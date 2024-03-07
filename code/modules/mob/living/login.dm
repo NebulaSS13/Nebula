@@ -26,3 +26,6 @@
 		var/obj/item/held = inv_slot?.get_equipped_item()
 		if(held)
 			held.reconsider_client_screen_presence(client, slot)
+
+	var/datum/extension/abilities/abilities = get_extension(src, /datum/extension/abilities)
+	abilities?.refresh_login()

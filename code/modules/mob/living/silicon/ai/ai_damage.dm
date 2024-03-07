@@ -47,8 +47,8 @@
 	oxyloss = max(0, amount)
 
 /mob/living/silicon/ai/update_health()
-	..()
-	if(status_flags & GODMODE)
+	. = ..()
+	if(!.)
 		setOxyLoss(0)
 
 /mob/living/silicon/ai/rejuvenate()

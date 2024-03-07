@@ -1,20 +1,21 @@
-/obj/item/psychic_power/telekinesis
+/obj/item/ability/psionic/telekinesis
 	name = "telekinetic grip"
 	maintain_cost = 3
 	icon_state = "telekinesis"
 	var/atom/movable/focus
 
-/obj/item/psychic_power/telekinesis/Destroy()
+/obj/item/ability/psionic/telekinesis/Destroy()
 	focus = null
 	. = ..()
 
-/obj/item/psychic_power/telekinesis/Process()
-	if(!focus || !isturf(focus.loc) || get_dist(get_turf(focus), get_turf(owner)) > owner.psi.get_rank(PSI_PSYCHOKINESIS))
+/obj/item/ability/psionic/telekinesis/Process()
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(!focus || !isturf(focus.loc) || get_dist(get_turf(focus), get_turf(owner)) > psi?.get_rank(PSI_PSYCHOKINESIS))
 		owner.drop_from_inventory(src)
 		return
 	. = ..()
 
-/obj/item/psychic_power/telekinesis/proc/set_focus(var/atom/movable/_focus)
+/obj/item/ability/psionic/telekinesis/proc/set_focus(var/atom/movable/_focus)
 
 	if(!_focus.simulated || !isturf(_focus.loc))
 		return FALSE
@@ -29,7 +30,8 @@
 	else
 		return FALSE
 
-	if(_focus.anchored || (check_paramount && owner.psi.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT))
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(_focus.anchored || (check_paramount && psi?.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT))
 		focus = _focus
 		. = attack_self(owner)
 		if(!.)
@@ -45,18 +47,19 @@
 	overlays += I
 	return TRUE
 
-/obj/item/psychic_power/telekinesis/attack_self(var/mob/user)
+/obj/item/ability/psionic/telekinesis/attack_self(var/mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
 	sparkle()
 	return focus.do_simple_ranged_interaction(user)
 
-/obj/item/psychic_power/telekinesis/afterattack(var/atom/target, var/mob/living/user, var/proximity)
+/obj/item/ability/psionic/telekinesis/afterattack(var/atom/target, var/mob/living/user, var/proximity)
 
-	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !user.psi || !user.psi.can_use() || !user.psi.spend_power(5))
+	var/datum/ability_handler/psionics/psi = user.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !psi?.can_use() || !psi?.spend_power(5))
 		return
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.psi.set_cooldown(5)
+	psi.set_cooldown(5)
 
 	var/user_psi_leech = user.do_psionics_check(5, user)
 	if(user_psi_leech)
@@ -68,7 +71,7 @@
 		return
 
 	var/distance = get_dist(get_turf(user), get_turf(focus ? focus : target))
-	if(distance > user.psi.get_rank(PSI_PSYCHOKINESIS))
+	if(distance > psi.get_rank(PSI_PSYCHOKINESIS))
 		to_chat(user, SPAN_WARNING("Your telekinetic power won't reach that far."))
 		return FALSE
 
@@ -84,12 +87,12 @@
 				I.afterattack(target,user,1) // for splashing with beakers
 		else
 			if(!focus.anchored)
-				var/user_rank = owner.psi.get_rank(PSI_PSYCHOKINESIS)
+				var/user_rank = psi?.get_rank(PSI_PSYCHOKINESIS)
 				focus.throw_at(target, user_rank*2, user_rank*10, owner)
 			sleep(1)
 			sparkle()
 
-/obj/item/psychic_power/telekinesis/proc/sparkle()
+/obj/item/ability/psionic/telekinesis/proc/sparkle()
 	set waitfor = 0
 	if(focus)
 		var/obj/effect/overlay/O = new /obj/effect/overlay(get_turf(focus))

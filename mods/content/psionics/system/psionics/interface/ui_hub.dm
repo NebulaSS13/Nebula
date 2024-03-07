@@ -19,10 +19,9 @@
 
 /obj/screen/psi/hub/on_update_icon()
 	var/mob/living/owner = owner_ref?.resolve()
-	if(!istype(owner) || !owner.psi)
-		return
-	icon_state = owner.psi.suppressed ? "psi_suppressed" : "psi_active"
-	if(world.time < owner.psi.next_power_use)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	icon_state = psi?.suppressed ? "psi_suppressed" : "psi_active"
+	if(world.time < psi?.next_power_use)
 		overlays |= on_cooldown
 	else
 		overlays.Cut()
@@ -44,15 +43,17 @@
 	if(!istype(owner))
 		qdel(src)
 		return
-	if(!owner.psi)
+	var/datum/ability_handler/psionics/psi = owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(!psi)
 		return
-	maptext = "[round((owner.psi.stamina/owner.psi.max_stamina)*100)]%"
+	maptext = "[round((psi.stamina/psi.max_stamina)*100)]%"
 	update_icon()
 
 /obj/screen/psi/hub/handle_click(mob/user, params)
 
 	var/mob/living/owner = owner_ref?.resolve()
-	if(!istype(owner) || !owner.psi)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(!psi)
 		return
 
 	var/list/click_params = params2list(params)
@@ -60,16 +61,16 @@
 		owner.show_psi_assay(owner)
 		return
 
-	if(owner.psi.suppressed && owner.psi.stun)
+	if(psi.suppressed && psi.stun)
 		to_chat(owner, "<span class='warning'>You are dazed and reeling, and cannot muster enough focus to do that!</span>")
 		return
 
-	owner.psi.suppressed = !owner.psi.suppressed
-	to_chat(owner, "<span class='notice'>You are <b>[owner.psi.suppressed ? "now suppressing" : "no longer suppressing"]</b> your psi-power.</span>")
-	if(owner.psi.suppressed)
-		owner.psi.cancel()
-		owner.psi.hide_auras()
+	psi.suppressed = !psi.suppressed
+	to_chat(owner, "<span class='notice'>You are <b>[psi?.suppressed ? "now suppressing" : "no longer suppressing"]</b> your psi-power.</span>")
+	if(psi.suppressed)
+		psi.cancel()
+		psi.hide_auras()
 	else
 		sound_to(owner, sound('sound/effects/psi/power_unlock.ogg'))
-		owner.psi.show_auras()
+		psi.show_auras()
 	update_icon()

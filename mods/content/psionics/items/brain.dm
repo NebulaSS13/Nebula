@@ -1,4 +1,4 @@
 /obj/item/organ/internal/brain/handle_severe_damage()
 	. = ..()
-	if(owner.psi)
-		owner.psi.check_latency_trigger(20, "physical trauma")
+	var/datum/ability_handler/psionics/psi = owner?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	psi?.check_latency_trigger(20, "physical trauma")

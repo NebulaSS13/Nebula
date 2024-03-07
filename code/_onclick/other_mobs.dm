@@ -20,6 +20,14 @@
 /mob/proc/attack_empty_hand()
 	return
 
+/mob/living/attack_empty_hand()
+	// Handle any prepared ability/spell/power invocations.
+	var/datum/extension/abilities/abilities = get_extension(src, /datum/extension/abilities)
+	if(abilities?.do_self_invocation())
+		return TRUE
+	return FALSE
+
+
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	return
 

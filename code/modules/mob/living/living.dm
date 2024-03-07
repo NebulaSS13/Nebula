@@ -201,9 +201,10 @@ default behaviour is:
 /mob/living/proc/get_total_life_damage()
 	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
 
-/mob/living/proc/update_health()
-	SHOULD_CALL_PARENT(TRUE)
-	if(status_flags & GODMODE)
+/mob/living/update_health()
+
+	. = ..()
+	if(!.)
 		current_health = get_max_health()
 		set_stat(CONSCIOUS)
 		return
@@ -215,6 +216,7 @@ default behaviour is:
 		if(!QDELETED(src)) // death() may delete or remove us
 			set_status(STAT_BLIND, 1)
 			set_status(STAT_SILENCE, 0)
+	return TRUE
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
@@ -244,74 +246,6 @@ default behaviour is:
 //		log_debug("[src] ~ [src.bodytemperature] ~ [temperature]")
 
 	return btemperature
-
-/mob/living/proc/setBruteLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/getBruteLoss()
-	return get_max_health() - current_health
-
-/mob/living/proc/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
-
-/mob/living/proc/getOxyLoss()
-	return 0
-
-/mob/living/proc/adjustOxyLoss(var/damage, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
-
-/mob/living/proc/setOxyLoss(var/amount)
-	return
-
-/mob/living/proc/getToxLoss()
-	return 0
-
-/mob/living/proc/adjustToxLoss(var/amount, var/do_update_health = TRUE)
-	adjustBruteLoss(amount * 0.5, do_update_health)
-
-/mob/living/proc/setToxLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/getFireLoss()
-	return
-
-/mob/living/proc/adjustFireLoss(var/amount, var/do_update_health = TRUE)
-	adjustBruteLoss(amount * 0.5, do_update_health)
-
-/mob/living/proc/setFireLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/getHalLoss()
-	return 0
-
-/mob/living/proc/adjustHalLoss(var/amount, var/do_update_health = TRUE)
-	adjustBruteLoss(amount * 0.5, do_update_health)
-
-/mob/living/proc/setHalLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/adjustBrainLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
-
-/mob/living/proc/setBrainLoss(var/amount)
-	return
-
-/mob/living/proc/getCloneLoss()
-	return 0
-
-/mob/living/proc/setCloneLoss(var/amount)
-	return
-
-/mob/living/proc/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
 
 /mob/living/proc/get_health_ratio() // ratio might be the wrong word
 	return current_health/get_max_health()
@@ -867,9 +801,6 @@ default behaviour is:
 		var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching_reagents.total_volume)
 		if(saturation > 0)
 			fluids.trans_to_holder(touching_reagents, saturation)
-
-/mob/living/proc/nervous_system_failure()
-	return FALSE
 
 /mob/living/proc/needs_wheelchair()
 	return FALSE

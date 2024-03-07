@@ -193,6 +193,11 @@
 	if(stat || try_maneuver(A))
 		return TRUE
 
+	// Handle any prepared ability/spell/power invocations.
+	var/datum/extension/abilities/abilities = get_extension(src, /datum/extension/abilities)
+	if(abilities?.do_melee_invocation(A))
+		return TRUE
+
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
@@ -218,7 +223,15 @@
 	return FALSE
 
 /mob/living/RangedAttack(var/atom/A, var/params)
-	return try_maneuver(A)
+	if(try_maneuver(A))
+		return TRUE
+
+	// Handle any prepared ability/spell/power invocations.
+	var/datum/extension/abilities/abilities = get_extension(src, /datum/extension/abilities)
+	if(abilities?.do_ranged_invocation(A))
+		return TRUE
+
+	return FALSE
 
 /*
 	Restrained ClickOn
