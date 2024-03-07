@@ -203,10 +203,11 @@
 	..()
 
 /datum/gear_tweak/custom_setup/tweak_item(mob/user, obj/item/gear, metadata)
-	var/arglist = list(user)
+	var/list/arglist = list(user)
 	if(length(additional_arguments))
 		arglist += additional_arguments
 	call(gear, custom_setup_proc)(arglist(arglist))
+	arglist.Cut()
 	return GEAR_TWEAK_SUCCESS
 
 /*
