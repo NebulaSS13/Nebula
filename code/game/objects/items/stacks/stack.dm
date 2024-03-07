@@ -214,16 +214,21 @@
 		// Check that the recipe is still available to us.
 		var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
 		if(!(recipe in recipes))
+			world << 1
 			var/found_recipe = FALSE
 			for(var/datum/stack_recipe_list/recipe_list in recipes)
 				if(recipe in recipe_list.recipes)
 					found_recipe = TRUE
+					world << 2
 					break
 			if(!found_recipe)
+				world << 3
 				return TOPIC_NOACTION
 
 		// Validate the target amount and create the product.
-		var/multiplier = clamp(text2num(href_list["multiplier"]), 0, min(round(get_amount() / recipe.req_amount), round(recipe.max_res_amount / recipe.res_amount)))
+		var/multiplier = clamp(text2num(href_list["multiplier"]), 0, min(round(get_amount() / recipe.req_amount)))
+		if(!isnull(recipe.max_res_amount))
+			multiplier = min(multiplier, round(recipe.max_res_amount / recipe.res_amount))
 		if(multiplier > 0)
 			produce_recipe(recipe, multiplier, user)
 			return TOPIC_REFRESH
