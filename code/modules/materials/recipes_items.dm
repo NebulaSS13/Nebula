@@ -176,11 +176,6 @@
 	result_type = /obj/item/stick
 	difficulty = 0
 
-/datum/stack_recipe/shovel
-	title = "shovel"
-	result_type = /obj/item/tool/shovel
-	difficulty = 1
-
 /datum/stack_recipe/crossbowframe
 	title = "crossbow frame"
 	result_type = /obj/item/crossbowframe
