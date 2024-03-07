@@ -285,7 +285,7 @@
 		user.visible_message(
 			SPAN_DANGER("\The [user] manages to get \the [tool] stuck in \the [target]'s [affected.name]!"), \
 			SPAN_DANGER("You manage to get \the [tool] stuck in \the [target]'s [affected.name]!"))
-		affected.embed(tool, affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool))
+		affected.embed_in_organ(tool, affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool))
 	else
 		user.visible_message(
 			SPAN_WARNING("\The [user] slips, mangling \the [target]'s [affected.name] with \the [tool]."), \

@@ -47,7 +47,7 @@
 
 // Called when thrown object lands on this turf.
 /turf/open/hitby(var/atom/movable/AM)
-	..()
+	. = ..()
 	if(!QDELETED(AM))
 		AM.fall()
 

@@ -58,11 +58,12 @@
 			if (prob(chance))
 				if (enter(AM, silent = TRUE, check_incap = FALSE, instant = TRUE))
 					visible_message(SPAN_NOTICE("[message]"))
-					return
+					return TRUE
 
 	if (LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		var/mob/living/pilot = pick(pilots)
 		return pilot.hitby(AM, TT)
+
 	. = ..()
 
 /mob/living/exosuit/bullet_act(obj/item/projectile/P, def_zone, used_weapon)

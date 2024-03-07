@@ -35,8 +35,8 @@
 		current_health = get_max_health()
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
-	..()
-	if(!anchored)
+	. = ..()
+	if(. && !anchored)
 		step(src, AM.last_move)
 
 /obj/proc/create_matter()

@@ -116,7 +116,7 @@
 		climb(user, I)
 
 /obj/structure/ladder/hitby(obj/item/I)
-	..()
+	. = ..()
 	if(!target_down)
 		return
 	if(!has_gravity())
