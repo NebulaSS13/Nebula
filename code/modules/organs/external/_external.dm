@@ -792,10 +792,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 		handle_germ_effects()
 
 /obj/item/organ/external/proc/handle_germ_sync()
-	var/turf/simulated/T = get_turf(owner)
+	var/turf/T = get_turf(owner)
 	for(var/datum/wound/W in wounds)
 		//Open wounds can become infected
-		if(max(istype(T) && T.get_dirt()*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
+		// what in the hell is this doing with T?
+		if(max(istype(T) && T.simulated && T.get_dirt()*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
 			W.germ_level++
 
 	var/antibiotics = GET_CHEMICAL_EFFECT(owner, CE_ANTIBIOTIC)

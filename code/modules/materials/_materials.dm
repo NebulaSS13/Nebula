@@ -639,7 +639,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(REAGENT_VOLUME(holder, type) < turf_touch_threshold)
 		return
 
-	if(istype(T, /turf/simulated))
+	if(istype(T) && T.simulated)
 		var/turf/simulated/wall/W = T
 		if(defoliant)
 			for(var/obj/effect/overlay/wallrot/E in W)

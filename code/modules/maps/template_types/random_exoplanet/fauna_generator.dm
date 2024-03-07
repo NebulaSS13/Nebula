@@ -210,13 +210,13 @@
 	for(var/i = 1 to round(repopulate_megafauna_threshold - length(live_megafauna)))
 		if(prob(90))
 			continue
-		var/turf/simulated/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects))
+		var/turf/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects, /proc/turf_is_simulated))
 		try_spawn_megafauna(T)
 
 	for(var/i = 1 to round(repopulate_fauna_threshold - length(live_fauna)))
 		if(prob(90))
 			continue
-		var/turf/simulated/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects))
+		var/turf/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects, /proc/turf_is_simulated))
 		try_spawn_fauna(T)
 
 	time_last_repop = REALTIMEOFDAY

@@ -95,7 +95,7 @@
 	if(keep_air)
 		W.air = old_air
 	if(old_fire)
-		if(istype(W, /turf/simulated))
+		if(W.simulated)
 			W.fire = old_fire
 		else if(old_fire)
 			qdel(old_fire)
@@ -214,6 +214,6 @@
 	return TRUE
 
 //No idea why resetting the base appearance from New() isn't enough, but without this it doesn't work
-/turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)
+/turf/simulated/shuttle/wall/corner/transport_properties_from(turf/other)
 	. = ..()
 	reset_base_appearance()

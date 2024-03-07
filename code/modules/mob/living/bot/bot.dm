@@ -377,13 +377,10 @@
 /turf/proc/CardinalTurfsWithAccess(var/obj/item/card/id/ID)
 	var/L[] = new()
 
-	//	for(var/turf/simulated/t in oview(src,1))
-
 	for(var/d in global.cardinal)
-		var/turf/simulated/T = get_step(src, d)
-		if(istype(T) && !T.density)
-			if(!LinkBlockedWithAccess(src, T, ID))
-				L.Add(T)
+		var/turf/T = get_step(src, d)
+		if(istype(T) && !T.density && T.simulated && !LinkBlockedWithAccess(src, T, ID))
+			L.Add(T)
 	return L
 
 

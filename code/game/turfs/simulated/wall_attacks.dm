@@ -17,8 +17,9 @@
 		set_light(0)
 		src.blocks_air = 0
 		set_opacity(0)
-		for(var/turf/simulated/turf in loc)
-			SSair.mark_for_update(turf)
+		for(var/turf/turf in loc)
+			if(turf.simulated)
+				SSair.mark_for_update(turf)
 	else
 		can_open = WALL_OPENING
 		set_density(1)
@@ -30,8 +31,9 @@
 		set_light(1)
 		src.blocks_air = 1
 		set_opacity(1)
-		for(var/turf/simulated/turf in loc)
-			SSair.mark_for_update(turf)
+		for(var/turf/turf in loc)
+			if(turf.simulated)
+				SSair.mark_for_update(turf)
 
 	can_open = WALL_CAN_OPEN
 	update_icon()
@@ -40,13 +42,14 @@
 	if(!SSair)
 		return
 
-	for(var/turf/simulated/turf in loc)
-		update_thermal(turf)
-		SSair.mark_for_update(turf)
+	for(var/turf/turf in loc)
+		if(turf.simulated)
+			update_thermal(turf)
+			SSair.mark_for_update(turf)
 
 
-/turf/simulated/wall/proc/update_thermal(var/turf/simulated/source)
-	if(istype(source))
+/turf/simulated/wall/proc/update_thermal(var/turf/source)
+	if(istype(source) && source.simulated)
 		if(density && opacity)
 			source.thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 		else

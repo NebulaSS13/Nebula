@@ -14,8 +14,8 @@
 	vermin_probability = 0
 	web_probability = 0
 
-/decl/turf_initializer/maintenance/InitializeTurf(var/turf/simulated/T)
-	if(!istype(T) || T.density)
+/decl/turf_initializer/maintenance/InitializeTurf(var/turf/T)
+	if(!istype(T) || T.density || !T.simulated)
 		return
 	// Quick and dirty check to avoid placing things inside windows
 	if(locate(/obj/structure/grille, T))
@@ -53,7 +53,11 @@
 			how_dirty++
 	return how_dirty
 
-/decl/turf_initializer/maintenance/proc/attempt_web(var/turf/simulated/T)
+/decl/turf_initializer/maintenance/proc/attempt_web(var/turf/T)
+
+	if(!istype(T) || !T.simulated)
+		return
+
 	var/turf/north_turf = get_step(T, NORTH)
 	if(!north_turf || !north_turf.density)
 		return

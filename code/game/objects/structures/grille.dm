@@ -184,10 +184,8 @@
 				update_icon()
 			return TRUE
 
-	return ..()
-
-//window placing
-	else if(istype(W,/obj/item/stack/material))
+	//window placing
+	if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
 		if(ST.material.opacity > 0.7)
 			return 0
@@ -202,9 +200,9 @@
 					to_chat(user, "<span class='notice'>You can't reach.</span>")
 					return
 		place_window(user, loc, dir_to_set, ST)
-		return
+		return TRUE
 
-	else if(!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
+	if(!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
@@ -213,7 +211,9 @@
 				take_damage(W.force)
 			if(BRUTE)
 				take_damage(W.force * 0.1)
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/structure/grille/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)

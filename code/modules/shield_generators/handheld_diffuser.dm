@@ -34,11 +34,12 @@
 		return
 
 	for(var/direction in global.cardinal)
-		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
-		for(var/obj/effect/shield/S in shielded_tile)
-			// 10kJ per pulse, but gap in the shield lasts for longer than regular diffusers.
-			if(istype(S) && !S.diffused_for && !S.disabled_for && cell.checked_use(10 KILOWATTS * CELLRATE))
-				S.diffuse(20)
+		var/turf/shielded_tile = get_step(get_turf(src), direction)
+		if(shielded_tile?.simulated)
+			for(var/obj/effect/shield/S in shielded_tile)
+				// 10kJ per pulse, but gap in the shield lasts for longer than regular diffusers.
+				if(istype(S) && !S.diffused_for && !S.disabled_for && cell.checked_use(10 KILOWATTS * CELLRATE))
+					S.diffuse(20)
 
 /obj/item/shield_diffuser/attack_self()
 	enabled = !enabled
