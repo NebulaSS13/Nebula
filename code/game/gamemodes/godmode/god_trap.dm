@@ -1,6 +1,6 @@
 /obj/structure/deity/trap
 	density = FALSE
-	health = 1
+	current_health = 1
 	var/triggered = 0
 
 /obj/structure/deity/trap/Initialize()

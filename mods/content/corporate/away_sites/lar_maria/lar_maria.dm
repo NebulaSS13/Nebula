@@ -54,7 +54,7 @@
 /mob/living/simple_animal/hostile/lar_maria/test_subject
 	name = "test subject"
 	desc = "Sick, filthy, angry and probably crazy human in an orange robe."
-	mob_default_max_health = 40
+	max_health = 40
 	corpse = /obj/abstract/landmark/corpse/lar_maria/test_subject
 	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_test_subject.dmi'
 
@@ -87,7 +87,7 @@
 /mob/living/simple_animal/hostile/lar_maria/guard//angry guards armed with batons and shotguns. Still bite
 	name = "security"
 	desc = "Guard dressed at Zeng-Hu Pharmaceuticals uniform."
-	mob_default_max_health = 60
+	max_health = 60
 	natural_weapon = /obj/item/baton
 	weapon = /obj/item/baton
 	corpse = /obj/abstract/landmark/corpse/lar_maria/zhp_guard
@@ -122,7 +122,7 @@
 	name = "virologist"
 	desc = "Virologist dressed at Zeng-Hu Pharmaceuticals uniform."
 	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_virologist_m.dmi'
-	mob_default_max_health = 50
+	max_health = 50
 	corpse = /obj/abstract/landmark/corpse/lar_maria/virologist
 
 /obj/abstract/landmark/corpse/lar_maria/virologist

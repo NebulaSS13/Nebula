@@ -106,8 +106,8 @@
 	return origin_tech
 
 /obj/item/Initialize(var/ml, var/material_key)
-	if(isnull(health))
-		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
+	if(isnull(current_health))
+		current_health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
 	if(!ispath(material_key, /decl/material))
 		material_key = material
 	if(material_key)
@@ -156,8 +156,8 @@
 	clone = ..()
 	clone.contaminated = contaminated
 	clone.blood_overlay = image(blood_overlay)
+	clone.current_health = current_health
 
-	clone.health = health
 	//#TODO: once item damage in, check health!
 
 	//Coating

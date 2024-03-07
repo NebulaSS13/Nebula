@@ -137,8 +137,9 @@
 	else if(isobj(AM))
 		var/obj/item/I = AM
 		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	if(reinf_material) tforce *= 0.25
-	if(health - tforce <= 7 && !reinf_material)
+	if(reinf_material)
+		tforce *= 0.25
+	if(current_health - tforce <= 7 && !reinf_material)
 		set_anchored(FALSE)
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
@@ -252,7 +253,7 @@
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)
 			hit(W.force)
-			if(health <= 7)
+			if(current_health <= 7)
 				set_anchored(FALSE)
 				step(src, get_dir(user, src))
 		else

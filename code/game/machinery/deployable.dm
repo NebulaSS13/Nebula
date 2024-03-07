@@ -38,10 +38,11 @@
 				return
 		return
 	else if(IS_WRENCH(W))
-		if (src.health < src.max_health)
-			src.health = src.max_health
-			src.emagged = 0
-			src.req_access = list(access_security)
+		var/current_max_health = get_max_health()
+		if (current_health < current_max_health)
+			current_health = current_max_health
+			emagged = 0
+			req_access = list(access_security)
 			visible_message("<span class='warning'>[user] repairs \the [src]!</span>")
 			return
 		else if (src.emagged > 0)
@@ -53,21 +54,21 @@
 	else
 		switch(W.damtype)
 			if(BURN)
-				src.health -= W.force * 0.75
+				current_health -= W.force * 0.75
 			if(BRUTE)
-				src.health -= W.force * 0.5
-		if (src.health <= 0)
-			src.explode()
+				current_health -= W.force * 0.5
+		if (current_health <= 0)
+			explode()
 		..()
 
 /obj/machinery/deployable/barrier/explosion_act(severity)
 	. = ..()
 	if(. && !QDELETED(src))
 		if(severity == 1)
-			health = 0
+			current_health = 0
 		else if(severity == 2)
-			health -= 25
-		if(health <= 0)
+			current_health -= 25
+		if(current_health <= 0)
 			explode()
 
 /obj/machinery/deployable/barrier/emp_act(severity)

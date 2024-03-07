@@ -1329,7 +1329,7 @@
 "dX" = (
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -1337,7 +1337,7 @@
 /obj/item/stack/tile/floor_dark,
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)

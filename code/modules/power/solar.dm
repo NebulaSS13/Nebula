@@ -55,7 +55,7 @@ var/global/list/solars_list = list()
 		S.anchored = TRUE
 	S.forceMove(src)
 	if(S.glass_reinforced) //if the panel is in reinforced glass
-		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
+		current_health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
 
 
@@ -63,25 +63,25 @@ var/global/list/solars_list = list()
 /obj/machinery/power/solar/attackby(obj/item/W, mob/user)
 
 	if(IS_CROWBAR(W))
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		playsound(loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
 		if(do_after(user, 50,src))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
 				S.dropInto(loc)
 				S.give_glass()
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='notice'>[user] takes the glass off the solar panel.</span>")
 			qdel(src)
 		return
 	else if (W)
-		src.add_fingerprint(user)
-		src.health -= W.force
-		src.healthcheck()
+		add_fingerprint(user)
+		current_health -= W.force
+		healthcheck()
 	..()
 
 /obj/machinery/power/solar/proc/healthcheck()
-	if (src.health <= 0)
+	if (current_health <= 0)
 		if(!(stat & BROKEN))
 			set_broken(TRUE)
 
@@ -92,7 +92,7 @@ var/global/list/solars_list = list()
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
 	else
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
-		src.set_dir(angle2dir(adir))
+		set_dir(angle2dir(adir))
 	return
 
 //calculates the fraction of the sunlight that the panel recieves
@@ -132,9 +132,9 @@ var/global/list/solars_list = list()
 /obj/machinery/power/solar/set_broken(new_state)
 	. = ..()
 	if(. && new_state)
-		health = 0
-		new /obj/item/shard(src.loc)
-		new /obj/item/shard(src.loc)
+		current_health = 0
+		new /obj/item/shard(loc)
+		new /obj/item/shard(loc)
 		var/obj/item/solar_assembly/S = locate() in src
 		S.glass_type = null
 		unset_control()
@@ -144,11 +144,11 @@ var/global/list/solars_list = list()
 	if(. && !QDELETED(src))
 		if(severity == 1)
 			if(prob(15))
-				new /obj/item/shard( src.loc )
+				new /obj/item/shard( loc )
 			physically_destroyed()
 		else if(severity == 2)
 			if (prob(25))
-				new /obj/item/shard( src.loc )
+				new /obj/item/shard( loc )
 				physically_destroyed()
 			else if (prob(50))
 				set_broken(TRUE)
@@ -228,13 +228,13 @@ var/global/list/solars_list = list()
 			default_pixel_z = 0
 			reset_offsets(0)
 			user.visible_message("<span class='notice'>[user] wrenches the solar assembly into place.</span>")
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+			playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 	else
 		if(IS_WRENCH(W))
 			anchored = FALSE
 			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from it's place.</span>")
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+			playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 
 		if(istype(W, /obj/item/stack/material) && W.get_material_type() == /decl/material/solid/glass)
@@ -242,7 +242,7 @@ var/global/list/solars_list = list()
 			if(S.use(2))
 				glass_type =       S.material.type
 				glass_reinforced = S.reinf_material?.type
-				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+				playsound(loc, 'sound/machines/click.ogg', 50, 1)
 				user.visible_message("<span class='notice'>[user] places the glass on the solar assembly.</span>")
 				if(tracker)
 					new /obj/machinery/power/tracker(get_turf(src), src)
@@ -261,7 +261,7 @@ var/global/list/solars_list = list()
 			return 1
 	else
 		if(IS_CROWBAR(W))
-			new /obj/item/tracker_electronics(src.loc)
+			new /obj/item/tracker_electronics(loc)
 			tracker = 0
 			user.visible_message("<span class='notice'>[user] takes out the electronics from the solar assembly.</span>")
 			return 1
@@ -421,15 +421,15 @@ var/global/list/solars_list = list()
 
 	if(href_list["rate control"])
 		if(href_list["cdir"])
-			src.cdir = clamp((360+src.cdir+text2num(href_list["cdir"]))%360, 0, 359)
-			src.targetdir = src.cdir
+			cdir = clamp((360+cdir+text2num(href_list["cdir"]))%360, 0, 359)
+			targetdir = cdir
 			if(track == 2) //manual update, so losing auto-tracking
 				track = 0
 			spawn(1)
 				set_panels(cdir)
 		if(href_list["tdir"])
-			src.trackrate = clamp(src.trackrate+text2num(href_list["tdir"]), -7200, 7200)
-			if(src.trackrate) nexttime = world.time + 36000/abs(trackrate)
+			trackrate = clamp(trackrate+text2num(href_list["tdir"]), -7200, 7200)
+			if(trackrate) nexttime = world.time + 36000/abs(trackrate)
 
 	if(href_list["track"])
 		track = text2num(href_list["track"])
@@ -438,15 +438,15 @@ var/global/list/solars_list = list()
 				connected_tracker.set_angle(global.sun.angle)
 				set_panels(cdir)
 		else if (track == 1) //begin manual tracking
-			src.targetdir = src.cdir
-			if(src.trackrate) nexttime = world.time + 36000/abs(trackrate)
+			targetdir = cdir
+			if(trackrate) nexttime = world.time + 36000/abs(trackrate)
 			set_panels(targetdir)
 
 	if(href_list["search_connected"])
-		src.search_for_connected()
+		search_for_connected()
 		if(connected_tracker && track == 2)
 			connected_tracker.set_angle(global.sun.angle)
-		src.set_panels(cdir)
+		set_panels(cdir)
 
 	interact(usr)
 	return 1

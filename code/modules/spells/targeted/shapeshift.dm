@@ -116,7 +116,7 @@
 
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 2, Sp_POWER = 2)
 
-	newVars = list("health" = 50, "default_mob_max_health" = 50)
+	newVars = list("health" = 50, "max_health" = 50)
 
 	hud_state = "wiz_poly"
 
@@ -183,7 +183,7 @@
 						"melee_damage_upper" = 25,
 						"resistance" = 6,
 						"health" = 125,
-						"mob_default_max_health" = 125)
+						"max_health" = 125)
 			duration = 0
 			return "You revel in the corruption. There is no turning back."
 

@@ -1,13 +1,13 @@
 /obj/structure/pit
-	name       = "pit"
-	desc       = "Watch your step, partner."
-	icon       = 'icons/obj/structures/pit.dmi'
-	icon_state = "pit1"
-	blend_mode = BLEND_MULTIPLY
-	density    = FALSE
-	anchored   = TRUE
-	health     = -1     //You can't break a hole in the ground.
-	var/open   = TRUE
+	name           = "pit"
+	desc           = "Watch your step, partner."
+	icon           = 'icons/obj/structures/pit.dmi'
+	icon_state     = "pit1"
+	blend_mode     = BLEND_MULTIPLY
+	density        = FALSE
+	anchored       = TRUE
+	current_health = -1     //You can't break a hole in the ground.
+	var/open       = TRUE
 
 /obj/structure/pit/attackby(obj/item/W, mob/user)
 	if(IS_SHOVEL(W))
@@ -109,9 +109,9 @@
 // Closed Pit
 /////////////////////////////////////////////
 /obj/structure/pit/closed
-	name   = "mound"
-	desc   = "Some things are better left buried."
-	health = -1     //Can't break a hole in the ground...
+	name           = "mound"
+	desc           = "Some things are better left buried."
+	current_health = ITEM_HEALTH_NO_DAMAGE //Can't break a hole in the ground...
 
 /obj/structure/pit/closed/Initialize()
 	. = ..()

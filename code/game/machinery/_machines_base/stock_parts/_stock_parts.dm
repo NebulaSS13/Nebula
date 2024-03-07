@@ -89,7 +89,7 @@
 	SetName("broken [name]")
 
 /obj/item/stock_parts/proc/is_functional()
-	return (!can_take_damage()) || (health > 0)
+	return (!can_take_damage()) || (current_health > 0)
 
 /obj/item/stock_parts/examine(mob/user)
 	. = ..()

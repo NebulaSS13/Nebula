@@ -744,7 +744,7 @@
 "bv" = (
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/closet/crate/medical,
 /obj/random/medical,
@@ -812,7 +812,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/machinery/door/window/brigdoor/southright{
@@ -1731,7 +1731,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -2380,7 +2380,7 @@
 "ef" = (
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/closet/crate/secure{
 	name = "resources crate";
@@ -3342,7 +3342,7 @@
 /obj/random/drinkbottle,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /turf/simulated/floor/wood/ebony,
 /area/liberia/bar)
@@ -3633,7 +3633,7 @@
 /obj/structure/table/woodentable/walnut,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4695,7 +4695,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -4977,7 +4977,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/corner/blue/mono,
@@ -6429,7 +6429,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/machinery/door/window/brigdoor/northleft{
 	req_access = newlist()

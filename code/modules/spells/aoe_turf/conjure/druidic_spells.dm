@@ -39,7 +39,7 @@
 	if(!..())
 		return 0
 
-	newVars = list("mob_default_max_health" = 20 + spell_levels[Sp_POWER]*5, "health" = 20 + spell_levels[Sp_POWER]*5, "melee_damage_lower" = 10 + spell_levels[Sp_POWER], "melee_damage_upper" = 10 + spell_levels[Sp_POWER]*2)
+	newVars = list("max_health" = 20 + spell_levels[Sp_POWER]*5, "health" = 20 + spell_levels[Sp_POWER]*5, "melee_damage_lower" = 10 + spell_levels[Sp_POWER], "melee_damage_upper" = 10 + spell_levels[Sp_POWER]*2)
 
 	return "Your bats are now stronger."
 
@@ -59,7 +59,7 @@
 
 	summon_amt = 1
 	summon_type = list(/mob/living/simple_animal/hostile/commanded/bear)
-	newVars = list("mob_default_max_health" = 15,
+	newVars = list("max_health" = 15,
 				"health" = 15,
 				"melee_damage_lower" = 10,
 				"melee_damage_upper" = 10,
@@ -76,14 +76,14 @@
 		return 0
 	switch(spell_levels[Sp_POWER])
 		if(1)
-			newVars = list("mob_default_max_health" = 30,
+			newVars = list("max_health" = 30,
 						"health" = 30,
 						"melee_damage_lower" = 15,
 						"melee_damage_upper" = 15
 						)
 			return "Your bear has been upgraded from a cub to a whelp."
 		if(2)
-			newVars = list("mob_default_max_health" = 45,
+			newVars = list("max_health" = 45,
 						"health" = 45,
 						"melee_damage_lower" = 20,
 						"melee_damage_upper" = 20,
@@ -91,7 +91,7 @@
 						)
 			return "Your bear has been upgraded from a whelp to an adult."
 		if(3)
-			newVars = list("mob_default_max_health" = 60,
+			newVars = list("max_health" = 60,
 						"health" = 60,
 						"melee_damage_lower" = 25,
 						"melee_damage_upper" = 25,
@@ -99,7 +99,7 @@
 						)
 			return "Your bear has been upgraded from an adult to an alpha."
 		if(4)
-			newVars = list("mob_default_max_health" = 75,
+			newVars = list("max_health" = 75,
 						"health" = 75,
 						"melee_damage_lower" = 35,
 						"melee_damage_upper" = 35,

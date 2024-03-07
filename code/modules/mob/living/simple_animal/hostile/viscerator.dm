@@ -3,7 +3,7 @@
 	desc = "A small, twin-bladed machine capable of inflicting very deadly lacerations."
 	icon = 'icons/mob/simple_animal/viscerator.dmi'
 	pass_flags = PASS_FLAG_TABLE
-	mob_default_max_health = 15
+	max_health = 15
 	natural_weapon = /obj/item/natural_weapon/rotating_blade
 	faction = "syndicate"
 	min_gas = null

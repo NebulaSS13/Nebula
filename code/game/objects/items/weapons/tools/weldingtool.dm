@@ -402,7 +402,7 @@
 	throwforce        = 5
 	volume            = 20
 	show_reagent_name = TRUE
-	health            = 40
+	current_health    = 40
 	max_health        = 40
 	material          = /decl/material/solid/metal/steel
 	var/can_refuel    = TRUE

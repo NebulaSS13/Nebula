@@ -332,10 +332,10 @@ var/global/list/turret_icons
 		if(force < 5)
 			return
 
-	health -= force
+	current_health -= force
 	if (force > 5 && prob(45))
 		spark_at(src, amount = 5)
-	if(health <= 0)
+	if(current_health <= 0)
 		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
@@ -383,12 +383,12 @@ var/global/list/turret_icons
 		if(severity == 1 || (severity == 2 && prob(25)))
 			physically_destroyed()
 		else if(severity == 2)
-			take_damage(initial(health) * 8)
+			take_damage(initial(current_health) * 8)
 		else
-			take_damage(initial(health) * 8 / 3)
+			take_damage(initial(current_health) * 8 / 3)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
-	health = 0
+	current_health = 0
 	set_broken(TRUE)
 	spark_at(src, amount = 5)
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
@@ -414,9 +414,10 @@ var/global/list/turret_icons
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			popDown() // no valid targets, close the cover
 
-	if(auto_repair && (health < max_health))
+	var/current_max_health = get_max_health()
+	if(auto_repair && (current_health < current_max_health))
 		use_power_oneoff(20000)
-		health = min(health+1, max_health) // 1HP for 20kJ
+		current_health = min(current_health+1, current_max_health) // 1HP for 20kJ
 
 /obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
 	switch(assess_living(L))

@@ -44,8 +44,8 @@ var/global/list/rad_collectors = list()
 	if(T)
 		var/datum/gas_mixture/our_turfs_air = T.return_air()
 		if(our_turfs_air.temperature > max_safe_temp)
-			health -= ((our_turfs_air.temperature - max_safe_temp) / 10)
-			if(health <= 0)
+			current_health -= ((our_turfs_air.temperature - max_safe_temp) / 10)
+			if(current_health <= 0)
 				collector_break()
 
 	//so that we don't zero out the meter if the SM is processed first.

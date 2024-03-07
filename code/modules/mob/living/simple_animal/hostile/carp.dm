@@ -5,7 +5,7 @@
 	speak_chance = 0
 	turns_per_move = 3
 	speed = 2
-	mob_default_max_health = 50
+	max_health = 50
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite
 	pry_time = 10 SECONDS
@@ -32,8 +32,8 @@
 	update_icon()
 
 /mob/living/simple_animal/hostile/carp/proc/carp_randomify()
-	mob_default_max_health = rand(initial(mob_default_max_health), (1.5 * initial(mob_default_max_health)))
-	current_health = mob_default_max_health
+	max_health = rand(initial(max_health), (1.5 * initial(max_health)))
+	current_health = max_health
 	if(prob(1))
 		carp_color = pick(COLOR_WHITE, COLOR_BLACK)
 	else

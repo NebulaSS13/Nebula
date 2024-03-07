@@ -1,6 +1,6 @@
 /mob/living/simple_animal
 	name = "animal"
-	mob_default_max_health = 20
+	max_health = 20
 	universal_speak = FALSE
 	mob_sort_value = 12
 

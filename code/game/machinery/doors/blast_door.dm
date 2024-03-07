@@ -158,7 +158,7 @@
 				to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 			return
 	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
-		var/amt = CEILING((max_health - health)/150)
+		var/amt = CEILING((get_max_health() - current_health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
 			return
@@ -209,7 +209,7 @@
 // Parameters: None
 // Description: Fully repairs the blast door.
 /obj/machinery/door/blast/proc/repair()
-	health = max_health
+	current_health = get_max_health()
 	set_broken(FALSE)
 	queue_icon_update()
 

@@ -11,7 +11,7 @@
 	pry_time = 4 SECONDS
 	skull_type = /obj/item/whip/tail
 	bleed_colour = COLOR_VIOLET
-	mob_default_max_health = 200
+	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/claws/drake
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,

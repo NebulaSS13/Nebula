@@ -6,7 +6,7 @@
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	max_health = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	health = 150
+	current_health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
@@ -60,17 +60,17 @@
 	if (!( ismob(AM) ))
 		var/mob/living/bot/bot = AM
 		if(istype(bot))
-			if(density && src.check_access(bot.botcard))
+			if(density && check_access(bot.botcard))
 				open()
 				addtimer(CALLBACK(src, PROC_REF(close)), 50, TIMER_UNIQUE | TIMER_OVERRIDE)
 		return
 	var/mob/M = AM // we've returned by here if M is not a mob
-	if (src.operating)
+	if (operating)
 		return
-	if (src.density && (!issmall(M) || ishuman(M) || issilicon(M)) && src.allowed(AM))
+	if (density && (!issmall(M) || ishuman(M) || issilicon(M)) && allowed(AM))
 		open()
 		var/open_timer
-		if(src.check_access(null))
+		if(check_access(null))
 			open_timer = 50
 		else //secure doors close faster
 			open_timer = 20
@@ -97,12 +97,12 @@
 /obj/machinery/door/window/open()
 	if (operating == 1) //doors can still open when emag-disabled
 		return 0
-	if (!src.operating) //in case of emag
-		src.operating = 1
+	if (!operating) //in case of emag
+		operating = 1
 
-	icon_state = "[src.base_state]open"
-	flick("[src.base_state]opening", src)
-	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
+	icon_state = "[base_state]open"
+	flick("[base_state]opening", src)
+	playsound(loc, 'sound/machines/windowdoor.ogg', 100, 1)
 
 	sleep(0.9 SECONDS)
 	explosion_resistance = 0
@@ -116,12 +116,12 @@
 	return TRUE
 
 /obj/machinery/door/window/close()
-	if (src.operating)
+	if (operating)
 		return 0
 
 	operating = 1
-	flick(text("[]closing", src.base_state), src)
-	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
+	flick("[base_state]closing", src)
+	playsound(loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	set_density(TRUE)
 	update_icon()
 	explosion_resistance = initial(explosion_resistance)
@@ -133,8 +133,8 @@
 	return TRUE
 
 /obj/machinery/door/window/take_damage(var/damage)
-	src.health = max(0, src.health - damage)
-	if (src.health <= 0)
+	current_health = max(0, current_health - damage)
+	if (current_health <= 0)
 		shatter()
 		return
 
@@ -142,8 +142,8 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
-			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-			visible_message("<span class='danger'>[user] smashes against the [src.name].</span>", 1)
+			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+			visible_message("<span class='danger'>\The [user] smashes against \the [src].</span>", 1)
 			take_damage(25)
 			return TRUE
 	return ..()
@@ -185,8 +185,8 @@
 	if(.)
 		return
 
-	if (src.allowed(user))
-		if (src.density)
+	if (allowed(user))
+		if (density)
 			open()
 		else
 			if (emagged)
@@ -194,16 +194,16 @@
 				return
 			close()
 
-	else if (src.density)
-		flick(text("[]deny", src.base_state), src)
+	else if (density)
+		flick("[base_state]deny", src)
 
 /obj/machinery/door/window/bash(obj/item/I, mob/user)
 	//Emags and ninja swords? You may pass.
 	if (istype(I, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = I
 		if(blade.is_special_cutting_tool() && emag_act(10, user))
-			spark_at(src.loc, amount=5)
-			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
+			spark_at(loc, amount=5)
+			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 			visible_message(SPAN_WARNING("The glass door was sliced open by [user]!"))
 		return 1
 	return ..()
@@ -214,7 +214,7 @@
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
 	max_health = 300
-	health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	current_health = 300.0 //Stronger doors for prison (regular window door health is 150)
 	pry_mod = 0.65
 
 

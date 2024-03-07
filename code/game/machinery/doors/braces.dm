@@ -102,7 +102,7 @@
 			return
 		if(C.weld(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			health = min(health + rand(20,30), max_health)
+			current_health = min(current_health + rand(20,30), get_max_health())
 			if(!is_damaged())
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else

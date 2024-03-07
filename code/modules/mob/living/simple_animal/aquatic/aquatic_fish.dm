@@ -2,7 +2,7 @@
 	name = "small fish"
 	desc = "Glub glub."
 	faction = "fishes"
-	mob_default_max_health = 10
+	max_health = 10
 	mob_size = MOB_SIZE_TINY
 	can_pull_size = 0
 	can_pull_mobs = 0

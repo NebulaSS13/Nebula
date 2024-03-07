@@ -222,31 +222,34 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	material = /decl/material/solid/metal/steel
-	health = 30
+	current_health = 30
 	max_health = 30
 	var/burn_damage = 0
 	var/brute_damage = 0
 	var/icon_state_broken = "broken"
 
 /obj/item/robot_parts/robot_component/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	var/current_max_health = get_max_health()
 	if(lastdamage > 0)
 		if(lastdamtype == BRUTE)
-			brute_damage = clamp(lastdamage, 0, max_health)
+			brute_damage = clamp(lastdamage, 0, current_max_health)
 		if(lastdamtype == BURN || lastdamtype == ELECTROCUTE)
-			burn_damage = clamp(lastdamage, 0, max_health)
+			burn_damage = clamp(lastdamage, 0, current_max_health)
 
 	//Health works differently for this thing
-	health = clamp(max_health - (brute_damage + burn_damage), 0, max_health)
+	current_health = clamp(current_max_health - (brute_damage + burn_damage), 0, current_max_health)
 	. = ..()
 
 /obj/item/robot_parts/robot_component/proc/set_bruteloss(var/amount)
-	brute_damage = clamp(amount, 0, max_health)
-	health = max_health - (brute_damage + burn_damage)
+	var/current_max_health = get_max_health()
+	brute_damage = clamp(amount, 0, current_max_health)
+	current_health = current_max_health - (brute_damage + burn_damage)
 	check_health(amount, BRUTE)
 
 /obj/item/robot_parts/robot_component/proc/set_burnloss(var/amount)
-	burn_damage = clamp(amount, 0, max_health)
-	health = max_health - (brute_damage + burn_damage)
+	var/current_max_health = get_max_health()
+	burn_damage = clamp(amount, 0, current_max_health)
+	current_health = current_max_health - (brute_damage + burn_damage)
 	check_health(amount, BURN)
 
 /obj/item/robot_parts/robot_component/physically_destroyed(skip_qdel)
@@ -258,7 +261,7 @@
 	. = ..()
 
 /obj/item/robot_parts/robot_component/proc/is_functional()
-	return ((brute_damage + burn_damage) < max_health)
+	return ((brute_damage + burn_damage) < get_max_health())
 
 /obj/item/robot_parts/robot_component/binary_communication_device
 	name = "binary communication device"

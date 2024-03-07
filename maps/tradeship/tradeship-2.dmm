@@ -4117,7 +4117,7 @@
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/machinery/meter/turf,
 /obj/structure/window/reinforced{
-	health = 1e+007
+	current_health = 1e+007
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/ship/trade/maintenance/atmos)
@@ -4130,7 +4130,7 @@
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/window/reinforced{
-	health = 1e+007
+	current_health = 1e+007
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/ship/trade/maintenance/atmos)

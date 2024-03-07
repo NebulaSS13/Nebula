@@ -65,7 +65,7 @@
 /obj/item/electronic_assembly/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
 	if(!can_take_damage())
 		return
-	if(health < 1)
+	if(current_health < 1)
 		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
 		physically_destroyed()
 	else if((get_percent_health() < 15) && prob(5))
@@ -109,7 +109,7 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(max_health/health < 0.5 && prob(5))
+	if(get_max_health()/current_health < 0.5 && prob(5))
 		visible_message(SPAN_WARNING("\The [src] shudders and sparks."))
 		power_failure = TRUE
 	// Now spend it.
@@ -471,7 +471,7 @@
 		var/obj/item/stack/cable_coil/C = I
 		if(is_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
-			health = min(max_health, health + 5)
+			current_health = min(get_max_health(), current_health + 5)
 		return TRUE
 
 	else if(user.a_intent != I_HURT)

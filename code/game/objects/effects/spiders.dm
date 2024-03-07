@@ -53,21 +53,21 @@
 			damage = 15
 			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 
-	health -= damage
+	current_health -= damage
 	healthcheck()
 
 /obj/effect/spider/bullet_act(var/obj/item/projectile/Proj)
 	..()
-	health -= Proj.get_structure_damage()
+	current_health -= Proj.get_structure_damage()
 	healthcheck()
 
 /obj/effect/spider/proc/healthcheck()
-	if(health <= 0)
+	if(current_health <= 0)
 		qdel(src)
 
 /obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300 + T0C)
-		health -= 5
+		current_health -= 5
 		healthcheck()
 	if(!QDELETED(src))
 		return ..()
@@ -194,7 +194,7 @@
 
 /obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(health > 0)
+	if(current_health > 0)
 		disturbed()
 
 /obj/effect/spider/spiderling/Crossed(atom/movable/AM)
@@ -218,7 +218,7 @@
 		..()
 
 /obj/effect/spider/spiderling/healthcheck()
-	if(health <= 0)
+	if(current_health <= 0)
 		die()
 
 /obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)

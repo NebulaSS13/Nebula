@@ -90,8 +90,8 @@
 	visible_message(SPAN_NOTICE("\The [user] packs up \the [src]."))
 	var/obj/item/defensive_barrier/B = new(get_turf(user), material?.type)
 	playsound(src, 'sound/items/Deconstruct.ogg', 100, 1)
-	B.stored_health = health
-	B.stored_max_health = max_health
+	B.stored_health = current_health
+	B.stored_max_health = get_max_health()
 	B.add_fingerprint(user)
 	qdel(src)
 	return TRUE
@@ -197,7 +197,7 @@
 	playsound(src, 'sound/effects/extout.ogg', 100, 1)
 	var/obj/structure/defensive_barrier/B = new(get_turf(user), material?.type)
 	B.set_dir(user.dir)
-	B.health = stored_health
+	B.current_health = stored_health
 	if(loc == user)
 		user.drop_from_inventory(src)
 	qdel(src)

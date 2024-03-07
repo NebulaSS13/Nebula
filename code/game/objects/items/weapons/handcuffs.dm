@@ -32,7 +32,7 @@
 
 /obj/item/handcuffs/examine(mob/user)
 	. = ..()
-	if (health > 0 && max_health > 0)
+	if (current_health > 0 && get_max_health() > 0)
 		var display = get_percent_health()
 		if (display > 66)
 			return

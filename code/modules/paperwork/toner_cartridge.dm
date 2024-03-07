@@ -32,7 +32,7 @@
 
 /obj/item/chems/toner_cartridge/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
-	health = clamp(health - (TT.speed * w_class), 0, max_health) //You don't wanna throw this around too much
+	current_health = clamp(current_health - (TT.speed * w_class), 0, get_max_health()) //You don't wanna throw this around too much
 	check_health()
 
 /obj/item/chems/toner_cartridge/proc/get_amount_toner()

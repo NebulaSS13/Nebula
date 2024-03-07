@@ -18,8 +18,8 @@
 		return 0 //must return a number
 
 	//Apply damage
-	damage = min(health, damage)
-	health = clamp(health - damage, 0, max_health)
+	damage = min(current_health, damage)
+	current_health = clamp(current_health - damage, 0, get_max_health())
 	check_health(damage, damage_type, damage_flags)
 	return damage
 
@@ -49,7 +49,7 @@
 	return (mult * (4 - severity)) + (severity != 1? rand(-(mult / severity), (mult / severity)) : 0 )
 
 /obj/item/proc/explosion_severity_damage_multiplier()
-	return CEILING(max_health / 3)
+	return CEILING(get_max_health() / 3)
 
 /obj/item/is_burnable()
 	return simulated

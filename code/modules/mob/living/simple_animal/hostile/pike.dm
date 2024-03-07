@@ -9,7 +9,7 @@
 	mob_size = MOB_SIZE_LARGE
 	offset_overhead_text_x = 16
 	pixel_x = -16
-	mob_default_max_health = 150
+	max_health = 150
 
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/pike

@@ -5,7 +5,7 @@
 	real_name = "robot"
 	icon = 'icons/mob/robots/robot.dmi'
 	icon_state = ICON_STATE_WORLD
-	mob_default_max_health = 300
+	max_health = 300
 	mob_sort_value = 4
 
 	z_flags = ZMM_MANGLE_PLANES

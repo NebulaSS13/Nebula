@@ -175,7 +175,7 @@ update_flag
 
 /obj/machinery/portable_atmospherics/canister/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > temperature_resistance)
-		health -= 5
+		current_health -= 5
 		healthcheck()
 	return ..()
 
@@ -183,7 +183,7 @@ update_flag
 	if(destroyed)
 		return 1
 
-	if (src.health <= 10)
+	if (current_health <= 10)
 		var/atom/location = src.loc
 		location.assume_air(air_contents)
 
@@ -258,14 +258,14 @@ update_flag
 		return
 
 	if(Proj.damage)
-		src.health -= round(Proj.damage / 2)
+		current_health -= round(Proj.damage / 2)
 		healthcheck()
 	..()
 
 /obj/machinery/portable_atmospherics/canister/bash(var/obj/item/W, var/mob/user)
 	. = ..()
 	if(.)
-		health -= W.force
+		current_health -= W.force
 		healthcheck()
 
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W, var/mob/user)
