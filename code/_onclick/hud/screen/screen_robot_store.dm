@@ -1,8 +1,9 @@
 /obj/screen/robot_store
 	name       = "store"
-	icon       = 'icons/mob/screen1_robot.dmi'
+	icon       = 'icons/mob/screen/styles/robot/panel.dmi'
 	icon_state = "store"
 	screen_loc = ui_borg_store
+	requires_ui_style = FALSE
 
 /obj/screen/robot_store/handle_click(mob/user, params)
 	if(isrobot(user))

@@ -1,8 +1,9 @@
 /obj/screen/ability_master
-	name           = "Abilities"
-	icon           = 'icons/mob/screen_spells.dmi'
-	icon_state     = "grey_spell_ready"
-	screen_loc     = ui_ability_master
+	name              = "Abilities"
+	icon              = 'icons/mob/screen/spells.dmi'
+	icon_state        = "grey_spell_ready"
+	screen_loc        = ui_ability_master
+	requires_ui_style = FALSE
 	var/list/obj/screen/ability/ability_objects = list()
 	var/list/obj/screen/ability/spell_objects = list()
 	var/showing = FALSE // If we're 'open' or not.
@@ -10,7 +11,7 @@
 	var/open_state = "master_open"		// What the button looks like when it's 'open', showing the other buttons.
 	var/closed_state = "master_closed"	// Button when it's 'closed', hiding everything else.
 
-/obj/screen/ability_master/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
+/obj/screen/ability_master/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		update_abilities(0, _owner)
@@ -154,10 +155,11 @@
 //This is what you click to do things//
 ///////////////////////////////////////
 /obj/screen/ability
-	icon = 'icons/mob/screen_spells.dmi'
+	icon = 'icons/mob/screen/spells.dmi'
 	icon_state = "grey_spell_base"
 	maptext_x = 3
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	var/background_base_state = "grey"
 	var/ability_icon_state = null
 	var/obj/screen/ability_master/ability_master

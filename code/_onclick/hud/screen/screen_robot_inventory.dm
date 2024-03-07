@@ -1,8 +1,9 @@
 /obj/screen/robot_inventory
-	name       = "inventory"
-	icon       = 'icons/mob/screen1_robot.dmi'
-	icon_state = "inventory"
-	screen_loc = ui_borg_inventory
+	name              = "inventory"
+	icon              = 'icons/mob/screen/styles/robot/panel.dmi'
+	icon_state        = "inventory"
+	screen_loc        = ui_borg_inventory
+	requires_ui_style = FALSE
 
 /obj/screen/robot_inventory/handle_click(mob/user, params)
 	if(isrobot(user))

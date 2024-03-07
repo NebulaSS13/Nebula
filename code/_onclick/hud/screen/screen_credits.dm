@@ -8,6 +8,7 @@
 	layer = HUD_ABOVE_ITEM_LAYER
 	maptext_height = WORLD_ICON_SIZE * 2
 	maptext_width  = WORLD_ICON_SIZE * 14
+	requires_ui_style = FALSE
 	var/client/parent
 	var/matrix/target
 

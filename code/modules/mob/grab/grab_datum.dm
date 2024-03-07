@@ -32,7 +32,7 @@
 	var/success_down            = "You adjust your grip on $rep_affecting$."
 	var/fail_up                 = "You can't get a better grip on $rep_affecting$!"
 	var/fail_down               = "You can't seem to relax your grip on $rep_affecting$!"
-	var/grab_icon               = 'icons/mob/screen1.dmi'
+	var/grab_icon               = 'icons/mob/screen/grabs.dmi'
 	var/grab_icon_state         = "reinforce"
 	var/upgrade_cooldown        = 40
 	var/action_cooldown         = 40

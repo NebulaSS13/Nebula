@@ -2,7 +2,6 @@
 #define MODPACK_SERPENTID
 // BEGIN_INCLUDE
 #include "serpentid.dm"
-#include "datum\attacks.dm"
 #include "datum\species.dm"
 #include "datum\species_bodytypes.dm"
 #include "mobs\bodyparts_serpentid.dm"

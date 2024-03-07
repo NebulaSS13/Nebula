@@ -1,12 +1,14 @@
 /obj/screen/storage
 	name = "storage"
+	icon = 'icons/mob/screen/storage.dmi'
 	user_incapacitation_flags = INCAPACITATION_DISRUPTED
 	screen_loc = ui_storage_default
 	layer = HUD_BASE_LAYER
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	var/weakref/storage_master_ref
 
-/obj/screen/storage/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, obj/item/storage/_storage_master)
+/obj/screen/storage/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, obj/item/storage/_storage_master)
 	. = ..()
 	storage_master_ref = _storage_master && weakref(_storage_master)
 
@@ -33,6 +35,7 @@
 
 /obj/screen/storage/close
 	name       = "close"
+	icon       = 'icons/effects/markers.dmi'
 	icon_state = "x"
 	layer      = HUD_BASE_LAYER
 
@@ -43,17 +46,16 @@
 		return TRUE
 	return FALSE
 
-/obj/screen/stored_start
+/obj/screen/stored
+	layer = HUD_BASE_LAYER
+	requires_owner = FALSE
+	requires_ui_style = FALSE
+
+/obj/screen/stored/start
 	icon_state = "stored_start"
-	layer = HUD_BASE_LAYER
-	requires_owner = FALSE
 
-/obj/screen/stored_cont
+/obj/screen/stored/cont
 	icon_state = "stored_continue"
-	layer = HUD_BASE_LAYER
-	requires_owner = FALSE
 
-/obj/screen/stored_end
+/obj/screen/stored/end
 	icon_state = "stored_end"
-	layer = HUD_BASE_LAYER
-	requires_owner = FALSE

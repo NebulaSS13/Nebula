@@ -5,15 +5,16 @@
 	hidden = FALSE
 	maptext_x = 6
 	maptext_y = -8
+	requires_ui_style = FALSE
 	var/image/on_cooldown
 	var/list/components
 
-/obj/screen/psi/hub/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
+/obj/screen/psi/hub/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat)
 	. = ..()
 	on_cooldown = image(icon, "cooldown")
 	components = list(
 		new /obj/screen/psi/armour(null, _owner),
-		new /obj/screen/psi/toggle_psi_menu(null, _owner, null, null, null, src)
+		new /obj/screen/psi/toggle_psi_menu(null, _owner, null, null, null, null, src)
 	)
 	START_PROCESSING(SSprocessing, src)
 

@@ -1043,7 +1043,7 @@ default behaviour is:
 	for(var/datum/action/action in actions)
 		button_number++
 		if(isnull(action.button))
-			action.button = new /obj/screen/action_button(null, src, null, null, null, action)
+			action.button = new /obj/screen/action_button(null, src, null, null, null, null, action)
 		action.button.SetName(action.UpdateName())
 		action.button.desc = action.UpdateDesc()
 		action.button.update_icon()

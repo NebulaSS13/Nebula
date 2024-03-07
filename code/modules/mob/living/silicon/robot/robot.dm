@@ -34,9 +34,9 @@
 
 //Hud stuff
 
-	var/obj/screen/robot_module_one/inv1
-	var/obj/screen/robot_module_two/inv2
-	var/obj/screen/robot_module_three/inv3
+	var/obj/screen/robot_module/one/inv1
+	var/obj/screen/robot_module/two/inv2
+	var/obj/screen/robot_module/three/inv3
 	var/obj/screen/robot_drop_grab/ui_drop_grab
 
 	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not

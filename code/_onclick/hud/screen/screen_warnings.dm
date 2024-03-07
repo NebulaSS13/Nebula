@@ -10,6 +10,5 @@
 
 /obj/screen/warning_cells
 	name = "cell"
-	icon = 'icons/mob/screen1_robot.dmi'
 	icon_state = "charge-empty"
 	screen_loc = ui_nutrition

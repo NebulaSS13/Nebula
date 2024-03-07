@@ -20,12 +20,15 @@
 	if(client)
 		client.screen |= hud_elements
 
+/obj/screen/zone_selector/exosuit
+	requires_ui_style = FALSE
+
 /mob/living/exosuit/InitializeHud()
-	zone_sel = new(null, src)
+	zone_sel = new /obj/screen/zone_selector/exosuit(null, src)
 	if(!LAZYLEN(hud_elements))
 		var/i = 1
 		for(var/hardpoint in hardpoints)
-			var/obj/screen/exosuit/hardpoint/H = new(null, src, null, null, null, hardpoint)
+			var/obj/screen/exosuit/hardpoint/H = new(null, src, null, null, null, null, hardpoint)
 			H.screen_loc = "LEFT:6,TOP-[i]:-16"
 			hud_elements |= H
 			hardpoint_hud_elements[hardpoint] = H

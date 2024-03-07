@@ -1,10 +1,11 @@
 /obj/screen/fullscreen
-	icon = 'icons/mob/screen_full.dmi'
+	icon = 'icons/mob/screen/full.dmi'
 	icon_state = "default"
 	screen_loc = ui_center_fullscreen
 	plane = FULLSCREEN_PLANE
 	layer = FULLSCREEN_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	requires_ui_style = FALSE
 	var/severity = 0
 	var/allstate = 0 //shows if it should show up for dead people too
 
@@ -29,7 +30,7 @@
 	layer = BLIND_LAYER
 
 /obj/screen/fullscreen/blackout
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/effects.dmi'
 	icon_state = "black"
 	screen_loc = ui_entire_screen
 	layer = BLIND_LAYER
@@ -39,13 +40,13 @@
 	layer = IMPAIRED_LAYER
 
 /obj/screen/fullscreen/blurry
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/effects.dmi'
 	screen_loc = ui_entire_screen
 	icon_state = "blurry"
 	alpha = 100
 
 /obj/screen/fullscreen/flash
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/effects.dmi'
 	screen_loc = ui_entire_screen
 	icon_state = "flash"
 
@@ -53,7 +54,7 @@
 	icon_state = "noise"
 
 /obj/screen/fullscreen/high
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/effects.dmi'
 	screen_loc = ui_entire_screen
 	icon_state = "druggy"
 	alpha = 180
@@ -66,7 +67,7 @@
 	alpha = 127
 
 /obj/screen/fullscreen/fadeout
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/effects.dmi'
 	icon_state = "black"
 	screen_loc = ui_entire_screen
 	alpha = 0

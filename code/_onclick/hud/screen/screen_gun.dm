@@ -1,5 +1,5 @@
 /obj/screen/gun
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/styles/midnight/fire_intent.dmi'
 	dir = SOUTH
 	abstract_type = /obj/screen/gun
 	var/toggle_flag

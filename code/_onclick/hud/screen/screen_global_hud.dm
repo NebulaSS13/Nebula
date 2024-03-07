@@ -7,6 +7,7 @@
 	alpha = 125
 	blend_mode = BLEND_MULTIPLY
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	is_global_screen = TRUE
 	user_incapacitation_flags = null
 
@@ -18,4 +19,5 @@
 	screen_loc = UI_HOLOMAP
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	is_global_screen = TRUE

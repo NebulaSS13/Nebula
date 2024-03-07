@@ -28,9 +28,10 @@
 /obj/screen/psi/toggle_psi_menu
 	name = "Show/Hide Psi UI"
 	icon_state = "arrow_left"
+	requires_ui_style = FALSE
 	var/obj/screen/psi/hub/controller
 
-/obj/screen/psi/toggle_psi_menu/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, obj/screen/psi/hub/_controller)
+/obj/screen/psi/toggle_psi_menu/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, obj/screen/psi/hub/_controller)
 	. = ..()
 	controller = _controller
 

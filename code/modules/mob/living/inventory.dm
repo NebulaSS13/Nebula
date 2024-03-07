@@ -182,3 +182,27 @@
 	if(istype(thrust))
 		return thrust
 	return null
+
+/mob/living/verb/quick_equip()
+	set name = "quick-equip"
+	set hidden = 1
+	var/obj/item/I = get_active_hand()
+	if(!I)
+		to_chat(src, SPAN_WARNING("You are not holding anything to equip."))
+		return
+	if(!equip_to_appropriate_slot(I))
+		to_chat(src, SPAN_WARNING("You are unable to equip that."))
+
+/mob/living/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
+	for (var/slot in slots)
+		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
+			return slot
+	if (del_on_fail)
+		qdel(W)
+	return null
+
+//Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
+/mob/living/proc/get_covering_equipped_item_by_zone(var/zone)
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)
+	if(O)
+		return get_covering_equipped_item(O.body_part)

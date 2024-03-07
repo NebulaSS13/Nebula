@@ -105,7 +105,7 @@ var/global/list/engine_setup_markers = list()
 	invisibility = INVISIBILITY_ABSTRACT
 	anchored = TRUE
 	density = FALSE
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "x3"
 
 /obj/effect/engine_setup/Initialize()
