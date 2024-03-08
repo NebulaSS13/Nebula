@@ -241,36 +241,31 @@ Single Use Emergency Pouches
 	name = "emergency autoinjector"
 	desc = "An emergency autoinjector from an emergency medical pouch."
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer
-	name = "emergency stabilizer autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/stabilizer, 5)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
-	name = "emergency painkiller autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/painkillers, 5)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins
-	name = "emergency antitoxins autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antitoxins, 5)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds
-	name = "emergency oxygel autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/oxy_meds, 5)
+	. = ..()
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
-	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/adrenaline, 8)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood
-	name = "emergency nanoblood autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nanoblood, 5)
+	. = ..()
 
 // Inhalers
 

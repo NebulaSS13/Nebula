@@ -32,7 +32,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
 	if(reagents?.total_volume > 0 && autolabel && !label_text) // don't override preset labels
-		label_text = reagents.get_primary_reagent_name()
+		label_text = "[reagents.get_primary_reagent_name()], [reagents.total_volume]u"
 
 /obj/item/chems/pill/on_update_icon()
 	. = ..()
