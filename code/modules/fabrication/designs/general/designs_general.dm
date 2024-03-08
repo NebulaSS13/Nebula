@@ -165,3 +165,6 @@
 
 /datum/fabricator_recipe/package_wrapper/gift
 	path = /obj/item/stack/package_wrap/gift
+
+/datum/fabricator_recipe/duct_tape
+	path = /obj/item/stack/tape_roll/duct_tape
