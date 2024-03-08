@@ -17,5 +17,9 @@
 		/datum/random_map/noise/forage
 	)
 
+/datum/level_data/player_level/shaded_hills/embark/after_generate_level()
+	. = ..()
+	SSweather.setup_weather_system(src)
+
 /obj/abstract/level_data_spawner/shaded_hills
 	level_data_type = /datum/level_data/player_level/shaded_hills/embark
