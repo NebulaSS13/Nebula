@@ -98,7 +98,6 @@
 
 //We lied - it's pills all the way down
 /obj/item/chems/pill/bromide
-	name = "bromide pill"
 	desc = "Highly toxic."
 	icon_state = "pill4"
 	volume = 50
@@ -112,6 +111,7 @@
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
 	volume = 50
+	autolabel = FALSE
 
 /obj/item/chems/pill/cyanide/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/cyanide, reagents.maximum_volume)
@@ -121,13 +121,13 @@
 	name = "Adminordrazine pill"
 	desc = "It's magic. We don't have to explain it."
 	icon_state = "pillA"
+	autolabel = FALSE
 
 /obj/item/chems/pill/adminordrazine/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/adminordrazine, 1)
 	. = ..()
 
 /obj/item/chems/pill/stox
-	name = "sedatives (15u)"
 	desc = "Commonly used to treat insomnia."
 	icon_state = "pill3"
 
@@ -136,7 +136,6 @@
 	. = ..()
 
 /obj/item/chems/pill/burn_meds
-	name = "synthskin (15u)"
 	desc = "Used to treat burns."
 	icon_state = "pill2"
 
@@ -145,7 +144,6 @@
 	. = ..()
 
 /obj/item/chems/pill/painkillers
-	name = "painkillers (15u)"
 	desc = "A simple painkiller."
 	icon_state = "pill3"
 
@@ -154,7 +152,6 @@
 	. = ..()
 
 /obj/item/chems/pill/strong_painkillers
-	name = "strong painkillers (15u)"
 	desc = "A powerful painkiller. Do not mix with alcohol consumption."
 	icon_state = "pill3"
 
@@ -163,7 +160,6 @@
 	. = ..()
 
 /obj/item/chems/pill/stabilizer
-	name = "stabilizer (30u)"
 	desc = "Used to stabilize patients."
 	icon_state = "pill1"
 
@@ -172,7 +168,6 @@
 	. = ..()
 
 /obj/item/chems/pill/oxygen
-	name = "oxygen (15u)"
 	desc = "Used to treat oxygen deprivation."
 	icon_state = "pill1"
 
@@ -181,7 +176,6 @@
 	. = ..()
 
 /obj/item/chems/pill/antitoxins
-	name = "antitoxins (25u)"
 	desc = "A broad-spectrum anti-toxin."
 	icon_state = "pill1"
 
@@ -191,7 +185,6 @@
 	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
 
 /obj/item/chems/pill/brute_meds
-	name = "styptic (20u)"
 	desc = "Used to treat physical injuries."
 	icon_state = "pill2"
 
@@ -203,6 +196,7 @@
 	name = "happy pill"
 	desc = "Happy happy joy joy!"
 	icon_state = "pill4"
+	autolabel = FALSE
 
 /obj/item/chems/pill/happy/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/psychoactives,   15)
@@ -213,6 +207,7 @@
 	name = "zoom pill"
 	desc = "Zoooom!"
 	icon_state = "pill4"
+	autolabel = FALSE
 
 /obj/item/chems/pill/zoom/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/narcotics,       5)
@@ -225,13 +220,13 @@
 	name = "strange pill"
 	desc = "The surface of this unlabelled pill crawls against your skin."
 	icon_state = "pill2"
+	autolabel = FALSE
 
 /obj/item/chems/pill/gleam/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/glowsap/gleam, 10)
 	. = ..()
 
 /obj/item/chems/pill/antibiotics
-	name = "antibiotics (10u)"
 	desc = "Contains antibiotic agents."
 	icon_state = "pill3"
 
@@ -241,7 +236,6 @@
 
 //Psychiatry pills.
 /obj/item/chems/pill/stimulants
-	name = "stimulants (15u)"
 	desc = "Improves the ability to concentrate."
 	icon_state = "pill2"
 
@@ -250,7 +244,6 @@
 	. = ..()
 
 /obj/item/chems/pill/antidepressants
-	name = "antidepressants (15u)"
 	desc = "Mild anti-depressant."
 	icon_state = "pill4"
 
@@ -259,38 +252,32 @@
 	. = ..()
 
 /obj/item/chems/pill/antirads
-	name = "antirads (7u)"
+	name = "pill (anti-rad treatment, 15u)"
 	desc = "Used to treat radiation poisoning."
 	icon_state = "pill1"
+	autolabel = FALSE
 
 /obj/item/chems/pill/antirads/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antirads, 7)
-	. = ..()
-
-/obj/item/chems/pill/antirad
-	name = "AntiRad"
-	desc = "Used to treat radiation poisoning."
-	icon_state = "yellow"
-
-/obj/item/chems/pill/antirad/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antirads,   5)
-	. = ..()
+	reagents.add_reagent(/decl/material/liquid/antirads, 5)
 	reagents.add_reagent(/decl/material/liquid/antitoxins, 10)
+	. = ..()
 
 /obj/item/chems/pill/sugariron
-	name = "Sugar-Iron (10u)"
+	name = "pill (sugar-iron, 10u)"
 	desc = "Used to help the body naturally replenish blood."
 	icon_state = "pill1"
+	autolabel = FALSE
 
 /obj/item/chems/pill/sugariron/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/metal/iron,       5)
-	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
+	. = ..()
 
 /obj/item/chems/pill/detergent
 	name = "detergent pod"
 	desc = "Put in water to get space cleaner. Do not eat. Really."
 	icon_state = "pod21"
+	autolabel = FALSE
 	var/smell_clean_time = 10 MINUTES
 
 // Don't overwrite the custom name.
@@ -305,6 +292,7 @@
 	name = "master flavorpod item"
 	desc = "A cellulose pod containing some kind of flavoring."
 	icon_state = "pill4"
+	autolabel = FALSE
 
 // Don't overwrite the custom names.
 /obj/item/chems/pill/pod/update_container_name()
