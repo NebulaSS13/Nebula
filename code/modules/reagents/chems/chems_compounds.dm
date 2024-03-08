@@ -74,7 +74,7 @@
 /decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
-		M.emote("shiver")
+		M.emote(/decl/emote/visible/shiver)
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
 
 /decl/material/liquid/capsaicin
@@ -423,7 +423,7 @@
 			else if(E.organ_tag != BP_CHEST && E.organ_tag != BP_GROIN && prob(15))
 				to_chat(H, SPAN_DANGER("Your [E.name] is being lacerated from within!"))
 				if(E.can_feel_pain())
-					H.emote("scream")
+					H.emote(/decl/emote/audible/scream)
 				if(prob(25))
 					for(var/i = 1 to rand(3,5))
 						new /obj/item/shard(get_turf(E), result_mat)

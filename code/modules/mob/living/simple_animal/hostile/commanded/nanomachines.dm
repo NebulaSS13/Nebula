@@ -11,7 +11,7 @@
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
 	gene_damage = -1
 	response_help_1p = "You wave your hand through $TARGET$."
-	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET$."
+	response_help_3p = "$USER$ waves $USER_THEIR$ hand through $TARGET$."
 	response_harm =    "agitates"
 	response_disarm =  "fans at"
 	ai = /datum/ai/nanomachines

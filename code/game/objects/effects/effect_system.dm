@@ -296,7 +296,7 @@ steam.start() -- spawns the effect
 	R.take_overall_damage(0, 0.75)
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
-		R.emote("gasp")
+		R.emote(/decl/emote/audible/gasp)
 		spawn (20)
 			R.coughedtime = 0
 

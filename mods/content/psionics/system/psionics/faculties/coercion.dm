@@ -45,7 +45,7 @@
 			if(prob(60) && iscarbon(M))
 				var/mob/living/carbon/C = M
 				if(C.can_feel_pain())
-					M.emote("scream")
+					M.emote(/decl/emote/audible/scream)
 			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a psionic scream!"))
 			M.flash_eyes()
 			SET_STATUS_MAX(M, STAT_BLIND,   3)
@@ -132,7 +132,7 @@
 		to_chat(user, "<span class='danger'>You lash out, stabbing into \the [target] with a lance of psi-power.</span>")
 		to_chat(target, "<span class='danger'>The muscles in your arms cramp horrendously!</span>")
 		if(prob(75))
-			target.emote("scream")
+			target.emote(/decl/emote/audible/scream)
 		for(var/hand_slot in target.get_held_item_slots())
 			var/obj/item/thing = target.get_equipped_item(hand_slot)
 			if(thing?.simulated && prob(75) && target.try_unequip(thing))

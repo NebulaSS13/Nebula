@@ -82,7 +82,7 @@
 /mob/living/carbon/airlock_crush(var/crush_damage)
 	. = ..()
 	if (can_feel_pain())
-		emote("scream")
+		emote(/decl/emote/audible/scream)
 
 /mob/living/silicon/robot/airlock_crush(var/crush_damage)
 	return ..(round(crush_damage / CYBORG_AIRLOCKCRUSH_RESISTANCE)) //TODO implement robot melee armour and remove this.

@@ -166,7 +166,7 @@
 	if(stance_damage >= 4 || (stance_damage >= 2 && prob(2)) || (stance_damage >= 3 && prob(8)))
 		if(!(lying || resting))
 			if(limb_pain)
-				emote("scream")
+				emote(/decl/emote/audible/scream)
 			custom_emote(VISIBLE_MESSAGE, "collapses!")
 		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
 
