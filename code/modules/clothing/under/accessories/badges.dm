@@ -47,11 +47,16 @@
 		else
 			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [badge_string].</span>","<span class='notice'>You display your [src.name]. It reads: [badge_string].</span>")
 
-/obj/item/clothing/accessory/badge/attack(mob/living/carbon/human/M, mob/living/user)
-	if(isliving(user))
-		user.visible_message("<span class='danger'>[user] invades [M]'s personal space, thrusting \the [src] into their face insistently.</span>","<span class='danger'>You invade [M]'s personal space, thrusting \the [src] into their face insistently.</span>")
+/obj/item/clothing/accessory/badge/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(isliving(user) && user.a_intent == I_HURT)
+		user.visible_message(
+			SPAN_DANGER("\The [user] invades \the [target]'s personal space, thrusting \the [src] into their face insistently."),
+			SPAN_DANGER("You invade \the [target]'s personal space, thrusting \the [src] into their face insistently.")
+		)
 		if(stored_name)
-			to_chat(M, "<span class='warning'>It reads: [stored_name], [badge_string].</span>")
+			to_chat(target, SPAN_NOTICE("It reads: [stored_name], [badge_string]."))
+		return TRUE
+	return ..()
 
 /obj/item/clothing/accessory/badge/PI
 	name = "private investigator's badge"

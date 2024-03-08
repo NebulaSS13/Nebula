@@ -18,8 +18,8 @@
 	sound_to(owner, 'sound/effects/psi/power_fail.ogg')
 	. = ..()
 
-/obj/item/ability/psionic/attack(var/mob/living/M, var/mob/living/user, var/target_zone)
-	if(M.do_psionics_check(max(force, maintain_cost), user))
+/obj/item/ability/psionic/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(target.do_psionics_check(max(force, maintain_cost), user))
 		to_chat(user, SPAN_WARNING("\The [src] flickers violently out of phase!"))
 		return TRUE
 	. = ..()

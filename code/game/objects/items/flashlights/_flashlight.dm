@@ -95,45 +95,44 @@
 		set_dir(pick(global.cardinal))
 		update_light()
 
-/obj/item/flashlight/attack(mob/living/M, mob/living/user)
-	add_fingerprint(user)
-	if(on && user.get_target_zone() == BP_EYES)
+/obj/item/flashlight/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
+	if(on && user.get_target_zone() == BP_EYES && target.should_have_organ(BP_HEAD))
+
+		add_fingerprint(user)
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
 
-		var/mob/living/carbon/human/H = M	//mob has protective eyewear
-		if(istype(H))
-			for(var/slot in global.standard_headgear_slots)
-				var/obj/item/clothing/C = H.get_equipped_item(slot)
-				if(istype(C) && (C.body_parts_covered & SLOT_EYES))
-					to_chat(user, SPAN_WARNING("You're going to need to remove [C] first."))
-					return
+		for(var/slot in global.standard_headgear_slots)
+			var/obj/item/clothing/C = target.get_equipped_item(slot)
+			if(istype(C) && (C.body_parts_covered & SLOT_EYES))
+				to_chat(user, SPAN_WARNING("You're going to need to remove [C] first."))
+				return TRUE
 
-			var/obj/item/organ/vision
-			var/decl/bodytype/root_bodytype = H.get_bodytype()
-			if(!root_bodytype.vision_organ || !H.should_have_organ(root_bodytype.vision_organ))
-				to_chat(user, SPAN_WARNING("You can't find anything on [H] to direct [src] into!"))
-				return
+		var/obj/item/organ/vision
+		var/decl/bodytype/root_bodytype = target.get_bodytype()
+		if(!root_bodytype?.vision_organ || !target.should_have_organ(root_bodytype.vision_organ))
+			to_chat(user, SPAN_WARNING("You can't find anything on \the [target] to direct \the [src] into!"))
+			return TRUE
 
-			vision = GET_INTERNAL_ORGAN(H, root_bodytype.vision_organ)
-			if(!vision)
-				vision = root_bodytype.has_organ[root_bodytype.vision_organ]
-				var/decl/pronouns/G = H.get_pronouns()
-				to_chat(user, SPAN_WARNING("\The [H] is missing [G.his] [initial(vision.name)]!"))
-				return
+		vision = GET_INTERNAL_ORGAN(target, root_bodytype.vision_organ)
+		if(!vision)
+			vision = root_bodytype.has_organ[root_bodytype.vision_organ]
+			var/decl/pronouns/G = target.get_pronouns()
+			to_chat(user, SPAN_WARNING("\The [target] is missing [G.his] [initial(vision.name)]!"))
+			return TRUE
 
-			user.visible_message(
-				SPAN_NOTICE("\The [user] directs [src] into [M]'s [vision.name]."),
-				SPAN_NOTICE("You direct [src] into [M]'s [vision.name].")
-			)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] directs [src] into [target]'s [vision.name]."),
+			SPAN_NOTICE("You direct [src] into [target]'s [vision.name].")
+		)
+		inspect_vision(vision, user)
 
-			inspect_vision(vision, user)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
+		target.flash_eyes()
+		return TRUE
 
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
-			M.flash_eyes()
-	else
-		return ..()
+	return ..()
 
 /obj/item/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
 	var/mob/living/carbon/human/H = vision.owner

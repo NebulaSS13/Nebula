@@ -28,8 +28,8 @@
 /obj/item/chems/drinks/attack_self(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		open(user)
-		return
-	attack(user, user)
+		return TRUE
+	return use_on_mob(user, user)
 
 /obj/item/chems/drinks/proc/open(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src))

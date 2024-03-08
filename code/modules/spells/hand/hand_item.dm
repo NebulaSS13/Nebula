@@ -24,11 +24,12 @@ Basically: I can use it to target things where I click. I can then pass these ta
 /obj/item/magic_hand/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/magic_hand/attack(var/mob/living/M, var/mob/living/user)
-	if(hand_spell && hand_spell.valid_target(M, user))
-		fire_spell(M, user)
-		return 0
-	return 1
+// These return values do not look correct...
+/obj/item/magic_hand/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(hand_spell && hand_spell.valid_target(target, user))
+		fire_spell(target, user)
+		return FALSE
+	return TRUE
 
 /obj/item/magic_hand/proc/fire_spell(var/atom/A, mob/living/user)
 	if(!hand_spell) //no spell? Die.

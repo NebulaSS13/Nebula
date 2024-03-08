@@ -52,7 +52,7 @@
 	if(remove_from_storage(pill, user))
 		if(target_mouth)
 			user.visible_message(SPAN_NOTICE("\The [user] pops a pill from \the [src]."))
-			pill.attack(user, user)
+			pill.use_on_mob(user, user)
 		else
 			if(user.put_in_inactive_hand(pill))
 				to_chat(user, SPAN_NOTICE("You take \the [pill] out of \the [src]."))

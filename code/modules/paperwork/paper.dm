@@ -152,33 +152,32 @@
 	interact(user, readonly = TRUE)
 	return TRUE
 
-/obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/paper/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/target_zone = user.get_target_zone()
 	if(target_zone == BP_EYES)
 		user.visible_message(
-			SPAN_NOTICE("You show the paper to [M]."),
-			SPAN_NOTICE("[user] holds up a paper and shows it to [M].")
+			SPAN_NOTICE("You show the paper to [target]."),
+			SPAN_NOTICE("[user] holds up a paper and shows it to [target].")
 		)
-		M.examinate(src)
+		target.examinate(src)
 		return TRUE
 
 	target_zone = check_zone(target_zone)
-	if(M.get_organ_sprite_accessory_by_category(SAC_COSMETICS, target_zone))
-		var/mob/living/carbon/human/H = M
-		if(H == user)
+	if(target.get_organ_sprite_accessory_by_category(SAC_COSMETICS, target_zone))
+		if(target == user)
 			to_chat(user, SPAN_NOTICE("You wipe off the makeup with [src]."))
-			H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
+			target.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] begins to wipe \the [H]'s makeup  off with \the [src]."),
-			SPAN_NOTICE("You begin to wipe off [H]'s makeup .")
+			SPAN_NOTICE("\The [user] begins to wipe \the [target]'s makeup  off with \the [src]."),
+			SPAN_NOTICE("You begin to wipe off [target]'s makeup .")
 		)
-		if(do_after(user, 10, H) && do_after(H, 10, check_holding = 0))	//user needs to keep their active hand, H does not.
+		if(do_after(user, 10, target) && do_after(target, 10, check_holding = 0))	//user needs to keep their active hand, H does not.
 			user.visible_message(
-				SPAN_NOTICE("\The [user] wipes \the [H]'s makeup  off with \the [src]."),
-				SPAN_NOTICE("You wipe off \the [H]'s makeup .")
+				SPAN_NOTICE("\The [user] wipes \the [target]'s makeup  off with \the [src]."),
+				SPAN_NOTICE("You wipe off \the [target]'s makeup .")
 			)
-		H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
+		target.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 		return TRUE
 
 	. = ..()

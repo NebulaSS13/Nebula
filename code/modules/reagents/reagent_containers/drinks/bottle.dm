@@ -244,9 +244,10 @@
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
 
-/obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
+/obj/item/broken_bottle/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	. = ..()
+	if(.)
+		playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 
 /obj/item/chems/drinks/bottle/gin
 	name = "Griffeater Gin"

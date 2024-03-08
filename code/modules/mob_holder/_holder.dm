@@ -120,14 +120,17 @@
 	for(var/mob/M in contents)
 		M.show_stripping_window(usr)
 
-/obj/item/holder/attack(mob/target, mob/user)
+/obj/item/holder/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
 	// Devour on click on self with holder
 	if(target == user && isliving(user))
 		var/mob/living/M = user
 		for(var/mob/victim in src.contents)
 			M.devour(victim)
 		update_state()
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/item/holder/proc/sync(var/mob/living/M)
 	SetName(M.name)

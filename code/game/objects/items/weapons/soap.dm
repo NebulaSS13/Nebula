@@ -87,7 +87,7 @@
 		user.update_personal_goal(/datum/goal/clean, 1)
 
 //attack_as_weapon
-/obj/item/soap/attack(mob/living/target, mob/living/user, var/target_zone)
+/obj/item/soap/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(ishuman(target) && user?.a_intent != I_HURT)
 		var/mob/living/carbon/human/victim = target
 		if(user.get_target_zone() == BP_MOUTH && victim.check_has_mouth())

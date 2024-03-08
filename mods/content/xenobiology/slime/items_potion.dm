@@ -8,21 +8,22 @@
 	var/slime_type = /mob/living/simple_animal/slime
 	var/can_tame_adults = FALSE
 
-/obj/item/slime_potion/attack(mob/living/slime/M, mob/user)
-	if(isslime(M))
-		if(M.is_adult && can_tame_adults)
+/obj/item/slime_potion/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(isslime(target))
+		var/mob/living/slime/slime = target
+		if(slime.is_adult && can_tame_adults)
 			to_chat(user, SPAN_WARNING("Only baby slimes can be tamed!"))
 			return TRUE
-		if(M.stat)
-			to_chat(user, SPAN_WARNING("\The [M] is dead!"))
+		if(slime.stat)
+			to_chat(user, SPAN_WARNING("\The [slime] is dead!"))
 			return TRUE
-		if(M.client)
-			to_chat(user, SPAN_WARNING("\The [M] resists!"))
+		if(slime.client)
+			to_chat(user, SPAN_WARNING("\The [slime] resists!"))
 			return TRUE
-		var/mob/living/simple_animal/slime/pet = new slime_type(M.loc, M.slime_type)
+		var/mob/living/simple_animal/slime/pet = new slime_type(slime.loc, slime.slime_type)
 		to_chat(user, SPAN_NOTICE("You feed \the [pet] the potion, removing its powers and calming it."))
 		pet.prompt_rename(user)
-		qdel(M)
+		qdel(slime)
 		qdel(src)
 		return TRUE
 	. = ..()

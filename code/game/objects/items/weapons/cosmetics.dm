@@ -45,25 +45,26 @@
 /obj/item/cosmetics/proc/show_open_message(mob/user)
 	return
 
-/obj/item/cosmetics/attack(atom/A, mob/user, target_zone)
-	if(!open || !ishuman(A))
+/obj/item/cosmetics/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
+	if(!open)
 		return ..()
 
-	if(istype(A, /obj/item/organ/external/head))
-		var/obj/item/organ/external/head/head = A
+	if(istype(target, /obj/item/organ/external/head))
+		var/obj/item/organ/external/head/head = target
 		head.write_on(user, src)
 		return TRUE
 
 	var/obj/item/organ/external/limb = user.get_organ(apply_marking_to_limb, /obj/item/organ/external/head)
 	if(!limb)
 		return ..()
-
+	var/target_zone = user.get_target_zone()
 	if(user.a_intent == I_HELP && target_zone != apply_to_zone && istype(limb, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = limb
-		head.write_on(user, src.name)
+		head.write_on(user, name)
 		return TRUE
 
-	if(!isliving(A) || target_zone != apply_to_zone)
+	if(!istype(target) || target_zone != apply_to_zone)
 		return ..()
 
 	var/decl/sprite_accessory/cosmetics/lip_decl = GET_DECL(cosmetic_type)
@@ -71,35 +72,33 @@
 		to_chat(user, SPAN_WARNING("You can't wear this makeup!"))
 		return TRUE
 
-	var/mob/living/user_living = user
-	if(user_living == A)
-		if(user_living.get_organ_sprite_accessory(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
+	if(user == target)
+		if(target.get_organ_sprite_accessory(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
 			to_chat(user, SPAN_WARNING("You need to wipe off your old makeup first!"))
 			return TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] does their makeup with \the [src]."),
 			SPAN_NOTICE("You take a moment to apply \the [src]. Perfect!")
 		)
-		user_living.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
+		user.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
 		return TRUE
 
-	user_living = A
-	if(user_living.get_organ_sprite_accessory(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
+	if(target.get_organ_sprite_accessory(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
 		to_chat(user, SPAN_WARNING("You need to wipe off the old makeup first!"))
 		return TRUE
 
 	user.visible_message(
-		SPAN_NOTICE("\The [user] begins to do \the [user_living]'s makeup with \the [src]."),
-		SPAN_NOTICE("You begin to apply \the [src] to \the [user_living].")
+		SPAN_NOTICE("\The [user] begins to do \the [target]'s makeup with \the [src]."),
+		SPAN_NOTICE("You begin to apply \the [src] to \the [target].")
 	)
-	if(do_after(user, 2 SECONDS, user_living))
+	if(do_after(user, 2 SECONDS, target))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] does \the [user_living]'s makeup with \the [src]."),
-			SPAN_NOTICE("You apply \the [src] to \the [user_living].")
+			SPAN_NOTICE("\The [user] does \the [target]'s makeup with \the [src]."),
+			SPAN_NOTICE("You apply \the [src] to \the [target].")
 		)
-		if(user_living.get_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, apply_marking_to_limb))
+		if(target.get_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, apply_marking_to_limb))
 			return TRUE
-		user_living.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
+		target.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
 	return TRUE
 
 //types

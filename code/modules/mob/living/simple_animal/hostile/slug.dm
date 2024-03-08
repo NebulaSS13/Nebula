@@ -60,13 +60,12 @@
 			var/datum/reagents/R = L.reagents
 			R.add_reagent(/decl/material/liquid/presyncopics, 0.5)
 
-/obj/item/holder/slug/attack(var/mob/target, var/mob/user)
+/obj/item/holder/slug/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/mob/living/simple_animal/hostile/slug/V = contents[1]
 	if(!V.stat && ishuman(target))
 		var/mob/living/carbon/human/H = target
-		if(!do_mob(user, H, 30))
-			return
-		V.attach(H)
-		qdel(src)
-		return
-	..()
+		if(do_mob(user, H, 30))
+			V.attach(H)
+			qdel(src)
+		return TRUE
+	return ..()
