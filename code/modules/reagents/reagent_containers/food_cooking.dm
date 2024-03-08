@@ -7,6 +7,8 @@
 	var/backyard_grilling_announcement = "smokes and chars!"
 	/// The span class used for the message above. Burned food defaults to SPAN_DANGER.
 	var/backyard_grilling_span         = "notice"
+	/// The number of times this object and its ancestors have been grilled. Used for grown foods' roasted chems.
+	var/backyard_grilling_count        = 0
 
 /obj/item/chems/food/get_dried_product()
 	drop_plate(get_turf(loc))
@@ -33,20 +35,26 @@
 /obj/item/chems/food/dry_out(var/obj/rack, var/drying_power = 1, var/fire_exposed = FALSE, var/silent = FALSE)
 	return fire_exposed ? grill(rack) : ..()
 
+/obj/item/chems/food/proc/get_grilled_product()
+	return new backyard_grilling_product(loc)
+
 /obj/item/chems/food/proc/grill(var/atom/heat_source)
 	if(!backyard_grilling_product || backyard_grilling_rawness <= 0)
 		return null
 	backyard_grilling_rawness--
 	if(backyard_grilling_rawness <= 0)
-		var/obj/item/food = new backyard_grilling_product
-		food.dropInto(loc)
+		var/obj/item/product = get_grilled_product()
+		product.dropInto(loc)
+		var/obj/item/chems/food/food = product
+		if(istype(food))
+			food.backyard_grilling_count = src.backyard_grilling_count + 1
 		if(backyard_grilling_announcement)
-			if(istype(food, /obj/item/chems/food/badrecipe))
-				food.visible_message(SPAN_DANGER("\The [src] [backyard_grilling_announcement]"))
+			if(istype(product, /obj/item/chems/food/badrecipe))
+				product.visible_message(SPAN_DANGER("\The [src] [backyard_grilling_announcement]"))
 			else
-				food.visible_message("<span class='[backyard_grilling_span]'>\The [src] [backyard_grilling_announcement]</span>")
+				product.visible_message("<span class='[backyard_grilling_span]'>\The [src] [backyard_grilling_announcement]</span>")
 		qdel(src)
-		return food
+		return product
 
 /obj/item/chems/food/proc/get_backyard_grilling_text(var/obj/rack)
 	var/moistness = backyard_grilling_rawness / initial(backyard_grilling_rawness)

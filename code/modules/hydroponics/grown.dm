@@ -9,6 +9,7 @@
 	material = /decl/material/solid/organic/plantmatter
 	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
 	drying_wetness = 45
+	dried_type = /obj/item/chems/food/grown/dry
 
 	var/datum/seed/seed
 
@@ -24,13 +25,23 @@
 		PRINT_STACK_TRACE("Grown initializing with null or invalid seed type '[seed || "NULL"]'")
 		return INITIALIZE_HINT_QDEL
 
-	if(!seed.chems)
+	if(!seed.chems && !(dry && seed.dried_chems) && !(backyard_grilling_count > 0 && seed.roasted_chems))
 		return INITIALIZE_HINT_QDEL // No reagent contents, no froot
 
 	if(seed.scannable_result)
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 
-	SetName("[seed.seed_name]")
+	var/descriptor = list()
+	if(dry)
+		descriptor += "dried"
+	if(backyard_grilling_count > 0)
+		descriptor += "roasted"
+	if(length(descriptor))
+		SetName("[english_list(descriptor)] [seed.seed_name]")
+	else
+		SetName("[seed.seed_name]")
+	if(seed.product_material)
+		material = seed.product_material
 	trash                          = seed.get_trash_type()
 	backyard_grilling_product      = seed.backyard_grilling_product
 	backyard_grilling_rawness      = seed.backyard_grilling_rawness
@@ -58,8 +69,14 @@
 /obj/item/chems/food/grown/populate_reagents()
 	. = ..()
 	// Fill the object up with the appropriate reagents.
-	for(var/rid in seed?.chems)
-		var/list/reagent_amounts = seed.chems[rid]
+	var/list/chems_to_fill
+	if(backyard_grilling_count > 0)
+		chems_to_fill ||= seed?.roasted_chems
+	if(dry)
+		chems_to_fill ||= seed?.dried_chems
+	chems_to_fill ||= seed?.chems
+	for(var/rid in chems_to_fill)
+		var/list/reagent_amounts = chems_to_fill[rid]
 		if(LAZYLEN(reagent_amounts))
 			var/rtotal = reagent_amounts[1]
 			var/list/data = null
@@ -131,10 +148,12 @@
 	if(!seed)
 		return
 	icon_state = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-product"
-	color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+	if(!dry && !backyard_grilling_count)
+		color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 	if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/hydroponics/hydroponics_products.dmi'))
 		var/image/fruit_leaves = image('icons/obj/hydroponics/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
-		fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
+		if(!dry && !backyard_grilling_count)
+			fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		add_overlay(fruit_leaves)
 
 /obj/item/chems/food/grown/Crossed(atom/movable/AM)
@@ -310,6 +329,26 @@ var/global/list/_wood_materials = list(
 		var/affected = pick(BP_R_HAND,BP_L_HAND)
 		seed.do_thorns(H,src,affected)
 		seed.do_sting(H,src,affected)
+
+/obj/item/chems/food/grown/dry
+	dry = TRUE
+	drying_wetness = null
+	dried_type = null
+	color = COLOR_BEIGE
+
+/obj/item/chems/food/grown/get_dried_product()
+	if(ispath(dried_type, /obj/item/chems/food/grown))
+		return new dried_type(loc, seed.type)
+	return ..()
+
+/obj/item/chems/food/grown/grilled
+	backyard_grilling_count = 1 // will get overwritten when actually made
+	color = COLOR_BROWN_ORANGE
+
+/obj/item/chems/food/grown/get_grilled_product()
+	if(ispath(backyard_grilling_product, /obj/item/chems/food/grown))
+		return new backyard_grilling_product(loc, seed.type)
+	return ..()
 
 // Predefined types for placing on the map.
 

@@ -247,6 +247,14 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
+/// Used for plant products that aren't quite wood, but are still tougher than normal plant matter.
+/decl/material/solid/organic/plantmatter/pith
+	name = "plant pith"
+	uid = "solid_plantpith"
+	melting_point = null
+	hardness = MAT_VALUE_FLEXIBLE
+	value = 0.4
+
 /decl/material/solid/organic/plantmatter/grass
 	name = "grass"
 	uid = "solid_grass"
