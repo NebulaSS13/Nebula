@@ -6,6 +6,7 @@
 	loop_turf_type               = /turf/exterior/mimic_edge/transition/loop
 	transition_turf_type         = /turf/exterior/mimic_edge/transition
 	use_global_exterior_ambience = FALSE
+	forbid_strata                = null
 
 	///The planetoid_data datum owning this level. At definition can be set to the planetoid_id of the planetoid to link up with on creation.
 	///Ideally this will eventually be the main reference for the z-level to the planet level contents are located on. So we don't need to link every single turfs to it.
