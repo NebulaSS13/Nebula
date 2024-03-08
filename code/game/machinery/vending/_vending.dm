@@ -70,7 +70,7 @@
 	var/scan_id = 1
 
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
-	. = ..()
+	..()
 	if(isnull(markup))
 		markup = 1.1 + (rand() * 0.4)
 	if(!ispath(vendor_currency, /decl/currency))
@@ -87,6 +87,11 @@
 		ads_list += splittext(product_ads, ";")
 
 	build_inventory(populate_parts)
+	return INITIALIZE_HINT_LATELOAD
+	
+/obj/machinery/vending/LateInitialize()
+	..()
+	update_icon()
 
 /**
  *  Build produdct_records from the products lists
@@ -434,7 +439,7 @@
 	return anchored && ..()
 
 /obj/machinery/vending/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
 	else if( !(stat & NOPOWER) )
@@ -443,7 +448,7 @@
 		spawn(rand(0, 15))
 			icon_state = "[initial(icon_state)]-off"
 	if(panel_open)
-		overlays += image(icon, "[initial(icon_state)]-panel")
+		add_overlay("[initial(icon_state)]-panel")
 
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()
