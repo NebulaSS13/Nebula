@@ -1,16 +1,5 @@
-/obj/item/chems/food/show_feed_message_end(var/mob/user, var/mob/target)
-	target = target || user
-	if(user && user == target && isliving(user))
-		var/mob/living/living_user = user
-		switch(living_user.get_food_satiation() / living_user.get_satiated_nutrition())
-			if(-(INFINITY) to 0.2)
-				to_chat(living_user, SPAN_WARNING("You hungrily chew out a piece of [src] and gobble it!"))
-			if(0.2 to 0.4)
-				to_chat(living_user, SPAN_NOTICE("You hungrily begin to eat [src]."))
-			if(0.4 to 0.8)
-				. = ..()
-			else
-				to_chat(living_user, SPAN_NOTICE("You unwillingly chew a bit of [src]."))
+/obj/item/chems/food/get_food_consumption_method(mob/eater)
+	return EATING_METHOD_EAT
 
 /obj/item/chems/food/play_feed_sound(mob/user, consumption_method = EATING_METHOD_EAT)
 	if(eat_sound)

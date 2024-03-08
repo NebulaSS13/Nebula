@@ -1,5 +1,5 @@
 /obj/item/chems/get_edible_material_amount(var/mob/eater)
-	return reagents?.total_volume
+	return ATOM_IS_OPEN_CONTAINER(src) && reagents?.total_volume
 
 /obj/item/chems/get_food_default_transfer_amount(mob/eater)
 	return eater?.get_eaten_transfer_amount(amount_per_transfer_from_this)

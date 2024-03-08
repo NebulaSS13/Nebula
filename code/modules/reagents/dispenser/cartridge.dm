@@ -15,20 +15,6 @@
 	if(populate && reagents.primary_reagent)
 		setLabel(reagents.get_primary_reagent_name())
 
-/obj/item/chems/chem_disp_cartridge/show_feed_message_end(var/mob/user, var/mob/target)
-	if(user == target)
-		to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
-	else
-		user.visible_message(SPAN_NOTICE("\The [user] feeds \the [src] to \the [target]!"))
-
-/obj/item/chems/chem_disp_cartridge/handle_eaten_by_mob(var/mob/user, var/mob/target)
-	. = ..()
-	if(. == EATEN_SUCCESS)
-		target = target || user
-		if(target?.has_personal_goal(/datum/goal/achievement/specific_object/drink))
-			for(var/R in reagents.reagent_volumes)
-				target.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
-
 /obj/item/chems/chem_disp_cartridge/examine(mob/user)
 	. = ..()
 	to_chat(user, "It has a capacity of [volume] units.")
