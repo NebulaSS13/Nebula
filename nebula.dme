@@ -3322,6 +3322,7 @@
 #include "code\modules\reagents\reagent_containers\glass_edibility.dm"
 #include "code\modules\reagents\reagent_containers\hypospray.dm"
 #include "code\modules\reagents\reagent_containers\inhaler.dm"
+#include "code\modules\reagents\reagent_containers\mortar.dm"
 #include "code\modules\reagents\reagent_containers\pill.dm"
 #include "code\modules\reagents\reagent_containers\pill_edibility.dm"
 #include "code\modules\reagents\reagent_containers\spray.dm"

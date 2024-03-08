@@ -48,6 +48,9 @@
 /decl/stack_recipe/hardness/ashtray
 	result_type       = /obj/item/ashtray
 
+/decl/stack_recipe/hardness/mortar
+	result_type = /obj/item/chems/glass/mortar
+
 /decl/stack_recipe/ring
 	result_type       = /obj/item/clothing/ring/material
 
