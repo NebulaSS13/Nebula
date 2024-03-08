@@ -6,7 +6,7 @@
 	material = /decl/material/solid/organic/cardboard
 	var/cracked = 0
 
-/obj/item/toy/xmas_cracker/attack(mob/target, mob/user)
+/obj/item/toy/xmas_cracker/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(!cracked && ishuman(target) && (target.stat == CONSCIOUS) && !target.get_active_held_item() )
 		target.visible_message(
 			SPAN_NOTICE("\The [user] and \the [target] pop \an [src]! *pop*"),
@@ -33,7 +33,7 @@
 		other_half.icon_state = "cracker2"
 		target.put_in_active_hand(other_half)
 		playsound(user, 'sound/effects/snap.ogg', 50, 1)
-		return 1
+		return TRUE
 	return ..()
 
 /obj/item/clothing/head/festive

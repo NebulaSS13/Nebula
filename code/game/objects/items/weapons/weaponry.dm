@@ -14,33 +14,33 @@
 	material = /decl/material/solid/glass
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
-/obj/item/nullrod/attack(mob/M, mob/living/user) //Paste from old-code to decult with a null rod.
-	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
+/obj/item/nullrod/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
+	admin_attack_log(user, target, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(M)
-	//if(user != M)
-	if(M.mind && LAZYLEN(M.mind.learned_spells))
-		M.silence_spells(300) //30 seconds
-		to_chat(M, "<span class='danger'>You've been silenced!</span>")
-		return
+	user.do_attack_animation(target)
+
+	if(target.mind && LAZYLEN(target.mind.learned_spells))
+		target.silence_spells(300) //30 seconds
+		to_chat(target, SPAN_DANGER("You've been silenced!"))
+		return TRUE
 
 	if (!user.check_dexterity(DEXTERITY_WEAPONS))
-		return
+		return TRUE
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='danger'>The rod slips out of your hand and hits your head.</span>")
+		to_chat(user, SPAN_DANGER("The rod slips out of your hand and hits your head."))
 		user.take_organ_damage(10)
 		SET_STATUS_MAX(user, STAT_PARA, 20)
-		return
+		return TRUE
 
-	if(iscultist(M))
-		M.visible_message("<span class='notice'>\The [user] waves \the [src] over \the [M]'s head.</span>")
+	if(iscultist(target))
+		target.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [target]'s head."))
 		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
-		cult.offer_uncult(M)
-		return
+		cult.offer_uncult(target)
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/nullrod/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)

@@ -12,27 +12,25 @@
 	create_reagents(30)
 	. = ..()
 
-/obj/item/pen/reagent/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/pen/reagent/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!istype(M))
-		return
-
-	. = ..()
-
-	var/allow = M.can_inject(user, target_zone)
-	if(allow)
+	var/allow = target.can_inject(user, user.get_target_zone())
+	if(allow && user.a_intent == I_HELP)
 		if (allow == INJECTION_PORT)
-			if(M != user)
-				to_chat(user, SPAN_WARNING("You begin hunting for an injection port on \the [M]'s suit!"))
+			if(target != user)
+				to_chat(user, SPAN_WARNING("You begin hunting for an injection port on \the [target]'s suit!"))
 			else
 				to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
-				return
+			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target))
+				return TRUE
 		if(reagents.total_volume)
-			if(M.reagents)
+			if(target.reagents)
 				var/contained_reagents = reagents.get_reagents()
-				var/trans = reagents.trans_to_mob(M, 30, CHEM_INJECT)
-				admin_inject_log(user, M, src, contained_reagents, trans)
+				var/trans = reagents.trans_to_mob(target, 30, CHEM_INJECT)
+				admin_inject_log(user, target, src, contained_reagents, trans)
+		return TRUE
+
+	. = ..()
 
 /*
  * Sleepy Pens

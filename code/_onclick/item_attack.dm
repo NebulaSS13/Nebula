@@ -10,7 +10,7 @@ item/resolve_attackby() calls the target atom's attackby() proc.
 Mobs:
 
 mob/living/attackby() after checking for surgery, calls the item's attack() proc.
-item/attack() generates attack logs, sets click cooldown and calls the mob's attacked_with_item() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
+item/use_on_mob() generates attack logs, sets click cooldown and calls the mob's attacked_with_item() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
 mob/attacked_with_item() should then do mob-type specific stuff (like determining hit/miss, handling shields, etc) and then possibly call the item's apply_hit_effect() proc to actually apply the effects of being hit.
 
 Item Hit Effects:
@@ -46,10 +46,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 /mob/living/attackby(obj/item/I, mob/user)
 	if(!ismob(user))
-		return 0
+		return FALSE
 	if(can_operate(src,user) != OPERATE_DENY && I.do_surgery(src,user)) //Surgery
-		return 1
-	return I.attack(src, user, user.get_target_zone() || ran_zone())
+		return TRUE
+	return I.use_on_mob(src, user)
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
 	var/user_zone_sel = user.get_target_zone()
@@ -79,12 +79,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/mob/living/attackee = null
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
-/obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone, animate = TRUE)
+/obj/item/proc/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	if(squash_item())
 		return TRUE
 
-	if(user?.a_intent != I_HURT && is_edible(M) && handle_eaten_by_mob(user, M) != EATEN_INVALID)
+	if(user?.a_intent != I_HURT && is_edible(target) && handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
 
 	if(item_flags & ITEM_FLAG_NO_BLUDGEON)
@@ -94,38 +94,37 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(user.a_intent == I_HELP)
 		switch(user.get_preference_value(/datum/client_preference/help_intent_attack_blocking))
 			if(PREF_ALWAYS)
-				if(user == M)
+				if(user == target)
 					to_chat(user, SPAN_WARNING("You refrain from hitting yourself with \the [src] as you are on help intent."))
 				else
-					to_chat(user, SPAN_WARNING("You refrain from hitting \the [M] with \the [src] as you are on help intent."))
+					to_chat(user, SPAN_WARNING("You refrain from hitting \the [target] with \the [src] as you are on help intent."))
 				return FALSE
 			if(PREF_MYSELF)
-				if(user == M)
+				if(user == target)
 					to_chat(user, SPAN_WARNING("You refrain from hitting yourself with \the [src] as you are on help intent."))
 					return FALSE
 
 	/////////////////////////
 
 	if(!no_attack_log)
-		admin_attack_log(user, M, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
+		admin_attack_log(user, target, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
 	/////////////////////////
 	user.setClickCooldown(attack_cooldown + w_class)
 	if(animate)
-		user.do_attack_animation(M)
+		user.do_attack_animation(target)
 	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))
-		return 0
+		return FALSE
 
-	var/hit_zone = M.resolve_item_attack(src, user, target_zone)
+	var/hit_zone = target.resolve_item_attack(src, user, user.get_target_zone())
 
 	var/datum/attack_result/AR = hit_zone
 	if(istype(AR))
 		if(AR.hit_zone)
-			apply_hit_effect(AR.attackee || M, user, AR.hit_zone)
-		return 1
+			apply_hit_effect(AR.attackee || target, user, AR.hit_zone)
+		return TRUE
 	if(hit_zone)
-		apply_hit_effect(M, user, hit_zone)
-
-	return 1
+		apply_hit_effect(target, user, hit_zone)
+	return TRUE
 
 //Called when a weapon is used to make a successful melee attack on a mob. Returns whether damage was dealt.
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)

@@ -47,8 +47,8 @@
 	else
 		to_chat(user, SPAN_NOTICE("You're too far away to tell much more.."))
 
-/obj/item/hand_labeler/attack(mob/living/M, mob/living/user, target_zone, animate)
-	return //No attacking
+/obj/item/hand_labeler/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/hand_labeler/afterattack(atom/movable/A, mob/user, proximity)
 	if(safety || !proximity || !istype(A) || A == loc)

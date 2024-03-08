@@ -108,5 +108,5 @@
 		T--
 	explode(get_turf(target))
 
-/obj/item/plastique/attack(mob/M, mob/user, def_zone)
-	return
+/obj/item/plastique/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE

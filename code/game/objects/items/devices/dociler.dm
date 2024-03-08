@@ -23,35 +23,39 @@
 
 	to_chat(user, "You set \the [src] to [mode] docile mode.")
 
-/obj/item/dociler/attack(var/mob/living/L, var/mob/user)
-	if(!isanimal(L))
-		to_chat(user, "<span class='warning'>\The [src] cannot not work on \the [L].</span>")
-		return
+/obj/item/dociler/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
+	if(!isanimal(target))
+		to_chat(user, SPAN_WARNING("\The [src] cannot not work on \the [target]."))
+		return TRUE
 
 	if(!loaded)
-		to_chat(user, "<span class='warning'>\The [src] isn't loaded!</span>")
-		return
+		to_chat(user, SPAN_WARNING("\The [src] isn't loaded!"))
+		return TRUE
 
-	user.visible_message("\The [user] thrusts \the [src] deep into \the [L]'s head, injecting something!")
-	to_chat(L, "<span class='notice'>You feel pain as \the [user] injects something into you. All of a sudden you feel as if [user] is the friendliest and nicest person you've ever know. You want to be friends with him and all his friends.</span>")
+	user.visible_message("\The [user] stabs \the [src] into \the [target], injecting something!")
+	var/decl/pronouns/G = user.get_pronouns()
+	to_chat(target, SPAN_NOTICE("You feel a stabbing pain as \the [user] injects something into you. All of a sudden you feel as if [user] is the friendliest and nicest person you've ever know. You want to be friends with [G.him] and all [G.his] friends."))
 	if(mode == "somewhat")
-		L.faction = user.faction
+		target.faction = user.faction
 	else
-		L.faction = null
-	if(istype(L,/mob/living/simple_animal/hostile))
-		var/mob/living/simple_animal/hostile/H = L
+		target.faction = null
+	if(istype(target, /mob/living/simple_animal/hostile))
+		var/mob/living/simple_animal/hostile/H = target
 		H.LoseTarget()
 		H.attack_same = 0
 		H.friends += weakref(user)
-	L.desc += "<br><span class='notice'>It looks especially docile.</span>"
-	var/name = input(user, "Would you like to rename \the [L]?", "Dociler", L.name) as text
+	target.desc += "<br><span class='notice'>It looks especially docile.</span>"
+	var/name = input(user, "Would you like to rename \the [target]?", "Dociler", target.name) as text
 	if(length(name))
-		L.real_name = name
-		L.SetName(name)
+		target.real_name = name
+		target.SetName(name)
 
-	loaded = 0
+	loaded = FALSE
 	icon_state = get_world_inventory_state()
-	spawn(1450)
-		loaded = 1
+	spawn(2.5 MINUTES)
+		loaded = TRUE
 		icon_state = "[icon_state]-charged"
 		src.visible_message("\The [src] beeps, refilling itself.")
+
+	return TRUE

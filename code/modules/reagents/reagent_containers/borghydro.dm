@@ -60,30 +60,31 @@
 					reagent_volumes[T] = min(reagent_volumes[T] + 5, volume)
 	return 1
 
-/obj/item/chems/borghypo/attack(var/mob/living/M, var/mob/user, var/target_zone)
-	if(!istype(M))
-		return
+/obj/item/chems/borghypo/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	if(!reagent_volumes[reagent_ids[mode]])
-		to_chat(user, "<span class='warning'>The injector is empty.</span>")
-		return
+		to_chat(user, SPAN_WARNING("The injector is empty."))
+		return TRUE
 
-	var/allow = M.can_inject(user, target_zone)
+	var/allow = target.can_inject(user, user.get_target_zone())
 	if (allow)
 		if (allow == INJECTION_PORT)
-			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
-			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
-				return
-		to_chat(user, "<span class='notice'>You inject [M] with the injector.</span>")
-		to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
+			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
+			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target))
+				return TRUE
 
-		if(M.reagents)
+		to_chat(user,   SPAN_NOTICE("You inject \the [target] with the injector."))
+		to_chat(target, SPAN_NOTICE("You feel a tiny prick!"))
+
+		if(target.reagents)
 			var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])
-			M.add_to_reagents(reagent_ids[mode], t)
+			target.add_to_reagents(reagent_ids[mode], t)
 			reagent_volumes[reagent_ids[mode]] -= t
-			admin_inject_log(user, M, src, reagent_ids[mode], t)
-			to_chat(user, "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>")
-	return
+			admin_inject_log(user, target, src, reagent_ids[mode], t)
+			to_chat(user, SPAN_NOTICE("[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining."))
+		return TRUE
+
+	return ..()
 
 /obj/item/chems/borghypo/attack_self(mob/user) //Change the mode
 	var/t = ""
@@ -161,8 +162,8 @@
 		/decl/material/liquid/ethanol/coffee
 		)
 
-/obj/item/chems/borghypo/service/attack(var/mob/M, var/mob/user)
-	return
+/obj/item/chems/borghypo/service/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/chems/borghypo/service/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!proximity)

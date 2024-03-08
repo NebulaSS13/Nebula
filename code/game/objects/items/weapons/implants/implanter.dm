@@ -61,28 +61,26 @@
 
 /obj/item/implanter/attackby(obj/item/I, mob/user)
 	if(!imp && istype(I, /obj/item/implant) && user.try_unequip(I,src))
-		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You slide \the [I] into \the [src]."))
 		imp = I
 		update_icon()
-	else
-		..()
+		return TRUE
+	return ..()
 
-/obj/item/implanter/attack(mob/M, mob/user)
-	if (!ishuman(M))
-		return
-	if (user && src.imp)
-		M.visible_message("<span class='warning'>[user] is attemping to implant [M].</span>")
+/obj/item/implanter/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
+	if(ishuman(target) && user && imp)
+		user.visible_message(SPAN_DANGER("\The [user] is attemping to implant \the [target]."))
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-		user.do_attack_animation(M)
-
+		user.do_attack_animation(target)
 		var/target_zone = user.get_target_zone()
-		if(src.imp.can_implant(M, user, target_zone))
+		if(imp.can_implant(target, user, target_zone))
 			var/imp_name = imp.name
-
-			if(do_after(user, 50, M) && src.imp.implant_in_mob(M, target_zone))
-				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
-				admin_attack_log(user, M, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
-
-				src.imp = null
+			if(do_after(user, 50, target) && imp.implant_in_mob(target, target_zone))
+				user.visible_message(SPAN_NOTICE("\The [target] has been implanted by \the [user]."))
+				admin_attack_log(user, target, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
+				imp = null
 				update_icon()
+		return TRUE
+
+	return ..()

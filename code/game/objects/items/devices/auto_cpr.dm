@@ -22,23 +22,22 @@
 	if(. && slot == slot_wear_suit_str)
 		. = user?.get_bodytype_category() == BODYTYPE_HUMANOID
 
-/obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user, var/target_zone)
-	if(istype(M) && user.a_intent == I_HELP)
-		var/obj/item/suit = M.get_equipped_item(slot_wear_suit_str)
+/obj/item/auto_cpr/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
+	if(ishuman(target) && user.a_intent == I_HELP)
+		var/obj/item/suit = target.get_equipped_item(slot_wear_suit_str)
 		if(suit)
 			to_chat(user, SPAN_WARNING("Their [suit] is in the way, remove it first!"))
-			return 1
-		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
-
-		if(!do_mob(user, M, 2 SECONDS))
-			return
-
+			return TRUE
+		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto \the [target]'s chest."))
+		if(!do_mob(user, target, 2 SECONDS))
+			return TRUE
 		if(user.try_unequip(src))
-			if(!M.equip_to_slot_if_possible(src, slot_wear_suit_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
+			if(!target.equip_to_slot_if_possible(src, slot_wear_suit_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
 				user.put_in_active_hand(src)
-			return 1
-	else
-		return ..()
+		return TRUE
+
+	return ..()
 
 /obj/item/auto_cpr/equipped(mob/user, slot)
 	..()
