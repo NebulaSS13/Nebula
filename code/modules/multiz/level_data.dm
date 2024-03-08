@@ -273,15 +273,8 @@
 		var/list/possible_strata = list()
 
 		for(var/stype in all_strata)
-			var/forbidden = FALSE
-			for(var/forbid_type in forbid_strata)
-				if(ispath(stype, forbid_type))
-					forbidden = TRUE
-					break
-			if(forbidden)
-				continue
 			var/decl/strata/strata = all_strata[stype]
-			if(strata.is_valid_level_stratum(src))
+			if(!is_type_in_list(strata, forbid_strata) && strata.is_valid_level_stratum(src))
 				possible_strata += stype
 
 		strata = DEFAULTPICK(possible_strata, GET_DECL(/decl/strata/sedimentary))
