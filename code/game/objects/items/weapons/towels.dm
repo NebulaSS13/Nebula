@@ -14,16 +14,18 @@
 /obj/item/towel/Initialize()
 	. = ..()
 	initialize_reagents()
-	START_PROCESSING(SSobj, src)
 
 /obj/item/towel/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	if(is_processing)
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 // Slowly dry out.
 /obj/item/towel/Process()
 	if(reagents?.total_volume)
 		reagents.remove_any(max(1, round(reagents.total_volume * 0.05)))
+	if(!reagents?.total_volume)
+		return PROCESS_KILL
 
 /obj/item/towel/initialize_reagents()
 	create_reagents(50)
@@ -33,8 +35,12 @@
 	. = ..()
 	if(reagents?.total_volume)
 		SetName("damp [initial(name)]")
+		if(!is_processing)
+			START_PROCESSING(SSobj, src)
 	else
 		SetName(initial(name))
+		if(is_processing)
+			STOP_PROCESSING(SSobj, src)
 
 /obj/item/towel/attack(mob/living/M, mob/living/user, var/target_zone, animate = TRUE)
 	if(user.a_intent == I_HURT)
