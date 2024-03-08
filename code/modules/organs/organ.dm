@@ -155,6 +155,11 @@
 	reset_status()
 	return TRUE
 
+// resets scarring, but ah well
+/obj/item/organ/proc/set_max_damage(var/ndamage)
+	absolute_max_damage = FLOOR(ndamage)
+	max_damage = absolute_max_damage
+
 /obj/item/organ/proc/set_species(specie_name)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
 	if(istext(specie_name))
@@ -173,15 +178,13 @@
 	//Use initial value to prevent scaling down each times we change the species during init
 	absolute_max_damage = initial(absolute_max_damage)
 	min_broken_damage = initial(min_broken_damage)
-	max_damage = initial(max_damage)
 
 	if(absolute_max_damage)
-		absolute_max_damage = max(1, FLOOR(absolute_max_damage * total_health_coefficient))
+		set_max_damage(max(1, FLOOR(absolute_max_damage * total_health_coefficient)))
 		min_broken_damage = max(1, FLOOR(absolute_max_damage * 0.5))
 	else
 		min_broken_damage = max(1, FLOOR(min_broken_damage * total_health_coefficient))
-		absolute_max_damage = max(1, FLOOR(min_broken_damage * 2))
-	max_damage = absolute_max_damage // resets scarring, but ah well
+		set_max_damage(max(1, FLOOR(min_broken_damage * 2)))
 
 	reset_status()
 

@@ -94,8 +94,8 @@
 /obj/item/organ/internal/proc/is_bruised()
 	return damage >= min_bruised_damage
 
-/obj/item/organ/internal/proc/set_max_damage(var/ndamage)
-	max_damage = FLOOR(ndamage)
+/obj/item/organ/internal/set_max_damage(var/ndamage)
+	. = ..()
 	min_broken_damage = FLOOR(0.75 * max_damage)
 	min_bruised_damage = FLOOR(0.25 * max_damage)
 	if(damage_threshold_count > 0)
