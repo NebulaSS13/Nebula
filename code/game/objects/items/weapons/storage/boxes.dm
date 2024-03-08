@@ -82,7 +82,7 @@
 	return list(
 				/obj/item/clothing/mask/breath,
 				/obj/item/tank/emergency/oxygen,
-				/obj/item/chems/hypospray/autoinjector,
+				/obj/item/chems/hypospray/autoinjector/stabilizer,
 				/obj/item/stack/medical/bruise_pack,
 				/obj/item/flashlight/flare/glowstick,
 				/obj/item/chems/food/candy/proteinbar,
@@ -99,7 +99,7 @@
 	return list(
 				/obj/item/clothing/mask/breath/scba,
 				/obj/item/tank/emergency/oxygen/engi,
-				/obj/item/chems/hypospray/autoinjector,
+				/obj/item/chems/hypospray/autoinjector/stabilizer,
 				/obj/item/chems/hypospray/autoinjector/antirad,
 				/obj/item/stack/medical/bruise_pack,
 				/obj/item/flashlight/flare/glowstick,
@@ -450,7 +450,7 @@
 	icon_state = "syringe"
 
 /obj/item/storage/box/autoinjectors/WillContain()
-	return list(/obj/item/chems/hypospray/autoinjector = 7)
+	return list(/obj/item/chems/hypospray/autoinjector/stabilizer = 7)
 
 /obj/item/storage/box/lights
 	name = "box of replacement bulbs"
