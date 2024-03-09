@@ -22,9 +22,9 @@
 	add_to_reagents(/decl/material/liquid/paint,         reagents.maximum_volume/2)
 	add_to_reagents(/decl/material/liquid/pigment/black, reagents.maximum_volume/2)
 
-/obj/item/chems/toner_cartridge/dump_contents()
+/obj/item/chems/toner_cartridge/dump_contents(atom/forced_loc = loc, mob/user)
 	. = ..()
-	reagents.splash(get_turf(src), reagents.total_volume)
+	reagents?.splash(get_turf(forced_loc), reagents.total_volume)
 
 /obj/item/chems/toner_cartridge/physically_destroyed(skip_qdel)
 	material.place_shards(get_turf(src), 2)

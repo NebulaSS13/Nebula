@@ -127,12 +127,12 @@
 	else
 		icon_state = "paper_bin2"
 
-/obj/item/paper_bin/dump_contents()
+/obj/item/paper_bin/dump_contents(atom/forced_loc = loc, mob/user)
 	. = ..()
 	//Dump all stored papers too
 	for(var/i=1 to amount)
-		var/obj/item/paper/P = new /obj/item/paper(loc)
-		P.merge_with_existing(loc, usr)
+		var/obj/item/paper/P = new /obj/item/paper(forced_loc)
+		P.merge_with_existing(forced_loc, usr)
 	LAZYCLEARLIST(papers)
 
 /obj/item/paper_bin/proc/add_paper(var/obj/item/paper/P)

@@ -366,10 +366,10 @@
 	return get_contained_external_atoms()
 
 /// Dump the contents of this atom onto its loc
-/atom/proc/dump_contents()
+/atom/proc/dump_contents(atom/forced_loc = loc, mob/user)
 	for(var/thing in get_contained_external_atoms())
 		var/atom/movable/AM = thing
-		AM.dropInto(loc)
+		AM.dropInto(forced_loc)
 		if(ismob(AM))
 			var/mob/M = AM
 			if(M.client)
