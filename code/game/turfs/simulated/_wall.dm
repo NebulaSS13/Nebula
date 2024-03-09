@@ -235,7 +235,7 @@ var/global/list/wall_fullblend_objects = list(
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
 			var/obj/structure/sign/poster/P = O
-			P.dismantle()
+			P.dismantle_structure()
 		else
 			O.forceMove(src)
 	clear_plants()

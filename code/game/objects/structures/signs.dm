@@ -111,7 +111,7 @@
 	if(QDELETED(src))
 		return TRUE
 	if(screwdriver.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 3 SECONDS, "taking down", "taking down"))
-		dismantle()
+		dismantle_structure(user)
 	return TRUE
 
 /obj/structure/sign/hide()

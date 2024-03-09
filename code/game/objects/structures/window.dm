@@ -202,7 +202,7 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
-			dismantle()
+			dismantle_structure(user)
 	else if(IS_COIL(W) && is_fulltile())
 		if (polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))

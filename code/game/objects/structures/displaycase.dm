@@ -64,7 +64,7 @@
 			matter -= mat
 	UNSETEMPTY(matter)
 
-/obj/structure/displaycase/dismantle()
+/obj/structure/displaycase/dismantle_structure(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 

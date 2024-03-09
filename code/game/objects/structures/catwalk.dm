@@ -111,7 +111,7 @@
 			var/obj/item/gun/energy/plasmacutter/cutter = C
 			if(!cutter.slice(user))
 				return
-			dismantle(user)
+			dismantle_structure(user)
 			return TRUE
 
 		if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)

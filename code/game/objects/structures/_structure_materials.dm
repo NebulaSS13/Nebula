@@ -81,7 +81,7 @@
 	material = null
 	reinf_material = null
 
-/obj/structure/proc/dismantle()
+/obj/structure/proc/dismantle_structure(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!dismantled)
 		dismantled = TRUE

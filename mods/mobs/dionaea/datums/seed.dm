@@ -20,7 +20,7 @@
 	set_trait(TRAIT_PLANT_ICON,"alien4")
 
 /obj/item/seeds/diona
-	seed_type = "diona"
+	seed = "diona"
 
 /decl/hierarchy/supply_pack/hydroponics/exoticseeds/Initialize()
 	contains[/obj/item/seeds/diona] = 2

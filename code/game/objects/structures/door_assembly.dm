@@ -158,7 +158,7 @@
 					if(!WT.isOn())
 						return
 					to_chat(user, "<span class='notice'>You dissasembled the airlock assembly!</span>")
-					dismantle()
+					dismantle_structure(user)
 					return TRUE
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")

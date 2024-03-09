@@ -52,7 +52,7 @@
 		return FALSE //#FIXME: once /obj/structure/sign use the generic structure tools procs we won't need to intercept this here anymore.
 	return ..()
 
-/obj/structure/sign/poster/dismantle()
+/obj/structure/sign/poster/dismantle_structure(mob/user)
 	//If not ruined, we can drop an intact poster item
 	if(!ruined)
 		return ..()
@@ -67,7 +67,7 @@
 /obj/structure/sign/poster/handle_default_wirecutter_attackby(mob/user, obj/item/wirecutters/wirecutters)
 	if(!wirecutters.do_tool_interaction(TOOL_WIRECUTTERS, user, src, 0, ruined? "scrapping off the remnants of" : "carefully removing", ruined? "cutting off" : "carefully removing"))
 		return TRUE //Don't run after_attack
-	dismantle()
+	dismantle_structure(user)
 	return TRUE
 
 /obj/structure/sign/poster/attack_hand(mob/user)
@@ -187,7 +187,7 @@
 			SPAN_NOTICE("You have placed the poster on \the [W]."))
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
-		P.dismantle()
+		P.dismantle_structure(user)
 
 /obj/item/poster/proc/ArePostersOnWall(var/turf/W, var/placed_poster)
 	//just check if there is a poster on or adjacent to the wall

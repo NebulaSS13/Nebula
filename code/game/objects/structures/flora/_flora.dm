@@ -45,8 +45,7 @@
 		playsound(src, snd_cut, 40, TRUE)
 
 /obj/structure/flora/proc/cut_down(var/obj/item/I, var/mob/user)
-
-	dismantle()
+	dismantle_structure(user)
 	return TRUE
 
 //Drop some bits when destroyed
