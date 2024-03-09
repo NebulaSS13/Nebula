@@ -474,6 +474,16 @@
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
 
+/atom/movable/get_thermal_mass()
+	if(!simulated)
+		return 0
+	return max(ITEM_SIZE_MIN, get_object_size()) * THERMAL_MASS_CONSTANT
+
+/atom/movable/get_thermal_mass_coefficient()
+	if(!simulated)
+		return 0
+	return (max(ITEM_SIZE_MIN, MOB_SIZE_MIN) * THERMAL_MASS_CONSTANT) / get_thermal_mass()
+
 /atom/movable/proc/try_burn_wearer(var/mob/living/holder, var/held_slot, var/delay = 0)
 	set waitfor = FALSE
 	if(delay)

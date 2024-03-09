@@ -1,21 +1,10 @@
 /atom
 	/// What is this atom's current temperature?
 	var/temperature = T20C
-	/// How rapidly does this atom equalize with ambient temperature?
-	var/temperature_coefficient = MAX_TEMPERATURE_COEFFICIENT
 
 /atom/movable/Entered(var/atom/movable/atom, var/atom/old_loc)
 	. = ..()
 	queue_temperature_atoms(atom)
-
-/obj
-	temperature_coefficient = null
-
-/mob
-	temperature_coefficient = null
-
-/turf
-	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
 // If this is a simulated atom, adjust our temperature.
 // This will eventually propagate to our contents via ProcessAtomTemperature()
@@ -25,20 +14,16 @@
 		return FALSE
 
 	var/diff_temp = round(adjust_temp - temperature, 0.1)
-	if(diff_temp <= 0.1)
+	if(abs(diff_temp) <= 0.1)
 		return FALSE
 
 	// Show a little message for people heating beakers with welding torches.
 	if(user && heated_by)
 		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
 	// Update our own heat.
-	var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
+	var/altered_temp = max(temperature + (get_thermal_mass_coefficient() * diff_temp), 0)
 	ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))
 	return TRUE
-
-/mob/Initialize()
-	. = ..()
-	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - FLOOR(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 
 // TODO: move mob bodytemperature onto this proc.
 /atom/proc/ProcessAtomTemperature()
@@ -59,7 +44,7 @@
 	var/old_temp = temperature
 	var/diff_temp = adjust_temp - temperature
 	if(abs(diff_temp) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
-		var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
+		var/altered_temp = max(temperature + (get_thermal_mass_coefficient() * diff_temp), 0)
 		ADJUST_ATOM_TEMPERATURE(src, (diff_temp > 0) ? min(adjust_temp, altered_temp) : max(adjust_temp, altered_temp))
 	else
 		temperature = adjust_temp
