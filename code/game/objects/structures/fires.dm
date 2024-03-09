@@ -5,11 +5,13 @@
 //   click behavior is curtailed by the fire_source.
 
 #define IDEAL_FUEL  15
-#define HIGH_FUEL   10
-#define LOW_FUEL    5
+#define HIGH_FUEL   (IDEAL_FUEL * 0.65)
+#define LOW_FUEL    (IDEAL_FUEL * 0.35)
+
 #define FIRE_LIT    1
 #define FIRE_DEAD  -1
 #define FIRE_OUT    0
+
 #define FUEL_CONSUMPTION_CONSTANT 0.025
 
 /obj/structure/fire_source
@@ -20,6 +22,7 @@
 	anchored = TRUE
 	density = FALSE
 	material = /decl/material/solid/stone/basalt
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	abstract_type = /obj/structure/fire_source
 	throwpass = TRUE
@@ -59,6 +62,7 @@
 	steam = new(name)
 	steam.attach(get_turf(src))
 	steam.set_up(3, 0, get_turf(src))
+	create_reagents(100)
 
 /obj/structure/fire_source/Destroy()
 	QDEL_NULL(steam)
@@ -100,8 +104,10 @@
 
 /obj/structure/fire_source/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(src) && fluids?.total_volume)
-		take_reagents(fluids)
+	if(!QDELETED(src) && fluids?.total_volume && reagents)
+		var/transfer = min(reagents.maximum_volume - reagents.total_volume, max(max(1, round(fluids.total_volume * 0.25))))
+		if(transfer > 0)
+			fluids.trans_to_obj(src, transfer)
 
 /obj/structure/fire_source/explosion_act()
 	. = ..()
@@ -201,12 +207,10 @@
 /obj/structure/fire_source/isflamesource()
 	return (lit == FIRE_LIT)
 
-/obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/fire_source/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return ..() || (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 
-	if(ATOM_IS_OPEN_CONTAINER(thing) && thing.reagents?.total_volume)
-		user.visible_message(SPAN_DANGER("\The [user] pours the contents of \the [thing] into \the [src]!"))
-		take_reagents(thing.reagents)
-		return TRUE
+/obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
 	if(lit == FIRE_LIT)
 
@@ -224,8 +228,8 @@
 			flame.light(user)
 			return TRUE
 
-	else if(thing.isflamesource())
-		visible_message(SPAN_NOTICE("\The [user] attempts to light \the [src] with \the [thing]..."))
+	if(thing.isflamesource())
+		visible_message(SPAN_NOTICE("\The [user] attempts to light \the [src] with \the [thing]."))
 		try_light(thing.get_heat())
 		return TRUE
 
@@ -249,7 +253,7 @@
 	// Slowly lose burn temperature.
 	// TODO: use temperature var and equalizing system?
 	last_fuel_burn_temperature = max(ignition_temperature, last_fuel_burn_temperature)
-	if(last_fuel_burn_temperature > T20C)
+	if(last_fuel_burn_temperature > T20C && fuel < LOW_FUEL)
 		last_fuel_burn_temperature = max(T20C, round(last_fuel_burn_temperature * 0.9))
 
 	var/list/waste = list()
@@ -266,7 +270,7 @@
 			fuel += add_fuel
 			last_fuel_burn_temperature = max(last_fuel_burn_temperature, max(T100C, material.burn_temperature))
 			consumed_item = TRUE
-		
+
 		if(consumed_item)
 			qdel(thing)
 
@@ -288,20 +292,22 @@
 
 	return (fuel > 0)
 
-/obj/structure/fire_source/proc/take_reagents(datum/reagents/RG)
-	var/do_steam = FALSE
-	for(var/rtype in RG.reagent_volumes)
-		var/decl/material/R = GET_DECL(rtype)
-		if(R.accelerant_value <= FUEL_VALUE_RETARDANT)
-			do_steam = TRUE
-		fuel += REAGENT_VOLUME(RG, rtype) * R.accelerant_value
-	RG.clear_reagents()
-	fuel = max(0, fuel)
-	if(lit == FIRE_LIT)
-		if(fuel <= 0)
-			die()
-		if(do_steam)
-			steam.start() // HISSSSSS!
+/obj/structure/fire_source/on_reagent_change()
+	..()
+	if(reagents?.total_volume)
+		var/do_steam = FALSE
+		for(var/rtype in reagents?.reagent_volumes)
+			var/decl/material/R = GET_DECL(rtype)
+			if(R.accelerant_value <= FUEL_VALUE_RETARDANT)
+				do_steam = TRUE
+			fuel += REAGENT_VOLUME(RG, rtype) * R.accelerant_value
+		reagents.clear_reagents()
+		fuel = max(0, fuel)
+		if(lit == FIRE_LIT)
+			if(fuel <= 0)
+				die()
+			if(do_steam)
+				steam.start() // HISSSSSS!
 
 /obj/structure/fire_source/proc/get_fire_exposed_atoms()
 	return loc?.get_contained_external_atoms()
@@ -334,7 +340,7 @@
 		var/datum/gas_mixture/removed = environment.remove(transfer_moles)
 		if(removed)
 			var/heat_transfer = removed.get_thermal_energy_change(round(last_fuel_burn_temperature * 0.1))
-			if(heat_transfer > 0) 
+			if(heat_transfer > 0)
 				removed.add_thermal_energy(heat_transfer)
 		environment.merge(removed)
 
