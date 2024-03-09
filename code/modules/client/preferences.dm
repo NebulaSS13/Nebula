@@ -80,8 +80,6 @@ var/global/list/time_prefs_fixed = list()
 	QDEL_LIST_ASSOC_VAL(char_render_holders)
 
 /datum/preferences/proc/setup()
-	if(!length(global.skills))
-		GET_DECL(/decl/hierarchy/skill)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = get_random_name()

@@ -81,10 +81,7 @@ SUBSYSTEM_DEF(jobs)
 					if((ASSIGNMENT_ROBOT in J.event_categories) || (ASSIGNMENT_COMPUTER in J.event_categories))
 						J.total_positions = 0
 
-	// Init skills.
-	if(!global.skills.len)
-		GET_DECL(/decl/hierarchy/skill)
-	if(!global.skills.len)
+	if(!length(global.using_map.get_available_skills()))
 		log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
 
 	// Update title and path tracking, submap list, etc.

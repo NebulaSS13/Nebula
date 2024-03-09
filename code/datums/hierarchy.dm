@@ -19,13 +19,13 @@
 /decl/hierarchy/proc/is_category()
 	return length(children)
 
-/decl/hierarchy/proc/get_descendents()
+/decl/hierarchy/proc/get_descendants()
 	if(!children)
 		return
 	. = children.Copy()
 	for(var/decl/hierarchy/child in children)
 		if(child.children)
-			. |= child.get_descendents()
+			. |= child.get_descendants()
 
 /decl/hierarchy/dd_SortValue()
 	return name

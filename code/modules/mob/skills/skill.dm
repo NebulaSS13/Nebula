@@ -1,5 +1,3 @@
-var/global/list/skills = list()
-
 /decl/hierarchy/skill
 
 	name = "None"                         // Name of the skill. This is what the player sees.
@@ -31,13 +29,6 @@ var/global/list/skills = list()
 
 /decl/hierarchy/skill/proc/update_special_effects(mob/mob, level)
 	return
-
-/decl/hierarchy/skill/Initialize()
-	. = ..()
-	GET_DECL(/decl/hierarchy/skill) // Make sure the full skill decl list is populated.
-	if(INSTANCE_IS_ABSTRACT(src))
-		for(var/decl/hierarchy/skill/C in children)
-			global.skills |= C.get_descendents()
 
 /decl/hierarchy/skill/dd_SortValue()
 	return sort_priority

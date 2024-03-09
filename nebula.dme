@@ -3803,6 +3803,7 @@
 #include "maps\tradeship\tradeship_define.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
+#include "maps\~mapsystem\map_skills.dm"
 #include "maps\~mapsystem\maps.dm"
 #include "maps\~mapsystem\maps_announcements.dm"
 #include "maps\~mapsystem\maps_antagonism.dm"
