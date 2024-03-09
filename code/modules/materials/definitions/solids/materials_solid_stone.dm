@@ -90,6 +90,7 @@
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
+	melting_point  = T0C + 1200
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
 /decl/material/solid/stone/concrete
@@ -98,6 +99,7 @@
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	color = COLOR_GRAY
 	value = 0.9
+	melting_point  = T0C + 1200
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/image/texture
