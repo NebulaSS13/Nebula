@@ -60,16 +60,13 @@
 
 //These procs convert to/from static save-data formats.
 /datum/category_item/player_setup_item/occupation/proc/load_skills()
-	if(!length(global.skills))
-		GET_DECL(/decl/hierarchy/skill)
-
 	pref.skills_allocated = list()
 	for(var/job_type in SSjobs.types_to_datums)
 		var/datum/job/job = SSjobs.get_by_path(job_type)
 		if("[job.type]" in pref.skills_saved)
 			var/S = pref.skills_saved["[job.type]"]
 			var/L = list()
-			for(var/decl/hierarchy/skill/skill in global.skills)
+			for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
 				if("[skill.type]" in S)
 					L[skill] = S["[skill.type]"]
 			if(length(L))
@@ -98,7 +95,7 @@
 		var/L = list()
 		var/sum = 0
 
-		for(var/decl/hierarchy/skill/skill in global.skills)
+		for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
 			if(skill in input_skills)
 				var/min = get_min_skill(job, skill)
 				var/max = get_max_skill(job, skill)
@@ -190,13 +187,22 @@
 	dat += "</center></tt>"
 
 	dat += "<table>"
+	var/list/available_skills = global.using_map.get_available_skills()
 	var/decl/hierarchy/skill/skill = GET_DECL(/decl/hierarchy/skill)
 	for(var/decl/hierarchy/skill/cat in skill.children)
-		dat += "<tr><th colspan = 4><b>[cat.name]</b></th></tr>"
+
+		var/list/cat_rows = list()
 		for(var/decl/hierarchy/skill/S in cat.children)
-			dat += get_skill_row(job, S)
-			for(var/decl/hierarchy/skill/perk in S.children)
-				dat += get_skill_row(job, perk)
+			if(S in available_skills)
+				cat_rows += get_skill_row(job, S)
+				for(var/decl/hierarchy/skill/perk in S.children)
+					if(perk in available_skills)
+						cat_rows += get_skill_row(job, perk)
+
+		if(length(cat_rows))
+			dat += "<tr><th colspan = 4><b>[cat.name]</b></th></tr>"
+			dat += cat_rows
+
 	dat += "</table>"
 	return JOINTEXT(dat)
 

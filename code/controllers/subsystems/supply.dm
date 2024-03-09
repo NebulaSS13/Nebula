@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(supply)
 	var/decl/hierarchy/supply_pack/root = GET_DECL(/decl/hierarchy/supply_pack)
 	for(var/decl/hierarchy/supply_pack/sp in root.children)
 		if(sp.is_category())
-			for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())
+			for(var/decl/hierarchy/supply_pack/spc in sp.get_descendants())
 				spc.setup()
 				master_supply_list += spc
 				CHECK_TICK

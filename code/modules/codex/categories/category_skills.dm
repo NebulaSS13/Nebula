@@ -3,7 +3,7 @@
 	desc = "Certifiable skills."
 
 /decl/codex_category/skills/Populate()
-	for(var/decl/hierarchy/skill/skill in global.skills)
+	for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
 		var/list/skill_info = list()
 		if(skill.prerequisites)
 			var/list/reqs = list()

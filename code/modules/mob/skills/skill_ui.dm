@@ -52,21 +52,34 @@
 	.["hide_unskilled"] = hide_unskilled
 
 	var/list/skill_data = list()
+	var/list/available_skills = global.using_map.get_available_skills()
 	var/decl/hierarchy/skill/skill = GET_DECL(/decl/hierarchy/skill)
+
 	for(var/decl/hierarchy/skill/V in skill.children)
+
 		var/list/skill_cat = list()
-		skill_cat["name"] = V.name
 		var/list/skills_in_cat = list()
+
 		for(var/decl/hierarchy/skill/S in V.children)
+
+			if(!(S in available_skills))
+				continue
+
 			var/offset = S.prerequisites ? S.prerequisites[S.parent.type] - 1 : 0
 			if(hide_unskilled && (get_value(S.type) + offset == SKILL_MIN))
 				continue
+
 			skills_in_cat += list(get_nano_row(S))
 			for(var/decl/hierarchy/skill/perk in S.children)
+				if(!(perk in available_skills))
+					continue
 				skills_in_cat += list(get_nano_row(perk))
+
 		if(length(skills_in_cat))
+			skill_cat["name"] = V.name
 			skill_cat["skills"] = skills_in_cat
 			skill_data += list(skill_cat)
+
 	.["skills_by_cat"] = skill_data
 
 /datum/skillset/proc/get_nano_row(var/decl/hierarchy/skill/S)
@@ -142,7 +155,7 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for(var/decl/hierarchy/skill/S in global.skills)
+		for(var/decl/hierarchy/skill/S in global.using_map.get_available_skills())
 			if(can_select(S.type, level))
 				choices[S.name] = S.type
 		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null|anything in choices
