@@ -11,7 +11,7 @@
 /turf/simulated/floor,
 /area/example/third)
 "cj" = (
-/turf/simulated/open,
+/turf/open,
 /area/turbolift/example/third)
 "cw" = (
 /obj/machinery/atmospherics/portables_connector,
@@ -61,7 +61,7 @@
 /area/example/third)
 "jb" = (
 /obj/machinery/light,
-/turf/simulated/open,
+/turf/open,
 /area/example/third)
 "lK" = (
 /turf/simulated/floor/glass,
@@ -71,7 +71,7 @@
 /turf/simulated/floor,
 /area/example/third)
 "nG" = (
-/turf/simulated/open,
+/turf/open,
 /area/space)
 "nN" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -132,7 +132,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/example/third)
 "wD" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -209,7 +209,7 @@
 /turf/simulated/floor,
 /area/example/third)
 "Ke" = (
-/turf/simulated/open,
+/turf/open,
 /area/example/third)
 "KS" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -275,7 +275,7 @@
 /area/example/third)
 "TM" = (
 /obj/structure/catwalk,
-/turf/simulated/open,
+/turf/open,
 /area/example/third)
 "TO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -286,7 +286,7 @@
 /area/example/third)
 "UC" = (
 /obj/structure/ladder,
-/turf/simulated/open,
+/turf/open,
 /area/example/third)
 "UM" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{

@@ -8,8 +8,7 @@
 	desc = "The botanist's best friend."
 	icon = 'icons/mob/bot/farmbot.dmi'
 	icon_state = "farmbot0"
-	health = 50
-	maxHealth = 50
+	max_health = 50
 	req_access = list(list(access_hydroponics, access_robotics))
 
 	var/action = "" // Used to update icon
@@ -126,7 +125,7 @@
 
 /mob/living/bot/farmbot/calcTargetPath() // We need to land NEXT to the tray, because the tray itself is impassable
 	for(var/trayDir in list(NORTH, SOUTH, EAST, WEST))
-		target_path = AStar(get_turf(loc), get_step(get_turf(target), trayDir), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, max_target_dist, id = botcard)
+		target_path = AStar(get_turf(loc), get_step(get_turf(target), trayDir), TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_target_dist, id = botcard)
 		if(target_path)
 			break
 	if(!target_path)
@@ -143,17 +142,19 @@
 	return
 
 /mob/living/bot/farmbot/UnarmedAttack(var/atom/A, var/proximity)
-	if(!..())
+	. = ..()
+	if(.)
 		return
+
 	if(busy)
-		return
+		return TRUE
 
 	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/T = A
 		var/t = confirmTarget(T)
 		switch(t)
 			if(0)
-				return
+				return TRUE
 			if(FARMBOT_COLLECT)
 				action = "water" // Needs a better one
 				update_icon()
@@ -186,20 +187,20 @@
 				busy = 1
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] fertilizes \the [A].</span>")
-					T.reagents.add_reagent(/decl/material/gas/ammonia, 10)
+					T.add_to_reagents(/decl/material/gas/ammonia, 10)
 		busy = 0
 		action = ""
 		update_icon()
 		T.update_icon()
 	else if(istype(A, /obj/structure/hygiene/sink))
 		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
-			return
+			return TRUE
 		action = "water"
 		update_icon()
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
 		busy = 1
 		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			tank.reagents.add_reagent(/decl/material/liquid/water, 100)
+			tank.add_to_reagents(/decl/material/liquid/water, 100)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		busy = 0
@@ -217,32 +218,27 @@
 				do_attack_animation(A)
 				if(prob(50))
 					visible_message("<span class='danger'>[src] swings wildly at [A] with a minihoe, missing completely!</span>")
-					return
+					return TRUE
 				var/t = pick("slashed", "sliced", "cut", "clawed")
 				A.attack_generic(src, 5, t)
 			if("water")
 				flick("farmbot_water", src)
 				visible_message("<span class='danger'>[src] splashes [A] with water!</span>")
 				tank.reagents.splash(A, 100)
+	return TRUE
 
-/mob/living/bot/farmbot/explode()
-	visible_message("<span class='danger'>[src] blows apart!</span>")
-	var/turf/Tsec = get_turf(src)
-
-	new /obj/item/minihoe(Tsec)
-	new /obj/item/chems/glass/bucket(Tsec)
-	new /obj/item/assembly/prox_sensor(Tsec)
-	new /obj/item/scanner/plant(Tsec)
-
-	if(tank)
-		tank.forceMove(Tsec)
-
-	if(prob(50))
-		new /obj/item/robot_parts/l_arm(Tsec)
-
-	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
-	return
+/mob/living/bot/farmbot/gib(do_gibs)
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		new /obj/item/minihoe(my_turf)
+		new /obj/item/chems/glass/bucket(my_turf)
+		new /obj/item/assembly/prox_sensor(my_turf)
+		new /obj/item/scanner/plant(my_turf)
+		if(tank)
+			tank.forceMove(my_turf)
+		if(prob(50))
+			new /obj/item/robot_parts/l_arm(my_turf)
 
 /mob/living/bot/farmbot/confirmTarget(var/atom/targ)
 	if(!..())

@@ -265,7 +265,7 @@
 	radiation = 0
 	t_left_radspike = 0
 	if(used_coolant)
-		src.reagents.remove_any(used_coolant)
+		remove_any_reagents(used_coolant)
 		used_coolant = 0
 
 /obj/machinery/radiocarbon_spectrometer/proc/complete_scan()

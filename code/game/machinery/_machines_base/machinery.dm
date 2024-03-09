@@ -407,7 +407,7 @@ Class Procs:
 	to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
 	for(var/obj/item/C in component_parts)
 		var/line = "<span class='notice'>	[C.name]</span>"
-		if(!C.health)
+		if(!C.current_health)
 			line = "<span class='warning'>	[C.name] (destroyed)</span>"
 		else if(C.get_percent_health() < 75)
 			line = "<span class='notice'>	[C.name] (damaged)</span>"

@@ -1,7 +1,12 @@
 #if !defined(USING_MAP_DATUM)
 
+	#ifdef UNIT_TEST
+		#include "../../code/unit_tests/offset_tests.dm"
+	#endif
+
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
+	#include "../../mods/content/dungeon_loot/_dungeon_loot.dme"
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/corporate/_corporate.dme"

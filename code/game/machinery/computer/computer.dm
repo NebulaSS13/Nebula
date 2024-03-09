@@ -16,7 +16,7 @@
 	var/light_range_on = 2
 	var/light_power_on = 1
 	var/overlay_layer
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	clicksound = "keyboard"
 
 /obj/machinery/computer/Initialize()

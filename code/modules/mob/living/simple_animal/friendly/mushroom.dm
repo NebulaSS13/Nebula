@@ -5,8 +5,7 @@
 	mob_size = MOB_SIZE_SMALL
 	speak_chance = 0
 	turns_per_move = 1
-	health = 5
-	maxHealth = 5
+	max_health = 5
 	harm_intent_damage = 5
 	pass_flags = PASS_FLAG_TABLE
 
@@ -47,11 +46,11 @@
 
 	spore_explode()
 
-/mob/living/simple_animal/mushroom/death(gibbed, deathmessage, show_dead_message)
-	. = ..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/mushroom/death(gibbed)
+	. = ..()
 	if(.)
 		total_mushrooms--
-		if(total_mushrooms < config.maximum_mushrooms && prob(30))
+		if(total_mushrooms < get_config_value(/decl/config/num/maximum_mushrooms) && prob(30))
 			spore_explode()
 
 /mob/living/simple_animal/mushroom/proc/spore_explode()
@@ -59,10 +58,10 @@
 		return
 	if(world.time < harvest_time + min_explode_time)
 		return
-	for(var/turf/simulated/target_turf in orange(1,src))
-		if(prob(60) && !target_turf.density && src.Adjacent(target_turf))
+	for(var/turf/target_turf in orange(1,src))
+		if(target_turf.simulated && !target_turf.density && prob(60) && src.Adjacent(target_turf))
 			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(target_turf,seed)
-	death(0)
+	death()
 	seed.thrown_at(src,get_turf(src),1)
 	if(src)
 		qdel(src)

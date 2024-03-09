@@ -20,11 +20,11 @@ MRE Stuff
 	. = list(
 		main_meal,
 		/obj/item/storage/mrebag/dessert,
-		/obj/item/storage/fancy/crackers,
+		/obj/item/storage/box/fancy/crackers,
 		/obj/random/mre/spread,
 		/obj/random/mre/drink,
 		/obj/random/mre/sauce,
-		/obj/item/kitchen/utensil/spork/plastic
+		/obj/item/utensil/spork/plastic
 	)
 
 /obj/item/storage/mre/Initialize(ml, material_key)
@@ -87,11 +87,11 @@ MRE Stuff
 	. = list(
 		main_meal,
 		/obj/item/storage/mrebag/dessert/menu9,
-		/obj/item/storage/fancy/crackers,
+		/obj/item/storage/box/fancy/crackers,
 		/obj/random/mre/spread/vegan,
 		/obj/random/mre/drink,
 		/obj/random/mre/sauce/vegan,
-		/obj/item/kitchen/utensil/spoon/plastic
+		/obj/item/utensil/spoon/plastic
 	)
 
 /obj/item/storage/mre/menu10
@@ -106,14 +106,14 @@ MRE Stuff
 		/obj/item/chems/food/candy/proteinbar,
 		/obj/item/chems/condiment/small/packet/protein,
 		/obj/random/mre/sauce/sugarfree,
-		/obj/item/kitchen/utensil/spoon/plastic
+		/obj/item/utensil/spoon/plastic
 	)
 
 /obj/item/storage/mre/menu11
 	name = "crayon MRE"
 	meal_desc = "This one doesn't have a menu listing. How very odd."
 	icon_state = "crayonmre"
-	main_meal = /obj/item/storage/fancy/crayons
+	main_meal = /obj/item/storage/box/fancy/crayons
 
 /obj/item/storage/mre/menu11/WillContain()
 	return list(
@@ -145,7 +145,7 @@ MRE Stuff
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE)
 
 /obj/item/storage/mrebag/WillContain()
-	return list(/obj/item/chems/food/slice/meatpizza/filled)
+	return list(/obj/item/chems/food/slice/pizza/meat/filled)
 
 /obj/item/storage/mrebag/on_update_icon()
 	. = ..()
@@ -161,10 +161,10 @@ MRE Stuff
 	. = ..()
 
 /obj/item/storage/mrebag/menu2/WillContain()
-	return list(/obj/item/chems/food/slice/margherita/filled)
+	return list(/obj/item/chems/food/slice/pizza/margherita/filled)
 
 /obj/item/storage/mrebag/menu3/WillContain()
-	return list(/obj/item/chems/food/slice/vegetablepizza/filled)
+	return list(/obj/item/chems/food/slice/pizza/vegetable/filled)
 
 /obj/item/storage/mrebag/menu4/WillContain()
 	return list(/obj/item/chems/food/hamburger)

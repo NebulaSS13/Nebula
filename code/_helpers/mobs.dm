@@ -113,7 +113,7 @@
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, check_holding = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, same_direction = 0, can_move = 0, max_distance, check_in_view = 0)
+/proc/do_after(mob/user, delay, atom/target = null, check_holding = TRUE, progress = TRUE, incapacitation_flags = INCAPACITATION_DEFAULT, same_direction = FALSE, can_move = FALSE, max_distance, check_in_view = FALSE, set_cooldown = FALSE)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -136,6 +136,9 @@
 	var/datum/progressbar/progbar
 	if (progress)
 		progbar = new(user, delay, target)
+
+	if(set_cooldown && delay)
+		user.setClickCooldown(delay)
 
 	var/endtime = world.time + delay
 	var/starttime = world.time
@@ -311,3 +314,15 @@ var/global/list/bodypart_coverage_cache = list()
 /proc/get_sorted_mob_list()
 	. = sortTim(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)
 	. = sortTim(., /proc/cmp_mob_sortvalue_asc)
+
+/proc/transfer_key_from_mob_to_mob(var/mob/from_mob, var/mob/to_mob)
+	if(!from_mob || !from_mob.key || !to_mob)
+		return FALSE
+	var/initial_key = from_mob.key
+	if(to_mob.key)
+		to_mob.ghostize()
+	if(from_mob.mind)
+		from_mob.mind.transfer_to(to_mob)
+	if(initial_key && to_mob.key != initial_key)
+		to_mob.key = initial_key
+	return to_mob.key == initial_key

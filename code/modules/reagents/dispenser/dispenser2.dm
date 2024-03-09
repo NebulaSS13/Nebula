@@ -130,8 +130,8 @@
 		events_repository.unregister(/decl/observ/destroyed, container, src)
 	container = new_container
 	if(container)
-		events_repository.register(/decl/observ/moved, container, src, .proc/check_container_status)
-		events_repository.register(/decl/observ/destroyed, container, src, .proc/check_container_status)
+		events_repository.register(/decl/observ/moved, container, src, PROC_REF(check_container_status))
+		events_repository.register(/decl/observ/destroyed, container, src, PROC_REF(check_container_status))
 	update_icon()
 	SSnano.update_uis(src) // update all UIs attached to src
 

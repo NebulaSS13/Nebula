@@ -47,10 +47,10 @@
 /area/template_noop)
 "k" = (
 /obj/structure/table/woodentable,
-/obj/item/kitchen/utensil/fork/plastic,
-/obj/item/kitchen/utensil/fork/plastic,
-/obj/item/kitchen/utensil/fork/plastic,
-/obj/item/knife/table,
+/obj/item/utensil/fork/plastic,
+/obj/item/utensil/fork/plastic,
+/obj/item/utensil/fork/plastic,
+/obj/item/utensil/knife,
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
@@ -58,8 +58,8 @@
 /area/template_noop)
 "l" = (
 /obj/structure/table/woodentable,
-/obj/item/knife/table,
-/obj/item/knife/table,
+/obj/item/utensil/knife,
+/obj/item/utensil/knife,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
@@ -155,7 +155,7 @@
 /area/template_noop)
 "C" = (
 /obj/structure/table/woodentable,
-/obj/machinery/computer/atmoscontrol/laptop{
+/obj/machinery/computer/central_atmos/laptop{
 	desc = "A cheap, beat-up old laptop.";
 	name = "old laptop"
 	},

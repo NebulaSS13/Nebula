@@ -1,33 +1,33 @@
-/turf/exterior/open/sky
+/turf/open/sky
 	name = "sky"
 	desc = "Hope you don't have a fear of heights..."
 	icon = 'icons/turf/exterior/sky_static.dmi'
 	icon_state = "0"
 	z_flags = 0
 
-/turf/exterior/open/sky/north
+/turf/open/sky/north
 	dir = NORTH
 
-/turf/exterior/open/sky/south
+/turf/open/sky/south
 	dir = SOUTH
 
-/turf/exterior/open/sky/west
+/turf/open/sky/west
 	dir = WEST
 
-/turf/exterior/open/sky/east
+/turf/open/sky/east
 	dir = EAST
 
-/turf/exterior/open/sky/moving
+/turf/open/sky/moving
 	icon = 'icons/turf/exterior/sky_slow.dmi'
 
-/turf/exterior/open/sky/moving/north
+/turf/open/sky/moving/north
 	dir = NORTH
 
-/turf/exterior/open/sky/moving/south
+/turf/open/sky/moving/south
 	dir = SOUTH
 
-/turf/exterior/open/sky/moving/west
+/turf/open/sky/moving/west
 	dir = WEST
 
-/turf/exterior/open/sky/moving/east
+/turf/open/sky/moving/east
 	dir = EAST

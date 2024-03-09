@@ -1,6 +1,11 @@
 /turf/simulated/floor/shuttle
 	name = "floor"
 	icon = 'icons/turf/shuttle.dmi'
+	abstract_type = /turf/simulated/floor/shuttle
+
+/turf/simulated/floor/shuttle/plating
+	icon_state = "plating"
+	initial_flooring = null
 
 /turf/simulated/floor/shuttle/blue
 	icon_state = "floor"

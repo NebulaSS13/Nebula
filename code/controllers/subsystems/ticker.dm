@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(ticker)
 		Master.SetRunLevel(RUNLEVEL_SETUP)
 		return
 
-	if(!bypass_gamemode_vote && (pregame_timeleft <= config.vote_autogamemode_timeleft SECONDS) && !gamemode_vote_results)
+	if(!bypass_gamemode_vote && (pregame_timeleft <= get_config_value(/decl/config/num/vote_autogamemode_timeleft) SECONDS) && !gamemode_vote_results)
 		if(!SSvote.active_vote)
 			SSvote.initiate_vote(/datum/vote/gamemode, automatic = 1)
 
@@ -111,8 +111,8 @@ SUBSYSTEM_DEF(ticker)
 	if(mode_finished && game_finished())
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		end_game_state = END_GAME_READY_TO_END
-		INVOKE_ASYNC(src, .proc/declare_completion)
-		if(config.allow_map_switching && config.auto_map_vote && global.all_maps.len > 1)
+		INVOKE_ASYNC(src, PROC_REF(declare_completion))
+		if(get_config_value(/decl/config/toggle/allow_map_switching) && get_config_value(/decl/config/toggle/auto_map_vote) && global.all_maps.len > 1)
 			SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
 
 	else if(mode_finished && (end_game_state <= END_GAME_NOT_OVER))
@@ -222,8 +222,13 @@ Helpers
 	if(mode_to_try in bad_modes)
 		return
 
-	//Find the relevant datum, resolving secret in the process.
-	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(uid = weight)
+	var/list/base_runnable_modes = list()
+	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
+	for(var/mode_type in all_modes)
+		var/decl/game_mode/game_mode = all_modes[mode_type]
+		if(game_mode.probability > 0 && !game_mode.startRequirements())
+			base_runnable_modes[game_mode.uid] = game_mode.probability
+
 	if((mode_to_try=="random") || (mode_to_try=="secret"))
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
@@ -263,8 +268,8 @@ Helpers
 		for (var/mode_tag in base_runnable_modes)
 			var/decl/game_mode/M = decls_repository.get_decl_by_id(mode_tag, validate_decl_type = FALSE)
 			if(M)
-				mode_names += M.name
-		if (config.secret_hide_possibilities)
+				mode_names |= M.name
+		if (get_config_value(/decl/config/toggle/secret_hide_possibilities))
 			message_admins("<B>Possibilities:</B> [english_list(mode_names)]")
 		else
 			to_world("<B>Possibilities:</B> [english_list(mode_names)]")
@@ -344,13 +349,13 @@ Helpers
 /datum/controller/subsystem/ticker/proc/game_finished()
 	if(mode.station_explosion_in_progress)
 		return 0
-	if(config.continous_rounds)
+	if(get_config_value(/decl/config/toggle/continuous_rounds))
 		return SSevac.evacuation_controller?.round_over() || mode.station_was_nuked
 	else
 		return mode.check_finished() || (SSevac.evacuation_controller && SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
-	if(config.continous_rounds)
+	if(get_config_value(/decl/config/toggle/continuous_rounds))
 		return mode.check_finished()
 	else
 		return game_finished()

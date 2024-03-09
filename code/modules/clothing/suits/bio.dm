@@ -12,7 +12,7 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 	siemens_coefficient = 0.9
-	origin_tech = "{'materials':3, 'engineering':3}"
+	origin_tech = @'{"materials":3, "engineering":3}'
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
@@ -25,7 +25,7 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	allowed = list(/obj/item/tank/emergency,/obj/item/pen,/obj/item/flashlight/pen,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/ano_scanner,/obj/item/clothing/head/bio_hood,/obj/item/clothing/mask/gas)
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,
@@ -34,7 +34,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.9
-	origin_tech = "{'materials':3, 'engineering':3}"
+	origin_tech = @'{"materials":3, "engineering":3}'
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
@@ -89,7 +89,7 @@
 	desc = "It protected doctors from the Black Death, back then. You bet your arse it's gonna help you against space plague."
 	icon = 'icons/clothing/suit/biosuit/plague.dmi'
 	flags_inv = HIDEGLOVES|HIDEJUMPSUIT|HIDETAIL
-	origin_tech = "{'materials':1,'engineering':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"engineering":1,"biotech":1}'
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT

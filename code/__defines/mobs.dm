@@ -137,8 +137,8 @@
 #define FLASH_PROTECTION_MODERATE 2
 #define FLASH_PROTECTION_MAJOR 3
 
-#define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
-#define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
+#define ANIMAL_SPAWN_DELAY round(get_config_value(/decl/config/num/respawn_delay) / 6)
+#define DRONE_SPAWN_DELAY  round(get_config_value(/decl/config/num/respawn_delay) / 3)
 
 // Incapacitation flags, used by the mob/proc/incapacitated() proc
 #define INCAPACITATION_NONE 0
@@ -182,7 +182,6 @@
 #define BP_ACETONE  "acetone reactor"
 
 // Robo Organs.
-#define BP_POSIBRAIN         "posibrain"
 #define BP_VOICE             "vocal synthesiser"
 #define BP_STACK             "stack"
 #define BP_OPTICS            "optics"
@@ -298,20 +297,18 @@
 
 #define MOB_FLAG_HOLY_BAD BITFLAG(0)  // If this mob is allergic to holiness
 
-#define MARKING_TARGET_SKIN 0 // Draw a /decl/sprite_accessory/marking to the mob's body, eg. tattoos
-#define MARKING_TARGET_HAIR 1 // Draw a /decl/sprite_accessory/marking to the mob's hair, eg. ears & horns
-
 #define DEXTERITY_NONE            0
 #define DEXTERITY_SIMPLE_MACHINES BITFLAG(0)
 #define DEXTERITY_HOLD_ITEM       BITFLAG(1)
-#define DEXTERITY_EQUIP_ITEM      BITFLAG(2)
-#define DEXTERITY_KEYBOARDS       BITFLAG(3)
-#define DEXTERITY_TOUCHSCREENS    BITFLAG(4)
+#define DEXTERITY_WIELD_ITEM      BITFLAG(2)
+#define DEXTERITY_EQUIP_ITEM      BITFLAG(3)
+#define DEXTERITY_KEYBOARDS       BITFLAG(4)
+#define DEXTERITY_TOUCHSCREENS    BITFLAG(5)
 // TODO: actually get grab code to check this one.
-#define DEXTERITY_GRAPPLE         BITFLAG(5)
-#define DEXTERITY_WEAPONS         BITFLAG(6)
-#define DEXTERITY_COMPLEX_TOOLS   BITFLAG(7)
-#define DEXTERITY_BASE (DEXTERITY_SIMPLE_MACHINES|DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM)
+#define DEXTERITY_GRAPPLE         BITFLAG(6)
+#define DEXTERITY_WEAPONS         BITFLAG(7)
+#define DEXTERITY_COMPLEX_TOOLS   BITFLAG(8)
+#define DEXTERITY_BASE (DEXTERITY_SIMPLE_MACHINES|DEXTERITY_HOLD_ITEM|DEXTERITY_WIELD_ITEM|DEXTERITY_EQUIP_ITEM)
 #define DEXTERITY_FULL (DEXTERITY_BASE|DEXTERITY_KEYBOARDS|DEXTERITY_TOUCHSCREENS|DEXTERITY_GRAPPLE|DEXTERITY_WEAPONS|DEXTERITY_COMPLEX_TOOLS)
 
 // List of dexterity flags ordered by 'complexity' for use in brainloss dex malus checking.
@@ -329,7 +326,7 @@ var/global/list/dexterity_levels = list(
 #define INJECTION_PORT 2
 #define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
 
-#define ADJUSTED_GLIDE_SIZE(DELAY) (NONUNIT_CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (config.glide_size_delay))
+#define ADJUSTED_GLIDE_SIZE(DELAY) (NONUNIT_CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (get_config_value(/decl/config/num/movement_glide_size)))
 
 #define PREF_MEM_RECORD "memory"
 #define PREF_SEC_RECORD "sec_record"
@@ -343,7 +340,8 @@ var/global/list/dexterity_levels = list(
 #define MOB_ICON_HAS_REST_STATE      BITFLAG(2)
 #define MOB_ICON_HAS_SLEEP_STATE     BITFLAG(3)
 #define MOB_ICON_HAS_GIB_STATE       BITFLAG(4)
-#define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(5)
+#define MOB_ICON_HAS_DUST_STATE      BITFLAG(5)
+#define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(6)
 #define NEUTER_ANIMATE "animate singular neutral"
 
 // Equipment Overlays Indices //
@@ -379,3 +377,34 @@ var/global/list/dexterity_levels = list(
 // Underlay defines; vestigal implementation currently.
 #define HU_TAIL_LAYER 1
 #define TOTAL_UNDER_LAYERS 1
+
+// Enum for result of an attempt to eat/eat from an item.
+#define EATEN_INVALID 0
+#define EATEN_UNABLE  1
+#define EATEN_SUCCESS 2
+
+// Enum for type of consumption, largely just cosmetic currently.
+#define EATING_METHOD_EAT   0
+#define EATING_METHOD_DRINK 1
+
+#define SAC_HAIR        /decl/sprite_accessory_category/hair
+#define SAC_FACIAL_HAIR /decl/sprite_accessory_category/facial_hair
+#define SAC_COSMETICS   /decl/sprite_accessory_category/cosmetics
+#define SAC_MARKINGS    /decl/sprite_accessory_category/markings
+#define SAC_HORNS       /decl/sprite_accessory_category/horns
+#define SAC_FRILLS      /decl/sprite_accessory_category/frills
+
+// Helpers for setting mob appearance. They are extremely ugly, hence the helpers.
+#define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)          (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_HAIR_STYLE(TARGET)                              (TARGET.get_organ_sprite_accessory_by_category(SAC_HAIR, BP_HEAD))
+#define SET_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category(null, SAC_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define GET_HAIR_COLOUR(TARGET)                             (TARGET.get_organ_sprite_accessory(GET_HAIR_STYLE(TARGET), BP_HEAD))
+
+#define SET_FACIAL_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)   (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_FACIAL_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(SAC_FACIAL_HAIR, BP_HEAD))
+#define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, SAC_FACIAL_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define GET_FACIAL_HAIR_COLOUR(TARGET)                      (TARGET.get_organ_sprite_accessory(GET_FACIAL_HAIR_STYLE(TARGET), BP_HEAD))
+
+// Used in death() to skip message broadcast.
+#define SKIP_DEATH_MESSAGE "no message"
+

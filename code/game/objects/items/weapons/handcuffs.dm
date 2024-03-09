@@ -10,7 +10,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 5
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
 	max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
 	var/elastic
@@ -32,7 +32,7 @@
 
 /obj/item/handcuffs/examine(mob/user)
 	. = ..()
-	if (health > 0 && max_health > 0)
+	if (current_health > 0 && get_max_health() > 0)
 		var display = get_percent_health()
 		if (display > 66)
 			return

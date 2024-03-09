@@ -14,7 +14,7 @@
 			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
 			return INITIALIZE_HINT_QDEL
 		if(!above.is_open())
-			above.ChangeTurf(/turf/simulated/open)
+			above.ChangeTurf(/turf/space) // This will be resolved to the appropriate open space type by ChangeTurf().
 	. = ..()
 
 /obj/structure/stairs/CheckExit(atom/movable/mover, turf/target)
@@ -43,6 +43,10 @@
 /obj/structure/stairs/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density
 
+/obj/structure/stairs/catwalk
+	name = "catwalk stairs"
+	icon_state = "catwalk"
+
 // type paths to make mapping easier.
 
 /obj/structure/stairs/long
@@ -62,6 +66,27 @@
 	pixel_x = -32
 
 /obj/structure/stairs/long/west
+	dir = WEST
+	bound_width = 64
+	bound_height = 32
+
+/obj/structure/stairs/long/catwalk
+	name = "catwalk stairs"
+	icon_state = "catwalk"
+
+/obj/structure/stairs/long/catwalk/north
+	dir = NORTH
+	bound_y = -32
+	pixel_y = -32
+
+/obj/structure/stairs/long/catwalk/east
+	dir = EAST
+	bound_width = 64
+	bound_height = 32
+	bound_x = -32
+	pixel_x = -32
+
+/obj/structure/stairs/long/catwalk/west
 	dir = WEST
 	bound_width = 64
 	bound_height = 32

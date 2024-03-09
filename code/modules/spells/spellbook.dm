@@ -70,7 +70,7 @@ var/global/list/artefact_feedback = list(
 		return
 	if(reagent)
 		if(I.reagents?.has_reagent(reagent, 5))
-			I.reagents.remove_reagent(reagent, 5)
+			I.remove_from_reagents(reagent, 5)
 		else if(LAZYACCESS(I.matter, reagent) >= (SHEET_MATERIAL_AMOUNT * 5))
 			qdel(I)
 	else

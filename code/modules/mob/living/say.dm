@@ -160,7 +160,7 @@
 			speaking = get_any_good_language(set_default=TRUE)
 			if (!speaking)
 				to_chat(src, SPAN_WARNING("You don't know a language and cannot speak."))
-				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
+				custom_emote(AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
 				return
 
 	if(handle_mob_specific_speech(message, message_mode, verb, speaking))
@@ -300,10 +300,10 @@
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/animate_speech_bubble, speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
-	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(animate_speech_bubble), speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
+	INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, speaking, italics, speech_bubble_recipients)
 	if(length(eavesdroppers))
-		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers)
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), stars(message), speaking, italics, eavesdroppers)
 
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")

@@ -68,7 +68,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 	for (var/admin in world.GetConfig("admin"))
 		world.SetConfig("APP/admin", admin, null)
 
-	if(config.admin_legacy_system)
+	if(get_config_value(/decl/config/toggle/on/admin_legacy_system))
 		load_admin_ranks()
 
 		//load text from file
@@ -108,7 +108,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 		if(!dbcon.IsConnected())
 			error("Failed to connect to database in load_admins(). Reverting to legacy system.")
 			log_misc("Failed to connect to database in load_admins(). Reverting to legacy system.")
-			config.admin_legacy_system = 1
+			set_config_value(/decl/config/toggle/on/admin_legacy_system, TRUE)
 			load_admins()
 			return
 
@@ -128,7 +128,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 		if(!admin_datums)
 			error("The database query in load_admins() resulted in no admins being added to the list. Reverting to legacy system.")
 			log_misc("The database query in load_admins() resulted in no admins being added to the list. Reverting to legacy system.")
-			config.admin_legacy_system = 1
+			set_config_value(/decl/config/toggle/on/admin_legacy_system, TRUE)
 			load_admins()
 			return
 

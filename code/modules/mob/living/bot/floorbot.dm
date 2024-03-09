@@ -133,14 +133,16 @@
 			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
 
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
-	if(!..())
+
+	. = ..()
+	if(.)
 		return
 
 	if(busy)
-		return
+		return TRUE
 
 	if(get_turf(A) != loc)
-		return
+		return FALSE
 
 	if(emagged && istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
@@ -210,35 +212,25 @@
 					M.use(1)
 					addTiles(4)
 			anchored = FALSE
+	return TRUE
 
-/mob/living/bot/floorbot/explode()
-	turn_off()
-	visible_message("<span class='danger'>[src] blows apart!</span>")
-	var/turf/Tsec = get_turf(src)
-
-
-	var/list/things = list()
-	for(var/atom/A in orange(5, src.loc))
-		things += A
-
-	var/list/shrapnel = list()
-
-	for(var/I = 3, I<3 , I++) //Toolbox shatters.
-		shrapnel += new /obj/item/shard/shrapnel(Tsec)
-
-	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
-		shrapnel += new /obj/item/stack/tile/floor(Tsec)
-
-	if(prob(50))
-		shrapnel += new /obj/item/robot_parts/l_arm(Tsec)
-	shrapnel += new /obj/item/assembly/prox_sensor(Tsec)
-
-	spark_at(src, cardinal_only = TRUE)
-
-	for(var/atom/movable/AM in shrapnel)
-		AM.throw_at(pick(things),5)
-
-	qdel(src)
+/mob/living/bot/floorbot/gib(do_gibs)
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		var/list/things = list()
+		for(var/atom/A in orange(5, src.loc))
+			things += A
+		var/list/shrapnel = list()
+		for(var/I = 3, I<3 , I++) //Toolbox shatters.
+			shrapnel += new /obj/item/shard/shrapnel(my_turf)
+		for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
+			shrapnel += new /obj/item/stack/tile/floor(my_turf)
+		if(prob(50))
+			shrapnel += new /obj/item/robot_parts/l_arm(my_turf)
+		shrapnel += new /obj/item/assembly/prox_sensor(my_turf)
+		for(var/atom/movable/AM in shrapnel)
+			AM.throw_at(pick(things),5)
 
 /mob/living/bot/floorbot/proc/addTiles(var/am)
 	amount += am

@@ -1,7 +1,7 @@
 /obj/aura/blueforge_aura
 	name = "Blueforge Aura"
-	icon = 'icons/mob/human_races/species/eyes.dmi'
-	icon_state = "eyes_blueforged_s"
+	icon = 'icons/mob/human_races/species/blueforged/eyes.dmi'
+	icon_state = "eyes"
 	layer = MOB_LAYER
 
 /obj/aura/blueforge_aura/life_tick()

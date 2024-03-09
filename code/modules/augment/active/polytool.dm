@@ -4,7 +4,7 @@
 	icon_state = "multitool"
 	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
 	augment_flags = AUGMENTATION_MECHANIC
-	origin_tech = "{'materials':2,'magnets':2,'engineering':4}"
+	origin_tech = @'{"materials":2,"magnets":2,"engineering":4}'
 	var/list/items = list()
 	var/list/paths = list() //We may lose them
 
@@ -58,7 +58,7 @@
 		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item
 			//Keep track of it, make sure it returns
-			events_repository.register(/decl/observ/item_unequipped, item, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
+			events_repository.register(/decl/observ/item_unequipped, item, src, TYPE_PROC_REF(/obj/item/organ/internal/augment/active/simple, holding_dropped) )
 			var/decl/pronouns/G = owner.get_pronouns()
 			owner.visible_message(
 				SPAN_NOTICE("\The [owner] extends [G.his] [item.name] from [G.his] [limb.name]."),

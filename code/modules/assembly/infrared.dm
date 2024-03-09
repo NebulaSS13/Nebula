@@ -10,7 +10,7 @@
 	name = "infrared emitter"
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
 	icon_state = "infrared"
-	origin_tech = "{'magnets':2}"
+	origin_tech = @'{"magnets":2}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
@@ -30,7 +30,7 @@
 	. = ..()
 	beams = list()
 	seen_turfs = list()
-	proximity_trigger = new(src, /obj/item/assembly/infra/proc/on_beam_entered, /obj/item/assembly/infra/proc/on_visibility_change, world.view, proximity_flags = PROXIMITY_EXCLUDE_HOLDER_TURF)
+	proximity_trigger = new(src, TYPE_PROC_REF(/obj/item/assembly/infra, on_beam_entered), TYPE_PROC_REF(/obj/item/assembly/infra, on_visibility_change), world.view, proximity_flags = PROXIMITY_EXCLUDE_HOLDER_TURF)
 
 /obj/item/assembly/infra/Destroy()
 	qdel(proximity_trigger)

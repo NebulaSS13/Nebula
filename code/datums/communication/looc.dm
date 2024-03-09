@@ -1,6 +1,6 @@
 /decl/communication_channel/ooc/looc
 	name = "LOOC"
-	config_setting = "looc_allowed"
+	config_setting = /decl/config/toggle/on/looc_allowed
 	flags = COMMUNICATION_NO_GUESTS|COMMUNICATION_LOG_CHANNEL_NAME|COMMUNICATION_ADMIN_FOLLOW
 	show_preference_setting = /datum/client_preference/show_looc
 

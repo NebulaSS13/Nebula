@@ -4,13 +4,13 @@
 	desc = "For when you desperately want meat and you don't care what kind. Has the same texture as old leather boots."
 	trash = /obj/item/trash/sosjerky
 	filling_color = "#631212"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	bitesize = 2
 	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/sosjerky/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/no_raisin
 	name = "raisins"
@@ -18,7 +18,7 @@
 	desc = "Pouring water on these will not turn them back into grapes, unfortunately."
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
-	center_of_mass = @"{'x':15,'y':4}"
+	center_of_mass = @'{"x":15,"y":4}'
 	nutriment_desc = list("raisins" = 6)
 	nutriment_amt = 6
 
@@ -27,12 +27,12 @@
 	icon_state = "space_twinkie"
 	desc = "So full of preservatives, it's guaranteed to survive longer then you will."
 	filling_color = "#ffe591"
-	center_of_mass = @"{'x':15,'y':11}"
+	center_of_mass = @'{"x":15,"y":11}'
 	bitesize = 2
 
 /obj/item/chems/food/spacetwinkie/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, 4)
 
 /obj/item/chems/food/cheesiehonkers
 	name = "cheese puffs"
@@ -40,7 +40,7 @@
 	desc = "Bite sized cheese flavoured snacks that will leave your fingers coated in cheese dust."
 	trash = /obj/item/trash/cheesie
 	filling_color = "#ffa305"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("cheese" = 5, "chips" = 2)
 	nutriment_amt = 4
 	bitesize = 2
@@ -50,7 +50,7 @@
 	icon_state = "syndi_cakes"
 	desc = "Made using extremely unethical labour, ingredients and marketing methods."
 	filling_color = "#ff5d05"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("sweetness" = 3, "cake" = 1)
 	nutriment_amt = 4
 	trash = /obj/item/trash/syndi_cakes
@@ -58,7 +58,7 @@
 
 /obj/item/chems/food/syndicake/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/regenerator, 5)
+	add_to_reagents(/decl/material/liquid/regenerator, 5)
 
 //terran delights
 
@@ -68,7 +68,7 @@
 	desc = "Pistachios. There is absolutely nothing remarkable about these."
 	trash = /obj/item/trash/pistachios
 	filling_color = "#825d26"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("nuts" = 1)
 	nutriment_amt = 3
 	bitesize = 0.5
@@ -79,7 +79,7 @@
 	desc = "A favorite among birds."
 	trash = /obj/item/trash/semki
 	filling_color = "#68645d"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("sunflower seeds" = 1)
 	nutriment_amt = 6
 	bitesize = 0.5
@@ -90,14 +90,14 @@
 	desc = "Space cepholapod tentacles, carefully removed from the squid then dried into strips of delicious rubbery goodness!"
 	trash = /obj/item/trash/squid
 	filling_color = "#c0a9d7"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
 
 /obj/item/chems/food/squid/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/croutons
 	name = "croutons"
@@ -105,7 +105,7 @@
 	desc = "Fried bread cubes. Good in salad but I guess you can just eat them as is."
 	trash = /obj/item/trash/croutons
 	filling_color = "#c6b17f"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("bread" = 1, "salt" = 1)
 	nutriment_amt = 3
 	bitesize = 1
@@ -117,14 +117,14 @@
 	desc = "Pig fat. Salted. Just as good as it sounds."
 	trash = /obj/item/trash/salo
 	filling_color = "#e0bcbc"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fat" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 2
 
 /obj/item/chems/food/salo/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/driedfish
 	name = "vobla"
@@ -132,14 +132,14 @@
 	desc = "Dried salted beer snack fish."
 	trash = /obj/item/trash/driedfish
 	filling_color = "#c8a5bb"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
 
 /obj/item/chems/food/driedfish/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/liquidfood
 	name = "\improper LiquidFood MRE"
@@ -147,27 +147,27 @@
 	icon_state = "liquidfood"
 	trash = /obj/item/trash/liquidfood
 	filling_color = "#a8a8a8"
-	center_of_mass = @"{'x':16,'y':15}"
+	center_of_mass = @'{"x":16,"y":15}'
 	nutriment_desc = list("chalk" = 6)
 	nutriment_amt = 20
 	bitesize = 4
 
 /obj/item/chems/food/liquidfood/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/solid/metal/iron, 3)
+	add_to_reagents(/decl/material/solid/metal/iron, 3)
 
 /obj/item/chems/food/meatcube
 	name = "cubed meat"
 	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
 	icon_state = "meatcube"
 	filling_color = "#7a3d11"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/meatcube/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/tastybread
 	name = "bread tube"
@@ -175,7 +175,7 @@
 	icon_state = "tastybread"
 	trash = /obj/item/trash/tastybread
 	filling_color = "#a66829"
-	center_of_mass = @"{'x':17,'y':16}"
+	center_of_mass = @'{"x":17,"y":16}'
 	nutriment_desc = list("bread" = 2, "sweetness" = 3)
 	nutriment_amt = 6
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -187,14 +187,14 @@
 	icon_state = "candy"
 	trash = /obj/item/trash/candy
 	filling_color = "#7d5f46"
-	center_of_mass = @"{'x':15,'y':15}"
+	center_of_mass = @'{"x":15,"y":15}'
 	nutriment_amt = 1
 	nutriment_desc = list("candy" = 1)
 	bitesize = 2
 
 /obj/item/chems/food/candy/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, 3)
 
 /obj/item/chems/food/candy/proteinbar
 	name = "protein bar"
@@ -205,9 +205,9 @@
 
 /obj/item/chems/food/candy/proteinbar/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment,         9)
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar,   4)
+	add_to_reagents(/decl/material/liquid/nutriment,         9)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar,   4)
 
 /obj/item/chems/food/candy/donor
 	name = "donor candy"
@@ -218,23 +218,23 @@
 
 /obj/item/chems/food/candy/donor/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment,      10)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
+	add_to_reagents(/decl/material/liquid/nutriment,      10)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, 3)
 
 /obj/item/chems/food/candy_corn
 	name = "candy corn"
 	desc = "It's a handful of candy corn. Not actually candied corn."
 	icon_state = "candy_corn"
 	filling_color = "#fffcb0"
-	center_of_mass = @"{'x':14,'y':10}"
+	center_of_mass = @'{"x":14,"y":10}'
 	nutriment_amt = 4
 	nutriment_desc = list("candy corn" = 4)
 	bitesize = 2
 
 /obj/item/chems/food/candy_corn/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment,       4)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
+	add_to_reagents(/decl/material/liquid/nutriment,       4)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, 2)
 
 /obj/item/chems/food/chips
 	name = "chips"
@@ -242,7 +242,7 @@
 	icon_state = "chips"
 	trash = /obj/item/trash/chips
 	filling_color = "#e8c31e"
-	center_of_mass = @"{'x':15,'y':15}"
+	center_of_mass = @'{"x":15,"y":15}'
 	nutriment_amt = 3
 	nutriment_desc = list("salt" = 1, "chips" = 2)
 	bitesize = 1
@@ -253,7 +253,7 @@
 	desc = "COOKIE!!!"
 	icon_state = "cookie"
 	filling_color = "#dbc94f"
-	center_of_mass = @"{'x':17,'y':18}"
+	center_of_mass = @'{"x":17,"y":18}'
 	nutriment_amt = 5
 	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
 	w_class = ITEM_SIZE_TINY
@@ -265,52 +265,50 @@
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolatebar"
 	filling_color = "#7d5f46"
-	center_of_mass = @"{'x':15,'y':15}"
+	center_of_mass = @'{"x":15,"y":15}'
 	nutriment_amt = 2
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
 
 /obj/item/chems/food/chocolatebar/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/coco,  2)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/coco,  2)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, 2)
 
 /obj/item/chems/food/chocolateegg
 	name = "chocolate egg"
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolateegg"
 	filling_color = "#7d5f46"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_amt = 3
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
 
 /obj/item/chems/food/chocolateegg/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/coco,  2)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/coco,  2)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, 2)
 
 /obj/item/chems/food/donut
 	name = "donut"
 	desc = "Goes great with Robust Coffee."
-	icon_state = "donut1"
+	icon = 'icons/obj/food/donuts/donut.dmi'
+	icon_state = ICON_STATE_WORLD
 	filling_color = "#d9c386"
-	center_of_mass = @"{'x':19,'y':16}"
+	center_of_mass = @'{"x":19,"y":16}'
 	nutriment_desc = list("sweetness", "donut")
 	nutriment_amt = 3
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	var/overlay_state = "box-donut1"
-	var/donut_state = "donut"
+	var/iced_icon = 'icons/obj/food/donuts/donut_iced.dmi'
 
-//FIXME: Again a really weird way of handling that
 /obj/item/chems/food/donut/populate_reagents()
 	. = ..()
-	if(prob(30))
-		icon_state = "[donut_state]2"
-		overlay_state = "box-donut2"
+	if(iced_icon && prob(30) && icon != iced_icon)
+		icon = iced_icon
 		SetName("frosted [name]")
-		reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
+		add_to_reagents(/decl/material/liquid/nutriment/sprinkles, 2)
 
 /obj/item/chems/food/donut/chaos
 	name = "chaos donut"
@@ -335,22 +333,23 @@
 
 /obj/item/chems/food/donut/chaos/populate_reagents()
 	. = ..()
-	reagents.add_reagent(pick(get_random_fillings()), 3)
+	add_to_reagents(pick(get_random_fillings()), 3)
 
 /obj/item/chems/food/donut/jelly
 	name = "jelly donut"
 	desc = "You jelly?"
-	icon_state = "jdonut1"
+	icon = 'icons/obj/food/donuts/donut_jelly.dmi'
+	iced_icon = 'icons/obj/food/donuts/donut_jelly_iced.dmi'
 	filling_color = "#ed1169"
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_amt = 3
 	bitesize = 5
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	donut_state = "jdonut"
+	var/jelly_type = /decl/material/liquid/nutriment/cherryjelly
 
 /obj/item/chems/food/donut/jelly/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
+	add_to_reagents(jelly_type, 5)
 
 //Sol Vendor
 /obj/item/chems/food/lunacake
@@ -359,7 +358,7 @@
 	desc = "Now with 20% less lawsuit enabling regolith!"
 	trash = /obj/item/trash/cakewrap
 	filling_color = "#ffffff"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("sweet" = 4, "vanilla" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -387,7 +386,7 @@
 	desc = "Contains over 9000% of your daily recommended intake of salt."
 	trash = /obj/item/trash/tidegobs
 	filling_color = "#2556b0"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("salt" = 4, "ocean" = 1, "seagull" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -398,7 +397,7 @@
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
 	trash = /obj/item/trash/saturno
 	filling_color = "#dca319"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("salt" = 4, "peanut" = 2,  "wood?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -409,7 +408,7 @@
 	desc = "Some kind of gel, maybe?"
 	trash = /obj/item/trash/jupiter
 	filling_color = "#dc1919"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("jelly?" = 5)
 	nutriment_amt = 5
 	bitesize = 2
@@ -420,7 +419,7 @@
 	desc = "Baseless tasteless nutrient rods to get you through the day. Now even less rash inducing!"
 	trash = /obj/item/trash/pluto
 	filling_color = "#ffffff"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("chalk" = 4, "sadness" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -431,7 +430,7 @@
 	desc = "A steaming self-heated bowl of sweet eggs and taters!"
 	trash = /obj/item/trash/mars
 	filling_color = "#d2c63f"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("eggs" = 4, "potato" = 4, "mustard" = 2)
 	nutriment_amt = 8
 	bitesize = 2
@@ -442,7 +441,7 @@
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
 	trash = /obj/item/trash/venus
 	filling_color = "#d2c63f"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("heat" = 4, "burning" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -450,7 +449,7 @@
 
 /obj/item/chems/food/venus/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/capsaicin, 5)
+	add_to_reagents(/decl/material/liquid/capsaicin, 5)
 
 /obj/item/chems/food/oort
 	name = "\improper Cloud Rocks"
@@ -458,14 +457,14 @@
 	desc = "Pop rocks. The new formula guarantees fewer shrapnel induced oral injuries."
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fizz" = 3, "sweet?" = 1, "shrapnel" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 
 /obj/item/chems/food/oort/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/frostoil, 5)
+	add_to_reagents(/decl/material/liquid/frostoil, 5)
 
 //weebo vend! So japanese it hurts
 
@@ -496,7 +495,7 @@
 
 /obj/item/chems/food/weebonuts/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/capsaicin, 1)
+	add_to_reagents(/decl/material/liquid/capsaicin, 1)
 
 /obj/item/chems/food/chocobanana
 	name = "choco banana"
@@ -509,7 +508,7 @@
 
 /obj/item/chems/food/chocobanana/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
+	add_to_reagents(/decl/material/liquid/nutriment/sprinkles, 10)
 
 /obj/item/chems/food/dango
 	name = "dango"
@@ -537,7 +536,7 @@
 		return
 	has_been_heated = 1
 	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
-	addtimer(CALLBACK(src, .proc/heat, weakref(user)), 20 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(heat), weakref(user)), 20 SECONDS)
 
 /obj/item/chems/food/donkpocket/sinpocket/heat(weakref/message_to)
 	..()
@@ -551,7 +550,7 @@
 	desc = "The food of choice for the seasoned traitor."
 	icon_state = "donkpocket"
 	filling_color = "#dedeab"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("heartiness" = 1, "dough" = 2)
 	nutriment_amt = 2
 	var/warm = 0
@@ -559,17 +558,17 @@
 
 /obj/item/chems/food/donkpocket/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/donkpocket/proc/heat()
 	if(warm)
 		return
 	warm = 1
 	for(var/reagent in heated_reagents)
-		reagents.add_reagent(reagent, heated_reagents[reagent])
+		add_to_reagents(reagent, heated_reagents[reagent])
 	bitesize = 6
 	SetName("warm donk-pocket")
-	addtimer(CALLBACK(src, .proc/cool), 7 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(cool)), 7 MINUTES)
 
 /obj/item/chems/food/donkpocket/proc/cool()
 	if(!warm)

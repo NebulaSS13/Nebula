@@ -15,8 +15,7 @@
 	turns_per_move = 5
 	see_in_dark = 10
 	response_harm = "pokes"
-	maxHealth = 125
-	health = 125
+	max_health = 125
 	natural_weapon = /obj/item/natural_weapon/bite
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
@@ -65,8 +64,7 @@
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
 	meat_amount = 4
-	maxHealth = 200
-	health = 200
+	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 5
 	speed = 2
@@ -82,8 +80,7 @@
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "A monstrously huge beige spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_beige.dmi'
-	maxHealth = 80
-	health = 80
+	max_health = 80
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
@@ -98,15 +95,16 @@
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
 	//things we can't encase in a cocoon
-	var/list/cocoon_blacklist = list(/mob/living/simple_animal/hostile/giant_spider,
-									 /obj/structure/closet)
+	var/static/list/cocoon_blacklist = list(
+		/mob/living/simple_animal/hostile/giant_spider,
+		/obj/structure/closet
+	)
 
 //hunters - the most damage, fast, average health and the only caste tenacious enough to break out of nets
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_black.dmi'
-	maxHealth = 150
-	health = 150
+	max_health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 10
 	speed = -1
@@ -126,8 +124,7 @@
 /mob/living/simple_animal/hostile/giant_spider/spitter
 	desc = "A monstrously huge iridescent spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_purple.dmi'
-	maxHealth = 90
-	health = 90
+	max_health = 90
 	poison_per_bite = 15
 	ranged = TRUE
 	move_to_delay = 2
@@ -148,8 +145,7 @@
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
-	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
-	health = maxHealth
+	set_max_health(rand(initial(max_health), (1.4 * initial(max_health))))
 	eye_colour = pick(allowed_eye_colours)
 	update_icon()
 
@@ -165,10 +161,10 @@
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
 	. = ..()
 	if(isliving(.))
-		if(health < maxHealth)
+		if(current_health < get_max_health())
 			var/obj/item/attacking_with = get_natural_weapon()
 			if(attacking_with)
-				health += (0.2 * attacking_with.force) //heal a bit on hit
+				heal_overall_damage(0.2 * attacking_with.force) //heal a bit on hit
 		if(ishuman(.))
 			var/mob/living/carbon/human/H = .
 			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
@@ -176,7 +172,7 @@
 				return
 		var/mob/living/L = .
 		if(L.reagents)
-			L.reagents.add_reagent(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
+			L.add_to_reagents(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
 			if(prob(poison_per_bite))
 				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 
@@ -190,7 +186,7 @@
 		if(!spooder.busy && prob(spooder.hunt_chance))
 			spooder.stop_automated_movement = 1
 			walk_to(spooder, pick(orange(20, spooder)), 1, spooder.move_to_delay)
-			addtimer(CALLBACK(spooder, /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement), 5 SECONDS)
+			addtimer(CALLBACK(spooder, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automated_movement)), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
 	stop_automated_movement = 0
@@ -219,9 +215,10 @@ Guard caste procs
 	if(spooder.paired_nurse && !spooder.busy && spooder.stance == HOSTILE_STANCE_IDLE)
 		spooder.protect(spooder.paired_nurse)
 
-/mob/living/simple_animal/hostile/giant_spider/guard/death()
+/mob/living/simple_animal/hostile/giant_spider/guard/death(gibbed)
 	. = ..()
-	divorce()
+	if(.)
+		divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/guard/Destroy()
 	. = ..()
@@ -244,7 +241,7 @@ Guard caste procs
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/protect(mob/nurse)
 	stop_automated_movement = 1
 	walk_to(src, nurse, 2, move_to_delay)
-	addtimer(CALLBACK(src, /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement), 5 SECONDS)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automated_movement)), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message("<span class='danger'>\The [src] chitters wildly!</span>")
@@ -253,7 +250,7 @@ Guard caste procs
 		attacking_with.force = initial(attacking_with.force) + 5
 	move_to_delay--
 	break_stuff_probability = 45
-	addtimer(CALLBACK(src, .proc/calm_down), 3 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(calm_down)), 3 MINUTES)
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/calm_down()
 	berserking = FALSE
@@ -273,14 +270,15 @@ Nurse caste procs
 			paired_guard.paired_nurse = null
 	paired_guard = null
 
-/mob/living/simple_animal/hostile/giant_spider/nurse/death()
+/mob/living/simple_animal/hostile/giant_spider/nurse/death(gibbed)
 	. = ..()
-	if(paired_guard)
-		paired_guard.vengance = rand(50,100)
-		if(prob(paired_guard.vengance))
-			paired_guard.berserking = TRUE
-			paired_guard.go_berserk()
-	divorce()
+	if(.)
+		if(paired_guard)
+			paired_guard.vengance = rand(50,100)
+			if(prob(paired_guard.vengance))
+				paired_guard.berserking = TRUE
+				paired_guard.go_berserk()
+		divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/Destroy()
 	. = ..()

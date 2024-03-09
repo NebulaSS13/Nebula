@@ -1,4 +1,7 @@
 /mob/living/attack_hand(mob/user)
+	// Allow grabbing a mob that you are buckled to, so that you can generate a control grab (for riding).
+	if(buckled == user && user.a_intent == I_GRAB)
+		return try_make_grab(user)
 	return ..() || (user && default_interaction(user))
 
 /mob/living/proc/default_interaction(var/mob/user)

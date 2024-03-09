@@ -32,7 +32,7 @@ exactly 2 "/mob text paths" '"/mob'
 exactly 6 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
-exactly 92 "'in world' uses" 'in world'
+exactly 94 "'in world' uses" 'in world'
 exactly 1 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
 exactly 18 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 9 ">> uses" '>>(?!>)' -P
@@ -50,8 +50,8 @@ exactly 1 "direct usage of decls_repository.get_decl()" 'decls_repository\.get_d
 exactly 21 "direct loc set" -P '(\t|;|\.)loc\s*=(?!=)'
 exactly 0 "magic number mouse opacity set" -P 'mouse_opacity\s*=\s*[0-2]'
 exactly 1 "magic number density set" -P '\bdensity\s*=\s*[01]'
-exactly 0 "magic number anchored set" -P 'anchored\s*=\s*[01]'
-exactly 7 "magic number opacity set" -P 'opacity\s*=\s*[01]'
+exactly 0 "magic number anchored set" -P '\banchored\s*=\s*[01]'
+exactly 7 "magic number opacity set" -P '\bopacity\s*=\s*[01]'
 
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 

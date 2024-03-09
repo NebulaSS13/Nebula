@@ -10,33 +10,36 @@
 		intent = I_DISARM
 		icon_state = "intent_help"
 
-/obj/screen/ascent_nymph_held
-	name = "held item"
-	screen_loc =  ANYMPH_SCREEN_LOC_HELD
-	icon_state = "held"
-
-/obj/screen/ascent_nymph_held/Click()
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
-	if(istype(nymph) && nymph.holding_item) nymph.try_unequip(nymph.holding_item)
-
 /obj/screen/ascent_nymph_molt
 	name = "molt"
-	icon = 'icons/obj/action_buttons/organs.dmi'
+	icon = 'mods/species/ascent/icons/ui_molt.dmi'
 	screen_loc =  ANYMPH_SCREEN_LOC_MOLT
 	icon_state = "molt-on"
+	requires_ui_style = FALSE
 
-/obj/screen/ascent_nymph_molt/Click()
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
+/obj/screen/ascent_nymph_molt/handle_click(mob/user, params)
+	var/mob/living/carbon/alien/ascent_nymph/nymph = user
 	if(istype(nymph)) nymph.molt()
 
 /datum/hud/ascent_nymph
-	var/obj/screen/ascent_nymph_held/held
 	var/obj/screen/ascent_nymph_molt/molt
 	var/obj/screen/food/food
 	var/obj/screen/drink/drink
 
-/datum/hud/ascent_nymph/get_ui_style()
-	return 'mods/species/ascent/icons/ui.dmi'
+/decl/ui_style/ascent
+	name = "Ascent"
+	restricted = TRUE
+	uid  = "ui_style_ascent"
+	override_icons = list(
+		UI_ICON_HEALTH      = 'mods/species/ascent/icons/ui_health.dmi',
+		UI_ICON_HANDS       = 'mods/species/ascent/icons/ui_hands.dmi',
+		UI_ICON_INTENT      = 'mods/species/ascent/icons/ui_intents.dmi',
+		UI_ICON_INTERACTION = 'mods/species/ascent/icons/ui_interactions.dmi',
+		UI_ICON_INVENTORY   = 'mods/species/ascent/icons/ui_inventory.dmi'
+	)
+
+/datum/hud/ascent_nymph/get_ui_style_data()
+	return GET_DECL(/decl/ui_style/ascent)
 
 /datum/hud/ascent_nymph/get_ui_color()
 	return COLOR_WHITE
@@ -45,49 +48,18 @@
 	return 255
 
 /datum/hud/ascent_nymph/FinalizeInstantiation()
-
-	var/ui_style = get_ui_style()
+	var/decl/ui_style/ui_style = get_ui_style_data()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-
-	held = new
-	held.icon =  ui_style
-	held.color = ui_color
-	held.alpha = ui_alpha
-	adding += held
-
-	molt = new
-	molt.icon =  ui_style
-	molt.color = ui_color
-	molt.alpha = ui_alpha
-	adding += molt
-
-	food = new
-	food.icon = 'icons/mob/status_hunger.dmi'
-	food.SetName("nutrition")
-	food.icon_state = "nutrition1"
-	food.pixel_w = 8
-	food.screen_loc = ui_nutrition_small
-	adding += food
-
-	drink = new
-	drink.icon = 'icons/mob/status_hunger.dmi'
-	drink.icon_state = "hydration1"
-	drink.SetName("hydration")
-	drink.screen_loc = ui_nutrition_small
-	adding += drink
-
-	action_intent = new /obj/screen/intent/ascent_nymph()
-	action_intent.icon =  ui_style
-	action_intent.color = ui_color
-	action_intent.alpha = ui_alpha
-	adding += action_intent
-
-	mymob.healths = new /obj/screen()
-	mymob.healths.icon =  ui_style
-	mymob.healths.color = ui_color
-	mymob.healths.alpha = ui_alpha
-	mymob.healths.SetName("health")
-	mymob.healths.screen_loc = ANYMPH_SCREEN_LOC_HEALTH
-	adding += mymob.healths
+	molt          = new(                                null, mymob, ui_style, ui_color, ui_alpha)
+	food          = new /obj/screen/food(               null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_NUTRITION)
+	drink         = new /obj/screen/drink(              null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HYDRATION)
+	action_intent = new /obj/screen/intent/ascent_nymph(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTENT)
+	mymob.healths = new /obj/screen/ascent_nymph_health(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HEALTH)
+	src.other = list()
+	src.adding = list(mymob.healths, molt, food, drink, action_intent)
 	..()
+
+/obj/screen/ascent_nymph_health
+	name = "health"
+	screen_loc = ANYMPH_SCREEN_LOC_HEALTH

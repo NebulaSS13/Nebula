@@ -2,7 +2,7 @@
 	name = "circuitboard (gas thruster)"
 	icon = 'icons/obj/modules/module_controller.dmi'
 	build_path = /obj/machinery/atmospherics/unary/engine
-	origin_tech = "{'powerstorage':1,'engineering':2}"
+	origin_tech = @'{"powerstorage":1,"engineering":2}'
 	req_components = list(
 		/obj/item/stack/cable_coil = 30,
 		/obj/item/pipe = 2
@@ -17,7 +17,7 @@
 	name = "circuitboard (fusion thruster)"
 	icon = 'icons/obj/modules/module_controller.dmi'
 	build_path = /obj/machinery/atmospherics/unary/engine/fusion
-	origin_tech = "{'powerstorage':1,'engineering':2}"
+	origin_tech = @'{"powerstorage":1,"engineering":2}'
 	req_components = list(
 		/obj/item/stack/cable_coil = 30,
 		/obj/item/pipe = 2

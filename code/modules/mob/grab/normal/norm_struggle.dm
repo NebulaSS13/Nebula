@@ -1,18 +1,18 @@
 /decl/grab/normal/struggle
-	name = "struggle grab"
-	upgrab =   /decl/grab/normal/aggressive
-	downgrab = /decl/grab/normal/passive
-	shift = 8
-	stop_move = 1
-	reverse_facing = 0
-	point_blank_mult = 1
-	same_tile = 0
-	breakability = 3
-	grab_slowdown = 0.35
-	upgrade_cooldown = 20
+	name                    = "struggle grab"
+	upgrab                  = /decl/grab/normal/aggressive
+	downgrab                = /decl/grab/normal/passive
+	shift                   = 8
+	stop_move               = 1
+	reverse_facing          = 0
+	point_blank_mult        = 1
+	same_tile               = 0
+	breakability            = 3
+	grab_slowdown           = 0.35
+	upgrade_cooldown        = 20
 	can_downgrade_on_resist = 0
-	icon_state = "reinforce"
-	break_chance_table = list(5, 20, 30, 80, 100)
+	grab_icon_state         = "reinforce"
+	break_chance_table      = list(5, 20, 30, 80, 100)
 
 /decl/grab/normal/struggle/process_effect(var/obj/item/grab/G)
 	var/mob/living/affecting = G.get_affecting_mob()
@@ -43,7 +43,7 @@
 	else
 		affecting.visible_message("<span class='warning'>[affecting] struggles against [assailant]!</span>")
 		G.done_struggle = FALSE
-		addtimer(CALLBACK(G, .proc/handle_resist), 1 SECOND)
+		addtimer(CALLBACK(G, PROC_REF(handle_resist)), 1 SECOND)
 		resolve_struggle(G)
 
 /decl/grab/normal/struggle/proc/resolve_struggle(var/obj/item/grab/G)

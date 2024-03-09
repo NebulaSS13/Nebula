@@ -88,7 +88,7 @@
 			if(eating.reagents?.total_volume)
 				eating.reagents.trans_to_obj(src, eating.reagents.total_volume)
 			for(var/mtype in eating.matter)
-				reagents.add_reagent(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+				add_to_reagents(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
 			if(eaten >= MAX_INTAKE_ORE_PER_TICK)
 				break
@@ -130,7 +130,7 @@
 				if(processed_mols)
 					// The ratio processed_moles/moles gives us the ratio of the reagent volume to what should be removed
 					// since the mole to unit conversion is linear.
-					reagents.remove_reagent(mtype, reagent_vol*(processed_mols/mols), defer_update = TRUE)
+					remove_from_reagents(mtype, reagent_vol*(processed_mols/mols), defer_update = TRUE)
 
 					use_power_oneoff(power_draw_per_mol*mols)
 					// Still somewhat arbitary
@@ -148,7 +148,7 @@
 				if(sheets > 0) // If we can't process any sheets at all, leave it for manual processing.
 					adjusted_reagents = TRUE
 					SSmaterials.create_object(mtype, output_turf, sheets)
-					reagents.remove_reagent(mtype, removing)
+					remove_from_reagents(mtype, removing)
 
 	return adjusted_reagents
 
@@ -173,7 +173,7 @@
 			if(!user.try_unequip(I, src))
 				return
 			output_container = I
-			events_repository.register(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/remove_container)
+			events_repository.register(/decl/observ/destroyed, output_container, src, TYPE_PROC_REF(/obj/machinery/material_processing/extractor, remove_container))
 			user.visible_message(SPAN_NOTICE("\The [user] places \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
 			return
 
@@ -185,7 +185,7 @@
 	if(!output_container)
 		return
 	. = output_container
-	events_repository.unregister(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/remove_container)
+	events_repository.unregister(/decl/observ/destroyed, output_container, src, TYPE_PROC_REF(/obj/machinery/material_processing/extractor, remove_container))
 	output_container = null
 
 /obj/machinery/material_processing/extractor/OnTopic(var/mob/user, var/list/href_list)

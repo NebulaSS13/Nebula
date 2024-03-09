@@ -15,6 +15,7 @@
 	var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
 	var/lore_text
 	var/mechanics_text
+	var/reaction_category
 	/// Flags used when reaction processing.
 	var/chemical_reaction_flags = 0
 

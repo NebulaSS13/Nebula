@@ -77,5 +77,5 @@
 	nano_data["bindings"] = phenomena_bindings
 	//Update the hud as well.
 	var/obj/screen/intent/deity/SD = hud_used?.action_intent
-	if(SD)
+	if(istype(SD))
 		SD.update_text()

@@ -54,7 +54,7 @@
 		/obj/item/storage/med_pouch/toxin
 	)
 	contraband = list(/obj/item/chems/syringe/antitoxin = 4,/obj/item/chems/syringe/antibiotic = 4,/obj/item/chems/pill/bromide = 1)
-	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':24}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
+	directional_offset = @'{"NORTH":{"y":-24}, "SOUTH":{"y":24}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/machinery/vending/wallmed2
@@ -77,5 +77,5 @@
 		/obj/item/storage/med_pouch/radiation
 	)
 	contraband = list(/obj/item/chems/pill/bromide = 3, /obj/item/chems/hypospray/autoinjector/pain = 2)
-	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':24}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
+	directional_offset = @'{"NORTH":{"y":-24}, "SOUTH":{"y":24}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED

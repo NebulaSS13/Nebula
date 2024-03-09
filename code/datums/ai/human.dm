@@ -8,13 +8,13 @@
 		return
 
 	if(H.get_shock() && H.shock_stage < 40 && prob(3))
-		H.emote(pick("moan","groan"))
+		H.emote(pick(/decl/emote/audible/moan, /decl/emote/audible/groan))
 
 	if(H.shock_stage > 10 && prob(3))
-		H.emote(pick("cry","whimper"))
+		H.emote(pick(/decl/emote/audible/cry, /decl/emote/audible/whimper))
 
 	if(H.shock_stage >= 40 && prob(3))
-		H.emote("scream")
+		H.emote(/decl/emote/audible/scream)
 
 	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
 		H.custom_emote("thrashes in agony")

@@ -73,7 +73,7 @@
 	name = "cult robes"
 	icon = 'icons/clothing/suit/cult.dmi'
 	desc = "A set of durable robes worn by the followers of Nar-Sie."
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_TAIL
 	allowed = list(/obj/item/book/tome,/obj/item/sword/cultblade)
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
@@ -92,7 +92,7 @@
 	name = "magus robes"
 	desc = "A set of plated robes worn by the followers of Nar-Sie."
 	icon = 'icons/clothing/suit/wizard/magusred.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
@@ -136,7 +136,7 @@
 		ARMOR_RAD = ARMOR_RAD_MINOR
 	)
 	siemens_coefficient = 0.2
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 
 /obj/item/clothing/suit/space/cult/Initialize()
 	. = ..()

@@ -29,7 +29,7 @@
 	if(!A)
 		return 0
 	if(href_list["PRG_beginReconstruction"])
-		if((A.hardware_integrity() < 100) || (A.backup_capacitor() < 100))
+		if((A.get_health_percent() < 100) || (A.backup_capacitor() < 100))
 			restoring = 1
 		return 1
 
@@ -66,12 +66,12 @@
 	if(!A || !restoring)
 		restoring = 0	// If the AI was removed, stop the restoration sequence.
 		return
-	A.adjustFireLoss(-4)
-	A.adjustBruteLoss(-4)
+	A.adjustFireLoss(-4, do_update_health = FALSE)
+	A.adjustBruteLoss(-4, do_update_health = FALSE)
 	A.adjustOxyLoss(-4)
-	A.updatehealth()
+	A.update_health()
 	// If the AI is dead, revive it.
-	if (A.health >= -100 && A.stat == DEAD)
+	if (A.stat == DEAD && !A.should_be_dead())
 		A.set_stat(CONSCIOUS)
 		A.lying = 0
 		A.switch_from_dead_to_living_mob_list()
@@ -81,7 +81,7 @@
 		if(AC)
 			AC.update_icon()
 	// Finished restoring
-	if((A.hardware_integrity() == 100) && (A.backup_capacitor() == 100))
+	if((A.get_health_percent() == 100) && (A.backup_capacitor() == 100))
 		restoring = 0
 
 /datum/nano_module/program/computer_aidiag
@@ -106,9 +106,9 @@
 		data["error"] = "No AI located"
 	else
 		data["ai_name"] = A.name
-		data["ai_integrity"] = A.hardware_integrity()
+		data["ai_integrity"] = A.get_health_percent()
 		data["ai_capacitor"] = A.backup_capacitor()
-		data["ai_isdamaged"] = (A.hardware_integrity() < 100) || (A.backup_capacitor() < 100)
+		data["ai_isdamaged"] = (A.get_health_percent() < 100) || (A.backup_capacitor() < 100)
 		data["ai_isdead"] = (A.stat == DEAD)
 
 		var/list/all_laws[0]

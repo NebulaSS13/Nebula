@@ -143,7 +143,7 @@
 		SET_STATUS_MAX(M, STAT_DROWSY, 3)
 		SET_STATUS_MAX(M, STAT_SLUR, 3)
 	if(prob(20))
-		M.emote(pick("giggle", "laugh"))
+		M.emote(pick(/decl/emote/audible/giggle, /decl/emote/audible/laugh))
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /decl/material/gas/nitrogen
@@ -325,7 +325,7 @@
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	color = "#777777"
-	stack_origin_tech = "{'materials':5}"
+	stack_origin_tech = @'{"materials":5}'
 	value = 0.45
 	gas_symbol_html = "T"
 	gas_symbol = "T"
@@ -340,7 +340,7 @@
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It is the most 'basic' fusion fuel."
 	flags = MAT_FLAG_FUSION_FUEL | MAT_FLAG_FISSIBLE
 	color = "#999999"
-	stack_origin_tech = "{'materials':3}"
+	stack_origin_tech = @'{"materials":3}'
 	gas_symbol_html = "D"
 	gas_symbol = "D"
 	value = 0.5

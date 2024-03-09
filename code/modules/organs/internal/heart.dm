@@ -5,13 +5,13 @@
 	icon_state = "heart-on"
 	dead_icon = "heart-off"
 	prosthetic_icon = "heart-prosthetic"
+	damage_reduction = 0.7
+	relative_size = 5
+	max_damage = 45
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/tmp/next_blood_squirt = 0
-	damage_reduction = 0.7
-	relative_size = 5
-	max_damage = 45
 	var/open
 	var/list/external_pump
 
@@ -70,7 +70,7 @@
 		return
 	else //and if it's beating, let's see if it should
 		var/should_stop = prob(80) && owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
-		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
+		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.get_max_health() * 0.75)) //brain failing to work heart properly
 		should_stop = should_stop || (prob(5) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop) // The heart has stopped due to going into traumatic or cardiovascular shock.
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
@@ -189,6 +189,10 @@
 	return is_usable() && (pulse > PULSE_NONE || BP_IS_PROSTHETIC(src) || (owner.status_flags & FAKEDEATH))
 
 /obj/item/organ/internal/heart/listen()
+
+	if(!owner || (status & (ORGAN_DEAD|ORGAN_CUT_AWAY)))
+		return "no pulse"
+
 	if(BP_IS_PROSTHETIC(src) && is_working())
 		if(is_bruised())
 			return "sputtering pump"

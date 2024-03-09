@@ -1,7 +1,7 @@
 /turf/unsimulated/floor
 	name = "floor"
 	icon = 'icons/turf/floors.dmi'
-	icon_state = "Floor3"
+	icon_state = "shuttle"
 	turf_flags = TURF_IS_HOLOMAP_PATH
 
 /turf/unsimulated/floor/can_climb_from_below(var/mob/climber)

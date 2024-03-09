@@ -14,12 +14,14 @@ var/global/exterior_broken_states = icon_states('icons/turf/exterior/broken.dmi'
 	name = "concrete"
 	desc = "A flat expanse of artificial stone-like artificial material."
 	icon = 'icons/turf/exterior/concrete.dmi'
-	diggable = FALSE
 	var/broken
 	var/burned
 
+/turf/exterior/concrete/can_be_dug()
+	return FALSE
+
 /turf/exterior/concrete/flooded
-	flooded = TRUE
+	flooded = /decl/material/liquid/water
 	color = COLOR_LIQUID_WATER
 
 /turf/exterior/concrete/Initialize(var/ml)

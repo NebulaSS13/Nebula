@@ -31,7 +31,7 @@
 		/obj/item/radio,
 		/obj/item/baton,
 		/obj/item/gun,
-		/obj/item/pickaxe
+		/obj/item/tool
 	)
 
 	online_slowdown = 1

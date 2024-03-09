@@ -6,11 +6,14 @@
 	material = /decl/material/solid/metal/aluminium
 	canhear_range = 0 // can't hear headsets from very far away
 	slot_flags = SLOT_EARS
-	cell = null
 	power_usage = 0
 	can_use_analog = FALSE
 	encryption_keys = list(/obj/item/encryptionkey)
 	encryption_key_capacity = 2
+
+/obj/item/radio/headset/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
+	return
 
 /obj/item/radio/headset/on_update_icon()
 	icon_state = get_world_inventory_state()

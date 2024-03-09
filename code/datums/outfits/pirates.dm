@@ -15,4 +15,4 @@
 	head = /obj/item/clothing/suit/armor/pirate
 	suit = /obj/item/clothing/suit/pirate
 	back = /obj/item/tank/jetpack/oxygen
-	flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
+	outfit_flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT

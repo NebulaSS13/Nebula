@@ -2,8 +2,7 @@
 	name = "bear"
 	desc = "A large brown bear."
 	icon = 'icons/mob/simple_animal/bear_brown.dmi'
-	health = 75
-	maxHealth = 75
+	max_health = 75
 	density = TRUE
 	natural_weapon = /obj/item/natural_weapon/claws
 	can_escape = TRUE
@@ -17,12 +16,12 @@
 /mob/living/simple_animal/hostile/commanded/bear/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	. = ..()
 	if(.)
-		src.emote("roars in rage!")
+		custom_emote(AUDIBLE_MESSAGE, "roars in rage!")
 
 /mob/living/simple_animal/hostile/commanded/bear/default_hurt_interaction(mob/user)
 	. = ..()
 	if(.)
-		src.emote("roars in rage!")
+		custom_emote(AUDIBLE_MESSAGE, "roars in rage!")
 
 /mob/living/simple_animal/hostile/commanded/bear/listen()
 	if(stance != COMMANDED_MISC) //cant listen if its booty shakin'

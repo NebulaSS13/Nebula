@@ -36,8 +36,8 @@ var/global/datum/getrev/revdata = new()
 	to_chat(src, "<b>Client Version:</b> [byond_version]")
 	if(revdata.revision)
 		var/server_revision = revdata.revision
-		if(config.githuburl)
-			server_revision = "<a href='[config.githuburl]/commit/[server_revision]'>[server_revision]</a>"
+		if(get_config_value(/decl/config/text/githuburl))
+			server_revision = "<a href='[get_config_value(/decl/config/text/githuburl)]/commit/[server_revision]'>[server_revision]</a>"
 		to_chat(src, "<b>Server Revision:</b> [server_revision] - [revdata.branch] - [revdata.date]")
 	else
 		to_chat(src, "<b>Server Revision:</b> Revision Unknown")

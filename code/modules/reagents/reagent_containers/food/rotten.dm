@@ -3,7 +3,7 @@
 /obj/item/chems/food/old
 	name = "master old-food"
 	desc = "they're all inedible and potentially dangerous items"
-	center_of_mass = @"{'x':15,'y':12}"
+	center_of_mass = @'{"x":15,"y":12}'
 	nutriment_desc = list("rot" = 5, "mold" = 5)
 	nutriment_amt = 10
 	bitesize = 3
@@ -12,7 +12,7 @@
 
 /obj/item/chems/food/old/populate_reagents()
 	. = ..()
-	reagents.add_reagent(pick(
+	add_to_reagents(pick(
 				/decl/material/liquid/fuel,
 				/decl/material/liquid/amatoxin,
 				/decl/material/liquid/carpotoxin,

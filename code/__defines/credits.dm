@@ -1,0 +1,4 @@
+#define CREDIT_ROLL_SPEED 185
+#define CREDIT_SPAWN_SPEED 20
+#define CREDIT_ANIMATE_HEIGHT (14 * world.icon_size)
+#define CREDIT_EASE_DURATION 22

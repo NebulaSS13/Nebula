@@ -36,14 +36,14 @@ var/global/list/image/splatter_cache=list()
 		basecolor = COLOR_LUMINOL
 		update_icon()
 
-/obj/effect/decal/cleanable/blood/clean_blood()
+/obj/effect/decal/cleanable/blood/clean(clean_forensics = TRUE)
 	fluorescent = FALSE
 	if(invisibility != INVISIBILITY_ABSTRACT)
 		set_invisibility(INVISIBILITY_ABSTRACT)
 		amount = 0
 		STOP_PROCESSING(SSobj, src)
 		remove_extension(src, /datum/extension/scent)
-	. = ..(ignore = TRUE)
+	. = ..(clean_forensics = FALSE)
 
 /obj/effect/decal/cleanable/blood/hide()
 	return
@@ -160,6 +160,14 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/drip/Initialize()
 	. = ..()
 	drips = list(icon_state)
+
+/obj/effect/decal/cleanable/blood/drip/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
+	set_overlays(drips?.Copy())
+
+/obj/effect/decal/cleanable/blood/drip/Destroy()
+	LAZYCLEARLIST(drips)
+	return ..()
 
 /obj/effect/decal/cleanable/blood/writing
 	icon = 'icons/effects/writing.dmi'

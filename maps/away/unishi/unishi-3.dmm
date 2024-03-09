@@ -357,7 +357,7 @@
 	dir = 8;
 	icon_state = "railing0"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/unishi/living)
 "bp" = (
 /turf/simulated/floor/tiled,
@@ -430,7 +430,7 @@
 /obj/structure/cable{
 	icon_state = "32-1"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/unishi/living)
 "bB" = (
 /obj/structure/reagent_dispensers/fueltank,
@@ -619,7 +619,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	health = 1e+007
+	current_health = 1e+007
 	},
 /obj/random/medical,
 /obj/random/medical,
@@ -930,7 +930,7 @@
 /obj/structure/table/woodentable,
 /obj/item/board,
 /obj/item/book/manual/mass_spectrometry,
-/obj/item/book/manual/stasis,
+/obj/item/book/fluff/stasis,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cM" = (
@@ -1382,7 +1382,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dT" = (
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -1442,7 +1442,7 @@
 "eb" = (
 /obj/structure/table/woodentable,
 /obj/item/poster,
-/obj/item/haircomb/random,
+/obj/item/grooming/comb/colorable/random,
 /obj/random/advdevice,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1720,10 +1720,10 @@
 /area/unishi/living)
 "eJ" = (
 /obj/structure/table/woodentable,
-/obj/item/haircomb/brush,
-/obj/item/lipstick/black,
-/obj/item/lipstick/green,
-/obj/item/lipstick/violet,
+/obj/item/grooming/brush,
+/obj/item/cosmetics/lipstick/black,
+/obj/item/cosmetics/lipstick/green,
+/obj/item/cosmetics/lipstick/violet,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood,
 /area/unishi/living)
@@ -2009,7 +2009,7 @@
 /area/unishi/living)
 "XA" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/unishi/living)
 
 (1,1,1) = {"

@@ -2,7 +2,7 @@
 
 /obj/item/storage/tray
 	name = "tray"
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food_trays.dmi'
 	icon_state = "tray_material"
 	desc = "A tray to serve food on."
 	force = 4
@@ -120,11 +120,11 @@
 
 /obj/item/storage/tray/on_update_icon()
 	. = ..()
-	clear_vis_contents(src)
+	clear_vis_contents()
 	for(var/obj/item/I in contents)
 		I.vis_flags |= VIS_INHERIT_PLANE | VIS_INHERIT_LAYER
 		I.appearance_flags |= RESET_COLOR
-		add_vis_contents(src, I)
+		add_vis_contents(I)
 
 /obj/item/storage/tray/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
 	. = ..()

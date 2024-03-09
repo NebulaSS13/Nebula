@@ -2,7 +2,7 @@
 
 /decl/communication_channel/aooc
 	name = "AOOC"
-	config_setting = "aooc_allowed"
+	config_setting = /decl/config/toggle/on/aooc_allowed
 	expected_communicator_type = /client
 	flags = COMMUNICATION_LOG_CHANNEL_NAME|COMMUNICATION_ADMIN_FOLLOW
 	log_proc = /proc/log_ooc

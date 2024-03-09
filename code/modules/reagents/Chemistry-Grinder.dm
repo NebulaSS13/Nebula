@@ -192,7 +192,7 @@
 	update_icon()
 
 	// Reset the machine.
-	addtimer(CALLBACK(src, .proc/end_grind, user), 6 SECONDS, TIMER_UNIQUE)
+	addtimer(CALLBACK(src, PROC_REF(end_grind), user), 6 SECONDS, TIMER_UNIQUE)
 
 	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(skill_to_check) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
 	// Process.
@@ -213,7 +213,7 @@
 				stack.use(amount_to_take)
 				if(QDELETED(stack))
 					holdingitems -= stack
-				beaker.reagents.add_reagent(material.type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
+				beaker.add_to_reagents(material.type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
 				continue
 
 		else if(O.reagents)
@@ -238,7 +238,7 @@
 	user.visible_message(SPAN_DANGER("\The [user]'s hand gets caught in \the [src]!"), SPAN_DANGER("Your hand gets caught in \the [src]!"))
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
 	if(BP_IS_PROSTHETIC(hand_organ))
-		beaker.reagents.add_reagent(/decl/material/solid/metal/iron, dam)
+		beaker.add_to_reagents(/decl/material/solid/metal/iron, dam)
 	else
 		user.take_blood(beaker, dam)
 	SET_STATUS_MAX(user, STAT_STUN, 2)

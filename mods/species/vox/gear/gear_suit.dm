@@ -27,7 +27,7 @@
 		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	siemens_coefficient = 0.6
-	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	bodytype_equip_flags = BODY_FLAG_VOX
 	flags_inv = (HIDEJUMPSUIT|HIDETAIL)
@@ -43,7 +43,7 @@
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
 	var/lights_color = "#00ffff"
 
-/obj/item/clothing/suit/space/vox/carapace/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/clothing/suit/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))
 		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-lights")
 		I.color = lights_color
@@ -79,6 +79,6 @@
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
 		ARMOR_LASER = ARMOR_LASER_MINOR,
 		ARMOR_BOMB = ARMOR_BOMB_PADDED) //Higher melee armor versus lower everything else.
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_TAIL
 	bodytype_equip_flags = BODY_FLAG_VOX
 	siemens_coefficient = 1 //Its literally metal

@@ -1,5 +1,4 @@
 /obj/item/clothing/under/vox
-	has_sensor = SUIT_NO_SENSORS
 	bodytype_equip_flags = BODY_FLAG_VOX
 
 /obj/item/clothing/under/vox/vox_casual

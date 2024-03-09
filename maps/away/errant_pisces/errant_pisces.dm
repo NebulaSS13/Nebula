@@ -24,8 +24,7 @@
 	turns_per_move = 5
 	meat_type = /obj/item/chems/food/sharkmeat
 	speed = 2
-	maxHealth = 100
-	health = 100
+	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35
 	faction = "shark"
@@ -33,14 +32,15 @@
 /mob/living/simple_animal/hostile/carp/shark/carp_randomify()
 	return
 
-/mob/living/simple_animal/hostile/carp/shark/death()
+/mob/living/simple_animal/hostile/carp/shark/death(gibbed)
 	..()
-	var/datum/gas_mixture/environment = loc.return_air()
-	if (environment)
-		var/datum/gas_mixture/sharkmaw_chlorine = new
-		sharkmaw_chlorine.adjust_gas(/decl/material/gas/chlorine, 10)
-		environment.merge(sharkmaw_chlorine)
-		visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))
+	if(. && !gibbed)
+		var/datum/gas_mixture/environment = loc.return_air()
+		if (environment)
+			var/datum/gas_mixture/sharkmaw_chlorine = new
+			sharkmaw_chlorine.adjust_gas(/decl/material/gas/chlorine, 10)
+			environment.merge(sharkmaw_chlorine)
+			visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))
 
 /mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
 	set waitfor = 0//to deal with sleep() possibly stalling other procs
@@ -64,14 +64,14 @@
 	desc = "A fillet of cosmoshark meat."
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
-	center_of_mass = @"{'x':17,'y':13}"
+	center_of_mass = @'{"x":17,"y":13}'
 	bitesize = 8
 
 /obj/item/chems/food/sharkmeat/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/psychoactives,     1)
-	reagents.add_reagent(/decl/material/gas/chlorine,             1)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+	add_to_reagents(/decl/material/liquid/psychoactives,     1)
+	add_to_reagents(/decl/material/gas/chlorine,             1)
 
 /obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
 	name = "industrial net"
@@ -80,7 +80,7 @@
 	icon_state = "net_f"
 	anchored = TRUE
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
-	maxhealth = 100
+	max_health = 100
 
 /obj/structure/net/Initialize(var/mapload)
 	. = ..()
@@ -93,16 +93,17 @@
 					continue
 				N.update_connections()
 
-/obj/structure/net/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
+/obj/structure/net/get_examined_damage_string()
+	if(!can_take_damage())
 		return
-	if(health_ratio >= 1)
+	var/health_percent = get_percent_health()
+	if(health_percent >= 100)
 		return SPAN_NOTICE("It looks fully intact.")
-	else if (health_ratio < 0.2)
+	else if (health_percent < 20)
 		return SPAN_DANGER("\The [src] is barely hanging on by the last few threads.")
-	else if (health_ratio < 0.5)
+	else if (health_percent < 50)
 		return SPAN_WARNING("Large swathes of \the [src] have been cut.")
-	else if (health_ratio < 0.9)
+	else
 		return SPAN_NOTICE("A few strands of \the [src] have been severed.")
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
@@ -112,7 +113,7 @@
 			to_chat(user,"<span class='warning'>You can't cut throught \the [src] with \the [W], it's too dull.</span>")
 			return
 		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
-		while(health > 0 && !QDELETED(src) && !QDELETED(user))
+		while(current_health > 0 && !QDELETED(src) && !QDELETED(user))
 			if (!do_after(user, 20, src))
 				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
 				return

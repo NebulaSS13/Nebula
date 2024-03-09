@@ -41,35 +41,45 @@ If its complexity is lower than our theme's then
 			for(var/j = 0, j < height, j++)
 				var/truex = xorigin + x + i - 1
 				var/truey = yorigin + y + j - 1
-				var/cell = map.get_map_cell(x+i,y+j)
+				var/tmp_cell
+				TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i, y+j, map)
+				var/cell = tmp_cell
 				room_theme.apply_room_theme(truex,truey,map.map[cell])
 				if(generate_doors && room_theme.door_type && !(map.map[cell] == WALL_CHAR || map.map[cell] == ARTIFACT_TURF_CHAR) && (i == 0 || i == width-1 || j == 0 || j == height-1))
 					var/isGood = 1
 					if(j == 0 || j == height-1) //check horizontally
-						var/curCell = map.map[map.get_map_cell(x+i-1,y+j)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i-1,y+j, map)
+						var/curCell = map.map[tmp_cell]
 						if(curCell != WALL_CHAR && curCell != ARTIFACT_TURF_CHAR)
 							isGood = 0
-						curCell = map.map[map.get_map_cell(x+i+1,y+j)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i+1,y+j, map)
+						curCell = map.map[tmp_cell]
 						if(curCell != WALL_CHAR && curCell != ARTIFACT_TURF_CHAR)
 							isGood = 0
-						curCell = map.map[map.get_map_cell(x+i,y+j-1)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i,y+j-1, map)
+						curCell = map.map[tmp_cell]
 						if(curCell == WALL_CHAR || curCell == ARTIFACT_TURF_CHAR)
 							isGood = 0
-						curCell = map.map[map.get_map_cell(x+i,y+j+1)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i,y+j+1, map)
+						curCell = map.map[tmp_cell]
 						if(curCell == WALL_CHAR || curCell == ARTIFACT_TURF_CHAR)
 							isGood = 0
-					if(i == 0 || i == width-1) //verticle
+					if(i == 0 || i == width-1) //vertical
 						isGood = 1 //if it failed above, it might not fail here.
-						var/curCell = map.map[map.get_map_cell(x+i,y+j-1)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i,y+j-1, map)
+						var/curCell = map.map[tmp_cell]
 						if(curCell != WALL_CHAR && curCell != ARTIFACT_TURF_CHAR)
 							isGood = 0
-						curCell = map.map[map.get_map_cell(x+i,y+j+1)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i,y+j+1, map)
+						curCell = map.map[tmp_cell]
 						if(curCell != WALL_CHAR && curCell != ARTIFACT_TURF_CHAR)
 							isGood = 0
-						curCell = map.map[map.get_map_cell(x+i-1,y+j)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i-1,y+j, map)
+						curCell = map.map[tmp_cell]
 						if(curCell == WALL_CHAR || curCell == ARTIFACT_TURF_CHAR)
 							isGood = 0
-						curCell = map.map[map.get_map_cell(x+i+1,y+j)]
+						TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(x+i+1,y+j, map)
+						curCell = map.map[tmp_cell]
 						if(curCell == WALL_CHAR || curCell == ARTIFACT_TURF_CHAR)
 							isGood = 0
 					if(isGood)

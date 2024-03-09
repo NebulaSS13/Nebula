@@ -54,7 +54,7 @@
 	construct_state         = /decl/machine_construction/wall_frame/panel_closed
 	frame_type              = /obj/item/frame/button/airlock_controller
 	base_type               = /obj/machinery/embedded_controller/radio/simple_docking_controller
-	directional_offset      = "{'NORTH':{'y':-22}, 'SOUTH':{'y':24}, 'EAST':{'x':-22}, 'WEST':{'x':22}}"
+	directional_offset      = @'{"NORTH":{"y":-22}, "SOUTH":{"y":24}, "EAST":{"x":-22}, "WEST":{"x":22}}'
 	required_interaction_dexterity = DEXTERITY_TOUCHSCREENS
 	var/frequency           = EXTERNAL_AIR_FREQ
 	///Icon state of the screen used by dummy controllers to match the same state

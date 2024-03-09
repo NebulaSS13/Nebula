@@ -52,7 +52,7 @@ var/global/religion_name = null
 
 /proc/station_name()
 	if(!global.using_map)
-		return config.server_name
+		return get_config_value(/decl/config/text/server_name)
 	if (global.using_map.station_name)
 		return global.using_map.station_name
 
@@ -90,8 +90,9 @@ var/global/religion_name = null
 			if(5)
 				global.using_map.station_name += pick(global.numbers_as_words)
 
-	if (config && config.server_name)
-		world.name = "[config.server_name]: [name]"
+	var/config_server_name = get_config_value(/decl/config/text/server_name)
+	if (config_server_name)
+		world.name = "[config_server_name]: [name]"
 	else
 		world.name = global.using_map.station_name
 
@@ -100,8 +101,9 @@ var/global/religion_name = null
 /proc/world_name(var/name)
 	global.using_map.station_name = name
 
-	if (config && config.server_name)
-		world.name = "[config.server_name]: [name]"
+	var/config_server_name = get_config_value(/decl/config/text/server_name)
+	if (config_server_name)
+		world.name = "[config_server_name]: [name]"
 	else
 		world.name = name
 

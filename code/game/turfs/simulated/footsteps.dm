@@ -35,7 +35,10 @@
 
 	return TRUE
 
-/mob/living/carbon/human/proc/handle_footsteps()
+/mob/living/proc/handle_footsteps()
+	return
+
+/mob/living/carbon/human/handle_footsteps()
 	step_count++
 	if(!has_footsteps())
 		return

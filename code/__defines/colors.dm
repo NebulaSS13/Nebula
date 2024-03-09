@@ -39,6 +39,7 @@
 #define COLOR_GREEN_GRAY       "#8daf6a"
 #define COLOR_DARK_GREEN_GRAY  "#54654c"
 #define COLOR_BLUE_GRAY        "#6a97b0"
+#define COLOR_MID_BLUE_GRAY    "#666699"
 #define COLOR_DARK_BLUE_GRAY   "#3e4855"
 #define COLOR_SURGERY_BLUE     "#e0f2f6"
 #define COLOR_SUN              "#ec8b2f"
@@ -92,6 +93,12 @@
 #define COLOR_CRYSTAL          "#00c8a5"
 #define COLOR_ASTEROID_ROCK    "#735555"
 #define COLOR_DIAMOND          "#d8d4ea"
+#define COLOR_BLOOD_RED        "#990000"
+#define COLOR_PALE_GOLD        "#cc9900"
+#define COLOR_ROYAL_BLUE       "#0033ff"
+#define COLOR_VERDANT_GREEN    "#287d00"
+#define COLOR_SCIENCE_PURPLE   "#6633cc"
+
 
 #define PIPE_COLOR_GREY        "#808080"
 #define PIPE_COLOR_RED         "#ff0000"

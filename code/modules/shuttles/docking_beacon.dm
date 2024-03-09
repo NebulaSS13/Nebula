@@ -153,7 +153,7 @@
 		for(var/turf/T in get_turfs())
 			new /obj/effect/temporary(T, 5 SECONDS,'icons/effects/alphacolors.dmi', "green")
 			projecting = TRUE
-			addtimer(CALLBACK(src, .proc/allow_projection), 10 SECONDS) // No spamming holograms.
+			addtimer(CALLBACK(src, PROC_REF(allow_projection)), 10 SECONDS) // No spamming holograms.
 
 	if(href_list["settings"])
 		D.ui_interact(user)

@@ -6,7 +6,7 @@
 	anchored = TRUE
 	density = FALSE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 
 	var/damage_threshold = 15
 	var/open
@@ -40,7 +40,7 @@
 		toggle_open(user)
 	return TRUE
 
-/obj/structure/fireaxecabinet/handle_mouse_drop(atom/over, mob/user)
+/obj/structure/fireaxecabinet/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user)
 		if(!open)
 			to_chat(user, SPAN_WARNING("\The [src] is closed."))

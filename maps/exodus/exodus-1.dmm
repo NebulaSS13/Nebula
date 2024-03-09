@@ -21,7 +21,7 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector,
 /obj/structure/sign/warning/vacuum{
-	dir = 4;
+	dir = 8;
 	pixel_x = 32
 	},
 /turf/simulated/floor/plating,
@@ -50,8 +50,9 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sub_sec_airlock";
 	name = "interior access button";
-	pixel_x = 25;
-	pixel_y = -25
+	pixel_x = 20;
+	pixel_y = -25;
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
@@ -71,16 +72,19 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "sub_sec_airlock";
-	pixel_y = -25;
+	pixel_y = -22;
 	tag_airpump = "sub_sec_pump";
 	tag_chamber_sensor = "sub_sec_sensor";
 	tag_exterior_door = "sub_sec_outer";
-	tag_interior_door = "sub_sec_inner"
+	tag_interior_door = "sub_sec_inner";
+	dir = 1;
+	pixel_x = -6
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sub_sec_sensor";
-	pixel_x = 12;
-	pixel_y = -25
+	pixel_x = 6;
+	pixel_y = -18;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
@@ -97,8 +101,9 @@
 /obj/machinery/button/access/exterior{
 	id_tag = "sub_sec_airlock";
 	name = "exterior access button";
-	pixel_x = -25;
-	pixel_y = 25
+	pixel_x = -20;
+	pixel_y = 25;
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/exodus/maintenance/sub/fore)
@@ -171,15 +176,21 @@
 /turf/space,
 /area/exodus/maintenance/sub/fore)
 "aC" = (
-/obj/structure/sign/directions/security{
-	dir = 1
+/obj/structure/sign/warning/lethal_turrets{
+	dir = 4;
+	pixel_x = -34;
+	pixel_y = 32
 	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/exodus/maintenance/sub/fore)
+/turf/space,
+/area/space)
 "aD" = (
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1"
+	},
+/obj/structure/sign/directions/security{
+	dir = 1;
+	pixel_x = -32
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
@@ -927,9 +938,11 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/central)
 "dd" = (
-/obj/structure/sign/warning/lethal_turrets,
-/turf/simulated/wall/r_wall/prepainted,
-/area/exodus/maintenance/exterior)
+/obj/structure/sign/warning/lethal_turrets{
+	pixel_y = 32
+	},
+/turf/space,
+/area/space)
 "de" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -1100,7 +1113,8 @@
 	id_tag = "sub_cargo_airlock";
 	name = "exterior access button";
 	pixel_x = 25;
-	pixel_y = 25
+	pixel_y = 25;
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/exodus/maintenance/sub/port)
@@ -1117,16 +1131,19 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "sub_cargo_airlock";
-	pixel_y = -25;
+	pixel_y = -22;
 	tag_airpump = "sub_cargo_pump";
 	tag_chamber_sensor = "sub_cargo_sensor";
 	tag_exterior_door = "sub_cargo_outer";
-	tag_interior_door = "sub_cargo_inner"
+	tag_interior_door = "sub_cargo_inner";
+	dir = 1;
+	pixel_x = -6
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sub_cargo_sensor";
-	pixel_x = 12;
-	pixel_y = -25
+	pixel_x = 6;
+	pixel_y = -18;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/port)
@@ -1150,7 +1167,8 @@
 	id_tag = "sub_cargo_airlock";
 	name = "interior access button";
 	pixel_x = -25;
-	pixel_y = 25
+	pixel_y = 25;
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/port)
@@ -1228,7 +1246,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/sign/warning/vacuum{
-	dir = 8;
+	dir = 4;
 	pixel_x = -32
 	},
 /turf/simulated/floor/plating,
@@ -1537,7 +1555,7 @@
 /area/exodus/maintenance/sub/command)
 "eL" = (
 /obj/item/radio/intercom{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/sub/command)
@@ -1625,8 +1643,8 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector,
 /obj/structure/sign/warning/vacuum{
-	dir = 8;
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
@@ -1677,8 +1695,8 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder,
 /obj/machinery/light_switch{
-	pixel_x = -22;
-	pixel_y = -22
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -1714,10 +1732,11 @@
 	icon_state = "0-2"
 	},
 /obj/structure/sign/warning/vacuum{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/structure/sign/warning/high_voltage{
-	dir = 4;
+	dir = 8;
 	pixel_x = 32
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1744,8 +1763,9 @@
 /obj/machinery/button/access/exterior{
 	id_tag = "sub_research_airlock";
 	name = "exterior access button";
-	pixel_x = 25;
-	pixel_y = 25
+	pixel_x = 20;
+	pixel_y = 24;
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/exodus/maintenance/sub/starboard)
@@ -1762,16 +1782,19 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "sub_research_airlock";
-	pixel_y = -25;
+	pixel_y = -22;
 	tag_airpump = "sub_research_pump";
 	tag_chamber_sensor = "sub_research_sensor";
 	tag_exterior_door = "sub_research_outer";
-	tag_interior_door = "sub_research_inner"
+	tag_interior_door = "sub_research_inner";
+	dir = 1;
+	pixel_x = -6
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sub_research_sensor";
-	pixel_x = 12;
-	pixel_y = -25
+	pixel_x = 6;
+	pixel_y = -18;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
@@ -1789,8 +1812,9 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sub_research_airlock";
 	name = "interior access button";
-	pixel_x = -25;
-	pixel_y = -25
+	pixel_x = -20;
+	pixel_y = -24;
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
@@ -1805,11 +1829,12 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "fo" = (
-/obj/structure/sign/directions/science{
-	dir = 1
+/obj/structure/sign/warning/lethal_turrets{
+	dir = 1;
+	pixel_y = -32
 	},
-/turf/simulated/wall/prepainted,
-/area/exodus/maintenance/sub/starboard)
+/turf/space,
+/area/space)
 "fp" = (
 /turf/space,
 /area/exodus/maintenance/sub/starboard)
@@ -2123,7 +2148,6 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/central)
 "gd" = (
-/obj/structure/sign/warning/lethal_turrets,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -3520,7 +3544,7 @@
 	dir = 4
 	},
 /obj/item/radio/intercom{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
@@ -4164,12 +4188,6 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/aft)
 "lb" = (
-/obj/machinery/button/access/interior{
-	id_tag = "sub_engineering_airlock";
-	name = "interior access button";
-	pixel_x = 25;
-	pixel_y = 25
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1
 	},
@@ -4182,6 +4200,11 @@
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "sub_engineering_inner"
 	},
+/obj/machinery/button/access/interior{
+	id_tag = "sub_engineering_airlock";
+	name = "interior access button";
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/sub/aft)
 "ld" = (
@@ -4191,16 +4214,18 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "sub_engineering_airlock";
-	pixel_y = -25;
+	pixel_y = -22;
 	tag_airpump = "sub_engineering_pump";
 	tag_chamber_sensor = "sub_engineering_sensor";
 	tag_exterior_door = "sub_engineering_outer";
-	tag_interior_door = "sub_engineering_inner"
+	tag_interior_door = "sub_engineering_inner";
+	dir = 1
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sub_engineering_sensor";
 	pixel_x = 12;
-	pixel_y = -25
+	pixel_y = -18;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/aft)
@@ -4208,15 +4233,14 @@
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "sub_engineering_outer"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/exodus/maintenance/sub/aft)
-"lf" = (
 /obj/machinery/button/access/exterior{
 	id_tag = "sub_engineering_airlock";
 	name = "exterior access button";
-	pixel_x = -25;
-	pixel_y = 25
+	pixel_y = 24
 	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/exodus/maintenance/sub/aft)
+"lf" = (
 /turf/simulated/floor/airless,
 /area/exodus/maintenance/sub/aft)
 "lg" = (
@@ -4340,7 +4364,7 @@
 /area/exodus/maintenance/sub/aft)
 "lw" = (
 /obj/structure/sign/warning/vacuum{
-	dir = 4;
+	dir = 8;
 	pixel_x = 32
 	},
 /obj/machinery/atmospherics/portables_connector{
@@ -5398,7 +5422,7 @@
 "oE" = (
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 21
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/maintenance/telecomms)
@@ -5410,10 +5434,18 @@
 	dir = 4
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/maintenance/telecomms)
+"pI" = (
+/obj/structure/sign/warning/lethal_turrets{
+	pixel_y = 32;
+	pixel_x = 34
+	},
+/turf/space,
+/area/space)
 "qe" = (
 /obj/machinery/light{
 	dir = 8
@@ -5440,6 +5472,18 @@
 	},
 /turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
+"rK" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/sign/warning/lethal_turrets{
+	dir = 1;
+	pixel_y = -32
+	},
+/turf/simulated/floor/airless,
+/area/space)
 "rL" = (
 /obj/item/stock_parts/subspace/analyzer,
 /obj/item/stock_parts/subspace/analyzer,
@@ -5567,6 +5611,13 @@
 /obj/structure/closet/toolcloset,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/maintenance/telecomms)
+"zy" = (
+/obj/structure/sign/warning/lethal_turrets{
+	dir = 4;
+	pixel_x = -34
+	},
+/turf/space,
+/area/space)
 "zH" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -5622,8 +5673,8 @@
 /area/exodus/maintenance/telecomms)
 "AE" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Exodus Underlevel";
-},
+	name = "Exodus Underlevel"
+	},
 /turf/space,
 /area/space)
 "AG" = (
@@ -5694,7 +5745,7 @@
 /obj/structure/rack,
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exodus/maintenance/telecomms)
@@ -5724,6 +5775,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/maintenance/sub/aft)
+"CW" = (
+/obj/structure/sign/warning/lethal_turrets{
+	dir = 8;
+	pixel_x = 34
+	},
+/turf/space,
+/area/space)
 "Dm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -5842,7 +5900,7 @@
 "LF" = (
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/maintenance/telecomms)
@@ -6016,11 +6074,12 @@
 /area/exodus/maintenance/telecomms)
 "Se" = (
 /obj/machinery/newscaster{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/simulated/floor/lino,
 /area/exodus/maintenance/telecomms)
@@ -6097,6 +6156,13 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/maintenance/telecomms)
+"Wa" = (
+/obj/structure/sign/directions/science{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/exodus/maintenance/sub/starboard)
 "Xu" = (
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/sub/fore)
@@ -31445,25 +31511,25 @@ aa
 aa
 aa
 aa
-dd
 ab
 ab
 ab
 ab
 ab
-dd
 ab
 ab
 ab
 ab
 ab
-dd
 ab
 ab
 ab
 ab
 ab
-dd
+ab
+ab
+ab
+ab
 aa
 cv
 eG
@@ -31703,18 +31769,18 @@ aa
 aa
 aa
 ab
+aC
+aa
+ac
+aa
+ac
+zy
 aa
 aa
 ac
 aa
-ac
 aa
-aa
-aa
-ac
-aa
-aa
-aa
+zy
 aa
 aa
 aa
@@ -32167,7 +32233,7 @@ ad
 ad
 Xu
 Xu
-aC
+ad
 ad
 aw
 am
@@ -32212,7 +32278,7 @@ cv
 cv
 cv
 ac
-dd
+ab
 ab
 ab
 ab
@@ -32470,7 +32536,7 @@ aa
 aa
 aa
 ab
-aa
+aC
 aa
 ac
 aa
@@ -33261,8 +33327,8 @@ aa
 aa
 aa
 aa
-aa
-dd
+fo
+ab
 ac
 cv
 gm
@@ -33494,7 +33560,7 @@ cv
 eG
 cv
 ac
-dd
+ab
 ab
 ab
 ac
@@ -33752,7 +33818,7 @@ cS
 cv
 aa
 ab
-aa
+aC
 aa
 ac
 aa
@@ -35036,8 +35102,8 @@ cL
 eG
 cv
 ac
+ab
 dd
-aa
 di
 di
 dn
@@ -35060,7 +35126,7 @@ fI
 fV
 fV
 fV
-fV
+rK
 gd
 fV
 gk
@@ -36322,7 +36388,7 @@ eG
 cv
 aa
 ab
-aa
+pI
 aa
 ac
 aa
@@ -36578,7 +36644,7 @@ cv
 eG
 cv
 ac
-dd
+ab
 ab
 ab
 ac
@@ -36859,8 +36925,8 @@ aa
 aa
 aa
 aa
-aa
-dd
+fo
+ab
 ac
 cv
 eG
@@ -37610,7 +37676,7 @@ aa
 aa
 aa
 ab
-aa
+pI
 aa
 ac
 aa
@@ -37866,7 +37932,7 @@ cv
 cv
 cv
 aa
-dd
+ab
 ab
 ab
 ab
@@ -38385,18 +38451,18 @@ cv
 cv
 aa
 ab
+pI
+aa
+ac
+aa
+ac
+CW
 aa
 aa
 ac
 aa
-ac
 aa
-aa
-aa
-ac
-aa
-aa
-aa
+CW
 aa
 aa
 aa
@@ -38641,25 +38707,25 @@ cw
 do
 cv
 aa
-dd
 ab
 ab
 ab
 ab
 ab
-dd
 ab
 ab
 ab
 ab
 ab
-dd
 ab
 ab
 ab
 ab
 ab
-dd
+ab
+ab
+ab
+ab
 aa
 cv
 eG
@@ -55612,8 +55678,8 @@ aa
 aa
 ez
 ct
-fo
-NK
+ch
+Wa
 NK
 ch
 ct

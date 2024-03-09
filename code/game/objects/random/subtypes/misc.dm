@@ -1,13 +1,14 @@
 /obj/random/contraband
 	name = "Random Illegal Item"
 	desc = "Hot Stuff."
-	icon = 'icons/obj/items/comb.dmi'
-	icon_state = "purplecomb"
+	icon = 'icons/obj/items/grooming/comb.dmi'
+	icon_state = ICON_STATE_WORLD
+	color = COLOR_PURPLE
 	spawn_nothing_percentage = 50
 
 /obj/random/contraband/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/haircomb =                               4,
+		/obj/item/grooming/comb =                               4,
 		/obj/item/storage/pill_bottle/painkillers =        3,
 		/obj/item/storage/pill_bottle/strong_painkillers = 1,
 		/obj/item/storage/pill_bottle/happy =              2,
@@ -89,7 +90,7 @@
 		/obj/item/pen/multi,
 		/obj/item/storage/box/matches,
 		/obj/item/stack/material/cardstock/mapped/cardboard,
-		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/box/fancy/cigarettes,
 		/obj/item/deck/cards
 	)
 	return spawnable_choices
@@ -120,10 +121,8 @@
 			spawnable_choices[trash_type] = 95
 		for(var/trash_type in typesof(/obj/item/trash/cigbutt))
 			spawnable_choices[trash_type] = 95
-		spawnable_choices -= /obj/item/trash/plate
 		spawnable_choices -= /obj/item/trash/snack_bowl
 		spawnable_choices -= /obj/item/trash/syndi_cakes
-		spawnable_choices -= /obj/item/trash/tray
 		var/lunches = lunchables_lunches()
 		for(var/lunch in lunches)
 			spawnable_choices[lunches[lunch]] = 1
@@ -184,16 +183,16 @@
 		/obj/item/stack/material/panel/mapped/plastic/ten,
 		/obj/item/stack/material/plank/mapped/wood/ten,
 		/obj/item/stack/material/cardstock/mapped/cardboard/ten,
-		/obj/item/stack/material/reinforced/mapped/plasteel/ten,
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten,
 		/obj/item/stack/material/sheet/mapped/steel/fifty,
-		/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+		/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 		/obj/item/stack/material/ingot/mapped/copper/fifty,
 		/obj/item/stack/material/pane/mapped/glass/fifty,
 		/obj/item/stack/material/pane/mapped/rglass/fifty,
 		/obj/item/stack/material/panel/mapped/plastic/fifty,
 		/obj/item/stack/material/plank/mapped/wood/fifty,
 		/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-		/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 		/obj/item/stack/material/rods/ten,
 		/obj/item/stack/material/rods/fifty
 	)
@@ -238,20 +237,20 @@
 /obj/random/smokes
 	name = "random smokeable"
 	desc = "This is a random smokeable item."
-	icon = 'icons/obj/cigarettes.dmi'
+	icon = 'icons/obj/items/storage/cigpack/acme.dmi'
 	icon_state = "Bpacket"
 
 /obj/random/smokes/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/fancy/cigarettes =                      5,
-		/obj/item/storage/fancy/cigarettes/dromedaryco =          4,
-		/obj/item/storage/fancy/cigarettes/killthroat =           1,
-		/obj/item/storage/fancy/cigarettes/luckystars =           3,
-		/obj/item/storage/fancy/cigarettes/jerichos =             3,
-		/obj/item/storage/fancy/cigarettes/menthols =             2,
-		/obj/item/storage/fancy/cigarettes/carcinomas =           3,
-		/obj/item/storage/fancy/cigarettes/professionals =        2,
-		/obj/item/storage/fancy/cigar =                           1,
+		/obj/item/storage/box/fancy/cigarettes =                      5,
+		/obj/item/storage/box/fancy/cigarettes/dromedaryco =          4,
+		/obj/item/storage/box/fancy/cigarettes/killthroat =           1,
+		/obj/item/storage/box/fancy/cigarettes/luckystars =           3,
+		/obj/item/storage/box/fancy/cigarettes/jerichos =             3,
+		/obj/item/storage/box/fancy/cigarettes/menthols =             2,
+		/obj/item/storage/box/fancy/cigarettes/carcinomas =           3,
+		/obj/item/storage/box/fancy/cigarettes/professionals =        2,
+		/obj/item/storage/box/fancy/cigar =                           1,
 		/obj/item/clothing/mask/smokable/cigarette =              2,
 		/obj/item/clothing/mask/smokable/cigarette/menthol =      2,
 		/obj/item/clothing/mask/smokable/cigarette/cigar =        1,
@@ -277,7 +276,7 @@
 		/obj/item/storage/box =                            5,
 		/obj/item/storage/box/donkpockets =                3,
 		/obj/item/storage/box/sinpockets =                 1,
-		/obj/item/storage/box/donut =                      2,
+		/obj/item/storage/box/fancy/donut =                      2,
 		/obj/item/storage/box/cups =                       3,
 		/obj/item/storage/box/mousetraps =                 4,
 		/obj/item/storage/box/engineer =                   3,
@@ -318,7 +317,7 @@
 	name = "random loot"
 	desc = "This is some random loot."
 	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift3"
+	icon_state = "gift_3"
 
 /obj/random/loot/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -345,7 +344,7 @@
 		/obj/item/stack/material/ingot/mapped/platinum/ten =      8,
 		/obj/item/stack/material/aerogel/mapped/tritium/ten =     7,
 		/obj/item/stack/material/segment/mapped/mhydrogen/ten =   6,
-		/obj/item/stack/material/reinforced/mapped/plasteel/ten = 9,
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten = 9,
 		/obj/item/stack/material/ingot/mapped/copper/ten =        8,
 		/obj/item/storage/box/monkeycubes =                       5,
 		/obj/item/storage/firstaid/surgery =                      4,
@@ -370,7 +369,7 @@
 	name = "random vending machine"
 	desc = "This is a randomly selected vending machine."
 	icon = 'icons/obj/vending.dmi'
-	icon_state = ""
+	icon_state = "coffee-hellfire"
 
 /obj/random/vendor/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -383,23 +382,71 @@
 /obj/random/lipstick
 	name = "random lipstick"
 	desc = "This is a tube of lipstick."
-	icon = 'icons/obj/items/lipstick.dmi'
+	icon = 'icons/obj/items/cosmetics/lipstick.dmi'
 	icon_state = "lipstick_closed"
 
 /obj/random/lipstick/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/lipstick,
-		/obj/item/lipstick/blue,
-		/obj/item/lipstick/green,
-		/obj/item/lipstick/turquoise,
-		/obj/item/lipstick/violet,
-		/obj/item/lipstick/yellow,
-		/obj/item/lipstick/orange,
-		/obj/item/lipstick/white,
-		/obj/item/lipstick/black
+		/obj/item/cosmetics/lipstick/red,
+		/obj/item/cosmetics/lipstick/blue,
+		/obj/item/cosmetics/lipstick/green,
+		/obj/item/cosmetics/lipstick/turquoise,
+		/obj/item/cosmetics/lipstick/violet,
+		/obj/item/cosmetics/lipstick/yellow,
+		/obj/item/cosmetics/lipstick/orange,
+		/obj/item/cosmetics/lipstick/white,
+		/obj/item/cosmetics/lipstick/black
 	)
 	return spawnable_choices
 
+/obj/random/eyeshadow
+	name = "random eyeshadow"
+	desc = "This is a tube of eyeshadow."
+	icon = 'icons/obj/items/cosmetics/eyeshadow.dmi'
+	icon_state = "eyeshadow_closed"
+
+/obj/random/eyeshadow/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/cosmetics/eyeshadow/red,
+		/obj/item/cosmetics/eyeshadow/blue,
+		/obj/item/cosmetics/eyeshadow/green,
+		/obj/item/cosmetics/eyeshadow/turquoise,
+		/obj/item/cosmetics/eyeshadow/violet,
+		/obj/item/cosmetics/eyeshadow/yellow,
+		/obj/item/cosmetics/eyeshadow/orange,
+		/obj/item/cosmetics/eyeshadow/white,
+		/obj/item/cosmetics/eyeshadow/black
+	)
+	return spawnable_choices
+
+/obj/random/makeup
+	name = "random makeup"
+	desc = "This is a tube of makeup."
+	icon = 'icons/obj/items/cosmetics/lipstick.dmi'
+	icon_state = "lipstick_closed"
+
+/obj/random/makeup/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/cosmetics/lipstick/red,
+		/obj/item/cosmetics/lipstick/blue,
+		/obj/item/cosmetics/lipstick/green,
+		/obj/item/cosmetics/lipstick/turquoise,
+		/obj/item/cosmetics/lipstick/violet,
+		/obj/item/cosmetics/lipstick/yellow,
+		/obj/item/cosmetics/lipstick/orange,
+		/obj/item/cosmetics/lipstick/white,
+		/obj/item/cosmetics/lipstick/black,
+		/obj/item/cosmetics/eyeshadow/red,
+		/obj/item/cosmetics/eyeshadow/blue,
+		/obj/item/cosmetics/eyeshadow/green,
+		/obj/item/cosmetics/eyeshadow/turquoise,
+		/obj/item/cosmetics/eyeshadow/violet,
+		/obj/item/cosmetics/eyeshadow/yellow,
+		/obj/item/cosmetics/eyeshadow/orange,
+		/obj/item/cosmetics/eyeshadow/white,
+		/obj/item/cosmetics/eyeshadow/black
+	)
+	return spawnable_choices
 
 /obj/random/crayon
 	name = "random crayon"

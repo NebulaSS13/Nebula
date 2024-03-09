@@ -46,5 +46,5 @@
 	// bolds the changelog button on the interface so we know there are updates.
 	if(client.prefs?.lastchangelog != global.changelog_hash)
 		to_chat(client, SPAN_NOTICE("You have unread updates in the changelog."))
-		if(config.aggressive_changelog)
+		if(get_config_value(/decl/config/toggle/aggressive_changelog))
 			client.changes()

@@ -5,7 +5,7 @@
 	name = "circuitboard (photocopier)"
 	build_path = /obj/machinery/photocopier
 	board_type = "machine"
-	origin_tech = "{'engineering':1, 'programming':1}"
+	origin_tech = @'{"engineering":1, "programming":1}'
 	req_components = list(
 			/obj/item/stock_parts/printer/buildable = 1,
 			/obj/item/stock_parts/manipulator       = 2,
@@ -28,7 +28,7 @@
 	density               = TRUE
 	idle_power_usage      = 30
 	active_power_usage    = 200
-	atom_flags            = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags            = ATOM_FLAG_CLIMBABLE
 	obj_flags             = OBJ_FLAG_ANCHORABLE
 	construct_state       = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(
@@ -60,10 +60,10 @@
 	printer = get_component_of_type(/obj/item/stock_parts/printer) //Cache the printer component
 	if(printer)
 		printer.show_queue_ctrl = FALSE //Make sure we don't let users mess with the print queue
-		printer.register_on_printed_page(  CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
-		printer.register_on_finished_queue(CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
-		printer.register_on_print_error(   CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
-		printer.register_on_status_changed(CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
+		printer.register_on_printed_page(  CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
+		printer.register_on_finished_queue(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
+		printer.register_on_print_error(   CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
+		printer.register_on_status_changed(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
 
 /obj/machinery/photocopier/on_update_icon()
 	cut_overlays()

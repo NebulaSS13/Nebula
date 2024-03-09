@@ -39,11 +39,11 @@
 			add_overlay(cur_overlays)
 	update_clothing_icon()
 
-/obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart, skip_offset = FALSE)
+/obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, force_skip_offset = FALSE, skip_offset = FALSE)
 	var/image/ret = ..()
 	if(ret && slot == slot_belt_str && length(contents))
 		for(var/obj/item/I in contents)
-			var/image/new_overlay = I.get_mob_overlay(user_mob, slot, bodypart)
+			var/image/new_overlay = I.get_mob_overlay(user_mob, slot, bodypart, use_fallback_if_icon_missing, TRUE)
 			if(new_overlay)
 				ret.overlays += new_overlay
 	return ret
@@ -167,7 +167,7 @@
 		/obj/item/chems/pill,
 		/obj/item/chems/syringe,
 		/obj/item/flame/lighter/zippo,
-		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/box/fancy/cigarettes,
 		/obj/item/storage/pill_bottle,
 		/obj/item/stack/medical,
 		/obj/item/flashlight/pen,

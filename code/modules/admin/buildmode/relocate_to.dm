@@ -34,14 +34,14 @@
 	ClearRelocator()
 
 	to_relocate = new_relocator
-	events_repository.register(/decl/observ/destroyed, to_relocate, src, /datum/build_mode/relocate_to/proc/ClearRelocator)
+	events_repository.register(/decl/observ/destroyed, to_relocate, src, TYPE_PROC_REF(/datum/build_mode/relocate_to, ClearRelocator))
 	to_chat(user, "<span class='notice'>Will now be relocating \the [to_relocate].</span>")
 
 /datum/build_mode/relocate_to/proc/ClearRelocator(var/feedback)
 	if(!to_relocate)
 		return
 
-	events_repository.unregister(/decl/observ/destroyed, to_relocate, src, /datum/build_mode/relocate_to/proc/ClearRelocator)
+	events_repository.unregister(/decl/observ/destroyed, to_relocate, src, TYPE_PROC_REF(/datum/build_mode/relocate_to, ClearRelocator))
 	to_relocate = null
 	if(feedback)
 		Warn("The selected relocation object was deleted.")

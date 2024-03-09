@@ -34,9 +34,10 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 
 /obj/aura/hitby()
 	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /obj/aura/debug
-	var/returning = 0
+	var/returning = FALSE
 
 /obj/aura/debug/attackby(var/obj/item/I, var/mob/user)
 	log_debug("Attackby for \ref[src]: [I], [user]")

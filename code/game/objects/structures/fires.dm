@@ -29,7 +29,7 @@
 	var/const/light_color_low =  "#ff0000"
 
 	var/list/affected_exterior_turfs
-	var/list/exterior_temperature = 30 // Celcius, but it is added directly to a Kelvin value so don't do any conversion.
+	var/list/exterior_temperature = 30 // Celsius, but it is added directly to a Kelvin value so don't do any conversion.
 
 	var/output_temperature = T0C+50  // The amount that the fire will try to heat up the air.
 	var/fuel = 0                     // How much fuel is left?
@@ -123,6 +123,11 @@
 		if(oxidizer.gas_flags & XGM_GAS_OXIDIZER)
 			return TRUE
 
+/obj/structure/fire_source/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	. = ..()
+	if(!QDELETED(src))
+		light()
+
 /obj/structure/fire_source/proc/light(var/force)
 	if(!check_atmos())
 		return FALSE
@@ -148,13 +153,14 @@
 			burn(user)
 		else
 			visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
+		update_icon()
 		return TRUE
 
 	if(lit != FIRE_LIT && user.a_intent == I_HURT)
 		to_chat(user, SPAN_DANGER("You start stomping on \the [src], trying to destroy it."))
 		if(do_after(user, 5 SECONDS, src))
 			visible_message(SPAN_DANGER("\The [user] stamps and kicks at \the [src] until it is completely destroyed."))
-			qdel(src)
+			physically_destroyed()
 		return TRUE
 
 	return ..()
@@ -179,8 +185,8 @@
 
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
-	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(thing) && user.a_intent != I_HURT)
-		thing.HandleObjectHeating(src, user, DIRECT_HEAT)
+	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(thing) && user.a_intent != I_HURT && lit == FIRE_LIT)
+		thing.handle_external_heating(DIRECT_HEAT, src, user)
 		return TRUE
 
 	if(ATOM_IS_OPEN_CONTAINER(thing))

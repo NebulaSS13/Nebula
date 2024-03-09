@@ -97,7 +97,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/chems/condiment/flour,
 		/obj/item/chems/drinks/milk,
 		/obj/item/chems/drinks/milk,
-		/obj/item/storage/fancy/egg_box,
+		/obj/item/storage/box/fancy/egg_box,
 		/obj/item/chems/food/tofu,
 		/obj/item/chems/food/tofu,
 		/obj/item/chems/food/meat,
@@ -136,7 +136,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/stack/material/plank/mapped/wood,
 		/obj/item/stack/material/panel/mapped/plastic,
 		/obj/item/stack/material/pane/mapped/rglass,
-		/obj/item/stack/material/reinforced/mapped/plasteel)
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel)
 
 /datum/supply_drop_loot/medical
 	name = "Medical"
@@ -170,7 +170,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/stack/material/plank/mapped/wood,
 		/obj/item/stack/material/panel/mapped/plastic,
 		/obj/item/stack/material/pane/mapped/rglass,
-		/obj/item/stack/material/reinforced/mapped/plasteel)
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel)
 
 /datum/supply_drop_loot/hydroponics
 	name = "Hydroponics"

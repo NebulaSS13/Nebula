@@ -1,13 +1,18 @@
-/obj/item/clothing/under/Initialize()
+/obj/item/clothing/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/interactive/multitool/items/clothing)
+	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
+		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
 
 /datum/extension/interactive/multitool/items/clothing/interact(var/obj/item/multitool/M, var/mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
 		return
-	var/obj/item/clothing/under/u = holder
-	if(u.has_sensor == SUIT_NO_SENSORS)
-		to_chat(user, SPAN_WARNING("\The [u] doesn't have suit sensors."))
+	var/obj/item/clothing/uniform = holder
+	if(!istype(uniform))
+		to_chat(user, SPAN_WARNING("\The [user] is not wearing an appropriate uniform."))
 		return
-	u.has_sensor = u.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
-	user.visible_message(SPAN_NOTICE("\The [user] [u.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [u]'s suit sensor controls."), range = 2)
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in uniform.accessories
+	if(!sensor)
+		to_chat(user, SPAN_WARNING("\The [uniform] doesn't have a vitals sensors attached."))
+		return
+	sensor.toggle_sensors_locked()
+	user.visible_message(SPAN_NOTICE("\The [user] [sensor.get_sensors_locked() ? "" : "un"]locks \the [user]'s suit sensor controls."), range = 2)

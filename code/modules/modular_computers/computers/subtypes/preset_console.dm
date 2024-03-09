@@ -71,6 +71,15 @@
 	)
 	autorun_program = /datum/computer_file/program/rcon_console
 
+/obj/machinery/computer/modular/preset/engineering/atmospherics
+	default_software = list(
+		/datum/computer_file/program/atmos_control,
+		/datum/computer_file/program/shutoff_valve,
+		/datum/computer_file/program/alarm_monitor,
+		/datum/computer_file/program/wordprocessor
+	)
+	autorun_program = /datum/computer_file/program/shutoff_valve
+
 /obj/machinery/computer/modular/preset/medical
 	default_software = list(
 		/datum/computer_file/program/suit_sensors,

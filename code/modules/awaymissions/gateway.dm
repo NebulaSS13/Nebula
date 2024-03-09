@@ -35,7 +35,7 @@
 
 /obj/machinery/gateway/centerstation/Initialize()
 	update_icon()
-	wait = world.time + config.gateway_delay	//+ thirty minutes default
+	wait = world.time + get_config_value(/decl/config/num/gateway_delay)	//+ thirty minutes default
 	awaygate = locate(/obj/machinery/gateway/centeraway)
 	. = ..()
 

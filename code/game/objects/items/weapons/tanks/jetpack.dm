@@ -13,7 +13,7 @@
 	action_button_name = "Toggle Jetpack"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':1,'engineering':3}"
+	origin_tech = @'{"materials":1,"engineering":3}'
 
 /obj/item/tank/jetpack/Initialize()
 	. = ..()
@@ -41,7 +41,7 @@
 	if(on)
 		add_overlay("[icon_state]-on")
 
-/obj/item/tank/jetpack/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/tank/jetpack/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && slot == slot_back_str && on)
 		overlay.icon_state = "[overlay.icon_state]-on"
 	. = ..()

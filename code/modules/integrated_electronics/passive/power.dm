@@ -121,18 +121,18 @@
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/on_reagent_change(changetype)
 	..()
-	set_pin_data(IC_OUTPUT, 1, reagents.total_volume)
+	set_pin_data(IC_OUTPUT, 1, reagents?.total_volume || 0)
 	push_data()
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/make_energy()
 	if(assembly)
 		if(assembly.battery)
 			var/battery_charge = 5000
-			if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > battery_charge && reagents.remove_reagent(/decl/material/liquid/blood, 1)) //only blood is powerful enough to power the station(c)
+			if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > battery_charge && remove_from_reagents(/decl/material/liquid/blood, 1)) //only blood is powerful enough to power the station(c)
 				assembly.give_power(battery_charge)
 			for(var/I in fuel)
 				if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > fuel[I])
-					if(reagents.remove_reagent(I, 1))
+					if(remove_from_reagents(I, 1))
 						assembly.give_power(fuel[I]*multi)
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/do_work()

@@ -1,5 +1,4 @@
-// This system is used to grab a ghost from observers with the required preferences 
-// and lack of bans set. See posibrain.dm for an example of how they are called/used.
+// This system is used to grab a ghost from observers with the required preferences and lack of bans set.
 /decl/ghosttrap
 	var/name
 	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
@@ -30,7 +29,7 @@
 /decl/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
 	if(request_timeout)
 		LAZYSET(request_timeouts, target, world.time + request_timeout)
-		events_repository.register(/decl/observ/destroyed, target, src, /decl/ghosttrap/proc/unregister_target)
+		events_repository.register(/decl/observ/destroyed, target, src, TYPE_PROC_REF(/decl/ghosttrap, unregister_target))
 	else
 		unregister_target(target)
 
@@ -44,7 +43,7 @@
 
 /decl/ghosttrap/proc/unregister_target(var/target)
 	LAZYREMOVE(request_timeouts, target)
-	events_repository.unregister(/decl/observ/destroyed, target, src, /decl/ghosttrap/proc/unregister_target)
+	events_repository.unregister(/decl/observ/destroyed, target, src, TYPE_PROC_REF(/decl/ghosttrap, unregister_target))
 
 // Handles a response to request_player().
 /decl/ghosttrap/Topic(href, href_list)
@@ -57,7 +56,7 @@
 			return
 		if(candidate != usr)
 			return
-		
+
 		var/timeout = LAZYACCESS(request_timeouts, target)
 		if(!isnull(timeout) && world.time > timeout)
 			to_chat(candidate, "This occupation request is no longer valid.")
@@ -95,33 +94,42 @@
 		target.SetName(target.real_name)
 
 /***********************************
-* Positronic brains. *
+* Computer intelligence cores. *
 ***********************************/
-/decl/ghosttrap/positronic_brain
-	name = "positronic brain"
+/decl/ghosttrap/machine_intelligence
+	name = "machine intelligence"
 	ban_checks = list("AI",ASSIGNMENT_ROBOT)
-	pref_check = "ghost_posibrain"
-	ghost_trap_message = "They are occupying a positronic brain now."
+	pref_check = "ghost_machine_intelligence"
+	ghost_trap_message = "They are occupying a computer intelligence core now."
 
-/decl/ghosttrap/positronic_brain/forced(var/mob/user)
-	var/obj/item/organ/internal/posibrain/brain = new(get_turf(user))
-	if(!brain.brainmob)
-		brain.init()
-	request_player(brain.brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
+/decl/ghosttrap/machine_intelligence/transfer_personality(mob/candidate, mob/target)
+	if(assess_candidate(candidate))
 
-/decl/ghosttrap/positronic_brain/welcome_candidate(var/mob/target)
-	to_chat(target, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
+		var/obj/item/organ/internal/brain/robotic/brain = target.loc?.loc
+		if(!istype(brain))
+			return FALSE
+
+		brain.transfer_key_to_brainmob(candidate, update_brainmob = FALSE)
+		brain.searching = FALSE
+		brain.update_icon()
+		announce_ghost_joinleave(candidate, 0, "[ghost_trap_message]")
+
+		var/mob/living/brainmob = brain.get_brainmob(create_if_missing = TRUE)
+		if(brainmob)
+			welcome_candidate(brainmob)
+			return TRUE
+
+/decl/ghosttrap/machine_intelligence/forced(var/mob/user)
+	var/obj/item/organ/internal/brain/robotic/brain = new(get_turf(user))
+	request_player(brain.get_brainmob(create_if_missing = TRUE), "Someone is requesting a player for a machine intelligence.", 60 SECONDS)
+
+/decl/ghosttrap/machine_intelligence/welcome_candidate(var/mob/target)
+	to_chat(target, "<b>You are a machine intelligence, brought into existence on [station_name()].</b>")
 	to_chat(target, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
 	to_chat(target, "<b>Remember, the purpose of your existence is to serve the crew and the [station_name()]. Above all else, do no harm.</b>")
 	to_chat(target, "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>")
 	var/turf/T = get_turf(target)
-	var/obj/item/organ/internal/posibrain/P = target.loc
-	T.visible_message("<span class='notice'>\The [P] chimes quietly.</span>")
-	if(!istype(P)) //wat
-		return
-	P.searching = 0
-	P.SetName("positronic brain ([P.brainmob.name])")
-	P.update_icon()
+	T.visible_message(SPAN_NOTICE("\The [target] beeps loudly."))
 
 /***********************************
 * Walking mushrooms and such. *
@@ -131,7 +139,7 @@
 	ban_checks = list("Botany Roles")
 	pref_check = "ghost_plant"
 	ghost_trap_message = "They are occupying a living plant now."
-	
+
 /decl/ghosttrap/sentient_plant/forced(var/mob/user)
 	request_player(new /mob/living/simple_animal/mushroom(get_turf(user)), "Someone is harvesting a walking mushroom.", 15 SECONDS)
 

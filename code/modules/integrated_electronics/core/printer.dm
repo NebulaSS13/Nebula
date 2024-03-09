@@ -156,7 +156,7 @@
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
 
-	if(config.allow_ic_printing || debug)
+	if(get_config_value(/decl/config/toggle/on/allow_ic_printing) || debug)
 		HTML += "Assembly cloning: [can_clone ? (fast_clone ? "Instant" : "Available") : "Unavailable"].<br>"
 
 	HTML += "Circuits available: [upgraded || debug ? "Advanced":"Regular"]."
@@ -164,7 +164,7 @@
 		HTML += "<br>Crossed out circuits mean that the printer is not sufficiently upgraded to create that circuit."
 
 	HTML += "<hr>"
-	if((can_clone && config.allow_ic_printing) || debug)
+	if((can_clone && get_config_value(/decl/config/toggle/on/allow_ic_printing)) || debug)
 		HTML += "Here you can load script for your assembly.<br>"
 		if(!cloning)
 			HTML += " <A href='?src=\ref[src];print=load'>{Load Program}</a> "
@@ -218,14 +218,8 @@
 		if(!build_type || !ispath(build_type))
 			return TRUE
 
-		var/list/cost
-		if(ispath(build_type, /obj/item/electronic_assembly))
-			var/obj/item/electronic_assembly/E = SScircuit.cached_assemblies[build_type]
-			cost = E.matter
-		else if(ispath(build_type, /obj/item/integrated_circuit))
-			var/obj/item/integrated_circuit/IC = SScircuit.cached_components[build_type]
-			cost = IC.matter
-		else if(!(build_type in SScircuit.circuit_fabricator_recipe_list["Tools"]))
+		var/list/cost = atom_info_repository.get_matter_for(build_type)
+		if(!ispath(build_type, /obj/item/electronic_assembly) && !ispath(build_type, /obj/item/integrated_circuit) && !(build_type in SScircuit.circuit_fabricator_recipe_list["Tools"]))
 			return
 
 		if(!debug && !subtract_material_costs(cost, usr))
@@ -243,7 +237,7 @@
 		playsound(src, 'sound/items/jaws_pry.ogg', 50, TRUE)
 
 	if(href_list["print"])
-		if(!config.allow_ic_printing && !debug)
+		if(!get_config_value(/decl/config/toggle/on/allow_ic_printing) && !debug)
 			to_chat(usr, "<span class='warning'>Your facility has disabled printing of custom circuitry due to recent allegations of copyright infringement.</span>")
 			return
 		if(!can_clone) // Copying and printing ICs is cloning
@@ -308,7 +302,7 @@
 					to_chat(usr, "<span class='notice'>You begin printing a custom assembly. This will take approximately [round(cloning_time/10)] seconds. You can still print \
 					off normal parts during this time.</span>")
 					playsound(src, 'sound/items/poster_being_created.ogg', 50, TRUE)
-					addtimer(CALLBACK(src, .proc/print_program, usr), cloning_time)
+					addtimer(CALLBACK(src, PROC_REF(print_program), usr), cloning_time)
 
 			if("cancel")
 				if(!cloning || !program)
@@ -338,16 +332,16 @@
 	desc = "Install this into your integrated circuit printer to enhance it."
 	color = COLOR_GRAY20
 	label = "label_up"
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':3,'engineering':3}"
+	origin_tech = @'{"materials":3,"engineering":3}'
 
 /obj/item/disk/integrated_circuit/upgrade/clone
 	name = "integrated circuit printer upgrade disk - instant cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies instantaneously."
-	origin_tech = "{'materials':3,'programming':5}"
+	origin_tech = @'{"materials":3,"programming":5}'

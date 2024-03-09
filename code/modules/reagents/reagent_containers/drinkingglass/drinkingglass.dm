@@ -26,7 +26,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
 	var/static/list/filling_icons_cache = list()
 
-	center_of_mass =@"{'x':16,'y':9}"
+	center_of_mass =@'{"x":16,"y":9}'
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[5,10,15,30]"
@@ -107,16 +107,15 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = custom_desc || ..()
 
 /obj/item/chems/drinks/glass2/on_reagent_change()
-	temperature_coefficient = 4 / max(1, reagents.total_volume)
+	temperature_coefficient = 4 / max(1, reagents?.total_volume)
 	..()
 
 /obj/item/chems/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)
 	if(!("[overlay_base_icon]_[GE.glass_addition]left" in icon_states(icon)))
-		return 0
+		return FALSE
 	if(!("[overlay_base_icon]_[GE.glass_addition]right" in icon_states(icon)))
-		return 0
-
-	return 1
+		return FALSE
+	return TRUE
 
 /obj/item/chems/drinks/glass2/examine(mob/user, distance)
 	. = ..()
@@ -213,7 +212,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		side = "right"
 
 /obj/item/chems/drinks/glass2/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/kitchen/utensil/spoon))
+	if(istype(W, /obj/item/utensil/spoon))
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='warning'>[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube.</span>")
 			playsound(src, "shatter", 30, 1)

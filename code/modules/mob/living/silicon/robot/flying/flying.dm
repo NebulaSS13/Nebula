@@ -21,7 +21,7 @@
 	components["comms"] =          new/datum/robot_component/binary_communication(src)
 	components["armour"] =         new/datum/robot_component/armour/light(src)
 
-/mob/living/silicon/robot/flying/Life()
+/mob/living/silicon/robot/flying/handle_regular_status_updates()
 	. = ..()
 	if(incapacitated() || !is_component_functioning("actuator"))
 		stop_flying()
@@ -38,9 +38,9 @@
 	default_pixel_y = -8
 	stop_floating()
 
-/mob/living/silicon/robot/flying/death()
+/mob/living/silicon/robot/flying/death(gibbed)
 	. = ..()
-	if(!QDELETED(src) && stat == DEAD)
+	if(. && !gibbed)
 		stop_flying()
 
 /mob/living/silicon/robot/flying/Process_Spacemove()

@@ -62,7 +62,7 @@ Must be implemented by subtypes.
 			return islist(new_value)
 		if(IC_FORMAT_INDEX)
 			return isnum(new_value)
-		
+
 /*
 Listener registration. You must unregister yourself if you are destroyed; the owner being destroyed will be handled automatically.
 */
@@ -75,7 +75,7 @@ Listener registration. You must unregister yourself if you are destroyed; the ow
 		return // Can try and register, but updates aren't coming
 	if(!listeners[owner])
 		listeners[owner] = list()
-		events_repository.register(/decl/observ/destroyed, owner, src, .proc/owner_destroyed)
+		events_repository.register(/decl/observ/destroyed, owner, src, PROC_REF(owner_destroyed))
 	LAZYADD(listeners[owner][listener], registered_proc)
 	return TRUE
 

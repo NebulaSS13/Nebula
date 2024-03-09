@@ -58,3 +58,11 @@
 		/datum/computer_file/program/records,
 		/datum/computer_file/program/wordprocessor
 	)
+
+/obj/item/modular_computer/laptop/preset/medical
+	default_programs = list(
+		/datum/computer_file/program/suit_sensors,
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/records,
+		/datum/computer_file/program/wordprocessor
+	)

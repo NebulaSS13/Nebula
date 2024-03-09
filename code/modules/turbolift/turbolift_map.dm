@@ -157,7 +157,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 					return
 
 				// Update path appropriately if needed.
-				var/swap_to = /turf/simulated/open
+				var/swap_to = /turf/space // this will be resolved to the appropriate open turf type by ChangeTurf().
 				if(cz == uz)                                                                       // Elevator.
 					if(wall_type && (tx == ux || ty == uy || tx == ex || ty == ey) && !(tx >= door_x1 && tx <= door_x2 && ty >= door_y1 && ty <= door_y2))
 						swap_to = wall_type

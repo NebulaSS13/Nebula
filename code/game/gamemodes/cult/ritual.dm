@@ -39,10 +39,10 @@
 	if(istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes_str), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
-	if(T.holy)
+	if(is_holy_turf(T))
 		to_chat(src, "<span class='warning'>This place is blessed, you may not draw runes on it - defile it first.</span>")
 		return
-	if(!istype(T, /turf/simulated))
+	if(!T.simulated)
 		to_chat(src, "<span class='warning'>You need more space to draw a rune here.</span>")
 		return
 	if(locate(/obj/effect/rune) in T)
@@ -89,7 +89,7 @@
 		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
-		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
+		var/obj/effect/rune/R = new rune(T, get_blood_color(), get_blood_name())
 		var/area/A = get_area(R)
 		log_and_message_admins("created \an [R.cultname] rune at \the [A.proper_name].")
 		R.add_fingerprint(src)
@@ -128,12 +128,6 @@
 
 /mob/living/carbon/human/mob_needs_tome()
 	return 1
-
-/mob/proc/get_rune_color()
-	return "#c80000"
-
-/mob/living/carbon/human/get_rune_color()
-	return species.get_blood_color(src)
 
 var/global/list/Tier1Runes = list(
 	/mob/proc/convert_rune,

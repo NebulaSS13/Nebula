@@ -5,7 +5,7 @@
 	enabled = 1
 	icon_state = "teslalink"
 	hardware_size = 1
-	origin_tech = "{'programming':2,'powerstorage':3,'engineering':2}"
+	origin_tech = @'{"programming":2,"powerstorage":3,"engineering":2}'
 	material = /decl/material/solid/metal/steel
 
 	var/passive_charging_rate = 250			// W

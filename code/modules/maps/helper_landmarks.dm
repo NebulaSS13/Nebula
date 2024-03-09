@@ -103,11 +103,11 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 
 /obj/abstract/landmark/delete_on_shuttle/Initialize()
 	. = ..()
-	events_repository.register_global(/decl/observ/shuttle_added, src, .proc/check_shuttle)
+	events_repository.register_global(/decl/observ/shuttle_added, src, PROC_REF(check_shuttle))
 
 /obj/abstract/landmark/delete_on_shuttle/proc/check_shuttle(var/shuttle)
 	if(SSshuttle.shuttles[shuttle_name] == shuttle)
-		events_repository.register(/decl/observ/shuttle_moved, shuttle, src, .proc/delete_everything)
+		events_repository.register(/decl/observ/shuttle_moved, shuttle, src, PROC_REF(delete_everything))
 		shuttle_datum = shuttle
 
 /obj/abstract/landmark/delete_on_shuttle/proc/delete_everything()
@@ -117,9 +117,9 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	qdel(src)
 
 /obj/abstract/landmark/delete_on_shuttle/Destroy()
-	events_repository.unregister_global(/decl/observ/shuttle_added, src, .proc/check_shuttle)
+	events_repository.unregister_global(/decl/observ/shuttle_added, src, PROC_REF(check_shuttle))
 	if(shuttle_datum)
-		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/delete_everything)
+		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src, PROC_REF(delete_everything))
 	. = ..()
 
 // Has a percent chance on spawn to set the specified variable on the specified type to the specified value.

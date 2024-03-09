@@ -3,7 +3,7 @@
 	hud_type = /datum/hud/animal
 
 /datum/hud/animal/FinalizeInstantiation()
-	action_intent = new /obj/screen/intent()
+	action_intent = new(null, mymob)
 	adding += action_intent
 	..()
 

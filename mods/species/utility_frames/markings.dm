@@ -4,7 +4,7 @@
 	body_parts = list(BP_CHEST)
 	species_allowed = list(SPECIES_FRAME)
 	icon = 'mods/species/utility_frames/icons/markings.dmi'
-	blend = ICON_MULTIPLY
+	color_blend = ICON_MULTIPLY
 	uid = "acc_marking_frame_stripe"
 
 /decl/sprite_accessory/marking/frame/head_stripe

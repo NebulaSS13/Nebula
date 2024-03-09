@@ -403,6 +403,7 @@
 
 /obj/item/magnetic_tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	ruin()
+	return ..()
 
 /obj/item/magnetic_tape/attack_self(mob/user)
 	if(!ruined)

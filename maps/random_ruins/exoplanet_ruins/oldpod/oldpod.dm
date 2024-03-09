@@ -6,7 +6,7 @@
 	suffixes = list("oldpod/oldpod.dmm")
 	cost = 0.5
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
-	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	template_tags = TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_WRECK
 	apc_test_exempt_areas = list(
 		/area/map_template/oldpod = NO_APC
 	)

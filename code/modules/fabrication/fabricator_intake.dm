@@ -15,7 +15,7 @@
 		var/reagent_matter = round(taking_reagent / REAGENT_UNITS_PER_MATERIAL_UNIT)
 		if(reagent_matter <= 0)
 			continue
-		thing.reagents.remove_reagent(R, taking_reagent)
+		thing.remove_from_reagents(R, taking_reagent)
 		stored_material[R] += reagent_matter
 		// If we're destroying this, take everything.
 		if(destructive)
@@ -66,7 +66,7 @@
 			adding_mat_overlay.color = mat_colour
 			material_overlays += adding_mat_overlay
 			update_icon()
-			addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/remove_mat_overlay, adding_mat_overlay), 1 SECOND)
+			addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/fabricator, remove_mat_overlay), adding_mat_overlay), 1 SECOND)
 
 		if(stack_ref && stacks_used)
 			stack_ref.use(stacks_used)

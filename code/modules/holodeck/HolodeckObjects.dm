@@ -98,6 +98,7 @@
 	icon = 'icons/misc/beach.dmi'
 	base_icon = 'icons/misc/beach.dmi'
 	initial_flooring = null
+	abstract_type = /turf/simulated/floor/holofloor/beach
 
 /turf/simulated/floor/holofloor/beach/sand
 	name = "sand"
@@ -155,7 +156,7 @@
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			hit(W.force)
-			if(health <= 7)
+			if(current_health <= 7)
 				anchored = FALSE
 				update_nearby_icons()
 				step(src, get_dir(user, src))
@@ -231,7 +232,7 @@
 	throw_range = 5
 	throwforce = 0
 	w_class = ITEM_SIZE_SMALL
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	base_parry_chance = 50
 	var/active = 0
 	var/item_color
@@ -419,9 +420,22 @@
 		faction = "carp"
 		natural_weapon.force = initial(natural_weapon.force)
 
-/mob/living/simple_animal/hostile/carp/holodeck/gib(anim="gibbed-m",do_gibs)
-	death()
+/mob/living/simple_animal/hostile/carp/holodeck/gib(do_gibs)
+	SHOULD_CALL_PARENT(FALSE)
+	if(stat != DEAD)
+		death(gibbed = TRUE)
+	if(stat == DEAD)
+		qdel(src)
+		return TRUE
+	return FALSE
 
-/mob/living/simple_animal/hostile/carp/holodeck/death()
-	..(null, "fades away!", "You have been destroyed.")
-	qdel(src)
+/mob/living/simple_animal/hostile/carp/get_death_message(gibbed)
+	return "fades away..."
+
+/mob/living/simple_animal/hostile/carp/holodeck/get_self_death_message(gibbed)
+	return "You have been destroyed."
+
+/mob/living/simple_animal/hostile/carp/holodeck/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		gib()

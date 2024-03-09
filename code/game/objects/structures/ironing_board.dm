@@ -31,7 +31,7 @@
 		holding = null
 
 	update_icon()
-	events_repository.unregister(/decl/observ/destroyed, I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
+	events_repository.unregister(/decl/observ/destroyed, I, src, TYPE_PROC_REF(/obj/structure/bed/roller/ironingboard, remove_item))
 
 // make a screeching noise to drive people mad
 /obj/structure/bed/roller/ironingboard/Move()
@@ -76,7 +76,7 @@
 
 		if(user.try_unequip(I, src))
 			cloth = I
-			events_repository.register(/decl/observ/destroyed, I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
+			events_repository.register(/decl/observ/destroyed, I, src, TYPE_PROC_REF(/obj/structure/bed/roller/ironingboard, remove_item))
 			update_icon()
 		return
 	else if(istype(I,/obj/item/ironingiron))
@@ -101,7 +101,7 @@
 		if(!cloth)
 			if(!holding && !R.enabled && user.try_unequip(I, src))
 				holding = R
-				events_repository.register(/decl/observ/destroyed, I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
+				events_repository.register(/decl/observ/destroyed, I, src, TYPE_PROC_REF(/obj/structure/bed/roller/ironingboard, remove_item))
 				update_icon()
 				return
 			to_chat(user, "<span class='notice'>There isn't anything on the ironing board.</span>")
@@ -150,4 +150,5 @@
 	name = "ironing board"
 	desc = "A collapsed ironing board that can be carried around."
 	icon = 'icons/obj/structures/ironing.dmi'
+	icon_state = "folded"
 	structure_form_type = /obj/structure/bed/roller/ironingboard

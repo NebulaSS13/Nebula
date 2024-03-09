@@ -87,8 +87,8 @@
 
 	sleep(80)
 
-	if(H.psi)
-		H.psi.reset()
+	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	psi?.reset()
 
 	to_chat(H, SPAN_NOTICE("\The [src] chimes quietly as it finishes removing the subpersonas from your brain."))
 
@@ -108,8 +108,9 @@
 	. = ..()
 	if(.)
 		var/mob/living/carbon/human/H = lastloc
-		if(istype(H) && H.psi)
-			H.psi.reset()
+		if(istype(H))
+			var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+			psi?.reset()
 		H = loc
 		if(!istype(H) || H.get_equipped_item(slot_head_str) != src)
 			canremove = TRUE
@@ -148,10 +149,11 @@
 			H.set_psi_rank(faculty, boosted_rank, take_larger = TRUE, temporary = TRUE)
 		else
 			H.set_psi_rank(faculty, unboosted_rank, take_larger = TRUE, temporary = TRUE)
-	if(H.psi)
-		H.psi.max_stamina = boosted_psipower
-		H.psi.stamina = H.psi.max_stamina
-		H.psi.update(force = TRUE)
+	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(psi)
+		psi.max_stamina = boosted_psipower
+		psi.stamina = psi.max_stamina
+		psi.update(force = TRUE)
 
 	to_chat(H, SPAN_NOTICE("You experience a brief but powerful wave of deja vu as \the [src] finishes modifying your brain."))
 	verbs |= /obj/item/clothing/head/helmet/space/psi_amp/proc/deintegrate

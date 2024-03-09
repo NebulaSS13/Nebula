@@ -10,8 +10,9 @@ var/global/savefile/Banlist
 
 	. = list()
 	var/appeal
-	if(config && config.banappeals)
-		appeal = "\nFor more information on your ban, or to appeal, head to <a href='[config.banappeals]'>[config.banappeals]</a>"
+	var/appealurl = get_config_value(/decl/config/text/banappeals)
+	if(appealurl)
+		appeal = "\nFor more information on your ban, or to appeal, head to <a href='[appealurl]'>[appealurl]</a>"
 	Banlist.cd = "/base"
 	if( "[ckey][id]" in Banlist.dir )
 		Banlist.cd = "[ckey][id]"

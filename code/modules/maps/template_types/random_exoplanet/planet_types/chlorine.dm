@@ -86,7 +86,7 @@
 	name                       = "chlorine exoplanet"
 	planetoid_data_type        = /datum/planetoid_data/random/chlorine
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine
-	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
+	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_WATER
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/chlorine
 	prefered_level_data_per_z  = list(
@@ -101,7 +101,7 @@
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor           = "chlorine exoplanet"
 	land_type            = /turf/exterior/chlorine_sand
-	water_type           = /turf/exterior/water/chlorine
+	water_type           = /turf/exterior/chlorine_sand/marsh
 	water_level_min      = 2
 	water_level_max      = 3
 	fauna_prob           = 2

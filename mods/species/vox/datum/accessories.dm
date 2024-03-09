@@ -70,7 +70,7 @@
 	body_flags_allowed = BODY_FLAG_VOX
 	bodytype_categories_allowed = list(BODYTYPE_VOX)
 	icon = 'mods/species/vox/icons/body/soldier/markings.dmi'
-	blend = ICON_MULTIPLY
+	color_blend = ICON_MULTIPLY
 	uid = "acc_markings_vox_neck"
 
 /decl/sprite_accessory/marking/vox/claws

@@ -55,8 +55,9 @@
 	if(!parent)
 		..()
 	else
+		var/turf/turf = loc
 		var/datum/gas_mixture/pipe_air = return_air()
-		if(istype(loc, /turf/simulated) || istype(loc, /turf/exterior))
+		if(istype(turf) && turf.simulated)
 			var/turf/pipe_turf = loc
 			var/environment_temperature = 0
 			if(pipe_turf.blocks_air)
@@ -79,7 +80,7 @@
 
 			var/mob/living/carbon/human/H = buckled_mob
 			if(istype(H) && H.species)
-				heat_limit = H.get_temperature_threshold(HEAT_LEVEL_3)
+				heat_limit = H.get_mob_temperature_threshold(HEAT_LEVEL_3)
 
 			if(pipe_air.temperature > heat_limit + 1)
 				buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, BP_CHEST, used_weapon = "Excessive Heat")

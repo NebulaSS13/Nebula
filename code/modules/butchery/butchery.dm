@@ -104,7 +104,7 @@
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
 	return TRUE
 
-/obj/structure/kitchenspike/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/structure/kitchenspike/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
 		try_spike(dropping, user)

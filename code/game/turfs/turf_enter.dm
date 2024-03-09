@@ -5,7 +5,7 @@
 	if(!istype(mover) || !(mover.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		return
 	for(var/atom/movable/neighbor in range(1))
-		if(objects > ENTER_PROXIMITY_LOOP_SANITY) 
+		if(objects > ENTER_PROXIMITY_LOOP_SANITY)
 			break // Don't let ore piles kill the server as well as the client.
 		if(neighbor.movable_flags & MOVABLE_FLAG_PROXMOVE)
 			objects++
@@ -15,17 +15,14 @@
 
 #undef ENTER_PROXIMITY_LOOP_SANITY
 /turf/Entered(var/atom/movable/A, var/atom/old_loc)
-
 	..()
-
-	if(!istype(A))
+	if(!istype(A) || !A.simulated)
 		return
-
-	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
-		H.handle_footsteps()
-
+	if(isliving(A))
+		var/mob/living/walker = A
+		walker.handle_footsteps()
 	queue_temperature_atoms(A)
+	A.update_turf_alpha_mask()
 
 // If an opaque movable atom moves around we need to potentially update visibility.
 	if(A?.opacity && !has_opaque_atom)
@@ -49,6 +46,8 @@
 					I.contaminate()
 					break
 
-	// Handle zmimic
-	if(!A.bound_overlay && !(A.z_flags & ZMM_IGNORE) && TURF_IS_MIMICKING(above))
-		above.update_mimic()
+	// Handle non-listener proximity triggers.
+	handle_proximity_update(A)
+
+	if(simulated)
+		A.OnSimulatedTurfEntered(src, old_loc)

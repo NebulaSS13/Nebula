@@ -176,7 +176,7 @@
 		/obj/item/screwdriver,
 		/obj/item/wrench,
 		/obj/item/hatchet,
-		/obj/item/kitchen/utensil/fork,
+		/obj/item/utensil/fork,
 		/obj/item/shard,
 		/obj/item/flame/lighter,
 		/obj/item/stack/cable_coil
@@ -187,7 +187,7 @@
 		/obj/item/screwdriver,
 		/obj/item/wrench,
 		/obj/item/hatchet,
-		/obj/item/kitchen/utensil/fork,
+		/obj/item/utensil/fork,
 		/obj/item/shard,
 		/obj/item/flame/lighter,
 		/obj/item/stack/cable_coil

@@ -3,7 +3,7 @@
 
 	..()
 
-	if(health <= 0 || stat == DEAD)
+	if(stat == DEAD)
 		return
 
 	var/turf/checking = get_turf(src)
@@ -25,11 +25,18 @@
 	set_nutrition(clamp(nutrition + FLOOR(radiation/100) + light_amount, 0, 500))
 
 	if(radiation >= 50 || light_amount > 2) //if there's enough light, heal
+		var/update_health = FALSE
 		if(getBruteLoss())
-			adjustBruteLoss(-1)
+			update_health = TRUE
+			adjustBruteLoss(-1, do_update_health = FALSE)
 		if(getFireLoss())
-			adjustFireLoss(-1)
+			update_health = TRUE
+			adjustFireLoss(-1, do_update_health = FALSE)
 		if(getToxLoss())
-			adjustToxLoss(-1)
+			update_health = TRUE
+			adjustToxLoss(-1, do_update_health = FALSE)
 		if(getOxyLoss())
-			adjustOxyLoss(-1)
+			update_health = TRUE
+			adjustOxyLoss(-1, do_update_health = FALSE)
+		if(update_health)
+			update_health()

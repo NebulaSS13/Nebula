@@ -55,9 +55,6 @@
 	strength = STR_HIGH
 	breath_pressure = 25
 	blood_volume = 840
-	heat_level_1 = 410 //Default 360 - Higher is better
-	heat_level_2 = 440 //Default 400
-	heat_level_3 = 800 //Default 1000
 	species_flags = SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_BLOCK | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NEED_DIRECT_ABSORB
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	bump_flag = HEAVY
@@ -65,7 +62,7 @@
 	swap_flags = ALLMOBS
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 
-	unarmed_attacks = list(/decl/natural_attack/serpentid)
+	unarmed_attacks = list(/decl/natural_attack/forelimb_slash)
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height =      1.75,
 		/datum/appearance_descriptor/body_length = 1

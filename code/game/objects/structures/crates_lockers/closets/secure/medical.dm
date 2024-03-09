@@ -84,12 +84,12 @@
 		/obj/item/clothing/accessory/storage/vest
 	)
 
-/obj/structure/closet/secure_closet/CMO
+/obj/structure/closet/secure_closet/cmo
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
 	closet_appearance = /decl/closet_appearance/secure_closet/cmo
 
-/obj/structure/closet/secure_closet/CMO/WillContain()
+/obj/structure/closet/secure_closet/cmo/WillContain()
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/med, 50),
@@ -132,6 +132,18 @@
 /obj/structure/closet/secure_closet/medical_wall/Initialize()
 	. = ..()
 	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
+
+/obj/structure/closet/secure_closet/medical_wall/pills
+	name = "pill cabinet"
+
+/obj/structure/closet/secure_closet/medical_wall/pills/WillContain()
+	return list(
+		/obj/item/storage/pill_bottle/antibiotics = 1,
+		/obj/item/storage/pill_bottle/painkillers = 1,
+		/obj/item/storage/pill_bottle/antitoxins  = 1,
+		/obj/item/storage/pill_bottle/burn_meds   = 1,
+		/obj/random/medical/pillbottle            = 1
+	)
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"

@@ -16,7 +16,7 @@
 
 	handle_generic_blending = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	maxhealth = 20
+	max_health = 20
 
 	var/destroyed = 0
 	var/list/connections
@@ -168,19 +168,24 @@
 	if(IS_WIRECUTTER(W))
 		if(!material.conductive || !shock(user, 100))
 			cut_grille()
+		return TRUE
 
-	else if((IS_SCREWDRIVER(W)) && (istype(loc, /turf/simulated) || anchored))
-		if(!shock(user, 90))
-			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			anchored = !anchored
-			user.visible_message(SPAN_NOTICE("[user] [anchored ? "fastens" : "unfastens"] the grille."), \
-								 SPAN_NOTICE("You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor."))
-			update_connections(1)
-			update_icon()
-			return
+	if((IS_SCREWDRIVER(W)))
+		var/turf/turf = loc
+		if(((istype(turf) && turf.simulated) || anchored))
+			if(!shock(user, 90))
+				playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
+				anchored = !anchored
+				user.visible_message(
+					SPAN_NOTICE("[user] [anchored ? "fastens" : "unfastens"] the grille."),
+					SPAN_NOTICE("You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.")
+				)
+				update_connections(1)
+				update_icon()
+			return TRUE
 
-//window placing
-	else if(istype(W,/obj/item/stack/material))
+	//window placing
+	if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
 		if(ST.material.opacity > 0.7)
 			return 0
@@ -195,9 +200,9 @@
 					to_chat(user, "<span class='notice'>You can't reach.</span>")
 					return
 		place_window(user, loc, dir_to_set, ST)
-		return
+		return TRUE
 
-	else if(!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
+	if(!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
@@ -206,7 +211,9 @@
 				take_damage(W.force)
 			if(BRUTE)
 				take_damage(W.force * 0.1)
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/structure/grille/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)

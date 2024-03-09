@@ -68,7 +68,7 @@
 		update_icon()
 		src.add_fingerprint(user)
 
-/obj/machinery/self_destruct/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/machinery/self_destruct/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && cylinder)
 		if(armed)
 			to_chat(user, SPAN_WARNING("Disarm the cylinder first."))

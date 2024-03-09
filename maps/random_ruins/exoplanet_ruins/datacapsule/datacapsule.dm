@@ -4,7 +4,7 @@
 	suffixes = list("datacapsule/datacapsule.dmm")
 	cost = 1
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
-	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	template_tags = TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_WRECK
 
 	apc_test_exempt_areas = list(
 		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC
@@ -40,7 +40,7 @@
 	desc += "Label is smudged, and there's crusted blood fingerprints on it."
 
 /obj/item/chems/glass/beaker/vial/random_podchem/populate_reagents()
-	reagents.add_reagent(pick(/decl/material/liquid/random, /decl/material/liquid/zombie/science, /decl/material/liquid/retrovirals), 5)
+	add_to_reagents(pick(/decl/material/liquid/random, /decl/material/liquid/zombie/science, /decl/material/liquid/retrovirals), 5)
 
 /obj/structure/backup_server
 	name = "backup server"
@@ -57,7 +57,7 @@
 			to_chat(user, SPAN_NOTICE("You pry out the data drive from \the [src]."))
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 			var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new(get_turf(src))
-			drive.origin_tech = "{'[TECH_DATA]':[rand(4,5)],'[TECH_ENGINEERING]':[rand(4,5)],'[TECH_EXOTIC_MATTER]':[rand(4,5)],'[TECH_COMBAT]':[rand(2,5)],'[TECH_ESOTERIC]':[rand(0,6)]}"
+			drive.origin_tech = @'{"[TECH_DATA]":[rand(4,5)],"[TECH_ENGINEERING]":[rand(4,5)],"[TECH_EXOTIC_MATTER]":[rand(4,5)],"[TECH_COMBAT]":[rand(2,5)],"[TECH_ESOTERIC]":[rand(0,6)]}'
 			disk_looted = TRUE
 		return TRUE
 	. = ..()

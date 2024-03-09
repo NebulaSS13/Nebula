@@ -1,6 +1,6 @@
-/proc/fill_cigarre_package(var/obj/item/storage/fancy/cigarettes/C, var/list/reagents)
+/proc/fill_cigarre_package(var/obj/item/storage/box/fancy/cigarettes/C, var/list/reagents)
 	for(var/reagent in reagents)
-		C.reagents.add_reagent(reagent, reagents[reagent] * C.max_storage_space)
+		C.add_to_reagents(reagent, reagents[reagent] * C.max_storage_space)
 
 /obj/item/storage/box/syndie_kit
 	name = "box"
@@ -57,7 +57,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
-	) 
+	)
 
 /obj/item/storage/backpack/chameleon/sydie_kit/WillContain()
 	return list(
@@ -128,10 +128,10 @@
 
 /obj/item/storage/box/syndie_kit/cigarette/WillContain()
 	return list(
-		/obj/item/storage/fancy/cigarettes/flash_powder = 2,
-		/obj/item/storage/fancy/cigarettes/chemsmoke = 2,
-		/obj/item/storage/fancy/cigarettes/mindbreak,
-		/obj/item/storage/fancy/cigarettes/tricord,
+		/obj/item/storage/box/fancy/cigarettes/flash_powder = 2,
+		/obj/item/storage/box/fancy/cigarettes/chemsmoke = 2,
+		/obj/item/storage/box/fancy/cigarettes/mindbreak,
+		/obj/item/storage/box/fancy/cigarettes/tricord,
 		/obj/item/flame/lighter/zippo/random,
 		)
 

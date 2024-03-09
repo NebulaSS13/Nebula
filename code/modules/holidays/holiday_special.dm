@@ -6,6 +6,7 @@
 	for(var/obj/structure/flora/tree/pine/xmas in world)
 		if(isNotStationLevel(xmas.z))
 			continue
-		for(var/turf/simulated/floor/T in orange(1,xmas))
-			for(var/i=1,i<=rand(1,5),i++)
-				new /obj/item/a_gift(T)
+		for(var/turf/T in orange(1,xmas))
+			if(T.is_floor() && T.simulated)
+				for(var/i = 1 to rand(1,5))
+					new /obj/item/a_gift(T)

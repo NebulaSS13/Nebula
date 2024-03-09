@@ -1,9 +1,21 @@
 /decl/maneuver
+	abstract_type = /decl/maneuver
 	var/name = "unnamed"
 	var/delay = 2 SECONDS
 	var/cooldown = 10 SECONDS
 	var/stamina_cost = 10
 	var/reflexive_modifier = 1
+	var/selection_icon = 'icons/screen/maneuver.dmi'
+	var/selection_icon_state
+
+/decl/maneuver/validate()
+	. = ..()
+	if(!selection_icon)
+		. += "no selection icon"
+	else if(!selection_icon_state)
+		. += "no selection icon_state"
+	else if(!check_state_in_icon(selection_icon_state, selection_icon))
+		. += "selection icon_state [selection_icon_state] not found in icon [selection_icon]"
 
 /decl/maneuver/proc/can_be_used_by(var/mob/living/user, var/atom/target, var/silent = FALSE)
 	if(!istype(user) || !user.can_do_maneuver(src, silent))
@@ -22,7 +34,7 @@
 		return FALSE
 	if(user.is_on_special_ability_cooldown())
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You cannot maneuver again for another [user.get_seconds_until_next_special_ability_string()]"))
+			to_chat(user, SPAN_WARNING("You cannot maneuver again for another [user.get_seconds_until_next_special_ability_string()]."))
 		return FALSE
 	if(user.get_stamina() < stamina_cost)
 		if(!silent)

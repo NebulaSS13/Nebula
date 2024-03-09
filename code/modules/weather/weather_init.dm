@@ -21,7 +21,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 
 	// If we're post-init, init immediately.
 	if(SSweather.initialized)
-		addtimer(CALLBACK(src, .proc/init_weather), 0)
+		addtimer(CALLBACK(src, PROC_REF(init_weather)), 0)
 
 // Start the weather effects from the highest point; they will propagate downwards during update.
 /obj/abstract/weather_system/proc/init_weather()

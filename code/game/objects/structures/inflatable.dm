@@ -23,7 +23,7 @@
 	transfer_fingerprints_to(R)
 	R.add_fingerprint(user)
 	if(inflatable_health)
-		R.health = inflatable_health
+		R.current_health = inflatable_health
 	qdel(src)
 
 /obj/item/inflatable/door
@@ -41,7 +41,7 @@
 	opacity = FALSE
 	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "wall"
-	maxhealth = 20
+	max_health = 20
 	hitsound = 'sound/effects/Glasshit.ogg'
 	atmos_canpass = CANPASS_DENSITY
 	material = /decl/material/solid/organic/plastic
@@ -120,7 +120,7 @@
 			deflate(TRUE)
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
-	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (health < maxhealth)
+	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (current_health < get_max_health())
 
 /obj/structure/inflatable/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/tape_roll/duct_tape/T = tool
@@ -134,7 +134,7 @@
 	playsound(src, 'sound/effects/tape.ogg', 50, TRUE)
 	last_damage_message = null
 	to_chat(user, SPAN_NOTICE("You tape up some of the damage to \the [src]."))
-	health = clamp(health + 3, 0, maxhealth)
+	current_health = clamp(current_health + 3, 0, get_max_health())
 	taped = TRUE
 
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
@@ -170,7 +170,7 @@
 		spawn(50)
 			var/obj/item/inflatable/R = new undeploy_path(src.loc)
 			src.transfer_fingerprints_to(R)
-			R.inflatable_health = health
+			R.inflatable_health = current_health
 			qdel(src)
 
 /obj/structure/inflatable/verb/hand_deflate()

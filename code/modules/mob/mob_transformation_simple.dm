@@ -50,7 +50,7 @@ var/global/list/href_to_mob_type = list(
 
 //This proc is the most basic of the procs. All it does is make a new mob on the same tile and transfer over a few variables.
 //Returns the new mob
-//Note that this proc does NOT do MMI related stuff!
+//Note that this proc does NOT do brain related stuff!
 /mob/proc/change_mob_type(var/new_type, var/turf/location, var/new_name, var/subspecies)
 
 	if(!new_type)

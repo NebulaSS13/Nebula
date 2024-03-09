@@ -316,7 +316,7 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/sleeper/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/machinery/sleeper/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
 		var/mob/target = dropping

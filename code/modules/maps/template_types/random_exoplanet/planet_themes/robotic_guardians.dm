@@ -9,8 +9,8 @@
 		/mob/living/simple_animal/hostile/hivebot/mega
 	)
 
-/datum/exoplanet_theme/robotic_guardians/modify_ruin_whitelist(whitelist_flags)
-	return whitelist_flags | RUIN_ALIEN
+/datum/exoplanet_theme/robotic_guardians/modify_template_whitelist(whitelist_flags)
+	return whitelist_flags | TEMPLATE_TAG_ALIEN
 
 /datum/exoplanet_theme/robotic_guardians/get_extra_fauna()
 	return guardian_types

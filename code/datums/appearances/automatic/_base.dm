@@ -6,7 +6,7 @@
 	if(source in appearance_sources)
 		return FALSE
 	appearance_sources[source] = new/datum/appearance_data(images, viewers, priority)
-	events_repository.register(/decl/observ/destroyed, source, src, /decl/appearance_handler/proc/RemoveAltAppearance)
+	events_repository.register(/decl/observ/destroyed, source, src, TYPE_PROC_REF(/decl/appearance_handler, RemoveAltAppearance))
 
 /decl/appearance_handler/proc/RemoveAltAppearance(var/source)
 	var/datum/appearance_data/ad = appearance_sources[source]

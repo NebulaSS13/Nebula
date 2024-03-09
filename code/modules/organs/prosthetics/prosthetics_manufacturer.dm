@@ -2,7 +2,7 @@
 	abstract_type = /decl/bodytype/prosthetic
 	icon_base = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 	desc = "A generic unbranded robotic prosthesis."
-	limb_tech = "{'engineering':1,'materials':1,'magnets':1}"
+	limb_tech = @'{"engineering":1,"materials":1,"magnets":1}'
 	modifier_string = "robotic"
 	is_robotic = TRUE
 	body_flags = BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT
@@ -14,9 +14,20 @@
 		'sound/foley/metal1.ogg'
 	)
 	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/mmi_holder,
+		BP_BRAIN = /obj/item/organ/internal/brain_interface,
 		BP_EYES  = /obj/item/organ/internal/eyes,
 		BP_CELL  = /obj/item/organ/internal/cell
+	)
+	cold_level_1 = SYNTH_COLD_LEVEL_1
+	cold_level_2 = SYNTH_COLD_LEVEL_2
+	cold_level_3 = SYNTH_COLD_LEVEL_3
+	heat_level_1 = SYNTH_HEAT_LEVEL_1
+	heat_level_2 = SYNTH_HEAT_LEVEL_2
+	heat_level_3 = SYNTH_HEAT_LEVEL_3
+	cold_discomfort_strings = null
+	heat_discomfort_level = 373.15
+	heat_discomfort_strings = list(
+		"You are dangerously close to overheating!"
 	)
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part

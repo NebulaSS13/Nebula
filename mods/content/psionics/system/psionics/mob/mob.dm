@@ -1,23 +1,16 @@
-/mob/living
-	var/datum/psi_complexus/psi
+/datum/ability_handler/psionics/refresh_login()
+	update(TRUE)
+	if(!suppressed)
+		show_auras()
 
-/mob/living/Login()
-	. = ..()
-	if(psi)
-		psi.update(TRUE)
-		if(!psi.suppressed)
-			psi.show_auras()
+/mob/proc/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)
+	return
 
-/mob/living/Destroy()
-	QDEL_NULL(psi)
-	. = ..()
-
-/mob/living/proc/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)
+/mob/living/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)
 	if(!get_target_zone()) // Can't target a zone, so you can't really invoke psionics.
 		to_chat(src, SPAN_NOTICE("You feel something strange brush against your mind... but your brain is not able to grasp it."))
 		return
-	if(!psi)
-		psi = new(src)
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, TRUE)
 	var/current_rank = psi.get_rank(faculty)
 	if(current_rank != rank && (!take_larger || current_rank < rank))
 		psi.set_rank(faculty, rank, defer_update, temporary)
@@ -33,6 +26,7 @@
 
 /mob/living/carbon/human/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/projectile/P = damage_source
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, TRUE)
 	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(SSmaterials.get_armor_key(P.damage_type, P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
 		visible_message("<span class='danger'>\The [src] deflects [attack_text]!</span>")
 		P.redirect(P.starting.x + rand(-2,2), P.starting.y + rand(-2,2), get_turf(src), src)
@@ -41,21 +35,26 @@
 
 /mob/living/carbon/get_cuff_breakout_mod()
 	. = ..()
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, FALSE)
 	if(psi)
 		. = clamp(. - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2), 0, 1)
 
 /mob/living/can_break_cuffs()
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, FALSE)
 	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
 
 /mob/living/carbon/get_special_resist_time()
 	. = ..()
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, FALSE)
 	if(psi && psi.can_use())
 		. += ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS))
 
 /mob/living/is_telekinetic()
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, FALSE)
 	. = psi && !psi.suppressed && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT
 
 /mob/living/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, FALSE)
 	if(psi)
 		. += get_extension(psi, /datum/extension/armor)

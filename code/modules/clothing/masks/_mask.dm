@@ -7,7 +7,7 @@
 	blood_overlay_type = "maskblood"
 	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':1,'engineering':1}"
+	origin_tech = @'{"materials":1,"engineering":1}'
 
 	var/voicechange = 0
 	var/list/say_messages
@@ -33,7 +33,7 @@
 	. = ..()
 	LAZYDISTINCTADD(., slot_wear_mask_str)
 
-/obj/item/clothing/mask/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/clothing/mask/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && hanging && slot == slot_wear_mask_str && check_state_in_icon("[overlay.icon_state]-down", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-down"
 	. = ..()

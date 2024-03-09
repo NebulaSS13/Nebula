@@ -2,7 +2,7 @@
 	name = "nano printer"
 	desc = "Small integrated printer with paper recycling module."
 	power_usage = 50
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	critical = 0
 	icon_state = "printer"
 	hardware_size = 1

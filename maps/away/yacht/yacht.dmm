@@ -413,11 +413,11 @@
 	dir = 8
 	},
 /obj/effect/spider/stickyweb,
-/turf/simulated/floor/beach/water/ocean,
+/turf/exterior/sand/water,
 /area/yacht/living)
 "bm" = (
 /obj/effect/spider/stickyweb,
-/turf/simulated/floor/beach/water/ocean,
+/turf/exterior/sand/water,
 /area/yacht/living)
 "bn" = (
 /obj/effect/spider/stickyweb,
@@ -449,7 +449,7 @@
 "bs" = (
 /obj/item/inflatable_duck,
 /obj/effect/spider/stickyweb,
-/turf/simulated/floor/beach/water/ocean,
+/turf/exterior/sand/water,
 /area/yacht/living)
 "bt" = (
 /obj/machinery/light{
@@ -473,11 +473,11 @@
 /turf/simulated/floor/carpet/purple,
 /area/yacht/living)
 "bx" = (
-/turf/simulated/floor/beach/water/ocean,
+/turf/exterior/sand/water,
 /area/yacht/living)
 "by" = (
 /mob/living/simple_animal/hostile/giant_spider/hunter,
-/turf/simulated/floor/beach/water/ocean,
+/turf/exterior/sand/water,
 /area/yacht/living)
 "bz" = (
 /obj/effect/decal/cleanable/dirt,
@@ -553,7 +553,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/beach/water/ocean,
+/turf/exterior/sand/water,
 /area/yacht/living)
 "bI" = (
 /obj/machinery/light,
@@ -938,7 +938,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/shovel/spade,
+/obj/item/tool/spade,
 /obj/item/chems/glass/bucket,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,

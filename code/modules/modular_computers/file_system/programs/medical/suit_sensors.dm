@@ -49,7 +49,7 @@
 		if(isAI(usr))
 			var/mob/living/silicon/ai/AI = usr
 			var/mob/living/carbon/human/H = locate(href_list["track"]) in SSmobs.mob_list
-			if(hassensorlevel(H, SUIT_SENSOR_TRACKING))
+			if(hassensorlevel(H, VITALS_SENSOR_TRACKING))
 				AI.ai_actual_track(H)
 		return 1
 

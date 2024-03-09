@@ -22,7 +22,7 @@
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
-	base_prosthetics_model = /decl/bodytype/prosthetic/vox/crap
+	base_external_prosthetics_model = /decl/bodytype/prosthetic/vox/crap
 
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
@@ -61,10 +61,6 @@
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
-
-	cold_level_1 = 80
-	cold_level_2 = 50
-	cold_level_3 = -1
 
 	age_descriptor = /datum/appearance_descriptor/age/vox
 
@@ -169,6 +165,6 @@
 		stack.do_backup()
 
 /decl/emote/audible/vox_shriek
-	key ="shriek"
-	emote_message_3p = "USER SHRIEKS!"
+	key = "shriek"
+	emote_message_3p = "$USER$ SHRIEKS!"
 	emote_sound = 'mods/species/vox/sounds/shriek1.ogg'

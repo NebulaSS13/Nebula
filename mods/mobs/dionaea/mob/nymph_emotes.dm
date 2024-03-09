@@ -1,5 +1,5 @@
-/mob/living/carbon/alien/diona
-	default_emotes = list(
+/mob/living/carbon/alien/diona/get_default_emotes()
+	var/static/list/default_emotes = list(
 		/decl/emote/visible,
 		/decl/emote/visible/scratch,
 		/decl/emote/visible/drool,
@@ -24,8 +24,9 @@
 		/decl/emote/audible/bug_chitter,
 		/decl/emote/audible/chirp
 	)
+	return default_emotes
 
 /decl/emote/audible/chirp
 	key = "chirp"
-	emote_message_3p = "USER chirps!"
+	emote_message_3p = "$USER$ chirps!"
 	emote_sound = 'mods/mobs/dionaea/sounds/nymphchirp.ogg'

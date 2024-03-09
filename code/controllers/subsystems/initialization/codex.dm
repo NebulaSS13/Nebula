@@ -84,9 +84,17 @@ SUBSYSTEM_DEF(codex)
 		popup.set_content(parse_links(jointext(entry.get_codex_body(presenting_to), null), presenting_to))
 		popup.open()
 
-/datum/controller/subsystem/codex/proc/get_guide(var/category)
-	var/decl/codex_category/cat = GET_DECL(category)
-	. = cat?.guide_html
+/datum/controller/subsystem/codex/proc/get_manual_text(var/guide_id)
+	if(ispath(guide_id, /decl/codex_category))
+		var/decl/codex_category/cat = GET_DECL(guide_id)
+		. = cat?.guide_html
+	else if(guide_id)
+		var/datum/codex_entry/entry
+		if(ispath(guide_id, /datum/codex_entry))
+			entry = guide_id
+			guide_id = initial(entry.name)
+		entry = get_codex_entry(guide_id)
+		. = entry?.guide_html
 
 /datum/controller/subsystem/codex/proc/retrieve_entries_for_string(var/searching)
 

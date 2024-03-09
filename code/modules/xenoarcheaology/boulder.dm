@@ -10,7 +10,6 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
-	var/last_act = 0
 
 /obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration)
 	. = ..()
@@ -24,36 +23,29 @@
 	return ..()
 
 /obj/structure/boulder/attackby(var/obj/item/I, var/mob/user)
+
 	if(istype(I, /obj/item/depth_scanner))
 		var/obj/item/depth_scanner/C = I
 		C.scan_atom(user, src)
-		return
+		return TRUE
 
 	if(istype(I, /obj/item/measuring_tape))
 		var/obj/item/measuring_tape/P = I
-		user.visible_message("<span class='notice'>\The [user] extends \the [P] towards \the [src].</span>", "<span class='notice'>You extend \the [P] towards \the [src].</span>")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] extends \the [P] towards \the [src]."),
+			SPAN_NOTICE("You extend \the [P] towards \the [src].")
+		)
 		if(do_after(user, 15))
-			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [src.excavation_level]cm.</span>")
-		return
+			to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [src.excavation_level]cm."))
+		return TRUE
 
-	if(istype(I, /obj/item/pickaxe))
-		var/obj/item/pickaxe/P = I
-
-		if(last_act + P.digspeed > world.time)//prevents message spam
-			return
-		last_act = world.time
-
-		to_chat(user, "<span class='warning'>You start [P.drill_verb] [src].</span>")
-
-		if(!do_after(user, P.digspeed))
-			return
-
-		to_chat(user, "<span class='notice'>You finish [P.drill_verb] [src].</span>")
-		excavation_level += P.excavation_amount
-
+	if(I.do_tool_interaction(TOOL_PICK, user, src, 3 SECONDS, set_cooldown = TRUE))
+		excavation_level += I.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
 		if(excavation_level > 200)
-			//failure
-			user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='warning'>\The [src] has disintegrated under your onslaught, any secrets it was holding are long gone.</span>")
+			user.visible_message(
+				SPAN_DANGER("\The [src] suddenly crumbles away."),
+				SPAN_DANGER("\The [src] has disintegrated under your onslaught. Any secrets it was holding are long gone.")
+			)
 			qdel(src)
 			return
 
@@ -66,20 +58,26 @@
 					var/obj/structure/artifact/X = O
 					if(X.my_effect)
 						X.my_effect.artifact_id = artifact_find.artifact_id
-				src.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>")
+				visible_message(SPAN_DANGER("\The [src] suddenly crumbles away."))
 			else
-				user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='notice'>\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.</span>")
+				user.visible_message(
+					SPAN_DANGER("\The [src] suddenly crumbles away."),
+					SPAN_DANGER("\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.")
+				)
 			qdel(src)
+		return TRUE
+
+	return ..()
 
 /obj/structure/boulder/Bumped(AM)
 	. = ..()
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
-		var/obj/item/pickaxe/P = (locate() in H.get_inactive_held_items())
-		if(istype(P))
-			src.attackby(P, H)
-
+		for(var/obj/item/P in H.get_inactive_held_items())
+			if(IS_PICK(P))
+				attackby(P, H)
+				return
 	else if(isrobot(AM))
 		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/pickaxe))
+		if(IS_PICK(R.module_active))
 			attackby(R.module_active,R)

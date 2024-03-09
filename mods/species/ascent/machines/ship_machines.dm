@@ -53,10 +53,10 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/item/chems/chem_disp_cartridge/ascent/crystal/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/crystal_agent, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/crystal_agent, reagents.maximum_volume)
 
 /obj/item/chems/chem_disp_cartridge/ascent/bromide/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/bromide, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/bromide, reagents.maximum_volume)
 
 /obj/machinery/sleeper/ascent
 	name = "mantid sleeper"

@@ -7,8 +7,6 @@
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
-	var/health
-	var/max_health
 	var/material_health_multiplier = 0.2
 	var/hitsound
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
@@ -86,7 +84,7 @@
 
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
-	var/center_of_mass = @"{'x':16,'y':16}" //can be null for no exact placement behaviour
+	var/center_of_mass = @'{"x":16,"y":16}' //can be null for no exact placement behaviour
 
 /obj/item/proc/can_contaminate()
 	return !(obj_flags & ITEM_FLAG_NO_CONTAMINATION)
@@ -108,8 +106,8 @@
 	return origin_tech
 
 /obj/item/Initialize(var/ml, var/material_key)
-	if(isnull(health))
-		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
+	if(isnull(current_health))
+		current_health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
 	if(!ispath(material_key, /decl/material))
 		material_key = material
 	if(material_key)
@@ -158,8 +156,8 @@
 	clone = ..()
 	clone.contaminated = contaminated
 	clone.blood_overlay = image(blood_overlay)
+	clone.current_health = current_health
 
-	clone.health = health
 	//#TODO: once item damage in, check health!
 
 	//Coating
@@ -206,12 +204,13 @@
 
 /obj/item/examine(mob/user, distance)
 	var/desc_comp = "" //For "description composite"
-	desc_comp += "It is a [w_class_description()] item."
+	desc_comp += "It is a [w_class_description()] item.<BR>"
 
-	var/desc_damage = get_examined_damage_string(health / max_health)
+	var/desc_damage = get_examined_damage_string()
 	if(length(desc_damage))
-		desc_comp += "<BR/>[desc_damage]"
+		desc_comp += "[desc_damage]<BR>"
 
+	var/added_header = FALSE
 	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON)
 
 		var/list/available_recipes = list()
@@ -224,44 +223,81 @@
 					available_recipes[initial_stage] = "\a [initial(prop.name)]"
 
 		if(length(available_recipes))
-			desc_comp += "<BR>*--------* <BR>"
+
+			if(!added_header)
+				added_header = TRUE
+				desc_comp += "*--------*<BR>"
+
 			for(var/decl/crafting_stage/initial_stage in available_recipes)
 				desc_comp += SPAN_NOTICE("With [available_recipes[initial_stage]], you could start making \a [initial_stage.descriptor] out of this.")
 				desc_comp += "<BR>"
-			desc_comp += "*--------*"
+			desc_comp += "*--------*<BR>"
+
+	if(distance <= 1 && has_extension(src, /datum/extension/loaded_cell))
+
+		if(!added_header)
+			added_header = TRUE
+			desc_comp += "*--------*<BR>"
+
+		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		var/obj/item/cell/loaded_cell  = cell_loaded?.get_cell()
+		var/obj/item/cell/current_cell = get_cell()
+		// Some items use the extension but may return something else to get_cell().
+		// In these cases, don't print the removal info etc.
+		if(current_cell && current_cell != loaded_cell)
+			desc_comp += SPAN_NOTICE("\The [src] is using an external [current_cell.name] as a power supply.")
+		else
+			desc_comp += jointext(cell_loaded.get_examine_text(current_cell), "<BR>")
+		desc_comp += "<BR>*--------*<BR>"
 
 	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
-		desc_comp += "<BR>*--------* <BR>"
+
+		if(!added_header)
+			added_header = TRUE
+			desc_comp += "*--------*<BR>"
 
 		if(origin_tech)
-			desc_comp += SPAN_NOTICE("Testing potentials:<BR>")
+			desc_comp += SPAN_NOTICE("Testing potentials:")
+			desc_comp += "<BR>"
 			var/list/techlvls = cached_json_decode(origin_tech)
 			for(var/T in techlvls)
 				var/decl/research_field/field = SSfabrication.get_research_field_by_id(T)
-				desc_comp += "Tech: Level [techlvls[T]] [field.name] <BR>"
+				desc_comp += "Tech: Level [techlvls[T]] [field.name].<BR>"
 		else
 			desc_comp += "No tech origins detected.<BR>"
 
 		if(LAZYLEN(matter))
-			desc_comp += SPAN_NOTICE("Extractable materials:<BR>")
+			desc_comp += SPAN_NOTICE("Extractable materials:")
+			desc_comp += "<BR>"
 			for(var/mat in matter)
 				var/decl/material/M = GET_DECL(mat)
 				desc_comp += "[capitalize(M.solid_name)]<BR>"
 		else
 			desc_comp += SPAN_DANGER("No extractable materials detected.<BR>")
-		desc_comp += "*--------*"
+		desc_comp += "*--------*<BR>"
 
 	return ..(user, distance, "", desc_comp)
 
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
 
-/obj/item/handle_mouse_drop(atom/over, mob/user)
-
+/obj/item/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user)
 		usr.face_atom(src)
 		dragged_onto(over)
 		return TRUE
+
+	// Allow dragging items onto/around tables and racks.
+	if(istype(over, /obj/structure))
+		var/obj/structure/struct = over
+		if(struct.structure_flags & STRUCTURE_FLAG_SURFACE)
+			if(user == loc && !user.try_unequip(src, get_turf(user)))
+				return TRUE
+			if(!isturf(loc))
+				return TRUE
+			var/list/click_data = params2list(params)
+			do_visual_slide(src, get_turf(src), pixel_x, pixel_y, get_turf(over), text2num(click_data["icon-x"])-1, text2num(click_data["icon-y"])-1, center_of_mass && cached_json_decode(center_of_mass))
+			return TRUE
 
 	// Try to drag-equip the item.
 	var/obj/screen/inventory/inv = over
@@ -282,10 +318,21 @@
 			user.equip_to_slot_if_possible(src, inv.slot_id)
 		return TRUE
 
+
 	. = ..()
 
 /obj/item/proc/dragged_onto(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
+
+/obj/item/afterattack(var/atom/A, var/mob/user, var/proximity)
+	. = ..()
+	if(. || !proximity)
+		return
+	var/atom_heat = get_heat()
+	if(atom_heat > 0)
+		A.handle_external_heating(atom_heat, src, user)
+		return TRUE
+	return FALSE
 
 /obj/item/attack_hand(mob/user)
 
@@ -332,6 +379,11 @@
 	if(!QDELETED(throwing))
 		throwing.finalize(hit=TRUE)
 
+	if(has_extension(src, /datum/extension/loaded_cell) && user.is_holding_offhand(src))
+		var/datum/extension/loaded_cell/cell_handler = get_extension(src, /datum/extension/loaded_cell)
+		if(cell_handler.try_unload(user))
+			return TRUE
+
 	if (loc == user)
 		if(!user.try_unequip(src))
 			return TRUE
@@ -375,8 +427,19 @@
 			if(S.collection_mode) //Mode is set to collect all items
 				if(isturf(src.loc))
 					S.gather_all(src.loc, user)
+				return TRUE
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
+				return TRUE
+
+	if(has_extension(src, /datum/extension/loaded_cell))
+		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		if(cell_loaded.has_tool_unload_interaction(W))
+			return cell_loaded.try_unload(user, W)
+		else if(istype(W, /obj/item/cell))
+			return cell_loaded.try_load(user, W)
+
+	return FALSE
 
 /obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
 	return
@@ -394,10 +457,10 @@
 	for(var/obj/item/thing in user?.get_held_items())
 		thing.update_twohanding()
 	if(play_dropsound && drop_sound && SSticker.mode)
-		addtimer(CALLBACK(src, .proc/dropped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+		addtimer(CALLBACK(src, PROC_REF(dropped_sound_callback)), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
-		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+		addtimer(CALLBACK(user, TYPE_PROC_REF(/mob, check_emissive_equipment)), 0, TIMER_UNIQUE)
 
 	RAISE_EVENT(/decl/observ/mob_unequipped, user, src)
 	RAISE_EVENT_REPEAT(/decl/observ/item_unequipped, src, user)
@@ -429,7 +492,7 @@
 	add_fingerprint(user)
 
 	hud_layerise()
-	addtimer(CALLBACK(src, .proc/reconsider_client_screen_presence, user.client, slot), 0)
+	addtimer(CALLBACK(src, PROC_REF(reconsider_client_screen_presence), user.client, slot), 0)
 
 	//Update two-handing status
 	var/mob/M = loc
@@ -440,11 +503,11 @@
 	if(user)
 		if(SSticker.mode)
 			if(pickup_sound && (slot in user.get_held_item_slots()))
-				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+				addtimer(CALLBACK(src, PROC_REF(pickup_sound_callback)), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 			else if(equip_sound)
-				addtimer(CALLBACK(src, .proc/equipped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+				addtimer(CALLBACK(src, PROC_REF(equipped_sound_callback)), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 		if(z_flags & ZMM_MANGLE_PLANES)
-			addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+			addtimer(CALLBACK(user, TYPE_PROC_REF(/mob, check_emissive_equipment)), 0, TIMER_UNIQUE)
 
 	RAISE_EVENT(/decl/observ/mob_equipped, user, src, slot)
 	RAISE_EVENT_REPEAT(/decl/observ/item_equipped, src, user, slot)
@@ -563,10 +626,6 @@
 	playsound(target, hitsound, 50, 1, -1)
 	return 1
 
-/obj/item/clean_blood()
-	. = ..()
-	clean()
-
 /obj/item/reveal_blood()
 	if(was_bloodied && !fluorescent)
 		fluorescent = FLUORESCENT_GLOWS
@@ -574,30 +633,25 @@
 		blood_overlay.color = COLOR_LUMINOL
 		update_icon()
 
-/obj/item/add_blood(mob/living/carbon/human/M, amount = 2, list/blood_data)
+/obj/item/add_blood(mob/living/M, amount = 2, list/blood_data)
 	if (!..())
 		return FALSE
-
 	if(istype(src, /obj/item/energy_blade))
 		return
-
 	if(!istype(M))
 		return TRUE
-
-	if(!blood_data)
-		blood_data = REAGENT_DATA(M.vessel, /decl/material/liquid/blood)
-
+	if(!blood_data && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
 	var/sample_dna = LAZYACCESS(blood_data, "blood_DNA")
 	if(sample_dna)
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
 		forensics.add_data(/datum/forensics/blood_dna, sample_dna)
 	add_coating(/decl/material/liquid/blood, amount, blood_data)
-
 	var/unique_enzymes = M.get_unique_enzymes()
 	var/blood_type = M.get_blood_type()
 	if(unique_enzymes && blood_type && !LAZYACCESS(blood_DNA, unique_enzymes))
 		LAZYSET(blood_DNA, unique_enzymes, blood_type)
-
 	return TRUE
 
 var/global/list/_blood_overlay_cache = list()
@@ -668,12 +722,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
 
-	events_repository.register(/decl/observ/destroyed, user, src, /obj/item/proc/unzoom)
-	events_repository.register(/decl/observ/moved, user, src, /obj/item/proc/unzoom)
-	events_repository.register(/decl/observ/dir_set, user, src, /obj/item/proc/unzoom)
-	events_repository.register(/decl/observ/item_unequipped, src, src, /obj/item/proc/zoom_drop)
+	events_repository.register(/decl/observ/destroyed, user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	events_repository.register(/decl/observ/moved, user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	events_repository.register(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	events_repository.register(/decl/observ/item_unequipped, src, src, TYPE_PROC_REF(/obj/item, zoom_drop))
 	if(isliving(user))
-		events_repository.register(/decl/observ/stat_set, user, src, /obj/item/proc/unzoom)
+		events_repository.register(/decl/observ/stat_set, user, src, TYPE_PROC_REF(/obj/item, unzoom))
 
 /obj/item/proc/zoom_drop(var/obj/item/I, var/mob/user)
 	unzoom(user)
@@ -683,12 +737,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	zoom = 0
 
-	events_repository.unregister(/decl/observ/destroyed, user, src, /obj/item/proc/unzoom)
-	events_repository.unregister(/decl/observ/moved, user, src, /obj/item/proc/unzoom)
-	events_repository.unregister(/decl/observ/dir_set, user, src, /obj/item/proc/unzoom)
-	events_repository.unregister(/decl/observ/item_unequipped, src, src, /obj/item/proc/zoom_drop)
+	events_repository.unregister(/decl/observ/destroyed, user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	events_repository.unregister(/decl/observ/moved, user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	events_repository.unregister(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	events_repository.unregister(/decl/observ/item_unequipped, src, src, TYPE_PROC_REF(/obj/item, zoom_drop))
 	if(isliving(user))
-		events_repository.unregister(/decl/observ/stat_set, user, src, /obj/item/proc/unzoom)
+		events_repository.unregister(/decl/observ/stat_set, user, src, TYPE_PROC_REF(/obj/item, unzoom))
 
 	if(!user.client)
 		return
@@ -799,9 +853,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	coating.remove_any(amount)
 	if(coating.total_volume <= MINIMUM_CHEMICAL_VOLUME)
-		clean(0)
+		clean(FALSE)
 
-/obj/item/proc/clean(clean_forensics=TRUE)
+/obj/item/clean(clean_forensics=TRUE)
+	. = ..()
 	QDEL_NULL(coating)
 	blood_overlay = null
 	if(clean_forensics)
@@ -875,3 +930,23 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // Supplied during loadout gear tweaking.
 /obj/item/proc/set_custom_desc(var/new_desc)
 	desc = new_desc
+
+/obj/item/proc/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
+	if(loaded_cell_type && accepted_cell_type)
+		set_extension(src, (power_supply_extension_type || /datum/extension/loaded_cell), accepted_cell_type, loaded_cell_type, charge_value)
+
+/obj/item/proc/handle_loadout_equip_replacement(obj/item/old_item)
+	return
+
+/obj/item/equipped(mob/user, slot)
+	. = ..()
+	// delay for 1ds to allow the rest of the call stack to resolve
+	if(!QDELETED(src) && !QDELETED(user) && user.get_equipped_slot_for_item(src) == slot)
+		try_burn_wearer(user, slot, 1)
+
+/obj/item/ProcessAtomTemperature()
+	if(material && material.bakes_into_material && !isnull(material.bakes_into_at_temperature) && temperature >= material.bakes_into_at_temperature)
+		set_material(material.bakes_into_material)
+	. = ..()
+

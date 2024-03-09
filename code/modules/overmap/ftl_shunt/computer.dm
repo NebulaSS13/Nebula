@@ -74,7 +74,7 @@
 		plot_delay_mult = 2
 
 	delay = clamp(((jump_dist * BASE_PLOT_TIME_PER_TILE) * plot_delay_mult),1, INFINITY)
-	jump_plot_timer = addtimer(CALLBACK(src, .proc/finish_plot, x, y), delay, TIMER_STOPPABLE)
+	jump_plot_timer = addtimer(CALLBACK(src, PROC_REF(finish_plot), x, y), delay, TIMER_STOPPABLE)
 	plotting_jump = TRUE
 	jump_plotted = FALSE
 	return delay

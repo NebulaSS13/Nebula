@@ -46,6 +46,7 @@ SUBSYSTEM_DEF(supply)
 			for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())
 				spc.setup()
 				master_supply_list += spc
+				CHECK_TICK
 
 // Just add points over time.
 /datum/controller/subsystem/supply/fire()

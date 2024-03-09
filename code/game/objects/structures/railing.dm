@@ -8,11 +8,11 @@
 	layer = OBJ_LAYER
 	climb_speed_mult = 0.25
 	anchored = FALSE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	material = DEFAULT_FURNITURE_MATERIAL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	maxhealth = 100
+	max_health = 100
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
@@ -78,10 +78,10 @@
 
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
 	neighbor_status = 0
-	var/Rturn = turn(src.dir, -90)
-	var/Lturn = turn(src.dir, 90)
+	var/Rturn = turn(dir, -90)
+	var/Lturn = turn(dir, 90)
 
-	for(var/obj/structure/railing/R in src.loc)
+	for(var/obj/structure/railing/R in loc)
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 32
 			if (UpdateNeighbors)
@@ -91,21 +91,21 @@
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, Lturn))
-		if ((R.dir == src.dir) && R.anchored)
+		if ((R.dir == dir) && R.anchored)
 			neighbor_status |= 16
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, Rturn))
-		if ((R.dir == src.dir) && R.anchored)
+		if ((R.dir == dir) && R.anchored)
 			neighbor_status |= 1
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, (Lturn + src.dir)))
+	for (var/obj/structure/railing/R in get_step(src, (Lturn + dir)))
 		if ((R.dir == Rturn) && R.anchored)
 			neighbor_status |= 64
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir)))
+	for (var/obj/structure/railing/R in get_step(src, (Rturn + dir)))
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 4
 			if (UpdateNeighbors)
@@ -164,7 +164,7 @@
 		to_chat(usr, "<span class='warning'>You can't flip \the [src] - something is in the way.</span>")
 		return 0
 
-	forceMove(get_step(src, src.dir))
+	forceMove(get_step(src, dir))
 	set_dir(turn(dir, 180))
 	update_icon()
 
@@ -198,7 +198,7 @@
 					H.apply_damage(8, BRUTE, BP_HEAD)
 				else
 					if (get_turf(H) == get_turf(src))
-						H.forceMove(get_step(src, src.dir))
+						H.forceMove(get_step(src, dir))
 					else
 						H.dropInto(loc)
 					SET_STATUS_MAX(H, STAT_WEAK, 5)
@@ -210,7 +210,7 @@
 	// Dismantle
 	if(IS_WRENCH(W))
 		if(!anchored)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(do_after(user, 20, src))
 				if(anchored)
 					return
@@ -220,7 +220,7 @@
 			return
 	// Wrench Open
 		else
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(density)
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] open.</span>", "<span class='notice'>You wrench \the [src] open.</span>")
 				density = FALSE
@@ -233,15 +233,16 @@
 	if(IS_WELDER(W))
 		var/obj/item/weldingtool/F = W
 		if(F.isOn())
-			if(health >= maxhealth)
+			var/current_max_health = get_max_health()
+			if(current_health >= current_max_health)
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
 				return
-			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+			playsound(loc, 'sound/items/Welder.ogg', 50, 1)
 			if(do_after(user, 20, src))
-				if(health >= maxhealth)
+				if(current_health >= current_max_health)
 					return
 				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				health = min(health+(maxhealth/5), maxhealth)
+				current_health = min(current_health+(current_max_health/5), current_max_health)
 			return
 
 	// Install
@@ -272,7 +273,7 @@
 /obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
 	. = ..()
 	if(. && get_turf(user) == get_turf(src))
-		var/turf/T = get_step(src, src.dir)
+		var/turf/T = get_step(src, dir)
 		if(T.turf_is_crowded(user))
 			to_chat(user, "<span class='warning'>You can't climb there, the way is blocked.</span>")
 			return 0
@@ -281,7 +282,7 @@
 	. = ..()
 	if(.)
 		if(!anchored || material.is_brittle())
-			take_damage(maxhealth) // Fatboy
+			take_damage(get_max_health()) // Fatboy
 
 	user.jump_layer_shift()
-	addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 2)
+	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, jump_layer_shift_end)), 2)

@@ -1,5 +1,5 @@
-/mob/living/carbon/alien/ascent_nymph
-	default_emotes = list(
+/mob/living/carbon/alien/ascent_nymph/get_default_emotes()
+	var/static/list/default_emotes = list(
 		/decl/emote/visible,
 		/decl/emote/visible/scratch,
 		/decl/emote/visible/drool,
@@ -20,3 +20,4 @@
 		/decl/emote/audible/bug_hiss,
 		/decl/emote/audible/bug_chitter
 	)
+	return default_emotes

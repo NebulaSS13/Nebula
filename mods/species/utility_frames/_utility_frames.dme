@@ -1,5 +1,6 @@
 #ifndef MODPACK_UTILITY_FRAMES
 #define MODPACK_UTILITY_FRAMES
+#include "../../content/shackles/_shackles.dme"
 #include "_utility_frames.dm"
 #include "species.dm"
 #include "species_bodytypes.dm"

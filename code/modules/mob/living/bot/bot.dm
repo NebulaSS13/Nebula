@@ -1,7 +1,6 @@
 /mob/living/bot
 	name = "Bot"
-	health = 20
-	maxHealth = 20
+	max_health = 20
 	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = TRUE
 	density = FALSE
@@ -55,34 +54,37 @@
 	access_scanner = new /obj(src)
 	access_scanner.req_access = req_access?.Copy()
 
-/mob/living/bot/Initialize()
-	. = ..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else
 		turn_off()
 
-/mob/living/bot/Life()
-	..()
-	if(health <= 0)
-		death()
-		return
-	set_status(STAT_WEAK, 0)
-	set_status(STAT_STUN, 0)
-	set_status(STAT_PARA, 0)
+/mob/living/bot/handle_regular_status_updates()
+	. = ..()
+	if(.)
+		set_status(STAT_WEAK, 0)
+		set_status(STAT_STUN, 0)
+		set_status(STAT_PARA, 0)
 
-	if(on && !client && !busy)
-		handleAI()
+/mob/living/bot/get_total_life_damage()
+	return getFireLoss() + getBruteLoss()
 
-/mob/living/bot/updatehealth()
-	if(status_flags & GODMODE)
-		health = maxHealth
-		set_stat(CONSCIOUS)
-	else
-		health = maxHealth - getFireLoss() - getBruteLoss()
+/mob/living/bot/get_dusted_remains()
+	return /obj/effect/decal/cleanable/blood/oil
 
-/mob/living/bot/death()
-	explode()
+/mob/living/bot/gib(do_gibs)
+	if(stat != DEAD)
+		death(gibbed = TRUE)
+	if(stat == DEAD)
+		turn_off()
+		visible_message(SPAN_DANGER("\The [src] blows apart!"))
+		spark_at(src, cardinal_only = TRUE)
+	return ..()
+
+/mob/living/bot/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		gib()
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
 	if(O.GetIdCard())
@@ -104,9 +106,9 @@
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
 	else if(IS_WELDER(O))
-		if(health < maxHealth)
+		if(current_health < get_max_health())
 			if(open)
-				health = min(maxHealth, health + 10)
+				heal_overall_damage(10)
 				user.visible_message("<span class='notice'>\The [user] repairs \the [src].</span>","<span class='notice'>You repair \the [src].</span>")
 			else
 				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
@@ -209,7 +211,12 @@
 /mob/living/bot/emag_act(var/remaining_charges, var/mob/user)
 	return 0
 
-/mob/living/bot/proc/handleAI()
+/mob/living/bot/handle_legacy_ai()
+	. = ..()
+	if(on && !busy)
+		handle_async_ai()
+
+/mob/living/bot/proc/handle_async_ai()
 	set waitfor = FALSE
 	if(ignore_list.len)
 		for(var/atom/A in ignore_list)
@@ -288,7 +295,7 @@
 /mob/living/bot/proc/startPatrol()
 	var/turf/T = getPatrolTurf()
 	if(T)
-		patrol_path = AStar(get_turf(loc), T, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, max_patrol_dist, id = botcard, exclude = obstacle)
+		patrol_path = AStar(get_turf(loc), T, TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_patrol_dist, id = botcard, exclude = obstacle)
 		if(!patrol_path)
 			patrol_path = list()
 		obstacle = null
@@ -320,7 +327,7 @@
 	return
 
 /mob/living/bot/proc/calcTargetPath()
-	target_path = AStar(get_turf(loc), get_turf(target), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, max_target_dist, id = botcard, exclude = obstacle)
+	target_path = AStar(get_turf(loc), get_turf(target), TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_target_dist, id = botcard, exclude = obstacle)
 	if(!target_path)
 		if(target && target.loc)
 			ignore_list |= target
@@ -360,9 +367,6 @@
 	set_light(0)
 	update_icon()
 
-/mob/living/bot/proc/explode()
-	qdel(src)
-
 /******************************************************************/
 // Navigation procs
 // Used for A-star pathfinding
@@ -373,13 +377,10 @@
 /turf/proc/CardinalTurfsWithAccess(var/obj/item/card/id/ID)
 	var/L[] = new()
 
-	//	for(var/turf/simulated/t in oview(src,1))
-
 	for(var/d in global.cardinal)
-		var/turf/simulated/T = get_step(src, d)
-		if(istype(T) && !T.density)
-			if(!LinkBlockedWithAccess(src, T, ID))
-				L.Add(T)
+		var/turf/T = get_step(src, d)
+		if(istype(T) && !T.density && T.simulated && !LinkBlockedWithAccess(src, T, ID))
+			L.Add(T)
 	return L
 
 

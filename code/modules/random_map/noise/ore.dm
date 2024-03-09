@@ -8,30 +8,30 @@
 	var/min_deep_ratio = MIN_DEEP_COUNT_PER_CHUNK
 
 	var/list/surface_metals = list(
-		/decl/material/solid/metal/iron =              list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
-		/decl/material/solid/metal/aluminium =         list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/metal/gold =              list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
-		/decl/material/solid/metal/silver =            list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
-		/decl/material/solid/metal/uranium =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+		/decl/material/solid/metal/iron        = list(RESOURCE_HIGH_MIN,   RESOURCE_HIGH_MAX),
+		/decl/material/solid/metal/aluminium   = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
+		/decl/material/solid/metal/gold        = list(RESOURCE_LOW_MIN,    RESOURCE_LOW_MAX),
+		/decl/material/solid/metal/silver      = list(RESOURCE_LOW_MIN,    RESOURCE_LOW_MAX),
+		/decl/material/solid/metal/uranium     = list(RESOURCE_LOW_MIN,    RESOURCE_LOW_MAX)
 	)
 	var/list/rare_metals = list(
-		/decl/material/solid/metal/gold =              list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/metal/silver =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/metal/uranium =           list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/metal/osmium =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/metal/gold        = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
+		/decl/material/solid/metal/silver      = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
+		/decl/material/solid/metal/uranium     = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
+		/decl/material/solid/metal/osmium      = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
+		/decl/material/solid/rutile            = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX)
 	)
 	var/list/deep_metals = list(
-		/decl/material/solid/metal/uranium =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
-		/decl/material/solid/gemstone/diamond =        list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
-		/decl/material/solid/metal/osmium =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
-		/decl/material/solid/metallic_hydrogen =       list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/metal/uranium     = list(RESOURCE_LOW_MIN,    RESOURCE_LOW_MAX),
+		/decl/material/solid/gemstone/diamond  = list(RESOURCE_LOW_MIN,    RESOURCE_LOW_MAX),
+		/decl/material/solid/metal/osmium      = list(RESOURCE_HIGH_MIN,   RESOURCE_HIGH_MAX),
+		/decl/material/solid/metallic_hydrogen = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
+		/decl/material/solid/rutile            = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX)
 	)
 	var/list/common_resources = list(
-		/decl/material/solid/sand =     list(3,5),
-		/decl/material/solid/clay =     list(3,5),
-		/decl/material/solid/graphite = list(3,5)
+		/decl/material/solid/sand              = list(RESOURCE_COMMON_MIN, RESOURCE_COMMON_MAX),
+		/decl/material/solid/clay              = list(RESOURCE_COMMON_MIN, RESOURCE_COMMON_MAX),
+		/decl/material/solid/graphite          = list(RESOURCE_COMMON_MIN, RESOURCE_COMMON_MAX)
 	)
 
 /datum/random_map/noise/ore/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
@@ -94,19 +94,19 @@
 
 			var/tmp_cell
 			TRANSLATE_AND_VERIFY_COORD(x, y)
+			if(tmp_cell)
+				var/spawning
+				if(tmp_cell < rare_val)
+					spawning = surface_metals
+				else if(tmp_cell < deep_val)
+					spawning = rare_metals
+				else
+					spawning = deep_metals
 
-			var/spawning
-			if(tmp_cell < rare_val)
-				spawning = surface_metals
-			else if(tmp_cell < deep_val)
-				spawning = rare_metals
-			else
-				spawning = deep_metals
-
-			for(var/val in spawning)
-				var/list/ranges = spawning[val]
-				resources[val] = rand(ranges[1], ranges[2])
-			set_extension(T, /datum/extension/buried_resources, resources)
+				for(var/val in spawning)
+					var/list/ranges = spawning[val]
+					resources[val] = rand(ranges[1], ranges[2])
+				set_extension(T, /datum/extension/buried_resources, resources)
 
 /datum/random_map/noise/ore/get_map_char(var/value)
 	if(value < rare_val)

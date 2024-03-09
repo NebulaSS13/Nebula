@@ -318,12 +318,12 @@
 
 /area/turbolift/tradeship_cargo
 	name = "Lower Cargo Bay"
-	base_turf = /turf/simulated/open
+	base_turf = /turf/open
 
 /area/turbolift/tradeship_upper
 	name = "Upper Cargo Bay"
-	base_turf = /turf/simulated/open
+	base_turf = /turf/open
 
 /area/turbolift/tradeship_roof
 	name = "Solar Array Access"
-	base_turf = /turf/simulated/open
+	base_turf = /turf/open

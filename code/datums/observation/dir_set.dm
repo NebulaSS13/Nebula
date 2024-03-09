@@ -18,7 +18,7 @@
 
 	// Listen to the parent if possible.
 	if(. && istype(dir_changer.loc, /atom/movable))	// We don't care about registering to turfs.
-		register(dir_changer.loc, dir_changer, /atom/proc/recursive_dir_set)
+		register(dir_changer.loc, dir_changer, TYPE_PROC_REF(/atom, recursive_dir_set))
 
 /*********************
 * Direction Handling *
@@ -28,8 +28,8 @@
 	. = ..()
 	var/decl/observ/dir_set/dir_set_event = GET_DECL(/decl/observ/dir_set)
 	if(dir_set_event.has_listeners(am))
-		events_repository.register(/decl/observ/dir_set, src, am, /atom/proc/recursive_dir_set)
+		events_repository.register(/decl/observ/dir_set, src, am, TYPE_PROC_REF(/atom, recursive_dir_set))
 
 /atom/movable/Exited(var/atom/movable/am, atom/new_loc)
 	. = ..()
-	events_repository.unregister(/decl/observ/dir_set, src, am, /atom/proc/recursive_dir_set)
+	events_repository.unregister(/decl/observ/dir_set, src, am, TYPE_PROC_REF(/atom, recursive_dir_set))

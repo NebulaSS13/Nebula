@@ -721,12 +721,9 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Globally Toggles OOC"
 	set name="Toggle OOC"
-
 	if(!check_rights(R_ADMIN))
 		return
-
-	config.ooc_allowed = !(config.ooc_allowed)
-	if (config.ooc_allowed)
+	if (toggle_config_value(/decl/config/toggle/on/ooc_allowed))
 		to_world("<B>The OOC channel has been globally enabled!</B>")
 	else
 		to_world("<B>The OOC channel has been globally disabled!</B>")
@@ -737,12 +734,9 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Globally Toggles AOOC"
 	set name="Toggle AOOC"
-
 	if(!check_rights(R_ADMIN))
 		return
-
-	config.aooc_allowed = !(config.aooc_allowed)
-	if (config.aooc_allowed)
+	if (toggle_config_value(/decl/config/toggle/on/aooc_allowed))
 		communicate_broadcast(/decl/communication_channel/aooc, "The AOOC channel has been globally enabled!", TRUE)
 	else
 		communicate_broadcast(/decl/communication_channel/aooc, "The AOOC channel has been globally disabled!", TRUE)
@@ -756,9 +750,7 @@ var/global/floorIsLava = 0
 
 	if(!check_rights(R_ADMIN))
 		return
-
-	config.looc_allowed = !(config.looc_allowed)
-	if (config.looc_allowed)
+	if (toggle_config_value(/decl/config/toggle/on/looc_allowed))
 		to_world("<B>The LOOC channel has been globally enabled!</B>")
 	else
 		to_world("<B>The LOOC channel has been globally disabled!</B>")
@@ -773,9 +765,7 @@ var/global/floorIsLava = 0
 
 	if(!check_rights(R_ADMIN))
 		return
-
-	config.dsay_allowed = !(config.dsay_allowed)
-	if (config.dsay_allowed)
+	if (toggle_config_value(/decl/config/toggle/on/dsay_allowed))
 		to_world("<B>Deadchat has been globally enabled!</B>")
 	else
 		to_world("<B>Deadchat has been globally disabled!</B>")
@@ -786,11 +776,9 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Toggle Dead OOC."
 	set name="Toggle Dead OOC"
-
 	if(!check_rights(R_ADMIN))
 		return
-
-	config.dooc_allowed = !( config.dooc_allowed )
+	toggle_config_value(/decl/config/toggle/on/dooc_allowed)
 	log_admin("[key_name(usr)] toggled Dead OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
 	SSstatistics.add_field_details("admin_verb","TDOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -804,9 +792,10 @@ var/global/floorIsLava = 0
 		return
 
 	//BYOND hates actually changing world.visibility at runtime, so let's just change if we give it the hub password.
-	world.update_hub_visibility() //proc defined in hub.dm
-	var/long_message = "toggled hub visibility. The server is now [global.visibility_pref ? "visible" : "invisible"] ([global.visibility_pref])."
-	if (global.visibility_pref && !world.reachable)
+	toggle_config_value(/decl/config/toggle/hub_visibility)
+	var/new_vis = get_config_value(/decl/config/toggle/hub_visibility)
+	var/long_message = "toggled hub visibility. The server is now [new_vis ? "visible" : "invisible"]."
+	if (new_vis && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
 
 	send2adminirc("[key_name(src)]" + long_message)
@@ -817,9 +806,12 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Toggle traitor scaling"
 	set name="Toggle Traitor Scaling"
-	config.traitor_scaling = !config.traitor_scaling
-	log_admin("[key_name(usr)] toggled Traitor Scaling to [config.traitor_scaling].")
-	message_admins("[key_name_admin(usr)] toggled Traitor Scaling [config.traitor_scaling ? "on" : "off"].", 1)
+	if(toggle_config_value(/decl/config/toggle/traitor_scaling))
+		log_admin("[key_name(usr)] toggled Traitor Scaling to on.")
+		message_admins("[key_name_admin(usr)] toggled Traitor Scaling on.", 1)
+	else
+		log_admin("[key_name(usr)] toggled Traitor Scaling to off.")
+		message_admins("[key_name_admin(usr)] toggled Traitor Scaling off.", 1)
 	SSstatistics.add_field_details("admin_verb","TTS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/startnow()
@@ -858,7 +850,7 @@ var/global/floorIsLava = 0
 	if(confirm == "Yes")
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		SSticker.end_game_state = END_GAME_READY_TO_END
-		INVOKE_ASYNC(SSticker, /datum/controller/subsystem/ticker/proc/declare_completion)
+		INVOKE_ASYNC(SSticker, TYPE_PROC_REF(/datum/controller/subsystem/ticker, declare_completion))
 		log_and_message_admins("initiated a game ending.")
 		to_world("<span class='danger'>Game ending!</span> <span class='notice'>Initiated by [usr.key]!</span>")
 		SSstatistics.add_field("admin_verb","ER") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -867,11 +859,10 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="People can't enter"
 	set name="Toggle Entering"
-	config.enter_allowed = !(config.enter_allowed)
-	if (!(config.enter_allowed))
-		to_world("<B>New players may no longer enter the game.</B>")
-	else
+	if (toggle_config_value(/decl/config/toggle/on/enter_allowed))
 		to_world("<B>New players may now enter the game.</B>")
+	else
+		to_world("<B>New players may no longer enter the game.</B>")
 	log_and_message_admins("toggled new player game entering.")
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -880,11 +871,11 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="People can't be AI"
 	set name="Toggle AI"
-	config.allow_ai = !( config.allow_ai )
-	if (!( config.allow_ai ))
-		to_world("<B>The AI job is no longer chooseable.</B>")
-	else
+
+	if (toggle_config_value(/decl/config/toggle/on/allow_ai))
 		to_world("<B>The AI job is chooseable now.</B>")
+	else
+		to_world("<B>The AI job is no longer chooseable.</B>")
 	log_admin("[key_name(usr)] toggled AI allowed.")
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -893,12 +884,12 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Respawn basically"
 	set name="Toggle Respawn"
-	config.abandon_allowed = !(config.abandon_allowed)
-	if(config.abandon_allowed)
+	if (toggle_config_value(/decl/config/toggle/on/abandon_allowed))
 		to_world("<B>You may now respawn.</B>")
+		log_and_message_admins("toggled respawn to On.")
 	else
 		to_world("<B>You may no longer respawn :(</B>")
-	log_and_message_admins("toggled respawn to [config.abandon_allowed ? "On" : "Off"].")
+		log_and_message_admins("toggled respawn to Off.")
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -908,10 +899,12 @@ var/global/floorIsLava = 0
 	set name="Toggle Aliens"
 	if(!check_rights(R_ADMIN))
 		return
-
-	config.aliens_allowed = !config.aliens_allowed
-	log_admin("[key_name(usr)] toggled Aliens to [config.aliens_allowed].")
-	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
+	if(toggle_config_value(/decl/config/toggle/aliens_allowed))
+		log_admin("[key_name(usr)] toggled Aliens to On.")
+		message_admins("[key_name_admin(usr)] toggled Aliens on.", 1)
+	else
+		log_admin("[key_name(usr)] toggled Aliens to Off.")
+		message_admins("[key_name_admin(usr)] toggled Aliens off.", 1)
 	SSstatistics.add_field_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggle_space_ninja()
@@ -920,9 +913,8 @@ var/global/floorIsLava = 0
 	set name="Toggle Space Ninjas"
 	if(!check_rights(R_ADMIN))
 		return
-
-	config.ninjas_allowed = !config.ninjas_allowed
-	log_and_message_admins("toggled Space Ninjas [config.ninjas_allowed ? "on" : "off"].")
+	toggle_config_value(/decl/config/toggle/ninjas_allowed)
+	log_and_message_admins("toggled Space Ninjas [get_config_value(/decl/config/toggle/ninjas_allowed) ? "on" : "off"].")
 	SSstatistics.add_field_details("admin_verb","TSN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/delay()
@@ -948,24 +940,24 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Toggle admin jumping"
 	set name="Toggle Jump"
-	config.allow_admin_jump = !(config.allow_admin_jump)
-	log_and_message_admins("toggled admin jumping to [config.allow_admin_jump].")
+	toggle_config_value(/decl/config/toggle/on/admin_jump)
+	log_and_message_admins("toggled admin jumping to [get_config_value(/decl/config/toggle/on/admin_jump)].")
 	SSstatistics.add_field_details("admin_verb","TJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adspawn()
 	set category = "Server"
 	set desc="Toggle admin spawning"
 	set name="Toggle Spawn"
-	config.allow_admin_spawning = !(config.allow_admin_spawning)
-	log_and_message_admins("toggled admin item spawning to [config.allow_admin_spawning].")
+	toggle_config_value(/decl/config/toggle/on/admin_spawning)
+	log_and_message_admins("toggled admin item spawning to [get_config_value(/decl/config/toggle/on/admin_spawning)].")
 	SSstatistics.add_field_details("admin_verb","TAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adrev()
 	set category = "Server"
 	set desc="Toggle admin revives"
 	set name="Toggle Revive"
-	config.allow_admin_rev = !(config.allow_admin_rev)
-	log_and_message_admins("toggled reviving to [config.allow_admin_rev].")
+	toggle_config_value(/decl/config/toggle/on/admin_revive)
+	log_and_message_admins("toggled reviving to [get_config_value(/decl/config/toggle/on/admin_revive)].")
 	SSstatistics.add_field_details("admin_verb","TAR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/immreboot()
@@ -987,7 +979,7 @@ var/global/floorIsLava = 0
 	set category = "Admin"
 	set name = "Unprison"
 	if (isAdminLevel(M.z))
-		if (config.allow_admin_jump)
+		if (get_config_value(/decl/config/toggle/on/admin_jump))
 			M.forceMove(get_random_spawn_turf(SPAWN_FLAG_PRISONERS_CAN_SPAWN))
 			message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]", 1)
 			log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
@@ -1144,7 +1136,9 @@ var/global/floorIsLava = 0
 	for(var/path in subtypesof(/atom))
 		var/atom/path_cast = path
 		if(TYPE_IS_SPAWNABLE(path_cast) && findtext(lowertext("[path]"), object))
-			matches += "[path]" // We need to use a string because input() checks invisibility on types for Reasons:tm:.
+			// We need to keep the type as a string because for some ungodly reason input() compares
+			// initial invisibility value to mob see_invisible.
+			matches += "[path]"
 
 	if(matches.len==0)
 		return
@@ -1153,11 +1147,11 @@ var/global/floorIsLava = 0
 	if(matches.len==1)
 		chosen = matches[1]
 	else
-		chosen = input("Select an atom type", "Spawn Atom", matches[1]) as null|anything in matches
+		chosen = input(usr, "Select an atom type", "Spawn Atom", matches[1]) as null|anything in matches
 		if(!chosen)
 			return
 
-	chosen = text2path(chosen)
+	chosen = text2path(chosen) // See comment above.
 	if(ispath(chosen,/turf))
 		var/turf/T = get_turf(usr.loc)
 		T.ChangeTurf(chosen)
@@ -1263,8 +1257,7 @@ var/global/floorIsLava = 0
 	set category = "Debug"
 	set desc="Reduces view range when wearing welding helmets"
 	set name="Toggle tinted welding helmets."
-	config.welder_vision = !( config.welder_vision )
-	if (config.welder_vision)
+	if (toggle_config_value(/decl/config/toggle/on/welder_vision))
 		to_world("<B>Reduced welder vision has been enabled!</B>")
 	else
 		to_world("<B>Reduced welder vision has been disabled!</B>")
@@ -1275,13 +1268,14 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Guests can't enter"
 	set name="Toggle guests"
-	config.guests_allowed = !(config.guests_allowed)
-	if (!(config.guests_allowed))
-		to_world("<B>Guests may no longer enter the game.</B>")
-	else
+	if (toggle_config_value(/decl/config/toggle/guests_allowed))
 		to_world("<B>Guests may now enter the game.</B>")
-	log_admin("[key_name(usr)] toggled guests game entering [config.guests_allowed?"":"dis"]allowed.")
-	log_and_message_admins("toggled guests game entering [config.guests_allowed?"":"dis"]allowed.")
+		log_admin("[key_name(usr)] toggled guests game entering allowed.")
+		log_and_message_admins("toggled guests game entering allowed.")
+	else
+		to_world("<B>Guests may no longer enter the game.</B>")
+		log_admin("[key_name(usr)] toggled guests game entering disallowed.")
+		log_and_message_admins("toggled guests game entering disallowed.")
 	SSstatistics.add_field_details("admin_verb","TGU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/output_ai_laws()

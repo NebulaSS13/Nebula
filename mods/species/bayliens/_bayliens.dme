@@ -44,6 +44,7 @@
 #include "tajaran\datum\language.dm"
 #include "tajaran\datum\species.dm"
 #include "tajaran\datum\species_bodytypes.dm"
+#include "tajaran\machinery\suit_cycler.dm"
 #include "tritonian\_tritonian.dm"
 #include "tritonian\datum\species.dm"
 #include "tritonian\datum\species_bodytypes.dm"

@@ -71,3 +71,19 @@
 		/datum/computer_file/program/shields_monitor,
 		/datum/computer_file/program/supermatter_monitor
 	)
+
+/obj/machinery/computer/modular/telescreen/preset/entertainment
+	default_software = list(
+		/datum/computer_file/program/camera_monitor
+	)
+	autorun_program = /datum/computer_file/program/camera_monitor
+
+/obj/machinery/computer/modular/telescreen/preset/security
+	default_software = list(
+		/datum/computer_file/program/digitalwarrant,
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/records,
+		/datum/computer_file/program/forceauthorization,
+		/datum/computer_file/program/wordprocessor
+	)
+	autorun_program = /datum/computer_file/program/camera_monitor

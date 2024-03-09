@@ -2,7 +2,7 @@
 	name = "random scanner"
 	desc = "This is a random technology scanner."
 	icon = 'icons/obj/items/device/scanner/atmos_scanner.dmi'
-	icon_state = "atmos"
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/technology_scanner/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -98,7 +98,7 @@
 	name = "random assembly"
 	desc = "This is a random circuit assembly."
 	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift1"
+	icon_state = "gift_1"
 
 /obj/random/assembly/spawn_choices()
 	var/static/list/spawnable_choices = list(

@@ -22,10 +22,8 @@
 	. = ..()
 	update_icon()
 
-/obj/item/oxycandle/afterattack(var/obj/O, var/mob/user, var/proximity)
-	if(proximity && istype(O) && on)
-		O.HandleObjectHeating(src, user, 500)
-	..()
+/obj/item/oxycandle/get_heat()
+	return on ? 500 : 0
 
 /obj/item/oxycandle/attack_self(mob/user)
 	if(!on)

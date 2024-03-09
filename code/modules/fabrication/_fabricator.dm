@@ -88,7 +88,7 @@
 	// Get any local network we need to be part of.
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
-	if(SSfabrication.post_recipe_init)
+	if(SSfabrication.initialized)
 		refresh_design_cache()
 	else
 		SSfabrication.queue_design_cache_refresh(src)

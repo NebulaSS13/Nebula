@@ -28,6 +28,13 @@
 		/decl/natural_attack/bite/sharp
 	)
 
+	available_accessory_categories = list(
+		SAC_HORNS,
+		SAC_FRILLS,
+		SAC_COSMETICS,
+		SAC_MARKINGS
+	)
+
 	primitive_form = "Stok"
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
@@ -43,14 +50,6 @@
 
 	description = "A heavily reptillian species. They prefer warmer temperatures than most species and \
 	their native tongue is a heavy hissing laungage."
-
-	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 220 //Default 200
-	cold_level_3 = 130 //Default 120
-
-	heat_level_1 = 420 //Default 360 - Higher is better
-	heat_level_2 = 480 //Default 400
-	heat_level_3 = 1100 //Default 1000
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
 
@@ -71,20 +70,6 @@
 	)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
-	heat_discomfort_level = 320
-	heat_discomfort_strings = list(
-		"You feel soothingly warm.",
-		"You feel the heat sink into your bones.",
-		"You feel warm enough to take a nap."
-		)
-
-	cold_discomfort_level = 292
-	cold_discomfort_strings = list(
-		"You feel chilly.",
-		"You feel sluggish and cold.",
-		"Your scales bristle against the cold."
-		)
-
 	breathing_sound = 'mods/species/bayliens/unathi/sound/lizard_breathing.ogg'
 
 	appearance_descriptors = list(
@@ -93,13 +78,13 @@
 		)
 
 	default_emotes = list(
-		/decl/emote/human/swish,
-		/decl/emote/human/wag,
-		/decl/emote/human/sway,
-		/decl/emote/human/qwag,
-		/decl/emote/human/fastsway,
-		/decl/emote/human/swag,
-		/decl/emote/human/stopsway
+		/decl/emote/visible/tail/swish,
+		/decl/emote/visible/tail/wag,
+		/decl/emote/visible/tail/sway,
+		/decl/emote/visible/tail/qwag,
+		/decl/emote/visible/tail/fastsway,
+		/decl/emote/visible/tail/swag,
+		/decl/emote/visible/tail/stopsway
 	)
 
 	pain_emotes_with_pain_level = list(

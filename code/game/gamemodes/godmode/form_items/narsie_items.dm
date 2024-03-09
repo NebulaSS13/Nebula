@@ -56,7 +56,7 @@
 	if(ismob(a))
 		var/mob/M = a
 		if(M.stat != DEAD)
-			events_repository.register(/decl/observ/death, M,src,/obj/item/twohanded/fireaxe/cult/proc/gain_power)
+			events_repository.register(/decl/observ/death, M,src, TYPE_PROC_REF(/obj/item/twohanded/fireaxe/cult, gain_power))
 		spawn(30)
 			events_repository.unregister(/decl/observ/death, M,src)
 	return ..()
@@ -74,4 +74,4 @@
 	amount_per_transfer_from_this = 10
 
 /obj/item/chems/drinks/zombiedrink/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/zombie, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/zombie, reagents.maximum_volume)

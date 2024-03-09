@@ -78,10 +78,10 @@
 			return
 		if(!cuffs || buckled)
 			return
-	if (cuffs.can_take_damage() && cuffs.health > 0) // Improvised cuffs can break because their health is > 0
+	if (cuffs.can_take_damage() && cuffs.current_health > 0) // Improvised cuffs can break because their health is > 0
 		var/cuffs_name = "\the [cuffs]"
-		cuffs.take_damage(cuffs.max_health / 2)
-		if (QDELETED(cuffs) || cuffs.health < 1)
+		cuffs.take_damage(cuffs.get_max_health() / 2)
+		if (QDELETED(cuffs) || cuffs.current_health < 1)
 			visible_message(
 				SPAN_DANGER("\The [src] manages to remove [cuffs_name], breaking them!"),
 				SPAN_NOTICE("You successfully remove [cuffs_name], breaking them!"), range = 2

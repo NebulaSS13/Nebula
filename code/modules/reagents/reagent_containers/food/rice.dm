@@ -8,7 +8,7 @@
 	icon_state = "boiledrice"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fffbdb"
-	center_of_mass = @"{'x':17,'y':11}"
+	center_of_mass = @'{"x":17,"y":11}'
 	nutriment_desc = list("rice" = 2)
 	nutriment_amt = 6
 	bitesize = 2
@@ -27,7 +27,7 @@
 	icon_state = "katsu"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#faa005"
-	center_of_mass = @"{'x':17,'y':11}"
+	center_of_mass = @'{"x":17,"y":11}'
 	nutriment_desc = list("rice" = 2, "apple" = 2, "potato" = 2, "carrot" = 2, "bread" = 2, )
 	nutriment_amt = 6
 	bitesize = 2
@@ -38,7 +38,7 @@
 	icon_state = "rpudding"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fffbdb"
-	center_of_mass = @"{'x':17,'y':11}"
+	center_of_mass = @'{"x":17,"y":11}'
 	nutriment_desc = list("rice" = 2)
 	nutriment_amt = 4
 	bitesize = 2

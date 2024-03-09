@@ -11,10 +11,9 @@
 	department_types = list(/decl/department/civilian)
 
 /datum/job/assistant/get_access()
-	if(config.assistant_maint)
+	if(get_config_value(/decl/config/toggle/assistant_maint))
 		return list(access_maint_tunnels)
-	else
-		return list()
+	return list()
 
 /datum/job/chaplain
 	title = "Chaplain"

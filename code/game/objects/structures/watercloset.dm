@@ -75,11 +75,9 @@ var/global/list/hygiene_props = list()
 				visible_message("\The [src] gurgles and overflows!")
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
-			var/obj/effect/fluid/F = locate() in T
-			var/adding = min(flood_amt-F?.reagents.total_volume, rand(30,50)*clogged)
+			var/adding = min(flood_amt-T?.reagents?.total_volume, rand(30,50)*clogged)
 			if(adding > 0)
-				if(!F) F = new(T)
-				F.reagents.add_reagent(/decl/material/liquid/water, adding)
+				T.add_to_reagents(/decl/material/liquid/water, adding)
 
 /obj/structure/hygiene/proc/drain()
 	if(!can_drain) return
@@ -208,7 +206,7 @@ var/global/list/hygiene_props = list()
 	icon_state = "urinal"
 	density = FALSE
 	anchored = TRUE
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
@@ -284,7 +282,7 @@ var/global/list/hygiene_props = list()
 /obj/effect/mist/Initialize()
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
-		addtimer(CALLBACK(src, /datum/proc/qdel_self), 25 SECONDS)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 25 SECONDS)
 
 /obj/structure/hygiene/shower/attackby(obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/scanner/gas))
@@ -322,7 +320,7 @@ var/global/list/hygiene_props = list()
 		for(var/thing in loc.get_contained_external_atoms())
 			wash_mob(thing)
 			process_heat(thing)
-		reagents.add_reagent(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
+		add_to_reagents(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
 		if(world.time >= next_wash)
 			next_wash = world.time + (10 SECONDS)
 			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
@@ -335,9 +333,9 @@ var/global/list/hygiene_props = list()
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(water_temperature >= H.get_temperature_threshold(HEAT_LEVEL_1))
+		if(water_temperature >= H.get_mob_temperature_threshold(HEAT_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is searing hot!"))
-		else if(water_temperature <= H.get_temperature_threshold(COLD_LEVEL_1))
+		else if(water_temperature <= H.get_mob_temperature_threshold(COLD_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is freezing cold!"))
 
 /obj/item/bikehorn/rubberducky
@@ -354,7 +352,7 @@ var/global/list/hygiene_props = list()
 	anchored = TRUE
 	var/busy = 0 	//Something's being washed at the moment
 
-/obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/structure/hygiene/sink/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
 		var/obj/item/thing = dropping
@@ -384,7 +382,7 @@ var/global/list/hygiene_props = list()
 		return TRUE
 	busy = FALSE
 
-	user.clean_blood()
+	user.clean()
 	user.visible_message(
 		SPAN_NOTICE("\The [user] washes their hands using \the [src]."),
 		SPAN_NOTICE("You wash your hands using \the [src]."))
@@ -404,13 +402,14 @@ var/global/list/hygiene_props = list()
 			SPAN_NOTICE("\The [user] fills \the [RG] using \the [src]."),
 			SPAN_NOTICE("You fill \the [RG] using \the [src]."))
 		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
-		RG.reagents.add_reagent(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
+		RG.add_to_reagents(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		return 1
 
 	else if (istype(O, /obj/item/baton))
 		var/obj/item/baton/B = O
-		if(B.bcell)
-			if(B.bcell.charge > 0 && B.status == 1)
+		var/obj/item/cell/cell = B.get_cell()
+		if(cell)
+			if(cell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
 				if(isliving(user))
 					var/mob/living/M = user
@@ -427,7 +426,7 @@ var/global/list/hygiene_props = list()
 				return 1
 	else if(istype(O, /obj/item/mop))
 		if(REAGENTS_FREE_SPACE(O.reagents) >= 5)
-			O.reagents.add_reagent(/decl/material/liquid/water, 5)
+			O.add_to_reagents(/decl/material/liquid/water, 5)
 			to_chat(user, SPAN_NOTICE("You wet \the [O] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
@@ -451,7 +450,7 @@ var/global/list/hygiene_props = list()
 
 	if(istype(O, /obj/item/chems/spray/extinguisher)) return TRUE // We're washing, not filling.
 
-	O.clean_blood()
+	O.clean()
 	user.visible_message( \
 		SPAN_NOTICE("\The [user] washes \a [I] using \the [src]."),
 		SPAN_NOTICE("You wash \a [I] using \the [src]."))
@@ -580,7 +579,7 @@ var/global/list/hygiene_props = list()
 		next_gurgle = world.time + 80
 		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
-	T.add_fluid(/decl/material/liquid/water, min(75, fill_level - T.get_fluid_depth()))
+	T.add_to_reagents(/decl/material/liquid/water, min(75, fill_level - T.get_fluid_depth()))
 
 /obj/structure/hygiene/faucet/Process()
 	..()

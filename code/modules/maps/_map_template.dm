@@ -27,6 +27,8 @@
 	var/template_parent_type = /datum/map_template
 	///The initial type of level_data to instantiate new z-level with initially. (Is replaced by whatever is in the map file.) If null, will use default.
 	var/level_data_type
+	/// Various tags used for selecting templates for placement on a map.
+	var/template_tags = 0
 
 /datum/map_template/New(var/created_ad_hoc)
 	if(created_ad_hoc != SSmapping.type)
@@ -43,8 +45,8 @@
 /datum/map_template/proc/get_template_cost()
 	return 0
 
-/datum/map_template/proc/get_ruin_tags()
-	return 0
+/datum/map_template/proc/get_template_tags()
+	return template_tags
 
 /datum/map_template/proc/preload_size()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
@@ -99,12 +101,11 @@
 
 	for (var/turf/T as anything in turfs)
 		if(template_flags & TEMPLATE_FLAG_NO_RUINS)
-			T.turf_flags |= TURF_FLAG_NORUINS
+			T.turf_flags |= TURF_FLAG_NO_POINTS_OF_INTEREST
 		if(template_flags & TEMPLATE_FLAG_NO_RADS)
 			qdel(SSradiation.sources_assoc[T])
-		if(istype(T,/turf/simulated))
-			var/turf/simulated/sim = T
-			sim.update_air_properties()
+		if(istype(T) && T.simulated)
+			T.update_air_properties()
 
 /datum/map_template/proc/pre_init_shuttles()
 	. = SSshuttle.block_queue
@@ -117,12 +118,12 @@
 		SSshuttle.map_hash_to_areas[map_hash] = initialized_areas_by_type
 		for(var/area/A in initialized_areas_by_type)
 			A.saved_map_hash = map_hash
-			events_repository.register(/decl/observ/destroyed, A, src, .proc/cleanup_lateloaded_area)
+			events_repository.register(/decl/observ/destroyed, A, src, PROC_REF(cleanup_lateloaded_area))
 	SSshuttle.block_queue = pre_init_state
 	SSshuttle.clear_init_queue() // We will flush the queue unless there were other blockers, in which case they will do it.
 
 /datum/map_template/proc/cleanup_lateloaded_area(area/destroyed_area)
-	events_repository.unregister(/decl/observ/destroyed, destroyed_area, src, .proc/cleanup_lateloaded_area)
+	events_repository.unregister(/decl/observ/destroyed, destroyed_area, src, PROC_REF(cleanup_lateloaded_area))
 	if(destroyed_area.saved_map_hash)
 		SSshuttle.map_hash_to_areas[destroyed_area.saved_map_hash] -= destroyed_area
 

@@ -12,7 +12,7 @@
 
 	var/atom/from = new donor_type(test_loc)
 	from.create_reagents(container_volume)
-	from.reagents.add_reagent(/decl/material/liquid/water, container_volume)
+	from.add_to_reagents(/decl/material/liquid/water, container_volume)
 
 	var/atom/target
 	if(ispath(recipient_type, /turf) && istype(test_loc, recipient_type))
@@ -219,9 +219,8 @@
 
 	// Cleanup pt. 2
 	chem_refs.Cut()
-	var/obj/effect/fluid/fluid = locate() in spawn_spot
-	if(fluid)
-		qdel(fluid)
+	if(spawn_spot.reagents?.total_volume)
+		spawn_spot.reagents.clear_reagents()
 		failures += "- spawn turf had fluids post-test"
 
 	// Report status.

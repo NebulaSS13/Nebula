@@ -17,7 +17,7 @@
 	description = "Avian species, largely crows, magpies and other corvids, were among the first sophonts uplifted to aid in colonizing Mars. \
 	These days they are more commonly found pursuing their own careers and goals on the fringes of human space or around their adopted homeworld \
 	of Hyperion. Neo-avian naming conventions tend to be a chosen name followed by the species of the person, followed by the location they were hatched."
-	base_prosthetics_model = null
+	base_external_prosthetics_model = null
 
 	snow_slowdown_mod = -1
 
@@ -46,11 +46,6 @@
 	swap_flags = MONKEY|SIMPLE_ANIMAL
 	push_flags = MONKEY|SIMPLE_ANIMAL
 
-	heat_discomfort_strings = list(
-		"Your feathers prickle in the heat.",
-		"You feel uncomfortably warm.",
-		)
-
 	unarmed_attacks = list(
 		/decl/natural_attack/bite/sharp,
 		/decl/natural_attack/claws,
@@ -71,7 +66,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/avian, slot_shoes_str)
 
 /decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
-	return H.skin_colour
+	return H.get_skin_colour()
 
 /decl/hierarchy/outfit/job/generic/assistant/avian
 	name = "Job - Avian Assistant"

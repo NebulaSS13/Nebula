@@ -33,7 +33,7 @@
 /decl/material/liquid/glowsap/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	if(ishuman(holder?.my_atom))
 		var/mob/living/carbon/human/H = holder.my_atom
-		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
+		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, update_eyes)), 5 SECONDS)
 	. = ..()
 
 /decl/material/liquid/glowsap/affect_overdose(var/mob/living/M)
@@ -74,7 +74,7 @@
 /decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
-		M.emote("shiver")
+		M.emote(/decl/emote/visible/shiver)
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
 
 /decl/material/liquid/capsaicin
@@ -309,7 +309,7 @@
 
 /decl/material/solid/tobacco/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.reagents.add_reagent(/decl/material/liquid/nicotine, nicotine)
+	M.add_to_reagents(/decl/material/liquid/nicotine, nicotine)
 
 /decl/material/solid/tobacco/fine
 	name = "fine tobacco"
@@ -423,7 +423,7 @@
 			else if(E.organ_tag != BP_CHEST && E.organ_tag != BP_GROIN && prob(15))
 				to_chat(H, SPAN_DANGER("Your [E.name] is being lacerated from within!"))
 				if(E.can_feel_pain())
-					H.emote("scream")
+					H.emote(/decl/emote/audible/scream)
 				if(prob(25))
 					for(var/i = 1 to rand(3,5))
 						new /obj/item/shard(get_turf(E), result_mat)

@@ -4,7 +4,7 @@
 	suffixes = list("monoliths/monoliths.dmm")
 	cost = 1
 	template_flags = TEMPLATE_FLAG_NO_RUINS
-	ruin_tags = RUIN_ALIEN
+	template_tags = TEMPLATE_TAG_ALIEN
 
 /obj/structure/monolith
 	name = "monolith"

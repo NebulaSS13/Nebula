@@ -1,11 +1,3 @@
-/mob/living/silicon/robot/updatehealth()
-	if(status_flags & GODMODE)
-		health = maxHealth
-		stat = CONSCIOUS
-		return
-	health = maxHealth - (getBruteLoss() + getFireLoss())
-	return
-
 /mob/living/silicon/robot/getBruteLoss()
 	var/amount = 0
 	for(var/V in components)
@@ -20,13 +12,14 @@
 		if(C.installed != 0) amount += C.electronics_damage
 	return amount
 
-/mob/living/silicon/robot/adjustBruteLoss(var/amount)
+/mob/living/silicon/robot/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(FALSE) // take/heal overall call update_health regardless of arg
 	if(amount > 0)
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
 
-/mob/living/silicon/robot/adjustFireLoss(var/amount)
+/mob/living/silicon/robot/adjustFireLoss(var/amount, var/do_update_health = TRUE)
 	if(amount > 0)
 		take_overall_damage(0, amount)
 	else
@@ -56,7 +49,7 @@
 		return C
 	return 0
 
-/mob/living/silicon/robot/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
+/mob/living/silicon/robot/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
 	var/list/datum/robot_component/parts = get_damaged_components(brute, burn)
 	if(!parts.len)	return
 	var/datum/robot_component/picked = pick(parts)
@@ -133,20 +126,16 @@
 	var/datum/robot_component/armour/A = get_armour()
 	if(A)
 		A.take_damage(brute,burn,sharp)
-		return
-
-	while(parts.len && (brute>0 || burn>0) )
-		var/datum/robot_component/picked = pick(parts)
-
-		var/brute_was = picked.brute_damage
-		var/burn_was = picked.electronics_damage
-
-		picked.take_damage(brute,burn)
-
-		brute	-= (picked.brute_damage - brute_was)
-		burn	-= (picked.electronics_damage - burn_was)
-
-		parts -= picked
+	else
+		while(parts.len && (brute>0 || burn>0) )
+			var/datum/robot_component/picked = pick(parts)
+			var/brute_was = picked.brute_damage
+			var/burn_was = picked.electronics_damage
+			picked.take_damage(brute,burn)
+			brute	-= (picked.brute_damage - brute_was)
+			burn	-= (picked.electronics_damage - burn_was)
+			parts -= picked
+	update_health()
 
 /mob/living/silicon/robot/emp_act(severity)
 	uneq_all()

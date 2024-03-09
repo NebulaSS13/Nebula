@@ -185,7 +185,7 @@
 	can_hold = list(/obj/item/photo)
 	material = /decl/material/solid/organic/plastic
 
-/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user)
+/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && in_range(src, user) || loc == user)
 		if(user.active_storage)
 			user.active_storage.close(user)
@@ -211,6 +211,10 @@
 	var/turned_on        = TRUE
 	var/field_of_view    = 3 // squared, so 3 is a 3x3 of tiles
 	var/obj/item/camera_film/film = new //Currently loaded film
+
+/obj/item/camera/loaded/Initialize()
+	film = new(src)
+	return ..()
 
 /obj/item/camera/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
@@ -298,9 +302,9 @@
 		if(length(holding))
 			holding = "They are holding [english_list(holding)]"
 		if(!mob_detail)
-			mob_detail = "You can see [A] on the photo[(A.health / A.maxHealth) < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
+			mob_detail = "You can see [A] on the photo[A.get_health_ratio() < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
 		else
-			mob_detail += "You can also see [A] on the photo[(A.health / A.maxHealth)< 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
+			mob_detail += "You can also see [A] on the photo[A.get_health_ratio() < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
 	return mob_detail
 
 /obj/item/camera/afterattack(atom/target, mob/user, flag)

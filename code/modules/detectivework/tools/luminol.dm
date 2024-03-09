@@ -9,4 +9,4 @@
 	volume = 250
 
 /obj/item/chems/spray/luminol/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/luminol, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/luminol, reagents.maximum_volume)

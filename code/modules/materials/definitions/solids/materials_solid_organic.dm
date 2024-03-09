@@ -3,6 +3,10 @@
 	ignition_point = T0C+500 // Based on loose ignition temperature of plastic
 	accelerant_value = 0.1
 	burn_product = /decl/material/gas/carbon_monoxide
+/* TODO: burn products for solids
+	bakes_into_at_temperature = T0C+500
+	bakes_into_material = /decl/material/solid/carbon
+*/
 
 /decl/material/solid/organic/plastic
 	name = "plastic"
@@ -18,7 +22,7 @@
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	weight = MAT_VALUE_LIGHT
 	melting_point = T0C+371 //assuming heat resistant plastic
-	stack_origin_tech = "{'materials':3}"
+	stack_origin_tech = @'{"materials":3}'
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_SHINY
@@ -30,17 +34,25 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/plastic/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/furniture/crate/plastic(src)
-	. += new/datum/stack_recipe/bag(src)
-	. += new/datum/stack_recipe/ivbag(src)
-	. += create_recipe_list(/datum/stack_recipe/cartridge)
-	. += create_recipe_list(/datum/stack_recipe/tile/light)
-	. += new/datum/stack_recipe/hazard_cone(src)
-	. += new/datum/stack_recipe/furniture/flaps(src)
+/decl/material/solid/organic/wax
+	name = "wax"
+	uid = "solid_wax"
+	taste_description = "waxy blandness"
+	lore_text = "A soft, easily melted substance produced by bees. Used to make candles."
+	accelerant_value = 0.6
+	construction_difficulty = MAT_VALUE_NORMAL_DIY
+	reflectiveness = MAT_VALUE_SHINY
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
+	default_solid_form = /obj/item/stack/material/bar
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	color = "#fffccc"
+	door_icon_base = "plastic"
+	hardness = MAT_VALUE_FLEXIBLE - 10
+	weight = MAT_VALUE_LIGHT
+	melting_point = 363
+	ignition_point = 473
+	boiling_point = 643
 
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
@@ -63,7 +75,7 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
-	stack_origin_tech = "{'materials':1}"
+	stack_origin_tech = @'{"materials":1}'
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
 	conductive = 0
@@ -76,21 +88,12 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/cardboard/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)	//recipes below don't support composite materials
-		return
-	. += create_recipe_list(/datum/stack_recipe/box)
-	. += new/datum/stack_recipe/cardborg_suit(src)
-	. += new/datum/stack_recipe/cardborg_helmet(src)
-	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
-
 /decl/material/solid/organic/paper
 	name                    = "paper"
 	uid                     = "solid_paper"
 	lore_text               = "Low tech writing medium made from cellulose fibers. Also used in wrappings and packaging."
 	color                   = "#cfcece"
-	stack_origin_tech       = "{'materials':1}"
+	stack_origin_tech       = @'{"materials":1}'
 	door_icon_base          = "wood"
 	destruction_desc        = "tears"
 	icon_base               = 'icons/turf/walls/solid.dmi'
@@ -116,18 +119,12 @@
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/paper/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/paper_sheets(src)
-
 /decl/material/solid/organic/cloth //todo
 	name = "cotton"
 	uid = "solid_cotton"
 	use_name = "cotton"
 	color = "#ffffff"
-	stack_origin_tech = "{'materials':2}"
+	stack_origin_tech = @'{"materials":2}'
 	door_icon_base = "wood"
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -145,13 +142,6 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-
-/decl/material/solid/organic/cloth/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/banner(src)
 
 /decl/material/solid/organic/cloth/yellow
 	name = "yellow"
@@ -305,14 +295,6 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/tans_to = /decl/material/solid/organic/leather
 
-/decl/material/solid/organic/skin/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/banner(src)
-	. += new/datum/stack_recipe/shoes(src)
-
 /decl/material/solid/organic/skin/lizard
 	name = "lizardskin"
 	uid = "solid_lizardskin"
@@ -435,12 +417,6 @@
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
 
-/decl/material/solid/organic/bone/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/ladder(src)
-
 // Stub for earrings. TODO: put it in clams
 /decl/material/solid/organic/bone/pearl
 	name                   = "pearl"
@@ -472,7 +448,7 @@
 	name = "leather"
 	uid = "solid_leather"
 	color = "#5c4831"
-	stack_origin_tech = "{'materials':2}"
+	stack_origin_tech = @'{"materials":2}'
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
 	melting_point = T0C+300
@@ -489,15 +465,6 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-
-/decl/material/solid/organic/leather/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/banner(src)
-	. += new/datum/stack_recipe/shoes(src)
-	. += new/datum/stack_recipe/boots(src)
 
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"

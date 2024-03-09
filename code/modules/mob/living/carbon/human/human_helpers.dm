@@ -77,8 +77,8 @@
 			equipment_darkness_modifier += G.darkness_view
 			equipment_vision_flags |= G.vision_flags
 			equipment_light_protection += G.light_protection
-			if(G.overlay)
-				equipment_overlays |= G.overlay
+			if(G.screen_overlay)
+				equipment_overlays |= G.screen_overlay
 			if(G.see_invisible >= 0)
 				if(equipment_see_invis)
 					equipment_see_invis = min(equipment_see_invis, G.see_invisible)

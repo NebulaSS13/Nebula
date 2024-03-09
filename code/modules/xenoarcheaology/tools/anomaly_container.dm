@@ -37,7 +37,7 @@
 	underlays.Cut()
 	desc = initial(desc)
 
-/obj/structure/artifact/handle_mouse_drop(atom/over, mob/user)
+/obj/structure/artifact/handle_mouse_drop(atom/over, mob/user, params)
 	if(istype(over, /obj/structure/anomaly_container))
 		Bumped(user)
 		var/obj/structure/anomaly_container/box = over

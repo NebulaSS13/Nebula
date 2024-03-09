@@ -1,16 +1,17 @@
 #define DEBUG
 // Turf-only flags.
-#define TURF_FLAG_NOJAUNT             BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
-#define TURF_FLAG_NORUINS             BITFLAG(1) // Used by the ruin generator to skip placing loaded ruins on this turf.
-#define TURF_FLAG_BACKGROUND          BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
-#define TURF_IS_HOLOMAP_OBSTACLE      BITFLAG(3)
-#define TURF_IS_HOLOMAP_PATH          BITFLAG(4)
-#define TURF_IS_HOLOMAP_ROCK          BITFLAG(5)
+#define TURF_FLAG_NOJAUNT               BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
+#define TURF_FLAG_NO_POINTS_OF_INTEREST BITFLAG(1) // Used by the level subtemplate generator to skip placing loaded templates on this turf.
+#define TURF_FLAG_BACKGROUND            BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
+#define TURF_FLAG_HOLY                  BITFLAG(3)
+#define TURF_IS_HOLOMAP_OBSTACLE        BITFLAG(4)
+#define TURF_IS_HOLOMAP_PATH            BITFLAG(5)
+#define TURF_IS_HOLOMAP_ROCK            BITFLAG(6)
 
 ///Width or height of a transition edge area along the map's borders where transition edge turfs are placed to connect levels together.
 #define TRANSITIONEDGE 7
-///Extra spacing needed between any random ruins and the transition edge of a level.
-#define RUIN_MAP_EDGE_PAD 15
+///Extra spacing needed between any random level templates and the transition edge of a level.
+#define TEMPLATE_TAG_MAP_EDGE_PAD 15
 
 ///Enum value for a level edge that's to be untouched
 #define LEVEL_EDGE_NONE 0
@@ -195,11 +196,6 @@
 #define WRINKLES_WRINKLY	1
 #define WRINKLES_NONE		2
 
-//detergent states for clothes
-#define SMELL_DEFAULT	0
-#define SMELL_CLEAN		1
-#define SMELL_STINKY	2
-
 //Shuttle mission stages
 #define SHUTTLE_MISSION_PLANNED  1
 #define SHUTTLE_MISSION_STARTED  2
@@ -267,6 +263,10 @@
 #define ICON_STATE_INV   "inventory"
 
 #define hex2num(X) text2num(X, 16)
+/// Returns the hex value of a number given a value assumed to be a base-ten value, padded to a minimum length of 2.
+#define num2hex(num) num2text(num, 2, 16)
+/// Returns the hex value of a number given a value assumed to be a base-ten value, padded to a supplied minimum length.
+#define num2hex_padded(num, len) num2text(num, len, 16)
 
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
 
@@ -319,5 +319,33 @@
 #define LEVEL_ABOVE_PLATING 2
 
 // Defines for fluorescence (/atom/var/fluorescent)
-#define FLUORESCENT_GLOWS   1	// Glows when under flourescent light
-#define FLUORESCENT_GLOWING 2	// Currently glowing due to flourescent light
+/// Glows when under flourescent light
+#define FLUORESCENT_GLOWS   1
+/// Currently glowing due to flourescent light
+#define FLUORESCENT_GLOWING 2
+
+// Flags used for utensil-food interaction.
+/// Solid or semi-solid food; chopsticks, forks.
+#define UTENSIL_FLAG_COLLECT BITFLAG(0)
+/// Soft, liquid or semi-liquid food; soups, stews, pudding.
+#define UTENSIL_FLAG_SCOOP   BITFLAG(1)
+/// Foods that need to be sliced before eating; steak, grapefruit.
+#define UTENSIL_FLAG_SLICE   BITFLAG(2)
+/// Unimplemented; condiments that are collected before being spread on other food.
+#define UTENSIL_FLAG_SPREAD  BITFLAG(3)
+
+// Default.
+#define GROOMABLE_NONE  0
+// Hair, feathers.
+#define GROOMABLE_COMB  BITFLAG(0)
+// Hair, beards.
+#define GROOMABLE_BRUSH BITFLAG(1)
+// Horns.
+#define GROOMABLE_FILE  BITFLAG(2)
+
+// Nothing to groom on this organ.
+#define GROOMING_RESULT_FAILED  0
+// Can groom somewhat (short hair with a comb)
+#define GROOMING_RESULT_PARTIAL 1
+// Can groom properly (long hair with a brush)
+#define GROOMING_RESULT_SUCCESS 2

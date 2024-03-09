@@ -31,7 +31,7 @@
 		return
 	for(var/chem in starting_chems)
 		var/obj/B = new container_type(src)
-		B.reagents.add_reagent(chem, 60)
+		B.add_to_reagents(chem, 60)
 		beakers += B
 
 /obj/item/gun/projectile/dartgun/on_update_icon()
@@ -41,7 +41,7 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/gun/projectile/dartgun/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/gun/projectile/dartgun/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && (slot in user_mob?.get_held_item_slots()) && ammo_magazine)
 		overlay.icon_state += "-[clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
 	. = ..()

@@ -1,12 +1,15 @@
 var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype
+	/// Name used in general.
 	var/name = "default"
+	/// Name used in preference bodytype selection. Defaults to name.
+	var/pref_name
 	/// Seen when examining a prosthetic limb, if non-null.
 	var/desc
 	var/icon_base
 	var/icon_deformed
-	var/lip_icon
+	var/cosmetics_icon
 	var/bandages_icon
 	var/bodytype_flag = BODY_FLAG_HUMANOID
 	var/bodytype_category = BODYTYPE_OTHER
@@ -22,8 +25,10 @@ var/global/list/bodytypes_by_category = list()
 	var/associated_gender
 	var/appearance_flags = 0 // Appearance/display related features.
 
+	/// Used when filing your nails.
+	var/nail_noun
 	/// What tech levels should limbs of this type use/need?
-	var/limb_tech = "{'biotech':2}"
+	var/limb_tech = @'{"biotech":2}'
 	var/icon_cache_uid
 	/// Determines if eyes should render on heads using this bodytype.
 	var/has_eyes = TRUE
@@ -82,7 +87,6 @@ var/global/list/bodytypes_by_category = list()
 	// Used for initializing prefs/preview
 	var/base_color =      COLOR_BLACK
 	var/base_eye_color =  COLOR_BLACK
-	var/base_hair_color = COLOR_BLACK
 
 	/// Used to initialize organ material
 	var/material =        /decl/material/solid/organic/meat
@@ -143,10 +147,7 @@ var/global/list/bodytypes_by_category = list()
 	var/vital_organ_failure_death_delay = 25 SECONDS
 	var/mob_size = MOB_SIZE_MEDIUM
 
-	var/default_h_style = /decl/sprite_accessory/hair/bald
-	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
-
-	var/list/base_markings
+	var/list/default_sprite_accessories
 
 	// Darksight handling
 	/// Fractional multiplier (0 to 1) for the base alpha of the darkness overlay. A value of 1 means darkness is completely invisible.
@@ -168,9 +169,36 @@ var/global/list/bodytypes_by_category = list()
 	/// Stun from blindness modifier.
 	var/eye_flash_mod = 1
 
+	// Bodytype temperature damage thresholds.
+	var/cold_level_1 = 243  // Cold damage level 1 below this point. -30 Celsium degrees
+	var/cold_level_2 = 200  // Cold damage level 2 below this point.
+	var/cold_level_3 = 120  // Cold damage level 3 below this point.
+	var/heat_level_1 = 360  // Heat damage level 1 above this point.
+	var/heat_level_2 = 400  // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000 // Heat damage level 3 above this point.
+
+	// Temperature comfort levels and strings.
+	var/heat_discomfort_level = 315
+	var/cold_discomfort_level = 285
+	/// Aesthetic messages about feeling warm.
+	var/list/heat_discomfort_strings = list(
+		"You feel sweat drip down your neck.",
+		"You feel uncomfortably warm.",
+		"Your skin prickles in the heat."
+	)
+	/// Aesthetic messages about feeling chilly.
+	var/list/cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your chilly flesh stands out in goosebumps."
+	)
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
+
+	if(!pref_name)
+		pref_name = name
 
 	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
 	//If the species has eyes, they are the default vision organ
@@ -180,9 +208,9 @@ var/global/list/bodytypes_by_category = list()
 	if(!breathing_organ && has_organ[BP_LUNGS])
 		breathing_organ = BP_LUNGS
 
-	if(config.grant_default_darksight)
-		eye_darksight_range = max(eye_darksight_range, config.default_darksight_range)
-		eye_low_light_vision_effectiveness = max(eye_low_light_vision_effectiveness, config.default_darksight_effectiveness)
+	if(get_config_value(/decl/config/toggle/grant_default_darksight))
+		eye_darksight_range = max(eye_darksight_range, get_config_value(/decl/config/num/default_darksight_range))
+		eye_low_light_vision_effectiveness = max(eye_low_light_vision_effectiveness, get_config_value(/decl/config/num/default_darksight_effectiveness))
 
 	// Modify organ lists if necessary.
 	if(islist(override_organ_types))
@@ -211,6 +239,18 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/validate()
 	. = ..()
 
+	var/damage_icon = get_damage_overlays()
+	if(damage_icon)
+		for(var/brute = 0 to 3)
+			for(var/burn = 0 to 3)
+				var/damage_state = "[brute][burn]"
+				if(!check_state_in_icon(damage_state, damage_icon))
+					. += "missing state '[damage_state]' in icon '[damage_icon]'"
+		if(!check_state_in_icon("", damage_icon))
+			. += "missing default empty state in icon '[damage_icon]'"
+	else
+		. += "null damage overlay icon"
+
 	if(eye_base_low_light_vision > 1)
 		. += "base low light vision is greater than 1 (over 100%)"
 	else if(eye_base_low_light_vision < 0)
@@ -231,26 +271,47 @@ var/global/list/bodytypes_by_category = list()
 	else if(eye_low_light_vision_adjustment_speed < 0)
 		. += "low light vision adjustment speed is less than 0 (below 0%)"
 
-	if(icon_base)
-		if(check_state_in_icon("torso", icon_base))
-			. += "deprecated \"torso\" state present in icon_base"
-		if(!check_state_in_icon(BP_CHEST, icon_base))
-			. += "\"[BP_CHEST]\" state not present in icon_base"
-	if(icon_deformed && icon_deformed != icon_base)
-		if(check_state_in_icon("torso", icon_deformed))
-			. += "deprecated \"torso\" state present in icon_deformed"
-		if(!check_state_in_icon(BP_CHEST, icon_deformed))
-			. += "\"[BP_CHEST]\" state not present in icon_deformed"
+	if(icon_base || icon_deformed)
+
+		var/list/limb_tags = list()
+		for(var/limb in has_limbs)
+			limb_tags |= limb
+		for(var/limb in override_limb_types)
+			limb_tags |= limb
+
+		if(icon_base)
+			if(check_state_in_icon("torso", icon_base))
+				. += "deprecated \"torso\" state present in icon_base"
+			for(var/limb in limb_tags)
+				if(!check_state_in_icon(limb, icon_base))
+					. += "missing required state in [icon_base]: [limb]"
+
+		if(icon_deformed && icon_deformed != icon_base)
+			if(check_state_in_icon("torso", icon_deformed))
+				. += "deprecated \"torso\" state present in icon_deformed"
+			for(var/limb in limb_tags)
+				if(!check_state_in_icon(limb, icon_deformed))
+					. += "missing required state in [icon_deformed]: [limb]"
+
 	if((appearance_flags & HAS_SKIN_COLOR) && isnull(base_color))
 		. += "uses skin color but missing base_color"
-	if((appearance_flags & HAS_HAIR_COLOR) && isnull(base_hair_color))
-		. += "uses hair color but missing base_hair_color"
 	if((appearance_flags & HAS_EYE_COLOR) && isnull(base_eye_color))
 		. += "uses eye color but missing base_eye_color"
-	if(isnull(default_h_style))
-		. += "null default_h_style (use a bald/hairless hairstyle if 'no hair' is intended)"
-	if(isnull(default_f_style))
-		. += "null default_f_style (use a shaved/hairless facial hair style if 'no facial hair' is intended)"
+
+	for(var/accessory_category in default_sprite_accessories)
+		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
+		if(!istype(acc_cat))
+			. += "invalid sprite accessory category entry: [accessory_category || "null"]"
+			continue
+		for(var/accessory in default_sprite_accessories[accessory_category])
+			var/decl/sprite_accessory/acc_decl = GET_DECL(accessory)
+			if(!istype(acc_decl))
+				. += "invalid sprite accessory in category [accessory_category]: [accessory || "null"]"
+				continue
+			if(acc_decl.accessory_category != acc_cat.type)
+				. += "accessory category [acc_decl.accessory_category || "null"] does not match [acc_cat.type]"
+			if(!istype(acc_decl, acc_cat.base_accessory_type))
+				. += "accessory type [acc_decl.type] does not align with category base accessory: [acc_cat.base_accessory_type || "null"]"
 
 	var/list/tail_data = has_limbs[BP_TAIL]
 	if(tail_data)
@@ -278,6 +339,31 @@ var/global/list/bodytypes_by_category = list()
 		else
 			. += "invalid BP_TAIL type: got [tail_organ], expected /obj/item/organ/external/tail"
 
+	if(cold_level_3)
+		if(cold_level_2)
+			if(cold_level_3 > cold_level_2)
+				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
+			if(cold_level_1)
+				if(cold_level_3 > cold_level_1)
+					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
+	if(cold_level_2 && cold_level_1)
+		if(cold_level_2 > cold_level_1)
+			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
+
+	if(heat_level_3 != INFINITY)
+		if(heat_level_2 != INFINITY)
+			if(heat_level_3 < heat_level_2)
+				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
+			if(heat_level_1 != INFINITY)
+				if(heat_level_3 < heat_level_1)
+					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
+	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
+		if(heat_level_2 < heat_level_1)
+			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
+
+	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
+		. += "heat and cold damage level thresholds overlap"
+
 /decl/bodytype/proc/max_skin_tone()
 	if(appearance_flags & HAS_SKIN_TONE_GRAV)
 		return 100
@@ -303,14 +389,14 @@ var/global/list/bodytypes_by_category = list()
 	if(H.has_external_organs())
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!is_default_limb(E))
-				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE, skip_health_update = TRUE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(E)
 
 	//Clear invalid internal organs
 	if(H.has_internal_organs())
 		for(var/obj/item/organ/O in H.get_internal_organs())
 			if(!is_default_organ(O))
-				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE, skip_health_update = TRUE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(O)
 
 	//Create missing limbs
@@ -323,7 +409,7 @@ var/global/list/bodytypes_by_category = list()
 		if(E.parent_organ)
 			var/list/parent_organ_data = has_limbs[E.parent_organ]
 			parent_organ_data["has_children"]++
-		H.add_organ(E, GET_EXTERNAL_ORGAN(H, E.parent_organ), FALSE, FALSE)
+		H.add_organ(E, GET_EXTERNAL_ORGAN(H, E.parent_organ), FALSE, FALSE, skip_health_update = TRUE)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -334,7 +420,8 @@ var/global/list/bodytypes_by_category = list()
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
-		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
+		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE, skip_health_update = TRUE)
+	H.update_health()
 
 //Checks if an existing organ is the bodytype default
 /decl/bodytype/proc/is_default_organ(obj/item/organ/internal/O)
@@ -373,33 +460,26 @@ var/global/list/bodytypes_by_category = list()
 		if(initial(I.parent_organ) == organ.organ_tag)
 			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))
 
-/decl/bodytype/proc/set_default_hair(mob/living/carbon/human/organism, override_existing = TRUE, defer_update_hair = FALSE)
-	if(!organism.h_style || (override_existing && (organism.h_style != default_h_style)))
-		organism.h_style = default_h_style
-		. = TRUE
-	if(!organism.h_style || (override_existing && (organism.f_style != default_f_style)))
-		organism.f_style = default_f_style
-		. = TRUE
-	if(. && !defer_update_hair)
-		organism.update_hair()
+/decl/bodytype/proc/set_default_sprite_accessories(var/mob/living/setting)
+	if(!istype(setting))
+		return
+	for(var/obj/item/organ/external/E in setting.get_external_organs())
+		E.skin_colour = base_color
+		E.clear_sprite_accessories(skip_update = TRUE)
+	if(!length(default_sprite_accessories))
+		return
+	for(var/accessory_category in default_sprite_accessories)
+		for(var/accessory in default_sprite_accessories[accessory_category])
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_colour = default_sprite_accessories[accessory_category][accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(setting, bodypart)
+				if(O)
+					O.set_sprite_accessory(accessory, null, accessory_colour, skip_update = TRUE)
 
 /decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
-	if(length(base_markings))
-		for(var/mark_type in base_markings)
-			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
-			for(var/bodypart in mark_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
-				if(O && !LAZYACCESS(O.markings, mark_type))
-					LAZYSET(O.markings, mark_type, base_markings[mark_type])
-
-	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
-		E.skin_colour = base_color
-
-	mannequin.eye_colour = base_eye_color
-	mannequin.hair_colour = base_hair_color
-	mannequin.facial_hair_colour = base_hair_color
-	set_default_hair(mannequin)
-
+	set_default_sprite_accessories(mannequin)
+	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
 	mannequin.force_update_limbs()
 	mannequin.update_mutations(0)
 	mannequin.update_body(0)
@@ -449,8 +529,64 @@ var/global/list/bodytypes_by_category = list()
 		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, limb.owner.dna, src)
 		limb.owner.add_organ(new_innard, GET_EXTERNAL_ORGAN(limb.owner, new_innard.parent_organ), FALSE, FALSE)
 
+/decl/bodytype/proc/get_body_temperature_threshold(var/threshold)
+	switch(threshold)
+		if(COLD_LEVEL_1)
+			return cold_level_1
+		if(COLD_LEVEL_2)
+			return cold_level_2
+		if(COLD_LEVEL_3)
+			return cold_level_3
+		if(HEAT_LEVEL_1)
+			return heat_level_1
+		if(HEAT_LEVEL_2)
+			return heat_level_2
+		if(HEAT_LEVEL_3)
+			return heat_level_3
+		else
+			CRASH("get_species_temperature_threshold() called with invalid threshold value.")
+
+/decl/bodytype/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+
+	if(!prob(5))
+		return
+
+	var/covered = 0 // Basic coverage can help.
+	var/held_items = H.get_held_items()
+	for(var/obj/item/clothing/clothes in H)
+		if(clothes in held_items)
+			continue
+		if((clothes.body_parts_covered & SLOT_UPPER_BODY) && (clothes.body_parts_covered & SLOT_LOWER_BODY))
+			covered = 1
+			break
+
+	switch(msg_type)
+		if("cold")
+			if(!covered && length(cold_discomfort_strings))
+				to_chat(H, SPAN_DANGER(pick(cold_discomfort_strings)))
+		if("heat")
+			if(covered && length(heat_discomfort_strings))
+				to_chat(H, SPAN_DANGER(pick(heat_discomfort_strings)))
+
 /decl/bodytype/proc/get_user_species_for_validation()
 	for(var/species_name in get_all_species())
 		var/decl/species/species = get_species_by_key(species_name)
 		if(src in species.available_bodytypes)
 			return species_name
+
+// Defined as a global so modpacks can add to it.
+var/global/list/limbs_with_nails = list(
+	BP_L_HAND,
+	BP_R_HAND,
+	BP_M_HAND,
+	BP_L_FOOT,
+	BP_R_FOOT
+)
+
+/decl/bodytype/proc/get_default_grooming_results(obj/item/organ/external/limb, obj/item/grooming/tool)
+	if(nail_noun && (tool.grooming_flags & GROOMABLE_FILE) && (limb?.organ_tag in limbs_with_nails))
+		return list(
+			"success"    = GROOMING_RESULT_SUCCESS,
+			"descriptor" = nail_noun
+		)
+	return null

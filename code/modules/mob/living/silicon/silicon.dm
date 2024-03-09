@@ -140,16 +140,13 @@
 	return
 
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
-
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
 			if(BRUTE)
 				adjustBruteLoss(Proj.damage)
 			if(BURN)
 				adjustFireLoss(Proj.damage)
-
 	Proj.on_hit(src,100) //wow this is a terrible hack
-	updatehealth()
 	return 100
 
 /mob/living/silicon/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
@@ -166,7 +163,7 @@
 // this function shows the health of the AI in the Status panel
 /mob/living/silicon/proc/show_system_integrity()
 	if(!src.stat)
-		stat(null, text("System integrity: [round((health/maxHealth)*100)]%"))
+		stat(null, text("System integrity: [get_health_percent()]%"))
 	else
 		stat(null, text("Systems nonfunctional"))
 
@@ -193,9 +190,8 @@
 
 //can't inject synths
 /mob/living/silicon/can_inject(var/mob/user, var/target_zone)
-	to_chat(user, "<span class='warning'>The armoured plating is too tough.</span>")
-	return 0
-
+	to_chat(user, SPAN_WARNING("The armoured plating is too tough."))
+	return FALSE
 
 //Silicon mob language procs
 
@@ -464,3 +460,7 @@
 	// This seems to be specifically to stop ghosted maintenance drones being used as free all-access cards.
 	if(istype(idcard) && !stat && !(ckey && !client) && !is_type_in_list(idcard, exceptions))
 		LAZYDISTINCTADD(., idcard)
+
+/mob/living/silicon/get_total_life_damage()
+	return (getBruteLoss() + getFireLoss())
+

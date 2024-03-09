@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(typing)
 	var/static/regex/match_verbs
 	/// A list of clients waiting to be polled for input state.
 	var/list/client/queue = list()
-	/// A list of ckey to list, containing current state data. See .proc/get_entry for details.
+	/// A list of ckey to list, containing current state data. See get_entry() for details.
 	var/list/status = list()
 	/* example of an entry:
 		(ckey = list(
@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(typing)
 	*/
 
 /datum/controller/subsystem/typing/Initialize(start_timeofday)
-	if(config.show_typing_indicator_for_whispers)
+	if(get_config_value(/decl/config/toggle/show_typing_indicator_for_whispers))
 		match_verbs = regex("^(Me|Say|Whisper) +\"?\\w+")
 	else
 		match_verbs = regex("^(Me|Say) +\"?\\w+")
@@ -159,7 +159,7 @@ Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Po
 
 /atom/movable/typing_indicator/Destroy()
 	if(master)
-		remove_vis_contents(master, src)
+		master.remove_vis_contents(src)
 		if(ismob(master))
 			var/mob/owner = master
 			if(owner.typing_indicator == src)
@@ -177,7 +177,7 @@ Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Po
 	set_invisibility(INVISIBILITY_MAXIMUM)
 	if(ismovable(master))
 		var/atom/movable/owner = master
-		remove_vis_contents(owner, src)
+		owner.remove_vis_contents(src)
 
 /atom/movable/typing_indicator/proc/show_typing_indicator()
 
@@ -195,7 +195,7 @@ Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Po
 
 	if(ismovable(master))
 		var/atom/movable/owner = master
-		add_vis_contents(owner, src)
+		owner.add_vis_contents(src)
 
 	// Animate it popping up from nowhere.
 	var/matrix/M = matrix()

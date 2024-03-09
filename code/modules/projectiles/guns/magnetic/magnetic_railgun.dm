@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/railgun.dmi'
 	removable_components = TRUE // Can swap out the capacitor for more shots, or cell for longer usage before recharge
 	load_type = /obj/item/rcd_ammo
-	origin_tech = "{'combat':5,'materials':4,'magnets':4}"
+	origin_tech = @'{"combat":5,"materials":4,"magnets":4}'
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
 	one_hand_penalty = 6
 	power_cost = 300
@@ -14,12 +14,13 @@
 	loaded = /obj/item/rcd_ammo/large // ~30 shots
 	combustion = 1
 	bulk = GUN_BULK_RIFLE + 3
-
-	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv // 6-8 shots
 	gun_unreliable = 0
 	var/slowdown_held = 3
 	var/slowdown_worn = 2
+
+/obj/item/gun/magnetic/railgun/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/hyper, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/magnetic/railgun/Initialize()
 	LAZYSET(slowdown_per_slot, BP_L_HAND,        slowdown_held)
@@ -63,7 +64,6 @@
 	one_hand_penalty = 2
 	fire_delay = 8
 	removable_components = FALSE
-	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv
 	slot_flags = SLOT_BACK
 	power_cost = 100

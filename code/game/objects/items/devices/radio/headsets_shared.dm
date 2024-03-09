@@ -5,7 +5,7 @@
 
 /obj/item/encryptionkey/cargo
 	name = "supply radio encryption key"
-	icon_state = "med_cypherkey"
+	inlay_color = COLOR_ASSEMBLY_WHITE
 	can_decrypt = list(access_cargo)
 
 /obj/item/radio/headset/headset_mining
@@ -16,7 +16,7 @@
 
 /obj/item/encryptionkey/mining
 	name = "mining radio encryption key"
-	icon_state = "med_cypherkey"
+	inlay_color = COLOR_ASSEMBLY_WHITE
 	can_decrypt = list(access_mining)
 /obj/item/radio/headset/headset_sec
 	name = "security radio headset"
@@ -25,7 +25,7 @@
 
 /obj/item/encryptionkey/sec
 	name = "security radio encryption key"
-	icon_state = "sec_cypherkey"
+	inlay_color = COLOR_BLOOD_RED
 	can_decrypt = list(access_security)
 
 /obj/item/radio/headset/headset_med
@@ -36,7 +36,7 @@
 
 /obj/item/encryptionkey/med
 	name = "medical radio encryption key"
-	icon_state = "med_cypherkey"
+	inlay_color = COLOR_ASSEMBLY_WHITE
 	can_decrypt = list(access_medical)
 
 /obj/item/radio/headset/headset_service
@@ -47,7 +47,7 @@
 
 /obj/item/encryptionkey/service
 	name = "service radio encryption key"
-	icon_state = "srv_cypherkey"
+	inlay_color = COLOR_VERDANT_GREEN
 	can_decrypt = list(access_bar)
 
 /obj/item/radio/headset/headset_sci
@@ -58,7 +58,7 @@
 
 /obj/item/encryptionkey/sci
 	name = "science radio encryption key"
-	icon_state = "sci_cypherkey"
+	inlay_color = COLOR_SCIENCE_PURPLE
 	can_decrypt = list(access_research)
 
 /obj/item/radio/headset/headset_eng
@@ -69,7 +69,7 @@
 
 /obj/item/encryptionkey/eng
 	name = "engineering radio encryption key"
-	icon_state = "eng_cypherkey"
+	inlay_color = PIPE_COLOR_YELLOW
 	can_decrypt = list(access_engine)
 
 /obj/item/radio/headset/heads
@@ -79,8 +79,13 @@
 
 /obj/item/encryptionkey/command
 	name = "command encryption key"
-	icon_state = "com_cypherkey"
+	inlay_color = COLOR_ROYAL_BLUE
 	can_decrypt = list(access_bridge)
+
+/obj/item/encryptionkey/heads
+	color = COLOR_GOLD
+	fill_color = COLOR_PALE_GOLD
+	inlay_color = COLOR_ROYAL_BLUE
 
 /obj/item/radio/headset/heads/ce
 	name = "chief engineer's headset"
@@ -90,7 +95,6 @@
 
 /obj/item/encryptionkey/heads/ce
 	name = "chief engineer's encryption key"
-	icon_state = "cap_cypherkey"
 	can_decrypt = list(
 		access_bridge,
 		access_engine
@@ -104,7 +108,6 @@
 
 /obj/item/encryptionkey/heads/cmo
 	name = "chief medical officer's encryption key"
-	icon_state = "cap_cypherkey"
 	can_decrypt = list(
 		access_bridge,
 		access_medical
@@ -118,7 +121,6 @@
 
 /obj/item/encryptionkey/heads/rd
 	name = "research director's encryption key"
-	icon_state = "cap_cypherkey"
 	can_decrypt = list(
 		access_bridge,
 		access_research
@@ -131,7 +133,6 @@
 
 /obj/item/encryptionkey/heads/captain
 	name = "captain's encryption key"
-	icon_state = "cap_cypherkey"
 	can_decrypt = list(
 		access_bridge,
 		access_security,
@@ -149,7 +150,6 @@
 
 /obj/item/encryptionkey/heads/hop
 	name = "head of personnel's encryption key"
-	icon_state = "hop_cypherkey"
 	can_decrypt = list(
 		access_bar,
 		access_cargo,
@@ -165,8 +165,8 @@
 	encryption_keys = list(/obj/item/encryptionkey/heads/hos)
 
 /obj/item/encryptionkey/heads/hos
-	name = "head of personnel's encryption key"
-	icon_state = "hos_cypherkey"
+	name = "head of security's encryption key"
+	inlay_color = COLOR_BLOOD_RED
 	can_decrypt = list(
 		access_bridge,
 		access_security
@@ -183,13 +183,12 @@
 	encryption_keys = list(/obj/item/encryptionkey/ert)
 
 /obj/item/encryptionkey/mercenary
-	icon_state = "cypherkey"
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	can_decrypt = list(access_mercenary)
 
 /obj/item/radio/headset/mercenary
 	can_use_analog = TRUE
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	encryption_keys = list(/obj/item/encryptionkey/mercenary)
 	analog_secured = list((access_mercenary) = TRUE)
 
@@ -203,13 +202,12 @@
 	encryption_keys = list(/obj/item/encryptionkey/entertainment)
 
 /obj/item/encryptionkey/raider
-	icon_state = "cypherkey"
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	can_decrypt = list(access_raider)
 
 /obj/item/radio/headset/raider
 	can_use_analog = TRUE
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	encryption_keys = list(/obj/item/encryptionkey/raider)
 	analog_secured = list((access_raider) = TRUE)
 

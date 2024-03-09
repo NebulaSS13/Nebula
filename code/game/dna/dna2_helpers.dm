@@ -2,16 +2,6 @@
 // Helpers for DNA2
 /////////////////////////////
 
-// Pads 0s to t until length == u
-/proc/add_zero2(t, u)
-	var/temp1
-	while (length(t) < u)
-		t = "0[t]"
-	temp1 = t
-	if (length(t) > u)
-		temp1 = copytext(t,2,u+1)
-	return temp1
-
 // DNA Gene activation boundaries, see dna2.dm.
 // Returns a list object with 4 numbers.
 /proc/GetDNABounds(var/block)
@@ -143,40 +133,28 @@
 
 	dna.check_integrity()
 
-	fingerprint        = dna.fingerprint
-	unique_enzymes     = dna.unique_enzymes
-	hair_colour        = rgb(dna.GetUIValueRange(DNA_UI_HAIR_R,255),  dna.GetUIValueRange(DNA_UI_HAIR_G,255),  dna.GetUIValueRange(DNA_UI_HAIR_B,255))
-	facial_hair_colour = rgb(dna.GetUIValueRange(DNA_UI_BEARD_R,255), dna.GetUIValueRange(DNA_UI_BEARD_G,255), dna.GetUIValueRange(DNA_UI_BEARD_B,255))
-	skin_colour        = rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255))
-	eye_colour         = rgb(dna.GetUIValueRange(DNA_UI_EYES_R,255),  dna.GetUIValueRange(DNA_UI_EYES_G,255),  dna.GetUIValueRange(DNA_UI_EYES_B,255))
-	skin_tone          = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
+	fingerprint          = dna.fingerprint
+	unique_enzymes       = dna.unique_enzymes
+	set_skin_colour(       rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255)))
+	set_eye_colour(        rgb(dna.GetUIValueRange(DNA_UI_EYES_R,255),  dna.GetUIValueRange(DNA_UI_EYES_G,255),  dna.GetUIValueRange(DNA_UI_EYES_B,255)))
+	skin_tone            = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
+
 
 	// TODO: update DNA gender to not be a bool - use bodytype and pronouns
 	//Body markings
-	for(var/tag in dna.body_markings)
+	for(var/tag in dna.heritable_sprite_accessories)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, tag)
 		if(E)
-			var/list/marklist = dna.body_markings[tag]
+			var/list/marklist = dna.heritable_sprite_accessories[tag]
 			if(length(marklist))
-				E.markings = marklist.Copy()
+				for(var/accessory in marklist)
+					E.set_sprite_accessory(accessory, null, marklist[accessory], skip_update = TRUE)
 			else
-				LAZYCLEARLIST(E.markings)
+				E.clear_sprite_accessories(skip_update = TRUE)
 
 	//Base skin and blend
 	for(var/obj/item/organ/organ in get_organs())
 		organ.set_dna(dna)
-
-	//Hair
-	var/list/hair_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
-	var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE, length(hair_subtypes))
-	if(hair > 0 && hair <= length(hair_subtypes))
-		h_style = hair_subtypes[hair]
-
-	//Facial Hair
-	var/list/beard_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
-	var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE, length(beard_subtypes))
-	if((0 < beard) && (beard <= length(beard_subtypes)))
-		f_style = beard_subtypes[beard]
 
 	force_update_limbs()
 	update_hair(update_icons = FALSE)

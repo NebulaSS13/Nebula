@@ -1289,7 +1289,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -1411,7 +1410,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -1503,7 +1501,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/button/access/exterior{
@@ -1717,7 +1714,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/button/access/exterior{
@@ -2046,7 +2042,6 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -2232,7 +2227,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -3120,7 +3114,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ih" = (
-/obj/item/knife/table,
+/obj/item/utensil/knife,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ii" = (
@@ -3242,8 +3236,8 @@
 /area/errant_pisces/infirmary)
 "iF" = (
 /obj/structure/table,
-/obj/item/trash/plate,
-/obj/item/kitchen/utensil/fork,
+/obj/item/plate,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "iG" = (
@@ -3253,7 +3247,7 @@
 /area/errant_pisces/dorms)
 "iH" = (
 /obj/structure/table/marble,
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "iI" = (
@@ -3523,7 +3517,7 @@
 /area/errant_pisces/hallway)
 "js" = (
 /obj/structure/table,
-/obj/item/kitchen/utensil/fork/plastic,
+/obj/item/utensil/fork/plastic,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3652,7 +3646,7 @@
 /area/errant_pisces/infirmary)
 "jK" = (
 /obj/structure/table,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3956,8 +3950,8 @@
 	dir = 1
 	},
 /obj/structure/bookcase,
-/obj/item/book/manual/anomaly_testing,
-/obj/item/book/manual/anomaly_spectroscopy,
+/obj/item/book/fluff/anomaly_testing,
+/obj/item/book/fluff/anomaly_spectroscopy,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kB" = (
@@ -3968,7 +3962,7 @@
 /area/errant_pisces/science_wing)
 "kC" = (
 /obj/structure/bookcase,
-/obj/item/book/manual/materials_chemistry_analysis,
+/obj/item/book/fluff/materials_chemistry_analysis,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kD" = (
@@ -4308,7 +4302,7 @@
 /obj/structure/closet/secure_closet/hydroponics,
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4320,7 +4314,7 @@
 /obj/machinery/vending/hydronutrients,
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -4884,7 +4878,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
@@ -5443,7 +5436,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
@@ -5789,7 +5781,6 @@
 "pp" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -6335,7 +6326,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,

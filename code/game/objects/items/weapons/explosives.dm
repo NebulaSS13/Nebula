@@ -7,7 +7,7 @@
 	item_state = "plasticx"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE,
@@ -48,8 +48,13 @@
 /obj/item/plastique/afterattack(atom/movable/target, mob/user, flag)
 	if (!flag)
 		return
-	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage/) || istype(target, /obj/item/clothing/accessory/storage/) || istype(target, /obj/item/clothing/under))
+	if (ismob(target) || istype(target, /obj/item/storage) || istype(target, /obj/item/clothing/accessory/storage) || istype(target, /obj/item/clothing/under))
 		return
+	if(isturf(target))
+		var/turf/target_turf = target
+		if(!target_turf.simulated)
+			return
+
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 

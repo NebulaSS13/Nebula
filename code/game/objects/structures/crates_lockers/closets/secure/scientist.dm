@@ -30,12 +30,12 @@
 		/obj/item/storage/belt/general
 	)
 
-/obj/structure/closet/secure_closet/RD
+/obj/structure/closet/secure_closet/research_director
 	name = "chief science officer's locker"
 	req_access = list(access_rd)
 	closet_appearance = /decl/closet_appearance/secure_closet/rd
 
-/obj/structure/closet/secure_closet/RD/WillContain()
+/obj/structure/closet/secure_closet/research_director/WillContain()
 	return list(
 		/obj/item/clothing/suit/bio_suit/scientist = 2,
 		/obj/item/clothing/head/bio_hood/scientist = 2,
@@ -59,4 +59,27 @@
 		/obj/item/storage/box/syringegun,
 		/obj/item/storage/box/syringes,
 		/obj/item/chems/glass/bottle/sedatives
+	)
+
+/obj/structure/closet/secure_closet/pilot
+	name = "pilot locker"
+	req_access = list(access_xenobiology)
+
+/obj/structure/closet/secure_closet/pilot/WillContain()
+	return list(
+		/obj/item/storage/backpack/parachute,
+		/obj/item/knife/utility,
+		/obj/item/clothing/under/pilot,
+		/obj/item/clothing/suit/storage/toggle/bomber,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/shoes/color/black,
+		/obj/item/clothing/gloves/color/black,
+		/obj/item/radio/headset/headset_sci,
+		/obj/item/flashlight,
+		/obj/item/chems/food/liquidfood,
+		/obj/item/chems/drinks/cans/waterbottle,
+		/obj/item/storage/box/flares,
+		/obj/item/cell/device,
+		/obj/item/radio,
+		/obj/item/storage/backpack/satchel
 	)

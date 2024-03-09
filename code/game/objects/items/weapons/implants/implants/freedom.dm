@@ -3,7 +3,7 @@
 /obj/item/implant/freedom
 	name = "freedom implant"
 	desc = "Use this to escape from those evil Red Shirts."
-	origin_tech = "{'materials':1,'biotech':2,'esoteric':2}"
+	origin_tech = @'{"materials":1,"biotech":2,"esoteric":2}'
 	implant_color = "r"
 	hidden = 1
 	var/activation_emote

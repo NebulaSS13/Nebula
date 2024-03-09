@@ -16,6 +16,7 @@
 	cell_threshold = 6
 	target_turf_type = null
 	floor_type = null
+	change_area = TRUE
 
 /datum/random_map/automata/cave_system/mountains/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	var/datum/level_data/LD = SSmapping.levels_by_z[tz]

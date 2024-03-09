@@ -109,7 +109,11 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/cleanup_failed = FALSE
 
 	if(!async && check_cleanup) // Async tests run at the same time, so cleaning up after any one completes risks breaking other tests
-		var/ignored_types = list(/atom/movable/lighting_overlay, /obj/abstract/landmark/test)
+		var/static/list/ignored_types = list(
+			/atom/movable/lighting_overlay,
+			/obj/effect/decal/cleanable/dirt,
+			/obj/abstract/landmark/test
+		)
 		var/z_levels = list()
 		var/turf/safe = get_safe_turf()
 		var/turf/space = get_space_turf()
@@ -150,14 +154,6 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 // Async unit tests will be delayed until the subsystems in this list have fired at least once.
 /datum/unit_test/proc/subsystems_to_await()
 	return list()
-
-/proc/load_unit_test_changes()
-/*
-	//This takes about 60 seconds to run during unit testing and is only used for the ZAS vacume check on The Asteroid.
-	if(config.roundstart_level_generation != 1)
-		log_unit_test("Overiding Configuration option for Asteroid Generation to ENABLED")
-		config.roundstart_level_generation = 1	// The default map requires it, the example config doesn't have this enabled.
- */
 
 /proc/get_test_datums()
 	. = list()

@@ -32,8 +32,8 @@ In short:
 	SSskybox.change_skybox("narsie", new_use_stars = FALSE, new_use_overmap_details = FALSE)
 
 /datum/universal_state/hell/proc/MiscSet()
-	for(var/turf/simulated/floor/T)
-		if(!T.holy && prob(1))
+	for(var/turf/T)
+		if(T.is_floor() && T.simulated && !is_holy_turf(T) && prob(1))
 			new /obj/effect/gateway/active/cult(T)
 
 /datum/universal_state/hell/proc/KillMobs()

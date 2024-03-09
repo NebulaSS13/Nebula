@@ -106,7 +106,7 @@
 			if(!req_access)
 				locked = FALSE
 			else
-				var/obj/item/card/id/I = user.GetIdCard()				
+				var/obj/item/card/id/I = user.GetIdCard()
 				if(!istype(I, /obj/item/card/id))
 					to_chat(user, SPAN_WARNING("[\src] flashes a yellow LED near the ID scanner. Did you remember to scan your ID or PDA?"))
 					return TOPIC_HANDLED

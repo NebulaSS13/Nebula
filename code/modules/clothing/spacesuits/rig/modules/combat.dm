@@ -34,7 +34,7 @@
 	interface_desc = "Disorientates your target by blinding them with this intense palm-mounted light."
 	device = /obj/item/flash
 
-	origin_tech = "{'combat':2,'magnets':3,'engineering':5}"
+	origin_tech = @'{"combat":2,"magnets":3,"engineering":5}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
@@ -44,7 +44,7 @@
 /obj/item/rig_module/device/flash/advanced
 	name = "advanced mounted flash"
 	device = /obj/item/flash/advanced
-	origin_tech = "{'combat':3,'magnets':3,'engineering':5}"
+	origin_tech = @'{"combat":3,"magnets":3,"engineering":5}'
 
 /obj/item/rig_module/device/flash/installed()
 	. = ..()
@@ -262,7 +262,7 @@
 
 	interface_name = "mounted energy gun"
 	interface_desc = "A shoulder-mounted suit-powered energy gun."
-	origin_tech = "{'powerstorage':6,'combat':6,'engineering':6}"
+	origin_tech = @'{"powerstorage":6,"combat":6,"engineering":6}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
@@ -284,7 +284,7 @@
 
 	interface_name = "mounted electrolaser"
 	interface_desc = "A shoulder-mounted, cell-powered electrolaser."
-	origin_tech = "{'powerstorage':5,'combat':5,'engineering':6}"
+	origin_tech = @'{"powerstorage":5,"combat":5,"engineering":6}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
@@ -304,7 +304,7 @@
 
 	interface_name = "mounted plasma cutter"
 	interface_desc = "A forearm-mounted suit-powered plasma cutter."
-	origin_tech = "{'materials':5,'exoticmatter':4,'engineering':7,'combat':5}"
+	origin_tech = @'{"materials":5,"exoticmatter":4,"engineering":7,"combat":5}'
 
 	gun = /obj/item/gun/energy/plasmacutter/mounted
 	material = /decl/material/solid/metal/steel

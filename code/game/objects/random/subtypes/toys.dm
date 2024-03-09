@@ -155,8 +155,8 @@
 /obj/random/plushie
 	name = "random plushie"
 	desc = "This is a random plushie."
-	icon = 'icons/obj/toy/toy.dmi'
-	icon_state = "nymphplushie"
+	icon = 'icons/obj/toy/plush_cat.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/plushie/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -169,7 +169,7 @@
 /obj/random/plushie/large
 	name = "random large plushie"
 	desc = "This is a random large plushie."
-	icon = 'icons/obj/toy/toy.dmi'
+	icon = 'icons/obj/structures/plushie.dmi'
 	icon_state = "droneplushie"
 
 /obj/random/plushie/large/spawn_choices()

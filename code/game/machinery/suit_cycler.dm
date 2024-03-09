@@ -112,21 +112,21 @@
 		events_repository.unregister(/decl/observ/destroyed, suit, src)
 	suit = new_suit
 	if(istype(suit))
-		events_repository.register(/decl/observ/destroyed, suit, src, /obj/machinery/suit_cycler/proc/loaded_item_destroyed)
+		events_repository.register(/decl/observ/destroyed, suit, src, TYPE_PROC_REF(/obj/machinery/suit_cycler, loaded_item_destroyed))
 
 /obj/machinery/suit_cycler/proc/set_helmet(obj/item/new_helmet)
 	if(istype(helmet))
 		events_repository.unregister(/decl/observ/destroyed, helmet, src)
 	helmet = new_helmet
 	if(istype(helmet))
-		events_repository.register(/decl/observ/destroyed, helmet, src, /obj/machinery/suit_cycler/proc/loaded_item_destroyed)
+		events_repository.register(/decl/observ/destroyed, helmet, src, TYPE_PROC_REF(/obj/machinery/suit_cycler, loaded_item_destroyed))
 
 /obj/machinery/suit_cycler/proc/set_boots(obj/item/new_boots)
 	if(istype(boots))
 		events_repository.unregister(/decl/observ/destroyed, boots, src)
 	boots = new_boots
 	if(istype(boots))
-		events_repository.register(/decl/observ/destroyed, boots, src, /obj/machinery/suit_cycler/proc/loaded_item_destroyed)
+		events_repository.register(/decl/observ/destroyed, boots, src, TYPE_PROC_REF(/obj/machinery/suit_cycler, loaded_item_destroyed))
 
 /obj/machinery/suit_cycler/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
@@ -158,7 +158,7 @@
 	DROP_NULL(boots)
 	return ..()
 
-/obj/machinery/suit_cycler/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/machinery/suit_cycler/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping) && try_move_inside(dropping, user))
 		return TRUE
@@ -399,19 +399,19 @@
 			if(radiation_level > 2)
 				helmet.decontaminate()
 			if(radiation_level > 1)
-				helmet.clean_blood()
+				helmet.clean()
 
 		if(suit)
 			if(radiation_level > 2)
 				suit.decontaminate()
 			if(radiation_level > 1)
-				suit.clean_blood()
+				suit.clean()
 
 		if(boots)
 			if(radiation_level > 2)
 				boots.decontaminate()
 			if(radiation_level > 1)
-				boots.clean_blood()
+				boots.clean()
 
 	update_icon()
 	updateUsrDialog()
@@ -441,7 +441,7 @@
 
 	if(occupant)
 		if(prob(radiation_level*2) && occupant.can_feel_pain())
-			occupant.emote("scream")
+			occupant.emote(/decl/emote/audible/scream)
 		if(radiation_level > 2)
 			occupant.take_organ_damage(0, radiation_level*2 + rand(1,3))
 		if(radiation_level > 1)

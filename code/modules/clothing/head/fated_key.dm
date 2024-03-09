@@ -12,7 +12,7 @@
 		canremove = FALSE
 		to_chat(user, SPAN_DANGER("<font size=3>\The [src] shatters your mind as it sears through [user.isSynthetic() ? "metal and circuitry" : "flesh and bone"], embedding itself into your skull!</font>"))
 		SET_STATUS_MAX(user, STAT_PARA, 5)
-		addtimer(CALLBACK(src, .proc/activate_role), 5 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(activate_role)), 5 SECONDS)
 	else
 		canremove = TRUE
 		name = initial(name)
@@ -26,7 +26,7 @@
 		name = "halo of starfire"
 		desc = "Beware the fire of the star-bearers; it is too terrible to touch."
 		starbearer.add_aura(new /obj/aura/regenerating(starbearer))
-		body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_HANDS|SLOT_FEET
+		body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_HANDS|SLOT_FEET|SLOT_TAIL
 		item_flags |= ITEM_FLAG_AIRTIGHT
 
 /obj/item/clothing/head/fated/verb/perform_division()

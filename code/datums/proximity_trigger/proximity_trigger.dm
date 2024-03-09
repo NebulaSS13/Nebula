@@ -84,30 +84,30 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 
 /datum/proximity_trigger/proc/register_turfs()
 	if(ismovable(holder))
-		events_repository.register(/decl/observ/moved, holder, src, /datum/proximity_trigger/proc/on_holder_moved)
-	events_repository.register(/decl/observ/dir_set, holder, src, /datum/proximity_trigger/proc/register_turfs) // Changing direction might alter the relevant turfs
+		events_repository.register(/decl/observ/moved, holder, src, TYPE_PROC_REF(/datum/proximity_trigger, on_holder_moved))
+	events_repository.register(/decl/observ/dir_set, holder, src, TYPE_PROC_REF(/datum/proximity_trigger, register_turfs)) // Changing direction might alter the relevant turfs
 
 	var/list/new_turfs = acquire_relevant_turfs()
 	if(listequal(turfs_in_range, new_turfs))
 		return
 
 	for(var/t in (turfs_in_range - new_turfs))
-		events_repository.unregister(/decl/observ/opacity_set, t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		events_repository.unregister(/decl/observ/opacity_set, t, src, TYPE_PROC_REF(/datum/proximity_trigger, on_turf_visibility_changed))
 	for(var/t in (new_turfs - turfs_in_range))
-		events_repository.register(/decl/observ/opacity_set, t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		events_repository.register(/decl/observ/opacity_set, t, src, TYPE_PROC_REF(/datum/proximity_trigger, on_turf_visibility_changed))
 
 	turfs_in_range = new_turfs
 	on_turf_visibility_changed()
 
 /datum/proximity_trigger/proc/unregister_turfs()
 	if(ismovable(holder))
-		events_repository.unregister(/decl/observ/moved, holder, src, /datum/proximity_trigger/proc/on_holder_moved)
-	events_repository.unregister(/decl/observ/dir_set, holder, src, /datum/proximity_trigger/proc/register_turfs)
+		events_repository.unregister(/decl/observ/moved, holder, src, TYPE_PROC_REF(/datum/proximity_trigger, on_holder_moved))
+	events_repository.unregister(/decl/observ/dir_set, holder, src, TYPE_PROC_REF(/datum/proximity_trigger, register_turfs))
 
 	for(var/t in turfs_in_range)
-		events_repository.unregister(/decl/observ/opacity_set, t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		events_repository.unregister(/decl/observ/opacity_set, t, src, TYPE_PROC_REF(/datum/proximity_trigger, on_turf_visibility_changed))
 	for(var/t in seen_turfs_)
-		events_repository.unregister(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.unregister(/decl/observ/entered, t, src, TYPE_PROC_REF(/datum/proximity_trigger, on_turf_entered))
 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), list())
 
@@ -122,9 +122,9 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), new_seen_turfs_.Copy())
 
 	for(var/t in (seen_turfs_ - new_seen_turfs_))
-		events_repository.unregister(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.unregister(/decl/observ/entered, t, src, TYPE_PROC_REF(/datum/proximity_trigger, on_turf_entered))
 	for(var/t in (new_seen_turfs_ - seen_turfs_))
-		events_repository.register(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.register(/decl/observ/entered, t, src, TYPE_PROC_REF(/datum/proximity_trigger, on_turf_entered))
 
 	seen_turfs_ = new_seen_turfs_
 
@@ -141,18 +141,18 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 		return
 	// For opaque movables, we need to recheck visibility on destruction, when their opacity is changed, or when they move out of range.
 	if(enterer.opacity)
-		events_repository.register(/decl/observ/opacity_set, enterer, src, /datum/proximity_trigger/proc/update_opaque_atom)
-		events_repository.register(/decl/observ/destroyed, enterer, src, /datum/proximity_trigger/proc/update_opaque_atom)
-		events_repository.register(/decl/observ/moved, enterer, src, /datum/proximity_trigger/proc/update_opaque_atom)
+		events_repository.register(/decl/observ/opacity_set, enterer, src, TYPE_PROC_REF(/datum/proximity_trigger, update_opaque_atom))
+		events_repository.register(/decl/observ/destroyed, enterer, src, TYPE_PROC_REF(/datum/proximity_trigger, update_opaque_atom))
+		events_repository.register(/decl/observ/moved, enterer, src, TYPE_PROC_REF(/datum/proximity_trigger, update_opaque_atom))
 		on_turf_visibility_changed()
 	call(proc_owner, on_turf_entered)(enterer)
 
 /datum/proximity_trigger/proc/update_opaque_atom(var/atom/opaque_atom)
 	var/turf/atom_loc = get_turf(opaque_atom)
 	if(QDELETED(opaque_atom) || !opaque_atom.opacity || !atom_loc || !(atom_loc in turfs_in_range))
-		events_repository.unregister(/decl/observ/opacity_set, opaque_atom, src, /datum/proximity_trigger/proc/update_opaque_atom)
-		events_repository.unregister(/decl/observ/destroyed, opaque_atom, src, /datum/proximity_trigger/proc/update_opaque_atom)
-		events_repository.unregister(/decl/observ/moved, opaque_atom, src, /datum/proximity_trigger/proc/update_opaque_atom)
+		events_repository.unregister(/decl/observ/opacity_set, opaque_atom, src, TYPE_PROC_REF(/datum/proximity_trigger, update_opaque_atom))
+		events_repository.unregister(/decl/observ/destroyed, opaque_atom, src, TYPE_PROC_REF(/datum/proximity_trigger, update_opaque_atom))
+		events_repository.unregister(/decl/observ/moved, opaque_atom, src, TYPE_PROC_REF(/datum/proximity_trigger, update_opaque_atom))
 		on_turf_visibility_changed()
 
 /datum/proximity_trigger/proc/get_seen_turfs()
@@ -186,7 +186,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /obj/item/proxy_debug/Initialize()
 	. = ..()
 	overlay = image('icons/misc/mark.dmi', icon_state = "x3")
-	var/datum/proximity_trigger/a = new proxy_type(src, /obj/item/proxy_debug/proc/turf_entered, /obj/item/proxy_debug/proc/update_turfs)
+	var/datum/proximity_trigger/a = new proxy_type(src, TYPE_PROC_REF(/obj/item/proxy_debug, turf_entered), TYPE_PROC_REF(/obj/item/proxy_debug, update_turfs))
 	a.register_turfs()
 
 /obj/item/proxy_debug/proc/turf_entered(var/atom/A)

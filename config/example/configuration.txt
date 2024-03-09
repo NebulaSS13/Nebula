@@ -1,0 +1,630 @@
+##
+# ADMIN
+# Configuration options relating to administration.
+##
+
+## Allows admin jumping.
+#ALLOW_ADMIN_JUMP 1
+
+## Comment this out to stop admins being able to choose their personal OOC color. Uncomment to enable.
+#ALLOW_ADMIN_OOCCOLOR
+
+## Allows admin revives.
+#ALLOW_ADMIN_REV 1
+
+## Allows admin item spawning.
+#ALLOW_ADMIN_SPAWNING 1
+
+## Uncomment this to allow admins to narrate using HTML tags. Uncomment to enable.
+#ALLOW_UNSAFE_NARRATES
+
+## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes.
+#AUTOSTEALTH 0
+
+## Set to 0/1 to disable/enable automatic admin rights for users connecting from the host the server is running on.
+#AUTO_LOCAL_ADMIN 1
+
+## Set to jobban 'Guest-' accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
+## Set to 1 to jobban them from those positions, set to 0 to allow them.
+#GUEST_JOBBAN 1
+
+## Chooses whether mods have the ability to issue tempbans for jobs or not. Uncomment to enable.
+#MODS_CAN_JOB_TEMPBAN
+
+## Chooses whether mods have the ability to tempban or not. Uncomment to enable.
+#MODS_CAN_TEMPBAN
+
+## Maximum mod job tempban duration (in minutes).
+#MOD_JOB_TEMPBAN_MAX 1440
+
+## Maximum mod tempban duration (in minutes).
+#MOD_TEMPBAN_MAX 1440
+
+##
+# DEBUG
+# Configuration options relating to error reporting.
+##
+
+## Uncomment to make proccall require R_ADMIN instead of R_DEBUG
+## designed for environments where you have testers but don't want them
+## able to use the more powerful debug options.
+##  Uncomment to enable.
+#DEBUG_PARANOID
+
+## The "cooldown" time for each occurrence of a unique error.
+#ERROR_COOLDOWN 600
+
+## How many occurrences before the next will silence them.
+#ERROR_LIMIT 50
+
+## How long to wait between messaging admins about occurrences of a unique error.
+#ERROR_MSG_DELAY 50
+
+## How long a unique error will be silenced for.
+#ERROR_SILENCE_TIME 6000
+
+##
+# EVENTS
+# Configuration options relating to event timers and probabilities.
+##
+
+## Hash out to disable random events during the round. Uncomment to enable.
+#ALLOW_RANDOM_EVENTS
+
+## The lower delay between events in minutes.
+## Affect mundane, moderate, and major events respectively.
+#EVENT_DELAY_LOWER [10,30,50]
+
+## The upper delay between events in minutes.
+## Affect mundane, moderate, and major events respectively.
+#EVENT_DELAY_UPPER [15,45,70]
+
+## If the first delay has a custom start time. Defined in minutes.
+#EVENT_FIRST_RUN [null,null,{"lower":80,"upper":100}]
+
+## Determines if objectives are disabled.
+#OBJECTIVES_DISABLED 2
+
+##
+# GAME OPTIONS
+# Configuration options relating to gameplay, such as movement, health and stamina.
+##
+
+## Uncomment this to modify the length of the spam kicking interval in seconds.
+#ACT_INTERVAL 0.1
+
+## Remove the # to let aliens spawn. Uncomment to enable.
+#ALIENS_ALLOWED
+
+## Remove the # to allow people to leave public comments on each other's characters via the comments system. Uncomment to enable.
+#ALLOW_CHARACTER_COMMENTS
+
+## Allow multiple input keys to be pressed for diagonal movement. Uncomment to enable.
+#ALLOW_DIAGONAL_MOVEMENT
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
+#ANIMAL_DELAY 0
+
+## Remove the # to give assistants maint access. Uncomment to enable.
+#ASSISTANT_MAINT
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
+#CREEP_DELAY 6
+
+## The effectiveness of default darksight if above is uncommented.
+#DEFAULT_DARKSIGHT_EFFECTIVENESS 0.05
+
+## The range of default darksight if above is uncommented.
+#DEFAULT_DARKSIGHT_RANGE 2
+
+## Threshold of where brain damage begins to affect dexterity (70 brainloss above this means zero dexterity). Default is 30.
+#DEX_MALUS_BRAINLOSS_THRESHOLD 30
+
+## Restricted ERT to be only called by admins. Uncomment to enable.
+#ERT_ADMIN_CALL_ONLY
+
+## Uncomment this to enable expanded alt interactions with objects. Uncomment to enable.
+#EXPANDED_ALT_INTERACTIONS
+
+## Expected round length in hours.
+#EXPECTED_ROUND_LENGTH 3
+
+## Uncomment to allow ghosts to possess any animal. Uncomment to enable.
+#GHOSTS_CAN_POSSESS_ANIMALS
+
+## Remove the # to let ghosts spin chairs. Uncomment to enable.
+#GHOST_INTERACTION
+
+## Set this to 0 for perfectly smooth movement gliding, or 1 or more for delayed chess move style movements.
+#GLIDE_SIZE_DELAY 1
+
+## Whether or not all human mobs have very basic darksight by default. Uncomment to enable.
+#GRANT_DEFAULT_DARKSIGHT
+
+## Specify a number of days after which to hide comments on public profiles (to avoid bloat from retired characters).
+#HIDE_COMMENTS_OLDER_THAN 0
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
+#HUMAN_DELAY 0
+
+## Maximum stamina recovered per tick when resting.
+#MAXIMUM_STAMINA_RECOVERY 3
+
+## Uncomment this to modify the number of actions permitted per interval before being kicked for spam.
+#MAX_ACTS_PER_INTERVAL 140
+
+## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
+#MAX_GEAR_COST 10
+
+## Value used for expending stamina during sprinting.
+#MINIMUM_SPRINT_COST 0.8
+
+## Minimum stamina recovered per tick when resting.
+#MINIMUM_STAMINA_RECOVERY 1
+
+## Remove the # to let ninjas spawn. Uncomment to enable.
+#NINJAS_ALLOWED
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
+#ROBOT_DELAY 0
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
+#RUN_DELAY 2
+
+## Determines the severity of athletics skill when applied to stamina cost.
+#SKILL_SPRINT_COST_RANGE 0.8
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
+#WALK_DELAY 4
+
+##
+# GAME WORLD
+# Configuration options relating to the game world and simulation.
+##
+
+## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR Uncomment to enable.
+#ALLOW_HOLIDAYS
+
+## Uncomment this to prevent players from printing copy/pasted circuits.
+#ALLOW_IC_PRINTING 1
+
+## Uncomment to allow ghosts to write in blood during Cult rounds.
+#CULT_GHOSTWRITER 1
+
+## The maximum duration of an exoplanet day, in minutes.
+#EXOPLANET_MAX_DAY_DURATION 40
+
+## The minimum duration of an exoplanet day, in minutes.
+#EXOPLANET_MIN_DAY_DURATION 10
+
+## Percentile strength of exterior ambient light (such as starlight). 0.5 is 50% lit.
+#EXTERIOR_AMBIENT_LIGHT 0
+
+## How long the delay is before the Away Mission gate opens. Default is half an hour.
+#GATEWAY_DELAY 18000
+
+## Humans are forced to have surnames if this is uncommented. Uncomment to enable.
+#HUMANS_NEED_SURNAMES
+
+## What to multiply power by when crossing Z-levels.
+#ITERATIVE_EXPLOSIVES_Z_MULTIPLIER 0.75
+
+## The power of explosion required for it to cross Z-levels.
+#ITERATIVE_EXPLOSIVES_Z_THRESHOLD 10
+
+## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
+#LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010
+
+## After this amount alive, walking mushrooms spawned from botany will not reproduce.
+#MAXIMUM_MUSHROOMS 15
+
+## How much radiation levels self-reduce by each tick.
+#RADIATION_DECAY_RATE 1
+
+## Below this point, radiation is ignored.
+## Radiation weakens with distance from the source; stop calculating when the strength falls below this value. Lower values mean radiation reaches smaller (with increasingly trivial damage) at the cost of more CPU usage.
+## Max range = DISTANCE^2 * POWER / RADIATION_LOWER_LIMIT
+#RADIATION_LOWER_LIMIT 0.15
+
+## General material radiation resistance is divided by this value.
+#RADIATION_MATERIAL_RESISTANCE_DIVISOR 2
+
+## The amount of radiation resistance on a turf is multiplied by this value.
+#RADIATION_RESISTANCE_MULTIPLIER 1.25
+
+## Enable/Disable random level generation. Will behave strangely if turned off with a map that expects it on. Uncomment to enable.
+#ROUNDSTART_LEVEL_GENERATION
+
+## Unhash this to use iterative explosions, keep it hashed to use circle explosions. Uncomment to enable.
+#USE_ITERATIVE_EXPLOSIONS
+
+## Uncomment to disable the restrictive weldervision overlay.
+#WELDER_VISION 1
+
+##
+# HEALTH
+# Configuration options relating to the health simulation.
+##
+
+## Determines whether bones can be broken through excessive damage to the organ.
+## 0 means bones can't break, 1 means they can.
+#BONES_CAN_BREAK 1
+
+## Level of health at which a mob becomes dead.
+#HEALTH_THRESHOLD_DEAD -100
+
+## Determines whether limbs can be amputated through excessive damage to the organ.
+## 0 means limbs can't be amputated, 1 means they can.
+#LIMBS_CAN_BREAK 1
+
+## Percentage multiplier that influences how damage spreads around organs. 100 means normal, 50 means half.
+#ORGAN_DAMAGE_SPILLOVER_MULTIPLIER 0.5
+
+## Percentage multiplier which enables organs to take more damage before bones breaking or limbs being destroyed.
+#ORGAN_HEALTH_MULTIPLIER 0.9
+
+## Percentage multiplier which influences how fast organs regenerate naturally.
+#ORGAN_REGENERATION_MULTIPLIER 0.25
+
+## Amount of time (in hundredths of seconds) for which a brain retains the 'spark of life' after the person's death (set to -1 for infinite).
+#REVIVAL_BRAIN_LIFE -1
+
+## A multiplier for the impact stress has on blood regeneration, as above.
+#STRESS_BLOOD_RECOVERY_CONSTANT 0.3
+
+## A multiplier for the impact stress has on wound passive healing, as above.
+#STRESS_HEALING_RECOVERY_CONSTANT 0.3
+
+## A multiplier for the impact stress has on shock recovery - 0.3 means maximum stress imposes a 30% penalty on shock recovery.
+#STRESS_SHOCK_RECOVERY_CONSTANT 0.5
+
+##
+# LOGGING
+# Configuration options relating to logging.
+##
+
+## log client access (logon/logoff) Uncomment to enable.
+#LOG_ACCESS
+
+## log admin actions Uncomment to enable.
+#LOG_ADMIN
+
+## log admin chat Uncomment to enable.
+#LOG_ADMINCHAT
+
+## Log admin warning messages. Also duplicates a bunch of other messages. Uncomment to enable.
+#LOG_ADMINWARN
+
+## log attack messages Uncomment to enable.
+#LOG_ATTACK
+
+## log debug output Uncomment to enable.
+#LOG_DEBUG
+
+## log emotes Uncomment to enable.
+#LOG_EMOTE
+
+## log game actions (start of round, results, etc.) Uncomment to enable.
+#LOG_GAME
+
+## Log all Topic() calls (for use by coders in tracking down Topic issues). Uncomment to enable.
+#LOG_HREFS
+
+## log OOC channel Uncomment to enable.
+#LOG_OOC
+
+## Log PDA messages. Uncomment to enable.
+#LOG_PDA
+
+## Log world.log and runtime errors to a file. Uncomment to enable.
+#LOG_RUNTIME
+
+## log client Say Uncomment to enable.
+#LOG_SAY
+
+## log player votes Uncomment to enable.
+#LOG_VOTE
+
+## log client Whisper Uncomment to enable.
+#LOG_WHISPER
+
+## Log world.log messages. Uncomment to enable.
+#LOG_WORLD_OUTPUT
+
+##
+# MODES
+# Configuration options relating to game modes.
+##
+
+## If uncommented, votes can be called to add extra antags to the round. Uncomment to enable.
+#ALLOW_EXTRA_ANTAGS
+
+## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
+## Malf and Rev will let the shuttle be called when the antags/protags are dead.
+##  Uncomment to enable.
+#CONTINUOUS_ROUNDS
+
+## Spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard. Uncomment to enable.
+#FEATURE_OBJECT_SPELL_SYSTEM
+
+## Allowed modes.
+#MODES ["crossfire","cult","extended","god","heist","mercenary","ninja","revolution","siege","spyvspy","traitor","uprising","wizard"]
+
+## Mode names.
+#MODE_NAMES {"calamity":"Calamity","cult":"Cult","extended":"Extended","god":"Deity","heist":"Heist","meteor":"Meteor","crossfire":"Mercenary & heist","siege":"Mercenary & revolution","spyvspy":"Spy v. spy","uprising":"Cult & revolution","ninja":"Ninja","mercenary":"Mercenary","revolution":"Revolution","traitor":"Traitor","wizard":"Wizard"}
+
+## Relative probability of each mode.
+#PROBABILITIES {"calamity":0,"cult":1,"extended":1,"god":0,"heist":0,"meteor":0,"crossfire":0,"siege":0,"spyvspy":0,"uprising":0,"ninja":0,"mercenary":1,"revolution":0,"traitor":0,"wizard":1}
+
+## If security is prohibited from being most antagonists. Uncomment to enable.
+#PROTECT_ROLES_FROM_ANTAGONIST
+
+## If amount of traitors scales or not. Uncomment to enable.
+#TRAITOR_SCALING
+
+## A list of modes that should be votable.
+#VOTABLE_MODES ["crossfire","cult","extended","god","heist","mercenary","meteor","ninja","revolution","secret","siege","spyvspy","traitor","uprising","wizard"]
+
+##
+# PROTECTED
+# Configuration options protected from manipulation on-server.
+##
+
+## Password used for authorizing external tools that can apply bans.
+#BAN_COMMS_PASSWORD 
+
+## Password used for authorizing ircbot and other external tools.
+#COMMS_PASSWORD 
+
+## Export address where external tools that monitor logins are located.
+#LOGIN_EXPORT_ADDR 
+
+##
+# RESOURCES
+# Configuration options relating to server resources.
+##
+
+## Uncomment this and set it to a file path relative to the executing binary to prefix all custom icon locations with this location ie. '[CUSTOM_ICON_ICON_LOCATION]/[custom icon path value]'
+#CUSTOM_ICON_ICON_LOCATION config/custom_icons/icons
+
+## Set this to a file path relative to the executing binary to prefix all custom item icon locations with this location ie. '[CUSTOM_ITEM_ICON_LOCATION]/[custom item icon path value]'
+#CUSTOM_ITEM_ICON_LOCATION config/custom_items/icons
+
+## Direct clients to preload the server resource file from a URL pointing to a .rsc file. NOTE: At this time (byond 512),
+## the client/resource_rsc var does not function as one would expect. See client_defines.dm, the 'preload_rsc' var's
+## comments on how to use it properly. If you use a resource URL, you must set preload_rsc to 0 at compile time or
+## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
+## Spaces are prohibited in each URL by spec, you must use encoded spaces.
+## ex. RESOURCE_URLS URL URL2 URL3
+#RESOURCE_URLS []
+
+##
+# SERVER
+# Configuration options relating to the server itself.
+##
+
+## Comment to disable respawning by default.
+#ABANDON_ALLOWED 1
+
+## IRC channel to send adminhelps to. Leave blank to disable adminhelps-to-irc.
+#ADMIN_IRC 
+
+## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
+#ADMIN_LEGACY_SYSTEM 1
+
+## Allow AI job.
+#ALLOW_AI 1
+
+## Allow ghosts to join as maintenance drones.
+#ALLOW_DRONE_SPAWN 1
+
+## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup. Uncomment to enable.
+#ANNOUNCE_SHUTTLE_DOCK_TO_IRC
+
+## Comment to disable the AOOC channel by default.
+#AOOC_ALLOWED 1
+
+## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
+#BANAPPEALS 
+
+## Add a # infront of this if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
+#BAN_LEGACY_SYSTEM 1
+
+## Sets the number of available character slots.
+#CHARACTER_SLOTS 10
+
+## Sets the minimum number of cultists needed for ghosts to write in blood.
+#CULT_GHOSTWRITER_REQ_CULTISTS 10
+
+## Uncomment this to remove the server from the hub. Uncomment to enable.
+#DELIST_WHEN_NO_ADMINS
+
+## Uncomment to enable.
+#DISABLE_PLAYER_MICE
+
+## Uncomment to make Discord webhooks send in plaintext rather than as embeds. Uncomment to enable.
+#DISABLE_WEBHOOK_EMBEDS
+
+## Discord server permanent invite address.
+#DISCORDURL 
+
+## Comment to disable the dead OOC channel by default.
+#DOOC_ALLOWED 1
+
+## Uncomment this to DISABLE action spam kicking. Not recommended; this helps protect from spam attacks. Uncomment to enable.
+#DO_NOT_PREVENT_SPAM
+
+## A drone will become available every X ticks since last drone spawn. Default is 2 minutes.
+#DRONE_BUILD_TIME 1200
+
+## Comment to disable ghost chat by default.
+#DSAY_ALLOWED 1
+
+## Comment to prevent anyone from joining the round by default.
+#ENTER_ALLOWED 1
+
+## Remove the # mark infront of this to forbid admins from posssessing the singularity. Uncomment to enable.
+#FORBID_SINGULO_POSSESSION
+
+## Discussion forum address.
+#FORUMURL 
+
+## Defines world FPS. Defaults to 20.
+## Can also accept ticklag values (0.9, 0.5, etc) which will automatically be converted to FPS.
+#FPS 20
+
+## GitHub address.
+#GITHUBURL 
+
+## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting). Uncomment to enable.
+#GUESTS_ALLOWED
+
+## Set a hosted by name for UNIX platforms.
+#HOSTEDBY 
+
+## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to visible. This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly. Uncomment to enable.
+#HUB_VISIBILITY
+
+## Host where the IRC bot is hosted. Port 45678 needs to be open.
+#IRC_BOT_HOST localhost
+
+## GitHub new issue address.
+#ISSUEREPORTURL 
+
+## Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments.
+#JOBS_HAVE_MINIMAL_ACCESS 1
+
+## Disconnect players who did nothing during the set amount of minutes.
+#KICK_INACTIVE 0
+
+## Sets the number of loadout slots per character.
+#LOADOUT_SLOTS 3
+
+## Toggle for having jobs load up from the .txt Uncomment to enable.
+#LOAD_JOBS_FROM_TXT
+
+## Comment to disable the LOOC channel by default.
+#LOOC_ALLOWED 1
+
+## IRC channel to send information to. Leave blank to disable.
+#MAIN_IRC #main
+
+## Remove the # to define a different cap for aspect points in chargen.
+#MAX_CHARACTER_ASPECTS 5
+
+## This many drones can be active at the same time.
+#MAX_MAINT_DRONES 5
+
+## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000).
+#MINIMUM_BYOND_BUILD 0
+
+## Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511).
+#MINIMUM_BYOND_VERSION 0
+
+## Uncomment to enable.
+#NO_CLICK_COOLDOWN
+
+## Whether or not to make localhost immune to throttling.
+## Localhost will still be throttled internally; it just won't be affected by it.
+##  Uncomment to enable.
+#NO_THROTTLE_LOCALHOST
+
+## Comment to disable the OOC channel by default.
+#OOC_ALLOWED 1
+
+## Is the panic bunker currently on by default? Uncomment to enable.
+#PANIC_BUNKER
+
+## A message when user did not pass the panic bunker.
+#PANIC_BUNKER_MESSAGE Sorry! The panic bunker is enabled. Please head to our Discord or forum to get yourself added to the panic bunker bypass.
+
+## The maximum number of non-admin players online.
+#PLAYER_LIMIT 0
+
+## Respawn delay in minutes before one may respawn as a crew member.
+#RESPAWN_DELAY 30
+
+## Set a server location for world reboot. Don't include the byond://, just give the address and port.
+#SERVER 
+
+## Set a server URL for the IRC bot to use; like SERVER, don't include the byond://
+## Unlike SERVER, this one shouldn't break auto-reconnect.
+#SERVERURL 
+
+## Server name: This appears at the top of the screen in-game.
+#SERVER_NAME Nebula 13
+
+## Uncomment this to show a typing indicator for people writing whispers. Uncomment to enable.
+#SHOW_TYPING_INDICATOR_FOR_WHISPERS
+
+## SSinitialization throttling.
+#TICK_LIMIT_MC_INIT 98
+
+## Set to 1 to prevent newly-spawned mice from understanding human speech. Uncomment to enable.
+#UNEDUCATED_MICE
+
+## Uncomment to restrict non-admins from using humanoid alien races. Uncomment to enable.
+#USEALIENWHITELIST
+
+## Uncomment to use the alien whitelist system with SQL instead. (requires the above uncommented as well). Uncomment to enable.
+#USEALIENWHITELIST_SQL
+
+## Set to jobban everyone who's key is not listed in data/whitelist.txt from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
+## Uncomment to 1 to jobban, leave commented out to allow these positions for everyone (but see GUEST_JOBBAN above and regular jobbans).
+##  Uncomment to enable.
+#USEWHITELIST
+
+## Uncomment to enable sending data to the IRC bot. Uncomment to enable.
+#USE_IRC_BOT
+
+## Remove the # in front of this config option to have loyalty implants spawn by default on your server. Uncomment to enable.
+#USE_LOYALTY_IMPLANTS
+
+## Uncomment to make Dream Daemon refuse to reboot for any reason other than SIGUSR1. Uncomment to enable.
+#WAIT_FOR_SIGUSR1_REBOOT
+
+## Wiki address.
+#WIKIURL 
+
+##
+# VOTING
+# Configuration options relating to votes at runtime.
+##
+
+## Uncomment to enable map voting; you'll need to use the script at tools/server.sh or an equivalent for it to take effect.
+## You'll also likely need to enable WAIT_FOR_SIGUSR1 below.
+##  Uncomment to enable.
+#ALLOW_MAP_SWITCHING
+
+## Allow players to initate a mode-change start. Uncomment to enable.
+#ALLOW_VOTE_MODE
+
+## Allow players to initiate a restart vote. Uncomment to enable.
+#ALLOW_VOTE_RESTART
+
+## Uncomment to enable an automatic map vote and switch at end of round. MAP_SWITCHING must also be enabled. Uncomment to enable.
+#AUTO_MAP_VOTE
+
+## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
+#VOTE_AUTOGAMEMODE_TIMELEFT 100
+
+## Autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes).
+#VOTE_AUTOTRANSFER_INITIAL 108000
+
+## Autovote delay (deciseconds) before sequential automatic transfer votes are called (default 30 minutes).
+#VOTE_AUTOTRANSFER_INTERVAL 18000
+
+## Min delay (deciseconds) between voting sessions (default 10 minutes).
+#VOTE_DELAY 6000
+
+## Prevents dead players from voting or starting votes.
+#VOTE_NO_DEAD 0
+
+## Prevents players not in-round from voting on crew transfer votes.
+#VOTE_NO_DEAD_CREW_TRANSFER 0
+
+## Players' votes default to 'No vote' (otherwise,  default to 'No change').
+#VOTE_NO_DEFAULT 0
+
+## Time period (deciseconds) which voting session will last (default 1 minute).
+#VOTE_PERIOD 600

@@ -87,7 +87,7 @@
 		catcher.SetSize((iter*2)+1)
 		particle_catchers.Add(catcher)
 
-	addtimer(CALLBACK(src, .proc/update_light_colors), 10 SECONDS, TIMER_LOOP)
+	addtimer(CALLBACK(src, PROC_REF(update_light_colors)), 10 SECONDS, TIMER_LOOP)
 
 /obj/effect/fusion_em_field/proc/handle_tick()
 	//make sure the field generator is still intact
@@ -194,7 +194,7 @@
 
 	if(field_cohesion == 0)
 		owned_core.Shutdown(force_rupture=1)
-		
+
 	if(percent_unstable > 0.5 && prob(percent_unstable*100))
 		if(plasma_temperature < FUSION_RUPTURE_THRESHOLD)
 			visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")

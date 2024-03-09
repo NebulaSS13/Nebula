@@ -43,13 +43,13 @@
 	///List of theme types that can be picked by this planet when generating.
 	var/list/possible_themes
 	///Bit flag of the only ruin tags that may be picked by this planet.
-	var/ruin_tags_whitelist
+	var/template_tags_whitelist
 	///Bit flag of the ruin tags that may never be picked for this planet.
-	var/ruin_tags_blacklist
+	var/template_tags_blacklist
 	///Maximume amount of subtemplates/ruins/sites that may be picked and spawned on the planet.
 	var/subtemplate_budget = 4
 	///Ruin sites map template category to use for creating ruins on this planet.
-	var/ruin_category = MAP_TEMPLATE_CATEGORY_PLANET_SITE
+	var/template_category = MAP_TEMPLATE_CATEGORY_PLANET_SITE
 
 /datum/map_template/planetoid/random/is_runtime_generated()
 	return TRUE
@@ -154,16 +154,20 @@
 	if(!gen_data)
 		gen_data = create_planetoid_instance()
 
+	// Update our blacklist for habitability
+	if(gen_data.habitability_class >= HABITABILITY_BAD)
+		template_tags_blacklist |= TEMPLATE_TAG_HABITABLE
+
 	//Generate some of the background stuff for our new planet
 	before_planet_gen(gen_data)
 
 	//Prepare themes, and apply ruin overrides
-	var/new_ruin_whitelist = ruin_tags_whitelist
-	var/new_ruin_blacklist = ruin_tags_blacklist
+	var/new_template_whitelist = template_tags_whitelist
+	var/new_template_blacklist = template_tags_blacklist
 	var/list/theme_map_generators
 	for(var/datum/exoplanet_theme/T in gen_data.themes)
-		new_ruin_whitelist = T.modify_ruin_whitelist(new_ruin_whitelist)
-		new_ruin_blacklist = T.modify_ruin_blacklist(new_ruin_blacklist)
+		new_template_whitelist = T.modify_template_whitelist(new_template_whitelist)
+		new_template_blacklist = T.modify_template_blacklist(new_template_blacklist)
 		T.before_map_generation(gen_data)
 
 		var/list/gennies = T.get_map_generators()
@@ -188,7 +192,7 @@
 		///Create all needed z-levels, tell each of them to generate themselves
 		new_level_data = generate_levels(gen_data, theme_map_generators)
 		//Spawn the ruins and sites on the planet
-		generate_features(gen_data, new_level_data, new_ruin_whitelist, new_ruin_blacklist)
+		generate_features(gen_data, new_level_data, new_template_whitelist, new_template_blacklist)
 
 	//Notify themes we finished gen. Since some themes may not change level gen, we run it for either random or mapped planets
 	for(var/datum/exoplanet_theme/T in gen_data.themes)
@@ -259,7 +263,7 @@
 			var/valid = 1
 			var/list/block_to_check = block(locate(T.x - landing_radius, T.y - landing_radius, T.z), locate(T.x + landing_radius, T.y + landing_radius, T.z))
 			for(var/turf/check in block_to_check)
-				if(!istype(get_area(check), gen_data.surface_area) || check.turf_flags & TURF_FLAG_NORUINS)
+				if(!istype(get_area(check), gen_data.surface_area) || check.turf_flags & TURF_FLAG_NO_POINTS_OF_INTEREST)
 					valid = 0
 					break
 			if(attempts >= 10)

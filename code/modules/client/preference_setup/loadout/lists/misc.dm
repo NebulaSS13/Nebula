@@ -64,13 +64,28 @@
 
 /decl/loadout_option/lipstick
 	name = "lipstick selection"
-	path = /obj/item/lipstick
-	loadout_flags = GEAR_HAS_TYPE_SELECTION
+	path = /obj/item/cosmetics/lipstick
+	loadout_flags = GEAR_HAS_SUBTYPE_SELECTION
 
-/decl/loadout_option/comb
-	name = "plastic comb"
-	path = /obj/item/haircomb
+/decl/loadout_option/eyeshadow
+	name = "eyeshadow selection"
+	path = /obj/item/cosmetics/eyeshadow
+	loadout_flags = GEAR_HAS_SUBTYPE_SELECTION
+
+/decl/loadout_option/grooming
+	name = "grooming tool selection"
+	path = /obj/item/grooming
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+
+/decl/loadout_option/grooming/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"comb"           = /obj/item/grooming/comb/colorable,
+		"butterfly comb" = /obj/item/grooming/comb/butterfly/colorable,
+		"brush"          = /obj/item/grooming/brush/colorable,
+		"file"           = /obj/item/grooming/file/colorable
+	)
 
 /decl/loadout_option/mask
 	name = "sterile mask"

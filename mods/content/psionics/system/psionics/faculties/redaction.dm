@@ -64,8 +64,9 @@
 		user.visible_message(SPAN_NOTICE("<i>\The [user] rests a hand on \the [target]'s [E.name]...</i>"))
 		to_chat(target, SPAN_NOTICE("A healing warmth suffuses you."))
 
-		var/redaction_rank = user.psi.get_rank(PSI_REDACTION)
-		var/pk_rank = user.psi.get_rank(PSI_PSYCHOKINESIS)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		var/redaction_rank = psi?.get_rank(PSI_REDACTION)
+		var/pk_rank = psi?.get_rank(PSI_PSYCHOKINESIS)
 		if(pk_rank >= PSI_RANK_LATENT && redaction_rank >= PSI_RANK_MASTER)
 			var/removal_size = clamp(5-pk_rank, 0, 5)
 			var/valid_objects = list()
@@ -177,7 +178,8 @@
 
 		user.visible_message(SPAN_NOTICE("<i>\The [user] splays out their hands over \the [target]'s body...</i>"))
 		if(!do_after(user, 100, target, 0, 1))
-			user.psi.backblast(rand(10,25))
+			var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+			psi?.backblast(rand(10,25))
 			return TRUE
 
 		for(var/mob/observer/G in global.dead_mob_list_)

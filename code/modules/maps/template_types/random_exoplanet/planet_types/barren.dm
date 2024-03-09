@@ -74,7 +74,7 @@
 	name                       = "barren exoplanet"
 	planetoid_data_type        = /datum/planetoid_data/random/barren
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/barren
-	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
+	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_WATER
 	subtemplate_budget         = 6
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/barren

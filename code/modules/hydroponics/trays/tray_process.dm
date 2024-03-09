@@ -84,9 +84,9 @@
 
 	// Seed datum handles gasses, light and pressure.
 	if(mechanical && closed_system)
-		plant_health -= seed.handle_environment(T,environment,tray_light)
+		plant_health -= seed.handle_plant_environment(T,environment,tray_light)
 	else
-		plant_health -= seed.handle_environment(T,environment)
+		plant_health -= seed.handle_plant_environment(T,environment)
 
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
 	if (closed_system && get_port())

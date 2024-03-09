@@ -17,8 +17,8 @@
 /obj/random/clipboard
 	name = "random clipboard"
 	desc = "This is a random material clipboard."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "clipboard_preview"
+	icon = 'icons/obj/items/clipboard.dmi'
+	icon_state = "clipboard"
 
 /obj/random/clipboard/spawn_choices()
 	var/static/list/spawnable_choices = list(

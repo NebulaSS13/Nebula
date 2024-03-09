@@ -3,7 +3,7 @@
 	name = "babel implant"
 	desc = "A small implant with a microphone on it."
 	icon_state = "implant_evil"
-	origin_tech = "{'materials':1,'biotech':2,'esoteric':3}"
+	origin_tech = @'{"materials":1,"biotech":2,"esoteric":3}'
 	hidden = 1
 	var/list/languages = list()
 	var/learning_threshold = 20 //need to hear language spoken this many times to learn it
@@ -44,6 +44,6 @@
 	name = "lingophagic node"
 	desc = "A chunk of what could be discolored crystalized brain matter. It seems to pulse occasionally."
 	icon_state = "implant_melted"
-	origin_tech = "{'biotech':5}"
+	origin_tech = @'{"biotech":5}'
 	learning_threshold = 10
 	max_languages = 3

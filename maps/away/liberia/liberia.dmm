@@ -177,9 +177,7 @@
 "ay" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -207,9 +205,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
 	},
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
@@ -324,7 +320,7 @@
 	dir = 9
 	},
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -643,13 +639,10 @@
 /area/liberia/hallway)
 "bo" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -751,7 +744,7 @@
 "bv" = (
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/closet/crate/medical,
 /obj/random/medical,
@@ -819,7 +812,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/machinery/door/window/brigdoor/southright{
@@ -835,13 +828,10 @@
 /area/liberia/mule)
 "bC" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1270,13 +1260,10 @@
 /area/liberia/mule)
 "cp" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1578,13 +1565,10 @@
 	},
 /obj/structure/table/steel,
 /obj/effect/paint/silver,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -1747,7 +1731,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -2347,10 +2331,10 @@
 	},
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/forty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/forty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -2364,9 +2348,9 @@
 /obj/machinery/door/window/brigdoor/northleft{
 	req_access = newlist()
 	},
-/obj/item/stack/material/reinforced/mapped/titanium/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/titanium/fifty,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "ed" = (
@@ -2396,7 +2380,7 @@
 "ef" = (
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/closet/crate/secure{
 	name = "resources crate";
@@ -2454,7 +2438,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -2735,7 +2719,7 @@
 /obj/item/paint_sprayer,
 /obj/item/clothing/gloves/insulated,
 /obj/item/suit_cooling_unit,
-/obj/item/stack/material/shiny/mapped/aluminium/ten,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten,
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
@@ -3358,7 +3342,7 @@
 /obj/random/drinkbottle,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /turf/simulated/floor/wood/ebony,
 /area/liberia/bar)
@@ -3649,7 +3633,7 @@
 /obj/structure/table/woodentable/walnut,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4196,7 +4180,7 @@
 "hz" = (
 /obj/machinery/vending/cigarette{
 	dir = 1;
-	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
+	products = list(/obj/item/storage/box/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
@@ -4711,7 +4695,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -4993,7 +4977,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/corner/blue/mono,
@@ -5258,7 +5242,7 @@
 /area/liberia/library)
 "kc" = (
 /obj/structure/table/woodentable/walnut,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
@@ -6445,7 +6429,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = null
+	current_health = null
 	},
 /obj/machinery/door/window/brigdoor/northleft{
 	req_access = newlist()
@@ -6534,7 +6518,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "rc" = (
@@ -6762,7 +6746,7 @@
 	pixel_x = -4;
 	pixel_y = -4
 	},
-/obj/item/stack/material/shiny/mapped/aluminium/ten{
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten{
 	pixel_y = -4
 	},
 /obj/item/stack/material/pane/mapped/glass/ten{
@@ -7060,7 +7044,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -7249,9 +7233,9 @@
 /obj/structure/rack/dark,
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -7538,14 +7522,14 @@
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
-/obj/item/stack/material/reinforced/mapped/titanium/fifty,
-/obj/item/stack/material/reinforced/mapped/ocp/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/titanium/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/ocp/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,
@@ -7984,7 +7968,7 @@
 	dir = 6
 	},
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8094,13 +8078,10 @@
 /area/liberia/dockinghall)
 "QE" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,

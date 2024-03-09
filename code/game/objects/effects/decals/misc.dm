@@ -1,7 +1,7 @@
 /obj/effect/decal/point
 	name = "arrow"
 	desc = "It's an arrow hanging in mid-air. There may be a wizard about."
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "arrow"
 	layer = POINTER_LAYER
 	anchored = TRUE

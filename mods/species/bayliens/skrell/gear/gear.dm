@@ -79,7 +79,6 @@
 	slowdown_held = 1
 	slowdown_worn = 1
 	removable_components = FALSE
-	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv
 	load_type = /obj/item/magnetic_ammo/skrell
 	loaded = /obj/item/magnetic_ammo/skrell
@@ -95,7 +94,6 @@
 	item_state = "skrell_carbine"
 	slot_flags = SLOT_BACK|SLOT_LOWER_BODY
 	desc = "The Vuu'Xqu*ix T-3, known as 'VT-3' by SolGov. Rarely seen out in the wild by anyone outside of a Skrellian SDTF."
-	accepts_cell_type = /obj/item/cell/high
 	self_recharge = 1
 	projectile_type=/obj/item/projectile/beam/pulse/skrell/single
 	charge_cost=120
@@ -109,6 +107,9 @@
 		list(mode_name="heavy", projectile_type=/obj/item/projectile/beam/pulse/skrell/heavy, charge_cost=55, burst=2, burst_delay=3),
 		list(mode_name="light", projectile_type=/obj/item/projectile/beam/pulse/skrell, charge_cost=40, burst=3, burst_delay=2)
 		)
+
+/obj/item/gun/energy/pulse_rifle/skrell/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/high, /obj/item/cell, power_supply_extension_type, charge_value)
 
 /obj/item/projectile/beam/pulse/skrell
 	icon_state = "pu_laser"

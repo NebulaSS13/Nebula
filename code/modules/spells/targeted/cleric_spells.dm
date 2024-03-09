@@ -181,7 +181,7 @@
 		var/time = (L.getBruteLoss() + L.getFireLoss()) * 20
 		L.status_flags &= GODMODE
 		to_chat(L,"<span class='notice'>You will be in stasis for [time/10] second\s.</span>")
-		addtimer(CALLBACK(src,.proc/cancel_rift),time)
+		addtimer(CALLBACK(src,PROC_REF(cancel_rift)),time)
 
 /spell/targeted/heal_target/trance/Destroy()
 	cancel_rift()
@@ -220,7 +220,7 @@
 				should_wait = 0
 				break //Don't need to check anymore.
 		if(should_wait)
-			addtimer(CALLBACK(src,.proc/check_for_revoke,targets), 30 SECONDS)
+			addtimer(CALLBACK(src,PROC_REF(check_for_revoke),targets), 30 SECONDS)
 		else
 			revoke_spells()
 

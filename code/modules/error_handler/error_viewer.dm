@@ -126,14 +126,9 @@ var/global/datum/error_viewer/error_cache/error_cache
 	// Show the error to admins with debug messages turned on, but only if one
 	//  from the same source hasn't been shown too recently
 	if (error_source.next_message_at <= world.time)
-		var/const/viewtext = "\[view]" // Nesting these in other brackets went poorly
+		//var/const/viewtext = "\[view]" // Nesting these in other brackets went poorly
 		//log_debug("Runtime in <b>[e.file]</b>, line <b>[e.line]</b>: <b>[html_encode(e.name)]</b> [error_entry.make_link(viewtext)]")
-		var/err_msg_delay
-		if(config)
-			err_msg_delay = config.error_msg_delay
-		else
-			err_msg_delay = initial(config.error_msg_delay)
-		error_source.next_message_at = world.time + err_msg_delay
+		error_source.next_message_at = world.time + get_config_value(/decl/config/num/debug_error_msg_delay)
 
 /datum/error_viewer/error_source
 	var/list/errors = list()

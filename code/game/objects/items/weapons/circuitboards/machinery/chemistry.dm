@@ -2,7 +2,7 @@
 	name = "circuitboard (chemical heater)"
 	build_path = /obj/machinery/reagent_temperature
 	board_type = "machine"
-	origin_tech = "{'powerstorage':2,'engineering':1}"
+	origin_tech = @'{"powerstorage":2,"engineering":1}'
 	req_components = list(
 		/obj/item/stock_parts/micro_laser = 1,
 		/obj/item/stock_parts/capacitor = 1
@@ -21,7 +21,7 @@
 	name = "circuitboard (ChemMaster 3000)"
 	build_path = /obj/machinery/chem_master
 	board_type = "machine"
-	origin_tech = "{'biotech':2,'engineering':1}"
+	origin_tech = @'{"biotech":2,"engineering":1}'
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1,
@@ -37,7 +37,7 @@
 	name = "circuitboard (chemical dispenser)"
 	build_path = /obj/machinery/chemical_dispenser
 	board_type = "machine"
-	origin_tech = "{'biotech':2,'engineering':1}"
+	origin_tech = @'{"biotech":2,"engineering":1}'
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/manipulator = 1

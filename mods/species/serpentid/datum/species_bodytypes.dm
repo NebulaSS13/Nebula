@@ -48,6 +48,9 @@
 		BP_R_HAND = list(BP_R_HAND, BP_R_HAND_UPPER)
 	)
 	breathing_organ =  BP_TRACH
+	heat_level_1 = 410 //Default 360 - Higher is better
+	heat_level_2 = 440 //Default 400
+	heat_level_3 = 800 //Default 1000
 
 /decl/bodytype/serpentid/Initialize()
 	equip_adjust = list(

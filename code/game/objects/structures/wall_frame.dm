@@ -6,7 +6,7 @@
 	desc = "A low wall section which serves as the base of windows, amongst other things."
 	icon = 'icons/obj/structures/wall_frame.dmi'
 	icon_state = "frame"
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_ADJACENT_EXCEPTION
+	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_ADJACENT_EXCEPTION
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	anchored = TRUE
 	density = TRUE
@@ -16,7 +16,7 @@
 	material = DEFAULT_WALL_MATERIAL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	maxhealth = 40
+	max_health = 40
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
@@ -48,12 +48,13 @@
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
-/obj/structure/wall_frame/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
+/obj/structure/wall_frame/get_examined_damage_string()
+	if(!can_take_damage())
 		return
-	if(health_ratio > 0.7)
+	var/health_percent = get_percent_health()
+	if(health_percent > 70)
 		return SPAN_NOTICE("It's got a few dents and scratches.")
-	else if(health_ratio > 0.3)
+	else if(health_percent > 30)
 		return SPAN_WARNING("A few pieces of panelling have fallen off.")
 	else
 		return SPAN_DANGER("It's nearly falling to pieces.")
@@ -141,17 +142,18 @@
 	return
 
 /obj/structure/wall_frame/hitby(AM, var/datum/thrownthing/TT)
-	..()
-	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else
-		var/obj/O = AM
-		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	if (tforce < 15)
-		return
-	take_damage(tforce)
+	. = ..()
+	if(.)
+		var/tforce = 0
+		if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
+			var/mob/I = AM
+			tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		else
+			var/obj/O = AM
+			tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		if (tforce < 15)
+			return
+		take_damage(tforce)
 
 /obj/structure/wall_frame/get_color()
 	return paint_color

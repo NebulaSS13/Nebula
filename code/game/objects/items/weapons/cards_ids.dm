@@ -90,14 +90,14 @@
 	name = "broken cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "{'magnets':2,'esoteric':2}"
+	origin_tech = @'{"magnets":2,"esoteric":2}'
 
 /obj/item/card/emag
 	desc = "It's a card with a magnetic strip attached to some circuitry."
 	name = "cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "{'magnets':2,'esoteric':2}"
+	origin_tech = @'{"magnets":2,"esoteric":2}'
 	var/uses = 10
 
 	var/static/list/card_choices = list(
@@ -186,7 +186,7 @@ var/global/const/NO_EMAG_ACT = -50
 	. = ..()
 	update_icon()
 
-/obj/item/card/id/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/card/id/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && detail_color)
 		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-colors", detail_color, RESET_COLOR)
 	. = ..()
@@ -385,6 +385,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/captains_spare
 	name = "captain's spare ID"
 	desc = "The spare ID of the High Lord himself."
+	icon_state = ICON_STATE_WORLD
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"

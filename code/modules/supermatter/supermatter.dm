@@ -562,7 +562,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
 	animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(src, .proc/finish_damage_animation), 12 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(finish_damage_animation)), 12 SECONDS)
 
 /obj/machinery/power/supermatter/proc/finish_damage_animation()
 	damage_animation = FALSE

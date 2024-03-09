@@ -68,7 +68,7 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/steam_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/effect/effect/system, spread), i), 0)
 
 /datum/effect/effect/system/steam_spread/spread(var/i)
 	set waitfor = 0
@@ -98,35 +98,43 @@ steam.start() -- spawns the effect
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	var/spark_sound = "sparks"
+
+/obj/effect/sparks/struck
+	spark_sound = "light_bic"
 
 /obj/effect/sparks/Initialize()
 	. = ..()
 	QDEL_IN(src, 5 SECONDS)
-	playsound(src.loc, "sparks", 100, 1)
-	var/turf/T = src.loc
-	if (isturf(T))
-		T.hotspot_expose(1000,100)
+	playsound(loc, spark_sound, 100, 1)
+	if(isturf(loc))
+		var/turf/T = loc
+		T.spark_act()
 
 /obj/effect/sparks/Destroy()
-	var/turf/T = src.loc
-	if (isturf(T))
-		T.hotspot_expose(1000,100)
+	if(isturf(loc))
+		var/turf/T = loc
+		T.spark_act()
 	return ..()
 
 /obj/effect/sparks/Move()
-	..()
-	var/turf/T = src.loc
-	if (isturf(T))
-		T.hotspot_expose(1000,100)
+	. = ..()
+	if(. && isturf(loc))
+		var/turf/T = loc
+		T.spark_act()
 
-/proc/spark_at(turf/location, amount = 3, cardinal_only = FALSE, holder = null)
-	var/datum/effect/effect/system/spark_spread/sparks = new()
+/proc/spark_at(turf/location, amount = 3, cardinal_only = FALSE, holder = null, spark_type = /datum/effect/effect/system/spark_spread)
+	var/datum/effect/effect/system/spark_spread/sparks = new spark_type
 	sparks.set_up(amount, cardinal_only, location)
 	if(holder)
 		sparks.attach(holder)
 	sparks.start()
 
 /datum/effect/effect/system/spark_spread
+	var/spark_type = /obj/effect/sparks
+
+/datum/effect/effect/system/spark_spread/non_electrical
+	spark_type = /obj/effect/sparks/struck
 
 /datum/effect/effect/system/spark_spread/set_up(n = 3, c = 0, loca)
 	if(n > 10)
@@ -141,13 +149,13 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/spark_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/effect/effect/system, spread), i), 0)
 
 /datum/effect/effect/system/spark_spread/spread(var/i)
 	set waitfor = 0
 	if(holder)
 		src.location = get_turf(holder)
-	var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
+	var/obj/effect/sparks/sparks = new spark_type(location)
 	var/direction
 	if(src.cardinals)
 		direction = pick(global.cardinal)
@@ -181,7 +189,7 @@ steam.start() -- spawns the effect
 	. = ..()
 	if(smoke_duration)
 		time_to_live = smoke_duration
-	addtimer(CALLBACK(src, .proc/end_of_life), time_to_live)
+	addtimer(CALLBACK(src, PROC_REF(end_of_life)), time_to_live)
 
 /obj/effect/effect/smoke/proc/end_of_life()
 	if(!QDELETED(src))
@@ -288,11 +296,9 @@ steam.start() -- spawns the effect
 	R.take_overall_damage(0, 0.75)
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
-		R.emote("gasp")
+		R.emote(/decl/emote/audible/gasp)
 		spawn (20)
 			R.coughedtime = 0
-	R.updatehealth()
-	return
 
 /////////////////////////////////////////////
 // Smoke spread
@@ -320,7 +326,7 @@ steam.start() -- spawns the effect
 	for(i=0, i<src.number, i++)
 		if(src.total_smoke > 20)
 			return
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/effect/effect/system, spread), i), 0)
 
 /datum/effect/effect/system/smoke_spread/spread(var/i)
 	if(holder)

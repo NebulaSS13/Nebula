@@ -13,7 +13,7 @@
 /decl/species/adherent
 	name = SPECIES_ADHERENT
 	name_plural = "Adherents"
-	base_prosthetics_model = null
+	base_external_prosthetics_model = null
 
 	description = "The Vigil is a loose collection of floating squid-like machines made of a crystalline composite. \
 	They once served their creators faithfully, but were left orphaned by a stellar apocalypse."
@@ -50,14 +50,6 @@
 
 	speech_sounds = list('mods/species/bayliens/adherent/sound/chime.ogg')
 	speech_chance = 25
-
-	cold_level_1 = SYNTH_COLD_LEVEL_1
-	cold_level_2 = SYNTH_COLD_LEVEL_2
-	cold_level_3 = SYNTH_COLD_LEVEL_3
-
-	heat_level_1 = SYNTH_HEAT_LEVEL_1
-	heat_level_2 = SYNTH_HEAT_LEVEL_2
-	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	species_flags = SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =   SPECIES_CAN_JOIN
@@ -104,7 +96,7 @@
 				float_is_usable = TRUE
 				break
 	if(float_is_usable)
-		if(istype(landing, /turf/simulated/open))
+		if(landing.is_open())
 			H.visible_message("\The [H] descends from \the [landing].", "You descend regally.")
 		else
 			H.visible_message("\The [H] floats gracefully down from \the [landing].", "You land gently on \the [landing].")

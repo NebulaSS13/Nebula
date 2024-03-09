@@ -1,0 +1,2 @@
+/turf/simulated/wall/sandstone/@SUBTYPES : /turf/simulated/wall/brick/sandstone/@SUBTYPES{@OLD}
+/turf/simulated/wall/sandstonediamond/@SUBTYPES : /turf/simulated/wall/brick/sandstonediamond/@SUBTYPES{@OLD}

@@ -26,7 +26,7 @@
 /datum/phenomena/point/activate(var/atom/a)
 	..()
 	if(!arrow)
-		arrow = image('icons/mob/screen1.dmi', icon_state = "arrow", layer = POINTER_LAYER)
+		arrow = image('icons/effects/markers.dmi', icon_state = "arrow", layer = POINTER_LAYER)
 	var/turf/T = get_turf(a)
 	arrow.loc = T
 	var/list/view = view(7,T)
@@ -37,7 +37,7 @@
 			if((M in view) && M.client)
 				to_chat(M, "<span class='cult'>Your attention is eerily drawn to \the [a].</span>")
 				M.client.images += arrow
-				events_repository.register(/decl/observ/logged_out, M, src, /datum/phenomena/point/proc/remove_image)
+				events_repository.register(/decl/observ/logged_out, M, src, TYPE_PROC_REF(/datum/phenomena/point, remove_image))
 				spawn(20)
 					if(M.client)
 						remove_image(M)

@@ -36,7 +36,8 @@
 	return -1
 
 /obj/machinery/atmospherics/pipe/Initialize()
-	if(istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
+	var/turf/T = get_turf(src)
+	if(T?.is_wall())
 		level = LEVEL_BELOW_PLATING
 	alpha = 255 // for mapping hidden pipes
 	. = ..()
@@ -190,7 +191,8 @@
 	set_leaking(missing)
 
 /obj/machinery/atmospherics/pipe/hide(var/i)
-	if(istype(loc, /turf/simulated))
+	var/turf/turf = loc
+	if(istype(turf) && turf.simulated)
 		set_invisibility(i ? 101 : 0)
 	update_icon()
 

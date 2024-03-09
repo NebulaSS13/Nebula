@@ -13,6 +13,10 @@
 
 	for (var/subtype in subtypesof(/obj/item/chems/food/slice))
 		var/obj/item/chems/food/slice/slice = subtype
+
+		if(TYPE_IS_ABSTRACT(slice))
+			continue
+
 		if(!initial(slice.whole_path))
 			log_bad("[slice] does not define a whole_path.")
 			any_failed = TRUE

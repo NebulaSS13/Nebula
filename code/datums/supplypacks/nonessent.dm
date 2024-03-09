@@ -11,7 +11,7 @@
 /decl/hierarchy/supply_pack/nonessent/artscrafts
 	name = "Art - Arts and Crafts supplies"
 	contains = list(
-		/obj/item/storage/fancy/crayons,
+		/obj/item/storage/box/fancy/crayons,
 		/obj/item/camera,
 		/obj/item/camera_film = 2,
 		/obj/item/storage/photo_album,

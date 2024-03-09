@@ -10,7 +10,7 @@
 	edge = 0
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':2}"
+	origin_tech = @'{"combat":2}'
 	attack_verb = list("beaten")
 	base_parry_chance = 30
 	material = /decl/material/solid/metal/aluminium
@@ -23,35 +23,33 @@
 	var/stunforce = 0
 	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not
-	var/obj/item/cell/bcell
 	var/hitcost = 7
 
-/obj/item/baton/loaded
-	bcell = /obj/item/cell/device/high
-
-/obj/item/baton/Initialize(var/ml)
+/obj/item/baton/Initialize(var/ml, var/material_key, var/loaded_cell_type)
 	. = ..(ml)
-	if(ispath(bcell))
-		bcell = new bcell(src)
-		update_icon()
+	setup_power_supply(loaded_cell_type)
 
-/obj/item/baton/Destroy()
-	if(bcell && !ispath(bcell))
-		qdel(bcell)
-		bcell = null
-	return ..()
+/obj/item/baton/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	. = ..(loaded_cell_type, /obj/item/cell/device, /datum/extension/loaded_cell/secured, charge_value)
+	update_icon()
 
-/obj/item/baton/get_cell()
-	return bcell
+/obj/item/baton/loaded/Initialize(var/ml, var/material_key, var/loaded_cell_type)
+	return ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/high)
+
+/obj/item/baton/infinite/Initialize(var/ml, var/material_key, var/loaded_cell_type)
+	. = ..(ml, material_key, loaded_cell_type = /obj/item/cell/infinite)
+	set_status(1, null)
 
 /obj/item/baton/proc/update_status()
-	if(bcell.charge < hitcost)
+	var/obj/item/cell/cell = get_cell()
+	if(cell?.charge < hitcost)
 		status = 0
 		update_icon()
 
 /obj/item/baton/proc/deductcharge(var/chrgdeductamt)
-	if(bcell)
-		if(bcell.checked_use(chrgdeductamt))
+	var/obj/item/cell/cell = get_cell()
+	if(cell)
+		if(cell.checked_use(chrgdeductamt))
 			update_status()
 			return 1
 		else
@@ -66,55 +64,24 @@
 		add_overlay("[icon_state]-active")
 		set_light(1.5, 2, "#ff6a00")
 	else
-		if(!bcell)
+		if(!get_cell())
 			add_overlay("[icon_state]-nocell")
 		set_light(0)
-
-/obj/item/baton/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		examine_cell(user)
-
-// Addition made by Techhead0, thanks for fullfilling the todo!
-/obj/item/baton/proc/examine_cell(mob/user)
-	if(bcell)
-		to_chat(user, "<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>")
-	if(!bcell)
-		to_chat(user, "<span class='warning'>The baton does not have a power source installed.</span>")
-
-/obj/item/baton/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/cell/device))
-		if(!bcell && user.try_unequip(W))
-			W.forceMove(src)
-			bcell = W
-			to_chat(user, "<span class='notice'>You install a cell into the [src].</span>")
-			update_icon()
-		else
-			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
-	else if(IS_SCREWDRIVER(W))
-		if(bcell)
-			bcell.update_icon()
-			bcell.dropInto(loc)
-			bcell = null
-			to_chat(user, "<span class='notice'>You remove the cell from the [src].</span>")
-			status = 0
-			update_icon()
-	else
-		..()
 
 /obj/item/baton/attack_self(mob/user)
 	set_status(!status, user)
 	add_fingerprint(user)
 
 /obj/item/baton/proc/set_status(var/newstatus, mob/user)
-	if(bcell && bcell.charge >= hitcost)
+	var/obj/item/cell/cell = get_cell()
+	if(cell?.charge >= hitcost)
 		if(status != newstatus)
 			change_status(newstatus)
 			to_chat(user, "<span class='notice'>[src] is now [status ? "on" : "off"].</span>")
 			playsound(loc, "sparks", 75, 1, -1)
 	else
 		change_status(0)
-		if(!bcell)
+		if(!cell)
 			to_chat(user, "<span class='warning'>[src] does not have a power source!</span>")
 		else
 			to_chat(user,  "<span class='warning'>[src] is out of charge.</span>")
@@ -182,19 +149,15 @@
 
 	return 1
 
-/obj/item/baton/emp_act(severity)
-	if(bcell)
-		bcell.emp_act(severity)	//let's not duplicate code everywhere if we don't have to please.
-	..()
-
 // Stunbaton module for Security synthetics
 /obj/item/baton/robot
-	bcell = null
 	hitcost = 20
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
-/obj/item/baton/robot/examine_cell(mob/user)
-	to_chat(user, "<span class='notice'>The baton is running off an external power supply.</span>")
+/obj/item/baton/robot/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(distance == 1)
+		to_chat(user, SPAN_NOTICE("The baton is running off an external power supply."))
 
 // Override proc for the stun baton module, found in PC Security synthetics
 // Refactored to fix #14470 - old proc defination increased the hitcost beyond
@@ -202,29 +165,25 @@
 // Also hard-coded to be unuseable outside their righteous synthetic owners.
 /obj/item/baton/robot/attack_self(mob/user)
 	var/mob/living/silicon/robot/R = isrobot(user) ? user : null // null if the user is NOT a robot
-	update_cell(R) // takes both robots and null
 	if (R)
 		return ..()
 	else	// Stop pretending and get out of your cardborg suit, human.
-		to_chat(user, "<span class='warning'>You don't seem to be able interacting with this by yourself..</span>")
+		to_chat(user, "<span class='warning'>You don't seem to be able to interact with this by yourself..</span>")
 		add_fingerprint(user)
 	return 0
 
 /obj/item/baton/robot/attackby(obj/item/W, mob/user)
 	return
 
-/obj/item/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
-	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects
-	return ..()
+/obj/item/baton/robot/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
+	return
 
-// Updates the baton's cell to use user's own cell
-// Otherwise, if null (when the user isn't a robot), render it unuseable
-/obj/item/baton/robot/proc/update_cell(mob/living/silicon/robot/user)
-	if (!user)
-		bcell = null
-		set_status(0)
-	else if (!bcell || bcell != user.cell)
-		bcell = user.cell // if it is null, nullify it anyway
+/obj/item/baton/robot/get_cell()
+	var/mob/living/silicon/robot/holder = loc
+	if(istype(holder))
+		return holder.cell
+	return ..()
 
 // Traitor variant for Engineering synthetics.
 /obj/item/baton/robot/electrified_arm

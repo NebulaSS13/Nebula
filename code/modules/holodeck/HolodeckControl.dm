@@ -67,7 +67,7 @@
 		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>([prog])</A><BR>"
 
 	dat += "<BR>"
-	dat += "<A href='?src=\ref[src];program=turnoff'>(Turn Off)</A><BR>"
+	dat += "<A href='?src=\ref[src];program=[global.using_map.holodeck_off_program[programs_list_id]]'>(Turn Off)</A><BR>"
 
 	dat += "<BR>"
 	dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
@@ -198,7 +198,7 @@
 
 		if(!checkInteg(linkedholodeck))
 			damaged = 1
-			loadProgram(global.using_map.holodeck_programs["turnoff"], 0)
+			loadProgram(global.using_map.holodeck_programs[global.using_map.holodeck_default_program[programs_list_id] || "turnoff"], 0)
 			active = 0
 			update_use_power(POWER_USE_IDLE)
 			visible_message("The holodeck overloads!", null, "You hear electricity arcing!", range = 10)
@@ -230,9 +230,9 @@
 //Why is it called toggle if it doesn't toggle?
 /obj/machinery/computer/HolodeckControl/proc/togglePower(var/toggleOn = 0)
 	if(toggleOn)
-		loadProgram(global.using_map.holodeck_programs["emptycourt"], 0)
+		loadProgram(global.using_map.holodeck_programs[global.using_map.holodeck_default_program[programs_list_id] || "emptycourt"], 0)
 	else
-		loadProgram(global.using_map.holodeck_programs["turnoff"], 0)
+		loadProgram(global.using_map.holodeck_programs[global.using_map.holodeck_default_program[programs_list_id] || "turnoff"], 0)
 
 		if(!linkedholodeck.has_gravity)
 			linkedholodeck.gravitychange(1)
@@ -324,7 +324,7 @@
 
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
 	//Turn it back to the regular non-holographic room
-	loadProgram(global.using_map.holodeck_programs["turnoff"], 0)
+	loadProgram(global.using_map.holodeck_programs[global.using_map.holodeck_default_program[programs_list_id] || "turnoff"], 0)
 
 	if(!linkedholodeck.has_gravity)
 		linkedholodeck.gravitychange(1,linkedholodeck)

@@ -128,10 +128,10 @@
 	listeners = list()
 	listener_status = list()
 
-	events_repository.register(/decl/observ/destroyed, source, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, source, src, TYPE_PROC_REF(/datum, qdel_self))
 
 	if(ismovable(source))
-		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
+		proxy_listener = new(source, TYPE_PROC_REF(/datum/sound_token, PrivAddListener), TYPE_PROC_REF(/datum/sound_token, PrivLocateListeners), range, proc_owner = src)
 		proxy_listener.register_turfs()
 
 /datum/sound_token/Destroy()
@@ -169,7 +169,7 @@
 	listeners = null
 	listener_status = null
 
-	events_repository.unregister(/decl/observ/destroyed, source, src, /datum/proc/qdel_self)
+	events_repository.unregister(/decl/observ/destroyed, source, src, TYPE_PROC_REF(/datum, qdel_self))
 	QDEL_NULL(proxy_listener)
 	source = null
 
@@ -217,16 +217,16 @@
 
 	listeners += listener
 
-	events_repository.register(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	events_repository.register(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	events_repository.register(/decl/observ/moved, listener, src, TYPE_PROC_REF(/datum/sound_token, PrivUpdateListenerLoc))
+	events_repository.register(/decl/observ/destroyed, listener, src, TYPE_PROC_REF(/datum/sound_token, PrivRemoveListener))
 
 	PrivUpdateListenerLoc(listener, FALSE)
 
 /datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
 	null_sound = null_sound || new(channel = sound.channel)
 	sound_to(listener, null_sound)
-	events_repository.unregister(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	events_repository.unregister(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	events_repository.unregister(/decl/observ/moved, listener, src, TYPE_PROC_REF(/datum/sound_token, PrivUpdateListenerLoc))
+	events_repository.unregister(/decl/observ/destroyed, listener, src, TYPE_PROC_REF(/datum/sound_token, PrivRemoveListener))
 	listeners -= listener
 	listener_status -= listener
 

@@ -20,8 +20,8 @@ var/global/list/_default_hug_messages = list(
 			hug_3p = "$USER$ rubs $TARGET$'s back soothingly."
 			hug_1p = "You rub $TARGET$'s back soothingly."
 		else
-			hug_3p = "$USER$ hugs $TARGET$ to make $TARGET_HIM$ feel better."
-			hug_1p = "You hug $TARGET$ to make $TARGET_HIM$ feel better."
+			hug_3p = "$USER$ hugs $TARGET$ to make $TARGET_THEM$ feel better."
+			hug_1p = "You hug $TARGET$ to make $TARGET_THEM$ feel better."
 
 		var/list/use_hug_messages = target.get_hug_zone_messages(get_target_zone())
 		if(length(use_hug_messages) >= 2)
@@ -33,16 +33,16 @@ var/global/list/_default_hug_messages = list(
 		var/decl/pronouns/target_pronouns = target.get_pronouns()
 
 		hug_3p = replacetext(hug_3p, "$USER$",       "\the [src]")
-		hug_3p = replacetext(hug_3p, "$USER_HIM$",   my_pronouns.him)
-		hug_3p = replacetext(hug_3p, "$USER_HIS$",   my_pronouns.his)
+		hug_3p = replacetext(hug_3p, "$USER_THEM$",   my_pronouns.him)
+		hug_3p = replacetext(hug_3p, "$USER_THEIR$",   my_pronouns.his)
 
 		hug_3p = replacetext(hug_3p, "$TARGET$",     "\the [target]")
-		hug_3p = replacetext(hug_3p, "$TARGET_HIM$", target_pronouns.him)
-		hug_3p = replacetext(hug_3p, "$TARGET_HIS$", target_pronouns.his)
+		hug_3p = replacetext(hug_3p, "$TARGET_THEM$", target_pronouns.him)
+		hug_3p = replacetext(hug_3p, "$TARGET_THEIR$", target_pronouns.his)
 
 		hug_1p = replacetext(hug_1p, "$TARGET$",     "\the [target]")
-		hug_1p = replacetext(hug_1p, "$TARGET_HIM$", target_pronouns.him)
-		hug_1p = replacetext(hug_1p, "$TARGET_HIS$", target_pronouns.his)
+		hug_1p = replacetext(hug_1p, "$TARGET_THEM$", target_pronouns.him)
+		hug_1p = replacetext(hug_1p, "$TARGET_THEIR$", target_pronouns.his)
 
 		visible_message(
 			SPAN_NOTICE(capitalize(hug_3p)),

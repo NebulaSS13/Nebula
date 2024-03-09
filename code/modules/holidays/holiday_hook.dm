@@ -1,27 +1,37 @@
-//Uncommenting ALLOW_HOLIDAYS in config.txt will enable this hook.
+//Uncommenting ALLOW_HOLIDAYS in configuration will enable this hook.
 /hook/startup/proc/updateHoliday()
-	if(config?.allow_holidays)
-		var/list/holidays = cached_json_decode(safe_file2text("config/holidays.json"), FALSE)
-		if(length(holidays))
+	update_holiday()
+	return TRUE
 
-			var/c_year =    text2num(time2text(world.timeofday, "YY"))
-			var/c_month =   text2num(time2text(world.timeofday, "MM"))
-			var/c_day =     text2num(time2text(world.timeofday, "DD"))
-			var/c_weekday = lowertext(time2text(world.timeofday, "DDD"))
+/proc/update_holiday()
 
-			for(var/list/holiday_data in holidays)
+	if(!get_config_value(/decl/config/toggle/allow_holidays))
+		set_holiday_data(null, TRUE)
+		return FALSE
 
-				var/h_year =    holiday_data["year"]
-				var/h_month =   holiday_data["month"]
-				var/h_day =     holiday_data["day"]
-				var/h_weekday = holiday_data["weekday"] 
+	var/list/holidays = cached_json_decode(safe_file2text("config/holidays.json"), FALSE)
+	if(!length(holidays))
+		set_holiday_data(null, TRUE)
+		return FALSE
 
-				if((isnull(h_year)    || h_year  == c_year)  && \
-				   (isnull(h_month)   || h_month == c_month) && \
-				   (isnull(h_day)     || h_day   == c_day)   && \
-				   (isnull(h_weekday) || h_weekday == c_weekday))
-					var/holiday_path = text2path(holiday_data["path"]) || /datum/holiday
-					set_holiday_data(new holiday_path(holiday_data))
-					break
+	var/c_year =    text2num(time2text(world.timeofday, "YY"))
+	var/c_month =   text2num(time2text(world.timeofday, "MM"))
+	var/c_day =     text2num(time2text(world.timeofday, "DD"))
+	var/c_weekday = lowertext(time2text(world.timeofday, "DDD"))
 
-	return 1
+	for(var/list/holiday_data in holidays)
+
+		var/h_year =    holiday_data["year"]
+		var/h_month =   holiday_data["month"]
+		var/h_day =     holiday_data["day"]
+		var/h_weekday = holiday_data["weekday"]
+
+		if((isnull(h_year)    || h_year  == c_year)  && \
+		  (isnull(h_month)   || h_month == c_month) && \
+		  (isnull(h_day)     || h_day   == c_day)   && \
+		  (isnull(h_weekday) || h_weekday == c_weekday))
+			var/holiday_path = text2path(holiday_data["path"]) || /datum/holiday
+			set_holiday_data(new holiday_path(holiday_data))
+			return TRUE
+
+	return FALSE

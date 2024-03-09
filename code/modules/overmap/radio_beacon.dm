@@ -13,8 +13,8 @@
 	<br><br>---END OF TRANSMISSION---"
 
 /obj/effect/overmap/radio/proc/set_origin(obj/effect/overmap/origin)
-	events_repository.register(/decl/observ/moved, origin, src, /obj/effect/overmap/radio/proc/follow)
-	events_repository.register(/decl/observ/destroyed, origin, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/moved, origin, src, TYPE_PROC_REF(/obj/effect/overmap/radio, follow))
+	events_repository.register(/decl/observ/destroyed, origin, src, TYPE_PROC_REF(/datum, qdel_self))
 	forceMove(origin.loc)
 	source = origin
 	pixel_x = -(origin.bound_width - 6)
@@ -35,7 +35,7 @@
 	icon = 'icons/obj/items/device/radio/beacon.dmi'
 	icon_state = "beacon"
 
-	origin_tech = "{'magnets':2, 'programming':2}"
+	origin_tech = @'{"magnets":2, "programming":2}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
 

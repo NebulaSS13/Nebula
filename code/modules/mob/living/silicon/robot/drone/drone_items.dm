@@ -76,12 +76,11 @@
 	can_hold = list(
 		/obj/item/cell,
 		/obj/item/stock_parts,
-		/obj/item/mmi,
+		/obj/item/organ/internal/brain_interface,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
 		/obj/item/flash,
 		/obj/item/organ/internal/brain,
-		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
 		/obj/item/stock_parts/circuitboard,
 		/obj/item/chems/glass,
@@ -199,7 +198,7 @@
 		var/resolved = wrapped.resolve_attackby(target,user,params)
 
 		//If resolve_attackby forces waiting before taking wrapped, we need to let it finish before doing the rest.
-		addtimer(CALLBACK(src, .proc/finish_using, target, user, params, force_holder, resolved), 0)
+		addtimer(CALLBACK(src, PROC_REF(finish_using), target, user, params, force_holder, resolved), 0)
 
 	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
 		var/obj/item/I = target

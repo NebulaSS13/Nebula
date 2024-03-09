@@ -3,8 +3,8 @@
 /obj/effect/vine/proc/get_cardinal_neighbors()
 	. = list()
 	for(var/check_dir in global.cardinal)
-		var/turf/simulated/T = get_step(get_turf(src), check_dir)
-		if(istype(T))
+		var/turf/T = get_step(get_turf(src), check_dir)
+		if(istype(T) && T.simulated)
 			. |= T
 
 /obj/effect/vine/proc/get_zlevel_neighbors()
@@ -38,24 +38,24 @@
 	. |= get_zlevel_neighbors()
 
 /obj/effect/vine/Process()
-	var/turf/simulated/T = get_turf(src)
-	if(!istype(T))
+	var/turf/T = get_turf(src)
+	if(!istype(T) || !T.simulated)
 		return
 
 	//Take damage from bad environment if any
-	adjust_health(-seed.handle_environment(T,T.return_air(),null,1))
-	if(health <= 0)
+	adjust_health(-seed.handle_plant_environment(T,T.return_air(),null,1))
+	if(current_health <= 0)
 		return
-	
+
 	//Vine fight!
 	for(var/obj/effect/vine/other in T)
 		if(other.seed != seed)
 			other.vine_overrun(seed, src)
 
 	//Growing up
-	if(health < max_health)
+	if(current_health < get_max_health())
 		adjust_health(1)
-		if(growth_threshold && !(health % growth_threshold))
+		if(growth_threshold && !(current_health % growth_threshold))
 			update_icon()
 
 	if(is_mature())
@@ -76,7 +76,7 @@
 			var/list/neighbors = get_neighbors()
 			if(neighbors.len)
 				spread_to(pick(neighbors))
-			
+
 		//Try to settle down
 		if(can_spawn_plant())
 			plant = new(T,seed)
@@ -93,15 +93,15 @@
 		STOP_PROCESSING(SSvines, src)
 
 /obj/effect/vine/proc/can_spawn_plant()
-	var/turf/simulated/T = get_turf(src)
-	return parent == src && health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN)
+	var/turf/T = get_turf(src)
+	return parent == src && current_health == get_max_health() && !plant && istype(T) && T.simulated && !T.CanZPass(src, DOWN)
 
 /obj/effect/vine/proc/should_sleep()
 	if(buckled_mob) //got a victim to fondle
 		return FALSE
 	if(length(get_neighbors())) //got places to spread to
 		return FALSE
-	if(health < max_health) //got some growth to do
+	if(current_health < get_max_health()) //got some growth to do
 		return FALSE
 	if(targets_in_range()) //got someone to grab
 		return FALSE
@@ -126,8 +126,8 @@
 
 /obj/effect/vine/proc/wake_neighbors()
 	// This turf is clear now, let our buddies know.
-	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
-		if(!istype(check_turf))
+	for(var/turf/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
+		if(!istype(check_turf) || !check_turf.simulated)
 			continue
 		for(var/obj/effect/vine/neighbor in check_turf.contents)
 			if(QDELETED(neighbor))
@@ -136,8 +136,8 @@
 
 /obj/effect/vine/proc/targets_in_range()
 	var/list/mob/targets = list()
-	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors() | list(loc)))
-		if(!istype(check_turf))
+	for(var/turf/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors() | list(loc)))
+		if(!istype(check_turf) || !check_turf.simulated)
 			continue
 		for(var/mob/living/M in check_turf.contents)
 			if(QDELETED(M))

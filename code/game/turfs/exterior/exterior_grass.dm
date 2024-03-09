@@ -4,15 +4,21 @@
 	icon = 'icons/turf/exterior/grass.dmi'
 	footstep_type = /decl/footsteps/grass
 	icon_edge_layer = EXT_EDGE_GRASS
+	color = "#5e7a3b"
+	base_color = "#5e7a3b"
+	icon_has_corners = TRUE
 
 /turf/exterior/wildgrass
 	name = "wild grass"
 	icon = 'icons/turf/exterior/wildgrass.dmi'
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
-	icon_has_corners = TRUE
-	color = "#799c4b"
-	base_color = "#799c4b"
 	footstep_type = /decl/footsteps/grass
+	color = "#5e7a3b"
+	base_color = "#5e7a3b"
+	icon_has_corners = TRUE
+
+/turf/exterior/wildgrass/get_movable_alpha_mask_state(atom/movable/mover)
+	. = ..() || "mask_grass"
 
 /turf/exterior/wildgrass/Initialize(mapload, no_update_icon)
 	. = ..()
@@ -35,9 +41,11 @@
 
 /turf/exterior/wildgrass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
-		melt()
+		handle_melting()
+	return ..()
 
-/turf/exterior/wildgrass/melt()
+/turf/exterior/wildgrass/handle_melting(list/meltable_materials)
+	. = ..()
 	if(icon_state != "scorched")
 		SetName("scorched ground")
 		icon_state = "scorched"

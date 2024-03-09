@@ -9,7 +9,7 @@
 	desc = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
 	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0

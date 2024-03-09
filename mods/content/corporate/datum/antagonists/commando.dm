@@ -29,14 +29,13 @@
 	)
 
 /obj/item/encryptionkey/hacked
-	icon_state = "cypherkey"
 	can_decrypt = list(access_hacked)
-	origin_tech = "{'esoteric':3}"
+	origin_tech = @'{"esoteric":3}'
 
 /obj/item/encryptionkey/hacked/Initialize(ml, material_key)
 	. = ..()
 	can_decrypt |= get_all_station_access()
 
 /obj/item/radio/headset/hacked
-	origin_tech = "{'esoteric':3}"
+	origin_tech = @'{"esoteric":3}'
 	encryption_keys = list(/obj/item/encryptionkey/hacked)

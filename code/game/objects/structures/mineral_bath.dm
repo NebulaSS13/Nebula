@@ -83,7 +83,7 @@
 			occupant = null
 			STOP_PROCESSING(SSobj, src)
 
-/obj/structure/mineral_bath/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/structure/mineral_bath/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
 		enter_bath(dropping, user)

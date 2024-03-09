@@ -134,7 +134,7 @@
 	activated = 1
 	current_tick = 0
 	START_PROCESSING(SSobj, src)
-	events_repository.register(/decl/observ/moved, src, src, /obj/item/anodevice/proc/on_move)
+	events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/anodevice, on_move))
 	if(inserted_battery?.battery_effect?.activated == 0)
 		inserted_battery.battery_effect.ToggleActivate(1)
 

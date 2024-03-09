@@ -1,6 +1,6 @@
 /datum/ailment/fault/acid
 	name = "acidic discharge"
-	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ is leaking some kind of chemical."
+	manual_diagnosis_string = "$USER_THEIR$ $ORGAN$ is leaking some kind of chemical."
 
 /datum/ailment/fault/acid/on_ailment_event()
 	organ.owner.custom_pain("A burning sensation spreads through your [organ.name].", 5, affecting = organ.owner)

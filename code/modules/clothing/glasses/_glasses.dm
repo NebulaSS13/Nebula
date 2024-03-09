@@ -18,7 +18,7 @@
 	var/electric =         FALSE //if the glasses should be disrupted by EMP
 
 	var/hud_type
-	var/obj/screen/overlay
+	var/obj/screen/screen_overlay
 	var/obj/item/clothing/glasses/hud/hud // Hud glasses, if any
 	var/activation_sound =   'sound/items/goggles_charge.ogg'
 	var/deactivation_sound // set this if you want a sound on deactivation
@@ -32,7 +32,7 @@
 	if(ispath(hud))
 		hud = new hud(src)
 
-/obj/item/clothing/glasses/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/clothing/glasses/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-active", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-active"
 	. = ..()
@@ -43,7 +43,7 @@
 	. = ..()
 
 /obj/item/clothing/glasses/needs_vision_update()
-	return ..() || overlay || vision_flags || see_invisible || darkness_view
+	return ..() || screen_overlay || vision_flags || see_invisible || darkness_view
 
 /obj/item/clothing/glasses/emp_act(severity)
 	if(electric)
@@ -69,7 +69,7 @@
 		active = _active
 		update_icon()
 		update_clothing_icon()
-		update_vision()
+		update_wearer_vision()
 
 /obj/item/clothing/glasses/on_update_icon()
 	. = ..()

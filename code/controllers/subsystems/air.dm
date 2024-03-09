@@ -199,7 +199,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		T.post_update_air_properties()
 		T.needs_air_update = 0
 		#ifdef ZASDBG
-		remove_vis_contents(T, zasdbgovl_mark)
+		T.remove_vis_contents(zasdbgovl_mark)
 		#endif
 
 		if (no_mc_tick)
@@ -215,7 +215,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		T.post_update_air_properties()
 		T.needs_air_update = 0
 		#ifdef ZASDBG
-		remove_vis_contents(T, zasdbgovl_mark)
+		T.remove_vis_contents(zasdbgovl_mark)
 		#endif
 
 		if (no_mc_tick)
@@ -366,7 +366,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		return
 	tiles_to_update += T
 	#ifdef ZASDBG
-	add_vis_contents(T, zasdbgovl_mark)
+	T.add_vis_contents(zasdbgovl_mark)
 	#endif
 	T.needs_air_update = 1
 

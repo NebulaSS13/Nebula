@@ -22,7 +22,7 @@
 	back = /obj/item/tank/jetpack/oxygen
 	mask = /obj/item/clothing/mask/gas/swat
 
-	flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
+	outfit_flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/ert
 	name = "Spec Ops - Emergency response team"
@@ -54,7 +54,7 @@
 
 	backpack_contents = list(/obj/item/clothing/suit/space/void/merc/prepared = 1, /obj/item/clothing/mask/gas/syndicate = 1)
 
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
+	outfit_flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/mercenary/syndicate
 	name = "Spec Ops - Syndicate"

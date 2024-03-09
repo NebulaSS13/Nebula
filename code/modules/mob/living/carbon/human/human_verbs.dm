@@ -11,18 +11,17 @@
 		src.verbs -= /mob/living/carbon/human/proc/morph
 		return
 
-	var/new_facial = input("Please select facial hair color.", "Character Generation", facial_hair_colour) as color
+	var/new_facial = input("Please select facial hair color.", "Character Generation", GET_FACIAL_HAIR_COLOUR(src)) as color
 	if(new_facial)
-		facial_hair_colour = new_facial
+		SET_FACIAL_HAIR_COLOUR(src, new_facial, TRUE)
 
-	var/new_hair = input("Please select hair color.", "Character Generation", hair_colour) as color
+	var/new_hair = input("Please select hair color.", "Character Generation", GET_HAIR_COLOUR(src)) as color
 	if(new_hair)
-		hair_colour = new_hair
+		SET_HAIR_COLOUR(src, new_hair, TRUE)
 
-	var/new_eyes = input("Please select eye color.", "Character Generation", eye_colour) as color
+	var/new_eyes = input("Please select eye color.", "Character Generation", get_eye_colour()) as color
 	if(new_eyes)
-		eye_colour = new_eyes
-		update_eyes()
+		set_eye_colour(new_eyes)
 
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation", "[35-skin_tone]")  as text
 
@@ -39,11 +38,11 @@
 	for(var/x in all_hairs)
 		hairs += all_hairs[x]
 
-	var/decl/new_style = input("Please select hair style", "Character Generation",h_style)  as null|anything in hairs
+	var/decl/new_style = input("Please select hair style", "Character Generation", GET_HAIR_STYLE(src))  as null|anything in hairs
 
 	// if new style selected (not cancel)
 	if(new_style)
-		h_style = new_style.type
+		SET_HAIR_STYLE(src, new_style.type, TRUE)
 
 	// facial hair
 	var/list/all_fhairs = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
@@ -52,10 +51,10 @@
 	for(var/x in all_fhairs)
 		fhairs += all_fhairs[x]
 
-	new_style = input("Please select facial style", "Character Generation",f_style)  as null|anything in fhairs
+	new_style = input("Please select facial style", "Character Generation", GET_FACIAL_HAIR_STYLE(src))  as null|anything in fhairs
 
 	if(new_style)
-		f_style = new_style.type
+		SET_FACIAL_HAIR_STYLE(src, new_style.type, TRUE)
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neutral")
 	if (new_gender)
@@ -65,6 +64,8 @@
 			gender = FEMALE
 		else
 			gender = NEUTER
+
+	update_hair()
 	try_refresh_visible_overlays()
 	check_dna()
 
@@ -220,8 +221,8 @@
 		to_chat(src, SPAN_WARNING("Your [gloves] are getting in the way."))
 		return
 
-	var/turf/simulated/T = src.loc
-	if (!istype(T)) //to prevent doodling out of mechs and lockers
+	var/turf/T = src.loc
+	if (!istype(T) || !T.simulated) //to prevent doodling out of mechs and lockers
 		to_chat(src, "<span class='warning'>You cannot reach the floor.</span>")
 		return
 

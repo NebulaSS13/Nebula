@@ -84,7 +84,7 @@
 	if(selected_io)
 		unselect_io(selected_io)
 	selected_io = io
-	events_repository.register(/decl/observ/destroyed, selected_io, src, .proc/unselect_io)
+	events_repository.register(/decl/observ/destroyed, selected_io, src, PROC_REF(unselect_io))
 	switch(mode)
 		if(UNWIRE)
 			mode = UNWIRING

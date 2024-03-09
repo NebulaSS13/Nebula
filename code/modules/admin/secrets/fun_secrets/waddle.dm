@@ -7,8 +7,8 @@
 	if(waddling)
 		for(var/mob/living/living_mob in global.living_mob_list_)
 			set_extension(living_mob, /datum/extension/waddle)
-		events_repository.register_global(/decl/observ/life, src, .proc/enroll_in_waddling)
-		events_repository.register_global(/decl/observ/death, src, .proc/cure_waddling)
+		events_repository.register_global(/decl/observ/life, src, PROC_REF(enroll_in_waddling))
+		events_repository.register_global(/decl/observ/death, src, PROC_REF(cure_waddling))
 	else
 		for(var/mob/living/living_mob in global.living_mob_list_)
 			cure_waddling(living_mob)
@@ -32,8 +32,8 @@
 
 /datum/extension/waddle/New(datum/holder)
 	. = ..()
-	events_repository.register(/decl/observ/moved, holder, src, .proc/waddle)
-	events_repository.register(/decl/observ/destroyed, holder, src, .proc/qdel_self)
+	events_repository.register(/decl/observ/moved, holder, src, PROC_REF(waddle))
+	events_repository.register(/decl/observ/destroyed, holder, src, PROC_REF(qdel_self))
 
 /datum/extension/event_registration/Destroy()
 	events_repository.unregister(/decl/observ/destroyed, holder, src)

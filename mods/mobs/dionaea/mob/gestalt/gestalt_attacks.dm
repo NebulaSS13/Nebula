@@ -1,11 +1,12 @@
 /obj/structure/diona_gestalt/attackby(var/obj/item/thing, var/mob/user)
 	. = ..()
-	if(thing.force) 
+	if(thing.force)
 		shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/hitby()
-	..()
-	shed_atom(forcefully = TRUE)
+	. = ..()
+	if(.)
+		shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	. = ..()
@@ -20,4 +21,4 @@
 		shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/proc/handle_member_click(var/mob/living/carbon/alien/diona/clicker)
-	return
+	return FALSE

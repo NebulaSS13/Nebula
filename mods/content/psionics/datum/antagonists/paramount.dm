@@ -30,7 +30,8 @@
 		player.set_psi_rank(PSI_COERCION, 3,      defer_update = TRUE)
 		player.set_psi_rank(PSI_PSYCHOKINESIS, 3, defer_update = TRUE)
 		player.set_psi_rank(PSI_ENERGISTICS, 3,   defer_update = TRUE)
-		player.psi.update(TRUE)
+		var/datum/ability_handler/psionics/psi = player.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		psi?.update(TRUE)
 
 /decl/special_role/paramount/create_objectives(var/datum/mind/player)
 

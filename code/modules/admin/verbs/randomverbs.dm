@@ -83,7 +83,7 @@
 		return
 
 	if (style == "unsafe")
-		if (!config.allow_unsafe_narrates)
+		if (!get_config_value(/decl/config/toggle/allow_unsafe_narrates))
 			to_chat(user, SPAN_WARNING("Unsafe narrates are not permitted by the server configuration."))
 			return
 
@@ -291,8 +291,7 @@
 Allow admins to set players to be able to respawn/bypass 30 min wait, without the admin having to edit variables directly
 Ccomp's first proc.
 */
-
-/client/proc/get_ghosts(var/notify = 0,var/what = 2)
+/proc/get_ghosts(var/notify, var/what = 2)
 	// what = 1, return ghosts ass list.
 	// what = 2, return mob list
 
@@ -305,16 +304,14 @@ Ccomp's first proc.
 		any = 1                                                 //if no ghosts show up, any will just be 0
 	if(!any)
 		if(notify)
-			to_chat(src, "There doesn't appear to be any ghosts for you to select.")
+			to_chat(notify, "There doesn't appear to be any ghosts for you to select.")
 		return
-
 	for(var/mob/M in mobs)
 		var/name = M.name
 		ghosts[name] = M                                        //get the name of the mob for the popup list
-	if(what==1)
+	if(what == 1)
 		return ghosts
-	else
-		return mobs
+	return mobs
 
 /client/proc/get_ghosts_by_key()
 	. = list()
@@ -336,7 +333,7 @@ Ccomp's first proc.
 		to_chat(src, "<span class='warning'>[selection] no longer has an associated ghost.</span>")
 		return
 
-	if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+	if(G.has_enabled_antagHUD == 1 && get_config_value(/decl/config/toggle/antag_hud_restricted))
 		var/response = alert(src, "[selection] has enabled antagHUD. Are you sure you wish to allow them to respawn?","Ghost has used AntagHUD","No","Yes")
 		if(response == "No") return
 	else
@@ -351,7 +348,7 @@ Ccomp's first proc.
 	G.can_reenter_corpse = CORPSE_CAN_REENTER_AND_RESPAWN
 
 	G.show_message("<span class=notice><b>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</b></span>", 1)
-	log_and_message_admins("has allowed [key_name(G)] to bypass the [config.respawn_delay] minute respawn limit.")
+	log_and_message_admins("has allowed [key_name(G)] to bypass the [get_config_value(/decl/config/num/respawn_delay)] minute respawn limit.")
 
 /client/proc/toggle_antagHUD_use()
 	set category = "Server"
@@ -360,33 +357,12 @@ Ccomp's first proc.
 
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-	var/action=""
-	if(config.antag_hud_allowed)
-		for(var/mob/observer/ghost/g in get_ghosts())
-			if(!g.client.holder)						//Remove the verb from non-admin ghosts
-				g.verbs -= /mob/observer/ghost/verb/toggle_antagHUD
-			if(g.antagHUD)
-				g.antagHUD = 0						// Disable it on those that have it enabled
-				g.has_enabled_antagHUD = 2				// We'll allow them to respawn
-				to_chat(g, "<span class='danger'>The Administrator has disabled AntagHUD</span>")
-		config.antag_hud_allowed = 0
-		to_chat(src, "<span class='danger'>AntagHUD usage has been disabled</span>")
-		action = "disabled"
-	else
-		for(var/mob/observer/ghost/g in get_ghosts())
-			if(!g.client.holder)						// Add the verb back for all non-admin ghosts
-				g.verbs += /mob/observer/ghost/verb/toggle_antagHUD
-				to_chat(g, "<span class='notice'><B>The Administrator has enabled AntagHUD </B></span>")// Notify all observers they can now use AntagHUD
-
-		config.antag_hud_allowed = 1
+	var/action = "disabled"
+	if(toggle_config_value(/decl/config/toggle/antag_hud_allowed))
 		action = "enabled"
-		to_chat(src, "<span class='notice'><B>AntagHUD usage has been enabled</B></span>")
-
-
+	to_chat(src, "<span class='notice'><B>AntagHUD usage has been [action]</B></span>")
 	log_admin("[key_name(usr)] has [action] antagHUD usage for observers")
 	message_admins("Admin [key_name_admin(usr)] has [action] antagHUD usage for observers", 1)
-
-
 
 /client/proc/toggle_antagHUD_restrictions()
 	set category = "Server"
@@ -395,22 +371,19 @@ Ccomp's first proc.
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
 	var/action=""
-	if(config.antag_hud_restricted)
-		for(var/mob/observer/ghost/g in get_ghosts())
-			to_chat(g, "<span class='notice'><B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B></span>")
-		action = "lifted restrictions"
-		config.antag_hud_restricted = 0
-		to_chat(src, "<span class='notice'><B>AntagHUD restrictions have been lifted</B></span>")
-	else
-		for(var/mob/observer/ghost/g in get_ghosts())
+	if(toggle_config_value(/decl/config/toggle/antag_hud_restricted))
+		for(var/mob/observer/ghost/g in get_ghosts(src))
 			to_chat(g, "<span class='danger'>The administrator has placed restrictions on joining the round if you use AntagHUD</span>")
 			to_chat(g, "<span class='danger'>Your AntagHUD has been disabled, you may choose to re-enabled it but will be under restrictions</span>")
 			g.antagHUD = 0
 			g.has_enabled_antagHUD = 0
 		action = "placed restrictions"
-		config.antag_hud_restricted = 1
 		to_chat(src, "<span class='danger'>AntagHUD restrictions have been enabled</span>")
-
+	else
+		for(var/mob/observer/ghost/g in get_ghosts(src))
+			to_chat(g, "<span class='notice'><B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B></span>")
+		action = "lifted restrictions"
+		to_chat(src, "<span class='notice'><B>AntagHUD restrictions have been lifted</B></span>")
 	log_admin("[key_name(usr)] has [action] on joining the round if they use AntagHUD")
 	message_admins("Admin [key_name_admin(usr)] has [action] on joining the round if they use AntagHUD", 1)
 
@@ -545,7 +518,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!istype(M))
 		alert("Cannot revive a ghost")
 		return
-	if(config.allow_admin_rev)
+	if(get_config_value(/decl/config/toggle/on/admin_revive))
 		M.revive()
 
 		log_and_message_admins("healed / revived [key_name_admin(M)]!")
@@ -665,21 +638,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/cmd_admin_gib(mob/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
 	set name = "Gib"
-
 	if(!check_rights(R_ADMIN|R_FUN))	return
-
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
 	if(confirm != "Yes") return
 	//Due to the delay here its easy for something to have happened to the mob
 	if(!M)	return
-
 	log_admin("[key_name(usr)] has gibbed [key_name(M)]")
 	message_admins("[key_name_admin(usr)] has gibbed [key_name_admin(M)]", 1)
-
-	if(isobserver(M))
-		gibs(M.loc)
-		return
-
 	M.gib()
 	SSstatistics.add_field_details("admin_verb","GIB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -828,12 +793,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set desc = "Toggles random events such as meteors, black holes, blob (but not space dust) on/off"
 	if(!check_rights(R_SERVER))	return
 
-	if(!config.allow_random_events)
-		config.allow_random_events = 1
+	toggle_config_value(/decl/config/toggle/allow_random_events)
+	if(get_config_value(/decl/config/toggle/allow_random_events))
 		to_chat(usr, "Random events enabled")
 		message_admins("Admin [key_name_admin(usr)] has enabled random events.", 1)
 	else
-		config.allow_random_events = 0
 		to_chat(usr, "Random events disabled")
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.", 1)
 	SSstatistics.add_field_details("admin_verb","TRE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

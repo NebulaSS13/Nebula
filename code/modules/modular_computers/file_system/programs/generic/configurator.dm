@@ -33,8 +33,9 @@
 	var/obj/item/stock_parts/computer/battery_module/battery_module = program.computer.get_component(PART_BATTERY)
 	data["battery_exists"] = !!battery_module
 	if(battery_module)
-		data["battery_rating"] = battery_module.battery.maxcharge
-		data["battery_percent"] = round(battery_module.battery.percent())
+		var/obj/item/cell/battery = battery_module.get_cell()
+		data["battery_rating"] = battery?.maxcharge || 0
+		data["battery_percent"] = battery ? round(battery.percent()) : 0
 
 	var/obj/item/stock_parts/computer/network_card/network_card = program.computer.get_component(PART_NETWORK)
 	data["nic_exists"] = !!network_card

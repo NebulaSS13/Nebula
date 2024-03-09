@@ -12,7 +12,7 @@
 	items = list(
 		/obj/item/chems/food/dough
 	)
-	result = /obj/item/chems/food/donut/slimejelly
+	result = /obj/item/chems/food/donut/jelly/slime
 
 /decl/recipe/slimeburger
 	display_name = "Slime Burger"
@@ -36,15 +36,15 @@
 	result = /obj/item/chems/food/slimesoup
 
 /obj/item/chems/food/jellysandwich/slime/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
 
 /obj/item/chems/food/jelliedtoast/slime/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
 
 /obj/item/chems/food/jellyburger/slime/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
 
 /obj/item/chems/food/slimesoup
@@ -54,25 +54,21 @@
 	filling_color = "#c4dba0"
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
+	utensil_flags = UTENSIL_FLAG_SCOOP
 
 /obj/item/chems/food/slimesoup/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/water, 10)
 	. = ..()
 
-/obj/item/chems/food/donut/slimejelly
+/obj/item/chems/food/donut/jelly/slime
 	name = "jelly donut"
 	desc = "You jelly?"
-	icon_state = "jdonut1"
 	filling_color = "#ed1169"
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_amt = 3
 	bitesize = 5
-	donut_state = "jdonut"
-
-/obj/item/chems/food/donut/slimejelly/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
-	. = ..()
+	jelly_type = /decl/material/liquid/slimejelly
 
 /obj/item/chems/food/mysterysoup/get_random_fillings()
 	. = ..() + list(list(

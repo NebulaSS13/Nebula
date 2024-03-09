@@ -48,7 +48,7 @@
 	)
 
 /obj/item/chems/spray/extinguisher/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/item/chems/spray/extinguisher/has_safety()
 	return TRUE
@@ -62,7 +62,7 @@
 	if(!.)
 		return
 	if(user.buckled && isobj(user.buckled))
-		addtimer(CALLBACK(src, .proc/propel_object, user.buckled, user, get_dir(A, user)), 0)
+		addtimer(CALLBACK(src, PROC_REF(propel_object), user.buckled, user, get_dir(A, user)), 0)
 	else if(!user.check_space_footing())
 		var/old_dir = user.dir
 		step(user, get_dir(A, user))

@@ -4,20 +4,20 @@
 	icon_state = "metal"
 	hitsound = 'sound/weapons/genhit.ogg'
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
-	maxhealth = 50
+	max_health = 50
 	density =  TRUE
 	anchored = TRUE
 	opacity =  TRUE
 
 	var/datum/lock/lock
-
 	var/has_window = FALSE
 	var/changing_state = FALSE
 	var/icon_base
 	var/door_sound_volume = 25
+	var/connections = 0
 
 /obj/structure/door/Initialize()
-	. = ..()
+	..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(lock)
@@ -25,14 +25,39 @@
 	if(!icon_base)
 		icon_base = material.door_icon_base
 	update_icon()
-	update_nearby_tiles(need_rebuild = TRUE)
 	if(material?.luminescence)
 		set_light(material.luminescence, 0.5, material.color)
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/door/LateInitialize(mapload, dir=0, populate_parts=TRUE)
+	..()
+	update_nearby_tiles(need_rebuild = TRUE)
+
+/obj/structure/door/update_nearby_tiles(need_rebuild)
+	. = ..()
+	update_connections(TRUE)
 
 /obj/structure/door/Destroy()
 	update_nearby_tiles()
 	QDEL_NULL(lock)
 	return ..()
+
+/obj/structure/door/get_blend_objects()
+	var/static/list/blend_objects = list(
+		/obj/structure/wall_frame, 
+		/obj/structure/window, 
+		/obj/structure/grille, 
+		/obj/machinery/door
+	)
+	return blend_objects
+
+/obj/structure/door/update_connections(var/propagate = FALSE)
+	. = ..()
+	if(propagate && isturf(loc))
+		for(var/turf/simulated/wall/W in RANGE_TURFS(loc, 1))
+			W.wall_connections = null
+			W.other_connections = null
+			W.queue_icon_update()
 
 /obj/structure/door/get_material_health_modifier()
 	. = 10

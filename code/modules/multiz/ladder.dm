@@ -107,7 +107,7 @@
 	var/turf/T = get_turf(src)
 	if(T)
 		for(var/atom/movable/M in T.contents)
-			addtimer(CALLBACK(M, /atom/movable/proc/fall, T), 0)
+			addtimer(CALLBACK(M, TYPE_PROC_REF(/atom/movable, fall), T), 0)
 	return ..()
 
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
@@ -116,7 +116,7 @@
 		climb(user, I)
 
 /obj/structure/ladder/hitby(obj/item/I)
-	..()
+	. = ..()
 	if(!target_down)
 		return
 	if(!has_gravity())

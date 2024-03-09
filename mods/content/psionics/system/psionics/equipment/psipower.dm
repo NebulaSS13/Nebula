@@ -1,59 +1,37 @@
-/obj/item/psychic_power
+/obj/item/ability/psionic
 	name = "psychic power"
 	icon = 'mods/content/psionics/icons/psychic_powers.dmi'
-	atom_flags = 0
-	simulated = 1
-	anchored = TRUE
-
-	pickup_sound = null
-	drop_sound =   null
-	equip_sound =  null
-
-	is_spawnable_type = FALSE
-	abstract_type = /obj/item/psychic_power
-
+	abstract_type = /obj/item/ability/psionic
+	handler_type = /datum/ability_handler/psionics
 	var/maintain_cost = 3
-	var/mob/living/owner
 
-/obj/item/psychic_power/Initialize()
-	owner = loc
-	if(!istype(owner))
-		return INITIALIZE_HINT_QDEL
-	START_PROCESSING(SSprocessing, src)
-	return ..()
+/obj/item/ability/psionic/Initialize()
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		START_PROCESSING(SSprocessing, src)
 
-/obj/item/psychic_power/Destroy()
-	if(istype(owner) && owner.psi)
-		LAZYREMOVE(owner.psi.manifested_items, src)
-		UNSETEMPTY(owner.psi.manifested_items)
+/obj/item/ability/psionic/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
 	. = ..()
 
-/obj/item/psychic_power/get_storage_cost()
-	return ITEM_SIZE_NO_CONTAINER
-
-/obj/item/psychic_power/attack_self(var/mob/user)
+/obj/item/ability/psionic/attack_self(var/mob/user)
 	sound_to(owner, 'sound/effects/psi/power_fail.ogg')
-	user.drop_from_inventory(src)
-
-/obj/item/psychic_power/attack(var/mob/living/M, var/mob/living/user, var/target_zone)
-	if(M.do_psionics_check(max(force, maintain_cost), user))
-		to_chat(user, "<span class='danger'>\The [src] flickers violently out of phase!</span>")
-		return 1
 	. = ..()
 
-/obj/item/psychic_power/afterattack(var/atom/target, var/mob/living/user, var/proximity)
+/obj/item/ability/psionic/attack(var/mob/living/M, var/mob/living/user, var/target_zone)
+	if(M.do_psionics_check(max(force, maintain_cost), user))
+		to_chat(user, SPAN_WARNING("\The [src] flickers violently out of phase!"))
+		return TRUE
+	. = ..()
+
+/obj/item/ability/psionic/afterattack(var/atom/target, var/mob/living/user, var/proximity)
 	if(target.do_psionics_check(max(force, maintain_cost), user))
-		to_chat(user, "<span class='danger'>\The [src] flickers violently out of phase!</span>")
-		return
+		to_chat(user, SPAN_WARNING("\The [src] flickers violently out of phase!"))
+		return TRUE
 	. = ..(target, user, proximity)
 
-/obj/item/psychic_power/dropped()
-	..()
-	qdel(src)
-
-/obj/item/psychic_power/Process()
-	if(istype(owner))
-		owner.psi.spend_power(maintain_cost, backblast_on_failure = FALSE)
+/obj/item/ability/psionic/Process()
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	psi?.spend_power(maintain_cost, backblast_on_failure = FALSE)
 	if((!owner || owner.do_psionics_check(maintain_cost, owner) || loc != owner || !(src in owner.get_held_items())) && !QDELETED(src))
 		qdel(src)

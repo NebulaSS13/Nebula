@@ -64,7 +64,7 @@
 		if(check)
 			pref.real_name = check.sanitize_cultural_name(pref.real_name, pref.species)
 			if(!pref.real_name)
-				pref.real_name = check.get_random_name(preference_mob(), pref.gender)
+				pref.real_name = check.get_random_name(get_mannequin(pref.client?.ckey), pref.gender)
 
 /datum/category_item/player_setup_item/background/culture/load_character(datum/pref_record_reader/R)
 	for(var/token in ALL_CULTURAL_TAGS)

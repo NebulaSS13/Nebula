@@ -1,5 +1,6 @@
 /decl/bodytype/prosthetic/basic_human
 	name = "Unbranded"
+	pref_name = "synthetic body"
 	bodytype_category = BODYTYPE_HUMANOID
 
 /decl/bodytype/prosthetic/wooden

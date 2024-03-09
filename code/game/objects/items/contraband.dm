@@ -45,7 +45,7 @@
 /obj/item/chems/glass/beaker/vial/random/populate_reagents()
 	var/list/picked_reagents = pickweight(random_reagent_list)
 	for(var/reagent in picked_reagents)
-		reagents.add_reagent(reagent, picked_reagents[reagent])
+		add_to_reagents(reagent, picked_reagents[reagent])
 
 	var/list/names = new
 	for(var/reagent_type in reagents.reagent_volumes)

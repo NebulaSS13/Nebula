@@ -1,0 +1,3 @@
+/obj/item/haircomb/random/@SUBTYPES : /obj/item/grooming/comb/colorable/random/@SUBTYPES{@OLD}
+/obj/item/haircomb/brush/@SUBTYPES : /obj/item/grooming/brush/colorable/random/@SUBTYPES{@OLD}
+/obj/item/haircomb/@SUBTYPES : /obj/item/grooming/comb/@SUBTYPES{@OLD}

@@ -19,8 +19,8 @@
 	drop_sound        = 'sound/foley/paperpickup1.ogg'
 	pickup_sound      = 'sound/foley/paperpickup2.ogg'
 	item_flags        = ITEM_FLAG_CAN_TAPE
-	health            = 10
-	max_health        = 10
+	current_health    = 10
+	max_health = 10
 	var/tmp/cur_page  = 1           // current page
 	var/tmp/max_pages = 100         //Maximum number of papers that can be in the bundle
 	var/list/pages                  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
@@ -184,7 +184,7 @@
 	user.visible_message( \
 		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!</span>", \
 		"<span class='[span_class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
-	addtimer(CALLBACK(src, .proc/burn_callback, P, user, span_class), 2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(burn_callback), P, user, span_class), 2 SECONDS)
 
 /obj/item/paper_bundle/examine(mob/user, distance)
 	. = ..()

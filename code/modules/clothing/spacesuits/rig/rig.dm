@@ -200,7 +200,7 @@
 		LAZYSET(chest.slowdown_per_slot, slot_wear_suit_str, (active? online_slowdown : offline_slowdown))
 	if(helmet)
 		helmet.tint = (active? vision_restriction : offline_vision_restriction)
-		helmet.update_vision()
+		helmet.update_wearer_vision()
 
 /obj/item/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.get_equipped_item(slot_back_str) != src)
@@ -579,7 +579,7 @@
 		for(var/slot in update_rig_slots)
 			wearer.update_equipment_overlay(slot)
 
-/obj/item/rig/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)

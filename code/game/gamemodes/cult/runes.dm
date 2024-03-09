@@ -247,15 +247,16 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(wall.health >= wall.max_health)
+		var/wall_max_health = wall.get_max_health()
+		if(wall.current_health >= wall_max_health)
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = wall.max_health - wall.health
-		wall.health += t
+		t = wall_max_health - wall.current_health
+		wall.current_health += t
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
-		t = wall.health
+		t = wall.current_health
 	user.remove_blood_simple(t / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
@@ -268,13 +269,11 @@
 	color = "#ff0000"
 	anchored = TRUE
 	density = TRUE
+	max_health = 200
 	var/obj/effect/rune/wall/rune
-	var/health
-	var/max_health = 200
 
 /obj/effect/cultwall/Initialize(mapload, var/bcolor)
 	. = ..()
-	health = max_health
 	if(bcolor)
 		color = bcolor
 
@@ -287,9 +286,10 @@
 /obj/effect/cultwall/examine(mob/user)
 	. = ..()
 	if(iscultist(user))
-		if(health == max_health)
+		var/current_max_health = get_max_health()
+		if(current_health == current_max_health)
 			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > max_health * 0.5)
+		else if(current_health > current_max_health * 0.5)
 			to_chat(user, "<span class='warning'>It is damaged.</span>")
 		else
 			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
@@ -320,8 +320,8 @@
 	..()
 
 /obj/effect/cultwall/proc/take_damage(var/amount)
-	health -= amount
-	if(health <= 0)
+	current_health -= amount
+	if(current_health <= 0)
 		visible_message("<span class='warning'>\The [src] dissipates.</span>")
 		qdel(src)
 
@@ -364,8 +364,8 @@
 /obj/effect/rune/defile/cast(var/mob/living/user)
 	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
 	for(var/turf/T in range(1, src))
-		if(T.holy)
-			T.holy = 0
+		if(is_holy_turf(T))
+			T.turf_flags &= ~TURF_FLAG_HOLY
 		else
 			T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
@@ -615,8 +615,8 @@
 		for(var/mob/living/M in cultists)
 			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
 		for(var/turf/T in range(5, src))
-			if(T.holy)
-				T.holy = 0
+			if(is_holy_turf(T))
+				T.turf_flags &= ~TURF_FLAG_HOLY
 			else
 				T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")

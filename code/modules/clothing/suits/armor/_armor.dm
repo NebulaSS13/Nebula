@@ -9,4 +9,4 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 	blood_overlay_type = "armor"
-	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
+	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'

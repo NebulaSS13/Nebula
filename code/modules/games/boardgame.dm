@@ -164,65 +164,99 @@
 
 //Checkers
 
-/obj/item/chems/food/checker
+/obj/item/checker
 	name = "checker"
 	desc = "It is plastic and shiny."
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "checker_black"
 	w_class = ITEM_SIZE_TINY
-	center_of_mass = @"{'x':16,'y':16}"
-	nutriment_desc = list("a choking hazard" = 4)
-	nutriment_amt = 1
+	center_of_mass = @'{"x":16,"y":16}'
 	var/piece_color ="black"
 
-/obj/item/chems/food/checker/Initialize()
+// Override these to let people eat checkers.
+/obj/item/checker/is_edible(mob/eater)
+	return TRUE
+
+/obj/item/checker/is_food_empty(mob/eater)
+	return FALSE
+
+/obj/item/checker/transfer_eaten_material(mob/eater, amount)
+	if(isliving(eater))
+		var/mob/living/living_eater = eater
+		living_eater.get_ingested_reagents()?.add_reagent(/decl/material/solid/organic/plastic, 3)
+
+/obj/item/checker/play_feed_sound(mob/user, consumption_method = EATING_METHOD_EAT)
+	return
+
+/obj/item/checker/show_food_consumed_message(mob/user, mob/target)
+	return
+
+/obj/item/checker/show_feed_message_start(var/mob/user, var/mob/target)
+	target = target || user
+	if(user)
+		if(user == target)
+			to_chat(user, SPAN_NOTICE("You begin trying to swallow \the [target]."))
+		else
+			user.visible_message(SPAN_NOTICE("\The [user] attempts to force \the [target] to swallow \the [src]!"))
+
+/obj/item/checker/show_feed_message_end(var/mob/user, var/mob/target)
+	target = target || user
+	if(user)
+		if(user == target)
+			to_chat(user, SPAN_NOTICE("You swallow \the [src]."))
+		else
+			user.visible_message(SPAN_NOTICE("\The [user] forces \the [target] to swallow \the [src]!"))
+
+// End food overrides.
+
+/obj/item/checker/Initialize()
 	. = ..()
 	icon_state = "[name]_[piece_color]"
 	name = "[piece_color] [name]"
 
-/obj/item/chems/food/checker/red
+/obj/item/checker/red
 	piece_color ="red"
 
 //Chess
 
-/obj/item/chems/food/checker/pawn
+/obj/item/checker/pawn
 	name = "pawn"
 	desc = "How many pawns will die in your war?"
 
-/obj/item/chems/food/checker/pawn/red
+/obj/item/checker/pawn/red
 	piece_color ="red"
 
-/obj/item/chems/food/checker/knight
+/obj/item/checker/knight
 	name = "knight"
 	desc = "The piece chess deserves, and needs to actually play."
 
-/obj/item/chems/food/checker/knight/red
+/obj/item/checker/knight/red
 	piece_color ="red"
 
-/obj/item/chems/food/checker/bishop
+/obj/item/checker/bishop
 	name = "bishop"
 	desc = "What corruption occured, urging holy men to fight?"
 
-/obj/item/chems/food/checker/bishop/red
+/obj/item/checker/bishop/red
 	piece_color ="red"
 
-/obj/item/chems/food/checker/rook
+/obj/item/checker/rook
 	name = "rook"
 	desc = "Representing ancient moving towers. So powerful and fast they were banned from wars, forever."
 
-/obj/item/chems/food/checker/rook/red
+/obj/item/checker/rook/red
 	piece_color ="red"
 
-/obj/item/chems/food/checker/queen
+/obj/item/checker/queen
 	name = "queen"
 	desc = "A queen of battle and pain. She dances across the battlefield."
 
-/obj/item/chems/food/checker/queen/red
+/obj/item/checker/queen/red
 	piece_color ="red"
 
-/obj/item/chems/food/checker/king
+/obj/item/checker/king
 	name = "king"
 	desc = "Why does a chess game end when the king dies?"
 
-/obj/item/chems/food/checker/king/red
+/obj/item/checker/king/red
 	piece_color ="red"

@@ -60,21 +60,21 @@
 				A.fab_status_flags &= ~FAB_HACKED
 			else
 				A.fab_status_flags |= FAB_HACKED
-			addtimer(CALLBACK(src, .proc/reset_flag, index, FAB_HACKED), 5 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(reset_flag), index, FAB_HACKED), 5 SECONDS)
 
 		if(AUTOLATHE_SHOCK_WIRE)
 			if(A.fab_status_flags & FAB_SHOCKED)
 				A.fab_status_flags &= ~FAB_SHOCKED
 			else
 				A.fab_status_flags |= FAB_SHOCKED
-			addtimer(CALLBACK(src, .proc/reset_flag, index, FAB_SHOCKED), 5 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(reset_flag), index, FAB_SHOCKED), 5 SECONDS)
 
 		if(AUTOLATHE_DISABLE_WIRE)
 			if(A.fab_status_flags & FAB_DISABLED)
 				A.fab_status_flags &= ~FAB_DISABLED
 			else
 				A.fab_status_flags |= FAB_DISABLED
-			addtimer(CALLBACK(src, .proc/reset_flag, index, FAB_DISABLED), 5 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(reset_flag), index, FAB_DISABLED), 5 SECONDS)
 
 #undef AUTOLATHE_HACK_WIRE
 #undef AUTOLATHE_SHOCK_WIRE
