@@ -258,6 +258,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/list/heating_products
 	var/bypass_heating_products_for_root_type
 	var/accelerant_value = 0
+	var/burn_temperature = 100 CELSIUS
 	var/burn_product
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged
 

@@ -21,6 +21,8 @@
 		return TRUE
 	. = ..()
 
-/obj/item/rock/striker/Initialize(var/ml, var/material_key)
-	material_key = /decl/material/solid/hematite
-	return ..()
+/obj/item/rock/hematite
+	material = /decl/material/solid/hematite
+
+/obj/item/rock/flint
+	material = /decl/material/solid/stone/flint

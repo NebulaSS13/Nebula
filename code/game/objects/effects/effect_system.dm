@@ -98,6 +98,7 @@ steam.start() -- spawns the effect
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	var/spark_sound = "sparks"
 
 /obj/effect/sparks/struck

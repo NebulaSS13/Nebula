@@ -18,7 +18,7 @@
 	name = "material rock spawner"
 	spawn_type = list(
 		/obj/item/rock = 10,
-		/obj/item/rock/striker = 1
+		/obj/item/rock/hematite = 1
 	)
 
 /datum/random_map/noise/forage
