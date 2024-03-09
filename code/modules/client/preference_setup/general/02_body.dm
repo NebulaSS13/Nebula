@@ -319,6 +319,9 @@
 			var/decl/sprite_accessory/next_accessory_decl
 			var/style_colour = current_accessories[accessory_decl.type]
 			var/list/available_accessories = pref.get_usable_sprite_accessories(get_mannequin(pref.client?.ckey), mob_species, mob_bodytype, accessory_category.type, current_accessories - accessory_decl?.type)
+			if(length(available_accessories) <= 1)
+				return TOPIC_NOACTION
+
 			if(href_list["acc_next"])
 				next_accessory_decl = next_in_list(accessory_decl, available_accessories)
 			else if(href_list["acc_prev"])
