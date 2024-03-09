@@ -9,6 +9,12 @@
 	handle_material           = /decl/material/solid/organic/wood
 	material_force_multiplier = 0.3
 
+/obj/item/tool/pickaxe/get_initial_tool_qualities()
+	var/static/list/tool_qualities = list(
+		TOOL_PICK   = TOOL_QUALITY_DEFAULT,
+		TOOL_SHOVEL = TOOL_QUALITY_MEDIOCRE
+	)
+
 /obj/item/tool/pickaxe/titanium
 	origin_tech               = @'{"materials":3}'
 	material                  = /decl/material/solid/metal/titanium

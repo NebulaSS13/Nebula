@@ -13,9 +13,6 @@
 	var/monkey_type = /mob/living/carbon/human/monkey
 	var/wrapper_type
 
-/obj/item/chems/food/monkeycube/get_food_consumption_method(mob/eater)
-	return EATING_METHOD_EAT
-
 /obj/item/chems/food/monkeycube/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
