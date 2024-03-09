@@ -66,6 +66,9 @@
 /decl/stack_recipe/hardness/integrity/furniture/chair/roundedchair
 	result_type        = /obj/structure/bed/chair/rounded
 
+/decl/stack_recipe/hardness/integrity/furniture/drying_rack
+	result_type        = /obj/structure/drying_rack
+
 /decl/stack_recipe/hardness/integrity/lock
 	result_type        = /obj/item/lock_construct
 

@@ -260,11 +260,6 @@
 	color = COLOR_BEIGE
 	ignition_point = T0C+50 // very flammable
 
-/decl/material/solid/organic/plantmatter/grass/dry/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && phase_at_temperature() == MAT_PHASE_SOLID)
-		. += new/datum/stack_recipe/tile/grass_roof(src)
-
 /decl/material/solid/organic/meat
 	name = "meat"
 	uid = "solid_meat"

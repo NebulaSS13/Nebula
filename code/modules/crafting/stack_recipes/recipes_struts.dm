@@ -31,7 +31,7 @@
 	result_type                 = /obj/structure/rack
 
 /decl/stack_recipe/strut/butcher_hook
-	result_type                 = /obj/structure/kitchenspike
+	result_type                 = /obj/structure/meat_hook
 	one_per_turf                = TRUE
 	difficulty                  = MAT_VALUE_NORMAL_DIY
 
