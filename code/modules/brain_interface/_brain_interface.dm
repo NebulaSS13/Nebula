@@ -122,7 +122,6 @@
 		rig.forced_move(direction, user)
 
 /obj/item/organ/internal/brain_interface/Destroy()
-	STOP_PROCESSING(SSprocessing, src)
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/borg = loc
 		if(borg.central_processor == src)
