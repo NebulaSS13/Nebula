@@ -13,7 +13,7 @@
 
 /turf/exterior/sand/drop_diggable_resources()
 	if(!dug && prob(15))
-		new /obj/item/rock(src, /decl/material/solid/stone/flint)
+		new /obj/item/rock/flint(src)
 	return ..()
 
 /turf/exterior/sand/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

@@ -11,7 +11,7 @@
 
 /turf/exterior/clay/drop_diggable_resources()
 	if(!dug && prob(15))
-		new /obj/item/rock(src, /decl/material/solid/stone/flint)
+		new /obj/item/rock/flint(src)
 	return ..()
 
 /turf/exterior/clay/flooded
