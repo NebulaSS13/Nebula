@@ -1,0 +1,2 @@
+/turf/simulated/shuttle/wall/@SUBTYPES : /turf/simulated/wall/shuttle/@SUBTYPES{@OLD}
+/turf/simulated/shuttle/@SUBTYPES : /turf/simulated/wall/shuttle/@SUBTYPES{@OLD}

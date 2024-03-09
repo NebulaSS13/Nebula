@@ -172,7 +172,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 					var/turf/simulated/wall/wall = checking.ChangeTurf(swap_to)
 					if(istype(wall) && turf_id)
 						wall.unique_merge_identifier = turf_id
-						wall.queue_update_icon()
+						wall.queue_icon_update()
 					// Let's make absolutely sure that we have the right turf.
 					checking = locate(tx,ty,cz)
 

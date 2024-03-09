@@ -122,3 +122,15 @@
 	else if(istype(W, /turf/simulated/wall))
 		return 1
 	return 0
+
+/turf/simulated/wall/shuttle
+	material = /decl/material/solid/metal/titanium
+	paint_color = COLOR_BEIGE
+	stripe_color = COLOR_SKY_BLUE
+
+/turf/simulated/wall/shuttle/get_wall_icon()
+	return 'icons/turf/walls/solid.dmi'
+
+/turf/simulated/wall/shuttle/dark
+	paint_color = COLOR_GUNMETAL
+	stripe_color = COLOR_MAROON

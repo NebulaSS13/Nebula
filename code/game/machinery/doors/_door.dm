@@ -54,9 +54,9 @@
 
 /obj/machinery/door/get_blend_objects()
 	var/static/list/blend_objects = list(
-		/obj/structure/wall_frame, 
-		/obj/structure/window, 
-		/obj/structure/grille, 
+		/obj/structure/wall_frame,
+		/obj/structure/window,
+		/obj/structure/grille,
 		/obj/machinery/door
 	) // Objects which to blend with
 	return blend_objects
@@ -540,7 +540,7 @@
 					W.other_connections = null
 					W.queue_icon_update()
 
-		else if( istype(T, /turf/simulated/shuttle/wall) ||	istype(T, /turf/unsimulated/wall))
+		else if(istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
 			for(var/obj/O in T)

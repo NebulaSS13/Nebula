@@ -981,8 +981,8 @@
 /area/outpost/abandoned)
 "dv" = (
 /turf/exterior/barren,
-/turf/simulated/shuttle/wall{
-	icon_state = "diagonalWall3"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "mining_signal"
 	},
 /area/outpost/abandoned)
 "dw" = (
@@ -1025,9 +1025,8 @@
 /area/outpost/abandoned)
 "dB" = (
 /turf/exterior/barren,
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "diagonalWall3"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "mining_signal"
 	},
 /area/outpost/abandoned)
 "dC" = (

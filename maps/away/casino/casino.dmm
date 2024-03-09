@@ -98,7 +98,9 @@
 /area/space)
 "al" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/nw,
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "casino_bridge"
+	},
 /area/casino/casino_bridge)
 "am" = (
 /turf/simulated/wall/r_wall,
@@ -115,7 +117,9 @@
 /area/casino/casino_bridge)
 "ao" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/ne,
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "casino_bridge"
+	},
 /area/casino/casino_bridge)
 "ap" = (
 /turf/simulated/floor/tiled,
@@ -446,7 +450,9 @@
 /area/casino/casino_hangar)
 "bs" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/ne,
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "casino_bridge"
+	},
 /area/casino/casino_hangar)
 "bt" = (
 /obj/effect/shuttle_landmark/nav_casino/nav3,
@@ -1136,19 +1142,19 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
 "do" = (
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "casino_cutter"
+	},
 /area/casino/casino_cutter)
 "dp" = (
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_straight"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "casino_cutter"
 	},
 /area/casino/casino_cutter)
 "dq" = (
 /obj/structure/fuel_port/hydrogen,
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "casino_cutter"
 	},
 /area/casino/casino_cutter)
 "dr" = (
@@ -1468,9 +1474,8 @@
 /turf/simulated/floor/shuttle/blue,
 /area/casino/casino_cutter)
 "ep" = (
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "casino_cutter"
 	},
 /area/casino/casino_cutter)
 "eq" = (
@@ -4476,7 +4481,9 @@
 /area/casino/casino_mainfloor)
 "mM" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/sw,
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "casino_bridge"
+	},
 /area/casino/casino_bow)
 "mN" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
@@ -4517,7 +4524,9 @@
 /area/casino/casino_bow)
 "mT" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/se,
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "casino_bridge"
+	},
 /area/casino/casino_bow)
 "mU" = (
 /obj/machinery/atmospherics/portables_connector{
@@ -4591,8 +4600,8 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "nf" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "casino_bridge"
 	},
 /area/casino/casino_bow)
 "ng" = (
@@ -4673,7 +4682,9 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "np" = (
-/turf/simulated/shuttle/wall/corner/dark,
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "casino_bridge"
+	},
 /area/casino/casino_bow)
 "nq" = (
 /obj/structure/grille,
@@ -4691,8 +4702,8 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "nr" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "casino_bridge"
 	},
 /area/casino/casino_bow)
 "ns" = (

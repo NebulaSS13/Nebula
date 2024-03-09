@@ -1244,26 +1244,23 @@
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "dF" = (
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "dG" = (
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall_t"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "dH" = (
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_straight"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "dI" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "swall_s"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "dJ" = (
@@ -1298,9 +1295,8 @@
 	},
 /area/lost_supply_base/common)
 "dR" = (
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall_straight"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "dS" = (
@@ -1321,9 +1317,8 @@
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "dW" = (
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall_f"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "dX" = (
@@ -1376,9 +1371,8 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "eg" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 8;
-	icon_state = "propulsion_r"
+/obj/structure/shuttle/engine/propulsion/right{
+	dir = 8
 	},
 /turf/space,
 /area/space)
@@ -1392,9 +1386,8 @@
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "ei" = (
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "ej" = (
@@ -1497,8 +1490,8 @@
 	},
 /area/lost_supply_base/common)
 "eB" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "eD" = (
@@ -1563,15 +1556,13 @@
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "eO" = (
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_f"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "eP" = (
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "swall_s"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "eT" = (
@@ -1600,14 +1591,13 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "eW" = (
-/turf/simulated/shuttle/wall{
-	dir = 5;
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "eX" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "swall_t"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "supply_base"
 	},
 /area/space)
 "eY" = (

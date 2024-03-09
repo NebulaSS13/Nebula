@@ -1,6 +1,6 @@
 // DM Environment file for nebula.dme.
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
- // New source code should be placed in .dm files: choose File/New --> Code File.
+// New source code should be placed in .dm files: choose File/New --> Code File.
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
@@ -1540,7 +1540,6 @@
 #include "code\game\turfs\simulated\wall_icon.dm"
 #include "code\game\turfs\simulated\wall_log.dm"
 #include "code\game\turfs\simulated\wall_material.dm"
-#include "code\game\turfs\simulated\wall_shuttle.dm"
 #include "code\game\turfs\simulated\wall_types.dm"
 #include "code\game\turfs\space\space.dm"
 #include "code\game\turfs\space\transit.dm"

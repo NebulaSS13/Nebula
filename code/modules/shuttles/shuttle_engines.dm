@@ -1,6 +1,6 @@
 /obj/structure/shuttle
 	name = "shuttle"
-	icon = 'icons/turf/shuttle.dmi'
+	abstract_type = /obj/structure/shuttle
 
 /obj/structure/shuttle/window
 	name = "shuttle window"
@@ -15,6 +15,8 @@
 	name = "engine"
 	density = TRUE
 	anchored = TRUE
+	icon = 'icons/obj/structures/shuttle_engine.dmi'
+	abstract_type = /obj/structure/shuttle/engine
 
 /obj/structure/shuttle/engine/heater
 	name = "heater"
@@ -29,6 +31,12 @@
 	name = "propulsion"
 	icon_state = "propulsion"
 	opacity = TRUE
+
+/obj/structure/shuttle/engine/propulsion/left
+	icon_state = "propulsion_l"
+
+/obj/structure/shuttle/engine/propulsion/right
+	icon_state = "propulsion_r"
 
 /obj/structure/shuttle/engine/propulsion/burst
 	name = "burst"
