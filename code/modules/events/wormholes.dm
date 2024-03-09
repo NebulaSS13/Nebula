@@ -17,7 +17,9 @@
 	var/list/areas = area_repository.get_areas_by_z_level()
 	for(var/i in areas)
 		var/area/A = areas[i]
-		for(var/turf/simulated/floor/T in A)
+		for(var/turf/T in A)
+			if(!T.is_floor() || !T.simulated)
+				continue
 			if(!(T.z in affecting_z))
 				continue
 			if(isAdminLevel(T.z))

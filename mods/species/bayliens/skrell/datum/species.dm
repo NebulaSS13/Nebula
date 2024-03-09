@@ -114,7 +114,7 @@
 /decl/species/skrell/get_gender(var/mob/living/carbon/human/H)
 	return istype(H) && (H.appearance_descriptors["headtail length"] == 1 ? MALE : FEMALE)
 
-/decl/species/skrell/handle_trail(mob/living/carbon/human/H, turf/simulated/T, old_loc)
+/decl/species/skrell/handle_trail(mob/living/carbon/human/H, turf/T, old_loc)
 	var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 	if(!shoes)
 		var/list/bloodDNA
@@ -123,10 +123,12 @@
 			bloodDNA = list(blood_data["blood_DNA"] = blood_data["blood_type"])
 		else
 			bloodDNA = list()
-		T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, H.dir, 0, H.get_skin_colour() + "25") // Coming (8c is the alpha value)
-		if(istype(old_loc, /turf/simulated))
-			var/turf/simulated/old_turf = old_loc
-			old_turf.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, 0, H.dir, H.get_skin_colour() + "25") // Going (8c is the alpha value)
+		if(T.simulated)
+			T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, H.dir, 0, H.get_skin_colour() + "25") // Coming (8c is the alpha value)
+		if(isturf(old_loc))
+			var/turf/old_turf = old_loc
+			if(old_turf.simulated)
+				old_turf.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, 0, H.dir, H.get_skin_colour() + "25") // Going (8c is the alpha value)
 
 /decl/species/skrell/check_background()
 	return TRUE

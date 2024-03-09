@@ -20,19 +20,7 @@ var/global/universe_has_ended = 0
 		S.color = initial(S.color)
 
 /datum/universal_state/supermatter_cascade/DecayTurf(var/turf/T)
-	if(istype(T,/turf/simulated/wall))
-		var/turf/simulated/wall/W=T
-		W.handle_melting()
-		return
-	if(istype(T,/turf/simulated/floor))
-		var/turf/simulated/floor/F=T
-		// Burnt?
-		if(!F.burnt)
-			F.burn_tile()
-		else
-			if(!istype(F,/turf/simulated/floor/plating))
-				F.break_tile_to_plating()
-		return
+	T.handle_universal_decay()
 
 // Apply changes when entering state
 /datum/universal_state/supermatter_cascade/OnEnter()

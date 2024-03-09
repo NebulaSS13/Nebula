@@ -58,8 +58,8 @@
 		return
 	if(world.time < harvest_time + min_explode_time)
 		return
-	for(var/turf/simulated/target_turf in orange(1,src))
-		if(prob(60) && !target_turf.density && src.Adjacent(target_turf))
+	for(var/turf/target_turf in orange(1,src))
+		if(target_turf.simulated && !target_turf.density && prob(60) && src.Adjacent(target_turf))
 			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(target_turf,seed)
 	death()
 	seed.thrown_at(src,get_turf(src),1)

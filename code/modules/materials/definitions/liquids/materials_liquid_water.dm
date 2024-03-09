@@ -83,7 +83,7 @@
 
 	var/list/data = REAGENT_DATA(holder, type)
 	if(data && data["holy"])
-		T.holy = TRUE
+		T.turf_flags |= TURF_FLAG_HOLY
 
 /decl/material/liquid/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	..()

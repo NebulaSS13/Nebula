@@ -221,8 +221,8 @@
 		to_chat(src, SPAN_WARNING("Your [gloves] are getting in the way."))
 		return
 
-	var/turf/simulated/T = src.loc
-	if (!istype(T)) //to prevent doodling out of mechs and lockers
+	var/turf/T = src.loc
+	if (!istype(T) || !T.simulated) //to prevent doodling out of mechs and lockers
 		to_chat(src, "<span class='warning'>You cannot reach the floor.</span>")
 		return
 

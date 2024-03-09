@@ -77,8 +77,12 @@ RSF
 		if(stored_matter <= 0)
 			return
 
-	if(!istype(A, /obj/structure/table) && !istype(A, /turf/simulated/floor))
-		return
+	if(!istype(A, /obj/structure/table))
+		if(!isturf(A))
+			return
+		var/turf/turf = A
+		if(!turf.is_floor() || !turf.simulated)
+			return
 
 	playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 	var/used_energy = 0

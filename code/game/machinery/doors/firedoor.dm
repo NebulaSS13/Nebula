@@ -467,11 +467,11 @@
 		return TRUE
 
 /obj/machinery/door/firedoor/border/update_nearby_tiles(need_rebuild)
-	var/turf/simulated/source = get_turf(src)
-	var/turf/simulated/destination = get_step(source,dir)
+	var/turf/source = get_turf(src)
+	var/turf/destination = get_step(source,dir)
 
 	update_heat_protection(loc)
 
-	if(istype(source)) SSair.mark_for_update(source)
-	if(istype(destination)) SSair.mark_for_update(destination)
+	if(istype(source) && source.simulated) SSair.mark_for_update(source)
+	if(istype(destination) && destination.simulated) SSair.mark_for_update(destination)
 	return TRUE

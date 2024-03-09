@@ -364,8 +364,8 @@
 /obj/effect/rune/defile/cast(var/mob/living/user)
 	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
 	for(var/turf/T in range(1, src))
-		if(T.holy)
-			T.holy = 0
+		if(is_holy_turf(T))
+			T.turf_flags &= ~TURF_FLAG_HOLY
 		else
 			T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
@@ -615,8 +615,8 @@
 		for(var/mob/living/M in cultists)
 			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
 		for(var/turf/T in range(5, src))
-			if(T.holy)
-				T.holy = 0
+			if(is_holy_turf(T))
+				T.turf_flags &= ~TURF_FLAG_HOLY
 			else
 				T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")

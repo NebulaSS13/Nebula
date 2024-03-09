@@ -344,7 +344,7 @@
 	visible_message(SPAN_DANGER("\The [src] throws up!"),SPAN_DANGER("You throw up!"))
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 	var/turf/location = loc
-	if(istype(location, /turf/simulated))
+	if(istype(location) && location.simulated)
 		var/obj/effect/decal/cleanable/vomit/splat = new /obj/effect/decal/cleanable/vomit(location)
 		if(stomach.ingested.total_volume)
 			stomach.ingested.trans_to_obj(splat, min(15, stomach.ingested.total_volume))
@@ -405,7 +405,7 @@
 	UpdateAppearance()
 	..()
 
-/mob/living/carbon/human/add_blood(mob/living/carbon/human/M, amount = 2, blood_data)
+/mob/living/add_blood(mob/living/M, amount = 2, list/blood_data)
 	if (!..())
 		return 0
 	var/bloodied
@@ -1260,3 +1260,38 @@
 		/decl/emote/visible/vomit
 	)
 	return default_emotes
+
+/mob/living/carbon/human/HandleBloodTrail(turf/T, old_loc)
+	// Tracking blood
+	var/obj/item/source
+	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
+	if(istype(shoes))
+		shoes.handle_movement(src, MOVING_QUICKLY(src))
+		if(shoes.coating && shoes.coating.total_volume > 1)
+			source = shoes
+	else
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, foot_tag)
+			if(stomper && stomper.coating && stomper.coating.total_volume > 1)
+				source = stomper
+	if(!source)
+		species.handle_trail(src, T, old_loc)
+		return
+
+	var/list/bloodDNA
+	var/bloodcolor
+	var/list/blood_data = REAGENT_DATA(source.coating, /decl/material/liquid/blood)
+	if(blood_data)
+		bloodDNA = list(blood_data["blood_DNA"] = blood_data["blood_type"])
+	else
+		bloodDNA = list()
+	bloodcolor = source.coating.get_color()
+	source.remove_coating(1)
+	update_equipment_overlay(slot_shoes_str)
+
+	if(species.get_move_trail(src))
+		T.AddTracks(species.get_move_trail(src),bloodDNA, dir, 0, bloodcolor) // Coming
+		if(isturf(old_loc))
+			var/turf/old_turf = old_loc
+			old_turf.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
+

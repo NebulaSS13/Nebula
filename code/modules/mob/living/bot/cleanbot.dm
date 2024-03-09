@@ -22,9 +22,10 @@
 	if(!screwloose && !oddbutton && prob(5))
 		visible_message("\The [src] makes an excited beeping booping sound!")
 	if(screwloose && prob(5)) // Make a mess
-		if(istype(loc, /turf/simulated))
-			var/turf/simulated/T = loc
-			T.wet_floor()
+		if(isturf(loc))
+			var/turf/T = loc
+			if(T.simulated)
+				T.wet_floor()
 	if(oddbutton && prob(5)) // Make a big mess
 		visible_message("Something flies out of [src]. He seems to be acting oddly.")
 		var/obj/effect/decal/cleanable/blood/gibs/gib = new(loc)
@@ -68,15 +69,10 @@
 	visible_message("\The [src] begins to clean up \the [D].")
 	update_icon()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
-	if(do_after(src, cleantime, progress = 0))
-		if(istype(loc, /turf/simulated))
-			var/turf/simulated/f = loc
-			f.dirt = 0
-		if(!D)
-			return
-		qdel(D)
+	if(do_after(src, cleantime, progress = 0) && !QDELETED(D))
 		if(D == target)
 			target = null
+		qdel(D)
 	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
 	update_icon()

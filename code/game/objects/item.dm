@@ -633,30 +633,25 @@
 		blood_overlay.color = COLOR_LUMINOL
 		update_icon()
 
-/obj/item/add_blood(mob/living/carbon/human/M, amount = 2, list/blood_data)
+/obj/item/add_blood(mob/living/M, amount = 2, list/blood_data)
 	if (!..())
 		return FALSE
-
 	if(istype(src, /obj/item/energy_blade))
 		return
-
 	if(!istype(M))
 		return TRUE
-
-	if(!blood_data)
-		blood_data = REAGENT_DATA(M.vessel, /decl/material/liquid/blood)
-
+	if(!blood_data && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
 	var/sample_dna = LAZYACCESS(blood_data, "blood_DNA")
 	if(sample_dna)
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
 		forensics.add_data(/datum/forensics/blood_dna, sample_dna)
 	add_coating(/decl/material/liquid/blood, amount, blood_data)
-
 	var/unique_enzymes = M.get_unique_enzymes()
 	var/blood_type = M.get_blood_type()
 	if(unique_enzymes && blood_type && !LAZYACCESS(blood_DNA, unique_enzymes))
 		LAZYSET(blood_DNA, unique_enzymes, blood_type)
-
 	return TRUE
 
 var/global/list/_blood_overlay_cache = list()

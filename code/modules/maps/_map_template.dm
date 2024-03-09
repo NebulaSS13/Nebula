@@ -104,9 +104,8 @@
 			T.turf_flags |= TURF_FLAG_NO_POINTS_OF_INTEREST
 		if(template_flags & TEMPLATE_FLAG_NO_RADS)
 			qdel(SSradiation.sources_assoc[T])
-		if(istype(T,/turf/simulated))
-			var/turf/simulated/sim = T
-			sim.update_air_properties()
+		if(istype(T) && T.simulated)
+			T.update_air_properties()
 
 /datum/map_template/proc/pre_init_shuttles()
 	. = SSshuttle.block_queue

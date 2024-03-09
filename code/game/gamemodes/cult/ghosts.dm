@@ -18,7 +18,7 @@
 
 /mob/observer/ghost/proc/ghost_ability_check()
 	var/turf/T = get_turf(src)
-	if(T.holy)
+	if(is_holy_turf(T))
 		to_chat(src, "<span class='notice'>You may not use your abilities on the blessed ground.</span>")
 		return 0
 	if(ghost_magic_cd > world.time)
@@ -52,8 +52,8 @@
 
 	var/doodle_color = COLOR_BLOOD_HUMAN
 
-	var/turf/simulated/T = get_turf(src)
-	if(!istype(T))
+	var/turf/T = get_turf(src)
+	if(!T?.simulated)
 		to_chat(src, "<span class='warning'>You cannot doodle there.</span>")
 		return
 

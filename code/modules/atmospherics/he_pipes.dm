@@ -55,8 +55,9 @@
 	if(!parent)
 		..()
 	else
+		var/turf/turf = loc
 		var/datum/gas_mixture/pipe_air = return_air()
-		if(istype(loc, /turf/simulated) || istype(loc, /turf/exterior))
+		if(istype(turf) && turf.simulated)
 			var/turf/pipe_turf = loc
 			var/environment_temperature = 0
 			if(pipe_turf.blocks_air)

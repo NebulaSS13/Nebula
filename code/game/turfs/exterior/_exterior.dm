@@ -89,10 +89,6 @@
 	owner = null
 	. = ..()
 
-/turf/exterior/levelupdate()
-	for(var/obj/O in src)
-		O.hide(0)
-
 /turf/exterior/explosion_act(severity)
 	SHOULD_CALL_PARENT(TRUE)
 	..()

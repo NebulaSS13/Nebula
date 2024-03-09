@@ -1432,6 +1432,43 @@ default behaviour is:
 			buckled_mob.layer = layer + 0.01
 		buckled_mob.plane = plane
 
+/mob/living/OnSimulatedTurfEntered(turf/T, old_loc)
+	T.add_dirt(0.5)
+
+	HandleBloodTrail(T, old_loc)
+
+	if(lying)
+		return
+
+	var/turf_wet = T.get_wetness()
+	if(turf_wet <= 0)
+		return
+
+	if(buckled || (MOVING_DELIBERATELY(src) && prob(min(100, 100/(turf_wet/10)))))
+		return
+
+	// skillcheck for slipping
+	if(!prob(min(100, skill_fail_chance(SKILL_HAULING, 100, SKILL_MAX+1)/(3/turf_wet))))
+		return
+
+	var/slip_dist = 1
+	var/slip_stun = 6
+	var/floor_type = "wet"
+
+	if(2 <= turf_wet) // Lube
+		floor_type = "slippery"
+		slip_dist = 4
+		slip_stun = 10
+
+	// Dir check to avoid slipping up and down via ladders.
+	if(slip("the [floor_type] floor", slip_stun) && (dir in global.cardinal))
+		for(var/i = 1 to slip_dist)
+			step(src, dir)
+			sleep(1)
+
+/mob/living/proc/HandleBloodTrail(turf/T, old_loc)
+	return
+
 /mob/living/proc/handle_general_grooming(user, obj/item/grooming/tool)
 	if(tool.grooming_flags & (GROOMABLE_BRUSH|GROOMABLE_COMB))
 		visible_message(SPAN_NOTICE(tool.replace_message_tokens((user == src) ? tool.message_target_self_generic : tool.message_target_other_generic, user, src, tool)))

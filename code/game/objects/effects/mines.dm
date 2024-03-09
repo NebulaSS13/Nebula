@@ -46,16 +46,16 @@
 	//example: n2o triggerproc
 	//note: im lazy
 
-	for (var/turf/simulated/floor/target in range(1,src))
-		if(!target.blocks_air)
+	for (var/turf/target in range(1,src))
+		if(target.simulated && !target.blocks_air)
 			target.assume_gas(/decl/material/gas/nitrous_oxide, 30)
 
 	spawn(0)
 		qdel(src)
 
 /obj/effect/mine/proc/triggerflame(obj)
-	for (var/turf/simulated/floor/target in range(1,src))
-		if(!target.blocks_air)
+	for (var/turf/target in range(1,src))
+		if(target.simulated && !target.blocks_air)
 			target.assume_gas(/decl/material/gas/hydrogen, 30)
 			target.hotspot_expose(1000, CELL_VOLUME)
 

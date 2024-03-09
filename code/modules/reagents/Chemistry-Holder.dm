@@ -544,9 +544,6 @@ var/global/obj/temp_reagents_holder = new
 					qdel(B)
 			if(dirtiness <= DIRTINESS_CLEAN)
 				target.clean()
-				if(istype(target, /turf/simulated))
-					var/turf/simulated/simulated_turf = target
-					simulated_turf.dirt = 0
 
 /datum/reagents/proc/touch_obj(var/obj/target)
 	if(!target || !istype(target) || !target.simulated)

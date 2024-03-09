@@ -12,8 +12,6 @@
 
 	var/turf_flags
 
-	var/holy = 0
-
 	// Initial air contents (in moles)
 	var/list/initial_gas
 
@@ -114,6 +112,12 @@
 	if(flooded)
 		set_flooded(flooded, TRUE, skip_vis_contents_update = TRUE, mapload = mapload)
 	update_vis_contents()
+
+	if(simulated)
+		var/area/A = loc
+		if(istype(A) && (A.area_flags & AREA_FLAG_HOLY))
+			turf_flags |= TURF_FLAG_HOLY
+		levelupdate()
 
 	return INITIALIZE_HINT_NORMAL
 
@@ -253,6 +257,9 @@
 		step(G.affecting, get_dir(G.affecting.loc, src))
 		return TRUE
 
+	if(IS_COIL(W) && try_build_cable(W, user))
+		return TRUE
+
 	return ..()
 
 /turf/Enter(atom/movable/mover, atom/forget)
@@ -306,8 +313,15 @@
 	return FALSE
 
 /turf/proc/levelupdate()
-	for(var/obj/O in src)
-		O.hide(O.hides_under_flooring() && !is_plating())
+	if(is_open() || is_plating())
+		for(var/obj/O in src)
+			O.hide(FALSE)
+	else if(is_wall())
+		for(var/obj/O in src)
+			O.hide(TRUE)
+	else
+		for(var/obj/O in src)
+			O.hide(O.hides_under_flooring())
 
 /turf/proc/AdjacentTurfs(var/check_blockage = TRUE)
 	. = list()
@@ -620,11 +634,36 @@
 		to_chat(AM, SPAN_WARNING("Something blocks the path."))
 	return TRUE
 
-/turf/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
-	return
+/turf/clean(clean_forensics = TRUE)
+	for(var/obj/effect/decal/cleanable/blood/B in contents)
+		B.clean(clean_forensics)
+	. = ..()
 
-/turf/proc/unwet_floor(var/check_very_wet = TRUE)
-	return
+//returns 1 if made bloody, returns 0 otherwise
+/turf/add_blood(mob/living/M)
+	if(!simulated || !..() || !ishuman(M))
+		return FALSE
+	var/mob/living/carbon/human/H = M
+	var/unique_enzymes = H.get_unique_enzymes()
+	var/blood_type     = H.get_blood_type()
+	if(unique_enzymes && blood_type)
+		for(var/obj/effect/decal/cleanable/blood/B in contents)
+			if(!LAZYACCESS(B.blood_DNA, unique_enzymes))
+				LAZYSET(B.blood_DNA, unique_enzymes, blood_type)
+				LAZYSET(B.blood_data, unique_enzymes, REAGENT_DATA(H.vessel, H.species.blood_reagent))
+				var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
+				forensics.add_data(/datum/forensics/blood_dna, unique_enzymes)
+	else
+		blood_splatter(src, M, 1)
+	return TRUE
+
+/turf/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor=COLOR_BLOOD_HUMAN)
+	if(!simulated)
+		return
+	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
+	if(!tracks)
+		tracks = new typepath(src)
+	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 // Proc called in /turf/Entered() to supply an appropriate fluid overlay.
 /turf/proc/get_movable_alpha_mask_state(atom/movable/mover)
@@ -678,3 +717,6 @@
 	var/turf/T = get_turf(target)
 	if(T.can_dig_pit())
 		T.try_dig_pit(user, prop)
+
+/turf/proc/handle_universal_decay()
+	return

@@ -624,7 +624,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		return shoes.move_trail
 	return move_trail
 
-/decl/species/proc/handle_trail(var/mob/living/carbon/human/H, var/turf/simulated/T)
+/decl/species/proc/handle_trail(var/mob/living/carbon/human/H, var/turf/T)
 	return
 
 /decl/species/proc/update_skin(var/mob/living/carbon/human/H)

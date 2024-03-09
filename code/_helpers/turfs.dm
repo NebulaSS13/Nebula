@@ -46,10 +46,13 @@
 */
 
 /proc/is_holy_turf(var/turf/T)
-	return T && T.holy
+	return (T?.turf_flags & TURF_FLAG_HOLY)
 
 /proc/is_not_holy_turf(var/turf/T)
 	return !is_holy_turf(T)
+
+/proc/turf_is_simulated(var/turf/T)
+	return T.simulated
 
 /proc/turf_contains_dense_objects(var/turf/T)
 	return T.contains_dense_objects()
