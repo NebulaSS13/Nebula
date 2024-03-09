@@ -35,6 +35,8 @@ var/global/list/wall_fullblend_objects = list(
 	)
 	zone_membership_candidate = TRUE
 
+	/// If set, will prevent merges between walls with different IDs.
+	var/unique_merge_identifier
 	var/damage = 0
 	var/can_open = 0
 	var/decl/material/material
