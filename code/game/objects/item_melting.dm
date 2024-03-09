@@ -14,7 +14,7 @@
 	var/list/meltable_materials
 	for(var/mat in matter)
 		var/decl/material/melt_material = GET_DECL(mat)
-		if(!isnull(melt_material.melting_point) && temperature >= melt_material.melting_point)
+		if(!isnull(melt_material.temperature_damage_threshold) && temperature >= melt_material.temperature_damage_threshold)
 			LAZYDISTINCTADD(meltable_materials, melt_material)
 	if(length(meltable_materials))
 		. = null // Don't return PROCESS_KILL here.
