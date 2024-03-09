@@ -78,4 +78,4 @@
 	wall_support_value = MAT_VALUE_LIGHT
 	burn_product = /decl/material/gas/carbon_monoxide
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
-	default_solid_form = /obj/item/stack/material/reinforced
+	default_solid_form = /obj/item/stack/material/sheet/reinforced

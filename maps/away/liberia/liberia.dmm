@@ -2331,10 +2331,10 @@
 	},
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/forty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/forty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -2348,9 +2348,9 @@
 /obj/machinery/door/window/brigdoor/northleft{
 	req_access = newlist()
 	},
-/obj/item/stack/material/reinforced/mapped/titanium/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/titanium/fifty,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "ed" = (
@@ -2719,7 +2719,7 @@
 /obj/item/paint_sprayer,
 /obj/item/clothing/gloves/insulated,
 /obj/item/suit_cooling_unit,
-/obj/item/stack/material/shiny/mapped/aluminium/ten,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten,
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
@@ -6518,7 +6518,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "rc" = (
@@ -6746,7 +6746,7 @@
 	pixel_x = -4;
 	pixel_y = -4
 	},
-/obj/item/stack/material/shiny/mapped/aluminium/ten{
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten{
 	pixel_y = -4
 	},
 /obj/item/stack/material/pane/mapped/glass/ten{
@@ -7044,7 +7044,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -7233,9 +7233,9 @@
 /obj/structure/rack/dark,
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -7522,14 +7522,14 @@
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
-/obj/item/stack/material/reinforced/mapped/titanium/fifty,
-/obj/item/stack/material/reinforced/mapped/ocp/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/titanium/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/ocp/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,

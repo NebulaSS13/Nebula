@@ -18,14 +18,6 @@
 		/decl/material/solid/silicon = 1
 	)
 
-/decl/material/solid/stone/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		if(wall_support_value >= 10)
-			. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/planting_bed(src)
-		. += new/datum/stack_recipe/fountain(src)
-
 // Placeholder for firemaking.
 /decl/material/solid/stone/sandstone
 	name = "sandstone"

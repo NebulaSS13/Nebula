@@ -1428,7 +1428,7 @@
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/ingot/mapped/silver/ten,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "eb" = (

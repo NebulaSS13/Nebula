@@ -212,29 +212,6 @@
 	default_solid_form = /obj/item/stack/material/sheet
 	ferrous = TRUE
 
-/decl/material/solid/metal/steel/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.))
-		if(!ispath(stack_type))
-			. += new/datum/stack_recipe/furniture/closet(src)
-			. += new/datum/stack_recipe/furniture/tank_dispenser(src)
-			. += new/datum/stack_recipe/furniture/canister(src)
-			. += new/datum/stack_recipe/furniture/tank(src)
-			. += new/datum/stack_recipe/cannon(src)
-			. += new/datum/stack_recipe_list("tiling", create_recipe_list(/datum/stack_recipe/tile/metal))
-			. += new/datum/stack_recipe/furniture/computerframe(src)
-			. += new/datum/stack_recipe_list("airlock assemblies", create_recipe_list(/datum/stack_recipe/furniture/door_assembly))
-			. += new/datum/stack_recipe/grenade(src)
-			. += new/datum/stack_recipe/light(src)
-			. += new/datum/stack_recipe/light_small(src)
-			. += new/datum/stack_recipe/light_switch(src)
-			. += new/datum/stack_recipe/light_switch/windowtint(src)
-			. += new/datum/stack_recipe/apc(src)
-			. += new/datum/stack_recipe/air_alarm(src)
-			. += new/datum/stack_recipe/fire_alarm(src)
-		else if(ispath(stack_type, /obj/item/stack/material/strut))
-			. += new/datum/stack_recipe/furniture/machine(src)
-
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
 	uid = "solid_holographic_steel"
@@ -279,12 +256,7 @@
 	color = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	taste_description = "metal"
-	default_solid_form = /obj/item/stack/material/shiny
-
-/decl/material/solid/metal/aluminium/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/grenade(src)
+	default_solid_form = /obj/item/stack/material/sheet/shiny
 
 /decl/material/solid/metal/aluminium/holographic
 	name = "holoaluminium"
@@ -311,19 +283,12 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
-	default_solid_form = /obj/item/stack/material/reinforced
+	default_solid_form = /obj/item/stack/material/sheet/reinforced
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	dissolves_in = MAT_SOLVENT_IMMUNE
 	dissolves_into = null
 	ferrous = TRUE
-
-/decl/material/solid/metal/plasteel/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/ai_core(src)
-		. += new/datum/stack_recipe/furniture/crate(src)
-		. += new/datum/stack_recipe/grip(src)
 
 /decl/material/solid/metal/titanium
 	name = "titanium"
@@ -347,16 +312,9 @@
 	stack_origin_tech = @'{"materials":2}'
 	hitsound = 'sound/weapons/smash.ogg'
 	reflectiveness = MAT_VALUE_MATTE
-	default_solid_form = /obj/item/stack/material/reinforced
+	default_solid_form = /obj/item/stack/material/sheet/reinforced
 	dissolves_in = MAT_SOLVENT_IMMUNE
 	dissolves_into = null
-
-/decl/material/solid/metal/titanium/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/ai_core(src)
-		. += new/datum/stack_recipe/furniture/crate(src)
-		. += new/datum/stack_recipe/grip(src)
 
 /decl/material/solid/metal/plasteel/ocp
 	name = "osmium-carbide plasteel"

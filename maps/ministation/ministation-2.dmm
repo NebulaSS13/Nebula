@@ -2045,9 +2045,9 @@
 /obj/structure/table,
 /obj/item/clothing/glasses/welding,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/machinery/camera/network/research{
 	dir = 1

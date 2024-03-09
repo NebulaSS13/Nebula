@@ -450,7 +450,7 @@ Sells devices, odds and ends, and medical stuff
 		/obj/item/storage/box/greenglowsticks                           = TRADER_THIS_TYPE,
 		/obj/item/clothing/suit/space/void/engineering/salvage/prepared = TRADER_THIS_TYPE,
 		/obj/item/stack/material/puck/mapped/uranium/ten                = TRADER_THIS_TYPE,
-		/obj/item/stack/material/reinforced/mapped/plasteel/fifty       = TRADER_THIS_TYPE,
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty = TRADER_THIS_TYPE,
 		/obj/item/stack/material/sheet/mapped/steel/fifty               = TRADER_THIS_TYPE,
 		/obj/item/stack/material/ingot/mapped/copper/fifty              = TRADER_THIS_TYPE
 	)

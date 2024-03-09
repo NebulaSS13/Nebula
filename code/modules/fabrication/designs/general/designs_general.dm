@@ -97,7 +97,7 @@
 	path = /obj/item/plunger
 
 /datum/fabricator_recipe/fiberglass
-	path = /obj/item/stack/material/reinforced/mapped/fiberglass
+	path = /obj/item/stack/material/sheet/reinforced/mapped/fiberglass
 	category = "Textiles"
 	fabricator_types = list(
 		FABRICATOR_CLASS_GENERAL,

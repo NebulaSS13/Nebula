@@ -3108,7 +3108,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/main)
 "agN" = (
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/machinery/navbeacon/SecurityD,
@@ -13637,7 +13637,7 @@
 /area/exodus/ai_monitored/storage/eva)
 "aCW" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
 /obj/item/stack/material/sheet/mapped/steel{
@@ -16713,7 +16713,7 @@
 /area/exodus/crew_quarters/toilet)
 "aJb" = (
 /obj/machinery/navbeacon/Bar,
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/machinery/door/firedoor,
@@ -16733,7 +16733,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/gateway)
 "aJd" = (
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/machinery/navbeacon/Kitchen,
@@ -17578,7 +17578,7 @@
 /area/exodus/maintenance/locker)
 "aKW" = (
 /obj/machinery/navbeacon/Hydroponics,
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/machinery/door/firedoor,
@@ -26282,7 +26282,7 @@
 	dir = 4;
 	id_tag = "packageSort2"
 	},
-/obj/structure/plasticflaps,
+/obj/structure/flaps,
 /turf/simulated/floor/plating,
 /area/exodus/quartermaster/office)
 "bdU" = (
@@ -31423,13 +31423,13 @@
 /area/exodus/research/robotics)
 "boJ" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
 /obj/item/stack/material/panel/mapped/plastic{
@@ -32837,7 +32837,7 @@
 	dir = 4;
 	id_tag = "packageExternal"
 	},
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/structure/cable{
@@ -34109,7 +34109,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/robotics)
 "bug" = (
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
 /obj/item/stack/cable_coil,
@@ -35916,7 +35916,7 @@
 /obj/item/stack/material/sheet/mapped/steel{
 	amount = 50
 	},
-/obj/item/stack/material/shiny/mapped/aluminium,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium,
 /obj/item/clothing/glasses/welding,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/lab)
@@ -36711,7 +36711,7 @@
 	pixel_y = 3
 	},
 /obj/item/stack/material/sheet/mapped/steel/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /obj/item/multitool,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
@@ -38293,9 +38293,9 @@
 	dir = 1;
 	current_health = 1e+006
 	},
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
 "bCA" = (
@@ -38380,7 +38380,7 @@
 /area/exodus/turret_protected/ai_server_room)
 "bCL" = (
 /obj/machinery/navbeacon/Research,
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/machinery/door/firedoor,
@@ -44093,7 +44093,7 @@
 /area/exodus/janitor)
 "bNY" = (
 /obj/machinery/navbeacon/Janitor,
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/machinery/door/firedoor,
@@ -48066,7 +48066,7 @@
 /area/exodus/maintenance/research_starboard)
 "bWa" = (
 /obj/machinery/navbeacon/Medbay,
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /turf/simulated/floor/plating,
@@ -55385,7 +55385,7 @@
 /area/exodus/engineering/foyer)
 "clg" = (
 /obj/machinery/navbeacon/Engineering,
-/obj/structure/plasticflaps{
+/obj/structure/flaps{
 	opacity = 1
 	},
 /obj/machinery/door/firedoor,

@@ -1,5 +1,5 @@
 /obj/machinery/portable_atmospherics/canister
-	name = "\improper Canister: \[CAUTION\]"
+	name = "canister"
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
 	density = TRUE
@@ -34,44 +34,45 @@
 	return -1
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent
-	name = "\improper Canister: \[N2O\]"
+	name = "\improper N2O canister"
 	icon_state = "redws"
 	canister_color = "redws"
 	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/nitrogen
-	name = "\improper Canister: \[N2\]"
+	name = "nitrogen canister"
 	icon_state = "red"
 	canister_color = "red"
 	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/nitrogen/prechilled
-	name = "\improper Canister: \[N2 (Cooling)\]"
+	name = "cryogenic nitrogen canister"
+	start_pressure = 20 ATM
 
 /obj/machinery/portable_atmospherics/canister/oxygen
-	name = "\improper Canister: \[O2\]"
+	name = "oxygen canister"
 	icon_state = "blue"
 	canister_color = "blue"
 	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled
-	name = "\improper Canister: \[O2 (Cryo)\]"
+	name = "cryogenic oxygen canister"
 	start_pressure = 20 ATM
 
 /obj/machinery/portable_atmospherics/canister/hydrogen
-	name = "\improper Canister: \[Hydrogen\]"
+	name = "hydrogen canister"
 	icon_state = "purple"
 	canister_color = "purple"
 	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
-	name = "\improper Canister \[CO2\]"
+	name = "\improper CO2 canister"
 	icon_state = "black"
 	canister_color = "black"
 	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/air
-	name = "\improper Canister \[Air\]"
+	name = "air canister"
 	icon_state = "grey"
 	canister_color = "grey"
 	can_label = 0
@@ -432,7 +433,7 @@ update_flag
 
 // Spawn debug tanks.
 /obj/machinery/portable_atmospherics/canister/helium
-	name = "\improper Canister \[He\]"
+	name = "helium canister"
 	icon_state = "black"
 	canister_color = "black"
 	can_label = 0
@@ -443,7 +444,7 @@ update_flag
 	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/methyl_bromide
-	name = "\improper Canister \[CH3Br\]"
+	name = "\improper CH3Br canister"
 	icon_state = "black"
 	canister_color = "black"
 	can_label = 0
@@ -454,7 +455,7 @@ update_flag
 	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/chlorine
-	name = "\improper Canister \[Cl\]"
+	name = "chlorine canister"
 	icon_state = "black"
 	canister_color = "black"
 	can_label = 0

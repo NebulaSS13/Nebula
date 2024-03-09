@@ -4511,7 +4511,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "iN" = (
-/obj/item/stack/material/reinforced/mapped/plasteel,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "iO" = (
@@ -4525,7 +4525,7 @@
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iQ" = (
-/obj/item/stack/material/reinforced/mapped/plasteel,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
 "iR" = (
@@ -4961,7 +4961,7 @@
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jU" = (
-/obj/item/stack/material/reinforced/mapped/plasteel,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)

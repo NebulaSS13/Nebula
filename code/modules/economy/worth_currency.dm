@@ -83,13 +83,29 @@
 		else if(!denomination.overlay)
 			. += "Null overlay found for '[denomination]'."
 
+	// Get all coin denominations.
+	var/list/validating_denominations = denominations?.Copy()
+	for(var/datum/denomination/denomination in validating_denominations)
+		if(!denomination.faces)
+			validating_denominations -= denomination
+
+	// Remove all coin recipes that create our denomination.
+	var/list/all_coin_recipes = decls_repository.get_decls_of_type(/decl/stack_recipe/coin)
+	for(var/recipe_type in all_coin_recipes)
+		var/decl/stack_recipe/coin/recipe = all_coin_recipes[recipe_type]
+		validating_denominations -= recipe.denomination
+
+	// If any are left, someone has forgotten a denomination.
+	if(length(validating_denominations))
+		. += "missing coin crafting recipes: [english_list(validating_denominations)]"
+
 /decl/currency/proc/format_value(var/amt)
 	. = "[name_prefix][FLOOR(amt / absolute_value)][name_suffix]"
 
 /decl/currency/proc/build_denominations()
+	denominations = sortTim(denominations, /proc/cmp_currency_denomination_des)
 	for(var/datum/denomination/denomination in denominations)
 		denominations_by_value["[denomination.marked_value]"] = denomination
-	sortTim(denominations, /proc/cmp_currency_denomination_des)
 
 /decl/currency/credits
 	name =          "credits"
@@ -110,6 +126,13 @@
 	)
 	..()
 
+/decl/stack_recipe/coin/credits
+	name = "two credit coin"
+	currency = /decl/currency/credits
+
+/decl/stack_recipe/coin/credits/one
+	name = "one credit coin"
+
 /datum/denomination/coin/mid
 	state = "coin_medium"
 
@@ -128,6 +151,16 @@
 		new /datum/denomination/coin(src,       1,  "one",  COLOR_BRONZE)
 	)
 	..()
+
+/decl/stack_recipe/coin/trader
+	currency = /decl/currency/trader
+	name = "ten scrip coin"
+
+/decl/stack_recipe/coin/trader/mid
+	name = "five scrip coin"
+
+/decl/stack_recipe/coin/trader/small
+	name = "one scrip coin"
 
 /decl/currency/scav
 	name = "scavbucks"

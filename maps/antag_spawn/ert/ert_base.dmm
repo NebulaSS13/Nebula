@@ -2283,10 +2283,10 @@
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,

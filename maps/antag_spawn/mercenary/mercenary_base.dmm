@@ -1064,7 +1064,7 @@
 	},
 /obj/machinery/light/small,
 /obj/item/stack/material/panel/mapped/plastic/ten,
-/obj/item/stack/material/shiny/mapped/aluminium/ten,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten,
 /obj/item/stack/material/sheet/mapped/steel/ten,
 /obj/item/stack/material/pane/mapped/glass/ten,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -1205,7 +1205,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/stack/material/reinforced/mapped/plasteel/ten,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/rods/fifty,
@@ -2453,9 +2453,9 @@
 /area/map_template/merc_spawn)
 "LY" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/reinforced/mapped/ocp/ten,
-/obj/item/stack/material/reinforced/mapped/ocp/ten,
-/obj/item/stack/material/reinforced/mapped/ocp/ten,
+/obj/item/stack/material/sheet/reinforced/mapped/ocp/ten,
+/obj/item/stack/material/sheet/reinforced/mapped/ocp/ten,
+/obj/item/stack/material/sheet/reinforced/mapped/ocp/ten,
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,

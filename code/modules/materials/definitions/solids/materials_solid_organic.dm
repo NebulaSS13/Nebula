@@ -34,17 +34,6 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/plastic/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/furniture/crate/plastic(src)
-		. += new/datum/stack_recipe/bag(src)
-		. += new/datum/stack_recipe/ivbag(src)
-		. += create_recipe_list(/datum/stack_recipe/cartridge)
-		. += create_recipe_list(/datum/stack_recipe/tile/light)
-		. += new/datum/stack_recipe/hazard_cone(src)
-		. += new/datum/stack_recipe/furniture/flaps(src)
-
 /decl/material/solid/organic/wax
 	name = "wax"
 	uid = "solid_wax"
@@ -64,10 +53,6 @@
 	melting_point = 363
 	ignition_point = 473
 	boiling_point = 643
-
-// Wax does not use the base recipe list.
-/decl/material/solid/organic/wax/generate_recipes()
-	. = list(new /datum/stack_recipe/candle(src))
 
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
@@ -103,14 +88,6 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/cardboard/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += create_recipe_list(/datum/stack_recipe/box)
-		. += new/datum/stack_recipe/cardborg_suit(src)
-		. += new/datum/stack_recipe/cardborg_helmet(src)
-		. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
-
 /decl/material/solid/organic/paper
 	name                    = "paper"
 	uid                     = "solid_paper"
@@ -142,11 +119,6 @@
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/paper/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/paper_sheets(src)
-
 /decl/material/solid/organic/cloth //todo
 	name = "cotton"
 	uid = "solid_cotton"
@@ -170,12 +142,6 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-
-/decl/material/solid/organic/cloth/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/cloak(src)
-		. += new/datum/stack_recipe/banner(src)
 
 /decl/material/solid/organic/cloth/yellow
 	name = "yellow"
@@ -329,13 +295,6 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/tans_to = /decl/material/solid/organic/leather
 
-/decl/material/solid/organic/skin/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/cloak(src)
-		. += new/datum/stack_recipe/banner(src)
-		. += new/datum/stack_recipe/shoes(src)
-
 /decl/material/solid/organic/skin/lizard
 	name = "lizardskin"
 	uid = "solid_lizardskin"
@@ -458,12 +417,6 @@
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
 
-/decl/material/solid/organic/bone/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type) && wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/ladder(src)
-
 // Stub for earrings. TODO: put it in clams
 /decl/material/solid/organic/bone/pearl
 	name                   = "pearl"
@@ -512,14 +465,6 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-
-/decl/material/solid/organic/leather/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += new/datum/stack_recipe/cloak(src)
-		. += new/datum/stack_recipe/banner(src)
-		. += new/datum/stack_recipe/shoes(src)
-		. += new/datum/stack_recipe/boots(src)
 
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"

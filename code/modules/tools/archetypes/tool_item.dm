@@ -1,6 +1,13 @@
 /obj/item/proc/get_tool_quality(var/archetype)
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
-	. = tool?.get_tool_quality(archetype)
+	return tool?.get_tool_quality(archetype)
+
+/obj/item/proc/get_best_tool_archetype()
+	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
+	if(tool)
+		for(var/tool_archetype in tool.tool_values)
+			if(!. || tool.get_tool_quality(tool_archetype) > tool.get_tool_quality(.))
+				. = tool_archetype
 
 /obj/item/proc/get_tool_speed(var/archetype)
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
