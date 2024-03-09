@@ -115,7 +115,7 @@
 	parent_planetoid     = "neutralia"
 	level_max_width      = 128
 	level_max_height     = 128
-	loop_turf_type       = /turf/unsimulated/mimic_edge/transition/loop
+	loop_turf_type       = /turf/mimic_edge/transition/loop
 
 /datum/level_data/planetoid/neutralia/sky
 	name             = "neutralia sky"

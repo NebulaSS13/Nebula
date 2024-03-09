@@ -122,7 +122,7 @@
 	/// If an unconnected edge is facing a connected edge, it will be instead filled with "border_filler" instead, if defined.
 	var/loop_turf_type// = /turf/unsimulated/mimc_edge/transition/loop
 	/// The turf type to use for zlevel lateral connections
-	var/transition_turf_type = /turf/unsimulated/mimic_edge/transition
+	var/transition_turf_type = /turf/mimic_edge/transition
 
 	// *** Atmos ***
 	/// Temperature of standard exterior atmosphere.

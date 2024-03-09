@@ -3,8 +3,8 @@
 /datum/level_data/planetoid
 	level_flags                  = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	border_filler                = /turf/unsimulated/mineral
-	loop_turf_type               = /turf/exterior/mimic_edge/transition/loop
-	transition_turf_type         = /turf/exterior/mimic_edge/transition
+	loop_turf_type               = /turf/mimic_edge/transition/loop
+	transition_turf_type         = /turf/mimic_edge/transition
 	use_global_exterior_ambience = FALSE
 
 	///The planetoid_data datum owning this level. At definition can be set to the planetoid_id of the planetoid to link up with on creation.

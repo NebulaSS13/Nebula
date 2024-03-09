@@ -5,9 +5,7 @@
 /datum/unit_test/icon_test/turfs_shall_have_icon_states
 	name = "ICON STATE - Turf Subtypes Shall Have Icon States"
 	var/list/except_types = list(
-		/turf/unsimulated/mimic_edge,
-		/turf/exterior/mimic_edge,
-		/turf/simulated/mimic_edge,
+		/turf/mimic_edge,
 		/turf/open
 	)
 
