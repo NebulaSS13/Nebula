@@ -21,9 +21,13 @@
 	var/floor_departure_sound
 	var/floor_arrival_sound
 
+	var/turf_id
+
 INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 /obj/abstract/turbolift_spawner/Initialize()
 	. = ..()
+	if(!turf_id)
+		turf_id = sequential_id(type)
 	if(SSmapping.initialized)
 		build_turbolift()
 	else
@@ -165,7 +169,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 						swap_to = floor_type
 
 				if(checking.type != swap_to)
-					checking.ChangeTurf(swap_to)
+					var/turf/simulated/wall/wall = checking.ChangeTurf(swap_to)
+					if(istype(wall) && turf_id)
+						wall.unique_merge_identifier = turf_id
+						wall.queue_update_icon()
 					// Let's make absolutely sure that we have the right turf.
 					checking = locate(tx,ty,cz)
 
