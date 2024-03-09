@@ -323,7 +323,7 @@ var/global/list/_wood_materials = list(
 	plantname = "libertycap"
 
 /obj/item/chems/food/grown/ambrosiavulgaris
-	plantname = "biteleaf"
+	plantname = "ambrosiavulgaris"
 
 /obj/item/chems/food/fruit_slice
 	name = "fruit slice"

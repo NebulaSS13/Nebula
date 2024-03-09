@@ -821,11 +821,11 @@ I said no!
 	result = /obj/item/chems/food/tossedsalad
 
 /decl/recipe/aesirsalad
-	fruit = list("goldapple" = 1, "biteleafdeus" = 1)
+	fruit = list("goldapple" = 1, "ambrosiadeus" = 1)
 	result = /obj/item/chems/food/aesirsalad
 
 /decl/recipe/validsalad
-	fruit = list("potato" = 1, "biteleaf" = 3)
+	fruit = list("potato" = 1, "ambrosiavulgaris" = 3)
 	items = list(/obj/item/chems/food/meatball)
 	result = /obj/item/chems/food/validsalad
 

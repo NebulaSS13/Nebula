@@ -36,6 +36,7 @@ var/global/list/plant_seed_sprites = list()
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 	else if(has_extension(src, /datum/extension/scannable))
 		remove_extension(src, /datum/extension/scannable)
+	update_appearance()
 
 //Updates strings and icon appropriately based on seed datum.
 /obj/item/seeds/proc/update_appearance()
@@ -230,7 +231,7 @@ var/global/list/plant_seed_sprites = list()
 	seed = "goldapple"
 
 /obj/item/seeds/ambrosiavulgarisseed
-	seed = "biteleaf"
+	seed = "ambrosiavulgaris"
 
 /obj/item/seeds/ambrosiadeusseed
 	seed = "ambrosiadeus"

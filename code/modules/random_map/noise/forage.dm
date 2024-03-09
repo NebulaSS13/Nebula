@@ -52,7 +52,7 @@
 			"potato",
 			"cotton",
 			"nettle",
-			"biteleaf",
+			"ambrosiavulgaris",
 			"harebells",
 			"poppies",
 			"sunflowers",
