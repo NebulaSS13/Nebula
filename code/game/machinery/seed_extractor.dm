@@ -32,9 +32,7 @@
 			to_chat(user, "<span class='notice'>You extract some seeds from [O].</span>")
 			var/produce = rand(1,4)
 			for(var/i = 0;i<=produce;i++)
-				var/obj/item/seeds/seeds = new /obj/item/seeds/modified(get_turf(src))
-				seeds.seed_type = new_seed_type.name
-				seeds.update_seed()
+				new /obj/item/seeds/modified(get_turf(src), null, new_seed_type.name)
 		else
 			to_chat(user, "[O] doesn't seem to have any usable seeds inside it.")
 

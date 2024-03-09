@@ -708,9 +708,7 @@
 			SSplants.seeds[name] = src
 
 		if(harvest_sample)
-			var/obj/item/seeds/seeds = new(get_turf(user))
-			seeds.seed_type = name
-			seeds.update_seed()
+			new /obj/item/seeds(get_turf(user), null, name)
 			return
 
 		var/total_yield = 0
