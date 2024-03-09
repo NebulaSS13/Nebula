@@ -84,6 +84,11 @@
 	. = ..()
 	update_strings()
 
+/obj/item/stack/material/clear_matter()
+	..()
+	reinf_material = null
+	matter_per_piece = null
+
 /obj/item/stack/material/proc/is_same(obj/item/stack/material/M)
 	if(!istype(M))
 		return FALSE

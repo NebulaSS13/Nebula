@@ -897,6 +897,7 @@
 	},
 /obj/structure/table,
 /obj/item/integrated_circuit_printer,
+/obj/machinery/cell_charger,
 /turf/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "ce" = (
@@ -2858,8 +2859,7 @@
 /turf/floor/lino,
 /area/ship/trade/crew/dorms2)
 "Ic" = (
-/obj/structure/table,
-/obj/machinery/cell_charger,
+/obj/machinery/recycler,
 /turf/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "IU" = (

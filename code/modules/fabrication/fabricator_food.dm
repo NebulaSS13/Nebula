@@ -6,7 +6,6 @@
 	icon_state = "replicator"
 	base_icon_state = "replicator"
 	base_storage_capacity_mult = 5
-	has_recycler = FALSE
 
 /obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/decl/language/speaking)
 	if(speaking && !speaking.machine_understands)
@@ -24,6 +23,9 @@
 				addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/fabricator, try_queue_build), recipe, 1), 2 SECONDS)
 				break
 	..()
+
+/obj/machinery/fabricator/bioprinter/can_ingest(var/obj/item/thing)
+	return istype(thing, /obj/item/chems/food) || ..()
 
 /obj/machinery/fabricator/replicator/proc/state_status()
 	for(var/thing in storage_capacity)

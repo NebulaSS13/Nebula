@@ -657,6 +657,11 @@
 "VL" = (
 /turf/open,
 /area/turbolift/example/second)
+"WW" = (
+/obj/effect/floor_decal/corner/mauve/mono,
+/obj/machinery/recycler,
+/turf/floor/tiled/white/monotile,
+/area/example/second)
 "Xm" = (
 /obj/structure/iv_drip,
 /obj/item/chems/ivbag/blood/ominus,
@@ -1729,7 +1734,7 @@ lP
 nC
 CN
 lP
-kf
+WW
 BY
 XE
 lJ

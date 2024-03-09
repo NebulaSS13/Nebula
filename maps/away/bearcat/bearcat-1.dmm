@@ -1880,6 +1880,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/stock_parts/circuitboard/autolathe,
+/obj/item/stock_parts/circuitboard/recycler,
 /obj/item/stock_parts/circuitboard/unary_atmos/heater,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/techstorage)

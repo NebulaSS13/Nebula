@@ -22841,6 +22841,7 @@
 	pixel_x = 3;
 	pixel_y = -3
 	},
+/obj/item/stock_parts/circuitboard/recycler,
 /turf/floor/plating,
 /area/exodus/storage/tech)
 "aWC" = (
@@ -31497,19 +31498,9 @@
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/research)
 "boQ" = (
-/obj/structure/table{
-	name = "plastic table frame"
-	},
-/obj/effect/floor_decal/corner/purple{
-	dir = 5
-	},
-/obj/effect/floor_decal/industrial/warning,
-/obj/structure/extinguisher_cabinet{
-	pixel_x = -29;
-	dir = 4
-	},
-/obj/machinery/cell_charger,
-/turf/floor/tiled/white,
+/obj/machinery/recycler,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/tiled/dark,
 /area/exodus/research/lab)
 "boR" = (
 /obj/machinery/light_switch{
@@ -31531,11 +31522,11 @@
 /obj/effect/floor_decal/corner/purple{
 	dir = 5
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8
-	},
 /obj/structure/bed/chair/office/light{
 	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
 	},
 /turf/floor/tiled/white,
 /area/exodus/research/lab)
@@ -31560,6 +31551,8 @@
 /obj/effect/floor_decal/corner/purple{
 	dir = 1
 	},
+/obj/structure/table,
+/obj/machinery/cell_charger,
 /turf/floor/tiled/white,
 /area/exodus/research/lab)
 "boV" = (
@@ -31745,6 +31738,8 @@
 	pixel_y = -32
 	},
 /obj/item/hand_labeler,
+/obj/item/storage/belt/utility,
+/obj/machinery/cell_charger,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
 "bpp" = (
@@ -32569,6 +32564,10 @@
 /obj/item/stack/cable_coil,
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/floor/tiled/white,
 /area/exodus/research/lab)
@@ -38388,15 +38387,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/research)
 "bCM" = (
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -22
-	},
-/obj/item/storage/belt/utility,
-/obj/structure/table{
-	name = "plastic table frame"
-	},
-/obj/machinery/cell_charger,
+/obj/machinery/recycler,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
 "bCN" = (
@@ -39213,6 +39204,10 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/brown,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
 "bEq" = (
@@ -60002,7 +59997,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
 "cxy" = (
-/obj/structure/reagent_dispensers/watertank,
+/obj/machinery/recycler,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
 "cxz" = (
@@ -60349,6 +60344,7 @@
 	name = "Engineering RC";
 	pixel_y = -32
 	},
+/obj/structure/reagent_dispensers/watertank,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
 "czd" = (

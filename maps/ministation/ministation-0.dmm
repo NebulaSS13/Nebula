@@ -3390,6 +3390,14 @@
 /obj/item/radio/intercom/locked{
 	pixel_y = 20
 	},
+/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
+/obj/item/storage/toolbox/mechanical{
+	pixel_x = -2;
+	pixel_y = -1
+	},
+/obj/item/stack/material/pane/mapped/glass/ten,
+/obj/item/stack/material/sheet/mapped/steel/ten,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "rH" = (
@@ -10719,9 +10727,6 @@
 	},
 /turf/floor/tiled,
 /area/ministation/cargo)
-"Su" = (
-/turf/floor/pool,
-/area/ministation/dorms)
 "Sv" = (
 /obj/machinery/light{
 	dir = 4
@@ -10921,16 +10926,8 @@
 /turf/floor/plating,
 /area/ministation/engine)
 "Tp" = (
-/obj/structure/table,
-/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-/obj/item/storage/toolbox/mechanical{
-	pixel_x = -2;
-	pixel_y = -1
-	},
-/obj/item/stack/material/pane/mapped/glass/ten,
-/obj/item/stack/material/sheet/mapped/steel/ten,
-/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten,
 /obj/machinery/camera/network/mining,
+/obj/machinery/recycler,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "Tt" = (
@@ -47279,10 +47276,10 @@ aa
 aa
 zW
 Vj
-Su
-Su
-Su
-Su
+sq
+sq
+sq
+sq
 xN
 zW
 kL
@@ -47536,10 +47533,10 @@ aa
 aa
 zW
 sq
-Su
-Su
-Su
-Su
+sq
+sq
+sq
+sq
 xN
 zW
 Lt
@@ -47793,10 +47790,10 @@ aa
 aa
 zW
 IA
-Su
-Su
-Su
-Su
+sq
+sq
+sq
+sq
 xN
 zW
 zW
@@ -48050,10 +48047,10 @@ aa
 aa
 zW
 sq
-Su
-Su
-Su
-Su
+sq
+sq
+sq
+sq
 xN
 WM
 IE
@@ -48307,10 +48304,10 @@ aa
 aa
 zW
 qb
-Su
-Su
-Su
-Su
+sq
+sq
+sq
+sq
 xN
 qe
 qe
@@ -48564,10 +48561,10 @@ aa
 aa
 zW
 yc
-Su
-Su
-Su
-Su
+sq
+sq
+sq
+sq
 xN
 jy
 qe

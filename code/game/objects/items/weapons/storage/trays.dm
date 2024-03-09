@@ -95,7 +95,7 @@
 	W.pixel_z = 0
 
 /obj/item/storage/tray/dump_contents(atom/forced_loc = loc, mob/user)
-	if(!isturf(new_loc)) //to handle hand switching
+	if(!isturf(forced_loc)) //to handle hand switching
 		return FALSE
 	if(user)
 		close(user)

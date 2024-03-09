@@ -76,7 +76,10 @@
 				. = SUBSTANCE_TAKEN_SOME
 
 /obj/machinery/fabricator/proc/can_ingest(var/obj/item/thing)
-	. = (has_recycler || istype(thing, /obj/item/stack/material))
+	if(istype(thing, /obj/item/melted_thing) || istype(thing, /obj/item/scrap_material))
+		return TRUE
+	var/obj/item/stack/material/stack = thing
+	return istype(stack) && !stack.reinf_material
 
 /obj/machinery/fabricator/proc/show_intake_message(var/mob/user, var/value, var/thing)
 	if(value == SUBSTANCE_TAKEN_FULL)
