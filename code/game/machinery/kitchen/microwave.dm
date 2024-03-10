@@ -286,10 +286,10 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in get_contained_external_atoms())
-		if (!istype(O,/obj/item/chems/food) && !istype(O, /obj/item/grown))
-			return 1
-	return 0
+	for(var/obj/O in get_contained_external_atoms())
+		if(!istype(O,/obj/item/chems/food))
+			return TRUE
+	return FALSE
 
 /obj/machinery/microwave/proc/start()
 	start_time = REALTIMEOFDAY

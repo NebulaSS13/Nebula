@@ -319,10 +319,7 @@
 		return
 	var/list/seed_output = list()
 	for(var/i in 1 to rand(1,4))
-		var/obj/item/seeds/seeds = new(get_turf(O))
-		seeds.seed = SSplants.seeds[O.plantname]
-		seeds.update_seed()
-		seed_output += weakref(seeds)
+		seed_output += weakref(new /obj/item/seeds(get_turf(O), null, O.seed))
 	qdel(O)
 
 	if(seed_output.len)

@@ -101,7 +101,6 @@
 	can_hold = list(
 		/obj/item/chems/glass,
 		/obj/item/seeds,
-		/obj/item/grown,
 		/obj/item/disk/botany
 	)
 
@@ -115,7 +114,6 @@
 		/obj/item/chems/drinks,
 		/obj/item/chems/condiment,
 		/obj/item/seeds,
-		/obj/item/grown,
 		/obj/item/glass_extra
 	)
 

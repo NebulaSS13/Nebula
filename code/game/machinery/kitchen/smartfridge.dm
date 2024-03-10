@@ -84,7 +84,7 @@
 	desc = "A refrigerated storage unit for fruits and vegetables."
 
 /obj/machinery/smartfridge/produce/accept_check(var/obj/item/O)
-	return istype(O, /obj/item/grown) || istype(O, /obj/item/chems/food/grown)
+	return istype(O, /obj/item/chems/food/grown)
 
 /obj/machinery/smartfridge/sheets
 	name = "raw material storage"
