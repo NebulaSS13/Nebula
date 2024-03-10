@@ -83,7 +83,6 @@
 	. = ..()
 	if(istype(material))
 		LAZYSET(matter, material.type, SHEET_MATERIAL_AMOUNT)
-		set_color(material.color)
 		icon_state = material.ore_icon_overlay ? material.ore_icon_overlay : initial(icon_state)
 		if(icon_state == "dust")
 			slot_flags = SLOT_HOLSTER

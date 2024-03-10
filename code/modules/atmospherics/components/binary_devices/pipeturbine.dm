@@ -63,15 +63,15 @@
 		update_networks()
 
 /obj/machinery/atmospherics/pipeturbine/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if (dP > 10)
-		overlays += image('icons/obj/pipeturbine.dmi', "moto-turb")
+		add_overlay("moto-turb")
 	if (kin_energy > 100000)
-		overlays += image('icons/obj/pipeturbine.dmi', "low-turb")
+		add_overlay("low-turb")
 	if (kin_energy > 500000)
-		overlays += image('icons/obj/pipeturbine.dmi', "med-turb")
+		add_overlay("med-turb")
 	if (kin_energy > 1000000)
-		overlays += image('icons/obj/pipeturbine.dmi', "hi-turb")
+		add_overlay("hi-turb")
 
 /obj/machinery/turbinemotor
 	name = "motor"

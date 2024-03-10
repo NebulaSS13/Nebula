@@ -47,12 +47,11 @@
 	else
 		desc = base_desc
 
-/obj/structure/proc/update_material_colour(var/override_colour)
+/obj/structure/proc/update_material_colour()
+	color = get_color()
 	if(istype(material))
-		color = override_colour || material.color
 		alpha = clamp((50 + material.opacity * 255), 0, 255)
 	else
-		color = override_colour || initial(color)
 		alpha = initial(alpha)
 
 ///Spawns a single part_type part, returns the result. Allows overriding spawning the actual part and it's constructor args.
