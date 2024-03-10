@@ -83,7 +83,8 @@
 		)
 	)
 	var/list/trees = list(
-		/obj/structure/flora/tree/hardwood/ebony
+		/obj/structure/flora/tree/hardwood/ebony = 9,
+		/obj/structure/flora/tree/dead/ebony = 1
 	)
 	var/list/cave_trees = list(
 		/obj/structure/flora/tree/softwood/towercap
@@ -118,7 +119,7 @@
 				return
 		else if(istype(T, /turf/exterior/wildgrass))
 			if(prob(parse_value * 0.35))
-				var/tree_type = pick(trees)
+				var/tree_type = pickweight(trees)
 				new tree_type(T)
 				return
 			place_prob = parse_value * 0.3
