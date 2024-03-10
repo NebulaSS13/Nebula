@@ -19,3 +19,10 @@
 		if(mat?.accelerant_value > FUEL_VALUE_NONE)
 			product.fuel += round(mat.accelerant_value * (req_amount * (amount / res_amount) * SHEET_MATERIAL_AMOUNT))
 	return product
+
+/decl/stack_recipe/turfs/wall/logs
+	name                        = "log wall"
+	result_type                 = /turf/wall/log
+	craft_stack_types           = /obj/item/stack/material/log
+	forbidden_craft_stack_types = /obj/item/stack/material/ore
+	difficulty                  = MAT_VALUE_HARD_DIY
