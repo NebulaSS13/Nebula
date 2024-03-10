@@ -112,3 +112,6 @@
 
 /decl/stack_recipe/planks/furniture/chair/fancy
 	result_type            = /obj/structure/bed/chair/wood/wings
+
+/decl/stack_recipe/planks/furniture/chest
+	result_type            = /obj/structure/closet/crate/chest

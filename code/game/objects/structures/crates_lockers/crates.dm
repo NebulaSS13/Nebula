@@ -307,3 +307,10 @@
 
 /obj/structure/closet/crate/uranium/WillContain()
 	return list(/obj/item/stack/material/puck/mapped/uranium/ten = 5)
+
+/obj/structure/closet/crate/chest
+	name = "chest"
+	desc = "A compact, hinged chest."
+	icon = 'icons/obj/closets/bases/chest.dmi'
+	closet_appearance = /decl/closet_appearance/crate/chest
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC

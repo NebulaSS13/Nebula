@@ -522,6 +522,10 @@
 	decal_icon = 'icons/obj/closets/decals/crate.dmi'
 	color = COLOR_GRAY40
 
+/decl/closet_appearance/crate/chest
+	base_icon =  'icons/obj/closets/bases/chest.dmi'
+	color = WOOD_COLOR_GENERIC
+
 /decl/closet_appearance/crate/plastic
 	color = COLOR_GRAY80
 

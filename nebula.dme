@@ -1308,6 +1308,7 @@
 #include "code\game\objects\items\weapons\special_attacks\backstab.dm"
 #include "code\game\objects\items\weapons\storage\backpack.dm"
 #include "code\game\objects\items\weapons\storage\bags.dm"
+#include "code\game\objects\items\weapons\storage\basket.dm"
 #include "code\game\objects\items\weapons\storage\belt.dm"
 #include "code\game\objects\items\weapons\storage\bible.dm"
 #include "code\game\objects\items\weapons\storage\boxes.dm"
