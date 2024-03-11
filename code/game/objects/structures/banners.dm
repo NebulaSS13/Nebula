@@ -90,6 +90,12 @@
 	var/hung_desc = "The banner is rather plain, with no markings."
 	var/list/decals
 
+/obj/item/banner/woven
+	icon = 'icons/obj/banner_woven.dmi'
+	material = /decl/material/solid/organic/plantmatter/grass/dry
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	hung_desc = "The woven banner is rustic and uneven."
+
 /obj/item/banner/green
 	name = "green banner"
 	material_alteration = MAT_FLAG_ALTERATION_NONE
