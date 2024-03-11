@@ -148,7 +148,11 @@
 		add_overlay(SSmaterials.wall_damage_overlays[clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(material && istype(W.material))
+	if(unique_merge_identifier != W.unique_merge_identifier)
+		return 0
+	else if(unique_merge_identifier)
+		return 1
+	else if(material && istype(W.material))
 		var/other_wall_icon = W.get_wall_icon()
 		if(material.wall_blend_icons[other_wall_icon])
 			return 2

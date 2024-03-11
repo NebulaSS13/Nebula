@@ -1,6 +1,6 @@
 /turf/simulated/floor/shuttle
 	name = "floor"
-	icon = 'icons/turf/shuttle.dmi'
+	icon = 'icons/turf/flooring/shuttle.dmi'
 	abstract_type = /turf/simulated/floor/shuttle
 
 /turf/simulated/floor/shuttle/plating

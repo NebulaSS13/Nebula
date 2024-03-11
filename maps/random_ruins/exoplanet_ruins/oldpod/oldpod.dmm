@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "oldpod"
 	},
 /area/map_template/oldpod)
 "ab" = (
@@ -11,8 +11,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "ac" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "oldpod"
 	},
 /area/map_template/oldpod)
 "ad" = (
@@ -25,8 +25,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "af" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "oldpod"
 	},
 /area/map_template/oldpod)
 "ag" = (
@@ -503,13 +503,13 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "bh" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 10
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "oldpod"
 	},
 /area/map_template/oldpod)
 "bi" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
+/turf/simulated/wall/shuttle/dark{
+	unique_merge_identifier = "oldpod"
 	},
 /area/map_template/oldpod)
 

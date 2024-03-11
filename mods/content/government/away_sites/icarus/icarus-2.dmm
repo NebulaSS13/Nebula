@@ -1374,18 +1374,18 @@
 /turf/simulated/floor/reinforced,
 /area/icarus/open)
 "eq" = (
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
+	},
 /area/icarus/open)
 "er" = (
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_straight"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
 	},
 /area/icarus/vessel)
 "es" = (
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall_t"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
 	},
 /area/icarus/vessel)
 "et" = (
@@ -1396,7 +1396,9 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
+	},
 /area/icarus/open)
 "ev" = (
 /obj/structure/cable{
@@ -1406,11 +1408,12 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ew" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 8;
-	icon_state = "propulsion_l"
+/obj/structure/shuttle/engine/propulsion/left{
+	dir = 8
 	},
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
+	},
 /area/icarus/vessel)
 "ex" = (
 /obj/structure/shuttle/window,
@@ -1427,9 +1430,8 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eA" = (
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
 	},
 /area/icarus/vessel)
 "eB" = (
@@ -1531,8 +1533,8 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eT" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "swall"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
 	},
 /area/icarus/vessel)
 "eU" = (
@@ -1546,7 +1548,9 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eW" = (
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
+	},
 /area/icarus/vessel)
 "eX" = (
 /obj/machinery/light/small{
@@ -1555,14 +1559,13 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eY" = (
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_straight"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
 	},
 /area/icarus/open)
 "eZ" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "swall_t"
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
 	},
 /area/icarus/open)
 "fa" = (
@@ -1579,11 +1582,12 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "fc" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 8;
-	icon_state = "propulsion_l"
+/obj/structure/shuttle/engine/propulsion/left{
+	dir = 8
 	},
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "icarus"
+	},
 /area/icarus/open)
 "fd" = (
 /obj/effect/floor_decal/solarpanel,

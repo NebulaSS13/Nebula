@@ -387,7 +387,9 @@
 /turf/simulated/floor/shuttle/black,
 /area/shuttle/escape_shuttle)
 "tC" = (
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/shuttle{
+	unique_merge_identifier = "ministation_escape"
+	},
 /area/space)
 "AD" = (
 /obj/structure/window/borosilicate_reinforced,

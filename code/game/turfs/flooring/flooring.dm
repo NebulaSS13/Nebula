@@ -341,7 +341,7 @@
 
 /decl/flooring/reinforced/shuttle
 	name = "floor"
-	icon = 'icons/turf/shuttle.dmi'
+	icon = 'icons/turf/flooring/shuttle.dmi'
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	can_paint = 1

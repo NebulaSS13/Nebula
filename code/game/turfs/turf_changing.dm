@@ -212,8 +212,3 @@
 
 	update_material()
 	return TRUE
-
-//No idea why resetting the base appearance from New() isn't enough, but without this it doesn't work
-/turf/simulated/shuttle/wall/corner/transport_properties_from(turf/other)
-	. = ..()
-	reset_base_appearance()
