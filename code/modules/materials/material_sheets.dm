@@ -408,6 +408,7 @@
 	plural_icon_state = "bundle-mult"
 	max_icon_state = "bundle-max"
 	stack_merge_type = /obj/item/stack/material/bundle
+	crafting_stack_type = /obj/item/stack/material/bundle
 
 /obj/item/stack/material/strut
 	name = "struts"

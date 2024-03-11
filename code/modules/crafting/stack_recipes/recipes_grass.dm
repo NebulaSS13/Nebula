@@ -8,8 +8,12 @@
 /decl/stack_recipe/woven/banner
 	result_type = /obj/item/banner/woven
 
-/decl/stack_recipe/tile/grass_roof
+/decl/stack_recipe/tile/woven
 	name                = "woven roof tile"
 	craft_stack_types   = /obj/item/stack/material/bundle
 	required_material   = /decl/material/solid/organic/plantmatter/grass/dry
-	result_type         = /obj/item/stack/tile/roof/grass
+	result_type         = /obj/item/stack/tile/roof/woven
+
+/decl/stack_recipe/tile/woven/floor
+	name                = "woven floor tile"
+	result_type         = /obj/item/stack/tile/woven

@@ -168,6 +168,13 @@
 /turf/floor/cult/is_defiled()
 	return TRUE
 
+/turf/simulated/floor/woven
+	name = "floor"
+	icon = 'icons/turf/flooring/woven.dmi'
+	icon_state = "0"
+	initial_flooring = /decl/flooring/woven
+	color = COLOR_BEIGE
+
 //Tiled floor + sub-types
 
 /turf/floor/tiled

@@ -435,3 +435,18 @@
 
 /decl/flooring/pool/deep
 	height = -FLUID_DEEP - 50
+
+/decl/flooring/woven
+	name = "woven floor"
+	desc = "A rustic woven mat."
+	icon = 'icons/turf/flooring/woven.dmi'
+	icon_base = "0"
+	damage_temperature = T0C+80
+	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR
+	build_type = /obj/item/stack/tile/woven
+	can_engrave = FALSE
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_ALL
+	space_smooth = SMOOTH_NONE
+	decal_layer = ABOVE_WIRE_LAYER
+	color = COLOR_BEIGE
