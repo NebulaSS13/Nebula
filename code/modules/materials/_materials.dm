@@ -348,6 +348,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		solvent_melt_dose            = 0
 		solvent_max_damage           = 0
 		slipperiness                 = 0
+		bakes_into_at_temperature    = null
 		ignition_point               = null
 		melting_point                = null
 		boiling_point                = null
@@ -356,7 +357,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		burn_product                 = null
 		vapor_products               = null
 	else if(isnull(temperature_damage_threshold))
-		for(var/value in list(ignition_point, melting_point, boiling_point))
+		for(var/value in list(ignition_point, melting_point, boiling_point, heating_point, bakes_into_at_temperature))
 			if(!isnull(value) && (isnull(temperature_damage_threshold) || temperature_damage_threshold > value))
 				temperature_damage_threshold = value
 
