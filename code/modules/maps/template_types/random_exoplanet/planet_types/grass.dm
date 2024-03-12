@@ -159,3 +159,20 @@
 	forced_ambience = list(
 		'sound/ambience/jungle.ogg'
 	)
+	fishing_failure_prob = 10
+	// TODO: waterweed?
+	fishing_results = list(
+		/obj/random/natural_debris                           = 10,
+		/mob/living/simple_animal/aquatic/fish               = 10,
+		/mob/living/simple_animal/aquatic/fish/grump         = 10,
+		/obj/item/mollusc                                    = 5,
+		/obj/item/mollusc/barnacle/fished                    = 5,
+		/mob/living/simple_animal/aquatic/fish/large         = 5,
+		/mob/living/simple_animal/aquatic/fish/large/bass    = 5,
+		/mob/living/simple_animal/aquatic/fish/large/salmon  = 5,
+		/mob/living/simple_animal/aquatic/fish/large/trout   = 5,
+		/mob/living/simple_animal/aquatic/fish/large/pike    = 3,
+		/mob/living/simple_animal/aquatic/fish/large/javelin = 3,
+		/obj/item/mollusc/clam/fished/pearl                  = 3,
+		/mob/living/simple_animal/aquatic/fish/large/koi     = 1
+	)

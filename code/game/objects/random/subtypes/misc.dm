@@ -95,6 +95,23 @@
 	)
 	return spawnable_choices
 
+/obj/random/natural_debris // Natural crap that you might fish out of a river in unspoiled countryside.
+	name = "random natural detritus"
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "remains"
+
+// We really have a limited amount of random crap, don't we...
+/obj/random/natural_debris/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/remains/mouse,
+		/obj/item/remains/lizard,
+		/obj/item/stick,
+		/obj/item/trash/mollusc_shell,
+		/obj/item/trash/mollusc_shell/clam,
+		/obj/item/trash/mollusc_shell/barnacle
+	)
+	return spawnable_choices
+
 /obj/random/junk //Broken items, or stuff that could be picked up
 	name = "random junk"
 	desc = "This is some random junk."
