@@ -2,10 +2,10 @@
 	name = "goose"
 	desc = "A large waterfowl, known for its beauty and quick temper when provoked."
 	icon = 'icons/mob/simple_animal/goose.dmi'
-	speak = list("Honk!")
-	speak_emote = list("honks")
-	emote_hear = list("honks","flaps its wings","clacks")
-	emote_see = list("flaps its wings", "scratches the ground")
+	speak_emote  = list("honks")
+	emote_speech = list("Honk!")
+	emote_hear   = list("honks","flaps its wings","clacks")
+	emote_see    = list("flaps its wings", "scratches the ground")
 	natural_weapon = /obj/item/natural_weapon/goosefeet
 	health = 45
 	maxHealth = 45

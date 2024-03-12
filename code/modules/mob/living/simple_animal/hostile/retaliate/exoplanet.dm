@@ -79,13 +79,13 @@
 	speed = 2
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
-	speak_chance = 5
-	speak = list("Hruuugh!","Hrunnph")
-	emote_see = list("paws the ground","shakes its mane","stomps")
-	emote_hear = list("snuffles")
+	speak_chance = 2.5
+	emote_speech = list("Hruuugh!","Hrunnph")
+	emote_see    = list("paws the ground","shakes its mane","stomps")
+	emote_hear   = list("snuffles")
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
-		)
+	)
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
 	desc = "A fast, armoured predator accustomed to hiding and ambushing."
@@ -102,10 +102,10 @@
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	cold_damage_per_tick = 0
-	speak_chance = 5
-	speak = list("Awrr?","Aowrl!","Worrl")
-	emote_see = list("sniffs the air cautiously","looks around")
-	emote_hear = list("snuffles")
+	speak_chance = 2.5
+	emote_speech = list("Awrr?","Aowrl!","Worrl")
+	emote_see    = list("sniffs the air cautiously","looks around")
+	emote_hear   = list("snuffles")
 	mob_size = MOB_SIZE_SMALL
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak
@@ -119,9 +119,9 @@
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
-	speak_chance = 2
-	speak = list("Shuhn","Shrunnph?","Shunpf")
-	emote_see = list("scratches the ground","shakes out its mane","tinkles gently")
+	speak_chance = 1
+	emote_speech = list("Shuhn","Shrunnph?","Shunpf")
+	emote_see    = list("scratches the ground","shakes out its mane","tinkles gently")
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt
 	desc = "A piglike creature with a long and graceful mane. Don't be fooled by its beauty."
@@ -144,7 +144,7 @@
 	name = "taki"
 	desc = "It looks like a bunch of legs."
 	icon = 'icons/mob/simple_animal/bug.dmi'
-	speak_chance = 1
+	speak_chance = 0.5
 	emote_hear = list("scratches the ground","chitters")
 	mob_size = MOB_SIZE_MINISCULE
 
@@ -158,7 +158,7 @@
 	health = 150
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/pincers
-	speak_chance = 1
+	speak_chance = 0.5
 	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT
@@ -203,4 +203,4 @@
 /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava
 	desc = "A vaguely canine looking beast. It looks as though its fur is made of stone wool."
 	icon = 'icons/mob/simple_animal/lavadog.dmi'
-	speak = list("Karuph","Karump")
+	emote_speech = list("Karuph","Karump")

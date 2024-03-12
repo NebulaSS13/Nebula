@@ -5,9 +5,9 @@
 	health = 750 //how sweet it is to be a god!
 	maxHealth = 750
 	mob_size = MOB_SIZE_LARGE
-	speak = list("...")
-	speak_emote = list("professes","speaks unto you","elaborates","proclaims")
-	emote_hear = list("sings a song to herself", "preens herself")
+	speak_emote  = list("professes","speaks unto you","elaborates","proclaims")
+	emote_speech = null
+	emote_hear   = list("sings a song to herself", "preens herself")
 	natural_weapon = /obj/item/natural_weapon/giant
 	min_gas = null
 	max_gas = null

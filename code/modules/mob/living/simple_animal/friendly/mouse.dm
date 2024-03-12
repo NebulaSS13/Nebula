@@ -3,12 +3,12 @@
 	real_name = "mouse"
 	desc = "It's a small rodent."
 	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
-	speak = list("Squeek!","SQUEEK!","Squeek?")
-	speak_emote = list("squeeks","squeeks","squiks")
-	emote_hear = list("squeeks","squeaks","squiks")
-	emote_see = list("runs in a circle", "shakes", "scritches at something")
+	speak_emote  = list("squeeks","squeeks","squiks")
+	emote_speech = list("Squeek!","SQUEEK!","Squeek?")
+	emote_hear   = list("squeeks","squeaks","squiks")
+	emote_see    = list("runs in a circle", "shakes", "scritches at something")
 	pass_flags = PASS_FLAG_TABLE
-	speak_chance = 1
+	speak_chance = 0.5
 	turns_per_move = 5
 	see_in_dark = 6
 	health = 5
