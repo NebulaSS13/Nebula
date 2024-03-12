@@ -896,10 +896,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cj" = (
-/mob/living/simple_animal/hostile/retaliate/parrot{
-	name = "\proper Meatbag";
-	speak = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")
-	},
+/mob/living/simple_animal/hostile/retaliate/parrot/pirate,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},

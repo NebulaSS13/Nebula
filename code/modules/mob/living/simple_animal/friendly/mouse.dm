@@ -50,12 +50,12 @@
 		playsound(mouse.loc, 'sound/effects/mousesqueek.ogg', 50)
 	if(mouse.stat == CONSCIOUS && prob(0.5))
 		mouse.set_stat(UNCONSCIOUS)
-		mouse.wander = 0
+		mouse.wander = FALSE
 		mouse.speak_chance = 0
 	else if(mouse.stat == UNCONSCIOUS)
 		if(prob(1))
 			mouse.set_stat(CONSCIOUS)
-			mouse.wander = 1
+			mouse.wander = TRUE
 		else if(prob(5))
 			INVOKE_ASYNC(mouse, /mob/living/simple_animal/proc/audible_emote, "snuffles.")
 

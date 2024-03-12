@@ -92,11 +92,11 @@
 	if(disabled > 0)
 		set_stat(UNCONSCIOUS)
 		disabled--
-		wander = 0
+		wander = FALSE
 		speak_chance = 0
 		if(disabled <= 0)
 			set_stat(CONSCIOUS)
-			wander = 1
+			wander = TRUE
 			speak_chance = 2.5
 
 	//repair a bit of damage
@@ -141,7 +141,7 @@
 	if(!exploding && !disabled && prob(explode_chance))
 		exploding = 1
 		set_stat(UNCONSCIOUS)
-		wander = 1
+		wander = TRUE
 		walk(src,0)
 		spawn(rand(50,150))
 			if(!disabled && exploding)

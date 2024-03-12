@@ -227,6 +227,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	do_delayed_life_action()
 	performing_delayed_life_action = FALSE
 
+/mob/living/simple_animal/proc/turf_is_safe(turf/target)
+	if(!istype(target))
+		return FALSE
+	if(target.is_open() && target.has_gravity() && !can_overcome_gravity())
+		return FALSE
+	if(is_aquatic != target.submerged())
+		return FALSE
+	return TRUE
+
 // For saner overriding; only override this.
 /mob/living/simple_animal/proc/do_delayed_life_action()
 	if(buckled && can_escape)
@@ -247,8 +256,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
-				SelfMove(pick(global.cardinal))
-				turns_since_move = 0
+				var/turf/move_to = get_step(loc, pick(global.cardinal))
+				if(turf_is_safe(move_to))
+					SelfMove(move_to)
+					turns_since_move = 0
 
 	//Speaking
 	if(prob(speak_chance))
