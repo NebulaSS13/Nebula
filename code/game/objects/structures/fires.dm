@@ -28,6 +28,8 @@
 	throwpass = TRUE
 
 	var/datum/effect/effect/system/steam_spread/steam // Used when being quenched.
+	var/datum/composite_sound/fire_crackles/fire_loop
+	var/datum/composite_sound/grill/grill_loop // Used when food is cooking on the fire.
 
 	var/const/light_range_high =  3
 	var/const/light_range_mid =   2
@@ -47,34 +49,39 @@
 
 	/// Are we on fire?
 	var/lit = FIRE_OUT
-	/// How much fuel is left? 
+	/// How much fuel is left?
 	var/fuel = 0
 
-/obj/structure/fire_source/proc/get_current_burn_temperature()
-	var/datum/gas_mixture/environment = return_air()
-	return max(environment?.temperature, last_fuel_burn_temperature)
 
 /obj/structure/fire_source/Initialize()
 	. = ..()
-	if(lit == FIRE_LIT)
-		try_light(INFINITY, TRUE)
 	update_icon()
+	create_reagents(100)
 	steam = new(name)
 	steam.attach(get_turf(src))
 	steam.set_up(3, 0, get_turf(src))
-	create_reagents(100)
+	fire_loop  = new(list(src), FALSE)
+	grill_loop = new(list(src), FALSE)
+	if(lit == FIRE_LIT)
+		try_light(INFINITY, TRUE)
 
 /obj/structure/fire_source/Destroy()
 	QDEL_NULL(steam)
 	STOP_PROCESSING(SSobj, src)
 	lit = FIRE_DEAD
 	refresh_affected_exterior_turfs()
+	QDEL_NULL(fire_loop)
+	QDEL_NULL(grill_loop)
 	return ..()
 
 /obj/structure/fire_source/Move()
 	. = ..()
 	if(. && lit == FIRE_LIT)
 		refresh_affected_exterior_turfs()
+
+/obj/structure/fire_source/proc/get_current_burn_temperature()
+	var/datum/gas_mixture/environment = return_air()
+	return max(environment?.temperature, last_fuel_burn_temperature)
 
 /obj/structure/fire_source/proc/refresh_affected_exterior_turfs()
 
@@ -122,6 +129,8 @@
 		visible_message(SPAN_DANGER("\The [src] goes out!"))
 		STOP_PROCESSING(SSobj, src)
 		update_icon()
+		if(fire_loop?.started)
+			fire_loop.stop(src)
 
 /obj/structure/fire_source/proc/check_atmos()
 	var/datum/gas_mixture/GM = loc?.return_air()
@@ -141,6 +150,8 @@
 	refresh_affected_exterior_turfs()
 	visible_message(SPAN_DANGER("\The [src] catches alight!"))
 	START_PROCESSING(SSobj, src)
+	if(fire_loop && !fire_loop.started)
+		fire_loop.start(src)
 	update_icon()
 	return TRUE
 
@@ -261,6 +272,11 @@
 			environment.update_values()
 
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
+
+	if(istype(thing, /obj/item/chems) && user.a_intent != I_HURT)
+		var/obj/item/chems/chems = thing
+		if(chems.standard_pour_into(src, user))
+			return TRUE
 
 	if(lit == FIRE_LIT)
 
