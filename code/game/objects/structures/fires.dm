@@ -210,6 +210,56 @@
 /obj/structure/fire_source/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return ..() || (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 
+// Returns null for no burn, empty list for burn with no products, assoc
+// matter to value list for waste products.
+// We assume a normalized mole amount for 'amount'.
+/decl/material/proc/get_burn_products(var/amount, var/burn_temperature)
+
+	// No chance of burning.
+	if(isnull(ignition_point) && isnull(boiling_point) && !length(vapor_products))
+		return
+
+	// Burning a reagent of any kind.
+	if(ignition_point && burn_temperature >= ignition_point)
+		. = list() // We need to return a non-null value to indicate we consumed the material.
+		if(burn_product)
+			.[burn_product] = amount
+		return
+
+	// If it has a vapor product, turn it into that.
+	if(length(vapor_products))
+		. = list()
+		for(var/vapor in vapor_products)
+			.[vapor] = (amount * vapor_products[vapor])
+		return
+
+	// If it's not ignitable but can be boiled, consider vaporizing it.
+	if(!isnull(boiling_point) && burn_temperature >= boiling_point)
+		. = list(type = amount)
+
+/obj/structure/fire_source/proc/burn_material(var/decl/material/mat, var/amount)
+	var/list/burn_products = mat.get_burn_products(amount, last_fuel_burn_temperature)
+	. = !isnull(burn_products)
+	if(.)
+		if(mat.ignition_point && last_fuel_burn_temperature >= mat.ignition_point)
+			if(mat.accelerant_value > FUEL_VALUE_NONE)
+				fuel += amount * (1 + material.accelerant_value)
+			if(mat.burn_temperature)
+				last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
+		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
+			fuel -= amount * mat.accelerant_value
+		fuel = max(fuel, 0)
+
+// Dump waste gas from burned fuel.
+/obj/structure/fire_source/proc/dump_waste_products(var/atom/target, var/list/waste)
+	if(istype(target) && length(waste))
+		var/datum/gas_mixture/environment = target.return_air()
+		if(environment)
+			for(var/w in waste)
+				if(waste[w] > 0)
+					environment.adjust_gas(w, waste[w], FALSE)
+			environment.update_values()
+
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
 	if(lit == FIRE_LIT)
@@ -258,37 +308,23 @@
 
 	var/list/waste = list()
 	for(var/obj/item/thing in contents)
-
 		var/consumed_item = FALSE
 		for(var/mat in thing.matter)
-			var/decl/material/material = GET_DECL(mat)
-			if(isnull(material.ignition_point))
-				continue
-			var/add_fuel = round(MOLES_PER_MATERIAL_UNIT(thing.matter[mat])) * (1+material.accelerant_value)
-			if(material.burn_product)
-				waste[material.burn_product] += add_fuel
-			fuel += add_fuel
-			last_fuel_burn_temperature = max(last_fuel_burn_temperature, max(T100C, material.burn_temperature))
-			consumed_item = TRUE
-
+			var/list/waste_products = burn_material(GET_DECL(mat), MOLES_PER_MATERIAL_UNIT(thing.matter[mat]))
+			if(!isnull(waste_products))
+				for(var/product in waste_products)
+					waste[product] += waste_products[product]
+				consumed_item = TRUE
 		if(consumed_item)
 			qdel(thing)
-
 		if(fuel >= IDEAL_FUEL)
 			break
+
+	dump_waste_products(loc, waste)
 
 	if(!isnull(cap_last_fuel_burn))
 		// TODO: dump excess directly into the atmosphere as heat
 		last_fuel_burn_temperature = min(last_fuel_burn_temperature, cap_last_fuel_burn)
-
-	// Dump waste gas from burned fuel.
-	var/turf/T = get_turf(src)
-	var/datum/gas_mixture/environment = T?.return_air()
-	if(environment && length(waste))
-		for(var/w in waste)
-			if(waste[w] > 0)
-				environment.adjust_gas(w, waste[w], FALSE)
-		environment.update_values()
 
 	return (fuel > 0)
 
@@ -296,18 +332,25 @@
 	..()
 	if(reagents?.total_volume)
 		var/do_steam = FALSE
+		var/list/waste = list()
+
 		for(var/rtype in reagents?.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
-			if(R.accelerant_value <= FUEL_VALUE_RETARDANT)
+
+			var/decl/material/reagent = GET_DECL(rtype)
+			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
 				do_steam = TRUE
-			fuel += REAGENT_VOLUME(RG, rtype) * R.accelerant_value
-		reagents.clear_reagents()
-		fuel = max(0, fuel)
-		if(lit == FIRE_LIT)
-			if(fuel <= 0)
-				die()
-			if(do_steam)
-				steam.start() // HISSSSSS!
+
+			var/volume = max(1, round(REAGENT_VOLUME(reagents, rtype) / 10)) // arbitrary constant to get it in line with mat burning values
+			var/list/waste_products = burn_material(reagent, volume)
+			if(!isnull(waste_products))
+				for(var/product in waste_products)
+					waste[product] += waste_products[product]
+				reagents.remove_reagent(reagent.type, volume)
+
+		dump_waste_products(loc, waste)
+
+		if(lit == FIRE_LIT && do_steam)
+			steam.start() // HISSSSSS!
 
 /obj/structure/fire_source/proc/get_fire_exposed_atoms()
 	return loc?.get_contained_external_atoms()
