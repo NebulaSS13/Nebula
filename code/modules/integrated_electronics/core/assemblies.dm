@@ -109,7 +109,7 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(get_max_health()/current_health < 0.5 && prob(5))
+	if(get_health_ratio() < 0.5 && prob(5))
 		visible_message(SPAN_WARNING("\The [src] shudders and sparks."))
 		power_failure = TRUE
 	// Now spend it.

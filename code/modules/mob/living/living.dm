@@ -260,12 +260,6 @@ default behaviour is:
 
 	return btemperature
 
-/mob/living/proc/get_health_ratio() // ratio might be the wrong word
-	return current_health/get_max_health()
-
-/mob/living/proc/get_health_percent(var/sigfig = 1)
-	return round(get_health_ratio()*100, sigfig)
-
 /mob/living/proc/set_max_health(var/val, var/skip_health_update = FALSE)
 	max_health = val
 	if(!skip_health_update)

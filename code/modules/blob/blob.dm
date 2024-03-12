@@ -208,9 +208,6 @@
 	var/reported_low_damage = FALSE
 	var/times_to_pulse = 0
 
-/obj/effect/blob/core/proc/get_health_percent()
-	return ((current_health / get_max_health()) * 100)
-
 /*
 the master core becomes more vulnereable to damage as it weakens,
 but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading

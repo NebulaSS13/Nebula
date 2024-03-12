@@ -35,6 +35,7 @@
 	default_solid_form = /obj/item/stack/material/panel
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	tensile_strength = 0.75
 
 /decl/material/solid/organic/wax
 	name = "wax"
@@ -167,6 +168,7 @@
 	default_solid_form = /obj/item/stack/material/slab
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	fishing_bait_value = 0.75
 
 /// Used for plant products that aren't quite wood, but are still tougher than normal plant matter.
 /decl/material/solid/organic/plantmatter/pith
@@ -187,12 +189,14 @@
 	melting_point = null // can grass melt??
 	ignition_point = T0C+100
 	tans_to = /decl/material/solid/organic/plantmatter/grass/dry
+	tensile_strength = 0.2
 
 /decl/material/solid/organic/plantmatter/grass/dry
-	name = "dry grass"
+	name = "dried grass"
 	uid = "solid_dry_grass"
 	color = COLOR_BEIGE
-	ignition_point = T0C+50 // very flammable
+	ignition_point = T0C+50
+	tensile_strength = 0.5
 
 /decl/material/solid/organic/meat
 	name = "meat"
@@ -214,6 +218,7 @@
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = 'sound/effects/squelch1.ogg'
+	fishing_bait_value = 1
 
 /decl/material/solid/organic/skin
 	name = "skin"
@@ -236,6 +241,7 @@
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = "punch"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	fishing_bait_value = 0.75
 	tans_to = /decl/material/solid/organic/leather
 
 /decl/material/solid/organic/skin/lizard
@@ -316,6 +322,7 @@
 	default_solid_form = /obj/item/stack/material/skin/feathers
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	fishing_bait_value = 0
 
 /decl/material/solid/organic/skin/feathers/purple
 	color = COLOR_PALE_PURPLE_GRAY
@@ -406,6 +413,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	tensile_strength = 0.8 // TODO: dried sinew? Should this be crappier than plastic/metal?
 
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"

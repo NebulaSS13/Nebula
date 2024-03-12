@@ -6,12 +6,20 @@
 	abstract_type = /obj/random
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 	var/spawn_method = /obj/random/proc/spawn_item
+	var/spawned_atoms
 
 // creates a new object and deletes itself
 /obj/random/Initialize()
-	..()
+	. = ..()
 	call(src, spawn_method)()
-	return INITIALIZE_HINT_QDEL
+	if(!SSatoms.initialized || !length(spawned_atoms))
+		return INITIALIZE_HINT_QDEL
+
+	// Hang around for a tick in case someone wants our spawn results.
+	invisibility = INVISIBILITY_MAXIMUM
+	name = ""
+	verbs.Cut()
+	QDEL_IN(src, 1)
 
 /obj/random/proc/item_to_spawn()
 	var/list/spawn_choices = spawn_choices()
@@ -35,6 +43,12 @@
 			A.default_pixel_x = pixel_x
 			A.default_pixel_y = pixel_y
 			A.reset_offsets(0)
+
+	spawned_atoms = .
+
+/obj/random/Destroy()
+	spawned_atoms = null
+	return ..()
 
 /obj/random/proc/create_instance(var/build_path, var/spawn_loc)
 	return new build_path(spawn_loc)

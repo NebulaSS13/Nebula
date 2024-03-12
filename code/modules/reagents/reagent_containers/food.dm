@@ -200,5 +200,5 @@
 /obj/item/chems/food/populate_reagents()
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
-	if(nutriment_amt)
+	if(nutriment_amt && nutriment_type)
 		add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)

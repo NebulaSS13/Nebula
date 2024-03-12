@@ -8,6 +8,7 @@
 	emote_see = list("gnashes")
 	base_animal_type = /mob/living/simple_animal/aquatic // used for language, ignore actual type
 	is_aquatic = TRUE
+	holder_type = /obj/item/holder
 
 	meat_type = /obj/item/chems/food/fish
 	meat_amount = 3

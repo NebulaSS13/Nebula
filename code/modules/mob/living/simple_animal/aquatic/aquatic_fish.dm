@@ -17,6 +17,31 @@
 /mob/living/simple_animal/aquatic/fish/grump
 	icon = 'icons/mob/simple_animal/fish_grump.dmi'
 
-/mob/living/simple_animal/aquatic/fish/judge
+/mob/living/simple_animal/aquatic/fish/large
 	icon = 'icons/mob/simple_animal/fish_judge.dmi'
 	meat_amount = 2
+	mob_size = MOB_SIZE_SMALL
+
+/mob/living/simple_animal/aquatic/fish/large/bass
+	name = "bass"
+	icon = 'icons/mob/simple_animal/fish_bass.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/javelin
+	name = "javelin"
+	icon = 'icons/mob/simple_animal/fish_javelin.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/koi
+	name = "koi"
+	icon = 'icons/mob/simple_animal/fish_koi.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/pike
+	name = "pike"
+	icon = 'icons/mob/simple_animal/fish_pike.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/salmon
+	name = "salmon"
+	icon = 'icons/mob/simple_animal/fish_salmon.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/trout
+	name = "trout"
+	icon = 'icons/mob/simple_animal/fish_trout.dmi'

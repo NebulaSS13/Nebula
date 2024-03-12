@@ -28,6 +28,9 @@
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
+/decl/stack_recipe/planks/fishing_rod
+	result_type = /obj/item/fishing_rod
+
 /decl/stack_recipe/planks/stick
 	result_type            = /obj/item/stick
 	difficulty             = MAT_VALUE_EASY_DIY

@@ -97,7 +97,7 @@
 	desc = "A small rodent. It looks very old."
 	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 	speak_emote = list("squeeks")
-	holder_type = /obj/item/holder/mouse
+	holder_type = /obj/item/holder
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_MINISCULE
 	response_harm = "stamps on"
