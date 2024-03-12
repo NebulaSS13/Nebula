@@ -42,7 +42,7 @@
 /decl/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(thermal_product && location && ATOM_SHOULD_TEMPERATURE_ENQUEUE(location))
-		ADJUST_ATOM_TEMPERATURE(location, thermal_product)
+		ADJUST_ATOM_TEMPERATURE(location, location.temperature + (location.get_thermal_mass_coefficient() * thermal_product))
 
 // This proc returns a list of all reagents it wants to use; if the holder has several reactions that use the same reagent, it will split the reagent evenly between them
 /decl/chemical_reaction/proc/get_used_reagents()

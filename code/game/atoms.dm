@@ -898,3 +898,9 @@
 /atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
 	set waitfor = FALSE
 	return
+
+/atom/proc/get_thermal_mass()
+	return 0
+
+/atom/proc/get_thermal_mass_coefficient()
+	return 1

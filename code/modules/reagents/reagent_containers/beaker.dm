@@ -145,10 +145,12 @@
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
-	temperature_coefficient = 1
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	lid_color = COLOR_GRAY40
+
+/obj/item/chems/glass/beaker/insulated/get_thermal_mass_coefficient()
+	return 0.1
 
 // Hack around reagent temp changes.
 /obj/item/chems/glass/beaker/insulated/ProcessAtomTemperature()
