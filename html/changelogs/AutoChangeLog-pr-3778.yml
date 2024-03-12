@@ -1,0 +1,4 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Atom temperature will equalize slower.}
+delete-after: true
