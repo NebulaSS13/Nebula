@@ -183,7 +183,10 @@
 		/obj/structure/reagent_dispensers
 	)
 	// Types to be skipped for reasons other than abstraction/spawnability.
-	var/static/list/excepted_types = list()
+	var/static/list/excepted_types = list(
+		// Not technically abstract, but should not be spawned outside of /datum/seed/harvest().
+		/obj/item/chems/food/grown
+	)
 
 /datum/unit_test/chemistry_premade_bottles_shall_not_melt/start_test()
 
