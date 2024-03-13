@@ -383,7 +383,7 @@
 	// make a place to test
 	SSmapping.increment_world_z_size(/datum/level_data/unit_test)
 	for(var/turf/T in block(locate(1, 1, world.maxz), locate(3, 3, world.maxz)))
-		T.ChangeTurf(/turf/simulated/floor)
+		T.ChangeTurf(/turf/floor)
 	var/turf/T = locate(2, 2, world.maxz)
 
 	// first, every spawnable machine ("mapped" behavior)

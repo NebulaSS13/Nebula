@@ -1,26 +1,26 @@
 //Commonly used
-/turf/simulated/wall/prepainted
+/turf/wall/prepainted
 	color = COLOR_GUNMETAL
 	paint_color = COLOR_WALL_GUNMETAL
 	stripe_color = COLOR_GUNMETAL
-/turf/simulated/wall/r_wall/prepainted
+/turf/wall/r_wall/prepainted
 	color = COLOR_GUNMETAL
 	paint_color = COLOR_WALL_GUNMETAL
 	stripe_color = COLOR_GUNMETAL
 
-/turf/simulated/wall/r_wall
+/turf/wall/r_wall
 	color = "#a8a9b2"
 	icon_state = "reinforced_solid"
 	material = /decl/material/solid/metal/plasteel
 	reinf_material = /decl/material/solid/metal/plasteel
 
-/turf/simulated/wall/r_wall/hull
+/turf/wall/r_wall/hull
 	name = "hull"
 	color = COLOR_HULL
 	paint_color = COLOR_HULL
 	stripe_color = COLOR_HULL
 
-/turf/simulated/wall/r_wall/hull/Initialize()
+/turf/wall/r_wall/hull/Initialize()
 	. = ..()
 	paint_color = color
 	color = null //color is just for mapping
@@ -37,100 +37,100 @@
 			paint_color = adjust_brightness(paint_color, bleach_factor)
 	update_icon()
 
-/turf/simulated/wall/titanium
+/turf/wall/titanium
 	color = COLOR_SILVER
 	material = /decl/material/solid/metal/titanium
 
-/turf/simulated/wall/r_titanium
+/turf/wall/r_titanium
 	color = "#d1e6e3"
 	icon_state = "reinforced_solid"
 	material = /decl/material/solid/metal/titanium
 	reinf_material = /decl/material/solid/metal/titanium
 
-/turf/simulated/wall/ocp_wall
+/turf/wall/ocp_wall
 	color = COLOR_GUNMETAL
 	material = /decl/material/solid/metal/plasteel/ocp
 	reinf_material = /decl/material/solid/metal/plasteel/ocp
 
-/turf/simulated/wall/iron
+/turf/wall/iron
 	color = "#5c5454"
 	icon_state = "metal"
 	material = /decl/material/solid/metal/iron
 
-/turf/simulated/wall/plastic
+/turf/wall/plastic
 	color = COLOR_EGGSHELL
 	icon_state = "plastic"
 	material = /decl/material/solid/organic/plastic
 
 // A plastic wall with a plastic girder. Very flimsy but very easy to move or remove with just a crowbar.
-/turf/simulated/wall/plastic/facade
+/turf/wall/plastic/facade
 	girder_material = /decl/material/solid/organic/plastic
 
-/turf/simulated/wall/wood
+/turf/wall/wood
 	color = COLOR_BROWN
 	icon_state = "wood"
 	material = /decl/material/solid/organic/wood
 
-/turf/simulated/wall/walnut
+/turf/wall/walnut
 	color = COLOR_BROWN_ORANGE
 	icon_state = "wood"
 	material = /decl/material/solid/organic/wood/walnut
 
-/turf/simulated/wall/raidershuttle
+/turf/wall/raidershuttle
 	color = COLOR_GREEN_GRAY
 	icon_state = "metal"
 	material = /decl/material/solid/metal/alienalloy
 
-/turf/simulated/wall/raidershuttle/attackby()
+/turf/wall/raidershuttle/attackby()
 	return
 
 //Alien metal walls
-/turf/simulated/wall/alium
+/turf/wall/alium
 	color = COLOR_BLUE_GRAY
-	floor_type = /turf/simulated/floor/fixed/alium
+	floor_type = /turf/floor/fixed/alium
 	material = /decl/material/solid/metal/aliumium
 
-/turf/simulated/wall/alium/explosion_act(severity)
+/turf/wall/alium/explosion_act(severity)
 	SHOULD_CALL_PARENT(TRUE)
 	if(prob(explosion_resistance))
 		..()
 
 //Cult wall
-/turf/simulated/wall/cult
+/turf/wall/cult
 	icon_state = "cult"
 	color = COLOR_RED_GRAY
 	material = /decl/material/solid/stone/cult
 
-/turf/simulated/wall/cult/on_defilement()
+/turf/wall/cult/on_defilement()
 	return
 
-/turf/simulated/wall/cult/is_defiled()
+/turf/wall/cult/is_defiled()
 	return TRUE
 
-/turf/simulated/wall/cult/reinf
+/turf/wall/cult/reinf
 	icon_state = "reinforced_cult"
 	reinf_material = /decl/material/solid/stone/cult/reinforced
 
-/turf/simulated/wall/cult/dismantle_wall()
+/turf/wall/cult/dismantle_wall()
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.remove_cultiness(CULTINESS_PER_TURF)
 	. = ..()
 
-/turf/simulated/wall/cult/can_join_with(var/turf/simulated/wall/W)
+/turf/wall/cult/can_join_with(var/turf/wall/W)
 	if(material && W.material && material.icon_base == W.material.icon_base)
 		return 1
-	else if(istype(W, /turf/simulated/wall))
+	else if(istype(W, /turf/wall))
 		return 1
 	return 0
 
-/turf/simulated/wall/shuttle
+/turf/wall/shuttle
 	material = /decl/material/solid/metal/titanium
 	paint_color = COLOR_BEIGE
 	stripe_color = COLOR_SKY_BLUE
 
-/turf/simulated/wall/shuttle/get_wall_icon()
+/turf/wall/shuttle/get_wall_icon()
 	return 'icons/turf/walls/solid.dmi'
 
-/turf/simulated/wall/shuttle/dark
+/turf/wall/shuttle/dark
 	paint_color = COLOR_GUNMETAL
 	stripe_color = COLOR_MAROON

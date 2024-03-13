@@ -19,7 +19,7 @@
 	if(is_plating())
 		return get_footstep_for_mob(/decl/footsteps/plating, caller)
 
-/turf/simulated/floor/get_footstep_sound(var/mob/caller)
+/turf/floor/get_footstep_sound(var/mob/caller)
 	. = ..() || get_footstep_for_mob(flooring?.footstep_type || /decl/footsteps/blank, caller)
 
 /mob/living/carbon/human/proc/has_footsteps()

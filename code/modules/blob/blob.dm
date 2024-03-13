@@ -71,8 +71,8 @@
 /obj/effect/blob/proc/expand(var/turf/T)
 	if(istype(T, /turf/unsimulated/) || isspaceturf(T))
 		return
-	if(istype(T, /turf/simulated/wall))
-		var/turf/simulated/wall/SW = T
+	if(istype(T, /turf/wall))
+		var/turf/wall/SW = T
 		SW.take_damage(80)
 		return
 	var/obj/structure/girder/G = locate() in T

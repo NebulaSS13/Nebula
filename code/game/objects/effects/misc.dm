@@ -26,7 +26,7 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/paint/LateInitialize()
-	var/turf/simulated/wall/W = get_turf(src)
+	var/turf/wall/W = get_turf(src)
 	if(istype(W))
 		W.paint_color = color
 		W.stripe_color = color
@@ -72,7 +72,7 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/paint_stripe/LateInitialize()
-	var/turf/simulated/wall/W = get_turf(src)
+	var/turf/wall/W = get_turf(src)
 	if(istype(W))
 		W.stripe_color = color
 		W.update_icon()

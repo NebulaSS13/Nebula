@@ -39,7 +39,7 @@
 
 /area/turbolift/example/first
 	name = "Testing Site First Floor Lift"
-	base_turf = /turf/simulated/floor
+	base_turf = /turf/floor
 
 /area/turbolift/example/second
 	name = "Testing Site Second Floor Lift"

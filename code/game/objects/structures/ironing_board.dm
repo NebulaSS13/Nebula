@@ -36,7 +36,7 @@
 // make a screeching noise to drive people mad
 /obj/structure/bed/roller/ironingboard/Move()
 	var/turf/T = get_turf(src)
-	if(isspaceturf(T) || istype(T, /turf/simulated/floor/carpet))
+	if(isspaceturf(T) || istype(T, /turf/floor/carpet))
 		return
 	playsound(T, pick(move_sounds), 75, 1)
 

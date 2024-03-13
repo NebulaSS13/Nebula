@@ -93,8 +93,13 @@
 						if(istype(m, f2))
 							from_objs += m
 
-				else if(text_starts_with(f, "/turf/simulated"))
-					for(var/turf/simulated/m in world)
+				else if(text_starts_with(f, "/turf/floor"))
+					for(var/turf/floor/m in world)
+						if(istype(m, f2))
+							from_objs += m
+
+				else if(text_starts_with(f, "/turf/wall"))
+					for(var/turf/wall/m in world)
 						if(istype(m, f2))
 							from_objs += m
 
@@ -162,8 +167,13 @@
 							if(istype(m, f2))
 								objs += m
 
-					else if(text_starts_with(f, "/turf/simulated"))
-						for(var/turf/simulated/m in from_obj)
+					else if(text_starts_with(f, "/turf/floor"))
+						for(var/turf/floor/m in from_obj)
+							if(istype(m, f2))
+								objs += m
+
+					else if(text_starts_with(f, "/turf/wall"))
+						for(var/turf/wall/m in from_obj)
 							if(istype(m, f2))
 								objs += m
 

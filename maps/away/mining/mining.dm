@@ -223,7 +223,7 @@
 /obj/item/stool/stone/Initialize(mapload)
 	. = ..(mapload, /decl/material/solid/stone/sandstone)
 
-/turf/simulated/floor/airless/stone
+/turf/floor/airless/stone
 	name = "temple floor"
 	desc = "You can only imagine what once took place in these halls."
 	icon = 'icons/turf/flooring/cult.dmi'

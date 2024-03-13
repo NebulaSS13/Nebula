@@ -1,4 +1,4 @@
-/turf/simulated/floor/attack_hand(mob/user)
+/turf/floor/attack_hand(mob/user)
 	if(!ishuman(user))
 		return ..()
 	var/mob/living/carbon/human/H = user
@@ -7,7 +7,7 @@
 		return TRUE
 	return ..()
 
-/turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
+/turf/floor/attackby(var/obj/item/C, var/mob/user)
 
 	if(!C || !user)
 		return 0
@@ -170,7 +170,7 @@
 
 	return ..()
 
-/turf/simulated/floor/proc/welder_melt()
+/turf/floor/proc/welder_melt()
 	if(!(is_plating()) || broken || burnt)
 		return FALSE
 	// if burnt/broken is nonzero plating just chooses a random icon
@@ -181,7 +181,7 @@
 	update_icon()
 	return TRUE
 
-/turf/simulated/floor/why_cannot_build_cable(var/mob/user, var/cable_error)
+/turf/floor/why_cannot_build_cable(var/mob/user, var/cable_error)
 	switch(cable_error)
 		if(0)
 			return
@@ -192,7 +192,7 @@
 		else //Fallback
 			. = ..()
 
-/turf/simulated/floor/cannot_build_cable()
+/turf/floor/cannot_build_cable()
 	if(broken || burnt)
 		return 2
 	if(!is_plating())

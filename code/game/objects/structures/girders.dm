@@ -159,8 +159,8 @@
 		to_chat(user, SPAN_NOTICE("You create a false wall! Push on it to open or close the passage."))
 
 	var/turf/Tsrc = get_turf(src)
-	Tsrc.ChangeTurf(/turf/simulated/wall)
-	var/turf/simulated/wall/T = get_turf(src)
+	Tsrc.ChangeTurf(/turf/wall)
+	var/turf/wall/T = get_turf(src)
 	T.set_turf_materials(S.material, reinf_material, null, material)
 	T.can_open = prepped_for_fakewall
 	T.add_hiddenprint(usr)

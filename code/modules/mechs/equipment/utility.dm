@@ -499,8 +499,8 @@
 		scoop_ore(target)
 		return
 
-	if (istype(target, /turf/simulated/wall))
-		var/turf/simulated/wall/wall = target
+	if (istype(target, /turf/wall))
+		var/turf/wall/wall = target
 		var/wall_hardness = max(wall.material.hardness, wall.reinf_material ? wall.reinf_material.hardness : 0)
 		if (wall_hardness > drill_head.material.hardness)
 			to_chat(user, SPAN_WARNING("\The [wall] is too hard to drill through with \the [drill_head]."))

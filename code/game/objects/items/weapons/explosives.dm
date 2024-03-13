@@ -85,8 +85,8 @@
 		explosion(location, -1, -1, 2, 3)
 
 	if(target)
-		if (istype(target, /turf/simulated/wall))
-			var/turf/simulated/wall/W = target
+		if (istype(target, /turf/wall))
+			var/turf/wall/W = target
 			W.dismantle_wall(1)
 		else if(isliving(target))
 			target.explosion_act(2) // c4 can't gib mobs anymore.

@@ -54,7 +54,7 @@
 /obj/structure/door/update_connections(var/propagate = FALSE)
 	. = ..()
 	if(propagate && isturf(loc))
-		for(var/turf/simulated/wall/W in RANGE_TURFS(loc, 1))
+		for(var/turf/wall/W in RANGE_TURFS(loc, 1))
 			W.wall_connections = null
 			W.other_connections = null
 			W.queue_icon_update()

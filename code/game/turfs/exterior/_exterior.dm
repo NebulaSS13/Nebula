@@ -98,6 +98,6 @@
 /turf/exterior/on_defilement()
 	..()
 	if(density)
-		ChangeTurf(/turf/simulated/wall/cult)
+		ChangeTurf(/turf/wall/cult)
 	else
-		ChangeTurf(/turf/simulated/floor/cult)
+		ChangeTurf(/turf/floor/cult)

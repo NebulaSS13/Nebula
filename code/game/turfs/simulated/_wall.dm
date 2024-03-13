@@ -16,7 +16,7 @@ var/global/list/wall_fullblend_objects = list(
 	/obj/structure/wall_frame
 )
 
-/turf/simulated/wall
+/turf/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
 	icon = 'icons/turf/walls/_previews.dmi'
@@ -46,12 +46,12 @@ var/global/list/wall_fullblend_objects = list(
 	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/list/wall_connections
 	var/list/other_connections
-	var/floor_type = /turf/simulated/floor/plating //turf it leaves after destruction
+	var/floor_type = /turf/floor/plating //turf it leaves after destruction
 	var/paint_color
 	var/stripe_color
 	var/handle_structure_blending = TRUE
 
-/turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
+/turf/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 
 	..(ml)
 
@@ -66,11 +66,11 @@ var/global/list/wall_fullblend_objects = list(
 	set_extension(src, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
 	START_PROCESSING(SSturf, src) //Used for radiation.
 
-/turf/simulated/wall/LateInitialize(var/ml)
+/turf/wall/LateInitialize(var/ml)
 	..()
 	update_material(!ml)
 
-/turf/simulated/wall/Destroy()
+/turf/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
 	material = GET_DECL(/decl/material/placeholder)
 	reinf_material = null
@@ -80,31 +80,31 @@ var/global/list/wall_fullblend_objects = list(
 	. = ..()
 	var/turf/debris = locate(old_x, old_y, old_z)
 	if(debris)
-		for(var/turf/simulated/wall/W in RANGE_TURFS(debris, 1))
+		for(var/turf/wall/W in RANGE_TURFS(debris, 1))
 			W.wall_connections = null
 			W.other_connections = null
 			W.queue_icon_update()
 
 // Walls always hide the stuff below them.
-/turf/simulated/wall/levelupdate()
+/turf/wall/levelupdate()
 	for(var/obj/O in src)
 		O.hide(1)
 
-/turf/simulated/wall/protects_atom(var/atom/A)
+/turf/wall/protects_atom(var/atom/A)
 	var/obj/O = A
 	return (istype(O) && O.hides_under_flooring()) || ..()
 
-/turf/simulated/wall/Process(wait, tick)
+/turf/wall/Process(wait, tick)
 	var/how_often = max(round(2 SECONDS/wait), 1)
 	if(tick % how_often)
 		return //We only work about every 2 seconds
 	if(!radiate())
 		return PROCESS_KILL
 
-/turf/simulated/wall/get_material()
+/turf/wall/get_material()
 	return material
 
-/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
+/turf/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
 		burn(2500)
 	else if(istype(Proj,/obj/item/projectile/ion))
@@ -126,7 +126,7 @@ var/global/list/wall_fullblend_objects = list(
 
 	take_damage(damage)
 
-/turf/simulated/wall/hitby(AM, var/datum/thrownthing/TT)
+/turf/wall/hitby(AM, var/datum/thrownthing/TT)
 	. = ..()
 	if(. && density && !ismob(AM))
 		var/obj/O = AM
@@ -135,7 +135,7 @@ var/global/list/wall_fullblend_objects = list(
 		if(tforce > 0)
 			take_damage(tforce)
 
-/turf/simulated/wall/proc/clear_plants()
+/turf/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
 		qdel(WR)
 	for(var/obj/effect/vine/plant in range(src, 1))
@@ -144,12 +144,12 @@ var/global/list/wall_fullblend_objects = list(
 			plant.update_icon()
 			plant.reset_offsets(0)
 
-/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
+/turf/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
 	clear_plants()
 	. = ..()
 
 //Appearance
-/turf/simulated/wall/examine(mob/user)
+/turf/wall/examine(mob/user)
 	. = ..()
 
 	if(!damage)
@@ -167,27 +167,27 @@ var/global/list/wall_fullblend_objects = list(
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
 
-/turf/simulated/wall/proc/get_paint_examine_message()
+/turf/wall/proc/get_paint_examine_message()
 	. = SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
 
 //Damage
-/turf/simulated/wall/handle_melting(list/meltable_materials)
+/turf/wall/handle_melting(list/meltable_materials)
 	. = ..()
 	if(!can_melt())
 		return
-	var/turf/simulated/floor/F = ChangeTurf(/turf/simulated/floor/plating)
+	var/turf/floor/F = ChangeTurf(/turf/floor/plating)
 	if(!istype(F))
 		return
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
 	visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
 
-/turf/simulated/wall/proc/take_damage(dam)
+/turf/wall/proc/take_damage(dam)
 	if(dam)
 		damage = max(0, damage + dam)
 		update_damage()
 
-/turf/simulated/wall/proc/update_damage()
+/turf/wall/proc/update_damage()
 	var/cap = material.integrity
 	if(reinf_material)
 		cap += reinf_material.integrity
@@ -202,23 +202,23 @@ var/global/list/wall_fullblend_objects = list(
 
 	return
 
-/turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air :(
+/turf/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air :(
 	burn(exposed_temperature)
 	return ..()
 
-/turf/simulated/wall/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
+/turf/wall/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	burn(adj_temp)
 	if(adj_temp > material.melting_point)
 		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)))
 	return ..()
 
-/turf/simulated/wall/proc/get_dismantle_stack_type()
+/turf/wall/proc/get_dismantle_stack_type()
 	return
 
-/turf/simulated/wall/proc/get_dismantle_sound()
+/turf/wall/proc/get_dismantle_sound()
 	return 'sound/items/Welder.ogg'
 
-/turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
+/turf/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
 
 	playsound(src, get_dismantle_sound(), 100, 1)
 	if(!no_product)
@@ -241,7 +241,7 @@ var/global/list/wall_fullblend_objects = list(
 	clear_plants()
 	. = ChangeTurf(floor_type || get_base_turf_by_area(src))
 
-/turf/simulated/wall/explosion_act(severity)
+/turf/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1)
 		dismantle_wall(1,1,1)
@@ -254,19 +254,19 @@ var/global/list/wall_fullblend_objects = list(
 		take_damage(rand(0, 250))
 
 // Wall-rot effect, a nasty fungus that destroys walls.
-/turf/simulated/wall/proc/rot()
+/turf/wall/proc/rot()
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		return
 	var/number_rots = rand(2,3)
 	for(var/i=0, i<number_rots, i++)
 		new/obj/effect/overlay/wallrot(src)
 
-/turf/simulated/wall/proc/can_melt()
+/turf/wall/proc/can_melt()
 	if(material.flags & MAT_FLAG_UNMELTABLE)
 		return 0
 	return 1
 
-/turf/simulated/wall/proc/radiate()
+/turf/wall/proc/radiate()
 	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)
 	if(!total_radiation)
 		return
@@ -274,30 +274,30 @@ var/global/list/wall_fullblend_objects = list(
 	SSradiation.radiate(src, total_radiation)
 	return total_radiation
 
-/turf/simulated/wall/proc/burn(temperature)
+/turf/wall/proc/burn(temperature)
 	if(!QDELETED(src) && istype(material) && material.combustion_effect(src, temperature, 0.7))
-		for(var/turf/simulated/wall/W in range(3,src))
+		for(var/turf/wall/W in range(3,src))
 			if(W != src)
-				addtimer(CALLBACK(W, TYPE_PROC_REF(/turf/simulated/wall, burn), temperature/4), 2)
+				addtimer(CALLBACK(W, TYPE_PROC_REF(/turf/wall, burn), temperature/4), 2)
 		dismantle_wall(TRUE)
 
-/turf/simulated/wall/get_color()
+/turf/wall/get_color()
 	return paint_color
 
-/turf/simulated/wall/set_color(new_color)
+/turf/wall/set_color(new_color)
 	paint_color = new_color
 	update_icon()
 
-/turf/simulated/wall/proc/CheckPenetration(var/base_chance, var/damage)
+/turf/wall/proc/CheckPenetration(var/base_chance, var/damage)
 	return round(damage/material.integrity*180)
 
-/turf/simulated/wall/can_engrave()
+/turf/wall/can_engrave()
 	return (material && material.hardness >= 10 && material.hardness <= 100)
 
-/turf/simulated/wall/is_wall()
+/turf/wall/is_wall()
 	return TRUE
 
-/turf/simulated/wall/on_defilement()
+/turf/wall/on_defilement()
 	var/new_material
 	if(material?.type != /decl/material/solid/stone/cult)
 		new_material = /decl/material/solid/stone/cult
@@ -308,8 +308,8 @@ var/global/list/wall_fullblend_objects = list(
 		..()
 		set_turf_materials(new_material, new_rmaterial)
 
-/turf/simulated/wall/is_defiled()
+/turf/wall/is_defiled()
 	return material?.type == /decl/material/solid/stone/cult || reinf_material?.type == /decl/material/solid/stone/cult/reinforced || ..()
 
-/turf/simulated/wall/handle_universal_decay()
+/turf/wall/handle_universal_decay()
 	handle_melting()

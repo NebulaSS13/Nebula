@@ -1,37 +1,37 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "b" = (
-/turf/simulated/wall/iron,
+/turf/wall/iron,
 /area/template_noop)
 "c" = (
 /obj/structure/door/uranium,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/template_noop)
 "d" = (
-/turf/simulated/wall/uranium,
+/turf/wall/uranium,
 /area/template_noop)
 "e" = (
 /obj/structure/bed/chair/wood,
 /obj/effect/decal/cleanable/cobweb,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/template_noop)
 "f" = (
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/template_noop)
 "g" = (
 /obj/item/trash/candle,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/template_noop)
 "h" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/template_noop)
 "i" = (
 /obj/structure/artifact,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/template_noop)
 "I" = (
 /obj/structure/bed/chair/wood,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/template_noop)
 
 (1,1,1) = {"

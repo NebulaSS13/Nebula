@@ -74,7 +74,7 @@
 	name = "Casino Hangar"
 	landmark_tag = "nav_casino_hangar"
 	base_area = /area/casino/casino_hangar
-	base_turf = /turf/simulated/floor/plating
+	base_turf = /turf/floor/plating
 
 /obj/effect/shuttle_landmark/nav_casino/cutter_transit
 	name = "In transit"

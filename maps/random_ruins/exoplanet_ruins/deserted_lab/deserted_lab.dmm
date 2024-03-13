@@ -3,23 +3,23 @@
 /turf/template_noop,
 /area/template_noop)
 "ab" = (
-/turf/simulated/wall/r_wall/prepainted{
+/turf/wall/r_wall/prepainted{
 	paint_color = "#556769"
 	},
 /area/template_noop)
 "ac" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "ad" = (
 /obj/random/loot,
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/mucus,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "ae" = (
 /obj/random/loot,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "af" = (
 /obj/structure/anomaly_container,
@@ -30,13 +30,13 @@
 /obj/structure/sign/warning/secure_area{
 	pixel_y = 32
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "ah" = (
 /obj/structure/mattress/dirty,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/drip,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "ai" = (
 /obj/machinery/floodlight,
@@ -48,21 +48,21 @@
 	pixel_y = 32
 	},
 /obj/effect/decal/cleanable/spiderling_remains,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "ak" = (
 /obj/structure/artifact,
 /obj/effect/decal/cleanable/cobweb2,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "al" = (
 /obj/random/loot,
 /obj/effect/decal/cleanable/mucus,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "am" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/template_noop)
 "ao" = (
 /obj/random/junk,
@@ -75,7 +75,7 @@
 /area/template_noop)
 "aq" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "ar" = (
 /obj/structure/closet/crate/trashcart,
@@ -90,10 +90,10 @@
 "at" = (
 /obj/random/loot,
 /mob/living/simple_animal/hostile/slug,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "au" = (
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "av" = (
 /obj/structure/table{
@@ -101,58 +101,58 @@
 	},
 /obj/random/contraband,
 /obj/random/masks,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "aw" = (
 /obj/effect/decal/cleanable/mucus,
 /mob/living/simple_animal/hostile/creature,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "ax" = (
 /obj/structure/bed/chair/office/light,
 /obj/structure/emergency_dispenser/east,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "ay" = (
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "az" = (
 /obj/structure/door/wood,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aA" = (
 /obj/structure/sign/painting/monkey_painting{
 	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "aB" = (
 /obj/item/clothing/head/bio_hood/anomaly,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aC" = (
 /obj/random/closet,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aE" = (
 /obj/structure/bookcase/manuals/xenoarchaeology,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aF" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aG" = (
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aH" = (
 /obj/random/trash,
 /obj/random/trash,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aI" = (
 /obj/machinery/door/airlock/vault{
@@ -162,11 +162,11 @@
 	deployed = 1;
 	icon_state = "beartrap1"
 	},
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aJ" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "aK" = (
 /obj/effect/decal/cleanable/spiderling_remains,
@@ -174,14 +174,14 @@
 	name = "plastic table frame"
 	},
 /obj/machinery/reagentgrinder,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aL" = (
 /obj/structure/rack,
 /obj/random/firstaid,
 /obj/random/advdevice,
 /obj/random/advdevice,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "aM" = (
 /obj/effect/decal/cleanable/vomit,
@@ -189,33 +189,33 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = 32
 	},
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aN" = (
 /obj/effect/decal/cleanable/mucus,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "aO" = (
 /obj/machinery/door/airlock/vault{
 	name = "Door";
 	welded = null
 	},
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aP" = (
 /obj/machinery/door/airlock/external/bolted,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aQ" = (
 /obj/effect/decal/cleanable/cobweb2,
 /obj/structure/closet/cabinet,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aR" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -32
 	},
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aS" = (
 /obj/random/junk,
@@ -226,43 +226,43 @@
 /obj/machinery/door/airlock/vault{
 	name = "Door"
 	},
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aU" = (
 /obj/random/junk,
 /obj/structure/bed/chair/office/light,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aV" = (
 /obj/item/harpoon,
 /obj/abstract/landmark/corpse/scientist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "aW" = (
 /obj/item/beartrap,
 /obj/structure/sign/warning/anomalous_materials{
 	pixel_x = 32
 	},
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "aX" = (
 /obj/random/trash,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aY" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/purple,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "aZ" = (
 /obj/structure/railing/mapped,
 /obj/machinery/replicator,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "ba" = (
 /obj/random/snack,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "bb" = (
 /obj/structure/rack,
@@ -270,27 +270,27 @@
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/random/toolbox,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "bc" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/mime,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "bd" = (
 /obj/effect/decal/cleanable/blood/drip,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "be" = (
 /obj/effect/decal/cleanable/mucus,
-/turf/simulated/floor/carpet/blue2,
+/turf/floor/carpet/blue2,
 /area/template_noop)
 "bf" = (
 /obj/random/trash,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/mucus,
 /mob/living/simple_animal/hostile/creature,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "bg" = (
 /obj/random/trash,
@@ -298,7 +298,7 @@
 	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/blood/drip,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/template_noop)
 "za" = (
 /obj/abstract/landmark/clear,

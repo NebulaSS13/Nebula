@@ -111,7 +111,7 @@
 			if (!S.use(1))
 				return
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless)
+			ChangeTurf(/turf/floor/airless)
 			qdel(L)
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")

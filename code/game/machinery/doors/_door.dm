@@ -532,10 +532,10 @@
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 
-		if( istype(T, /turf/simulated/wall))
+		if( istype(T, /turf/wall))
 			success = 1
 			if(propagate)
-				for(var/turf/simulated/wall/W in RANGE_TURFS(T, 1))
+				for(var/turf/wall/W in RANGE_TURFS(T, 1))
 					W.wall_connections = null
 					W.other_connections = null
 					W.queue_icon_update()
