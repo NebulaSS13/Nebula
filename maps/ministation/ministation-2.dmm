@@ -2920,7 +2920,7 @@
 /area/ministation/science)
 "mK" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/science)
 "mN" = (
 /obj/machinery/door/airlock/glass/science{

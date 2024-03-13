@@ -103,10 +103,10 @@
 
 /datum/random_map/city/get_appropriate_path(var/value)
 	if(value == ROAD_VALUE && prob(99))
-		return /turf/floor/natural/concrete/reinforced/road
+		return /turf/floor/concrete/reinforced/road
 
 /datum/random_map/city/get_additional_spawns(var/value, var/turf/floor/T)
-	if(istype(T, /turf/floor/natural/concrete/reinforced/road))
+	if(istype(T, /turf/floor/concrete/reinforced/road))
 		if(prob(1))
 			new/obj/structure/rubble/house(T)
 		if(prob(5))
@@ -126,7 +126,7 @@
 //Generic ruin
 /datum/random_map/maze/concrete
 	wall_type =  /turf/wall/concrete
-	floor_type = /turf/floor/natural/concrete/reinforced
+	floor_type = /turf/floor/concrete/reinforced
 	preserve_map = 0
 
 /datum/random_map/maze/concrete/get_appropriate_path(var/value)
@@ -134,7 +134,7 @@
 		if(prob(80))
 			return /turf/wall/concrete
 		else
-			return /turf/floor/natural/concrete/reinforced/damaged
+			return /turf/floor/concrete/reinforced/damaged
 	return ..()
 
 /datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/floor/T)

@@ -22189,11 +22189,11 @@
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aVa" = (
 /obj/structure/flora/bush/ppflowers,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aVb" = (
 /obj/structure/flora/bush/brflowers,
@@ -22201,7 +22201,7 @@
 	pixel_y = 28
 	},
 /obj/item/chems/glass/bucket,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aVc" = (
 /obj/structure/bookcase{
@@ -22265,7 +22265,7 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aVl" = (
 /obj/machinery/light,
@@ -22846,18 +22846,18 @@
 /area/exodus/storage/tech)
 "aWC" = (
 /obj/structure/flora/bush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aWD" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aWE" = (
 /obj/structure/flora/bush/sparsegrass,
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aWF" = (
 /obj/machinery/door/firedoor,
@@ -23522,7 +23522,7 @@
 /area/exodus/storage/tech)
 "aYh" = (
 /obj/structure/flora/bush/brflowers,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aYi" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -24207,7 +24207,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "aZz" = (
 /turf/wall/prepainted,
@@ -25151,7 +25151,7 @@
 /area/exodus/hallway/secondary/entry/aft)
 "bbC" = (
 /obj/structure/flora/bush/fernybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "bbD" = (
 /obj/structure/cable/green{
@@ -25749,7 +25749,7 @@
 	c_tag = "Hydroponics Pasture South";
 	dir = 8
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "bcQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -25860,7 +25860,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "bcZ" = (
 /obj/structure/cable/green{
@@ -51857,7 +51857,7 @@
 "cdD" = (
 /obj/structure/flora/grass/brown,
 /obj/structure/closet/crate/hydroponics/beekeeping,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/exodus/hydroponics/garden)
 "cdE" = (
 /obj/structure/sign/warning/secure_area{

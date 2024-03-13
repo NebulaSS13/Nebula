@@ -38,7 +38,11 @@ var/global/list/flooring_cache = list()
 		icon_state = flooring_override
 
 	// Apply edges, corners, and inner corners.
-	var/has_border = 0
+	var/has_border        = 0
+	var/has_edges         = (flooring.flags & TURF_HAS_EDGES)
+	var/has_inner_corners = (flooring.flags & TURF_HAS_INNER_CORNERS)
+	var/has_corners       = (flooring.flags & TURF_HAS_CORNERS)
+
 	//Check the cardinal turfs
 	for(var/step_dir in global.cardinal)
 		var/turf/floor/T = get_step(src, step_dir)
@@ -47,23 +51,23 @@ var/global/list/flooring_cache = list()
 		if (!is_linked)
 			has_border |= step_dir
 			//Now, if we don't, then lets add a border
-			if(check_state_in_icon("[flooring.icon_base]_edges", flooring.icon))
-				add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir, (flooring.flags & TURF_HAS_EDGES)))
+			if(has_edges)
+				add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir, has_edges))
 	var/has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
 	if(flooring.can_paint && LAZYLEN(decals))
 		add_overlay(decals.Copy())
 	//We can only have inner corners if we're smoothed with something
-	if (has_smooth && flooring.flags & TURF_HAS_INNER_CORNERS)
+	if (has_smooth && has_inner_corners)
 		for(var/direction in global.cornerdirs)
 			if((has_smooth & direction) == direction)
-				if(!flooring.symmetric_test_link(src, get_step(src, direction)) && check_state_in_icon("[flooring.icon_base]_corners", flooring.icon))
+				if(!flooring.symmetric_test_link(src, get_step(src, direction)))
 					add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction))
 	//Next up, outer corners
-	if (has_border && flooring.flags & TURF_HAS_CORNERS)
+	if (has_border && has_corners)
 		for(var/direction in global.cornerdirs)
 			if((has_border & direction) == direction)
-				if(!flooring.symmetric_test_link(src, get_step(src, direction)) && check_state_in_icon("[flooring.icon_base]_edges", flooring.icon))
-					add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES)))
+				if(!flooring.symmetric_test_link(src, get_step(src, direction)))
+					add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction, has_edges))
 
 /turf/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0, var/external = FALSE)
 	if(!flooring_cache[cache_key])

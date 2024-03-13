@@ -18,6 +18,7 @@
 
 /turf/floor/natural/snow
 	name = "snow"
+	desc = "Let it snow, let it snow, let it snow..."
 	icon = 'icons/turf/exterior/snow.dmi'
 	icon_edge_layer = EXT_EDGE_SNOW
 	footstep_type = /decl/footsteps/snow
@@ -28,8 +29,13 @@
 /turf/floor/natural/snow/get_base_movement_delay(travel_dir, mob/mover)
 	. = ..()
 	if(mover)
-		var/decl/flooring/snow = GET_DECL(/decl/flooring/snow)
-		. += snow.get_movement_delay(travel_dir, mover)
+		var/obj/item/clothing/shoes/shoes = mover.get_equipped_item(slot_shoes_str)
+		if(shoes)
+			. += shoes.snow_slowdown_mod
+		var/decl/species/my_species = mover.get_species()
+		if(my_species)
+			. += my_species.snow_slowdown_mod
+		. = max(., 0)
 
 /turf/floor/natural/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	handle_melting()

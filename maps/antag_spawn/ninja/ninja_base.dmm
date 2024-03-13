@@ -1,9 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ac" = (
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "snowwhite"
-	},
+/turf/unsimulated/floor/snow,
 /area/map_template/ninja_dojo/dojo)
 "ad" = (
 /turf/unsimulated/floor{
@@ -18,10 +15,7 @@
 /area/map_template/ninja_dojo/dojo)
 "af" = (
 /obj/effect/floor_decal/asteroid,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "snowwhite"
-	},
+/turf/unsimulated/floor/snow,
 /area/map_template/ninja_dojo/dojo)
 "ag" = (
 /obj/structure/flora/tree/dead,
@@ -37,10 +31,7 @@
 /area/map_template/ninja_dojo/dojo)
 "ai" = (
 /obj/structure/flora/tree/dead,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "snowwhite"
-	},
+/turf/unsimulated/floor/snow,
 /area/map_template/ninja_dojo/dojo)
 "aj" = (
 /turf/wall/wood,
@@ -218,10 +209,7 @@
 /area/map_template/ninja_dojo/dojo)
 "aH" = (
 /obj/structure/flora/tree/pine,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "snowwhite"
-	},
+/turf/unsimulated/floor/snow,
 /area/map_template/ninja_dojo/dojo)
 "aI" = (
 /obj/structure/iv_drip,
@@ -509,17 +497,11 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bn" = (
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "snowplating"
-	},
+/turf/unsimulated/floor/snow_plating,
 /area/map_template/ninja_dojo/dojo)
 "bo" = (
 /obj/effect/floor_decal/snow,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "snowplating"
-	},
+/turf/unsimulated/floor/snow_plating,
 /area/map_template/ninja_dojo/dojo)
 "bp" = (
 /obj/item/radio/intercom/ninja{
@@ -687,10 +669,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bJ" = (
 /obj/effect/floor_decal/snow,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "ice"
-	},
+/turf/unsimulated/floor/ice,
 /area/map_template/ninja_dojo/dojo)
 "bK" = (
 /obj/machinery/door/morgue{
@@ -712,10 +691,7 @@
 "bM" = (
 /obj/effect/floor_decal/snow,
 /obj/structure/aliumizer,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/snow.dmi';
-	icon_state = "ice"
-	},
+/turf/unsimulated/floor/ice,
 /area/map_template/ninja_dojo/dojo)
 "bN" = (
 /obj/abstract/landmark{

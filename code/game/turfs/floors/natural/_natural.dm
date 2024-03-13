@@ -1,14 +1,17 @@
 /turf/floor/natural
+
 	name = "ground"
 	icon = 'icons/turf/exterior/barren.dmi'
+	desc = "Bare, barren sand."
 	icon_state = "0"
 	footstep_type = /decl/footsteps/asteroid
 	open_turf_type = /turf/open
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
+
 	base_name = "ground"
 	base_desc = "Bare, barren sand."
 	base_icon = 'icons/turf/exterior/barren.dmi'
-	base_icon_state = 0
+	base_icon_state = "0"
 	base_color = null
 
 	var/dirt_color = "#7c5e42"
@@ -88,13 +91,13 @@
 
 	return ..()
 
-/turf/floor/natural/set_flooring(var/decl/flooring/newflooring)
-	return
-
 /turf/floor/natural/on_reagent_change()
 	. = ..()
-	if(reagent_type && height < 0 && reagents && reagents.total_volume < abs(height))
+	if(!QDELETED(src) && reagent_type && height < 0 && !QDELETED(reagents) && reagents.total_volume < abs(height))
 		add_to_reagents(abs(height) - reagents.total_volume)
+
+/turf/floor/natural/set_flooring(var/decl/flooring/newflooring)
+	return
 
 /turf/floor/natural/is_plating()
 	return !density

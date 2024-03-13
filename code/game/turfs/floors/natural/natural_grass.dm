@@ -6,7 +6,6 @@
 	icon_edge_layer = EXT_EDGE_GRASS
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
-	icon_has_corners = TRUE
 	material = /decl/material/solid/organic/plantmatter/grass
 
 /turf/floor/natural/grass/wild
@@ -17,7 +16,6 @@
 	footstep_type = /decl/footsteps/grass
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
-	icon_has_corners = TRUE
 
 /turf/floor/natural/grass/wild/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..() || "mask_grass"
