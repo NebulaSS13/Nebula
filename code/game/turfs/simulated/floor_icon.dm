@@ -1,6 +1,6 @@
 var/global/list/flooring_cache = list()
 
-/turf/simulated/floor/on_update_icon(var/update_neighbors)
+/turf/floor/on_update_icon(var/update_neighbors)
 
 	. = ..()
 	cut_overlays()
@@ -28,7 +28,7 @@ var/global/list/flooring_cache = list()
 		var/has_border = 0
 		//Check the cardinal turfs
 		for(var/step_dir in global.cardinal)
-			var/turf/simulated/floor/T = get_step(src, step_dir)
+			var/turf/floor/T = get_step(src, step_dir)
 			var/is_linked = flooring.symmetric_test_link(src, T)
 
 			//Alright we've figured out whether or not we smooth with this turf
@@ -73,11 +73,11 @@ var/global/list/flooring_cache = list()
 			add_overlay(get_damage_overlay("burned[burnt]"))
 
 	if(update_neighbors)
-		for(var/turf/simulated/floor/F in orange(src, 1))
+		for(var/turf/floor/F in orange(src, 1))
 			F.queue_ao(FALSE)
 			F.queue_icon_update()
 
-/turf/simulated/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0, var/external = FALSE)
+/turf/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0, var/external = FALSE)
 	if(!flooring_cache[cache_key])
 		var/image/I = image(icon = flooring.icon, icon_state = icon_base, dir = icon_dir)
 
@@ -120,8 +120,8 @@ var/global/list/flooring_cache = list()
 				is_linked = TRUE
 
 		//If we get here then its a normal floor
-		else if (istype(opponent, /turf/simulated/floor))
-			var/turf/simulated/floor/floor_opponent = opponent
+		else if (istype(opponent, /turf/floor))
+			var/turf/floor/floor_opponent = opponent
 			//If the floor is the same as us,then we're linked,
 			if (istype(src, floor_opponent.flooring))
 				is_linked = TRUE

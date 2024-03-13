@@ -3,6 +3,8 @@
 	ignition_point = T0C+500 // Based on loose ignition temperature of plastic
 	accelerant_value = 0.1
 	burn_product = /decl/material/gas/carbon_monoxide
+	melting_point = null
+
 /* TODO: burn products for solids
 	bakes_into_at_temperature = T0C+500
 	bakes_into_material = /decl/material/solid/carbon
@@ -74,7 +76,6 @@
 	brute_armor = 1
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
-	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
 	stack_origin_tech = @'{"materials":1}'
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
@@ -109,7 +110,6 @@
 	wall_flags              = PAINT_PAINTABLE | PAINT_STRIPABLE | WALL_HAS_EDGES
 	brute_armor             = 0.5
 	ignition_point          = T0C + 232 //"the temperature at which book-paper catches fire, and burns." close enough
-	melting_point           = T0C + 232
 	conductive              = FALSE
 	value                   = 0.25
 	default_solid_form      = /obj/item/stack/material/bolt
@@ -127,7 +127,6 @@
 	stack_origin_tech = @'{"materials":2}'
 	door_icon_base = "wood"
 	ignition_point = T0C+232
-	melting_point = T0C+300
 	flags = MAT_FLAG_PADDING
 	brute_armor = 1
 	conductive = 0
@@ -214,7 +213,7 @@
 	color = "#9d2300"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+232
-	melting_point = T0C+300
+	melting_point = T0C+300 // assuming synthetic carpet (plastic)
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
@@ -234,7 +233,6 @@
 	color = COLOR_GREEN_GRAY
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
-	melting_point = T0C+300
 	conductive = 1
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -255,7 +253,6 @@
 	color = COLOR_DARK_RED
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
-	melting_point = T0C+300
 	conductive = 1
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -277,7 +274,6 @@
 	color = "#9e8c72"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
-	melting_point = T0C+300
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -403,7 +399,6 @@
 	uid = "solid_bone"
 	color = "#f0edc7"
 	ignition_point = T0C+1100
-	melting_point = T0C+1800
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -451,7 +446,6 @@
 	stack_origin_tech = @'{"materials":2}'
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
-	melting_point = T0C+300
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -471,7 +465,7 @@
 	uid = "solid_synthleather"
 	color = "#1f1f20"
 	ignition_point = T0C+150
-	melting_point = T0C+100
+	melting_point = T0C+100 // Assuming synthetic leather.
 
 /decl/material/solid/organic/leather/lizard
 	name = "scaled hide"

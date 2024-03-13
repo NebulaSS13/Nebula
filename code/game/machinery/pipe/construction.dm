@@ -42,7 +42,7 @@ Buildable meters
 	constructed_path = P.base_type || P.type
 
 //called when a turf is attacked with a pipe item
-/obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
+/obj/item/pipe/afterattack(turf/floor/target, mob/user, proximity)
 	if(!proximity) return
 	if(istype(target))
 		user.try_unequip(src, target)

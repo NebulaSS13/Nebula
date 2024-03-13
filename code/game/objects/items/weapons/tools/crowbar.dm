@@ -22,7 +22,7 @@
 	//List of things crowbars made from brittle materials have high chance of breaking on.
 	var/static/list/break_chances = list(
 		/obj/machinery/door = 80,
-		/turf/simulated/floor/tiled = 25,
+		/turf/floor/tiled = 25,
 		/mob/living = 15,
 		/obj/machinery = 15
 		)

@@ -75,7 +75,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 
 /obj/abstract/landmark/clear/LateInitialize()
 	. = ..()
-	var/turf/simulated/wall/simulated_wall = get_turf(src)
+	var/turf/wall/simulated_wall = get_turf(src)
 	if(istype(simulated_wall))
 		simulated_wall.dismantle_wall(TRUE, TRUE, TRUE)
 	else if(istype(simulated_wall, /turf/exterior/wall))
@@ -188,8 +188,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	return TRUE
 
 /obj/abstract/landmark/proc_caller/floor_burner
-	type_to_find = /turf/simulated/floor
-	proc_to_call = /turf/simulated/floor/proc/burn_tile
+	type_to_find = /turf/floor
+	proc_to_call = /turf/floor/proc/burn_tile
 	arguments_to_pass = null
 
 /// Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.

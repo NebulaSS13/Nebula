@@ -20,7 +20,6 @@
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	brute_armor = 1
 	weight = MAT_VALUE_NORMAL
-	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
 	stack_origin_tech = @'{"materials":1,"biotech":1}'
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'

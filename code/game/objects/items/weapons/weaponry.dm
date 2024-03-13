@@ -53,15 +53,15 @@
 			new /obj/effect/temporary(get_turf(altar),'icons/effects/effects.dmi',"purple_electricity_constant", 10)
 			altar.visible_message("<span class='notice'>\The [altar] groans in protest as reality settles around \the [src].</span>")
 
-	if(istype(A, /turf/simulated/wall/cult))
-		var/turf/simulated/wall/cult/W = A
+	if(istype(A, /turf/wall/cult))
+		var/turf/wall/cult/W = A
 		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
-		W.ChangeTurf(/turf/simulated/wall)
+		W.ChangeTurf(/turf/wall)
 
-	if(istype(A, /turf/simulated/floor/cult))
-		var/turf/simulated/floor/cult/F = A
+	if(istype(A, /turf/floor/cult))
+		var/turf/floor/cult/F = A
 		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
-		F.ChangeTurf(/turf/simulated/floor)
+		F.ChangeTurf(/turf/floor)
 
 
 /obj/item/energy_net

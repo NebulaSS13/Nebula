@@ -30,7 +30,7 @@
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 0
-	summon_type = list(/turf/simulated/floor/cult)
+	summon_type = list(/turf/floor/cult)
 
 	hud_state = "const_floor"
 
@@ -43,7 +43,7 @@
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 0
-	summon_type = list(/turf/simulated/wall/cult)
+	summon_type = list(/turf/wall/cult)
 
 	hud_state = "const_wall"
 
@@ -58,7 +58,7 @@
 	range = 0
 	cast_delay = 50
 
-	summon_type = list(/turf/simulated/wall/r_wall)
+	summon_type = list(/turf/wall/r_wall)
 
 /spell/aoe_turf/conjure/soulstone
 	name = "Summon Soulstone"

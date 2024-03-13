@@ -65,7 +65,7 @@ var/global/default_mobloc = null
 
 	if(isnull(mobloc))
 		if(!default_mobloc)
-			for(var/turf/simulated/floor/tiled/T in world)
+			for(var/turf/floor/tiled/T in world)
 				if(!T.zone?.air)
 					continue
 				var/pressure = T.zone.air.return_pressure()

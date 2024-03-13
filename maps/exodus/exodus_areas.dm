@@ -951,7 +951,7 @@
 /area/turbolift/security_maintenance
 	name = "Maintenance - Below Security"
 	lift_announce_str = "Arriving at the maintenance level, below the Security department."
-	base_turf = /turf/simulated/floor/plating
+	base_turf = /turf/floor/plating
 
 /area/turbolift/research_station
 	name = "Station - By Research"
@@ -960,7 +960,7 @@
 /area/turbolift/research_maintenance
 	name = "Maintenance - Below Research"
 	lift_announce_str = "Arriving at the maintenance level, below the R&D department."
-	base_turf = /turf/simulated/floor/plating
+	base_turf = /turf/floor/plating
 
 /area/turbolift/engineering_station
 	name = "Station - By Engineering"
@@ -969,7 +969,7 @@
 /area/turbolift/engineering_maintenance
 	name = "Maintenance - Below Engineering"
 	lift_announce_str = "Arriving at the maintenance level, below the Engineering department."
-	base_turf = /turf/simulated/floor/plating
+	base_turf = /turf/floor/plating
 
 /area/turbolift/cargo_station
 	name = "Station - By Cargo"
@@ -978,7 +978,7 @@
 /area/turbolift/cargo_maintenance
 	name = "Maintenance - Below Cargo"
 	lift_announce_str = "Arriving at the maintenance level, below the Cargo department."
-	base_turf = /turf/simulated/floor/plating
+	base_turf = /turf/floor/plating
 
 /////////////////
 //ELEVATORS END//

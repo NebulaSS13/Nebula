@@ -1,7 +1,7 @@
 // This type of flooring cannot be altered short of being destroyed and rebuilt.
 // Use this to bypass the flooring system entirely ie. event areas, holodeck, etc.
 
-/turf/simulated/floor/fixed
+/turf/floor/fixed
 	name = "floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
@@ -9,33 +9,33 @@
 	footstep_type = /decl/footsteps/plating
 	is_outside = OUTSIDE_AREA
 
-/turf/simulated/floor/fixed/attackby(var/obj/item/C, var/mob/user)
+/turf/floor/fixed/attackby(var/obj/item/C, var/mob/user)
 	if(istype(C, /obj/item/stack) && !IS_COIL(C))
 		return
 	return ..()
 
-/turf/simulated/floor/fixed/on_update_icon()
+/turf/floor/fixed/on_update_icon()
 	queue_ao(FALSE)
 
-/turf/simulated/floor/fixed/is_plating()
+/turf/floor/fixed/is_plating()
 	return 0
 
-/turf/simulated/floor/fixed/set_flooring()
+/turf/floor/fixed/set_flooring()
 	return
 
-/turf/simulated/floor/fixed/alium
+/turf/floor/fixed/alium
 	name = "alien plating"
 	desc = "This obviously wasn't made for your feet."
 	icon = 'icons/turf/flooring/alium.dmi'
 	icon_state = "jaggy"
 
-/turf/simulated/floor/fixed/alium/attackby(var/obj/item/C, var/mob/user)
+/turf/floor/fixed/alium/attackby(var/obj/item/C, var/mob/user)
 	if(IS_CROWBAR(C))
 		to_chat(user, "<span class='notice'>There aren't any openings big enough to pry it away...</span>")
 		return TRUE
 	return ..()
 
-/turf/simulated/floor/fixed/alium/Initialize()
+/turf/floor/fixed/alium/Initialize()
 	. = ..()
 	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
 	if(!A)
@@ -44,11 +44,11 @@
 	var/style = A.hardness % 2 ? "curvy" : "jaggy"
 	icon_state = "[style][(x*y) % 7]"
 
-/turf/simulated/floor/fixed/alium/airless
+/turf/floor/fixed/alium/airless
 	initial_gas = null
 	temperature = TCMB
 
-/turf/simulated/floor/fixed/alium/explosion_act(severity)
+/turf/floor/fixed/alium/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
 	if(prob(A.explosion_resistance))

@@ -1,4 +1,4 @@
-/turf/simulated/floor
+/turf/floor
 	name = "plating"
 	icon = 'icons/turf/flooring/plating.dmi'
 	icon_state = "plating"
@@ -29,19 +29,19 @@
 	var/decl/flooring/flooring
 	var/lava = 0
 
-/turf/simulated/floor/can_climb_from_below(var/mob/climber)
+/turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
 
-/turf/simulated/floor/is_plating()
+/turf/floor/is_plating()
 	return !flooring
 
-/turf/simulated/floor/get_base_movement_delay(var/travel_dir, var/mob/mover)
+/turf/floor/get_base_movement_delay(var/travel_dir, var/mob/mover)
 	return flooring?.get_movement_delay(travel_dir, mover) || ..()
 
-/turf/simulated/floor/protects_atom(var/atom/A)
+/turf/floor/protects_atom(var/atom/A)
 	return (A.level <= LEVEL_BELOW_PLATING && !is_plating()) || ..()
 
-/turf/simulated/floor/Initialize(var/ml, var/floortype)
+/turf/floor/Initialize(var/ml, var/floortype)
 	. = ..(ml)
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
@@ -50,7 +50,7 @@
 	if(!ml)
 		RemoveLattice()
 
-/turf/simulated/floor/proc/set_flooring(var/decl/flooring/newflooring)
+/turf/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	if(flooring == newflooring)
 		return
 	make_plating(defer_icon_update = 1)
@@ -74,7 +74,7 @@
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
-/turf/simulated/floor/proc/make_plating(var/place_product, var/defer_icon_update)
+/turf/floor/proc/make_plating(var/place_product, var/defer_icon_update)
 
 	LAZYCLEARLIST(decals)
 	for(var/obj/effect/decal/writing/W in src)
@@ -111,33 +111,33 @@
 	if(!defer_icon_update)
 		update_icon(1)
 
-/turf/simulated/floor/can_engrave()
+/turf/floor/can_engrave()
 	return (!flooring || flooring.can_engrave)
 
-/turf/simulated/floor/shuttle_ceiling
+/turf/floor/shuttle_ceiling
 	name = "hull plating"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "reinforced_light"
 	initial_gas = null
 
-/turf/simulated/floor/shuttle_ceiling/air
+/turf/floor/shuttle_ceiling/air
 	initial_gas = list(/decl/material/gas/oxygen = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
-/turf/simulated/floor/is_floor()
+/turf/floor/is_floor()
 	return TRUE
 
-/turf/simulated/floor/on_defilement()
+/turf/floor/on_defilement()
 	if(flooring?.type != /decl/flooring/reinforced/cult)
 		..()
 		set_flooring(GET_DECL(/decl/flooring/reinforced/cult))
 
-/turf/simulated/floor/is_defiled()
+/turf/floor/is_defiled()
 	return flooring?.type == /decl/flooring/reinforced/cult || ..()
 
-/turf/simulated/floor/get_physical_height()
+/turf/floor/get_physical_height()
 	return flooring?.height || 0
 
-/turf/simulated/floor/handle_universal_decay()
+/turf/floor/handle_universal_decay()
 	if(!burnt)
 		burn_tile()
 	else if(flooring)

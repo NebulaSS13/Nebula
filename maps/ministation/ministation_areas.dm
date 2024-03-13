@@ -329,7 +329,7 @@
 
 /area/turbolift/l1
 	name = "Station Level 1"
-	base_turf = /turf/simulated/floor
+	base_turf = /turf/floor
 
 /area/turbolift/l2
 	name = "Station Level 2"

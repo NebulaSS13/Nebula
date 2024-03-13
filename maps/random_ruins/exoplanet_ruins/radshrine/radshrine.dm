@@ -1,4 +1,4 @@
-/turf/simulated/wall/uranium
+/turf/wall/uranium
 	icon_state = "metal"
 	color = COLOR_GREEN
 	material = /decl/material/solid/metal/uranium

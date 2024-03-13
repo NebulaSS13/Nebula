@@ -34,7 +34,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	self-explanatory but the various object types may have their own documentation.
 
 	PATHS THAT USE DATUMS
-		turf/simulated/wall
+		turf/wall
 		obj/item
 		obj/structure/barricade
 		obj/structure/table
@@ -126,6 +126,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/melting_point = 1800
 	/// K, point that material will become a gas.
 	var/boiling_point = 3000
+	/// Set automatically if null based on ignition, boiling and melting point
+	var/temperature_damage_threshold
 	/// kJ/kg, enthalpy of vaporization
 	var/latent_heat = 7000
 	/// kg/mol
@@ -330,28 +332,34 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Null/clear a bunch of physical vars as this material is fake.
 	if(holographic)
-		shard_type             = SHARD_NONE
-		conductive             = 0
-		hidden_from_codex      = TRUE
-		value                  = 0
-		exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-		exoplanet_rarity_gas   = MAT_RARITY_NOWHERE
-		dissolves_into         = null
-		dissolves_in           = MAT_SOLVENT_IMMUNE
-		solvent_power          = MAT_SOLVENT_NONE
-		heating_products       = null
-		chilling_products      = null
-		heating_point          = null
-		chilling_point         = null
-		solvent_melt_dose      = 0
-		solvent_max_damage     = 0
-		slipperiness           = 0
-		ignition_point         = null
-		melting_point          = null
-		boiling_point          = null
-		accelerant_value       = FUEL_VALUE_NONE
-		burn_product           = null
-		vapor_products         = null
+		shard_type                   = SHARD_NONE
+		conductive                   = 0
+		hidden_from_codex            = TRUE
+		value                        = 0
+		exoplanet_rarity_plant       = MAT_RARITY_NOWHERE
+		exoplanet_rarity_gas         = MAT_RARITY_NOWHERE
+		dissolves_into               = null
+		dissolves_in                 = MAT_SOLVENT_IMMUNE
+		solvent_power                = MAT_SOLVENT_NONE
+		heating_products             = null
+		chilling_products            = null
+		heating_point                = null
+		chilling_point               = null
+		solvent_melt_dose            = 0
+		solvent_max_damage           = 0
+		slipperiness                 = 0
+		bakes_into_at_temperature    = null
+		ignition_point               = null
+		melting_point                = null
+		boiling_point                = null
+		temperature_damage_threshold = INFINITY
+		accelerant_value             = FUEL_VALUE_NONE
+		burn_product                 = null
+		vapor_products               = null
+	else if(isnull(temperature_damage_threshold))
+		for(var/value in list(ignition_point, melting_point, boiling_point, heating_point, bakes_into_at_temperature))
+			if(!isnull(value) && (isnull(temperature_damage_threshold) || temperature_damage_threshold > value))
+				temperature_damage_threshold = value
 
 	if(!shard_icon)
 		shard_icon = shard_type
@@ -642,7 +650,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 
 	if(istype(T) && T.simulated)
-		var/turf/simulated/wall/W = T
+		var/turf/wall/W = T
 		if(defoliant)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				W.visible_message(SPAN_NOTICE("\The [E] is completely dissolved by the solution!"))

@@ -26,29 +26,29 @@
 /turf/exterior/wall/random,
 /area/mine/unexplored)
 "ai" = (
-/turf/simulated/wall/brick/sandstone,
+/turf/wall/brick/sandstone,
 /area/mine/unexplored)
 "aj" = (
-/turf/simulated/floor/airless/stone,
+/turf/floor/airless/stone,
 /area/mine/explored)
 "ak" = (
-/turf/simulated/floor/fixed/alium/airless,
+/turf/floor/fixed/alium/airless,
 /area/mine/explored)
 "al" = (
 /obj/structure/monolith,
-/turf/simulated/floor/fixed/alium/airless,
+/turf/floor/fixed/alium/airless,
 /area/mine/explored)
 "am" = (
-/turf/simulated/wall/alium,
+/turf/wall/alium,
 /area/mine/unexplored)
 "an" = (
 /turf/exterior/wall,
 /area/mine/unexplored)
 "ao" = (
-/turf/simulated/wall/alium,
+/turf/wall/alium,
 /area/mine/explored)
 "ap" = (
-/turf/simulated/wall/brick/sandstone,
+/turf/wall/brick/sandstone,
 /area/mine/explored)
 "aq" = (
 /obj/effect/floor_decal/spline/fancy/wood,
@@ -96,25 +96,25 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
-/turf/simulated/floor/airless/stone,
+/turf/floor/airless/stone,
 /area/mine/explored)
 "aM" = (
 /obj/item/stool/stone,
-/turf/simulated/floor/fixed/alium/airless,
+/turf/floor/fixed/alium/airless,
 /area/mine/explored)
 "aN" = (
 /obj/structure/door/sandstone{
 	desc = "It opens and closes. It's absolutely dominated by a huge engraving of some kind of bird.";
 	name = "engraved door"
 	},
-/turf/simulated/floor/airless/stone,
+/turf/floor/airless/stone,
 /area/mine/explored)
 "aP" = (
 /turf/exterior/sand/water,
 /area/mine/explored)
 "aQ" = (
 /obj/structure/door/sandstone,
-/turf/simulated/floor/airless/stone,
+/turf/floor/airless/stone,
 /area/mine/explored)
 "aR" = (
 /obj/effect/shuttle_landmark/orb/nav3,
@@ -125,7 +125,7 @@
 /area/mine/explored)
 "aT" = (
 /obj/effect/overmap/visitable/sector/orb,
-/turf/simulated/wall/alium,
+/turf/wall/alium,
 /area/mine/explored)
 "aU" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -339,7 +339,7 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
-/turf/simulated/wall/brick/sandstone,
+/turf/wall/brick/sandstone,
 /area/mine/explored)
 "Rr" = (
 /obj/effect/floor_decal/spline/fancy/wood,
@@ -348,11 +348,11 @@
 "SY" = (
 /obj/structure/fountain,
 /mob/living/simple_animal/hostile/retaliate/parrot/space,
-/turf/simulated/floor/airless/stone,
+/turf/floor/airless/stone,
 /area/mine/explored)
 "TP" = (
 /obj/structure/totem,
-/turf/simulated/floor/fixed/alium/airless,
+/turf/floor/fixed/alium/airless,
 /area/mine/explored)
 
 (1,1,1) = {"

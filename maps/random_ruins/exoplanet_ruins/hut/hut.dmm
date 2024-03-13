@@ -3,41 +3,41 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/simulated/wall/silver,
+/turf/wall/silver,
 /area/template_noop)
 "d" = (
 /obj/random/trash,
 /obj/structure/inflatable/door,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "e" = (
 /obj/machinery/artifact_scanpad,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "f" = (
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "g" = (
 /obj/structure/curtain/black,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/template_noop)
 "h" = (
 /obj/structure/inflatable/door,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "i" = (
 /obj/structure/filing_cabinet,
 /obj/effect/decal/cleanable/cobweb,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "j" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/effect/decal/cleanable/cobweb2,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "k" = (
 /obj/structure/bed/chair/wheelchair,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "l" = (
 /obj/structure/table/marble,
@@ -45,13 +45,13 @@
 /obj/structure/sign/painting/monkey_painting{
 	pixel_y = -32
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "m" = (
 /obj/structure/table/marble,
 /obj/item/paper_bin,
 /obj/random/voidhelmet,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "n" = (
 /obj/structure/gravemarker/random,
@@ -59,27 +59,27 @@
 /area/template_noop)
 "o" = (
 /obj/structure/bookcase/manuals/xenoarchaeology,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "p" = (
 /obj/random/junk,
 /obj/random/loot,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "q" = (
 /obj/item/pen/multi,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "r" = (
 /mob/living/bot/medbot,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "t" = (
 /obj/structure/bed,
 /obj/item/bedsheet/rainbow,
 /obj/random/drinkbottle,
 /obj/random/trash,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/template_noop)
 "u" = (
 /obj/structure/rack,
@@ -88,17 +88,17 @@
 /obj/random/loot,
 /obj/random/hat,
 /obj/random/voidsuit,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "G" = (
 /obj/structure/sign/department/science_1{
 	pixel_y = 32
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/template_noop)
 "K" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/template_noop)
 
 (1,1,1) = {"

@@ -510,7 +510,7 @@ var/global/list/diversion_junctions = list()
 		id_tag = "ds[sequential_id(/obj/item/disposal_switch_construct)]"
 
 /obj/item/disposal_switch_construct/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || user.incapacitated() || !id_tag)
+	if(!proximity || !istype(A, /turf/floor) || user.incapacitated() || !id_tag)
 		return
 	var/area/area = get_area(A)
 	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))

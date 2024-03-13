@@ -56,14 +56,14 @@
 /turf/unsimulated/wall,
 /area/test_area/general)
 "n" = (
-/turf/simulated/floor,
+/turf/floor,
 /area/test_area/general)
 "o" = (
 /turf/space,
 /area/test_area/general)
 "p" = (
 /obj/abstract/landmark/test/safe_turf,
-/turf/simulated/floor,
+/turf/floor,
 /area/test_area/general)
 "q" = (
 /obj/abstract/landmark/test/space_turf,

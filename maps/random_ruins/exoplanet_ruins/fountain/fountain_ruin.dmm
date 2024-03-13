@@ -3,10 +3,10 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/simulated/wall/brick/sandstonediamond,
+/turf/wall/brick/sandstonediamond,
 /area/template_noop)
 "c" = (
-/turf/simulated/floor/fixed/alium,
+/turf/floor/fixed/alium,
 /area/template_noop)
 "e" = (
 /obj/structure/fountain,

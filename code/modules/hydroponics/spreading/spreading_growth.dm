@@ -18,7 +18,7 @@
 
 /obj/effect/vine/proc/get_neighbors()
 	. = list()
-	for(var/turf/simulated/floor in get_cardinal_neighbors())
+	for(var/turf/floor in get_cardinal_neighbors())
 		if(get_dist(parent, floor) > spread_distance)
 			continue
 		var/blocked = 0

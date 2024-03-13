@@ -42,10 +42,10 @@
 	icon_state = "map_vent_out"
 	external_pressure_bound = 0.25 ATM
 
-/turf/simulated/floor/tiled/lowpressure
+/turf/floor/tiled/lowpressure
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD)
 
-/turf/simulated/floor/tiled/white/lowpressure
+/turf/floor/tiled/white/lowpressure
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD)
 
 /obj/item/disk/astrodata
