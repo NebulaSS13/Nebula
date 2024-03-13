@@ -9,7 +9,7 @@
 				if(prob(33))
 					var/decl/material/mat = GET_DECL(/decl/material/solid/metal/steel)
 					mat.place_shards(src)
-				ReplaceWithLattice()
+				physically_destroyed()
 			if(2)
 				ChangeTurf(get_base_turf_by_area(src))
 			if(3)
@@ -27,7 +27,7 @@
 
 /turf/floor/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	var/temp_destroy = get_damage_temperature()
-	if(!burnt && prob(5))
+	if(!is_floor_burned() && prob(5))
 		burn_tile(exposed_temperature)
 	else if(temp_destroy && exposed_temperature >= (temp_destroy + 100) && prob(1) && !is_plating())
 		make_plating() //destroy the tile, exposing plating

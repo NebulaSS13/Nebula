@@ -220,7 +220,7 @@
 		to_chat(user, SPAN_WARNING("You need flooring to paint on."))
 		return FALSE
 
-	if(!F.flooring.can_paint || F.broken || F.burnt)
+	if(!F.flooring.can_paint || F.is_floor_damaged())
 		to_chat(user, SPAN_WARNING("\The [src] cannot paint \the [F.name]."))
 		return FALSE
 

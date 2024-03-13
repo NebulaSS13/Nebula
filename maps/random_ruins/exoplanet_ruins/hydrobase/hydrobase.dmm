@@ -1813,7 +1813,7 @@
 /obj/structure/cable{
 	dir = 4
 	},
-/turf/exterior/concrete,
+/turf/floor/natural/concrete,
 /area/template_noop)
 "eM" = (
 /obj/effect/floor_decal/industrial/warning{

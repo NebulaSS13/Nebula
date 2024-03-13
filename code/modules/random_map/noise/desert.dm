@@ -14,9 +14,9 @@
 	if(isnull(val)) val = 0
 	switch(val)
 		if(0 to 1)
-			return /turf/exterior/sand/water
+			return /turf/floor/natural/sand/water
 		else
-			return /turf/exterior/sand
+			return /turf/floor/natural/sand
 
 /datum/random_map/noise/desert/get_additional_spawns(var/value, var/turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))

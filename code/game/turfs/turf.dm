@@ -324,7 +324,7 @@
 	return
 
 /turf/proc/is_plating()
-	return 0
+	return FALSE
 
 /turf/proc/protects_atom(var/atom/A)
 	return FALSE
@@ -582,7 +582,7 @@
 /turf/get_vis_contents_to_add()
 	var/air_graphic = get_air_graphic()
 	if(length(air_graphic))
-		LAZYADD(., air_graphic)
+		LAZYDISTINCTADD(., air_graphic)
 	if(weather)
 		LAZYADD(., weather)
 	if(flooded)
@@ -766,3 +766,6 @@
 
 /turf/proc/handle_universal_decay()
 	return
+
+/turf/proc/get_soil_color()
+	return null

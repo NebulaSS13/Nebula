@@ -130,7 +130,7 @@
 		if(emagged)
 			return 1
 		else
-			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
+			return (amount && (T.is_floor_damaged() || (improvefloors && !T.flooring)))
 
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
 
@@ -156,19 +156,19 @@
 		else
 			visible_message("<span class='danger'>[src] begins to tear through the floor!</span>")
 			if(do_after(src, 150, F)) // Extra time because this can and will kill.
-				F.ReplaceWithLattice()
+				F.physically_destroyed()
 				addTiles(1)
 		target = null
 		update_icon()
 	else if(istype(A, /turf/floor))
 		var/turf/floor/F = A
-		if(F.broken || F.burnt)
+		if(F.is_floor_damaged())
 			busy = 1
 			update_icon()
 			visible_message("<span class='notice'>[src] begins to remove the broken floor.</span>")
 			anchored = TRUE
 			if(do_after(src, 50, F))
-				if(F.broken || F.burnt)
+				if(F.is_floor_damaged())
 					F.make_plating()
 			anchored = FALSE
 			target = null

@@ -2,6 +2,7 @@
 	name = "plating"
 	icon = 'icons/turf/flooring/plating.dmi'
 	icon_state = "plating"
+	layer = PLATING_LAYER
 	permit_ao = TRUE
 	thermal_conductivity = 0.040
 	heat_capacity = 10000
@@ -15,19 +16,20 @@
 
 	// Damage to flooring.
 	// These are icon state suffixes, NOT booleans!
-	var/broken
-	var/burnt
+	var/_floor_broken
+	var/_floor_burned
+
 	// Plating data.
 	var/base_name = "plating"
 	var/base_desc = "The naked hull."
 	var/base_icon = 'icons/turf/flooring/plating.dmi'
 	var/base_icon_state = "plating"
 	var/base_color = COLOR_WHITE
+
 	// Flooring data.
 	var/flooring_override
 	var/initial_flooring
 	var/decl/flooring/flooring
-	var/lava = 0
 
 /turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
@@ -47,8 +49,6 @@
 		floortype = initial_flooring
 	if(floortype)
 		set_flooring(GET_DECL(floortype))
-	if(!ml)
-		RemoveLattice()
 
 /turf/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	if(flooring == newflooring)
@@ -103,8 +103,8 @@
 		flooring = null
 
 	set_light(0)
-	broken = null
-	burnt = null
+	set_floor_broken(skip_update = TRUE)
+	set_floor_burned()
 	flooring_override = null
 	levelupdate()
 
@@ -124,7 +124,7 @@
 	initial_gas = list(/decl/material/gas/oxygen = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 /turf/floor/is_floor()
-	return TRUE
+	return !density && !is_open()
 
 /turf/floor/on_defilement()
 	if(flooring?.type != /decl/flooring/reinforced/cult)
@@ -138,12 +138,12 @@
 	return flooring?.height || 0
 
 /turf/floor/handle_universal_decay()
-	if(!burnt)
+	if(!is_floor_burned())
 		burn_tile()
 	else if(flooring)
 		break_tile_to_plating()
 	else
-		ReplaceWithLattice()
+		physically_destroyed()
 
 /turf/floor/get_footstep_sound(var/mob/caller)
 	. = ..() || get_footstep_for_mob(flooring?.footstep_type || /decl/footsteps/blank, caller)

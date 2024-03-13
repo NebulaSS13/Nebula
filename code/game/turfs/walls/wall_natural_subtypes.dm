@@ -35,15 +35,15 @@
 
 /turf/wall/natural/ice
 	strata_override = /decl/strata/permafrost
-	floor_type = /turf/exterior/ice
+	floor_type = /turf/floor/natural/ice
 
 /turf/wall/natural/random/ice
 	strata_override = /decl/strata/permafrost
-	floor_type = /turf/exterior/ice
+	floor_type = /turf/floor/natural/ice
 
 /turf/wall/natural/random/high_chance/ice
 	strata_override = /decl/strata/permafrost
-	floor_type = /turf/exterior/ice
+	floor_type = /turf/floor/natural/ice
 
 /turf/wall/natural/dirt
 	material = /decl/material/solid/soil

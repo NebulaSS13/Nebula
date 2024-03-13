@@ -1,4 +1,4 @@
-/turf/exterior/set_turf_materials(decl/material/new_material, decl/material/new_reinf_material, force, decl/material/new_girder_material, skip_update)
+/turf/floor/natural/set_turf_materials(decl/material/new_material, decl/material/new_reinf_material, force, decl/material/new_girder_material, skip_update)
 
 	if(ispath(new_material))
 		new_material = GET_DECL(new_material)
@@ -22,5 +22,5 @@
 		if(!skip_update)
 			queue_icon_update()
 
-/turf/exterior/get_material()
+/turf/floor/natural/get_material()
 	return material

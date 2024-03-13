@@ -1,7 +1,8 @@
-/turf/exterior
+
+/turf/floor/natural
 	var/static/HEIGHT_OFFSET_RANGE = (world.icon_size - 16)
 
-/turf/exterior/proc/can_draw_edge_over(turf/exterior/turf_to_check)
+/turf/floor/natural/proc/can_draw_edge_over(turf/exterior/turf_to_check)
 	if(istype(turf_to_check))
 		var/my_height    = get_physical_height()
 		var/their_height = turf_to_check.get_physical_height()
@@ -12,8 +13,8 @@
 		return icon_edge_layer > turf_to_check.icon_edge_layer
 	return TRUE
 
-/turf/exterior/on_update_icon()
-	. = ..() // Recalc AO and flooding overlay.
+/turf/floor/natural/on_update_icon()
+
 	cut_overlays()
 	if(LAZYLEN(decals))
 		add_overlay(decals)
@@ -54,7 +55,7 @@
 		var/neighbors = 0
 		for(var/direction in global.cardinal)
 
-			var/turf/exterior/turf_to_check = get_step_resolving_mimic(src, direction)
+			var/turf/floor/natural/turf_to_check = get_step_resolving_mimic(src, direction)
 			if(!isturf(turf_to_check) || turf_to_check.density)
 				continue
 

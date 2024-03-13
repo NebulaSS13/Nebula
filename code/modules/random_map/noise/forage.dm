@@ -103,33 +103,33 @@
 	var/place_type
 
 	if(T.is_outside())
-		if(istype(T, /turf/exterior/rock))
+		if(istype(T, /turf/floor/natural/rock))
 			if(prob(15)) // Static as current map has limited amount of rock turfs
 				var/rock_type = pick(forage["rocks"])
 				new rock_type(T)
 				return
-		else if(istype(T, /turf/exterior/wildgrass))
+		else if(istype(T, /turf/floor/natural/wildgrass))
 			if(prob(parse_value * 0.35))
 				var/tree_type = pick(trees)
 				new tree_type(T)
 				return
 			place_prob = parse_value * 0.3
 			place_type = pick(forage["grass"])
-		else if(istype(T, /turf/exterior/mud/water))
+		else if(istype(T, /turf/floor/natural/mud/water))
 			place_prob = parse_value * 0.3
 			place_type = pick(forage["shallows"])
 	else
-		if(istype(T, /turf/exterior/mud) && !istype(T, /turf/exterior/mud/water/deep))
+		if(istype(T, /turf/floor/natural/mud) && !istype(T, /turf/floor/natural/mud/water/deep))
 			if(prob(parse_value * 0.35))
 				var/tree_type = pick(cave_trees)
 				new tree_type(T)
 				return
 			place_prob = parse_value * 0.6
 			place_type = pick(forage["caves"])
-		else if(istype(T, /turf/exterior/dirt))
+		else if(istype(T, /turf/floor/natural/dirt))
 			place_prob = parse_value * 0.3
 			place_type = pick(forage["caves"])
-		else if(istype(T, /turf/exterior/mud/water))
+		else if(istype(T, /turf/floor/natural/mud/water))
 			place_prob = parse_value * 0.3
 			place_type = pick(forage["cave_shallows"])
 
