@@ -35,7 +35,7 @@
 			nearestTargetDist = artifact[2]
 
 		for(var/A in SSxenoarch.digsite_spawning_turfs)
-			var/turf/exterior/wall/T = A
+			var/turf/wall/natural/T = A
 			if(T.density && T.finds && T.finds.len)
 				if(T.z == cur_turf.z)
 					var/cur_dist = get_dist(cur_turf, T) * 2

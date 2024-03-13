@@ -1,0 +1,1 @@
+/turf/exterior/wall/@SUBTYPES : /turf/wall/natural/@SUBTYPES{@OLD}

@@ -10,7 +10,7 @@
 	if(new_data)
 		set_data(new_data)
 		return
-	var/turf/exterior/wall/container = holder
+	var/turf/wall/natural/container = holder
 	if(istype(container))
 		geodata = new(container)
 
@@ -21,7 +21,7 @@
 	var/source_mineral = /decl/material/gas/chlorine
 	var/list/find_presence = list()
 
-/datum/geosample/New(var/turf/exterior/wall/container)
+/datum/geosample/New(var/turf/wall/natural/container)
 	if(!istype(container))
 		return
 
@@ -38,7 +38,7 @@
 	for(var/carrier in find_presence)
 		find_presence[carrier] = find_presence[carrier] / total_presence
 
-/datum/geosample/proc/UpdateNearbyArtifactInfo(var/turf/exterior/wall/container)
+/datum/geosample/proc/UpdateNearbyArtifactInfo(var/turf/wall/natural/container)
 	if(!istype(container))
 		return
 

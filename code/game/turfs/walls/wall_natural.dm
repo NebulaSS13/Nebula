@@ -1,0 +1,157 @@
+/turf/wall/natural
+	icon_state         = "natural"
+	desc               = "A rough natural wall."
+	turf_flags         = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
+	girder_material    = null
+	floor_type         = /turf/exterior/barren
+	construction_stage = -1
+	var/strata_override
+	var/ramp_slope_direction
+	var/image/ore_overlay
+	var/static/list/exterior_wall_shine_cache = list()
+
+/turf/wall/natural/get_paint_examine_message()
+	return SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
+
+/turf/wall/natural/get_wall_icon()
+	return 'icons/turf/walls/natural.dmi'
+
+/turf/wall/natural/Initialize(var/ml, var/materialtype, var/rmaterialtype)
+	if(!SSxenoarch.initialized)
+		SSxenoarch.possible_spawn_walls += src
+	. = ..()
+	set_extension(src, /datum/extension/geological_data)
+	// Init ramp state if needed.
+	if(ramp_slope_direction)
+		make_ramp(null, ramp_slope_direction, TRUE)
+
+/turf/wall/natural/LateInitialize(var/ml)
+	..()
+	spread_deposit()
+	if(!ramp_slope_direction && floor_type && HasAbove(z))
+		var/turf/T = GetAbove(src)
+		if(!istype(T, floor_type) && T.is_open())
+			T.ChangeTurf(floor_type, keep_air = TRUE)
+	//Set the rock color
+	if(!paint_color)
+		var/rcolor = SSmaterials.get_rock_color(src)
+		if(rcolor)
+			paint_color = rcolor
+			queue_icon_update()
+
+/turf/wall/natural/Destroy()
+	SSxenoarch.digsite_spawning_turfs -= src
+	if(!ramp_slope_direction)
+		update_neighboring_ramps(destroying_self = TRUE)
+	. = ..()
+
+/turf/wall/natural/attackby(obj/item/W, mob/user, click_params)
+
+	if(user.check_dexterity(DEXTERITY_COMPLEX_TOOLS) && !ramp_slope_direction)
+
+		if(istype(W, /obj/item/depth_scanner))
+			var/obj/item/depth_scanner/C = W
+			C.scan_atom(user, src)
+			return TRUE
+
+		if (istype(W, /obj/item/measuring_tape))
+			var/obj/item/measuring_tape/P = W
+			user.visible_message(SPAN_NOTICE("\The [user] extends [P] towards [src]."),SPAN_NOTICE("You extend [P] towards [src]."))
+			if(do_after(user,10, src))
+				to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [excavation_level]cm."))
+			return TRUE
+
+		if(istype(W, /obj/item/tool/xeno))
+			return handle_xenoarch_tool_interaction(W, user)
+
+	. = ..()
+
+// Drill out natural walls.
+/turf/wall/natural/handle_wall_tool_interactions(obj/item/W, mob/user)
+	if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
+		dismantle_wall()
+		return TRUE
+	return FALSE
+
+/turf/wall/natural/update_strings()
+	if(reinf_material)
+		SetName("[reinf_material.solid_name] deposit")
+		desc = "A natural cliff face composed of bare [material.solid_name] and a deposit of [reinf_material.solid_name]."
+	else
+		SetName("natural [material.solid_name] wall")
+		desc = "A natural cliff face composed of bare [material.solid_name]."
+
+/turf/wall/natural/update_material(var/update_neighbors)
+	if(reinf_material?.ore_icon_overlay)
+		ore_overlay = image('icons/turf/mining_decals.dmi', "[reinf_material.ore_icon_overlay]")
+		ore_overlay.appearance_flags = RESET_COLOR
+		var/matrix/M
+		if(prob(50))
+			M = M || matrix()
+			M.Scale(-1,1)
+		if(prob(75))
+			M = M || matrix()
+			M.Turn(pick(90, 180, 270))
+		ore_overlay.color = reinf_material.color
+		ore_overlay.layer = DECAL_LAYER
+		if(M)
+			ore_overlay.transform = M
+	. = ..()
+
+/turf/wall/natural/drop_dismantled_products(devastated, explode)
+	// TODO: drop composite material
+	drop_ore()
+
+// TODO: rock crumble SFX
+/turf/wall/natural/get_dismantle_sound()
+	return 'sound/items/Welder.ogg'
+
+/turf/wall/natural/dismantle_wall(devastated, explode, no_product, ramp_update = TRUE)
+	destroy_artifacts(null, INFINITY)
+	if(ramp_update && !ramp_slope_direction)
+		ramp_slope_direction = NORTH // Temporary so we don't let any neighboring ramps use us as supports.
+		update_neighboring_ramps()
+		ramp_slope_direction = null
+	return ..(devastated, explode, no_product)
+
+/turf/wall/natural/Bumped(var/atom/movable/AM)
+	. = ..()
+	if(!. && !ramp_slope_direction && ismob(AM))
+		var/mob/M = AM
+		var/obj/item/held = M.get_active_hand()
+		if(IS_PICK(held))
+			attackby(held, M)
+			return TRUE
+
+/turf/wall/natural/proc/drop_ore()
+	if(reinf_material?.ore_result_amount)
+		pass_geodata_to(new /obj/item/stack/material/ore(src, reinf_material.ore_result_amount, reinf_material.type))
+		reinf_material = null
+		ore_overlay = null
+		update_material(FALSE)
+	if(prob(30) && !ramp_slope_direction && material)
+		pass_geodata_to(new /obj/item/stack/material/ore(src, material.ore_result_amount, material.type))
+
+/turf/wall/natural/proc/pass_geodata_to(obj/O)
+	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)
+	if(ours.geodata)
+		ours.geodata.UpdateNearbyArtifactInfo(src)
+		set_extension(O, /datum/extension/geological_data)
+		var/datum/extension/geological_data/newdata = get_extension(O, /datum/extension/geological_data)
+		if(newdata)
+			newdata.set_data(ours.geodata.get_copy())
+
+/turf/wall/natural/proc/spread_deposit()
+	if(!istype(reinf_material) || reinf_material.ore_spread_chance <= 0)
+		return
+	for(var/trydir in global.cardinal)
+		if(!prob(reinf_material.ore_spread_chance))
+			continue
+		var/turf/wall/natural/target_turf = get_step_resolving_mimic(src, trydir)
+		if(!istype(target_turf) || !isnull(target_turf.reinf_material))
+			continue
+		target_turf.set_turf_materials(target_turf.material, reinf_material)
+		target_turf.spread_deposit()
+
+/turf/wall/natural/get_default_material()
+	. = GET_DECL(SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone)

@@ -9,7 +9,7 @@
 /turf/space,
 /area/space)
 "af" = (
-/turf/exterior/wall/random/ministation,
+/turf/wall/natural/random/ministation,
 /area/space)
 "aF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{

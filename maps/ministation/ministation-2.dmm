@@ -16,7 +16,7 @@
 /turf/wall,
 /area/ministation/science)
 "af" = (
-/turf/exterior/wall/random/ministation,
+/turf/wall/natural/random/ministation,
 /area/space)
 "ah" = (
 /turf/wall,

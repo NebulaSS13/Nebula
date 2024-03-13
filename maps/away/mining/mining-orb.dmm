@@ -20,10 +20,10 @@
 /turf/exterior/barren,
 /area/mine/unexplored)
 "ag" = (
-/turf/exterior/wall/random/high_chance,
+/turf/wall/natural/random/high_chance,
 /area/mine/unexplored)
 "ah" = (
-/turf/exterior/wall/random,
+/turf/wall/natural/random,
 /area/mine/unexplored)
 "ai" = (
 /turf/wall/brick/sandstone,
@@ -42,7 +42,7 @@
 /turf/wall/alium,
 /area/mine/unexplored)
 "an" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/mine/unexplored)
 "ao" = (
 /turf/wall/alium,
@@ -121,7 +121,7 @@
 /turf/space,
 /area/space)
 "aS" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/mine/explored)
 "aT" = (
 /obj/effect/overmap/visitable/sector/orb,

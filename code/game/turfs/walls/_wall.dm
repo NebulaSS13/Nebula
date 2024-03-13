@@ -60,7 +60,7 @@ var/global/list/wall_fullblend_objects = list(
 	icon_state = "blank"
 	color = null
 
-	set_turf_materials((materialtype || material || get_default_material()), (rmaterialtype || reinf_material), TRUE, girder_material)
+	set_turf_materials((materialtype || material || get_default_material()), (rmaterialtype || reinf_material), TRUE, girder_material, skip_update = TRUE)
 
 	. = INITIALIZE_HINT_LATELOAD
 	set_extension(src, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
@@ -168,7 +168,7 @@ var/global/list/wall_fullblend_objects = list(
 		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
 
 /turf/wall/proc/get_paint_examine_message()
-	. = SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
+	return SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
 
 //Damage
 /turf/wall/handle_melting(list/meltable_materials)
@@ -218,19 +218,22 @@ var/global/list/wall_fullblend_objects = list(
 /turf/wall/proc/get_dismantle_sound()
 	return 'sound/items/Welder.ogg'
 
-/turf/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
+/turf/wall/proc/drop_dismantled_products(devastated, explode)
+	var/list/obj/structure/girder/placed_girders
+	if(girder_material)
+		placed_girders = girder_material.place_dismantled_girder(src, reinf_material)
+	for(var/obj/structure/girder/placed_girder in placed_girders)
+		placed_girder.anchored = TRUE
+		placed_girder.prepped_for_fakewall = can_open
+		placed_girder.update_icon()
+	if(material)
+		material.place_dismantled_product(src, devastated, amount = rand(3, 5), drop_type = get_dismantle_stack_type())
+
+/turf/wall/proc/dismantle_wall(devastated, explode, no_product)
 
 	playsound(src, get_dismantle_sound(), 100, 1)
 	if(!no_product)
-		var/list/obj/structure/girder/placed_girders
-		if(girder_material)
-			placed_girders = girder_material.place_dismantled_girder(src, reinf_material)
-		for(var/obj/structure/girder/placed_girder in placed_girders)
-			placed_girder.anchored = TRUE
-			placed_girder.prepped_for_fakewall = can_open
-			placed_girder.update_icon()
-		if(material)
-			material.place_dismantled_product(src, devastated, amount = rand(3, 5), drop_type = get_dismantle_stack_type())
+		drop_dismantled_products(devastated, explode)
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
@@ -244,12 +247,12 @@ var/global/list/wall_fullblend_objects = list(
 /turf/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1)
-		dismantle_wall(1,1,1)
+		dismantle_wall(TRUE, TRUE, TRUE)
 	else if(severity == 2)
 		if(prob(75))
 			take_damage(rand(150, 250))
 		else
-			dismantle_wall(1,1)
+			dismantle_wall(TRUE, TRUE)
 	else if(severity == 3)
 		take_damage(rand(0, 250))
 
@@ -313,3 +316,6 @@ var/global/list/wall_fullblend_objects = list(
 
 /turf/wall/handle_universal_decay()
 	handle_melting()
+
+/turf/wall/proc/get_hit_sound()
+	return 'sound/effects/metalhit.ogg'

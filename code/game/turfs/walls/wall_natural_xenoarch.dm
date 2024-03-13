@@ -1,4 +1,4 @@
-/turf/exterior/wall
+/turf/wall/natural
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
 	var/list/finds
@@ -7,7 +7,7 @@
 	var/archaeo_overlay
 	var/excav_overlay
 
-/turf/exterior/wall/proc/place_artifact_debris(var/severity = 0)
+/turf/wall/natural/proc/place_artifact_debris(var/severity = 0)
 	for(var/j in 1 to rand(1, 3 + max(min(severity, 1), 0) * 2))
 		switch(rand(1,7))
 			if(1)
@@ -25,7 +25,7 @@
 			if(7)
 				SSmaterials.create_object(/decl/material/solid/metal/uranium, src, rand(5, 25))
 
-/turf/exterior/wall/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
+/turf/wall/natural/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
 	//many finds are ancient and thus very delicate - luckily there is a specialised energy suspension field which protects them when they're being extracted
 	if(prob(F.prob_delicate))
 		var/obj/effect/suspension_field/S = locate() in src
@@ -41,7 +41,7 @@
 		pass_geodata_to(new /obj/item/strangerock(src, F.find_type))
 	finds.Remove(F)
 
-/turf/exterior/wall/proc/handle_xenoarch_tool_interaction(var/obj/item/tool/xeno/P, var/mob/user)
+/turf/wall/natural/proc/handle_xenoarch_tool_interaction(var/obj/item/tool/xeno/P, var/mob/user)
 	. = TRUE
 	if(last_excavation + 2 SECONDS > world.time)//prevents message spam
 		return
@@ -109,7 +109,7 @@
 	if(amount_rocks > 0)
 		pass_geodata_to(new /obj/item/stack/material/ore(src, amount_rocks, material?.type))
 
-/turf/exterior/wall/proc/destroy_artifacts(var/obj/item/W, var/newDepth)
+/turf/wall/natural/proc/destroy_artifacts(var/obj/item/W, var/newDepth)
 	if(!length(finds))
 		return
 	var/datum/find/F = finds[1]

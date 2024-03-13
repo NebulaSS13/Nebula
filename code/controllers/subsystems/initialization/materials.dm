@@ -133,7 +133,7 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_cocktails_by_primary_ingredient(var/primary)
 	. = cocktails_by_primary_ingredient[primary]
 
-/datum/controller/subsystem/materials/proc/get_strata_type(var/turf/exterior/wall/location)
+/datum/controller/subsystem/materials/proc/get_strata_type(var/turf/wall/natural/location)
 	if(!istype(location))
 		return
 
@@ -156,7 +156,7 @@ SUBSYSTEM_DEF(materials)
 		mat_name = lowertext(mat_name)
 		return materials_by_name[mat_name]
 
-/datum/controller/subsystem/materials/proc/get_strata_material_type(var/turf/exterior/location)
+/datum/controller/subsystem/materials/proc/get_strata_material_type(var/turf/wall/natural/location)
 	if(!istype(location))
 		return
 
@@ -177,13 +177,13 @@ SUBSYSTEM_DEF(materials)
 	return mat?.create_object(target, amount, object_type, reinf_type)
 
 ///Returns the rock color for a given exterior wall
-/datum/controller/subsystem/materials/proc/get_rock_color(var/turf/exterior/wall/location)
+/datum/controller/subsystem/materials/proc/get_rock_color(var/turf/wall/location)
 	if(!istype(location))
 		return
 	//#TODO: allow specifying rock color per z-level maybe?
-
-	if(istype(location.owner))
-		return location.owner.get_rock_color()
+	var/datum/planetoid_data/owner = LAZYACCESS(SSmapping.planetoid_data_by_z, location.z)
+	if(istype(owner))
+		return owner.get_rock_color()
 
 // There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
 // This could eventually be removed if we used decls for damage types.

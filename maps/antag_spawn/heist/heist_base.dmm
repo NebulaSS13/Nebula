@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/space)
 "ac" = (
 /turf/unsimulated/mineral,
@@ -171,7 +171,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aC" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/map_template/syndicate_mothership/raider_base)
 "aD" = (
 /obj/machinery/door/airlock/hatch,

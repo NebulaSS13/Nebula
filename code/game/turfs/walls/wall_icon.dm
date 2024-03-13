@@ -16,10 +16,12 @@
 	SSradiation.resistance_cache.Remove(src)
 	if(update_neighbors)
 		var/iterate_turfs = list()
-		for(var/turf/wall/W in RANGE_TURFS(src, 1))
-			W.wall_connections = null
-			W.other_connections = null
-			iterate_turfs += W
+		for(var/direction in global.alldirs)
+			var/turf/wall/W = get_step_resolving_mimic(src, direction)
+			if(istype(W))
+				W.wall_connections = null
+				W.other_connections = null
+				iterate_turfs += W
 		for(var/turf/wall/W as anything in iterate_turfs)
 			W.update_icon()
 	else
@@ -49,56 +51,52 @@
 /turf/wall/proc/apply_reinf_overlay()
 	. = istype(reinf_material)
 
-/turf/wall/on_update_icon()
-	. = ..()
-	cut_overlays()
-
-	if(!istype(material))
+/turf/wall/proc/refresh_connections()
+	if(wall_connections && other_connections)
 		return
+	var/list/wall_dirs =  list()
+	var/list/other_dirs = list()
+	for(var/stepdir in global.alldirs)
+		var/turf/T = get_step(src, stepdir)
+		if(!T)
+			continue
+		if(istype(T, /turf/wall))
+			switch(can_join_with(T))
+				if(0)
+					continue
+				if(1)
+					wall_dirs += get_dir(src, T)
+				if(2)
+					wall_dirs += get_dir(src, T)
+					other_dirs += get_dir(src, T)
 
-	if(!wall_connections || !other_connections)
-		var/list/wall_dirs =  list()
-		var/list/other_dirs = list()
-		for(var/stepdir in global.alldirs)
-			var/turf/T = get_step(src, stepdir)
-			if(!T)
-				continue
-			if(istype(T, /turf/wall))
-				switch(can_join_with(T))
-					if(0)
-						continue
-					if(1)
-						wall_dirs += get_dir(src, T)
-					if(2)
-						wall_dirs += get_dir(src, T)
-						other_dirs += get_dir(src, T)
-
-			if(handle_structure_blending)
-				var/success = 0
-				for(var/O in T)
-					for(var/blend_type in global.wall_blend_objects)
-						if(istype(O, blend_type))
-							success = TRUE
-							break
-					for(var/nb_type in global.wall_noblend_objects)
-						if(istype(O, nb_type))
-							success = FALSE
-							break
-					if(success)
-						wall_dirs += get_dir(src, T)
-						if(get_dir(src, T) in global.cardinal)
-							var/blendable = FALSE
-							for(var/fb_type in global.wall_fullblend_objects)
-								if(istype(O, fb_type))
-									blendable = TRUE
-									break
-							if(!blendable)
-								other_dirs += get_dir(src, T)
+		if(handle_structure_blending)
+			var/success = 0
+			for(var/O in T)
+				for(var/blend_type in global.wall_blend_objects)
+					if(istype(O, blend_type))
+						success = TRUE
 						break
+				for(var/nb_type in global.wall_noblend_objects)
+					if(istype(O, nb_type))
+						success = FALSE
+						break
+				if(success)
+					wall_dirs += get_dir(src, T)
+					if(get_dir(src, T) in global.cardinal)
+						var/blendable = FALSE
+						for(var/fb_type in global.wall_fullblend_objects)
+							if(istype(O, fb_type))
+								blendable = TRUE
+								break
+						if(!blendable)
+							other_dirs += get_dir(src, T)
+					break
+	wall_connections = dirs_to_corner_states(wall_dirs)
+	other_connections = dirs_to_corner_states(other_dirs)
 
-		wall_connections = dirs_to_corner_states(wall_dirs)
-		other_connections = dirs_to_corner_states(other_dirs)
 
+/turf/wall/proc/update_wall_icon()
 	var/material_icon_base = get_wall_icon()
 	var/base_color = material.color
 
@@ -136,6 +134,16 @@
 			else
 				I = image(_get_wall_subicon(reinf_material.icon_reinf, wall_connections, reinf_color))
 			add_overlay(I)
+
+/turf/wall/on_update_icon()
+	. = ..()
+	cut_overlays()
+
+	if(!istype(material))
+		return
+
+	refresh_connections()
+	update_wall_icon()
 
 	var/image/texture = material.get_wall_texture()
 	if(texture)
