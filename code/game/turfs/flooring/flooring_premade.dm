@@ -168,7 +168,7 @@
 /turf/floor/cult/is_defiled()
 	return TRUE
 
-/turf/simulated/floor/woven
+/turf/floor/woven
 	name = "floor"
 	icon = 'icons/turf/flooring/woven.dmi'
 	icon_state = "0"

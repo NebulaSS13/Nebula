@@ -369,7 +369,7 @@
 	desc = "A flimsy, woven roofing tile."
 	icon_state = "woven"
 	material = /decl/material/solid/organic/plantmatter/grass/dry
-	replacement_turf_type = /turf/simulated/floor/woven
+	replacement_turf_type = /turf/floor/woven
 
 /obj/item/stack/tile/roof/try_build_turf(var/mob/user, var/turf/target)
 
