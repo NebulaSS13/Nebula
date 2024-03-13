@@ -811,7 +811,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "gp" = (
 /obj/machinery/atmospherics/binary/pump/on{
@@ -1239,7 +1239,7 @@
 	},
 /obj/machinery/light,
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "ix" = (
 /obj/structure/bed/chair/office/light,
@@ -1871,7 +1871,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/structure/flora/bush/fullgrass,
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "mL" = (
 /obj/structure/table,
@@ -3039,7 +3039,7 @@
 /area/ministation/medical)
 "sp" = (
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/w2)
 "sq" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -3660,7 +3660,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "uv" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -5505,7 +5505,7 @@
 /area/ministation/maint/l2centraln)
 "BW" = (
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/w2)
 "Ca" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -6284,7 +6284,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Jz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6359,7 +6359,7 @@
 "Kv" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Kz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6369,7 +6369,7 @@
 	dir = 1
 	},
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "KG" = (
 /obj/structure/table,
@@ -6669,7 +6669,7 @@
 	pixel_y = -63
 	},
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Nh" = (
 /obj/effect/decal/cleanable/dirt,
@@ -7383,7 +7383,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Sq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{

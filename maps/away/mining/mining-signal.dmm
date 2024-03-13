@@ -1596,7 +1596,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/brflowers,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/outpost/abandoned)
 "fs" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1701,7 +1701,7 @@
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fI" = (
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/outpost/abandoned)
 "fJ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1712,7 +1712,7 @@
 	dir = 1
 	},
 /obj/structure/flora/bush/stalkybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/outpost/abandoned)
 "fK" = (
 /obj/effect/decal/cleanable/blood/gibs/down,

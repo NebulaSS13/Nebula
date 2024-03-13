@@ -36,6 +36,6 @@
 	abstract_type         = /decl/stack_recipe/turfs/wall
 	expected_product_type = /turf/wall
 
-/decl/stack_recipe/turfs/path
-	abstract_type         = /decl/stack_recipe/turfs/path
-	expected_product_type = /turf/floor/natural
+/decl/stack_recipe/turfs/floor
+	abstract_type         = /decl/stack_recipe/turfs/floor
+	expected_product_type = /turf/floor

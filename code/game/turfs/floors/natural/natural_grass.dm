@@ -6,7 +6,6 @@
 	icon_edge_layer = EXT_EDGE_GRASS
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
-	icon_has_corners = TRUE
 
 /turf/floor/natural/wildgrass
 	name = "wild grass"
@@ -15,7 +14,6 @@
 	footstep_type = /decl/footsteps/grass
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
-	icon_has_corners = TRUE
 
 /turf/floor/natural/wildgrass/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..() || "mask_grass"
@@ -34,10 +32,10 @@
 /turf/floor/natural/attackby(obj/item/W, mob/user)
 	if(IS_KNIFE(W))
 		if(W.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = "harvesting", success_message = "harvesting"))
-			if(QDELETED(src) || !istype(src, /turf/exterior/wildgrass))
+			if(QDELETED(src) || !istype(src, /turf/floor/natural/wildgrass))
 				return TRUE
 			new /obj/item/stack/material/bundle/grass(src, rand(2,5))
-			ChangeTurf(/turf/exterior/grass)
+			ChangeTurf(/turf/floor/natural/grass)
 		return TRUE
 	return ..()
 

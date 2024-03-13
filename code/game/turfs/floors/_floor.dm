@@ -53,7 +53,7 @@
 /turf/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	if(flooring == newflooring)
 		return
-	make_plating(defer_icon_update = 1)
+	make_plating(defer_icon_update = TRUE)
 	flooring = newflooring
 
 	var/check_z_flags

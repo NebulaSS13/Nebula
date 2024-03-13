@@ -16,7 +16,7 @@
 	if(length(failures))
 		var/fail_msg ="[length(failures)] /decl\s failed validation:"
 		for(var/failed_type in failures)
-			fail_msg += "\n- [failed_type]\n\t- [jointext(failures[failed_type], "\n\t-")]"
+			fail_msg += "\n- [failed_type]\n\t- [jointext(failures[failed_type], "\n\t- ")]"
 		fail(fail_msg)
 	else
 		pass("All /decl/s were validated successfully.")

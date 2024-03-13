@@ -40,7 +40,7 @@
 				if(!flooring)
 					return
 				to_chat(user, "<span class='notice'>You lever off the [flooring.descriptor].</span>")
-				make_plating(1)
+				make_plating(TRUE)
 			else
 				return
 			playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
@@ -53,7 +53,7 @@
 			if(!flooring)
 				return
 			to_chat(user, "<span class='notice'>You unscrew and remove the [flooring.descriptor].</span>")
-			make_plating(1)
+			make_plating(TRUE)
 			playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
 			return TRUE
 		else if(IS_WRENCH(C) && (flooring.flags & TURF_REMOVE_WRENCH))
@@ -62,7 +62,7 @@
 			if(!flooring)
 				return
 			to_chat(user, "<span class='notice'>You unwrench and remove the [flooring.descriptor].</span>")
-			make_plating(1)
+			make_plating(TRUE)
 			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 			return TRUE
 		else if(IS_SHOVEL(C) && (flooring.flags & TURF_REMOVE_SHOVEL))
@@ -71,7 +71,7 @@
 			if(!flooring)
 				return
 			to_chat(user, "<span class='notice'>You shovel off the [flooring.descriptor].</span>")
-			make_plating(1)
+			make_plating(TRUE)
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 			return TRUE
 		else if(IS_COIL(C))

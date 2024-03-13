@@ -1,10 +1,11 @@
 /turf/floor/shuttle
-	name = "floor"
+	name = "shuttle floor"
 	icon = 'icons/turf/flooring/shuttle.dmi'
-	abstract_type = /turf/floor/shuttle
-
-/turf/floor/shuttle/plating
-	icon_state = "plating"
+	desc = "A synthetic floor plate commonly seen in shuttles and other vehicles."
+	base_name = "shuttle floor"
+	base_desc = "A synthetic floor plate commonly seen in shuttles and other vehicles."
+	base_icon = 'icons/turf/flooring/shuttle.dmi'
+	base_icon_state = "plating"
 	initial_flooring = null
 
 /turf/floor/shuttle/blue

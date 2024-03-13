@@ -5,7 +5,6 @@
 	footstep_type = /decl/footsteps/sand
 	icon = 'icons/turf/exterior/sand.dmi'
 	icon_edge_layer = EXT_EDGE_SAND
-	icon_has_corners = TRUE
 	possible_states = 4
 
 /turf/floor/natural/sand/get_diggable_resources()

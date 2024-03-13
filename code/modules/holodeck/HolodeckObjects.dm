@@ -67,7 +67,7 @@
 	name = "lush grass"
 	icon = 'icons/turf/flooring/grass.dmi'
 	icon_state = "grass0"
-	initial_flooring = /decl/flooring/grass
+	initial_flooring = /decl/flooring/fake_grass
 
 /turf/floor/holofloor/snow
 	name = "snow"
@@ -109,6 +109,7 @@
 	name = "coastline"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
+	base_icon = 'icons/misc/beach2.dmi'
 	base_icon_state = "sandwater"
 
 /turf/floor/holofloor/beach/water
@@ -121,16 +122,16 @@
 	base_name = "desert sand"
 	desc = "Uncomfortably gritty for a hologram."
 	base_desc = "Uncomfortably gritty for a hologram."
-	icon_state = "asteroid"
-	base_icon_state = "asteroid"
-	icon = 'icons/turf/flooring/asteroid.dmi'
-	base_icon = 'icons/turf/flooring/asteroid.dmi'
+	icon_state = "0"
+	base_icon_state = "0"
+	icon = 'icons/turf/exterior/barren.dmi'
+	base_icon = 'icons/turf/exterior/barren.dmi'
 	initial_flooring = null
 
 /turf/floor/holofloor/desert/Initialize(var/ml)
 	. = ..()
 	if(prob(10))
-		overlays += "asteroid[rand(0,9)]"
+		LAZYADD(decals, image('icons/turf/flooring/decals.dmi', "asteroid[rand(0,9)]"))
 
 /obj/structure/holostool
 	name = "stool"
