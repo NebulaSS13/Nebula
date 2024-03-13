@@ -8,7 +8,7 @@
 /turf/template_noop,
 /area/template_noop)
 "c" = (
-/turf/simulated/floor/fixed/alium/ruin,
+/turf/floor/fixed/alium/ruin,
 /area/template_noop)
 "d" = (
 /obj/structure/artifact,
@@ -22,7 +22,7 @@
 	dir = 8
 	},
 /obj/structure/window/borosilicate_reinforced,
-/turf/simulated/floor/fixed/alium/ruin,
+/turf/floor/fixed/alium/ruin,
 /area/template_noop)
 "e" = (
 /obj/abstract/landmark/clear,

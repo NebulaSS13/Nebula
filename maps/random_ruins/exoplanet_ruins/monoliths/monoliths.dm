@@ -75,12 +75,12 @@
 	C.set_hallucination(20, 100)
 	return TRUE
 
-/turf/simulated/floor/fixed/alium/ruin
+/turf/floor/fixed/alium/ruin
 	name = "ancient alien plating"
 	desc = "This obviously wasn't made for your feet. Looks pretty old."
 	initial_gas = null
 
-/turf/simulated/floor/fixed/alium/ruin/Initialize()
+/turf/floor/fixed/alium/ruin/Initialize()
 	. = ..()
 	if(prob(10))
 		ChangeTurf(get_base_turf_by_area(src))

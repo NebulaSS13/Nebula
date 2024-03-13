@@ -49,13 +49,13 @@
 	dock_target = "merc_shuttle"
 	current_location = "nav_merc_start"
 	defer_initialisation = TRUE
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling/merc
+	ceiling_type = /turf/floor/shuttle_ceiling/merc
 	warmup_time = 5
 	range = 1
 	fuel_consumption = 7
 	skill_needed = SKILL_BASIC
 
-/turf/simulated/floor/shuttle_ceiling/merc
+/turf/floor/shuttle_ceiling/merc
 	color = COLOR_RED
 
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle

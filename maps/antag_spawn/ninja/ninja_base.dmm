@@ -43,7 +43,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aj" = (
-/turf/simulated/wall/wood,
+/turf/wall/wood,
 /area/map_template/ninja_dojo/dojo)
 "ak" = (
 /obj/structure/table/glass,
@@ -941,7 +941,7 @@
 /area/map_template/ninja_dojo/dojo)
 "ck" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
+/turf/wall/r_titanium,
 /area/map_template/ninja_dojo/start)
 "cl" = (
 /obj/machinery/door/morgue{
@@ -1044,7 +1044,7 @@
 	dir = 1
 	},
 /obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
+/turf/wall/r_titanium,
 /area/map_template/ninja_dojo/start)
 "cy" = (
 /obj/structure/table/steel_reinforced,
@@ -1141,16 +1141,16 @@
 /area/map_template/ninja_dojo/start)
 "cH" = (
 /obj/machinery/computer/teleporter,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/ninja_dojo/start)
 "cI" = (
 /obj/machinery/teleport/station,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/ninja_dojo/start)
 "cJ" = (
 /obj/machinery/teleport/hub,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/ninja_dojo/start)
 "cK" = (
 /obj/machinery/light{
@@ -1408,7 +1408,7 @@
 	id = "ninja_ship"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/ninja_dojo/start)
 "ss" = (
 /turf/unsimulated/wall,

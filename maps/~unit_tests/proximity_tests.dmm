@@ -6,18 +6,18 @@
 /turf/unsimulated/wall,
 /area/test_area/proximity)
 "c" = (
-/turf/simulated/floor,
+/turf/floor,
 /area/test_area/proximity)
 "d" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/test_area/proximity)
 "e" = (
 /obj/abstract/landmark/proximity_spawner,
-/turf/simulated/floor,
+/turf/floor,
 /area/test_area/proximity)
 "f" = (
 /obj/abstract/landmark/proximity_wall,
-/turf/simulated/wall,
+/turf/wall,
 /area/test_area/proximity)
 "Q" = (
 /obj/abstract/level_data_spawner/debug,

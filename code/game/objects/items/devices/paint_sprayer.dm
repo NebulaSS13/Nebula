@@ -99,11 +99,11 @@
 
 	if (color_picker)
 		var/new_color
-		if (istype(A, /turf/simulated/floor))
+		if (istype(A, /turf/floor))
 			new_color = pick_color_from_floor(A, user)
 		else if (istype(A, /obj/machinery/door/airlock))
 			new_color = pick_color_from_airlock(A, user)
-		else if (istype(A, /turf/simulated/wall))
+		else if (istype(A, /turf/wall))
 			new_color = pick_color_from_wall(A, user)
 		else if (istype(A, /obj/structure/wall_frame))
 			new_color = pick_color_from_wall_frame(A, user)
@@ -114,13 +114,13 @@
 		else
 			change_color(new_color, user)
 
-	else if (istype(A, /turf/simulated/wall))
+	else if (istype(A, /turf/wall))
 		. = paint_wall(A, user)
 
 	else if (istype(A, /obj/structure/wall_frame))
 		. = paint_wall_frame(A, user)
 
-	else if (istype(A, /turf/simulated/floor))
+	else if (istype(A, /turf/floor))
 		. = paint_floor(A, user, params)
 
 	else if (istype(A, /obj/machinery/door/airlock))
@@ -143,7 +143,7 @@
 	return .
 
 
-/obj/item/paint_sprayer/proc/paint_wall(var/turf/simulated/wall/W, var/mob/user)
+/obj/item/paint_sprayer/proc/paint_wall(var/turf/wall/W, var/mob/user)
 	if(istype(W) && (!W.material || !W.material.wall_flags))
 		to_chat(user, SPAN_WARNING("You can't paint this wall type."))
 		return
@@ -162,7 +162,7 @@
 		W.stripe_wall(paint_color)
 
 
-/obj/item/paint_sprayer/proc/pick_color_from_wall(var/turf/simulated/wall/W, var/mob/user)
+/obj/item/paint_sprayer/proc/pick_color_from_wall(var/turf/wall/W, var/mob/user)
 	if (!W.material || !W.material.wall_flags)
 		return FALSE
 
@@ -175,7 +175,7 @@
 			return FALSE
 
 
-/obj/item/paint_sprayer/proc/select_wall_region(var/turf/simulated/wall/W, var/mob/user, var/input_text)
+/obj/item/paint_sprayer/proc/select_wall_region(var/turf/wall/W, var/mob/user, var/input_text)
 	var/list/choices = list()
 	if (W.material.wall_flags & PAINT_PAINTABLE)
 		choices |= PAINT_REGION_PAINT
@@ -215,7 +215,7 @@
 	return choice
 
 
-/obj/item/paint_sprayer/proc/paint_floor(var/turf/simulated/floor/F, var/mob/user, var/params)
+/obj/item/paint_sprayer/proc/paint_floor(var/turf/floor/F, var/mob/user, var/params)
 	if(!F.flooring)
 		to_chat(user, SPAN_WARNING("You need flooring to paint on."))
 		return FALSE
@@ -274,7 +274,7 @@
 	return TRUE
 
 
-/obj/item/paint_sprayer/proc/pick_color_from_floor(var/turf/simulated/floor/F, var/mob/user)
+/obj/item/paint_sprayer/proc/pick_color_from_floor(var/turf/floor/F, var/mob/user)
 	if (!F.decals || !F.decals.len)
 		return FALSE
 	var/list/available_colors = list()

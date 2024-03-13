@@ -1,5 +1,5 @@
 //Interactions
-/turf/simulated/wall/proc/toggle_open(var/mob/user)
+/turf/wall/proc/toggle_open(var/mob/user)
 
 	if(can_open == WALL_OPENING)
 		return
@@ -38,7 +38,7 @@
 	can_open = WALL_CAN_OPEN
 	update_icon()
 
-/turf/simulated/wall/proc/update_air()
+/turf/wall/proc/update_air()
 	if(!SSair)
 		return
 
@@ -48,7 +48,7 @@
 			SSair.mark_for_update(turf)
 
 
-/turf/simulated/wall/proc/update_thermal(var/turf/source)
+/turf/wall/proc/update_thermal(var/turf/source)
 	if(istype(source) && source.simulated)
 		if(density && opacity)
 			source.thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
@@ -57,17 +57,17 @@
 
 
 
-/turf/simulated/wall/proc/fail_smash(var/mob/user)
+/turf/wall/proc/fail_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash against \the [src]!</span>")
 	take_damage(rand(25,75))
 
-/turf/simulated/wall/proc/success_smash(var/mob/user)
+/turf/wall/proc/success_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1)
 		dismantle_wall(1)
 
-/turf/simulated/wall/proc/try_touch(var/mob/user, var/rotting)
+/turf/wall/proc/try_touch(var/mob/user, var/rotting)
 	. = TRUE
 	if(rotting)
 		if(reinf_material)
@@ -83,7 +83,7 @@
 	else if (isnull(construction_stage) || !reinf_material)
 		toggle_open(user)
 
-/turf/simulated/wall/attack_hand(var/mob/user)
+/turf/wall/attack_hand(var/mob/user)
 	radiate()
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -96,7 +96,7 @@
 	if(!.)
 		return try_touch(user, (locate(/obj/effect/overlay/wallrot) in src))
 
-/turf/simulated/wall/attackby(var/obj/item/W, var/mob/user, click_params)
+/turf/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 
 	if(istype(W, /obj/item/stack/tile/roof))
 		return ..()
@@ -236,7 +236,7 @@
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
+					if(!do_after(user,40,src) || !istype(src, /turf/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
 					update_icon()
@@ -267,7 +267,7 @@
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user, 60, src) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
+					if(!do_after(user, 60, src) || !istype(src, /turf/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
 					update_icon()
@@ -278,7 +278,7 @@
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
+					if(!do_after(user,100,src) || !istype(src, /turf/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
 					update_icon()
@@ -289,7 +289,7 @@
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
+					if(!do_after(user,40,src) || !istype(src, /turf/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
 					update_icon()
@@ -313,7 +313,7 @@
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user,70,src) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
+					if(!do_after(user,70,src) || !istype(src, /turf/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
 					update_icon()
@@ -324,7 +324,7 @@
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
+					if(!do_after(user,100,src) || !istype(src, /turf/wall) || !user || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
 						dismantle_wall()

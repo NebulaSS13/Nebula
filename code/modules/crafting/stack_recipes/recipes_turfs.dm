@@ -35,7 +35,7 @@
 
 /decl/stack_recipe/turfs/wall
 	abstract_type         = /decl/stack_recipe/turfs/wall
-	expected_product_type = /turf/simulated/wall
+	expected_product_type = /turf/wall
 
 /decl/stack_recipe/turfs/path
 	abstract_type         = /decl/stack_recipe/turfs/path

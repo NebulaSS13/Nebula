@@ -31,7 +31,7 @@
 
 /decl/stack_recipe/turfs/wall/brick
 	name                       = "brick wall"
-	result_type                = /turf/simulated/wall/brick
+	result_type                = /turf/wall/brick
 	craft_stack_types          = /obj/item/stack/material/brick
 	difficulty                 = MAT_VALUE_HARD_DIY
 

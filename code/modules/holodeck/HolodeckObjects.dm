@@ -3,73 +3,73 @@
 // Holographic tables are in code/modules/tables/presets.dm
 // Holographic racks are in code/modules/tables/rack.dm
 
-/turf/simulated/floor/holofloor
+/turf/floor/holofloor
 	thermal_conductivity = 0
 
-/turf/simulated/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
+/turf/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
 
-/turf/simulated/floor/holofloor/attackby(obj/item/W, mob/user)
+/turf/floor/holofloor/attackby(obj/item/W, mob/user)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-/turf/simulated/floor/holofloor/set_flooring()
+/turf/floor/holofloor/set_flooring()
 	return
 
-/turf/simulated/floor/holofloor/carpet
+/turf/floor/holofloor/carpet
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "brown"
 	initial_flooring = /decl/flooring/carpet
 
-/turf/simulated/floor/holofloor/concrete
+/turf/floor/holofloor/concrete
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "brown"
 	initial_flooring = /decl/flooring/carpet
 
-/turf/simulated/floor/holofloor/concrete
+/turf/floor/holofloor/concrete
 	name = "floor"
 	icon = 'icons/turf/flooring/misc.dmi'
 	icon_state = "concrete"
 	initial_flooring = null
 
-/turf/simulated/floor/holofloor/tiled
+/turf/floor/holofloor/tiled
 	name = "floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
 
-/turf/simulated/floor/holofloor/tiled/dark
+/turf/floor/holofloor/tiled/dark
 	name = "dark floor"
 	icon_state = "dark"
 	initial_flooring = /decl/flooring/tiling/dark
 
-/turf/simulated/floor/holofloor/tiled/stone
+/turf/floor/holofloor/tiled/stone
 	name = "stone floor"
 	icon_state = "stone"
 	initial_flooring = /decl/flooring/tiling/stone
 
-/turf/simulated/floor/holofloor/lino
+/turf/floor/holofloor/lino
 	name = "lino"
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_state = "lino"
 	initial_flooring = /decl/flooring/linoleum
 
-/turf/simulated/floor/holofloor/wood
+/turf/floor/holofloor/wood
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"
 	color = WOOD_COLOR_CHOCOLATE
 	initial_flooring = /decl/flooring/wood
 
-/turf/simulated/floor/holofloor/grass
+/turf/floor/holofloor/grass
 	name = "lush grass"
 	icon = 'icons/turf/flooring/grass.dmi'
 	icon_state = "grass0"
 	initial_flooring = /decl/flooring/grass
 
-/turf/simulated/floor/holofloor/snow
+/turf/floor/holofloor/snow
 	name = "snow"
 	base_name = "snow"
 	icon = 'icons/turf/floors.dmi'
@@ -77,46 +77,46 @@
 	icon_state = "snow"
 	base_icon_state = "snow"
 
-/turf/simulated/floor/holofloor/space
+/turf/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
 
-/turf/simulated/floor/holofloor/reinforced
+/turf/floor/holofloor/reinforced
 	icon = 'icons/turf/flooring/tiles.dmi'
 	initial_flooring = /decl/flooring/reinforced
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
 
-/turf/simulated/floor/holofloor/space/Initialize()
+/turf/floor/holofloor/space/Initialize()
 	. = ..()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
-/turf/simulated/floor/holofloor/beach
+/turf/floor/holofloor/beach
 	desc = "Uncomfortably gritty for a hologram."
 	base_desc = "Uncomfortably gritty for a hologram."
 	icon = 'icons/misc/beach.dmi'
 	base_icon = 'icons/misc/beach.dmi'
 	initial_flooring = null
-	abstract_type = /turf/simulated/floor/holofloor/beach
+	abstract_type = /turf/floor/holofloor/beach
 
-/turf/simulated/floor/holofloor/beach/sand
+/turf/floor/holofloor/beach/sand
 	name = "sand"
 	icon_state = "desert0"
 	base_icon_state = "desert0"
 
-/turf/simulated/floor/holofloor/beach/coastline
+/turf/floor/holofloor/beach/coastline
 	name = "coastline"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
 	base_icon_state = "sandwater"
 
-/turf/simulated/floor/holofloor/beach/water
+/turf/floor/holofloor/beach/water
 	name = "water"
 	icon_state = "seashallow"
 	base_icon_state = "seashallow"
 
-/turf/simulated/floor/holofloor/desert
+/turf/floor/holofloor/desert
 	name = "desert sand"
 	base_name = "desert sand"
 	desc = "Uncomfortably gritty for a hologram."
@@ -127,7 +127,7 @@
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	initial_flooring = null
 
-/turf/simulated/floor/holofloor/desert/Initialize(var/ml)
+/turf/floor/holofloor/desert/Initialize(var/ml)
 	. = ..()
 	if(prob(10))
 		overlays += "asteroid[rand(0,9)]"

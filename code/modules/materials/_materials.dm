@@ -34,7 +34,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	self-explanatory but the various object types may have their own documentation.
 
 	PATHS THAT USE DATUMS
-		turf/simulated/wall
+		turf/wall
 		obj/item
 		obj/structure/barricade
 		obj/structure/table
@@ -642,7 +642,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 
 	if(istype(T) && T.simulated)
-		var/turf/simulated/wall/W = T
+		var/turf/wall/W = T
 		if(defoliant)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				W.visible_message(SPAN_NOTICE("\The [E] is completely dissolved by the solution!"))

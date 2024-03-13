@@ -5,7 +5,7 @@
 	icon_base = "floor"
 	flags = TURF_ACID_IMMUNE | TURF_REMOVE_SHOVEL
 
-/turf/simulated/floor/diona
+/turf/floor/diona
 	name = "biomass"
 	icon = 'mods/mobs/dionaea/icons/turfs.dmi'
 	icon_state = "floor"

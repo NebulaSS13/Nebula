@@ -179,7 +179,7 @@
 		src.update_icon()
 	return 1
 
-/turf/simulated/floor/transport_properties_from(turf/simulated/floor/other)
+/turf/floor/transport_properties_from(turf/floor/other)
 	if(!..())
 		return FALSE
 
@@ -190,7 +190,7 @@
 	set_flooring(other.flooring)
 	return TRUE
 
-/turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)
+/turf/wall/transport_properties_from(turf/wall/other)
 	if(!..())
 		return FALSE
 

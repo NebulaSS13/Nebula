@@ -22,7 +22,7 @@
 	throw_range = 20
 	item_flags = 0
 	obj_flags = 0
-	var/replacement_turf_type = /turf/simulated/floor
+	var/replacement_turf_type = /turf/floor
 
 /obj/item/stack/tile/proc/try_build_turf(var/mob/user, var/turf/target)
 

@@ -4,7 +4,7 @@
 	var/max_late_time = (30 SECONDS)
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY|SHUTTLE_FLAGS_NO_CODE
 	category = /datum/shuttle/autodock/ferry/supply
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling
+	ceiling_type = /turf/floor/shuttle_ceiling
 
 /datum/shuttle/autodock/ferry/supply/short_jump(var/area/destination)
 	if(moving_status != SHUTTLE_IDLE)

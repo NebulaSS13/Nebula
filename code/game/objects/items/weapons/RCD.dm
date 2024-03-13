@@ -252,7 +252,7 @@
 /decl/hierarchy/rcd_mode/airlock/basic
 	cost = 10
 	delay = 5 SECONDS
-	handles_type = /turf/simulated/floor
+	handles_type = /turf/floor
 	work_type = /obj/machinery/door/airlock
 
 /decl/hierarchy/rcd_mode/airlock/basic/can_handle_work(var/rcd, var/turf/target)
@@ -267,7 +267,7 @@
 /decl/hierarchy/rcd_mode/floor_and_walls/base_turf
 	cost = 1
 	delay = 2 SECONDS
-	work_type = /turf/simulated/floor/airless
+	work_type = /turf/floor/airless
 
 /decl/hierarchy/rcd_mode/floor_and_walls/base_turf/can_handle_work(var/rcd, var/turf/target)
 	return istype(target) && (isspaceturf(target) || istype(target, get_base_turf_by_area(target)))
@@ -275,8 +275,8 @@
 /decl/hierarchy/rcd_mode/floor_and_walls/floor_turf
 	cost = 3
 	delay = 2 SECONDS
-	handles_type = /turf/simulated/floor
-	work_type = /turf/simulated/wall
+	handles_type = /turf/floor
+	work_type = /turf/wall
 
 /*
 	Deconstruction
@@ -295,7 +295,7 @@
 /decl/hierarchy/rcd_mode/deconstruction/floor
 	cost = 9
 	delay = 2 SECONDS
-	handles_type = /turf/simulated/floor
+	handles_type = /turf/floor
 
 /decl/hierarchy/rcd_mode/deconstruction/floor/get_work_result(var/target)
 	return get_base_turf_by_area(target)
@@ -303,8 +303,8 @@
 /decl/hierarchy/rcd_mode/deconstruction/wall
 	cost = 9
 	delay = 2 SECONDS
-	handles_type = /turf/simulated/wall
-	work_type = /turf/simulated/floor
+	handles_type = /turf/wall
+	work_type = /turf/floor
 
-/decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/rcd/rcd, var/turf/simulated/wall/target)
+/decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/rcd/rcd, var/turf/wall/target)
 	return ..() && (rcd.canRwall || !target.reinf_material)

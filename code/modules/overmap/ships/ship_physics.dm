@@ -48,8 +48,8 @@
 				continue
 
 			. += DEFAULT_TURF_MASS
-			if(istype(T, /turf/simulated/wall))
-				var/turf/simulated/wall/W = T
+			if(istype(T, /turf/wall))
+				var/turf/wall/W = T
 				if(W.material)
 					. += W.material.weight * 5
 				if(W.reinf_material)

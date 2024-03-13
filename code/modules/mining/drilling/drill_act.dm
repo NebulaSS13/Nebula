@@ -10,7 +10,7 @@
 	// but there is no visual indicator for a drill above you currently and that
 	// seems like it would be a bit unfair on people wandering into the beam.
 
-/turf/simulated/wall/drill_act()
+/turf/wall/drill_act()
 	SHOULD_CALL_PARENT(FALSE)
 	dismantle_wall(TRUE)
 

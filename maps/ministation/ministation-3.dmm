@@ -21,7 +21,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "aV" = (
 /obj/machinery/atmospherics/binary/pump/on{
@@ -34,20 +34,20 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "cw" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/floor/reinforced/airless,
 /area/space)
 "dp" = (
 /obj/machinery/power/terminal{
 	dir = 8
 	},
 /obj/structure/cable,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "dH" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "es" = (
 /obj/machinery/light/small,
@@ -60,17 +60,17 @@
 /obj/structure/sign/warning/airlock{
 	pixel_y = 26
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "gu" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "hx" = (
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "hC" = (
 /obj/structure/cable{
@@ -79,14 +79,14 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "jq" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "kV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
@@ -95,13 +95,13 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "ld" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "mI" = (
 /obj/structure/cable{
@@ -113,26 +113,26 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "nf" = (
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "nY" = (
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "rw" = (
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "rB" = (
 /obj/structure/cable{
@@ -142,7 +142,7 @@
 	dir = 1;
 	pixel_y = 20
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "sD" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -151,13 +151,13 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "tN" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4overpass)
 "ug" = (
 /obj/machinery/door/airlock/external/glass{
@@ -177,27 +177,27 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/ministation/maint/l4central)
 "uG" = (
 /obj/structure/lattice,
 /turf/space,
 /area/space)
 "uQ" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4overpass)
 "vD" = (
 /obj/machinery/power/solar_control{
 	dir = 8
 	},
 /obj/structure/cable,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "wi" = (
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "xN" = (
 /obj/abstract/map_data{
@@ -212,7 +212,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "yS" = (
 /obj/abstract/landmark{
@@ -221,7 +221,7 @@
 /turf/space,
 /area/space)
 "yX" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/ministation/maint/l4overpass)
 "zd" = (
 /obj/structure/ladder,
@@ -233,14 +233,14 @@
 /area/ministation/maint/l4overpass)
 "Aj" = (
 /obj/structure/cable,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "AT" = (
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Cd" = (
 /obj/structure/cable{
@@ -250,13 +250,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "Cl" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Cu" = (
 /obj/structure/ladder,
@@ -271,7 +271,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "Dc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -280,7 +280,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "DX" = (
 /obj/structure/cable{
@@ -289,7 +289,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Ed" = (
 /obj/structure/cable{
@@ -301,13 +301,13 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Fa" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4overpass)
 "GD" = (
 /obj/machinery/door/airlock/external/glass{
@@ -327,33 +327,33 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "Hs" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "HM" = (
 /obj/machinery/network/relay{
 	initial_network_id = "molluscnet"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "IZ" = (
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Lu" = (
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "Lx" = (
 /obj/structure/cable{
@@ -365,14 +365,14 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "MF" = (
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Np" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -381,13 +381,13 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "Nz" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "NO" = (
 /obj/abstract/level_data_spawner/main_level,
@@ -400,7 +400,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Uw" = (
 /obj/structure/lattice,
@@ -420,7 +420,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "Wi" = (
 /obj/structure/cable{
@@ -432,14 +432,14 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "Wl" = (
 /obj/machinery/power/smes/buildable/preset,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "XA" = (
 /obj/machinery/light/small{
@@ -467,10 +467,10 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/ministation/maint/l4central)
 "Yv" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/ministation/maint/l4central)
 
 (1,1,1) = {"

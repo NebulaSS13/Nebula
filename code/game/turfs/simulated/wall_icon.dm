@@ -1,4 +1,4 @@
-/turf/simulated/wall/proc/update_material(var/update_neighbors)
+/turf/wall/proc/update_material(var/update_neighbors)
 	if(construction_stage != -1)
 		if(reinf_material)
 			construction_stage = 6
@@ -16,26 +16,26 @@
 	SSradiation.resistance_cache.Remove(src)
 	if(update_neighbors)
 		var/iterate_turfs = list()
-		for(var/turf/simulated/wall/W in RANGE_TURFS(src, 1))
+		for(var/turf/wall/W in RANGE_TURFS(src, 1))
 			W.wall_connections = null
 			W.other_connections = null
 			iterate_turfs += W
-		for(var/turf/simulated/wall/W as anything in iterate_turfs)
+		for(var/turf/wall/W as anything in iterate_turfs)
 			W.update_icon()
 	else
 		wall_connections = null
 		other_connections = null
 		update_icon()
 
-/turf/simulated/wall/proc/paint_wall(var/new_paint_color)
+/turf/wall/proc/paint_wall(var/new_paint_color)
 	paint_color = new_paint_color
 	update_icon()
 
-/turf/simulated/wall/proc/stripe_wall(var/new_paint_color)
+/turf/wall/proc/stripe_wall(var/new_paint_color)
 	stripe_color = new_paint_color
 	update_icon()
 
-/turf/simulated/wall/proc/update_strings()
+/turf/wall/proc/update_strings()
 	if(reinf_material)
 		SetName("reinforced [material.solid_name] [material.wall_name]")
 		desc = "It seems to be a section of hull reinforced with [reinf_material.solid_name] and plated with [material.solid_name]."
@@ -43,13 +43,13 @@
 		SetName("[material.solid_name] [material.wall_name]")
 		desc = "It seems to be a section of hull plated with [material.solid_name]."
 
-/turf/simulated/wall/proc/get_wall_icon()
+/turf/wall/proc/get_wall_icon()
 	. = (istype(material) && material.icon_base) || 'icons/turf/walls/solid.dmi'
 
-/turf/simulated/wall/proc/apply_reinf_overlay()
+/turf/wall/proc/apply_reinf_overlay()
 	. = istype(reinf_material)
 
-/turf/simulated/wall/on_update_icon()
+/turf/wall/on_update_icon()
 	. = ..()
 	cut_overlays()
 
@@ -63,7 +63,7 @@
 			var/turf/T = get_step(src, stepdir)
 			if(!T)
 				continue
-			if(istype(T, /turf/simulated/wall))
+			if(istype(T, /turf/wall))
 				switch(can_join_with(T))
 					if(0)
 						continue
@@ -147,7 +147,7 @@
 			integrity += reinf_material.integrity
 		add_overlay(SSmaterials.wall_damage_overlays[clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
-/turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
+/turf/wall/proc/can_join_with(var/turf/wall/W)
 	if(unique_merge_identifier != W.unique_merge_identifier)
 		return 0
 	else if(unique_merge_identifier)

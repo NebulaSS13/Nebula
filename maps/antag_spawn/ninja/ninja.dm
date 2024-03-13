@@ -40,4 +40,4 @@
 /area/map_template/ninja_dojo/start
 	name = "\improper Clan Dojo"
 	icon_state = "shuttlered"
-	base_turf = /turf/simulated/floor/plating
+	base_turf = /turf/floor/plating

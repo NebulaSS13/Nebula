@@ -98,7 +98,7 @@
 		UnarmedAttack(target)
 
 /mob/living/bot/floorbot/lookForTargets()
-	for(var/turf/simulated/floor/T in view(src))
+	for(var/turf/floor/T in view(src))
 		if(confirmTarget(T))
 			target = T
 			return
@@ -125,7 +125,7 @@
 	if(A.loc.name == "Space")
 		return 0
 
-	var/turf/simulated/floor/T = A
+	var/turf/floor/T = A
 	if(istype(T))
 		if(emagged)
 			return 1
@@ -144,8 +144,8 @@
 	if(get_turf(A) != loc)
 		return FALSE
 
-	if(emagged && istype(A, /turf/simulated/floor))
-		var/turf/simulated/floor/F = A
+	if(emagged && istype(A, /turf/floor))
+		var/turf/floor/F = A
 		busy = 1
 		update_icon()
 		if(F.flooring)
@@ -160,8 +160,8 @@
 				addTiles(1)
 		target = null
 		update_icon()
-	else if(istype(A, /turf/simulated/floor))
-		var/turf/simulated/floor/F = A
+	else if(istype(A, /turf/floor))
+		var/turf/floor/F = A
 		if(F.broken || F.burnt)
 			busy = 1
 			update_icon()

@@ -8,7 +8,7 @@
 "ac" = (
 /obj/structure/table/woodentable,
 /obj/item/storage/backpack/cultpack,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ad" = (
 /turf/unsimulated/wall/fakeglass{
@@ -24,14 +24,14 @@
 "af" = (
 /obj/structure/table/woodentable,
 /obj/item/storage/backpack/satchel/grey/withwallet,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ag" = (
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ah" = (
 /obj/structure/undies_wardrobe,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ai" = (
 /turf/unsimulated/wall/fakeglass{
@@ -40,7 +40,7 @@
 /area/map_template/wizard_station)
 "aj" = (
 /obj/structure/door/wood,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ak" = (
 /obj/structure/table/woodentable,
@@ -50,7 +50,7 @@
 	pixel_y = 8
 	},
 /obj/item/chems/drinks/flask/barflask,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "al" = (
 /obj/structure/table/woodentable,
@@ -63,7 +63,7 @@
 "am" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/rd,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "an" = (
 /obj/structure/table/woodentable,
@@ -77,7 +77,7 @@
 /obj/structure/table/woodentable,
 /obj/item/storage/backpack/satchel/grey/withwallet,
 /obj/item/clothing/glasses/eyepatch/monocle,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ap" = (
 /mob/living/carbon/human/monkey{
@@ -102,7 +102,7 @@
 	name = "Teleport-Scroll"
 	},
 /obj/item/toy/figure/ninja,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "as" = (
 /obj/structure/table/woodentable,
@@ -158,18 +158,18 @@
 /obj/abstract/landmark/start{
 	name = "wizard"
 	},
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "az" = (
 /obj/structure/aliumizer,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "aA" = (
 /obj/item/radio/intercom/wizard{
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "aB" = (
 /obj/structure/bookcase{
