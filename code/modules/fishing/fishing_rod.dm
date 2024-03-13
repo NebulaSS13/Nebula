@@ -161,7 +161,7 @@
 			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-bait", bait.color, RESET_COLOR | RESET_ALPHA)
 	. = ..()
 
-/obj/item/fishing_rod/attack(mob/living/M, mob/living/user)
+/obj/item/fishing_rod/use_on_mob(mob/living/target, mob/living/user)
 	return user.a_intent != I_HURT ? FALSE : ..()
 
 /obj/item/fishing_rod/proc/can_fish_in(mob/user, atom/target)
