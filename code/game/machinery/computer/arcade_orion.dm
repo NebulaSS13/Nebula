@@ -399,8 +399,8 @@
 /obj/machinery/computer/arcade/orion_trail/proc/emag_effect(var/event)
 	switch(event)
 		if(ORION_TRAIL_RAIDERS)
-			if(iscarbon(usr))
-				var/mob/living/carbon/M = usr
+			if(isliving(usr))
+				var/mob/living/M = usr
 				if(prob(50))
 					to_chat(usr, "<span class='warning'>You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?</span>")
 					M.set_hallucination(50, 50)
@@ -421,8 +421,8 @@
 			var/mob/living/M = usr
 			M.adjustBruteLoss(10)
 		if(ORION_TRAIL_FLUX)
-			if(iscarbon(usr) && prob(75))
-				var/mob/living/carbon/M = usr
+			if(isliving(usr) && prob(75))
+				var/mob/living/M = usr
 				SET_STATUS_MAX(M, STAT_WEAK, 3)
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
 				M.take_organ_damage(10)

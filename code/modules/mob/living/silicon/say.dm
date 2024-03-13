@@ -36,7 +36,7 @@
 #define IS_PAI 3
 
 /mob/living/silicon/say_understands(mob/speaker, decl/language/speaking)
-	return (!speaking && (iscarbon(speaker) || issilicon(speaker) || isbrain(speaker))) || ..()
+	return (!speaking && (ishuman(speaker) || issilicon(speaker) || isbrain(speaker))) || ..()
 
 //For holopads only. Usable by AI.
 /mob/living/silicon/ai/proc/holopad_talk(var/message, verb, decl/language/speaking)

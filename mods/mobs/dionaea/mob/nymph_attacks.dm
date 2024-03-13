@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/UnarmedAttack(var/atom/A)
+/mob/living/simple_animal/alien/diona/UnarmedAttack(var/atom/A)
 
 	if(incapacitated())
 		return ..()
@@ -39,7 +39,7 @@
 		return TRUE
 	return ..()
 
-/mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
+/mob/living/simple_animal/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
 
 	if(incapacitated())
 		return FALSE

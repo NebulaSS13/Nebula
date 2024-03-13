@@ -79,31 +79,34 @@
 	nodamage = 1
 
 /obj/item/projectile/energy/floramut/on_hit(var/atom/target, var/blocked = 0)
+	if(!isliving(target))
+		return
+
 	var/mob/living/M = target
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = M
-		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
+	if(M.get_species()?.species_flags & SPECIES_FLAG_IS_PLANT)
+		if(M.get_nutrition() < 500)
 			if(prob(15))
-				H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
-				SET_STATUS_MAX(H, STAT_WEAK, 5)
+				M.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
+				SET_STATUS_MAX(M, STAT_WEAK, 5)
 				var/decl/pronouns/G = M.get_pronouns()
 				visible_message(
-					SPAN_DANGER("\The [M] writhes in pain as [G.his] vacuoles boil."), \
-					blind_message = SPAN_WARNING("You hear a crunching sound."))
-			if(prob(35))
-				if(prob(80))
-					randmutb(M)
-					domutcheck(M,null)
-				else
-					randmutg(M)
-					domutcheck(M,null)
-			else
-				M.adjustFireLoss(rand(5,15))
-				M.show_message("<span class='danger'>The radiation beam singes you!</span>")
-	else if(iscarbon(target))
-		M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
+					SPAN_DANGER("\The [M] writhes in pain as [G.his] vacuoles boil."),
+					blind_message = SPAN_WARNING("You hear a crunching sound.")
+				)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(prob(35))
+					if(prob(80))
+						randmutb(H)
+						domutcheck(H,null)
+					else
+						randmutg(H)
+						domutcheck(H,null)
+		else
+			M.adjustFireLoss(rand(5,15))
+			M.show_message(SPAN_DANGER("The radiation beam singes you!"))
 	else
-		return 1
+		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
 
 /obj/item/projectile/energy/floramut/gene
 	name = "gamma somatoray"
@@ -123,15 +126,14 @@
 	nodamage = 1
 
 /obj/item/projectile/energy/florayield/on_hit(var/atom/target, var/blocked = 0)
-	var/mob/M = target
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = M
-		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
-			H.adjust_nutrition(30)
-	else if (iscarbon(target))
-		M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
+	if(!isliving(target))
+		return
+	var/mob/living/M = target
+	if(M.get_species()?.species_flags & SPECIES_FLAG_IS_PLANT)
+		if(M.get_nutrition() < 500)
+			M.adjust_nutrition(30)
 	else
-		return 1
+		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
 
 
 /obj/item/projectile/beam/mindflayer

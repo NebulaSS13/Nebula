@@ -3,7 +3,7 @@
 
 /obj/machinery/vending/finish_vending()
 	if(prob(diona_spawn_chance)) //Hehehe
-		var/mob/living/carbon/alien/diona/S = new(get_turf(src))
+		var/mob/living/simple_animal/alien/diona/S = new(get_turf(src))
 		visible_message(SPAN_NOTICE("\The [src] makes an odd grinding noise before coming to a halt as \a [S.name] slithers out of the receptacle."))
 		return
 	..()

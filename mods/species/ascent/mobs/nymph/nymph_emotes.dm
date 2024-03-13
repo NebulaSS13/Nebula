@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/ascent_nymph/get_default_emotes()
+/mob/living/simple_animal/alien/kharmaan/get_default_emotes()
 	var/static/list/default_emotes = list(
 		/decl/emote/visible,
 		/decl/emote/visible/scratch,

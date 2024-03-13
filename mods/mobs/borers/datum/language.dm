@@ -12,15 +12,7 @@
 
 #define isborer(X) istype(X, /mob/living/simple_animal/borer)
 /decl/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
-
-	var/mob/living/simple_animal/borer/B
-
-	if(iscarbon(speaker))
-		var/mob/living/carbon/M = speaker
-		B = M.has_brain_worms()
-	else if(isborer(speaker))
-		B = speaker
-
+	var/mob/living/simple_animal/borer/B = isborer(speaker) ? speaker : speaker.has_brain_worms()
 	if(B)
 		if(B.host)
 			if(B.host.nutrition < 50 || B.host.stat)

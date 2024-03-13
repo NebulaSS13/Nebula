@@ -362,9 +362,10 @@
 	name = "lungs and gills"
 	has_gills = TRUE
 
-/mob/living/carbon/proc/cough(var/deliberate = FALSE)
+/mob/living/proc/cough(var/deliberate = FALSE)
+
 	var/obj/item/organ/internal/lungs/lung = get_organ(BP_LUNGS)
-	if(!lung || !lung.active_breathing || isSynthetic() || stat == DEAD || (deliberate && lastcough + 3 SECONDS > world.time))
+	if(!lung || !lung.active_breathing || isSynthetic() || stat == DEAD || (deliberate && last_cough + 3 SECONDS > world.time))
 		return
 
 	if(lung.breath_fail_ratio > 0.9 && world.time > lung.last_successful_breath + 2 MINUTES)
@@ -378,7 +379,7 @@
 
 	audible_message("<b>[src]</b> coughs!", "You cough!", radio_message = "coughs!") // styled like an emote
 
-	lastcough = world.time
+	last_cough = world.time
 
 	// Coughing clears out 1-2 reagents from the lungs.
 	if(lung.inhaled.total_volume > 0 && loc)

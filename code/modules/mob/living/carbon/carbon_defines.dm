@@ -8,12 +8,10 @@
 	var/datum/reagents/metabolism/bloodstr
 	var/datum/reagents/metabolism/touching
 
-	var/coughedtime = null
 	var/ignore_rads = FALSE
 	/// Whether the mob is performing cpr or not.
 	var/performing_cpr = FALSE
 	var/lastpuke = 0
-	var/lastcough = 0
 
 	var/obj/item/tank/internal = null//Human/Monkey
 	var/decl/species/species   // Contains environment tolerances and language information, set during New().

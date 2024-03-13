@@ -30,14 +30,8 @@
 
 /obj/effect/containment_field/HasProximity(atom/movable/AM)
 	. = ..()
-	if(.)
-		if(issilicon(AM) && prob(40))
-			shock(AM)
-			return TRUE
-		if(iscarbon(AM) && prob(50))
-			shock(AM)
-			return TRUE
-		return FALSE
+	if(. && isliving(AM) && prob(50))
+		shock(AM)
 
 /obj/effect/containment_field/proc/shock(mob/living/user)
 	if(hasShocked)

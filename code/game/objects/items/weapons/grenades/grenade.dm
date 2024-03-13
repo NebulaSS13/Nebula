@@ -65,9 +65,9 @@
 		to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")
 		activate(user)
 		add_fingerprint(user)
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			C.throw_mode_on()
+		if(isliving(user))
+			var/mob/living/M = user
+			M.throw_mode_on()
 
 /obj/item/grenade/proc/activate(mob/user)
 	if(active)

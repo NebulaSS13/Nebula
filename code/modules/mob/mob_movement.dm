@@ -39,9 +39,9 @@
 			attack_self()
 			return
 		if(SOUTHWEST)
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				C.toggle_throw_mode()
+			if(isliving(usr))
+				var/mob/living/M = usr
+				M.toggle_throw_mode()
 			else
 				to_chat(usr, "<span class='warning'>This mob type cannot throw items.</span>")
 			return
@@ -62,7 +62,7 @@
 
 /client/verb/swap_hand()
 	set hidden = 1
-	if(iscarbon(mob))
+	if(ismob(mob))
 		var/mob/M = mob
 		M.swap_hand()
 	if(isrobot(mob))
@@ -78,12 +78,10 @@
 
 /client/verb/toggle_throw_mode()
 	set hidden = 1
-	if(!iscarbon(mob))
+	if(!ismob(mob))
 		return
 	if (!mob.stat && isturf(mob.loc) && !mob.restrained())
-		mob:toggle_throw_mode()
-	else
-		return
+		mob.toggle_throw_mode()
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(newloc, direct)

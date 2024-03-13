@@ -225,9 +225,9 @@
 	if(ismob(user))
 		var/mob/M = user
 		if(M.client)
-			if(iscarbon(M))
-				var/mob/living/carbon/C = M
-				if(!C.get_equipped_item(slot_handcuffed_str))
+			if(isliving(M))
+				var/mob/living/holder = M
+				if(!holder.get_equipped_item(slot_handcuffed_str))
 					SwitchState()
 			else
 				SwitchState()

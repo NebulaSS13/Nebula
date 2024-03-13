@@ -105,14 +105,13 @@
 		to_chat(user, "<span class='danger'>\The [src] is locked and running, wait for it to finish.</span>")
 		return
 
-	if(!iscarbon(victim) && !isanimal(victim))
+	if(!isliving(victim))
 		to_chat(user, "<span class='danger'>This is not suitable for \the [src]!</span>")
 		return
 
 	if(ishuman(victim) && !emagged)
 		to_chat(user, "<span class='danger'>\The [src] safety guard is engaged!</span>")
 		return
-
 
 	if(victim.abiotic(1))
 		to_chat(user, "<span class='danger'>\The [victim] may not have any abiotic items on.</span>")
@@ -177,9 +176,9 @@
 	var/slab_name =  occupant.name
 	var/slab_nutrition = 20
 
-	if(iscarbon(occupant))
-		var/mob/living/carbon/C = occupant
-		slab_nutrition = C.nutrition / 15
+	if(isliving(occupant))
+		var/mob/living/C = occupant
+		slab_nutrition = round(C.get_nutrition() / 15)
 
 	if(ishuman(occupant))
 		slab_name = occupant.real_name

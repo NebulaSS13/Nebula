@@ -66,7 +66,7 @@
 /obj/structure/bed/chair/comfy/brown{
 	dir = 1
 	},
-/obj/abstract/landmark/deadcap,
+/obj/abstract/landmark/corpse/deadcap,
 /turf/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ak" = (

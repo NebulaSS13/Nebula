@@ -42,11 +42,9 @@
 			if(prob(blocked))
 				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
 				continue
-			if(prob(60) && iscarbon(M))
-				var/mob/living/carbon/C = M
-				if(C.can_feel_pain())
-					M.emote(/decl/emote/audible/scream)
-			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a psionic scream!"))
+			if(prob(60) && M.can_feel_pain())
+				to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a psionic scream!"))
+				M.emote(/decl/emote/audible/scream)
 			M.flash_eyes()
 			SET_STATUS_MAX(M, STAT_BLIND,   3)
 			SET_STATUS_MAX(M, STAT_DEAF,    6)
@@ -245,7 +243,7 @@
 		if(coercion_rank >= PSI_RANK_GRANDMASTER)
 			ADJ_STATUS(target, STAT_PARA, -1)
 		target.set_status(STAT_DROWSY, 0)
-		if(iscarbon(target))
-			var/mob/living/carbon/M = target
+		if(isliving(target))
+			var/mob/living/M = target
 			M.adjust_hallucination(-30)
 		return TRUE

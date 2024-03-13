@@ -1,5 +1,5 @@
 
-/mob/living/carbon/alien/ascent_nymph/handle_regular_hud_updates()
+/mob/living/simple_animal/alien/kharmaan/handle_regular_hud_updates()
 	. = ..()
 	if(!.)
 		return
@@ -21,7 +21,7 @@
 			if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
 			else							nymph_hud.drink.icon_state = "hydration4"
 
-/mob/living/carbon/alien/ascent_nymph/handle_nutrition_and_hydration()
+/mob/living/simple_animal/alien/kharmaan/handle_nutrition_and_hydration()
 	. = ..()
 	// Generate some crystals over time.
 	if(nutrition >= 300 && crystal_reserve < ANYMPH_MAX_CRYSTALS)
@@ -38,13 +38,13 @@
 	if(hydration > 0)
 		adjust_hydration(DEFAULT_THIRST_FACTOR * -1)
 
-/mob/living/carbon/alien/ascent_nymph/Stat()
+/mob/living/simple_animal/alien/kharmaan/Stat()
 	. = ..()
 	if(client && statpanel("Status"))
 		stat("Nutrition", "[get_nutrition()]/[ANYMPH_NUTRITION_MOLT]")
 		stat("Crystal reserve", "[crystal_reserve]/[ANYMPH_CRYSTAL_MOLT]")
 
-/mob/living/carbon/alien/ascent_nymph/proc/can_molt()
+/mob/living/simple_animal/alien/kharmaan/proc/can_molt()
 	if(crystal_reserve < ANYMPH_CRYSTAL_MOLT)
 		to_chat(src, SPAN_WARNING("You don't have enough crystalline matter stored up to molt right now."))
 		return FALSE
@@ -56,12 +56,12 @@
 		return FALSE
 	return TRUE
 
-/mob/living/carbon/alien/ascent_nymph/proc/molt()
+/mob/living/simple_animal/alien/kharmaan/proc/molt()
 	if(!can_molt())
 		return
 
 	molt = min(molt + 1, 5)
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
+	var/mob/living/simple_animal/alien/kharmaan/nymph = usr
 	nymph.visible_message("\icon[nymph] [nymph] begins to shimmy and shake out of its old skin.")
 	if(molt == 5)
 		if(do_after(nymph, 10 SECONDS, nymph, FALSE))

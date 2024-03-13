@@ -16,8 +16,6 @@
 
 #define isAI(A) istype(A, /mob/living/silicon/ai)
 
-#define isalien(A) istype(A, /mob/living/carbon/alien)
-
 #define isanimal(A) istype(A, /mob/living/simple_animal)
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
@@ -25,8 +23,6 @@
 #define isatom(A) isloc(A)
 
 #define isbrain(A) istype(A, /mob/living/brain)
-
-#define iscarbon(A) istype(A, /mob/living/carbon)
 
 #define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))
 
@@ -90,11 +86,6 @@
 
 #define isplunger(A) istype(A, /obj/item/plunger)
 
-/proc/isspecies(A, B)
-	if(!iscarbon(A))
-		return FALSE
-	var/mob/living/carbon/C = A
-	return C.species?.name == B
 
 #define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
 

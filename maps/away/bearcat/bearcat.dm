@@ -100,28 +100,21 @@
 /turf/floor/tiled/white/usedup
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
-/obj/abstract/landmark/deadcap
+/obj/abstract/landmark/corpse/deadcap
 	name = "Dead Captain"
+	corpse_outfits = list(/decl/hierarchy/outfit/deadcap)
+	delete_me = FALSE //  we handle this in LateInit
 
-/obj/abstract/landmark/deadcap/Initialize()
+/obj/abstract/landmark/corpse/deadcap/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-// chair may need to init first
-/obj/abstract/landmark/deadcap/LateInitialize()
-	..()
-	var/turf/T = get_turf(src)
-	var/mob/living/carbon/human/corpse = new(T)
-	scramble(1,corpse,100)
-	corpse.real_name = "Captain"
-	corpse.name = "Captain"
-	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/deadcap)
-	outfit.equip_outfit(corpse)
-	var/corpse_health = corpse.get_max_health()
-	corpse.adjustOxyLoss(corpse_health)
-	corpse.setBrainLoss(corpse_health)
-	corpse.death()
-	var/obj/structure/bed/chair/C = locate() in T
+/obj/abstract/landmark/corpse/deadcap/LateInitialize()
+	var/mob/corpse = my_corpse?.resolve()
+	if(!istype(corpse))
+		return
+	corpse.SetName("Captain")
+	var/obj/structure/bed/chair/C = locate() in loc
 	if(C)
 		C.buckle_mob(corpse)
 	qdel(src)

@@ -1173,6 +1173,13 @@
 		return SScharacter_info.get_record(comments_record_id, TRUE)
 	return ..()
 
+/mob/living/carbon/human/proc/get_age()
+	. = LAZYACCESS(appearance_descriptors, "age") || 30
+
+/mob/living/carbon/human/proc/set_age(var/val)
+	var/datum/appearance_descriptor/age = LAZYACCESS(species.appearance_descriptors, "age")
+	LAZYSET(appearance_descriptors, "age", (age ? age.sanitize_value(val) : 30))
+
 /mob/living/carbon/human/get_default_emotes()
 	var/static/list/default_emotes = list(
 		/decl/emote/visible/blink,
