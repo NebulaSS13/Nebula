@@ -2,9 +2,9 @@
 	name = "maintenance drone"
 	desc = "A small robot. It looks angry."
 	icon = 'icons/mob/simple_animal/drone.dmi'
-	speak = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
-	speak_emote = list("blares","buzzes","beeps")
-	speak_chance = 1
+	emote_speech = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
+	speak_emote  = list("blares","buzzes","beeps")
+	speak_chance = 0.5
 	health = 50
 	maxHealth = 50
 	natural_weapon = /obj/item/natural_weapon/drone_slicer

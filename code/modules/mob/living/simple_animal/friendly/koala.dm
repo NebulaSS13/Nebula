@@ -6,11 +6,11 @@
 	maxHealth = 45
 	health = 45
 	speed = 4
-	speak = list("Rrr", "Wraarh...", "Pfrrr...")
-	speak_emote = list("roar")
-	emote_hear = list("grunting.","rustling.", "slowly yawns.")
-	emote_see = list("slowly turns around his head.", "rises to his feet, and lays to the ground on all fours.")
-	speak_chance = 1
+	speak_emote  = list("roar")
+	emote_speech = list("Rrr", "Wraarh...", "Pfrrr...")
+	emote_hear   = list("grunting.","rustling.", "slowly yawns.")
+	emote_see    = list("slowly turns around his head.", "rises to his feet, and lays to the ground on all fours.")
+	speak_chance = 0.5
 	turns_per_move = 10 //lazy
 	see_in_dark = 6
 	stop_automated_movement_when_pulled = 1

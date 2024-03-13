@@ -8,7 +8,7 @@
 	health = 75
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/tentecles
-	speak_chance = 1
+	speak_chance = 0.5
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 	var/gets_random_color = TRUE
 

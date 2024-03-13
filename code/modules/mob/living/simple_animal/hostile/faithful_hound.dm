@@ -9,7 +9,7 @@
 	faction = MOB_FACTION_NEUTRAL
 	density = FALSE
 	stop_automated_movement = 1
-	wander = 0
+	wander = FALSE
 	anchored = TRUE
 	faction = "cute ghost dogs"
 	supernatural = 1

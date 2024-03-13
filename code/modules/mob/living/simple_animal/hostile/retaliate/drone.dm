@@ -6,10 +6,10 @@
 	icon = 'icons/mob/simple_animal/drone_combat.dmi'
 	ranged = 1
 	rapid = 0
-	speak_chance = 5
+	speak_chance = 2.5
 	turns_per_move = 3
-	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
-	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
+	emote_speech = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
+	emote_see    = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
 	health = 300
@@ -92,12 +92,12 @@
 	if(disabled > 0)
 		set_stat(UNCONSCIOUS)
 		disabled--
-		wander = 0
+		wander = FALSE
 		speak_chance = 0
 		if(disabled <= 0)
 			set_stat(CONSCIOUS)
-			wander = 1
-			speak_chance = 5
+			wander = TRUE
+			speak_chance = 2.5
 
 	//repair a bit of damage
 	if(prob(1))
@@ -141,7 +141,7 @@
 	if(!exploding && !disabled && prob(explode_chance))
 		exploding = 1
 		set_stat(UNCONSCIOUS)
-		wander = 1
+		wander = TRUE
 		walk(src,0)
 		spawn(rand(50,150))
 			if(!disabled && exploding)

@@ -18,18 +18,23 @@
 
 	icon_state = ICON_STATE_WORLD
 
-	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
-	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
-
-	var/list/speak = list("...")
+	/// Tracks cloneloss for the mob. Set to -1 to disable gene damage for the mob.
+	var/gene_damage = 0
+	/// Does the percentage health show in the stat panel for the mob?
+	var/show_stat_health = TRUE
+	/// A prob chance of speaking.
 	var/speak_chance = 0
-	var/list/emote_hear = list()	//Hearable emotes
-	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
+	/// Strings shown when this mob speaks and is not understood.
+	var/list/emote_speech
+	/// Hearable emotes that this mob can randomly perform.
+	var/list/emote_hear
+	/// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
+	var/list/emote_see
 
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/wander = 1	// Does the mob wander around when idle?
+	var/wander = TRUE // Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is grabbing it.
 
 	//Interaction
@@ -172,11 +177,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..()
 
 /mob/living/simple_animal/Life()
+
 	if(is_aquatic && !submerged() && stat != DEAD)
 		walk(src, 0)
-		if(!HAS_STATUS(src, STAT_PARA)) // gated to avoid redundant update_icon() calls.
+		if(HAS_STATUS(src, STAT_PARA) <= 2) // gated to avoid redundant update_icon() calls.
 			SET_STATUS_MAX(src, STAT_PARA, 3)
 			update_icon()
+
 	. = ..()
 	if(!.)
 		return FALSE
@@ -220,6 +227,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	do_delayed_life_action()
 	performing_delayed_life_action = FALSE
 
+/mob/living/simple_animal/proc/turf_is_safe(turf/target)
+	if(!istype(target))
+		return FALSE
+	if(target.is_open() && target.has_gravity() && !can_overcome_gravity())
+		return FALSE
+	if(is_aquatic != target.submerged())
+		return FALSE
+	return TRUE
+
 // For saner overriding; only override this.
 /mob/living/simple_animal/proc/do_delayed_life_action()
 	if(buckled && can_escape)
@@ -240,24 +256,27 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
-				SelfMove(pick(global.cardinal))
-				turns_since_move = 0
+				var/turf/move_to = get_step(loc, pick(global.cardinal))
+				if(turf_is_safe(move_to))
+					SelfMove(move_to)
+					turns_since_move = 0
 
 	//Speaking
-	if(speak_chance)
-		if(rand(0,200) < speak_chance)
-			var/action = pick(
-				speak.len;      "speak",
-				emote_hear.len; "emote_hear",
-				emote_see.len;  "emote_see"
-				)
-
-			switch(action)
-				if("speak")
-					say(pick(speak))
-				if("emote_hear")
+	if(prob(speak_chance))
+		var/action = pick(
+			LAZYLEN(emote_speech); "emote_speech",
+			LAZYLEN(emote_hear);   "emote_hear",
+			LAZYLEN(emote_see);    "emote_see"
+		)
+		switch(action)
+			if("emote_speech")
+				if(length(emote_speech))
+					say(pick(emote_speech))
+			if("emote_hear")
+				if(length(emote_hear))
 					audible_emote("[pick(emote_hear)].")
-				if("emote_see")
+			if("emote_see")
+				if(length(emote_see))
 					visible_emote("[pick(emote_see)].")
 
 /mob/living/simple_animal/proc/handle_atmos(var/atmos_suitable = 1)

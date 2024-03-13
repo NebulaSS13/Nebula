@@ -4,9 +4,9 @@
 	icon = 'icons/mob/simple_animal/clown.dmi'
 	speak_chance = 0
 	turns_per_move = 5
-	speak = list("HONK", "Honk!", "Welcome to clown planet!")
-	emote_see = list("honks")
-	speak_chance = 1
+	emote_speech = list("HONK", "Honk!", "Welcome to clown planet!")
+	emote_see    = list("honks")
+	speak_chance = 0.5
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 75
