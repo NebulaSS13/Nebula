@@ -11,7 +11,7 @@
 		opacity    = FALSE
 
 		// Pretend to be a normal floor turf under the ramp.
-		var/turf/exterior/under = floor_type
+		var/turf/under = floor_type
 		icon             = initial(under.icon)
 		icon_state       = initial(under.icon_state)
 		color            = initial(under.color)

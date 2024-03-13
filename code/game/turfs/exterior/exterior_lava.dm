@@ -1,4 +1,4 @@
-/turf/exterior/lava
+/turf/floor/natural/lava
 	name = "lava"
 	icon = 'icons/turf/exterior/lava.dmi'
 	movement_delay = 4
@@ -8,15 +8,15 @@
 	material = /decl/material/solid/stone/basalt // TODO: inherent turf temperature
 	var/list/victims
 
-/turf/exterior/lava/Initialize()
+/turf/floor/natural/lava/Initialize()
 	. = ..()
 	set_light(2, l_color = LIGHT_COLOR_LAVA)
 
-/turf/exterior/lava/Destroy()
+/turf/floor/natural/lava/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/turf/exterior/lava/Entered(atom/movable/AM)
+/turf/floor/natural/lava/Entered(atom/movable/AM)
 	..()
 	if(locate(/obj/structure/catwalk/) in src)
 		return
@@ -27,11 +27,11 @@
 		LAZYADD(victims, weakref(AM))
 		START_PROCESSING(SSobj, src)
 
-/turf/exterior/lava/Exited(atom/movable/AM)
+/turf/floor/natural/lava/Exited(atom/movable/AM)
 	. = ..()
 	LAZYREMOVE(victims, weakref(AM))
 
-/turf/exterior/lava/Process()
+/turf/floor/natural/lava/Process()
 	if(locate(/obj/structure/catwalk/) in src)
 		victims = null
 		return PROCESS_KILL

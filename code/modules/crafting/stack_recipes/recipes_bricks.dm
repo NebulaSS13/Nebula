@@ -49,15 +49,15 @@
 
 /decl/stack_recipe/turfs/path/brick
 	name                       = "cobblestone path"
-	result_type                = /turf/exterior/path
+	result_type                = /turf/floor/natural/path
 	craft_stack_types          = /obj/item/stack/material/brick
 
 /decl/stack_recipe/turfs/path/brick/herringbone
 	name                       = "herringbone path"
-	result_type                = /turf/exterior/path/herringbone
+	result_type                = /turf/floor/natural/path/herringbone
 	difficulty                 = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/turfs/path/brick/running_bond
 	name                       = "running bond path"
-	result_type                = /turf/exterior/path/running_bond
+	result_type                = /turf/floor/natural/path/running_bond
 	difficulty                 = MAT_VALUE_HARD_DIY

@@ -1,10 +1,10 @@
-/turf/exterior/rock
+/turf/floor/natural/rock
 	name = "rock floor"
 	icon = 'icons/turf/exterior/rock.dmi'
 	icon_edge_layer = EXT_EDGE_VOLCANIC
 	is_fundament_turf = TRUE
 
-/turf/exterior/rock/Initialize(mapload, no_update_icon)
+/turf/floor/natural/rock/Initialize(mapload, no_update_icon)
 	material = material || SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone
 	. = ..()
 

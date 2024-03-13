@@ -1,4 +1,4 @@
-/turf/exterior/open_ocean
+/turf/floor/natural/open_ocean
 	name = "open ocean"
 	icon = 'icons/turf/exterior/ocean_deep.dmi'
 	icon_state = "0"

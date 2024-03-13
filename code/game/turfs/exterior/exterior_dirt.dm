@@ -1,4 +1,4 @@
-/turf/exterior/dirt
+/turf/floor/natural/dirt
 	name = "dirt"
 	desc = "A flat expanse of dry, cracked earth."
 	icon = 'icons/turf/exterior/dirt.dmi'
@@ -9,7 +9,7 @@
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/soil
 
-/turf/exterior/dirt/fluid_act(var/datum/reagents/fluids)
+/turf/floor/natural/dirt/fluid_act(var/datum/reagents/fluids)
 	SHOULD_CALL_PARENT(FALSE)
-	var/turf/new_turf = ChangeTurf(/turf/exterior/mud, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
+	var/turf/new_turf = ChangeTurf(/turf/floor/natural/mud, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
 	return new_turf.fluid_act(fluids)

@@ -13,7 +13,7 @@
 
 /datum/level_data/planetoid/exoplanet/meat
 	base_area           = /area/exoplanet/meat
-	base_turf           = /turf/exterior/meat
+	base_turf           = /turf/floor/natural/meat
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators    = list(
@@ -110,15 +110,15 @@
 	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
 	water_level_max      = 3
 	water_level_min      = 2
-	land_type            = /turf/exterior/meat
-	water_type           = /turf/exterior/meat/acid
+	land_type            = /turf/floor/natural/meat
+	water_type           = /turf/floor/natural/meat/acid
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
 ////////////////////////////////////////////////////////////////////////////
 
 /area/exoplanet/meat
-	base_turf       = /turf/exterior/meat
+	base_turf       = /turf/floor/natural/meat
 	forced_ambience = list(
 		"sound/ambience/spookyspace1.ogg",
 		"sound/ambience/spookyspace2.ogg"
@@ -128,7 +128,7 @@
 // Turfs
 ////////////////////////////////////////////////////////////////////////////
 
-/turf/exterior/meat
+/turf/floor/natural/meat
 	name          = "fleshy ground"
 	icon          = 'icons/turf/exterior/flesh.dmi'
 	desc          = "It's disgustingly soft to the touch. And warm. Too warm."
@@ -136,7 +136,7 @@
 	footstep_type = /decl/footsteps/mud
 	material = /decl/material/solid/organic/meat
 
-/turf/exterior/meat/acid
+/turf/floor/natural/meat/acid
 	name         = "juices"
 	desc         = "Half-digested chunks of vines are floating in the puddle of some liquid."
 	gender       = PLURAL

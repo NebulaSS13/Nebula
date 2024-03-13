@@ -231,21 +231,6 @@
 		else
 			target.air.temperature += sharer_temperature_delta
 
-	else if(istype(target, /turf/exterior) && !target.blocks_air)
-		var/turf/exterior/modeled_location = target
-		var/datum/gas_mixture/target_air = modeled_location.return_air()
-
-		var/delta_temperature = air.temperature - target_air.temperature
-		var/sharer_heat_capacity = target_air.heat_capacity()
-
-		if((sharer_heat_capacity > 0) && (partial_heat_capacity > 0))
-			var/heat = thermal_conductivity*delta_temperature* \
-				(partial_heat_capacity*sharer_heat_capacity/(partial_heat_capacity+sharer_heat_capacity))
-
-			air.temperature += -heat/total_heat_capacity
-		else
-			return 1
-
 	else
 		if((target.heat_capacity > 0) && (partial_heat_capacity > 0))
 			var/delta_temperature = air.temperature - target.temperature

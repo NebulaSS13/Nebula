@@ -1,4 +1,4 @@
-/turf/exterior/shrouded
+/turf/floor/natural/shrouded
 	name = "packed sand"
 	icon = 'icons/turf/exterior/shrouded.dmi'
 	desc = "Sand that has been packed in to solid earth."
@@ -7,7 +7,7 @@
 	material = /decl/material/solid/sand
 	is_fundament_turf = TRUE
 
-/turf/exterior/shrouded/tar
+/turf/floor/natural/shrouded/tar
 	name = "tar"
 	desc = "A pool of viscous and sticky tar."
 	movement_delay = 12

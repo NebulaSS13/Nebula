@@ -1,4 +1,4 @@
-/turf/exterior/chlorine_sand
+/turf/floor/natural/chlorine_sand
 	name = "chlorinated sand"
 	desc = "Sand that has been heavily contaminated by chlorine."
 	icon = 'icons/turf/exterior/chlorine_sand.dmi'
@@ -9,7 +9,7 @@
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/sand
 
-/turf/exterior/chlorine_sand/marsh
+/turf/floor/natural/chlorine_sand/marsh
 	name = "chlorine marsh"
 	desc = "A pool of noxious liquid chlorine. It's full of silt and plant matter."
 	reagent_type = /decl/material/gas/chlorine

@@ -1,18 +1,16 @@
-/turf/exterior
+/turf/floor/natural
 	name = "ground"
 	icon = 'icons/turf/exterior/barren.dmi'
-	footstep_type = /decl/footsteps/asteroid
 	icon_state = "0"
-	layer = PLATING_LAYER
+	footstep_type = /decl/footsteps/asteroid
 	open_turf_type = /turf/open
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
-	zone_membership_candidate = TRUE
-	initial_gas = list(
-		/decl/material/gas/oxygen = MOLES_O2STANDARD,
-		/decl/material/gas/nitrogen = MOLES_N2STANDARD
-	)
+	base_name = "ground"
+	base_desc = "Bare, barren sand."
+	base_icon = 'icons/turf/exterior/barren.dmi'
+	base_icon_state = 0
+	base_color = null
 
-	var/base_color
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
 	var/icon_edge_layer = -1
@@ -25,27 +23,21 @@
 
 	var/is_fundament_turf = FALSE
 	var/reagent_type
-
 	var/const/TRENCH_DEPTH_PER_ACTION = 100
 
-/turf/exterior/Initialize(mapload, no_update_icon = FALSE)
-
+/turf/floor/natural/Initialize(mapload, no_update_icon = FALSE)
 	if(base_color)
 		color = base_color
 	else
 		color = null
-
 	if(material)
 		set_turf_materials(material, skip_update = no_update_icon)
 
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
-
 	. = ..(mapload)	// second param is our own, don't pass to children
-
 	if (no_update_icon)
 		return
-
 	// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
 	if(!mapload)
 		for(var/direction in global.alldirs)
@@ -56,11 +48,10 @@
 				else
 					target_turf.update_icon()
 	update_icon()
-
 	if(reagent_type && height < 0)
 		add_to_reagents(reagent_type, abs(height))
 
-/turf/exterior/attackby(obj/item/W, mob/user)
+/turf/floor/natural/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/stack/material/ore) || istype(W, /obj/item/stack/material/lump))
 
@@ -97,29 +88,26 @@
 
 	return ..()
 
-/turf/exterior/on_reagent_change()
+/turf/floor/natural/set_flooring(var/decl/flooring/newflooring)
+	return
+
+/turf/floor/natural/on_reagent_change()
 	. = ..()
 	if(reagent_type && height < 0 && reagents && reagents.total_volume < abs(height))
 		add_to_reagents(abs(height) - reagents.total_volume)
 
-/turf/exterior/is_floor()
-	return !density && !is_open()
-
-/turf/exterior/is_plating()
+/turf/floor/natural/is_plating()
 	return !density
 
-/turf/exterior/can_engrave()
+/turf/floor/natural/can_engrave()
 	return FALSE
 
-/turf/exterior/explosion_act(severity)
-	SHOULD_CALL_PARENT(TRUE)
-	..()
-	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
-		ChangeTurf(get_base_turf_by_area(src))
+/turf/floor/natural/physically_destroyed(var/skip_qdel)
+	SHOULD_CALL_PARENT(FALSE)
+	return !!switch_to_base_turf()
 
-/turf/exterior/on_defilement()
-	..()
-	if(density)
-		ChangeTurf(/turf/wall/cult)
-	else
-		ChangeTurf(/turf/floor/cult)
+/turf/floor/natural/on_defilement()
+	ChangeTurf(/turf/floor/cult)
+
+/turf/floor/natural/get_soil_color()
+	return dirt_color

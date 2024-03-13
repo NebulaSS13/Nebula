@@ -12,7 +12,7 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/level_data/planetoid/exoplanet/desert
-	base_turf           = /turf/exterior/sand
+	base_turf           = /turf/floor/natural/sand
 	base_area           = /area/exoplanet/desert
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
@@ -108,7 +108,7 @@
 
 /datum/random_map/noise/exoplanet/desert
 	descriptor           = "desert exoplanet"
-	land_type            = /turf/exterior/sand
+	land_type            = /turf/floor/natural/sand
 	flora_prob           = 5
 	grass_prob           = 2
 	large_flora_prob     = 0
@@ -123,7 +123,7 @@
 /datum/random_map/noise/exoplanet/desert/get_appropriate_path(var/value)
 	. = ..()
 	if(noise2value(value) > 6)
-		return /turf/exterior/dry
+		return /turf/floor/natural/dry
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
@@ -138,4 +138,4 @@
 		'sound/effects/wind/desert4.ogg',
 		'sound/effects/wind/desert5.ogg'
 	)
-	base_turf = /turf/exterior/sand
+	base_turf = /turf/floor/natural/sand

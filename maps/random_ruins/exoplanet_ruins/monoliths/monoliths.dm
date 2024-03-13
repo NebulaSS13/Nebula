@@ -38,10 +38,12 @@
 	else
 		z_flags &= ~ZMM_MANGLE_PLANES
 
-	var/turf/exterior/T = get_turf(src)
+	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
-		add_overlay(I)
+		var/soil_color = T.get_soil_color()
+		if(soil_color)
+			var/image/I = overlay_image(icon, "dugin", soil_color, RESET_COLOR)
+			add_overlay(I)
 
 /obj/structure/monolith/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)

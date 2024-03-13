@@ -1,4 +1,4 @@
-/turf/exterior/path
+/turf/floor/natural/path
 	name = "path"
 	color = COLOR_GRAY
 	base_color = COLOR_GRAY
@@ -7,10 +7,10 @@
 	icon_edge_layer = EXT_EDGE_PATH
 	material = /decl/material/solid/stone/sandstone
 
-/turf/exterior/path/running_bond
+/turf/floor/natural/path/running_bond
 	icon = 'icons/turf/exterior/running_bond.dmi'
 	icon_edge_layer = null
 
-/turf/exterior/path/herringbone
+/turf/floor/natural/path/herringbone
 	icon = 'icons/turf/exterior/herringbone.dmi'
 	icon_edge_layer = null

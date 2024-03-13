@@ -1,7 +1,7 @@
-/turf/exterior/grass
+/turf/floor/natural/grass
 	name = "grass"
 	possible_states = 1
-	icon = 'icons/turf/exterior/grass.dmi'
+	icon = 'icons/turf/flooring/grass.dmi'
 	footstep_type = /decl/footsteps/grass
 	icon_edge_layer = EXT_EDGE_GRASS
 	color = "#5e7a3b"
@@ -9,17 +9,17 @@
 	icon_has_corners = TRUE
 	material = /decl/material/solid/organic/plantmatter/grass
 
-/turf/exterior/grass/wild
+/turf/floor/natural/grass/wild
 	name = "wild grass"
 	possible_states = 0
-	icon = 'icons/turf/exterior/wildgrass.dmi'
+	icon = 'icons/turf/flooring/wildgrass.dmi'
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
 	footstep_type = /decl/footsteps/grass
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
 	icon_has_corners = TRUE
 
-/turf/exterior/grass/wild/get_movable_alpha_mask_state(atom/movable/mover)
+/turf/floor/natural/grass/wild/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..() || "mask_grass"
 
 /obj/item/stack/material/bundle/grass
@@ -33,17 +33,17 @@
 	dried_type = null
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 
-/turf/exterior/grass/wild/attackby(obj/item/W, mob/user)
+/turf/floor/natural/grass/wild/attackby(obj/item/W, mob/user)
 	if(IS_KNIFE(W))
 		if(W.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = "harvesting", success_message = "harvesting"))
-			if(QDELETED(src) || !istype(src, /turf/exterior/grass/wild))
+			if(QDELETED(src) || !istype(src, /turf/floor/natural/grass/wild))
 				return TRUE
 			new /obj/item/stack/material/bundle/grass(src, rand(2,5))
-			ChangeTurf(/turf/exterior/grass)
+			ChangeTurf(/turf/floor/natural/grass)
 		return TRUE
 	return ..()
 
-/turf/exterior/grass/wild/Initialize(mapload, no_update_icon)
+/turf/floor/natural/grass/wild/Initialize(mapload, no_update_icon)
 	. = ..()
 	//It's possible we're created on a level that's not a planet!
 	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[z]
@@ -62,12 +62,12 @@
 	if(!LAZYLEN(resources.resources))
 		remove_extension(src, /datum/extension/buried_resources)
 
-/turf/exterior/grass/wild/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/turf/floor/natural/grass/wild/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
 		handle_melting()
 	return ..()
 
-/turf/exterior/grass/wild/handle_melting(list/meltable_materials)
+/turf/floor/natural/grass/wild/handle_melting(list/meltable_materials)
 	. = ..()
 	if(icon_state != "scorched")
 		SetName("scorched ground")

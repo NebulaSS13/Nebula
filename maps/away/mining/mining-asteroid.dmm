@@ -6,14 +6,14 @@
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "af" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "aj" = (
 /turf/wall/r_wall,
 /area/djstation)
 "ak" = (
 /obj/random/junk,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "al" = (
 /obj/random/trash,
@@ -204,15 +204,15 @@
 /area/djstation)
 "be" = (
 /obj/random/maintenance,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "bf" = (
 /obj/effect/overmap/visitable/sector/cluster,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "cb" = (
 /obj/effect/shuttle_landmark/cluster/nav5,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "db" = (
 /obj/effect/shuttle_landmark/cluster/nav6,
@@ -236,7 +236,7 @@
 /area/space)
 "ib" = (
 /obj/effect/shuttle_landmark/cluster/nav7,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "jb" = (
 /obj/machinery/button/access/exterior{
@@ -244,7 +244,7 @@
 	name = "exterior access button";
 	pixel_y = -24
 	},
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "kb" = (
 /obj/machinery/door/airlock/external{
@@ -340,7 +340,7 @@
 	pixel_x = -24;
 	req_access = null
 	},
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "wb" = (
 /obj/machinery/door/airlock/external{

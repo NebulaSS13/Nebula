@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/exoplanet/neutralia)
 "b" = (
 /turf/unsimulated/mineral,
@@ -17,15 +17,15 @@
 /area/exoplanet/neutralia)
 "j" = (
 /obj/abstract/landmark/exoplanet_spawn/large_plant,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/exoplanet/neutralia)
 "o" = (
 /obj/abstract/landmark/exoplanet_spawn/animal,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/exoplanet/neutralia)
 "x" = (
 /obj/abstract/landmark/exoplanet_spawn/plant,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/exoplanet/neutralia)
 
 (1,1,1) = {"

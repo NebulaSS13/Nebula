@@ -3,7 +3,7 @@
 	desc               = "A rough natural wall."
 	turf_flags         = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 	girder_material    = null
-	floor_type         = /turf/exterior/barren
+	floor_type         = /turf/floor/natural/barren
 	construction_stage = -1
 	var/strata_override
 	var/ramp_slope_direction
@@ -162,3 +162,6 @@
 
 /turf/wall/natural/get_default_material()
 	. = GET_DECL(SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone)
+
+/turf/wall/natural/on_defilement()
+	ChangeTurf(/turf/wall/cult)
