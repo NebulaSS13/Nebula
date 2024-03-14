@@ -56,7 +56,7 @@
 					for(var/decl/stack_recipe/recipe as anything in recipes)
 						if(ispath(recipe.result_type, /turf)) // Cannot exist without a loc and doesn't have matter, cannot assess here.
 							continue
-						var/atom/product = recipe.spawn_result(null, null, 1, material, reinforced)
+						var/atom/product = LAZYACCESS(recipe.spawn_result(null, null, 1, material, reinforced), 1)
 						var/failed
 						if(!product)
 							failed = "no product returned"

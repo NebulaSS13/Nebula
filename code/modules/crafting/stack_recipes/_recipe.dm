@@ -318,31 +318,33 @@
 	return null
 
 /decl/stack_recipe/proc/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/atom/O
-
 	//TODO: standardize material argument passing in Initialize().
 	if(ispath(result_type, /obj/item/stack)) // Amount is set manually in some overrides as well.
-		O = new result_type(location, amount, MATERIAL_RECIPE_PARAMS)
+		. = list(new result_type(location, amount, MATERIAL_RECIPE_PARAMS))
 	else
-		O = new result_type(location, MATERIAL_RECIPE_PARAMS)
+		. = list()
+		for(var/i in 1 to amount)
+			. += new result_type(location, MATERIAL_RECIPE_PARAMS)
 
 	if(user && set_dir_on_spawn)
-		O.set_dir(user?.dir)
+		for(var/atom/O in .)
+			O.set_dir(user.dir)
 
 	// Temp block pending material/matter rework
-	if(mat && mat?.type != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
-		var/obj/struct = O
-		if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
-			struct.matter[mat.type] = max(struct.matter[mat.type], struct.matter[DEFAULT_FURNITURE_MATERIAL])
-			struct.matter -= DEFAULT_FURNITURE_MATERIAL
+	if(mat && mat?.type != DEFAULT_FURNITURE_MATERIAL && ispath(result_type, /obj))
+		for(var/obj/struct in .)
+			if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
+				struct.matter[mat.type] = max(struct.matter[mat.type], struct.matter[DEFAULT_FURNITURE_MATERIAL])
+				struct.matter -= DEFAULT_FURNITURE_MATERIAL
 	// End temp block
 
-	if(user && istype(O, /obj/item/stack))
-		var/obj/item/stack/S = O
-		S.add_to_stacks(user, 1)
+	if(user && ispath(result_type, /obj/item/stack))
+		for(var/obj/item/stack/S in .)
+			S.add_to_stacks(user, 1)
 
-	if(!QDELETED(O))
-		return O
+	for(var/atom/res in .)
+		if(QDELETED(res))
+			. -= res
 
 /decl/stack_recipe/proc/can_make(mob/user)
 	if (one_per_turf && (locate(result_type) in user.loc))
