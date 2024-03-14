@@ -106,14 +106,14 @@
 		visible_message(SPAN_NOTICE("\The [user] begins slicing apart \the [src] with \the [W]."))
 		if(do_after(user,reinf_material ? 40: 20,src))
 			visible_message(SPAN_NOTICE("\The [user] slices apart \the [src] with \the [W]."))
-			dismantle()
+			dismantle_structure(user)
 		return TRUE
 
 	if(IS_PICK(W))
 		if(W.get_tool_quality(TOOL_PICK) < TOOL_QUALITY_GOOD)
 			to_chat(user, SPAN_WARNING("\The [W] is not powerful enough to destroy \the [src]."))
 		else if(W.do_tool_interaction(TOOL_PICK, user, src, (reinf_material ? 6 : 4) SECONDS, set_cooldown = TRUE))
-			dismantle()
+			dismantle_structure(user)
 		return TRUE
 	// Reinforcing a girder, or turning it into a wall.
 	if(istype(W, /obj/item/stack/material))
@@ -199,7 +199,7 @@
 	max_health = 150
 	cover = 70
 
-/obj/structure/girder/cult/dismantle()
+/obj/structure/girder/cult/dismantle_structure(mob/user)
 	material = null
 	reinf_material = null
 	parts_type = null

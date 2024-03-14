@@ -10,7 +10,7 @@
 	var/tmp/list/slots_allowed
 	var/tmp/list/blacklisted_types = list(/obj/item/clothing/suit/space)
 
-/obj/structure/coatrack/dismantle()
+/obj/structure/coatrack/dismantle_structure(mob/user)
 	for(var/obj/item/thing in contents)
 		thing.dropInto(loc)
 	. = ..()

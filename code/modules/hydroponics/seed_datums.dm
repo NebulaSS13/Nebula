@@ -334,10 +334,10 @@
 
 //Ambrosia/varieties.
 /datum/seed/ambrosia
-	name = "biteleaf"
-	seed_name = "biteleaf"
-	display_name = "biteleaf patch"
-	mutants = list("biteleafdeus")
+	name = "ambrosiavulgaris"
+	seed_name = "ambrosia vulgaris"
+	display_name = "ambrosia vulgaris patch"
+	mutants = list("ambrosiadeus")
 	chems = list(
 		/decl/material/liquid/nutriment = list(1),
 		/decl/material/liquid/psychoactives = list(1,8),
@@ -345,7 +345,7 @@
 		/decl/material/liquid/brute_meds = list(1,10,1),
 		/decl/material/liquid/bromide = list(1,10)
 	)
-	kitchen_tag = "biteleaf"
+	kitchen_tag = "ambrosiavulgaris"
 
 /datum/seed/ambrosia/New()
 	..()
@@ -360,9 +360,9 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 
 /datum/seed/ambrosia/deus
-	name = "biteleafdeus"
-	seed_name = "biteleaf deus"
-	display_name = "biteleaf deus patch"
+	name = "ambrosiadeus"
+	seed_name = "ambrosia deus"
+	display_name = "ambrosia deus patch"
 	mutants = null
 	chems = list(
 		/decl/material/liquid/nutriment = list(1),
@@ -372,7 +372,7 @@
 		/decl/material/liquid/amphetamines = list(1,10,1),
 		/decl/material/liquid/psychoactives = list(1,10)
 	)
-	kitchen_tag = "biteleafdeus"
+	kitchen_tag = "ambrosiadeus"
 
 /datum/seed/ambrosia/deus/New()
 	..()

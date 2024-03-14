@@ -42,7 +42,7 @@
 
 //tobacco sold seperately if you're too snobby to grow it yourself.
 /obj/item/chems/food/grown/dried_tobacco
-	plantname = "tobacco"
+	seed = "tobacco"
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/food/grown/dried_tobacco/Initialize()
@@ -51,10 +51,10 @@
 	SetName("dried [name]")
 	color = "#a38463"
 /obj/item/chems/food/grown/dried_tobacco/bad
-	plantname = "badtobacco"
+	seed = "badtobacco"
 
 /obj/item/chems/food/grown/dried_tobacco/fine
-	plantname = "finetobacco"
+	seed = "finetobacco"
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/paper/cig/filter))

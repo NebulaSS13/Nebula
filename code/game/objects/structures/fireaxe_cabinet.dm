@@ -58,7 +58,7 @@
 	QDEL_NULL(fireaxe)
 	. = ..()
 
-/obj/structure/fireaxecabinet/dismantle()
+/obj/structure/fireaxecabinet/dismantle_structure(mob/user)
 	if(loc && !dismantled && !QDELETED(fireaxe))
 		fireaxe.dropInto(loc)
 		fireaxe = null

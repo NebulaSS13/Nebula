@@ -323,7 +323,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		B.lift(10 SECONDS) //~10 seconds
 	return TRUE
 
-/obj/structure/tape_barricade/dismantle()
+/obj/structure/tape_barricade/dismantle_structure(mob/user)
 	for (var/obj/structure/tape_barricade/B in get_tape_line())
 		if(B == src || QDELETED(B))
 			continue

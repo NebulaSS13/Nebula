@@ -52,7 +52,7 @@
 		)
 	take_damage(W.force)
 
-/obj/structure/deity/dismantle()
+/obj/structure/deity/physically_destroyed(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	qdel(src)
 	. = TRUE

@@ -78,7 +78,7 @@
 	var/obj/structure/girder/G = locate() in T
 	if(G)
 		if(prob(40))
-			G.dismantle()
+			G.dismantle_structure()
 		return
 	var/obj/structure/window/W = locate() in T
 	if(W)

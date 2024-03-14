@@ -708,9 +708,7 @@
 			SSplants.seeds[name] = src
 
 		if(harvest_sample)
-			var/obj/item/seeds/seeds = new(get_turf(user))
-			seeds.seed_type = name
-			seeds.update_seed()
+			new /obj/item/seeds(get_turf(user), null, src)
 			return
 
 		var/total_yield = 0
@@ -736,7 +734,7 @@
 				. += new product_type(get_turf(user), using_yield)
 		else
 			for(var/i = 1 to total_yield)
-				var/obj/item/product = new product_type(get_turf(user),name)
+				var/obj/item/product = new product_type(get_turf(user), null, src)
 				. += product
 
 				if(get_trait(TRAIT_PRODUCT_COLOUR) && istype(product, /obj/item/chems/food))

@@ -310,7 +310,6 @@
 
 		if(!isnull(SSplants.seeds[seed.seed.name]))
 			seed.seed = seed.seed.diverge(1)
-			seed.seed_type = seed.seed.name
 			seed.update_seed()
 
 		if(prob(seed.modified))

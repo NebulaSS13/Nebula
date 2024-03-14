@@ -62,7 +62,7 @@
 				update_materials(TRUE)
 	. = ..()
 
-/obj/structure/barricade/dismantle()
+/obj/structure/barricade/dismantle_structure(mob/user)
 	visible_message(SPAN_DANGER("The barricade is smashed apart!"))
 	. = ..()
 

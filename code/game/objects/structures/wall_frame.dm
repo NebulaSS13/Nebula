@@ -86,7 +86,7 @@
 			visible_message(SPAN_NOTICE("\The [user] begins slicing through \the [src] with \the [W]."))
 			if(do_after(user, 20,src))
 				visible_message(SPAN_NOTICE("\The [user] slices \the [src] apart with \the [W]."))
-				dismantle()
+				dismantle_structure(user)
 			return TRUE
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

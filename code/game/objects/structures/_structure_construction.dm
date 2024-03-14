@@ -32,7 +32,7 @@
 			return TRUE
 		playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] completely dismantles \the [src] with \the [welder]."))
-		dismantle()
+		dismantle_structure(user)
 		return TRUE
 	return FALSE
 
@@ -47,7 +47,7 @@
 			return TRUE
 		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] completely dismantles \the [src] with \the [crowbar]."))
-		dismantle()
+		dismantle_structure(user)
 		return TRUE
 	return FALSE
 

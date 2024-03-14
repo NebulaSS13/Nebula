@@ -8,17 +8,17 @@
 	slot_flags = SLOT_HOLSTER
 	material = /decl/material/solid/organic/plantmatter
 	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
-
-	var/plantname = "apple" // Setting as a default in case this is spawned manually.
 	var/datum/seed/seed
-	var/potency = -1
 
-/obj/item/chems/food/grown/Initialize(mapload, planttype)
-	if(planttype)
-		plantname = planttype
-	seed = SSplants.seeds[plantname]
-	if(!seed)
-		log_warning("\The [src] couldn't get a seed from SSplants for plant type '[plantname]'. Deleting!")
+/obj/item/chems/food/grown/Initialize(mapload, material_key, _seed)
+
+	if(isnull(seed) && _seed)
+		seed = _seed
+	if(istext(seed))
+		seed = SSplants.seeds[seed]
+
+	if(!istype(seed))
+		PRINT_STACK_TRACE("Grown initializing with null or invalid seed type '[seed || "NULL"]'")
 		return INITIALIZE_HINT_QDEL
 
 	if(seed.scannable_result)
@@ -37,7 +37,6 @@
 		reagents.clear_reagents()
 	if(!seed?.chems)
 		return
-	potency = seed.get_trait(TRAIT_POTENCY)
 
 	. = ..() //create_reagent and populate_reagents
 
@@ -53,6 +52,7 @@
 		if(LAZYLEN(reagent_amounts))
 			var/rtotal = reagent_amounts[1]
 			var/list/data = null
+			var/potency = seed.get_trait(TRAIT_POTENCY)
 			if(LAZYACCESS(reagent_amounts,2) && potency > 0)
 				rtotal += round(potency/reagent_amounts[2])
 			if(rid == /decl/material/liquid/nutriment)
@@ -171,7 +171,7 @@ var/global/list/_wood_materials = list(
 				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
 				qdel(src)
 				user.put_in_hands(pocell)
-				pocell.maxcharge = src.potency * 10
+				pocell.maxcharge =  seed.get_trait(TRAIT_POTENCY) * 10
 				pocell.charge = pocell.maxcharge
 				return TRUE
 
@@ -320,10 +320,10 @@ var/global/list/_wood_materials = list(
 // Predefined types for placing on the map.
 
 /obj/item/chems/food/grown/libertycap
-	plantname = "libertycap"
+	seed = "libertycap"
 
 /obj/item/chems/food/grown/ambrosiavulgaris
-	plantname = "biteleaf"
+	seed = "ambrosiavulgaris"
 
 /obj/item/chems/food/fruit_slice
 	name = "fruit slice"
