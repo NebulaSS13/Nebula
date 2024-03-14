@@ -2979,7 +2979,7 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/tiled/freezer,
 /area/casino/casino_kitchen)
 "iF" = (

@@ -1058,14 +1058,13 @@ var/global/floorIsLava = 0
 	set category = "Debug"
 	set desc = "Spawn the product of a seed."
 	set name = "Spawn Fruit"
-
-	if(!check_rights(R_SPAWN))	return
-
-	if(!seedtype || !SSplants.seeds[seedtype])
+	if(!check_rights(R_SPAWN) || !seedtype || !SSplants.seeds[seedtype])
 		return
 	var/datum/seed/S = SSplants.seeds[seedtype]
-	S.harvest(usr,0,0,1)
-	log_admin("[key_name(usr)] spawned [seedtype] fruit at ([usr.x],[usr.y],[usr.z])")
+	if(S?.harvest(usr, 0, FALSE, 1))
+		log_admin("[key_name(usr)] spawned [seedtype] fruit at ([usr.x],[usr.y],[usr.z])")
+	else
+		to_chat(usr, SPAN_WARNING("Failed to harvest [seedtype]."))
 
 /datum/admins/proc/spawn_custom_item()
 	set category = "Debug"

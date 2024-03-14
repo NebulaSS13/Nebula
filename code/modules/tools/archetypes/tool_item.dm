@@ -1,6 +1,9 @@
 /obj/item/proc/get_tool_quality(var/archetype)
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
-	return tool?.get_tool_quality(archetype)
+	. = tool?.get_tool_quality(archetype)
+	if(!.)
+		var/decl/tool_archetype/tool_arch = GET_DECL(archetype)
+		. = tool_arch.get_default_quality(src)
 
 /obj/item/proc/get_best_tool_archetype()
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
@@ -12,6 +15,9 @@
 /obj/item/proc/get_tool_speed(var/archetype)
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
 	. = tool?.get_tool_speed(archetype)
+	if(!.)
+		var/decl/tool_archetype/tool_arch = GET_DECL(archetype)
+		. = tool_arch.get_default_speed(src)
 
 /**Returns the property's value for a givent archetype. */
 /obj/item/proc/get_tool_property(var/archetype, var/property)
@@ -40,8 +46,7 @@
 	if(get_tool_quality(archetype) <= 0)
 		return FALSE
 
-	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
-	. = tool.do_tool_interaction(archetype, user, target, delay, start_message, success_message, failure_message, fuel_expenditure, check_skill,  prefix_message, suffix_message, check_skill_threshold, check_skill_prob, set_cooldown)
+	. = handle_tool_interaction(archetype, user, src, target, delay, start_message, success_message, failure_message, fuel_expenditure, check_skill, prefix_message, suffix_message, check_skill_threshold, check_skill_prob, set_cooldown)
 
 	if(QDELETED(user) || QDELETED(target))
 		return FALSE

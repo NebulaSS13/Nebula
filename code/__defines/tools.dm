@@ -10,6 +10,7 @@
 #define TOOL_SHOVEL         /decl/tool_archetype/shovel
 #define TOOL_PICK           /decl/tool_archetype/pick
 #define TOOL_HAMMER         /decl/tool_archetype/hammer
+#define TOOL_KNIFE          /decl/tool_archetype/knife
 
 // Misc tools.
 #define TOOL_PEN            /decl/tool_archetype/pen
@@ -36,9 +37,10 @@
 #define TOOL_QUALITY_BEST     2
 
 // Tool speeds (smaller values mean a shorter delay)
-#define TOOL_SPEED_WORST   3
-#define TOOL_SPEED_DEFAULT 1
-#define TOOL_SPEED_BEST  0.5
+#define TOOL_SPEED_WORST    3
+#define TOOL_SPEED_MEDIOCRE 2
+#define TOOL_SPEED_DEFAULT  1
+#define TOOL_SPEED_BEST   0.5
 
 // Helper macros for interaction checks.
 #define IS_TOOL(A, T)     (isatom(A) && A.get_tool_quality(T) > 0)
@@ -54,6 +56,7 @@
 #define IS_SHOVEL(A)      IS_TOOL(A, TOOL_SHOVEL)
 #define IS_PEN(A)         IS_TOOL(A, TOOL_PEN)
 #define IS_PICK(A)        IS_TOOL(A, TOOL_PICK)
+#define IS_KNIFE(A)       IS_TOOL(A, TOOL_KNIFE)
 
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)

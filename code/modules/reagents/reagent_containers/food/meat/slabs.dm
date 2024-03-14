@@ -11,6 +11,8 @@
 	material = /decl/material/solid/organic/meat
 	bitesize = 3
 	utensil_flags = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
+	drying_wetness = 60
+	dried_type = /obj/item/chems/food/jerky/meat
 
 /obj/item/chems/food/meat/populate_reagents()
 	. = ..()

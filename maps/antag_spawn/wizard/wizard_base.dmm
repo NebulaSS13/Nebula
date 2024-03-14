@@ -519,7 +519,7 @@
 	},
 /area/map_template/wizard_station)
 "br" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"

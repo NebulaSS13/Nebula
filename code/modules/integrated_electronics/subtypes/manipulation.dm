@@ -261,6 +261,8 @@
 		switch(get_pin_data(IC_INPUT, 2))
 			if(0)
 				var/list/harvest_output = TR.harvest()
+				if(harvest_output && !islist(harvest_output))
+					harvest_output = list(harvest_output)
 				for(var/i in 1 to length(harvest_output))
 					harvest_output[i] = weakref(harvest_output[i])
 

@@ -276,6 +276,9 @@
 			desc_comp += SPAN_DANGER("No extractable materials detected.<BR>")
 		desc_comp += "*--------*<BR>"
 
+	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
+		desc_comp += "\The [src] is [get_dryness_text()].<BR>"
+
 	return ..(user, distance, "", desc_comp)
 
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)

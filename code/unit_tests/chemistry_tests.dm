@@ -203,7 +203,7 @@
 				continue
 			chem = new chem(spawn_spot)
 			if(QDELETED(chem))
-				failures += "- [type] qdeleted after Initialize()"
+				failures += "- [chem.type] qdeleted after Initialize()"
 				continue
 			chem_refs[chem.type] = weakref(chem)
 

@@ -37,6 +37,14 @@
 	var/image/harvest_overlay
 	var/list/growing_overlays
 
+	// Backyard grilling vars. Not passed through genetics.
+	var/backyard_grilling_rawness      = 20
+	var/backyard_grilling_product      = /obj/item/chems/food/badrecipe
+	var/backyard_grilling_announcement = "smokes and chars!"
+
+	// Used to show an icon when drying in a rack.
+	var/drying_state = "grown"
+
 /datum/seed/New()
 
 	set_trait(TRAIT_IMMUTABLE,            0)            // If set, plant will never mutate. If -1, plant is highly mutable.
@@ -695,7 +703,7 @@
 /datum/seed/proc/harvest(var/mob/user,var/yield_mod,var/harvest_sample,var/force_amount)
 
 	if(!user)
-		return
+		return FALSE
 
 	if(!force_amount && get_trait(TRAIT_YIELD) == 0 && !harvest_sample)
 		if(istype(user)) to_chat(user, "<span class='danger'>You fail to harvest anything useful.</span>")
@@ -708,8 +716,7 @@
 			SSplants.seeds[name] = src
 
 		if(harvest_sample)
-			new /obj/item/seeds(get_turf(user), null, src)
-			return
+			return new /obj/item/seeds(get_turf(user), null, src)
 
 		var/total_yield = 0
 		if(!isnull(force_amount))

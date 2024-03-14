@@ -2801,7 +2801,7 @@
 /turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "iG" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)

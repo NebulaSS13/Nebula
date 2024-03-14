@@ -57,7 +57,7 @@
 		LAZYADD(., new skull_type(T))
 
 // Structure for conducting butchery on.
-/obj/structure/kitchenspike
+/obj/structure/meat_hook
 	name = "meat hook"
 	desc = "It looks pretty sharp."
 	anchored = TRUE
@@ -78,17 +78,17 @@
 	var/secures_occupant = TRUE
 	var/busy =             FALSE
 
-/obj/structure/kitchenspike/return_air()
+/obj/structure/meat_hook/return_air()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		return T.return_air()
 
-/obj/structure/kitchenspike/improvised
+/obj/structure/meat_hook/improvised
 	name = "truss"
 	icon_state = "improvised"
 	secures_occupant = FALSE
 
-/obj/structure/kitchenspike/attack_hand(var/mob/user)
+/obj/structure/meat_hook/attack_hand(var/mob/user)
 
 	if(!occupant || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
@@ -96,21 +96,20 @@
 	if(occupant_state == CARCASS_FRESH)
 		visible_message(SPAN_NOTICE("\The [user] removes \the [occupant] from \the [src]."))
 		occupant.forceMove(get_turf(src))
-		occupant = null
-		occupant_state = CARCASS_EMPTY
+		clear_occupant()
 		busy = FALSE
 		update_icon()
 	else
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
 	return TRUE
 
-/obj/structure/kitchenspike/receive_mouse_drop(atom/dropping, mob/user, params)
+/obj/structure/meat_hook/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
 		try_spike(dropping, user)
 		return TRUE
 
-/obj/structure/kitchenspike/proc/try_spike(var/mob/living/target, var/mob/living/user)
+/obj/structure/meat_hook/proc/try_spike(var/mob/living/target, var/mob/living/user)
 	if(!istype(target) || !Adjacent(user) || user.incapacitated() || target.anchored)
 		return
 
@@ -141,14 +140,15 @@
 		target.forceMove(src)
 		occupant = target
 		occupant_state = CARCASS_FRESH
+		SetName("[target.name] carcass")
 		update_icon()
 	else
 		to_chat(user, SPAN_WARNING("You cannot butcher \the [target]."))
 
-/obj/structure/kitchenspike/proc/suitable_for_butchery(var/mob/living/victim)
+/obj/structure/meat_hook/proc/suitable_for_butchery(var/mob/living/victim)
 	return istype(victim) && ((victim.meat_type && victim.meat_amount) || (victim.skin_material && victim.skin_amount) || (victim.bone_material && victim.bone_amount))
 
-/obj/structure/kitchenspike/on_update_icon()
+/obj/structure/meat_hook/on_update_icon()
 	..()
 	if(occupant)
 		occupant.set_dir(SOUTH)
@@ -159,7 +159,7 @@
 		I.transform = M
 		add_overlay(I)
 
-/obj/structure/kitchenspike/mob_breakout(mob/living/escapee)
+/obj/structure/meat_hook/mob_breakout(mob/living/escapee)
 	. = ..()
 	if(secures_occupant)
 		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [src]!"))
@@ -168,27 +168,32 @@
 	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [src]!"))
 	escapee.dropInto(loc)
 	if(escapee == occupant)
-		occupant = null
-		occupant_state = CARCASS_EMPTY
+		clear_occupant()
 		update_icon()
 	return TRUE
 
-/obj/structure/kitchenspike/proc/set_carcass_state(var/_state)
+/obj/structure/meat_hook/proc/clear_occupant()
+	occupant = null
+	occupant_state = CARCASS_EMPTY
+	SetName(initial(name))
+	update_materials(TRUE) // reset name
+
+/obj/structure/meat_hook/proc/set_carcass_state(var/_state)
 	occupant_state = _state
 	if(occupant)
 		occupant.adjustBruteLoss(rand(50,60))
 		if(occupant.stat != DEAD)
 			occupant.death()
 	if(QDELETED(occupant))
-		occupant = null
-		occupant_state = CARCASS_EMPTY
+		clear_occupant()
 	else if(occupant_state == CARCASS_EMPTY)
 		for(var/obj/item/W in occupant)
 			occupant.drop_from_inventory(W)
-		QDEL_NULL(occupant)
+		qdel(occupant)
+		clear_occupant()
 	update_icon()
 
-/obj/structure/kitchenspike/proc/do_butchery_step(var/mob/user, var/next_state, var/butchery_string)
+/obj/structure/meat_hook/proc/do_butchery_step(var/mob/user, obj/item/tool, var/next_state, var/butchery_string)
 
 	if(QDELETED(occupant))
 		return FALSE
@@ -196,12 +201,11 @@
 	var/last_state = occupant_state
 	var/mob/living/last_occupant = occupant
 
-	user.visible_message(SPAN_NOTICE("\The [user] begins [butchery_string] \the [occupant]."))
 	occupant.adjustBruteLoss(rand(50,60))
 	update_icon()
-
-	if(do_after(user, 3 SECONDS, src) && !QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
-		user.visible_message(SPAN_NOTICE("\The [user] finishes [butchery_string] \the [occupant]."))
+	if(!tool?.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = butchery_string, success_message = butchery_string, check_skill = SKILL_COOKING))
+		return FALSE
+	if(!QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
 		switch(next_state)
 			if(CARCASS_SKINNED)
 				occupant.harvest_skin()
@@ -211,10 +215,11 @@
 				occupant.harvest_meat()
 		set_carcass_state(next_state)
 		return TRUE
+
 	return FALSE
 
-/obj/structure/kitchenspike/attackby(var/obj/item/thing, var/mob/user)
-	if(!thing.sharp)
+/obj/structure/meat_hook/attackby(var/obj/item/thing, var/mob/user)
+	if(!IS_KNIFE(thing))
 		return ..()
 	if(!occupant)
 		to_chat(user, SPAN_WARNING("There is nothing on \the [src] to butcher."))
@@ -223,13 +228,14 @@
 		busy = TRUE
 		switch(occupant_state)
 			if(CARCASS_FRESH)
-				do_butchery_step(user, CARCASS_SKINNED, "skinning")
+				do_butchery_step(user, thing, CARCASS_SKINNED, "skinning")
 			if(CARCASS_SKINNED)
-				do_butchery_step(user, CARCASS_JOINTED, "deboning")
+				do_butchery_step(user, thing, CARCASS_JOINTED, "deboning")
 			if(CARCASS_JOINTED)
-				do_butchery_step(user, CARCASS_EMPTY,   "butchering")
+				do_butchery_step(user, thing, CARCASS_EMPTY,   "butchering")
 		busy = FALSE
 		return TRUE
+
 #undef CARCASS_EMPTY
 #undef CARCASS_FRESH
 #undef CARCASS_SKINNED

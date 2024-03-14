@@ -7,6 +7,10 @@
 	bitesize = 1
 	center_of_mass = @'{"x":17,"y":20}'
 	material = /decl/material/solid/organic/meat
+	backyard_grilling_product = /obj/item/chems/food/cutlet
+	backyard_grilling_announcement = "sizzles as it is grilled through."
+	drying_wetness = 30
+	dried_type = /obj/item/chems/food/jerky/cutlet
 
 /obj/item/chems/food/rawcutlet/populate_reagents()
 	. = ..()
@@ -33,6 +37,8 @@
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":15}'
 	material = /decl/material/solid/organic/meat
+	backyard_grilling_product = /obj/item/chems/food/meatball
+	backyard_grilling_announcement = "sizzles as it is grilled through."
 
 /obj/item/chems/food/rawmeatball/populate_reagents()
 	. = ..()
@@ -129,6 +135,7 @@
 	add_to_reagents(/decl/material/liquid/nutriment/protein,     12)
 	add_to_reagents(/decl/material/liquid/amphetamines,           5)
 
+// Shouldn't this be poisonous?
 /obj/item/chems/food/spider
 	name = "giant spider leg"
 	desc = "An economical replacement for crab. In space! Would probably be a lot nicer cooked."
@@ -137,10 +144,22 @@
 	center_of_mass = @'{"x":16,"y":10}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
+	drying_wetness = 60
+	dried_type = /obj/item/chems/food/jerky/spider/poison
+	backyard_grilling_product = /obj/item/chems/food/spider/charred
+	backyard_grilling_announcement = "smokes as the poison burns away."
 
 /obj/item/chems/food/spider/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/protein, 9)
+
+/obj/item/chems/food/spider/charred
+	name = "charred spider meat"
+	desc = "A slab of green meat with char lines. The poison has been burned out of it."
+	color = COLOR_RED_LIGHT
+	backyard_grilling_product = /obj/item/chems/food/badrecipe
+	dried_product_takes_color = FALSE
+	dried_type = /obj/item/chems/food/jerky/spider
 
 /obj/item/chems/food/spider/cooked
 	name = "boiled spider meat"

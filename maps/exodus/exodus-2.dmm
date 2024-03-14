@@ -19131,7 +19131,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/tiled/freezer,
 /area/exodus/crew_quarters/kitchen)
 "aOo" = (
@@ -19925,7 +19925,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/research)
 "aPM" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/tiled/freezer,
 /area/exodus/crew_quarters/kitchen)
 "aPN" = (
@@ -26718,7 +26718,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-4"
 	},
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/corner/lime/three_quarters{
 	dir = 8
 	},
@@ -53004,7 +53004,7 @@
 	pixel_x = 27;
 	dir = 8
 	},
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/corner/purple/three_quarters{
 	dir = 1
 	},

@@ -1,0 +1,1 @@
+/obj/structure/kitchenspike/@SUBTYPES : /obj/structure/meat_hook/@SUBTYPES{@OLD}

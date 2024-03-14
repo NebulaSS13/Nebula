@@ -7936,7 +7936,7 @@
 	dir = 9
 	},
 /obj/structure/window/reinforced,
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/hydroponics)
 "Kz" = (

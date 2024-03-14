@@ -768,7 +768,7 @@
 /turf/floor/tiled/white,
 /area/ministation/hall/e2)
 "fD" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /obj/effect/floor_decal/snow,
 /turf/floor/tiled/freezer{
 	name = "kitchen freezer floor";
@@ -7892,7 +7892,7 @@
 /turf/floor/plating,
 /area/ministation/maint/hydromaint)
 "WL" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/floor/plating,
 /area/ministation/maint/hydromaint)
 "WN" = (

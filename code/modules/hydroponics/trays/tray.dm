@@ -272,6 +272,7 @@
 		. = seed.harvest(user,yield_mod)
 	else
 		. = seed.harvest(get_turf(src),yield_mod)
+
 	// Reset values.
 	harvest = 0
 	lastproduce = age

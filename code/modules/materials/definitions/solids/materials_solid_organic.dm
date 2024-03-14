@@ -247,6 +247,19 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
+/decl/material/solid/organic/plantmatter/grass
+	name = "grass"
+	uid = "solid_grass"
+	default_solid_form = /obj/item/stack/material/bundle
+	melting_point = null // can grass melt??
+	ignition_point = T0C+100
+
+/decl/material/solid/organic/plantmatter/grass/dry
+	name = "dry grass"
+	uid = "solid_dry_grass"
+	color = COLOR_BEIGE
+	ignition_point = T0C+50 // very flammable
+
 /decl/material/solid/organic/meat
 	name = "meat"
 	uid = "solid_meat"
@@ -289,7 +302,7 @@
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = "punch"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-	var/tans_to = /decl/material/solid/organic/leather
+	tans_to = /decl/material/solid/organic/leather
 
 /decl/material/solid/organic/skin/lizard
 	name = "lizardskin"

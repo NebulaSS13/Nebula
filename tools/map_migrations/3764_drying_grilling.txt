@@ -1,0 +1,1 @@
+/obj/machinery/smartfridge/drying_rack/@SUBTYPES : /obj/machinery/smartfridge/drying_oven/@SUBTYPES{@OLD}

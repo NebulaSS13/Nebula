@@ -823,6 +823,8 @@
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/nutriment/cornoil = list(1,10))
 	kitchen_tag = "corn"
 	trash_type = /obj/item/corncob
+	backyard_grilling_product = /obj/item/chems/food/popcorn
+	backyard_grilling_announcement = "pops enthusiastically!"
 
 /datum/seed/corn/New()
 	..()
@@ -1122,6 +1124,7 @@
 	display_name = "grass patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,20))
 	kitchen_tag = "grass"
+	product_type = /obj/item/stack/material/bundle/grass
 
 /datum/seed/grass/New()
 	..()

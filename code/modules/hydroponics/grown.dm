@@ -8,12 +8,15 @@
 	slot_flags = SLOT_HOLSTER
 	material = /decl/material/solid/organic/plantmatter
 	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
+	drying_wetness = 45
+
 	var/datum/seed/seed
 
 /obj/item/chems/food/grown/Initialize(mapload, material_key, _seed)
 
 	if(isnull(seed) && _seed)
 		seed = _seed
+
 	if(istext(seed))
 		seed = SSplants.seeds[seed]
 
@@ -21,16 +24,22 @@
 		PRINT_STACK_TRACE("Grown initializing with null or invalid seed type '[seed || "NULL"]'")
 		return INITIALIZE_HINT_QDEL
 
+	if(!seed.chems)
+		return INITIALIZE_HINT_QDEL // No reagent contents, no froot
+
 	if(seed.scannable_result)
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 
 	SetName("[seed.seed_name]")
-	trash = seed.get_trash_type()
+	trash                          = seed.get_trash_type()
+	backyard_grilling_product      = seed.backyard_grilling_product
+	backyard_grilling_rawness      = seed.backyard_grilling_rawness
+	backyard_grilling_announcement = seed.backyard_grilling_announcement
+
 	if(!dried_type)
 		dried_type = type
 
 	. = ..(mapload) //Init reagents
-	update_icon()
 
 /obj/item/chems/food/grown/initialize_reagents(populate)
 	if(reagents)
@@ -43,6 +52,8 @@
 	update_desc()
 	if(reagents.total_volume > 0)
 		bitesize = 1 + round(reagents.total_volume / 2, 1)
+
+	update_icon()
 
 /obj/item/chems/food/grown/populate_reagents()
 	. = ..()
@@ -277,23 +288,6 @@ var/global/list/_wood_materials = list(
 		seed.thrown_at(src,user)
 		sleep(-1)
 		if(src) qdel(src)
-		return
-
-	if(seed.kitchen_tag == "grass")
-		user.show_message("<span class='notice'>You make a grass tile out of \the [src]!</span>", 1)
-		var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR)
-		if(!flesh_colour) flesh_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-		for(var/i=0,i<2,i++)
-			var/obj/item/stack/tile/grass/G = new (user.loc)
-			if(flesh_colour) G.color = flesh_colour
-			for (var/obj/item/stack/tile/grass/NG in user.loc)
-				if(G==NG)
-					continue
-				if(NG.amount>=NG.max_amount)
-					continue
-				NG.attackby(G, user)
-			to_chat(user, "You add the newly-formed grass to the stack. It now contains [G.amount] tiles.")
-		qdel(src)
 		return
 
 	if(seed.get_trait(TRAIT_SPREAD) > 0)

@@ -108,7 +108,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "at" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},

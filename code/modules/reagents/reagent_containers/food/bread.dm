@@ -13,6 +13,8 @@
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
+	backyard_grilling_product = /obj/item/chems/food/toastedsandwich
+	backyard_grilling_announcement = "is toasted golden brown."
 
 /obj/item/chems/food/sandwich/populate_reagents()
 	. = ..()

@@ -54,6 +54,15 @@
 	icon_state = "tile_grass"
 	origin_tech = @'{"biotech":1}'
 
+/obj/item/stack/tile/woven
+	name = "woven tile"
+	singular_name = "woven floor tile"
+	desc = "A piece of woven material suitable for covering the floor."
+	icon_state = "woven"
+	origin_tech = @'{"biotech":1}'
+	material = /decl/material/solid/organic/plantmatter/grass/dry
+	color = COLOR_BEIGE
+
 /*
  * Wood
  */
@@ -354,6 +363,13 @@
 	matter_multiplier = 0.3
 	icon_state = "tile"
 	material = /decl/material/solid/metal/steel
+
+/obj/item/stack/tile/roof/woven
+	name = "woven roofing tile"
+	desc = "A flimsy, woven roofing tile."
+	icon_state = "woven"
+	material = /decl/material/solid/organic/plantmatter/grass/dry
+	replacement_turf_type = /turf/floor/woven
 
 /obj/item/stack/tile/roof/try_build_turf(var/mob/user, var/turf/target)
 

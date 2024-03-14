@@ -48,3 +48,9 @@
 			. = SPAN_WARNING(.)
 		else if(value > TOOL_QUALITY_DECENT)
 			. = SPAN_NOTICE(.)
+
+/decl/tool_archetype/proc/get_default_quality(obj/item/tool)
+	return 0
+
+/decl/tool_archetype/proc/get_default_speed(obj/item/tool)
+	return TOOL_SPEED_WORST // Need to return a non-zero/null value to avoid bugs.
