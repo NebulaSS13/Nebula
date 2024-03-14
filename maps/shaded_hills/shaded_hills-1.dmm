@@ -54,9 +54,6 @@
 "sS" = (
 /turf/exterior/mud/water,
 /area/shaded_hills/caves/unexplored)
-"tp" = (
-/turf/exterior/grass,
-/area/space)
 "ul" = (
 /obj/abstract/landmark/roofed,
 /turf/floor/wood/ebony,
@@ -14783,7 +14780,7 @@ lE
 lE
 lE
 lE
-tp
+lC
 lC
 lC
 lC
@@ -14935,7 +14932,7 @@ lE
 lE
 lE
 lE
-tp
+lC
 lC
 lC
 lC
