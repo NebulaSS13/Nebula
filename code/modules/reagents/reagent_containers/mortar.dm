@@ -13,6 +13,7 @@
 	if(crushing_item)
 		crushing_item.dropInto(loc || get_turf(user))
 		return TRUE
+	return ..()
 
 /obj/item/chems/glass/mortar/attackby(obj/item/using_item, mob/living/user)
 	if((. = ..()))
@@ -31,30 +32,31 @@
 			to_chat(user, SPAN_NOTICE("\The [using_item] is not suitable for grinding."))
 			return TRUE
 		if(!user.try_unequip(using_item, src))
-			return FALSE
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You add \the [using_item] to \the [src] for grinding."))
 		return TRUE
-	else if(using_item.force > 0 && attacking_material && crushing_material)
-		if(attacking_material.hardness <= crushing_material.hardness)
-			to_chat(user, SPAN_NOTICE("\The [using_item] is not hard enough to crush \the [crushing_item]."))
-			return TRUE
-		if(REAGENTS_FREE_SPACE(reagents) < crushing_item.reagents.total_volume)
-			to_chat(user, SPAN_WARNING("\The [src] is too full to grind \the [crushing_item], it'd spill everywhere!"))
-			return TRUE
-		if(crushing_item.reagents.total_volume) // if it has no reagents, skip all the fluff and destroy it instantly
-			var/stamina_to_consume = max(crushing_item.reagents.total_volume * (1 + user.get_stamina_skill_mod()/2), 5)
-			if(stamina_to_consume > 100) // TODO: add user.get_max_stamina()?
-				to_chat(user, SPAN_WARNING("\The [crushing_item] is too large for you to grind in \the [src]!"))
-				return TRUE
-			if(user.get_stamina() < stamina_to_consume)
-				to_chat(user, SPAN_WARNING("You are too tired to crush \the [crushing_item], take a break!"))
-				return TRUE
-			to_chat(user, SPAN_NOTICE("You start grinding \the [crushing_item] with \the [using_item]."))
-			if(!do_after(user, stamina_to_consume SECONDS))
-				to_chat(user, SPAN_NOTICE("You stop grinding \the [crushing_item]."))
-				return TRUE
-			user.adjust_stamina(-stamina_to_consume)
-			crushing_item.reagents.trans_to(src, crushing_item.reagents.total_volume, skill_factor)
-			to_chat(user, SPAN_NOTICE("You finish grinding \the [crushing_item] with \the [using_item]."))
-		QDEL_NULL(crushing_item)
+	if(using_item.force <= 0 || !attacking_material || !crushing_material)
 		return TRUE
+	if(attacking_material.hardness <= crushing_material.hardness)
+		to_chat(user, SPAN_NOTICE("\The [using_item] is not hard enough to crush \the [crushing_item]."))
+		return TRUE
+	if(REAGENTS_FREE_SPACE(reagents) < crushing_item.reagents.total_volume)
+		to_chat(user, SPAN_WARNING("\The [src] is too full to grind \the [crushing_item], it'd spill everywhere!"))
+		return TRUE
+	if(crushing_item.reagents?.total_volume) // if it has no reagents, skip all the fluff and destroy it instantly
+		var/stamina_to_consume = max(crushing_item.reagents.total_volume * (1 + user.get_stamina_skill_mod()/2), 5)
+		if(stamina_to_consume > 100) // TODO: add user.get_max_stamina()?
+			to_chat(user, SPAN_WARNING("\The [crushing_item] is too large for you to grind in \the [src]!"))
+			return TRUE
+		if(user.get_stamina() < stamina_to_consume)
+			to_chat(user, SPAN_WARNING("You are too tired to crush \the [crushing_item], take a break!"))
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You start grinding \the [crushing_item] with \the [using_item]."))
+		if(!do_after(user, stamina_to_consume SECONDS))
+			to_chat(user, SPAN_NOTICE("You stop grinding \the [crushing_item]."))
+			return TRUE
+		user.adjust_stamina(-stamina_to_consume)
+		crushing_item.reagents.trans_to(src, crushing_item.reagents.total_volume, skill_factor)
+		to_chat(user, SPAN_NOTICE("You finish grinding \the [crushing_item] with \the [using_item]."))
+	QDEL_NULL(crushing_item)
+	return TRUE
