@@ -105,6 +105,9 @@
 		if(isnull(max_res_amount) || max_res_amount > stack_max)
 			max_res_amount = stack_max
 
+	if(isnull(max_res_amount) && one_per_turf)
+		max_res_amount = 1
+
 	if(isnull(name_plural))
 		name_plural = "[name]s"
 
