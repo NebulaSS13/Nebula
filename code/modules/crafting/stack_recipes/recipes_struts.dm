@@ -46,4 +46,4 @@
 	required_material           = /decl/material/solid/metal/steel
 
 /decl/stack_recipe/strut/machine/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return new result_type(location)
+	return ..(user, location, amount, null, null)

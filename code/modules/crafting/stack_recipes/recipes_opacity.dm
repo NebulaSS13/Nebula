@@ -6,6 +6,7 @@
 
 /decl/stack_recipe/opacity/fullwindow
 	name                 = "full-tile window"
+	one_per_turf         = TRUE
 	result_type          = /obj/structure/window
 
 /decl/stack_recipe/opacity/fullwindow/can_make(mob/user)
@@ -17,12 +18,13 @@
 				return FALSE
 
 /decl/stack_recipe/opacity/fullwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, SOUTHWEST, TRUE)
+	return list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, SOUTHWEST, TRUE))
 
 /decl/stack_recipe/opacity/borderwindow
 	name                 = "border window"
 	result_type          = /obj/structure/window
-	one_per_turf         = 0
+	one_per_turf         = FALSE
+	max_res_amount       = 1 // one per direction
 
 /decl/stack_recipe/opacity/borderwindow/can_make(mob/user)
 	. = ..()
@@ -33,7 +35,7 @@
 				return FALSE
 
 /decl/stack_recipe/opacity/borderwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, user?.dir, TRUE)
+	return list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, user?.dir, TRUE))
 
 /decl/stack_recipe/opacity/windoor
 	result_type          = /obj/structure/windoor_assembly
@@ -44,6 +46,3 @@
 		if(locate(/obj/machinery/door/window) in user.loc)
 			to_chat(user, "<span class='warning'>There is already a windoor here!</span>")
 			return FALSE
-
-/decl/stack_recipe/opacity/windoor/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return new result_type(user?.loc, MATERIAL_RECIPE_PARAMS)

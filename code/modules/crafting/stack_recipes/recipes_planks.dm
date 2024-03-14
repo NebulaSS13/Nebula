@@ -34,10 +34,10 @@
 	set_dir_on_spawn       = FALSE
 
 /decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/structure/noticeboard/board = ..()
-	if(istype(board) && user)
-		board.set_dir(global.reverse_dir[user.dir])
-	return board
+	. = ..()
+	if(user)
+		for(var/obj/structure/noticeboard/board in .)
+			board.set_dir(global.reverse_dir[user.dir])
 
 /decl/stack_recipe/planks/prosthetic
 	abstract_type          = /decl/stack_recipe/planks/prosthetic
@@ -47,12 +47,11 @@
 	var/prosthetic_model   = /decl/bodytype/prosthetic/wooden
 
 /decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/item/organ/external/limb = ..()
-	if(limb)
+	. = ..()
+	for(var/obj/item/organ/external/limb in .)
 		limb.set_species(prosthetic_species)
 		limb.set_bodytype(prosthetic_model, override_material = (required_material != MATERIAL_FORBIDDEN ? mat?.type : null))
 		limb.status |= ORGAN_CUT_AWAY
-	return limb
 
 /decl/stack_recipe/planks/prosthetic/left_arm
 	result_type            = /obj/item/organ/external/arm

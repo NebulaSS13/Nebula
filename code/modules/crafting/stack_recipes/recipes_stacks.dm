@@ -8,14 +8,6 @@
 	apply_material_name = FALSE
 	category            = "tiling"
 
-/decl/stack_recipe/tile/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/item/stack/S = ..()
-	if(istype(S))
-		S.amount = amount
-		if(user)
-			S.add_to_stacks(user, 1)
-	return S
-
 /decl/stack_recipe/tile/wood
 	result_type         = /obj/item/stack/tile/wood
 	required_material   = /decl/material/solid/organic/wood

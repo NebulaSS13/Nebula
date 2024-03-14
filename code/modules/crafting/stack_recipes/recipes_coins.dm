@@ -25,8 +25,8 @@
 		. += "invalid or null denomination: [denomination || "NULL"]"
 
 /decl/stack_recipe/coin/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/item/coin/coin = ..()
-	if(istype(coin) && istype(denomination))
-		coin.denomination = denomination
-		coin.SetName(coin.denomination.name)
-	return coin
+	. = ..()
+	if(istype(denomination))
+		for(var/obj/item/coin/coin in .)
+			coin.denomination = denomination
+			coin.SetName(coin.denomination.name)
