@@ -176,7 +176,8 @@
 		to_chat(user, SPAN_WARNING("You waste some [name] and fail to make [recipe.get_display_name(produced, mat, reinf_mat)]!"))
 		return
 	to_chat(user, SPAN_NOTICE("You complete [recipe.get_display_name(produced, mat, reinf_mat)]!"))
-	var/atom/movable/O = LAZYACCESS(recipe.spawn_result(user, user.loc, produced, mat, reinf_mat), 1)
+	var/list/atom/results = recipe.spawn_result(user, user.loc, produced, mat, reinf_mat)
+	var/atom/movable/O = LAZYACCESS(results, 1)
 	if(istype(O) && !QDELETED(O)) // In case of stack merger.
 		O.add_fingerprint(user)
 		user.put_in_hands(O)
