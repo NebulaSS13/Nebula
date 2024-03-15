@@ -1342,3 +1342,50 @@
 	set_trait(TRAIT_IDEAL_HEAT, 298)
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+
+/datum/seed/tea
+	name = "tea"
+	seed_name = "tea leaf"
+	display_name = "tea plant"
+	chems = list(/decl/material/liquid/nutriment = list(1))
+	dried_chems = list(/decl/material/liquid/nutriment/tea = list(10,10))
+
+/datum/seed/tea/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,TRUE)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_PRODUCT_ICON,"tobacco")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#749733")
+	set_trait(TRAIT_PLANT_COLOUR,"#749733")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_HEAT, 299)
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
+/datum/seed/coffee
+	name = "coffee"
+	seed_name = "coffee cherries"
+	display_name = "coffee plant"
+	chems = list(/decl/material/liquid/nutriment = list(1))
+	roasted_chems = list(/decl/material/liquid/nutriment/coffee = list(10,10))
+	backyard_grilling_product = /obj/item/chems/food/grown/grilled
+	backyard_grilling_announcement = "roasts and darkens."
+	product_material = /decl/material/solid/organic/plantmatter/pith
+
+/datum/seed/coffee/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,TRUE)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_PRODUCT_ICON,"grapes")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#a80000")
+	set_trait(TRAIT_PLANT_COLOUR,"#749733")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_HEAT, 299)
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)

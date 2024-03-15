@@ -59,7 +59,9 @@
 			"lavender",
 			"garlic",
 			"peppercorn",
-			"bamboo"
+			"bamboo",
+			"coffee",
+			"tea"
 		),
 	)
 	var/list/trees = list(
