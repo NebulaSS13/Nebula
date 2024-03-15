@@ -16,7 +16,7 @@
 	max_res_amount    = 30
 	required_material = /decl/material/solid/organic/paper
 
-/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	. = ..()
 	if(amount <= 1)
 		return .

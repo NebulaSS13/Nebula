@@ -19,7 +19,7 @@
 /obj/structure/get_color()
 	if(paint_color)
 		return paint_color
-	if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
 		return material.color
 	return initial(color)
 

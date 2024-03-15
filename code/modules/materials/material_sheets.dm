@@ -274,6 +274,18 @@
 	craft_verb = "tailor"
 	craft_verbing = "tailoring"
 
+// Subtypes for dyed cloth.
+/obj/item/stack/material/bolt/yellow
+	paint_color = "#ffbf00"
+/obj/item/stack/material/bolt/teal
+/obj/item/stack/material/bolt/black
+/obj/item/stack/material/bolt/green
+/obj/item/stack/material/bolt/purple
+/obj/item/stack/material/bolt/blue
+/obj/item/stack/material/bolt/beige
+/obj/item/stack/material/bolt/lime
+/obj/item/stack/material/bolt/red
+
 /obj/item/stack/material/pane
 	name = "panes"
 	singular_name = "pane"

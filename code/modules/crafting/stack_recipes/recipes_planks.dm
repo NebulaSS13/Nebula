@@ -33,7 +33,7 @@
 	difficulty             = MAT_VALUE_HARD_DIY
 	set_dir_on_spawn       = FALSE
 
-/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	. = ..()
 	if(user)
 		for(var/obj/structure/noticeboard/board in .)
@@ -46,7 +46,7 @@
 	var/prosthetic_species = SPECIES_HUMAN
 	var/prosthetic_model   = /decl/bodytype/prosthetic/wooden
 
-/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	. = ..()
 	for(var/obj/item/organ/external/limb in .)
 		limb.set_species(prosthetic_species)
@@ -88,16 +88,16 @@
 
 /decl/stack_recipe/planks/furniture/sofa
 	name                   = "sofa, middle"
-	result_type            = /obj/structure/bed/sofa/middle
+	result_type            = /obj/structure/bed/sofa/middle/unpadded
 	category               = "seating"
 
 /decl/stack_recipe/planks/furniture/sofa/left
 	name                   = "sofa, left"
-	result_type            = /obj/structure/bed/sofa/left
+	result_type            = /obj/structure/bed/sofa/left/unpadded
 
 /decl/stack_recipe/planks/furniture/sofa/right
 	name                   = "sofa, right"
-	result_type            = /obj/structure/bed/sofa/right
+	result_type            = /obj/structure/bed/sofa/right/unpadded
 
 /decl/stack_recipe/planks/furniture/bookcase
 	result_type            = /obj/structure/bookcase

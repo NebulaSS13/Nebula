@@ -62,6 +62,7 @@
 	origin_tech = @'{"biotech":1}'
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 	color = COLOR_BEIGE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /*
  * Wood
@@ -271,81 +272,100 @@
 	name = "brown carpet"
 	singular_name = "brown carpet"
 	desc = "A piece of brown carpet."
-	icon_state = "tile_carpetbrown"
+	icon_state = "tile_carpet"
+	material = /decl/material/solid/organic/cloth
+	paint_color = "#6e391d"
+	var/detail_color = "#aa6300"
+
+/obj/item/stack/tile/carpet/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/stack/tile/carpet/on_update_icon()
+	. = ..()
+	color = get_color()
+	set_overlays(overlay_image(icon, "[icon_state]-detail", detail_color, RESET_COLOR))
 
 /obj/item/stack/tile/carpet/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetblue
+/obj/item/stack/tile/carpet/blue
 	name = "blue carpet"
 	desc = "A piece of blue and gold carpet."
 	singular_name = "blue carpet"
-	icon_state = "tile_carpetblue"
+	paint_color = "#464858"
 
-/obj/item/stack/tile/carpetblue/fifty
+/obj/item/stack/tile/carpet/blue/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetblue2
+/obj/item/stack/tile/carpet/blue2
 	name = "pale blue carpet"
 	desc = "A piece of blue and pale blue carpet."
 	singular_name = "pale blue carpet"
-	icon_state = "tile_carpetblue2"
+	paint_color = "#356287"
+	detail_color = "#868e96"
 
-/obj/item/stack/tile/carpetblue2/fifty
+/obj/item/stack/tile/carpet/blue2/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetblue3
+/obj/item/stack/tile/carpet/blue3
 	name = "sea blue carpet"
 	desc = "A piece of blue and green carpet."
 	singular_name = "sea blue carpet"
-	icon_state = "tile_carpetblue3"
+	detail_color = "#528c3c"
+	paint_color = "#356287"
 
-/obj/item/stack/tile/carpetblue3/fifty
+/obj/item/stack/tile/carpet/blue3/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetmagenta
+/obj/item/stack/tile/carpet/magenta
 	name = "magenta carpet"
 	desc = "A piece of magenta carpet."
 	singular_name = "magenta carpet"
-	icon_state = "tile_carpetmagenta"
+	paint_color = "#91265e"
+	detail_color = "#be6208"
 
-/obj/item/stack/tile/carpetmagenta/fifty
+/obj/item/stack/tile/carpet/magenta/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetpurple
+/obj/item/stack/tile/carpet/purple
 	name = "purple carpet"
 	desc = "A piece of purple carpet."
 	singular_name = "purple carpet"
-	icon_state = "tile_carpetpurple"
+	paint_color = "#4f3365"
+	detail_color = "#a25204"
 
-/obj/item/stack/tile/carpetpurple/fifty
+/obj/item/stack/tile/carpet/purple/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetorange
+/obj/item/stack/tile/carpet/orange
 	name = "orange carpet"
 	desc = "A piece of orange carpet."
 	singular_name = "orange carpet"
-	icon_state = "tile_carpetorange"
+	paint_color = "#9d480c"
+	detail_color = "#d07708"
 
-/obj/item/stack/tile/carpetorange/fifty
+/obj/item/stack/tile/carpet/orange/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetgreen
+/obj/item/stack/tile/carpet/green
 	name = "green carpet"
 	desc = "A piece of green carpet."
 	singular_name = "green carpet"
-	icon_state = "tile_carpetgreen"
+	paint_color = "#2a6e47"
+	detail_color = "#328e63"
 
-/obj/item/stack/tile/carpetgreen/fifty
+/obj/item/stack/tile/carpet/green/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetred
+/obj/item/stack/tile/carpet/red
 	name = "red carpet"
 	desc = "A piece of red carpet."
 	singular_name = "red carpet"
-	icon_state = "tile_carpetred"
+	paint_color = "#873221"
+	detail_color = "#aa6300"
 
-/obj/item/stack/tile/carpetred/fifty
+/obj/item/stack/tile/carpet/red/fifty
 	amount = 50
 
 /obj/item/stack/tile/pool

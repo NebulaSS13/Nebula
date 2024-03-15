@@ -55,19 +55,14 @@
 	result_type        = /obj/structure/bed/chair
 	category           = "seating"
 
-/decl/stack_recipe/hardness/integrity/furniture/chair/padded
-	result_type        = /obj/structure/bed/chair/padded
-
 /decl/stack_recipe/hardness/integrity/furniture/chair/office
-
-/decl/stack_recipe/hardness/integrity/furniture/chair/office/comfy
-	result_type        = /obj/structure/bed/chair/office/comfy
+	result_type        = /obj/structure/bed/chair/office/comfy/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/comfy
-	result_type        = /obj/structure/bed/chair/comfy
+	result_type        = /obj/structure/bed/chair/comfy/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/arm
-	result_type        = /obj/structure/bed/chair/armchair
+	result_type        = /obj/structure/bed/chair/armchair/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/roundedchair
 	result_type        = /obj/structure/bed/chair/rounded
