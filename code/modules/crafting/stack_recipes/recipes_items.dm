@@ -17,13 +17,19 @@
 	required_material = /decl/material/solid/organic/paper
 
 /decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/item/paper/P = ..()
-	if(amount > 1)
-		var/obj/item/paper_bundle/B = new(location)
-		B.merge(P)
-		for(var/i = 1 to (amount - 1))
-			if(B.get_amount_papers() >= B.max_pages)
-				B = new(location)
-			B.merge(new /obj/item/paper(location))
-		return B
-	return P
+	. = ..()
+	if(amount <= 1)
+		return .
+	var/obj/item/paper_bundle/bundle = new (location)
+	var/list/bundles = list(bundle)
+	var/remaining = amount
+	for(var/obj/item/paper/paper in .)
+		remaining--
+		if(bundle.get_amount_papers() >= bundle.max_pages)
+			if(remaining == 0)
+				bundles += paper // not a bundle, this is an exception for single overflow pages
+				break
+			bundle = new(location)
+			bundles += bundle
+		bundle.merge(paper)
+	return bundles

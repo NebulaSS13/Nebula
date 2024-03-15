@@ -153,7 +153,9 @@
 
 /obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/quantity, mob/user)
 	var/required = quantity*recipe.req_amount
-	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
+	var/produced = quantity*recipe.res_amount
+	if(!isnull(recipe.max_res_amount))
+		produced = min(produced, recipe.max_res_amount)
 	var/decl/material/mat       = get_material()
 	var/decl/material/reinf_mat = get_reinforced_material()
 
@@ -174,7 +176,8 @@
 		to_chat(user, SPAN_WARNING("You waste some [name] and fail to make [recipe.get_display_name(produced, mat, reinf_mat)]!"))
 		return
 	to_chat(user, SPAN_NOTICE("You complete [recipe.get_display_name(produced, mat, reinf_mat)]!"))
-	var/atom/movable/O = recipe.spawn_result(user, user.loc, produced, mat, reinf_mat)
+	var/list/atom/results = recipe.spawn_result(user, user.loc, produced, mat, reinf_mat)
+	var/atom/movable/O = LAZYACCESS(results, 1)
 	if(istype(O) && !QDELETED(O)) // In case of stack merger.
 		O.add_fingerprint(user)
 		user.put_in_hands(O)

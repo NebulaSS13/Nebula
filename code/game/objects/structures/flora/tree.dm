@@ -108,18 +108,28 @@
 
 /obj/structure/flora/tree/dead/ebony
 	icon_state = "dead_ebony_1"
+	material   = /decl/material/solid/organic/wood/ebony
+	stump_type = /obj/structure/flora/stump/tree/ebony
 
 /obj/structure/flora/tree/dead/mahogany
 	icon_state = "dead_mahogany_1"
+	material   = /decl/material/solid/organic/wood/mahogany
+	stump_type = /obj/structure/flora/stump/tree/mahogany
 
 /obj/structure/flora/tree/dead/walnut
 	icon_state = "dead_walnut_1"
+	material   = /decl/material/solid/organic/wood/walnut
+	stump_type = /obj/structure/flora/stump/tree/walnut
 
 /obj/structure/flora/tree/dead/maple
 	icon_state = "dead_maple_1"
+	material   = /decl/material/solid/organic/wood/maple
+	stump_type = /obj/structure/flora/stump/tree/maple
 
 /obj/structure/flora/tree/dead/yew
 	icon_state = "dead_yew_1"
+	material   = /decl/material/solid/organic/wood/yew
+	stump_type = /obj/structure/flora/stump/tree/yew
 
 /obj/structure/flora/tree/softwood
 	icon          = 'icons/obj/flora/softwood.dmi'
