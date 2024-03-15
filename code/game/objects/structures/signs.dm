@@ -127,9 +127,9 @@
 		copy_extension(src, S, /datum/extension/forensic_evidence)
 		copy_extension(src, S, /datum/extension/scent)
 		transfer_fingerprints_to(S)
-	matter = null
-	material = null
-	reinf_material = null
+		if(paint_color)
+			S.set_color(paint_color)
+	clear_materials()
 
 /obj/structure/sign/double/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
 	return FALSE

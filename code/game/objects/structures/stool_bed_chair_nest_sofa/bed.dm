@@ -128,7 +128,10 @@
 
 /obj/structure/bed/proc/remove_padding()
 	if(reinf_material)
-		reinf_material.create_object(get_turf(src))
+		var/list/res = reinf_material.create_object(get_turf(src))
+		if(padding_color)
+			for(var/obj/item/thing in res)
+				thing.set_color(padding_color)
 	reinf_material = null
 	padding_color = null
 	update_icon()

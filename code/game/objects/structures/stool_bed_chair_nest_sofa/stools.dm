@@ -64,7 +64,10 @@
 
 /obj/item/stool/proc/remove_padding()
 	if(padding_material)
-		padding_material.create_object(get_turf(src))
+		var/list/res = padding_material.create_object(get_turf(src))
+		if(padding_color)
+			for(var/obj/item/thing in res)
+				thing.set_color(padding_color)
 	padding_material = null
 	padding_color = null
 	update_icon()

@@ -87,7 +87,11 @@
 		visible_message(SPAN_DANGER("\The [src] shatters!"))
 
 	var/debris_count = is_fulltile() ? 4 : 1
-	material.place_shards(loc, debris_count)
+	var/list/shards = material.place_shards(loc, debris_count)
+	if(paint_color)
+		for(var/obj/item/thing in shards)
+			thing.set_color(paint_color)
+
 	if(reinf_material)
 		reinf_material.create_object(loc, debris_count, /obj/item/stack/material/rods)
 	qdel(src)
@@ -260,12 +264,15 @@
 // TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
-	var/list/products = material.create_object(loc, is_fulltile() ? 4 : 2)
+	. = material.create_object(loc, is_fulltile() ? 4 : 2)
 	if(reinf_material)
-		for(var/obj/item/stack/material/S in products)
+		for(var/obj/item/stack/material/S in .)
 			S.reinf_material = reinf_material
 			S.update_strings()
 			S.update_icon()
+	if(paint_color)
+		for(var/obj/item/thing in .)
+			thing.set_color(paint_color)
 
 /obj/structure/window/grab_attack(var/obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)

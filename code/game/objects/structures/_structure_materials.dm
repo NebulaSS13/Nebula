@@ -76,6 +76,8 @@
 				placing = parts_amount
 			if(placing > 0)
 				LAZYADD(., M.place_dismantled_product(T, FALSE, placing, parts_type))
+
+/obj/structure/proc/clear_materials()
 	matter = null
 	material = null
 	reinf_material = null
@@ -84,7 +86,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!dismantled)
 		dismantled = TRUE
-		create_dismantled_products(get_turf(src))
+		var/list/products = create_dismantled_products(get_turf(src))
+		if(paint_color && length(products))
+			for(var/obj/product in products)
+				if((isitem(product) || istype(product, /obj/structure)) && product.get_material() == material)
+					product.set_color(paint_color)
+		clear_materials()
 		dump_contents()
 		if(!QDELETED(src))
 			qdel(src)
