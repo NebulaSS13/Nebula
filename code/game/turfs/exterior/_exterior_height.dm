@@ -4,7 +4,7 @@
 /turf/exterior/get_physical_height()
 	return density ? 0 : height
 
-/turf/exterior/set_height(new_height)
+/turf/exterior/set_physical_height(new_height)
 	if(height != new_height)
 		height = new_height
 		for(var/turf/neighbor as anything in RANGE_TURFS(src, 1))

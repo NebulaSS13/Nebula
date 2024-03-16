@@ -156,7 +156,7 @@
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
 
 	if(keep_height)
-		W.set_height(old_height)
+		W.set_physical_height(old_height)
 
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)

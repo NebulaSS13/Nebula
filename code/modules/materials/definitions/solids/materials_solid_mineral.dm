@@ -228,6 +228,7 @@
 		/decl/material/solid/silicon = 1
 	)
 	default_solid_form = /obj/item/stack/material/lump
+	can_backfill_turf_type = /turf/exterior/sand
 
 /decl/material/solid/clay
 	name = "clay"
@@ -243,6 +244,7 @@
 	melting_point = null // Clay is already almost a liquid...
 	// lower than the temperature expected from a kiln so that clay can be used to make bricks to make a high-temperature kiln.
 	bakes_into_at_temperature = 950 CELSIUS 
+	can_backfill_turf_type = /turf/exterior/clay
 
 /decl/material/solid/soil
 	name = "soil"
@@ -254,6 +256,10 @@
 	melting_point = null
 	hardness = 0
 	integrity = 0
+	can_backfill_turf_type = list(
+		/turf/exterior/mud,
+		/turf/exterior/dirt
+	)
 
 /decl/material/solid/hematite
 	name = "hematite"

@@ -224,10 +224,7 @@
 			return TRUE
 
 		if(IS_SHOVEL(W) && can_be_dug())
-			if(get_diggable_resources())
-				if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS, set_cooldown = TRUE))
-					drop_diggable_resources()
-			else if(user.a_intent == I_HELP && can_dig_pit())
+			if(user.a_intent == I_HELP && can_dig_pit())
 				try_dig_pit(user, W)
 			else if(can_dig_trench())
 				try_dig_trench(user, W)

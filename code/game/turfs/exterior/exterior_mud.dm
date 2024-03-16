@@ -7,10 +7,10 @@
 	is_fundament_turf = TRUE
 
 /turf/exterior/clay/get_diggable_resources()
-	return dug ? null : list(/obj/item/stack/material/ore/clay = list(3, 2))
+	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/clay = list(3, 2))
 
 /turf/exterior/clay/drop_diggable_resources()
-	if(!dug && prob(15))
+	if(get_physical_height() >= -(FLUID_DEEP) && prob(15))
 		new /obj/item/rock/flint(src)
 	return ..()
 

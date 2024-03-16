@@ -24,7 +24,7 @@
 	return can_be_dug() && !(locate(/obj/structure/pit) in src)
 
 /turf/proc/try_dig_pit(var/mob/user, var/obj/item/tool)
-	if((!user && !tool) || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS, set_cooldown = TRUE))
+	if((!user && !tool) || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS, set_cooldown = TRUE))
 		return dig_pit()
 	return null
 
@@ -35,7 +35,7 @@
 	return FALSE
 
 /turf/proc/try_dig_trench(mob/user, obj/item/tool)
-	if((!user && !tool) || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS, set_cooldown = TRUE))
+	if((!user && !tool) || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 2.5 SECONDS, set_cooldown = TRUE))
 		return dig_trench()
 	return null
 
