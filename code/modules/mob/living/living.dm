@@ -1477,3 +1477,5 @@ default behaviour is:
 		return TRUE
 	return FALSE
 
+/mob/living/proc/handle_footsteps()
+	return

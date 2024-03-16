@@ -1,21 +1,21 @@
-/turf/exterior/wall/random
+/turf/wall/natural/random
 	reinf_material = null
 
-/turf/exterior/wall/random/proc/get_weighted_mineral_list()
+/turf/wall/natural/random/proc/get_weighted_mineral_list()
 	if(strata_override)
 		var/decl/strata/strata_info = GET_DECL(strata_override)
 		. = strata_info.ores_sparse
 	if(!.)
 		. = SSmaterials.weighted_minerals_sparse
 
-/turf/exterior/wall/random/high_chance/get_weighted_mineral_list()
+/turf/wall/natural/random/high_chance/get_weighted_mineral_list()
 	if(strata_override)
 		var/decl/strata/strata_info = GET_DECL(strata_override)
 		. = strata_info.ores_rich
 	if(!.)
 		. = SSmaterials.weighted_minerals_rich
 
-/turf/exterior/wall/random/Initialize(ml, materialtype, rmaterialtype)
+/turf/wall/natural/random/Initialize(ml, materialtype, rmaterialtype)
 	if(!strata_override)
 		strata_override = SSmaterials.get_strata_type(src)
 	if(isnull(reinf_material))
@@ -24,23 +24,27 @@
 			reinf_material = pickweight(default_mineral_list)
 	. = ..()
 
-/turf/exterior/wall/volcanic
+/turf/wall/natural/volcanic
 	strata_override = /decl/strata/igneous
 
-/turf/exterior/wall/random/volcanic
+/turf/wall/natural/random/volcanic
 	strata_override = /decl/strata/igneous
 
-/turf/exterior/wall/random/high_chance/volcanic
+/turf/wall/natural/random/high_chance/volcanic
 	strata_override = /decl/strata/igneous
 
-/turf/exterior/wall/ice
+/turf/wall/natural/ice
 	strata_override = /decl/strata/permafrost
 	floor_type = /turf/exterior/ice
 
-/turf/exterior/wall/random/ice
+/turf/wall/natural/random/ice
 	strata_override = /decl/strata/permafrost
 	floor_type = /turf/exterior/ice
 
-/turf/exterior/wall/random/high_chance/ice
+/turf/wall/natural/random/high_chance/ice
 	strata_override = /decl/strata/permafrost
 	floor_type = /turf/exterior/ice
+
+/turf/wall/natural/dirt
+	material = /decl/material/solid/soil
+	color = "#41311b"

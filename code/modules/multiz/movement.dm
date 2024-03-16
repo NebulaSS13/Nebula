@@ -189,7 +189,7 @@
 /atom/movable/proc/protected_from_fall_damage(var/turf/landing)
 	if(!!(locate(/obj/structure/stairs) in landing))
 		return TRUE
-	var/turf/exterior/wall/ramp = landing
+	var/turf/wall/natural/ramp = landing
 	if(istype(ramp) && ramp.ramp_slope_direction) // walking down a ramp
 		return TRUE
 

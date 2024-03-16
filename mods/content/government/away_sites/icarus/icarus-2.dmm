@@ -9,10 +9,10 @@
 /turf/open,
 /area/icarus/open)
 "ad" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/icarus/open)
 "ae" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/icarus/vessel)
 "af" = (
 /obj/structure/grille,

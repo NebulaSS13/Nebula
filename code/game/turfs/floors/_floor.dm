@@ -144,3 +144,6 @@
 		break_tile_to_plating()
 	else
 		ReplaceWithLattice()
+
+/turf/floor/get_footstep_sound(var/mob/caller)
+	. = ..() || get_footstep_for_mob(flooring?.footstep_type || /decl/footsteps/blank, caller)

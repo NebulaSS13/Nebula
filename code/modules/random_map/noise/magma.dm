@@ -40,6 +40,6 @@
 	if(value>=178)
 		if(istype(T,/turf/exterior/barren))
 			T.ChangeTurf(/turf/exterior/lava)
-		else if(istype(T,/turf/exterior/wall))
-			var/turf/exterior/wall/M = T
+		else if(istype(T,/turf/wall/natural))
+			var/turf/wall/natural/M = T
 			M.floor_type = /turf/exterior/lava

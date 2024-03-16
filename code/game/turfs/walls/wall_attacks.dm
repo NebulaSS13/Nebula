@@ -65,7 +65,7 @@
 	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1)
-		dismantle_wall(1)
+		dismantle_wall(TRUE)
 
 /turf/wall/proc/try_touch(var/mob/user, var/rotting)
 	. = TRUE
@@ -96,27 +96,17 @@
 	if(!.)
 		return try_touch(user, (locate(/obj/effect/overlay/wallrot) in src))
 
-/turf/wall/attackby(var/obj/item/W, var/mob/user, click_params)
-
-	if(istype(W, /obj/item/stack/tile/roof))
-		return ..()
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
+/turf/wall/proc/handle_wall_tool_interactions(obj/item/W, mob/user)
+	//get the user's location
+	if(!isturf(user.loc))
+		return FALSE //can't do this stuff whilst inside objects and such
 	if(!construction_stage && try_graffiti(user, W))
 		return TRUE
-
-	if (!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
-		return
-
-	//get the user's location
-	if(!isturf(user.loc))	return	//can't do this stuff whilst inside objects and such
-
 	if(W)
 		radiate()
 		if(W.get_heat() >= T100C)
 			burn(W.get_heat())
-
+			. = TRUE
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
@@ -128,11 +118,9 @@
 				return TRUE
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
 			to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>")
-			src.dismantle_wall(1)
+			dismantle_wall(TRUE)
 			return TRUE
-
 	var/turf/T = user.loc	//get user's location for delay checks
-
 	if(damage && istype(W, /obj/item/weldingtool))
 
 		var/obj/item/weldingtool/WT = W
@@ -330,20 +318,25 @@
 						dismantle_wall()
 					return
 
+	return FALSE
+
+/turf/wall/attackby(var/obj/item/W, var/mob/user, click_params)
+
+	if(istype(W, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return ..()
+
+	if(handle_wall_tool_interactions(W, user))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		return TRUE
+
 	if(istype(W,/obj/item/frame))
 		var/obj/item/frame/F = W
 		F.try_build(src, click_params)
 		return TRUE
 
 	// Attack the wall with items
-	if(istype(W,/obj/item/rcd) || istype(W, /obj/item/chems))
-		return
-	if(!W.force)
-		return
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.a_intent == I_HELP)
-			return
+	if(istype(W,/obj/item/rcd) || istype(W, /obj/item/chems) || !W.force || user.a_intent == I_HELP)
+		return ..()
 
 	user.do_attack_animation(src)
 	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
@@ -353,7 +346,7 @@
 	if(effective_force < 2)
 		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it had no effect!"))
 		playsound(src, hitsound, 25, 1)
-		return
+		return TRUE
 	// Check for a glancing blow.
 	var/dam_prob = max(0, 100 - material.hardness + effective_force + W.armor_penetration)
 	if(!prob(dam_prob))
@@ -362,9 +355,9 @@
 		if(user.skill_fail_prob(SKILL_HAULING, 40, SKILL_ADEPT))
 			SET_STATUS_MAX(user, STAT_WEAK, 2)
 			visible_message(SPAN_DANGER("\The [user] is knocked back by the force of the blow!"))
-		return
+		return TRUE
 
-	playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
+	playsound(src, get_hit_sound(), 50, 1)
 	visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W]!"))
 	take_damage(effective_force)
 	return TRUE

@@ -114,7 +114,7 @@
 	update_vis_contents()
 
 	if(simulated)
-		var/area/A = loc
+		var/area/A = get_area(src)
 		if(istype(A) && (A.area_flags & AREA_FLAG_HOLY))
 			turf_flags |= TURF_FLAG_HOLY
 		levelupdate()
@@ -620,7 +620,7 @@
 /turf/Bumped(var/atom/movable/AM)
 	if(!istype(AM) || !HasAbove(z))
 		return ..()
-	var/turf/exterior/wall/slope = AM.loc
+	var/turf/wall/natural/slope = AM.loc
 	if(!istype(slope) || !slope.ramp_slope_direction || get_dir(src, slope) != slope.ramp_slope_direction)
 		return ..()
 	var/turf/above_wall = GetAbove(src)

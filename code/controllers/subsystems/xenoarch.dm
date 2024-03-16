@@ -12,35 +12,14 @@ SUBSYSTEM_DEF(xenoarch)
 	init_order = SS_INIT_XENOARCH
 	flags = SS_NO_FIRE
 	var/list/artifact_spawning_turfs = list()
-	var/list/digsite_spawning_turfs = list()
-	var/list/digsite_types_weighted = list()
+	var/list/digsite_spawning_turfs  = list()
+	var/list/digsite_types_weighted  = list()
+	var/list/possible_spawn_walls    = list()
 
 /datum/controller/subsystem/xenoarch/Initialize(timeofday)
-	SetupXenoarch()
-	..()
-
-/datum/controller/subsystem/xenoarch/Recover()
-	if (istype(SSxenoarch.artifact_spawning_turfs))
-		artifact_spawning_turfs = SSxenoarch.artifact_spawning_turfs
-	if (istype(SSxenoarch.digsite_spawning_turfs))
-		digsite_spawning_turfs = SSxenoarch.digsite_spawning_turfs
-
-/datum/controller/subsystem/xenoarch/proc/get_random_digsite_type()
-	if(!digsite_types_weighted.len)
-		var/list/digsites = decls_repository.get_decls_of_type(/decl/xenoarch_digsite)
-		for(var/D in digsites)
-			var/decl/xenoarch_digsite/digsite = digsites[D]
-			digsite_types_weighted[D] = digsite.weight
-	return pickweight(digsite_types_weighted)
-
-/datum/controller/subsystem/xenoarch/proc/SetupXenoarch()
-	for(var/turf/exterior/wall/M in global.natural_walls)
-		if(!M.density)
+	for(var/turf/wall/natural/M in possible_spawn_walls)
+		if(QDELETED(M) || !M.density || M.ramp_slope_direction || !prob(XENOARCH_SPAWN_CHANCE))
 			continue
-
-		if(!prob(XENOARCH_SPAWN_CHANCE))
-			continue
-
 		var/farEnough = 1
 		for(var/A in digsite_spawning_turfs)
 			var/turf/T = A
@@ -60,7 +39,7 @@ SUBSYSTEM_DEF(xenoarch)
 
 		var/list/viable_adjacent_turfs = list()
 		if(target_digsite_size > 1)
-			for(var/turf/exterior/wall/T in orange(2, M))
+			for(var/turf/wall/natural/T in orange(2, M))
 				if(!T.density)
 					continue
 				if(T.finds)
@@ -75,7 +54,7 @@ SUBSYSTEM_DEF(xenoarch)
 			turfs_to_process += pick_n_take(viable_adjacent_turfs)
 
 		while(turfs_to_process.len)
-			var/turf/exterior/wall/archeo_turf = pop(turfs_to_process)
+			var/turf/wall/natural/archeo_turf = pop(turfs_to_process)
 
 			processed_turfs.Add(archeo_turf)
 			if(isnull(archeo_turf.finds))
@@ -103,19 +82,36 @@ SUBSYSTEM_DEF(xenoarch)
 				artifact_spawning_turfs.Add(archeo_turf)
 		CHECK_TICK
 
+	possible_spawn_walls.Cut()
+
 	//create artifact machinery
 	var/num_artifacts_spawn = rand(ARTIFACTSPAWNNUM_LOWER, ARTIFACTSPAWNNUM_UPPER)
 	var/list/final_artifact_spawning_turfs = list()
 	for(var/i = 1 to num_artifacts_spawn)
 		final_artifact_spawning_turfs += pick_n_take(artifact_spawning_turfs)
 	artifact_spawning_turfs = final_artifact_spawning_turfs
-	for(var/turf/exterior/wall/artifact_turf in artifact_spawning_turfs)
+	for(var/turf/wall/natural/artifact_turf in artifact_spawning_turfs)
 		artifact_turf.artifact_find = new()
+	..()
+
+/datum/controller/subsystem/xenoarch/Recover()
+	if (istype(SSxenoarch.artifact_spawning_turfs))
+		artifact_spawning_turfs = SSxenoarch.artifact_spawning_turfs
+	if (istype(SSxenoarch.digsite_spawning_turfs))
+		digsite_spawning_turfs = SSxenoarch.digsite_spawning_turfs
+
+/datum/controller/subsystem/xenoarch/proc/get_random_digsite_type()
+	if(!digsite_types_weighted.len)
+		var/list/digsites = decls_repository.get_decls_of_type(/decl/xenoarch_digsite)
+		for(var/D in digsites)
+			var/decl/xenoarch_digsite/digsite = digsites[D]
+			digsite_types_weighted[D] = digsite.weight
+	return pickweight(digsite_types_weighted)
 
 /datum/controller/subsystem/xenoarch/proc/get_nearest_artifact(var/turf/source)
 	var/artifact_distance = INFINITY
 	var/artifact_id 
-	for(var/turf/exterior/wall/T in artifact_spawning_turfs)
+	for(var/turf/wall/natural/T in artifact_spawning_turfs)
 		if(T.artifact_find)
 			var/cur_dist = get_dist(source, T) * 2
 			if(cur_dist < artifact_distance)

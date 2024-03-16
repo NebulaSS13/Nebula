@@ -168,6 +168,6 @@
 	descriptor       = "planetary mantle caves"
 	target_turf_type = /turf/exterior/rock/volcanic //Only let it apply to non-lava turfs
 	floor_type       = null
-	wall_type        = /turf/exterior/wall
+	wall_type        = /turf/wall/natural
 
 #undef TRANSLATE_COORD

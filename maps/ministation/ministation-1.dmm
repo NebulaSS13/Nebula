@@ -23,7 +23,7 @@
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "af" = (
-/turf/exterior/wall/random/ministation,
+/turf/wall/natural/random/ministation,
 /area/space)
 "aj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,

@@ -1785,7 +1785,7 @@
 /turf/wall,
 /area/ship/trade/crew/medbay)
 "eh" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/space)
 "el" = (
 /obj/structure/disposalpipe/segment,
@@ -1835,7 +1835,7 @@
 /turf/wall/r_wall,
 /area/ship/trade/crew/medbay)
 "ew" = (
-/turf/exterior/wall/random/high_chance,
+/turf/wall/natural/random/high_chance,
 /area/space)
 "ex" = (
 /obj/effect/paint/brown,
@@ -5260,7 +5260,7 @@
 /area/ship/trade/shuttle/outgoing/engineering)
 "tG" = (
 /obj/abstract/ramp_sculptor/north,
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/space)
 "tV" = (
 /turf/space,
@@ -5924,7 +5924,7 @@
 /area/ship/trade/crew/medbay/chemistry)
 "Cg" = (
 /obj/abstract/ramp_sculptor/east,
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/space)
 "Co" = (
 /obj/effect/floor_decal/corner/red/diagonal,
@@ -7142,7 +7142,7 @@
 /area/ship/trade/crew/medbay/chemistry)
 "OQ" = (
 /obj/abstract/ramp_sculptor/west,
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/space)
 "Pa" = (
 /obj/structure/cable{
@@ -7556,7 +7556,7 @@
 /area/ship/trade/shuttle/outgoing/engineering)
 "Tv" = (
 /obj/structure/lattice,
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/space)
 "Tx" = (
 /obj/structure/shuttle/engine/propulsion/burst/right,

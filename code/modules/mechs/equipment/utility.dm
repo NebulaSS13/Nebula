@@ -490,8 +490,8 @@
 		drill_head = null
 		return
 
-	if (istype(target, /turf/exterior/wall))
-		for (var/turf/exterior/wall/M in RANGE_TURFS(target, 1))
+	if (istype(target, /turf/wall/natural))
+		for (var/turf/wall/natural/M in RANGE_TURFS(target, 1))
 			if (!(get_dir(owner, M) & owner.dir))
 				continue
 			drill_head.durability -= 1

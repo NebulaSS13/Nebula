@@ -18,7 +18,7 @@
 /turf/space,
 /area/space)
 "af" = (
-/turf/exterior/wall,
+/turf/wall/natural,
 /area/space)
 "ag" = (
 /turf/exterior/barren,

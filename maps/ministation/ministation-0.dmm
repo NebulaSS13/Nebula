@@ -28,7 +28,7 @@
 /turf/floor/tiled,
 /area/ministation/engine)
 "af" = (
-/turf/exterior/wall/random/ministation,
+/turf/wall/natural/random/ministation,
 /area/space)
 "ak" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{

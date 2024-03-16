@@ -1,4 +1,4 @@
-/turf/exterior/wall/random/ministation/get_weighted_mineral_list()
+/turf/wall/natural/random/ministation/get_weighted_mineral_list()
 	if(prob(80))
 		. = list()
 	else if(prob(75))
