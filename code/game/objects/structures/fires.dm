@@ -4,25 +4,32 @@
 //   ie. all fire behavior comes from the fuel atoms in the fire, but spread and
 //   click behavior is curtailed by the fire_source.
 
-#define DIRECT_HEAT 1000
 #define IDEAL_FUEL  15
-#define HIGH_FUEL   10
-#define LOW_FUEL    5
+#define HIGH_FUEL   (IDEAL_FUEL * 0.65)
+#define LOW_FUEL    (IDEAL_FUEL * 0.35)
+
 #define FIRE_LIT    1
 #define FIRE_DEAD  -1
 #define FIRE_OUT    0
-#define FUEL_CONSUMPTION_CONSTANT 0.1
+
+#define FUEL_CONSUMPTION_CONSTANT 0.025
 
 /obj/structure/fire_source
-	name = "campfire"
+	name = "firepit"
 	desc = "Did anyone bring any marshmallows?"
 	icon = 'icons/obj/structures/fire.dmi'
 	icon_state = "campfire"
 	anchored = TRUE
 	density = FALSE
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/stone/basalt
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	abstract_type = /obj/structure/fire_source
+	throwpass = TRUE
 
 	var/datum/effect/effect/system/steam_spread/steam // Used when being quenched.
+	var/datum/composite_sound/fire_crackles/fire_loop
+	var/datum/composite_sound/grill/grill_loop // Used when food is cooking on the fire.
 
 	var/const/light_range_high =  3
 	var/const/light_range_mid =   2
@@ -35,30 +42,46 @@
 	var/const/light_color_low =  "#ff0000"
 
 	var/list/affected_exterior_turfs
-	var/list/exterior_temperature = 30 // Celsius, but it is added directly to a Kelvin value so don't do any conversion.
+	var/next_fuel_consumption = 0
+	var/last_fuel_burn_temperature = T20C
+	var/cap_last_fuel_burn = 850 CELSIUS // Prevent using campfires and stoves as kilns.
+	var/exterior_temperature = 30
 
-	/// Arbitrary direct temperature from fire, todo: material burn
-	var/burn_temperature   = DIRECT_HEAT
-	/// The amount that the fire will try to heat up the air.
-	var/output_temperature = T0C+50
-	/// How much fuel is left? TODO: function of fuel atoms
-	var/fuel = 0
 	/// Are we on fire?
-	var/lit = FALSE
+	var/lit = FIRE_OUT
+	/// How much fuel is left?
+	var/fuel = 0
+
 
 /obj/structure/fire_source/Initialize()
 	. = ..()
-	if(lit == FIRE_LIT && fuel > 0)
-		light(TRUE)
 	update_icon()
+	create_reagents(100)
 	steam = new(name)
 	steam.attach(get_turf(src))
 	steam.set_up(3, 0, get_turf(src))
+	fire_loop  = new(list(src), FALSE)
+	grill_loop = new(list(src), FALSE)
+	if(lit == FIRE_LIT)
+		try_light(INFINITY, TRUE)
+
+/obj/structure/fire_source/Destroy()
+	QDEL_NULL(steam)
+	STOP_PROCESSING(SSobj, src)
+	lit = FIRE_DEAD
+	refresh_affected_exterior_turfs()
+	QDEL_NULL(fire_loop)
+	QDEL_NULL(grill_loop)
+	return ..()
 
 /obj/structure/fire_source/Move()
 	. = ..()
 	if(. && lit == FIRE_LIT)
 		refresh_affected_exterior_turfs()
+
+/obj/structure/fire_source/proc/get_current_burn_temperature()
+	var/datum/gas_mixture/environment = return_air()
+	return max(environment?.temperature, last_fuel_burn_temperature)
 
 /obj/structure/fire_source/proc/refresh_affected_exterior_turfs()
 
@@ -83,36 +106,15 @@
 
 /obj/structure/fire_source/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
-	light()
-
-/obj/structure/fire_source/hearth
-	name = "hearth fire"
-	desc = "So cheery!"
-	fuel = 100
-	lit = FIRE_LIT
-
-/obj/structure/fire_source/stove
-	name = "stove"
-	desc = "Just the thing to warm your hands by."
-	icon_state = "stove"
-	density = TRUE
-
-/obj/structure/fire_source/stove/grab_attack(obj/item/grab/G)
-	return FALSE
-
-/obj/structure/fire_source/fireplace
-	name = "fireplace"
-	desc = "So cheery!"
-	icon_state = "fireplace"
-	density = TRUE
-
-/obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
-	return FALSE
+	if(!QDELETED(src))
+		try_light(exposed_temperature)
 
 /obj/structure/fire_source/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(src) && fluids?.total_volume)
-		take_reagents(fluids)
+	if(!QDELETED(src) && fluids?.total_volume && reagents)
+		var/transfer = min(reagents.maximum_volume - reagents.total_volume, max(max(1, round(fluids.total_volume * 0.25))))
+		if(transfer > 0)
+			fluids.trans_to_obj(src, transfer)
 
 /obj/structure/fire_source/explosion_act()
 	. = ..()
@@ -122,10 +124,13 @@
 /obj/structure/fire_source/proc/die()
 	if(lit == FIRE_LIT)
 		lit = FIRE_DEAD
+		last_fuel_burn_temperature = T20C
 		refresh_affected_exterior_turfs()
 		visible_message(SPAN_DANGER("\The [src] goes out!"))
 		STOP_PROCESSING(SSobj, src)
 		update_icon()
+		if(fire_loop?.started)
+			fire_loop.stop(src)
 
 /obj/structure/fire_source/proc/check_atmos()
 	var/datum/gas_mixture/GM = loc?.return_air()
@@ -134,36 +139,54 @@
 		if(oxidizer.gas_flags & XGM_GAS_OXIDIZER)
 			return TRUE
 
-/obj/structure/fire_source/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	. = ..()
-	if(!QDELETED(src))
-		light()
-
-/obj/structure/fire_source/proc/light(var/force)
+/obj/structure/fire_source/proc/try_light(ignition_temperature, force)
 	if(!check_atmos())
 		return FALSE
 	if(lit == FIRE_LIT && !force)
 		return FALSE
-	if(!process_fuel())
+	if(!process_fuel(ignition_temperature))
 		return FALSE
 	lit = FIRE_LIT
 	refresh_affected_exterior_turfs()
 	visible_message(SPAN_DANGER("\The [src] catches alight!"))
 	START_PROCESSING(SSobj, src)
+	if(fire_loop && !fire_loop.started)
+		fire_loop.start(src)
 	update_icon()
 	return TRUE
 
+/obj/structure/fire_source/proc/remove_atom(atom/movable/thing)
+	if(!QDELETED(thing))
+		thing.dropInto(loc)
+		return TRUE
+	return FALSE
+
+/obj/structure/fire_source/proc/get_removable_atoms()
+	return get_contained_external_atoms()
+
+/obj/structure/fire_source/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
+		var/list/removable = get_removable_atoms()
+		if(length(removable))
+			to_chat(user, "Looking within \the [src], you see:")
+			for(var/atom/thing in removable)
+				to_chat(user, "\icon[thing] \the [thing]")
+		else
+			to_chat(user, "\The [src] is empty.")
+
 /obj/structure/fire_source/attack_hand(var/mob/user)
 
-	if(length(contents) && user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
-		var/obj/item/removing = pick(contents)
-		removing.dropInto(loc)
-		user.put_in_hands(removing)
-		if(lit == FIRE_LIT)
-			visible_message(SPAN_DANGER("\The [user] fishes \the [removing] out of \the [src]!"))
-			user.fire_act(null, burn_temperature)
-		else
-			visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
+	var/list/removable_atoms = get_removable_atoms()
+	if(length(removable_atoms) && user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
+		var/obj/item/removing = pick(removable_atoms)
+		if(remove_atom(removing))
+			user.put_in_hands(removing)
+			if(lit == FIRE_LIT)
+				visible_message(SPAN_DANGER("\The [user] fishes \the [removing] out of \the [src]!"))
+				user.fire_act(return_air(), last_fuel_burn_temperature, 500)
+			else
+				visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
 		update_icon()
 		return TRUE
 
@@ -188,22 +211,71 @@
 	affecting_mob.forceMove(get_turf(src))
 	SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 	visible_message(SPAN_DANGER("\The [G.assailant] hurls \the [affecting_mob] onto \the [src]!"))
-	affecting_mob.fire_act(null, burn_temperature)
+	if(lit == FIRE_LIT)
+		affecting_mob.fire_act(return_air(), last_fuel_burn_temperature, 500)
 	return TRUE
 
 /obj/structure/fire_source/isflamesource()
 	return (lit == FIRE_LIT)
 
+/obj/structure/fire_source/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return ..() || (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+
+// Returns null for no burn, empty list for burn with no products, assoc
+// matter to value list for waste products.
+// We assume a normalized mole amount for 'amount'.
+/decl/material/proc/get_burn_products(var/amount, var/burn_temperature)
+
+	// No chance of burning.
+	if(isnull(ignition_point) && isnull(boiling_point) && !length(vapor_products))
+		return
+
+	// Burning a reagent of any kind.
+	if(ignition_point && burn_temperature >= ignition_point)
+		. = list() // We need to return a non-null value to indicate we consumed the material.
+		if(burn_product)
+			.[burn_product] = amount
+		return
+
+	// If it has a vapor product, turn it into that.
+	if(length(vapor_products))
+		. = list()
+		for(var/vapor in vapor_products)
+			.[vapor] = (amount * vapor_products[vapor])
+		return
+
+	// If it's not ignitable but can be boiled, consider vaporizing it.
+	if(!isnull(boiling_point) && burn_temperature >= boiling_point)
+		. = list(type = amount)
+
+/obj/structure/fire_source/proc/burn_material(var/decl/material/mat, var/amount)
+	var/list/burn_products = mat.get_burn_products(amount, last_fuel_burn_temperature)
+	. = !isnull(burn_products)
+	if(.)
+		if(mat.ignition_point && last_fuel_burn_temperature >= mat.ignition_point)
+			if(mat.accelerant_value > FUEL_VALUE_NONE)
+				fuel += amount * (1 + material.accelerant_value)
+			if(mat.burn_temperature)
+				last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
+		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
+			fuel -= amount * mat.accelerant_value
+		fuel = max(fuel, 0)
+
+// Dump waste gas from burned fuel.
+/obj/structure/fire_source/proc/dump_waste_products(var/atom/target, var/list/waste)
+	if(istype(target) && length(waste))
+		var/datum/gas_mixture/environment = target.return_air()
+		if(environment)
+			for(var/w in waste)
+				if(waste[w] > 0)
+					environment.adjust_gas(w, waste[w], FALSE)
+			environment.update_values()
+
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
-	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(thing) && user.a_intent != I_HURT && lit == FIRE_LIT)
-		thing.handle_external_heating(DIRECT_HEAT, src, user)
-		return TRUE
-
-	if(ATOM_IS_OPEN_CONTAINER(thing))
-		if(thing.reagents?.total_volume)
-			user.visible_message(SPAN_DANGER("\The [user] pours the contents of \the [thing] into \the [src]!"))
-			take_reagents(thing.reagents)
+	if(istype(thing, /obj/item/chems) && user.a_intent != I_HURT)
+		var/obj/item/chems/chems = thing
+		if(chems.standard_pour_into(src, user))
 			return TRUE
 
 	if(lit == FIRE_LIT)
@@ -222,95 +294,87 @@
 			flame.light(user)
 			return TRUE
 
-	else if(thing.isflamesource())
-		visible_message(SPAN_NOTICE("\The [user] attempts to light \the [src] with \the [thing]..."))
-		light()
+	if(thing.isflamesource())
+		visible_message(SPAN_NOTICE("\The [user] attempts to light \the [src] with \the [thing]."))
+		try_light(thing.get_heat())
 		return TRUE
 
-	if((lit != FIRE_LIT || user.a_intent == I_HURT) && user.try_unequip(thing, src))
-		user.visible_message(SPAN_NOTICE("\The [user] drops \the [thing] into \the [src]."))
+	if((lit != FIRE_LIT || user.a_intent == I_HURT))
+		// Only drop in one log at a time.
+		if(istype(thing, /obj/item/stack))
+			var/obj/item/stack/stack = thing
+			thing = stack.split(1)
+		if(!QDELETED(thing) && user.try_unequip(thing, src))
+			user.visible_message(SPAN_NOTICE("\The [user] drops \the [thing] into \the [src]."))
 		update_icon()
 		return TRUE
 
 	return ..()
 
-/obj/structure/fire_source/proc/process_fuel()
+/obj/structure/fire_source/proc/process_fuel(ignition_temperature)
 
 	if(fuel >= IDEAL_FUEL)
 		return TRUE
 
+	// Slowly lose burn temperature.
+	// TODO: use temperature var and equalizing system?
+	last_fuel_burn_temperature = max(ignition_temperature, last_fuel_burn_temperature)
+	if(last_fuel_burn_temperature > T20C && fuel < LOW_FUEL)
+		last_fuel_burn_temperature = max(T20C, round(last_fuel_burn_temperature * 0.9))
+
 	var/list/waste = list()
 	for(var/obj/item/thing in contents)
-
+		var/consumed_item = FALSE
+		for(var/mat in thing.matter)
+			var/list/waste_products = burn_material(GET_DECL(mat), MOLES_PER_MATERIAL_UNIT(thing.matter[mat]))
+			if(!isnull(waste_products))
+				for(var/product in waste_products)
+					waste[product] += waste_products[product]
+				consumed_item = TRUE
+		if(consumed_item)
+			qdel(thing)
 		if(fuel >= IDEAL_FUEL)
 			break
 
-		if(istype(thing, /obj/item/stack))
-			var/obj/item/stack/stack = thing
-			if(stack.material.accelerant_value > FUEL_VALUE_NONE)
-				var/fuel_per_unit = 2 * stack.material.accelerant_value
-				var/use_stacks = min(stack.amount, FLOOR((IDEAL_FUEL - fuel) / fuel_per_unit))
-				var/add_fuel = round(fuel_per_unit * use_stacks)
-				if(stack.material.burn_product)
-					if(waste[stack.material.burn_product])
-						waste[stack.material.burn_product] += add_fuel
-					else
-						waste[stack.material.burn_product] = add_fuel
-				fuel += add_fuel
-				stack.use(use_stacks)
-				continue
+	dump_waste_products(loc, waste)
 
-		var/modified_fuel = FALSE
-		for(var/mat in thing.matter)
-			var/decl/material/material = GET_DECL(mat)
-			if(material.accelerant_value > FUEL_VALUE_NONE)
-				modified_fuel = TRUE
-				var/add_fuel = round(MOLES_PER_MATERIAL_UNIT(thing.matter[mat])) * material.accelerant_value
-				if(material.burn_product)
-					if(waste[material.burn_product])
-						waste[material.burn_product] += add_fuel
-					else
-						waste[material.burn_product] = add_fuel
-				fuel += add_fuel
-
-		if(modified_fuel)
-			qdel(thing)
-			continue
-
-	// Dump waste gas from burned fuel.
-	var/turf/T = get_turf(src)
-	var/datum/gas_mixture/environment = T?.return_air()
-	if(environment && length(waste))
-		for(var/w in waste)
-			if(waste[w] > 0)
-				environment.adjust_gas(w, waste[w], FALSE)
-		environment.update_values()
+	if(!isnull(cap_last_fuel_burn))
+		// TODO: dump excess directly into the atmosphere as heat
+		last_fuel_burn_temperature = min(last_fuel_burn_temperature, cap_last_fuel_burn)
 
 	return (fuel > 0)
 
-/obj/structure/fire_source/proc/take_reagents(datum/reagents/RG)
-	var/do_steam = FALSE
-	for(var/rtype in RG.reagent_volumes)
-		var/decl/material/R = GET_DECL(rtype)
-		if(R.accelerant_value <= FUEL_VALUE_RETARDANT)
-			do_steam = TRUE
-		fuel += REAGENT_VOLUME(RG, rtype) * R.accelerant_value
-	RG.clear_reagents()
-	fuel = max(0, fuel)
-	if(lit == FIRE_LIT)
-		if(fuel <= 0)
-			die()
-		if(do_steam)
+/obj/structure/fire_source/on_reagent_change()
+	..()
+	if(reagents?.total_volume)
+		var/do_steam = FALSE
+		var/list/waste = list()
+
+		for(var/rtype in reagents?.reagent_volumes)
+
+			var/decl/material/reagent = GET_DECL(rtype)
+			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
+				do_steam = TRUE
+
+			var/volume = max(1, round(REAGENT_VOLUME(reagents, rtype) / 10)) // arbitrary constant to get it in line with mat burning values
+			var/list/waste_products = burn_material(reagent, volume)
+			if(!isnull(waste_products))
+				for(var/product in waste_products)
+					waste[product] += waste_products[product]
+				reagents.remove_reagent(reagent.type, volume)
+
+		dump_waste_products(loc, waste)
+
+		if(lit == FIRE_LIT && do_steam)
 			steam.start() // HISSSSSS!
 
-/obj/structure/fire_source/Destroy()
-	QDEL_NULL(steam)
-	STOP_PROCESSING(SSobj, src)
-	lit = FIRE_DEAD
-	refresh_affected_exterior_turfs()
-	return ..()
+/obj/structure/fire_source/proc/get_fire_exposed_atoms()
+	return loc?.get_contained_external_atoms()
 
 /obj/structure/fire_source/Process()
+
+	if(lit != FIRE_LIT)
+		return PROCESS_KILL
 
 	if(!check_atmos())
 		die()
@@ -321,49 +385,84 @@
 		die()
 		return
 
-	// Burn anyone sitting in the fire.
-	var/turf/T = loc
-	if(istype(T))
+	if(isturf(loc))
+		var/turf/my_turf = loc
+		my_turf.hotspot_expose(last_fuel_burn_temperature, 500, 1)
 
-		T.hotspot_expose(burn_temperature, null, 1)
-		for(var/atom/thing in loc)
-			if(!thing.simulated)
-				return
-			thing.fire_act(null, burn_temperature)
+	var/datum/gas_mixture/environment = return_air()
+	for(var/atom/thing in get_fire_exposed_atoms())
+		thing.fire_act(environment, last_fuel_burn_temperature, 500)
 
-		// Copied from space heaters. Heat up the air on our tile, heat will percolate out.
-		var/datum/gas_mixture/GM = T.return_air()
-		if(GM && abs(GM.temperature - output_temperature) > 0.1)
-			var/transfer_moles = 0.25 * GM.total_moles
-			var/datum/gas_mixture/removed = GM.remove(transfer_moles)
-			if(removed)
-				var/heat_transfer = removed.get_thermal_energy_change(output_temperature)
-				if(heat_transfer > 0) removed.add_thermal_energy(heat_transfer)
-			GM.merge(removed)
+	// Copied from space heaters. Heat up the air on our tile, heat will percolate out.
+	if(environment && abs(environment.temperature - last_fuel_burn_temperature) > 0.1)
+		var/transfer_moles = 0.25 * environment.total_moles
+		var/datum/gas_mixture/removed = environment.remove(transfer_moles)
+		if(removed)
+			var/heat_transfer = removed.get_thermal_energy_change(round(last_fuel_burn_temperature * 0.1))
+			if(heat_transfer > 0)
+				removed.add_thermal_energy(heat_transfer)
+		environment.merge(removed)
+
 
 	queue_icon_update()
 
 /obj/structure/fire_source/on_update_icon()
 	..()
 	if((fuel || length(contents)) && (lit != FIRE_DEAD))
-		add_overlay("[icon_state]_full")
+		// todo: get colour from fuel
+		var/image/I = image(icon, "[icon_state]_full")
+		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+		add_overlay(I)
+
 	switch(lit)
 		if(FIRE_LIT)
 			if(fuel >= HIGH_FUEL)
-				add_overlay("[icon_state]_lit")
+				var/image/I = image(icon, "[icon_state]_lit")
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				add_overlay(I)
 				set_light(light_range_high, light_power_high, light_color_high)
 			else if(fuel <= LOW_FUEL)
-				add_overlay("[icon_state]_lit_dying")
+				var/image/I = image(icon, "[icon_state]_lit_dying")
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				add_overlay(I)
 				set_light(light_range_mid, light_power_mid, light_color_mid)
 			else
-				add_overlay("[icon_state]_lit_low")
+				var/image/I = image(icon, "[icon_state]_lit_low")
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				add_overlay(I)
 				set_light(light_range_low, light_power_low, light_color_low)
-
 		if(FIRE_DEAD)
-			add_overlay("[icon_state]_burnt")
+			var/image/I = image(icon, "[icon_state]_burnt")
+			I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+			add_overlay(I)
 			set_light(0)
 		else
 			set_light(0)
+
+// Subtypes.
+/obj/structure/fire_source/firepit
+	obj_flags = OBJ_FLAG_HOLLOW
+
+/obj/structure/fire_source/stove
+	name = "stove"
+	desc = "Just the thing to warm your hands by."
+	icon_state = "stove"
+	density = TRUE
+	material = /decl/material/solid/metal/iron
+	obj_flags = OBJ_FLAG_HOLLOW
+
+/obj/structure/fire_source/stove/grab_attack(obj/item/grab/G)
+	return FALSE
+
+/obj/structure/fire_source/fireplace
+	name = "fireplace"
+	desc = "So cheery!"
+	icon_state = "fireplace"
+	density = TRUE
+	material = /decl/material/solid/stone/pottery // brick
+
+/obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
+	return FALSE
 
 #undef FUEL_CONSUMPTION_CONSTANT
 #undef FIRE_LIT
@@ -372,4 +471,3 @@
 #undef LOW_FUEL
 #undef HIGH_FUEL
 #undef IDEAL_FUEL
-#undef DIRECT_HEAT

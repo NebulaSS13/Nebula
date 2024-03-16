@@ -41,6 +41,7 @@
 	sparse_material_weight = 35
 	rich_material_weight = 20
 	dirtiness = 15
+	burn_temperature = 1350 CELSIUS
 
 	flags = MAT_FLAG_FISSIBLE
 	neutron_cross_section = 30
@@ -240,7 +241,8 @@
 	default_solid_form = /obj/item/stack/material/lump
 	bakes_into_material = /decl/material/solid/stone/pottery
 	melting_point = null // Clay is already almost a liquid...
-	bakes_into_at_temperature = 1100 CELSIUS // roughly the temperature expected from a kiln
+	// lower than the temperature expected from a kiln so that clay can be used to make bricks to make a high-temperature kiln.
+	bakes_into_at_temperature = 950 CELSIUS 
 
 /decl/material/solid/soil
 	name = "soil"
@@ -382,6 +384,7 @@
 		/decl/material/solid/gemstone/diamond = 0.02,
 		/decl/material/solid/carbon = 0.98
 	)
+	burn_temperature = 1750 CELSIUS
 	heating_point = GENERIC_SMELTING_HEAT_POINT
 	heating_sound = null
 	heating_message = null

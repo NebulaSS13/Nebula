@@ -148,7 +148,7 @@
 
 //Atmospherics
 /obj/item/clothing/head/helmet/space/void/atmos
-	desc = "A flame-retardant voidsuit helmet with a self-repairing visor and light anti-radiation shielding."
+	desc = "A flame-resistant voidsuit helmet with a self-repairing visor and light anti-radiation shielding."
 	name = "atmospherics voidsuit helmet"
 	icon = 'icons/clothing/spacesuit/void/atmos/helmet.dmi'
 	armor = list(

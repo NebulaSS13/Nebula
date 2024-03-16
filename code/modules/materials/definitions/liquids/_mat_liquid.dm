@@ -6,7 +6,7 @@
 	molar_mass = 0.018 //water
 	latent_heat = 2258
 	abstract_type = /decl/material/liquid
-	accelerant_value = FUEL_VALUE_RETARDANT // Abstract way of dousing fires with fluid; realistically it should deprive them of oxidizer but heigh ho
+	accelerant_value = FUEL_VALUE_SUPPRESSANT // Abstract way of dousing fires with fluid; realistically it should deprive them of oxidizer but heigh ho
 
 /decl/material/liquid/Initialize()
 	if(!gas_name)

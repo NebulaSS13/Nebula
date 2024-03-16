@@ -20,6 +20,7 @@
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	brute_armor = 1
 	weight = MAT_VALUE_NORMAL
+	burn_temperature = 1000 CELSIUS
 	ignition_point = T0C+288
 	stack_origin_tech = @'{"materials":1,"biotech":1}'
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'

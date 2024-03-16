@@ -10,6 +10,12 @@
 		/obj/item/stack/material/lump
 	)
 
+/decl/stack_recipe/bricks/firepit
+	on_floor                    = TRUE
+	one_per_turf                = TRUE
+	apply_material_name         = FALSE
+	result_type                 = /obj/structure/fire_source/firepit
+
 /decl/stack_recipe/bricks/furniture
 	abstract_type              = /decl/stack_recipe/bricks/furniture
 	one_per_turf               = TRUE

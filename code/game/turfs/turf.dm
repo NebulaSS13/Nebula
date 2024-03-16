@@ -685,7 +685,7 @@
 		hotspot_expose(1000,100)
 		if(prob(25))
 			for(var/obj/structure/fire_source/fire in contents)
-				fire.light()
+				fire.try_light(1000)
 		return TRUE
 	return FALSE
 
