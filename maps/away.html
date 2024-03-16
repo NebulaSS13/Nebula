@@ -14,7 +14,7 @@
 </header>
 <main>
 <h1>Away sites <aside>maps/away/README.md</aside> 
-            <a href="https://github.com/NebulaSS13/Nebula/blob/a158eb877da3a2237bbb11eda2e43df048213935/maps/away/README.md">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/77f9df701d2356ed92e19f5a2d8ca0ce4524603b/maps/away/README.md">
         <img src="git.png" width="16" height="16" title="maps&#x2F;away&#x2F;README.md"/></a></h1>
 
 <table class="summary" cellspacing="0">
@@ -33,7 +33,7 @@
 <p>BUT HEED MY RUMINATIONS</p>
 <h2 id="while-mapping">While mapping</h2><h3 id="dont-use-map-specific-types">Don't use map-specific types</h3>
 <p>Away maps are expected to work whether you're on a specific main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map. You can use content packages to define content that is only included for particular maps, as the away sites are tested with all packages enabled.</p>
-<p>e.g. you can use <code>/area/space</code>, or <code>/turf/sim/wall</code>, because neither are specific to a given map. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use <code>/obj/random_multi/single_item/punitelly</code>, because Punitelli only exists when <code>punitelli.dm</code> is compiled.</p>
+<p>e.g. you can use <code>/area/space</code>, or <code>/turf/wall</code>, because neither are specific to a given map. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use <code>/obj/random_multi/single_item/punitelly</code>, because Punitelli only exists when <code>punitelli.dm</code> is compiled.</p>
 <p>To make life easier, you can uncheck your main map definition then recompile, to make sure these types aren't available while you're mapping.</p>
 <h3 id="dont-re-use-area-types-from-other-maps">Don't re-use area types from other maps</h3>
 <p>Except for, like, <code>/area/space</code>. That one's probably fine.</p>
@@ -55,7 +55,7 @@
 <p>The map loader works best when everything it's spawning does all its initialisation work in <code>Initialize</code>, instead of in <code>New</code>. Most likely your misbehaving thing is doing more initialisation than is healthy in <code>New</code>. It's fixable! Often not even that hard. Go talk to a dev.</p></td></tr></table></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/a158eb877da3a2237bbb11eda2e43df048213935">a158eb8</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/77f9df701d2356ed92e19f5a2d8ca0ce4524603b">77f9df7</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
