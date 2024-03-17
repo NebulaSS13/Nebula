@@ -75,7 +75,7 @@
 		slowdown_accessory += accessory.accessory_slowdown
 
 /**
- *  Attach accessory A to src
+ *  Attach accessory accessory to src
  *
  *  user is the user doing the attaching. Can be null, such as when attaching
  *  items on spawn

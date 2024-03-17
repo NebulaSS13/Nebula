@@ -5,8 +5,14 @@
 
 /obj/structure/closet/secure_closet/engineering_chief/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/clothing/webbing/vest/brown = 70, /obj/item/clothing/webbing = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/backpack/industrial, /obj/item/backpack/satchel/eng)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/clothing/webbing/vest/brown = 70,
+			/obj/item/clothing/webbing = 30
+		)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/backpack/industrial,
+			/obj/item/backpack/satchel/eng
+		)),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/eng, 50),
 		/obj/item/blueprints,
 		/obj/item/clothing/under/chief_engineer,
@@ -59,8 +65,18 @@
 
 /obj/structure/closet/secure_closet/engineering_personal/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/clothing/webbing/vest/brown = 70, /obj/item/clothing/webbing = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/backpack/industrial, /obj/item/backpack/satchel/eng)),
+		new/datum/atom_creator/weighted(
+			list(
+				/obj/item/clothing/webbing/vest/brown = 70,
+				/obj/item/clothing/webbing = 30
+			)
+		),
+		new/datum/atom_creator/weighted(
+			list(
+				/obj/item/backpack/industrial,
+				/obj/item/backpack/satchel/eng
+			)
+		),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/eng, 50),
 		/obj/item/toolbox/mechanical,
 		/obj/item/radio/headset/headset_eng,
@@ -78,8 +94,14 @@
 
 /obj/structure/closet/secure_closet/atmos_personal/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/clothing/webbing/vest/brown = 70, /obj/item/clothing/webbing = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/backpack/industrial, /obj/item/backpack/satchel/eng)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/clothing/webbing/vest/brown = 70,
+			/obj/item/clothing/webbing = 30
+		)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/backpack/industrial,
+			/obj/item/backpack/satchel/eng
+		)),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/eng, 50),
 		/obj/item/clothing/suit/fire,
 		/obj/item/flashlight,

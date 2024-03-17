@@ -22,12 +22,12 @@
 
 /obj/random/clipboard/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clipboard =           300,
-		/obj/item/clipboard/steel =     200,
+		/obj/item/clipboard           = 300,
+		/obj/item/clipboard/steel     = 200,
 		/obj/item/clipboard/aluminium = 200,
-		/obj/item/clipboard/plastic =   200,
-		/obj/item/clipboard/glass =     100,
-		/obj/item/clipboard/ebony =      10
+		/obj/item/clipboard/plastic   = 200,
+		/obj/item/clipboard/glass     = 100,
+		/obj/item/clipboard/ebony     =  10
 	)
 	return spawnable_choices
 

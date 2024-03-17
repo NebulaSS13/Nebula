@@ -10,17 +10,27 @@
 	starting_accessories = null
 
 /obj/item/clothing/suit/armor/pcarrier/light
-	starting_accessories = list(/obj/item/clothing/armor_attachment/plate)
+	starting_accessories = list(
+		/obj/item/clothing/armor_attachment/plate
+	)
 
 /obj/item/clothing/suit/armor/pcarrier/press
 	color = COLOR_BABY_BLUE
-	starting_accessories = list(/obj/item/clothing/armor_attachment/tag/press)
+	starting_accessories = list(
+		/obj/item/clothing/armor_attachment/tag/press
+	)
 
 /obj/item/clothing/suit/armor/pcarrier/press/prepared
-	starting_accessories = list(/obj/item/clothing/armor_attachment/plate, /obj/item/clothing/armor_attachment/tag/press)
+	starting_accessories = list(
+		/obj/item/clothing/armor_attachment/plate, 
+		/obj/item/clothing/armor_attachment/tag/press
+	)
 
 /obj/item/clothing/suit/armor/pcarrier/medium
-	starting_accessories = list(/obj/item/clothing/armor_attachment/plate/medium, /obj/item/clothing/webbing/pouches)
+	starting_accessories = list(
+		/obj/item/clothing/armor_attachment/plate/medium, 
+		/obj/item/clothing/webbing/pouches
+	)
 
 /obj/item/clothing/suit/armor/pcarrier/blue
 	name = "blue plate carrier"

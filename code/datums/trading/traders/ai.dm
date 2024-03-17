@@ -26,14 +26,14 @@ They sell generic supplies and ask for generic supplies.
 		TRADER_BRIBE_REFUSAL     = "You have given me money to stay, however, I am a station. I do not leave.",
 	)
 	possible_wanted_items = list(
-		/obj/item                                          = TRADER_SUBTYPES_ONLY,
-		/obj/item/assembly                                 = TRADER_BLACKLIST_ALL,
-		/obj/item/assembly_holder                          = TRADER_BLACKLIST_ALL,
-		/obj/item/encryptionkey/hacked                     = TRADER_BLACKLIST,
-		/obj/item/tank/onetankbomb                         = TRADER_BLACKLIST,
-		/obj/item/radio                                    = TRADER_BLACKLIST_ALL,
-		/obj/item/modular_computer/pda                     = TRADER_BLACKLIST_SUB,
-		/obj/item/uplink                                   = TRADER_BLACKLIST
+		/obj/item                                  = TRADER_SUBTYPES_ONLY,
+		/obj/item/assembly                         = TRADER_BLACKLIST_ALL,
+		/obj/item/assembly_holder                  = TRADER_BLACKLIST_ALL,
+		/obj/item/encryptionkey/hacked             = TRADER_BLACKLIST,
+		/obj/item/tank/onetankbomb                 = TRADER_BLACKLIST,
+		/obj/item/radio                            = TRADER_BLACKLIST_ALL,
+		/obj/item/modular_computer/pda             = TRADER_BLACKLIST_SUB,
+		/obj/item/uplink                           = TRADER_BLACKLIST
 	)
 	possible_trading_items = list(
 		/obj/item/bag                              = TRADER_SUBTYPES_ONLY,
@@ -50,16 +50,16 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/briefcase                        = TRADER_THIS_TYPE,
 		/obj/item/box/fancy                        = TRADER_SUBTYPES_ONLY,
 		/obj/item/laundry_basket                   = TRADER_THIS_TYPE,
-		/obj/item/secure_storage/briefcase                 = TRADER_THIS_TYPE,
+		/obj/item/secure_storage/briefcase         = TRADER_THIS_TYPE,
 		/obj/item/plants                           = TRADER_THIS_TYPE,
 		/obj/item/ore                              = TRADER_THIS_TYPE,
 		/obj/item/toolbox                          = TRADER_ALL,
 		/obj/item/wallet                           = TRADER_THIS_TYPE,
 		/obj/item/photo_album                      = TRADER_THIS_TYPE,
-		/obj/item/clothing/glasses                         = TRADER_SUBTYPES_ONLY,
-		/obj/item/clothing/glasses/hud                     = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/glasses/blindfold/tape          = TRADER_BLACKLIST,
-		/obj/item/clothing/glasses/chameleon               = TRADER_BLACKLIST
+		/obj/item/clothing/glasses                 = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/glasses/hud             = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/glasses/blindfold/tape  = TRADER_BLACKLIST,
+		/obj/item/clothing/glasses/chameleon       = TRADER_BLACKLIST
 	)
 
 	insult_drop = 0
@@ -97,25 +97,25 @@ They sell generic supplies and ask for generic supplies.
 	origin = "Manifacturing Beacon"
 
 	possible_trading_items = list(
-		/obj/structure/aicore            = TRADER_THIS_TYPE,
-		/obj/structure/girder            = TRADER_THIS_TYPE,
-		/obj/structure/grille            = TRADER_THIS_TYPE,
-		/obj/structure/mopbucket         = TRADER_THIS_TYPE,
-		/obj/structure/ore_box           = TRADER_THIS_TYPE,
-		/obj/structure/coatrack          = TRADER_THIS_TYPE,
-		/obj/structure/bookcase          = TRADER_THIS_TYPE,
-		/obj/item/bee_pack               = TRADER_THIS_TYPE,
-		/obj/item/bee_smoker             = TRADER_THIS_TYPE,
-		/obj/item/beehive_assembly       = TRADER_THIS_TYPE,
-		/obj/item/glass_jar              = TRADER_THIS_TYPE,
-		/obj/item/honey_frame            = TRADER_THIS_TYPE,
-		/obj/item/target                 = TRADER_ALL,
-		/obj/structure/tank_rack         = TRADER_SUBTYPES_ONLY,
-		/obj/structure/filing_cabinet    = TRADER_THIS_TYPE,
-		/obj/structure/safe              = TRADER_THIS_TYPE,
-		/obj/structure/plushie           = TRADER_SUBTYPES_ONLY,
-		/obj/structure/sign              = TRADER_SUBTYPES_ONLY,
-		/obj/structure/sign/double       = TRADER_BLACKLIST_ALL,
+		/obj/structure/aicore             = TRADER_THIS_TYPE,
+		/obj/structure/girder             = TRADER_THIS_TYPE,
+		/obj/structure/grille             = TRADER_THIS_TYPE,
+		/obj/structure/mopbucket          = TRADER_THIS_TYPE,
+		/obj/structure/ore_box            = TRADER_THIS_TYPE,
+		/obj/structure/coatrack           = TRADER_THIS_TYPE,
+		/obj/structure/bookcase           = TRADER_THIS_TYPE,
+		/obj/item/bee_pack                = TRADER_THIS_TYPE,
+		/obj/item/bee_smoker              = TRADER_THIS_TYPE,
+		/obj/item/beehive_assembly        = TRADER_THIS_TYPE,
+		/obj/item/glass_jar               = TRADER_THIS_TYPE,
+		/obj/item/honey_frame             = TRADER_THIS_TYPE,
+		/obj/item/target                  = TRADER_ALL,
+		/obj/structure/tank_rack          = TRADER_SUBTYPES_ONLY,
+		/obj/structure/filing_cabinet     = TRADER_THIS_TYPE,
+		/obj/structure/safe               = TRADER_THIS_TYPE,
+		/obj/structure/plushie            = TRADER_SUBTYPES_ONLY,
+		/obj/structure/sign               = TRADER_SUBTYPES_ONLY,
+		/obj/structure/sign/double        = TRADER_BLACKLIST_ALL,
 		/obj/structure/sign/plaque/golden = TRADER_BLACKLIST_ALL,
-		/obj/structure/sign/poster       = TRADER_BLACKLIST
+		/obj/structure/sign/poster        = TRADER_BLACKLIST
 	)

@@ -43,7 +43,7 @@
 		/obj/item/energy_blade/sword/toy = TRADER_THIS_TYPE,
 		/obj/item/toy/bosunwhistle       = TRADER_THIS_TYPE,
 		/obj/item/board                  = TRADER_THIS_TYPE,
-		/obj/item/box/checkers   = TRADER_ALL,
+		/obj/item/box/checkers           = TRADER_ALL,
 		/obj/item/deck                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/pack                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/dice                   = TRADER_ALL,
@@ -174,33 +174,37 @@
 		"Space Fashion"
 	)
 	possible_trading_items = list(
-		/obj/item/clothing/accessory                 = TRADER_ALL,
-		/obj/item/clothing/badge                     = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/webbing/holster = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/medal                     = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/webbing         = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/gloves                    = TRADER_SUBTYPES_ONLY,
-		/obj/item/clothing/gloves/lightrig           = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/gloves/rig                = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/gloves/thick/swat         = TRADER_BLACKLIST,
-		/obj/item/clothing/gloves/chameleon          = TRADER_BLACKLIST,
-		/obj/item/clothing/head                      = TRADER_SUBTYPES_ONLY,
-		/obj/item/clothing/head/HoS                  = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/head/bio_hood             = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/head/bomb_hood            = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/head/caphat               = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/head/centhat              = TRADER_BLACKLIST,
-		/obj/item/clothing/head/chameleon            = TRADER_BLACKLIST,
-		/obj/item/clothing/head/collectable          = TRADER_BLACKLIST,
-		/obj/item/clothing/head/culthood             = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/head/helmet               = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/head/lightrig             = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/head/radiation            = TRADER_BLACKLIST,
-		/obj/item/clothing/head/warden               = TRADER_BLACKLIST,
-		/obj/item/clothing/head/welding              = TRADER_BLACKLIST
+		/obj/item/clothing/neck                       = TRADER_ALL,
+		/obj/item/clothing/suit/jacket                = TRADER_ALL,
+		/obj/item/clothing/suit/robe                  = TRADER_ALL,
+		/obj/item/clothing/shoes/legbrace             = TRADER_ALL,
+		/obj/item/clothing/shoes/kneepads             = TRADER_ALL,
+		/obj/item/clothing/armor_attachment/tag       = TRADER_ALL,
+		/obj/item/clothing/armor_attachment/helmcover = TRADER_ALL,
+		/obj/item/clothing/badge                      = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/medal                      = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/webbing                    = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/webbing/holster            = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/gloves                     = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/gloves/lightrig            = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/gloves/rig                 = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/gloves/thick/swat          = TRADER_BLACKLIST,
+		/obj/item/clothing/gloves/chameleon           = TRADER_BLACKLIST,
+		/obj/item/clothing/head                       = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/head/HoS                   = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/head/bio_hood              = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/head/bomb_hood             = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/head/caphat                = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/head/centhat               = TRADER_BLACKLIST,
+		/obj/item/clothing/head/chameleon             = TRADER_BLACKLIST,
+		/obj/item/clothing/head/collectable           = TRADER_BLACKLIST,
+		/obj/item/clothing/head/culthood              = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/head/helmet                = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/head/lightrig              = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/head/radiation             = TRADER_BLACKLIST,
+		/obj/item/clothing/head/warden                = TRADER_BLACKLIST,
+		/obj/item/clothing/head/welding               = TRADER_BLACKLIST
 	)
-
-
 
 /*
 Sells devices, odds and ends, and medical stuff
@@ -378,20 +382,20 @@ Sells devices, odds and ends, and medical stuff
 	)
 
 	possible_wanted_items = list(
-		/obj/item/chems/drinks/bottle           = TRADER_THIS_TYPE,
-		/obj/item/organ/internal/liver          = TRADER_THIS_TYPE,
-		/obj/item/organ/internal/kidneys        = TRADER_THIS_TYPE,
-		/obj/item/organ/internal/lungs          = TRADER_THIS_TYPE,
-		/obj/item/organ/internal/heart          = TRADER_THIS_TYPE,
-		/obj/item/box/fancy/cigarettes  = TRADER_ALL
+		/obj/item/chems/drinks/bottle    = TRADER_THIS_TYPE,
+		/obj/item/organ/internal/liver   = TRADER_THIS_TYPE,
+		/obj/item/organ/internal/kidneys = TRADER_THIS_TYPE,
+		/obj/item/organ/internal/lungs   = TRADER_THIS_TYPE,
+		/obj/item/organ/internal/heart   = TRADER_THIS_TYPE,
+		/obj/item/box/fancy/cigarettes   = TRADER_ALL
 	)
 
 	possible_trading_items = list(
-		/obj/item/pill_bottle           = TRADER_SUBTYPES_ONLY,
-		/obj/item/firstaid/fire         = TRADER_THIS_TYPE,
-		/obj/item/firstaid/toxin        = TRADER_THIS_TYPE,
-		/obj/item/firstaid/adv          = TRADER_THIS_TYPE,
-		/obj/item/box/bloodpacks        = TRADER_THIS_TYPE,
+		/obj/item/pill_bottle                   = TRADER_SUBTYPES_ONLY,
+		/obj/item/firstaid/fire                 = TRADER_THIS_TYPE,
+		/obj/item/firstaid/toxin                = TRADER_THIS_TYPE,
+		/obj/item/firstaid/adv                  = TRADER_THIS_TYPE,
+		/obj/item/box/bloodpacks                = TRADER_THIS_TYPE,
 		/obj/item/chems/ivbag                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/retractor                     = TRADER_THIS_TYPE,
 		/obj/item/hemostat                      = TRADER_THIS_TYPE,
@@ -447,7 +451,7 @@ Sells devices, odds and ends, and medical stuff
 		/obj/machinery/mining/drill                                     = TRADER_THIS_TYPE,
 		/obj/machinery/mining/brace                                     = TRADER_THIS_TYPE,
 		/obj/machinery/floodlight                                       = TRADER_THIS_TYPE,
-		/obj/item/box/greenglowsticks                           = TRADER_THIS_TYPE,
+		/obj/item/box/greenglowsticks                                   = TRADER_THIS_TYPE,
 		/obj/item/clothing/suit/space/void/engineering/salvage/prepared = TRADER_THIS_TYPE,
 		/obj/item/stack/material/puck/mapped/uranium/ten                = TRADER_THIS_TYPE,
 		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty = TRADER_THIS_TYPE,

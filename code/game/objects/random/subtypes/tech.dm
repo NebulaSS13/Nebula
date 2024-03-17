@@ -6,11 +6,11 @@
 
 /obj/random/technology_scanner/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/t_scanner =            5,
-		/obj/item/radio/off =            2,
-		/obj/item/scanner/reagent =      2,
+		/obj/item/t_scanner            = 5,
+		/obj/item/radio/off            = 2,
+		/obj/item/scanner/reagent      = 2,
 		/obj/item/scanner/spectrometer = 2,
-		/obj/item/scanner/gas =          5
+		/obj/item/scanner/gas          = 5
 	)
 	return spawnable_choices
 
@@ -22,14 +22,14 @@
 
 /obj/random/powercell/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/cell/crap =            1,
-		/obj/item/cell =                 8,
-		/obj/item/cell/high =            5,
-		/obj/item/cell/gun=              5,
-		/obj/item/cell/super =           2,
-		/obj/item/cell/hyper =           1,
+		/obj/item/cell/crap            = 1,
+		/obj/item/cell                 = 8,
+		/obj/item/cell/high            = 5,
+		/obj/item/cell/gun             = 5,
+		/obj/item/cell/super           = 2,
+		/obj/item/cell/hyper           = 1,
 		/obj/item/cell/device/standard = 7,
-		/obj/item/cell/device/high =     5
+		/obj/item/cell/device/high     = 5
 	)
 	return spawnable_choices
 
@@ -58,19 +58,19 @@
 
 /obj/random/tech_supply/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/random/powercell =                     3,
-		/obj/random/technology_scanner =            2,
-		/obj/item/stack/package_wrap/twenty_five =  1,
-		/obj/item/hand_labeler =                    1,
-		/obj/random/bomb_supply =                   2,
-		/obj/item/chems/spray/extinguisher =                    1,
+		/obj/random/powercell                     = 3,
+		/obj/random/technology_scanner            = 2,
+		/obj/item/stack/package_wrap/twenty_five  = 1,
+		/obj/item/hand_labeler                    = 1,
+		/obj/random/bomb_supply                   = 2,
+		/obj/item/chems/spray/extinguisher        = 1,
 		/obj/item/clothing/gloves/insulated/cheap = 1,
-		/obj/item/stack/cable_coil/random =         2,
-		/obj/random/toolbox =                       2,
-		/obj/item/belt/utility =            2,
-		/obj/item/belt/utility/atmostech =  1,
-		/obj/random/tool =                          5,
-		/obj/item/stack/tape_roll/duct_tape =       2
+		/obj/item/stack/cable_coil/random         = 2,
+		/obj/random/toolbox                       = 2,
+		/obj/item/belt/utility                    = 2,
+		/obj/item/belt/utility/atmostech          = 1,
+		/obj/random/tool                          = 5,
+		/obj/item/stack/tape_roll/duct_tape       = 2
 	)
 	return spawnable_choices
 
@@ -82,15 +82,15 @@
 
 /obj/random/tank/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/tank/oxygen =                      5,
-		/obj/item/tank/oxygen/yellow =               4,
+		/obj/item/tank/oxygen                      = 5,
+		/obj/item/tank/oxygen/yellow               = 4,
 		/obj/item/tank/emergency/oxygen/double/red = 4,
-		/obj/item/tank/air =                         3,
-		/obj/item/tank/emergency/oxygen =            4,
-		/obj/item/tank/emergency/oxygen/engi =       3,
-		/obj/item/tank/emergency/oxygen/double =     2,
-		/obj/item/tank/nitrogen =                    1,
-		/obj/item/suit_cooling_unit =                1
+		/obj/item/tank/air                         = 3,
+		/obj/item/tank/emergency/oxygen            = 4,
+		/obj/item/tank/emergency/oxygen/engi       = 3,
+		/obj/item/tank/emergency/oxygen/double     = 2,
+		/obj/item/tank/nitrogen                    = 1,
+		/obj/item/suit_cooling_unit                = 1
 	)
 	return spawnable_choices
 

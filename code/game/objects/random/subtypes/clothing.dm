@@ -7,15 +7,15 @@
 
 /obj/random/masks/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/mask/gas =                4,
-		/obj/item/clothing/mask/gas/half =           5,
-		/obj/item/clothing/mask/gas/swat =           1,
-		/obj/item/clothing/mask/gas/syndicate =      1,
-		/obj/item/clothing/mask/breath =             6,
-		/obj/item/clothing/mask/breath/medical =     4,
-		/obj/item/clothing/mask/balaclava =          3,
+		/obj/item/clothing/mask/gas                = 4,
+		/obj/item/clothing/mask/gas/half           = 5,
+		/obj/item/clothing/mask/gas/swat           = 1,
+		/obj/item/clothing/mask/gas/syndicate      = 1,
+		/obj/item/clothing/mask/breath             = 6,
+		/obj/item/clothing/mask/breath/medical     = 4,
+		/obj/item/clothing/mask/balaclava          = 3,
 		/obj/item/clothing/mask/balaclava/tactical = 2,
-		/obj/item/clothing/mask/surgical =           4
+		/obj/item/clothing/mask/surgical           = 4
 	)
 	return spawnable_choices
 
@@ -27,26 +27,26 @@
 
 /obj/random/shoes/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/shoes/workboots =             3,
-		/obj/item/clothing/shoes/jackboots =             3,
-		/obj/item/clothing/shoes/jackboots/swat =        1,
+		/obj/item/clothing/shoes/workboots             = 3,
+		/obj/item/clothing/shoes/jackboots             = 3,
+		/obj/item/clothing/shoes/jackboots/swat        = 1,
 		/obj/item/clothing/shoes/jackboots/swat/combat = 1,
-		/obj/item/clothing/shoes/galoshes =              2,
-		/obj/item/clothing/shoes/syndigaloshes =         1,
-		/obj/item/clothing/shoes/magboots =              1,
-		/obj/item/clothing/shoes/dress =                 4,
+		/obj/item/clothing/shoes/galoshes              = 2,
+		/obj/item/clothing/shoes/syndigaloshes         = 1,
+		/obj/item/clothing/shoes/magboots              = 1,
+		/obj/item/clothing/shoes/dress                 = 4,
 		/obj/item/clothing/shoes/jackboots/jungleboots = 3,
 		/obj/item/clothing/shoes/jackboots/desertboots = 3,
-		/obj/item/clothing/shoes/jackboots/duty =        3,
-		/obj/item/clothing/shoes/jackboots/tactical =    1,
-		/obj/item/clothing/shoes/color/black =           4,
-		/obj/item/clothing/shoes/dress =                 3,
-		/obj/item/clothing/shoes/dress/white =           3,
-		/obj/item/clothing/shoes/sandal =                3,
-		/obj/item/clothing/shoes/color/brown =           4,
-		/obj/item/clothing/shoes/color/red =             4,
-		/obj/item/clothing/shoes/color/blue =            4,
-		/obj/item/clothing/shoes/craftable =             4
+		/obj/item/clothing/shoes/jackboots/duty        = 3,
+		/obj/item/clothing/shoes/jackboots/tactical    = 1,
+		/obj/item/clothing/shoes/color/black           = 4,
+		/obj/item/clothing/shoes/dress                 = 3,
+		/obj/item/clothing/shoes/dress/white           = 3,
+		/obj/item/clothing/shoes/sandal                = 3,
+		/obj/item/clothing/shoes/color/brown           = 4,
+		/obj/item/clothing/shoes/color/red             = 4,
+		/obj/item/clothing/shoes/color/blue            = 4,
+		/obj/item/clothing/shoes/craftable             = 4
 	)
 	return spawnable_choices
 
@@ -58,17 +58,17 @@
 
 /obj/random/gloves/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/gloves/insulated =       3,
-		/obj/item/clothing/gloves/thick =           6,
-		/obj/item/clothing/gloves/thick/botany =    5,
-		/obj/item/clothing/gloves/latex =           4,
-		/obj/item/clothing/gloves/thick/swat =      3,
-		/obj/item/clothing/gloves/thick/combat =    3,
-		/obj/item/clothing/gloves/color/white =     5,
-		/obj/item/clothing/gloves/rainbow =         1,
-		/obj/item/clothing/gloves/thick/duty =      5,
-		/obj/item/clothing/gloves/guards =          3,
-		/obj/item/clothing/gloves/tactical =        3,
+		/obj/item/clothing/gloves/insulated       = 3,
+		/obj/item/clothing/gloves/thick           = 6,
+		/obj/item/clothing/gloves/thick/botany    = 5,
+		/obj/item/clothing/gloves/latex           = 4,
+		/obj/item/clothing/gloves/thick/swat      = 3,
+		/obj/item/clothing/gloves/thick/combat    = 3,
+		/obj/item/clothing/gloves/color/white     = 5,
+		/obj/item/clothing/gloves/rainbow         = 1,
+		/obj/item/clothing/gloves/thick/duty      = 5,
+		/obj/item/clothing/gloves/guards          = 3,
+		/obj/item/clothing/gloves/tactical        = 3,
 		/obj/item/clothing/gloves/insulated/cheap = 5
 	)
 	return spawnable_choices
@@ -81,21 +81,21 @@
 
 /obj/random/glasses/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/glasses/sunglasses =                3,
-		/obj/item/clothing/glasses/prescription =              7,
-		/obj/item/clothing/glasses/meson =                     5,
-		/obj/item/clothing/glasses/meson/prescription =        4,
-		/obj/item/clothing/glasses/science =                   6,
-		/obj/item/clothing/glasses/material =                  5,
-		/obj/item/clothing/glasses/welding =                   3,
-		/obj/item/clothing/glasses/hud/health =                4,
-		/obj/item/clothing/glasses/hud/health/prescription =   3,
-		/obj/item/clothing/glasses/hud/security =              4,
+		/obj/item/clothing/glasses/sunglasses                = 3,
+		/obj/item/clothing/glasses/prescription              = 7,
+		/obj/item/clothing/glasses/meson                     = 5,
+		/obj/item/clothing/glasses/meson/prescription        = 4,
+		/obj/item/clothing/glasses/science                   = 6,
+		/obj/item/clothing/glasses/material                  = 5,
+		/obj/item/clothing/glasses/welding                   = 3,
+		/obj/item/clothing/glasses/hud/health                = 4,
+		/obj/item/clothing/glasses/hud/health/prescription   = 3,
+		/obj/item/clothing/glasses/hud/security              = 4,
 		/obj/item/clothing/glasses/hud/security/prescription = 3,
-		/obj/item/clothing/glasses/sunglasses/sechud =         2,
-		/obj/item/clothing/glasses/sunglasses/sechud/toggle =  3,
+		/obj/item/clothing/glasses/sunglasses/sechud         = 2,
+		/obj/item/clothing/glasses/sunglasses/sechud/toggle  = 3,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles = 1,
-		/obj/item/clothing/glasses/tacgoggles =                1
+		/obj/item/clothing/glasses/tacgoggles                = 1
 	)
 	return spawnable_choices
 
@@ -107,16 +107,16 @@
 
 /obj/random/hat/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/head/helmet =                 2,
-		/obj/item/clothing/head/helmet/tactical =        1,
+		/obj/item/clothing/head/helmet                 = 2,
+		/obj/item/clothing/head/helmet/tactical        = 1,
 		/obj/item/clothing/head/helmet/space/emergency = 1,
-		/obj/item/clothing/head/bio_hood/general =       1,
-		/obj/item/clothing/head/hardhat =                4,
-		/obj/item/clothing/head/hardhat/orange =         4,
-		/obj/item/clothing/head/hardhat/red =            4,
-		/obj/item/clothing/head/hardhat/dblue =          4,
-		/obj/item/clothing/head/ushanka =                3,
-		/obj/item/clothing/head/welding =                2
+		/obj/item/clothing/head/bio_hood/general       = 1,
+		/obj/item/clothing/head/hardhat                = 4,
+		/obj/item/clothing/head/hardhat/orange         = 4,
+		/obj/item/clothing/head/hardhat/red            = 4,
+		/obj/item/clothing/head/hardhat/dblue          = 4,
+		/obj/item/clothing/head/ushanka                = 3,
+		/obj/item/clothing/head/welding                = 2
 	)
 	return spawnable_choices
 
@@ -128,21 +128,21 @@
 
 /obj/random/suit/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/suit/hazardvest =          4,
-		/obj/item/clothing/suit/toggle/labcoat =      4,
-		/obj/item/clothing/suit/space/emergency =             1,
-		/obj/item/clothing/suit/armor/vest =                  4,
-		/obj/item/clothing/suit/armor/pcarrier/tactical =     1,
-		/obj/item/clothing/suit/armor/vest/heavy =            3,
-		/obj/item/clothing/suit/jacket/bomber =       3,
-		/obj/item/clothing/suit/chef/classic =                3,
-		/obj/item/clothing/suit/surgicalapron =               2,
-		/obj/item/clothing/suit/apron/overalls =              3,
-		/obj/item/clothing/suit/bio_suit/general =            1,
-		/obj/item/clothing/suit/jacket/hoodie/black = 3,
-		/obj/item/clothing/suit/jacket/brown = 3,
-		/obj/item/clothing/suit/jacket/leather =      3,
-		/obj/item/clothing/suit/apron =                       4
+		/obj/item/clothing/suit/hazardvest              = 4,
+		/obj/item/clothing/suit/toggle/labcoat          = 4,
+		/obj/item/clothing/suit/space/emergency         = 1,
+		/obj/item/clothing/suit/armor/vest              = 4,
+		/obj/item/clothing/suit/armor/pcarrier/tactical = 1,
+		/obj/item/clothing/suit/armor/vest/heavy        = 3,
+		/obj/item/clothing/suit/jacket/bomber           = 3,
+		/obj/item/clothing/suit/chef/classic            = 3,
+		/obj/item/clothing/suit/surgicalapron           = 2,
+		/obj/item/clothing/suit/apron/overalls          = 3,
+		/obj/item/clothing/suit/bio_suit/general        = 1,
+		/obj/item/clothing/suit/jacket/hoodie/black     = 3,
+		/obj/item/clothing/suit/jacket/brown            = 3,
+		/obj/item/clothing/suit/jacket/leather          = 3,
+		/obj/item/clothing/suit/apron                   = 4
 	)
 	return spawnable_choices
 
@@ -155,16 +155,16 @@
 /obj/random/clothing/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/clothing/under/syndicate/tacticool = 2,
-		/obj/item/clothing/under/syndicate/combat =    1,
-		/obj/item/clothing/under/hazard =              4,
-		/obj/item/clothing/under/sterile =             4,
-		/obj/item/clothing/pants/casual/camo =         2,
-		/obj/item/clothing/under/frontier =            2,
-		/obj/item/clothing/under/harness =             2,
-		/obj/item/clothing/under/medical/paramedic =   2,
-		/obj/item/clothing/under/overalls =            2,
-		/obj/item/clothing/head/earmuffs =             2,
-		/obj/item/clothing/under/tactical =            1
+		/obj/item/clothing/under/syndicate/combat    = 1,
+		/obj/item/clothing/under/hazard              = 4,
+		/obj/item/clothing/under/sterile             = 4,
+		/obj/item/clothing/pants/casual/camo         = 2,
+		/obj/item/clothing/under/frontier            = 2,
+		/obj/item/clothing/under/harness             = 2,
+		/obj/item/clothing/under/medical/paramedic   = 2,
+		/obj/item/clothing/under/overalls            = 2,
+		/obj/item/clothing/head/earmuffs             = 2,
+		/obj/item/clothing/under/tactical            = 1
 	)
 	return spawnable_choices
 
@@ -176,15 +176,15 @@
 
 /obj/random/accessory/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/webbing =                3,
-		/obj/item/clothing/webbing/webbing_large =  3,
-		/obj/item/clothing/webbing/vest/black =     2,
-		/obj/item/clothing/webbing/vest/brown =     2,
-		/obj/item/clothing/webbing/vest =           2,
-		/obj/item/clothing/webbing/bandolier =      1,
-		/obj/item/clothing/webbing/holster/thigh =  1,
-		/obj/item/clothing/webbing/holster/hip =    1,
-		/obj/item/clothing/webbing/holster/waist =  1,
+		/obj/item/clothing/webbing                = 3,
+		/obj/item/clothing/webbing/webbing_large  = 3,
+		/obj/item/clothing/webbing/vest/black     = 2,
+		/obj/item/clothing/webbing/vest/brown     = 2,
+		/obj/item/clothing/webbing/vest           = 2,
+		/obj/item/clothing/webbing/bandolier      = 1,
+		/obj/item/clothing/webbing/holster/thigh  = 1,
+		/obj/item/clothing/webbing/holster/hip    = 1,
+		/obj/item/clothing/webbing/holster/waist  = 1,
 		/obj/item/clothing/webbing/holster/armpit = 1,
 		/obj/item/clothing/shoes/kneepads =         3,
 		/obj/item/clothing/neck/stethoscope =       2
