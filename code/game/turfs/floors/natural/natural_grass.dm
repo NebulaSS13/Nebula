@@ -6,12 +6,13 @@
 	icon_edge_layer = EXT_EDGE_GRASS
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	material = /decl/material/solid/organic/plantmatter/grass
 
 /turf/floor/natural/grass/wild
 	name = "wild grass"
-	possible_states = 0
-	icon = 'icons/turf/flooring/wildgrass.dmi'
+	possible_states = null
+	icon = 'icons/turf/exterior/wildgrass.dmi'
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
 	footstep_type = /decl/footsteps/grass
 	color = "#5e7a3b"

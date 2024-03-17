@@ -1539,7 +1539,6 @@
 #include "code\game\turfs\floors\subtypes\floor_cult.dm"
 #include "code\game\turfs\floors\subtypes\floor_misc.dm"
 #include "code\game\turfs\floors\subtypes\floor_path.dm"
-#include "code\game\turfs\floors\subtypes\floor_plating.dm"
 #include "code\game\turfs\floors\subtypes\floor_reinforced.dm"
 #include "code\game\turfs\floors\subtypes\floor_shuttle.dm"
 #include "code\game\turfs\floors\subtypes\floor_static.dm"

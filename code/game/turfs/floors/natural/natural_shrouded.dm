@@ -4,6 +4,7 @@
 	desc = "Sand that has been packed in to solid earth."
 	dirt_color = "#3e3960"
 	possible_states = 8
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	material = /decl/material/solid/sand
 	is_fundament_turf = TRUE
 

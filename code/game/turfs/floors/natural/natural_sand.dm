@@ -6,6 +6,7 @@
 	icon = 'icons/turf/exterior/sand.dmi'
 	icon_edge_layer = EXT_EDGE_SAND
 	possible_states = 4
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	material = /decl/material/solid/sand
 	is_fundament_turf = TRUE
 
