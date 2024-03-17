@@ -179,7 +179,7 @@
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
+	opacity = 0
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -209,7 +209,7 @@
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
+	opacity = 0
 	},
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
@@ -324,7 +324,7 @@
 	dir = 9
 	},
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -644,12 +644,12 @@
 "bo" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = FALSE;
+	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
+	opacity = 0
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -836,12 +836,12 @@
 "bC" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = FALSE;
+	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
+	opacity = 0
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1271,12 +1271,12 @@
 "cp" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = FALSE;
+	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
+	opacity = 0
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1579,12 +1579,12 @@
 /obj/structure/table/steel,
 /obj/effect/paint/silver,
 /obj/machinery/door/blast/shutters{
-	density = FALSE;
+	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
+	opacity = 0
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -2454,7 +2454,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -7984,7 +7984,7 @@
 	dir = 6
 	},
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8095,12 +8095,12 @@
 "QE" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = FALSE;
+	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
+	opacity = 0
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,

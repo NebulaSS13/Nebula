@@ -1316,11 +1316,11 @@
 /area/shuttle/escape_shuttle)
 "aLF" = (
 /obj/machinery/door/blast/regular{
-	density = FALSE;
+	density = 0;
 	icon_state = "pdoor0";
 	id_tag = "CentComPort";
 	name = "Security Doors";
-	opacity = FALSE
+	opacity = 0
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
