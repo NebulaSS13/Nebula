@@ -5,10 +5,15 @@
 	w_class = ITEM_SIZE_NORMAL
 	accessory_slot = ACCESSORY_SLOT_UTILITY
 	accessory_high_visibility = TRUE
-	accessory_hide_on_uniform_rolldown = TRUE
 	var/slots = 3
 	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
 	var/obj/item/storage/internal/pockets/hold
+
+/obj/item/clothing/accessory/storage/get_initial_accessory_hide_on_states()
+	var/static/list/initial_accessory_hide_on_states = list(
+		/decl/clothing_state_modifier/rolled_down
+	)
+	return initial_accessory_hide_on_states
 
 /obj/item/clothing/accessory/storage/Initialize()
 	. = ..()
