@@ -40,6 +40,7 @@
 	name = "maid's headband"
 	desc = "This dainty, frilled thing is apparently meant to go on your head."
 	icon = 'icons/clothing/head/inf_hat.dmi'
+	markings_state_modifier = null
 
 /obj/item/clothing/suit/infilsuit/fem
 	name = "maid's uniform"

@@ -98,15 +98,24 @@
 	// Holder takes precedence, if we're attached as an accessory.
 	var/list/sync_modifiers = list(overlay.icon_state)
 	var/obj/item/clothing/holder = istype(loc, /obj/item/clothing) ? loc : null
-	for(var/modifier_type in clothing_state_modifiers)
-		// If we have no holder, use our own state.
+	var/list/modifiers = list()
+	if(length(clothing_state_modifiers))
+		modifiers |= clothing_state_modifiers
+	if(length(holder?.clothing_state_modifiers))
+		modifiers |= holder.clothing_state_modifiers
+	for(var/modifier_type in modifiers)
 		var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
-		if(modifier.applies_icon_state_modifier)
-			if(clothing_state_modifiers[modifier_type] && !holder)
-				LAZYADD(sync_modifiers, modifier.icon_state_modifier)
-			// If we have a holder, their state overrides ours.
-			else if((modifier_type in holder?.clothing_state_modifiers) && holder.clothing_state_modifiers[modifier_type])
-				LAZYADD(sync_modifiers, modifier.icon_state_modifier)
+		// Do we even care about this one?
+		if(!modifier.applies_icon_state_modifier)
+			continue
+		if(!(modifier_type in clothing_state_modifiers))
+			continue
+		if(holder?.clothing_state_modifiers && !holder.clothing_state_modifiers[modifier_type])
+			continue
+		if(!LAZYACCESS(clothing_state_modifiers, modifier_type))
+			continue
+		LAZYADD(sync_modifiers, modifier.icon_state_modifier)
+
 	var/new_state = JOINTEXT(sync_modifiers)
 	if(check_state_in_icon(new_state, overlay.icon))
 		overlay.icon_state = new_state

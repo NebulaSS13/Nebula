@@ -28,27 +28,6 @@
 /datum/unit_test/gear_clothing_icon_state_test/start_test()
 
 	var/list/check_types = subtypesof(/obj/item/clothing)
-	var/list/detailed_check_types = list(
-		/obj/item/clothing/suit,
-		/obj/item/clothing/accessory,
-		/obj/item/clothing/under
-	)
-	var/list/skip_detailed_check_types = list()
-	var/list/onmob_exception_list = list(
-		/obj/item/clothing/accessory/buddytag,
-		/obj/item/clothing/accessory/armor/plate,
-		/obj/item/clothing/accessory/armor/tag/oneg,
-		/obj/item/clothing/accessory/armor/tag/opos,
-		/obj/item/clothing/accessory/armor/tag/apos,
-		/obj/item/clothing/accessory/armor/tag/aneg,
-		/obj/item/clothing/accessory/armor/tag/bpos,
-		/obj/item/clothing/accessory/armor/tag/bneg,
-		/obj/item/clothing/accessory/armor/tag/abpos,
-		/obj/item/clothing/accessory/armor/tag/abneg
-	)
-	for(var/checktype in onmob_exception_list)
-		onmob_exception_list |= typesof(checktype)
-
 	var/list/failures = list()
 	for(var/clothing_type in check_types)
 
@@ -73,22 +52,6 @@
 			clothing_fails += "missing initial state '[initial_state]' in initial icon '[initial_icon]'"
 		if(initial_item_state)
 			clothing_fails += "legacy item state set '[initial_item_state]'"
-
-		var/do_detailed_check = FALSE
-		for(var/detailed_check_type in detailed_check_types)
-			if(ispath(clothes, detailed_check_type))
-				do_detailed_check = TRUE
-				break
-		if(do_detailed_check)
-			for(var/detailed_check_type in skip_detailed_check_types)
-				if(ispath(clothes, detailed_check_type))
-					do_detailed_check = FALSE
-					break
-
-		if(!do_detailed_check)
-			if(length(clothing_fails))
-				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]"
-			continue
 
 		// We don't currently validate clothes specifically for nonhumans.
 		// TODO: make this a loop over all relevant bodytype categories instead.
@@ -124,74 +87,70 @@
 					clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
 
 		// I wish we could initial() lists/procs.
-		if(!length(clothes.get_available_clothing_state_modifiers()))
-			QDEL_NULL(clothes)
-			if(length(clothing_fails))
-				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]"
-			continue
+		if(length(clothes.get_available_clothing_state_modifiers()))
 
-		var/list/all_tokens = list()
-		for(var/decl/clothing_state_modifier/modifier in clothes.get_available_clothing_state_modifiers())
-			if(!modifier.applies_icon_state_modifier)
-				continue
-			all_tokens += modifier.icon_state_modifier
-
-		// Generate an ordered non-overlapping set of possible icon state combinations.
-		var/list/generated_tokens = all_tokens.Copy()
-		for(var/token in all_tokens)
-			for(var/gen_token in generated_tokens)
-				var/skip_gen = FALSE
-				for(var/check_index = all_tokens.Find(token) to length(all_tokens))
-					if(findtext(gen_token, all_tokens[check_index]))
-						skip_gen = TRUE
-						break
-				if(skip_gen)
+			var/list/all_tokens = list()
+			for(var/decl/clothing_state_modifier/modifier in clothes.get_available_clothing_state_modifiers())
+				if(!modifier.applies_icon_state_modifier)
 					continue
-				generated_tokens += "[gen_token][token]"
+				all_tokens += modifier.icon_state_modifier
 
-		// God help unit test time if people start putting markings on flannel shirts.
-		if(clothes.markings_state_modifier && clothes.markings_color)
-			for(var/token in generated_tokens)
-				generated_tokens += "[token][clothes.markings_state_modifier]"
+			// Generate an ordered non-overlapping set of possible icon state combinations.
+			var/list/generated_tokens = all_tokens.Copy()
+			for(var/token in all_tokens)
+				for(var/gen_token in generated_tokens)
+					var/skip_gen = FALSE
+					for(var/check_index = all_tokens.Find(token) to length(all_tokens))
+						if(findtext(gen_token, all_tokens[check_index]))
+							skip_gen = TRUE
+							break
+					if(skip_gen)
+						continue
+					generated_tokens += "[gen_token][token]"
 
-		// Keep track of which states we've looked for or otherwise evaluated for later state checking.
-		var/list/check_states = icon_states(clothes.icon)
+			// God help unit test time if people start putting markings on flannel shirts.
+			if(clothes.markings_state_modifier && clothes.markings_color)
+				for(var/token in generated_tokens)
+					generated_tokens += "[token][clothes.markings_state_modifier]"
 
-		// Validate against the list of generated tokens.
-		for(var/gen_token in generated_tokens)
+			// Keep track of which states we've looked for or otherwise evaluated for later state checking.
+			var/list/check_states = icon_states(clothes.icon)
 
-			if(ICON_STATE_WORLD in check_states)
-				var/check_state = "[ICON_STATE_WORLD][gen_token]"
-				if(!(check_state in check_states))
-					clothing_fails += "missing world state '[check_state]' in '[clothes.icon]'"
+			// Validate against the list of generated tokens.
+			for(var/gen_token in generated_tokens)
 
-			if(ICON_STATE_INV in check_states)
-				var/check_state = "[ICON_STATE_INV][gen_token]"
-				if(!(check_state in check_states))
-					clothing_fails += "missing inventory state '[check_state]' in '[clothes.icon]'"
+				if(ICON_STATE_WORLD in check_states)
+					var/check_state = "[ICON_STATE_WORLD][gen_token]"
+					if(!(check_state in check_states))
+						clothing_fails += "missing world state '[check_state]' in '[clothes.icon]'"
 
-			for(var/slot in check_slots)
-				var/check_state = "[state_base]-[slot][gen_token]"
-				if(!(slot in global.all_hand_slots) && !(check_state in check_states))
-					clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
+				if(ICON_STATE_INV in check_states)
+					var/check_state = "[ICON_STATE_INV][gen_token]"
+					if(!(check_state in check_states))
+						clothing_fails += "missing inventory state '[check_state]' in '[clothes.icon]'"
 
-			// Prune expected states from the file.
-			for(var/related_state in check_states)
-				if(findtext(related_state, gen_token))
-					check_states -= related_state
+				for(var/slot in check_slots)
+					var/check_state = "[state_base]-[slot][gen_token]"
+					if(!(slot in global.all_hand_slots) && !(check_state in check_states))
+						clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
 
-		// Now we check for unrelated or invalid modifier states remaining.
-		var/list/extraneous_states = list()
-		var/list/all_modifiers = decls_repository.get_decls_of_subtype(/decl/clothing_state_modifier)
-		for(var/modifier_type in all_modifiers)
-			var/decl/clothing_state_modifier/modifier = all_modifiers[modifier_type]
-			if(modifier.applies_icon_state_modifier)
-				for(var/check_state in check_states)
-					if(findtext(check_state, modifier.icon_state_modifier))
-						extraneous_states |= check_state
+				// Prune expected states from the file.
+				for(var/related_state in check_states)
+					if(findtext(related_state, gen_token))
+						check_states -= related_state
 
-		for(var/extraneous_state in extraneous_states)
-			clothing_fails += "extraneous onmob state '[extraneous_state]' in '[clothes.icon]'"
+			// Now we check for unrelated or invalid modifier states remaining.
+			var/list/extraneous_states = list()
+			var/list/all_modifiers = decls_repository.get_decls_of_subtype(/decl/clothing_state_modifier)
+			for(var/modifier_type in all_modifiers)
+				var/decl/clothing_state_modifier/modifier = all_modifiers[modifier_type]
+				if(modifier.applies_icon_state_modifier)
+					for(var/check_state in check_states)
+						if(findtext(check_state, modifier.icon_state_modifier))
+							extraneous_states |= check_state
+
+			for(var/extraneous_state in extraneous_states)
+				clothing_fails += "extraneous onmob state '[extraneous_state]' in '[clothes.icon]'"
 
 		QDEL_NULL(clothes)
 		if(length(clothing_fails))
