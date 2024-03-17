@@ -22,8 +22,24 @@
 
 // Override for action buttons.
 /obj/item/clothing/attack_self(mob/user)
-	if(loc == user && user.get_active_held_item() != src)
-		return attack_hand_with_interaction_checks(user)
+	if(loc == user)
+		if(user.get_active_hand() != src)
+			return attack_hand_with_interaction_checks(user)
+		// Adjust our clothing state.
+		if(length(clothing_state_modifiers))
+			var/decl/clothing_state_modifier/modifier
+			if(length(clothing_state_modifiers) == 1)
+				modifier = GET_DECL(clothing_state_modifiers[1])
+			else
+				var/list/choices = list()
+				for(var/modifier_type in clothing_state_modifiers)
+					choices += GET_DECL(modifier_type)
+				modifier = input(user, "How do you want to interact with \the [src]?", "Adjust Clothing") as null|anything in choices
+				if(!modifier || QDELETED(src) || QDELETED(user) || !(modifier.type in clothing_state_modifiers) || (loc != user))
+					return TRUE
+			if(modifier)
+				call(modifier.toggle_verb)()
+			return TRUE
 	return ..()
 
 /obj/item/clothing/attackby(var/obj/item/I, var/mob/user)
@@ -75,7 +91,6 @@
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory)
 	if(!accessory || !(accessory in accessories) || !accessory.accessory_removable || !accessory.canremove)
 		return
-
 	accessory.on_removed(user)
 	LAZYREMOVE(accessories, accessory)
 	update_accessory_slowdown()
@@ -146,14 +161,15 @@
 	return FALSE
 
 /obj/item/clothing/proc/on_removed(var/mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
+	var/obj/item/clothing/holder = loc
+	if(istype(holder))
 		if(user)
+			to_chat(user, SPAN_NOTICE("You remove \the [src] from \the [holder]."))
 			user.put_in_hands(src)
 			add_fingerprint(user)
 		else
 			dropInto(loc)
-		suit.update_clothing_toggle_verbs()
+		holder.update_clothing_toggle_verbs()
 		update_clothing_toggle_verbs()
 		return TRUE
 	return FALSE

@@ -34,27 +34,25 @@
 	H.examine_holster(user)
 
 /obj/item/clothing/accessory/storage/holster/on_attached(obj/item/clothing/under/S, mob/user)
-	..()
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		suit.verbs += /atom/proc/holster_verb
+	. = ..()
+	var/obj/item/clothing/holder = loc
+	if(istype(holder))
+		holder.verbs |= /atom/proc/holster_verb
 
 /obj/item/clothing/accessory/storage/holster/on_removed(mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
+	var/obj/item/clothing/holder = loc
+	if(istype(holder))
 		var/remove_verb = TRUE
-		if(has_extension(suit, /datum/extension/holster))
+		if(has_extension(holder, /datum/extension/holster))
 			remove_verb = FALSE
-
-		for(var/obj/accessory in suit.accessories)
+		for(var/obj/accessory in holder.accessories)
 			if(accessory == src)
 				continue
 			if(has_extension(accessory, /datum/extension/holster))
 				remove_verb = FALSE
-
 		if(remove_verb)
-			suit.verbs -= /atom/proc/holster_verb
-	..()
+			holder.verbs -= /atom/proc/holster_verb
+	return ..()
 
 /obj/item/clothing/accessory/storage/holster/armpit
 	name = "armpit holster"
