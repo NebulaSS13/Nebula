@@ -78,7 +78,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	. = ..()
 	var/turf/wall/wall = get_turf(src)
 	if(istype(wall))
-		wall.dismantle_wall(TRUE, TRUE, TRUE)
+		wall.dismantle_turf(TRUE, TRUE, TRUE)
 	qdel(src)
 
 //Applies fire act to the turf

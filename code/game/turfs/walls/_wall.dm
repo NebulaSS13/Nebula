@@ -196,11 +196,9 @@ var/global/list/wall_fullblend_objects = list(
 		cap = cap / 10
 
 	if(damage >= cap)
-		dismantle_wall(1)
+		physically_destroyed()
 	else
 		update_icon()
-
-	return
 
 /turf/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air :(
 	burn(exposed_temperature)
@@ -229,7 +227,7 @@ var/global/list/wall_fullblend_objects = list(
 	if(material)
 		material.place_dismantled_product(src, devastated, amount = rand(3, 5), drop_type = get_dismantle_stack_type())
 
-/turf/wall/proc/dismantle_wall(devastated, explode, no_product)
+/turf/wall/dismantle_turf(devastated, explode, no_product)
 
 	playsound(src, get_dismantle_sound(), 100, 1)
 	if(!no_product)
@@ -247,12 +245,12 @@ var/global/list/wall_fullblend_objects = list(
 /turf/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1)
-		dismantle_wall(TRUE, TRUE, TRUE)
+		dismantle_turf(TRUE, TRUE, TRUE)
 	else if(severity == 2)
 		if(prob(75))
 			take_damage(rand(150, 250))
 		else
-			dismantle_wall(TRUE, TRUE)
+			dismantle_turf(TRUE, TRUE)
 	else if(severity == 3)
 		take_damage(rand(0, 250))
 
@@ -282,7 +280,7 @@ var/global/list/wall_fullblend_objects = list(
 		for(var/turf/wall/W in range(3,src))
 			if(W != src)
 				addtimer(CALLBACK(W, TYPE_PROC_REF(/turf/wall, burn), temperature/4), 2)
-		dismantle_wall(TRUE)
+		physically_destroyed()
 
 /turf/wall/get_color()
 	return paint_color

@@ -4,14 +4,16 @@
 		return ChangeTurf(base_turf)
 	return src
 
-/turf/physically_destroyed(var/skip_qdel)
-	SHOULD_CALL_PARENT(FALSE)
+/turf/proc/dismantle_turf(devastated, explode, no_product)
 	var/turf/new_turf = switch_to_base_turf()
-	if(istype(new_turf) && !new_turf.is_open() && !(locate(/obj/structure/lattice) in new_turf))
+	if(!no_product && istype(new_turf) && !new_turf.is_open() && !(locate(/obj/structure/lattice) in new_turf))
 		new /obj/structure/lattice(new_turf)
 	return !!new_turf
 
-/turf/floor/natiral
+/turf/physically_destroyed(var/skip_qdel)
+	SHOULD_CALL_PARENT(FALSE)
+	return dismantle_turf(TRUE)
+
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()

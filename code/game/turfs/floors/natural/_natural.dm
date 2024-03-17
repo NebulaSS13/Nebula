@@ -105,8 +105,7 @@
 /turf/floor/natural/can_engrave()
 	return FALSE
 
-/turf/floor/natural/physically_destroyed(var/skip_qdel)
-	SHOULD_CALL_PARENT(FALSE)
+/turf/floor/natural/dismantle_turf(devastated, explode, no_product)
 	return !!switch_to_base_turf()
 
 /turf/floor/natural/on_defilement()

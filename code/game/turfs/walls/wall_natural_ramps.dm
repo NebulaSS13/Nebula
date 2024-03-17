@@ -45,7 +45,7 @@
 			continue
 		var/turf/wall/natural/support = get_step(neighbor, global.reverse_dir[neighbor.ramp_slope_direction])
 		if(!istype(support) || (destroying_self && support == src) || support.ramp_slope_direction)
-			neighbor.dismantle_wall(ramp_update = FALSE) // This will only occur on ramps, so no need to propagate to other ramps.
+			neighbor.dismantle_turf(ramp_update = FALSE) // This will only occur on ramps, so no need to propagate to other ramps.
 
 // TODO: convert to alt interaction.
 /turf/wall/natural/AltClick(mob/user)

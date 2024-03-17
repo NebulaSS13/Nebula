@@ -495,7 +495,7 @@
 			if (!(get_dir(owner, M) & owner.dir))
 				continue
 			drill_head.durability -= 1
-			M.dismantle_wall()
+			M.dismantle_turf()
 		scoop_ore(target)
 		return
 
