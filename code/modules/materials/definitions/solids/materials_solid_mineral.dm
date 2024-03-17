@@ -227,7 +227,7 @@
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)
-	default_solid_form = /obj/item/stack/material/lump
+	default_solid_form = /obj/item/stack/material/ore/handful
 	can_backfill_turf_type = /turf/exterior/sand
 
 /decl/material/solid/clay
@@ -241,7 +241,7 @@
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
 	value = 0.8
-	default_solid_form = /obj/item/stack/material/lump
+	default_solid_form = /obj/item/stack/material/lump/large
 	bakes_into_material = /decl/material/solid/stone/pottery
 	melting_point = null // Clay is already almost a liquid...
 	// lower than the temperature expected from a kiln so that clay can be used to make bricks to make a high-temperature kiln.
@@ -254,7 +254,7 @@
 	uid = "solid_soil"
 	color = COLOR_BEASTY_BROWN
 	value = 0
-	default_solid_form = /obj/item/stack/material/lump
+	default_solid_form = /obj/item/stack/material/lump/large
 	melting_point = null
 	hardness = 0
 	integrity = 0

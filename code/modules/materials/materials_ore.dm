@@ -117,10 +117,6 @@
 	material = /decl/material/solid/hematite
 /obj/item/stack/material/ore/coal
 	material = /decl/material/solid/graphite
-/obj/item/stack/material/ore/sand
-	singular_name = "handful"
-	plural_name   = "handfuls"
-	material      = /decl/material/solid/sand
 /obj/item/stack/material/ore/silver
 	material = /decl/material/solid/metal/silver
 /obj/item/stack/material/ore/gold
@@ -159,6 +155,14 @@
 	material = /decl/material/solid/ice/hydrate/xenon
 /obj/item/stack/material/ore/meat
 	material = /decl/material/solid/organic/meat
+
+/obj/item/stack/material/ore/handful
+	singular_name = "handful"
+	plural_name   = "handfuls"
+	stack_merge_type           = /obj/item/stack/material/ore/handful
+
+/obj/item/stack/material/ore/handful/sand
+	material      = /decl/material/solid/sand
 
 /client/proc/spawn_ore_pile()
 	set name = "Spawn Ore Pile"

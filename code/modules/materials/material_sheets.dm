@@ -394,12 +394,18 @@
 	stack_merge_type = /obj/item/stack/material/lump
 	crafting_stack_type = /obj/item/stack/material/lump
 
-/obj/item/stack/material/lump/clay
+/obj/item/stack/material/lump/large
 	base_state        = "lump_large"
 	icon_state        = "lump_large"
 	plural_icon_state = "lump_large-mult"
 	max_icon_state    = "lump_large-max"
+	stack_merge_type  = /obj/item/stack/material/lump/large
+
+/obj/item/stack/material/lump/large/clay
 	material = /decl/material/solid/clay
+
+/obj/item/stack/material/lump/large/soil
+	material = /decl/material/solid/soil
 
 /obj/item/stack/material/slab
 	name = "slabs"

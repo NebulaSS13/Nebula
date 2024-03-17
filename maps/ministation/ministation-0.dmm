@@ -2125,7 +2125,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/item/stack/material/ore/sand,
+/obj/item/stack/material/ore/handful/sand,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "jX" = (
@@ -11564,7 +11564,7 @@
 /area/ministation/engine)
 "Wc" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/ore/sand,
+/obj/item/stack/material/ore/handful/sand,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/floor/tiled,
 /area/ministation/cargo)

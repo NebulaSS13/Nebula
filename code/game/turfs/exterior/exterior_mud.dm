@@ -7,7 +7,7 @@
 	is_fundament_turf = TRUE
 
 /turf/exterior/clay/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/lump/clay = list(3, 2))
+	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/lump/large/clay = list(3, 2))
 
 /turf/exterior/clay/drop_diggable_resources()
 	if(get_physical_height() >= -(FLUID_DEEP) && prob(15))

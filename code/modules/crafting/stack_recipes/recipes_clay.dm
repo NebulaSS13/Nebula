@@ -22,6 +22,7 @@
 	result_type                 = /obj/item/chems/glass/pottery/bowl
 
 /decl/stack_recipe/clay/brick
+	name_plural                 = "bricks"
 	res_amount                  = 2
 	max_res_amount              = 20
 	result_type                 = /obj/item/stack/material/brick/clay

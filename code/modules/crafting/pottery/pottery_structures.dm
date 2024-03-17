@@ -15,7 +15,7 @@
 	pottery -= thing
 
 /obj/structure/fire_source/kiln/get_removable_atoms()
-	. = pottery
+	. = pottery?.Copy()
 	if(firebox_open)
 		. |= ..()
 
