@@ -12,8 +12,17 @@
 /obj/item/tool/pickaxe/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
 		TOOL_PICK   = TOOL_QUALITY_DEFAULT,
-		TOOL_SHOVEL = TOOL_QUALITY_MEDIOCRE
+		TOOL_SHOVEL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_HAMMER = TOOL_QUALITY_MEDIOCRE
 	)
+	return tool_qualities
+
+// Using these mainly for debugging.
+/obj/item/tool/pickaxe/wood
+	material                  = /decl/material/solid/organic/wood
+
+/obj/item/tool/pickaxe/stone
+	material                  = /decl/material/solid/stone/flint
 
 /obj/item/tool/pickaxe/titanium
 	origin_tech               = @'{"materials":3}'
@@ -22,7 +31,8 @@
 /obj/item/tool/pickaxe/titanium/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
 		TOOL_PICK   = TOOL_QUALITY_DECENT,
-		TOOL_SHOVEL = TOOL_QUALITY_DEFAULT
+		TOOL_SHOVEL = TOOL_QUALITY_DEFAULT,
+		TOOL_HAMMER = TOOL_QUALITY_MEDIOCRE
 	)
 	return tool_qualities
 
@@ -33,7 +43,8 @@
 /obj/item/tool/pickaxe/plasteel/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
 		TOOL_PICK   = TOOL_QUALITY_GOOD,
-		TOOL_SHOVEL = TOOL_QUALITY_DECENT
+		TOOL_SHOVEL = TOOL_QUALITY_DECENT,
+		TOOL_HAMMER = TOOL_QUALITY_MEDIOCRE
 	)
 	return tool_qualities
 
@@ -44,6 +55,7 @@
 /obj/item/tool/pickaxe/ocp/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
 		TOOL_PICK   = TOOL_QUALITY_BEST,
-		TOOL_SHOVEL = TOOL_QUALITY_GOOD
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD,
+		TOOL_HAMMER = TOOL_QUALITY_MEDIOCRE
 	)
 	return tool_qualities

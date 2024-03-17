@@ -57,6 +57,7 @@
 #define IS_PEN(A)         IS_TOOL(A, TOOL_PEN)
 #define IS_PICK(A)        IS_TOOL(A, TOOL_PICK)
 #define IS_KNIFE(A)       IS_TOOL(A, TOOL_KNIFE)
+#define IS_HAMMER(A)      IS_TOOL(A, TOOL_HAMMER)
 
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)

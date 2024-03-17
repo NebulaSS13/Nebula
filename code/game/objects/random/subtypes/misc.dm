@@ -172,7 +172,7 @@
 /obj/random/material //Random materials for building stuff
 	name = "random material"
 	desc = "This is a random material."
-	icon = 'icons/obj/materials.dmi'
+	icon = 'icons/obj/items/stacks/materials.dmi'
 	icon_state = "sheet"
 
 /obj/random/material/spawn_choices()

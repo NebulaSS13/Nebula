@@ -27,7 +27,7 @@
 	else
 		wall_connections = null
 		other_connections = null
-		update_icon()
+	update_icon()
 
 /turf/wall/proc/paint_wall(var/new_paint_color)
 	paint_color = new_paint_color

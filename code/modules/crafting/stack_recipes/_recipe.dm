@@ -355,3 +355,9 @@
 		to_chat(user, SPAN_WARNING("[capitalize(get_display_name(1))] must be constructed on the floor!"))
 		return FALSE
 	return TRUE
+
+/decl/stack_recipe/proc/get_craft_verbing(obj/item/stack/stack)
+	return stack.craft_verbing || "making"
+
+/decl/stack_recipe/proc/get_craft_verb(obj/item/stack/stack)
+	return stack.craft_verb || "make"
