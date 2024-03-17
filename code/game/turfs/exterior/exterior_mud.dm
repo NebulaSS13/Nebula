@@ -26,7 +26,7 @@
 	is_fundament_turf = TRUE
 
 /turf/exterior/mud/drop_diggable_resources()
-	if(!dug && prob(25))
+	if(get_physical_height() > -(FLUID_DEEP) && prob(25))
 		new /obj/item/chems/food/worm(src)
 	return ..()
 

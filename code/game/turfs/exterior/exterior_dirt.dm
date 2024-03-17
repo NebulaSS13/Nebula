@@ -17,6 +17,6 @@
 	return new_turf.fluid_act(fluids)
 
 /turf/exterior/dirt/drop_diggable_resources()
-	if(!dug && prob(10))
+	if(get_physical_height() > -(FLUID_DEEP) && prob(10))
 		new /obj/item/chems/food/worm(src)
 	return ..()
