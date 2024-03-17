@@ -216,80 +216,67 @@ else if(##equipment_var) {\
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W, mob/user)
 
-	if(!isliving(user)) return
-
-	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/hand_labeler))
-		return ..()
-
 	if(IS_SCREWDRIVER(W))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)//maybe I should make this into a proc?
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-			return
-
-		if(helmet || boots || tank)
+		else if(helmet || boots || tank)
 			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
-			if(!choice) return
-
-			playsound(loc, 'sound/items/Screwdriver.ogg', 50)
-			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
-				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
-				user.put_in_hands(tank)
-				src.tank = null
-			else if(choice == helmet)
-				to_chat(user, "You detach \the [helmet] from \the [src]'s helmet mount.")
-				user.put_in_hands(helmet)
-				src.helmet = null
-			else if(choice == boots)
-				to_chat(user, "You detach \the [boots] from \the [src]'s boot mounts.")
-				user.put_in_hands(boots)
-				src.boots = null
+			if(choice)
+				playsound(loc, 'sound/items/Screwdriver.ogg', 50)
+				if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
+					to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
+					user.put_in_hands(tank)
+					src.tank = null
+				else if(choice == helmet)
+					to_chat(user, "You detach \the [helmet] from \the [src]'s helmet mount.")
+					user.put_in_hands(helmet)
+					src.helmet = null
+				else if(choice == boots)
+					to_chat(user, "You detach \the [boots] from \the [src]'s boot mounts.")
+					user.put_in_hands(boots)
+					src.boots = null
 		else
 			to_chat(user, "\The [src] does not have anything installed.")
-		return
-	else if(istype(W,/obj/item/clothing/head/helmet/space))
+		return TRUE
+
+	if(istype(W,/obj/item/clothing/head/helmet/space))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-			return
-		if(helmet)
+		else if(helmet)
 			to_chat(user, "\The [src] already has a helmet installed.")
-		else
-			if(!user.try_unequip(W, src))
-				return
+		else if(user.try_unequip(W, src))
 			to_chat(user, "You attach \the [W] to \the [src]'s helmet mount.")
 			src.helmet = W
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		return
-	else if(istype(W,/obj/item/clothing/shoes/magboots))
+		return TRUE
+
+	if(istype(W,/obj/item/clothing/shoes/magboots))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-			return
-		if(boots)
+		else if(boots)
 			to_chat(user, "\The [src] already has magboots installed.")
-		else
-			if(!user.try_unequip(W, src))
-				return
+		else if(user.try_unequip(W, src))
 			to_chat(user, "You attach \the [W] to \the [src]'s boot mounts.")
 			boots = W
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		return
-	else if(istype(W,/obj/item/tank))
+		return TRUE
+
+	if(istype(W,/obj/item/tank))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-			return
-		if(tank)
+		else if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")
-		else
-			if(!user.try_unequip(W, src))
-				return
+		else if(user.try_unequip(W, src))
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
 			tank = W
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/clothing/suit/space/void/attack_self() //sole purpose of existence is to toggle the helmet
 	toggle_helmet()
+	return TRUE
 
 /obj/item/clothing/suit/space/void/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && tank && slot == slot_back_str)

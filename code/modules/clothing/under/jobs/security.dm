@@ -83,13 +83,17 @@
 	desc = "A rumpled white dress shirt paired with well-worn grey slacks."
 	icon = 'icons/clothing/under/uniform_detective_1.dmi'
 	siemens_coefficient = 0.9
-	starting_accessories = list(/obj/item/clothing/neck/tie/blue_clip)
+	starting_accessories = list(
+		/obj/item/clothing/neck/tie/blue_clip
+	)
 	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/under/det/grey
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
 	icon = 'icons/clothing/under/uniform_detective_2.dmi'
-	starting_accessories = list(/obj/item/clothing/neck/tie/long/red)
+	starting_accessories = list(
+		/obj/item/clothing/neck/tie/long/red
+	)
 
 /obj/item/clothing/under/det/black
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants."

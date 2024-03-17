@@ -13,7 +13,9 @@
 	)
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list() //They are a pizza shop, not a bargainer.
-	possible_trading_items = list(/obj/item/chems/food/sliceable/pizza = TRADER_SUBTYPES_ONLY)
+	possible_trading_items = list(
+		/obj/item/chems/food/sliceable/pizza = TRADER_SUBTYPES_ONLY
+	)
 
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Hello! Welcome to " + TRADER_TOKEN_ORIGIN + ", may I take your order?",

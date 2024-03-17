@@ -25,7 +25,7 @@
 /obj/random/documents/scg/spawn_choices()
 	return list (
 		/obj/item/documents/scg/verified = 7,
-		/obj/item/documents/scg/red =      7,
-		/obj/item/documents/scg/blue =     7,
-		/obj/item/documents/scg/brains =   7
+		/obj/item/documents/scg/red      = 7,
+		/obj/item/documents/scg/blue     = 7,
+		/obj/item/documents/scg/brains   = 7
 	)

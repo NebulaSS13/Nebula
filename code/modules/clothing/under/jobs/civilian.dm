@@ -58,7 +58,9 @@
 	desc = "The plain, professional attire of an Internal Affairs Agent. The collar is <i>immaculately</i> starched."
 	name = "Internal Affairs uniform"
 	icon = 'icons/clothing/under/uniform_internalaffairs.dmi'
-	starting_accessories = list(/obj/item/clothing/neck/tie/black)
+	starting_accessories = list(
+		/obj/item/clothing/neck/tie/black
+	)
 
 /obj/item/clothing/under/internalaffairs/plain
 	desc = "A plain shirt and pair of pressed black pants."
@@ -68,7 +70,9 @@
 /obj/item/clothing/under/internalaffairs/plain/nt
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	starting_accessories = list(/obj/item/clothing/neck/tie/long/red)
+	starting_accessories = list(
+		/obj/item/clothing/neck/tie/long/red
+	)
 
 /obj/item/clothing/under/janitor
 	desc = "It's the official uniform of the janitor. It has minor protection from biohazards."
@@ -99,7 +103,9 @@
 	name = "blue suit"
 	desc = "A classy suit."
 	icon = 'icons/clothing/under/uniform_lawyer_black.dmi'
-	starting_accessories = list(/obj/item/clothing/neck/tie/red)
+	starting_accessories = list(
+		/obj/item/clothing/neck/tie/red
+	)
 
 /obj/item/clothing/under/lawyer/purpsuit
 	name = "purple suit"

@@ -5,3 +5,10 @@
 	slot_flags = SLOT_FEET
 	body_parts_covered = SLOT_LEGS
 	accessory_slot = ACCESSORY_SLOT_DECOR
+
+/obj/item/clothing/shoes/legbrace
+	name = "legbrace"
+	desc = "A lightweight polymer frame meant to brace and hold someone's legs upright comfortably, protecting their bones from high levels of gravity."
+	icon = 'icons/clothing/accessories/legbrace.dmi'
+	accessory_slot = ACCESSORY_SLOT_DECOR
+	body_parts_covered = SLOT_LEGS

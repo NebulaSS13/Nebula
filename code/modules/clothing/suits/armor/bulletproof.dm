@@ -21,7 +21,6 @@
 		)
 	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
 
-// no accessory
 /obj/item/clothing/suit/armor/bulletproof/prepared
 	starting_accessories = list(
 		/obj/item/clothing/gloves/armguards/ballistic,

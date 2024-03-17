@@ -6,22 +6,22 @@
 
 /obj/random/medical/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/random/medical/lite =                        21,
-		/obj/item/bodybag =                                2,
-		/obj/item/chems/glass/bottle/stabilizer =          2,
-		/obj/item/chems/glass/bottle/antitoxin =           2,
-		/obj/item/pill_bottle =                    2,
-		/obj/item/pill_bottle/painkillers =        2,
-		/obj/item/pill_bottle/strong_painkillers = 1,
-		/obj/item/pill_bottle/antidepressants =    2,
-		/obj/item/pill_bottle/oxygen =             1,
-		/obj/item/pill_bottle/burn_meds =          1,
-		/obj/item/pill_bottle/brute_meds =         1,
-		/obj/item/chems/syringe/antitoxin =                2,
-		/obj/item/chems/syringe/antibiotic =               1,
-		/obj/item/chems/syringe/stabilizer =               2,
-		/obj/item/box/freezer =                    1,
-		/obj/item/stack/nanopaste =                        1
+		/obj/random/medical/lite                 = 21,
+		/obj/item/bodybag                        =  2,
+		/obj/item/chems/glass/bottle/stabilizer  =  2,
+		/obj/item/chems/glass/bottle/antitoxin   =  2,
+		/obj/item/pill_bottle                    =  2,
+		/obj/item/pill_bottle/painkillers        =  2,
+		/obj/item/pill_bottle/strong_painkillers =  1,
+		/obj/item/pill_bottle/antidepressants    =  2,
+		/obj/item/pill_bottle/oxygen             =  1,
+		/obj/item/pill_bottle/burn_meds          =  1,
+		/obj/item/pill_bottle/brute_meds         =  1,
+		/obj/item/chems/syringe/antitoxin        =  2,
+		/obj/item/chems/syringe/antibiotic       =  1,
+		/obj/item/chems/syringe/stabilizer       =  2,
+		/obj/item/box/freezer                    =  1,
+		/obj/item/stack/nanopaste                =  1
 	)
 	return spawnable_choices
 
@@ -75,13 +75,13 @@
 /obj/random/firstaid/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/firstaid/regular = 4,
-		/obj/item/firstaid/trauma =  3,
-		/obj/item/firstaid/toxin =   3,
-		/obj/item/firstaid/o2 =      3,
-		/obj/item/firstaid/stab =    2,
-		/obj/item/firstaid/adv =     2,
-		/obj/item/firstaid/combat =  1,
-		/obj/item/firstaid/empty =   2,
-		/obj/item/firstaid/fire =    3
+		/obj/item/firstaid/trauma  = 3,
+		/obj/item/firstaid/toxin   = 3,
+		/obj/item/firstaid/o2      = 3,
+		/obj/item/firstaid/stab    = 2,
+		/obj/item/firstaid/adv     = 2,
+		/obj/item/firstaid/combat  = 1,
+		/obj/item/firstaid/empty   = 2,
+		/obj/item/firstaid/fire    = 3
 	)
 	return spawnable_choices

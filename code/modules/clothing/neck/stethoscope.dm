@@ -1,6 +1,6 @@
 /obj/item/clothing/neck/stethoscope
 	name = "stethoscope"
-	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
+	desc = "A medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon = 'icons/clothing/accessories/stethoscope.dmi'
 	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 

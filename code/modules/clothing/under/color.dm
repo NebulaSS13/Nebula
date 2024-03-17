@@ -5,6 +5,19 @@
 	desc = "Groovy!"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psychadelic.dmi'
 
+
+/obj/item/clothing/under/color
+	name = "jumpsuit"
+	desc = "The latest in space fashion."
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+
+/obj/item/clothing/under/color/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/rolled_down),
+		GET_DECL(/decl/clothing_state_modifier/rolled_sleeves)
+	)
+	return expected_state_modifiers
+
 /obj/item/clothing/under/color/orange
 	name = "orange jumpsuit"
 	desc = "It's standardised prisoner-wear. Its suit sensor controls are permanently set to the \"Fully On\" position."
@@ -21,11 +34,6 @@
 	name = "black jumpsuit shorts"
 	desc = "The latest in space fashion, in a ladies' cut with shorts."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_shorts.dmi'
-
-/obj/item/clothing/under/color
-	name = "jumpsuit"
-	desc = "The latest in space fashion."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
 
 /obj/item/clothing/under/color/white
 	name = "white jumpsuit"

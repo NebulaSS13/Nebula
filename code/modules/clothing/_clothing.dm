@@ -5,15 +5,14 @@
 	material = /decl/material/solid/organic/cloth
 	paint_verb = "dyed"
 	replaced_in_loadout = TRUE
+	w_class = ITEM_SIZE_SMALL
 	icon_state = ICON_STATE_WORLD
 	force = 0
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
 	var/tint = TINT_NONE							  // Sets the item's level of visual impairment tint.
-
 	var/bodytype_equip_flags    // Bitfields; if null, checking is skipped. Determine if a given mob can equip this item or not.
-
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
@@ -31,7 +30,6 @@
 /obj/item/clothing/Initialize()
 
 	. = ..()
-
 	if(accessory_slot)
 		if(isnull(accessory_removable))
 			accessory_removable = TRUE
@@ -41,8 +39,7 @@
 
 	if(starting_accessories)
 		for(var/T in starting_accessories)
-			src.attach_accessory(null, new T(src))
-
+			attach_accessory(null, new T(src))
 	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
 		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
 
@@ -197,6 +194,7 @@
 
 	update_clothing_icon()
 
+
 // Used by washing machines to temporarily make clothes smell
 /obj/item/clothing/proc/change_smell(decl/material/odorant, time = 10 MINUTES)
 	if(!odorant || !odorant.scent)
@@ -338,8 +336,8 @@
 			return TOPIC_HANDLED
 	. = ..()
 
-/obj/item/clothing/get_pressure_weakness(pressure,zone)
-	. = ..()
+/obj/item/clothing/get_pressure_weakness(pressure, zone)
+	. = (body_parts_covered & zone) ? ..() : 1
 	for(var/obj/item/clothing/accessory in accessories)
 		. = min(., accessory.get_pressure_weakness(pressure,zone))
 
