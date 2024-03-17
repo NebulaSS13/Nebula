@@ -24,8 +24,21 @@
 
 /obj/item/clothing/Initialize()
 	. = ..()
-	if(markings_icon && markings_color)
+
+	if(starting_accessories)
+		for(var/T in starting_accessories)
+			src.attach_accessory(null, new T(src))
+
+	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
+		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
+
+	if(markings_color && markings_icon)
 		update_icon()
+
+/obj/item/clothing/Destroy()
+	if(istype(loc, /obj/item/clothing))
+		on_removed()
+	return ..()
 
 /obj/item/clothing/can_contaminate()
 	return TRUE
@@ -77,13 +90,23 @@
 			if(state_modifier && check_state_in_icon("[overlay.icon_state]-[state_modifier]", overlay.icon))
 				overlay.icon_state = "[overlay.icon_state]-[root_bodytype.onmob_state_modifiers[slot]]"
 
+		if(istype(loc, /obj/item/clothing/under))
+			var/new_state = overlay.icon_state
+			var/obj/item/clothing/under/uniform = loc
+			if(uniform.rolled_down)
+				new_state = "[new_state]-rolled"
+			else if(uniform.rolled_sleeves)
+				new_state = "[new_state]-sleeves"
+			if(check_state_in_icon(overlay.icon, new_state))
+				overlay.icon_state = new_state
+
 		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
 			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
 		if(length(accessories))
-			for(var/obj/item/clothing/accessory/A in accessories)
-				if(A.should_overlay())
-					overlay.overlays += A.get_mob_overlay(user_mob, slot, skip_offset = TRUE)
+			for(var/obj/item/clothing/accessory in accessories)
+				if(accessory.should_overlay())
+					overlay.overlays += accessory.get_mob_overlay(user_mob, slot, skip_offset = TRUE)
 
 		if(!(slot in user_mob?.get_held_item_slots()))
 			if(blood_DNA)
@@ -103,7 +126,7 @@
 	if(markings_icon && markings_color)
 		add_overlay(mutable_appearance(icon, "[base_state][markings_icon]", markings_color))
 	var/list/new_overlays
-	for(var/obj/item/clothing/accessory/accessory in accessories)
+	for(var/obj/item/clothing/accessory in accessories)
 		var/image/I = accessory.get_attached_inventory_overlay(base_state)
 		if(I)
 			LAZYADD(new_overlays, I)
@@ -122,9 +145,9 @@
 /obj/item/clothing/proc/get_fibers()
 	. = "material from \a [name]"
 	var/list/acc = list()
-	for(var/obj/item/clothing/accessory/A in accessories)
-		if(prob(40) && A.get_fibers())
-			acc += A.get_fibers()
+	for(var/obj/item/clothing/accessory in accessories)
+		if(prob(40) && accessory.get_fibers())
+			acc += accessory.get_fibers()
 	if(acc.len)
 		. += " with traces of [english_list(acc)]"
 
@@ -132,15 +155,6 @@
 	add_fingerprint(source)
 	if(prob(10))
 		ironed_state = WRINKLES_WRINKLY
-
-/obj/item/clothing/Initialize()
-	. = ..()
-	if(starting_accessories)
-		for(var/T in starting_accessories)
-			var/obj/item/clothing/accessory/tie = new T(src)
-			src.attach_accessory(null, tie)
-	if(markings_color && markings_icon)
-		update_icon()
 
 /obj/item/clothing/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
@@ -179,13 +193,13 @@
 
 /obj/item/clothing/get_examine_line()
 	. = ..()
-	var/list/ties = list()
-	for(var/obj/item/clothing/accessory/accessory in accessories)
-		if(accessory.high_visibility)
-			ties += "\a [accessory.get_examine_line()]"
-	if(ties.len)
+	var/list/ties
+	for(var/obj/item/clothing/accessory in accessories)
+		if(accessory.accessory_high_visibility)
+			LAZYADD(ties, "\a [accessory.get_examine_line()]")
+	if(LAZYLEN(ties))
 		.+= " with [english_list(ties)] attached"
-	if(accessories.len > ties.len)
+	if(LAZYLEN(accessories) > LAZYLEN(ties))
 		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
 
 /obj/item/clothing/examine(mob/user)
@@ -245,8 +259,8 @@
 
 /obj/item/clothing/get_pressure_weakness(pressure,zone)
 	. = ..()
-	for(var/obj/item/clothing/accessory/A in accessories)
-		. = min(., A.get_pressure_weakness(pressure,zone))
+	for(var/obj/item/clothing/accessory in accessories)
+		. = min(., accessory.get_pressure_weakness(pressure,zone))
 
 /obj/item/clothing/proc/check_limb_support(var/mob/living/carbon/human/user)
 	return FALSE
@@ -272,7 +286,7 @@
 	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in old_clothes.accessories
 	if(!sensor)
 		return
-	sensor.removable = TRUE // This will be refreshed by remove_accessory/attach_accessory
+	sensor.accessory_removable = TRUE // This will be refreshed by remove_accessory/attach_accessory
 	old_clothes.remove_accessory(null, sensor)
 	attach_accessory(null, sensor)
 
@@ -288,3 +302,11 @@
 /obj/item/clothing/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)
+
+// This stub is so the linter stops yelling about sleeping during Initialize()
+// due to corpse props equipping themselves, which calls equip_to_slot, which
+// calls attackby(), which sometimes sleeps due to input(). Yeah.
+// Remove this if a better fix presents itself.
+/obj/item/clothing/proc/try_attach_accessory(var/obj/item/accessory, var/mob/user)
+	set waitfor = FALSE
+	attackby(accessory, user)

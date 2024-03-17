@@ -3,13 +3,13 @@
 	desc = "A simple, bland cloak."
 	icon = 'icons/clothing/suit/cloaks/_cloak.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	slot = ACCESSORY_SLOT_OVER
 	slot_flags = SLOT_OVER_BODY
 	allowed = list(/obj/item/tank/emergency/oxygen)
-	high_visibility = TRUE
 	armor = list(ARMOR_MELEE = 0, ARMOR_BULLET = 0, ARMOR_LASER = 0,ARMOR_ENERGY = 0, ARMOR_BOMB = 0, ARMOR_BIO = 0, ARMOR_RAD = 0)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	siemens_coefficient = 0.9
+	accessory_slot = ACCESSORY_SLOT_OVER
+	accessory_high_visibility = TRUE
 
 /obj/item/clothing/accessory/cloak/on_update_icon()
 	. = ..()

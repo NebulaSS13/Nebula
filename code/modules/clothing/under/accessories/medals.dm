@@ -4,7 +4,7 @@
 	name = ACCESSORY_SLOT_MEDAL
 	desc = "A simple medal."
 	icon = 'icons/clothing/accessories/medals/medal_bronze.dmi'
-	slot = ACCESSORY_SLOT_MEDAL
+	accessory_slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/medal/bronze
 	name = "bronze medal"

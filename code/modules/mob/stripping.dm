@@ -52,28 +52,28 @@
 				toggle_internals(user)
 			return
 		if("tie")
-			if(!istype(holder) || !holder.accessories.len)
+			if(!istype(holder) || !LAZYLEN(holder.accessories))
 				return
 
-			var/obj/item/clothing/accessory/A
+			var/obj/item/clothing/accessory
 			if(LAZYLEN(holder.accessories) > 1)
-				A = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
+				accessory = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
 			else
-				A = holder.accessories[1]
+				accessory = holder.accessories[1]
 
-			if(!istype(A))
+			if(!istype(accessory))
 				return
 
-			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
+			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [accessory.name]!</span>")
 
 			if(!do_after(user, HUMAN_STRIP_DELAY, src, check_holding = FALSE, progress = FALSE))
 				return
 
-			if(!A || holder.loc != src || !(A in holder.accessories))
+			if(!accessory || holder.loc != src || !(accessory in holder.accessories))
 				return
 
-			admin_attack_log(user, src, "Stripped \an [A] from \the [holder].", "Was stripped of \an [A] from \the [holder].", "stripped \an [A] from \the [holder] of")
-			holder.remove_accessory(user,A)
+			admin_attack_log(user, src, "Stripped \an [accessory] from \the [holder].", "Was stripped of \an [accessory] from \the [holder].", "stripped \an [accessory] from \the [holder] of")
+			holder.remove_accessory(user, accessory)
 			return
 		else
 			var/obj/item/located_item = locate(slot_to_strip_text) in src

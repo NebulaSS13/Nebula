@@ -4,7 +4,7 @@
 	slot_flags = SLOT_TIE
 	icon = 'icons/clothing/accessories/vitals_sensor.dmi'
 	icon_state = ICON_STATE_WORLD
-	slot = ACCESSORY_SLOT_SENSORS
+	accessory_slot = ACCESSORY_SLOT_SENSORS
 	var/sensors_locked = FALSE
 	var/sensor_mode
 	var/static/list/sensor_modes = list(
@@ -54,9 +54,9 @@
 /obj/item/clothing/accessory/vitals_sensor/proc/update_removable()
 	var/obj/item/clothing/clothes = loc
 	if(istype(clothes) && (src in clothes.accessories))
-		removable = !sensors_locked
+		accessory_removable = !sensors_locked
 	else
-		removable = TRUE
+		accessory_removable = TRUE
 
 /obj/item/clothing/accessory/vitals_sensor/proc/set_sensor_mode(var/new_sensor_mode)
 	if(sensor_mode != new_sensor_mode)

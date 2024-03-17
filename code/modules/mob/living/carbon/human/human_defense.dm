@@ -71,10 +71,10 @@ meteor_act
 		var/obj/item/clothing/gear = get_equipped_item(slot)
 		if(!istype(gear))
 			continue
-		if(gear.accessories.len)
-			for(var/obj/item/clothing/accessory/bling in gear.accessories)
-				if(bling.body_parts_covered & def_zone.body_part)
-					var/armor = get_extension(bling, /datum/extension/armor)
+		if(LAZYLEN(gear.accessories))
+			for(var/obj/item/clothing/accessory in gear.accessories)
+				if(accessory.body_parts_covered & def_zone.body_part)
+					var/armor = get_extension(accessory, /datum/extension/armor)
 					if(armor)
 						. += armor
 		if(gear.body_parts_covered & def_zone.body_part)

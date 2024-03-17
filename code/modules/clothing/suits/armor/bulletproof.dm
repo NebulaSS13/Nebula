@@ -58,7 +58,7 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
-	slowdown = 1
+	accessory_slowdown = 1
 	material = /decl/material/solid/metal/plasteel
 	matter = list(
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,

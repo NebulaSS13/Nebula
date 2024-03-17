@@ -61,4 +61,4 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0
-	slowdown = 1
+	accessory_slowdown = 1
