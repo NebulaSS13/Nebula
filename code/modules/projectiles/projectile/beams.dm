@@ -251,7 +251,7 @@
 /obj/item/projectile/beam/plasmacutter/on_impact(var/atom/A)
 	if(istype(A, /turf/wall/natural))
 		var/turf/wall/natural/M = A
-		M.dismantle_wall()
+		M.dismantle_turf()
 	. = ..()
 
 /obj/item/projectile/beam/confuseray

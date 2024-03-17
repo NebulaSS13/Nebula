@@ -12,7 +12,7 @@
 
 /turf/wall/drill_act()
 	SHOULD_CALL_PARENT(FALSE)
-	dismantle_wall(TRUE)
+	physically_destroyed()
 
 /turf/unsimulated/drill_act()
 	SHOULD_CALL_PARENT(FALSE)
