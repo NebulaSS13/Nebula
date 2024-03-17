@@ -5,6 +5,7 @@
 	icon_edge_layer = EXT_EDGE_CLAY
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 
 /turf/floor/natural/clay/get_diggable_resources()
 	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/lump/large/clay = list(3, 2))
@@ -24,6 +25,7 @@
 	icon_edge_layer = EXT_EDGE_MUD
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 
 /turf/floor/natural/mud/drop_diggable_resources()
 	if(get_physical_height() > -(FLUID_DEEP))
@@ -56,7 +58,8 @@
 	is_fundament_turf = TRUE
 
 /turf/floor/natural/dry/fluid_act(datum/reagents/fluids)
-	SHOULD_CALL_PARENT(FALSE)
+	if(fluids?.total_volume < FLUID_SHALLOW)
+		return ..()
 	var/turf/new_turf = ChangeTurf(/turf/floor/natural/mud, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
 	return new_turf.fluid_act(fluids)
 

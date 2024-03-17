@@ -108,7 +108,7 @@
 				var/rock_type = pick(forage["rocks"])
 				new rock_type(T)
 				return
-		else if(istype(T, /turf/floor/natural/wildgrass))
+		else if(istype(T, /turf/floor/natural/grass/wild))
 			if(prob(parse_value * 0.35))
 				var/tree_type = pick(trees)
 				new tree_type(T)

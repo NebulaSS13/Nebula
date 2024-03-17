@@ -31,6 +31,9 @@
 	var/initial_flooring
 	var/decl/flooring/flooring
 
+// Defining this here as a dummy mapping shorthand so mappers can search for 'plating'.
+/turf/floor/plating
+
 /turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
 
