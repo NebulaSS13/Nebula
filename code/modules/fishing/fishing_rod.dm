@@ -11,13 +11,13 @@
 	icon = 'icons/obj/fishing_rod.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
+	force = 5 // bonk
 
 	var/const/base_fishing_time = 25 SECONDS
 	var/is_fishing = FALSE
 	var/obj/item/bait
 	var/obj/item/fishing_line/line
 	var/line_integrity
-	// Reduces fishing time by 20%.
 	var/fishing_rod_quality = 0.1
 
 /obj/item/fishing_rod/Initialize()
@@ -30,21 +30,11 @@
 	update_icon()
 
 /obj/item/fishing_rod/on_update_icon()
-
 	..()
-
 	if(line)
-		var/image/I = image(icon, "[icon_state]-line")
-		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-		I.color = line.color
-		add_overlay(I)
-
+		add_overlay(overlay_image(icon, "[icon_state]-line", line.color, RESET_COLOR | RESET_ALPHA))
 	if(bait)
-		var/image/I = image(icon, "[icon_state]-bait")
-		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-		I.color = bait.color
-		add_overlay(I)
-
+		add_overlay(overlay_image(icon, "[icon_state]-bait", bait.color, RESET_COLOR | RESET_ALPHA))
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inhand_overlays()
@@ -72,21 +62,11 @@
 			to_chat(user, "\The [src] has been baited with \a [bait].")
 
 /obj/item/fishing_rod/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
-
 	if(overlay)
-
-		if(line && check_state_in_icon("[overlay.icon_state]-line", overlay.icon))
-			var/image/I = image(overlay.icon, "[overlay.icon_state]-line")
-			I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-			I.color = line.color
-			overlay.overlays += I
-
-		if(bait && check_state_in_icon("[overlay.icon_state]-bait", overlay.icon))
-			var/image/I = image(overlay.icon, "[overlay.icon_state]-bait")
-			I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-			I.color = bait.color
-			overlay.overlays += I
-
+		if(line)
+			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-line", line.color, RESET_COLOR | RESET_ALPHA)
+		if(bait)
+			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-bait", bait.color, RESET_COLOR | RESET_ALPHA)
 	. = ..()
 
 /obj/item/fishing_rod/attack(mob/living/M, mob/living/user)
@@ -213,18 +193,19 @@
 	update_icon()
 	return TRUE
 
-/obj/item/fishing_rod/proc/load_line(mob/user, obj/item/fishing_line/new_line)
+/obj/item/fishing_rod/proc/load_line(mob/user, obj/item/new_line)
 
 	var/static/list/valid_line_types = list(
+		/obj/item/fishing_line,
 		/obj/item/stack/cable_coil,
 		/obj/item/stack/net_cable_coil,
 		/obj/item/stack/material/bundle
 	)
 
-	if(!istype(new_line) && !is_type_in_list(new_line, valid_line_types))
+	if(!new_line || !is_type_in_list(new_line, valid_line_types))
 		return FALSE
 
-	if(!new_line?.material?.tensile_strength)
+	if(!new_line.material?.tensile_strength)
 		to_chat(user, SPAN_WARNING("\The [new_line] isn't suitable for the rigors of fishing."))
 		return TRUE
 
