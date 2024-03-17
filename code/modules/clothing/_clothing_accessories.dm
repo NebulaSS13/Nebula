@@ -23,7 +23,7 @@
 // Override for action buttons.
 /obj/item/clothing/attack_self(mob/user)
 	if(loc == user)
-		if(user.get_active_hand() != src)
+		if(user.get_active_held_item() != src)
 			return attack_hand_with_interaction_checks(user)
 		// Adjust our clothing state.
 		if(length(clothing_state_modifiers))
@@ -80,22 +80,14 @@
 /obj/item/clothing/proc/attach_accessory(mob/user, obj/item/clothing/accessory)
 	if(accessory in accessories)
 		return
-	LAZYADD(accessories, accessory)
 	accessory.on_attached(src, user)
 	if(accessory.accessory_removable)
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
-	update_accessory_slowdown()
-	update_icon()
-	update_clothing_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory)
 	if(!accessory || !(accessory in accessories) || !accessory.accessory_removable || !accessory.canremove)
 		return
 	accessory.on_removed(user)
-	LAZYREMOVE(accessories, accessory)
-	update_accessory_slowdown()
-	update_icon()
-	update_clothing_icon()
 
 /obj/item/clothing/proc/removetie_verb()
 	set name = "Remove Accessory"
@@ -156,7 +148,11 @@
 		if(user)
 			to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [holder]."))
 			add_fingerprint(user)
+		LAZYADD(holder.accessories, src)
 		holder.update_clothing_toggle_verbs()
+		holder.update_accessory_slowdown()
+		holder.update_icon()
+		holder.update_clothing_icon()
 		return TRUE
 	return FALSE
 
@@ -169,8 +165,12 @@
 			add_fingerprint(user)
 		else
 			dropInto(loc)
-		holder.update_clothing_toggle_verbs()
+		LAZYREMOVE(holder.accessories, src)
 		update_clothing_toggle_verbs()
+		holder.update_clothing_toggle_verbs()
+		holder.update_accessory_slowdown()
+		holder.update_icon()
+		holder.update_clothing_icon()
 		return TRUE
 	return FALSE
 

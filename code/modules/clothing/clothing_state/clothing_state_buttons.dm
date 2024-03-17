@@ -14,7 +14,7 @@
 	set category = "Object"
 	set src in usr
 
-	if(usr.incapacitated())
+	if(!usr || usr.incapacitated() || QDELETED(src))
 		return
 	var/obj/item/clothing/toggled = toggle_clothing_state(/decl/clothing_state_modifier/buttons)
 	if(toggled)

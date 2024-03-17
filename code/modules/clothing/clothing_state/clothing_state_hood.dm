@@ -14,12 +14,12 @@
 	set category = "Object"
 	set src in usr
 
+	if(!usr || usr.incapacitated() || QDELETED(src))
+		return
+
 	var/check_hood = get_hood()
 	if(!ismob(loc) || !check_hood)
 		remove_hood()
-
-	if(usr.incapacitated())
-		return
 
 	if(usr.get_equipped_item(slot_wear_suit_str) != src)
 		to_chat(usr, SPAN_WARNING("You must be wearing \the [src] to put up the hood!"))
