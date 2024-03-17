@@ -21,7 +21,7 @@
 	var/ironed_state = WRINKLES_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 	var/volume_multiplier = 1
-	var/markings_icon	// simple colored overlay that would be applied to the icon
+	var/markings_state_modifier	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
 	var/should_display_id = TRUE
 
@@ -38,7 +38,7 @@
 	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
 		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
 
-	if(update_clothing_state_toggles() || (markings_color && markings_icon))
+	if(update_clothing_state_toggles() || (markings_color && markings_state_modifier))
 		update_icon()
 
 /obj/item/clothing/Destroy()
@@ -120,8 +120,8 @@
 			overlay.icon_state = new_state
 
 	// Apply any marking overlays that we have defined.
-	if(markings_icon && markings_color)
-		new_state = JOINTEXT(list(overlay.icon_state, markings_icon))
+	if(markings_state_modifier && markings_color)
+		new_state = JOINTEXT(list(overlay.icon_state, markings_state_modifier))
 		if(check_state_in_icon(new_state, overlay.icon))
 			overlay.overlays += mutable_appearance(overlay.icon, new_state, markings_color)
 
@@ -146,8 +146,8 @@
 /obj/item/clothing/on_update_icon()
 	. = ..()
 	icon_state = JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier()))
-	if(markings_icon && markings_color)
-		add_overlay(mutable_appearance(icon, "[icon_state][markings_icon]", markings_color))
+	if(markings_state_modifier && markings_color)
+		add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
 	var/list/new_overlays
 	for(var/obj/item/clothing/accessory in accessories)
 		var/image/I = accessory.get_attached_inventory_overlay(icon_state)

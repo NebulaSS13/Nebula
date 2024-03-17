@@ -118,6 +118,10 @@
 			var/check_state = "[state_base]-[slot]"
 			if(!check_state_in_icon(check_state, clothes.icon))
 				clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
+			if(clothes.markings_state_modifier && clothes.markings_color)
+				check_state = "[check_state][clothes.markings_state_modifier]"
+				if(!check_state_in_icon(check_state, clothes.icon))
+					clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
 
 		// I wish we could initial() lists/procs.
 		if(!length(clothes.get_available_clothing_state_modifiers()))
@@ -144,6 +148,11 @@
 				if(skip_gen)
 					continue
 				generated_tokens += "[gen_token][token]"
+
+		// God help unit test time if people start putting markings on flannel shirts.
+		if(clothes.markings_state_modifier && clothes.markings_color)
+			for(var/token in generated_tokens)
+				generated_tokens += "[token][clothes.markings_state_modifier]"
 
 		// Keep track of which states we've looked for or otherwise evaluated for later state checking.
 		var/list/check_states = icon_states(clothes.icon)

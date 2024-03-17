@@ -3,7 +3,7 @@
 	desc = "Whoever owns this hat means business. Hopefully, it's just good business."
 	color = COLOR_SILVER
 	icon = 'icons/clothing/head/detective.dmi'
-	markings_icon = "band"
+	markings_state_modifier = "band"
 	markings_color = COLOR_DARK_GRAY
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MINOR,
