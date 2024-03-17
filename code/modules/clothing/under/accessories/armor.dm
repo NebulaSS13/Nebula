@@ -6,15 +6,15 @@
 	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY40
 	gender = PLURAL
-	slot = ACCESSORY_SLOT_ARMOR_S
 	slots = 2
+	accessory_slot = ACCESSORY_SLOT_ARMOR_S
 
 /obj/item/clothing/accessory/storage/pouches/large
 	name = "large storage pouches"
 	desc = "A collection of black pouches that can be attached to a plate carrier. Carries up to four items."
 	icon = 'icons/clothing/accessories/pouches/lpouches.dmi'
 	slots = 4
-	slowdown = 1
+	accessory_slowdown = 1
 
 /obj/item/clothing/accessory/storage/pouches/large/tan
 	color = COLOR_TAN
@@ -32,7 +32,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
 		ARMOR_BOMB = ARMOR_BOMB_MINOR
 		)
-	slot = ACCESSORY_SLOT_ARMOR_C
+	accessory_slot = ACCESSORY_SLOT_ARMOR_C
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
@@ -69,7 +69,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
-	slowdown = 0.5
+	accessory_slowdown = 0.5
 	material = /decl/material/solid/metal/plasteel
 	matter = list(
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
@@ -93,7 +93,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
-	slot = ACCESSORY_SLOT_ARMOR_A
+	accessory_slot = ACCESSORY_SLOT_ARMOR_A
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
@@ -121,7 +121,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
-	slot = ACCESSORY_SLOT_ARMOR_L
+	accessory_slot = ACCESSORY_SLOT_ARMOR_L
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
@@ -143,7 +143,7 @@
 	name = "\improper WARDEN tag"
 	desc = "A tag with the word WARDEN printed in silver lettering on it."
 	icon = 'icons/clothing/accessories/tags/tag_large.dmi'
-	slot = ACCESSORY_SLOT_ARMOR_M
+	accessory_slot = ACCESSORY_SLOT_ARMOR_M
 
 /obj/item/clothing/accessory/armor/tag/press
 	name = "\improper PRESS tag"
@@ -200,7 +200,7 @@
 	desc = "A fabric cover for armored helmets."
 	icon = 'icons/clothing/accessories/armor/helmcover.dmi'
 	icon_state = ICON_STATE_WORLD
-	slot = ACCESSORY_SLOT_HELM_C
+	accessory_slot = ACCESSORY_SLOT_HELM_C
 
 /obj/item/clothing/accessory/armor/helmcover/blue
 	color = COLOR_SKY_BLUE

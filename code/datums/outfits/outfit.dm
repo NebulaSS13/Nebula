@@ -126,7 +126,7 @@ var/global/list/outfits_decls_by_type_
 
 		var/obj/item/equip_uniform = H.get_equipped_item(slot_w_uniform_str)
 		if(holster && equip_uniform)
-			var/obj/item/clothing/accessory/equip_holster = new holster
+			var/obj/item/clothing/equip_holster = new holster
 			equip_uniform.attackby(equip_holster, H)
 			if(equip_holster.loc != equip_uniform && !QDELETED(equip_holster))
 				qdel(equip_holster)

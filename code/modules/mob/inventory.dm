@@ -47,7 +47,7 @@
 		return TRUE
 
 	if(slot == slot_tie_str)
-		var/obj/item/clothing/under/uniform = get_equipped_item(slot_w_uniform_str)
+		var/obj/item/clothing/uniform = get_equipped_item(slot_w_uniform_str)
 		if(istype(uniform))
 			uniform.try_attach_accessory(W, src)
 		return TRUE

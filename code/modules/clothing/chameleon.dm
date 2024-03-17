@@ -338,12 +338,11 @@
 		update_clothing_icon()	//so our overlays update.
 
 /obj/item/clothing/accessory/chameleon/disguise(var/newtype, var/mob/user)
-	var/obj/item/clothing/accessory/copy = ..()
+	var/obj/item/clothing/copy = ..()
 	if (!copy)
 		return
-
-	slot = copy.slot
-	high_visibility = copy.high_visibility
+	accessory_slot            = copy.accessory_slot
+	accessory_high_visibility = copy.accessory_high_visibility
 	return copy
 
 //*****************

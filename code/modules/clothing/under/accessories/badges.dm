@@ -9,9 +9,9 @@
 	desc = "A leather-backed badge, with gold trimmings."
 	icon = 'icons/clothing/accessories/badges/detectivebadge.dmi'
 	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
-	slot = ACCESSORY_SLOT_INSIGNIA
-	high_visibility = 1
-	hide_on_uniform_rolldown = TRUE
+	accessory_slot = ACCESSORY_SLOT_INSIGNIA
+	accessory_high_visibility = TRUE
+	accessory_hide_on_uniform_rolldown = TRUE
 	var/badge_string = "Detective"
 	var/stored_name
 
