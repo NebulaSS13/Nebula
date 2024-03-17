@@ -668,6 +668,7 @@
 #include "code\datums\wires\wire_description.dm"
 #include "code\datums\wires\wires.dm"
 #include "code\game\alpha_masks.dm"
+#include "code\game\atom_material.dm"
 #include "code\game\atoms.dm"
 #include "code\game\atoms_fluids.dm"
 #include "code\game\atoms_init.dm"

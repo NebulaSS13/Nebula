@@ -19,6 +19,9 @@
 	randpixel                  = 6
 	is_spawnable_type          = TRUE
 	crafting_stack_type        = /obj/item/stack/material/ore
+	craft_verb                 = "knap"
+	craft_verbing              = "knapping"
+	can_be_pulverized          = TRUE
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
@@ -61,6 +64,21 @@
 		//inseert full state last
 		states += scrapboard
 		cached_ore_icon_states[IS] = states
+
+/obj/item/stack/material/ore/attackby(obj/item/W, mob/user)
+	if(IS_HAMMER(W))
+		if(W.material?.hardness < material?.hardness)
+			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to pulverize [material.solid_name]."))
+			return TRUE
+		var/converting = clamp(get_amount(), 0, 5)
+		if(converting)
+			// TODO: make a gravel type?
+			// TODO: pass actual stone material to gravel?
+			new /obj/item/stack/material/ore/sand(get_turf(user), converting)
+			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
+			use(converting)
+		return TRUE
+	return ..()
 
 /obj/item/stack/material/ore/update_state_from_amount()
 	if(amount > 1)
@@ -176,7 +194,8 @@
 	for(var/mtype in all_materials)
 		var/decl/material/mat = all_materials[mtype]
 		if(mat.ore_result_amount)
-			new /obj/item/stack/material/ore(T, mat.ore_result_amount, mtype)
+			var/drop_type = mat.ore_type || /obj/item/stack/material/ore
+			new drop_type(T, mat.ore_result_amount, mtype)
 
 #undef ORE_MAX_AMOUNT
 #undef ORE_MAX_OVERLAYS

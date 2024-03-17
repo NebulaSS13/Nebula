@@ -23,7 +23,7 @@
 /obj/item/knife/Initialize(ml, material_key)
 	. = ..()
 	if(!has_extension(src, /datum/extension/tool))
-		set_extension(src, /datum/extension/tool/variable, list(
+		set_extension(src, /datum/extension/tool/variable/simple, list(
 			TOOL_SCALPEL =     TOOL_QUALITY_MEDIOCRE,
 			TOOL_SAW =         TOOL_QUALITY_BAD,
 			TOOL_RETRACTOR =   TOOL_QUALITY_BAD,

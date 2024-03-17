@@ -44,7 +44,7 @@
 		if(length(tool_qualities) == 1)
 			tool_data = get_or_create_extension(src, /datum/extension/tool, tool_qualities)
 		else
-			tool_data = get_or_create_extension(src, /datum/extension/tool/variable, tool_qualities)
+			tool_data = get_or_create_extension(src, /datum/extension/tool/variable/simple, tool_qualities)
 
 		// Update properties.
 		if(tool_data && IS_PICK(src))

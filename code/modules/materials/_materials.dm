@@ -52,16 +52,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			wood
 */
 
-//Returns the material the object is made of, if applicable.
-//Will we ever need to return more than one value here? Or should we just return the "dominant" material.
-/obj/proc/get_material()
-	return
-
-//mostly for convenience
-/obj/proc/get_material_type()
-	var/decl/material/mat = get_material()
-	. = mat?.type
-
 // Material definition and procs follow.
 /decl/material
 
@@ -194,6 +184,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/ore_icon_overlay
 	var/ore_type_value
 	var/ore_data_value
+	var/ore_type = /obj/item/stack/material/ore
 
 	var/value = 1
 
@@ -305,7 +296,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 
 	if(!target_stack.can_use(use_sheets))
-		to_chat(user, SPAN_WARNING("You need need at least [use_sheets] [use_sheets == 1 ? target_stack.singular_name : target_stack.plural_name] for reinforcement with [used_stack]."))
+		to_chat(user, SPAN_WARNING("You need need at least [use_sheets] [use_sheets == 1 ? target_stack.singular_name : target_stack.plural_name] for reinforcement with \the [used_stack]."))
 		return
 
 	to_chat(user, SPAN_NOTICE("You reinforce the [target_stack] with [reinf_mat.solid_name]."))

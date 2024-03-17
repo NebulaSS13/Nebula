@@ -1,23 +1,33 @@
 // These are foul, but apparent we can't reliably access z-level strata during
 // SSmapping gen. Using /atom/movable so they don't show up in the mapper.
+
+/obj/item/stack/material/ore/basalt
+	is_spawnable_type = TRUE
+	material = /decl/material/solid/stone/basalt
+
+/obj/item/stack/material/ore/basalt/three
+	amount = 3
+
 /atom/movable/spawn_boulder
 	name = "material boulder spawner"
 	is_spawnable_type = FALSE
 	simulated = FALSE
-	var/spawn_type = /obj/structure/boulder
+	var/spawn_type = /obj/structure/boulder/basalt
 
 /atom/movable/spawn_boulder/Initialize()
 	..()
 	if(isturf(loc))
 		if(islist(spawn_type))
 			spawn_type = pickweight(spawn_type)
-		new spawn_type(loc, SSmaterials.get_strata_material_type(loc))
+		if(spawn_type)
+			new spawn_type(loc)
 	return INITIALIZE_HINT_QDEL
 
 /atom/movable/spawn_boulder/rock
 	name = "material rock spawner"
 	spawn_type = list(
-		/obj/item/rock = 10,
+		/obj/item/stack/material/ore/basalt/three,
+		/obj/item/rock/basalt = 10,
 		/obj/item/rock/hematite = 1
 	)
 

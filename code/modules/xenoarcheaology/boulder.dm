@@ -11,6 +11,9 @@
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
 
+/obj/structure/boulder/basalt
+	material = /decl/material/solid/stone/basalt
+
 /obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration)
 	. = ..()
 	icon_state = "boulder[rand(1,6)]"

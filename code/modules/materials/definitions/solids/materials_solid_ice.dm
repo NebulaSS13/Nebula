@@ -1,22 +1,25 @@
 /decl/material/solid/ice
-	color = "#a5f2f3"
-	heating_products = list(
+	name                   = "water"
+	use_name               = "ice"
+	solid_name             = "ice"
+	liquid_name            = "water"
+	gas_name               = "steam"
+	color                  = "#a5f2f3"
+	codex_name             = "water ice"
+	taste_description      = "ice"
+	ore_spread_chance      = 25
+	ore_scan_icon          = "mineral_common"
+	ore_icon_overlay       = "lump"
+	removed_by_welder      = TRUE
+	value                  = 0.2
+	sparse_material_weight = 2
+	ore_result_amount      = 7
+	rich_material_weight   = 37
+	heating_point          = T20C + 10 // Above room temperature, to avoid drinks melting.
+	uid                    = "solid_ice"
+	heating_products       = list(
 		/decl/material/liquid/water = 1
 	)
-	name = "water"
-	use_name = "ice"
-	codex_name = "water ice"
-	taste_description = "ice"
-	ore_spread_chance = 25
-	ore_scan_icon = "mineral_common"
-	ore_icon_overlay = "lump"
-	removed_by_welder = TRUE
-	value = 0.2
-	sparse_material_weight = 2
-	ore_result_amount = 7
-	rich_material_weight = 37
-	heating_point = T20C + 10 // Above room temperature, to avoid drinks melting.
-	uid = "solid_ice"
 
 /decl/material/solid/ice/Initialize()
 	liquid_name ||= "liquid [name]" // avoiding the 'molten ice' issue
@@ -30,6 +33,9 @@
 	name = "aspium"
 	use_name = null
 	codex_name = null
+	solid_name = null
+	liquid_name = null
+	gas_name = null
 	heating_products = list(
 		/decl/material/liquid/fuel/hydrazine = 0.3,
 		/decl/material/liquid/water = 0.7
@@ -43,6 +49,9 @@
 	name = "lukrite"
 	use_name = null
 	codex_name = null
+	solid_name = null
+	liquid_name = null
+	gas_name = null
 	heating_products = list(
 		/decl/material/solid/sulfur = 0.4,
 		/decl/material/liquid/water = 0.2,
@@ -57,6 +66,9 @@
 	name = "rubenium"
 	use_name = null
 	codex_name = null
+	solid_name = null
+	liquid_name = null
+	gas_name = null
 	heating_products = list(
 		/decl/material/solid/metal/radium  = 0.4,
 		/decl/material/liquid/water = 0.4,
@@ -71,6 +83,9 @@
 	name = "trigarite"
 	use_name = null
 	codex_name = null
+	solid_name = null
+	liquid_name = null
+	gas_name = null
 	heating_products = list(
 		/decl/material/liquid/acid/hydrochloric = 0.2,
 		/decl/material/liquid/water             = 0.2,
@@ -85,6 +100,9 @@
 	name = "ediroite"
 	use_name = null
 	codex_name = null
+	solid_name = null
+	liquid_name = null
+	gas_name = null
 	heating_products = list(
 		/decl/material/gas/ammonia  = 0.05,
 		/decl/material/liquid/water = 0.55,
@@ -99,6 +117,9 @@
 	name = "hydrogen ice"
 	use_name = null
 	codex_name = null
+	solid_name = null
+	liquid_name = null
+	gas_name = null
 	uid = "solid_ice_hydrogen"
 	heating_products = list(
 		/decl/material/gas/hydrogen = 0.05,
@@ -118,6 +139,9 @@
 /decl/material/solid/ice/hydrate
 	codex_name = null
 	use_name = null
+	solid_name = null
+	liquid_name = null
+	gas_name = null
 	uid = "solid_hydrate"
 	heating_point = T0C //the melting point is always water's
 	abstract_type = /decl/material/solid/ice/hydrate

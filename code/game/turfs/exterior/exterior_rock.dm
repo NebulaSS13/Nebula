@@ -8,7 +8,7 @@
 
 /turf/exterior/rock/Initialize(mapload, no_update_icon)
 	. = ..()
-	set_turf_materials(SSmaterials.get_strata_material_type(src), skip_update = no_update_icon)
+	set_turf_materials(material || SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone, skip_update = no_update_icon)
 
 /turf/exterior/rock/volcanic
 	name = "volcanic floor"

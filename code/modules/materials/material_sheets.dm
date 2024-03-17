@@ -8,7 +8,7 @@
 	throw_range = 3
 	max_amount = 60
 	randpixel = 3
-	icon = 'icons/obj/materials.dmi'
+	icon = 'icons/obj/items/stacks/materials.dmi'
 	material = null //! Material will be set only during Initialize, or the stack is invalid.
 	matter = null   //! As with material, these stacks should only set this in Initialize as they are abstract 'shapes' rather than discrete objects.
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
@@ -17,6 +17,8 @@
 	plural_name = "sheets"
 	abstract_type = /obj/item/stack/material
 	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
+	var/can_be_pulverized = FALSE
+	var/can_be_reinforced = FALSE
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
@@ -119,14 +121,27 @@
 
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
 
-	if(istype(W, /obj/item/stack/material))
+	if(can_be_reinforced && istype(W, /obj/item/stack/material))
 		if(is_same(W))
 			return ..()
 		if(!reinf_material)
 			material.reinforce(user, W, src)
 		return TRUE
 
-	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
+	if(can_be_pulverized && IS_HAMMER(W) && material?.hardness >= MAT_VALUE_RIGID)
+		if(W.material?.hardness < material.hardness)
+			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to pulverize [material.solid_name]."))
+			return TRUE
+		var/converting = clamp(get_amount(), 0, 5)
+		if(converting)
+			// TODO: make a gravel type?
+			// TODO: pass actual stone material to gravel?
+			new /obj/item/stack/material/ore/sand(get_turf(user), converting)
+			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
+			use(converting)
+		return TRUE
+
+	if(reinf_material?.default_solid_form && IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
 			WT.weld(2, user)
@@ -141,7 +156,7 @@
 
 /obj/item/stack/material/on_update_icon()
 	. = ..()
-	color = material.color
+	color = material?.color
 	alpha = 100 + max(1, amount/25)*(material.opacity * 255)
 	update_state_from_amount()
 
@@ -182,6 +197,7 @@
 	max_icon_state = "ingot-max"
 	stack_merge_type = /obj/item/stack/material/ingot
 	crafting_stack_type = /obj/item/stack/material/ingot
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/sheet
 	name = "sheets"
@@ -232,6 +248,8 @@
 	plural_name = "lengths"
 	stack_merge_type = /obj/item/stack/material/bone
 	crafting_stack_type = /obj/item/stack/material/bone
+	craft_verb = "carve"
+	craft_verbing = "carving"
 
 /obj/item/stack/material/brick
 	name = "bricks"
@@ -242,6 +260,7 @@
 	max_icon_state = "brick-max"
 	stack_merge_type = /obj/item/stack/material/brick
 	crafting_stack_type = /obj/item/stack/material/brick
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/bolt
 	name = "bolts"
@@ -250,6 +269,8 @@
 	plural_name = "bolts"
 	stack_merge_type = /obj/item/stack/material/bolt
 	crafting_stack_type = /obj/item/stack/material/bolt
+	craft_verb = "tailor"
+	craft_verbing = "tailoring"
 
 /obj/item/stack/material/pane
 	name = "panes"
@@ -260,6 +281,7 @@
 	max_icon_state = "sheet-clear-max"
 	stack_merge_type = /obj/item/stack/material/pane
 	crafting_stack_type = /obj/item/stack/material/pane
+	can_be_reinforced = TRUE
 
 /obj/item/stack/material/pane/update_state_from_amount()
 	if(reinf_material)
@@ -280,6 +302,8 @@
 	max_icon_state = "sheet-card-max"
 	stack_merge_type = /obj/item/stack/material/cardstock
 	crafting_stack_type = /obj/item/stack/material/cardstock
+	craft_verb = "fold"
+	craft_verbing = "folding"
 
 /obj/item/stack/material/gemstone
 	name = "gems"
@@ -290,6 +314,7 @@
 	max_icon_state = "diamond-max"
 	stack_merge_type = /obj/item/stack/material/gemstone
 	crafting_stack_type = /obj/item/stack/material/gemstone
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/puck
 	name = "pucks"
@@ -300,6 +325,7 @@
 	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/puck
 	crafting_stack_type = /obj/item/stack/material/puck
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/aerogel
 	name = "aerogel"
@@ -336,6 +362,8 @@
 	max_icon_state = "log-max"
 	stack_merge_type = /obj/item/stack/material/log
 	crafting_stack_type = /obj/item/stack/material/log
+	craft_verb = "whittle"
+	craft_verbing = "whittling"
 	var/plank_type = /obj/item/stack/material/plank
 
 /obj/item/stack/material/log/attackby(obj/item/W, mob/user)
@@ -384,6 +412,7 @@
 	attack_verb = list("cubed")
 	stack_merge_type = /obj/item/stack/material/cubes
 	crafting_stack_type = /obj/item/stack/material // cubes can be used for any crafting
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/lump
 	name = "lumps"
@@ -394,6 +423,9 @@
 	max_icon_state = "lump-max"
 	stack_merge_type = /obj/item/stack/material/lump
 	crafting_stack_type = /obj/item/stack/material/lump
+	craft_verb = "sculpt"
+	craft_verbing = "sculpting"
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/slab
 	name = "slabs"
@@ -404,6 +436,7 @@
 	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/slab
 	crafting_stack_type = /obj/item/stack/material/slab
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/bundle
 	name = "bundles"
@@ -414,6 +447,8 @@
 	max_icon_state = "bundle-max"
 	stack_merge_type = /obj/item/stack/material/bundle
 	crafting_stack_type = /obj/item/stack/material/bundle
+	craft_verb = "weave"
+	craft_verbing = "weaving"
 
 /obj/item/stack/material/strut
 	name = "struts"

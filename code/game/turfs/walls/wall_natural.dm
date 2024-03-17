@@ -26,18 +26,15 @@
 		make_ramp(null, ramp_slope_direction, TRUE)
 
 /turf/wall/natural/LateInitialize(var/ml)
+	//Set the rock color
+	if(!paint_color)
+		paint_color = SSmaterials.get_rock_color(src)
 	..()
 	spread_deposit()
 	if(!ramp_slope_direction && floor_type && HasAbove(z))
 		var/turf/T = GetAbove(src)
 		if(!istype(T, floor_type) && T.is_open())
 			T.ChangeTurf(floor_type, keep_air = TRUE)
-	//Set the rock color
-	if(!paint_color)
-		var/rcolor = SSmaterials.get_rock_color(src)
-		if(rcolor)
-			paint_color = rcolor
-			queue_icon_update()
 
 /turf/wall/natural/Destroy()
 	SSxenoarch.digsite_spawning_turfs -= src
@@ -68,8 +65,11 @@
 
 // Drill out natural walls.
 /turf/wall/natural/handle_wall_tool_interactions(obj/item/W, mob/user)
-	if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
-		dismantle_wall()
+	if(IS_PICK(W))
+		if(W.material?.hardness < max(material?.hardness, reinf_material?.hardness))
+			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to dig through \the [src]."))
+		else if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
+			dismantle_wall()
 		return TRUE
 	return FALSE
 
@@ -99,7 +99,6 @@
 	. = ..()
 
 /turf/wall/natural/drop_dismantled_products(devastated, explode)
-	// TODO: drop composite material
 	drop_ore()
 
 // TODO: rock crumble SFX
@@ -125,12 +124,14 @@
 
 /turf/wall/natural/proc/drop_ore()
 	if(reinf_material?.ore_result_amount)
-		pass_geodata_to(new /obj/item/stack/material/ore(src, reinf_material.ore_result_amount, reinf_material.type))
+		var/drop_type = reinf_material.ore_type || /obj/item/stack/material/ore
+		pass_geodata_to(new drop_type(src, reinf_material.ore_result_amount, reinf_material.type))
 		reinf_material = null
 		ore_overlay = null
 		update_material(FALSE)
 	if(prob(30) && !ramp_slope_direction && material)
-		pass_geodata_to(new /obj/item/stack/material/ore(src, material.ore_result_amount, material.type))
+		var/drop_type = material.ore_type || /obj/item/stack/material/ore
+		pass_geodata_to(new drop_type(src, material.ore_result_amount, material.type))
 
 /turf/wall/natural/proc/pass_geodata_to(obj/O)
 	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)
