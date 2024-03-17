@@ -84,7 +84,18 @@
 				if(ispath(clothes, detailed_check_type))
 					do_detailed_check = FALSE
 					break
+
 		if(!do_detailed_check)
+			if(length(clothing_fails))
+				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]"
+			continue
+
+		// We don't currently validate clothes specifically for nonhumans.
+		// TODO: make this a loop over all relevant bodytype categories instead.
+		var/check_flags = initial(clothes.bodytype_equip_flags)
+		if(!(check_flags & BODY_FLAG_HUMANOID) || ((check_flags & BODY_FLAG_EXCLUDE) && (check_flags & BODY_FLAG_HUMANOID)))
+			if(length(clothing_fails))
+				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]"
 			continue
 
 		clothes = new clothes
@@ -112,7 +123,7 @@
 		if(!length(clothes.get_available_clothing_state_modifiers()))
 			QDEL_NULL(clothes)
 			if(length(clothing_fails))
-				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]]"
+				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]"
 			continue
 
 		var/list/all_tokens = list()

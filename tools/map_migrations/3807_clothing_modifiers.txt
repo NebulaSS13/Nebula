@@ -1,0 +1,1 @@
+/obj/item/clothing/suit/storage/toggle/hoodie/nt/@SUBTYPES : /obj/item/clothing/suit/storage/toggle/nt_hoodie/@SUBTYPES{@OLD}

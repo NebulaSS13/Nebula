@@ -1852,6 +1852,7 @@
 #include "code\modules\clothing\clothing_state\clothing_state_rolled.dm"
 #include "code\modules\clothing\clothing_state\clothing_state_sleeves.dm"
 #include "code\modules\clothing\clothing_state\clothing_state_tucked.dm"
+#include "code\modules\clothing\clothing_state\clothing_state_untied.dm"
 #include "code\modules\clothing\ears\_ears.dm"
 #include "code\modules\clothing\ears\earrings.dm"
 #include "code\modules\clothing\glasses\_glasses.dm"

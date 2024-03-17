@@ -262,7 +262,7 @@
 		for(var/modifier_type in clothing_state_modifiers)
 			var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
 			interactions += modifier.name
-		to_chat(user, SPAN_SUBTLE("Use alt-click to [english_list(interactions, and_text = "or")]."))
+		to_chat(user, SPAN_SUBTLE("Use alt-click to [english_list(interactions, and_text = " or ")]."))
 
 #undef RAG_COUNT
 

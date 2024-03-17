@@ -1,5 +1,5 @@
 /decl/bodytype/skrell
-	name                 = BODYTYPE_SKRELL
+	name                 = "skrellian body"
 	icon_base            = 'mods/species/bayliens/skrell/icons/body/body.dmi'
 	bandages_icon        = 'icons/mob/bandage.dmi'
 	bandages_icon        = 'icons/mob/bandage.dmi'

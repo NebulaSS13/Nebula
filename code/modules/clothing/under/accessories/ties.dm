@@ -40,51 +40,11 @@
 	color = "#b18345"
 
 //Bowties
-/obj/item/clothing/accessory/bowtie
-	var/tied = TRUE
-
-/obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user)
-	..()
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		suit.verbs += /obj/item/clothing/accessory/bowtie/verb/toggle
-
-/obj/item/clothing/accessory/bowtie/on_removed(mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		suit.verbs -= /obj/item/clothing/accessory/bowtie/verb/toggle
-	..()
-
-/obj/item/clothing/accessory/bowtie/verb/toggle()
-	set name = "Toggle Bowtie"
-	set category = "Object"
-	set src in usr
-
-	if(usr.incapacitated())
-		return 0
-	if(!istype(src)) // This verb is given to our holding clothing item and called on it, so src might not be the bowtie.
-		for(var/obj/item/clothing/accessory/bowtie/tie in accessories)
-			src = tie
-			break
-	if(!istype(src))
-		return
-	do_toggle(usr)
-
-/obj/item/clothing/accessory/bowtie/proc/do_toggle(mob/user)
-	user.visible_message("\The [user] [tied ? "un" : ""]ties \the [src].", "You [tied ? "un" : ""]tie \the [src].")
-	tied = !tied
-	update_icon()
-
-/obj/item/clothing/accessory/bowtie/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && !tied && check_state_in_icon("[overlay.icon_state]-untied", overlay.icon))
-		overlay.icon_state = "[overlay.icon_state]-untied"
-	. = ..()
-
-/obj/item/clothing/accessory/bowtie/on_update_icon()
-	. = ..()
-	icon_state = get_world_inventory_state()
-	if(!tied && check_state_in_icon("[icon_state]-untied", icon))
-		icon_state = "[icon_state]-untied"
+/obj/item/clothing/accessory/bowtie/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/untied)
+	)
+	return expected_state_modifiers
 
 /obj/item/clothing/accessory/bowtie/color
 	name = "bowtie"
