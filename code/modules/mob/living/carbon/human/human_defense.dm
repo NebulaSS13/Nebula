@@ -292,7 +292,7 @@ meteor_act
 	if(isobj(AM) && in_throw_mode && !get_active_held_item() && TT.speed <= THROWFORCE_SPEED_DIVISOR && !incapacitated() && isturf(AM.loc))
 		put_in_active_hand(AM)
 		visible_message(SPAN_NOTICE("\The [src] catches \the [AM]!"))
-		throw_mode_off()
+		toggle_throw_mode(FALSE)
 		process_momentum(AM, TT)
 		return FALSE
 	return ..()
