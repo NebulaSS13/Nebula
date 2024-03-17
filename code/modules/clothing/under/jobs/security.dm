@@ -108,7 +108,7 @@
 		)
 	siemens_coefficient = 0.9
 	flags_inv = BLOCK_HEAD_HAIR
-	markings_icon = "band"
+	markings_state_modifier = "band"
 	markings_color = "#b2977c"
 	material = /decl/material/solid/organic/leather
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)

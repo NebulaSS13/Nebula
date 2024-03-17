@@ -8,7 +8,7 @@
 	heat_protection = SLOT_FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-	markings_icon = "_coloring"
+	markings_state_modifier = "_coloring"
 
 /obj/item/clothing/shoes/color/black
 	name = "black shoes"
