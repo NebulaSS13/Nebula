@@ -41,8 +41,8 @@
 
 /decl/hierarchy/supply_pack/security/blackguards
 	name = "Armor - Arm and leg guards, black"
-	contains = list(/obj/item/clothing/accessory/armguards = 2,
-					/obj/item/clothing/accessory/legguards = 2)
+	contains = list(/obj/item/clothing/gloves/armguards = 2,
+					/obj/item/clothing/shoes/legguards = 2)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
 	access = access_armory

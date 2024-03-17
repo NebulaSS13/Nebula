@@ -1,4 +1,4 @@
-/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+/obj/item/clothing/suit/storage/brown_jacket/nanotrasen
 	name = "\improper NanoTrasen leather jacket"
 	desc = "A brown leather coat. The NanoTrasen logo is proudly displayed on the back."
 	icon = 'mods/content/corporate/icons/clothing/suit/nt_brown.dmi'
@@ -13,7 +13,7 @@
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
 	icon = 'mods/content/corporate/icons/clothing/suit/mbill.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/dais
+/obj/item/clothing/suit/storage/wintercoat/dais
 	name = "\improper DAIS winter coat"
 	icon = 'mods/content/corporate/icons/clothing/suit/dais_coat.dmi'
 	hood = /obj/item/clothing/head/winterhood/dais

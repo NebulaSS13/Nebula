@@ -45,7 +45,7 @@ var/global/list/bodytypes_by_category = list()
 	/// Determines how the limb behaves with regards to manual attachment/detachment.
 	var/modular_limb_tier = MODULAR_BODYPART_INVALID
 
-	var/onmob_state_modifiers
+	var/list/onmob_state_modifiers
 	var/health_hud_intensity = 1
 
 	var/pixel_offset_x = 0                    // Used for offsetting large icons.

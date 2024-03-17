@@ -8,77 +8,77 @@
 
 /decl/loadout_option/clothing/flannel
 	name = "flannel (colorable)"
-	path = /obj/item/clothing/accessory/toggleable/flannel
+	path = /obj/item/clothing/shirt/flannel
 	slot = slot_tie_str
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/scarf
 	name = "scarf"
-	path = /obj/item/clothing/accessory/scarf
+	path = /obj/item/clothing/decor/scarf
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/hawaii
 	name = "hawaii shirt"
-	path = /obj/item/clothing/accessory/toggleable/hawaii
+	path = /obj/item/clothing/shirt/hawaii
 
 /decl/loadout_option/clothing/hawaii/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"blue hawaii shirt" =           /obj/item/clothing/accessory/toggleable/hawaii,
-		"red hawaii shirt" =            /obj/item/clothing/accessory/toggleable/hawaii/red,
-		"random colored hawaii shirt" = /obj/item/clothing/accessory/toggleable/hawaii/random
+		"blue hawaii shirt" =           /obj/item/clothing/shirt/hawaii,
+		"red hawaii shirt" =            /obj/item/clothing/shirt/hawaii/red,
+		"random colored hawaii shirt" = /obj/item/clothing/shirt/hawaii/random
 	)
 
 /decl/loadout_option/clothing/vest
 	name = "suit vest, colour select"
-	path = /obj/item/clothing/accessory/toggleable
+	path = /obj/item/clothing/suit/jacket/black_vest
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/suspenders
 	name = "suspenders"
-	path = /obj/item/clothing/accessory/suspenders
+	path = /obj/item/clothing/decor/suspenders
 
 /decl/loadout_option/clothing/suspenders/colorable
 	name = "suspenders, colour select"
-	path = /obj/item/clothing/accessory/suspenders/colorable
+	path = /obj/item/clothing/decor/suspenders/colorable
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/wcoat
 	name = "waistcoat, colour select"
-	path = /obj/item/clothing/accessory/wcoat
+	path = /obj/item/clothing/suit/jacket/waistcoat
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/zhongshan
 	name = "zhongshan jacket, colour select"
-	path = /obj/item/clothing/accessory/toggleable/zhongshan
+	path = /obj/item/clothing/suit/jacket/zhongshan
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/dashiki
 	name = "dashiki selection"
-	path = /obj/item/clothing/accessory/dashiki
+	path = /obj/item/clothing/suit/dashiki
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/clothing/thawb
 	name = "thawb"
-	path = /obj/item/clothing/accessory/thawb
+	path = /obj/item/clothing/suit/thawb
 
 /decl/loadout_option/clothing/sherwani
 	name = "sherwani, colour select"
-	path = /obj/item/clothing/accessory/sherwani
+	path = /obj/item/clothing/suit/sherwani
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/qipao
 	name = "qipao blouse, colour select"
-	path = /obj/item/clothing/accessory/qipao
+	path = /obj/item/clothing/shirt/qipao
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/sweater
 	name = "turtleneck sweater, colour select"
-	path = /obj/item/clothing/accessory/sweater
+	path = /obj/item/clothing/shirt/sweater
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/tangzhuang
 	name = "tangzhuang jacket, colour select"
-	path = /obj/item/clothing/accessory/tangzhuang
+	path = /obj/item/clothing/suit/tangzhuang
 	loadout_flags = GEAR_HAS_COLOR_SELECTION

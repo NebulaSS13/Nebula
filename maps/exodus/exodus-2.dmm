@@ -2676,12 +2676,12 @@
 /area/exodus/security/main)
 "afO" = (
 /obj/structure/closet/wardrobe/red,
-/obj/item/clothing/accessory/storage/holster/waist,
-/obj/item/clothing/accessory/storage/holster/waist,
-/obj/item/clothing/accessory/storage/holster/waist,
-/obj/item/clothing/accessory/armband,
-/obj/item/clothing/accessory/armband,
-/obj/item/clothing/accessory/armband,
+/obj/item/clothing/webbing/holster/waist,
+/obj/item/clothing/webbing/holster/waist,
+/obj/item/clothing/webbing/holster/waist,
+/obj/item/clothing/decor/armband,
+/obj/item/clothing/decor/armband,
+/obj/item/clothing/decor/armband,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -4472,9 +4472,9 @@
 	pixel_x = 4;
 	pixel_y = -28
 	},
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo/cord,
+/obj/item/clothing/decor/badge/holo,
+/obj/item/clothing/decor/badge/holo,
+/obj/item/clothing/decor/badge/holo/cord,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -38722,11 +38722,11 @@
 /obj/item/storage/belt/medical,
 /obj/item/storage/belt/medical,
 /obj/item/storage/belt/medical,
-/obj/item/clothing/accessory/stethoscope,
-/obj/item/clothing/accessory/stethoscope,
-/obj/item/clothing/accessory/stethoscope,
-/obj/item/clothing/accessory/stethoscope,
-/obj/item/clothing/accessory/stethoscope,
+/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/tie/stethoscope,
 /obj/machinery/light_switch{
 	name = "light switch ";
 	pixel_y = -22;
@@ -43475,7 +43475,7 @@
 	},
 /obj/structure/closet/secure_closet/cmo,
 /obj/item/clothing/mask/gas,
-/obj/item/clothing/accessory/stethoscope,
+/obj/item/clothing/tie/stethoscope,
 /obj/item/storage/belt/medical,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/flashlight/pen,

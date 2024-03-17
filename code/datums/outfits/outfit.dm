@@ -69,7 +69,7 @@ var/global/list/outfits_decls_by_type_
 		if(!ispath(uniform, /obj/item/clothing))
 			. += "outfit is flagged for sensors, but uniform cannot take accessories"
 		var/succeeded = FALSE
-		var/obj/item/sensor = new /obj/item/clothing/accessory/vitals_sensor
+		var/obj/item/sensor = new /obj/item/clothing/sensor/vitals
 		if(uniform)
 			var/obj/item/clothing/wear_uniform = new uniform // sadly we need to read a list
 			if(wear_uniform.can_attach_accessory(sensor))
@@ -103,10 +103,10 @@ var/global/list/outfits_decls_by_type_
 		post_equip(H)
 
 	if(outfit_flags & OUTFIT_HAS_VITALS_SENSOR)
-		var/obj/item/clothing/accessory/vitals_sensor/sensor = new(get_turf(H))
+		var/obj/item/clothing/sensor/vitals/sensor = new(get_turf(H))
 		for(var/check_slot in global.vitals_sensor_equip_slots)
 			var/obj/item/clothing/equipped = H.get_equipped_item(check_slot)
-			if(istype(equipped) && !(locate(/obj/item/clothing/accessory/vitals_sensor) in equipped.accessories) && equipped.can_attach_accessory(sensor))
+			if(istype(equipped) && !(locate(/obj/item/clothing/sensor/vitals) in equipped.accessories) && equipped.can_attach_accessory(sensor))
 				equipped.attach_accessory(null, sensor)
 				break
 		if(isturf(sensor))

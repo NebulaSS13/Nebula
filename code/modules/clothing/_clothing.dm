@@ -3,13 +3,13 @@
 	siemens_coefficient = 0.9
 	origin_tech = @'{"materials":1,"engineering":1}'
 	material = /decl/material/solid/organic/cloth
+	icon_state = ICON_STATE_WORLD
+	w_class = ITEM_SIZE_SMALL
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
 	var/tint = TINT_NONE							  // Sets the item's level of visual impairment tint.
-
 	var/bodytype_equip_flags    // Bitfields; if null, checking is skipped. Determine if a given mob can equip this item or not.
-
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
@@ -26,13 +26,12 @@
 /obj/item/clothing/Initialize()
 
 	. = ..()
-
+	accessory_hide_on_states = get_initial_accessory_hide_on_states()
 	accessory_hide_on_states = get_initial_accessory_hide_on_states()
 
 	if(starting_accessories)
 		for(var/T in starting_accessories)
-			src.attach_accessory(null, new T(src))
-
+			attach_accessory(null, new T(src))
 	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
 		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
 
@@ -160,9 +159,11 @@
 		var/image/I = accessory.get_attached_inventory_overlay(icon_state)
 		if(I)
 			LAZYADD(new_overlays, I)
+
 	if(LAZYLEN(new_overlays))
 		add_overlay(new_overlays)
 	update_clothing_icon()
+
 
 // Used by washing machines to temporarily make clothes smell
 /obj/item/clothing/proc/change_smell(decl/material/odorant, time = 10 MINUTES)
@@ -252,7 +253,7 @@
 	if(rags)
 		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
 
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in accessories
 	if(sensor)
 		switch(sensor.sensor_mode)
 			if(VITALS_SENSOR_OFF)
@@ -272,6 +273,19 @@
 		to_chat(user, SPAN_SUBTLE("Use alt-click to [english_list(interactions, and_text = " or ")]."))
 
 #undef RAG_COUNT
+
+/obj/item/clothing/get_alt_interactions(var/mob/user)
+	. = ..()
+	for(var/modifier_type in clothing_state_modifiers)
+		var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
+		if(modifier.alt_interaction_type)
+			LAZYADD(., modifier.alt_interaction_type)
+
+// Short-circuit this for quick interaction when worn.
+/obj/item/clothing/AltClick(var/mob/user)
+	if(src in user.get_equipped_items())
+		return attack_self(user)
+	return ..()
 
 /obj/item/clothing/Topic(href, href_list, datum/topic_state/state)
 	var/mob/user = usr
@@ -312,7 +326,7 @@
 /obj/item/clothing/proc/set_sensors(mob/user)
 	if (isobserver(user) || user.incapacitated())
 		return
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in accessories
 	if(sensor)
 		sensor.user_set_sensors(user)
 
@@ -321,7 +335,7 @@
 	if(!istype(old_item, /obj/item/clothing) || !(ACCESSORY_SLOT_SENSORS in valid_accessory_slots))
 		return
 	var/obj/item/clothing/old_clothes = old_item
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in old_clothes.accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in old_clothes.accessories
 	if(!sensor)
 		return
 	sensor.accessory_removable = TRUE // This will be refreshed by remove_accessory/attach_accessory

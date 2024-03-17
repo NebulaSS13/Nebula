@@ -28,7 +28,7 @@
 		ACCESSORY_SLOT_RANK,
 		ACCESSORY_SLOT_DEPT,
 		ACCESSORY_SLOT_OVER
-		)
+	)
 
 /obj/item/clothing/under/get_associated_equipment_slots()
 	. = ..()

@@ -52,7 +52,7 @@
 		if(46 to 50)
 			new/obj/item/clothing/under/chameleon(src)
 			for(var/i = 0, i < 7, i++)
-				new /obj/item/clothing/accessory/horrible(src)
+				new /obj/item/clothing/tie/horrible(src)
 		if(51 to 52) // Uncommon, 2% each
 			new /obj/item/classic_baton(src)
 		if(53 to 54)
@@ -119,7 +119,7 @@
 			new /obj/item/clothing/gloves/color/white(src)
 			new /obj/item/clothing/mask/gas/mime(src)
 			new /obj/item/clothing/head/beret(src)
-			new /obj/item/clothing/accessory/suspenders(src)
+			new /obj/item/clothing/decor/suspenders(src)
 			new /obj/item/pen/crayon/mime(src)
 		if(96)
 			new /obj/item/vampiric(src)

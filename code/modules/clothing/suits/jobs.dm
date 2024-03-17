@@ -143,27 +143,27 @@
 	icon = 'icons/clothing/suit/hazard_vest/green.dmi'
 
 //Lawyer
-/obj/item/clothing/suit/storage/toggle/suit
+/obj/item/clothing/suit/storage/suit
 	name = "suit jacket"
 	desc = "A snappy dress jacket."
 	icon = 'icons/clothing/suit/suit_jacket.dmi'
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/suit/blue
+/obj/item/clothing/suit/storage/suit/blue
 	name = "blue suit jacket"
 	color = "#00326e"
 
-/obj/item/clothing/suit/storage/toggle/suit/purple
+/obj/item/clothing/suit/storage/suit/purple
 	name = "purple suit jacket"
 	color = "#6c316c"
 
-/obj/item/clothing/suit/storage/toggle/suit/black
+/obj/item/clothing/suit/storage/suit/black
 	name = "black suit jacket"
 	color = "#1f1f1f"
 
 //Medical
-/obj/item/clothing/suit/storage/toggle/fr_jacket
+/obj/item/clothing/suit/storage/fr_jacket
 	name = "first responder jacket"
 	desc = "A high-visibility jacket worn by medical first responders."
 	icon = 'icons/clothing/suit/responder_jacket.dmi'
@@ -183,7 +183,7 @@
 	)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/fr_jacket/ems
+/obj/item/clothing/suit/storage/fr_jacket/ems
 	name = "\improper EMS jacket"
 	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
 	icon = 'icons/clothing/suit/emt_jacket.dmi'

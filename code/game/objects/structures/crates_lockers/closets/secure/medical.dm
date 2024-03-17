@@ -44,8 +44,8 @@
 		/obj/item/clothing/under/medical,
 		/obj/item/clothing/under/nurse,
 		/obj/item/clothing/under/orderly,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/fr_jacket,
+		/obj/item/clothing/suit/storage/labcoat,
+		/obj/item/clothing/suit/storage/fr_jacket,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_med,
 		/obj/item/stack/tape_roll/barricade_tape/medical,
@@ -68,8 +68,8 @@
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/storage/belt/medical/emt,
 		/obj/item/clothing/mask/gas,
-		/obj/item/clothing/suit/storage/toggle/fr_jacket,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/fr_jacket,
+		/obj/item/clothing/suit/storage/labcoat,
 		/obj/item/radio/headset/headset_med,
 		/obj/item/flashlight,
 		/obj/item/tank/emergency/oxygen/engi,
@@ -81,7 +81,7 @@
 		/obj/item/crowbar,
 		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/storage/box/freezer,
-		/obj/item/clothing/accessory/storage/vest
+		/obj/item/clothing/webbing/vest
 	)
 
 /obj/structure/closet/secure_closet/cmo
@@ -97,8 +97,8 @@
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/under/chief_medical_officer,
-		/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
-		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
+		/obj/item/clothing/suit/storage/labcoat/cmo,
+		/obj/item/clothing/suit/storage/labcoat/cmoalt,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/radio/headset/heads/cmo,
@@ -154,7 +154,7 @@
 	return list(
 		/obj/item/clothing/under/psych,
 		/obj/item/clothing/under/psych/turtleneck,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
@@ -189,7 +189,7 @@
 		/obj/item/storage/box/gloves,
 		/obj/item/clothing/under/virologist,
 		/obj/item/clothing/shoes/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
+		/obj/item/clothing/suit/storage/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
 		/obj/item/scanner/health,
 		/obj/item/scanner/breath,

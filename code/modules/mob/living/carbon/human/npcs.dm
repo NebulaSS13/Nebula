@@ -12,7 +12,7 @@
 		equip_to_appropriate_slot(new /obj/item/clothing/under/waiter/monke(src))
 	else
 		var/obj/item/clothing/C = new /obj/item/clothing/pants/casual/mustangjeans/monke(src)
-		C.attach_accessory(null, new /obj/item/clothing/accessory/toggleable/hawaii/random(src))
+		C.attach_accessory(null, new /obj/item/clothing/shirt/hawaii/random(src))
 		equip_to_appropriate_slot(C)
 		if(prob(10))
 			equip_to_appropriate_slot(new /obj/item/clothing/head/collectable/petehat(src))
@@ -27,7 +27,7 @@
 
 /obj/item/clothing/under/color/white/blank/Initialize()
 	. = ..()
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = new(src)
+	var/obj/item/clothing/sensor/vitals/sensor = new(src)
 	sensor.set_sensors_locked(TRUE)
 	sensor.set_sensor_mode(VITALS_SENSOR_OFF)
 	attach_accessory(null, sensor)

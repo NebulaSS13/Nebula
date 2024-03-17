@@ -5,8 +5,14 @@
 
 /obj/structure/closet/secure_closet/engineering_chief/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/clothing/accessory/storage/vest/brown = 70, /obj/item/clothing/accessory/storage = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/clothing/webbing/vest/brown = 70,
+			/obj/item/clothing/webbing = 30
+		)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/storage/backpack/industrial,
+			/obj/item/storage/backpack/satchel/eng
+		)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/eng, 50),
 		/obj/item/blueprints,
 		/obj/item/clothing/under/chief_engineer,
@@ -59,7 +65,7 @@
 
 /obj/structure/closet/secure_closet/engineering_personal/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/clothing/accessory/storage/vest/brown = 70, /obj/item/clothing/accessory/storage = 30)),
+		new/datum/atom_creator/weighted(list(/obj/item/clothing/webbing/vest/brown = 70, /obj/item/clothing/webbing = 30)),
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/eng, 50),
 		/obj/item/storage/toolbox/mechanical,
@@ -78,8 +84,14 @@
 
 /obj/structure/closet/secure_closet/atmos_personal/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/clothing/accessory/storage/vest/brown = 70, /obj/item/clothing/accessory/storage = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/clothing/webbing/vest/brown = 70,
+			/obj/item/clothing/webbing = 30
+		)),
+		new/datum/atom_creator/weighted(list(
+			/obj/item/storage/backpack/industrial,
+			/obj/item/storage/backpack/satchel/eng
+		)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/eng, 50),
 		/obj/item/clothing/suit/fire,
 		/obj/item/flashlight,

@@ -12,7 +12,7 @@
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
-	var/obj/item/clothing/ring/covering_ring
+	var/obj/item/clothing/jewelry/ring/covering_ring
 
 /obj/item/clothing/gloves/get_associated_equipment_slots()
 	. = ..()
@@ -25,7 +25,7 @@
 	return "material from a pair of [name]."
 
 /obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
-	var/obj/item/clothing/ring/check_ring
+	var/obj/item/clothing/jewelry/ring/check_ring
 	var/obj/item/gloves = user?.get_equipped_item(slot_gloves_str)
 	if(slot == slot_gloves_str && gloves)
 		if(!ignore_equipped && gloves != src)

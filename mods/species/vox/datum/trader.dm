@@ -40,7 +40,7 @@
 		TRADER_BRIBE_REFUSAL     = "Krrkkrhkkhh! You ask too much! It must be moving on."
 	)
 	possible_wanted_items = list(
-		/obj/item/                      = TRADER_SUBTYPES_ONLY,
+		/obj/item                       = TRADER_SUBTYPES_ONLY,
 		/obj/item/stack/material        = TRADER_SUBTYPES_ONLY,
 		/obj/item/stack/material/cyborg = TRADER_BLACKLIST_ALL,
 		/obj/item/organ                 = TRADER_SUBTYPES_ONLY,
@@ -50,7 +50,7 @@
 		/obj/item/gun/projectile/dartgun/vox  = TRADER_SUBTYPES_ONLY,
 		/obj/item/trash                       = TRADER_SUBTYPES_ONLY,
 		/obj/item/remains                     = TRADER_ALL,
-		/obj/item/clothing/accessory          = TRADER_ALL,
+		/obj/item/clothing/decor              = TRADER_ALL,
 		/obj/item/robot_parts                 = TRADER_SUBTYPES_ONLY,
 		/obj/item/robot_parts/robot_component = TRADER_BLACKLIST
 	)

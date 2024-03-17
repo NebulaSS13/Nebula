@@ -1690,7 +1690,7 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/clothing/accessory/bracelet,
+/obj/item/clothing/jewelry/bracelet,
 /obj/random/lipstick,
 /obj/random/coin,
 /turf/floor,
@@ -2166,8 +2166,8 @@
 	dir = 4
 	},
 /obj/structure/closet/crate,
-/obj/item/clothing/accessory/medal/gold,
-/obj/item/clothing/accessory/locket,
+/obj/item/clothing/decor/badge/medal/gold,
+/obj/item/clothing/jewelry/locket,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)
@@ -2207,7 +2207,7 @@
 /obj/structure/table,
 /obj/item/stack/material/puck/mapped/uranium,
 /obj/item/utensil/knife/plastic,
-/obj/item/clothing/accessory/bowtie/ugly,
+/obj/item/clothing/tie/bow/ugly,
 /obj/random/action_figure,
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)

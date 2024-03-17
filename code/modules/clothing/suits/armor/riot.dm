@@ -21,42 +21,7 @@
 	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'
 
 /obj/item/clothing/suit/armor/riot/prepared
-	starting_accessories = list(/obj/item/clothing/accessory/armguards/riot, /obj/item/clothing/accessory/legguards/riot)
-
-// Parts
-
-/obj/item/clothing/accessory/legguards/riot
-	name = "riot leg guards"
-	desc = "A pair of armored leg pads with heavy padding to protect against melee attacks. Looks like they might impair movement."
-	icon = 'icons/clothing/accessories/armor/legguards_riot.dmi'
-	color = null
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
-		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
-		ARMOR_LASER = ARMOR_LASER_SMALL,
-		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
-		ARMOR_BOMB = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0.5
-	accessory_slowdown = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY)
-	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'
-
-/obj/item/clothing/accessory/armguards/riot
-	name = "riot arm guards"
-	desc = "A pair of armored arm pads with heavy padding to protect against melee attacks."
-	icon = 'icons/clothing/accessories/armor/armguards_riot.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
-		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
-		ARMOR_LASER = ARMOR_LASER_SMALL,
-		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
-		ARMOR_BOMB = ARMOR_BOMB_PADDED
-		)
-	color = null
-	siemens_coefficient = 0.5
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY)
-	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'
-
+	starting_accessories = list(
+		/obj/item/clothing/gloves/armguards/riot,
+		/obj/item/clothing/shoes/legguards/riot
+	)

@@ -93,7 +93,7 @@
 		/obj/item/clothing/glasses/hud/security =              4,
 		/obj/item/clothing/glasses/hud/security/prescription = 3,
 		/obj/item/clothing/glasses/sunglasses/sechud =         2,
-		/obj/item/clothing/glasses/sunglasses/sechud/toggle =  3,
+		/obj/item/clothing/glasses/sunglasses/sechud =  3,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles = 1,
 		/obj/item/clothing/glasses/tacgoggles =                1
 	)
@@ -129,18 +129,18 @@
 /obj/random/suit/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/clothing/suit/storage/hazardvest =          4,
-		/obj/item/clothing/suit/storage/toggle/labcoat =      4,
+		/obj/item/clothing/suit/storage/labcoat =      4,
 		/obj/item/clothing/suit/space/emergency =             1,
 		/obj/item/clothing/suit/armor/vest =                  4,
 		/obj/item/clothing/suit/armor/pcarrier/tactical =     1,
 		/obj/item/clothing/suit/armor/vest/heavy =            3,
-		/obj/item/clothing/suit/storage/toggle/bomber =       3,
+		/obj/item/clothing/suit/storage/bomber =       3,
 		/obj/item/clothing/suit/chef/classic =                3,
 		/obj/item/clothing/suit/surgicalapron =               2,
 		/obj/item/clothing/suit/apron/overalls =              3,
 		/obj/item/clothing/suit/bio_suit/general =            1,
-		/obj/item/clothing/suit/storage/toggle/hoodie/black = 3,
-		/obj/item/clothing/suit/storage/toggle/brown_jacket = 3,
+		/obj/item/clothing/suit/storage/hoodie/black = 3,
+		/obj/item/clothing/suit/storage/brown_jacket = 3,
 		/obj/item/clothing/suit/storage/leather_jacket =      3,
 		/obj/item/clothing/suit/apron =                       4
 	)
@@ -176,18 +176,18 @@
 
 /obj/random/accessory/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/accessory/storage =                3,
-		/obj/item/clothing/accessory/storage/webbing_large =  3,
-		/obj/item/clothing/accessory/storage/vest/black =     2,
-		/obj/item/clothing/accessory/storage/vest/brown =     2,
-		/obj/item/clothing/accessory/storage/vest =           2,
-		/obj/item/clothing/accessory/storage/bandolier =      1,
-		/obj/item/clothing/accessory/storage/holster/thigh =  1,
-		/obj/item/clothing/accessory/storage/holster/hip =    1,
-		/obj/item/clothing/accessory/storage/holster/waist =  1,
-		/obj/item/clothing/accessory/storage/holster/armpit = 1,
-		/obj/item/clothing/accessory/kneepads =               3,
-		/obj/item/clothing/accessory/stethoscope =            2
+		/obj/item/clothing/webbing                = 3,
+		/obj/item/clothing/webbing/webbing_large  = 3,
+		/obj/item/clothing/webbing/vest/black     = 2,
+		/obj/item/clothing/webbing/vest/brown     = 2,
+		/obj/item/clothing/webbing/vest           = 2,
+		/obj/item/clothing/webbing/bandolier      = 1,
+		/obj/item/clothing/webbing/holster/thigh  = 1,
+		/obj/item/clothing/webbing/holster/hip    = 1,
+		/obj/item/clothing/webbing/holster/waist  = 1,
+		/obj/item/clothing/webbing/holster/armpit = 1,
+		/obj/item/clothing/decor/kneepads         = 3,
+		/obj/item/clothing/tie/stethoscope        = 2
 	)
 	return spawnable_choices
 

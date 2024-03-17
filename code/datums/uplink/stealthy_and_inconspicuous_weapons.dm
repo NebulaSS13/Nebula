@@ -25,7 +25,7 @@
 	name = "Armoured Waistcoat"
 	desc = "A classy waistcoat that discreetly provides a layer of low-profile armor to the discerning agent."
 	item_cost = 6
-	path = /obj/item/clothing/accessory/wcoat/armored
+	path = /obj/item/clothing/suit/jacket/waistcoat/armored
 
 /datum/uplink_item/item/stealthy_weapons/random_toxin
 	name = "Random Toxin Vial"
