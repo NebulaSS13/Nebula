@@ -3,49 +3,12 @@
 	desc = "A slick suit vest."
 	icon = 'icons/clothing/accessories/clothing/vest.dmi'
 	icon_state = ICON_STATE_WORLD
-	var/open = FALSE
 
-/obj/item/clothing/accessory/toggleable/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && open && check_state_in_icon("[overlay.icon_state]-open", overlay.icon))
-		overlay.icon_state = "[overlay.icon_state]-open"
-	. = ..()
-
-/obj/item/clothing/accessory/toggleable/on_attached(obj/item/clothing/under/S, mob/user)
-	..()
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		suit.verbs |= /obj/item/clothing/accessory/toggleable/verb/toggle
-
-/obj/item/clothing/accessory/toggleable/on_removed(mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		suit.verbs -= /obj/item/clothing/accessory/toggleable/verb/toggle
-	..()
-
-/obj/item/clothing/accessory/toggleable/attack_self(mob/user)
-	do_toggle()
-	. = ..()
-
-/obj/item/clothing/accessory/toggleable/verb/toggle()
-	set name = "Toggle Buttons"
-	set category = "Object"
-	set src in usr
-	if(!usr.incapacitated())
-		var/obj/item/clothing/accessory/toggleable/H = (istype(src, /obj/item/clothing/accessory/toggleable)) ? src : (locate() in src)
-		if(H)
-			H.do_toggle(usr)
-
-/obj/item/clothing/accessory/toggleable/on_update_icon()
-	. = ..()
-	icon_state = get_world_inventory_state()
-	if(open && check_state_in_icon("[icon_state]-open", icon))
-		icon_state = "[icon_state]-open"
-
-/obj/item/clothing/accessory/toggleable/proc/do_toggle(user)
-	open = !open
-	to_chat(user, SPAN_NOTICE("You [open ? "unbutton" : "button up"] \the [src]."))
-	update_icon()
-	update_clothing_icon()
+/obj/item/clothing/accessory/toggleable/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/buttons)
+	)
+	return expected_state_modifiers
 
 /obj/item/clothing/accessory/toggleable/black_vest
 	name = "black vest"
@@ -55,10 +18,6 @@
 	name = "tan suit jacket"
 	desc = "Cozy suit jacket."
 	icon = 'icons/clothing/accessories/clothing/jacket_tan.dmi'
-
-/obj/item/clothing/accessory/toggleable/tan_jacket/Initialize()
-	. = ..()
-	do_toggle()
 
 /obj/item/clothing/accessory/toggleable/charcoal_jacket
 	name = "charcoal suit jacket"
@@ -102,63 +61,11 @@
 	name = "flannel shirt"
 	desc = "A comfy, plaid flannel shirt."
 	icon = 'icons/clothing/accessories/clothing/flannel.dmi'
-	var/rolled = FALSE
-	var/tucked = FALSE
 
-/obj/item/clothing/accessory/toggleable/flannel/on_attached(obj/item/clothing/under/S, mob/user)
-	..()
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
-		suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
-
-/obj/item/clothing/accessory/toggleable/flannel/on_removed(mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
-		suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
-	..()
-
-/obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves()
-	set name = "Roll Flannel Sleeves"
-	set category = "Object"
-	set src in usr
-	if(usr.incapacitated())
-		return FALSE
-	var/obj/item/clothing/accessory/toggleable/flannel/H = (istype(src, /obj/item/clothing/accessory/toggleable)) ? src : (locate() in src)
-	if(H)
-		H.rolled = !H.rolled
-		to_chat(usr, SPAN_NOTICE("You roll [H.rolled ? "up" : "down"] the sleeves of \the [H]."))
-		H.update_icon()
-		H.update_clothing_icon()
-
-/obj/item/clothing/accessory/toggleable/flannel/verb/tuck()
-	set name = "Toggle Shirt Tucking"
-	set category = "Object"
-	set src in usr
-	if(usr.incapacitated())
-		return FALSE
-	if(usr.incapacitated())
-		return FALSE
-	var/obj/item/clothing/accessory/toggleable/flannel/H = (istype(src, /obj/item/clothing/accessory/toggleable)) ? src : (locate() in src)
-	if(H)
-		H.tucked = !H.tucked
-		to_chat(usr, SPAN_NOTICE("You [H.tucked ? "tuck in" : "untuck"] \the [H]."))
-		H.update_icon()
-		H.update_clothing_icon()
-
-/obj/item/clothing/accessory/toggleable/flannel/on_update_icon()
-	. = ..()
-	if(rolled && check_state_in_icon("[icon_state]-rolled", icon))
-		icon_state = "[icon_state]-rolled"
-	if(tucked && check_state_in_icon("[icon_state]-tucked", icon))
-		icon_state = "[icon_state]-tucked"
-	update_clothing_icon()
-
-/obj/item/clothing/accessory/toggleable/flannel/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay)
-		if(rolled && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
-			overlay.icon_state = "[overlay.icon_state]-rolled"
-		if(tucked && check_state_in_icon("[overlay.icon_state]-tucked", overlay.icon))
-			overlay.icon_state = "[overlay.icon_state]-tucked"
-	. = ..()
+/obj/item/clothing/accessory/toggleable/flannel/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/buttons),
+		GET_DECL(/decl/clothing_state_modifier/rolled_sleeves),
+		GET_DECL(/decl/clothing_state_modifier/tucked_in)
+	)
+	return expected_state_modifiers

@@ -5,9 +5,10 @@
 	var/accessory_high_visibility
 	/// used when an accessory is meant to slow the wearer down when attached to clothing
 	var/accessory_slowdown
-	var/accessory_hide_on_uniform_rolldown = FALSE
-	var/accessory_hide_on_uniform_rollsleeves = FALSE
+	var/list/accessory_hide_on_states
 
+/obj/item/clothing/proc/get_initial_accessory_hide_on_states()
+	return null
 
 /obj/item/clothing/proc/can_attach_accessory(obj/item/clothing/accessory)
 	if(valid_accessory_slots && istype(accessory) && !isnull(accessory.accessory_slot) && (accessory.accessory_slot in valid_accessory_slots))
@@ -134,29 +135,34 @@
 		. = accessory.attack_hand(user) || .
 	return TRUE
 
-/obj/item/clothing/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
-	if(istype(S))
-		forceMove(S)
+/obj/item/clothing/proc/on_attached(var/obj/item/clothing/holder, var/mob/user)
+	if(istype(holder))
+		forceMove(holder)
 		if(user)
-			to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [S]."))
-			src.add_fingerprint(user)
+			to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [holder]."))
+			add_fingerprint(user)
+		holder.update_clothing_toggle_verbs()
+		return TRUE
+	return FALSE
 
 /obj/item/clothing/proc/on_removed(var/mob/user)
 	var/obj/item/clothing/suit = loc
 	if(istype(suit))
 		if(user)
-			usr.put_in_hands(src)
-			src.add_fingerprint(user)
+			user.put_in_hands(src)
+			add_fingerprint(user)
 		else
 			dropInto(loc)
+		suit.update_clothing_toggle_verbs()
+		update_clothing_toggle_verbs()
+		return TRUE
+	return FALSE
 
 /obj/item/clothing/proc/should_overlay()
-	. = istype(loc, /obj/item/clothing)
-	if(. && istype(loc, /obj/item/clothing/under))
-		var/obj/item/clothing/under/uniform = loc
-		if(uniform.rolled_down && accessory_hide_on_uniform_rolldown)
-			return FALSE
-		if(uniform.rolled_sleeves && accessory_hide_on_uniform_rollsleeves)
+	. = is_accessory()
+	if(. && istype(loc, /obj/item/clothing))
+		var/obj/item/clothing/uniform = loc
+		if(uniform.should_hide_accessory(accessory_hide_on_states))
 			return FALSE
 
 /obj/item/clothing/proc/get_attached_overlay_state()
@@ -168,3 +174,11 @@
 		var/image/ret = image(icon, find_state)
 		ret.color = color
 		return ret
+
+/obj/item/clothing/OnDisguise(obj/item/copy, mob/user)
+	. = ..()
+	if(istype(copy, /obj/item/clothing))
+		var/obj/item/clothing/clothes = copy
+		accessory_hide_on_states = clothes.accessory_hide_on_states?.Copy()
+	else
+		accessory_hide_on_states = get_initial_accessory_hide_on_states()

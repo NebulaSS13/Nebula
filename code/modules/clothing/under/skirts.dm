@@ -3,7 +3,6 @@
 	desc = "A black skirt, very fancy!"
 	icon = 'icons/clothing/under/skirts/skirt_black.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
-	rolled_sleeves = -1
 
 /obj/item/clothing/under/skirt/plaid_blue
 	name = "blue plaid skirt"

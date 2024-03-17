@@ -10,10 +10,14 @@
 	icon = 'icons/clothing/accessories/badges/detectivebadge.dmi'
 	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
 	accessory_slot = ACCESSORY_SLOT_INSIGNIA
-	accessory_high_visibility = TRUE
-	accessory_hide_on_uniform_rolldown = TRUE
 	var/badge_string = "Detective"
 	var/stored_name
+
+/obj/item/clothing/accessory/badge/get_initial_accessory_hide_on_states()
+	var/static/list/initial_accessory_hide_on_states = list(
+		/decl/clothing_state_modifier/rolled_down
+	)
+	return initial_accessory_hide_on_states
 
 /obj/item/clothing/accessory/badge/get_lore_info()
 	. = ..()
