@@ -7,7 +7,7 @@
 	speak_emote = list("clicks")
 	emote_hear = list("clicks")
 	emote_see = list("clacks")
-	speak_chance = 1
+	speak_chance = 0.5
 	turns_per_move = 5
 	response_harm = "stamps on"
 	stop_automated_movement = 1

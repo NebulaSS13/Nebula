@@ -213,21 +213,27 @@ Single Use Emergency Pouches
 
 /obj/item/chems/pill/pouch_pill/stabilizer/populate_reagents()
 	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/antitoxins/populate_reagents()
 	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/oxy_meds/populate_reagents()
 	add_to_reagents(/decl/material/liquid/oxy_meds, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/painkillers/populate_reagents()
 	add_to_reagents(/decl/material/liquid/painkillers, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/brute_meds/populate_reagents()
 	add_to_reagents(/decl/material/liquid/brute_meds, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/burn_meds/populate_reagents()
 	add_to_reagents(/decl/material/liquid/burn_meds, reagents.maximum_volume)
+	. = ..()
 
 // Injectors
 
@@ -235,36 +241,31 @@ Single Use Emergency Pouches
 	name = "emergency autoinjector"
 	desc = "An emergency autoinjector from an emergency medical pouch."
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer
-	name = "emergency stabilizer autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer/populate_reagents()
 	add_to_reagents(/decl/material/liquid/stabilizer, 5)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
-	name = "emergency painkiller autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers/populate_reagents()
 	add_to_reagents(/decl/material/liquid/painkillers, 5)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins
-	name = "emergency antitoxins autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins/populate_reagents()
 	add_to_reagents(/decl/material/liquid/antitoxins, 5)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds
-	name = "emergency oxygel autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds/populate_reagents()
 	add_to_reagents(/decl/material/liquid/oxy_meds, 5)
+	. = ..()
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
-	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline/populate_reagents()
 	add_to_reagents(/decl/material/liquid/adrenaline, 8)
+	. = ..()
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood
-	name = "emergency nanoblood autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood/populate_reagents()
 	add_to_reagents(/decl/material/liquid/nanoblood, 5)
+	. = ..()
 
 // Inhalers
 

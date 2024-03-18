@@ -108,6 +108,10 @@
 	var/decl/strata/strata
 	///The base material randomly chosen from the strata for this level.
 	var/decl/material/strata_base_material
+	///Strata types to forbid from generating on this level.
+	var/list/forbid_strata = list(
+		/decl/strata/permafrost
+	)
 	///The default base turf type for the whole level. It will be the base turf type for the z level, unless loaded by map.
 	/// filler_turf overrides what turfs the level will be created with.
 	var/base_turf = /turf/space
@@ -270,7 +274,7 @@
 
 		for(var/stype in all_strata)
 			var/decl/strata/strata = all_strata[stype]
-			if(strata.is_valid_level_stratum(src))
+			if(!is_type_in_list(strata, forbid_strata) && strata.is_valid_level_stratum(src))
 				possible_strata += stype
 
 		strata = DEFAULTPICK(possible_strata, GET_DECL(/decl/strata/sedimentary))

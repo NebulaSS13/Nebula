@@ -3,11 +3,11 @@
 	name = "space bear"
 	desc = "RawrRawr!!"
 	icon = 'icons/mob/simple_animal/bear_space.dmi'
-	speak = list("RAWR!","Rawr!","GRR!","Growl!")
-	speak_emote = list("growls", "roars")
-	emote_hear = list("rawrs","grumbles","grawls")
-	emote_see = list("stares ferociously", "stomps")
-	speak_chance = 1
+	speak_emote  = list("growls", "roars")
+	emote_speech = list("RAWR!","Rawr!","GRR!","Growl!")
+	emote_hear   = list("rawrs","grumbles","grawls")
+	emote_see    = list("stares ferociously", "stomps")
+	speak_chance = 0.5
 	turns_per_move = 5
 	see_in_dark = 6
 	response_harm = "pokes"

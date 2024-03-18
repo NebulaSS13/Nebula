@@ -1708,7 +1708,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-3	},
+	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
 	icon_state = "1-2"

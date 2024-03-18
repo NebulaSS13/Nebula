@@ -67,7 +67,7 @@
 	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	base_type = /obj/machinery/vending/wallmed2
 	products = list(
-		/obj/item/chems/hypospray/autoinjector = 5,
+		/obj/item/chems/hypospray/autoinjector/stabilizer = 5,
 		/obj/item/stack/medical/bruise_pack = 4,
 		/obj/item/stack/medical/ointment = 4,
 		/obj/item/storage/med_pouch/trauma,
@@ -76,6 +76,9 @@
 		/obj/item/storage/med_pouch/toxin,
 		/obj/item/storage/med_pouch/radiation
 	)
-	contraband = list(/obj/item/chems/pill/bromide = 3, /obj/item/chems/hypospray/autoinjector/pain = 2)
+	contraband = list(
+		/obj/item/chems/pill/bromide = 3, 
+		/obj/item/chems/hypospray/autoinjector/pain = 2
+	)
 	directional_offset = @'{"NORTH":{"y":-24}, "SOUTH":{"y":24}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
