@@ -10,13 +10,12 @@
 	matter = list(
 		/decl/material/solid/organic/cardboard = MATTER_AMOUNT_REINFORCEMENT
 	)
-	storage_type = /datum/extension/storage/bible
+	storage = /datum/storage/bible
 	var/renamed = 0
 	var/icon_changed = 0
 
 /obj/item/bible/Initialize()
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 
@@ -93,7 +92,6 @@
 			LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = TRUE))
 
 /obj/item/bible/attackby(obj/item/W, mob/user)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage?.use_sound)
 		playsound(loc, storage.use_sound, 50, 1, -5)
 	return ..()

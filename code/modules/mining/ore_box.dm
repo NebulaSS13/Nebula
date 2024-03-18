@@ -29,18 +29,17 @@
 /obj/structure/ore_box/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/stack/material/ore))
 		return insert_ore(W, user)
-	var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
-	if(storage)
+	if(W.storage)
 		var/added_ore = FALSE
-		storage.hide_from(usr)
-		for(var/obj/item/stack/material/ore/O in storage.get_contents())
+		W.storage.hide_from(usr)
+		for(var/obj/item/stack/material/ore/O in W.storage.get_contents())
 			if(total_ores >= maximum_ores)
 				break
-			storage.remove_from_storage(user, O, src, TRUE) //This will move the item to this item's contents
+			W.storage.remove_from_storage(user, O, src, TRUE) //This will move the item to this item's contents
 			insert_ore(O)
 			added_ore = TRUE
 		if(added_ore)
-			storage.finish_bulk_removal()
+			W.storage.finish_bulk_removal()
 			to_chat(user, SPAN_NOTICE("You empty \the [W] into \the [src]."))
 			return TRUE
 	return ..()

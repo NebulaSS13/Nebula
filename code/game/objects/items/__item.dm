@@ -152,7 +152,6 @@
 
 	reconsider_single_icon()
 
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		if(storage.allow_quick_empty)
 			verbs += /obj/item/proc/quick_empty
@@ -177,7 +176,6 @@
 			LAZYREMOVE(organ.implants, src)
 		M.drop_from_inventory(src)
 
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(istype(storage))
 		// some ui cleanup needs to be done
 		storage.on_item_pre_deletion(src) // must be done before deletion // TODO: ADD PRE_DELETION OBSERVATION
@@ -326,11 +324,9 @@
 
 /obj/item/handle_mouse_drop(atom/over, mob/user, params)
 
-	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED) && over == user)
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		if(storage)
-			storage.open(user)
-			return TRUE
+	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED) && over == user && storage)
+		storage.open(user)
+		return TRUE
 
 	if(over == user)
 		usr.face_atom(src)
@@ -353,9 +349,8 @@
 	var/obj/screen/inventory/inv = over
 	if(user.client && istype(inv) && inv.slot_id && (over in user.client.screen))
 		// Remove the item from our bag if necessary.
-		var/datum/extension/storage/storage = loc && get_extension(loc, /datum/extension/storage)
-		if(istype(storage))
-			storage.remove_from_storage(user, src)
+		if(istype(loc?.storage))
+			loc.storage.remove_from_storage(user, src)
 			dropInto(get_turf(loc))
 		// Otherwise remove it from our inventory if necessary.
 		else if(ismob(loc))
@@ -457,19 +452,17 @@
 				else
 					dropInto(get_turf(user))
 				return TRUE
-			var/datum/extension/storage/loc_storage = get_extension(loc, /datum/extension/storage)
-			if(loc_storage)
+			if(loc?.storage)
 				visible_message(SPAN_NOTICE("\The [user] fumbles \the [src] out of \the [loc]."))
-				loc_storage.remove_from_storage(user, src)
+				loc.storage.remove_from_storage(user, src)
 				dropInto(get_turf(loc))
 				return TRUE
 		to_chat(user, SPAN_WARNING("You are not dexterous enough to pick up \the [src]."))
 		return TRUE
 
 	var/old_loc = loc
-	var/datum/extension/storage/loc_storage = get_extension(loc, /datum/extension/storage)
-	if(loc_storage)
-		loc_storage.remove_from_storage(user, src)
+	if(loc?.storage)
+		loc.storage.remove_from_storage(user, src)
 
 	if(!QDELETED(throwing))
 		throwing.finalize(hit=TRUE)
@@ -513,16 +506,14 @@
 	if(SSfabrication.try_craft_with(W, src, user))
 		return TRUE
 
-	if(istype(W, /atom/movable))
-		var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
-		if(storage?.use_to_pickup)
-			if(storage.collection_mode) //Mode is set to collect all items
-				if(isturf(src.loc))
-					storage.gather_all(src.loc, user)
-				return TRUE
-			else if(storage.can_be_inserted(src, user))
-				storage.handle_item_insertion(src)
-				return TRUE
+	if(W.storage?.use_to_pickup)
+		if(W.storage.collection_mode) //Mode is set to collect all items
+			if(isturf(src.loc))
+				W.storage.gather_all(src.loc, user)
+			return TRUE
+		else if(W.storage.can_be_inserted(src, user))
+			W.storage.handle_item_insertion(src)
+			return TRUE
 
 	if(has_extension(src, /datum/extension/loaded_cell))
 		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
@@ -536,7 +527,6 @@
 /obj/item/attack_ghost(mob/user)
 	var/mob/observer/ghost/G = user
 	if(G.client?.holder || G.antagHUD)
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 		storage?.show_to(user)
 
 /obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
@@ -571,11 +561,11 @@
 		pixel_y = 0
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
-/obj/item/proc/on_exit_storage(datum/extension/storage/S)
+/obj/item/proc/on_exit_storage(datum/storage/S)
 	return
 
 // called when this item is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
-/obj/item/proc/on_enter_storage(datum/extension/storage/S)
+/obj/item/proc/on_enter_storage(datum/storage/S)
 	return
 
 // called when "found" in pockets and storage items. Returns 1 if the search should end.
@@ -634,10 +624,7 @@
 			// Putting stuff into backpacks.
 			if(slot_in_backpack_str)
 				var/obj/item/back = user.get_equipped_item(slot_back_str)
-				if(!istype(back))
-					return FALSE
-				var/datum/extension/storage/storage = get_extension(back, /datum/extension/storage)
-				return storage?.can_be_inserted(src, user, TRUE)
+				return back?.storage?.can_be_inserted(src, user, TRUE)
 
 			// Equipping accessories.
 			if(slot_tie_str)
@@ -1086,16 +1073,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return BASE_STORAGE_COST(w_class)
 
 /obj/item/receive_mouse_drop(atom/dropping, mob/user, params)
-	. = ..()
-	if(!.)
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		if(storage?.scoop_inside(dropping, user))
-			return TRUE
+	. = ..() || storage?.scoop_inside(dropping, user)
 
 /obj/item/proc/toggle_gathering_mode()
 	set name = "Switch Gathering Method"
 	set category = "Object"
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(!storage)
 		verbs = /obj/item/proc/toggle_gathering_mode
 		return
@@ -1109,7 +1091,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/quick_empty()
 	set name = "Empty Contents"
 	set category = "Object"
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(!storage)
 		verbs = /obj/item/proc/quick_empty
 		return
@@ -1119,10 +1100,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/attack_self(mob/user)
 	//Clicking on itself will empty it, if it has the verb to do that.
-	if(user.get_active_hand() == src)
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		if(storage?.allow_quick_empty)
-			quick_empty()
-			return TRUE
+	if(user.get_active_hand() == src && storage?.allow_quick_empty)
+		quick_empty()
+		return TRUE
 	return ..()
 

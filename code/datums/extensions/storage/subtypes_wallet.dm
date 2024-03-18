@@ -1,4 +1,4 @@
-/datum/extension/storage/wallet
+/datum/storage/wallet
 	max_w_class = ITEM_SIZE_SMALL //Don't worry, see can_hold[]
 	max_storage_space = 8
 	can_hold = list(
@@ -38,7 +38,7 @@
 		/obj/item/clothing/accessory/armor/tag,
 	)
 
-/datum/extension/storage/wallet/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
+/datum/storage/wallet/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
 	. = ..()
 	if(. && istype(holder, /obj/item/wallet))
 		var/obj/item/wallet/wallet = holder
@@ -49,7 +49,7 @@
 		if(W == wallet.front_stick)
 			wallet.front_stick = null
 
-/datum/extension/storage/wallet/handle_item_insertion(obj/item/W, prevent_warning = 0)
+/datum/storage/wallet/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..(W, prevent_warning)
 	if(. && istype(holder, /obj/item/wallet))
 		var/obj/item/wallet/wallet = holder

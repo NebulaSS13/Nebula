@@ -10,16 +10,14 @@
 	w_class = ITEM_SIZE_NORMAL
 	key_type = /obj/item/chems/food/egg
 	use_single_icon_overlay_state = "eggbox"
-	storage_type = /datum/extension/storage/box/egg
+	storage = /datum/storage/box/egg
 
 /obj/item/box/fancy/egg_box/update_icon_state()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	icon_state = get_world_inventory_state()
 	if(storage?.opened)
 		icon_state = "[icon_state]_open"
 
 /obj/item/box/fancy/egg_box/add_contents_overlays()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	return storage?.opened && ..()
 
 /obj/item/box/fancy/egg_box/adjust_contents_overlay(var/overlay_index, var/image/overlay)

@@ -77,9 +77,8 @@
 			player.equip_to_slot(T, slot)
 			if(T.loc == player)
 				return
-		for(var/obj/item/thing in player.get_mob_contents())
-			var/datum/extension/storage/storage = get_extension(thing, /datum/extension/storage)
-			if(storage)
+		for(var/atom/thing in player.get_mob_contents())
+			if(thing.storage)
 				T.forceMove(thing)
 				break
 

@@ -2,7 +2,7 @@
 	name = "shoulder holster"
 	desc = "A handgun holster."
 	icon = 'icons/clothing/accessories/holsters/holster.dmi'
-	storage_type = /datum/extension/storage/holster/shoulder
+	storage = /datum/storage/holster/shoulder
 	accessory_slot = ACCESSORY_SLOT_HOLSTER
 	var/list/can_holster = null
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
@@ -10,7 +10,7 @@
 
 /obj/item/clothing/accessory/webbing/holster/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/holster, get_extension(src, /datum/extension/storage), sound_in, sound_out, can_holster)
+	set_extension(src, /datum/extension/holster, storage, sound_in, sound_out, can_holster)
 
 /obj/item/clothing/accessory/webbing/holster/attackby(obj/item/W, mob/user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)

@@ -8,7 +8,7 @@
 	icon_state = ICON_STATE_WORLD
 	item_state = null
 	use_single_icon_overlay_state = "donutbox"
-	storage_type = /datum/extension/storage/box/donut
+	storage = /datum/storage/box/donut
 
 /obj/item/box/fancy/donut/update_icon_state()
 	icon_state = get_world_inventory_state()

@@ -6,5 +6,5 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	storage_type = /datum/extension/storage/basket
+	storage = /datum/storage/basket
 	material = /decl/material/solid/organic/plantmatter/grass/dry

@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/organic/plastic
 	key_type = /obj/item/chems/glass/beaker/vial
-	storage_type = /datum/extension/storage/box/vials
+	storage = /datum/storage/box/vials
 
 /obj/item/box/fancy/vials/WillContain()
 	return list(/obj/item/chems/glass/beaker/vial = 12)

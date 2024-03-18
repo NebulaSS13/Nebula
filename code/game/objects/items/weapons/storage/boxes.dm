@@ -27,14 +27,14 @@
 	item_state = "syringe_kit"
 	material = /decl/material/solid/organic/cardboard
 	obj_flags = OBJ_FLAG_HOLLOW
-	storage_type = /datum/extension/storage/box
+	storage = /datum/storage/box
 	var/foldable = /obj/item/stack/material/cardstock
 
 /obj/item/box/large
 	name = "large box"
 	icon_state = "largebox"
 	w_class = ITEM_SIZE_LARGE
-	storage_type = /datum/extension/storage/box/large
+	storage = /datum/storage/box/large
 
 /obj/item/box/union_cards
 	name = "box of union cards"
@@ -155,7 +155,7 @@
 	icon = 'icons/obj/items/storage/ammobox.dmi'
 	icon_state = "ammo"
 	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	storage_type = /datum/extension/storage/box/metal
+	storage = /datum/storage/box/metal
 
 /obj/item/box/ammo/blanks
 	name = "box of blank shells"
@@ -355,7 +355,7 @@
 	desc = "Drymate brand monkey cubes. Just add water!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
-	storage_type = /datum/extension/storage/box/monkey
+	storage = /datum/storage/box/monkey
 
 /obj/item/box/monkeycubes/WillContain()
 	return list(/obj/item/chems/food/monkeycube/wrapped = 5)
@@ -412,7 +412,7 @@
 	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
 	icon = 'icons/obj/toy/toy.dmi'
 	icon_state = "spbox"
-	storage_type = /datum/extension/storage/box/snappop
+	storage = /datum/storage/box/snappop
 
 /obj/item/box/snappops/WillContain()
 	return list(/obj/item/toy/snappop = 8)
@@ -430,11 +430,10 @@
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
-	storage_type = /datum/extension/storage/box/lights
+	storage = /datum/storage/box/lights
 
 /obj/item/box/lights/Initialize(ml, material_key)
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 
@@ -511,7 +510,7 @@
 	icon_state = "portafreezer"
 	item_state = "medicalpack"
 	foldable = null
-	storage_type = /datum/extension/storage/box/freezer
+	storage = /datum/storage/box/freezer
 	w_class = ITEM_SIZE_LARGE
 	temperature = -16 CELSIUS
 
@@ -522,7 +521,7 @@
 	name = "checkers box"
 	desc = "This box holds a nifty portion of checkers. Foam-shaped on the inside so that only checkers may fit."
 	icon_state = "checkers"
-	storage_type = /datum/extension/storage/box/checkers
+	storage = /datum/storage/box/checkers
 	foldable = null
 
 /obj/item/box/checkers/WillContain()
@@ -723,7 +722,7 @@
 	icon = 'icons/obj/items/storage/part_pack.dmi'
 	icon_state = "part"
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/box/parts_pack
+	storage = /datum/storage/box/parts_pack
 
 /obj/item/box/parts_pack/Initialize(ml, material_key)
 	setup_name()

@@ -13,7 +13,7 @@
 /obj/item/secure_storage
 	name = "secstorage"
 	w_class = ITEM_SIZE_NORMAL
-	storage_type = /datum/extension/storage/secure
+	storage = /datum/storage/secure
 	material = /decl/material/solid/metal/steel
 	var/lock_type = /datum/extension/lockable/storage
 	var/icon_locking = "secureb"
@@ -78,14 +78,13 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
-	storage_type = /datum/extension/storage/secure/briefcase
+	storage = /datum/storage/secure/briefcase
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/secure_storage/briefcase/attack_hand(mob/user as mob)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/datum/extension/lockable/lock   = get_extension(src, /datum/extension/lockable)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(lock && storage)
 		if (loc == user && lock.locked)
 			to_chat(user, SPAN_WARNING("\The [src] is locked and cannot be opened!"))
@@ -111,7 +110,7 @@
 	lock_type = /datum/extension/lockable/storage/safe
 	icon_locking = "safeb"
 	icon_opened = "safe0"
-	storage_type = /datum/extension/storage/secure/safe
+	storage = /datum/storage/secure/safe
 
 /obj/item/secure_storage/safe/WillContain()
 	return list(

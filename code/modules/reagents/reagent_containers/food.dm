@@ -86,7 +86,7 @@
 
 /obj/item/chems/food/attackby(obj/item/W, mob/user)
 
-	if(has_extension(W, /datum/extension/storage))
+	if(W?.storage)
 		return ..()
 
 	// Plating food.

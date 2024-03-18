@@ -23,12 +23,7 @@
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 	var/list/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
 
-	// A type of /datum/extension/storage to use for this obj.
-	var/storage_type
-
 /obj/Initialize(mapload)
-	if(storage_type)
-		set_extension(src, storage_type)
 	//Health should be set to max_health only if it's null.
 	. = ..()
 	create_matter()

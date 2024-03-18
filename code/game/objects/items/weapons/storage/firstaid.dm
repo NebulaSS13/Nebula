@@ -16,7 +16,7 @@
 	throw_range = 8
 	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/organic/plastic
-	storage_type = /datum/extension/storage/firstaid
+	storage = /datum/storage/firstaid
 
 /obj/item/firstaid/empty
 	icon_state = "firstaid"
@@ -134,7 +134,7 @@
 	icon = 'icons/obj/items/storage/surgerykit.dmi'
 	icon_state = "surgerykit"
 	item_state = "firstaid-surgery"
-	storage_type = /datum/extension/storage/firstaid/surgery
+	storage = /datum/storage/firstaid/surgery
 
 /obj/item/firstaid/surgery/WillContain()
 	return list(
@@ -152,7 +152,7 @@
 
 /obj/item/firstaid/surgery/ghetto // Mostly just for debugging.
 	name = "shady surgery kit"
-	storage_type = /datum/extension/storage/firstaid/surgery/ghetto
+	storage = /datum/storage/firstaid/surgery/ghetto
 
 /obj/item/firstaid/surgery/ghetto/WillContain()
 	return list(

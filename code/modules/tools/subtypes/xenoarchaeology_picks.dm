@@ -112,7 +112,7 @@
 	slot_flags        = SLOT_LOWER_BODY
 	w_class           = ITEM_SIZE_NORMAL
 	material          = /decl/material/solid/organic/leather/synth
-	storage_type      = /datum/extension/storage/excavation
+	storage           = /datum/storage/excavation
 
 /obj/item/excavation/WillContain()
 	return list(
@@ -145,6 +145,5 @@
 		var/obj/item/tool/xeno/smallest = picksToSort[selected]
 		smallest.forceMove(src)
 		picksToSort -= smallest
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		storage.prepare_ui()

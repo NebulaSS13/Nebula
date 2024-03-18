@@ -7,7 +7,7 @@
 	anchored = TRUE
 	material = /decl/material/solid/glass
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
-	storage_type = /datum/extension/storage/structure/mirror
+	storage = /datum/storage/structure/mirror
 	directional_offset = @'{"NORTH":{"y":-29}, "SOUTH":{"y":29}, "EAST":{"x":29}, "WEST":{"x":-29}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/shattered = FALSE

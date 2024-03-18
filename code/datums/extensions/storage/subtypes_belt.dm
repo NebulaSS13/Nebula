@@ -1,8 +1,8 @@
-/datum/extension/storage/belt
+/datum/storage/belt
 	storage_slots = 7
 	max_w_class = ITEM_SIZE_NORMAL
 
-/datum/extension/storage/belt/utility
+/datum/storage/belt/utility
 	can_hold = list(
 		///obj/item/combitool,
 		/obj/item/crowbar,
@@ -28,7 +28,7 @@
 		/obj/item/clothing/gloves
 	)
 
-/datum/extension/storage/belt/medical
+/datum/storage/belt/medical
 	can_hold = list(
 		/obj/item/scanner/health,
 		/obj/item/scanner/breath,
@@ -57,7 +57,7 @@
 		/obj/item/clothing/gloves
 	)
 
-/datum/extension/storage/belt/security
+/datum/storage/belt/security
 	can_hold = list(
 		/obj/item/crowbar,
 		/obj/item/grenade,
@@ -86,7 +86,7 @@
 		/obj/item/cell/gun
 	)
 
-/datum/extension/storage/belt/general
+/datum/storage/belt/general
 	can_hold = list(
 		/obj/item/flash,
 		/obj/item/telebaton,
@@ -118,7 +118,7 @@
 		/obj/item/crowbar
 	)
 
-/datum/extension/storage/belt/janitor
+/datum/storage/belt/janitor
 	can_hold = list(
 		/obj/item/grenade/chem_grenade,
 		/obj/item/lightreplacer,
@@ -132,7 +132,7 @@
 		/obj/item/plunger
 	)
 
-/datum/extension/storage/belt/archaeology
+/datum/storage/belt/archaeology
 	can_hold = list(
 		/obj/item/core_sampler,
 		/obj/item/pinpointer/radio,
@@ -159,31 +159,31 @@
 		/obj/item/tool/xeno/hand
 	)
 
-/datum/extension/storage/belt/soulstone
+/datum/storage/belt/soulstone
 	can_hold = list(
 		/obj/item/soulstone
 	)
 
-/datum/extension/storage/belt/champion
+/datum/storage/belt/champion
 	storage_slots = null
 	max_storage_space = ITEM_SIZE_SMALL
 	can_hold = list(
 		/obj/item/clothing/mask/luchador
 	)
 
-/datum/extension/storage/holster/security/tactical
+/datum/storage/holster/security/tactical
 	storage_slots = 10
 
-/datum/extension/storage/belt/waistpack
+/datum/storage/belt/waistpack
 	storage_slots = null
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = ITEM_SIZE_SMALL * 4
 
-/datum/extension/storage/belt/waistpack/big
+/datum/storage/belt/waistpack/big
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = ITEM_SIZE_NORMAL * 4
 
-/datum/extension/storage/belt/firefighter
+/datum/storage/belt/firefighter
 	storage_slots = 6
 	can_hold = list(
 		/obj/item/grenade/chem_grenade/water,

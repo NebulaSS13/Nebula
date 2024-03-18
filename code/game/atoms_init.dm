@@ -1,6 +1,14 @@
 // Atom-level definitions
 
 /atom/New(loc, ...)
+
+	// Do this as early as humanly possible to replicate previous type-based storage behavior.
+	if(storage)
+		if(ispath(storage))
+			storage = new(src)
+		if(!istype(storage))
+			storage = null
+
 	//atom creation method that preloads variables at creation
 	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		global._preloader.load(src)
@@ -72,6 +80,7 @@
 /atom/Destroy()
 	UNQUEUE_TEMPERATURE_ATOM(src)
 
+	QDEL_NULL(storage)
 	QDEL_NULL(reagents)
 
 	LAZYCLEARLIST(our_overlays)

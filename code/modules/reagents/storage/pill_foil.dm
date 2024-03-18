@@ -5,7 +5,7 @@
 	icon_state = "pill_pack"
 	pop_sound = 'sound/effects/pop.ogg'
 	color = COLOR_GRAY80
-	storage_type = /datum/extension/storage/pillbottle/foil
+	storage = /datum/storage/pillbottle/foil
 	var/pill_type
 	var/pill_count = 4
 	var/pill_positions

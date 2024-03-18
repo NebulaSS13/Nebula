@@ -95,7 +95,7 @@
 		/obj/item/taperecorder
 	)
 	protects_against_weather = TRUE
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/det_trench/grey
 	name = "grey trenchcoat"
@@ -128,7 +128,7 @@
 		)
 	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/forensics/red
 	name = "red jacket"
@@ -234,7 +234,7 @@
 		/obj/item/clothing/head/hardhat/ems
 	)
 	body_parts_covered = SLOT_UPPER_BODY
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/surgicalapron
 	name = "surgical apron"

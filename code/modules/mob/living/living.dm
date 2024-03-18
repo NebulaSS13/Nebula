@@ -258,8 +258,7 @@ default behaviour is:
 		if(thing in .)
 			continue
 		LAZYDISTINCTADD(., thing)
-		var/datum/extension/storage/storage = get_extension(thing, /datum/extension/storage)
-		var/list/storage_contents = storage?.return_inv()
+		var/list/storage_contents = thing?.storage?.return_inv()
 		if(length(storage_contents))
 			gear_tree |= storage_contents
 

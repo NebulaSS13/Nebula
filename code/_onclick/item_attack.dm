@@ -30,7 +30,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return A.attackby(src, user, click_params)
 
 /atom/proc/attackby(obj/item/W, mob/user, var/click_params)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		if(isrobot(user) && (W == user.get_active_hand()))
 			return //Robots can't store their modules.

@@ -1,6 +1,6 @@
-/datum/extension/storage
-	base_type = /datum/extension/storage
-	expected_type = /atom
+/datum/storage
+	var/atom/holder
+	var/expected_type = /atom
 
 	/// Has the storage been opened?
 	var/opened = FALSE
@@ -29,45 +29,53 @@
 	/// What storage UI do we use?
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
 
-/datum/extension/storage/New()
+/datum/storage/New(atom/_holder)
+
+	if(!istype(_holder))
+		PRINT_STACK_TRACE("Storage datum initialized with non-atom holder '[_holder || "NULL"].")
+		qdel(src)
+		return
+
+	holder = _holder
 	if(isnull(max_storage_space) && !isnull(storage_slots))
 		max_storage_space = storage_slots * BASE_STORAGE_COST(max_w_class)
 	storage_ui = new storage_ui(src)
 	prepare_ui()
 	..()
 
-/datum/extension/storage/Destroy()
+/datum/storage/Destroy()
+	if(holder)
+		if(holder.storage == src)
+			holder.storage = null
+		holder = null
 	if(istype(storage_ui))
 		QDEL_NULL(storage_ui)
 	. = ..()
 
-/datum/extension/storage/proc/get_contents()
-	var/atom/atom_holder = isatom(holder) ? holder : null
-	return atom_holder?.get_stored_inventory()
+/datum/storage/proc/get_contents()
+	return holder?.get_stored_inventory()
 
-/datum/extension/storage/proc/return_inv()
+/datum/storage/proc/return_inv()
 	. = get_contents()
-	for(var/obj/item/thing in .)
-		var/datum/extension/storage/storage = get_extension(thing, /datum/extension/storage)
-		var/list/storage_inv = storage?.return_inv()
+	for(var/atom/thing in .)
+		var/list/storage_inv = thing.storage?.return_inv()
 		if(storage_inv)
 			LAZYDISTINCTADD(., storage_inv)
 
-/datum/extension/storage/proc/show_to(mob/user)
+/datum/storage/proc/show_to(mob/user)
 	if(storage_ui)
 		storage_ui.show_to(user)
 
-/datum/extension/storage/proc/hide_from(mob/user)
+/datum/storage/proc/hide_from(mob/user)
 	if(storage_ui)
 		storage_ui.hide_from(user)
 
-/datum/extension/storage/proc/open(mob/user)
+/datum/storage/proc/open(mob/user)
 	if(!opened)
 		opened = TRUE
-		if(isatom(holder))
-			var/atom/atom_holder = holder
-			playsound(atom_holder.loc, open_sound, 50, 0, -5)
-			atom_holder.queue_icon_update()
+		if(holder)
+			playsound(holder.loc, open_sound, 50, 0, -5)
+			holder.queue_icon_update()
 	if (use_sound)
 		playsound(holder, use_sound, 50, 0, -5)
 	if (isrobot(user) && user.hud_used)
@@ -79,33 +87,32 @@
 	storage_ui.on_open(user)
 	storage_ui.show_to(user)
 
-/datum/extension/storage/proc/prepare_ui()
+/datum/storage/proc/prepare_ui()
 	storage_ui.prepare_ui()
 
-/datum/extension/storage/proc/close(mob/user)
+/datum/storage/proc/close(mob/user)
 	hide_from(user)
 	if(storage_ui)
 		storage_ui.after_close(user)
 
-/datum/extension/storage/proc/close_all()
+/datum/storage/proc/close_all()
 	if(storage_ui)
 		storage_ui.close_all()
 
-/datum/extension/storage/proc/storage_space_used()
+/datum/storage/proc/storage_space_used()
 	. = 0
 	for(var/obj/item/I in get_contents())
 		. += I.get_storage_cost()
 
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
-/datum/extension/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
+/datum/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
 	if(user && !user.canUnEquip(W))
 		return 0
 
-	var/atom/atom_holder = holder
-	if(!isatom(atom_holder) || atom_holder.loc == W)
+	if(!holder || holder.loc == W)
 		return 0 //Means the item is already in the storage item
 
 	if(storage_slots != null && length(get_contents()) >= storage_slots)
@@ -169,7 +176,7 @@
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/datum/extension/storage/proc/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
+/datum/storage/proc/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
 	if(!istype(W))
 		return 0
 	if(ismob(W.loc))
@@ -178,10 +185,8 @@
 			return
 	W.forceMove(holder)
 	W.on_enter_storage(src)
-	var/atom/atom_holder = holder
 	if(usr)
-		if(istype(atom_holder))
-			atom_holder.add_fingerprint(usr)
+		holder.add_fingerprint(usr)
 		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
@@ -192,30 +197,28 @@
 					M.show_message(SPAN_NOTICE("\The [usr] puts [W] into [holder]."), VISIBLE_MESSAGE)
 		if(!NoUpdate)
 			update_ui_after_item_insertion()
-	if(istype(atom_holder))
-		atom_holder.update_icon()
+	holder.update_icon()
 	return 1
 
-/datum/extension/storage/proc/update_ui_after_item_insertion()
+/datum/storage/proc/update_ui_after_item_insertion()
 	prepare_ui()
 	if(storage_ui)
 		storage_ui.on_insertion(usr)
 
-/datum/extension/storage/proc/update_ui_after_item_removal()
+/datum/storage/proc/update_ui_after_item_removal()
 	prepare_ui()
 	if(storage_ui)
 		storage_ui.on_post_remove(usr)
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
-/datum/extension/storage/proc/remove_from_storage(mob/user, obj/item/W, atom/new_location, var/NoUpdate = 0)
+/datum/storage/proc/remove_from_storage(mob/user, obj/item/W, atom/new_location, var/NoUpdate = 0)
 	if(!istype(W))
 		return FALSE
 	new_location = new_location || get_turf(holder)
 	if(storage_ui)
 		storage_ui.on_pre_remove(user, W)
-	if(isatom(holder))
-		var/atom/atom_holder = holder
-		if(ismob(atom_holder.loc))
+	if(holder)
+		if(ismob(holder.loc))
 			W.dropped(user)
 	if(ismob(new_location))
 		W.hud_layerise()
@@ -227,32 +230,27 @@
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
-	if(!NoUpdate && isatom(holder))
-		var/atom/atom_holder = holder
-		atom_holder.update_icon()
+	if(!NoUpdate && holder)
+		holder.update_icon()
 	return 1
 
 // Only do ui functions for now; the obj is responsible for anything else.
-/datum/extension/storage/proc/on_item_pre_deletion(obj/item/W)
+/datum/storage/proc/on_item_pre_deletion(obj/item/W)
 	if(storage_ui)
 		storage_ui.on_pre_remove(null, W) // Supposed to be able to handle null user.
 
 // Only do ui functions for now; the obj is responsible for anything else.
-/datum/extension/storage/proc/on_item_post_deletion(obj/item/W)
+/datum/storage/proc/on_item_post_deletion(obj/item/W)
 	if(storage_ui)
 		update_ui_after_item_removal()
-	if(isatom(holder))
-		var/atom/atom_holder = holder
-		atom_holder.queue_icon_update()
+	holder?.queue_icon_update()
 
 //Run once after using remove_from_storage with NoUpdate = 1
-/datum/extension/storage/proc/finish_bulk_removal()
+/datum/storage/proc/finish_bulk_removal()
 	update_ui_after_item_removal()
-	if(isatom(holder))
-		var/atom/atom_holder = holder
-		atom_holder.update_icon()
+	holder?.update_icon()
 
-/datum/extension/storage/proc/gather_all(var/turf/T, var/mob/user)
+/datum/storage/proc/gather_all(var/turf/T, var/mob/user)
 	var/success = 0
 	var/failure = 0
 	for(var/obj/item/I in T)
@@ -270,15 +268,14 @@
 	else
 		to_chat(user, SPAN_NOTICE("You fail to pick anything up with \the [holder]."))
 
-/datum/extension/storage/proc/scoop_inside(mob/living/scooped, mob/living/user)
+/datum/storage/proc/scoop_inside(mob/living/scooped, mob/living/user)
 	if(!istype(scooped))
 		return FALSE
-	var/atom/atom_holder = holder
-	if(!istype(atom_holder) || !scooped.holder_type || scooped.buckled || LAZYLEN(scooped.pinned) || scooped.mob_size > MOB_SIZE_SMALL || scooped != user || atom_holder.loc == scooped)
+	if(!istype(holder) || !scooped.holder_type || scooped.buckled || LAZYLEN(scooped.pinned) || scooped.mob_size > MOB_SIZE_SMALL || scooped != user || holder.loc == scooped)
 		return FALSE
 	if(!do_after(user, 1 SECOND, holder))
 		return FALSE
-	if(!istype(atom_holder) || !atom_holder.Adjacent(scooped) || scooped.incapacitated())
+	if(!istype(holder) || !holder.Adjacent(scooped) || scooped.incapacitated())
 		return
 	var/obj/item/holder/H = new scooped.holder_type(get_turf(scooped))
 	if(H)
@@ -290,7 +287,7 @@
 		qdel(H)
 	return FALSE
 
-/datum/extension/storage/proc/make_exact_fit()
+/datum/storage/proc/make_exact_fit()
 	var/list/contents = get_contents()
 	var/contents_length = length(contents)
 	if(contents_length <= 0)
@@ -304,13 +301,13 @@
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
 
-/datum/extension/storage/proc/quick_empty(mob/user, var/turf/dump_loc)
+/datum/storage/proc/quick_empty(mob/user, var/turf/dump_loc)
 	hide_from(user)
 	for(var/obj/item/I in get_contents())
 		remove_from_storage(user, I, dump_loc, 1)
 	finish_bulk_removal()
 
-/datum/extension/storage/proc/handle_mouse_drop(mob/user, obj/over_object, params)
+/datum/storage/proc/handle_mouse_drop(mob/user, obj/over_object, params)
 	var/atom/atom = holder
 	if(!istype(atom))
 		return FALSE

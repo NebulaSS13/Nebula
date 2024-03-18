@@ -63,21 +63,19 @@
 	if(istype(A) && imp)
 		var/obj/item/implant/compressed/c = imp
 		if (c.scanned)
-			if (!has_extension(A, /datum/extension/storage))
+			if (!A.storage)
 				to_chat(user, "<span class='warning'>Something is already compressed inside the implant!</span>")
 			return
 		else if(safe)
-			if (!has_extension(A, /datum/extension/storage))
+			if (!A.storage)
 				to_chat(user, "<span class='warning'>The matter compressor safeties prevent you from doing that.</span>")
 			return
 		if(ishuman(A.loc))
 			var/mob/living/carbon/human/H = A.loc
 			if(!H.try_unequip(A))
 				return
-		else if(isobj(A.loc))
-			var/datum/extension/storage/storage = get_extension(A.loc, /datum/extension/storage)
-			if(storage)
-				storage.remove_from_storage(user, A)
+		else if(isobj(A.loc) && A.loc.storage)
+			A.loc.storage.remove_from_storage(user, A)
 		c.scanned = A
 		A.forceMove(src)  //Store it inside
 		safe = 2

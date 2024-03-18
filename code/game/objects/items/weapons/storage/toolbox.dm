@@ -11,7 +11,7 @@
 	throw_speed = 1
 	throw_range = 7
 	w_class = ITEM_SIZE_LARGE
-	storage_type = /datum/extension/storage/toolbox
+	storage = /datum/storage/toolbox
 	origin_tech = @'{"combat":1}'
 	attack_verb = list("robusted")
 	material = /decl/material/solid/metal/aluminium

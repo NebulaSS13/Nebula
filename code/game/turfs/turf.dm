@@ -260,9 +260,7 @@
 
 			return TRUE
 
-		var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
-		if(storage?.collection_mode)
-			storage.gather_all(src, user)
+		if(W?.storage?.collection_mode && W.storage.gather_all(src, user))
 			return TRUE
 
 	if(ATOM_IS_OPEN_CONTAINER(W) && W.reagents && reagents?.total_volume >= FLUID_PUDDLE)
@@ -272,12 +270,9 @@
 			reagents.trans_to(W, taking)
 			return TRUE
 
-	if(istype(W, /obj/item))
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		if(istype(storage))
-			if(storage.use_to_pickup && storage.collection_mode)
-				storage.gather_all(src, user)
-			return TRUE
+	if(istype(W, /obj/item) && storage && storage.use_to_pickup && storage.collection_mode)
+		storage.gather_all(src, user)
+		return TRUE
 
 	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W

@@ -11,9 +11,8 @@
 /atom/proc/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 
-	if(can_interact_with_storage(user, strict = TRUE) && has_extension(src, /datum/extension/storage) && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
+	if(can_interact_with_storage(user, strict = TRUE) && storage && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
 		add_fingerprint(user)
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 		storage.open(user)
 		return TRUE
 

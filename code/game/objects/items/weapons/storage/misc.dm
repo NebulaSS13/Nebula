@@ -33,7 +33,7 @@
 	icon_state = "cigpaperbook"
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/cigpapers
+	storage = /datum/storage/cigpapers
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/plastic
@@ -64,7 +64,7 @@
 	icon_state = "placeholder"
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/chewables
+	storage = /datum/storage/chewables
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/tin
@@ -75,7 +75,7 @@
 //loose leaf
 /obj/item/chewables/rollable
 	name = "bag of tobacco"
-	storage_type = /datum/extension/storage/chewables/rollable
+	storage = /datum/storage/chewables/rollable
 
 /obj/item/chewables/rollable/bad
 	name = "bag of Men at Arms tobacco"
@@ -136,7 +136,7 @@
 	name = "pack of Getmore Cookies"
 	desc = "A pack of delicious cookies, and possibly the only product in Getmores Chocolate Corp lineup that has any trace of chocolate in it."
 	icon_state = "cookiebag"
-	storage_type = /datum/extension/storage/chewables/cookies
+	storage = /datum/storage/chewables/cookies
 
 /obj/item/chewables/candy/cookies/WillContain()
 	return list(/obj/item/chems/food/cookie = 6)
@@ -145,7 +145,7 @@
 	name = "pack of Rainbo-Gums"
 	desc = "A mixed pack of delicious fruit flavored bubble-gums!"
 	icon_state = "gumpack"
-	storage_type = /datum/extension/storage/chewables/gum
+	storage = /datum/storage/chewables/gum
 
 /obj/item/chewables/candy/gum/WillContain()
 	return list(/obj/item/clothing/mask/chewable/candy/gum = 8)
@@ -154,7 +154,7 @@
 	name = "pack of medicinal lollipops"
 	desc = "A mixed pack of medicinal flavored lollipops. These have no business being on store shelves."
 	icon_state = "lollipack"
-	storage_type = /datum/extension/storage/chewables/lollipops
+	storage = /datum/storage/chewables/lollipops
 
 /obj/item/chewables/candy/medicallollis/WillContain()
 	return list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 20)
@@ -167,7 +167,7 @@
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 	material = /decl/material/solid/glass
-	storage_type = /datum/extension/storage/chewables/lollipops
+	storage = /datum/storage/chewables/lollipops
 
 /obj/item/medical_lolli_jar/WillContain()
 	return list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)

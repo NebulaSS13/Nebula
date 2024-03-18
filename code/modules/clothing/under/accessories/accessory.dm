@@ -31,9 +31,8 @@
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user)
 	if(istype(loc, /obj/item/clothing))
-		if(has_extension(src, /datum/extension/storage) && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
+		if(storage && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
 			add_fingerprint(user)
-			var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 			storage.open(user)
 			return TRUE
 		return FALSE //we aren't an object on the ground so don't call parent

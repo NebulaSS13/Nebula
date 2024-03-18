@@ -5,7 +5,7 @@
 	icon = 'icons/obj/items/storage/picnic_basket.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
-	storage_type = /datum/extension/storage/picnic_basket
+	storage = /datum/storage/picnic_basket
 	attack_verb = list("picnics")
 	material = /decl/material/solid/organic/plastic
 	var/tmp/filled = FALSE

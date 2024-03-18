@@ -12,7 +12,7 @@
 	name = "shipping jacket"
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
 	icon = 'mods/content/corporate/icons/clothing/suit/mbill.dmi'
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/toggle/wintercoat/dais
 	name = "\improper DAIS winter coat"

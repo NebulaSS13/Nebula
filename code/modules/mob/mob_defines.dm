@@ -109,7 +109,7 @@
 	var/decl/move_intent/default_walk_intent
 	var/decl/move_intent/default_run_intent
 
-	var/datum/extension/storage/active_storage
+	var/datum/storage/active_storage
 	var/obj/buckled = null//Living
 	var/in_throw_mode = 0
 

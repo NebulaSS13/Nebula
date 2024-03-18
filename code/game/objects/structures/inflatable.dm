@@ -307,7 +307,7 @@
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
 	w_class = ITEM_SIZE_LARGE
-	storage_type = /datum/extension/storage/briefcase/inflatables
+	storage = /datum/storage/briefcase/inflatables
 
 /obj/item/briefcase/inflatable/WillContain()
 	return list(

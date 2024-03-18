@@ -4,7 +4,6 @@
 /obj/item/get_mechanics_info()
 	. = ..()
 	var/list/storage_info_list = list()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		storage_info_list += "Storage items are holdable or wearable objects used for storing items. You can hold an appropriate item in your hand and click on the storage item to put the item inside. You can then take items out by accessing the storage UI. To do this, either hold the storage in your hand and click it with the other, or click+drag the storage item onto yourself (this works if the storage item is not being held too!).<BR>"
 

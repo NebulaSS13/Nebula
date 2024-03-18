@@ -71,14 +71,13 @@
 		return FALSE
 
 	if(is_type_in_list(O, bag_whitelist))
-		var/datum/extension/storage/bag = get_extension(O, /datum/extension/storage)
-		if(bag)
+		if(O.storage)
 			var/failed = TRUE
 			for(var/obj/item/G in O)
 				if(!G.reagents || !G.reagents.total_volume)
 					continue
 				failed = FALSE
-				bag.remove_from_storage(user, G, src)
+				O.storage.remove_from_storage(user, G, src)
 				holdingitems += G
 				if(LAZYLEN(holdingitems) >= limit)
 					break
@@ -86,7 +85,7 @@
 			if(failed)
 				to_chat(user, SPAN_NOTICE("Nothing in \the [O] is usable."))
 				return TRUE
-			bag.finish_bulk_removal()
+			O.storage.finish_bulk_removal()
 
 			if(!length(O.contents))
 				to_chat(user, "You empty \the [O] into \the [src].")

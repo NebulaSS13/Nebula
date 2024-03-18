@@ -3,7 +3,7 @@
 	desc = "A handy device capable of showing an enlarged projection of whatever you can fit inside."
 	icon = 'icons/obj/items/device/projector.dmi'
 	icon_state = "projector0"
-	storage_type = /datum/extension/storage/slide_projector
+	storage = /datum/storage/slide_projector
 	material = /decl/material/solid/metal/steel
 	var/static/list/projection_types = list(
 		/obj/item/photo = /obj/effect/projection/photo,

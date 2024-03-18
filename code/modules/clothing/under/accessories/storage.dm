@@ -5,19 +5,19 @@
 	w_class = ITEM_SIZE_NORMAL
 	accessory_slot = ACCESSORY_SLOT_UTILITY
 	accessory_high_visibility = TRUE
-	storage_type = /datum/extension/storage/pockets
+	storage = /datum/storage/pockets
 
 /obj/item/clothing/accessory/webbing/webbing_large
 	name = "large webbing"
 	desc = "A large collection of synthcotton pockets and pouches."
 	icon = 'icons/clothing/accessories/storage/webbing_large.dmi'
-	storage_type = /datum/extension/storage/pockets/webbing
+	storage = /datum/storage/pockets/webbing
 
 /obj/item/clothing/accessory/webbing/vest
 	name = "webbing vest"
 	desc = "Durable synthcotton vest with lots of pockets to carry essentials."
 	icon = 'icons/clothing/accessories/storage/vest.dmi'
-	storage_type = /datum/extension/storage/pockets/vest
+	storage = /datum/storage/pockets/vest
 
 /obj/item/clothing/accessory/webbing/vest/black
 	name = "black webbing vest"
@@ -30,7 +30,7 @@
 	icon = 'icons/clothing/accessories/storage/vest_brown.dmi'
 
 /obj/item/clothing/accessory/webbing/drop_pouches
-	storage_type = /datum/extension/storage/pockets/pouches
+	storage = /datum/storage/pockets/pouches
 
 /obj/item/clothing/accessory/webbing/drop_pouches/black
 	name = "black drop pouches"
@@ -51,11 +51,10 @@
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife loops."
 	icon = 'icons/clothing/accessories/clothing/harness_unathi.dmi'
-	storage_type = /datum/extension/storage/pockets/knifeharness
+	storage = /datum/storage/pockets/knifeharness
 
 /obj/item/clothing/accessory/webbing/knifeharness/Initialize()
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		for(var/i = 1 to 2)
 			var/obj/item/knife/primitive/knife = new(src)
@@ -81,4 +80,4 @@
 	name = "bandolier"
 	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
 	icon = 'icons/obj/items/bandolier.dmi'
-	storage_type = /datum/extension/storage/pockets/bandolier
+	storage = /datum/storage/pockets/bandolier

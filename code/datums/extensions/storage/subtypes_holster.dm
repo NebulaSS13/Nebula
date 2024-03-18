@@ -1,4 +1,4 @@
-/datum/extension/storage/holster
+/datum/storage/holster
 	storage_slots = 2
 	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(
@@ -6,10 +6,10 @@
 		/obj/item/telebaton
 	)
 
-/datum/extension/storage/holster/shoulder
+/datum/storage/holster/shoulder
 	storage_slots = 1
 
-/datum/extension/storage/holster/security
+/datum/storage/holster/security
 	storage_slots = 8
 	can_hold = list(
 		/obj/item/crowbar,
@@ -38,7 +38,7 @@
 		/obj/item/clothing/gloves
 	)
 
-/datum/extension/storage/holster/general
+/datum/storage/holster/general
 	storage_slots = 7
 	can_hold = list(
 		/obj/item/flash,
@@ -71,7 +71,7 @@
 		/obj/item/crowbar
 	)
 
-/datum/extension/storage/holster/forensic
+/datum/storage/holster/forensic
 	storage_slots = 8
 	can_hold = list(
 		/obj/item/chems/spray/luminol,
@@ -90,7 +90,7 @@
 		/obj/item/camera
 	)
 
-/datum/extension/storage/holster/machete
+/datum/storage/holster/machete
 	storage_slots = 8
 	can_hold = list(
 		/obj/item/binoculars,

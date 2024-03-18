@@ -482,12 +482,11 @@
 
 	else if (istype(O, /obj/item/plants))
 		physical_attack_hand(user) // Harvests and clears out dead plants.
-		var/datum/extension/storage/storage = get_extension(O, /datum/extension/storage)
-		if(storage)
+		if(O.storage)
 			for (var/obj/item/chems/food/grown/G in get_turf(user))
-				if(!storage.can_be_inserted(G, user))
+				if(!O.storage.can_be_inserted(G, user))
 					return
-				storage.handle_item_insertion(G, 1)
+				O.storage.handle_item_insertion(G, 1)
 
 	else if ( istype(O, /obj/item/plantspray) )
 

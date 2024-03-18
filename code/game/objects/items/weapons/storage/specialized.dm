@@ -16,7 +16,7 @@
 	icon_state = "satchel"
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
-	storage_type = /datum/extension/storage/ore
+	storage = /datum/storage/ore
 	material = /decl/material/solid/organic/leather
 
 
@@ -28,7 +28,7 @@
 	desc = "A heavy steel case for storing evidence."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "case"
-	storage_type = /datum/extension/storage/evidence
+	storage = /datum/storage/evidence
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/metal/stainlesssteel
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
@@ -43,7 +43,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "plantbag"
 	slot_flags = SLOT_LOWER_BODY
-	storage_type = /datum/extension/storage/plants
+	storage = /datum/storage/plants
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/organic/leather
 
@@ -61,7 +61,7 @@
 	icon_state = "sheetsnatcher"
 	desc = "A patented storage system designed for any kind of mineral sheet."
 	material = /decl/material/solid/organic/plastic
-	storage_type = /datum/extension/storage/sheets
+	storage = /datum/storage/sheets
 	w_class = ITEM_SIZE_NORMAL
 
 // -----------------------------
@@ -71,4 +71,4 @@
 /obj/item/sheetsnatcher/borg
 	name = "sheet snatcher 9000"
 	desc = ""
-	storage_type = /datum/extension/storage/sheets/robot
+	storage = /datum/storage/sheets/robot

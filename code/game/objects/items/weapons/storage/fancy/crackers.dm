@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	key_type = /obj/item/chems/food/cracker
 	use_single_icon_overlay_state = "crackerbag"
-	storage_type = /datum/extension/storage/box/crackers
+	storage = /datum/storage/box/crackers
 
 /obj/item/box/fancy/crackers/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	overlay?.pixel_x = -(overlay_index)
@@ -22,7 +22,6 @@
 
 /obj/item/box/fancy/crackers/on_update_icon()
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage?.opened)
 		add_overlay("[icon_state]_open")
 	else

@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("lunched")
 	material = /decl/material/solid/organic/plastic
-	storage_type = /datum/extension/storage/lunchbox
+	storage = /datum/storage/lunchbox
 	var/tmp/filled = FALSE
 
 /obj/item/lunchbox/WillContain()

@@ -14,5 +14,5 @@
 	icon_state = "satchel"
 	slot_flags = SLOT_LOWER_BODY | SLOT_POCKET
 	w_class = ITEM_SIZE_NORMAL
-	storage_type = /datum/extension/storage/bag/fossils
+	storage = /datum/storage/bag/fossils
 	material = /decl/material/solid/organic/leather/synth

@@ -11,4 +11,4 @@
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/organic/leather/synth
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY)
-	storage_type = /datum/extension/storage/briefcase
+	storage = /datum/storage/briefcase

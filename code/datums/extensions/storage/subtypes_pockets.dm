@@ -1,15 +1,15 @@
-/datum/extension/storage/pockets
+/datum/storage/pockets
 	storage_slots = 3
 	max_w_class = ITEM_SIZE_SMALL
 
-/datum/extension/storage/pockets/pouches
+/datum/storage/pockets/pouches
 	storage_slots = 4 //to accomodate it being slotless
 
-/datum/extension/storage/pockets/pouches/New()
+/datum/storage/pockets/pouches/New()
 	max_storage_space = storage_slots * BASE_STORAGE_COST(max_w_class)
 	..()
 
-/datum/extension/storage/pockets/knifeharness
+/datum/storage/pockets/knifeharness
 	storage_slots = 2
 	max_w_class = ITEM_SIZE_NORMAL //for knives
 	can_hold = list(
@@ -17,13 +17,13 @@
 		/obj/item/knife,
 	)
 
-/datum/extension/storage/pockets/webbing
+/datum/storage/pockets/webbing
 	storage_slots = 4
 
-/datum/extension/storage/pockets/vest
+/datum/storage/pockets/vest
 	storage_slots = 5
 
-/datum/extension/storage/pockets/bandolier
+/datum/storage/pockets/bandolier
 	storage_slots = 10
 	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(
@@ -52,6 +52,6 @@
 		/obj/item/pill_bottle
 	)
 
-/datum/extension/storage/pockets/suit
+/datum/storage/pockets/suit
 	storage_slots = 2
 	max_w_class = ITEM_SIZE_SMALL

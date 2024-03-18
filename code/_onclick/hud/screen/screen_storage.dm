@@ -8,12 +8,12 @@
 	requires_ui_style = FALSE
 	var/weakref/storage_master_ref
 
-/obj/screen/storage/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, datum/extension/storage/_storage_master)
+/obj/screen/storage/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, datum/storage/_storage_master)
 	. = ..()
 	storage_master_ref = _storage_master && weakref(_storage_master)
 
 /obj/screen/storage/handle_click(mob/user, params)
-	var/datum/extension/storage/storage_master = storage_master_ref?.resolve()
+	var/datum/storage/storage_master = storage_master_ref?.resolve()
 	if(istype(storage_master) && !QDELETED(storage_master) && isatom(storage_master.holder))
 		var/obj/item/I = user.get_active_held_item()
 		if(I)
@@ -40,7 +40,7 @@
 	layer      = HUD_BASE_LAYER
 
 /obj/screen/storage/close/handle_click(mob/user, params)
-	var/datum/extension/storage/storage_master = storage_master_ref?.resolve()
+	var/datum/storage/storage_master = storage_master_ref?.resolve()
 	if(istype(storage_master) && !QDELETED(storage_master))
 		storage_master.close(user)
 		return TRUE

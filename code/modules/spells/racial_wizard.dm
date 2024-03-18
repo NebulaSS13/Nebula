@@ -36,7 +36,7 @@
 	qdel(src)
 
 /obj/item/bag/cash/infinite
-	storage_type = /datum/extension/storage/bag/cash/infinite
+	storage = /datum/storage/bag/cash/infinite
 
 /obj/item/bag/cash/infinite/WillContain()
 	return list(/obj/item/cash/c1000)

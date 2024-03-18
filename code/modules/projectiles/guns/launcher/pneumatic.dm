@@ -10,7 +10,7 @@
 	fire_sound_text = "a loud whoosh of moving air"
 	fire_delay = 50
 	fire_sound = 'sound/weapons/tablehit1.ogg'
-	storage_type = /datum/extension/storage/hopper
+	storage = /datum/storage/hopper
 
 	var/fire_pressure                           // Used in fire checks/pressure checks.
 	var/obj/item/tank/tank = null               // Tank of gas for use in firing the cannon.
@@ -46,7 +46,6 @@
 	update_icon()
 
 /obj/item/gun/launcher/pneumatic/proc/unload_hopper(mob/user)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	var/list/item_contents = storage?.get_contents()
 	if(length(item_contents))
 		var/obj/item/removing = item_contents[item_contents.len]
@@ -77,7 +76,6 @@
 	eject_tank(user)
 
 /obj/item/gun/launcher/pneumatic/consume_next_projectile(atom/movable/firer)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	var/list/storage_contents = storage?.get_contents()
 	if(!length(storage_contents))
 		return null
@@ -144,4 +142,4 @@
 	name = "small pneumatic cannon"
 	desc = "It looks smaller than your garden variety cannon"
 	w_class = ITEM_SIZE_NORMAL
-	storage_type = /datum/extension/storage/hopper/small
+	storage = /datum/storage/hopper/small
