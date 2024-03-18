@@ -65,21 +65,6 @@
 		states += scrapboard
 		cached_ore_icon_states[IS] = states
 
-/obj/item/stack/material/ore/attackby(obj/item/W, mob/user)
-	if(IS_HAMMER(W))
-		if(W.material?.hardness < material?.hardness)
-			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to pulverize [material.solid_name]."))
-			return TRUE
-		var/converting = clamp(get_amount(), 0, 5)
-		if(converting)
-			// TODO: make a gravel type?
-			// TODO: pass actual stone material to gravel?
-			new /obj/item/stack/material/ore/sand(get_turf(user), converting)
-			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
-			use(converting)
-		return TRUE
-	return ..()
-
 /obj/item/stack/material/ore/update_state_from_amount()
 	if(amount > 1)
 		add_overlay(get_cached_ore_pile_overlay(icon_state, amount))

@@ -136,7 +136,7 @@
 		if(converting)
 			// TODO: make a gravel type?
 			// TODO: pass actual stone material to gravel?
-			new /obj/item/stack/material/ore/sand(get_turf(user), converting)
+			new /obj/item/stack/material/ore/handful/sand(get_turf(user), converting)
 			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
 			use(converting)
 		return TRUE

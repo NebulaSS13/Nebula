@@ -6,6 +6,7 @@
 	sharp               = TRUE
 	edge                = TRUE
 	force               = 3
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/rock/Initialize()
 	. = ..()
