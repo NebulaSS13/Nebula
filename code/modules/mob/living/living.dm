@@ -507,7 +507,7 @@ default behaviour is:
 	. = ..()
 	if(.)
 		handle_grabs_after_move(old_loc, Dir)
-		if (active_storage && !( active_storage in contents ) && get_turf(active_storage) != get_turf(src))	//check !( active_storage in contents ) first so we hopefully don't have to call get_turf() so much.
+		if (active_storage && !( active_storage.holder in contents ) && get_turf(active_storage.holder) != get_turf(src))
 			active_storage.close(src)
 
 /mob/living/verb/resist()

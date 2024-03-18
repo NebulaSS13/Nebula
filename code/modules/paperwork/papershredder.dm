@@ -152,7 +152,7 @@
 	if(empty_into)
 		for(var/obj/item/I in shredded)
 			if(empty_into.storage.can_be_inserted(I, user, !isnull(user)))
-				empty_into.storage.handle_item_insertion(I, TRUE)
+				empty_into.storage.handle_item_insertion(null, I, TRUE)
 				LAZYREMOVE(shredded, I)
 
 		// Report on how we did

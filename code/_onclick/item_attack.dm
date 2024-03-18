@@ -31,12 +31,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 /atom/proc/attackby(obj/item/W, mob/user, var/click_params)
 	if(storage)
-		if(isrobot(user) && (W == user.get_active_hand()))
+		if(isrobot(user) && (W == user.get_active_held_item()))
 			return //Robots can't store their modules.
 		if(!storage.can_be_inserted(W, user))
 			return
 		W.add_fingerprint(user)
-		return storage.handle_item_insertion(W)
+		return storage.handle_item_insertion(user, W)
 	return FALSE
 
 /atom/movable/attackby(obj/item/W, mob/user)

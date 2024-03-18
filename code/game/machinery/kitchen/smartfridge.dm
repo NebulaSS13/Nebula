@@ -197,7 +197,7 @@
 	if(O.storage)
 		var/plants_loaded = 0
 		for(var/obj/G in O.storage.get_contents())
-			if(accept_check(G) && O.storage.remove_from_storage(user, G, src, 1))
+			if(accept_check(G) && O.storage.remove_from_storage(user, G, src, TRUE))
 				plants_loaded++
 				stock_item(G)
 		O.storage.finish_bulk_removal()

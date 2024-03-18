@@ -3,13 +3,13 @@
 	allow_quick_empty = 1
 	use_to_pickup = 1
 
-/datum/storage/bag/handle_item_insertion(obj/item/W, prevent_warning = 0)
+/datum/storage/bag/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
 	. = ..()
 	if(. && istype(holder, /obj/item/bag))
 		var/obj/item/bag/bag = holder
 		bag.update_w_class()
 
-/datum/storage/bag/remove_from_storage(mob/user, obj/item/W, atom/new_location)
+/datum/storage/bag/remove_from_storage(mob/user, obj/item/W, atom/new_location, skip_update)
 	. = ..()
 	if(. && istype(holder, /obj/item/bag))
 		var/obj/item/bag/bag = holder
@@ -36,10 +36,10 @@
 	max_w_class = ITEM_SIZE_HUGE
 	can_hold = list(/obj/item/coin, /obj/item/cash)
 
-/datum/storage/bag/cash/infinite/remove_from_storage(mob/user, obj/item/W, atom/new_location)
+/datum/storage/bag/cash/infinite/remove_from_storage(mob/user, obj/item/W, atom/new_location, skip_update)
 	. = ..()
 	if(. && istype(W,/obj/item/cash)) //only matters if its spacecash.
-		handle_item_insertion(new /obj/item/cash/c1000, 1)
+		handle_item_insertion(null, new /obj/item/cash/c1000, TRUE)
 
 /datum/storage/bag/quantum
 	storage_slots = 56

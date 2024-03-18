@@ -143,7 +143,7 @@
 
 	if(AM.loc?.storage)
 		AM.loc.storage.remove_from_storage(user, AM, src)
-		AM.loc.storage.handle_item_insertion(src, TRUE)
+		AM.loc.storage.handle_item_insertion(null, src, TRUE)
 	else
 		AM.forceMove(src)
 
@@ -254,7 +254,7 @@
 			M.put_in_hands(AM)
 		else
 			if(forced_loc?.storage)
-				forced_loc.storage.handle_item_insertion(AM, TRUE)
+				forced_loc.storage.handle_item_insertion(null, AM, TRUE)
 			else
 				AM.dropInto(forced_loc)
 

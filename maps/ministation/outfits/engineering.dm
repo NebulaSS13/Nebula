@@ -29,7 +29,7 @@
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	hands = list(/obj/item/wrench)
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	id_type = /obj/item/card/id/ministation/engineering
 	l_ear = /obj/item/radio/headset/heads/ce
 	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR

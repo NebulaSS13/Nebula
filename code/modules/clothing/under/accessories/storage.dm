@@ -59,7 +59,7 @@
 		for(var/i = 1 to 2)
 			var/obj/item/knife/primitive/knife = new(src)
 			if(storage.can_be_inserted(knife, null, TRUE))
-				storage.handle_item_insertion(knife)
+				storage.handle_item_insertion(null, knife)
 	update_icon()
 
 /obj/item/clothing/accessory/webbing/knifeharness/on_update_icon()

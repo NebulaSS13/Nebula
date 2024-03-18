@@ -484,9 +484,8 @@
 		physical_attack_hand(user) // Harvests and clears out dead plants.
 		if(O.storage)
 			for (var/obj/item/chems/food/grown/G in get_turf(user))
-				if(!O.storage.can_be_inserted(G, user))
-					return
-				O.storage.handle_item_insertion(G, 1)
+				if(O.storage.can_be_inserted(G, user))
+					O.storage.handle_item_insertion(user, G, TRUE)
 
 	else if ( istype(O, /obj/item/plantspray) )
 

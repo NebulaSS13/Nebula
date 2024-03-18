@@ -260,7 +260,7 @@ var/global/list/closets = list()
 		if(istype(W, /obj/item/laundry_basket) && W.contents.len && W.storage)
 			var/turf/T = get_turf(src)
 			for(var/obj/item/I in W.storage.get_contents())
-				W.storage.remove_from_storage(user, I, T, 1)
+				W.storage.remove_from_storage(user, I, T, TRUE)
 			W.storage.finish_bulk_removal()
 			user.visible_message(
 				SPAN_NOTICE("\The [user] empties \the [W] into \the [src]."),

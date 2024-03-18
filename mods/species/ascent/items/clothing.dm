@@ -83,7 +83,7 @@
 		/obj/item/stack/medical/resin
 	))
 		allowed |= tool
-		storage.handle_item_insertion(new tool(src))
+		storage.handle_item_insertion(null, new tool(src))
 	if(length(storage.get_contents()))
 		storage.make_exact_fit()
 		storage.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent

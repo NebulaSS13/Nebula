@@ -90,13 +90,13 @@
 	// Try put it in their backpack
 	var/obj/item/back = get_equipped_item(slot_back_str) 
 	if(back?.storage?.can_be_inserted(newitem, null, 1))
-		back.storage.handle_item_insertion(newitem)
+		back.storage.handle_item_insertion(src, newitem)
 		return back
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/thing in contents)
 		if(thing?.storage?.can_be_inserted(newitem, null, 1))
-			thing.storage.handle_item_insertion(newitem)
+			thing.storage.handle_item_insertion(src, newitem)
 			return thing
 
 /mob/proc/equip_to_storage_or_drop(obj/item/newitem)

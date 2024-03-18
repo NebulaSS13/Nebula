@@ -176,13 +176,7 @@
 			LAZYREMOVE(organ.implants, src)
 		M.drop_from_inventory(src)
 
-	if(istype(storage))
-		// some ui cleanup needs to be done
-		storage.on_item_pre_deletion(src) // must be done before deletion // TODO: ADD PRE_DELETION OBSERVATION
-		. = ..()
-		storage.on_item_post_deletion(src) // must be done after deletion
-	else
-		return ..()
+	return ..()
 
 /obj/item/GetCloneArgs()
 	. = ..()
@@ -512,7 +506,7 @@
 				W.storage.gather_all(src.loc, user)
 			return TRUE
 		else if(W.storage.can_be_inserted(src, user))
-			W.storage.handle_item_insertion(src)
+			W.storage.handle_item_insertion(user, src)
 			return TRUE
 
 	if(has_extension(src, /datum/extension/loaded_cell))
@@ -1100,7 +1094,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/attack_self(mob/user)
 	//Clicking on itself will empty it, if it has the verb to do that.
-	if(user.get_active_hand() == src && storage?.allow_quick_empty)
+	if(user.get_active_held_item() == src && storage?.allow_quick_empty)
 		quick_empty()
 		return TRUE
 	return ..()

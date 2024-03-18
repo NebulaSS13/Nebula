@@ -32,7 +32,7 @@
 
 /decl/interaction_handler/storage_open
 	name = "Open Storage"
-	expected_target_type = /obj/item
+	expected_target_type = /atom
 	incapacitation_flags = INCAPACITATION_DISRUPTED
 
 /decl/interaction_handler/storage_open/is_possible(atom/target, mob/user, obj/item/prop)

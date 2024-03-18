@@ -90,7 +90,7 @@
 	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]
 	W.pixel_z = 0
 
-/obj/item/storage/tray/dump_contents(atom/forced_loc = loc, mob/user)
+/obj/item/plate/tray/dump_contents(atom/forced_loc = loc, mob/user)
 	if(!isturf(forced_loc)) //to handle hand switching
 		return FALSE
 	if(user && storage)

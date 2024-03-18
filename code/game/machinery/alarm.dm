@@ -136,12 +136,14 @@
 	return ..()
 
 /obj/machinery/alarm/Initialize(mapload, var/dir)
-	. = ..()
 	if (name != BASE_ALARM_NAME)
 		custom_alarm_name = TRUE // this will prevent us from messing with alarms with names set on map
 
 	set_frequency(frequency)
 	reset_area(null, get_area(src))
+
+	. = ..()
+
 	if(!alarm_area)
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid

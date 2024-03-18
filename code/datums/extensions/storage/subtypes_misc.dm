@@ -85,6 +85,10 @@
 /datum/storage/hopper/small
 	max_w_class = ITEM_SIZE_TINY
 
+/datum/storage/hopper/industrial
+	max_w_class       = ITEM_SIZE_GARGANTUAN
+	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_NORMAL)
+
 /datum/storage/photo_album
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
 	can_hold = list(/obj/item/photo)
