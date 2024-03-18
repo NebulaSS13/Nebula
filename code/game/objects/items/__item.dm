@@ -953,3 +953,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		set_material(material.bakes_into_material)
 	. = ..()
 
+/obj/item/clear_matter()
+	..()
+	material = null

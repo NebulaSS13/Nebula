@@ -19,6 +19,9 @@
 	order.set_data("dna", loaded_dna)
 	return order
 
+/obj/machinery/fabricator/bioprinter/can_ingest(var/obj/item/thing)
+	return istype(thing?.material, /decl/material/solid/organic/meat) || ..()
+
 /obj/machinery/fabricator/bioprinter/do_build(datum/fabricator_build_order/order)
 	. = ..()
 	//Fetch params as they were when the order was passed

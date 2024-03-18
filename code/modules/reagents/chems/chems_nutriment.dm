@@ -21,6 +21,11 @@
 	var/hydration_factor = 0 // Per unit
 	var/injectable       = FALSE
 
+/decl/material/liquid/nutriment/Initialize()
+	solid_name = name   // avoid 'frozen sugar'
+	liquid_name = name  // avoid 'molten honey'
+	return ..()
+
 /decl/material/liquid/nutriment/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
 
 	if(!islist(newdata) || !newdata.len)

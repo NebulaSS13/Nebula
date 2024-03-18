@@ -58,12 +58,12 @@
 		STOP_PROCESSING(SSobj, src)
 		qdel(src)
 
-/obj/structure/closet/statue/dump_contents()
+/obj/structure/closet/statue/dump_contents(atom/forced_loc = loc, mob/user)
 	for(var/obj/O in src)
-		O.dropInto(loc)
+		O.dropInto(forced_loc)
 
 	for(var/mob/living/M in src)
-		M.dropInto(loc)
+		M.dropInto(forced_loc)
 		M.unset_sdisability(MUTED)
 		M.take_overall_damage((M.current_health - current_health - 100),0) //any new damage the statue incurred is transfered to the mob
 		if(M.client)

@@ -383,8 +383,7 @@ Class Procs:
 		if(stash)
 			stash.stash(expelled_components)
 
-	for(var/obj/O in src)
-		O.dropInto(loc)
+	dump_contents()
 
 	qdel(src)
 	return frame

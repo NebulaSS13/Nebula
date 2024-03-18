@@ -54,9 +54,9 @@
 		return TRUE
 	return ..()
 
-/obj/structure/banner_frame/dump_contents()
+/obj/structure/banner_frame/dump_contents(atom/forced_loc = loc, mob/user)
 	if(istype(banner))
-		banner.dropInto(loc)
+		banner.dropInto(forced_loc)
 		banner = null
 	. = ..()
 

@@ -94,20 +94,21 @@
 	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]
 	W.pixel_z = 0
 
-/obj/item/storage/tray/dump_contents(var/mob/user, turf/new_loc = loc)
-	if(!isturf(new_loc)) //to handle hand switching
+/obj/item/storage/tray/dump_contents(atom/forced_loc = loc, mob/user)
+	if(!isturf(forced_loc)) //to handle hand switching
 		return FALSE
 	if(user)
 		close(user)
-	if(!(locate(/obj/structure/table) in new_loc) && user && contents.len)
-		visible_message(SPAN_DANGER("Everything falls off the [name]! Good job, [user]."))
-		scatter_contents(FALSE, new_loc)
+	if(!(locate(/obj/structure/table) in forced_loc) && contents.len)
+		if(user)
+			visible_message(SPAN_DANGER("Everything falls off the [name]! Good job, [user]."))
+		scatter_contents(FALSE, forced_loc)
 	return TRUE
 
 /obj/item/storage/tray/dropped(mob/user)
 	. = ..()
 	if(!no_drop)
-		dump_contents(user)
+		dump_contents(user = user)
 
 /obj/item/storage/tray/throw_at(atom/target, range, speed, mob/thrower, spin, datum/callback/callback)
 	no_drop = TRUE

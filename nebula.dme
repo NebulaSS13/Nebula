@@ -2162,6 +2162,7 @@
 #include "code\modules\fabrication\fabricator_textile.dm"
 #include "code\modules\fabrication\fabricator_topic.dm"
 #include "code\modules\fabrication\fabricator_ui.dm"
+#include "code\modules\fabrication\recycler.dm"
 #include "code\modules\fabrication\designs\_design.dm"
 #include "code\modules\fabrication\designs\general\designs_arms_ammo.dm"
 #include "code\modules\fabrication\designs\general\designs_devices_components.dm"

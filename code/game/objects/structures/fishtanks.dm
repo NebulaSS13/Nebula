@@ -92,9 +92,9 @@ var/global/list/fishtank_cache = list()
 			A.physically_destroyed(TRUE)
 	qdel(src)
 
-/obj/structure/glass_tank/dump_contents()
+/obj/structure/glass_tank/dump_contents(atom/forced_loc = loc, mob/user)
 	. = ..()
-	var/turf/T = get_turf(src)
+	var/turf/T = get_turf(forced_loc)
 	if(reagents?.total_volume && T)
 		reagents.trans_to_turf(T, T.reagents, reagents.total_volume)
 

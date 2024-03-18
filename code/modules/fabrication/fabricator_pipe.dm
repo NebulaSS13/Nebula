@@ -12,6 +12,7 @@
 	color_selectable = TRUE
 
 /obj/machinery/fabricator/pipe/on_update_icon()
+	return // no icons
 
 /obj/machinery/fabricator/pipe/CanUseTopic(mob/user)
 	if(!anchored)

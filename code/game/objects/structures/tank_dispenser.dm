@@ -40,7 +40,7 @@
 	QDEL_NULL_LIST(oxygen_tanks)
 	return ..()
 
-/obj/structure/tank_rack/dump_contents()
+/obj/structure/tank_rack/dump_contents(atom/forced_loc = loc, mob/user)
 	hydrogen_tanks = null
 	oxygen_tanks = null
 	return ..()

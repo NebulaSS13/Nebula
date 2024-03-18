@@ -53,7 +53,7 @@
 		if(!skip_icon_update)
 			update_icon()
 
-/obj/structure/noticeboard/dump_contents()
+/obj/structure/noticeboard/dump_contents(atom/forced_loc = loc, mob/user)
 	for(var/thing in notices)
 		remove_paper(thing, skip_icon_update = TRUE)
 	return ..()

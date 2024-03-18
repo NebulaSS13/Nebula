@@ -275,6 +275,7 @@
 		/obj/item/stock_parts/circuitboard/broken,
 		/obj/item/stock_parts/circuitboard/arcade,
 		/obj/item/stock_parts/circuitboard/autolathe,
+		/obj/item/stock_parts/circuitboard/recycler,
 		/obj/item/stock_parts/circuitboard/atmos_alert,
 		/obj/item/stock_parts/circuitboard/air_alarm,
 		/obj/item/stock_parts/circuitboard/fax_machine,

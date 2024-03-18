@@ -4731,6 +4731,11 @@
 	},
 /turf/floor/tiled,
 /area/ministation/science)
+"EO" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/recycler,
+/turf/floor/tiled/techfloor,
+/area/ministation/science)
 "EP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 10
@@ -41632,7 +41637,7 @@ ec
 ae
 ae
 ae
-iL
+EO
 CL
 iI
 hh

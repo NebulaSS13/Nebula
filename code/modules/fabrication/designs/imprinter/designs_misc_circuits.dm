@@ -110,6 +110,9 @@
 /datum/fabricator_recipe/imprinter/circuit/autolathe
 	path = /obj/item/stock_parts/circuitboard/autolathe
 
+/datum/fabricator_recipe/imprinter/circuit/recycler
+	path = /obj/item/stock_parts/circuitboard/recycler
+
 /datum/fabricator_recipe/imprinter/circuit/replicator
 	path = /obj/item/stock_parts/circuitboard/replicator
 

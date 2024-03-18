@@ -245,7 +245,7 @@
 			C.set_color(trash_color)
 	. = ..()
 
-/obj/item/parcel/dump_contents()
+/obj/item/parcel/dump_contents(atom/forced_loc = loc, mob/user)
 	for(var/thing in get_contained_external_atoms())
 		var/atom/movable/AM = thing
 
@@ -257,7 +257,7 @@
 			var/obj/item/storage/S = loc
 			S.handle_item_insertion(AM, TRUE)
 		else
-			AM.dropInto(loc)
+			AM.dropInto(forced_loc)
 
 		if(ismob(AM))
 			var/mob/M = AM
