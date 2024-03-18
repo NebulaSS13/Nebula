@@ -2,7 +2,7 @@
 	Represents flexible bags that expand based on the size of their contents.
 */
 /obj/item/bag
-	storage_type = /datum/extension/storage/bag
+	storage = /datum/storage/bag
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
@@ -11,14 +11,12 @@
 	w_class = initial(w_class)
 	for(var/obj/item/I in contents)
 		w_class = max(w_class, I.w_class)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		var/cur_storage_space = storage.storage_space_used()
 		while(BASE_STORAGE_CAPACITY(w_class) < cur_storage_space)
 			w_class++
 
 /obj/item/bag/get_storage_cost()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		var/used_ratio = storage.storage_space_used()/storage.max_storage_space
 		return max(BASE_STORAGE_COST(w_class), round(used_ratio * BASE_STORAGE_COST(storage.max_w_class), 1))
@@ -33,7 +31,7 @@
 	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag"
 	item_state = "trashbag"
-	storage_type = /datum/extension/storage/bag/trash
+	storage = /datum/storage/bag/trash
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/bag/trash/update_w_class()
@@ -58,7 +56,7 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = @'{"exoticmatter":5,"materials":6}'
-	storage_type = /datum/extension/storage/bag/trash/advanced
+	storage = /datum/storage/bag/trash/advanced
 
 /obj/item/bag/trash/advanced/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/backpack/holding) || istype(W, /obj/item/bag/trash/advanced))
@@ -77,7 +75,7 @@
 	icon = 'icons/obj/items/storage/plasticbag.dmi'
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
-	storage_type = /datum/extension/storage/bag/plastic
+	storage = /datum/storage/bag/plastic
 	w_class = ITEM_SIZE_TINY
 
 	material = /decl/material/solid/organic/plastic
@@ -93,7 +91,7 @@
 	icon_state = "cashbag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/bag/cash
+	storage = /datum/storage/bag/cash
 	material = /decl/material/solid/organic/leather/synth
 
 /obj/item/bag/cash/filled/Initialize()
@@ -112,6 +110,5 @@
 	new /obj/item/cash/c1000(src)
 	new /obj/item/cash/c1000(src)
 	new /obj/item/cash/c1000(src)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()

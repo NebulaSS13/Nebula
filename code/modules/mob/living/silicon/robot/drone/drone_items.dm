@@ -212,9 +212,8 @@
 		if(grab)
 			if(I == user.active_storage?.holder)
 				user.active_storage.close(user) //Closes the ui.
-			var/datum/extension/storage/loc_storage = get_extension(I.loc, /datum/extension/storage)
-			if(loc_storage)
-				if(!loc_storage.remove_from_storage(user, I, src))
+			if(I.loc?.storage)
+				if(!I.loc.storage.remove_from_storage(user, I, src))
 					return
 			else
 				I.forceMove(src)

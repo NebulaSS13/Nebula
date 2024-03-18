@@ -297,7 +297,6 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 	W.pixel_z = 0
 
 /obj/structure/handle_mouse_drop(atom/over, mob/user, params)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		if(!(. = storage?.handle_mouse_drop(user, over, params)))
 			storage_removed(user)

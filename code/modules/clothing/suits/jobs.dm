@@ -71,7 +71,7 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/box/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/taperecorder)
 	protects_against_weather = TRUE
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/det_trench/grey
 	name = "grey trenchcoat"
@@ -104,7 +104,7 @@
 		)
 	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/forensics/red
 	name = "red jacket"
@@ -210,7 +210,7 @@
 		/obj/item/clothing/head/hardhat/ems
 	)
 	body_parts_covered = SLOT_UPPER_BODY
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/surgicalapron
 	name = "surgical apron"

@@ -1,7 +1,7 @@
 /datum/extension/holster
 	base_type = /datum/extension/holster
 	var/atom/atom_holder
-	var/datum/extension/storage/storage
+	var/datum/storage/storage
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'
 	var/list/can_holster = null

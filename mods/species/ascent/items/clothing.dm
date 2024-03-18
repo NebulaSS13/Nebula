@@ -61,7 +61,7 @@
 	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_harness_gyne.dmi')
 	body_parts_covered = 0
 	slot_flags = SLOT_OVER_BODY | SLOT_LOWER_BODY
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 	allowed = list(
 		/obj/item/flashlight,
 		/obj/item/tank,
@@ -72,7 +72,6 @@
 
 /obj/item/clothing/suit/ascent/Initialize()
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(!storage)
 		return
 	for(var/tool in list(

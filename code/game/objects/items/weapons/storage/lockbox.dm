@@ -7,7 +7,7 @@
 	icon_state = "lockbox+l"
 	item_state = "syringe_kit"
 	w_class = ITEM_SIZE_HUGE
-	storage_type = /datum/extension/storage/lockbox
+	storage = /datum/storage/lockbox
 	req_access = list(access_armory)
 	material = /decl/material/solid/metal/stainlesssteel
 
@@ -28,7 +28,6 @@
 			if(src.locked)
 				src.icon_state = src.icon_locked
 				to_chat(user, "<span class='notice'>You lock \the [src]!</span>")
-				var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 				storage?.close_all()
 				return
 			else

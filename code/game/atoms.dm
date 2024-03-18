@@ -56,6 +56,9 @@
 	var/current_health
 	var/max_health
 
+	// /datum/storage instance to use for this obj. Set to a type for instantiation on init.
+	var/datum/storage/storage
+
 /atom/proc/get_max_health()
 	return max_health
 
@@ -878,7 +881,9 @@
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	RETURN_TYPE(/list)
-	return list()
+	. = list()
+	if(storage)
+		. += /decl/interaction_handler/storage_open
 
 /atom/proc/can_climb_from_below(var/mob/climber)
 	return FALSE
@@ -909,7 +914,7 @@
 	while (cur_atom && !(cur_atom in container.contents))
 		if (isarea(cur_atom))
 			return
-		if(cur_atom.loc && has_extension(cur_atom.loc, /datum/extension/storage))
+		if(cur_atom.loc?.storage)
 			.++
 		cur_atom = cur_atom.loc
 	if (!cur_atom)
@@ -923,7 +928,7 @@
 	while (cur_atom && !isturf(cur_atom))
 		if (isarea(cur_atom))
 			return
-		if(cur_atom.loc && has_extension(cur_atom.loc, /datum/extension/storage))
+		if(cur_atom.loc?.storage)
 			.++
 		cur_atom = cur_atom.loc
 	if (!cur_atom)

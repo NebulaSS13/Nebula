@@ -264,7 +264,7 @@
 /datum/unit_test/storage_map_test/start_test()
 	var/bad_tests = 0
 
-	for(var/datum/extension/storage/storage in world)
+	for(var/datum/storage/storage in world)
 		var/obj/item/S = storage.holder
 		if(isPlayerLevel(S.z))
 			var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\] \[[S.x] / [S.y] / [S.z]\]"

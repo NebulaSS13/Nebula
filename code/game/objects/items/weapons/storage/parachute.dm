@@ -7,7 +7,6 @@
 
 /obj/item/backpack/parachute/Initialize(ml, material_key)
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		storage.max_storage_space = max(1, round(storage.max_storage_space * 0.5))
 

@@ -86,7 +86,7 @@
 	icon_state = "candlebox"
 	throwforce = 2
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/box/candles
+	storage = /datum/storage/box/candles
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/cardboard
 

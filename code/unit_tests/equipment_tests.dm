@@ -60,11 +60,11 @@
 
 	for(var/storage_type in typesof(/obj))
 		var/obj/thing = storage_type
-		if(TYPE_IS_ABSTRACT(thing) || !ispath(initial(thing.storage_type), /datum/extension/storage))
+		if(TYPE_IS_ABSTRACT(thing) || !ispath(initial(thing.storage), /datum/storage))
 			continue
 		thing = new thing //should be fine to put it in nullspace...
-		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type] | [thing.storage_type]\]"
-		bad_tests += test_storage_capacity(thing, get_extension(thing, /datum/extension/storage), bad_msg)
+		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type] | [thing.storage]\]"
+		bad_tests += test_storage_capacity(thing, get_extension(thing, /datum/storage), bad_msg)
 
 	if(bad_tests)
 		fail("\[[bad_tests]\] Some storage item types were not able to hold their default initial contents.")
@@ -73,7 +73,7 @@
 
 	return 1
 
-/proc/test_storage_capacity(obj/thing, datum/extension/storage/storage, bad_msg)
+/proc/test_storage_capacity(obj/thing, datum/storage/storage, bad_msg)
 	var/bad_tests = 0
 	var/list/contents = storage?.get_contents()
 	if(isnull(storage))
@@ -88,7 +88,7 @@
 		if(I.w_class > storage.max_w_class)
 			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [storage.max_w_class]). [ascii_reset]")
 			bad_tests++
-		if(has_extension(I, /datum/extension/storage) && I.w_class >= thing.w_class)
+		if(I.storage && I.w_class >= thing.w_class)
 			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [thing.w_class]). [ascii_reset]")
 			bad_tests++
 		total_storage_space += I.get_storage_cost()

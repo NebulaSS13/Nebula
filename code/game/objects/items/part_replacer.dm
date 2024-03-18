@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/device/parts_replacer.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
-	storage_type = /datum/extension/storage/parts_replacer
+	storage = /datum/storage/parts_replacer
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = @'{"engineering":3,"materials":3}'
@@ -29,7 +29,7 @@
 	desc = "A version of the RPED that allows for replacement of parts and scanning from a distance, along with higher capacity for parts."
 	icon = 'icons/obj/items/device/parts_replacer_advanced.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	storage_type = /datum/extension/storage/parts_replacer/advanced
+	storage = /datum/storage/parts_replacer/advanced
 	replace_sound = 'sound/items/PSHOOM.ogg'
 	remote_interaction = TRUE
 	matter = list(

@@ -1,4 +1,4 @@
-/datum/extension/storage/sheets
+/datum/storage/sheets
 	storage_ui = /datum/storage_ui/default/sheetsnatcher
 	storage_slots = 7
 	allow_quick_empty = TRUE
@@ -6,10 +6,10 @@
 	/// the number of sheets it can carry.
 	var/capacity = 300
 
-/datum/extension/storage/sheets/robot
+/datum/storage/sheets/robot
 	capacity = 500 //Borgs get more because >specialization
 
-/datum/extension/storage/sheets/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
+/datum/storage/sheets/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W,/obj/item/stack/material))
 		if(!stop_messages)
 			to_chat(user, "\The [holder] does not accept [W].")
@@ -24,7 +24,7 @@
 	return TRUE
 
 // Modified handle_item_insertion.  Would prefer not to, but...
-/datum/extension/storage/sheets/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
+/datum/storage/sheets/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
 		return FALSE
@@ -54,7 +54,7 @@
 	return TRUE
 
 // Modified quick_empty verb drops appropriate sized stacks
-/datum/extension/storage/sheets/quick_empty(mob/user, var/turf/dump_loc)
+/datum/storage/sheets/quick_empty(mob/user, var/turf/dump_loc)
 	for(var/obj/item/stack/material/S in get_contents())
 		while(S.amount)
 			var/obj/item/stack/material/N = new S.type(dump_loc)
@@ -71,7 +71,7 @@
 		atom_holder.update_icon()
 
 // Instead of removing
-/datum/extension/storage/sheets/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
+/datum/storage/sheets/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
 		return FALSE

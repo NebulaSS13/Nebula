@@ -7,7 +7,7 @@ Single Use Emergency Pouches
 	desc = "For use in emergency situations only."
 	icon = 'icons/obj/med_pouch.dmi'
 	icon_state = "pack0"
-	storage_type = /datum/extension/storage/med_pouch
+	storage = /datum/storage/med_pouch
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/plastic
 	var/injury_type = "generic"
@@ -26,7 +26,6 @@ Single Use Emergency Pouches
 /obj/item/med_pouch/Initialize(ml, material_key)
 	. = ..()
 	SetName("emergency [injury_type] pouch")
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 	for(var/obj/item/chems/C in contents)
@@ -37,7 +36,6 @@ Single Use Emergency Pouches
 	if(!cross_overlay)
 		cross_overlay = overlay_image(icon, "cross", flags = RESET_COLOR)
 	add_overlay(cross_overlay)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	icon_state = "pack[!!(storage?.opened)]"
 
 /obj/item/med_pouch/examine(mob/user)
@@ -53,7 +51,6 @@ Single Use Emergency Pouches
 		return TOPIC_HANDLED
 
 /obj/item/med_pouch/attack_self(mob/user)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage && !storage.opened)
 		storage.open(user)
 		return TRUE

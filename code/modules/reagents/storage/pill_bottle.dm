@@ -8,7 +8,7 @@
 	icon = 'icons/obj/items/storage/pillbottle.dmi'
 	item_state = "contsolid"
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/pillbottle
+	storage = /datum/storage/pillbottle
 	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/organic/plastic
 	var/pop_sound = 'sound/effects/peelz.ogg'
@@ -18,7 +18,6 @@
 
 /obj/item/pill_bottle/proc/pop_pill(var/mob/user)
 
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(!storage)
 		return FALSE
 

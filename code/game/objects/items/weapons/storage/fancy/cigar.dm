@@ -13,14 +13,13 @@
 	material = /decl/material/solid/organic/wood/mahogany
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
-	storage_type = /datum/extension/storage/box/cigar
+	storage = /datum/storage/box/cigar
 
 /obj/item/box/fancy/cigar/Initialize(ml, material_key)
 	. = ..()
 	initialize_reagents()
 
 /obj/item/box/fancy/cigar/initialize_reagents(populate)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	create_reagents(10 * max(1, storage?.storage_slots))
 	. = ..()
 

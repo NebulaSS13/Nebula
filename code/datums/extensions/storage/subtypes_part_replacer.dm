@@ -1,4 +1,4 @@
-/datum/extension/storage/parts_replacer
+/datum/storage/parts_replacer
 	can_hold = list(/obj/item/stock_parts)
 	storage_slots = 50
 	use_to_pickup = 1
@@ -8,6 +8,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 100
 
-/datum/extension/storage/parts_replacer/advanced
+/datum/storage/parts_replacer/advanced
 	storage_slots = 400
 	max_storage_space = 200

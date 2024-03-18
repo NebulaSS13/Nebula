@@ -88,17 +88,16 @@
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	var/datum/extension/storage/storage = get_extension(get_equipped_item(slot_back_str), /datum/extension/storage) 
-	if(storage?.can_be_inserted(newitem, null, 1))
-		newitem.forceMove(storage.holder)
-		return storage.holder
+	var/obj/item/back = get_equipped_item(slot_back_str) 
+	if(back?.storage?.can_be_inserted(newitem, null, 1))
+		back.storage.handle_item_insertion(newitem)
+		return back
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/thing in contents)
-		storage = get_extension(thing, /datum/extension/storage)
-		if(storage?.can_be_inserted(newitem, null, 1))
-			newitem.forceMove(storage.holder)
-			return storage.holder
+		if(thing?.storage?.can_be_inserted(newitem, null, 1))
+			thing.storage.handle_item_insertion(newitem)
+			return thing
 
 /mob/proc/equip_to_storage_or_drop(obj/item/newitem)
 	var/stored = equip_to_storage(newitem)

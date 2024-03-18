@@ -1,6 +1,6 @@
 /obj/item/mech_storage
 	w_class = ITEM_SIZE_NO_CONTAINER
-	storage_type = /datum/extension/storage/mech
+	storage = /datum/storage/mech
 	anchored = TRUE
 	max_health = ITEM_HEALTH_NO_DAMAGE
 

@@ -6,8 +6,6 @@
 			/decl/interaction_handler/drop,
 			/decl/interaction_handler/use
 		))
-	if(has_extension(src, /datum/extension/storage))
-		LAZYADD(., /decl/interaction_handler/storage_open)
 
 /decl/interaction_handler/use
 	name = "Use"
@@ -38,8 +36,7 @@
 	incapacitation_flags = INCAPACITATION_DISRUPTED
 
 /decl/interaction_handler/storage_open/is_possible(atom/target, mob/user, obj/item/prop)
-	. = ..() && (ishuman(user) || isrobot(user) || issmall(user)) && has_extension(target, /datum/extension/storage)
+	. = ..() && (ishuman(user) || isrobot(user) || issmall(user)) && target?.storage
 
 /decl/interaction_handler/storage_open/invoked(atom/target, mob/user, obj/item/prop)
-	var/datum/extension/storage/S = get_extension(target, /datum/extension/storage)
-	S?.open(user)
+	target?.storage?.open(user)

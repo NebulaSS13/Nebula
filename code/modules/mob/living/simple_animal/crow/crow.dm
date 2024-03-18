@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/storage/backpack/corvid.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/backpack/crow
+	storage = /datum/storage/backpack/crow
 	material = /decl/material/solid/organic/cloth
 
 /mob/living/simple_animal/crow

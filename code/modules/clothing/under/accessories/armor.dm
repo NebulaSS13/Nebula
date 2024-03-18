@@ -7,13 +7,13 @@
 	color = COLOR_GRAY40
 	gender = PLURAL
 	slot = ACCESSORY_SLOT_ARMOR_S
-	storage_type = /datum/extension/storage/pouches
+	storage = /datum/storage/pouches
 
 /obj/item/clothing/accessory/webbing/pouches/large
 	name = "large storage pouches"
 	desc = "A collection of black pouches that can be attached to a plate carrier. Carries up to four items."
 	icon = 'icons/clothing/accessories/pouches/lpouches.dmi'
-	storage_type = /datum/extension/storage/pouches/large
+	storage = /datum/storage/pouches/large
 	slowdown = 1
 
 /obj/item/clothing/accessory/webbing/pouches/large/tan

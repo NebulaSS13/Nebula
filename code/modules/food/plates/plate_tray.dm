@@ -5,13 +5,12 @@
 	icon                 = 'icons/obj/food/plates/tray.dmi'
 	material             = /decl/material/solid/organic/plastic
 	w_class              = ITEM_SIZE_NORMAL
-	storage_type         = /datum/extension/storage/tray
+	storage              = /datum/storage/tray
 	force                = 4
 	throwforce           = 10
 	throw_speed          = 1
 	throw_range          = 5
 	melee_accuracy_bonus = -10
-	storage_type         = /datum/extension/storage/tray
 	attack_verb          = list("served","slammed","hit")
 	material_alteration  = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/cooldown         = 0 // Cooldown for banging the tray with a rolling pin. based on world.time. very silly
@@ -22,14 +21,13 @@
 	return FALSE
 
 /obj/item/plate/tray/resolve_attackby(var/atom/A, mob/user)
-	if(has_extension(A, /datum/extension/storage)) //Disallow putting in bags without raising w_class. Don't know why though, it was part of the old trays
+	if(A.storage) //Disallow putting in bags without raising w_class. Don't know why though, it was part of the old trays
 		to_chat(user, SPAN_WARNING("The tray won't fit in \the [A]."))
 		return
 	. = ..()
 
 /obj/item/plate/tray/proc/scatter_contents(var/neatly = FALSE, target_loc = get_turf(src))
 	set waitfor = FALSE
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		for(var/obj/item/I in storage.get_contents())
 			if(storage.remove_from_storage(null, I, target_loc) && !neatly)
@@ -95,7 +93,6 @@
 /obj/item/storage/tray/dump_contents(atom/forced_loc = loc, mob/user)
 	if(!isturf(forced_loc)) //to handle hand switching
 		return FALSE
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(user && storage)
 		storage.close(user)
 	if(!(locate(/obj/structure/table) in forced_loc) && contents.len)

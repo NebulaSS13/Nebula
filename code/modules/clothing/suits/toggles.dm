@@ -1,6 +1,6 @@
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/toggle
-	storage_type = /datum/extension/storage/pockets/suit
+	storage = /datum/storage/pockets/suit
 	var/buttons // null means no toggle, TRUE means unbuttoned, FALSE means buttoned closed. Set during Initialize() based on icon
 	var/obj/item/clothing/head/hood
 

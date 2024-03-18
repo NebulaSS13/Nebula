@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/wallet.dmi'
 	icon_state = "wallet-white"
 	w_class = ITEM_SIZE_SMALL
-	storage_type = /datum/extension/storage/wallet
+	storage = /datum/storage/wallet
 	slot_flags = SLOT_ID
 	material = /decl/material/solid/organic/leather
 
@@ -94,10 +94,9 @@
 	. = ..() && ishuman(user)
 
 /decl/interaction_handler/remove_id/wallet/invoked(atom/target, mob/user, obj/item/prop)
-	var/datum/extension/storage/storage = get_extension(target, /datum/extension/storage)
-	if(storage)
+	if(target?.storage)
 		var/atom/movable/atom_target = target
 		var/obj/item/card/id/id = atom_target.GetIdCard()
 		if (istype(id))
-			storage.remove_from_storage(user, id)
+			target.storage.remove_from_storage(user, id)
 			user.put_in_hands(id)

@@ -25,6 +25,5 @@
 
 /obj/item/briefcase/foundation/Initialize(ml, material_key)
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()

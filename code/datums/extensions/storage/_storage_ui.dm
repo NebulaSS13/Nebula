@@ -1,5 +1,5 @@
 /datum/storage_ui
-	var/datum/extension/storage/_storage
+	var/datum/storage/_storage
 
 /datum/storage_ui/New(var/owner)
 	_storage = owner

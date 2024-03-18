@@ -1,9 +1,9 @@
-/datum/extension/storage/firstaid
+/datum/storage/firstaid
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
 
-/datum/extension/storage/firstaid/surgery
+/datum/storage/firstaid/surgery
 	storage_slots = 14
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = null
@@ -22,7 +22,7 @@
 		/obj/item/stack/nanopaste
 	)
 
-/datum/extension/storage/firstaid/surgery/ghetto
+/datum/storage/firstaid/surgery/ghetto
 	can_hold = list(
 		/obj/item/screwdriver,
 		/obj/item/wrench,

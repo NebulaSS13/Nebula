@@ -62,5 +62,5 @@
 	icon = 'icons/clothing/belt/gearbelt.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state = ACCESSORY_SLOT_UTILITY
-	storage_type = /datum/extension/storage/belt/archaeology
+	storage = /datum/storage/belt/archaeology
 	material = /decl/material/solid/organic/leather/synth

@@ -152,7 +152,7 @@
 
 // Bag o Holding
 /obj/item/backpack/holding/quantum
-	storage_type = /datum/extension/storage/bag/quantum
+	storage = /datum/storage/bag/quantum
 
 /obj/item/backpack/holding/quantum/attack_hand(mob/user)
 	if(!user)

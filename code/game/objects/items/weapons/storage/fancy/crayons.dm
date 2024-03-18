@@ -10,7 +10,7 @@
 	w_class = ITEM_SIZE_SMALL
 	key_type = /obj/item/pen/crayon
 	use_single_icon_overlay_state = "crayonbox"
-	storage_type = /datum/extension/storage/box/crayons
+	storage = /datum/storage/box/crayons
 
 /obj/item/box/fancy/crayons/update_icon_state()
 	icon_state = get_world_inventory_state()

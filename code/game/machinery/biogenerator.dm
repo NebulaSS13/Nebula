@@ -97,17 +97,16 @@
 	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
 	else if(isobj(O))
-		var/datum/extension/storage/storage = get_extension(O, /datum/extension/storage)
-		if(storage)
+		if(O.storage)
 			var/hadPlants = 0
-			for(var/obj/item/chems/food/grown/G in storage.get_contents())
+			for(var/obj/item/chems/food/grown/G in O.storage.get_contents())
 				hadPlants = 1
-				storage.remove_from_storage(user, G, src, 1) //No UI updates until we are all done.
+				O.storage.remove_from_storage(user, G, src, 1) //No UI updates until we are all done.
 				ingredients++
 				if(ingredients >= capacity)
 					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
 					break
-			storage.finish_bulk_removal() //Now do the UI stuff once.
+			O.storage.finish_bulk_removal() //Now do the UI stuff once.
 			if(!hadPlants)
 				to_chat(user, "<span class='notice'>\The [O] has no produce inside.</span>")
 			else if(ingredients < capacity)

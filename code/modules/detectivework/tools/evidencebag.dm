@@ -36,7 +36,7 @@
 				return ..()
 		else
 		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-			if(!has_extension(I.loc, /datum/extension/storage))	//in a container.
+			if(I.loc?.storage)	//in a container.
 				return ..()
 			
 			var/sdepth = I.storage_depth(user)

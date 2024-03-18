@@ -7,7 +7,7 @@ MRE Stuff
 	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "mre"
-	storage_type = /datum/extension/storage/mre
+	storage = /datum/storage/mre
 	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/main_meal = /obj/item/mrebag
@@ -26,7 +26,6 @@ MRE Stuff
 
 /obj/item/mre/Initialize(ml, material_key)
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 
@@ -36,12 +35,10 @@ MRE Stuff
 
 /obj/item/mre/on_update_icon()
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage?.opened)
 		icon_state = "[initial(icon_state)][storage.opened]"
 
 /obj/item/mre/attack_self(mob/user)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage && !storage.opened)
 		storage.open(user)
 		return TRUE
@@ -134,7 +131,7 @@ MRE Stuff
 	desc = "A vacuum-sealed bag containing the MRE's main course. Self-heats when opened."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pouch_medium"
-	storage_type = /datum/extension/storage/mrebag
+	storage = /datum/storage/mrebag
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE)
@@ -144,12 +141,10 @@ MRE Stuff
 
 /obj/item/mrebag/on_update_icon()
 	. = ..()
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage?.opened)
 		icon_state = "[initial(icon_state)][storage.opened]"
 
 /obj/item/mrebag/attack_self(mob/user)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage && !storage.opened)
 		storage.open(user)
 		return TRUE
@@ -186,7 +181,7 @@ MRE Stuff
 	name = "dessert"
 	desc = "A vacuum-sealed bag containing the MRE's dessert."
 	icon_state = "pouch_small"
-	storage_type = /datum/extension/storage/mrebag/dessert
+	storage = /datum/storage/mrebag/dessert
 
 /obj/item/mrebag/dessert/WillContain()
 	return list(/obj/random/mre/dessert)

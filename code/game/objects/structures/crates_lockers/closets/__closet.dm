@@ -257,19 +257,17 @@ var/global/list/closets = list()
 				slice_into_parts(W, user)
 			return TRUE
 
-		if(istype(W, /obj/item/laundry_basket) && W.contents.len)
-			var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
-			if(storage)
-				var/turf/T = get_turf(src)
-				for(var/obj/item/I in storage.get_contents())
-					storage.remove_from_storage(user, I, T, 1)
-				storage.finish_bulk_removal()
-				user.visible_message(
-					SPAN_NOTICE("\The [user] empties \the [W] into \the [src]."),
-					SPAN_NOTICE("You empty \the [W] into \the [src]."),
-					SPAN_NOTICE("You hear rustling of clothes.")
-				)
-				return TRUE
+		if(istype(W, /obj/item/laundry_basket) && W.contents.len && W.storage)
+			var/turf/T = get_turf(src)
+			for(var/obj/item/I in W.storage.get_contents())
+				W.storage.remove_from_storage(user, I, T, 1)
+			W.storage.finish_bulk_removal()
+			user.visible_message(
+				SPAN_NOTICE("\The [user] empties \the [W] into \the [src]."),
+				SPAN_NOTICE("You empty \the [W] into \the [src]."),
+				SPAN_NOTICE("You hear rustling of clothes.")
+			)
+			return TRUE
 
 		if(user.try_unequip(W, loc))
 			W.pixel_x = 0

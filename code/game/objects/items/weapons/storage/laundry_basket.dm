@@ -10,7 +10,7 @@
 	item_state = "laundry"
 	desc = "The peak of thousands of years of laundry evolution."
 	w_class = ITEM_SIZE_GARGANTUAN
-	storage_type = /datum/extension/storage/laundry_basket
+	storage = /datum/storage/laundry_basket
 	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/linked
@@ -63,7 +63,7 @@
 	icon = 'icons/mob/offhand.dmi'
 	icon_state = "offhand"
 	name = "second hand"
-	storage_type = null
+	storage = null
 
 /obj/item/laundry_basket/offhand/dropped(mob/user)
 	..()

@@ -14,7 +14,6 @@
 
 /obj/item/box/fancy/proc/update_icon_state()
 	icon_state = initial(icon_state)
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(key_type && storage?.opened)
 		icon_state = "[icon_state][count_by_type(contents, key_type)]"
 

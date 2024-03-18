@@ -10,11 +10,9 @@
 		. = ..()
 
 /atom/proc/handle_mouse_drop(atom/over, mob/user, params)
-	if(can_interact_with_storage(user) && !user.incapacitated(INCAPACITATION_DISRUPTED) && over == user)
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		if(storage)
-			storage.open(user)
-			return TRUE
+	if(can_interact_with_storage(user) && !user.incapacitated(INCAPACITATION_DISRUPTED) && over == user && storage)
+		storage.open(user)
+		return TRUE
 	. = over?.receive_mouse_drop(src, user, params)
 
 // Can the user drop something onto this atom?
