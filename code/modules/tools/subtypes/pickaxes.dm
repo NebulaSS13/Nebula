@@ -17,6 +17,14 @@
 	)
 	return tool_qualities
 
+/obj/item/tool/pickaxe/get_initial_tool_properties()
+	var/static/list/tool_properties = list(
+		TOOL_PICK = list(
+			TOOL_PROP_EXCAVATION_DEPTH = 200
+		)
+	)
+	return tool_properties
+
 // Using these mainly for debugging.
 /obj/item/tool/pickaxe/wood
 	material                  = /decl/material/solid/organic/wood

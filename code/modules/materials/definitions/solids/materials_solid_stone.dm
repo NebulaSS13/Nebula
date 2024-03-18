@@ -17,7 +17,6 @@
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)
-	ore_type = /obj/item/stack/material/lump
 	ore_result_amount = 7
 
 /decl/material/solid/stone/sandstone
