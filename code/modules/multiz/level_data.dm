@@ -517,7 +517,7 @@
 /datum/level_data/proc/warn_bad_strata(var/turf/T)
 	if(_has_warned_uninitialized_strata)
 		return
-	PRINT_STACK_TRACE("Turf tried to init it's strata before it was setup for level '[level_id]' z:[level_z]! [log_info_line(T)]")
+	PRINT_STACK_TRACE("Turf tried to init its strata before it was setup for level '[level_id]' z:[level_z]! [log_info_line(T)]")
 	_has_warned_uninitialized_strata = TRUE
 
 ////////////////////////////////////////////

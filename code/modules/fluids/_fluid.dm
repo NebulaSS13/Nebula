@@ -24,7 +24,11 @@
 	if(reagent_volume > FLUID_DEEP)
 		new_layer = DEEP_FLUID_LAYER
 	else
-		new_layer = SHALLOW_FLUID_LAYER
+		var/turf/T = get_turf(src)
+		if(T?.get_physical_height() < 0)
+			new_layer = T.layer + 0.2
+		else
+			new_layer = SHALLOW_FLUID_LAYER
 	if(layer != new_layer)
 		layer = new_layer
 

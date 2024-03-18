@@ -76,16 +76,19 @@ What is the naming convention for planes or layers?
 #define OVER_OPENSPACE_PLANE        -3
 
 #define DEFAULT_PLANE                   0
-	#define PLATING_LAYER               1
+//BELOW PLATING
+	#define UNDER_TURF_LAYER            1
+	//PLATING
+	#define PLATING_LAYER               1.5
 	//ABOVE PLATING
-	#define HOLOMAP_LAYER               1.01
-	#define DECAL_PLATING_LAYER         1.02
-	#define DISPOSALS_PIPE_LAYER        1.03
-	#define LATTICE_LAYER               1.04
-	#define PIPE_LAYER                  1.05
-	#define WIRE_LAYER                  1.06
-	#define WIRE_TERMINAL_LAYER         1.07
-	#define ABOVE_WIRE_LAYER            1.08
+	#define HOLOMAP_LAYER               1.51
+	#define DECAL_PLATING_LAYER         1.52
+	#define DISPOSALS_PIPE_LAYER        1.53
+	#define LATTICE_LAYER               1.54
+	#define PIPE_LAYER                  1.55
+	#define WIRE_LAYER                  1.56
+	#define WIRE_TERMINAL_LAYER         1.57
+	#define ABOVE_WIRE_LAYER            1.58
 	//TURF PLANE
 	//TURF_LAYER = 2
 	#define TURF_DETAIL_LAYER           2.01

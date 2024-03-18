@@ -136,7 +136,7 @@
 	footstep_type = /decl/footsteps/mud
 
 /turf/exterior/meat/get_diggable_resources()
-	return dug ? null : list(/obj/item/stack/material/ore/meat = list(3, 2))
+	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/meat = list(3, 2))
 
 /turf/exterior/meat/acid
 	name         = "juices"

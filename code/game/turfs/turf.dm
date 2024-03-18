@@ -77,6 +77,9 @@
 	var/last_flow_dir = 0
 	var/atom/movable/fluid_overlay/fluid_overlay
 
+	// Temporary list of weakrefs of atoms who should be excepted from falling into us
+	var/list/skip_height_fall_for
+
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
 
@@ -221,11 +224,10 @@
 			return TRUE
 
 		if(IS_SHOVEL(W) && can_be_dug())
-			if(get_diggable_resources())
-				if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS, set_cooldown = TRUE))
-					drop_diggable_resources()
-			else if(can_dig_pit())
+			if(user.a_intent == I_HELP && can_dig_pit())
 				try_dig_pit(user, W)
+			else if(can_dig_trench())
+				try_dig_trench(user, W)
 			else
 				to_chat(user, SPAN_WARNING("There is nothing to be dug out of \the [src]."))
 			return TRUE
@@ -301,6 +303,21 @@
 			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
 				mover.Bump(obstacle, 1)
 				return 0
+
+	// Check if they need to climb out of a hole.
+	if(has_gravity())
+		var/mob/mover_mob = mover
+		if(!istype(mover_mob) || (!mover_mob.throwing && !mover_mob.can_overcome_gravity()))
+			var/turf/old_turf  = mover.loc
+			var/old_height     = old_turf.get_physical_height() + old_turf.reagents?.total_volume
+			var/current_height = get_physical_height() + reagents?.total_volume
+			if(abs(current_height - old_height) > FLUID_SHALLOW)
+				if(current_height > old_height)
+					return 0
+				if(MOVING_DELIBERATELY(mover_mob))
+					to_chat(mover_mob, SPAN_WARNING("You refrain from stepping over the edge; it looks like a steep drop down to \the [src]."))
+					return 0
+
 	return 1 //Nothing found to block so return success!
 
 /turf/proc/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
@@ -689,6 +706,28 @@
 		return TRUE
 	return FALSE
 
+/turf/receive_mouse_drop(atom/dropping, mob/user, params)
+	. = ..()
+	if(!. && simulated && dropping == user && isturf(user.loc) && user.Adjacent(src))
+		var/turf/other_turf = user.loc
+		var/our_height = get_physical_height()
+		var/their_height = other_turf.get_physical_height()
+		if(abs(our_height-their_height) > FLUID_SHALLOW)
+			. = TRUE
+			if(our_height < their_height)
+				user.visible_message(SPAN_NOTICE("\The [user] starts climbing down into \the [src]."))
+			else
+				user.visible_message(SPAN_NOTICE("\The [user] starts climbing out of \the [other_turf]."))
+			if(!do_after(user, 2 SECONDS, src) || QDELETED(user) || user?.loc != other_turf || !user.Adjacent(src))
+				return
+			if(our_height < their_height)
+				user.visible_message(SPAN_NOTICE("\The [user] climbs down into \the [src]."))
+			else
+				user.visible_message(SPAN_NOTICE("\The [user] climbs out of \the [other_turf]."))
+			LAZYDISTINCTADD(skip_height_fall_for, weakref(user))
+			user.dropInto(src)
+			LAZYREMOVE(skip_height_fall_for, weakref(user))
+
 /turf/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/show_turf_contents)
@@ -709,6 +748,14 @@
 	expected_user_type = /mob
 	expected_target_type = /turf
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+
+/decl/interaction_handler/dig/trench
+	name = "Dig Trench"
+
+/decl/interaction_handler/dig/trench/invoked(atom/target, mob/user, obj/item/prop)
+	var/turf/T = get_turf(target)
+	if(T.can_dig_trench())
+		T.try_dig_trench(user, prop)
 
 /decl/interaction_handler/dig/pit
 	name = "Dig Pit"

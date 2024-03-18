@@ -18,13 +18,15 @@
 	var/icon_edge_layer = -1
 	var/icon_edge_states
 	var/icon_has_corners = FALSE
+
 	///Overrides the level's strata for this turf.
 	var/strata_override
 	var/decl/material/material
-	/// Whether or not sand/clay has been dug up here.
-	var/dug = FALSE
+
 	var/is_fundament_turf = FALSE
 	var/reagent_type
+
+	var/const/TRENCH_DEPTH_PER_ACTION = 100
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
@@ -54,6 +56,43 @@
 
 	if(reagent_type && height < 0)
 		add_to_reagents(reagent_type, abs(height))
+
+/turf/exterior/attackby(obj/item/W, mob/user)
+
+	if(istype(W, /obj/item/stack/material/ore) || istype(W, /obj/item/stack/material/lump))
+
+		if(get_physical_height() >= 0)
+			to_chat(user, SPAN_WARNING("\The [src] is flush with ground level and cannot be backfilled."))
+			return TRUE
+
+		if(!W.material?.can_backfill_turf_type)
+			to_chat(user, SPAN_WARNING("You cannot use \the [W] to backfill \the [src]."))
+			return TRUE
+
+		var/can_backfill = islist(W.material.can_backfill_turf_type) ? is_type_in_list(src, W.material.can_backfill_turf_type) : istype(src, W.material.can_backfill_turf_type)
+		if(!can_backfill)
+			to_chat(user, SPAN_WARNING("You cannot use \the [W] to backfill \the [src]."))
+			return TRUE
+
+		var/obj/item/stack/stack = W
+		if(!do_after(user, 1 SECOND, src) || user.get_active_hand() != stack || get_physical_height() >= 0)
+			return TRUE
+
+		// At best, you get about 5 pieces of clay or dirt from digging the
+		// associated turfs. So we'll make it cost 5 to put some back.
+		// TODO: maybe make this use the diggable loot list.
+		var/stack_depth = CEILING((abs(get_physical_height()) / TRENCH_DEPTH_PER_ACTION) * 5)
+		var/using_lumps = max(1, min(stack.amount, min(stack_depth, 5)))
+		if(stack.use(using_lumps))
+			set_physical_height(min(0, get_physical_height() + ((using_lumps / 5) * TRENCH_DEPTH_PER_ACTION)))
+			playsound(src, 'sound/items/shovel_dirt.ogg', 50, TRUE)
+			if(get_physical_height() >= 0)
+				visible_message(SPAN_NOTICE("\The [user] backfills \the [src]!"))
+			else
+				visible_message(SPAN_NOTICE("\The [user] partially backfills \the [src]."))
+		return TRUE
+
+	return ..()
 
 /turf/exterior/on_reagent_change()
 	. = ..()

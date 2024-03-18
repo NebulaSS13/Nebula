@@ -90,6 +90,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/toxicity = 0 // Organ damage from ingestion.
 	var/toxicity_targets_organ // Bypass liver/kidneys when ingested, harm this organ directly (using BP_FOO defines).
 
+	var/can_backfill_turf_type
+
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
 	var/shard_icon                        // Related to above.
@@ -166,7 +168,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// Damage values.
 	var/hardness = MAT_VALUE_HARD            // Used for edge damage in weapons.
 	var/reflectiveness = MAT_VALUE_DULL
-
 	var/ferrous = FALSE                       // Can be used as a striker for firemaking.
 	var/weight = MAT_VALUE_NORMAL             // Determines blunt damage/throwforce for weapons.
 
