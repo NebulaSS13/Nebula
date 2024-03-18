@@ -12,31 +12,33 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	icon_state = null
 	base_icon = "square" // Base icon name
 	/// The icon state prefix used for overlay/addon sprites. If unset, defaults to base_icon.
-	var/overlay_base_icon = null
 	filling_states = @"[20,40,60,80,100]"
 	volume = 30
 	material = /decl/material/solid/glass
-
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
-
-	var/list/extras = list() // List of extras. Two extras maximum
-
-	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
-	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
-	var/static/list/filling_icons_cache = list()
-
 	center_of_mass =@'{"x":16,"y":9}'
-
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME | PRESENTATION_FLAG_DESC
 	temperature_coefficient = 4
-	obj_flags = OBJ_FLAG_HOLLOW
+	w_class = ITEM_SIZE_SMALL
 
+	var/overlay_base_icon = null
+	var/list/extras = list() // List of extras. Two extras maximum
+	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
+	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
+	var/static/list/filling_icons_cache = list()
 	var/custom_name
 	var/custom_desc
+
+// Reverse the matter effect of the hollow flag, keep the force effect.
+// Glasses are so tiny that their effective matter is ten times lower than forks/knives due to OBJ_FLAG_HOLLOW.
+/obj/item/chems/drinks/glass2/get_matter_amount_modifier()
+	. = ..()
+	if(obj_flags & OBJ_FLAG_HOLLOW)
+		. /= HOLLOW_OBJECT_MATTER_MULTIPLIER
 
 /obj/item/chems/drinks/glass2/examine(mob/M)
 	. = ..()

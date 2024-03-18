@@ -19,7 +19,7 @@
 /obj/machinery/vending/props/on_update_icon()
 	..()
 	if(!(stat & NOPOWER))
-		overlays += image(icon, "[initial(icon_state)]-overlay")
+		add_overlay("[initial(icon_state)]-overlay")
 
 //FOR ACTORS GUILD - Containers
 /obj/machinery/vending/containers
