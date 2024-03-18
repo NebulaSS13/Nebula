@@ -443,6 +443,8 @@ default behaviour is:
 
 	previous_damage_appearance = damage_appearance
 	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(!root_bodytype)
+		return
 	var/image/standing_image = image(root_bodytype.get_damage_overlays(src), icon_state = "00")
 
 	// blend the individual damage states with our icons
