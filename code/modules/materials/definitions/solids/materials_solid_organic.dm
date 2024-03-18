@@ -261,6 +261,7 @@
 	default_solid_form = /obj/item/stack/material/bundle
 	melting_point = null // can grass melt??
 	ignition_point = T0C+100
+	tans_to = /decl/material/solid/organic/plantmatter/grass/dry
 
 /decl/material/solid/organic/plantmatter/grass/dry
 	name = "dry grass"
