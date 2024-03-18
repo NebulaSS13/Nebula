@@ -38,7 +38,7 @@
 		/obj/item/clothing/accessory/armor/tag,
 	)
 
-/datum/storage/wallet/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
+/datum/storage/wallet/remove_from_storage(mob/user, obj/item/W, atom/new_location, skip_update)
 	. = ..()
 	if(. && istype(holder, /obj/item/wallet))
 		var/obj/item/wallet/wallet = holder
@@ -49,7 +49,7 @@
 		if(W == wallet.front_stick)
 			wallet.front_stick = null
 
-/datum/storage/wallet/handle_item_insertion(obj/item/W, prevent_warning = 0)
+/datum/storage/wallet/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
 	. = ..(W, prevent_warning)
 	if(. && istype(holder, /obj/item/wallet))
 		var/obj/item/wallet/wallet = holder

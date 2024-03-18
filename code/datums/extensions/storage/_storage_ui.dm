@@ -1,7 +1,7 @@
 /datum/storage_ui
 	var/datum/storage/_storage
 
-/datum/storage_ui/New(var/owner)
+/datum/storage_ui/New(owner)
 	_storage = owner
 	..()
 
@@ -12,10 +12,10 @@
 		_storage = null
 	. = ..()
 
-/datum/storage_ui/proc/show_to(var/mob/user)
+/datum/storage_ui/proc/show_to(mob/user)
 	return
 
-/datum/storage_ui/proc/hide_from(var/mob/user)
+/datum/storage_ui/proc/hide_from(mob/user)
 	return
 
 /datum/storage_ui/proc/prepare_ui()
@@ -24,22 +24,22 @@
 /datum/storage_ui/proc/close_all()
 	return
 
-/datum/storage_ui/proc/on_open(var/mob/user)
+/datum/storage_ui/proc/on_open(mob/user)
 	return
 
-/datum/storage_ui/proc/after_close(var/mob/user)
+/datum/storage_ui/proc/after_close(mob/user)
 	return
 
-/datum/storage_ui/proc/on_insertion(var/mob/user)
+/datum/storage_ui/proc/on_insertion()
 	return
 
-/datum/storage_ui/proc/on_pre_remove(var/mob/user, var/obj/item/W)
+/datum/storage_ui/proc/on_pre_remove(obj/item/W)
 	return
 
-/datum/storage_ui/proc/on_post_remove(var/mob/user, var/obj/item/W)
+/datum/storage_ui/proc/on_post_remove(obj/item/W)
 	return
 
-/datum/storage_ui/proc/on_hand_attack(var/mob/user)
+/datum/storage_ui/proc/on_hand_attack(mob/user)
 	return
 
 // Default subtype
@@ -54,7 +54,7 @@
 	var/obj/screen/stored/cont/stored_continue
 	var/obj/screen/stored/end/stored_end
 
-/datum/storage_ui/default/New(var/storage)
+/datum/storage_ui/default/New(storage)
 	..()
 	boxes            = new(null, null, null, null, null, null, storage)
 	storage_start    = new(null, null, null, null, null, null, storage)
@@ -77,34 +77,34 @@
 	QDEL_NULL(closer)
 	. = ..()
 
-/datum/storage_ui/default/on_open(var/mob/user)
+/datum/storage_ui/default/on_open(mob/user)
 	if (user.active_storage)
 		user.active_storage.close(user)
 
-/datum/storage_ui/default/after_close(var/mob/user)
+/datum/storage_ui/default/after_close(mob/user)
 	user.active_storage = null
 
-/datum/storage_ui/default/on_insertion(var/mob/user)
-	if(user.active_storage)
-		user.active_storage.show_to(user)
+/datum/storage_ui/default/proc/refresh_viewers()
+	for(var/mob/user in is_seeing)
+		if(user.active_storage == _storage)
+			_storage.show_to(user)
 
-/datum/storage_ui/default/on_pre_remove(var/mob/user, var/obj/item/W)
-	if(isatom(_storage?.holder))
-		var/atom/atom_holder = _storage.holder
-		for(var/mob/M in range(1, atom_holder.loc))
-			if (M.active_storage == _storage && M.client)
-				M.client.screen -= W
+/datum/storage_ui/default/on_insertion()
+	refresh_viewers()
 
-/datum/storage_ui/default/on_post_remove(var/mob/user)
-	if(user && user.active_storage) // Using ?. here causes a runtime ('Cannot read 0.active_storage'), it shouldn't but it does.
-		user.active_storage.show_to(user)
+/datum/storage_ui/default/on_post_remove(obj/item/W)
+	refresh_viewers()
 
-/datum/storage_ui/default/on_hand_attack(var/mob/user)
-	for(var/mob/M in range(1))
-		if (M.active_storage == _storage)
-			_storage.close(M)
+/datum/storage_ui/default/on_pre_remove(obj/item/W)
+	for(var/mob/user in is_seeing)
+		user.client?.screen -= W
 
-/datum/storage_ui/default/show_to(var/mob/user)
+/datum/storage_ui/default/on_hand_attack(mob/user)
+	for(var/mob/other_user in is_seeing)
+		if (other_user.active_storage == _storage)
+			_storage.close(other_user)
+
+/datum/storage_ui/default/show_to(mob/user)
 	var/list/contents = _storage?.get_contents()
 	if(user.active_storage != _storage)
 		for(var/obj/item/I in contents)
@@ -130,7 +130,7 @@
 	is_seeing |= user
 	user.active_storage = _storage
 
-/datum/storage_ui/default/hide_from(var/mob/user)
+/datum/storage_ui/default/hide_from(mob/user)
 	is_seeing -= user
 	if(!user.client)
 		return
@@ -257,7 +257,7 @@
 
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken
-/datum/storage_ui/default/sheetsnatcher/prepare_ui(var/mob/user)
+/datum/storage_ui/default/sheetsnatcher/prepare_ui(mob/user)
 	var/adjusted_contents = length(_storage.get_contents())
 
 	var/row_num = 0
@@ -265,8 +265,7 @@
 	if (adjusted_contents > 7)
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)
-	if(user && user.active_storage)
-		user.active_storage.show_to(user)
+	refresh_viewers()
 
 #undef SCREEN_LOC_MOD_FIRST
 #undef SCREEN_LOC_MOD_SECOND

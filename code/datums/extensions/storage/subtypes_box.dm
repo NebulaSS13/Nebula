@@ -47,7 +47,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 7
 
-/datum/storage/box/cigar/remove_from_storage(mob/user, obj/item/W, atom/new_location)
+/datum/storage/box/cigar/remove_from_storage(mob/user, obj/item/W, atom/new_location, skip_update)
 	if(istype(W, /obj/item/clothing/mask/smokable/cigarette/cigar) && isatom(holder))
 		var/atom/atom_holder = holder
 		if(atom_holder.reagents)
@@ -58,7 +58,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 
-/datum/storage/box/cigarettes/remove_from_storage(mob/user, obj/item/W, atom/new_location)
+/datum/storage/box/cigarettes/remove_from_storage(mob/user, obj/item/W, atom/new_location, skip_update)
 	// Don't try to transfer reagents to lighters
 	if(istype(W, /obj/item/clothing/mask/smokable/cigarette) && isatom(holder))
 		var/atom/atom_holder = holder

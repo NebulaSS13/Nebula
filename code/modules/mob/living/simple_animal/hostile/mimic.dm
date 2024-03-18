@@ -108,8 +108,8 @@ var/global/list/protected_objects = list(
 				M.forceMove(C)
 		if(C.storage)
 			for(var/atom/movable/M in src)
-				if(C.storage.can_be_inserted(M,null,1))
-					C.storage.handle_item_insertion(M)
+				if(C.storage.can_be_inserted(M, null, 1))
+					C.storage.handle_item_insertion(null, M)
 				else
 					M.forceMove(src.loc)
 		for(var/atom/movable/M in src)

@@ -176,7 +176,7 @@
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/datum/storage/proc/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
+/datum/storage/proc/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
 	if(!istype(W))
 		return 0
 	if(ismob(W.loc))
@@ -185,70 +185,64 @@
 			return
 	W.forceMove(holder)
 	W.on_enter_storage(src)
-	if(usr)
-		holder.add_fingerprint(usr)
+	if(user)
+		holder.add_fingerprint(user)
 		if(!prevent_warning)
-			for(var/mob/M in viewers(usr, null))
-				if (M == usr)
-					to_chat(usr, SPAN_NOTICE("You put \the [W] into [holder]."))
+			for(var/mob/M in viewers(user, null))
+				if (M == user)
+					to_chat(user, SPAN_NOTICE("You put \the [W] into [holder]."))
 				else if (get_dist(holder, M) <= 1) //If someone is standing close enough, they can tell what it is...
-					M.show_message(SPAN_NOTICE("\The [usr] puts [W] into [holder]."), VISIBLE_MESSAGE)
+					M.show_message(SPAN_NOTICE("\The [user] puts [W] into [holder]."), VISIBLE_MESSAGE)
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
-					M.show_message(SPAN_NOTICE("\The [usr] puts [W] into [holder]."), VISIBLE_MESSAGE)
-		if(!NoUpdate)
+					M.show_message(SPAN_NOTICE("\The [user] puts [W] into [holder]."), VISIBLE_MESSAGE)
+		if(!skip_update)
 			update_ui_after_item_insertion()
 	holder.update_icon()
 	return 1
 
 /datum/storage/proc/update_ui_after_item_insertion()
 	prepare_ui()
-	if(storage_ui)
-		storage_ui.on_insertion(usr)
+	storage_ui?.on_insertion()
 
 /datum/storage/proc/update_ui_after_item_removal()
 	prepare_ui()
-	if(storage_ui)
-		storage_ui.on_post_remove(usr)
+	storage_ui?.on_post_remove()
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
-/datum/storage/proc/remove_from_storage(mob/user, obj/item/W, atom/new_location, var/NoUpdate = 0)
+/datum/storage/proc/remove_from_storage(mob/user, obj/item/W, atom/new_location, skip_update)
 	if(!istype(W))
 		return FALSE
 	new_location = new_location || get_turf(holder)
-	if(storage_ui)
-		storage_ui.on_pre_remove(user, W)
-	if(holder)
-		if(ismob(holder.loc))
-			W.dropped(user)
+	storage_ui?.on_pre_remove(W)
+	if(ismob(holder?.loc))
+		W.dropped(user)
 	if(ismob(new_location))
 		W.hud_layerise()
 	else
 		W.reset_plane_and_layer()
 	W.forceMove(new_location)
-	if(user && !NoUpdate)
+	if(!skip_update)
 		update_ui_after_item_removal()
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
-	if(!NoUpdate && holder)
+	if(!skip_update && holder)
 		holder.update_icon()
 	return 1
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /datum/storage/proc/on_item_pre_deletion(obj/item/W)
-	if(storage_ui)
-		storage_ui.on_pre_remove(null, W) // Supposed to be able to handle null user.
+	storage_ui?.on_pre_remove(W) // Supposed to be able to handle null user.
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /datum/storage/proc/on_item_post_deletion(obj/item/W)
-	if(storage_ui)
-		update_ui_after_item_removal()
+	update_ui_after_item_removal()
 	holder?.queue_icon_update()
 
-//Run once after using remove_from_storage with NoUpdate = 1
+//Run once after using remove_from_storage with skip_update = 1
 /datum/storage/proc/finish_bulk_removal()
 	update_ui_after_item_removal()
-	holder?.update_icon()
+	holder?.queue_icon_update()
 
 /datum/storage/proc/gather_all(var/turf/T, var/mob/user)
 	var/success = 0
@@ -258,7 +252,7 @@
 			failure = 1
 			continue
 		success = 1
-		handle_item_insertion(I, 1, 1) // First 1 is no messages, second 1 is no ui updates
+		handle_item_insertion(user, I, TRUE, TRUE) // First 1 is no messages, second 1 is no ui updates
 	if(success && !failure)
 		to_chat(user, SPAN_NOTICE("You put everything into \the [holder]."))
 		update_ui_after_item_insertion()
@@ -282,7 +276,7 @@
 		if(can_be_inserted(H))
 			scooped.forceMove(H)
 			H.sync(scooped)
-			handle_item_insertion(H)
+			handle_item_insertion(user, H)
 			return TRUE
 		qdel(H)
 	return FALSE
@@ -304,7 +298,7 @@
 /datum/storage/proc/quick_empty(mob/user, var/turf/dump_loc)
 	hide_from(user)
 	for(var/obj/item/I in get_contents())
-		remove_from_storage(user, I, dump_loc, 1)
+		remove_from_storage(user, I, dump_loc, TRUE)
 	finish_bulk_removal()
 
 /datum/storage/proc/handle_mouse_drop(mob/user, obj/over_object, params)

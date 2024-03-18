@@ -3391,7 +3391,7 @@
 	pixel_y = 20
 	},
 /obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},

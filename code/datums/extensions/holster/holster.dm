@@ -46,7 +46,7 @@
 		if(istype(user))
 			user.stop_aiming(no_message=1)
 		holstered = I
-		storage.handle_item_insertion(holstered, 1)
+		storage.handle_item_insertion(user, holstered, 1)
 		holstered.add_fingerprint(user)
 		holstered.add_fibers(atom_holder)
 		if(isobj(storage?.holder))

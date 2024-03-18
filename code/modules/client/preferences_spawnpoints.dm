@@ -108,7 +108,7 @@
 			if(istype(pack) && pack.storage)
 				for(var/atom/movable/thing in victim.get_held_items())
 					victim.drop_from_inventory(thing)
-					pack.storage.handle_item_insertion(thing)
+					pack.storage.handle_item_insertion(null, thing)
 
 			C.set_occupant(victim, 1)
 			SET_STATUS_MAX(victim, STAT_ASLEEP, rand(1,3))

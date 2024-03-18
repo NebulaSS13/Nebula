@@ -24,7 +24,7 @@
 	return TRUE
 
 // Modified handle_item_insertion.  Would prefer not to, but...
-/datum/storage/sheets/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
+/datum/storage/sheets/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
 		return FALSE
@@ -71,7 +71,7 @@
 		atom_holder.update_icon()
 
 // Instead of removing
-/datum/storage/sheets/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
+/datum/storage/sheets/remove_from_storage(mob/user, obj/item/W, atom/new_location, skip_update)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
 		return FALSE

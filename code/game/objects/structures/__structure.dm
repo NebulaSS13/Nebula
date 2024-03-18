@@ -295,11 +295,3 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 	W.pixel_x = (CELLSIZE * (cell_x + 0.5)) - center["x"]
 	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]
 	W.pixel_z = 0
-
-/obj/structure/handle_mouse_drop(atom/over, mob/user, params)
-	if(storage)
-		if(!(. = storage?.handle_mouse_drop(user, over, params)))
-			storage_removed(user)
-			return
-	if((. = ..()))
-		return

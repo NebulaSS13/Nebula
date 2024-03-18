@@ -31738,7 +31738,7 @@
 	pixel_y = -32
 	},
 /obj/item/hand_labeler,
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/machinery/cell_charger,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)

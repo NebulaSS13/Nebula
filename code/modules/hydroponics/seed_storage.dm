@@ -328,7 +328,7 @@
 		var/loaded = 0
 		for(var/obj/item/seeds/G in storage.get_contents())
 			++loaded
-			O.storage.remove_from_storage(user, G, src, 1)
+			O.storage.remove_from_storage(user, G, src, TRUE)
 			add(G, 1)
 		O.storage.finish_bulk_removal()
 		if (loaded)

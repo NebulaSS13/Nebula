@@ -85,7 +85,7 @@ var/global/list/diversion_junctions = list()
 		if(I.storage)
 			to_chat(user, "<span class='notice'>You empty the bag.</span>")
 			for(var/obj/item/O in I.storage.get_contents())
-				I.storage.remove_from_storage(user, O, src, 1)
+				I.storage.remove_from_storage(user, O, src, TRUE)
 			I.storage.finish_bulk_removal()
 			update_icon()
 			return

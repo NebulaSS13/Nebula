@@ -101,7 +101,7 @@
 			var/hadPlants = 0
 			for(var/obj/item/chems/food/grown/G in O.storage.get_contents())
 				hadPlants = 1
-				O.storage.remove_from_storage(user, G, src, 1) //No UI updates until we are all done.
+				O.storage.remove_from_storage(user, G, src, TRUE)
 				ingredients++
 				if(ingredients >= capacity)
 					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
