@@ -3926,7 +3926,7 @@
 	dir = 4
 	},
 /obj/structure/casino/roulette_chart{
-	density = TRUE
+	density = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/commons)
@@ -4242,7 +4242,7 @@
 /obj/machinery/reagent_temperature,
 /obj/item/chems/drinks/shaker,
 /obj/machinery/vending/boozeomat{
-	density = FALSE;
+	density = 0;
 	pixel_y = -32;
 	req_access = list()
 	},
@@ -4795,7 +4795,7 @@
 	dir = 4
 	},
 /obj/structure/casino/roulette{
-	density = TRUE
+	density = 1
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
