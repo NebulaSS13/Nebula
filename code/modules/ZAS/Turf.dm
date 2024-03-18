@@ -258,12 +258,15 @@
 	if(!include_heat_sources)
 		return gas
 
-	var/initial_temperature = weather ? weather.adjust_temperature(gas.temperature) : gas.temperature
+	if(weather)
+		gas.temperature = weather.adjust_temperature(gas.temperature)
+	var/initial_temperature = gas.temperature
 	if(length(affecting_heat_sources))
 		for(var/obj/structure/fire_source/heat_source as anything in affecting_heat_sources)
 			gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
 			if(abs(gas.temperature - initial_temperature) >= 100)
 				break
+	gas.update_values()
 	return gas
 
 /turf/proc/c_copy_air()
