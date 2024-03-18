@@ -2,7 +2,7 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
-	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
+	emote_speech = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	base_animal_type = /mob/living/simple_animal/construct

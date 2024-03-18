@@ -51,7 +51,7 @@
 /obj/machinery/vending/snix/on_update_icon()
 	..()
 	if(!(stat & NOPOWER))
-		overlays += image(icon, "[initial(icon_state)]-fan")
+		add_overlay("[initial(icon_state)]-fan")
 
 /obj/machinery/vending/sol
 	name = "Mars-Mart"
@@ -93,7 +93,7 @@
 /obj/machinery/vending/weeb/on_update_icon()
 	..()
 	if(!(stat & NOPOWER))
-		overlays += image(icon, "[initial(icon_state)]-fan")
+		add_overlay("[initial(icon_state)]-fan")
 
 /obj/machinery/vending/hotfood
 	name = "Hot Foods"
@@ -115,7 +115,7 @@
 /obj/machinery/vending/hotfood/on_update_icon()
 	..()
 	if(!(stat & NOPOWER))
-		overlays += image(icon, "[initial(icon_state)]-heater")
+		add_overlay("[initial(icon_state)]-heater")
 
 /obj/machinery/vending/boozeomat
 	name = "Booze-O-Mat"
@@ -209,7 +209,7 @@
 	if(stat & BROKEN && prob(20))
 		icon_state = "[initial(icon_state)]-hellfire"
 	else if(!(stat & NOPOWER))
-		overlays += image(icon, "[initial(icon_state)]-screen")
+		add_overlay("[initial(icon_state)]-screen")
 
 /obj/machinery/vending/cola
 	name = "Robust Softdrinks"
@@ -267,7 +267,7 @@
 /obj/machinery/vending/fitness/on_update_icon()
 	..()
 	if(!(stat & NOPOWER))
-		overlays += image(icon, "[initial(icon_state)]-overlay")
+		add_overlay("[initial(icon_state)]-overlay")
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
