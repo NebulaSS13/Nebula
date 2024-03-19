@@ -21,7 +21,6 @@
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
 /mob/living/carbon/human
-	var/toxins_alert = 0
 	var/co2_alert = 0
 	var/stamina = 100
 
@@ -545,7 +544,7 @@
 		if(pressure)
 			pressure.icon_state = "pressure[GET_HUD_ALERT(src, /decl/hud_element/condition/pressure)]"
 		if(toxin)
-			toxin.icon_state = "tox[toxins_alert ? "1" : "0"]"
+			toxin.icon_state = "tox[GET_HUD_ALERT(src, /decl/hud_element/condition/toxins)]"
 		if(oxygen)
 			oxygen.icon_state = "oxy[GET_HUD_ALERT(src, /decl/hud_element/condition/oxygen)]"
 		if(fire)

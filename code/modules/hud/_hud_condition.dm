@@ -9,3 +9,5 @@
 /decl/hud_element/condition/fire
 
 /decl/hud_element/condition/oxygen
+
+/decl/hud_element/condition/toxins

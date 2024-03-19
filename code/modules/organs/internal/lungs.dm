@@ -204,7 +204,7 @@
 	var/inhaled_gas_used = inhaling / 4
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
-	owner.toxins_alert = 0 // Reset our toxins alert for now.
+	SET_HUD_ALERT(owner, /decl/hud_element/condition/toxins, 0) // Reset our toxins alert for now.
 	if(!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
 		var/poison_total = 0
 		if(poison_types)
@@ -212,7 +212,7 @@
 				if(poison_types[gname])
 					poison_total += breath.gas[gname]
 		if(((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
-			owner.toxins_alert = 1
+			SET_HUD_ALERT(owner, /decl/hud_element/condition/toxins, 1)
 
 	// Pass reagents from the gas into our body.
 	// Presumably if you breathe it you have a specialized metabolism for it, so we drop/ignore breath_type. Also avoids
