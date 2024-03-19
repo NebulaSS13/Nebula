@@ -199,7 +199,7 @@
 			to_chat(owner, SPAN_NOTICE("It gets easier to breathe."))
 		breath_fail_ratio = clamp(0,breath_fail_ratio-0.05,1)
 
-	owner.oxygen_alert = failed_inhale * 2
+	SET_HUD_ALERT(owner, /decl/hud_element/condition/oxygen, (failed_inhale * 2))
 
 	var/inhaled_gas_used = inhaling / 4
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
@@ -252,7 +252,7 @@
 	if(failed_breath)
 		handle_failed_breath()
 	else
-		owner.oxygen_alert = 0
+		SET_HUD_ALERT(owner, /decl/hud_element/condition/oxygen, 0)
 	return failed_breath
 
 /obj/item/organ/internal/lungs/proc/handle_failed_breath()
@@ -266,7 +266,7 @@
 	if(damage || GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
 		owner.take_damage(OXY, HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
-	owner.oxygen_alert = max(owner.oxygen_alert, 2)
+	SET_HUD_ALERT_MAX(owner, /decl/hud_element/condition/oxygen, 2)
 	last_int_pressure = 0
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)

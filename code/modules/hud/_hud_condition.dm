@@ -7,3 +7,5 @@
 /decl/hud_element/condition/pressure
 
 /decl/hud_element/condition/fire
+
+/decl/hud_element/condition/oxygen
