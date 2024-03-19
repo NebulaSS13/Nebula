@@ -1,7 +1,7 @@
 /turf/floor/natural/clay
 	name = "clay"
 	desc = "Thick, claggy clay."
-	icon = 'icons/turf/exterior/mud_light.dmi'
+	icon = 'icons/turf/flooring/mud_light.dmi'
 	icon_edge_layer = EXT_EDGE_CLAY
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
@@ -19,7 +19,7 @@
 /turf/floor/natural/mud
 	name = "mud"
 	desc = "Thick, waterlogged mud."
-	icon = 'icons/turf/exterior/mud_dark.dmi'
+	icon = 'icons/turf/flooring/mud_dark.dmi'
 	icon_edge_layer = EXT_EDGE_MUD
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
@@ -48,7 +48,7 @@
 	name = "dry mud"
 	desc = "Should have stayed hydrated."
 	dirt_color = "#ae9e66"
-	icon = 'icons/turf/exterior/seafloor.dmi'
+	icon = 'icons/turf/flooring/seafloor.dmi'
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/soil
 

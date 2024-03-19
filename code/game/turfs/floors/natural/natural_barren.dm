@@ -1,6 +1,6 @@
 /turf/floor/natural/barren
 	name = "ground"
-	icon = 'icons/turf/exterior/barren.dmi'
+	icon = 'icons/turf/flooring/barren.dmi'
 	icon_edge_layer = EXT_EDGE_BARREN
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/sand

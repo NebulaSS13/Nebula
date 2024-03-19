@@ -65,7 +65,7 @@
 
 /turf/floor/holofloor/grass
 	name = "lush grass"
-	icon = 'icons/turf/flooring/grass.dmi'
+	icon = 'icons/turf/flooring/fakegrass.dmi'
 	icon_state = "grass0"
 	initial_flooring = /decl/flooring/fake_grass
 
@@ -124,8 +124,8 @@
 	base_desc = "Uncomfortably gritty for a hologram."
 	icon_state = "0"
 	base_icon_state = "0"
-	icon = 'icons/turf/exterior/barren.dmi'
-	base_icon = 'icons/turf/exterior/barren.dmi'
+	icon = 'icons/turf/flooring/barren.dmi'
+	base_icon = 'icons/turf/flooring/barren.dmi'
 	initial_flooring = null
 
 /turf/floor/holofloor/desert/Initialize(var/ml)

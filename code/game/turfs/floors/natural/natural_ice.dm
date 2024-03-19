@@ -1,6 +1,6 @@
 /turf/floor/natural/ice
 	name = "ice"
-	icon = 'icons/turf/exterior/ice.dmi'
+	icon = 'icons/turf/flooring/ice.dmi'
 	footstep_type = /decl/footsteps/plating
 	base_color = COLOR_LIQUID_WATER
 	color = COLOR_LIQUID_WATER
@@ -19,7 +19,7 @@
 /turf/floor/natural/snow
 	name = "snow"
 	desc = "Let it snow, let it snow, let it snow..."
-	icon = 'icons/turf/exterior/snow.dmi'
+	icon = 'icons/turf/flooring/snow.dmi'
 	icon_edge_layer = EXT_EDGE_SNOW
 	footstep_type = /decl/footsteps/snow
 	possible_states = 13

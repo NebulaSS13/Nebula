@@ -3,7 +3,7 @@
 	desc = "It's coarse and gets everywhere."
 	dirt_color = "#ae9e66"
 	footstep_type = /decl/footsteps/sand
-	icon = 'icons/turf/exterior/sand.dmi'
+	icon = 'icons/turf/flooring/sand.dmi'
 	icon_edge_layer = EXT_EDGE_SAND
 	possible_states = 4
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID

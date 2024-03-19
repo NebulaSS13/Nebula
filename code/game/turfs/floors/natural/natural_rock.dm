@@ -1,6 +1,6 @@
 /turf/floor/natural/rock
 	name = "rock floor"
-	icon = 'icons/turf/exterior/rock.dmi'
+	icon = 'icons/turf/flooring/rock.dmi'
 	icon_edge_layer = EXT_EDGE_VOLCANIC
 	is_fundament_turf = TRUE
 

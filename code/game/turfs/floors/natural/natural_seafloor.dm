@@ -1,7 +1,7 @@
 /turf/floor/natural/seafloor
 	name = "sea floor"
 	desc = "A thick layer of silt and debris from above."
-	icon = 'icons/turf/exterior/seafloor.dmi'
+	icon = 'icons/turf/flooring/seafloor.dmi'
 	icon_edge_layer = EXT_EDGE_SEAFLOOR
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	material = /decl/material/solid/sand

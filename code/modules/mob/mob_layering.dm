@@ -89,7 +89,7 @@
 		new_pixel_z += structure_offset
 
 		// Update offsets from loc.
-		var/turf/exterior/ext = loc
+		var/turf/floor/natural/ext = loc
 		if(istype(ext) && ext.height < 0)
 			new_pixel_z += ext.pixel_z
 

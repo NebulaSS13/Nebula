@@ -38,7 +38,7 @@
 
 /turf/floor/fake_grass
 	name = "grass patch"
-	icon = 'icons/turf/flooring/grass.dmi'
+	icon = 'icons/turf/flooring/fakegrass.dmi'
 	icon_state = "grass0"
 	initial_flooring = /decl/flooring/fake_grass
 

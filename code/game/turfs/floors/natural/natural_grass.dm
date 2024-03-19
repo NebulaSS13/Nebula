@@ -12,7 +12,7 @@
 /turf/floor/natural/grass/wild
 	name = "wild grass"
 	possible_states = null
-	icon = 'icons/turf/exterior/wildgrass.dmi'
+	icon = 'icons/turf/flooring/wildgrass.dmi'
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
 	footstep_type = /decl/footsteps/grass
 	color = "#5e7a3b"

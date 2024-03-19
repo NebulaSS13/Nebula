@@ -1,7 +1,7 @@
 /turf/floor/natural
 
 	name = "ground"
-	icon = 'icons/turf/exterior/barren.dmi'
+	icon = 'icons/turf/flooring/barren.dmi'
 	desc = "Bare, barren sand."
 	icon_state = "0"
 	footstep_type = /decl/footsteps/asteroid
@@ -10,7 +10,7 @@
 
 	base_name = "ground"
 	base_desc = "Bare, barren sand."
-	base_icon = 'icons/turf/exterior/barren.dmi'
+	base_icon = 'icons/turf/flooring/barren.dmi'
 	base_icon_state = "0"
 	base_color = null
 
