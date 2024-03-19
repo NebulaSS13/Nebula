@@ -29,12 +29,18 @@
 	result_type        = /obj/item/stool/bar
 	category           = "seating"
 
-/decl/stack_recipe/hardness/integrity/furniture/pew
-	result_type        = /obj/structure/bed/chair/pew
+/decl/stack_recipe/hardness/integrity/furniture/bench
+	result_type        = /obj/structure/bed/chair/bench
 	category           = "seating"
 
-/decl/stack_recipe/hardness/integrity/furniture/pew/left
-	result_type        = /obj/structure/bed/chair/pew/left
+/decl/stack_recipe/hardness/integrity/furniture/bench/single
+	result_type        = /obj/structure/bed/chair/bench/single
+
+/decl/stack_recipe/hardness/integrity/furniture/bench/pew
+	result_type        = /obj/structure/bed/chair/bench/pew
+
+/decl/stack_recipe/hardness/integrity/furniture/bench/pew/single
+	result_type        = /obj/structure/bed/chair/bench/pew/single
 
 /decl/stack_recipe/hardness/integrity/furniture/closet
 	result_type        = /obj/structure/closet

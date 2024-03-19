@@ -321,20 +321,3 @@
 /obj/structure/bed/chair/wood/wings/walnut
 	color = WOOD_COLOR_CHOCOLATE
 	material = /decl/material/solid/organic/wood/walnut
-
-/obj/structure/bed/chair/pew
-	name = "pew"
-	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
-	icon_state = "pew"
-	base_icon = "pew"
-	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/organic/wood
-	obj_flags = 0
-/obj/structure/bed/chair/pew/left
-	icon_state = "pew_left"
-/obj/structure/bed/chair/pew/mahogany
-	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/organic/wood/mahogany
-/obj/structure/bed/chair/pew/left/mahogany
-	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/organic/wood/mahogany
