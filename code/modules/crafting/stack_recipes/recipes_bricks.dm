@@ -16,6 +16,9 @@
 	apply_material_name         = FALSE
 	result_type                 = /obj/structure/fire_source/firepit
 
+/decl/stack_recipe/bricks/firepit/kiln
+	result_type                 = /obj/structure/fire_source/kiln
+
 /decl/stack_recipe/bricks/furniture
 	abstract_type              = /decl/stack_recipe/bricks/furniture
 	one_per_turf               = TRUE
