@@ -8,6 +8,7 @@
 	max_health = 100
 	universal_understand = TRUE
 	mob_sort_value = 5
+	is_spawnable_type = FALSE
 
 	meat_type = null
 	meat_amount = 0

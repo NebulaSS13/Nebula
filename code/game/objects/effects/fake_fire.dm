@@ -11,12 +11,17 @@
 
 /obj/effect/fake_fire/Initialize()
 	. = ..()
+	if(!loc)
+		return INITIALIZE_HINT_QDEL
 	set_light(3, 0.5, color)
 	START_PROCESSING(SSobj,src)
 	if(lifetime)
 		QDEL_IN(src,lifetime)
 
 /obj/effect/fake_fire/Process()
+	if(!loc)
+		qdel(src)
+		return PROCESS_KILL
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel,last_temperature,pressure)
 	loc.fire_act(firelevel,last_temperature,pressure)

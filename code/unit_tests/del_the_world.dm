@@ -21,32 +21,10 @@
 		/obj/machinery/power/apc,
 		// ditto, these both might be temporarily broken
 		/obj/machinery/alarm,
-		// needs to have a 1:1 relationship to a holodeck
-		/obj/machinery/computer/HolodeckControl,
-		// cannot be spawned without passing a seed
-		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
-		// invalid without linked AI
-		/obj/machinery/ai_powersupply,
-		// invalid if not created in a card
-		/mob/living/silicon/pai,
-		// NO.
-		/mob/living/deity,
 		// Needs a level above.
 		/obj/structure/stairs,
 		// Fluid system related; causes issues with atoms spawned on the turf.
 		/obj/abstract/landmark/mapped_fluid,
-		/obj/effect/flood,
-		// Not valid when spawned manually.
-		/obj/effect/overmap,
-		/obj/effect/shuttle_landmark,
-		// Generally not expected to be spawned outside of a mob HUD context.
-		/obj/screen
-	) + list(
-		// Exclude only this type, since it's not meant to be spawned but its subtypes are.
-		// TODO: Consider whether this warrants abstract_type?
-		/obj/machinery/power/smes,
-		// This is evil, evil code and destroys other tests.
-		/obj/effect/bhole,
 	)
 	// Instantiate all spawnable atoms
 	for(var/path in typesof(/obj/item, /obj/effect, /obj/structure, /obj/machinery, /obj/vehicle, /mob) - ignore)

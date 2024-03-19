@@ -197,7 +197,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/Process()
-	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
+	if(!parent || !loc) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
 	else if(parent.air?.compare(loc.return_air()))
 		update_sound(0)

@@ -178,7 +178,6 @@
 	// let's keep it a string for consistency with the other uses of it
 	burnt = "1"
 	remove_decals()
-	update_icon()
 	return TRUE
 
 /turf/floor/why_cannot_build_cable(var/mob/user, var/cable_error)

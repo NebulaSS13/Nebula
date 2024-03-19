@@ -61,6 +61,9 @@
 /decl/hierarchy/outfit/corpse/slavers_base
 	name = "Basic slaver output"
 
+/obj/abstract/landmark/corpse/slavers_base
+	abstract_type = /obj/abstract/landmark/corpse/slavers_base
+
 /obj/abstract/landmark/corpse/slavers_base/slaver1
 	name = "Slaver"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver1)

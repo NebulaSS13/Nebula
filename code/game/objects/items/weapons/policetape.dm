@@ -145,7 +145,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 
 /**Place a tape line on the current turf. */
 /obj/item/stack/tape_roll/barricade_tape/proc/place_line(var/mob/user, var/turf/T, var/pdir)
-	if(T.is_open() || T.is_wall())
+	if(!T || T.is_open() || T.is_wall())
 		to_chat(user, SPAN_WARNING("You can't place tape here!"))
 		return
 	if(locate(/obj/structure/tape_barricade) in T)
@@ -254,7 +254,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		var/turf/target_turf = get_step(src, look_dir)
 		var/obj/structure/tape_barricade/B = locate(/obj/structure/tape_barricade, target_turf)
 		//We connect to walls and other tape_barricades
-		if((B && !QDELETED(B)) || (!B && target_turf.is_wall()))
+		if((B && !QDELETED(B)) || (!B && target_turf?.is_wall()))
 			neighbors |= look_dir
 
 /**Allow sutypes to override with their own forced icon state name.*/

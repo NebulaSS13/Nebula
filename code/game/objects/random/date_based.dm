@@ -13,7 +13,7 @@
 	return ..()
 
 /obj/random/date_based/proc/check_date()
-	if(date_check.IsValid())
+	if(date_check?.IsValid())
 		return spawn_item()
 
 /datum/is_date/proc/IsValid()

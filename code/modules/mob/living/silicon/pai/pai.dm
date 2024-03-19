@@ -86,7 +86,7 @@ var/global/list/possible_say_verbs = list(
 		if(istype(loc, /obj/item/paicard))
 			card = loc
 		else
-			card.radio = new /obj/item/radio(card)
+			card = new /obj/item/paicard(src)
 	if(istype(card))
 		if(!card.radio)
 			card.radio = new /obj/item/radio(card)

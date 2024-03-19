@@ -21,6 +21,7 @@
 
 /obj/abstract/landmark/corpse
 	name = "Unknown"
+	abstract_type = /obj/abstract/landmark/corpse
 	var/species                                       // List of species to pick from.
 	var/corpse_outfits = list(/decl/hierarchy/outfit) // List of outfits to pick from. Uses pickweight()
 	var/spawn_flags = (~0)

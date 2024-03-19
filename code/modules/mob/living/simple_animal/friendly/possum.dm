@@ -31,7 +31,7 @@
 	expected_type = /mob/living/simple_animal/opossum
 /datum/ai/opossum/do_process(time_elapsed)
 	. = ..()
-	if(!prob(1))
+	if(!prob(1) || !body.loc)
 		return
 	var/mob/living/simple_animal/opossum/poss = body
 	poss.resting = (poss.stat == UNCONSCIOUS)

@@ -24,17 +24,15 @@
 /obj/machinery/atmospherics/unary/thermal_plate/Process()
 	..()
 
-	var/datum/gas_mixture/environment = loc.return_air()
+	var/datum/gas_mixture/environment = loc?.return_air()
+	if(!environment)
+		return
 
 	//Get processable air sample and thermal info from environment
 
 	var/transfer_moles = 0.25 * environment.get_total_moles()
 	var/datum/gas_mixture/external_removed = environment.remove(transfer_moles)
-
-	if (!external_removed)
-		return radiate()
-
-	if (external_removed.get_total_moles() < 10)
+	if (external_removed?.get_total_moles() < 10)
 		return radiate()
 
 	//Get same info from connected gas

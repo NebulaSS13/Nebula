@@ -30,10 +30,12 @@
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "X"
 	color = COLOR_PURPLE
+	abstract_type = /obj/prefab
 	var/prefab_type
 
 /obj/prefab/Initialize()
 	..()
-	var/decl/prefab/prefab = GET_DECL(prefab_type)
-	prefab.create(loc)
+	if(loc)
+		var/decl/prefab/prefab = GET_DECL(prefab_type)
+		prefab?.create(loc)
 	return INITIALIZE_HINT_QDEL

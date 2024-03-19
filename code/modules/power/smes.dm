@@ -18,6 +18,7 @@
 	stat_immune = 0
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
 	reason_broken = MACHINE_BROKEN_GENERIC
+	is_spawnable_type = FALSE
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
