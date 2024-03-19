@@ -63,7 +63,7 @@
 	var/turf/location = loc
 	if(ismob(location))
 		var/mob/M = location
-		if(M.get_active_hand() == src)
+		if(M.get_active_held_item() == src)
 			location = M.loc
 
 	if(isturf(location)) //start a fire if possible
@@ -97,7 +97,7 @@
 		return
 
 	// Make sure our user is still holding us
-	if(user && user.get_active_hand() == src)
+	if(user && user.get_active_held_item() == src)
 		if(user.a_intent == I_HELP) //don't shoot if we're on help intent
 			to_chat(user, SPAN_WARNING("You refrain from firing \the [src] as your intent is set to help."))
 			return
@@ -192,7 +192,7 @@
 	)
 
 	var/handle = show_radial_menu(user, user, options, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src))
-	if(!handle || user.get_active_hand() != src)
+	if(!handle || user.get_active_held_item() != src)
 		return
 
 	switch(handle)

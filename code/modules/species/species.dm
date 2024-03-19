@@ -638,7 +638,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		uniform.add_fingerprint(attacker)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, ran_zone(attacker.get_target_zone(), target = target))
 
-	var/list/holding = list(target.get_active_hand() = 60)
+	var/list/holding = list(target.get_active_held_item() = 60)
 	for(var/thing in target.get_inactive_held_items())
 		holding[thing] = 30
 

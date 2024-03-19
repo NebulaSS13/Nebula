@@ -699,7 +699,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(!zoom && istype(H) && H.equipment_tint_total >= TINT_MODERATE)
 		to_chat(user, SPAN_WARNING("Your visor gets in the way of looking through the [devicename]."))
 		return
-	else if(!zoom && user.get_active_hand() != src)
+	else if(!zoom && user.get_active_held_item() != src)
 		to_chat(user, SPAN_WARNING("You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better."))
 		return
 

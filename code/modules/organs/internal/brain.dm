@@ -207,7 +207,7 @@
 	if(is_bruised() && prob(1) && !HAS_STATUS(owner, STAT_BLURRY))
 		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
 		owner.set_status(STAT_BLURRY, 10)
-	var/held = owner.get_active_hand()
+	var/held = owner.get_active_held_item()
 	if(damage >= 0.5*max_damage && prob(1) && held)
 		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
 		owner.try_unequip(held)

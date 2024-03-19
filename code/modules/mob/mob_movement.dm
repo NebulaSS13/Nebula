@@ -55,7 +55,7 @@
 	if(length(get_active_grabs()))
 		. = TRUE
 	else
-		var/obj/item/hand = get_active_hand()
+		var/obj/item/hand = get_active_held_item()
 		. = hand?.can_be_dropped_by_client(src)
 	if(.)
 		drop_item()
@@ -76,11 +76,9 @@
 		mob.mode()
 	return
 
-/client/verb/toggle_throw_mode()
-	set hidden = 1
-	if(!ismob(mob))
-		return
-	if (!mob.stat && isturf(mob.loc) && !mob.restrained())
+/client/verb/toggle_throw_mode_verb()
+	set hidden = TRUE
+	if(!mob.stat && isturf(mob.loc) && !mob.restrained())
 		mob.toggle_throw_mode()
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.

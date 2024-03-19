@@ -67,7 +67,7 @@
 	var/facing      = get_cardinal_dir(user, targeted_turf) || user.dir
 	var/install_dir = global.reverse_dir[facing]
 	//If we used the screwdriver on the panel, it'll be in the active hand
-	var/obj/item/screwdriver/S = user.get_active_hand()
+	var/obj/item/screwdriver/S = user.get_active_held_item()
 	if(!istype(S))
 		//Otherwise it should be in one of the offhand slots
 		for(S in user.get_inactive_held_items())

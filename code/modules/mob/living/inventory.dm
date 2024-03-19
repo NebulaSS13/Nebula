@@ -62,7 +62,7 @@
 			if(hand.slot_id == slot)
 				hand.add_overlay("hand_selected")
 			hand.compile_overlays()
-		var/obj/item/I = get_active_hand()
+		var/obj/item/I = get_active_held_item()
 		if(istype(I))
 			I.on_active_hand()
 
@@ -76,7 +76,7 @@
 		if(hud_used)
 			hud_used.rebuild_hands()
 
-/mob/living/get_active_hand()
+/mob/living/get_active_held_item()
 	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(get_active_held_item_slot())
 	return inv_slot?.get_equipped_item()
 
@@ -186,7 +186,7 @@
 /mob/living/verb/quick_equip()
 	set name = "quick-equip"
 	set hidden = 1
-	var/obj/item/I = get_active_hand()
+	var/obj/item/I = get_active_held_item()
 	if(!I)
 		to_chat(src, SPAN_WARNING("You are not holding anything to equip."))
 		return

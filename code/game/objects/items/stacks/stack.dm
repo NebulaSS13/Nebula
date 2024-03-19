@@ -116,7 +116,7 @@
 		return
 
 	if(!recipes)
-		recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
+		recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_held_item()?.get_best_tool_archetype())
 
 	var/list/dat = list()
 
@@ -201,7 +201,7 @@
 
 		var/datum/stack_recipe_list/recipe_list = locate(href_list["sublist"])
 		if(istype(recipe_list))
-			var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
+			var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_held_item()?.get_best_tool_archetype())
 			if(recipe_list in recipes)
 				list_recipes(user, recipe_list)
 				return TOPIC_HANDLED
@@ -215,7 +215,7 @@
 			return TOPIC_NOACTION
 
 		// Check that the recipe is still available to us.
-		var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
+		var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_held_item()?.get_best_tool_archetype())
 		if(!(recipe in recipes))
 			var/found_recipe = FALSE
 			for(var/datum/stack_recipe_list/recipe_list in recipes)
