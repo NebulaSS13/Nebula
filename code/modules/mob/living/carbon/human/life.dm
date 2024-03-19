@@ -25,7 +25,6 @@
 	var/toxins_alert = 0
 	var/co2_alert = 0
 	var/fire_alert = 0
-	var/pressure_alert = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/handle_living_non_stasis_processes()
@@ -195,7 +194,7 @@
 		var/loc_temp = environment.temperature
 
 		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
-			pressure_alert = 0
+			SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 0)
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection (convection)
@@ -251,13 +250,13 @@
 	if(adjusted_pressure >= species.hazard_high_pressure)
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
 		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
-		pressure_alert = 2
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 2)
 	else if(adjusted_pressure >= species.warning_high_pressure)
-		pressure_alert = 1
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 1)
 	else if(adjusted_pressure >= species.warning_low_pressure)
-		pressure_alert = 0
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 0)
 	else if(adjusted_pressure >= species.hazard_low_pressure)
-		pressure_alert = -1
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, -1)
 	else
 		var/list/obj/item/organ/external/parts = get_damageable_organs()
 		for(var/obj/item/organ/external/O in parts)
@@ -267,7 +266,7 @@
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			take_damage(OXY, 4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
-		pressure_alert = -2
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, -2)
 
 	return
 
@@ -548,7 +547,7 @@
 				cells.icon_state = "charge-empty"
 
 		if(pressure)
-			pressure.icon_state = "pressure[pressure_alert]"
+			pressure.icon_state = "pressure[GET_HUD_ALERT(src, /decl/hud_element/condition/pressure)]"
 		if(toxin)
 			toxin.icon_state = "tox[toxins_alert ? "1" : "0"]"
 		if(oxygen)

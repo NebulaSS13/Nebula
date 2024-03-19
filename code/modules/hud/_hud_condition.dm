@@ -1,0 +1,7 @@
+// decl stubs for future implementation work.
+/decl/hud_element
+	abstract_type = /decl/hud_element
+/decl/hud_element/condition
+	abstract_type = /decl/hud_element/condition
+
+/decl/hud_element/condition/pressure

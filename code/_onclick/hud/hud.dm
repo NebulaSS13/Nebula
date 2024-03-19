@@ -27,6 +27,8 @@
 
 	var/default_ui_style = /decl/ui_style/midnight
 
+	var/list/alerts
+
 	var/list/hand_hud_objects
 	var/list/swaphand_hud_objects
 	var/obj/screen/intent/action_intent

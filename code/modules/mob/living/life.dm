@@ -20,6 +20,8 @@
 
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
+
+	CLEAR_HUD_ALERTS(src) // These will be set again in the status update proc below.
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
 	handle_stasis()
 
