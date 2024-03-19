@@ -33,7 +33,7 @@
 	name = "health scanner HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
 	icon = 'icons/clothing/eyes/hud_medical.dmi'
-	hud_type = HUD_MEDICAL
+	glasses_hud_type = HUD_MEDICAL
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
@@ -55,7 +55,7 @@
 	name = "security HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status and security records."
 	icon = 'icons/clothing/eyes/hud_security.dmi'
-	hud_type = HUD_SECURITY
+	glasses_hud_type = HUD_SECURITY
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/hud/security/prescription
@@ -82,7 +82,7 @@
 	desc = "A heads-up display that scans for messes and alerts the user. Good for finding puddles hiding under catwalks."
 	icon = 'icons/clothing/eyes/hud_janitor.dmi'
 	body_parts_covered = 0
-	hud_type = HUD_JANITOR
+	glasses_hud_type = HUD_JANITOR
 
 /obj/item/clothing/glasses/hud/janitor/prescription
 	name = "prescription janiHUD"

@@ -136,8 +136,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/water_soothe_amount
 
 	// HUD data vars.
-	var/datum/hud_data/hud
-	var/hud_type
+	var/datum/hud_data/species_hud
 
 	var/grab_type = /decl/grab/normal/passive // The species' default grab type.
 
@@ -381,10 +380,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(!default_cultural_info[token])
 			default_cultural_info[token] = global.using_map.default_cultural_info[token]
 
-	if(hud_type)
-		hud = new hud_type()
+	if(species_hud)
+		species_hud = new species_hud
 	else
-		hud = new()
+		species_hud = new
 
 	if(LAZYLEN(appearance_descriptors))
 		for(var/desctype in appearance_descriptors)

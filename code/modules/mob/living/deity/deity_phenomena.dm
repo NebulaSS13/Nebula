@@ -18,7 +18,7 @@
 /mob/living/deity/proc/silence(var/amount)
 	if(!silenced)
 		to_chat(src, "<span class='warning'>You've been silenced! Your phenomenas are disabled!</span>")
-		var/obj/screen/intent/deity/SD = hud_used?.action_intent
+		var/obj/screen/intent/deity/SD = istype(hud_used) && hud_used.action_intent
 		if(istype(SD))
 			SD.color = "#ff0000"
 	silenced += amount
@@ -34,7 +34,7 @@
 			silenced--
 			if(!silenced)
 				to_chat(src, "<span class='notice'>You are no longer silenced.</span>")
-				var/obj/screen/intent/deity/SD = hud_used?.action_intent
+				var/obj/screen/intent/deity/SD = istype(hud_used) && hud_used.action_intent
 				if(istype(SD))
 					SD.color = null
 		if(power_per_regen < 0 || power < power_min)
@@ -64,7 +64,7 @@
 		for(var/mod in intent_list)
 			if(intent_list[mod] == P)
 				intent_list[mod] = null
-	var/obj/screen/intent/deity/SD = hud_used?.action_intent
+	var/obj/screen/intent/deity/SD = istype(hud_used) && hud_used.action_intent
 	if(istype(SD))
 		SD.update_text()
 	update_phenomenas()

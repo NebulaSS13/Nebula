@@ -434,12 +434,14 @@
 	return TRUE
 
 /obj/item/attack_ai(mob/living/silicon/ai/user)
-	if (istype(src.loc, /obj/item/robot_module))
-		//If the item is part of a cyborg module, equip it
-		if(!isrobot(user))
-			return
-		var/mob/living/silicon/robot/R = user
-		R.activate_module(src)
+	if (!istype(src.loc, /obj/item/robot_module))
+		return
+	//If the item is part of a cyborg module, equip it
+	if(!isrobot(user))
+		return
+	var/mob/living/silicon/robot/R = user
+	R.activate_module(src)
+	if(R.hud_used)
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/W, mob/user)
@@ -727,6 +729,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	else if(!zoom && user.get_active_held_item() != src)
 		to_chat(user, SPAN_WARNING("You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better."))
+		return
+
+	if(!istype(user.hud_used))
 		return
 
 	if(user.hud_used.hud_shown)

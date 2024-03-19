@@ -37,7 +37,7 @@
 	..()
 
 /mob/living/simple_animal/borer
-	hud_type = /datum/hud/borer
+	hud_used = /datum/hud/borer
 
 /mob/living/simple_animal/borer/proc/reset_ui_callback()
 	if(!is_on_special_ability_cooldown())
