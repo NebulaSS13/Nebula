@@ -11,3 +11,5 @@
 /decl/hud_element/condition/oxygen
 
 /decl/hud_element/condition/toxins
+
+/decl/hud_element/condition/carbon_dioxide

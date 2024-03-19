@@ -21,7 +21,6 @@
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
 /mob/living/carbon/human
-	var/co2_alert = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/handle_living_non_stasis_processes()
