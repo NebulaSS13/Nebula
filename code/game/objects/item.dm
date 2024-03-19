@@ -324,13 +324,13 @@
 /obj/item/proc/dragged_onto(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
 
+/obj/item/proc/can_heat_atom(atom/other)
+	return get_heat() > 0 && isflamesource()
+
 /obj/item/afterattack(var/atom/A, var/mob/user, var/proximity)
 	. = ..()
-	if(. || !proximity)
-		return
-	var/atom_heat = get_heat()
-	if(atom_heat > 0)
-		A.handle_external_heating(atom_heat, src, user)
+	if(!. && proximity && can_heat_atom(A))
+		A.handle_external_heating(get_heat(), src, user)
 		return TRUE
 	return FALSE
 
