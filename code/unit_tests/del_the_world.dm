@@ -19,13 +19,15 @@
 	var/list/ignore = typesof(
 		// will error if the area already has one
 		/obj/machinery/power/apc,
-		// ditto, these both might be temporarily broken
+		// throw assert failures around non-null alarm area on spawn
 		/obj/machinery/alarm,
 		// Needs a level above.
-		/obj/structure/stairs,
-		// Fluid system related; causes issues with atoms spawned on the turf.
-		/obj/abstract/landmark/mapped_fluid,
+		/obj/structure/stairs
 	)
+
+	// Suspend to avoid fluid flows shoving stuff off the testing turf.
+	SSfluids.suspend()
+
 	// Instantiate all spawnable atoms
 	for(var/path in typesof(/obj/item, /obj/effect, /obj/structure, /obj/machinery, /obj/vehicle, /mob) - ignore)
 		var/atom/movable/AM
@@ -128,6 +130,8 @@
 			failures += "[path] qdel'd in New()"
 		if(fails & BAD_INIT_SLEPT)
 			failures += "[path] slept during Initialize()"
+
+	SSfluids.wake()
 
 	SSticker.delay_end = FALSE
 	//This shouldn't be needed, but let's be polite
