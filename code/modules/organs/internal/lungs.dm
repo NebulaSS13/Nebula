@@ -289,7 +289,7 @@
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
 			else
 				src.damage += damage
-			owner.fire_alert = 1
+			SET_HUD_ALERT(owner, /decl/hud_element/condition/fire, 1)
 		else if(breath.temperature >= heat_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
@@ -305,7 +305,7 @@
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
 			else
 				src.damage += damage
-			owner.fire_alert = 2
+			SET_HUD_ALERT(owner, /decl/hud_element/condition/fire, 2)
 
 		//breathing in hot/cold air also heats/cools you a bit
 		var/temp_adj = breath.temperature - owner.bodytemperature

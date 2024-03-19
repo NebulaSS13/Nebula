@@ -5,3 +5,5 @@
 	abstract_type = /decl/hud_element/condition
 
 /decl/hud_element/condition/pressure
+
+/decl/hud_element/condition/fire

@@ -24,7 +24,6 @@
 	var/oxygen_alert = 0
 	var/toxins_alert = 0
 	var/co2_alert = 0
-	var/fire_alert = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/handle_living_non_stasis_processes()
@@ -214,7 +213,6 @@
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= get_mob_temperature_threshold(HEAT_LEVEL_1))
 		//Body temperature is too hot.
-		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 		var/burn_dam = 0
 		if(bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_2))
@@ -224,10 +222,10 @@
 		else
 			burn_dam = HEAT_DAMAGE_LEVEL_3
 		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
-		fire_alert = max(fire_alert, 2)
+		SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 2)
 
 	else if(bodytemperature <= get_mob_temperature_threshold(COLD_LEVEL_1))
-		fire_alert = max(fire_alert, 1)
+		SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		var/burn_dam = 0
@@ -241,7 +239,7 @@
 		set_stasis(get_cryogenic_factor(bodytemperature), STASIS_COLD)
 		if(!has_chemical_effect(CE_CRYO, 1))
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
-			fire_alert = max(fire_alert, 1)
+			SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 1)
 
 	// Account for massive pressure differences.  Done by Polymorph
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
@@ -421,7 +419,6 @@
 
 
 /mob/living/carbon/human/handle_regular_hud_updates()
-	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
 	if(life_tick%30==15)
 		hud_updateflag = 1022
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
@@ -553,7 +550,7 @@
 		if(oxygen)
 			oxygen.icon_state = "oxy[oxygen_alert ? "1" : "0"]"
 		if(fire)
-			fire.icon_state = "fire[fire_alert ? fire_alert : 0]"
+			fire.icon_state = "fire[GET_HUD_ALERT(src, /decl/hud_element/condition/fire)]"
 
 		if(bodytemp)
 			if (!species)
