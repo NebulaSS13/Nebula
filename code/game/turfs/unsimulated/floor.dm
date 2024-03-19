@@ -26,12 +26,12 @@
 
 /turf/unsimulated/floor/snow
 	name = "snow"
-	icon = 'icons/turf/exterior/snow.dmi'
+	icon = 'icons/turf/flooring/snow.dmi'
 	icon_state = "0"
 
 /turf/unsimulated/floor/ice
 	name = "ice"
-	icon = 'icons/turf/exterior/ice.dmi'
+	icon = 'icons/turf/flooring/ice.dmi'
 	icon_state = "0"
 	color = COLOR_SKY_BLUE
 

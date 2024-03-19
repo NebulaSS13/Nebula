@@ -1,7 +1,7 @@
 /decl/flooring/fake_grass
 	name = "grass"
 	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
-	icon = 'icons/turf/flooring/grass.dmi'
+	icon = 'icons/turf/flooring/fakegrass.dmi'
 	icon_base = "grass"
 	has_base_range = 3
 	damage_temperature = T0C+80

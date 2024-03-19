@@ -130,7 +130,7 @@
 
 /turf/floor/natural/meat
 	name          = "fleshy ground"
-	icon          = 'icons/turf/exterior/flesh.dmi'
+	icon          = 'icons/turf/flooring/flesh.dmi'
 	desc          = "It's disgustingly soft to the touch. And warm. Too warm."
 	dirt_color    = "#c40031"
 	footstep_type = /decl/footsteps/mud

@@ -1,6 +1,6 @@
 /turf/floor/natural/lava
 	name = "lava"
-	icon = 'icons/turf/exterior/lava.dmi'
+	icon = 'icons/turf/flooring/lava.dmi'
 	movement_delay = 4
 	dirt_color = COLOR_GRAY20
 	footstep_type = /decl/footsteps/lava

@@ -15,39 +15,39 @@
 /decl/flooring/carpet/blue
 	name = "blue carpet"
 	icon_base = "blue1"
-	build_type = /obj/item/stack/tile/carpetblue
+	build_type = /obj/item/stack/tile/carpet/blue
 
 /decl/flooring/carpet/blue2
 	name = "pale blue carpet"
 	icon_base = "blue2"
-	build_type = /obj/item/stack/tile/carpetblue2
+	build_type = /obj/item/stack/tile/carpet/blue2
 
 /decl/flooring/carpet/blue3
 	name = "sea blue carpet"
 	icon_base = "blue3"
-	build_type = /obj/item/stack/tile/carpetblue3
+	build_type = /obj/item/stack/tile/carpet/blue3
 
 /decl/flooring/carpet/magenta
 	name = "magenta carpet"
 	icon_base = "purple"
-	build_type = /obj/item/stack/tile/carpetmagenta
+	build_type = /obj/item/stack/tile/carpet/magenta
 
 /decl/flooring/carpet/purple
 	name = "purple carpet"
 	icon_base = "purple"
-	build_type = /obj/item/stack/tile/carpetpurple
+	build_type = /obj/item/stack/tile/carpet/purple
 
 /decl/flooring/carpet/orange
 	name = "orange carpet"
 	icon_base = "orange"
-	build_type = /obj/item/stack/tile/carpetorange
+	build_type = /obj/item/stack/tile/carpet/orange
 
 /decl/flooring/carpet/green
 	name = "green carpet"
 	icon_base = "green"
-	build_type = /obj/item/stack/tile/carpetgreen
+	build_type = /obj/item/stack/tile/carpet/green
 
 /decl/flooring/carpet/red
 	name = "red carpet"
 	icon_base = "red"
-	build_type = /obj/item/stack/tile/carpetred
+	build_type = /obj/item/stack/tile/carpet/red

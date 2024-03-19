@@ -2,7 +2,7 @@
 /turf/floor/natural
 	var/static/HEIGHT_OFFSET_RANGE = (world.icon_size - 16)
 
-/turf/floor/natural/proc/can_draw_edge_over(turf/exterior/turf_to_check)
+/turf/floor/natural/proc/can_draw_edge_over(turf/floor/natural/turf_to_check)
 	if(istype(turf_to_check))
 		var/my_height    = get_physical_height()
 		var/their_height = turf_to_check.get_physical_height()
@@ -81,7 +81,7 @@
 		if(icon_has_corners)
 			for(var/direction in global.cornerdirs)
 
-				var/turf/exterior/turf_to_check = get_step_resolving_mimic(src, direction)
+				var/turf/floor/natural/turf_to_check = get_step_resolving_mimic(src, direction)
 				if(!istype(turf_to_check) || turf_to_check.density)
 					continue
 

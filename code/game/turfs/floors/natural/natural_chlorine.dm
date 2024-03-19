@@ -1,7 +1,7 @@
 /turf/floor/natural/chlorine_sand
 	name = "chlorinated sand"
 	desc = "Sand that has been heavily contaminated by chlorine."
-	icon = 'icons/turf/exterior/chlorine_sand.dmi'
+	icon = 'icons/turf/flooring/chlorine_sand.dmi'
 	possible_states = 11
 	icon_edge_layer = EXT_EDGE_CHLORINE_SAND
 	dirt_color = "#d2e0b7"
