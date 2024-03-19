@@ -10,6 +10,7 @@
 	#include "levels/_levels.dm"
 	#include "outfits/_outfits.dm"
 
+	#include "shaded_hills_currency.dm"
 	#include "shaded_hills_skills.dm"
 	#include "shaded_hills_turfs.dm"
 
