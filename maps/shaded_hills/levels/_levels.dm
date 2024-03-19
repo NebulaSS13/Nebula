@@ -20,6 +20,7 @@
 /datum/level_data/player_level/shaded_hills/embark/after_generate_level()
 	. = ..()
 	SSweather.setup_weather_system(src)
+	SSdaycycle.add_linked_levels(get_all_connected_level_ids() | level_id, start_at_night = FALSE, update_interval = 20 MINUTES)
 
 /obj/abstract/level_data_spawner/shaded_hills
 	level_data_type = /datum/level_data/player_level/shaded_hills/embark
