@@ -149,6 +149,9 @@
 	return ..()
 
 /obj/effect/energy_net/Process()
+	if(!captured)
+		qdel(src)
+		return PROCESS_KILL
 	if(temporary)
 		countdown--
 	if(captured.buckled != src)

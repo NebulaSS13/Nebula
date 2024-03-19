@@ -140,11 +140,11 @@
 	wow this is stupid, someone help me
 	*/
 	var/turf/T_src = get_turf(src)
-	if(!T_src.loc) return 0
+	if(!T_src?.loc) return 0
 	var/area/A_src = T_src.loc
 
 	var/turf/T_scrub = get_turf(scrubber)
-	if(!T_scrub.loc) return 0
+	if(!T_scrub?.loc) return 0
 	var/area/A_scrub = T_scrub.loc
 
 	if(A_scrub != A_src)
@@ -158,7 +158,7 @@
 	var/found = 0
 
 	var/turf/T = get_turf(src)
-	if(!T.loc) return
+	if(!T?.loc) return
 	var/area/A = T.loc
 	for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in SSmachines.machinery)
 		var/turf/T2 = get_turf(scrubber)

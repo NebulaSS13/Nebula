@@ -1,6 +1,7 @@
 //Load a random map template from the list. Maploader handles it to avoid order of init madness
 /obj/abstract/landmark/map_load_mark
 	name = "map loader landmark"
+	is_spawnable_type = FALSE
 	var/centered = TRUE
 	var/list/map_template_names	//list of template names to pick from
 

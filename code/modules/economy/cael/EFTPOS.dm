@@ -55,7 +55,7 @@
 
 
 	var/obj/item/parcel/D = new(R.loc, null, R, "EFTPOS access code")
-	D.attach_label(usr, null, "EFTPOS access code")
+	D.attach_label(null, null, "EFTPOS access code")
 
 /obj/item/eftpos/attack_self(mob/user)
 	if(get_dist(src,user) <= 1)

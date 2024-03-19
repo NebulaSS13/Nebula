@@ -125,7 +125,7 @@
 #define TURBGENG 0.8
 
 /obj/machinery/turbine/Process()
-	if(!compressor.starter)
+	if(!compressor?.starter)
 		return
 	overlays.Cut()
 	if(stat & BROKEN)

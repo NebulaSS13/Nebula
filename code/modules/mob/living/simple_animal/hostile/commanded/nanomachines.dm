@@ -30,6 +30,8 @@
 
 /datum/ai/nanomachines/do_process(time_elapsed)
 	. = ..()
+	if(!body.loc)
+		return
 	var/mob/living/simple_animal/hostile/commanded/nanomachine/swarm = body
 	switch(swarm.stance)
 		if(COMMANDED_HEAL)

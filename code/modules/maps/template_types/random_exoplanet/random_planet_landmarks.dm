@@ -3,6 +3,7 @@
 /obj/abstract/landmark/exoplanet_spawn
 	name = "base exoplanet spawner"
 	abstract_type = /obj/abstract/landmark/exoplanet_spawn
+	is_spawnable_type = FALSE
 
 /obj/abstract/landmark/exoplanet_spawn/Initialize(ml)
 	..()

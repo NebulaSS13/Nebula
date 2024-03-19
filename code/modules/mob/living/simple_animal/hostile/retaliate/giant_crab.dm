@@ -36,6 +36,8 @@
 
 /datum/ai/giant_crab/do_process(time_elapsed)
 	. = ..()
+	if(!body.loc)
+		return
 	var/mob/living/simple_animal/hostile/retaliate/giant_crab/crab = body
 	if((crab.current_health > crab.get_max_health() / 1.5) && length(crab.enemies) && prob(10))
 		if(crab.victim)

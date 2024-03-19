@@ -196,11 +196,14 @@
 	use_power = POWER_USE_ACTIVE
 	power_channel = EQUIP
 	invisibility = INVISIBILITY_ABSTRACT
+	is_spawnable_type = FALSE
 	var/mob/living/silicon/ai/powered_ai = null
 
 /obj/machinery/ai_powersupply/Initialize()
 	. = ..()
 	powered_ai = loc
+	if(!istype(powered_ai))
+		return INITIALIZE_HINT_QDEL
 	powered_ai.psupply = src
 
 /obj/machinery/ai_powersupply/Destroy()

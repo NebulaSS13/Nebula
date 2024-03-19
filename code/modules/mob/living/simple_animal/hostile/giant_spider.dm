@@ -180,6 +180,8 @@
 	expected_type = /mob/living/simple_animal/hostile/giant_spider
 
 /datum/ai/giant_spider/do_process()
+	if(!body.loc)
+		return
 	var/mob/living/simple_animal/hostile/giant_spider/spooder = body
 	if(spooder.stance == HOSTILE_STANCE_IDLE)
 		//chance to skitter madly away
@@ -207,6 +209,8 @@ Guard caste procs
 
 /datum/ai/giant_spider/guard/do_process(time_elapsed)
 	. = ..()
+	if(!body.loc)
+		return
 	var/mob/living/simple_animal/hostile/giant_spider/guard/spooder = body
 	if(spooder.berserking)
 		return
@@ -312,6 +316,8 @@ Nurse caste procs
 
 /datum/ai/giant_spider/nurse/do_process(time_elapsed)
 	. = ..()
+	if(!body.loc)
+		return
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/spooder = body
 	if(spooder.stance != HOSTILE_STANCE_IDLE)
 		spooder.busy = 0

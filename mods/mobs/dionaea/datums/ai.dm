@@ -5,6 +5,8 @@
 	var/wander_prob = 44
 
 /datum/ai/nymph/do_process(var/time_elapsed)
+	if(!body.loc)
+		return
 	if(body.stat != CONSCIOUS)
 		return
 	if(prob(wander_prob) && !LAZYLEN(body.grabbed_by) && isturf(body.loc)) //won't move if being pulled

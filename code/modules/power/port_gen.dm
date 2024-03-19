@@ -251,7 +251,7 @@
 
 /obj/machinery/port_gen/pacman/handleInactive()
 	var/cooling_temperature = 20
-	var/datum/gas_mixture/environment = loc.return_air()
+	var/datum/gas_mixture/environment = loc?.return_air()
 	if (environment)
 		var/ratio = min(environment.return_pressure()/ONE_ATMOSPHERE, 1)
 		var/ambient = environment.temperature - T20C

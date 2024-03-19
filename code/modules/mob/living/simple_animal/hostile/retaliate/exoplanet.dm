@@ -28,6 +28,8 @@
 	expected_type = /mob/living/simple_animal/hostile/retaliate/beast
 
 /datum/ai/beast/do_process(time_elapsed)
+	if(!body.loc)
+		return
 	var/mob/living/simple_animal/hostile/retaliate/beast/beast = body
 	var/nut = beast.get_nutrition()
 	var/max_nut = beast.get_max_nutrition()

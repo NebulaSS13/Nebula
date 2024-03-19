@@ -19,7 +19,12 @@
 	var/active = 0
 
 /obj/structure/monolith/Initialize()
+
 	. = ..()
+
+	if(!loc)
+		return INITIALIZE_HINT_QDEL
+
 	icon_state = "jaggy[rand(1,4)]"
 
 	var/datum/planetoid_data/E = SSmapping.planetoid_data_by_z[z]
