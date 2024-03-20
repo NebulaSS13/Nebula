@@ -60,9 +60,6 @@
 
 /datum/ai/slime/do_process(time_elapsed)
 	. = ..()
-	if(!body.loc)
-		return
-
 	if(attacked > 0)
 		attacked = clamp(attacked--, 0, 50)
 

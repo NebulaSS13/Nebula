@@ -27,8 +27,6 @@
 
 /datum/ai/commanded/do_process(time_elapsed)
 	..()
-	if(!body.loc)
-		return
 	var/mob/living/simple_animal/hostile/commanded/com = body
 	while(com.command_buffer.len > 1)
 		var/mob/speaker = com.command_buffer[1]

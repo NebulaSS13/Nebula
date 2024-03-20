@@ -7,7 +7,7 @@
 	)
 
 /datum/ai/monkey/do_process(var/time_elapsed)
-	if(body.incapacitated() || !body.loc)
+	if(body.incapacitated())
 		return
 
 	if(prob(33) && isturf(body.loc) && !LAZYLEN(body.grabbed_by)) //won't move if being pulled

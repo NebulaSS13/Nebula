@@ -44,8 +44,6 @@
 
 /datum/ai/mouse/do_process()
 	..()
-	if(!body.loc)
-		return
 	var/mob/living/simple_animal/mouse/mouse = body
 	if(prob(mouse.speak_chance))
 		playsound(mouse.loc, 'sound/effects/mousesqueek.ogg', 50)
