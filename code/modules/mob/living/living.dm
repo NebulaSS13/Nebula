@@ -188,7 +188,7 @@ default behaviour is:
 	set hidden = 1
 	var/current_max_health = get_max_health()
 	if (current_health < (current_max_health/2)) // Health below half of maxhealth.
-		adjustBrainLoss(current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
+		take_damage(BRAIN, current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
 		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
 /mob/living/proc/update_body(var/update_icons=1)
@@ -198,8 +198,21 @@ default behaviour is:
 /mob/living/proc/should_be_dead()
 	return current_health <= 0
 
+/mob/living/proc/get_life_damage_types()
+	var/static/list/life_damage_types = list(
+		OXY,
+		TOX,
+		BURN,
+		BRUTE,
+		CLONE,
+		PAIN
+	)
+	return life_damage_types
+
 /mob/living/proc/get_total_life_damage()
-	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
+	. = 0
+	for(var/damtype in get_life_damage_types())
+		. += get_damage(damtype)
 
 /mob/living/update_health()
 
@@ -304,26 +317,26 @@ default behaviour is:
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
-	adjustBruteLoss(-brute, do_update_health = FALSE)
-	adjustFireLoss(-burn, do_update_health = update_health)
+	heal_damage(BRUTE, brute, do_update_health = FALSE)
+	heal_damage(BURN, do_update_health = update_health)
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
 	if(status_flags & GODMODE)
 		return
-	adjustBruteLoss(brute, do_update_health = FALSE)
-	adjustFireLoss(burn)
+	take_damage(BRUTE, brute, do_update_health = FALSE)
+	take_damage(BURN, burn)
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
-	adjustBruteLoss(-brute, do_update_health = FALSE)
-	adjustFireLoss(-burn)
+	heal_damage(BRUTE, brute, do_update_health = FALSE)
+	heal_damage(BURN, burn)
 
 // damage MANY external organs, in random order
 /mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
 	if(status_flags & GODMODE)	return 0	//godmode
-	adjustBruteLoss(brute, do_update_health = FALSE)
-	adjustFireLoss(burn)
+	take_damage(BRUTE, brute, do_update_health = FALSE)
+	take_damage(BURN, burn)
 
 /mob/living/proc/restore_all_organs()
 	return
@@ -352,10 +365,10 @@ default behaviour is:
 		reagent_list.clear_reagents()
 
 	// shut down various types of badness
-	setToxLoss(0)
-	setOxyLoss(0)
-	setCloneLoss(0)
-	setBrainLoss(0)
+	set_damage(TOX, 0)
+	set_damage(OXY, 0)
+	set_damage(CLONE, 0)
+	set_damage(BRAIN, 0)
 	set_status(STAT_PARA, 0)
 	set_status(STAT_STUN, 0)
 	set_status(STAT_WEAK, 0)
@@ -369,7 +382,7 @@ default behaviour is:
 	// fix all status conditions including blind/deaf
 	clear_status_effects()
 
-	heal_overall_damage(getBruteLoss(), getFireLoss())
+	heal_overall_damage(get_damage(BRUTE), get_damage(BURN))
 
 	// fix all of our organs
 	restore_all_organs()
@@ -395,9 +408,9 @@ default behaviour is:
 
 /mob/living/proc/basic_revival(var/repair_brain = TRUE)
 
-	if(repair_brain && getBrainLoss() > 50)
+	if(repair_brain && get_damage(BRAIN) > 50)
 		repair_brain = FALSE
-		setBrainLoss(50)
+		set_damage(BRAIN, 50)
 
 	if(stat == DEAD)
 		switch_from_dead_to_living_mob_list()
@@ -814,7 +827,7 @@ default behaviour is:
 		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
 		SET_STATUS_MAX(src, STAT_PARA, rand(8,16))
 		set_status(STAT_JITTER, rand(150,200))
-		adjustHalLoss(rand(50,60))
+		take_damage(PAIN, rand(50,60))
 
 /mob/living/proc/get_digestion_product()
 	return null
@@ -902,11 +915,11 @@ default behaviour is:
 	..()
 	if(!has_gravity())
 		return
-	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
+	if(isturf(loc) && pull_damage() && prob(get_damage(BRUTE) / 6))
 		if (!should_have_organ(BP_HEART))
 			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
-			adjustBruteLoss(1)
+			take_damage(BRUTE, 1)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
 
 /mob/living/CanUseTopicPhysical(mob/user)
@@ -1069,7 +1082,7 @@ default behaviour is:
 				A.alert_on_fall(src)
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
-	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))) * get_fall_height())
+	take_damage(BRUTE, rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))) * get_fall_height())
 
 /mob/living/proc/get_toxin_resistance()
 	var/decl/species/species = get_species()

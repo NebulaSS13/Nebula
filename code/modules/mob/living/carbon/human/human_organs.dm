@@ -10,7 +10,7 @@
 	return E?.name
 
 /mob/living/carbon/human/proc/should_recheck_bad_external_organs()
-	var/damage_this_tick = getToxLoss()
+	var/damage_this_tick = get_damage(TOX)
 	for(var/obj/item/organ/external/O in get_external_organs())
 		damage_this_tick += O.burn_dam + O.brute_dam
 

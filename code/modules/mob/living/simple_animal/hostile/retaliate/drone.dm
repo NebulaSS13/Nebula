@@ -108,8 +108,8 @@
 	if(prob(1))
 		src.visible_message("<span class='warning'>[html_icon(src)] [src] shudders and shakes as some of it's damaged systems come back online.</span>")
 		spark_at(src, cardinal_only = TRUE)
-		adjustBruteLoss(-(rand(10,50)), do_update_health = FALSE)
-		adjustFireLoss(-(rand(10,50)))
+		heal_damage(BRUTE, (rand(10,50)), do_update_health = FALSE)
+		heal_damage(BURN, (rand(10,50)))
 
 	//spark for no reason
 	if(prob(5))
@@ -170,7 +170,7 @@
 
 //ion rifle!
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
-	adjustFireLoss(rand(3,15) * (severity + 1))
+	take_damage(BURN, rand(3,15) * (severity + 1))
 	disabled = rand(150, 600)
 	hostile_drone = 0
 	walk(src,0)

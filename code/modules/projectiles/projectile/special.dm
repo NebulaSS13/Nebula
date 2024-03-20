@@ -103,7 +103,7 @@
 						randmutg(H)
 						domutcheck(H,null)
 		else
-			M.adjustFireLoss(rand(5,15))
+			M.heal_damage(BURN, rand(5,15))
 			M.show_message(SPAN_DANGER("The radiation beam singes you!"))
 	else
 		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))

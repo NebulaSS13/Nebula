@@ -135,7 +135,7 @@
 				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
 			if(prob(1))
 				to_chat(src, "<span class='warning'>You feel strange!</span>")
-				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
+				take_damage(CLONE, 5 * RADIATION_SPEED_COEFFICIENT)
 				emote(/decl/emote/audible/gasp)
 	if(radiation > 150)
 		damage = 8
@@ -145,7 +145,7 @@
 	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
-		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+		take_damage(TOX, damage * RADIATION_SPEED_COEFFICIENT)
 		var/list/limbs = get_external_organs()
 		if(!isSynthetic() && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)

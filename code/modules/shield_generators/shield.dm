@@ -236,7 +236,7 @@
 
 
 /obj/effect/shield/proc/overcharge_shock(var/mob/living/M)
-	M.adjustFireLoss(rand(20, 40))
+	M.take_damage(BURN, rand(20, 40))
 	SET_STATUS_MAX(M, STAT_WEAK, 5)
 	to_chat(M, "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyses you!</span>")
 	take_damage(10, SHIELD_DAMTYPE_EM)
