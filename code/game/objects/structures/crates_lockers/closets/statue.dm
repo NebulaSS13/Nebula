@@ -24,10 +24,10 @@
 		L.forceMove(src)
 		L.set_sdisability(MUTED)
 		current_health = L.current_health + 100 //stoning damaged mobs will result in easier to shatter statues
-		intialTox = L.getToxLoss()
-		intialFire = L.getFireLoss()
-		intialBrute = L.getBruteLoss()
-		intialOxy = L.getOxyLoss()
+		intialTox = L.get_damage(TOX)
+		intialFire = L.get_damage(BURN)
+		intialBrute = L.get_damage(BRUTE)
+		intialOxy = L.get_damage(OXY)
 		if(ishuman(L))
 			name = "statue of [L.name]"
 			if(L.gender == "female")
@@ -49,10 +49,10 @@
 /obj/structure/closet/statue/Process()
 	timer--
 	for(var/mob/living/M in src) //Go-go gadget stasis field
-		M.setToxLoss(intialTox)
-		M.adjustFireLoss(intialFire - M.getFireLoss(), do_update_health = FALSE)
-		M.adjustBruteLoss(intialBrute - M.getBruteLoss())
-		M.setOxyLoss(intialOxy)
+		M.set_damage(TOX, intialTox)
+		M.take_damage(BURN, intialFire - M.get_damage(BURN), do_update_health = FALSE)
+		M.take_damage(BRUTE, intialBrute - M.get_damage(BRUTE))
+		M.set_damage(OXY, intialOxy)
 	if (timer <= 0)
 		dump_contents()
 		STOP_PROCESSING(SSobj, src)

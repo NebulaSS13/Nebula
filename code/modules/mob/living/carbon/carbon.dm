@@ -62,7 +62,7 @@
 		organ.take_external_damage(d, 0)
 	else
 		take_organ_damage(d)
-	if(prob(getBruteLoss() - 50))
+	if(prob(get_damage(BRUTE) - 50))
 		gib()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)

@@ -401,7 +401,7 @@
 
 		// Brute damage repair.
 		if(IS_WELDER(thing))
-			if(!getBruteLoss())
+			if(!get_damage(BRUTE))
 				return TRUE
 			var/list/damaged_parts = list()
 			for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
@@ -414,7 +414,7 @@
 
 		// Burn damage repair.
 		if(IS_COIL(thing))
-			if(!getFireLoss())
+			if(!get_damage(BURN))
 				return TRUE
 			var/list/damaged_parts = list()
 			for(var/obj/item/mech_component/MC in list(arms, legs, body, head))

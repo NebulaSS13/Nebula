@@ -67,12 +67,12 @@
 	if(dosage >= 3)
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15
-		M.adjustOxyLoss(10,20)
+		M.take_damage(OXY, 10,20)
 		if(istype(H))
 			H.co2_alert = 1
 	else if(dosage >= 1.5)
 		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
-		M.adjustOxyLoss(3,5)
+		M.take_damage(OXY, 3,5)
 		if(istype(H))
 			H.co2_alert = 1
 	else if(dosage >= 0.25)

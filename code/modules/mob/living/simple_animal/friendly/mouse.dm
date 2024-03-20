@@ -82,7 +82,7 @@
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
 /mob/living/simple_animal/mouse/proc/splat()
-	adjustBruteLoss(get_max_health())  // Enough damage to kill
+	take_damage(BRUTE, get_max_health())  // Enough damage to kill
 	splatted = TRUE
 	death()
 

@@ -74,8 +74,8 @@
 		radiation -= rads
 		adjust_nutrition(rads)
 		heal_overall_damage(rads,rads)
-		adjustOxyLoss(-(rads), do_update_health = FALSE)
-		adjustToxLoss(-(rads))
+		heal_damage(OXY, rads, do_update_health = FALSE)
+		heal_damage(TOX, rads)
 
 /decl/bodytype/diona
 	name = "nymph"

@@ -228,7 +228,7 @@
 	desc = "acute toxicity"
 
 /decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/removed, var/value)
-	M.adjustToxLoss(value * removed)
+	M.take_damage(TOX, value * removed)
 
 /decl/random_chem_effect/random_properties/heal_brute
 	beneficial = 1

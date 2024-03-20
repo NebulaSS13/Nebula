@@ -294,15 +294,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	if(bodytemperature < minbodytemp)
 		fire_alert = 2
-		adjustFireLoss(cold_damage_per_tick)
+		take_damage(BURN, cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
 		fire_alert = 1
-		adjustFireLoss(heat_damage_per_tick)
+		take_damage(BURN, heat_damage_per_tick)
 	else
 		fire_alert = 0
 
 	if(!atmos_suitable)
-		adjustBruteLoss(unsuitable_atmos_damage)
+		take_damage(BRUTE, unsuitable_atmos_damage)
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
@@ -337,7 +337,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	bullet_impact_visuals(Proj)
-	adjustBruteLoss(damage)
+	take_damage(BRUTE, damage)
 	Proj.on_hit(src)
 	return 0
 
@@ -370,7 +370,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				harm_verb = pick(attack.attack_verb)
 				if(attack.sharp || attack.edge)
 					adjustBleedTicks(dealt_damage)
-		adjustBruteLoss(dealt_damage)
+		take_damage(BRUTE, dealt_damage)
 		user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
 		user.do_attack_animation(src)
 		return TRUE
@@ -383,7 +383,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
 			else if(current_health < get_max_health() && MED.can_use(1))
-				adjustBruteLoss(-MED.animal_heal)
+				heal_damage(BRUTE, MED.animal_heal)
 				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 				MED.use(1)
 		else
@@ -427,7 +427,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
 		purge = 3
-	adjustBruteLoss(damage)
+	take_damage(BRUTE, damage)
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)
 
@@ -540,7 +540,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/handle_bleeding()
 	bleed_ticks--
-	adjustBruteLoss(1)
+	take_damage(BRUTE, 1)
 
 	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour

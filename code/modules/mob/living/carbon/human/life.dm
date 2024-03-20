@@ -32,7 +32,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+	last_pain = null // Clear the last cached pain value so further calls won't use an old value.
 	//Organs and blood
 	handle_organs()
 	handle_shock()
@@ -144,7 +144,7 @@
 		cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
-	if(getFireLoss())
+	if(get_damage(BURN))
 		if((MUTATION_COLD_RESISTANCE in mutations) || (prob(1)))
 			heal_organ_damage(0,1)
 
@@ -266,7 +266,7 @@
 			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
-			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
+			take_damage(OXY, 4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
 
 	return
@@ -369,7 +369,7 @@
 		for(var/obj/item/I in src)
 			if(I.contaminated)
 				total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
-		adjustToxLoss(total_contamination)
+		take_damage(TOX, total_contamination)
 
 	. = ..()
 	if(!.)
@@ -384,7 +384,7 @@
 	if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
 		set_stat(UNCONSCIOUS)
 		animate_tail_reset()
-		adjustHalLoss(-3)
+		heal_damage(PAIN, 3)
 		if(prob(2) && is_asystole() && isSynthetic())
 			visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
 	else
@@ -402,13 +402,13 @@
 			ADJ_STATUS(src, STAT_DIZZY, -15)
 		if(HAS_STATUS(src, STAT_JITTER))
 			ADJ_STATUS(src, STAT_JITTER, -15)
-		adjustHalLoss(-3)
+		heal_damage(PAIN, 3)
 	else
 		if(HAS_STATUS(src, STAT_DIZZY))
 			ADJ_STATUS(src, STAT_DIZZY, -3)
 		if(HAS_STATUS(src, STAT_JITTER))
 			ADJ_STATUS(src, STAT_JITTER, -3)
-		adjustHalLoss(-1)
+		heal_damage(PAIN, 1)
 
 	if(HAS_STATUS(src, STAT_DROWSY))
 		SET_STATUS_MAX(src, STAT_BLURRY, 2)
@@ -450,7 +450,7 @@
 		else
 			clear_fullscreen("crit")
 			//Oxygen damage overlay
-			if(getOxyLoss())
+			if(get_damage(OXY))
 				var/severity = 0
 				switch(getOxyLossPercent())
 					if(10 to 20)		severity = 1
@@ -465,7 +465,7 @@
 				clear_fullscreen("oxy")
 
 		//Fire and Brute damage overlay (BSSR)
-		var/hurtdamage = src.getBruteLoss() + src.getFireLoss() + damageoverlaytemp
+		var/hurtdamage = src.get_damage(BRUTE) + src.get_damage(BURN) + damageoverlaytemp
 		damageoverlaytemp = 0 // We do this so we can detect if someone hits us or not.
 		if(hurtdamage)
 			var/severity = 0
@@ -616,7 +616,7 @@
 		else if (should_have_organ(tag))
 			vomit_score += 45
 	if(has_chemical_effect(CE_TOXIN, 1) || radiation)
-		vomit_score += 0.5 * getToxLoss()
+		vomit_score += 0.5 * get_damage(TOX)
 	if(has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
 		vomit_score += 10 * GET_CHEMICAL_EFFECT(src, CE_ALCOHOL_TOXIC)
 	if(has_chemical_effect(CE_ALCOHOL, 1))

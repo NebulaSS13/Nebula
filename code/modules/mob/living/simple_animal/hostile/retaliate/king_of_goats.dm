@@ -153,16 +153,16 @@
 			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
 			stop_automation = TRUE
 			if(do_after(src, 6 SECONDS, src))
-				var/initial_brute = getBruteLoss()
-				var/initial_burn = getFireLoss()
+				var/initial_brute = get_damage(BRUTE)
+				var/initial_burn = get_damage(BURN)
 				visible_message(SPAN_MFAUNA("\The [src] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(src,pick(global.cardinal)), -1, 2, 2, 3, 6)
 				explosion(get_step(src,pick(global.cardinal)), -1, 1, 4, 4, 6)
 				explosion(get_step(src,pick(global.cardinal)), -1, 3, 4, 3, 6)
 				stop_automation = FALSE
 				spellscast += 2
-				setBruteLoss(initial_brute)
-				setFireLoss(initial_burn)
+				set_damage(BRUTE, initial_brute)
+				set_damage(BURN, initial_burn)
 			else
 				visible_message(SPAN_NOTICE("The [src] loses concentration and huffs haughtily."))
 				stop_automation = FALSE

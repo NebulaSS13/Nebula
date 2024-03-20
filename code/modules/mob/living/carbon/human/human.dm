@@ -905,8 +905,8 @@
 
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
 		var/oxyloss_threshold = round(species.total_health * 0.35)
-		if(getOxyLoss() >= oxyloss_threshold)
-			setOxyLoss(oxyloss_threshold)
+		if(get_damage(OXY) >= oxyloss_threshold)
+			set_damage(OXY, oxyloss_threshold)
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
 		return TRUE
@@ -925,7 +925,7 @@
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/nervous_system_failure()
-	return getBrainLoss() >= get_max_health() * 0.75
+	return get_damage(BRAIN) >= get_max_health() * 0.75
 
 /mob/living/carbon/human/melee_accuracy_mods()
 	. = ..()

@@ -238,7 +238,7 @@
 	var/failed_breath = failed_inhale || failed_exhale
 	if(!failed_breath)
 		last_successful_breath = world.time
-		owner.adjustOxyLoss(-5 * inhale_efficiency)
+		owner.heal_damage(OXY, 5 * inhale_efficiency)
 		if(!BP_IS_PROSTHETIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)
 				sound_to(owner, sound(species.breathing_sound,0,0,0,5))
@@ -264,7 +264,7 @@
 			owner.emote(pick(/decl/emote/visible/shiver,/decl/emote/visible/twitch))
 
 	if(damage || GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
-		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
+		owner.take_damage(OXY, HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)
 	last_int_pressure = 0
