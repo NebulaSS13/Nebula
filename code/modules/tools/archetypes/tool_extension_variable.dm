@@ -44,6 +44,13 @@
 	var/tool_name = tool_archetype.name
 	if(tool_archetype.article)
 		tool_name = "\a [tool_name]"
-	to_chat(user, SPAN_NOTICE("You adjust \the [holder] to function as [tool_name]."))
+
+	to_chat(user, get_adjustment_message(tool_name))
 	var/atom/A = holder
 	A.update_icon()
+
+/datum/extension/tool/variable/proc/get_adjustment_message(tool_name)
+	return SPAN_NOTICE("You adjust \the [holder] to function as [tool_name].")
+
+/datum/extension/tool/variable/simple/get_adjustment_message(tool_name)
+	return SPAN_NOTICE("You adjust your grip on \the [holder] to use it as [tool_name].")

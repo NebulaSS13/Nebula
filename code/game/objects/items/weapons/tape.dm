@@ -31,7 +31,7 @@
 
 /obj/item/stack/tape_roll/duct_tape/Initialize(mapload, amount, material)
 	. = ..()
-	set_extension(src, /datum/extension/tool/variable, list(
+	set_extension(src, /datum/extension/tool/variable/simple, list(
 		TOOL_BONE_GEL = TOOL_QUALITY_MEDIOCRE,
 		TOOL_SUTURES =  TOOL_QUALITY_BAD
 	))

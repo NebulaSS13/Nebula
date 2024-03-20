@@ -17,8 +17,8 @@
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)
+	ore_result_amount = 7
 
-// Placeholder for firemaking.
 /decl/material/solid/stone/sandstone
 	name = "sandstone"
 	uid = "solid_sandstone"

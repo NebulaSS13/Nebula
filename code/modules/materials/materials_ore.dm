@@ -19,6 +19,9 @@
 	randpixel                  = 6
 	is_spawnable_type          = TRUE
 	crafting_stack_type        = /obj/item/stack/material/ore
+	craft_verb                 = "knap"
+	craft_verbing              = "knapping"
+	can_be_pulverized          = TRUE
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
@@ -180,7 +183,8 @@
 	for(var/mtype in all_materials)
 		var/decl/material/mat = all_materials[mtype]
 		if(mat.ore_result_amount)
-			new /obj/item/stack/material/ore(T, mat.ore_result_amount, mtype)
+			var/drop_type = mat.ore_type || /obj/item/stack/material/ore
+			new drop_type(T, mat.ore_result_amount, mtype)
 
 #undef ORE_MAX_AMOUNT
 #undef ORE_MAX_OVERLAYS
