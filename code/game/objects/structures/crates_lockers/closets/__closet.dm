@@ -28,6 +28,11 @@ var/global/list/closets = list()
 	var/opened = FALSE
 	var/locked = FALSE
 
+	/// Determines whether or not we wait until the first time our contents are gotten to initialize contents. May lead to icon bugs if not handled delicately.
+	var/lazyload_contents = TRUE
+	/// Whether or not our contents have been initialized or not, used in lazyloaded contents.
+	var/contents_initialized = FALSE
+
 /obj/structure/closet/Destroy()
 	global.closets -= src
 	. = ..()
@@ -47,17 +52,25 @@ var/global/list/closets = list()
 
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/structure/closet/LateInitialize(mapload, ...)
+/obj/structure/closet/proc/create_initial_contents()
+	if(contents_initialized)
+		return
 	var/list/will_contain = WillContain()
 	if(will_contain)
 		create_objects_in_loc(opened ? loc : src, will_contain)
+		contents_initialized = TRUE
 
+/obj/structure/closet/LateInitialize(mapload, ...)
+	if(!lazyload_contents)
+		create_initial_contents()
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
+		create_initial_contents() // always create contents if we're loading contents from the map
 		store_contents()
 
 /obj/structure/closet/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && !opened)
+		create_initial_contents()
 		var/content_size = 0
 		for(var/atom/movable/AM in contents)
 			if(!AM.anchored)
@@ -96,6 +109,7 @@ var/global/list/closets = list()
 
 /obj/structure/closet/proc/store_contents()
 	var/stored_units = 0
+	create_initial_contents()
 
 	if(storage_types & CLOSET_STORAGE_ITEMS)
 		stored_units += store_items(stored_units)
@@ -103,6 +117,10 @@ var/global/list/closets = list()
 		stored_units += store_mobs(stored_units)
 	if(storage_types & CLOSET_STORAGE_STRUCTURES)
 		stored_units += store_structures(stored_units)
+
+/obj/structure/closet/dump_contents()
+	create_initial_contents()
+	return ..()
 
 /obj/structure/closet/proc/open()
 	if(src.opened)
