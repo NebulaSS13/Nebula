@@ -409,6 +409,7 @@
 		TOOL_HATCHET = /obj/item/stack/material/plank,
 		TOOL_SAW = /obj/item/stack/material/plank
 	)
+	matter_multiplier = 3
 
 /obj/item/stack/material/segment
 	name = "segments"
@@ -459,6 +460,7 @@
 	craft_verbing = "sculpting"
 	can_be_pulverized = TRUE
 	can_be_converted_into = list(TOOL_HAMMER = /obj/item/stack/material/brick)
+	matter_multiplier = 1.5
 
 /obj/item/stack/material/lump/large
 	base_state        = "lump_large"
@@ -466,6 +468,7 @@
 	plural_icon_state = "lump_large-mult"
 	max_icon_state    = "lump_large-max"
 	stack_merge_type  = /obj/item/stack/material/lump/large
+	matter_multiplier = 3
 
 /obj/item/stack/material/lump/large/clay
 	material = /decl/material/solid/clay

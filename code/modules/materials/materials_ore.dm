@@ -23,6 +23,7 @@
 	craft_verbing              = "knapping"
 	can_be_pulverized          = TRUE
 	can_be_converted_into      = list(TOOL_HAMMER = /obj/item/stack/material/brick)
+	matter_multiplier          = 1.5
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
