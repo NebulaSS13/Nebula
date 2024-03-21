@@ -17,7 +17,6 @@
 	plural_name = "sheets"
 	abstract_type = /obj/item/stack/material
 	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
-	var/list/can_be_converted_into
 	var/can_be_pulverized = FALSE
 	var/can_be_reinforced = FALSE
 	var/decl/material/reinf_material
@@ -120,6 +119,9 @@
 		update_strings()
 		update_icon()
 
+/obj/item/stack/material/proc/get_stack_conversion_dictionary()
+	return
+
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
 
 	if(can_be_reinforced && istype(W, /obj/item/stack/material))
@@ -129,7 +131,7 @@
 			material.reinforce(user, W, src)
 		return TRUE
 
-	// TODO: convert to can_be_converted_into entry.
+	// TODO: convert to converts_into entry.
 	if(can_be_pulverized && IS_HAMMER(W) && material?.hardness >= MAT_VALUE_RIGID && user.a_intent == I_HURT)
 
 		if(W.material?.hardness < material.hardness)
@@ -137,7 +139,6 @@
 			return TRUE
 
 		var/converting = clamp(get_amount(), 0, 5)
-		world << "[converting] [get_amount()]"
 		if(converting && W.do_tool_interaction(TOOL_HAMMER, user, src, 1 SECOND, "pulverizing", "pulverizing", set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= converting)
 			// TODO: make a gravel type?
 			// TODO: pass actual stone material to gravel?
@@ -155,6 +156,7 @@
 			reinf_material.create_object(get_turf(user), 1)
 			return TRUE
 
+	var/list/can_be_converted_into = get_stack_conversion_dictionary()
 	if(length(can_be_converted_into) && user.a_intent != I_HURT)
 
 		var/convert_tool
@@ -408,11 +410,14 @@
 	crafting_stack_type = /obj/item/stack/material/log
 	craft_verb = "whittle"
 	craft_verbing = "whittling"
-	can_be_converted_into = list(
+	matter_multiplier = 3
+
+/obj/item/stack/material/log/get_stack_conversion_dictionary()
+	var/static/list/converts_into = list(
 		TOOL_HATCHET = /obj/item/stack/material/plank,
 		TOOL_SAW = /obj/item/stack/material/plank
 	)
-	matter_multiplier = 3
+	return converts_into
 
 /obj/item/stack/material/segment
 	name = "segments"
@@ -462,8 +467,13 @@
 	craft_verb = "sculpt"
 	craft_verbing = "sculpting"
 	can_be_pulverized = TRUE
-	can_be_converted_into = list(TOOL_HAMMER = /obj/item/stack/material/brick)
 	matter_multiplier = 1.5
+
+/obj/item/stack/material/lump/get_stack_conversion_dictionary()
+	var/static/list/converts_into = list(
+		TOOL_HAMMER = /obj/item/stack/material/brick
+	)
+	return converts_into
 
 /obj/item/stack/material/lump/large
 	base_state        = "lump_large"
