@@ -106,7 +106,6 @@
 /obj/item/clothing/under/medical/paramedic
 	name = "short sleeve medical jumpsuit"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one has a cross on the chest denoting that the wearer is trained medical personnel."
-	rolled_sleeves = TRUE
 
 /obj/item/clothing/under/medical/scrubs
 	name = "scrubs"

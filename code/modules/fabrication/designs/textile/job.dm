@@ -92,32 +92,32 @@
 	path = /obj/item/clothing/suit/surgicalapron
 
 /datum/fabricator_recipe/textiles/job/medical/genericlab
-	path = /obj/item/clothing/suit/storage/toggle/labcoat
+	path = /obj/item/clothing/suit/storage/labcoat
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatcmo
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
+	path = /obj/item/clothing/suit/storage/labcoat/cmo
 
 /datum/fabricator_recipe/textiles/job/medical/chemistlab
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
+	path = /obj/item/clothing/suit/storage/labcoat/chemist
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatgenetics
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/genetics
+	path = /obj/item/clothing/suit/storage/labcoat/genetics
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatvirologist
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
+	path = /obj/item/clothing/suit/storage/labcoat/virologist
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatblue
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
+	path = /obj/item/clothing/suit/storage/labcoat/blue
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatrd
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
+	path = /obj/item/clothing/suit/storage/labcoat/rd
 
 /datum/fabricator_recipe/textiles/job/medical/suithospital
 	path = /obj/item/clothing/suit/hospital
-	
+
 /datum/fabricator_recipe/textiles/job/medical/suitmedicalresponder
-	path = /obj/item/clothing/suit/storage/toggle/fr_jacket
-	
+	path = /obj/item/clothing/suit/storage/fr_jacket
+
 /datum/fabricator_recipe/textiles/job/medical/medicalchestrig
 	path = /obj/item/clothing/suit/storage/medical_chest_rig
 
@@ -130,7 +130,7 @@
 	path = /obj/item/clothing/suit/storage/forensics
 
 /datum/fabricator_recipe/textiles/job/security/coatspace_agent
-	path = /obj/item/clothing/suit/storage/toggle/agent_jacket
+	path = /obj/item/clothing/suit/storage/agent_jacket
 
 /datum/fabricator_recipe/textiles/job/security/detcoat
 	path = /obj/item/clothing/suit/storage/det_trench/reinforced

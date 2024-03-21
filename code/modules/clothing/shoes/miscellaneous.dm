@@ -2,7 +2,7 @@
 	name = "brown shoes"
 	desc = "A pair of brown shoes. They seem to have extra grip."
 	icon = 'icons/clothing/feet/colored_shoes.dmi'
-	markings_icon = "_coloring"
+	markings_state_modifier = "_coloring"
 	markings_color = WOOD_COLOR_CHOCOLATE
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP

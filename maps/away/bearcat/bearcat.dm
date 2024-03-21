@@ -122,7 +122,7 @@
 /decl/hierarchy/outfit/deadcap
 	name = "Derelict Captain"
 	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
-	suit = /obj/item/clothing/suit/storage/toggle/wintercoat
+	suit = /obj/item/clothing/suit/storage/wintercoat
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 
@@ -130,7 +130,7 @@
 	..()
 	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
 	if(uniform)
-		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
+		var/obj/item/clothing/shirt/hawaii/random/eyegore = new()
 		if(uniform.can_attach_accessory(eyegore))
 			uniform.attach_accessory(null, eyegore)
 		else

@@ -13,7 +13,7 @@
 		/obj/item/cosmetics,
 		/obj/item/grooming,
 		/obj/item/mirror,
-		/obj/item/clothing/accessory/locket,
+		/obj/item/clothing/jewelry,
 		/obj/item/clothing/head/hairflower,
 		/obj/item/flashlight/pen,
 		/obj/item/flashlight,
@@ -38,9 +38,9 @@
 		/obj/item/paicard,
 		/obj/item/stamp,
 		/obj/item/key,
-		/obj/item/clothing/accessory/badge,
-		/obj/item/clothing/accessory/medal,
-		/obj/item/clothing/accessory/armor/tag,
+		/obj/item/clothing/decor/badge,
+		/obj/item/clothing/decor/badge/medal,
+		/obj/item/clothing/decor/armor_tag,
 		)
 	slot_flags = SLOT_ID
 	material = /decl/material/solid/organic/leather

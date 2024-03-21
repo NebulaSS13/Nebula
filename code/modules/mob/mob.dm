@@ -351,7 +351,7 @@
 			dat += "<B>[capitalize(get_descriptive_slot_name(slot))]:</b> <a href='?src=\ref[src];item=[slot]'>[thing_in_slot || "nothing"]</a>"
 			if(istype(thing_in_slot, /obj/item/clothing))
 				var/obj/item/clothing/C = thing_in_slot
-				if(C.accessories.len)
+				if(LAZYLEN(C.accessories))
 					dat += "<A href='?src=\ref[src];item=[slot_tie_str];holder=\ref[C]'>Remove accessory</A>"
 
 	// Do they get an option to set internals?
@@ -366,7 +366,7 @@
 	var/obj/item/clothing/suit = get_equipped_item(slot_w_uniform_str)
 	if(istype(suit))
 		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+	var/obj/item/clothing/sensor/vitals/sensor = get_vitals_sensor()
 	if(sensor)
 		if(sensor.get_sensors_locked())
 			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>Unlock vitals sensors</A>"

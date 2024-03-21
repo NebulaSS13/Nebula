@@ -2069,7 +2069,7 @@
 "oc" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/obj/item/clothing/suit/storage/toggle/bomber,
+/obj/item/clothing/suit/storage/bomber,
 /turf/floor/plating,
 /area/ministation/maint/secmaint)
 "od" = (
@@ -4836,7 +4836,7 @@
 	name = "prototype hypospray";
 	origin_tech = null
 	},
-/obj/item/clothing/accessory/stethoscope,
+/obj/item/clothing/tie/stethoscope,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "yK" = (
@@ -5248,7 +5248,7 @@
 "Av" = (
 /obj/structure/closet/chefcloset,
 /obj/item/storage/box/ammo/beanbags,
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
+/obj/item/clothing/suit/storage/wintercoat/hydro,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn{
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	},

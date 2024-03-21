@@ -6,10 +6,10 @@
 	result_type       = /obj/item/clothing/suit/armor/crafted
 
 /decl/stack_recipe/hardness/armguards
-	result_type       = /obj/item/clothing/accessory/armguards/craftable
+	result_type       = /obj/item/clothing/gloves/armguards/craftable
 
 /decl/stack_recipe/hardness/legguards
-	result_type       = /obj/item/clothing/accessory/legguards/craftable
+	result_type       = /obj/item/clothing/shoes/legguards/craftable
 
 /decl/stack_recipe/hardness/gauntlets
 	result_type       = /obj/item/clothing/gloves/thick/craftable
@@ -52,7 +52,7 @@
 	result_type = /obj/item/chems/glass/mortar
 
 /decl/stack_recipe/ring
-	result_type       = /obj/item/clothing/ring/material
+	result_type       = /obj/item/clothing/jewelry/ring/material
 
 /decl/stack_recipe/hardness/clipboard
 	result_type       = /obj/item/clipboard

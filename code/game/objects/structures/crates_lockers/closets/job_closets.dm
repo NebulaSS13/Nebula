@@ -24,7 +24,7 @@
 		/obj/item/clothing/under/sl_suit = 2,
 		/obj/item/clothing/under/bartender = 2,
 		/obj/item/clothing/under/dress/dress_saloon,
-		/obj/item/clothing/accessory/wcoat/black = 2,
+		/obj/item/clothing/suit/jacket/waistcoat/black = 2,
 		/obj/item/clothing/shoes/color/black = 2
 	)
 
@@ -85,9 +85,9 @@
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/suit/storage/toggle/suit/blue,
+		/obj/item/clothing/suit/storage/suit/blue,
 		/obj/item/clothing/under/lawyer/purpsuit,
-		/obj/item/clothing/suit/storage/toggle/suit/purple,
+		/obj/item/clothing/suit/storage/suit/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black
 	)

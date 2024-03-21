@@ -4,37 +4,37 @@
 	path = /obj/item/clothing/suit/storage/det_trench
 
 /datum/fabricator_recipe/textiles/overwear/coat
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
+	path = /obj/item/clothing/suit/storage/labcoat/coat
 
 /datum/fabricator_recipe/textiles/overwear/leather_coat
 	path = /obj/item/clothing/suit/leathercoat
 
 /datum/fabricator_recipe/textiles/overwear/coatbomber
-	path = /obj/item/clothing/suit/storage/toggle/bomber
+	path = /obj/item/clothing/suit/storage/bomber
 
 /datum/fabricator_recipe/textiles/overwear/coatleather_jacket
 	path = /obj/item/clothing/suit/storage/leather_jacket
 
 /datum/fabricator_recipe/textiles/overwear/coatbrown_jacket
-	path = /obj/item/clothing/suit/storage/toggle/brown_jacket
+	path = /obj/item/clothing/suit/storage/brown_jacket
 
 /datum/fabricator_recipe/textiles/overwear/coathoodie
-	path = /obj/item/clothing/suit/storage/toggle/hoodie
+	path = /obj/item/clothing/suit/storage/hoodie
 
 /datum/fabricator_recipe/textiles/overwear/hoodiealt
-	path = /obj/item/clothing/suit/storage/toggle/hoodie/black
+	path = /obj/item/clothing/suit/storage/hoodie/black
 
 /datum/fabricator_recipe/textiles/overwear/trackstandard
-	path = /obj/item/clothing/suit/storage/toggle/track
+	path = /obj/item/clothing/suit/storage/track
 
 /datum/fabricator_recipe/textiles/overwear/trackblue
-	path = /obj/item/clothing/suit/storage/toggle/track/blue
+	path = /obj/item/clothing/suit/storage/track/blue
 
 /datum/fabricator_recipe/textiles/overwear/trackred
-	path = /obj/item/clothing/suit/storage/toggle/track/red
+	path = /obj/item/clothing/suit/storage/track/red
 
 /datum/fabricator_recipe/textiles/overwear/tracknavy
-	path = /obj/item/clothing/suit/storage/toggle/track/navy
+	path = /obj/item/clothing/suit/storage/track/navy
 
 /datum/fabricator_recipe/textiles/overwear/lettermanstandard
 	path = /obj/item/clothing/suit/letterman

@@ -66,8 +66,8 @@ something, make sure it's not in one of the other lists.*/
 		/obj/random/maintenance/clean =                        320,
 		/obj/item/storage/backpack/toxins =                     10,
 		/obj/item/clothing/glasses/science =                     4,
-		/obj/item/clothing/suit/storage/toggle/labcoat =         4,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science = 4,
+		/obj/item/clothing/suit/storage/labcoat =         4,
+		/obj/item/clothing/suit/storage/labcoat/science = 4,
 		/obj/item/clothing/under/color/white =                   4,
 		/obj/item/clothing/glasses/material =                    3,
 		/obj/item/scanner/plant =                                3,
@@ -110,9 +110,9 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/clothing/mask/balaclava =                       2,
 		/obj/item/storage/briefcase/inflatable =                  2,
 		/obj/item/storage/belt/utility/full =                     2,
-		/obj/item/clothing/accessory/storage/vest/black =         2,
+		/obj/item/clothing/webbing/vest/black =         2,
 		/obj/item/clothing/under/overalls =                       2,
-		/obj/item/clothing/accessory/storage/vest/brown =         2,
+		/obj/item/clothing/webbing/vest/brown =         2,
 		/obj/item/handcuffs =                                     2,
 		/obj/item/clothing/mask/bandana/orange =                  2,
 		/obj/item/clothing/head/hardhat/dblue =                   2,
@@ -121,7 +121,7 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/clothing/glasses/welding =                      1,
 		/obj/item/clothing/shoes/magboots =                       1,
 		/obj/item/beartrap =                                      1,
-		/obj/item/clothing/accessory/storage/drop_pouches/brown = 1
+		/obj/item/clothing/webbing/drop_pouches/brown = 1
 	)
 	return spawnable_choices
 
@@ -146,8 +146,8 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/clothing/glasses/material =              3,
 		/obj/item/clothing/head/soft/yellow =              3,
 		/obj/item/clothing/under/syndicate/tacticool =     2,
-		/obj/item/clothing/accessory/storage/vest/black =  2,
-		/obj/item/clothing/accessory/storage/vest/brown =  2,
+		/obj/item/clothing/webbing/vest/black =  2,
+		/obj/item/clothing/webbing/vest/brown =  2,
 		/obj/item/handcuffs =                              2,
 		/obj/item/storage/belt/utility =                   2,
 		/obj/item/storage/backpack/dufflebag/syndie/ammo = 1,
@@ -172,7 +172,7 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/storage/backpack/satchel/med =                  5,
 		/obj/item/storage/backpack/messenger/med =                5,
 		/obj/item/clothing/gloves/color/white =                   5,
-		/obj/item/clothing/suit/storage/toggle/labcoat =          4,
+		/obj/item/clothing/suit/storage/labcoat =          4,
 		/obj/item/clothing/shoes/color/white =                    3,
 		/obj/item/storage/backpack/dufflebag/med =                3,
 		/obj/item/storage/box/beakers =                           3,
@@ -186,17 +186,17 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/storage/belt/medical/emt =                      2,
 		/obj/item/storage/belt/medical =                          2,
 		/obj/item/clothing/under/medical/paramedic =              2,
-		/obj/item/clothing/accessory/storage/vest/black =         2,
-		/obj/item/clothing/accessory/storage/vest =               2,
-		/obj/item/clothing/accessory/stethoscope =                2,
+		/obj/item/clothing/webbing/vest/black =         2,
+		/obj/item/clothing/webbing/vest =               2,
+		/obj/item/clothing/tie/stethoscope =                2,
 		/obj/item/clothing/glasses/hud/health =                   2,
 		/obj/item/storage/backpack/dufflebag/syndie/med =         1,
 		/obj/item/clothing/shoes/jackboots/swat/combat =          1,
 		/obj/item/clothing/glasses/hud/health/prescription =      1,
 		/obj/item/clothing/head/bio_hood/virology =               1,
 		/obj/item/clothing/suit/bio_suit/general =                1,
-		/obj/item/clothing/accessory/storage/drop_pouches/white = 1,
-		/obj/item/clothing/accessory/storage/drop_pouches/black = 1
+		/obj/item/clothing/webbing/drop_pouches/white = 1,
+		/obj/item/clothing/webbing/drop_pouches/black = 1
 	)
 	return spawnable_choices
 
@@ -227,10 +227,10 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/clothing/glasses/hud/security =                 2,
 		/obj/item/clothing/head/helmet =                          2,
 		/obj/item/clothing/suit/armor/vest/security =             2,
-		/obj/item/clothing/accessory/storage/drop_pouches/black = 2,
+		/obj/item/clothing/webbing/drop_pouches/black = 2,
 		/obj/item/clothing/head/earmuffs =                        2,
 		/obj/item/handcuffs =                                     2,
-		/obj/item/clothing/accessory/storage/holster/thigh =      1,
+		/obj/item/clothing/webbing/holster/thigh =      1,
 		/obj/item/cell/gun =                                      1,
 		/obj/item/clothing/mask/gas/swat =                        1,
 		/obj/item/clothing/mask/gas/syndicate =                   1,
@@ -248,8 +248,8 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/clothing/glasses/sunglasses/sechud =            1,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle =     1,
 		/obj/item/clothing/glasses/sunglasses/sechud =            1,
-		/obj/item/clothing/accessory/storage/holster/hip =        1,
-		/obj/item/clothing/accessory/storage/holster/waist =      1,
-		/obj/item/clothing/accessory/storage/holster/armpit =     1
+		/obj/item/clothing/webbing/holster/hip =        1,
+		/obj/item/clothing/webbing/holster/waist =      1,
+		/obj/item/clothing/webbing/holster/armpit =     1
 	)
 	return spawnable_choices

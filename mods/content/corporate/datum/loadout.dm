@@ -1,25 +1,25 @@
 /decl/loadout_option/accessory/ntaward
 	name = "corporate award selection"
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal
+	path = /obj/item/clothing/decor/badge/medal
 	cost = 8
 
 /decl/loadout_option/accessory/ntaward/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"sciences medal" =        /obj/item/clothing/accessory/medal/nanotrasen/bronze,
-		"distinguished service" = /obj/item/clothing/accessory/medal/nanotrasen/silver,
-		"command medal" =         /obj/item/clothing/accessory/medal/nanotrasen/gold
+		"sciences medal" =        /obj/item/clothing/decor/badge/medal/nanotrasen/bronze,
+		"distinguished service" = /obj/item/clothing/decor/badge/medal/nanotrasen/silver,
+		"command medal" =         /obj/item/clothing/decor/badge/medal/nanotrasen/gold
 	)
 
 /decl/loadout_option/accessory/armband_nt
 	name = "corporate armband"
-	path = /obj/item/clothing/accessory/armband/whitegreen
+	path = /obj/item/clothing/decor/armband/whitegreen
 
 /decl/loadout_option/suit/labcoat_corp
 	name = "labcoat, corporate colors"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
+	path = /obj/item/clothing/suit/storage/labcoat/science
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corporate
@@ -80,7 +80,7 @@
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/suit/storage/leather_jacket/nanotrasen,
-		/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+		/obj/item/clothing/suit/storage/brown_jacket/nanotrasen
 	)
 
 /decl/loadout_option/suit/science_poncho
@@ -89,11 +89,11 @@
 
 /decl/loadout_option/suit/hoodie_nt
 	name = "hoodie, NanoTrasen"
-	path = /obj/item/clothing/suit/storage/toggle/hoodie/nt
+	path = /obj/item/clothing/suit/storage/toggle/nt_hoodie
 
 /decl/loadout_option/suit/wintercoat_dais
 	name = "winter coat, DAIS"
-	path = /obj/item/clothing/suit/storage/toggle/wintercoat/dais
+	path = /obj/item/clothing/suit/storage/wintercoat/dais
 
 /decl/loadout_option/suit/leather/get_gear_tweak_options()
 	. = ..()

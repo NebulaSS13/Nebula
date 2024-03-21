@@ -34,7 +34,7 @@
 		/obj/item/ammo_magazine/pistol/empty         = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/box/pistol/empty     = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/smg/empty            = TRADER_BLACKLIST,
-		/obj/item/clothing/accessory/storage/holster = TRADER_ALL
+		/obj/item/clothing/webbing/holster = TRADER_ALL
 	)
 
 /datum/trader/ship/egunshop
@@ -74,7 +74,7 @@
 		/obj/item/cell/high                          = TRADER_THIS_TYPE,
 		/obj/item/cell/super                         = TRADER_THIS_TYPE,
 		/obj/item/cell/hyper                         = TRADER_THIS_TYPE,
-		/obj/item/clothing/accessory/storage/holster = TRADER_ALL
+		/obj/item/clothing/webbing/holster = TRADER_ALL
 	)
 
 /datum/trader/dogan
@@ -102,5 +102,5 @@
 		/obj/item/gun/projectile/bolt_action/sniper/ant = TRADER_THIS_TYPE,
 		/obj/item/gun/energy/laser/dogan                = TRADER_THIS_TYPE,
 		/obj/item/gun/projectile/automatic/smg/usi      = TRADER_THIS_TYPE,
-		/obj/item/clothing/accessory/storage/holster    = TRADER_ALL
+		/obj/item/clothing/webbing/holster    = TRADER_ALL
 	)

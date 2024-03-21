@@ -21,47 +21,8 @@
 		)
 	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
 
-// no accessory
 /obj/item/clothing/suit/armor/bulletproof/prepared
-	starting_accessories = list(/obj/item/clothing/accessory/armguards/ballistic, /obj/item/clothing/accessory/legguards/ballistic)
-
-/obj/item/clothing/accessory/armguards/ballistic
-	name = "ballistic arm guards"
-	desc = "A pair of armored arm pads with heavy plates to protect against ballistic projectiles."
-	icon = 'icons/clothing/accessories/armor/armguards_ballistic.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
-		ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE,
-		ARMOR_LASER = ARMOR_LASER_SMALL,
-		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
-		ARMOR_BOMB = ARMOR_BOMB_PADDED
-		)
-	color = null
-	siemens_coefficient = 0.7
-	material = /decl/material/solid/metal/plasteel
-	matter = list(
-		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
-		)
-	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
-
-/obj/item/clothing/accessory/legguards/ballistic
-	name = "ballistic leg guards"
-	desc = "A pair of armored leg pads with heavy plates to protect against ballistic projectiles. Looks like they might impair movement."
-	icon = 'icons/clothing/accessories/armor/legguards_ballistic.dmi'
-	color = null
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
-		ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE,
-		ARMOR_LASER = ARMOR_LASER_SMALL,
-		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
-		ARMOR_BOMB = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0.7
-	slowdown = 1
-	material = /decl/material/solid/metal/plasteel
-	matter = list(
-		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
-		)
-	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
+	starting_accessories = list(
+		/obj/item/clothing/gloves/armguards/ballistic,
+		/obj/item/clothing/shoes/legguards/ballistic
+	)

@@ -42,7 +42,7 @@
 	shoes =    /obj/item/clothing/shoes/color/black
 	hands =    list(/obj/item/storage/briefcase/foundation)
 	l_ear =    /obj/item/radio/headset/foundation
-	holster =  /obj/item/clothing/accessory/storage/holster/armpit
+	holster =  /obj/item/clothing/webbing/holster/armpit
 	id_type = /obj/item/card/id/foundation
 	id_slot =  slot_wear_id_str
 

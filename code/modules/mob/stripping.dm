@@ -31,7 +31,7 @@
 				toggle_sensors(user)
 			return
 		if ("lock_sensors")
-			var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+			var/obj/item/clothing/sensor/vitals/sensor = get_vitals_sensor()
 			if (!istype(sensor))
 				return
 			visible_message(SPAN_DANGER("\The [user] is trying to [sensor.get_sensors_locked() ? "un" : ""]lock \the [src]'s sensors!"))
@@ -52,28 +52,28 @@
 				toggle_internals(user)
 			return
 		if("tie")
-			if(!istype(holder) || !holder.accessories.len)
+			if(!istype(holder) || !length(holder.accessories))
 				return
 
-			var/obj/item/clothing/accessory/A
+			var/obj/item/clothing/accessory
 			if(LAZYLEN(holder.accessories) > 1)
-				A = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
+				accessory = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
 			else
-				A = holder.accessories[1]
+				accessory = holder.accessories[1]
 
-			if(!istype(A))
+			if(!istype(accessory))
 				return
 
-			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
+			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [accessory.name]!</span>")
 
 			if(!do_after(user, HUMAN_STRIP_DELAY, src, check_holding = FALSE, progress = FALSE))
 				return
 
-			if(!A || holder.loc != src || !(A in holder.accessories))
+			if(!accessory || holder.loc != src || !(accessory in holder.accessories))
 				return
 
-			admin_attack_log(user, src, "Stripped \an [A] from \the [holder].", "Was stripped of \an [A] from \the [holder].", "stripped \an [A] from \the [holder] of")
-			holder.remove_accessory(user,A)
+			admin_attack_log(user, src, "Stripped \an [accessory] from \the [holder].", "Was stripped of \an [accessory] from \the [holder].", "stripped \an [accessory] from \the [holder] of")
+			holder.remove_accessory(user, accessory)
 			return
 		else
 			var/obj/item/located_item = locate(slot_to_strip_text) in src
@@ -134,7 +134,7 @@
 
 // Modify the current target sensor level.
 /mob/proc/toggle_sensors(var/mob/living/user)
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+	var/obj/item/clothing/sensor/vitals/sensor = get_vitals_sensor()
 	if(!istype(sensor))
 		to_chat(user, SPAN_WARNING("\The [src] is not wearing a vitals sensor."))
 	if (sensor.get_sensors_locked())
@@ -147,4 +147,4 @@
 	for(var/check_slot in global.vitals_sensor_equip_slots)
 		var/obj/item/clothing/equipped = get_equipped_item(check_slot)
 		if(istype(equipped))
-			return (locate(/obj/item/clothing/accessory/vitals_sensor) in equipped.accessories)
+			return (locate(/obj/item/clothing/sensor/vitals) in equipped.accessories)

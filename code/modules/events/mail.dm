@@ -12,10 +12,10 @@
 		/obj/item/storage/box/fancy/crayons,
 		/obj/item/guitar,
 		/obj/item/toy/shipmodel,
-		/obj/item/clothing/accessory/locket,
+		/obj/item/clothing/jewelry/locket,
 		/obj/item/binoculars,
 		/obj/item/camera,
-		/obj/item/clothing/accessory/bowtie/ugly
+		/obj/item/clothing/tie/bow/ugly
 	)
 
 	var/list/rare_gifts = list(

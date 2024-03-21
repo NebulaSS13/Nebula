@@ -600,13 +600,13 @@
 	name = "box of spare engineering armbands"
 	desc = "A box full of engineering armbands. For use in emergencies when provisional engineering peronnel are needed."
 /obj/item/storage/box/armband/engine/WillContain()
-	return list(/obj/item/clothing/accessory/armband/engine = 5)
+	return list(/obj/item/clothing/decor/armband/engine = 5)
 
 /obj/item/storage/box/armband/med
 	name = "box of spare medical armbands"
 	desc = "A box full of medical armbands. For use in emergencies when provisional medical personnel are needed."
 /obj/item/storage/box/armband/med/WillContain()
-	return list(/obj/item/clothing/accessory/armband/med = 5)
+	return list(/obj/item/clothing/decor/armband/med = 5)
 
 /obj/item/storage/box/imprinting
 	name = "box of education implants"

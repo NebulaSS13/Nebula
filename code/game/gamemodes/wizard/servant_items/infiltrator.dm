@@ -3,7 +3,7 @@
 	desc = "Whoever owns this hat means business. Hopefully, it's just good business."
 	color = COLOR_SILVER
 	icon = 'icons/clothing/head/detective.dmi'
-	markings_icon = "band"
+	markings_state_modifier = "band"
 	markings_color = COLOR_DARK_GRAY
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MINOR,
@@ -40,6 +40,7 @@
 	name = "maid's headband"
 	desc = "This dainty, frilled thing is apparently meant to go on your head."
 	icon = 'icons/clothing/head/inf_hat.dmi'
+	markings_state_modifier = null
 
 /obj/item/clothing/suit/infilsuit/fem
 	name = "maid's uniform"

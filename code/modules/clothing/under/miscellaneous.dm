@@ -49,19 +49,19 @@
 	name = "\improper Officer's Dress Uniform"
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\"."
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	should_display_id = FALSE
 
 /obj/item/clothing/under/centcom_officer
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	should_display_id = FALSE
 
 /obj/item/clothing/under/centcom_captain
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	should_display_id = FALSE
 
 /obj/item/clothing/under/owl
 	name = "owl uniform"
@@ -107,7 +107,7 @@
 	icon = 'icons/clothing/under/suits/suit_black.dmi'
 
 /obj/item/clothing/under/suit_jacket/waistcoat
-	starting_accessories = list(/obj/item/clothing/accessory/wcoat/black)
+	starting_accessories = list(/obj/item/clothing/suit/jacket/waistcoat/black)
 
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
@@ -322,8 +322,8 @@
 	desc = "A charcoal suit and red tie. Very professional."
 	icon = 'icons/clothing/under/suits/suit_pants_charcoal.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/navy,
-		/obj/item/clothing/accessory/toggleable/charcoal_jacket
+		/obj/item/clothing/tie/navy,
+		/obj/item/clothing/suit/jacket/charcoal
 	)
 
 /obj/item/clothing/under/suit_jacket/navy
@@ -331,8 +331,8 @@
 	desc = "A navy suit and red tie, intended for the galaxy's finest."
 	icon = 'icons/clothing/under/suits/suit_pants_navy.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/red,
-		/obj/item/clothing/accessory/toggleable/navy_jacket
+		/obj/item/clothing/tie/red,
+		/obj/item/clothing/suit/jacket/navy
 	)
 
 /obj/item/clothing/under/suit_jacket/burgundy
@@ -340,8 +340,8 @@
 	desc = "A burgundy suit and black tie. Somewhat formal."
 	icon = 'icons/clothing/under/suits/suit_pants_burgundy.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/black,
-		/obj/item/clothing/accessory/toggleable/burgundy_jacket
+		/obj/item/clothing/tie/black,
+		/obj/item/clothing/suit/jacket/burgundy
 	)
 
 /obj/item/clothing/under/suit_jacket/checkered
@@ -349,8 +349,8 @@
 	desc = "That's a very nice suit you have there. Shame if something were to happen to it, eh?"
 	icon = 'icons/clothing/under/suits/suit_pants_checkered.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/black,
-		/obj/item/clothing/accessory/toggleable/checkered_jacket
+		/obj/item/clothing/tie/black,
+		/obj/item/clothing/suit/jacket/checkered
 	)
 
 /obj/item/clothing/under/suit_jacket/tan
@@ -358,8 +358,8 @@
 	desc = "A tan suit. Smart, but casual."
 	icon = 'icons/clothing/under/suits/suit_pants_tan.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/long/yellow,
-		/obj/item/clothing/accessory/toggleable/tan_jacket
+		/obj/item/clothing/tie/long/yellow,
+		/obj/item/clothing/suit/jacket/tan
 	)
 
 /obj/item/clothing/under/serviceoveralls

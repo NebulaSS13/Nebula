@@ -1,0 +1,16 @@
+/obj/item/clothing/accessory : /obj/item/clothing/tie
+/obj/item/clothing/accessory/bowtie/@SUBTYPES : /obj/item/clothing/tie/bowtie/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/long/@SUBTYPES : /obj/item/clothing/tie/long/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/black : /obj/item/clothing/tie/black
+/obj/item/clothing/accessory/red : /obj/item/clothing/tie/red
+/obj/item/clothing/accessory/blue_clip : /obj/item/clothing/tie/blue_clip
+/obj/item/clothing/accessory/blue : /obj/item/clothing/tie/blue
+/obj/item/clothing/accessory/navy : /obj/item/clothing/tie/navy
+/obj/item/clothing/accessory/horrible : /obj/item/clothing/tie/horrible
+/obj/item/clothing/accessory/brown : /obj/item/clothing/tie/brown
+/obj/item/clothing/accessory/armband/@SUBTYPES : /obj/item/clothing/armband/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/scarf/@SUBTYPES : /obj/item/clothing/scarf/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/necklace/@SUBTYPES : /obj/item/clothing/jewelry/necklace/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/bracelet/@SUBTYPES : /obj/item/clothing/jewelry/bracelet/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/cloak/@SUBTYPES : /obj/item/clothing/suit/cloak/@SUBTYPES{@OLD}
+obj/item/clothing/accessory/badge/@SUBTYPES : obj/item/clothing/badge/@SUBTYPES{@OLD}

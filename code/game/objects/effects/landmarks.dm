@@ -58,7 +58,7 @@
 /obj/abstract/landmark/costume/madscientist/make_costumes()
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
-	new /obj/item/clothing/suit/storage/toggle/labcoat/mad(src.loc)
+	new /obj/item/clothing/suit/storage/labcoat/mad(src.loc)
 	new /obj/item/clothing/glasses/prescription/gglasses(src.loc)
 
 /obj/abstract/landmark/costume/elpresidente/make_costumes()
@@ -78,12 +78,12 @@
 	new /obj/item/clothing/glasses/blindfold(src.loc)
 
 /obj/abstract/landmark/costume/butler/make_costumes()
-	new /obj/item/clothing/accessory/wcoat/black(src.loc)
+	new /obj/item/clothing/suit/jacket/waistcoat/black(src.loc)
 	new /obj/item/clothing/under/suit_jacket(src.loc)
 	new /obj/item/clothing/head/that(src.loc)
 
 /obj/abstract/landmark/costume/prig/make_costumes()
-	new /obj/item/clothing/accessory/wcoat/black(src.loc)
+	new /obj/item/clothing/suit/jacket/waistcoat/black(src.loc)
 	new /obj/item/clothing/glasses/eyepatch/monocle(src.loc)
 	var/CHOICE= pick( /obj/item/clothing/head/bowler, /obj/item/clothing/head/that)
 	new CHOICE(src.loc)
