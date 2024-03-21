@@ -17,6 +17,7 @@
 	plural_name = "sheets"
 	abstract_type = /obj/item/stack/material
 	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
+	var/list/can_be_converted_into
 	var/can_be_pulverized = FALSE
 	var/can_be_reinforced = FALSE
 	var/decl/material/reinf_material
@@ -148,6 +149,32 @@
 			to_chat(user, SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.create_object(get_turf(user), 1)
 			return TRUE
+
+	if(length(can_be_converted_into) && user.a_intent != I_HURT)
+		var/convert_tool
+		var/obj/item/stack/convert_type
+		for(var/tool_type in can_be_converted_into)
+			if(IS_TOOL(W, tool_type))
+				convert_tool = tool_type
+				convert_type = can_be_converted_into[tool_type]
+				break
+
+		if(convert_type)
+
+			var/matter_per_single_sheet = SHEET_MATERIAL_AMOUNT * matter_multiplier
+			var/product_per_sheet = matter_per_single_sheet / (SHEET_MATERIAL_AMOUNT * initial(convert_type.matter_multiplier))
+			var/minimum_per_one_product = CEILING(1 / product_per_sheet)
+
+			if(get_amount() < minimum_per_one_product)
+				to_chat(user, SPAN_WARNING("You will need [minimum_per_one_product] [minimum_per_one_product == 1 ? singular_name : plural_name] to produce [product_per_sheet] [product_per_sheet == 1 ? initial(convert_type.singular_name) : initial(convert_type.plural_name)]."))
+			else if(W.do_tool_interaction(convert_tool, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= minimum_per_one_product)
+				var/obj/item/stack/product = new convert_type(get_turf(src), product_per_sheet, material?.type, reinf_material?.type)
+				use(minimum_per_one_product)
+				if(product.add_to_stacks(user, TRUE))
+					user.put_in_hands(product)
+
+			return TRUE
+
 
 	return ..()
 
@@ -378,19 +405,10 @@
 	crafting_stack_type = /obj/item/stack/material/log
 	craft_verb = "whittle"
 	craft_verbing = "whittling"
-	var/plank_type = /obj/item/stack/material/plank
-
-/obj/item/stack/material/log/attackby(obj/item/W, mob/user)
-	if(plank_type && (IS_HATCHET(W) || IS_SAW(W)))
-		var/tool_type = W.get_tool_quality(TOOL_HATCHET) >= W.get_tool_quality(TOOL_SAW) ? TOOL_HATCHET : TOOL_SAW
-		if(W.do_tool_interaction(tool_type, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src))
-			var/obj/item/stack/planks = new plank_type(get_turf(src), rand(2,4), material?.type, reinf_material?.type) // todo: change plank amount based on carpentry skillcheck
-			playsound(loc, 'sound/foley/wooden_drop.ogg', 40, TRUE)
-			use(1)
-			if(planks.add_to_stacks(user, TRUE))
-				user.put_in_hands(planks)
-		return TRUE
-	return ..()
+	can_be_converted_into = list(
+		TOOL_HATCHET = /obj/item/stack/material/plank,
+		TOOL_SAW = /obj/item/stack/material/plank
+	)
 
 /obj/item/stack/material/segment
 	name = "segments"
@@ -440,6 +458,7 @@
 	craft_verb = "sculpt"
 	craft_verbing = "sculpting"
 	can_be_pulverized = TRUE
+	can_be_converted_into = list(TOOL_HAMMER = /obj/item/stack/material/brick)
 
 /obj/item/stack/material/lump/large
 	base_state        = "lump_large"

@@ -22,6 +22,7 @@
 	craft_verb                 = "knap"
 	craft_verbing              = "knapping"
 	can_be_pulverized          = TRUE
+	can_be_converted_into      = list(TOOL_HAMMER = /obj/item/stack/material/brick)
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
@@ -96,7 +97,6 @@
 /obj/item/stack/material/ore/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/stack/material) && !is_same(W))
 		return FALSE //Don't reinforce
-
 	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		return FALSE //Don't melt stuff with welder
 	return ..()
