@@ -154,8 +154,8 @@
 
 
 /obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/quantity, mob/user, var/paint_color)
-	var/required = quantity*recipe.req_amount
-	var/produced = quantity*recipe.res_amount
+	var/required = quantity * recipe.get_required_stack_amount(src)
+	var/produced = quantity * recipe.res_amount
 	if(!isnull(recipe.max_res_amount))
 		produced = min(produced, recipe.max_res_amount)
 	var/decl/material/mat       = get_material()

@@ -1,7 +1,7 @@
 // Tiles
 /decl/stack_recipe/tile
 	abstract_type       = /decl/stack_recipe/tile
-	req_amount          = 1
+	req_amount          = 1 * SHEET_MATERIAL_AMOUNT
 	res_amount          = 4
 	max_res_amount      = 20
 	difficulty          = MAT_VALUE_NORMAL_DIY

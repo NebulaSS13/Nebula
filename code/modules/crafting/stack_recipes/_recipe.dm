@@ -23,7 +23,7 @@
 	var/gender
 	// Object path to the desired product.
 	var/result_type
-	/// Amount of sheets/ingots/etc needed for this recipe. If null, generates from result matter.
+	/// Amount of matter units needed for this recipe. If null, generates from result matter.
 	var/req_amount
 	/// Amount of stuff that is produced in one batch (e.g. 4 for floor tiles).
 	var/res_amount                       = 1
@@ -160,6 +160,9 @@
 			if((stack_type in craft_stack_types) && (stack_type in forbidden_craft_stack_types))
 				. += "[stack_type] is in both forbidden and craftable stack types"
 
+/decl/stack_recipe/proc/get_required_stack_amount(obj/item/stack/stack)
+	return max(1, CEILING(req_amount / max(1, (SHEET_MATERIAL_AMOUNT * stack?.matter_multiplier))))
+
 /decl/stack_recipe/proc/get_list_display(mob/user, obj/item/stack/stack)
 
 	. = list("<tr>")
@@ -168,8 +171,10 @@
 	. += get_display_name(res_amount, apply_article = FALSE)
 	. += "</td>"
 
+
+	var/stack_req_amount = get_required_stack_amount(stack)
 	. += "<td width = '75px'>"
-	. += "[req_amount] [req_amount == 1 ? stack.singular_name : stack.plural_name]"
+	. += "[stack_req_amount] [stack_req_amount == 1 ? stack.singular_name : stack.plural_name]"
 	. += "</td>"
 
 	. += "<td width = '75px'>"
@@ -187,17 +192,23 @@
 	. += "</td>"
 
 	. += "<td width = '200px'>"
-	var/max_multiplier = round(stack.get_amount() / req_amount)
+	var/max_multiplier = round(stack.get_amount() / stack_req_amount)
 	if(max_multiplier)
+		var/min_multiplier = max(1, stack_req_amount)
 		if(max_res_amount > 0)
 			max_multiplier = min(max_multiplier, round(max_res_amount / res_amount))
 		var/static/list/multipliers = list(1, 5, 10, 25, 50)
+		if(!(min_multiplier in multipliers))
+			. += "<a href='?src=\ref[stack];make=\ref[src];multiplier=[min_multiplier]'>[min_multiplier*res_amount]x</a>"
 		for(var/n in multipliers)
+			if(n <= min_multiplier)
+				continue
 			if(max_multiplier < n)
 				break
 			. += "<a href='?src=\ref[stack];make=\ref[src];multiplier=[n]'>[n*res_amount]x</a>"
 		if(!(max_multiplier in multipliers))
 			. += "<a href='?src=\ref[stack];make=\ref[src];multiplier=[max_multiplier]'>[max_multiplier*res_amount]x</a>"
+
 	. += "</td>"
 	. += "</tr>"
 
@@ -288,7 +299,7 @@
 		materials = atom_info_repository.get_matter_for(result_type, (ispath(required_material) ? required_material : null), res_amount)
 		for(var/mat in materials)
 			req_amount += round(materials[mat]/res_amount)
-		req_amount = clamp(CEILING(((req_amount*crafting_extra_cost_factor)/SHEET_MATERIAL_AMOUNT) * res_amount), 1, 50)
+		req_amount = CEILING(req_amount*crafting_extra_cost_factor)
 
 /decl/stack_recipe/proc/get_display_name(amount, decl/material/mat, decl/material/reinf_mat, apply_article = TRUE)
 	var/material_strings
