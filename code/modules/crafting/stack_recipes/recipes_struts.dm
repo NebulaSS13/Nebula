@@ -7,6 +7,7 @@
 	one_per_turf                = TRUE
 	on_floor                    = TRUE
 	difficulty                  = MAT_VALUE_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/strut/railing
 	result_type = /obj/structure/railing

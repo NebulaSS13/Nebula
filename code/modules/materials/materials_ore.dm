@@ -160,9 +160,12 @@
 	material = /decl/material/solid/organic/meat
 
 /obj/item/stack/material/ore/handful
-	singular_name = "handful"
-	plural_name   = "handfuls"
-	stack_merge_type           = /obj/item/stack/material/ore/handful
+	singular_name         = "handful"
+	plural_name           = "handfuls"
+	stack_merge_type      = /obj/item/stack/material/ore/handful
+	matter_multiplier     = 1
+	can_be_converted_into = null
+	can_be_pulverized     = FALSE
 
 /obj/item/stack/material/ore/handful/sand
 	material      = /decl/material/solid/sand

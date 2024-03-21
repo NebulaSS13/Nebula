@@ -129,17 +129,22 @@
 			material.reinforce(user, W, src)
 		return TRUE
 
-	if(can_be_pulverized && IS_HAMMER(W) && material?.hardness >= MAT_VALUE_RIGID)
+	// TODO: convert to can_be_converted_into entry.
+	if(can_be_pulverized && IS_HAMMER(W) && material?.hardness >= MAT_VALUE_RIGID && user.a_intent == I_HURT)
+
 		if(W.material?.hardness < material.hardness)
 			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to pulverize [material.solid_name]."))
 			return TRUE
+
 		var/converting = clamp(get_amount(), 0, 5)
-		if(converting)
+		world << "[converting] [get_amount()]"
+		if(converting && W.do_tool_interaction(TOOL_HAMMER, user, src, 1 SECOND, "pulverizing", "pulverizing", set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= converting)
 			// TODO: make a gravel type?
 			// TODO: pass actual stone material to gravel?
 			new /obj/item/stack/material/ore/handful/sand(get_turf(user), converting)
 			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
 			use(converting)
+
 		return TRUE
 
 	if(reinf_material?.default_solid_form && IS_WELDER(W))
@@ -151,6 +156,7 @@
 			return TRUE
 
 	if(length(can_be_converted_into) && user.a_intent != I_HURT)
+
 		var/convert_tool
 		var/obj/item/stack/convert_type
 		for(var/tool_type in can_be_converted_into)
@@ -161,20 +167,17 @@
 
 		if(convert_type)
 
-			var/matter_per_single_sheet = SHEET_MATERIAL_AMOUNT * matter_multiplier
-			var/product_per_sheet = matter_per_single_sheet / (SHEET_MATERIAL_AMOUNT * initial(convert_type.matter_multiplier))
-			var/minimum_per_one_product = CEILING(1 / product_per_sheet)
+			var/product_per_sheet         = matter_multiplier / initial(convert_type.matter_multiplier)
+			var/minimum_per_one_product   = CEILING(1 / product_per_sheet)
 
 			if(get_amount() < minimum_per_one_product)
 				to_chat(user, SPAN_WARNING("You will need [minimum_per_one_product] [minimum_per_one_product == 1 ? singular_name : plural_name] to produce [product_per_sheet] [product_per_sheet == 1 ? initial(convert_type.singular_name) : initial(convert_type.plural_name)]."))
 			else if(W.do_tool_interaction(convert_tool, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= minimum_per_one_product)
-				var/obj/item/stack/product = new convert_type(get_turf(src), product_per_sheet, material?.type, reinf_material?.type)
+				var/obj/item/stack/product = new convert_type(get_turf(src), CEILING(product_per_sheet), material?.type, reinf_material?.type)
 				use(minimum_per_one_product)
 				if(product.add_to_stacks(user, TRUE))
 					user.put_in_hands(product)
-
 			return TRUE
-
 
 	return ..()
 

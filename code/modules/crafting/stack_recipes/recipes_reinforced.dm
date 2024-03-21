@@ -3,10 +3,12 @@
 	craft_stack_types = /obj/item/stack/material/sheet/reinforced
 	one_per_turf      = TRUE
 	difficulty        = MAT_VALUE_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/reinforced/ai_core
 	result_type       = /obj/structure/aicore
 	on_floor          = FALSE
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/reinforced/crate
 	result_type       = /obj/structure/closet/crate

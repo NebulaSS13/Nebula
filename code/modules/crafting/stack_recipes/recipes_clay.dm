@@ -1,5 +1,4 @@
 /decl/stack_recipe/clay
-	res_amount                  = 1
 	time                        = 1 SECOND
 	abstract_type               = /decl/stack_recipe/clay
 	required_material           = /decl/material/solid/clay
@@ -23,8 +22,6 @@
 
 /decl/stack_recipe/clay/brick
 	name_plural                 = "bricks"
-	res_amount                  = 2
-	max_res_amount              = 20
 	result_type                 = /obj/item/stack/material/brick/clay
 
 /decl/stack_recipe/clay/brick/spawn_result(user, location, amount)

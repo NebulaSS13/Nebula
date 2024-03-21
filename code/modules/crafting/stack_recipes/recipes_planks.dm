@@ -18,10 +18,12 @@
 /decl/stack_recipe/planks/zipgunframe
 	result_type            = /obj/item/zipgunframe
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/planks/coilgun
 	result_type            = /obj/item/coilgun_assembly
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/planks/stick
 	result_type            = /obj/item/stick
