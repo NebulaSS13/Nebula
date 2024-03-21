@@ -72,7 +72,7 @@
 
 /obj/item/gun/projectile/automatic/assault_rifle/update_base_icon()
 	if(ammo_magazine)
-		if(ammo_magazine.stored_ammo.len)
+		if(ammo_magazine.get_stored_ammo_count())
 			icon_state = "[get_world_inventory_state()]-loaded"
 		else
 			icon_state = "[get_world_inventory_state()]-empty"
