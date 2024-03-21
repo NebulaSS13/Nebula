@@ -411,19 +411,19 @@
 	if((fuel || length(contents)) && (lit != FIRE_DEAD))
 		// todo: get colour from fuel
 		var/image/I = image(icon, "[icon_state]_full")
-		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+		I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 		add_overlay(I)
 
 	switch(lit)
 		if(FIRE_LIT)
 			if(fuel >= HIGH_FUEL)
 				var/image/I = image(icon, "[icon_state]_lit")
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 				add_overlay(I)
 				set_light(light_range_high, light_power_high, light_color_high)
 			else if(fuel <= LOW_FUEL)
 				var/image/I = image(icon, "[icon_state]_lit_dying")
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 				add_overlay(I)
 				set_light(light_range_mid, light_power_mid, light_color_mid)
 			else
