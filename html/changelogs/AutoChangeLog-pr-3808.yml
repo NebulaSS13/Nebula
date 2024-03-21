@@ -1,5 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: Mining now requires a tool of sufficient hardness.}
-  - {tweak: Tool crafting is now restricted to specific stack types.}
-delete-after: true
