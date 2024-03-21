@@ -28,6 +28,11 @@
 	var/opened = null
 	var/open_sound = null
 
+	/// Determines whether or not we wait until the first time our contents are gotten to initialize contents. May lead to icon bugs if not handled delicately.
+	var/lazyload_contents = TRUE
+	/// Whether or not our contents have been initialized or not, used in lazyloaded contents.
+	var/contents_initialized = FALSE
+
 /obj/item/storage/Destroy()
 	if(istype(storage_ui))
 		QDEL_NULL(storage_ui)
@@ -39,7 +44,21 @@
 		return TRUE
 	. = ..()
 
+/obj/item/storage/proc/create_initial_contents()
+	if(contents_initialized)
+		return
+	var/list/will_contain = WillContain()
+	if(length(will_contain))
+		create_objects_in_loc(src, will_contain)
+		update_icon()
+	contents_initialized = TRUE
+
+/obj/item/storage/dump_contents()
+	create_initial_contents()
+	return ..()
+
 /obj/item/storage/proc/return_inv()
+	create_initial_contents()
 
 	var/list/L = list(  )
 
@@ -60,7 +79,8 @@
 /obj/item/storage/proc/open(mob/user)
 	if(!opened)
 		playsound(src.loc, src.open_sound, 50, 0, -5)
-		opened = 1
+		opened = TRUE
+		create_initial_contents()
 		queue_icon_update()
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
@@ -168,6 +188,7 @@
 		var/mob/M = W.loc
 		if(!M.try_unequip(W))
 			return
+	create_initial_contents()
 	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)
@@ -365,10 +386,8 @@
 	storage_ui = new storage_ui(src)
 	prepare_ui()
 
-	var/list/will_contain = WillContain()
-	if(length(will_contain))
-		create_objects_in_loc(src, will_contain)
-		update_icon()
+	if(!lazyload_contents)
+		create_initial_contents()
 
 /obj/item/storage/emp_act(severity)
 	if(!isliving(src.loc))

@@ -12,6 +12,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("whipped", "lashed", "disciplined")
 	material = /decl/material/solid/organic/leather/synth
+	lazyload_contents = FALSE // because we sometimes overlay our contents
 	var/overlay_flags
 
 /obj/item/storage/belt/get_associated_equipment_slots()

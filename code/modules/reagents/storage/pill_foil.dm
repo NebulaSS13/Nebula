@@ -5,6 +5,7 @@
 	icon_state = "pill_pack"
 	pop_sound = 'sound/effects/pop.ogg'
 	color = COLOR_GRAY80
+	lazyload_contents = FALSE
 	var/pill_type
 	var/pill_count = 4
 	var/pill_positions

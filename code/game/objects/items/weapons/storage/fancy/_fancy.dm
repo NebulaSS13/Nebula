@@ -4,6 +4,7 @@
 
 /obj/item/storage/box/fancy
 	abstract_type = /obj/item/storage/box/fancy
+	lazyload_contents = FALSE
 	/// A string modifier used to generate overlays for contents.
 	var/use_single_icon_overlay_state
 	/// The root type of the key item that this "fancy" container is meant to store.
