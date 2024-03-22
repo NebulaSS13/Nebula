@@ -267,6 +267,11 @@
 		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src))
 			SSzcopy.discover_movable(src)
 
+		if(isturf(loc))
+			var/turf/T = loc
+			if(T.reagents)
+				fluid_act(T.reagents)
+
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(TRUE)
