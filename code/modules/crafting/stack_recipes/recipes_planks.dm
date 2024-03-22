@@ -27,6 +27,10 @@
 	result_type            = /obj/item/stick
 	difficulty             = MAT_VALUE_EASY_DIY
 
+/decl/stack_recipe/planks/bucket
+	result_type            = /obj/item/chems/glass/bucket/wood
+	difficulty             = MAT_VALUE_EASY_DIY
+
 /decl/stack_recipe/planks/noticeboard
 	result_type            = /obj/structure/noticeboard
 	on_floor               = TRUE
@@ -114,3 +118,6 @@
 
 /decl/stack_recipe/planks/furniture/chest
 	result_type            = /obj/structure/closet/crate/chest
+
+/decl/stack_recipe/planks/furniture/meathook
+	result_type            = /obj/structure/meat_hook/improvised
