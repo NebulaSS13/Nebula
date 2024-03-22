@@ -146,6 +146,7 @@
 		return FALSE
 	if(!process_fuel(ignition_temperature))
 		return FALSE
+	last_fuel_burn_temperature = max(last_fuel_burn_temperature, ignition_temperature) // needed for initial burn procs to function
 	lit = FIRE_LIT
 	refresh_affected_exterior_turfs()
 	visible_message(SPAN_DANGER("\The [src] catches alight!"))
@@ -249,14 +250,12 @@
 		. = list(type = amount)
 
 /obj/structure/fire_source/proc/burn_material(var/decl/material/mat, var/amount)
-	var/list/burn_products = mat.get_burn_products(amount, last_fuel_burn_temperature)
-	. = !isnull(burn_products)
+	. = mat.get_burn_products(amount, last_fuel_burn_temperature)
 	if(.)
 		if(mat.ignition_point && last_fuel_burn_temperature >= mat.ignition_point)
 			if(mat.accelerant_value > FUEL_VALUE_NONE)
 				fuel += amount * (1 + material.accelerant_value)
-			if(mat.burn_temperature)
-				last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
+			last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
 		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
 			fuel -= amount * mat.accelerant_value
 		fuel = max(fuel, 0)

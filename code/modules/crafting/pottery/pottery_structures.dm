@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/kiln.dmi'
 	icon_state = ICON_STATE_WORLD
 	density = TRUE
-	cap_last_fuel_burn = FALSE
+	cap_last_fuel_burn = null
 
 	var/list/pottery = list()
 	var/maximum_items = 3
