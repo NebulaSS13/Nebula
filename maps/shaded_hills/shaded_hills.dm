@@ -8,6 +8,8 @@
 	#include "areas/_areas.dm"
 	#include "jobs/_jobs.dm"
 	#include "levels/_levels.dm"
+	#include "levels/random_map.dm"
+	#include "levels/strata.dm"
 	#include "outfits/_outfits.dm"
 
 	#include "shaded_hills_currency.dm"
