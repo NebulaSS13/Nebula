@@ -63,6 +63,7 @@
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 	color = COLOR_BEIGE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	replacement_turf_type = /turf/floor/woven
 
 /*
  * Wood
