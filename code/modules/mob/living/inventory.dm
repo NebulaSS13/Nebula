@@ -27,8 +27,9 @@
 /mob/living/get_all_available_equipment_slots()
 	. = ..()
 	var/decl/species/my_species = get_species()
-	for(var/slot in my_species?.hud?.equip_slots)
-		LAZYDISTINCTADD(., slot)
+	if(istype(my_species?.species_hud))
+		for(var/slot in my_species.species_hud.equip_slots)
+			LAZYDISTINCTADD(., slot)
 
 /mob/living/add_held_item_slot(var/datum/inventory_slot/held_slot)
 	var/datum/inventory_slot/existing_slot = get_inventory_slot_datum(held_slot.slot_id)
@@ -57,11 +58,12 @@
 	var/last_slot = get_active_held_item_slot()
 	if(slot != last_slot && (slot in get_held_item_slots()))
 		_held_item_slot_selected = slot
-		for(var/obj/screen/inventory/hand in hud_used?.hand_hud_objects)
-			hand.cut_overlay("hand_selected")
-			if(hand.slot_id == slot)
-				hand.add_overlay("hand_selected")
-			hand.compile_overlays()
+		if(istype(hud_used))
+			for(var/obj/screen/inventory/hand in hud_used.hand_hud_objects)
+				hand.cut_overlay("hand_selected")
+				if(hand.slot_id == slot)
+					hand.add_overlay("hand_selected")
+				hand.compile_overlays()
 		var/obj/item/I = get_active_held_item()
 		if(istype(I))
 			I.on_active_hand()
@@ -73,7 +75,7 @@
 		pending_hand_rebuild = TRUE
 		sleep(1)
 		pending_hand_rebuild = FALSE
-		if(hud_used)
+		if(istype(hud_used))
 			hud_used.rebuild_hands()
 
 /mob/living/get_active_held_item()

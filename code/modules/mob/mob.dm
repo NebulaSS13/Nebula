@@ -10,7 +10,8 @@
 	QDEL_NULL(typing_indicator)
 
 	unset_machine()
-	QDEL_NULL(hud_used)
+	if(istype(hud_used))
+		QDEL_NULL(hud_used)
 	if(active_storage)
 		active_storage.close(src)
 	if(istype(ability_master))

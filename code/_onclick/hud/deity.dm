@@ -1,5 +1,5 @@
 /mob/living/deity
-	hud_type = /datum/hud/deity
+	hud_used = /datum/hud/deity
 
 /datum/hud/deity/FinalizeInstantiation()
 	action_intent =  new /obj/screen/intent/deity(null, mymob)

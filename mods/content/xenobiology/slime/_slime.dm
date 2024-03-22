@@ -24,7 +24,7 @@
 	bone_material = null
 	bone_amount = 0
 	ai = /datum/ai/slime
-	hud_type = /datum/hud/slime
+	hud_used = /datum/hud/slime
 	nutrition = 800
 
 	var/is_adult = FALSE

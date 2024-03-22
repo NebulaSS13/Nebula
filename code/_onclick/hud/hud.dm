@@ -5,16 +5,13 @@
 */
 
 /mob
-	var/hud_type = null
-	var/datum/hud/hud_used = null
+	var/datum/hud/hud_used
 
 /mob/proc/InitializeHud()
-	if(hud_used)
-		qdel(hud_used)
-	if(hud_type)
-		hud_used = new hud_type(src)
-	else
-		hud_used = new /datum/hud(src)
+	if(istype(hud_used))
+		QDEL_NULL(hud_used)
+	if(ispath(hud_used))
+		hud_used = new hud_used(src)
 	refresh_lighting_master()
 
 /datum/hud
@@ -80,13 +77,13 @@
 
 /datum/hud/proc/hidden_inventory_update()
 	var/decl/species/species = mymob?.get_species()
-	if(species?.hud)
-		refresh_inventory_slots(species.hud.hidden_slots, (inventory_shown && hud_shown))
+	if(istype(species?.species_hud))
+		refresh_inventory_slots(species.species_hud.hidden_slots, (inventory_shown && hud_shown))
 
 /datum/hud/proc/persistant_inventory_update()
 	var/decl/species/species = mymob?.get_species()
-	if(species?.hud)
-		refresh_inventory_slots(species.hud.persistent_slots, hud_shown)
+	if(istype(species?.species_hud))
+		refresh_inventory_slots(species.species_hud.persistent_slots, hud_shown)
 
 /datum/hud/proc/refresh_inventory_slots(var/list/checking_slots, var/show_hud)
 
@@ -293,16 +290,16 @@
 
 	// Swap hand and quick equip screen elems.
 	var/obj/screen/using = new /obj/screen/equip(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HANDS)
-	src.adding += using
+	adding += using
 	LAZYADD(swaphand_hud_objects, using)
 
 	if(length(held_slots) > 1)
 
 		using = new /obj/screen/inventory/swaphand(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HANDS)
-		src.adding += using
+		adding += using
 		LAZYADD(swaphand_hud_objects, using)
 		using = new /obj/screen/inventory/swaphand/right(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HANDS)
-		src.adding += using
+		adding += using
 		LAZYADD(swaphand_hud_objects, using)
 
 	// Actual hand elems.
@@ -312,23 +309,21 @@
 	set name = "Minimize Hud"
 	set hidden = TRUE
 
-	if(!hud_used)
-		to_chat(usr, "<span class='warning'>This mob type does not use a HUD.</span>")
+	if(isnull(hud_used))
+		to_chat(usr, SPAN_WARNING("This mob type does not use a HUD."))
 		return
 
-	if(!ishuman(src))
-		to_chat(usr, "<span class='warning'>Inventory hiding is currently only supported for human mobs, sorry.</span>")
+	if(!client || !istype(hud_used))
 		return
 
-	if(!client) return
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
-		if(src.hud_used.adding)
-			src.client.screen -= src.hud_used.adding
-		if(src.hud_used.other)
-			src.client.screen -= src.hud_used.other
-		if(src.hud_used.hotkeybuttons)
-			src.client.screen -= src.hud_used.hotkeybuttons
+		if(hud_used.adding)
+			client.screen -= hud_used.adding
+		if(hud_used.other)
+			client.screen -= hud_used.other
+		if(hud_used.hotkeybuttons)
+			client.screen -= hud_used.hotkeybuttons
 
 		//Due to some poor coding some things need special treatment:
 		//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
@@ -337,33 +332,33 @@
 				client.screen += hud_used.hand_hud_objects         // we want the hands to be visible
 			if(LAZYLEN(hud_used.swaphand_hud_objects))
 				client.screen += hud_used.swaphand_hud_objects     // we want the hands swap thingy to be visible
-			src.client.screen += src.hud_used.action_intent        // we want the intent swticher visible
-			src.hud_used.action_intent.screen_loc = ui_acti_alt    // move this to the alternative position, where zone_select usually is.
+			client.screen += hud_used.action_intent        // we want the intent swticher visible
+			hud_used.action_intent.screen_loc = ui_acti_alt    // move this to the alternative position, where zone_select usually is.
 		else
-			src.client.screen -= src.healths
-			src.client.screen -= src.internals
-			src.client.screen -= src.gun_setting_icon
+			client.screen -= healths
+			client.screen -= internals
+			client.screen -= gun_setting_icon
 
 		//These ones are not a part of 'adding', 'other' or 'hotkeybuttons' but we want them gone.
-		src.client.screen -= src.zone_sel	//zone_sel is a mob variable for some reason.
+		client.screen -= zone_sel	//zone_sel is a mob variable for some reason.
 
 	else
 		hud_used.hud_shown = 1
-		if(src.hud_used.adding)
-			src.client.screen += src.hud_used.adding
-		if(src.hud_used.other && src.hud_used.inventory_shown)
-			src.client.screen += src.hud_used.other
-		if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
-			src.client.screen += src.hud_used.hotkeybuttons
-		if(src.healths)
-			src.client.screen |= src.healths
-		if(src.internals)
-			src.client.screen |= src.internals
-		if(src.gun_setting_icon)
-			src.client.screen |= src.gun_setting_icon
+		if(hud_used.adding)
+			client.screen += hud_used.adding
+		if(hud_used.other && hud_used.inventory_shown)
+			client.screen += hud_used.other
+		if(hud_used.hotkeybuttons && !hud_used.hotkey_ui_hidden)
+			client.screen += hud_used.hotkeybuttons
+		if(healths)
+			client.screen |= healths
+		if(internals)
+			client.screen |= internals
+		if(gun_setting_icon)
+			client.screen |= gun_setting_icon
 
-		src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
-		src.client.screen += src.zone_sel				//This one is a special snowflake
+		hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
+		client.screen += zone_sel				//This one is a special snowflake
 
 	hud_used.hidden_inventory_update()
 	hud_used.persistant_inventory_update()
@@ -371,7 +366,7 @@
 
 //Similar to minimize_hud() but keeps zone_sel, gun_setting_icon, and healths.
 /mob/proc/toggle_zoom_hud()
-	if(!hud_used)
+	if(!istype(hud_used))
 		return
 	if(!ishuman(src))
 		return
@@ -382,25 +377,25 @@
 
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
-		if(src.hud_used.adding)
-			src.client.screen -= src.hud_used.adding
-		if(src.hud_used.other)
-			src.client.screen -= src.hud_used.other
-		if(src.hud_used.hotkeybuttons)
-			src.client.screen -= src.hud_used.hotkeybuttons
-		src.client.screen -= src.internals
-		src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
+		if(hud_used.adding)
+			client.screen -= hud_used.adding
+		if(hud_used.other)
+			client.screen -= hud_used.other
+		if(hud_used.hotkeybuttons)
+			client.screen -= hud_used.hotkeybuttons
+		client.screen -= internals
+		client.screen += hud_used.action_intent		//we want the intent swticher visible
 	else
 		hud_used.hud_shown = 1
-		if(src.hud_used.adding)
-			src.client.screen += src.hud_used.adding
-		if(src.hud_used.other && src.hud_used.inventory_shown)
-			src.client.screen += src.hud_used.other
-		if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
-			src.client.screen += src.hud_used.hotkeybuttons
-		if(src.internals)
-			src.client.screen |= src.internals
-		src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
+		if(hud_used.adding)
+			client.screen += hud_used.adding
+		if(hud_used.other && hud_used.inventory_shown)
+			client.screen += hud_used.other
+		if(hud_used.hotkeybuttons && !hud_used.hotkey_ui_hidden)
+			client.screen += hud_used.hotkeybuttons
+		if(internals)
+			client.screen |= internals
+		hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
 
 	hud_used.hidden_inventory_update()
 	hud_used.persistant_inventory_update()

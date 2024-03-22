@@ -575,16 +575,17 @@
 
 	var/list/new_slots
 	var/list/held_slots = get_held_item_slots()
-	for(var/slot_id in species.hud.inventory_slots)
-		var/datum/inventory_slot/old_slot = get_inventory_slot_datum(slot_id)
-		if(slot_id in held_slots)
-			LAZYSET(new_slots, slot_id, old_slot)
-			continue
-		var/datum/inventory_slot/new_slot = species.hud.inventory_slots[slot_id]
-		if(!old_slot || !old_slot.equivalent_to(new_slot))
-			LAZYSET(new_slots, slot_id, new_slot.Clone())
-		else
-			LAZYSET(new_slots, slot_id, old_slot)
+	if(istype(species.species_hud))
+		for(var/slot_id in species.species_hud.inventory_slots)
+			var/datum/inventory_slot/old_slot = get_inventory_slot_datum(slot_id)
+			if(slot_id in held_slots)
+				LAZYSET(new_slots, slot_id, old_slot)
+				continue
+			var/datum/inventory_slot/new_slot = species.species_hud.inventory_slots[slot_id]
+			if(!old_slot || !old_slot.equivalent_to(new_slot))
+				LAZYSET(new_slots, slot_id, new_slot.Clone())
+			else
+				LAZYSET(new_slots, slot_id, old_slot)
 	set_inventory_slots(new_slots)
 
 	//recheck species-restricted clothing

@@ -275,7 +275,7 @@
 /mob/proc/set_move_intent(var/decl/move_intent/next_intent)
 	if(next_intent && move_intent != next_intent && next_intent.can_be_used_by(src))
 		move_intent = next_intent
-		if(hud_used)
+		if(istype(hud_used))
 			hud_used.move_intent.icon_state = move_intent.hud_icon_state
 		return TRUE
 	return FALSE
