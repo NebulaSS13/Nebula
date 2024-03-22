@@ -101,9 +101,8 @@
 /turf/wall/natural/drop_dismantled_products(devastated, explode)
 	drop_ore()
 
-// TODO: rock crumble SFX
 /turf/wall/natural/get_dismantle_sound()
-	return 'sound/items/Welder.ogg'
+	return 'sound/effects/rockcrumble.ogg'
 
 /turf/wall/natural/dismantle_wall(devastated, explode, no_product, ramp_update = TRUE)
 	destroy_artifacts(null, INFINITY)
