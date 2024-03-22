@@ -9,6 +9,7 @@
 	var/ramp_slope_direction
 	var/image/ore_overlay
 	var/static/list/exterior_wall_shine_cache = list()
+	var/being_mined = FALSE
 
 /turf/wall/natural/get_paint_examine_message()
 	return SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
@@ -65,11 +66,16 @@
 
 // Drill out natural walls.
 /turf/wall/natural/handle_wall_tool_interactions(obj/item/W, mob/user)
-	if(IS_PICK(W))
+	if(IS_PICK(W) && !being_mined)
 		if(W.material?.hardness < max(material?.hardness, reinf_material?.hardness))
 			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to dig through \the [src]."))
-		else if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
-			dismantle_wall()
+		else
+			if(being_mined)
+				return TRUE
+			being_mined = TRUE
+			if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
+				dismantle_wall()
+			being_mined = FALSE
 		return TRUE
 	return FALSE
 
