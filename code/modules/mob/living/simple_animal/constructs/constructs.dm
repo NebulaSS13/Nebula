@@ -266,7 +266,7 @@
 	. = ..()
 	if(.)
 		if(fire)
-			fire.icon_state = "fire[!!fire_alert]"
+			fire.icon_state = "fire[!!GET_HUD_ALERT(src, /decl/hud_element/condition/fire)]"
 		silence_spells(purge)
 		if(healths)
 			switch(current_health)

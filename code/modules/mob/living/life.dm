@@ -18,6 +18,8 @@
 	if(machine && (machine.CanUseTopic(src, machine.DefaultTopicState()) == STATUS_CLOSE)) // unsure if this is a good idea, but using canmousedrop was ???
 		machine = null
 
+	CLEAR_HUD_ALERTS(src) // These will be set again in the various update procs below.
+
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.

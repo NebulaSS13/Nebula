@@ -2274,6 +2274,7 @@
 #include "code\modules\holomap\holomap.dm"
 #include "code\modules\hotloading\_admin.dm"
 #include "code\modules\hotloading\note.dm"
+#include "code\modules\hud\_hud_condition.dm"
 #include "code\modules\hydroponics\grown.dm"
 #include "code\modules\hydroponics\grown_inedible.dm"
 #include "code\modules\hydroponics\grown_predefined.dm"

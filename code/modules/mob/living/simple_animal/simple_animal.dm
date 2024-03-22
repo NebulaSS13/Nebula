@@ -52,7 +52,6 @@
 	var/maxbodytemp = 350
 	var/heat_damage_per_tick = 3	//amount of damage applied if animal's body temperature is higher than maxbodytemp
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
-	var/fire_alert = 0
 
 	//Atmos effect - Yes, you can make creatures that require arbitrary gasses to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/min_gas = list(/decl/material/gas/oxygen = 5)
@@ -293,13 +292,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			bodytemperature += ((environment.temperature - bodytemperature) / 5)
 
 	if(bodytemperature < minbodytemp)
-		fire_alert = 2
+		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 2)
 		take_damage(BURN, cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
-		fire_alert = 1
+		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 1)
 		take_damage(BURN, heat_damage_per_tick)
 	else
-		fire_alert = 0
+		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 0)
 
 	if(!atmos_suitable)
 		take_damage(BRUTE, unsuitable_atmos_damage)
