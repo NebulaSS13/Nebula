@@ -17,8 +17,11 @@
 				to_chat(user, SPAN_WARNING("There is already a full-tile window here!"))
 				return FALSE
 
-/decl/stack_recipe/opacity/fullwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, SOUTHWEST, TRUE))
+/decl/stack_recipe/opacity/fullwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+	. = list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, SOUTHWEST, TRUE))
+	if(paint_color)
+		for(var/obj/structure/window/window in .)
+			window.set_color(paint_color)
 
 /decl/stack_recipe/opacity/borderwindow
 	name                 = "border window"
@@ -34,8 +37,12 @@
 				to_chat(user, "<span class='warning'>There is already a window facing that direction here!</span>")
 				return FALSE
 
-/decl/stack_recipe/opacity/borderwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, user?.dir, TRUE))
+/decl/stack_recipe/opacity/borderwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+	. = list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, user?.dir, TRUE))
+	if(paint_color)
+		for(var/obj/structure/window/window in .)
+			window.set_color(paint_color)
+
 
 /decl/stack_recipe/opacity/windoor
 	result_type          = /obj/structure/windoor_assembly

@@ -317,7 +317,7 @@
 			return mat
 	return null
 
-/decl/stack_recipe/proc/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/proc/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	//TODO: standardize material argument passing in Initialize().
 	if(ispath(result_type, /obj/item/stack)) // Amount is set manually in some overrides as well.
 		. = list(new result_type(location, amount, MATERIAL_RECIPE_PARAMS))
@@ -345,6 +345,8 @@
 	for(var/atom/res in .)
 		if(QDELETED(res))
 			. -= res
+		else if(paint_color && (isitem(res) || istype(res, /obj/structure)))
+			res.set_color(paint_color)
 
 /decl/stack_recipe/proc/can_make(mob/user)
 	if (one_per_turf && (locate(result_type) in user.loc))

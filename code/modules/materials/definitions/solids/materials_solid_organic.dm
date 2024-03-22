@@ -119,10 +119,10 @@
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/cloth //todo
-	name = "cotton"
+/decl/material/solid/organic/cloth
+	name = "cloth"
 	uid = "solid_cotton"
-	use_name = "cotton"
+	use_name = "cloth"
 	color = "#ffffff"
 	stack_origin_tech = @'{"materials":2}'
 	door_icon_base = "wood"
@@ -142,90 +142,10 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/cloth/yellow
-	name = "yellow"
-	uid = "solid_cotton_yellow"
-	use_name = "yellow cloth"
-	adjective_name = "yellow"
-	color = "#ffbf00"
-
-/decl/material/solid/organic/cloth/teal
-	name = "teal"
-	uid = "solid_cotton_teal"
-	use_name = "teal cloth"
-	adjective_name = "teal"
-	color = "#00e1ff"
-
-/decl/material/solid/organic/cloth/black
-	name = "black"
-	uid = "solid_cotton_black"
-	use_name = "black cloth"
-	adjective_name = "black"
-	color = "#505050"
-
-/decl/material/solid/organic/cloth/green
-	name = "green"
-	uid = "solid_cotton_green"
-	use_name = "green cloth"
-	adjective_name = "green"
-	color = "#b7f27d"
-
-/decl/material/solid/organic/cloth/purple
-	name = "purple"
-	uid = "solid_cotton_purple"
-	use_name = "purple cloth"
-	adjective_name = "purple"
-	color = "#9933ff"
-
-/decl/material/solid/organic/cloth/blue
-	name = "blue"
-	uid = "solid_cotton_blue"
-	use_name = "blue cloth"
-	adjective_name = "blue"
-	color = "#46698c"
-
-/decl/material/solid/organic/cloth/beige
-	name = "beige"
-	uid = "solid_cotton_beige"
-	use_name = "beige cloth"
-	adjective_name = "beige"
-	color = "#ceb689"
-
-/decl/material/solid/organic/cloth/lime
-	name = "lime"
-	uid = "solid_cotton_lime"
-	use_name = "lime cloth"
-	adjective_name = "lime"
-	color = "#62e36c"
-
-/decl/material/solid/organic/cloth/red
-	name = "red"
-	uid = "solid_cotton_red"
-	use_name = "red cloth"
-	adjective_name = "red"
-	color = "#9d2300"
-
-/decl/material/solid/organic/carpet
-	name = "red"
-	uid = "solid_carpet"
-	use_name = "red upholstery"
-	adjective_name = "red"
-	color = "#9d2300"
-	flags = MAT_FLAG_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300 // assuming synthetic carpet (plastic)
-	conductive = 0
-	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	reflectiveness = MAT_VALUE_DULL
-	hardness = MAT_VALUE_SOFT
-	weight = MAT_VALUE_EXTREMELY_LIGHT
-	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
-	hidden_from_codex = TRUE
-	default_solid_form = /obj/item/stack/material/bolt
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-	sound_manipulate = 'sound/foley/paperpickup2.ogg'
-	sound_dropped = 'sound/foley/paperpickup1.ogg'
+/decl/material/solid/organic/cloth/synthetic
+	name = "synthetic cloth"
+	uid = "solid_cloth_synthetic"
+	melting_point = T0C+300 // plastic
 
 /decl/material/solid/organic/plantmatter
 	name = "plant matter"

@@ -47,7 +47,7 @@
 	result_type       = /obj/machinery/constructable_frame/computerframe
 	req_amount        = 5 // Arbitrary value since machines don't handle matter properly yet.
 
-/decl/stack_recipe/steel/furniture/computerframe/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/steel/furniture/computerframe/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	return ..(user, location, amount, null, null)
 
 /decl/stack_recipe/steel/furniture/door_assembly

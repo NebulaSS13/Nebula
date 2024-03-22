@@ -24,6 +24,7 @@
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 	var/base_icon = "bed"
+	var/padding_color
 
 /obj/structure/bed/user_can_mousedrop_onto(mob/user, atom/being_dropped, incapacitation_flags, params)
 	if(user == being_dropped)
@@ -54,7 +55,7 @@
 		var/image/I = image(icon, "[icon_state]_padding")
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_material.color
+			I.color = padding_color || reinf_material.color
 			add_overlay(I)
 
 /obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -79,22 +80,28 @@
 			if(C.get_amount() < 1) // How??
 				qdel(C)
 				return
-			var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
-			if(istype(W,/obj/item/stack/tile/carpet))
-				padding_type = /decl/material/solid/organic/carpet
-			else if(istype(W,/obj/item/stack/material))
-				var/obj/item/stack/material/M = W
-				if(M.material && (M.material.flags & MAT_FLAG_PADDING))
-					padding_type = M.material.type
+
+			var/padding_type
+			var/new_padding_color
+			if(istype(W, /obj/item/stack/tile) || istype(W, /obj/item/stack/material/bolt))
+				padding_type = W.material?.type
+				new_padding_color = W.paint_color
+
+			if(padding_type)
+				var/decl/material/padding_mat = GET_DECL(padding_type)
+				if(!istype(padding_mat) || !(padding_mat.flags & MAT_FLAG_PADDING))
+					padding_type = null
+
 			if(!padding_type)
 				to_chat(user, "You cannot pad \the [src] with that.")
 				return
+
 			C.use(1)
 			if(!isturf(src.loc))
 				src.forceMove(get_turf(src))
 			playsound(src.loc, 'sound/effects/rustle5.ogg', 50, 1)
 			to_chat(user, "You add padding to \the [src].")
-			add_padding(padding_type)
+			add_padding(padding_type, new_padding_color)
 			return
 
 		else if(IS_WIRECUTTER(W))
@@ -114,14 +121,19 @@
 					if(user_buckle_mob(affecting, user))
 						qdel(W)
 
-/obj/structure/bed/proc/remove_padding()
-	if(reinf_material)
-		reinf_material.create_object(get_turf(src))
-		reinf_material = null
+/obj/structure/bed/proc/add_padding(var/padding_type, var/new_padding_color)
+	reinf_material = GET_DECL(padding_type)
+	padding_color = new_padding_color
 	update_icon()
 
-/obj/structure/bed/proc/add_padding(var/padding_type)
-	reinf_material = GET_DECL(padding_type)
+/obj/structure/bed/proc/remove_padding()
+	if(reinf_material)
+		var/list/res = reinf_material.create_object(get_turf(src))
+		if(padding_color)
+			for(var/obj/item/thing in res)
+				thing.set_color(padding_color)
+	reinf_material = null
+	padding_color = null
 	update_icon()
 
 /obj/structure/bed/psych

@@ -13,6 +13,29 @@
 	var/footstep_type
 	var/mob_offset
 
+	var/paint_color
+	var/paint_verb = "painted"
+
+/obj/structure/get_color()
+	if(paint_color)
+		return paint_color
+	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		return material.color
+	return initial(color)
+
+/obj/item/set_color(new_color)
+	if(new_color == COLOR_WHITE)
+		new_color = null
+	if(paint_color != new_color)
+		paint_color = new_color
+	if(paint_color)
+		color = paint_color
+	else if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		color = material.color
+	else
+		color = new_color
+	return FALSE
+
 /obj/structure/create_matter()
 	..()
 	if(material || reinf_material)
@@ -45,6 +68,9 @@
 		var/damage_desc = get_examined_damage_string()
 		if(length(damage_desc))
 			to_chat(user, damage_desc)
+
+		if(paint_color)
+			to_chat(user, "\The [src] has been <font color='[paint_color]'>[paint_verb]</font>.")
 
 		if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
 			if(anchored)

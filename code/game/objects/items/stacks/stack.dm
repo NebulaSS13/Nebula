@@ -153,7 +153,7 @@
 	popup.open()
 
 
-/obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/quantity, mob/user)
+/obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/quantity, mob/user, var/paint_color)
 	var/required = quantity*recipe.req_amount
 	var/produced = quantity*recipe.res_amount
 	if(!isnull(recipe.max_res_amount))
@@ -179,7 +179,7 @@
 		return
 
 	to_chat(user, SPAN_NOTICE("You [recipe.get_craft_verb(src)] [recipe.get_display_name(produced, mat, reinf_mat)]!"))
-	var/list/atom/results = recipe.spawn_result(user, user.loc, produced, mat, reinf_mat)
+	var/list/atom/results = recipe.spawn_result(user, user.loc, produced, mat, reinf_mat, paint_color)
 	var/atom/movable/O = LAZYACCESS(results, 1)
 	if(istype(O) && !QDELETED(O)) // In case of stack merger.
 		O.add_fingerprint(user)
@@ -233,7 +233,7 @@
 		if(!isnull(recipe.max_res_amount))
 			multiplier = min(multiplier, round(recipe.max_res_amount / recipe.res_amount))
 		if(multiplier > 0)
-			produce_recipe(recipe, multiplier, user)
+			produce_recipe(recipe, multiplier, user, paint_color)
 			return TOPIC_REFRESH
 
 	return TOPIC_NOACTION
@@ -356,7 +356,7 @@
 	return null
 
 /obj/item/stack/proc/copy_from(var/obj/item/stack/other)
-	color = other.color
+	other.set_color(paint_color)
 	dried_type = other.dried_type
 	drying_wetness = other.drying_wetness
 
@@ -448,7 +448,7 @@
 
 /**Whether a stack type has the capability to be merged. */
 /obj/item/stack/proc/can_merge_stacks(var/obj/item/stack/other)
-	return !(uses_charge && !force)
+	return !(uses_charge && !force) && (!istype(other) || other.paint_color == paint_color)
 
 /// Returns the string describing an amount of the stack, i.e. "an ingot" vs "a flag"
 /obj/item/stack/proc/get_string_for_amount(amount)

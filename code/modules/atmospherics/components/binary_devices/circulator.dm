@@ -81,19 +81,18 @@
 
 /obj/machinery/atmospherics/binary/circulator/on_update_icon()
 	icon_state = anchored ? "circ-assembled" : "circ-unassembled"
-	overlays.Cut()
+	cut_overlays()
 	if (stat & (BROKEN|NOPOWER) || !anchored)
 		return 1
 	if (last_pressure_delta > 0 && recent_moles_transferred > 0)
 		if (temperature_overlay)
-			overlays += image('icons/obj/power.dmi', temperature_overlay)
+			add_overlay(temperature_overlay)
 		if (last_pressure_delta > (5 ATM))
-			overlays += image('icons/obj/power.dmi', "circ-run")
+			add_overlay("circ-run")
 		else
-			overlays += image('icons/obj/power.dmi', "circ-slow")
+			add_overlay("circ-slow")
 	else
-		overlays += image('icons/obj/power.dmi', "circ-off")
-
+		add_overlay("circ-off")
 	return 1
 
 /obj/machinery/atmospherics/binary/circulator/set_dir(new_dir)

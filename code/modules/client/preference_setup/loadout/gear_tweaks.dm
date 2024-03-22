@@ -44,7 +44,7 @@
 /datum/gear_tweak/color/tweak_item(mob/user, obj/item/gear, metadata)
 	if(valid_colors && !(metadata in valid_colors))
 		return GEAR_TWEAK_SKIPPED
-	gear.color = sanitize_hexcolor(metadata, gear.color)
+	gear.set_color(sanitize_hexcolor(metadata, gear.get_color()))
 	return GEAR_TWEAK_SUCCESS
 
 /*
