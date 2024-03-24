@@ -129,7 +129,7 @@ SUBSYSTEM_DEF(fluids)
 		// Wash our turf.
 		current_fluid_holder.fluid_act(reagent_holder)
 
-		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/exterior) && (current_fluid_holder.reagents?.total_volume + current_fluid_holder.get_physical_height()) > 0))
+		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/floor) && (current_fluid_holder.turf_flags & TURF_FLAG_ABSORB_LIQUID) && (current_fluid_holder.reagents?.total_volume + current_fluid_holder.get_physical_height()) > 0))
 			removing = round(current_depth * 0.5)
 			if(removing > 0)
 				current_fluid_holder.remove_fluids(removing, defer_update = TRUE)

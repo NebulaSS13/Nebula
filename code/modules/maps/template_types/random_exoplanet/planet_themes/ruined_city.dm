@@ -103,15 +103,14 @@
 
 /datum/random_map/city/get_appropriate_path(var/value)
 	if(value == ROAD_VALUE && prob(99))
-		return /turf/exterior/concrete/reinforced/road
+		return /turf/floor/concrete/reinforced/road
 
 /datum/random_map/city/get_additional_spawns(var/value, var/turf/floor/T)
-	if(istype(T, /turf/exterior/concrete/reinforced/road))
+	if(istype(T, /turf/floor/concrete/reinforced/road))
 		if(prob(1))
 			new/obj/structure/rubble/house(T)
 		if(prob(5))
-			var/turf/exterior/concrete/C = T
-			C.set_broken(TRUE)
+			T.set_floor_broken(TRUE)
 
 /datum/random_map/city/apply_to_map()
 	..()
@@ -127,7 +126,7 @@
 //Generic ruin
 /datum/random_map/maze/concrete
 	wall_type =  /turf/wall/concrete
-	floor_type = /turf/exterior/concrete/reinforced
+	floor_type = /turf/floor/concrete/reinforced
 	preserve_map = 0
 
 /datum/random_map/maze/concrete/get_appropriate_path(var/value)
@@ -135,7 +134,7 @@
 		if(prob(80))
 			return /turf/wall/concrete
 		else
-			return /turf/exterior/concrete/reinforced/damaged
+			return /turf/floor/concrete/reinforced/damaged
 	return ..()
 
 /datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/floor/T)
@@ -143,7 +142,7 @@
 		return
 	if(prob(10))
 		new/obj/item/remains/xeno/charred(T)
-	if((T.broken && prob(80)) || prob(10))
+	if((T.is_floor_broken() && prob(80)) || prob(10))
 		new/obj/structure/rubble/house(T)
 	if(prob(1))
 		new/obj/abstract/landmark/exoplanet_spawn/animal(T)

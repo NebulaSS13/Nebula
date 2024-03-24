@@ -2092,7 +2092,7 @@
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "gu" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "ib" = (
 /obj/structure/hygiene/sink{

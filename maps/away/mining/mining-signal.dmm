@@ -3,7 +3,7 @@
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "ab" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "af" = (
 /turf/wall/titanium,
@@ -980,7 +980,7 @@
 /turf/wall/titanium,
 /area/outpost/abandoned)
 "dv" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /turf/wall/shuttle{
 	unique_merge_identifier = "mining_signal"
 	},
@@ -1024,7 +1024,7 @@
 /turf/floor/carpet,
 /area/outpost/abandoned)
 "dB" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /turf/wall/shuttle{
 	unique_merge_identifier = "mining_signal"
 	},
@@ -1219,22 +1219,22 @@
 /area/outpost/abandoned)
 "eh" = (
 /obj/structure/hygiene/sink/puddle,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "ei" = (
 /obj/random/trash,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "ej" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "ek" = (
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
 	},
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "el" = (
 /obj/structure/firedoor_assembly{
@@ -1357,7 +1357,7 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "eG" = (
 /obj/machinery/door/airlock/external,
@@ -1536,7 +1536,7 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "fg" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1596,7 +1596,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/brflowers,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/outpost/abandoned)
 "fs" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1635,7 +1635,7 @@
 /area/outpost/abandoned)
 "fy" = (
 /obj/effect/floor_decal/asteroid,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "fz" = (
 /obj/effect/floor_decal/asteroid,
@@ -1701,7 +1701,7 @@
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fI" = (
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/outpost/abandoned)
 "fJ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1712,7 +1712,7 @@
 	dir = 1
 	},
 /obj/structure/flora/bush/stalkybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/outpost/abandoned)
 "fK" = (
 /obj/effect/decal/cleanable/blood/gibs/down,
@@ -1836,7 +1836,7 @@
 "gc" = (
 /obj/item/solar_assembly,
 /obj/effect/decal/cleanable/dirt,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "gd" = (
 /obj/structure/windoor_assembly{
@@ -1939,12 +1939,12 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "gt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "gu" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2057,7 +2057,7 @@
 /area/outpost/abandoned)
 "gM" = (
 /obj/item/solar_assembly,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "gN" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2087,7 +2087,7 @@
 	dir = 1
 	},
 /obj/machinery/power/tracker,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/outpost/abandoned)
 "gR" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2131,7 +2131,7 @@
 /obj/structure/cable/orange{
 	icon_state = "1-2"
 	},
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/outpost/abandoned)
 "gX" = (
 /obj/structure/cable/orange{
@@ -2393,31 +2393,31 @@
 /area/outpost/abandoned)
 "ib" = (
 /obj/effect/shuttle_landmark/away/nav7,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "jb" = (
 /obj/effect/shuttle_landmark/away/nav1,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "kb" = (
 /obj/effect/shuttle_landmark/away/nav2,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "lb" = (
 /obj/effect/shuttle_landmark/away/nav3,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "mb" = (
 /obj/effect/shuttle_landmark/away/nav6,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "nb" = (
 /obj/effect/shuttle_landmark/away/nav5,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "ob" = (
 /obj/effect/shuttle_landmark/away/nav4,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/mine/explored)
 "pb" = (
 /obj/effect/gibspawner/human,

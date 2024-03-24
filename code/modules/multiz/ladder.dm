@@ -42,7 +42,7 @@
 		var/turf/T = get_turf(src)
 		if((locate(/obj/structure/ladder) in GetBelow(src)) && (!(locate(/obj/structure/lattice) in loc) || !T.is_open()))
 			var/old_turf_type = T.type
-			T.ReplaceWithLattice()
+			T.dismantle_turf()
 			//Gonna keep logging those, since it's not clear if it's always a desired behavior. Since mappers would probably not want to rely on this.
 			log_debug("Ladder replaced turf type '[old_turf_type]' at ([x], [y], [z]) with a lattice and open turf '[loc]' of type '[loc.type]'.")
 	find_connections()

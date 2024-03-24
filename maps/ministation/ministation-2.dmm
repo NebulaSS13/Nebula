@@ -2688,7 +2688,7 @@
 /area/ministation/science)
 "mK" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/science)
 "mN" = (
 /obj/machinery/door/airlock/glass/science{
@@ -3289,7 +3289,7 @@
 	dir = 8
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/ministation/hall/n3)
 "tc" = (
 /obj/structure/cable{
@@ -4470,7 +4470,7 @@
 	dir = 4
 	},
 /obj/structure/flora/grass/both,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/ministation/hall/n3)
 "Dc" = (
 /obj/item/radio/intercom{
@@ -7000,7 +7000,7 @@
 "Ym" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/bush/grassybush,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/ministation/hall/n3)
 "Yv" = (
 /obj/structure/cable{

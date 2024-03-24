@@ -85,14 +85,14 @@
 		explosion(location, -1, -1, 2, 3)
 
 	if(target)
-		if (istype(target, /turf/wall))
-			var/turf/wall/W = target
-			W.dismantle_wall(1)
+		if (istype(target, /turf))
+			target.physically_destroyed()
 		else if(isliving(target))
 			target.explosion_act(2) // c4 can't gib mobs anymore.
 		else
 			target.explosion_act(1)
-	if(target)
+	// TODO: vis contents instead of diddling overlays directly.
+	if(!QDELETED(target))
 		target.overlays -= image_overlay
 	qdel(src)
 
