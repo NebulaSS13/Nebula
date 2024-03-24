@@ -17,6 +17,7 @@
 	plural_name = "sheets"
 	abstract_type = /obj/item/stack/material
 	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/can_be_pulverized = FALSE
 	var/can_be_reinforced = FALSE
 	var/decl/material/reinf_material
@@ -188,7 +189,10 @@
 
 /obj/item/stack/material/on_update_icon()
 	. = ..()
-	alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+	if(material)
+		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+	else
+		alpha = initial(alpha)
 	update_state_from_amount()
 	if(drying_wetness > 0)
 		var/image/I = new(icon, icon_state)

@@ -10,6 +10,7 @@
 /mob/proc/InitializeHud()
 	if(istype(hud_used))
 		QDEL_NULL(hud_used)
+		hud_used = initial(hud_used)
 	if(ispath(hud_used))
 		hud_used = new hud_used(src)
 	refresh_lighting_master()

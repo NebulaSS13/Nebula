@@ -63,6 +63,7 @@
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 	color = COLOR_BEIGE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	replacement_turf_type = /turf/floor/woven
 
 /*
  * Wood
@@ -390,6 +391,7 @@
 	icon_state = "woven"
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 	replacement_turf_type = /turf/floor/woven
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/stack/tile/roof/try_build_turf(var/mob/user, var/turf/target)
 

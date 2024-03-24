@@ -106,8 +106,12 @@
 	if(!ispath(pref.starting_cash_choice, /decl/starting_cash_choice))
 		pref.starting_cash_choice = global.using_map.default_starting_cash_choice
 
-	if(!pref.survival_box_choice && length(global.using_map.survival_box_choices)) // if you have at least one box available, 'none' must be its own bespoke option
-		pref.survival_box_choice = global.using_map.survival_box_choices[global.using_map.survival_box_choices[1]]
+	// if you have at least one box available, 'none' must be its own bespoke option
+	if(length(global.using_map.survival_box_choices))
+		if(!pref.survival_box_choice || !(pref.survival_box_choice.type in global.using_map.survival_box_choices))
+			pref.survival_box_choice = global.using_map.survival_box_choices[global.using_map.survival_box_choices[1]]
+	else
+		pref.survival_box_choice = null
 
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()

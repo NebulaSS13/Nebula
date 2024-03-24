@@ -68,7 +68,6 @@
 	animate(transform=M, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
 
 /obj/structure/flora/tree/create_dismantled_products(turf/T)
-	. = ..()
 	if(log_type)
 		LAZYADD(., new log_type(T, rand(max(1,round(log_amount*0.5)), log_amount), material?.type, reinf_material?.type))
 	if(stump_type)
@@ -76,6 +75,7 @@
 		stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees..
 		if(paint_color)
 			stump.set_color()
+	. = ..()
 
 /obj/structure/flora/tree/pine
 	name         = "pine tree"

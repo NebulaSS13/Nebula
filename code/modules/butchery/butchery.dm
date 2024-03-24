@@ -150,14 +150,26 @@
 
 /obj/structure/meat_hook/on_update_icon()
 	..()
-	if(occupant)
-		occupant.set_dir(SOUTH)
-		var/image/I = image(null)
-		I.appearance = occupant
-		var/matrix/M = matrix()
-		M.Turn(occupant.butchery_rotation)
-		I.transform = M
-		add_overlay(I)
+	if(!occupant)
+		return
+
+	occupant.set_dir(SOUTH)
+
+	var/image/I = image(null)
+	I.appearance = occupant
+	I.appearance_flags |= RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
+	I.pixel_x = null
+	I.pixel_y = null
+	I.pixel_z = null
+	I.pixel_w = null
+	I.layer   = FLOAT_LAYER
+	I.plane   = FLOAT_PLANE
+
+	var/matrix/M = matrix()
+	M.Turn(occupant.butchery_rotation)
+	I.transform = M
+
+	add_overlay(I)
 
 /obj/structure/meat_hook/mob_breakout(mob/living/escapee)
 	. = ..()

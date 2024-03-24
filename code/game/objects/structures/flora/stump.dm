@@ -17,9 +17,9 @@
 		. = ..()
 
 /obj/structure/flora/stump/create_dismantled_products(turf/T)
-	. = ..()
 	if(log_type)
 		LAZYADD(., new log_type(T, rand(2,3), material?.type, reinf_material?.type))
+	. = ..()
 
 //Base tree stump
 /obj/structure/flora/stump/tree

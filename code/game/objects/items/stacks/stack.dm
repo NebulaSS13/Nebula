@@ -412,7 +412,7 @@
 	if(!user.is_holding_offhand(src) || !can_split())
 		return ..()
 
-	var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
+	var/N = input(user, "How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
 	if(!N)
 		return TRUE
 

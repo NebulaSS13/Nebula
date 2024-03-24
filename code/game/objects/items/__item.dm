@@ -520,6 +520,9 @@
 /obj/item/proc/equipped(var/mob/user, var/slot)
 	SHOULD_CALL_PARENT(TRUE)
 
+	// Clear our alpha mask.
+	update_turf_alpha_mask()
+
 	add_fingerprint(user)
 
 	hud_layerise()

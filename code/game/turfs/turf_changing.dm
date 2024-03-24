@@ -161,6 +161,9 @@
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)
 
+	for(var/atom/movable/AM in W.contents)
+		AM.update_turf_alpha_mask()
+
 /turf/proc/transport_properties_from(turf/other)
 	if(other.zone)
 		if(!air)
