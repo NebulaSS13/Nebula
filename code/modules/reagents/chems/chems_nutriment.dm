@@ -9,6 +9,7 @@
 	fruit_descriptor = "nutritious"
 	uid = "chem_nutriment"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Please, no more animal protein or glowsap or corn oil atmosphere.
+	fishing_bait_value = 0.65
 
 	// Technically a room-temperature solid, but saves
 	// repathing it to /solid all over the codebase.
@@ -102,6 +103,7 @@
 	taste_description = "some sort of protein"
 	color = "#440000"
 	uid = "chem_nutriment_protein"
+	fishing_bait_value = 1
 
 /decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/carbon/M, removed)
 	var/malus_level = M.GetTraitLevel(/decl/trait/malus/animal_protein)

@@ -15,3 +15,8 @@
 	SHOULD_CALL_PARENT(FALSE)
 	var/turf/new_turf = ChangeTurf(/turf/exterior/mud, keep_air = TRUE, keep_air_below = TRUE)
 	return new_turf.fluid_act(fluids)
+
+/turf/exterior/dirt/drop_diggable_resources()
+	if(get_physical_height() > -(FLUID_DEEP) && prob(10))
+		new /obj/item/chems/food/worm(src)
+	return ..()

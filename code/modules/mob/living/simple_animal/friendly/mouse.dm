@@ -18,7 +18,7 @@
 	maxbodytemp = 323	//Above 50 Degrees Celsius
 	universal_speak = FALSE
 	universal_understand = TRUE
-	holder_type = /obj/item/holder/mouse
+	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_MINISCULE
 	possession_candidate = 1
 	can_escape = TRUE

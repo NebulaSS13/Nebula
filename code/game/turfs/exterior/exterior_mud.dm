@@ -25,6 +25,11 @@
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
 
+/turf/exterior/mud/drop_diggable_resources()
+	if(get_physical_height() > -(FLUID_DEEP) && prob(25))
+		new /obj/item/chems/food/worm(src)
+	return ..()
+
 /turf/exterior/mud/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!reagents?.total_volume)
 		ChangeTurf(/turf/exterior/dry, keep_air = TRUE, keep_air_below = TRUE)

@@ -23,6 +23,9 @@
 	result_type            = /obj/item/coilgun_assembly
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
 
+/decl/stack_recipe/planks/fishing_rod
+	result_type = /obj/item/fishing_rod
+
 /decl/stack_recipe/planks/stick
 	result_type            = /obj/item/stick
 	difficulty             = MAT_VALUE_EASY_DIY
