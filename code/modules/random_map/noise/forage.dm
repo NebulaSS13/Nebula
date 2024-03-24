@@ -130,10 +130,10 @@
 				return
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["grass"])
-		else if(istype(T, /turf/exterior/mud/water/deep))
+		else if(istype(T, /turf/floor/natural/mud/water/deep))
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["riverbed"])
-		else if(istype(T, /turf/exterior/mud/water))
+		else if(istype(T, /turf/floor/natural/mud/water))
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["shallows"])
 		else if(istype(T, /turf/exterior/mud))

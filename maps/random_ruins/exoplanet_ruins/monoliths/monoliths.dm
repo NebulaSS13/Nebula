@@ -81,7 +81,13 @@
 	desc = "This obviously wasn't made for your feet. Looks pretty old."
 	initial_gas = null
 
-/turf/floor/fixed/alium/ruin/Initialize()
-	. = ..()
-	if(prob(10))
-		ChangeTurf(get_base_turf_by_area(src))
+/obj/abstract/landmark/random_base_turf
+	name = "random chance base turf"
+	var/turf_prob = 10
+
+/obj/abstract/landmark/random_base_turf/Initialize()
+	..()
+	if(isturf(loc) && prob(turf_prob))
+		var/turf/my_turf = loc
+		my_turf.ChangeTurf(get_base_turf_by_area(src))
+	return INITIALIZE_HINT_QDEL
