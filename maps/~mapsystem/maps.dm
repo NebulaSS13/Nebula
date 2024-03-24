@@ -53,6 +53,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	 */
 	var/list/map_admin_faxes
 
+	var/map_tech_level = MAP_TECH_LEVEL_SPACE
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock

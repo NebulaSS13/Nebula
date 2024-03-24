@@ -23,12 +23,8 @@
 	var/gender
 	// Object path to the desired product.
 	var/result_type
-	/// Amount of sheets/ingots/etc needed for this recipe. If null, generates from result matter.
+	/// Amount of matter units needed for this recipe. If null, generates from result matter.
 	var/req_amount
-	/// Amount of stuff that is produced in one batch (e.g. 4 for floor tiles).
-	var/res_amount                       = 1
-	// Caps the amount that can be produced in one craft action. Set to null for no cap.
-	var/max_res_amount
 	/// Time it takes for this recipe to be crafted (not including skill and tool modifiers). If null, generates from product w_class and difficulty.
 	var/time
 	/// If set, only one of this object can be made per turf.
@@ -43,7 +39,10 @@
 	var/set_dir_on_spawn                 = TRUE
 	/// Used to validate some checks like matter (since /turf has no matter).
 	var/expected_product_type            = /obj
-	/// Used for providing a display name.
+	/// Used to prevent multiple being crafted at once.
+	var/allow_multiple_craft = TRUE
+	/// Category var used to discriminate recipes per-map. Unrelated to origin_tech.
+	var/available_to_map_tech_level = MAP_TECH_LEVEL_ANY
 
 	/// What stack types can be used to make this recipe?
 	var/list/craft_stack_types           = list(
@@ -97,17 +96,6 @@
 		if(isnull(gender))
 			gender = initial(result.gender)
 
-	// Clamp stack max amount to this regardless of anything else
-	// so we don't lose material on crafting an impossible stack.
-	if(ispath(result_type, /obj/item/stack))
-		var/obj/item/stack/result_stack = result_type
-		var/stack_max = initial(result_stack.max_amount)
-		if(isnull(max_res_amount) || max_res_amount > stack_max)
-			max_res_amount = stack_max
-
-	if(isnull(max_res_amount) && one_per_turf)
-		max_res_amount = 1
-
 	if(isnull(name_plural))
 		name_plural = "[name]s"
 
@@ -160,16 +148,32 @@
 			if((stack_type in craft_stack_types) && (stack_type in forbidden_craft_stack_types))
 				. += "[stack_type] is in both forbidden and craftable stack types"
 
+/decl/stack_recipe/proc/get_required_stack_amount(obj/item/stack/stack)
+	return max(1, CEILING(req_amount / max(1, (SHEET_MATERIAL_AMOUNT * stack?.matter_multiplier))))
+
 /decl/stack_recipe/proc/get_list_display(mob/user, obj/item/stack/stack)
+
+	var/sheets_per_product = req_amount / CEILING(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier))
+	var/products_per_sheet = CEILING(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier)) / req_amount
+	var/clamp_sheets = max(1, CEILING(sheets_per_product))
+	var/max_multiplier = FLOOR(stack.get_amount() / clamp_sheets)
+
+	// Stacks can have a max bound that will cause us to waste material on crafting an impossible amount.
+	if(ispath(result_type, /obj/item/stack))
+		var/obj/item/stack/product_stack = result_type
+		max_multiplier = min(max_multiplier, initial(product_stack.max_amount) * sheets_per_product)
+	else
+		// TODO: work out what types should let you craft multiple.
+		max_multiplier = min(max_multiplier, 1)
 
 	. = list("<tr>")
 
 	. += "<td width = '150px'>"
-	. += get_display_name(res_amount, apply_article = FALSE)
+	. += get_display_name(max(1, FLOOR(products_per_sheet)), apply_article = FALSE)
 	. += "</td>"
 
 	. += "<td width = '75px'>"
-	. += "[req_amount] [req_amount == 1 ? stack.singular_name : stack.plural_name]"
+	. += "[clamp_sheets] [clamp_sheets == 1 ? stack.singular_name : stack.plural_name]"
 	. += "</td>"
 
 	. += "<td width = '75px'>"
@@ -187,17 +191,21 @@
 	. += "</td>"
 
 	. += "<td width = '200px'>"
-	var/max_multiplier = round(stack.get_amount() / req_amount)
-	if(max_multiplier)
-		if(max_res_amount > 0)
-			max_multiplier = min(max_multiplier, round(max_res_amount / res_amount))
-		var/static/list/multipliers = list(1, 5, 10, 25, 50)
-		for(var/n in multipliers)
-			if(max_multiplier < n)
-				break
-			. += "<a href='?src=\ref[stack];make=\ref[src];multiplier=[n]'>[n*res_amount]x</a>"
-		if(!(max_multiplier in multipliers))
-			. += "<a href='?src=\ref[stack];make=\ref[src];multiplier=[max_multiplier]'>[max_multiplier*res_amount]x</a>"
+	if(max_multiplier <= 0 || clamp_sheets > stack.get_amount())
+		. += "Insufficient materials."
+	else if(allow_multiple_craft && !one_per_turf && clamp_sheets <= max_multiplier)
+		var/new_row = 5
+		for(var/i = clamp_sheets to max_multiplier step clamp_sheets)
+			var/producing = i * FLOOR(products_per_sheet)
+			. += "<a href='?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i]'>[producing]x</a>"
+			if(new_row == 0)
+				new_row = 5
+				. += "<br>"
+			else
+				new_row--
+	else
+		. += "<a href='?src=\ref[stack];make=\ref[src];producing=[FLOOR(clamp_sheets * products_per_sheet)];expending=[clamp_sheets]'>1x</a>"
+
 	. += "</td>"
 	. += "</tr>"
 
@@ -285,10 +293,13 @@
 	if(result_type && isnull(req_amount))
 		req_amount = 0
 		var/list/materials
-		materials = atom_info_repository.get_matter_for(result_type, (ispath(required_material) ? required_material : null), res_amount)
+		materials = atom_info_repository.get_matter_for(result_type, (ispath(required_material) ? required_material : null))
 		for(var/mat in materials)
-			req_amount += round(materials[mat]/res_amount)
-		req_amount = clamp(CEILING(((req_amount*crafting_extra_cost_factor)/SHEET_MATERIAL_AMOUNT) * res_amount), 1, 50)
+			req_amount += round(materials[mat])
+		req_amount = CEILING(req_amount*crafting_extra_cost_factor)
+		if(!ispath(result_type, /obj/item/stack))
+			// Due to matter calc, without this clamping, one sheet can make 32x grenade casings. Not ideal.
+			req_amount = max(req_amount, SHEET_MATERIAL_AMOUNT)
 
 /decl/stack_recipe/proc/get_display_name(amount, decl/material/mat, decl/material/reinf_mat, apply_article = TRUE)
 	var/material_strings

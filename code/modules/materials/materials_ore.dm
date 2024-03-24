@@ -22,11 +22,18 @@
 	craft_verb                 = "knap"
 	craft_verbing              = "knapping"
 	can_be_pulverized          = TRUE
+	matter_multiplier          = 1.5
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
 	var/static/list/ore_icon_states = icon_states('icons/obj/materials/ore.dmi')
+
+/obj/item/stack/material/ore/get_stack_conversion_dictionary()
+	var/static/list/converts_into = list(
+		TOOL_HAMMER = /obj/item/stack/material/brick
+	)
+	return converts_into
 
 ///Returns a cached ore pile icon state
 /obj/item/stack/material/ore/proc/get_cached_ore_pile_overlay(var/state_name, var/stack_icon_index)
@@ -96,7 +103,6 @@
 /obj/item/stack/material/ore/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/stack/material) && !is_same(W))
 		return FALSE //Don't reinforce
-
 	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		return FALSE //Don't melt stuff with welder
 	return ..()
@@ -159,9 +165,14 @@
 	material = /decl/material/solid/organic/meat
 
 /obj/item/stack/material/ore/handful
-	singular_name = "handful"
-	plural_name   = "handfuls"
-	stack_merge_type           = /obj/item/stack/material/ore/handful
+	singular_name         = "handful"
+	plural_name           = "handfuls"
+	stack_merge_type      = /obj/item/stack/material/ore/handful
+	matter_multiplier     = 1
+	can_be_pulverized     = FALSE
+
+/obj/item/stack/material/ore/handful/get_stack_conversion_dictionary()
+	return
 
 /obj/item/stack/material/ore/handful/sand
 	material      = /decl/material/solid/sand

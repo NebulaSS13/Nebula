@@ -27,7 +27,7 @@
 	name                 = "border window"
 	result_type          = /obj/structure/window
 	one_per_turf         = FALSE
-	max_res_amount       = 1 // one per direction
+	allow_multiple_craft = FALSE
 
 /decl/stack_recipe/opacity/borderwindow/can_make(mob/user)
 	. = ..()

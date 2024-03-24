@@ -1,6 +1,7 @@
 /decl/stack_recipe/steel
 	abstract_type     = /decl/stack_recipe/steel
 	required_material = /decl/material/solid/metal/steel
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/steel/apc
 	result_type       = /obj/item/frame/apc
@@ -45,7 +46,7 @@
 
 /decl/stack_recipe/steel/furniture/computerframe
 	result_type       = /obj/machinery/constructable_frame/computerframe
-	req_amount        = 5 // Arbitrary value since machines don't handle matter properly yet.
+	req_amount        = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
 
 /decl/stack_recipe/steel/furniture/computerframe/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	return ..(user, location, amount, null, null)
@@ -97,7 +98,7 @@
 
 /decl/stack_recipe/steel/furniture/canister
 	result_type       = /obj/machinery/portable_atmospherics/canister
-	req_amount        = 20 // Arbitrary value since machines don't handle matter properly yet.
+	req_amount        = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
 
 /decl/stack_recipe/steel/furniture/tank
 	result_type       = /obj/item/pipe/tank

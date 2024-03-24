@@ -10,7 +10,7 @@
 
 /decl/stack_recipe/hardness/integrity/furniture/door
 	result_type        = /obj/structure/door
-	req_amount         = 5 // Arbitrary value since doors return weird matter values.
+	req_amount         = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since doors return weird matter values.
 
 /decl/stack_recipe/hardness/integrity/furniture/barricade
 	result_type        = /obj/structure/barricade
@@ -47,6 +47,7 @@
 
 /decl/stack_recipe/hardness/integrity/furniture/tank_dispenser
 	result_type        = /obj/structure/tank_rack
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/integrity/furniture/coffin
 	result_type        = /obj/structure/closet/coffin
@@ -57,6 +58,7 @@
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/office
 	result_type        = /obj/structure/bed/chair/office/comfy/unpadded
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/comfy
 	result_type        = /obj/structure/bed/chair/comfy/unpadded
@@ -78,6 +80,4 @@
 
 /decl/stack_recipe/hardness/integrity/rod
 	result_type        = /obj/item/stack/material/rods
-	res_amount         = 2
-	max_res_amount     = 60
 	difficulty         = MAT_VALUE_NORMAL_DIY

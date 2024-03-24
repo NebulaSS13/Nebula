@@ -15,7 +15,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_amount = 100
 	icon = 'icons/obj/tiles.dmi'
-	matter_multiplier = 0.15
+	matter_multiplier = 0.2
 	force = 1
 	throwforce = 1
 	throw_speed = 5
