@@ -120,6 +120,14 @@ var/global/list/organ_icon_cache = list()
 			owner.update_body()
 		update_icon()
 
+/obj/item/organ/external/proc/clear_sprite_accessories_by_category(var/accessory_category, var/skip_update = FALSE)
+	var/list/category_accessories = get_sprite_accessories_by_category(accessory_category)
+	category_accessories?.Cut()
+	_sprite_accessories?[accessory_category] = null
+	if(skip_update)
+		return
+	owner?.update_body(update_icons = TRUE)
+
 /obj/item/organ/external/proc/get_sprite_accessories_by_category(var/accessory_category)
 	return LAZYACCESS(_sprite_accessories, accessory_category)
 
@@ -178,7 +186,7 @@ var/global/list/organ_icon_cache = list()
 		for(var/accessory in draw_accessories)
 			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
 			if(accessory_decl?.is_heritable)
-				LAZYADD(., accessory)
+				LAZYSET(., accessory, draw_accessories[accessory])
 
 /obj/item/organ/external/proc/set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, preserve_colour = TRUE, preserve_type = TRUE, skip_update)
 	if(!accessory_category)
@@ -198,7 +206,7 @@ var/global/list/organ_icon_cache = list()
 		// We may only be setting colour, in which case we don't bother with a removal.
 		if(preserve_type && !accessory_type)
 			accessory_type = replacing_type
-		else
+		else if (accessory_type != replacing_type)
 			remove_sprite_accessory(replacing_type, TRUE)
 
 	// We have already done our removal above and have nothing further to set below.

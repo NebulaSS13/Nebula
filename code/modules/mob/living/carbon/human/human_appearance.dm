@@ -63,21 +63,24 @@
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	var/list/valid_hairstyles = species?.get_available_accessories(root_bodytype, SAC_HAIR)
 	if(length(valid_hairstyles))
-		SET_HAIR_STYLE(src, pick(valid_hairstyles), TRUE)
+		var/body_default_hairstyles = LAZYACCESS(root_bodytype?.default_sprite_accessories, SAC_HAIR)
+		// Forgive us, but we need to set both hair color AND style at the same time...
+		set_organ_sprite_accessory_by_category(pick(valid_hairstyles), SAC_HAIR, GET_HAIR_COLOUR(src) || body_default_hairstyles?[body_default_hairstyles[1]], TRUE, TRUE, BP_HEAD, TRUE)
 	else
 		//this shouldn't happen
 		var/new_hair = LAZYACCESS(root_bodytype?.default_sprite_accessories, SAC_HAIR) || /decl/sprite_accessory/hair/bald
 		if(new_hair)
-			SET_HAIR_STYLE(src, new_hair, TRUE)
+			set_organ_sprite_accessory_by_category(new_hair[1], SAC_HAIR, new_hair[new_hair[1]], TRUE, TRUE, BP_HEAD, TRUE)
 
 	var/list/valid_facial_hairstyles = species?.get_available_accessories(root_bodytype, SAC_FACIAL_HAIR)
 	if(length(valid_facial_hairstyles))
-		SET_FACIAL_HAIR_STYLE(src, pick(valid_facial_hairstyles), TRUE)
+		var/body_default_facial_hairstyles = LAZYACCESS(root_bodytype?.default_sprite_accessories, SAC_FACIAL_HAIR)
+		set_organ_sprite_accessory_by_category(pick(valid_facial_hairstyles), SAC_FACIAL_HAIR, GET_FACIAL_HAIR_COLOUR(src) || body_default_facial_hairstyles?[body_default_facial_hairstyles[1]], TRUE, TRUE, BP_HEAD, TRUE)
 	else
 		//this shouldn't happen
 		var/new_facial_hair = LAZYACCESS(root_bodytype?.default_sprite_accessories, SAC_FACIAL_HAIR) || /decl/sprite_accessory/facial_hair/shaved
 		if(new_facial_hair)
-			SET_FACIAL_HAIR_STYLE(src, new_facial_hair, TRUE)
+			set_organ_sprite_accessory_by_category(new_facial_hair[1], SAC_FACIAL_HAIR, new_facial_hair[new_facial_hair[1]], TRUE, TRUE, BP_HEAD, TRUE)
 
 	update_hair()
 

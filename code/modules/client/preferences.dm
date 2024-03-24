@@ -403,7 +403,7 @@ var/global/list/time_prefs_fixed = list()
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
 	for(var/obj/item/organ/external/O in character.get_external_organs())
-		O.clear_sprite_accessories(skip_update = TRUE)
+		O.clear_sprite_accessories_by_category(SAC_MARKINGS, skip_update = TRUE)
 
 	for(var/accessory_category in sprite_accessories)
 		for(var/accessory in sprite_accessories[accessory_category])
