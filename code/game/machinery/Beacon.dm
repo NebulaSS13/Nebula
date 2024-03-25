@@ -36,9 +36,10 @@
 		icon_state = "[state]"
 
 /obj/machinery/tracking_beacon/Process()
-	if(!beacon && loc)
-		beacon = new /obj/item/radio/beacon(get_turf(src))
+	var/turf/my_turf = get_turf(src)
+	if(!beacon && my_turf)
+		beacon = new /obj/item/radio/beacon(my_turf)
 		beacon.set_invisibility(INVISIBILITY_MAXIMUM)
-	if(beacon && beacon.loc != loc)
-		beacon.forceMove(loc)
+	if(beacon && beacon.loc != my_turf)
+		beacon.forceMove(my_turf)
 	update_icon()
