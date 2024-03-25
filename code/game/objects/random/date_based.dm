@@ -6,6 +6,7 @@
 	name = "random object (date based)"
 	icon_state = "yup"
 	spawn_method = PROC_REF(check_date)
+	abstract_type = /obj/random/date_based
 	var/datum/is_date/date_check
 
 /obj/random/date_based/Destroy()
