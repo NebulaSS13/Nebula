@@ -28,6 +28,7 @@
 	desc = null
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "blank"
+	is_spawnable_type = FALSE
 	var/list/connected_zlevels //cached for checking if we someone is obseving us so we should process
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/is_burnable()
@@ -36,6 +37,8 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize(mapload,var/datum/seed/newseed, var/start_mature)
 	. = ..(mapload) // avoid passing newseed as dir
 	seed = newseed
+	if(!seed)
+		return INITIALIZE_HINT_QDEL
 	dead = 0
 	age = start_mature ? seed.get_trait(TRAIT_MATURATION) : 1
 	plant_health = seed.get_trait(TRAIT_ENDURANCE)

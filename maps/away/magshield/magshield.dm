@@ -65,16 +65,16 @@
 /obj/structure/magshield/maggen/Process()
 	var/eye_safety = 0
 	chance = rand(1,300)//I wanted to use Poisson distribution with Lambda for 5 minutes but made it simpler
-	if (chance == 1)
+	var/turf/T = get_turf(src)
+	var/area/A = get_area(src)
+	if (A && T && chance == 1)
 		empulse(src, heavy_range, lighter_range, 0)
-		var/turf/T = get_turf(src)
-		var/area/A = get_area(src)
 		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A.proper_name] ([T.x], [T.y], [T.z])")
 		visible_message(
 			SPAN_DANGER("\The [src] suddenly activates!"),
 			SPAN_DANGER("Electricity arcs between \the [src]'s rotating spokes as a powerful magnetic field tugs on every metallic object nearby.")
 		)
-		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
+		for(var/mob/living/carbon/M in hear(10, T))
 			eye_safety = M.eyecheck()
 			if(eye_safety < FLASH_PROTECTION_MODERATE)
 				M.flash_eyes()

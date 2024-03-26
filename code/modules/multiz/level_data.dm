@@ -532,6 +532,7 @@
 /obj/abstract/level_data_spawner
 	name = "space"
 	icon_state = "level_data"
+	is_spawnable_type = FALSE
 	var/level_data_type = /datum/level_data/space
 
 INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)

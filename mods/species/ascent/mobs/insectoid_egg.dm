@@ -76,6 +76,8 @@ var/global/default_gyne
 
 	last_tick = world.time
 	var/turf/T = get_turf(src)
+	if(!T)
+		return
 
 	// Too high of temp will damage eggs.
 	if(T.temperature > (max_temperature * 1.5))

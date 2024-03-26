@@ -14,6 +14,8 @@
 /obj/effect/quicksand/Initialize()
 	. = ..()
 	var/turf/T = get_turf(src)
+	if(!T)
+		return INITIALIZE_HINT_QDEL
 	appearance = T.appearance
 
 /obj/effect/quicksand/user_unbuckle_mob(mob/user)

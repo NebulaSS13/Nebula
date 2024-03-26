@@ -24,7 +24,7 @@ var/global/list/navbeacons = list()
 	. = ..()
 
 	var/turf/T = loc
-	hide(!T.is_plating())
+	hide(istype(T) && !T.is_plating())
 
 	navbeacons += src
 

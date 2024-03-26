@@ -29,6 +29,8 @@
 
 /obj/effect/decompiler/Initialize()
 	. = ..()
+	if(!loc)
+		return INITIALIZE_HINT_QDEL
 	expiry_time = world.time + lifetime
 	START_PROCESSING(SSobj, src)
 	decompiled_matter = list()

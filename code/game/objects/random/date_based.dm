@@ -6,6 +6,7 @@
 	name = "random object (date based)"
 	icon_state = "yup"
 	spawn_method = PROC_REF(check_date)
+	abstract_type = /obj/random/date_based
 	var/datum/is_date/date_check
 
 /obj/random/date_based/Destroy()
@@ -13,7 +14,7 @@
 	return ..()
 
 /obj/random/date_based/proc/check_date()
-	if(date_check.IsValid())
+	if(date_check?.IsValid())
 		return spawn_item()
 
 /datum/is_date/proc/IsValid()

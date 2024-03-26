@@ -34,6 +34,8 @@ var/global/list/magnetic_modules = list()
 	. = ..()
 	global.magnetic_modules += src
 	var/turf/T = loc
+	if(!T)
+		return INITIALIZE_HINT_QDEL
 	hide(!T.is_plating())
 	center = T
 

@@ -1,4 +1,5 @@
 /obj/test
+	is_spawnable_type = FALSE
 	name = "A test object. You shall never see this."
 	desc = "A test object. You shall never see this."
 

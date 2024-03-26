@@ -11,10 +11,10 @@
 /obj/machinery/tracking_beacon/Initialize()
 	. = ..()
 	var/turf/T = get_turf(src)
-	beacon = new /obj/item/radio/beacon(T)
-	beacon.set_invisibility(INVISIBILITY_MAXIMUM)
-
-	hide(!T.is_plating())
+	if(T)
+		beacon = new /obj/item/radio/beacon(T)
+		beacon.set_invisibility(INVISIBILITY_MAXIMUM)
+	hide(!T?.is_plating())
 
 /obj/machinery/tracking_beacon/Destroy()
 	QDEL_NULL(beacon)
@@ -36,11 +36,10 @@
 		icon_state = "[state]"
 
 /obj/machinery/tracking_beacon/Process()
-	if(!beacon)
-		beacon = new /obj/item/radio/beacon(get_turf(src))
+	var/turf/my_turf = get_turf(src)
+	if(!beacon && my_turf)
+		beacon = new /obj/item/radio/beacon(my_turf)
 		beacon.set_invisibility(INVISIBILITY_MAXIMUM)
-	if(beacon)
-		if(beacon.loc != loc)
-			beacon.forceMove(loc)
-
+	if(beacon && beacon.loc != my_turf)
+		beacon.forceMove(my_turf)
 	update_icon()

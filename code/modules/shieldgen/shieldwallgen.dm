@@ -101,7 +101,11 @@
 	if(!anchored)
 		power = 0
 		return 0
+
 	var/turf/T = src.loc
+	if(!T)
+		power = 0
+		return 0
 
 	var/obj/structure/cable/C = T.get_cable_node()
 	var/datum/powernet/PN
