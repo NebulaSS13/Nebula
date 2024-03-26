@@ -46,12 +46,14 @@
 			"towercap"
 		),
 		"shallows" = list(
+			/obj/item/rock/flint,
 			"rice",
 			"mollusc",
 			"clam",
 			"sugarcane"
 		),
 		"cave_shallows" = list(
+			/obj/item/rock/flint,
 			"algae",
 			"mollusc",
 			"clam"
@@ -73,9 +75,16 @@
 			"coffee",
 			"tea"
 		),
+		"riverbed" = list(
+			/obj/item/rock/flint,
+			// no rice, generally rice wants at most 10cm water
+			"mollusc",
+			"clam"
+		)
 	)
 	var/list/trees = list(
-		/obj/structure/flora/tree/hardwood/ebony
+		/obj/structure/flora/tree/hardwood/ebony = 9,
+		/obj/structure/flora/tree/dead/ebony = 1
 	)
 	var/list/cave_trees = list(
 		/obj/structure/flora/tree/softwood/towercap
@@ -110,11 +119,14 @@
 				return
 		else if(istype(T, /turf/exterior/grass))
 			if(prob(parse_value * 0.35))
-				var/tree_type = pick(trees)
+				var/tree_type = pickweight(trees)
 				new tree_type(T)
 				return
 			place_prob = parse_value * 0.3
 			place_type = pick(forage["grass"])
+		else if(istype(T, /turf/exterior/mud/water/deep))
+			place_prob = parse_value * 0.3
+			place_type = pick(forage["riverbed"])
 		else if(istype(T, /turf/exterior/mud/water))
 			place_prob = parse_value * 0.3
 			place_type = pick(forage["shallows"])
@@ -134,9 +146,12 @@
 			place_type = pick(forage["cave_shallows"])
 
 	if(place_type && prob(place_prob))
-		new /obj/structure/flora/plant(T, null, null, place_type)
-		for(var/stepdir in global.alldirs)
-			if(prob(15))
-				var/turf/neighbor = get_step(T, stepdir)
-				if(istype(neighbor, T.type) && !(locate(/obj/structure/flora/plant) in neighbor))
-					new /obj/structure/flora/plant(neighbor, null, null, place_type)
+		if(istype(place_type, /datum/seed))
+			new /obj/structure/flora/plant(T, null, null, place_type)
+			for(var/stepdir in global.alldirs)
+				if(prob(15))
+					var/turf/neighbor = get_step(T, stepdir)
+					if(istype(neighbor, T.type) && !(locate(/obj/structure/flora/plant) in neighbor))
+						new /obj/structure/flora/plant(neighbor, null, null, place_type)
+		else if(ispath(place_type, /atom))
+			new place_type(T)
