@@ -18,7 +18,7 @@
 	name = "shoulder cape"
 	desc = "A simple looking cape with a couple of runes woven into the fabric."
 	icon = 'icons/clothing/accessories/clothing/cape_grunt.dmi'
-	slot = ACCESSORY_SLOT_INSIGNIA // Adding again in case we want to change it in the future.
+	accessory_slot = ACCESSORY_SLOT_INSIGNIA // Adding again in case we want to change it in the future.
 
 /obj/item/clothing/accessory/shouldercape/officer
 	name = "officer's cape"

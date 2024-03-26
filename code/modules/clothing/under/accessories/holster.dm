@@ -2,9 +2,9 @@
 	name = "shoulder holster"
 	desc = "A handgun holster."
 	icon = 'icons/clothing/accessories/holsters/holster.dmi'
-	slot = ACCESSORY_SLOT_HOLSTER
 	slots = 1
 	max_w_class = ITEM_SIZE_NORMAL
+	accessory_slot = ACCESSORY_SLOT_HOLSTER
 	var/list/can_holster = null
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'

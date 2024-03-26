@@ -110,7 +110,7 @@
 
 	armor = list(ARMOR_LASER = ARMOR_LASER_MINOR, ARMOR_ENERGY = ARMOR_ENERGY_MINOR, ARMOR_BOMB = ARMOR_BOMB_MINOR)
 	body_parts_covered = SLOT_LOWER_BODY | SLOT_LEGS | SLOT_TAIL
-	slowdown = 0.5
+	accessory_slowdown = 0.5
 
 	heat_protection = SLOT_LOWER_BODY | SLOT_LEGS | SLOT_TAIL
 	cold_protection = SLOT_LOWER_BODY | SLOT_LEGS | SLOT_TAIL
@@ -122,7 +122,7 @@
 	name = "venter assembly"
 	desc = "A series of complex tubes, meant to dissipate heat from the skin passively."
 	icon = 'icons/clothing/accessories/venter.dmi'
-	slot = "over"
+	accessory_slot = "over"
 
 /obj/item/clothing/accessory/space_adapted/bracer
 	name = "legbrace"

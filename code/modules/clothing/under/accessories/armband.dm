@@ -2,10 +2,10 @@
 	name = "red armband"
 	desc = "A fancy red armband!"
 	icon = 'icons/clothing/accessories/armbands/armband_security.dmi'
-	slot = ACCESSORY_SLOT_ARMBAND
 	bodytype_equip_flags = null
-	hide_on_uniform_rolldown = TRUE
-	hide_on_uniform_rollsleeves = TRUE
+	accessory_slot = ACCESSORY_SLOT_ARMBAND
+	accessory_hide_on_uniform_rolldown = TRUE
+	accessory_hide_on_uniform_rollsleeves = TRUE
 
 /obj/item/clothing/accessory/armband/cargo
 	name = "cargo armband"

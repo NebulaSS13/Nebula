@@ -2,7 +2,7 @@
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon = 'icons/clothing/accessories/stethoscope.dmi'
-	high_visibility = 1
+	accessory_high_visibility = TRUE
 
 /obj/item/clothing/accessory/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
 	if(ishuman(M) && isliving(user) && user.a_intent == I_HELP)
