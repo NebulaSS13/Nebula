@@ -86,6 +86,9 @@
 	var/tmp/use_single_icon
 	var/center_of_mass = @'{"x":16,"y":16}' //can be null for no exact placement behaviour
 
+	/// Used when this item is replaced by a loadout item. If TRUE, loadout places src in wearer's storage. If FALSE, src is deleted.
+	var/replaced_in_loadout = TRUE
+
 	var/paint_color
 	var/paint_verb = "painted"
 
@@ -975,6 +978,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/handle_loadout_equip_replacement(obj/item/old_item)
 	return
+
+/// Used to handle equipped icons overwritten by custom loadout. If TRUE, loadout places src in wearer's storage. If FALSE, src is deleted by loadout.
+/obj/item/proc/loadout_should_keep(obj/item/new_item, mob/wearer)
+	return type != new_item.type && !replaced_in_loadout
 
 /obj/item/equipped(mob/user, slot)
 	. = ..()
