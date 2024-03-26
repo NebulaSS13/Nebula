@@ -106,10 +106,9 @@
 	. = outfit_by_type(.)
 
 /datum/job/proc/create_cash_on_hand(var/mob/living/carbon/human/H, var/datum/money_account/M)
-	if(!istype(M) || !ispath(H.client?.prefs?.starting_cash_choice, /decl/starting_cash_choice))
+	if(!istype(M) || !H.client?.prefs?.starting_cash_choice)
 		return 0
-	var/decl/starting_cash_choice/cash = GET_DECL(H.client.prefs.starting_cash_choice)
-	for(var/obj/item/thing in cash.get_cash_objects(H, M))
+	for(var/obj/item/thing in H.client.prefs.starting_cash_choice.get_cash_objects(H, M))
 		. += thing.get_base_value()
 		H.equip_to_storage_or_put_in_hands(thing)
 

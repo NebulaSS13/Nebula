@@ -158,6 +158,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	/// A list of survival box types selectable for this map. If null, defaults to all defined decls. At runtime, this is an associative list of decl type -> decl.
 	var/list/decl/survival_box_option/survival_box_choices
 
+	// A list of cash spawn options, similar to above.
+	var/list/decl/starting_cash_choice/starting_cash_choices
+
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(LAZYLEN(lobby_tracks) == 1)
@@ -183,6 +186,11 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		survival_box_choices = decls_repository.get_decls_of_subtype(/decl/survival_box_option)
 	else if(length(survival_box_choices))
 		survival_box_choices = decls_repository.get_decls(survival_box_choices)
+
+	if(isnull(starting_cash_choices))
+		starting_cash_choices = decls_repository.get_decls_of_subtype(/decl/starting_cash_choice)
+	else if(length(starting_cash_choices))
+		starting_cash_choices = decls_repository.get_decls(starting_cash_choices)
 
 	if(secrets_directory)
 		secrets_directory = trim(lowertext(secrets_directory))
