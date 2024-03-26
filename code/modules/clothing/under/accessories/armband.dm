@@ -2,10 +2,15 @@
 	name = "red armband"
 	desc = "A fancy red armband!"
 	icon = 'icons/clothing/accessories/armbands/armband_security.dmi'
-	slot = ACCESSORY_SLOT_ARMBAND
 	bodytype_equip_flags = null
-	hide_on_uniform_rolldown = TRUE
-	hide_on_uniform_rollsleeves = TRUE
+	accessory_slot = ACCESSORY_SLOT_ARMBAND
+
+/obj/item/clothing/accessory/armband/get_initial_accessory_hide_on_states()
+	var/static/list/initial_accessory_hide_on_states = list(
+		/decl/clothing_state_modifier/rolled_down,
+		/decl/clothing_state_modifier/rolled_sleeves
+	)
+	return initial_accessory_hide_on_states
 
 /obj/item/clothing/accessory/armband/cargo
 	name = "cargo armband"

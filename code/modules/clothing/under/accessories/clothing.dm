@@ -87,18 +87,12 @@
 	name = "tangzhuang jacket"
 	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."
 	icon = 'icons/clothing/accessories/clothing/tangzuhang.dmi'
-	var/sleeves_rolled = FALSE
 
-/obj/item/clothing/accessory/tangzhuang/on_update_icon()
-	. = ..()
-	icon_state = get_world_inventory_state()
-	if(sleeves_rolled && check_state_in_icon("[icon_state]-sleeves", icon))
-		icon_state = "[icon_state]-sleeves"
-
-/obj/item/clothing/accessory/tangzhuang/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
-	if(overlay && sleeves_rolled && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))
-		overlay.icon_state = "[overlay.icon_state]-sleeves"
-	. = ..()
+/obj/item/clothing/accessory/tangzhuang/tangzhuang/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/rolled_sleeves)
+	)
+	return expected_state_modifiers
 
 /obj/item/clothing/accessory/fire_overpants
 	name = "fire overpants"
@@ -110,7 +104,7 @@
 
 	armor = list(ARMOR_LASER = ARMOR_LASER_MINOR, ARMOR_ENERGY = ARMOR_ENERGY_MINOR, ARMOR_BOMB = ARMOR_BOMB_MINOR)
 	body_parts_covered = SLOT_LOWER_BODY | SLOT_LEGS | SLOT_TAIL
-	slowdown = 0.5
+	accessory_slowdown = 0.5
 
 	heat_protection = SLOT_LOWER_BODY | SLOT_LEGS | SLOT_TAIL
 	cold_protection = SLOT_LOWER_BODY | SLOT_LEGS | SLOT_TAIL
@@ -122,7 +116,7 @@
 	name = "venter assembly"
 	desc = "A series of complex tubes, meant to dissipate heat from the skin passively."
 	icon = 'icons/clothing/accessories/venter.dmi'
-	slot = "over"
+	accessory_slot = "over"
 
 /obj/item/clothing/accessory/space_adapted/bracer
 	name = "legbrace"

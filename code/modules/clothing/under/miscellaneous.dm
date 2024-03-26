@@ -49,19 +49,19 @@
 	name = "\improper Officer's Dress Uniform"
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\"."
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	should_display_id = FALSE
 
 /obj/item/clothing/under/centcom_officer
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	should_display_id = FALSE
 
 /obj/item/clothing/under/centcom_captain
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	should_display_id = FALSE
 
 /obj/item/clothing/under/owl
 	name = "owl uniform"

@@ -38,7 +38,7 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
-	slowdown = 1
+	accessory_slowdown = 1
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'

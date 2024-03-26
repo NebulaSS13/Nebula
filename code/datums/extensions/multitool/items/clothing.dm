@@ -1,8 +1,3 @@
-/obj/item/clothing/Initialize()
-	. = ..()
-	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
-		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
-
 /datum/extension/interactive/multitool/items/clothing/interact(var/obj/item/multitool/M, var/mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
 		return
