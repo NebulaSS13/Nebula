@@ -484,8 +484,8 @@ SUBSYSTEM_DEF(jobs)
 		H.skillset.obtain_from_client(job, H.client)
 
 		//Equip job items.
-		job.setup_account(H)
 		job.equip_job(H, H.mind?.role_alt_title, H.char_branch, H.char_rank)
+		job.setup_account(H)
 		job.apply_fingerprints(H)
 		spawn_in_storage = equip_custom_loadout(H, job)
 	else

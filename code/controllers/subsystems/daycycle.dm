@@ -1,8 +1,8 @@
 ///Subsystem for updating day/night ambient lighting for sets of z-levels that share a common day/night state.
-SUBSYSTEM_DEF(daycyle)
+SUBSYSTEM_DEF(daycycle)
 	name       = "Day Cycle"
 	priority   = SS_PRIORITY_DAYCYCLE
-	wait       = 1 MINUTE
+	wait       = 2 SECONDS
 	flags      = SS_BACKGROUND | SS_POST_FIRE_TIMING | SS_NO_INIT
 	runlevels  = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	init_order = SS_INIT_TICKER
@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(daycyle)
 	var/list/current_run
 
 ///Adds a set of levels that should all be updated at the same time and share the same day state
-/datum/controller/subsystem/daycyle/proc/add_linked_levels(var/list/level_ids, var/start_at_night = FALSE, var/update_interval = 5 MINUTES)
+/datum/controller/subsystem/daycycle/proc/add_linked_levels(var/list/level_ids, var/start_at_night = FALSE, var/update_interval = 5 MINUTES)
 	if(get_config_value(/decl/config/toggle/disable_daycycle))
 		return //If disabled, we don't add anything
 	var/topmost_level_id = level_ids[1]
@@ -20,12 +20,12 @@ SUBSYSTEM_DEF(daycyle)
 		CRASH("Tried to add a set of level ids that was already registered! ('[topmost_level_id]')")
 	LAZYSET(registered_levels, topmost_level_id, new /datum/ssdaycycle_registered(level_ids, start_at_night, update_interval))
 
-/datum/controller/subsystem/daycyle/proc/remove_linked_levels(var/topmost_level_id)
+/datum/controller/subsystem/daycycle/proc/remove_linked_levels(var/topmost_level_id)
 	if(!LAZYISIN(registered_levels, topmost_level_id))
 		return
 	LAZYREMOVE(registered_levels, topmost_level_id)
 
-/datum/controller/subsystem/daycyle/fire(resumed = 0)
+/datum/controller/subsystem/daycycle/fire(resumed = 0)
 	if(get_config_value(/decl/config/toggle/disable_daycycle))
 		disable()
 		LAZYCLEARLIST(current_run)
@@ -37,7 +37,7 @@ SUBSYSTEM_DEF(daycyle)
 		levels = current_run[levels]
 		current_run.len--
 		//Make sure it's time to run it, otherwise skip
-		if(REALTIMEOFDAY >= (levels.time_last_column_update + levels.update_interval))
+		if(REALTIMEOFDAY >= (levels.time_last_column_update + round(levels.update_interval / (max(levels.x_max) - max(levels.x_min)))))
 			levels.update_all_daycolumns()
 		if (MC_TICK_CHECK)
 			return
@@ -113,7 +113,10 @@ SUBSYSTEM_DEF(daycyle)
 /datum/ssdaycycle_registered/proc/get_level_column(var/level_index)
 	if(daycolumn_x < x_min[level_index] || daycolumn_x >= x_max[level_index])
 		return //Don't add turfs until daycolumn is within the actual level
-	. = block(locate(daycolumn_x, y_min[level_index], level_z[level_index]), locate(daycolumn_x, y_max[level_index], level_z[level_index]))
+	. = list()
+	for(var/turf/turf in block(locate(daycolumn_x, y_min[level_index], level_z[level_index]), locate(daycolumn_x, y_max[level_index], level_z[level_index])))
+		if(turf.is_outside())
+			. += turf
 
 ///Increment the column we're currently updating for our set of managed z-level.
 /datum/ssdaycycle_registered/proc/increment_column()
