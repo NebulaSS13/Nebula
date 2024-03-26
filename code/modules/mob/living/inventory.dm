@@ -15,6 +15,8 @@
 		for(var/slot in get_inventory_slots())
 			all_slots += get_inventory_slot_datum(slot)
 		for(var/datum/inventory_slot/inv_slot as anything in sortTim(all_slots, /proc/cmp_inventory_slot_desc))
+			if(isnull(inv_slot.quick_equip_priority)) // Never quick-equip into some slots.
+				continue
 			_inventory_slot_priority += inv_slot.slot_id
 	return _inventory_slot_priority
 
