@@ -18,27 +18,27 @@
 
 /obj/structure/loot_pile/surface/medicine_cabinet/get_common_loot()
 	var/static/list/common_loot = list(
-		/obj/item/storage/pill_bottle/sugariron,
+		/obj/item/pill_bottle/sugariron,
 		/obj/item/stack/medical/bruise_pack,
 		/obj/item/stack/medical/ointment,
-		/obj/item/storage/med_pouch/trauma,
-		/obj/item/storage/med_pouch/burn,
-		/obj/item/storage/med_pouch/toxin,
-		/obj/item/storage/med_pouch/radiation,
-		/obj/item/storage/med_pouch/oxyloss,
+		/obj/item/med_pouch/trauma,
+		/obj/item/med_pouch/burn,
+		/obj/item/med_pouch/toxin,
+		/obj/item/med_pouch/radiation,
+		/obj/item/med_pouch/oxyloss,
 		/obj/item/chems/hypospray/autoinjector
 	)
 	return common_loot
 
 /obj/structure/loot_pile/surface/medicine_cabinet/get_uncommon_loot()
 	var/static/list/uncommon_loot = list(
-		/obj/item/storage/pill_bottle/painkillers,
+		/obj/item/pill_bottle/painkillers,
 		/obj/item/stack/medical/splint,
-		/obj/item/storage/pill_bottle/burn_meds,
-		/obj/item/storage/pill_bottle/brute_meds,
-		/obj/item/storage/pill_bottle/antitoxins,
-		/obj/item/storage/pill_bottle/antibiotics,
-		/obj/item/storage/pill_bottle/oxygen
+		/obj/item/pill_bottle/burn_meds,
+		/obj/item/pill_bottle/brute_meds,
+		/obj/item/pill_bottle/antitoxins,
+		/obj/item/pill_bottle/antibiotics,
+		/obj/item/pill_bottle/oxygen
 	)
 	return uncommon_loot
 
@@ -46,7 +46,7 @@
 	var/static/list/rare_loot = list(
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/medical/advanced/ointment,
-		/obj/item/storage/pill_bottle/strong_painkillers
+		/obj/item/pill_bottle/strong_painkillers
 	)
 	return rare_loot
 

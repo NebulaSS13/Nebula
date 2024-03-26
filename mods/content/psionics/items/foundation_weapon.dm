@@ -8,22 +8,22 @@
 /obj/item/gun/projectile/revolver/foundation/disrupts_psionics()
 	return FALSE
 
-/obj/item/storage/briefcase/foundation
+/obj/item/briefcase/foundation
 	name = "\improper Foundation briefcase"
 	desc = "A handsome black leather briefcase embossed with a stylized radio telescope."
 	icon_state = "fbriefcase"
 	item_state = "fbriefcase"
 
-/obj/item/storage/briefcase/foundation/disrupts_psionics()
+/obj/item/briefcase/foundation/disrupts_psionics()
 	return FALSE
 
-/obj/item/storage/briefcase/foundation/WillContain()
+/obj/item/briefcase/foundation/WillContain()
 	return list(
 		/obj/item/ammo_magazine/speedloader/nullglass,
 		/obj/item/gun/projectile/revolver/foundation,
 	)
 
-/obj/item/storage/briefcase/foundation/Initialize(ml, material_key)
+/obj/item/briefcase/foundation/Initialize(ml, material_key)
 	. = ..()
-	if(length(contents))
-		make_exact_fit()
+	if(length(contents) && storage)
+		storage.make_exact_fit()

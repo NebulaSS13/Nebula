@@ -279,11 +279,11 @@
 	icon_state = "tube1"
 	},
 /obj/structure/closet/cabinet,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/item/taperecorder,
 /obj/item/camera,
-/obj/item/storage/backpack/dufflebag/syndie,
-/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/backpack/dufflebag/syndie,
+/obj/item/box/ammo/shotgunshells,
 /obj/item/handcuffs,
 /turf/floor/wood,
 /area/ship/scrap/command/captain)
@@ -303,7 +303,7 @@
 	pixel_y = 25
 	},
 /obj/random/action_figure,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 24;
@@ -1667,8 +1667,8 @@
 	pixel_x = -25
 	},
 /obj/structure/closet/wardrobe/mixed,
-/obj/item/storage/backpack/dufflebag/med,
-/obj/item/storage/belt/utility/full,
+/obj/item/backpack/dufflebag/med,
+/obj/item/belt/utility/full,
 /turf/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "du" = (
@@ -2024,7 +2024,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/item/storage/box/donkpockets,
+/obj/item/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/kitchen/rollingpin,
 /obj/item/chems/condiment/small/saltshaker{
@@ -2266,7 +2266,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/crew/medbay)
 "eA" = (
-/obj/item/storage/pill_bottle/happy,
+/obj/item/pill_bottle/happy,
 /obj/machinery/power/apc/derelict{
 	dir = 1
 	},
@@ -2393,7 +2393,7 @@
 /obj/random/bomb_supply,
 /obj/random/bomb_supply,
 /obj/random/bomb_supply,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "eM" = (
@@ -2456,7 +2456,7 @@
 /obj/structure/sign/plaque/golden/medical{
 	pixel_x = 32
 	},
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
 /obj/item/chems/syringe/antibiotic,
@@ -2888,7 +2888,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 9
 	},
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/wash)
@@ -3030,7 +3030,7 @@
 /obj/structure/table,
 /obj/machinery/light/small,
 /obj/item/chems/spray/cleaner,
-/obj/item/storage/laundry_basket,
+/obj/item/laundry_basket,
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/item/cell/high,
 /turf/floor/tiled/usedup,
@@ -3232,7 +3232,7 @@
 	pixel_y = 25
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/storage/backpack/dufflebag/syndie,
+/obj/item/backpack/dufflebag/syndie,
 /mob/living/simple_animal/hostile/vagrant,
 /turf/floor/usedup,
 /area/ship/scrap/hidden)
@@ -3389,7 +3389,7 @@
 /obj/structure/table/reinforced,
 /obj/item/flashlight/lamp,
 /obj/item/cash/c1000,
-/obj/item/storage/bible/booze,
+/obj/item/bible/booze,
 /obj/item/cell/high,
 /turf/floor/usedup,
 /area/ship/scrap/hidden)
@@ -3747,7 +3747,7 @@
 	dir = 5
 	},
 /obj/structure/closet/toolcloset,
-/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/backpack/dufflebag/eng,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/floor/tiled/usedup,
@@ -3796,13 +3796,13 @@
 /obj/structure/closet/hydrant{
 	pixel_y = 32
 	},
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hu" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},

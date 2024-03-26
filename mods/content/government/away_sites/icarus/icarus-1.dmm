@@ -46,7 +46,7 @@
 /area/icarus/vessel)
 "ao" = (
 /obj/structure/bed/chair/comfy/black,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /turf/floor/wood,
 /area/icarus/vessel)
 "ap" = (
@@ -106,12 +106,12 @@
 /area/icarus/vessel)
 "aD" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/lunchbox/mars,
+/obj/item/lunchbox/mars,
 /turf/floor/wood,
 /area/icarus/vessel)
 "aE" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/photo_album,
+/obj/item/photo_album,
 /turf/floor/wood,
 /area/icarus/vessel)
 "aF" = (
@@ -154,7 +154,7 @@
 /area/icarus/vessel)
 "aL" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigar,
+/obj/item/box/fancy/cigar,
 /turf/floor/wood,
 /area/icarus/vessel)
 "aM" = (
@@ -1309,7 +1309,7 @@
 /area/icarus/open)
 "ex" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/empty,
+/obj/item/firstaid/empty,
 /turf/floor/tiled,
 /area/icarus/open)
 "ey" = (
@@ -1531,7 +1531,7 @@
 "fa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/storage/pill_bottle/antibiotics,
+/obj/item/pill_bottle/antibiotics,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fb" = (
@@ -1551,7 +1551,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fd" = (

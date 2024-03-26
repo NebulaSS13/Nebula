@@ -2979,7 +2979,7 @@
 "hH" = (
 /obj/structure/table,
 /obj/random/firstaid,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /turf/floor/plating,
 /area/errant_pisces/infirmary)
 "hI" = (
@@ -2999,8 +2999,8 @@
 "hL" = (
 /obj/structure/table/steel,
 /obj/item/clothing/head/surgery,
-/obj/item/storage/firstaid/surgery,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/surgery,
+/obj/item/firstaid/adv,
 /turf/floor/tiled/white,
 /area/errant_pisces/infirmary)
 "hM" = (
@@ -3571,7 +3571,7 @@
 /area/errant_pisces/infirmary)
 "jC" = (
 /obj/structure/table,
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /turf/floor/tiled,
 /area/errant_pisces/infirmary)
 "jD" = (
@@ -3773,7 +3773,7 @@
 	dir = 8
 	},
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
+/obj/item/clothing/suit/toggle/labcoat/genetics,
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
 "kf" = (
@@ -3984,7 +3984,7 @@
 /area/errant_pisces/science_wing)
 "kG" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/labcoat/blue,
+/obj/item/clothing/suit/toggle/labcoat/blue,
 /obj/random/coin,
 /obj/random/coin,
 /turf/floor/tiled,
@@ -4020,7 +4020,7 @@
 /area/errant_pisces/cryo)
 "kM" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/labcoat,
+/obj/item/clothing/suit/toggle/labcoat,
 /turf/floor/tiled,
 /area/errant_pisces/cryo)
 "kN" = (
@@ -4048,9 +4048,9 @@
 /area/errant_pisces/general_storage)
 "kS" = (
 /obj/structure/rack,
-/obj/item/storage/box/survival,
-/obj/item/storage/box/survival,
-/obj/item/storage/box/survival,
+/obj/item/box/survival,
+/obj/item/box/survival,
+/obj/item/box/survival,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "kT" = (
@@ -4200,17 +4200,17 @@
 /area/errant_pisces/science_wing)
 "lu" = (
 /obj/structure/table,
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
 "lv" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
 "lw" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
 "lx" = (
@@ -4220,12 +4220,12 @@
 /area/errant_pisces/science_wing)
 "ly" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves,
+/obj/item/box/gloves,
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
 "lz" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/labcoat,
+/obj/item/clothing/suit/toggle/labcoat,
 /obj/random/advdevice,
 /obj/machinery/light{
 	dir = 8;
@@ -4256,18 +4256,18 @@
 /area/errant_pisces/cryo)
 "lD" = (
 /obj/structure/rack,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "lE" = (
 /obj/structure/rack,
-/obj/item/storage/ore,
+/obj/item/ore,
 /obj/random/tool,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "lF" = (
 /obj/structure/rack,
-/obj/item/storage/firstaid/empty,
+/obj/item/firstaid/empty,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "lG" = (
@@ -4359,7 +4359,7 @@
 /area/errant_pisces/science_wing)
 "lT" = (
 /obj/structure/table/steel,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/item/knife/kitchen/cleaver,
 /obj/item/twohanded/fireaxe,
 /obj/structure/window/reinforced{
@@ -4524,7 +4524,7 @@
 /area/errant_pisces/science_wing)
 "mp" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/tiled,
 /area/errant_pisces/cryo)
 "mq" = (
@@ -4630,7 +4630,7 @@
 	dir = 8
 	},
 /obj/structure/table,
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /obj/item/chems/dropper,
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -6105,7 +6105,7 @@
 "qn" = (
 /obj/structure/rack,
 /obj/item/clothing/mask/breath,
-/obj/item/storage/box/survival,
+/obj/item/box/survival,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -6213,7 +6213,7 @@
 /area/errant_pisces/fishing_wing)
 "qF" = (
 /obj/structure/rack,
-/obj/item/storage/box/survival,
+/obj/item/box/survival,
 /obj/item/stack/net/thirty,
 /turf/floor/plating,
 /area/errant_pisces/fishing_wing)

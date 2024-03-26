@@ -257,15 +257,14 @@ var/global/list/closets = list()
 				slice_into_parts(W, user)
 			return TRUE
 
-		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
-			var/obj/item/storage/laundry_basket/LB = W
+		if(istype(W, /obj/item/laundry_basket) && W.contents.len && W.storage)
 			var/turf/T = get_turf(src)
-			for(var/obj/item/I in LB.contents)
-				LB.remove_from_storage(I, T, 1)
-			LB.finish_bulk_removal()
+			for(var/obj/item/I in W.storage.get_contents())
+				W.storage.remove_from_storage(user, I, T, TRUE)
+			W.storage.finish_bulk_removal()
 			user.visible_message(
-				SPAN_NOTICE("\The [user] empties \the [LB] into \the [src]."),
-				SPAN_NOTICE("You empty \the [LB] into \the [src]."),
+				SPAN_NOTICE("\The [user] empties \the [W] into \the [src]."),
+				SPAN_NOTICE("You empty \the [W] into \the [src]."),
 				SPAN_NOTICE("You hear rustling of clothes.")
 			)
 			return TRUE

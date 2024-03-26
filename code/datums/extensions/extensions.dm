@@ -73,7 +73,7 @@
 	return get_extension(source, base_type)
 
 /proc/get_extension(var/datum/source, var/base_type)
-	if(!source.extensions)
+	if(!source?.extensions)
 		return
 	. = source.extensions[base_type]
 	if(!.)

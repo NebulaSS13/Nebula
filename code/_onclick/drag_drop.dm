@@ -10,6 +10,9 @@
 		. = ..()
 
 /atom/proc/handle_mouse_drop(atom/over, mob/user, params)
+	if(storage && !(. = storage?.handle_mouse_drop(user, over, params)))
+		storage_removed(user)
+		return
 	. = over?.receive_mouse_drop(src, user, params)
 
 // Can the user drop something onto this atom?

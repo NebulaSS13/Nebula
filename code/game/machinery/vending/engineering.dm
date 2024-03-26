@@ -44,7 +44,7 @@
 		/obj/item/frame/apc/kit = 10,
 		/obj/item/frame/air_alarm/kit = 10,
 		/obj/item/cell = 10,
-		/obj/item/storage/belt/utility
+		/obj/item/belt/utility
 	)
 	contraband = list(/obj/item/cell/high = 3)
 
@@ -59,7 +59,7 @@
 	markup = 0
 	initial_access = list(access_atmospherics, access_engine_equip)
 	products = list(
-		/obj/item/storage/belt/utility = 4,
+		/obj/item/belt/utility = 4,
 		/obj/item/clothing/glasses/meson = 4,
 		/obj/item/clothing/gloves/insulated = 4,
 		/obj/item/screwdriver = 12,

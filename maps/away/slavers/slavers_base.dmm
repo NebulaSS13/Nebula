@@ -531,7 +531,7 @@
 /turf/floor/airless,
 /area/slavers_base/cells)
 "bJ" = (
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
 /turf/floor/airless,
 /area/slavers_base/cells)
 "bK" = (
@@ -1139,7 +1139,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/floor/tiled,
 /area/slavers_base/secwing)
 "dk" = (
@@ -1158,7 +1158,7 @@
 /area/slavers_base/secwing)
 "dm" = (
 /obj/structure/rack,
-/obj/item/storage/box/ammo/stunshells,
+/obj/item/box/ammo/stunshells,
 /obj/item/gun/projectile/shotgun/pump,
 /turf/floor/tiled,
 /area/slavers_base/secwing)
@@ -1383,7 +1383,7 @@
 /area/slavers_base/secwing)
 "dR" = (
 /obj/structure/table/steel,
-/obj/item/storage/box/ammo/stunshells,
+/obj/item/box/ammo/stunshells,
 /obj/item/baton,
 /obj/machinery/power/terminal{
 	dir = 1
@@ -1777,14 +1777,14 @@
 /area/slavers_base/med)
 "eY" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/empty,
+/obj/item/firstaid/empty,
 /obj/item/handcuffs,
 /obj/item/baton,
 /turf/floor/tiled/airless,
 /area/slavers_base/med)
 "eZ" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/o2,
+/obj/item/firstaid/o2,
 /obj/item/folder/cyan,
 /obj/item/paper{
 	info = "Seems they don't really look over my shoulder anymore. We have now maybe a dozen of them with inactive implants. Hope they will pick right moment to flip the lid. I'll kill few bastards myself soon as I have a chance.";
@@ -1795,7 +1795,7 @@
 /area/slavers_base/med)
 "fa" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /obj/item/hatchet,
 /turf/floor/tiled/airless,
 /area/slavers_base/med)
@@ -1809,13 +1809,13 @@
 /area/slavers_base/med)
 "fd" = (
 /obj/structure/table,
-/obj/item/storage/box/handcuffs,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/floor/airless,
 /area/slavers_base/med)
 "fe" = (
 /obj/structure/table,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /turf/floor/airless,
 /area/slavers_base/med)
 "ff" = (
@@ -2454,7 +2454,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/floor/airless,
 /area/slavers_base/powatm)
 "gN" = (
@@ -2682,12 +2682,12 @@
 	dir = 1
 	},
 /obj/structure/safe,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/airless,
 /area/slavers_base/demo)
 "ht" = (
 /obj/structure/safe,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/airless,
 /area/slavers_base/demo)
 "hu" = (
@@ -2847,7 +2847,7 @@
 /area/slavers_base/demo)
 "hP" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/secure/briefcase/money,
+/obj/item/secure_storage/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -2977,7 +2977,7 @@
 /area/slavers_base/demo)
 "ij" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/tiled/airless,
 /area/slavers_base/demo)
 "ik" = (
@@ -3570,7 +3570,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/item/storage/secure/briefcase/money,
+/obj/item/secure_storage/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -3735,7 +3735,7 @@
 /area/slavers_base/demo)
 "kv" = (
 /obj/structure/table,
-/obj/item/storage/box/glass_extras,
+/obj/item/box/glass_extras,
 /turf/floor/tiled,
 /area/slavers_base/demo)
 "kw" = (

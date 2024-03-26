@@ -175,21 +175,20 @@
 * photo album *
 **************/
 //#TODO: This thing is awful. Might as well use a trashbag instead since you get the same thing, just with more space....
-/obj/item/storage/photo_album
+/obj/item/photo_album
 	name          = "photo album"
 	icon          = 'icons/obj/photography.dmi'
 	icon_state    = "album"
 	item_state    = "briefcase"
 	w_class       = ITEM_SIZE_NORMAL //same as book
-	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
-	can_hold = list(/obj/item/photo)
-	material = /decl/material/solid/organic/plastic
+	storage       = /datum/storage/photo_album 
+	material      = /decl/material/solid/organic/plastic
 
-/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user, params)
+/obj/item/photo_album/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && in_range(src, user) || loc == user)
 		if(user.active_storage)
 			user.active_storage.close(user)
-		show_to(user)
+		storage?.show_to(user)
 		return TRUE
 	. = ..()
 

@@ -188,7 +188,7 @@ var/global/list/outfits_decls_by_type_
 		var/decl/survival_box_option/chosen_survival_box = H?.client?.prefs.survival_box_choice
 		if(chosen_survival_box?.box_type)
 			if(outfit_flags & OUTFIT_EXTENDED_SURVIVAL)
-				H.species.equip_survival_gear(H, /obj/item/storage/box/engineer)
+				H.species.equip_survival_gear(H, /obj/item/box/engineer)
 			else
 				H.species.equip_survival_gear(H, chosen_survival_box.box_type)
 

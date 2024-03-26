@@ -10,8 +10,8 @@
 
 /decl/hierarchy/supply_pack/atmospherics/evacuation
 	name = "Gear - Emergency Suits"
-	contains = list(/obj/item/storage/toolbox/emergency = 2,
-					/obj/item/clothing/suit/storage/hazardvest = 2,
+	contains = list(/obj/item/toolbox/emergency = 2,
+					/obj/item/clothing/suit/hazardvest = 2,
 					/obj/item/tank/emergency/oxygen/engi = 2,
 			 		/obj/item/clothing/suit/space/emergency = 2,
 					/obj/item/clothing/head/helmet/space/emergency = 2,
@@ -21,7 +21,7 @@
 
 /decl/hierarchy/supply_pack/atmospherics/inflatable
 	name = "Equipment - Inflatable barriers"
-	contains = list(/obj/item/storage/briefcase/inflatable = 3)
+	contains = list(/obj/item/briefcase/inflatable = 3)
 	containertype = /obj/structure/closet/crate
 	containername = "inflatable barrier crate"
 

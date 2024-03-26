@@ -37,14 +37,14 @@
 		else
 			dropInto(loc)
 
-//default attackby behaviour
-/obj/item/clothing/accessory/attackby(obj/item/I, mob/user)
-	..()
-
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user)
 	if(istype(loc, /obj/item/clothing))
-		return TRUE //we aren't an object on the ground so don't call parent
+		if(storage && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
+			add_fingerprint(user)
+			storage.open(user)
+			return TRUE
+		return FALSE //we aren't an object on the ground so don't call parent
 	return ..()
 
 /obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)

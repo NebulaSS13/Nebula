@@ -4,18 +4,18 @@
 
 /decl/hierarchy/supply_pack/medical/medical
 	name = "Refills - Medical supplies"
-	contains = list(/obj/item/storage/firstaid/regular,
-					/obj/item/storage/firstaid/trauma,
-					/obj/item/storage/firstaid/fire,
-					/obj/item/storage/firstaid/toxin,
-					/obj/item/storage/firstaid/o2,
-					/obj/item/storage/firstaid/adv,
-					/obj/item/storage/firstaid/stab,
+	contains = list(/obj/item/firstaid/regular,
+					/obj/item/firstaid/trauma,
+					/obj/item/firstaid/fire,
+					/obj/item/firstaid/toxin,
+					/obj/item/firstaid/o2,
+					/obj/item/firstaid/adv,
+					/obj/item/firstaid/stab,
 					/obj/item/chems/glass/bottle/antitoxin,
 					/obj/item/chems/glass/bottle/stabilizer,
 					/obj/item/chems/glass/bottle/sedatives,
-					/obj/item/storage/box/syringes,
-					/obj/item/storage/box/autoinjectors)
+					/obj/item/box/syringes,
+					/obj/item/box/autoinjectors)
 	containername = "medical crate"
 
 /decl/hierarchy/supply_pack/medical/atk
@@ -30,37 +30,37 @@
 
 /decl/hierarchy/supply_pack/medical/trauma
 	name = "EMERGENCY - Trauma pouches"
-	contains = list(/obj/item/storage/firstaid/trauma = 3)
+	contains = list(/obj/item/firstaid/trauma = 3)
 	containername = "trauma pouch crate"
 
 /decl/hierarchy/supply_pack/medical/burn
 	name = "EMERGENCY - Burn pouches"
-	contains = list(/obj/item/storage/firstaid/fire = 3)
+	contains = list(/obj/item/firstaid/fire = 3)
 	containername = "burn pouch crate"
 
 /decl/hierarchy/supply_pack/medical/toxin
 	name = "EMERGENCY - Toxin pouches"
-	contains = list(/obj/item/storage/firstaid/toxin = 3)
+	contains = list(/obj/item/firstaid/toxin = 3)
 	containername = "toxin pouch crate"
 
 /decl/hierarchy/supply_pack/medical/oxyloss
 	name = "EMERGENCY - Low oxygen pouches"
-	contains = list(/obj/item/storage/firstaid/o2 = 3)
+	contains = list(/obj/item/firstaid/o2 = 3)
 	containername = "low oxygen pouch crate"
 
 /decl/hierarchy/supply_pack/medical/stab
 	name = "Triage - Stability kit"
-	contains = list(/obj/item/storage/firstaid/stab = 3)
+	contains = list(/obj/item/firstaid/stab = 3)
 	containername = "stability kit crate"
 
 /decl/hierarchy/supply_pack/medical/clotting
 	name = "EMERGENCY - Clotting kit"
-	contains = list(/obj/item/storage/firstaid/clotting = 3)
+	contains = list(/obj/item/firstaid/clotting = 3)
 	containername = "clotting kit crate"
 
 /decl/hierarchy/supply_pack/medical/bloodpack
 	name = "Refills - Blood Bags (Empty)"
-	contains = list(/obj/item/storage/box/bloodpacks = 3)
+	contains = list(/obj/item/box/bloodpacks = 3)
 	containername = "blood pack crate"
 
 /decl/hierarchy/supply_pack/medical/blood
@@ -70,7 +70,7 @@
 
 /decl/hierarchy/supply_pack/medical/bodybag
 	name = "Equipment - Body bags"
-	contains = list(/obj/item/storage/box/bodybags = 3)
+	contains = list(/obj/item/box/bodybags = 3)
 	containername = "body bag crate"
 
 /decl/hierarchy/supply_pack/medical/stretcher
@@ -91,7 +91,7 @@
 
 /decl/hierarchy/supply_pack/medical/medicalextragear
 	name = "Gear - Medical surplus equipment"
-	contains = list(/obj/item/storage/belt/medical = 3,
+	contains = list(/obj/item/belt/medical = 3,
 					/obj/item/clothing/glasses/hud/health = 3)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical surplus equipment crate"
@@ -99,14 +99,14 @@
 
 /decl/hierarchy/supply_pack/medical/cmogear
 	name = "Gear - Chief medical officer equipment"
-	contains = list(/obj/item/storage/belt/medical,
+	contains = list(/obj/item/belt/medical,
 					/obj/item/radio/headset/heads/cmo,
 					/obj/item/clothing/under/chief_medical_officer,
 					/obj/item/chems/hypospray/vial,
 					/obj/item/clothing/accessory/stethoscope,
 					/obj/item/clothing/glasses/hud/health,
-					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
-					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
+					/obj/item/clothing/suit/toggle/labcoat/cmo,
+					/obj/item/clothing/suit/toggle/labcoat/cmoalt,
 					/obj/item/clothing/mask/surgical,
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
@@ -120,14 +120,14 @@
 
 /decl/hierarchy/supply_pack/medical/doctorgear
 	name = "Gear - Medical Doctor equipment"
-	contains = list(/obj/item/storage/belt/medical,
+	contains = list(/obj/item/belt/medical,
 					/obj/item/radio/headset/headset_med,
 					/obj/item/clothing/under/medical,
 					/obj/item/clothing/accessory/stethoscope,
 					/obj/item/clothing/glasses/hud/health,
-					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/suit/toggle/labcoat,
 					/obj/item/clothing/mask/surgical,
-					/obj/item/storage/firstaid/adv,
+					/obj/item/firstaid/adv,
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
@@ -140,19 +140,19 @@
 
 /decl/hierarchy/supply_pack/medical/chemistgear
 	name = "Gear - Pharmacist equipment"
-	contains = list(/obj/item/storage/box/beakers,
+	contains = list(/obj/item/box/beakers,
 					/obj/item/radio/headset/headset_med,
-					/obj/item/storage/box/autoinjectors,
+					/obj/item/box/autoinjectors,
 					/obj/item/clothing/under/chemist,
 					/obj/item/clothing/glasses/science,
-					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
+					/obj/item/clothing/suit/toggle/labcoat/chemist,
 					/obj/item/clothing/mask/surgical,
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/chems/dropper,
 					/obj/item/scanner/health,
 					/obj/item/scanner/breath,
-					/obj/item/storage/box/pillbottles,
+					/obj/item/box/pillbottles,
 					/obj/item/chems/syringe)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "pharmacist equipment crate"
@@ -160,25 +160,25 @@
 
 /decl/hierarchy/supply_pack/medical/paramedicgear
 	name = "Gear - Paramedic equipment"
-	contains = list(/obj/item/storage/belt/medical/emt,
+	contains = list(/obj/item/belt/medical/emt,
 					/obj/item/radio/headset/headset_med,
 					/obj/item/clothing/under/medical/scrubs/black,
 					/obj/item/clothing/accessory/armband/medgreen,
 					/obj/item/clothing/glasses/hud/health,
-					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/suit/toggle/labcoat,
 					/obj/item/clothing/under/medical,
-					/obj/item/clothing/suit/storage/toggle/fr_jacket,
+					/obj/item/clothing/suit/toggle/fr_jacket,
 					/obj/item/clothing/mask/gas,
 					/obj/item/clothing/under/medical/paramedic,
 					/obj/item/clothing/accessory/stethoscope,
-					/obj/item/storage/firstaid/adv,
+					/obj/item/firstaid/adv,
 					/obj/item/clothing/shoes/jackboots,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
 					/obj/item/scanner/breath,
 					/obj/item/flashlight/pen,
 					/obj/item/chems/syringe,
-					/obj/item/clothing/accessory/storage/vest)
+					/obj/item/clothing/accessory/webbing/vest)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "paramedic equipment crate"
 	access = access_medical_equip
@@ -189,7 +189,7 @@
 					/obj/item/radio/headset/headset_med,
 					/obj/item/clothing/under/psych/turtleneck,
 					/obj/item/clothing/shoes/dress,
-					/obj/item/clothing/suit/storage/toggle/labcoat,
+					/obj/item/clothing/suit/toggle/labcoat,
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/clipboard,
 					/obj/item/folder/cyan,
@@ -209,8 +209,8 @@
 					/obj/item/clothing/head/surgery/purple,
 					/obj/item/clothing/head/surgery/blue,
 					/obj/item/clothing/head/surgery/green,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/box/masks,
+					/obj/item/box/gloves)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical scrubs crate"
 	access = access_medical_equip
@@ -222,8 +222,8 @@
 					/obj/item/camera_film = 2,
 					/obj/item/scanner/autopsy,
 					/obj/item/scalpel,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves,
+					/obj/item/box/masks,
+					/obj/item/box/gloves,
 					/obj/item/pen)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "autopsy equipment crate"
@@ -240,14 +240,14 @@
 					/obj/item/clothing/under/orderly,
 					/obj/item/clothing/under/medical = 3,
 					/obj/item/clothing/under/medical/paramedic = 3,
-					/obj/item/clothing/suit/storage/toggle/labcoat = 3,
-					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
-					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
-					/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
-					/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
-					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/clothing/suit/toggle/labcoat = 3,
+					/obj/item/clothing/suit/toggle/labcoat/cmo,
+					/obj/item/clothing/suit/toggle/labcoat/cmoalt,
+					/obj/item/clothing/suit/toggle/labcoat/genetics,
+					/obj/item/clothing/suit/toggle/labcoat/virologist,
+					/obj/item/clothing/suit/toggle/labcoat/chemist,
+					/obj/item/box/masks,
+					/obj/item/box/gloves)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical uniform crate"
 	access = access_medical_equip
@@ -260,15 +260,15 @@
 					/obj/item/clothing/suit/bio_suit/cmo = 2,
 					/obj/item/clothing/mask/gas = 5,
 					/obj/item/tank/oxygen = 5,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/box/masks,
+					/obj/item/box/gloves)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical biohazard equipment crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/portablefreezers
 	name = "Equipment - Portable freezers"
-	contains = list(/obj/item/storage/box/freezer = 7)
+	contains = list(/obj/item/box/freezer = 7)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "portable freezers crate"
 	access = access_medical_equip
@@ -293,9 +293,9 @@
 	name = "Gear - Sterile clothes"
 	contains = list(/obj/item/clothing/under/medical/scrubs/green = 2,
 					/obj/item/clothing/head/surgery/green = 2,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves,
-					/obj/item/storage/belt/medical = 3)
+					/obj/item/box/masks,
+					/obj/item/box/gloves,
+					/obj/item/belt/medical = 3)
 	containertype = /obj/structure/closet/crate
 	containername = "sterile clothes crate"
 

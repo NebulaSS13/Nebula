@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/ministation/engineer
 	name = "Job - Station Engineer"
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_slot = slot_l_store_str
@@ -18,7 +18,7 @@
 /decl/hierarchy/outfit/job/ministation/engineer/head
 	name = "Job - Head Engineer"
 	glasses = /obj/item/clothing/glasses/welding/superior
-	suit = /obj/item/clothing/suit/storage/hazardvest
+	suit = /obj/item/clothing/suit/hazardvest
 	gloves = /obj/item/clothing/gloves/thick
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	hands = list(/obj/item/wrench)

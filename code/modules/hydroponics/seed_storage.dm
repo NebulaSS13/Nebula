@@ -324,14 +324,13 @@
 		user.visible_message(SPAN_NOTICE("\The [user] puts \the [O] into \the [src]."))
 		return TRUE
 
-	if(istype(O, /obj/item/storage/plants))
-		var/obj/item/storage/P = O
+	if(istype(O, /obj/item/plants) && O.storage)
 		var/loaded = 0
-		for(var/obj/item/seeds/G in P.contents)
+		for(var/obj/item/seeds/G in storage.get_contents())
 			++loaded
-			P.remove_from_storage(G, src, 1)
+			O.storage.remove_from_storage(user, G, src, TRUE)
 			add(G, 1)
-		P.finish_bulk_removal()
+		O.storage.finish_bulk_removal()
 		if (loaded)
 			user.visible_message(SPAN_NOTICE("\The [user] puts the seeds from \the [O] into \the [src]."))
 		else
@@ -346,9 +345,8 @@
 			var/mob/user = O.loc
 			if(!user.try_unequip(O, src))
 				return
-		else if(istype(O.loc,/obj/item/storage))
-			var/obj/item/storage/S = O.loc
-			S.remove_from_storage(O, src)
+		else if(isobj(O.loc))
+			O.loc?.storage?.remove_from_storage(null, O, src)
 
 	O.forceMove(src)
 	var/newID = 0

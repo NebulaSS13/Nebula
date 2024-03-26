@@ -1,6 +1,6 @@
 /decl/crafting_stage/empty_storage/medibot
 	descriptor = "medical bot"
-	begins_with_object_type = /obj/item/storage/firstaid
+	begins_with_object_type = /obj/item/firstaid
 	progress_message = "You add the robot arm to the first aid kit."
 	completion_trigger_type = /obj/item/robot_parts
 	item_icon_state = "medibot_1"
@@ -18,7 +18,7 @@
 /decl/crafting_stage/proximity/medibot/get_product(obj/item/work)
 	var/mob/living/bot/medbot/bot = ..()
 	if(istype(bot))
-		var/obj/item/storage/firstaid/kit = locate() in work
+		var/obj/item/firstaid/kit = locate() in work
 		if(bot && kit)
 			bot.skin = kit.icon_state
 			bot.update_icon()

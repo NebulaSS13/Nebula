@@ -38,10 +38,10 @@
 		desc += " This one smells of [scent]."
 	update_icon()
 
-/obj/item/storage/candle_box/scented
+/obj/item/candle_box/scented
 	name = "scented candle box"
 	desc = "An unbranded pack of scented candles, in a variety of scents."
-	max_storage_space = 5
-
-/obj/item/storage/candle_box/scented/WillContain()
+	storage = /datum/storage/box/candles/scented
+	
+/obj/item/candle_box/scented/WillContain()
 	return list(/obj/item/flame/candle/scented = 5)

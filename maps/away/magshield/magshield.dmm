@@ -1176,7 +1176,7 @@
 /turf/floor/airless,
 /area/magshield/north)
 "dn" = (
-/obj/item/storage/wallet/random,
+/obj/item/wallet/random,
 /turf/floor/airless,
 /area/magshield/north)
 "do" = (
@@ -1730,7 +1730,7 @@
 /area/magshield/north)
 "eQ" = (
 /obj/structure/table/steel,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/floor/airless,
 /area/magshield/north)
 "eR" = (
@@ -1739,7 +1739,7 @@
 /area/magshield/north)
 "eS" = (
 /obj/structure/table/steel,
-/obj/item/storage/box/lights,
+/obj/item/box/lights,
 /turf/floor/airless,
 /area/magshield/north)
 "eT" = (
@@ -2180,7 +2180,7 @@
 /area/magshield/west)
 "gt" = (
 /obj/structure/closet,
-/obj/item/storage/wallet/leather,
+/obj/item/wallet/leather,
 /obj/random/clothing,
 /obj/random/smokes,
 /turf/floor/carpet/blue,
@@ -2261,7 +2261,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/storage/box/checkers,
+/obj/item/box/checkers,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
@@ -2271,7 +2271,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/storage/belt/champion,
+/obj/item/belt/champion,
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gJ" = (
@@ -2284,7 +2284,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/storage/bible/booze,
+/obj/item/bible/booze,
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gL" = (

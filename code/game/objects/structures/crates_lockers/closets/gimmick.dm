@@ -57,7 +57,7 @@
 		/obj/item/energy_blade/sword = 3,
 		/obj/item/gun/energy/laser = 3,
 		/obj/item/baton = 3,
-		/obj/item/storage/box/flashbangs = 3,
+		/obj/item/box/flashbangs = 3,
 		/obj/item/clothing/head/helmet/thunderdome = 3
 	)
 
@@ -71,6 +71,6 @@
 		/obj/item/energy_blade/sword = 3,
 		/obj/item/gun/energy/laser = 3,
 		/obj/item/baton = 3,
-		/obj/item/storage/box/flashbangs = 3,
+		/obj/item/box/flashbangs = 3,
 		/obj/item/clothing/head/helmet/thunderdome = 3
 	)

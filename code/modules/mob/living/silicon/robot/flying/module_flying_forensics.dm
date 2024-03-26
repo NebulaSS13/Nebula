@@ -13,7 +13,7 @@
 	)
 	equipment = list(
 		/obj/item/forensics/sample_kit/swabs,
-		/obj/item/storage/evidence,
+		/obj/item/evidence,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
 		/obj/item/gripper/clerical,

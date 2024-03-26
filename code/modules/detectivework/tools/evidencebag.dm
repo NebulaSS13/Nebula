@@ -35,18 +35,15 @@
 			if(!user.Adjacent(I))
 				return ..()
 		else
-			//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-			if(istype(I.loc, /obj/item/storage))	//in a container.
-				var/sdepth = I.storage_depth(user)
-				if (sdepth == -1 || sdepth > 1)
-					return ..() //too deeply nested to access
-				var/obj/item/storage/U = I.loc
-				user.client.screen -= I
-				U.contents.Remove(I)
-			else if(I in user.get_held_items())
-				user.drop_from_inventory(I)
-			else
+		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
+			if(I.loc?.storage)	//in a container.
 				return ..()
+			
+			var/sdepth = I.storage_depth(user)
+			if (sdepth == -1 || sdepth > 1)
+				return ..() //too deeply nested to access
+			
+			user.drop_from_inventory(I)
 
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] puts \the [I] into \the [src]."), \

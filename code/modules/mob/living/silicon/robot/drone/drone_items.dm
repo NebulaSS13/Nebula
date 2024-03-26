@@ -65,7 +65,7 @@
 		/obj/item/chems/glass,
 		/obj/item/chems/pill,
 		/obj/item/chems/ivbag,
-		/obj/item/storage/pill_bottle
+		/obj/item/pill_bottle
 	)
 
 /obj/item/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
@@ -210,12 +210,10 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			if(I == user.active_storage)
-				var/obj/item/storage/storage = I
-				storage.close(user) //Closes the ui.
-			if(istype(I.loc, /obj/item/storage))
-				var/obj/item/storage/storage = I.loc
-				if(!storage.remove_from_storage(I, src))
+			if(I == user.active_storage?.holder)
+				user.active_storage.close(user) //Closes the ui.
+			if(I.loc?.storage)
+				if(!I.loc.storage.remove_from_storage(user, I, src))
 					return
 			else
 				I.forceMove(src)

@@ -5,8 +5,8 @@
 
 /obj/structure/closet/secure_closet/captains/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/captain, /obj/item/storage/backpack/satchel/cap)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/captain, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/captain, /obj/item/backpack/satchel/cap)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/captain, 50),
 		/obj/item/clothing/suit/captunic,
 		/obj/item/clothing/suit/captunic/capjacket,
 		/obj/item/clothing/head/caphat/cap,
@@ -32,7 +32,7 @@
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/head/helmet,
 		/obj/item/radio/headset/heads/hop,
-		/obj/item/storage/box/ids = 2,
+		/obj/item/box/ids = 2,
 		/obj/item/flash
 	)
 
@@ -65,7 +65,7 @@
 
 /obj/structure/closet/secure_closet/hos/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
 		/obj/item/clothing/head/HoS,
 		/obj/item/clothing/suit/armor/vest/heavy/hos,
 		/obj/item/clothing/under/head_of_security/jensen,
@@ -75,12 +75,12 @@
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/shield/riot,
-		/obj/item/storage/box/flashbangs,
-		/obj/item/storage/belt/holster/security,
+		/obj/item/box/flashbangs,
+		/obj/item/belt/holster/security,
 		/obj/item/flash,
 		/obj/item/baton/loaded,
 		/obj/item/gun/energy/gun,
-		/obj/item/clothing/accessory/storage/holster/waist,
+		/obj/item/clothing/accessory/webbing/holster/waist,
 		/obj/item/telebaton,
 		/obj/item/holowarrant
 	)
@@ -92,8 +92,8 @@
 
 /obj/structure/closet/secure_closet/warden/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/suit/armor/vest/heavy/warden,
 		/obj/item/clothing/under/warden,
 		/obj/item/clothing/suit/armor/warden,
@@ -101,13 +101,13 @@
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/stack/tape_roll/barricade_tape/police,
-		/obj/item/storage/box/flashbangs,
-		/obj/item/storage/box/teargas,
-		/obj/item/storage/belt/holster/security,
+		/obj/item/box/flashbangs,
+		/obj/item/box/teargas,
+		/obj/item/belt/holster/security,
 		/obj/item/chems/spray/pepper,
 		/obj/item/baton/loaded,
 		/obj/item/gun/energy/gun,
-		/obj/item/storage/box/holobadge,
+		/obj/item/box/holobadge,
 		/obj/item/holowarrant
 	)
 
@@ -118,11 +118,11 @@
 
 /obj/structure/closet/secure_closet/security/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/head/helmet,
 		/obj/item/radio/headset/headset_sec,
-		/obj/item/storage/belt/holster/security,
+		/obj/item/belt/holster/security,
 		/obj/item/flash,
 		/obj/item/chems/spray/pepper,
 		/obj/item/grenade/chem_grenade/teargas,
@@ -130,7 +130,7 @@
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/hailer,
-		/obj/item/clothing/accessory/storage/vest/black,
+		/obj/item/clothing/accessory/webbing/vest/black,
 		/obj/item/gun/energy/taser,
 		/obj/item/holowarrant,
 	)
@@ -145,22 +145,22 @@
 		/obj/item/clothing/under/det,
 		/obj/item/clothing/under/det/grey,
 		/obj/item/clothing/under/det/black,
-		/obj/item/clothing/suit/storage/det_trench,
-		/obj/item/clothing/suit/storage/det_trench/grey,
-		/obj/item/clothing/suit/storage/forensics/blue,
-		/obj/item/clothing/suit/storage/forensics/red,
+		/obj/item/clothing/suit/det_trench,
+		/obj/item/clothing/suit/det_trench/grey,
+		/obj/item/clothing/suit/forensics/blue,
+		/obj/item/clothing/suit/forensics/red,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/head/det,
 		/obj/item/clothing/head/det/grey,
 		/obj/item/clothing/shoes/dress,
-		/obj/item/storage/box/evidence,
+		/obj/item/box/evidence,
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/pcarrier/detective,
 		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/gun/projectile/pistol,
-		/obj/item/clothing/accessory/storage/holster/armpit,
+		/obj/item/clothing/accessory/webbing/holster/armpit,
 		/obj/item/chems/drinks/flask/detflask,
-		/obj/item/storage/briefcase/crimekit,
+		/obj/item/briefcase/crimekit,
 		/obj/item/holowarrant
 	)
 
@@ -198,7 +198,7 @@
 		/obj/item/pen ,
 		/obj/item/clothing/suit/judgerobe,
 		/obj/item/clothing/head/powdered_wig ,
-		/obj/item/storage/briefcase,
+		/obj/item/briefcase,
 	)
 
 /obj/structure/closet/secure_closet/wall
@@ -223,5 +223,5 @@
 		/obj/item/camera = 2,
 		/obj/item/camera_film = 2,
 		/obj/item/taperecorder = 2,
-		/obj/item/storage/secure/briefcase = 2,
+		/obj/item/secure_storage/briefcase = 2,
 	)

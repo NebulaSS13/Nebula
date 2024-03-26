@@ -29,7 +29,7 @@
 	antag_text = "Need to bypass a bolted door? You can use a crowbar to pry the electronics out of an airlock, provided that it has no power and has been welded shut."
 
 /datum/codex_entry/toolbelt
-	associated_paths = list(/obj/item/storage/belt/utility)
+	associated_paths = list(/obj/item/belt/utility)
 	mechanics_text = "The tool-belt has enough slots to carry a full engineer's toolset: screwdriver, crowbar, wrench, welder, cable coil, and multitool. Simply click the belt to move a tool to one of its slots."
 	lore_text = "Good hide is hard to come by in certain regions of the galaxy. When they can't come across it, most TSCs will outfit their crews with toolbelts made of synthesized leather."
 	antag_text = "Only amateurs skip grabbing a tool-belt."
@@ -74,7 +74,7 @@
 	antag_text = "RCDs can be incredibly dangerous in the wrong hands. Use them to swiftly block off corridors, or instantly breach the ship wherever you want."
 
 /datum/codex_entry/toolbox
-	associated_paths = list(/obj/item/storage/toolbox)
+	associated_paths = list(/obj/item/toolbox)
 	mechanics_text = "The toolbox is a general-purpose storage item with lots of space. With an item in your hand, click on it to store it inside."
 	lore_text = "No one remembers which company designed this particular toolbox. It's been mass-produced, retired, brought out of retirement, and counterfeited for decades."
 	antag_text = "Carrying one of these and being bald tends to instill a certain primal fear in most people."

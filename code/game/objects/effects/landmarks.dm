@@ -49,7 +49,7 @@
 	new /obj/item/clothing/gloves/chameleon(src.loc)
 	new /obj/item/clothing/suit/chameleon(src.loc)
 	new /obj/item/clothing/head/chameleon(src.loc)
-	new /obj/item/storage/backpack/chameleon(src.loc)
+	new /obj/item/backpack/chameleon(src.loc)
 
 /obj/abstract/landmark/costume/gladiator/make_costumes()
 	new /obj/item/clothing/under/gladiator(src.loc)
@@ -58,7 +58,7 @@
 /obj/abstract/landmark/costume/madscientist/make_costumes()
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
-	new /obj/item/clothing/suit/storage/toggle/labcoat/mad(src.loc)
+	new /obj/item/clothing/suit/toggle/labcoat/mad(src.loc)
 	new /obj/item/clothing/glasses/prescription/gglasses(src.loc)
 
 /obj/abstract/landmark/costume/elpresidente/make_costumes()

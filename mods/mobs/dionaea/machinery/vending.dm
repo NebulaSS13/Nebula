@@ -9,7 +9,7 @@
 	..()
 
 /obj/machinery/vending/dinnerware/Initialize(mapload, d, populate_parts)
-	products[/obj/item/storage/lunchbox/nymph] = 3
+	products[/obj/item/lunchbox/nymph] = 3
 	. = ..()
 
 /obj/machinery/vending/hydroseeds/Initialize(mapload, d, populate_parts)

@@ -208,7 +208,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l2centraln)
 "bx" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 4;
 	pixel_y = 26
 	},
@@ -1032,11 +1032,11 @@
 /area/ministation/security)
 "hx" = (
 /obj/structure/table,
-/obj/item/storage/box/handcuffs{
+/obj/item/box/handcuffs{
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/item/storage/box/flashbangs,
+/obj/item/box/flashbangs,
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 25
 	},
@@ -1313,7 +1313,7 @@
 	pixel_y = 7
 	},
 /obj/item/pen,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /obj/item/handcuffs,
 /obj/machinery/newscaster{
 	pixel_x = 32;
@@ -1505,7 +1505,7 @@
 	name = "Common Channel";
 	pixel_y = 20
 	},
-/obj/item/storage/pill_bottle,
+/obj/item/pill_bottle,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -1875,7 +1875,7 @@
 /area/ministation/hall/e2)
 "mL" = (
 /obj/structure/table,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/machinery/light,
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -2037,8 +2037,8 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
 /turf/floor/tiled,
 /area/ministation/security)
 "nX" = (
@@ -2069,7 +2069,7 @@
 "oc" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/obj/item/clothing/suit/storage/toggle/bomber,
+/obj/item/clothing/suit/toggle/bomber,
 /turf/floor/plating,
 /area/ministation/maint/secmaint)
 "od" = (
@@ -2119,7 +2119,7 @@
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
-/obj/item/storage/medical_lolli_jar{
+/obj/item/medical_lolli_jar{
 	pixel_y = 7
 	},
 /obj/effect/floor_decal/corner/paleblue/full,
@@ -2392,8 +2392,8 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/box/masks,
+/obj/item/box/gloves,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "pN" = (
@@ -3022,8 +3022,8 @@
 /area/ministation/medical)
 "sn" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
+/obj/item/box/gloves,
+/obj/item/box/masks,
 /obj/item/clothing/suit/surgicalapron,
 /obj/item/clothing/suit/surgicalapron,
 /obj/item/chems/spray/cleaner,
@@ -3964,7 +3964,7 @@
 "vH" = (
 /obj/structure/table,
 /obj/item/chems/dropper,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/item/mollusc/clam,
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -4012,7 +4012,7 @@
 /area/ministation/medical)
 "vN" = (
 /obj/structure/table,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /obj/item/pen,
 /obj/item/radio/intercom{
 	dir = 1;
@@ -4265,7 +4265,7 @@
 /area/ministation/cafe)
 "wQ" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
@@ -4501,11 +4501,11 @@
 /area/ministation/medical)
 "xH" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -4654,11 +4654,11 @@
 /area/ministation/medical)
 "yh" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -4841,11 +4841,11 @@
 /area/ministation/medical)
 "yK" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -4951,7 +4951,7 @@
 /obj/item/book/skill/service/botany,
 /obj/item/wirecutters/clippers,
 /obj/item/scanner/plant,
-/obj/item/storage/plants,
+/obj/item/plants,
 /turf/floor/tiled,
 /area/ministation/hydro)
 "zl" = (
@@ -5247,8 +5247,8 @@
 /area/ministation/hydro)
 "Av" = (
 /obj/structure/closet/chefcloset,
-/obj/item/storage/box/ammo/beanbags,
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
+/obj/item/box/ammo/beanbags,
+/obj/item/clothing/suit/toggle/wintercoat/hydro,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn{
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	},
@@ -5268,9 +5268,9 @@
 /obj/item/clothing/shoes/clown_shoes,
 /obj/item/clothing/under/clown,
 /obj/item/stamp/clown,
-/obj/item/storage/backpack/clown,
+/obj/item/backpack/clown,
 /obj/item/bikehorn,
-/obj/item/storage/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
 /obj/item/poster,
 /turf/floor/plating,
 /area/ministation/maint/hydromaint)
@@ -5921,7 +5921,7 @@
 /obj/item/roller{
 	pixel_y = 10
 	},
-/obj/item/storage/belt/medical/emt,
+/obj/item/belt/medical/emt,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,
@@ -6149,7 +6149,7 @@
 "Ir" = (
 /obj/structure/table,
 /obj/item/folder/blue,
-/obj/item/storage/box/PDAs,
+/obj/item/box/PDAs,
 /obj/machinery/status_display{
 	pixel_y = 30
 	},
@@ -6954,7 +6954,7 @@
 /area/ministation/hall/e2)
 "Pd" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigarettes{
+/obj/item/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /obj/item/flame/lighter/random,
@@ -7699,7 +7699,7 @@
 /obj/structure/window/reinforced,
 /obj/structure/table,
 /obj/machinery/recharger,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/item/ammo_magazine/rifle/practice,
 /obj/item/ammo_magazine/rifle/practice,
 /obj/item/ammo_magazine/rifle/practice,
@@ -7802,7 +7802,7 @@
 	pixel_x = -22
 	},
 /obj/item/clothing/mask/horsehead,
-/obj/item/storage/wallet/random{
+/obj/item/wallet/random{
 	pixel_z = -11
 	},
 /obj/item/classic_baton{
@@ -7879,8 +7879,8 @@
 /obj/item/shield/riot,
 /obj/item/shield/riot,
 /obj/item/clothing/suit/armor/reactive,
-/obj/item/storage/box/ammo/beanbags,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
@@ -8089,11 +8089,11 @@
 	pixel_y = 20
 	},
 /obj/structure/table,
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = -2;
 	pixel_y = 4
 	},

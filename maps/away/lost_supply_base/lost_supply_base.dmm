@@ -1184,7 +1184,7 @@
 	dir = 6;
 	icon_state = "warning"
 	},
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /turf/floor/airless,
 /area/lost_supply_base)
 "dv" = (
@@ -1769,7 +1769,7 @@
 /area/lost_supply_base/supply)
 "fA" = (
 /obj/structure/table,
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /turf/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "fB" = (
@@ -2049,7 +2049,7 @@
 "gn" = (
 /obj/structure/closet/crate/trashcart,
 /obj/item/mop,
-/obj/item/storage/box/lights/bulbs,
+/obj/item/box/lights/bulbs,
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 1;
 	external_pressure_bound = 0;

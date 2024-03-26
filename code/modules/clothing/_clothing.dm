@@ -29,6 +29,11 @@
 	if(markings_icon && markings_color)
 		update_icon()
 
+/obj/item/clothing/get_stored_inventory()
+	. = ..()
+	if(length(.) && length(accessories))
+		. -= accessories
+
 /obj/item/clothing/can_contaminate()
 	return TRUE
 

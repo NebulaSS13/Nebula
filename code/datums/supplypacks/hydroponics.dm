@@ -12,7 +12,7 @@
 					/obj/item/clothing/gloves/thick/botany,
 					/obj/item/clothing/suit/apron,
 					/obj/item/minihoe,
-					/obj/item/storage/box/botanydisk
+					/obj/item/box/botanydisk
 					)
 	containername = "hydroponics supply crate"
 	access = access_hydroponics

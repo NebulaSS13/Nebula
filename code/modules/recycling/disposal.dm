@@ -81,14 +81,14 @@ var/global/list/diversion_junctions = list()
 	if(stat & BROKEN || !I || !user)
 		return
 
-	if(istype(I, /obj/item/storage/bag/trash))
-		var/obj/item/storage/bag/trash/T = I
-		to_chat(user, "<span class='notice'>You empty the bag.</span>")
-		for(var/obj/item/O in T.contents)
-			T.remove_from_storage(O,src, 1)
-		T.finish_bulk_removal()
-		update_icon()
-		return
+	if(istype(I, /obj/item/bag/trash))
+		if(I.storage)
+			to_chat(user, "<span class='notice'>You empty the bag.</span>")
+			for(var/obj/item/O in I.storage.get_contents())
+				I.storage.remove_from_storage(user, O, src, TRUE)
+			I.storage.finish_bulk_removal()
+			update_icon()
+			return
 
 	var/obj/item/grab/G = I
 	if(istype(G))	// handle grabbed mob

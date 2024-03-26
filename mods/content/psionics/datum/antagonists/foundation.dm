@@ -40,9 +40,9 @@
 	glasses =  /obj/item/clothing/glasses/sunglasses
 	uniform =  /obj/item/clothing/under/suit_jacket/charcoal
 	shoes =    /obj/item/clothing/shoes/color/black
-	hands =    list(/obj/item/storage/briefcase/foundation)
+	hands =    list(/obj/item/briefcase/foundation)
 	l_ear =    /obj/item/radio/headset/foundation
-	holster =  /obj/item/clothing/accessory/storage/holster/armpit
+	holster =  /obj/item/clothing/accessory/webbing/holster/armpit
 	id_type = /obj/item/card/id/foundation
 	id_slot =  slot_wear_id_str
 

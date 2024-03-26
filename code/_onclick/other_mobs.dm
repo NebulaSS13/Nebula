@@ -5,15 +5,27 @@
 /atom/proc/handle_grab_interaction(var/mob/user)
 	return FALSE
 
+/atom/proc/can_interact_with_storage(user, strict = FALSE)
+	return isliving(user)
+
 /atom/proc/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+
+	if(can_interact_with_storage(user, strict = TRUE) && storage && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
+		add_fingerprint(user)
+		storage.open(user)
+		return TRUE
+
 	if(handle_grab_interaction(user))
 		return TRUE
+
 	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 		return FALSE
+
 	user.visible_message(
 		SPAN_DANGER("\The [user] shakes \the [src]!"),
 		SPAN_DANGER("You shake \the [src]!"))
+
 	object_shaken()
 	return TRUE
 

@@ -19,15 +19,15 @@
 
 /obj/structure/closet/secure_closet/medical1/WillContain()
 	return list(
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/syringes,
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
 		/obj/item/chems/glass/bottle/stabilizer = 2,
 		/obj/item/chems/glass/bottle/antitoxin = 2,
 		/obj/random/firstaid,
-		/obj/item/storage/box/masks,
-		/obj/item/storage/box/gloves
+		/obj/item/box/masks,
+		/obj/item/box/gloves
 	)
 
 /obj/structure/closet/secure_closet/medical3
@@ -37,19 +37,19 @@
 
 /obj/structure/closet/secure_closet/medical3/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/med, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/medic, /obj/item/backpack/satchel/med)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/med, 50),
 		/obj/item/clothing/under/nursesuit,
 		/obj/item/clothing/head/nursehat,
 		/obj/item/clothing/under/medical,
 		/obj/item/clothing/under/nurse,
 		/obj/item/clothing/under/orderly,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/fr_jacket,
+		/obj/item/clothing/suit/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/fr_jacket,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_med,
 		/obj/item/stack/tape_roll/barricade_tape/medical,
-		/obj/item/storage/belt/medical/emt,
+		/obj/item/belt/medical/emt,
 		RANDOM_SCRUBS,
 		RANDOM_SCRUBS
 	)
@@ -62,14 +62,14 @@
 
 /obj/structure/closet/secure_closet/paramedic/WillContain()
 	return list(
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/syringes,
 		/obj/item/chems/glass/bottle/stabilizer,
 		/obj/item/chems/glass/bottle/antitoxin,
-		/obj/item/storage/belt/medical/emt,
+		/obj/item/belt/medical/emt,
 		/obj/item/clothing/mask/gas,
-		/obj/item/clothing/suit/storage/toggle/fr_jacket,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/fr_jacket,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/radio/headset/headset_med,
 		/obj/item/flashlight,
 		/obj/item/tank/emergency/oxygen/engi,
@@ -80,8 +80,8 @@
 		/obj/random/medical,
 		/obj/item/crowbar,
 		/obj/item/chems/spray/extinguisher/mini,
-		/obj/item/storage/box/freezer,
-		/obj/item/clothing/accessory/storage/vest
+		/obj/item/box/freezer,
+		/obj/item/clothing/accessory/webbing/vest
 	)
 
 /obj/structure/closet/secure_closet/cmo
@@ -91,14 +91,14 @@
 
 /obj/structure/closet/secure_closet/cmo/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/med, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/medic, /obj/item/backpack/satchel/med)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/med, 50),
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/under/chief_medical_officer,
-		/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
-		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
+		/obj/item/clothing/suit/toggle/labcoat/cmo,
+		/obj/item/clothing/suit/toggle/labcoat/cmoalt,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/radio/headset/heads/cmo,
@@ -115,7 +115,7 @@
 
 /obj/structure/closet/secure_closet/chemical/WillContain()
 	return list(
-		/obj/item/storage/box/pillbottles = 2,
+		/obj/item/box/pillbottles = 2,
 		/obj/random/medical = 12
 	)
 
@@ -138,10 +138,10 @@
 
 /obj/structure/closet/secure_closet/medical_wall/pills/WillContain()
 	return list(
-		/obj/item/storage/pill_bottle/antibiotics = 1,
-		/obj/item/storage/pill_bottle/painkillers = 1,
-		/obj/item/storage/pill_bottle/antitoxins  = 1,
-		/obj/item/storage/pill_bottle/burn_meds   = 1,
+		/obj/item/pill_bottle/antibiotics = 1,
+		/obj/item/pill_bottle/painkillers = 1,
+		/obj/item/pill_bottle/antitoxins  = 1,
+		/obj/item/pill_bottle/burn_meds   = 1,
 		/obj/random/medical/pillbottle            = 1
 	)
 
@@ -154,11 +154,11 @@
 	return list(
 		/obj/item/clothing/under/psych,
 		/obj/item/clothing/under/psych/turtleneck,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/antidepressants,
+		/obj/item/pill_bottle/antidepressants,
 		/obj/item/chems/pill/stimulants,
 		/obj/item/clipboard,
 		/obj/item/folder/cyan,
@@ -166,7 +166,7 @@
 		/obj/item/magnetic_tape/random = 3,
 		/obj/item/camera,
 		/obj/random/plush/therapy,
-		/obj/item/storage/belt/general
+		/obj/item/belt/general
 	)
 
 /obj/structure/closet/secure_closet/virology
@@ -177,19 +177,19 @@
 
 /obj/structure/closet/secure_closet/virology/WillContain()
 	return list(
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/syringes,
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
 		/obj/item/chems/glass/bottle/stabilizer,
-		/obj/item/storage/pill_bottle/antibiotics,
+		/obj/item/pill_bottle/antibiotics,
 		/obj/item/chems/syringe/antibiotic,
 		/obj/item/chems/glass/bottle/antitoxin,
-		/obj/item/storage/box/masks,
-		/obj/item/storage/box/gloves,
+		/obj/item/box/masks,
+		/obj/item/box/gloves,
 		/obj/item/clothing/under/virologist,
 		/obj/item/clothing/shoes/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
+		/obj/item/clothing/suit/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
 		/obj/item/scanner/health,
 		/obj/item/scanner/breath,
@@ -207,8 +207,8 @@
 		/obj/item/clothing/suit/straight_jacket,
 		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/antidepressants,
-		/obj/item/storage/pill_bottle/stimulants,
+		/obj/item/pill_bottle/antidepressants,
+		/obj/item/pill_bottle/stimulants,
 		/obj/item/clothing/under/psych/turtleneck,
 		/obj/item/clothing/under/psych
 	)

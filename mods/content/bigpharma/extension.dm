@@ -31,7 +31,7 @@
 
 /datum/extension/obfuscated_medication/pill_bottle
 	container_description = "A small plastic bottle of pills."
-	expected_type = /obj/item/storage/pill_bottle
+	expected_type = /obj/item/pill_bottle
 
 /datum/extension/obfuscated_medication/pill_bottle/get_original_reagent(var/obj/item/donor)
 	for(var/obj/item/chems/pill/pill in donor?.contents)
@@ -39,12 +39,12 @@
 			return pill.reagents.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/pill_bottle/update_appearance()
-	var/obj/item/storage/pill_bottle/bottle = holder
+	var/obj/item/pill_bottle/bottle = holder
 	bottle.wrapper_color = get_medication_colour_from_reagent_name(original_reagent)
 
 /datum/extension/obfuscated_medication/foil_pack
 	container_description = "A small foil blister pack of pills."
-	expected_type = /obj/item/storage/pill_bottle/foil_pack
+	expected_type = /obj/item/pill_bottle/foil_pack
 
 /datum/extension/obfuscated_medication/foil_pack/get_original_reagent(var/obj/item/donor)
 	for(var/obj/item/chems/pill/pill in donor?.contents)
@@ -52,6 +52,6 @@
 			return pill.reagents.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/foil_pack/update_appearance()
-	var/obj/item/storage/pill_bottle/foil_pack/foil_pack = holder
+	var/obj/item/pill_bottle/foil_pack/foil_pack = holder
 	foil_pack.wrapper_color = COLOR_OFF_WHITE
 	foil_pack.color = get_medication_colour_from_reagent_name(original_reagent)

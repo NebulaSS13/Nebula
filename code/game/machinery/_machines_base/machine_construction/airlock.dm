@@ -17,8 +17,8 @@
 		to_chat(user, SPAN_NOTICE("You open the main cover panel on \the [machine], exposing the internals."))
 		machine.queue_icon_update()
 		return TRUE
-	if(istype(I, /obj/item/storage/part_replacer))
-		var/obj/item/storage/part_replacer/replacer = I
+	if(istype(I, /obj/item/part_replacer))
+		var/obj/item/part_replacer/replacer = I
 		if(replacer.remote_interaction)
 			machine.part_replacement(user, replacer)
 		machine.display_parts(user)

@@ -4,7 +4,7 @@
 	id_type = /obj/item/card/id/tradeship/engineering
 	shoes = /obj/item/clothing/shoes/workboots
 	hands = list(/obj/item/wrench)
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	r_pocket = /obj/item/radio
 	l_ear = /obj/item/radio/headset/headset_eng
 	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
@@ -18,12 +18,12 @@
 	name = "Tradeship - Job - Head Engineer"
 	uniform = /obj/item/clothing/under/chief_engineer
 	glasses = /obj/item/clothing/glasses/welding/superior
-	suit = /obj/item/clothing/suit/storage/hazardvest
+	suit = /obj/item/clothing/suit/hazardvest
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	hands = list(/obj/item/wrench)
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	id_type = /obj/item/card/id/tradeship/engineering/head
 	r_pocket = /obj/item/radio
 	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR

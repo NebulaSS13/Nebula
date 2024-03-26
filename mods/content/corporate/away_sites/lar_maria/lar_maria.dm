@@ -133,7 +133,7 @@
 /decl/hierarchy/outfit/corpse/zhp_virologist
 	name = "Dead male ZHP virologist"
 	uniform = /obj/item/clothing/under/virologist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	suit = /obj/item/clothing/suit/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/color/white
 	gloves = /obj/item/clothing/gloves/latex/nitrile
 	head = /obj/item/clothing/head/surgery
@@ -155,7 +155,7 @@
 /decl/hierarchy/outfit/corpse/zhp_virologist_female
 	name = "Dead female ZHP virologist"
 	uniform = /obj/item/clothing/under/virologist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	suit = /obj/item/clothing/suit/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/color/white
 	gloves = /obj/item/clothing/gloves/latex/nitrile
 	mask = /obj/item/clothing/mask/surgical

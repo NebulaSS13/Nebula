@@ -7,28 +7,13 @@
 	anchored = TRUE
 	material = /decl/material/solid/glass
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
-	var/shattered = FALSE
-	var/list/ui_users
-	var/obj/item/storage/internal/mirror_storage/mirror_storage
+	storage = /datum/storage/structure/mirror
 	directional_offset = @'{"NORTH":{"y":-29}, "SOUTH":{"y":29}, "EAST":{"x":29}, "WEST":{"x":-29}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	var/shattered = FALSE
+	var/list/ui_users
 
-/obj/structure/mirror/Initialize()
-	. = ..()
-	mirror_storage = new/obj/item/storage/internal/mirror_storage(src)
-
-/obj/structure/mirror/get_contained_external_atoms()
-	. = ..()
-	if(mirror_storage)
-		LAZYADD(., mirror_storage.get_contained_external_atoms()) // add these, we're pretending this is a storage object
-		LAZYREMOVE(., mirror_storage) // abstract object, don't yoink it out. do this second to avoid list churn
-
-/obj/item/storage/internal/mirror_storage
-	use_sound = 'sound/effects/closet_open.ogg'
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-
-/obj/item/storage/internal/mirror_storage/WillContain()
+/obj/structure/mirror/WillContain()
 	return list(
 			/obj/item/grooming/comb/colorable/random,
 			/obj/item/grooming/brush/colorable/random,
@@ -42,23 +27,16 @@
 		)
 
 /obj/structure/mirror/Destroy()
-	QDEL_NULL(mirror_storage)
 	clear_ui_users(ui_users)
 	. = ..()
 
-/obj/structure/mirror/handle_mouse_drop(atom/over, mob/user, params)
-	if(!(. = mirror_storage?.handle_storage_internal_mouse_drop(user, over, params)))
-		flick("mirror_open",src)
-		return
-	if((. = ..()))
-		return // Handled
+/obj/structure/mirror/storage_inserted(atom/movable/thing)
+	. = ..()
+	flick("mirror_open",src)
 
-/obj/structure/mirror/attackby(obj/item/W, mob/user)
-	if((. = ..())) // already handled
-		return
-	if((. = mirror_storage.attackby(W, user))) // storage handles it
-		flick("mirror_open",src)
-		return
+/obj/structure/mirror/storage_removed(atom/movable/thing)
+	. = ..()
+	flick("mirror_open",src)
 
 /obj/structure/mirror/take_damage(damage)
 	if(prob(damage))
@@ -66,20 +44,14 @@
 		shatter()
 	. = ..()
 
-/obj/structure/mirror/emp_act(severity)
-	mirror_storage.emp_act(severity)
-	..()
-
 /obj/structure/mirror/attack_hand(mob/user)
-	SHOULD_CALL_PARENT(FALSE)
-	use_mirror(user)
-	return TRUE
-
-/obj/structure/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
+	if(user.a_intent == I_HURT)
+		return ..()
 	if(shattered)
 		to_chat(user, SPAN_WARNING("You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out."))
-		return
-	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", mirror = src)
+	else
+		open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", mirror = src)
+	return TRUE
 
 /obj/structure/mirror/proc/shatter()
 	if(shattered)	return

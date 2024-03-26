@@ -384,8 +384,8 @@
 /area/example/second)
 "ys" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/syringes,
-/obj/item/storage/box/freezer,
+/obj/item/box/syringes,
+/obj/item/box/freezer,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)
@@ -524,8 +524,8 @@
 /area/example/second)
 "Hn" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
+/obj/item/box/gloves,
+/obj/item/box/masks,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)
@@ -540,7 +540,7 @@
 /obj/item/scalpel/laser/advanced,
 /obj/item/robotanalyzer,
 /obj/item/scanner/health,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)
@@ -558,7 +558,7 @@
 /area/example/second)
 "LK" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)
@@ -619,7 +619,7 @@
 /obj/item/stack/material/ingot/mapped/silver/ten,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/item/stack/material/gemstone/mapped/diamond/ten,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,

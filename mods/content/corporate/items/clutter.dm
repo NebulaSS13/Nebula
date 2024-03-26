@@ -4,17 +4,17 @@
 	icon_state = "ntballoon"
 	item_state = "ntballoon"
 
-/obj/item/storage/lunchbox/dais
+/obj/item/lunchbox/dais
 	name = "\improper DAIS brand lunchbox"
 	icon = 'mods/content/corporate/icons/lunchbox_dais.dmi'
 	desc = "A little lunchbox. This one is branded with the Deimos Advanced Information Systems logo!"
 
-/obj/item/storage/lunchbox/nt
+/obj/item/lunchbox/nt
 	name = "\improper NanoTrasen brand lunchbox"
 	icon = 'mods/content/corporate/icons/lunchbox_nanotrasen.dmi'
 	desc = "A little lunchbox. This one is branded with the NanoTrasen logo!"
 
-/obj/item/storage/lunchbox/nt/filled
+/obj/item/lunchbox/nt/filled
 	filled = TRUE
 
 /datum/fabricator_recipe/textiles/banner/nanotrasen

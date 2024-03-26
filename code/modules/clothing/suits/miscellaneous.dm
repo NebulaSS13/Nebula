@@ -47,7 +47,7 @@
 	desc = "This robe commands authority."
 	icon = 'icons/clothing/suit/judge.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-	allowed = list(/obj/item/storage/box/fancy/cigarettes,/obj/item/cash)
+	allowed = list(/obj/item/box/fancy/cigarettes,/obj/item/cash)
 	flags_inv = HIDEJUMPSUIT
 
 /obj/item/clothing/suit/apron/overalls
@@ -185,7 +185,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0
 
-/obj/item/clothing/suit/storage/toggle/bomber
+/obj/item/clothing/suit/toggle/bomber
 	name = "bomber jacket"
 	desc = "A thick, well-worn WW2 leather bomber jacket."
 	icon = 'icons/clothing/suit/leather_jacket/bomber.dmi'
@@ -195,34 +195,34 @@
 	siemens_coefficient = 0.7
 	material = /decl/material/solid/organic/leather
 
-/obj/item/clothing/suit/storage/leather_jacket
+/obj/item/clothing/suit/leather_jacket
 	name = "black leather jacket"
 	desc = "A black leather coat."
 	icon = 'icons/clothing/suit/leather_jacket/black.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
 //This one has buttons for some reason
-/obj/item/clothing/suit/storage/toggle/brown_jacket
+/obj/item/clothing/suit/toggle/brown_jacket
 	name = "leather jacket"
 	desc = "A brown leather coat."
 	icon = 'icons/clothing/suit/leather_jacket/brown.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/agent_jacket
+/obj/item/clothing/suit/toggle/agent_jacket
 	name = "agent jacket"
 	desc = "A black leather jacket belonging to an agent of the Sol Federal Police."
 	icon = 'icons/clothing/suit/leather_jacket/agent.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/hoodie
+/obj/item/clothing/suit/toggle/hoodie
 	name = "hoodie"
 	desc = "A warm sweatshirt."
 	icon = 'icons/clothing/suit/hoodie.dmi'
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/hoodie/black
+/obj/item/clothing/suit/toggle/hoodie/black
 	name = "black hoodie"
 	desc = "A warm, black sweatshirt."
 	color = COLOR_DARK_GRAY
@@ -230,23 +230,23 @@
 /*
  * Track Jackets
  */
-/obj/item/clothing/suit/storage/toggle/track
+/obj/item/clothing/suit/toggle/track
 	name = "track jacket"
 	desc = "A track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/black.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/track/blue
+/obj/item/clothing/suit/toggle/track/blue
 	name = "blue track jacket"
 	desc = "A blue track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/blue.dmi'
 
-/obj/item/clothing/suit/storage/toggle/track/red
+/obj/item/clothing/suit/toggle/track/red
 	name = "red track jacket"
 	desc = "A red track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/red.dmi'
 
-/obj/item/clothing/suit/storage/toggle/track/navy
+/obj/item/clothing/suit/toggle/track/navy
 	name = "navy track jacket"
 	desc = "A navy track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/navy.dmi'
