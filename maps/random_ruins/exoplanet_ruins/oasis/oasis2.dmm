@@ -4,36 +4,36 @@
 /area/template_noop)
 "b" = (
 /obj/structure/flora/bush/genericbush,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "c" = (
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "d" = (
 /obj/structure/flora/bush/brflowers,
 /obj/structure/flora/bush/ywflowers,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "e" = (
 /obj/structure/flora/bush/ppflowers,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "f" = (
 /obj/structure/flora/bush/fullgrass,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "g" = (
 /obj/structure/flora/bush/leafybush,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "h" = (
 /obj/structure/flora/bush/ppflowers,
 /obj/structure/flora/bush/fernybush,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "i" = (
 /obj/structure/flora/grass/both,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "j" = (
 /turf/exterior/sand/water,
@@ -41,7 +41,7 @@
 "k" = (
 /obj/structure/flora/grass/both,
 /obj/structure/flora/bush/ywflowers,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "l" = (
 /obj/structure/flora/bush/reedbush,
@@ -50,12 +50,12 @@
 "m" = (
 /obj/structure/flora/grass/both,
 /obj/structure/flora/bush/fullgrass,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 "n" = (
 /obj/structure/flora/bush/ywflowers,
 /obj/structure/flora/bush/ppflowers,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/template_noop)
 
 (1,1,1) = {"

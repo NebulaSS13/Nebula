@@ -294,7 +294,7 @@
 		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 
 		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
+			if(get_dist(src, user) < 2 && user.get_active_held_item() == P && P.lit)
 				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
@@ -322,9 +322,9 @@
 			return TOPIC_NOACTION
 
 		//If we got a pen that's not in our hands, make sure to move it over
-		if(user.get_active_hand() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
+		if(user.get_active_held_item() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
 			to_chat(user, SPAN_NOTICE("You grab your trusty [I.name]!"))
-		else if(user.get_active_hand() != I)
+		else if(user.get_active_held_item() != I)
 			to_chat(user, SPAN_WARNING("You'd use your trusty [I.name], but your hands are full!"))
 			return TOPIC_NOACTION
 

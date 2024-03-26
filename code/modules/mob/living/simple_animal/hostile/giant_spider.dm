@@ -11,7 +11,7 @@
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")
 	emote_see = list("rubs its forelegs together", "wipes its fangs", "stops suddenly")
-	speak_chance = 5
+	speak_chance = 2.5
 	turns_per_move = 5
 	see_in_dark = 10
 	response_harm = "pokes"

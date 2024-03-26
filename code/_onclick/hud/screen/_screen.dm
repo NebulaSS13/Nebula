@@ -54,6 +54,15 @@
 		alpha = ui_alpha
 	return ..()
 
+/obj/screen/get_color()
+	return color
+
+/obj/screen/set_color(new_color)
+	if(color != new_color)
+		color = new_color
+		return TRUE
+	return FALSE
+
 /obj/screen/proc/set_ui_style(decl/ui_style/ui_style, ui_cat)
 	if(istext(ui_cat))
 		ui_style_category = ui_cat

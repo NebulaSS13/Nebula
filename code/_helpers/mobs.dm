@@ -72,7 +72,7 @@
 
 	var/target_loc = target.loc
 
-	var/holding = check_holding && user.get_active_hand()
+	var/holding = check_holding && user.get_active_held_item()
 	var/datum/progressbar/progbar
 	if (progress)
 		progbar = new(user, time, target)
@@ -102,7 +102,7 @@
 			. = 0
 			break
 
-		if(check_holding && user.get_active_hand() != holding)
+		if(check_holding && user.get_active_held_item() != holding)
 			. = 0
 			break
 
@@ -131,7 +131,7 @@
 	if(!user.Process_Spacemove(0) && user.inertia_dir)
 		drifting = 1
 
-	var/holding = user.get_active_hand()
+	var/holding = user.get_active_held_item()
 
 	var/datum/progressbar/progbar
 	if (progress)
@@ -165,7 +165,7 @@
 			break
 
 		if(check_holding)
-			if(user.get_active_hand() != holding)
+			if(user.get_active_held_item() != holding)
 				. = 0
 				break
 

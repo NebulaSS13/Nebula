@@ -1,4 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: Fabricators like autolathes can no longer recycle arbitrary items.}
-delete-after: true

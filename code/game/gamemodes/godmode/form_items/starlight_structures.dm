@@ -245,7 +245,7 @@
 		if(followers.len)
 			for(var/m in followers)
 				var/mob/living/L = m
-				L.adjustFireLoss(-5)
+				L.heal_damage(BURN, 5)
 				if(prob(5))
 					to_chat(L, "<span class='notice'>You feel a pleasant warmth spread throughout your body...</span>")
 				for(var/s in L.mind.learned_spells)

@@ -239,7 +239,7 @@ var/global/list/meteors_cataclysm = list(\
 	hits = 1
 	hitpwr = 3
 	dropamt = 1
-	meteordrop = /obj/item/stack/material/ore/sand
+	meteordrop = /obj/item/stack/material/ore/handful/sand
 
 //Medium-sized
 /obj/effect/meteor/medium

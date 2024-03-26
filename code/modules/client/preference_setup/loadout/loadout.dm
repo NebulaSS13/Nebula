@@ -436,7 +436,7 @@ var/global/list/gear_datums = list()
 		if(!old_item)
 			return
 		item.handle_loadout_equip_replacement(old_item)
-		if(old_item.type != item.type)
+		if(old_item.loadout_should_keep(item, wearer))
 			place_in_storage_or_drop(wearer, old_item)
 		else
 			qdel(old_item)

@@ -90,7 +90,7 @@
 /obj/item/clothing/glasses/eyepatch/hud/science
 	name = "SCIpatch"
 	desc = "A Science-type heads-up display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
-	hud_type = HUD_SCIENCE
+	glasses_hud_type = HUD_SCIENCE
 	eye_color = COLOR_PINK
 
 /obj/item/clothing/glasses/eyepatch/hud/meson/Initialize()

@@ -98,12 +98,12 @@
 
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
-			throw_item(A)
+			mob_throw_item(A)
 			trigger_aiming(TARGET_CAN_CLICK)
 			return 1
-		throw_mode_off()
+		toggle_throw_mode(FALSE)
 
-	var/obj/item/W = get_active_hand()
+	var/obj/item/W = get_active_held_item()
 
 	if(W == A) // Handle attack_self
 		W.attack_self(src)
@@ -293,7 +293,7 @@
 	A.AltClick(src)
 
 /atom/proc/AltClick(var/mob/user)
-	if(try_handle_interactions(user, get_alt_interactions(user), user?.get_active_hand()))
+	if(try_handle_interactions(user, get_alt_interactions(user), user?.get_active_held_item()))
 		return TRUE
 	if(user?.get_preference_value(/datum/client_preference/show_turf_contents) == PREF_ALT_CLICK)
 		. = show_atom_list_for_turf(user, get_turf(src))

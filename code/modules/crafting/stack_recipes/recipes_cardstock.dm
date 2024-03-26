@@ -1,6 +1,7 @@
 /decl/stack_recipe/cardstock
 	abstract_type     = /decl/stack_recipe/cardstock
 	craft_stack_types = /obj/item/stack/material/cardstock
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE // not exactly high tech, but donuts etc are not medieval
 
 /decl/stack_recipe/cardstock/box
 	result_type       = /obj/item/storage/box

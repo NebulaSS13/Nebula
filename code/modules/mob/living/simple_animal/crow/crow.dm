@@ -15,10 +15,10 @@
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
 
-	speak = list("Caw.", "Caw?", "Caw!", "CAW.")
-	speak_emote = list("caws")
-	emote_hear = list("caws")
-	emote_see = list("hops")
+	emote_speech = list("Caw.", "Caw?", "Caw!", "CAW.")
+	speak_emote  = list("caws")
+	emote_hear   = list("caws")
+	emote_see    = list("hops")
 
 	natural_weapon = /obj/item/natural_weapon/crow_claws
 

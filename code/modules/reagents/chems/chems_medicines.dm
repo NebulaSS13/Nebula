@@ -64,7 +64,7 @@
 /decl/material/liquid/brute_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
-	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.getBruteLoss())))
+	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.get_damage(BRUTE))))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /decl/material/liquid/burn_meds
@@ -83,7 +83,7 @@
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, removed, var/datum/reagents/holder)
 	..()
 	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
-	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.getFireLoss())))
+	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.get_damage(BURN))))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 #undef ADJUSTED_REGEN_VAL
 
@@ -263,7 +263,7 @@
 				E.limb_flags |= ORGAN_FLAG_DEFORMED
 
 /decl/material/liquid/retrovirals/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustCloneLoss(-20 * removed)
+	M.heal_damage(CLONE, 20 * removed)
 	if(LAZYACCESS(M.chem_doses, type) > 10)
 		ADJ_STATUS(M, STAT_DIZZY, 5)
 		ADJ_STATUS(M, STAT_JITTER, 5)

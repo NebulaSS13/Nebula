@@ -2,7 +2,7 @@
 //as they handle all relevant stuff like adding it to the player's screen and such
 
 //Returns the thing in our active hand (whatever is in our active module-slot, in this case) or any active grab
-/mob/living/silicon/robot/get_active_hand()
+/mob/living/silicon/robot/get_active_held_item()
 	return module_active || (locate(/obj/item/grab) in contents)
 
 /*-------TODOOOOOOOOOO--------*/
@@ -53,7 +53,7 @@
 		module_state_3 = null
 		inv3.icon_state = "inv3"
 	update_icon()
-	if(!isnull(hud_used))
+	if(istype(hud_used))
 		hud_used.update_robot_modules_display()
 
 /mob/living/silicon/robot/proc/uneq_all()
@@ -84,7 +84,7 @@
 		module_state_3 = null
 		inv3.icon_state = "inv3"
 	update_icon()
-	if(!isnull(hud_used))
+	if(istype(hud_used))
 		hud_used.update_robot_modules_display()
 
 /mob/living/silicon/robot/proc/activated(obj/item/O)

@@ -5,9 +5,9 @@
 	var/tox_mult = 1
 
 /obj/aura/regenerating/life_tick()
-	user.adjustBruteLoss(-brute_mult, do_update_health = FALSE)
-	user.adjustFireLoss(-fire_mult, do_update_health = FALSE)
-	user.adjustToxLoss(-tox_mult)
+	user.heal_damage(BRUTE, brute_mult, do_update_health = FALSE)
+	user.heal_damage(BURN, fire_mult, do_update_health = FALSE)
+	user.heal_damage(TOX, tox_mult)
 
 /obj/aura/regenerating/human
 	var/nutrition_damage_mult = 1 //How much nutrition it takes to heal regular damage
@@ -37,17 +37,17 @@
 
 	var/update_health = FALSE
 	var/organ_regen = get_config_value(/decl/config/num/health_organ_regeneration_multiplier)
-	if(brute_mult && H.getBruteLoss())
+	if(brute_mult && H.get_damage(BRUTE))
 		update_health = TRUE
-		H.adjustBruteLoss(-brute_mult * organ_regen, do_update_health = FALSE)
+		H.heal_damage(BRUTE, brute_mult * organ_regen, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
-	if(fire_mult && H.getFireLoss())
+	if(fire_mult && H.get_damage(BURN))
 		update_health = TRUE
-		H.adjustFireLoss(-fire_mult * organ_regen, do_update_health = FALSE)
+		H.heal_damage(BURN, fire_mult * organ_regen, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
-	if(tox_mult && H.getToxLoss())
+	if(tox_mult && H.get_damage(TOX))
 		update_health = TRUE
-		H.adjustToxLoss(-tox_mult * organ_regen, do_update_health = FALSE)
+		H.heal_damage(TOX, tox_mult * organ_regen, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(update_health)
 		H.update_health()
@@ -55,7 +55,7 @@
 	if(!can_regenerate_organs())
 		return 1
 	if(organ_mult)
-		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
+		if(prob(10) && H.nutrition >= 150 && !H.get_damage(BRUTE) && !H.get_damage(BURN))
 			var/obj/item/organ/external/D = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 			if (D.status & ORGAN_DISFIGURED)
 				if (H.nutrition >= 20)

@@ -22,7 +22,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME | PRESENTATION_FLAG_DESC
-	obj_flags = OBJ_FLAG_HOLLOW
+	w_class = ITEM_SIZE_SMALL
 
 	/// The icon state prefix used for overlay/addon sprites. If unset, defaults to base_icon.
 	var/overlay_base_icon = null
@@ -32,6 +32,13 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	var/static/list/filling_icons_cache = list()
 	var/custom_name
 	var/custom_desc
+
+// Reverse the matter effect of the hollow flag, keep the force effect.
+// Glasses are so tiny that their effective matter is ten times lower than forks/knives due to OBJ_FLAG_HOLLOW.
+/obj/item/chems/drinks/glass2/get_matter_amount_modifier()
+	. = ..()
+	if(obj_flags & OBJ_FLAG_HOLLOW)
+		. /= HOLLOW_OBJECT_MATTER_MULTIPLIER
 
 /obj/item/chems/drinks/glass2/examine(mob/M)
 	. = ..()

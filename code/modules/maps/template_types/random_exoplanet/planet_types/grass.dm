@@ -19,7 +19,7 @@
 ///Surface of a grass exoplanet
 /datum/level_data/planetoid/exoplanet/grass
 	base_area           = /area/exoplanet/grass
-	base_turf           = /turf/exterior/wildgrass
+	base_turf           = /turf/exterior/grass/wild
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators    = list(
@@ -133,7 +133,7 @@
 ///Map generator for the grass exoplanet surface
 /datum/random_map/noise/exoplanet/grass
 	descriptor       = "grass exoplanet"
-	land_type        = /turf/exterior/wildgrass
+	land_type        = /turf/exterior/grass/wild
 	water_type       = /turf/exterior/mud/water
 	coast_type       = /turf/exterior/mud
 	water_level_min  = 3
@@ -147,7 +147,7 @@
 
 ///Area for the grass exoplanet surface
 /area/exoplanet/grass
-	base_turf = /turf/exterior/wildgrass
+	base_turf = /turf/exterior/grass/wild
 	ambience  = list(
 		'sound/effects/wind/wind_2_1.ogg',
 		'sound/effects/wind/wind_2_2.ogg',

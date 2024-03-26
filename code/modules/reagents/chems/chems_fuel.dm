@@ -17,7 +17,7 @@
 	value = 1.5
 
 /decl/material/liquid/fuel/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustToxLoss(2 * removed)
+	M.take_damage(TOX, 2 * removed)
 
 /decl/material/liquid/fuel/explosion_act(obj/item/chems/holder, severity)
 	. = ..()

@@ -35,4 +35,4 @@
 
 /turf/exterior/snow/handle_melting(list/meltable_materials)
 	. = ..()
-	ChangeTurf(/turf/exterior/ice)
+	ChangeTurf(/turf/exterior/ice, keep_height = TRUE)

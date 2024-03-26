@@ -157,10 +157,10 @@ SUBSYSTEM_DEF(statistics)
 		death.gender = dead.gender
 		death.time_of_death = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 		death.coords = "[dead.x], [dead.y], [dead.z]"
-		death.bruteloss = dead.getBruteLoss()
-		death.fireloss =  dead.getFireLoss()
-		death.brainloss = dead.getBrainLoss()
-		death.oxyloss =   dead.getOxyLoss()
+		death.bruteloss = dead.get_damage(BRUTE)
+		death.fireloss =  dead.get_damage(BURN)
+		death.brainloss = dead.get_damage(BRAIN)
+		death.oxyloss =   dead.get_damage(OXY)
 		death.using_map_name = global.using_map.full_name
 		var/obj/effect/overmap/visitable/cell = global.overmap_sectors[num2text(dead.z)]
 		death.overmap_location_name = cell?.name || "Unknown"

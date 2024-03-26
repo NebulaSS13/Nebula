@@ -3,6 +3,8 @@
 	siemens_coefficient = 0.9
 	origin_tech = @'{"materials":1,"engineering":1}'
 	material = /decl/material/solid/organic/cloth
+	paint_verb = "dyed"
+	replaced_in_loadout = TRUE
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
@@ -70,6 +72,12 @@
 /obj/item/clothing/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 
 	if(overlay)
+
+		var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
+		if(istype(root_bodytype) && root_bodytype?.onmob_state_modifiers)
+			var/state_modifier = root_bodytype.onmob_state_modifiers[slot]
+			if(state_modifier && check_state_in_icon("[overlay.icon_state]-[state_modifier]", overlay.icon))
+				overlay.icon_state = "[overlay.icon_state]-[root_bodytype.onmob_state_modifiers[slot]]"
 
 		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
 			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)

@@ -95,20 +95,20 @@ var/global/default_mobloc = null
 
 	switch(damage_type)
 		if(BRUTE)
-			loss = M.getBruteLoss()
+			loss = M.get_damage(BRUTE)
 		if(BURN)
-			loss = M.getFireLoss()
+			loss = M.get_damage(BURN)
 		if(TOX)
-			loss = M.getToxLoss()
+			loss = M.get_damage(TOX)
 		if(OXY)
-			loss = M.getOxyLoss()
+			loss = M.get_damage(OXY)
 		if(CLONE)
-			loss = M.getCloneLoss()
+			loss = M.get_damage(CLONE)
 		if(PAIN)
-			loss = M.getHalLoss()
+			loss = M.get_damage(PAIN)
 
 	if(!loss && ishuman(M))
-		var/mob/living/carbon/human/H = M            // Synthetics have robot limbs which don't report damage to getXXXLoss()
+		var/mob/living/carbon/human/H = M            // Synthetics have robot limbs which don't report damage to get_damage(XXX)
 		if(H.isSynthetic())                          // So we have to hard code this check or create a different one for them.
 			return H.species.total_health - H.current_health
 	return loss

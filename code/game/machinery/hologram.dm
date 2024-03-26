@@ -229,7 +229,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 					ai_text = stars(text)
 			if(isanimal(M) && !M.universal_speak)
 				var/mob/living/simple_animal/SA = M
-				ai_text = pick(SA.speak)
+				ai_text = DEFAULTPICK(SA.emote_speech, "...")
 			var/name_used = M.GetVoice()
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
 			var/short_links = master.get_preference_value(/datum/client_preference/ghost_follow_link_length) == PREF_SHORT
@@ -240,7 +240,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/message
 	if(isanimal(M) && !M.universal_speak)
 		var/mob/living/simple_animal/SA = M
-		message = get_hear_message(name_used, pick(SA.speak), verb, speaking)
+		message = get_hear_message(name_used, DEFAULTPICK(SA.emote_speech, "..."), verb, speaking)
 	else
 		message = get_hear_message(name_used, text, verb, speaking)
 	if(targetpad && !targetpad.incoming_connection) //If this is the pad you're making the call from and the call is accepted

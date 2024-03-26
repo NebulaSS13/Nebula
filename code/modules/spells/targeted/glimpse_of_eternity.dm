@@ -21,6 +21,6 @@
 			new /obj/effect/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "electricity_constant")
 		else
 			SET_STATUS_MAX(L, STAT_BLIND, 2)
-			L.adjustBruteLoss(-10, do_update_health = FALSE)
-			L.adjustFireLoss(-10)
+			L.heal_damage(BRUTE, 10, do_update_health = FALSE)
+			L.heal_damage(BURN, 10)
 			new /obj/effect/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "green_sparkles")

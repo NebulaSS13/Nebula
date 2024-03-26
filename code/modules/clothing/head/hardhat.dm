@@ -22,6 +22,7 @@
 	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
+	replaced_in_loadout = FALSE
 
 /obj/item/clothing/head/hardhat/orange
 	icon = 'icons/clothing/head/hardhat/orange.dmi'

@@ -75,7 +75,10 @@
 	if(.)
 		set_density(0)
 		destroyed = TRUE
-		subtract_matter(new /obj/item/shard(get_turf(src), material?.type))
+		var/obj/item/shard/shard = new(get_turf(src), material?.type)
+		if(paint_color)
+			shard.set_color(paint_color)
+		subtract_matter(shard)
 		playsound(src, "shatter", 70, 1)
 		update_icon()
 

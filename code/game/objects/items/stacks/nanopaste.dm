@@ -15,10 +15,10 @@
 		return 0
 	if (isrobot(M))	//Repairing cyborgs
 		var/mob/living/silicon/robot/R = M
-		if (R.getBruteLoss() || R.getFireLoss() )
+		if (R.get_damage(BRUTE) || R.get_damage(BURN) )
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			R.adjustBruteLoss(-15, do_update_health = FALSE)
-			R.adjustFireLoss(-15)
+			R.heal_damage(BRUTE, 15, do_update_health = FALSE)
+			R.heal_damage(BURN, 15)
 			use(1)
 			user.visible_message("<span class='notice'>\The [user] applied some [src] on [R]'s damaged areas.</span>",\
 				"<span class='notice'>You apply some [src] at [R]'s damaged areas.</span>")

@@ -7,7 +7,7 @@
 	var/cracked = 0
 
 /obj/item/toy/xmas_cracker/attack(mob/target, mob/user)
-	if(!cracked && ishuman(target) && (target.stat == CONSCIOUS) && !target.get_active_hand() )
+	if(!cracked && ishuman(target) && (target.stat == CONSCIOUS) && !target.get_active_held_item() )
 		target.visible_message(
 			SPAN_NOTICE("\The [user] and \the [target] pop \an [src]! *pop*"),
 			SPAN_NOTICE("You pull \an [src] with \the [target]! *pop*"),

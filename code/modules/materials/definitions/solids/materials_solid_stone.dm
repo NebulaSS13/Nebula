@@ -18,6 +18,8 @@
 		/decl/material/solid/silicon = 1
 	)
 	ore_result_amount = 7
+	sound_manipulate = 'sound/foley/rockscrape.ogg'
+	sound_dropped    = 'sound/foley/rockscrape.ogg'
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"

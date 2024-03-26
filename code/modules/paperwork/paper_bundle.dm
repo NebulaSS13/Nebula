@@ -167,7 +167,7 @@
 /obj/item/paper_bundle/proc/burn_callback(var/obj/item/flame/P, var/mob/user, var/span_class)
 	if(QDELETED(P) || QDELETED(user))
 		return
-	if(!Adjacent(user) || user.get_active_hand() != P || !P.lit)
+	if(!Adjacent(user) || user.get_active_held_item() != P || !P.lit)
 		to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 		return
 	user.visible_message( \

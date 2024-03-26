@@ -9,11 +9,11 @@
 		. += "Bored..."
 	if(holder.attacked)
 		. += "Grrr..."
-	if(holder.body.getToxLoss() > 30)
+	if(holder.body.get_damage(TOX) > 30)
 		. += "Cold..."
-	if(holder.body.getToxLoss() > 60)
+	if(holder.body.get_damage(TOX) > 60)
 		. += list("So... cold...", "Very... cold...")
-	if(holder.body.getToxLoss() > 90)
+	if(holder.body.get_damage(TOX) > 90)
 		. += "C... c..."
 	if(holder.slime.feeding_on)
 		. += list("Nom...", "Tasty...")
@@ -23,7 +23,7 @@
 	if(prob(2))
 		. = list()
 		var/tension = 10
-		if(holder.slime.nutrition < holder.slime.get_hunger_nutrition()) 
+		if(holder.slime.nutrition < holder.slime.get_hunger_nutrition())
 			. += list("Hungry...", "Where is the food?", "I want to eat...")
 			tension += 10
 		if(holder.slime.nutrition < holder.slime.get_starve_nutrition())
@@ -37,7 +37,7 @@
 /decl/slime_comment/zap/get_comment(var/datum/ai/slime/holder)
 	if(holder.slime.powerlevel > 3)
 		. = list("Bzzz...")
-		if(holder.slime.powerlevel > 5) 
+		if(holder.slime.powerlevel > 5)
 			. += "Zap..."
 		if(holder.slime.powerlevel > 8)
 			. += "Zap... Bzz..."

@@ -86,6 +86,32 @@
 	var/tmp/use_single_icon
 	var/center_of_mass = @'{"x":16,"y":16}' //can be null for no exact placement behaviour
 
+	/// Used when this item is replaced by a loadout item. If TRUE, loadout places src in wearer's storage. If FALSE, src is deleted.
+	var/replaced_in_loadout = TRUE
+
+	var/paint_color
+	var/paint_verb = "painted"
+
+/obj/item/get_color()
+	if(paint_color)
+		return paint_color
+	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		return material.color
+	return initial(color)
+
+/obj/item/set_color(new_color)
+	if(new_color == COLOR_WHITE)
+		new_color = null
+	if(paint_color != new_color)
+		paint_color = new_color
+	if(paint_color)
+		color = paint_color
+	else if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		color = material.color
+	else
+		color = new_color
+	return FALSE
+
 /obj/item/proc/can_contaminate()
 	return !(obj_flags & ITEM_FLAG_NO_CONTAMINATION)
 
@@ -210,6 +236,9 @@
 	if(length(desc_damage))
 		desc_comp += "[desc_damage]<BR>"
 
+	if(paint_color)
+		desc_comp += "\The [src] has been <font color='[paint_color]'>[paint_verb]</font>.<BR>"
+
 	var/added_header = FALSE
 	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON)
 
@@ -327,13 +356,13 @@
 /obj/item/proc/dragged_onto(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
 
+/obj/item/proc/can_heat_atom(atom/other)
+	return get_heat() > 0 && isflamesource()
+
 /obj/item/afterattack(var/atom/A, var/mob/user, var/proximity)
 	. = ..()
-	if(. || !proximity)
-		return
-	var/atom_heat = get_heat()
-	if(atom_heat > 0)
-		A.handle_external_heating(atom_heat, src, user)
+	if(!. && proximity && can_heat_atom(A))
+		A.handle_external_heating(get_heat(), src, user)
 		return TRUE
 	return FALSE
 
@@ -408,12 +437,14 @@
 	return TRUE
 
 /obj/item/attack_ai(mob/living/silicon/ai/user)
-	if (istype(src.loc, /obj/item/robot_module))
-		//If the item is part of a cyborg module, equip it
-		if(!isrobot(user))
-			return
-		var/mob/living/silicon/robot/R = user
-		R.activate_module(src)
+	if (!istype(src.loc, /obj/item/robot_module))
+		return
+	//If the item is part of a cyborg module, equip it
+	if(!isrobot(user))
+		return
+	var/mob/living/silicon/robot/R = user
+	R.activate_module(src)
+	if(R.hud_used)
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/W, mob/user)
@@ -491,6 +522,9 @@
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
 	SHOULD_CALL_PARENT(TRUE)
+
+	// Clear our alpha mask.
+	update_turf_alpha_mask()
 
 	add_fingerprint(user)
 
@@ -699,8 +733,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(!zoom && istype(H) && H.equipment_tint_total >= TINT_MODERATE)
 		to_chat(user, SPAN_WARNING("Your visor gets in the way of looking through the [devicename]."))
 		return
-	else if(!zoom && user.get_active_hand() != src)
+	else if(!zoom && user.get_active_held_item() != src)
 		to_chat(user, SPAN_WARNING("You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better."))
+		return
+
+	if(!istype(user.hud_used))
 		return
 
 	if(user.hud_used.hud_shown)
@@ -893,6 +930,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)
 	if(!client)
 		return
+	if(client.mob?.get_equipped_item(slot) != src)
+		return
 	if(client.mob?.item_should_have_screen_presence(src, slot))
 		client.screen |= src
 	else
@@ -941,6 +980,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/handle_loadout_equip_replacement(obj/item/old_item)
 	return
+
+/// Used to handle equipped icons overwritten by custom loadout. If TRUE, loadout places src in wearer's storage. If FALSE, src is deleted by loadout.
+/obj/item/proc/loadout_should_keep(obj/item/new_item, mob/wearer)
+	return type != new_item.type && !replaced_in_loadout
 
 /obj/item/equipped(mob/user, slot)
 	. = ..()

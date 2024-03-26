@@ -173,11 +173,11 @@
 	if(skill_level >= SKILL_BASIC)
 		if(H.getOxyLossPercent() > 50)
 			dat += "<span class='scan_blue'>[b]Severe oxygen deprivation detected.[endb]</span>"
-		if(H.getToxLoss() > 50)
+		if(H.get_damage(TOX) > 50)
 			dat += "<span class='scan_green'>[b]Major systemic organ failure detected.[endb]</span>"
-	if(H.getFireLoss() > 50)
+	if(H.get_damage(BURN) > 50)
 		dat += "<span class='scan_orange'>[b]Severe burn damage detected.[endb]</span>"
-	if(H.getBruteLoss() > 50)
+	if(H.get_damage(BRUTE) > 50)
 		dat += "<span class='scan_red'>[b]Severe anatomical damage detected.[endb]</span>"
 
 	if(skill_level >= SKILL_BASIC)

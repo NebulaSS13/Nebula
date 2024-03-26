@@ -741,7 +741,7 @@
 			var/obj/item/organ/external/affecting = SAFEPICK(M.get_external_organs())
 			if(!affecting)
 				to_chat(M, SPAN_DANGER("You land heavily!"))
-				M.adjustBruteLoss(damage)
+				M.take_damage(BRUTE, damage)
 			else
 				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
 				affecting.take_external_damage(damage, 0)

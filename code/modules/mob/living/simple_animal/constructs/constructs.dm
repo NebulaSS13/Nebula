@@ -2,7 +2,7 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
-	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
+	emote_speech = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	base_animal_type = /mob/living/simple_animal/construct
@@ -75,7 +75,7 @@
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
 		if(current_health < get_max_health())
-			adjustBruteLoss(-5)
+			heal_damage(BRUTE, 5)
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] is undamaged.</span>")
@@ -137,7 +137,7 @@
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
-			adjustBruteLoss(P.damage * 0.5)
+			take_damage(BRUTE, P.damage * 0.5)
 			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
 							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 
@@ -266,7 +266,7 @@
 	. = ..()
 	if(.)
 		if(fire)
-			fire.icon_state = "fire[!!fire_alert]"
+			fire.icon_state = "fire[!!GET_HUD_ALERT(src, /decl/hud_element/condition/fire)]"
 		silence_spells(purge)
 		if(healths)
 			switch(current_health)

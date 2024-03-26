@@ -3,8 +3,8 @@
 	SHOULD_CALL_PARENT(TRUE)
 	cut_overlays()
 	if((material_alteration & MAT_FLAG_ALTERATION_COLOR) && material)
-		color = material.color
 		alpha = 100 + material.opacity * 255
+	color = get_color() // avoiding set_color() here as that will set it on paint_color
 	if(blood_overlay)
 		add_overlay(blood_overlay)
 	if(global.contamination_overlay && contaminated)

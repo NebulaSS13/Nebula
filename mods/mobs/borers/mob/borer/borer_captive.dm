@@ -45,10 +45,10 @@
 		to_chat(H, "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</span>")
 		to_chat(B.host, "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>")
 
-		spawn(rand(200,250)+B.host.getBrainLoss())
+		spawn(rand(200,250)+B.host.get_damage(BRAIN))
 			if(!B || !B.controlling) return
 
-			B.host.adjustBrainLoss(rand(0.1,0.5))
+			B.host.take_damage(BRAIN, rand(0.1,0.5))
 			to_chat(H, "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>")
 			to_chat(B.host, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
 			B.detach_from_host()

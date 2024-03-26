@@ -4,9 +4,9 @@
 	if(stat == DEAD)
 		msg += "<span class='deadsay'>It is limp and unresponsive.</span>"
 	else
-		if(src.getBruteLoss() >= 40)
+		if(src.get_damage(BRUTE) >= 40)
 			msg += SPAN_DANGER("It has severe punctures and tears in its flesh!")
-		else if(src.getBruteLoss())
+		else if(src.get_damage(BRUTE))
 			msg += SPAN_WARNING("It has some punctures in its flesh!")
 		switch(powerlevel)
 			if(2 to 3) msg += SPAN_WARNING("It is flickering gently with a little electrical activity.")

@@ -550,12 +550,11 @@
 		return FALSE
 
 	is_outside = new_outside
+	last_outside_check = OUTSIDE_UNCERTAIN
+	SSambience.queued |= src
+	update_external_atmos_participation()
 	if(!skip_weather_update)
 		update_weather()
-	SSambience.queued |= src
-
-	last_outside_check = OUTSIDE_UNCERTAIN
-	update_external_atmos_participation()
 
 	if(!HasBelow(z))
 		return TRUE
@@ -731,7 +730,7 @@
 /turf/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/show_turf_contents)
-	if(user && IS_SHOVEL(user.get_active_hand()))
+	if(user && IS_SHOVEL(user.get_active_held_item()))
 		if(can_dig_pit())
 			LAZYADD(., /decl/interaction_handler/dig/pit)
 

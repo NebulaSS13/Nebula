@@ -211,7 +211,7 @@
 	explanation = "Patient has internal organ damage."
 
 /decl/diagnostic_sign/liver/manifested_in(obj/item/organ/external/victim)
-	return victim.owner && victim.owner.getToxLoss() >= 25
+	return victim.owner && victim.owner.get_damage(TOX) >= 25
 
 /decl/diagnostic_sign/oxygenation
 	name = "Cyanosis"

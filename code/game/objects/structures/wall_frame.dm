@@ -19,8 +19,6 @@
 	max_health = 40
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
-
-	var/paint_color
 	var/stripe_color
 	var/list/connections
 	var/list/other_connections
@@ -154,13 +152,6 @@
 		if (tforce < 15)
 			return
 		take_damage(tforce)
-
-/obj/structure/wall_frame/get_color()
-	return paint_color
-
-/obj/structure/wall_frame/set_color(new_color)
-	paint_color = new_color
-	update_icon()
 
 //Subtypes
 /obj/structure/wall_frame/standard

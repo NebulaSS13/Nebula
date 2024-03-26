@@ -55,7 +55,7 @@
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	flesh_color = "#90edeb"
-	hud_type = /datum/hud_data/adherent
+	species_hud = /datum/hud_data/adherent
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(

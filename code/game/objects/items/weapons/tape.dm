@@ -12,7 +12,7 @@
 	w_class          = ITEM_SIZE_SMALL
 	material         = /decl/material/solid/organic/plastic
 	current_health   = 10
-	max_health = 10
+	max_health       = 10
 
 /obj/item/stack/tape_roll/can_split()
 	return FALSE

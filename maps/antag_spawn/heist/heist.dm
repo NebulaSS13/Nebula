@@ -1,6 +1,10 @@
 #include "heist_antag.dm"
 #include "heist_outfit.dm"
 
+/mob/living/simple_animal/hostile/retaliate/parrot/pirate
+	name = "\proper Meatbag"
+	emote_speech = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")
+
 /datum/map_template/ruin/antag_spawn/heist
 	name = "Heist Base"
 	suffixes = list("heist/heist_base.dmm")

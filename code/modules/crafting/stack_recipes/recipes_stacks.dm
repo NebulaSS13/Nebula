@@ -1,9 +1,6 @@
 // Tiles
 /decl/stack_recipe/tile
 	abstract_type       = /decl/stack_recipe/tile
-	req_amount          = 1
-	res_amount          = 4
-	max_res_amount      = 20
 	difficulty          = MAT_VALUE_NORMAL_DIY
 	apply_material_name = FALSE
 	category            = "tiling"
@@ -33,6 +30,7 @@
 /decl/stack_recipe/tile/steel
 	abstract_type     = /decl/stack_recipe/tile/steel
 	required_material = /decl/material/solid/metal/steel
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/tile/steel/floor
 	result_type       = /obj/item/stack/tile/floor

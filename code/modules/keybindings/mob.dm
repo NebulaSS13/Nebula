@@ -11,7 +11,7 @@
 	description = "Toggle throwing the current item or not."
 
 /datum/keybinding/mob/toggle_throw_mode/down(client/user)
-	user.mob.toggle_throw_mode()
+	user.toggle_throw_mode_verb()
 	return TRUE
 
 /datum/keybinding/mob/hold_throw_mode
@@ -21,11 +21,11 @@
 	description = "Hold this to turn on throw mode, and release it to turn off throw mode"
 
 /datum/keybinding/mob/hold_throw_mode/down(client/user)
-	user.mob.throw_mode_on()
+	user.mob.toggle_throw_mode(TRUE)
 	return TRUE
 
 /datum/keybinding/mob/hold_throw_mode/up(client/user)
-	user.mob.throw_mode_off()
+	user.mob.toggle_throw_mode(FALSE)
 	return TRUE
 
 /datum/keybinding/mob/swap_hands

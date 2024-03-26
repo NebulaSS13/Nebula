@@ -4,6 +4,10 @@
 	var/name = "survival box option"
 	var/box_type
 
+/decl/survival_box_option/none
+	name = "nothing"
+	uid = "survival_box_nothing"
+
 /decl/survival_box_option/survival
 	name = "survival kit"
 	box_type = /obj/item/storage/box/survival

@@ -739,7 +739,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 							I.take_internal_damage(organ_damage, silent=TRUE)
 							dam = 0
 		if(dam > 0)
-			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
+			M.take_damage(TOX, toxicity_targets_organ ? (dam * 0.75) : dam)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
 		M.take_organ_damage(0, removed * solvent_power, override_droplimb = DISMEMBER_METHOD_ACID)
@@ -813,7 +813,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
-	M.adjustToxLoss(REM)
+	M.take_damage(TOX, REM)
 
 /decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	if(newdata)

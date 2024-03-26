@@ -31,6 +31,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
+	replaced_in_loadout = FALSE
 	var/up = 0
 	var/base_state
 

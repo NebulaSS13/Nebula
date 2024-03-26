@@ -276,7 +276,7 @@
 
 /decl/interaction_handler/vine_chop/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/effect/vine/V = target
-	var/obj/item/W = user.get_active_hand()
+	var/obj/item/W = user.get_active_held_item()
 	if(!istype(W) || !W.edge || W.w_class < ITEM_SIZE_NORMAL)
 		to_chat(user, SPAN_WARNING("You need a larger or sharper object for this task!"))
 		return
