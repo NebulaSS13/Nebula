@@ -21,3 +21,10 @@
 #elif !defined(MAP_OVERRIDE)
 	#warn A map has already been included, ignoring Shaded Hills
 #endif
+
+/datum/map/shaded_hills
+	default_species = SPECIES_KOBALOI
+	loadout_categories = list(
+		/decl/loadout_category/fantasy/clothing,
+		/decl/loadout_category/fantasy/utility
+	)
