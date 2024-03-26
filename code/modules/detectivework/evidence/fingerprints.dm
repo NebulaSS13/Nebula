@@ -11,12 +11,13 @@
 	if(F.completeness > 0)
 		add_data(F)
 
-/datum/forensics/fingerprints/add_data(var/datum/fingerprint/newprint)
-	if(!newprint || newprint.completeness <= 0)
-		return
-	for(var/datum/fingerprint/F in data)
-		if(F.merge(newprint))
-			return
+/datum/forensics/fingerprints/add_data(var/list/newdata)
+	for(var/datum/fingerprint/newprint in newdata)
+		if(!newprint || newprint.completeness <= 0)
+			continue
+		for(var/datum/fingerprint/F in data)
+			if(F.merge(newprint))
+				continue
 	..()
 
 /datum/forensics/fingerprints/PopulateClone(datum/clone)
