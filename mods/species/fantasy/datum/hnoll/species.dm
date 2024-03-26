@@ -18,7 +18,7 @@
 	hidden_from_codex   = FALSE
 	age_descriptor      = /datum/appearance_descriptor/age/hnoll
 	available_bodytypes = list(/decl/bodytype/hnoll)
-	preview_outfit      = /decl/hierarchy/outfit/shaded_hills/wanderer
+	preview_outfit      = /decl/hierarchy/outfit/job/shaded_hills/wanderer
 	spawn_flags         = SPECIES_CAN_JOIN
 	flesh_color         = "#ae7d32"
 	hunger_factor       = DEFAULT_HUNGER_FACTOR * 1.2
