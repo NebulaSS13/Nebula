@@ -44,5 +44,5 @@
 /obj/abstract/landmark/roofed/LateInitialize()
 	var/turf/T = loc
 	if(istype(T))
-		T.set_outside(FALSE)
+		T.set_outside(OUTSIDE_NO)
 	qdel(src)
