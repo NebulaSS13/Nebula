@@ -133,7 +133,7 @@
 
 		if(secures_occupant)
 			user.visible_message(SPAN_DANGER("\The [user] impales \the [target] on \the [src]!"))
-			target.adjustBruteLoss(rand(30, 45))
+			target.take_damage(BRUTE, rand(30, 45))
 		else
 			user.visible_message(SPAN_DANGER("\The [user] hangs \the [target] from \the [src]!"))
 
@@ -150,14 +150,26 @@
 
 /obj/structure/meat_hook/on_update_icon()
 	..()
-	if(occupant)
-		occupant.set_dir(SOUTH)
-		var/image/I = image(null)
-		I.appearance = occupant
-		var/matrix/M = matrix()
-		M.Turn(occupant.butchery_rotation)
-		I.transform = M
-		add_overlay(I)
+	if(!occupant)
+		return
+
+	occupant.set_dir(SOUTH)
+
+	var/image/I = image(null)
+	I.appearance = occupant
+	I.appearance_flags |= RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
+	I.pixel_x = null
+	I.pixel_y = null
+	I.pixel_z = null
+	I.pixel_w = null
+	I.layer   = FLOAT_LAYER
+	I.plane   = FLOAT_PLANE
+
+	var/matrix/M = matrix()
+	M.Turn(occupant.butchery_rotation)
+	I.transform = M
+
+	add_overlay(I)
 
 /obj/structure/meat_hook/mob_breakout(mob/living/escapee)
 	. = ..()
@@ -181,7 +193,7 @@
 /obj/structure/meat_hook/proc/set_carcass_state(var/_state)
 	occupant_state = _state
 	if(occupant)
-		occupant.adjustBruteLoss(rand(50,60))
+		occupant.take_damage(BRUTE, rand(50,60))
 		if(occupant.stat != DEAD)
 			occupant.death()
 	if(QDELETED(occupant))
@@ -201,7 +213,7 @@
 	var/last_state = occupant_state
 	var/mob/living/last_occupant = occupant
 
-	occupant.adjustBruteLoss(rand(50,60))
+	occupant.take_damage(BRUTE, rand(50,60))
 	update_icon()
 	if(!tool?.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = butchery_string, success_message = butchery_string, check_skill = SKILL_COOKING))
 		return FALSE

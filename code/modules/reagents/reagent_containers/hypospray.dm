@@ -179,10 +179,22 @@
 	w_class = ITEM_SIZE_TINY
 	detail_state = "_band"
 	detail_color = COLOR_CYAN
+	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
 
+/obj/item/chems/hypospray/autoinjector/Initialize()
+	. = ..()
+	if(label_text)
+		update_container_name()
 
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
+	SHOULD_CALL_PARENT(TRUE)
+	. = ..()
+	if(reagents?.total_volume > 0 && autolabel && !label_text) // don't override preset labels
+		label_text = "[reagents.get_primary_reagent_name()], [reagents.total_volume]u"
+
+/obj/item/chems/hypospray/autoinjector/stabilizer/populate_reagents()
 	add_to_reagents(/decl/material/liquid/adrenaline, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/hypospray/autoinjector/Initialize()
 	. = ..()
@@ -208,41 +220,41 @@
 // Autoinjector - Detox
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/detox
-	name = "autoinjector (antitox)"
 	detail_color = COLOR_GREEN
 
 /obj/item/chems/hypospray/autoinjector/detox/populate_reagents()
 	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Pain
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/pain
-	name = "autoinjector (painkiller)"
 	detail_color = COLOR_PURPLE
 
 /obj/item/chems/hypospray/autoinjector/pain/populate_reagents()
 	add_to_reagents(/decl/material/liquid/painkillers, reagents.maximum_volume)
+	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Antirad
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/antirad
-	name = "autoinjector (anti-rad)"
 	detail_color = COLOR_AMBER
 
 /obj/item/chems/hypospray/autoinjector/antirad/populate_reagents()
 	add_to_reagents(/decl/material/liquid/antirads, reagents.maximum_volume)
+	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Hallucinogenics
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/hallucinogenics
-	name = "autoinjector"
 	detail_color = COLOR_DARK_GRAY
 
 /obj/item/chems/hypospray/autoinjector/hallucinogenics/populate_reagents()
 	add_to_reagents(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
+	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Clotting agent
@@ -266,4 +278,5 @@
 	detail_color = COLOR_WHITE
 
 /obj/item/chems/hypospray/autoinjector/empty/populate_reagents()
+	SHOULD_CALL_PARENT(FALSE)
 	return

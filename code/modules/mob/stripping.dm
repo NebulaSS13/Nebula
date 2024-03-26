@@ -8,7 +8,7 @@
 
 	// Are we placing or stripping?
 	var/stripping = FALSE
-	var/obj/item/held = user.get_active_hand()
+	var/obj/item/held = user.get_active_held_item()
 	if(!istype(held) || is_robot_module(held))
 		stripping = TRUE
 

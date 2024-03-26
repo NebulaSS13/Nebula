@@ -2,9 +2,8 @@
 	abstract_type         = /decl/stack_recipe/turfs
 	expected_product_type = /turf
 	time                  = 5 SECONDS // Arbitrary value since turfs don't behave like objs in terms of w_class/time
-	req_amount            = 5         // Arbitrary value since turfs have no matter return weird matter values.
-	max_res_amount        = 1
-	res_amount            = 1
+	req_amount            = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since turfs have no matter return weird matter values.
+	one_per_turf          = TRUE
 
 /decl/stack_recipe/turfs/can_make(mob/user)
 	. = ..()
@@ -24,7 +23,7 @@
 /decl/stack_recipe/turfs/update_req_amount()
 	return
 
-/decl/stack_recipe/turfs/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/turfs/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	var/turf/build_turf = get_turf(location)
 	if(!build_turf)
 		return

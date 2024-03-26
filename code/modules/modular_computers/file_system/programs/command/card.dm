@@ -111,8 +111,8 @@
 	return null
 
 /datum/computer_file/program/card_mod/proc/get_photo(mob/user)
-	if(istype(user.get_active_hand(), /obj/item/photo))
-		var/obj/item/photo/photo = user.get_active_hand()
+	if(istype(user.get_active_held_item(), /obj/item/photo))
+		var/obj/item/photo/photo = user.get_active_held_item()
 		return photo.img
 
 	if(issilicon(user))
@@ -190,7 +190,7 @@
 			if(computer.get_inserted_id())
 				card_slot.eject_id(user)
 			else
-				card_slot.insert_id(user.get_active_hand(), user)
+				card_slot.insert_id(user.get_active_held_item(), user)
 		if("terminate")
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))

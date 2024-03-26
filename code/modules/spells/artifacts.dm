@@ -37,6 +37,6 @@
 	if(isliving(user))
 		var/mob/living/M = user
 		if(icon_state == "[name][sides]")
-			M.adjustBruteLoss(-30)
+			M.heal_damage(BRUTE, 30)
 		else if(icon_state == "[name]1")
-			M.adjustBruteLoss(30)
+			M.take_damage(BRUTE, 30)

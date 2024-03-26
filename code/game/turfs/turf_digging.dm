@@ -1,5 +1,5 @@
 /// Return an assoc list of resource item type to a base and a random component
-/// ex. return list(/obj/item/stack/material/ore/sand = list(3, 2))
+/// ex. return list(/obj/item/stack/material/ore/handful/sand = list(3, 2))
 /turf/proc/get_diggable_resources()
 	return null
 

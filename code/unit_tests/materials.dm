@@ -56,7 +56,7 @@
 					for(var/decl/stack_recipe/recipe as anything in recipes)
 						if(ispath(recipe.result_type, /turf)) // Cannot exist without a loc and doesn't have matter, cannot assess here.
 							continue
-						var/atom/product = LAZYACCESS(recipe.spawn_result(null, null, 1, material, reinforced), 1)
+						var/atom/product = LAZYACCESS(recipe.spawn_result(null, null, 1, material, reinforced, null), 1)
 						var/failed
 						if(!product)
 							failed = "no product returned"
@@ -68,10 +68,10 @@
 							if(!material && !reinforced)
 								if(length(product_obj.matter))
 									failed = "unsupplied material types"
-							else if(material && (product_obj.matter[material.type]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-								failed = "excessive base material ([recipe.req_amount]/[CEILING(product_obj.matter[material.type]/SHEET_MATERIAL_AMOUNT)])"
-							else if(reinforced && (product_obj.matter[reinforced.type]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-								failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product_obj.matter[reinforced.type]/SHEET_MATERIAL_AMOUNT)])"
+							else if(material && (product_obj.matter[material.type]) > recipe.req_amount)
+								failed = "excessive base material ([recipe.req_amount]/[CEILING(product_obj.matter[material.type])])"
+							else if(reinforced && (product_obj.matter[reinforced.type]) > recipe.req_amount)
+								failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product_obj.matter[reinforced.type])])"
 							else
 								for(var/mat in product_obj.matter)
 									if(mat != material?.type && mat != reinforced?.type)

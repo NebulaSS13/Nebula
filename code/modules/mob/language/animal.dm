@@ -26,8 +26,7 @@
 /decl/language/animal/scramble(mob/living/speaker, input, list/known_languages)
 	if(isanimal(speaker))
 		var/mob/living/simple_animal/critter = speaker
-		if(length(critter.speak))
-			return pick(critter.speak)
+		return DEFAULTPICK(critter.emote_speech, "...")
 	return "..."
 
 /decl/language/animal/get_spoken_verb(mob/living/speaker, msg_end)

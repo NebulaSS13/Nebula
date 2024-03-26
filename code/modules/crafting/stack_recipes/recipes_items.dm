@@ -3,6 +3,7 @@
 	result_type       = /obj/item/grenade/chem_grenade
 	difficulty        = MAT_VALUE_VERY_HARD_DIY
 	required_material = /decl/material/solid/metal/aluminium
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/candle
 	result_type       = /obj/item/flame/candle
@@ -12,11 +13,9 @@
 /decl/stack_recipe/paper_sheets
 	name              = "sheet of paper"
 	result_type       = /obj/item/paper
-	res_amount        = 4
-	max_res_amount    = 30
 	required_material = /decl/material/solid/organic/paper
 
-/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	. = ..()
 	if(amount <= 1)
 		return .

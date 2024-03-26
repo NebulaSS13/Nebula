@@ -132,12 +132,12 @@
 				if(held_card)
 					held_card.dropInto(loc)
 
-					if(ishuman(usr) && !usr.get_active_hand())
+					if(ishuman(usr) && !usr.get_active_held_item())
 						usr.put_in_hands(held_card)
 					held_card = null
 					SSnano.update_uis(src)
 				else
-					var/obj/item/I = usr.get_active_hand()
+					var/obj/item/I = usr.get_active_held_item()
 					if (istype(I, /obj/item/card/id))
 						if(!usr.try_unequip(I, src))
 							return

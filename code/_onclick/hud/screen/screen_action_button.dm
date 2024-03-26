@@ -61,6 +61,8 @@
 	update_icon()
 
 /obj/screen/action_button/hide_toggle/handle_click(mob/user, params)
+	if(!istype(user.hud_used))
+		return
 	user.hud_used.action_buttons_hidden = !user.hud_used.action_buttons_hidden
 	hidden = user.hud_used.action_buttons_hidden
 	if(hidden)

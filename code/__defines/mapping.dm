@@ -40,3 +40,7 @@ if(other_init) { \
 #define MAP_TEMPLATE_CATEGORY_SPACE           "space_template"
 #define MAP_TEMPLATE_CATEGORY_AWAYSITE        "awaysite_template"
 #define MAP_TEMPLATE_CATEGORY_LANDMARK_LOADED "landmark_template"
+
+/// Used to filter out some crafting recipes.
+#define MAP_TECH_LEVEL_ANY     0
+#define MAP_TECH_LEVEL_SPACE 100

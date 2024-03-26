@@ -26,7 +26,7 @@
 		if(affecting)
 			affecting.add_pain(CEILING(power/2))
 		else
-			adjustHalLoss(CEILING(power/2))
+			take_damage(PAIN, CEILING(power/2))
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks
@@ -100,14 +100,15 @@
 
 
 	if(prob(1))
-		switch(getToxLoss())
+		var/tox_damage = get_damage(TOX)
+		switch(tox_damage)
 			if(5 to 17)
-				custom_pain("Your body stings slightly.", getToxLoss())
+				custom_pain("Your body stings slightly.", tox_damage)
 			if(17 to 35)
-				custom_pain("Your body stings.", getToxLoss())
+				custom_pain("Your body stings.", tox_damage)
 			if(35 to 60)
-				custom_pain("Your body stings strongly.", getToxLoss())
+				custom_pain("Your body stings strongly.", tox_damage)
 			if(60 to 100)
-				custom_pain("Your whole body hurts badly.", getToxLoss())
+				custom_pain("Your whole body hurts badly.", tox_damage)
 			if(100 to INFINITY)
-				custom_pain("Your body aches all over, it's driving you mad.", getToxLoss())
+				custom_pain("Your body aches all over, it's driving you mad.", tox_damage)

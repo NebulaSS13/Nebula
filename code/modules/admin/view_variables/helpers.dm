@@ -20,12 +20,12 @@
 		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
-		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BRUTE]'>[getBruteLoss()]</a>
-		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BURN]'>[getFireLoss()]</a>
-		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[TOX]'>[getToxLoss()]</a>
-		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[OXY]'>[getOxyLoss()]</a>
-		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[CLONE]'>[getCloneLoss()]</a>
-		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BP_BRAIN]'>[getBrainLoss()]</a>
+		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BRUTE]'>[get_damage(BRUTE)]</a>
+		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BURN]'>[get_damage(BURN)]</a>
+		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[TOX]'>[get_damage(TOX)]</a>
+		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[OXY]'>[get_damage(OXY)]</a>
+		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[CLONE]'>[get_damage(CLONE)]</a>
+		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BP_BRAIN]'>[get_damage(BRAIN)]</a>
 		</font>
 		"}
 

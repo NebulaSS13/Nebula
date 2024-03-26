@@ -66,7 +66,7 @@
 
 	// Other general warnings.
 	if(skill_level >= SKILL_BASIC)
-		switch(C.getOxyLoss())
+		switch(C.get_damage(OXY))
 			if(0 to 25)
 				dat += "<span class='scan_green'>Subject oxygen levels nominal.</span>"
 			if(25 to 50)

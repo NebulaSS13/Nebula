@@ -208,7 +208,7 @@
 //	icon states.
 
 /obj/item/chems/drinks/teapot
-	name = "teapot"
+	name = "china teapot"
 	desc = "An elegant teapot. It simply oozes class."
 	icon_state = "teapot"
 	item_state = "teapot"

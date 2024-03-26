@@ -143,9 +143,9 @@
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
 			if(BRUTE)
-				adjustBruteLoss(Proj.damage)
+				take_damage(BRUTE, Proj.damage)
 			if(BURN)
-				adjustFireLoss(Proj.damage)
+				take_damage(BURN, Proj.damage)
 	Proj.on_hit(src,100) //wow this is a terrible hack
 	return 100
 
@@ -461,8 +461,12 @@
 	if(istype(idcard) && !stat && !(ckey && !client) && !is_type_in_list(idcard, exceptions))
 		LAZYDISTINCTADD(., idcard)
 
-/mob/living/silicon/get_total_life_damage()
-	return (getBruteLoss() + getFireLoss())
+/mob/living/silicon/get_life_damage_types()
+	var/static/list/life_damage_types = list(
+		BURN,
+		BRUTE
+	)
+	return life_damage_types
 
 /mob/living/silicon/get_death_message(gibbed)
 	return "gives one shrill beep before falling lifeless."

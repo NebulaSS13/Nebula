@@ -378,7 +378,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = intent_numeric((intent_numeric(a_intent)+1) % 4)
 			if("left")
 				a_intent = intent_numeric((intent_numeric(a_intent)+3) % 4)
-		if(hud_used && hud_used.action_intent)
+		if(istype(hud_used) && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
 	else if(isrobot(src))
@@ -389,7 +389,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = I_HURT
 			if("right","left")
 				a_intent = intent_numeric(intent_numeric(a_intent) - 3)
-		if(hud_used && hud_used.action_intent)
+		if(istype(hud_used) && hud_used.action_intent)
 			if(a_intent == I_HURT)
 				hud_used.action_intent.icon_state = I_HURT
 			else
@@ -562,10 +562,10 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return can_admin_interact() && ..(ghost_multitool)
 
 /mob/living/carbon/human/get_multitool()
-	return ..(get_active_hand())
+	return ..(get_active_held_item())
 
 /mob/living/silicon/robot/get_multitool()
-	return ..(get_active_hand())
+	return ..(get_active_held_item())
 
 /mob/living/silicon/ai/get_multitool()
 	return ..(aiMulti)
@@ -706,7 +706,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
  */
 /mob/proc/get_accessible_pen()
 	//We might save a few loop iterations by just looking in the active hand first
-	var/obj/item/I = get_active_hand()
+	var/obj/item/I = get_active_held_item()
 	if(IS_PEN(I))
 		return I
 	//Look if we're holding a pen elsewhere

@@ -8,42 +8,42 @@
 
 /decl/hierarchy/supply_pack/flooring/carpetblue
 	name = "Blue and gold carpet"
-	contains = list(/obj/item/stack/tile/carpetblue/fifty)
+	contains = list(/obj/item/stack/tile/carpet/blue/fifty)
 	containername = "blue and gold carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetblue2
 	name = "Pale blue carpet"
-	contains = list(/obj/item/stack/tile/carpetblue2/fifty)
+	contains = list(/obj/item/stack/tile/carpet/blue2/fifty)
 	containername = "pale blue carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetblue3
 	name = "Sea blue carpet"
-	contains = list(/obj/item/stack/tile/carpetblue3/fifty)
+	contains = list(/obj/item/stack/tile/carpet/blue3/fifty)
 	containername = "sea blue carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetpurple
 	name = "Magenta carpet"
-	contains = list(/obj/item/stack/tile/carpetmagenta/fifty)
+	contains = list(/obj/item/stack/tile/carpet/magenta/fifty)
 	containername = "magenta carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetpurple
 	name = "Purple carpet"
-	contains = list(/obj/item/stack/tile/carpetpurple/fifty)
+	contains = list(/obj/item/stack/tile/carpet/purple/fifty)
 	containername = "purple carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetorange
 	name = "Orange carpet"
-	contains = list(/obj/item/stack/tile/carpetorange/fifty)
+	contains = list(/obj/item/stack/tile/carpet/orange/fifty)
 	containername = "orange carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetgreen
 	name = "Green carpet"
-	contains = list(/obj/item/stack/tile/carpetgreen/fifty)
+	contains = list(/obj/item/stack/tile/carpet/green/fifty)
 	containername = "green carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetred
 	name = "Red carpet"
-	contains = list(/obj/item/stack/tile/carpetred/fifty)
+	contains = list(/obj/item/stack/tile/carpet/red/fifty)
 	containername = "red carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/linoleum

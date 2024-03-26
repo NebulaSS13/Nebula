@@ -186,10 +186,11 @@ var/global/list/outfits_decls_by_type_
 
 	if(H.species && !(OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR & equip_adjustments))
 		var/decl/survival_box_option/chosen_survival_box = H?.client?.prefs.survival_box_choice
-		if(outfit_flags & OUTFIT_EXTENDED_SURVIVAL)
-			H.species.equip_survival_gear(H, /obj/item/storage/box/engineer)
-		else if(chosen_survival_box?.box_type)
-			H.species.equip_survival_gear(H, chosen_survival_box.box_type)
+		if(chosen_survival_box?.box_type)
+			if(outfit_flags & OUTFIT_EXTENDED_SURVIVAL)
+				H.species.equip_survival_gear(H, /obj/item/storage/box/engineer)
+			else
+				H.species.equip_survival_gear(H, chosen_survival_box.box_type)
 
 	if(H.client?.prefs?.give_passport)
 		global.using_map.create_passport(H)

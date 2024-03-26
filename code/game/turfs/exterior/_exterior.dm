@@ -75,7 +75,7 @@
 			return TRUE
 
 		var/obj/item/stack/stack = W
-		if(!do_after(user, 1 SECOND, src) || user.get_active_hand() != stack || get_physical_height() >= 0)
+		if(!do_after(user, 1 SECOND, src) || user.get_active_held_item() != stack || get_physical_height() >= 0)
 			return TRUE
 
 		// At best, you get about 5 pieces of clay or dirt from digging the

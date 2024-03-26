@@ -79,7 +79,7 @@
 
 // Proc helper for attachment verb.
 /mob/living/carbon/human/proc/check_can_attach_modular_limb(var/obj/item/organ/external/E)
-	if(is_on_special_ability_cooldown() || get_active_hand() != E)
+	if(is_on_special_ability_cooldown() || get_active_held_item() != E)
 		return FALSE
 	if(incapacitated() || restrained())
 		to_chat(src, SPAN_WARNING("You can't do that in your current state!"))
@@ -136,7 +136,7 @@
 	set desc = "Attach a replacement limb."
 	set src = usr
 
-	var/obj/item/organ/external/E = get_active_hand()
+	var/obj/item/organ/external/E = get_active_held_item()
 	if(!check_can_attach_modular_limb(E))
 		return FALSE
 	if(!do_after(src, 2 SECONDS, src))

@@ -12,6 +12,7 @@
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/organic/plastic //TODO: rubber
 	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_REINFORCEMENT)
+	replaced_in_loadout = FALSE
 
 /obj/item/clothing/gloves/insulated/cheap                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."

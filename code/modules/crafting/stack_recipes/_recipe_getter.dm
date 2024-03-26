@@ -35,6 +35,8 @@ var/global/list/cached_recipes = list()
 		var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/stack_recipe)
 		for(var/recipe_type in all_recipes)
 			var/decl/stack_recipe/recipe = all_recipes[recipe_type]
+			if(global.using_map.map_tech_level < recipe.available_to_map_tech_level)
+				continue
 			if(recipe.can_be_made_from(stack_type, tool_type, mat, reinf_mat))
 				if(recipe.category)
 					LAZYDISTINCTADD(grouped_recipes[recipe.category], recipe)

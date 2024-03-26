@@ -717,7 +717,7 @@
 /mob/proc/can_autofire(var/obj/item/gun/autofiring, var/atom/autofiring_at)
 	if(!client || !(autofiring_at in view(client.view,src)))
 		return FALSE
-	if(get_active_hand() != autofiring || incapacitated())
+	if(get_active_held_item() != autofiring || incapacitated())
 		return FALSE
 	return TRUE
 

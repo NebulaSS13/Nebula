@@ -137,7 +137,7 @@
 		return FALSE
 	if(!MayAdjust(user))
 		return FALSE
-	if(W != user.get_active_hand())
+	if(W != user.get_active_held_item())
 		return FALSE
 
 	if(!CanPhysicallyInteract(user))

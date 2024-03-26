@@ -135,6 +135,7 @@
 	overlay_base_icon = "coffeecup" // so that subtypes work properly
 	rim_pos = @'{"y":22,"x_left":12,"x_right":20}'
 	filling_overlayed = TRUE
+	material = /decl/material/solid/stone/ceramic
 
 /obj/item/chems/drinks/glass2/coffeecup/black
 	name = "black coffee cup"
@@ -182,13 +183,10 @@
 	base_name = "rainbow cup"
 
 /obj/item/chems/drinks/glass2/coffeecup/metal
-	name = "metal coffee cup"
 	desc = "A metal coffee cup. You're not sure which metal."
 	base_icon = "coffeecup_metal"
 	icon_state = "coffeecup_metal"
-	base_name = "metal cup"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	material = /decl/material/solid/metal/stainlesssteel
 
 /obj/item/chems/drinks/glass2/coffeecup/STC
 	name = "\improper ICCG coffee cup"

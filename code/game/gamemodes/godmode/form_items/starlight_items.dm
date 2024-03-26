@@ -100,7 +100,7 @@
 /obj/item/knife/ritual/shadow/apply_hit_effect(var/mob/living/target, var/mob/living/user, var/hit_zone)
 	. = ..()
 	if(charge)
-		if(target.getBruteLoss() > 15)
+		if(target.get_damage(BRUTE) > 15)
 			var/datum/reagents/R = target.reagents
 			if(!R)
 				return
@@ -108,7 +108,7 @@
 			new /obj/effect/temporary(get_turf(target),3, 'icons/effects/effects.dmi', "fire_goon")
 			charge--
 	else
-		user.adjustFireLoss(5)
+		user.take_damage(BURN, 5)
 		if(prob(5))
 			to_chat(user, "<span class='warning'>\The [src] appears to be out of power!</span>")
 		new /obj/effect/temporary(get_turf(user),3, 'icons/effects/effects.dmi', "fire_goon")

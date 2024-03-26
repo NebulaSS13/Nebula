@@ -16,14 +16,13 @@
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
-	var/painted_color
 	var/broken =    FALSE
 	var/neighbor_status = 0
 
 /obj/structure/railing/mapped
 	anchored = TRUE
 	color = COLOR_ORANGE
-	painted_color = COLOR_ORANGE
+	paint_color = COLOR_ORANGE
 
 /obj/structure/railing/mapped/no_density
 	density = FALSE
@@ -55,9 +54,6 @@
 		desc = "A simple [material.solid_name] railing designed to protect against careless trespass."
 	else
 		..()
-
-/obj/structure/railing/update_material_colour(override_colour)
-	. = ..(painted_color || override_colour)
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE

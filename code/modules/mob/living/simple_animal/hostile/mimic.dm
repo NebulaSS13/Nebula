@@ -134,7 +134,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	return ..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping
-	wander = 0
+	wander = FALSE
 	stop_automated_movement = 1
 
 	var/awake = 0

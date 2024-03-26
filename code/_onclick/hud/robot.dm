@@ -1,7 +1,7 @@
 var/global/obj/screen/robot_inventory
 
 /mob/living/silicon/robot
-	hud_type = /datum/hud/robot
+	hud_used = /datum/hud/robot
 
 /decl/ui_style/robot
 	name = "Stationbound"

@@ -21,18 +21,13 @@
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
 /mob/living/carbon/human
-	var/oxygen_alert = 0
-	var/toxins_alert = 0
-	var/co2_alert = 0
-	var/fire_alert = 0
-	var/pressure_alert = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
 		return FALSE
-	last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+	last_pain = null // Clear the last cached pain value so further calls won't use an old value.
 	//Organs and blood
 	handle_organs()
 	handle_shock()
@@ -52,7 +47,7 @@
 			to_chat(src, SPAN_WARNING("You are exhausted!"))
 			if(MOVING_QUICKLY(src))
 				set_moving_slowly()
-	if(last_stamina != stamina && hud_used)
+	if(last_stamina != stamina && istype(hud_used))
 		hud_used.update_stamina()
 
 /mob/living/carbon/human/proc/handle_stamina()
@@ -144,7 +139,7 @@
 		cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
-	if(getFireLoss())
+	if(get_damage(BURN))
 		if((MUTATION_COLD_RESISTANCE in mutations) || (prob(1)))
 			heal_organ_damage(0,1)
 
@@ -195,7 +190,7 @@
 		var/loc_temp = environment.temperature
 
 		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
-			pressure_alert = 0
+			SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 0)
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection (convection)
@@ -215,7 +210,6 @@
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= get_mob_temperature_threshold(HEAT_LEVEL_1))
 		//Body temperature is too hot.
-		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 		var/burn_dam = 0
 		if(bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_2))
@@ -225,10 +219,10 @@
 		else
 			burn_dam = HEAT_DAMAGE_LEVEL_3
 		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
-		fire_alert = max(fire_alert, 2)
+		SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 2)
 
 	else if(bodytemperature <= get_mob_temperature_threshold(COLD_LEVEL_1))
-		fire_alert = max(fire_alert, 1)
+		SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		var/burn_dam = 0
@@ -242,7 +236,7 @@
 		set_stasis(get_cryogenic_factor(bodytemperature), STASIS_COLD)
 		if(!has_chemical_effect(CE_CRYO, 1))
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
-			fire_alert = max(fire_alert, 1)
+			SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 1)
 
 	// Account for massive pressure differences.  Done by Polymorph
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
@@ -251,13 +245,13 @@
 	if(adjusted_pressure >= species.hazard_high_pressure)
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
 		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
-		pressure_alert = 2
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 2)
 	else if(adjusted_pressure >= species.warning_high_pressure)
-		pressure_alert = 1
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 1)
 	else if(adjusted_pressure >= species.warning_low_pressure)
-		pressure_alert = 0
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 0)
 	else if(adjusted_pressure >= species.hazard_low_pressure)
-		pressure_alert = -1
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, -1)
 	else
 		var/list/obj/item/organ/external/parts = get_damageable_organs()
 		for(var/obj/item/organ/external/O in parts)
@@ -266,8 +260,8 @@
 			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
-			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
-		pressure_alert = -2
+			take_damage(OXY, 4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
+		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, -2)
 
 	return
 
@@ -369,7 +363,7 @@
 		for(var/obj/item/I in src)
 			if(I.contaminated)
 				total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
-		adjustToxLoss(total_contamination)
+		take_damage(TOX, total_contamination)
 
 	. = ..()
 	if(!.)
@@ -384,7 +378,7 @@
 	if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
 		set_stat(UNCONSCIOUS)
 		animate_tail_reset()
-		adjustHalLoss(-3)
+		heal_damage(PAIN, 3)
 		if(prob(2) && is_asystole() && isSynthetic())
 			visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
 	else
@@ -402,13 +396,13 @@
 			ADJ_STATUS(src, STAT_DIZZY, -15)
 		if(HAS_STATUS(src, STAT_JITTER))
 			ADJ_STATUS(src, STAT_JITTER, -15)
-		adjustHalLoss(-3)
+		heal_damage(PAIN, 3)
 	else
 		if(HAS_STATUS(src, STAT_DIZZY))
 			ADJ_STATUS(src, STAT_DIZZY, -3)
 		if(HAS_STATUS(src, STAT_JITTER))
 			ADJ_STATUS(src, STAT_JITTER, -3)
-		adjustHalLoss(-1)
+		heal_damage(PAIN, 1)
 
 	if(HAS_STATUS(src, STAT_DROWSY))
 		SET_STATUS_MAX(src, STAT_BLURRY, 2)
@@ -422,7 +416,6 @@
 
 
 /mob/living/carbon/human/handle_regular_hud_updates()
-	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
 	if(life_tick%30==15)
 		hud_updateflag = 1022
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
@@ -450,7 +443,7 @@
 		else
 			clear_fullscreen("crit")
 			//Oxygen damage overlay
-			if(getOxyLoss())
+			if(get_damage(OXY))
 				var/severity = 0
 				switch(getOxyLossPercent())
 					if(10 to 20)		severity = 1
@@ -465,7 +458,7 @@
 				clear_fullscreen("oxy")
 
 		//Fire and Brute damage overlay (BSSR)
-		var/hurtdamage = src.getBruteLoss() + src.getFireLoss() + damageoverlaytemp
+		var/hurtdamage = src.get_damage(BRUTE) + src.get_damage(BURN) + damageoverlaytemp
 		damageoverlaytemp = 0 // We do this so we can detect if someone hits us or not.
 		if(hurtdamage)
 			var/severity = 0
@@ -548,13 +541,13 @@
 				cells.icon_state = "charge-empty"
 
 		if(pressure)
-			pressure.icon_state = "pressure[pressure_alert]"
+			pressure.icon_state = "pressure[GET_HUD_ALERT(src, /decl/hud_element/condition/pressure)]"
 		if(toxin)
-			toxin.icon_state = "tox[toxins_alert ? "1" : "0"]"
+			toxin.icon_state = "tox[GET_HUD_ALERT(src, /decl/hud_element/condition/toxins)]"
 		if(oxygen)
-			oxygen.icon_state = "oxy[oxygen_alert ? "1" : "0"]"
+			oxygen.icon_state = "oxy[GET_HUD_ALERT(src, /decl/hud_element/condition/oxygen)]"
 		if(fire)
-			fire.icon_state = "fire[fire_alert ? fire_alert : 0]"
+			fire.icon_state = "fire[GET_HUD_ALERT(src, /decl/hud_element/condition/fire)]"
 
 		if(bodytemp)
 			if (!species)
@@ -616,7 +609,7 @@
 		else if (should_have_organ(tag))
 			vomit_score += 45
 	if(has_chemical_effect(CE_TOXIN, 1) || radiation)
-		vomit_score += 0.5 * getToxLoss()
+		vomit_score += 0.5 * get_damage(TOX)
 	if(has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
 		vomit_score += 10 * GET_CHEMICAL_EFFECT(src, CE_ALCOHOL_TOXIC)
 	if(has_chemical_effect(CE_ALCOHOL, 1))

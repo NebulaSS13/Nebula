@@ -45,7 +45,7 @@
 		return FALSE
 
 	if(!tray.seed)
-		var/obj/item/seeds/seeds = get_active_hand()
+		var/obj/item/seeds/seeds = get_active_held_item()
 		if(istype(seeds))
 			if(try_unequip(seeds))
 				tray.plant_seed(src, seeds)

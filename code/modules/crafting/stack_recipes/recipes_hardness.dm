@@ -40,10 +40,12 @@
 /decl/stack_recipe/hardness/drill_head
 	result_type       = /obj/item/drill_head
 	difficulty        = MAT_VALUE_EASY_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/baseball_bat
 	result_type       = /obj/item/twohanded/baseballbat
 	difficulty        = MAT_VALUE_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE // similar to boxes, not thematically appropriate to low tech
 
 /decl/stack_recipe/hardness/ashtray
 	result_type       = /obj/item/ashtray
@@ -56,6 +58,7 @@
 
 /decl/stack_recipe/hardness/clipboard
 	result_type       = /obj/item/clipboard
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/cross
 	result_type       = /obj/item/cross

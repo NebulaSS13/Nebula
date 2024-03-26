@@ -2,10 +2,10 @@
 	name = "goose"
 	desc = "A large waterfowl, known for its beauty and quick temper when provoked."
 	icon = 'icons/mob/simple_animal/goose.dmi'
-	speak = list("Honk!")
-	speak_emote = list("honks")
-	emote_hear = list("honks","flaps its wings","clacks")
-	emote_see = list("flaps its wings", "scratches the ground")
+	speak_emote  = list("honks")
+	emote_speech = list("Honk!")
+	emote_hear   = list("honks","flaps its wings","clacks")
+	emote_see    = list("flaps its wings", "scratches the ground")
 	natural_weapon = /obj/item/natural_weapon/goosefeet
 	max_health = 45
 	pass_flags = PASS_FLAG_TABLE
@@ -55,8 +55,8 @@
 	if(!loose && prob(25) && (attacking_with && attacking_with.force >= loose_threshold)) //second wind
 		loose = TRUE
 		set_max_health(initial(max_health) * 1.5)
-		setBruteLoss(0)
-		setFireLoss(0)
+		set_damage(BRUTE, 0)
+		set_damage(BURN, 0)
 		enrage_potency = enrage_potency_loose
 		desc += " The [name] is loose! Oh no!"
 		update_icon()

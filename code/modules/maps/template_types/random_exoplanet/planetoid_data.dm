@@ -244,11 +244,11 @@
 ///Registers to neccessary processors and begin running all processing needed by the planet
 /datum/planetoid_data/proc/begin_processing()
 	if(day_duration)
-		SSdaycyle.add_linked_levels(get_linked_level_ids(), starts_at_night, day_duration)
+		SSdaycycle.add_linked_levels(get_linked_level_ids(), starts_at_night, day_duration)
 
 ///Stop running any processing needed by the planet, and unregister from processors.
 /datum/planetoid_data/proc/end_processing()
-	SSdaycyle.remove_linked_levels(topmost_level_id)
+	SSdaycycle.remove_linked_levels(topmost_level_id)
 
 //#TODO: Move this into some SS for planet processing stuff or something?
 /datum/planetoid_data/Process(wait, tick)

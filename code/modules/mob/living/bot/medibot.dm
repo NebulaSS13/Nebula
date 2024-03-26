@@ -308,22 +308,22 @@
 		return treatment_emag
 
 	// If they're injured, we're using a beaker, and they don't have on of the chems in the beaker
-	if(reagent_glass && use_beaker && ((H.getBruteLoss() >= heal_threshold) || (H.getToxLoss() >= heal_threshold) || (H.getToxLoss() >= heal_threshold) || (H.getOxyLoss() >= (heal_threshold + 15))))
+	if(reagent_glass && use_beaker && ((H.get_damage(BRUTE) >= heal_threshold) || (H.get_damage(TOX) >= heal_threshold) || (H.get_damage(TOX) >= heal_threshold) || (H.get_damage(OXY) >= (heal_threshold + 15))))
 		for(var/R in reagent_glass.reagents.reagent_volumes)
 			if(!H.reagents.has_reagent(R))
 				return 1
 			continue
 
-	if((H.getBruteLoss() >= heal_threshold) && (!H.reagents.has_reagent(treatment_brute)))
+	if((H.get_damage(BRUTE) >= heal_threshold) && (!H.reagents.has_reagent(treatment_brute)))
 		return treatment_brute //If they're already medicated don't bother!
 
-	if((H.getOxyLoss() >= (15 + heal_threshold)) && (!H.reagents.has_reagent(treatment_oxy)))
+	if((H.get_damage(OXY) >= (15 + heal_threshold)) && (!H.reagents.has_reagent(treatment_oxy)))
 		return treatment_oxy
 
-	if((H.getFireLoss() >= heal_threshold) && (!H.reagents.has_reagent(treatment_fire)))
+	if((H.get_damage(BURN) >= heal_threshold) && (!H.reagents.has_reagent(treatment_fire)))
 		return treatment_fire
 
-	if((H.getToxLoss() >= heal_threshold) && (!H.reagents.has_reagent(treatment_tox)))
+	if((H.get_damage(TOX) >= heal_threshold) && (!H.reagents.has_reagent(treatment_tox)))
 		return treatment_tox
 
 /mob/living/bot/medbot/proc/tip_over(mob/user)

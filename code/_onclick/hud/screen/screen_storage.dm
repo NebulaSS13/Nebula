@@ -15,7 +15,7 @@
 /obj/screen/storage/handle_click(mob/user, params)
 	var/obj/item/storage/storage_master = storage_master_ref?.resolve()
 	if(istype(storage_master) && !QDELETED(storage_master))
-		var/obj/item/I = user.get_active_hand()
+		var/obj/item/I = user.get_active_held_item()
 		if(I)
 			user.ClickOn(storage_master)
 		return TRUE

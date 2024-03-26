@@ -10,7 +10,8 @@
 	QDEL_NULL(typing_indicator)
 
 	unset_machine()
-	QDEL_NULL(hud_used)
+	if(istype(hud_used))
+		QDEL_NULL(hud_used)
 	if(active_storage)
 		active_storage.close(src)
 	if(istype(ability_master))
@@ -474,7 +475,7 @@
 	set name = "Activate Held Object"
 	set category = "Object"
 	set src = usr
-	var/obj/item/W = get_active_hand()
+	var/obj/item/W = get_active_held_item()
 	W?.attack_self(src)
 	return W
 
@@ -596,7 +597,7 @@
 	return 0
 
 /mob/living/carbon/human/pull_damage()
-	if(!lying || getBruteLoss() + getFireLoss() < 100)
+	if(!lying || get_damage(BRUTE) + get_damage(BURN) < 100)
 		return FALSE
 	for(var/obj/item/organ/external/e in get_external_organs())
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
@@ -829,8 +830,8 @@
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	LAZYREMOVE(embedded, implant)
-	adjustBruteLoss(5, do_update_health = FALSE)
-	adjustFireLoss(10)
+	take_damage(BRUTE, 5, do_update_health = FALSE)
+	take_damage(BURN, 10)
 	. = ..()
 
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
@@ -977,21 +978,9 @@
 
 //Throwing stuff
 
-/mob/proc/toggle_throw_mode()
-	if (src.in_throw_mode)
-		throw_mode_off()
-	else
-		throw_mode_on()
-
-/mob/proc/throw_mode_off()
-	src.in_throw_mode = 0
-	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
-		src.throw_icon.icon_state = "act_throw_off"
-
-/mob/proc/throw_mode_on()
-	src.in_throw_mode = 1
-	if(src.throw_icon)
-		src.throw_icon.icon_state = "act_throw_on"
+/mob/proc/toggle_throw_mode(force_set)
+	in_throw_mode = isnull(force_set) ? !in_throw_mode : force_set
+	throw_icon?.icon_state = "act_throw_[in_throw_mode ? "on" : "off"]"
 
 /mob/proc/toggle_antag_pool()
 	set name = "Toggle Add-Antag Candidacy"
@@ -1100,10 +1089,11 @@
 
 	// Work out if we have any brain damage impacting our dexterity.
 	var/dex_malus = 0
-	if(getBrainLoss())
+	var/braindamage = get_damage(BRAIN)
+	if(braindamage)
 		var/brainloss_threshold = get_config_value(/decl/config/num/dex_malus_brainloss_threshold)
-		if(getBrainLoss() > brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
-			dex_malus = clamp(CEILING((getBrainLoss()-brainloss_threshold)/10), 0, length(global.dexterity_levels))
+		if(braindamage > brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
+			dex_malus = clamp(CEILING((braindamage-brainloss_threshold)/10), 0, length(global.dexterity_levels))
 			if(dex_malus > 0)
 				dex_malus = global.dexterity_levels[dex_malus]
 
@@ -1464,3 +1454,7 @@
 
 /mob/proc/nervous_system_failure()
 	return FALSE
+
+/mob/proc/mob_throw_item(atom/target)
+	return
+

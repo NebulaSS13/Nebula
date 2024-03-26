@@ -18,13 +18,19 @@
 /decl/stack_recipe/planks/zipgunframe
 	result_type            = /obj/item/zipgunframe
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/planks/coilgun
 	result_type            = /obj/item/coilgun_assembly
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/planks/stick
 	result_type            = /obj/item/stick
+	difficulty             = MAT_VALUE_EASY_DIY
+
+/decl/stack_recipe/planks/bucket
+	result_type            = /obj/item/chems/glass/bucket/wood
 	difficulty             = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/planks/noticeboard
@@ -33,7 +39,7 @@
 	difficulty             = MAT_VALUE_HARD_DIY
 	set_dir_on_spawn       = FALSE
 
-/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	. = ..()
 	if(user)
 		for(var/obj/structure/noticeboard/board in .)
@@ -46,7 +52,7 @@
 	var/prosthetic_species = SPECIES_HUMAN
 	var/prosthetic_model   = /decl/bodytype/prosthetic/wooden
 
-/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	. = ..()
 	for(var/obj/item/organ/external/limb in .)
 		limb.set_species(prosthetic_species)
@@ -88,16 +94,16 @@
 
 /decl/stack_recipe/planks/furniture/sofa
 	name                   = "sofa, middle"
-	result_type            = /obj/structure/bed/sofa/middle
+	result_type            = /obj/structure/bed/sofa/middle/unpadded
 	category               = "seating"
 
 /decl/stack_recipe/planks/furniture/sofa/left
 	name                   = "sofa, left"
-	result_type            = /obj/structure/bed/sofa/left
+	result_type            = /obj/structure/bed/sofa/left/unpadded
 
 /decl/stack_recipe/planks/furniture/sofa/right
 	name                   = "sofa, right"
-	result_type            = /obj/structure/bed/sofa/right
+	result_type            = /obj/structure/bed/sofa/right/unpadded
 
 /decl/stack_recipe/planks/furniture/bookcase
 	result_type            = /obj/structure/bookcase
@@ -114,3 +120,6 @@
 
 /decl/stack_recipe/planks/furniture/chest
 	result_type            = /obj/structure/closet/crate/chest
+
+/decl/stack_recipe/planks/furniture/meathook
+	result_type            = /obj/structure/meat_hook/improvised

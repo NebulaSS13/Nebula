@@ -6,7 +6,7 @@
 	var/detail_decal
 
 /turf/exterior/seafloor/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
+	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/handful/sand = list(3, 2))
 
 /turf/exterior/seafloor/flooded
 	flooded = /decl/material/liquid/water

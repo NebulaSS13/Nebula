@@ -70,50 +70,47 @@
 
 /obj/item/towel/random/Initialize()
 	. = ..()
-	color = get_random_colour()
+	set_color(get_random_colour())
 
 /obj/item/towel/gold
 	name = "gold towel"
-	color = "#ffd700"
+	paint_color = "#ffd700"
 
 /obj/item/towel/red
 	name = "red towel"
-	color = "#ff0000"
+	paint_color = "#ff0000"
 
 /obj/item/towel/purple
 	name = "purple towel"
-	color = "#800080"
+	paint_color = "#800080"
 
 /obj/item/towel/cyan
 	name = "cyan towel"
-	color = "#00ffff"
+	paint_color = "#00ffff"
 
 /obj/item/towel/orange
 	name = "orange towel"
-	color = "#ff8c00"
+	paint_color = "#ff8c00"
 
 /obj/item/towel/pink
 	name = "pink towel"
-	color = "#ff6666"
+	paint_color = "#ff6666"
 
 /obj/item/towel/light_blue
 	name = "light blue towel"
-	color = "#3fc0ea"
+	paint_color = "#3fc0ea"
 
 /obj/item/towel/black
 	name = "black towel"
-	color = "#222222"
-	material = /decl/material/solid/organic/cloth/black
+	paint_color = "#222222"
 
 /obj/item/towel/brown
 	name = "black towel"
-	color = "#854636"
-	material = /decl/material/solid/organic/cloth/beige
+	paint_color = "#854636"
 
 /obj/item/towel/fleece // loot from the king of goats. it's a golden towel
 	name = "golden fleece"
 	desc = "The legendary Golden Fleece of Jason made real."
-	color = "#ffd700"
 	force = 1
 	attack_verb = list("smote")
 	material = /decl/material/solid/metal/gold

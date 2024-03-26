@@ -179,7 +179,7 @@
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
 			while (count-- && count >= 0)
-				var/obj/item/chems/pill/P = new/obj/item/chems/pill(loc)
+				var/obj/item/chems/pill/dispensed/P = new(loc)
 				if(!name) name = reagents.get_primary_reagent_name()
 				P.SetName("[name] pill")
 				P.icon_state = "pill"+pillsprite

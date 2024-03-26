@@ -12,7 +12,7 @@
 	remains_type = /obj/effect/decal/cleanable/dirt
 	hitsound     = 'sound/effects/glass_crack2.ogg'
 	snd_cut      = 'sound/effects/break_ceramic.ogg'
-	material     = /decl/material/solid/stone/ceramic
+	material     = /decl/material/solid/stone/pottery
 	matter       = list(
 		/decl/material/solid/clay                = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/sand                = MATTER_AMOUNT_REINFORCEMENT,

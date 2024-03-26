@@ -111,8 +111,8 @@
 		if(!say_understands(speaker,language))
 			if(isanimal(speaker))
 				var/mob/living/simple_animal/S = speaker
-				if(S.speak && S.speak.len)
-					message = pick(S.speak)
+				if(LAZYLEN(S.emote_speech))
+					message = pick(S.emote_speech)
 				else
 					return
 			else

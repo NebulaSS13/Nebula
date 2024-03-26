@@ -6,7 +6,7 @@
 		if(!get_empty_hand_slot())
 			to_chat(src, SPAN_WARNING("Your hands are full!"))
 			return FALSE
-	else if(get_active_hand())
+	else if(get_active_held_item())
 		to_chat(src, SPAN_WARNING("Your [parse_zone(get_active_held_item_slot())] is full!"))
 		return FALSE
 	if(LAZYLEN(grabbed_by))

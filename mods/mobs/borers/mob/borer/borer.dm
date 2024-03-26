@@ -103,7 +103,7 @@
 	if(!host || host.stat)
 		return
 
-	if(prob(host.getBrainLoss()/20))
+	if(prob(host.get_damage(BRAIN)/20))
 		INVOKE_ASYNC(host, TYPE_PROC_REF(/mob, say), "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 	if(stat)
@@ -134,7 +134,7 @@
 			host.release_control()
 			return
 		if(prob(5))
-			host.adjustBrainLoss(0.1)
+			host.take_damage(BRAIN, 0.1)
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()

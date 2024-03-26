@@ -95,8 +95,8 @@
 	name = "Farmbot"
 	desc = "The botanist's best friend. There's something slightly odd about the way it moves."
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/farmbot.dmi'
-	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
-	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
+	emote_speech = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
+	emote_see    = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
 	faction = "farmbots"
 	max_health = 225
 	malfunctioning = 0
@@ -107,7 +107,7 @@
 		projectiletype = /obj/item/projectile/beam/drone/weak
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
-	adjustFireLoss(rand(5,10) * (severity + 1))
+	take_damage(BRUTE, rand(5,10) * (severity + 1))
 	disabled = rand(15, 30)
 	malfunctioning = 1
 	hostile_drone = 1

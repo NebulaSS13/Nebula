@@ -24,11 +24,6 @@
 	var/decal_blend = BLEND_MULTIPLY
 	var/power_use = 0
 
-/obj/item/mech_component/set_color(new_color)
-	var/last_colour = color
-	color = new_color
-	return color != last_colour
-
 /obj/item/mech_component/emp_act(var/severity)
 	take_burn_damage(rand((10 - (severity*3)),15-(severity*4)))
 	for(var/obj/item/thing in contents)
