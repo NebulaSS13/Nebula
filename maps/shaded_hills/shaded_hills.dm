@@ -11,6 +11,7 @@
 	#include "outfits/_outfits.dm"
 
 	#include "shaded_hills_currency.dm"
+	#include "shaded_hills_map.dm"
 	#include "shaded_hills_skills.dm"
 	#include "shaded_hills_turfs.dm"
 
@@ -21,10 +22,3 @@
 #elif !defined(MAP_OVERRIDE)
 	#warn A map has already been included, ignoring Shaded Hills
 #endif
-
-/datum/map/shaded_hills
-	default_species = SPECIES_KOBALOI
-	loadout_categories = list(
-		/decl/loadout_category/fantasy/clothing,
-		/decl/loadout_category/fantasy/utility
-	)
