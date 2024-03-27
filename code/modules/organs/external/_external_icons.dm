@@ -131,6 +131,11 @@ var/global/list/organ_icon_cache = list()
 /obj/item/organ/external/proc/get_sprite_accessories_by_category(var/accessory_category)
 	return LAZYACCESS(_sprite_accessories, accessory_category)
 
+/obj/item/organ/external/proc/get_sprite_accessory_categories()
+	. = list()
+	for(var/category_type in _sprite_accessories)
+		. += GET_DECL(category_type)
+
 /obj/item/organ/external/proc/get_sprite_accessory_by_category(var/accessory_category)
 	var/list/accessories = get_sprite_accessories_by_category(accessory_category)
 	if(length(accessories))
