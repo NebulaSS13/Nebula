@@ -3,7 +3,7 @@
 	desc = "A slab of meat."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "meat"
-	slice_path = /obj/item/chems/food/rawcutlet
+	slice_path = /obj/item/chems/food/cutlet/raw
 	slices_num = 3
 	max_health = 180
 	filling_color = "#ff1c1c"

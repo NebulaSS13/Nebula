@@ -17,9 +17,12 @@
 
 /obj/item/chems/food/handle_consumed(mob/feeder, mob/eater, consumption_method = EATING_METHOD_EAT)
 
-	if(isliving(eater) && cooked_food)
+	if(isliving(eater))
 		var/mob/living/living_eater = eater
-		living_eater.add_stressor(/datum/stressor/ate_cooked_food, 15 MINUTES)
+		if(cooked_food == FOOD_COOKED)
+			living_eater.add_stressor(/datum/stressor/ate_cooked_food, 15 MINUTES)
+		else if(cooked_food == FOOD_RAW)
+			living_eater.add_stressor(/datum/stressor/ate_raw_food, 15 MINUTES)
 
 	var/obj/item/plate_ref = plate
 	var/trash_ref = trash

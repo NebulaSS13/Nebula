@@ -61,21 +61,6 @@
 	nutriment_desc = list("bun" = 4)
 	nutriment_amt = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	attack_products = list(
-		/obj/item/chems/food/meatball = /obj/item/chems/food/burger,
-		/obj/item/chems/food/cutlet = /obj/item/chems/food/hamburger,
-		/obj/item/chems/food/sausage = /obj/item/chems/food/hotdog
-	)
-
-/obj/item/chems/food/burger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
-/obj/item/chems/food/hamburger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
-/obj/item/chems/food/human/burger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
-
-// Spaghetti + meatball = spaghetti with meatball(s)
-/obj/item/chems/food/boiledspagetti/attack_products = list(/obj/item/chems/food/meatball = /obj/item/chems/food/meatballspagetti)
-
-// Spaghetti with meatballs + meatball = spaghetti with more meatball(s)
-/obj/item/chems/food/meatballspagetti/attack_products = list(/obj/item/chems/food/meatball = /obj/item/chems/food/spesslaw)
 
 /obj/item/chems/food/bunbun
 	name = "\improper Bun Bun"
