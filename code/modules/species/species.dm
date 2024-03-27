@@ -689,13 +689,14 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	for(var/accessory in get_available_accessory_types(bodytype, accessory_category))
 		. += GET_DECL(accessory)
 
-/decl/species/proc/get_available_accessory_types(bodytype, accessory_category)
+/decl/species/proc/get_available_accessory_types(decl/bodytype/bodytype, accessory_category)
 	if(!bodytype)
 		bodytype = default_bodytype
-	var/list/available_accessories = LAZYACCESS(accessory_styles, accessory_category)
+	var/list/available_accessories = accessory_styles?[bodytype.type]?[accessory_category]
 	if(!available_accessories)
 		available_accessories = list()
-		LAZYSET(accessory_styles, accessory_category, available_accessories)
+		LAZYINITLIST(accessory_styles)
+		LAZYSET(accessory_styles[bodytype.type], accessory_category, available_accessories)
 		var/decl/sprite_accessory_category/accessory_category_decl = GET_DECL(accessory_category)
 		var/list/all_accessories = decls_repository.get_decls_of_subtype(accessory_category_decl.base_accessory_type)
 		for(var/accessory_style in all_accessories)
