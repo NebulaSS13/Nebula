@@ -31,3 +31,17 @@
 		if(user)
 			S.add_to_stacks(user, 1)
 	return S
+
+/decl/stack_recipe/clay/crucible
+	result_type = /obj/item/storage/crucible
+	on_floor = TRUE
+	time = 3 SECONDS
+
+/decl/stack_recipe/clay/mould
+	name                        = "mould, blank"
+	result_type                 = /obj/item/mould
+	time                        = 5 SECONDS
+
+/decl/stack_recipe/clay/mould/crucible
+	name                        = "mould, crucible"
+	result_type                 = /obj/item/mould/crucible
