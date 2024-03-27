@@ -65,7 +65,7 @@
 	// Build list of data from sensor readings.
 	for(var/obj/machinery/power/sensor/S in grid_sensors)
 		sensors.Add(list(list(
-		"name" = S.id_tag,
+		"name" = html_encode(S.id_tag),
 		"alarm" = S.check_grid_warning()
 		)))
 		if(S.id_tag == active_sensor)
@@ -167,5 +167,5 @@
 
 
 	else if( href_list["setsensor"] )
-		active_sensor = href_list["setsensor"]
+		active_sensor = html_decode(href_list["setsensor"])
 		. = 1

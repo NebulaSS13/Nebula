@@ -36,7 +36,10 @@
 		var/area/A = get_area(src)
 		if(!A)
 			return // in nullspace
-		id_tag = "[A.proper_name] #[sequential_id(A.name + "power/sensor")]"
+		var/suffix = uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, "[A.proper_name]power/sensor", 1) // unlike sequential_id, starts at 1 instead of 100
+		if(suffix == 1)
+			suffix = null
+		id_tag = "[A.proper_name][suffix ? " #[suffix]" : null]"
 	name = "[id_tag] - powernet sensor"
 
 // Proc: check_grid_warning()
