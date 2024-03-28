@@ -28,10 +28,10 @@
 	if(pen_flag & PEN_FLAG_ACTIVE)
 		icon_state = "[icon_state]-on"
 
-/obj/item/pen/retractable/attack(atom/A, mob/user, target_zone)
+/obj/item/pen/retractable/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(!(pen_flag & PEN_FLAG_ACTIVE))
 		toggle()
-	..()
+	return ..()
 
 /obj/item/pen/retractable/attack_self(mob/user)
 	toggle()

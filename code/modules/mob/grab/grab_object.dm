@@ -94,10 +94,10 @@
 		else
 			upgrade()
 
-/obj/item/grab/attack(mob/M, mob/living/user)
-	if(affecting == M)
+/obj/item/grab/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(affecting == target)
 		var/datum/extension/abilities/abilities = get_extension(user, /datum/extension/abilities)
-		if(abilities?.do_grabbed_invocation(M))
+		if(abilities?.do_grabbed_invocation(target))
 			return TRUE
 	. = ..()
 

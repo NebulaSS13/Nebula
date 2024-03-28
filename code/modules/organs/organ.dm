@@ -380,7 +380,8 @@
 		if(owner)
 			owner.update_health()
 
-/obj/item/organ/attack(var/mob/target, var/mob/user)
+/obj/item/organ/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
 	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
 

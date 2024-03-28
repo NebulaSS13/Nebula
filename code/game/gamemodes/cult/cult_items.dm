@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
-/obj/item/sword/cultblade/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/sword/cultblade/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
 	if(iscultist(user) || (user.mind in godcult.current_antagonists))
@@ -32,7 +32,7 @@
 	var/spooky = pick('sound/hallucinations/growl1.ogg', 'sound/hallucinations/growl2.ogg', 'sound/hallucinations/growl3.ogg', 'sound/hallucinations/wail.ogg')
 	playsound(loc, spooky, 50, 1)
 
-	return 1
+	return TRUE
 
 /obj/item/sword/cultblade/on_picked_up(mob/living/user)
 	if(!iscultist(user))

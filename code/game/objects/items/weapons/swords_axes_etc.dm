@@ -17,16 +17,16 @@
 	item_flags = ITEM_FLAG_IS_WEAPON
 	material = /decl/material/solid/organic/wood
 
-/obj/item/classic_baton/attack(mob/M, mob/living/user)
+/obj/item/classic_baton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
+		to_chat(user, SPAN_WARNING("You club yourself over the head."))
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			H.apply_damage(2*force, BRUTE, BP_HEAD)
 		else
 			user.take_organ_damage(2*force)
-		return
+		return TRUE
 	return ..()
 
 //Telescopic baton
@@ -73,19 +73,14 @@
 	else
 		icon = 'icons/obj/items/weapon/telebaton.dmi'
 
-/obj/item/telebaton/attack(mob/target, mob/living/user)
-	if(on)
-		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-			to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
-			SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				H.apply_damage(2*force, BRUTE, BP_HEAD)
-			else
-				user.take_organ_damage(2*force)
-			return
-		if(..())
-			//playsound(src.loc, "swing_hit", 50, 1, -1)
-			return
-	else
-		return ..()
+/obj/item/telebaton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(on && (MUTATION_CLUMSY in user.mutations) && prob(50))
+		to_chat(user, SPAN_DANGER("You club yourself over the head."))
+		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
+		if(ishuman(user))
+			var/mob/living/carbon/human/H = user
+			H.apply_damage(2*force, BRUTE, BP_HEAD)
+		else
+			user.take_organ_damage(2*force)
+		return TRUE
+	return ..()

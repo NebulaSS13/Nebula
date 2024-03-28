@@ -275,7 +275,7 @@
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
 			if (do_after(E, 1.2 SECONDS, get_turf(user)) && E && MC)
 				for (var/mob/living/M in orange(1, E))
-					attack(M, E, E.get_target_zone(), FALSE)
+					use_on_mob(M, E, animate = FALSE)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
 				playsound(E, 'sound/mecha/mechturn.ogg', 40, 1)
 

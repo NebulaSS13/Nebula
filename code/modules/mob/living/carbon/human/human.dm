@@ -967,7 +967,10 @@
 		if(!defer_language_update)
 			update_languages()
 
-/mob/living/carbon/human/proc/get_cultural_value(var/token)
+/mob/living/proc/get_cultural_value(var/token)
+	return null
+
+/mob/living/carbon/human/get_cultural_value(var/token)
 	. = LAZYACCESS(cultural_info, token)
 	if(!istype(., /decl/cultural_info))
 		. = global.using_map.default_cultural_info[token]

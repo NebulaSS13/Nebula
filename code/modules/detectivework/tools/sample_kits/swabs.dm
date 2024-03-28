@@ -16,10 +16,12 @@
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 	)
 
-/obj/item/forensics/sample_kit/swabs/attack(var/mob/living/carbon/human/H, var/mob/user)
-	if(!istype(H))
+/obj/item/forensics/sample_kit/swabs/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
+	if(!ishuman(target))
 		return ..()
 
+	var/mob/living/carbon/human/H = target
 	var/time_to_take = H.a_intent == I_HELP ? 1 SECOND : 3 SECONDS
 	user.visible_message(SPAN_NOTICE("\The [user] starts swabbing a sample from \the [H]."))
 	if(!do_mob(user, H, time_to_take))

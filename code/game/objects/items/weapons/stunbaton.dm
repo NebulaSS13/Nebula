@@ -94,12 +94,12 @@
 		status = s
 		update_icon()
 
-/obj/item/baton/attack(mob/M, mob/user)
+/obj/item/baton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(status && (MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='danger'>You accidentally hit yourself with the [src]!</span>")
+		to_chat(user, SPAN_DANGER("You accidentally hit yourself with the [src]!"))
 		SET_STATUS_MAX(user, STAT_WEAK, 30)
 		deductcharge(hitcost)
-		return
+		return TRUE
 	return ..()
 
 /obj/item/baton/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)

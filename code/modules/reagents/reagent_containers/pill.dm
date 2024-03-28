@@ -43,10 +43,10 @@
 		color = null
 
 /obj/item/chems/pill/attack_self(mob/user)
-	attack(user, user)
+	return use_on_mob(user, user)
 
 /obj/item/chems/pill/dragged_onto(var/mob/user)
-	attack(user, user)
+	return use_on_mob(user, user)
 
 /obj/item/chems/pill/afterattack(obj/target, mob/user, proximity)
 	if(proximity && ATOM_IS_OPEN_CONTAINER(target) && target.reagents)

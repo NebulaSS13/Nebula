@@ -174,8 +174,8 @@
 	item_state = "sheet-metal"
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
-/obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)
-	return
+/obj/item/form_printer/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/form_printer/afterattack(atom/target, mob/living/user, flag, params)
 

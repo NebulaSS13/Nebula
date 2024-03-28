@@ -58,10 +58,10 @@
 		plate = new plate(src)
 
 /obj/item/chems/food/attack_self(mob/user)
-	attack(user, user)
+	return use_on_mob(user, user)
 
 /obj/item/chems/food/dragged_onto(var/mob/user)
-	attack(user, user)
+	return use_on_mob(user, user)
 
 /obj/item/chems/food/examine(mob/user, distance)
 	. = ..()

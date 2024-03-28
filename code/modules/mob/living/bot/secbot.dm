@@ -189,6 +189,11 @@
 		handcuffs.place_handcuffs(C, src)
 	resetTarget() //we're done, failed or not. Don't want to get stuck if C is not
 
+/mob/living/bot/get_target_zone()
+	if(!client)
+		return BP_CHEST
+	return ..()
+
 /mob/living/bot/secbot/UnarmedAttack(var/mob/M, var/proximity)
 
 	. = ..()
@@ -208,7 +213,7 @@
 	else
 		a_intent = I_GRAB
 
-	stun_baton.attack(M, src, BP_CHEST) //robots and turrets aim for center of mass
+	stun_baton.use_on_mob(M, src) //robots and turrets aim for center of mass
 	flick(attack_state, src)
 	return TRUE
 

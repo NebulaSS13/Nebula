@@ -37,8 +37,8 @@
 		work_modes = h.children
 	work_mode = work_modes[1]
 
-/obj/item/rcd/attack()
-	return 0
+/obj/item/rcd/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/rcd/proc/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && user.get_active_held_item() == src && !user.incapacitated())

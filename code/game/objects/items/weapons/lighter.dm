@@ -81,20 +81,16 @@
 	else
 		add_overlay(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
-/obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
-	if(!ismob(M))
-		return
-
+/obj/item/flame/lighter/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(lit)
-		M.IgniteMob()
-
-		var/obj/item/clothing/mask/smokable/cigarette/cig = M.get_equipped_item(slot_wear_mask_str)
+		target.IgniteMob()
+		var/obj/item/clothing/mask/smokable/cigarette/cig = target.get_equipped_item(slot_wear_mask_str)
 		if(istype(cig) && user.get_target_zone() == BP_MOUTH)
-			if(M == user)
+			if(target == user)
 				cig.attackby(src, user)
 			else
-				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
-			return
+				cig.light(SPAN_NOTICE("\The [user] holds \the [src] out for \the [target], and lights \the [cig]."))
+			return TRUE
 	return ..()
 
 /obj/item/flame/lighter/Process()

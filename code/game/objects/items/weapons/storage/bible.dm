@@ -66,21 +66,25 @@
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
-	if(user == M || !ishuman(user) || !ishuman(M))
-		return
+/obj/item/storage/bible/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
+	if(user == target || !ishuman(user) || !ishuman(target))
+		return ..()
+
 	if(user.mind?.assigned_job?.is_holy)
-		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
-		if(do_after(user, 5 SECONDS) && user.Adjacent(M))
+		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [target]'s forehead, reciting a prayer..."))
+		if(do_after(user, 5 SECONDS) && user.Adjacent(target))
 			var/decl/pronouns/G = user.get_pronouns()
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] finishes reciting [G.his] prayer, removing \the [src] from \the [M]'s forehead."), \
-				SPAN_NOTICE("You finish reciting your prayer, removing \the [src] from \the [M]'s forehead."))
-			if(user.get_cultural_value(TAG_RELIGION) == M.get_cultural_value(TAG_RELIGION))
-				to_chat(M, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] finishes reciting [G.his] prayer, removing \the [src] from \the [target]'s forehead."),
+				SPAN_NOTICE("You finish reciting your prayer, removing \the [src] from \the [target]'s forehead."))
+			if(user.get_cultural_value(TAG_RELIGION) == target.get_cultural_value(TAG_RELIGION))
+				to_chat(target, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 			else
-				to_chat(M, "Nothing happened.")
-		..()
+				to_chat(target, "Nothing happened.")
+		return TRUE
+
+	return ..()
 
 /obj/item/storage/bible/afterattack(atom/A, mob/user, proximity)
 	if(proximity && user?.mind?.assigned_job?.is_holy)

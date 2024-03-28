@@ -11,36 +11,42 @@
 	else
 		to_chat(user, "You see strange symbols on the paper. Are they supposed to mean something?")
 
-/obj/item/paper/talisman/attack(var/mob/living/M, var/mob/living/user)
-	return
+/obj/item/paper/talisman/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/paper/talisman/stun/attack_self(var/mob/user)
 	if(iscultist(user))
 		to_chat(user, "This is a stun talisman.")
 	return ..()
 
-/obj/item/paper/talisman/stun/attack(var/mob/living/M, var/mob/living/user)
-	if(!iscultist(user))
-		return
-	user.say("Dream Sign: Evil Sealing Talisman!") //TODO: never change this shit
-	var/obj/item/nullrod/nrod = locate() in M
-	if(nrod)
-		user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [M], but they are unaffected."), SPAN_DANGER("You invoke \the [src] at [M], but they are unaffected."))
-		return
-	else
-		user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [M]."), SPAN_DANGER("You invoke \the [src] at [M]."))
+/obj/item/paper/talisman/stun/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(isliving(M))
-		if(issilicon(M))
-			SET_STATUS_MAX(M, STAT_WEAK, 15)
-			SET_STATUS_MAX(M, STAT_SILENCE, 15)
+	if(!iscultist(user))
+		return FALSE
+
+	user.say("Dream Sign: Evil Sealing Talisman!") //TODO: never change this shit
+	var/obj/item/nullrod/nrod = locate() in target
+	if(nrod)
+		user.visible_message(
+			SPAN_DANGER("\The [user] invokes \the [src] at [target], but they are unaffected."), 
+			SPAN_DANGER("You invoke \the [src] at [target], but they are unaffected.")
+		)
+		return TRUE
+
+	user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [target]."), SPAN_DANGER("You invoke \the [src] at [target]."))
+	if(isliving(target))
+		if(issilicon(target))
+			SET_STATUS_MAX(target, STAT_WEAK, 15)
+			SET_STATUS_MAX(target, STAT_SILENCE, 15)
 		else
-			SET_STATUS_MAX(M, STAT_WEAK, 20)
-			SET_STATUS_MAX(M, STAT_STUN, 20)
-			SET_STATUS_MAX(M, STAT_SILENCE, 20)
-	admin_attack_log(user, M, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
+			SET_STATUS_MAX(target, STAT_WEAK, 20)
+			SET_STATUS_MAX(target, STAT_STUN, 20)
+			SET_STATUS_MAX(target, STAT_SILENCE, 20)
+	admin_attack_log(user, target, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
 	user.try_unequip(src)
 	qdel(src)
+	return TRUE
+
 
 /obj/item/paper/talisman/emp/attack_self(var/mob/user)
 	if(iscultist(user))
