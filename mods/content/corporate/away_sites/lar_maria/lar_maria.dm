@@ -29,10 +29,10 @@
 	environment_smash = 1
 	faction = "lar_maria"
 	status_flags = CANPUSH
-	speak = list("Die!", "Fresh meat!", "Hurr!", "You said help will come!", "I did nothing!", "Eat my fist!", "One for the road!")
-	speak_chance = 50
-	emote_hear = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
-	emote_see = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
+	speak_chance = 25
+	emote_speech = list("Die!", "Fresh meat!", "Hurr!", "You said help will come!", "I did nothing!", "Eat my fist!", "One for the road!")
+	emote_hear   = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
+	emote_see    = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
 	turns_per_move = 5
 	speed = 8
 	can_escape = TRUE

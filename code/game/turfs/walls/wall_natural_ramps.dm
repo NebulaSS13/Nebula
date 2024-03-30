@@ -50,7 +50,7 @@
 // TODO: convert to alt interaction.
 /turf/wall/natural/AltClick(mob/user)
 
-	var/obj/item/P = user.get_active_hand()
+	var/obj/item/P = user.get_active_held_item()
 	if(user.Adjacent(src) && IS_PICK(P) && HasAbove(z))
 
 		var/user_dir = get_dir(src, user)

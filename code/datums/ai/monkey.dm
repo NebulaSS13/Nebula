@@ -13,7 +13,7 @@
 	if(prob(33) && isturf(body.loc) && !LAZYLEN(body.grabbed_by)) //won't move if being pulled
 		body.SelfMove(pick(global.cardinal))
 
-	var/obj/held = body.get_active_hand()
+	var/obj/held = body.get_active_held_item()
 	if(held && prob(1))
 		var/turf/T = get_random_turf_in_range(body, 7, 2)
 		if(T)
@@ -21,7 +21,7 @@
 				var/obj/item/gun/G = held
 				G.Fire(T, body)
 			else
-				body.throw_item(T)
+				body.mob_throw_item(T)
 		else
 			body.try_unequip(held)
 

@@ -24,7 +24,7 @@
 	var/max_icon_state
 	var/amount = 1
 	var/matter_multiplier = 1
-	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
+	var/max_amount
 	var/stack_merge_type  //determines whether different stack types can merge
 	var/build_type //used when directly applied to a turf
 	var/uses_charge
@@ -118,7 +118,7 @@
 		return
 
 	if(!recipes)
-		recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
+		recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_held_item()?.get_best_tool_archetype())
 
 	var/list/dat = list()
 
@@ -153,33 +153,32 @@
 	popup.open()
 
 
-/obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/quantity, mob/user)
-	var/required = quantity*recipe.req_amount
-	var/produced = quantity*recipe.res_amount
-	if(!isnull(recipe.max_res_amount))
-		produced = min(produced, recipe.max_res_amount)
+/obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/producing, var/expending, mob/user, paint_color)
+
+	if(producing <= 0 || expending <= 0 || expending > get_amount())
+		return
+
 	var/decl/material/mat       = get_material()
 	var/decl/material/reinf_mat = get_reinforced_material()
-
-	if (!can_use(required))
-		to_chat(user, SPAN_WARNING("You haven't got enough [plural_name] to [recipe.get_craft_verb(src)] [recipe.get_display_name(produced, mat, reinf_mat)]!"))
+	if (!can_use(expending))
+		to_chat(user, SPAN_WARNING("You haven't got enough [plural_name] to [recipe.get_craft_verb(src)] [recipe.get_display_name(producing, mat, reinf_mat)]!"))
 		return
 	if(!recipe.can_make(user))
 		return
 	if (recipe.time)
-		to_chat(user, SPAN_NOTICE("You set about [recipe.get_craft_verbing(src)] [recipe.get_display_name(produced, mat, reinf_mat)]..."))
+		to_chat(user, SPAN_NOTICE("You set about [recipe.get_craft_verbing(src)] [recipe.get_display_name(producing, mat, reinf_mat)]..."))
 		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
 			return
 
-	if(!use(required))
+	if(!use(expending))
 		return
 
 	if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
-		to_chat(user, SPAN_WARNING("You waste some [name] and fail to [recipe.get_craft_verb(src)] [recipe.get_display_name(produced, mat, reinf_mat)]!"))
+		to_chat(user, SPAN_WARNING("You waste some [name] and fail to [recipe.get_craft_verb(src)] [recipe.get_display_name(producing, mat, reinf_mat)]!"))
 		return
 
-	to_chat(user, SPAN_NOTICE("You [recipe.get_craft_verb(src)] [recipe.get_display_name(produced, mat, reinf_mat)]!"))
-	var/list/atom/results = recipe.spawn_result(user, user.loc, produced, mat, reinf_mat)
+	to_chat(user, SPAN_NOTICE("You [recipe.get_craft_verb(src)] [recipe.get_display_name(producing, mat, reinf_mat)]!"))
+	var/list/atom/results = recipe.spawn_result(user, user.loc, producing, mat, reinf_mat, paint_color)
 	var/atom/movable/O = LAZYACCESS(results, 1)
 	if(istype(O) && !QDELETED(O)) // In case of stack merger.
 		O.add_fingerprint(user)
@@ -204,7 +203,7 @@
 
 		var/datum/stack_recipe_list/recipe_list = locate(href_list["sublist"])
 		if(istype(recipe_list))
-			var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
+			var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_held_item()?.get_best_tool_archetype())
 			if(recipe_list in recipes)
 				list_recipes(user, recipe_list)
 				return TOPIC_HANDLED
@@ -218,7 +217,7 @@
 			return TOPIC_NOACTION
 
 		// Check that the recipe is still available to us.
-		var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
+		var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_held_item()?.get_best_tool_archetype())
 		if(!(recipe in recipes))
 			var/found_recipe = FALSE
 			for(var/datum/stack_recipe_list/recipe_list in recipes)
@@ -229,11 +228,10 @@
 				return TOPIC_NOACTION
 
 		// Validate the target amount and create the product.
-		var/multiplier = clamp(text2num(href_list["multiplier"]), 0, min(round(get_amount() / recipe.req_amount)))
-		if(!isnull(recipe.max_res_amount))
-			multiplier = min(multiplier, round(recipe.max_res_amount / recipe.res_amount))
-		if(multiplier > 0)
-			produce_recipe(recipe, multiplier, user)
+		var/producing = text2num(href_list["producing"])
+		var/expending = text2num(href_list["expending"])
+		if(producing > 0 && expending > 0)
+			produce_recipe(recipe, producing, expending, user, paint_color)
 			return TOPIC_REFRESH
 
 	return TOPIC_NOACTION
@@ -356,7 +354,7 @@
 	return null
 
 /obj/item/stack/proc/copy_from(var/obj/item/stack/other)
-	color = other.color
+	other.set_color(paint_color)
 	dried_type = other.dried_type
 	drying_wetness = other.drying_wetness
 
@@ -414,7 +412,7 @@
 	if(!user.is_holding_offhand(src) || !can_split())
 		return ..()
 
-	var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
+	var/N = input(user, "How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
 	if(!N)
 		return TRUE
 
@@ -448,7 +446,7 @@
 
 /**Whether a stack type has the capability to be merged. */
 /obj/item/stack/proc/can_merge_stacks(var/obj/item/stack/other)
-	return !(uses_charge && !force)
+	return !(uses_charge && !force) && (!istype(other) || other.paint_color == paint_color)
 
 /// Returns the string describing an amount of the stack, i.e. "an ingot" vs "a flag"
 /obj/item/stack/proc/get_string_for_amount(amount)

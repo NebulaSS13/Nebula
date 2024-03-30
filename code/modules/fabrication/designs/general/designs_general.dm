@@ -171,3 +171,6 @@
 
 /datum/fabricator_recipe/ironing_board
 	path = /obj/item/roller/ironingboard
+
+/datum/fabricator_recipe/duct_tape
+	path = /obj/item/stack/tape_roll/duct_tape

@@ -123,7 +123,7 @@
 		return
 
 	if(!H.holstered)
-		var/obj/item/W = usr.get_active_hand()
+		var/obj/item/W = usr.get_active_held_item()
 		if(!istype(W, /obj/item))
 			to_chat(usr, "<span class='warning'>You're not holding anything to holster.</span>")
 			return

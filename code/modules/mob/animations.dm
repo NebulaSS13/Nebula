@@ -88,7 +88,7 @@
 
 	// What are we attacking with?
 	if(!weapon)
-		weapon = get_active_hand()
+		weapon = get_active_held_item()
 		if(!weapon)
 			return
 

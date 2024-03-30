@@ -27,7 +27,7 @@
 	. = ..()
 	if(!slot_id || !usr)
 		return
-	var/equipped_item = usr.get_active_hand()
+	var/equipped_item = usr.get_active_held_item()
 	if(equipped_item)
 		var/new_mouse_over_atom = weakref(equipped_item)
 		if(new_mouse_over_atom != mouse_over_atom_ref)

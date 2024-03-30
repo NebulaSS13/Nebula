@@ -4930,12 +4930,12 @@
 /area/liberia/merchantstorage)
 "jw" = (
 /obj/structure/rack/dark,
-/obj/item/stack/tile/carpetred,
-/obj/item/stack/tile/carpetpurple,
-/obj/item/stack/tile/carpetorange,
-/obj/item/stack/tile/carpetgreen,
-/obj/item/stack/tile/carpetblue,
-/obj/item/stack/tile/carpetblue2,
+/obj/item/stack/tile/carpet/red,
+/obj/item/stack/tile/carpet/purple,
+/obj/item/stack/tile/carpet/orange,
+/obj/item/stack/tile/carpet/green,
+/obj/item/stack/tile/carpet/blue,
+/obj/item/stack/tile/carpet/blue2,
 /obj/item/stack/tile/carpet,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/floor/tiled/techfloor/grid,

@@ -45,12 +45,8 @@
 	if(overlay && slot == slot_w_uniform_str)
 		if(rolled_down && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-rolled"
-		else
-			var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
-			if(istype(root_bodytype) && root_bodytype.uniform_state_modifier && check_state_in_icon("[overlay.icon_state]-[root_bodytype.uniform_state_modifier]", overlay.icon))
-				overlay.icon_state = "[overlay.icon_state]-[root_bodytype.uniform_state_modifier]"
-			if(rolled_sleeves && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))
-				overlay.icon_state = "[overlay.icon_state]-sleeves"
+		else if(rolled_sleeves && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))
+			overlay.icon_state = "[overlay.icon_state]-sleeves"
 	. = ..()
 
 /obj/item/clothing/under/proc/roll_down_clothes()

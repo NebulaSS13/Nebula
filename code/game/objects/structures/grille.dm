@@ -159,7 +159,10 @@
 	else
 		set_density(0)
 		if(material)
-			material.create_object(get_turf(src), 1, parts_type)
+			var/res = material.create_object(get_turf(src), 1, parts_type)
+			if(paint_color)
+				for(var/obj/item/thing in res)
+					thing.set_color(paint_color)
 		destroyed = TRUE
 		parts_amount = 1
 		update_icon()

@@ -10,7 +10,7 @@
 	material = /decl/material/solid/metal/stainlesssteel
 	var/decal =        "Quarter-turf"
 	var/paint_dir =    "Precise"
-	var/paint_color = COLOR_GRAY15
+	var/spray_color = COLOR_GRAY15
 	var/color_picker = FALSE
 
 	var/list/decals = list(
@@ -80,7 +80,7 @@
 
 /obj/item/paint_sprayer/on_update_icon()
 	. = ..()
-	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
+	add_overlay(overlay_image(icon, "[icon_state]_color", spray_color))
 	add_overlay(color_picker ? "[icon_state]_red" : "[icon_state]_blue")
 	if(isliving(loc))
 		var/mob/M = loc
@@ -88,7 +88,7 @@
 
 /obj/item/paint_sprayer/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && check_state_in_icon("[overlay.icon_state]_color", overlay.icon))
-		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]_color", paint_color)
+		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]_color", spray_color)
 	. = ..()
 
 /obj/item/paint_sprayer/afterattack(var/atom/A, var/mob/user, var/proximity, var/params)
@@ -131,7 +131,7 @@
 		. = FALSE
 
 	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
-		A.set_color(paint_color)
+		A.set_color(spray_color)
 		. = TRUE
 
 	else
@@ -157,9 +157,9 @@
 	if (user.incapacitated() || !W || !user.Adjacent(W))
 		return FALSE
 	if(choice == PAINT_REGION_PAINT)
-		W.paint_wall(paint_color)
+		W.paint_wall(spray_color)
 	else if(choice == PAINT_REGION_STRIPE)
-		W.stripe_wall(paint_color)
+		W.stripe_wall(spray_color)
 
 
 /obj/item/paint_sprayer/proc/pick_color_from_wall(var/turf/wall/W, var/mob/user)
@@ -192,9 +192,9 @@
 	if (user.incapacitated() || !WF || !user.Adjacent(WF))
 		return FALSE
 	if(choice == PAINT_REGION_PAINT)
-		WF.paint_wall_frame(paint_color)
+		WF.paint_wall_frame(spray_color)
 	else if(choice == PAINT_REGION_STRIPE)
-		WF.stripe_wall_frame(paint_color)
+		WF.stripe_wall_frame(spray_color)
 
 
 /obj/item/paint_sprayer/proc/pick_color_from_wall_frame(var/obj/structure/wall_frame/WF, var/mob/user)
@@ -267,8 +267,8 @@
 		painting_dir = paint_dirs[paint_dir]
 
 	var/painting_color
-	if(decal_data["colored"] && paint_color)
-		painting_color = paint_color
+	if(decal_data["colored"] && spray_color)
+		painting_color = spray_color
 
 	new painting_decal(F, painting_dir, painting_color)
 	return TRUE
@@ -297,11 +297,11 @@
 
 	switch (select_airlock_region(D, user, "What do you wish to paint?"))
 		if (PAINT_REGION_PAINT)
-			D.paint_airlock(paint_color)
+			D.paint_airlock(spray_color)
 		if (PAINT_REGION_STRIPE)
-			D.stripe_airlock(paint_color)
+			D.stripe_airlock(spray_color)
 		if (PAINT_REGION_WINDOW)
-			D.paint_window(paint_color)
+			D.paint_window(spray_color)
 		else
 			return FALSE
 	return TRUE
@@ -352,16 +352,16 @@
 
 
 /obj/item/paint_sprayer/proc/change_color(var/new_color, var/mob/user)
-	if (new_color && new_color != paint_color)
-		paint_color = new_color
+	if (new_color && new_color != spray_color)
+		spray_color = new_color
 		if (user)
-			to_chat(user, SPAN_NOTICE("You set \the [src] to paint with <span style='color:[paint_color]'>a new color</span>."))
+			to_chat(user, SPAN_NOTICE("You set \the [src] to paint with <span style='color:[spray_color]'>a new color</span>."))
 		update_icon()
 
 
 /obj/item/paint_sprayer/examine(mob/user)
 	. = ..(user)
-	to_chat(user, "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [paint_color] paint.")
+	to_chat(user, "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [spray_color] paint.")
 
 /obj/item/paint_sprayer/CtrlClick()
 	if (!isturf(loc))
@@ -378,7 +378,7 @@
 
 	if(usr.incapacitated())
 		return
-	var/new_color = input(usr, "Choose a color.", name, paint_color) as color|null
+	var/new_color = input(usr, "Choose a color.", name, spray_color) as color|null
 	if (usr.incapacitated())
 		return
 	change_color(new_color, usr)
@@ -391,7 +391,7 @@
 
 	if(usr.incapacitated())
 		return
-	var/preset = input(usr, "Choose a color.", name, paint_color) as null|anything in preset_colors
+	var/preset = input(usr, "Choose a color.", name, spray_color) as null|anything in preset_colors
 	if(usr.incapacitated())
 		return
 	change_color(preset_colors[preset], usr)

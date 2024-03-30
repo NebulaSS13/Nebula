@@ -100,7 +100,7 @@
 	var/slime_temp_adj = 10
 
 /decl/material/liquid/capsaicin/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustToxLoss(0.5 * removed)
+	M.take_damage(TOX, 0.5 * removed)
 
 /decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
@@ -448,6 +448,6 @@
 			break
 	else
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
-		M.adjustBruteLoss(rand(3,6))
+		M.take_damage(BRUTE, rand(3,6))
 		if(prob(10))
 			new /obj/item/shard(get_turf(M), result_mat)

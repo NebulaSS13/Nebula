@@ -11,11 +11,13 @@
 	w_class = ITEM_SIZE_HUGE
 	material = DEFAULT_FURNITURE_MATERIAL
 	var/base_icon = "stool"
+	var/padding_color
 	var/decl/material/padding_material
 
 /obj/item/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
-	padding_material = /decl/material/solid/organic/carpet
+	padding_material = /decl/material/solid/organic/cloth
+	padding_color = "#9d2300"
 
 /obj/item/stool/Initialize()
 	. = ..()
@@ -26,9 +28,6 @@
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
-/obj/item/stool/padded
-	padding_material = /decl/material/solid/organic/carpet
-
 /obj/item/stool/bar
 	name = "bar stool"
 	icon_state = "bar_stool_preview" //set for the map
@@ -37,18 +36,19 @@
 
 /obj/item/stool/bar/padded
 	icon_state = "bar_stool_padded_preview"
-	padding_material = /decl/material/solid/organic/carpet
+	padding_material = /decl/material/solid/organic/cloth
+	padding_color = "#9d2300"
 
 /obj/item/stool/on_update_icon()
 	. = ..()
 	// Prep icon.
 	icon_state = ""
 	// Base icon.
-	var/list/noverlays = list(overlay_image(icon, "[base_icon]_base", material.color))
+	var/list/noverlays = list(overlay_image(icon, "[base_icon]_base", get_color(), RESET_COLOR|RESET_ALPHA))
 	// Padding overlay.
 	if(padding_material)
-		noverlays += overlay_image(icon, "[base_icon]_padding", padding_material.color)
-	add_overlay(noverlays)
+		noverlays += overlay_image(icon, "[base_icon]_padding", padding_color || padding_material.color)
+	set_overlays(noverlays)
 	// Strings.
 	if(padding_material)
 		SetName("[padding_material.solid_name] [initial(name)]") //this is not perfect but it will do for now.
@@ -57,14 +57,19 @@
 		SetName("[material.solid_name] [initial(name)]")
 		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
-/obj/item/stool/proc/add_padding(var/padding_type)
+/obj/item/stool/proc/add_padding(var/padding_type, var/new_padding_color)
 	padding_material = GET_DECL(padding_type)
+	padding_color = new_padding_color
 	update_icon()
 
 /obj/item/stool/proc/remove_padding()
 	if(padding_material)
-		padding_material.create_object(get_turf(src))
-		padding_material = null
+		var/list/res = padding_material.create_object(get_turf(src))
+		if(padding_color)
+			for(var/obj/item/thing in res)
+				thing.set_color(padding_color)
+	padding_material = null
+	padding_color = null
 	update_icon()
 
 /obj/item/stool/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
@@ -106,23 +111,30 @@
 		if(C.get_amount() < 1) // How??
 			qdel(C)
 			return
-		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
-		if(istype(W,/obj/item/stack/tile/carpet))
-			padding_type = /decl/material/solid/organic/carpet
-		else if(istype(W,/obj/item/stack/material))
-			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.flags & MAT_FLAG_PADDING))
-				padding_type = M.material.type
+
+		var/padding_type
+		var/new_padding_color
+		if(istype(W, /obj/item/stack/tile) || istype(W, /obj/item/stack/material/bolt))
+			padding_type = W.material?.type
+			new_padding_color = W.paint_color
+
+		if(padding_type)
+			var/decl/material/padding_mat = GET_DECL(padding_type)
+			if(!istype(padding_mat) || !(padding_mat.flags & MAT_FLAG_PADDING))
+				padding_type = null
+
 		if(!padding_type)
 			to_chat(user, "You cannot pad \the [src] with that.")
 			return
+
 		C.use(1)
 		if(!isturf(src.loc))
 			user.drop_from_inventory(src)
 			src.dropInto(loc)
 		to_chat(user, "You add padding to \the [src].")
-		add_padding(padding_type)
+		add_padding(padding_type, new_padding_color)
 		return
+
 	else if(IS_WIRECUTTER(W))
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")

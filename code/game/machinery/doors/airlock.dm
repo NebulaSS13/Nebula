@@ -135,7 +135,7 @@ About the new airlock wires panel:
 			var/mob/living/carbon/C = user
 			if(istype(C) && C.hallucination_power > 25)
 				to_chat(user, SPAN_DANGER("You feel a powerful shock course through your body!"))
-				user.adjustHalLoss(10)
+				user.take_damage(PAIN, 10)
 				SET_STATUS_MAX(user, STAT_STUN, 10)
 				return
 	..(user)
@@ -1099,17 +1099,19 @@ About the new airlock wires panel:
 	name = A.proper_name
 	. = ..()
 
-/obj/machinery/door/airlock/proc/paint_airlock(var/paint_color)
-	door_color = paint_color
-	update_icon()
+/obj/machinery/door/airlock/proc/paint_airlock(var/new_color)
+	if(door_color != new_color)
+		door_color = new_color
+		update_icon()
 
-/obj/machinery/door/airlock/proc/stripe_airlock(var/paint_color)
-	stripe_color = paint_color
-	update_icon()
+/obj/machinery/door/airlock/proc/stripe_airlock(var/new_color)
+	if(stripe_color != new_color)
+		stripe_color = new_color
+		update_icon()
 
-/obj/machinery/door/airlock/proc/paint_window(paint_color)
-	if (paint_color)
-		window_color = paint_color
+/obj/machinery/door/airlock/proc/paint_window(new_color)
+	if (new_color)
+		window_color = new_color
 	else if (window_material)
 		var/decl/material/window = get_window_material()
 		window_color = window.color

@@ -91,8 +91,8 @@
 		cycles_before_converted++
 		if(prob(50))
 			to_chat(M, "<span class='danger'>The mental strain is too much for you! You feel your body weakening!</span>")
-			M.adjustToxLoss(15, do_update_health = FALSE)
-			M.adjustHalLoss(30)
+			M.take_damage(TOX, 15, do_update_health = FALSE)
+			M.take_damage(PAIN, 30)
 		return TOPIC_REFRESH
 
 /obj/structure/deity/altar/on_update_icon()

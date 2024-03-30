@@ -17,7 +17,7 @@
 	var/active =           TRUE
 	var/electric =         FALSE //if the glasses should be disrupted by EMP
 
-	var/hud_type
+	var/glasses_hud_type
 	var/obj/screen/screen_overlay
 	var/obj/item/clothing/glasses/hud/hud // Hud glasses, if any
 	var/activation_sound =   'sound/items/goggles_charge.ogg'

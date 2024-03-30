@@ -32,10 +32,10 @@
 			if(istype(S, /obj/item/clothing/accessory/storage/holster))
 				var/datum/extension/holster/E = get_extension(S, /datum/extension/holster)
 				if(!E.holstered)
-					if(!H.get_active_hand())
+					if(!H.get_active_held_item())
 						to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
 						return
-					E.holster(H.get_active_hand(), H)
+					E.holster(H.get_active_held_item(), H)
 				else
 					E.unholster(H, TRUE)
 				return
@@ -44,10 +44,10 @@
 	if(istype(B))
 		var/datum/extension/holster/E = get_extension(B, /datum/extension/holster)
 		if(!E.holstered)
-			if(!H.get_active_hand())
+			if(!H.get_active_held_item())
 				to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
 				return
-			E.holster(H.get_active_hand(), H)
+			E.holster(H.get_active_held_item(), H)
 		else
 			E.unholster(H, TRUE)
 		return

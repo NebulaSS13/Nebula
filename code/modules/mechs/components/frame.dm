@@ -57,7 +57,7 @@
 /obj/structure/heavy_vehicle_frame/on_update_icon()
 	..()
 	for(var/obj/item/mech_component/comp in list(legs, head, body, arms))
-		get_mech_image(comp.decal, comp.decal_blend, comp.icon_state, comp.on_mech_icon, comp.color, overlay_layer = FLOAT_LAYER)
+		add_overlay(get_mech_image(comp.decal, comp.decal_blend, comp.icon_state, comp.on_mech_icon, comp.color, overlay_layer = FLOAT_LAYER))
 	if(body)
 		set_density(TRUE)
 		add_overlay(get_mech_image(body.decal, body.decal_blend, "[body.icon_state]_cockpit", body.icon, body.color))
@@ -301,7 +301,7 @@
 		return 0
 	if(user)
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))
-		if(!user.canUnEquip(thing) || !do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_hand() != thing)
+		if(!user.canUnEquip(thing) || !do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_held_item() != thing)
 			return
 		if(!user.try_unequip(thing))
 			return

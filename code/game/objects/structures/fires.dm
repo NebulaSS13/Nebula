@@ -146,6 +146,7 @@
 		return FALSE
 	if(!process_fuel(ignition_temperature))
 		return FALSE
+	last_fuel_burn_temperature = max(last_fuel_burn_temperature, ignition_temperature) // needed for initial burn procs to function
 	lit = FIRE_LIT
 	refresh_affected_exterior_turfs()
 	visible_message(SPAN_DANGER("\The [src] catches alight!"))
@@ -249,14 +250,12 @@
 		. = list(type = amount)
 
 /obj/structure/fire_source/proc/burn_material(var/decl/material/mat, var/amount)
-	var/list/burn_products = mat.get_burn_products(amount, last_fuel_burn_temperature)
-	. = !isnull(burn_products)
+	. = mat.get_burn_products(amount, last_fuel_burn_temperature)
 	if(.)
 		if(mat.ignition_point && last_fuel_burn_temperature >= mat.ignition_point)
 			if(mat.accelerant_value > FUEL_VALUE_NONE)
 				fuel += amount * (1 + material.accelerant_value)
-			if(mat.burn_temperature)
-				last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
+			last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
 		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
 			fuel -= amount * mat.accelerant_value
 		fuel = max(fuel, 0)
@@ -411,19 +410,19 @@
 	if((fuel || length(contents)) && (lit != FIRE_DEAD))
 		// todo: get colour from fuel
 		var/image/I = image(icon, "[icon_state]_full")
-		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+		I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 		add_overlay(I)
 
 	switch(lit)
 		if(FIRE_LIT)
 			if(fuel >= HIGH_FUEL)
 				var/image/I = image(icon, "[icon_state]_lit")
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 				add_overlay(I)
 				set_light(light_range_high, light_power_high, light_color_high)
 			else if(fuel <= LOW_FUEL)
 				var/image/I = image(icon, "[icon_state]_lit_dying")
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 				add_overlay(I)
 				set_light(light_range_mid, light_power_mid, light_color_mid)
 			else

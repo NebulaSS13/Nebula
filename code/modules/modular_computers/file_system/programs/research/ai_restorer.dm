@@ -66,9 +66,9 @@
 	if(!A || !restoring)
 		restoring = 0	// If the AI was removed, stop the restoration sequence.
 		return
-	A.adjustFireLoss(-4, do_update_health = FALSE)
-	A.adjustBruteLoss(-4, do_update_health = FALSE)
-	A.adjustOxyLoss(-4)
+	A.heal_damage(BURN, 4, do_update_health = FALSE)
+	A.heal_damage(BRUTE, 4, do_update_health = FALSE)
+	A.heal_damage(OXY, 4)
 	A.update_health()
 	// If the AI is dead, revive it.
 	if (A.stat == DEAD && !A.should_be_dead())

@@ -178,7 +178,7 @@
 		effect = new /obj/effect/rift(T)
 		effect.color = "f0e68c"
 		L.forceMove(effect)
-		var/time = (L.getBruteLoss() + L.getFireLoss()) * 20
+		var/time = (L.get_damage(BRUTE) + L.get_damage(BURN)) * 20
 		L.status_flags &= GODMODE
 		to_chat(L,"<span class='notice'>You will be in stasis for [time/10] second\s.</span>")
 		addtimer(CALLBACK(src,PROC_REF(cancel_rift)),time)

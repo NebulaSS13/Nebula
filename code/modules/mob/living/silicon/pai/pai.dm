@@ -24,7 +24,7 @@ var/global/list/possible_say_verbs = list(
 	icon = 'icons/mob/robots/pai/pai_drone.dmi'
 	icon_state = ICON_STATE_WORLD
 	mob_sort_value = 3
-	hud_type = /datum/hud/pai
+	hud_used = /datum/hud/pai
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
@@ -273,7 +273,7 @@ var/global/list/possible_say_verbs = list(
 		return
 	if(W.force)
 		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
-		adjustBruteLoss(W.force)
+		take_damage(BRUTE, W.force)
 	else
 		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 

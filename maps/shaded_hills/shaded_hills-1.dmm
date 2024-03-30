@@ -151,7 +151,7 @@
 "MH" = (
 /obj/abstract/landmark/roofed,
 /obj/abstract/landmark/roofed,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/shaded_hills/outside)
 "MK" = (
 /obj/abstract/landmark/roofed,
@@ -166,7 +166,7 @@
 /area/shaded_hills/outside)
 "TD" = (
 /obj/abstract/landmark/roofed,
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/shaded_hills/outside)
 "TR" = (
 /turf/exterior/grass,
@@ -190,7 +190,7 @@
 /turf/exterior/path/basalt,
 /area/shaded_hills/outside/river)
 "Xt" = (
-/turf/exterior/wildgrass,
+/turf/exterior/grass/wild,
 /area/shaded_hills/outside)
 "ZV" = (
 /turf/wall/log/ebony,

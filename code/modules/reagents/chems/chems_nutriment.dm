@@ -52,7 +52,7 @@
 
 /decl/material/liquid/nutriment/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(!injectable)
-		M.adjustToxLoss(0.2 * removed)
+		M.take_damage(TOX, 0.2 * removed)
 		return
 	affect_ingest(M, removed, holder)
 
@@ -106,7 +106,7 @@
 /decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/carbon/M, removed)
 	var/malus_level = M.GetTraitLevel(/decl/trait/malus/animal_protein)
 	var/malus_factor = malus_level ? malus_level * 0.25 : 0
-	M.adjustToxLoss(removed * malus_factor)
+	M.take_damage(TOX, removed * malus_factor)
 	M.adjust_nutrition(nutriment_factor * removed * (1 - malus_factor))
 
 /decl/material/liquid/nutriment/protein/egg

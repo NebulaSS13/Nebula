@@ -64,7 +64,7 @@
 		queue_icon_update()
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
-	if (isrobot(user) && user.hud_used)
+	if (isrobot(user) && istype(user.hud_used))
 		var/mob/living/silicon/robot/robot = user
 		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
 			robot.hud_used.toggle_show_robot_modules()
@@ -244,7 +244,7 @@
 	if (.) //if the item was used as a crafting component, just return
 		return
 
-	if(isrobot(user) && (W == user.get_active_hand()))
+	if(isrobot(user) && (W == user.get_active_held_item()))
 		return //Robots can't store their modules.
 
 	if(!can_be_inserted(W, user))
@@ -258,7 +258,7 @@
 		return ..()
 	for(var/slot in global.pocket_slots)
 		var/obj/item/pocket = user.get_equipped_item(slot)
-		if(pocket == src && !user.get_active_hand()) //Prevents opening if it's in a pocket.
+		if(pocket == src && !user.get_active_held_item()) //Prevents opening if it's in a pocket.
 			if(user.try_unequip(src))
 				user.put_in_hands(src)
 			return TRUE
@@ -378,7 +378,7 @@
 
 /obj/item/storage/attack_self(mob/user)
 	//Clicking on itself will empty it, if it has the verb to do that.
-	if(user.get_active_hand() == src)
+	if(user.get_active_held_item() == src)
 		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
