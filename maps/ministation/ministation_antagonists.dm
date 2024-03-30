@@ -1,4 +1,5 @@
 /decl/special_role
+	valid_species = list(SPECIES_HUMAN, SPECIES_YINGLET)
 	initial_spawn_req = 1
 	initial_spawn_target = 1
 
@@ -28,8 +29,7 @@
 	initial_spawn_target = 2
 	command_department_id = /decl/department/command
 
-/datum/map/ministation
-	potential_theft_targets = list(
+/datum/map/ministation/potential_theft_targets = list(
 		"an owl mask"                        = /obj/item/clothing/mask/gas/owl_mask,
 		"a toy ripley"                       = /obj/item/toy/prize/powerloader,
 		"a collectable top hat"              = /obj/item/clothing/head/collectable/tophat,
@@ -42,10 +42,11 @@
 		"the hypospray"                      = /obj/item/chems/hypospray,
 		"the captain's pinpointer"           = /obj/item/pinpointer,
 		"the championship belt"              = /obj/item/storage/belt/champion,
-		"the corporate account documents"   = /obj/item/documents/corporate/account,
-		"the corporate personnel data"      = /obj/item/documents/corporate/personnel,
+		"the tradehouse account documents"   = /obj/item/documents/tradehouse/account,
+		"the tradehouse personnel data"      = /obj/item/documents/tradehouse/personnel,
 		"the table-top spaceship model"      = /obj/item/toy/shipmodel,
 		"the AI inteliCard"                  = /obj/item/aicard,
 		"the nuclear authentication disk"    = /obj/item/disk/nuclear,
+		"a yinglet egg"                      = /obj/item/yinglet_egg,
 		"the officer's sword"                = /obj/item/sword/replica/officersword
 	)

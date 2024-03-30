@@ -1,13 +1,13 @@
-/datum/job/ministation/corporate/rep
-	title = "Company Representative"
+/datum/job/ministation/tradehouse/rep
+	title = "Tradehouse Representative"
 	alt_titles = list("Narc")
 	hud_icon = "hudnarc"
 	spawn_positions = 1
 	total_positions = 2
 	req_admin_notify = 1
 	guestbanned = 1
-	supervisors = "the Board of Directors"
-	outfit_type = /decl/hierarchy/outfit/job/ministation/corporate
+	supervisors = "the Trademaster"
+	outfit_type = /decl/hierarchy/outfit/job/ministation/tradehouse
 	min_skill = list(
 		SKILL_WEAPONS  = SKILL_BASIC,
 		SKILL_FINANCE  = SKILL_EXPERT,
@@ -22,7 +22,7 @@
 		SKILL_ANATOMY  = SKILL_EXPERT
 	)
 	skill_points = 35
-	department_types = list(/decl/department/corporate)
+	department_types = list(/decl/department/tradehouse)
 	selection_color = "#a89004"
 	access = list(
 		access_lawyer,
@@ -58,7 +58,8 @@
 		access_hop,
 		access_RC_announce,
 		access_keycard_auth,
-		access_gateway
+		access_gateway,
+		access_cameras
 		)
 
 	minimal_access = list(
@@ -92,5 +93,6 @@
 		access_hop,
 		access_RC_announce,
 		access_keycard_auth,
-		access_gateway
+		access_gateway,
+		access_cameras
 		)

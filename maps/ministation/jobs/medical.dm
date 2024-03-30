@@ -5,7 +5,7 @@
 	supervisors = "the Head Doctor"
 	total_positions = 2
 	spawn_positions = 2
-	alt_titles = list("Chemist", "Nurse", "Surgeon")
+	alt_titles = list("Chemist","Nurse")
 	skill_points = 34
 	min_skill = list(
 		SKILL_LITERACY  = SKILL_ADEPT,
@@ -26,21 +26,23 @@
 		access_morgue,
 		access_surgery,
 		access_chemistry,
-		access_virology
+		access_virology,
+		access_cameras
 	)
 	minimal_access = list(
 		access_medical,
 		access_medical_equip,
 		access_morgue,
 		access_surgery,
-		access_virology
+		access_virology,
+		access_cameras
 	)
 	outfit_type = /decl/hierarchy/outfit/job/ministation/doctor
 	minimal_player_age = 3
 	event_categories = list(ASSIGNMENT_MEDICAL)
 
 /datum/job/ministation/doctor/head
-	title = "Head Doctor"
+	title = "Medical Director"
 	head_position = 1
 	department_types = list(
 		/decl/department/medical,
@@ -48,7 +50,7 @@
 	)
 	supervisors = "the Captain and your own ethics"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/doctor/head
-	alt_titles = list("Chief Medical Officer", "Head Surgeon")
+	alt_titles = list("Surgeon","Patriarch of Medicine", "Head Doctor")
 	total_positions = 1
 	spawn_positions = 1
 	skill_points = 38
@@ -82,7 +84,8 @@
 		access_robotics,
 		access_hydroponics,
 		access_maint_tunnels,
-		access_external_airlocks
+		access_external_airlocks,
+		access_cameras
 	)
 	minimal_access = list(
 		access_medical,
@@ -107,7 +110,8 @@
 		access_robotics,
 		access_hydroponics,
 		access_maint_tunnels,
-		access_external_airlocks
+		access_external_airlocks,
+		access_cameras
 	)
 	minimal_player_age = 14
 	ideal_character_age = 50

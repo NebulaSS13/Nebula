@@ -5,6 +5,8 @@
 	name = "Ministation - Job - Researcher"
 	uniform = /obj/item/clothing/under/color/white
 	id_type = /obj/item/card/id/ministation/scientist
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
+	yinglet_suit_officiated = TRUE
 
 /obj/item/card/id/ministation/scientist
 	name = "identification card"
@@ -14,6 +16,7 @@
 /decl/hierarchy/outfit/job/ministation/scientist/head
 	name = "Tradeship - Job - Head Researcher"
 	l_ear = /obj/item/radio/headset/heads/rd
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officer
 	shoes = /obj/item/clothing/shoes/dress
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/card/id/ministation/scientist/head
