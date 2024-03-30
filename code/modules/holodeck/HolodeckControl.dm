@@ -3,12 +3,12 @@
 	desc = "A computer used to control a nearby holodeck."
 	icon_keyboard = "tech_key"
 	icon_screen = "holocontrol"
-	is_spawnable_type = FALSE
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
 
 	var/lock_access = list(access_bridge)
 	var/islocked = 0
 	var/item_power_usage = 500
+	// TODO: some way to update this when the circuit is spawned rather than created from dismantling a console.
 	var/area/linkedholodeck = null
 	var/linkedholodeck_area
 	var/active = 0
@@ -180,6 +180,10 @@
 		emergencyShutdown()
 
 /obj/machinery/computer/holodeck_control/Process()
+
+	if(!linkedholodeck)
+		return
+
 	for(var/item in holographic_objs) // do this first, to make sure people don't take items out when power is down.
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
@@ -241,8 +245,10 @@
 
 
 /obj/machinery/computer/holodeck_control/proc/loadProgram(var/datum/holodeck_program/HP, var/check_delay = 1)
-	if(!HP)
+
+	if(!HP || !istype(linkedholodeck))
 		return
+
 	var/area/A = locate(HP.target)
 	if(!A)
 		return
@@ -305,6 +311,11 @@
 
 
 /obj/machinery/computer/holodeck_control/proc/toggleGravity(var/area/A)
+
+	if(!istype(A))
+		visible_message(SPAN_WARNING("ERROR. Cannot locate holodeck systems."), range = 3)
+		return
+
 	if(world.time < (last_gravity_change + 25))
 		if(world.time < (last_gravity_change + 15))//To prevent super-spam clicking
 			return
@@ -325,7 +336,7 @@
 	//Turn it back to the regular non-holographic room
 	loadProgram(global.using_map.holodeck_programs[global.using_map.holodeck_default_program[programs_list_id] || "turnoff"], 0)
 
-	if(!linkedholodeck.has_gravity)
+	if(linkedholodeck && !linkedholodeck.has_gravity)
 		linkedholodeck.gravitychange(1,linkedholodeck)
 
 	active = 0
