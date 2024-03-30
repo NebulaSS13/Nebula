@@ -47,12 +47,11 @@
 	else
 		desc = base_desc
 
-/obj/structure/proc/update_material_colour(var/override_colour)
+/obj/structure/proc/update_material_colour()
+	color = get_color()
 	if(istype(material))
-		color = override_colour || material.color
 		alpha = clamp((50 + material.opacity * 255), 0, 255)
 	else
-		color = override_colour || initial(color)
 		alpha = initial(alpha)
 
 ///Spawns a single part_type part, returns the result. Allows overriding spawning the actual part and it's constructor args.
@@ -77,6 +76,8 @@
 				placing = parts_amount
 			if(placing > 0)
 				LAZYADD(., M.place_dismantled_product(T, FALSE, placing, parts_type))
+
+/obj/structure/proc/clear_materials()
 	matter = null
 	material = null
 	reinf_material = null
@@ -85,7 +86,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!dismantled)
 		dismantled = TRUE
-		create_dismantled_products(get_turf(src))
+		var/list/products = create_dismantled_products(get_turf(src))
+		if(paint_color && length(products))
+			for(var/obj/product in products)
+				if((isitem(product) || istype(product, /obj/structure)) && product.get_material() == material)
+					product.set_color(paint_color)
+		clear_materials()
 		dump_contents()
 		if(!QDELETED(src))
 			qdel(src)

@@ -25,6 +25,7 @@
 
 /obj/item/shard/nullglass
 	material = MAT_NULLGLASS
+
 /decl/stack_recipe/tile/nullglass
-	name = "nullglass floor tile"
 	result_type = /obj/item/stack/tile/floor_nullglass
+	required_material = MAT_NULLGLASS

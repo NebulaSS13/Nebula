@@ -59,7 +59,7 @@
 	. = ..()
 	if(statpanel("Status"))
 
-		var/obj/item/gps/G = get_active_hand()
+		var/obj/item/gps/G = get_active_held_item()
 		if(istype(G))
 			stat("Coordinates:", "[G.get_coordinates()]")
 
@@ -575,16 +575,17 @@
 
 	var/list/new_slots
 	var/list/held_slots = get_held_item_slots()
-	for(var/slot_id in species.hud.inventory_slots)
-		var/datum/inventory_slot/old_slot = get_inventory_slot_datum(slot_id)
-		if(slot_id in held_slots)
-			LAZYSET(new_slots, slot_id, old_slot)
-			continue
-		var/datum/inventory_slot/new_slot = species.hud.inventory_slots[slot_id]
-		if(!old_slot || !old_slot.equivalent_to(new_slot))
-			LAZYSET(new_slots, slot_id, new_slot.Clone())
-		else
-			LAZYSET(new_slots, slot_id, old_slot)
+	if(istype(species.species_hud))
+		for(var/slot_id in species.species_hud.inventory_slots)
+			var/datum/inventory_slot/old_slot = get_inventory_slot_datum(slot_id)
+			if(slot_id in held_slots)
+				LAZYSET(new_slots, slot_id, old_slot)
+				continue
+			var/datum/inventory_slot/new_slot = species.species_hud.inventory_slots[slot_id]
+			if(!old_slot || !old_slot.equivalent_to(new_slot))
+				LAZYSET(new_slots, slot_id, new_slot.Clone())
+			else
+				LAZYSET(new_slots, slot_id, old_slot)
 	set_inventory_slots(new_slots)
 
 	//recheck species-restricted clothing
@@ -905,8 +906,8 @@
 
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
 		var/oxyloss_threshold = round(species.total_health * 0.35)
-		if(getOxyLoss() >= oxyloss_threshold)
-			setOxyLoss(oxyloss_threshold)
+		if(get_damage(OXY) >= oxyloss_threshold)
+			set_damage(OXY, oxyloss_threshold)
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
 		return TRUE
@@ -925,7 +926,7 @@
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/nervous_system_failure()
-	return getBrainLoss() >= get_max_health() * 0.75
+	return get_damage(BRAIN) >= get_max_health() * 0.75
 
 /mob/living/carbon/human/melee_accuracy_mods()
 	. = ..()

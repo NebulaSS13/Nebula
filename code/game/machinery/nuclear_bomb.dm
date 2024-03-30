@@ -229,7 +229,7 @@ var/global/bomb_set
 			yes_code = 0
 			auth = null
 		else
-			var/obj/item/I = usr.get_active_hand()
+			var/obj/item/I = usr.get_active_held_item()
 			if(istype(I, /obj/item/disk/nuclear))
 				if(!usr.try_unequip(I, src))
 					return 1

@@ -151,7 +151,7 @@
 			giver = null
 			accesses.Cut()
 		else
-			var/obj/item/I = user.get_active_hand()
+			var/obj/item/I = user.get_active_held_item()
 			if (istype(I, /obj/item/card/id) && user.try_unequip(I))
 				I.forceMove(src)
 				giver = I

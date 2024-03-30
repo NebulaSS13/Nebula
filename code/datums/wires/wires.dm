@@ -131,7 +131,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 		var/mob/living/L = usr
 		if(CanUse(L) && href_list["action"])
 
-			var/obj/item/I = L.get_active_hand()
+			var/obj/item/I = L.get_active_held_item()
 			var/obj/item/offhand_item = usr?.get_rig()?.selected_module
 
 			holder.add_hiddenprint(L)

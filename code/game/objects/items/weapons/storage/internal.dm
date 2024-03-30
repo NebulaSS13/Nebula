@@ -68,7 +68,7 @@
 		var/mob/living/carbon/human/H = user
 		for(var/slot in global.pocket_slots)
 			var/obj/item/pocket = H.get_equipped_item(slot)
-			if(pocket == master_item && !H.get_active_hand())
+			if(pocket == master_item && !H.get_active_held_item())
 				H.try_unequip(master_item)
 				H.put_in_hands(master_item)
 				return FALSE

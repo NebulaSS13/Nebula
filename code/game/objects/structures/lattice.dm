@@ -12,7 +12,7 @@
 	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
-/obj/structure/lattice/Initialize()
+/obj/structure/lattice/Initialize(mapload)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		DELETE_IF_DUPLICATE_OF(/obj/structure/lattice)
@@ -21,7 +21,8 @@
 		var/turf/T = loc
 		if(!istype(T) || !T.is_open())
 			return INITIALIZE_HINT_QDEL
-		. = INITIALIZE_HINT_LATELOAD
+		if(mapload)
+			return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/lattice/LateInitialize()
 	. = ..()

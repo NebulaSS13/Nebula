@@ -15,7 +15,7 @@
 
 /mob/living/simple_animal/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
 	SHOULD_CALL_PARENT(FALSE)
-	setCloneLoss(gene_damage + amount)
+	set_damage(CLONE, gene_damage + amount)
 	if(do_update_health)
 		update_health()
 
@@ -35,5 +35,10 @@
 	if(do_update_health)
 		update_health()
 
-/mob/living/simple_animal/get_total_life_damage()
-	return getFireLoss() + getBruteLoss() + getCloneLoss()
+/mob/living/simple_animal/get_life_damage_types()
+	var/static/list/life_damage_types = list(
+		BURN,
+		BRUTE,
+		CLONE
+	)
+	return life_damage_types

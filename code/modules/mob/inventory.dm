@@ -1,6 +1,6 @@
 //This proc is called whenever someone clicks an inventory ui slot.
 /mob/proc/attack_ui(slot)
-	var/obj/item/W = get_active_hand()
+	var/obj/item/W = get_active_held_item()
 	var/obj/item/E = get_equipped_item(slot)
 	if (istype(E))
 		if(istype(W))
@@ -114,7 +114,7 @@
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
 
 //Returns the thing in our active hand
-/mob/proc/get_active_hand()
+/mob/proc/get_active_held_item()
 	RETURN_TYPE(/obj/item)
 	return null
 
@@ -129,7 +129,7 @@
 /mob/proc/get_held_items()
 	for(var/obj/item/thing in get_inactive_held_items())
 		LAZYADD(., thing)
-	var/obj/item/thing = get_active_hand()
+	var/obj/item/thing = get_active_held_item()
 	if(istype(thing))
 		LAZYADD(., thing)
 
@@ -193,7 +193,7 @@
 				qdel(grab)
 				. = TRUE
 			return
-	. = drop_from_inventory(get_active_hand(), Target)
+	. = drop_from_inventory(get_active_held_item(), Target)
 
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
@@ -340,7 +340,7 @@
 
 /// If this proc returns false, reconsider_client_screen_presence will set the item's screen_loc to null.
 /mob/proc/item_should_have_screen_presence(obj/item/item, slot)
-	if(!slot || !hud_used)
+	if(!slot || !istype(hud_used))
 		return FALSE
 	if(hud_used.inventory_shown)
 		return TRUE

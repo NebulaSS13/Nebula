@@ -10,7 +10,7 @@
 
 /decl/stack_recipe/hardness/integrity/furniture/door
 	result_type        = /obj/structure/door
-	req_amount         = 5 // Arbitrary value since doors return weird matter values.
+	req_amount         = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since doors return weird matter values.
 
 /decl/stack_recipe/hardness/integrity/furniture/barricade
 	result_type        = /obj/structure/barricade
@@ -29,18 +29,25 @@
 	result_type        = /obj/item/stool/bar
 	category           = "seating"
 
-/decl/stack_recipe/hardness/integrity/furniture/pew
-	result_type        = /obj/structure/bed/chair/pew
+/decl/stack_recipe/hardness/integrity/furniture/bench
+	result_type        = /obj/structure/bed/chair/bench
 	category           = "seating"
 
-/decl/stack_recipe/hardness/integrity/furniture/pew/left
-	result_type        = /obj/structure/bed/chair/pew/left
+/decl/stack_recipe/hardness/integrity/furniture/bench/single
+	result_type        = /obj/structure/bed/chair/bench/single
+
+/decl/stack_recipe/hardness/integrity/furniture/bench/pew
+	result_type        = /obj/structure/bed/chair/bench/pew
+
+/decl/stack_recipe/hardness/integrity/furniture/bench/pew/single
+	result_type        = /obj/structure/bed/chair/bench/pew/single
 
 /decl/stack_recipe/hardness/integrity/furniture/closet
 	result_type        = /obj/structure/closet
 
 /decl/stack_recipe/hardness/integrity/furniture/tank_dispenser
 	result_type        = /obj/structure/tank_rack
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/integrity/furniture/coffin
 	result_type        = /obj/structure/closet/coffin
@@ -49,19 +56,15 @@
 	result_type        = /obj/structure/bed/chair
 	category           = "seating"
 
-/decl/stack_recipe/hardness/integrity/furniture/chair/padded
-	result_type        = /obj/structure/bed/chair/padded
-
 /decl/stack_recipe/hardness/integrity/furniture/chair/office
-
-/decl/stack_recipe/hardness/integrity/furniture/chair/office/comfy
-	result_type        = /obj/structure/bed/chair/office/comfy
+	result_type        = /obj/structure/bed/chair/office/comfy/unpadded
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/comfy
-	result_type        = /obj/structure/bed/chair/comfy
+	result_type        = /obj/structure/bed/chair/comfy/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/arm
-	result_type        = /obj/structure/bed/chair/armchair
+	result_type        = /obj/structure/bed/chair/armchair/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/roundedchair
 	result_type        = /obj/structure/bed/chair/rounded
@@ -77,6 +80,4 @@
 
 /decl/stack_recipe/hardness/integrity/rod
 	result_type        = /obj/item/stack/material/rods
-	res_amount         = 2
-	max_res_amount     = 60
 	difficulty         = MAT_VALUE_NORMAL_DIY

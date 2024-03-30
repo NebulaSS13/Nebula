@@ -18,20 +18,25 @@
 	icon_state = ICON_STATE_WORLD
 	buckle_pixel_shift = @"{'x':0,'y':0,'z':8}"
 
+
 	var/can_have_rider = TRUE
 	var/max_rider_size = MOB_SIZE_SMALL
 
-	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
-
-	var/list/speak = list("...")
+	/// Does the percentage health show in the stat panel for the mob?
+	var/show_stat_health = TRUE
+	/// A prob chance of speaking.
 	var/speak_chance = 0
-	var/list/emote_hear = list()	//Hearable emotes
-	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
+	/// Strings shown when this mob speaks and is not understood.
+	var/list/emote_speech
+	/// Hearable emotes that this mob can randomly perform.
+	var/list/emote_hear
+	/// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
+	var/list/emote_see
 
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/wander = 1	// Does the mob wander around when idle?
+	var/wander = TRUE // Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is grabbing it.
 
 	//Interaction
@@ -47,7 +52,6 @@
 	var/maxbodytemp = 350
 	var/heat_damage_per_tick = 3	//amount of damage applied if animal's body temperature is higher than maxbodytemp
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
-	var/fire_alert = 0
 
 	//Atmos effect - Yes, you can make creatures that require arbitrary gasses to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/min_gas = list(/decl/material/gas/oxygen = 5)
@@ -184,13 +188,14 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/handle_regular_status_updates()
 	if(purge)
 		purge -= 1
+
 	. = ..()
 	if(.)
 		if(can_bleed && bleed_ticks > 0)
 			handle_bleeding()
 		if(is_aquatic && !submerged())
 			walk(src, 0)
-			if(HAS_STATUS(src, STAT_PARA))
+			if(HAS_STATUS(src, STAT_PARA) <= 2) // gated to avoid redundant update_icon() calls.
 				SET_STATUS_MAX(src, STAT_PARA, 3)
 				update_icon()
 
@@ -212,6 +217,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	do_delayed_life_action()
 	performing_delayed_life_action = FALSE
 
+/mob/living/simple_animal/proc/turf_is_safe(turf/target)
+	if(!istype(target))
+		return FALSE
+	if(target.is_open() && target.has_gravity() && !can_overcome_gravity())
+		return FALSE
+	if(is_aquatic != target.submerged())
+		return FALSE
+	return TRUE
+
 // For saner overriding; only override this.
 /mob/living/simple_animal/proc/do_delayed_life_action()
 	if(buckled && can_escape)
@@ -232,24 +246,27 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
-				SelfMove(pick(global.cardinal))
-				turns_since_move = 0
+				var/turf/move_to = get_step(loc, pick(global.cardinal))
+				if(turf_is_safe(move_to))
+					SelfMove(move_to)
+					turns_since_move = 0
 
 	//Speaking
-	if(speak_chance)
-		if(rand(0,200) < speak_chance)
-			var/action = pick(
-				speak.len;      "speak",
-				emote_hear.len; "emote_hear",
-				emote_see.len;  "emote_see"
-				)
-
-			switch(action)
-				if("speak")
-					say(pick(speak))
-				if("emote_hear")
+	if(prob(speak_chance))
+		var/action = pick(
+			LAZYLEN(emote_speech); "emote_speech",
+			LAZYLEN(emote_hear);   "emote_hear",
+			LAZYLEN(emote_see);    "emote_see"
+		)
+		switch(action)
+			if("emote_speech")
+				if(length(emote_speech))
+					say(pick(emote_speech))
+			if("emote_hear")
+				if(length(emote_hear))
 					audible_emote("[pick(emote_hear)].")
-				if("emote_see")
+			if("emote_see")
+				if(length(emote_see))
 					visible_emote("[pick(emote_see)].")
 
 /mob/living/simple_animal/handle_environment(datum/gas_mixture/environment)
@@ -275,16 +292,16 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			bodytemperature += ((environment.temperature - bodytemperature) / 5)
 
 	if(bodytemperature < minbodytemp)
-		fire_alert = 2
-		adjustFireLoss(cold_damage_per_tick)
+		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 2)
+		take_damage(BURN, cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
-		fire_alert = 1
-		adjustFireLoss(heat_damage_per_tick)
+		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 1)
+		take_damage(BURN, heat_damage_per_tick)
 	else
-		fire_alert = 0
+		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 0)
 
 	if(!atmos_suitable)
-		adjustBruteLoss(unsuitable_atmos_damage)
+		take_damage(BRUTE, unsuitable_atmos_damage)
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
@@ -319,7 +336,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	bullet_impact_visuals(Proj)
-	adjustBruteLoss(damage)
+	take_damage(BRUTE, damage)
 	Proj.on_hit(src)
 	return 0
 
@@ -352,7 +369,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				harm_verb = pick(attack.attack_verb)
 				if(attack.sharp || attack.edge)
 					adjustBleedTicks(dealt_damage)
-		adjustBruteLoss(dealt_damage)
+		take_damage(BRUTE, dealt_damage)
 		user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
 		user.do_attack_animation(src)
 		return TRUE
@@ -365,7 +382,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
 			else if(current_health < get_max_health() && MED.can_use(1))
-				adjustBruteLoss(-MED.animal_heal)
+				heal_damage(BRUTE, MED.animal_heal)
 				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 				MED.use(1)
 		else
@@ -409,7 +426,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
 		purge = 3
-	adjustBruteLoss(damage)
+	take_damage(BRUTE, damage)
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)
 
@@ -522,7 +539,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/handle_bleeding()
 	bleed_ticks--
-	adjustBruteLoss(1)
+	take_damage(BRUTE, 1)
 
 	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour

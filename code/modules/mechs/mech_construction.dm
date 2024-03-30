@@ -88,7 +88,7 @@
 				SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."),
 				SPAN_NOTICE("You begin trying to install \the [system] into \the [src].")
 			)
-			if(!do_after(user, delay, src) || user.get_active_hand() != system)
+			if(!do_after(user, delay, src) || user.get_active_held_item() != system)
 				return FALSE
 
 			if(user.try_unequip(system))

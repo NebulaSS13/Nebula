@@ -23,7 +23,6 @@
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
 
-
 /obj/Initialize(mapload)
 	. = ..()
 	create_matter()

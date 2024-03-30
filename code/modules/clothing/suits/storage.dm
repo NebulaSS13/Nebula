@@ -1,4 +1,5 @@
 /obj/item/clothing/suit/storage
+	replaced_in_loadout = FALSE
 	var/obj/item/storage/internal/pockets/pockets
 	var/slots = 2
 

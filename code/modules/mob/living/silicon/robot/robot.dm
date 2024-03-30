@@ -474,13 +474,13 @@
 			to_chat(user, "<span class='warning'>You lack the reach to be able to repair yourself.</span>")
 			return
 
-		if (!getBruteLoss())
+		if (!get_damage(BRUTE))
 			to_chat(user, "Nothing to fix here!")
 			return
 		var/obj/item/weldingtool/WT = W
 		if (WT.weld(0))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			adjustBruteLoss(-30)
+			heal_damage(BRUTE, 30)
 			add_fingerprint(user)
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
 		else
@@ -488,13 +488,13 @@
 			return
 
 	else if(istype(W, /obj/item/stack/cable_coil) && (wiresexposed || isdrone(src)))
-		if (!getFireLoss())
+		if (!get_damage(BURN))
 			to_chat(user, "Nothing to fix here!")
 			return
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.use(1))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			adjustFireLoss(-30)
+			heal_damage(BURN, 30)
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the burnt wires on \the [src]!"))
 
 	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
@@ -639,8 +639,8 @@
 		return ..()
 
 /mob/living/silicon/robot/proc/handle_selfinsert(obj/item/W, mob/user)
-	if ((user == src) && istype(get_active_hand(),/obj/item/gripper))
-		var/obj/item/gripper/H = get_active_hand()
+	if ((user == src) && istype(get_active_held_item(),/obj/item/gripper))
+		var/obj/item/gripper/H = get_active_held_item()
 		if (W.loc == H) //if this triggers something has gone very wrong, and it's safest to abort
 			return
 		else if (H.wrapped == W)
@@ -876,7 +876,7 @@
 	set category = "IC"
 	set src = usr
 
-	var/obj/item/W = get_active_hand()
+	var/obj/item/W = get_active_held_item()
 	if (W)
 		W.attack_self(src)
 

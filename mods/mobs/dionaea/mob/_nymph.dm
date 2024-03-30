@@ -27,7 +27,7 @@
 	holder_type = /obj/item/holder/diona
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
-	hud_type = /datum/hud/diona_nymph
+	hud_used = /datum/hud/diona_nymph
 
 	ai = /datum/ai/nymph
 
@@ -74,8 +74,8 @@
 		radiation -= rads
 		adjust_nutrition(rads)
 		heal_overall_damage(rads,rads)
-		adjustOxyLoss(-(rads), do_update_health = FALSE)
-		adjustToxLoss(-(rads))
+		heal_damage(OXY, rads, do_update_health = FALSE)
+		heal_damage(TOX, rads)
 
 /decl/bodytype/diona
 	name = "nymph"

@@ -233,16 +233,16 @@
 			owner.radiation = max(0, owner.radiation - heal_rate)
 			return
 
-		if(owner.getCloneLoss() && spend_power(heal_rate))
+		if(owner.get_damage(CLONE) && spend_power(heal_rate))
 			if(prob(25))
 				to_chat(owner, SPAN_NOTICE("Your autoredactive faculty stitches together some of your mangled DNA."))
-			owner.adjustCloneLoss(-heal_rate)
+			owner.heal_damage(CLONE, heal_rate)
 			return
 
 	// Heal everything left.
-	if(heal_general && prob(mend_prob) && (owner.getBruteLoss() || owner.getFireLoss() || owner.getOxyLoss()) && spend_power(heal_rate))
-		owner.adjustBruteLoss(-(heal_rate), do_update_health = FALSE)
-		owner.adjustFireLoss(-(heal_rate), do_update_health = FALSE)
-		owner.adjustOxyLoss(-(heal_rate))
+	if(heal_general && prob(mend_prob) && (owner.get_damage(BRUTE) || owner.get_damage(BURN) || owner.get_damage(OXY)) && spend_power(heal_rate))
+		owner.heal_damage(BRUTE, heal_rate, do_update_health = FALSE)
+		owner.heal_damage(BURN, heal_rate, do_update_health = FALSE)
+		owner.heal_damage(OXY, heal_rate)
 		if(prob(25))
 			to_chat(owner, SPAN_NOTICE("Your skin crawls as your autoredactive faculty heals your body."))

@@ -22,11 +22,18 @@
 	craft_verb                 = "knap"
 	craft_verbing              = "knapping"
 	can_be_pulverized          = TRUE
+	matter_multiplier          = 1.5
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
 	var/static/list/ore_icon_states = icon_states('icons/obj/materials/ore.dmi')
+
+/obj/item/stack/material/ore/get_stack_conversion_dictionary()
+	var/static/list/converts_into = list(
+		TOOL_HAMMER = /obj/item/stack/material/brick
+	)
+	return converts_into
 
 ///Returns a cached ore pile icon state
 /obj/item/stack/material/ore/proc/get_cached_ore_pile_overlay(var/state_name, var/stack_icon_index)
@@ -65,21 +72,6 @@
 		states += scrapboard
 		cached_ore_icon_states[IS] = states
 
-/obj/item/stack/material/ore/attackby(obj/item/W, mob/user)
-	if(IS_HAMMER(W))
-		if(W.material?.hardness < material?.hardness)
-			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to pulverize [material.solid_name]."))
-			return TRUE
-		var/converting = clamp(get_amount(), 0, 5)
-		if(converting)
-			// TODO: make a gravel type?
-			// TODO: pass actual stone material to gravel?
-			new /obj/item/stack/material/ore/sand(get_turf(user), converting)
-			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
-			use(converting)
-		return TRUE
-	return ..()
-
 /obj/item/stack/material/ore/update_state_from_amount()
 	if(amount > 1)
 		add_overlay(get_cached_ore_pile_overlay(icon_state, amount))
@@ -98,7 +90,6 @@
 	. = ..()
 	if(istype(material))
 		LAZYSET(matter, material.type, SHEET_MATERIAL_AMOUNT)
-		set_color(material.color)
 		icon_state = material.ore_icon_overlay ? material.ore_icon_overlay : initial(icon_state)
 		if(icon_state == "dust")
 			slot_flags = SLOT_HOLSTER
@@ -112,7 +103,6 @@
 /obj/item/stack/material/ore/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/stack/material) && !is_same(W))
 		return FALSE //Don't reinforce
-
 	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		return FALSE //Don't melt stuff with welder
 	return ..()
@@ -135,10 +125,6 @@
 	material = /decl/material/solid/hematite
 /obj/item/stack/material/ore/coal
 	material = /decl/material/solid/graphite
-/obj/item/stack/material/ore/sand
-	material = /decl/material/solid/sand
-/obj/item/stack/material/ore/clay
-	material = /decl/material/solid/clay
 /obj/item/stack/material/ore/silver
 	material = /decl/material/solid/metal/silver
 /obj/item/stack/material/ore/gold
@@ -177,6 +163,19 @@
 	material = /decl/material/solid/ice/hydrate/xenon
 /obj/item/stack/material/ore/meat
 	material = /decl/material/solid/organic/meat
+
+/obj/item/stack/material/ore/handful
+	singular_name         = "handful"
+	plural_name           = "handfuls"
+	stack_merge_type      = /obj/item/stack/material/ore/handful
+	matter_multiplier     = 1
+	can_be_pulverized     = FALSE
+
+/obj/item/stack/material/ore/handful/get_stack_conversion_dictionary()
+	return
+
+/obj/item/stack/material/ore/handful/sand
+	material      = /decl/material/solid/sand
 
 /client/proc/spawn_ore_pile()
 	set name = "Spawn Ore Pile"
