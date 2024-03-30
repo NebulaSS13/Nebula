@@ -369,12 +369,14 @@
 /obj/structure/table/reinforced,
 /obj/machinery/button/blast_door{
 	id_tag = "quarantine";
-	name = "Infirmary Quarantine Button"
+	name = "Infirmary Quarantine Button";
+	directional_offset = null
 	},
 /obj/machinery/button/alternate/door{
 	id_tag = "medleave";
 	name = "Interior medbay doors button";
-	pixel_y = 8
+	pixel_y = 8;
+	directional_offset = null
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -483,7 +485,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -633,7 +635,8 @@
 /area/ministation/security)
 "ds" = (
 /obj/machinery/computer/cryopod{
-	pixel_y = -27
+	pixel_y = -27;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/ministation/arrival)
@@ -778,7 +781,8 @@
 	dir = 6
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled/white,
@@ -898,9 +902,7 @@
 /area/ministation/maint/l2centrals)
 "ey" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
@@ -973,11 +975,12 @@
 	},
 /obj/machinery/computer/modular/telescreen/preset/generic{
 	name = "south bump";
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/item/radio/intercom/locked/entertainment{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/floor/tiled,
 /area/ministation/hop)
@@ -985,9 +988,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/floor/tiled,
 /area/ministation/hall/w2)
 "fl" = (
@@ -1097,7 +1098,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "secshut";
 	name = "security shutter button";
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/machinery/computer/prisoner{
 	dir = 4
@@ -1361,7 +1363,7 @@
 /obj/item/bedsheet/mime,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -27
+	pixel_y = -30
 	},
 /turf/floor/tiled,
 /area/ministation/security)
@@ -1481,7 +1483,8 @@
 /area/ministation/security)
 "hz" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -1719,7 +1722,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1952,7 +1955,6 @@
 	dir = 8
 	},
 /obj/machinery/power/apc{
-	areastring = null;
 	name = "_South APC";
 	pixel_y = -24
 	},
@@ -1965,7 +1967,7 @@
 /obj/machinery/porta_turret{
 	dir = 4;
 	id_tag = "goodstuff";
-	max_health = 160;
+	max_health = 160
 	},
 /turf/floor/bluegrid,
 /area/ministation/security)
@@ -2002,13 +2004,6 @@
 	},
 /turf/floor/plating,
 /area/ministation/maint/l2centraln)
-"jA" = (
-/obj/structure/sign/department/botany{
-	pixel_y = -1
-	},
-/obj/structure/window/basic/full,
-/turf/floor/tiled,
-/area/ministation/hydro)
 "jF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -2070,7 +2065,8 @@
 /obj/structure/table,
 /obj/item/book/skill/service/cooking,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/machinery/fabricator/micro/bartender{
 	pixel_x = 4
@@ -2082,7 +2078,7 @@
 /obj/item/hand_labeler,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/item/storage/pill_bottle,
 /obj/machinery/light{
@@ -2438,14 +2434,15 @@
 	},
 /obj/structure/bed/chair,
 /obj/machinery/status_display{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /turf/floor/tiled,
 /area/ministation/hall/w2)
 "lJ" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = -34;
+	pixel_y = -30;
 	dir = 1
 	},
 /turf/floor/carpet/blue2,
@@ -2572,7 +2569,8 @@
 /obj/machinery/network/requests_console{
 	department = "Detective's office";
 	pixel_x = -32;
-	initial_network_id = "molluscnet"
+	initial_network_id = "molluscnet";
+	dir = 8
 	},
 /turf/floor/carpet/red,
 /area/ministation/detective)
@@ -2635,7 +2633,8 @@
 /area/ministation/hall/e2)
 "mL" = (
 /obj/machinery/newscaster{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /obj/machinery/camera/network/security{
 	dir = 4;
@@ -2869,7 +2868,7 @@
 /obj/machinery/camera/autoname,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/door/firedoor{
 	dir = 8
@@ -3195,7 +3194,7 @@
 /obj/item/circular_saw,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -3247,7 +3246,7 @@
 /obj/structure/table,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/item/bonesetter,
 /obj/item/bonegel,
@@ -3468,7 +3467,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -32
+	pixel_y = -30
 	},
 /obj/abstract/landmark/latejoin/cryo,
 /turf/floor/tiled/dark,
@@ -3487,7 +3486,7 @@
 "qX" = (
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/machinery/computer/modular/preset/security{
 	dir = 4
@@ -3517,7 +3516,8 @@
 	dir = 8
 	},
 /obj/machinery/status_display{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /turf/floor/tiled,
 /area/ministation/hall/w2)
@@ -3739,7 +3739,8 @@
 /area/ministation/medical)
 "rM" = (
 /obj/machinery/status_display{
-	pixel_y = -29
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -4392,7 +4393,7 @@
 "tS" = (
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/cooker/fryer,
@@ -4490,7 +4491,8 @@
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/machinery/newscaster{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/floor/tiled/dark,
 /area/ministation/cafe)
@@ -4609,7 +4611,8 @@
 /area/ministation/hall/e2)
 "ux" = (
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/machinery/vending/sovietsoda{
 	dir = 8;
@@ -4658,7 +4661,6 @@
 	dir = 4
 	},
 /obj/machinery/power/apc{
-	areastring = null;
 	name = "_South APC";
 	pixel_y = -24
 	},
@@ -4754,7 +4756,8 @@
 	icon_state = "tube1"
 	},
 /obj/structure/sign/warning/nosmoking_1{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 4
 	},
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -4885,7 +4888,7 @@
 /area/ministation/cafe)
 "vt" = (
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/flora/pottedplant/minitree,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
@@ -5013,7 +5016,7 @@
 /obj/item/pen,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -32
+	pixel_y = -30
 	},
 /obj/item/scanner/autopsy,
 /turf/floor/tiled/dark,
@@ -5243,7 +5246,8 @@
 	req_access = list("ACCESS_CAMERAS")
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled/white,
@@ -5484,7 +5488,8 @@
 "xt" = (
 /obj/structure/table,
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/machinery/chemical_dispenser/bar_alc/full{
 	dir = 8
@@ -5660,7 +5665,8 @@
 "xW" = (
 /obj/structure/table/marble,
 /obj/machinery/status_display{
-	pixel_y = -29
+	pixel_y = -29;
+	dir = 1
 	},
 /obj/machinery/door/firedoor{
 	dir = 8
@@ -5859,7 +5865,8 @@
 /area/ministation/cafe)
 "yB" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -5903,7 +5910,8 @@
 	dir = 8
 	},
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 4
@@ -5917,7 +5925,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -32
+	pixel_y = -30
 	},
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -6395,7 +6403,8 @@
 /area/ministation/hydro)
 "Av" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/lino,
@@ -6609,7 +6618,7 @@
 	pixel_y = 32
 	},
 /obj/item/radio/intercom/locked/entertainment{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -6715,7 +6724,8 @@
 /area/ministation/maint/l2centraln)
 "Cp" = (
 /obj/machinery/vending/wallmed1{
-	pixel_y = -24
+	pixel_y = -24;
+	dir = 1
 	},
 /obj/structure/table/woodentable,
 /obj/machinery/reagent_temperature,
@@ -6835,7 +6845,7 @@
 /area/ministation/hall/w2)
 "CV" = (
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/floor/carpet,
 /area/ministation/hall/w2)
@@ -6901,7 +6911,7 @@
 "Dk" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/item/chems/drinks/juicebox/apple,
@@ -6968,7 +6978,8 @@
 /area/ministation/security)
 "DC" = (
 /obj/machinery/newscaster{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /turf/floor/carpet/red,
 /area/ministation/detective)
@@ -7078,9 +7089,7 @@
 /area/ministation/hall/w2)
 "Eg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -7155,7 +7164,7 @@
 	dir = 8
 	},
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -7268,7 +7277,7 @@
 "Fz" = (
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -32
+	pixel_y = -30
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -7297,11 +7306,12 @@
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/machinery/computer/modular/telescreen/preset/generic{
 	name = "south bump";
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/item/radio/intercom/locked/entertainment{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -7367,7 +7377,8 @@
 /area/ministation/hall/w2)
 "Gh" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -7556,7 +7567,7 @@
 "HF" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/alarm{
 	dir = 4;
@@ -7587,9 +7598,7 @@
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "HJ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/floor/tiled,
 /area/ministation/hall/w2)
 "HL" = (
@@ -7650,7 +7659,7 @@
 /obj/item/chems/drinks/glass2/mug,
 /obj/effect/floor_decal/carpet,
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/floor/tiled/dark,
 /area/ministation/security)
@@ -7668,7 +7677,8 @@
 /area/ministation/maint/l2centrals)
 "Ie" = (
 /obj/machinery/status_display{
-	pixel_y = -29
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/ministation/arrival)
@@ -7678,7 +7688,7 @@
 /obj/random/plushie,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -32
+	pixel_y = -30
 	},
 /turf/floor/carpet/blue2,
 /area/ministation/security)
@@ -7693,6 +7703,11 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/southleft,
 /obj/structure/table/reinforced,
+/obj/structure/sign/department/botany{
+	pixel_y = -1;
+	dir = 4;
+	pixel_x = -32
+	},
 /turf/floor/tiled,
 /area/ministation/hydro)
 "In" = (
@@ -7740,7 +7755,8 @@
 /area/ministation/maint/l2centrals)
 "Iz" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
@@ -7830,7 +7846,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 20
+	pixel_x = 22
 	},
 /obj/machinery/camera/autoname{
 	dir = 1
@@ -8216,7 +8232,8 @@
 /area/ministation/hall/w2)
 "Lp" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -8406,7 +8423,8 @@
 /obj/abstract/landmark/latejoin/cryo,
 /obj/machinery/status_display{
 	pixel_y = -1;
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/floor/tiled/dark,
 /area/ministation/cryo)
@@ -8586,7 +8604,8 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/vending/wallmed1{
-	pixel_x = -26
+	pixel_x = -26;
+	dir = 4
 	},
 /turf/floor/tiled,
 /area/ministation/security)
@@ -8604,7 +8623,8 @@
 "Nu" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "escape2_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -8903,7 +8923,7 @@
 /obj/machinery/door/firedoor,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/floor/plating,
 /area/ministation/medical)
@@ -9102,7 +9122,8 @@
 "PY" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "escape1_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -9389,7 +9410,8 @@
 	req_access = list("ACCESS_CAMERAS")
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled/white,
@@ -9423,11 +9445,15 @@
 /turf/floor/tiled/white,
 /area/ministation/detective)
 "Sd" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/structure/sign/warning/airlock{
-	pixel_y = -1
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
 	},
-/turf/floor/plating,
+/obj/structure/sign/warning/airlock{
+	pixel_y = -1;
+	dir = 4;
+	pixel_x = -32
+	},
+/turf/floor/tiled,
 /area/ministation/hall/w2)
 "Sg" = (
 /obj/structure/cable{
@@ -9866,7 +9892,8 @@
 /area/ministation/detective)
 "UC" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/structure/closet/wardrobe/chemistry_white,
 /obj/effect/floor_decal/industrial/hatch/red,
@@ -10000,7 +10027,8 @@
 /area/ministation/hydro)
 "Vr" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/floor/tiled,
 /area/ministation/hop)
@@ -10015,7 +10043,8 @@
 	name = "exterior access button";
 	pixel_x = -20;
 	pixel_y = -10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /turf/floor/plating,
 /area/ministation/maint/l2centrals)
@@ -10030,7 +10059,8 @@
 "Vu" = (
 /obj/machinery/status_display{
 	pixel_y = -1;
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 5
@@ -10072,7 +10102,7 @@
 "VJ" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/body_scanconsole{
 	dir = 8
@@ -10139,7 +10169,8 @@
 	pixel_y = 32
 	},
 /obj/structure/sign/warning/smoking{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /turf/floor/carpet,
 /area/ministation/hall/w2)
@@ -10212,7 +10243,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 20
+	pixel_x = 22
 	},
 /turf/floor/carpet/blue3,
 /area/ministation/security)
@@ -10359,7 +10390,7 @@
 	icon_state = "warning"
 	},
 /obj/machinery/turretid/stun{
-	dir = 4;
+	dir = 8;
 	pixel_x = 26;
 	initial_access = null;
 	req_access = list("ACCESS_HEAD_OF_SECURITY");
@@ -10373,7 +10404,8 @@
 	},
 /obj/structure/sign/department/chemistry{
 	pixel_x = 32;
-	pixel_y = -5
+	pixel_y = -5;
+	dir = 8
 	},
 /turf/floor/tiled/white,
 /area/ministation/hall/e2)
@@ -10385,7 +10417,8 @@
 	dir = 8
 	},
 /obj/structure/sign/warning/armory{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
@@ -10570,7 +10603,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /turf/floor/tiled,
 /area/ministation/security)
@@ -10600,7 +10633,7 @@
 "YY" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/item/mop,
 /obj/structure/mopbucket,
@@ -10644,7 +10677,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "Chef1";
 	name = "Kitchen Shutter";
-	pixel_y = -24
+	pixel_y = -24;
+	dir = 1
 	},
 /obj/random/plushie,
 /turf/floor/carpet,
@@ -35266,13 +35300,13 @@ kZ
 kZ
 rt
 OT
-Sd
+rt
 kZ
 cr
 kZ
 rt
 OT
-Sd
+rt
 OT
 rt
 aa
@@ -35523,13 +35557,13 @@ kZ
 lI
 mh
 Ry
-mh
+Sd
 nx
 oH
 rc
 mh
 Ry
-mh
+Sd
 rW
 kZ
 aa
@@ -50443,7 +50477,7 @@ Xw
 ty
 um
 jV
-jA
+OV
 if
 qT
 wN
