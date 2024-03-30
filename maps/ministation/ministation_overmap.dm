@@ -1,8 +1,6 @@
 /obj/effect/overmap/visitable/ship/ministation
-	name = "Tradepost Mollusc"
+	name = "Tradepost Zebra"
 	color = "#00ffff"
-//	start_x = 4
-//	start_y = 4
 	vessel_mass = 5000
 	max_speed = 1/(2 SECONDS)
 	burn_delay = 2 SECONDS

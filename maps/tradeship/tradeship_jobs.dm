@@ -27,7 +27,7 @@
 		suit = pick(list(
 			/obj/item/clothing/suit/space/void/mining,
 			/obj/item/clothing/suit/space/void/engineering,
-			/obj/item/clothing/suit/space/void/pilot,
+			/obj/item/clothing/suit/space/void/expedition,
 			/obj/item/clothing/suit/space/void/excavation,
 			/obj/item/clothing/suit/space/void/engineering/salvage
 		))
@@ -35,7 +35,7 @@
 		helmet = pick(list(
 			/obj/item/clothing/head/helmet/space/void/mining,
 			/obj/item/clothing/head/helmet/space/void/engineering,
-			/obj/item/clothing/head/helmet/space/void/pilot,
+			/obj/item/clothing/head/helmet/space/void/expedition,
 			/obj/item/clothing/head/helmet/space/void/excavation,
 			/obj/item/clothing/head/helmet/space/void/engineering/salvage
 		))

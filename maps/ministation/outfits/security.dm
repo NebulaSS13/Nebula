@@ -14,7 +14,6 @@
 	r_pocket = /obj/item/handcuffs
 	id_type = /obj/item/card/id/ministation/security
 	pda_type = /obj/item/modular_computer/pda/security
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
 
 /decl/hierarchy/outfit/job/ministation/security/head
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
@@ -28,7 +27,6 @@
 	r_pocket = /obj/item/handcuffs
 	id_type = /obj/item/card/id/ministation/security
 	pda_type = /obj/item/modular_computer/pda/security
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officer
 
 /decl/hierarchy/outfit/job/ministation/security/Initialize()
 	. = ..()

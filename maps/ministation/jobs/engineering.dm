@@ -48,11 +48,11 @@
 		SKILL_ENGINES      = SKILL_MAX
 	)
 	skill_points = 30
-	alt_titles = list("Atmospheric Technician")
+	alt_titles = list("Atmospheric Technician", "Electrician", "Maintenance Technician")
 	event_categories = list(ASSIGNMENT_ENGINEER)
 
 /datum/job/ministation/engineer/head
-	title = "Chief Engineer"
+	title = "Head Engineer"
 	head_position = 1
 	department_types = list(
 		/decl/department/engineering,
@@ -135,5 +135,5 @@
 		SKILL_ENGINES      = SKILL_MAX
 	)
 	skill_points = 40
-	alt_titles = list("Head Engineer", "Patriarch of Engineering", "Patriarch of Electricity")
+	alt_titles = list("Chief of Engineering")
 	event_categories = list(ASSIGNMENT_ENGINEER)

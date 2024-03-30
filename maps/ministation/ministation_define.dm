@@ -1,17 +1,17 @@
 /datum/map/ministation
 	name = "Ministation"
-	full_name = "Tradepost Mollusc"
+	full_name = "Tradepost Zebra"
 	path = "ministation"
 	ground_noun = "floor"
 
-	station_name = "Tradepost Mollusc"
-	station_short = "Mollusc"
+	station_name = "Tradepost Zebra"
+	station_short = "Zebra"
 
-	dock_name     = "Val Salia Station"
+	dock_name     = "Salvia Station"
 	boss_name     = "Trademaster"
 	boss_short    = "Admin"
-	company_name  = "Tradehouse Ivenmoth"
-	company_short = "Ivenmoth"
+	company_name  = "Tradehouse Administration"
+	company_short = "Admin"
 
 	default_law_type = /datum/ai_laws/nanotrasen
 

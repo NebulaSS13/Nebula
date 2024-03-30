@@ -71,11 +71,11 @@
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/spacesuit/void/salvage/suit.dmi')
 
 //pilot
-/obj/item/clothing/head/helmet/space/void/pilot/Initialize()
+/obj/item/clothing/head/helmet/space/void/expedition/Initialize()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/spacesuit/void/pilot/helmet.dmi')
 
-/obj/item/clothing/suit/space/void/pilot/Initialize()
+/obj/item/clothing/suit/space/void/expedition/Initialize()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/spacesuit/void/pilot/suit.dmi')
 

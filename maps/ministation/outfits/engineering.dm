@@ -4,13 +4,12 @@
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_slot = slot_l_store_str
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 	head = /obj/item/clothing/head/hardhat
-	uniform = /obj/item/clothing/under/hazardjumpsuit
+	uniform = /obj/item/clothing/under/hazard
 	r_pocket = /obj/item/t_scanner
 	id_type = /obj/item/card/id/ministation/engineering
 	pda_type = /obj/item/modular_computer/pda/engineering
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
 
 /decl/hierarchy/outfit/job/ministation/engineer/Initialize()
 	. = ..()
@@ -23,7 +22,7 @@
 
 /decl/hierarchy/outfit/job/ministation/chief_engineer
 	name = "Job - Head Engineer"
-	uniform = /obj/item/clothing/under/hazardjumpsuit
+	uniform = /obj/item/clothing/under/hazard
 	glasses = /obj/item/clothing/glasses/welding/superior
 	suit = /obj/item/clothing/suit/storage/hazardvest
 	gloves = /obj/item/clothing/gloves/thick
@@ -33,5 +32,4 @@
 	belt = /obj/item/storage/belt/utility/full
 	id_type = /obj/item/card/id/ministation/engineering
 	l_ear = /obj/item/radio/headset/heads/ce
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officer
+	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR

@@ -202,7 +202,7 @@
 		qdel(H)
 		spawn(50)
 			new /obj/item/honey_frame(loc)
-			new /obj/item/stack/material/bar(loc, 1, /decl/material/solid/organic/wax)
+			new /obj/item/stack/material/bar/wax(loc, 1)
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"

@@ -1,6 +1,6 @@
 /datum/job/ministation/security
 	title = "Security Officer"
-	alt_titles = list("Warden","Scout")
+	alt_titles = list("Warden")
 	supervisors = "the Head of Security"
 	spawn_positions = 1
 	total_positions = 2
@@ -144,4 +144,4 @@
 		SKILL_WEAPONS	= SKILL_MAX
 	)
 	skill_points = 40
-	alt_titles = list("Patriarch of Security","Patriarch of Scouting")
+	alt_titles = list("Security Commander")

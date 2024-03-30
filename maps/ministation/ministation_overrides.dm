@@ -8,6 +8,3 @@
 		/datum/computer_file/program/wordprocessor,
 		/datum/computer_file/program/supply
 	)
-
-/datum/map/ministation
-	lobby_tracks = list(/decl/music_track/zazie)

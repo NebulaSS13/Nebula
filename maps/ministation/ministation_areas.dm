@@ -12,22 +12,26 @@
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg')
 	icon = 'maps/ministation/ministation_areas.dmi'
 	icon_state = "default"
+	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/ministation/supply_dock
 	name = "Supply Shuttle Dock"
 	icon_state = "yellow"
 	base_turf = /turf/space
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/ministation/supply
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	req_access = list(access_cargo)
 	requires_power = 0
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 //Hallways
 /area/ministation/hall
 	icon_state = "white"
 	area_flags = AREA_FLAG_HALLWAY
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/ministation/hall/n
 	name = "\improper Forward Hallway"
@@ -60,6 +64,7 @@
 	turf_initializer = /decl/turf_initializer/maintenance
 	icon_state = "orange"
 	secure = TRUE
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 // First floor maint
 
@@ -149,6 +154,8 @@
 	req_access = list(access_mining)
 	icon_state = "brown"
 	secure = TRUE
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
+
 /area/ministation/mining
 	name = "\improper Mineral Processing"
 	req_access = list(access_mining)
@@ -160,6 +167,7 @@
 	req_access = list(access_heads)
 	secure = TRUE
 	icon_state = "dark_blue"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/ministation/bridge/vault
 	name = "\improper Vault"
@@ -194,6 +202,7 @@
 	name = "\improper Atmospherics"
 	req_access = list(access_atmospherics)
 	icon_state = "ATMOS"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ministation/science
 	name = "\improper Research & Development Laboratory"
@@ -212,6 +221,7 @@
 	req_access = list(access_medical)
 	icon_state = "light_blue"
 	secure = TRUE
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/ministation/cryo
 	name = "\improper Medical Cryogenics"
@@ -241,6 +251,7 @@
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
 	secure = TRUE
 	icon_state = "yellow"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ministation/supermatter
 	name = "\improper Supermatter Engine"
@@ -262,13 +273,14 @@
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/signal.ogg','sound/ambience/sonar.ogg')
 	secure = TRUE
 	icon_state = "light_blue"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ministation/tradehouse_rep
 	name = "\improper Tradehouse Representative Chamber"
 	req_access = list(access_lawyer)
 	icon_state = "brown"
 
-/area/ministation/Arrival
+/area/ministation/arrival
 	name = "\improper Arrival Shuttle" // I hate this ugly thing
 	icon_state = "white"
 	requires_power = 0
@@ -295,9 +307,6 @@
 	secure = TRUE
 	req_access = list(access_ai_upload)
 	icon_state = "light_blue"
-
-/datum/goal/scav_hoard_junk
-	valid_areas = list(/area/ministation/tradehouse_rep)
 
 /area/shuttle/escape_shuttle
 	name = "\improper Emergency Shuttle"
@@ -326,12 +335,12 @@
 
 /area/turbolift/l1
 	name = "Station Level 1"
-	base_turf = /turf/simulated/floor
+	base_turf = /turf/floor
 
 /area/turbolift/l2
 	name = "Station Level 2"
-	base_turf = /turf/simulated/open
+	base_turf = /turf/open
 
 /area/turbolift/l3
 	name = "Station Level 3"
-	base_turf = /turf/simulated/open
+	base_turf = /turf/open

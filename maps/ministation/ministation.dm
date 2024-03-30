@@ -3,11 +3,17 @@ Ministation "Zebra"
 A butchered variant on Giacom's Ministation designed for 5 to 10 players.
 Now poorly imported for Nebula!
 And then imported back to ScavStation!
+And then copied back upstream to Neb...
+Twice...
 */
 
 #if !defined(USING_MAP_DATUM)
 
 	#define USING_MAP_DATUM /datum/map/ministation
+
+	#ifdef UNIT_TEST
+		#include "../../code/unit_tests/offset_tests.dm"
+	#endif
 
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
@@ -29,6 +35,7 @@ And then imported back to ScavStation!
 	#include "ministation_antagonists.dm"
 	#include "ministation_areas.dm"
 	#include "ministation_departments.dm"
+	#include "ministation_documents.dm"
 	#include "ministation_jobs.dm"
 	#include "ministation_shuttles.dm"
 	#include "ministation_objects.dm"
