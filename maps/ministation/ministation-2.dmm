@@ -167,8 +167,6 @@
 	pixel_x = -22
 	},
 /obj/structure/curtain/open/bed,
-/obj/item/clothing/under/yinglet/matriarch,
-/obj/item/clothing/head/yinglet/matriarch,
 /obj/random/plushie,
 /turf/simulated/floor/carpet/red,
 /area/ministation/bridge)
@@ -474,9 +472,9 @@
 /area/ministation/bridge/vault)
 "bG" = (
 /obj/structure/closet/secure_closet/captains,
-/obj/item/clothing/shoes/sandal/yinglet,
+/obj/item/clothing/shoes/sandal,
 /obj/item/storage/belt/holster,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/captain,
+/obj/item/clothing/suit/storage/toggle/wintercoat/captain,
 /obj/item/stamp/captain,
 /turf/simulated/floor/carpet/red,
 /area/ministation/bridge)
@@ -672,7 +670,7 @@
 /area/space)
 "co" = (
 /turf/simulated/wall/r_wall,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "cp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/status_display{
@@ -737,7 +735,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "cE" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -1306,8 +1304,8 @@
 /area/ministation/science)
 "fc" = (
 /obj/structure/closet/secure_closet/scientist,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/robotics,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/science,
+/obj/item/clothing/suit/storage/toggle/wintercoat/robotics,
+/obj/item/clothing/suit/storage/toggle/wintercoat/science,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
@@ -2365,7 +2363,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "kr" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small{
@@ -2585,8 +2583,8 @@
 /area/ministation/hall/n3)
 "lh" = (
 /obj/structure/closet,
-/obj/item/clothing/under/yinglet/yinglibrarian,
-/obj/item/clothing/shoes/sandal/yinglet,
+/obj/item/clothing/under/librarian,
+/obj/item/clothing/shoes/sandal,
 /obj/item/multitool,
 /turf/simulated/floor/wood/mahogany,
 /area/ministation/library)
@@ -3599,7 +3597,7 @@
 	req_access = list("ACCESS_CAMERAS")
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "sQ" = (
 /obj/structure/ladder,
 /obj/structure/cable{
@@ -3954,7 +3952,7 @@
 	name = "rep blast door"
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "vm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
@@ -4261,7 +4259,6 @@
 /turf/simulated/floor/wood/mahogany,
 /area/ministation/library)
 "ym" = (
-/obj/structure/yinglet_nest,
 /turf/simulated/floor/tiled,
 /area/ministation/bridge/vault)
 "yu" = (
@@ -4622,7 +4619,7 @@
 "AX" = (
 /obj/machinery/door/airlock/hatch/maintenance,
 /turf/simulated/floor/plating,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "AY" = (
 /obj/machinery/computer/cryopod/robot{
 	pixel_y = 29
@@ -5089,7 +5086,7 @@
 	pixel_y = 25
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "Dd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -5765,7 +5762,7 @@
 	name = "rep blast door"
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "Id" = (
 /obj/machinery/door/airlock,
 /obj/structure/disposalpipe/segment{
@@ -5810,7 +5807,7 @@
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "Io" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -5822,7 +5819,7 @@
 	name = "Tradehouse Representative"
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "Ir" = (
 /turf/simulated/floor/wood/yew,
 /area/ministation/court)
@@ -5858,7 +5855,7 @@
 /area/ministation/court)
 "IC" = (
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "IL" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "slimeblast3";
@@ -5956,8 +5953,8 @@
 /area/ministation/science)
 "Jx" = (
 /obj/structure/closet/secure_closet/RD,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/rd,
-/obj/item/clothing/suit/storage/toggle/redcoat/yinglet/officer,
+/obj/item/clothing/suit/storage/toggle/wintercoat/rd,
+/obj/item/clothing/suit/storage/toggle/redcoat/officer,
 /obj/item/stamp/rd,
 /obj/item/rig/eva/equipped,
 /turf/simulated/floor/tiled/white,
@@ -6884,10 +6881,10 @@
 	},
 /obj/item/modular_computer/tablet/preset/custom_loadout/cheap,
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "PW" = (
 /obj/structure/closet/secure_closet/xenoarchaeologist,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/science,
+/obj/item/clothing/suit/storage/toggle/wintercoat/science,
 /obj/item/ano_scanner,
 /obj/item/stock_parts/circuitboard/suspension_gen,
 /turf/simulated/floor/tiled/white,
@@ -7295,7 +7292,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "Sf" = (
 /obj/structure/table/woodentable/walnut,
 /obj/machinery/light{
@@ -7553,7 +7550,7 @@
 	name = "rep blast door"
 	},
 /turf/simulated/floor/plating,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "TS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -7593,7 +7590,7 @@
 	},
 /obj/machinery/faxmachine/mapped,
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "Uh" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/reinforced,
@@ -8067,7 +8064,7 @@
 	pixel_x = 32
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "WV" = (
 /obj/machinery/igniter{
 	id_tag = "toxinsigniter"
@@ -8259,7 +8256,7 @@
 	pixel_x = -26
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "Yl" = (
 /obj/machinery/light{
 	dir = 8
@@ -8369,7 +8366,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "YQ" = (
 /obj/structure/closet/lawcloset,
 /obj/machinery/light{
@@ -8602,7 +8599,7 @@
 /obj/item/paper_bin,
 /obj/item/pen,
 /turf/simulated/floor/carpet/green,
-/area/ministation/yinglet_rep)
+/area/ministation/tradehouse_rep)
 "ZW" = (
 /obj/machinery/light/small{
 	dir = 4

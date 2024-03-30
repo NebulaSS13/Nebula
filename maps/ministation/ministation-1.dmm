@@ -55,8 +55,8 @@
 /area/ministation/cafe)
 "ar" = (
 /obj/structure/table,
-/obj/item/clothing/head/winterhood/yinglet/cmo,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/cmo,
+/obj/item/clothing/head/winterhood/cmo,
+/obj/item/clothing/suit/storage/toggle/wintercoat/cmo,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,
@@ -1535,10 +1535,10 @@
 /area/ministation/hall/w2)
 "hI" = (
 /obj/structure/closet/secure_closet/security,
-/obj/item/clothing/under/yinglet/scout,
-/obj/item/clothing/head/yinglet/scout,
+/obj/item/clothing/under/scout,
+/obj/item/clothing/head/scout,
 /obj/item/clothing/suit/armor/bulletproof,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/security,
+/obj/item/clothing/suit/storage/toggle/wintercoat/security,
 /obj/item/flashlight/maglight,
 /obj/machinery/alarm{
 	dir = 4;
@@ -2166,11 +2166,11 @@
 /area/ministation/security)
 "km" = (
 /obj/structure/closet/secure_closet/medical3,
-/obj/item/clothing/suit/yinglabcoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/medical,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/medical,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/chemistry,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/paramedic,
+/obj/item/clothing/suit/storage/toggle/labcoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/medical,
+/obj/item/clothing/suit/storage/toggle/wintercoat/medical,
+/obj/item/clothing/suit/storage/toggle/wintercoat/chemistry,
+/obj/item/clothing/suit/storage/toggle/wintercoat/paramedic,
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "kr" = (
@@ -3387,8 +3387,8 @@
 	icon_state = "pipe-c"
 	},
 /obj/structure/closet/secure_closet/CMO,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/cmo,
-/obj/item/clothing/suit/storage/toggle/redcoat/yinglet/officer,
+/obj/item/clothing/suit/storage/toggle/wintercoat/cmo,
+/obj/item/clothing/suit/storage/toggle/redcoat/officer,
 /obj/item/gun/projectile/dartgun/medical,
 /obj/item/ammo_magazine/chemdart,
 /obj/item/ammo_magazine/chemdart,
@@ -5336,11 +5336,7 @@
 /obj/machinery/door/window/brigdoor/southright{
 	dir = 1
 	},
-/obj/machinery/suit_cycler/medical/prepared{
-	available_bodytypes = list("yinglet body");
-	suit = /obj/item/clothing/suit/space/void/medical/alt/scav;
-	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/scav
-	},
+/obj/machinery/suit_cycler/medical/prepared,
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "wW" = (
@@ -6472,25 +6468,25 @@
 /area/ministation/hall/e2)
 "AJ" = (
 /obj/structure/closet/wardrobe/mixed,
-/obj/item/clothing/shoes/sandal/yinglet,
-/obj/item/clothing/shoes/sandal/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/under/yinglet/yingjumpsuit,
-/obj/item/clothing/under/yinglet/yingjumpsuit{
+/obj/item/clothing/shoes/sandal,
+/obj/item/clothing/shoes/sandal,
+/obj/item/clothing/under/color,
+/obj/item/clothing/under/color,
+/obj/item/clothing/under/color,
+/obj/item/clothing/under/color{
 	color = "#ff00ff"
 	},
-/obj/item/clothing/under/yinglet/yingjumpsuit{
+/obj/item/clothing/under/color{
 	color = "#000000"
 	},
-/obj/item/clothing/under/yinglet/yingjumpsuit{
+/obj/item/clothing/under/color{
 	color = "#008000"
 	},
-/obj/item/clothing/under/yinglet/yingjumpsuit{
+/obj/item/clothing/under/color{
 	color = "#808080"
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/redcoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/redcoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/redcoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/redcoat,
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "AK" = (
@@ -6734,7 +6730,7 @@
 /area/ministation/cafe)
 "Ct" = (
 /obj/structure/closet/chefcloset,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/hydroponics,
+/obj/item/clothing/suit/storage/toggle/wintercoat/hydroponics,
 /obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
 /obj/item/clothing/suit/armor/bulletproof,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn,
@@ -6813,7 +6809,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/security,
+/obj/item/clothing/suit/storage/toggle/wintercoat/security,
 /obj/item/flashlight/maglight,
 /obj/item/chems/spray/pepper,
 /obj/structure/closet/secure_closet/warden{
@@ -7448,11 +7444,7 @@
 /turf/simulated/floor,
 /area/ministation/hop)
 "GC" = (
-/obj/machinery/suit_cycler/medical/prepared{
-	available_bodytypes = list("yinglet body");
-	suit = /obj/item/clothing/suit/space/void/medical/alt/scav;
-	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/scav
-	},
+/obj/machinery/suit_cycler/medical/prepared,
 /obj/machinery/door/window/brigdoor/southright{
 	dir = 1
 	},
@@ -7652,11 +7644,7 @@
 	autoset_access = 0;
 	dir = 4
 	},
-/obj/machinery/suit_cycler/security/prepared{
-	suit = /obj/item/clothing/suit/space/void/security/alt/scav;
-	helmet = /obj/item/clothing/head/helmet/space/void/security/alt/scav;
-	available_bodytypes = list("yinglet body")
-	},
+/obj/machinery/suit_cycler/security/prepared,
 /turf/simulated/floor/tiled,
 /area/ministation/security)
 "HX" = (
@@ -8187,11 +8175,7 @@
 	autoset_access = 0;
 	dir = 4
 	},
-/obj/machinery/suit_cycler/security/prepared{
-	suit = /obj/item/clothing/suit/space/void/security/alt/scav;
-	helmet = /obj/item/clothing/head/helmet/space/void/security/alt/scav;
-	available_bodytypes = list("yinglet body")
-	},
+/obj/machinery/suit_cycler/security/prepared,
 /turf/simulated/floor/tiled,
 /area/ministation/security)
 "KW" = (
@@ -8441,7 +8425,7 @@
 /obj/structure/closet/secure_closet/hop2,
 /obj/item/book/skill/organizational/finance,
 /obj/item/clothing/suit/fancyrobe,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/HoP,
+/obj/item/clothing/suit/storage/toggle/wintercoat/HoP,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -9147,10 +9131,10 @@
 /area/ministation/cafe)
 "Qg" = (
 /obj/structure/closet/secure_closet/security,
-/obj/item/clothing/under/yinglet/scout,
-/obj/item/clothing/head/yinglet/scout,
+/obj/item/clothing/under/scout,
+/obj/item/clothing/head/scout,
 /obj/item/clothing/suit/armor/bulletproof,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/security,
+/obj/item/clothing/suit/storage/toggle/wintercoat/security,
 /obj/item/flashlight/maglight,
 /obj/item/chems/spray/pepper,
 /turf/simulated/floor/tiled,
@@ -10244,7 +10228,7 @@
 /area/ministation/security)
 "Wt" = (
 /obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/hydroponics,
+/obj/item/clothing/suit/storage/toggle/wintercoat/hydroponics,
 /obj/structure/closet/chefcloset,
 /turf/simulated/floor/carpet,
 /area/ministation/cafe)
@@ -10432,7 +10416,7 @@
 	dir = 1
 	},
 /obj/structure/closet/secure_closet/hos,
-/obj/item/clothing/suit/storage/toggle/wintercoat/yinglet/HoS,
+/obj/item/clothing/suit/storage/toggle/wintercoat/HoS,
 /obj/item/flashlight/maglight,
 /obj/item/chems/spray/pepper,
 /obj/item/stamp/hos,
