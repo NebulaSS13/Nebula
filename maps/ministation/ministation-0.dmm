@@ -123,7 +123,8 @@
 /area/ministation/atmospherics)
 "aK" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled/steel_grid,
@@ -541,7 +542,8 @@
 	id_tag = "mining_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = -10
+	pixel_y = -10;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/cable{
@@ -717,7 +719,8 @@
 	id_tag = "trash_sort"
 	},
 /obj/structure/sign/warning/deathsposal{
-	pixel_x = -30
+	pixel_x = -30;
+	dir = 4
 	},
 /obj/structure/flaps/airtight,
 /turf/floor/plating,
@@ -802,7 +805,8 @@
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 5;
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/plating,
@@ -935,7 +939,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/floor/tiled,
 /area/ministation/janitor)
@@ -1291,7 +1295,8 @@
 	dir = 8
 	},
 /obj/machinery/status_display/supply_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/machinery/atmospherics/portables_connector{
 	pixel_x = -3;
@@ -1318,7 +1323,7 @@
 /obj/machinery/hologram/holopad,
 /obj/item/radio/intercom/locked{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/tiled,
 /area/ministation/cargo)
@@ -1489,7 +1494,8 @@
 	frequency = 1447;
 	listening = 0;
 	name = "Station Intercom (AI Private)";
-	pixel_y = -29
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1840,7 +1846,8 @@
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 5;
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled/techfloor,
@@ -2126,7 +2133,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/floor/tiled,
 /area/ministation/cargo)
@@ -2272,7 +2280,8 @@
 "jo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -2416,7 +2425,8 @@
 /area/ministation/hall/s1)
 "jU" = (
 /obj/structure/sign/warning/docking_area{
-	pixel_y = -30
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_airlock_interior";
@@ -2600,7 +2610,8 @@
 	dir = 5
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -2925,7 +2936,7 @@
 "mg" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/displaycase,
 /obj/item/toy/shipmodel,
@@ -2956,7 +2967,8 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -3062,7 +3074,8 @@
 	id_tag = "l1ne_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = -10
+	pixel_y = -10;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/floor/plating,
@@ -3987,7 +4000,7 @@
 "rD" = (
 /obj/structure/table,
 /obj/item/radio/intercom/locked{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/floor/tiled,
 /area/ministation/cargo)
@@ -4169,7 +4182,8 @@
 "sA" = (
 /obj/structure/table,
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/storage/box/lights/mixed,
@@ -4248,7 +4262,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/status_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/floor/tiled/techmaint,
 /area/ministation/ai_core)
@@ -5092,7 +5107,8 @@
 "wG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -5139,7 +5155,8 @@
 /area/ministation/engine)
 "wS" = (
 /obj/machinery/status_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/item/plunger,
 /turf/floor/tiled,
@@ -5594,7 +5611,7 @@
 "zz" = (
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 25
+	pixel_x = 22
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/crate,
@@ -5623,7 +5640,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled/steel_grid,
@@ -6355,7 +6373,8 @@
 /area/ministation/ai_sat)
 "Cu" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled/techfloor,
@@ -6709,11 +6728,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1";
-	pixel_y = -6
-	},
 /obj/machinery/light_switch{
 	pixel_y = 10;
 	pixel_x = 21;
@@ -6721,6 +6735,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
+	},
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/floor/tiled/techfloor,
 /area/ministation/atmospherics)
@@ -6925,7 +6943,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/item/clothing/gloves/insulated,
 /obj/item/storage/toolbox/mechanical{
@@ -7174,7 +7192,8 @@
 "EF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -7285,7 +7304,8 @@
 "ET" = (
 /obj/effect/floor_decal/corner/yellow/three_quarters,
 /obj/structure/sign/warning/engineering_access{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -7412,7 +7432,7 @@
 /obj/structure/closet/firecloset,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/floor/tiled,
 /area/ministation/engine)
@@ -7829,7 +7849,8 @@
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 5;
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -8017,7 +8038,8 @@
 	pixel_y = 1
 	},
 /obj/structure/sign/warning/airlock{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /obj/machinery/vending/wallmed1{
 	pixel_y = 32
@@ -8270,7 +8292,8 @@
 	canhear_range = 3;
 	name = "Common Channel";
 	pixel_x = 27;
-	pixel_y = -3
+	pixel_y = -3;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -8881,7 +8904,8 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 5;
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -9247,7 +9271,8 @@
 /area/ministation/ai_core)
 "JK" = (
 /obj/machinery/flasher{
-	pixel_y = -21
+	pixel_y = -21;
+	dir = 1
 	},
 /obj/machinery/ai_slipper{
 	uses = 10
@@ -9462,7 +9487,7 @@
 /obj/item/radio/intercom{
 	listening = 0;
 	name = "Custom Channel";
-	pixel_y = 27
+	pixel_y = 20
 	},
 /obj/item/radio/intercom{
 	frequency = 1447;
@@ -9517,7 +9542,8 @@
 	dir = 1
 	},
 /obj/machinery/flasher{
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /turf/floor/tiled/techmaint,
 /area/ministation/ai_upload)
@@ -9535,7 +9561,8 @@
 	frequency = 1447;
 	listening = 0;
 	name = "Station Intercom (AI Private)";
-	pixel_y = -29
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/machinery/computer/upload/robot{
 	dir = 1
@@ -9868,7 +9895,8 @@
 "Ll" = (
 /obj/item/radio/intercom{
 	name = "Station Intercom (General)";
-	pixel_x = 28
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "2-8"
@@ -10024,7 +10052,8 @@
 	dir = 9
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 32
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/floor/tiled,
 /area/ministation/ai_sat)
@@ -10195,7 +10224,8 @@
 /obj/machinery/turretid/stun{
 	control_area = "\improper AI Upload Chamber";
 	id_tag = "aihome";
-	pixel_y = -24
+	pixel_y = -24;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/ministation/ai_sat)
@@ -10248,7 +10278,8 @@
 	name = "Recruit"
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/wood/walnut,
@@ -10561,7 +10592,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -10671,7 +10703,8 @@
 /obj/machinery/airlock_sensor{
 	id_tag = "sat2_sensor";
 	pixel_y = -20;
-	pixel_x = -10
+	pixel_x = -10;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/ministation/ai_sat)
@@ -10737,7 +10770,8 @@
 "Oe" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/plating,
@@ -11145,7 +11179,8 @@
 /area/ministation/engine)
 "Pl" = (
 /obj/structure/sign/warning/airlock{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/cable{
@@ -11380,7 +11415,7 @@
 /obj/item/flashlight/lamp/green,
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /turf/floor/carpet/blue2,
 /area/ministation/hall/s1)
@@ -11648,7 +11683,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "cargo2_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/ministation/cargo)
@@ -11666,7 +11702,8 @@
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/shoes/magboots,
 /obj/machinery/status_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/floor/tiled,
 /area/ministation/eva)
@@ -11757,7 +11794,7 @@
 "RB" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -12426,7 +12463,8 @@
 	dir = 9
 	},
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -12579,7 +12617,8 @@
 /area/space)
 "Uv" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/plating,
@@ -12983,7 +13022,8 @@
 	dir = 4
 	},
 /obj/machinery/status_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -13005,28 +13045,32 @@
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Doors";
 	pixel_x = -6;
-	pixel_y = 7
+	pixel_y = 7;
+	directional_offset = null
 	},
 /obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the engine control room blast doors.";
 	id_tag = "EngineBlastexterior";
 	name = "Engine Bay Blast Doors";
 	pixel_y = -3;
-	pixel_x = 5
+	pixel_x = 5;
+	directional_offset = null
 	},
 /obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the engine control room blast doors.";
 	id_tag = "EngineBlastinterior";
 	name = "Engine Monitoring Room Blast Doors";
 	pixel_y = -3;
-	pixel_x = -6
+	pixel_x = -6;
+	directional_offset = null
 	},
 /obj/machinery/button/toggle{
 	desc = "A remote control-switch for the engine emitter.";
 	id_tag = "EngineEmitter";
 	name = "Engine Emitter";
 	pixel_x = 6;
-	pixel_y = 7
+	pixel_y = 7;
+	directional_offset = null
 	},
 /turf/floor/tiled/steel_grid,
 /area/ministation/smcontrol)
@@ -13218,7 +13262,8 @@
 	dir = 8
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/floor/tiled,
@@ -13278,7 +13323,8 @@
 	name = "AI Upload turret control";
 	id_tag = "upload";
 	control_area = "\improper AI Upload Chamber";
-	pixel_y = -24
+	pixel_y = -24;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/ministation/ai_sat)
@@ -13315,7 +13361,8 @@
 	id_tag = "westatmos_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = -10
+	pixel_y = -10;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/floor/plating,
@@ -13718,7 +13765,8 @@
 	name = "exterior access button";
 	pixel_x = -20;
 	pixel_y = -10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /turf/floor,
 /area/ministation/maint/eastatmos)
@@ -13870,7 +13918,8 @@
 	pixel_y = -4;
 	pixel_x = -35;
 	id_tag = "eject";
-	name = "4. SM CORE EJECT"
+	name = "4. SM CORE EJECT";
+	dir = 4
 	},
 /obj/machinery/atmospherics/valve/digital{
 	dir = 1;
