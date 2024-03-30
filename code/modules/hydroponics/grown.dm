@@ -338,7 +338,7 @@ var/global/list/_wood_materials = list(
 
 /obj/item/chems/food/grown/get_dried_product()
 	if(ispath(dried_type, /obj/item/chems/food/grown))
-		return new dried_type(loc, seed.type)
+		return new dried_type(loc, null, seed.type)
 	return ..()
 
 /obj/item/chems/food/grown/grilled
@@ -347,7 +347,7 @@ var/global/list/_wood_materials = list(
 
 /obj/item/chems/food/grown/get_grilled_product()
 	if(ispath(backyard_grilling_product, /obj/item/chems/food/grown))
-		return new backyard_grilling_product(loc, seed.type)
+		return new backyard_grilling_product(loc, null, seed.type)
 	return ..()
 
 // Predefined types for placing on the map.
