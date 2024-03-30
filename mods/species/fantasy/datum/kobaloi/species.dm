@@ -7,7 +7,7 @@
 	available_bodytypes = list(
 		/decl/bodytype/kobaloi
 	)
-	preview_outfit      = /decl/hierarchy/outfit/shaded_hills/wanderer
+	preview_outfit      = /decl/hierarchy/outfit/job/shaded_hills/wanderer
 	age_descriptor      = /datum/appearance_descriptor/age
 	base_external_prosthetics_model = null
 

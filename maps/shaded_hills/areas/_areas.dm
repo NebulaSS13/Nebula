@@ -18,9 +18,6 @@
 	description = "Birds and insects call from the grasses, and a cool wind gusts from across the river."
 	area_blurb_category = /area/shaded_hills/outside
 
-/area/shaded_hills/outside/hills
-	name = "Foothills"
-
 /area/shaded_hills/outside/river
 	name = "River"
 	color = COLOR_BLUE
@@ -40,13 +37,17 @@
 	color = COLOR_GRAY80
 
 /area/shaded_hills/caves/unexplored
-	name = "Trackless Deeps"
+	name = "Trackless Deeps - North"
 	color = COLOR_GRAY20
 	ambience = list(
 		'sound/ambience/ominous1.ogg',
 		'sound/ambience/ominous2.ogg',
 		'sound/ambience/ominous3.ogg',
 	)
+
+// Area coherency test hates that the unexplored area is split by a tunnel.
+/area/shaded_hills/caves/unexplored/south
+	name = "Trackless Deeps - South"
 
 /area/shaded_hills/caves/river
 	name = "Silent River"
