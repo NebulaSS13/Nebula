@@ -1,4 +1,4 @@
-/obj/machinery/computer/HolodeckControl
+/obj/machinery/computer/holodeck_control
 	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
 	icon_keyboard = "tech_key"
@@ -23,7 +23,7 @@
 	var/list/supported_programs = list()
 	var/list/restricted_programs = list()
 
-/obj/machinery/computer/HolodeckControl/Initialize()
+/obj/machinery/computer/holodeck_control/Initialize()
 	. = ..()
 	linkedholodeck = locate(linkedholodeck_area)
 	if (programs_list_id in global.using_map.holodeck_supported_programs)
@@ -31,11 +31,11 @@
 	if (programs_list_id in global.using_map.holodeck_restricted_programs)
 		restricted_programs |= global.using_map.holodeck_restricted_programs[programs_list_id]
 
-/obj/machinery/computer/HolodeckControl/interface_interact(var/mob/user)
+/obj/machinery/computer/holodeck_control/interface_interact(var/mob/user)
 	interact(user)
 	return TRUE
 
-/obj/machinery/computer/HolodeckControl/interact(var/mob/user)
+/obj/machinery/computer/holodeck_control/interact(var/mob/user)
 	user.set_machine(src)
 	var/dat
 
@@ -100,7 +100,7 @@
 	onclose(user, "computer")
 	return
 
-/obj/machinery/computer/HolodeckControl/Topic(href, href_list)
+/obj/machinery/computer/holodeck_control/Topic(href, href_list)
 	if(..())
 		return 1
 	if((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (issilicon(usr)))
@@ -135,7 +135,7 @@
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/HolodeckControl/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/computer/holodeck_control/emag_act(var/remaining_charges, var/mob/user)
 	playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 	last_to_emag = user //emag again to change the owner
 	if (!emagged)
@@ -150,7 +150,7 @@
 	else
 		..()
 
-/obj/machinery/computer/HolodeckControl/proc/update_projections()
+/obj/machinery/computer/holodeck_control/proc/update_projections()
 	if (safety_disabled)
 		item_power_usage = 2500
 		for(var/obj/item/holo/esword/H in linkedholodeck)
@@ -166,20 +166,20 @@
 			C.friends = list(weakref(last_to_emag))
 
 //This could all be done better, but it works for now.
-/obj/machinery/computer/HolodeckControl/Destroy()
+/obj/machinery/computer/holodeck_control/Destroy()
 	emergencyShutdown()
 	. = ..()
 
-/obj/machinery/computer/HolodeckControl/explosion_act(severity)
+/obj/machinery/computer/holodeck_control/explosion_act(severity)
 	emergencyShutdown()
 	. = ..()
 
-/obj/machinery/computer/HolodeckControl/power_change()
+/obj/machinery/computer/holodeck_control/power_change()
 	. = ..()
 	if (. && active && (stat & NOPOWER))
 		emergencyShutdown()
 
-/obj/machinery/computer/HolodeckControl/Process()
+/obj/machinery/computer/holodeck_control/Process()
 	for(var/item in holographic_objs) // do this first, to make sure people don't take items out when power is down.
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
@@ -208,7 +208,7 @@
 				T.explosion_act(3)
 				T.hotspot_expose(1000,500,1)
 
-/obj/machinery/computer/HolodeckControl/proc/derez(var/obj/obj , var/silent = 1)
+/obj/machinery/computer/holodeck_control/proc/derez(var/obj/obj , var/silent = 1)
 	holographic_objs.Remove(obj)
 
 	if(obj == null)
@@ -219,7 +219,7 @@
 		visible_message("The [oldobj.name] fades away!")
 	qdel(obj)
 
-/obj/machinery/computer/HolodeckControl/proc/checkInteg(var/area/A)
+/obj/machinery/computer/holodeck_control/proc/checkInteg(var/area/A)
 	for(var/turf/T in A)
 		if(isspaceturf(T))
 			return 0
@@ -227,7 +227,7 @@
 	return 1
 
 //Why is it called toggle if it doesn't toggle?
-/obj/machinery/computer/HolodeckControl/proc/togglePower(var/toggleOn = 0)
+/obj/machinery/computer/holodeck_control/proc/togglePower(var/toggleOn = 0)
 	if(toggleOn)
 		loadProgram(global.using_map.holodeck_programs[global.using_map.holodeck_default_program[programs_list_id] || "emptycourt"], 0)
 	else
@@ -240,7 +240,7 @@
 		update_use_power(POWER_USE_IDLE)
 
 
-/obj/machinery/computer/HolodeckControl/proc/loadProgram(var/datum/holodeck_program/HP, var/check_delay = 1)
+/obj/machinery/computer/holodeck_control/proc/loadProgram(var/datum/holodeck_program/HP, var/check_delay = 1)
 	if(!HP)
 		return
 	var/area/A = locate(HP.target)
@@ -304,7 +304,7 @@
 		update_projections()
 
 
-/obj/machinery/computer/HolodeckControl/proc/toggleGravity(var/area/A)
+/obj/machinery/computer/holodeck_control/proc/toggleGravity(var/area/A)
 	if(world.time < (last_gravity_change + 25))
 		if(world.time < (last_gravity_change + 15))//To prevent super-spam clicking
 			return
@@ -321,7 +321,7 @@
 	else
 		A.gravitychange(1,A)
 
-/obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
+/obj/machinery/computer/holodeck_control/proc/emergencyShutdown()
 	//Turn it back to the regular non-holographic room
 	loadProgram(global.using_map.holodeck_programs[global.using_map.holodeck_default_program[programs_list_id] || "turnoff"], 0)
 
@@ -333,7 +333,7 @@
 
 // Locking system
 
-/obj/machinery/computer/HolodeckControl/proc/togglelock(var/mob/user)
+/obj/machinery/computer/holodeck_control/proc/togglelock(var/mob/user)
 	if(cantogglelock(user))
 		islocked = !islocked
 		audible_message("<span class='notice'>\The [src] emits a series of beeps to announce it has been [islocked ? null : "un"]locked.</span>", hearing_distance = 3)
@@ -342,5 +342,5 @@
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return 1
 
-/obj/machinery/computer/HolodeckControl/proc/cantogglelock(var/mob/user)
+/obj/machinery/computer/holodeck_control/proc/cantogglelock(var/mob/user)
 	return has_access(lock_access, user.GetAccess())
