@@ -13,11 +13,9 @@ And then imported back to ScavStation!
 
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
-	#include "../../mods/valsalia/_valsalia.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/species/ascent/_ascent.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"
-	//#include "../../mods/species/vox/_vox.dme"
 	#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/bayliens/_bayliens.dme"
 	#include "../../mods/content/mundane.dm"
@@ -68,7 +66,6 @@ And then imported back to ScavStation!
 	#include "jobs/medical.dm"
 	#include "jobs/security.dm"
 	#include "jobs/science.dm"
-	#include "jobs/yinglets.dm"
 	#include "jobs/tradehouse.dm"
 	#include "jobs/synthetics.dm"
 
@@ -79,7 +76,6 @@ And then imported back to ScavStation!
 	#include "outfits/medical.dm"
 	#include "outfits/science.dm"
 	#include "outfits/security.dm"
-	#include "outfits/yinglets.dm"
 	#include "outfits/tradehouse.dm"
 
 #elif !defined(MAP_OVERRIDE)

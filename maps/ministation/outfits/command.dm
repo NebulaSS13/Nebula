@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/ministation/captain
 	name = "Ministation - Job - Captain"
-	uniform = /obj/item/clothing/under/yinglet/matriarch
-	head = /obj/item/clothing/head/yinglet/matriarch
+	uniform = /obj/item/clothing/under/captain
+	head = /obj/item/clothing/head/caphat
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_ear = /obj/item/radio/headset/heads/captain
 	id_type = /obj/item/card/id/gold

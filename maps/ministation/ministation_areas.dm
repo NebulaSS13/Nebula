@@ -263,7 +263,7 @@
 	secure = TRUE
 	icon_state = "light_blue"
 
-/area/ministation/yinglet_rep
+/area/ministation/tradehouse_rep
 	name = "\improper Tradehouse Representative Chamber"
 	req_access = list(access_lawyer)
 	icon_state = "brown"
@@ -297,7 +297,7 @@
 	icon_state = "light_blue"
 
 /datum/goal/scav_hoard_junk
-	valid_areas = list(/area/ministation/yinglet_rep)
+	valid_areas = list(/area/ministation/tradehouse_rep)
 
 /area/shuttle/escape_shuttle
 	name = "\improper Emergency Shuttle"

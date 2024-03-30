@@ -15,7 +15,6 @@
 	id_type = /obj/item/card/id/ministation/security
 	pda_type = /obj/item/modular_computer/pda/security
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
-	yinglet_suit_officiated = TRUE
 
 /decl/hierarchy/outfit/job/ministation/security/head
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
@@ -61,7 +60,6 @@
 	pda_type = /obj/item/modular_computer/pda/forensics
 	backpack_contents = list(/obj/item/storage/box/evidence = 1)
 	gloves = /obj/item/clothing/gloves/thick
-	yinglet_suit_officiated = TRUE
 
 /decl/hierarchy/outfit/job/ministation/detective/Initialize()
 	. = ..()

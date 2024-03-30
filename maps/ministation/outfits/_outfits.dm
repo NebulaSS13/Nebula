@@ -6,4 +6,3 @@
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat
 	l_ear = null
 	r_ear = null
-	yinglet_suit_fallback = TRUE 

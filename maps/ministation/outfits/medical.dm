@@ -21,7 +21,6 @@
 	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/ministation/doctor
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
-	yinglet_suit_officiated = TRUE
 
 /decl/hierarchy/outfit/job/ministation/doctor/Initialize()
 	. = ..()
