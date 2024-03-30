@@ -70,16 +70,16 @@
 	var/mob/living/carbon/human/H = owner
 
 	var/oxygenated = GET_CHEMICAL_EFFECT(owner, CE_OXYGENATED)
-	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * oxygenated))
+	H.heal_damage(OXY, HUMAN_MAX_OXYLOSS * oxygenated)
 
 	if(breath_fail_ratio < 0.25 && oxygenated)
-		H.oxygen_alert = 0
+		SET_HUD_ALERT(H, /decl/hud_element/condition/oxygen, 0)
 	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
-		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
+		H.take_damage(OXY, HUMAN_MAX_OXYLOSS * breath_fail_ratio)
 		if(oxygenated)
-			H.oxygen_alert = 1
+			SET_HUD_ALERT(H, /decl/hud_element/condition/oxygen, 1)
 		else
-			H.oxygen_alert = 2
+			SET_HUD_ALERT(H, /decl/hud_element/condition/oxygen, 2)
 
 /obj/item/organ/internal/brain/insectoid/serpentid
 	var/lowblood_tally = 0

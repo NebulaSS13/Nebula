@@ -24,7 +24,7 @@
 	bone_material = null
 	bone_amount = 0
 	ai = /datum/ai/slime
-	hud_type = /datum/hud/slime
+	hud_used = /datum/hud/slime
 	nutrition = 800
 
 	var/is_adult = FALSE
@@ -59,7 +59,7 @@
 		update_health()
 
 /mob/living/slime/setToxLoss(var/amount)
-	adjustToxLoss(amount-getToxLoss())
+	take_damage(TOX, amount-get_damage(TOX))
 
 /mob/living/slime/Initialize(mapload, var/_stype = /decl/slime_colour/grey)
 
@@ -265,7 +265,7 @@
 				return TRUE
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
-			adjustBruteLoss(damage)
+			take_damage(BRUTE, damage)
 			return TRUE
 
 	return ..()
@@ -308,7 +308,7 @@
 		powerlevel++
 		if(powerlevel > 10)
 			powerlevel = 10
-			adjustToxLoss(-10)
+			heal_damage(TOX, 10)
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0

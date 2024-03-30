@@ -14,7 +14,7 @@
 		if(A.RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, src))
 			return
 
-	var/obj/item/gun/gun = get_active_hand()
+	var/obj/item/gun/gun = get_active_held_item()
 	if(a_intent == I_HURT && istype(over_object) && (isturf(over_object) || isturf(over_object.loc)) && !incapacitated() && istype(gun))
 		gun.set_autofire(over_object, src)
 
@@ -24,7 +24,7 @@
 		if(A.RelayMouseDown(object, location, control, params, src))
 			return
 
-	var/obj/item/gun/gun = get_active_hand()
+	var/obj/item/gun/gun = get_active_held_item()
 	if(a_intent == I_HURT && istype(object) && (isturf(object) || isturf(object.loc)) && !incapacitated() && istype(gun))
 		gun.set_autofire(object, src)
 
@@ -34,6 +34,6 @@
 		if(A.RelayMouseUp(object, location, control, params, src))
 			return
 
-	var/obj/item/gun/gun = get_active_hand()
+	var/obj/item/gun/gun = get_active_held_item()
 	if(istype(gun))
 		gun.clear_autofire()

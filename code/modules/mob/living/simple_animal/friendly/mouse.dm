@@ -3,12 +3,12 @@
 	real_name = "mouse"
 	desc = "It's a small rodent."
 	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
-	speak = list("Squeek!","SQUEEK!","Squeek?")
-	speak_emote = list("squeeks","squeeks","squiks")
-	emote_hear = list("squeeks","squeaks","squiks")
-	emote_see = list("runs in a circle", "shakes", "scritches at something")
+	speak_emote  = list("squeeks","squeeks","squiks")
+	emote_speech = list("Squeek!","SQUEEK!","Squeek?")
+	emote_hear   = list("squeeks","squeaks","squiks")
+	emote_see    = list("runs in a circle", "shakes", "scritches at something")
 	pass_flags = PASS_FLAG_TABLE
-	speak_chance = 1
+	speak_chance = 0.5
 	turns_per_move = 5
 	see_in_dark = 6
 	max_health = 5
@@ -49,12 +49,12 @@
 		playsound(mouse.loc, 'sound/effects/mousesqueek.ogg', 50)
 	if(mouse.stat == CONSCIOUS && prob(0.5))
 		mouse.set_stat(UNCONSCIOUS)
-		mouse.wander = 0
+		mouse.wander = FALSE
 		mouse.speak_chance = 0
 	else if(mouse.stat == UNCONSCIOUS)
 		if(prob(1))
 			mouse.set_stat(CONSCIOUS)
-			mouse.wander = 1
+			mouse.wander = TRUE
 		else if(prob(5))
 			INVOKE_ASYNC(mouse, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
 
@@ -82,7 +82,7 @@
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
 /mob/living/simple_animal/mouse/proc/splat()
-	adjustBruteLoss(get_max_health())  // Enough damage to kill
+	take_damage(BRUTE, get_max_health())  // Enough damage to kill
 	splatted = TRUE
 	death()
 

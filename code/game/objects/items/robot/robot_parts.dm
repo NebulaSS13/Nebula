@@ -131,7 +131,7 @@
 	..()
 	if(istype(W, /obj/item/flash))
 		if(isrobot(user))
-			var/current_module = user.get_active_hand()
+			var/current_module = user.get_active_held_item()
 			if(current_module == W)
 				to_chat(user, "<span class='warning'>How do you propose to do that?</span>")
 				return

@@ -1,18 +1,27 @@
 /obj/structure/boulder
 	name = "boulder"
-	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
+	desc = "A large boulder, somewhat bigger than a small boulder."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "boulder1"
 	density = TRUE
 	opacity = TRUE
 	anchored = TRUE
 	material = /decl/material/solid/stone/sandstone
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
 
+/obj/structure/boulder/excavated
+	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
+
 /obj/structure/boulder/basalt
 	material = /decl/material/solid/stone/basalt
+
+/obj/structure/boulder/create_dismantled_products(turf/T)
+	new /obj/item/stack/material/ore(T, rand(3,5), material?.type)
+	matter = null
+	material = null
+	return ..()
 
 /obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration)
 	. = ..()

@@ -4,6 +4,7 @@
 #define OXY         "oxy"
 #define CLONE       "clone"
 #define PAIN        "pain"
+#define BRAIN       "brain"
 #define ELECTROCUTE "electrocute"
 
 #define CUT       "cut"

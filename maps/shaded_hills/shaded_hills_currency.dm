@@ -1,6 +1,8 @@
 /datum/map/shaded_hills
-	default_starting_cash_choice = /decl/starting_cash_choice/cash
-	starting_cash_choices = list(/decl/starting_cash_choice/none, /decl/starting_cash_choice/cash)
+	starting_cash_choices = list(
+		/decl/starting_cash_choice/none,
+		/decl/starting_cash_choice/cash
+	)
 	default_currency = /decl/currency/imperial
 	salary_modifier = 0.05 // turn the 300-400 base into 15-20 base
 

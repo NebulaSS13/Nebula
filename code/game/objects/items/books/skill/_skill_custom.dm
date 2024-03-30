@@ -94,7 +94,7 @@
 	..()
 
 /obj/item/book/skill/custom/proc/can_write(var/obj/item/pen, var/mob/user)
-	if(user.get_active_hand() == pen && CanPhysicallyInteractWith(user,src) && !QDELETED(src) && !QDELETED(pen))
+	if(user.get_active_held_item() == pen && CanPhysicallyInteractWith(user,src) && !QDELETED(src) && !QDELETED(pen))
 		return TRUE
 	else
 		to_chat(user,SPAN_DANGER("How can you expect to write anything when you can't physically put pen to paper?"))

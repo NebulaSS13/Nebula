@@ -62,14 +62,14 @@
 
 	set_special_ability_cooldown(5 SECONDS)
 
-	src.visible_message("<span class='danger'>\The [src] hunkers down over \the [target], tearing into their flesh.</span>")
+	visible_message("<span class='danger'>\The [src] hunkers down over \the [target], tearing into their flesh.</span>")
 	if(do_mob(src, target, 5 SECONDS))
 		to_chat(target,"<span class='danger'>\The [src] scrapes your flesh from your bones!</span>")
 		to_chat(src,"<span class='danger'>You feed hungrily off \the [target]'s flesh.</span>")
-		target.adjustBruteLoss(25)
-		if(target.getBruteLoss() < -target.get_max_health())
+		target.take_damage(BRUTE, 25)
+		if(target.get_damage(BRUTE) < -target.get_max_health())
 			target.gib()
-		src.adjustBruteLoss(-25)
+		heal_damage(BRUTE, 25)
 
 /**
  *  Attempt to devour victim

@@ -136,8 +136,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/water_soothe_amount
 
 	// HUD data vars.
-	var/datum/hud_data/hud
-	var/hud_type
+	var/datum/hud_data/species_hud
 
 	var/grab_type = /decl/grab/normal/passive // The species' default grab type.
 
@@ -381,10 +380,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(!default_cultural_info[token])
 			default_cultural_info[token] = global.using_map.default_cultural_info[token]
 
-	if(hud_type)
-		hud = new hud_type()
+	if(species_hud)
+		species_hud = new species_hud
 	else
-		hud = new()
+		species_hud = new
 
 	if(LAZYLEN(appearance_descriptors))
 		for(var/desctype in appearance_descriptors)
@@ -638,7 +637,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		uniform.add_fingerprint(attacker)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, ran_zone(attacker.get_target_zone(), target = target))
 
-	var/list/holding = list(target.get_active_hand() = 60)
+	var/list/holding = list(target.get_active_held_item() = 60)
 	for(var/thing in target.get_inactive_held_items())
 		holding[thing] = 30
 

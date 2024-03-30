@@ -49,13 +49,12 @@
 	var/current_mode = null
 
 /obj/machinery/light/get_color()
-	return lightbulb ? lightbulb.get_color() : null
+	return lightbulb?.get_color()
 
 /obj/machinery/light/set_color(color)
-	if (!lightbulb)
-		return
-	lightbulb.set_color(color)
-	queue_icon_update()
+	. = lightbulb?.set_color(color)
+	if(.)
+		queue_icon_update()
 
 // the smaller bulb light fixture
 /obj/machinery/light/small
@@ -441,7 +440,6 @@
 
 /obj/machinery/light/navigation/on_update_icon()
 	. = ..() // this will handle pixel offsets
-	overlays.Cut()
 	icon_state = "nav[delay][!!(lightbulb && on)]"
 
 /obj/machinery/light/navigation/attackby(obj/item/W, mob/user)

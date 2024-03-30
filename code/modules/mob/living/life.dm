@@ -18,6 +18,8 @@
 	if(machine && (machine.CanUseTopic(src, machine.DefaultTopicState()) == STATUS_CLOSE)) // unsure if this is a good idea, but using canmousedrop was ???
 		machine = null
 
+	CLEAR_HUD_ALERTS(src) // These will be set again in the various update procs below.
+
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
@@ -135,7 +137,7 @@
 				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
 			if(prob(1))
 				to_chat(src, "<span class='warning'>You feel strange!</span>")
-				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
+				take_damage(CLONE, 5 * RADIATION_SPEED_COEFFICIENT)
 				emote(/decl/emote/audible/gasp)
 	if(radiation > 150)
 		damage = 8
@@ -145,7 +147,7 @@
 	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
-		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+		take_damage(TOX, damage * RADIATION_SPEED_COEFFICIENT)
 		var/list/limbs = get_external_organs()
 		if(!isSynthetic() && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)

@@ -31,7 +31,7 @@ default_map_directory = "../../_maps"
 replacement_re = re.compile(r'\s*(?P<path>[^{]*)\s*(\{(?P<props>.*)\})?')
 
 #urgent todo: replace with actual parser, this is slow as janitor in crit
-split_re = re.compile(r'((?:[A-Za-z0-9_\-$]+)\s*=\s*(?:"(?:.+?)"|[^";]*)|@OLD)')
+split_re = re.compile(r'((?:[A-Za-z0-9_\-$]+)\s*=\s*(?:"(?:.+?)"|list\([^;]*\)|[^";]*)|@OLD)')
 
 
 def props_to_string(props):
@@ -75,7 +75,7 @@ def update_path(dmm_data, replacement_string, verbose=False):
         old_path = old_path[:-len("/@SUBTYPES")]
         if verbose:
             print("Looking for subtypes of", old_path)
-        subtypes = r"(?:/\w+)*"
+        subtypes = r"(?P<subpath>(?:/\w+)*)"
 
     replacement_pattern = re.compile(rf"(?P<path>{re.escape(old_path)}{subtypes})\s*(:?{{(?P<props>.*)}})?$")
 

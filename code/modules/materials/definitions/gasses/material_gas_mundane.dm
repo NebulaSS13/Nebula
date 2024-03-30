@@ -67,21 +67,21 @@
 	if(dosage >= 3)
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15
-		M.adjustOxyLoss(10,20)
+		M.take_damage(OXY, 10,20)
 		if(istype(H))
-			H.co2_alert = 1
+			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 1)
 	else if(dosage >= 1.5)
 		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
-		M.adjustOxyLoss(3,5)
+		M.take_damage(OXY, 3,5)
 		if(istype(H))
-			H.co2_alert = 1
+			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 1)
 	else if(dosage >= 0.25)
 		warning_message = pick("a little dizzy","short of breath")
 		warning_prob = 10
 		if(istype(H))
-			H.co2_alert = 0
+			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 0)
 	else if(istype(H))
-		H.co2_alert = 0
+		SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 0)
 	if(istype(H) && dosage > 1 && H.ticks_since_last_successful_breath < 15)
 		H.ticks_since_last_successful_breath++
 	if(warning_message && prob(warning_prob))

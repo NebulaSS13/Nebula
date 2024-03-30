@@ -146,7 +146,7 @@
 */
 
 /obj/item/grab/proc/on_target_change(obj/screen/zone_selector/zone, old_sel, new_sel)
-	if(src != assailant.get_active_hand())
+	if(src != assailant.get_active_held_item())
 		return // Note that because of this condition, there's no guarantee that target_zone = old_sel
 	if(target_zone == new_sel)
 		return

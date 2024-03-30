@@ -16,6 +16,9 @@
 	apply_material_name         = FALSE
 	result_type                 = /obj/structure/fire_source/firepit
 
+/decl/stack_recipe/bricks/firepit/kiln
+	result_type                 = /obj/structure/fire_source/kiln
+
 /decl/stack_recipe/bricks/furniture
 	abstract_type              = /decl/stack_recipe/bricks/furniture
 	one_per_turf               = TRUE
@@ -24,9 +27,9 @@
 
 /decl/stack_recipe/bricks/furniture/planting_bed
 	result_type                = /obj/machinery/portable_atmospherics/hydroponics/soil
-	req_amount                 = 3 // Arbitrary value since machines don't handle matter properly yet.
+	req_amount                 = 3 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
 
-/decl/stack_recipe/bricks/furniture/planting_bed/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/bricks/furniture/planting_bed/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
 	return list(new result_type(location))
 
 /decl/stack_recipe/bricks/fountain

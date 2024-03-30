@@ -531,7 +531,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		return .
 	for(var/obj/item/gear in get_equipped_items(TRUE))
 		client.screen |= gear
-	if(hud_used)
+	if(istype(hud_used))
 		hud_used.hidden_inventory_update()
 		hud_used.persistant_inventory_update()
 		update_action_buttons()

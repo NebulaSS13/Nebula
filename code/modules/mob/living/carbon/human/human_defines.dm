@@ -65,7 +65,7 @@
 	var/became_younger
 	var/list/appearance_descriptors
 	var/list/smell_cooldown
-	/// var for caching last getHalloss() run to avoid looping through organs over and over and over again
+	/// var for caching last pain calc to avoid looping through organs over and over and over again
 	var/last_pain
 	var/vital_organ_missing_time
 	/// Used to look up records when the client is logged out.

@@ -17,6 +17,7 @@
 	plural_name = "sheets"
 	abstract_type = /obj/item/stack/material
 	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/can_be_pulverized = FALSE
 	var/can_be_reinforced = FALSE
 	var/decl/material/reinf_material
@@ -119,6 +120,9 @@
 		update_strings()
 		update_icon()
 
+/obj/item/stack/material/proc/get_stack_conversion_dictionary()
+	return
+
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
 
 	if(can_be_reinforced && istype(W, /obj/item/stack/material))
@@ -128,17 +132,21 @@
 			material.reinforce(user, W, src)
 		return TRUE
 
-	if(can_be_pulverized && IS_HAMMER(W) && material?.hardness >= MAT_VALUE_RIGID)
+	// TODO: convert to converts_into entry.
+	if(can_be_pulverized && IS_HAMMER(W) && material?.hardness >= MAT_VALUE_RIGID && user.a_intent == I_HURT)
+
 		if(W.material?.hardness < material.hardness)
 			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to pulverize [material.solid_name]."))
 			return TRUE
+
 		var/converting = clamp(get_amount(), 0, 5)
-		if(converting)
+		if(converting && W.do_tool_interaction(TOOL_HAMMER, user, src, 1 SECOND, "pulverizing", "pulverizing", set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= converting)
 			// TODO: make a gravel type?
 			// TODO: pass actual stone material to gravel?
-			new /obj/item/stack/material/ore/sand(get_turf(user), converting)
+			new /obj/item/stack/material/ore/handful/sand(get_turf(user), converting)
 			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
 			use(converting)
+
 		return TRUE
 
 	if(reinf_material?.default_solid_form && IS_WELDER(W))
@@ -149,6 +157,31 @@
 			reinf_material.create_object(get_turf(user), 1)
 			return TRUE
 
+	var/list/can_be_converted_into = get_stack_conversion_dictionary()
+	if(length(can_be_converted_into) && user.a_intent != I_HURT)
+
+		var/convert_tool
+		var/obj/item/stack/convert_type
+		for(var/tool_type in can_be_converted_into)
+			if(IS_TOOL(W, tool_type))
+				convert_tool = tool_type
+				convert_type = can_be_converted_into[tool_type]
+				break
+
+		if(convert_type)
+
+			var/product_per_sheet         = matter_multiplier / initial(convert_type.matter_multiplier)
+			var/minimum_per_one_product   = CEILING(1 / product_per_sheet)
+
+			if(get_amount() < minimum_per_one_product)
+				to_chat(user, SPAN_WARNING("You will need [minimum_per_one_product] [minimum_per_one_product == 1 ? singular_name : plural_name] to produce [product_per_sheet] [product_per_sheet == 1 ? initial(convert_type.singular_name) : initial(convert_type.plural_name)]."))
+			else if(W.do_tool_interaction(convert_tool, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= minimum_per_one_product)
+				var/obj/item/stack/product = new convert_type(get_turf(src), CEILING(product_per_sheet), material?.type, reinf_material?.type)
+				use(minimum_per_one_product)
+				if(product.add_to_stacks(user, TRUE))
+					user.put_in_hands(product)
+			return TRUE
+
 	return ..()
 
 /obj/item/stack/material/get_max_drying_wetness()
@@ -156,10 +189,11 @@
 
 /obj/item/stack/material/on_update_icon()
 	. = ..()
-	color = material?.color
-	alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+	if(material)
+		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+	else
+		alpha = initial(alpha)
 	update_state_from_amount()
-
 	if(drying_wetness > 0)
 		var/image/I = new(icon, icon_state)
 		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
@@ -262,6 +296,10 @@
 	crafting_stack_type = /obj/item/stack/material/brick
 	can_be_pulverized = TRUE
 
+// Extra subtype defined for the clay stack recipes to not freak out about null material.
+/obj/item/stack/material/brick/clay
+	material = /decl/material/solid/clay
+
 /obj/item/stack/material/bolt
 	name = "bolts"
 	icon_state = "sheet-cloth"
@@ -271,6 +309,18 @@
 	crafting_stack_type = /obj/item/stack/material/bolt
 	craft_verb = "tailor"
 	craft_verbing = "tailoring"
+
+// Subtypes for dyed cloth.
+/obj/item/stack/material/bolt/yellow
+	paint_color = "#ffbf00"
+/obj/item/stack/material/bolt/teal
+/obj/item/stack/material/bolt/black
+/obj/item/stack/material/bolt/green
+/obj/item/stack/material/bolt/purple
+/obj/item/stack/material/bolt/blue
+/obj/item/stack/material/bolt/beige
+/obj/item/stack/material/bolt/lime
+/obj/item/stack/material/bolt/red
 
 /obj/item/stack/material/pane
 	name = "panes"
@@ -364,19 +414,14 @@
 	crafting_stack_type = /obj/item/stack/material/log
 	craft_verb = "whittle"
 	craft_verbing = "whittling"
-	var/plank_type = /obj/item/stack/material/plank
+	matter_multiplier = 3
 
-/obj/item/stack/material/log/attackby(obj/item/W, mob/user)
-	if(plank_type && (IS_HATCHET(W) || IS_SAW(W)))
-		var/tool_type = W.get_tool_quality(TOOL_HATCHET) >= W.get_tool_quality(TOOL_SAW) ? TOOL_HATCHET : TOOL_SAW
-		if(W.do_tool_interaction(tool_type, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src))
-			var/obj/item/stack/planks = new plank_type(get_turf(src), rand(2,4), material?.type, reinf_material?.type) // todo: change plank amount based on carpentry skillcheck
-			playsound(loc, 'sound/foley/wooden_drop.ogg', 40, TRUE)
-			use(1)
-			if(planks.add_to_stacks(user, TRUE))
-				user.put_in_hands(planks)
-		return TRUE
-	return ..()
+/obj/item/stack/material/log/get_stack_conversion_dictionary()
+	var/static/list/converts_into = list(
+		TOOL_HATCHET = /obj/item/stack/material/plank,
+		TOOL_SAW = /obj/item/stack/material/plank
+	)
+	return converts_into
 
 /obj/item/stack/material/segment
 	name = "segments"
@@ -426,6 +471,27 @@
 	craft_verb = "sculpt"
 	craft_verbing = "sculpting"
 	can_be_pulverized = TRUE
+	matter_multiplier = 1.5
+
+/obj/item/stack/material/lump/get_stack_conversion_dictionary()
+	var/static/list/converts_into = list(
+		TOOL_HAMMER = /obj/item/stack/material/brick
+	)
+	return converts_into
+
+/obj/item/stack/material/lump/large
+	base_state        = "lump_large"
+	icon_state        = "lump_large"
+	plural_icon_state = "lump_large-mult"
+	max_icon_state    = "lump_large-max"
+	stack_merge_type  = /obj/item/stack/material/lump/large
+	matter_multiplier = 3
+
+/obj/item/stack/material/lump/large/clay
+	material = /decl/material/solid/clay
+
+/obj/item/stack/material/lump/large/soil
+	material = /decl/material/solid/soil
 
 /obj/item/stack/material/slab
 	name = "slabs"

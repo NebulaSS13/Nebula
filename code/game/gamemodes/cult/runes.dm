@@ -126,7 +126,7 @@
 		if(!iscultist(target) && target.loc == get_turf(src)) // They hesitated, resisted, or can't join, and they are still on the rune - burn them
 			if(target.stat == CONSCIOUS)
 				target.take_overall_damage(0, 10)
-				switch(target.getFireLoss())
+				switch(target.get_damage(BURN))
 					if(0 to 25)
 						to_chat(target, "<span class='danger'>Your blood boils as you force yourself to resist the corruption invading every corner of your mind.</span>")
 					if(25 to 45)
@@ -180,17 +180,17 @@
 			var/warning = 0
 			while(user.loc == src)
 				user.take_organ_damage(0, 2)
-				if(user.getFireLoss() > 50)
+				if(user.get_damage(BURN) > 50)
 					to_chat(user, "<span class='danger'>Your body can't handle the heat anymore!</span>")
 					leaveRune(user)
 					return
 				if(warning == 0)
 					to_chat(user, "<span class='warning'>You feel the immerse heat of the realm of Nar-Sie...</span>")
 					++warning
-				if(warning == 1 && user.getFireLoss() > 15)
+				if(warning == 1 && user.get_damage(BURN) > 15)
 					to_chat(user, "<span class='warning'>Your burns are getting worse. You should return to your realm soon...</span>")
 					++warning
-				if(warning == 2 && user.getFireLoss() > 35)
+				if(warning == 2 && user.get_damage(BURN) > 35)
 					to_chat(user, "<span class='warning'>The heat! It burns!</span>")
 					++warning
 				sleep(10)
@@ -471,7 +471,7 @@
 		if(ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 			if(H.is_asystole())
-				H.adjustBrainLoss(2 + casters.len)
+				H.take_damage(BRAIN, 2 + casters.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
@@ -546,9 +546,9 @@
 		statuses += "you regain lost blood"
 		if(!charges)
 			return statuses
-	if(user.getBruteLoss() || user.getFireLoss())
-		var/healbrute = user.getBruteLoss()
-		var/healburn = user.getFireLoss()
+	if(user.get_damage(BRUTE) || user.get_damage(BURN))
+		var/healbrute = user.get_damage(BRUTE)
+		var/healburn = user.get_damage(BURN)
 		if(healbrute < healburn)
 			healbrute = min(healbrute, charges / 2)
 			charges -= healbrute
@@ -563,9 +563,9 @@
 		statuses += "your wounds mend"
 		if(!charges)
 			return statuses
-	if(user.getToxLoss())
-		use = min(user.getToxLoss(), charges)
-		user.adjustToxLoss(-use)
+	if(user.get_damage(TOX))
+		use = min(user.get_damage(TOX), charges)
+		user.heal_damage(TOX, use)
 		charges -= use
 		statuses += "your body stings less"
 		if(!charges)

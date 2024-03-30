@@ -4,7 +4,7 @@
 	var/decl/backpack_outfit/backpack
 	var/list/backpack_metadata
 	var/decl/survival_box_option/survival_box_choice
-	var/starting_cash_choice
+	var/decl/starting_cash_choice/starting_cash_choice
 	var/give_passport = TRUE
 
 /datum/category_item/player_setup_item/physical/equipment
@@ -26,8 +26,8 @@
 	pref.all_underwear =          R.read("all_underwear")
 	pref.all_underwear_metadata = R.read("all_underwear_metadata")
 	pref.backpack_metadata =      R.read("backpack_metadata")
-	pref.starting_cash_choice =   R.read("starting_cash_choice")
-	pref.survival_box_choice =    decls_repository.get_decl_by_id(R.read("survival_box"), validate_decl_type = FALSE)
+	pref.starting_cash_choice =   decls_repository.get_decl_by_id_or_var(R.read("starting_cash_choice"), /decl/starting_cash_choice)
+	pref.survival_box_choice =    decls_repository.get_decl_by_id_or_var(R.read("survival_box"), /decl/survival_box_option)
 
 	pref.give_passport = R.read("passport")
 	if(isnull(pref.give_passport))
@@ -36,23 +36,14 @@
 	var/load_backbag = R.read("backpack")
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
-	var/list/all_cash_choices = decls_repository.get_decls_of_type(/decl/starting_cash_choice)
-	for(var/ctype in all_cash_choices)
-		var/decl/starting_cash_choice/cash_choice = all_cash_choices[ctype]
-		if(lowertext(cash_choice.name) == pref.starting_cash_choice)
-			pref.starting_cash_choice = ctype
-			break
-
 /datum/category_item/player_setup_item/physical/equipment/save_character(datum/pref_record_writer/W)
 	W.write("all_underwear",          pref.all_underwear)
 	W.write("all_underwear_metadata", pref.all_underwear_metadata)
 	W.write("backpack",               pref.backpack.name)
 	W.write("backpack_metadata",      pref.backpack_metadata)
 	W.write("survival_box",           pref.survival_box_choice?.uid)
+	W.write("starting_cash_choice",   pref.starting_cash_choice?.uid)
 	W.write("passport",               pref.give_passport)
-
-	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
-	W.write("starting_cash_choice", lowertext(cash_choice.name))
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
@@ -103,11 +94,18 @@
 				var/list/metadata = tweak_metadata["[tweak]"]
 				tweak_metadata["[tweak]"] = tweak.validate_metadata(metadata)
 
-	if(!ispath(pref.starting_cash_choice, /decl/starting_cash_choice))
-		pref.starting_cash_choice = global.using_map.default_starting_cash_choice
+	if(length(global.using_map.starting_cash_choices))
+		if(!pref.starting_cash_choice || !(pref.starting_cash_choice.type in global.using_map.starting_cash_choices))
+			pref.starting_cash_choice = global.using_map.starting_cash_choices[global.using_map.starting_cash_choices[1]]
+	else
+		pref.starting_cash_choice = null
 
-	if(!pref.survival_box_choice && length(global.using_map.survival_box_choices)) // if you have at least one box available, 'none' must be its own bespoke option
-		pref.survival_box_choice = global.using_map.survival_box_choices[global.using_map.survival_box_choices[1]]
+	// if you have at least one box available, 'none' must be its own bespoke option
+	if(length(global.using_map.survival_box_choices))
+		if(!pref.survival_box_choice || !(pref.survival_box_choice.type in global.using_map.survival_box_choices))
+			pref.survival_box_choice = global.using_map.survival_box_choices[global.using_map.survival_box_choices[1]]
+	else
+		pref.survival_box_choice = null
 
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
@@ -134,8 +132,8 @@
 	if(global.using_map.passport_type)
 		. += "<b>Passport:</b> <a href='?src=\ref[src];toggle_passport=1'><b>[pref.give_passport ? "Yes" : "No"]</b></a><br>"
 
-	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
-	. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[capitalize(cash_choice.name)]</a><br>"
+	if(length(global.using_map.starting_cash_choices))
+		. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[pref.starting_cash_choice]</a><br>"
 	return jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/equipment/proc/get_underwear_metadata(var/underwear_category, var/datum/gear_tweak/gt)
@@ -220,6 +218,12 @@
 			set_backpack_metadata(bo, bt, new_metadata)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["change_cash_choice"])
-		pref.starting_cash_choice = next_in_list(pref.starting_cash_choice, decls_repository.get_decl_paths_of_subtype(/decl/starting_cash_choice))
-		return TOPIC_REFRESH_UPDATE_PREVIEW
+		var/list/display_choices = list()
+		for(var/key in global.using_map.starting_cash_choices)
+			display_choices += global.using_map.starting_cash_choices[key]
+		var/chosen_cash = input(user, "Select a personal finance alternative.", "Personal Finances", pref.starting_cash_choice) as null|anything in display_choices
+		if(!chosen_cash)
+			return TOPIC_NOACTION
+		pref.starting_cash_choice = chosen_cash
+		return TOPIC_REFRESH
 	return ..()
