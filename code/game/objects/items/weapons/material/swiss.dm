@@ -109,7 +109,7 @@
 	if(active_tool != null)
 		add_overlay(overlay_image(icon, active_tool, flags = RESET_COLOR))
 
-/obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart, skip_offset = FALSE)
+/obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart)
 	. = (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE) ? ..() : new /image
 
 /obj/item/knife/folding/swiss/resolve_attackby(obj/target, mob/user)

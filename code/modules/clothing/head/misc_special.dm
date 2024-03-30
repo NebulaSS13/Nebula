@@ -70,7 +70,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()	//so our mob-overlays
 
-/obj/item/clothing/head/welding/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/clothing/head/welding/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && up && check_state_in_icon("[overlay.icon_state]_up", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_up"
 	. = ..()
@@ -126,7 +126,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()
 
-/obj/item/clothing/head/ushanka/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/clothing/head/ushanka/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && up && check_state_in_icon("[overlay.icon_state]_up", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_up"
 	. = ..()
@@ -198,7 +198,7 @@
 	if(overlay && check_state_in_icon("[overlay.icon_state]-flame", overlay.icon))
 		return emissive_overlay(overlay.icon, "[overlay.icon_state]-flame")
 
-/obj/item/clothing/head/cakehat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/clothing/head/cakehat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && is_on_fire)
 		var/image/I = get_mob_flame_overlay(overlay, bodytype)
 		if(I)
