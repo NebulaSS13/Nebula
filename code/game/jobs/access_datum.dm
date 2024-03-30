@@ -376,6 +376,12 @@ var/global/const/access_heads = "ACCESS_HEADS" //67
 	desc = "Command"
 	region = ACCESS_REGION_COMMAND
 
+var/global/const/access_cameras = "ACCESS_CAMERAS" //68
+/datum/access/cameras
+	id = access_cameras
+	desc = "Cameras"
+	region = ACCESS_REGION_SECURITY
+
 /******************
 * Central Command *
 ******************/

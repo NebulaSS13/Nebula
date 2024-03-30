@@ -5,7 +5,7 @@
 	supervisors = "the Head Doctor"
 	total_positions = 2
 	spawn_positions = 2
-	alt_titles = list("Chemist","Nurse")
+	alt_titles = list("Chemist", "Nurse", "Surgeon")
 	skill_points = 34
 	min_skill = list(
 		SKILL_LITERACY  = SKILL_ADEPT,
@@ -42,7 +42,7 @@
 	event_categories = list(ASSIGNMENT_MEDICAL)
 
 /datum/job/ministation/doctor/head
-	title = "Medical Director"
+	title = "Head Doctor"
 	head_position = 1
 	department_types = list(
 		/decl/department/medical,
@@ -50,7 +50,7 @@
 	)
 	supervisors = "the Captain and your own ethics"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/doctor/head
-	alt_titles = list("Surgeon","Patriarch of Medicine", "Head Doctor")
+	alt_titles = list("Chief Medical Officer", "Head Surgeon")
 	total_positions = 1
 	spawn_positions = 1
 	skill_points = 38

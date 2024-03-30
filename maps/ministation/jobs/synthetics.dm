@@ -3,7 +3,7 @@
 	event_categories = list(ASSIGNMENT_ROBOT)
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "your laws, the Head of Personnel, and the Captain"
+	supervisors = "your laws, the Lieutenant, and the Captain"
 	selection_color = "#254c25"
 	minimal_player_age = 7
 	account_allowed = 0
@@ -52,8 +52,7 @@
 	department_types = list(/decl/department/miscellaneous)
 
 /datum/job/computer/equip_job(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
-	if(!H)	return 0
-	return 1
+	return !!H
 
 /datum/job/computer/is_position_available()
 	return (empty_playable_ai_cores.len != 0)

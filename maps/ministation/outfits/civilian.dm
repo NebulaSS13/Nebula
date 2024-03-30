@@ -5,8 +5,7 @@
 	id_type = /obj/item/card/id/ministation/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/storage/ore = 1)
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
+	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 
 /decl/hierarchy/outfit/job/ministation/cargo/Initialize()
 	. = ..()
@@ -18,7 +17,6 @@
 	uniform = /obj/item/clothing/under/bartender
 	id_type = /obj/item/card/id/ministation/bartender
 	pda_type = /obj/item/modular_computer/pda
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 	head = /obj/item/clothing/head/chefhat
 
 /decl/hierarchy/outfit/job/ministation/janitor
@@ -27,7 +25,6 @@
 	uniform = /obj/item/clothing/under/janitor
 	id_type = /obj/item/card/id/ministation/janitor
 	pda_type = /obj/item/modular_computer/pda
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
 /decl/hierarchy/outfit/job/ministation/librarian
 	l_ear = /obj/item/radio/headset/headset_service
@@ -35,7 +32,6 @@
 	uniform = /obj/item/clothing/under/librarian
 	id_type = /obj/item/card/id/ministation/librarian
 	pda_type = /obj/item/modular_computer/pda
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
 //cards
 /obj/item/card/id/ministation/cargo

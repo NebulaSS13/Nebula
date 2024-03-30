@@ -44,7 +44,7 @@
 	supervisors = "the Captain"
 	spawn_positions = 1
 	total_positions = 1
-	alt_titles = list("Head Researcher", "Chief Researcher", "Patriarch of Science")
+	alt_titles = list("Head Researcher", "Chief Researcher")
 	outfit_type = /decl/hierarchy/outfit/job/ministation/scientist/head
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,

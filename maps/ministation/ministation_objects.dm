@@ -5,7 +5,6 @@
 		if(strata_override)
 			var/decl/strata/strata_info = GET_DECL(strata_override)
 			. = strata_info.ores_sparse
-			. = strata_info.ores_sparse
 		if(!.)
 			. = SSmaterials.weighted_minerals_sparse
 	else
@@ -19,14 +18,14 @@
 /decl/closet_appearance/crate/ministation
 	decals = null
 	extra_decals = null
-	base_icon =  'bin.dmi'
+	base_icon =  'maps/ministation/bin.dmi'
 	decal_icon = 'icons/obj/closets/decals/crate.dmi'
 	color = COLOR_WHITE
 
 /obj/structure/closet/crate/bin/ministation
 	name = "garbage bin"
 	desc = "A large bin for putting trash in."
-	icon = 'bin.dmi'
+	icon = 'maps/ministation/bin.dmi'
 	icon_state = "base"
 	closet_appearance = /decl/closet_appearance/crate/ministation
 	storage_types = CLOSET_STORAGE_MOBS | CLOSET_STORAGE_ITEMS

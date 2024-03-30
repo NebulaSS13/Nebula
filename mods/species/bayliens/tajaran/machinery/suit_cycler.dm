@@ -54,7 +54,7 @@
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_FELINE, 'mods/species/bayliens/tajaran/icons/clothing/salvage/suit.dmi')
 
-/obj/item/clothing/suit/space/void/pilot/Initialize()
+/obj/item/clothing/suit/space/void/expedition/Initialize()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_FELINE, 'mods/species/bayliens/tajaran/icons/clothing/pilot/suit.dmi')
 

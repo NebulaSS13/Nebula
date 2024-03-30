@@ -1,6 +1,5 @@
 /datum/job/ministation/captain
 	title = "Captain"
-	alt_titles = list("Matriarch", "Supreme Patriarch")
 	supervisors = "your profit margin, your conscience, and the watchful eye of the Tradehouse Rep"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/captain
 	min_skill = list(
@@ -19,7 +18,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#1d1d4f"
-	hud_icon = "hudyingmatriarch"
+	hud_icon = "hudcaptain"
 	req_admin_notify = 1
 	access = list()
 	minimal_access = list()
@@ -39,7 +38,7 @@
 	return get_all_station_access()
 
 /mob/proc/freetradeunion_rename_company()
-	set name = "Defect from Tradehouse Ivenmoth"
+	set name = "Defect from Tradehouse"
 	set category = "Captain's Powers"
 	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", global.using_map.company_name), MAX_NAME_LEN)
 	if(!company)
@@ -54,8 +53,7 @@
 	verbs -= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/hop
-	title = "Head of Personnel"
-	alt_titles = list("Patriarch of Personnel","Lieutenant")
+	title = "Lieutenant"
 	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/hop
 	head_position = 1
@@ -66,7 +64,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#2f2f7f"
-	hud_icon = "hudyingpatriarch"
+	hud_icon = "hudlieutenant"
 	req_admin_notify = 1
 	minimal_player_age = 14
 	economic_power = 10

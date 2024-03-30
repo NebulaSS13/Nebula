@@ -88,8 +88,8 @@
 /decl/item_modifier/space_suit/pilot
 	name = "Pilot"
 	type_setups = list(
-		/obj/item/clothing/head/helmet/space/void = /obj/item/clothing/head/helmet/space/void/pilot,
-		/obj/item/clothing/suit/space/void =        /obj/item/clothing/suit/space/void/pilot
+		/obj/item/clothing/head/helmet/space/void = /obj/item/clothing/head/helmet/space/void/expedition,
+		/obj/item/clothing/suit/space/void =        /obj/item/clothing/suit/space/void/expedition
 	)
 
 /decl/item_modifier/space_suit/salvage
