@@ -28,7 +28,7 @@
 /turf/exterior/barren,
 /area/shaded_hills/caves/unexplored/south)
 "kZ" = (
-/obj/abstract/level_data_spawner/shaded_hills,
+/obj/abstract/level_data_spawner/shaded_hills_grassland,
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/river)
 "lC" = (

@@ -18,7 +18,9 @@
 	#include "shaded_hills_testing.dm"
 	#include "shaded_hills_turfs.dm"
 
-	#include "shaded_hills-1.dmm"
+	#include "shaded_hills-grassland.dmm"
+	#include "shaded_hills-woods.dmm"
+	#include "shaded_hills-swamp.dmm"
 
 	#define USING_MAP_DATUM /datum/map/shaded_hills
 

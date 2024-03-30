@@ -77,3 +77,40 @@
 		'sound/ambience/ominous2.ogg',
 		'sound/ambience/ominous3.ogg',
 	)
+
+// Swamp areas.
+/area/shaded_hills/caves/river/swamp
+	name = "Southern Silent River"
+
+/area/shaded_hills/outside/swamp
+	name = "Swamp"
+	description = "The reek of stagnant water and the chirp of insects filter through the humid air."
+
+/area/shaded_hills/outside/river/swamp
+	name = "Swampy River"
+	description = "Mud squelches underfoot as the river broadens and splits, feeding a broad expanse of swamp and still water."
+
+/area/shaded_hills/caves/swamp
+	name = "Southern Deep Tunnels"
+
+/area/shaded_hills/caves/unexplored/swamp
+	name = "Trackless Deeps - Far South"
+
+// Woodland areas.
+/area/shaded_hills/caves/river/woods
+	name = "Northern Silent River"
+
+/area/shaded_hills/outside/river/lake
+	name = "Woodland Lake"
+
+/area/shaded_hills/outside/woods
+	name = "Woodlands"
+
+/area/shaded_hills/outside/river/woods
+	name = "Woodland River"
+
+/area/shaded_hills/caves/woods
+	name = "Northern Deep Tunnels"
+
+/area/shaded_hills/caves/unexplored/woods
+	name = "Trackless Deeps - Far North"
