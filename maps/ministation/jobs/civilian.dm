@@ -1,5 +1,5 @@
 /datum/job/ministation/assistant
-	title = "Assistant"
+	title = "Recruit"
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "absolutely everyone"
@@ -13,9 +13,10 @@
 	event_categories = list(ASSIGNMENT_GARDENER)
 
 /datum/job/ministation/assistant/get_access()
-	if(get_config_value(/decl/config/toggle/assistant_maint))
+	if(config.assistant_maint)
 		return list(access_maint_tunnels)
-	return list()
+	else
+		return list()
 
 /decl/hierarchy/outfit/job/ministation_assistant
 	name = "Job - Ministation Assistant"
@@ -23,7 +24,7 @@
 /datum/job/ministation/bartender
 	title = "Bartender"
 	alt_titles = list("Cook","Barista")
-	supervisors = "the Lieutenant and the Captain"
+	supervisors = "the Head of Personnel and the Captain"
 	total_positions = 2
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/ministation/bartender
@@ -54,7 +55,7 @@
 /datum/job/ministation/cargo
 	title = "Cargo Technician"
 	alt_titles = list("Shaft Miner","Drill Technician","Prospector")
-	supervisors = "the Lieutenant and the Captain"
+	supervisors = "the Head of Personnel and the Captain"
 	total_positions = 3
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/ministation/cargo
@@ -106,7 +107,7 @@
 	department_types = list(/decl/department/service)
 	total_positions = 2
 	spawn_positions = 1
-	supervisors = "the Lieutenant and the Captain"
+	supervisors = "the Head of Personnel and the Captain"
 	economic_power = 3
 	selection_color = "#940088"
 	access = list(
@@ -140,7 +141,7 @@
 	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 2
-	supervisors = "the Lieutenant, the Captain, and the smell of old paper"
+	supervisors = "the Head of Personnel, the Captain, and the smell of old paper"
 	economic_power = 5
 	selection_color = "#008800"
 	access = list(access_library)

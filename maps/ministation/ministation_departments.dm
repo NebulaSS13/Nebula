@@ -62,7 +62,7 @@
 /obj/item/robot_module/security
 	associated_department = /decl/department/security
 
-/obj/machinery/network/pager/security
+/obj/machinery/network/pager/security 
 	department = /decl/department/security
 
 /decl/department/miscellaneous
@@ -70,9 +70,9 @@
 	display_priority = -1
 	display_color = "#ccffcc"
 
-/decl/department/corporate
-	name = "Corporate"
-	announce_channel = "Corporate"
+/decl/department/tradehouse
+	name = "Tradehouse"
+	announce_channel = "Tradehouse"
 	colour = "#b98f03"
 	display_priority = 4
 	display_color = "#ffddf0"

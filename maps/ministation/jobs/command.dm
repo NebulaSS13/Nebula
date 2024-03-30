@@ -1,6 +1,7 @@
 /datum/job/ministation/captain
 	title = "Captain"
-	supervisors = "your profit margin, your conscience, and the watchful eye of the Company Rep"
+	alt_titles = list("Matriarch", "Supreme Patriarch")
+	supervisors = "your profit margin, your conscience, and the watchful eye of the Tradehouse Rep"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/captain
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
@@ -18,7 +19,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#1d1d4f"
-	hud_icon = "hudcaptain"
+	hud_icon = "hudyingmatriarch"
 	req_admin_notify = 1
 	access = list()
 	minimal_access = list()
@@ -29,7 +30,7 @@
 	must_fill = 1
 	not_random_selectable = 1
 
-/datum/job/ministation/captain/equip_job(var/mob/living/carbon/human/H)
+/datum/job/ministation/captain/equip_job(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
 	if(H)
 		H.verbs |= /mob/proc/freetradeunion_rename_company
@@ -38,7 +39,7 @@
 	return get_all_station_access()
 
 /mob/proc/freetradeunion_rename_company()
-	set name = "Defect from Corporate Control"
+	set name = "Defect from Tradehouse Ivenmoth"
 	set category = "Captain's Powers"
 	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", global.using_map.company_name), MAX_NAME_LEN)
 	if(!company)
@@ -53,7 +54,8 @@
 	verbs -= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/hop
-	title = "Lieutenant"
+	title = "Head of Personnel"
+	alt_titles = list("Patriarch of Personnel","Lieutenant")
 	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/hop
 	head_position = 1
@@ -64,7 +66,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#2f2f7f"
-	hud_icon = "hudlieutenant"
+	hud_icon = "hudyingpatriarch"
 	req_admin_notify = 1
 	minimal_player_age = 14
 	economic_power = 10
@@ -112,7 +114,8 @@
 		access_hop,
 		access_RC_announce,
 		access_keycard_auth,
-		access_gateway
+		access_gateway,
+		access_cameras
 	)
 	minimal_access = list(
 		access_security,
@@ -155,7 +158,8 @@
 		access_hop,
 		access_RC_announce,
 		access_keycard_auth,
-		access_gateway
+		access_gateway,
+		access_cameras
 	)
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
