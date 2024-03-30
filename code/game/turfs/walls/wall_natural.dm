@@ -75,7 +75,8 @@
 			being_mined = TRUE
 			if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
 				dismantle_wall()
-			being_mined = FALSE
+			if(istype(src, /turf/wall/natural)) // dismantle_wall() can change our type
+				being_mined = FALSE
 		return TRUE
 	return FALSE
 
