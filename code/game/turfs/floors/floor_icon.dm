@@ -1,3 +1,54 @@
+/turf/floor
+	var/static/HEIGHT_OFFSET_RANGE = (world.icon_size - 16)
+
+/turf/floor/proc/get_trench_icon()
+	var/check_icon = (istype(flooring) && flooring.icon) || icon
+	if(check_icon && check_state_in_icon("trench", check_icon))
+		return check_icon
+
+/turf/floor/proc/update_height_appearance()
+
+	layer = TURF_LAYER
+	if(istype(flooring) && !flooring.render_trenches) // TODO: Update pool tiles/edges to behave properly with this new system.
+		return FALSE
+
+	var/my_height = get_physical_height()
+	if(my_height < 0)
+
+		var/height_ratio = clamp(abs(my_height) / FLUID_DEEP, 0, 1)
+		default_pixel_z = -(min(HEIGHT_OFFSET_RANGE, round(HEIGHT_OFFSET_RANGE * height_ratio)))
+		pixel_z = default_pixel_z
+		layer = UNDER_TURF_LAYER + ((1-height_ratio) * 0.01)
+
+		var/image/I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "full")
+		var/shadow_alpha = 80 * height_ratio
+		I.color = COLOR_BLACK
+		I.alpha = shadow_alpha
+		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+		add_overlay(I)
+
+		// Draw a cliff wall if we have a northern neighbor that isn't part of our trench.
+		var/turf/floor/neighbor = get_step_resolving_mimic(src, NORTH)
+		if(isturf(neighbor) && neighbor.is_open())
+			return
+
+		if(!istype(neighbor) || (neighbor.get_physical_height() > my_height))
+			var/trench_icon = (istype(neighbor) && neighbor.get_trench_icon()) || get_trench_icon()
+			if(trench_icon)
+
+				I = image(icon = trench_icon, icon_state = "trench")
+				I.pixel_z = world.icon_size
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				I.color = isatom(neighbor) ? neighbor.color : color
+				add_overlay(I)
+
+				I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "northedge")
+				I.pixel_z = world.icon_size
+				I.color = COLOR_BLACK
+				I.alpha = shadow_alpha
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				add_overlay(I)
+
 /turf/floor/on_update_icon(var/update_neighbors)
 	. = ..()
 	cut_overlays()
@@ -12,6 +63,9 @@
 		add_overlay(get_turf_damage_overlay(_floor_broken))
 	if(is_floor_burned())
 		add_overlay(get_turf_damage_overlay(_floor_burned))
+
+	update_height_appearance()
+
 	compile_overlays()
 
 	if(update_neighbors)

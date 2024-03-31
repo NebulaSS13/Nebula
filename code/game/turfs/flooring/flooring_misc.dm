@@ -65,6 +65,7 @@
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
 	height = -(FLUID_OVER_MOB_HEAD) - 50
+	render_trenches = FALSE
 
 /decl/flooring/pool/deep
 	height = -FLUID_DEEP - 50
@@ -73,7 +74,7 @@
 	name = "woven floor"
 	desc = "A rustic woven mat."
 	icon = 'icons/turf/flooring/woven.dmi'
-	icon_base = "0"
+	icon_base = "woven"
 	damage_temperature = T0C+80
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/woven

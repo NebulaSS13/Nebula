@@ -45,4 +45,5 @@
 /turf/floor/woven
 	name = "floor"
 	icon = 'icons/turf/flooring/woven.dmi'
-	icon_state = "0"
+	icon_state = "woven"
+	initial_flooring = /decl/flooring/woven

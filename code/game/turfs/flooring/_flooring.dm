@@ -58,6 +58,8 @@ var/global/list/flooring_cache = list()
 	var/outer_edge_state
 	var/outer_corner_state
 
+	var/render_trenches = TRUE
+
 /decl/flooring/Initialize()
 	. = ..()
 
@@ -81,6 +83,9 @@ var/global/list/flooring_cache = list()
 		. += "null or invalid icon_state '[icon_base]'"
 
 	if(icon && icon_base)
+
+		if(!check_state_in_icon("trench", icon))
+			. += "no trench wall state"
 
 		if(has_base_range)
 			for(var/i = 0 to has_base_range)

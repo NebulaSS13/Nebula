@@ -1,7 +1,3 @@
-
-/turf/floor/natural
-	var/static/HEIGHT_OFFSET_RANGE = (world.icon_size - 16)
-
 /turf/floor/natural/proc/can_draw_edge_over(turf/floor/natural/turf_to_check)
 	if(istype(turf_to_check))
 		var/my_height    = get_physical_height()
@@ -13,45 +9,14 @@
 		return icon_edge_layer > turf_to_check.icon_edge_layer
 	return TRUE
 
-/turf/floor/natural/on_update_icon()
+/turf/floor/natural/update_floor_icon(update_neighbors)
 
-	cut_overlays()
-	if(LAZYLEN(decals))
-		add_overlay(decals)
-
-	if(height < 0)
-
-		var/height_ratio = clamp(abs(height) / FLUID_DEEP, 0, 1)
-		default_pixel_z = -(min(HEIGHT_OFFSET_RANGE, round(HEIGHT_OFFSET_RANGE * height_ratio)))
-		pixel_z = default_pixel_z
-		layer = UNDER_TURF_LAYER + ((1-height_ratio) * 0.01)
-
-		var/shadow_alpha = 80 * height_ratio
-		var/image/I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "full")
-		I.color = COLOR_BLACK
-		I.alpha = shadow_alpha
-		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-		add_overlay(I)
-
-		// Draw a cliff wall if we have a northern neighbor that isn't part of our trench.
-		var/turf/neighbor = get_step_resolving_mimic(src, NORTH)
-		if(!istype(neighbor) || (neighbor.get_physical_height() > height))
-			I = image(icon = icon, icon_state = "trench")
-			I.pixel_z = world.icon_size
-			add_overlay(I)
-			I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "northedge")
-			I.pixel_z = world.icon_size
-			I.color = COLOR_BLACK
-			I.alpha = shadow_alpha
-			I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-			add_overlay(I)
-
-	else
-		default_pixel_z = 0
-		layer = TURF_LAYER
+	if(flooring)
+		return ..()
 
 	if(icon_edge_layer >= 0)
 
+		var/my_height = get_physical_height()
 		var/neighbors = 0
 		for(var/direction in global.cardinal)
 
@@ -60,7 +25,7 @@
 				continue
 
 			// We consider adjacent same-type turfs within our height range to be neighbors.
-			if(istype(turf_to_check, type) && height == turf_to_check.get_physical_height())
+			if(istype(turf_to_check, type) && my_height == turf_to_check.get_physical_height())
 				neighbors |= direction
 				continue
 
@@ -85,7 +50,7 @@
 				if(!istype(turf_to_check) || turf_to_check.density)
 					continue
 
-				if(istype(turf_to_check, type) && height == turf_to_check.get_physical_height())
+				if(istype(turf_to_check, type) && my_height == turf_to_check.get_physical_height())
 					continue
 
 				if(can_draw_edge_over(turf_to_check))
@@ -107,5 +72,3 @@
 						else if(direction & WEST)
 							I.pixel_x -= world.icon_size
 						add_overlay(I)
-
-	compile_overlays()
