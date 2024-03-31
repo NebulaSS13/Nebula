@@ -8,7 +8,7 @@
 /turf/template_noop,
 /area/template_noop)
 "i" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "k" = (
 /obj/structure/closet/crate/chest/ebony,
@@ -92,7 +92,7 @@
 	dir = 1;
 	pixel_y = 24
 	},
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "Z" = (
 /obj/item/remains/human,

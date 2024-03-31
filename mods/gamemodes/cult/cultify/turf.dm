@@ -11,13 +11,13 @@
 		set_flooring(GET_DECL(/decl/flooring/reinforced/cult))
 
 /turf/floor/is_defiled()
-	return flooring?.type == /decl/flooring/reinforced/cult || ..()
+	return istype(flooring) ? (flooring.type == /decl/flooring/reinforced/cult) : ..()
 
 /turf/floor/cult
 	name = "engraved floor"
 	icon = 'icons/turf/flooring/cult.dmi'
 	icon_state = "cult"
-	initial_flooring = /decl/flooring/reinforced/cult
+	flooring = /decl/flooring/reinforced/cult
 
 /turf/wall/on_defilement()
 	var/new_material

@@ -2,3 +2,4 @@
 /turf/floor/grass/@SUBTYPES : /turf/floor/fake_grass/@SUBTYPES{@OLD}
 /turf/floor/natural/concrete/@SUBTYPES : /turf/floor/concrete/@SUBTYPES{@OLD}
 /turf/floor/natural/wildgrass/@SUBTYPES : /turf/floor/natural/grass/wild/@SUBTYPES{@OLD}
+/turf/floor/natural/@SUBTYPES : /turf/floor/@SUBTYPES{@OLD}

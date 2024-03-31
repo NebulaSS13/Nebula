@@ -7,7 +7,7 @@
 /turf/floor/fake_grass,
 /area/shaded_hills/outside/point_of_interest/fairy_ring)
 "D" = (
-/turf/floor/natural/grass/wild,
+/turf/floor/grass/wild,
 /area/shaded_hills/outside/point_of_interest/fairy_ring)
 "N" = (
 /turf/template_noop,

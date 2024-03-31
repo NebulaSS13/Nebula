@@ -4,7 +4,7 @@
 
 /obj/item/soulstone/shatter()
 	for(var/i=1 to rand(2,5))
-		new /obj/item/shard(get_turf(src), MAT_NULLGLASS)
+		new /obj/item/shard(get_turf(src), /decl/material/nullglass)
 	. = ..()
 
 /obj/item/soulstone/withstand_psi_stress(var/stress, var/atom/source)

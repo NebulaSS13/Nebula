@@ -8,7 +8,7 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "cE" = (
-/turf/floor/natural/mud/water,
+/turf/floor/mud/water,
 /area/shaded_hills/outside/river/swamp)
 "cS" = (
 /obj/structure/bed/chair/wood/ebony{
@@ -17,26 +17,26 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "hT" = (
-/turf/floor/natural/mud/water/deep,
+/turf/floor/mud/water/deep,
 /area/shaded_hills/outside/river/swamp)
 "kZ" = (
 /obj/abstract/level_data_spawner/shaded_hills_swamp,
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/shaded_hills/outside/swamp)
 "ll" = (
 /obj/structure/fire_source/fireplace/basalt,
 /obj/item/stack/material/log/mapped/ebony/ten,
 /obj/item/chems/glass/beaker/kettle,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/witch_hut)
 "lC" = (
 /turf/unsimulated/dark_filler,
 /area/shaded_hills/caves/river/swamp)
 "lE" = (
-/turf/floor/natural/mud/water,
+/turf/floor/mud/water,
 /area/shaded_hills/outside/swamp)
 "lZ" = (
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/caves/swamp)
 "nK" = (
 /obj/structure/closet/crate/chest/ebony,
@@ -56,7 +56,7 @@
 /area/shaded_hills/witch_hut)
 "rP" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/outside/swamp)
 "sj" = (
 /turf/wall/natural/basalt/shaded_hills,
@@ -65,7 +65,7 @@
 /turf/unsimulated/dark_filler,
 /area/shaded_hills/outside/river/swamp)
 "tp" = (
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/swamp)
 "vz" = (
 /obj/structure/table/woodentable/ebony,
@@ -76,30 +76,30 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "vZ" = (
-/turf/floor/natural/mud/water,
+/turf/floor/mud/water,
 /area/shaded_hills/caves/river/swamp)
 "wv" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 4
 	},
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/outside/swamp)
 "xr" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/swamp)
 "yi" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/unexplored/swamp)
 "BC" = (
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/outside/river/swamp)
 "BF" = (
 /obj/structure/door/walnut,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/witch_hut)
 "BY" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/outside/swamp)
 "Do" = (
 /turf/unsimulated/dark_filler,
@@ -119,7 +119,7 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "Ic" = (
-/turf/floor/natural/clay,
+/turf/floor/clay,
 /area/shaded_hills/outside/river/swamp)
 "Jx" = (
 /obj/structure/table/woodentable/ebony,
@@ -145,11 +145,11 @@
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/swamp)
 "Ma" = (
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/caves/swamp)
 "OM" = (
 /obj/abstract/landmark/start/shaded_hills/herbalist,
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/outside/swamp)
 "SE" = (
 /obj/structure/door/walnut,
@@ -157,13 +157,13 @@
 /area/shaded_hills/witch_hut)
 "Ty" = (
 /obj/abstract/landmark/start/shaded_hills/traveller,
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/outside/swamp)
 "TA" = (
 /turf/unsimulated/mask,
 /area/shaded_hills/outside/swamp/poi)
 "TD" = (
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/shaded_hills/outside/swamp)
 "TR" = (
 /obj/structure/closet/crate/chest/ebony,
@@ -183,13 +183,13 @@
 /turf/wall/brick/basalt,
 /area/shaded_hills/witch_hut)
 "Xc" = (
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/shaded_hills/outside/river/swamp)
 "Xt" = (
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/outside/swamp)
 "Yn" = (
-/turf/floor/natural/mud/water/deep,
+/turf/floor/mud/water/deep,
 /area/shaded_hills/caves/river/swamp)
 "YX" = (
 /obj/structure/bed/simple/ebony,

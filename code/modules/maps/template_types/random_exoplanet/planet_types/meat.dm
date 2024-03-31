@@ -13,7 +13,7 @@
 
 /datum/level_data/planetoid/exoplanet/meat
 	base_area           = /area/exoplanet/meat
-	base_turf           = /turf/floor/natural/meat
+	base_turf           = /turf/floor/meat
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators    = list(
@@ -110,15 +110,15 @@
 	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
 	water_level_max      = 3
 	water_level_min      = 2
-	land_type            = /turf/floor/natural/meat
-	water_type           = /turf/floor/natural/meat/acid
+	land_type            = /turf/floor/meat
+	water_type           = /turf/floor/meat/acid
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
 ////////////////////////////////////////////////////////////////////////////
 
 /area/exoplanet/meat
-	base_turf       = /turf/floor/natural/meat
+	base_turf       = /turf/floor/meat
 	forced_ambience = list(
 		"sound/ambience/spookyspace1.ogg",
 		"sound/ambience/spookyspace2.ogg"
@@ -128,17 +128,16 @@
 // Turfs
 ////////////////////////////////////////////////////////////////////////////
 
-/turf/floor/natural/meat
-	name          = "fleshy ground"
-	icon          = 'icons/turf/flooring/flesh.dmi'
-	desc          = "It's disgustingly soft to the touch. And warm. Too warm."
-	dirt_color    = "#c40031"
-	footstep_type = /decl/footsteps/mud
-	material = /decl/material/solid/organic/meat
+/turf/floor/meat
+	name              = "fleshy ground"
+	icon              = 'icons/turf/flooring/flesh.dmi'
+	icon_state        = "meat"
+	base_flooring     = /decl/flooring/meat
+	material         = /decl/material/solid/organic/meat
 
-/turf/floor/natural/meat/acid
-	name         = "juices"
-	desc         = "Half-digested chunks of vines are floating in the puddle of some liquid."
-	gender       = PLURAL
-	reagent_type = /decl/material/liquid/acid/stomach
-	height       = -(FLUID_SHALLOW)
+/turf/floor/meat/acid
+	name              = "juices"
+	desc              = "Half-digested chunks of vines are floating in the puddle of some liquid."
+	gender            = PLURAL
+	fill_reagent_type = /decl/material/liquid/acid/stomach
+	height            = -(FLUID_SHALLOW)

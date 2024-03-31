@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "ac" = (
 /turf/unsimulated/mask,
@@ -24,7 +24,7 @@
 /turf/floor,
 /area/smugglers/base)
 "ah" = (
-/turf/floor/natural/barren,
+/turf/floor,
 /area/space)
 "aj" = (
 /obj/item/ammo_casing/pistol/magnum{
@@ -37,11 +37,11 @@
 	pixel_y = -5
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "ak" = (
 /obj/effect/decal/cleanable/blood,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "al" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -98,7 +98,7 @@
 	pixel_y = 7
 	},
 /obj/item/flashlight/flare/glowstick/yellow,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "av" = (
 /obj/effect/decal/cleanable/blood/drip,
@@ -281,11 +281,11 @@
 	pixel_x = -25;
 	pixel_y = 25
 	},
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "aM" = (
 /obj/random/trash,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "aN" = (
 /obj/machinery/light/small{
@@ -432,7 +432,7 @@
 /obj/item/tool/xeno/hand{
 	pixel_x = -15
 	},
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "bh" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -476,7 +476,7 @@
 /area/smugglers/base)
 "bn" = (
 /obj/structure/boulder,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "bo" = (
 /obj/item/stack/material/ore/silver,
@@ -484,7 +484,7 @@
 	pixel_x = 10;
 	pixel_y = -5
 	},
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "bp" = (
 /obj/structure/cable{
@@ -946,7 +946,7 @@
 "db" = (
 /obj/effect/decal/cleanable/blood,
 /obj/abstract/landmark/corpse/doctor,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "eb" = (
 /obj/machinery/light/small{

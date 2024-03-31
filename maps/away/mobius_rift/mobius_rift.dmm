@@ -33,7 +33,7 @@
 /turf/floor/fake_grass,
 /area/mobius_rift)
 "k" = (
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mobius_rift)
 "l" = (
 /obj/structure/flora/bush/fullgrass,

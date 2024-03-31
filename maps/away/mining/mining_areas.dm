@@ -3,7 +3,7 @@
 	icon_state = "mining"
 	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 	sound_env = ASTEROID
-	base_turf = /turf/floor/natural/barren
+	base_turf = /turf/floor
 	area_flags = AREA_FLAG_IS_BACKGROUND | AREA_FLAG_HIDE_FROM_HOLOMAP
 
 /area/mine/explored

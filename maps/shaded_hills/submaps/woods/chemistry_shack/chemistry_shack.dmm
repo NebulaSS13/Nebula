@@ -32,7 +32,7 @@
 	pixel_y = 4;
 	pixel_x = -8
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "k" = (
 /obj/abstract/exterior_marker/inside,
@@ -52,7 +52,7 @@
 	dir = 1;
 	pixel_y = 10
 	},
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/template_noop)
 "p" = (
 /obj/abstract/exterior_marker/inside,
@@ -63,12 +63,12 @@
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "q" = (
 /obj/structure/drying_rack/ebony,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/template_noop)
 "r" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/filter_stand/mapped,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "s" = (
 /obj/abstract/exterior_marker/inside,
@@ -123,7 +123,7 @@
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "N" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "R" = (
 /obj/abstract/exterior_marker/inside,
@@ -147,10 +147,10 @@
 	pixel_x = -10;
 	pixel_y = 9
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "W" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/template_noop)
 "X" = (
 /obj/abstract/exterior_marker/inside,

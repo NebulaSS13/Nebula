@@ -1,10 +1,10 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "az" = (
 /obj/random/hostile/cave,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/caves/deep/poi)
 "bV" = (
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/caves/deep)
 "kZ" = (
 /obj/abstract/level_data_spawner/shaded_hills_caverns,
@@ -25,21 +25,21 @@
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/deep)
 "vR" = (
-/turf/floor/natural/lava,
+/turf/floor/lava,
 /area/shaded_hills/caves/deep/poi)
 "wz" = (
 /obj/random/hostile/cave,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/caves/deep)
 "MT" = (
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/caves/deep/poi)
 "Ng" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/deep)
 "SH" = (
 /obj/random/hostile/cave,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/caves/deep/poi)
 
 (1,1,1) = {"

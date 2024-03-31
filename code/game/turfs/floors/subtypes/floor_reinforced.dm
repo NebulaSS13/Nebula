@@ -2,7 +2,7 @@
 	name = "reinforced floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "reinforced"
-	initial_flooring = /decl/flooring/reinforced
+	flooring = /decl/flooring/reinforced
 
 /turf/floor/reinforced/airless
 	initial_gas = null

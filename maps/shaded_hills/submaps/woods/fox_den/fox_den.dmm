@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/template_noop)
 "n" = (
 /turf/template_noop,
@@ -8,10 +8,10 @@
 "r" = (
 /mob/living/simple_animal/passive/fox,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/fox_den)
 "x" = (
-/turf/floor/natural/grass/wild,
+/turf/floor/grass/wild,
 /area/template_noop)
 "y" = (
 /obj/item/cash/imperial/quin,
@@ -22,10 +22,10 @@
 /obj/item/clothing/ears/dangle/diamond,
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/fox_den)
 "B" = (
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/template_noop)
 "M" = (
 /obj/abstract/exterior_marker/inside,
@@ -35,18 +35,18 @@
 "O" = (
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/fox_den)
 "P" = (
 /obj/item/food/butchery/offal/small,
 /obj/item/stack/material/bone/mapped/bone,
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/fox_den)
 "S" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/fox_den)
 "W" = (
 /obj/abstract/exterior_marker/inside,
@@ -55,7 +55,7 @@
 "Y" = (
 /obj/item/seeds/extracted/foxglove,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/fox_den)
 
 (1,1,1) = {"

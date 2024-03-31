@@ -8,169 +8,165 @@
 	return ..()
 
 /turf/floor/attackby(var/obj/item/C, var/mob/user)
-
 	if(!C || !user)
-		return 0
-
+		return FALSE
 	if(istype(C, /obj/item/stack/tile/roof) || IS_COIL(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
 		return ..()
+	if(istype(flooring))
+		return flooring.handle_item_interaction(src, user, C)
+	if(try_backfill(C, user))
+		return TRUE
+	if(try_stack_build(C, user))
+		return TRUE
+	if(try_turf_repair_or_deconstruct(C, user))
+		return TRUE
+	return ..()
 
-	if(!(IS_SCREWDRIVER(C) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)) && try_graffiti(user, C))
+/turf/floor/proc/try_build_catwalk(var/obj/item/C, var/mob/user)
+	if(!(locate(/obj/structure/catwalk) in src) && istype(C, /obj/item/stack/material/rods))
+		var/obj/item/stack/material/rods/R = C
+		if (R.use(2))
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			new /obj/structure/catwalk(src, R.material.type)
+			return TRUE
+	return FALSE
+
+/turf/floor/proc/try_stack_build(var/obj/item/stack/S, var/mob/user)
+	if(!istype(S))
+		return FALSE
+
+	if(is_floor_damaged())
+		to_chat(user, SPAN_WARNING("This section is too damaged to support anything. Use a welder to fix the damage."))
 		return TRUE
 
-	if(flooring)
-		if(IS_CROWBAR(C) && user.a_intent != I_HURT)
-			if(is_floor_damaged())
-				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src, 0.15))
-					return TRUE
-				if(!flooring)
-					return
-				to_chat(user, "<span class='notice'>You remove the broken [flooring.descriptor].</span>")
-				make_plating()
-			else if(flooring.flags & TURF_IS_FRAGILE)
-				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src, 0.15))
-					return TRUE
-				if(!flooring)
-					return
-				to_chat(user, "<span class='danger'>You forcefully pry off the [flooring.descriptor], destroying them in the process.</span>")
-				make_plating()
-			else if(flooring.flags & TURF_REMOVE_CROWBAR)
-				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
-					return TRUE
-				if(!flooring)
-					return
-				to_chat(user, "<span class='notice'>You lever off the [flooring.descriptor].</span>")
-				make_plating(TRUE)
-			else
-				return
-			playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
-			return TRUE
-		else if(IS_SCREWDRIVER(C) && (flooring.flags & TURF_REMOVE_SCREWDRIVER))
-			if(is_floor_damaged())
-				return
-			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
-				return TRUE
-			if(!flooring)
-				return
-			to_chat(user, "<span class='notice'>You unscrew and remove the [flooring.descriptor].</span>")
-			make_plating(TRUE)
-			playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
-			return TRUE
-		else if(IS_WRENCH(C) && (flooring.flags & TURF_REMOVE_WRENCH))
-			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
-				return TRUE
-			if(!flooring)
-				return
-			to_chat(user, "<span class='notice'>You unwrench and remove the [flooring.descriptor].</span>")
-			make_plating(TRUE)
-			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
-			return TRUE
-		else if(IS_SHOVEL(C) && (flooring.flags & TURF_REMOVE_SHOVEL))
-			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
-				return TRUE
-			if(!flooring)
-				return
-			to_chat(user, "<span class='notice'>You shovel off the [flooring.descriptor].</span>")
-			make_plating(TRUE)
+	if(try_build_catwalk(S, user))
+		return TRUE
+
+	var/decl/flooring/use_flooring
+	for(var/decl/flooring/F as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/flooring))
+		if(!F.build_type)
+			continue
+		if((ispath(S.type, F.build_type) || ispath(S.build_type, F.build_type)) && (isnull(F.build_material) || S.material?.type == F.build_material))
+			use_flooring = F
+			break
+	if(!use_flooring)
+		return FALSE
+
+	// Do we have enough?
+	if(use_flooring.build_cost && S.get_amount() < use_flooring.build_cost)
+		to_chat(user, SPAN_WARNING("You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor]."))
+		return TRUE
+	// Stay still and focus...
+	if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src))
+		return TRUE
+	if(istype(flooring) || !S || !user || !use_flooring)
+		return TRUE
+	if(S.use(use_flooring.build_cost))
+		set_flooring(use_flooring)
+		playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
+	return TRUE
+
+/turf/floor/proc/try_backfill(obj/item/stack/material/C, mob/user)
+
+	if((istype(flooring) && flooring.constructed) || !istype(C) || !istype(user))
+		return FALSE
+
+	if(istype(base_flooring) && base_flooring.constructed)
+		return FALSE
+
+	if(!istype(C, /obj/item/stack/material/ore) && !istype(C, /obj/item/stack/material/lump))
+		return FALSE
+
+	if(get_physical_height() >= 0)
+		to_chat(user, SPAN_WARNING("\The [src] is flush with ground level and cannot be backfilled."))
+		return TRUE
+
+	if(!C.material?.can_backfill_turf_type)
+		to_chat(user, SPAN_WARNING("You cannot use \the [C] to backfill \the [src]."))
+		return TRUE
+
+	var/can_backfill = islist(C.material.can_backfill_turf_type) ? is_type_in_list(src, C.material.can_backfill_turf_type) : istype(src, C.material.can_backfill_turf_type)
+	if(!can_backfill)
+		to_chat(user, SPAN_WARNING("You cannot use \the [C] to backfill \the [src]."))
+		return TRUE
+
+	var/obj/item/stack/stack = C
+	if(!do_after(user, 1 SECOND, src) || user.get_active_held_item() != stack || get_physical_height() >= 0)
+		return TRUE
+
+	// At best, you get about 5 pieces of clay or dirt from digging the
+	// associated turfs. So we'll make it cost 5 to put some back.
+	// TODO: maybe make this use the diggable loot list.
+	var/stack_depth = ceil((abs(get_physical_height()) / TRENCH_DEPTH_PER_ACTION) * 5)
+	var/using_lumps = max(1, min(stack.amount, min(stack_depth, 5)))
+	if(stack.use(using_lumps))
+		set_physical_height(min(0, get_physical_height() + ((using_lumps / 5) * TRENCH_DEPTH_PER_ACTION)))
+		playsound(src, 'sound/items/shovel_dirt.ogg', 50, TRUE)
+		if(get_physical_height() >= 0)
+			visible_message(SPAN_NOTICE("\The [user] backfills \the [src]!"))
+		else
+			visible_message(SPAN_NOTICE("\The [user] partially backfills \the [src]."))
+	return TRUE
+
+/turf/floor/proc/is_constructed_floor()
+	if(istype(flooring))
+		return flooring.constructed
+	if(istype(base_flooring))
+		return base_flooring.constructed
+	return FALSE
+
+/turf/floor/proc/try_turf_repair_or_deconstruct(var/obj/item/C, var/mob/user)
+
+	if(!is_constructed_floor())
+		return FALSE
+
+	if(IS_CROWBAR(C) && is_floor_damaged())
+		playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
+		visible_message(SPAN_NOTICE("\The [user] has begun prying off the damaged plating."))
+		. = TRUE
+		var/turf/T = GetBelow(src)
+		if(T)
+			T.visible_message(SPAN_DANGER("The ceiling above looks as if it's being pried off."))
+
+		if(do_after(user, 10 SECONDS))
+			if(!is_floor_damaged() || !(is_plating()))return
+			visible_message(SPAN_DANGER("\The [user] has pried off the damaged plating!"))
+			new /obj/item/stack/tile/floor(src)
+			physically_destroyed()
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-			return TRUE
-		else if(IS_COIL(C))
-			to_chat(user, "<span class='warning'>You must remove the [flooring.descriptor] first.</span>")
-			return TRUE
-	else
+			if(T)
+				T.visible_message(SPAN_DANGER("The ceiling above has been pried off!"))
+		return TRUE
 
-		if(istype(C, /obj/item/stack))
+	if(IS_WELDER(C))
+		var/obj/item/weldingtool/welder = C
+		if(welder.isOn() && is_plating() && welder.weld(0, user))
 			if(is_floor_damaged())
-				to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
-				return TRUE
-			//first check, catwalk? Else let flooring do its thing
-			if(locate(/obj/structure/catwalk, src))
-				return
-			if (istype(C, /obj/item/stack/material/rods))
-				var/obj/item/stack/material/rods/R = C
-				if (R.use(2))
-					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-					new /obj/structure/catwalk(src, R.material.type)
-					return TRUE
-				return
+				to_chat(user, SPAN_NOTICE("You fix some damage to \the [src]."))
+				playsound(src, 'sound/items/Welder.ogg', 80, 1)
+				icon_state = "plating"
+				set_floor_burned(skip_update = TRUE)
+				set_floor_broken()
+			else
+				playsound(src, 'sound/items/Welder.ogg', 80, 1)
+				visible_message(SPAN_NOTICE("\The [user] has started melting \the [src]'s reinforcements!"))
+				if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
+					visible_message(SPAN_NOTICE("\The [user] has melted \the [src]'s reinforcements! It should now be possible to pry it off."))
+					playsound(src, 'sound/items/Welder.ogg', 80, 1)
+			return TRUE
 
-			var/obj/item/stack/S = C
-			var/decl/flooring/use_flooring
-			var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
-			for(var/flooring_type in decls)
-				var/decl/flooring/F = decls[flooring_type]
-				if(!F.build_type)
-					continue
-				if((ispath(S.type, F.build_type) || ispath(S.build_type, F.build_type)) && (isnull(F.build_material) || S.material?.type == F.build_material))
-					use_flooring = F
-					break
-
-			if(use_flooring)
-				// Do we have enough?
-				if(use_flooring.build_cost && S.get_amount() < use_flooring.build_cost)
-					to_chat(user, "<span class='warning'>You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor].</span>")
-					return TRUE
-				// Stay still and focus...
-				if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src))
-					return TRUE
-				if(flooring || !S || !user || !use_flooring)
-					return TRUE
-				if(S.use(use_flooring.build_cost))
-					set_flooring(use_flooring)
-					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-					return TRUE
-
-		// Repairs and Deconstruction.
-		else if(IS_CROWBAR(C))
-			if(is_floor_damaged())
-				playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
-				visible_message("<span class='notice'>[user] has begun prying off the damaged plating.</span>")
-				. = TRUE
-				var/turf/T = GetBelow(src)
-				if(T)
-					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
-				if(do_after(user, 10 SECONDS))
-					if(!is_floor_damaged() || !(is_plating()))return
-					visible_message("<span class='warning'>[user] has pried off the damaged plating.</span>")
-					new /obj/item/stack/tile/floor(src)
-					physically_destroyed()
-					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-					if(T)
-						T.visible_message("<span class='danger'>The ceiling above has been pried off!</span>")
-			return
-		else if(IS_WELDER(C))
-			var/obj/item/weldingtool/welder = C
-			if(welder.isOn() && (is_plating()))
-				if(is_floor_damaged())
-					if(welder.weld(0, user))
-						to_chat(user, "<span class='notice'>You fix some dents on the broken plating.</span>")
-						playsound(src, 'sound/items/Welder.ogg', 80, 1)
-						icon_state = "plating"
-						set_floor_burned(skip_update = TRUE)
-						set_floor_broken()
-						return TRUE
-				else
-					if(welder.weld(0, user))
-						playsound(src, 'sound/items/Welder.ogg', 80, 1)
-						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-						. = TRUE
-						if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
-							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
-							playsound(src, 'sound/items/Welder.ogg', 80, 1)
-				return
-		else if(istype(C, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !is_floor_damaged())
-			var/obj/item/gun/energy/plasmacutter/cutter = C
-			if(!cutter.slice(user))
-				return ..()
+	if(istype(C, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !is_floor_damaged())
+		var/obj/item/gun/energy/plasmacutter/cutter = C
+		if(cutter.slice(user))
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
-			visible_message("<span class='notice'>[user] has started slicing through the plating's reinforcements!</span>")
+			visible_message(SPAN_NOTICE("\The [user] has started slicing through \the [src]'s reinforcements!"))
 			. = TRUE
 			if(do_after(user, 3 SECONDS) && welder_melt())
-				visible_message("<span class='warning'>[user] has sliced through the plating's reinforcements! It should be possible to pry it off.</span>")
+				visible_message(SPAN_NOTICE("\The [user] has sliced through \the [src]'s reinforcements! It should now be possible to pry it off."))
 				playsound(src, 'sound/items/Welder.ogg', 80, 1)
-			return
+			return TRUE
 
-	return ..()
+	return FALSE
 
 /turf/floor/proc/welder_melt()
 	if(!(is_plating()) || is_floor_damaged())

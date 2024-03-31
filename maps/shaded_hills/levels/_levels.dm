@@ -4,7 +4,7 @@
 /datum/level_data/player_level/shaded_hills
 	use_global_exterior_ambience = FALSE
 	base_area = null
-	base_turf = /turf/floor/natural/dirt
+	base_turf = /turf/floor/dirt
 	abstract_type = /datum/level_data/player_level/shaded_hills
 	ambient_light_level = 1
 	ambient_light_color = "#f3e6ca"
@@ -81,7 +81,7 @@
 				/mob/living/simple_animal/passive/rabbit/black = 3,
 				/mob/living/simple_animal/opossum              = 5
 			),
-			/turf/floor/natural/grass,
+			/turf/floor/grass,
 			10
 		)
 	)
@@ -113,7 +113,7 @@
 				/mob/living/simple_animal/frog/yellow          = 2,
 				/mob/living/simple_animal/frog/purple          = 1
 			),
-			/turf/floor/natural/grass,
+			/turf/floor/grass,
 			5
 		),
 		list(
@@ -123,7 +123,7 @@
 				/mob/living/simple_animal/frog/yellow          = 2,
 				/mob/living/simple_animal/frog/purple          = 1
 			),
-			/turf/floor/natural/mud,
+			/turf/floor/mud,
 			10
 		)
 	)
@@ -151,14 +151,14 @@
 				/mob/living/simple_animal/passive/rabbit/black = 2,
 				/mob/living/simple_animal/opossum              = 2
 			),
-			/turf/floor/natural/grass,
+			/turf/floor/grass,
 			10
 		),
 		list(
 			list(
 				/mob/living/simple_animal/passive/deer         = 1
 			),
-			/turf/floor/natural/grass,
+			/turf/floor/grass,
 			5
 		)
 	)
@@ -190,7 +190,7 @@
 		/datum/random_map/automata/cave_system/shaded_hills,
 		/datum/random_map/noise/ore/rich
 	)
-	base_turf = /turf/floor/natural/rock/basalt
+	base_turf = /turf/floor/rock/basalt
 
 /datum/level_data/player_level/shaded_hills/dungeon
 	name = "Shaded Hills - Dungeon"
@@ -201,7 +201,7 @@
 	submap_budget = 5
 	submap_category = MAP_TEMPLATE_CATEGORY_SH_DUNGEON
 	submap_area = /area/shaded_hills/caves/dungeon/poi
-	base_turf = /turf/floor/natural/rock/basalt
+	base_turf = /turf/floor/rock/basalt
 
 /obj/abstract/level_data_spawner/shaded_hills_grassland
 	level_data_type = /datum/level_data/player_level/shaded_hills/grassland

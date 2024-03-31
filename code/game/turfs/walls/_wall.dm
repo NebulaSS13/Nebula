@@ -31,6 +31,7 @@ var/global/list/wall_fullblend_objects = list(
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 	initial_gas = GAS_STANDARD_AIRMIX
 	zone_membership_candidate = TRUE
+	layer = TURF_OVER_EDGE_LAYER
 
 	/// If set, will prevent merges between walls with different IDs.
 	var/unique_merge_identifier
@@ -46,7 +47,6 @@ var/global/list/wall_fullblend_objects = list(
 	/// A list of connections to non-walls for each corner, used for icon generation. Can be converted to a list of dirs with corner_states_to_dirs().
 	var/list/other_connections
 	var/floor_type = /turf/floor/plating //turf it leaves after destruction
-	var/paint_color
 	var/stripe_color
 	var/handle_structure_blending = TRUE
 	var/min_dismantle_amount = 2
@@ -297,9 +297,6 @@ var/global/list/wall_fullblend_objects = list(
 			if(W != src)
 				addtimer(CALLBACK(W, TYPE_PROC_REF(/turf/wall, burn), temperature/4), 2)
 		physically_destroyed()
-
-/turf/wall/get_color()
-	return paint_color
 
 /turf/wall/set_color(new_color)
 	paint_color = new_color

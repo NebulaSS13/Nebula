@@ -1,16 +1,16 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/floor/natural/rock/volcanic,
+/turf/floor/rock/volcanic,
 /area/exoplanet/underground/neutralia/bottom)
 "b" = (
 /turf/unsimulated/mineral,
 /area/exoplanet/underground/neutralia/bottom)
 "c" = (
-/turf/floor/natural/lava,
+/turf/floor/lava,
 /area/exoplanet/underground/neutralia/bottom)
 "d" = (
 /obj/abstract/level_data_spawner/neutralia/bottom,
-/turf/floor/natural/rock/volcanic,
+/turf/floor/rock/volcanic,
 /area/exoplanet/underground/neutralia/bottom)
 
 (1,1,1) = {"

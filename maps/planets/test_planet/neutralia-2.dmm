@@ -3,11 +3,11 @@
 /turf/unsimulated/mineral,
 /area/exoplanet/underground/neutralia)
 "b" = (
-/turf/floor/natural/barren,
+/turf/floor,
 /area/exoplanet/underground/neutralia)
 "c" = (
 /obj/abstract/level_data_spawner/neutralia/underground,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/exoplanet/underground/neutralia)
 
 (1,1,1) = {"
