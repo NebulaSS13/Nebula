@@ -16,7 +16,7 @@
 
 /datum/level_data/planetoid/exoplanet/chlorine
 	base_area                      = /area/exoplanet/chlorine
-	base_turf                      = /turf/floor/natural/chlorine_sand
+	base_turf                      = /turf/floor/chlorine_sand
 	exterior_atmosphere            = null
 	exterior_atmos_temp            = null
 	level_generators               = list(
@@ -100,8 +100,8 @@
 
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor           = "chlorine exoplanet"
-	land_type            = /turf/floor/natural/chlorine_sand
-	water_type           = /turf/floor/natural/chlorine_sand/marsh
+	land_type            = /turf/floor/chlorine_sand
+	water_type           = /turf/floor/chlorine_sand/marsh
 	water_level_min      = 2
 	water_level_max      = 3
 	fauna_prob           = 2
@@ -122,4 +122,4 @@
 		'sound/effects/wind/desert4.ogg',
 		'sound/effects/wind/desert5.ogg'
 	)
-	base_turf = /turf/floor/natural/chlorine_sand
+	base_turf = /turf/floor/chlorine_sand

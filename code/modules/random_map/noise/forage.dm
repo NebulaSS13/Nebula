@@ -122,12 +122,12 @@
 	var/place_type
 
 	if(T.is_outside())
-		if(istype(T, /turf/floor/natural/rock))
+		if(istype(T, /turf/floor/rock))
 			if(prob(15)) // Static as current map has limited amount of rock turfs
 				var/rock_type = SAFEPICK(forage["rocks"])
 				new rock_type(T)
 				return
-		else if(istype(T, /turf/floor/natural/grass))
+		else if(istype(T, /turf/floor/grass))
 			if(prob(parse_value * tree_weight))
 				if(length(trees))
 					var/tree_type = pickweight(trees)
@@ -135,17 +135,17 @@
 				return
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["grass"])
-		else if(istype(T, /turf/floor/natural/mud/water/deep))
+		else if(istype(T, /turf/floor/mud/water/deep))
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["riverbed"])
-		else if(istype(T, /turf/floor/natural/mud/water))
+		else if(istype(T, /turf/floor/mud/water))
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["shallows"])
-		else if(istype(T, /turf/floor/natural/mud))
+		else if(istype(T, /turf/floor/mud))
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["riverbank"]) // no entries by default, expanded on subtypes
 	else
-		if(istype(T, /turf/floor/natural/mud) && !istype(T, /turf/floor/natural/mud/water/deep))
+		if(istype(T, /turf/floor/mud) && !istype(T, /turf/floor/mud/water/deep))
 			if(prob(parse_value * cave_tree_weight))
 				if(length(cave_trees))
 					var/tree_type = pick(cave_trees)
@@ -153,10 +153,10 @@
 				return
 			place_prob = parse_value * cave_forage_weight * 2
 			place_type = SAFEPICK(forage["caves"])
-		else if(istype(T, /turf/floor/natural/dirt))
+		else if(istype(T, /turf/floor/dirt))
 			place_prob = parse_value * cave_forage_weight
 			place_type = SAFEPICK(forage["caves"])
-		else if(istype(T, /turf/floor/natural/mud/water))
+		else if(istype(T, /turf/floor/mud/water))
 			place_prob = parse_value * cave_forage_weight
 			place_type = SAFEPICK(forage["cave_shallows"])
 

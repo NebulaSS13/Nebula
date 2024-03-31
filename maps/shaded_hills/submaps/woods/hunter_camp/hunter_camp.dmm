@@ -1,36 +1,36 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/floor/natural/grass/wild,
+/turf/floor/grass/wild,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "b" = (
 /obj/structure/drying_rack,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "e" = (
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "h" = (
 /obj/structure/flora/tree/hardwood/ebony,
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "j" = (
 /obj/item/stack/material/skin/mapped/leather/twenty,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "k" = (
 /obj/item/food/butchery/offal/beef,
 /obj/item/food/butchery/offal/small/beef,
 /obj/structure/pit,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "n" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "q" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/food/butchery/haunch/shoulder/beef,
 /obj/item/food/butchery/haunch/side/beef,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "A" = (
 /obj/abstract/exterior_marker/inside,
@@ -38,55 +38,55 @@
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "B" = (
 /obj/structure/flora/stump/tree/ebony,
-/turf/floor/natural/grass/wild,
+/turf/floor/grass/wild,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "C" = (
 /obj/structure/flora/stump/tree/ebony,
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "D" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "E" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "F" = (
 /obj/structure/drying_rack,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "I" = (
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "J" = (
 /obj/structure/flora/tree/hardwood/ebony,
-/turf/floor/natural/grass/wild,
+/turf/floor/grass/wild,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "K" = (
 /turf/template_noop,
 /area/template_noop)
 "P" = (
 /obj/structure/flora/tree/hardwood/mahogany,
-/turf/floor/natural/grass/wild,
+/turf/floor/grass/wild,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "Q" = (
 /obj/structure/bed/bedroll/fur,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "S" = (
 /obj/structure/fire_source/firepit/basalt,
 /obj/item/stack/material/log/mapped/walnut/fifteen,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "U" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "Z" = (
 /obj/item/bladed/knife,
-/turf/floor/natural/barren,
+/turf/floor/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 
 (1,1,1) = {"

@@ -18,5 +18,4 @@
 
 #define PSIONIC "psi"
 
-#define MAT_NULLGLASS  /decl/material/nullglass
 #define COLOR_NULLGLASS        "#ff6088"

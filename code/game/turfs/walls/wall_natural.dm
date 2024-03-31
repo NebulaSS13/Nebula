@@ -3,7 +3,7 @@
 	desc               = "A rough natural wall."
 	turf_flags         = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 	girder_material    = null
-	floor_type         = /turf/floor/natural/barren
+	floor_type         = /turf/floor/rock
 	construction_stage = -1
 	var/strata_override
 	var/ramp_slope_direction

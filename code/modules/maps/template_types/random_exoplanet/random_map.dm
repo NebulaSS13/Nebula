@@ -153,8 +153,8 @@
 /datum/random_map/noise/exoplanet/mantle
 	descriptor           = "planetary mantle"
 	smoothing_iterations = 3
-	land_type            = /turf/floor/natural/rock/volcanic
-	water_type           = /turf/floor/natural/lava
+	land_type            = /turf/floor/rock/volcanic
+	water_type           = /turf/floor/lava
 	water_level_min      = 4
 	water_level_max      = 6
 	fauna_prob           = 0
@@ -166,7 +166,7 @@
 //Random map generator to create rock walls underground
 /datum/random_map/automata/cave_system/mantle
 	descriptor       = "planetary mantle caves"
-	target_turf_type = /turf/floor/natural/rock/volcanic //Only let it apply to non-lava turfs
+	target_turf_type = /turf/floor/rock/volcanic //Only let it apply to non-lava turfs
 	floor_type       = null
 	wall_type        = /turf/wall/natural
 

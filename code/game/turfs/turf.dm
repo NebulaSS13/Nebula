@@ -36,7 +36,7 @@
 	var/fluid_blocked_dirs = 0
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
-	var/open_turf_type // Which open turf type to use by default above this turf in a multiz context. Overridden by area.
+	var/open_turf_type = /turf/open // Which open turf type to use by default above this turf in a multiz context. Overridden by area.
 
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
@@ -84,8 +84,12 @@
 	// Temporary list of weakrefs of atoms who should be excepted from falling into us
 	var/list/skip_height_fall_for
 
+	var/paint_color
+
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
+
+	color = null
 
 	// atom/Initialize has been copied here for performance (or at least the bits of it that turfs use has been)
 	if(atom_flags & ATOM_FLAG_INITIALIZED)
@@ -781,6 +785,14 @@
 
 /turf/proc/get_soil_color()
 	return null
+
+/turf/get_color()
+	if(paint_color)
+		return paint_color
+	var/decl/material/material = get_material()
+	if(material)
+		return material.color
+	return color
 
 /turf/proc/get_fishing_result(obj/item/food/bait)
 	var/area/A = get_area(src)

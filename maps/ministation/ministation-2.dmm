@@ -3670,7 +3670,7 @@
 	dir = 8
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/ministation/hall/n3)
 "tc" = (
 /obj/structure/cable{
@@ -5130,7 +5130,7 @@
 	dir = 4
 	},
 /obj/structure/flora/grass/both,
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/ministation/hall/n3)
 "Dc" = (
 /obj/item/radio/intercom{
@@ -8308,7 +8308,7 @@
 "Ym" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/bush/grassybush,
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/ministation/hall/n3)
 "Yv" = (
 /obj/structure/cable{

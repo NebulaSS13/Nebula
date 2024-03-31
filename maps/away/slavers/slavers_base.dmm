@@ -21,7 +21,7 @@
 /turf/wall/natural,
 /area/space)
 "ag" = (
-/turf/floor/natural/barren,
+/turf/floor,
 /area/space)
 "ah" = (
 /turf/wall,
@@ -86,7 +86,7 @@
 /area/slavers_base/mort)
 "at" = (
 /obj/effect/gibspawner/human,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/space)
 "au" = (
 /obj/structure/rack,
@@ -95,11 +95,11 @@
 /area/slavers_base/mort)
 "av" = (
 /obj/item/tool/shovel,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/space)
 "aw" = (
 /obj/item/remains/human,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/space)
 "ax" = (
 /obj/item/remains/human,

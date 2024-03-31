@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/floor/natural/shrouded/tar,
+/turf/floor/shrouded/tar,
 /area/template_noop)
 "b" = (
 /turf/template_noop,
@@ -12,7 +12,7 @@
 "d" = (
 /obj/structure/artifact,
 /obj/abstract/landmark/clear,
-/turf/floor/natural/shrouded,
+/turf/floor/shrouded,
 /area/template_noop)
 "e" = (
 /obj/structure/flora/bush/fullgrass,
@@ -20,7 +20,7 @@
 /area/template_noop)
 "f" = (
 /obj/structure/monolith,
-/turf/floor/natural/shrouded/tar,
+/turf/floor/shrouded/tar,
 /area/template_noop)
 
 (1,1,1) = {"

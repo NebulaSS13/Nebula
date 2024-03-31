@@ -111,7 +111,7 @@
 	if(istype(new_turf, /turf/floor))
 		var/turf/floor/T = new_turf
 		if(!T.is_plating())
-			T.make_plating(!T.is_floor_damaged())
+			T.set_flooring(null, place_product = !T.is_floor_damaged())
 	return new_turf.is_plating()
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)

@@ -25,8 +25,8 @@
 	uid = "solid_nullglass"
 
 /obj/item/shard/nullglass
-	material = MAT_NULLGLASS
+	material = /decl/material/nullglass
 
 /decl/stack_recipe/tile/nullglass
 	result_type = /obj/item/stack/tile/floor_nullglass
-	required_material = MAT_NULLGLASS
+	required_material = /decl/material/nullglass

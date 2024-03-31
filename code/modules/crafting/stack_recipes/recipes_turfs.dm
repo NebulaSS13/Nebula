@@ -43,5 +43,5 @@
 
 /decl/stack_recipe/turfs/floor
 	abstract_type         = /decl/stack_recipe/turfs/floor
-	expected_product_type = /turf/floor/natural
+	expected_product_type = /turf/floor
 	category              = "floors"

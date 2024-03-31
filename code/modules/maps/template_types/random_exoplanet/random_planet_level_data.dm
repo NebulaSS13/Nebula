@@ -15,14 +15,14 @@
 ///Level data for generating surface levels on exoplanets
 /datum/level_data/planetoid/exoplanet
 	base_area = /area/exoplanet
-	base_turf = /turf/floor/natural/dirt
+	base_turf = /turf/floor/dirt
 	daycycle_id = null // will be generated
 	daycycle_type = /datum/daycycle/exoplanet
 
 ///Level data for generating underground levels on exoplanets
 /datum/level_data/planetoid/exoplanet/underground
 	base_area = /area/exoplanet/underground
-	base_turf = /turf/floor/natural/rock
+	base_turf = /turf/floor/rock
 	level_generators = list(
 		/datum/random_map/noise/exoplanet/mantle,
 		/datum/random_map/automata/cave_system/mantle,

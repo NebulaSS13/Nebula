@@ -14,10 +14,10 @@
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "ae" = (
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "af" = (
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/unexplored)
 "ag" = (
 /turf/wall/natural/random/high_chance,
@@ -55,7 +55,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "as" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -64,7 +64,7 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "au" = (
 /obj/effect/shuttle_landmark/orb/nav4,
@@ -72,25 +72,25 @@
 /area/space)
 "ax" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aB" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aD" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aF" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aI" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
@@ -110,7 +110,7 @@
 /turf/floor/airless/stone,
 /area/mine/explored)
 "aP" = (
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aQ" = (
 /obj/structure/door/sandstone,
@@ -131,20 +131,20 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aV" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aW" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aX" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -153,7 +153,7 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aY" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -162,7 +162,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "aZ" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -171,7 +171,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "ba" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -180,7 +180,7 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "bb" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -189,19 +189,19 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "bc" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "bd" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "be" = (
 /turf/unsimulated/mask,
@@ -218,26 +218,26 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "eM" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "fA" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "ma" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "pz" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -246,17 +246,17 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "st" = (
 /obj/effect/shuttle_landmark/orb/nav7,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "vc" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "wM" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -265,29 +265,29 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "yQ" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "yR" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "Aj" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "DJ" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "EM" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -299,7 +299,7 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "Gl" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
@@ -308,29 +308,29 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "Le" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "LT" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/explored)
 "MX" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "NQ" = (
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "Ol" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
@@ -343,7 +343,7 @@
 /area/mine/explored)
 "Rr" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/floor/natural/sand/water,
+/turf/floor/rock/sand/water,
 /area/mine/unexplored)
 "SY" = (
 /obj/structure/fountain,

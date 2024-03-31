@@ -80,33 +80,6 @@
 	if(!istext(icon_state))
 		. += "null or invalid icon_state '[icon_state]'"
 	if(icon && icon_state && !check_state_in_icon(icon_state, icon))
-		. += "missing initial icon_state '[icon_state]' from '[icon]"
-	if(base_icon)
-		if(!istext(base_icon_state))
-			. += "base_icon set, but null or invalid base_icon_state set: '[base_icon_state]'"
-		else if(!check_state_in_icon(base_icon_state, base_icon))
-			. += "base_icon_state '[base_icon_state]' not found in base_icon '[base_icon]'"
-	else if(base_icon_state)
-		. += "null base_icon but base_icon_state set"
-
-/turf/floor/natural/validate_turf()
-	. = ..()
-	if(icon_edge_layer != -1 && !isnum(icon_edge_layer))
-		. += "invalid icon_edge_layer '[icon_edge_layer]'"
-
-	if(icon && icon_state)
-		if(possible_states)
-			for(var/i = 0 to possible_states)
-				if(!check_state_in_icon(num2text(i), icon))
-					. += "missing icon_state [i] from icon '[icon]'"
-
-		if(icon_edge_layer >= 0)
-			for(var/checkdir in (icon_has_corners ? global.alldirs : global.cardinal))
-				if(icon_edge_states)
-					for(var/i = 0 to icon_edge_states)
-						var/check_state = "edge[checkdir][i]"
-						if(!check_state_in_icon(check_state, icon))
-							. += "missing edge state '[check_state]' in icon '[icon]'"
-				var/check_state = "edge[checkdir]"
-				if(!check_state_in_icon(check_state, icon))
-					. += "missing edge state '[check_state]' in icon '[icon]'"
+		. += "missing initial icon_state '[icon_state]' from '[icon]'"
+	if(!istype(base_flooring))
+		. += "null or invalid base_flooring ([base_flooring || "NULL"])"

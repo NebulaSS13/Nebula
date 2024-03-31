@@ -1,25 +1,25 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/template_noop)
 "f" = (
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/template_noop)
 "k" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "n" = (
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "o" = (
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "p" = (
-/turf/floor/natural/grass,
+/turf/floor/grass,
 /area/template_noop)
 "r" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "w" = (
 /obj/item/bladed/knife,
@@ -28,11 +28,11 @@
 /obj/item/cash/imperial/quin,
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "y" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "z" = (
 /obj/abstract/exterior_marker/inside,
@@ -41,7 +41,7 @@
 "C" = (
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "G" = (
 /obj/item/bone/skull/deer,
@@ -49,10 +49,10 @@
 /obj/item/food/butchery/offal,
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "J" = (
-/turf/floor/natural/grass/wild,
+/turf/floor/grass/wild,
 /area/template_noop)
 "K" = (
 /turf/template_noop,
@@ -60,7 +60,7 @@
 "M" = (
 /mob/living/simple_animal/hostile/bear,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "O" = (
 /obj/abstract/exterior_marker/inside,
@@ -78,7 +78,7 @@
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "W" = (
 /obj/abstract/exterior_marker/inside,

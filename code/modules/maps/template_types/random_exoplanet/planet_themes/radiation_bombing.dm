@@ -33,7 +33,7 @@
 		source.range = 4
 		SSradiation.add_source(source)
 		crater_center.set_light(2, 0.4, PIPE_COLOR_GREEN)
-		for(var/turf/floor/natural/crater in circlerangeturfs(crater_center, 3))
+		for(var/turf/floor/crater in circlerangeturfs(crater_center, 3))
 			if(prob(10))
 				new/obj/item/remains/xeno/charred(crater)
 			crater.handle_melting()

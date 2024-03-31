@@ -6,14 +6,14 @@
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "af" = (
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "aj" = (
 /turf/wall/r_wall,
 /area/djstation)
 "ak" = (
 /obj/random/junk,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "al" = (
 /obj/random/trash,
@@ -204,15 +204,15 @@
 /area/djstation)
 "be" = (
 /obj/random/maintenance,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "bf" = (
 /obj/effect/overmap/visitable/sector/cluster,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "cb" = (
 /obj/effect/shuttle_landmark/cluster/nav5,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "db" = (
 /obj/effect/shuttle_landmark/cluster/nav6,
@@ -236,7 +236,7 @@
 /area/space)
 "ib" = (
 /obj/effect/shuttle_landmark/cluster/nav7,
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "jb" = (
 /obj/machinery/button/access/exterior{
@@ -245,7 +245,7 @@
 	pixel_y = -24;
 	dir = 1
 	},
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "kb" = (
 /obj/machinery/door/airlock/external{
@@ -345,7 +345,7 @@
 	req_access = null;
 	dir = 4
 	},
-/turf/floor/natural/barren,
+/turf/floor,
 /area/mine/explored)
 "wb" = (
 /obj/machinery/door/airlock/external{

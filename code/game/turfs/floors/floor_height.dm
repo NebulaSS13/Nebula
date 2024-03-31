@@ -1,10 +1,10 @@
-/turf/floor/natural
+/turf/floor
 	var/height = 0
 
-/turf/floor/natural/get_physical_height()
+/turf/floor/get_physical_height()
 	return density ? 0 : height
 
-/turf/floor/natural/set_physical_height(new_height)
+/turf/floor/set_physical_height(new_height)
 	if(height != new_height)
 		height = new_height
 		for(var/turf/neighbor as anything in RANGE_TURFS(src, 1))

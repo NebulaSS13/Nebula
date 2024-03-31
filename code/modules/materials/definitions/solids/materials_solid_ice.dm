@@ -34,12 +34,13 @@
 	liquid_name = "water"
 	solid_name = "snow"
 	gas_name = "steam"
+	color = COLOR_WHITE
 	codex_name = null
 	uid = "solid_snow"
 	hardness = MAT_VALUE_MALLEABLE
 	dug_drop_type = /obj/item/stack/material/ore/handful
 	default_solid_form = /obj/item/stack/material/ore/handful
-	can_backfill_turf_type = /turf/floor/natural/snow
+	can_backfill_turf_type = /turf/floor/snow
 
 /decl/material/solid/ice/aspium
 	name = "aspium"

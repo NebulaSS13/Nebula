@@ -36,8 +36,8 @@
 		"FFF",
 		"wood"  = /turf/floor/wood::color,
 		"mud",
-		"grass" = /turf/floor/natural/grass::color,
-		"rock"  = /turf/floor/natural/rock/basalt::color,
+		"grass" = /turf/floor/grass::color,
+		"rock"  = /turf/floor/rock/basalt::color,
 		"brick" = /turf/wall/brick/sandstone::color
 	)
 

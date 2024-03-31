@@ -169,7 +169,7 @@
 			anchored = TRUE
 			if(do_after(src, 50, F))
 				if(F.is_floor_damaged())
-					F.make_plating()
+					F.set_flooring(null)
 			anchored = FALSE
 			target = null
 			busy = 0

@@ -16,7 +16,7 @@
 
 /datum/level_data/planetoid/exoplanet/shrouded
 	base_area           = /area/exoplanet/shrouded
-	base_turf           = /turf/floor/natural/shrouded
+	base_turf           = /turf/floor/shrouded
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators    = list(
@@ -108,8 +108,8 @@
 	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
 	water_level_max      = 3
 	water_level_min      = 2
-	land_type            = /turf/floor/natural/shrouded
-	water_type           = /turf/floor/natural/shrouded/tar
+	land_type            = /turf/floor/shrouded
+	water_type           = /turf/floor/shrouded/tar
 
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()
@@ -125,4 +125,4 @@
 		"sound/ambience/spookyspace1.ogg",
 		"sound/ambience/spookyspace2.ogg"
 	)
-	base_turf = /turf/floor/natural/shrouded
+	base_turf = /turf/floor/shrouded

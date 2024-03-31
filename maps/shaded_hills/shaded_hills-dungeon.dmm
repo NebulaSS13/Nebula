@@ -2,32 +2,32 @@
 "ae" = (
 /obj/item/stack/material/bolt/mapped/cloth/fifty,
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "aK" = (
-/turf/floor/natural/mud/water/deep,
+/turf/floor/mud/water/deep,
 /area/shaded_hills/caves/dungeon/poi)
 "aS" = (
 /obj/item/stack/material/bolt/mapped/cloth/five,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "bD" = (
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "bG" = (
 /obj/structure/closet/cabinet/wooden/ebony,
 /obj/item/clothing/suit/armor/crafted/copper,
 /obj/item/clothing/pants/trousers/braies,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "ce" = (
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "cp" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/bladed/knife,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "dA" = (
 /obj/structure/bed/chair/bench/ebony{
@@ -35,53 +35,53 @@
 	},
 /obj/item/remains/human,
 /obj/item/clothing/pants/trousers/braies,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "dP" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/flame/torch,
 /obj/item/flame/torch,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "dT" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/knife/kitchen/cleaver/bronze,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "fh" = (
 /mob/living/simple_animal/aquatic/fish/grump,
-/turf/floor/natural/path/basalt/water/deep,
+/turf/floor/path/basalt/water/deep,
 /area/shaded_hills/caves/dungeon/poi)
 "fD" = (
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
 /obj/item/ancient_surgery/bonesaw,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "fW" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
 /obj/item/stack/medical/bandage/crafted/five,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "gy" = (
 /obj/structure/table/woodentable_reinforced/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "hd" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/stack/material/brick/mapped/graphite/fifteen,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "hr" = (
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "hz" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "hU" = (
 /turf/wall/natural/basalt/shaded_hills,
@@ -93,18 +93,18 @@
 /obj/structure/wall_sconce{
 	dir = 8
 	},
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "jf" = (
 /obj/item/remains/human,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "jh" = (
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "jv" = (
 /obj/item/remains/human,
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/caves/dungeon)
 "jU" = (
 /obj/structure/bed/chair/bench/ebony{
@@ -112,45 +112,45 @@
 	},
 /obj/item/food/grown/dried_tobacco/bad,
 /obj/item/rock/flint/striker,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "jV" = (
 /obj/item/stack/material/plank/mapped/ebony/five,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "ko" = (
 /obj/item/stack/material/bone/mapped/bone/twentyfive,
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "kE" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/material/ingot/mapped/silver/ten,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "kI" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/flame/candle,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "kL" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/bladed/folding,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "kN" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 4
 	},
 /obj/item/stack/material/bolt/mapped/cloth/five,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "lj" = (
 /obj/structure/drying_rack/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "lo" = (
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "lC" = (
 /turf/unsimulated/dark_filler,
@@ -160,101 +160,101 @@
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/dungeon)
 "mM" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/caves/dungeon)
 "ni" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/material/ingot/mapped/iron/twentyfive,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "nD" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 4
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "nE" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
 /obj/item/bladed/folding,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "nH" = (
 /obj/structure/closet/cabinet/wooden/ebony,
 /obj/item/clothing/suit/armor/forged/banded,
 /obj/item/clothing/pants/trousers/braies,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "nJ" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/food/grown/dried_tobacco/fine,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "nT" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/stack/material/ore/diamond,
 /obj/item/stack/material/ore/diamond,
 /obj/item/stack/material/ore/diamond,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "nV" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/bladed/folding,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "ob" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/bladed/knife,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "ok" = (
 /obj/random/hostile/dungeon,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "oq" = (
 /obj/item/stack/material/skin/mapped/leather/twentyfive,
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "ou" = (
 /obj/random/hostile/dungeon,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "oD" = (
 /obj/structure/wall_sconce{
 	dir = 1
 	},
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "oF" = (
 /turf/wall/natural/dirt,
 /area/shaded_hills/caves/dungeon/poi)
 "oP" = (
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/inn)
 "oW" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "pl" = (
 /obj/item/cash/imperial/crown,
-/turf/floor/natural/path/basalt/water,
+/turf/floor/path/basalt/water,
 /area/shaded_hills/caves/dungeon/poi)
 "pZ" = (
 /obj/structure/reagent_dispensers/barrel/ebony/oil,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "qh" = (
 /obj/structure/wall_sconce{
 	dir = 1
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "rz" = (
-/turf/floor/natural/path/basalt/water/deep,
+/turf/floor/path/basalt/water/deep,
 /area/shaded_hills/caves/dungeon/poi)
 "rA" = (
 /turf/wall/log/walnut,
@@ -262,7 +262,7 @@
 "rI" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/material/ingot/mapped/tin/twenty,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "rM" = (
 /obj/structure/closet/crate/chest/ebony,
@@ -275,32 +275,32 @@
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
 /obj/item/bladed/longsword,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "rP" = (
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
 /obj/item/ancient_surgery/forceps,
 /obj/item/ancient_surgery/retractor,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "sU" = (
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/caves/dungeon/poi)
 "tQ" = (
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
-/turf/floor/natural/path/basalt/water,
+/turf/floor/path/basalt/water,
 /area/shaded_hills/caves/dungeon/poi)
 "ud" = (
 /obj/structure/wall_sconce{
 	dir = 4
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "uU" = (
 /obj/item/remains/human,
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/caves/dungeon/poi)
 "vu" = (
 /obj/structure/closet/crate/chest/ebony,
@@ -314,40 +314,40 @@
 /obj/item/cash/imperial/crown,
 /obj/item/bladed/longsword,
 /obj/item/bladed/poignard,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "vN" = (
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
 /obj/item/remains/human,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "vO" = (
 /obj/structure/working/loom/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "wa" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 4
 	},
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "wg" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 4
 	},
 /obj/random/hostile/dungeon,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "wP" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/tool/hammer,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "xo" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/medical/ointment/crafted/five,
 /obj/item/stack/medical/ointment/crafted/five,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "xL" = (
 /obj/abstract/ramp_sculptor/east,
@@ -355,12 +355,12 @@
 /area/shaded_hills/caves/dungeon)
 "yh" = (
 /obj/structure/reagent_dispensers/barrel/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "yM" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/tool/pickaxe/iron,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "zm" = (
 /obj/structure/wall_sconce{
@@ -369,35 +369,35 @@
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
 /obj/item/ancient_surgery/bonesetter,
 /obj/item/ancient_surgery/sutures,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "zA" = (
 /obj/structure/door/ebony,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ad" = (
 /obj/structure/wall_sconce{
 	dir = 8
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "AK" = (
 /obj/structure/fire_source/stove,
 /obj/effect/decal/cleanable/ash,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Bk" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 4
 	},
 /obj/item/food/grown/dried_tobacco/bad,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "BG" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/stack/material/thread/mapped/cotton/thirty,
 /obj/item/bladed/knife,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Cu" = (
 /turf/wall/brick/basalt,
@@ -405,54 +405,54 @@
 "CA" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/material/ingot/mapped/bronze/twenty,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "CP" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/material/ingot/mapped/gold/ten,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "CZ" = (
 /obj/structure/door/ebony,
 /obj/abstract/landmark/lock_preset/shaded_hills/inn_exterior,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/inn)
 "Dr" = (
 /obj/structure/wall_sconce{
 	dir = 4
 	},
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "DW" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/bladed/folding,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ef" = (
 /obj/structure/reagent_dispensers/barrel/ebony,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Eq" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
 /obj/item/stack/material/bolt/mapped/cloth/five,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Fx" = (
 /turf/wall/natural/dirt,
 /area/shaded_hills/caves/dungeon/inn)
 "FT" = (
 /obj/random/hostile/dungeon,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Gr" = (
 /obj/structure/working/spinning_wheel/twisting_bench/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Gu" = (
 /obj/structure/table/woodentable_reinforced/ebony,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "GA" = (
 /obj/structure/door/ebony,
@@ -462,46 +462,46 @@
 	lock_preset_id = "sunken keep";
 	name = "sunken keep locked door"
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "GV" = (
-/turf/floor/natural/path/basalt/water,
+/turf/floor/path/basalt/water,
 /area/shaded_hills/caves/dungeon/poi)
 "Hj" = (
 /obj/item/cash/imperial/quin,
-/turf/floor/natural/path/basalt/water,
+/turf/floor/path/basalt/water,
 /area/shaded_hills/caves/dungeon/poi)
 "Hs" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/flame/candle,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "HI" = (
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/caves/dungeon)
 "HO" = (
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
 /obj/item/ancient_surgery/cautery,
 /obj/item/ancient_surgery/scalpel,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ie" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/glass/mortar,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Im" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ip" = (
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/caves/dungeon/poi)
 "IF" = (
 /obj/structure/wall_sconce{
 	dir = 1
 	},
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "JA" = (
 /obj/structure/door/ebony,
@@ -509,7 +509,7 @@
 	lock_preset_id = "sunken keep";
 	name = "sunken keep locked door"
 	},
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Kq" = (
 /obj/structure/closet/crate/chest/ebony,
@@ -522,93 +522,93 @@
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
 /obj/item/bladed/broadsword,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ky" = (
 /obj/structure/bookcase/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Kz" = (
 /obj/structure/fire_source/kiln/high_temperature,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "KB" = (
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/inn)
 "Ln" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/tool/hammer/sledge,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "LB" = (
 /obj/structure/table/woodentable/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "ME" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 4
 	},
 /obj/item/stack/medical/bandage/crafted/five,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "MW" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/rock/flint/striker,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Og" = (
-/turf/floor/natural/mud/water,
+/turf/floor/mud/water,
 /area/shaded_hills/caves/dungeon/poi)
 "Oq" = (
 /obj/structure/table/woodentable/ebony,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Pb" = (
 /turf/wall/natural/dirt,
 /area/shaded_hills/caves/dungeon)
 "Pq" = (
 /obj/structure/wall_sconce,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ql" = (
 /obj/structure/door/ebony,
-/turf/floor/natural/dirt,
+/turf/floor/dirt,
 /area/shaded_hills/caves/dungeon/poi)
 "QI" = (
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
-/turf/floor/natural/path/basalt/water,
+/turf/floor/path/basalt/water,
 /area/shaded_hills/caves/dungeon/poi)
 "QT" = (
 /obj/structure/stairs/north,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/inn)
 "Ri" = (
 /obj/item/stack/material/plank/mapped/ebony/five,
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/medical/bandage/crafted/five,
 /obj/item/stack/medical/bandage/crafted/five,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Rm" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/stack/material/ore/diamond,
-/turf/floor/natural/path/herringbone/basalt,
+/turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Rt" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
 /obj/random/hostile/dungeon,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "RA" = (
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/caves/dungeon)
 "Ss" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/material/bolt/mapped/cloth/fifty,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "SN" = (
 /obj/structure/bed/chair/bench/ebony{
@@ -616,61 +616,61 @@
 	},
 /obj/item/remains/human,
 /obj/item/clothing/suit/armor/forged/banded,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "SX" = (
 /obj/structure/door/ebony,
 /obj/abstract/landmark/lock_preset/shaded_hills/shrine,
-/turf/floor/natural/mud,
+/turf/floor/mud,
 /area/shaded_hills/caves/dungeon)
 "TA" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/stack/material/ingot/mapped/copper/twenty,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "TR" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/dungeon)
 "Ua" = (
-/turf/floor/natural/rock/basalt,
+/turf/floor/rock/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ve" = (
 /obj/structure/bed/simple/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Vk" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/food/grown/dried_tobacco/bad,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Xx" = (
 /turf/wall/log/walnut,
 /area/shaded_hills/caves/dungeon)
 "XX" = (
 /obj/structure/wall_sconce,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Yi" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/stack/material/thread/mapped/dried_gut/thirty,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "YE" = (
 /obj/item/stack/material/plank/mapped/ebony/five,
-/turf/floor/natural/path/basalt,
+/turf/floor/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "YN" = (
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon)
 "Zg" = (
 /obj/structure/working/spinning_wheel/ebony,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Zp" = (
 /obj/structure/closet/cabinet/wooden/ebony,
 /obj/item/clothing/suit/armor/crafted/leather,
 /obj/item/clothing/pants/trousers/braies,
-/turf/floor/natural/path/running_bond/basalt,
+/turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 
 (1,1,1) = {"

@@ -15,7 +15,7 @@
 	name = "nullglass"
 	icon_state = "sheet-shiny"
 	plural_icon_state = "sheet-shiny-mult"
-	material = MAT_NULLGLASS
+	material = /decl/material/nullglass
 
 /obj/item/stack/material/nullglass/fifty
 	amount = 50

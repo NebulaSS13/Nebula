@@ -91,31 +91,32 @@ What is the naming convention for planes or layers?
 	#define ABOVE_WIRE_LAYER            1.58
 	//TURF PLANE
 	//TURF_LAYER = 2
-	#define TURF_DETAIL_LAYER           2.01
-	#define TURF_SHADOW_LAYER           2.02
+	#define TURF_OVER_EDGE_LAYER        TURF_LAYER + (FLOOR_LAYER_CONSTANT*100)
+	#define TURF_DETAIL_LAYER           TURF_OVER_EDGE_LAYER + 0.01
+	#define TURF_SHADOW_LAYER           TURF_OVER_EDGE_LAYER + 0.02
 	//ABOVE TURF
-	#define DECAL_LAYER                 2.03
-	#define RUNE_LAYER                  2.04
-	#define AO_LAYER                    2.045
-	#define ABOVE_TILE_LAYER            2.05
-	#define EXPOSED_PIPE_LAYER          2.06
-	#define EXPOSED_WIRE_LAYER          2.07
-	#define EXPOSED_WIRE_TERMINAL_LAYER 2.08
-	#define CATWALK_LAYER               2.09
-	#define BLOOD_LAYER                 2.10
-	#define MOUSETRAP_LAYER             2.11
-	#define PLANT_LAYER                 2.12
+	#define DECAL_LAYER                 TURF_OVER_EDGE_LAYER + 0.03
+	#define RUNE_LAYER                  TURF_OVER_EDGE_LAYER + 0.04
+	#define AO_LAYER                    TURF_OVER_EDGE_LAYER + 0.045
+	#define ABOVE_TILE_LAYER            TURF_OVER_EDGE_LAYER + 0.05
+	#define EXPOSED_PIPE_LAYER          TURF_OVER_EDGE_LAYER + 0.06
+	#define EXPOSED_WIRE_LAYER          TURF_OVER_EDGE_LAYER + 0.07
+	#define EXPOSED_WIRE_TERMINAL_LAYER TURF_OVER_EDGE_LAYER + 0.08
+	#define CATWALK_LAYER               TURF_OVER_EDGE_LAYER + 0.09
+	#define BLOOD_LAYER                 TURF_OVER_EDGE_LAYER + 0.10
+	#define MOUSETRAP_LAYER             TURF_OVER_EDGE_LAYER + 0.11
+	#define PLANT_LAYER                 TURF_OVER_EDGE_LAYER + 0.12
 	//HIDING MOB
-	#define HIDING_MOB_LAYER            2.14
-	#define SHALLOW_FLUID_LAYER         2.15
-	#define MOB_SHADOW_LAYER            2.16
+	#define HIDING_MOB_LAYER            TURF_OVER_EDGE_LAYER + 0.14
+	#define SHALLOW_FLUID_LAYER         TURF_OVER_EDGE_LAYER + 0.15
+	#define MOB_SHADOW_LAYER            TURF_OVER_EDGE_LAYER + 0.16
 	//OBJ
-	#define BELOW_DOOR_LAYER            2.17
-	#define OPEN_DOOR_LAYER             2.18
-	#define BELOW_TABLE_LAYER           2.19
-	#define TABLE_LAYER                 2.20
-	#define BELOW_OBJ_LAYER             2.21
-	#define STRUCTURE_LAYER             2.22
+	#define BELOW_DOOR_LAYER            TURF_OVER_EDGE_LAYER + 0.17
+	#define OPEN_DOOR_LAYER             TURF_OVER_EDGE_LAYER + 0.18
+	#define BELOW_TABLE_LAYER           TURF_OVER_EDGE_LAYER + 0.19
+	#define TABLE_LAYER                 TURF_OVER_EDGE_LAYER + 0.20
+	#define BELOW_OBJ_LAYER             TURF_OVER_EDGE_LAYER + 0.21
+	#define STRUCTURE_LAYER             TURF_OVER_EDGE_LAYER + 0.22
 	// OBJ_LAYER                        3
 	#define ABOVE_OBJ_LAYER             3.01
 	#define CLOSED_DOOR_LAYER           3.02
