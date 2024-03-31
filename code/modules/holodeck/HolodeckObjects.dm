@@ -13,7 +13,7 @@
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-/turf/floor/holofloor/set_flooring(var/decl/flooring/newflooring)
+/turf/floor/holofloor/set_flooring(var/decl/flooring/newflooring, skip_update)
 	return
 
 /turf/floor/holofloor/carpet

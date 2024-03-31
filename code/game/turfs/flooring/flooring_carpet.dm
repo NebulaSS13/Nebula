@@ -5,7 +5,7 @@
 	icon_base = "brown"
 	build_type = /obj/item/stack/tile/carpet
 	damage_temperature = T0C+200
-	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 	can_engrave = FALSE
 	footstep_type = /decl/footsteps/carpet
 	floor_smooth = SMOOTH_NONE

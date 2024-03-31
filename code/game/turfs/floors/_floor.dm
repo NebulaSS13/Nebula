@@ -51,12 +51,21 @@
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
-		set_flooring(GET_DECL(floortype))
+		if(ml)
+			set_flooring(GET_DECL(floortype), skip_update = TRUE)
+			queue_icon_update()
+		else
+			set_flooring(GET_DECL(floortype))
 
-/turf/floor/proc/set_flooring(var/decl/flooring/newflooring)
+/turf/floor/proc/set_flooring(var/decl/flooring/newflooring, skip_update)
+
 	if(flooring == newflooring)
 		return
-	make_plating(defer_icon_update = TRUE)
+
+	if(flooring)
+		make_plating(defer_icon_update = TRUE)
+		flooring = null
+
 	flooring = newflooring
 
 	var/check_z_flags
@@ -70,10 +79,14 @@
 	else
 		disable_zmimic()
 
-	queue_icon_update(SSatoms.initialized) // only update neighbors if we're setting flooring after SSatoms has finished
-	levelupdate()
 	if(flooring)
 		layer = TURF_LAYER
+
+	levelupdate()
+
+	if(!skip_update)
+		for(var/turf/T as anything in RANGE_TURFS(src, 1))
+			T.update_icon()
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.

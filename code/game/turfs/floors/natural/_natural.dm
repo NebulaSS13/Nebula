@@ -96,7 +96,7 @@
 	if(!QDELETED(src) && reagent_type && height < 0 && !QDELETED(reagents) && reagents.total_volume < abs(height))
 		add_to_reagents(abs(height) - reagents.total_volume)
 
-/turf/floor/natural/set_flooring(var/decl/flooring/newflooring)
+/turf/floor/natural/set_flooring(var/decl/flooring/newflooring, skip_update)
 	return
 
 /turf/floor/natural/is_plating()

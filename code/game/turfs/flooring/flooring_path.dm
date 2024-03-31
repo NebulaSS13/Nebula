@@ -13,7 +13,7 @@
 	name         = "cobblestone path"
 	desc         = "A rustic cobblestone path."
 	icon_base    = "cobble"
-	flags        = TURF_HAS_EDGES | TURF_REMOVE_CROWBAR
+	flags        = TURF_REMOVE_CROWBAR
 
 /decl/flooring/path/running_bond
 	name         = "stone path"

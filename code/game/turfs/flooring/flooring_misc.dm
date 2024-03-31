@@ -5,7 +5,7 @@
 	icon_base = "grass"
 	has_base_range = 3
 	damage_temperature = T0C+80
-	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_SHOVEL
+	flags = TURF_REMOVE_SHOVEL
 	build_type = /obj/item/stack/tile/grass
 	can_engrave = FALSE
 	floor_smooth = SMOOTH_NONE
@@ -59,7 +59,7 @@
 	icon = 'icons/turf/flooring/pool.dmi'
 	icon_base = "pool"
 	build_type = /obj/item/stack/tile/pool
-	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR
+	flags = TURF_REMOVE_CROWBAR
 	footstep_type = /decl/footsteps/tiles
 	floor_smooth = SMOOTH_NONE
 	wall_smooth = SMOOTH_NONE
@@ -75,7 +75,7 @@
 	icon = 'icons/turf/flooring/woven.dmi'
 	icon_base = "0"
 	damage_temperature = T0C+80
-	flags = TURF_HAS_EDGES | TURF_REMOVE_CROWBAR
+	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/woven
 	can_engrave = FALSE
 	floor_smooth = SMOOTH_NONE

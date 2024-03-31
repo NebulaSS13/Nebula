@@ -1,5 +1,3 @@
-var/global/list/flooring_cache = list()
-
 /turf/floor/on_update_icon(var/update_neighbors)
 	. = ..()
 	cut_overlays()
@@ -14,77 +12,25 @@ var/global/list/flooring_cache = list()
 		add_overlay(get_turf_damage_overlay(_floor_broken))
 	if(is_floor_burned())
 		add_overlay(get_turf_damage_overlay(_floor_burned))
+	compile_overlays()
 
 	if(update_neighbors)
 		for(var/turf/floor/F in orange(src, 1))
 			F.queue_ao(FALSE)
 			F.queue_icon_update()
 
+
 /turf/floor/proc/update_floor_icon(update_neighbors)
-	if(!flooring)
-		return // This implies we're plating.
+	if(istype(flooring))
+		flooring.update_turf_icon(src)
+		return
 	// Set initial icon and strings.
-	SetName(flooring.name)
-	desc  = flooring.desc
-	if(icon != flooring.icon)
-		icon  = flooring.icon
-	if(color != flooring.color)
-		color = flooring.color
-	if(!flooring_override)
-		flooring_override = flooring.icon_base
-		if(flooring.has_base_range)
-			flooring_override = "[flooring_override][rand(0,flooring.has_base_range)]"
-	if(icon_state != flooring_override)
-		icon_state = flooring_override
-
-	// Apply edges, corners, and inner corners.
-	var/has_border        = 0
-	var/has_edges         = (flooring.flags & TURF_HAS_EDGES)
-	var/has_inner_corners = (flooring.flags & TURF_HAS_INNER_CORNERS)
-	var/has_corners       = (flooring.flags & TURF_HAS_CORNERS)
-
-	//Check the cardinal turfs
-	for(var/step_dir in global.cardinal)
-		var/turf/floor/T = get_step(src, step_dir)
-		var/is_linked = flooring.symmetric_test_link(src, T)
-		//Alright we've figured out whether or not we smooth with this turf
-		if (!is_linked)
-			has_border |= step_dir
-			//Now, if we don't, then lets add a border
-			if(has_edges)
-				add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir, has_edges))
-	var/has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
-	if(flooring.can_paint && LAZYLEN(decals))
-		add_overlay(decals.Copy())
-	//We can only have inner corners if we're smoothed with something
-	if (has_smooth && has_inner_corners)
-		for(var/direction in global.cornerdirs)
-			if((has_smooth & direction) == direction)
-				if(!flooring.symmetric_test_link(src, get_step(src, direction)))
-					add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction))
-	//Next up, outer corners
-	if (has_border && has_corners)
-		for(var/direction in global.cornerdirs)
-			if((has_border & direction) == direction)
-				if(!flooring.symmetric_test_link(src, get_step(src, direction)))
-					add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction, has_edges))
-
-/turf/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0, var/external = FALSE)
-	if(!flooring_cache[cache_key])
-		var/image/I = image(icon = flooring.icon, icon_state = icon_base, dir = icon_dir)
-		//External overlays will be offset out of this tile
-		if (external)
-			if (icon_dir & NORTH)
-				I.pixel_y = world.icon_size
-			else if (icon_dir & SOUTH)
-				I.pixel_y = -world.icon_size
-			if (icon_dir & WEST)
-				I.pixel_x = -world.icon_size
-			else if (icon_dir & EAST)
-				I.pixel_x = world.icon_size
-		I.layer = flooring.decal_layer
-		flooring_cache[cache_key] = I
-	return flooring_cache[cache_key]
+	SetName(initial(name))
+	desc       = initial(desc)
+	icon       = initial(icon)
+	icon_state = initial(icon_state)
+	color      = initial(color)
+	flooring_override = null
 
 /turf/floor/proc/is_floor_broken()
 	return !isnull(_floor_broken) && (!flooring || (flooring.flags & TURF_CAN_BREAK))
@@ -142,12 +88,12 @@ var/global/list/flooring_cache = list()
 /turf/proc/get_turf_damage_overlay(var/overlay_state)
 	var/damage_overlay_icon = get_turf_damage_overlay_icon()
 	var/cache_key = "[icon]-[overlay_state]"
-	if(!flooring_cache[cache_key])
+	if(!global.flooring_cache[cache_key])
 		var/image/I = image(icon = damage_overlay_icon, icon_state = overlay_state)
 		I.blend_mode = BLEND_MULTIPLY
 		I.layer = DECAL_LAYER
-		flooring_cache[cache_key] = I
-	return flooring_cache[cache_key]
+		global.flooring_cache[cache_key] = I
+	return global.flooring_cache[cache_key]
 
 /decl/flooring/proc/test_link(var/turf/origin, var/turf/opponent)
 	var/is_linked = FALSE

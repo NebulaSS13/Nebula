@@ -20,7 +20,7 @@
 /turf/floor/fixed/is_plating()
 	return 0
 
-/turf/floor/fixed/set_flooring(var/decl/flooring/newflooring)
+/turf/floor/fixed/set_flooring(var/decl/flooring/newflooring, skip_update)
 	return
 
 /turf/floor/fixed/alium
