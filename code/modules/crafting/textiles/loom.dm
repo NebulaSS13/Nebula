@@ -28,7 +28,7 @@
 	if(weaving_type && weaving_progress > 0)
 		var/obj/item/scrap_material/scraps = new(loc, weaving_type)
 		var/decl/material/scrap_material = GET_DECL(weaving_type)
-		scraps.matter = list(weaving_type, weaving_progress)
+		scraps.matter = list(weaving_type = weaving_progress)
 		scraps.name = "[scrap_material.solid_name] scraps"
 		. = scraps
 	weaving_type = null
@@ -57,7 +57,7 @@
 			loaded = TRUE
 
 		if(loaded)
-			weaving_type = loaded_thread.material
+			weaving_type = loaded_thread.material.type
 			to_chat(user, SPAN_NOTICE("You wind thread onto \the [src]."))
 			update_icon()
 			return TRUE
@@ -110,24 +110,39 @@
 	working = TRUE
 	update_icon()
 	var/processed = 0
+	var/last_completion_descriptor = null
 	while(!QDELETED(loaded_thread) && user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src))
 		if(QDELETED(loaded_thread) || QDELETED(src) || QDELETED(user) || !weaving_type || !(weaving_type in loaded_thread.matter_per_piece))
 			break
 
 		weaving_progress += loaded_thread.matter_per_piece[weaving_type]
 		var/obj/item/stack/material/product_ref = product_type
-		var/matter_per_product = initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT
+		var/matter_per_product = CEILING(initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)
 		if(weaving_progress > matter_per_product)
 			var/produced = round(weaving_progress / matter_per_product)
-			if(produced)
-				processed += produced
-				weaving_progress -= produced * matter_per_product
-				var/obj/item/stack/cloth = new product_type(get_turf(src), produced, weaving_type)
-				if(isitem(cloth))
-					if(loaded_thread.paint_color)
-						cloth.set_color(loaded_thread.paint_color)
-					if(istype(cloth))
-						cloth.add_to_stacks(user, TRUE)
+			processed += produced
+			weaving_progress -= produced * matter_per_product
+			var/obj/item/stack/cloth = new product_type(get_turf(src), produced, weaving_type)
+			if(isitem(cloth))
+				if(loaded_thread.paint_color)
+					cloth.set_color(loaded_thread.paint_color)
+				if(istype(cloth))
+					cloth.add_to_stacks(user, TRUE)
+			to_chat(user, SPAN_NOTICE("You finish weaving \a [cloth]."))
+			last_completion_descriptor = null
+		else
+			switch(weaving_progress / matter_per_product)
+				if(-(INFINITY) to 0.25)
+					completion_descriptor = "barely started"
+				if(0.25 to 0.5)
+					completion_descriptor = "half finished"
+				if(0.5 to 0.75)
+					completion_descriptor = "three-quarters complete"
+				else
+					completion_descriptor = "almost finished"
+			if(completion_descriptor != last_completion_descriptor)
+				to_chat(user, SPAN_NOTICE("You work at \the [src]. The weaving looks [completion_descriptor]."))
+			last_completion_descriptor = completion_descriptor
 
 		loaded_thread.use(1)
 		if(QDELETED(loaded_thread))

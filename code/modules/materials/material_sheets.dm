@@ -315,13 +315,21 @@
 /obj/item/stack/material/bolt/yellow
 	paint_color = "#ffbf00"
 /obj/item/stack/material/bolt/teal
+	paint_color = "#00e1ff"
 /obj/item/stack/material/bolt/black
+	paint_color = "#505050"
 /obj/item/stack/material/bolt/green
+	paint_color = "#b7f27d"
 /obj/item/stack/material/bolt/purple
+	paint_color = "#9933ff"
 /obj/item/stack/material/bolt/blue
+	paint_color = "#46698c"
 /obj/item/stack/material/bolt/beige
+	paint_color = "#ceb689"
 /obj/item/stack/material/bolt/lime
+	paint_color = "#62e36c"
 /obj/item/stack/material/bolt/red
+	paint_color = "#9d2300"
 
 /obj/item/stack/material/pane
 	name = "panes"
