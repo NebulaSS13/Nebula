@@ -30,8 +30,8 @@
 /turf/proc/can_dig_pit(tool_hardness = MAT_VALUE_MALLEABLE)
 	return can_be_dug(tool_hardness) && !(locate(/obj/structure/pit) in src)
 
-/turf/proc/try_dig_pit(var/mob/user, var/obj/item/tool)
-	if((!user && !tool) || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS, set_cooldown = TRUE))
+/turf/proc/try_dig_pit(var/mob/user, var/obj/item/tool, using_tool = TOOL_SHOVEL)
+	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 5 SECONDS, set_cooldown = TRUE))
 		return dig_pit(tool?.material?.hardness)
 	return null
 
@@ -41,10 +41,10 @@
 /turf/proc/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
 	return FALSE
 
-/turf/proc/try_dig_trench(mob/user, obj/item/tool)
-	if((!user && !tool) || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 2.5 SECONDS, set_cooldown = TRUE))
-		return dig_trench(tool?.material?.hardness)
+/turf/proc/try_dig_trench(mob/user, obj/item/tool, max_diggable_hardness = MAT_VALUE_FLEXIBLE, using_tool = TOOL_SHOVEL)
+	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 2.5 SECONDS, set_cooldown = TRUE))
+		return dig_trench(tool?.material?.hardness, max_diggable_hardness)
 	return null
 
-/turf/proc/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE)
+/turf/proc/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
 	return FALSE

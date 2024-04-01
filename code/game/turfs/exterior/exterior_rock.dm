@@ -21,3 +21,4 @@
 /turf/exterior/rock/volcanic
 	name = "volcanic floor"
 	strata_override = /decl/strata/igneous
+	material = /decl/material/solid/stone/basalt

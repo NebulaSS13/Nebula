@@ -237,16 +237,23 @@
 				to_chat(user, SPAN_WARNING("You cannot dig anything out of \the [src] with \the [W]."))
 			return TRUE
 
-		if(IS_PICK(W))
+		var/decl/material/material = get_material()
+		if(IS_PICK(W) && material)
+
+			if(material?.hardness <= MAT_VALUE_FLEXIBLE)
+				to_chat(user, SPAN_WARNING("\The [src] is too soft to be excavated with \the [W]. Use a shovel."))
+				return TRUE
 
 			// Let picks dig out hard turfs, but not dig pits.
 			if(!can_be_dug(W.material?.hardness, max_diggable_hardness = INFINITY))
-				to_chat(user, SPAN_WARNING("\The [src] is too hard to be dug with \the [W]."))
+				to_chat(user, SPAN_WARNING("\The [src] is too hard to be excavated with \the [W]."))
 				return TRUE
+
 			if(can_dig_trench(W.material?.hardness, max_diggable_hardness = INFINITY))
-				try_dig_trench(user, W)
+				try_dig_trench(user, W, max_diggable_hardness = INFINITY, using_tool = TOOL_PICK)
 			else
-				to_chat(user, SPAN_WARNING("You cannot dig anything out of \the [src] with \the [W]."))
+				to_chat(user, SPAN_WARNING("You cannot excavate \the [src] with \the [W]."))
+
 			return TRUE
 
 		if(istype(W, /obj/item/storage))
