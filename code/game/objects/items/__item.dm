@@ -383,7 +383,7 @@
 		leftover_mats[mat] = matter[mat]
 
 	if(length(leftover_mats))
-		var/obj/item/scrap_material/remains = new(loc)
+		var/obj/item/debris/scraps/remains = new(loc)
 		remains.matter = leftover_mats?.Copy()
 		remains.update_primary_material()
 		LAZYADD(., remains)

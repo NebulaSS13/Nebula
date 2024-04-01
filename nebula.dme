@@ -2403,6 +2403,7 @@
 #include "code\modules\maps\template_types\random_exoplanet\planet_types\volcanic.dm"
 #include "code\modules\materials\_materials.dm"
 #include "code\modules\materials\material_armor.dm"
+#include "code\modules\materials\material_debris.dm"
 #include "code\modules\materials\material_drying.dm"
 #include "code\modules\materials\material_sheets.dm"
 #include "code\modules\materials\material_sheets_mapping.dm"
