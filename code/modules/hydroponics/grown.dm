@@ -409,3 +409,6 @@ var/global/list/fruit_icon_cache = list()
 		user.visible_message(SPAN_DANGER("\The [user] reflexively hurls \the [src] at \the [aiming_at]!"))
 		user.mob_throw_item(get_turf(aiming_at), src)
 		user.trigger_aiming(TARGET_CAN_CLICK)
+
+/obj/item/chems/food/grown/has_textile_fibers()
+	return istype(material, /decl/material/solid/organic/cloth)

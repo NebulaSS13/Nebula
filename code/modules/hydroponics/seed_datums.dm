@@ -4,6 +4,8 @@
 	name = "cotton"
 	seed_name = "cotton"
 	display_name = "cotton"
+	product_material = /decl/material/solid/organic/cloth
+	chems = list(/decl/material/solid/organic/cloth = list(1,1)) // solely so the grown item spawns
 
 /datum/seed/cotton/New()
 	..()
@@ -16,7 +18,6 @@
 	set_trait(TRAIT_PRODUCT_COLOUR, "#ffffff")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
-
 
 // Chili plants/variants.
 /datum/seed/chili

@@ -120,9 +120,9 @@
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/organic/cloth
-	name = "cloth"
+	name = "cotton"
 	uid = "solid_cotton"
-	use_name = "cloth"
+	use_name = "cotton"
 	color = "#ffffff"
 	stack_origin_tech = @'{"materials":2}'
 	door_icon_base = "wood"
@@ -143,7 +143,7 @@
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/organic/cloth/synthetic
-	name = "synthetic cloth"
+	name = "nylon"
 	uid = "solid_cloth_synthetic"
 	melting_point = T0C+300 // plastic
 
