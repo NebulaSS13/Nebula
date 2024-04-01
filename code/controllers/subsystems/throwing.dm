@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(throwing)
 
 /datum/thrownthing/Destroy()
 	SSthrowing.processing -= thrownthing
-	thrownthing.throwing = null
+	thrownthing.end_throw()
 	thrownthing = null
 	target = null
 	thrower = null
@@ -192,6 +192,7 @@ SUBSYSTEM_DEF(throwing)
 	if(!QDELETED(thrownthing))
 		thrownthing.fall()
 
+	thrownthing.end_throw()
 	qdel(src)
 
 /datum/thrownthing/proc/hit_atom(atom/A)
