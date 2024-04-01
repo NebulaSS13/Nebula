@@ -13,7 +13,9 @@
 	#include "outfits/_outfits.dm"
 
 	#include "shaded_hills_currency.dm"
+	#include "shaded_hills_map.dm"
 	#include "shaded_hills_skills.dm"
+	#include "shaded_hills_testing.dm"
 	#include "shaded_hills_turfs.dm"
 
 	#include "shaded_hills-grassland.dmm"
