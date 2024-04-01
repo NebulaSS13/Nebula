@@ -1,21 +1,17 @@
-/obj/structure/spindle
-	name = "spindle"
-	icon = 'icons/obj/structures/spindle.dmi'
-	icon_state = ICON_STATE_WORLD
-	anchored = TRUE
-	density = TRUE
-	material = /decl/material/solid/organic/wood
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	var/tmp/working = FALSE
-	var/list/loaded
-	var/product_type = /obj/item/stack/material/thread
-	var/const/MAX_LOADED = 5
+/obj/structure/textiles/spinning_wheel
 
-/obj/structure/spindle/Destroy()
+	name                 = "spinning wheel"
+	icon                 = 'icons/obj/structures/spindle.dmi'
+	product_type         = /obj/item/stack/material/thread
+
+	var/const/MAX_LOADED = 5
+	var/list/loaded
+
+/obj/structure/textiles/spinning_wheel/Destroy()
 	QDEL_NULL_LIST(loaded)
 	return ..()
 
-/obj/structure/spindle/on_update_icon()
+/obj/structure/textiles/spinning_wheel/on_update_icon()
 	..()
 
 	icon_state = initial(icon_state)
@@ -30,7 +26,7 @@
 	if(working)
 		icon_state = "[icon_state]-working"
 
-/obj/structure/spindle/attackby(obj/item/W, mob/user)
+/obj/structure/textiles/spinning_wheel/attackby(obj/item/W, mob/user)
 
 	if(user.a_intent == I_HURT)
 		return ..()
@@ -52,7 +48,7 @@
 
 	return ..()
 
-/obj/structure/spindle/attack_hand(mob/user)
+/obj/structure/textiles/spinning_wheel/attack_hand(mob/user)
 
 	if(user.a_intent == I_HURT)
 		return ..()
@@ -80,7 +76,7 @@
 	working = TRUE
 	update_icon()
 	var/processed = 0
-	while(length(loaded) && user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src))
+	while(length(loaded) && user.do_skilled(5 SECONDS, work_skill, src))
 		if(!length(loaded) || QDELETED(src) || QDELETED(user))
 			break
 

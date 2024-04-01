@@ -1,22 +1,19 @@
-/obj/structure/loom
-	name = "loom"
-	icon = 'icons/obj/structures/loom.dmi'
-	icon_state = ICON_STATE_WORLD
-	anchored = TRUE
-	density = TRUE
-	material = /decl/material/solid/organic/wood
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	var/tmp/working = FALSE
-	var/obj/item/stack/loaded_thread
-	var/product_type = /obj/item/stack/material/bolt
-	var/weaving_type
-	var/weaving_progress = 0
+/obj/structure/textiles/loom
 
-/obj/structure/loom/Destroy()
+	name                 = "loom"
+	icon                 = 'icons/obj/structures/loom.dmi'
+	product_type         = /obj/item/stack/material/bolt
+
+	var/weaving_progress = 0
+	var/weaving_type
+	var/weaving_color
+	var/obj/item/stack/loaded_thread
+
+/obj/structure/textiles/loom/Destroy()
 	QDEL_NULL(loaded_thread)
 	return ..()
 
-/obj/structure/loom/physically_destroyed()
+/obj/structure/textiles/loom/physically_destroyed()
 	if(loaded_thread)
 		loaded_thread.dropInto(loc)
 		loaded_thread = null
@@ -24,17 +21,17 @@
 		clear_in_progress_weaving()
 	return ..()
 
-/obj/structure/loom/proc/clear_in_progress_weaving()
+/obj/structure/textiles/loom/proc/clear_in_progress_weaving()
 	if(weaving_type && weaving_progress > 0)
-		var/obj/item/scrap_material/scraps = new(loc, weaving_type)
-		var/decl/material/scrap_material = GET_DECL(weaving_type)
+		var/obj/item/debris/scraps/scraps = new(loc)
 		scraps.matter = list(weaving_type = weaving_progress)
-		scraps.name = "[scrap_material.solid_name] scraps"
+		scraps.update_primary_material()
 		. = scraps
+	weaving_color = null
 	weaving_type = null
 	weaving_progress = 0
 
-/obj/structure/loom/attackby(obj/item/W, mob/user)
+/obj/structure/textiles/loom/attackby(obj/item/W, mob/user)
 
 	if(user.a_intent == I_HURT)
 		return ..()
@@ -57,6 +54,7 @@
 			loaded = TRUE
 
 		if(loaded)
+			weaving_color = loaded_thread.get_color()
 			weaving_type = loaded_thread.material.type
 			to_chat(user, SPAN_NOTICE("You wind thread onto \the [src]."))
 			update_icon()
@@ -64,21 +62,27 @@
 
 	return ..()
 
-/obj/structure/loom/on_update_icon()
+/obj/structure/textiles/loom/on_update_icon()
 	..()
 
 	icon_state = initial(icon_state)
 
 	if(loaded_thread)
-		var/image/I = image(icon, "[icon_state]-loaded")
+		var/image/I = image(icon, "[icon_state]-thread")
 		I.color = loaded_thread.get_color()
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I)
+
+	if(weaving_progress)
+		var/image/I = image(icon, "[icon_state]-weaving")
+		I.color = weaving_color
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
 	if(working)
 		icon_state = "[icon_state]-working"
 
-/obj/structure/loom/attack_hand(mob/user)
+/obj/structure/textiles/loom/attack_hand(mob/user)
 
 	if(user.a_intent == I_HURT)
 		return ..()
@@ -111,7 +115,7 @@
 	update_icon()
 	var/processed = 0
 	var/last_completion_descriptor = null
-	while(!QDELETED(loaded_thread) && user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src))
+	while(!QDELETED(loaded_thread) && user.do_skilled(2 SECONDS, work_skill, src))
 		if(QDELETED(loaded_thread) || QDELETED(src) || QDELETED(user) || !weaving_type || !(weaving_type in loaded_thread.matter_per_piece))
 			break
 
@@ -125,12 +129,13 @@
 			var/obj/item/stack/cloth = new product_type(get_turf(src), produced, weaving_type)
 			if(isitem(cloth))
 				if(loaded_thread.paint_color)
-					cloth.set_color(loaded_thread.paint_color)
+					cloth.set_color(weaving_color)
 				if(istype(cloth))
 					cloth.add_to_stacks(user, TRUE)
 			to_chat(user, SPAN_NOTICE("You finish weaving \a [cloth]."))
 			last_completion_descriptor = null
 		else
+			var/completion_descriptor
 			switch(weaving_progress / matter_per_product)
 				if(-(INFINITY) to 0.25)
 					completion_descriptor = "barely started"
