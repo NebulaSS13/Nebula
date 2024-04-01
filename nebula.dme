@@ -2040,6 +2040,7 @@
 #include "code\modules\crafting\stack_recipes\recipes_textiles.dm"
 #include "code\modules\crafting\stack_recipes\recipes_turfs.dm"
 #include "code\modules\crafting\textiles\_textiles.dm"
+#include "code\modules\crafting\textiles\loom.dm"
 #include "code\modules\crafting\textiles\spindle.dm"
 #include "code\modules\crafting\textiles\thread.dm"
 #include "code\modules\culture_descriptor\_culture.dm"

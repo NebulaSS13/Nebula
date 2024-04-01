@@ -23,7 +23,7 @@
 	if(length(loaded))
 		var/obj/item/thing = loaded[1]
 		var/image/I = image(icon, "[icon_state]-loaded")
-		I.color = thing.material?.color
+		I.color = thing.get_color()
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
@@ -31,6 +31,13 @@
 		icon_state = "[icon_state]-working"
 
 /obj/structure/spindle/attackby(obj/item/W, mob/user)
+
+	if(user.a_intent == I_HURT)
+		return ..()
+
+	if(working)
+		to_chat(user, SPAN_WARNING("\The [src] is currently in use, please wait for it to be finished."))
+		return TRUE
 
 	if(W.has_textile_fibers(W))
 		if(length(loaded) >= MAX_LOADED)
@@ -50,8 +57,24 @@
 	if(user.a_intent == I_HURT)
 		return ..()
 
+	if(working)
+		to_chat(user, SPAN_WARNING("\The [src] is currently in use, please wait for it to be finished."))
+		return TRUE
+
+	if(user.a_intent == I_GRAB)
+		if(!length(loaded))
+			to_chat(user, SPAN_WARNING("\The [src] has no fibers to remove."))
+		else
+			var/obj/item/thing = loaded[1]
+			to_chat(user, SPAN_NOTICE("You remove \the [thing] from \the [src]."))
+			thing.dropInto(loc)
+			user.put_in_hands(thing)
+			LAZYREMOVE(loaded, thing)
+			update_icon()
+		return TRUE
+
 	if(!length(loaded))
-		to_chat(user, SPAN_WARNING("\The [src] needs to be prepared with fibers before you can spin thread."))
+		to_chat(user, SPAN_WARNING("\The [src] needs to be prepared with fibers before you can spin anything."))
 		return TRUE
 
 	working = TRUE
@@ -68,15 +91,18 @@
 			var/obj/item/stack/material/product_ref = product_type
 			var/produced = max(1, round(loaded_fiber.matter[loaded_fiber.material?.type] / (initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)))
 			var/obj/item/stack/thread = new product_type(get_turf(src), produced, loaded_fiber.material?.type)
-			if(istype(thread))
-				thread.add_to_stacks(user, TRUE)
+			if(isitem(thread))
+				if(loaded_fiber.paint_color)
+					thread.set_color(loaded_fiber.paint_color)
+				if(istype(thread))
+					thread.add_to_stacks(user, TRUE)
 
 		processed++
 		QDEL_NULL(loaded_fiber)
 		update_icon()
 
 	if(processed && !QDELETED(user))
-		to_chat(user, SPAN_NOTICE("You finish working at \the [src], having spun [processed] lengths of thread."))
+		to_chat(user, SPAN_NOTICE("You finish working at \the [src], having spun [processed] length\s of thread."))
 
 	working = FALSE
 	update_icon()
