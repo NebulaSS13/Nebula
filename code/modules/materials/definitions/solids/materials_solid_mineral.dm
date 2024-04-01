@@ -223,7 +223,7 @@
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
 	value = 0.8
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_MALLEABLE
 	integrity = 10
 	dirtiness = 15
 	dissolves_into = list(
@@ -243,7 +243,7 @@
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
 	value = 0.8
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_MALLEABLE
 	integrity = 10
 	dirtiness = 10
 	default_solid_form = /obj/item/stack/material/lump/large
@@ -261,7 +261,7 @@
 	value = 0
 	default_solid_form = /obj/item/stack/material/lump/large
 	melting_point = null
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_MALLEABLE
 	integrity = 10
 	dirtiness = 30
 	can_backfill_turf_type = list(

@@ -366,6 +366,56 @@
 		return TRUE
 	return FALSE
 
+/obj/item/proc/squash_item(skip_qdel = FALSE)
+
+	if(!istype(material) || material.hardness <= MAT_VALUE_MALLEABLE)
+		return null
+
+	var/list/leftover_mats = list()
+	for(var/mat in matter)
+		var/decl/material/material_decl = GET_DECL(mat)
+		if(material_decl.hardness <= MAT_VALUE_MALLEABLE)
+			var/spawn_amount = round(matter[mat] / SHEET_MATERIAL_AMOUNT)
+			if(spawn_amount > 0)
+				var/obj/item/stack/material/lump/lump = new(loc, spawn_amount, mat)
+				LAZYADD(., lump)
+				continue
+		leftover_mats[mat] = matter[mat]
+
+	if(length(leftover_mats))
+		var/list/mat_names = list()
+		var/highest_mat
+		for(var/mat in leftover_mats)
+			var/decl/material/material_decl = GET_DECL(mat)
+			mat_names += material_decl.solid_name
+			if(!highest_mat || leftover_mats[highest_mat] < leftover_mats[mat])
+				highest_mat = mat
+		if(highest_mat)
+			var/obj/item/scrap_material/remains = new(loc, highest_mat)
+			remains.matter = leftover_mats?.Copy()
+			remains.name   = "[english_list(mat_names)] scraps"
+			remains.desc   = "The squashed remains of \a [src]."
+			remains.color  = remains.material.color
+			LAZYADD(., remains)
+
+	if(!skip_qdel)
+		matter = null
+		material = null
+		qdel(src)
+
+/obj/item/attack_self(mob/user)
+	. = ..()
+	if(!. && user.a_intent == I_HURT && istype(material))
+		var/list/results = squash_item(skip_qdel = TRUE)
+		if(length(results) && user.try_unequip(src, user.loc))
+			user.visible_message(SPAN_DANGER("\The [user] squashes \the [src] into a lump."))
+			for(var/obj/item/thing in results)
+				user.put_in_hands(thing)
+			matter = null
+			material = null
+			qdel(src)
+			return TRUE
+
 /obj/item/attack_hand(mob/user)
 
 	if(!user)

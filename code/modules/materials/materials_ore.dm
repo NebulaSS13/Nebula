@@ -171,6 +171,10 @@
 	matter_multiplier     = 1
 	can_be_pulverized     = FALSE
 
+// Override as it doesn't make much sense to squash sand.
+/obj/item/stack/material/ore/handful/squash_item(skip_qdel = FALSE)
+	return
+
 /obj/item/stack/material/ore/handful/get_stack_conversion_dictionary()
 	return
 

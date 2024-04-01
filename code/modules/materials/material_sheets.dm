@@ -473,6 +473,10 @@
 	can_be_pulverized = TRUE
 	matter_multiplier = 1.5
 
+// Override as squashing items produces this item type.
+/obj/item/stack/material/lump/squash_item(skip_qdel = FALSE)
+	return
+
 /obj/item/stack/material/lump/get_stack_conversion_dictionary()
 	var/static/list/converts_into = list(
 		TOOL_HAMMER = /obj/item/stack/material/brick

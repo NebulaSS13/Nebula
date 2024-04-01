@@ -35,6 +35,7 @@
 #define MAT_VALUE_VERY_HARD_DIY     3
 
 //Arbitrary hardness thresholds
+#define MAT_VALUE_MALLEABLE          0
 #define MAT_VALUE_SOFT              10
 #define MAT_VALUE_FLEXIBLE          20
 #define MAT_VALUE_RIGID             40

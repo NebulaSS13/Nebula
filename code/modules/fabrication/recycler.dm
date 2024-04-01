@@ -160,6 +160,10 @@
 	icon = 'icons/obj/melted_thing.dmi'
 	icon_state = ICON_STATE_WORLD
 
+// Override as squashing items produces this item type.
+/obj/item/scrap_material/squash_item(skip_qdel = FALSE)
+	return
+
 /obj/machinery/recycler/proc/dump_trace_material(atom/forced_loc = loc)
 
 	if(!length(trace_matter))
