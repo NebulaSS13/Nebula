@@ -7,6 +7,7 @@
 	icon_edge_layer = EXT_EDGE_SAND
 	icon_has_corners = TRUE
 	possible_states = 4
+	material = /decl/material/solid/sand
 
 /turf/exterior/sand/get_diggable_resources()
 	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/handful/sand = list(3, 2))

@@ -5,6 +5,7 @@
 	icon_edge_layer = EXT_EDGE_CLAY
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
+	material = /decl/material/solid/clay
 
 /turf/exterior/clay/get_diggable_resources()
 	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/lump/large/clay = list(3, 2))
@@ -24,6 +25,7 @@
 	icon_edge_layer = EXT_EDGE_MUD
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
+	material = /decl/material/solid/soil
 
 /turf/exterior/mud/drop_diggable_resources()
 	if(get_physical_height() > -(FLUID_DEEP))
@@ -54,6 +56,7 @@
 	dirt_color = "#ae9e66"
 	icon = 'icons/turf/exterior/seafloor.dmi'
 	is_fundament_turf = TRUE
+	material = /decl/material/solid/soil
 
 /turf/exterior/dry/fluid_act(datum/reagents/fluids)
 	SHOULD_CALL_PARENT(FALSE)
