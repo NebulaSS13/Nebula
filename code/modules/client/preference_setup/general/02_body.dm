@@ -85,20 +85,25 @@
 	W.write("bgstate",                pref.bgstate)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
-
-	pref.skin_colour =        pref.skin_colour        || COLOR_BLACK
-	pref.eye_colour  =        pref.eye_colour         || COLOR_BLACK
+	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+	if(mob_bodytype.appearance_flags & HAS_SKIN_COLOR)
+		pref.skin_colour = pref.skin_colour || mob_bodytype.base_color     || COLOR_BLACK
+	else
+		pref.skin_colour = mob_bodytype.base_color     || COLOR_BLACK
+	if(mob_bodytype.appearance_flags & HAS_EYE_COLOR)
+		pref.eye_colour  = pref.eye_colour  || mob_bodytype.base_eye_color || COLOR_BLACK
+	else
+		pref.eye_colour  = mob_bodytype.base_eye_color || COLOR_BLACK
 
 	pref.blood_type = sanitize_text(pref.blood_type, initial(pref.blood_type))
 
 	if(!pref.species || !(pref.species in get_playable_species()))
 		pref.species = global.using_map.default_species
 
-	var/decl/species/mob_species = get_species_by_key(pref.species)
 	if(!pref.blood_type || !(pref.blood_type in mob_species.blood_types))
 		pref.blood_type = pickweight(mob_species.blood_types)
 
-	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	var/low_skin_tone = mob_bodytype ? (35 - mob_bodytype.max_skin_tone()) : -185
 	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
 

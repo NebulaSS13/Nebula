@@ -20,5 +20,7 @@
 /obj/screen/setup_preview/bg/Click(location, control, params)
 	if(pref)
 		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
-		pref.update_preview_icon()
+		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(pref.client_ckey)
+		if(mannequin)
+			pref.update_character_previews(mannequin)
 	return ..()
