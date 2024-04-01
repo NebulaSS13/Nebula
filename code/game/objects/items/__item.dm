@@ -368,7 +368,7 @@
 
 /obj/item/proc/squash_item(skip_qdel = FALSE)
 
-	if(!istype(material) || material.hardness <= MAT_VALUE_MALLEABLE)
+	if(!istype(material) || material.hardness > MAT_VALUE_MALLEABLE)
 		return null
 
 	var/list/leftover_mats = list()
@@ -404,8 +404,7 @@
 		qdel(src)
 
 /obj/item/attack_self(mob/user)
-	. = ..()
-	if(!. && user.a_intent == I_HURT && istype(material))
+	if(user.a_intent == I_HURT && istype(material))
 		var/list/results = squash_item(skip_qdel = TRUE)
 		if(length(results) && user.try_unequip(src, user.loc))
 			user.visible_message(SPAN_DANGER("\The [user] squashes \the [src] into a lump."))
@@ -415,6 +414,11 @@
 			material = null
 			qdel(src)
 			return TRUE
+	return ..()
+
+/obj/item/end_throw()
+	. = ..()
+	squash_item()
 
 /obj/item/attack_hand(mob/user)
 

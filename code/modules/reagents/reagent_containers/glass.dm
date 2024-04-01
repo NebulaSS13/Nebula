@@ -54,14 +54,15 @@
 		to_chat(user,SPAN_NOTICE("The airtight lid seals it completely."))
 
 /obj/item/chems/glass/attack_self()
-	..()
-	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
-		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
-	else
-		to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
-		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	update_icon()
+	. = ..()
+	if(!.)
+		if(ATOM_IS_OPEN_CONTAINER(src))
+			to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
+			atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
+		else
+			to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
+			atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		update_icon()
 
 /obj/item/chems/glass/attack(mob/M, mob/user, def_zone)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
