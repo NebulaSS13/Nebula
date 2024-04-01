@@ -299,6 +299,7 @@
 // Extra subtype defined for the clay stack recipes to not freak out about null material.
 /obj/item/stack/material/brick/clay
 	material = /decl/material/solid/clay
+	is_spawnable_type = TRUE
 
 /obj/item/stack/material/bolt
 	name = "bolts"
@@ -485,6 +486,7 @@
 
 /obj/item/stack/material/lump/clay
 	material = /decl/material/solid/clay
+	is_spawnable_type = TRUE
 
 /obj/item/stack/material/lump/large
 	base_state        = "lump_large"
@@ -492,13 +494,16 @@
 	plural_icon_state = "lump_large-mult"
 	max_icon_state    = "lump_large-max"
 	stack_merge_type  = /obj/item/stack/material/lump/large
+	crafting_stack_type = /obj/item/stack/material/lump/large
 	matter_multiplier = 3
 
 /obj/item/stack/material/lump/large/clay
 	material = /decl/material/solid/clay
+	is_spawnable_type = TRUE
 
 /obj/item/stack/material/lump/large/soil
 	material = /decl/material/solid/soil
+	is_spawnable_type = TRUE
 
 /obj/item/stack/material/slab
 	name = "slabs"
