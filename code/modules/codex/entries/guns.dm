@@ -52,19 +52,20 @@
 	. = ..()
 	var/list/traits = list()
 
-	traits += "<br>Caliber: [caliber]"
-
-	var/list/loading_ways = list()
-	if(load_method & SINGLE_CASING)
-		loading_ways += "loose [caliber] rounds"
-	if(load_method & SPEEDLOADER)
-		loading_ways += "speedloaders"
-	if(load_method & MAGAZINE)
-		loading_ways += "magazines"
-	traits += "Can be loaded using [english_list(loading_ways)]"
-
-	if(load_method & (SINGLE_CASING|SPEEDLOADER))
-		traits += "It can hold [max_shells] rounds."
+	if(caliber == CALIBER_UNUSABLE)
+		traits += "<br>It cannot be reloaded with standard ammunition."
+	else
+		traits += "<br>It is chambered for [caliber] caliber."
+		var/list/loading_ways = list()
+		if(load_method & SINGLE_CASING)
+			loading_ways += "loose [caliber] rounds"
+		if(load_method & SPEEDLOADER)
+			loading_ways += "speedloaders"
+		if(load_method & MAGAZINE)
+			loading_ways += "magazines"
+		traits += "Can be loaded using [english_list(loading_ways)]"
+		if(load_method & (SINGLE_CASING|SPEEDLOADER))
+			traits += "It can hold [max_shells] rounds."
 
 	if(jam_chance)
 		traits += "It's prone to jamming."

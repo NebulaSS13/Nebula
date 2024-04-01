@@ -60,13 +60,13 @@ var/global/list/icon_state_cache = list()
 	..()
 	update_world_inventory_state()
 
-/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart, skip_offset = FALSE)
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart)
 
 	if(!use_single_icon)
 		var/mob_state = (item_state || icon_state)
 		var/mob_icon = global.default_onmob_icons[slot]
 		var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
-		if(istype(root_bodytype) && !skip_offset)
+		if(istype(root_bodytype))
 			var/use_slot = (bodypart in root_bodytype.equip_adjust) ? bodypart : slot
 			return root_bodytype.get_offset_overlay_image(mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
@@ -98,7 +98,7 @@ var/global/list/icon_state_cache = list()
 	var/image/I = image(useicon, use_state)
 	I.color = color
 	I.appearance_flags = RESET_COLOR
-	. = adjust_mob_overlay(user_mob,  bodytype, I, slot, bodypart, skip_offset)
+	. = adjust_mob_overlay(user_mob,  bodytype, I, slot, bodypart)
 
 /obj/item/proc/get_fallback_slot(var/slot)
 	return
@@ -109,9 +109,9 @@ var/global/list/icon_state_cache = list()
 // Ensure ..() is called only at the end of this proc, and that `overlay` is mutated rather than replaced.
 // This is necessary to ensure that all the overlays are generated and tracked prior to being passed to
 // the bodytype offset proc, which can scrub icon/icon_state information as part of the offset process.
-/obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
-	if(root_bodytype && root_bodytype.bodytype_category != bodytype && !skip_offset)
+	if(root_bodytype && root_bodytype.bodytype_category != bodytype)
 		var/list/overlays_to_offset = overlay.overlays
 		overlay = root_bodytype.get_offset_overlay_image(overlay.icon, overlay.icon_state, color, (bodypart || slot))
 		for(var/thing in overlays_to_offset)

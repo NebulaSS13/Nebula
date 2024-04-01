@@ -28,7 +28,7 @@
 	color = "#486e6e"
 	var/lights_color = "#00ffff"
 
-/obj/item/clothing/head/helmet/space/vox/carapace/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/clothing/head/helmet/space/vox/carapace/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))
 		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-lights")
 		I.color = lights_color

@@ -35,7 +35,7 @@
 			break
 
 // Grab our inhands from the mob we're wrapping, if they have any.
-/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, skip_offset = FALSE)
+/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/mob/M = locate() in contents
 	if(istype(M))
 		icon =  M.get_holder_icon()

@@ -1072,11 +1072,12 @@
 		return gripper.get_dexterity()
 
 	// If this slot requires an organ, do the appropriate organ checks.
-	var/obj/item/organ/external/active_hand = GET_EXTERNAL_ORGAN(src, check_slot)
+	var/obj/item/organ/external/active_hand = GET_EXTERNAL_ORGAN(src, gripper.requires_organ_tag)
 	if(!active_hand)
 		if(!silent)
-			to_chat(src, "Your [parse_zone(check_slot)] is missing!")
+			to_chat(src, SPAN_WARNING("Your [parse_zone(check_slot)] is missing!"))
 		return DEXTERITY_NONE
+
 	if(!active_hand.is_usable())
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your [active_hand.name] is unusable!"))

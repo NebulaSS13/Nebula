@@ -122,6 +122,11 @@
 //Attempts to load A into src, depending on the type of thing being loaded and the load_method
 //Maybe this should be broken up into separate procs for each load method?
 /obj/item/gun/projectile/proc/load_ammo(var/obj/item/A, mob/user)
+
+	// This gun cannot be manually reloaded.
+	if(caliber == CALIBER_UNUSABLE)
+		return
+
 	if(istype(A, /obj/item/ammo_magazine))
 		. = TRUE
 		var/obj/item/ammo_magazine/AM = A

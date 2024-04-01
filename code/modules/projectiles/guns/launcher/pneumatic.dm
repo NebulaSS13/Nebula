@@ -133,7 +133,7 @@
 		icon_state = get_world_inventory_state()
 	update_held_icon()
 
-/obj/item/gun/launcher/pneumatic/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
+/obj/item/gun/launcher/pneumatic/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && tank)
 		overlay.icon_state += "-tank"
 	. = ..()
