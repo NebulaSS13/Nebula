@@ -483,6 +483,9 @@
 	)
 	return converts_into
 
+/obj/item/stack/material/lump/clay
+	material = /decl/material/solid/clay
+
 /obj/item/stack/material/lump/large
 	base_state        = "lump_large"
 	icon_state        = "lump_large"

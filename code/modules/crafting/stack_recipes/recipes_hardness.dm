@@ -1,6 +1,6 @@
 /decl/stack_recipe/hardness
 	abstract_type     = /decl/stack_recipe/hardness
-	required_hardness = MAT_VALUE_FLEXIBLE + 10
+	required_min_hardness = MAT_VALUE_FLEXIBLE + 10
 
 /decl/stack_recipe/hardness/improvised_armour
 	result_type       = /obj/item/clothing/suit/armor/crafted

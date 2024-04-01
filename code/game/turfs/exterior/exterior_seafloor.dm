@@ -4,7 +4,9 @@
 	icon = 'icons/turf/exterior/seafloor.dmi'
 	icon_edge_layer = EXT_EDGE_SEAFLOOR
 	material = /decl/material/solid/sand
+	is_fundament_turf = TRUE
 	var/detail_decal
+
 /turf/exterior/seafloor/flooded
 	flooded = /decl/material/liquid/water
 	color = COLOR_LIQUID_WATER

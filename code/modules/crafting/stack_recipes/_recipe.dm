@@ -43,8 +43,6 @@
 	var/allow_multiple_craft = TRUE
 	/// Category var used to discriminate recipes per-map. Unrelated to origin_tech.
 	var/available_to_map_tech_level = MAP_TECH_LEVEL_ANY
-	/// Set to false if you want a recipe to be able to craft results of the same general type as the input stack.
-	var/forbid_recursive_crafting = TRUE
 
 	/// What stack types can be used to make this recipe?
 	var/list/craft_stack_types           = list(
@@ -80,7 +78,9 @@
 	/// Minimum material integrity value.
 	var/required_integrity
 	/// Minimum material hardness value.
-	var/required_hardness
+	var/required_min_hardness
+	/// Maximum material hardness value.
+	var/required_max_hardness
 	/// Maximum material opacity value.
 	var/required_max_opacity
 
@@ -135,8 +135,10 @@
 			. += "null required material but non-null integrity value"
 		if(!isnull(required_max_opacity))
 			. += "null required material but non-null max opacity value"
-		if(!isnull(required_hardness))
-			. += "null required material but non-null hardness value"
+		if(!isnull(required_min_hardness))
+			. += "null required material but non-null min hardness value"
+		if(!isnull(required_max_hardness))
+			. += "null required material but non-null max hardness value"
 
 	if(recipe_skill && difficulty > 0)
 		var/decl/hierarchy/skill/used_skill = GET_DECL(recipe_skill)
@@ -215,9 +217,11 @@
 
 /decl/stack_recipe/proc/can_be_made_from(stack_type, tool_type, decl/material/mat, decl/material/reinf_mat)
 
-	// Shortcut to avoid letting recipes make themselves.
-	if(forbid_recursive_crafting && (ispath(stack_type, result_type) || ispath(result_type, stack_type)))
-		return FALSE
+	// Early checks to avoid letting recipes make themselves.
+	if(ispath(result_type, /obj/item/stack))
+		var/obj/item/stack/result_ref = result_type
+		if(stack_type == initial(result_ref.crafting_stack_type))
+			return FALSE
 
 	// Check if they're using the appropriate materials.
 	if(ispath(required_material) && !istype(mat, required_material))
@@ -240,7 +244,9 @@
 			return FALSE
 		if(!isnull(required_integrity) && mat.integrity < required_integrity)
 			return FALSE
-		if(!isnull(required_hardness) && mat.hardness < required_hardness)
+		if(!isnull(required_min_hardness) && mat.hardness < required_min_hardness)
+			return FALSE
+		if(!isnull(required_max_hardness) && mat.hardness > required_max_hardness)
 			return FALSE
 		if(!isnull(required_max_opacity) && mat.opacity > required_max_opacity)
 			return FALSE

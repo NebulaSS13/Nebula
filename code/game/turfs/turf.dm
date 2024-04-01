@@ -237,6 +237,18 @@
 				to_chat(user, SPAN_WARNING("You cannot dig anything out of \the [src] with \the [W]."))
 			return TRUE
 
+		if(IS_PICK(W))
+
+			// Let picks dig out hard turfs, but not dig pits.
+			if(!can_be_dug(W.material?.hardness, max_diggable_hardness = INFINITY))
+				to_chat(user, SPAN_WARNING("\The [src] is too hard to be dug with \the [W]."))
+				return TRUE
+			if(can_dig_trench(W.material?.hardness, max_diggable_hardness = INFINITY))
+				try_dig_trench(user, W)
+			else
+				to_chat(user, SPAN_WARNING("You cannot dig anything out of \the [src] with \the [W]."))
+			return TRUE
+
 		if(istype(W, /obj/item/storage))
 			var/obj/item/storage/storage = W
 			if(storage.collection_mode)

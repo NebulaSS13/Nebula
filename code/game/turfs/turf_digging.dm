@@ -11,7 +11,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	update_icon()
 
-/turf/proc/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE)
+/turf/proc/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
 	return FALSE
 
 /turf/proc/drop_diggable_resources()
@@ -38,7 +38,7 @@
 /turf/proc/dig_pit(tool_hardness = MAT_VALUE_MALLEABLE)
 	return can_dig_pit(tool_hardness) && new /obj/structure/pit(src)
 
-/turf/proc/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE)
+/turf/proc/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
 	return FALSE
 
 /turf/proc/try_dig_trench(mob/user, obj/item/tool)

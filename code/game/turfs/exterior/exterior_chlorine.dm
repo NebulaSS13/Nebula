@@ -6,6 +6,8 @@
 	icon_edge_layer = EXT_EDGE_CHLORINE_SAND
 	dirt_color = "#d2e0b7"
 	footstep_type = /decl/footsteps/sand
+	is_fundament_turf = TRUE
+	material = /decl/material/solid/sand
 
 /turf/exterior/chlorine_sand/marsh
 	name = "chlorine marsh"

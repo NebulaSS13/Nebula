@@ -8,6 +8,7 @@
 	icon_has_corners = TRUE
 	possible_states = 4
 	material = /decl/material/solid/sand
+	is_fundament_turf = TRUE
 
 /turf/exterior/sand/drop_diggable_resources()
 	if(get_physical_height() >= -(FLUID_DEEP) && prob(15))

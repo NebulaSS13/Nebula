@@ -5,6 +5,7 @@
 	icon = 'icons/turf/exterior/cobblestone.dmi'
 	icon_state = "0"
 	icon_edge_layer = EXT_EDGE_PATH
+	material = /decl/material/solid/stone/sandstone
 
 /turf/exterior/path/running_bond
 	icon = 'icons/turf/exterior/running_bond.dmi'

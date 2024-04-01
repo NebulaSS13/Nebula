@@ -1,3 +1,6 @@
+/turf/exterior
+	var/const/MAX_DIGGABLE_HARDNESS = MAT_VALUE_HARD
+
 /turf/exterior/dig_pit(tool_hardness = MAT_VALUE_MALLEABLE)
 	if(istype(material) && material.hardness > tool_hardness)
 		return
@@ -19,8 +22,8 @@
 	else
 		ChangeTurf(/turf/exterior/dirt, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
 
-/turf/exterior/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE)
-	return can_be_dug(tool_hardness) && get_physical_height() > -(FLUID_DEEP)
+/turf/exterior/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
+	return can_be_dug(tool_hardness, max_diggable_hardness) && get_physical_height() > -(FLUID_DEEP)
 
-/turf/exterior/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE)
-	return !density && !is_open() && material && material.hardness <= tool_hardness
+/turf/exterior/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
+	return !density && !is_open() && material && material.hardness <= tool_hardness && material.hardness <= max_diggable_hardness
