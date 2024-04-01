@@ -383,20 +383,10 @@
 		leftover_mats[mat] = matter[mat]
 
 	if(length(leftover_mats))
-		var/list/mat_names = list()
-		var/highest_mat
-		for(var/mat in leftover_mats)
-			var/decl/material/material_decl = GET_DECL(mat)
-			mat_names += material_decl.solid_name
-			if(!highest_mat || leftover_mats[highest_mat] < leftover_mats[mat])
-				highest_mat = mat
-		if(highest_mat)
-			var/obj/item/scrap_material/remains = new(loc, highest_mat)
-			remains.matter = leftover_mats?.Copy()
-			remains.name   = "[english_list(mat_names)] scraps"
-			remains.desc   = "The squashed remains of \a [src]."
-			remains.color  = remains.material.color
-			LAZYADD(., remains)
+		var/obj/item/scrap_material/remains = new(loc)
+		remains.matter = leftover_mats?.Copy()
+		remains.update_primary_material()
+		LAZYADD(., remains)
 
 	if(!skip_qdel)
 		matter = null

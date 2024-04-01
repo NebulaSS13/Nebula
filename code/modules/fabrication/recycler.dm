@@ -156,9 +156,59 @@
 
 /obj/item/scrap_material
 	name = "scraps"
-	desc = "Tailings and scraps left over from the recycling process."
+	desc = "A small pile of tailings and scraps."
 	icon = 'icons/obj/melted_thing.dmi'
 	icon_state = ICON_STATE_WORLD
+
+/obj/item/scrap_material/proc/update_primary_material()
+
+	var/list/mat_names = list()
+	var/highest_mat
+	for(var/mat in matter)
+		if(!highest_mat || matter[highest_mat] < matter[mat])
+			highest_mat = mat
+		var/decl/material/material_decl = GET_DECL(mat)
+		mat_names += material_decl.solid_name
+
+	if(!highest_mat)
+		qdel(src)
+	else
+		material = GET_DECL(highest_mat)
+		name     = "[english_list(mat_names)] [initial(name)]"
+		color    = material.color
+
+/obj/item/scrap_material/attack_self(mob/user)
+
+	// We can only split up scraps that are pure.
+	if(length(matter) == 1)
+		var/decl/material/split_material = GET_DECL(matter[1])
+		var/sheet_amount = round(matter[split_material.type] / SHEET_MATERIAL_AMOUNT)
+		if(sheet_amount < 1)
+			to_chat(user, SPAN_WARNING("There is not enough [split_material.solid_name] to shape into lumps."))
+			return TRUE
+		var/obj/item/stack/material/lump/lumps = new(get_turf(user), sheet_amount, split_material.type)
+		matter[split_material.type] -= sheet_amount * sheet_material_amount
+		if(matter[split_material.type] <= 0)
+			qdel(src)
+		to_chat(user, SPAN_NOTICE("You separate the [split_material.solid_name] into [sheet_amount] lump\s."))
+		user.put_in_hands(lumps)
+		return TRUE
+
+	return ..()
+
+/obj/item/scrap_material/attackby(obj/item/W, mob/user)
+	if(istype(W, type) && user.try_unequip(W))
+		LAZYINITLIST(matter)
+		for(var/mat in W.matter)
+			matter[mat] += W.matter[mat]
+		UNSETEMPTY(matter)
+		W.matter = null
+		W.material = null
+		to_chat(user, SPAN_NOTICE("You combine \the [src] and \the [W]."))
+		qdel(W)
+		update_primary_material()
+		return TRUE
+	. = ..()
 
 // Override as squashing items produces this item type.
 /obj/item/scrap_material/squash_item(skip_qdel = FALSE)
@@ -171,20 +221,9 @@
 
 	var/highest_mat
 	var/last_highest = 0
-	var/list/mat_names = list()
-	for(var/mat in trace_matter)
-		var/decl/material/material = GET_DECL(mat)
-		mat_names += material.solid_name
-		if(isnull(highest_mat) || trace_matter[mat] > last_highest)
-			highest_mat = mat
-			last_highest = trace_matter[mat]
-
-	if(highest_mat)
-		var/obj/item/scrap_material/remains = new(forced_loc, highest_mat)
-		remains.matter = trace_matter?.Copy()
-		remains.name = "[english_list(mat_names)] scraps"
-		remains.color = remains.material.color
-
+	var/obj/item/scrap_material/remains = new(forced_loc)
+	remains.matter = trace_matter?.Copy()
+	remains.update_primary_material()
 	trace_matter.Cut()
 
 /obj/machinery/recycler/dump_contents(atom/forced_loc = loc, mob/user)
