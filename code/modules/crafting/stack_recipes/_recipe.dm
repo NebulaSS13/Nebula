@@ -43,6 +43,8 @@
 	var/allow_multiple_craft = TRUE
 	/// Category var used to discriminate recipes per-map. Unrelated to origin_tech.
 	var/available_to_map_tech_level = MAP_TECH_LEVEL_ANY
+	/// Set to false if you want a recipe to be able to craft results of the same general type as the input stack.
+	var/forbid_recursive_crafting = TRUE
 
 	/// What stack types can be used to make this recipe?
 	var/list/craft_stack_types           = list(
@@ -212,6 +214,10 @@
 	. = JOINTEXT(.)
 
 /decl/stack_recipe/proc/can_be_made_from(stack_type, tool_type, decl/material/mat, decl/material/reinf_mat)
+
+	// Shortcut to avoid letting recipes make themselves.
+	if(forbid_recursive_crafting && (ispath(stack_type, result_type) || ispath(result_type, stack_type)))
+		return FALSE
 
 	// Check if they're using the appropriate materials.
 	if(ispath(required_material) && !istype(mat, required_material))
