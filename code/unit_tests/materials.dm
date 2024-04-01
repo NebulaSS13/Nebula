@@ -54,7 +54,8 @@
 
 					// Handle the actual validation.
 					for(var/decl/stack_recipe/recipe as anything in recipes)
-						if(ispath(recipe.result_type, /turf)) // Cannot exist without a loc and doesn't have matter, cannot assess here.
+						var/test_type = recipe.test_result_type || recipe.result_type
+						if(!test_type || ispath(test_type, /turf)) // Cannot exist without a loc and doesn't have matter, cannot assess here.
 							continue
 						var/atom/product = LAZYACCESS(recipe.spawn_result(null, null, 1, material, reinforced, null), 1)
 						var/failed

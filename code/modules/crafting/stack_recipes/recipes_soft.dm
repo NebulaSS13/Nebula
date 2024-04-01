@@ -23,8 +23,10 @@
 	result_type                 = /obj/item/chems/glass/pottery/bowl
 
 /decl/stack_recipe/soft/stack
+	name                        = "brick"
 	name_plural                 = "bricks"
-	result_type                 = /obj/item/stack/material/brick/clay
+	result_type                 = /obj/item/stack/material/brick
+	test_result_type            = /obj/item/stack/material/brick/clay
 
 /decl/stack_recipe/soft/stack/spawn_result(user, location, amount)
 	var/obj/item/stack/S = ..()
@@ -35,9 +37,13 @@
 	return S
 
 /decl/stack_recipe/soft/stack/large_lump
+	name                        = "large lump"
 	name_plural                 = "large lumps"
-	result_type                 = /obj/item/stack/material/lump/large/clay
+	result_type                 = /obj/item/stack/material/lump/large
+	test_result_type            = /obj/item/stack/material/lump/large/clay
 
 /decl/stack_recipe/soft/stack/small_lump
-	name_plural                 = "lumps"
-	result_type                 = /obj/item/stack/material/lump/clay
+	name                        = "small lump"
+	name_plural                 = "small lumps"
+	result_type                 = /obj/item/stack/material/lump
+	test_result_type            = /obj/item/stack/material/lump/clay

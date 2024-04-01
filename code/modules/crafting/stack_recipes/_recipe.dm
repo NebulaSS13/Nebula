@@ -21,8 +21,11 @@
 	var/name_plural
 	/// Used for name grammar, grabbed from product if null.
 	var/gender
-	// Object path to the desired product.
+	/// Object path to the desired product.
 	var/result_type
+	/// Object path to use in unit testing; leave null to use result_type instead.
+	/// Useful for items that require a material to Initialize() correctly as testing tries to use a null material.
+	var/test_result_type
 	/// Amount of matter units needed for this recipe. If null, generates from result matter.
 	var/req_amount
 	/// Time it takes for this recipe to be crafted (not including skill and tool modifiers). If null, generates from product w_class and difficulty.
@@ -200,7 +203,7 @@
 	else if(allow_multiple_craft && !one_per_turf && clamp_sheets <= max_multiplier)
 		var/new_row = 5
 		for(var/i = clamp_sheets to max_multiplier step clamp_sheets)
-			var/producing = i * FLOOR(products_per_sheet)
+			var/producing = FLOOR(i * products_per_sheet)
 			. += "<a href='?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i]'>[producing]x</a>"
 			if(new_row == 0)
 				new_row = 5
@@ -305,7 +308,7 @@
 	if(result_type && isnull(req_amount))
 		req_amount = 0
 		var/list/materials
-		materials = atom_info_repository.get_matter_for(result_type, (ispath(required_material) ? required_material : null))
+		materials = atom_info_repository.get_matter_for((test_result_type || result_type), (ispath(required_material) ? required_material : null))
 		for(var/mat in materials)
 			req_amount += round(materials[mat])
 		req_amount = CEILING(req_amount*crafting_extra_cost_factor)
