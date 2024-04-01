@@ -7,14 +7,6 @@
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/clay
 
-/turf/exterior/clay/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/lump/large/clay = list(3, 2))
-
-/turf/exterior/clay/drop_diggable_resources()
-	if(get_physical_height() >= -(FLUID_DEEP) && prob(15))
-		new /obj/item/rock/flint(src)
-	return ..()
-
 /turf/exterior/clay/flooded
 	flooded = /decl/material/liquid/water
 
@@ -26,11 +18,6 @@
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/soil
-
-/turf/exterior/mud/drop_diggable_resources()
-	if(get_physical_height() > -(FLUID_DEEP))
-		return list(/obj/item/stack/material/lump/large/soil = list(3, 2))
-	return ..()
 
 /turf/exterior/mud/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!reagents?.total_volume)

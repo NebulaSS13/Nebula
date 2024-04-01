@@ -223,13 +223,18 @@
 			T.try_build_turf(user, src)
 			return TRUE
 
-		if(IS_SHOVEL(W) && can_be_dug())
-			if(user.a_intent == I_HELP && can_dig_pit())
+		if(IS_SHOVEL(W))
+
+			if(!can_be_dug(W.material?.hardness))
+				to_chat(user, SPAN_WARNING("\The [src] is too hard to be dug with \the [W]."))
+				return TRUE
+
+			if(user.a_intent == I_HELP && can_dig_pit(W.material?.hardness))
 				try_dig_pit(user, W)
-			else if(can_dig_trench())
+			else if(can_dig_trench(W.material?.hardness))
 				try_dig_trench(user, W)
 			else
-				to_chat(user, SPAN_WARNING("There is nothing to be dug out of \the [src]."))
+				to_chat(user, SPAN_WARNING("You cannot dig anything out of \the [src] with \the [W]."))
 			return TRUE
 
 		if(istype(W, /obj/item/storage))
@@ -730,8 +735,9 @@
 /turf/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/show_turf_contents)
-	if(user && IS_SHOVEL(user.get_active_held_item()))
-		if(can_dig_pit())
+	if(user)
+		var/obj/item/held = user.get_active_held_item()
+		if(istype(held) && IS_SHOVEL(held) && can_dig_pit(held.material?.hardness))
 			LAZYADD(., /decl/interaction_handler/dig/pit)
 
 /decl/interaction_handler/show_turf_contents
@@ -753,7 +759,7 @@
 
 /decl/interaction_handler/dig/trench/invoked(atom/target, mob/user, obj/item/prop)
 	var/turf/T = get_turf(target)
-	if(T.can_dig_trench())
+	if(T.can_dig_trench(prop?.material?.hardness))
 		T.try_dig_trench(user, prop)
 
 /decl/interaction_handler/dig/pit
@@ -761,7 +767,7 @@
 
 /decl/interaction_handler/dig/pit/invoked(atom/target, mob/user, obj/item/prop)
 	var/turf/T = get_turf(target)
-	if(T.can_dig_pit())
+	if(T.can_dig_pit(prop?.material?.hardness))
 		T.try_dig_pit(user, prop)
 
 /turf/proc/handle_universal_decay()

@@ -9,9 +9,6 @@
 	possible_states = 4
 	material = /decl/material/solid/sand
 
-/turf/exterior/sand/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/handful/sand = list(3, 2))
-
 /turf/exterior/sand/drop_diggable_resources()
 	if(get_physical_height() >= -(FLUID_DEEP) && prob(15))
 		new /obj/item/rock/flint(src)
@@ -34,11 +31,9 @@
 /turf/exterior/sand/handle_melting(list/meltable_materials)
 	. = ..()
 	if(icon_state != "glass")
+		set_turf_materials(/decl/material/solid/glass, skip_update = TRUE)
 		SetName("molten silica")
 		desc = "A glassed patch of sand."
 		icon_state = "glass"
 		icon_edge_layer = -1
 		clear_diggable_resources()
-
-/turf/exterior/sand/can_be_dug()
-	return icon_state != "glass" && ..()

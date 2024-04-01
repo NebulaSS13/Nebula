@@ -9,9 +9,6 @@
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/soil
 
-/turf/exterior/dirt/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/lump/large/soil = list(3, 2))
-
 /turf/exterior/dirt/fluid_act(var/datum/reagents/fluids)
 	SHOULD_CALL_PARENT(FALSE)
 	var/turf/new_turf = ChangeTurf(/turf/exterior/mud, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)

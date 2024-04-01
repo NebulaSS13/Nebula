@@ -32,6 +32,15 @@ var/global/list/_tool_properties_cache = list()
 			var/obj/tool_ref   = tool_type
 			to_chat(user, SPAN_WARNING("You need \a [initial(handle_ref.name)] to craft \a [initial(tool_ref.name)]."))
 			return TRUE
+
+		if(W.material?.hardness < MAT_VALUE_SOFT)
+			to_chat(user, SPAN_WARNING("\The [W] is too soft to be used as part of an effective tool."))
+			return TRUE
+
+		if(material?.hardness < MAT_VALUE_SOFT)
+			to_chat(user, SPAN_WARNING("\The [src] is too soft to be used as part of an effective tool."))
+			return TRUE
+
 		if(ismob(loc))
 			var/mob/M = loc
 			M.drop_from_inventory(src)

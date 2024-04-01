@@ -134,9 +134,7 @@
 	desc          = "It's disgustingly soft to the touch. And warm. Too warm."
 	dirt_color    = "#c40031"
 	footstep_type = /decl/footsteps/mud
-
-/turf/exterior/meat/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/meat = list(3, 2))
+	material = /decl/material/solid/organic/meat
 
 /turf/exterior/meat/acid
 	name         = "juices"
