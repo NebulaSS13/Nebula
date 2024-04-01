@@ -12,5 +12,5 @@
 
 /obj/item/clothing/mask/gas/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && user?.get_bodytype()?.name != "skrellian body")
+	if(. && user?.get_species_name() != SPECIES_SKRELL)
 		return FALSE

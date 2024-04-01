@@ -64,7 +64,7 @@
 		clothes = new clothes
 
 		// Check if the clothing has all expected states.
-		var/decl/species/default_species = get_species_by_key(global.using_map.default_species)
+		var/decl/species/default_species = get_species_by_key(SPECIES_HUMAN)
 		var/decl/bodytype/default_bodytype = default_species.default_bodytype
 		var/state_base = default_bodytype.bodytype_category
 
