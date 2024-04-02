@@ -64,7 +64,7 @@
 			continue
 		thing = new thing //should be fine to put it in nullspace...
 		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type] | [thing.storage]\]"
-		bad_tests += test_storage_capacity(thing, get_extension(thing, /datum/storage), bad_msg)
+		bad_tests += test_storage_capacity(thing.storage, bad_msg)
 
 	if(bad_tests)
 		fail("\[[bad_tests]\] Some storage item types were not able to hold their default initial contents.")
@@ -73,29 +73,33 @@
 
 	return 1
 
-/proc/test_storage_capacity(obj/thing, datum/storage/storage, bad_msg)
+/proc/test_storage_capacity(datum/storage/storage, bad_msg)
 	var/bad_tests = 0
 	var/list/contents = storage?.get_contents()
-	if(isnull(storage))
+	var/atom/movable/thing = storage?.holder
+	if(!istype(thing))
+		log_unit_test("[bad_msg] Null or invalid storage holder [istype(thing, /datum) ? thing.type : (thing || "NULL")]. [ascii_reset]")
+	else if(isnull(storage))
 		log_unit_test("[bad_msg] Null storage extension. [ascii_reset]")
 		bad_tests++
 	else if(!isnull(storage.storage_slots) && length(contents) > storage.storage_slots)
 		log_unit_test("[bad_msg] Contains more items than it has slots for ([length(contents)] / [storage.storage_slots]). [ascii_reset]")
 		bad_tests++
 
-	var/total_storage_space = 0
-	for(var/obj/item/I in contents)
-		if(I.w_class > storage.max_w_class)
-			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [storage.max_w_class]). [ascii_reset]")
-			bad_tests++
-		if(I.storage && I.w_class >= thing.w_class)
-			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [thing.w_class]). [ascii_reset]")
-			bad_tests++
-		total_storage_space += I.get_storage_cost()
+	if(thing && storage)
+		var/total_storage_space = 0
+		for(var/obj/item/I in contents)
+			if(I.w_class > storage.max_w_class)
+				log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [storage.max_w_class]). [ascii_reset]")
+				bad_tests++
+			if(I.storage && I.w_class >= thing.get_object_size())
+				log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [thing.get_object_size()]). [ascii_reset]")
+				bad_tests++
+			total_storage_space += I.get_storage_cost()
 
-	if(total_storage_space > storage.max_storage_space)
-		log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [storage.max_storage_space]). [ascii_reset]")
-		bad_tests++
+		if(total_storage_space > storage.max_storage_space)
+			log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [storage.max_storage_space]). [ascii_reset]")
+			bad_tests++
 
 	return bad_tests
 

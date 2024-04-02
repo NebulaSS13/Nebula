@@ -265,10 +265,9 @@
 	var/bad_tests = 0
 
 	for(var/datum/storage/storage in world)
-		var/obj/item/S = storage.holder
-		if(isPlayerLevel(S.z))
-			var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\] \[[S.x] / [S.y] / [S.z]\]"
-			bad_tests += test_storage_capacity(S, storage, bad_msg)
+		if(storage.holder?.z && isPlayerLevel(storage.holder.z))
+			var/bad_msg = "[ascii_red]--------------- [storage.holder.name] \[[storage.holder.type]\] \[[storage.holder.x] / [storage.holder.y] / [storage.holder.z]\]"
+			bad_tests += test_storage_capacity(storage, bad_msg)
 
 	if(bad_tests)
 		fail("\[[bad_tests]\] Some on-map storage items were not able to hold their initial contents.")
