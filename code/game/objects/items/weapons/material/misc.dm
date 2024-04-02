@@ -108,7 +108,7 @@
 	desc = "A fine example of a machete, with a polished blade, wooden handle and a leather cord loop."
 	icon = 'icons/obj/items/weapon/machetes/machete_dx.dmi'
 
-/obj/item/minihoe // -- Numbers
+/obj/item/minihoe
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."
 	icon = 'icons/obj/items/tool/hoe.dmi'
@@ -120,6 +120,10 @@
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+
+/obj/item/minihoe/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_HOE = TOOL_QUALITY_DEFAULT))
 
 /obj/item/minihoe/unbreakable
 	max_health = ITEM_HEALTH_NO_DAMAGE

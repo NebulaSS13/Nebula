@@ -11,6 +11,7 @@
 #define TOOL_PICK           /decl/tool_archetype/pick
 #define TOOL_HAMMER         /decl/tool_archetype/hammer
 #define TOOL_KNIFE          /decl/tool_archetype/knife
+#define TOOL_HOE            /decl/tool_archetype/hoe
 
 // Misc tools.
 #define TOOL_PEN            /decl/tool_archetype/pen
@@ -58,6 +59,7 @@
 #define IS_PICK(A)        IS_TOOL(A, TOOL_PICK)
 #define IS_KNIFE(A)       IS_TOOL(A, TOOL_KNIFE)
 #define IS_HAMMER(A)      IS_TOOL(A, TOOL_HAMMER)
+#define IS_HOE(A)         IS_TOOL(A, TOOL_HOE)
 
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)

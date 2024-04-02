@@ -223,6 +223,10 @@
 			T.try_build_turf(user, src)
 			return TRUE
 
+		if(IS_HOE(W) && can_dig_farm(W.material?.hardness))
+			try_dig_farm(user, W)
+			return TRUE
+
 		if(IS_SHOVEL(W))
 
 			if(!can_be_dug(W.material?.hardness))

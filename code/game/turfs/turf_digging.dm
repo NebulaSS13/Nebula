@@ -23,6 +23,7 @@
 			LAZYADD(., new resource_type(src, get_material_type()))
 	clear_diggable_resources()
 
+// Procs for digging pits.
 /turf/proc/can_dig_pit(tool_hardness = MAT_VALUE_MALLEABLE)
 	return can_be_dug(tool_hardness) && !(locate(/obj/structure/pit) in src)
 
@@ -34,6 +35,23 @@
 /turf/proc/dig_pit(tool_hardness = MAT_VALUE_MALLEABLE)
 	return can_dig_pit(tool_hardness) && new /obj/structure/pit(src)
 
+// Procs for digging farms.
+/turf/proc/can_dig_farm(tool_hardness = MAT_VALUE_MALLEABLE)
+	// TODO: check that the turf can actually support plants.
+	return can_be_dug(tool_hardness) && !(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in src)
+
+/turf/proc/try_dig_farm(mob/user, obj/item/tool, using_tool = TOOL_HOE)
+	var/decl/material/material = get_material()
+	if(!material?.tillable)
+		return
+	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 5 SECONDS, set_cooldown = TRUE))
+		return dig_farm(tool?.material?.hardness)
+	return null
+
+/turf/proc/dig_farm(tool_hardness = MAT_VALUE_MALLEABLE)
+	return can_dig_farm(tool_hardness) && new /obj/machinery/portable_atmospherics/hydroponics/soil(src)
+
+// Proc for digging trenches.
 /turf/proc/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
 	return FALSE
 

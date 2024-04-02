@@ -13,10 +13,13 @@
 	drop_diggable_resources()
 	ChangeTurf(/turf/floor/natural/dirt, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
 
-/turf/floor/natural/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
-	return !density && !is_open() && material && material.hardness <= tool_hardness && material.hardness <= max_diggable_hardness
+/turf/exterior/dig_farm()
+	if(is_fundament_turf)
+		return ..()
+	drop_diggable_resources()
+	ChangeTurf(/turf/exterior/dirt, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
 
-/turf/floor/natural/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
+/turf/exterior/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
 	if(istype(material) && (!material || material.hardness > tool_hardness || material.hardness > max_diggable_hardness))
 		return
 	if(is_fundament_turf)

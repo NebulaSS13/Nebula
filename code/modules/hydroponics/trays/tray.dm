@@ -462,10 +462,11 @@
 
 		plant_seed(user, O)
 
-	else if (istype(O, /obj/item/minihoe))  // The minihoe
+	else if (IS_HOE(O))
 
 		if(weedlevel > 0)
-			user.visible_message("<span class='notice'>[user] starts uprooting the weeds.</span>", "<span class='notice'>You remove the weeds from the [src].</span>")
+			if(!O.do_tool_interaction(TOOL_HOE, user, src, 2 SECONDS, start_message = "uprooting the weeds in", success_message = "weeding") || weedlevel <= 0 || QDELETED(src))
+				return TRUE
 			weedlevel = 0
 			update_icon()
 			if(seed)
@@ -474,7 +475,8 @@
 					plant_health -= rand(40,60)
 					check_plant_health()
 		else
-			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
+			to_chat(user, SPAN_WARNING("This plot is completely devoid of weeds. It doesn't need uprooting."))
+		return TRUE
 
 	else if (istype(O, /obj/item/storage/plants))
 

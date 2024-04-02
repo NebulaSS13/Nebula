@@ -267,6 +267,7 @@
 	integrity = 10
 	dirtiness = 30
 	dug_drop_type = /obj/item/stack/material/lump/large
+	tillable = TRUE
 	can_backfill_turf_type = list(
 		/turf/floor/natural/mud,
 		/turf/floor/natural/dirt

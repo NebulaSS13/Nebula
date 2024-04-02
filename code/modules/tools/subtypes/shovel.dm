@@ -13,7 +13,10 @@
 	handle_material    = /decl/material/solid/organic/wood
 
 /obj/item/tool/shovel/get_initial_tool_qualities()
-	var/static/list/tool_qualities = list(TOOL_SHOVEL = TOOL_QUALITY_DEFAULT)
+	var/static/list/tool_qualities = list(
+		TOOL_SHOVEL = TOOL_QUALITY_DEFAULT,
+		TOOL_HOE    = TOOL_QUALITY_BAD
+	)
 	return tool_qualities
 
 /obj/item/tool/spade
@@ -35,5 +38,9 @@
 	return null
 
 /obj/item/tool/spade/get_initial_tool_qualities()
-	var/static/list/tool_qualities = list(TOOL_SHOVEL = TOOL_QUALITY_BAD)
+	var/static/list/tool_qualities = list(
+		TOOL_SHOVEL = TOOL_QUALITY_BAD,
+		TOOL_HOE    = TOOL_QUALITY_MEDIOCRE
+
+	)
 	return tool_qualities
