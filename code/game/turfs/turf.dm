@@ -249,12 +249,12 @@
 				return TRUE
 
 			// Let picks dig out hard turfs, but not dig pits.
-			if(!can_be_dug(W.material?.hardness, max_diggable_hardness = INFINITY))
+			if(!can_be_dug(W.material?.hardness, using_tool = TOOL_PICK))
 				to_chat(user, SPAN_WARNING("\The [src] is too hard to be excavated with \the [W]."))
 				return TRUE
 
-			if(can_dig_trench(W.material?.hardness, max_diggable_hardness = INFINITY))
-				try_dig_trench(user, W, max_diggable_hardness = INFINITY, using_tool = TOOL_PICK)
+			if(can_dig_trench(W.material?.hardness, using_tool = TOOL_PICK))
+				try_dig_trench(user, W, using_tool = TOOL_PICK)
 			else
 				to_chat(user, SPAN_WARNING("You cannot excavate \the [src] with \the [W]."))
 
@@ -756,13 +756,31 @@
 			user.dropInto(src)
 			LAZYREMOVE(skip_height_fall_for, weakref(user))
 
+/turf/proc/handle_universal_decay()
+	return
+
+/turf/proc/get_soil_color()
+	return null
+
+/turf/proc/get_fishing_result(obj/item/chems/food/bait)
+	var/area/A = get_area(src)
+	return A.get_fishing_result(src, bait)
+
 /turf/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/show_turf_contents)
 	if(user)
 		var/obj/item/held = user.get_active_held_item()
-		if(istype(held) && IS_SHOVEL(held) && can_dig_pit(held.material?.hardness))
-			LAZYADD(., /decl/interaction_handler/dig/pit)
+		if(istype(held))
+			if(IS_SHOVEL(held))
+				if(can_dig_pit(held.material?.hardness))
+					LAZYDISTINCTADD(., /decl/interaction_handler/dig/pit)
+				if(can_dig_trench(held.material?.hardness))
+					LAZYDISTINCTADD(., /decl/interaction_handler/dig/trench)
+			if(IS_PICK(held) && can_dig_trench(held.material?.hardness, using_tool = TOOL_PICK))
+				LAZYDISTINCTADD(., /decl/interaction_handler/dig/trench)
+			if(IS_HOE(held) && can_dig_farm(held.material?.hardness))
+				LAZYDISTINCTADD(., /decl/interaction_handler/dig/farm)
 
 /decl/interaction_handler/show_turf_contents
 	name = "Show Turf Contents"
@@ -783,8 +801,13 @@
 
 /decl/interaction_handler/dig/trench/invoked(atom/target, mob/user, obj/item/prop)
 	var/turf/T = get_turf(target)
-	if(T.can_dig_trench(prop?.material?.hardness))
-		T.try_dig_trench(user, prop)
+	if(IS_SHOVEL(prop))
+		if(T.can_dig_trench(prop?.material?.hardness))
+			T.try_dig_trench(user, prop)
+	else if(IS_PICK(prop))
+		var/decl/material/material = T.get_material()
+		if(material?.hardness > MAT_VALUE_FLEXIBLE && T.can_dig_trench(prop?.material?.hardness, using_tool = TOOL_PICK))
+			T.try_dig_trench(user, prop, using_tool = TOOL_PICK)
 
 /decl/interaction_handler/dig/pit
 	name = "Dig Pit"
@@ -794,12 +817,10 @@
 	if(T.can_dig_pit(prop?.material?.hardness))
 		T.try_dig_pit(user, prop)
 
-/turf/proc/handle_universal_decay()
-	return
+/decl/interaction_handler/dig/farm
+	name = "Dig Farm Plot"
 
-/turf/proc/get_soil_color()
-	return null
-
-/turf/proc/get_fishing_result(obj/item/chems/food/bait)
-	var/area/A = get_area(src)
-	return A.get_fishing_result(src, bait)
+/decl/interaction_handler/dig/farm/invoked(atom/target, mob/user, obj/item/prop)
+	var/turf/T = get_turf(target)
+	if(T.can_dig_farm(prop?.material?.hardness))
+		T.try_dig_farm(user, prop)

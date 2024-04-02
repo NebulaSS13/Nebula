@@ -1,9 +1,23 @@
 /obj/machinery/portable_atmospherics/hydroponics/Process()
 
-	// Handle nearby smoke if any.
-	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
-		if(smoke.reagents.total_volume)
-			smoke.reagents.trans_to_obj(src, 5, copy = 1)
+	var/turf/T = get_turf(src)
+	if(istype(T) && !closed_system)
+
+		var/space_left = reagents ? (reagents.maximum_volume - reagents.total_volume) : 0
+		if(space_left > 0)
+
+			// Handle nearby smoke if any.
+			for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
+				if(smoke.reagents.total_volume)
+					smoke.reagents.trans_to_obj(src, 5, copy = 1)
+
+			// Handle environmental effects like weather and flooding.
+			if(T.reagents?.total_volume && reagents.total_volume < reagents.maximum_volume)
+				T.reagents.trans_to_obj(src, min(space_left, min(T.reagents.total_volume, rand(5,10))))
+			if(istype(T.weather?.weather_system?.current_state, /decl/state/weather/rain))
+				var/decl/state/weather/rain/rain = T.weather.weather_system.current_state
+				if(rain.is_liquid)
+					reagents.add_reagent(T.weather.water_material, min(space_left, rand(3,5)))
 
 	//Do this even if we're not ready for a plant cycle.
 	process_reagents()
@@ -133,9 +147,9 @@
 	if(!closed_system && \
 	 seed.get_trait(TRAIT_SPREAD) == 2 && \
 	 2 * age >= seed.get_trait(TRAIT_MATURATION) && \
-	 !(locate(/obj/effect/vine) in get_turf(src)) && \
+	 !(locate(/obj/effect/vine) in T) && \
 	 prob(2 * seed.get_trait(TRAIT_POTENCY)))
-		new /obj/effect/vine(get_turf(src), seed)
+		new /obj/effect/vine(T, seed)
 
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
 		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER
