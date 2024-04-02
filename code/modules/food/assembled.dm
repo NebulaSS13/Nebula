@@ -207,7 +207,7 @@
 
 /obj/item/chems/food/fries/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheesyfries/raw
+		/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheesyfries/uncooked
 	)
 	return combined_food_products
 
@@ -218,4 +218,4 @@
 /obj/item/chems/food/berryclafoutis/raw/cooked_food    = FOOD_RAW
 /obj/item/chems/food/plump_pie/raw/cooked_food         = FOOD_RAW
 /obj/item/chems/food/loadedbakedpotato/raw/cooked_food = FOOD_RAW
-/obj/item/chems/food/cheesyfries/raw/cooked_food       = FOOD_RAW
+/obj/item/chems/food/cheesyfries/uncooked/cooked_food  = FOOD_PREPARED // No penalty for eating it, but nicer cooked.

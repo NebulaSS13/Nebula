@@ -334,5 +334,5 @@
 	items  = list(/obj/item/chems/food/loadedbakedpotato/raw)
 	result = /obj/item/chems/food/loadedbakedpotato
 /decl/recipe/baked/cheesyfries
-	items  = list(/obj/item/chems/food/cheesyfries/raw)
+	items  = list(/obj/item/chems/food/cheesyfries/uncooked)
 	result = /obj/item/chems/food/cheesyfries
