@@ -7,6 +7,11 @@
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/clay
 
+/turf/exterior/clay/drop_diggable_resources()
+	if(get_physical_height() >= -(FLUID_DEEP) && prob(15))
+		new /obj/item/rock/flint(src)
+	return ..()
+
 /turf/exterior/clay/flooded
 	flooded = /decl/material/liquid/water
 
