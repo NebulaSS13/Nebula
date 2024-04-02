@@ -281,7 +281,12 @@
 			origin_turf.visible_message(SPAN_DANGER("\The [thrown] splatters against [target]!"))
 		splatter(origin_turf,thrown)
 
-/datum/seed/proc/handle_plant_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
+/datum/seed/proc/handle_plant_environment(var/obj/machinery/portable_atmospherics/hydroponics/holder, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
+
+	var/growth_rate = 1
+	var/turf/current_turf = isturf(holder) ? holder : get_turf(holder)
+	if(istype(holder) && !holder.mechanical && current_turf)
+		growth_rate = current_turf.get_plant_growth_rate()
 
 	var/health_change = 0
 	// Handle gas consumption.
@@ -296,15 +301,15 @@
 				missing_gas++
 
 		if(missing_gas > 0)
-			health_change += missing_gas * HYDRO_SPEED_MULTIPLIER
+			health_change += missing_gas * growth_rate
 
 	// Process it.
 	var/pressure = environment.return_pressure()
 	if(pressure < get_trait(TRAIT_LOWKPA_TOLERANCE)|| pressure > get_trait(TRAIT_HIGHKPA_TOLERANCE))
-		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+		health_change += rand(1,3) * growth_rate
 
 	if(abs(environment.temperature - get_trait(TRAIT_IDEAL_HEAT)) > get_trait(TRAIT_HEAT_TOLERANCE))
-		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+		health_change += rand(1,3) * growth_rate
 
 	// Handle gas production.
 	if(exude_gasses && exude_gasses.len && !check_only)
@@ -327,7 +332,7 @@
 		light_supplied = current_turf.get_lumcount() * 5
 	if(light_supplied)
 		if(abs(light_supplied - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
-			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+			health_change += rand(1,3) * growth_rate
 
 	for(var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
 		if(smoke.reagents.has_reagent(/decl/material/liquid/weedkiller))

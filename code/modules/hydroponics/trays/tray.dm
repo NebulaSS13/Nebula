@@ -203,7 +203,7 @@
 	dead = 1
 	mutation_level = 0
 	harvest = 0
-	weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
+	weedlevel += 1
 	pestlevel = 0
 
 //Process reagents being input into the tray.

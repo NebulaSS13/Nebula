@@ -759,6 +759,9 @@
 /turf/proc/handle_universal_decay()
 	return
 
+/turf/proc/get_plant_growth_rate()
+	return 0
+
 /turf/proc/get_soil_color()
 	return null
 

@@ -88,9 +88,6 @@
 #define EVENT_LEVEL_MODERATE 2
 #define EVENT_LEVEL_MAJOR    3
 
-//General-purpose life speed define for plants.
-#define HYDRO_SPEED_MULTIPLIER 1
-
 //Area flags, possibly more to come
 #define AREA_FLAG_RAD_SHIELDED         BITFLAG(1)  // Shielded from radiation, clearly.
 #define AREA_FLAG_EXTERNAL             BITFLAG(2)  // External as in exposed to space, not outside in a nice, green, forest.

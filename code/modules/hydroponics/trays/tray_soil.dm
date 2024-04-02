@@ -8,8 +8,83 @@
 	mechanical = 0
 	tray_light = 0
 	matter = null
+	pixel_z = 8
+	color = "#7c5e42"
+	var/obj/item/stack/material/brick/reinforced_with
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/Initialize()
+
+	. = ..()
+
+	var/turf/exterior/E = get_turf(src)
+	if(istype(E))
+		color = E.dirt_color
+
+	pixel_x = rand(-3,3)
+	pixel_y = rand(-3,3)
+	update_icon()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/physically_destroyed()
+	if(reinforced_with)
+		reinforced_with.dropInto(loc)
+		reinforced_with = null
+	return ..()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/Destroy()
+	var/oldloc = loc
+	QDEL_NULL(reinforced_with)
+	. = ..()
+	if(oldloc)
+		for(var/obj/machinery/portable_atmospherics/hydroponics/soil/neighbor in orange(1, oldloc))
+			neighbor.update_icon()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/Crossed(atom/movable/AM)
+	. = ..()
+	if(!ismob(AM) || !seed || dead)
+		return
+	var/mob/walker = AM
+	if(walker.mob_size < MOB_SIZE_MEDIUM)
+		return
+	if(MOVING_DELIBERATELY(walker) && prob(90))
+		return
+	if(prob(25))
+		return
+	to_chat(walker, SPAN_DANGER("You trample \the [seed]!"))
+	plant_health = max(0, plant_health - rand(3,5))
+	check_plant_health()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/Process()
+	var/turf/T = get_turf(src)
+	if(istype(T) && !closed_system)
+		var/space_left = reagents ? (reagents.maximum_volume - reagents.total_volume) : 0
+		if(space_left > 0 && reagents.total_volume < 10)
+			for(var/step_dir in global.alldirs)
+				var/turf/neighbor = get_step_resolving_mimic(src, step_dir)
+				if(neighbor != loc && neighbor?.reagents?.total_volume && Adjacent(neighbor))
+					neighbor.reagents.trans_to_obj(src, rand(2,3))
+	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O, var/mob/user)
+
+	if(istype(O, /obj/item/stack/material/brick))
+		if(reinforced_with)
+			to_chat(user, SPAN_WARNING("\The [src] has already been fenced with bricks."))
+			return TRUE
+		var/obj/item/stack/material/brick/bricks = O
+		if(bricks.get_amount() < 4)
+			to_chat(user, SPAN_WARNING("You need at least four bricks to fence off \the [src]."))
+			return TRUE
+
+		var/obj/item/stack/material/brick/new_bricks = bricks.split(5)
+		if(!QDELETED(new_bricks) && istype(new_bricks) && new_bricks.get_amount() >= 4)
+			reinforced_with = new_bricks
+			to_chat(user, SPAN_NOTICE("You fence \the [src] off with \the [reinforced_with]."))
+			density = TRUE
+			update_icon()
+			for(var/obj/machinery/portable_atmospherics/hydroponics/soil/neighbor in orange(1, loc))
+				neighbor.update_icon()
+		return TRUE
+
 	if(!seed && user.a_intent == I_HURT && (IS_SHOVEL(O) || IS_HOE(O)))
 		var/use_tool = O.get_tool_quality(TOOL_SHOVEL) > O.get_tool_quality(TOOL_HOE) ? TOOL_SHOVEL : TOOL_HOE
 		if(use_tool)
@@ -19,6 +94,21 @@
 	if(istype(O, /obj/item/tank))
 		return TRUE
 	return ..()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/on_update_icon()
+	. = ..()
+	if(reinforced_with)
+		for(var/step_dir in global.cardinal)
+			var/obj/machinery/portable_atmospherics/hydroponics/soil/neighbor = locate() in get_step_resolving_mimic(loc, step_dir)
+			if(istype(neighbor) && neighbor.reinforced_with)
+				continue
+			var/image/I = image(icon, "bricks", dir = step_dir)
+			I.color = reinforced_with.get_color()
+			I.appearance_flags |= RESET_COLOR
+			I.pixel_x = -(pixel_x)
+			I.pixel_y = -(pixel_y)
+			I.pixel_z = -(pixel_z)
+			add_overlay(I)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/Initialize()
 	. = ..()
