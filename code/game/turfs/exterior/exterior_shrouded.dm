@@ -4,6 +4,8 @@
 	desc = "Sand that has been packed in to solid earth."
 	dirt_color = "#3e3960"
 	possible_states = 8
+	material = /decl/material/solid/soil
+	is_fundament_turf = TRUE
 
 /turf/exterior/shrouded/tar
 	name = "tar"

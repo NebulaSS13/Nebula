@@ -92,10 +92,6 @@
 	if(N && !cannot_interact(usr))
 		amount_per_transfer_from_this = N
 
-
-/obj/item/chems/attack_self(mob/user)
-	return
-
 /obj/item/chems/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 

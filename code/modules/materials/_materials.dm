@@ -284,6 +284,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// If set to a material type, stacks of this material will be able to be tanned on a drying rack after being wetted to convert them to tans_to.
 	var/tans_to
 
+	/// What form does this take if dug out of the ground, if any?
+	var/dug_drop_type
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))

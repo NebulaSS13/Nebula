@@ -39,7 +39,7 @@
 /decl/stack_recipe/strut/bed
 	result_type                 = /obj/structure/bed
 	required_integrity          = 50
-	required_hardness           = MAT_VALUE_FLEXIBLE + 10
+	required_min_hardness           = MAT_VALUE_FLEXIBLE + 10
 
 /decl/stack_recipe/strut/machine
 	result_type                 = /obj/machinery/constructable_frame/machine_frame

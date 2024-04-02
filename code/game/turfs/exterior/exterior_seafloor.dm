@@ -3,10 +3,9 @@
 	desc = "A thick layer of silt and debris from above."
 	icon = 'icons/turf/exterior/seafloor.dmi'
 	icon_edge_layer = EXT_EDGE_SEAFLOOR
+	material = /decl/material/solid/sand
+	is_fundament_turf = TRUE
 	var/detail_decal
-
-/turf/exterior/seafloor/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/ore/handful/sand = list(3, 2))
 
 /turf/exterior/seafloor/flooded
 	flooded = /decl/material/liquid/water

@@ -2,7 +2,7 @@
 /decl/stack_recipe/coin
 	name              = "antique coin"
 	result_type       = /obj/item/coin
-	required_hardness = MAT_VALUE_FLEXIBLE
+	required_min_hardness = MAT_VALUE_FLEXIBLE
 	category          = "antique coins"
 	abstract_type     = /decl/stack_recipe/coin
 	var/currency

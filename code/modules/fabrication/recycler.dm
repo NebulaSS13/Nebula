@@ -154,33 +154,14 @@
 		LAZYADD(., hopper.get_contained_external_atoms())
 		LAZYREMOVE(., hopper)
 
-/obj/item/scrap_material
-	name = "scraps"
-	desc = "Tailings and scraps left over from the recycling process."
-	icon = 'icons/obj/melted_thing.dmi'
-	icon_state = ICON_STATE_WORLD
-
 /obj/machinery/recycler/proc/dump_trace_material(atom/forced_loc = loc)
 
 	if(!length(trace_matter))
 		return
 
-	var/highest_mat
-	var/last_highest = 0
-	var/list/mat_names = list()
-	for(var/mat in trace_matter)
-		var/decl/material/material = GET_DECL(mat)
-		mat_names += material.solid_name
-		if(isnull(highest_mat) || trace_matter[mat] > last_highest)
-			highest_mat = mat
-			last_highest = trace_matter[mat]
-
-	if(highest_mat)
-		var/obj/item/scrap_material/remains = new(forced_loc, highest_mat)
-		remains.matter = trace_matter?.Copy()
-		remains.name = "[english_list(mat_names)] scraps"
-		remains.color = remains.material.color
-
+	var/obj/item/debris/scraps/remains = new(forced_loc)
+	remains.matter = trace_matter?.Copy()
+	remains.update_primary_material()
 	trace_matter.Cut()
 
 /obj/machinery/recycler/dump_contents(atom/forced_loc = loc, mob/user)

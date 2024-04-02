@@ -11,16 +11,12 @@
 		. = TRUE
 
 	if(.)
-		if(material)
-			name       = "[material.adjective_name] [initial(name)]"
-			base_color = material.color
-		else
-			name       = initial(name)
-			base_color = initial(base_color)
-		dirt_color = base_color
-		color = base_color
+		update_from_material()
 		if(!skip_update)
 			queue_icon_update()
+
+/turf/exterior/proc/update_from_material()
+	return
 
 /turf/exterior/get_material()
 	return material

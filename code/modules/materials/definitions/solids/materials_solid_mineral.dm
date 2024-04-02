@@ -223,12 +223,13 @@
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
 	value = 0.8
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_MALLEABLE
 	integrity = 10
 	dirtiness = 15
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)
+	dug_drop_type = /obj/item/stack/material/ore/handful
 	default_solid_form = /obj/item/stack/material/ore/handful
 	can_backfill_turf_type = /turf/exterior/sand
 
@@ -243,9 +244,10 @@
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
 	value = 0.8
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_MALLEABLE
 	integrity = 10
 	dirtiness = 10
+	dug_drop_type = /obj/item/stack/material/lump/large
 	default_solid_form = /obj/item/stack/material/lump/large
 	bakes_into_material = /decl/material/solid/stone/pottery
 	melting_point = null // Clay is already almost a liquid...
@@ -261,9 +263,10 @@
 	value = 0
 	default_solid_form = /obj/item/stack/material/lump/large
 	melting_point = null
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_MALLEABLE
 	integrity = 10
 	dirtiness = 30
+	dug_drop_type = /obj/item/stack/material/lump/large
 	can_backfill_turf_type = list(
 		/turf/exterior/mud,
 		/turf/exterior/dirt

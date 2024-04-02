@@ -535,3 +535,5 @@
 		appearance_flags &= ~remove_flags
 	return old_appearance != appearance_flags
 
+/atom/movable/proc/end_throw()
+	throwing = null

@@ -76,7 +76,7 @@
 				. = SUBSTANCE_TAKEN_SOME
 
 /obj/machinery/fabricator/proc/can_ingest(var/obj/item/thing)
-	if(istype(thing, /obj/item/melted_thing) || istype(thing, /obj/item/scrap_material))
+	if(istype(thing, /obj/item/debris))
 		return TRUE
 	var/obj/item/stack/material/stack = thing
 	return istype(stack) && !stack.reinf_material

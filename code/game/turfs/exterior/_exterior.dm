@@ -35,6 +35,9 @@
 	else
 		color = null
 
+	if(material)
+		set_turf_materials(material, skip_update = no_update_icon)
+
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
 

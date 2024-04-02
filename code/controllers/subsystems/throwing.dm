@@ -14,7 +14,6 @@ SUBSYSTEM_DEF(throwing)
 /datum/controller/subsystem/throwing/stat_entry()
 	..("P:[processing.len]")
 
-
 /datum/controller/subsystem/throwing/fire(resumed = 0)
 	if (!resumed)
 		src.currentrun = processing.Copy()
@@ -34,7 +33,7 @@ SUBSYSTEM_DEF(throwing)
 			continue
 		if (QDELETED(TT))
 			if(!QDELETED(AM))
-				AM.throwing = null
+				AM.end_throw()
 				processing -= AM
 			if (MC_TICK_CHECK)
 				return
@@ -104,7 +103,7 @@ SUBSYSTEM_DEF(throwing)
 
 /datum/thrownthing/Destroy()
 	SSthrowing.processing -= thrownthing
-	thrownthing.throwing = null
+	thrownthing.end_throw()
 	thrownthing = null
 	target = null
 	thrower = null
@@ -193,6 +192,7 @@ SUBSYSTEM_DEF(throwing)
 	if(!QDELETED(thrownthing))
 		thrownthing.fall()
 
+	thrownthing.end_throw()
 	qdel(src)
 
 /datum/thrownthing/proc/hit_atom(atom/A)

@@ -21,8 +21,11 @@
 	var/name_plural
 	/// Used for name grammar, grabbed from product if null.
 	var/gender
-	// Object path to the desired product.
+	/// Object path to the desired product.
 	var/result_type
+	/// Object path to use in unit testing; leave null to use result_type instead.
+	/// Useful for items that require a material to Initialize() correctly as testing tries to use a null material.
+	var/test_result_type
 	/// Amount of matter units needed for this recipe. If null, generates from result matter.
 	var/req_amount
 	/// Time it takes for this recipe to be crafted (not including skill and tool modifiers). If null, generates from product w_class and difficulty.
@@ -78,7 +81,9 @@
 	/// Minimum material integrity value.
 	var/required_integrity
 	/// Minimum material hardness value.
-	var/required_hardness
+	var/required_min_hardness
+	/// Maximum material hardness value.
+	var/required_max_hardness
 	/// Maximum material opacity value.
 	var/required_max_opacity
 
@@ -133,8 +138,10 @@
 			. += "null required material but non-null integrity value"
 		if(!isnull(required_max_opacity))
 			. += "null required material but non-null max opacity value"
-		if(!isnull(required_hardness))
-			. += "null required material but non-null hardness value"
+		if(!isnull(required_min_hardness))
+			. += "null required material but non-null min hardness value"
+		if(!isnull(required_max_hardness))
+			. += "null required material but non-null max hardness value"
 
 	if(recipe_skill && difficulty > 0)
 		var/decl/hierarchy/skill/used_skill = GET_DECL(recipe_skill)
@@ -196,7 +203,7 @@
 	else if(allow_multiple_craft && !one_per_turf && clamp_sheets <= max_multiplier)
 		var/new_row = 5
 		for(var/i = clamp_sheets to max_multiplier step clamp_sheets)
-			var/producing = i * FLOOR(products_per_sheet)
+			var/producing = FLOOR(i * products_per_sheet)
 			. += "<a href='?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i]'>[producing]x</a>"
 			if(new_row == 0)
 				new_row = 5
@@ -212,6 +219,12 @@
 	. = JOINTEXT(.)
 
 /decl/stack_recipe/proc/can_be_made_from(stack_type, tool_type, decl/material/mat, decl/material/reinf_mat)
+
+	// Early checks to avoid letting recipes make themselves.
+	if(ispath(result_type, /obj/item/stack))
+		var/obj/item/stack/result_ref = result_type
+		if(stack_type == initial(result_ref.crafting_stack_type))
+			return FALSE
 
 	// Check if they're using the appropriate materials.
 	if(ispath(required_material) && !istype(mat, required_material))
@@ -234,7 +247,9 @@
 			return FALSE
 		if(!isnull(required_integrity) && mat.integrity < required_integrity)
 			return FALSE
-		if(!isnull(required_hardness) && mat.hardness < required_hardness)
+		if(!isnull(required_min_hardness) && mat.hardness < required_min_hardness)
+			return FALSE
+		if(!isnull(required_max_hardness) && mat.hardness > required_max_hardness)
 			return FALSE
 		if(!isnull(required_max_opacity) && mat.opacity > required_max_opacity)
 			return FALSE
@@ -293,7 +308,7 @@
 	if(result_type && isnull(req_amount))
 		req_amount = 0
 		var/list/materials
-		materials = atom_info_repository.get_matter_for(result_type, (ispath(required_material) ? required_material : null))
+		materials = atom_info_repository.get_matter_for((test_result_type || result_type), (ispath(required_material) ? required_material : null))
 		for(var/mat in materials)
 			req_amount += round(materials[mat])
 		req_amount = CEILING(req_amount*crafting_extra_cost_factor)

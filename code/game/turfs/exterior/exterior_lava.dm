@@ -4,6 +4,7 @@
 	movement_delay = 4
 	dirt_color = COLOR_GRAY20
 	footstep_type = /decl/footsteps/lava
+	is_fundament_turf = TRUE
 	var/list/victims
 
 /turf/exterior/lava/Initialize()

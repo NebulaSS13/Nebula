@@ -2,14 +2,23 @@
 	name = "rock floor"
 	icon = 'icons/turf/exterior/rock.dmi'
 	icon_edge_layer = EXT_EDGE_VOLCANIC
-
-/turf/exterior/rock/can_be_dug()
-	return FALSE
+	is_fundament_turf = TRUE
 
 /turf/exterior/rock/Initialize(mapload, no_update_icon)
+	material = material || SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone
 	. = ..()
-	set_turf_materials(material || SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone, skip_update = no_update_icon)
+
+/turf/exterior/rock/update_from_material()
+	if(istype(material))
+		name       = "[material.adjective_name] [initial(name)]"
+		base_color = material.color
+	else
+		name       = initial(name)
+		base_color = initial(base_color)
+	dirt_color = base_color
+	color = base_color
 
 /turf/exterior/rock/volcanic
 	name = "volcanic floor"
 	strata_override = /decl/strata/igneous
+	material = /decl/material/solid/stone/basalt

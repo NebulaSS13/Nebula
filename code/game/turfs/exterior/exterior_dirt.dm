@@ -7,9 +7,7 @@
 	base_color = "#41311b"
 	footstep_type = /decl/footsteps/asteroid
 	is_fundament_turf = TRUE
-
-/turf/exterior/dirt/get_diggable_resources()
-	return (get_physical_height() <= -(FLUID_DEEP)) ? null : list(/obj/item/stack/material/lump/large/soil = list(3, 2))
+	material = /decl/material/solid/soil
 
 /turf/exterior/dirt/fluid_act(var/datum/reagents/fluids)
 	SHOULD_CALL_PARENT(FALSE)
