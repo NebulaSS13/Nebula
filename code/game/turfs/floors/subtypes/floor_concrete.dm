@@ -4,6 +4,7 @@
 	icon = 'icons/turf/flooring/concrete.dmi'
 	icon_state = "inset"
 	initial_flooring = null
+//	material = /decl/material/solid/stone/concrete
 
 	base_name = "concrete"
 	base_desc = "A flat expanse of artificial stone-like artificial material."

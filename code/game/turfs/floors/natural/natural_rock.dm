@@ -8,7 +8,7 @@
 	material = material || SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone
 	. = ..()
 
-/turf/exterior/rock/update_from_material()
+/turf/floor/natural/rock/update_from_material()
 	if(istype(material))
 		name       = "[material.adjective_name] [initial(name)]"
 		base_color = material.color
@@ -18,7 +18,7 @@
 	dirt_color = base_color
 	color = base_color
 
-/turf/exterior/rock/volcanic
+/turf/floor/natural/rock/volcanic
 	name = "volcanic floor"
 	strata_override = /decl/strata/igneous
 	material = /decl/material/solid/stone/basalt

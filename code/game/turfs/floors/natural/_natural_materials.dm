@@ -15,12 +15,8 @@
 		if(!skip_update)
 			queue_icon_update()
 
-<<<<<<<< HEAD:code/game/turfs/exterior/_exterior_material.dm
-/turf/exterior/proc/update_from_material()
+/turf/floor/natural/proc/update_from_material()
 	return
 
-/turf/exterior/get_material()
-========
 /turf/floor/natural/get_material()
->>>>>>>> 09a51deb017 (Repathing /turf/exterior to /turf/floor/natural.):code/game/turfs/floors/floor_natural_materials.dm
 	return material
