@@ -15,7 +15,7 @@
 		/obj/item/scanner/plant,
 		/obj/item/seeds,
 		/obj/item/chems/glass/bottle,
-		/obj/item/minihoe
+		/obj/item/tool/hoe/mini
 	)
 
 //Captain

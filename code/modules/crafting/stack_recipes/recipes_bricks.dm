@@ -28,9 +28,6 @@
 	difficulty                 = MAT_VALUE_HARD_DIY
 	category                   = "furniture"
 
-/decl/stack_recipe/bricks/furniture/planting_bed/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
-	return list(new result_type(location))
-
 /decl/stack_recipe/bricks/fountain
 	result_type                = /obj/structure/fountain/mundane
 	one_per_turf               = TRUE

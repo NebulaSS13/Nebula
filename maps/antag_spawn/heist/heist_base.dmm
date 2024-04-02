@@ -1241,7 +1241,7 @@
 /obj/item/seeds/potatoseed,
 /obj/item/seeds/potatoseed,
 /obj/item/seeds/ambrosiavulgarisseed,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /obj/item/beartrap,
 /obj/structure/table/steel,
 /turf/floor/plating,

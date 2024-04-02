@@ -1,5 +1,5 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil
-	name = "soil"
+	name = "tilled soil"
 	desc = "A mound of earth. You could plant some seeds here."
 	icon_state = "soil"
 	density = FALSE
@@ -10,10 +10,15 @@
 	matter = null
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O,/obj/item/tank))
-		return
-	else
-		..()
+	if(!seed && user.a_intent == I_HURT && (IS_SHOVEL(O) || IS_HOE(O)))
+		var/use_tool = O.get_tool_quality(TOOL_SHOVEL) > O.get_tool_quality(TOOL_HOE) ? TOOL_SHOVEL : TOOL_HOE
+		if(use_tool)
+			if(O.do_tool_interaction(use_tool, user, src, 3 SECONDS, "filling in", "filling in"))
+				qdel(src)
+			return TRUE
+	if(istype(O, /obj/item/tank))
+		return TRUE
+	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/Initialize()
 	. = ..()

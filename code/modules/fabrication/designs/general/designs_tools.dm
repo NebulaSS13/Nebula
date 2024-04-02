@@ -33,7 +33,7 @@
 	path = /obj/item/hatchet
 
 /datum/fabricator_recipe/tool/minihoe
-	path = /obj/item/minihoe
+	path = /obj/item/tool/hoe/mini
 
 /datum/fabricator_recipe/tool/inflatable_wall
 	path = /obj/item/inflatable

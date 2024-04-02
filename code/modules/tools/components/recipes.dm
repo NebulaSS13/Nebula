@@ -30,6 +30,9 @@
 /decl/stack_recipe/tool/head/hammer
 	result_type                 = /obj/item/tool_component/head/hammer
 
+/decl/stack_recipe/tool/head/hoe
+	result_type                 = /obj/item/tool_component/head/hoe
+
 /decl/stack_recipe/tool/head/shovel
 	result_type                 = /obj/item/tool_component/head/shovel
 

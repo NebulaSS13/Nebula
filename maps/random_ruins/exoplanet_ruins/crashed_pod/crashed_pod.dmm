@@ -1039,7 +1039,7 @@
 /obj/item/seeds/cornseed,
 /obj/item/hatchet,
 /obj/item/chems/glass/bucket,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /obj/item/plantspray/pests,
 /obj/item/plantspray/pests,
 /obj/item/plantspray/weeds,

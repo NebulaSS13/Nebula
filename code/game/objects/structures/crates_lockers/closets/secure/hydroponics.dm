@@ -12,7 +12,7 @@
 		/obj/item/radio/headset/headset_service,
 		/obj/item/clothing/mask/bandana/botany,
 		/obj/item/clothing/head/bandana/green,
-		/obj/item/minihoe,
+		/obj/item/tool/hoe/mini,
 		/obj/item/hatchet,
 		/obj/item/wirecutters/clippers,
 		/obj/item/chems/spray/plantbgone,

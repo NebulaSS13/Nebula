@@ -7,11 +7,11 @@
 	contains = list(/obj/item/chems/spray/plantbgone = 4,
 					/obj/item/chems/glass/bottle/ammonia = 2,
 					/obj/item/hatchet,
-					/obj/item/minihoe,
+					/obj/item/tool/hoe/mini,
 					/obj/item/scanner/plant,
 					/obj/item/clothing/gloves/thick/botany,
 					/obj/item/clothing/suit/apron,
-					/obj/item/minihoe,
+					/obj/item/tool/hoe/mini,
 					/obj/item/storage/box/botanydisk
 					)
 	containername = "hydroponics supply crate"
