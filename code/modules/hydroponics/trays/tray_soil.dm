@@ -16,12 +16,15 @@
 
 	. = ..()
 
+	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb
+	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/setlight
+
 	var/turf/exterior/E = get_turf(src)
 	if(istype(E))
 		color = E.dirt_color
 
-	pixel_x = rand(-3,3)
-	pixel_y = rand(-3,3)
+	pixel_x = rand(-1,1)
+	pixel_y = rand(-1,1)
 	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/physically_destroyed()
@@ -40,10 +43,10 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/Crossed(atom/movable/AM)
 	. = ..()
-	if(!ismob(AM) || !seed || dead)
+	if(!istype(AM) || !ismob(AM) || !AM.simulated || !seed || dead)
 		return
 	var/mob/walker = AM
-	if(walker.mob_size < MOB_SIZE_MEDIUM)
+	if(walker.mob_size < MOB_SIZE_SMALL)
 		return
 	if(MOVING_DELIBERATELY(walker) && prob(90))
 		return
@@ -79,7 +82,6 @@
 		if(!QDELETED(new_bricks) && istype(new_bricks) && new_bricks.get_amount() >= 4)
 			reinforced_with = new_bricks
 			to_chat(user, SPAN_NOTICE("You fence \the [src] off with \the [reinforced_with]."))
-			density = TRUE
 			update_icon()
 			for(var/obj/machinery/portable_atmospherics/hydroponics/soil/neighbor in orange(1, loc))
 				neighbor.update_icon()
@@ -88,7 +90,7 @@
 	if(!seed && user.a_intent == I_HURT && (IS_SHOVEL(O) || IS_HOE(O)))
 		var/use_tool = O.get_tool_quality(TOOL_SHOVEL) > O.get_tool_quality(TOOL_HOE) ? TOOL_SHOVEL : TOOL_HOE
 		if(use_tool)
-			if(O.do_tool_interaction(use_tool, user, src, 3 SECONDS, "filling in", "filling in"))
+			if(O.do_tool_interaction(use_tool, user, src, 3 SECONDS, "filling in", "filling in", check_skill = SKILL_BOTANY))
 				qdel(src)
 			return TRUE
 	if(istype(O, /obj/item/tank))
@@ -110,10 +112,14 @@
 			I.pixel_z = -(pixel_z)
 			add_overlay(I)
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/Initialize()
+/obj/machinery/portable_atmospherics/hydroponics/soil/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+		return TRUE
 	. = ..()
-	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb
-	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/setlight
+	if(. && reinforced_with)
+		var/obj/machinery/portable_atmospherics/hydroponics/soil/neighbor = locate() in get_turf(mover)
+		if(!neighbor?.reinforced_with)
+			return FALSE
 
 // Holder for vine plants.
 // Icons for plants are generated as overlays, so setting it to invisible wouldn't work.
