@@ -15,12 +15,33 @@
  */
 
 //Returns a list in plain english as a string
-/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "," )
+/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = ",", summarize = FALSE)
+
+	if(!length(input))
+		return nothing_text
+
+	if(summarize)
+		var/list/thing_gender = list()
+		var/list/thing_count = list()
+		for(var/atom/thing as anything in input)
+			input -= thing
+			var/thing_string = isatom(thing) ? thing.name : "\proper [thing]"
+			thing_count[thing_string] += 1
+			thing_gender[thing_string] = isatom(thing) ? thing.gender : NEUTER
+		input = list()
+		for(var/thing_string in thing_count)
+			if(thing_count[thing_string] == 1)
+				input += "\the [thing_string]"
+			else
+				input += "[thing_count[thing_string]] [thing_string][thing_gender[thing_string] == PLURAL ? "" : "s"]"
+
 	switch(length(input))
-		if(0) return nothing_text
-		if(1) return "[input[1]]"
-		if(2) return "[input[1]][and_text][input[2]]"
-		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
+		if(1)
+			return "[input[1]]"
+		if(2)
+			return "[input[1]][and_text][input[2]]"
+		else
+			return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
 
 //Returns a newline-separated list that counts equal-ish items, outputting count and item names, optionally with icons and specific determiners
 /proc/counting_english_list(list/input, output_icons = TRUE, determiners = DET_NONE, nothing_text = "nothing", line_prefix = "", first_item_prefix = "\n", last_item_suffix = "\n", and_text = "\n", comma_text = "\n", final_comma_text = "")

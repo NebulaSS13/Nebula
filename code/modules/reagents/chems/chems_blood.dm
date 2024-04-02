@@ -14,6 +14,7 @@
 	opacity = TRUE
 	min_fluid_opacity = FLUID_MAX_ALPHA
 	max_fluid_opacity = 240
+	compost_value = 1 // yum
 
 	chilling_products = list(
 		/decl/material/liquid/coagulated_blood = 1
@@ -81,3 +82,4 @@
 	toxicity = 4
 	value = 0
 	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON
+	compost_value = 1 // yum

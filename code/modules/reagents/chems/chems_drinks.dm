@@ -5,6 +5,7 @@
 	value = 0.4
 	abstract_type = /decl/material/liquid/drink
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Please, no more berry juice atmosphere planets.
+	compost_value = 1
 
 	var/nutrition = 0 // Per unit
 	var/hydration = 6 // Per unit

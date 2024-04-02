@@ -10,6 +10,7 @@
 	uid = "chem_nutriment"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Please, no more animal protein or glowsap or corn oil atmosphere.
 	fishing_bait_value = 0.65
+	compost_value = 1
 
 	// Technically a room-temperature solid, but saves
 	// repathing it to /solid all over the codebase.
