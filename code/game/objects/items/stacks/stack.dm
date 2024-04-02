@@ -167,13 +167,13 @@
 		return
 	if (recipe.time)
 		to_chat(user, SPAN_NOTICE("You set about [recipe.get_craft_verbing(src)] [recipe.get_display_name(producing, mat, reinf_mat)]..."))
-		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
+		if (!user.do_skilled(recipe.time, recipe.recipe_skill))
 			return
 
 	if(!use(expending))
 		return
 
-	if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
+	if(user.skill_fail_prob(recipe.recipe_skill, 90, recipe.difficulty))
 		to_chat(user, SPAN_WARNING("You waste some [name] and fail to [recipe.get_craft_verb(src)] [recipe.get_display_name(producing, mat, reinf_mat)]!"))
 		return
 
