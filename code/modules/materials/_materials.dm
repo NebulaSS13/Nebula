@@ -300,6 +300,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// Whether or not turfs made of this material can support plants.
 	var/tillable = FALSE
 
+	var/compost_value = 0
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
@@ -368,6 +370,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		accelerant_value             = FUEL_VALUE_NONE
 		burn_product                 = null
 		vapor_products               = null
+		compost_value                = 0
 	else if(isnull(temperature_damage_threshold))
 		for(var/value in list(ignition_point, melting_point, boiling_point, heating_point, bakes_into_at_temperature))
 			if(!isnull(value) && (isnull(temperature_damage_threshold) || temperature_damage_threshold > value))

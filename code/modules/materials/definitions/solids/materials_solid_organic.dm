@@ -4,6 +4,7 @@
 	accelerant_value = 0.1
 	burn_product = /decl/material/gas/carbon_monoxide
 	melting_point = null
+	compost_value = 1
 
 /* TODO: burn products for solids
 	bakes_into_at_temperature = T0C+500
@@ -36,6 +37,7 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 	tensile_strength = 0.75
+	compost_value = 0
 
 /decl/material/solid/organic/wax
 	name = "wax"
@@ -56,6 +58,7 @@
 	melting_point = 363
 	ignition_point = 473
 	boiling_point = 643
+	compost_value = 0.2
 
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
@@ -89,6 +92,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	compost_value = 0.8
 
 /decl/material/solid/organic/paper
 	name                    = "paper"
@@ -119,6 +123,7 @@
 	exoplanet_rarity_gas    = MAT_RARITY_NOWHERE
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
+	compost_value = 0.8
 
 /decl/material/solid/organic/cloth
 	name = "cotton"
@@ -142,12 +147,14 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	compost_value = 0.8
 	has_textile_fibers = TRUE
 
 /decl/material/solid/organic/cloth/synthetic
 	name = "nylon"
 	uid = "solid_cloth_synthetic"
 	melting_point = T0C+300 // plastic
+	compost_value = 0
 
 /decl/material/solid/organic/plantmatter
 	name = "plant matter"
@@ -197,6 +204,7 @@
 	color = COLOR_BEIGE
 	ignition_point = T0C+50
 	tensile_strength = 0.5
+	compost_value = 0.5
 
 /decl/material/solid/organic/meat
 	name = "meat"
@@ -243,6 +251,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	fishing_bait_value = 0.75
 	tans_to = /decl/material/solid/organic/leather
+	compost_value = 0.8
 
 /decl/material/solid/organic/skin/lizard
 	name = "lizardskin"
@@ -365,6 +374,7 @@
 	default_solid_form = /obj/item/stack/material/bone
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
+	compost_value = 0.5
 
 // Stub for earrings. TODO: put it in clams
 /decl/material/solid/organic/bone/pearl
@@ -414,6 +424,7 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 	tensile_strength = 0.8 // TODO: dried sinew? Should this be crappier than plastic/metal?
+	compost_value = 0.2
 
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"
@@ -421,6 +432,7 @@
 	color = "#1f1f20"
 	ignition_point = T0C+150
 	melting_point = T0C+100 // Assuming synthetic leather.
+	compost_value = 0
 
 /decl/material/solid/organic/leather/lizard
 	name = "scaled hide"

@@ -368,3 +368,10 @@
 
 /obj/proc/get_blend_objects()
 	return
+
+/obj/proc/is_compostable()
+	for(var/mat in matter)
+		var/decl/material/composting_mat = GET_DECL(mat)
+		if(composting_mat.compost_value)
+			return TRUE
+	return FALSE

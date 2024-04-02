@@ -8,8 +8,9 @@
 	anchored                          = FALSE
 	material                          = /decl/material/solid/organic/plastic
 	matter                            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
-	max_health = 100
+	max_health                        = 100
 	tool_interaction_flags            = TOOL_INTERACTION_DECONSTRUCT
+	var/wrenchable                    = TRUE
 	var/unwrenched                    = FALSE
 	var/tmp/volume                    = 1000
 	var/amount_dispensed              = 10
@@ -49,24 +50,28 @@
 	. = ..()
 	if(unwrenched)
 		to_chat(user, SPAN_WARNING("Someone has wrenched open its tap - it's spilling everywhere!"))
-	if(distance > 2)
-		return
 
-	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "Its refilling cap is open.")
-	else
-		to_chat(user, "Its refilling cap is closed.")
+	if(distance <= 2)
 
-	if(reagents?.total_volume)
-		to_chat(user, "It contains [reagents.total_volume] units of fluid.")
-	else
-		to_chat(user, "It's empty.")
+		if(wrenchable)
+			if(ATOM_IS_OPEN_CONTAINER(src))
+				to_chat(user, "Its refilling cap is open.")
+			else
+				to_chat(user, "Its refilling cap is closed.")
 
-	if(reagents?.maximum_volume)
-		to_chat(user, "It may contain up to [reagents.maximum_volume] units of fluid.")
+		to_chat(user, SPAN_NOTICE("It contains:"))
+		if(LAZYLEN(reagents?.reagent_volumes))
+			for(var/rtype in reagents.reagent_volumes)
+				var/decl/material/R = GET_DECL(rtype)
+				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] unit\s of [R.liquid_name]."))
+		else
+			to_chat(user, SPAN_NOTICE("Nothing."))
+
+		if(reagents?.maximum_volume)
+			to_chat(user, "It may contain up to [reagents.maximum_volume] unit\s of fluid.")
 
 /obj/structure/reagent_dispensers/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W))
+	if(wrenchable && IS_WRENCH(W))
 		unwrenched = !unwrenched
 		visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s tap [unwrenched ? "open" : "shut"]."))
 		if(unwrenched)
@@ -74,17 +79,6 @@
 			leak()
 		return TRUE
 	. = ..()
-
-/obj/structure/reagent_dispensers/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 2)
-		to_chat(user, SPAN_NOTICE("It contains:"))
-		if(LAZYLEN(reagents?.reagent_volumes))
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/R = GET_DECL(rtype)
-				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] units of [R.name]"))
-		else
-			to_chat(user, SPAN_NOTICE("Nothing."))
 
 /obj/structure/reagent_dispensers/verb/set_amount_dispensed()
 	set name = "Set amount dispensed"

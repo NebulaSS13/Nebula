@@ -66,7 +66,8 @@
 		/decl/material/gas/ammonia =                1,
 		/decl/material/liquid/nutriment =           1,
 		/decl/material/liquid/adminordrazine =      1,
-		/decl/material/liquid/fertilizer =          1
+		/decl/material/liquid/fertilizer =          1,
+		/decl/material/liquid/fertilizer/compost =  1
 	)
 	var/static/list/weedkiller_reagents = list(
 		/decl/material/liquid/fuel/hydrazine =     -4,
@@ -109,7 +110,8 @@
 		/decl/material/liquid/nutriment =          list(  0.5,  0.1, 0  ),
 		/decl/material/solid/metal/radium =        list( -1.5,  0,   0.2),
 		/decl/material/liquid/adminordrazine =     list(  1,    1,   1  ),
-		/decl/material/liquid/fertilizer =         list(  0,    0.2, 0.2)
+		/decl/material/liquid/fertilizer =         list(  0,    0.2, 0.2),
+		/decl/material/liquid/fertilizer/compost = list(  0,    0.2, 0.2)
 	)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather

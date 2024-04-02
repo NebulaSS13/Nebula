@@ -176,6 +176,13 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
+/decl/material/liquid/fertilizer/compost
+	name = "compost"
+	uid = "liquid_compost"
+	lore_text = "A mulch of organics good for feeding to plants."
+	taste_description = "organic rot"
+	toxicity = 0.1
+
 /decl/material/liquid/weedkiller
 	name = "weedkiller"
 	uid = "liquid_weedkiller"
