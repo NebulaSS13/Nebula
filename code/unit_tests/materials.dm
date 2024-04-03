@@ -42,13 +42,7 @@
 					var/decl/material/reinforced = GET_DECL(reinforced_type)
 
 					// Get a linear list of all recipes available to this combination.
-					var/list/recipes = get_stack_recipes(material, reinforced, stack_type, tool_type)
-					while(locate(/datum/stack_recipe_list) in recipes)
-						for(var/datum/stack_recipe_list/recipe_stack in recipes)
-							recipes -= recipe_stack
-							if(length(recipe_stack.recipes))
-								recipes |= recipe_stack.recipes
-
+					var/list/recipes = get_stack_recipes(material, reinforced, stack_type, tool_type, flat = TRUE)
 					if(!length(recipes))
 						continue
 

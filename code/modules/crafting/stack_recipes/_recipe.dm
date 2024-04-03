@@ -226,8 +226,15 @@
 	// Early checks to avoid letting recipes make themselves.
 	if(ispath(result_type, /obj/item/stack))
 		var/obj/item/stack/result_ref = result_type
-		if(stack_type == initial(result_ref.crafting_stack_type))
+		if(stack_type == result_ref::crafting_stack_type)
 			return FALSE
+
+	if(required_reinforce_material == MATERIAL_FORBIDDEN && reinf_mat)
+		return FALSE
+	else if(ispath(required_reinforce_material) && !istype(reinf_mat, required_reinforce_material))
+		return FALSE
+	else if(required_reinforce_material == MATERIAL_REQUIRED && !reinf_mat)
+		return FALSE
 
 	// Check if they're using the appropriate materials.
 	if(ispath(required_material) && !istype(mat, required_material))
@@ -235,13 +242,6 @@
 	else if(required_material == MATERIAL_FORBIDDEN && mat)
 		return FALSE
 	else if(required_material == MATERIAL_REQUIRED && !mat)
-		return FALSE
-
-	if(ispath(required_reinforce_material) && !istype(reinf_mat, required_reinforce_material))
-		return FALSE
-	else if(required_reinforce_material == MATERIAL_FORBIDDEN && reinf_mat)
-		return FALSE
-	else if(required_reinforce_material == MATERIAL_REQUIRED && !reinf_mat)
 		return FALSE
 
 	// Check if the material has the appropriate properties.
