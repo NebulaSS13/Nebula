@@ -158,7 +158,7 @@
 /decl/stack_recipe/proc/get_required_stack_amount(obj/item/stack/stack)
 	return max(1, CEILING(req_amount / max(1, (SHEET_MATERIAL_AMOUNT * stack?.matter_multiplier))))
 
-/decl/stack_recipe/proc/get_list_display(mob/user, obj/item/stack/stack)
+/decl/stack_recipe/proc/get_list_display(mob/user, obj/item/stack/stack, datum/stack_recipe_list/sublist)
 
 	var/sheets_per_product = req_amount / CEILING(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier))
 	var/products_per_sheet = CEILING(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier)) / req_amount
@@ -204,14 +204,14 @@
 		var/new_row = 5
 		for(var/i = clamp_sheets to max_multiplier step clamp_sheets)
 			var/producing = FLOOR(i * products_per_sheet)
-			. += "<a href='?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i]'>[producing]x</a>"
+			. += "<a href='?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i];returning=\ref[sublist]'>[producing]x</a>"
 			if(new_row == 0)
 				new_row = 5
 				. += "<br>"
 			else
 				new_row--
 	else
-		. += "<a href='?src=\ref[stack];make=\ref[src];producing=[FLOOR(clamp_sheets * products_per_sheet)];expending=[clamp_sheets]'>1x</a>"
+		. += "<a href='?src=\ref[stack];make=\ref[src];producing=[FLOOR(clamp_sheets * products_per_sheet)];expending=[clamp_sheets];returning=\ref[sublist]'>1x</a>"
 
 	. += "</td>"
 	. += "</tr>"
