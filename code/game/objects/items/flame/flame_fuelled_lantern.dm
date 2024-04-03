@@ -13,6 +13,12 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material            = /decl/material/solid/metal/copper
 	can_manually_light  = FALSE
+	sconce_can_hold     = TRUE
+
+/obj/item/flame/fuelled/lantern/get_sconce_overlay()
+	. = list(overlay_image(icon, "[icon_state]-sconce", color = color, flags = RESET_COLOR))
+	if(lit)
+		. += overlay_image(icon, "[icon_state]-sconce-lit", color = lit_light_color, flags = RESET_COLOR)
 
 /obj/item/flame/fuelled/lantern/filled
 	start_fuelled = TRUE
