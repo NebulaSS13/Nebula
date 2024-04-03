@@ -1158,6 +1158,7 @@
 #include "code\game\objects\items\flame\_flame.dm"
 #include "code\game\objects\items\flame\flame_candle.dm"
 #include "code\game\objects\items\flame\flame_fuelled.dm"
+#include "code\game\objects\items\flame\flame_fuelled_lantern.dm"
 #include "code\game\objects\items\flame\flame_fuelled_lighter.dm"
 #include "code\game\objects\items\flame\flame_fuelled_lighter_zippo.dm"
 #include "code\game\objects\items\flame\flame_matches.dm"

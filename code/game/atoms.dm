@@ -910,3 +910,6 @@
 
 /atom/proc/get_thermal_mass_coefficient()
 	return 1
+
+/atom/proc/spark_act(obj/effect/sparks/sparks)
+	return
