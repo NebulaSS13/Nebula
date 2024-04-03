@@ -60,9 +60,10 @@ var/global/list/_alpha_masks = list()
 	updating_turf_alpha_mask = TRUE
 	sleep(0)
 	updating_turf_alpha_mask = FALSE
-	if(!src || QDELETED(src))
+	if(QDELETED(src))
 		return
-	var/mask_state = (get_turf(src))?.get_movable_alpha_mask_state(src)
+	var/turf/our_turf = loc
+	var/mask_state = isturf(our_turf) && our_turf.get_movable_alpha_mask_state(src)
 	if(mask_state)
 		var/atom/movable/alpha_mask/mask = get_or_create_alpha_mask(src)
 		if(mask)
