@@ -87,6 +87,9 @@
 		if(!antag_check && entry.antag_text && !entry.mechanics_text && !entry.lore_text)
 			continue
 
+		if(entry.unsearchable) // We act as if this entry doesn't exist unless directly opened by an item.
+			continue
+
 		var/first_letter = uppertext(copytext(thing, 1, 2))
 		if(first_letter != last_first_letter)
 			last_first_letter = first_letter

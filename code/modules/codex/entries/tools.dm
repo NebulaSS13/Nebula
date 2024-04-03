@@ -38,43 +38,51 @@
 	associated_paths = list(/obj/item/cable_painter)
 	mechanics_text = "Use this device to select a preferred cable color. Apply it to a bundle of cables on your person, or use it on installed cabling on the floor to paint it in your chosen color."
 	lore_text = "A device often used by spacefaring engineers to color-code their electrical systems. An experienced technician can identify traditional installations by color alone."
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/paint_sprayer
 	associated_paths = list(/obj/item/paint_sprayer)
 	mechanics_text = "Use the paint sprayer to set decal, color and direction used for painting or to switch into the color picking mode. Ctrl+Click for quickly switching modes and Alt+Click for quickly selecting a preset color."
 	lore_text = "This ubiquitous maintenance-grade paint sprayer isn't as fancy or convenient as modern consumer models, but with an internal synthesizer it never runs out of pigment!"
 	antag_text = "This thing would be perfect for vandalism. Could you write your name in the halls?"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/geiger_counter
 	associated_paths = list(/obj/item/geiger)
 	mechanics_text = "By using this item, you may toggle its scanning mode on and off. Examine it while it's on to check for ambient radiation."
 	lore_text = "For centuries geiger counters have been saving the lives of unsuspecting laborers and technicians. You can never be too careful around radiation."
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/light_replacer
 	associated_paths = list(/obj/item/lightreplacer)
 	mechanics_text = "Examine or use this item to see how many lights are remaining. You can feed it lightbulbs or sheets of glass to refill it."
 	lore_text = "Can you believe they used to have to screw lightbulbs in by hand?"
 	antag_text = "Using a cryptographic sequencer on this device will cause it to overload each light it replaces; when turned on, the new lights will explode!"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/multitool
 	name = TOOL_CODEX_MULTITOOL
 	mechanics_text = "Multitools are incredibly versatile and can be used on a wide variety of machines. The most common use for this is to trip a device's wires without having to cut them. Simply click on an object with exposed wiring to use it. There might be other uses, as well..."
 	lore_text = "The common, every day multitool is descended from certain electrical tools from Earth's early space age. Though none too cheap, they are incredibly handy, and can be found in any self-respecting technician's toolbox."
 	antag_text = "This handy little tool can get you through doors, turn off power, and anything else you might need."
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/t_scanner
 	associated_paths = list(/obj/item/t_scanner)
 	mechanics_text = "Use this to toggle its scanning capabilities on and off. While on, it will expose the layout of cabling and pipework in a 7x7 area around you."
 	lore_text = "The T-ray scanner is a modern spectroscopy solution and labor-saving device. Why work yourself to the bone removing floor panels when you can simply look through them with submillimeter radiation?"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/rcd
 	associated_paths = list(/obj/item/rcd)
 	mechanics_text = "On use, this device will toggle between various types of structures (or their removal). You can examine it to see its current mode. It must be loaded with compressed matter cartridges, which can be obtained from an autolathe. Click an adjacent tile to use the device."
 	lore_text = "Advents in material printing and synthesis technology have produced everyday miracles, such as the RCD, which in certain industries has single-handedly put entire construction crews out of a job."
 	antag_text = "RCDs can be incredibly dangerous in the wrong hands. Use them to swiftly block off corridors, or instantly breach the ship wherever you want."
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/toolbox
 	associated_paths = list(/obj/item/toolbox)
 	mechanics_text = "The toolbox is a general-purpose storage item with lots of space. With an item in your hand, click on it to store it inside."
 	lore_text = "No one remembers which company designed this particular toolbox. It's been mass-produced, retired, brought out of retirement, and counterfeited for decades."
 	antag_text = "Carrying one of these and being bald tends to instill a certain primal fear in most people."
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE

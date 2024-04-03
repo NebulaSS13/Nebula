@@ -26,8 +26,10 @@
 				PRINT_STACK_TRACE("Invalid item supplied to codex category Populate(): [item]")
 				continue
 			var/starter = uppertext(copytext(strip_improper(item_entry.name), 1, 2))
-			LAZYADD(links[starter], "<l>[item_entry.name]</l>")
 			LAZYDISTINCTADD(item_entry.categories, src)
+			if(item_entry.unsearchable) // Unsearchable entries don't show up in category listings either.
+				continue
+			LAZYADD(links[starter], "<l>[item_entry.name]</l>")
 
 		var/list/link_cells = list()
 		for(var/letter in global.alphabet_capital)

@@ -23,6 +23,7 @@
 
 /datum/codex_entry/guide/robotics
 	name = "Guide to Robotics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1>Cyborgs for Dummies</h1>
 
@@ -149,6 +150,7 @@
 
 /datum/codex_entry/guide/detective
 	name = "Guide to Forensics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1>Detective Work</h1>
 		Between your bouts of self-narration and drinking whiskey on the rocks, you might get a case or two to solve.<br>
@@ -174,6 +176,7 @@
 
 /datum/codex_entry/guide/nuclear_sabotage
 	name = "Guide to Nuclear Sabotage"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1>Nuclear Explosives 101</h1>
 		Hello and thank you for choosing the Syndicate for your nuclear information needs. Today's crash course will deal with the operation of a Nuclear Fission Device.<br><br>
@@ -208,6 +211,7 @@
 
 /datum/codex_entry/guide/particle_accelerator
 	name = "Guide to Particle Accelerators"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1>Experienced User's Guide</h1>
 		<h2>Setting up the accelerator</h2>
@@ -229,6 +233,7 @@
 
 /datum/codex_entry/guide/singularity
 	name = "Guide to Singularity Engines"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1>Singularity Safety in Special Circumstances</h1>
 		<h2>Power outage</h2>
@@ -258,6 +263,7 @@
 
 /datum/codex_entry/guide/mech_construction
 	name = "Guide to Exosuit Construction"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<center>
 		<br>
@@ -315,6 +321,7 @@
 
 /datum/codex_entry/guide/atmospherics
 	name = "Guide to Atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1><a name="Contents">Contents</a></h1>
 		<ol>
@@ -391,6 +398,7 @@
 
 /datum/codex_entry/guide/eva
 	name = "Guide to EVA"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1><a name="Foreword">EVA Gear and You: Not Spending All Day Inside</a></h1>
 		<I>Or: How not to suffocate because there's a hole in your shoes</I><BR>
@@ -447,6 +455,7 @@
 
 /datum/codex_entry/guide/xenoarchaeology
 	name = "Guide to Xenoarchaeology"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1><a name="Contents">Contents</a></h1>
 		<ol>
@@ -538,6 +547,7 @@
 
 /datum/codex_entry/guide/mass_spectrometry
 	name = "Guide to Mass Spectrometry"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	lore_text = {"
 		<h1><a name="Contents">Contents</a></h1>
 		<ol>
@@ -586,18 +596,22 @@
 
 /datum/codex_entry/guide/engineering
 	name = "Guide to Engineering"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/guide/construction
 	name = "Guide to Construction"
 
 /datum/codex_entry/guide/supermatter
 	name = "Guide to Supermatter Engines"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/guide/fusion
 	name = "Guide to Fusion Reactors"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/guide/hacking
 	name = "Guide to Hacking"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	associated_strings = list("hacking")
 	mechanics_text = "Airlocks, vending machines, and various other machinery can be hacked by opening them up and fiddling with the wires. \
 	While it might sound like a unlawful deed (and it usually is) this process is also performed by engineers, usually to fix said criminal deeds. \

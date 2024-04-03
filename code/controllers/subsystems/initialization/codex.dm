@@ -112,6 +112,8 @@ SUBSYSTEM_DEF(codex)
 			results = list()
 			for(var/entry_title in entries_by_string)
 				var/datum/codex_entry/entry = entries_by_string[entry_title]
+				if(entry.unsearchable) // This entry can only be opened directly from links, and does not show up in search results.
+					continue
 				if(findtext(entry.name, searching) || findtext(entry.lore_text, searching) || findtext(entry.mechanics_text, searching) || findtext(entry.antag_text, searching))
 					results |= entry
 		search_cache[searching] = sortTim(results, /proc/cmp_name_asc)
