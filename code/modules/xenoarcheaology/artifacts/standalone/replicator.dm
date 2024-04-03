@@ -54,7 +54,7 @@
 	/obj/item/handcuffs,
 	/obj/item/hemostat,
 	/obj/item/knife/kitchen,
-	/obj/item/flame/lighter,
+	/obj/item/flame/fuelled/lighter,
 	/obj/item/light/bulb,
 	/obj/item/light/tube,
 	/obj/item/tool/pickaxe,

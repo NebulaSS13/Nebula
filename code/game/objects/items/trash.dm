@@ -95,11 +95,6 @@
 	name = "vobla pack"
 	icon_state = "driedfish"
 
-/obj/item/trash/candle
-	name = "candle"
-	icon = 'icons/obj/candle.dmi'
-	icon_state = "candle4"
-
 /obj/item/trash/liquidfood
 	name = "\improper \"LiquidFood\" MRE"
 	icon_state = "liquidfood"

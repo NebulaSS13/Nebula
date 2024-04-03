@@ -1346,7 +1346,7 @@
 /area/magshield/north)
 "dV" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/item/flame/lighter/random,
+/obj/item/flame/fuelled/lighter/random,
 /turf/floor/airless,
 /area/magshield/north)
 "dW" = (
@@ -2725,7 +2725,7 @@
 /area/magshield/west)
 "ia" = (
 /obj/structure/table/woodentable,
-/obj/item/flame/lighter/zippo/random,
+/obj/item/flame/fuelled/lighter/zippo/random,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},

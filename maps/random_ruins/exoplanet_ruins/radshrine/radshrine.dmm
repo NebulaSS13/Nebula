@@ -18,7 +18,7 @@
 /turf/floor/carpet/red,
 /area/template_noop)
 "g" = (
-/obj/item/trash/candle,
+/obj/item/flame/candle/spent,
 /turf/floor/carpet/red,
 /area/template_noop)
 "h" = (

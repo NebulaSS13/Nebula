@@ -178,7 +178,7 @@
 		/obj/item/hatchet,
 		/obj/item/utensil/fork,
 		/obj/item/shard,
-		/obj/item/flame/lighter,
+		/obj/item/flame/fuelled/lighter,
 		/obj/item/stack/cable_coil
 	)
 
@@ -189,7 +189,7 @@
 		/obj/item/hatchet,
 		/obj/item/utensil/fork,
 		/obj/item/shard,
-		/obj/item/flame/lighter,
+		/obj/item/flame/fuelled/lighter,
 		/obj/item/stack/cable_coil
 	)
 

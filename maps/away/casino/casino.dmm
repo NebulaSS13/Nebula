@@ -3390,7 +3390,7 @@
 "jH" = (
 /obj/structure/table/marble,
 /obj/item/ashtray,
-/obj/item/flame/lighter/zippo/random,
+/obj/item/flame/fuelled/lighter/zippo/random,
 /turf/floor/tiled,
 /area/casino/casino_mainfloor)
 "jI" = (
@@ -4271,7 +4271,7 @@
 /area/casino/casino_private1)
 "mf" = (
 /obj/structure/bed/chair/comfy/red,
-/obj/item/flame/lighter/zippo/random,
+/obj/item/flame/fuelled/lighter/zippo/random,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/wood,
 /area/casino/casino_private2)
@@ -4298,7 +4298,7 @@
 /obj/item/chems/drinks/bottle/agedwhiskey,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
-/obj/item/flame/lighter/zippo/random,
+/obj/item/flame/fuelled/lighter/zippo/random,
 /turf/floor/carpet,
 /area/casino/casino_mainfloor)
 "mk" = (

@@ -106,18 +106,18 @@
 
 /decl/loadout_option/lighter
 	name = "cheap lighter"
-	path = /obj/item/flame/lighter
+	path = /obj/item/flame/fuelled/lighter
 
 /decl/loadout_option/lighter/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"random" = /obj/item/flame/lighter/random,
-		"red" =    /obj/item/flame/lighter/red,
-		"yellow" = /obj/item/flame/lighter/yellow,
-		"cyan" =   /obj/item/flame/lighter/cyan,
-		"green" =  /obj/item/flame/lighter/green,
-		"pink" =   /obj/item/flame/lighter/pink
+		"random" = /obj/item/flame/fuelled/lighter/random,
+		"red" =    /obj/item/flame/fuelled/lighter/red,
+		"yellow" = /obj/item/flame/fuelled/lighter/yellow,
+		"cyan" =   /obj/item/flame/fuelled/lighter/cyan,
+		"green" =  /obj/item/flame/fuelled/lighter/green,
+		"pink" =   /obj/item/flame/fuelled/lighter/pink
 	)
 
 /decl/loadout_option/ashtray

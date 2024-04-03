@@ -14,6 +14,46 @@ var/global/obj/temp_reagents_holder = new
 		return 0
 	return reagents.maximum_volume - reagents.total_volume
 
+/atom/proc/get_reagents()
+	return reagents
+
+/atom/proc/take_waste_burn_products(list/materials, exposed_temperature)
+
+	// This might not be needed. Leaving it in for safety.
+	var/turf/T = get_turf(src)
+	if(T != src)
+		return T?.take_waste_burn_products(materials, exposed_temperature)
+
+	var/datum/reagents/liquids
+	var/datum/gas_mixture/vapor
+	var/obj/item/debris/scraps/scraps
+	for(var/mat in materials)
+		var/amount = materials[mat]
+		var/decl/material/material_data = GET_DECL(mat)
+		switch(material_data.phase_at_temperature(exposed_temperature))
+
+			if(MAT_PHASE_SOLID)
+				if(!scraps)
+					scraps = (locate() in src) || new(src)
+					LAZYINITLIST(scraps.matter)
+				scraps.matter[mat] += amount
+
+			if(MAT_PHASE_LIQUID)
+				if(!liquids)
+					liquids = get_reagents()
+				liquids?.add_reagent(mat, max(1, round(amount * REAGENT_UNITS_PER_MATERIAL_UNIT)), defer_update = TRUE)
+
+			if(MAT_PHASE_GAS)
+				if(!vapor)
+					vapor = return_air()
+				vapor?.adjust_gas_temp(mat, MOLES_PER_MATERIAL_UNIT(amount), exposed_temperature, update = FALSE)
+
+	if(scraps)
+		UNSETEMPTY(scraps.matter)
+		scraps.update_primary_material()
+	vapor?.update_values()
+	liquids?.update_total()
+
 /datum/reagents
 	var/primary_reagent
 	var/list/reagent_volumes

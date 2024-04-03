@@ -42,7 +42,7 @@
 		/obj/item/storage/box/fancy/cigarettes/cigarello/mint = 2,
 		/obj/item/storage/box/fancy/cigarettes/cigarello/variety = 2,
 		/obj/item/storage/box/matches = 10,
-		/obj/item/flame/lighter/random = 4,
+		/obj/item/flame/fuelled/lighter/random = 4,
 		/obj/item/storage/chewables/tobacco = 2,
 		/obj/item/storage/chewables/tobacco2 = 2,
 		/obj/item/storage/chewables/tobacco3 = 2,
@@ -60,7 +60,7 @@
 		/obj/item/chems/ecig_cartridge/blanknico = 2
 	)
 	contraband = list(
-		/obj/item/flame/lighter/zippo = 4,
+		/obj/item/flame/fuelled/lighter/zippo = 4,
 		/obj/item/clothing/mask/smokable/cigarette/rolled/sausage = 3,
 		/obj/item/storage/box/fancy/cigar = 5,
 		/obj/item/storage/box/fancy/cigarettes/killthroat = 5

@@ -502,6 +502,6 @@
 
 /obj/random/single/lighter
 	name = "randomly spawned lighter"
-	icon = 'icons/obj/items/lighters.dmi'
-	icon_state = "lighter"
-	spawn_object = /obj/item/flame/lighter
+	icon = 'icons/obj/items/flame/lighter.dmi'
+	icon_state = ICON_STATE_WORLD
+	spawn_object = /obj/item/flame/fuelled/lighter

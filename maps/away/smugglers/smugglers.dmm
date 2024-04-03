@@ -874,7 +874,7 @@
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/paper/smug_3,
-/obj/item/flame/lighter,
+/obj/item/flame/fuelled/lighter,
 /obj/random/coin,
 /turf/floor/tiled,
 /area/smugglers/dorms)

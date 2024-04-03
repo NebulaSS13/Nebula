@@ -223,15 +223,15 @@
 		SetName("[initial(name)] [material.solid_name]")
 
 /obj/item/shreddedp/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/flame/lighter))
+	if(W.isflamesource())
 		burnpaper(W, user)
 		return TRUE
 	return ..()
 
-/obj/item/shreddedp/proc/burnpaper(var/obj/item/flame/lighter/P, var/mob/user)
+/obj/item/shreddedp/proc/burnpaper(var/obj/item/P, var/mob/user)
 	if(!CanPhysicallyInteractWith(user, src) || material?.accelerant_value <= FUEL_VALUE_NONE)
 		return
-	if(!P.lit)
+	if(!P.isflamesource())
 		to_chat(user, SPAN_WARNING("\The [P] is not lit."))
 		return
 	var/decl/pronouns/G = user.get_pronouns()

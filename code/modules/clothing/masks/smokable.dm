@@ -165,9 +165,9 @@
 		var/text = matchmes
 		if(istype(W, /obj/item/flame/match))
 			text = matchmes
-		else if(istype(W, /obj/item/flame/lighter/zippo))
+		else if(istype(W, /obj/item/flame/fuelled/lighter/zippo))
 			text = zippomes
-		else if(istype(W, /obj/item/flame/lighter))
+		else if(istype(W, /obj/item/flame/fuelled/lighter))
 			text = lightermes
 		else if(IS_WELDER(W))
 			text = weldermes
@@ -580,8 +580,8 @@
 		SetName("[G.name]-packed [initial(name)]")
 		qdel(G)
 
-	else if(istype(W, /obj/item/flame/lighter))
-		var/obj/item/flame/lighter/L = W
+	else if(istype(W, /obj/item/flame/fuelled/lighter))
+		var/obj/item/flame/fuelled/lighter/L = W
 		if(L.lit)
 			light(SPAN_NOTICE("[user] manages to light their [name] with [W]."))
 

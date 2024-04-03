@@ -1,0 +1,1 @@
+/obj/item/flame/lighter/@SUBTYPES : /obj/item/flame/fuelled/lighter/@SUBTYPES{@OLD}
