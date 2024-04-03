@@ -29,7 +29,9 @@ SUBSYSTEM_DEF(ambience)
 
 	var/override_light_power
 	var/override_light_color
-	if(!is_outside())
+	// If we're indoors because of our area, OR we're outdoors and not exposed to the weather, get interior ambience.
+	var/outsideness = is_outside()
+	if((!outsideness && is_outside == OUTSIDE_AREA) || (outsideness && get_weather_exposure() != WEATHER_EXPOSED))
 		var/area/A = get_area(src)
 		if(!A || !A.interior_ambient_light_level)
 			return FALSE

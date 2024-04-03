@@ -3649,6 +3649,7 @@
 #include "code\modules\weather\weather_fsm.dm"
 #include "code\modules\weather\weather_fsm_state_transitions.dm"
 #include "code\modules\weather\weather_fsm_states.dm"
+#include "code\modules\weather\weather_helpers.dm"
 #include "code\modules\weather\weather_init.dm"
 #include "code\modules\weather\weather_mob_tracking.dm"
 #include "code\modules\weather\weather_wind.dm"

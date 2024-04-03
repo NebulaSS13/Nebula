@@ -12,6 +12,9 @@
 	var/protects_against_weather = FALSE
 	var/fire_resist = T0C+100
 
+/obj/item/clothing/suit/gives_weather_protection()
+	return protects_against_weather
+
 /obj/item/clothing/suit/get_associated_equipment_slots()
 	. = ..()
 	LAZYDISTINCTADD(., slot_wear_suit_str)

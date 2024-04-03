@@ -38,6 +38,20 @@
 		. = ..()
 	someone_is_cutting = FALSE
 
+/obj/structure/flora/tree/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	if(!ml && protects_against_weather)
+		for(var/turf/T in RANGE_TURFS(src, 1))
+			T.update_ambient_light_from_z_or_area()
+
+// I hate doing things that aren't cleanup in Destroy(), but this should still update even when admin-deleted.
+/obj/structure/flora/tree/Destroy()
+	var/list/turfs_to_update = RANGE_TURFS(src, 1)
+	. = ..()
+	if(protects_against_weather)
+		for(var/turf/T in turfs_to_update)
+			T.update_ambient_light_from_z_or_area()
+
 /obj/structure/flora/tree/take_damage(damage)
 	. = ..()
 	if(!QDELETED(src) && damage >= 5)
@@ -83,6 +97,7 @@
 	icon         = 'icons/obj/flora/pinetrees.dmi'
 	icon_state   = "pine_1"
 	stump_type   = /obj/structure/flora/stump/tree/pine
+	opacity      = TRUE
 
 /obj/structure/flora/tree/pine/init_appearance()
 	icon_state = "pine_[rand(1, 3)]"
@@ -158,6 +173,7 @@
 	icon_state = "mahogany_1"
 	material   = /decl/material/solid/organic/wood/mahogany
 	stump_type = /obj/structure/flora/stump/tree/mahogany
+	opacity    = TRUE
 
 /obj/structure/flora/tree/hardwood/maple
 	name       = "maple tree"
@@ -170,6 +186,7 @@
 	icon_state = "yew_1"
 	material   = /decl/material/solid/organic/wood/yew
 	stump_type = /obj/structure/flora/stump/tree/yew
+	opacity    = TRUE
 
 /obj/structure/flora/tree/hardwood/walnut
 	name       = "walnut tree"
