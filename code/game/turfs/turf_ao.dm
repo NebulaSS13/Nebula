@@ -11,9 +11,10 @@
 
 /turf/proc/regenerate_ao()
 	for(var/thing in RANGE_TURFS(src, 1))
-		var/turf/T = thing
-		if(istype(T) && T.permit_ao)
-			T.queue_ao(TRUE)
+		var/turf/their_turf = thing
+		their_turf = their_turf.resolve_to_actual_turf()
+		if(their_turf.permit_ao)
+			their_turf.queue_ao(TRUE)
 
 /turf/proc/calculate_ao_neighbors()
 	ao_neighbors = 0

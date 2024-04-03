@@ -8,38 +8,38 @@ Define for getting a bitfield of adjacent turfs that meet a condition.
 	var/result = 0
 	CALCULATE_NEIGHBORS(src, result, T, isopenturf(T))
 */
-#define CALCULATE_NEIGHBORS(ORIGIN, VAR, TVAR, FUNC) \
-	for (var/_tdir in global.cardinal) {             \
-		TVAR = get_step(ORIGIN, _tdir);              \
-		if ((TVAR) && (FUNC)) {                      \
-			VAR |= BITFLAG(_tdir);                   \
-		}                                            \
-	}                                                \
-	if (VAR & N_NORTH) {                             \
-		if (VAR & N_WEST) {                          \
-			TVAR = get_step(ORIGIN, NORTHWEST);      \
-			if (FUNC) {                              \
-				VAR |= N_NORTHWEST;                  \
-			}                                        \
-		}                                            \
-		if (VAR & N_EAST) {                          \
-			TVAR = get_step(ORIGIN, NORTHEAST);      \
-			if (FUNC) {                              \
-				VAR |= N_NORTHEAST;                  \
-			}                                        \
-		}                                            \
-	}                                                \
-	if (VAR & N_SOUTH) {                             \
-		if (VAR & N_WEST) {                          \
-			TVAR = get_step(ORIGIN, SOUTHWEST);      \
-			if (FUNC) {                              \
-				VAR |= N_SOUTHWEST;                  \
-			}                                        \
-		}                                            \
-		if (VAR & N_EAST) {                          \
-			TVAR = get_step(ORIGIN, SOUTHEAST);      \
-			if (FUNC) {                              \
-				VAR |= N_SOUTHEAST;                  \
-			}                                        \
-		}                                            \
+#define CALCULATE_NEIGHBORS(ORIGIN, VAR, TVAR, FUNC)            \
+	for (var/_tdir in global.cardinal) {                        \
+		TVAR = get_step_resolving_mimic(ORIGIN, _tdir);         \
+		if ((TVAR) && (FUNC)) {                                 \
+			VAR |= BITFLAG(_tdir);                              \
+		}                                                       \
+	}                                                           \
+	if (VAR & N_NORTH) {                                        \
+		if (VAR & N_WEST) {                                     \
+			TVAR = get_step_resolving_mimic(ORIGIN, NORTHWEST); \
+			if (FUNC) {                                         \
+				VAR |= N_NORTHWEST;                             \
+			}                                                   \
+		}                                                       \
+		if (VAR & N_EAST) {                                     \
+			TVAR = get_step_resolving_mimic(ORIGIN, NORTHEAST); \
+			if (FUNC) {                                         \
+				VAR |= N_NORTHEAST;                             \
+			}                                                   \
+		}                                                       \
+	}                                                           \
+	if (VAR & N_SOUTH) {                                        \
+		if (VAR & N_WEST) {                                     \
+			TVAR = get_step_resolving_mimic(ORIGIN, SOUTHWEST); \
+			if (FUNC) {                                         \
+				VAR |= N_SOUTHWEST;                             \
+			}                                                   \
+		}                                                       \
+		if (VAR & N_EAST) {                                     \
+			TVAR = get_step_resolving_mimic(ORIGIN, SOUTHEAST); \
+			if (FUNC) {                                         \
+				VAR |= N_SOUTHEAST;                             \
+			}                                                   \
+		}                                                       \
 	}
