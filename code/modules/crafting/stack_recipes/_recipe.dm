@@ -317,18 +317,18 @@
 			req_amount = max(req_amount, SHEET_MATERIAL_AMOUNT)
 
 /decl/stack_recipe/proc/get_display_name(amount, decl/material/mat, decl/material/reinf_mat, apply_article = TRUE)
-	var/material_strings
+	var/material_strings = list()
 	if(apply_material_name)
 		if(mat && required_material != MATERIAL_FORBIDDEN)
-			LAZYDISTINCTADD(material_strings, mat.use_name)
+			material_strings |= mat.use_name
 		if(reinf_mat && required_reinforce_material != MATERIAL_FORBIDDEN)
-			LAZYDISTINCTADD(material_strings, reinf_mat.use_name)
-		if(LAZYLEN(material_strings))
+			material_strings |= reinf_mat.use_name
+		if(length(material_strings))
 			material_strings = "[english_list(material_strings)]"
 	if(amount != 1)
-		. = jointext(list("[amount]x", material_strings, name_plural), " ")
+		. = jointext(list("[amount]x") + material_strings + name_plural, " ")
 	else
-		. = jointext(list(material_strings, name), " ")
+		. = jointext(list() + material_strings + name, " ")
 		if(apply_article)
 			if(gender == PLURAL)
 				. = "some [.]"
