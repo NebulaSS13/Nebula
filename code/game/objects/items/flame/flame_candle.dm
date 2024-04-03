@@ -6,6 +6,7 @@
 	material        = /decl/material/solid/organic/wax
 	lit_light_range = 2
 	_fuel           = null
+	sconce_can_hold = TRUE
 
 /obj/item/flame/candle/spent
 	_fuel           = 0
@@ -21,6 +22,11 @@
 		set_color(pick(available_colors))
 
 	. = ..()
+
+/obj/item/flame/candle/get_sconce_overlay()
+	. = list(overlay_image(icon, "[icon_state]-sconce", color = color, flags = RESET_COLOR))
+	if(lit)
+		. += overlay_image(icon, "[icon_state]-lit", color = color, flags = RESET_COLOR)
 
 /obj/item/flame/candle/on_update_icon()
 
@@ -78,6 +84,7 @@
 	name = "incense cone"
 	desc = "An incense cone. It produces fragrant smoke when burned."
 	icon = 'icons/obj/items/flame/incense.dmi'
+	sconce_can_hold = FALSE
 
 /obj/item/flame/candle/scented/incense/get_available_scents()
 	var/static/list/available_scents = list(

@@ -31,6 +31,8 @@
 	var/can_manually_extinguish = TRUE
 	/// Can you light this item with your hand?
 	var/can_manually_light = FALSE
+	/// Can this item be put into a sconce?
+	var/sconce_can_hold = FALSE
 
 /obj/item/flame/Initialize()
 
@@ -49,12 +51,17 @@
 
 	set_extension(src, /datum/extension/tool, list(TOOL_CAUTERY = TOOL_QUALITY_BAD))
 	update_icon()
+	if(istype(loc, /obj/structure/wall_sconce))
+		loc.update_icon()
 
 /obj/item/flame/Destroy()
 	extinguish(null, TRUE)
 	return ..()
 
 /obj/item/flame/proc/get_available_scents()
+	return null
+
+/obj/item/flame/proc/get_sconce_overlay()
 	return null
 
 /obj/item/flame/get_tool_quality(archetype, property)
@@ -71,7 +78,11 @@
 	lit = TRUE
 	damtype = BURN
 	update_force()
+
 	update_icon()
+	if(istype(loc, /obj/structure/wall_sconce))
+		loc.update_icon()
+
 	if(!no_message)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] lights \the [src]."),
@@ -107,7 +118,11 @@
 	lit = FALSE
 	damtype = BRUTE
 	update_force()
+
 	update_icon()
+	if(istype(loc, /obj/structure/wall_sconce))
+		loc.update_icon()
+
 	set_light(0)
 	if(scent)
 		remove_extension(src, /datum/extension/scent)
@@ -181,6 +196,8 @@
 		return PROCESS_KILL
 
 	update_icon()
+	if(istype(loc, /obj/structure/wall_sconce))
+		loc.update_icon()
 
 	// TODO: generalized ignition proc
 	if(isliving(loc))
