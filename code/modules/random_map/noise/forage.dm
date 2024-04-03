@@ -82,13 +82,17 @@
 			"clam"
 		)
 	)
-	var/static/list/trees = list(
+	var/list/trees = list(
 		/obj/structure/flora/tree/hardwood/ebony = 9,
 		/obj/structure/flora/tree/dead/ebony = 1
 	)
-	var/static/list/cave_trees = list(
+	var/list/cave_trees = list(
 		/obj/structure/flora/tree/softwood/towercap
 	)
+	var/tree_weight = 0.35
+	var/cave_tree_weight = 0.35
+	var/forage_weight = 0.3
+	var/cave_forage_weight = 0.3
 
 /datum/random_map/noise/forage/New()
 	for(var/category in forage)
@@ -119,33 +123,36 @@
 				new rock_type(T)
 				return
 		else if(istype(T, /turf/exterior/grass))
-			if(prob(parse_value * 0.35))
+			if(prob(parse_value * tree_weight))
 				if(length(trees))
 					var/tree_type = pickweight(trees)
 					new tree_type(T)
 				return
-			place_prob = parse_value * 0.3
+			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["grass"])
 		else if(istype(T, /turf/exterior/mud/water/deep))
-			place_prob = parse_value * 0.3
+			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["riverbed"])
 		else if(istype(T, /turf/exterior/mud/water))
-			place_prob = parse_value * 0.3
+			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["shallows"])
+		else if(istype(T, /turf/exterior/mud))
+			place_prob = parse_value * forage_weight
+			place_type = SAFEPICK(forage["riverbank"]) // no entries by default, expanded on subtypes
 	else
 		if(istype(T, /turf/exterior/mud) && !istype(T, /turf/exterior/mud/water/deep))
-			if(prob(parse_value * 0.35))
+			if(prob(parse_value * cave_tree_weight))
 				if(length(cave_trees))
 					var/tree_type = pick(cave_trees)
 					new tree_type(T)
 				return
-			place_prob = parse_value * 0.6
+			place_prob = parse_value * cave_forage_weight * 2
 			place_type = SAFEPICK(forage["caves"])
 		else if(istype(T, /turf/exterior/dirt))
-			place_prob = parse_value * 0.3
+			place_prob = parse_value * cave_forage_weight
 			place_type = SAFEPICK(forage["caves"])
 		else if(istype(T, /turf/exterior/mud/water))
-			place_prob = parse_value * 0.3
+			place_prob = parse_value * cave_forage_weight
 			place_type = SAFEPICK(forage["cave_shallows"])
 
 	if(place_type && prob(place_prob))
