@@ -96,8 +96,6 @@
 		var/obj/result = result_type
 		if(isnull(name))
 			name = initial(result.name)
-		if(isnull(time))
-			time = max(0.5 SECONDS, round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(initial(result.w_class)) + CRAFT_TIME_DIFFICULTY(difficulty), 5))
 		if(isnull(gender))
 			gender = initial(result.gender)
 
@@ -122,8 +120,8 @@
 
 	if(!istext(name))
 		. += "null or non-text name: [name || "NULL"]"
-	if(!isnum(time))
-		. += "null or non-text crafting time: [time || "NULL"]"
+	if(!isnull(time) && !isnum(time))
+		. += "non-null, non-number preset crafting time: [json_encode(time)]"
 	if(!ispath(result_type))
 		. += "null or non-path result type: [result_type || "NULL"]"
 	else if(!ispath(expected_product_type))
@@ -143,12 +141,12 @@
 		if(!isnull(required_max_hardness))
 			. += "null required material but non-null max hardness value"
 
-	if(recipe_skill && difficulty > 0)
+	if(recipe_skill && !isnull(difficulty))
 		var/decl/hierarchy/skill/used_skill = GET_DECL(recipe_skill)
 		if(!istype(used_skill))
 			. += "invalid skill decl [recipe_skill]"
 		else if(length(used_skill.levels) < difficulty)
-			. += "required skill [recipe_skill] is missing skill level [isnull(difficulty) ? "NULL" : json_encode(difficulty)]"
+			. += "required skill [recipe_skill] is missing skill level [json_encode(difficulty)]"
 
 	if(length(forbidden_craft_stack_types) && length(craft_stack_types))
 		for(var/stack_type in (forbidden_craft_stack_types|craft_stack_types))
@@ -173,6 +171,9 @@
 		// TODO: work out what types should let you craft multiple.
 		max_multiplier = min(max_multiplier, 1)
 
+	var/decl/material/mat       = stack.get_material()
+	var/decl/material/reinf_mat = stack.get_reinforced_material()
+
 	. = list("<tr>")
 
 	. += "<td width = '150px'>"
@@ -184,14 +185,16 @@
 	. += "</td>"
 
 	. += "<td width = '75px'>"
-	. += "[round(time / 10, 0.5)] second\s"
+	. += "[round(get_adjusted_time(mat, reinf_mat) / 10, 0.5)] second\s"
 	. += "</td>"
 
 	. += "<td width = '200px'>"
-	if(recipe_skill && difficulty)
-		var/decl/hierarchy/skill/S = GET_DECL(recipe_skill)
-		var/skill_message = "[capitalize(LAZYACCESS(S.levels, difficulty))] [capitalize(S.name)]"
-		if(user.skill_check(recipe_skill, difficulty))
+	var/used_skill = get_skill(mat, reinf_mat)
+	var/used_difficulty = get_skill_difficulty(mat, reinf_mat)
+	if(used_skill && used_difficulty)
+		var/decl/hierarchy/skill/display_skill = GET_DECL(used_skill)
+		var/skill_message = "[capitalize(LAZYACCESS(display_skill.levels, used_difficulty))] [capitalize(display_skill.name)]"
+		if(user.skill_check(used_skill, used_difficulty))
 			. += skill_message
 		else
 			. += "<font color='red'>[skill_message]</font>"
@@ -389,3 +392,15 @@
 
 /decl/stack_recipe/proc/get_craft_verb(obj/item/stack/stack)
 	return stack.craft_verb || "make"
+
+/decl/stack_recipe/proc/get_skill(decl/material/mat, decl/material/reinf_mat)
+	return recipe_skill || mat.crafting_skill
+
+/decl/stack_recipe/proc/get_skill_difficulty(decl/material/mat, decl/material/reinf_mat)
+	return (isnull(difficulty) ? max(mat.construction_difficulty, reinf_mat?.construction_difficulty) : difficulty) || MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/proc/get_adjusted_time(decl/material/mat, decl/material/reinf_mat)
+	. = time
+	if(isnull(time))
+		var/obj/result = result_type
+		. = max(0.5 SECONDS, round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(result::w_class) + CRAFT_TIME_DIFFICULTY(get_skill_difficulty(mat, reinf_mat)), 0.5 SECONDS))

@@ -169,6 +169,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/hitsound = 'sound/weapons/genhit.ogg'
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
+	/// When a stack recipe doesn't specify a skill to use, use this skill.
+	var/crafting_skill = SKILL_CONSTRUCTION
 	// Modifies skill checks when constructing with this material.
 	var/construction_difficulty = MAT_VALUE_EASY_DIY
 	// Determines what is used to remove or dismantle this material.
@@ -293,7 +295,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		to_chat(user, SPAN_WARNING("You need need at least one [used_stack.singular_name] to reinforce [target_stack]."))
 		return
 
-	var/decl/material/reinf_mat = used_stack.material
+	var/decl/material/reinf_mat = used_stack.get_material()
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
 		to_chat(user, SPAN_WARNING("The [reinf_mat.solid_name] is too structurally weak to reinforce the [name]."))
 		return
@@ -382,6 +384,18 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 #define FALSEWALL_STATE "fwall_open"
 /decl/material/validate()
 	. = ..()
+
+	if(!crafting_skill)
+		. += "no construction skill set"
+	else if(!isnull(construction_difficulty))
+		var/decl/hierarchy/skill/used_skill = GET_DECL(crafting_skill)
+		if(!istype(used_skill))
+			. += "invalid skill decl [used_skill]"
+		else if(length(used_skill.levels) < construction_difficulty)
+			. += "required skill [used_skill] is missing skill level [json_encode(construction_difficulty)]"
+
+	if(isnull(construction_difficulty))
+		. += "no construction difficulty set"
 
 	if(!isnull(bakes_into_at_temperature))
 		if(!isnull(melting_point) && melting_point <= bakes_into_at_temperature)

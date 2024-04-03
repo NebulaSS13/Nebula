@@ -165,15 +165,18 @@
 		return
 	if(!recipe.can_make(user))
 		return
-	if (recipe.time)
+	var/used_skill = recipe.get_skill(mat, reinf_mat)
+	var/used_difficulty = recipe.get_skill_difficulty(mat, reinf_mat)
+	var/used_time = recipe.get_adjusted_time(mat, reinf_mat)
+	if (used_time)
 		to_chat(user, SPAN_NOTICE("You set about [recipe.get_craft_verbing(src)] [recipe.get_display_name(producing, mat, reinf_mat)]..."))
-		if (!user.do_skilled(recipe.time, recipe.recipe_skill))
+		if (!user.do_skilled(used_time, used_skill))
 			return
 
 	if(!use(expending))
 		return
 
-	if(user.skill_fail_prob(recipe.recipe_skill, 90, recipe.difficulty))
+	if(user.skill_fail_prob(used_skill, 90, used_difficulty))
 		to_chat(user, SPAN_WARNING("You waste some [name] and fail to [recipe.get_craft_verb(src)] [recipe.get_display_name(producing, mat, reinf_mat)]!"))
 		return
 
