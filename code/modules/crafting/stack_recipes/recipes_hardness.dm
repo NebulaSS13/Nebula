@@ -36,6 +36,19 @@
 
 /decl/stack_recipe/hardness/urn
 	result_type       = /obj/item/urn
+	craft_stack_types           = list(
+		/obj/item/stack/material/sheet,
+		/obj/item/stack/material/ingot,
+		/obj/item/stack/material/bar,
+		/obj/item/stack/material/puck
+	)
+	forbidden_craft_stack_types = list(
+		/obj/item/stack/material/ore,
+		/obj/item/stack/material/log,
+		/obj/item/stack/material/lump,
+		/obj/item/stack/material/slab,
+		/obj/item/stack/material/plank
+	)
 
 /decl/stack_recipe/hardness/drill_head
 	result_type       = /obj/item/drill_head
