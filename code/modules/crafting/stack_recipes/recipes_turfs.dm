@@ -35,7 +35,9 @@
 /decl/stack_recipe/turfs/wall
 	abstract_type         = /decl/stack_recipe/turfs/wall
 	expected_product_type = /turf/wall
+	category              = "walls"
 
 /decl/stack_recipe/turfs/path
 	abstract_type         = /decl/stack_recipe/turfs/path
 	expected_product_type = /turf/exterior
+	category              = "floors"

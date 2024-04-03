@@ -9,12 +9,14 @@
 		/obj/item/stack/material/log,
 		/obj/item/stack/material/lump
 	)
+	category                    = "structures"
 
 /decl/stack_recipe/bricks/firepit
 	on_floor                    = TRUE
 	one_per_turf                = TRUE
 	apply_material_name         = FALSE
 	result_type                 = /obj/structure/fire_source/firepit
+	category                    = "fire sources"
 
 /decl/stack_recipe/bricks/firepit/kiln
 	result_type                 = /obj/structure/fire_source/kiln
@@ -24,6 +26,7 @@
 	one_per_turf               = TRUE
 	on_floor                   = TRUE
 	difficulty                 = MAT_VALUE_HARD_DIY
+	category                   = "furniture"
 
 /decl/stack_recipe/bricks/furniture/planting_bed
 	result_type                = /obj/machinery/portable_atmospherics/hydroponics/soil

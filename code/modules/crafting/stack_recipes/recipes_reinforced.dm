@@ -9,11 +9,14 @@
 	result_type       = /obj/structure/aicore
 	on_floor          = FALSE
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
+	category          = "furniture"
 
 /decl/stack_recipe/reinforced/crate
 	result_type       = /obj/structure/closet/crate
+	category          = "furniture"
 
 /decl/stack_recipe/reinforced/grip
 	result_type       = /obj/item/butterflyhandle
 	difficulty        = MAT_VALUE_NORMAL_DIY
 	one_per_turf      = FALSE
+	category          = "weapons"

@@ -5,6 +5,7 @@
 
 /decl/stack_recipe/cardstock/box
 	result_type       = /obj/item/storage/box
+	category          = "cardstock boxes"
 
 /decl/stack_recipe/cardstock/box/large
 	result_type       = /obj/item/storage/box/large

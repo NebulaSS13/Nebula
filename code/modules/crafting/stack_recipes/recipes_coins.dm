@@ -11,11 +11,13 @@
 /decl/stack_recipe/coin/Initialize()
 	. = ..()
 	var/decl/currency/currency_decl = GET_DECL(currency)
-	if(currency_decl && name)
-		for(var/datum/denomination/currency_denomination in currency_decl.denominations)
-			if(currency_denomination.name == name)
-				denomination = currency_denomination
-				return
+	if(currency_decl)
+		required_material = currency_decl.material
+		if(name)
+			for(var/datum/denomination/currency_denomination in currency_decl.denominations)
+				if(currency_denomination.name == name)
+					denomination = currency_denomination
+					return
 
 /decl/stack_recipe/coin/validate()
 	. = ..()

@@ -8,6 +8,7 @@
 	on_floor                    = TRUE
 	difficulty                  = MAT_VALUE_HARD_DIY
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
+	category                    = "structures"
 
 /decl/stack_recipe/strut/railing
 	result_type = /obj/structure/railing
@@ -27,19 +28,23 @@
 
 /decl/stack_recipe/strut/table_frame
 	result_type                 = /obj/structure/table/frame
+	category                    = "furniture"
 
 /decl/stack_recipe/strut/rack
 	result_type                 = /obj/structure/rack
+	category                    = "furniture"
 
 /decl/stack_recipe/strut/butcher_hook
 	result_type                 = /obj/structure/meat_hook
 	one_per_turf                = TRUE
 	difficulty                  = MAT_VALUE_NORMAL_DIY
+	category                    = "furniture"
 
 /decl/stack_recipe/strut/bed
 	result_type                 = /obj/structure/bed
 	required_integrity          = 50
 	required_min_hardness           = MAT_VALUE_FLEXIBLE + 10
+	category                    = "furniture"
 
 /decl/stack_recipe/strut/machine
 	result_type                 = /obj/machinery/constructable_frame/machine_frame
