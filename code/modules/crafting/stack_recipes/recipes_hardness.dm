@@ -4,35 +4,42 @@
 
 /decl/stack_recipe/hardness/improvised_armour
 	result_type       = /obj/item/clothing/suit/armor/crafted
+	category          = "improvised armor"
 
-/decl/stack_recipe/hardness/armguards
+/decl/stack_recipe/hardness/improvised_armour/armguards
 	result_type       = /obj/item/clothing/accessory/armguards/craftable
 
-/decl/stack_recipe/hardness/legguards
+/decl/stack_recipe/hardness/improvised_armour/legguards
 	result_type       = /obj/item/clothing/accessory/legguards/craftable
 
-/decl/stack_recipe/hardness/gauntlets
+/decl/stack_recipe/hardness/improvised_armour/gauntlets
 	result_type       = /obj/item/clothing/gloves/thick/craftable
 
-/decl/stack_recipe/hardness/fork
+/decl/stack_recipe/hardness/utensils
+	abstract_type     = /decl/stack_recipe/hardness/utensils
+	category          = "utensils"
+
+/decl/stack_recipe/hardness/utensils/fork
 	result_type       = /obj/item/utensil/fork
 
-/decl/stack_recipe/hardness/chopsticks
+/decl/stack_recipe/hardness/utensils/chopsticks
 	result_type       = /obj/item/utensil/chopsticks
 
-/decl/stack_recipe/hardness/knife
+/decl/stack_recipe/hardness/utensils/knife
 	result_type       = /obj/item/utensil/knife
 	difficulty        = MAT_VALUE_HARD_DIY
 
+/decl/stack_recipe/hardness/utensils/spoon
+	result_type       = /obj/item/utensil/spoon
+
 /decl/stack_recipe/hardness/bell
 	result_type       = /obj/item/bell
-
-/decl/stack_recipe/hardness/spoon
-	result_type       = /obj/item/utensil/spoon
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE // similar to boxes and bats, not thematically appropriate to low tech
 
 /decl/stack_recipe/hardness/blade
 	result_type       = /obj/item/butterflyblade
 	difficulty        = MAT_VALUE_NORMAL_DIY
+	category          = "weapons"
 
 /decl/stack_recipe/hardness/urn
 	result_type       = /obj/item/urn
@@ -46,6 +53,7 @@
 	result_type       = /obj/item/twohanded/baseballbat
 	difficulty        = MAT_VALUE_HARD_DIY
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE // similar to boxes, not thematically appropriate to low tech
+	category          = "weapons"
 
 /decl/stack_recipe/hardness/ashtray
 	result_type       = /obj/item/ashtray

@@ -4,6 +4,7 @@
 	difficulty        = MAT_VALUE_VERY_HARD_DIY
 	required_material = /decl/material/solid/metal/aluminium
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
+	category          = "weapons"
 
 /decl/stack_recipe/candle
 	result_type       = /obj/item/flame/candle

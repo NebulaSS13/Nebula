@@ -7,6 +7,7 @@
 	one_per_turf       = TRUE
 	on_floor           = TRUE
 	difficulty         = MAT_VALUE_HARD_DIY
+	category           = "furniture"
 
 /decl/stack_recipe/hardness/integrity/furniture/door
 	result_type        = /obj/structure/door

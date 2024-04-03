@@ -2,6 +2,7 @@
 	abstract_type     = /decl/stack_recipe/steel
 	required_material = /decl/material/solid/metal/steel
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
+	category          = "structures"
 
 /decl/stack_recipe/steel/apc
 	result_type       = /obj/item/frame/apc
@@ -37,12 +38,14 @@
 /decl/stack_recipe/steel/cannon
 	result_type       = /obj/item/cannonframe
 	difficulty        = MAT_VALUE_VERY_HARD_DIY
+	category          = "weapons"
 
 /decl/stack_recipe/steel/furniture
 	abstract_type     = /decl/stack_recipe/steel/furniture
 	one_per_turf      = TRUE
 	on_floor          = TRUE
 	difficulty        = MAT_VALUE_HARD_DIY
+	category          = "furniture"
 
 /decl/stack_recipe/steel/furniture/computerframe
 	result_type       = /obj/machinery/constructable_frame/computerframe

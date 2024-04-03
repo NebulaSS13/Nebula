@@ -1,6 +1,7 @@
 /decl/stack_recipe/woven
 	abstract_type       = /decl/stack_recipe/woven
 	craft_stack_types   = /obj/item/stack/material/bundle
+	category            = "woven items"
 
 /decl/stack_recipe/woven/basket
 	result_type = /obj/item/storage/basket

@@ -8,9 +8,11 @@
 /decl/stack_recipe/planks/crossbowframe
 	result_type            = /obj/item/crossbowframe
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
+	category               = "weapons"
 
 /decl/stack_recipe/planks/beehive_assembly
 	result_type            = /obj/item/beehive_assembly
+	category               = "furniture"
 
 /decl/stack_recipe/planks/beehive_frame
 	result_type            = /obj/item/honey_frame
@@ -19,6 +21,7 @@
 	result_type            = /obj/item/zipgunframe
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
+	category               = "weapons"
 
 /decl/stack_recipe/planks/coilgun
 	result_type            = /obj/item/coilgun_assembly
@@ -88,6 +91,7 @@
 	one_per_turf           = TRUE
 	on_floor               = TRUE
 	difficulty             = MAT_VALUE_HARD_DIY
+	category               = "furniture"
 
 /decl/stack_recipe/planks/furniture/coffin
 	result_type            = /obj/structure/closet/coffin/wooden
