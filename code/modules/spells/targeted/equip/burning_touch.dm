@@ -9,12 +9,11 @@
 	range = -1
 	duration = 0
 	max_targets = 1
-	equipped_summons = list("active hand" = /obj/item/flame/hands)
+	equipped_summons = list("active hand" = /obj/item/burning_hands)
 	delete_old = 0
-
 	hud_state = "gen_burnhand"
 
-/obj/item/flame/hands
+/obj/item/burning_hands
 	name = "Burning Hand"
 	icon = 'icons/mob/screen/grabs.dmi'
 	icon_state = "grabbed+1"
@@ -25,13 +24,18 @@
 	var/burn_power = 0
 	var/burn_timer
 
-/obj/item/flame/hands/on_picked_up(var/mob/user)
+/obj/item/burning_hands/on_picked_up(var/mob/user)
 	burn_power = 0
 	burn_timer = world.time + 10 SECONDS
 	START_PROCESSING(SSobj,src)
 
+/obj/item/burning_hands/get_heat()
+	return 1000
 
-/obj/item/flame/hands/Process()
+/obj/item/burning_hands/isflamesource()
+	return TRUE
+
+/obj/item/burning_hands/Process()
 	if(world.time < burn_timer)
 		return
 	burn_timer = world.time + 5 SECONDS
@@ -59,9 +63,9 @@
 		else
 			to_chat(user, "<span class='warning'>You feel \the [src] grow hotter and hotter!</span>")
 
-/obj/item/flame/hands/get_storage_cost()
+/obj/item/burning_hands/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/flame/hands/dropped()
+/obj/item/burning_hands/dropped()
 	..()
 	qdel(src)

@@ -98,6 +98,11 @@
 	else if(reagents?.total_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 
+/turf/get_reagents()
+	if(!reagents)
+		create_reagents(FLUID_MAX_DEPTH)
+	return ..()
+
 /turf/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE)
 	if(!reagents)
 		create_reagents(FLUID_MAX_DEPTH)

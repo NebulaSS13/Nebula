@@ -319,7 +319,7 @@
 /area/map_template/wizard_station)
 "aS" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/candle_box,
+/obj/item/storage/box/candles,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

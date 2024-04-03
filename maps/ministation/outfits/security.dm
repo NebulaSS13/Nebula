@@ -51,7 +51,7 @@
 	l_ear = /obj/item/radio/headset/headset_sec
 	uniform = /obj/item/clothing/under/det
 	suit = /obj/item/clothing/suit/storage/det_trench
-	l_pocket = /obj/item/flame/lighter/zippo
+	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress
 	hands = list(/obj/item/storage/briefcase/crimekit)
 	id_type = /obj/item/card/id/ministation/security

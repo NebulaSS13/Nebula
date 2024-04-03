@@ -5374,7 +5374,7 @@
 /area/exodus/maintenance/security_starboard)
 "alo" = (
 /obj/structure/rack,
-/obj/item/flame/lighter/random,
+/obj/item/flame/fuelled/lighter/random,
 /obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /obj/random/maintenance,
 /obj/random/maintenance,
@@ -17522,7 +17522,7 @@
 	dir = 1
 	},
 /obj/structure/table/reinforced,
-/obj/item/flame/lighter/zippo,
+/obj/item/flame/fuelled/lighter/zippo,
 /turf/floor/lino,
 /area/exodus/crew_quarters/bar)
 "aKR" = (
@@ -20021,7 +20021,7 @@
 /obj/structure/closet{
 	name = "Prisoner's Locker"
 	},
-/obj/item/flame/lighter/zippo,
+/obj/item/flame/fuelled/lighter/zippo,
 /obj/item/storage/box/fancy/cigarettes,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/prison/dorm)
@@ -20097,7 +20097,7 @@
 	},
 /obj/random/single{
 	name = "randomly spawned lighter";
-	spawn_object = /obj/item/flame/lighter
+	spawn_object = /obj/item/flame/fuelled/lighter
 	},
 /turf/floor/lino,
 /area/exodus/hallway/secondary/entry/starboard)
@@ -50058,7 +50058,7 @@
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/item/flame/lighter/zippo,
+/obj/item/flame/fuelled/lighter/zippo,
 /obj/item/megaphone,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4

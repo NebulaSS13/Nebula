@@ -282,11 +282,11 @@
 
 	return t
 
-/obj/item/paper/proc/burnpaper(obj/item/flame/P, mob/user)
+/obj/item/paper/proc/burnpaper(obj/item/P, mob/user)
 	var/class = "warning"
 
-	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/flame/lighter/zippo))
+	if(P.isflamesource() && !user.restrained())
+		if(istype(P, /obj/item/flame/fuelled/lighter/zippo))
 			class = "rose"
 
 		var/decl/pronouns/G = user.get_pronouns()
@@ -294,7 +294,7 @@
 		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 
 		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_held_item() == P && P.lit)
+			if(get_dist(src, user) < 2 && user.get_active_held_item() == P && P.isflamesource())
 				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
@@ -401,7 +401,7 @@
 		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
 		return TRUE
 
-	else if(istype(P, /obj/item/flame))
+	else if(P.isflamesource())
 		burnpaper(P, user)
 		return TRUE
 

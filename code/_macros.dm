@@ -153,6 +153,7 @@
 #define SPAN_NOTICE(X)   SPAN_CLASS("notice",        X)
 #define SPAN_WARNING(X)  SPAN_CLASS("warning",       X)
 #define SPAN_DANGER(X)   SPAN_CLASS("danger",        X)
+#define SPAN_ROSE(X)     SPAN_CLASS("rose",          X)
 #define SPAN_OCCULT(X)   SPAN_CLASS("cult",          X)
 #define SPAN_MFAUNA(X)   SPAN_CLASS("mfauna",        X)
 #define SPAN_SUBTLE(X)   SPAN_CLASS("subtle",        X)

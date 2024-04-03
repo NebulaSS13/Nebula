@@ -132,7 +132,7 @@
 		/obj/item/storage/box/fancy/cigarettes/chemsmoke = 2,
 		/obj/item/storage/box/fancy/cigarettes/mindbreak,
 		/obj/item/storage/box/fancy/cigarettes/tricord,
-		/obj/item/flame/lighter/zippo/random,
+		/obj/item/flame/fuelled/lighter/zippo/random,
 		)
 
 //Rig Electrowarfare and Voice Synthesiser kit

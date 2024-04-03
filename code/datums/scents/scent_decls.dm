@@ -57,3 +57,8 @@
 	color = COLOR_YELLOW_GRAY
 	scent = "sandalwood"
 	scent_datum = /datum/extension/scent/candle/sandalwood
+
+/decl/scent_type/woodsmoke
+	color = COLOR_DARK_GRAY
+	scent = "woodsmoke"
+	scent_datum = /datum/extension/scent/candle/woodsmoke

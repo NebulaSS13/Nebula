@@ -40,7 +40,7 @@
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_ear =  /obj/item/radio/headset/heads/captain
 	glasses = /obj/item/clothing/glasses/eyepatch
-	l_pocket = /obj/item/flame/lighter/zippo
+	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	id_pda_assignment = "Corporate Commander"
 
 /decl/hierarchy/outfit/death_command

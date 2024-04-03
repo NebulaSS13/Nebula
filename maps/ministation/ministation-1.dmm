@@ -5317,7 +5317,7 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table,
-/obj/item/flame/lighter/zippo,
+/obj/item/flame/fuelled/lighter/zippo,
 /obj/item/chems/drinks/shaker,
 /obj/item/clothing/head/collectable/tophat,
 /obj/machinery/fabricator/micro,
@@ -8932,7 +8932,7 @@
 /obj/item/storage/box/fancy/cigarettes{
 	pixel_y = 2
 	},
-/obj/item/flame/lighter/random,
+/obj/item/flame/fuelled/lighter/random,
 /turf/floor/carpet,
 /area/ministation/hall/w2)
 "Pe" = (

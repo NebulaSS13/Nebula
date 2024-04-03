@@ -38,7 +38,7 @@
 		/obj/item/crowbar,
 		/obj/item/rsf,
 		/obj/item/chems/dropper/industrial,
-		/obj/item/flame/lighter/zippo,
+		/obj/item/flame/fuelled/lighter/zippo,
 		/obj/item/storage/tray/robotray,
 		/obj/item/chems/borghypo/service
 	)
@@ -56,7 +56,7 @@
 	. = ..()
 	var/obj/item/rsf/M = locate() in equipment
 	M.stored_matter = 30
-	var/obj/item/flame/lighter/zippo/L = locate() in equipment
+	var/obj/item/flame/fuelled/lighter/zippo/L = locate() in equipment
 	L.lit = TRUE
 
 /obj/item/robot_module/clerical/butler/finalize_emag()

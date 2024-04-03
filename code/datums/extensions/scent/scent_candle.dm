@@ -1,6 +1,6 @@
 /datum/extension/scent/candle
 	intensity = /decl/scent_intensity/normal
-	descriptor = SCENT_DESC_FRAGRANCE 
+	descriptor = SCENT_DESC_FRAGRANCE
 	range = 4
 
 /datum/extension/scent/candle/rose
@@ -35,3 +35,6 @@
 
 /datum/extension/scent/candle/sandalwood
 	scent = "sandalwood"
+
+/datum/extension/scent/candle/woodsmoke
+	scent = "woodsmoke"

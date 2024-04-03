@@ -117,7 +117,7 @@
 
 /obj/structure/loot_pile/maint/trash/get_common_loot()
 	var/static/list/common_loot = list(
-		/obj/item/trash/candle,
+		/obj/item/flame/candle/spent,
 		/obj/item/trash/candy,
 		/obj/item/trash/candy/proteinbar,
 		/obj/item/trash/cigbutt/spitgum,

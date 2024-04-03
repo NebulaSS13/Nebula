@@ -1441,7 +1441,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/flame/lighter/random,
+/obj/item/flame/fuelled/lighter/random,
 /turf/floor/tiled/airless,
 /area/lost_supply_base/common)
 "es" = (

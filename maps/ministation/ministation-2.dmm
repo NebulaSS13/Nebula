@@ -4171,7 +4171,7 @@
 /obj/effect/floor_decal/stoneborder{
 	dir = 6
 	},
-/obj/item/storage/candle_box,
+/obj/item/storage/box/candles,
 /turf/floor/wood/walnut,
 /area/ministation/library)
 "xc" = (
