@@ -17,7 +17,6 @@
 	var/is_fishing = FALSE
 	var/obj/item/bait
 	var/obj/item/fishing_line/line
-	var/line_integrity
 	var/fishing_rod_quality = 0.1
 
 /obj/item/fishing_rod/Initialize()
@@ -78,6 +77,10 @@
 	if(!target.submerged())
 		to_chat(user, SPAN_WARNING("The water is not deep enough to fish there."))
 		return FISHING_FAILED_WARNING
+	var/list/hit = check_trajectory(target, src, pass_flags=PASS_FLAG_TABLE, lifespan = get_dist(target, src))
+	if(length(hit))
+		to_chat(user, SPAN_WARNING("Your fishing line is blocked from reaching \the [target] by \the [hit[1]]."))
+		return FISHING_FAILED_WARNING
 	return FISHING_POSSIBLE
 
 /obj/item/fishing_rod/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
@@ -103,7 +106,7 @@
 
 // TODO: more interesting fishing minigame.
 /obj/item/fishing_rod/proc/do_fishing_minigame(mob/user, turf/target)
-	user.visible_message(SPAN_NOTICE("\The [user] casts \the [src] into \the [target]."))
+	user.visible_message(SPAN_NOTICE("\The [user] casts \the [src] into \the [target.get_fluid_name()]."))
 	playsound(target, 'sound/effects/slosh.ogg', 25, 1)
 	target.show_bubbles()
 	if(do_after(user, get_fishing_delay(user), target))
@@ -119,6 +122,7 @@
 				to_chat(user, SPAN_DANGER("Your fishing line snaps!"))
 				line = null
 			update_icon()
+			result.throw_at(get_turf(user), get_dist(src, result), 0.5, user, FALSE)
 		else
 			// A non-item, non-mob result is probably an /obj/effect from a random
 			// spawner. "You catch a spiderling remains!" is pretty silly.
