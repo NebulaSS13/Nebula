@@ -12,10 +12,8 @@
 	for(var/skill_type in get_available_skill_types())
 		var/decl/hierarchy/skill/skill = GET_DECL(skill_type)
 		if(INSTANCE_IS_ABSTRACT(skill))
-			for(var/decl/hierarchy/skill/child in skill.children)
-				_available_skills |= child.get_descendants()
-		else
-			_available_skills |= skill
+			continue
+		_available_skills |= skill
 
 /datum/map/proc/get_available_skills()
 	if(!_available_skills)
