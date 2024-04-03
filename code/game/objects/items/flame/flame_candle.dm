@@ -1,15 +1,19 @@
 /obj/item/flame/candle
-	name            = "candle"
-	desc            = "A small pillar candle. Its specially-formulated fuel-oxidizer wax mixture allows continued combustion in airless environments."
-	icon            = 'icons/obj/items/flame/candle.dmi'
-	w_class         = ITEM_SIZE_TINY
-	material        = /decl/material/solid/organic/wax
-	lit_light_range = 2
-	_fuel           = null
-	sconce_can_hold = TRUE
+	name                  = "candle"
+	desc                  = "A small pillar candle. Its specially-formulated fuel-oxidizer wax mixture allows continued combustion in airless environments."
+	icon                  = 'icons/obj/items/flame/candle.dmi'
+	w_class               = ITEM_SIZE_TINY
+	material              = /decl/material/solid/organic/wax
+	lit_light_range       = 2
+	_fuel                 = null
+	sconce_can_hold       = TRUE
+	extinguish_on_dropped = FALSE
 
 /obj/item/flame/candle/spent
 	_fuel           = 0
+
+/obj/item/flame/candle/red
+	paint_color = COLOR_RED
 
 /obj/item/flame/candle/Initialize()
 
@@ -26,7 +30,7 @@
 /obj/item/flame/candle/get_sconce_overlay()
 	. = list(overlay_image(icon, "[icon_state]-sconce", color = color, flags = RESET_COLOR))
 	if(lit)
-		. += overlay_image(icon, "[icon_state]-lit", color = color, flags = RESET_COLOR)
+		. += overlay_image(icon, "[icon_state]-sconce-lit", color = color, flags = RESET_COLOR)
 
 /obj/item/flame/candle/on_update_icon()
 
@@ -48,8 +52,10 @@
 		// TODO: emissives
 		add_overlay(overlay_image(icon, "[icon_state]_lit", flags = RESET_COLOR))
 
-
 /obj/item/flame/candle/proc/get_available_colors()
+	return null
+
+/obj/item/flame/candle/random/get_available_colors()
 	var/static/list/available_colours = list(
 		COLOR_WHITE,
 		COLOR_DARK_GRAY,

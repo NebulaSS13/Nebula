@@ -52,7 +52,8 @@
 		if(prob(50) && growth_stage >= plant.growth_stages)
 			harvestable = rand(1, 3)
 		if(plant.get_trait(TRAIT_BIOLUM))
-			set_light(round(plant.get_trait(TRAIT_POTENCY)/10), l_color = plant.get_trait(TRAIT_BIOLUM_COLOUR))
+			var/potency = plant.get_trait(TRAIT_POTENCY)
+			set_light(l_range = max(1, round(potency/10)), l_power = clamp(round(potency/30), 0, 1), l_color = plant.get_trait(TRAIT_BIOLUM_COLOUR))
 	update_icon()
 	return ..()
 

@@ -1,16 +1,18 @@
 /obj/item/storage/box/candles
-	name = "candle pack"
+	name = "party candle pack"
 	desc = "A pack of unscented candles in a variety of colours."
 	icon = 'icons/obj/items/storage/candles.dmi'
 	icon_state = ICON_STATE_WORLD
-	can_hold = list(/obj/item/flame/candle)
+	can_hold = list(
+		/obj/item/flame/candle
+	)
 	throwforce = 2
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/cardboard
 
 /obj/item/storage/box/candles/WillContain()
-	return list(/obj/item/flame/candle = 7)
+	return list(/obj/item/flame/candle/random = 7)
 
 /obj/item/storage/box/candles/incense
 	name = "incense box"

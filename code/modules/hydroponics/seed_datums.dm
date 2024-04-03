@@ -549,6 +549,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#d3aca3")
 	set_trait(TRAIT_PLANT_COLOUR,"#dcd9d9")
 	set_trait(TRAIT_PLANT_ICON,"mushroom8")
+
 /datum/seed/mushroom/glowbell
 	name = "glowbell"
 	seed_name = "glowbell"
