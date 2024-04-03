@@ -400,6 +400,9 @@
 		else
 			set_light(0)
 
+/obj/structure/fire_source/spark_act(obj/effect/sparks/sparks)
+	try_light(1000)
+
 // Subtypes.
 /obj/structure/fire_source/firepit
 	obj_flags = OBJ_FLAG_HOLLOW

@@ -14,7 +14,7 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
 
-/obj/item/flame/fuelled/lighter/light(mob/user)
+/obj/item/flame/fuelled/lighter/light(mob/user, no_message)
 	if(submerged())
 		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
 		return FALSE

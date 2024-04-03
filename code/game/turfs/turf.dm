@@ -725,12 +725,12 @@
 		if(fluid_depth <= FLUID_DEEP)
 			return "mask_deep"
 
-/turf/proc/spark_act(obj/effect/sparks/sparks)
+/turf/spark_act(obj/effect/sparks/sparks)
 	if(simulated)
 		hotspot_expose(1000,100)
-		if(prob(25))
-			for(var/obj/structure/fire_source/fire in contents)
-				fire.try_light(1000)
+		for(var/atom/thing in contents)
+			if(thing.simulated && prob(25))
+				thing.spark_act(sparks)
 		return TRUE
 	return FALSE
 

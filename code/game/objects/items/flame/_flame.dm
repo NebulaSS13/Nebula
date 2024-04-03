@@ -200,3 +200,7 @@
 			location.hotspot_expose(700, 5)
 		extinguish()
 	return ..()
+
+/obj/item/flame/spark_act(obj/effect/sparks/sparks)
+	if(!can_manually_light)
+		light(null, no_message = TRUE)
