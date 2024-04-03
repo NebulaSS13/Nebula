@@ -272,6 +272,10 @@
 			if(T.reagents)
 				fluid_act(T.reagents)
 
+		for(var/mob/viewer in storage?.storage_ui?.is_seeing)
+			if(!storage.can_view(viewer))
+				storage.close(viewer)
+
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(TRUE)
@@ -287,6 +291,8 @@
 
 	var/datum/thrownthing/TT = new(src, target, range, speed, thrower, callback)
 	throwing = TT
+
+	storage?.close_all()
 
 	pixel_z = 0
 	if(spin && does_spin)

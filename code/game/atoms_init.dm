@@ -78,7 +78,9 @@
 	return
 
 /atom/Destroy()
-	storage?.on_item_pre_deletion(src) // must be done before deletion // TODO: ADD PRE_DELETION OBSERVATION
+	// must be done before deletion // TODO: ADD PRE_DELETION OBSERVATION
+	if(isatom(loc) && loc.storage)
+		loc.storage.on_item_pre_deletion(src)
 	UNQUEUE_TEMPERATURE_ATOM(src)
 	QDEL_NULL(reagents)
 	LAZYCLEARLIST(our_overlays)
@@ -89,9 +91,11 @@
 		updateVisibility(src)
 	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
 		QDEL_NULL(atom_codex_ref)
+	var/atom/oldloc = loc
 	. = ..()
+	if(isatom(oldloc) && oldloc.storage)
+		oldloc.storage.on_item_post_deletion(src) // must be done after deletion
 	// This might need to be moved onto a Del() override at some point.
-	storage?.on_item_post_deletion(src) // must be done after deletion
 	QDEL_NULL(storage)
 
 // Called if an atom is deleted before it initializes. Only call Destroy in this if you know what you're doing.

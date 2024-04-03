@@ -1,4 +1,5 @@
 /datum/storage_ui
+	var/list/is_seeing // List of mobs which are currently seeing the contents of this storage
 	var/datum/storage/_storage
 
 /datum/storage_ui/New(owner)
@@ -6,6 +7,7 @@
 	..()
 
 /datum/storage_ui/Destroy()
+	LAZYCLEARLIST(is_seeing)
 	if(_storage)
 		if(_storage.storage_ui == src)
 			_storage.storage_ui = null
@@ -44,7 +46,6 @@
 
 // Default subtype
 /datum/storage_ui/default
-	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
 	var/obj/screen/storage/boxes/boxes
 	var/obj/screen/storage/close/closer
 	var/obj/screen/storage/start/storage_start //storage UI
@@ -127,11 +128,11 @@
 		user.client.screen += storage_start
 		user.client.screen += storage_continue
 		user.client.screen += storage_end
-	is_seeing |= user
+	LAZYDISTINCTADD(is_seeing, user)
 	user.active_storage = _storage
 
 /datum/storage_ui/default/hide_from(mob/user)
-	is_seeing -= user
+	LAZYREMOVE(is_seeing, user)
 	if(!user.client)
 		return
 	user.client.screen -= boxes
@@ -162,7 +163,7 @@
 		if(M.active_storage == _storage && M.client)
 			cansee |= M
 		else
-			is_seeing -= M
+			LAZYREMOVE(is_seeing, M)
 	return cansee
 
 //This proc draws out the inventory and places the items on it. tx and ty are the upper left tile and mx, my are the bottm right.

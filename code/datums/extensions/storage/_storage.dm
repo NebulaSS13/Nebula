@@ -322,3 +322,6 @@
 				user.equip_to_slot_if_possible(holder, inv.slot_id)
 			return FALSE
 	return FALSE
+
+/datum/storage/proc/can_view(mob/viewer)
+	return (holder in viewer.contents) || viewer.Adjacent(holder)
