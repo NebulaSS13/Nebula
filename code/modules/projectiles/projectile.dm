@@ -37,7 +37,7 @@
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/damage_flags = DAM_BULLET
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
-	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
+	var/life_span //If non-null, this will de-increment every after_move(). When 0, it will delete the projectile.
 		//Effects
 	var/stun = 0
 	var/weaken = 0
@@ -327,6 +327,8 @@
 		light.forceMove(loc)
 		light.copy_from(tracer_type)
 		QDEL_IN(light, 3)
+	if(!isnull(life_span) && --life_span <= 0)
+		qdel(src)
 
 /obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
 	//Check if we even broke skin in first place
