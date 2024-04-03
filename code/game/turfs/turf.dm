@@ -338,7 +338,7 @@
 			if(abs(current_height - old_height) > FLUID_SHALLOW)
 				if(current_height > old_height)
 					return 0
-				if(MOVING_DELIBERATELY(mover_mob))
+				if(istype(mover_mob) && MOVING_DELIBERATELY(mover_mob))
 					to_chat(mover_mob, SPAN_WARNING("You refrain from stepping over the edge; it looks like a steep drop down to \the [src]."))
 					return 0
 
