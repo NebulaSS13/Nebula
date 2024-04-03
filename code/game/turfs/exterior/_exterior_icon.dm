@@ -46,7 +46,7 @@
 			add_overlay(I)
 
 	else
-
+		default_pixel_z = 0
 		layer = TURF_LAYER
 
 	if(icon_edge_layer >= 0)
