@@ -13,6 +13,21 @@
 	. = ..()
 	initialize_reagents()
 
+/obj/item/flame/fuelled/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 && reagents?.maximum_volume && user)
+		switch(reagents.total_volume / reagents.maximum_volume)
+			if(0 to 0.1)
+				to_chat(user, SPAN_WARNING("\The [src] is nearly empty."))
+			if(0.1 to 0.25)
+				to_chat(user, SPAN_NOTICE("\The [src] is one-quarter full."))
+			if(0.25 to 0.5)
+				to_chat(user, SPAN_NOTICE("\The [src] is half full."))
+			if(0.5 to 0.75)
+				to_chat(user, SPAN_NOTICE("\The [src] is three-quarters full."))
+			else
+				to_chat(user, SPAN_NOTICE("\The [src] is full."))
+
 /obj/item/flame/fuelled/get_fuel()
 	return REAGENT_VOLUME(reagents, fuel_type)
 
