@@ -12,6 +12,9 @@
 	var/brightness_on
 	var/on = 0
 
+/obj/item/clothing/head/gives_weather_protection()
+	return protects_against_weather
+
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
 		if(!isturf(user.loc))

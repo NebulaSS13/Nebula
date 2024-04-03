@@ -981,9 +981,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else
 		client.screen -= src
 
-/obj/item/proc/gives_weather_protection()
-	return FALSE
-
 /obj/item/proc/get_assembly_detail_color()
 	return
 
