@@ -7,6 +7,7 @@
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
 	icon_has_corners = TRUE
+	material = /decl/material/solid/organic/plantmatter/grass
 
 /turf/exterior/grass/wild
 	name = "wild grass"

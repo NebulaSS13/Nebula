@@ -29,6 +29,17 @@
 	ore_name    ||= solid_name
 	. = ..()
 
+/decl/material/solid/ice/snow
+	name = "snow"
+	liquid_name = "water"
+	solid_name = "snow"
+	gas_name = "steam"
+	uid = "solid_snow"
+	hardness = MAT_VALUE_MALLEABLE
+	dug_drop_type = /obj/item/stack/material/ore/handful
+	default_solid_form = /obj/item/stack/material/ore/handful
+	can_backfill_turf_type = /turf/exterior/snow
+
 /decl/material/solid/ice/aspium
 	name = "aspium"
 	use_name = null

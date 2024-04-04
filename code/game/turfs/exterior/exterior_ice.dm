@@ -4,6 +4,7 @@
 	footstep_type = /decl/footsteps/plating
 	base_color = COLOR_LIQUID_WATER
 	color = COLOR_LIQUID_WATER
+	material = /decl/material/solid/ice
 
 /turf/exterior/ice/Initialize()
 	. = ..()
@@ -22,6 +23,7 @@
 	footstep_type = /decl/footsteps/snow
 	possible_states = 13
 	dirt_color = "#e3e7e8"
+	material = /decl/material/solid/ice/snow
 
 /turf/exterior/snow/get_base_movement_delay(travel_dir, mob/mover)
 	. = ..()
