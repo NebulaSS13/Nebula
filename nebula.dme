@@ -1162,6 +1162,7 @@
 #include "code\game\objects\items\flame\flame_fuelled_lighter.dm"
 #include "code\game\objects\items\flame\flame_fuelled_lighter_zippo.dm"
 #include "code\game\objects\items\flame\flame_matches.dm"
+#include "code\game\objects\items\flame\flame_torch.dm"
 #include "code\game\objects\items\flashlights\_flashlight.dm"
 #include "code\game\objects\items\flashlights\flare.dm"
 #include "code\game\objects\items\flashlights\floodlamp.dm"

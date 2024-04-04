@@ -1,7 +1,7 @@
 /obj/item/storage/box/matches
 	name = "matchbox"
 	desc = "A small box of 'Space-Proof' premium matches."
-	icon = 'icons/obj/items/storage/matches/matchbox.dmi'
+	icon = 'icons/obj/items/storage/matchbox.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
 	w_class = ITEM_SIZE_TINY
