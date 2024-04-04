@@ -6,8 +6,6 @@
 	name          = "organic exoplanet"
 	desc          = "An exoplanet made entirely of organic matter."
 	color         = "#ac4653"
-	surface_color = "#e2768d"
-	water_color   = "#c7c27c"
 
 ////////////////////////////////////////////////////////////////////////////
 // Level Data
@@ -76,6 +74,8 @@
 	flora                          = /datum/planet_flora/random/meat
 	fauna                          = /datum/fauna_generator/meat
 	strata                         = /decl/strata/sedimentary
+	surface_color = "#e2768d"
+	water_color   = "#c7c27c"
 	possible_rock_colors           = list(
 		COLOR_OFF_WHITE,
 		"#f3ebd4",

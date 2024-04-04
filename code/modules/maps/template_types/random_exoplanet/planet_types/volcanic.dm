@@ -6,8 +6,6 @@
 	name          = "volcanic exoplanet"
 	desc          = "A tectonically unstable planet, extremely rich in minerals."
 	color         = "#9c2020"
-	surface_color = "#261e19"
-	water_color   = "#c74d00"
 
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic/get_atmosphere_color()
 	return COLOR_GRAY20
@@ -78,6 +76,8 @@
 	initial_weather_state          = /decl/state/weather/ash
 	flora                          = /datum/planet_flora/random/volcanic
 	fauna                          = /datum/fauna_generator/volcanic
+	surface_color = "#261e19"
+	water_color   = "#c74d00"
 	possible_rock_colors           = list(
 		COLOR_DARK_GRAY
 	)

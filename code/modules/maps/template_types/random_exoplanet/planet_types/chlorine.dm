@@ -6,8 +6,6 @@
 	name          = "chlorine exoplanet"
 	desc          = "An exoplanet with a chlorine based ecosystem. Large quantities of liquid chlorine are present."
 	color         = "#c9df9f"
-	surface_color = "#a3b879"
-	water_color   = COLOR_BOTTLE_GREEN
 
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine/get_atmosphere_color()
 	return "#e5f2bd"
@@ -72,6 +70,8 @@
 	surface_light_gen_level_max    = 0.85
 	flora                          = /datum/planet_flora/random/chlorine
 	fauna                          = /datum/fauna_generator/chlorine
+	surface_color 				   = "#a3b879"
+	water_color  				   = COLOR_BOTTLE_GREEN
 	possible_rock_colors           = list(
 		COLOR_GRAY80,
 		COLOR_PALE_GREEN_GRAY,

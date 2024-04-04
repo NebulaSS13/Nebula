@@ -6,8 +6,6 @@
 	name          = "desert exoplanet"
 	desc          = "An arid exoplanet with sparse biological resources but rich mineral deposits underground."
 	color         = "#a08444"
-	surface_color = "#d6cca4"
-	water_color   = null
 
 ////////////////////////////////////////////////////////////////////////////
 // Level Data
@@ -80,6 +78,8 @@
 	surface_light_gen_level_max    = 0.95
 	flora                          = /datum/planet_flora/random/desert
 	fauna                          = /datum/fauna_generator/desert
+	surface_color 				   = "#d6cca4"
+	water_color   				   = null
 	possible_rock_colors           = list(
 		COLOR_BEIGE,
 		COLOR_PALE_YELLOW,
