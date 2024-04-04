@@ -23,7 +23,7 @@
 	return !dry
 
 /obj/item/chems/food/get_dryness_text(var/obj/rack)
-	var/moistness = drying_wetness / initial(drying_wetness)
+	var/moistness = drying_wetness / get_max_drying_wetness()
 	if(moistness > 0.65)
 		return "fresh"
 	if(moistness > 0.35)
