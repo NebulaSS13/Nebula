@@ -13,7 +13,4 @@
 /area/proc/get_fishing_result(turf/origin, obj/item/chems/food/bait)
 	if(!length(fishing_results) || prob(fishing_failure_prob))
 		return null
-	var/loot_type = pickweight(fishing_results)
-	if(!loot_type)
-		return null
-	. = new loot_type(origin)
+	return pickweight(fishing_results)

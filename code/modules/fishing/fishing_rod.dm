@@ -2,6 +2,110 @@
 #define FISHING_FAILED_WARNING 1
 #define FISHING_POSSIBLE       2
 
+// Abstract item for pulling the minigame delay and interaction out of afterattack at some point.
+/obj/abstract/fishing_marker
+	is_spawnable_type = FALSE
+	var/turf/target
+	var/mob/user
+	var/obj/item/fishing_rod/rod
+	// Atom-typed so we can use initial().
+	var/atom/hooked
+
+/obj/abstract/fishing_marker/Destroy()
+	if(rod?.is_fishing == src)
+		rod.is_fishing = null
+
+	target = null
+	user   = null
+	hooked = null
+	rod    = null
+	return ..()
+
+/obj/abstract/fishing_marker/Initialize(ml, mob/_user, obj/item/fishing_rod/_rod)
+
+	. = ..(ml)
+
+	rod    = _rod
+	user   = _user
+	target = get_turf(src)
+
+	if(!istype(rod) || !istype(user) || !istype(target))
+		return INITIALIZE_HINT_QDEL
+
+	user.visible_message(SPAN_NOTICE("\The [user] casts \the [rod] into \the [target.get_fluid_name()]."))
+	playsound(target, 'sound/effects/watersplash.ogg', 25, 1)
+	target.show_bubbles()
+	addtimer(CALLBACK(src, PROC_REF(notify_catch)), rod.get_fishing_delay(user, target))
+	return INITIALIZE_HINT_NORMAL
+
+/obj/abstract/fishing_marker/proc/notify_catch()
+
+	if(QDELETED(src))
+		return
+
+	if(QDELETED(target) || QDELETED(user) || QDELETED(rod))
+		qdel(src)
+		return
+
+	hooked = target.get_fishing_result(rod.bait) || FALSE
+	to_chat(user, SPAN_NOTICE("You feel a tug on \the [rod]!"))
+	target.show_bubbles()
+	playsound(target, 'sound/effects/bubbles3.ogg', 50, 1)
+	addtimer(CALLBACK(src, PROC_REF(lose_catch), hooked), 3 SECONDS)
+
+/obj/abstract/fishing_marker/proc/lose_catch(old_hooked)
+
+	if(QDELETED(src))
+		return
+
+	if(QDELETED(target) || QDELETED(user) || QDELETED(rod) || hooked != old_hooked)
+		qdel(src)
+		return
+
+	hooked = null
+	to_chat(user, SPAN_NOTICE("\The [rod]'s line goes slack..."))
+	playsound(target, 'sound/effects/slosh.ogg', 25, 1)
+	addtimer(CALLBACK(src, PROC_REF(notify_catch)), rod.get_fishing_delay(user, target))
+
+// TODO: more interesting fishing minigame.
+/obj/abstract/fishing_marker/proc/catch_fish()
+
+	if(QDELETED(src))
+		return
+
+	if(QDELETED(target) || QDELETED(user) || QDELETED(rod))
+		qdel(src)
+		return
+
+	if(istype(rod) && istype(user) && istype(target) && user.get_active_held_item() == rod && rod.is_fishing == src)
+
+		if(!ispath(hooked) || ispath(hooked, /obj/effect) || ispath(hooked, /obj/abstract) || !initial(hooked.simulated))
+			to_chat(user, SPAN_NOTICE("You catch... nothing."))
+
+		else
+
+			var/atom/movable/result = new hooked(target)
+			to_chat(user, SPAN_NOTICE("You catch \a [result]!"))
+			if(ismob(result))
+				var/mob/feesh = result
+				SET_STATUS_MAX(feesh, STAT_STUN, 3)
+				QDEL_NULL(rod.bait)
+
+			rod.line.take_damage(round(result.get_object_size() * rand(0.5, 1.5)))
+			if(QDELETED(rod.line))
+				to_chat(user, SPAN_DANGER("Your fishing line snaps!"))
+				rod.line = null
+				rod.update_icon()
+
+			var/turf/result_turf = get_step(get_turf(user), get_dir(user, result))
+			if(result_turf && get_turf(result) != result_turf)
+				result.throw_at(result_turf, get_dist(rod, result), 0.5, user, FALSE)
+
+		playsound(target, 'sound/effects/slosh.ogg', 25, 1)
+
+	if(!QDELETED(src))
+		qdel(src)
+
 /obj/item/fishing_rod
 	name = "fishing rod"
 	desc = "A simple fishing rod with eyelets for stringing a line."
@@ -14,7 +118,7 @@
 	force = 5 // bonk
 
 	var/const/base_fishing_time = 25 SECONDS
-	var/is_fishing = FALSE
+	var/obj/abstract/fishing_marker/is_fishing
 	var/obj/item/bait
 	var/obj/item/fishing_line/line
 	var/fishing_rod_quality = 0.1
@@ -28,6 +132,12 @@
 	. = ..()
 	update_icon()
 
+/obj/item/fishing_rod/Destroy()
+	QDEL_NULL(is_fishing)
+	QDEL_NULL(bait)
+	QDEL_NULL(line)
+	return ..()
+
 /obj/item/fishing_rod/on_update_icon()
 	..()
 	if(line)
@@ -37,11 +147,6 @@
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inhand_overlays()
-
-/obj/item/fishing_rod/Destroy()
-	QDEL_NULL(bait)
-	QDEL_NULL(line)
-	return ..()
 
 /obj/item/fishing_rod/physically_destroyed()
 	if(bait)
@@ -84,56 +189,46 @@
 	return FISHING_POSSIBLE
 
 /obj/item/fishing_rod/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+
+	if(user.a_intent == I_HURT)
+		return ..()
+
 	if(is_fishing)
 		to_chat(user, SPAN_WARNING("You are already fishing with \the [src]!"))
 		return
+
 	if(!line)
 		to_chat(user, SPAN_WARNING("\The [src] has no line!"))
 		return
+
+	if(get_dist(user, target) > 5)
+		to_chat(user, SPAN_WARNING("\The [target] is too far away!"))
+		return
+
 	var/fish_check = can_fish_in(user, target)
 	if(fish_check == FISHING_FAILED_SILENT)
 		// TODO: throw the hook at them without doing the fishing minigame.
 		return ..()
+
 	if(fish_check == FISHING_FAILED_WARNING)
 		return
-	is_fishing = TRUE
-	do_fishing_minigame(user, target)
-	is_fishing = FALSE
 
-/obj/item/fishing_rod/proc/get_fishing_delay(mob/user)
+	is_fishing = new(get_turf(target), user, src)
+
+/obj/item/fishing_rod/proc/get_fishing_delay(mob/user, turf/target)
 	var/speed_mult = fishing_rod_quality + (bait?.get_bait_value() || 0)
 	return clamp(base_fishing_time - (base_fishing_time * speed_mult), 1, base_fishing_time * 2)
 
-// TODO: more interesting fishing minigame.
-/obj/item/fishing_rod/proc/do_fishing_minigame(mob/user, turf/target)
-	user.visible_message(SPAN_NOTICE("\The [user] casts \the [src] into \the [target.get_fluid_name()]."))
-	playsound(target, 'sound/effects/slosh.ogg', 25, 1)
-	target.show_bubbles()
-	if(do_after(user, get_fishing_delay(user), target))
-		playsound(target, 'sound/effects/slosh.ogg', 25, 1)
-		target.show_bubbles()
-		var/atom/movable/result = target.get_fishing_result(bait)
-		if(ismob(result) || isitem(result) || istype(result, /obj/structure) || istype(result, /obj/machinery))
-			to_chat(user, SPAN_NOTICE("You catch \a [result]!"))
-			if(ismob(result))
-				QDEL_NULL(bait)
-			line.take_damage(round(result.get_object_size() * rand(0.5, 1.5)))
-			if(QDELETED(line))
-				to_chat(user, SPAN_DANGER("Your fishing line snaps!"))
-				line = null
-			update_icon()
-			result.throw_at(get_turf(user), get_dist(src, result), 0.5, user, FALSE)
-		else
-			// A non-item, non-mob result is probably an /obj/effect from a random
-			// spawner. "You catch a spiderling remains!" is pretty silly.
-			if(isatom(result))
-				qdel(result)
-			to_chat(user, SPAN_NOTICE("You catch... nothing."))
-		return TRUE
-	to_chat(user, SPAN_WARNING("You reel your line back in and abandon trying to fish in \the [target]."))
-	return FALSE
-
 /obj/item/fishing_rod/attack_self(mob/user)
+
+	if(is_fishing)
+		if(isnull(is_fishing.hooked))
+			to_chat(user, SPAN_NOTICE("You reel your line back in and abandon fishing in \the [is_fishing.target]."))
+			QDEL_NULL(is_fishing)
+		else
+			// This is where the proper fishing minigame should go (when it exists).
+			is_fishing.catch_fish()
+		return TRUE
 
 	if(bait)
 		bait.dropInto(loc)
