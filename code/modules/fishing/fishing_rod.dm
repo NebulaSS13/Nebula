@@ -2,110 +2,6 @@
 #define FISHING_FAILED_WARNING 1
 #define FISHING_POSSIBLE       2
 
-// Abstract item for pulling the minigame delay and interaction out of afterattack at some point.
-/obj/abstract/fishing_marker
-	is_spawnable_type = FALSE
-	var/turf/target
-	var/mob/user
-	var/obj/item/fishing_rod/rod
-	// Atom-typed so we can use initial().
-	var/atom/hooked
-
-/obj/abstract/fishing_marker/Destroy()
-	if(rod?.is_fishing == src)
-		rod.is_fishing = null
-
-	target = null
-	user   = null
-	hooked = null
-	rod    = null
-	return ..()
-
-/obj/abstract/fishing_marker/Initialize(ml, mob/_user, obj/item/fishing_rod/_rod)
-
-	. = ..(ml)
-
-	rod    = _rod
-	user   = _user
-	target = get_turf(src)
-
-	if(!istype(rod) || !istype(user) || !istype(target))
-		return INITIALIZE_HINT_QDEL
-
-	user.visible_message(SPAN_NOTICE("\The [user] casts \the [rod] into \the [target.get_fluid_name()]."))
-	playsound(target, 'sound/effects/watersplash.ogg', 25, 1)
-	target.show_bubbles()
-	addtimer(CALLBACK(src, PROC_REF(notify_catch)), rod.get_fishing_delay(user, target))
-	return INITIALIZE_HINT_NORMAL
-
-/obj/abstract/fishing_marker/proc/notify_catch()
-
-	if(QDELETED(src))
-		return
-
-	if(QDELETED(target) || QDELETED(user) || QDELETED(rod))
-		qdel(src)
-		return
-
-	hooked = target.get_fishing_result(rod.bait) || FALSE
-	to_chat(user, SPAN_NOTICE("You feel a tug on \the [rod]!"))
-	target.show_bubbles()
-	playsound(target, 'sound/effects/bubbles3.ogg', 50, 1)
-	addtimer(CALLBACK(src, PROC_REF(lose_catch), hooked), 3 SECONDS)
-
-/obj/abstract/fishing_marker/proc/lose_catch(old_hooked)
-
-	if(QDELETED(src))
-		return
-
-	if(QDELETED(target) || QDELETED(user) || QDELETED(rod) || hooked != old_hooked)
-		qdel(src)
-		return
-
-	hooked = null
-	to_chat(user, SPAN_NOTICE("\The [rod]'s line goes slack..."))
-	playsound(target, 'sound/effects/slosh.ogg', 25, 1)
-	addtimer(CALLBACK(src, PROC_REF(notify_catch)), rod.get_fishing_delay(user, target))
-
-// TODO: more interesting fishing minigame.
-/obj/abstract/fishing_marker/proc/catch_fish()
-
-	if(QDELETED(src))
-		return
-
-	if(QDELETED(target) || QDELETED(user) || QDELETED(rod))
-		qdel(src)
-		return
-
-	if(istype(rod) && istype(user) && istype(target) && user.get_active_held_item() == rod && rod.is_fishing == src)
-
-		if(!ispath(hooked) || ispath(hooked, /obj/effect) || ispath(hooked, /obj/abstract) || !initial(hooked.simulated))
-			to_chat(user, SPAN_NOTICE("You catch... nothing."))
-
-		else
-
-			var/atom/movable/result = new hooked(target)
-			to_chat(user, SPAN_NOTICE("You catch \a [result]!"))
-			if(ismob(result))
-				var/mob/feesh = result
-				SET_STATUS_MAX(feesh, STAT_STUN, 3)
-				QDEL_NULL(rod.bait)
-
-			rod.line.take_damage(round(result.get_object_size() * rand(0.5, 1.5)))
-			if(QDELETED(rod.line))
-				to_chat(user, SPAN_DANGER("Your fishing line snaps!"))
-				rod.line = null
-				rod.update_icon()
-
-			var/turf/result_turf = get_step(get_turf(user), get_dir(user, result))
-			if(result_turf && get_turf(result) != result_turf)
-				result.throw_at(result_turf, get_dist(rod, result), 0.5, user, FALSE)
-
-		playsound(target, 'sound/effects/slosh.ogg', 25, 1)
-
-	if(!QDELETED(src))
-		qdel(src)
-
 /obj/item/fishing_rod
 	name = "fishing rod"
 	desc = "A simple fishing rod with eyelets for stringing a line."
@@ -117,8 +13,13 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 5 // bonk
 
+	// Fishing minigame tracking vars.
+	var/turf/fishing_target
+	var/mob/fishing_user
+	// Atom-typed so we can use initial().
+	var/atom/fishing_hooked
+
 	var/const/base_fishing_time = 25 SECONDS
-	var/obj/abstract/fishing_marker/is_fishing
 	var/obj/item/bait
 	var/obj/item/fishing_line/line
 	var/fishing_rod_quality = 0.1
@@ -133,10 +34,97 @@
 	update_icon()
 
 /obj/item/fishing_rod/Destroy()
-	QDEL_NULL(is_fishing)
+	stop_fishing()
 	QDEL_NULL(bait)
 	QDEL_NULL(line)
 	return ..()
+
+/obj/item/fishing_rod/proc/stop_fishing()
+
+	fishing_target = null
+	fishing_user   = null
+	fishing_hooked = null
+
+/obj/item/fishing_rod/proc/start_fishing(turf/_target, mob/_user)
+
+	fishing_user   = _user
+	fishing_target = _target
+
+	if(!istype(fishing_user) || !istype(fishing_user))
+		stop_fishing()
+		return
+
+	fishing_user.visible_message(SPAN_NOTICE("\The [fishing_user] casts \the [src] into \the [fishing_target.get_fluid_name()]."))
+	playsound(fishing_target, 'sound/effects/watersplash.ogg', 25, 1)
+	fishing_target.show_bubbles()
+	addtimer(CALLBACK(src, PROC_REF(notify_catch)), get_fishing_delay(fishing_user, fishing_target))
+
+/obj/item/fishing_rod/proc/notify_catch()
+
+	if(QDELETED(src))
+		return
+
+	if(QDELETED(fishing_target) || QDELETED(fishing_user))
+		stop_fishing()
+		return
+
+	fishing_hooked = fishing_target.get_fishing_result(bait) || FALSE
+	to_chat(fishing_user, SPAN_NOTICE("You feel a tug on \the [src]!"))
+	fishing_target.show_bubbles()
+	playsound(fishing_target, 'sound/effects/bubbles3.ogg', 50, 1)
+	addtimer(CALLBACK(src, PROC_REF(lose_catch), fishing_hooked), 3 SECONDS)
+
+/obj/item/fishing_rod/proc/lose_catch(old_hooked)
+
+	if(QDELETED(src))
+		return
+
+	if(QDELETED(fishing_target) || QDELETED(fishing_user) || fishing_hooked != old_hooked)
+		stop_fishing()
+		return
+
+	fishing_hooked = null
+	to_chat(fishing_user, SPAN_NOTICE("\The [src]'s line goes slack..."))
+	playsound(fishing_target, 'sound/effects/slosh.ogg', 25, 1)
+	addtimer(CALLBACK(src, PROC_REF(notify_catch)), get_fishing_delay(fishing_user, fishing_target))
+
+// TODO: more interesting fishing minigame.
+/obj/item/fishing_rod/proc/catch_fish()
+
+	if(QDELETED(src))
+		return
+
+	if(QDELETED(fishing_target) || QDELETED(fishing_user))
+		stop_fishing()
+		return
+
+	if(istype(fishing_user) && istype(fishing_target) && fishing_user.get_active_held_item() == src)
+
+		if(!ispath(fishing_hooked) || ispath(fishing_hooked, /obj/effect) || !initial(fishing_hooked.simulated))
+			to_chat(fishing_user, SPAN_NOTICE("You catch... nothing."))
+
+		else
+
+			var/atom/movable/result = new fishing_hooked(fishing_target)
+			to_chat(fishing_user, SPAN_NOTICE("You catch \a [result]!"))
+			if(ismob(result))
+				var/mob/feesh = result
+				SET_STATUS_MAX(feesh, STAT_STUN, 3)
+				QDEL_NULL(bait)
+
+			line.take_damage(round(result.get_object_size() * rand(0.5, 1.5)))
+			if(QDELETED(line))
+				to_chat(fishing_user, SPAN_DANGER("Your fishing line snaps!"))
+				line = null
+				update_icon()
+
+			var/turf/result_turf = get_step(get_turf(fishing_user), get_dir(fishing_user, result))
+			if(result_turf && get_turf(result) != result_turf)
+				result.throw_at(result_turf, get_dist(src, result), 0.5, fishing_user, FALSE)
+
+		playsound(fishing_target, 'sound/effects/slosh.ogg', 25, 1)
+
+	stop_fishing()
 
 /obj/item/fishing_rod/on_update_icon()
 	..()
@@ -193,7 +181,7 @@
 	if(user.a_intent == I_HURT)
 		return ..()
 
-	if(is_fishing)
+	if(fishing_target)
 		to_chat(user, SPAN_WARNING("You are already fishing with \the [src]!"))
 		return
 
@@ -213,7 +201,7 @@
 	if(fish_check == FISHING_FAILED_WARNING)
 		return
 
-	is_fishing = new(get_turf(target), user, src)
+	start_fishing(get_turf(target), user)
 
 /obj/item/fishing_rod/proc/get_fishing_delay(mob/user, turf/target)
 	var/speed_mult = fishing_rod_quality + (bait?.get_bait_value() || 0)
@@ -221,13 +209,13 @@
 
 /obj/item/fishing_rod/attack_self(mob/user)
 
-	if(is_fishing)
-		if(isnull(is_fishing.hooked))
-			to_chat(user, SPAN_NOTICE("You reel your line back in and abandon fishing in \the [is_fishing.target]."))
-			QDEL_NULL(is_fishing)
+	if(fishing_target)
+		if(isnull(fishing_hooked))
+			to_chat(user, SPAN_NOTICE("You reel your line back in and abandon fishing in \the [fishing_target.get_fluid_name()]."))
+			stop_fishing()
 		else
 			// This is where the proper fishing minigame should go (when it exists).
-			is_fishing.catch_fish()
+			catch_fish()
 		return TRUE
 
 	if(bait)
