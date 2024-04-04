@@ -30,6 +30,6 @@
 		add_overlay(overlay_image(icon, "[icon_state]-over", lit_light_color, flags = RESET_COLOR))
 
 /obj/item/flame/fuelled/lantern/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
-	if(overlay && lit && (slot in global.all_hand_slots))
+	if(overlay && lit && (slot == slot_belt_str || (slot in global.all_hand_slots)))
 		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-over", lit_light_color, flags = RESET_COLOR)
 	return ..()

@@ -83,6 +83,20 @@
 	result_type        = /obj/item/stack/material/rods
 	difficulty         = MAT_VALUE_NORMAL_DIY
 
-/decl/stack_recipe/hardness/integrity/sconce
+/decl/stack_recipe/hardness/integrity/nonflammable
+	abstract_type      = /decl/stack_recipe/hardness/integrity/nonflammable
+
+/decl/stack_recipe/hardness/integrity/nonflammable/can_be_made_from(stack_type, tool_type, decl/material/mat, decl/material/reinf_mat)
+	. = ..()
+	if(. && (!mat || !mat.ignition_point))
+		return FALSE
+
+/decl/stack_recipe/hardness/integrity/nonflammable/sconce
 	result_type        = /obj/item/wall_sconce
 	difficulty         = MAT_VALUE_NORMAL_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_MEDIEVAL
+
+/decl/stack_recipe/hardness/integrity/nonflammable/lantern
+	result_type        = /obj/item/flame/fuelled/lantern
+	difficulty         = MAT_VALUE_HARD_DIY
+	available_to_map_tech_level = MAP_TECH_LEVEL_MEDIEVAL
