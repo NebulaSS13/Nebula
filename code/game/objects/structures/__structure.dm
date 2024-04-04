@@ -23,7 +23,7 @@
 		return material.color
 	return initial(color)
 
-/obj/item/set_color(new_color)
+/obj/structure/set_color(new_color)
 	if(new_color == COLOR_WHITE)
 		new_color = null
 	if(paint_color != new_color)
