@@ -12,22 +12,6 @@
 	if(slot != BP_L_HAND && slot != BP_R_HAND)
 		return slot_tie_str
 
-/obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
-	if(istype(S))
-		forceMove(S)
-		if(user)
-			to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [S]."))
-			src.add_fingerprint(user)
-
-/obj/item/clothing/accessory/proc/on_removed(var/mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		if(user)
-			usr.put_in_hands(src)
-			src.add_fingerprint(user)
-		else
-			dropInto(loc)
-
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user)
 	if(istype(loc, /obj/item/clothing))

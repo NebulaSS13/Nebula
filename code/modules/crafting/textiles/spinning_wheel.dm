@@ -26,10 +26,9 @@
 
 /obj/structure/textiles/spinning_wheel/try_take_input(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/storage))
-
+	if(istype(W.storage))
 		var/list/loading_growns = list()
-		for(var/obj/item/thing in W)
+		for(var/obj/item/thing in W.get_stored_inventory())
 			if(can_process(thing))
 				loading_growns += thing
 
@@ -42,15 +41,14 @@
 			return TRUE
 
 		var/loaded_items = 0
-		var/obj/item/storage/bag = W
 		for(var/obj/item/thing as anything in loading_growns)
-			if(bag.remove_from_storage(thing, src, TRUE))
+			if(W.storage.remove_from_storage(thing, src, TRUE))
 				loaded_items++
 				LAZYADD(loaded, thing)
 				if(length(loaded) >= MAX_LOADED)
 					break
 		if(loaded_items)
-			bag.finish_bulk_removal()
+			W.storage.finish_bulk_removal()
 			to_chat(user, SPAN_NOTICE("You prepare \the [src] with [loaded_items] items from \the [W]."))
 			update_icon()
 		return TRUE
