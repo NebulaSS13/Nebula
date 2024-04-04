@@ -82,3 +82,7 @@
 /decl/stack_recipe/hardness/integrity/rod
 	result_type        = /obj/item/stack/material/rods
 	difficulty         = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/hardness/integrity/sconce
+	result_type        = /obj/item/wall_sconce
+	difficulty         = MAT_VALUE_NORMAL_DIY
