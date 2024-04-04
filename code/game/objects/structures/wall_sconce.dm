@@ -16,6 +16,9 @@
 /obj/structure/wall_sconce/candle
 	light_source        = /obj/item/flame/candle
 
+/obj/structure/wall_sconce/torch
+	light_source        = /obj/item/flame/torch
+
 /obj/structure/wall_sconce/Initialize()
 
 	if(ispath(light_source))

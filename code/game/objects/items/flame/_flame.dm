@@ -1,40 +1,40 @@
 //For anything that can light stuff on fire
 /obj/item/flame
 
-	abstract_type = /obj/item/flame
-	icon_state    = ICON_STATE_WORLD
-	w_class       = ITEM_SIZE_TINY
-	throwforce    = 4
-	origin_tech   = @'{"materials":1}'
-	material      = /decl/material/solid/organic/wood
+	abstract_type               = /obj/item/flame
+	icon_state                  = ICON_STATE_WORLD
+	w_class                     = ITEM_SIZE_TINY
+	throwforce                  = 4
+	origin_tech                 = @'{"materials":1}'
+	material                    = /decl/material/solid/organic/wood
 
 	/// Parameters for lighting when lit.
-	var/lit_light_range = 1
-	var/lit_light_power = 0.5
-	var/lit_light_color = "#e09d37"
+	var/lit_light_range         = 1
+	var/lit_light_power         = 0.5
+	var/lit_light_color         = "#e09d37"
 
 	/// Does this flame source smell of anything when burning?
 	var/decl/scent_type/scent
 	/// Is this item extinguished by being dropped?
-	var/extinguish_on_dropped = TRUE
+	var/extinguish_on_dropped   = TRUE
 	/// How hot does this burn?
-	var/lit_heat = 1000
+	var/lit_heat                = 1000
 	/// Can this item be extinguished by water?
-	var/waterproof = FALSE
+	var/waterproof              = FALSE
 	/// Is this item currently lit?
-	var/lit = FALSE
+	var/lit                     = FALSE
 	/// How many SSobj ticks can this burn for?
-	var/_fuel = 0
+	var/_fuel                   = 0
 	/// How much fuel does this spend in a tick?
-	var/_fuel_spend_amt = 1
+	var/_fuel_spend_amt         = 1
 	/// Can you put this item out with your hand?
 	var/can_manually_extinguish = TRUE
 	/// Can you light this item with your hand?
-	var/can_manually_light = FALSE
+	var/can_manually_light      = FALSE
 	/// Can this item be put into a sconce?
-	var/sconce_can_hold = FALSE
+	var/sconce_can_hold         = FALSE
 
-/obj/item/flame/Initialize()
+/obj/item/flame/Initialize(var/ml, var/material_key)
 
 	var/list/available_scents = get_available_scents()
 	if(LAZYLEN(available_scents))
@@ -184,9 +184,11 @@
 			other.light(user)
 
 /obj/item/flame/attackby(obj/item/W, mob/user)
+
 	if(user.a_intent != I_HURT && !can_manually_light && (W.isflamesource() || W.get_heat() > T100C))
 		light(user)
 		return TRUE
+
 	return ..()
 
 /obj/item/flame/Process()

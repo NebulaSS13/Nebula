@@ -16,11 +16,31 @@
 	shatter(0)
 
 /obj/item/stick/attackby(obj/item/W, mob/user)
+
 	if(W.sharp && W.edge && !sharp)
 		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
 		sharp = 1 //Sharpen stick
 		SetName("sharpened " + name)
 		update_force()
+		return TRUE
+
+	if(!sharp && (istype(W, /obj/item/stack/material/bolt) || istype(W, /obj/item/stack/material/bundle)))
+
+		var/obj/item/stack/material/fuel = W
+		if(fuel.get_amount() < 5)
+			to_chat(user, SPAN_WARNING("You need at least five units of flammable material to create a torch."))
+			return TRUE
+
+		var/was_held = loc == user
+		if(!was_held || user.try_unequip(src))
+			var/obj/item/flame/torch/torch = new(get_turf(src), material?.type, W.material?.type)
+			fuel.use(5)
+			if(was_held)
+				user.put_in_hands(torch)
+			to_chat(user, SPAN_NOTICE("You fashion \the [src] into \a [torch]."))
+			qdel(src)
+		return TRUE
+
 	return ..()
 
 /obj/item/stick/attack(mob/M, mob/user)
