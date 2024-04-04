@@ -1,0 +1,2 @@
+/obj/machinery/computer/HolodeckControl/@SUBTYPES : /obj/machinery/computer/holodeck_control/@SUBTYPES{@OLD}
+/obj/item/stock_parts/circuitboard/holodeckcontrol/@SUBTYPES : /obj/item/stock_parts/circuitboard/holodeck_control/@SUBTYPES{@OLD}

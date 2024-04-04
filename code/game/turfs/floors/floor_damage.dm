@@ -14,7 +14,6 @@
 	else
 		broken = "0"
 	remove_decals()
-	update_icon()
 
 /turf/floor/proc/burn_tile(var/exposed_temperature)
 	if(!flooring || !(flooring.flags & TURF_CAN_BURN) || !isnull(burnt))
@@ -24,4 +23,3 @@
 	else
 		burnt = "0"
 	remove_decals()
-	update_icon()

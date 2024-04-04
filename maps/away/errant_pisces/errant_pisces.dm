@@ -73,7 +73,8 @@
 	add_to_reagents(/decl/material/liquid/psychoactives,     1)
 	add_to_reagents(/decl/material/gas/chlorine,             1)
 
-/obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
+//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
+/obj/structure/net
 	name = "industrial net"
 	desc = "A sturdy industrial net of synthetic belts reinforced with plasteel threads."
 	icon = 'maps/away/errant_pisces/icons/net.dmi'
@@ -87,11 +88,12 @@
 	update_connections()
 	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
 		var/turf/T = get_turf(src)
-		for (var/turf/AT in T.CardinalTurfs(FALSE))
-			for (var/obj/structure/net/N in AT)
-				if (type != N.type)//net-walls cause update for net-walls and floors for floors but not for each other
-					continue
-				N.update_connections()
+		if(T)
+			for (var/turf/AT in T.CardinalTurfs(FALSE))
+				for (var/obj/structure/net/N in AT)
+					if (type != N.type)//net-walls cause update for net-walls and floors for floors but not for each other
+						continue
+					N.update_connections()
 
 /obj/structure/net/get_examined_damage_string()
 	if(!can_take_damage())
@@ -139,10 +141,11 @@
 /obj/structure/net/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
 	overlays.Cut()
 	var/turf/T = get_turf(src)
-	for (var/turf/AT in T.CardinalTurfs(FALSE))
-		if((locate(/obj/structure/net) in AT) || (locate(/obj/structure/lattice) in AT))//connects to another net objects or walls/floors or lattices
-			var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
-			overlays += I
+	if(T)
+		for (var/turf/AT in T.CardinalTurfs(FALSE))
+			if((locate(/obj/structure/net) in AT) || (locate(/obj/structure/lattice) in AT))//connects to another net objects or walls/floors or lattices
+				var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
+				overlays += I
 
 /obj/structure/net/net_wall
 	icon_state = "net_w"
@@ -153,19 +156,20 @@
 	. = ..()
 	if (mapload)//if it's pre-mapped, it should put floor-net below itself
 		var/turf/T = get_turf(src)
-		for (var/obj/structure/net/N in T)
-			if (N.type != /obj/structure/net/net_wall)//if there's net that is not a net-wall, we don't need to spawn it
-				return
-		new /obj/structure/net(T)
-
+		if(T)
+			for (var/obj/structure/net/N in T)
+				if (N.type != /obj/structure/net/net_wall)//if there's net that is not a net-wall, we don't need to spawn it
+					return
+			new /obj/structure/net(T)
 
 /obj/structure/net/net_wall/update_connections()//this is different for net-walls because they only connect to walls and net-walls
 	overlays.Cut()
 	var/turf/T = get_turf(src)
-	for (var/turf/AT in T.CardinalTurfs(FALSE))
-		if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
-			var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
-			overlays += I
+	if(T)
+		for (var/turf/AT in T.CardinalTurfs(FALSE))
+			if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
+				var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
+				overlays += I
 
 /obj/item/stack/net
 	name = "industrial net roll"
@@ -202,9 +206,10 @@
 	if (!has_gravity())
 		return 1
 	var/turf/T = get_turf(src)
-	for (var/turf/AT in T.CardinalTurfs(FALSE))
-		if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
-			return 1
+	if(T)
+		for (var/turf/AT in T.CardinalTurfs(FALSE))
+			if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
+				return 1
 	return 0
 
 /obj/item/stack/net/attack_self(mob/user)//press while holding to lay one. If there's net already, place wall

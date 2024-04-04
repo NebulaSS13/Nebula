@@ -204,7 +204,7 @@
 	to_chat(user, "It menaces with reinforcements of [material].")
 
 /mob/living/exosuit/return_air()
-	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc.return_air()
+	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc?.return_air()
 
 /mob/living/exosuit/GetIdCards(list/exceptions)
 	. = ..()

@@ -49,8 +49,7 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/reset/Initialize()
 	..()
 	var/turf/T = get_turf(src)
-	T.remove_decals()
-	T.update_icon()
+	T?.remove_decals()
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_QDEL
 
@@ -60,7 +59,7 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/undo/Initialize()
 	SHOULD_CALL_PARENT(FALSE)
 	var/turf/T = get_turf(src)
-	if(length(T.decals))
+	if(T && length(T.decals))
 		T.decals.len--
 		UNSETEMPTY(T.decals)
 		T.update_icon()

@@ -20,7 +20,7 @@
 	. = ..()
 
 /datum/ai/proc/can_process()
-	if(!body || ((body.client || body.mind) && !(body.status_flags & ENABLE_AI)))
+	if(!body || !body.loc || ((body.client || body.mind) && !(body.status_flags & ENABLE_AI)))
 		return FALSE
 	if(wait_for > world.time)
 		return FALSE

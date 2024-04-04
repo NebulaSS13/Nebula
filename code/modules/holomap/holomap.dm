@@ -34,6 +34,8 @@
 	return ..()
 
 /obj/machinery/holomap/Initialize()
+	if(!loc)
+		return INITIALIZE_HINT_QDEL
 	holomap_datum = new()
 	original_zLevel = loc.z
 	bogus = FALSE

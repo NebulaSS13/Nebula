@@ -13,14 +13,15 @@ var/global/list/flood_type_overlay_cache = list()
 	return global.flood_type_overlay_cache[fluid_type]
 
 /obj/effect/flood
-	name          = ""
-	icon          = 'icons/effects/liquids.dmi'
-	icon_state    = "ocean"
-	layer         = DEEP_FLUID_LAYER
-	color         = COLOR_LIQUID_WATER
-	alpha         = 140
-	invisibility  = 0
-	simulated     = FALSE
-	density       = FALSE
-	anchored      = TRUE
-	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	name              = ""
+	icon              = 'icons/effects/liquids.dmi'
+	icon_state        = "ocean"
+	layer             = DEEP_FLUID_LAYER
+	color             = COLOR_LIQUID_WATER
+	alpha             = 140
+	invisibility      = 0
+	simulated         = FALSE
+	density           = FALSE
+	anchored          = TRUE
+	mouse_opacity     = MOUSE_OPACITY_UNCLICKABLE
+	is_spawnable_type = FALSE

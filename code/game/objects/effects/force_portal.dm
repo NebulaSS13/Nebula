@@ -23,9 +23,13 @@
 		boom_time = 0
 
 /obj/effect/force_portal/proc/boom()
-	set waitfor = 0
-	var/list/possible_turfs = getcircle(get_turf(src), 5)
-	while(contents && contents.len)
+	set waitfor = FALSE
+	var/turf/my_turf = get_turf(src)
+	if(!my_turf)
+		qdel(src)
+		return
+	var/list/possible_turfs = getcircle(my_turf, 5)
+	while(length(contents))
 		var/target = pick(possible_turfs)
 		possible_turfs -= target
 		var/atom/movable/picked = pick(contents)

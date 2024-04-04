@@ -151,6 +151,8 @@
 /obj/effect/rune/teleport/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
+	if(!A)
+		return INITIALIZE_HINT_QDEL
 	destination = A.proper_name
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.teleport_runes += src
@@ -159,8 +161,9 @@
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.teleport_runes -= src
 	var/turf/T = get_turf(src)
-	for(var/atom/movable/A in contents)
-		A.forceMove(T)
+	if(T)
+		for(var/atom/movable/A in contents)
+			A.forceMove(T)
 	return ..()
 
 /obj/effect/rune/teleport/examine(mob/user)

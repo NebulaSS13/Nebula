@@ -50,9 +50,9 @@
 	global.silicon_mob_list += src
 	. = ..()
 
-	if(silicon_radio)
+	if(ispath(silicon_radio))
 		silicon_radio = new silicon_radio(src)
-	if(silicon_camera)
+	if(ispath(silicon_camera))
 		silicon_camera = new silicon_camera(src)
 	for(var/T in starting_stock_parts)
 		stock_parts += new T(src)
@@ -289,7 +289,10 @@
 	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
-	if(!(alarm.alarm_z() in SSmapping.get_connected_levels(get_z(src))))
+	var/my_z = get_z(src)
+	if(!my_z)
+		return
+	if(!(alarm.alarm_z() in SSmapping.get_connected_levels(my_z)))
 		return // Didn't actually hear it as far as we're concerned.
 	if(!next_alarm_notice)
 		next_alarm_notice = world.time + SecondsToTicks(10)
