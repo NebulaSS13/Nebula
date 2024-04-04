@@ -1,12 +1,12 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "eR" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/outside/woods)
 "gQ" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/unexplored/woods)
 "hT" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/outside/river/lake)
 "kZ" = (
 /obj/abstract/level_data_spawner/shaded_hills_woods,
@@ -16,37 +16,37 @@
 /turf/unsimulated/dark_filler,
 /area/space)
 "lU" = (
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/outside/woods)
 "ma" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/outside/river/lake)
 "nl" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/river/woods)
 "qy" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves/woods)
 "sS" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/caves/river/woods)
 "te" = (
-/turf/exterior/rock/basalt,
+/turf/floor/natural/rock/basalt,
 /area/shaded_hills/outside/woods)
 "ul" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/outside/river/woods)
 "xr" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside/river/lake)
 "zp" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside/river/woods)
 "DX" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/caves/river/woods)
 "ES" = (
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/river/woods)
 "EV" = (
 /turf/unsimulated/mask,
@@ -55,16 +55,16 @@
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/woods)
 "HA" = (
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/woods)
 "My" = (
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/river/lake)
 "PO" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/outside/river/woods)
 "Xt" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/caves/woods)
 
 (1,1,1) = {"

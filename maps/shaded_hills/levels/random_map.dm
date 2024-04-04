@@ -1,6 +1,6 @@
 /datum/random_map/automata/cave_system/shaded_hills
 	descriptor          = "Shaded Hills caves"
-	floor_type          = /turf/exterior/rock/basalt
+	floor_type          = /turf/floor/natural/rock/basalt
 	wall_type           = /turf/wall/natural/basalt/shaded_hills
 	sparse_mineral_turf = /turf/wall/natural/random/basalt/shaded_hills
 	rich_mineral_turf   = /turf/wall/natural/random/high_chance/basalt/shaded_hills
@@ -17,12 +17,12 @@
 /datum/random_map/noise/shaded_hills/swamp/get_appropriate_path(var/value)
 	value = noise2value(value)
 	if(value <= 3)
-		return /turf/exterior/mud/water/deep
+		return /turf/floor/natural/mud/water/deep
 	if(value <= 5)
-		return /turf/exterior/mud/water
+		return /turf/floor/natural/mud/water
 	if(value <= 7)
-		return /turf/exterior/mud
-	return /turf/exterior/grass
+		return /turf/floor/natural/mud
+	return /turf/floor/natural/grass
 
 /datum/random_map/noise/shaded_hills/woods
 	descriptor = "Shaded Hills Woods"
@@ -30,8 +30,8 @@
 /datum/random_map/noise/shaded_hills/woods/get_appropriate_path(var/value)
 	value = noise2value(value)
 	if(value <= 6)
-		return /turf/exterior/grass/wild
-	return /turf/exterior/grass
+		return /turf/floor/natural/grass/wild
+	return /turf/floor/natural/grass
 
 /datum/random_map/noise/shaded_hills_woods/get_additional_spawns(var/value, var/turf/T)
 	if(T.density || (locate(/obj/structure) in T))

@@ -1,64 +1,64 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "cE" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/outside/river/swamp)
 "hT" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/outside/river/swamp)
 "kZ" = (
 /obj/abstract/level_data_spawner/shaded_hills_swamp,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/swamp)
 "lC" = (
 /turf/unsimulated/dark_filler,
 /area/space)
 "lE" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/outside/swamp)
 "lZ" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/caves/swamp)
 "sj" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/river/swamp)
 "tp" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/outside/swamp)
 "vZ" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/caves/river/swamp)
 "xr" = (
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/outside/swamp)
 "yi" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/unexplored/swamp)
 "BC" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside/river/swamp)
 "EI" = (
 /turf/unsimulated/mask,
 /area/shaded_hills/outside/swamp)
 "Ic" = (
-/turf/exterior/clay,
+/turf/floor/natural/clay,
 /area/shaded_hills/outside/river/swamp)
 "LF" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/swamp)
 "Ma" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves/swamp)
 "TD" = (
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/swamp)
 "Xc" = (
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/river/swamp)
 "Xt" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside/swamp)
 "Yn" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/caves/river/swamp)
 
 (1,1,1) = {"
