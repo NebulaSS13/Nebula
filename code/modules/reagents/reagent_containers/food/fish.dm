@@ -39,7 +39,6 @@
 		..()
 
 /obj/item/chems/food/fish/grilled
-	name = "grilled fish fillet"
 	desc = "A lightly grilled fish fillet."
 	icon_state = "grilledfish"
 	nutriment_amt = 8
