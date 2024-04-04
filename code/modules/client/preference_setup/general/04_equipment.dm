@@ -127,12 +127,13 @@
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
 
-	if(length(global.using_map.survival_box_choices))
+	if(length(global.using_map.survival_box_choices) > 1)
 		. += "<b>Survival box type:</b> <a href='?src=\ref[src];change_survival_box=1'><b>[pref.survival_box_choice]</b></a><br>"
+
 	if(global.using_map.passport_type)
 		. += "<b>Passport:</b> <a href='?src=\ref[src];toggle_passport=1'><b>[pref.give_passport ? "Yes" : "No"]</b></a><br>"
 
-	if(length(global.using_map.starting_cash_choices))
+	if(length(global.using_map.starting_cash_choices) > 1)
 		. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[pref.starting_cash_choice]</a><br>"
 	return jointext(.,null)
 

@@ -135,7 +135,7 @@
 	var/datum/gas_mixture/exterior_atmosphere
 
 	// *** Connections ***
-	///A list of all level_ids, and a direction. Indicates what direction of the map connects to what level
+	///A associative list of all level_ids to a direction bitflag. Indicates what direction of the map connects to what level
 	var/list/connected_levels
 	///A cached list of connected directions to their connected level id. Filled up at runtime.
 	var/tmp/list/cached_connections
