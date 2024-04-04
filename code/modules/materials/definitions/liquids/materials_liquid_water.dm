@@ -22,6 +22,7 @@
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
 	slipperiness = 8
+	slippery_amount = 5
 	dirtiness = DIRTINESS_CLEAN
 	turf_touch_threshold = 0.1
 	chilling_point = T0C
