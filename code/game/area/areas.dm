@@ -447,23 +447,10 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /atom/proc/has_gravity()
 	var/area/A = get_area(src)
-	if(A && A.has_gravity())
-		return 1
-	return 0
-
-/mob/has_gravity()
-	if(!lastarea)
-		lastarea = get_area(src)
-	if(!lastarea || !lastarea.has_gravity())
-		return 0
-
-	return 1
+	return A?.has_gravity()
 
 /turf/has_gravity()
-	var/area/A = loc
-	if(A && A.has_gravity())
-		return 1
-	return 0
+	return loc.has_gravity()
 
 /area/proc/get_dimensions()
 	var/list/res = list("x"=1,"y"=1)
