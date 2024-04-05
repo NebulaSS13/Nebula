@@ -225,6 +225,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/solvent_melt_dose = 0
 	var/solvent_max_damage  = 0
 	var/slipperiness = 0
+	var/slippery_amount = 1
 	var/euphoriant // If set, ingesting/injecting this material will cause the rainbow high overlay/behavior.
 
 	var/glass_icon = DRINK_ICON_DEFAULT
@@ -657,7 +658,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(slipperiness != 0 && !T.check_fluid_depth()) // Don't make floors slippery if they have an active fluid on top of them please.
 			if(slipperiness < 0)
 				W.unwet_floor(TRUE)
-			else
+			else if (REAGENT_VOLUME(holder, type) >= slippery_amount)
 				W.wet_floor(slipperiness)
 
 	if(length(vapor_products))
