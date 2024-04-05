@@ -86,22 +86,30 @@
 		if(loaded_fiber)
 
 			// TODO: handle blended yarn?
+			var/list/total_waste   = list()
 			var/list/total_fibers  = list()
 			var/list/loaded_fibers = loaded_fiber.get_contained_matter()
 			for(var/mat in loaded_fibers)
 				var/decl/material/check_material = GET_DECL(mat)
 				if(check_material.has_textile_fibers)
 					total_fibers[check_material] += loaded_fibers[mat]
+				else
+					total_waste[check_material.type] += loaded_fibers[mat]
 
-		for(var/decl/material/fiber_mat as anything in total_fibers)
-			var/obj/item/stack/material/product_ref = product_type
-			var/produced = max(1, round(total_fibers[fiber_mat] / (initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)))
-			var/obj/item/stack/thread = new product_type(get_turf(src), produced, fiber_mat.type)
-			if(isitem(thread))
-				if(loaded_fiber.paint_color)
-					thread.set_color(loaded_fiber.paint_color)
-				if(istype(thread))
-					thread.add_to_stacks(user, TRUE)
+			for(var/decl/material/fiber_mat as anything in total_fibers)
+				var/obj/item/stack/material/product_ref = product_type
+				var/produced = max(1, round(total_fibers[fiber_mat] / (initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)))
+				var/obj/item/stack/thread = new product_type(get_turf(src), produced, fiber_mat.type)
+				if(isitem(thread))
+					if(loaded_fiber.paint_color)
+						thread.set_color(loaded_fiber.paint_color)
+					if(istype(thread))
+						thread.add_to_stacks(user, TRUE)
+
+			if(length(total_waste))
+				var/obj/item/debris/scraps/scraps = new(get_turf(src))
+				scraps.matter = total_waste
+				scraps.update_primary_material()
 
 		processed++
 		QDEL_NULL(loaded_fiber)

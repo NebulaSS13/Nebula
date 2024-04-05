@@ -52,19 +52,19 @@
 	path = /obj/item/clothing/suit/letterman/green
 
 /datum/fabricator_recipe/textiles/overwear/poncho1
-	path = /obj/item/clothing/suit/poncho/colored
+	path = /obj/item/clothing/suit/poncho/classic
 
 /datum/fabricator_recipe/textiles/overwear/poncho2
-	path = /obj/item/clothing/suit/poncho/colored/green
+	path = /obj/item/clothing/suit/poncho/classic/green
 
 /datum/fabricator_recipe/textiles/overwear/poncho3
-	path = /obj/item/clothing/suit/poncho/colored/red
+	path = /obj/item/clothing/suit/poncho/classic/red
 
 /datum/fabricator_recipe/textiles/overwear/poncho4
-	path = /obj/item/clothing/suit/poncho/colored/purple
+	path = /obj/item/clothing/suit/poncho/classic/purple
 
 /datum/fabricator_recipe/textiles/overwear/poncho5
-	path = /obj/item/clothing/suit/poncho/colored/blue
+	path = /obj/item/clothing/suit/poncho/classic/blue
 
 /datum/fabricator_recipe/textiles/overwear/poncho6
 	path = /obj/item/clothing/suit/poncho/roles/security

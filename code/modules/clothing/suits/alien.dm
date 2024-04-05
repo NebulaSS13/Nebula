@@ -5,6 +5,10 @@
 	desc = "A simple garment."
 	icon = 'icons/clothing/suit/rough_robe.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
+/obj/item/clothing/suit/robe/yellowed // wash ur clothes
+	paint_color = "#e1cf98"
 
 //Misc Xeno clothing.
 
@@ -16,7 +20,7 @@
 
 /obj/item/clothing/accessory/shouldercape
 	name = "shoulder cape"
-	desc = "A simple looking cape with a couple of runes woven into the fabric."
+	desc = "A simple-looking cape with a couple of runes woven into the fabric."
 	icon = 'icons/clothing/accessories/clothing/cape_grunt.dmi'
 	accessory_slot = ACCESSORY_SLOT_INSIGNIA // Adding again in case we want to change it in the future.
 

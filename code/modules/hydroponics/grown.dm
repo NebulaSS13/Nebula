@@ -413,6 +413,6 @@ var/global/list/fruit_icon_cache = list()
 /obj/item/chems/food/grown/has_textile_fibers()
 	for(var/mat in get_contained_matter())
 		var/decl/material/check_mat = GET_DECL(mat)
-		if(mat.has_textile_fibers)
+		if(check_mat.has_textile_fibers)
 			return TRUE
 	return FALSE

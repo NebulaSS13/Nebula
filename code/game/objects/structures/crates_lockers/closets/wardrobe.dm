@@ -74,7 +74,7 @@
 
 /obj/structure/closet/wardrobe/xenos/WillContain()
 	return list(
-		/obj/item/clothing/suit/robe    = 3,
+		/obj/item/clothing/suit/robe/yellowed    = 3,
 		/obj/item/clothing/shoes/sandal = 3,
 	)
 

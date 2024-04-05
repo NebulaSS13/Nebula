@@ -3140,7 +3140,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/clothing/suit/robe,
+/obj/item/clothing/suit/robe/yellowed,
 /obj/effect/decal/cleanable/dirt,
 /turf/floor/tiled/airless,
 /area/slavers_base/demo)
