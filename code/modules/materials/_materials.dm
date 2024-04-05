@@ -288,6 +288,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// What form does this take if dug out of the ground, if any?
 	var/dug_drop_type
 
+	/// Can objects containing this material be used for textile spinning?
+	var/has_textile_fibers = FALSE
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))

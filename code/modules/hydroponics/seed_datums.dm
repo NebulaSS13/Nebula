@@ -1,11 +1,11 @@
-// Cotton Im going to achieve singularity
-
 /datum/seed/cotton
 	name = "cotton"
 	seed_name = "cotton"
 	display_name = "cotton"
-	product_material = /decl/material/solid/organic/cloth
-	chems = list(/decl/material/solid/organic/cloth = list(1,1)) // solely so the grown item spawns
+	product_material = /decl/material/solid/organic/plantmatter/pith/husk
+	chems = list(
+		/decl/material/solid/organic/cloth = list(10,1)
+	)
 
 /datum/seed/cotton/New()
 	..()

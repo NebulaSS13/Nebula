@@ -83,10 +83,20 @@
 		var/obj/item/loaded_fiber = loaded[1]
 		LAZYREMOVE(loaded, loaded_fiber)
 
-		if(loaded_fiber && loaded_fiber.material && LAZYACCESS(loaded_fiber.matter, loaded_fiber.material.type))
+		if(loaded_fiber)
+
+			// TODO: handle blended yarn?
+			var/list/total_fibers  = list()
+			var/list/loaded_fibers = loaded_fiber.get_contained_matter()
+			for(var/mat in loaded_fibers)
+				var/decl/material/check_material = GET_DECL(mat)
+				if(check_material.has_textile_fibers)
+					total_fibers[check_material] += loaded_fibers[mat]
+
+		for(var/decl/material/fiber_mat as anything in total_fibers)
 			var/obj/item/stack/material/product_ref = product_type
-			var/produced = max(1, round(loaded_fiber.matter[loaded_fiber.material?.type] / (initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)))
-			var/obj/item/stack/thread = new product_type(get_turf(src), produced, loaded_fiber.material?.type)
+			var/produced = max(1, round(total_fibers[fiber_mat] / (initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)))
+			var/obj/item/stack/thread = new product_type(get_turf(src), produced, fiber_mat.type)
 			if(isitem(thread))
 				if(loaded_fiber.paint_color)
 					thread.set_color(loaded_fiber.paint_color)

@@ -411,4 +411,8 @@ var/global/list/fruit_icon_cache = list()
 		user.trigger_aiming(TARGET_CAN_CLICK)
 
 /obj/item/chems/food/grown/has_textile_fibers()
-	return istype(material, /decl/material/solid/organic/cloth)
+	for(var/mat in get_contained_matter())
+		var/decl/material/check_mat = GET_DECL(mat)
+		if(mat.has_textile_fibers)
+			return TRUE
+	return FALSE

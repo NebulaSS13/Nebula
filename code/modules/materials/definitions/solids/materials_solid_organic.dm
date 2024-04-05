@@ -141,6 +141,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	has_textile_fibers = TRUE
 
 /decl/material/solid/organic/cloth/synthetic
 	name = "nylon"
@@ -174,6 +175,10 @@
 	melting_point = null
 	hardness = MAT_VALUE_FLEXIBLE
 	value = 0.4
+
+/decl/material/solid/organic/plantmatter/pith/husk
+	name = "plant husk"
+	uid = "solid_planthusk"
 
 /decl/material/solid/organic/plantmatter/grass
 	name = "grass"
