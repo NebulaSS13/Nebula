@@ -55,7 +55,7 @@
 		if(!touching_reagents?.total_volume)
 			to_chat(user, SPAN_WARNING("[user == M ? "You are" : "\The [M] [G.is]"] already dry."))
 		else
-			user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to towel [user == M ? G.self : "\the M"] dry."))
+			user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to towel [user == M ? G.self : "\the [M]"] dry."))
 			touching_reagents.trans_to(src, min(touching_reagents.total_volume, reagent_space))
 			playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 	return TRUE
