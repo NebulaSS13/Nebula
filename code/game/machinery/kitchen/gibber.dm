@@ -167,8 +167,8 @@
 	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
 	src.occupant.ghostize()
 	addtimer(CALLBACK(src, PROC_REF(finish_gibbing)), gib_time)
-
-	var/list/gib_products = occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones()
+	var/decl/butchery_data/butchery_data = GET_DECL(occupant.butchery_data)
+	var/list/gib_products = butchery_data?.get_all_products(occupant)
 	if(!length(gib_products))
 		return
 	gib_products = shuffle(gib_products)

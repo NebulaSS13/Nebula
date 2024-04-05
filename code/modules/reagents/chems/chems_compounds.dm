@@ -60,6 +60,12 @@
 	overdose = REAGENTS_OVERDOSE
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
+/decl/material/liquid/enzyme/rennet
+	name = "rennet"
+	uid = "chem_rennet"
+	lore_text = "A complex mix of enzymes extracted from a ruminant's stomach. Important to cheesemaking, and as a chemical precursor."
+	taste_description = "sweet bile"
+
 /decl/material/liquid/frostoil
 	name = "chilly oil"
 	lore_text = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."

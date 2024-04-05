@@ -9,7 +9,7 @@
 	break_stuff_probability = 15
 	faction = "drakes"
 	pry_time = 4 SECONDS
-	skull_type = /obj/item/whip/tail
+	butchery_data = /decl/butchery_data/animal/reptile/drake
 	bleed_colour = COLOR_VIOLET
 	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/claws/drake

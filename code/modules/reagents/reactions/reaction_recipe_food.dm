@@ -12,13 +12,21 @@
 			new obj_result(location)
 
 /decl/chemical_reaction/recipe/food/cheesewheel
-	name = "Cheesewheel"
+	name = "Enzyme Cheesewheel"
 	required_reagents = list(/decl/material/liquid/drink/milk = 40)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
-	mix_message = "The solution thickens and curdles into a rich yellow substance."
+	mix_message = "The solution thickens and curdles into a rich yellow solid."
 	minimum_temperature = 40 CELSIUS
 	maximum_temperature = (40 CELSIUS) + 100
 	obj_result = /obj/item/chems/food/sliceable/cheesewheel
+
+/decl/chemical_reaction/recipe/food/cheesewheel/rennet
+	name = "Rennet Cheesewheel"
+	catalysts = null
+	required_reagents = list(
+		/decl/material/liquid/drink/milk = 40,
+		/decl/material/liquid/enzyme/rennet = 3
+	)
 
 /decl/chemical_reaction/recipe/food/rawmeatball
 	name = "Raw Meatball"

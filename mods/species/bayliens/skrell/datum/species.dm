@@ -1,3 +1,7 @@
+/decl/butchery_data/humanoid/skrell
+	meat_type = /obj/item/chems/food/fish/octopus/skrell
+	bone_material = /decl/material/solid/organic/bone/cartilage
+
 /decl/species/skrell
 	name = SPECIES_SKRELL
 	name_plural = SPECIES_SKRELL
@@ -20,8 +24,8 @@
 	Skrell value cooperation and have very communal lifestyles, and despite their diplomatic fluency and innate curiosity are very leery of outside \
 	interference in their customs and values."
 
-	meat_type = /obj/item/chems/food/fish/octopus/skrell
-	bone_material = /decl/material/solid/organic/bone/cartilage
+	butchery_data = /decl/butchery_data/humanoid/skrell
+
 	available_pronouns = list(
 		/decl/pronouns/skrell
 	)

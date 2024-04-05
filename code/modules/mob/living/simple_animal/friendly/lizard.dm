@@ -10,8 +10,4 @@
 	possession_candidate = 1
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
-
-	meat_amount = 1
-	bone_amount = 1
-	skin_amount = 1
-	skin_material = /decl/material/solid/organic/skin/lizard
+	butchery_data = /decl/butchery_data/animal/reptile/small

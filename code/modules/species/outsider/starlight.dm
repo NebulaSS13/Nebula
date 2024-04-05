@@ -1,10 +1,6 @@
 /decl/species/starlight
 	abstract_type = /decl/species/starlight
-
-	meat_type = null
-	bone_material = null
-	skin_material = null
-
+	butchery_data = null
 	spawn_flags = SPECIES_IS_RESTRICTED
 	available_pronouns = list(/decl/pronouns/neuter)
 	force_cultural_info = list(

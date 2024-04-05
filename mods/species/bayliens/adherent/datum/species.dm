@@ -20,9 +20,7 @@
 	hidden_from_codex = FALSE
 	silent_steps = TRUE
 
-	meat_type = null
-	bone_material = null
-	skin_material = null
+	butchery_data = /decl/butchery_data/crystal
 
 	blood_types = list(/decl/blood_type/coolant)
 

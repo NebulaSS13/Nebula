@@ -1,34 +1,34 @@
 /decl/parrot_subspecies
 	var/name = "giant parrot"
 	var/icon_set = "parrot"
-	var/feathers = 	/decl/material/solid/organic/skin/feathers
+	var/butchery_data = /decl/butchery_data/animal/bird/parrot/space
 
 /decl/parrot_subspecies/purple
 	name = "simurgh"
 	icon_set = "purple"
-	feathers = 	/decl/material/solid/organic/skin/feathers/purple
+	butchery_data = /decl/butchery_data/animal/bird/parrot/space/purple
 
 /decl/parrot_subspecies/blue
 	name = "ziz"
 	icon_set = "blue"
-	feathers = 	/decl/material/solid/organic/skin/feathers/blue
+	butchery_data = /decl/butchery_data/animal/bird/parrot/space/blue
 
 /decl/parrot_subspecies/green
 	name = "fenghuang"
 	icon_set = "green"
-	feathers = 	/decl/material/solid/organic/skin/feathers/green
+	butchery_data = /decl/butchery_data/animal/bird/parrot/space/green
 
 /decl/parrot_subspecies/brown
 	name = "roc"
 	icon_set = "brown"
-	feathers = 	/decl/material/solid/organic/skin/feathers/brown
+	butchery_data = /decl/butchery_data/animal/bird/parrot/space/brown
 
 /decl/parrot_subspecies/red
 	name = "phoenix"
 	icon_set = "red"
-	feathers = 	/decl/material/solid/organic/skin/feathers/red
+	butchery_data = /decl/butchery_data/animal/bird/parrot/space/red
 
 /decl/parrot_subspecies/black
 	name = "lord of birds"
 	icon_set = "black"
-	feathers = 	/decl/material/solid/organic/skin/feathers/black
+	butchery_data = /decl/butchery_data/animal/bird/parrot/space/black

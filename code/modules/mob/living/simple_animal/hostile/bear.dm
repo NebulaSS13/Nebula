@@ -23,11 +23,7 @@
 	max_gas = null
 	minbodytemp = 0
 
-	meat_type = /obj/item/chems/food/bearmeat
-	meat_amount = 10
-	bone_amount = 20
-	skin_amount = 20
-	skin_material = /decl/material/solid/organic/skin/fur/heavy
+	butchery_data = /decl/butchery_data/animal/space_bear
 
 	var/stance_step = 0
 

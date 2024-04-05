@@ -397,8 +397,7 @@
 /mob/living/simple_animal/hostile/carp/holodeck
 	icon = 'icons/mob/simple_animal/holocarp.dmi'
 	alpha = 127
-	meat_amount = 0
-	meat_type = null
+	butchery_data = null
 
 /mob/living/simple_animal/hostile/carp/holodeck/carp_randomify()
 	return

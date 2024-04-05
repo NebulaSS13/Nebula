@@ -33,14 +33,7 @@
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 	base_animal_type = /mob/living/simple_animal/hostile/giant_spider
-
-	meat_type = /obj/item/chems/food/spider
-	meat_amount = 3
-	bone_material = null
-	bone_amount =   0
-	skin_material = /decl/material/solid/organic/skin/insect
-	skin_amount =   5
-
+	butchery_data = /decl/butchery_data/animal/arthropod/giant_spider
 	glowing_eyes = TRUE
 	ai = /datum/ai/giant_spider
 
@@ -63,7 +56,7 @@
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
-	meat_amount = 4
+	butchery_data = /decl/butchery_data/animal/arthropod/giant_spider/guard
 	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 5

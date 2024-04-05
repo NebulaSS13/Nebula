@@ -75,12 +75,12 @@
 	for(var/key in resources)
 		if(!ispath(key, /decl/material/solid))
 			resources -= key
-	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/organic/meat)
-	if(meat_amount)
+	var/organ_meat_amount = LAZYACCESS(resources, /decl/material/solid/organic/meat)
+	if(organ_meat_amount)
 		if(LAZYACCESS(resources, /decl/material/solid/metal/steel))
-			resources[/decl/material/solid/metal/steel] += meat_amount
+			resources[/decl/material/solid/metal/steel] += organ_meat_amount
 		else
-			LAZYSET(resources, /decl/material/solid/metal/steel, meat_amount)
+			LAZYSET(resources, /decl/material/solid/metal/steel, organ_meat_amount)
 		LAZYREMOVE(resources, /decl/material/solid/organic/meat)
 
 /datum/fabricator_recipe/robotics/prosthetic/get_product_name()

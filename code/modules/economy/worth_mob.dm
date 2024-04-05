@@ -14,14 +14,7 @@
 
 /mob/living/get_single_monetary_worth()
 	. = ..()
-	if(meat_type)
-		. += atom_info_repository.get_combined_worth_for(meat_type) * meat_amount
-	if(skin_material)
-		var/decl/material/M = GET_DECL(skin_material)
-		. += skin_amount * M.value * 10
-	if(bone_material)
-		var/decl/material/M = GET_DECL(bone_material)
-		. += bone_amount * M.value * 10
-	if(skull_type)
-		.+= atom_info_repository.get_combined_worth_for(skull_type)
+	if(butchery_data)
+		var/decl/butchery_data/butchery_decl = GET_DECL(butchery_data)
+		. += butchery_decl.get_monetary_worth(src)
 	. = round(.)

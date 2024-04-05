@@ -11,10 +11,13 @@
 		"elderly" =       260
 	)
 
+/decl/butchery_data/humanoid/unathi
+	skin_material = /decl/material/solid/organic/skin/lizard
+
 /decl/species/unathi
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
-	skin_material = /decl/material/solid/organic/skin/lizard
+	butchery_data = /decl/butchery_data/humanoid/unathi
 
 	available_bodytypes = list(
 		/decl/bodytype/lizard,

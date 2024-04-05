@@ -12,12 +12,7 @@
 	faction = "geese"
 	pry_time = 8 SECONDS
 	break_stuff_probability = 5
-
-	meat_type = /obj/item/chems/food/meat/chicken/game
-	meat_amount = 6
-	bone_amount = 8
-	skin_amount = 8
-	skin_material = /decl/material/solid/organic/skin/feathers
+	butchery_data = /decl/butchery_data/animal/bird/goose
 
 	var/enrage_potency = 3
 	var/enrage_potency_loose = 4
@@ -69,4 +64,4 @@
 	enrage_potency = 3
 	loose_threshold = 20
 	max_damage = 35
-	skull_type = /obj/item/pen/fancy/quill
+	butchery_data = /decl/butchery_data/animal/bird/goose/dire

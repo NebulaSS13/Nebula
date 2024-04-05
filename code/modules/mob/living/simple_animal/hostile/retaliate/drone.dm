@@ -19,13 +19,7 @@
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
 	gene_damage = -1
-
-	meat_type =     null
-	meat_amount =   0
-	bone_material = null
-	bone_amount =   0
-	skin_material = null
-	skin_amount =   0
+	butchery_data = /decl/butchery_data/synthetic
 
 	var/datum/effect/effect/system/trail/ion_trail
 

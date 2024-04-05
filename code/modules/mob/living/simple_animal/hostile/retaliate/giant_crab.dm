@@ -8,7 +8,7 @@
 	emote_see = list("clacks")
 	speak_chance = 0.5
 	turns_per_move = 5
-	meat_amount = 12
+	butchery_data = /decl/butchery_data/animal/arthropod/crab/giant
 	can_escape = TRUE //snip snip
 	break_stuff_probability = 15
 	faction = "crabs"

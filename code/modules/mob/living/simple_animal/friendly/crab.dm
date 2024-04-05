@@ -18,12 +18,7 @@
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 		)
 	ai = /datum/ai/crab
-
-	meat_amount =   3
-	skin_material = /decl/material/solid/organic/skin/insect
-	skin_amount =   10
-	bone_material = null
-	bone_amount =   0
+	butchery_data = /decl/butchery_data/animal/arthropod/crab
 
 /mob/living/simple_animal/crab/get_bodytype()
 	return GET_DECL(/decl/bodytype/animal/crab)

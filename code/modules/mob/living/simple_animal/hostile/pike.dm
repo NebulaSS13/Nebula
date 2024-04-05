@@ -16,10 +16,7 @@
 	can_escape = TRUE
 
 	break_stuff_probability = 55
-
-	meat_amount = 10
-	bone_amount = 20
-	skin_amount = 20
+	butchery_data = /decl/butchery_data/animal/fish/space_carp/pike
 
 /obj/item/natural_weapon/bite/pike
 	force = 25

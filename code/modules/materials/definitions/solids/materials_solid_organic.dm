@@ -231,6 +231,10 @@
 	hitsound = 'sound/effects/squelch1.ogg'
 	fishing_bait_value = 1
 
+/decl/material/solid/organic/meat/gut
+	name = "gut"
+	uid = "solid_gut"
+
 /decl/material/solid/organic/skin
 	name = "skin"
 	uid = "solid_skin"

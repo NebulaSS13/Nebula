@@ -21,6 +21,7 @@
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 	structure_flags = STRUCTURE_FLAG_SURFACE
+	can_support_butchery = TRUE
 
 	var/can_flip = TRUE
 	var/is_flipped = FALSE

@@ -13,13 +13,7 @@
 	a_intent =     I_HURT
 	mob_size =     MOB_SIZE_LARGE
 	atom_flags = ATOM_FLAG_SHIELD_CONTENTS | ATOM_FLAG_BLOCK_DIAGONAL_FACING
-
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	butchery_data = null
 
 	var/emp_damage = 0
 

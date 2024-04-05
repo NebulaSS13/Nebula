@@ -48,6 +48,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return FALSE
 	if(can_operate(src,user) != OPERATE_DENY && I.do_surgery(src,user)) //Surgery
 		return TRUE
+	if(try_butcher_in_place(user, I))
+		return TRUE
 	return I.use_on_mob(src, user)
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
