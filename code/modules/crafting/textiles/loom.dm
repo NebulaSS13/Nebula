@@ -3,6 +3,7 @@
 	name                 = "loom"
 	icon                 = 'icons/obj/structures/loom.dmi'
 	product_type         = /obj/item/stack/material/bolt
+	work_sound           = /datum/composite_sound/loom_working
 
 	var/weaving_progress = 0
 	var/weaving_type
@@ -11,6 +12,7 @@
 
 /obj/structure/textiles/loom/Destroy()
 	QDEL_NULL(loaded_thread)
+	QDEL_NULL(work_sound)
 	return ..()
 
 /obj/structure/textiles/loom/physically_destroyed()
@@ -31,15 +33,7 @@
 	weaving_type = null
 	weaving_progress = 0
 
-/obj/structure/textiles/loom/attackby(obj/item/W, mob/user)
-
-	if(user.a_intent == I_HURT)
-		return ..()
-
-	if(working)
-		to_chat(user, SPAN_WARNING("\The [src] is currently in use, please wait for it to be finished."))
-		return TRUE
-
+/obj/structure/textiles/loom/try_take_input(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material/thread))
 		var/loaded = FALSE
 		if(loaded_thread)
@@ -52,45 +46,27 @@
 		else if(user.try_unequip(W, src))
 			loaded_thread = W
 			loaded = TRUE
-
 		if(loaded)
 			weaving_color = loaded_thread.get_color()
 			weaving_type = loaded_thread.material.type
 			to_chat(user, SPAN_NOTICE("You wind thread onto \the [src]."))
 			update_icon()
 			return TRUE
+	return FALSE
 
-	return ..()
-
-/obj/structure/textiles/loom/on_update_icon()
-	..()
-
-	icon_state = initial(icon_state)
-
+/obj/structure/textiles/loom/apply_textiles_overlays()
 	if(loaded_thread)
 		var/image/I = image(icon, "[icon_state]-thread")
 		I.color = loaded_thread.get_color()
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
-
 	if(weaving_progress)
 		var/image/I = image(icon, "[icon_state]-weaving")
 		I.color = weaving_color
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-	if(working)
-		icon_state = "[icon_state]-working"
-
-/obj/structure/textiles/loom/attack_hand(mob/user)
-
-	if(user.a_intent == I_HURT)
-		return ..()
-
-	if(working)
-		to_chat(user, SPAN_WARNING("\The [src] is currently in use, please wait for it to be finished."))
-		return TRUE
-
+/obj/structure/textiles/loom/try_unload_material(mob/user)
 	if(user.a_intent == I_GRAB)
 		if(loaded_thread)
 			to_chat(user, SPAN_NOTICE("You remove \the [loaded_thread] from \the [src]."))
@@ -106,13 +82,15 @@
 		else
 			to_chat(user, SPAN_WARNING("\The [src] has no thread to remove."))
 		return TRUE
+	return FALSE
+
+/obj/structure/textiles/loom/try_start_working(mob/user)
 
 	if(!loaded_thread)
 		to_chat(user, SPAN_WARNING("\The [src] needs to be wound with thread before you can weave anything."))
 		return TRUE
 
-	working = TRUE
-	update_icon()
+	start_working()
 	var/processed = 0
 	var/last_completion_descriptor = null
 	while(!QDELETED(loaded_thread) && user.do_skilled(2 SECONDS, work_skill, src))
@@ -158,6 +136,5 @@
 	if(processed && !QDELETED(user))
 		to_chat(user, SPAN_NOTICE("You finish working at \the [src], having woven [processed] length\s of cloth."))
 
-	working = FALSE
-	update_icon()
+	stop_working()
 	return TRUE

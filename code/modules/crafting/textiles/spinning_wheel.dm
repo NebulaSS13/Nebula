@@ -3,6 +3,7 @@
 	name                 = "spinning wheel"
 	icon                 = 'icons/obj/structures/spindle.dmi'
 	product_type         = /obj/item/stack/material/thread
+	work_sound = /datum/composite_sound/spinning_wheel_working
 
 	var/const/MAX_LOADED = 5
 	var/list/loaded
@@ -11,11 +12,7 @@
 	QDEL_NULL_LIST(loaded)
 	return ..()
 
-/obj/structure/textiles/spinning_wheel/on_update_icon()
-	..()
-
-	icon_state = initial(icon_state)
-
+/obj/structure/textiles/spinning_wheel/apply_textiles_overlays()
 	if(length(loaded))
 		var/obj/item/thing = loaded[1]
 		var/image/I = image(icon, "[icon_state]-loaded")
@@ -23,58 +20,25 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-	if(working)
-		icon_state = "[icon_state]-working"
-
-/obj/structure/textiles/spinning_wheel/attackby(obj/item/W, mob/user)
-
-	if(user.a_intent == I_HURT)
-		return ..()
-
-	if(working)
-		to_chat(user, SPAN_WARNING("\The [src] is currently in use, please wait for it to be finished."))
-		return TRUE
-
+/obj/structure/textiles/spinning_wheel/try_take_input(obj/item/W, mob/user)
 	if(W.has_textile_fibers(W))
 		if(length(loaded) >= MAX_LOADED)
 			to_chat(user, SPAN_WARNING("\The [src] is already fully stocked and ready for spinning."))
 			return TRUE
-
 		if(user.try_unequip(W, src))
 			LAZYADD(loaded, W)
 			to_chat(user, SPAN_NOTICE("You prepare \the [src] with \the [W]."))
 			update_icon()
 		return TRUE
+	return TRUE
 
-	return ..()
-
-/obj/structure/textiles/spinning_wheel/attack_hand(mob/user)
-
-	if(user.a_intent == I_HURT)
-		return ..()
-
-	if(working)
-		to_chat(user, SPAN_WARNING("\The [src] is currently in use, please wait for it to be finished."))
-		return TRUE
-
-	if(user.a_intent == I_GRAB)
-		if(!length(loaded))
-			to_chat(user, SPAN_WARNING("\The [src] has no fibers to remove."))
-		else
-			var/obj/item/thing = loaded[1]
-			to_chat(user, SPAN_NOTICE("You remove \the [thing] from \the [src]."))
-			thing.dropInto(loc)
-			user.put_in_hands(thing)
-			LAZYREMOVE(loaded, thing)
-			update_icon()
-		return TRUE
+/obj/structure/textiles/spinning_wheel/try_start_working(mob/user)
 
 	if(!length(loaded))
 		to_chat(user, SPAN_WARNING("\The [src] needs to be prepared with fibers before you can spin anything."))
 		return TRUE
 
-	working = TRUE
-	update_icon()
+	start_working()
 	var/processed = 0
 	while(length(loaded) && user.do_skilled(5 SECONDS, work_skill, src))
 		if(!length(loaded) || QDELETED(src) || QDELETED(user))
@@ -118,6 +82,19 @@
 	if(processed && !QDELETED(user))
 		to_chat(user, SPAN_NOTICE("You finish working at \the [src], having spun [processed] length\s of thread."))
 
-	working = FALSE
-	update_icon()
+	stop_working()
 	return TRUE
+
+/obj/structure/textiles/spinning_wheel/try_unload_material(mob/user)
+	if(user.a_intent == I_GRAB)
+		if(!length(loaded))
+			to_chat(user, SPAN_WARNING("\The [src] has no fibers to remove."))
+		else
+			var/obj/item/thing = loaded[1]
+			to_chat(user, SPAN_NOTICE("You remove \the [thing] from \the [src]."))
+			thing.dropInto(loc)
+			user.put_in_hands(thing)
+			LAZYREMOVE(loaded, thing)
+			update_icon()
+		return TRUE
+	return FALSE
