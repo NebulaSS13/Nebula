@@ -37,11 +37,9 @@
 	craft_verb = "weave"
 	craft_verbing = "weaving"
 	matter_multiplier = 0.1
-
-	// PLACEHOLDER
-	icon_state = "bundle"
-	plural_icon_state = "bundle-mult"
-	max_icon_state = "bundle-max"
+	icon_state = "thread"
+	plural_icon_state = "thread-mult"
+	max_icon_state = "thread-max"
 
 /obj/item/stack/material/thread/cotton
 	material = /decl/material/solid/organic/cloth

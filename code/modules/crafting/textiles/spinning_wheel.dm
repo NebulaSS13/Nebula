@@ -1,7 +1,7 @@
 /obj/structure/textiles/spinning_wheel
 
 	name                 = "spinning wheel"
-	icon                 = 'icons/obj/structures/spindle.dmi'
+	icon                 = 'icons/obj/structures/spinning_wheel.dmi'
 	product_type         = /obj/item/stack/material/thread
 	work_sound = /datum/composite_sound/spinning_wheel_working
 
@@ -47,6 +47,7 @@
 		if(loaded_items)
 			bag.finish_bulk_removal()
 			to_chat(user, SPAN_NOTICE("You prepare \the [src] with [loaded_items] items from \the [bag]."))
+			update_icon()
 		return TRUE
 
 	if(W.has_textile_fibers(W))

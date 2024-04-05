@@ -127,3 +127,11 @@
 
 /decl/stack_recipe/planks/furniture/meathook
 	result_type            = /obj/structure/meat_hook/improvised
+
+/decl/stack_recipe/planks/furniture/spinning_wheel
+	result_type            = /obj/structure/textiles/spinning_wheel
+	difficulty             = MAT_VALUE_VERY_HARD_DIY
+
+/decl/stack_recipe/planks/furniture/loom
+	result_type            = /obj/structure/textiles/loom
+	difficulty             = MAT_VALUE_VERY_HARD_DIY
