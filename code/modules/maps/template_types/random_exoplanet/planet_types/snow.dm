@@ -6,8 +6,6 @@
 	name          = "snow exoplanet"
 	desc          = "Cold planet with limited plant life."
 	color         = "#dcdcdc"
-	surface_color = "#e8faff"
-	water_color   = "#b5dfeb"
 
 ////////////////////////////////////////////////////////////////////////////
 // Level Data
@@ -62,6 +60,8 @@
 	initial_weather_state          = /decl/state/weather/snow
 	flora                          = /datum/planet_flora/random/snow
 	fauna                          = /datum/fauna_generator/snow
+	surface_color = "#e8faff"
+	water_color   = "#b5dfeb"
 	possible_rock_colors           = list(
 		COLOR_DARK_BLUE_GRAY,
 		COLOR_GUNMETAL,

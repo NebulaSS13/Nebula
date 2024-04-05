@@ -6,8 +6,6 @@
 	name          = "barren exoplanet"
 	desc          = "A planet that couldn't hold its atmosphere from either low gravity, or the lack of a strong magnetosphere, or even from intense solar winds."
 	color         = "#6c6c6c"
-	surface_color = "#807d7a"
-	water_color   = null
 
 ////////////////////////////////////////////////////////////////////////////
 // Level Data
@@ -48,6 +46,8 @@
 	atmosphere_gen_temperature_min = -240 CELSIUS //-240c is about the surface temp of pluto for ref
 	atmosphere_gen_temperature_max = 450 CELSIUS //450c is the temperature at the surface of mercury for ref
 	initial_weather_state          = null // No weather.
+	surface_color = "#807d7a"
+	water_color   = null
 	possible_rock_colors           = list(
 		COLOR_BEIGE,
 		COLOR_GRAY80,

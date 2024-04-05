@@ -6,8 +6,6 @@
 	name          = "shrouded exoplanet"
 	desc          = "An exoplanet shrouded in a perpetual storm of bizzare, light absorbing particles."
 	color         = "#783ca4"
-	surface_color = "#3e3960"
-	water_color   = "#2b2840"
 
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded/get_atmosphere_color()
 	return COLOR_BLACK
@@ -71,6 +69,8 @@
 	surface_light_gen_level_max    = 0.25
 	flora                          = /datum/planet_flora/random/shrouded
 	fauna                          = /datum/fauna_generator/shrouded
+	surface_color = "#3e3960"
+	water_color   = "#2b2840"
 	possible_rock_colors           = list(
 		COLOR_INDIGO,
 		COLOR_DARK_BLUE_GRAY,
