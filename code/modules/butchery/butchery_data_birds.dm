@@ -8,8 +8,10 @@
 	bone_amount   = 8
 	skin_amount   = 8
 
-/decl/butchery_data/animal/bird/goose/dire
-//	/obj/item/pen/fancy/quill
+/decl/butchery_data/animal/bird/goose/dire/harvest_meat(mob/donor)
+	. = ..()
+	var/quill = new /obj/item/pen/fancy/quill(get_turf(donor))
+	LAZYADD(., quill)
 
 /decl/butchery_data/animal/bird/parrot
 	meat_amount   = 3
@@ -18,6 +20,7 @@
 	meat_amount   = 10
 	bone_amount   = 20
 	skin_amount   = 20
+	stomach_type  = /obj/item/chems/food/butchery/stomach
 
 /decl/butchery_data/animal/bird/parrot/space/purple
 	skin_material = /decl/material/solid/organic/skin/feathers/purple

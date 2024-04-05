@@ -16,11 +16,13 @@
 
 /decl/butchery_data/animal/fish/carp
 	meat_type     = /obj/item/chems/food/fish/carp
+	stomach_type  = /obj/item/chems/food/butchery/stomach
 
 /decl/butchery_data/animal/fish/space_carp
 	meat_type     = /obj/item/chems/food/fish/poison
 	skin_material = /decl/material/solid/organic/skin/fish/purple
 	bone_material = /decl/material/solid/organic/bone/cartilage
+	stomach_type  = /obj/item/chems/food/butchery/stomach
 
 /decl/butchery_data/animal/fish/space_carp/pike
 	meat_amount   = 10
@@ -40,6 +42,7 @@
 	bone_material = /decl/material/solid/organic/bone/cartilage
 	skin_material = /decl/material/solid/organic/skin/shark
 	must_use_hook = TRUE
+	stomach_type  = /obj/item/chems/food/butchery/stomach
 
 /decl/butchery_data/animal/fish/shark/large
 	meat_amount   = 10

@@ -10,8 +10,11 @@
 
 /obj/item/chems/food/butchery/Initialize(ml, material_key, mob/donor)
 	. = ..()
-	if(donor)
-		SetName("[donor.name] [name]")
+	if(istype(donor))
+		set_name_from(mob/donor)
+
+/obj/item/chems/food/butchery/proc/set_name_from(mob/donor)
+	SetName("[donor.name] [name]")
 
 /obj/item/chems/food/butchery/offal
 	name                = "offal"
@@ -19,7 +22,6 @@
 	icon                = 'icons/obj/items/butchery/offal.dmi'
 	material            = /decl/material/solid/organic/meat/gut
 	nutriment_amt       = 15
-
 
 /obj/item/chems/food/butchery/haunch
 	name                = "haunch"
@@ -29,13 +31,15 @@
 	var/bone_over       = FALSE
 	var/bone_material   = /decl/material/solid/organic/bone
 
-/obj/item/chems/food/butchery/haunch/shoulder
-	name                = "shoulder"
-
-/obj/item/chems/food/butchery/haunch/Initialize()
+/obj/item/chems/food/butchery/haunch/Initialize(ml, material_key, mob/donor, _bone)
+	if(donor)
+		bone_material = _bone // null bone is valid here
 	if(bone_material)
 		LAZYSET(matter, bone_material, MATTER_AMOUNT_REINFORCEMENT)
-	return ..()
+	. = ..()
+
+/obj/item/chems/food/butchery/haunch/shoulder
+	name                = "shoulder"
 
 /obj/item/chems/food/butchery/haunch/on_update_icon()
 	..()
@@ -47,7 +51,7 @@
 		if(bone_over)
 			add_overlay(bone_image)
 		else
-			underlays = bone_image
+			underlays += bone_image
 
 /obj/item/chems/food/butchery/haunch/side
 	name                = "side of meat"
@@ -56,8 +60,11 @@
 	bone_over           = TRUE
 	w_class             = ITEM_SIZE_GARGANTUAN
 
+/obj/item/chems/food/butchery/haunch/side/set_name_from(mob/donor)
+	SetName("side of [name] meat")
+
 /obj/item/chems/food/butchery/stomach
-	name                = "animal stomach"
+	name                = "stomach"
 	desc                = "The stomach of a large animal. It would probably make a decent waterskin if properly treated."
 	icon                = 'icons/obj/items/butchery/ruminant_stomach.dmi'
 	material            = /decl/material/solid/organic/meat/gut
@@ -69,6 +76,5 @@
 	add_to_reagents(stomach_reagent, 12)
 
 /obj/item/chems/food/butchery/stomach/ruminant
-	name                = "ruminant stomach"
 	desc                = "A secondary stomach from an unfortunate cow, or some other ruminant. A good source of rennet."
 	stomach_reagent     = /decl/material/liquid/enzyme/rennet

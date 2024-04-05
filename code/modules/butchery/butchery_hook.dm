@@ -42,13 +42,13 @@
 		return ..()
 
 	if(occupant_state == CARCASS_FRESH)
-		visible_message(SPAN_NOTICE("\The [user] removes \the [occupant] from \the [src]."))
+		visible_message(SPAN_NOTICE("\The [user] removes \the [occupant] from \the [initial(name)]."))
 		occupant.forceMove(get_turf(src))
 		clear_occupant()
 		busy = FALSE
 		update_icon()
 	else
-		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
+		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [initial(name)] would be pointless."))
 	return TRUE
 
 /obj/structure/meat_hook/receive_mouse_drop(atom/dropping, mob/user, params)
@@ -70,7 +70,7 @@
 		return
 
 	if(occupant)
-		to_chat(user, SPAN_WARNING("\The [src] already has a carcass on it."))
+		to_chat(user, SPAN_WARNING("\The [initial(name)] already has a carcass on it."))
 		return
 
 	if(suitable_for_butchery(target))
@@ -88,7 +88,7 @@
 		target.forceMove(src)
 		occupant = target
 		occupant_state = CARCASS_FRESH
-		SetName("[target.name] carcass")
+		SetName("[target.name]'s carcass")
 		update_icon()
 	else
 		to_chat(user, SPAN_WARNING("You cannot butcher \the [target]."))
@@ -124,10 +124,10 @@
 /obj/structure/meat_hook/mob_breakout(mob/living/escapee)
 	. = ..()
 	if(secures_occupant)
-		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [src]!"))
+		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [initial(name)]!"))
 		if(!do_after(escapee, 5 SECONDS, src))
 			return FALSE
-	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [src]!"))
+	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [initial(name)]!"))
 	escapee.dropInto(loc)
 	if(escapee == occupant)
 		clear_occupant()

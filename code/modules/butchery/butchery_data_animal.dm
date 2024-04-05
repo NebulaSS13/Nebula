@@ -1,6 +1,13 @@
 /decl/butchery_data/animal
 	bone_amount       = 5
 	skin_amount       = 5
+	var/stomach_type
+
+/decl/butchery_data/animal/harvest_innards(mob/donor)
+	. = ..()
+	if(stomach_type)
+		var/product = new stomach_type(get_turf(donor), gut_material)
+		LAZYADD(., product)
 
 /decl/butchery_data/animal/corgi
 	meat_type         = /obj/item/chems/food/meat/corgi
@@ -19,6 +26,7 @@
 	bone_amount       = 20
 	skin_amount       = 20
 	skin_material     = /decl/material/solid/organic/skin/fur/heavy
+	stomach_type      = /obj/item/chems/food/butchery/stomach
 
 /decl/butchery_data/animal/cat
 	skin_material     = /decl/material/solid/organic/skin/fur/orange

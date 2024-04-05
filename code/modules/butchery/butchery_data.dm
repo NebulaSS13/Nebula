@@ -1,19 +1,26 @@
 /decl/butchery_data
+
 	abstract_type = /decl/butchery_data
+
 	var/meat_type         = /obj/item/chems/food/meat
 	var/meat_material     = /decl/material/solid/organic/meat
 	var/meat_amount       = 3
+
 	var/bone_type         = /obj/item/stack/material/bone
 	var/bone_material     = /decl/material/solid/organic/bone
 	var/bone_amount       = 3
+
 	var/skin_type         = /obj/item/stack/material/skin
 	var/skin_material     = /decl/material/solid/organic/skin
 	var/skin_amount       = 3
+
 	var/gut_type          = /obj/item/chems/food/butchery/offal
 	var/gut_material      = /decl/material/solid/organic/meat/gut
 	var/gut_amount        = 1
+
 	var/butchery_rotation = 90
 	var/must_use_hook     = TRUE
+	var/needs_surface     = FALSE
 
 /decl/butchery_data/proc/place_products(mob/living/donor, product_material, product_amount, product_type)
 	if((istype(donor) && donor.butchery_data != type) || !product_material || !product_amount || !product_type)
@@ -31,22 +38,52 @@
 	. = place_products(donor, skin_material, skin_amount, skin_type)
 
 /decl/butchery_data/proc/harvest_innards(mob/living/donor)
+
 	. = place_products(donor, gut_material,  gut_amount,  gut_type)
+
+	var/removed_organ = FALSE
+	for(var/obj/item/organ/organ in donor?.get_internal_organs())
+		if(istype(organ))
+			donor.remove_organ(organ, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE)
+			removed_organ = TRUE
+		else if(isitem(organ))
+			organ.dropInto(get_turf(donor))
+		else
+			continue
+		LAZYADD(., organ)
+
+	if(removed_organ)
+		donor.update_health()
+		donor.update_icon()
 
 /decl/butchery_data/proc/harvest_bones(mob/living/donor)
 	. = place_products(donor, bone_material, bone_amount, bone_type)
 
 /decl/butchery_data/proc/harvest_meat(mob/living/donor)
+
 	. = place_products(donor, meat_material, meat_amount, meat_type)
-	if(!istype(donor) || !donor?.reagents || !length(.))
+
+	if(!istype(donor))
 		return
-	var/list/meat
-	for(var/obj/item/chems/food/slab in .)
-		LAZYADD(meat, slab)
-	if(length(meat))
-		var/reagent_split = round(donor.reagents.total_volume/length(meat), 1)
-		for(var/obj/item/chems/food/slab as anything in meat)
-			donor.reagents.trans_to_obj(slab, reagent_split)
+
+	if(donor.reagents && length(.))
+		var/list/meat
+		for(var/obj/item/chems/food/slab in .)
+			LAZYADD(meat, slab)
+		if(length(meat))
+			var/reagent_split = round(donor.reagents.total_volume/length(meat), 1)
+			for(var/obj/item/chems/food/slab as anything in meat)
+				donor.reagents.trans_to_obj(slab, reagent_split)
+
+	// This process will delete the mob, so do it last.
+	for(var/obj/item/organ/organ as anything in donor?.get_external_organs())
+		if(istype(organ))
+			donor.remove_organ(organ, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE)
+		else if(isitem(organ))
+			organ.dropInto(get_turf(donor))
+		else
+			continue
+		LAZYADD(., organ)
 
 /decl/butchery_data/proc/get_all_products(mob/living/donor)
 	for(var/thing in harvest_skin(donor))

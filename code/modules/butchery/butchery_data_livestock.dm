@@ -1,5 +1,20 @@
 /decl/butchery_data/animal/ruminant
 	abstract_type = /decl/butchery_data/animal/ruminant
+	stomach_type  = /obj/item/chems/food/butchery/stomach/ruminant
+
+/decl/butchery_data/animal/ruminant/harvest_meat(mob/donor)
+	var/static/list/extra_product = list(
+		/obj/item/chems/food/butchery/haunch/shoulder,
+		/obj/item/chems/food/butchery/haunch/shoulder,
+		/obj/item/chems/food/butchery/haunch/side,
+		/obj/item/chems/food/butchery/haunch/side,
+		/obj/item/chems/food/butchery/haunch,
+		/obj/item/chems/food/butchery/haunch
+	)
+	var/create_turf = get_turf(donor)
+	for(var/product in extra_product)
+		var/food = new product(create_turf, meat_material, donor, bone_material)
+		LAZYADD(., food)
 
 /decl/butchery_data/animal/ruminant/goat
 	meat_type     = /obj/item/chems/food/meat/goat

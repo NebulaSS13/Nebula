@@ -234,6 +234,7 @@
 /decl/material/solid/organic/meat/gut
 	name = "gut"
 	uid = "solid_gut"
+	color = "#9c6b6b"
 
 /decl/material/solid/organic/skin
 	name = "skin"
