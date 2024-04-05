@@ -142,7 +142,7 @@
 
 		if(!current_target)
 			if(prob(1))
-				for(var/mob/living/slime/frenemy in range(1, src))
+				for(var/mob/living/slime/frenemy in range(1, body))
 					if(frenemy != body && body.Adjacent(frenemy))
 						body.a_intent_change((frenemy.slime_type == slime.slime_type) ? I_HELP : I_HURT)
 						body.UnarmedAttack(frenemy)
