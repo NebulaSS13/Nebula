@@ -57,6 +57,7 @@
 		to_chat(user, SPAN_NOTICE("You combine \the [src] and \the [W]."))
 		qdel(W)
 		update_primary_material()
+		user.put_in_hands(src)
 		return TRUE
 	. = ..()
 

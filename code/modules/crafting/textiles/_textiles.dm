@@ -40,6 +40,7 @@
 	update_icon()
 
 /obj/structure/textiles/proc/stop_working()
+	working = FALSE
 	if(work_sound?.started)
 		work_sound.stop(src)
 	update_icon()
@@ -58,7 +59,7 @@
 
 	return ..()
 
-/obj/structure/textiles/proc/try_take_input(obj/item/W, mob/user)
+/obj/structure/textiles/proc/try_take_input(obj/item/W, mob/user, silent)
 	return FALSE
 
 /obj/structure/textiles/proc/try_unload_material(mob/user)

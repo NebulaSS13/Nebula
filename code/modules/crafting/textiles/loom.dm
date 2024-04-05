@@ -34,6 +34,7 @@
 	weaving_progress = 0
 
 /obj/structure/textiles/loom/try_take_input(obj/item/W, mob/user)
+
 	if(istype(W, /obj/item/stack/material/thread))
 		var/loaded = FALSE
 		if(loaded_thread)
@@ -93,7 +94,7 @@
 	start_working()
 	var/processed = 0
 	var/last_completion_descriptor = null
-	while(!QDELETED(loaded_thread) && user.do_skilled(2 SECONDS, work_skill, src))
+	while(!QDELETED(loaded_thread) && user.do_skilled(1.5 SECONDS, work_skill, src))
 		if(QDELETED(loaded_thread) || QDELETED(src) || QDELETED(user) || !weaving_type || !(weaving_type in loaded_thread.matter_per_piece))
 			break
 
