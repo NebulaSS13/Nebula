@@ -1,4 +1,0 @@
-author: Chinsky
-changes:
-  - {bugfix: Fixed planets having wrong colors when seen on skybox}
-delete-after: true
