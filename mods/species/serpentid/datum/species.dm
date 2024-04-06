@@ -11,10 +11,12 @@
 		"senescent" =      45
 	)
 
-
 /decl/butchery_data/humanoid/serpentid
 	skin_material     = /decl/material/solid/organic/skin/insect
+
 	bone_material     = null
+	bone_amount       = null
+	bone_type         = null
 
 /decl/species/serpentid
 	name = SPECIES_SERPENTID

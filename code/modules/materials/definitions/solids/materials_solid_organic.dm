@@ -232,6 +232,10 @@
 	tensile_strength = 0.8 // TODO: dried sinew? Should this be crappier than plastic/metal?
 	compost_value = 0.2
 
+/decl/material/solid/organic/leather/gut
+	name = "dried gut"
+	uid = "solid_dried_gut"
+
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"
 	uid = "solid_synthleather"

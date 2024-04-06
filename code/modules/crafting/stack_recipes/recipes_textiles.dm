@@ -32,9 +32,15 @@
 /decl/stack_recipe/textiles/leather/gloves
 	result_type           = /obj/item/clothing/gloves/thick
 
+/decl/stack_recipe/textiles/leather/waterskin
+	result_type           = /obj/item/chems/waterskin/crafted
+	required_material     = /decl/material/solid/organic/leather
+	category              = null
+
 /decl/stack_recipe/textiles/cloth
 	abstract_type         = /decl/stack_recipe/textiles/cloth
 	craft_stack_types     = /obj/item/stack/material/bolt
+	category              = "clothing"
 
 /decl/stack_recipe/textiles/cloth/bandana
 	result_type           = /obj/item/clothing/mask/bandana/colourable

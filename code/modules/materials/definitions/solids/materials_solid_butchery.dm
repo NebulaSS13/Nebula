@@ -27,7 +27,7 @@
 /decl/material/solid/organic/meat/fish
 	name  = "fish meat"
 	uid = "solid_meat_fish"
-	color = "#ffb2b2"
+	color = "#ff9b9b"
 
 /decl/material/solid/organic/meat/chicken
 	name  = "chicken meat"

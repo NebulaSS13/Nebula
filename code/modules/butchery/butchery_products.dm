@@ -55,13 +55,11 @@
 	slice_num           = 2
 	w_class             = ITEM_SIZE_HUGE
 	var/bone_material   = /decl/material/solid/organic/bone
-	var/skin_material   = /decl/material/solid/organic/skin
 
 /obj/item/chems/food/butchery/haunch/Initialize(ml, material_key, mob/living/donor)
 	var/decl/butchery_data/butchery_decl = GET_DECL(donor?.butchery_data)
 	if(butchery_decl)
 		bone_material = butchery_decl.bone_material
-		skin_material = butchery_decl.skin_material
 	if(bone_material)
 		LAZYSET(matter, bone_material, MATTER_AMOUNT_REINFORCEMENT)
 	. = ..()
@@ -73,9 +71,9 @@
 		var/decl/material/bones = GET_DECL(bone_material)
 		add_overlay(overlay_image(icon, "[icon_state]-bone", bones.color, RESET_COLOR))
 
-	if(skin_material && check_state_in_icon("[icon_state]-skin", icon))
-		var/decl/material/skin = GET_DECL(skin_material)
-		add_overlay(overlay_image(icon, "[icon_state]-skin", skin.color, RESET_COLOR))
+	if(fat_material && check_state_in_icon("[icon_state]-fat", icon))
+		var/decl/material/fat = GET_DECL(fat_material)
+		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.color, RESET_COLOR))
 
 /obj/item/chems/food/butchery/haunch/shoulder
 	name                = "shoulder"
@@ -100,7 +98,14 @@
 	icon                = 'icons/obj/items/butchery/ruminant_stomach.dmi'
 	material            = /decl/material/solid/organic/meat/gut
 	nutriment_amt       = 8
+	dried_type          = /obj/item/chems/waterskin
 	var/stomach_reagent = /decl/material/liquid/acid/stomach
+
+/obj/item/chems/food/butchery/stomach/get_dried_product()
+	var/obj/item/chems/waterskin/result = ..()
+	if(istype(result) && reagents?.total_volume)
+		reagents.trans_to_holder(result.reagents, reagents.total_volume)
+	return result
 
 /obj/item/chems/food/butchery/stomach/populate_reagents()
 	..()
