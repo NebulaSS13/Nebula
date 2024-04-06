@@ -198,6 +198,7 @@
 	body_parts_covered = SLOT_FACE
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
+	matter = null
 	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/mask/bandana/colourable
