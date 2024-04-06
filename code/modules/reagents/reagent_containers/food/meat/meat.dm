@@ -63,7 +63,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "steak"
 	slice_path = /obj/item/chems/food/cutlet
-	slices_num = 3
+	slice_num = 3
 	filling_color = "#7a3d11"
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 3

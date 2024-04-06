@@ -100,8 +100,8 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/storage/box/fancy/egg_box,
 		/obj/item/chems/food/tofu,
 		/obj/item/chems/food/tofu,
-		/obj/item/chems/food/meat,
-		/obj/item/chems/food/meat)
+		/obj/item/chems/food/butchery/meat,
+		/obj/item/chems/food/butchery/meat)
 
 /datum/supply_drop_loot/armour
 	name = "Armour"

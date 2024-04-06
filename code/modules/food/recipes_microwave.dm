@@ -5,7 +5,7 @@
 /* No telebacon. just no...
 /decl/recipe/telebacon
 	items = list(
-		/obj/item/chems/food/meat,
+		/obj/item/chems/food/butchery/meat,
 		/obj/item/assembly/signaler
 	)
 	result = /obj/item/chems/food/telebacon
@@ -13,7 +13,7 @@
 I said no!
 /decl/recipe/syntitelebacon
 	items = list(
-		/obj/item/chems/food/meat/syntiflesh,
+		/obj/item/chems/food/butchery/meat/syntiflesh,
 		/obj/item/assembly/signaler
 	)
 	result = /obj/item/chems/food/telebacon
@@ -91,9 +91,9 @@ I said no!
 /decl/recipe/fishburger
 	items = list(
 		/obj/item/chems/food/bun,
-		/obj/item/chems/food/fish
+		/obj/item/chems/food/butchery/meat/fish
 	)
-	result = /obj/item/chems/food/fishburger
+	result = /obj/item/chems/food/butchery/meat/fishburger
 
 /decl/recipe/tofuburger
 	items = list(
@@ -250,7 +250,7 @@ I said no!
 /decl/recipe/soylentgreen
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	items = list(
-		/obj/item/chems/food/meat/human = 2
+		/obj/item/chems/food/butchery/meat/human = 2
 	)
 	reagent_mix = REAGENT_REPLACE // no raw flour
 	result = /obj/item/chems/food/soylentgreen
@@ -342,7 +342,7 @@ I said no!
 	fruit = list("chili" = 1)
 	reagents = list(/decl/material/liquid/nutriment/batter = 10)
 	items = list(
-		/obj/item/chems/food/fish
+		/obj/item/chems/food/butchery/meat/fish
 	)
 	result = /obj/item/chems/food/cubancarp
 
@@ -381,7 +381,7 @@ I said no!
 			return FALSE
 
 /decl/recipe/plainsteak
-	items = list(/obj/item/chems/food/meat)
+	items = list(/obj/item/chems/food/butchery/meat)
 	result = /obj/item/chems/food/plainsteak
 
 /decl/recipe/meatsteak
@@ -397,7 +397,7 @@ I said no!
 
 /decl/recipe/syntisteak
 	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
-	items = list(/obj/item/chems/food/meat/syntiflesh)
+	items = list(/obj/item/chems/food/butchery/meat/syntiflesh)
 	result = /obj/item/chems/food/meatsteak/synthetic
 
 /decl/recipe/pizzamargherita
@@ -503,7 +503,7 @@ I said no!
 /decl/recipe/bigbiteburger
 	items = list(
 		/obj/item/chems/food/burger,
-		/obj/item/chems/food/meat = 2,
+		/obj/item/chems/food/butchery/meat = 2,
 		/obj/item/chems/food/egg,
 	)
 	reagent_mix = REAGENT_REPLACE // no raw egg
@@ -539,9 +539,9 @@ I said no!
 /decl/recipe/fishandchips
 	items = list(
 		/obj/item/chems/food/fries,
-		/obj/item/chems/food/fish
+		/obj/item/chems/food/butchery/meat/fish
 	)
-	result = /obj/item/chems/food/fishandchips
+	result = /obj/item/chems/food/butchery/meat/fishandchips
 
 /decl/recipe/bread
 	display_name = "loaf of bread"
@@ -586,7 +586,7 @@ I said no!
 /decl/recipe/stew
 	fruit = list("potato" = 1, "tomato" = 1, "carrot" = 1, "eggplant" = 1, "mushroom" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
-	items = list(/obj/item/chems/food/meat)
+	items = list(/obj/item/chems/food/butchery/meat)
 	result = /obj/item/chems/food/stew
 
 /decl/recipe/jelliedtoast
@@ -630,7 +630,7 @@ I said no!
 	fruit = list("apple" = 1, "carrot" = 1, "potato" = 1)
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/nutriment/rice = 10, /decl/material/liquid/nutriment/flour = 5)
 	items = list(
-		/obj/item/chems/food/meat/chicken
+		/obj/item/chems/food/butchery/meat/chicken
 	)
 	result = /obj/item/chems/food/katsucurry
 
@@ -679,7 +679,7 @@ I said no!
 	items = list(
 		/obj/item/chems/food/bigbiteburger,
 		/obj/item/chems/food/dough,
-		/obj/item/chems/food/meat,
+		/obj/item/chems/food/butchery/meat,
 		/obj/item/chems/food/cheesewedge,
 		/obj/item/chems/food/boiledegg,
 	)
@@ -756,10 +756,10 @@ I said no!
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	items = list(
 		/obj/item/chems/food/egg,
-		/obj/item/chems/food/fish
+		/obj/item/chems/food/butchery/meat/fish
 	)
 	reagent_mix = REAGENT_REPLACE // no raw egg/fish
-	result = /obj/item/chems/food/fishfingers
+	result = /obj/item/chems/food/butchery/meat/fishfingers
 
 /decl/recipe/mysterysoup
 	reagents = list(/decl/material/liquid/water = 10)

@@ -10,9 +10,10 @@
 		LAZYADD(., product)
 
 /decl/butchery_data/animal/corgi
-	meat_type         = /obj/item/chems/food/meat/corgi
+	meat_type         = /obj/item/chems/food/butchery/meat/corgi
 	meat_amount       = 3
 	skin_material     = /decl/material/solid/organic/skin/fur/orange
+	gut_type          = /obj/item/chems/food/butchery/offal/small
 
 /decl/butchery_data/animal/corgi/puppy
 	meat_amount       = 1
@@ -30,6 +31,7 @@
 
 /decl/butchery_data/animal/cat
 	skin_material     = /decl/material/solid/organic/skin/fur/orange
+	gut_type          = /obj/item/chems/food/butchery/offal/small
 
 /decl/butchery_data/animal/cat/black
 	skin_material     = /decl/material/solid/organic/skin/fur/black
@@ -46,6 +48,7 @@
 	bone_amount       = 1
 	skin_amount       = 1
 	must_use_hook     = FALSE
+	gut_type          = /obj/item/chems/food/butchery/offal/small
 
 /decl/butchery_data/animal/small/furred
 	skin_material     = /decl/material/solid/organic/skin/fur

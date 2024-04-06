@@ -7,6 +7,7 @@
 	bone_amount   = 1
 	skin_amount   = 1
 	must_use_hook = FALSE
+	gut_type = /obj/item/chems/food/butchery/offal/small
 
 /decl/butchery_data/animal/reptile/drake/harvest_bones(mob/living/donor)
 	. = ..()

@@ -28,7 +28,7 @@
 		"Food" = list(
 			/obj/item/chems/drinks/milk/smallcarton = 30,
 			/obj/item/chems/drinks/milk = 50,
-			/obj/item/chems/food/meat/syntiflesh = 50,
+			/obj/item/chems/food/butchery/meat/syntiflesh = 50,
 			/obj/item/storage/box/fancy/egg_box = 300),
 		"Nutrients" = list(
 			/obj/item/chems/glass/bottle/eznutrient = 60,

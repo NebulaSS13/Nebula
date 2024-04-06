@@ -196,8 +196,8 @@
 			qdel(thing)
 		else
 			thing.forceMove(src)
-			if(istype(thing, /obj/item/chems/food/meat))
-				var/obj/item/chems/food/meat/slab = thing
+			if(istype(thing, /obj/item/chems/food/butchery/meat))
+				var/obj/item/chems/food/butchery/meat/slab = thing
 				slab.SetName("[slab_name] [slab.name]")
 				slab.add_to_reagents(/decl/material/liquid/nutriment,slab_nutrition)
 

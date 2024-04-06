@@ -93,10 +93,6 @@
 				if(QDELETED(src) || client)
 					return
 
-/obj/item/chems/food/meat/corgi
-	name = "corgi meat"
-	desc = "Tastes like... well you know..."
-
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
 	if(istype(O, /obj/item/newspaper))
 		if(!stat)

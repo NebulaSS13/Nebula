@@ -22,7 +22,7 @@
 
 /decl/chemical_reaction/recipe/food/cheesewheel/rennet
 	name = "Rennet Cheesewheel"
-	catalysts = null
+	catalysts = list()
 	required_reagents = list(
 		/decl/material/liquid/drink/milk = 40,
 		/decl/material/liquid/enzyme/rennet = 3
@@ -51,7 +51,7 @@
 	name = "Synthetic Meat"
 	required_reagents = list(/decl/material/liquid/blood = 5, /decl/material/liquid/plasticide = 1)
 	mix_message = "The solution thickens disturbingly, taking on a meaty appearance."
-	obj_result = /obj/item/chems/food/meat/syntiflesh
+	obj_result = /obj/item/chems/food/butchery/meat/syntiflesh
 
 /decl/chemical_reaction/recipe/food/tofu
 	name = "Tofu"

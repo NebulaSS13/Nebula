@@ -59,6 +59,10 @@
 				L.forceMove(T)
 			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
+/decl/butchery_data/animal/fish/space_carp/shark
+	meat_type = /obj/item/chems/food/sharkmeat
+	must_use_hook = TRUE
+
 /obj/item/chems/food/sharkmeat
 	name = "cosmoshark fillet"
 	desc = "A fillet of cosmoshark meat."

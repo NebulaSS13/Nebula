@@ -11,7 +11,6 @@
 	speak_emote = list("brays in a booming voice")
 	emote_hear = list("brays in a booming voice")
 	emote_see = list("stamps a mighty foot, shaking the surroundings")
-	butchery_data = /decl/butchery_data/animal/ruminant/goat/king
 	response_harm = "assaults"
 	max_health = 500
 	mob_size = MOB_SIZE_LARGE

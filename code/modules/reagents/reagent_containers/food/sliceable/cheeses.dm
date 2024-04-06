@@ -3,7 +3,7 @@
 	desc = "A big wheel of delcious cheddar."
 	icon_state = "cheesewheel"
 	slice_path = /obj/item/chems/food/cheesewedge
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#fff700"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cheese" = 10)

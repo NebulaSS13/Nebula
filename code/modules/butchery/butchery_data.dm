@@ -2,7 +2,7 @@
 
 	abstract_type = /decl/butchery_data
 
-	var/meat_type         = /obj/item/chems/food/meat
+	var/meat_type         = /obj/item/chems/food/butchery/meat
 	var/meat_material     = /decl/material/solid/organic/meat
 	var/meat_amount       = 3
 
@@ -18,7 +18,7 @@
 	var/gut_material      = /decl/material/solid/organic/meat/gut
 	var/gut_amount        = 1
 
-	var/butchery_rotation = 90
+	var/butchery_rotation = 270
 	var/must_use_hook     = TRUE
 	var/needs_surface     = FALSE
 
@@ -36,6 +36,11 @@
 
 /decl/butchery_data/proc/harvest_skin(mob/living/donor)
 	. = place_products(donor, skin_material, skin_amount, skin_type)
+	if(donor && length(.))
+		var/skin_color = donor.get_skin_colour()
+		if(skin_color)
+			for(var/obj/item/thing in .)
+				thing.set_color(skin_color)
 
 /decl/butchery_data/proc/harvest_innards(mob/living/donor)
 
@@ -112,18 +117,30 @@
 		. += "valid meat type but meat amount is less than or equal to zero"
 	if(!meat_type && meat_amount > 0)
 		. += "invalid meat type but meat amount is larger than zero"
+	if((meat_type || meat_amount) && !meat_material)
+		. += "invalid meat material but meat type or meat amount are set"
 
 	if(skin_type && skin_amount <= 0)
 		. += "valid skin type but skin amount is less than or equal to zero"
 	if(!skin_type && skin_amount > 0)
 		. += "invalid skin type but skin amount is larger than zero"
+	if((skin_type || skin_amount) && !skin_material)
+		. += "invalid skin material but skin type or skin amount are set"
 
 	if(bone_type && bone_amount <= 0)
 		. += "valid bone type but bone amount is less than or equal to zero"
 	if(!bone_type && bone_amount > 0)
 		. += "invalid bone type but bone amount is larger than zero"
+	if((bone_type || bone_amount) && !bone_material)
+		. += "invalid bone material but bone type or bone amount are set"
 
 	if(gut_type && gut_amount <= 0)
-		. += "valid bone type but bone amount is less than or equal to zero"
+		. += "valid gut type but gut amount is less than or equal to zero"
 	if(!gut_type && gut_amount > 0)
-		. += "invalid bone type but bone amount is larger than zero"
+		. += "invalid gut type but gut amount is larger than zero"
+	if((gut_type || gut_amount) && !gut_material)
+		. += "invalid gut material but gut type or gut amount are set"
+
+	// Try to retrieve all products to ensure nothing trips any runtimes.
+	for(var/atom/thing in get_all_products())
+		qdel(thing)

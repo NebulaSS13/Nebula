@@ -26,7 +26,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
 	slice_path = /obj/item/chems/food/doughslice
-	slices_num = 3
+	slice_num = 3
 	center_of_mass = @'{"x":16,"y":16}'
 	utensil_flags = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
 	backyard_grilling_product = /obj/item/chems/food/flatbread
@@ -43,7 +43,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
 	slice_path = /obj/item/chems/food/spagetti
-	slices_num = 1
+	slice_num = 1
 	bitesize = 2
 	center_of_mass = @'{"x":17,"y":19}'
 	nutriment_desc = list("dough" = 1)

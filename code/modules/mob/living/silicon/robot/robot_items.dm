@@ -374,8 +374,8 @@
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5
 	var/list/fuel_types = list(
-		/obj/item/chems/food/meat = 2,
-		/obj/item/chems/food/fish = 1.5
+		/obj/item/chems/food/butchery/meat = 2,
+		/obj/item/chems/food/butchery/meat/fish = 1.5
 	)
 
 /obj/item/bioreactor/attack_self(var/mob/user)

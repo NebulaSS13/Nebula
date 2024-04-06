@@ -1,5 +1,5 @@
 /decl/butchery_data/humanoid/skrell
-	meat_type = /obj/item/chems/food/fish/octopus/skrell
+	meat_type = /obj/item/chems/food/butchery/meat/fish/octopus/skrell
 	bone_material = /decl/material/solid/organic/bone/cartilage
 
 /decl/species/skrell

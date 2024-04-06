@@ -84,7 +84,7 @@
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
 
-/obj/item/chems/food/fishburger
+/obj/item/chems/food/butchery/meat/fishburger
 	name = "fish sandwich"
 	desc = "Almost like a carp is yelling somewhere... Give me back that fillet -o- carp, give me that carp."
 	icon_state = "fishburger"
@@ -92,7 +92,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 	bitesize = 3
 
-/obj/item/chems/food/fishburger/populate_reagents()
+/obj/item/chems/food/butchery/meat/fishburger/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
 

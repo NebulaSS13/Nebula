@@ -487,13 +487,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	bleed_ticks = round(bleed_ticks)
 
+/mob/living/simple_animal/get_blood_color()
+	return bleed_colour
+
 /mob/living/simple_animal/proc/handle_bleeding()
 	bleed_ticks--
 	take_damage(BRUTE, 1)
-
-	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
-	drip.basecolor = bleed_colour
-	drip.update_icon()
+	blood_splatter(get_turf(src), src, FALSE)
 
 /mob/living/simple_animal/get_digestion_product()
 	return /decl/material/liquid/nutriment
