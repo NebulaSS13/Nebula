@@ -8,10 +8,10 @@
 	is_fundament_turf = TRUE
 	var/detail_decal
 
-/turf/exterior/seafloor/get_plant_growth_rate()
+/turf/floor/natural/seafloor/get_plant_growth_rate()
 	return 0.8
 
-/turf/exterior/seafloor/flooded
+/turf/floor/natural/seafloor/flooded
 	flooded = /decl/material/liquid/water
 	color = COLOR_LIQUID_WATER
 

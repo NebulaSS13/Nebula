@@ -8,10 +8,10 @@
 	material = /decl/material/solid/sand
 	is_fundament_turf = TRUE
 
-/turf/exterior/shrouded/get_plant_growth_rate()
+/turf/floor/natural/shrouded/get_plant_growth_rate()
 	return 0.5
 
-/turf/exterior/shrouded/tar
+/turf/floor/natural/shrouded/tar
 	name = "tar"
 	desc = "A pool of viscous and sticky tar."
 	movement_delay = 12

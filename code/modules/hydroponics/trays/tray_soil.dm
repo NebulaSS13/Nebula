@@ -19,9 +19,9 @@
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/setlight
 
-	var/turf/exterior/E = get_turf(src)
-	if(istype(E))
-		color = E.dirt_color
+	if(isturf(loc))
+		var/turf/turf = loc
+		color = turf.get_soil_color()
 
 	pixel_x = rand(-1,1)
 	pixel_y = rand(-1,1)

@@ -9,10 +9,10 @@
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	material = /decl/material/solid/organic/plantmatter/grass
 
-/turf/exterior/grass/get_plant_growth_rate()
+/turf/floor/natural/grass/get_plant_growth_rate()
 	return 1.2 // Shouldn't really matter since you can't plant on grass, it turns to dirt first.
 
-/turf/exterior/grass/wild
+/turf/floor/natural/grass/wild
 	name = "wild grass"
 	possible_states = null
 	icon = 'icons/turf/flooring/wildgrass.dmi'

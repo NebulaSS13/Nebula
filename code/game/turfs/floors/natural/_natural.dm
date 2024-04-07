@@ -28,10 +28,10 @@
 	var/reagent_type
 	var/const/TRENCH_DEPTH_PER_ACTION = 100
 
-/turf/exterior/get_plant_growth_rate()
+/turf/floor/natural/get_plant_growth_rate()
 	return 0.1
 
-/turf/exterior/Initialize(mapload, no_update_icon = FALSE)
+/turf/floor/natural/Initialize(mapload, no_update_icon = FALSE)
 
 	if(base_color)
 		color = base_color
