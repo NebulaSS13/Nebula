@@ -18,6 +18,7 @@
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = 'sound/effects/squelch1.ogg'
+	fishing_bait_value = 1
 
 /decl/material/solid/organic/meat/gut
 	name = "gut"
@@ -55,6 +56,7 @@
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = "punch"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	fishing_bait_value = 0.75
 	tans_to = /decl/material/solid/organic/leather
 
 /decl/material/solid/organic/skin/lizard
@@ -87,6 +89,7 @@
 	default_solid_form = /obj/item/stack/material/skin/pelt
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	fishing_bait_value = 0
 
 /decl/material/solid/organic/skin/fur/gray
 	uid = "solid_fur_gray"
@@ -135,6 +138,7 @@
 	default_solid_form = /obj/item/stack/material/skin/feathers
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	fishing_bait_value = 0
 
 /decl/material/solid/organic/skin/feathers/purple
 	color = COLOR_PALE_PURPLE_GRAY
