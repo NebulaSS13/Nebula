@@ -136,7 +136,7 @@
 		else if(istype(T, /turf/floor/natural/mud/water))
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["shallows"])
-		else if(istype(T, /turf/exterior/mud))
+		else if(istype(T, /turf/floor/natural/mud))
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["riverbank"]) // no entries by default, expanded on subtypes
 	else
