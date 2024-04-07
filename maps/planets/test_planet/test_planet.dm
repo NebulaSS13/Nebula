@@ -128,21 +128,21 @@
 	name             = "neutralia surface"
 	level_id         = NEUTRALIA_SURFACE_LEVEL_ID
 	base_area        = /area/exoplanet/neutralia
-	base_turf        = /turf/exterior/barren
+	base_turf        = /turf/floor/natural/barren
 	border_filler    = /turf/unsimulated/dark_filler
 
 /datum/level_data/planetoid/neutralia/underground
 	name             = "neutralia underground"
 	level_id         = "neutralia_underground"
 	base_area        = /area/exoplanet/underground/neutralia
-	base_turf        = /turf/exterior/barren
+	base_turf        = /turf/floor/natural/barren
 	border_filler    = /turf/unsimulated/mineral
 
 /datum/level_data/planetoid/neutralia/underground/bottom
 	name      = "neutralia abyssal depths"
 	level_id  = "neutralia_abyssal_depths"
 	base_area = /area/exoplanet/underground/neutralia/bottom
-	base_turf = /turf/exterior/rock/volcanic
+	base_turf = /turf/floor/natural/rock/volcanic
 
 /obj/abstract/level_data_spawner/neutralia/sky
 	level_data_type = /datum/level_data/planetoid/neutralia/sky

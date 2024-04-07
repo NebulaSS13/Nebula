@@ -23,3 +23,19 @@
 
 /turf/unsimulated/floor/shuttle_ceiling
 	icon_state = "reinforced"
+
+/turf/unsimulated/floor/snow
+	name = "snow"
+	icon = 'icons/turf/flooring/snow.dmi'
+	icon_state = "0"
+
+/turf/unsimulated/floor/ice
+	name = "ice"
+	icon = 'icons/turf/flooring/ice.dmi'
+	icon_state = "0"
+	color = COLOR_SKY_BLUE
+
+/turf/unsimulated/floor/snow_plating
+	name = "snowy plating"
+	icon = 'icons/turf/flooring/snow_plating.dmi'
+	icon_state = "snowplating"

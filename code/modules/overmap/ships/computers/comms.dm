@@ -196,7 +196,7 @@
 	if(!istype(T))
 		return FALSE
 	for(var/turf/neighbor in RANGE_TURFS(T, 1))
-		if(istype(neighbor, /turf/space) || istype(neighbor, /turf/exterior))
+		if(istype(neighbor, /turf/space) || neighbor.is_outside())
 			return TRUE
 	return FALSE
 

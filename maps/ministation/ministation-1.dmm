@@ -347,7 +347,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "bN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -388,7 +388,7 @@
 /area/ministation/medical)
 "bR" = (
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/security)
 "bU" = (
 /obj/machinery/firealarm{
@@ -1163,7 +1163,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "fW" = (
 /obj/structure/table,
@@ -1206,7 +1206,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "gm" = (
 /obj/machinery/vending/sovietsoda,
@@ -1221,7 +1221,7 @@
 /area/ministation/maint/l2centrals)
 "gw" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "gz" = (
 /turf/open,
@@ -1742,7 +1742,7 @@
 	},
 /obj/machinery/light,
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "iw" = (
 /obj/machinery/seed_extractor,
@@ -2153,7 +2153,7 @@
 /area/ministation/medical)
 "kh" = (
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/security)
 "km" = (
 /obj/structure/closet/secure_closet/medical3,
@@ -2200,7 +2200,7 @@
 /area/ministation/medical)
 "kz" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "kB" = (
 /obj/structure/dogbed,
@@ -2579,7 +2579,7 @@
 /area/ministation/maint/l2centraln)
 "mu" = (
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "mv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2629,7 +2629,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/structure/flora/bush/fullgrass,
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "mL" = (
 /obj/machinery/newscaster{
@@ -2817,7 +2817,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/flora/bush/fernybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/security)
 "oc" = (
 /obj/structure/rack,
@@ -3909,7 +3909,7 @@
 /area/ministation/medical)
 "sp" = (
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/w2)
 "sq" = (
 /obj/structure/cable{
@@ -4598,7 +4598,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "uv" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -4835,7 +4835,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "vm" = (
 /obj/structure/cable{
@@ -5085,7 +5085,7 @@
 /area/ministation/hop)
 "vX" = (
 /obj/structure/flora/bush/brflowers,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "wc" = (
 /obj/machinery/disposal,
@@ -6687,7 +6687,7 @@
 /area/ministation/security)
 "BW" = (
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/w2)
 "BZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -7236,7 +7236,7 @@
 /area/ministation/maint/hydromaint)
 "Fh" = (
 /obj/structure/flora/bush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Fj" = (
 /obj/machinery/disposal,
@@ -7412,7 +7412,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Gu" = (
 /obj/machinery/light_switch{
@@ -7488,7 +7488,7 @@
 /area/ministation/security)
 "GO" = (
 /obj/effect/overlay/palmtree_r,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/security)
 "GR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -7712,7 +7712,7 @@
 /area/ministation/hydro)
 "In" = (
 /obj/structure/flora/bush/sunnybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Io" = (
 /obj/machinery/light/small,
@@ -7814,7 +7814,7 @@
 /obj/structure/flora/bush/brflowers,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "IT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -7854,7 +7854,7 @@
 /turf/floor/carpet,
 /area/ministation/cafe)
 "Ji" = (
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Jj" = (
 /obj/structure/table/woodentable,
@@ -7924,7 +7924,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Jz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -8099,7 +8099,7 @@
 "Kv" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Kz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8109,7 +8109,7 @@
 	dir = 1
 	},
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "KG" = (
 /obj/effect/floor_decal/carpet{
@@ -8173,7 +8173,7 @@
 	dir = 4;
 	level = 2
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "KS" = (
 /turf/floor/tiled/dark,
@@ -8552,7 +8552,7 @@
 	pixel_y = -63
 	},
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Nh" = (
 /obj/effect/decal/cleanable/dirt,
@@ -8662,7 +8662,7 @@
 /obj/machinery/alarm{
 	pixel_y = 23
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "NC" = (
 /turf/open,
@@ -8738,7 +8738,7 @@
 /area/ministation/maint/l2centrals)
 "Oe" = (
 /obj/structure/flora/bush/fernybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Of" = (
 /obj/abstract/landmark/start{
@@ -8764,7 +8764,7 @@
 /area/ministation/hall/e2)
 "Oo" = (
 /obj/machinery/beehive,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Op" = (
 /obj/structure/disposalpipe/segment,
@@ -8825,7 +8825,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "OH" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -9175,7 +9175,7 @@
 "Qk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Qm" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -9197,7 +9197,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Qy" = (
 /obj/machinery/vending/snix,
@@ -9467,7 +9467,7 @@
 	dir = 4
 	},
 /obj/structure/flora/bush/lavendergrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hall/e2)
 "Sq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -9816,7 +9816,7 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Uj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -9870,7 +9870,7 @@
 "Ux" = (
 /obj/structure/lattice,
 /obj/structure/flora/bush/brflowers,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Uz" = (
 /obj/machinery/door/airlock/external/glass{
@@ -10023,7 +10023,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/ministation/hydro)
 "Vr" = (
 /obj/structure/extinguisher_cabinet{

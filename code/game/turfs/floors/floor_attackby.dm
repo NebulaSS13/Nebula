@@ -20,7 +20,7 @@
 
 	if(flooring)
 		if(IS_CROWBAR(C) && user.a_intent != I_HURT)
-			if(broken || burnt)
+			if(is_floor_damaged())
 				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src, 0.15))
 					return TRUE
 				if(!flooring)
@@ -40,20 +40,20 @@
 				if(!flooring)
 					return
 				to_chat(user, "<span class='notice'>You lever off the [flooring.descriptor].</span>")
-				make_plating(1)
+				make_plating(TRUE)
 			else
 				return
 			playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 			return TRUE
 		else if(IS_SCREWDRIVER(C) && (flooring.flags & TURF_REMOVE_SCREWDRIVER))
-			if(broken || burnt)
+			if(is_floor_damaged())
 				return
 			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
 				return TRUE
 			if(!flooring)
 				return
 			to_chat(user, "<span class='notice'>You unscrew and remove the [flooring.descriptor].</span>")
-			make_plating(1)
+			make_plating(TRUE)
 			playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
 			return TRUE
 		else if(IS_WRENCH(C) && (flooring.flags & TURF_REMOVE_WRENCH))
@@ -62,7 +62,7 @@
 			if(!flooring)
 				return
 			to_chat(user, "<span class='notice'>You unwrench and remove the [flooring.descriptor].</span>")
-			make_plating(1)
+			make_plating(TRUE)
 			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 			return TRUE
 		else if(IS_SHOVEL(C) && (flooring.flags & TURF_REMOVE_SHOVEL))
@@ -71,7 +71,7 @@
 			if(!flooring)
 				return
 			to_chat(user, "<span class='notice'>You shovel off the [flooring.descriptor].</span>")
-			make_plating(1)
+			make_plating(TRUE)
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 			return TRUE
 		else if(IS_COIL(C))
@@ -80,7 +80,7 @@
 	else
 
 		if(istype(C, /obj/item/stack))
-			if(broken || burnt)
+			if(is_floor_damaged())
 				to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
 				return TRUE
 			//first check, catwalk? Else let flooring do its thing
@@ -120,7 +120,7 @@
 			return TRUE
 		// Repairs and Deconstruction.
 		else if(IS_CROWBAR(C))
-			if(broken || burnt)
+			if(is_floor_damaged())
 				playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 				visible_message("<span class='notice'>[user] has begun prying off the damaged plating.</span>")
 				. = TRUE
@@ -128,10 +128,10 @@
 				if(T)
 					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
 				if(do_after(user, 10 SECONDS))
-					if(!broken && !burnt || !(is_plating()))return
+					if(!is_floor_damaged() || !(is_plating()))return
 					visible_message("<span class='warning'>[user] has pried off the damaged plating.</span>")
 					new /obj/item/stack/tile/floor(src)
-					src.ReplaceWithLattice()
+					physically_destroyed()
 					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 					if(T)
 						T.visible_message("<span class='danger'>The ceiling above has been pried off!</span>")
@@ -139,13 +139,13 @@
 		else if(IS_WELDER(C))
 			var/obj/item/weldingtool/welder = C
 			if(welder.isOn() && (is_plating()))
-				if(broken || burnt)
+				if(is_floor_damaged())
 					if(welder.weld(0, user))
 						to_chat(user, "<span class='notice'>You fix some dents on the broken plating.</span>")
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						icon_state = "plating"
-						burnt = null
-						broken = null
+						set_floor_burned(skip_update = TRUE)
+						set_floor_broken()
 						return TRUE
 				else
 					if(welder.weld(0, user))
@@ -156,7 +156,7 @@
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
 				return
-		else if(istype(C, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !broken && !burnt)
+		else if(istype(C, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !is_floor_damaged())
 			var/obj/item/gun/energy/plasmacutter/cutter = C
 			if(!cutter.slice(user))
 				return ..()
@@ -171,12 +171,12 @@
 	return ..()
 
 /turf/floor/proc/welder_melt()
-	if(!(is_plating()) || broken || burnt)
+	if(!(is_plating()) || is_floor_damaged())
 		return FALSE
-	// if burnt/broken is nonzero plating just chooses a random icon
+	// if burned/broken is nonzero plating just chooses a random icon
 	// so it doesn't really matter what we set this to as long as it's truthy
 	// let's keep it a string for consistency with the other uses of it
-	burnt = "1"
+	set_floor_burned(TRUE, skip_update = TRUE)
 	remove_decals()
 	return TRUE
 
@@ -192,7 +192,7 @@
 			. = ..()
 
 /turf/floor/cannot_build_cable()
-	if(broken || burnt)
+	if(is_floor_damaged())
 		return 2
 	if(!is_plating())
 		return 1

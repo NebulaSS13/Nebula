@@ -12,7 +12,7 @@
 /turf/unsimulated/beach/sand,
 /area/mobius_rift)
 "e" = (
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "f" = (
 /turf/wall/natural/random/high_chance,
@@ -22,7 +22,7 @@
 /area/mobius_rift)
 "h" = (
 /obj/structure/flora/bush/fullgrass,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "i" = (
 /obj/structure/flora/bush/fullgrass,
@@ -30,31 +30,31 @@
 /area/mobius_rift)
 "j" = (
 /obj/structure/flora/bush/genericbush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "k" = (
-/turf/exterior/sand/water,
+/turf/floor/natural/sand/water,
 /area/mobius_rift)
 "l" = (
 /obj/structure/flora/bush/fullgrass,
 /obj/structure/flora/bush/genericbush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "m" = (
 /obj/structure/flora/bush/grassybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "n" = (
 /mob/living/simple_animal/hostile/vagrant,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "o" = (
 /obj/structure/flora/bush/pointybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "p" = (
 /obj/structure/flora/bush/sunnybush,
-/turf/floor/grass,
+/turf/floor/fake_grass,
 /area/mobius_rift)
 "q" = (
 /mob/living/simple_animal/hostile/vagrant,

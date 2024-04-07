@@ -1,31 +1,31 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aX" = (
 /obj/abstract/landmark/roofed,
-/turf/exterior/path/basalt,
+/turf/floor/natural/path/basalt,
 /area/shaded_hills/outside)
 "bJ" = (
 /obj/abstract/landmark/roofed,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside)
 "eL" = (
 /obj/abstract/landmark/start/wanderer,
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/caves)
 "eR" = (
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/caves/unexplored/south)
 "fO" = (
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/outside/river)
 "gQ" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/caves/unexplored/south)
 "hT" = (
 /obj/abstract/landmark/start/wanderer,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/river)
 "jj" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves/unexplored/south)
 "kZ" = (
 /obj/abstract/level_data_spawner/shaded_hills_grassland,
@@ -35,16 +35,16 @@
 /turf/unsimulated/dark_filler,
 /area/space)
 "lE" = (
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside)
 "lU" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/unexplored/south)
 "ma" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/caves)
 "nd" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves/entrance)
 "nl" = (
 /obj/structure/door/wood/ebony,
@@ -55,7 +55,7 @@
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/river)
 "sS" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/caves/unexplored/south)
 "te" = (
 /turf/unsimulated/mask,
@@ -68,138 +68,138 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/outside)
 "vX" = (
-/turf/exterior/path/running_bond/basalt,
+/turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/river)
 "xr" = (
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/outside)
 "xC" = (
 /turf/floor/wood/ebony,
 /area/shaded_hills/outside)
 "yA" = (
 /obj/abstract/landmark/start/wanderer,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves)
 "zp" = (
-/turf/exterior/clay,
+/turf/floor/natural/clay,
 /area/shaded_hills/outside/river)
 "DX" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/caves/unexplored/south)
 "EE" = (
 /obj/abstract/landmark/latejoin/observer,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves)
 "EP" = (
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/caves/entrance)
 "ES" = (
 /obj/abstract/landmark/roofed,
 /turf/wall/log/ebony,
 /area/shaded_hills/outside)
 "EV" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/caves/river)
 "Fg" = (
 /obj/structure/door/wood/ebony,
 /obj/abstract/landmark/roofed,
-/turf/exterior/path/basalt,
+/turf/floor/natural/path/basalt,
 /area/shaded_hills/outside)
 "Ft" = (
 /obj/structure/fire_source,
 /obj/item/stack/material/log/mapped/wood/ten,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves)
 "Fv" = (
-/turf/exterior/rock/basalt,
+/turf/floor/natural/rock/basalt,
 /area/shaded_hills/outside)
 "Gh" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/outside/river)
 "Gt" = (
 /obj/abstract/landmark/latejoin,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/river)
 "Hn" = (
 /obj/abstract/landmark/start/wanderer,
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside/river)
 "HA" = (
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/caves)
 "HI" = (
 /obj/abstract/landmark/roofed,
 /turf/wall/brick/basalt,
 /area/shaded_hills/outside/river)
 "HV" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/outside)
 "Ic" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside/river)
 "Kd" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside)
 "Ku" = (
 /obj/abstract/landmark/start/wanderer,
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/outside)
 "KQ" = (
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/caves)
 "LF" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/unexplored)
 "LX" = (
 /obj/abstract/landmark/roofed,
-/turf/exterior/dirt,
+/turf/floor/natural/dirt,
 /area/shaded_hills/outside)
 "My" = (
-/turf/exterior/mud/water/deep,
+/turf/floor/natural/mud/water/deep,
 /area/shaded_hills/outside/river)
 "MH" = (
 /obj/abstract/landmark/roofed,
 /obj/abstract/landmark/roofed,
-/turf/exterior/grass/wild,
+/turf/floor/natural/grass/wild,
 /area/shaded_hills/outside)
 "MK" = (
 /obj/abstract/landmark/roofed,
-/turf/exterior/barren,
+/turf/floor/natural/barren,
 /area/shaded_hills/outside)
 "PO" = (
 /obj/abstract/landmark/roofed,
 /turf/wall/brick/basalt,
 /area/shaded_hills/outside)
 "Sm" = (
-/turf/exterior/path/basalt,
+/turf/floor/natural/path/basalt,
 /area/shaded_hills/outside)
 "TD" = (
 /obj/abstract/landmark/roofed,
-/turf/exterior/grass/wild,
+/turf/floor/natural/grass/wild,
 /area/shaded_hills/outside)
 "TR" = (
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside/river)
 "UV" = (
-/turf/exterior/mud/water,
+/turf/floor/natural/mud/water,
 /area/shaded_hills/caves/river)
 "VO" = (
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/caves/entrance)
 "WH" = (
 /obj/abstract/landmark/start/wanderer,
-/turf/exterior/mud,
+/turf/floor/natural/mud,
 /area/shaded_hills/outside)
 "WO" = (
 /obj/abstract/landmark/roofed,
 /obj/abstract/landmark/roofed,
-/turf/exterior/grass,
+/turf/floor/natural/grass,
 /area/shaded_hills/outside)
 "Xd" = (
-/turf/exterior/path/basalt,
+/turf/floor/natural/path/basalt,
 /area/shaded_hills/outside/river)
 "Xt" = (
-/turf/exterior/grass/wild,
+/turf/floor/natural/grass/wild,
 /area/shaded_hills/outside)
 "ZV" = (
 /turf/wall/log/ebony,

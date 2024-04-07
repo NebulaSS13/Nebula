@@ -3,10 +3,6 @@
 /turf/proc/get_diggable_resources()
 	return null
 
-/turf/exterior/get_diggable_resources()
-	if(istype(material) && material.dug_drop_type && (get_physical_height() > -(FLUID_DEEP)))
-		return list(material.dug_drop_type = list(3, 2))
-
 /turf/proc/clear_diggable_resources()
 	SHOULD_CALL_PARENT(TRUE)
 	update_icon()

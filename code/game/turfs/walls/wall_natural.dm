@@ -3,7 +3,7 @@
 	desc               = "A rough natural wall."
 	turf_flags         = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 	girder_material    = null
-	floor_type         = /turf/exterior/barren
+	floor_type         = /turf/floor/natural/barren
 	construction_stage = -1
 	var/strata_override
 	var/ramp_slope_direction
@@ -74,8 +74,8 @@
 				return TRUE
 			being_mined = TRUE
 			if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
-				dismantle_wall()
-			if(istype(src, /turf/wall/natural)) // dismantle_wall() can change our type
+				dismantle_turf()
+			if(istype(src, /turf/wall/natural)) // dismantle_turf() can change our type
 				being_mined = FALSE
 		return TRUE
 	return FALSE
@@ -111,7 +111,7 @@
 /turf/wall/natural/get_dismantle_sound()
 	return 'sound/effects/rockcrumble.ogg'
 
-/turf/wall/natural/dismantle_wall(devastated, explode, no_product, ramp_update = TRUE)
+/turf/wall/natural/dismantle_turf(devastated, explode, no_product, ramp_update = TRUE)
 	destroy_artifacts(null, INFINITY)
 	if(ramp_update && !ramp_slope_direction)
 		ramp_slope_direction = NORTH // Temporary so we don't let any neighboring ramps use us as supports.
@@ -162,3 +162,6 @@
 
 /turf/wall/natural/get_default_material()
 	. = GET_DECL(SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone)
+
+/turf/wall/natural/on_defilement()
+	ChangeTurf(/turf/wall/cult)

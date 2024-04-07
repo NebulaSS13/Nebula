@@ -38,10 +38,12 @@
 	else
 		z_flags &= ~ZMM_MANGLE_PLANES
 
-	var/turf/exterior/T = get_turf(src)
+	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
-		add_overlay(I)
+		var/soil_color = T.get_soil_color()
+		if(soil_color)
+			var/image/I = overlay_image(icon, "dugin", soil_color, RESET_COLOR)
+			add_overlay(I)
 
 /obj/structure/monolith/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
@@ -79,7 +81,13 @@
 	desc = "This obviously wasn't made for your feet. Looks pretty old."
 	initial_gas = null
 
-/turf/floor/fixed/alium/ruin/Initialize()
-	. = ..()
-	if(prob(10))
-		ChangeTurf(get_base_turf_by_area(src))
+/obj/abstract/landmark/random_base_turf
+	name = "random chance base turf"
+	var/turf_prob = 10
+
+/obj/abstract/landmark/random_base_turf/Initialize()
+	..()
+	if(isturf(loc) && prob(turf_prob))
+		var/turf/my_turf = loc
+		my_turf.ChangeTurf(get_base_turf_by_area(src))
+	return INITIALIZE_HINT_QDEL

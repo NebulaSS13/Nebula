@@ -3,7 +3,7 @@
 /datum/random_map/noise/volcanism
 	descriptor = "volcanism"
 	smoothing_iterations = 6
-	target_turf_type = /turf/exterior
+	target_turf_type = /turf/floor/natural
 
 // Get rid of those dumb little single-tile volcanic areas.
 /datum/random_map/noise/volcanism/cleanup()
@@ -38,8 +38,8 @@
 
 /datum/random_map/noise/volcanism/get_additional_spawns(var/value, var/turf/T)
 	if(value>=178)
-		if(istype(T,/turf/exterior/barren))
-			T.ChangeTurf(/turf/exterior/lava)
+		if(istype(T,/turf/floor/natural/barren))
+			T.ChangeTurf(/turf/floor/natural/lava)
 		else if(istype(T,/turf/wall/natural))
 			var/turf/wall/natural/M = T
-			M.floor_type = /turf/exterior/lava
+			M.floor_type = /turf/floor/natural/lava

@@ -1,27 +1,24 @@
-/turf/proc/ReplaceWithLattice(var/material)
+/turf/proc/switch_to_base_turf()
 	var/base_turf = get_base_turf_by_area(src)
 	if(base_turf && type != base_turf)
-		. = ChangeTurf(base_turf)
-	else
-		. = src
-	if(!(locate(/obj/structure/lattice) in .))
-		new /obj/structure/lattice(., material)
+		return ChangeTurf(base_turf)
+	return src
 
-// Removes all signs of lattice on the pos of the turf -Donkieyo
-/turf/proc/RemoveLattice()
-	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-	if(L)
-		qdel(L)
+/turf/proc/dismantle_turf(devastated, explode, no_product)
+	var/turf/new_turf = switch_to_base_turf()
+	if(!no_product && istype(new_turf) && !new_turf.is_open() && !(locate(/obj/structure/lattice) in new_turf))
+		new /obj/structure/lattice(new_turf)
+	return !!new_turf
+
+/turf/physically_destroyed(var/skip_qdel)
+	SHOULD_CALL_PARENT(FALSE)
+	return dismantle_turf(TRUE)
 
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
 	if (above)
 		above.update_mimic()
-
-/turf/physically_destroyed(var/skip_qdel)
-	SHOULD_CALL_PARENT(FALSE)
-	. = TRUE
 
 // Updates open turfs above this one to use its open_turf_type
 /turf/proc/update_open_above(var/restrict_type, var/respect_area = TRUE)
@@ -186,11 +183,9 @@
 	if(!..())
 		return FALSE
 
-	broken = other.broken
-	burnt = other.burnt
-	if(broken || burnt)
-		queue_icon_update()
 	set_flooring(other.flooring)
+	set_floor_broken(other._floor_broken, TRUE)
+	set_floor_burned(other._floor_burned)
 	return TRUE
 
 /turf/wall/transport_properties_from(turf/wall/other)

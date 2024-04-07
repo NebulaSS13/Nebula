@@ -1,14 +1,14 @@
-/turf/exterior/path/basalt
+/turf/floor/natural/path/basalt
 	name = "basalt path"
 	color = COLOR_DARK_GRAY
 	base_color = COLOR_DARK_GRAY
 
-/turf/exterior/path/herringbone/basalt
+/turf/floor/natural/path/herringbone/basalt
 	name = "basalt path"
 	color = COLOR_DARK_GRAY
 	base_color = COLOR_DARK_GRAY
 
-/turf/exterior/path/running_bond/basalt
+/turf/floor/natural/path/running_bond/basalt
 	name = "basalt path"
 	color = COLOR_DARK_GRAY
 	base_color = COLOR_DARK_GRAY
@@ -38,7 +38,7 @@
 /turf/wall/natural/random/high_chance/basalt/shaded_hills
 	strata_override = /decl/strata/shaded_hills
 
-/turf/exterior/rock/basalt
+/turf/floor/natural/rock/basalt
 	material = /decl/material/solid/stone/basalt
 	color = COLOR_DARK_GRAY
 

@@ -65,7 +65,7 @@
 	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1)
-		dismantle_wall(TRUE)
+		physically_destroyed()
 
 /turf/wall/proc/try_touch(var/mob/user, var/rotting)
 	. = TRUE
@@ -74,7 +74,7 @@
 			to_chat(user, "<span class='danger'>\The [reinf_material.solid_name] feels porous and crumbly.</span>")
 		else
 			to_chat(user, "<span class='danger'>\The [material.solid_name] [material.rotting_touch_message]!</span>")
-			dismantle_wall()
+			dismantle_turf()
 			return
 
 	if(!can_open)
@@ -118,7 +118,7 @@
 				return TRUE
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
 			to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>")
-			dismantle_wall(TRUE)
+			physically_destroyed()
 			return TRUE
 	var/turf/T = user.loc	//get user's location for delay checks
 	if(damage && istype(W, /obj/item/weldingtool))
@@ -178,7 +178,7 @@
 			cut_delay       = W.get_expected_tool_use_delay(TOOL_PICK, cut_delay)
 
 		if(dismantle_verb)
-			. = TRUE
+
 			to_chat(user, "<span class='notice'>You begin [dismantle_verb] \the [src].</span>")
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
@@ -186,13 +186,11 @@
 			if(cut_delay<0)
 				cut_delay = 0
 
-			if(!do_after(user,cut_delay,src))
-				return
-
-			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
-			user.visible_message("<span class='warning'>\The [user] finishes [dismantle_verb] \the [src]!</span>")
-			dismantle_wall()
-			return
+			if(do_after(user,cut_delay,src))
+				to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
+				user.visible_message("<span class='warning'>\The [user] finishes [dismantle_verb] \the [src]!</span>")
+				dismantle_turf()
+			return TRUE
 
 	//Reinforced dismantling.
 	else
@@ -209,7 +207,7 @@
 						return
 
 					to_chat(user, "<span class='notice'>You tear through the wall's support system and plating!</span>")
-					dismantle_wall()
+					dismantle_turf()
 					user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
@@ -315,7 +313,7 @@
 					if(!do_after(user,100,src) || !istype(src, /turf/wall) || !user || !W || !T )	return
 					if(user.loc == T && user.get_active_held_item() == W )
 						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
-						dismantle_wall()
+						dismantle_turf()
 					return
 
 	return FALSE

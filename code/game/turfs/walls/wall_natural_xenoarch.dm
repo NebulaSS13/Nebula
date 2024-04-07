@@ -69,7 +69,7 @@
 			SSxenoarch.artifact_spawning_turfs -= src
 		else if(prob(5))
 			new /obj/structure/boulder/excavated(src, material?.type)
-		dismantle_wall()
+		dismantle_turf()
 		return
 
 	var/excav_level = P.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
