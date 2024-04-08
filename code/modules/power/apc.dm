@@ -581,10 +581,6 @@ var/global/list/all_apcs = list()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/power/apc/proc/report()
-	var/obj/item/cell/cell = get_cell()
-	return "[area.proper_name] : [equipment]/[lighting]/[environ] ([lastused_equip+lastused_light+lastused_environ]) : [cell? cell.percent() : "N/C"] ([charging])"
-
 /obj/machinery/power/apc/proc/update()
 	var/old_power_light = area.power_light
 	var/old_power_environ = area.power_environ
@@ -614,10 +610,6 @@ var/global/list/all_apcs = list()
 
 	else if(cell?.charge > 0)
 		powered_down  = FALSE
-
-/obj/machinery/power/apc/proc/isWireCut(var/wireIndex)
-	return wires.IsIndexCut(wireIndex)
-
 
 /obj/machinery/power/apc/CanUseTopic(mob/user, datum/topic_state/state)
 	if(user.lying)
@@ -882,25 +874,6 @@ var/global/list/all_apcs = list()
 			operating = 0
 			update()
 
-/obj/machinery/power/apc/proc/reboot()
-	//reset various counters so that process() will start fresh
-	charging = initial(charging)
-	autoflag = initial(autoflag)
-	longtermpower = initial(longtermpower)
-	failure_timer = initial(failure_timer)
-
-	//start with main breaker off, chargemode in the default state and all channels on auto upon reboot
-	operating = 0
-
-	set_chargemode(initial(chargemode))
-	power_alarm.clearAlarm(loc, src)
-
-	lighting = POWERCHAN_ON_AUTO
-	equipment = POWERCHAN_ON_AUTO
-	environ = POWERCHAN_ON_AUTO
-
-	force_update_channels()
-
 /obj/machinery/power/apc/proc/set_chargemode(new_mode)
 	chargemode = new_mode
 	var/obj/item/stock_parts/power/battery/power = get_component_of_type(/obj/item/stock_parts/power/battery)
@@ -934,24 +907,6 @@ var/global/list/all_apcs = list()
 			return POWERCHAN_OFF_TEMP
 		else
 			return POWERCHAN_OFF
-
-// Malfunction: Transfers APC under AI's control
-/obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)
-	if(!A || !A.hacked_apcs || hacker || aidisabled || A.stat == DEAD)
-		return 0
-	src.hacker = A
-	A.hacked_apcs += src
-	locked = 1
-	update_icon()
-	return 1
-
-/obj/machinery/power/apc/malf_upgrade(var/mob/living/silicon/ai/user)
-	..()
-	malf_upgraded = 1
-	emp_hardened = 1
-	to_chat(user, "\The [src] has been upgraded. It is now protected against EM pulses.")
-	return 1
-
 /obj/machinery/power/apc/proc/set_channel_state_manual(var/channel, var/state)
 	switch(channel)
 		if(APC_POWERCHAN_EQUIPMENT)

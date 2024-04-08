@@ -136,12 +136,6 @@
 		if(typecache_include[A.type] && !typecache_exclude[A.type])
 			. += A
 
-/proc/range_in_typecache(dist, center, list/typecache)
-	for (var/thing in range(dist, center))
-		var/atom/A = thing
-		if (typecache[A.type])
-			return TRUE
-
 /proc/typecache_first_match(list/target, list/typecache)
 	for (var/thing in target)
 		var/datum/D = thing
@@ -404,15 +398,6 @@ Checks if a list has the same entries and values as an element of big.
 	return r
 
 // Returns the key based on the index
-/proc/get_key_by_index(var/list/L, var/index)
-	var/i = 1
-	for(var/key in L)
-		if(index == i)
-			return key
-		i++
-	return null
-
-// Returns the key based on the index
 /proc/get_key_by_value(var/list/L, var/value)
 	for(var/key in L)
 		if(L[key] == value)
@@ -442,13 +427,6 @@ Checks if a list has the same entries and values as an element of big.
 
 	//to_world_log("	output: [out.len]")
 	return out
-
-/proc/insertion_sort_numeric_list_descending(var/list/L)
-	//to_world_log("descending len input: [L.len]")
-	var/list/out = insertion_sort_numeric_list_ascending(L)
-	//to_world_log("	output: [out.len]")
-	return reverselist(out)
-
 
 // Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
 // Use ADD_SORTED(list, A, cmp_proc)
@@ -643,12 +621,6 @@ proc/dd_sortedObjectList(list/incoming)
 		sorted_text += list_bottom
 	return sorted_text
 
-
-/proc/dd_sortedTextList(list/incoming)
-	var/case_sensitive = 1
-	return dd_sortedtextlist(incoming, case_sensitive)
-
-
 /datum/proc/dd_SortValue()
 	return "[src]"
 
@@ -701,15 +673,6 @@ proc/dd_sortedObjectList(list/incoming)
 			. |= value
 		else
 			checked += value
-
-/proc/assoc_by_proc(var/list/plain_list, var/get_initial_value)
-	. = list()
-	for(var/entry in plain_list)
-		.[call(get_initial_value)(entry)] = entry
-
-/proc/get_initial_name(var/atom/atom_type)
-	var/atom/A = atom_type
-	return initial(A.name)
 
 //Move a single element from position fromIndex within a list, to position toIndex
 //All elements in the range [1,toIndex) before the move will be before the pivot afterwards

@@ -1868,10 +1868,6 @@
 /obj/random/tool,
 /turf/floor/airless,
 /area/constructionsite/hallway/fore)
-"gp" = (
-/obj/machinery/porta_turret_construct,
-/turf/floor/tiled/dark/airless,
-/area/constructionsite/ai)
 "gq" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/tiled/dark/airless,
@@ -22522,7 +22518,7 @@ aR
 aR
 gg
 gg
-gp
+gh
 gi
 gh
 gi
@@ -23734,11 +23730,11 @@ aR
 aR
 gg
 gg
-gp
+gh
 gi
 gh
 gi
-gp
+gh
 gg
 gg
 aR

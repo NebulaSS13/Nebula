@@ -1,6 +1,5 @@
 // Aspects are basically skills + stats + feats all rolled into one. You get to choose a certain number
 // of them at character generation and they will alter some interactions with the world. Very WIP.
-var/global/list/aspect_datums = list()     // Raw datums, no index.
 var/global/list/aspect_categories = list() // Containers for ease of printing data.
 
 /datum/aspect_category

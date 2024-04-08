@@ -156,16 +156,18 @@
 	uid = "chem_immunobooster"
 
 /decl/material/liquid/immunobooster/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(ishuman(M) && REAGENT_VOLUME(holder, type) < REAGENTS_OVERDOSE)
-		var/mob/living/carbon/human/H = M
-		H.immunity = min(H.immunity_norm * 0.5, removed + H.immunity) // Rapidly brings someone up to half immunity.
+	if(REAGENT_VOLUME(holder, type) >= REAGENTS_OVERDOSE)
+		return
+	var/immunity_to_add = clamp((M.immunity_norm / 2) - M.get_immunity(), 0, removed)
+	if(immunity_to_add > 0)
+		M.adjust_immunity(immunity_to_add) // Rapidly brings someone up to half immunity.
 
 /decl/material/liquid/immunobooster/affect_overdose(var/mob/living/M)
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
-		H.immunity -= 0.5 //inverse effects when abused
+		M.adjust_immunity(-0.5)
 
 /decl/material/liquid/stimulants
 	name = "stimulants"
@@ -229,15 +231,16 @@
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
-	M.immunity = max(M.immunity - 0.1, 0)
+	M.adjust_immunity(-0.1)
 	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
 	if(volume > 10)
-		M.immunity = max(M.immunity - 0.3, 0)
+		M.adjust_immunity(-0.3)
 	if(LAZYACCESS(M.chem_doses, type) > 15)
-		M.immunity = max(M.immunity - 0.25, 0)
+		M.adjust_immunity(-0.25)
 
 /decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M)
 	..()
+	M.adjust_immunity(-0.5)
 	M.immunity = max(M.immunity - 0.25, 0)
 	if(prob(2))
 		M.immunity_norm = max(M.immunity_norm - 1, 0)

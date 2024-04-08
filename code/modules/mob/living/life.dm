@@ -214,9 +214,6 @@
 /mob/living/proc/handle_random_events()
 	return
 
-/mob/living
-	var/weakref/last_weather
-
 /mob/living/proc/is_outside()
 	var/turf/T = loc
 	return istype(T) && T.is_outside()

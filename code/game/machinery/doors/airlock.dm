@@ -9,8 +9,6 @@
 #define AIRLOCK_DENY	5
 #define AIRLOCK_EMAG	6
 
-var/global/list/airlock_overlays = list()
-
 /obj/machinery/door/airlock
 	name = "airlock"
 	icon = 'icons/obj/doors/station/door.dmi'

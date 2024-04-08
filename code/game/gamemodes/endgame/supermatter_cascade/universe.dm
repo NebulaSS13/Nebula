@@ -57,7 +57,7 @@ var/global/universe_has_ended = 0
 	var/end_message = "Attn. [global.using_map.station_name]: Severe gravitational anomalies of unheard of scope have been detected in the local volume. Size and intensity of anomalies are increasing exponentially. Within the hour, a newborn black hole will have consumed everything in this sector."
 	if(exit_exists)
 		end_message += "\n\nCuriously, the distortion is predicted to form a traversable wormhole quite close to your current location in approximately five minutes. The terminus is unknown, but it must be better than behind a hungry singularity. Godspeed."
-	end_message += "\n\nAUTOMATED ALERT: Link to [command_name()] lost."
+	end_message += "\n\nAUTOMATED ALERT: Link to [global.using_map.boss_name] lost."
 	priority_announcement.Announce(end_message, "SUPERMATTER CASCADE DETECTED")
 
 /datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe()

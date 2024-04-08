@@ -10,10 +10,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 /turf/var/obj/fire/fire = null
 
-//Some legacy definitions so fires can be started.
-/atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return null
-
 /atom/movable/proc/is_burnable()
 	return FALSE
 
@@ -21,8 +17,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	return simulated
 
 /turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
-	if(fire_protection > world.time-300)
-		return 0
 	if(locate(/obj/fire) in src)
 		return 1
 
@@ -142,12 +136,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				if(!acs || !acs.check_combustibility())
 					continue
 
-				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
-				//reduce firelevel.
-				if(enemy_tile.fire_protection > world.time-30)
-					firelevel -= 1.5
-					continue
-
 				//Spread the fire.
 				if(prob( 50 + 50 * (firelevel/vsc.fire_firelevel_multiplier) ) && my_tile.CanPass(null, enemy_tile, 0,0) && enemy_tile.CanPass(null, my_tile, 0,0))
 					enemy_tile.create_fire(firelevel)
@@ -184,11 +172,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		T.fire = null
 	SSair.active_hotspots.Remove(src)
 	. = ..()
-
-/turf
-	var/fire_protection = 0 //Protects newly extinguished tiles from being overrun again.
-/turf/proc/apply_fire_protection()
-	fire_protection = world.time
 
 //Returns the firelevel
 /datum/gas_mixture/proc/react(var/zone/zone, force_burn, no_check = 0)

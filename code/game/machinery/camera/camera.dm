@@ -28,7 +28,6 @@
 	var/detectTime = 0
 	var/alarm_delay = 100 // Don't forget, there's another 10 seconds in queueAlarm()
 
-	var/number = 1
 	var/c_tag = null
 	var/status = 1
 	var/cut_power = FALSE
@@ -51,16 +50,6 @@
 	. = ..()
 	if(stat & BROKEN)
 		to_chat(user, SPAN_WARNING("It is completely demolished."))
-
-/obj/machinery/camera/malf_upgrade(var/mob/living/silicon/ai/user)
-	..()
-	malf_upgraded = 1
-
-	install_component(/obj/item/stock_parts/capacitor/adv, TRUE)
-	install_component(/obj/item/stock_parts/scanning_module/adv, TRUE)
-
-	to_chat(user, SPAN_NOTICE("\The [src] has been upgraded. It now has X-Ray capability and EMP resistance."))
-	return 1
 
 /obj/machinery/camera/apply_visual(mob/living/carbon/human/M)
 	if(!M.client || !istype(M))
@@ -323,15 +312,6 @@
 	var/datum/extension/network_device/camera/D = get_extension(src, /datum/extension/network_device)
 	return D.channels
 
-// Resets the camera's wires to fully operational state. Used by one of Malfunction abilities.
-/obj/machinery/camera/proc/reset_wires()
-	if(!wires)
-		return
-	set_broken(FALSE) // Fixes the camera and updates the icon.
-	wires.CutAll()
-	wires.MendAll()
-	update_coverage()
-
 /obj/machinery/camera/proc/nano_structure()
 	var/datum/extension/network_device/camera/D = get_extension(src, /datum/extension/network_device/)
 	return D.nano_structure()
@@ -388,5 +368,4 @@
 	can_write = FALSE
 
 /decl/public_access/public_variable/camera_channels/access_var(obj/machinery/camera/C)
-	var/datum/extension/network_device/camera/camera_device = get_extension(C, /datum/extension/network_device/)
-	return english_list(camera_device?.channels)
+	return english_list(C.get_channels())

@@ -41,19 +41,11 @@
 /obj/item/assembly_holder/proc/attach(var/obj/item/D, var/obj/item/D2, var/mob/user)
 	return
 
-/obj/item/assembly_holder/proc/attach_special(var/obj/O, var/mob/user)
-	return
-
 /obj/item/assembly_holder/proc/process_activation(var/obj/item/D)
 	return
 
 /obj/item/assembly_holder/proc/detached()
 	return
-
-
-/obj/item/assembly_holder/IsAssemblyHolder()
-	return 1
-
 
 /obj/item/assembly_holder/attach(var/obj/item/assembly/D, var/obj/item/assembly/D2, var/mob/user)
 	if((!D)||(!D2))
@@ -77,17 +69,6 @@
 
 	return 1
 
-
-/obj/item/assembly_holder/attach_special(var/obj/O, var/mob/user)
-	if(!O)	return
-	if(!O.IsSpecialAssembly())	return 0
-
-/*	if(O:Attach_Holder())
-		special_assembly = O
-		update_icon()
-		src.SetName("[a_left.name] [a_right.name] [special_assembly.name] assembly")
-*/
-	return
 
 /obj/item/assembly_holder/HasProximity(atom/movable/AM)
 	. = ..()
@@ -144,8 +125,6 @@
 			to_chat(user, "<span class='notice'>\The [src] can now be taken apart!</span>")
 		update_icon()
 		return
-	else if(W.IsSpecialAssembly())
-		attach_special(W, user)
 	else
 		..()
 	return

@@ -376,6 +376,3 @@
 
 /mob/living/slime/can_change_intent()
 	return TRUE
-
-/mob/living/slime/get_telecomms_race_info()
-	return list("Slime", FALSE)

@@ -81,10 +81,6 @@
 /proc/sanitize_safe(input, max_length = MAX_MESSAGE_LEN, encode = TRUE, trim = TRUE, extra = TRUE, ascii_only = FALSE)
 	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra, ascii_only)
 
-/proc/paranoid_sanitize(t)
-	var/regex/alphanum_only = regex("\[^a-zA-Z0-9# ,.?!:;()]", "g")
-	return alphanum_only.Replace(t, "#")
-
 //Filters out undesirable characters from names
 /proc/sanitize_name(input, max_length = MAX_NAME_LEN, allow_numbers = 0, force_first_letter_uppercase = TRUE)
 	if(!input || length_char(input) > max_length)
@@ -311,22 +307,9 @@
 		t = replacetext(t, char, repl_chars[char])
 	return t
 
-/proc/random_string(length, list/characters)
-	. = ""
-	for (var/i in 1 to length)
-		. += pick(characters)
-
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
 	return pad_left(t, u, "0")
-
-//Adds 'u' number of spaces ahead of the text 't'
-/proc/add_lspace(t, u)
-	return pad_left(t, u, " ")
-
-//Adds 'u' number of spaces behind the text 't'
-/proc/add_tspace(t, u)
-	return pad_right(t, u, " ")
 
 // Adds the required amount of 'character' in front of 'text' to extend the lengh to 'desired_length', if it is shorter
 // No consideration are made for a multi-character 'character' input
@@ -388,16 +371,6 @@
 	var/static/regex/non_ascii_regex = regex(@"[^\x00-\x7F]+", "g")
 	return non_ascii_regex.Replace(text, "")
 
-/proc/strip_html_simple(t, limit = MAX_MESSAGE_LEN)
-	var/list/strip_chars = list("<",">")
-	t = copytext(t,1,limit)
-	for(var/char in strip_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + copytext(t, index+1)
-			index = findtext(t, char)
-	return t
-
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
 /proc/strip_html_properly(input)
@@ -422,48 +395,6 @@
 			break
 
 	return input
-
-//This proc fills in all spaces with the "replace" var (* by default) with whatever
-//is in the other string at the same spot (assuming it is not a replace char).
-//This is used for fingerprints
-/proc/stringmerge_ascii(text, compare,replace = "*")
-	var/newtext = text
-	if(length(text) != length(compare))
-		return 0
-	for(var/i = 1, i < length(text), i++)
-		var/a = copytext(text,i,i+1)
-		var/b = copytext(compare,i,i+1)
-		//if it isn't both the same letter, or if they are both the replacement character
-		//(no way to know what it was supposed to be)
-		if(a != b)
-			if(a == replace) //if A is the replacement char
-				newtext = copytext(newtext,1,i) + b + copytext(newtext, i+1)
-			else if(b == replace) //if B is the replacement char
-				newtext = copytext(newtext,1,i) + a + copytext(newtext, i+1)
-			else //The lists disagree, Uh-oh!
-				return 0
-	return newtext
-
-//This proc returns the number of chars of the string that is the character
-//This is used for detective work to determine fingerprint completion.
-/proc/stringpercent_ascii(text,character = "*")
-	if(!text || !character)
-		return 0
-	var/count = 0
-	for(var/i = 1, i <= length(text), i++)
-		var/a = copytext(text,i,i+1)
-		if(a == character)
-			count++
-	return count
-
-/proc/reverse_text(text = "")
-	var/new_text = ""
-	var/bytes_length = length(text)
-	var/letter = ""
-	for(var/i = 1, i <= bytes_length, i += length(letter))
-		letter = text[i]
-		new_text = letter + new_text
-	return new_text
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length

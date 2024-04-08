@@ -132,9 +132,6 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		holder.stealthy_ = STEALTH_OFF
 	return holder.stealthy_
 
-/mob/proc/is_stealthed()
-	return client && client.is_stealthed()
-
 /client/proc/stealth()
 	set category = "Admin"
 	set name = "Stealth Mode"

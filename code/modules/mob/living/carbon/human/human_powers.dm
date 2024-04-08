@@ -49,43 +49,6 @@
 /****************
  misc alien verbs
 ****************/
-/mob/living/carbon/human/proc/commune()
-	set category = "Abilities"
-	set name = "Commune with creature"
-	set desc = "Send a telepathic message to an unlucky recipient."
-
-	var/list/targets = list()
-	var/target = null
-	var/text = null
-
-	targets += getmobs() //Fill list, prompt user with list
-	target = input("Select a creature!", "Speak to creature", null, null) as null|anything in targets
-
-	if(!target) return
-
-	text = input("What would you like to say?", "Speak to creature", null, null)
-
-	text = sanitize(text)
-
-	if(!text) return
-
-	var/mob/M = targets[target]
-
-	if(isghost(M) || M.stat == DEAD)
-		to_chat(src, "<span class='warning'>Not even a [src.species.name] can speak to the dead.</span>")
-		return
-
-	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
-
-	to_chat(M, "<span class='notice'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i></span>")
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.species.name == src.species.name)
-			return
-		if(prob(75))
-			to_chat(H, "<span class='warning'>Your nose begins to bleed...</span>")
-			H.drip(1)
-
 /mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
 	set desc = "Whisper silently to someone over a distance."
@@ -97,11 +60,3 @@
 		to_chat(M, "<span class='alium'>You hear a strange, alien voice in your head... <i>[msg]</i></span>")
 		to_chat(src, "<span class='alium'>You channel a message: \"[msg]\" to [M]</span>")
 	return
-
-/mob/living/carbon/human/proc/change_colour()
-	set category = "Abilities"
-	set name = "Change Colour"
-	set desc = "Choose the colour of your skin."
-
-	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", get_skin_colour()) as color|null
-	set_skin_colour(new_skin)

@@ -36,10 +36,10 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 		return
 
 	if(!title)
-		title = "[command_name()] Update"
+		title = "[global.using_map.boss_name] Update"
 
 	if(!announcement_type)
-		announcement_type = "[command_name()] Update"
+		announcement_type = "[global.using_map.boss_name] Update"
 
 	var/message_title = new_title ? new_title : title
 	var/message_sound = new_sound ? new_sound : sound
@@ -79,7 +79,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	. += "<br>"
 
 /datum/announcement/priority/command/FormMessage(message, message_title)
-	. = "<h1 class='alert'>[command_name()] Update</h1>"
+	. = "<h1 class='alert'>[global.using_map.boss_name] Update</h1>"
 	if (message_title)
 		. += "<br><h2 class='alert'>[message_title]</h2>"
 

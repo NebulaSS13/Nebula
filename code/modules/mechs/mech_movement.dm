@@ -19,10 +19,6 @@
 			if(pilot.up_hint)
 				pilot.up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
-/mob/living/exosuit/can_ztravel()
-	if(Process_Spacemove(1)) //Handle here
-		return TRUE
-
 //Inertia drift making us face direction makes exosuit flight a bit difficult, plus newtonian flight model yo
 /mob/living/exosuit/set_dir(ndir)
 	if(inertia_dir && inertia_dir == ndir)

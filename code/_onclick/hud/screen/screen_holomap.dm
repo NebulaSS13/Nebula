@@ -3,7 +3,6 @@
 	layer = HUD_ITEM_LAYER
 	requires_owner = FALSE
 	requires_ui_style = FALSE
-	var/active = TRUE
 	var/datum/station_holomap/holomap
 
 /obj/screen/holomap_text

@@ -16,7 +16,6 @@
 
 	species_language = /decl/language/diona
 	only_species_language = 1
-	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
 	universal_understand = FALSE
 	universal_speak = FALSE

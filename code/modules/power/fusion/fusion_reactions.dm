@@ -104,9 +104,8 @@
 /decl/fusion_reaction/helium_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	set waitfor = FALSE
 	. = 1
-	var/datum/event/wormholes/WM = /datum/event/wormholes
+	var/datum/event/wormholes/WM = new /datum/event/wormholes(new /datum/event_meta(EVENT_LEVEL_MAJOR))
 	WM.setup(affected_z_levels = SSmapping.get_connected_levels(holder))
-	new WM(new /datum/event_meta(EVENT_LEVEL_MAJOR))
 
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()

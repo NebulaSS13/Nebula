@@ -6,12 +6,6 @@
 		mloc = mloc.loc
 	return mloc
 
-/proc/turf_clear(turf/T)
-	for(var/atom/A in T)
-		if(A.simulated)
-			return 0
-	return 1
-
 // Picks a turf without a mob from the given list of turfs, if one exists.
 // If no such turf exists, picks any random turf from the given list of turfs.
 /proc/pick_mobless_turf_if_exists(var/list/start_turfs)
@@ -62,9 +56,6 @@
 
 /proc/is_station_turf(var/turf/T)
 	return T && isStationLevel(T.z)
-
-/proc/has_air(var/turf/T)
-	return !!T.return_air()
 
 /proc/IsTurfAtmosUnsafe(var/turf/T)
 	if(isspaceturf(T)) // Space tiles

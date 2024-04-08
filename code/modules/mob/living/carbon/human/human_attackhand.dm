@@ -275,9 +275,6 @@
 	// Again.
 	start_compressions(H, FALSE, cpr_mode)
 
-/mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
-	return
-
 //Breaks all grips and pulls that the mob currently has.
 /mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
 	. = FALSE

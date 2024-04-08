@@ -150,7 +150,7 @@ SUBSYSTEM_DEF(supply)
 		var/obj/item/paper/manifest/slip
 		if(!SP.contraband)
 			var/info = list()
-			info +="<h3>[command_name()] Shipping Manifest</h3><hr><br>"
+			info +="<h3>[global.using_map.boss_name] Shipping Manifest</h3><hr><br>"
 			info +="Order #[SO.ordernum]<br>"
 			info +="Destination: [global.using_map.station_name]<br>"
 			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"

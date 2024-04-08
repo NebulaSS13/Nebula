@@ -44,8 +44,8 @@
 	addtimer(CALLBACK(src, PROC_REF(finalize_announce)), 2)
 
 /datum/uplink_item/item/services/fake_update_annoncement/proc/finalize_announce()
-	name = "[command_name()] Update Announcement"
-	desc = "Causes a falsified [command_name()] Update."
+	name = "[global.using_map.boss_name] Update Announcement"
+	desc = "Causes a falsified [global.using_map.boss_name] Update."
 
 /***************
 * Service Item *

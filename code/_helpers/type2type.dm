@@ -8,12 +8,6 @@
  *			worldtime2text
  */
 
-/proc/text2numlist(text, delimiter="\n")
-	var/list/num_list = list()
-	for(var/x in splittext(text, delimiter))
-		num_list += text2num(x)
-	return num_list
-
 // Splits the text of a file at seperator and returns them in a list.
 /proc/file2list(filename, seperator = "\n")
 	return splittext(safe_file2text(filename), seperator)
@@ -197,30 +191,6 @@
 
 /proc/atomtype2nameassoclist(var/atom_type)
 	return atomtypes2nameassoclist(typesof(atom_type))
-
-/proc/str2hex(str)
-	if(!istext(str)||!str)
-		return
-	var/r
-	var/c
-	for(var/i = 1 to length(str))
-		c= text2ascii(str,i)
-		r+= num2hex(c)
-	return r
-
-// Decodes hex to raw byte string.
-// If safe=TRUE, returns null on incorrect input strings instead of CRASHing
-/proc/hex2str(str)
-	if(!istext(str)||!str)
-		return
-	var/r
-	var/c
-	for(var/i = 1 to length(str)/2)
-		c = hex2num(copytext(str,i*2-1,i*2+1))
-		if(isnull(c))
-			return null
-		r += ascii2text(c)
-	return r
 
 //checks if a file exists and contains text
 //returns text as a string if these conditions are met

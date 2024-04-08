@@ -4,7 +4,6 @@
 #define FAX_ADMIN_COOLDOWN  30 SECONDS    //Cooldown after faxing an admin
 
 var/global/list/allfaxes       = list()
-var/global/list/alldepartments = list()
 var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to admins
 
 ////////////////////////////////////////////////////////////////////////////////////////

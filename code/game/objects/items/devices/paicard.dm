@@ -336,12 +336,6 @@ var/global/list/pai_cards = list()
 		else
 			qdel(src)
 
-/obj/item/paicard/see_emote(mob/living/M, text)
-	if(pai && pai.client && pai.stat == CONSCIOUS)
-		var/rendered = "<span class='message'>[text]</span>"
-		pai.show_message(rendered, 2)
-	..()
-
 /obj/item/paicard/show_message(msg, type, alt, alt_type)
 	if(pai && pai.client)
 		var/rendered = "<span class='message'>[msg]</span>"

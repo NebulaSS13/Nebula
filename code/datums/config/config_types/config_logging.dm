@@ -14,7 +14,6 @@
 		/decl/config/toggle/log_attack,
 		/decl/config/toggle/log_adminchat,
 		/decl/config/toggle/log_adminwarn,
-		/decl/config/toggle/log_pda,
 		/decl/config/toggle/log_hrefs,
 		/decl/config/toggle/log_runtime,
 		/decl/config/toggle/log_world_output
@@ -67,10 +66,6 @@
 /decl/config/toggle/log_adminwarn
 	uid = "log_adminwarn"
 	desc = "Log admin warning messages. Also duplicates a bunch of other messages."
-
-/decl/config/toggle/log_pda
-	uid = "log_pda"
-	desc = "Log PDA messages."
 
 /decl/config/toggle/log_hrefs
 	uid = "log_hrefs"

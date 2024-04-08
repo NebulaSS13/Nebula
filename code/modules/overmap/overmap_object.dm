@@ -1,5 +1,3 @@
-var/global/list/overmap_unknown_ids = list()
-
 /obj/effect/overmap
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'

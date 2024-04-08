@@ -100,13 +100,6 @@
 	returns[2] = null
 	return returns
 
-/mob/living/proc/get_speech_ending(verb, var/ending)
-	if(ending=="!")
-		return pick("exclaims","shouts","yells")
-	if(ending=="?")
-		return "asks"
-	return verb
-
 /mob/living/proc/format_say_message(var/message = null)
 	if(!message)
 		return

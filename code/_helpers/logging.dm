@@ -16,9 +16,6 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	if (log_world)
 		to_world_log("SS[subsystem]: [text]")
 
-/proc/log_ss_init(text)
-	game_log("SS", "[text]")
-
 #define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [src] usr: [usr].")
 //print a warning message to world.log
 /proc/warning(msg)
@@ -90,16 +87,13 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 		game_log("ATTACK", text)
 
 /proc/log_adminsay(text)
+	global.admin_log.Add(text)
 	if (get_config_value(/decl/config/toggle/log_adminchat))
 		game_log("ADMINSAY", text)
 
 /proc/log_adminwarn(text)
 	if (get_config_value(/decl/config/toggle/log_adminwarn))
 		game_log("ADMINWARN", text)
-
-/proc/log_pda(text)
-	if (get_config_value(/decl/config/toggle/log_pda))
-		game_log("PDA", text)
 
 /proc/log_misc(text)
 	game_log("MISC", text)
@@ -116,18 +110,6 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	to_world_log(text) //this comes before the config check because it can't possibly runtime
 	if(get_config_value(/decl/config/toggle/log_world_output))
 		game_log("DD_OUTPUT", text)
-
-//pretty print a direction bitflag, can be useful for debugging.
-/proc/dir_text(var/dir)
-	var/list/comps = list()
-	if(dir & NORTH) comps += "NORTH"
-	if(dir & SOUTH) comps += "SOUTH"
-	if(dir & EAST) comps += "EAST"
-	if(dir & WEST) comps += "WEST"
-	if(dir & UP) comps += "UP"
-	if(dir & DOWN) comps += "DOWN"
-
-	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")
 
 //more or less a logging utility
 /proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1, var/datum/ticket/ticket = null)

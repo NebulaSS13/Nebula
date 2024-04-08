@@ -6,7 +6,7 @@
 	if(status_flags & GODMODE)	return 0	//godmode
 
 	if(immunity > 0.2 * immunity_norm && immunity < immunity_norm)
-		immunity = min(immunity + 0.25, immunity_norm)
+		adjust_immunity(0.25)
 
 /mob/living/proc/adjust_immunity(var/amt)
 	immunity = clamp(immunity + amt, 0, immunity_norm)
