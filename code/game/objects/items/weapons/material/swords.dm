@@ -44,7 +44,7 @@
 		if(material.reflectiveness >= MAT_VALUE_SHINY && check_state_in_icon("[icon_state]_shine", icon))
 			add_overlay(mutable_appearance(icon, "[icon_state]_shine"), adjust_brightness(color, 20 + material.reflectiveness))
 
-/obj/item/sword/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/sword/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	//Do not color scabbarded blades
 	if(overlay && (material_alteration & MAT_FLAG_ALTERATION_COLOR) && (slot == slot_back_str || slot == slot_belt_str))
 		overlay.color = null

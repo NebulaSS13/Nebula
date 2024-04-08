@@ -51,7 +51,7 @@ def main():
 
 	# Find existing saves for the target map, then replicate them to all our target map dirs.
 	# If they exist already, don't copy over, just move on.
-	filename_regex = r"character_([a-zA-Z_]+)_(\d+)\.json"
+	filename_regex = r"character_([a-zA-Z0-9_]+)_(\d+)\.json"
 	print("Scanning saves in " + scrapedir + "...")
 	save_slots_to_update = []
 	saves_to_replicate = []
