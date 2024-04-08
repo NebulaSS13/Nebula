@@ -116,7 +116,7 @@
 		purge_skills_missing_prerequisites(job)
 
 /datum/preferences/proc/get_character_age()
-	return appearance_descriptors["age"] || 30
+	return LAZYACCESS(appearance_descriptors, "age") || 30
 
 /datum/preferences/proc/check_skill_prerequisites(datum/job/job, decl/hierarchy/skill/S)
 	if(!S.prerequisites)

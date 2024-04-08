@@ -41,7 +41,7 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/gun/projectile/dartgun/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/gun/projectile/dartgun/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && (slot in user_mob?.get_held_item_slots()) && ammo_magazine)
 		overlay.icon_state += "-[clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
 	. = ..()

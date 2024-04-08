@@ -14,7 +14,7 @@
 
 */
 
-/mob/living/carbon/human/proc/show_descriptors_to(var/mob/user)
+/mob/living/carbon/human/proc/show_descriptors_to(mob/user)
 	if(LAZYLEN(appearance_descriptors))
 		if(user == src)
 			for(var/entry in appearance_descriptors)
@@ -41,7 +41,7 @@
 	var/equivalent_variance_threshold = 0.1        // Variance % below this value will be treated as equivalent when examining another mob.
 	var/comparison_variance_multiplier = 0.75      // A multiplier applied to variance values to tighten them in a bit and allow for major cross-species variations to have more significant strings.
 
-/datum/appearance_descriptor/New(var/comparison_val = 1)
+/datum/appearance_descriptor/New(comparison_val = 1)
 	if(!isnull(comparison_val))
 		relative_value_comparison_multiplier = comparison_val
 	if(!chargen_label)
@@ -60,19 +60,19 @@
 /datum/appearance_descriptor/proc/set_default_value()
 	default_value = CEILING(LAZYLEN(standalone_value_descriptors) * 0.5)
 
-/datum/appearance_descriptor/proc/get_mob_scale_adjustments(var/offset_value)
+/datum/appearance_descriptor/proc/get_mob_scale_adjustments(decl/bodytype/bodytype, offset_value)
 	return
 
-/datum/appearance_descriptor/proc/get_mob_appearance_overlay(var/mob/applying, var/offset_value)
+/datum/appearance_descriptor/proc/get_mob_appearance_overlay(mob/applying, offset_value)
 	return
 
-/datum/appearance_descriptor/proc/get_third_person_message_start(var/decl/pronouns/my_gender)
+/datum/appearance_descriptor/proc/get_third_person_message_start(decl/pronouns/my_gender)
 	return "[my_gender.He] [my_gender.is]"
 
 /datum/appearance_descriptor/proc/get_first_person_message_start()
 	return "You are"
 
-/datum/appearance_descriptor/proc/get_standalone_value_descriptor(var/check_value)
+/datum/appearance_descriptor/proc/get_standalone_value_descriptor(check_value)
 	if(isnull(check_value))
 		check_value = default_value
 	else
@@ -81,10 +81,10 @@
 		return standalone_value_descriptors[check_value]
 
 // Build a species-specific descriptor string.
-/datum/appearance_descriptor/proc/get_species_text(var/use_name)
+/datum/appearance_descriptor/proc/get_species_text(use_name)
 	. = " for \a [use_name]"
 
-/datum/appearance_descriptor/proc/get_initial_comparison_component(var/mob/me, var/mob/them, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender, var/my_value)
+/datum/appearance_descriptor/proc/get_initial_comparison_component(mob/me, mob/them, decl/pronouns/my_gender, decl/pronouns/other_gender, my_value)
 	if(!skip_species_mention)
 		var/mob/living/carbon/human/H = me
 		var/mob/living/carbon/human/O = them
@@ -92,7 +92,7 @@
 			. = get_species_text("\improper [H.species.name]")
 	. = "[get_third_person_message_start(my_gender)] [get_standalone_value_descriptor(my_value)][.]"
 
-/datum/appearance_descriptor/proc/get_secondary_comparison_component(var/decl/pronouns/my_gender, var/decl/pronouns/other_gender, var/my_value, var/comparing_value)
+/datum/appearance_descriptor/proc/get_secondary_comparison_component(decl/pronouns/my_gender, decl/pronouns/other_gender, my_value, comparing_value)
 	var/variance = abs(1-(my_value/comparing_value)) * comparison_variance_multiplier
 	if(variance < equivalent_variance_threshold)
 		. = "[.], [get_comparative_value_string_equivalent(my_gender, other_gender)]"
@@ -102,7 +102,7 @@
 		else if(my_value > comparing_value)
 			. = "[.], [get_comparative_value_string_larger(variance, my_gender, other_gender)]"
 
-/datum/appearance_descriptor/proc/get_comparative_value_descriptor(var/my_value, var/mob/observer, var/mob/me)
+/datum/appearance_descriptor/proc/get_comparative_value_descriptor(my_value, mob/observer, mob/me)
 
 	// Store our gender info for later.
 	var/decl/pronouns/my_gender = me.get_pronouns()
@@ -124,18 +124,18 @@
 	// We're done, add a full stop.
 	. = "[.]. "
 
-/datum/appearance_descriptor/proc/get_index_from_value(var/value)
+/datum/appearance_descriptor/proc/get_index_from_value(value)
 	return value
 
-/datum/appearance_descriptor/proc/get_comparative_value_string_equivalent(var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
+/datum/appearance_descriptor/proc/get_comparative_value_string_equivalent(decl/pronouns/my_gender, decl/pronouns/other_gender)
 	return comparative_value_descriptor_equivalent
 
-/datum/appearance_descriptor/proc/get_comparative_value_string_smaller(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
+/datum/appearance_descriptor/proc/get_comparative_value_string_smaller(value, decl/pronouns/my_gender, decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_smaller)
 	value = clamp(CEILING(value * maxval), 1, maxval)
 	return comparative_value_descriptors_smaller[value]
 
-/datum/appearance_descriptor/proc/get_comparative_value_string_larger(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
+/datum/appearance_descriptor/proc/get_comparative_value_string_larger(value, decl/pronouns/my_gender, decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_larger)
 	value = clamp(CEILING(value * maxval), 1, maxval)
 	return comparative_value_descriptors_larger[value]
@@ -143,22 +143,22 @@
 /datum/appearance_descriptor/proc/has_custom_value()
 	return FALSE
 
-/datum/appearance_descriptor/proc/randomize_value(var/limit_chargen = TRUE)
+/datum/appearance_descriptor/proc/randomize_value(limit_chargen = TRUE)
 	if(limit_chargen)
 		return rand(chargen_min_index, chargen_max_index)
 	return rand(1, LAZYLEN(standalone_value_descriptors))
 
-/datum/appearance_descriptor/proc/get_value_from_index(var/value, var/chargen_bound = TRUE)
+/datum/appearance_descriptor/proc/get_value_from_index(value, chargen_bound = TRUE)
 	if(chargen_bound)
 		return clamp(round(value), chargen_min_index, chargen_max_index)
 	return clamp(round(value), 1, LAZYLEN(standalone_value_descriptors))
 
-/datum/appearance_descriptor/proc/sanitize_value(var/value, var/chargen_bound = TRUE)
+/datum/appearance_descriptor/proc/sanitize_value(value, chargen_bound = TRUE)
 	if(chargen_bound)
 		return clamp(round(value), get_min_chargen_value(), get_max_chargen_value())
 	return clamp(round(value), 1, LAZYLEN(standalone_value_descriptors))
 
-/datum/appearance_descriptor/proc/get_value_text(var/value)
+/datum/appearance_descriptor/proc/get_value_text(value)
 	. = "[value || "0"]"
 
 /datum/appearance_descriptor/proc/get_min_chargen_value()

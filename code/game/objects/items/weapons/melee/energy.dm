@@ -164,7 +164,7 @@
 			add_overlay(emissive_overlay(icon, "[icon_state]-extended"))
 			z_flags |= ZMM_MANGLE_PLANES
 
-/obj/item/energy_blade/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/energy_blade/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-extended", overlay.icon))
 		overlay.overlays += emissive_overlay(overlay.icon, "[overlay.icon_state]-extended")
 	. = ..()
