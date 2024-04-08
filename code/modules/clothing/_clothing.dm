@@ -118,9 +118,9 @@
 	// We apply accessory overlays after calling parent so accessories are not offset twice.
 	overlay = ..()
 	if(overlay && length(accessories))
-		for(var/obj/item/clothing/accessory/A in accessories)
-			if(A.should_overlay())
-				overlay.overlays += A.get_mob_overlay(user_mob, slot, bodypart)
+		for(var/obj/item/clothing/accessory in accessories)
+			if(accessory.should_overlay())
+				overlay.overlays += accessory.get_mob_overlay(user_mob, slot, bodypart)
 	return overlay
 
 /obj/item/clothing/on_update_icon()
