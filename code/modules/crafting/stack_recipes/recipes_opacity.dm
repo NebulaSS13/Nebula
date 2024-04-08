@@ -1,8 +1,9 @@
 /decl/stack_recipe/opacity
-	abstract_type        = /decl/stack_recipe/opacity
-	required_max_opacity = 0.5
-	on_floor             = TRUE
-	difficulty           = MAT_VALUE_HARD_DIY
+	abstract_type               = /decl/stack_recipe/opacity
+	required_max_opacity        = 0.5
+	on_floor                    = TRUE
+	difficulty                  = MAT_VALUE_HARD_DIY
+	required_reinforce_material = MATERIAL_ALLOWED
 
 /decl/stack_recipe/opacity/fullwindow
 	name                 = "full-tile window"
