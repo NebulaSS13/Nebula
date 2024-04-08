@@ -48,7 +48,7 @@
 	. = ..()
 	icon_state = "[get_world_inventory_state()][active ? "_on" : ""]"
 
-/obj/item/clothing/suit/armor/reactive/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/clothing/suit/armor/reactive/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]_on", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_on"
 	. = ..()

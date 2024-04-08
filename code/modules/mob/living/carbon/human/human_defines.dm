@@ -60,8 +60,6 @@
 	var/became_older
 	var/became_younger
 
-	var/list/appearance_descriptors
-
 	var/list/smell_cooldown
 
 	/// var for caching last getHalloss() run to avoid looping through organs over and over and over again
