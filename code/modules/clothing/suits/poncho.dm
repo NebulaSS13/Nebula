@@ -1,26 +1,32 @@
-
-/obj/item/clothing/suit/poncho/colored
+/obj/item/clothing/suit/poncho/classic
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
 	icon = 'icons/clothing/suit/poncho/classic.dmi'
 	bodytype_equip_flags = null
 
-/obj/item/clothing/suit/poncho/colored/green
+/obj/item/clothing/suit/poncho/colored
+	name = "poncho"
+	desc = "A simple, comfortable poncho."
+	icon = 'icons/clothing/suit/poncho/colourable.dmi'
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	bodytype_equip_flags = null
+
+/obj/item/clothing/suit/poncho/classic/green
 	name = "green poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is green."
 	icon = 'icons/clothing/suit/poncho/green.dmi'
 
-/obj/item/clothing/suit/poncho/colored/red
+/obj/item/clothing/suit/poncho/classic/red
 	name = "red poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is red."
 	icon = 'icons/clothing/suit/poncho/red.dmi'
 
-/obj/item/clothing/suit/poncho/colored/purple
+/obj/item/clothing/suit/poncho/classic/purple
 	name = "purple poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is purple."
 	icon = 'icons/clothing/suit/poncho/purple.dmi'
 
-/obj/item/clothing/suit/poncho/colored/blue
+/obj/item/clothing/suit/poncho/classic/blue
 	name = "blue poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is blue."
 	icon = 'icons/clothing/suit/poncho/blue.dmi'

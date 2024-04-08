@@ -120,9 +120,9 @@
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/organic/cloth
-	name = "cloth"
+	name = "cotton"
 	uid = "solid_cotton"
-	use_name = "cloth"
+	use_name = "cotton"
 	color = "#ffffff"
 	stack_origin_tech = @'{"materials":2}'
 	door_icon_base = "wood"
@@ -141,9 +141,10 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	has_textile_fibers = TRUE
 
 /decl/material/solid/organic/cloth/synthetic
-	name = "synthetic cloth"
+	name = "nylon"
 	uid = "solid_cloth_synthetic"
 	melting_point = T0C+300 // plastic
 
@@ -174,6 +175,10 @@
 	melting_point = null
 	hardness = MAT_VALUE_FLEXIBLE
 	value = 0.4
+
+/decl/material/solid/organic/plantmatter/pith/husk
+	name = "plant husk"
+	uid = "solid_planthusk"
 
 /decl/material/solid/organic/plantmatter/grass
 	name = "grass"

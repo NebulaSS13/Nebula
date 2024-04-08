@@ -1040,3 +1040,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/clear_matter()
 	..()
 	material = null
+
+/obj/item/proc/has_textile_fibers()
+	return FALSE

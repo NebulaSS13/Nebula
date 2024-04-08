@@ -198,7 +198,14 @@
 	body_parts_covered = SLOT_FACE
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
+	matter = null
 	material = /decl/material/solid/organic/cloth
+
+/obj/item/clothing/mask/bandana/colourable
+	name = "bandana"
+	desc = "A simple bandana, worn on the face or head."
+	color = null
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
 	. = ..()

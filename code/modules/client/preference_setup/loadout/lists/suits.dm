@@ -8,7 +8,7 @@
 
 /decl/loadout_option/suit/poncho
 	name = "poncho selection"
-	path = /obj/item/clothing/suit/poncho/colored
+	path = /obj/item/clothing/suit/poncho/classic
 	cost = 1
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 

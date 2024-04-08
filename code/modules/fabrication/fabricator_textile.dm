@@ -9,3 +9,8 @@
 	base_type = /obj/machinery/fabricator/textile
 	fabricator_class = FABRICATOR_CLASS_TEXTILE
 	base_storage_capacity_mult = 100
+
+/obj/machinery/fabricator/textile/can_ingest(var/obj/item/thing)
+	if(thing.has_textile_fibers()) // only raw cotton plants currently
+		return TRUE
+	return ..()
