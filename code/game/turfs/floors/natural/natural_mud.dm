@@ -26,6 +26,11 @@
 	material = /decl/material/solid/soil
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 
+/turf/floor/natural/mud/drop_diggable_resources()
+	if(get_physical_height() > -(FLUID_DEEP) && prob(15))
+		new /obj/item/chems/food/worm(src)
+	return ..()
+
 /turf/floor/natural/mud/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!reagents?.total_volume)
 		ChangeTurf(/turf/floor/natural/dry, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)

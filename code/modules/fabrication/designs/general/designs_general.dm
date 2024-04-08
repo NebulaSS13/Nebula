@@ -174,3 +174,10 @@
 
 /datum/fabricator_recipe/duct_tape
 	path = /obj/item/stack/tape_roll/duct_tape
+
+/datum/fabricator_recipe/fishing_line
+	path = /obj/item/fishing_line
+
+/datum/fabricator_recipe/fishing_line_high_quality
+	path = /obj/item/fishing_line/high_quality
+

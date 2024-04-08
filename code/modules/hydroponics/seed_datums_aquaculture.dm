@@ -24,7 +24,7 @@
 	name = "clam"
 	seed_name = "clam"
 	display_name = "clam bed"
-	product_type = /obj/item/mollusc/clam
+	product_type = /obj/item/mollusc/clam/fished
 
 /datum/seed/mollusc/clam/New()
 	..()
@@ -35,7 +35,7 @@
 	name = "barnacle"
 	seed_name = "barnacle"
 	display_name = "barnacle bed"
-	product_type = /obj/item/mollusc/barnacle
+	product_type = /obj/item/mollusc/barnacle/fished
 
 /datum/seed/mollusc/barnacle/New()
 	..()

@@ -78,7 +78,6 @@
 /obj/item/chems/food/fish/mollusc/barnacle
 	fish_type = "barnacle"
 
-
 // Molluscs!
 /obj/item/trash/mollusc_shell
 	name = "mollusc shell"
@@ -122,7 +121,21 @@
 	meat_type = /obj/item/chems/food/fish/mollusc/clam
 	shell_type = /obj/item/trash/mollusc_shell/clam
 
-/obj/item/mollusc/proc/crack_shell(var/mob/user)
+// This is not a space clam...
+/obj/item/mollusc/barnacle/fished
+	desc = "A squat little barnacle, somehow pried from its perch."
+/obj/item/mollusc/clam/fished
+	desc = "A regular old bivalve. Full of secrets, probably."
+
+// Subtype to avoid exploiting aquaculture to make infinite pearls.
+/obj/item/mollusc/clam/fished/pearl/crack_shell(mob/user)
+	. = ..()
+	if(prob(10))
+		to_chat(user, SPAN_NOTICE("You find a pearl!"))
+		var/obj/item/stack/material/lump/pearl = new(get_turf(user), 1, /decl/material/solid/organic/bone/pearl)
+		user.put_in_hands(pearl)
+
+/obj/item/mollusc/proc/crack_shell(mob/user)
 	playsound(loc, "fracture", 80, 1)
 	if(user && loc == user)
 		user.drop_from_inventory(src)

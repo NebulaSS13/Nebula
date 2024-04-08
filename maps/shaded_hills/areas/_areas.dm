@@ -2,24 +2,27 @@
 	abstract_type = /area/shaded_hills
 	icon = 'maps/shaded_hills/areas/icons.dmi'
 	icon_state = "area"
-/* Uncomment when fishing is merged.
-	fishing_failure_prob = 10
+	fishing_failure_prob = 5
 	fishing_results = list(
-		/obj/random/natural_debris                           = 10,
 		/mob/living/simple_animal/aquatic/fish               = 10,
 		/mob/living/simple_animal/aquatic/fish/grump         = 10,
 		/obj/item/mollusc                                    = 5,
 		/obj/item/mollusc/barnacle/fished                    = 5,
-		/mob/living/simple_animal/aquatic/fish/large         = 5,
-		/mob/living/simple_animal/aquatic/fish/large/bass    = 5,
-		/mob/living/simple_animal/aquatic/fish/large/salmon  = 5,
-		/mob/living/simple_animal/aquatic/fish/large/trout   = 5,
-		/mob/living/simple_animal/aquatic/fish/large/pike    = 3,
-		/mob/living/simple_animal/aquatic/fish/large/javelin = 3,
 		/obj/item/mollusc/clam/fished/pearl                  = 3,
-		/mob/living/simple_animal/aquatic/fish/large/koi     = 1
+		/obj/item/trash/mollusc_shell/clam                   = 1,
+		/obj/item/trash/mollusc_shell/barnacle               = 1,
+		/obj/item/remains/mouse                              = 1,
+		/obj/item/remains/lizard                             = 1,
+		/obj/item/stick                                      = 1,
+		/obj/item/trash/mollusc_shell                        = 1,
 	)
-*/
+	var/list/additional_fishing_results
+
+/area/shaded_hills/Initialize()
+	if(additional_fishing_results)
+		for(var/fish in additional_fishing_results)
+			fishing_results[fish] = additional_fishing_results[fish]
+	. = ..()
 
 /area/shaded_hills/outside
 	name = "Grasslands"
@@ -43,6 +46,15 @@
 	color = COLOR_BLUE
 	description = "The soft susurration of running water mingles with the hum of insects and croak of frogs."
 	area_blurb_category = /area/shaded_hills/outside/river
+	additional_fishing_results = list(
+		/mob/living/simple_animal/aquatic/fish/large        = 5,
+		/mob/living/simple_animal/aquatic/fish/large/salmon = 5,
+		/mob/living/simple_animal/aquatic/fish/large/trout  = 5,
+		/mob/living/simple_animal/aquatic/fish/large/pike   = 3
+	)
+
+/mob/living/simple_animal/aquatic/fish/large/trout/river
+	name = "rainbow trout"
 
 /area/shaded_hills/caves
 	name = "Deep Tunnels"
@@ -104,6 +116,13 @@
 
 /area/shaded_hills/outside/river/lake
 	name = "Woodland Lake"
+	additional_fishing_results = list(
+		/mob/living/simple_animal/aquatic/fish/large/bass        = 5,
+		/mob/living/simple_animal/aquatic/fish/large/trout       = 5,
+		/mob/living/simple_animal/aquatic/fish/large/javelin     = 5,
+		/mob/living/simple_animal/hostile/retaliate/aquatic/carp = 3,
+		/mob/living/simple_animal/aquatic/fish/large/koi         = 1
+	)
 
 /area/shaded_hills/outside/woods
 	name = "Woodlands"

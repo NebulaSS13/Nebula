@@ -59,6 +59,12 @@
 /atom/proc/get_max_health()
 	return max_health
 
+/atom/proc/get_health_ratio()
+	return current_health/get_max_health()
+
+/atom/proc/get_health_percent(var/sigfig = 1)
+	return round(get_health_ratio()*100, sigfig)
+
 /**
 	Adjust variables prior to Initialize() based on the map
 
