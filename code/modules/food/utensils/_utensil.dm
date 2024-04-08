@@ -144,7 +144,7 @@
 		)
 	var/reagents_per_slice = max(1, round(reagents.total_volume / slice_num))
 	for(var/i = 1 to slice_num)
-		var/atom/movable/slice = new slice_path(loc, material)
+		var/atom/movable/slice = new slice_path(loc, material?.type)
 		reagents.trans_to_obj(slice, reagents_per_slice)
 		LAZYADD(., slice)
 	qdel(src)

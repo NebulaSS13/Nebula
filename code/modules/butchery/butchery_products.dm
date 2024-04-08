@@ -43,10 +43,40 @@
 	icon                = 'icons/obj/items/butchery/offal.dmi'
 	material            = /decl/material/solid/organic/meat/gut
 	nutriment_amt       = 15
+	slice_path          = /obj/item/chems/food/butchery/offal/small
+	slice_num           = 4
+
+/obj/item/chems/food/butchery/offal/handle_utensil_cutting(obj/item/tool, mob/user)
+	. = ..()
+	if(dry && length(.))
+		for(var/obj/item/chems/food/guts in .)
+			if(!guts.dry)
+				guts.dry = TRUE
+				guts.SetName("dried [guts.name]")
+
+/obj/item/chems/food/butchery/offal/fluid_act(var/datum/reagents/fluids)
+	. = ..()
+	if(!QDELETED(src) && fluids?.total_volume && material?.tans_to)
+		if(!dried_type)
+			dried_type = type
+		drying_wetness = get_max_drying_wetness()
+
+/obj/item/chems/food/butchery/offal/get_max_drying_wetness()
+	return 120
+
+/obj/item/chems/food/butchery/offal/get_dried_product()
+	if(dried_type == type && material)
+		var/obj/item/chems/food/dried = new dried_type(loc, (material.tans_to || material.type))
+		if(istype(dried))
+			dried.dry = TRUE
+			dried.SetName("dried [dried.name]")
+		return dried
+	return ..()
 
 /obj/item/chems/food/butchery/offal/small
 	icon                = 'icons/obj/items/butchery/offal_small.dmi'
 	nutriment_amt       = 5
+	w_class             = ITEM_SIZE_SMALL
 
 /obj/item/chems/food/butchery/haunch
 	name                = "haunch"
@@ -90,7 +120,7 @@
 		slice_num = max(1, round(slice_num/2))
 
 /obj/item/chems/food/butchery/haunch/side/set_name_from(mob/living/donor)
-	SetName("side of [name] meat")
+	SetName("side of [donor.name] meat")
 
 /obj/item/chems/food/butchery/stomach
 	name                = "stomach"

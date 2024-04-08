@@ -66,6 +66,9 @@
 		return TRUE
 	return TRUE
 
+/obj/structure/textiles/spinning_wheel/proc/is_thread_material(decl/material/mat)
+	return istype(mat) && mat.has_textile_fibers
+
 /obj/structure/textiles/spinning_wheel/try_start_working(mob/user)
 
 	if(!length(loaded))
@@ -89,7 +92,7 @@
 			var/list/loaded_fibers = loaded_fiber.get_contained_matter()
 			for(var/mat in loaded_fibers)
 				var/decl/material/check_material = GET_DECL(mat)
-				if(check_material.has_textile_fibers)
+				if(is_thread_material(check_material))
 					total_fibers[check_material] += loaded_fibers[mat]
 				else
 					total_waste[check_material.type] += loaded_fibers[mat]
