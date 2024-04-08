@@ -350,3 +350,9 @@
 #define GROOMING_RESULT_PARTIAL 1
 // Can groom properly (long hair with a brush)
 #define GROOMING_RESULT_SUCCESS 2
+
+#if DM_VERSION < 515
+#define TYPE_INITIAL(REF, VAR) initial(REF.VAR)
+#else
+#define TYPE_INITIAL(REF, VAR) (REF::VAR)
+#endif
