@@ -278,6 +278,8 @@
 /datum/planetoid_data/proc/generate_life(var/list/breathable_gas, var/list/toxic_gases)
 	if(fauna)
 		fauna.generate_fauna(atmosphere, breathable_gas?.Copy(), toxic_gases?.Copy()) //Must be copies here #TODO: Fix this
+		for(var/datum/exoplanet_theme/theme in themes)
+			fauna.apply_theme(theme)
 
 ///Setup the initial weather state for the planet. Doesn't apply it to our z levels however.
 /datum/planetoid_data/proc/generate_weather()
