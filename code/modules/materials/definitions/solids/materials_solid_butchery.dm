@@ -24,6 +24,7 @@
 	name = "gut"
 	uid = "solid_gut"
 	color = "#ffd6d6"
+	tans_to = /decl/material/solid/organic/leather/gut
 
 /decl/material/solid/organic/meat/fish
 	name  = "fish meat"

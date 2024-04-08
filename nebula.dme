@@ -2083,6 +2083,7 @@
 #include "code\modules\crafting\textiles\_textiles.dm"
 #include "code\modules\crafting\textiles\loom.dm"
 #include "code\modules\crafting\textiles\spinning_wheel.dm"
+#include "code\modules\crafting\textiles\twisting_bench.dm"
 #include "code\modules\culture_descriptor\_culture.dm"
 #include "code\modules\culture_descriptor\culture\_culture.dm"
 #include "code\modules\culture_descriptor\culture\cultures_hidden.dm"

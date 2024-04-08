@@ -1,9 +1,10 @@
 /obj/structure/textiles/loom
 
-	name                 = "loom"
-	icon                 = 'icons/obj/structures/loom.dmi'
-	product_type         = /obj/item/stack/material/bolt
-	work_sound           = /datum/composite_sound/loom_working
+	name         = "loom"
+	desc         = "A complex, articulated device for weaving threads into cloth."
+	icon         = 'icons/obj/structures/loom.dmi'
+	product_type = /obj/item/stack/material/bolt
+	work_sound   = /datum/composite_sound/loom_working
 
 	var/weaving_progress = 0
 	var/weaving_type
@@ -36,6 +37,11 @@
 /obj/structure/textiles/loom/try_take_input(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/stack/material/thread))
+
+		if(!W.material.has_textile_fibers)
+			to_chat(user, SPAN_WARNING("\The [W] isn't suitable for making cloth."))
+			return TRUE
+
 		var/loaded = FALSE
 		if(loaded_thread)
 			if(!loaded_thread.can_merge_stacks(W))

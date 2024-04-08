@@ -1,9 +1,10 @@
 /obj/structure/textiles/spinning_wheel
 
-	name                 = "spinning wheel"
-	icon                 = 'icons/obj/structures/spinning_wheel.dmi'
-	product_type         = /obj/item/stack/material/thread
-	work_sound = /datum/composite_sound/spinning_wheel_working
+	name         = "spinning wheel"
+	desc         = "A pedal-operated wheel for spinning plant fibers into thread."
+	icon         = 'icons/obj/structures/spinning_wheel.dmi'
+	product_type = /obj/item/stack/material/thread
+	work_sound   = /datum/composite_sound/spinning_wheel_working
 
 	var/const/MAX_LOADED = 10
 	var/list/loaded
@@ -20,17 +21,20 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
+/obj/structure/textiles/spinning_wheel/proc/can_process(obj/item/thing)
+	return istype(thing) && thing.has_textile_fibers()
+
 /obj/structure/textiles/spinning_wheel/try_take_input(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/storage))
-		var/obj/item/storage/bag = W
+
 		var/list/loading_growns = list()
-		for(var/obj/item/thing in bag)
-			if(thing.has_textile_fibers())
+		for(var/obj/item/thing in W)
+			if(can_process(thing))
 				loading_growns += thing
 
 		if(!length(loading_growns))
-			to_chat(user, SPAN_WARNING("Nothing in \the [bag] is suitable for processing on \the [src]."))
+			to_chat(user, SPAN_WARNING("Nothing in \the [W] is suitable for processing on \the [src]."))
 			return TRUE
 
 		if(length(loaded) >= MAX_LOADED)
@@ -38,6 +42,7 @@
 			return TRUE
 
 		var/loaded_items = 0
+		var/obj/item/storage/bag = W
 		for(var/obj/item/thing as anything in loading_growns)
 			if(bag.remove_from_storage(thing, src, TRUE))
 				loaded_items++
@@ -46,11 +51,11 @@
 					break
 		if(loaded_items)
 			bag.finish_bulk_removal()
-			to_chat(user, SPAN_NOTICE("You prepare \the [src] with [loaded_items] items from \the [bag]."))
+			to_chat(user, SPAN_NOTICE("You prepare \the [src] with [loaded_items] items from \the [W]."))
 			update_icon()
 		return TRUE
 
-	if(W.has_textile_fibers(W))
+	if(can_process(W))
 		if(length(loaded) >= MAX_LOADED)
 			to_chat(user, SPAN_WARNING("\The [src] is already fully stocked and ready for spinning."))
 			return TRUE
