@@ -43,7 +43,7 @@
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
 	var/lights_color = "#00ffff"
 
-/obj/item/clothing/suit/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/clothing/suit/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))
 		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-lights")
 		I.color = lights_color

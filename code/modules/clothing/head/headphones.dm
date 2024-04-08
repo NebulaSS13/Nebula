@@ -23,7 +23,7 @@
 		icon_state = "[icon_state]-on"
 	update_clothing_icon()
 
-/obj/item/clothing/head/headphones/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/clothing/head/headphones/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && headphones_on)
 		overlay.icon_state = "[overlay.icon_state]-on"
 	. = ..()

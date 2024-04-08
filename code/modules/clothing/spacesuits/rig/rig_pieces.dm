@@ -29,7 +29,7 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 
-/obj/item/clothing/head/helmet/space/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/clothing/head/helmet/space/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && user_mob?.check_rig_status() && check_state_in_icon("[overlay.icon_state]-sealed", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-sealed"
 	. = ..()
@@ -49,7 +49,7 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 
-/obj/item/clothing/gloves/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/clothing/gloves/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && user_mob?.check_rig_status() && check_state_in_icon("[overlay.icon_state]-sealed", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-sealed"
 	. = ..()
@@ -69,7 +69,7 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 
-/obj/item/clothing/shoes/magboots/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/clothing/shoes/magboots/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && user_mob?.check_rig_status() && check_state_in_icon("[overlay.icon_state]-sealed", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-sealed"
 	. = ..()
@@ -95,7 +95,7 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 
-/obj/item/clothing/suit/space/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/clothing/suit/space/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && user_mob?.check_rig_status() && check_state_in_icon("[overlay.icon_state]-sealed", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-sealed"
 	. = ..()

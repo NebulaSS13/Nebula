@@ -68,7 +68,7 @@
 	if(wielded)
 		. += wielded_parry_bonus
 
-/obj/item/twohanded/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/twohanded/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && wielded && (slot in list(BP_L_HAND, BP_R_HAND)))
 		overlay.icon_state = "[overlay.icon_state]-wielded"
 	. = ..()
@@ -138,7 +138,7 @@
 		))
 
 
-/obj/item/twohanded/spear/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/twohanded/spear/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(check_state_in_icon("[overlay.icon_state]-shaft", overlay.icon))
 			overlay.overlays += get_shaft_overlay("[overlay.icon_state]-shaft")
