@@ -5,6 +5,7 @@
 	base_color = COLOR_LIQUID_WATER
 	color = COLOR_LIQUID_WATER
 	material = /decl/material/solid/ice
+	can_engrave = TRUE
 
 /turf/floor/natural/ice/Initialize()
 	. = ..()

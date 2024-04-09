@@ -37,24 +37,35 @@
 		color = base_color
 	else
 		color = null
-	if(material)
-		set_turf_materials(material, skip_update = no_update_icon)
 
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
+
+	// TEMP: set these so putting tiles over natural turfs doesn't make green sand.
+	base_name       = name
+	base_desc       = desc
+	base_icon       = icon
+	base_icon_state = icon_state
+	base_color      = color
+	// END TEMP
+
+	if(material)
+		set_turf_materials(material, skip_update = no_update_icon)
+
 	. = ..(mapload)	// second param is our own, don't pass to children
-	if (no_update_icon)
-		return
-	// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
-	if(!mapload)
-		for(var/direction in global.alldirs)
-			var/turf/target_turf = get_step_resolving_mimic(src, direction)
-			if(istype(target_turf))
-				if(TICK_CHECK) // not CHECK_TICK -- only queue if the server is overloaded
-					target_turf.queue_icon_update()
-				else
-					target_turf.update_icon()
-	update_icon()
+
+	if(!no_update_icon)
+		// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
+		if(!mapload)
+			for(var/direction in global.alldirs)
+				var/turf/target_turf = get_step_resolving_mimic(src, direction)
+				if(istype(target_turf))
+					if(TICK_CHECK) // not CHECK_TICK -- only queue if the server is overloaded
+						target_turf.queue_icon_update()
+					else
+						target_turf.update_icon()
+		update_icon()
+
 	if(reagent_type && height < 0)
 		add_to_reagents(reagent_type, abs(height))
 
@@ -100,20 +111,8 @@
 	if(!QDELETED(src) && reagent_type && height < 0 && !QDELETED(reagents) && reagents.total_volume < abs(height))
 		add_to_reagents(abs(height) - reagents.total_volume)
 
-/turf/floor/natural/set_flooring(var/decl/flooring/newflooring, skip_update)
-	return
-
-/turf/floor/natural/is_plating()
-	return FALSE
-
-/turf/floor/natural/can_engrave()
-	return FALSE
-
 /turf/floor/natural/dismantle_turf(devastated, explode, no_product)
 	return !!switch_to_base_turf()
-
-/turf/floor/natural/on_defilement()
-	ChangeTurf(/turf/floor/cult)
 
 /turf/floor/natural/get_soil_color()
 	return dirt_color
