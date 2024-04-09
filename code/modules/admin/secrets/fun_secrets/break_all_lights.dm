@@ -6,3 +6,4 @@
 	if(.)
 		for(var/obj/machinery/power/apc/apc in SSmachines.machinery)
 			apc.overload_lighting()
+			CHECK_TICK
