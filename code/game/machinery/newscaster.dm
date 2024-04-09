@@ -201,7 +201,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 
 /obj/machinery/newscaster/interact(mob/user)            //########### THE MAIN BEEF IS HERE! And in the proc below this...############
 	if(ishuman(user) || issilicon(user) )
-		var/mob/living/human_or_robot_user = user
+		var/mob/living/carbon/human_or_robot_user = user
 		var/dat
 		dat = text("<HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[src.unit_no]</H3>")
 

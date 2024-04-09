@@ -685,7 +685,7 @@ var/global/obj/temp_reagents_holder = new
 	if(!. && href_list["deconvert"])
 		var/list/data = REAGENT_DATA(src, /decl/material/liquid/water)
 		if(LAZYACCESS(data, "holy"))
-			var/mob/living/carbon/C = locate(href_list["deconvert"])
+			var/mob/living/C = locate(href_list["deconvert"])
 			if(istype(C) && !QDELETED(C) && C.mind)
 				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
 				godcult.remove_antagonist(C.mind,1)

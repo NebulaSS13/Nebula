@@ -186,7 +186,7 @@
 
 /obj/item/toy/snappop/Crossed(atom/movable/AM)
 	//i guess carp and shit shouldn't set them off
-	var/mob/living/carbon/M = AM
+	var/mob/living/M = AM
 	if(!istype(M) || MOVING_DELIBERATELY(M))
 		return
 	to_chat(M, SPAN_WARNING("You step on the snap pop!"))

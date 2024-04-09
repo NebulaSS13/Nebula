@@ -36,7 +36,7 @@
 	var/turf/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		spark_at(location, amount=2, cardinal_only = TRUE)
-		for(var/mob/living/carbon/M in viewers(world.view, location))
+		for(var/mob/living/M in viewers(world.view, location))
 			if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
 				switch(get_dist(M, location))
 					if(0 to 3)

@@ -14,7 +14,7 @@
 	var/max_implants = 5
 	var/injection_cooldown = 600
 	var/replenish_cooldown = 6000
-	var/mob/living/carbon/occupant = null
+	var/mob/living/occupant = null
 	var/injecting = 0
 
 /obj/machinery/implantchair/Initialize()

@@ -108,12 +108,22 @@
 	. = ..()
 	if(.) //We moved
 
-		var/stamina_cost = 0
-		for(var/obj/item/grab/G as anything in get_active_grabs())
-			stamina_cost -= G.grab_slowdown()
-		stamina_cost = round(stamina_cost)
-		if(stamina_cost < 0)
-			adjust_stamina(stamina_cost)
+		if(stat != DEAD)
+
+			var/stamina_cost = 0
+			for(var/obj/item/grab/G as anything in get_active_grabs())
+				stamina_cost -= G.grab_slowdown()
+			stamina_cost = round(stamina_cost)
+			if(stamina_cost < 0)
+				adjust_stamina(stamina_cost)
+
+			var/nut_removed = DEFAULT_HUNGER_FACTOR/10
+			var/hyd_removed = DEFAULT_THIRST_FACTOR/10
+			if (move_intent.flags & MOVE_INTENT_EXERTIVE)
+				nut_removed *= 2
+				hyd_removed *= 2
+			adjust_nutrition(-nut_removed)
+			adjust_hydration(-hyd_removed)
 
 		handle_leg_damage()
 		species.handle_post_move(src)

@@ -147,7 +147,7 @@ var/global/list/narsie_list = list()
 			new /obj/effect/narsie_footstep(T)
 
 	if(prob(25))
-		for(var/mob/living/carbon/M in oviewers(8, src))
+		for(var/mob/living/M in oviewers(8, src))
 			if(M.stat == CONSCIOUS && !(M.status_flags & GODMODE) && !iscultist(M))
 				to_chat(M, SPAN_DANGER("You feel your sanity crumble away in an instant as you gaze upon [src.name]..."))
 				M.apply_effect(3, STUN)

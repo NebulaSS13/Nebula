@@ -134,6 +134,10 @@ Please contact me on #coderbus IRC. ~Carn x
 		visible_underlays = get_all_current_mob_underlays()
 
 	var/decl/bodytype/root_bodytype = get_bodytype()
+	// We are somehow updating with no torso, or a torso with no bodytype (probably gibbing). No point continuing.
+	if(!root_bodytype)
+		return
+	
 	var/matrix/M = matrix()
 	if(current_posture?.prone && (root_bodytype.prone_overlay_offset[1] || root_bodytype.prone_overlay_offset[2]))
 		M.Translate(root_bodytype.prone_overlay_offset[1], root_bodytype.prone_overlay_offset[2])
@@ -537,17 +541,6 @@ Please contact me on #coderbus IRC. ~Carn x
 	else
 		set_current_mob_overlay(HO_FIRE_LAYER, null, update_icons)
 
-//Ported from hud login stuff
-//
-/mob/living/carbon/hud_reset(full_reset = FALSE)
-	if(!(. = ..()))
-		return .
-	for(var/obj/item/gear in get_equipped_items(TRUE))
-		client.screen |= gear
-	if(istype(hud_used))
-		hud_used.hidden_inventory_update()
-		hud_used.persistant_inventory_update()
-		update_action_buttons()
-	if(internals && internal)
+/mob/living/carbon/human/hud_reset(full_reset = FALSE)
+	if((. = ..()) && internals && internal)
 		internals.icon_state = "internal1"
-	queue_hand_rebuild()

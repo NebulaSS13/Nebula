@@ -1,4 +1,4 @@
-/mob/living/carbon/process_resist()
+/mob/living/carbon/human/process_resist()
 
 	//drop && roll
 	if(on_fire && !buckled)
@@ -29,10 +29,7 @@
 	if(get_equipped_item(slot_handcuffed_str))
 		spawn() escape_handcuffs()
 
-/mob/living/carbon/proc/get_cuff_breakout_mod()
-	return 1
-
-/mob/living/carbon/proc/escape_handcuffs()
+/mob/living/carbon/human/proc/escape_handcuffs()
 	//This line represent a significant buff to grabs...
 	// We don't have to check the click cooldown because /mob/living/verb/resist() has done it for us, we can simply set the delay
 	setClickCooldown(100)
@@ -98,10 +95,7 @@
 	drop_from_inventory(cuffs)
 	return
 
-/mob/living/proc/can_break_cuffs()
-	. = FALSE
-
-/mob/living/carbon/proc/break_handcuffs()
+/mob/living/carbon/human/proc/break_handcuffs()
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
 	visible_message(
 		"<span class='danger'>[src] is trying to break \the [cuffs]!</span>",
@@ -122,53 +116,3 @@
 		qdel(cuffs)
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
-
-/mob/living/carbon/human/can_break_cuffs()
-	. = ..() || species.can_shred(src,1)
-
-/mob/living/carbon/proc/get_special_resist_time()
-	return 0
-
-/mob/living/carbon/escape_buckle()
-	var/unbuckle_time
-	if(src.get_equipped_item(slot_handcuffed_str) && istype(src.buckled, /obj/effect/energy_net))
-		var/obj/effect/energy_net/N = src.buckled
-		N.escape_net(src) //super snowflake but is literally used NOWHERE ELSE.-Luke
-		return
-
-	if(!buckled) return
-	if(!restrained())
-		..()
-	else
-		setClickCooldown(100)
-		unbuckle_time = max(0, (2 MINUTES) - get_special_resist_time())
-
-		visible_message(
-			"<span class='danger'>[src] attempts to unbuckle themself!</span>",
-			"<span class='warning'>You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)</span>", range = 2
-			)
-
-	if(unbuckle_time && buckled)
-		var/stages = 2
-		for(var/i = 1 to stages)
-			if(!unbuckle_time || do_after(usr, unbuckle_time*0.5, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
-				if(!buckled)
-					return
-				visible_message(
-					SPAN_WARNING("\The [src] tries to unbuckle themself."),
-					SPAN_WARNING("You try to unbuckle yourself ([i*100/stages]% done)."), range = 2
-					)
-			else
-				if(!buckled)
-					return
-				visible_message(
-					SPAN_WARNING("\The [src] stops trying to unbuckle themself."),
-					SPAN_WARNING("You stop trying to unbuckle yourself."), range = 2
-					)
-				return
-		visible_message(
-			SPAN_DANGER("\The [src] manages to unbuckle themself!"),
-			SPAN_NOTICE("You successfully unbuckle yourself."), range = 2
-			)
-		buckled.user_unbuckle_mob(src)
-		return

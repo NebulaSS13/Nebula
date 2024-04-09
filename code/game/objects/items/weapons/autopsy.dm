@@ -17,7 +17,7 @@
 /obj/item/scanner/autopsy/is_valid_scan_target(atom/O)
 	return ishuman(O) || istype(O, /obj/item/organ/external)
 
-/obj/item/scanner/autopsy/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
+/obj/item/scanner/autopsy/do_surgery(mob/living/M, mob/living/user, fuckup_prob)
 	if(istype(M))
 		scan(M,user)
 

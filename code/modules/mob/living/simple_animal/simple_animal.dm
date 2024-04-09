@@ -61,7 +61,6 @@
 	var/resistance		  = 0	// Damage reduction
 	var/armor_type = /datum/extension/armor
 	var/list/natural_armor //what armor animal has
-	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
 	var/is_aquatic = FALSE
 
 	//Null rod stuff
@@ -484,17 +483,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/get_digestion_product()
 	return /decl/material/liquid/nutriment
 
-/mob/living/simple_animal/eyecheck()
-	switch(flash_vulnerability)
-		if(2 to INFINITY)
-			return FLASH_PROTECTION_REDUCED
-		if(1)
-			return FLASH_PROTECTION_NONE
-		if(0)
-			return FLASH_PROTECTION_MAJOR
-		else
-			return FLASH_PROTECTION_MAJOR
-
 /mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
 	if(attacker.a_intent == I_HURT)
 		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, attacker.get_active_held_item_slot(), used_weapon = description)
@@ -508,18 +496,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/get_admin_job_string()
 	return "Animal"
-
-/mob/living/simple_animal/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
-	var/safety = eyecheck()
-	if(safety < FLASH_PROTECTION_MAJOR)
-		SET_STATUS_MAX(src, STAT_WEAK, 2)
-		if(safety < FLASH_PROTECTION_MODERATE)
-			SET_STATUS_MAX(src, STAT_STUN, (flash_strength - 2))
-			SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
-			SET_STATUS_MAX(src, STAT_CONFUSE, flash_strength)
-			flash_eyes(2)
-		return TRUE
-	return FALSE
 
 /mob/living/simple_animal/get_speech_bubble_state_modifier()
 	return ..() || "rough"

@@ -89,9 +89,9 @@
 	shorthand = "KB"
 
 #define isascentdrone(X) istype(X, /mob/living/silicon/robot/flying/ascent)
-/decl/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
+/decl/language/mantid/worldnet/check_special_condition(var/mob/living/other)
 	if(isascentdrone(other))
 		return TRUE
-	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.internal_organs))
+	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.get_internal_organs()))
 		return TRUE
 	return FALSE

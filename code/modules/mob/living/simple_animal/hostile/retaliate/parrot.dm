@@ -435,7 +435,7 @@
 		return 1
 
 	var/obj/item/stolen_item = null
-	for(var/mob/living/carbon/C in view(1,src))
+	for(var/mob/living/C in view(1,src))
 		for(var/obj/item/thing in C.get_held_items())
 			if(can_pick_up(thing))
 				stolen_item = thing

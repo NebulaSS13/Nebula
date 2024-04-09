@@ -1,4 +1,4 @@
-/mob/living/carbon/proc/get_gyne_name()
+/mob/living/proc/get_gyne_name()
 	return dna?.lineage || create_gyne_name()
 
 /proc/create_gyne_name()

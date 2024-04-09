@@ -10,7 +10,7 @@
 	anchored = TRUE
 
 	var/obj/item/tank/tank
-	var/mob/living/carbon/breather
+	var/mob/living/carbon/human/breather
 	var/obj/item/clothing/mask/breath/contained
 
 	var/spawn_type = /obj/item/tank/emergency/oxygen/engi
@@ -35,10 +35,10 @@
 		qdel(tank)
 	if(breather)
 		breather.drop_from_inventory(contained)
-		src.visible_message(SPAN_NOTICE("The mask rapidly retracts just before /the [src] is destroyed!"))
+		src.visible_message(SPAN_NOTICE("The mask rapidly retracts just before \the [src] is destroyed!"))
+	breather = null
 	qdel(contained)
 	contained = null
-	breather = null
 	return ..()
 
 /obj/machinery/oxygen_pump/handle_mouse_drop(atom/over, mob/user, params)
@@ -67,17 +67,17 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
-	if(C && istype(C))
+/obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/C)
+	if(ishuman(C))
 		contained.dropInto(C.loc)
 		C.equip_to_slot(contained, slot_wear_mask_str)
 		if(tank)
 			tank.forceMove(C)
 		breather = C
 
-/obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
-	if(C && istype(C))
-		if(!C.internal && tank)
+/obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/C)
+	if(ishuman(C))
+		if(!C.get_internals() && tank)
 			breather.set_internals(tank)
 		update_use_power(POWER_USE_ACTIVE)
 
@@ -163,10 +163,10 @@
 
 
 /obj/machinery/oxygen_pump/Process()
-	if(breather)
+	if(istype(breather))
 		if(!can_apply_to_target(breather))
 			detach_mask()
-		else if(!breather.internal && tank)
+		else if(!breather.get_internals() && tank)
 			set_internals(breather)
 
 

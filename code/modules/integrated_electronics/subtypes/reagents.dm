@@ -150,7 +150,7 @@
 
 /obj/item/integrated_circuit/reagent/injector/proc/draw_after(var/weakref/target, var/amount)
 	busy = FALSE
-	var/mob/living/carbon/C = target_nearby(target)
+	var/mob/living/C = target_nearby(target)
 	if(!C)
 		activate_pin(3)
 		return

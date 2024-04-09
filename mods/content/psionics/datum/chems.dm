@@ -1,4 +1,4 @@
-/decl/material/liquid/crystal_agent/do_material_check(var/mob/living/carbon/M)
+/decl/material/liquid/crystal_agent/do_material_check(var/mob/living/M)
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	. = (M.get_ability_handler(/datum/ability_handler/psionics) || (M.mind && wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : ..()
 

@@ -48,6 +48,6 @@
 /decl/species/proc/get_bodytype_by_pronouns(var/decl/pronouns/pronouns)
 	if(istype(pronouns))
 		for(var/decl/bodytype/bodytype in available_bodytypes)
-			if(bodytype.associated_gender == pronouns.name)
+			if(!isnull(bodytype.associated_gender) && bodytype.retrievable_via_pronoun && bodytype.associated_gender == pronouns.name)
 				return bodytype
 	return default_bodytype

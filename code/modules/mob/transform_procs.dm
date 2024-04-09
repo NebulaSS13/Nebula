@@ -49,7 +49,7 @@
 	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
 
-/mob/living/carbon/AIize()
+/mob/living/AIize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)

@@ -26,7 +26,7 @@
 		if(check_friendly_species(M))
 			. -= M
 
-/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/target, var/mob/living/initiator)
+/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/target, var/mob/living/initiator)
 	if(target == initiator || check_friendly_species(initiator))
 		return ..()
 	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))

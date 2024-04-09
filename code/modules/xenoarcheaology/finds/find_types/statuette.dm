@@ -167,7 +167,7 @@
 /obj/effect/shadow_wight/Process()
 	if(loc)
 		step_rand(src)
-		var/mob/living/carbon/M = locate() in src.loc
+		var/mob/living/M = locate() in src.loc
 		if(M)
 			playsound(src.loc, pick('sound/hallucinations/behind_you1.ogg',\
 			'sound/hallucinations/behind_you2.ogg',\

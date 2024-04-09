@@ -329,8 +329,11 @@ This function restores all organs.
 	recheck_bad_external_organs()
 	verbs -= /mob/living/carbon/human/proc/undislocate
 
+
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
-	if(status_flags & GODMODE)	return	//godmode
+	if(status_flags & GODMODE)
+		return	//godmode
+
 	var/obj/item/organ/external/organ = given_organ
 	if(!organ)
 		if(isorgan(def_zone))
@@ -352,8 +355,10 @@ This function restores all organs.
 			organ = GET_EXTERNAL_ORGAN(src, check_zone(def_zone, src))
 
 	//Handle other types of damage
-	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
+	var/static/list/human_handled_damage_types = list(BRUTE, BURN, PAIN, CLONE)
+	if(!(damagetype in human_handled_damage_types))
 		return ..()
+
 	if(!istype(organ))
 		return 0 // This is reasonable and means the organ is missing.
 
@@ -368,6 +373,7 @@ This function restores all organs.
 
 	if(damage > 15 && prob(damage*4) && organ.can_feel_pain())
 		make_reagent(round(damage/10), /decl/material/liquid/adrenaline)
+
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
@@ -400,7 +406,7 @@ This function restores all organs.
 
 //Electrical shock
 
-/mob/living/carbon/human/apply_shock(var/shock_damage, var/def_zone, var/base_siemens_coeff = 1.0)
+/mob/living/carbon/human/proc/apply_shock(var/shock_damage, var/def_zone, var/base_siemens_coeff = 1.0)
 	var/obj/item/organ/external/initial_organ = GET_EXTERNAL_ORGAN(src, check_zone(def_zone, src))
 	if(!initial_organ)
 		initial_organ = pick(get_external_organs())
@@ -424,22 +430,20 @@ This function restores all organs.
 		floor_organ = pick(get_external_organs())
 
 	var/list/obj/item/organ/external/to_shock = trace_shock(initial_organ, floor_organ)
-
-	if(to_shock && to_shock.len)
-		shock_damage /= to_shock.len
-		shock_damage = round(shock_damage, 0.1)
-	else
+	if(!length(to_shock))
 		return 0
 
-	var/total_damage = 0
+	shock_damage /= length(to_shock)
+	shock_damage = round(shock_damage, 0.1)
 
 	for(var/obj/item/organ/external/E in to_shock)
-		total_damage += ..(shock_damage, E.organ_tag, base_siemens_coeff * get_siemens_coefficient_organ(E))
+		var/actual_shock_damage = max(1, round(shock_damage * base_siemens_coeff * get_siemens_coefficient_organ(E)))
+		if(actual_shock_damage)
+			apply_damage(shock_damage, BURN, E.organ_tag, used_weapon="Electrocution")
+			. += actual_shock_damage
 
-	if(total_damage > 10)
+	if(. > 10)
 		local_emp(initial_organ, 3)
-
-	return total_damage
 
 /mob/living/carbon/human/proc/trace_shock(var/obj/item/organ/external/init, var/obj/item/organ/external/floor)
 	var/list/obj/item/organ/external/traced_organs = list(floor)

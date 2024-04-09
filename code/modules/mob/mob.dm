@@ -291,8 +291,19 @@
 #undef PARTIALLY_BUCKLED
 #undef FULLY_BUCKLED
 
+/mob/proc/grab_restrained()
+	for (var/obj/item/grab/G in grabbed_by)
+		if(G.restrains())
+			return TRUE
+
 /mob/proc/restrained()
-	return
+	if(get_equipped_item(slot_handcuffed_str))
+		return TRUE
+	if(grab_restrained())
+		return TRUE
+	if (istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket))
+		return TRUE
+	return FALSE
 
 /mob/proc/reset_view(atom/A)
 	set waitfor = 0
@@ -982,7 +993,11 @@
 /mob/proc/get_sound_volume_multiplier()
 	if(GET_STATUS(src, STAT_DEAF))
 		return 0
-	return 1
+	. = 1
+	for(var/slot in global.headphone_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
+			. = min(., C.volume_multiplier)
 
 // Mobs further up the chain should override this proc if they want to return a simple dexterity value.
 /mob/proc/get_dexterity(var/silent)
@@ -1308,6 +1323,9 @@
 
 /mob/proc/mob_throw_item(atom/target)
 	return
+
+/mob/proc/swap_hand()
+	SHOULD_CALL_PARENT(TRUE)
 
 /mob/living/proc/get_butchery_product_name()
 	var/decl/butchery_data/butchery_decl = GET_DECL(butchery_data)

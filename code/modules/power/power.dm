@@ -183,7 +183,7 @@
 //power_source is a source of electricity, can be powercell, area, apc, cable, powernet or null
 //source is an object caused electrocuting (airlock, grille, etc)
 //No animations will be performed by this proc.
-/proc/electrocute_mob(mob/living/carbon/M, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
+/proc/electrocute_mob(mob/living/M, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
 	var/area/source_area
 	if(istype(power_source,/area))
 		source_area = power_source

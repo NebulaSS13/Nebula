@@ -130,7 +130,7 @@ About the new airlock wires panel:
 			else /*if(src.justzap)*/
 				return
 		else if(prob(10) && src.operating == 0)
-			var/mob/living/carbon/C = user
+			var/mob/living/C = user
 			if(istype(C) && C.hallucination_power > 25)
 				to_chat(user, SPAN_DANGER("You feel a powerful shock course through your body!"))
 				user.take_damage(10, PAIN)

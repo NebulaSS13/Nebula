@@ -12,7 +12,7 @@
 
 /obj/item/organ/internal/egg_sac/insectoid/attack_self(var/mob/user)
 	. = ..()
-	var/mob/living/carbon/H = user
+	var/mob/living/H = user
 	if(.)
 		if(H.incapacitated())
 			to_chat(H, SPAN_WARNING("You can't produce eggs in your current state."))

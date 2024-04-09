@@ -101,8 +101,8 @@
 	if(spamcheck)
 		return
 
-	var/mob/living/carbon/target = null
-	for(var/mob/living/carbon/M in get_turf(src))
+	var/mob/living/target = null
+	for(var/mob/living/M in get_turf(src))
 		if(!iscultist(M) && M.stat != DEAD)
 			target = M
 			break
@@ -741,7 +741,7 @@
 	var/list/mob/living/current = list()
 	while(cultists.len >= 3)
 		cultists = get_cultists()
-		for(var/mob/living/carbon/M in viewers(src))
+		for(var/mob/living/M in viewers(src))
 			if(iscultist(M))
 				continue
 			current |= M

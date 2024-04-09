@@ -218,7 +218,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/user)
 	if(bag.opened || !bag.contains_body)
 		return
 
@@ -226,7 +226,7 @@
 	if(L)
 		injectMob(L, user, bag)
 
-/obj/item/chems/syringe/proc/injectMob(var/mob/living/carbon/target, var/mob/living/carbon/user, var/atom/trackTarget)
+/obj/item/chems/syringe/proc/injectMob(var/mob/living/target, var/mob/living/user, var/atom/trackTarget)
 	if(!trackTarget)
 		trackTarget = target
 
@@ -267,7 +267,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/syringestab(var/mob/living/target, var/mob/living/user)
 
 	if(ishuman(target))
 
@@ -306,7 +306,7 @@
 	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)
 
-/obj/item/chems/syringe/proc/break_syringe(mob/living/carbon/human/target, mob/living/carbon/user)
+/obj/item/chems/syringe/proc/break_syringe(mob/living/carbon/human/target, mob/living/user)
 	desc += " It is broken."
 	mode = SYRINGE_BROKEN
 	if(target)

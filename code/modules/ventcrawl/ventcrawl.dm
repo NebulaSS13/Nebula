@@ -34,11 +34,9 @@ var/global/list/ventcrawl_machinery = list(
 	return ventcrawl_carry()
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(is_type_in_list(carried_item, can_enter_vent_with))
-		return !get_equipped_slot_for_item(carried_item)
-
-/mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	return (carried_item in get_internal_organs()) || ..()
+	if(is_type_in_list(carried_item, can_enter_vent_with) && !get_equipped_slot_for_item(carried_item))
+		return TRUE
+	return (carried_item in get_internal_organs())
 
 /mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	var/obj/item/organ/internal/stomach = GET_INTERNAL_ORGAN(src, BP_STOMACH)

@@ -123,7 +123,7 @@
 	else
 		M.add_chemical_effect(CE_TOXIN, 1)
 
-/decl/material/liquid/painkillers/proc/isboozed(var/mob/living/carbon/M)
+/decl/material/liquid/painkillers/proc/isboozed(var/mob/living/M)
 	. = 0
 	if(!narcotic)
 		return

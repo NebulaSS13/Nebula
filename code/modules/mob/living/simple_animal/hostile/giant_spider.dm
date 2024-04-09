@@ -106,7 +106,7 @@
 	hunt_chance = 25
 	can_escape = TRUE
 	pry_time = 5 SECONDS
-	flash_vulnerability = 2 //sensitive eyes for stalking prey
+	flash_protection = FLASH_PROTECTION_REDUCED
 	does_spin = FALSE
 	available_maneuvers = list(/decl/maneuver/leap/spider)
 	ability_cooldown = 3 MINUTES
@@ -126,7 +126,7 @@
 	fire_desc = "spits venom"
 	ranged_range = 6
 	pry_time = 7 SECONDS
-	flash_vulnerability = 2
+	flash_protection = FLASH_PROTECTION_REDUCED
 
 	var/venom_charge = 16
 

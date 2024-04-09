@@ -324,7 +324,7 @@ var/global/list/surgery_tool_exception_cache = list()
 	use(1)
 
 //check if mob is lying down on something we can operate him on.
-/proc/can_operate(mob/living/carbon/M, mob/living/carbon/user)
+/proc/can_operate(mob/living/M, mob/living/user)
 	var/turf/T = get_turf(M)
 	if(locate(/obj/machinery/optable, T))
 		. = OPERATE_IDEAL

@@ -208,7 +208,7 @@
 		prompt_revive_callback(owner)
 	return TRUE
 
-/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/carbon/C)
+/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/C)
 	set waitfor = FALSE
 	if(C && !backup_inviable())
 		prompting = TRUE

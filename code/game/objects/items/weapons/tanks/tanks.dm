@@ -300,7 +300,7 @@ var/global/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/proc/toggle_valve(var/mob/user)
 
-	var/mob/living/carbon/location
+	var/mob/living/location
 	if(isliving(loc))
 		location = loc
 	else if(istype(loc,/obj/item/rig))
@@ -310,7 +310,7 @@ var/global/list/global/tank_gauge_cache = list()
 	else
 		return
 
-	if(location.internal == src)
+	if(location.get_internals() == src)
 		to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
 		location.set_internals(null)
 	else

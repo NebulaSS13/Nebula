@@ -29,7 +29,7 @@
 	. = ..()
 	uses = rand(1, 5)
 
-/obj/item/implant/freedom/trigger(emote, mob/living/carbon/source)
+/obj/item/implant/freedom/trigger(emote, mob/living/source)
 	if (emote == activation_emote)
 		activate()
 
@@ -39,7 +39,7 @@
 		uses--
 		to_chat(imp_in, "You feel a faint click.")
 
-/obj/item/implant/freedom/proc/remove_cuffs_and_unbuckle(mob/living/carbon/user)
+/obj/item/implant/freedom/proc/remove_cuffs_and_unbuckle(mob/living/user)
 	var/obj/cuffs = user.get_equipped_item(slot_handcuffed_str)
 	if(!cuffs)
 		return 0
@@ -48,7 +48,7 @@
 		user.buckled.unbuckle_mob()
 	return
 
-/obj/item/implant/freedom/implanted(mob/living/carbon/source)
+/obj/item/implant/freedom/implanted(mob/living/source)
 	src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
 	source.StoreMemory("Freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", /decl/memory_options/system)
 	to_chat(source, "The implanted freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
