@@ -20,6 +20,11 @@
 	hitsound = 'sound/effects/squelch1.ogg'
 	fishing_bait_value = 1
 
+/decl/material/solid/organic/meat/egg
+	name = "egg"
+	uid = "solid_egg"
+	color = "#f8f7b4"
+
 /decl/material/solid/organic/meat/gut
 	name = "gut"
 	uid = "solid_gut"

@@ -14,7 +14,7 @@
 
 /obj/item/chems/food/meatballsoup/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein,  8)
+	add_to_reagents(/decl/material/solid/organic/meat,  8)
 	add_to_reagents(/decl/material/liquid/water,              5)
 
 /obj/item/chems/food/bloodsoup
@@ -29,7 +29,7 @@
 
 /obj/item/chems/food/bloodsoup/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein,  2)
+	add_to_reagents(/decl/material/solid/organic/meat,  2)
 	add_to_reagents(/decl/material/liquid/blood,              10)
 	add_to_reagents(/decl/material/liquid/water,              5)
 
@@ -178,7 +178,7 @@
 
 /obj/item/chems/food/hotchili/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein,  3)
+	add_to_reagents(/decl/material/solid/organic/meat,  3)
 	add_to_reagents(/decl/material/liquid/capsaicin,          3)
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 2)
 
@@ -195,7 +195,7 @@
 
 /obj/item/chems/food/coldchili/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein,   3)
+	add_to_reagents(/decl/material/solid/organic/meat,   3)
 	add_to_reagents(/decl/material/liquid/frostoil,            3)
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato,  2)
 
@@ -228,7 +228,7 @@
 
 /obj/item/chems/food/stew/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein,  4)
+	add_to_reagents(/decl/material/solid/organic/meat,  4)
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 5)
 	add_to_reagents(/decl/material/liquid/eyedrops,           5)
 	add_to_reagents(/decl/material/liquid/water,              5)

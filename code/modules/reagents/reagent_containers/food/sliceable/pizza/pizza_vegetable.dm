@@ -7,7 +7,7 @@
 
 /obj/item/chems/food/sliceable/pizza/vegetablepizza/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein,  5)
+	add_to_reagents(/decl/material/solid/organic/meat,  5)
 	add_to_reagents(/decl/material/liquid/nutriment/ketchup,  6)
 	add_to_reagents(/decl/material/liquid/eyedrops,           12)
 

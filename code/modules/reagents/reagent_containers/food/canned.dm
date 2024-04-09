@@ -72,7 +72,7 @@
 
 /obj/item/chems/food/can/beef/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 12)
+	add_to_reagents(/decl/material/solid/organic/meat, 12)
 
 /obj/item/chems/food/can/beans
 	name = "baked beans"
@@ -135,7 +135,7 @@
 
 /obj/item/chems/food/can/caviar/true/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 	add_to_reagents(/decl/material/liquid/carpotoxin,        1)
 
 /obj/item/knife/opener

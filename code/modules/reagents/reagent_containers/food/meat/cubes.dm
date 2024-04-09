@@ -15,7 +15,7 @@
 
 /obj/item/chems/food/monkeycube/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
 /obj/item/chems/food/monkeycube/get_single_monetary_worth()
 	. = (monkey_type ? round(atom_info_repository.get_combined_worth_for(monkey_type) * 1.25) : 5)

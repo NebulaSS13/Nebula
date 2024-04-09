@@ -32,14 +32,14 @@
 	hidden_from_codex = TRUE
 	ratios = list(
 		/decl/material/liquid/nutriment = 2,
-		/decl/material/liquid/nutriment/protein = 1,
+		/decl/material/solid/organic/meat = 1,
 		/decl/material/liquid/water = 3,
 		/decl/material/solid/metal/iron
 	)
 
 /obj/item/chems/drinks/glass2/fitnessflask/proteinshake/populate_reagents()
-	add_to_reagents(/decl/material/liquid/nutriment,         30)
-	add_to_reagents(/decl/material/solid/metal/iron,         10)
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
-	add_to_reagents(/decl/material/liquid/water,             45)
+	add_to_reagents(/decl/material/liquid/nutriment,   30)
+	add_to_reagents(/decl/material/solid/metal/iron,   10)
+	add_to_reagents(/decl/material/solid/organic/meat, 15)
+	add_to_reagents(/decl/material/liquid/water,       45)
 

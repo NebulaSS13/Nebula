@@ -12,7 +12,7 @@
 
 /obj/item/chems/food/sliceable/cheesewheel/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
 /obj/item/chems/food/cheesewedge
 	name = "cheese wedge"

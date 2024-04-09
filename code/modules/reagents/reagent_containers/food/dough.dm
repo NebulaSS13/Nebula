@@ -34,7 +34,7 @@
 
 /obj/item/chems/food/sliceable/flatdough/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 1)
+	add_to_reagents(/decl/material/solid/organic/meat, 1)
 	add_to_reagents(/decl/material/liquid/nutriment,         3)
 
 /obj/item/chems/food/doughslice

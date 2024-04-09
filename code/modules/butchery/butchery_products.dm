@@ -5,7 +5,7 @@
 	material            = /decl/material/solid/organic/meat
 	w_class             = ITEM_SIZE_LARGE
 	volume              = 20
-	nutriment_type      = /decl/material/liquid/nutriment/protein
+	nutriment_type      = /decl/material/solid/organic/meat
 	nutriment_amt       = 20
 	slice_path          = null
 	slice_num           = null
@@ -45,14 +45,40 @@
 	nutriment_amt       = 15
 	slice_path          = /obj/item/chems/food/butchery/offal/small
 	slice_num           = 4
+	var/_cleaned        = FALSE
+	var/work_skill      = SKILL_CONSTRUCTION
+
+/obj/item/chems/food/butchery/offal/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 && user.skill_check(work_skill, SKILL_BASIC))
+		if(_cleaned && drying_wetness)
+			to_chat(user, "\The [src] can be hung on a drying rack to dry it in preparation for being twisted into thread.")
+		else if(!_cleaned)
+			to_chat(user, "\The [src] can be scraped clean with a sharp object like a knife.")
+		else if(!drying_wetness)
+			to_chat(user, "\The [src] can be soaked in water to prepare it for drying.")
+
+/obj/item/chems/food/butchery/offal/attackby(obj/item/W, mob/user)
+	if(IS_KNIFE(W) && !_cleaned)
+		if(W.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, "scraping", "scraping", check_skill = work_skill, set_cooldown = TRUE) && !_cleaned)
+			_cleaned = TRUE
+			SetName("cleaned [name]")
+		return TRUE
+	return ..()
+
+/obj/item/chems/food/butchery/offal/is_dryable()
+	return _cleaned && ..()
 
 /obj/item/chems/food/butchery/offal/handle_utensil_cutting(obj/item/tool, mob/user)
 	. = ..()
 	if(dry && length(.))
-		for(var/obj/item/chems/food/guts in .)
+		for(var/obj/item/chems/food/butchery/offal/guts in .)
 			if(!guts.dry)
 				guts.dry = TRUE
 				guts.SetName("dried [guts.name]")
+			else if(!guts._cleaned)
+				guts._cleaned = TRUE
+				guts.SetName("cleaned [guts.name]")
 
 /obj/item/chems/food/butchery/offal/fluid_act(var/datum/reagents/fluids)
 	. = ..()
@@ -136,6 +162,9 @@
 	if(istype(result) && reagents?.total_volume)
 		reagents.trans_to_holder(result.reagents, reagents.total_volume)
 	return result
+
+/obj/item/chems/food/butchery/stomach/get_max_drying_wetness()
+	return 80
 
 /obj/item/chems/food/butchery/stomach/populate_reagents()
 	..()

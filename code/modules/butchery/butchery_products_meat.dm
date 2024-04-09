@@ -11,6 +11,8 @@
 	utensil_flags  = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
 	drying_wetness = 60
 	dried_type     = /obj/item/chems/food/jerky/meat
+	nutriment_type = /decl/material/solid/organic/meat
+	nutriment_amt  = 9
 
 /obj/item/chems/food/butchery/meat/proc/get_meat_icons()
 	var/static/list/meat_icons = list(
@@ -23,10 +25,6 @@
 /obj/item/chems/food/butchery/meat/Initialize(ml, material_key, mob/living/donor)
 	icon = pick(get_meat_icons())
 	return ..()
-
-/obj/item/chems/food/butchery/meat/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 9)
 
 /obj/item/chems/food/butchery/meat/syntiflesh
 	name = "synthetic meat"

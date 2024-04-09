@@ -24,20 +24,27 @@
 	name = "Rennet Cheesewheel"
 	catalysts = list()
 	required_reagents = list(
-		/decl/material/liquid/drink/milk = 40,
+		/decl/material/liquid/drink/milk    = 40,
 		/decl/material/liquid/enzyme/rennet = 3
 	)
 
 /decl/chemical_reaction/recipe/food/rawmeatball
 	name = "Raw Meatball"
-	required_reagents = list(/decl/material/liquid/nutriment/protein = 3, /decl/material/liquid/nutriment/flour = 5)
+	required_reagents = list(
+		/decl/material/solid/organic/meat     = 3,
+		/decl/material/liquid/nutriment/flour = 5
+	)
 	result_amount = 3
 	mix_message = "The flour thickens the processed meat until it clumps."
 	obj_result = /obj/item/chems/food/rawmeatball
 
 /decl/chemical_reaction/recipe/food/dough
 	name = "Plain dough"
-	required_reagents = list(/decl/material/liquid/nutriment/protein/egg = 3, /decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
+	required_reagents = list(
+		/decl/material/solid/organic/meat/egg = 3,
+		/decl/material/liquid/nutriment/flour = 10,
+		/decl/material/liquid/water           = 10
+	)
 	mix_message = "The solution folds and thickens into a large ball of dough."
 	obj_result = /obj/item/chems/food/dough
 

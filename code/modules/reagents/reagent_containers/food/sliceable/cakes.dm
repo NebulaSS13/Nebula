@@ -43,7 +43,7 @@
 
 /obj/item/chems/food/sliceable/braincake/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 25)
+	add_to_reagents(/decl/material/solid/organic/meat, 25)
 	add_to_reagents(/decl/material/liquid/neuroannealer,     10)
 
 /obj/item/chems/food/slice/braincake
@@ -73,7 +73,7 @@
 
 /obj/item/chems/food/sliceable/cheesecake/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/solid/organic/meat, 15)
 
 /obj/item/chems/food/slice/cheesecake
 	name = "cheese cake slice"

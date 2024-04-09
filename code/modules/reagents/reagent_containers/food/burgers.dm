@@ -13,7 +13,7 @@
 
 /obj/item/chems/food/brainburger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/solid/organic/meat, 6)
 	add_to_reagents(/decl/material/liquid/neuroannealer,     6)
 
 /obj/item/chems/food/ghostburger
@@ -40,7 +40,7 @@
 
 /obj/item/chems/food/human/burger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/solid/organic/meat, 6)
 
 /obj/item/chems/food/cheeseburger
 	name = "cheeseburger"
@@ -52,7 +52,7 @@
 
 /obj/item/chems/food/cheeseburger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
 /obj/item/chems/food/burger
 	name = "burger"
@@ -67,7 +67,7 @@
 
 /obj/item/chems/food/burger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 
 /obj/item/chems/food/hamburger
 	name = "hamburger"
@@ -82,7 +82,7 @@
 
 /obj/item/chems/food/hamburger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+	add_to_reagents(/decl/material/solid/organic/meat, 5)
 
 /obj/item/chems/food/butchery/meat/fishburger
 	name = "fish sandwich"
@@ -94,7 +94,7 @@
 
 /obj/item/chems/food/butchery/meat/fishburger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/solid/organic/meat, 6)
 
 /obj/item/chems/food/tofuburger
 	name = "tofu burger"
@@ -144,7 +144,7 @@
 
 /obj/item/chems/food/xenoburger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 8)
+	add_to_reagents(/decl/material/solid/organic/meat, 8)
 
 /obj/item/chems/food/clownburger
 	name = "clown burger"
@@ -187,7 +187,7 @@
 
 /obj/item/chems/food/bigbiteburger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
 /obj/item/chems/food/jellyburger
 	name = "jelly burger"
@@ -215,7 +215,7 @@
 
 /obj/item/chems/food/superbiteburger/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 25)
+	add_to_reagents(/decl/material/solid/organic/meat, 25)
 
 // I am not creating another file just for hot dogs.
 
@@ -230,7 +230,7 @@
 
 /obj/item/chems/food/hotdog/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/solid/organic/meat, 6)
 
 /obj/item/chems/food/classichotdog
 	name = "classic hotdog"
@@ -242,4 +242,4 @@
 
 /obj/item/chems/food/classichotdog/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 16)
+	add_to_reagents(/decl/material/solid/organic/meat, 16)

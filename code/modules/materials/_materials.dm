@@ -302,6 +302,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/compost_value = 0
 
+	/// Nutrition values!
+	var/nutriment_factor     = 0 // Per removed amount each tick
+	var/hydration_factor     = 0 // Per removed amount each tick
+	var/injectable_nutrition = FALSE
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
@@ -742,8 +747,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+
 	if(M.status_flags & GODMODE)
 		return
+
+	if(nutriment_factor || hydration_factor)
+		if(injectable_nutrition)
+			adjust_nutrition(M, removed)
+		else
+			M.take_damage(TOX, 0.2 * removed)
 
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
@@ -780,7 +792,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
+// Defined as a proc so it can be overridden.
+/decl/material/proc/adjust_nutrition(var/mob/living/M, var/removed)
+	if(nutriment_factor)
+		M.adjust_nutrition(nutriment_factor * removed)
+	if(hydration_factor)
+		M.adjust_hydration(hydration_factor * removed)
+
 /decl/material/proc/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	adjust_nutrition(M, removed)
 	if(affect_blood_on_ingest)
 		affect_blood(M, removed * 0.5, holder)
 

@@ -40,7 +40,7 @@
 	if(prob(75))
 		S.get_trait(TRAIT_STINGS, 1)
 
-	LAZYSET(S.chems, /decl/material/liquid/nutriment/protein, list(10,30))
+	LAZYSET(S.chems, /decl/material/solid/organic/meat, list(10,30))
 	LAZYSET(S.chems, /decl/material/liquid/blood, list(5,10))
 	LAZYSET(S.chems, /decl/material/liquid/acid/stomach, list(5,10))
 

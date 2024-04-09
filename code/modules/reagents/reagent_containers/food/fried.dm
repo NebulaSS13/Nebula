@@ -49,4 +49,4 @@
 
 /obj/item/chems/food/cheesyfries/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/solid/organic/meat, 2)

@@ -8,7 +8,5 @@
 	nutriment_type = null
 	nutriment_amt = 0
 	material = /decl/material/solid/organic/meat
-
-/obj/item/chems/food/worm/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+	nutriment_type = /decl/material/solid/organic/meat
+	nutriment_amt = 5

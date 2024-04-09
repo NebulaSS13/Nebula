@@ -488,7 +488,7 @@
 	brand = "sausage... wait what."
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/sausage/populate_reagents()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/solid/organic/meat, 6)
 
 /obj/item/trash/cigbutt/sausagebutt
 	name = "sausage butt"

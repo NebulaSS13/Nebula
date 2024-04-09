@@ -73,9 +73,9 @@
 
 /obj/item/chems/food/sharkmeat/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
-	add_to_reagents(/decl/material/liquid/psychoactives,     1)
-	add_to_reagents(/decl/material/gas/chlorine,             1)
+	add_to_reagents(/decl/material/solid/organic/meat,   5)
+	add_to_reagents(/decl/material/liquid/psychoactives, 1)
+	add_to_reagents(/decl/material/gas/chlorine,         1)
 
 //if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
 /obj/structure/net

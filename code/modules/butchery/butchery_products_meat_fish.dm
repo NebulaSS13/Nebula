@@ -6,7 +6,7 @@
 	center_of_mass                 = @'{"x":17,"y":13}'
 	bitesize                       = 6
 	nutriment_amt                  = 6
-	nutriment_type                 = /decl/material/liquid/nutriment/protein
+	nutriment_type                 = /decl/material/solid/organic/meat/fish
 	material                       = /decl/material/solid/organic/meat/fish
 	drying_wetness                 = 60
 	dried_type                     = /obj/item/chems/food/jerky/fish

@@ -7,7 +7,7 @@
 
 /obj/item/chems/food/sliceable/pizza/meatpizza/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein,  34)
+	add_to_reagents(/decl/material/solid/organic/meat,  34)
 	add_to_reagents(/decl/material/liquid/nutriment/barbecue, 6)
 
 /obj/item/chems/food/slice/pizza/meat

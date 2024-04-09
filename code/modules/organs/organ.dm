@@ -109,7 +109,7 @@
 
 // todo: make this redundant with matter shenanigans
 /obj/item/organ/populate_reagents()
-	var/reagent_to_add = /decl/material/liquid/nutriment/protein
+	var/reagent_to_add = /decl/material/solid/organic/meat
 	if(bodytype)
 		reagent_to_add = bodytype.edible_reagent // can set this to null and skip the next block
 	if(reagent_to_add)

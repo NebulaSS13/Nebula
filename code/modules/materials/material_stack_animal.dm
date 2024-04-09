@@ -10,6 +10,16 @@
 	var/_cleaned = FALSE
 	var/work_skill = SKILL_CONSTRUCTION
 
+/obj/item/stack/material/skin/examine(mob/user, distance)
+	. = ..()
+	if(user && distance <= 1 && user.skill_check(work_skill, SKILL_BASIC) && material?.tans_to)
+		if(_cleaned && drying_wetness)
+			to_chat(user, SPAN_NOTICE("\The [src] is ready for tanning on a drying rack or in a drying oven."))
+		else if(!_cleaned)
+			to_chat(user, SPAN_NOTICE("\The [src] must be scraped clean with a knife or other sharp object before it can be tanned."))
+		else if(!drying_wetness)
+			to_chat(user, SPAN_NOTICE("\The [src] must be soaked in water before it can be tanned."))
+
 /obj/item/stack/material/skin/proc/set_cleaned()
 	if(_cleaned)
 		return

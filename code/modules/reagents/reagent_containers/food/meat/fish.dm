@@ -8,7 +8,7 @@
 
 /obj/item/chems/food/butchery/meat/fishfingers/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
 /obj/item/chems/food/cubancarp
 	name = "\improper Cuban Carp"
@@ -23,7 +23,7 @@
 
 /obj/item/chems/food/cubancarp/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 	add_to_reagents(/decl/material/liquid/capsaicin,         3)
 
 /obj/item/chems/food/butchery/meat/fishandchips
@@ -38,4 +38,4 @@
 
 /obj/item/chems/food/butchery/meat/fishandchips/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)

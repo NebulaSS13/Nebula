@@ -11,6 +11,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Please, no more animal protein or glowsap or corn oil atmosphere.
 	fishing_bait_value = 0.65
 	compost_value = 1
+	nutriment_factor = 10
 
 	// Technically a room-temperature solid, but saves
 	// repathing it to /solid all over the codebase.
@@ -18,10 +19,6 @@
 	ignition_point   = 353
 	boiling_point    = 373
 	accelerant_value =   0.65
-
-	var/nutriment_factor = 10 // Per unit
-	var/hydration_factor = 0 // Per unit
-	var/injectable       = FALSE
 
 /decl/material/liquid/nutriment/Initialize()
 	solid_name = name   // avoid 'frozen sugar'
@@ -52,29 +49,6 @@
 				data -= taste
 	. = data
 
-/decl/material/liquid/nutriment/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(!injectable)
-		M.take_damage(TOX, 0.2 * removed)
-		return
-	affect_ingest(M, removed, holder)
-
-/decl/material/liquid/nutriment/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	adjust_nutrition(M, removed)
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
-	M.heal_organ_damage(0.5 * removed, 0) //what
-	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
-
-/decl/material/liquid/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/removed)
-	var/nut_removed = removed
-	var/hyd_removed = removed
-	if(nutriment_factor)
-		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
-	if(hydration_factor)
-		M.adjust_hydration(hydration_factor * hyd_removed) // For thirst
-
 /decl/material/liquid/nutriment/slime_meat
 	name = "slime-meat"
 	lore_text = "Mollusc meat, or slug meat - something slimy, anyway."
@@ -88,7 +62,7 @@
 	name = "glucose"
 	color = "#ffffff"
 	scannable = 1
-	injectable = 1
+	injectable_nutrition = TRUE
 	uid = "chem_nutriment_glucose"
 
 /decl/material/liquid/nutriment/bread
@@ -99,29 +73,7 @@
 	name = "cake"
 	uid = "chem_nutriment_cake"
 
-/decl/material/liquid/nutriment/protein
-	name = "animal protein"
-	taste_description = "some sort of protein"
-	color = "#440000"
-	uid = "chem_nutriment_protein"
-	fishing_bait_value = 1
-
-/decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/carbon/M, removed)
-	var/malus_level = M.GetTraitLevel(/decl/trait/malus/animal_protein)
-	var/malus_factor = malus_level ? malus_level * 0.25 : 0
-	M.take_damage(TOX, removed * malus_factor)
-	M.adjust_nutrition(nutriment_factor * removed * (1 - malus_factor))
-
-/decl/material/liquid/nutriment/protein/egg
-	name = "egg yolk"
-	taste_description = "egg"
-	color = "#ffffaa"
-	uid = "chem_nutriment_egg"
-	melting_point = 273
-	boiling_point = 373
-
 //vegetamarian alternative that is safe for vegans to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
-
 /decl/material/liquid/nutriment/plant_protein
 	name = "plant protein"
 	lore_text = "A gooey pale paste."

@@ -13,7 +13,7 @@
 
 /obj/item/chems/food/sliceable/meatbread/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 20)
+	add_to_reagents(/decl/material/solid/organic/meat, 20)
 
 /obj/item/chems/food/slice/meatbread
 	name = "meatbread slice"
@@ -43,7 +43,7 @@
 
 /obj/item/chems/food/sliceable/xenomeatbread/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 20)
+	add_to_reagents(/decl/material/solid/organic/meat, 20)
 
 /obj/item/chems/food/slice/xenomeatbread
 	name = "xenomeatbread slice"
@@ -155,7 +155,7 @@
 
 /obj/item/chems/food/sliceable/creamcheesebread/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/solid/organic/meat, 15)
 
 /obj/item/chems/food/slice/creamcheesebread
 	name = "cream cheese bread slice"

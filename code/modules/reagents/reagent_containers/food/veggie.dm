@@ -41,7 +41,7 @@
 
 /obj/item/chems/food/validsalad/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
 /obj/item/chems/food/carrotfries
 	name = "carrot fries"
