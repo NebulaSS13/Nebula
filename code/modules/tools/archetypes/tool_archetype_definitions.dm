@@ -49,6 +49,11 @@
 	tool_sound   = 'sound/weapons/Genhit.ogg'
 	tool_message = "striking"
 
+/decl/tool_archetype/hoe
+	name         = "hoe"
+	tool_sound   = 'sound/items/shovel_dirt.ogg'
+	tool_message = "tilling"
+
 /decl/tool_archetype/knife
 	name         = "knife"
 	tool_sound   = 'sound/weapons/bladeslice.ogg'

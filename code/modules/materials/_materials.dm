@@ -297,6 +297,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// Can objects containing this material be used for textile spinning?
 	var/has_textile_fibers = FALSE
 
+	/// Whether or not turfs made of this material can support plants.
+	var/tillable = FALSE
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))

@@ -1190,7 +1190,7 @@
 "db" = (
 /obj/structure/table,
 /obj/item/wirecutters/clippers,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /obj/item/chems/glass/bucket,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/disk/botany,

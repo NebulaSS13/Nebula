@@ -10,7 +10,13 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 	bodytype_equip_flags = null
-	allowed = list (/obj/item/chems/spray/plantbgone,/obj/item/scanner/plant,/obj/item/seeds,/obj/item/chems/glass/bottle,/obj/item/minihoe)
+	allowed = list (
+		/obj/item/chems/spray/plantbgone,
+		/obj/item/scanner/plant,
+		/obj/item/seeds,
+		/obj/item/chems/glass/bottle,
+		/obj/item/tool/hoe/mini
+	)
 
 //Captain
 /obj/item/clothing/suit/captunic

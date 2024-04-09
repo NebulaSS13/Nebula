@@ -2996,7 +2996,7 @@
 /obj/item/scanner/plant,
 /obj/item/scanner/gas,
 /obj/item/hatchet,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /obj/item/wrench,
 /obj/item/wirecutters/clippers,
 /obj/effect/floor_decal/industrial/fire/fulltile,

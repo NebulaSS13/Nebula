@@ -1,6 +1,6 @@
 /decl/stack_recipe/bricks
-	abstract_type              = /decl/stack_recipe/bricks
-	craft_stack_types          = list(
+	abstract_type               = /decl/stack_recipe/bricks
+	craft_stack_types           = list(
 		/obj/item/stack/material/brick,
 		/obj/item/stack/material/slab
 	)
@@ -11,14 +11,26 @@
 	)
 	category                    = "structures"
 
-/decl/stack_recipe/bricks/firepit
+/decl/stack_recipe/bricks/fire_source
+	abstract_type               = /decl/stack_recipe/bricks/fire_source
 	on_floor                    = TRUE
 	one_per_turf                = TRUE
 	apply_material_name         = FALSE
-	result_type                 = /obj/structure/fire_source/firepit
 	category                    = "fire sources"
 
-/decl/stack_recipe/bricks/firepit/kiln
+/decl/stack_recipe/bricks/fire_source/firepit
+	result_type                 = /obj/structure/fire_source/firepit
+	craft_stack_types           = list(
+		/obj/item/stack/material/brick,
+		/obj/item/stack/material/slab,
+		/obj/item/stack/material/ore,
+		/obj/item/stack/material/lump
+	)
+	forbidden_craft_stack_types = list(
+		/obj/item/stack/material/log,
+	)
+
+/decl/stack_recipe/bricks/fire_source/kiln
 	result_type                 = /obj/structure/fire_source/kiln
 
 /decl/stack_recipe/bricks/furniture
@@ -27,13 +39,6 @@
 	on_floor                   = TRUE
 	difficulty                 = MAT_VALUE_HARD_DIY
 	category                   = "furniture"
-
-/decl/stack_recipe/bricks/furniture/planting_bed
-	result_type                = /obj/machinery/portable_atmospherics/hydroponics/soil
-	req_amount                 = 3 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
-
-/decl/stack_recipe/bricks/furniture/planting_bed/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
-	return list(new result_type(location))
 
 /decl/stack_recipe/bricks/fountain
 	result_type                = /obj/structure/fountain/mundane

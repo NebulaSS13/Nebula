@@ -985,7 +985,7 @@
 /turf/floor,
 /area/ship/trade/loading_bay)
 "cr" = (
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)
 "cX" = (
@@ -1008,7 +1008,7 @@
 /area/ship/trade/disused)
 "dN" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /turf/floor,
 /area/ship/trade/aft_port_underside_maint)
 "en" = (

@@ -40,5 +40,5 @@
 		/obj/item/wirecutters/clippers,
 		/obj/item/scanner/plant,
 		/obj/item/hatchet,
-		/obj/item/minihoe
+		/obj/item/tool/hoe/mini
 	)

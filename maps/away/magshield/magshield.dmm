@@ -2770,7 +2770,7 @@
 /turf/floor/tiled,
 /area/magshield/east)
 "ii" = (
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},

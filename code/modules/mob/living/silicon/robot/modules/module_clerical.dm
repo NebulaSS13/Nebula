@@ -28,7 +28,7 @@
 		/obj/item/flash,
 		/obj/item/gripper/service,
 		/obj/item/chems/glass/bucket,
-		/obj/item/minihoe,
+		/obj/item/tool/hoe/mini,
 		/obj/item/hatchet,
 		/obj/item/scanner/plant,
 		/obj/item/storage/plants,

@@ -7,7 +7,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	update_icon()
 
-/turf/proc/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
+/turf/proc/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
 	return FALSE
 
 /turf/proc/drop_diggable_resources()
@@ -23,24 +23,41 @@
 			LAZYADD(., new resource_type(src, get_material_type()))
 	clear_diggable_resources()
 
-/turf/proc/can_dig_pit(tool_hardness = MAT_VALUE_MALLEABLE)
-	return can_be_dug(tool_hardness) && !(locate(/obj/structure/pit) in src)
+// Procs for digging pits.
+/turf/proc/can_dig_pit(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
+	return can_be_dug(tool_hardness, using_tool) && !(locate(/obj/structure/pit) in src)
 
 /turf/proc/try_dig_pit(var/mob/user, var/obj/item/tool, using_tool = TOOL_SHOVEL)
 	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 5 SECONDS, set_cooldown = TRUE))
-		return dig_pit(tool?.material?.hardness)
+		return dig_pit(tool?.material?.hardness, using_tool)
 	return null
 
-/turf/proc/dig_pit(tool_hardness = MAT_VALUE_MALLEABLE)
-	return can_dig_pit(tool_hardness) && new /obj/structure/pit(src)
+/turf/proc/dig_pit(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
+	return can_dig_pit(tool_hardness, using_tool) && new /obj/structure/pit(src)
 
-/turf/proc/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
-	return FALSE
+// Procs for digging farms.
+/turf/proc/can_dig_farm(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
+	return get_plant_growth_rate() > 0 && can_be_dug(tool_hardness, using_tool) && !(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in src)
 
-/turf/proc/try_dig_trench(mob/user, obj/item/tool, max_diggable_hardness = MAT_VALUE_FLEXIBLE, using_tool = TOOL_SHOVEL)
+/turf/proc/try_dig_farm(mob/user, obj/item/tool, using_tool = TOOL_HOE)
+	var/decl/material/material = get_material()
+	if(!material?.tillable)
+		return
+	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 5 SECONDS, set_cooldown = TRUE, check_skill = SKILL_BOTANY))
+		return dig_farm(tool?.material?.hardness, using_tool)
+	return null
+
+/turf/proc/dig_farm(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
+	return can_dig_farm(tool_hardness, using_tool) && new /obj/machinery/portable_atmospherics/hydroponics/soil(src)
+
+// Proc for digging trenches.
+/turf/proc/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
+	return can_be_dug(tool_hardness, using_tool) && get_physical_height() > -(FLUID_DEEP)
+
+/turf/proc/try_dig_trench(mob/user, obj/item/tool, using_tool = TOOL_SHOVEL)
 	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 2.5 SECONDS, set_cooldown = TRUE))
-		return dig_trench(tool?.material?.hardness, max_diggable_hardness)
+		return dig_trench(tool?.material?.hardness, using_tool)
 	return null
 
-/turf/proc/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, max_diggable_hardness = MAT_VALUE_FLEXIBLE)
+/turf/proc/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
 	return FALSE

@@ -3650,6 +3650,7 @@
 #include "code\modules\tools\components\recipes.dm"
 #include "code\modules\tools\subtypes\drills.dm"
 #include "code\modules\tools\subtypes\hammers.dm"
+#include "code\modules\tools\subtypes\hoes.dm"
 #include "code\modules\tools\subtypes\pickaxes.dm"
 #include "code\modules\tools\subtypes\power_tools.dm"
 #include "code\modules\tools\subtypes\shovel.dm"

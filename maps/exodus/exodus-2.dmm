@@ -6995,7 +6995,7 @@
 /area/exodus/maintenance/dormitory)
 "aoI" = (
 /obj/structure/table,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/prison)
 "aoJ" = (
@@ -20402,7 +20402,7 @@
 /area/exodus/crew_quarters/kitchen)
 "aQX" = (
 /obj/item/hatchet,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /obj/effect/floor_decal/corner/lime{
 	dir = 9
 	},
@@ -20448,7 +20448,7 @@
 /area/exodus/hydroponics)
 "aRf" = (
 /obj/structure/table,
-/obj/item/minihoe,
+/obj/item/tool/hoe/mini,
 /obj/item/hatchet,
 /turf/floor/tiled/steel_grid,
 /area/exodus/hydroponics)

@@ -10,6 +10,9 @@
 	material = /decl/material/solid/sand
 	is_fundament_turf = TRUE
 
+/turf/floor/natural/sand/get_plant_growth_rate()
+	return 0.5
+
 /turf/floor/natural/sand/drop_diggable_resources()
 	if(get_physical_height() >= -(FLUID_DEEP) && prob(15))
 		new /obj/item/rock/flint(src)

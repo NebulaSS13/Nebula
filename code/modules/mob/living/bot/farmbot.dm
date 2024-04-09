@@ -231,7 +231,7 @@
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(. && my_turf)
-		new /obj/item/minihoe(my_turf)
+		new /obj/item/tool/hoe/mini(my_turf)
 		new /obj/item/chems/glass/bucket(my_turf)
 		new /obj/item/assembly/prox_sensor(my_turf)
 		new /obj/item/scanner/plant(my_turf)

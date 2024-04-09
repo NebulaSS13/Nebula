@@ -1,0 +1,1 @@
+/obj/item/minihoe/@SUBTYPES : /obj/item/tool/hoe/mini/@SUBTYPES{@OLD}

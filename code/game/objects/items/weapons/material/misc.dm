@@ -108,22 +108,6 @@
 	desc = "A fine example of a machete, with a polished blade, wooden handle and a leather cord loop."
 	icon = 'icons/obj/items/weapon/machetes/machete_dx.dmi'
 
-/obj/item/minihoe // -- Numbers
-	name = "mini hoe"
-	desc = "It's used for removing weeds or scratching your back."
-	icon = 'icons/obj/items/tool/hoe.dmi'
-	icon_state = "hoe"
-	item_state = "hoe"
-	material_force_multiplier = 0.25 // 5 with weight 20 (steel)
-	thrown_material_force_multiplier = 0.25
-	w_class = ITEM_SIZE_SMALL
-	attack_verb = list("slashed", "sliced", "cut", "clawed")
-	material = /decl/material/solid/metal/steel
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-
-/obj/item/minihoe/unbreakable
-	max_health = ITEM_HEALTH_NO_DAMAGE
-
 /obj/item/scythe
 	name = "scythe"
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
