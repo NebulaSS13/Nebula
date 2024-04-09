@@ -1,0 +1,5 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Farm plots are now dug rather than crafted.}
+  - {tweak: Various agriculture changes! Check the PR for more details.}
+delete-after: true
