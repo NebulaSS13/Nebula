@@ -19,7 +19,7 @@
 		return res
 
 /datum/event/radiation_storm/announce()
-	global.using_map.radiation_detected_announcement()
+	global.using_map.radiation_detected_announcement(affecting_z = affecting_z)
 
 /datum/event/radiation_storm/start()
 	..()
