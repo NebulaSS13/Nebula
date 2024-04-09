@@ -118,6 +118,7 @@
 	fruit_descriptor = "astringent"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antitoxins"
+	var/antitoxin_strength = 1 // effect multiplier
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
 		/decl/material/liquid/zombiepowder
@@ -125,11 +126,11 @@
 
 /decl/material/liquid/antitoxins/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(remove_generic)
-		ADJ_STATUS(M, STAT_DROWSY, -6 * removed)
-		M.adjust_hallucination(-9 * removed)
+		ADJ_STATUS(M, STAT_DROWSY, -6 * removed * antitoxin_strength)
+		M.adjust_hallucination(-9 * removed * antitoxin_strength)
 		M.add_chemical_effect(CE_ANTITOX, 1)
 
-	var/removing = (4 * removed)
+	var/removing = (4 * removed * antitoxin_strength)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	for(var/R in ingested?.reagent_volumes)
 		var/decl/material/chem = GET_DECL(R)

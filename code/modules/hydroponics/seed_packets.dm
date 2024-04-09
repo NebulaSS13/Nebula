@@ -327,3 +327,18 @@
 
 /obj/item/seeds/cotton
 	seed = "cotton"
+
+/obj/item/seeds/yarrow
+	seed = "yarrow"
+
+/obj/item/seeds/aloe
+	seed = "aloe"
+
+/obj/item/seeds/ginseng
+	seed = "ginseng"
+
+/obj/item/seeds/valerian
+	seed = "valerian"
+
+/obj/item/seeds/foxglove
+	seed = "foxglove"
