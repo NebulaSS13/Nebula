@@ -65,7 +65,7 @@
 		lay_out()
 		return TRUE
 	if(user.a_intent != I_HURT)
-		return use_on_mob(user, user, user.get_target_zone())
+		return use_on_mob(user, user)
 	return ..()
 
 /obj/item/towel/random/Initialize()
