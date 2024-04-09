@@ -138,6 +138,7 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/bolt
+	dug_drop_type = /obj/item/stack/material/bolt
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
@@ -166,6 +167,7 @@
 	wall_support_value = MAT_VALUE_LIGHT
 	value = 0.8
 	default_solid_form = /obj/item/stack/material/slab
+	dug_drop_type = /obj/item/stack/material/slab
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 	fishing_bait_value = 0.75
@@ -190,6 +192,7 @@
 	ignition_point = T0C+100
 	tans_to = /decl/material/solid/organic/plantmatter/grass/dry
 	tensile_strength = 0.2
+	dug_drop_type = /obj/item/stack/material/bundle
 
 /decl/material/solid/organic/plantmatter/grass/dry
 	name = "dried grass"

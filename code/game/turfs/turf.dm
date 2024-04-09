@@ -218,7 +218,8 @@
 
 	if(is_floor())
 
-		if(istype(W, /obj/item/stack/tile))
+		if(istype(W, /obj/item/stack/tile) && is_plating())
+			world << "aaa 1"
 			var/obj/item/stack/tile/T = W
 			T.try_build_turf(user, src)
 			return TRUE

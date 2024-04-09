@@ -283,14 +283,13 @@
 			update_icon()
 			update_matter()
 		return TRUE
-	else
-		if(get_amount() < used)
-			return FALSE
-		for(var/i = 1 to charge_costs.len)
-			var/datum/matter_synth/S = synths[i]
-			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
-		update_icon()
-		return TRUE
+	if(get_amount() < used)
+		return FALSE
+	for(var/i = 1 to charge_costs.len)
+		var/datum/matter_synth/S = synths[i]
+		S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
+	update_icon()
+	return TRUE
 
 /obj/item/stack/proc/on_used_last()
 	qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer

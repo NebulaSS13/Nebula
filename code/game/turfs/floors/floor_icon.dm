@@ -70,21 +70,12 @@
 
 	if(update_neighbors)
 		for(var/turf/floor/F in orange(src, 1))
-			F.queue_ao(FALSE)
+			F.queue_ao()
 			F.queue_icon_update()
-
 
 /turf/floor/proc/update_floor_icon(update_neighbors)
 	if(istype(flooring))
 		flooring.update_turf_icon(src)
-		return
-	// Set initial icon and strings.
-	SetName(initial(name))
-	desc       = initial(desc)
-	icon       = initial(icon)
-	icon_state = initial(icon_state)
-	color      = initial(color)
-	flooring_override = null
 
 /turf/floor/proc/is_floor_broken()
 	return !isnull(_floor_broken) && (!flooring || (flooring.flags & TURF_CAN_BREAK))
