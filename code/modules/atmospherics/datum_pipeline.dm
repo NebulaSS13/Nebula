@@ -167,23 +167,14 @@
 	if(!isturf(target))
 		return
 
-	var/datum/gas_mixture/air_sample = air.remove_ratio(mingle_volume/air.volume)
-	air_sample.volume = mingle_volume
+	var/datum/gas_mixture/air_sample = air.remove_volume(mingle_volume)
 
 	if(target.zone)
-		//Have to consider preservation of group statuses
-		var/datum/gas_mixture/turf_copy = new
-
-		turf_copy.copy_from(target.zone.air)
-		turf_copy.volume = target.zone.air.volume //Copy a good representation of the turf from parent group
-
-		equalize_gases(list(air_sample, turf_copy))
+		//Copy a good representation of the turf from parent group
+		var/datum/gas_mixture/turf_sample = target.zone.air.remove_volume(CELL_VOLUME)
+		equalize_gases(list(air_sample, turf_sample))
 		air.merge(air_sample)
-
-		turf_copy.subtract(target.zone.air)
-
-		target.zone.air.merge(turf_copy)
-
+		target.assume_air(turf_sample)
 	else
 		var/datum/gas_mixture/turf_air = target.return_air()
 

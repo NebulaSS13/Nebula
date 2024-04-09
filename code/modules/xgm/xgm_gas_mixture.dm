@@ -404,24 +404,6 @@
 			if(new_alpha != O.alpha)
 				O.update_alpha_animation(new_alpha)
 
-//Simpler version of merge(), adjusts gas amounts directly and doesn't account for temperature or group_multiplier.
-/datum/gas_mixture/proc/add(datum/gas_mixture/right_side)
-	for(var/g in right_side.gas)
-		gas[g] += right_side.gas[g]
-
-	update_values()
-	return 1
-
-
-//Simpler version of remove(), adjusts gas amounts directly and doesn't account for group_multiplier.
-/datum/gas_mixture/proc/subtract(datum/gas_mixture/right_side)
-	for(var/g in right_side.gas)
-		gas[g] -= right_side.gas[g]
-
-	update_values()
-	return 1
-
-
 //Multiply all gas amounts by a factor.
 /datum/gas_mixture/proc/multiply(factor)
 	for(var/g in gas)
