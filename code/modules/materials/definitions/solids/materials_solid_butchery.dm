@@ -1,11 +1,12 @@
 /decl/material/solid/organic/meat
 	name = "meat"
+	codex_name = "animal protein"
 	uid = "solid_meat"
+	taste_description = "umami"
 	color = "#c03b2a"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
 	conductive = 1
-	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	integrity = 60
 	hardness = MAT_VALUE_SOFT
@@ -21,25 +22,32 @@
 	fishing_bait_value = 1
 
 /decl/material/solid/organic/meat/egg
-	name = "egg"
+	name = "egg yolk"
+	codex_name = "egg yolk"
+	taste_description = "egg"
+	color = "#ffffaa"
 	uid = "solid_egg"
-	color = "#f8f7b4"
-
-/decl/material/solid/organic/meat/gut
-	name = "gut"
-	uid = "solid_gut"
-	color = "#ffd6d6"
-	tans_to = /decl/material/solid/organic/leather/gut
+	melting_point = 273
+	boiling_point = 373
 
 /decl/material/solid/organic/meat/fish
 	name  = "fish meat"
+	codex_name = "fish protein"
 	uid = "solid_meat_fish"
 	color = "#ff9b9b"
 
 /decl/material/solid/organic/meat/chicken
 	name  = "chicken meat"
+	codex_name = "chicken protein"
 	uid = "solid_meat_chicken"
 	color = "#e98a8a"
+
+/decl/material/solid/organic/meat/gut
+	name = "gut"
+	codex_name = null
+	uid = "solid_gut"
+	color = "#ffd6d6"
+	tans_to = /decl/material/solid/organic/leather/gut
 
 /decl/material/solid/organic/skin
 	name = "skin"
@@ -64,6 +72,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	fishing_bait_value = 0.75
 	tans_to = /decl/material/solid/organic/leather
+	compost_value = 0.8
 
 /decl/material/solid/organic/skin/lizard
 	name = "lizardskin"
@@ -187,6 +196,7 @@
 	default_solid_form = /obj/item/stack/material/bone
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
+	compost_value = 0.5
 
 // Stub for earrings. TODO: put it in clams
 /decl/material/solid/organic/bone/pearl

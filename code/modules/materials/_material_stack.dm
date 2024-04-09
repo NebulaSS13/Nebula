@@ -51,7 +51,7 @@
 	update_icon()
 
 /obj/item/stack/material/get_codex_value()
-	return (material && !material.hidden_from_codex) ? "[lowertext(material.codex_name)] (substance)" : ..()
+	return (material && !material.hidden_from_codex) ? "[lowertext(material.codex_name || material.name)] (substance)" : ..()
 
 /obj/item/stack/material/get_reinforced_material()
 	return reinf_material

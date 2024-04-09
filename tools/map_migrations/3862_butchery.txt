@@ -1,0 +1,2 @@
+/obj/item/chems/food/fish/@SUBTYPES : /obj/item/chems/food/butchery/meat/fish/@SUBTYPES{@OLD}
+/obj/item/chems/food/meat/@SUBTYPES : /obj/item/chems/food/butchery/meat/@SUBTYPES{@OLD}
