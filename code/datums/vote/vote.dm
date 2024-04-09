@@ -22,7 +22,6 @@
 	var/win_x = 450
 	var/win_y = 740                // Vote window size.
 
-	var/show_leading = 0           // Colours leading choice based on votes count.
 	var/manual_allowed = 1         // Whether humans can start it.
 
 	var/list/vote_start_sounds = list(

@@ -127,12 +127,6 @@
 
 		user.visible_message("[usr] draws back the string of [src]!",SPAN_NOTICE("You continue drawing back the string of [src]!"))
 
-/obj/item/gun/launcher/crossbow/proc/increase_tension(var/mob/user)
-
-	if(!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
-		return
-
-
 /obj/item/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/rcd))

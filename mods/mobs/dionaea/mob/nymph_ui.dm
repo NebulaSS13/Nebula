@@ -10,9 +10,6 @@
 		intent = I_DISARM
 		icon_state = "intent_help"
 
-/datum/hud/diona_nymph
-	var/obj/screen/diona_held/held
-
 /decl/ui_style/diona
 	name = "Diona"
 	restricted = TRUE

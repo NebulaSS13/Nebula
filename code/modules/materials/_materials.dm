@@ -503,10 +503,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 
-// Snowflakey, only checked for alien doors at the moment.
-/decl/material/proc/can_open_material_door(var/mob/living/user)
-	return 1
-
 // Currently used for weapons and objects made of uranium to irradiate things.
 /decl/material/proc/products_need_process()
 	return (radioactivity>0) //todo
