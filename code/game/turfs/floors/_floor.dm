@@ -102,6 +102,7 @@
 	icon_state = base_icon_state
 	color = base_color
 	layer = PLATING_LAYER
+	world << "[icon], [icon_state]"
 
 	if(flooring)
 		flooring.on_remove()

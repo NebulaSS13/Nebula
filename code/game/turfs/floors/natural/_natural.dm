@@ -104,7 +104,7 @@
 	return
 
 /turf/floor/natural/is_plating()
-	return !density
+	return FALSE
 
 /turf/floor/natural/can_engrave()
 	return FALSE
