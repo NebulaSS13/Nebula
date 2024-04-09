@@ -14,6 +14,8 @@
 	)
 	zone_membership_candidate = TRUE
 
+	var/can_engrave = TRUE
+
 	// Damage to flooring.
 	// These are icon state suffixes, NOT booleans!
 	var/_floor_broken
@@ -102,7 +104,6 @@
 	icon_state = base_icon_state
 	color = base_color
 	layer = PLATING_LAYER
-	world << "[icon], [icon_state]"
 
 	if(flooring)
 		flooring.on_remove()
@@ -129,7 +130,7 @@
 		update_icon(1)
 
 /turf/floor/can_engrave()
-	return (!flooring || flooring.can_engrave)
+	return flooring ? flooring.can_engrave : can_engrave
 
 /turf/floor/shuttle_ceiling
 	name = "hull plating"

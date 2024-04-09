@@ -26,8 +26,6 @@
 
 /obj/item/stack/tile/proc/try_build_turf(var/mob/user, var/turf/target)
 
-	world << "aaa 2"
-
 	var/ladder = (locate(/obj/structure/ladder) in target)
 	if(ladder)
 		to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
@@ -38,9 +36,7 @@
 		to_chat(user, SPAN_WARNING("The tiles need some support, build a lattice first."))
 		return FALSE
 
-	world << "aaa 3"
 	if(use(1))
-		world << "aaa 4"
 		playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
 		target.ChangeTurf(replacement_turf_type, keep_air = TRUE)
 		qdel(lattice)
