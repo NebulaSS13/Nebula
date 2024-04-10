@@ -58,8 +58,8 @@
 				SPAN_DANGER("\The [src] suddenly crumbles away."),
 				SPAN_DANGER("\The [src] has disintegrated under your onslaught. Any secrets it was holding are long gone.")
 			)
-			qdel(src)
-			return
+			physically_destroyed()
+			return TRUE
 
 		if(prob(excavation_level))
 			//success
@@ -76,7 +76,7 @@
 					SPAN_DANGER("\The [src] suddenly crumbles away."),
 					SPAN_DANGER("\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.")
 				)
-			qdel(src)
+			physically_destroyed()
 		return TRUE
 
 	return ..()
