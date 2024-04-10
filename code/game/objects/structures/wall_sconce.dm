@@ -9,7 +9,7 @@
 	max_health          = 100
 	w_class             = ITEM_SIZE_LARGE
 
-/obj/item/wall_sconce/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/wall_sconce/use_on_mob(mob/living/target, mob/living/user, var/target_zone)
 	return FALSE
 
 /obj/item/wall_sconce/afterattack(var/atom/A, var/mob/user, var/proximity)

@@ -9,7 +9,7 @@ item/resolve_attackby() calls the target atom's attackby() proc.
 
 Mobs:
 
-mob/living/attackby() after checking for surgery, calls the item's attack() proc.
+mob/living/attackby() after checking for surgery, calls the item's use_on_mob() proc.
 item/use_on_mob() generates attack logs, sets click cooldown and calls the mob's attacked_with_item() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
 mob/attacked_with_item() should then do mob-type specific stuff (like determining hit/miss, handling shields, etc) and then possibly call the item's apply_hit_effect() proc to actually apply the effects of being hit.
 
@@ -24,7 +24,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
 	return (tool?.handle_physical_manipulation(user)) || FALSE
 
-//I would prefer to rename this to attack(), but that would involve touching hundreds of files.
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)

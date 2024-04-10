@@ -131,7 +131,7 @@
 			admin_inject_log(user, target, src, contained_reagents, trans_amt)
 			update_name()
 		return TRUE
-	
+
 	return ..()
 
 /obj/item/chems/glass/rag/afterattack(atom/A, mob/user, proximity)
@@ -151,7 +151,7 @@
 	if(!on_fire && istype(A) && (src in user))
 		if(ATOM_IS_OPEN_CONTAINER(A) && !(A in user))
 			remove_contents(user, A)
-		else if(!ismob(A)) //mobs are handled in attack() - this prevents us from wiping down people while smothering them.
+		else if(!ismob(A)) //mobs are handled in use_on_mob() - this prevents us from wiping down people while smothering them.
 			wipe_down(A, user)
 		return
 

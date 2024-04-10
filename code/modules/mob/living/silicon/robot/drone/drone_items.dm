@@ -188,7 +188,7 @@
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.forceMove(user)
 
-		//The force of the wrapped obj gets set to zero during the attack() and afterattack().
+		//The force of the wrapped obj gets set to zero during the use_on_mob() and afterattack().
 		var/force_holder = wrapped.force
 		wrapped.force = 0.0
 
