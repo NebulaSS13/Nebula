@@ -142,7 +142,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
-	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
+	var/shock_vulnerability = 1   // The lower, the thicker the skin and better the insulation.
 	var/species_flags = 0         // Various specific features.
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
 	// Move intents. Earlier in list == default for that type of movement.

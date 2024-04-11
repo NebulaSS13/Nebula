@@ -90,7 +90,7 @@ meteor_act
 	if (!def_zone)
 		return 1.0
 
-	var/siemens_coefficient = max(species.siemens_coefficient,0)
+	var/siemens_coefficient = max(species.get_shock_vulnerability(src), 0)
 	for(var/slot in global.standard_clothing_slots)
 		var/obj/item/clothing/C = get_equipped_item(slot)
 		if(istype(C) && (C.body_parts_covered & def_zone.body_part)) // Is that body part being targeted covered?
@@ -379,7 +379,7 @@ meteor_act
 
 	if(status_flags & GODMODE)	return 0	//godmode
 
-	if(species.siemens_coefficient == -1)
+	if(species.get_shock_vulnerability(src) == -1)
 		if(stored_shock_by_ref["\ref[src]"])
 			stored_shock_by_ref["\ref[src]"] += shock_damage
 		else

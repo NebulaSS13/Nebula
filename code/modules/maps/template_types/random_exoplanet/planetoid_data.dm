@@ -498,10 +498,10 @@
 	if(habitability_class == HABITABILITY_OKAY || habitability_class == HABITABILITY_IDEAL)
 		var/decl/species/S           = global.get_species_by_key(global.using_map.default_species)
 		var/breathed_min_pressure    = S.breath_pressure
-		var/safe_max_pressure        = S.hazard_high_pressure
-		var/safe_min_pressure        = S.hazard_low_pressure
-		var/comfortable_max_pressure = S.warning_high_pressure
-		var/comfortable_min_pressure = S.warning_low_pressure
+		var/safe_max_pressure        = S.get_hazard_high_pressure()
+		var/safe_min_pressure        = S.get_hazard_low_pressure()
+		var/comfortable_max_pressure = S.get_warning_high_pressure()
+		var/comfortable_min_pressure = S.get_warning_low_pressure()
 
 		//On ideal planets, clamp against the comfortability limit pressures, since it shouldn't hit any extremes
 		if(habitability_class == HABITABILITY_IDEAL)

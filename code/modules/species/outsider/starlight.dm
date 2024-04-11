@@ -86,7 +86,7 @@
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 	hunger_factor = 0
 	death_message = "dissolves into pure flames!"
 	breath_type = null

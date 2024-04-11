@@ -590,3 +590,6 @@ var/global/list/limbs_with_nails = list(
 			"descriptor" = nail_noun
 		)
 	return null
+
+/decl/bodytype/proc/get_movement_slowdown(var/mob/living/carbon/human/H)
+	return movement_slowdown

@@ -6,7 +6,7 @@
 
 	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_GROIN) // gets bodytype slowdown, which can be reset by set_bodytype
 	if(H)
-		tally += H.slowdown
+		tally += H.bodytype.get_movement_slowdown(src)
 
 	tally += species.handle_movement_delay_special(src)
 

@@ -39,7 +39,7 @@
 	)
 	cyborg_noun =             null
 
-	siemens_coefficient =     0
+	shock_vulnerability =     0
 	rarity_value =            6
 
 	age_descriptor = /datum/appearance_descriptor/age/adherent

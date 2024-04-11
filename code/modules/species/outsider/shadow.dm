@@ -25,7 +25,7 @@
 	available_bodytypes = list(/decl/bodytype/starlight/shadow)
 
 	unarmed_attacks = list(/decl/natural_attack/claws/strong, /decl/natural_attack/bite/sharp)
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 
 	blood_types = list(
 		/decl/blood_type/shadowstuff

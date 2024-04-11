@@ -28,6 +28,10 @@
 		/decl/emote/audible/vox_shriek
 	)
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/toggle_vox_pressure_seal
+	)
+
 	unarmed_attacks = list(
 		/decl/natural_attack/stomp,
 		/decl/natural_attack/kick,
@@ -59,9 +63,6 @@
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
-	warning_low_pressure = 50
-	hazard_low_pressure = 0
-
 	age_descriptor = /datum/appearance_descriptor/age/vox
 
 	preview_outfit = /decl/hierarchy/outfit/vox_raider
@@ -71,7 +72,7 @@
 
 	breath_type = /decl/material/gas/nitrogen
 	poison_types = list(/decl/material/gas/oxygen = TRUE)
-	siemens_coefficient = 0.2
+	shock_vulnerability = 0.2
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 
@@ -151,6 +152,9 @@
 		H.equip_to_slot_or_del(new /obj/item/storage/box/vox(H), BP_R_HAND)
 		H.set_internals(backpack)
 
+// Ideally this would all be on bodytype, but pressure is handled per-mob currently.
+var/global/list/vox_current_pressure_toggle = list()
+
 /decl/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped beyond recognition!\n")
@@ -168,3 +172,51 @@
 	key = "shriek"
 	emote_message_3p = "$USER$ SHRIEKS!"
 	emote_sound = 'mods/species/vox/sounds/shriek1.ogg'
+
+/decl/species/vox/get_warning_low_pressure(var/mob/living/carbon/human/H)
+	if(H && global.vox_current_pressure_toggle["\ref[H]"])
+		return 50
+	return ..()
+
+/decl/species/vox/get_hazard_low_pressure(var/mob/living/carbon/human/H)
+	if(H && global.vox_current_pressure_toggle["\ref[H]"])
+		return 0
+	return ..()
+
+/mob/living/carbon/human/proc/toggle_vox_pressure_seal()
+	set name = "Toggle Vox Pressure Seal"
+	set category = "Abilities"
+	set src = usr
+
+	if(!istype(species, /decl/species/vox))
+		verbs -= /mob/living/carbon/human/proc/toggle_vox_pressure_seal
+		return
+
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
+		to_chat(src, SPAN_WARNING("You are in no state to do that."))
+		return
+
+	var/decl/pronouns/G = get_pronouns()
+	visible_message(SPAN_NOTICE("\The [src] begins flexing and realigning [G.his] scaling..."))
+	if(!do_after(src, 2 SECONDS, src, FALSE))
+		visible_message(
+			SPAN_NOTICE("\The [src] ceases adjusting [G.his] scaling."),
+			self_message = SPAN_WARNING("You must remain still to seal or unseal your scaling."))
+		return
+
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
+		to_chat(src, SPAN_WARNING("You are in no state to do that."))
+		return
+
+	// TODO: maybe add cold and heat thresholds to this.
+	var/my_ref = "\ref[src]"
+	if((global.vox_current_pressure_toggle[my_ref] = !global.vox_current_pressure_toggle[my_ref]))
+		visible_message(
+			SPAN_NOTICE("\The [src]'s scaling flattens and smooths out."),
+			self_message = SPAN_NOTICE("You flatten your scaling and inflate internal bladders, protecting yourself against low pressure at the cost of dexterity.")
+		)
+	else
+		visible_message(
+			SPAN_NOTICE("\The [src]'s scaling bristles roughly."),
+			self_message = SPAN_NOTICE("You bristle your scaling and deflate your internal bladders, restoring mobility but leaving yourself vulnerable to low pressure.")
+		)

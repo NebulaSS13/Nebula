@@ -17,7 +17,7 @@
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
 	species_flags = SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 
 	meat_type = null
 	bone_material = null
