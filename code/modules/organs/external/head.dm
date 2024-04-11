@@ -29,6 +29,10 @@
 		if(eyes)
 			return eyes.get_special_overlay()
 
+// Let people with mouth slots pick things up.
+/obj/item/organ/external/head/get_manual_dexterity()
+	. = ..() | DEXTERITY_BASE
+
 /obj/item/organ/external/head/proc/get_eyes()
 	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
