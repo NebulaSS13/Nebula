@@ -54,6 +54,12 @@
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
+/turf/space/LateInitialize()
+	if(SSmapping.base_floor_area)
+		var/area/new_area = locate(SSmapping.base_floor_area) || new SSmapping.base_floor_area
+		ChangeArea(src, new_area)
+	ChangeTurf(SSmapping.base_floor_type, keep_air_below = TRUE)
+
 /turf/space/proc/toggle_transit(var/direction)
 	if(edge)
 		return
@@ -84,12 +90,6 @@
 			T.z_eventually_space = FALSE
 
 	return ..()
-
-/turf/space/LateInitialize()
-	if(SSmapping.base_floor_area)
-		var/area/new_area = locate(SSmapping.base_floor_area) || new SSmapping.base_floor_area
-		ChangeArea(src, new_area)
-	ChangeTurf(SSmapping.base_floor_type, keep_air_below = TRUE)
 
 /turf/space/attackby(obj/item/C, mob/user)
 
