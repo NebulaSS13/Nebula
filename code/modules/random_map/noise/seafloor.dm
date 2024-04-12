@@ -4,8 +4,8 @@
 	target_turf_type = /turf/floor/natural/seafloor/flooded
 
 /datum/random_map/noise/seafloor/replace_space
-	descriptor = "seafloor (replace space)"
-	target_turf_type = /turf/space
+	descriptor = "seafloor (replace)"
+	target_turf_type = TRUE
 
 /datum/random_map/noise/seafloor/replace_space/get_appropriate_path(var/value)
 	return /turf/floor/natural/seafloor/flooded

@@ -4,7 +4,7 @@
 
 /datum/random_map/noise/desert/replace_space
 	descriptor = "desert (replacement)"
-	target_turf_type = /turf/space
+	target_turf_type = TRUE
 
 /datum/random_map/noise/desert/get_map_char(var/value)
 	return "<font color='#[value][value][value][value][value][value]'>[pick(list(",",".","'","`"))]</font>"

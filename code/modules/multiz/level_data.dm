@@ -582,6 +582,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 
 /datum/level_data/unit_test
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
+	filler_turf = /turf/unsimulated/dark_filler
 
 /datum/level_data/overmap
 	name = "Sensor Display"
