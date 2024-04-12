@@ -375,3 +375,19 @@
 		if(composting_mat.compost_value)
 			return TRUE
 	return FALSE
+
+// Used to determine if something can be used as the basis of a mold.
+/obj/proc/get_mould_difficulty()
+	return SKILL_IMPOSSIBLE // length(matter) <= 1
+
+// Used to determine what a mold made from this item produces.
+/obj/proc/get_mould_product_type()
+	return type
+
+// Used to pass an associative list of data to the mold to pass to the product.
+/obj/proc/get_mould_metadata()
+	return
+
+// Called when passing the metadata back to the item.
+/obj/proc/take_mould_metadata(list/metadata)
+	return

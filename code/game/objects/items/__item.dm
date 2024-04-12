@@ -229,15 +229,16 @@
 	return FALSE
 
 /obj/item/examine(mob/user, distance)
-	var/desc_comp = "" //For "description composite"
-	desc_comp += "It is a [w_class_description()] item.<BR>"
+	
+	var/list/desc_comp = list()
+	desc_comp += "It is a [w_class_description()] item."
 
 	var/desc_damage = get_examined_damage_string()
 	if(length(desc_damage))
-		desc_comp += "[desc_damage]<BR>"
+		desc_comp += "[desc_damage]"
 
 	if(paint_color)
-		desc_comp += "\The [src] has been <font color='[paint_color]'>[paint_verb]</font>.<BR>"
+		desc_comp += "\The [src] has been <font color='[paint_color]'>[paint_verb]</font>."
 
 	var/added_header = FALSE
 	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON)
@@ -255,18 +256,17 @@
 
 			if(!added_header)
 				added_header = TRUE
-				desc_comp += "*--------*<BR>"
+				desc_comp += "*--------*"
 
 			for(var/decl/crafting_stage/initial_stage in available_recipes)
 				desc_comp += SPAN_NOTICE("With [available_recipes[initial_stage]], you could start making \a [initial_stage.descriptor] out of this.")
-				desc_comp += "<BR>"
-			desc_comp += "*--------*<BR>"
+			desc_comp += "*--------*"
 
 	if(distance <= 1 && has_extension(src, /datum/extension/loaded_cell))
 
 		if(!added_header)
 			added_header = TRUE
-			desc_comp += "*--------*<BR>"
+			desc_comp += "*--------*"
 
 		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
 		var/obj/item/cell/loaded_cell  = cell_loaded?.get_cell()
@@ -276,39 +276,37 @@
 		if(current_cell && current_cell != loaded_cell)
 			desc_comp += SPAN_NOTICE("\The [src] is using an external [current_cell.name] as a power supply.")
 		else
-			desc_comp += jointext(cell_loaded.get_examine_text(current_cell), "<BR>")
-		desc_comp += "<BR>*--------*<BR>"
+			desc_comp += cell_loaded.get_examine_text(current_cell)
+		desc_comp += "*--------*"
 
 	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
 
 		if(!added_header)
 			added_header = TRUE
-			desc_comp += "*--------*<BR>"
+			desc_comp += "*--------*"
 
 		if(origin_tech)
 			desc_comp += SPAN_NOTICE("Testing potentials:")
-			desc_comp += "<BR>"
 			var/list/techlvls = cached_json_decode(origin_tech)
 			for(var/T in techlvls)
 				var/decl/research_field/field = SSfabrication.get_research_field_by_id(T)
-				desc_comp += "Tech: Level [techlvls[T]] [field.name].<BR>"
+				desc_comp += "Tech: Level [techlvls[T]] [field.name]."
 		else
-			desc_comp += "No tech origins detected.<BR>"
+			desc_comp += "No tech origins detected."
 
 		if(LAZYLEN(matter))
 			desc_comp += SPAN_NOTICE("Extractable materials:")
-			desc_comp += "<BR>"
 			for(var/mat in matter)
 				var/decl/material/M = GET_DECL(mat)
-				desc_comp += "[capitalize(M.solid_name)]<BR>"
+				desc_comp += "[capitalize(M.solid_name)]"
 		else
-			desc_comp += SPAN_DANGER("No extractable materials detected.<BR>")
-		desc_comp += "*--------*<BR>"
+			desc_comp += SPAN_DANGER("No extractable materials detected.")
+		desc_comp += "*--------*"
 
 	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
-		desc_comp += "\The [src] is [get_dryness_text()].<BR>"
+		desc_comp += "\The [src] is [get_dryness_text()]."
 
-	return ..(user, distance, "", desc_comp)
+	return ..(user, distance, "", jointext(desc_comp, "<br/>"))
 
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
@@ -392,14 +390,16 @@
 		matter = null
 		material = null
 		qdel(src)
+	return . || TRUE
 
 /obj/item/attack_self(mob/user)
 	if(user.a_intent == I_HURT && istype(material))
 		var/list/results = squash_item(skip_qdel = TRUE)
-		if(length(results) && user.try_unequip(src, user.loc))
+		if(results && user.try_unequip(src, user.loc))
 			user.visible_message(SPAN_DANGER("\The [user] squashes \the [src] into a lump."))
-			for(var/obj/item/thing in results)
-				user.put_in_hands(thing)
+			if(islist(results))
+				for(var/obj/item/thing in results)
+					user.put_in_hands(thing)
 			matter = null
 			material = null
 			qdel(src)

@@ -47,3 +47,23 @@
 	name_plural                 = "small lumps"
 	result_type                 = /obj/item/stack/material/lump
 	test_result_type            = /obj/item/stack/material/lump/clay
+
+/decl/stack_recipe/soft/crucible
+	result_type = /obj/item/chems/crucible
+
+/decl/stack_recipe/soft/mould
+	name = "mould, blank"
+	result_type = /obj/item/chems/mould
+	category = "moulds"
+
+/decl/stack_recipe/soft/mould/crucible
+	name = "mould, crucible"
+	result_type = /obj/item/chems/mould/crucible
+
+/decl/stack_recipe/soft/mould/rod
+	name = "mould, rod"
+	result_type = /obj/item/chems/mould/rod
+
+/decl/stack_recipe/soft/mould/ingot
+	name = "mould, ingot"
+	result_type = /obj/item/chems/mould/ingot

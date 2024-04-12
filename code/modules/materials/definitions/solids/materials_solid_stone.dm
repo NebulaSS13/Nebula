@@ -58,7 +58,7 @@
 	uid = "solid_pottery"
 	lore_text = "A hard but brittle substance produced by firing clay in a kiln."
 	color = "#cd8f75"
-	melting_point = 1750 // Arbitrary, hotter than the kiln currently reaches.
+	melting_point = 2000 // Arbitrary, hotter than the kiln currently reaches.
 
 /decl/material/solid/stone/ceramic
 	name = "ceramic"

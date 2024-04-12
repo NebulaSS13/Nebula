@@ -5,6 +5,8 @@
 #define SKILL_PROF     5
 #define HAS_PERK       SKILL_NONE + 1
 
+#define SKILL_IMPOSSIBLE INFINITY
+
 #define SKILL_MIN      1 // Min skill value selectable
 #define SKILL_MAX      5 // Max skill value selectable
 #define SKILL_DEFAULT  4 //most mobs will default to this

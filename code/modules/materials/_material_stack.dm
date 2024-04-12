@@ -34,7 +34,7 @@
 
 	. = ..(mapload, amount, _material)
 	if(!istype(material))
-		log_warning("[src] ([x],[y],[z]) was deleted because it didn't have a valid material set('[material]')!")
+		PRINT_STACK_TRACE("[src] ([x],[y],[z]) was deleted because it didn't have a valid material set('[material]')!")
 		return INITIALIZE_HINT_QDEL
 
 	base_state = icon_state
