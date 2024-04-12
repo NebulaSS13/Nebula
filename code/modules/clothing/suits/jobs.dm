@@ -90,7 +90,7 @@
 		/obj/item/ammo_casing,
 		/obj/item/baton,
 		/obj/item/handcuffs,
-		/obj/item/storage/box/fancy/cigarettes,
+		/obj/item/box/fancy/cigarettes,
 		/obj/item/flame/fuelled/lighter,
 		/obj/item/taperecorder
 	)

@@ -1,3 +1,7 @@
+/// The number of worms influences the rate at which contents are decomposed into compost.
+var/global/const/COMPOST_WORM_EAT_AMOUNT = 50
+var/global/const/COMPOST_MAX_WORMS       = 10
+
 /obj/structure/reagent_dispensers/compost_bin
 	name                      = "compost bin"
 	desc                      = "A squat bin for decomposing organic material."
@@ -9,19 +13,20 @@
 	matter                    = null
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	wrenchable                = FALSE
-
-	/// The number of worms influences the rate at which contents are decomposed into compost.
-	var/worm_amount           = 0
-	var/const/WORM_EAT_AMOUNT = 50
-	var/const/MAX_WORMS       = 10
-	var/const/MAX_ITEMS       = 50
+	storage                   = /datum/storage/hopper/industrial/compost
 
 /obj/structure/reagent_dispensers/compost_bin/Initialize()
 	// Building one outside should give you some Free Worms:tm:.
 	// Station needs to add worms (when worms are in code).
 	var/turf/turf = get_turf(src)
 	if(istype(turf))
-		worm_amount = round(5 * turf.get_plant_growth_rate())
+		var/worms = round(5 * turf.get_plant_growth_rate())
+		if(worms)
+			for(var/i = 1 to worms)
+				var/obj/item/chems/food/worm/worm = new(src)
+				if(!storage.handle_item_insertion(null, worm))
+					qdel(worm)
+					break
 	. = ..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER // something seems to be unsetting this :(
 
@@ -34,7 +39,11 @@
 	. = ..()
 	if(distance <= 1)
 
-		switch(worm_amount)
+		var/worms = 0
+		for(var/obj/item/chems/food/worm/worm in get_stored_inventory())
+			worms++
+
+		switch(worms)
 			if(0)
 				to_chat(user, SPAN_WARNING("There are no worms in \the [src]."))
 			if(1)
@@ -46,40 +55,25 @@
 			else
 				to_chat(user, SPAN_NOTICE("A thriving worm colony wiggles around in \the [src]."))
 
-		var/composting = get_contained_external_atoms()
+		var/list/composting = list()
+		for(var/thing in get_stored_inventory())
+			if(!istype(thing, /obj/item/chems/food/worm))
+				composting += thing
+
 		if(length(composting))
 			to_chat(user, SPAN_NOTICE("[capitalize(english_list(composting, summarize = TRUE))] [length(composting) == 1 ? "is" : "are"] composting inside \the [src]."))
 		else
 			to_chat(user, SPAN_NOTICE("Nothing is composting within \the [src]."))
 
+/obj/structure/reagent_dispensers/compost_bin/Entered(var/atom/movable/AM, atom/old_loc)
+	. = ..()
+	if(!is_processing)
+		START_PROCESSING(SSobj, src)
+
 /obj/structure/reagent_dispensers/compost_bin/physically_destroyed()
 	dump_contents()
-	for(var/i = 1 to worm_amount)
-		new /obj/item/chems/food/worm(loc)
-	worm_amount = 0
 	if(reagents)
 		reagents.trans_to(loc, reagents.total_volume)
-	return ..()
-
-/obj/structure/reagent_dispensers/compost_bin/attack_hand(mob/user)
-
-	if(user.a_intent == I_HURT)
-		return ..()
-
-	if(length(get_contained_external_atoms()))
-		var/obj/item/removing = pick(get_contained_external_atoms())
-		removing.dropInto(loc)
-		user.put_in_hands(removing)
-		to_chat(user, SPAN_NOTICE("You fish \the [removing] out of \the [src]."))
-		return TRUE
-
-	if(worm_amount)
-		worm_amount--
-		var/obj/item/chems/food/worm/worm = new(loc)
-		user.put_in_hands(worm)
-		to_chat(user, SPAN_NOTICE("You fish \the [worm] out of \the [src]."))
-		return TRUE
-
 	return ..()
 
 /obj/structure/reagent_dispensers/compost_bin/attackby(obj/item/W, mob/user)
@@ -87,67 +81,51 @@
 	if(user.a_intent == I_HURT)
 		return ..()
 
-	if(istype(W, /obj/item/storage))
+	if(W.storage)
 
-		var/is_full = FALSE
-		var/transferred = 0
-		var/obj/item/storage/plantbag = W
-		for(var/obj/item/thing in plantbag.contents)
-			if(thing.is_compostable())
-				if(length(get_contained_external_atoms()) >= MAX_ITEMS)
-					to_chat(user, SPAN_WARNING("\The [src] is full. Give it some time to compost."))
-					is_full = TRUE
-					break
-				transferred++
-				plantbag.remove_from_storage(thing, src, TRUE)
+		var/emptied = FALSE
+		for(var/obj/item/O in W.get_stored_inventory())
+			if(storage.can_be_inserted(O))
+				W.storage.remove_from_storage(null, O, loc, skip_update = TRUE)
+				storage.handle_item_insertion(null, O, skip_update = TRUE)
+				emptied = TRUE
 
-		if(transferred)
-			plantbag.finish_bulk_removal()
-			to_chat(user, SPAN_NOTICE("You dump [transferred] item\s from \the [W] into \the [src]."))
-		else if(!is_full)
-			to_chat(user, SPAN_WARNING("Nothing in \the [W] is suitable for composting."))
-		return TRUE
-
-	if(istype(W, /obj/item/chems/food/worm))
-		if(worm_amount < MAX_WORMS)
-			if(user.try_unequip(W))
-				to_chat(user, SPAN_NOTICE("You drop \the [W] into \the [src]."))
-				worm_amount++
-				qdel(W)
-				if(!is_processing)
-					START_PROCESSING(SSobj, src)
-		else
-			to_chat(user, SPAN_WARNING("\The [src] is already at maximum worm capacity."))
-		return TRUE
-
-	if(W.is_compostable())
-		if(length(get_contained_external_atoms()) >= MAX_ITEMS)
-			to_chat(user, SPAN_WARNING("\The [src] is full. Give it some time to compost."))
-		else if(user.try_unequip(W, src))
-			to_chat(user, SPAN_NOTICE("You drop \the [W] into \the [src]."))
-			update_icon()
-			if(!is_processing)
-				START_PROCESSING(SSobj, src)
-		return TRUE
+		if(emptied)
+			W.storage.finish_bulk_removal()
+			storage.update_ui_after_item_insertion(user)
+			if(length(W.get_stored_inventory()))
+				to_chat(user, SPAN_NOTICE("You partially empty \the [W] into \the [src]'s hopper."))
+			else
+				to_chat(user, SPAN_NOTICE("You empty \the [W] into \the [src]'s hopper."))
+			W.update_icon()
+			return TRUE
 
 	return ..()
 
 /obj/structure/reagent_dispensers/compost_bin/Process()
+
+	var/worms = 0
+	var/list/current_contents = get_stored_inventory()
+	if(islist(current_contents))
+		current_contents = current_contents.Copy()
+
+	for(var/obj/item/chems/food/worm/worm in current_contents)
+		current_contents -= worm
+		worms++
+
 	// No worms means no processing.
-	if(worm_amount <= 0)
+	if(worms <= 0)
 		return PROCESS_KILL
 
 	// Worm-related tracking values.
 	var/worms_are_hungry  = TRUE
-	var/worm_eat_amount   = max(1, round(worm_amount * WORM_EAT_AMOUNT))
+	var/worm_eat_amount   = max(1, round(worms * COMPOST_WORM_EAT_AMOUNT))
 	var/worm_drink_amount = max(1, round(worm_eat_amount * REAGENT_UNITS_PER_MATERIAL_UNIT))
 
 	// Digest an item.
-	var/list/composting_items = get_contained_external_atoms()
-	if(length(composting_items))
+	if(length(current_contents))
 
-		var/obj/item/composting = pick(composting_items)
-		var/list/composting_matter = composting.get_contained_matter()
+		var/obj/item/composting = pick(current_contents)
 
 		if(composting.is_compostable())
 
@@ -183,6 +161,7 @@
 
 				var/obj/item/debris/scraps/remains = (locate() in contents) || new(src)
 				LAZYINITLIST(remains.matter)
+				var/list/composting_matter = composting.get_contained_matter()
 				for(var/mat in composting_matter)
 					remains.matter[mat] += composting_matter[mat]
 				UNSETEMPTY(remains.matter)
@@ -208,8 +187,10 @@
 		// Worms gotta eat...
 		if(worms_are_hungry)
 			reagents.remove_reagent(/decl/material/liquid/fertilizer/compost, worm_drink_amount * 0.025)
-		if(worm_amount < MAX_WORMS && prob(1))
-			worm_amount++
+		if(prob(1) && worms < COMPOST_MAX_WORMS)
+			var/obj/item/chems/food/worm/worm = new(src)
+			if(!storage.handle_item_insertion(null, worm))
+				qdel(worm)
 
 /obj/structure/reagent_dispensers/compost_bin/get_alt_interactions(var/mob/user)
 	. = ..()

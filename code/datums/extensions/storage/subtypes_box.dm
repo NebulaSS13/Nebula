@@ -115,5 +115,5 @@
 /datum/storage/box/candles/scented
 	max_storage_space = 5
 
-/datum/storage/box/incense
+/datum/storage/box/candles/incense
 	max_storage_space = 9

@@ -26,7 +26,8 @@
 	. = ..()
 
 /obj/item/box/fancy/cigarettes/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(!ismob(M))
+
+	if(!ismob(target))
 		return
 
 	if(target == user && user.get_target_zone() == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(slot_wear_mask_str))

@@ -4180,7 +4180,7 @@
 "hz" = (
 /obj/machinery/vending/cigarette{
 	dir = 1;
-	products = list(/obj/item/storage/box/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/fuelled/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
+	products = list(/obj/item/box/fancy/cigarettes=10,/obj/item/box/matches=10,/obj/item/flame/fuelled/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/floor/wood/walnut,
 /area/liberia/bar)

@@ -49,7 +49,10 @@
 
 /datum/storage/med_pouch/open(mob/user)
 	if(!opened)
-		user.visible_message("<span class='notice'>\The [user] tears open [src], breaking the vacuum seal!</span>", "<span class='notice'>You tear open [src], breaking the vacuum seal!</span>")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] tears open \the [holder], breaking the vacuum seal!"),
+			SPAN_NOTICE("You tear open \the [holder], breaking the vacuum seal!")
+		)
 	. = ..()
 
 /datum/storage/cigpapers
@@ -88,6 +91,21 @@
 /datum/storage/hopper/industrial
 	max_w_class       = ITEM_SIZE_GARGANTUAN
 	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_NORMAL)
+
+/datum/storage/hopper/industrial/compost
+	can_hold = list(/obj/item)
+	expected_type = /obj/structure/reagent_dispensers/compost_bin
+
+/datum/storage/hopper/industrial/compost/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
+	. = ..()
+	if(!.)
+		return
+	if(istype(W, /obj/item/chems/food/worm) && istype(holder, /obj/structure/reagent_dispensers/compost_bin))
+		var/worms = 0
+		for(var/obj/item/chems/food/worm/worm in get_contents())
+			worms++
+		return worms < COMPOST_MAX_WORMS
+	return W.is_compostable()
 
 /datum/storage/photo_album
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box

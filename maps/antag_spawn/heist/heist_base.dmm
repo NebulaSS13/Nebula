@@ -856,7 +856,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	markup = 0;
-	products = list(/obj/item/storage/box/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/fuelled/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/box/fancy/cigarettes = 10, /obj/item/box/matches = 10, /obj/item/flame/fuelled/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
