@@ -18,7 +18,7 @@
 	scan_data = breath_scan_action(A, user, src, mode)
 	playsound(src, 'sound/effects/fastbeep.ogg', 20)
 
-/proc/breath_scan_action(mob/living/carbon/target, mob/living/user, obj/scanner, var/verbose)
+/proc/breath_scan_action(mob/living/target, mob/living/user, obj/scanner, var/verbose)
 	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS) || !istype(target))
 		return
 
@@ -27,7 +27,7 @@
 	to_chat(user, .)
 	to_chat(user, "<hr>")
 
-/proc/breath_scan_results(var/mob/living/carbon/C, var/verbose, var/skill_level = SKILL_DEFAULT)
+/proc/breath_scan_results(var/mob/living/C, var/verbose, var/skill_level = SKILL_DEFAULT)
 	. = list()
 	var/header = list()
 	var/b

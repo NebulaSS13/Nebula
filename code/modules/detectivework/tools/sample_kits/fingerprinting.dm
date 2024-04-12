@@ -72,10 +72,11 @@
 			return TRUE
 	to_chat(user, SPAN_WARNING("They don't have any hands."))
 
-/obj/item/forensics/sample/print/attack(var/mob/living/carbon/human/H, var/mob/user)
-	if(!istype(H))
+/obj/item/forensics/sample/print/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(!ishuman(target))
 		return ..()
 
+	var/mob/living/carbon/human/H = target
 	if(!can_take_print_from(H, user))
 		return 1
 

@@ -42,20 +42,20 @@
 		if(is_processing)
 			STOP_PROCESSING(SSobj, src)
 
-/obj/item/towel/attack(mob/living/M, mob/living/user, var/target_zone, animate = TRUE)
+/obj/item/towel/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(user.a_intent == I_HURT)
 		return ..()
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/reagent_space = reagents.maximum_volume - reagents.total_volume
 	if(reagent_space <= 0)
-		to_chat(user, SPAN_WARNING("\The [src] is too saturated to dry [user == M ? "yourself" : "\the [M]"] off effectively."))
+		to_chat(user, SPAN_WARNING("\The [src] is too saturated to dry [user == target ? "yourself" : "\the [target]"] off effectively."))
 	else
-		var/decl/pronouns/G = M.get_pronouns()
-		var/datum/reagents/touching_reagents = M.get_contact_reagents()
+		var/decl/pronouns/G = target.get_pronouns()
+		var/datum/reagents/touching_reagents = target.get_contact_reagents()
 		if(!touching_reagents?.total_volume)
-			to_chat(user, SPAN_WARNING("[user == M ? "You are" : "\The [M] [G.is]"] already dry."))
+			to_chat(user, SPAN_WARNING("[user == target ? "You are" : "\The [target] [G.is]"] already dry."))
 		else
-			user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to towel [user == M ? G.self : "\the [M]"] dry."))
+			user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to towel [user == target ? G.self : "\the [target]"] dry."))
 			touching_reagents.trans_to(src, min(touching_reagents.total_volume, reagent_space))
 			playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 	return TRUE
@@ -65,7 +65,7 @@
 		lay_out()
 		return TRUE
 	if(user.a_intent != I_HURT)
-		return attack(user, user, user.get_target_zone())
+		return use_on_mob(user, user)
 	return ..()
 
 /obj/item/towel/random/Initialize()

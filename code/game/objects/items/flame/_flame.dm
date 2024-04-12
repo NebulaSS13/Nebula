@@ -97,17 +97,17 @@
 
 	return TRUE
 
-/obj/item/flame/attack(mob/living/M, mob/living/user)
+/obj/item/flame/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!istype(M) || user.a_intent == I_HURT || !lit || user.get_target_zone() != BP_MOUTH)
+	if(!istype(target) || user.a_intent == I_HURT || !lit || user.get_target_zone() != BP_MOUTH)
 		return ..()
 
-	var/obj/item/clothing/mask/smokable/cigarette/cig = M.get_equipped_item(slot_wear_mask_str)
+	var/obj/item/clothing/mask/smokable/cigarette/cig = target.get_equipped_item(slot_wear_mask_str)
 	if(istype(cig))
-		if(M == user)
+		if(target == user)
 			cig.attackby(src, user)
 		else
-			cig.light(SPAN_NOTICE("\The [user] holds \the [src] out for \the [M], and lights \the [cig]."))
+			cig.light(SPAN_NOTICE("\The [user] holds \the [src] out for \the [target], and lights \the [cig]."))
 		return TRUE
 
 	return ..()

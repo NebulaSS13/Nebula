@@ -97,7 +97,7 @@
 		playsound(loc, phrase_sound, phrase_volume, phrase_vary)
 	return TRUE
 
-/obj/item/toy/plushie/attack(mob/M, mob/user)
+/obj/item/toy/plushie/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	. = ..()
 	if(. && phrase_sound)
 		playsound(src, phrase_sound, phrase_volume, phrase_vary)

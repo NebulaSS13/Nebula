@@ -42,13 +42,13 @@
 	scatter_contents()
 	. = ..()
 
-/obj/item/storage/tray/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/storage/tray/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50)) // There is a better way to do this but I'll be damned if I'm the one to fix it.
-		to_chat(user, SPAN_DANGER("You accidentally slam yourself with the [src]!"))
+		to_chat(user, SPAN_DANGER("You accidentally slam yourself with \the [src]!"))
 		SET_STATUS_MAX(user, STAT_WEAK, 1)
 		user.take_organ_damage(2)
 		if(prob(50))
-			playsound(M, hitsound, 50, 1)
+			playsound(target, hitsound, 50, 1)
 		. = TRUE
 	else
 		. = ..()
@@ -158,7 +158,8 @@ TRAY TYPES GO HERE
 /obj/item/storage/tray/metal
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
-/obj/item/storage/tray/metal/attack(mob/living/carbon/M, mob/living/carbon/user) // So metal trays make the fun noise
+/obj/item/storage/tray/metal/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	// So metal trays make the fun noise
 	hitsound = pick('sound/items/trayhit1.ogg','sound/items/trayhit2.ogg')
 	. = ..()
 

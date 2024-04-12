@@ -99,10 +99,13 @@
 	..()
 
 //hit other people with it
-/obj/item/holowarrant/attack(mob/living/carbon/M, mob/living/carbon/user)
-	user.visible_message("<span class='notice'>[user] holds up a warrant projector and shows the contents to [M].</span>", \
-			"<span class='notice'>You show the warrant to [M].</span>")
-	M.examinate(src)
+/obj/item/holowarrant/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] holds up a warrant projector and shows the contents to \the [target]."),
+		SPAN_NOTICE("You show the warrant to \the [target].")
+	)
+	target.examinate(src)
+	return TRUE
 
 /obj/item/holowarrant/on_update_icon()
 	. = ..()

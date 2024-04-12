@@ -36,103 +36,114 @@
 		TOOL_SUTURES =  TOOL_QUALITY_BAD
 	))
 
-/obj/item/stack/tape_roll/duct_tape/attack(var/mob/living/carbon/human/H, var/mob/user)
-	if(!istype(H))
-		return
-	if(user.get_target_zone() == BP_EYES)
+/obj/item/stack/tape_roll/duct_tape/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-		if(!GET_EXTERNAL_ORGAN(H, BP_HEAD))
-			to_chat(user, SPAN_WARNING("\The [H] doesn't have a head."))
-			return
-		if(!H.check_has_eyes())
-			to_chat(user, SPAN_WARNING("\The [H] doesn't have any eyes."))
-			return
-		if(H.get_equipped_item(slot_glasses_str))
-			to_chat(user, SPAN_WARNING("\The [H] is already wearing something on their eyes."))
-			return
-
-		var/obj/item/head = H.get_equipped_item(slot_head_str)
-		if(head && (head.body_parts_covered & SLOT_FACE))
-			to_chat(user, SPAN_WARNING("Remove their [head] first."))
-			return
-
-		if(!can_use(2))
-			to_chat(user, SPAN_WARNING("There's not enough [plural_name] in your [src] to tape \the [H]'s eyes! You need at least 2 [plural_name]."))
-			return
-
-		user.visible_message(SPAN_WARNING("\The [user] begins taping over \the [H]'s eyes!"))
-		if(!do_mob(user, H, 30))
-			return
-
-		// Repeat failure checks.
-		if(!H || !src || !GET_EXTERNAL_ORGAN(H, BP_HEAD) || !H.check_has_eyes() || H.get_equipped_item(slot_glasses_str))
-			return
-		head = H.get_equipped_item(slot_head_str)
-		if(head && (head.body_parts_covered & SLOT_FACE))
-			return
-
-		use(2)
-		playsound(src, 'sound/effects/tape.ogg',25)
-		user.visible_message(SPAN_WARNING("\The [user] has taped up \the [H]'s eyes!"))
-		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses_str)
-		return TRUE
-
-	else if(user.get_target_zone() == BP_MOUTH || user.get_target_zone() == BP_HEAD)
-		if(!GET_EXTERNAL_ORGAN(H, BP_HEAD))
-			to_chat(user, SPAN_WARNING("\The [H] doesn't have a head."))
-			return
-		if(!H.check_has_mouth())
-			to_chat(user, SPAN_WARNING("\The [H] doesn't have a mouth."))
-			return
-		if(H.get_equipped_item(slot_wear_mask_str))
-			to_chat(user, SPAN_WARNING("\The [H] is already wearing a mask."))
-			return
-		var/obj/item/head = H.get_equipped_item(slot_head_str)
-		if(head && (head.body_parts_covered & SLOT_FACE))
-			to_chat(user, SPAN_WARNING("Remove their [head] first."))
-			return
-
-		if(!can_use(2))
-			to_chat(user, SPAN_WARNING("There's not enough [plural_name] in your [src] to tape \the [H]'s mouth! You need at least 2 [plural_name]."))
-			return
-
-		playsound(src, 'sound/effects/tape.ogg',25)
-		user.visible_message(SPAN_WARNING("\The [user] begins taping up \the [H]'s mouth!"))
-
-		if(!do_mob(user, H, 30))
-			return
-
-		// Repeat failure checks.
-		if(!H || !src || !GET_EXTERNAL_ORGAN(H, BP_HEAD) || !H.check_has_mouth() || H.get_equipped_item(slot_wear_mask_str))
-			return
-		head = H.get_equipped_item(slot_head_str)
-		if(head && (head.body_parts_covered & SLOT_FACE))
-			return
-
-		use(2)
-		playsound(src, 'sound/effects/tape.ogg',25)
-		user.visible_message(SPAN_WARNING("\The [user] has taped up \the [H]'s mouth!"))
-		H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), slot_wear_mask_str)
-		return TRUE
-
-	else if(user.get_target_zone() == BP_R_HAND || user.get_target_zone() == BP_L_HAND)
+	if(user.get_target_zone() == BP_R_HAND || user.get_target_zone() == BP_L_HAND)
 		if(!can_use(4))
-			to_chat(user, SPAN_WARNING("There's not enough [plural_name] in your [src] to tape \the [H]'s hands! You need at least 4 [plural_name]."))
-			return
+			to_chat(user, SPAN_WARNING("There's not enough [plural_name] in your [src] to tape \the [target]'s hands! You need at least 4 [plural_name]."))
+			return TRUE
 		use(4)
 		playsound(src, 'sound/effects/tape.ogg',25)
 		var/obj/item/handcuffs/cable/tape/T = new(user)
-		if(!T.place_handcuffs(H, user))
+		if(!T.place_handcuffs(target, user))
 			qdel(T)
 		return TRUE
 
-	else if(user.get_target_zone() == BP_CHEST)
-		var/obj/item/clothing/suit/space/suit = H.get_equipped_item(slot_wear_suit_str)
+	if(user.get_target_zone() == BP_CHEST)
+		var/obj/item/clothing/suit/space/suit = target.get_equipped_item(slot_wear_suit_str)
 		if(istype(suit))
 			suit.attackby(src, user)//everything is handled by attackby
 		else
-			to_chat(user, SPAN_WARNING("\The [H] isn't wearing a spacesuit for you to reseal."))
+			to_chat(user, SPAN_WARNING("\The [target] isn't wearing a spacesuit for you to reseal."))
 		return TRUE
+
+	if(!target?.should_have_organ(BP_HEAD))
+		return ..()
+
+	if(user.get_target_zone() == BP_EYES)
+
+		if(!GET_EXTERNAL_ORGAN(target, BP_HEAD))
+			to_chat(user, SPAN_WARNING("\The [target] doesn't have a head."))
+			return TRUE
+
+		if(!target.check_has_eyes())
+			to_chat(user, SPAN_WARNING("\The [target] doesn't have any eyes."))
+			return TRUE
+
+		if(target.get_equipped_item(slot_glasses_str))
+			to_chat(user, SPAN_WARNING("\The [target] is already wearing something on their eyes."))
+			return TRUE
+
+		var/obj/item/head = target.get_equipped_item(slot_head_str)
+		if(head && (head.body_parts_covered & SLOT_FACE))
+			to_chat(user, SPAN_WARNING("Remove their [head] first."))
+			return TRUE
+
+		if(!can_use(2))
+			to_chat(user, SPAN_WARNING("There's not enough [plural_name] in your [src] to tape \the [target]'s eyes! You need at least 2 [plural_name]."))
+			return TRUE
+
+		user.visible_message(SPAN_WARNING("\The [user] begins taping over \the [target]'s eyes!"))
+		if(!do_mob(user, target, 30))
+			return TRUE
+
+		// Repeat failure checks.
+		if(!target || !src || !GET_EXTERNAL_ORGAN(target, BP_HEAD) || !target.check_has_eyes() || target.get_equipped_item(slot_glasses_str))
+			return TRUE
+
+		head = target.get_equipped_item(slot_head_str)
+		if(head && (head.body_parts_covered & SLOT_FACE))
+			return TRUE
+
+		use(2)
+		playsound(src, 'sound/effects/tape.ogg',25)
+		user.visible_message(SPAN_WARNING("\The [user] has taped up \the [target]'s eyes!"))
+		target.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(target), slot_glasses_str)
+		return TRUE
+
+	if(user.get_target_zone() == BP_MOUTH || user.get_target_zone() == BP_HEAD)
+
+		if(!GET_EXTERNAL_ORGAN(target, BP_HEAD))
+			to_chat(user, SPAN_WARNING("\The [target] doesn't have a head."))
+			return TRUE
+
+		if(!target.check_has_mouth())
+			to_chat(user, SPAN_WARNING("\The [target] doesn't have a mouth."))
+			return TRUE
+
+		if(target.get_equipped_item(slot_wear_mask_str))
+			to_chat(user, SPAN_WARNING("\The [target] is already wearing a mask."))
+			return TRUE
+
+		var/obj/item/head = target.get_equipped_item(slot_head_str)
+		if(head && (head.body_parts_covered & SLOT_FACE))
+			to_chat(user, SPAN_WARNING("Remove their [head] first."))
+			return TRUE
+
+		if(!can_use(2))
+			to_chat(user, SPAN_WARNING("There's not enough [plural_name] in your [src] to tape \the [target]'s mouth! You need at least 2 [plural_name]."))
+			return TRUE
+
+		playsound(src, 'sound/effects/tape.ogg',25)
+		user.visible_message(SPAN_WARNING("\The [user] begins taping up \the [target]'s mouth!"))
+
+		if(!do_mob(user, target, 30))
+			return TRUE
+
+		// Repeat failure checks.
+		if(!target || !src || !GET_EXTERNAL_ORGAN(target, BP_HEAD) || !target.check_has_mouth() || target.get_equipped_item(slot_wear_mask_str))
+			return TRUE
+
+		head = target.get_equipped_item(slot_head_str)
+		if(head && (head.body_parts_covered & SLOT_FACE))
+			return TRUE
+
+		use(2)
+		playsound(src, 'sound/effects/tape.ogg',25)
+		user.visible_message(SPAN_WARNING("\The [user] has taped up \the [target]'s mouth!"))
+		target.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(target), slot_wear_mask_str)
+		return TRUE
+
 	return ..()
 
 /obj/item/stack/tape_roll/duct_tape/proc/stick(var/obj/item/W, mob/user)

@@ -57,21 +57,22 @@
 			user.visible_message("<span class='danger'>\The [user] shatters \the [src] with \the [I]!</span>")
 			shatter()
 
-/obj/item/soulstone/attack(var/mob/living/simple_animal/M, var/mob/user)
-	if(M == shade)
-		to_chat(user, "<span class='notice'>You recapture \the [M].</span>")
-		M.forceMove(src)
-		return
+/obj/item/soulstone/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(target == shade)
+		to_chat(user, SPAN_NOTICE("You recapture \the [target]."))
+		target.forceMove(src)
+		return TRUE
 	if(full == SOULSTONE_ESSENCE)
-		to_chat(user, "<span class='notice'>\The [src] is already full.</span>")
-		return
-	if(M.stat != DEAD && !M.is_asystole())
-		to_chat(user, "<span class='notice'>Kill or maim the victim first.</span>")
-		return
-	for(var/obj/item/W in M)
-		M.drop_from_inventory(W)
-	M.dust()
+		to_chat(user, SPAN_NOTICE("\The [src] is already full."))
+		return TRUE
+	if(target.stat != DEAD && !target.is_asystole())
+		to_chat(user, SPAN_NOTICE("Kill or maim the victim first."))
+		return TRUE
+	for(var/obj/item/thing in target)
+		target.drop_from_inventory(thing)
+	target.dust()
 	set_full(SOULSTONE_ESSENCE)
+	return TRUE
 
 /obj/item/soulstone/attack_self(var/mob/user)
 	if(full != SOULSTONE_ESSENCE) // No essence - no shade

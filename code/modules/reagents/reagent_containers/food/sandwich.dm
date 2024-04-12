@@ -84,19 +84,11 @@
 	var/obj/item/O = pick(contents)
 	to_chat(user, "<span class='warning'>You think you can see [O.name] in there.</span>")
 
-/obj/item/chems/food/csandwich/attack(mob/M, mob/user, def_zone)
-
-	var/obj/item/shard
-	for(var/obj/item/O in contents)
-		if(istype(O,/obj/item/shard))
-			shard = O
-			break
-
-	var/mob/living/H
-	if(isliving(M))
-		H = M
-
-	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
-		to_chat(H, "<span class='warning'>You lacerate your mouth on a [shard.name] in the sandwich!</span>")
-		H.take_damage(BRUTE, 5) //TODO: Target head if human.
-	..()
+/obj/item/chems/food/csandwich/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	var/obj/item/shard = locate() in get_contained_external_atoms() // grab early in case of qdele
+	. = ..()
+	if(. && target == user)
+		//This needs a check for feeding the food to other people, but that could be abusable.
+		if(shard) 
+			to_chat(target, SPAN_DANGER("You lacerate yourself on \a [shard] in \the [src]!"))
+			target.take_damage(BRUTE, 5) //TODO: Target head if human.

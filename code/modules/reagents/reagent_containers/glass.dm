@@ -64,9 +64,9 @@
 			atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 		update_icon()
 
-/obj/item/chems/glass/attack(mob/M, mob/user, def_zone)
+/obj/item/chems/glass/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
-		return	..()
+		return ..()
 	return FALSE
 
 /obj/item/chems/glass/afterattack(var/obj/target, var/mob/user, var/proximity)

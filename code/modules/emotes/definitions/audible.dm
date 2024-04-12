@@ -103,7 +103,7 @@
 		var/obj/item/organ/internal/lungs/lung = user.get_organ(BP_LUNGS)
 		. = lung?.active_breathing && !user.isSynthetic()
 
-/decl/emote/audible/cough/do_emote(var/mob/living/carbon/user, var/extra_params)
+/decl/emote/audible/cough/do_emote(var/mob/living/user, var/extra_params)
 	if(!istype(user))
 		to_chat(user, SPAN_WARNING("You are unable to cough."))
 		return

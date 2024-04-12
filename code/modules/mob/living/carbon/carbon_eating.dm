@@ -1,4 +1,4 @@
-/mob/living/carbon/can_eat_food_currently(obj/eating, mob/user, consumption_method)
+/mob/living/can_eat_food_currently(obj/eating, mob/user, consumption_method)
 	user = user || src
 	if(get_food_satiation(consumption_method) < get_max_nutrition())
 		return TRUE

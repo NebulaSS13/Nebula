@@ -40,7 +40,7 @@
 	. = ..()
 
 // Tossing a pizza around can have terrible effects...
-/obj/item/pizzabox/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/pizzabox/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	..()
 	return FALSE
 

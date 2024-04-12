@@ -81,7 +81,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/grooming/attack(mob/living/M, mob/living/user, var/target_zone, animate = TRUE)
-	if(try_groom(user, M))
+/obj/item/grooming/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(try_groom(user, target))
 		return TRUE
 	return ..()

@@ -50,13 +50,12 @@
 	else
 		icon_state = "cimplanter0"
 
-/obj/item/implanter/compressed/attack(mob/M, mob/user)
+/obj/item/implanter/compressed/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/obj/item/implant/compressed/c = imp
-	if (!c)	return
-	if (c.scanned == null)
-		to_chat(user, "Please compress an object with the implanter first.")
-		return
-	..()
+	if(!istype(c) || c.scanned == null)
+		to_chat(user, SPAN_WARNING("Please compress an object with the implanter first."))
+		return TRUE
+	return ..()
 
 /obj/item/implanter/compressed/afterattack(obj/item/A, mob/user, proximity)
 	if(!proximity)

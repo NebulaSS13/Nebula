@@ -136,14 +136,18 @@
 	else
 		..()
 
-/obj/item/book/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/book/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(user.get_target_zone() == BP_EYES)
-		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
-			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")
+		user.visible_message(
+			SPAN_NOTICE("You open up the book and show it to \the [target]."),
+			SPAN_NOTICE("\The [user] opens up a book and shows it to \the [target].")
+		)
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
-		var/processed_dat = M.handle_reading_literacy(user, "<i>Author: [author].</i><br><br>" + "[dat]")
+		var/processed_dat = target.handle_reading_literacy(user, "<i>Author: [author].</i><br><br>" + "[dat]")
 		if(processed_dat)
-			show_browser(M, processed_dat, "window=book;size=1000x550")
+			show_browser(target, processed_dat, "window=book;size=1000x550")
+		return TRUE
+	return ..()
 
 // Copied from paper for the most part. TODO: generalize.
 /obj/item/book/proc/formatpencode(var/mob/user, var/t, var/obj/item/pen/P)

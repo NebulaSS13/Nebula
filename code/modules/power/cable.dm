@@ -535,24 +535,20 @@ By design, d1 is the smallest direction and d2 is the highest
 ///////////////////////////////////
 
 //you can use wires to heal robotics
-/obj/item/stack/cable_coil/attack(var/atom/A, var/mob/living/user, var/def_zone)
-	if(ishuman(A) && user.a_intent == I_HELP)
-		var/mob/living/carbon/human/H = A
+/obj/item/stack/cable_coil/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(ishuman(target) && user.a_intent == I_HELP)
+		var/mob/living/carbon/human/H = target
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
-
-		if (!S) return
-		if(!BP_IS_PROSTHETIC(S) || user.a_intent != I_HELP)
+		if(!S || !BP_IS_PROSTHETIC(S) || user.a_intent != I_HELP)
 			return ..()
-
 		if(BP_IS_BRITTLE(S))
 			to_chat(user, SPAN_WARNING("\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
-			return 1
-
+			return TRUE
 		var/use_amt = min(src.amount, CEILING(S.burn_dam/3), 5)
 		if(can_use(use_amt))
 			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
-				src.use(use_amt)
-		return
+				use(use_amt)
+		return TRUE
 	return ..()
 
 /obj/item/stack/cable_coil/on_update_icon()

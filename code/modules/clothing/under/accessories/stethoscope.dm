@@ -4,11 +4,13 @@
 	icon = 'icons/clothing/accessories/stethoscope.dmi'
 	accessory_high_visibility = TRUE
 
-/obj/item/clothing/accessory/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
-	if(ishuman(M) && isliving(user) && user.a_intent == I_HELP)
-		var/obj/item/organ/organ = GET_EXTERNAL_ORGAN(M, user.get_target_zone())
+/obj/item/clothing/accessory/stethoscope/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(ishuman(target) && isliving(user) && user.a_intent == I_HELP)
+		var/obj/item/organ/organ = GET_EXTERNAL_ORGAN(target, user.get_target_zone())
 		if(organ)
-			user.visible_message("[user] places [src] against [M]'s [organ.name] and listens attentively.",
-								 "You place [src] against [M]'s [organ.name]. You hear [english_list(organ.listen())].")
+			user.visible_message(
+				"\The [user] places [src] against \the [target]'s [organ.name] and listens attentively.",
+				"You place \the [src] against \the [target]'s [organ.name]. You hear [english_list(organ.listen())]."
+			)
 			return TRUE
-	return ..(M,user)
+	return ..()

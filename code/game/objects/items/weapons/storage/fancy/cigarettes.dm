@@ -33,11 +33,9 @@
 		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 	..()
 
-/obj/item/storage/box/fancy/cigarettes/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(!ismob(M))
-		return
+/obj/item/storage/box/fancy/cigarettes/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(M == user && user.get_target_zone() == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(slot_wear_mask_str))
+	if(target == user && user.get_target_zone() == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(slot_wear_mask_str))
 		// Find ourselves a cig. Note that we could be full of lighters.
 		var/obj/item/clothing/mask/smokable/cigarette/cig = null
 		for(var/obj/item/clothing/mask/smokable/cigarette/C in contents)
@@ -45,24 +43,24 @@
 			break
 
 		if(cig == null)
-			to_chat(user, "<span class='notice'>Looks like the packet is out of cigarettes.</span>")
-			return
+			to_chat(user, SPAN_NOTICE("Looks like the packet is out of cigarettes."))
+			return TRUE
 
 		// Instead of running equip_to_slot_if_possible() we check here first,
 		// to avoid dousing cig with reagents if we're not going to equip it
 		if(!cig.mob_can_equip(user, slot_wear_mask_str))
-			return
+			return TRUE
 
 		// We call remove_from_storage first to manage the reagent transfer and
 		// UI updates.
 		remove_from_storage(cig, null)
 		user.equip_to_slot(cig, slot_wear_mask_str)
-
 		reagents.maximum_volume = 5 * contents.len
-		to_chat(user, "<span class='notice'>You take a cigarette out of the pack.</span>")
+		to_chat(user, SPAN_NOTICE("You take a cigarette out of the pack."))
 		update_icon()
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/storage/box/fancy/cigarettes/dromedaryco
 	name = "pack of Dromedary Co. cigarettes"
