@@ -1,10 +1,24 @@
 /obj/item/clothing/pants/trousers
-	name = "trousers"
-	desc = "Some simple trousers. One leg per leg."
-	icon = 'mods/species/fantasy/icons/clothing/trousers.dmi'
-	sprite_sheets = list(BODYTYPE_HNOLL = 'mods/species/fantasy/icons/clothing/trousers_hnoll.dmi')
+	name                = "trousers"
+	desc                = "Some simple trousers. One leg per leg."
+	icon                = 'mods/species/fantasy/icons/clothing/trousers.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	material = /decl/material/solid/organic/leather
+	material            = /decl/material/solid/organic/leather
+	sprite_sheets       = list(
+		BODYTYPE_HNOLL  = 'mods/species/fantasy/icons/clothing/trousers_hnoll.dmi'
+	)
 
-/decl/stack_recipe/textiles/trousers
-	result_type       = /obj/item/clothing/pants/trousers
+/obj/item/clothing/pants/trousers/jerkin/Initialize()
+	. = ..()
+	var/obj/item/clothing/accessory/jerkin/jerkin = new
+	attach_accessory(null, jerkin)
+	if(!(jerkin in accessories))
+		qdel(jerkin)
+
+/obj/item/clothing/pants/trousers/braies
+	name                = "braies"
+	desc                = "Some short trousers. Comfortable and easy to wear."
+	icon                = 'mods/species/fantasy/icons/clothing/braies.dmi'
+	sprite_sheets       = list(
+		BODYTYPE_HNOLL  = 'mods/species/fantasy/icons/clothing/braies_hnoll.dmi'
+	)

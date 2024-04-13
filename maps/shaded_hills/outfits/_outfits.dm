@@ -4,5 +4,5 @@
 	id_type       = null
 	pda_type      = null
 	l_ear         = null
-	uniform       = /obj/item/clothing/pants/loincloth
-	shoes         = /obj/item/clothing/shoes/sandal
+	uniform       = /obj/item/clothing/pants/trousers/jerkin
+	shoes         = /obj/item/clothing/shoes/craftable/boots

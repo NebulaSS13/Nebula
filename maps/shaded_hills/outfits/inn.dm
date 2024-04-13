@@ -1,5 +1,6 @@
 /decl/hierarchy/outfit/job/shaded_hills/innkeeper
 	name    = "Shaded Hills - Innkeeper"
+	suit    = /obj/item/clothing/suit/apron/colourable
 
 /decl/hierarchy/outfit/job/shaded_hills/inn_worker
 	name    = "Shaded Hills - Inn Worker"
