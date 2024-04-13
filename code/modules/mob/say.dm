@@ -64,14 +64,6 @@ var/global/list/special_channel_keys = list(
 			verb ="asks"
 	return verb
 
-/mob/proc/get_ear()
-	// returns an atom representing a location on the map from which this
-	// mob can hear things
-
-	// should be overloaded for all mobs whose "ear" is separate from their "mob"
-
-	return get_turf(src)
-
 /mob/proc/check_speech_punctuation_state(var/text)
 	var/ending = copytext(text, length(text))
 	if (ending == "?")

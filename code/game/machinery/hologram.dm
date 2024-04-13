@@ -256,21 +256,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span>[prefix] [speaking.format_message(text, verb)]</span></i>"
 	return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span>[prefix] [verb], <span class='message'>\"[text]\"</span></span></i>"
 
-/obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
-	if(M)
-		for(var/mob/living/silicon/ai/master in masters)
-			//var/name_used = M.GetVoice()
-			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
-			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
-			master.show_message(rendered, 2)
-		for(var/mob/living/carbon/master in masters)
-			//var/name_used = M.GetVoice()
-			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
-			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
-			master.show_message(rendered, 2)
-		if(targetpad)
-			targetpad.visible_message("<i><span class='message'>[text]</span></i>")
-
 /obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
 	for(var/mob/living/silicon/ai/master in masters)
 		var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"

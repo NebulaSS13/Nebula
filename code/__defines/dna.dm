@@ -44,7 +44,6 @@ var/global/CLUMSYBLOCK =        0
 var/global/FAKEBLOCK =          0
 var/global/COUGHBLOCK =         0
 var/global/GLASSESBLOCK =       0
-var/global/EPILEPSYBLOCK =      0
 var/global/TWITCHBLOCK =        0
 var/global/NERVOUSBLOCK =       0
 var/global/MONKEYBLOCK =        STRUCDNASIZE

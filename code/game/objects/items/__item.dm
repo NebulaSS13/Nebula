@@ -522,9 +522,6 @@
 /obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
 	return
 
-/obj/item/proc/moved(mob/user, old_loc)
-	return
-
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(var/mob/user, var/play_dropsound = TRUE)
 
@@ -983,11 +980,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_assembly_detail_color()
 	return
-
-/obj/item/proc/updateSelfDialog()
-	var/mob/M = src.loc
-	if(istype(M) && M.client && M.machine == src)
-		src.attack_self(M)
 
 /obj/item/singularity_pull(S, current_size)
 	set waitfor = FALSE

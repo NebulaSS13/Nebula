@@ -329,13 +329,6 @@ This function restores all organs.
 	recheck_bad_external_organs()
 	verbs -= /mob/living/carbon/human/proc/undislocate
 
-/mob/living/carbon/human/proc/HealDamage(zone, brute, burn)
-	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, zone)
-	if(!E)
-		return FALSE
-	if(E.heal_damage(brute, burn))
-		BITSET(hud_updateflag, HEALTH_HUD)
-
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
 	if(status_flags & GODMODE)	return	//godmode
 	var/obj/item/organ/external/organ = given_organ

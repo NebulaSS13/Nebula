@@ -1,5 +1,3 @@
-var/global/list/sparring_attack_cache = list()
-
 //Species unarmed attacks
 /decl/natural_attack
 	abstract_type = /decl/natural_attack

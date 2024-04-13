@@ -20,7 +20,6 @@ var/global/list/_limb_mask_cache = list()
 var/global/list/human_icon_cache    = list()
 var/global/list/eye_icon_cache      = list()
 var/global/list/tail_icon_cache     = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
-var/global/list/light_overlay_cache = list()
 
 /proc/overlay_image(icon,icon_state,color,flags)
 	var/image/ret = image(icon,icon_state)
@@ -74,7 +73,6 @@ There are several things that need to be remembered:
 		update_body()	//Handles updating your mob's icon to reflect their gender/race/complexion etc
 		update_hair()	//Handles updating your hair overlay (used to be update_face, but mouth and
 																			...eyes were merged into update_body)
-		update_targeted() // Updates the target overlay when someone points a gun at you
 
 >	All of these procs update our overlay lists, and then call update_icon() by default.
 	If you wish to update several overlays at once, you can set the argument to 0 to disable the update and call

@@ -59,8 +59,5 @@
 /mob/proc/update_mutations()
 	return
 
-/mob/proc/update_targeted()
-	return
-
 /mob/proc/update_hair(var/update_icons=1)
 	return

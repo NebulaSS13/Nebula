@@ -161,14 +161,6 @@
 	hub = null
 	return ..()
 
-/proc/find_loc(obj/R)
-	if (!R)	return null
-	var/turf/T = R.loc
-	while(!isturf(T))
-		T = T.loc
-		if(!T || istype(T, /area))	return null
-	return T
-
 /obj/machinery/teleport
 	name = "teleport"
 	icon = 'icons/obj/machines/teleporter.dmi'

@@ -153,17 +153,11 @@ var/global/list/areas = list()
 /area/proc/alert_on_fall(var/mob/living/carbon/human/H)
 	return
 
-/area/proc/get_contents()
-	return contents
-
 /area/proc/get_cameras()
 	var/list/cameras = list()
 	for (var/obj/machinery/camera/C in src)
 		cameras += C
 	return cameras
-
-/area/proc/is_shuttle_locked()
-	return 0
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
@@ -451,18 +445,6 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /turf/has_gravity()
 	return loc.has_gravity()
-
-/area/proc/get_dimensions()
-	var/list/res = list("x"=1,"y"=1)
-	var/list/min = list("x"=world.maxx,"y"=world.maxy)
-	for(var/turf/T in src)
-		res["x"] = max(T.x, res["x"])
-		res["y"] = max(T.y, res["y"])
-		min["x"] = min(T.x, min["x"])
-		min["y"] = min(T.y, min["y"])
-	res["x"] = res["x"] - min["x"] + 1
-	res["y"] = res["y"] - min["y"] + 1
-	return res
 
 /area/proc/has_turfs()
 	return !!(locate(/turf) in src)

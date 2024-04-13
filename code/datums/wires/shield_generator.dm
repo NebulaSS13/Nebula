@@ -12,7 +12,6 @@ var/global/const/SHIELDGEN_WIRE_POWER = 1			// Cut to disable power input into t
 var/global/const/SHIELDGEN_WIRE_HACK = 2			// Pulse to hack the generator, enabling hacked modes. Cut to unhack. Mend does nothing.
 var/global/const/SHIELDGEN_WIRE_CONTROL = 4		// Cut to lock most shield controls. Mend to unlock them. Pulse does nothing.
 var/global/const/SHIELDGEN_WIRE_AICONTROL = 8		// Cut to disable AI control. Mend to restore.
-var/global/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have any specific function
 
 /datum/wires/shield_generator/CanUse()
 	var/obj/machinery/shield_generator/S = holder

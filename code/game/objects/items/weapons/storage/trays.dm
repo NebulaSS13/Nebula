@@ -157,11 +157,7 @@ TRAY TYPES GO HERE
 
 /obj/item/storage/tray/metal
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-
-/obj/item/storage/tray/metal/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	// So metal trays make the fun noise
-	hitsound = pick('sound/items/trayhit1.ogg','sound/items/trayhit2.ogg')
-	. = ..()
+	hitsound = "tray_hit" // So metal trays make the fun noise
 
 /obj/item/storage/tray/metal/aluminium
 	name = "tray"

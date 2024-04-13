@@ -134,16 +134,3 @@ var/global/list/uplink_random_selections_
 			continue
 		return I
 	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
-
-#ifdef DEBUG
-/proc/debug_uplink_purchage_log()
-	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
-	for(var/antag_type in all_antag_types)
-		var/decl/special_role/A = all_antag_types[antag_type]
-		A.print_player_summary()
-
-/proc/debug_uplink_item_assoc_list()
-	for(var/key in uplink.items_assoc)
-		log_debug("[key] - [uplink.items_assoc[key]]")
-
-#endif

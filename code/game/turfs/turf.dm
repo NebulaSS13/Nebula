@@ -414,9 +414,6 @@
 		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable))
 			qdel(O)
 
-/turf/proc/update_blood_overlays()
-	return
-
 /turf/proc/remove_decals()
 	LAZYCLEARLIST(decals)
 	update_icon()

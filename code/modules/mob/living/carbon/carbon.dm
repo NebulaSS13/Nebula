@@ -185,13 +185,6 @@
 	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
 	bodytemperature += temp_inc
 
-/mob/living/carbon/can_use_hands()
-	if(get_equipped_item(slot_handcuffed_str))
-		return 0
-	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
-		return 0
-	return 1
-
 /mob/living/carbon/restrained()
 	return get_equipped_item(slot_handcuffed_str)
 

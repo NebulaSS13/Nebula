@@ -11,7 +11,6 @@
 	turns_per_move = 5
 	response_harm = "stamps on"
 	stop_automated_movement = 1
-	friendly = "pinches"
 	possession_candidate = 1
 	can_escape = TRUE //snip snip
 	pass_flags = PASS_FLAG_TABLE

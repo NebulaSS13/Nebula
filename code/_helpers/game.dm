@@ -26,11 +26,6 @@
 			return A
 	return 0
 
-/proc/get_area_master(const/O)
-	var/area/A = get_area(O)
-	if (isarea(A))
-		return A
-
 /proc/in_range(atom/source, mob/user)
 	if(get_dist(source, user) <= 1)
 		return TRUE
@@ -129,7 +124,7 @@
 		if(dx*dx + dy*dy <= rsq)
 			. += T
 
-/proc/circleviewturfs(center=usr,radius=3)		//Is there even a diffrence between this proc and circlerangeturfs()?
+/proc/circleviewturfs(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)
 	var/list/turfs = new/list()
@@ -270,40 +265,11 @@
 	else
 		return 0
 
-/proc/get_cardinal_step_away(atom/start, atom/finish) //returns the position of a step from start away from finish, in one of the cardinal directions
-	//returns only NORTH, SOUTH, EAST, or WEST
-	var/dx = finish.x - start.x
-	var/dy = finish.y - start.y
-	if(abs(dy) > abs (dx)) //slope is above 1:1 (move horizontally in a tie)
-		if(dy > 0)
-			return get_step(start, SOUTH)
-		else
-			return get_step(start, NORTH)
-	else
-		if(dx > 0)
-			return get_step(start, WEST)
-		else
-			return get_step(start, EAST)
-
 /proc/get_mob_by_key(var/key)
 	for(var/mob/M in SSmobs.mob_list)
 		if(M.ckey == lowertext(key))
 			return M
 	return null
-
-
-// Will return a list of active candidates. It increases the buffer 5 times until it finds a candidate which is active within the buffer.
-/proc/get_active_candidates(var/buffer = 1)
-
-	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
-	var/i = 0
-	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/ghost/G in global.player_list)
-			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
-				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
-					candidates += G.key
-		i++
-	return candidates
 
 /datum/projectile_data
 	var/src_x
@@ -325,23 +291,6 @@
 	src.power_y = power_y
 	src.dest_x = dest_x
 	src.dest_y = dest_y
-
-/proc/projectile_trajectory(var/src_x, var/src_y, var/rotation, var/angle, var/power)
-
-	// returns the destination (Vx,y) that a projectile shot at [src_x], [src_y], with an angle of [angle],
-	// rotated at [rotation] and with the power of [power]
-	// Thanks to VistaPOWA for this function
-
-	var/power_x = power * cos(angle)
-	var/power_y = power * sin(angle)
-	var/time = 2* power_y / 10 //10 = g
-
-	var/distance = time * power_x
-
-	var/dest_x = src_x + distance*sin(rotation);
-	var/dest_y = src_y + distance*cos(rotation);
-
-	return new /datum/projectile_data(src_x, src_y, time, distance, power_x, power_y, dest_x, dest_y)
 
 /proc/MixColors(const/list/colors)
 	var/list/reds = list()
@@ -420,9 +369,6 @@
 
 /proc/convert_k2c(var/temp)
 	return ((temp - T0C))
-
-/proc/convert_c2k(var/temp)
-	return ((temp + T0C))
 
 /proc/getCardinalAirInfo(var/turf/loc, var/list/stats=list("temperature"))
 	var/list/temps = new/list(4)

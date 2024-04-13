@@ -188,9 +188,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
 
-/mob/observer/ghost/can_use_hands()
-	return FALSE
-
 /mob/observer/ghost/is_active()
 	return FALSE
 

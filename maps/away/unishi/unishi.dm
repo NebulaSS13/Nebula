@@ -8,7 +8,6 @@
 
 /decl/submap_archetype/derelict/unishi
 	descriptor = "derelict research vessel"
-	map = "SRV Verne"
 	crew_jobs = list(
 		/datum/job/submap/unishi_crew,
 		/datum/job/submap/unishi_researcher

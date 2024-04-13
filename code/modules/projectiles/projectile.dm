@@ -366,11 +366,6 @@
 		return
 	return TRUE	//Bullets don't drift in space
 
-/obj/item/projectile/proc/old_style_target(atom/target, atom/source)
-	if(!source)
-		source = get_turf(src)
-	setAngle(get_projectile_angle(source, target))
-
 /obj/item/projectile/proc/fire(angle, atom/direct_target)
 	//If no Angle needs to resolve it from xo/yo!
 	if(direct_target)
@@ -559,11 +554,6 @@
 	var/datum/point/vector/v = current.return_vector_after_increments(moves)
 	return v.return_turf()
 
-/obj/item/projectile/proc/return_pathing_turfs_in_moves(moves, forced_Angle)
-	var/turf/current = get_turf(src)
-	var/turf/ending = return_predicted_turf_after_moves(moves, forced_Angle)
-	return getline(current, ending)
-
 /obj/item/projectile/proc/process_hitscan()
 	set waitfor = FALSE
 	var/safety = range * 3
@@ -584,12 +574,6 @@
 	beam_segments = list()	//initialize segment list with the list for the first segment
 	beam_index = pcache
 	beam_segments[beam_index] = null	//record start.
-
-/obj/item/projectile/proc/vol_by_damage()
-	if(src.damage)
-		return clamp((src.damage) * 0.67, 30, 100)// Multiply projectile damage by 0.67, then CLAMP the value between 30 and 100
-	else
-		return 50 //if the projectile doesn't do damage, play its hitsound at 50% volume.
 
 /obj/item/projectile/proc/before_z_change(turf/oldloc, turf/newloc)
 	var/datum/point/pcache = trajectory.copy_to()

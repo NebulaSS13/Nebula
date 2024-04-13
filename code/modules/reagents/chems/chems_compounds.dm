@@ -292,9 +292,9 @@
 	if(!H.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 	if(H.regenerate_blood(4 * removed))
-		H.immunity = max(H.immunity - 0.1, 0)
+		H.adjust_immunity(-0.1)
 		if(LAZYACCESS(H.chem_doses, type) > H.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
-			H.immunity = max(H.immunity - 0.5, 0)
+			H.adjust_immunity(-0.5)
 
 /decl/material/solid/tobacco
 	name = "tobacco"

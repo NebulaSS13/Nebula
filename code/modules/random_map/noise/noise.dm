@@ -4,7 +4,6 @@
 /datum/random_map/noise
 	descriptor = "distribution map"
 	var/cell_range = 255            // These values are used to seed ore values rather than to determine a turf type.
-	var/cell_smooth_amt = 5
 	var/random_variance_chance = 25 // % chance of applying random_element.
 	var/random_element = 0.5        // Determines the variance when smoothing out cell values.
 	var/cell_base                   // Set in New()

@@ -206,12 +206,6 @@
 /atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
-/mob/proc/findname(msg)
-	for(var/mob/M in SSmobs.mob_list)
-		if (M.real_name == msg)
-			return M
-	return 0
-
 #define ENCUMBERANCE_MOVEMENT_MOD 0.35
 /mob/proc/get_movement_delay(var/travel_dir)
 	. = 0
@@ -490,11 +484,6 @@
 	if(msg != null)
 		flavor_text = msg
 
-/mob/proc/warn_flavor_changed()
-	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
-		to_chat(src, "<h2 class='alert'>OOC Warning:</h2>")
-		to_chat(src, "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>")
-
 /mob/proc/print_flavor_text()
 	if (flavor_text && flavor_text != "")
 		var/msg = replacetext(flavor_text, "\n", " ")
@@ -617,23 +606,8 @@
 		return TRUE
 	. = ..()
 
-/mob/proc/can_use_hands()
-	return
-
 /mob/proc/is_active()
 	return (0 >= usr.stat)
-
-/mob/proc/is_dead()
-	return stat == DEAD
-
-/mob/proc/is_mechanical()
-	return FALSE
-
-/mob/living/silicon/is_mechanical()
-	return TRUE
-
-/mob/proc/is_ready()
-	return client && !!mind
 
 /mob/proc/can_touch(var/atom/touching)
 	if(!touching.Adjacent(src) || incapacitated())
@@ -780,19 +754,6 @@
 /mob/verb/southface()
 	set hidden = 1
 	return facedir(client.client_dir(SOUTH))
-
-/mob/proc/Resting(amount)
-	facing_dir = null
-	resting = max(max(resting,amount),0)
-	return
-
-/mob/proc/SetResting(amount)
-	resting = max(amount,0)
-	return
-
-/mob/proc/AdjustResting(amount)
-	resting = max(resting + amount,0)
-	return
 
 /mob/proc/get_species_name()
 	SHOULD_CALL_PARENT(TRUE)
@@ -969,12 +930,6 @@
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(WEST))
-
-/mob/proc/adjustEarDamage()
-	return
-
-/mob/proc/setEarDamage()
-	return
 
 //Throwing stuff
 
@@ -1177,9 +1132,6 @@
 			physically_destroyed()
 		else if(!is_blind())
 			flash_eyes()
-
-/mob/proc/get_telecomms_race_info()
-	return list("Unknown", FALSE)
 
 /mob/proc/can_enter_cryopod(var/mob/user)
 	if(stat == DEAD)

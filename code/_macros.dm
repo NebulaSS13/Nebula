@@ -86,6 +86,11 @@
 
 #define isplunger(A) istype(A, /obj/item/plunger)
 
+#define isassembly(A) istype(A, /obj/item/assembly)
+
+#define isigniter(A) istype(A, /obj/item/assembly/igniter)
+
+#define istimer(A) istype(A, /obj/item/assembly/timer)
 
 #define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
 

@@ -7,7 +7,7 @@
 	msg = sanitize(msg)
 	if(!msg)	return
 
-	log_admin("ADMIN: [key_name(src)] : [msg]")
+	log_adminsay("[key_name(src)] : [msg]")
 
 	if(check_rights(R_ADMIN,0))
 		for(var/client/C in global.admins)

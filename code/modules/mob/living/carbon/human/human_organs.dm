@@ -242,10 +242,6 @@
 		else
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
-/mob/living/carbon/human/proc/sync_organ_dna()
-	for(var/obj/item/organ/O in get_organs())
-		O.setup(dna)
-
 /mob/living/proc/is_asystole()
 	return FALSE
 
@@ -259,15 +255,6 @@
 		if(!istype(heart) || !heart.is_working())
 			return TRUE
 	return FALSE
-
-/mob/living/carbon/human/proc/is_lung_ruptured()
-	var/obj/item/organ/internal/L = GET_INTERNAL_ORGAN(src, BP_LUNGS)
-	return L && L.is_bruised()
-
-/mob/living/carbon/human/proc/rupture_lung()
-	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
-	if(L)
-		L.rupture()
 
 //Registers an organ and setup the organ hierachy properly.
 //affected  : Parent organ if applicable.

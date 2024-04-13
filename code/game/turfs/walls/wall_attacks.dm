@@ -55,18 +55,6 @@
 		else
 			source.thermal_conductivity = initial(source.thermal_conductivity)
 
-
-
-/turf/wall/proc/fail_smash(var/mob/user)
-	to_chat(user, "<span class='danger'>You smash against \the [src]!</span>")
-	take_damage(rand(25,75))
-
-/turf/wall/proc/success_smash(var/mob/user)
-	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
-	user.do_attack_animation(src)
-	spawn(1)
-		physically_destroyed()
-
 /turf/wall/proc/try_touch(var/mob/user, var/rotting)
 	. = TRUE
 	if(rotting)

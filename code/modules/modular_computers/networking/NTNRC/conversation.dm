@@ -69,5 +69,5 @@
 	if(operator != client)
 		return 0 // Not Authorised
 
-	add_status_message("[client.username] has changed channel title from [title] to [newtitle]")
+	add_status_message("[client.username] has changed channel title from [title] to [newtitle] by operator.")
 	title = newtitle

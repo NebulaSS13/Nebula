@@ -123,8 +123,6 @@
 
 	var/radiation = 0.0//Carbon
 
-	var/voice_name = "unidentifiable voice"
-
 	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 
 	//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)

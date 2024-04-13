@@ -11,8 +11,6 @@
 	var/skin_tone = 0
 	/// multiplies melee combat damage
 	var/damage_multiplier = 1
-	/// no lipstick by default- arguably misleading, as it could be used for general makeup
-	var/lip_color = null
 	var/list/worn_underwear = list()
 	var/datum/backpack_setup/backpack_setup
 	var/list/cultural_info = list()

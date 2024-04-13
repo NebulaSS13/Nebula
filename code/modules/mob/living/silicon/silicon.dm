@@ -1,6 +1,5 @@
 /mob/living/silicon
 	gender = NEUTER
-	voice_name = "synthesized voice"
 	skillset = /datum/skillset/silicon
 
 	meat_type = null
@@ -75,6 +74,9 @@
 	QDEL_NULL_LIST(stock_parts)
 	return ..()
 
+/mob/living/silicon/get_dexterity(silent)
+	return dexterity
+
 /mob/living/silicon/experiences_hunger_and_thirst()
 	return FALSE // Doesn't really apply to robots. Maybe unify this with cells in the future.
 
@@ -136,9 +138,6 @@
 			SET_STATUS_MAX(src, STAT_STUN, 2)
 		return
 
-/mob/living/silicon/proc/damage_mob(var/brute = 0, var/fire = 0, var/tox = 0)
-	return
-
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
@@ -151,14 +150,6 @@
 
 /mob/living/silicon/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return 0//The only effect that can hit them atm is flashes and they still directly edit so this works for now
-
-/proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
-	if(!istype(bot) || !istype(ai))
-		return 0
-	if (bot.connected_ai == ai)
-		return 1
-	return 0
-
 
 // this function shows the health of the AI in the Status panel
 /mob/living/silicon/proc/show_system_integrity()
@@ -356,12 +347,6 @@
 	var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
 	return mind && (mind in traitors.current_antagonists)
 
-/mob/living/silicon/adjustEarDamage()
-	return
-
-/mob/living/silicon/setEarDamage()
-	return
-
 /mob/living/silicon/reset_view()
 	..()
 	if(cameraFollow)
@@ -440,9 +425,6 @@
 
 /mob/living/silicon/get_admin_job_string()
 	return "Silicon-based"
-
-/mob/living/silicon/get_telecomms_race_info()
-	return list("Artificial Life", TRUE)
 
 /mob/living/silicon/proc/process_os()
 	var/datum/extension/interactive/os = get_extension(src, /datum/extension/interactive/os)

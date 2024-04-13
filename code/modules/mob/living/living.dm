@@ -239,27 +239,6 @@ default behaviour is:
 /mob/living/proc/increaseBodyTemp(value)
 	return 0
 
-/mob/living/proc/adjustBodyTemp(actual, desired, incrementboost)
-	var/btemperature = actual
-	var/difference = abs(actual-desired)	//get difference
-	var/increments = difference/10 //find how many increments apart they are
-	var/change = increments*incrementboost	// Get the amount to change by (x per increment)
-
-	// Too cold
-	if(actual < desired)
-		btemperature += change
-		if(actual > desired)
-			btemperature = desired
-	// Too hot
-	if(actual > desired)
-		btemperature -= change
-		if(actual < desired)
-			btemperature = desired
-//	if(ishuman(src))
-//		log_debug("[src] ~ [src.bodytemperature] ~ [temperature]")
-
-	return btemperature
-
 /mob/living/proc/set_max_health(var/val, var/skip_health_update = FALSE)
 	max_health = val
 	if(!skip_health_update)
@@ -288,14 +267,6 @@ default behaviour is:
 		for(var/obj/item/storage/S in src.contents)	//Check for storage items
 			L += get_contents(S)
 		return L
-
-/mob/living/proc/check_contents_for(A)
-	var/list/L = src.get_contents()
-
-	for(var/obj/B in L)
-		if(B.type == A)
-			return 1
-	return 0
 
 /mob/living/proc/can_inject(var/mob/user, var/target_zone)
 	return 1
@@ -650,11 +621,6 @@ default behaviour is:
 			if(src)
 				clear_fullscreen("flash", 25)
 		return 1
-
-/mob/living/proc/cannot_use_vents()
-	if(mob_size > MOB_SIZE_SMALL)
-		return "You can't fit into that vent."
-	return null
 
 /mob/living/proc/has_brain()
 	return TRUE

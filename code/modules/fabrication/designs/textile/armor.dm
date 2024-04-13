@@ -92,23 +92,3 @@
 
 /datum/fabricator_recipe/textiles/helmet/thunderdome
 	path = /obj/item/clothing/head/helmet/thunderdome
-
-var/global/list/melee_mats = list(
-	/decl/material/solid/gemstone/diamond = ARMOR_MELEE_SHIELDED,
-	/decl/material/solid/metal/plasteel = ARMOR_MELEE_SHIELDED,
-	/decl/material/solid/metal/titanium = ARMOR_MELEE_VERY_HIGH,
-	/decl/material/solid/metal/steel = ARMOR_MELEE_MAJOR,
-	/decl/material/solid/metal/iron = ARMOR_MELEE_KNIVES,
-	/decl/material/solid/organic/leather = ARMOR_MELEE_KNIVES,
-	/decl/material/solid/organic/plastic = ARMOR_MELEE_SMALL
-)
-
-var/global/list/bullet_mats = list(
-	/decl/material/solid/gemstone/diamond = ARMOR_BALLISTIC_AP,
-	/decl/material/solid/metal/plasteel = ARMOR_BALLISTIC_RIFLE,
-	/decl/material/solid/metal/titanium = ARMOR_BALLISTIC_RESISTANT,
-	/decl/material/solid/metal/steel = ARMOR_BALLISTIC_PISTOL,
-	/decl/material/solid/metal/iron = ARMOR_BALLISTIC_SMALL,
-	/decl/material/solid/organic/leather = ARMOR_BALLISTIC_MINOR,
-	/decl/material/solid/organic/plastic = ARMOR_BALLISTIC_MINOR
-)

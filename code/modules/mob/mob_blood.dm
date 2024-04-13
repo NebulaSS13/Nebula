@@ -23,8 +23,3 @@
 	var/data = list()
 	data["donor"] = weakref(src)
 	return data
-
-/mob/proc/gibs(atom/location = loc)
-	var/gibber_type = get_gibber_type()
-	if(gibber_type)
-		return new gibber_type(location, get_blood_type(), get_unique_enzymes(), get_flesh_color(), get_blood_color())

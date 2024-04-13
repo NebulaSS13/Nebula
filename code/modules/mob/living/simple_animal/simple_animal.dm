@@ -65,7 +65,6 @@
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
 	var/obj/item/natural_weapon/natural_weapon
-	var/friendly = "nuzzles"
 	var/environment_smash = 0
 	var/resistance		  = 0	// Damage reduction
 	var/armor_type = /datum/extension/armor
@@ -487,9 +486,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	..(message, null, verb)
 
-/mob/living/simple_animal/get_speech_ending(verb, var/ending)
-	return verb
-
 /mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
 	W.forceMove(get_turf(src))
 	return 1
@@ -572,9 +568,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/get_admin_job_string()
 	return "Animal"
-
-/mob/living/simple_animal/get_telecomms_race_info()
-	return list("Domestic Animal", FALSE)
 
 /mob/living/simple_animal/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
 	var/safety = eyecheck()

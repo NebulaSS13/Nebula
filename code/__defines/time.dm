@@ -10,7 +10,6 @@
 #define DAY *864000
 #define DAYS *864000
 
-#define TimeOfGame (get_game_time())
 #define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
 
 #define TICKS *world.tick_lag

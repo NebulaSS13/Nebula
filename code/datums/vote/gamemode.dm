@@ -3,7 +3,6 @@
 	additional_header = "<td align = 'center'><b>Minimum Players</b></td>"
 	win_x = 500
 	win_y = 1100
-	show_leading = TRUE
 
 /datum/vote/gamemode/can_run(mob/creator, automatic)
 	if(!automatic && (!get_config_value(/decl/config/toggle/vote_mode) || !is_admin(creator)))

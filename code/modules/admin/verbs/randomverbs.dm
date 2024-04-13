@@ -269,24 +269,6 @@
 	to_chat(M, "<span class = 'alert'>You have been [muteunmute] from [mute_string].</span>")
 	SSstatistics.add_field_details("admin_verb","MUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_add_random_ai_law()
-	set category = "Fun"
-	set name = "Add Random AI Law"
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
-		return
-	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
-	if(confirm != "Yes") return
-	log_admin("[key_name(src)] has added a random AI law.")
-	message_admins("[key_name_admin(src)] has added a random AI law.", 1)
-
-	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
-	if(show_log == "Yes")
-		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
-
-	IonStorm(0)
-	SSstatistics.add_field_details("admin_verb","ION") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /*
 Allow admins to set players to be able to respawn/bypass 30 min wait, without the admin having to edit variables directly
 Ccomp's first proc.
@@ -537,7 +519,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!input)
 		return
 	if(!customname)
-		customname = "[command_name()] Update"
+		customname = "[global.using_map.boss_name] Update"
 
 	// Even admin must bow to the whim of the autolanguagefilter.
 	if(filter_block_message(mob, input) || filter_block_message(mob, customname))
@@ -661,11 +643,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 		log_and_message_admins("used gibself.")
 		SSstatistics.add_field_details("admin_verb","GIBS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/update_world()
-	// If I see anyone granting powers to specific keys like the code that was here,
-	// I will both remove their SVN access and permanently ban them from my servers.
-	return
 
 /client/proc/cmd_admin_check_contents(mob/living/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"

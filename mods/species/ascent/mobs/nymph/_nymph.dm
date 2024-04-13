@@ -19,7 +19,6 @@
 	available_maneuvers = list(/decl/maneuver/leap)
 
 	only_species_language = 1
-	voice_name = "mantid nymph"
 	speak_emote = list("hisses", "chitters")
 	universal_understand = FALSE
 	universal_speak = FALSE
