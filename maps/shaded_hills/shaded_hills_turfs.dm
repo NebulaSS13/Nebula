@@ -42,24 +42,38 @@
 	material = /decl/material/solid/stone/basalt
 	color = COLOR_DARK_GRAY
 
-/turf/wall/log/ebony
-	icon_state = "wood"
+/obj/structure/railing/mapped/ebony
 	material = /decl/material/solid/organic/wood/ebony
 	color = WOOD_COLOR_BLACK
+	paint_color = null
+
+/obj/structure/fire_source/fireplace/basalt
+	material = /decl/material/solid/stone/basalt
+
+/obj/structure/textiles/loom/ebony
+	material = /decl/material/solid/organic/wood/ebony
+
+/obj/structure/fire_source/firepit/basalt
+	material = /decl/material/solid/stone/basalt
+
+/obj/structure/textiles/spinning_wheel/ebony
+	material = /decl/material/solid/organic/wood/ebony
+
+/obj/item/tool/pickaxe/iron
+	material = /decl/material/solid/metal/iron
+	handle_material = /decl/material/solid/organic/wood/ebony
+
+/obj/structure/table/shaded_hills_counter
+	icon_state                = "reinf_preview"
+	color                     = WOOD_COLOR_BLACK
+	material                  = /decl/material/solid/stone/basalt
+	reinf_material            = /decl/material/solid/organic/wood/ebony
+	additional_reinf_material = /decl/material/solid/metal/copper
+
+/obj/structure/bed/chair/bench/ebony
+	color = WOOD_COLOR_BLACK
+	material = /decl/material/solid/organic/wood/ebony
 
 /obj/structure/door/wood/ebony
 	material = /decl/material/solid/organic/wood/ebony
 	color = WOOD_COLOR_BLACK
-
-/obj/abstract/landmark/roofed
-	name = "roofed turf"
-
-/obj/abstract/landmark/roofed/Initialize()
-	..()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/abstract/landmark/roofed/LateInitialize()
-	var/turf/T = loc
-	if(istype(T))
-		T.set_outside(OUTSIDE_NO)
-	qdel(src)

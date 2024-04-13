@@ -1,5 +1,16 @@
 /obj/abstract/exterior_marker
+	abstract_type = /obj/abstract/exterior_marker
 	var/set_outside
+
+/obj/abstract/exterior_marker/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/exterior_marker/LateInitialize()
+	var/turf/T = loc
+	if(istype(T))
+		T.set_outside(set_outside)
+	qdel(src)
 
 /obj/abstract/exterior_marker/Initialize()
 	..()
