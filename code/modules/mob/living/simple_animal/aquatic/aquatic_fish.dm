@@ -47,3 +47,6 @@
 /mob/living/simple_animal/aquatic/fish/large/trout
 	name = "trout"
 	icon = 'icons/mob/simple_animal/fish_trout.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/trout/river
+	name = "rainbow trout"

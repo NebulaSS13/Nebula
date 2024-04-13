@@ -11,6 +11,7 @@
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
+/obj/abstract/landmark/start/shaded_hills/miner,
 /turf/floor/natural/grass,
 /area/shaded_hills/outside)
 "dB" = (
@@ -42,7 +43,7 @@
 /turf/floor/natural/mud/water/deep,
 /area/shaded_hills/caves/unexplored/south)
 "hT" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/river)
 "iP" = (
@@ -89,6 +90,7 @@
 "mG" = (
 /obj/structure/bed/chair/bench/ebony,
 /obj/item/knife/utility,
+/obj/abstract/landmark/start/shaded_hills/miner,
 /turf/floor/natural/barren,
 /area/shaded_hills/outside)
 "mX" = (
@@ -155,6 +157,10 @@
 "zp" = (
 /turf/floor/natural/clay,
 /area/shaded_hills/outside/river)
+"CO" = (
+/obj/abstract/landmark/start/shaded_hills/cave_dweller,
+/turf/floor/natural/mud,
+/area/shaded_hills/caves/unexplored/south)
 "DX" = (
 /turf/floor/natural/mud,
 /area/shaded_hills/caves/unexplored/south)
@@ -172,12 +178,18 @@
 "EE" = (
 /turf/floor/wood/ebony,
 /area/shaded_hills/outside/river)
+"EL" = (
+/obj/abstract/exterior_marker/inside,
+/obj/abstract/landmark/start/shaded_hills/miner,
+/turf/floor/woven,
+/area/shaded_hills/outside)
 "EP" = (
 /turf/floor/natural/dirt,
 /area/shaded_hills/caves/entrance)
 "EQ" = (
 /obj/structure/bed,
 /obj/abstract/exterior_marker/inside,
+/obj/abstract/landmark/start/shaded_hills/miner,
 /turf/floor/woven,
 /area/shaded_hills/outside)
 "ES" = (
@@ -212,7 +224,7 @@
 /turf/floor/woven,
 /area/shaded_hills/caves/unexplored/south)
 "Hn" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/river)
 "HA" = (
@@ -228,6 +240,11 @@
 "Ic" = (
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/river)
+"Jv" = (
+/obj/item/chems/mould/ingot,
+/obj/item/chems/mould/ingot,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/outside)
 "JN" = (
 /turf/wall/log/ebony,
 /area/shaded_hills/outside/river)
@@ -236,6 +253,7 @@
 /area/shaded_hills/outside)
 "Ku" = (
 /obj/structure/bed,
+/obj/abstract/landmark/start/shaded_hills/cave_dweller,
 /turf/floor/woven,
 /area/shaded_hills/caves/unexplored/south)
 "KQ" = (
@@ -309,6 +327,7 @@
 /obj/structure/bed/chair/bench/ebony{
 	dir = 8
 	},
+/obj/abstract/landmark/start/shaded_hills/miner,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside)
 "ZV" = (
@@ -9413,7 +9432,7 @@ lU
 eR
 DX
 DX
-DX
+CO
 DX
 sS
 sS
@@ -14179,7 +14198,7 @@ Fv
 Fv
 ES
 Ed
-el
+EL
 el
 ES
 HV
@@ -14481,7 +14500,7 @@ HV
 Fv
 Fv
 js
-Fv
+Jv
 Fv
 ES
 HV

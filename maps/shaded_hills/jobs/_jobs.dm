@@ -1,40 +1,39 @@
 /datum/map/shaded_hills
-	id_hud_icons = 'maps/shaded_hills/icons/hud.dmi'
-
-/decl/hierarchy/outfit/job/shaded_hills
-	name = "Shaded Hills Outfit"
-	abstract_type = /decl/hierarchy/outfit/job/shaded_hills
-	id_type = null
-	pda_type = null
-	l_ear = null
-
-/decl/hierarchy/outfit/job/shaded_hills/wanderer
-	name    = "Shaded Hills - Wanderer"
-	uniform = /obj/item/clothing/pants/loincloth
-	shoes   = /obj/item/clothing/shoes/sandal
-
-/datum/map/shaded_hills
-	allowed_jobs = list(/datum/job/shaded_hills/wanderer)
-	default_job_type = /datum/job/shaded_hills/wanderer
-	default_department_type = /decl/department/shaded_hills/denizens
-
-/decl/department/shaded_hills
-	abstract_type = /decl/department/shaded_hills
-
-/decl/department/shaded_hills/denizens
-	name = "Denizens"
-
-/datum/job/shaded_hills
-	abstract_type = /datum/job/shaded_hills
-	department_types = list(
-		/decl/department/shaded_hills/denizens
+	id_hud_icons            = 'maps/shaded_hills/icons/hud.dmi'
+	allowed_jobs            = list(
+		/datum/job/shaded_hills/visitor/traveller,
+		/datum/job/shaded_hills/local/miner,
+		/datum/job/shaded_hills/local/herbalist,
+		/datum/job/shaded_hills/local/forester,
+		/datum/job/shaded_hills/inn/innkeeper,
+		/datum/job/shaded_hills/inn/inn_worker,
+		/datum/job/shaded_hills/inn/bartender,
+		/datum/job/shaded_hills/inn/farmer,
+		/datum/job/shaded_hills/caves/dweller
+	)
+	default_job_type        = /datum/job/shaded_hills/visitor/traveller
+	default_department_type = /decl/department/shaded_hills/visitors
+	species_to_job_whitelist = list(
+		/decl/species/kobaloi = list(
+			/datum/job/shaded_hills/caves/dweller,
+			/datum/job/shaded_hills/visitor/traveller
+		)
+	)
+	job_to_species_blacklist = list(
+		/datum/job/shaded_hills/caves/dweller = list(
+			/decl/species/human,
+			/decl/species/hnoll
+		)
 	)
 
-/datum/job/shaded_hills/wanderer
-	title = "Wanderer"
-	spawn_positions = -1
-	total_positions = -1
-	outfit_type = /decl/hierarchy/outfit/job/shaded_hills/wanderer
+/decl/department/shaded_hills
+	abstract_type           = /decl/department/shaded_hills
+	noun                    = "faction"
+	noun_adj                = "faction"
+	announce_channel        = null
 
-/obj/abstract/landmark/start/wanderer
-	name = "Wanderer"
+/datum/job/shaded_hills
+	abstract_type           = /datum/job/shaded_hills
+	department_types        = list(
+		/decl/department/shaded_hills/locals
+	)

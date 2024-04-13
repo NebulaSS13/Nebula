@@ -101,18 +101,26 @@
 /obj/structure/table/woodentable/ebony,
 /turf/floor/wood/ebony,
 /area/shaded_hills/witch_hut)
+"KA" = (
+/obj/abstract/landmark/start/shaded_hills/herbalist,
+/turf/floor/wood/ebony,
+/area/shaded_hills/witch_hut)
 "LF" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/swamp)
 "Ma" = (
 /turf/floor/natural/barren,
 /area/shaded_hills/caves/swamp)
+"OM" = (
+/obj/abstract/landmark/start/shaded_hills/herbalist,
+/turf/floor/natural/mud,
+/area/shaded_hills/outside/swamp)
 "SE" = (
 /obj/structure/door/ebony,
 /turf/floor/wood/ebony,
 /area/shaded_hills/witch_hut)
 "Ty" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/swamp)
 "TD" = (
@@ -140,6 +148,7 @@
 /area/shaded_hills/caves/river/swamp)
 "YX" = (
 /obj/structure/bed,
+/obj/abstract/landmark/start/shaded_hills/herbalist,
 /turf/floor/wood/ebony,
 /area/shaded_hills/witch_hut)
 
@@ -9036,7 +9045,7 @@ Xt
 Xt
 Xt
 Xt
-Xt
+OM
 Xt
 Xt
 Xt
@@ -9334,7 +9343,7 @@ TR
 bg
 bg
 bg
-bg
+KA
 aM
 Xt
 BY

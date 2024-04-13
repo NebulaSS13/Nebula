@@ -11,6 +11,10 @@
 "dp" = (
 /turf/wall/log/ebony,
 /area/shaded_hills/outside/river/woods)
+"eJ" = (
+/obj/abstract/landmark/start/shaded_hills/forester,
+/turf/floor/natural/path/basalt,
+/area/shaded_hills/outside/river/woods)
 "eR" = (
 /turf/floor/natural/barren,
 /area/shaded_hills/outside/woods)
@@ -125,6 +129,7 @@
 /area/shaded_hills/outside/woods)
 "Jz" = (
 /obj/structure/bed,
+/obj/abstract/landmark/start/shaded_hills/forester,
 /turf/floor/wood/ebony,
 /area/shaded_hills/forester_hut)
 "JI" = (
@@ -162,11 +167,11 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/forester_hut)
 "VA" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/outside/woods)
 "Wb" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/barren,
 /area/shaded_hills/caves/woods)
 "Xt" = (
@@ -187,7 +192,7 @@
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/outside/river/woods)
 "ZO" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/woods)
 
@@ -19589,7 +19594,7 @@ lb
 mo
 zq
 kx
-zq
+eJ
 zq
 zq
 zq

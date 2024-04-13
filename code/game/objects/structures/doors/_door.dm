@@ -44,9 +44,9 @@
 
 /obj/structure/door/get_blend_objects()
 	var/static/list/blend_objects = list(
-		/obj/structure/wall_frame, 
-		/obj/structure/window, 
-		/obj/structure/grille, 
+		/obj/structure/wall_frame,
+		/obj/structure/window,
+		/obj/structure/grille,
 		/obj/machinery/door
 	)
 	return blend_objects
@@ -221,6 +221,13 @@
 /obj/structure/door/wood/saloon
 	material = /decl/material/solid/organic/wood
 	opacity = FALSE
+
+/obj/structure/door/wood/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = WOOD_COLOR_BLACK
+
+/obj/structure/door/wood/saloon/ebony
+	material = /decl/material/solid/organic/wood/ebony
 
 /obj/structure/door/glass
 	material = /decl/material/solid/glass

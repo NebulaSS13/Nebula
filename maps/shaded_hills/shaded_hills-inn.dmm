@@ -168,7 +168,7 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/stable)
 "lz" = (
-/obj/structure/table/shaded_hills_counter,
+/obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/knife/kitchen/cleaver/bronze,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
@@ -188,6 +188,13 @@
 "lF" = (
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
+"lL" = (
+/obj/structure/bed/chair/bench/ebony{
+	dir = 1
+	},
+/obj/abstract/landmark/start/shaded_hills/farmer,
+/turf/floor/wood/ebony,
+/area/shaded_hills/farmhouse)
 "mG" = (
 /obj/structure/railing/mapped/ebony{
 	dir = 4
@@ -198,7 +205,7 @@
 /turf/wall/log/ebony,
 /area/shaded_hills/stable)
 "nN" = (
-/obj/structure/table/shaded_hills_counter,
+/obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/chems/glass/bucket/wood,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
@@ -241,11 +248,12 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
 "sM" = (
-/obj/structure/table/shaded_hills_counter,
+/obj/structure/table/woodentable_reinforced/ebony,
 /turf/floor/wood/ebony,
 /area/shaded_hills/general_store)
 "th" = (
 /obj/structure/bed,
+/obj/abstract/landmark/start/shaded_hills/inn_worker,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
 "tq" = (
@@ -271,6 +279,7 @@
 /area/shaded_hills/outside/downlands)
 "uu" = (
 /obj/structure/bed,
+/obj/abstract/landmark/start/shaded_hills/farmer,
 /turf/floor/wood/ebony,
 /area/shaded_hills/farmhouse)
 "uA" = (
@@ -294,6 +303,11 @@
 "xH" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/slaughterhouse)
+"yn" = (
+/obj/structure/bed,
+/obj/abstract/landmark/start/shaded_hills/innkeeper,
+/turf/floor/wood/ebony,
+/area/shaded_hills/inn)
 "yz" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/general_store)
@@ -301,6 +315,7 @@
 /obj/structure/bed/chair/wood/ebony{
 	dir = 1
 	},
+/obj/abstract/landmark/start/shaded_hills/farmer,
 /turf/floor/wood/ebony,
 /area/shaded_hills/farmhouse)
 "zl" = (
@@ -315,6 +330,10 @@
 "Ak" = (
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/stable)
+"Ap" = (
+/obj/abstract/landmark/start/shaded_hills/bartender,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/inn)
 "Ay" = (
 /turf/floor/natural/mud/water,
 /area/shaded_hills/outside/downlands)
@@ -358,7 +377,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "Ga" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
 "Gs" = (
@@ -373,7 +392,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "Gw" = (
-/obj/structure/table/shaded_hills_counter,
+/obj/structure/table/woodentable_reinforced/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "GQ" = (
@@ -621,7 +640,7 @@
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "Yu" = (
-/obj/abstract/landmark/start/wanderer,
+/obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/downlands)
 "Zb" = (
@@ -8901,7 +8920,7 @@ cx
 TR
 TR
 Ee
-th
+yn
 ZY
 ZY
 ZY
@@ -9663,11 +9682,11 @@ TR
 Ee
 SX
 lF
-lF
+Ap
 SX
 Ee
 Gu
-lF
+Ap
 Tr
 BG
 ZY
@@ -10275,7 +10294,7 @@ lF
 lF
 dC
 lF
-lF
+Ap
 Wl
 BG
 ZY
@@ -13178,7 +13197,7 @@ HI
 TR
 Ic
 qP
-hc
+lL
 LN
 hJ
 qP

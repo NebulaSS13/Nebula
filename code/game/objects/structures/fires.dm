@@ -429,6 +429,12 @@
 /obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
 	return FALSE
 
+/obj/structure/fire_source/fireplace/basalt
+	material = /decl/material/solid/stone/basalt
+
+/obj/structure/fire_source/firepit/basalt
+	material = /decl/material/solid/stone/basalt
+
 #undef FUEL_CONSUMPTION_CONSTANT
 #undef FIRE_LIT
 #undef FIRE_DEAD

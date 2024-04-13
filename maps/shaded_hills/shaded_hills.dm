@@ -6,11 +6,26 @@
 	#include "../../mods/species/fantasy/_fantasy.dme"
 
 	#include "areas/_areas.dm"
+	#include "areas/downlands.dm"
+	#include "areas/grassland.dm"
+	#include "areas/swamp.dm"
+	#include "areas/woods.dm"
+
 	#include "jobs/_jobs.dm"
+	#include "jobs/caves.dm"
+	#include "jobs/inn.dm"
+	#include "jobs/visitors.dm"
+	#include "jobs/wilderness.dm"
+
 	#include "levels/_levels.dm"
 	#include "levels/random_map.dm"
 	#include "levels/strata.dm"
+
 	#include "outfits/_outfits.dm"
+	#include "outfits/caves.dm"
+	#include "outfits/inn.dm"
+	#include "outfits/visitors.dm"
+	#include "outfits/wilderness.dm"
 
 	#include "shaded_hills_currency.dm"
 	#include "shaded_hills_map.dm"

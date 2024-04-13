@@ -67,3 +67,7 @@
 		TOOL_HAMMER = TOOL_QUALITY_MEDIOCRE
 	)
 	return tool_qualities
+
+/obj/item/tool/pickaxe/iron
+	material = /decl/material/solid/metal/iron
+	handle_material = /decl/material/solid/organic/wood/ebony

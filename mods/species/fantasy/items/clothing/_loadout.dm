@@ -19,20 +19,32 @@
 		"cloth"    = /decl/material/solid/organic/cloth
 	)
 
-/decl/loadout_option/clothing/fantasy/loincloth
+/decl/loadout_option/clothing/fantasy/uniform
 	name = "loincloth"
 	path = /obj/item/clothing/pants/loincloth
 	slot = slot_w_uniform_str
 
-/decl/loadout_option/clothing/fantasy/jerkin
+/decl/loadout_option/clothing/fantasy/uniform/jerkin
 	name = "jerkin"
 	path = /obj/item/clothing/accessory/jerkin
-	slot = slot_tie_str
 
-/decl/loadout_option/clothing/fantasy/trousers
+/decl/loadout_option/clothing/fantasy/uniform/trousers
 	name = "trousers"
 	path = /obj/item/clothing/pants/trousers
-	slot = slot_w_uniform_str
+
+/decl/loadout_option/clothing/fantasy/suit
+	name = "robes"
+	path = /obj/item/clothing/suit/robe
+	slot = slot_suit_str
+
+/decl/loadout_option/clothing/fantasy/suit/poncho
+	name = "robes"
+	path = /obj/item/clothing/suit/poncho/colored
+
+/decl/loadout_option/clothing/fantasy/mask
+	name = "bandana"
+	path = /obj/item/clothing/mask/bandana/colourable
+	slot = slot_wear_mask_str
 
 /decl/loadout_category/fantasy/utility
 	name = "Utility"
