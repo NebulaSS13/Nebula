@@ -1,8 +1,7 @@
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/toggle
 	storage = /datum/storage/pockets/suit
-	var/buttons // null means no toggle, TRUE means unbuttoned, FALSE means buttoned closed. Set during Initialize() based on icon
-	var/obj/item/clothing/head/hood
+	replaced_in_loadout = FALSE
 
 /obj/item/clothing/suit/toggle/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(
@@ -25,7 +24,7 @@
 	siemens_coefficient = 0.6
 	protects_against_weather = TRUE
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/get_assumed_clothing_state_modifiers()
+/obj/item/clothing/suit/toggle/wintercoat/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(
 		GET_DECL(/decl/clothing_state_modifier/buttons),
 		GET_DECL(/decl/clothing_state_modifier/hood)
@@ -149,7 +148,7 @@
 	action_button_name = "Toggle Hood"
 	hood = /obj/item/clothing/head/hoodiehood
 
-/obj/item/clothing/suit/storage/toggle/hoodie/get_assumed_clothing_state_modifiers()
+/obj/item/clothing/suit/toggle/hoodie/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(
 		GET_DECL(/decl/clothing_state_modifier/buttons),
 		GET_DECL(/decl/clothing_state_modifier/hood)
