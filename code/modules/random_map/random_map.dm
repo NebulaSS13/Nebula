@@ -23,6 +23,7 @@ var/global/list/map_count = list()
 	// Turf paths.
 	var/wall_type =  /turf/wall
 	var/floor_type = /turf/floor
+	// Turf type to act on when applying this map. Set to TRUE to use world.turf, or a path to use a specific turf subtype.
 	var/target_turf_type
 
 	var/change_area = FALSE
@@ -32,6 +33,9 @@ var/global/list/map_count = list()
 	var/list/map = list()           // Actual map.
 
 /datum/random_map/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
+
+	if(target_turf_type == TRUE)
+		target_turf_type = world.turf
 
 	// Store this for debugging.
 	if(!map_count[descriptor])

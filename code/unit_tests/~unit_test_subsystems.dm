@@ -31,9 +31,6 @@ SUBSYSTEM_DEF(unit_tests)
 	#endif
 	log_unit_test("Initializing Unit Testing")
 
-	// Load Map Templates
-	load_map_templates()
-
 	//
 	//Start the Round.
 	//
@@ -50,34 +47,6 @@ SUBSYSTEM_DEF(unit_tests)
 		if(cat in skipped_template_categories)
 			return TRUE
 	return FALSE
-
-/datum/controller/subsystem/unit_tests/proc/load_map_templates()
-	for(var/map_template_name in SSmapping.map_templates)
-		var/datum/map_template/map_template = SSmapping.get_template(map_template_name)
-		// Away sites are supposed to be tested separately in the Away Site environment
-		if(is_tested_separately(map_template))
-			report_progress("Skipping template '[map_template]' ([map_template.type]): Is tested separately.")
-			continue
-		if(map_template.is_runtime_generated())
-			report_progress("Skipping template '[map_template]' ([map_template.type]): Is generated at runtime.")
-			continue
-		load_template(map_template)
-		if(map_template.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
-			load_template(map_template)
-	log_unit_test("Map Templates Loaded")
-
-/datum/controller/subsystem/unit_tests/proc/load_template(datum/map_template/map_template)
-	// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
-	if(map_template.tallness == 1)
-		SSmapping.increment_world_z_size(/datum/level_data/unit_test)
-		var/turf/center = WORLD_CENTER_TURF(world.maxz)
-		if(!center)
-			CRASH("'[map_template]' (size: [map_template.width]x[map_template.height]) couldn't locate center turf at ([WORLD_CENTER_X][WORLD_CENTER_Y][world.maxz]) with world size ([WORLD_SIZE_TO_STRING])")
-		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(center)]")
-		map_template.load(center, centered = TRUE)
-	else // Multi-Z templates are loaded using different means
-		log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
-		map_template.load_new_z()
 
 /datum/controller/subsystem/unit_tests/proc/start_game()
 	if (GAME_STATE >= RUNLEVEL_POSTGAME)
