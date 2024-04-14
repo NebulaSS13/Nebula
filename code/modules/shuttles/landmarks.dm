@@ -85,7 +85,7 @@ var/global/list/shuttle_landmarks = list()
 		return FALSE
 	var/angle_offset = shuttle.current_location.get_angle_offset(src)
 	for(var/area/A in shuttle.shuttle_area)
-		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents, angle = angle_offset)
+		var/list/translation = get_turf_translation(get_turf(shuttle.get_center_of_rotation()), get_turf(src), A.contents, angle = angle_offset)
 		if(check_collision(base_area, list_values(translation)))
 			return FALSE
 	var/conn = SSmapping.get_connected_levels(z)

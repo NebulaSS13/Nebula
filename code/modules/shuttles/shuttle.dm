@@ -31,6 +31,9 @@
 	var/mothershuttle //tag of mothershuttle
 	var/motherdock    //tag of mothershuttle landmark, defaults to starting location
 
+	/// The landmark_tag of the landmark being used to match rotation and placement when docking.
+	var/current_port_tag
+
 /datum/shuttle/New(map_hash, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(!display_name)
@@ -174,7 +177,7 @@
 	var/angle_offset = current_location.get_angle_offset(destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents, angle = angle_offset)
+		translation += get_turf_translation(get_turf(get_center_of_rotation()), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation, angle_offset)
@@ -198,7 +201,7 @@
 	var/angle_offset = current_location.get_angle_offset(destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents, angle = angle_offset)
+		translation += get_turf_translation(get_turf(get_center_of_rotation()), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation, angle_offset)
@@ -387,3 +390,50 @@
 		return "The motherdock (tag: [initial(motherdock)]) was not found."
 	if(!mothershuttle && initial(mothershuttle))
 		return "The mothershuttle (tag: [initial(mothershuttle)]) was not found."
+
+// Landing/docking ports
+/datum/shuttle/proc/get_ports()
+	var/obj/effect/overmap/visitable/host = SSshuttle.ship_by_shuttle(name)
+	. = list()
+	if(!host)
+		return .
+	for(var/obj/effect/shuttle_landmark/local_dock/port in host.generic_waypoints)
+		. += port
+
+/datum/shuttle/proc/get_possible_ports()
+	var/list/res = list("None" = null)
+	var/list/ports = get_ports()
+	for(var/obj/effect/shuttle_landmark/local_dock/port in ports)
+		// Ports are never valid for landing at but always valid as ports, if not currently seleted.
+		if(port.landmark_tag == current_port_tag)
+			continue
+		res["[ports[port]] - [port.name]"] = port
+	return res
+
+/datum/shuttle/proc/get_current_port()
+	if(!current_port_tag)
+		return null
+	var/obj/effect/shuttle_landmark/local_dock/current_port = get_port_by_tag(current_port_tag)
+	return current_port
+
+/datum/shuttle/proc/get_center_of_rotation()
+	return get_current_port() || current_location
+
+/datum/shuttle/proc/set_port(port_tag)
+	if(isnull(port_tag)) // Special case for unsetting a port.
+		current_port_tag = null
+		return TRUE
+	if(get_port_by_tag(port_tag, available_only = TRUE))
+		current_port_tag = port_tag
+		return TRUE
+	return FALSE // port did not exist
+
+/datum/shuttle/proc/get_port_by_tag(port_tag, available_only = FALSE)
+	for(var/obj/effect/shuttle_landmark/local_dock/port in available_only ? get_possible_ports() : get_ports())
+		if(port.landmark_tag == port_tag)
+			return port
+	return null
+
+/datum/shuttle/proc/get_port_name()
+	var/obj/effect/shuttle_landmark/local_dock/current_port = get_port_by_tag(current_port_tag)
+	return current_port?.name || get_location_name()

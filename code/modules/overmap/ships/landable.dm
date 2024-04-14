@@ -290,8 +290,26 @@
 	docking_landmark.dir = dir
 	var/obj/effect/overmap/visitable/our_ship = SSshuttle.ship_by_shuttle(core.shuttle_name)
 	our_ship.add_landmark(docking_landmark)
+	var/turf/match_turf = get_step(docking_landmark, docking_landmark.dir)
+	if(match_turf)
+		var/obj/effect/shuttle_landmark/local_dock/our_dock = new /obj/effect/shuttle_landmark/local_dock(match_turf, port_name)
+		our_ship.add_landmark(our_dock)
 	qdel(src)
 
 /obj/effect/shuttle_landmark/visiting_shuttle/docking
 	name = "docking port"
-	flags = SLANDMARK_FLAG_AUTOSET | SLANDMARK_FLAG_ZERO_G | SLANDMARK_FLAG_REORIENT
+	flags = SLANDMARK_FLAG_AUTOSET | SLANDMARK_FLAG_ZERO_G | SLANDMARK_FLAG_REORIENT // not disconnected, they are physically attached
+
+/// Cannot actually be landed at. Used for alignment when landing or docking, however.
+/obj/effect/shuttle_landmark/local_dock
+	name = "docking port"
+	flags = SLANDMARK_FLAG_REORIENT
+
+/obj/effect/shuttle_landmark/local_dock/Initialize(ml, new_landmark_tag)
+	if(new_landmark_tag)
+		landmark_tag = new_landmark_tag
+	. = ..()
+
+/// No one is allowed to land here, we're just a holder for directional info.
+/obj/effect/shuttle_landmark/local_dock/is_valid(datum/shuttle/shuttle)
+	return FALSE

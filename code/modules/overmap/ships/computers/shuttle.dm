@@ -23,6 +23,7 @@
 
 		. += list(
 			"destination_name" = shuttle.get_destination_name(),
+			"port_name" = shuttle.get_port_name(),
 			"can_pick" = shuttle.moving_status == SHUTTLE_IDLE,
 			"fuel_usage" = shuttle.fuel_consumption * 100,
 			"remaining_fuel" = round(total_gas, 0.01) * 100,
@@ -35,6 +36,15 @@
 	if((. = ..()) != null)
 		return
 
+	if(href_list["dock_pick"])
+		var/list/possible_ports = shuttle.get_possible_ports()
+		var/port
+		if(length(possible_ports))
+			port = input("Choose shuttle docking port", "Shuttle Docking Port") as null|anything in possible_ports
+		else
+			to_chat(usr, SPAN_WARNING("No functional docking ports, defaulting to center-of-mass landing."))
+		if(CanInteract(usr, global.default_topic_state) && (port in possible_ports))
+			shuttle.set_port(possible_ports[port])
 	if(href_list["pick"])
 		var/list/possible_d = shuttle.get_possible_destinations()
 		var/D
