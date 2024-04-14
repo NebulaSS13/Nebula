@@ -201,4 +201,8 @@
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	if(nutriment_amt && nutriment_type)
-		add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)
+		// TODO: generalize taste as data
+		if(ispath(nutriment_type, /decl/material/liquid/nutriment))
+			add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)
+		else
+			add_to_reagents(nutriment_type, nutriment_amt)
