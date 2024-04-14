@@ -89,7 +89,7 @@
 
 /decl/loadout_option/suit/hoodie_nt
 	name = "hoodie, NanoTrasen"
-	path = /obj/item/clothing/suit/storage/toggle/hoodie/nt
+	path = /obj/item/clothing/suit/storage/toggle/nt_hoodie
 
 /decl/loadout_option/suit/wintercoat_dais
 	name = "winter coat, DAIS"

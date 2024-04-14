@@ -14,7 +14,7 @@
 
 /obj/item/clothing/head/helmet/space/void/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && user?.get_bodytype()?.name != BODYTYPE_SKRELL)
+	if(. && user?.get_species_name() != SPECIES_SKRELL)
 		return FALSE
 
 /obj/item/clothing/head/helmet/space/void/skrell/black
@@ -27,5 +27,5 @@
 
 /obj/item/clothing/head/helmet/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && user?.get_bodytype()?.name != BODYTYPE_SKRELL)
+	if(. && user?.get_species_name() != SPECIES_SKRELL)
 		return FALSE

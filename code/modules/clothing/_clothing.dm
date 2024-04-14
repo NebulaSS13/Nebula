@@ -21,11 +21,15 @@
 	var/ironed_state = WRINKLES_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 	var/volume_multiplier = 1
-	var/markings_icon	// simple colored overlay that would be applied to the icon
+	var/markings_state_modifier	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
+	var/should_display_id = TRUE
 
 /obj/item/clothing/Initialize()
+
 	. = ..()
+
+	accessory_hide_on_states = get_initial_accessory_hide_on_states()
 
 	if(starting_accessories)
 		for(var/T in starting_accessories)
@@ -34,13 +38,16 @@
 	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
 		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
 
-	if(markings_color && markings_icon)
+	if(update_clothing_state_toggles() || (markings_color && markings_state_modifier))
 		update_icon()
 
 /obj/item/clothing/Destroy()
-	if(istype(loc, /obj/item/clothing))
+	if(is_accessory())
 		on_removed()
 	return ..()
+
+/obj/item/clothing/proc/is_accessory()
+	return istype(loc, /obj/item/clothing)
 
 /obj/item/clothing/can_contaminate()
 	return TRUE
@@ -84,36 +91,58 @@
 
 /obj/item/clothing/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 
-	if(overlay)
+	if(!overlay)
+		return ..()
 
-		var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
-		if(istype(root_bodytype) && root_bodytype?.onmob_state_modifiers)
-			var/state_modifier = root_bodytype.onmob_state_modifiers[slot]
-			if(state_modifier && check_state_in_icon("[overlay.icon_state]-[state_modifier]", overlay.icon))
-				overlay.icon_state = "[overlay.icon_state]-[root_bodytype.onmob_state_modifiers[slot]]"
+	// Synchronize our modifiers.
+	// Holder takes precedence, if we're attached as an accessory.
+	var/list/sync_modifiers = list(overlay.icon_state)
+	var/obj/item/clothing/holder = istype(loc, /obj/item/clothing) ? loc : null
+	var/list/modifiers = list()
+	if(length(clothing_state_modifiers))
+		modifiers |= clothing_state_modifiers
+	if(length(holder?.clothing_state_modifiers))
+		modifiers |= holder.clothing_state_modifiers
+	for(var/modifier_type in modifiers)
+		var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
+		// Do we even care about this one?
+		if(!modifier.applies_icon_state_modifier)
+			continue
+		if(!(modifier_type in clothing_state_modifiers))
+			continue
+		if(holder?.clothing_state_modifiers && !holder.clothing_state_modifiers[modifier_type])
+			continue
+		if(!LAZYACCESS(clothing_state_modifiers, modifier_type))
+			continue
+		LAZYADD(sync_modifiers, modifier.icon_state_modifier)
 
-		if(istype(loc, /obj/item/clothing/under))
-			var/new_state = overlay.icon_state
-			var/obj/item/clothing/under/uniform = loc
-			if(uniform.rolled_down)
-				new_state = "[new_state]-rolled"
-			else if(uniform.rolled_sleeves)
-				new_state = "[new_state]-sleeves"
-			if(check_state_in_icon(overlay.icon, new_state))
-				overlay.icon_state = new_state
+	var/new_state = JOINTEXT(sync_modifiers)
+	if(check_state_in_icon(new_state, overlay.icon))
+		overlay.icon_state = new_state
 
-		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
-			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
+	// Apply our bodytype modifier if any applies. At time of writing this is restricted to some specific
+	// uniforms with a 'feminine' version that looks like someone has used an industrial press on their waist.
+	var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
+	if(slot in root_bodytype?.onmob_state_modifiers)
+		new_state = jointext(list(overlay.icon_state, root_bodytype.onmob_state_modifiers[slot]), "-")
+		if(check_state_in_icon(new_state, overlay.icon))
+			overlay.icon_state = new_state
 
-		if(!(slot in user_mob?.get_held_item_slots()))
-			if(blood_DNA)
-				var/mob_blood_overlay = user_mob.get_bodytype()?.get_blood_overlays(user_mob)
-				if(mob_blood_overlay)
-					var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
-					bloodsies.appearance_flags |= NO_CLIENT_COLOR
-					overlay.overlays += bloodsies
-			if(markings_icon && markings_color)
-				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
+	// Apply any marking overlays that we have defined.
+	if(markings_state_modifier && markings_color)
+		new_state = JOINTEXT(list(overlay.icon_state, markings_state_modifier))
+		if(check_state_in_icon(new_state, overlay.icon))
+			overlay.overlays += mutable_appearance(overlay.icon, new_state, markings_color)
+
+	// Apply a bloodied effect if the mob has been besmirched.
+	// Don't do this for inhands as the overlay is generally not slot based.
+	// TODO: make this slot based and masked to the onmob overlay?
+	if(!(slot in user_mob?.get_held_item_slots()) && blood_DNA && blood_overlay_type)
+		var/mob_blood_overlay = user_mob.get_bodytype()?.get_blood_overlays(user_mob)
+		if(mob_blood_overlay)
+			var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
+			bloodsies.appearance_flags |= NO_CLIENT_COLOR
+			overlay.overlays += bloodsies
 
 	// We apply accessory overlays after calling parent so accessories are not offset twice.
 	overlay = ..()
@@ -125,16 +154,17 @@
 
 /obj/item/clothing/on_update_icon()
 	. = ..()
-	var/base_state = get_world_inventory_state()
-	if(markings_icon && markings_color)
-		add_overlay(mutable_appearance(icon, "[base_state][markings_icon]", markings_color))
+	icon_state = JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier()))
+	if(markings_state_modifier && markings_color)
+		add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
 	var/list/new_overlays
 	for(var/obj/item/clothing/accessory in accessories)
-		var/image/I = accessory.get_attached_inventory_overlay(base_state)
+		var/image/I = accessory.get_attached_inventory_overlay(icon_state)
 		if(I)
 			LAZYADD(new_overlays, I)
 	if(LAZYLEN(new_overlays))
 		add_overlay(new_overlays)
+	update_clothing_icon()
 
 // Used by washing machines to temporarily make clothes smell
 /obj/item/clothing/proc/change_smell(decl/material/odorant, time = 10 MINUTES)
@@ -236,6 +266,13 @@
 			if(VITALS_SENSOR_TRACKING)
 				to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
+	if(length(clothing_state_modifiers))
+		var/list/interactions = list()
+		for(var/modifier_type in clothing_state_modifiers)
+			var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
+			interactions += modifier.name
+		to_chat(user, SPAN_SUBTLE("Use alt-click to [english_list(interactions, and_text = " or ")]."))
+
 #undef RAG_COUNT
 
 /obj/item/clothing/Topic(href, href_list, datum/topic_state/state)
@@ -293,13 +330,41 @@
 	old_clothes.remove_accessory(null, sensor)
 	attach_accessory(null, sensor)
 
+/obj/item/clothing/proc/get_hood()
+	return null
+
+/obj/item/clothing/proc/remove_hood()
+	var/obj/item/check_hood = get_hood()
+	if(!istype(check_hood) || check_hood.loc == src)
+		return
+	if(ismob(check_hood.loc))
+		var/mob/M = check_hood.loc
+		M.drop_from_inventory(check_hood)
+	check_hood.forceMove(src)
+	update_clothing_icon()
+
+/obj/item/clothing/dropped()
+	. = ..()
+	remove_hood()
+
+/obj/item/clothing/get_alt_interactions(var/mob/user)
+	. = ..()
+	var/list/all_clothing_state_modifiers = list()
+	for(var/obj/item/clothing/accessory in get_flat_accessory_list())
+		for(var/modifier_type in accessory.clothing_state_modifiers)
+			all_clothing_state_modifiers |= modifier_type
+	for(var/modifier_type in all_clothing_state_modifiers)
+		var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
+		if(modifier.alt_interaction_type)
+			LAZYADD(., modifier.alt_interaction_type)
+	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)
 
 /decl/interaction_handler/clothing_set_sensors
 	name = "Set Sensors Level"
-	expected_target_type = /obj/item/clothing/under
+	expected_target_type = /obj/item/clothing
 
 /decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
-	var/obj/item/clothing/under/U = target
+	var/obj/item/clothing/U = target
 	U.set_sensors(user)
 
 /obj/item/clothing/get_alt_interactions(var/mob/user)

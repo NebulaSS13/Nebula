@@ -17,16 +17,6 @@
 		return ..()
 	return 1
 
-/obj/item/clothing/accessory/OnDisguise(obj/item/copy, mob/user)
-	. = ..()
-	if(istype(copy, /obj/item/clothing))
-		var/obj/item/clothing/accessory = copy
-		accessory_hide_on_uniform_rolldown =    accessory.accessory_hide_on_uniform_rolldown
-		accessory_hide_on_uniform_rollsleeves = accessory.accessory_hide_on_uniform_rollsleeves
-	else
-		accessory_hide_on_uniform_rolldown =    initial(accessory_hide_on_uniform_rolldown)
-		accessory_hide_on_uniform_rollsleeves = initial(accessory_hide_on_uniform_rollsleeves)
-
 //Necklaces
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
