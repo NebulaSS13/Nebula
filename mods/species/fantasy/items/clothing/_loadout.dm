@@ -19,20 +19,58 @@
 		"cloth"    = /decl/material/solid/organic/cloth
 	)
 
-/decl/loadout_option/clothing/fantasy/loincloth
+/decl/loadout_option/clothing/fantasy/uniform
 	name = "loincloth"
 	path = /obj/item/clothing/pants/loincloth
 	slot = slot_w_uniform_str
 
-/decl/loadout_option/clothing/fantasy/jerkin
+/decl/loadout_option/clothing/fantasy/uniform/jerkin
 	name = "jerkin"
 	path = /obj/item/clothing/accessory/jerkin
 	slot = slot_tie_str
 
-/decl/loadout_option/clothing/fantasy/trousers
+/decl/loadout_option/clothing/fantasy/uniform/tunic
+	name = "tunic"
+	path = /obj/item/clothing/accessory/tunic
+	slot = slot_tie_str
+
+/decl/loadout_option/clothing/fantasy/uniform/tunic/short
+	name = "tunic, short"
+	path = /obj/item/clothing/accessory/tunic/short
+
+/decl/loadout_option/clothing/fantasy/uniform/trousers
 	name = "trousers"
 	path = /obj/item/clothing/pants/trousers
-	slot = slot_w_uniform_str
+
+/decl/loadout_option/clothing/fantasy/uniform/gown
+	name = "gown"
+	path = /obj/item/clothing/under/gown
+
+/decl/loadout_option/clothing/fantasy/uniform/braies
+	name = "braies"
+	path = /obj/item/clothing/pants/trousers/braies
+
+/decl/loadout_option/clothing/fantasy/suit
+	name = "robes"
+	path = /obj/item/clothing/suit/robe
+	slot = slot_wear_suit_str
+
+/decl/loadout_option/clothing/fantasy/suit/cloak
+	name = "cloak"
+	path = /obj/item/clothing/accessory/cloak
+
+/decl/loadout_option/clothing/fantasy/suit/poncho
+	name = "poncho"
+	path = /obj/item/clothing/suit/poncho/colored
+
+/decl/loadout_option/clothing/fantasy/suit/apron
+	name = "apron"
+	path = /obj/item/clothing/suit/apron/colourable
+
+/decl/loadout_option/clothing/fantasy/mask
+	name = "bandana"
+	path = /obj/item/clothing/mask/bandana/colourable
+	slot = slot_wear_mask_str
 
 /decl/loadout_category/fantasy/utility
 	name = "Utility"

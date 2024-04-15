@@ -27,6 +27,11 @@
 /obj/structure/railing/mapped/no_density
 	density = FALSE
 
+/obj/structure/railing/mapped/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = WOOD_COLOR_BLACK
+	paint_color = null
+
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
 		return

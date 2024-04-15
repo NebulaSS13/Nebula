@@ -17,3 +17,19 @@
 	icon = 'icons/turf/flooring/legacy/herringbone.dmi'
 	icon_edge_layer = -1
 //	initial_flooring = /decl/flooring/path/herringbone
+
+// Material subtypes.
+/turf/floor/natural/path/basalt
+	color = COLOR_DARK_GRAY
+	base_color = COLOR_DARK_GRAY
+	material = /decl/material/solid/stone/basalt
+
+/turf/floor/natural/path/herringbone/basalt
+	color = COLOR_DARK_GRAY
+	base_color = COLOR_DARK_GRAY
+	material = /decl/material/solid/stone/basalt
+
+/turf/floor/natural/path/running_bond/basalt
+	color = COLOR_DARK_GRAY
+	base_color = COLOR_DARK_GRAY
+	material = /decl/material/solid/stone/basalt

@@ -18,6 +18,12 @@
 		/obj/item/tool/hoe/mini
 	)
 
+/obj/item/clothing/suit/apron/colourable
+	desc = "A basic apron, good for protecting your clothes."
+	icon = 'icons/clothing/suit/apron_colourable.dmi'
+	color = null
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
 //Captain
 /obj/item/clothing/suit/captunic
 	name = "captain's parade tunic"

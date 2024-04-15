@@ -14,5 +14,6 @@
 
 // Subtypes.
 /turf/wall/log/ebony
+	icon_state = "wood"
 	material = /decl/material/solid/organic/wood/ebony
 	color = WOOD_COLOR_BLACK

@@ -48,3 +48,15 @@
 /turf/wall/natural/dirt
 	material = /decl/material/solid/soil
 	color = "#41311b"
+
+/turf/wall/natural/basalt
+	material = /decl/material/solid/stone/basalt
+	color = COLOR_DARK_GRAY
+
+/turf/wall/natural/random/basalt
+	material = /decl/material/solid/stone/basalt
+	color = COLOR_DARK_GRAY
+
+/turf/wall/natural/random/high_chance/basalt
+	material = /decl/material/solid/stone/basalt
+	color = COLOR_DARK_GRAY

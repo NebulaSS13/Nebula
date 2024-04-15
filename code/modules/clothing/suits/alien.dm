@@ -1,7 +1,7 @@
 //Primitive clothing.
 
 /obj/item/clothing/suit/robe
-	name = "roughspun robes"
+	name = "robes"
 	desc = "A simple garment."
 	icon = 'icons/clothing/suit/rough_robe.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS

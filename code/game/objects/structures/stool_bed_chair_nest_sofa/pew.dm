@@ -97,9 +97,9 @@
 	color = WOOD_COLOR_RICH
 	material = /decl/material/solid/organic/wood/mahogany
 
-/obj/structure/bed/chair/bench/right/mahogany
-	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/organic/wood/mahogany
+/obj/structure/bed/chair/bench/ebony
+	color = WOOD_COLOR_BLACK
+	material = /decl/material/solid/organic/wood/ebony
 
 /obj/structure/bed/chair/bench/pew
 	name = "pew"

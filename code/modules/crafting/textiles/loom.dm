@@ -139,3 +139,6 @@
 
 	stop_working()
 	return TRUE
+
+/obj/structure/textiles/loom/ebony
+	material = /decl/material/solid/organic/wood/ebony

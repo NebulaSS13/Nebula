@@ -127,3 +127,6 @@
 			update_icon()
 		return TRUE
 	return FALSE
+
+/obj/structure/textiles/spinning_wheel/ebony
+	material = /decl/material/solid/organic/wood/ebony

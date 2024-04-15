@@ -21,5 +21,10 @@
 
 /turf/floor/natural/rock/volcanic
 	name = "volcanic floor"
+	color = COLOR_DARK_GRAY
 	strata_override = /decl/strata/igneous
+	material = /decl/material/solid/stone/basalt
+
+/turf/floor/natural/rock/basalt
+	color = COLOR_DARK_GRAY
 	material = /decl/material/solid/stone/basalt

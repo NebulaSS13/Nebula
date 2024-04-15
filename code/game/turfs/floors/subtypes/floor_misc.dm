@@ -46,4 +46,5 @@
 	name = "floor"
 	icon = 'icons/turf/flooring/woven.dmi'
 	icon_state = "woven"
+	color = COLOR_BEIGE
 	initial_flooring = /decl/flooring/woven
