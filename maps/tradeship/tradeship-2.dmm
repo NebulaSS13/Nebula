@@ -755,6 +755,9 @@
 /obj/machinery/door/airlock/external/glass/bolted{
 	id_tag = "dock_star_out"
 	},
+/obj/effect/shuttle_landmark/docking_arm_starboard/rescue{
+	dir = 4
+	},
 /turf/floor/tiled/steel_ridged,
 /area/ship/trade/dock)
 "bx" = (
@@ -905,6 +908,12 @@
 /obj/structure/cable/orange{
 	icon_state = "4-8"
 	},
+/obj/abstract/local_dock/automatic{
+	dir = 4;
+	shuttle_tag = "Bee Shuttle";
+	port_tag = "starboard";
+	name = "starboard docking port"
+	},
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/shuttle/outgoing/general)
 "bI" = (
@@ -921,6 +930,9 @@
 /obj/machinery/shield_diffuser,
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/obj/effect/shuttle_landmark/docking_arm_port/shuttle{
+	dir = 8
 	},
 /turf/floor/tiled/steel_ridged,
 /area/ship/trade/dock)
@@ -1039,12 +1051,17 @@
 /obj/effect/floor_decal/corner/white{
 	dir = 9
 	},
-/obj/effect/shuttle_landmark/docking_arm_starboard/rescue,
 /obj/machinery/airlock_sensor{
 	id_tag = "tradeship_rescue_shuttle_sensor";
 	pixel_x = -22;
 	pixel_y = 20;
 	dir = 4
+	},
+/obj/abstract/local_dock/automatic{
+	dir = 1;
+	shuttle_tag = "Rescue Shuttle";
+	port_tag = "center";
+	name = "center"
 	},
 /turf/floor/tiled,
 /area/ship/trade/shuttle/rescue)
@@ -5990,6 +6007,16 @@
 	},
 /turf/floor/plating,
 /area/ship/trade/shuttle/outgoing/general)
+"CW" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/abstract/local_dock/automatic{
+	dir = 1;
+	shuttle_tag = "Bee Shuttle";
+	name = "center"
+	},
+/turf/floor/tiled,
+/area/ship/trade/shuttle/outgoing/general)
 "Db" = (
 /obj/effect/floor_decal/corner/white{
 	dir = 9
@@ -6071,6 +6098,12 @@
 	pixel_y = -26;
 	directional_offset = null
 	},
+/obj/abstract/local_dock/automatic{
+	dir = 8;
+	shuttle_tag = "Bee Shuttle";
+	port_tag = "port";
+	name = "port docking port"
+	},
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/shuttle/outgoing/general)
 "DE" = (
@@ -6109,6 +6142,11 @@
 	dir = 8
 	},
 /obj/effect/decal/warning_stripes,
+/obj/abstract/local_dock/automatic{
+	dir = 8;
+	shuttle_tag = "Rescue Shuttle";
+	port_tag = "port"
+	},
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/shuttle/rescue)
 "Eb" = (
@@ -7947,7 +7985,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
 	dir = 1
 	},
-/obj/effect/shuttle_landmark/docking_arm_port/shuttle,
 /turf/floor/tiled,
 /area/ship/trade/shuttle/outgoing/general)
 "Yl" = (
@@ -10099,7 +10136,7 @@ sA
 Vq
 QF
 Ld
-QF
+CW
 yy
 LU
 GS

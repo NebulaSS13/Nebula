@@ -18,10 +18,11 @@
 
 /mob/observer/eye/landing/Initialize(var/mapload, var/shuttle_tag, var/obj/effect/overmap/visitable/sector)
 	shuttle = SSshuttle.shuttles[shuttle_tag]
-	shuttle_dir = shuttle.current_location.dir
+	var/atom/movable/center_of_rotation = shuttle.get_center_of_rotation()
+	shuttle_dir = center_of_rotation.dir
 	target_sector = sector
 	// Generates the overlay of the shuttle on turfs.
-	var/turf/origin = get_turf(shuttle.current_location)
+	var/turf/origin = get_turf(center_of_rotation)
 	for(var/area/A in shuttle.shuttle_area)
 		for(var/turf/T in A)
 			var/image/I = image('icons/effects/alphacolors.dmi', origin, "red")

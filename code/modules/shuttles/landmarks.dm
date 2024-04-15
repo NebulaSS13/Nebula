@@ -83,9 +83,10 @@ var/global/list/shuttle_landmarks = list()
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
 		return FALSE
-	var/angle_offset = shuttle.current_location.get_angle_offset(src)
+	var/atom/movable/center_of_rotation = shuttle.get_center_of_rotation()
+	var/angle_offset = shuttle.get_angle_offset(center_of_rotation, src)
 	for(var/area/A in shuttle.shuttle_area)
-		var/list/translation = get_turf_translation(get_turf(shuttle.get_center_of_rotation()), get_turf(src), A.contents, angle = angle_offset)
+		var/list/translation = get_turf_translation(get_turf(center_of_rotation), get_turf(src), A.contents, angle = angle_offset)
 		if(check_collision(base_area, list_values(translation)))
 			return FALSE
 	var/conn = SSmapping.get_connected_levels(z)

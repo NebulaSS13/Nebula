@@ -33,6 +33,8 @@
 
 	/// The landmark_tag of the landmark being used to match rotation and placement when docking.
 	var/current_port_tag
+	/// A list of all available docking ports to use for rotation/placement when landing and docking.
+	var/list/docking_ports
 
 /datum/shuttle/New(map_hash, var/obj/effect/shuttle_landmark/initial_location)
 	..()
@@ -174,10 +176,11 @@
 		return FALSE
 	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
-	var/angle_offset = current_location.get_angle_offset(destination)
+	var/atom/movable/center_of_rotation = get_center_of_rotation()
+	var/angle_offset = get_angle_offset(center_of_rotation, destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(get_center_of_rotation()), get_turf(destination), A.contents, angle = angle_offset)
+		translation += get_turf_translation(get_turf(center_of_rotation), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation, angle_offset)
@@ -197,11 +200,11 @@
 
 	testing("Force moving [src] to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
-
-	var/angle_offset = current_location.get_angle_offset(destination)
+	var/atom/movable/center_of_rotation = get_center_of_rotation()
+	var/angle_offset = get_angle_offset(center_of_rotation, destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(get_center_of_rotation()), get_turf(destination), A.contents, angle = angle_offset)
+		translation += get_turf_translation(get_turf(center_of_rotation), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation, angle_offset)
@@ -393,47 +396,54 @@
 
 // Landing/docking ports
 /datum/shuttle/proc/get_ports()
-	var/obj/effect/overmap/visitable/host = SSshuttle.ship_by_shuttle(name)
-	. = list()
-	if(!host)
-		return .
-	for(var/obj/effect/shuttle_landmark/local_dock/port in host.generic_waypoints)
-		. += port
+	return docking_ports
 
-/datum/shuttle/proc/get_possible_ports()
-	var/list/res = list("None" = null)
+/datum/shuttle/proc/add_port(obj/abstract/local_dock/port)
+	if(!istype(port))
+		return FALSE
+	LAZYADD(docking_ports, port)
+	return TRUE
+
+/datum/shuttle/proc/get_port_choices()
+	var/list/res = list()
 	var/list/ports = get_ports()
-	for(var/obj/effect/shuttle_landmark/local_dock/port in ports)
-		// Ports are never valid for landing at but always valid as ports, if not currently seleted.
-		if(port.landmark_tag == current_port_tag)
-			continue
-		res["[ports[port]] - [port.name]"] = port
+	for(var/obj/abstract/local_dock/port in ports)
+		res[port.name] = port
 	return res
 
 /datum/shuttle/proc/get_current_port()
 	if(!current_port_tag)
 		return null
-	var/obj/effect/shuttle_landmark/local_dock/current_port = get_port_by_tag(current_port_tag)
+	var/obj/abstract/local_dock/current_port = get_port_by_tag(current_port_tag)
 	return current_port
 
 /datum/shuttle/proc/get_center_of_rotation()
 	return get_current_port() || current_location
 
-/datum/shuttle/proc/set_port(port_tag)
-	if(isnull(port_tag)) // Special case for unsetting a port.
-		current_port_tag = null
+/datum/shuttle/proc/set_port(port)
+	var/obj/abstract/local_dock/dock
+	if(istype(port, /obj/abstract/local_dock)) // We need to check availability.
+		dock = port
+	else
+		dock = get_port_by_tag(port)
+	if(dock && (dock.port_tag != current_port_tag))
+		current_port_tag = dock.port_tag
 		return TRUE
-	if(get_port_by_tag(port_tag, available_only = TRUE))
-		current_port_tag = port_tag
-		return TRUE
-	return FALSE // port did not exist
+	return FALSE // port did not exist or was already selected
 
-/datum/shuttle/proc/get_port_by_tag(port_tag, available_only = FALSE)
-	for(var/obj/effect/shuttle_landmark/local_dock/port in available_only ? get_possible_ports() : get_ports())
-		if(port.landmark_tag == port_tag)
+/datum/shuttle/proc/get_port_by_tag(port_tag)
+	for(var/obj/abstract/local_dock/port in get_ports())
+		if(port.port_tag == port_tag)
 			return port
 	return null
 
 /datum/shuttle/proc/get_port_name()
-	var/obj/effect/shuttle_landmark/local_dock/current_port = get_port_by_tag(current_port_tag)
-	return current_port?.name || get_location_name()
+	var/obj/abstract/local_dock/current_port = get_port_by_tag(current_port_tag)
+	return current_port?.name || "None"
+
+/datum/shuttle/proc/get_angle_offset(obj/rotation_center, obj/effect/shuttle_landmark/destination)
+	if(istype(rotation_center, /obj/effect/shuttle_landmark))
+		var/obj/effect/shuttle_landmark/center_landmark = rotation_center
+		return center_landmark.get_angle_offset(destination)
+	// Fallback case for a docking port; these always reorient.
+	return dir2angle(rotation_center.dir) - dir2angle(destination.dir)
