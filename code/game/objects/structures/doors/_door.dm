@@ -73,12 +73,12 @@
 
 /obj/structure/door/attack_hand(mob/user)
 	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
-		return density ? open() : close()
+		return density ? open(user) : close(user)
 	return ..()
 
-/obj/structure/door/proc/close()
-	set waitfor = 0
-	if(!can_close())
+/obj/structure/door/proc/close(mob/user)
+	set waitfor = FALSE
+	if(!can_close(user))
 		return FALSE
 	flick("[icon_base]_closing", src)
 	playsound(src, material.dooropen_noise, door_sound_volume, 1)
@@ -90,9 +90,9 @@
 	post_change_state()
 	return TRUE
 
-/obj/structure/door/proc/open()
-	set waitfor = 0
-	if(!can_open())
+/obj/structure/door/proc/open(mob/user)
+	set waitfor = FALSE
+	if(!can_open(user))
 		return FALSE
 	flick("[icon_base]_opening", src)
 	playsound(src, material.dooropen_noise, door_sound_volume, 1)
@@ -104,9 +104,19 @@
 	post_change_state()
 	return TRUE
 
-/obj/structure/door/proc/can_open()
-	if(lock && lock.isLocked())
-		return FALSE
+/obj/structure/door/proc/can_open(mob/user)
+	if(lock)
+
+		// Auto-unlock if we're holding the key.
+		if(user?.a_intent == I_HELP)
+			var/obj/item/held = user.get_active_held_item()
+			if(istype(held, /obj/item/key) || istype(held, /obj/item/storage/keyring))
+				attackby(held, user)''
+
+		if(lock.isLocked())
+			to_chat(user, SPAN_WARNING("\The [src] is locked."))
+			return FALSE
+
 	return density && !changing_state
 
 /obj/structure/door/proc/can_close()
@@ -115,7 +125,7 @@
 /obj/structure/door/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && lock)
-		to_chat(user, SPAN_NOTICE("It appears to have a lock."))
+		to_chat(user, SPAN_NOTICE("It appears to have a lock opened by '[lock.lock_data]."))
 
 /obj/structure/door/attack_ai(mob/living/user)
 	return attack_hand_with_interaction_checks(user)
@@ -138,12 +148,22 @@
 		return ..()
 
 	if(lock)
+
 		if(istype(I, /obj/item/key))
 			if(lock.toggle(I))
 				to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [I]."))
 			else
 				to_chat(user, SPAN_WARNING("\The [I] does not fit in the lock!"))
 			return TRUE
+
+		if(istype(I, /obj/item/storage/keyring))
+			for(var/obj/item/key/key in I)
+				if(lock.toggle(key))
+					to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [key]."))
+					return TRUE
+			to_chat(user, SPAN_WARNING("\The [I] has no keys that fit in the lock!"))
+			return TRUE
+
 		if(lock.pick_lock(I,user))
 			return TRUE
 		if(lock.isLocked())

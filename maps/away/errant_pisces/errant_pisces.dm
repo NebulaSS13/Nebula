@@ -190,7 +190,6 @@
 	max_amount = 30
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
-	lock_picking_level = 3
 
 /obj/item/stack/net/Initialize()
 	. = ..()

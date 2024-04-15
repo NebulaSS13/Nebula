@@ -1,18 +1,32 @@
 #define LOCK_LOCKED 1
 #define LOCK_BROKEN 2
 
+/obj/abstract/landmark/lock_preset
+	name = "locked door"
+	var/lock_preset_id  = "default"
+	var/lock_material   = /decl/material/solid/metal/iron
+	var/lock_complexity = 1
+
+/obj/abstract/landmark/lock_preset/Initialize()
+	..()
+	for(var/obj/structure/door/door in loc)
+		if(!door.lock)
+			door.lock = new /datum/lock(door, lock_preset_id, lock_material)
+	return INITIALIZE_HINT_QDEL
 
 /datum/lock
 	var/status = 1 //unlocked, 1 == locked 2 == broken
 	var/lock_data = "" //basically a randomized string. The longer the string the more complex the lock.
 	var/atom/holder
+	var/material
 
-/datum/lock/New(var/atom/h, var/complexity = 1)
+/datum/lock/New(var/atom/h, var/complexity = 1, var/mat)
 	holder = h
 	if(istext(complexity))
 		lock_data = complexity
 	else
 		lock_data = generateRandomString(complexity)
+	material = mat || /decl/material/solid/metal/iron
 
 /datum/lock/Destroy()
 	holder = null

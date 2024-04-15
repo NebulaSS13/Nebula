@@ -17,6 +17,10 @@
 	guestbanned             = TRUE
 	must_fill               = TRUE
 	not_random_selectable   = TRUE
+	lock_keys = list(
+		"inn interior" = /decl/material/solid/metal/copper,
+		"inn exterior" = /decl/material/solid/metal/iron
+	)
 
 /obj/abstract/landmark/start/shaded_hills/innkeeper
 	name                    = "Innkeeper"

@@ -30,6 +30,6 @@
 	..()
 
 /obj/item/lock_construct/proc/create_lock(var/atom/target, var/mob/user)
-	. = new /datum/lock(target,lock_data)
+	. = new /datum/lock(target, lock_data, material?.type)
 	user.visible_message(SPAN_NOTICE("\The [user] attaches \the [src] to \the [target]."))
 	qdel(src)

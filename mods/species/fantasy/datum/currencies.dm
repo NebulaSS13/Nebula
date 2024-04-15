@@ -24,6 +24,22 @@
 /datum/denomination/coin/crown/regalis
 	name = "\improper Imperial crown regalis"
 
+/obj/item/cash/imperial
+	abstract_type = /obj/item/cash/imperial
+	currency = /decl/currency/imperial
+
+/obj/item/cash/imperial/crown
+	absolute_worth = 1
+	icon_state = "coin"
+
+/obj/item/cash/imperial/quin
+	absolute_worth = 5
+	icon_state = "coin_medium"
+
+/obj/item/cash/imperial/regalis
+	absolute_worth = 125
+	icon_state = "coin_large"
+
 /decl/stack_recipe/coin/imperial
 	currency = /decl/currency/imperial
 	name = "\improper Imperial crown"
