@@ -490,10 +490,10 @@
 /area/shaded_hills/stable)
 "PQ" = (
 /obj/structure/closet/crate/chest,
-/obj/item/chems/food/meat,
-/obj/item/chems/food/meat,
-/obj/item/chems/food/meat,
-/obj/item/chems/food/meat/chicken,
+/obj/item/chems/food/butchery/meat,
+/obj/item/chems/food/butchery/meat,
+/obj/item/chems/food/butchery/meat,
+/obj/item/chems/food/butchery/meat/chicken,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "Qs" = (
