@@ -26,8 +26,6 @@
 	bypass_chilling_products_for_root_type = /decl/material/liquid/ethanol
 	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
 
-	var/nutriment_factor = 0
-	var/hydration_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/alcohol_toxicity = 1
 	var/adj_temp = 0
@@ -44,13 +42,11 @@
 	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 
 /decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.adjust_nutrition(nutriment_factor * removed)
-	M.adjust_hydration(hydration_factor * removed)
+	..()
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/strength_mod = (M.GetTraitLevel(/decl/trait/malus/ethanol) * 2.5) || 1

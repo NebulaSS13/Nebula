@@ -15,15 +15,11 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-
 	break_stuff_probability = 25
 	faction = "carp"
 	bleed_colour = "#5d0d71"
 	pass_flags = PASS_FLAG_TABLE
-
-	meat_type = /obj/item/chems/food/fish/poison
-	skin_material = /decl/material/solid/organic/skin/fish/purple
-	bone_material = /decl/material/solid/organic/bone/cartilage
+	butchery_data = /decl/butchery_data/animal/fish/space_carp
 	var/carp_color = COLOR_PURPLE
 
 /mob/living/simple_animal/hostile/carp/Initialize()

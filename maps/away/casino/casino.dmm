@@ -2959,10 +2959,10 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/chems/food/meat,
-/obj/item/chems/food/meat,
-/obj/item/chems/food/meat,
-/obj/item/chems/food/meat,
+/obj/item/chems/food/butchery/meat,
+/obj/item/chems/food/butchery/meat,
+/obj/item/chems/food/butchery/meat,
+/obj/item/chems/food/butchery/meat,
 /turf/floor/tiled/freezer,
 /area/casino/casino_kitchen)
 "iD" = (

@@ -1,4 +1,4 @@
-/obj/item/chems/food/fishfingers
+/obj/item/chems/food/butchery/meat/fishfingers
 	name = "fish fingers"
 	desc = "A finger of fish."
 	icon_state = "fishfingers"
@@ -6,9 +6,9 @@
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 3
 
-/obj/item/chems/food/fishfingers/populate_reagents()
+/obj/item/chems/food/butchery/meat/fishfingers/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
 /obj/item/chems/food/cubancarp
 	name = "\improper Cuban Carp"
@@ -23,10 +23,10 @@
 
 /obj/item/chems/food/cubancarp/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 	add_to_reagents(/decl/material/liquid/capsaicin,         3)
 
-/obj/item/chems/food/fishandchips
+/obj/item/chems/food/butchery/meat/fishandchips
 	name = "fish and chips"
 	desc = "Best enjoyed wrapped in a newspaper on a cold wet day."
 	icon_state = "fishandchips"
@@ -36,6 +36,6 @@
 	nutriment_amt = 3
 	bitesize = 3
 
-/obj/item/chems/food/fishandchips/populate_reagents()
+/obj/item/chems/food/butchery/meat/fishandchips/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)

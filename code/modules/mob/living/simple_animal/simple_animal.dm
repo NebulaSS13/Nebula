@@ -8,16 +8,8 @@
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
-	meat_type = /obj/item/chems/food/meat
-	meat_amount = 3
-	bone_material = /decl/material/solid/organic/bone
-	bone_amount = 5
-	skin_material = /decl/material/solid/organic/skin
-	skin_amount = 5
-
 	icon_state = ICON_STATE_WORLD
 	buckle_pixel_shift = @"{'x':0,'y':0,'z':8}"
-
 
 	var/can_have_rider = TRUE
 	var/max_rider_size = MOB_SIZE_SMALL
@@ -389,24 +381,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [G.him] back to life."))
 		return TRUE
 
-	if(meat_type && (stat == DEAD) && meat_amount && istype(O, /obj/item/knife/kitchen/cleaver))
-		var/victim_turf = get_turf(src)
-		if(!locate(/obj/structure/table, victim_turf))
-			to_chat(user, SPAN_WARNING("You need to place \the [src] on a table to butcher it."))
-			return TRUE
-		var/time_to_butcher = (mob_size)
-		to_chat(user, SPAN_WARNING("You begin harvesting \the [src]."))
-		if(do_after(user, time_to_butcher, src, same_direction = TRUE))
-			if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
-				to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
-				subtract_meat(user)
-			else
-				harvest(user, user.get_skill_value(SKILL_COOKING))
-		else
-			to_chat(user, SPAN_DANGER("Your hand slips with your movement, and some of the meat is ruined."))
-			subtract_meat(user)
-		return TRUE
-
 	return ..()
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
@@ -490,28 +464,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	W.forceMove(get_turf(src))
 	return 1
 
-// Harvest an animal's delicious byproducts
-/mob/living/simple_animal/proc/harvest(var/mob/user, var/skill_level)
-	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
-	user.visible_message("<span class='danger'>\The [user] chops up \the [src]!</span>")
-	if(meat_type && actual_meat_amount > 0 && (stat == DEAD))
-		for(var/i=0;i<actual_meat_amount;i++)
-			var/obj/item/meat = new meat_type(get_turf(src))
-			meat.SetName("[src.name] [meat.name]")
-			if(can_bleed)
-				var/obj/effect/decal/cleanable/blood/splatter/splat = new(get_turf(src))
-				splat.basecolor = bleed_colour
-				splat.update_icon()
-			qdel(src)
-
-/mob/living/simple_animal/proc/subtract_meat(var/mob/user)
-	meat_amount--
-	if(meat_amount <= 0)
-		to_chat(user, SPAN_NOTICE("\The [src] carcass is ruined beyond use."))
-
 /mob/living/simple_animal/handle_fire()
 	return
-
 /mob/living/simple_animal/update_fire()
 	return
 /mob/living/simple_animal/IgniteMob()
@@ -533,13 +487,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	bleed_ticks = round(bleed_ticks)
 
+/mob/living/simple_animal/get_blood_color()
+	return bleed_colour
+
 /mob/living/simple_animal/proc/handle_bleeding()
 	bleed_ticks--
 	take_damage(BRUTE, 1)
-
-	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
-	drip.basecolor = bleed_colour
-	drip.update_icon()
+	blood_splatter(get_turf(src), src, FALSE)
 
 /mob/living/simple_animal/get_digestion_product()
 	return /decl/material/liquid/nutriment

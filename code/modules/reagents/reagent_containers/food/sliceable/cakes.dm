@@ -3,7 +3,7 @@
 	desc = "A favorite desert of sophisticated rabbits."
 	icon_state = "carrotcake"
 	slice_path = /obj/item/chems/food/slice/carrotcake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#ffd675"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "carrot" = 15)
@@ -33,7 +33,7 @@
 	desc = "A squishy cake-thing."
 	icon_state = "braincake"
 	slice_path = /obj/item/chems/food/slice/braincake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#e6aedb"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "slime" = 15)
@@ -43,7 +43,7 @@
 
 /obj/item/chems/food/sliceable/braincake/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 25)
+	add_to_reagents(/decl/material/solid/organic/meat, 25)
 	add_to_reagents(/decl/material/liquid/neuroannealer,     10)
 
 /obj/item/chems/food/slice/braincake
@@ -64,7 +64,7 @@
 	desc = "DANGEROUSLY cheesy."
 	icon_state = "cheesecake"
 	slice_path = /obj/item/chems/food/slice/cheesecake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#faf7af"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "cream" = 10, "cheese" = 15)
@@ -73,7 +73,7 @@
 
 /obj/item/chems/food/sliceable/cheesecake/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/solid/organic/meat, 15)
 
 /obj/item/chems/food/slice/cheesecake
 	name = "cheese cake slice"
@@ -93,7 +93,7 @@
 	desc = "A plain cake, but a good cake."
 	icon_state = "plaincake"
 	slice_path = /obj/item/chems/food/slice/plaincake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#f7edd5"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "vanilla" = 15)
@@ -118,7 +118,7 @@
 	desc = "A cake with added orange."
 	icon_state = "orangecake"
 	slice_path = /obj/item/chems/food/slice/orangecake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#fada8e"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "orange" = 15)
@@ -143,7 +143,7 @@
 	desc = "A cake with added lime."
 	icon_state = "limecake"
 	slice_path = /obj/item/chems/food/slice/limecake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#cbfa8e"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lime" = 15)
@@ -168,7 +168,7 @@
 	desc = "A cake with added lemon."
 	icon_state = "lemoncake"
 	slice_path = /obj/item/chems/food/slice/lemoncake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#fafa8e"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lemon" = 15)
@@ -193,7 +193,7 @@
 	desc = "A cake with added chocolate."
 	icon_state = "chocolatecake"
 	slice_path = /obj/item/chems/food/slice/chocolatecake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#805930"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "chocolate" = 15)
@@ -218,7 +218,7 @@
 	desc = "Happy birthday!"
 	icon_state = "birthdaycake"
 	slice_path = /obj/item/chems/food/slice/birthdaycake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#ffd6d6"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10)
@@ -248,7 +248,7 @@
 	desc = "A cake centred with apples."
 	icon_state = "applecake"
 	slice_path = /obj/item/chems/food/slice/applecake
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#ebf5b8"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "apple" = 15)
@@ -273,7 +273,7 @@
 	desc = "A delicious treat for the autumn months."
 	icon_state = "pumpkinpie"
 	slice_path = /obj/item/chems/food/slice/pumpkinpie
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#f5b951"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("pie" = 5, "cream" = 5, "pumpkin" = 5)

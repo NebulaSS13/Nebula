@@ -524,12 +524,7 @@
 
 	available_maneuvers = species.maneuvers.Copy()
 
-	meat_type =     species.meat_type
-	meat_amount =   species.meat_amount
-	skin_material = species.skin_material
-	skin_amount =   species.skin_amount
-	bone_material = species.bone_material
-	bone_amount =   species.bone_amount
+	butchery_data = species.butchery_data
 
 	full_prosthetic = null //code dum thinks ur robot always
 	default_walk_intent = null

@@ -17,13 +17,7 @@
 	bleed_colour = SYNTH_BLOOD_COLOR
 	gene_damage = -1
 	base_animal_type = /mob/living/simple_animal/hostile/hivebot
-
-	meat_type =     null
-	meat_amount =   0
-	bone_material = null
-	bone_amount =   0
-	skin_material = null
-	skin_amount =   0
+	butchery_data = /decl/butchery_data/synthetic
 
 /mob/living/simple_animal/hostile/hivebot/check_has_mouth()
 	return FALSE

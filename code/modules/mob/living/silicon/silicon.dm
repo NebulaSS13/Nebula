@@ -1,13 +1,7 @@
 /mob/living/silicon
 	gender = NEUTER
 	skillset = /datum/skillset/silicon
-
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	butchery_data = /decl/butchery_data/synthetic
 
 	var/dexterity = DEXTERITY_FULL
 	var/syndicate = 0

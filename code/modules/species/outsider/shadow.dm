@@ -17,10 +17,7 @@
 	name = "Shadow"
 	name_plural = "shadows"
 	description = "A being of pure darkness, hates the light and all that comes with it."
-
-	meat_type = null
-	bone_material = null
-	skin_material = null
+	butchery_data = null
 
 	available_bodytypes = list(/decl/bodytype/starlight/shadow)
 

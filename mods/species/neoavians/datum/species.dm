@@ -11,6 +11,9 @@
 		"elderly" =        50
 	)
 
+/decl/butchery_data/humanoid/avian
+	meat_type = /obj/item/chems/food/butchery/meat/chicken
+
 /decl/species/neoavian
 	name = SPECIES_AVIAN
 	name_plural = "Neo-Avians"
@@ -24,7 +27,7 @@
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
 	holder_icon = 'mods/species/neoavians/icons/holder.dmi'
 
-	meat_type = /obj/item/chems/food/meat/chicken
+	butchery_data = /decl/butchery_data/humanoid/avian
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/assistant/avian
 

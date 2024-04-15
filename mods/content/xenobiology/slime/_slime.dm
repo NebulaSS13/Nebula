@@ -17,12 +17,7 @@
 	update_icon = 0
 	see_in_dark = 8
 	status_flags = CANPARALYSE|CANPUSH
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	butchery_data = null
 	ai = /datum/ai/slime
 	hud_used = /datum/hud/slime
 	nutrition = 800

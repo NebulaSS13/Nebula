@@ -16,7 +16,7 @@
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
-	skin_material = /decl/material/solid/organic/skin/fur/orange
+	butchery_data = /decl/butchery_data/animal/cat
 	base_animal_type = /mob/living/simple_animal/cat
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
@@ -132,17 +132,6 @@
 	. = ..()
 	set_flee_target(TT.thrower? TT.thrower : src.loc)
 
-/mob/living/simple_animal/cat/harvest_skin()
-	. = ..()
-	. += new/obj/item/cat_hide(get_turf(src))
-
-/obj/item/cat_hide
-	name = "cat hide"
-	desc = "The by-product of cat farming."
-	icon = 'icons/obj/items/sheet_hide.dmi'
-	icon_state = "sheet-cat"
-	material = /decl/material/solid/organic/leather/fur
-
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
 	var/mob/living/carbon/human/friend
@@ -229,7 +218,7 @@
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
 	icon = 'icons/mob/simple_animal/cat_black.dmi'
-	skin_material = /decl/material/solid/organic/skin/fur/black
+	butchery_data = /decl/butchery_data/animal/cat/black
 	holder_type = /obj/item/holder/runtime
 
 /obj/item/holder/runtime
@@ -240,9 +229,7 @@
 	desc = "D'aaawwww"
 	icon = 'icons/mob/simple_animal/kitten.dmi'
 	gender = NEUTER
-	meat_amount = 1
-	bone_amount = 3
-	skin_amount = 3
+	butchery_data = /decl/butchery_data/animal/cat/kitten
 
 /mob/living/simple_animal/cat/kitten/get_bodytype()
 	return GET_DECL(/decl/bodytype/animal/kitten)

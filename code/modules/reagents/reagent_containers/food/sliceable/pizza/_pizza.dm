@@ -1,6 +1,6 @@
 /obj/item/chems/food/sliceable/pizza
 	icon_state = ICON_STATE_WORLD
-	slices_num = 6
+	slice_num = 6
 	nutriment_amt = 25
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread

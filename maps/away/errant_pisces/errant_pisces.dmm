@@ -4058,7 +4058,7 @@
 /area/errant_pisces/general_storage)
 "kU" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/chems/food/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
 /turf/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "kV" = (
@@ -4158,7 +4158,7 @@
 /area/errant_pisces/prod_storage)
 "lm" = (
 /obj/structure/closet/crate,
-/obj/item/chems/food/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
 /turf/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "ln" = (
@@ -4377,8 +4377,8 @@
 /area/errant_pisces/general_storage)
 "lW" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/chems/food/fish/poison,
-/obj/item/chems/food/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
 /turf/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lX" = (
@@ -4386,7 +4386,7 @@
 	dir = 8
 	},
 /obj/structure/closet/crate,
-/obj/item/chems/food/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
 /turf/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lY" = (
@@ -5504,9 +5504,9 @@
 /area/errant_pisces/fishing_wing)
 "ox" = (
 /obj/structure/table/marble,
-/obj/item/chems/food/fish/poison,
-/obj/item/chems/food/fish/poison,
-/obj/item/chems/food/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
+/obj/item/chems/food/butchery/meat/fish/poison,
 /turf/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)
 "oy" = (
@@ -6379,7 +6379,7 @@
 /area/space)
 "rb" = (
 /obj/structure/net,
-/obj/item/chems/food/meat/syntiflesh,
+/obj/item/chems/food/butchery/meat/syntiflesh,
 /turf/space,
 /area/space)
 "rc" = (

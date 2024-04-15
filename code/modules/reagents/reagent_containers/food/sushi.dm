@@ -16,7 +16,7 @@
 		if(istype(topping, /obj/item/chems/food/sashimi))
 			var/obj/item/chems/food/sashimi/sashimi = topping
 			fish_type = sashimi.fish_type
-		else if(istype(topping, /obj/item/chems/food/meat/chicken))
+		else if(istype(topping, /obj/item/chems/food/butchery/meat/chicken))
 			fish_type = "chicken"
 		else if(istype(topping, /obj/item/chems/food/friedegg))
 			fish_type = "egg"
@@ -124,7 +124,7 @@
 		 istype(I, /obj/item/chems/food/cutlet) || \
 		 istype(I, /obj/item/chems/food/rawcutlet) || \
 		 istype(I, /obj/item/chems/food/spider) || \
-		 istype(I, /obj/item/chems/food/meat/chicken))
+		 istype(I, /obj/item/chems/food/butchery/meat/chicken))
 			new /obj/item/chems/food/sushi(get_turf(src), src, I)
 			return
 	. = ..()

@@ -10,9 +10,7 @@
 	mob_swap_flags = 0
 	mob_push_flags = 0
 	mob_always_swap = 1
-	meat_amount = 1
-	bone_amount = 3
-	skin_amount = 3
+	butchery_data = /decl/butchery_data/animal/fish/small
 
 /mob/living/simple_animal/aquatic/fish/grump
 	name = "small fish"
@@ -21,7 +19,7 @@
 /mob/living/simple_animal/aquatic/fish/large
 	name = "smallmouth bass"
 	icon = 'icons/mob/simple_animal/fish_judge.dmi'
-	meat_amount = 2
+	butchery_data = /decl/butchery_data/animal/fish/medium
 	mob_size = MOB_SIZE_SMALL
 
 /mob/living/simple_animal/aquatic/fish/large/bass

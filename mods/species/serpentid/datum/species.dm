@@ -11,6 +11,13 @@
 		"senescent" =      45
 	)
 
+/decl/butchery_data/humanoid/serpentid
+	skin_material     = /decl/material/solid/organic/skin/insect
+
+	bone_material     = null
+	bone_amount       = null
+	bone_type         = null
+
 /decl/species/serpentid
 	name = SPECIES_SERPENTID
 	name_plural = "Serpentids"
@@ -23,8 +30,7 @@
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
 	age_descriptor = /datum/appearance_descriptor/age/serpentid
-	skin_material = /decl/material/solid/organic/skin/insect
-	bone_material = null
+	butchery_data = /decl/butchery_data/humanoid/serpentid
 	speech_sounds = list('sound/voice/bug.ogg')
 	speech_chance = 2
 	warning_low_pressure = 50

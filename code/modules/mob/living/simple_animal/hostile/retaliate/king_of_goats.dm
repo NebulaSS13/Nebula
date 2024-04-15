@@ -11,7 +11,6 @@
 	speak_emote = list("brays in a booming voice")
 	emote_hear = list("brays in a booming voice")
 	emote_see = list("stamps a mighty foot, shaking the surroundings")
-	meat_amount = 12
 	response_harm = "assaults"
 	max_health = 500
 	mob_size = MOB_SIZE_LARGE
@@ -57,7 +56,6 @@
 	name = "emperor of goats"
 	desc = "The King of Kings, God amongst men, and your superior in every way."
 	icon = 'icons/mob/simple_animal/goat_king_phase_2.dmi'
-	meat_amount = 36
 	max_health = 750
 	natural_weapon = /obj/item/natural_weapon/goatking/unleashed
 	elemental_weapons = list(

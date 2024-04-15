@@ -115,7 +115,7 @@
 
 /obj/item/chems/food/soylentgreen/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
 /obj/item/chems/food/soylenviridians
 	name = "\improper Soylen Virdians"
@@ -139,7 +139,7 @@
 
 /obj/item/chems/food/meatpie/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
 /obj/item/chems/food/tofupie
 	name = "tofu-pie"
@@ -195,7 +195,7 @@
 
 /obj/item/chems/food/xemeatpie/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
 /obj/item/chems/food/poppypretzel
 	name = "poppy pretzel"

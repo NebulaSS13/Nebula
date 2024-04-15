@@ -15,6 +15,7 @@
 	max_health = 32 //Stacks should take damage even if no materials
 	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
 	var/list/matter_per_piece
+	var/name_modifier
 	var/singular_name
 	var/plural_name
 	/// If unset, picks a/an based off of if the first letter is a vowel or not.

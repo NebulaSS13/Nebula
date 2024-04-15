@@ -27,7 +27,7 @@
 	var/bitesize = 1
 	var/bitecount = 0
 	var/slice_path
-	var/slices_num
+	var/slice_num
 	var/dry = FALSE
 	var/nutriment_amt = 0
 	var/nutriment_type = /decl/material/liquid/nutriment // Used to determine which base nutriment type is spawned for this item.
@@ -142,7 +142,7 @@
 	return TRUE
 
 /obj/item/chems/food/proc/is_sliceable()
-	return (slices_num && slice_path && slices_num > 0)
+	return (slice_num && slice_path && slice_num > 0)
 
 /obj/item/chems/food/proc/drop_plate(var/drop_loc)
 	if(istype(plate))
@@ -201,4 +201,8 @@
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	if(nutriment_amt && nutriment_type)
-		add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)
+		// TODO: generalize taste as data
+		if(ispath(nutriment_type, /decl/material/liquid/nutriment))
+			add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)
+		else
+			add_to_reagents(nutriment_type, nutriment_amt)

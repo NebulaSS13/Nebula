@@ -13,15 +13,8 @@
 	faction = "goat"
 	max_health = 40
 	natural_weapon = /obj/item/natural_weapon/hooves
-
-	meat_type = /obj/item/chems/food/meat/goat
-	meat_amount = 4
-	bone_amount = 8
-	skin_material = /decl/material/solid/organic/skin/goat
-	skin_amount = 8
-
+	butchery_data = /decl/butchery_data/animal/ruminant/goat
 	ai = /datum/ai/goat
-
 	var/datum/reagents/udder = null
 
 /datum/ai/goat
@@ -101,12 +94,7 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	max_health = 50
-
-	meat_type = /obj/item/chems/food/meat/beef
-	meat_amount = 6
-	bone_amount = 10
-	skin_material = /decl/material/solid/organic/skin/cow
-	skin_amount = 10
+	butchery_data = /decl/butchery_data/animal/ruminant/cow
 
 	var/datum/reagents/udder = null
 	var/static/list/responses = list(
@@ -172,13 +160,7 @@
 	max_health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
-
-	meat_type = /obj/item/chems/food/meat/chicken
-	meat_amount = 1
-	bone_amount = 3
-	skin_amount = 3
-	skin_material = /decl/material/solid/organic/skin/feathers
-
+	butchery_data = /decl/butchery_data/animal/small/fowl/chick
 	var/amount_grown = 0
 
 /mob/living/simple_animal/chick/Initialize()
@@ -199,9 +181,7 @@
 	max_health = 10
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
-	meat_type = /obj/item/chems/food/meat/chicken
-	meat_amount = 2
-	skin_material = /decl/material/solid/organic/skin/feathers
+	butchery_data = /decl/butchery_data/animal/small/fowl
 	speak_chance = 2
 	turns_per_move = 3
 	abstract_type = /mob/living/simple_animal/fowl

@@ -12,24 +12,39 @@
 			new obj_result(location)
 
 /decl/chemical_reaction/recipe/food/cheesewheel
-	name = "Cheesewheel"
+	name = "Enzyme Cheesewheel"
 	required_reagents = list(/decl/material/liquid/drink/milk = 40)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
-	mix_message = "The solution thickens and curdles into a rich yellow substance."
+	mix_message = "The solution thickens and curdles into a rich yellow solid."
 	minimum_temperature = 40 CELSIUS
 	maximum_temperature = (40 CELSIUS) + 100
 	obj_result = /obj/item/chems/food/sliceable/cheesewheel
 
+/decl/chemical_reaction/recipe/food/cheesewheel/rennet
+	name = "Rennet Cheesewheel"
+	catalysts = list()
+	required_reagents = list(
+		/decl/material/liquid/drink/milk    = 40,
+		/decl/material/liquid/enzyme/rennet = 3
+	)
+
 /decl/chemical_reaction/recipe/food/rawmeatball
 	name = "Raw Meatball"
-	required_reagents = list(/decl/material/liquid/nutriment/protein = 3, /decl/material/liquid/nutriment/flour = 5)
+	required_reagents = list(
+		/decl/material/solid/organic/meat     = 3,
+		/decl/material/liquid/nutriment/flour = 5
+	)
 	result_amount = 3
 	mix_message = "The flour thickens the processed meat until it clumps."
 	obj_result = /obj/item/chems/food/rawmeatball
 
 /decl/chemical_reaction/recipe/food/dough
 	name = "Plain dough"
-	required_reagents = list(/decl/material/liquid/nutriment/protein/egg = 3, /decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
+	required_reagents = list(
+		/decl/material/solid/organic/meat/egg = 3,
+		/decl/material/liquid/nutriment/flour = 10,
+		/decl/material/liquid/water           = 10
+	)
 	mix_message = "The solution folds and thickens into a large ball of dough."
 	obj_result = /obj/item/chems/food/dough
 
@@ -43,7 +58,7 @@
 	name = "Synthetic Meat"
 	required_reagents = list(/decl/material/liquid/blood = 5, /decl/material/liquid/plasticide = 1)
 	mix_message = "The solution thickens disturbingly, taking on a meaty appearance."
-	obj_result = /obj/item/chems/food/meat/syntiflesh
+	obj_result = /obj/item/chems/food/butchery/meat/syntiflesh
 
 /decl/chemical_reaction/recipe/food/tofu
 	name = "Tofu"

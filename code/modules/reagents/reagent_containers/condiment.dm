@@ -366,7 +366,7 @@
 	icon_state = "packet_medium"
 
 /obj/item/chems/condiment/small/packet/protein/populate_reagents()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/solid/organic/meat, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/crayon
 	name = "crayon powder packet"

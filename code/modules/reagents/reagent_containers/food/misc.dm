@@ -25,7 +25,7 @@
 
 /obj/item/chems/food/badrecipe/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 1)
+	add_to_reagents(/decl/material/solid/organic/meat, 1)
 	add_to_reagents(/decl/material/solid/carbon,             3)
 
 /obj/item/chems/food/stuffing
@@ -61,7 +61,7 @@
 
 /obj/item/chems/food/loadedbakedpotato/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 
 /obj/item/chems/food/spacylibertyduff
 	name = "party jelly"
@@ -107,7 +107,7 @@
 
 /obj/item/chems/food/enchiladas/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/solid/organic/meat, 6)
 	add_to_reagents(/decl/material/liquid/capsaicin, 6)
 
 /obj/item/chems/food/monkeysdelight
@@ -121,7 +121,7 @@
 
 /obj/item/chems/food/monkeysdelight/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/solid/organic/meat, 10)
 	add_to_reagents(/decl/material/liquid/drink/juice/banana, 5)
 	add_to_reagents(/decl/material/solid/blackpepper,         1)
 	add_to_reagents(/decl/material/solid/sodiumchloride,      1)
@@ -209,7 +209,7 @@
 
 /obj/item/chems/food/taco/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 
 /obj/item/chems/food/pelmen
 	name = "meat pelmen"
@@ -221,7 +221,7 @@
 
 /obj/item/chems/food/pelmen/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 1)
+	add_to_reagents(/decl/material/solid/organic/meat, 1)
 
 /obj/item/chems/food/pelmeni_boiled
 	name = "boiled pelmeni"
@@ -233,4 +233,4 @@
 
 /obj/item/chems/food/pelmeni_boiled/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 30)
+	add_to_reagents(/decl/material/solid/organic/meat, 30)

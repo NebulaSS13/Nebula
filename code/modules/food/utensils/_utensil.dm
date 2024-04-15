@@ -72,6 +72,8 @@
 	. = ..()
 	if(isnull(utensil_type))
 		utensil_type = type
+	if(slice_path && slice_num)
+		utensil_flags |= UTENSIL_FLAG_SLICE
 
 // TODO: generalize this for edible non-food items somehow?
 /obj/item/chems/food/proc/seperate_chunk(obj/item/utensil/utensil, mob/user)
@@ -123,7 +125,7 @@
 
 	if(!is_sliceable())
 		// TODO: cut a piece off to prepare a food item for another utensil.
-		return FALSE
+		return null
 
 	if (!(isturf(loc) && ((locate(/obj/structure/table) in loc) || (locate(/obj/machinery/optable) in loc) || (locate(/obj/item/storage/tray) in loc))))
 		to_chat(user, SPAN_WARNING("You cannot slice \the [src] here! You need a table or at least a tray to do it."))
@@ -134,18 +136,19 @@
 			SPAN_NOTICE("\The [user] crudely slices \the [src] with \the [tool]!"),
 			SPAN_NOTICE("You crudely slice \the [src] with your [tool.name]!")
 		)
-		slices_num -= rand(1,min(1,round(slices_num/2)))
+		slice_num -= rand(1,min(1,round(slice_num/2)))
 	else
 		user.visible_message(
 			SPAN_NOTICE("\The [user] slices \the [src]!"),
 			SPAN_NOTICE("You slice \the [src]!")
 		)
-	var/reagents_per_slice = max(1, round(reagents.total_volume / slices_num))
-	for(var/i = 1 to slices_num)
-		reagents.trans_to_obj(new slice_path(loc), reagents_per_slice)
+	var/reagents_per_slice = max(1, round(reagents.total_volume / slice_num))
+	for(var/i = 1 to slice_num)
+		var/atom/movable/slice = new slice_path(loc, material?.type)
+		reagents.trans_to_obj(slice, reagents_per_slice)
+		LAZYADD(., slice)
 	qdel(src)
-	return TRUE
-
+	return . || TRUE
 
 /obj/item/chems/food/proc/do_utensil_interaction(obj/item/tool, mob/user)
 

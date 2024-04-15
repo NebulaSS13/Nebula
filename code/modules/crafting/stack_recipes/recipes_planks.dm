@@ -141,3 +141,7 @@
 /decl/stack_recipe/planks/furniture/loom
 	result_type            = /obj/structure/textiles/loom
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
+
+/decl/stack_recipe/planks/furniture/twisting_bench
+	result_type            = /obj/structure/textiles/spinning_wheel/twisting_bench
+	difficulty             = MAT_VALUE_VERY_HARD_DIY

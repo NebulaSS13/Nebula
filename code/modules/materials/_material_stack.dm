@@ -51,7 +51,7 @@
 	update_icon()
 
 /obj/item/stack/material/get_codex_value()
-	return (material && !material.hidden_from_codex) ? "[lowertext(material.codex_name)] (substance)" : ..()
+	return (material && !material.hidden_from_codex) ? "[lowertext(material.codex_name || material.name)] (substance)" : ..()
 
 /obj/item/stack/material/get_reinforced_material()
 	return reinf_material
@@ -64,13 +64,14 @@
 	..()
 
 /obj/item/stack/material/proc/update_strings()
+	var/prefix_name = name_modifier ? "[name_modifier] " : ""
 	if(amount>1)
-		SetName("[material.use_name] [plural_name]")
-		desc = "A stack of [material.use_name] [plural_name]."
+		SetName("[prefix_name][material.use_name] [plural_name]")
+		desc = "A stack of [prefix_name][material.use_name] [plural_name]."
 		gender = PLURAL
 	else
-		SetName("[material.use_name] [singular_name]")
-		desc = "\A [singular_name] of [material.use_name]."
+		SetName("[prefix_name][material.use_name] [singular_name]")
+		desc = "\A [prefix_name][singular_name] of [material.use_name]."
 		gender = NEUTER
 	if(reinf_material)
 		SetName("reinforced [name]")

@@ -1,60 +1,8 @@
 #define CARCASS_EMPTY    "empty"
 #define CARCASS_FRESH    "fresh"
 #define CARCASS_SKINNED  "skinned"
+#define CARCASS_GUTTED   "gutted"
 #define CARCASS_JOINTED  "jointed"
-
-/mob/living
-	var/meat_type =         /obj/item/chems/food/meat
-	var/meat_amount =       3
-	var/skin_material =     /decl/material/solid/organic/skin
-	var/skin_amount =       3
-	var/bone_material =     /decl/material/solid/organic/bone
-	var/bone_amount =       3
-	var/skull_type
-	var/butchery_rotation = 90
-
-/mob/living/carbon/human
-	butchery_rotation = 180
-
-// Harvest an animal's delicious byproducts
-/mob/living/proc/harvest_meat()
-	var/effective_meat_type = isSynthetic() ? /obj/item/stack/material/rods : meat_type
-	if(!effective_meat_type || !meat_amount)
-		return
-	blood_splatter(get_turf(src), src, large = TRUE)
-	var/meat_count = 0
-	for(var/i=0;i<meat_amount;i++)
-		var/obj/item/chems/food/meat/slab = new effective_meat_type(get_turf(src))
-		LAZYADD(., slab)
-		if(istype(slab))
-			meat_count++
-	if(reagents && meat_count > 0)
-		var/reagent_split = round(reagents.total_volume/meat_count,1)
-		for(var/obj/item/chems/food/meat/slab in .)
-			reagents.trans_to_obj(slab, reagent_split)
-
-/mob/living/carbon/human/harvest_meat()
-	. = ..()
-	for(var/obj/item/organ/internal/I in get_internal_organs())
-		remove_organ(I)
-		LAZYADD(., I)
-
-/mob/living/proc/harvest_skin()
-	if(skin_material && skin_amount)
-		var/product = SSmaterials.create_object(skin_material, get_turf(src), skin_amount)
-		if(product)
-			LAZYADD(., product)
-		blood_splatter(get_turf(src), src, large = TRUE)
-
-/mob/living/proc/harvest_bones()
-	var/turf/T = get_turf(src)
-	if(bone_material && bone_amount)
-		var/product = SSmaterials.create_object(bone_material, get_turf(src), bone_amount)
-		if(product)
-			LAZYADD(., product)
-		blood_splatter(T, src, large = TRUE)
-	if(skull_type)
-		LAZYADD(., new skull_type(T))
 
 // Structure for conducting butchery on.
 /obj/structure/meat_hook
@@ -94,13 +42,13 @@
 		return ..()
 
 	if(occupant_state == CARCASS_FRESH)
-		visible_message(SPAN_NOTICE("\The [user] removes \the [occupant] from \the [src]."))
+		visible_message(SPAN_NOTICE("\The [user] removes \the [occupant] from \the [initial(name)]."))
 		occupant.forceMove(get_turf(src))
 		clear_occupant()
 		busy = FALSE
 		update_icon()
 	else
-		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
+		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [initial(name)] would be pointless."))
 	return TRUE
 
 /obj/structure/meat_hook/receive_mouse_drop(atom/dropping, mob/user, params)
@@ -122,7 +70,7 @@
 		return
 
 	if(occupant)
-		to_chat(user, SPAN_WARNING("\The [src] already has a carcass on it."))
+		to_chat(user, SPAN_WARNING("\The [initial(name)] already has a carcass on it."))
 		return
 
 	if(suitable_for_butchery(target))
@@ -140,13 +88,13 @@
 		target.forceMove(src)
 		occupant = target
 		occupant_state = CARCASS_FRESH
-		SetName("[target.name] carcass")
+		SetName("[target.name]'s carcass")
 		update_icon()
 	else
 		to_chat(user, SPAN_WARNING("You cannot butcher \the [target]."))
 
 /obj/structure/meat_hook/proc/suitable_for_butchery(var/mob/living/victim)
-	return istype(victim) && ((victim.meat_type && victim.meat_amount) || (victim.skin_material && victim.skin_amount) || (victim.bone_material && victim.bone_amount))
+	return istype(victim) && victim.butchery_data
 
 /obj/structure/meat_hook/on_update_icon()
 	..()
@@ -166,7 +114,9 @@
 	I.plane   = FLOAT_PLANE
 
 	var/matrix/M = matrix()
-	M.Turn(occupant.butchery_rotation)
+	var/decl/butchery_data/butchery_data = GET_DECL(occupant.butchery_data)
+	if(butchery_data)
+		M.Turn(butchery_data.butchery_rotation)
 	I.transform = M
 
 	add_overlay(I)
@@ -174,10 +124,10 @@
 /obj/structure/meat_hook/mob_breakout(mob/living/escapee)
 	. = ..()
 	if(secures_occupant)
-		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [src]!"))
+		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [initial(name)]!"))
 		if(!do_after(escapee, 5 SECONDS, src))
 			return FALSE
-	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [src]!"))
+	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [initial(name)]!"))
 	escapee.dropInto(loc)
 	if(escapee == occupant)
 		clear_occupant()
@@ -218,13 +168,20 @@
 	if(!tool?.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = butchery_string, success_message = butchery_string, check_skill = SKILL_COOKING))
 		return FALSE
 	if(!QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
+
+		var/decl/butchery_data/butchery_data = GET_DECL(occupant.butchery_data)
+		if(!butchery_data)
+			return FALSE
+
 		switch(next_state)
 			if(CARCASS_SKINNED)
-				occupant.harvest_skin()
+				butchery_data.harvest_skin(occupant)
+			if(CARCASS_GUTTED)
+				butchery_data.harvest_innards(occupant)
 			if(CARCASS_JOINTED)
-				occupant.harvest_bones()
+				butchery_data.harvest_bones(occupant)
 			if(CARCASS_EMPTY)
-				occupant.harvest_meat()
+				butchery_data.harvest_meat(occupant)
 		set_carcass_state(next_state)
 		return TRUE
 
@@ -242,6 +199,8 @@
 			if(CARCASS_FRESH)
 				do_butchery_step(user, thing, CARCASS_SKINNED, "skinning")
 			if(CARCASS_SKINNED)
+				do_butchery_step(user, thing, CARCASS_GUTTED,  "gutting")
+			if(CARCASS_GUTTED)
 				do_butchery_step(user, thing, CARCASS_JOINTED, "deboning")
 			if(CARCASS_JOINTED)
 				do_butchery_step(user, thing, CARCASS_EMPTY,   "butchering")
@@ -251,4 +210,5 @@
 #undef CARCASS_EMPTY
 #undef CARCASS_FRESH
 #undef CARCASS_SKINNED
+#undef CARCASS_GUTTED
 #undef CARCASS_JOINTED

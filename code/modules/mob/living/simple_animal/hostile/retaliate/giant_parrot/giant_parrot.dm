@@ -20,27 +20,19 @@
 	parrot_isize = ITEM_SIZE_LARGE
 	simple_parrot = TRUE
 	ability_cooldown = 2 MINUTES
-
-	meat_amount = 10
-	bone_amount = 20
-	skin_amount = 20
-
-	var/list/subspecies = list(/decl/parrot_subspecies,
-								/decl/parrot_subspecies/purple,
-								/decl/parrot_subspecies/blue,
-								/decl/parrot_subspecies/green,
-								/decl/parrot_subspecies/red,
-								/decl/parrot_subspecies/brown,
-								/decl/parrot_subspecies/black)
+	butchery_data = /decl/butchery_data/animal/bird/parrot/space
 	var/get_subspecies_name = TRUE
+
+/mob/living/simple_animal/hostile/retaliate/parrot/space/proc/get_parrot_species()
+	var/list/parrot_species = decls_repository.get_decls_of_type(/decl/parrot_subspecies)
+	return LAZYLEN(parrot_species) ? parrot_species[pick(parrot_species)] : null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/Initialize()
 	. = ..()
-	var/subspecies_type = SAFEPICK(subspecies)
-	if(subspecies_type)
-		var/decl/parrot_subspecies/ps = GET_DECL(subspecies_type)
+	var/decl/parrot_subspecies/ps = get_parrot_species()
+	if(ps)
 		icon_set = ps.icon_set
-		skin_material = ps.feathers
+		butchery_data = ps.butchery_data
 		if(get_subspecies_name)
 			SetName(ps.name)
 	set_scale(2)
@@ -65,10 +57,12 @@
 //subtypes
 /mob/living/simple_animal/hostile/retaliate/parrot/space/lesser
 	name = "Avatar of the Howling Dark"
-	subspecies = list(/decl/parrot_subspecies/black)
 	get_subspecies_name = FALSE
 	natural_weapon = /obj/item/natural_weapon/large
 	max_health = 300
+
+/mob/living/simple_animal/hostile/retaliate/parrot/space/lesser/get_parrot_species()
+	return GET_DECL(/decl/parrot_subspecies/black)
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna
 	name = "giant parrot"

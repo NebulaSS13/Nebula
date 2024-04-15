@@ -15,7 +15,7 @@
 
 /obj/item/chems/food/jerky/fish/Initialize()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+	add_to_reagents(/decl/material/solid/organic/meat, 5)
 
 /obj/item/chems/food/jerky/meat
 	name = "dried meat"
@@ -27,7 +27,7 @@
 
 /obj/item/chems/food/jerky/meat/Initialize()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+	add_to_reagents(/decl/material/solid/organic/meat, 5)
 
 
 /obj/item/chems/food/jerky/cutlet
@@ -40,7 +40,7 @@
 
 /obj/item/chems/food/jerky/cutlet/Initialize()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
 /obj/item/chems/food/jerky/spider
 	name = "dried spider meat"
@@ -52,7 +52,7 @@
 
 /obj/item/chems/food/jerky/spider/Initialize()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+	add_to_reagents(/decl/material/solid/organic/meat, 5)
 
 /obj/item/chems/food/jerky/spider/poison
 	icon_state = "spiderjerky"

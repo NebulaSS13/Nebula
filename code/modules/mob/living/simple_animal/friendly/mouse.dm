@@ -25,11 +25,7 @@
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
 	base_animal_type = /mob/living/simple_animal/mouse
-
-	meat_amount =   1
-	bone_amount =   1
-	skin_amount =   1
-	skin_material = /decl/material/solid/organic/skin/fur
+	butchery_data = /decl/butchery_data/animal/small/furred
 
 	ai = /datum/ai/mouse
 
@@ -72,12 +68,13 @@
 		body_color = pick( list("brown","gray","white") )
 	switch(body_color)
 		if("gray")
-			skin_material = /decl/material/solid/organic/skin/fur/gray
+			butchery_data = /decl/butchery_data/animal/small/furred/gray
 			icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 		if("white")
-			skin_material = /decl/material/solid/organic/skin/fur/white
+			butchery_data = /decl/butchery_data/animal/small/furred/white
 			icon = 'icons/mob/simple_animal/mouse_white.dmi'
 		if("brown")
+			butchery_data = /decl/butchery_data/animal/small/furred
 			icon = 'icons/mob/simple_animal/mouse_brown.dmi'
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
@@ -130,7 +127,7 @@
 	desc = "A large rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 	body_color = "rat"
 	icon = 'icons/mob/simple_animal/rat.dmi'
-	skin_material = /decl/material/solid/organic/skin/fur/gray
+	butchery_data = /decl/butchery_data/animal/small/furred/gray
 	max_health = 20
 
 /mob/living/simple_animal/mouse/rat/set_mouse_icon()
