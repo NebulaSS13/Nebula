@@ -9,7 +9,6 @@
 	anchored = TRUE
 	opacity =  TRUE
 
-	var/datum/lock/lock
 	var/has_window = FALSE
 	var/changing_state = FALSE
 	var/icon_base
@@ -20,8 +19,6 @@
 	..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	if(lock)
-		lock = new /datum/lock(src, lock)
 	if(!icon_base)
 		icon_base = material.door_icon_base
 	update_icon()
@@ -39,7 +36,6 @@
 
 /obj/structure/door/Destroy()
 	update_nearby_tiles()
-	QDEL_NULL(lock)
 	return ..()
 
 /obj/structure/door/get_blend_objects()
@@ -104,28 +100,19 @@
 	post_change_state()
 	return TRUE
 
+/obj/structure/door/update_lock_overlay()
+	return // TODO
+
 /obj/structure/door/proc/can_open(mob/user)
 	if(lock)
-
-		// Auto-unlock if we're holding the key.
-		if(user?.a_intent == I_HELP)
-			var/obj/item/held = user.get_active_held_item()
-			if(istype(held, /obj/item/key) || istype(held, /obj/item/storage/keyring))
-				attackby(held, user)''
-
+		try_unlock(user, user?.get_active_held_item())
 		if(lock.isLocked())
 			to_chat(user, SPAN_WARNING("\The [src] is locked."))
 			return FALSE
-
 	return density && !changing_state
 
 /obj/structure/door/proc/can_close()
 	return !density && !changing_state
-
-/obj/structure/door/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1 && lock)
-		to_chat(user, SPAN_NOTICE("It appears to have a lock opened by '[lock.lock_data]."))
 
 /obj/structure/door/attack_ai(mob/living/user)
 	return attack_hand_with_interaction_checks(user)
@@ -141,47 +128,26 @@
 		to_chat(user, SPAN_WARNING("\The [src] must be closed before it can be repaired."))
 		return FALSE
 
+/obj/structure/door/can_install_lock()
+	return TRUE
+
 /obj/structure/door/attackby(obj/item/I, mob/user)
 	add_fingerprint(user, 0, I)
 
 	if((user.a_intent == I_HURT && I.force) || istype(I, /obj/item/stack/material))
 		return ..()
 
-	if(lock)
-
-		if(istype(I, /obj/item/key))
-			if(lock.toggle(I))
-				to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [I]."))
-			else
-				to_chat(user, SPAN_WARNING("\The [I] does not fit in the lock!"))
-			return TRUE
-
-		if(istype(I, /obj/item/storage/keyring))
-			for(var/obj/item/key/key in I)
-				if(lock.toggle(key))
-					to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [key]."))
-					return TRUE
-			to_chat(user, SPAN_WARNING("\The [I] has no keys that fit in the lock!"))
-			return TRUE
-
-		if(lock.pick_lock(I,user))
-			return TRUE
-		if(lock.isLocked())
-			to_chat(user, SPAN_WARNING("\The [src] is locked!"))
+	if(try_key_unlock(I, user))
 		return TRUE
 
-	if(istype(I,/obj/item/lock_construct))
-		if(lock)
-			to_chat(user, SPAN_WARNING("\The [src] already has a lock."))
-		else
-			var/obj/item/lock_construct/L = I
-			lock = L.create_lock(src,user)
-		return
+	if(try_install_lock(I, user))
+		return TRUE
 
 	if(density)
-		open()
+		open(user)
 	else
-		close()
+		close(user)
+	return TRUE
 
 /obj/structure/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group)
@@ -200,7 +166,7 @@
 		var/mob/M = AM
 		if(M.restrained() || issmall(M))
 			return
-	open()
+	open(ismob(AM) ? AM : null)
 
 /obj/structure/door/iron
 	material = /decl/material/solid/metal/iron

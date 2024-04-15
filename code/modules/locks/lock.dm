@@ -9,9 +9,10 @@
 
 /obj/abstract/landmark/lock_preset/Initialize()
 	..()
-	for(var/obj/structure/door/door in loc)
-		if(!door.lock)
-			door.lock = new /datum/lock(door, lock_preset_id, lock_material)
+	for(var/obj/structure/thing in loc)
+		if(!thing.lock && thing.can_install_lock())
+			thing.lock = new /datum/lock(thing, lock_preset_id, lock_material)
+			thing.update_icon()
 	return INITIALIZE_HINT_QDEL
 
 /datum/lock

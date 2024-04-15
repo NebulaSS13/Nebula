@@ -58,12 +58,18 @@
 		reinf_material = GET_DECL(reinf_material)
 	. = ..()
 	update_materials()
+	if(lock)
+		lock = new /datum/lock(src, lock)
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 
 /obj/structure/examine(mob/user, distance, infix, suffix)
 	. = ..()
+
 	if(distance <= 3)
+
+		if(distance <= 1 && lock)
+			to_chat(user, SPAN_NOTICE("\The [src] appears to have a lock, opened by '[lock.lock_data]'."))
 
 		var/damage_desc = get_examined_damage_string()
 		if(length(damage_desc))
@@ -169,6 +175,7 @@
 	. = ..()
 
 /obj/structure/Destroy()
+	QDEL_NULL(lock)
 	var/turf/T = get_turf(src)
 	. = ..()
 	if(T)

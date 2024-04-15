@@ -55,6 +55,12 @@ var/global/list/closets = list()
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
 
+/obj/structure/closet/update_lock_overlay()
+	return // TODO
+
+/obj/structure/closet/can_install_lock()
+	return TRUE
+
 /obj/structure/closet/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && !opened)
@@ -83,10 +89,15 @@ var/global/list/closets = list()
 
 /obj/structure/closet/proc/can_open()
 	if((setup & CLOSET_HAS_LOCK) && locked)
-		return 0
+		return FALSE
 	if((setup & CLOSET_CAN_BE_WELDED) && welded)
-		return 0
-	return 1
+		return FALSE
+	if(lock)
+		if(usr)
+			try_unlock(usr, usr.get_active_held_item())
+		if(lock.isLocked())
+			return FALSE
+	return TRUE
 
 /obj/structure/closet/proc/can_close()
 	for(var/obj/structure/closet/closet in get_turf(src))
@@ -277,6 +288,12 @@ var/global/list/closets = list()
 			W.pixel_w = 0
 			return TRUE
 		return FALSE
+
+	if(try_key_unlock(W, user))
+		return TRUE
+
+	if(try_install_lock(W, user))
+		return TRUE
 
 	if(istype(W, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = W
