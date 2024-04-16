@@ -11,7 +11,7 @@
 /decl/recipe/bigbiteburger
 	items = list(
 		/obj/item/chems/food/burger,
-		/obj/item/chems/food/meat = 2,
+		/obj/item/chems/food/butchery/meat = 2,
 		/obj/item/chems/food/egg,
 	)
 	reagent_mix = REAGENT_REPLACE // no raw egg
@@ -23,7 +23,7 @@
 	items = list(
 		/obj/item/chems/food/bigbiteburger,
 		/obj/item/chems/food/dough,
-		/obj/item/chems/food/meat,
+		/obj/item/chems/food/butchery/meat,
 		/obj/item/chems/food/cheesewedge,
 		/obj/item/chems/food/boiledegg,
 	)

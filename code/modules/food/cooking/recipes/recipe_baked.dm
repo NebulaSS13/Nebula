@@ -119,7 +119,7 @@
 /decl/recipe/baked/soylentgreen
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	items = list(
-		/obj/item/chems/food/meat/human = 2
+		/obj/item/chems/food/butchery/meat/human = 2
 	)
 	reagent_mix = REAGENT_REPLACE // no raw flour
 	result = /obj/item/chems/food/soylentgreen

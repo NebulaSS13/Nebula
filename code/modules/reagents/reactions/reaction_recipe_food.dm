@@ -12,7 +12,10 @@
 			create_food(location)
 
 /decl/chemical_reaction/recipe/food/proc/create_food(location)
-	return new obj_result(location)
+	var/atom/movable/food = new obj_result
+	if(istype(food))
+		food.dropInto(location)
+	return food
 
 /decl/chemical_reaction/recipe/food/cheesewheel
 	name = "Enzyme Cheesewheel"
@@ -97,7 +100,7 @@
 /decl/chemical_reaction/recipe/food/mint
 	name = "Mint"
 	required_reagents = list(
-		/decl/material/liquid/nutriment/sugar = 5, 
+		/decl/material/liquid/nutriment/sugar = 5,
 		/decl/material/liquid/frostoil = 5
 	)
 	mix_message = "The solution thickens and hardens into a glossy brown substance."
@@ -110,7 +113,7 @@
 /decl/chemical_reaction/recipe/food/pudding/chazuke
 	name = "Chazuke"
 	required_reagents = list(
-		/decl/material/liquid/nutriment/rice  = 5, 
+		/decl/material/liquid/nutriment/rice  = 5,
 		/decl/material/liquid/drink/tea/green = 1
 	)
 	mix_message = "The tea mingles with and cooks the rice."
@@ -119,7 +122,7 @@
 /decl/chemical_reaction/recipe/food/pudding/ricepudding
 	name = "Rice Pudding"
 	required_reagents = list(
-		/decl/material/liquid/drink/milk = 5, 
+		/decl/material/liquid/drink/milk = 5,
 		/decl/material/liquid/nutriment/rice = 10
 	)
 	obj_result = /obj/item/chems/food/ricepudding
@@ -127,8 +130,8 @@
 /decl/chemical_reaction/recipe/food/pudding/spacylibertyduff
 	name = "Space Liberty Duff"
 	required_reagents = list(
-		/decl/material/liquid/water = 10, 
-		/decl/material/liquid/ethanol/vodka = 5, 
+		/decl/material/liquid/water = 10,
+		/decl/material/liquid/ethanol/vodka = 5,
 		/decl/material/liquid/psychotropics = 5
 	)
 	obj_result = /obj/item/chems/food/spacylibertyduff
@@ -136,8 +139,8 @@
 /decl/chemical_reaction/recipe/food/pudding/amanitajelly
 	name = "Amanita Jelly"
 	required_reagents = list(
-		/decl/material/liquid/water = 10, 
-		/decl/material/liquid/ethanol/vodka = 5, 
+		/decl/material/liquid/water = 10,
+		/decl/material/liquid/ethanol/vodka = 5,
 		/decl/material/liquid/amatoxin = 5
 	)
 	obj_result = /obj/item/chems/food/amanitajelly

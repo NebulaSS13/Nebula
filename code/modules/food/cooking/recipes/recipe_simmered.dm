@@ -46,7 +46,7 @@
 /decl/recipe/simmered/stew
 	fruit = list("potato" = 1, "tomato" = 1, "carrot" = 1, "eggplant" = 1, "mushroom" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
-	items = list(/obj/item/chems/food/meat)
+	items = list(/obj/item/chems/food/butchery/meat)
 	result = /obj/item/chems/food/stew
 
 /decl/recipe/simmered/milosoup
@@ -95,6 +95,6 @@
 	fruit = list("apple" = 1, "carrot" = 1, "potato" = 1)
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/nutriment/rice = 10, /decl/material/liquid/nutriment/flour = 5)
 	items = list(
-		/obj/item/chems/food/meat/chicken
+		/obj/item/chems/food/butchery/meat/chicken
 	)
 	result = /obj/item/chems/food/katsucurry

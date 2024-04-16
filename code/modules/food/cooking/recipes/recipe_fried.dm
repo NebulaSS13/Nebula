@@ -37,14 +37,14 @@
 	fruit = list("chili" = 1)
 	reagents = list(/decl/material/liquid/nutriment/batter = 10)
 	items = list(
-		/obj/item/chems/food/fish
+		/obj/item/chems/food/butchery/meat/fish
 	)
 	result = /obj/item/chems/food/cubancarp
 
 /decl/recipe/fried/fishandchips
 	items = list(
 		/obj/item/chems/food/fries,
-		/obj/item/chems/food/fish
+		/obj/item/chems/food/butchery/meat/fish
 	)
 	result = /obj/item/chems/food/fishandchips
 

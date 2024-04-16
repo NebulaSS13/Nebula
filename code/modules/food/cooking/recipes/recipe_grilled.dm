@@ -3,7 +3,7 @@
 	//cooking_heat_type = COOKING_HEAT_DIRECT
 
 /decl/recipe/grilled/plainsteak
-	items = list(/obj/item/chems/food/meat)
+	items = list(/obj/item/chems/food/butchery/meat)
 	result = /obj/item/chems/food/plainsteak
 
 /decl/recipe/grilled/meatsteak
@@ -19,7 +19,7 @@
 
 /decl/recipe/grilled/syntisteak
 	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
-	items = list(/obj/item/chems/food/meat/syntiflesh)
+	items = list(/obj/item/chems/food/butchery/meat/syntiflesh)
 	result = /obj/item/chems/food/meatsteak/synthetic
 
 /decl/recipe/grilled/toastedsandwich
@@ -39,7 +39,7 @@
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	items = list(
 		/obj/item/chems/food/egg,
-		/obj/item/chems/food/fish
+		/obj/item/chems/food/butchery/meat/fish
 	)
 	reagent_mix = REAGENT_REPLACE // no raw egg/fish
 	result = /obj/item/chems/food/fishfingers
