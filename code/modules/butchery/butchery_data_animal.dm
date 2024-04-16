@@ -59,6 +59,22 @@
 /decl/butchery_data/animal/small/furred/white
 	skin_material     = /decl/material/solid/organic/skin/fur/white
 
+/decl/butchery_data/animal/small/frog
+	skin_material = null //frog skin doesn't seem very useable
+	skin_type     = null
+	skin_amount   = null
+
+/decl/butchery_data/animal/rabbit
+	skin_material     = /decl/material/solid/organic/skin/fur/white
+	gut_type          = /obj/item/chems/food/butchery/offal/small
+	must_use_hook     = FALSE
+
+/decl/butchery_data/animal/rabbit/brown
+	skin_material     = /decl/material/solid/organic/skin/fur/brown
+
+/decl/butchery_data/animal/rabbit/black
+	skin_material     = /decl/material/solid/organic/skin/fur/black
+
 /decl/butchery_data/animal/antlion
 	meat_type         = /obj/item/chems/food/xenomeat
 	meat_amount       = 5
