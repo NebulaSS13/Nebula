@@ -50,3 +50,6 @@ lib/*.so
 # python
 *.pyc
 __pycache__
+
+# Running OpenDream locally
+nebula.json
