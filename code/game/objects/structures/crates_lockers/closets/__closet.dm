@@ -102,8 +102,8 @@ var/global/list/closets = list()
 /obj/structure/closet/proc/can_close(mob/user)
 	for(var/obj/structure/closet/closet in get_turf(src))
 		if(closet != src)
-			return TRUE
-	return FALSE
+			return FALSE
+	return TRUE
 
 /obj/structure/closet/proc/store_contents()
 	var/stored_units = 0
