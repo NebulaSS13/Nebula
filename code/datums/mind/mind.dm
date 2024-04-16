@@ -399,6 +399,7 @@
 				H.implant_loyalty(H, override = TRUE)
 				log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
 			else
+				pass()
 	else if (href_list["silicon"])
 		BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 		switch(href_list["silicon"])

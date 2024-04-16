@@ -125,6 +125,7 @@ var/global/list/localhost_addresses = list(
 
 	switch (connection)
 		if ("seeker", "web") // check for invalid connection type. do nothing if valid
+			pass()
 		else return null
 
 	deactivate_darkmode(clear_chat = FALSE) // Overwritten if the pref is set later.

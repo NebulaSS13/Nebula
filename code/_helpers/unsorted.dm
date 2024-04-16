@@ -787,3 +787,8 @@ var/global/list/WALLITEMS = list(
 			if(3)
 				return "[num]rd"
 	return "[num]th"
+
+///A do nothing proc used to prevent empty block warnings
+///In hot code (like atmos checks), use EMPTY_BLOCK_GUARD instead.
+/proc/pass(...)
+	return

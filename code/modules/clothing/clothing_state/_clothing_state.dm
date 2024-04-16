@@ -69,8 +69,6 @@
 	if(!length(ambiguous_states))
 		return
 
-	for(var/modifier_type in ambiguous_states)
-
 	// Regrettably we now need to check all our accessories for the toggles.
 	var/list/accessory_states = list()
 	for(var/obj/item/clothing/accessory in get_flat_accessory_list())

@@ -621,6 +621,7 @@ SUBSYSTEM_DEF(zcopy)
 		switch (appearance:plane)
 			if (DEFAULT_PLANE, FLOAT_PLANE)
 				// fine
+				EMPTY_BLOCK_GUARD
 			else
 				plane_needs_fix = TRUE
 
