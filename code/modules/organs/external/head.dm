@@ -32,6 +32,10 @@
 		global.eye_icon_cache[cache_key] = emissive_overlay(eyes_icon, "")
 	return global.eye_icon_cache[cache_key]
 
+// Let people with mouth slots pick things up.
+/obj/item/organ/external/head/get_manual_dexterity()
+	. = ..() | DEXTERITY_BASE
+
 /obj/item/organ/external/head/examine(mob/user)
 	. = ..()
 
