@@ -81,7 +81,7 @@ var/global/list/organ_icon_cache = list()
 			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
 			if(!istype(accessory_decl))
 				continue
-			if(isnull(accessory_decl.sprite_overlay_layer) || !accessory_decl.draw_accessory)
+			if(!isnull(accessory_decl.sprite_overlay_layer) || !accessory_decl.draw_accessory)
 				continue
 			ret.Blend(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory] || COLOR_WHITE), accessory_decl.layer_blend)
 	if(render_alpha < 255)
