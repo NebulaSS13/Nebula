@@ -70,10 +70,10 @@
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
 
-/obj/structure/closet/statue/open()
+/obj/structure/closet/statue/open(mob/user)
 	return
 
-/obj/structure/closet/statue/close()
+/obj/structure/closet/statue/close(mob/user)
 	return
 
 /obj/structure/closet/statue/toggle()

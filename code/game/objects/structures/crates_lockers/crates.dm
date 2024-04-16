@@ -8,8 +8,8 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	var/rigged = 0
 
-/obj/structure/closet/crate/open()
-	if((atom_flags & ATOM_FLAG_OPEN_CONTAINER) && !opened && can_open())
+/obj/structure/closet/crate/open(mob/user)
+	if((atom_flags & ATOM_FLAG_OPEN_CONTAINER) && !opened && can_open(user))
 		object_shaken()
 	. = ..()
 	if(.)
@@ -280,7 +280,7 @@
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
 	return list(/obj/structure/closet/body_bag/cryobag/blank)
 
-/obj/structure/closet/crate/secure/biohazard/blanks/can_close()
+/obj/structure/closet/crate/secure/biohazard/blanks/can_close(mob/user)
 	for(var/obj/structure/closet/closet in get_turf(src))
 		if(closet != src && !(istype(closet, /obj/structure/closet/body_bag/cryobag)))
 			return 0

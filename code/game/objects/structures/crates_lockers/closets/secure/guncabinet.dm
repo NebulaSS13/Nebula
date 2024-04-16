@@ -16,8 +16,8 @@
 	..()
 	update_icon()
 
-/obj/structure/closet/secure_closet/guncabinet/open() //There are plenty of things that can open it that don't use toggle
-	..()
+/obj/structure/closet/secure_closet/guncabinet/open(mob/user) //There are plenty of things that can open it that don't use toggle
+	. = ..()
 	update_icon()
 
 // TODO rewrite to use parent call and proper closet icon stuff.
