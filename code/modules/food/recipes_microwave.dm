@@ -93,7 +93,7 @@ I said no!
 		/obj/item/chems/food/bun,
 		/obj/item/chems/food/butchery/meat/fish
 	)
-	result = /obj/item/chems/food/butchery/meat/fishburger
+	result = /obj/item/chems/food/fishburger
 
 /decl/recipe/tofuburger
 	items = list(
@@ -541,7 +541,7 @@ I said no!
 		/obj/item/chems/food/fries,
 		/obj/item/chems/food/butchery/meat/fish
 	)
-	result = /obj/item/chems/food/butchery/meat/fishandchips
+	result = /obj/item/chems/food/fishandchips
 
 /decl/recipe/bread
 	display_name = "loaf of bread"
@@ -759,7 +759,7 @@ I said no!
 		/obj/item/chems/food/butchery/meat/fish
 	)
 	reagent_mix = REAGENT_REPLACE // no raw egg/fish
-	result = /obj/item/chems/food/butchery/meat/fishfingers
+	result = /obj/item/chems/food/fishfingers
 
 /decl/recipe/mysterysoup
 	reagents = list(/decl/material/liquid/water = 10)
