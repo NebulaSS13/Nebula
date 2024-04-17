@@ -67,7 +67,7 @@
 	var/mob/M = A
 	if(!istype(M))
 		return VITALS_SENSOR_OFF
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = M.get_vitals_sensor()
+	var/obj/item/clothing/sensor/vitals/sensor = M.get_vitals_sensor()
 	if(sensor)
 		return sensor.sensor_mode
 	return VITALS_SENSOR_OFF

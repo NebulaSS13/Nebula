@@ -361,7 +361,7 @@
 	var/obj/item/clothing/suit = get_equipped_item(slot_w_uniform_str)
 	if(istype(suit))
 		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+	var/obj/item/clothing/sensor/vitals/sensor = get_vitals_sensor()
 	if(sensor)
 		if(sensor.get_sensors_locked())
 			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>Unlock vitals sensors</A>"

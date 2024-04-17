@@ -1,9 +1,7 @@
-
-/obj/item/clothing/accessory/buddytag
+/obj/item/clothing/sensor/buddytag
 	name = "buddy tag"
 	desc = "A tiny device, paired up with a counterpart set to same code. When devices are taken apart too far, they start beeping."
 	icon = 'icons/clothing/accessories/buddytag.dmi'
-	slot_flags = SLOT_TIE
 	accessory_high_visibility = TRUE
 	var/next_search = 0
 	var/on = 0
@@ -11,13 +9,13 @@
 	var/distance = 10
 	var/search_interval = 30 SECONDS
 
-/obj/item/clothing/accessory/buddytag/on_update_icon()
+/obj/item/clothing/sensor/buddytag/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	if(on && check_state_in_icon("[icon_state]-on", icon))
 		icon_state = "[icon_state]-on"
 
-/obj/item/clothing/accessory/buddytag/attack_self(mob/user)
+/obj/item/clothing/sensor/buddytag/attack_self(mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
 	var/list/dat = "<A href='?src=\ref[src];toggle=1;'>[on ? "Disable" : "Enable"]</a>"
@@ -28,10 +26,10 @@
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 
-/obj/item/clothing/accessory/buddytag/DefaultTopicState()
+/obj/item/clothing/sensor/buddytag/DefaultTopicState()
 	return global.physical_topic_state
 
-/obj/item/clothing/accessory/buddytag/OnTopic(var/user, var/list/href_list, var/state)
+/obj/item/clothing/sensor/buddytag/OnTopic(var/user, var/list/href_list, var/state)
 	if(href_list["toggle"])
 		on = !on
 		if(on)
@@ -59,14 +57,14 @@
 		search_interval = newtime SECONDS
 		return TOPIC_REFRESH
 
-/obj/item/clothing/accessory/buddytag/Process()
+/obj/item/clothing/sensor/buddytag/Process()
 	if(!on)
 		return PROCESS_KILL
 	if(world.time < next_search)
 		return
 	next_search = world.time + search_interval
 	var/has_friend
-	for(var/obj/item/clothing/accessory/buddytag/buddy in SSobj.processing)
+	for(var/obj/item/clothing/sensor/buddytag/buddy in SSobj.processing)
 		if(buddy == src)
 			continue
 		if(!buddy.on)
