@@ -212,7 +212,7 @@
 	flick(attack_state, src)
 	return TRUE
 
-/mob/living/bot/secbot/gib(do_gibs)
+/mob/living/bot/secbot/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(. && my_turf)

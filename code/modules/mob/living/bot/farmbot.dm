@@ -227,7 +227,7 @@
 				tank.reagents.splash(A, 100)
 	return TRUE
 
-/mob/living/bot/farmbot/gib(do_gibs)
+/mob/living/bot/farmbot/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(. && my_turf)

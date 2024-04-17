@@ -14,7 +14,7 @@
 		if(istype(container) && !QDELETED(container))
 			container.update_icon()
 
-/mob/living/brain/gib(do_gibs)
+/mob/living/brain/gib(do_gibs = TRUE)
 	var/obj/item/organ/internal/brain_interface/container = get_container()
 	var/obj/item/organ/internal/brain/sponge = loc
 	. = ..()
