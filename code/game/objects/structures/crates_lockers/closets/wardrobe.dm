@@ -255,7 +255,7 @@
 		/obj/item/clothing/shoes/color/purple,
 		/obj/item/clothing/shoes/color/red,
 		/obj/item/clothing/shoes/craftable,
-		/obj/item/clothing/accessory/toggleable/hawaii/random,
+		/obj/item/clothing/shirt/hawaii/random,
 	)
 
 /obj/structure/closet/wardrobe/tactical

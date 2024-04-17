@@ -39,19 +39,6 @@
 	desc = "Lucky suit jacket."
 	icon = 'icons/clothing/accessories/clothing/jacket_checkered.dmi'
 
-/obj/item/clothing/accessory/toggleable/hawaii
-	name = "flower-pattern shirt"
-	desc = "You probably need some welder googles to look at this."
-	icon = 'icons/clothing/accessories/clothing/hawaiian.dmi'
-
-/obj/item/clothing/accessory/toggleable/hawaii/red
-	icon = 'icons/clothing/accessories/clothing/hawaiian_alt.dmi'
-
-/obj/item/clothing/accessory/toggleable/hawaii/random/Initialize()
-	. = ..()
-	icon = pick('icons/clothing/accessories/clothing/hawaiian.dmi', 'icons/clothing/accessories/clothing/hawaiian_alt.dmi')
-	color = color_matrix_rotate_hue(rand(-11,12)*15)
-
 /obj/item/clothing/accessory/toggleable/zhongshan
 	name = "zhongshan suit jacket"
 	desc = "A stylish Chinese tunic suit jacket."

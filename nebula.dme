@@ -1930,6 +1930,8 @@
 #include "code\modules\clothing\rings\_ring.dm"
 #include "code\modules\clothing\rings\material.dm"
 #include "code\modules\clothing\rings\rings.dm"
+#include "code\modules\clothing\shirts\_shirts.dm"
+#include "code\modules\clothing\shirts\hawaii.dm"
 #include "code\modules\clothing\shoes\_shoes.dm"
 #include "code\modules\clothing\shoes\colour.dm"
 #include "code\modules\clothing\shoes\craftable.dm"

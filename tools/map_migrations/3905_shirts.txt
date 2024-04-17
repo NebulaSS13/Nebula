@@ -1,0 +1,1 @@
+/obj/item/clothing/accessory/toggleable/hawaii/@SUBTYPES : /obj/item/clothing/shirt/hawaii/@SUBTYPES{@OLD}

@@ -3707,7 +3707,7 @@
 "qr" = (
 /obj/structure/closet,
 /obj/random/maintenance,
-/obj/item/clothing/accessory/toggleable/hawaii,
+/obj/item/clothing/shirt/hawaii,
 /obj/random/gloves,
 /turf/floor/plating,
 /area/ministation/maint/l1ne)
@@ -8409,8 +8409,8 @@
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/shoes/sandal,
-/obj/item/clothing/under,
-/obj/item/clothing/under,
+/obj/item/clothing/under/color,
+/obj/item/clothing/under/color,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "Ho" = (
