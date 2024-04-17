@@ -20976,7 +20976,7 @@
 /area/exodus/chapel/main)
 "aSm" = (
 /obj/structure/cult/tome,
-/obj/item/clothing/under/suit_jacket/red,
+/obj/item/clothing/under/formal/red,
 /obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22

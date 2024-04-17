@@ -78,8 +78,7 @@
 	new /obj/item/clothing/glasses/blindfold(src.loc)
 
 /obj/abstract/landmark/costume/butler/make_costumes()
-	new /obj/item/clothing/suit/jacket/waistcoat/black(src.loc)
-	new /obj/item/clothing/under/suit_jacket(src.loc)
+	new /obj/item/clothing/under/formal(src.loc)
 	new /obj/item/clothing/head/that(src.loc)
 
 /obj/abstract/landmark/costume/prig/make_costumes()

@@ -64,7 +64,7 @@
 
 /decl/loadout_option/uniform/corp_exec_jacket
 	name = "corporate colours, liason suit"
-	path = /obj/item/clothing/under/suit_jacket/corp
+	path = /obj/item/clothing/under/formal/corp
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/nanotrasen_poncho
