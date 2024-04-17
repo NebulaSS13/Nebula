@@ -322,7 +322,7 @@
 	desc = "A charcoal suit and red tie. Very professional."
 	icon = 'icons/clothing/under/suits/suit_pants_charcoal.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/navy,
+		/obj/item/clothing/tie/navy,
 		/obj/item/clothing/accessory/toggleable/charcoal_jacket
 	)
 
@@ -331,7 +331,7 @@
 	desc = "A navy suit and red tie, intended for the galaxy's finest."
 	icon = 'icons/clothing/under/suits/suit_pants_navy.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/red,
+		/obj/item/clothing/tie/red,
 		/obj/item/clothing/accessory/toggleable/navy_jacket
 	)
 
@@ -340,7 +340,7 @@
 	desc = "A burgundy suit and black tie. Somewhat formal."
 	icon = 'icons/clothing/under/suits/suit_pants_burgundy.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/black,
+		/obj/item/clothing/tie/black,
 		/obj/item/clothing/accessory/toggleable/burgundy_jacket
 	)
 
@@ -349,7 +349,7 @@
 	desc = "That's a very nice suit you have there. Shame if something were to happen to it, eh?"
 	icon = 'icons/clothing/under/suits/suit_pants_checkered.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/black,
+		/obj/item/clothing/tie/black,
 		/obj/item/clothing/accessory/toggleable/checkered_jacket
 	)
 
@@ -358,7 +358,7 @@
 	desc = "A tan suit. Smart, but casual."
 	icon = 'icons/clothing/under/suits/suit_pants_tan.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/long/yellow,
+		/obj/item/clothing/tie/long/yellow,
 		/obj/item/clothing/accessory/toggleable/tan_jacket
 	)
 

@@ -8,6 +8,7 @@
 #define ACCESSORY_SLOT_RANK     "Rank"
 #define ACCESSORY_SLOT_DEPT		"Department"
 #define ACCESSORY_SLOT_DECOR    "Decor"
+#define ACCESSORY_SLOT_NECK     "Neck"
 #define ACCESSORY_SLOT_MEDAL    "Medal"
 #define ACCESSORY_SLOT_INSIGNIA "Insignia"
 #define ACCESSORY_SLOT_ARMOR_C  "Chest armor"
