@@ -83,18 +83,21 @@
 	desc = "A rumpled white dress shirt paired with well-worn grey slacks."
 	icon = 'icons/clothing/under/uniform_detective_1.dmi'
 	siemens_coefficient = 0.9
-	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
+	starting_accessories = list(/obj/item/clothing/tie/blue_clip)
 	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/under/det/grey
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
 	icon = 'icons/clothing/under/uniform_detective_2.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/long/red)
+	starting_accessories = list(/obj/item/clothing/tie/long/red)
 
 /obj/item/clothing/under/det/black
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants."
 	icon = 'icons/clothing/under/uniform_detective_3.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/long/red, /obj/item/clothing/accessory/toggleable/black_vest)
+	starting_accessories = list(
+		/obj/item/clothing/tie/long/red,
+		/obj/item/clothing/accessory/toggleable/black_vest
+	)
 
 /obj/item/clothing/head/det
 	name = "fedora"

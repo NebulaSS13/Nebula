@@ -15,7 +15,7 @@
 		/obj/item/clothing/accessory/locket,
 		/obj/item/binoculars,
 		/obj/item/camera,
-		/obj/item/clothing/accessory/bowtie/ugly
+		/obj/item/clothing/tie/bow/ugly
 	)
 
 	var/list/rare_gifts = list(

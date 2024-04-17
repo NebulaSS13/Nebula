@@ -2207,7 +2207,7 @@
 /obj/structure/table,
 /obj/item/stack/material/puck/mapped/uranium,
 /obj/item/utensil/knife/plastic,
-/obj/item/clothing/accessory/bowtie/ugly,
+/obj/item/clothing/tie/bow/ugly,
 /obj/random/action_figure,
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)

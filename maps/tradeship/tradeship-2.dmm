@@ -6419,7 +6419,7 @@
 /obj/item/bedsheet/medical,
 /obj/structure/curtain/open/privacy,
 /obj/structure/bed/padded,
-/obj/item/clothing/accessory/stethoscope,
+/obj/item/clothing/tie/stethoscope,
 /obj/random/drinkbottle,
 /turf/floor/tiled/white,
 /area/ship/trade/crew/medbay)

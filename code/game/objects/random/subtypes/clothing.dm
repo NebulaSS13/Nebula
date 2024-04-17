@@ -128,21 +128,21 @@
 
 /obj/random/suit/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/suit/hazardvest =          4,
-		/obj/item/clothing/suit/toggle/labcoat =      4,
-		/obj/item/clothing/suit/space/emergency =             1,
-		/obj/item/clothing/suit/armor/vest =                  4,
-		/obj/item/clothing/suit/armor/pcarrier/tactical =     1,
-		/obj/item/clothing/suit/armor/vest/heavy =            3,
-		/obj/item/clothing/suit/toggle/bomber =       3,
-		/obj/item/clothing/suit/chef/classic =                3,
-		/obj/item/clothing/suit/surgicalapron =               2,
-		/obj/item/clothing/suit/apron/overalls =              3,
-		/obj/item/clothing/suit/bio_suit/general =            1,
-		/obj/item/clothing/suit/toggle/hoodie/black = 3,
-		/obj/item/clothing/suit/toggle/brown_jacket = 3,
-		/obj/item/clothing/suit/leather_jacket =      3,
-		/obj/item/clothing/suit/apron =                       4
+		/obj/item/clothing/suit/hazardvest =              4,
+		/obj/item/clothing/suit/toggle/labcoat =          4,
+		/obj/item/clothing/suit/space/emergency =         1,
+		/obj/item/clothing/suit/armor/vest =              4,
+		/obj/item/clothing/suit/armor/pcarrier/tactical = 1,
+		/obj/item/clothing/suit/armor/vest/heavy =        3,
+		/obj/item/clothing/suit/toggle/bomber =           3,
+		/obj/item/clothing/suit/chef/classic =            3,
+		/obj/item/clothing/suit/surgicalapron =           2,
+		/obj/item/clothing/suit/apron/overalls =          3,
+		/obj/item/clothing/suit/bio_suit/general =        1,
+		/obj/item/clothing/suit/toggle/hoodie/black =     3,
+		/obj/item/clothing/suit/toggle/brown_jacket =     3,
+		/obj/item/clothing/suit/leather_jacket =          3,
+		/obj/item/clothing/suit/apron =                   4
 	)
 	return spawnable_choices
 
@@ -187,7 +187,7 @@
 		/obj/item/clothing/accessory/webbing/holster/waist =  1,
 		/obj/item/clothing/accessory/webbing/holster/armpit = 1,
 		/obj/item/clothing/accessory/kneepads =               3,
-		/obj/item/clothing/accessory/stethoscope =            2
+		/obj/item/clothing/tie/stethoscope =                  2
 	)
 	return spawnable_choices
 

@@ -93,7 +93,7 @@
 		/obj/item/paicard,
 		/obj/item/synthesized_instrument/violin,
 		/obj/item/belt/utility/full,
-		/obj/item/clothing/accessory/horrible,
+		/obj/item/clothing/tie/horrible,
 		/obj/item/box/large/foam_gun,
 		/obj/item/box/large/foam_gun/burst,
 		/obj/item/box/large/foam_gun/revolver)

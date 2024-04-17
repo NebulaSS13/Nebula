@@ -1,8 +1,5 @@
 /obj/item/clothing/accessory
-	name = "tie"
-	desc = "A neosilk clip-on tie."
-	icon = 'icons/clothing/accessories/ties/tie.dmi'
-	icon_state = ICON_STATE_WORLD
+	abstract_type = /obj/item/clothing/accessory
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
 	accessory_slot = ACCESSORY_SLOT_DECOR
