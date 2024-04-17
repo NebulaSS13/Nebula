@@ -141,6 +141,11 @@
 	},
 /turf/floor/wood/ebony,
 /area/shaded_hills/general_store)
+"iH" = (
+/obj/structure/door/wood/ebony,
+/obj/abstract/landmark/lock_preset/shaded_hills/inn_interior,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/inn)
 "iX" = (
 /obj/structure/window/basic/full,
 /turf/floor/natural/path/basalt,
@@ -247,6 +252,11 @@
 	},
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
+"sJ" = (
+/obj/structure/door/wood/ebony,
+/obj/abstract/landmark/lock_preset/shaded_hills/inn_interior,
+/turf/floor/wood/ebony,
+/area/shaded_hills/inn)
 "sM" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /turf/floor/wood/ebony,
@@ -342,6 +352,7 @@
 /area/shaded_hills/slaughterhouse)
 "Bx" = (
 /obj/structure/wall_sconce/lantern,
+/obj/structure/textiles/spinning_wheel/twisting_bench/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "BG" = (
@@ -498,6 +509,7 @@
 /area/shaded_hills/slaughterhouse)
 "Qs" = (
 /obj/structure/door/wood/ebony,
+/obj/abstract/landmark/lock_preset/shaded_hills/inn_exterior,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
 "QQ" = (
@@ -8620,7 +8632,7 @@ ZY
 ZY
 ZY
 ZY
-Qs
+sJ
 ZY
 ZY
 ZY
@@ -9074,7 +9086,7 @@ TR
 Ee
 Ee
 Ee
-dC
+iH
 Ee
 Ee
 Ee
@@ -10292,7 +10304,7 @@ SX
 lF
 lF
 lF
-dC
+iH
 lF
 Ap
 Wl

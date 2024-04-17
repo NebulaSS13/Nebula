@@ -15,3 +15,6 @@
 
 /obj/structure/textiles/spinning_wheel/twisting_bench/is_thread_material(decl/material/mat)
 	return istype(mat, accepts_gut_material)
+
+/obj/structure/textiles/spinning_wheel/twisting_bench/ebony
+	material = /decl/material/solid/organic/wood/ebony

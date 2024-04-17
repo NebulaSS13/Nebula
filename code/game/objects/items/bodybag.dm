@@ -41,6 +41,10 @@
 	. = ..()
 	update_icon() //Since adding a label updates the name, this handles updating the label overlay
 
+/obj/structure/closet/body_bag/can_install_lock()
+	// It is a plastic bag
+	return FALSE
+
 /obj/structure/closet/body_bag/on_update_icon()
 	if(opened)
 		icon_state = "open"
@@ -61,8 +65,9 @@
 	contains_body = ..()
 	return contains_body
 
-/obj/structure/closet/body_bag/close()
-	if(..())
+/obj/structure/closet/body_bag/close(mob/user)
+	. = ..()
+	if(.)
 		set_density(0)
 		return TRUE
 	return FALSE

@@ -12,7 +12,7 @@
 	if(distance <= 1 && !opened)
 		to_chat(user, "The lid is [locked ? "tightly secured with screws." : "unsecured and can be opened."]")
 
-/obj/structure/closet/coffin/can_open()
+/obj/structure/closet/coffin/can_open(mob/user)
 	. =  ..()
 	if(locked)
 		return FALSE
@@ -31,7 +31,7 @@
 		return ..()
 
 /obj/structure/closet/coffin/toggle(mob/user)
-	if(!(opened ? close() : open()))
+	if(!(opened ? close(user) : open(user)))
 		to_chat(user, SPAN_NOTICE("It won't budge!"))
 
 /obj/structure/closet/coffin/req_breakout()
@@ -39,8 +39,7 @@
 	if(locked)
 		return TRUE
 
-
-/obj/structure/closet/coffin/break_open()
+/obj/structure/closet/coffin/break_open(mob/user)
 	locked = FALSE
 	..()
 

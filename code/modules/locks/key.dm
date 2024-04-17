@@ -2,11 +2,19 @@
 	name = "key"
 	desc = "Used to unlock things."
 	icon = 'icons/obj/items/key.dmi'
-	icon_state = "keys"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/brass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/key_data
+
+/obj/item/key/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
+		if(key_data)
+			to_chat(user, SPAN_NOTICE("\The [src] unlocks '[key_data]'."))
+		else
+			to_chat(user, SPAN_NOTICE("\The [src] is blank."))
 
 /obj/item/key/proc/get_data(var/mob/user)
 	return key_data

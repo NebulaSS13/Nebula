@@ -79,6 +79,9 @@
 /decl/stack_recipe/hardness/integrity/key
 	result_type        = /obj/item/key
 
+/decl/stack_recipe/hardness/integrity/keyring
+	result_type        = /obj/item/storage/keyring
+
 /decl/stack_recipe/hardness/integrity/rod
 	result_type        = /obj/item/stack/material/rods
 	difficulty         = MAT_VALUE_NORMAL_DIY

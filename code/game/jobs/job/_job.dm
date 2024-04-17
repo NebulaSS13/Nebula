@@ -36,6 +36,9 @@
 	var/forced_spawnpoint                     // If set to a spawnpoint name, will use that spawn point for joining as this job.
 	var/hud_icon                              // icon used for Sec HUD overlay
 
+	// A list of string IDs for keys to grant on join.
+	var/list/lock_keys = list()
+
 	//Job access. The use of minimal_access or access is determined by a config setting: jobs_have_minimal_access
 	var/list/minimal_access = list()          // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()                  // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
@@ -91,9 +94,23 @@
 		H.set_default_language(required_language)
 	H.add_language(/decl/language/human/common)
 	H.set_default_language(/decl/language/human/common)
+
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit)
-		return outfit.equip_outfit(H, alt_title || title, job = src, rank = grade)
+		. = outfit.equip_outfit(H, alt_title || title, job = src, rank = grade)
+
+	if(length(lock_keys) == 1)
+		var/lock_key = lock_keys[1]
+		var/obj/item/key/new_key = new(get_turf(H), lock_keys[lock_key] || /decl/material/solid/metal/iron, lock_key)
+		H.put_in_hands_or_store_or_drop(new_key)
+	else if(length(lock_keys))
+		var/obj/item/storage/keyring/keyring
+		for(var/lock_key in lock_keys)
+			if(!keyring)
+				keyring = new(get_turf(H))
+				H.put_in_hands_or_store_or_drop(keyring)
+			var/obj/item/key/new_key = new(get_turf(H), lock_keys[lock_key] || /decl/material/solid/metal/iron, lock_key)
+			keyring.handle_item_insertion(new_key)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
