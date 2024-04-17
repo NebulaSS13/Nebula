@@ -343,7 +343,7 @@
 	dir = 5
 	},
 /obj/structure/table/glass,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /turf/floor/tiled/white/lowpressure,
 /area/map_template/ecship/science)
 "aZ" = (

@@ -647,9 +647,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/cmd_admin_check_contents(mob/living/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
 	set name = "Check Contents"
-
-	var/list/L = M.get_contents()
-	for(var/t in L)
+	for(var/t in M.get_mob_contents())
 		to_chat(usr, "[t]")
 	SSstatistics.add_field_details("admin_verb","CC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

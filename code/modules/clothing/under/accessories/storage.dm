@@ -1,172 +1,83 @@
-/obj/item/clothing/accessory/storage
+/obj/item/clothing/accessory/webbing
 	name = "webbing"
 	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
 	icon = 'icons/clothing/accessories/storage/webbing.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	accessory_slot = ACCESSORY_SLOT_UTILITY
 	accessory_high_visibility = TRUE
-	var/slots = 3
-	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
-	var/obj/item/storage/internal/pockets/hold
+	storage = /datum/storage/pockets
 
-/obj/item/clothing/accessory/storage/get_initial_accessory_hide_on_states()
-	var/static/list/initial_accessory_hide_on_states = list(
-		/decl/clothing_state_modifier/rolled_down
-	)
-	return initial_accessory_hide_on_states
-
-/obj/item/clothing/accessory/storage/Initialize()
-	. = ..()
-	create_storage()
-
-/obj/item/clothing/accessory/storage/Destroy()
-	QDEL_NULL(hold)
-	return ..()
-
-/obj/item/clothing/accessory/storage/proc/create_storage()
-	hold = new/obj/item/storage/internal/pockets(src, slots, max_w_class)
-
-/obj/item/clothing/accessory/storage/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE) || !hold)
-		return ..()
-	if(istype(loc, /obj/item/clothing))
-		hold.open(user)
-		return TRUE
-	if(hold.handle_attack_hand(user))	//otherwise interact as a regular storage item
-		return ..(user)
-	return TRUE
-
-/obj/item/clothing/accessory/storage/handle_mouse_drop(atom/over, mob/user, params)
-	if(istype(over, /obj/screen/inventory))
-		return ..()
-	if(!istype(loc, /obj/item/clothing) && hold?.handle_storage_internal_mouse_drop(user, over))
-		return ..()
-	return TRUE
-
-/obj/item/clothing/accessory/storage/attackby(obj/item/W, mob/user)
-	if(hold)
-		return hold.attackby(W, user)
-
-/obj/item/clothing/accessory/storage/emp_act(severity)
-	if(hold)
-		hold.emp_act(severity)
-		..()
-
-/obj/item/clothing/accessory/storage/attack_self(mob/user)
-	to_chat(user, "<span class='notice'>You empty [src].</span>")
-	var/turf/T = get_turf(src)
-	hold.hide_from(usr)
-	for(var/obj/item/I in hold)
-		hold.remove_from_storage(I, T, 1)
-	hold.finish_bulk_removal()
-	src.add_fingerprint(user)
-
-/obj/item/clothing/accessory/storage/webbing_large
+/obj/item/clothing/accessory/webbing/webbing_large
 	name = "large webbing"
 	desc = "A large collection of synthcotton pockets and pouches."
 	icon = 'icons/clothing/accessories/storage/webbing_large.dmi'
-	slots = 4
+	storage = /datum/storage/pockets/webbing
 
-/obj/item/clothing/accessory/storage/vest
+/obj/item/clothing/accessory/webbing/vest
 	name = "webbing vest"
 	desc = "Durable synthcotton vest with lots of pockets to carry essentials."
 	icon = 'icons/clothing/accessories/storage/vest.dmi'
-	slots = 5
+	storage = /datum/storage/pockets/vest
 
-/obj/item/clothing/accessory/storage/vest/black
+/obj/item/clothing/accessory/webbing/vest/black
 	name = "black webbing vest"
 	desc = "Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands."
 	icon = 'icons/clothing/accessories/storage/vest_black.dmi'
 
-/obj/item/clothing/accessory/storage/vest/brown
+/obj/item/clothing/accessory/webbing/vest/brown
 	name = "brown webbing vest"
 	desc = "Worn brownish synthcotton vest with lots of pockets to unload your hands."
 	icon = 'icons/clothing/accessories/storage/vest_brown.dmi'
 
-/obj/item/clothing/accessory/storage/drop_pouches
-	slots = 4 //to accomodate it being slotless
+/obj/item/clothing/accessory/webbing/drop_pouches
+	storage = /datum/storage/pockets/pouches
 
-/obj/item/clothing/accessory/storage/drop_pouches/create_storage()
-	hold = new/obj/item/storage/internal/pouch(src, slots*BASE_STORAGE_COST(max_w_class))
-
-/obj/item/clothing/accessory/storage/drop_pouches/black
+/obj/item/clothing/accessory/webbing/drop_pouches/black
 	name = "black drop pouches"
 	desc = "Robust black synthcotton bags to hold whatever you need, but cannot hold in hands."
 	icon = 'icons/clothing/accessories/pouches/thigh_black.dmi'
 
-/obj/item/clothing/accessory/storage/drop_pouches/brown
+/obj/item/clothing/accessory/webbing/drop_pouches/brown
 	name = "brown drop pouches"
 	desc = "Worn brownish synthcotton bags to hold whatever you need, but cannot hold in hands."
 	icon = 'icons/clothing/accessories/pouches/thigh_brown.dmi'
 
-/obj/item/clothing/accessory/storage/drop_pouches/white
+/obj/item/clothing/accessory/webbing/drop_pouches/white
 	name = "white drop pouches"
 	desc = "Durable white synthcotton bags to hold whatever you need, but cannot hold in hands."
 	icon = 'icons/clothing/accessories/pouches/thigh_white.dmi'
 
-/obj/item/clothing/accessory/storage/knifeharness
+/obj/item/clothing/accessory/webbing/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife loops."
 	icon = 'icons/clothing/accessories/clothing/harness_unathi.dmi'
-	slots = 2
-	max_w_class = ITEM_SIZE_NORMAL //for knives
+	storage = /datum/storage/pockets/knifeharness
 
-/obj/item/clothing/accessory/storage/knifeharness/Initialize()
+/obj/item/clothing/accessory/webbing/knifeharness/Initialize()
 	. = ..()
-	hold.can_hold = list(
-		/obj/item/hatchet,
-		/obj/item/knife,
-	)
-	new /obj/item/knife/primitive(hold)
-	new /obj/item/knife/primitive(hold)
+	if(storage)
+		for(var/i = 1 to 2)
+			var/obj/item/knife/primitive/knife = new(src)
+			if(storage.can_be_inserted(knife, null, TRUE))
+				storage.handle_item_insertion(null, knife)
 	update_icon()
 
-/obj/item/clothing/accessory/storage/knifeharness/on_update_icon()
+/obj/item/clothing/accessory/webbing/knifeharness/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	var/contents_count = min(length(contents), 2)
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
 
-/obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/accessory/webbing/knifeharness/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		var/contents_count = min(length(contents), 2)
 		if(contents_count > 0 && check_state_in_icon("[overlay.icon_state]-[contents_count]", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-[contents_count]"
 	. = ..()
 
-/obj/item/clothing/accessory/storage/bandolier
+/obj/item/clothing/accessory/webbing/bandolier
 	name = "bandolier"
 	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
 	icon = 'icons/obj/items/bandolier.dmi'
-	slots = 10
-	max_w_class = ITEM_SIZE_NORMAL
-
-/obj/item/clothing/accessory/storage/bandolier/Initialize()
-	. = ..()
-	hold.can_hold = list(
-		/obj/item/ammo_casing,
-		/obj/item/grenade,
-		/obj/item/knife,
-		/obj/item/star,
-		/obj/item/rcd_ammo,
-		/obj/item/chems/syringe,
-		/obj/item/chems/hypospray,
-		/obj/item/chems/hypospray/autoinjector,
-		/obj/item/chems/inhaler,
-		/obj/item/syringe_cartridge,
-		/obj/item/plastique,
-		/obj/item/clothing/mask/smokable,
-		/obj/item/screwdriver,
-		/obj/item/multitool,
-		/obj/item/magnetic_ammo,
-		/obj/item/ammo_magazine,
-		/obj/item/chems/glass/beaker/vial,
-		/obj/item/paper,
-		/obj/item/pen,
-		/obj/item/photo,
-		/obj/item/marshalling_wand,
-		/obj/item/chems/pill,
-		/obj/item/storage/pill_bottle
-	)
-
+	storage = /datum/storage/pockets/bandolier

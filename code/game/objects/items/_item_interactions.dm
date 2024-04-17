@@ -29,3 +29,14 @@
 
 /decl/interaction_handler/drop/invoked(atom/target, mob/user, obj/item/prop)
 	user.try_unequip(target, user.loc)
+
+/decl/interaction_handler/storage_open
+	name = "Open Storage"
+	expected_target_type = /atom
+	incapacitation_flags = INCAPACITATION_DISRUPTED
+
+/decl/interaction_handler/storage_open/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..() && (ishuman(user) || isrobot(user) || issmall(user)) && target?.storage
+
+/decl/interaction_handler/storage_open/invoked(atom/target, mob/user, obj/item/prop)
+	target?.storage?.open(user)

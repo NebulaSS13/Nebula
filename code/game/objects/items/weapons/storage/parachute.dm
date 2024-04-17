@@ -1,15 +1,16 @@
 //Parachutes
-/obj/item/storage/backpack/parachute
+/obj/item/backpack/parachute
 	name = "parachute"
 	desc = "A specially-made backpack, designed to help one survive jumping from incredible heights. It sacrifices some storage space for that added functionality."
 	icon = 'icons/obj/items/storage/backpack/parachute.dmi'
 	var/packed = TRUE
 
-/obj/item/storage/backpack/parachute/Initialize(ml, material_key)
-	max_storage_space = round(max_storage_space * 0.5)
+/obj/item/backpack/parachute/Initialize(ml, material_key)
 	. = ..()
+	if(storage)
+		storage.max_storage_space = max(1, round(storage.max_storage_space * 0.5))
 
-/obj/item/storage/backpack/parachute/examine(mob/user)
+/obj/item/backpack/parachute/examine(mob/user)
 	. = ..()
 	if(Adjacent(user))
 		if(packed)
@@ -17,7 +18,7 @@
 		else
 			to_chat(user, SPAN_DANGER("The parachute is unpacked."))
 
-/obj/item/storage/backpack/parachute/attack_self(mob/user)
+/obj/item/backpack/parachute/attack_self(mob/user)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/initial_pack = packed

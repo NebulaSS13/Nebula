@@ -260,11 +260,8 @@
 
 			return TRUE
 
-		if(istype(W, /obj/item/storage))
-			var/obj/item/storage/storage = W
-			if(storage.collection_mode)
-				storage.gather_all(src, user)
-				return TRUE
+		if(W?.storage?.collection_mode && W.storage.gather_all(src, user))
+			return TRUE
 
 	if(ATOM_IS_OPEN_CONTAINER(W) && W.reagents && reagents?.total_volume >= FLUID_PUDDLE)
 		var/taking = min(reagents.total_volume, REAGENTS_FREE_SPACE(W.reagents))
@@ -273,10 +270,8 @@
 			reagents.trans_to(W, taking)
 			return TRUE
 
-	if(istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		if(S.use_to_pickup && S.collection_mode)
-			S.gather_all(src, user)
+	if(istype(W, /obj/item) && storage && storage.use_to_pickup && storage.collection_mode)
+		storage.gather_all(src, user)
 		return TRUE
 
 	if(istype(W, /obj/item/grab))

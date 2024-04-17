@@ -288,7 +288,7 @@
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(. && my_turf)
-		new /obj/item/storage/firstaid(my_turf)
+		new /obj/item/firstaid(my_turf)
 		new /obj/item/assembly/prox_sensor(my_turf)
 		new /obj/item/scanner/health(my_turf)
 		if (prob(50))

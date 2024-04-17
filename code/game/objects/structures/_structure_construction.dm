@@ -138,6 +138,8 @@
 	if(.)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		add_fingerprint(user)
+		return
+	return ..()
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
 	if(environment_smash >= 1)

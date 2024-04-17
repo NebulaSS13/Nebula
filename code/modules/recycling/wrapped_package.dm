@@ -141,10 +141,9 @@
 		if(M == user)
 			user.put_in_hands(src)
 
-	if(istype(AM.loc, /obj/item/storage))
-		var/obj/item/storage/S = AM.loc
-		S.remove_from_storage(AM, src)
-		S.handle_item_insertion(src, TRUE)
+	if(AM.loc?.storage)
+		AM.loc.storage.remove_from_storage(user, AM, src)
+		AM.loc.storage.handle_item_insertion(null, src, TRUE)
 	else
 		AM.forceMove(src)
 
@@ -253,11 +252,11 @@
 		if(ismob(loc))
 			var/mob/M = loc
 			M.put_in_hands(AM)
-		else if(istype(loc, /obj/item/storage))
-			var/obj/item/storage/S = loc
-			S.handle_item_insertion(AM, TRUE)
 		else
-			AM.dropInto(forced_loc)
+			if(forced_loc?.storage)
+				forced_loc.storage.handle_item_insertion(null, AM, TRUE)
+			else
+				AM.dropInto(forced_loc)
 
 		if(ismob(AM))
 			var/mob/M = AM

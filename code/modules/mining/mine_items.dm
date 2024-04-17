@@ -8,15 +8,15 @@
 /obj/structure/closet/secure_closet/miner/WillContain()
 	return list(
 		new /datum/atom_creator/weighted(list(
-				/obj/item/storage/backpack/industrial,
-				/obj/item/storage/backpack/satchel/eng
+				/obj/item/backpack/industrial,
+				/obj/item/backpack/satchel/eng
 			)),
 		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/under/miner,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/scanner/gas,
-		/obj/item/storage/ore,
+		/obj/item/ore,
 		/obj/item/flashlight/lantern,
 		/obj/item/tool/shovel,
 		/obj/item/tool/pickaxe,

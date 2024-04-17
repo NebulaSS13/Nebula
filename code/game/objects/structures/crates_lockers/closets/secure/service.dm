@@ -8,12 +8,12 @@
 		/obj/item/clothing/under/chaplain,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/suit/chaplain_hoodie,
-		/obj/item/storage/box/candles = 2,
-		/obj/item/storage/box/candles/incense,
+		/obj/item/box/candles = 2,
+		/obj/item/box/candles/incense,
 		/obj/item/deck/tarot,
 		/obj/item/chems/drinks/bottle/holywater,
 		/obj/item/nullrod,
-		/obj/item/storage/bible,
-		/obj/item/storage/belt/general,
+		/obj/item/bible,
+		/obj/item/belt/general,
 		/obj/item/urn
 	)

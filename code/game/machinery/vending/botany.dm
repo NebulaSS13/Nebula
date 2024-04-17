@@ -15,7 +15,7 @@
 		/obj/item/chems/glass/bottle/robustharvest = 3,
 		/obj/item/plantspray/pests = 20,
 		/obj/item/chems/syringe = 5,
-		/obj/item/storage/plants = 5,
+		/obj/item/plants = 5,
 		/obj/item/chems/glass/bottle/ammonia = 10
 	)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.

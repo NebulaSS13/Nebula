@@ -11,10 +11,10 @@
 /decl/hierarchy/supply_pack/nonessent/artscrafts
 	name = "Art - Arts and Crafts supplies"
 	contains = list(
-		/obj/item/storage/box/fancy/crayons,
+		/obj/item/box/fancy/crayons,
 		/obj/item/camera,
 		/obj/item/camera_film = 2,
-		/obj/item/storage/photo_album,
+		/obj/item/photo_album,
 		/obj/item/chems/glass/paint/red,
 		/obj/item/chems/glass/paint/green,
 		/obj/item/chems/glass/paint/blue,
@@ -95,7 +95,7 @@
 					/obj/item/clothing/under/mailman,
 					/obj/item/clothing/under/dress/dress_saloon,
 					/obj/item/clothing/accessory/suspenders,
-					/obj/item/clothing/suit/storage/toggle/labcoat/mad,
+					/obj/item/clothing/suit/toggle/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
 					/obj/item/clothing/under/schoolgirl,
 					/obj/item/clothing/under/owl,
@@ -118,8 +118,8 @@
 /decl/hierarchy/supply_pack/nonessent/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
 					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/storage/toggle/suit/blue,
-					/obj/item/clothing/suit/storage/toggle/suit/purple,
+					/obj/item/clothing/suit/toggle/suit/blue,
+					/obj/item/clothing/suit/toggle/suit/purple,
 					/obj/item/clothing/under/suit_jacket,
 					/obj/item/clothing/under/suit_jacket/female,
 					/obj/item/clothing/under/suit_jacket/really_black,
@@ -228,7 +228,7 @@
 					/obj/item/clothing/head/chaplain_hood,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/under/wedding/bride_white,
-					/obj/item/storage/box/candles = 3)
+					/obj/item/box/candles = 3)
 	containername = "chaplain equipment crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
@@ -246,7 +246,7 @@
 	name = "Rec - Aromatherapy"
 	contains = list(
 		/obj/item/paper/aromatherapy_disclaimer,
-		/obj/item/storage/box/candles/scented = 3,
-		/obj/item/storage/box/candles/incense = 6,
+		/obj/item/box/candles/scented = 3,
+		/obj/item/box/candles/incense = 6,
 		/obj/item/flame/fuelled/lighter/random)
 	containername = "aromatherapy crate"

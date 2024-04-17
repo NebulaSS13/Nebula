@@ -12,7 +12,7 @@
 /decl/hierarchy/supply_pack/science/robotics
 	name = "Parts - Robotics"
 	contains = list(/obj/item/assembly/prox_sensor = 3,
-					/obj/item/storage/toolbox/electrical,
+					/obj/item/toolbox/electrical,
 					/obj/item/flash = 4,
 					/obj/item/cell/high = 2)
 	containertype = /obj/structure/closet/crate/secure/gear
@@ -36,14 +36,14 @@
 
 /decl/hierarchy/supply_pack/science/minergear
 	name = "Shaft miner equipment"
-	contains = list(/obj/item/storage/backpack/industrial,
-					/obj/item/storage/backpack/satchel/eng,
+	contains = list(/obj/item/backpack/industrial,
+					/obj/item/backpack/satchel/eng,
 					/obj/item/radio/headset/headset_cargo,
 					/obj/item/clothing/under/miner,
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/color/black,
 					/obj/item/scanner/gas,
-					/obj/item/storage/ore,
+					/obj/item/ore,
 					/obj/item/flashlight/lantern,
 					/obj/item/tool/shovel,
 					/obj/item/tool/pickaxe,

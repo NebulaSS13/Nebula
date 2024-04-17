@@ -10,9 +10,9 @@
 
 /decl/hierarchy/outfit/job/ministation/captain/Initialize()
 	. = ..()
-	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/captain
-	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/cap
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com
+	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/backpack/captain
+	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/backpack/satchel/cap
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/backpack/messenger/com
 
 /decl/hierarchy/outfit/job/ministation/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
@@ -36,4 +36,4 @@
 	hands = list(/obj/item/clothing/suit/armor/bulletproof)
 	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop
-	backpack_contents = list(/obj/item/storage/box/ids = 1)
+	backpack_contents = list(/obj/item/box/ids = 1)

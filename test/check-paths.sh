@@ -24,7 +24,7 @@ exactly() { # exactly N name search [mode] [filter]
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 # Additional exception August 2020: \b is a regex symbol as well as a BYOND macro.
 exactly 1 "escapes" '\\\\(red|blue|green|black|b|i[^mc])'
-exactly 3 "Del()s" '\WDel\('
+exactly 4 "Del()s" '\WDel\('
 exactly 2 "/atom text paths" '"/atom'
 exactly 2 "/area text paths" '"/area'
 exactly 2 "/datum text paths" '"/datum'

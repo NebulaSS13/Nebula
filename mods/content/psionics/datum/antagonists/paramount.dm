@@ -19,7 +19,7 @@
 	uniform = /obj/item/clothing/under/psysuit
 	suit =    /obj/item/clothing/suit/wizrobe/psypurple
 	shoes =   /obj/item/clothing/shoes/jackboots
-	back =    /obj/item/storage/backpack/satchel
+	back =    /obj/item/backpack/satchel
 	gloves =  /obj/item/clothing/gloves/color/grey
 	id_type = /obj/item/card/id/syndicate
 

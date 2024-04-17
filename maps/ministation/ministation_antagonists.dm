@@ -41,7 +41,7 @@
 		"a piece of corgi meat"              = /obj/item/chems/food/butchery/meat/corgi,
 		"the hypospray"                      = /obj/item/chems/hypospray,
 		"the captain's pinpointer"           = /obj/item/pinpointer,
-		"the championship belt"              = /obj/item/storage/belt/champion,
+		"the championship belt"              = /obj/item/belt/champion,
 		"the tradehouse account documents"   = /obj/item/documents/tradehouse/account,
 		"the tradehouse personnel data"      = /obj/item/documents/tradehouse/personnel,
 		"the table-top spaceship model"      = /obj/item/toy/shipmodel,

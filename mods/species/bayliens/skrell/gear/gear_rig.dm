@@ -27,7 +27,6 @@
 		/obj/item/ammo_magazine,
 		/obj/item/ammo_casing,
 		/obj/item/flashlight,
-		/obj/item/storage/,
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit
 	)

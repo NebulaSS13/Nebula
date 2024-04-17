@@ -127,7 +127,7 @@
 		// TODO: cut a piece off to prepare a food item for another utensil.
 		return null
 
-	if (!(isturf(loc) && ((locate(/obj/structure/table) in loc) || (locate(/obj/machinery/optable) in loc) || (locate(/obj/item/storage/tray) in loc))))
+	if (!(isturf(loc) && ((locate(/obj/structure/table) in loc) || (locate(/obj/machinery/optable) in loc) || (locate(/obj/item/plate) in loc))))
 		to_chat(user, SPAN_WARNING("You cannot slice \the [src] here! You need a table or at least a tray to do it."))
 		return TRUE
 

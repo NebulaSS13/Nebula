@@ -68,7 +68,7 @@ SUBSYSTEM_DEF(customitems)
 
 		// Spawn and equip the item.
 		if(ispath(citem.apply_to_target_type))
-			var/obj/item/existing_item = (locate(citem.apply_to_target_type) in M.get_contents())
+			var/obj/item/existing_item = (locate(citem.apply_to_target_type) in M.get_mob_contents())
 			if(existing_item)
 				citem.apply_to_item(existing_item)
 				return

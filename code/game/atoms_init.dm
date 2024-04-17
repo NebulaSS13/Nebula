@@ -1,6 +1,14 @@
 // Atom-level definitions
 
 /atom/New(loc, ...)
+
+	// Do this as early as humanly possible to replicate previous type-based storage behavior.
+	if(storage)
+		if(ispath(storage))
+			storage = new storage(src)
+		if(!istype(storage))
+			storage = null
+
 	//atom creation method that preloads variables at creation
 	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		global._preloader.load(src)
@@ -70,22 +78,25 @@
 	return
 
 /atom/Destroy()
+	// must be done before deletion // TODO: ADD PRE_DELETION OBSERVATION
+	if(isatom(loc) && loc.storage)
+		loc.storage.on_item_pre_deletion(src)
 	UNQUEUE_TEMPERATURE_ATOM(src)
-
 	QDEL_NULL(reagents)
-
 	LAZYCLEARLIST(our_overlays)
 	LAZYCLEARLIST(priority_overlays)
-
 	LAZYCLEARLIST(climbers)
-
 	QDEL_NULL(light)
-
 	if(opacity)
 		updateVisibility(src)
 	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
 		QDEL_NULL(atom_codex_ref)
-	return ..()
+	var/atom/oldloc = loc
+	. = ..()
+	if(isatom(oldloc) && oldloc.storage)
+		oldloc.storage.on_item_post_deletion(src) // must be done after deletion
+	// This might need to be moved onto a Del() override at some point.
+	QDEL_NULL(storage)
 
 // Called if an atom is deleted before it initializes. Only call Destroy in this if you know what you're doing.
 /atom/proc/EarlyDestroy(force = FALSE)

@@ -46,6 +46,11 @@
 		on_removed()
 	return ..()
 
+/obj/item/clothing/get_stored_inventory()
+	. = ..()
+	if(length(.) && length(accessories))
+		. -= accessories
+
 /obj/item/clothing/proc/is_accessory()
 	return istype(loc, /obj/item/clothing)
 

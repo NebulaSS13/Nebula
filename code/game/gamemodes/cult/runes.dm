@@ -424,14 +424,14 @@
 		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes_str)
 
 	O = user.get_equipped_item(slot_back_str)
-	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.try_unequip(O))
-		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
+	if(O.storage && !istype(O, /obj/item/backpack/cultpack) && user.try_unequip(O))
+		var/obj/item/backpack/cultpack/C = new /obj/item/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back_str)
 		if(C)
 			for(var/obj/item/I in O)
 				I.forceMove(C)
 	else if(!O)
-		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
+		var/obj/item/backpack/cultpack/C = new /obj/item/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back_str)
 
 	user.update_icon()

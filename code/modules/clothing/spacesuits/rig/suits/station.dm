@@ -8,7 +8,7 @@
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/briefcase, /obj/item/storage/secure/briefcase)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/briefcase, /obj/item/secure_storage/briefcase)
 
 	req_access = list(access_lawyer)
 
@@ -64,7 +64,7 @@
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/storage/ore,
+		/obj/item/ore,
 		/obj/item/t_scanner,
 		/obj/item/tool,
 		/obj/item/rcd
@@ -114,7 +114,7 @@
 	boots =  /obj/item/clothing/shoes/magboots/rig/eva
 	gloves = /obj/item/clothing/gloves/rig/eva
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/inflatable_dispenser,/obj/item/t_scanner,/obj/item/rcd)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/toolbox,/obj/item/briefcase/inflatable,/obj/item/inflatable_dispenser,/obj/item/t_scanner,/obj/item/rcd)
 
 	req_access = list(access_engine_equip)
 
@@ -165,9 +165,9 @@
 		/obj/item/flashlight,
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
-		/obj/item/storage/ore,
-		/obj/item/storage/toolbox,
-		/obj/item/storage/briefcase/inflatable,
+		/obj/item/ore,
+		/obj/item/toolbox,
+		/obj/item/briefcase/inflatable,
 		/obj/item/inflatable_dispenser,
 		/obj/item/t_scanner,
 		/obj/item/tool,
@@ -231,7 +231,7 @@
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/storage/excavation,
+		/obj/item/excavation,
 		/obj/item/tool,
 		/obj/item/scanner/health,
 		/obj/item/scanner/breath,
@@ -242,7 +242,7 @@
 		/obj/item/gps,
 		/obj/item/pinpointer/radio,
 		/obj/item/radio/beacon,
-		/obj/item/storage/bag/fossils
+		/obj/item/bag/fossils
 	)
 
 	anomaly_shielding = 1
@@ -288,7 +288,7 @@
 	boots =  /obj/item/clothing/shoes/magboots/rig/medical
 	gloves = /obj/item/clothing/gloves/rig/medical
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
 
 	req_access = list(access_medical_equip)
 

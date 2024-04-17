@@ -7,7 +7,7 @@
 /area/map_template/wizard_station)
 "ac" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/cultpack,
+/obj/item/backpack/cultpack,
 /turf/floor/carpet,
 /area/map_template/wizard_station)
 "ad" = (
@@ -23,7 +23,7 @@
 /area/map_template/wizard_station)
 "af" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/satchel/grey/withwallet,
+/obj/item/backpack/satchel/grey/withwallet,
 /turf/floor/carpet,
 /area/map_template/wizard_station)
 "ag" = (
@@ -75,7 +75,7 @@
 /area/map_template/wizard_station)
 "ao" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/satchel/grey/withwallet,
+/obj/item/backpack/satchel/grey/withwallet,
 /obj/item/clothing/glasses/eyepatch/monocle,
 /turf/floor/carpet,
 /area/map_template/wizard_station)
@@ -283,7 +283,7 @@
 /area/map_template/wizard_station)
 "aO" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/cups,
+/obj/item/box/cups,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -301,7 +301,7 @@
 /area/map_template/wizard_station)
 "aQ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -319,7 +319,7 @@
 /area/map_template/wizard_station)
 "aS" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/candles,
+/obj/item/box/candles,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -364,7 +364,7 @@
 /area/map_template/wizard_station)
 "aY" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -474,7 +474,7 @@
 /area/map_template/wizard_station)
 "bl" = (
 /obj/structure/closet,
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},

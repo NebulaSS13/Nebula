@@ -38,7 +38,7 @@
 /area/map_template/ninja_dojo/dojo)
 "ak" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -99,11 +99,11 @@
 /area/map_template/ninja_dojo/dojo)
 "at" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = 1
 	},
 /obj/structure/window/reinforced/crescent{
@@ -115,7 +115,7 @@
 /area/map_template/ninja_dojo/dojo)
 "aw" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -160,11 +160,11 @@
 /area/map_template/ninja_dojo/dojo)
 "aC" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/adv{
+/obj/item/firstaid/adv{
 	pixel_x = 1
 	},
 /obj/structure/window/reinforced/crescent{
@@ -220,8 +220,8 @@
 /area/map_template/ninja_dojo/dojo)
 "aJ" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/regular,
-/obj/item/storage/firstaid/combat,
+/obj/item/firstaid/regular,
+/obj/item/firstaid/combat,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
@@ -480,7 +480,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bl" = (
 /obj/structure/rack,
-/obj/item/storage/belt/medical,
+/obj/item/belt/medical,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -515,7 +515,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bq" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest,
+/obj/item/clothing/accessory/webbing/vest,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -569,7 +569,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bx" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/glasses,
+/obj/item/box/glasses,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -577,7 +577,7 @@
 /area/map_template/ninja_dojo/dojo)
 "by" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/sinpockets,
+/obj/item/box/sinpockets,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -947,7 +947,7 @@
 /area/map_template/ninja_dojo/dojo)
 "co" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/secure/briefcase/money,
+/obj/item/secure_storage/briefcase/money,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -960,7 +960,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cq" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -968,7 +968,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cr" = (
 /obj/structure/rack,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/item/multitool,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
@@ -1026,7 +1026,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/webbing/bandolier,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1067,7 +1067,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cC" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1075,7 +1075,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cD" = (
 /obj/structure/rack,
-/obj/item/storage/belt/holster/security/tactical,
+/obj/item/belt/holster/security/tactical,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1096,7 +1096,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cF" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/anti_photons,
+/obj/item/box/anti_photons,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"

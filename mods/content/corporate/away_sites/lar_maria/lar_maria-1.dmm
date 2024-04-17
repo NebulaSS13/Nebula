@@ -204,7 +204,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /obj/item/chems/spray/cleaner,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
@@ -549,8 +549,8 @@
 	dir = 8
 	},
 /obj/structure/table/glass,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/box/masks,
+/obj/item/box/gloves,
 /obj/item/chems/spray/antiseptic,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -655,7 +655,7 @@
 	dir = 8
 	},
 /obj/structure/table/glass,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cc" = (
@@ -746,7 +746,7 @@
 /area/lar_maria/vir_main)
 "cn" = (
 /obj/machinery/door/window/northright,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "co" = (
@@ -902,7 +902,7 @@
 /area/lar_maria/vir_main)
 "cF" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/machinery/light,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -1468,7 +1468,7 @@
 /turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "em" = (
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "en" = (
@@ -1623,7 +1623,7 @@
 /area/lar_maria/vir_aux)
 "eF" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eG" = (
@@ -1662,7 +1662,7 @@
 /area/lar_maria/sec_wing)
 "eL" = (
 /obj/structure/rack,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eM" = (
@@ -1761,7 +1761,7 @@
 /area/lar_maria/vir_aux)
 "eY" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eZ" = (
@@ -1774,8 +1774,8 @@
 /area/lar_maria/vir_aux)
 "fb" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/pillbottles,
+/obj/item/box/beakers,
+/obj/item/box/pillbottles,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fc" = (
@@ -1819,7 +1819,7 @@
 "fi" = (
 /obj/structure/closet,
 /obj/item/shield/riot,
-/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunammo,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -1899,13 +1899,13 @@
 "fr" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/table/glass,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/box/masks,
+/obj/item/box/gloves,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fs" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/autoinjectors,
+/obj/item/box/autoinjectors,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "ft" = (
@@ -1933,7 +1933,7 @@
 /area/lar_maria/sec_wing)
 "fw" = (
 /obj/structure/rack,
-/obj/item/storage/box/glowsticks,
+/obj/item/box/glowsticks,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2862,7 +2862,7 @@
 	pixel_x = -30
 	},
 /obj/random/smokes,
-/obj/item/storage/box/matches,
+/obj/item/box/matches,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},

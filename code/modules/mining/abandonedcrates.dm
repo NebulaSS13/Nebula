@@ -104,9 +104,9 @@
 		if(92)
 			new /obj/item/sword/katana(src)
 		if(93)
-			new /obj/item/storage/firstaid/combat(src) // Probably the least OP
+			new /obj/item/firstaid/combat(src) // Probably the least OP
 		if(94) // Why the hell not
-			new /obj/item/storage/backpack/clown(src)
+			new /obj/item/backpack/clown(src)
 			new /obj/item/clothing/under/clown(src)
 			new /obj/item/clothing/shoes/clown_shoes(src)
 			new /obj/item/clothing/mask/gas/clown_hat(src)
@@ -128,7 +128,7 @@
 		if(98)
 			new /obj/item/energy_blade/sword(src)
 		if(99)
-			new /obj/item/storage/belt/champion(src)
+			new /obj/item/belt/champion(src)
 			new /obj/item/clothing/mask/luchador(src)
 		if(100)
 			new /obj/item/clothing/head/bearpelt(src)

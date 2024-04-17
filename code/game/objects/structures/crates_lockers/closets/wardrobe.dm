@@ -45,7 +45,7 @@
 
 /obj/structure/closet/wardrobe/chaplain_black/WillContain()
 	return list(
-		/obj/item/storage/box/candles = 2,
+		/obj/item/box/candles = 2,
 		/obj/item/clothing/under/chaplain,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/suit/nun,
@@ -54,7 +54,7 @@
 		/obj/item/clothing/head/chaplain_hood,
 		/obj/item/clothing/suit/holidaypriest,
 		/obj/item/clothing/under/wedding/bride_white,
-		/obj/item/storage/backpack/cultpack,
+		/obj/item/backpack/cultpack,
 		/obj/item/deck/tarot,
 	)
 
@@ -151,7 +151,7 @@
 /obj/structure/closet/wardrobe/science_white/WillContain()
 	return list(
 		/obj/item/clothing/under/color/white = 3,
-		/obj/item/clothing/suit/storage/toggle/labcoat = 3,
+		/obj/item/clothing/suit/toggle/labcoat = 3,
 		/obj/item/clothing/shoes/color/white = 3,
 	)
 
@@ -162,7 +162,7 @@
 /obj/structure/closet/wardrobe/robotics_black/WillContain()
 	return list(
 		/obj/item/clothing/under/roboticist = 2,
-		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
+		/obj/item/clothing/suit/toggle/labcoat = 2,
 		/obj/item/clothing/shoes/color/black = 2,
 		/obj/item/clothing/gloves/thick = 2,
 	)
@@ -175,7 +175,7 @@
 	return list(
 		/obj/item/clothing/under/chemist = 2,
 		/obj/item/clothing/shoes/color/white = 2,
-		/obj/item/clothing/suit/storage/toggle/labcoat/chemist = 2,
+		/obj/item/clothing/suit/toggle/labcoat/chemist = 2,
 	)
 
 /obj/structure/closet/wardrobe/genetics_white
@@ -186,7 +186,7 @@
 	return list(
 		/obj/item/clothing/under/geneticist  = 2,
 		/obj/item/clothing/shoes/color/white = 2,
-		/obj/item/clothing/suit/storage/toggle/labcoat/genetics = 2,
+		/obj/item/clothing/suit/toggle/labcoat/genetics = 2,
 	)
 
 /obj/structure/closet/wardrobe/virology_white
@@ -197,7 +197,7 @@
 	return list(
 		/obj/item/clothing/under/virologist = 2,
 		/obj/item/clothing/shoes/color/white = 2,
-		/obj/item/clothing/suit/storage/toggle/labcoat/virologist = 2,
+		/obj/item/clothing/suit/toggle/labcoat/virologist = 2,
 		/obj/item/clothing/mask/surgical = 2,
 	)
 
@@ -209,7 +209,7 @@
 	return list(
 		/obj/item/clothing/under/medical = 2,
 		/obj/item/clothing/shoes/color/white = 3,
-		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
+		/obj/item/clothing/suit/toggle/labcoat = 2,
 		/obj/item/clothing/mask/surgical = 2,
 		/obj/item/clothing/under/medical/scrubs/blue,
 		/obj/item/clothing/under/medical/scrubs/green,
@@ -269,7 +269,7 @@
 		/obj/item/clothing/head/helmet/tactical,
 		/obj/item/clothing/mask/balaclava/tactical,
 		/obj/item/clothing/glasses/tacgoggles,
-		/obj/item/storage/belt/holster/security/tactical,
+		/obj/item/belt/holster/security/tactical,
 		/obj/item/clothing/shoes/jackboots/tactical,
 		/obj/item/clothing/gloves/tactical,
 	)
@@ -292,15 +292,15 @@
 		/obj/item/clothing/under/suit_jacket/red,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/internalaffairs/plain,
-		/obj/item/clothing/suit/storage/toggle/suit/black,
+		/obj/item/clothing/suit/toggle/suit/black,
 		/obj/item/clothing/under/assistantformal,
 		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/suit/storage/toggle/suit/blue,
+		/obj/item/clothing/suit/toggle/suit/blue,
 		/obj/item/clothing/under/lawyer/purpsuit,
-		/obj/item/clothing/suit/storage/toggle/suit/purple,
+		/obj/item/clothing/suit/toggle/suit/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/dress,
 	)
@@ -312,8 +312,8 @@
 /obj/structure/closet/wardrobe/lawyer_black/WillContain()
 	return list(
 		/obj/item/clothing/under/internalaffairs = 2,
-		/obj/item/clothing/suit/storage/toggle/suit/black = 2,
+		/obj/item/clothing/suit/toggle/suit/black = 2,
 		/obj/item/clothing/shoes/color/brown = 2,
 		/obj/item/clothing/glasses/sunglasses/big = 2,
-		/obj/item/storage/briefcase = 2,
+		/obj/item/briefcase = 2,
 	)

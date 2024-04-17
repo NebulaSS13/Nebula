@@ -15,7 +15,7 @@
 
 /decl/hierarchy/outfit/job/ascent/tech
 	name = "Ascent - Technician"
-	suit = /obj/item/clothing/suit/storage/ascent
+	suit = /obj/item/clothing/suit/ascent
 
 /obj/item/clothing/mask/gas/ascent
 	name = "mantid facemask"
@@ -52,7 +52,7 @@
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_gyne.dmi'
 	)
 
-/obj/item/clothing/suit/storage/ascent
+/obj/item/clothing/suit/ascent
 	name = "mantid gear harness"
 	desc = "A complex tangle of articulated cables and straps."
 	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
@@ -61,6 +61,7 @@
 	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_harness_gyne.dmi')
 	body_parts_covered = 0
 	slot_flags = SLOT_OVER_BODY | SLOT_LOWER_BODY
+	storage = /datum/storage/pockets/suit
 	allowed = list(
 		/obj/item/flashlight,
 		/obj/item/tank,
@@ -69,8 +70,10 @@
 		/obj/item/rcd
 	)
 
-/obj/item/clothing/suit/storage/ascent/Initialize()
+/obj/item/clothing/suit/ascent/Initialize()
 	. = ..()
+	if(!storage)
+		return
 	for(var/tool in list(
 		/obj/item/gun/energy/particle/small,
 		/obj/item/multitool/mantid,
@@ -80,7 +83,8 @@
 		/obj/item/stack/medical/resin
 	))
 		allowed |= tool
-		new tool(pockets)
-	pockets.make_exact_fit()
+		storage.handle_item_insertion(null, new tool(src))
+	if(length(storage.get_contents()))
+		storage.make_exact_fit()
+		storage.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent
 	allowed |= /obj/item/chems/drinks/cans/waterbottle/ascent
-	pockets.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent

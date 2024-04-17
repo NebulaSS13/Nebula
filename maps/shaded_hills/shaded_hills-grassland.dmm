@@ -125,7 +125,7 @@
 /area/shaded_hills/caves/river)
 "se" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/storage/basket,
+/obj/item/basket,
 /turf/floor/woven,
 /area/shaded_hills/caves/unexplored/south)
 "sS" = (

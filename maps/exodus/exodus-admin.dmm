@@ -582,7 +582,7 @@
 	pixel_y = 30
 	},
 /obj/structure/table,
-/obj/item/storage/firstaid/toxin,
+/obj/item/firstaid/toxin,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Shuttle Bridge East"
 	},
@@ -643,7 +643,7 @@
 /area/centcom)
 "aGC" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire,
+/obj/item/firstaid/fire,
 /obj/item/chems/spray/extinguisher,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Shuttle Bridge West"
@@ -963,12 +963,12 @@
 /area/centcom/holding)
 "aJW" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/toxin,
+/obj/item/firstaid/fire{
 	pixel_x = 2;
 	pixel_y = 3
 	},
@@ -1017,7 +1017,7 @@
 /area/shuttle/escape_shuttle)
 "aKt" = (
 /obj/structure/closet/crate/medical,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -1027,17 +1027,17 @@
 /obj/item/bodybag/cryobag{
 	pixel_x = 5
 	},
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves{
+/obj/item/box/masks,
+/obj/item/box/gloves{
 	pixel_x = 3;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/adv{
+/obj/item/firstaid/toxin,
+/obj/item/firstaid/adv{
 	pixel_x = -2
 	},
 /obj/item/chems/ivbag,
@@ -1079,19 +1079,19 @@
 /area/centcom/holding)
 "aKV" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 2;
 	pixel_y = 6
 	},
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/adv{
+/obj/item/firstaid/adv{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/storage/firstaid/adv{
+/obj/item/firstaid/adv{
 	pixel_x = -2
 	},
 /turf/unsimulated/floor{
@@ -1152,11 +1152,11 @@
 /area/centcom/holding)
 "aLb" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 3;
 	pixel_y = 4
 	},
-/obj/item/storage/box/masks,
+/obj/item/box/masks,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -1367,8 +1367,8 @@
 /area/centcom/holding)
 "aLL" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/fire,
+/obj/item/firstaid/regular{
 	pixel_x = 2;
 	pixel_y = 3
 	},
@@ -2107,7 +2107,7 @@
 /area/centcom/holding)
 "blb" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -2118,7 +2118,7 @@
 /area/shuttle/escape_shuttle)
 "bmb" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = 2;
 	pixel_y = 3
 	},
@@ -2191,7 +2191,7 @@
 /area/centcom/holding)
 "bDh" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -2640,7 +2640,7 @@
 /obj/item/chems/drinks/bottle/small/beer,
 /obj/item/chems/drinks/bottle/small/beer,
 /obj/item/flame/fuelled/lighter/zippo/random,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -2787,19 +2787,19 @@
 /turf/floor/tiled,
 /area/shuttle/escape_shuttle)
 "kSw" = (
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
@@ -3151,7 +3151,7 @@
 /area/tdome)
 "sDZ" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -3179,7 +3179,7 @@
 /area/tdome/tdomeadmin)
 "sRb" = (
 /obj/structure/table,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},

@@ -74,21 +74,34 @@
 	body_parts_covered = 0
 
 //Detective
-/obj/item/clothing/suit/storage/det_trench
+/obj/item/clothing/suit/det_trench
 	name = "brown trenchcoat"
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. This one wouldn't block much of anything."
 	icon = 'icons/clothing/suit/detective_brown.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/storage/box/fancy/cigarettes,/obj/item/flame/fuelled/lighter,/obj/item/taperecorder)
+	allowed = list(
+		/obj/item/tank/emergency,
+		/obj/item/flashlight,
+		/obj/item/gun/energy,
+		/obj/item/gun/projectile,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/baton,
+		/obj/item/handcuffs,
+		/obj/item/box/fancy/cigarettes,
+		/obj/item/flame/fuelled/lighter,
+		/obj/item/taperecorder
+	)
 	protects_against_weather = TRUE
+	storage = /datum/storage/pockets/suit
 
-/obj/item/clothing/suit/storage/det_trench/grey
+/obj/item/clothing/suit/det_trench/grey
 	name = "grey trenchcoat"
 	icon = 'icons/clothing/suit/detective_grey.dmi'
 
-/obj/item/clothing/suit/storage/det_trench/reinforced
+/obj/item/clothing/suit/det_trench/reinforced
 	name = "reinforced trenchcoat"
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. The coat is externally impact resistant - perfect for your next act of autodefenestration!"
 	armor = list(
@@ -101,7 +114,7 @@
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 //Forensics
-/obj/item/clothing/suit/storage/forensics
+/obj/item/clothing/suit/forensics
 	name = "jacket"
 	desc = "A forensics technician jacket."
 	icon = 'icons/clothing/suit/forensic_red.dmi'
@@ -115,18 +128,19 @@
 		)
 	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
+	storage = /datum/storage/pockets/suit
 
-/obj/item/clothing/suit/storage/forensics/red
+/obj/item/clothing/suit/forensics/red
 	name = "red jacket"
 	desc = "A red forensics technician jacket."
 
-/obj/item/clothing/suit/storage/forensics/blue
+/obj/item/clothing/suit/forensics/blue
 	name = "blue jacket"
 	desc = "A blue forensics technician jacket."
 	icon = 'icons/clothing/suit/forensic_blue.dmi'
 
 //Engineering
-/obj/item/clothing/suit/storage/hazardvest
+/obj/item/clothing/suit/hazardvest
 	name = "hazard vest"
 	desc = "A high-visibility vest used in work zones."
 	icon = 'icons/clothing/suit/hazard_vest/orange.dmi'
@@ -149,33 +163,33 @@
 	)
 	body_parts_covered = SLOT_UPPER_BODY
 
-/obj/item/clothing/suit/storage/hazardvest/green
+/obj/item/clothing/suit/hazardvest/green
 	name = "green hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is green!"
 	icon = 'icons/clothing/suit/hazard_vest/green.dmi'
 
 //Lawyer
-/obj/item/clothing/suit/storage/toggle/suit
+/obj/item/clothing/suit/toggle/suit
 	name = "suit jacket"
 	desc = "A snappy dress jacket."
 	icon = 'icons/clothing/suit/suit_jacket.dmi'
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/suit/blue
+/obj/item/clothing/suit/toggle/suit/blue
 	name = "blue suit jacket"
 	color = "#00326e"
 
-/obj/item/clothing/suit/storage/toggle/suit/purple
+/obj/item/clothing/suit/toggle/suit/purple
 	name = "purple suit jacket"
 	color = "#6c316c"
 
-/obj/item/clothing/suit/storage/toggle/suit/black
+/obj/item/clothing/suit/toggle/suit/black
 	name = "black suit jacket"
 	color = "#1f1f1f"
 
 //Medical
-/obj/item/clothing/suit/storage/toggle/fr_jacket
+/obj/item/clothing/suit/toggle/fr_jacket
 	name = "first responder jacket"
 	desc = "A high-visibility jacket worn by medical first responders."
 	icon = 'icons/clothing/suit/responder_jacket.dmi'
@@ -195,12 +209,12 @@
 	)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-/obj/item/clothing/suit/storage/toggle/fr_jacket/ems
+/obj/item/clothing/suit/toggle/fr_jacket/ems
 	name = "\improper EMS jacket"
 	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
 	icon = 'icons/clothing/suit/emt_jacket.dmi'
 
-/obj/item/clothing/suit/storage/medical_chest_rig
+/obj/item/clothing/suit/medical_chest_rig
 	name = "\improper MT chest-rig"
 	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
 	icon = 'icons/clothing/suit/med_chest.dmi'
@@ -220,6 +234,7 @@
 		/obj/item/clothing/head/hardhat/ems
 	)
 	body_parts_covered = SLOT_UPPER_BODY
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/surgicalapron
 	name = "surgical apron"

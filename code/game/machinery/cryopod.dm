@@ -23,7 +23,7 @@
 	var/list/frozen_items = list()
 	var/list/_admin_logs = list() // _ so it shows first in VV
 
-	var/storage_type = "crewmembers"
+	var/storage_desc = "crewmembers"
 	var/storage_name = "Cryogenic Oversight Control"
 	var/allow_items = 1
 
@@ -37,7 +37,7 @@
 	icon = 'icons/obj/robot_storage.dmi'
 	icon_state = "console"
 
-	storage_type = "cyborgs"
+	storage_desc = "cyborgs"
 	storage_name = "Robotic Storage Control"
 	allow_items = 0
 
@@ -63,7 +63,7 @@
 
 /obj/machinery/computer/cryopod/OnTopic(user, href_list, state)
 	if(href_list["log"])
-		var/dat = "<b>Recently stored [storage_type]</b><br/><hr/><br/>"
+		var/dat = "<b>Recently stored [storage_desc]</b><br/><hr/><br/>"
 		for(var/person in frozen_crew)
 			dat += "[person]<br/>"
 		dat += "<hr/>"
@@ -332,11 +332,8 @@
 	for(var/obj/item/W in occupant.get_equipped_items(include_carried = TRUE))
 		occupant.drop_from_inventory(W)
 		W.forceMove(src)
-
 		//Make sure we catch anything not handled by qdel() on the items.
 		for(var/obj/item/O in W.get_contained_external_atoms())
-			if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
-				continue
 			O.forceMove(src)
 
 	//Delete all items not on the preservation list.

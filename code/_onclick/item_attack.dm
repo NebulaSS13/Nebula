@@ -30,10 +30,19 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return A.attackby(src, user, click_params)
 
 /atom/proc/attackby(obj/item/W, mob/user, var/click_params)
-	return
+	if(storage)
+		if(isrobot(user) && (W == user.get_active_held_item()))
+			return //Robots can't store their modules.
+		if(!storage.can_be_inserted(W, user))
+			return
+		W.add_fingerprint(user)
+		return storage.handle_item_insertion(user, W)
+	return FALSE
 
 /atom/movable/attackby(obj/item/W, mob/user)
-	return bash(W,user)
+	. = ..()
+	if(!.)
+		return bash(W,user)
 
 /atom/movable/proc/bash(obj/item/W, mob/user)
 	if(isliving(user) && user.a_intent == I_HELP)

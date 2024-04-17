@@ -2,12 +2,12 @@
 	. = ..() || list()
 	. |= list(/obj/item/clothing/mask/gas/vox = 8)
 
-/obj/item/storage/box/vox
+/obj/item/box/vox
 	name = "vox survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and black stripe indicate this one contains nitrogen."
 	icon_state = "survivalvox"
 
-/obj/item/storage/box/vox/WillContain()
+/obj/item/box/vox/WillContain()
 	return list(
 			/obj/item/clothing/mask/breath = 1,
 			/obj/item/tank/emergency/nitrogen = 1,

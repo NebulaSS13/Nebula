@@ -555,7 +555,7 @@
 /area/unishi/living)
 "bP" = (
 /obj/item/stool/padded,
-/obj/item/storage/box/lights/bulbs,
+/obj/item/box/lights/bulbs,
 /turf/floor,
 /area/unishi/living)
 "bQ" = (
@@ -564,7 +564,7 @@
 /area/unishi/med)
 "bR" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
@@ -586,7 +586,7 @@
 /obj/item/bodybag,
 /obj/item/bodybag,
 /obj/item/roller,
-/obj/item/storage/chewables/candy/medicallollis,
+/obj/item/chewables/candy/medicallollis,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -1127,10 +1127,10 @@
 /area/unishi/living)
 "dl" = (
 /obj/structure/table,
-/obj/item/storage/laundry_basket,
+/obj/item/laundry_basket,
 /obj/item/chems/pill/detergent,
 /obj/item/chems/pill/detergent,
-/obj/item/storage/chewables/candy/gum,
+/obj/item/chewables/candy/gum,
 /turf/floor/tiled,
 /area/unishi/living)
 "dm" = (
@@ -1256,8 +1256,8 @@
 /area/unishi/kitchen)
 "dB" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
-/obj/item/storage/box/emps,
-/obj/item/storage/box/smokes,
+/obj/item/box/emps,
+/obj/item/box/smokes,
 /turf/floor/tiled,
 /area/unishi/living)
 "dC" = (
@@ -1324,7 +1324,7 @@
 /obj/structure/bed/padded,
 /obj/item/bedsheet/green,
 /obj/item/gun/projectile/pistol/holdout,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/item/card/emag_broken,
 /obj/item/plastique,
 /obj/item/ammo_casing/pistol/used,

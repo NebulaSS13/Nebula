@@ -1,9 +1,9 @@
-/obj/item/storage/box/bloodpacks
+/obj/item/box/bloodpacks
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
 
-/obj/item/storage/box/bloodpacks/WillContain()
+/obj/item/box/bloodpacks/WillContain()
 	return list(/obj/item/chems/ivbag = 7)
 
 /obj/item/chems/ivbag

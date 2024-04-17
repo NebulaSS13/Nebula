@@ -55,7 +55,7 @@
 /area/ministation/cafe)
 "ar" = (
 /obj/structure/table,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,
@@ -65,7 +65,7 @@
 	pixel_y = 24
 	},
 /obj/item/flashlight/lamp/green,
-/obj/item/storage/box/fancy/cigarettes/tricord,
+/obj/item/box/fancy/cigarettes/tricord,
 /turf/floor/carpet/blue,
 /area/ministation/medical)
 "at" = (
@@ -266,7 +266,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l2centraln)
 "bx" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 4;
 	pixel_y = 26
 	},
@@ -1520,8 +1520,8 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
+/obj/item/firstaid/adv,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "hH" = (
@@ -1537,7 +1537,7 @@
 "hI" = (
 /obj/structure/closet/secure_closet/security,
 /obj/item/clothing/suit/armor/bulletproof,
-/obj/item/clothing/suit/storage/toggle/wintercoat/security,
+/obj/item/clothing/suit/toggle/wintercoat/security,
 /obj/item/flashlight/maglight,
 /obj/machinery/alarm{
 	dir = 4;
@@ -1693,11 +1693,11 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -1838,8 +1838,8 @@
 /area/ministation/cafe)
 "iJ" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
+/obj/item/box/gloves,
+/obj/item/box/masks,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -2080,7 +2080,7 @@
 	name = "Common Channel";
 	pixel_y = 20
 	},
-/obj/item/storage/pill_bottle,
+/obj/item/pill_bottle,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -2157,11 +2157,11 @@
 /area/ministation/security)
 "km" = (
 /obj/structure/closet/secure_closet/medical3,
-/obj/item/clothing/suit/storage/toggle/labcoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat/medical,
-/obj/item/clothing/suit/storage/toggle/wintercoat/medical,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/labcoat,
+/obj/item/clothing/suit/toggle/wintercoat/medical,
+/obj/item/clothing/suit/toggle/wintercoat/medical,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "kr" = (
@@ -2822,7 +2822,7 @@
 "oc" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/obj/item/clothing/suit/storage/toggle/bomber,
+/obj/item/clothing/suit/toggle/bomber,
 /obj/item/clothing/mask/horsehead,
 /obj/item/cash/scavbucks,
 /turf/floor/plating,
@@ -2873,7 +2873,7 @@
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
-/obj/item/storage/medical_lolli_jar{
+/obj/item/medical_lolli_jar{
 	pixel_y = 7
 	},
 /obj/effect/floor_decal/corner/paleblue/full,
@@ -3020,8 +3020,8 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/storage/box/flashbangs,
-/obj/item/storage/box/handcuffs{
+/obj/item/box/flashbangs,
+/obj/item/box/handcuffs{
 	pixel_x = 5;
 	pixel_y = 5
 	},
@@ -3271,7 +3271,7 @@
 /area/ministation/medical)
 "pZ" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/clotting,
+/obj/item/firstaid/clotting,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "qa" = (
@@ -3381,7 +3381,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/structure/closet/secure_closet/cmo,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/gun/projectile/dartgun/medical,
 /obj/item/ammo_magazine/chemdart,
 /obj/item/ammo_magazine/chemdart,
@@ -4042,10 +4042,10 @@
 /obj/structure/closet/secure_closet/guncabinet{
 	req_access = list("ACCESS_HEAD_OF_SECURITY")
 	},
-/obj/item/storage/box/ammo/shotgunammo/large,
-/obj/item/storage/box/ammo/shotgunammo/large,
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunammo/large,
+/obj/item/box/ammo/shotgunammo/large,
+/obj/item/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -4960,7 +4960,7 @@
 "vH" = (
 /obj/structure/table,
 /obj/item/chems/dropper,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/item/mollusc/clam,
 /obj/machinery/alarm{
 	pixel_y = 23
@@ -5012,7 +5012,7 @@
 /area/ministation/medical)
 "vN" = (
 /obj/structure/table,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /obj/item/pen,
 /obj/item/radio/intercom{
 	dir = 1;
@@ -5297,7 +5297,7 @@
 /area/ministation/cafe)
 "wQ" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
@@ -5579,11 +5579,11 @@
 /area/ministation/medical)
 "xH" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -5722,7 +5722,7 @@
 	dir = 5
 	},
 /obj/structure/table/glass,
-/obj/item/storage/plants,
+/obj/item/plants,
 /obj/item/scanner/plant,
 /obj/item/wirecutters/clippers,
 /obj/item/book/skill/service/botany,
@@ -5750,11 +5750,11 @@
 /area/ministation/medical)
 "yh" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -6487,8 +6487,8 @@
 /obj/item/clothing/under/color{
 	color = "#808080"
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "AK" = (
@@ -6733,8 +6733,8 @@
 /area/ministation/cafe)
 "Ct" = (
 /obj/structure/closet/chefcloset,
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
+/obj/item/clothing/suit/toggle/wintercoat/hydro,
+/obj/item/clothing/suit/toggle/wintercoat/hydro,
 /obj/item/clothing/suit/armor/bulletproof,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn,
 /turf/floor/carpet,
@@ -6812,7 +6812,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat/security,
+/obj/item/clothing/suit/toggle/wintercoat/security,
 /obj/item/flashlight/maglight,
 /obj/item/chems/spray/pepper,
 /obj/structure/closet/secure_closet/warden{
@@ -7228,9 +7228,9 @@
 /obj/item/clothing/shoes/clown_shoes,
 /obj/item/clothing/under/clown,
 /obj/item/stamp/clown,
-/obj/item/storage/backpack/clown,
+/obj/item/backpack/clown,
 /obj/item/bikehorn,
-/obj/item/storage/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
 /obj/item/poster,
 /turf/floor/plating,
 /area/ministation/maint/hydromaint)
@@ -7735,7 +7735,7 @@
 "Ir" = (
 /obj/structure/table,
 /obj/item/folder/blue,
-/obj/item/storage/box/PDAs,
+/obj/item/box/PDAs,
 /obj/machinery/status_display{
 	pixel_y = 30
 	},
@@ -7791,11 +7791,11 @@
 /area/ministation/medical)
 "IO" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -7905,7 +7905,7 @@
 /area/ministation/security)
 "Jo" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /obj/item/pen,
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -7962,10 +7962,10 @@
 /area/ministation/maint/l2centraln)
 "JO" = (
 /obj/structure/closet/secure_closet/guncabinet,
-/obj/item/storage/box/ammo/stunshells/large,
-/obj/item/storage/box/ammo/stunshells/large,
-/obj/item/storage/box/ammo/beanbags,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/stunshells/large,
+/obj/item/box/ammo/stunshells/large,
+/obj/item/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn{
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag;
 	name = "sawn-off shotgun SN 101"
@@ -8129,7 +8129,7 @@
 /obj/item/ammo_magazine/rifle/practice,
 /obj/item/ammo_magazine/rifle/practice,
 /obj/item/ammo_magazine/rifle/practice,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/machinery/recharger,
 /obj/structure/window/reinforced,
 /turf/floor/tiled,
@@ -8350,10 +8350,10 @@
 /area/ministation/hall/e2)
 "LW" = (
 /obj/structure/table,
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /obj/item/chems/glass/beaker/large,
 /obj/item/chems/glass/beaker/large,
-/obj/item/storage/box/fancy/vials,
+/obj/item/box/fancy/vials,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "LY" = (
@@ -8435,7 +8435,7 @@
 	},
 /obj/structure/closet/secure_closet/hop2,
 /obj/item/book/skill/organizational/finance,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -8929,7 +8929,7 @@
 /area/ministation/medical)
 "Pd" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigarettes{
+/obj/item/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /obj/item/flame/fuelled/lighter/random,
@@ -9145,7 +9145,7 @@
 "Qg" = (
 /obj/structure/closet/secure_closet/security,
 /obj/item/clothing/suit/armor/bulletproof,
-/obj/item/clothing/suit/storage/toggle/wintercoat/security,
+/obj/item/clothing/suit/toggle/wintercoat/security,
 /obj/item/flashlight/maglight,
 /obj/item/chems/spray/pepper,
 /turf/floor/tiled,
@@ -9602,7 +9602,7 @@
 /area/ministation/hall/w2)
 "SZ" = (
 /obj/structure/table,
-/obj/item/storage/belt/medical/emt,
+/obj/item/belt/medical/emt,
 /obj/item/bodybag/rescue,
 /obj/item/auto_cpr,
 /turf/floor/tiled/white,
@@ -9886,7 +9886,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/item/taperecorder,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/item/scanner/autopsy,
 /turf/floor/tiled/white,
 /area/ministation/detective)
@@ -10084,9 +10084,9 @@
 /obj/item/clothing/suit/surgicalapron,
 /obj/item/clothing/suit/surgicalapron,
 /obj/item/clothing/suit/surgicalapron,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/syringes,
+/obj/item/box/masks,
+/obj/item/box/gloves,
+/obj/item/box/syringes,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
@@ -10248,8 +10248,8 @@
 /turf/floor/carpet/blue3,
 /area/ministation/security)
 "Wt" = (
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
+/obj/item/clothing/suit/toggle/wintercoat/hydro,
+/obj/item/clothing/suit/toggle/wintercoat/hydro,
 /obj/structure/closet/chefcloset,
 /turf/floor/carpet,
 /area/ministation/cafe)
@@ -10439,7 +10439,7 @@
 	dir = 1
 	},
 /obj/structure/closet/secure_closet/hos,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/flashlight/maglight,
 /obj/item/chems/spray/pepper,
 /obj/item/stamp/hos,
@@ -10480,7 +10480,7 @@
 /area/ministation/hall/w2)
 "XW" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -10728,7 +10728,7 @@
 /area/ministation/security)
 "ZT" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/machinery/light{
 	dir = 4
 	},

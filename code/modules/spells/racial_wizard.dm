@@ -11,7 +11,7 @@
 	force = 15
 	material = /decl/material/solid/stone/cult
 	var/list/potentials = list(
-		SPECIES_HUMAN = /obj/item/storage/bag/cash/infinite
+		SPECIES_HUMAN = /obj/item/bag/cash/infinite
 	)
 
 /obj/item/magic_rock/attack_self(mob/user)
@@ -35,16 +35,11 @@
 	to_chat(user, "\The [src] crumbles in your hands.")
 	qdel(src)
 
-/obj/item/storage/bag/cash/infinite/WillContain()
-	return /obj/item/cash/c1000
+/obj/item/bag/cash/infinite
+	storage = /datum/storage/bag/cash/infinite
 
-//HUMAN
-/obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W, atom/new_location)
-	. = ..()
-	if(.)
-		if(istype(W,/obj/item/cash)) //only matters if its spacecash.
-			var/obj/item/I = new /obj/item/cash/c1000()
-			src.handle_item_insertion(I,1)
+/obj/item/bag/cash/infinite/WillContain()
+	return list(/obj/item/cash/c1000)
 
 /spell/messa_shroud/choose_targets()
 	return list(get_turf(holder))

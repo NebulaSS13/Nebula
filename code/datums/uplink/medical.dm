@@ -8,13 +8,13 @@
 	name = "Box of Sin-Pockets"
 	desc = "A box of filled dough pockets. Great for a quick meal when you're hiding from Security. Instructions included on the box."
 	item_cost = 8
-	path = /obj/item/storage/box/sinpockets
+	path = /obj/item/box/sinpockets
 
 /datum/uplink_item/item/medical/stabilisation
 	name = "Stabilisation First Aid Kit"
 	desc = "Contains variety of emergency medical pouches."
 	item_cost = 16
-	path = /obj/item/storage/firstaid/stab
+	path = /obj/item/firstaid/stab
 
 /datum/uplink_item/item/medical/stasis
 	name = "Stasis Bag"
@@ -32,10 +32,10 @@
 	name = "Surgery Kit"
 	desc = "Contains all the tools needed for on the spot surgery, assuming you actually know what you're doing with them. Floor sterilization not included."
 	item_cost = 40
-	path = /obj/item/storage/firstaid/surgery
+	path = /obj/item/firstaid/surgery
 
 /datum/uplink_item/item/medical/combat
 	name = "Combat Medical Kit"
 	desc = "Contains most medicines you need to recover from injuries and illnesses, all in a convenient pill form. Splints for broken bones also included!"
 	item_cost = 48
-	path = /obj/item/storage/firstaid/combat
+	path = /obj/item/firstaid/combat

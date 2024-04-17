@@ -600,7 +600,7 @@
 /area/derelict/ship)
 "bW" = (
 /obj/structure/rack,
-/obj/item/storage/toolbox/syndicate,
+/obj/item/toolbox/syndicate,
 /obj/random/maintenance,
 /turf/floor/tiled,
 /area/derelict/ship)
@@ -2334,7 +2334,7 @@
 /turf/floor/airless,
 /area/constructionsite/medical)
 "il" = (
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /turf/floor/airless,
 /area/constructionsite/medical)
 "im" = (
@@ -3367,7 +3367,7 @@
 /turf/space,
 /area/AIsattele)
 "lY" = (
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 1;
 	pixel_y = -1
 	},

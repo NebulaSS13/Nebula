@@ -27,9 +27,9 @@
 
 /decl/hierarchy/outfit/job/service/gardener/Initialize()
 	. = ..()
-	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/hydroponics
-	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/hyd
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/hyd
+	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/backpack/hydroponics
+	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/backpack/satchel/hyd
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/backpack/messenger/hyd
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = "Job - Janitor"
@@ -51,16 +51,16 @@
 	name = "Job - Internal affairs agent"
 	l_ear = /obj/item/radio/headset/heads/ia
 	uniform = /obj/item/clothing/under/internalaffairs
-	suit = /obj/item/clothing/suit/storage/toggle/suit/black
+	suit = /obj/item/clothing/suit/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
-	hands = list(/obj/item/storage/briefcase)
+	hands = list(/obj/item/briefcase)
 	id_type = /obj/item/card/id/civilian/internal_affairs_agent
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/chaplain
 	name = "Job - Chaplain"
 	uniform = /obj/item/clothing/under/chaplain
-	hands = list(/obj/item/storage/bible)
+	hands = list(/obj/item/bible)
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda/medical

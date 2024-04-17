@@ -540,7 +540,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/storage/bible,
+/obj/item/bible,
 /obj/item/pen/blue,
 /obj/structure/table/woodentable,
 /obj/item/paper{
@@ -820,7 +820,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/obj/item/storage/toolbox/syndicate,
+/obj/item/toolbox/syndicate,
 /turf/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -1174,7 +1174,7 @@
 	icon_state = "tube1"
 	},
 /obj/item/cane,
-/obj/item/clothing/suit/storage/det_trench/grey,
+/obj/item/clothing/suit/det_trench/grey,
 /obj/item/clothing/ring/cti,
 /obj/item/clothing/under/lawyer/oldman,
 /obj/structure/table/woodentable,
@@ -1211,7 +1211,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4

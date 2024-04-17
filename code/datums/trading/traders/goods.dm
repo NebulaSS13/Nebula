@@ -43,7 +43,7 @@
 		/obj/item/energy_blade/sword/toy = TRADER_THIS_TYPE,
 		/obj/item/toy/bosunwhistle       = TRADER_THIS_TYPE,
 		/obj/item/board                  = TRADER_THIS_TYPE,
-		/obj/item/storage/box/checkers   = TRADER_ALL,
+		/obj/item/box/checkers   = TRADER_ALL,
 		/obj/item/deck                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/pack                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/dice                   = TRADER_ALL,
@@ -176,9 +176,9 @@
 	possible_trading_items = list(
 		/obj/item/clothing/accessory                 = TRADER_ALL,
 		/obj/item/clothing/accessory/badge           = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/accessory/storage/holster = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/accessory/webbing/holster = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/accessory/medal           = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/accessory/storage         = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/accessory/webbing         = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/gloves                    = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/gloves/lightrig           = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/gloves/rig                = TRADER_BLACKLIST_ALL,
@@ -383,15 +383,15 @@ Sells devices, odds and ends, and medical stuff
 		/obj/item/organ/internal/kidneys        = TRADER_THIS_TYPE,
 		/obj/item/organ/internal/lungs          = TRADER_THIS_TYPE,
 		/obj/item/organ/internal/heart          = TRADER_THIS_TYPE,
-		/obj/item/storage/box/fancy/cigarettes  = TRADER_ALL
+		/obj/item/box/fancy/cigarettes  = TRADER_ALL
 	)
 
 	possible_trading_items = list(
-		/obj/item/storage/pill_bottle           = TRADER_SUBTYPES_ONLY,
-		/obj/item/storage/firstaid/fire         = TRADER_THIS_TYPE,
-		/obj/item/storage/firstaid/toxin        = TRADER_THIS_TYPE,
-		/obj/item/storage/firstaid/adv          = TRADER_THIS_TYPE,
-		/obj/item/storage/box/bloodpacks        = TRADER_THIS_TYPE,
+		/obj/item/pill_bottle           = TRADER_SUBTYPES_ONLY,
+		/obj/item/firstaid/fire         = TRADER_THIS_TYPE,
+		/obj/item/firstaid/toxin        = TRADER_THIS_TYPE,
+		/obj/item/firstaid/adv          = TRADER_THIS_TYPE,
+		/obj/item/box/bloodpacks        = TRADER_THIS_TYPE,
 		/obj/item/chems/ivbag                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/retractor                     = TRADER_THIS_TYPE,
 		/obj/item/hemostat                      = TRADER_THIS_TYPE,
@@ -447,7 +447,7 @@ Sells devices, odds and ends, and medical stuff
 		/obj/machinery/mining/drill                                     = TRADER_THIS_TYPE,
 		/obj/machinery/mining/brace                                     = TRADER_THIS_TYPE,
 		/obj/machinery/floodlight                                       = TRADER_THIS_TYPE,
-		/obj/item/storage/box/greenglowsticks                           = TRADER_THIS_TYPE,
+		/obj/item/box/greenglowsticks                           = TRADER_THIS_TYPE,
 		/obj/item/clothing/suit/space/void/engineering/salvage/prepared = TRADER_THIS_TYPE,
 		/obj/item/stack/material/puck/mapped/uranium/ten                = TRADER_THIS_TYPE,
 		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty = TRADER_THIS_TYPE,

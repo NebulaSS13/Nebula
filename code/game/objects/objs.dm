@@ -24,6 +24,7 @@
 	var/list/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
 
 /obj/Initialize(mapload)
+	//Health should be set to max_health only if it's null.
 	. = ..()
 	create_matter()
 	//Only apply directional offsets if the mappers haven't set any offsets already
@@ -126,11 +127,10 @@
 			. |= DAM_LASER
 
 /obj/attackby(obj/item/O, mob/user)
-	if(obj_flags & OBJ_FLAG_ANCHORABLE)
-		if(IS_WRENCH(O))
-			wrench_floor_bolts(user)
-			update_icon()
-			return
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
+		wrench_floor_bolts(user)
+		update_icon()
+		return TRUE
 	return ..()
 
 /obj/proc/wrench_floor_bolts(mob/user, delay=20)

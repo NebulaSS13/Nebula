@@ -41,7 +41,7 @@
 		/obj/item/clothing/under/sundress,
 		/obj/item/clothing/under/waiter = 2,
 		/obj/item/radio/headset/headset_service = 2,
-		/obj/item/storage/box/mousetraps = 2,
+		/obj/item/box/mousetraps = 2,
 		/obj/item/clothing/under/chef,
 		/obj/item/clothing/head/chefhat
 	)
@@ -64,10 +64,10 @@
 		/obj/item/flashlight,
 		/obj/item/caution = 4,
 		/obj/item/lightreplacer,
-		/obj/item/storage/bag/trash,
+		/obj/item/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/soap,
-		/obj/item/storage/belt/janitor
+		/obj/item/belt/janitor
 	)
 
 /*
@@ -85,9 +85,9 @@
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/suit/storage/toggle/suit/blue,
+		/obj/item/clothing/suit/toggle/suit/blue,
 		/obj/item/clothing/under/lawyer/purpsuit,
-		/obj/item/clothing/suit/storage/toggle/suit/purple,
+		/obj/item/clothing/suit/toggle/suit/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black
 	)

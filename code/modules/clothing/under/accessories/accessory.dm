@@ -12,6 +12,16 @@
 	if(slot != BP_L_HAND && slot != BP_R_HAND)
 		return slot_tie_str
 
+//default attack_hand behaviour
+/obj/item/clothing/accessory/attack_hand(mob/user)
+	if(istype(loc, /obj/item/clothing))
+		if(storage && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
+			add_fingerprint(user)
+			storage.open(user)
+			return TRUE
+		return FALSE //we aren't an object on the ground so don't call parent
+	return ..()
+
 /obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)
 	if(body_parts_covered & zone)
 		return ..()

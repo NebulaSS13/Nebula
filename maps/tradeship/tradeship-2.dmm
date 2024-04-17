@@ -635,8 +635,8 @@
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
-/obj/item/storage/box/fancy/egg_box,
-/obj/item/storage/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/flour,
@@ -1976,7 +1976,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/item/storage/box/donkpockets,
+/obj/item/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/kitchen/rollingpin,
 /obj/item/chems/condiment/small/saltshaker{
@@ -2150,7 +2150,7 @@
 /turf/floor/plating,
 /area/ship/trade/crew/medbay)
 "fg" = (
-/obj/item/storage/pill_bottle/happy,
+/obj/item/pill_bottle/happy,
 /obj/machinery/power/apc{
 	dir = 1;
 	pixel_y = 22
@@ -2216,7 +2216,7 @@
 /obj/random/bomb_supply,
 /obj/random/bomb_supply,
 /obj/random/bomb_supply,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/structure/catwalk,
 /turf/open,
 /area/ship/trade/cargo)
@@ -2261,7 +2261,7 @@
 	pixel_x = 32;
 	dir = 8
 	},
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
 /obj/item/chems/syringe/antibiotic,
@@ -2554,7 +2554,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 9
 	},
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "gp" = (
@@ -2658,7 +2658,7 @@
 /area/space)
 "gA" = (
 /obj/machinery/washing_machine,
-/obj/item/storage/box/monkeycubes{
+/obj/item/box/monkeycubes{
 	pixel_y = 13
 	},
 /turf/floor/tiled/freezer,
@@ -2674,7 +2674,7 @@
 /obj/structure/table,
 /obj/machinery/light,
 /obj/item/chems/spray/cleaner,
-/obj/item/storage/laundry_basket,
+/obj/item/laundry_basket,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
@@ -3035,7 +3035,7 @@
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
-/obj/item/storage/backpack/dufflebag/syndie,
+/obj/item/backpack/dufflebag/syndie,
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -21
@@ -3202,7 +3202,7 @@
 /obj/structure/closet/hydrant{
 	pixel_y = 32
 	},
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /obj/structure/handrail,
 /turf/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
@@ -4549,7 +4549,7 @@
 /area/ship/trade/shuttle/outgoing/general)
 "ml" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},
@@ -4861,7 +4861,7 @@
 	dir = 5
 	},
 /obj/structure/closet/toolcloset,
-/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/backpack/dufflebag/eng,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/structure/handrail,
@@ -5403,9 +5403,9 @@
 	icon_state = "tube1"
 	},
 /obj/structure/closet/cabinet,
-/obj/item/storage/secure/briefcase,
-/obj/item/storage/backpack/dufflebag/syndie,
-/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/secure_storage/briefcase,
+/obj/item/backpack/dufflebag/syndie,
+/obj/item/box/ammo/shotgunshells,
 /obj/item/handcuffs,
 /obj/item/boombox,
 /obj/item/stack/tape_roll/barricade_tape/bureaucracy,
@@ -5527,11 +5527,11 @@
 /obj/item/tank/oxygen,
 /obj/item/tank/oxygen,
 /obj/item/roller,
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/antitoxins,
-/obj/item/storage/pill_bottle/antibiotics,
-/obj/item/storage/pill_bottle/burn_meds,
+/obj/item/firstaid/adv,
+/obj/item/pill_bottle/painkillers,
+/obj/item/pill_bottle/antitoxins,
+/obj/item/pill_bottle/antibiotics,
+/obj/item/pill_bottle/burn_meds,
 /obj/item/scanner/health,
 /obj/structure/handrail{
 	dir = 4
@@ -5651,7 +5651,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/item/chems/glass/rag,
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "yF" = (
@@ -6136,13 +6136,13 @@
 	req_access = list("ACCESS_HEAD_OF_PERSONNEL")
 	},
 /obj/item/clothing/suit/armor/vest,
-/obj/item/storage/box/ids,
+/obj/item/box/ids,
 /obj/item/flash,
 /obj/item/clothing/glasses/sunglasses,
-/obj/item/storage/box/evidence,
+/obj/item/box/evidence,
 /obj/item/stack/tape_roll/barricade_tape/police,
 /obj/item/holowarrant,
-/obj/item/storage/briefcase/crimekit,
+/obj/item/briefcase/crimekit,
 /obj/item/taperecorder,
 /obj/item/camera,
 /turf/floor/wood,
@@ -6478,7 +6478,7 @@
 	dir = 8;
 	pixel_x = -21
 	},
-/obj/item/storage/medical_lolli_jar,
+/obj/item/medical_lolli_jar,
 /obj/structure/table,
 /turf/floor/tiled/white,
 /area/ship/trade/crew/medbay)
@@ -6564,7 +6564,7 @@
 "Jb" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},
@@ -7303,7 +7303,7 @@
 	dir = 1
 	},
 /obj/item/stack/tape_roll/duct_tape,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "QS" = (
@@ -7690,7 +7690,7 @@
 	dir = 8
 	},
 /obj/random/closet,
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /obj/machinery/airlock_sensor{
 	dir = 8;
 	id_tag = "bee_interior_sensor";

@@ -51,9 +51,9 @@
 	uniform =  /obj/item/clothing/under/color/quantum
 	shoes =    /obj/item/clothing/shoes/color/black/quantum
 	l_ear =    /obj/item/radio/headset/ert/quantum
-	back =     /obj/item/storage/backpack/holding/quantum
+	back =     /obj/item/backpack/holding/quantum
 	head =     /obj/item/clothing/head/beret
-	belt =     /obj/item/storage/belt/utility/full/quantum
+	belt =     /obj/item/belt/utility/full/quantum
 	id_slot =  slot_wear_id_str
 
 /mob/living/carbon/human/quantum
@@ -151,11 +151,10 @@
 	to_chat(usr, SPAN_NOTICE("God mode is now [(status_flags & GODMODE) ? "enabled" : "disabled"]."))
 
 // Bag o Holding
-/obj/item/storage/backpack/holding/quantum
-	storage_slots = 56
-	max_w_class = 400
+/obj/item/backpack/holding/quantum
+	storage = /datum/storage/bag/quantum
 
-/obj/item/storage/backpack/holding/quantum/attack_hand(mob/user)
+/obj/item/backpack/holding/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 
@@ -292,7 +291,7 @@
 	return ..()
 
 // Belt
-/obj/item/storage/belt/utility/full/quantum/Initialize()
+/obj/item/belt/utility/full/quantum/Initialize()
 	. = ..()
 	// Full set of tools
 	new /obj/item/multitool(src)

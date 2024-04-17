@@ -122,9 +122,9 @@
 /obj/item/paper/sticky/can_bundle()
 	return FALSE // Would otherwise lead to buggy interaction
 
-/obj/item/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)
+/obj/item/paper/sticky/afterattack(var/atom/A, var/mob/user, var/flag, var/params)
 
-	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/storage) || is_crumpled)
+	if(!in_range(user, A) || istype(A, /obj/machinery/door) || A.storage || is_crumpled)
 		return
 
 	var/turf/target_turf = get_turf(A)

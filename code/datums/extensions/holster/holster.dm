@@ -1,7 +1,7 @@
 /datum/extension/holster
 	base_type = /datum/extension/holster
 	var/atom/atom_holder
-	var/obj/item/storage/storage
+	var/datum/storage/storage
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'
 	var/list/can_holster = null
@@ -33,7 +33,7 @@
 /datum/extension/holster/proc/holster(var/obj/item/I, var/mob/living/user)
 	if(!storage)
 		return 1
-	if(!holstered && storage.storage_slots != null && storage.contents.len >= storage.storage_slots - 1)
+	if(!holstered && storage.storage_slots != null && length(storage.get_contents()) >= storage.storage_slots - 1)
 		if(!can_holster(I))
 			to_chat(user, "<span class='notice'>\The [I] won't fit in \the [atom_holder]'s holster!.</span>")
 			return 1
@@ -46,10 +46,12 @@
 		if(istype(user))
 			user.stop_aiming(no_message=1)
 		holstered = I
-		storage.handle_item_insertion(holstered, 1)
+		storage.handle_item_insertion(user, holstered, 1)
 		holstered.add_fingerprint(user)
 		holstered.add_fibers(atom_holder)
-		storage.w_class = max(storage.w_class, holstered.w_class)
+		if(isobj(storage?.holder))
+			var/obj/obj_holder = storage.holder
+			obj_holder.w_class = max(obj_holder.w_class, holstered.w_class)
 		user.visible_message("<span class='notice'>\The [user] holsters \the [holstered].</span>", "<span class='notice'>You holster \the [holstered].</span>")
 		atom_holder.SetName("occupied [initial(atom_holder.name)]")
 		atom_holder.update_icon()
@@ -95,7 +97,9 @@
 		holstered.queue_icon_update()
 		user.put_in_hands(holstered)
 		holstered = null
-		storage.w_class = initial(storage.w_class)
+		if(isobj(storage?.holder))
+			var/obj/obj_holder = storage.holder
+			obj_holder.w_class = initial(obj_holder.w_class)
 		atom_holder.update_icon()
 		return 1
 	return 0

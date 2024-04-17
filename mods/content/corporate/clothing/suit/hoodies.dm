@@ -1,4 +1,4 @@
-/obj/item/clothing/suit/storage/toggle/nt_hoodie // no hood, not actually a hoodie
+/obj/item/clothing/suit/toggle/nt_hoodie // no hood, not actually a hoodie
 	name = "\improper NanoTrasen hoodie"
 	desc = "A warm, blue sweatshirt. It proudly bears the NanoTrasen logo on the back. The edges are trimmed with silver."
 	icon = 'mods/content/corporate/icons/clothing/suit/nt_hoodie.dmi'

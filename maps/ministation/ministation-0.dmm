@@ -366,11 +366,11 @@
 /area/ministation/mining)
 "bV" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -426,7 +426,7 @@
 /turf/floor/airless,
 /area/space)
 "ce" = (
-/obj/item/storage/ore,
+/obj/item/ore,
 /turf/floor/airless,
 /area/space)
 "cf" = (
@@ -887,8 +887,8 @@
 /area/ministation/hall/n)
 "dN" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/clothing/accessory/cloak,
 /obj/item/clothing/accessory/cloak,
 /turf/floor/wood/walnut,
@@ -1008,7 +1008,7 @@
 /area/ministation/supermatter)
 "ew" = (
 /obj/structure/closet/secure_closet/atmos_personal,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/clothing/under/hazard,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 10
@@ -2364,9 +2364,9 @@
 /area/ministation/ai_sat)
 "jI" = (
 /obj/structure/closet/secure_closet/cargotech,
-/obj/item/clothing/suit/storage/toggle/wintercoat/cargo,
+/obj/item/clothing/suit/toggle/wintercoat/cargo,
 /obj/item/key/cargo_train,
-/obj/item/clothing/suit/storage/toggle/wintercoat/cargo,
+/obj/item/clothing/suit/toggle/wintercoat/cargo,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "jL" = (
@@ -2923,7 +2923,7 @@
 /area/ministation/atmospherics)
 "me" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 6;
 	pixel_y = -5
 	},
@@ -3012,7 +3012,7 @@
 /area/ministation/ai_sat)
 "my" = (
 /obj/structure/table,
-/obj/item/storage/box,
+/obj/item/box,
 /obj/item/stack/package_wrap/twenty_five,
 /turf/floor/tiled,
 /area/ministation/cargo)
@@ -3049,7 +3049,7 @@
 /area/ministation/ai_sat)
 "mJ" = (
 /obj/structure/closet/secure_closet/atmos_personal,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/clothing/under/hazard,
 /turf/floor/tiled/techfloor,
 /area/ministation/atmospherics)
@@ -3230,8 +3230,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "nw" = (
@@ -4052,7 +4052,7 @@
 	},
 /obj/structure/closet/secure_closet/engineering_chief,
 /obj/item/clothing/under/hazard,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/telebaton,
 /obj/item/sealant_tank/mapped,
 /obj/item/sealant_tank/mapped,
@@ -4160,8 +4160,8 @@
 	level = 2
 	},
 /obj/structure/closet/jcloset,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/tiled,
 /area/ministation/janitor)
 "sz" = (
@@ -4186,7 +4186,7 @@
 	dir = 4
 	},
 /obj/item/grenade/chem_grenade/cleaner,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/stack/material/bar/wax,
 /turf/floor/tiled,
@@ -5011,7 +5011,7 @@
 /obj/structure/closet/secure_closet/quartermaster{
 	req_access = list("ACCESS_MINING")
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "wo" = (
@@ -5092,8 +5092,8 @@
 "wC" = (
 /obj/structure/closet,
 /obj/item/gun/launcher/foam/crossbow,
-/obj/item/storage/box/foam_darts,
-/obj/item/storage/box/foam_darts,
+/obj/item/box/foam_darts,
+/obj/item/box/foam_darts,
 /obj/item/gun/launcher/foam/revolver,
 /obj/item/gun/launcher/foam/revolver,
 /obj/item/gun/launcher/foam,
@@ -5134,11 +5134,11 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt,
+/obj/item/belt,
+/obj/item/belt,
+/obj/item/belt,
+/obj/item/belt,
+/obj/item/belt,
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "tube1"
@@ -5715,7 +5715,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/item/wrench,
 /obj/item/weldingtool,
 /obj/item/clothing/head/welding,
@@ -5785,7 +5785,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/item/wrench,
 /obj/item/weldingtool,
 /obj/item/clothing/head/welding/engie,
@@ -6138,8 +6138,8 @@
 /obj/structure/table/gamblingtable,
 /obj/item/stack/cable_coil/random,
 /obj/item/stack/cable_coil/random,
-/obj/item/storage/toolbox/mechanical,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/mechanical,
+/obj/item/toolbox/electrical,
 /obj/item/clothing/gloves/insulated/cheap,
 /obj/item/clothing/gloves/insulated/cheap,
 /obj/structure/disposalpipe/segment{
@@ -6247,8 +6247,8 @@
 /area/ministation/mining)
 "BS" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "BV" = (
@@ -6938,7 +6938,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_y = 5
 	},
 /obj/item/radio/intercom{
@@ -6946,7 +6946,7 @@
 	pixel_y = 20
 	},
 /obj/item/clothing/gloves/insulated,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_y = 5
 	},
 /turf/floor/tiled/steel_grid,
@@ -7644,10 +7644,10 @@
 /obj/structure/closet/secure_closet/engineering_personal{
 	req_access = list("ACCESS_ENGINEERING")
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat/engineering,
+/obj/item/clothing/suit/toggle/wintercoat/engineering,
 /obj/item/clothing/under/hazard,
-/obj/item/storage/backpack/dufflebag/eng,
-/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/backpack/dufflebag/eng,
+/obj/item/backpack/dufflebag/eng,
 /turf/floor/tiled/steel_grid,
 /area/ministation/engine)
 "FI" = (
@@ -7662,7 +7662,7 @@
 /obj/item/flashlight/lantern,
 /obj/item/flashlight/lantern,
 /obj/item/mobile_ladder,
-/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/backpack/dufflebag/eng,
 /turf/floor/tiled/steel_grid,
 /area/ministation/engine)
 "FJ" = (
@@ -8988,13 +8988,13 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/storage/backpack,
-/obj/item/storage/backpack,
-/obj/item/storage/backpack,
-/obj/item/storage/backpack,
-/obj/item/storage/backpack,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/backpack,
+/obj/item/backpack,
+/obj/item/backpack,
+/obj/item/backpack,
+/obj/item/backpack,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "IQ" = (
@@ -9850,11 +9850,11 @@
 /area/ministation/ai_sat)
 "Lg" = (
 /obj/structure/rack,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = -3;
 	pixel_y = 3
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/multitool,
 /turf/floor/tiled,
 /area/ministation/ai_sat)
@@ -10379,10 +10379,10 @@
 "MN" = (
 /obj/structure/closet/l3closet/janitor,
 /obj/item/grenade/chem_grenade/cleaner,
-/obj/item/storage/bag/trash,
-/obj/item/storage/bag/trash,
-/obj/item/storage/bag/trash,
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
+/obj/item/bag/trash,
+/obj/item/bag/trash,
+/obj/item/bag/trash,
 /turf/floor/tiled,
 /area/ministation/janitor)
 "MR" = (
@@ -10892,12 +10892,12 @@
 /obj/machinery/camera/network/mining{
 	dir = 1
 	},
-/obj/item/storage/ore,
+/obj/item/ore,
 /turf/floor/airless,
 /area/space)
 "Oy" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 6;
 	pixel_y = -5
 	},
@@ -11220,7 +11220,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,
 /obj/item/megaphone,
-/obj/item/storage/box,
+/obj/item/box,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "Pr" = (
@@ -12264,7 +12264,7 @@
 "Tp" = (
 /obj/structure/table,
 /obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -12426,7 +12426,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/clothing/suit/storage/hazardvest,
+/obj/item/clothing/suit/hazardvest,
 /obj/item/tank/emergency/oxygen/engi,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled/steel_grid,
@@ -12803,8 +12803,8 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/item/clothing/suit/storage/toggle/wintercoat,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "Vm" = (
@@ -13205,11 +13205,11 @@
 	icon_state = "bulb1"
 	},
 /obj/structure/closet/secure_closet/atmos_personal,
-/obj/item/storage/toolbox/emergency,
+/obj/item/toolbox/emergency,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/mask/breath/emergency,
-/obj/item/storage/firstaid/o2,
+/obj/item/firstaid/o2,
 /turf/floor/tiled/techfloor,
 /area/ministation/atmospherics)
 "WW" = (

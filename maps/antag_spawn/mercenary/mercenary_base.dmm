@@ -462,12 +462,12 @@
 /obj/item/chems/spray/cleaner,
 /obj/item/chems/spray/antiseptic,
 /obj/item/defibrillator/loaded,
-/obj/item/storage/firstaid/combat,
+/obj/item/firstaid/combat,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/surgical,
 /obj/item/bodybag/cryobag,
 /obj/item/chems/ivbag/blood/nanoblood,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "aT" = (
@@ -737,14 +737,14 @@
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bt" = (
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/structure/table,
 /obj/item/stack/nanopaste,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /obj/machinery/body_scanconsole,
 /turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
@@ -1214,8 +1214,8 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/item/storage/briefcase/inflatable,
-/obj/item/storage/briefcase/inflatable,
+/obj/item/briefcase/inflatable,
+/obj/item/briefcase/inflatable,
 /obj/item/inflatable_dispenser,
 /obj/item/spaceflare,
 /obj/item/spaceflare,
@@ -1558,8 +1558,8 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
-/obj/item/storage/toolbox/syndicate,
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
+/obj/item/toolbox/syndicate,
+/obj/item/backpack/dufflebag/syndie/ammo,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
@@ -1832,12 +1832,12 @@
 /area/map_template/merc_spawn)
 "js" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest/black,
-/obj/item/clothing/accessory/storage/vest/black,
+/obj/item/clothing/accessory/webbing/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
+/obj/item/clothing/accessory/webbing/vest,
+/obj/item/clothing/accessory/webbing/vest,
+/obj/item/clothing/accessory/webbing/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -1916,13 +1916,13 @@
 /area/map_template/merc_spawn)
 "kQ" = (
 /obj/structure/closet/crate/med_crate/toxin,
-/obj/item/storage/box/bodybags,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
-/obj/item/storage/belt/medical/emt,
-/obj/item/storage/belt/medical/emt,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
+/obj/item/box/bodybags,
+/obj/item/box/gloves,
+/obj/item/box/masks,
+/obj/item/belt/medical/emt,
+/obj/item/belt/medical/emt,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -1959,12 +1959,12 @@
 /area/map_template/merc_spawn)
 "lQ" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/drop_pouches/white,
-/obj/item/clothing/accessory/storage/drop_pouches/white,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
+/obj/item/clothing/accessory/webbing/drop_pouches/white,
+/obj/item/clothing/accessory/webbing/drop_pouches/white,
+/obj/item/clothing/accessory/webbing/drop_pouches/black,
+/obj/item/clothing/accessory/webbing/drop_pouches/black,
+/obj/item/clothing/accessory/webbing/drop_pouches/brown,
+/obj/item/clothing/accessory/webbing/drop_pouches/brown,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -2155,7 +2155,7 @@
 /area/map_template/merc_spawn)
 "vg" = (
 /obj/structure/table,
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
+/obj/item/backpack/dufflebag/syndie/ammo,
 /turf/floor/tiled,
 /area/map_template/merc_spawn)
 "vM" = (
@@ -2229,14 +2229,14 @@
 /turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "zo" = (
-/obj/item/storage/box/smokes,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/flashbangs,
+/obj/item/box/smokes,
+/obj/item/box/teargas,
+/obj/item/box/flashbangs,
 /obj/structure/rack,
 /obj/item/grenade/anti_photon,
 /obj/item/grenade/anti_photon,
 /obj/item/grenade/anti_photon,
-/obj/item/storage/box/frags,
+/obj/item/box/frags,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "vault"
@@ -2247,7 +2247,7 @@
 	dir = 8;
 	markup = 0;
 	name = "hacked cigarette machine";
-	products = list(/obj/item/storage/box/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/fuelled/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/box/fancy/cigarettes = 10, /obj/item/box/matches = 10, /obj/item/flame/fuelled/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /obj/structure/railing/mapped/no_density{
 	dir = 8
@@ -2436,15 +2436,15 @@
 /area/map_template/merc_spawn)
 "LD" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/pouches/large,
-/obj/item/clothing/accessory/storage/pouches/large,
-/obj/item/clothing/accessory/storage/pouches,
-/obj/item/clothing/accessory/storage/pouches,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/webbing/bandolier,
+/obj/item/clothing/accessory/webbing/bandolier,
+/obj/item/clothing/accessory/webbing/bandolier,
+/obj/item/clothing/accessory/webbing/pouches/large,
+/obj/item/clothing/accessory/webbing/pouches/large,
+/obj/item/clothing/accessory/webbing/pouches,
+/obj/item/clothing/accessory/webbing/pouches,
+/obj/item/clothing/accessory/webbing/holster/thigh,
+/obj/item/clothing/accessory/webbing/holster/thigh,
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "LI" = (
@@ -2554,11 +2554,11 @@
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
-/obj/item/storage/box/handcuffs{
+/obj/item/box/handcuffs{
 	pixel_x = 4;
 	pixel_y = 2
 	},
-/obj/item/storage/box/handcuffs{
+/obj/item/box/handcuffs{
 	pixel_x = 4;
 	pixel_y = 2
 	},
@@ -2604,13 +2604,13 @@
 /area/map_template/merc_spawn)
 "QJ" = (
 /obj/structure/rack,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "QW" = (
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
+/obj/item/backpack/dufflebag/syndie/ammo,
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "QX" = (

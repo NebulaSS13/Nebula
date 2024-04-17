@@ -3533,8 +3533,8 @@
 	},
 /obj/item/clothing/gloves/thick,
 /obj/item/clothing/gloves/thick,
-/obj/item/storage/belt/utility/atmostech,
-/obj/item/storage/belt/utility/atmostech,
+/obj/item/belt/utility/atmostech,
+/obj/item/belt/utility/atmostech,
 /obj/structure/table/steel,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
@@ -5583,7 +5583,7 @@
 /obj/structure/window/reinforced,
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
-/obj/item/storage/lunchbox/dais{
+/obj/item/lunchbox/dais{
 	pixel_x = 6;
 	pixel_y = 6
 	},
@@ -5692,7 +5692,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/stack/cable_coil{
 	pixel_x = 3;
 	pixel_y = -7
@@ -5936,8 +5936,8 @@
 	pixel_x = 24
 	},
 /obj/structure/rack,
-/obj/item/clothing/suit/storage/toggle/wintercoat/engineering,
-/obj/item/clothing/suit/storage/toggle/wintercoat/dais{
+/obj/item/clothing/suit/toggle/wintercoat/engineering,
+/obj/item/clothing/suit/toggle/wintercoat/dais{
 	pixel_y = 12
 	},
 /turf/floor/tiled/dark/monotile,
@@ -5999,7 +5999,7 @@
 /area/exodus/maintenance/telecomms)
 "Nw" = (
 /obj/structure/table/steel,
-/obj/item/storage/box/cups,
+/obj/item/box/cups,
 /obj/machinery/power/apc/hyper{
 	dir = 4;
 	name = "east bump";

@@ -102,41 +102,33 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pack for holding pickaxes
 
-/obj/item/storage/excavation
+/obj/item/excavation
 	name              = "excavation pick set"
 	icon              = 'icons/obj/items/storage/excavation.dmi'
 	icon_state        = "excavation"
 	item_state        = "utility"
 	desc              = "A rugged case containing a set of standardized picks used in archaeological digs."
 	item_state        = "syringe_kit"
-	storage_slots     = 7
 	slot_flags        = SLOT_LOWER_BODY
 	w_class           = ITEM_SIZE_NORMAL
-	can_hold          = list(/obj/item/tool/xeno)
-	max_storage_space = 18
-	max_w_class       = ITEM_SIZE_NORMAL
-	use_to_pickup     = 1
 	material          = /decl/material/solid/organic/leather/synth
+	storage           = /datum/storage/excavation
 
-/obj/item/storage/excavation/WillContain()
+/obj/item/excavation/WillContain()
 	return list(
-			/obj/item/tool/xeno/brush,
-			/obj/item/tool/xeno/one_pick,
-			/obj/item/tool/xeno/two_pick,
-			/obj/item/tool/xeno/three_pick,
-			/obj/item/tool/xeno/four_pick,
-			/obj/item/tool/xeno/five_pick,
-			/obj/item/tool/xeno/six_pick
-		)
+		/obj/item/tool/xeno/brush,
+		/obj/item/tool/xeno/one_pick,
+		/obj/item/tool/xeno/two_pick,
+		/obj/item/tool/xeno/three_pick,
+		/obj/item/tool/xeno/four_pick,
+		/obj/item/tool/xeno/five_pick,
+		/obj/item/tool/xeno/six_pick
+	)
 
-/obj/item/storage/excavation/empty/WillContain()
+/obj/item/excavation/empty/WillContain()
 	return
 
-/obj/item/storage/excavation/handle_item_insertion()
-	..()
-	sort_picks()
-
-/obj/item/storage/excavation/proc/sort_picks()
+/obj/item/excavation/proc/sort_picks()
 	var/list/obj/item/tool/xeno/picksToSort = list()
 	for(var/obj/item/tool/xeno/P in src)
 		picksToSort += P
@@ -153,4 +145,5 @@
 		var/obj/item/tool/xeno/smallest = picksToSort[selected]
 		smallest.forceMove(src)
 		picksToSort -= smallest
-	prepare_ui()
+	if(storage)
+		storage.prepare_ui()

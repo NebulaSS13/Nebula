@@ -869,7 +869,7 @@
 /area/lar_maria/dorms)
 "cG" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/glowsticks,
+/obj/item/box/glowsticks,
 /turf/floor/wood,
 /area/lar_maria/dorms)
 "cH" = (
@@ -1499,7 +1499,7 @@
 /area/lar_maria/office)
 "eF" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/floor/wood,
 /area/lar_maria/dorms)
 "eG" = (
@@ -1510,7 +1510,7 @@
 /area/lar_maria/dorms)
 "eH" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /turf/floor/wood,
 /area/lar_maria/dorms)
 "eI" = (
@@ -1565,7 +1565,7 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/floor/tiled/white,
 /area/lar_maria/office)
 "eR" = (
@@ -1679,8 +1679,8 @@
 /obj/item/clothing/head/surgery,
 /obj/item/clothing/under/medical/scrubs,
 /obj/item/clothing/under/medical/scrubs,
-/obj/item/clothing/suit/storage/toggle/labcoat,
-/obj/item/clothing/suit/storage/toggle/labcoat,
+/obj/item/clothing/suit/toggle/labcoat,
+/obj/item/clothing/suit/toggle/labcoat,
 /obj/random/gloves,
 /turf/floor/tiled,
 /area/lar_maria/office)
@@ -2610,7 +2610,7 @@
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
 /obj/item/chems/condiment/flour,
-/obj/item/storage/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
 /turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ie" = (

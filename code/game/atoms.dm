@@ -56,6 +56,9 @@
 	var/current_health
 	var/max_health
 
+	// /datum/storage instance to use for this obj. Set to a type for instantiation on init.
+	var/datum/storage/storage
+
 /atom/proc/get_max_health()
 	return max_health
 
@@ -367,8 +370,14 @@
 		if(cell)
 			LAZYREMOVE(., cell)
 
+// Return a list of all stored (in inventory) atoms, defaulting to above.
+/atom/proc/get_stored_inventory()
+	SHOULD_CALL_PARENT(TRUE)
+	return get_contained_external_atoms()
+
 // Return a list of all temperature-sensitive atoms, defaulting to above.
 /atom/proc/get_contained_temperature_sensitive_atoms()
+	SHOULD_CALL_PARENT(TRUE)
 	return get_contained_external_atoms()
 
 /// Dump the contents of this atom onto its loc
@@ -878,7 +887,9 @@
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	RETURN_TYPE(/list)
-	return list()
+	. = list()
+	if(storage)
+		. += /decl/interaction_handler/storage_open
 
 /atom/proc/can_climb_from_below(var/mob/climber)
 	return FALSE
@@ -900,6 +911,40 @@
 
 /atom/proc/can_be_injected_by(var/atom/injector)
 	return FALSE
+
+//Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
+//Returns -1 if the atom was not found on container.
+/atom/proc/storage_depth(atom/container)
+	. = 0
+	var/atom/cur_atom = src
+	while (cur_atom && !(cur_atom in container.contents))
+		if (isarea(cur_atom))
+			return
+		if(cur_atom.loc?.storage)
+			.++
+		cur_atom = cur_atom.loc
+	if (!cur_atom)
+		return -1	//inside something with a null loc.
+
+//Like storage depth, but returns the depth to the nearest turf
+//Returns -1 if no top level turf (a loc was null somewhere, or a non-turf atom's loc was an area somehow).
+/atom/proc/storage_depth_turf()
+	. = 0
+	var/atom/cur_atom = src
+	while (cur_atom && !isturf(cur_atom))
+		if (isarea(cur_atom))
+			return
+		if(cur_atom.loc?.storage)
+			.++
+		cur_atom = cur_atom.loc
+	if (!cur_atom)
+		. = -1	//inside something with a null loc.
+
+/atom/proc/storage_inserted(atom/movable/thing)
+	return
+
+/atom/proc/storage_removed(atom/movable/thing)
+	return
 
 /atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
 	set waitfor = FALSE

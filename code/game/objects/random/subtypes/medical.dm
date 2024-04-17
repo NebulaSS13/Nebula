@@ -10,17 +10,17 @@
 		/obj/item/bodybag =                                2,
 		/obj/item/chems/glass/bottle/stabilizer =          2,
 		/obj/item/chems/glass/bottle/antitoxin =           2,
-		/obj/item/storage/pill_bottle =                    2,
-		/obj/item/storage/pill_bottle/painkillers =        2,
-		/obj/item/storage/pill_bottle/strong_painkillers = 1,
-		/obj/item/storage/pill_bottle/antidepressants =    2,
-		/obj/item/storage/pill_bottle/oxygen =             1,
-		/obj/item/storage/pill_bottle/burn_meds =          1,
-		/obj/item/storage/pill_bottle/brute_meds =         1,
+		/obj/item/pill_bottle =                    2,
+		/obj/item/pill_bottle/painkillers =        2,
+		/obj/item/pill_bottle/strong_painkillers = 1,
+		/obj/item/pill_bottle/antidepressants =    2,
+		/obj/item/pill_bottle/oxygen =             1,
+		/obj/item/pill_bottle/burn_meds =          1,
+		/obj/item/pill_bottle/brute_meds =         1,
 		/obj/item/chems/syringe/antitoxin =                2,
 		/obj/item/chems/syringe/antibiotic =               1,
 		/obj/item/chems/syringe/stabilizer =               2,
-		/obj/item/storage/box/freezer =                    1,
+		/obj/item/box/freezer =                    1,
 		/obj/item/stack/nanopaste =                        1
 	)
 	return spawnable_choices
@@ -36,20 +36,20 @@
 	var/static/list/spawnable_choices = list(
 		/obj/item/stack/medical/bruise_pack               = 4,
 		/obj/item/stack/medical/ointment                  = 4,
-		/obj/item/storage/pill_bottle/antibiotics         = 2,
-		/obj/item/storage/pill_bottle/painkillers         = 2,
-		/obj/item/storage/pill_bottle/strong_painkillers  = 1,
+		/obj/item/pill_bottle/antibiotics                 = 2,
+		/obj/item/pill_bottle/painkillers                 = 2,
+		/obj/item/pill_bottle/strong_painkillers          = 1,
 		/obj/item/stack/medical/advanced/bruise_pack      = 2,
 		/obj/item/stack/medical/advanced/ointment         = 2,
 		/obj/item/stack/medical/splint                    = 1,
 		/obj/item/chems/hypospray/autoinjector/stabilizer = 3,
-		/obj/item/storage/pill_bottle/burn_meds           = 2,
-		/obj/item/storage/pill_bottle/antitoxins          = 2,
-		/obj/item/storage/med_pouch/trauma                = 2,
-		/obj/item/storage/med_pouch/burn                  = 2,
-		/obj/item/storage/med_pouch/toxin                 = 2,
-		/obj/item/storage/med_pouch/radiation             = 2,
-		/obj/item/storage/med_pouch/oxyloss               = 2
+		/obj/item/pill_bottle/burn_meds                   = 2,
+		/obj/item/pill_bottle/antitoxins                  = 2,
+		/obj/item/med_pouch/trauma                        = 2,
+		/obj/item/med_pouch/burn                          = 2,
+		/obj/item/med_pouch/toxin                         = 2,
+		/obj/item/med_pouch/radiation                     = 2,
+		/obj/item/med_pouch/oxyloss                       = 2
 	)
 	return spawnable_choices
 
@@ -59,10 +59,10 @@
 
 /obj/random/medical/pillbottle/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/pill_bottle/antibiotics,
-		/obj/item/storage/pill_bottle/oxygen,
-		/obj/item/storage/pill_bottle/brute_meds,
-		/obj/item/storage/pill_bottle/sugariron
+		/obj/item/pill_bottle/antibiotics,
+		/obj/item/pill_bottle/oxygen,
+		/obj/item/pill_bottle/brute_meds,
+		/obj/item/pill_bottle/sugariron
 	)
 	return spawnable_choices
 
@@ -74,14 +74,14 @@
 
 /obj/random/firstaid/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/firstaid/regular = 4,
-		/obj/item/storage/firstaid/trauma =  3,
-		/obj/item/storage/firstaid/toxin =   3,
-		/obj/item/storage/firstaid/o2 =      3,
-		/obj/item/storage/firstaid/stab =    2,
-		/obj/item/storage/firstaid/adv =     2,
-		/obj/item/storage/firstaid/combat =  1,
-		/obj/item/storage/firstaid/empty =   2,
-		/obj/item/storage/firstaid/fire =    3
+		/obj/item/firstaid/regular = 4,
+		/obj/item/firstaid/trauma =  3,
+		/obj/item/firstaid/toxin =   3,
+		/obj/item/firstaid/o2 =      3,
+		/obj/item/firstaid/stab =    2,
+		/obj/item/firstaid/adv =     2,
+		/obj/item/firstaid/combat =  1,
+		/obj/item/firstaid/empty =   2,
+		/obj/item/firstaid/fire =    3
 	)
 	return spawnable_choices

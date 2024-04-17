@@ -246,27 +246,21 @@ default behaviour is:
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
-/mob/proc/get_contents()
-	return
+/mob/proc/get_mob_contents()
 
-//Recursive function to find everything a mob is holding.
-/mob/living/get_contents(var/obj/item/storage/Storage = null)
-	var/list/L = list()
+	var/list/gear_tree = list()
+	for(var/obj/item/thing as anything in get_equipped_items(include_carried = TRUE))
+		gear_tree |= thing
 
-	if(Storage) //If it called itself
-		L += Storage.return_inv()
-
-		//Leave this commented out, it will cause storage items to exponentially add duplicate to the list
-		//for(var/obj/item/storage/S in Storage.return_inv()) //Check for storage items
-		//	L += get_contents(S)
-		return L
-
-	else
-
-		L += src.contents
-		for(var/obj/item/storage/S in src.contents)	//Check for storage items
-			L += get_contents(S)
-		return L
+	while(length(gear_tree))
+		var/obj/item/thing = gear_tree[1]
+		gear_tree -= thing
+		if(thing in .)
+			continue
+		LAZYDISTINCTADD(., thing)
+		var/list/storage_contents = thing?.storage?.return_inv()
+		if(length(storage_contents))
+			gear_tree |= storage_contents
 
 /mob/living/proc/can_inject(var/mob/user, var/target_zone)
 	return 1
@@ -513,7 +507,7 @@ default behaviour is:
 	. = ..()
 	if(.)
 		handle_grabs_after_move(old_loc, Dir)
-		if (active_storage && !( active_storage in contents ) && get_turf(active_storage) != get_turf(src))	//check !( active_storage in contents ) first so we hopefully don't have to call get_turf() so much.
+		if(active_storage && !active_storage.can_view(src))
 			active_storage.close(src)
 
 /mob/living/verb/resist()
@@ -566,7 +560,7 @@ default behaviour is:
 			if(ismob(A) || istype(A,/obj/item/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
-	else if(istype(H.loc,/obj/item/clothing/accessory/storage/holster) || istype(H.loc,/obj/item/storage/belt/holster))
+	else if(istype(H.loc,/obj/item/clothing/accessory/webbing/holster) || istype(H.loc,/obj/item/belt/holster))
 		var/datum/extension/holster/holster = get_extension(src, /datum/extension/holster)
 		if(holster.holstered == H)
 			holster.clear_holster()

@@ -31,7 +31,7 @@
 		/obj/item/tool/hoe/mini,
 		/obj/item/hatchet,
 		/obj/item/scanner/plant,
-		/obj/item/storage/plants,
+		/obj/item/plants,
 		/obj/item/robot_harvester,
 		/obj/item/kitchen/rollingpin,
 		/obj/item/knife/kitchen,
@@ -39,7 +39,7 @@
 		/obj/item/rsf,
 		/obj/item/chems/dropper/industrial,
 		/obj/item/flame/fuelled/lighter/zippo,
-		/obj/item/storage/tray/robotray,
+		/obj/item/plate/tray/robotray,
 		/obj/item/chems/borghypo/service
 	)
 	emag = /obj/item/chems/drinks/bottle/small/beer

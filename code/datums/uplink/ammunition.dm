@@ -38,27 +38,27 @@
 	name = "Ammobox of Sniper Rounds"
 	desc = "A container of rounds for the anti-materiel rifle. Contains 7 rounds."
 	item_cost = 8
-	path = /obj/item/storage/box/ammo/sniperammo
+	path = /obj/item/box/ammo/sniperammo
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/ammo/sniperammo/apds
 	name = "Ammobox of APDS Sniper Rounds"
 	desc = "A container of armor piercing rounds for the anti-materiel rifle. Contains 3 rounds."
 	item_cost = 12
-	path = /obj/item/storage/box/ammo/sniperammo/apds
+	path = /obj/item/box/ammo/sniperammo/apds
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Ammobox of Shotgun Shells"
 	desc = "An ammobox with 2 sets of shell holders. Contains 8 buckshot shells total."
 	item_cost = 8
-	path = /obj/item/storage/box/ammo/shotgunshells
+	path = /obj/item/box/ammo/shotgunshells
 
 /datum/uplink_item/item/ammo/shotgun_slugs
 	name = "Ammobox of Shotgun Slugs"
 	desc = "An ammobox with 2 sets of shell holders. Contains 8 slugs total."
 	item_cost = 8
-	path = /obj/item/storage/box/ammo/shotgunammo
+	path = /obj/item/box/ammo/shotgunammo
 
 /datum/uplink_item/item/ammo/smg
 	name = "Standard Box Magazine"

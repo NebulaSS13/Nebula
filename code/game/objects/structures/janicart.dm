@@ -7,7 +7,7 @@
 	density = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 	movable_flags = MOVABLE_FLAG_WHEELED
-	var/obj/item/storage/bag/trash/mybag	= null
+	var/obj/item/bag/trash/mybag	= null
 	var/obj/item/mop/mymop = null
 	var/obj/item/chems/spray/myspray = null
 	var/obj/item/lightreplacer/myreplacer = null
@@ -25,7 +25,7 @@
 
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/storage/bag/trash) && !mybag)
+	if(istype(I, /obj/item/bag/trash) && !mybag)
 		if(!user.try_unequip(I, src))
 			return
 		mybag = I
@@ -187,7 +187,7 @@
 		/datum/movement_handler/move_relay_self/janicart
 	)
 
-	var/obj/item/storage/bag/trash/mybag = null
+	var/obj/item/bag/trash/mybag = null
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
 /obj/structure/bed/chair/janicart/Initialize()
@@ -223,7 +223,7 @@
 		to_chat(user, SPAN_NOTICE("Hold \the [I] in one of your hands while you drive this [callme]."))
 		return TRUE
 
-	if(istype(I, /obj/item/storage/bag/trash))
+	if(istype(I, /obj/item/bag/trash))
 		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, SPAN_NOTICE("You hook \the [I] onto the [callme]."))

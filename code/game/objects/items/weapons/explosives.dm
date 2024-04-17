@@ -48,7 +48,7 @@
 /obj/item/plastique/afterattack(atom/movable/target, mob/user, flag)
 	if (!flag)
 		return
-	if (ismob(target) || istype(target, /obj/item/storage) || istype(target, /obj/item/clothing/accessory/storage) || istype(target, /obj/item/clothing/under))
+	if (ismob(target) || target.storage || istype(target, /obj/item/clothing/accessory/webbing/) || istype(target, /obj/item/clothing/under))
 		return
 	if(isturf(target))
 		var/turf/target_turf = target

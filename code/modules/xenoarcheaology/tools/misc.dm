@@ -18,17 +18,17 @@
 
 /obj/structure/closet/secure_closet/xenoarchaeologist/WillContain()
 	return list(
-		new /datum/atom_creator/simple(/obj/item/storage/backpack/toxins,    50),
-		new /datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag, 50),
+		new /datum/atom_creator/simple(/obj/item/backpack/toxins,    50),
+		new /datum/atom_creator/simple(/obj/item/backpack/dufflebag, 50),
 		/obj/item/clothing/under/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/glasses/science,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clipboard,
-		/obj/item/storage/belt/archaeology,
-		/obj/item/storage/excavation,
+		/obj/item/belt/archaeology,
+		/obj/item/excavation,
 		/obj/item/stack/tape_roll/barricade_tape/research,
 	)
 
@@ -38,8 +38,8 @@
 
 /obj/structure/closet/excavation/WillContain()
 	return list(
-		/obj/item/storage/belt/archaeology,
-		/obj/item/storage/excavation,
+		/obj/item/belt/archaeology,
+		/obj/item/excavation,
 		/obj/item/flashlight/lantern,
 		/obj/item/ano_scanner,
 		/obj/item/depth_scanner,
@@ -49,7 +49,7 @@
 		/obj/item/clothing/glasses/meson,
 		/obj/item/tool,
 		/obj/item/measuring_tape,
-		/obj/item/storage/bag/fossils,
+		/obj/item/bag/fossils,
 		/obj/item/hand_labeler,
 		/obj/item/stack/tape_roll/barricade_tape/research,
 	)
@@ -116,10 +116,10 @@
 
 //Bags
 /datum/fabricator_recipe/textiles/storage/fossils_bag
-	path = /obj/item/storage/bag/fossils
+	path = /obj/item/bag/fossils
 
 /datum/fabricator_recipe/textiles/storage/archeology_tool_belt
-	path = /obj/item/storage/belt/archaeology
+	path = /obj/item/belt/archaeology
 
 /datum/fabricator_recipe/textiles/storage/excavation_bag
-	path = /obj/item/storage/excavation/empty
+	path = /obj/item/excavation/empty

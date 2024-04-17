@@ -20,7 +20,7 @@
 	var/list/outfits_per_species
 
 /decl/special_role/raider/update_access(var/mob/living/player)
-	for(var/obj/item/storage/wallet/W in player.contents)
+	for(var/obj/item/wallet/W in player.contents)
 		for(var/obj/item/card/id/id in W.contents)
 			id.SetName("[player.real_name]'s Passport")
 			id.registered_name = player.real_name

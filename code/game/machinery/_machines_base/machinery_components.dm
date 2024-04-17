@@ -183,13 +183,14 @@ var/global/list/machine_path_to_circuit_type
 		events_repository.unregister(/decl/observ/destroyed, part, src)
 		return part
 
-/obj/machinery/proc/replace_part(mob/user, var/obj/item/storage/part_replacer/R, var/obj/item/stock_parts/old_part, var/obj/item/stock_parts/new_part)
+/obj/machinery/proc/replace_part(mob/user, var/obj/item/part_replacer/R, var/obj/item/stock_parts/old_part, var/obj/item/stock_parts/new_part)
 	if(ispath(old_part))
 		old_part = get_component_of_type(old_part, TRUE)
 	old_part = uninstall_component(old_part)
 	if(R)
-		R.remove_from_storage(new_part, src)
-		R.handle_item_insertion(old_part, 1)
+		if(R.storage)
+			R.storage.remove_from_storage(null, new_part, src)
+			R.storage.handle_item_insertion(null, old_part, TRUE)
 		R.part_replacement_sound()
 	install_component(new_part)
 	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
@@ -274,7 +275,7 @@ var/global/list/machine_path_to_circuit_type
 Standard helpers for users interacting with machinery parts.
 */
 
-/obj/machinery/proc/part_replacement(mob/user, obj/item/storage/part_replacer/R)
+/obj/machinery/proc/part_replacement(mob/user, obj/item/part_replacer/R)
 	for(var/obj/item/stock_parts/A in component_parts)
 		if(!A.base_type)
 			continue

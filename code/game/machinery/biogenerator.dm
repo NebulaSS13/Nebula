@@ -29,24 +29,24 @@
 			/obj/item/chems/drinks/milk/smallcarton = 30,
 			/obj/item/chems/drinks/milk = 50,
 			/obj/item/chems/food/butchery/meat/syntiflesh = 50,
-			/obj/item/storage/box/fancy/egg_box = 300),
+			/obj/item/box/fancy/egg_box = 300),
 		"Nutrients" = list(
 			/obj/item/chems/glass/bottle/eznutrient = 60,
 			/obj/item/chems/glass/bottle/left4zed = 120,
 			/obj/item/chems/glass/bottle/robustharvest = 120),
 		"Leather" = list(
-			/obj/item/storage/wallet/leather = 100,
+			/obj/item/wallet/leather = 100,
 			/obj/item/clothing/gloves/thick/botany = 250,
-			/obj/item/storage/belt/utility = 300,
-			/obj/item/storage/backpack/satchel = 400,
-			/obj/item/storage/bag/cash = 400,
+			/obj/item/belt/utility = 300,
+			/obj/item/backpack/satchel = 400,
+			/obj/item/bag/cash = 400,
 			/obj/item/clothing/shoes/workboots = 400,
 			/obj/item/clothing/shoes/craftable = 400,
 			/obj/item/clothing/shoes/dress = 400,
 			/obj/item/clothing/suit/leathercoat = 500,
-			/obj/item/clothing/suit/storage/toggle/brown_jacket = 500,
-			/obj/item/clothing/suit/storage/toggle/bomber = 500,
-			/obj/item/clothing/suit/storage/toggle/wintercoat = 500,
+			/obj/item/clothing/suit/toggle/brown_jacket = 500,
+			/obj/item/clothing/suit/toggle/bomber = 500,
+			/obj/item/clothing/suit/toggle/wintercoat = 500,
 			/obj/item/stack/material/bolt/mapped/cloth/ten = 300,
 			/obj/item/stack/material/bolt/mapped/cloth = 30,
 			/obj/item/stack/material/skin/mapped/leather/ten = 300,
@@ -96,22 +96,21 @@
 
 	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
-	else if(istype(O, /obj/item/storage/plants))
-		var/obj/item/storage/plants/P = O
-		var/hadPlants = 0
-		for(var/obj/item/chems/food/grown/G in P.contents)
-			hadPlants = 1
-			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
-			ingredients++
-			if(ingredients >= capacity)
-				to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
-				break
-		P.finish_bulk_removal() //Now do the UI stuff once.
-		if(!hadPlants)
-			to_chat(user, "<span class='notice'>\The [P] has no produce inside.</span>")
-		else if(ingredients < capacity)
-			to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
-
+	else if(isobj(O))
+		if(O.storage)
+			var/hadPlants = 0
+			for(var/obj/item/chems/food/grown/G in O.storage.get_contents())
+				hadPlants = 1
+				O.storage.remove_from_storage(user, G, src, TRUE)
+				ingredients++
+				if(ingredients >= capacity)
+					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
+					break
+			O.storage.finish_bulk_removal() //Now do the UI stuff once.
+			if(!hadPlants)
+				to_chat(user, "<span class='notice'>\The [O] has no produce inside.</span>")
+			else if(ingredients < capacity)
+				to_chat(user, "<span class='notice'>You empty \the [O] into \the [src].</span>")
 
 	else if(!istype(O, /obj/item/chems/food/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")

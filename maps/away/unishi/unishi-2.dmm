@@ -1561,7 +1561,7 @@
 "ev" = (
 /obj/structure/table/glass,
 /obj/item/scanner/xenobio,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/random/smokes,
 /turf/floor/tiled/white,
 /area/unishi/xenobio)
@@ -1570,7 +1570,7 @@
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -2222,7 +2222,7 @@
 /obj/item/remains,
 /obj/item/clothing/under/chief_engineer,
 /obj/random/shoes,
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
 /turf/floor/tiled/techfloor,
@@ -2271,7 +2271,7 @@
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/structure/window/borosilicate_reinforced,
 /obj/item/remains,
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
 /obj/effect/floor_decal/industrial/loading,
@@ -2371,7 +2371,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
 /turf/floor/tiled/techfloor,
@@ -2430,7 +2430,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
+/obj/item/clothing/suit/toggle/labcoat/genetics,
 /obj/effect/floor_decal/industrial/warning,
 /turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -2505,7 +2505,7 @@
 /turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gN" = (
-/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
+/obj/item/clothing/suit/toggle/labcoat/chemist,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -2514,7 +2514,7 @@
 /area/unishi/smresearch)
 "gO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
+/obj/item/clothing/suit/toggle/labcoat/cmoalt,
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -2661,7 +2661,7 @@
 "hh" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/remains,
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
 /turf/floor/tiled/techfloor,

@@ -32,11 +32,11 @@
 	var/list/raider_suits = list(
 		/obj/item/clothing/suit/pirate,
 		/obj/item/clothing/suit/hgpirate,
-		/obj/item/clothing/suit/storage/toggle/bomber,
-		/obj/item/clothing/suit/storage/leather_jacket,
-		/obj/item/clothing/suit/storage/toggle/brown_jacket,
-		/obj/item/clothing/suit/storage/toggle/hoodie,
-		/obj/item/clothing/suit/storage/toggle/hoodie/black,
+		/obj/item/clothing/suit/toggle/bomber,
+		/obj/item/clothing/suit/leather_jacket,
+		/obj/item/clothing/suit/toggle/brown_jacket,
+		/obj/item/clothing/suit/toggle/hoodie,
+		/obj/item/clothing/suit/toggle/hoodie/black,
 		/obj/item/clothing/suit/poncho/classic,
 		)
 	var/list/raider_guns = list(
@@ -60,9 +60,9 @@
 		/obj/item/gun/projectile/zipgun
 		)
 	var/list/raider_holster = list(
-		/obj/item/clothing/accessory/storage/holster/armpit,
-		/obj/item/clothing/accessory/storage/holster/waist,
-		/obj/item/clothing/accessory/storage/holster/hip
+		/obj/item/clothing/accessory/webbing/holster/armpit,
+		/obj/item/clothing/accessory/webbing/holster/waist,
+		/obj/item/clothing/accessory/webbing/holster/hip
 		)
 
 /decl/hierarchy/outfit/raider/Initialize()
@@ -81,7 +81,7 @@
 		var/turf/T = get_turf(H)
 
 		var/obj/item/primary = new new_gun(T)
-		var/obj/item/clothing/accessory/storage/holster/holster = null
+		var/obj/item/clothing/accessory/webbing/holster/holster = null
 
 		//Give some of the raiders a pirate gun as a secondary
 		if(prob(60))
@@ -113,7 +113,7 @@
 				if(prob(20)) //don't want to give them too much
 					H.equip_to_slot_or_del(new bullet_thrower.magazine_type(H), slot_r_store_str)
 			else if(bullet_thrower.ammo_type)
-				var/obj/item/storage/box/ammobox = new(get_turf(H.loc))
+				var/obj/item/box/ammobox = new(get_turf(H.loc))
 				for(var/i in 1 to rand(3,5) + rand(0,2))
 					new bullet_thrower.ammo_type(ammobox)
 				H.put_in_hands(ammobox)

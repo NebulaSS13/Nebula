@@ -29,13 +29,13 @@
 	name = "Job - Detective"
 	head = /obj/item/clothing/head/det
 	uniform = /obj/item/clothing/under/det
-	suit = /obj/item/clothing/suit/storage/det_trench
+	suit = /obj/item/clothing/suit/det_trench
 	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress
-	hands = list(/obj/item/storage/briefcase/crimekit)
+	hands = list(/obj/item/briefcase/crimekit)
 	id_type = /obj/item/card/id/security
 	pda_type = /obj/item/modular_computer/pda
-	backpack_contents = list(/obj/item/storage/box/evidence = 1)
+	backpack_contents = list(/obj/item/box/evidence = 1)
 
 /decl/hierarchy/outfit/job/security/detective/Initialize()
 	. = ..()
@@ -44,7 +44,7 @@
 /decl/hierarchy/outfit/job/security/detective/forensic
 	name = "Job - Forensic technician"
 	head = null
-	suit = /obj/item/clothing/suit/storage/forensics/blue
+	suit = /obj/item/clothing/suit/forensics/blue
 
 /decl/hierarchy/outfit/job/security/officer
 	name = "Job - Security Officer"
