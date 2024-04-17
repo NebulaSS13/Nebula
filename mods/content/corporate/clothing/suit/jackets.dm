@@ -14,7 +14,7 @@
 	icon = 'mods/content/corporate/icons/clothing/suit/mbill.dmi'
 	storage = /datum/storage/pockets/suit
 
-/obj/item/clothing/suit/toggle/wintercoat/dais
+/obj/item/clothing/suit/jacket/winter/dais
 	name = "\improper DAIS winter coat"
 	icon = 'mods/content/corporate/icons/clothing/suit/dais_coat.dmi'
 	hood = /obj/item/clothing/head/winterhood/dais

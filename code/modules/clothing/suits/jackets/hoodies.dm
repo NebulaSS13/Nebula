@@ -6,6 +6,13 @@
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	hood = /obj/item/clothing/head/hoodiehood
 
+/obj/item/clothing/suit/jacket/hoodie/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/buttons),
+		GET_DECL(/decl/clothing_state_modifier/hood)
+	)
+	return expected_state_modifiers
+
 /obj/item/clothing/suit/jacket/hoodie/black
 	name = "black hoodie"
 	desc = "A warm, black sweatshirt."

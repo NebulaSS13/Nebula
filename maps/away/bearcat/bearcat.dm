@@ -121,7 +121,7 @@
 /decl/hierarchy/outfit/deadcap
 	name = "Derelict Captain"
 	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
-	suit = /obj/item/clothing/suit/toggle/wintercoat
+	suit = /obj/item/clothing/suit/jacket/winter
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 

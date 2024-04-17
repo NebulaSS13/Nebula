@@ -478,7 +478,7 @@
 /obj/structure/closet/secure_closet/captains,
 /obj/item/clothing/shoes/sandal,
 /obj/item/belt/holster,
-/obj/item/clothing/suit/toggle/wintercoat/captain,
+/obj/item/clothing/suit/jacket/winter/captain,
 /obj/item/stamp/captain,
 /turf/floor/carpet/red,
 /area/ministation/bridge)
@@ -1316,8 +1316,8 @@
 /area/ministation/science)
 "fc" = (
 /obj/structure/closet/secure_closet/scientist,
-/obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/suit/toggle/wintercoat/science,
+/obj/item/clothing/suit/jacket/winter,
+/obj/item/clothing/suit/jacket/winter/science,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
@@ -4784,7 +4784,7 @@
 /area/ministation/telecomms)
 "Bx" = (
 /obj/structure/table,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
 /obj/item/radio/intercom{
 	name = "Station Intercom (General)";
 	pixel_y = 20
@@ -5995,7 +5995,7 @@
 /area/ministation/science)
 "Jx" = (
 /obj/structure/closet/secure_closet/research_director,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
 /obj/item/stamp/rd,
 /obj/item/rig/eva/equipped,
 /turf/floor/tiled/white,
@@ -6930,7 +6930,7 @@
 /area/ministation/tradehouse_rep)
 "PW" = (
 /obj/structure/closet/secure_closet/xenoarchaeologist,
-/obj/item/clothing/suit/toggle/wintercoat/science,
+/obj/item/clothing/suit/jacket/winter/science,
 /obj/item/ano_scanner,
 /obj/item/stock_parts/circuitboard/suspension_gen,
 /turf/floor/tiled/white,

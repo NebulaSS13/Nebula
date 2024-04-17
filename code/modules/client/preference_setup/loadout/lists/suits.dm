@@ -55,7 +55,7 @@
 
 /decl/loadout_option/suit/wintercoat
 	name = "winter coat"
-	path = /obj/item/clothing/suit/toggle/wintercoat
+	path = /obj/item/clothing/suit/jacket/winter
 
 /decl/loadout_option/suit/track
 	name = "track jacket selection"

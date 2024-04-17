@@ -46,7 +46,7 @@
 			/obj/item/clothing/suit/leathercoat = 500,
 			/obj/item/clothing/suit/jacket/brown = 500,
 			/obj/item/clothing/suit/jacket/bomber = 500,
-			/obj/item/clothing/suit/toggle/wintercoat = 500,
+			/obj/item/clothing/suit/jacket/winter = 500,
 			/obj/item/stack/material/bolt/mapped/cloth/ten = 300,
 			/obj/item/stack/material/bolt/mapped/cloth = 30,
 			/obj/item/stack/material/skin/mapped/leather/ten = 300,

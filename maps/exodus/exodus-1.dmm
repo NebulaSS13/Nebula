@@ -5936,8 +5936,8 @@
 	pixel_x = 24
 	},
 /obj/structure/rack,
-/obj/item/clothing/suit/toggle/wintercoat/engineering,
-/obj/item/clothing/suit/toggle/wintercoat/dais{
+/obj/item/clothing/suit/jacket/winter/engineering,
+/obj/item/clothing/suit/jacket/winter/dais{
 	pixel_y = 12
 	},
 /turf/floor/tiled/dark/monotile,
