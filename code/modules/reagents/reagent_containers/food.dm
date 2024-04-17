@@ -59,10 +59,18 @@
 		plate = new plate(src)
 
 /obj/item/chems/food/attack_self(mob/user)
-	attack(user, user)
+	if(is_edible(user))
+		attack(user, user)
+	else
+		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+	return TRUE
 
 /obj/item/chems/food/dragged_onto(var/mob/user)
-	attack(user, user)
+	if(is_edible(user))
+		attack(user, user)
+	else
+		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+	return TRUE
 
 /obj/item/chems/food/examine(mob/user, distance)
 	. = ..()
