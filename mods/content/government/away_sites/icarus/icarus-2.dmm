@@ -1277,7 +1277,7 @@
 	},
 /area/icarus/open)
 "eb" = (
-/obj/item/clothing/ring/mariner,
+/obj/item/clothing/gloves/ring/mariner,
 /turf/floor/tiled,
 /area/icarus/open)
 "ec" = (

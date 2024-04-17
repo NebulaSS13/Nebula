@@ -18,15 +18,3 @@
 		return ..()
 	return 1
 
-//Necklaces
-/obj/item/clothing/accessory/necklace
-	name = "necklace"
-	desc = "A simple necklace."
-	icon = 'icons/clothing/accessories/jewelry/necklace.dmi'
-	slot_flags = SLOT_FACE
-
-//Bracelets
-/obj/item/clothing/accessory/bracelet
-	name = "bracelet"
-	desc = "A simple bracelet with a clasp."
-	icon = 'icons/clothing/accessories/jewelry/bracelet.dmi'

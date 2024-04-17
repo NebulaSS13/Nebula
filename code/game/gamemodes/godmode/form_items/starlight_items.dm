@@ -1,44 +1,44 @@
-/obj/item/clothing/ring/aura_ring
+/obj/item/clothing/gloves/ring/aura_ring
 	var/obj/aura/granted_aura
 
-/obj/item/clothing/ring/aura_ring/equipped(var/mob/living/L, var/slot)
+/obj/item/clothing/gloves/ring/aura_ring/equipped(var/mob/living/L, var/slot)
 	..()
 	if(granted_aura && slot == slot_gloves_str)
 		L.add_aura(granted_aura)
 
-/obj/item/clothing/ring/aura_ring/dropped(var/mob/living/L)
+/obj/item/clothing/gloves/ring/aura_ring/dropped(var/mob/living/L)
 	..()
 	if(granted_aura)
 		L.remove_aura(granted_aura)
 
-/obj/item/clothing/ring/aura_ring/Destroy()
+/obj/item/clothing/gloves/ring/aura_ring/Destroy()
 	QDEL_NULL(granted_aura)
 	. = ..()
 
-/obj/item/clothing/ring/aura_ring/talisman_of_starborn
+/obj/item/clothing/gloves/ring/aura_ring/talisman_of_starborn
 	name = "Talisman of the Starborn"
 	desc = "This ring seems to shine with more light than is put on it."
-	icon = 'icons/clothing/rings/ring_star.dmi'
+	icon = 'icons/clothing/accessories/jewelry/rings/ring_star.dmi'
 
-/obj/item/clothing/ring/aura_ring/talisman_of_starborn/Initialize()
+/obj/item/clothing/gloves/ring/aura_ring/talisman_of_starborn/Initialize()
 	. = ..()
 	granted_aura = new /obj/aura/starborn()
 
-/obj/item/clothing/ring/aura_ring/talisman_of_blueforged
+/obj/item/clothing/gloves/ring/aura_ring/talisman_of_blueforged
 	name = "Talisman of the Blueforged"
 	desc = "The gem on this ring is quite peculiar..."
-	icon = 'icons/clothing/rings/ring_blue.dmi'
+	icon = 'icons/clothing/accessories/jewelry/rings/ring_blue.dmi'
 
-/obj/item/clothing/ring/aura_ring/talisman_of_blueforged/Initialize()
+/obj/item/clothing/gloves/ring/aura_ring/talisman_of_blueforged/Initialize()
 	. = ..()
 	granted_aura = new /obj/aura/blueforge_aura()
 
-/obj/item/clothing/ring/aura_ring/talisman_of_shadowling
+/obj/item/clothing/gloves/ring/aura_ring/talisman_of_shadowling
 	name = "Talisman of the Shadowling"
 	desc = "If you weren't looking at this, you probably wouldn't have noticed it."
-	icon = 'icons/clothing/rings/ring_shadow.dmi'
+	icon = 'icons/clothing/accessories/jewelry/rings/ring_shadow.dmi'
 
-/obj/item/clothing/ring/aura_ring/talisman_of_shadowling/Initialize()
+/obj/item/clothing/gloves/ring/aura_ring/talisman_of_shadowling/Initialize()
 	. = ..()
 	granted_aura = new /obj/aura/shadowling_aura()
 

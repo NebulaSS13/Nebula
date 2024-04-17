@@ -75,7 +75,7 @@
 	result_type = /obj/item/chems/glass/mortar
 
 /decl/stack_recipe/ring
-	result_type       = /obj/item/clothing/ring/material
+	result_type       = /obj/item/clothing/gloves/ring/material
 
 /decl/stack_recipe/hardness/clipboard
 	result_type       = /obj/item/clipboard
