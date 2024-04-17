@@ -1,0 +1,4 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Closets can now be locked with a physical lock.}
+delete-after: true
