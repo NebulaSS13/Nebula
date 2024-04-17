@@ -32,7 +32,7 @@
 
 /decl/loadout_option/suit/hoodie
 	name = "hoodie, colour select"
-	path = /obj/item/clothing/suit/toggle/hoodie
+	path = /obj/item/clothing/suit/jacket/hoodie
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/suit/coat
@@ -48,9 +48,9 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/toggle/bomber,
-		/obj/item/clothing/suit/leather_jacket,
-		/obj/item/clothing/suit/toggle/brown_jacket
+		/obj/item/clothing/suit/jacket/bomber,
+		/obj/item/clothing/suit/jacket/leather,
+		/obj/item/clothing/suit/jacket/brown
 	)
 
 /decl/loadout_option/suit/wintercoat
@@ -88,7 +88,7 @@
 
 /decl/loadout_option/suit/letterman_custom
 	name = "letterman jacket, colour select"
-	path = /obj/item/clothing/suit/letterman
+	path = /obj/item/clothing/suit/jacket/letterman
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	cost = 1
 

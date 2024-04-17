@@ -167,7 +167,7 @@
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/toggle/labcoat,
 					/obj/item/clothing/under/medical,
-					/obj/item/clothing/suit/toggle/fr_jacket,
+					/obj/item/clothing/suit/jacket/first_responder,
 					/obj/item/clothing/mask/gas,
 					/obj/item/clothing/under/medical/paramedic,
 					/obj/item/clothing/neck/stethoscope,

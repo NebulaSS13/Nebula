@@ -79,8 +79,8 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/leather_jacket/nanotrasen,
-		/obj/item/clothing/suit/toggle/brown_jacket/nanotrasen
+		/obj/item/clothing/suit/jacket/leather/nanotrasen,
+		/obj/item/clothing/suit/jacket/brown/nanotrasen
 	)
 
 /decl/loadout_option/suit/science_poncho

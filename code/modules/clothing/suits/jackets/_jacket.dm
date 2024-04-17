@@ -1,13 +1,20 @@
 /obj/item/clothing/suit/jacket
-	name = "suit jacket"
-	desc = "A snappy dress jacket."
-	icon = 'icons/clothing/suit/jackets/jacket.dmi'
-	blood_overlay_type = "coat"
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	slot_flags = SLOT_UPPER_BODY | SLOT_TIE
-	w_class = ITEM_SIZE_NORMAL
-	accessory_slot = ACCESSORY_SLOT_DECOR
+	name                = "suit jacket"
+	desc                = "A snappy dress jacket."
+	icon                = 'icons/clothing/suit/jackets/jacket.dmi'
+	blood_overlay_type  = "coat"
+	body_parts_covered  = SLOT_UPPER_BODY|SLOT_ARMS
+	cold_protection     = SLOT_UPPER_BODY|SLOT_ARMS
+	slot_flags          = SLOT_OVER_BODY | SLOT_TIE
+	w_class             = ITEM_SIZE_NORMAL
+	accessory_slot      = ACCESSORY_SLOT_DECOR
 	accessory_removable = TRUE
+
+/obj/item/clothing/suit/jacket/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/buttons)
+	)
+	return expected_state_modifiers
 
 /obj/item/clothing/suit/jacket/blue
 	name = "blue suit jacket"

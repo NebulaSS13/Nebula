@@ -2822,7 +2822,7 @@
 "oc" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/obj/item/clothing/suit/toggle/bomber,
+/obj/item/clothing/suit/jacket/bomber,
 /obj/item/clothing/mask/horsehead,
 /obj/item/cash/scavbucks,
 /turf/floor/plating,

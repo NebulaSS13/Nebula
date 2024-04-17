@@ -2,3 +2,9 @@
 /obj/item/clothing/accessory/toggleable/zhongshan/@SUBTYPES : /obj/item/clothing/suit/jacket/zhongshan/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/toggle/suit/@SUBTYPES : /obj/item/clothing/suit/jacket/@SUBTYPES{@OLD}
 /obj/item/clothing/accessory/toggleable/corpjacket/@SUBTYPES : /obj/item/clothing/suit/jacket/corp/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/toggle/fr_jacket/@SUBTYPES : /obj/item/clothing/suit/jacket/first_responder/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/letterman/@SUBTYPES : /obj/item/clothing/suit/jacket/letterman/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/toggle/bomber/@SUBTYPES : /obj/item/clothing/suit/jacket/bomber/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/leather_jacket/@SUBTYPES : /obj/item/clothing/suit/jacket/leather/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/toggle/agent_jacket/@SUBTYPES : /obj/item/clothing/suit/jacket/agent/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/toggle/hoodie/@SUBTYPES : /obj/item/clothing/suit/jacket/hoodie/@SUBTYPES{@OLD}

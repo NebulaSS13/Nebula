@@ -161,32 +161,6 @@
 	desc = "A high-visibility vest used in work zones. This one is green!"
 	icon = 'icons/clothing/suit/hazard_vest/green.dmi'
 
-//Medical
-/obj/item/clothing/suit/toggle/fr_jacket
-	name = "first responder jacket"
-	desc = "A high-visibility jacket worn by medical first responders."
-	icon = 'icons/clothing/suit/responder_jacket.dmi'
-	blood_overlay_type = "armor"
-	allowed = list(
-		/obj/item/stack/medical,
-		/obj/item/chems/dropper,
-		/obj/item/chems/hypospray,
-		/obj/item/chems/inhaler,
-		/obj/item/chems/syringe,
-		/obj/item/scanner/health,
-		/obj/item/scanner/breath,
-		/obj/item/flashlight,
-		/obj/item/radio,
-		/obj/item/tank/emergency,
-		/obj/item/chems/ivbag
-	)
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-
-/obj/item/clothing/suit/toggle/fr_jacket/ems
-	name = "\improper EMS jacket"
-	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
-	icon = 'icons/clothing/suit/emt_jacket.dmi'
-
 /obj/item/clothing/suit/medical_chest_rig
 	name = "\improper MT chest-rig"
 	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
