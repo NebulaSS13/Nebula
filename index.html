@@ -29,7 +29,7 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(203 modules,
+<aside>(205 modules,
     101/4475 macros, 2.3%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
@@ -94,6 +94,7 @@ General Public License version 3.
     <li class="has-children"><span title="code&#x2F;datums&#x2F;extensions">extensions</span><ul class="index-tree">
     <li><a href="code/datums/extensions/extensions.html" title="code&#x2F;datums&#x2F;extensions&#x2F;extensions">extensions</a></li>
     <li><span class="no-substance">scent&#x2F;</span><a href="code/datums/extensions/scent/_scent.html" title="code&#x2F;datums&#x2F;extensions&#x2F;scent&#x2F;_scent">_scent</a></li>
+    <li><span class="no-substance">storage&#x2F;</span><a href="code/datums/extensions/storage/subtypes_belt.html" title="code&#x2F;datums&#x2F;extensions&#x2F;storage&#x2F;subtypes_belt">subtypes_belt</a></li>
     </ul></li>
     <li><a href="code/datums/mil_ranks.html" title="code&#x2F;datums&#x2F;mil_ranks">mil_ranks</a></li>
     <li><span class="no-substance">mind&#x2F;</span><a href="code/datums/mind/memory.html" title="code&#x2F;datums&#x2F;mind&#x2F;memory">memory</a></li>
@@ -180,11 +181,14 @@ General Public License version 3.
     </ul></li>
     <li><a href="code/game/objects/objs_interactions.html" title="code&#x2F;game&#x2F;objects&#x2F;objs_interactions">objs_interactions</a></li>
     <li><span class="no-substance">random&#x2F;</span><a href="code/game/objects/random/date_based.html" title="code&#x2F;game&#x2F;objects&#x2F;random&#x2F;date_based">date_based</a></li>
-    <li class="has-children"><span class="no-substance">structures&#x2F;</span><a href="code/game/objects/structures/signs.html" title="code&#x2F;game&#x2F;objects&#x2F;structures&#x2F;signs">signs</a><ul class="index-tree">
+    <li class="has-children"><span title="code&#x2F;game&#x2F;objects&#x2F;structures">structures</span><ul class="index-tree">
+    <li><a href="code/game/objects/structures/compost.html" title="code&#x2F;game&#x2F;objects&#x2F;structures&#x2F;compost">compost</a></li>
+    <li class="has-children"><a href="code/game/objects/structures/signs.html" title="code&#x2F;game&#x2F;objects&#x2F;structures&#x2F;signs">signs</a><ul class="index-tree">
     <li><a href="code/game/objects/structures/signs/diploma.html" title="code&#x2F;game&#x2F;objects&#x2F;structures&#x2F;signs&#x2F;diploma">diploma</a></li>
     <li><a href="code/game/objects/structures/signs/direction_signs.html" title="code&#x2F;game&#x2F;objects&#x2F;structures&#x2F;signs&#x2F;direction_signs">direction_signs</a></li>
     <li><a href="code/game/objects/structures/signs/paintings.html" title="code&#x2F;game&#x2F;objects&#x2F;structures&#x2F;signs&#x2F;paintings">paintings</a></li>
     <li><a href="code/game/objects/structures/signs/warning_signs.html" title="code&#x2F;game&#x2F;objects&#x2F;structures&#x2F;signs&#x2F;warning_signs">warning_signs</a></li>
+    </ul></li>
     </ul></li>
     </ul></li>
     </ul></li>
@@ -349,7 +353,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(235 detailed/452 documented/19449 total, 2.3%)</aside></h3>
+<aside>(235 detailed/453 documented/19556 total, 2.3%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
@@ -528,6 +532,10 @@ Number of times slept in its destroy.</li>
     </ul></li>
     <li><a href="datum/sortInstance.html" title="&#x2F;datum&#x2F;sortInstance">sortInstance</a></li>
     <li><a href="datum/ssdaycycle_registered.html" title="&#x2F;datum&#x2F;ssdaycycle_registered">ssdaycycle_registered</a> - Data on a set of z-levels getting daylight updates</li>
+    <li class="has-children"><a href="datum/storage.html" title="&#x2F;datum&#x2F;storage">storage</a><ul class="index-tree">
+    <li><span class="no-substance">belt&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;storage&#x2F;belt&#x2F;medical">medical</span> - obj/item/combitool,</li>
+    <li><a href="datum/storage/sheets.html" title="&#x2F;datum&#x2F;storage&#x2F;sheets">sheets</a></li>
+    </ul></li>
     <li><span class="no-substance">stored_items&#x2F;</span><a href="datum/stored_items/vending_products.html" title="&#x2F;datum&#x2F;stored_items&#x2F;vending_products">vending_products</a> - Datum used to hold information about a product in a vending machine</li>
     <li><a href="datum/stressor.html" title="&#x2F;datum&#x2F;stressor">stressor</a></li>
     <li><a href="datum/timedevent.html" title="&#x2F;datum&#x2F;timedevent">Timed Event</a> - This is the actual timer, it contains the callback and necessary data to maintain
@@ -768,6 +776,10 @@ Parameters: var/obj/item/card/id</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;borg&#x2F;overdrive">overdrive</span> - Cyborg Spec Items</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;borg&#x2F;sight">sight</span> - HUD/SIGHT things</li>
     </ul></li>
+    <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;box">box</span><ul class="index-tree">
+    <li><a href="obj/item/box/fancy.html" title="&#x2F;obj&#x2F;item&#x2F;box&#x2F;fancy">fancy</a></li>
+    <li><a href="obj/item/box/glasses.html" title="&#x2F;obj&#x2F;item&#x2F;box&#x2F;glasses">glasses</a></li>
+    </ul></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;c_tube">c_tube</span> - Basically a trash item left from using paper rolls.</li>
     <li class="has-children"><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;camera">camera</span> - camera<ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;camera&#x2F;siliconcam">siliconcam</span> - AI-specific</li>
@@ -842,6 +854,8 @@ Parameters: var/obj/item/card/id</li>
     <li><a href="obj/item/parcel.html" title="&#x2F;obj&#x2F;item&#x2F;parcel">parcel</a> - A parcel wrapper for items and structures that can be wrapped in wrapping paper.</li>
     <li><a href="obj/item/pen.html" title="&#x2F;obj&#x2F;item&#x2F;pen">pen</a></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;photo">photo</span> - photo</li>
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;photo_album">photo_album</span> - photo album</li>
+    <li><a href="obj/item/pill_bottle.html" title="&#x2F;obj&#x2F;item&#x2F;pill_bottle">pill_bottle</a></li>
     <li><a href="obj/item/poster.html" title="&#x2F;obj&#x2F;item&#x2F;poster">poster</a> - A rolled up version of the wall-mounted poster structure</li>
     <li class="has-children"><a href="obj/item/radio.html" title="&#x2F;obj&#x2F;item&#x2F;radio">radio</a><ul class="index-tree">
     <li><a href="obj/item/radio/exosuit.html" title="&#x2F;obj&#x2F;item&#x2F;radio&#x2F;exosuit">exosuit</a></li>
@@ -873,15 +887,6 @@ As with material, these stacks should only set this in Initialize as they are ab
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;stock_parts&#x2F;item_holder&#x2F;disk_reader">disk_reader</span> - Stock part for reading/writing to an inserted data disk.</li>
     </ul></li>
     <li><a href="obj/item/stock_parts/printer.html" title="&#x2F;obj&#x2F;item&#x2F;stock_parts&#x2F;printer">printer</a></li>
-    </ul></li>
-    <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;storage">storage</span><ul class="index-tree">
-    <li><span class="no-substance">belt&#x2F;</span><a href="obj/item/storage/belt/utility.html" title="&#x2F;obj&#x2F;item&#x2F;storage&#x2F;belt&#x2F;utility">utility</a></li>
-    <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;storage&#x2F;box">box</span><ul class="index-tree">
-    <li><a href="obj/item/storage/box/fancy.html" title="&#x2F;obj&#x2F;item&#x2F;storage&#x2F;box&#x2F;fancy">fancy</a></li>
-    <li><a href="obj/item/storage/box/glasses.html" title="&#x2F;obj&#x2F;item&#x2F;storage&#x2F;box&#x2F;glasses">glasses</a></li>
-    </ul></li>
-    <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;storage&#x2F;photo_album">photo_album</span> - photo album</li>
-    <li><a href="obj/item/storage/pill_bottle.html" title="&#x2F;obj&#x2F;item&#x2F;storage&#x2F;pill_bottle">pill_bottle</a></li>
     </ul></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;tankassemblyproxy">tankassemblyproxy</span> - Pulled from rewritten bomb.dm</li>
     <li><a href="obj/item/tool.html" title="&#x2F;obj&#x2F;item&#x2F;tool">tool</a></li>
@@ -964,7 +969,6 @@ As with material, these stacks should only set this in Initialize as they are ab
     <li><a href="obj/structure/fuel_port.html" title="&#x2F;obj&#x2F;structure&#x2F;fuel_port">fuel_port</a></li>
     <li><a href="obj/structure/loot_pile.html" title="&#x2F;obj&#x2F;structure&#x2F;loot_pile">loot_pile</a></li>
     <li><a href="obj/structure/ore_box.html" title="&#x2F;obj&#x2F;structure&#x2F;ore_box">ore_box</a> - Ore box</li>
-    <li><span class="no-substance">reagent_dispensers&#x2F;</span><a href="obj/structure/reagent_dispensers/compost_bin.html" title="&#x2F;obj&#x2F;structure&#x2F;reagent_dispensers&#x2F;compost_bin">compost_bin</a></li>
     <li class="has-children"><a href="obj/structure/sign.html" title="&#x2F;obj&#x2F;structure&#x2F;sign">sign</a> - A wall mountable sign structure<ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;structure&#x2F;sign&#x2F;deck">deck</span> - A sign for indicating what level is the current level vertically</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;structure&#x2F;sign&#x2F;directions">directions</span> - Signs for showing the way to passerby. The dir of the sign is the direction it points towards. The icon of the sign itself is always south facing.</li>
@@ -1002,7 +1006,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/325f31a096ff0eb035d5a7d02e3550fd6f853fe2">325f31a</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/37324f8929a2679acaf94f4c78a70fb3ba5b4db2">37324f8</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
