@@ -1,5 +1,6 @@
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/toggle
+	abstract_type = /obj/item/clothing/suit/toggle
 	storage = /datum/storage/pockets/suit
 	replaced_in_loadout = FALSE
 

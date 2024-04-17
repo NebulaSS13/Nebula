@@ -10,3 +10,5 @@
 /obj/item/clothing/suit/toggle/hoodie/@SUBTYPES : /obj/item/clothing/suit/jacket/hoodie/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/toggle/wintercoat/@SUBTYPES : /obj/item/clothing/suit/jacket/winter/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/captunic/capjacket/@SUBTYPES : /obj/item/clothing/suit/jacket/captain/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/poncho/roles/@SUBTYPES : /obj/item/clothing/suit/poncho/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/poncho/classic/@SUBTYPES : /obj/item/clothing/suit/poncho/@SUBTYPES{@OLD}

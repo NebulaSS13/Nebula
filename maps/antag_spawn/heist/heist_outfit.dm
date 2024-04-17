@@ -37,7 +37,7 @@
 		/obj/item/clothing/suit/jacket/brown,
 		/obj/item/clothing/suit/jacket/hoodie,
 		/obj/item/clothing/suit/jacket/hoodie/black,
-		/obj/item/clothing/suit/poncho/classic,
+		/obj/item/clothing/suit/poncho,
 		)
 	var/list/raider_guns = list(
 		/obj/item/gun/energy/laser,
