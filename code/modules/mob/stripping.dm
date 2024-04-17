@@ -31,7 +31,7 @@
 				toggle_sensors(user)
 			return
 		if ("lock_sensors")
-			var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+			var/obj/item/clothing/sensor/vitals/sensor = get_vitals_sensor()
 			if (!istype(sensor))
 				return
 			visible_message(SPAN_DANGER("\The [user] is trying to [sensor.get_sensors_locked() ? "un" : ""]lock \the [src]'s sensors!"))
@@ -134,7 +134,7 @@
 
 // Modify the current target sensor level.
 /mob/proc/toggle_sensors(var/mob/living/user)
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+	var/obj/item/clothing/sensor/vitals/sensor = get_vitals_sensor()
 	if(!istype(sensor))
 		to_chat(user, SPAN_WARNING("\The [src] is not wearing a vitals sensor."))
 	if (sensor.get_sensors_locked())
@@ -147,4 +147,4 @@
 	for(var/check_slot in global.vitals_sensor_equip_slots)
 		var/obj/item/clothing/equipped = get_equipped_item(check_slot)
 		if(istype(equipped))
-			return (locate(/obj/item/clothing/accessory/vitals_sensor) in equipped.accessories)
+			return (locate(/obj/item/clothing/sensor/vitals) in equipped.accessories)

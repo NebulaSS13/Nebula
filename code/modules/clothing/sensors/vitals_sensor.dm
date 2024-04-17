@@ -1,10 +1,7 @@
-/obj/item/clothing/accessory/vitals_sensor
+/obj/item/clothing/sensor/vitals
 	name = "vitals sensor"
 	desc = "A small sensor used to read the biometrics and vital signs of the wearer."
-	slot_flags = SLOT_TIE
 	icon = 'icons/clothing/accessories/vitals_sensor.dmi'
-	icon_state = ICON_STATE_WORLD
-	accessory_slot = ACCESSORY_SLOT_SENSORS
 	var/sensors_locked = FALSE
 	var/sensor_mode
 	var/static/list/sensor_modes = list(
@@ -14,24 +11,24 @@
 		"Tracking beacon"
 	)
 
-/obj/item/clothing/accessory/vitals_sensor/Initialize()
+/obj/item/clothing/sensor/vitals/Initialize()
 	. = ..()
 	if(isnull(sensor_mode) || sensor_mode < VITALS_SENSOR_OFF || sensor_mode > VITALS_SENSOR_TRACKING)
 		set_sensor_mode(rand(VITALS_SENSOR_OFF, VITALS_SENSOR_TRACKING))
 	update_removable()
 
-/obj/item/clothing/accessory/vitals_sensor/proc/toggle_sensors_locked()
+/obj/item/clothing/sensor/vitals/proc/toggle_sensors_locked()
 	set_sensors_locked(!get_sensors_locked())
 
-/obj/item/clothing/accessory/vitals_sensor/proc/get_sensors_locked()
+/obj/item/clothing/sensor/vitals/proc/get_sensors_locked()
 	return sensors_locked
 
-/obj/item/clothing/accessory/vitals_sensor/proc/set_sensors_locked(new_state)
+/obj/item/clothing/sensor/vitals/proc/set_sensors_locked(new_state)
 	if(get_sensors_locked() != new_state)
 		sensors_locked = new_state
 		update_removable()
 
-/obj/item/clothing/accessory/vitals_sensor/examine(mob/user)
+/obj/item/clothing/sensor/vitals/examine(mob/user)
 	. = ..()
 	switch(sensor_mode)
 		if(VITALS_SENSOR_OFF)
@@ -43,27 +40,27 @@
 		if(VITALS_SENSOR_TRACKING)
 			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
-/obj/item/clothing/accessory/vitals_sensor/on_attached(obj/item/clothing/S, mob/user)
+/obj/item/clothing/sensor/vitals/on_attached(obj/item/clothing/S, mob/user)
 	. = ..()
 	update_removable()
 
-/obj/item/clothing/accessory/vitals_sensor/on_removed(mob/user)
+/obj/item/clothing/sensor/vitals/on_removed(mob/user)
 	. = ..()
 	update_removable()
 
-/obj/item/clothing/accessory/vitals_sensor/proc/update_removable()
+/obj/item/clothing/sensor/vitals/proc/update_removable()
 	var/obj/item/clothing/clothes = loc
 	if(istype(clothes) && (src in clothes.accessories))
 		accessory_removable = !sensors_locked
 	else
 		accessory_removable = TRUE
 
-/obj/item/clothing/accessory/vitals_sensor/proc/set_sensor_mode(var/new_sensor_mode)
+/obj/item/clothing/sensor/vitals/proc/set_sensor_mode(var/new_sensor_mode)
 	if(sensor_mode != new_sensor_mode)
 		sensor_mode = new_sensor_mode
 		update_icon()
 
-/obj/item/clothing/accessory/vitals_sensor/on_update_icon()
+/obj/item/clothing/sensor/vitals/on_update_icon()
 	. = ..()
 	cut_overlays()
 	var/image/I = image(icon, "[icon_state]-indicator")
@@ -81,11 +78,11 @@
 			I.color = COLOR_RED
 	add_overlay(I)
 
-/obj/item/clothing/accessory/vitals_sensor/attack_self(mob/user)
+/obj/item/clothing/sensor/vitals/attack_self(mob/user)
 	user_set_sensors(user)
 	return TRUE
 
-/obj/item/clothing/accessory/vitals_sensor/proc/user_set_sensors(mob/user)
+/obj/item/clothing/sensor/vitals/proc/user_set_sensors(mob/user)
 	if(sensors_locked)
 		to_chat(user, "The controls are locked.")
 		return FALSE
@@ -132,7 +129,7 @@
 		SPAN_NOTICE("You adjust \the [src].")
 	)
 
-/obj/item/clothing/accessory/vitals_sensor/emp_act(var/severity)
+/obj/item/clothing/sensor/vitals/emp_act(var/severity)
 	..()
 	switch(severity)
 		if(1)

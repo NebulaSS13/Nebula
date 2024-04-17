@@ -260,7 +260,7 @@
 	if(rags)
 		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
 
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in accessories
 	if(sensor)
 		switch(sensor.sensor_mode)
 			if(VITALS_SENSOR_OFF)
@@ -320,7 +320,7 @@
 /obj/item/clothing/proc/set_sensors(mob/user)
 	if (isobserver(user) || user.incapacitated())
 		return
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in accessories
 	if(sensor)
 		sensor.user_set_sensors(user)
 
@@ -329,7 +329,7 @@
 	if(!istype(old_item, /obj/item/clothing) || !(ACCESSORY_SLOT_SENSORS in valid_accessory_slots))
 		return
 	var/obj/item/clothing/old_clothes = old_item
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in old_clothes.accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in old_clothes.accessories
 	if(!sensor)
 		return
 	sensor.accessory_removable = TRUE // This will be refreshed by remove_accessory/attach_accessory

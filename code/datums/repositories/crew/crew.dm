@@ -49,7 +49,7 @@ var/global/datum/repository/crew/crew_repository = new()
 
 	cache_data_alert[num2text(z_level)] = FALSE
 	var/tracked = scan()
-	for(var/obj/item/clothing/accessory/vitals_sensor/sensor as anything in tracked)
+	for(var/obj/item/clothing/sensor/vitals/sensor as anything in tracked)
 		var/turf/pos = get_turf(sensor)
 		if(!pos || pos.z != z_level || sensor.sensor_mode == VITALS_SENSOR_OFF)
 			continue
@@ -94,7 +94,7 @@ var/global/datum/repository/crew/crew_repository = new()
 			if(. & MOD_SUIT_SENSORS_REJECTED)
 				return
 
-/datum/repository/crew/proc/process_crew_data(var/datum/priority_queue/modifiers, var/mob/living/carbon/human/H, var/obj/item/clothing/accessory/vitals_sensor/S, var/turf/pos, var/list/crew_data)
+/datum/repository/crew/proc/process_crew_data(var/datum/priority_queue/modifiers, var/mob/living/carbon/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos, var/list/crew_data)
 	var/current_priority = INFINITY
 	var/list/modifiers_of_this_priority = list()
 

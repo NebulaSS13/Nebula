@@ -5,7 +5,7 @@
 	if(!istype(uniform))
 		to_chat(user, SPAN_WARNING("\The [user] is not wearing an appropriate uniform."))
 		return
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in uniform.accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in uniform.accessories
 	if(!sensor)
 		to_chat(user, SPAN_WARNING("\The [uniform] doesn't have a vitals sensors attached."))
 		return
