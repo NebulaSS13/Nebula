@@ -10,7 +10,7 @@
 		else
 			to_chat(user, SPAN_WARNING("\The [I] does not fit in the lock!"))
 		return TRUE
-	if(istype(I, /obj/item/storage/keyring))
+	if(istype(I, /obj/item/keyring))
 		for(var/obj/item/key/key in I)
 			if(lock.toggle(key))
 				to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [key]."))
@@ -42,7 +42,7 @@
 		return FALSE
 	if(!lock.isLocked())
 		return TRUE
-	if(user?.a_intent == I_HELP && (istype(held, /obj/item/key) || istype(held, /obj/item/storage/keyring)))
+	if(user?.a_intent == I_HELP && (istype(held, /obj/item/key) || istype(held, /obj/item/keyring)))
 		try_key_unlock(held, user)
 	if(!lock.isLocked())
 		return TRUE
