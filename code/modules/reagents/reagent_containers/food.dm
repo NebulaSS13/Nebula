@@ -66,11 +66,7 @@
 	return TRUE
 
 /obj/item/chems/food/dragged_onto(var/mob/user)
-	if(is_edible(user))
-		attack(user, user)
-	else
-		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
-	return TRUE
+	return attack_self(user)
 
 /obj/item/chems/food/examine(mob/user, distance)
 	. = ..()
