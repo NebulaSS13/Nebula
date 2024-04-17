@@ -9,6 +9,11 @@
 	w_class             = ITEM_SIZE_NORMAL
 	accessory_slot      = ACCESSORY_SLOT_DECOR
 	accessory_removable = TRUE
+	valid_accessory_slots = list(
+		ACCESSORY_SLOT_INSIGNIA,
+		ACCESSORY_SLOT_ARMBAND,
+		ACCESSORY_SLOT_OVER
+	)
 
 /obj/item/clothing/suit/jacket/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(
