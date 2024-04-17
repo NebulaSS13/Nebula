@@ -1,0 +1,2 @@
+/obj/item/clothing/accessory/wcoat/@SUBTYPES : /obj/item/clothing/suit/jacket/waistcoat/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/toggleable/zhongshan/@SUBTYPES : /obj/item/clothing/suit/jacket/zhongshan/@SUBTYPES{@OLD}

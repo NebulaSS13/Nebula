@@ -107,7 +107,7 @@
 	icon = 'icons/clothing/under/suits/suit_black.dmi'
 
 /obj/item/clothing/under/suit_jacket/waistcoat
-	starting_accessories = list(/obj/item/clothing/accessory/wcoat/black)
+	starting_accessories = list(/obj/item/clothing/suit/jacket/waistcoat/black)
 
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
