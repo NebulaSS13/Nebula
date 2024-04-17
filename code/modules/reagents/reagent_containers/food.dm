@@ -23,7 +23,9 @@
 	w_class = ITEM_SIZE_SMALL
 	abstract_type = /obj/item/chems/food
 
-	var/cooked_food = FALSE // Indicates the food should give a positive stress effect on eating. This is set to true if the food is created by a recipe.
+	/// Indicates the food should give a stress effect on eating.
+	// This is set to 1 if the food is created by a recipe, -1 if the food is raw.
+	var/cooked_food = FOOD_PREPARED
 	var/bitesize = 1
 	var/bitecount = 0
 	var/slice_path
@@ -36,8 +38,14 @@
 	var/filling_color = "#ffffff" //Used by sandwiches.
 	var/trash
 	var/obj/item/plate/plate
-	var/list/attack_products //Items you can craft together. Like bomb making, but with food and less screwdrivers.
-	// Uses format list(ingredient = result_type). The ingredient can be a typepath or a kitchen_tag string (used for mobs or plants)
+
+/obj/item/chems/food/Initialize()
+	. = ..()
+	if(cooked_food == FOOD_RAW)
+		name = "raw [name]"
+	amount_per_transfer_from_this = bitesize
+	if(ispath(plate))
+		plate = new plate(src)
 
 /obj/item/chems/food/can_be_injected_by(var/atom/injector)
 	return TRUE
@@ -50,12 +58,6 @@
 
 /obj/item/chems/food/update_container_desc()
 	return FALSE
-
-/obj/item/chems/food/Initialize()
-	.=..()
-	amount_per_transfer_from_this = bitesize
-	if(ispath(plate))
-		plate = new plate(src)
 
 /obj/item/chems/food/attack_self(mob/user)
 	return use_on_mob(user, user)
@@ -83,63 +85,6 @@
 		to_chat(user, SPAN_NOTICE("\The [src] was bitten [bitecount] time\s!"))
 	else
 		to_chat(user, SPAN_NOTICE("\The [src] was bitten multiple times!"))
-
-/obj/item/chems/food/attackby(obj/item/W, mob/user)
-
-	if(W?.storage)
-		return ..()
-
-	// Plating food.
-	if(istype(W, /obj/item/plate))
-		var/obj/item/plate/plate = W
-		if(plate.try_plate_food(src, user))
-			return TRUE
-
-	// Eating with forks
-	if(user.a_intent == I_HELP && do_utensil_interaction(W, user))
-		return TRUE
-
-	// Hiding items inside larger food items.
-	if(user.a_intent != I_HURT && is_sliceable() && W.w_class < w_class && !is_robot_module(W) && !istype(W, /obj/item/chems/condiment))
-		if(user.try_unequip(W, src))
-			to_chat(user, SPAN_NOTICE("You slip \the [W] inside \the [src]."))
-			add_fingerprint(user)
-			W.forceMove(src)
-		return TRUE
-
-	// Creating food combinations.
-	if(try_create_combination(W, user))
-		return TRUE
-
-	return ..()
-
-/obj/item/chems/food/proc/try_create_combination(obj/item/W, mob/user)
-	if(!length(attack_products) || !istype(W) || QDELETED(src) || QDELETED(W))
-		return FALSE
-	var/create_type
-	for(var/key in attack_products)
-		if(ispath(key) && !istype(W, key))
-			continue
-		if(istext(key))
-			if(!istype(W, /obj/item/chems/food/grown))
-				continue
-			var/obj/item/chems/food/grown/G = W
-			if(G.seed.kitchen_tag && G.seed.kitchen_tag != key)
-				continue
-		create_type = attack_products[key]
-		break
-	if(!ispath(create_type) || (user && (!user.canUnEquip(src) || !user.canUnEquip(W))))
-		return FALSE
-	//If the snack was in your hands, the result will be too
-	var/was_in_hands = (src in user?.get_held_items())
-	var/my_loc = get_turf(src)
-	qdel(src)
-	qdel(W)
-	var/obj/item/chems/food/result = new create_type(my_loc)
-	if(was_in_hands)
-		user.put_in_hands(result)
-	to_chat(user, SPAN_NOTICE("You make \the [result]!"))
-	return TRUE
 
 /obj/item/chems/food/proc/is_sliceable()
 	return (slice_num && slice_path && slice_num > 0)

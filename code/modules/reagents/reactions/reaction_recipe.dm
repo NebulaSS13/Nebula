@@ -118,10 +118,3 @@
 	result_amount = 6
 	mix_message = "The broth of the noodles takes on a hellish red gleam."
 	hidden_from_codex = TRUE
-
-/decl/chemical_reaction/recipe/chazuke
-	name = "Chazuke"
-	result = /decl/material/liquid/nutriment/rice/chazuke
-	required_reagents = list(/decl/material/liquid/nutriment/rice = 10, /decl/material/liquid/drink/tea/green = 1)
-	result_amount = 10
-	mix_message = "The tea mingles with the rice."

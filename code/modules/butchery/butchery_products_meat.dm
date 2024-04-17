@@ -3,7 +3,7 @@
 	desc           = "A slab of meat."
 	icon           = 'icons/obj/items/butchery/meat1.dmi'
 	icon_state     = "meat"
-	slice_path     = /obj/item/chems/food/rawcutlet
+	slice_path     = /obj/item/chems/food/cutlet/raw
 	slice_num      = 3
 	filling_color  = "#ff1c1c"
 	center_of_mass = @'{"x":16,"y":14}'
