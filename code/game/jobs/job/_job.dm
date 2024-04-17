@@ -104,13 +104,13 @@
 		var/obj/item/key/new_key = new(get_turf(H), lock_keys[lock_key] || /decl/material/solid/metal/iron, lock_key)
 		H.put_in_hands_or_store_or_drop(new_key)
 	else if(length(lock_keys))
-		var/obj/item/storage/keyring/keyring
+		var/obj/item/keyring/keyring
 		for(var/lock_key in lock_keys)
 			if(!keyring)
 				keyring = new(get_turf(H))
 				H.put_in_hands_or_store_or_drop(keyring)
 			var/obj/item/key/new_key = new(get_turf(H), lock_keys[lock_key] || /decl/material/solid/metal/iron, lock_key)
-			keyring.handle_item_insertion(new_key)
+			keyring.storage?.handle_item_insertion(new_key)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)

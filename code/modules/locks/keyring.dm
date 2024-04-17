@@ -1,21 +1,15 @@
-/obj/item/storage/keyring
+/obj/item/keyring
 	name = "keyring"
 	desc = "A simple loop for threading keys onto."
 	icon = 'icons/obj/items/keyring.dmi'
 	icon_state = ICON_STATE_WORLD
-	can_hold = list(
-		/obj/item/key,
-		/obj/item/screwdriver,
-		/obj/item/arrow
-	)
+	storage = /datum/storage/keyring
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_LOWER_BODY | SLOT_POCKET
 	material = /decl/material/solid/metal/brass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 8
 
-/obj/item/storage/keyring/examine(mob/user, distance)
+/obj/item/keyring/examine(mob/user, distance)
 	. = ..()
 
 	if(length(contents) && distance <= 1)
@@ -31,7 +25,7 @@
 			for(var/key_string in key_strings)
 				to_chat(user, key_string)
 
-/obj/item/storage/keyring/on_update_icon()
+/obj/item/keyring/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	var/key_count = 0
@@ -45,10 +39,11 @@
 		if(key_count >= 3)
 			break
 
-/obj/item/storage/keyring/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
-	. = ..()
-	update_icon()
-
-/obj/item/storage/keyring/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
-	. = ..()
-	update_icon()
+/datum/storage/keyring
+	can_hold = list(
+		/obj/item/key,
+		/obj/item/screwdriver,
+		/obj/item/arrow
+	)
+	max_w_class = ITEM_SIZE_TINY
+	max_storage_space = 8

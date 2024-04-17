@@ -80,7 +80,7 @@
 	result_type        = /obj/item/key
 
 /decl/stack_recipe/hardness/integrity/keyring
-	result_type        = /obj/item/storage/keyring
+	result_type        = /obj/item/keyring
 
 /decl/stack_recipe/hardness/integrity/rod
 	result_type        = /obj/item/stack/material/rods
