@@ -9,3 +9,4 @@
 /obj/item/clothing/suit/toggle/agent_jacket/@SUBTYPES : /obj/item/clothing/suit/jacket/agent/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/toggle/hoodie/@SUBTYPES : /obj/item/clothing/suit/jacket/hoodie/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/toggle/wintercoat/@SUBTYPES : /obj/item/clothing/suit/jacket/winter/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/captunic/capjacket/@SUBTYPES : /obj/item/clothing/suit/jacket/captain/@SUBTYPES{@OLD}

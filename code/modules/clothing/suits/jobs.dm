@@ -25,13 +25,6 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 //Captain
-/obj/item/clothing/suit/captunic/capjacket
-	name = "captain's uniform jacket"
-	desc = "A less formal jacket for everyday captain use."
-	icon = 'icons/clothing/suit/cap_jacket.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-	flags_inv = 0
-
 //Chaplain
 /obj/item/clothing/suit/chaplain_hoodie
 	name = "chaplain hoodie"
