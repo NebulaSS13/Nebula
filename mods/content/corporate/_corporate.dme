@@ -22,6 +22,7 @@
 #include "clothing\suit\jackets.dm"
 #include "clothing\suit\labcoats.dm"
 #include "clothing\suit\ponchos.dm"
+#include "clothing\under\formalwear.dm"
 #include "clothing\under\security.dm"
 #include "clothing\under\uniforms.dm"
 #include "datum\ai_icons.dm"

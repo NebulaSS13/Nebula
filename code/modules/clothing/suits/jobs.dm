@@ -161,26 +161,6 @@
 	desc = "A high-visibility vest used in work zones. This one is green!"
 	icon = 'icons/clothing/suit/hazard_vest/green.dmi'
 
-//Lawyer
-/obj/item/clothing/suit/toggle/suit
-	name = "suit jacket"
-	desc = "A snappy dress jacket."
-	icon = 'icons/clothing/suit/suit_jacket.dmi'
-	blood_overlay_type = "coat"
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-
-/obj/item/clothing/suit/toggle/suit/blue
-	name = "blue suit jacket"
-	color = "#00326e"
-
-/obj/item/clothing/suit/toggle/suit/purple
-	name = "purple suit jacket"
-	color = "#6c316c"
-
-/obj/item/clothing/suit/toggle/suit/black
-	name = "black suit jacket"
-	color = "#1f1f1f"
-
 //Medical
 /obj/item/clothing/suit/toggle/fr_jacket
 	name = "first responder jacket"

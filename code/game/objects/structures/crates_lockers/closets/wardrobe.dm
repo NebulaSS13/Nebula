@@ -291,15 +291,15 @@
 		/obj/item/clothing/under/formal/tie,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/internalaffairs/plain,
-		/obj/item/clothing/suit/toggle/suit/black,
+		/obj/item/clothing/suit/jacket/black,
+		/obj/item/clothing/suit/jacket/blue,
+		/obj/item/clothing/suit/jacket/purple,
 		/obj/item/clothing/under/assistantformal,
 		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/suit/toggle/suit/blue,
 		/obj/item/clothing/under/lawyer/purpsuit,
-		/obj/item/clothing/suit/toggle/suit/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/dress,
 	)
@@ -311,7 +311,7 @@
 /obj/structure/closet/wardrobe/lawyer_black/WillContain()
 	return list(
 		/obj/item/clothing/under/internalaffairs = 2,
-		/obj/item/clothing/suit/toggle/suit/black = 2,
+		/obj/item/clothing/suit/jacket/black = 2,
 		/obj/item/clothing/shoes/color/brown = 2,
 		/obj/item/clothing/glasses/sunglasses/big = 2,
 		/obj/item/briefcase = 2,

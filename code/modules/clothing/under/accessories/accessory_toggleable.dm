@@ -14,28 +14,3 @@
 	name = "black vest"
 	color = COLOR_GRAY15
 
-/obj/item/clothing/accessory/toggleable/tan_jacket
-	name = "tan suit jacket"
-	desc = "Cozy suit jacket."
-	icon = 'icons/clothing/accessories/clothing/jacket_tan.dmi'
-
-/obj/item/clothing/accessory/toggleable/charcoal_jacket
-	name = "charcoal suit jacket"
-	desc = "Strict suit jacket."
-	icon = 'icons/clothing/accessories/clothing/jacket_charcoal.dmi'
-
-/obj/item/clothing/accessory/toggleable/navy_jacket
-	name = "navy suit jacket"
-	desc = "Official suit jacket."
-	icon = 'icons/clothing/accessories/clothing/jacket_navy.dmi'
-
-/obj/item/clothing/accessory/toggleable/burgundy_jacket
-	name = "burgundy suit jacket"
-	desc = "Expensive suit jacket."
-	icon = 'icons/clothing/accessories/clothing/jacket_burgundy.dmi'
-
-/obj/item/clothing/accessory/toggleable/checkered_jacket
-	name = "checkered suit jacket"
-	desc = "Lucky suit jacket."
-	icon = 'icons/clothing/accessories/clothing/jacket_checkered.dmi'
-
