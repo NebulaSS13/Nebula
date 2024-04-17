@@ -122,6 +122,10 @@
 	color = COLOR_GRAY20
 	uid = "solid_fur_black"
 
+/decl/material/solid/organic/skin/fur/brown
+	color = COLOR_DARK_BROWN
+	uid = "solid_fur_brown"
+
 /decl/material/solid/organic/skin/fur/heavy
 	color = COLOR_GUNMETAL
 	uid = "solid_fur_heavy"
