@@ -21,3 +21,7 @@
 /mob/living/simple_animal/frog/yellow
 	name = "yellow frog"
 	icon = 'icons/mob/simple_animal/frog_yellow.dmi'
+
+/mob/living/simple_animal/frog/purple
+	name = "purple frog"
+	icon = 'icons/mob/simple_animal/frog_purple.dmi'
