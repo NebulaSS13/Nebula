@@ -19,15 +19,15 @@
 
 /decl/loadout_option/clothing/hawaii
 	name = "hawaii shirt"
-	path = /obj/item/clothing/accessory/toggleable/hawaii
+	path = /obj/item/clothing/shirt/hawaii
 
 /decl/loadout_option/clothing/hawaii/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"blue hawaii shirt" =           /obj/item/clothing/accessory/toggleable/hawaii,
-		"red hawaii shirt" =            /obj/item/clothing/accessory/toggleable/hawaii/red,
-		"random colored hawaii shirt" = /obj/item/clothing/accessory/toggleable/hawaii/random
+		"blue hawaii shirt" =           /obj/item/clothing/shirt/hawaii,
+		"red hawaii shirt" =            /obj/item/clothing/shirt/hawaii/red,
+		"random colored hawaii shirt" = /obj/item/clothing/shirt/hawaii/random
 	)
 
 /decl/loadout_option/clothing/vest

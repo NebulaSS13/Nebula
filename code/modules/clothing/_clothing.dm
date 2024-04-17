@@ -5,6 +5,7 @@
 	material = /decl/material/solid/organic/cloth
 	paint_verb = "dyed"
 	replaced_in_loadout = TRUE
+	icon_state = ICON_STATE_WORLD
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
