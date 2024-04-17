@@ -216,7 +216,7 @@
 		PN.trigger_warning(5)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.species.siemens_coefficient <= 0)
+		if(H.species.get_shock_vulnerability(H) <= 0)
 			return
 		var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
 		if(istype(G) && G.siemens_coefficient == 0)

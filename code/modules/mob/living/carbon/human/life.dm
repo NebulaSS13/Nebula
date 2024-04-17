@@ -189,7 +189,7 @@
 	if(relative_density > 0.02) //don't bother if we are in vacuum or near-vacuum
 		var/loc_temp = environment.temperature
 
-		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
+		if(adjusted_pressure < species.get_warning_high_pressure(src) && adjusted_pressure > species.get_warning_low_pressure(src) && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
 			SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 0)
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
@@ -242,15 +242,16 @@
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
 	if(status_flags & GODMODE)	return 1	//godmode
 
-	if(adjusted_pressure >= species.hazard_high_pressure)
-		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
+	var/high_pressure = species.get_hazard_high_pressure(src)
+	if(adjusted_pressure >= high_pressure)
+		var/pressure_damage = min( ( (adjusted_pressure / high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
 		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
 		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 2)
-	else if(adjusted_pressure >= species.warning_high_pressure)
+	else if(adjusted_pressure >= species.get_warning_high_pressure(src))
 		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 1)
-	else if(adjusted_pressure >= species.warning_low_pressure)
+	else if(adjusted_pressure >= species.get_warning_low_pressure(src))
 		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 0)
-	else if(adjusted_pressure >= species.hazard_low_pressure)
+	else if(adjusted_pressure >= species.get_hazard_low_pressure(src))
 		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, -1)
 	else
 		var/list/obj/item/organ/external/parts = get_damageable_organs()

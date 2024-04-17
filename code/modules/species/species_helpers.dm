@@ -45,3 +45,18 @@ var/global/list/stored_shock_by_ref = list()
 /decl/species/proc/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/harness, slot_w_uniform_str)
+
+/decl/species/proc/get_hazard_high_pressure(var/mob/living/carbon/human/H)
+	return hazard_high_pressure
+
+/decl/species/proc/get_warning_high_pressure(var/mob/living/carbon/human/H)
+	return warning_high_pressure
+
+/decl/species/proc/get_warning_low_pressure(var/mob/living/carbon/human/H)
+	return warning_low_pressure
+
+/decl/species/proc/get_hazard_low_pressure(var/mob/living/carbon/human/H)
+	return hazard_low_pressure
+
+/decl/species/proc/get_shock_vulnerability(var/mob/living/carbon/human/H)
+	return shock_vulnerability
