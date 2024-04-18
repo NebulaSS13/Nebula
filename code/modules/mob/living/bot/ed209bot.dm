@@ -22,7 +22,7 @@
 	..()
 	icon_state = "ed2090"
 
-/mob/living/bot/secbot/ed209/gib(do_gibs)
+/mob/living/bot/secbot/ed209/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(. && my_turf)

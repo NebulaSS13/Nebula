@@ -22,7 +22,7 @@
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the [html_icon(holding)] [holding].</span>")
 
-/mob/living/bot/remotebot/gib(do_gibs)
+/mob/living/bot/remotebot/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(. && my_turf)

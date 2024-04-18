@@ -10,10 +10,7 @@
 /mob/living/silicon/get_gibbed_state(dusted)
 	return dusted ? "dust-r" : "gibbed-r"
 
-/mob/living/silicon/get_gibber_type()
-	return /obj/effect/gibspawner/robot
-
-/mob/living/silicon/gib(do_gibs)
+/mob/living/silicon/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..(do_gibs = FALSE)
 	if(. && my_turf)

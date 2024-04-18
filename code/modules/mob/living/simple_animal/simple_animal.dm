@@ -237,9 +237,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
-				var/turf/move_to = get_step(loc, pick(global.cardinal))
+				var/direction = pick(global.cardinal)
+				var/turf/move_to = get_step(loc, direction)
 				if(turf_is_safe(move_to))
-					SelfMove(move_to)
+					SelfMove(direction)
 					turns_since_move = 0
 
 	//Speaking
@@ -297,6 +298,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
 	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
+
+/mob/living/simple_animal/get_gibbed_icon()
+	return icon
 
 /mob/living/simple_animal/get_gibbed_state(dusted)
 	if(dusted)

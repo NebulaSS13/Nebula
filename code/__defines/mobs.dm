@@ -302,6 +302,7 @@
 
 #define DEXTERITY_NONE            0
 #define DEXTERITY_SIMPLE_MACHINES BITFLAG(0)
+// TODO: let HOLD equip items to hand just not other slots
 #define DEXTERITY_HOLD_ITEM       BITFLAG(1)
 #define DEXTERITY_WIELD_ITEM      BITFLAG(2)
 #define DEXTERITY_EQUIP_ITEM      BITFLAG(3)

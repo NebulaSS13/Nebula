@@ -78,7 +78,7 @@
 	update_icon()
 	return TRUE
 
-/mob/living/bot/cleanbot/gib(do_gibs)
+/mob/living/bot/cleanbot/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(. && my_turf)

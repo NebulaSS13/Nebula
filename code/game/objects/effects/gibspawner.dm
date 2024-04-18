@@ -1,7 +1,20 @@
 /mob/proc/spawn_gibber(atom/location = loc)
 	var/gibber_type = get_gibber_type()
-	if(gibber_type)
+	if(!gibber_type)
+		return
+	if(ispath(gibber_type, /obj/effect/gibspawner))
 		return new gibber_type(location, get_blood_type(), get_unique_enzymes(), get_flesh_color(), get_blood_color())
+	. = new gibber_type(location)
+	if(!istype(., /obj/effect/decal/cleanable/blood/gibs))
+		return
+	var/obj/effect/decal/cleanable/blood/gibs/gib = .
+	gib.fleshcolor = get_flesh_color()
+	gib.basecolor  = get_blood_color()
+	var/gib_unique_enzymes = get_unique_enzymes()
+	var/gib_blood_type = get_blood_type()
+	if(gib_unique_enzymes && gib_blood_type)
+		LAZYSET(gib.blood_DNA, gib_unique_enzymes, gib_blood_type)
+	gib.update_icon()
 
 /obj/effect/gibspawner
 	var/sparks = 0 //whether sparks spread on spawn_gibs()
