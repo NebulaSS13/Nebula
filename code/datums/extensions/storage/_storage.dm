@@ -29,7 +29,16 @@
 	/// What storage UI do we use?
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
 
+
+#ifdef UNIT_TEST
+var/global/list/_test_storage_items = list()
+#endif
+
 /datum/storage/New(atom/_holder)
+
+#ifdef UNIT_TEST
+	global._test_storage_items += src
+#endif
 
 	if(!istype(_holder))
 		PRINT_STACK_TRACE("Storage datum initialized with non-atom holder '[_holder || "NULL"].")
@@ -44,6 +53,11 @@
 	..()
 
 /datum/storage/Destroy()
+
+#ifdef UNIT_TEST
+	global._test_storage_items -= src
+#endif
+
 	if(holder)
 		if(holder.storage == src)
 			holder.storage = null
