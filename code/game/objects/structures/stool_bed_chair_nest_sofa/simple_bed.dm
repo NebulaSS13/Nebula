@@ -18,7 +18,7 @@
 	else
 		var/decl/pronouns/G = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] [G.are] laid down on \the [src] by \the [buckling]."),
+			SPAN_NOTICE("\The [buckled] [G.is] laid down on \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You are laid down on \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You hear a rustling sound.")
 		)

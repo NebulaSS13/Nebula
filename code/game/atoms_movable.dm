@@ -435,7 +435,7 @@
 	if(buckled == buckling)
 		var/decl/pronouns/G = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] buckles [G.them][G.self] to \the [src]."),
+			SPAN_NOTICE("\The [buckled] buckles [G.him][G.self] to \the [src]."),
 			SPAN_NOTICE("You buckle yourself to \the [src]."),
 			SPAN_NOTICE("You hear metal clanking.")
 		)
@@ -459,7 +459,7 @@
 	if(buckled == buckling)
 		var/decl/pronouns/G = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] unbuckled [G.them][G.self] from \the [src]!"),
+			SPAN_NOTICE("\The [buckled] unbuckled [G.him][G.self] from \the [src]!"),
 			SPAN_NOTICE("You unbuckle yourself from \the [src]."),
 			SPAN_NOTICE("You hear metal clanking.")
 		)

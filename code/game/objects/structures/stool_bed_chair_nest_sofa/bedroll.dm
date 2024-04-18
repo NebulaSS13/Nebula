@@ -6,12 +6,12 @@
 	w_class = ITEM_SIZE_LARGE
 	material = /decl/material/solid/organic/leather
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	var/padding_material = /decl/material/solid/organic/cloth
+	var/padding_material
 	var/belt_color = COLOR_BEASTY_BROWN
 	var/structure_path = /obj/structure/bed/bedroll
 
-/obj/item/bedroll/crafted/crafted
-	padding_material = null
+/obj/item/bedroll/fur
+	padding_material = /decl/material/solid/organic/skin/fur
 
 /obj/item/bedroll/Initialize()
 	// We need to set this initially so that we can pass it to our structure if we get unrolled.
@@ -48,10 +48,13 @@
 	w_class = ITEM_SIZE_LARGE
 	anchored = FALSE
 	material = /decl/material/solid/organic/leather
-	reinf_material = /decl/material/solid/organic/cloth
+	reinf_material = null
 	tool_interaction_flags = TOOL_INTERACTION_NONE // just use your hand on it nerd
 	buckle_sound = "rustle"
 	var/item_path = /obj/item/bedroll
+
+/obj/structure/bed/bedroll/fur
+	reinf_material = /decl/material/solid/organic/skin/fur
 
 /obj/structure/bed/bedroll/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
@@ -63,7 +66,7 @@
 	else
 		var/decl/pronouns/G = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] [G.are] bundled into \the [src] by \the [buckling]."),
+			SPAN_NOTICE("\The [buckled] [G.is] bundled into \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You are bundled into \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You hear a rustling sound.")
 		)
