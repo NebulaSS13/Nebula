@@ -10,7 +10,7 @@
  */
 /obj/structure/bed
 	name = "bed"
-	desc = "This is used to lie in, sleep in or strap on."
+	desc = "A raised, padded platform for sleeping on. This one has straps for ensuring restful snoozing in microgravity."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "bed"
 	anchored = TRUE

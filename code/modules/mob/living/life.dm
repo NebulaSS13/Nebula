@@ -356,10 +356,13 @@
 			remove_stressor(stressor)
 		add_stressor(keep_stressor, 5 SECONDS)
 
-	if(struct.user_comfort > 0 && HAS_STATUS(src, STAT_ASLEEP))
+	var/effective_comfort = struct.user_comfort
+	if(locate(/obj/item/bedsheet) in loc)
+		effective_comfort += 0.3
+	if(effective_comfort > 0 && HAS_STATUS(src, STAT_ASLEEP))
 		if(isnull(furniture_comfort_time))
 			furniture_comfort_time = world.time
-		else if((world.time - furniture_comfort_time) > clamp((30 SECONDS) - ((15 SECONDS) * struct.user_comfort), 0, 30 SECONDS))
+		else if((world.time - furniture_comfort_time) > clamp((30 SECONDS) - ((15 SECONDS) * effective_comfort), 0, 30 SECONDS))
 			remove_stressor(/datum/stressor/fatigued)
 			add_stressor(/datum/stressor/well_rested, 30 MINUTES)
 

@@ -96,6 +96,9 @@
 	difficulty             = MAT_VALUE_HARD_DIY
 	category               = "furniture"
 
+/decl/stack_recipe/planks/furniture/simple_bed
+	result_type = /obj/structure/bed/simple/crafted
+
 /decl/stack_recipe/planks/furniture/compost_bin
 	result_type            = /obj/structure/reagent_dispensers/compost_bin
 

@@ -20,7 +20,7 @@
 
 /decl/stack_recipe/textiles/leather/bedroll
 	result_type           = /obj/item/bedroll
-	category              = "furniture"
+	category              = "bedding"
 
 /decl/stack_recipe/textiles/leather/shoes
 	result_type           = /obj/item/clothing/shoes/craftable
@@ -55,3 +55,15 @@
 
 /decl/stack_recipe/textiles/cloth/poncho
 	result_type           = /obj/item/clothing/suit/poncho/colored
+
+/decl/stack_recipe/textiles/cloth/bedding
+	result_type           = /obj/item/bedsheet
+	category              = "bedding"
+
+/decl/stack_recipe/textiles/fur
+	abstract_type         = /decl/stack_recipe/textiles/fur
+	craft_stack_types     = /obj/item/stack/material/skin/pelt
+
+/decl/stack_recipe/textiles/fur/bedding
+	result_type           = /obj/item/bedsheet/furs
+	category              = "bedding"

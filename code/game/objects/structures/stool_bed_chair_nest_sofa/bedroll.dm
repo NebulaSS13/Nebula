@@ -37,7 +37,7 @@
 /obj/structure/bed/bedroll
 	name = "bedroll"
 	desc = "A thick, padded bag big enough for a human to huddle in. It's better than sleeping on the ground."
-	user_comfort = 0.75
+	user_comfort = 0.65
 	icon = 'icons/obj/structures/bedroll.dmi'
 	icon_state = "bedroll"
 	base_icon = "bedroll"
