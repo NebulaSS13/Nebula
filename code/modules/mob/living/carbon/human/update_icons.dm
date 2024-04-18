@@ -212,10 +212,11 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/matrix/M = matrix()
 	M.Scale(desired_scale_x, desired_scale_y)
 	if(lying)
-		if((dir & WEST) || buckled?.buckle_dir)
-			turn_angle = -90
-		else if(dir & EAST)
+		// This locate is very bad but trying to get it to respect the buckled dir is proving tricky.
+		if((dir & EAST) || (isturf(loc) && (locate(/obj/structure/bed) in loc)))
 			turn_angle = 90
+		else if(dir & WEST)
+			turn_angle = -90
 		else
 			turn_angle = pick(-90, 90)
 		M.Turn(turn_angle)

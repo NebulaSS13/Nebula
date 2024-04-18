@@ -346,7 +346,7 @@
 			keep_stressor = /datum/stressor/comfortable
 		if(-1 to -0.5)
 			keep_stressor = /datum/stressor/uncomfortable
-		if(-1 to -(INFINITY))
+		if(-(INFINITY) to -1)
 			keep_stressor = /datum/stressor/uncomfortable_very
 
 	if(keep_stressor)
