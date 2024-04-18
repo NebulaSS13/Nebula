@@ -19,7 +19,7 @@
 	category              = "clothing"
 
 /decl/stack_recipe/textiles/leather/bedroll
-	result_type           = /obj/item/bedroll
+	result_type           = /obj/item/bedroll/crafted
 	category              = "bedding"
 
 /decl/stack_recipe/textiles/leather/shoes

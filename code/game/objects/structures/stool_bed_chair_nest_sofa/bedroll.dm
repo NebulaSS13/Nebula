@@ -10,10 +10,14 @@
 	var/belt_color = COLOR_BEASTY_BROWN
 	var/structure_path = /obj/structure/bed/bedroll
 
+/obj/item/bedroll/crafted/crafted
+	padding_material = null
+
 /obj/item/bedroll/Initialize()
 	// We need to set this initially so that we can pass it to our structure if we get unrolled.
 	// In cases where the structure was spawned first, it overwrites matter anyway.
-	LAZYSET(matter, padding_material, MATTER_AMOUNT_REINFORCEMENT)
+	if(padding_material)
+		LAZYSET(matter, padding_material, MATTER_AMOUNT_REINFORCEMENT)
 	. = ..()
 	update_icon()
 
@@ -28,7 +32,7 @@
 	if(locate(/obj/structure/bed) in user.loc)
 		to_chat(user, SPAN_WARNING("There's no room to unroll \the [src] here."))
 		return TRUE
-	var/obj/structure/bed = new structure_path(user.loc, material?.type)
+	var/obj/structure/bed = new structure_path(user.loc, material?.type, padding_material)
 	user.visible_message(SPAN_NOTICE("\The [user] unrolls \the [src]."))
 	bed.matter = matter?.Copy()
 	qdel(src)
