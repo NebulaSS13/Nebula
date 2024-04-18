@@ -314,7 +314,52 @@
 		set_stat(UNCONSCIOUS)
 	else
 		set_stat(CONSCIOUS)
+
+	update_furniture_comfort()
 	return TRUE
+
+/mob/living
+	var/furniture_comfort_time
+
+/mob/living/proc/update_furniture_comfort()
+	if(!istype(buckled, /obj/structure))
+		furniture_comfort_time = null
+		return
+
+	var/obj/structure/struct = buckled
+	if(abs(struct.user_comfort) < 0.5)
+		furniture_comfort_time = null
+		return
+
+	var/list/remove_stressors = list(
+		/datum/stressor/comfortable_very,
+		/datum/stressor/comfortable,
+		/datum/stressor/uncomfortable_very,
+		/datum/stressor/uncomfortable
+	)
+	var/keep_stressor
+	switch(struct.user_comfort)
+		if(1 to INFINITY)
+			keep_stressor = /datum/stressor/comfortable_very
+		if(0.5 to 1)
+			keep_stressor = /datum/stressor/comfortable
+		if(-1 to -0.5)
+			keep_stressor = /datum/stressor/uncomfortable
+		if(-1 to -(INFINITY))
+			keep_stressor = /datum/stressor/uncomfortable_very
+	if(keep_stressor)
+		for(var/stressor in remove_stressors)
+			if(stressor == keep_stressor)
+				continue
+			remove_stressor(stressor)
+		add_stressor(keep_stressor, 5 SECONDS)
+
+	if(struct.user_comfort >= 0.5 && HAS_STATUS(src, STAT_ASLEEP))
+		if(isnull(furniture_comfort_time))
+			furniture_comfort_time = world.time
+		else if((world.time - furniture_comfort_time) > 30 SECONDS)
+			remove_stressor(/datum/stressor/fatigued)
+			add_stressor(/datum/stressor/well_rested, 30 MINUTES)
 
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()

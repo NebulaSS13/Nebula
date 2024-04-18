@@ -5,6 +5,9 @@
 	abstract_type = /obj/structure
 	max_health = 50
 
+	/// Multiplier for degree of comfort offered to mobs buckled to this furniture.
+	var/user_comfort = 0 // TODO: extremely uncomfortable chairs
+
 	var/structure_flags
 	var/last_damage_message
 	var/hitsound = 'sound/weapons/smash.ogg'
