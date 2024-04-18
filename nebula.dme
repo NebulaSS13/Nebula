@@ -2591,6 +2591,7 @@
 #include "code\modules\mob\mob_layering.dm"
 #include "code\modules\mob\mob_movement.dm"
 #include "code\modules\mob\mob_status.dm"
+#include "code\modules\mob\mob_temperature.dm"
 #include "code\modules\mob\mob_transformation_simple.dm"
 #include "code\modules\mob\say.dm"
 #include "code\modules\mob\stripping.dm"

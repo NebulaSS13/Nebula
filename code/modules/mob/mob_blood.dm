@@ -2,7 +2,7 @@
 	return get_species()?.get_species_flesh_color(src) || COLOR_GRAY
 
 /mob/proc/get_gibber_type()
-	return /obj/effect/gibspawner/generic
+	return null
 
 /mob/proc/get_blood_color()
 	return get_species()?.get_species_blood_color(src) || COLOR_BLOOD_HUMAN

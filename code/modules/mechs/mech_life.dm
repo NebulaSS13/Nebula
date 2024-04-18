@@ -108,7 +108,7 @@
 /mob/living/exosuit/get_gibbed_icon()
 	return null
 
-/mob/living/exosuit/gib(do_gibs)
+/mob/living/exosuit/gib(do_gibs = TRUE)
 	SHOULD_CALL_PARENT(FALSE)
 	if(stat != DEAD)
 		death(gibbed = TRUE)

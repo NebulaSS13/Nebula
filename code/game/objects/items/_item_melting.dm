@@ -1,5 +1,10 @@
 /obj/item/ProcessAtomTemperature()
+
+	if(material && material.bakes_into_material && !isnull(material.bakes_into_at_temperature) && temperature >= material.bakes_into_at_temperature)
+		set_material(material.bakes_into_material)
+
 	. = ..()
+
 	if(QDELETED(src))
 		return
 

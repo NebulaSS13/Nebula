@@ -34,3 +34,8 @@
 /mob/living/proc/is_blood_incompatible(their_blood_type)
 	var/decl/blood_type/my_blood = get_blood_type_by_name(get_blood_type())
 	return !istype(my_blood) || !my_blood.can_take_donation_from(get_blood_type_by_name(their_blood_type))
+
+/mob/living/get_gibber_type()
+	if(mob_size <= MOB_SIZE_TINY)
+		return isSynthetic() ? /obj/effect/decal/cleanable/blood/gibs/robot : /obj/effect/decal/cleanable/blood/gibs
+	return isSynthetic() ? /obj/effect/gibspawner/robot : /obj/effect/gibspawner/generic

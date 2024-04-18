@@ -1051,7 +1051,7 @@
 		var/obj/item/fax = locate(href_list["AdminFaxView"])
 		if (istype(fax, /obj/item/paper))
 			var/obj/item/paper/P = fax
-			P.interact(usr, TRUE)
+			P.interact(usr, TRUE, admin_interact = TRUE)
 		else if (istype(fax, /obj/item/photo))
 			var/obj/item/photo/H = fax
 			H.interact(usr)
