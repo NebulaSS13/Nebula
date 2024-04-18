@@ -481,7 +481,18 @@
 	if(!held_slot || !istype(holder) || QDELETED(holder) || loc != holder)
 		return
 
-	// TODO: check protective gear
+	// TODO: put these flags on the inventory slot or something.
+	var/check_slots
+	if(held_slot in global.all_hand_slots)
+		check_slots = SLOT_HANDS
+	else if(held_slot == BP_MOUTH || held_slot == BP_HEAD)
+		check_slots = SLOT_FACE
+
+	if(check_slots)
+		for(var/obj/item/covering in holder.get_covering_equipped_items(check_slots))
+			if(covering.max_heat_protection_temperature >= temperature)
+				return
+
 	// TODO: less simplistic messages and logic
 	var/datum/inventory_slot/slot = held_slot && holder.get_inventory_slot_datum(held_slot)
 	var/check_organ = slot?.requires_organ_tag

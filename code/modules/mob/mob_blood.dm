@@ -2,7 +2,7 @@
 	return get_species()?.get_species_flesh_color(src) || COLOR_GRAY
 
 /mob/proc/get_gibber_type()
-	return /obj/effect/gibspawner/generic
+	return null
 
 /mob/proc/get_blood_color()
 	return get_species()?.get_species_blood_color(src) || COLOR_BLOOD_HUMAN
@@ -23,8 +23,3 @@
 	var/data = list()
 	data["donor"] = weakref(src)
 	return data
-
-/mob/proc/gibs(atom/location = loc)
-	var/gibber_type = get_gibber_type()
-	if(gibber_type)
-		return new gibber_type(location, get_blood_type(), get_unique_enzymes(), get_flesh_color(), get_blood_color())

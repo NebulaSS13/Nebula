@@ -23,13 +23,16 @@
 	. = ..()
 
 /obj/item/chems/drinks/dragged_onto(var/mob/user)
-	attack_self(user)
+	return attack_self(user)
 
 /obj/item/chems/drinks/attack_self(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		open(user)
-		return
-	attack(user, user)
+	else if(is_edible(user))
+		attack(user, user)
+	else
+		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+	return TRUE
 
 /obj/item/chems/drinks/proc/open(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src))

@@ -221,7 +221,7 @@
 	if(load == user)
 		unload(direction)
 
-/mob/living/bot/mulebot/gib(do_gibs)
+/mob/living/bot/mulebot/gib(do_gibs = TRUE)
 	unload(pick(0, 1, 2, 4, 8))
 	var/turf/my_turf = get_turf(src)
 	. = ..()

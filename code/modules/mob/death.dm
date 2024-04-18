@@ -8,13 +8,14 @@
 
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 
+	var/animation_state = get_gibbed_state(dusted)
+	var/animation_icon  = get_gibbed_icon() // Needs to be done before nulling icon below.
+
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
 	dump_contents()
 	QDEL_IN(src, 1.5 SECONDS)
 
-	var/animation_state = get_gibbed_state(dusted)
-	var/animation_icon  = get_gibbed_icon()
 	if(animation_state && animation_icon)
 		var/atom/movable/overlay/animation
 		animation = new(loc)
@@ -41,7 +42,7 @@
 
 //This is the proc for gibbing a mob. Cannot gib ghosts.
 //added different sort of gibs and animations. N
-/mob/proc/gib(do_gibs)
+/mob/proc/gib(do_gibs = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	set waitfor = FALSE
 	var/lastloc = loc

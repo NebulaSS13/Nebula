@@ -120,8 +120,10 @@
 	else
 		to_chat(user, SPAN_NOTICE("You have to go closer if you want to read it."))
 
-/obj/item/paper/interact(mob/user, var/forceshow = FALSE, var/readonly = FALSE)
-	var/show_info = user.handle_reading_literacy(user, readonly? info : info_links, FALSE, (forceshow || get_dist(src, user) <= 1))
+/obj/item/paper/interact(mob/user, forceshow, readonly, admin_interact = FALSE)
+	var/show_info = readonly ? info : info_links
+	if(!admin_interact)
+		show_info = user.handle_reading_literacy(user, show_info, FALSE, (forceshow || get_dist(src, user) <= 1))
 	if(show_info)
 		user.set_machine(src)
 		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[show_info][stamp_text]</BODY></HTML>", "window=[name]")

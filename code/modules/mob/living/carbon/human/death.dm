@@ -1,4 +1,4 @@
-/mob/living/carbon/human/gib(do_gibs)
+/mob/living/carbon/human/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(.)

@@ -308,6 +308,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	O.unbuckle_mob(M)
 	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
 
+/mob/living/simple_animal/get_gibbed_icon()
+	return icon
+
 /mob/living/simple_animal/get_gibbed_state(dusted)
 	if(dusted)
 		return (mob_icon_state_flags & MOB_ICON_HAS_DUST_STATE) ? "world-dust" : null

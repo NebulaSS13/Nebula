@@ -72,7 +72,7 @@
 /mob/living/bot/get_dusted_remains()
 	return /obj/effect/decal/cleanable/blood/oil
 
-/mob/living/bot/gib(do_gibs)
+/mob/living/bot/gib(do_gibs = TRUE)
 	if(stat != DEAD)
 		death(gibbed = TRUE)
 	if(stat == DEAD)

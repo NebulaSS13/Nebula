@@ -420,7 +420,7 @@
 		faction = "carp"
 		natural_weapon.force = initial(natural_weapon.force)
 
-/mob/living/simple_animal/hostile/carp/holodeck/gib(do_gibs)
+/mob/living/simple_animal/hostile/carp/holodeck/gib(do_gibs = TRUE)
 	SHOULD_CALL_PARENT(FALSE)
 	if(stat != DEAD)
 		death(gibbed = TRUE)
@@ -429,7 +429,7 @@
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/hostile/carp/get_death_message(gibbed)
+/mob/living/simple_animal/hostile/carp/holodeck/get_death_message(gibbed)
 	return "fades away..."
 
 /mob/living/simple_animal/hostile/carp/holodeck/get_self_death_message(gibbed)

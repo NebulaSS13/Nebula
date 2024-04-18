@@ -918,8 +918,9 @@ default behaviour is:
 /mob/living/proc/can_do_special_ranged_attack(var/check_flag = TRUE)
 	return TRUE
 
-/mob/living/proc/get_food_satiation()
-	. = get_nutrition() + (get_ingested_reagents()?.total_volume * 10)
+/mob/living/proc/get_food_satiation(consumption_method = EATING_METHOD_EAT)
+	. = (consumption_method == EATING_METHOD_EAT) ? get_nutrition() : get_hydration()
+	. += get_ingested_reagents()?.total_volume * 5
 
 /mob/living/proc/get_ingested_reagents()
 	RETURN_TYPE(/datum/reagents)
