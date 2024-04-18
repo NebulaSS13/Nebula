@@ -6,7 +6,7 @@ LINEN BINS
 
 /obj/item/bedsheet
 	name = "bedsheet"
-	desc = "A surprisingly soft linen bedsheet."
+	desc = "A surprisingly soft bedsheet."
 	icon = 'icons/obj/bedsheets/bedsheet.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state = "bedsheet"
@@ -29,6 +29,11 @@ LINEN BINS
 			qdel(src)
 		return
 	..()
+
+/obj/item/bedsheet/yellowed
+	desc = "A surprisingly soft bedsheet. This one is old and yellowed."
+	paint_color = COLOR_BEIGE
+	paint_verb = "stained"
 
 /obj/item/bedsheet/blue
 	icon = 'icons/obj/bedsheets/bedsheet_blue.dmi'

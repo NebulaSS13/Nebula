@@ -264,7 +264,7 @@
 /area/shaded_hills/general_store)
 "th" = (
 /obj/structure/bed/simple/ebony/cloth,
-/obj/item/bedsheet,
+/obj/item/bedsheet/yellowed,
 /obj/abstract/landmark/start/shaded_hills/inn_worker,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
@@ -318,7 +318,7 @@
 /area/shaded_hills/slaughterhouse)
 "yn" = (
 /obj/structure/bed/simple/ebony/cloth,
-/obj/item/bedsheet,
+/obj/item/bedsheet/yellowed,
 /obj/abstract/landmark/start/shaded_hills/innkeeper,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
@@ -365,7 +365,7 @@
 /area/shaded_hills/inn)
 "BL" = (
 /obj/structure/bed/simple/ebony/cloth,
-/obj/item/bedsheet,
+/obj/item/bedsheet/yellowed,
 /turf/floor/wood/ebony,
 /area/shaded_hills/general_store)
 "Ee" = (
