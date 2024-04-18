@@ -50,7 +50,37 @@
 	material = /decl/material/solid/organic/leather
 	reinf_material = /decl/material/solid/organic/cloth
 	tool_interaction_flags = TOOL_INTERACTION_NONE // just use your hand on it nerd
+	buckle_sound = "rustle"
 	var/item_path = /obj/item/bedroll
+
+/obj/structure/bed/bedroll/show_buckle_message(var/mob/buckled, var/mob/buckling)
+	if(buckled == buckling)
+		visible_message(
+			SPAN_NOTICE("\The [buckled] climbs into \the [src]."),
+			SPAN_NOTICE("You climb into \the [src]."),
+			SPAN_NOTICE("You hear a rustling sound.")
+		)
+	else
+		var/decl/pronouns/G = buckled.get_pronouns()
+		visible_message(
+			SPAN_NOTICE("\The [buckled] [G.are] bundled into \the [src] by \the [buckling]."),
+			SPAN_NOTICE("You are bundled into \the [src] by \the [buckling]."),
+			SPAN_NOTICE("You hear a rustling sound.")
+		)
+
+/obj/structure/bed/bedroll/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
+	if(buckled == buckling)
+		visible_message(
+			SPAN_NOTICE("\The [buckled] climbs out of \the [src]."),
+			SPAN_NOTICE("You climb out of \the [src]."),
+			SPAN_NOTICE("You hear a rustling sound.")
+		)
+	else
+		visible_message(
+			SPAN_NOTICE("\The [buckled] was pulled out of \the [src] by \the [buckling]."),
+			SPAN_NOTICE("You were pulled out of \the [src] by \the [buckling]."),
+			SPAN_NOTICE("You hear a rustling sound.")
+		)
 
 /obj/structure/bed/bedroll/on_update_icon()
 	. = ..()
