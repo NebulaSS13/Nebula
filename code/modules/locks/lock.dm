@@ -34,7 +34,7 @@
 	. = ..()
 
 /datum/lock/proc/unlock(var/key = "", var/mob/user)
-	if(isLocked())
+	if(!isLocked())
 		to_chat(user, SPAN_WARNING("It's already unlocked!"))
 		return FALSE
 	key = get_key_data(key, user)
