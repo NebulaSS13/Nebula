@@ -165,7 +165,8 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/stable)
 "jA" = (
-/obj/structure/bed,
+/obj/structure/bed/simple/ebony,
+/obj/item/bedsheet/furs,
 /turf/floor/wood/ebony,
 /area/shaded_hills/stable)
 "kE" = (
@@ -262,7 +263,8 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/general_store)
 "th" = (
-/obj/structure/bed,
+/obj/structure/bed/simple/ebony/cloth,
+/obj/item/bedsheet,
 /obj/abstract/landmark/start/shaded_hills/inn_worker,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
@@ -288,7 +290,8 @@
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/downlands)
 "uu" = (
-/obj/structure/bed,
+/obj/structure/bed/simple/ebony,
+/obj/item/bedsheet/furs,
 /obj/abstract/landmark/start/shaded_hills/farmer,
 /turf/floor/wood/ebony,
 /area/shaded_hills/farmhouse)
@@ -314,7 +317,8 @@
 /turf/wall/brick/basalt,
 /area/shaded_hills/slaughterhouse)
 "yn" = (
-/obj/structure/bed,
+/obj/structure/bed/simple/ebony/cloth,
+/obj/item/bedsheet,
 /obj/abstract/landmark/start/shaded_hills/innkeeper,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
@@ -360,7 +364,8 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
 "BL" = (
-/obj/structure/bed,
+/obj/structure/bed/simple/ebony/cloth,
+/obj/item/bedsheet,
 /turf/floor/wood/ebony,
 /area/shaded_hills/general_store)
 "Ee" = (

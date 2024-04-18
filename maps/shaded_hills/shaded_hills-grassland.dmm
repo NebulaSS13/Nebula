@@ -187,7 +187,7 @@
 /turf/floor/natural/dirt,
 /area/shaded_hills/caves/entrance)
 "EQ" = (
-/obj/structure/bed,
+/obj/structure/bed/bedroll,
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/landmark/start/shaded_hills/miner,
 /turf/floor/woven,
@@ -252,7 +252,7 @@
 /turf/floor/natural/mud,
 /area/shaded_hills/outside)
 "Ku" = (
-/obj/structure/bed,
+/obj/structure/bed/bedroll,
 /obj/abstract/landmark/start/shaded_hills/cave_dweller,
 /turf/floor/woven,
 /area/shaded_hills/caves/unexplored/south)

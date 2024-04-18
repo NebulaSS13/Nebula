@@ -7,6 +7,12 @@
 	anchored = TRUE
 	user_comfort = 0.8
 
+/obj/structure/bed/simple/ebony
+	material = /decl/material/solid/organic/wood/ebony
+
+/obj/structure/bed/simple/ebony/cloth
+	reinf_material = /decl/material/solid/organic/cloth
+
 /obj/structure/bed/simple/crafted
 	reinf_material = null
 

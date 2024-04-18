@@ -147,7 +147,8 @@
 /turf/floor/natural/mud/water/deep,
 /area/shaded_hills/caves/river/swamp)
 "YX" = (
-/obj/structure/bed,
+/obj/structure/bed/simple/ebony,
+/obj/item/bedsheet/furs,
 /obj/abstract/landmark/start/shaded_hills/herbalist,
 /turf/floor/wood/ebony,
 /area/shaded_hills/witch_hut)
