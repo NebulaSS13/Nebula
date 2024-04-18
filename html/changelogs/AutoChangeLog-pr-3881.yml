@@ -1,5 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: Vox must now pick between pressure resistance and speed using the Toggle
-      Pressure Seal verb.}
-delete-after: true
