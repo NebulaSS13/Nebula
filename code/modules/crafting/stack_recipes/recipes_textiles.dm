@@ -18,8 +18,10 @@
 	craft_stack_types     = /obj/item/stack/material/skin
 	category              = "clothing"
 
-	result_type           = /obj/item/clothing/shoes/craftable/boots
-	category              = "clothing"
+/decl/stack_recipe/textiles/leather/bedroll
+	result_type           = /obj/item/bedroll
+	category              = "furniture"
+
 /decl/stack_recipe/textiles/leather/shoes
 	result_type           = /obj/item/clothing/shoes/craftable
 

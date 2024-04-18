@@ -322,6 +322,7 @@
 	var/furniture_comfort_time
 
 /mob/living/proc/update_furniture_comfort()
+
 	if(!istype(buckled, /obj/structure))
 		furniture_comfort_time = null
 		return
@@ -347,6 +348,7 @@
 			keep_stressor = /datum/stressor/uncomfortable
 		if(-1 to -(INFINITY))
 			keep_stressor = /datum/stressor/uncomfortable_very
+
 	if(keep_stressor)
 		for(var/stressor in remove_stressors)
 			if(stressor == keep_stressor)
@@ -354,10 +356,10 @@
 			remove_stressor(stressor)
 		add_stressor(keep_stressor, 5 SECONDS)
 
-	if(struct.user_comfort >= 0.5 && HAS_STATUS(src, STAT_ASLEEP))
+	if(struct.user_comfort > 0 && HAS_STATUS(src, STAT_ASLEEP))
 		if(isnull(furniture_comfort_time))
 			furniture_comfort_time = world.time
-		else if((world.time - furniture_comfort_time) > 30 SECONDS)
+		else if((world.time - furniture_comfort_time) > clamp((30 SECONDS) - ((15 SECONDS) * struct.user_comfort), 0, 30 SECONDS))
 			remove_stressor(/datum/stressor/fatigued)
 			add_stressor(/datum/stressor/well_rested, 30 MINUTES)
 

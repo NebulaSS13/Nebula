@@ -212,7 +212,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/matrix/M = matrix()
 	M.Scale(desired_scale_x, desired_scale_y)
 	if(lying)
-		if(dir & WEST)
+		if((dir & WEST) || buckled?.buckle_dir)
 			turn_angle = -90
 		else if(dir & EAST)
 			turn_angle = 90
