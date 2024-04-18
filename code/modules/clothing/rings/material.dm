@@ -1,11 +1,13 @@
 /////////////////////////////////////////
 //Material Rings
+// TODO: Merge this into /obj/item/clothing/ring?
+/obj/item/clothing/ring/material
+	material_alteration = MAT_FLAG_ALTERATION_ALL
+
 /obj/item/clothing/ring/material/set_material(var/new_material)
 	. = ..()
-	if(istype(material))
-		name = "[material.solid_name] ring"
+	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_DESC))
 		desc = "A ring made from [material.solid_name]."
-		color = material.color
 
 /obj/item/clothing/ring/material/attackby(var/obj/item/S, var/mob/user)
 	if(S.sharp)
