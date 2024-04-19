@@ -1,5 +1,5 @@
 //Pouches
-/obj/item/clothing/accessory/webbing/pouches
+/obj/item/clothing/webbing/pouches
 	name = "storage pouches"
 	desc = "A collection of black pouches that can be attached to a plate carrier. Carries up to two items."
 	icon = 'icons/clothing/accessories/pouches/pouches.dmi'
@@ -9,14 +9,14 @@
 	storage = /datum/storage/pouches
 	accessory_slot = ACCESSORY_SLOT_ARMOR_S
 
-/obj/item/clothing/accessory/webbing/pouches/large
+/obj/item/clothing/webbing/pouches/large
 	name = "large storage pouches"
 	desc = "A collection of black pouches that can be attached to a plate carrier. Carries up to four items."
 	icon = 'icons/clothing/accessories/pouches/lpouches.dmi'
 	storage = /datum/storage/pouches/large
 	accessory_slowdown = 1
 
-/obj/item/clothing/accessory/webbing/pouches/large/tan
+/obj/item/clothing/webbing/pouches/large/tan
 	color = COLOR_TAN
 
 //Armor plates

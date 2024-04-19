@@ -178,7 +178,7 @@
 					/obj/item/scanner/breath,
 					/obj/item/flashlight/pen,
 					/obj/item/chems/syringe,
-					/obj/item/clothing/accessory/webbing/vest)
+					/obj/item/clothing/webbing/vest)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "paramedic equipment crate"
 	access = access_medical_equip

@@ -2676,9 +2676,9 @@
 /area/exodus/security/main)
 "afO" = (
 /obj/structure/closet/wardrobe/red,
-/obj/item/clothing/accessory/webbing/holster/waist,
-/obj/item/clothing/accessory/webbing/holster/waist,
-/obj/item/clothing/accessory/webbing/holster/waist,
+/obj/item/clothing/webbing/holster/waist,
+/obj/item/clothing/webbing/holster/waist,
+/obj/item/clothing/webbing/holster/waist,
 /obj/item/clothing/armband,
 /obj/item/clothing/armband,
 /obj/item/clothing/armband,

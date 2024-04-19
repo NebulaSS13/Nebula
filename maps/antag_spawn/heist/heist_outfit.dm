@@ -60,9 +60,9 @@
 		/obj/item/gun/projectile/zipgun
 		)
 	var/list/raider_holster = list(
-		/obj/item/clothing/accessory/webbing/holster/armpit,
-		/obj/item/clothing/accessory/webbing/holster/waist,
-		/obj/item/clothing/accessory/webbing/holster/hip
+		/obj/item/clothing/webbing/holster/armpit,
+		/obj/item/clothing/webbing/holster/waist,
+		/obj/item/clothing/webbing/holster/hip
 		)
 
 /decl/hierarchy/outfit/raider/Initialize()
@@ -81,7 +81,7 @@
 		var/turf/T = get_turf(H)
 
 		var/obj/item/primary = new new_gun(T)
-		var/obj/item/clothing/accessory/webbing/holster/holster = null
+		var/obj/item/clothing/webbing/holster/holster = null
 
 		//Give some of the raiders a pirate gun as a secondary
 		if(prob(60))
