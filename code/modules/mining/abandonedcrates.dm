@@ -52,7 +52,7 @@
 		if(46 to 50)
 			new/obj/item/clothing/under/chameleon(src)
 			for(var/i = 0, i < 7, i++)
-				new /obj/item/clothing/tie/horrible(src)
+				new /obj/item/clothing/neck/tie/horrible(src)
 		if(51 to 52) // Uncommon, 2% each
 			new /obj/item/classic_baton(src)
 		if(53 to 54)

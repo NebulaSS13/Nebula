@@ -1638,7 +1638,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/neck/stethoscope,
 /turf/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dO" = (

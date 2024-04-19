@@ -38722,11 +38722,11 @@
 /obj/item/belt/medical,
 /obj/item/belt/medical,
 /obj/item/belt/medical,
-/obj/item/clothing/tie/stethoscope,
-/obj/item/clothing/tie/stethoscope,
-/obj/item/clothing/tie/stethoscope,
-/obj/item/clothing/tie/stethoscope,
-/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/neck/stethoscope,
+/obj/item/clothing/neck/stethoscope,
+/obj/item/clothing/neck/stethoscope,
+/obj/item/clothing/neck/stethoscope,
+/obj/item/clothing/neck/stethoscope,
 /obj/machinery/light_switch{
 	name = "light switch ";
 	pixel_y = -22;
@@ -43475,7 +43475,7 @@
 	},
 /obj/structure/closet/secure_closet/cmo,
 /obj/item/clothing/mask/gas,
-/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/neck/stethoscope,
 /obj/item/belt/medical,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/flashlight/pen,
