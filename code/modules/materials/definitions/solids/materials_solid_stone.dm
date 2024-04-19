@@ -27,6 +27,7 @@
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
 	melting_point = T0C + 600
+	hardness = MAT_VALUE_RIGID + 5
 
 /decl/material/solid/stone/flint
 	name      = "flint"
@@ -42,7 +43,7 @@
 	color                  = "#615f5f"
 	exoplanet_rarity_plant = MAT_RARITY_MUNDANE
 	exoplanet_rarity_gas   = MAT_RARITY_MUNDANE
-	hardness               = MAT_VALUE_HARD + 5
+	hardness               = MAT_VALUE_HARD
 	melting_point          = T0C + 1260
 	brute_armor            = 15
 	explosion_resistance   = 15
@@ -69,6 +70,7 @@
 
 	dissolves_in = MAT_SOLVENT_IMMUNE
 	dissolves_into = null
+
 /decl/material/solid/stone/marble
 	name = "marble"
 	uid = "solid_marble"
