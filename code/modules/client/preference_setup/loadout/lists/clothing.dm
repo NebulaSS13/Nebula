@@ -14,7 +14,7 @@
 
 /decl/loadout_option/clothing/scarf
 	name = "scarf"
-	path = /obj/item/clothing/accessory/scarf
+	path = /obj/item/clothing/neck/scarf
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/hawaii

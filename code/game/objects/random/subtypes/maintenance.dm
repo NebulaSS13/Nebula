@@ -188,7 +188,7 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/clothing/under/medical/paramedic =              2,
 		/obj/item/clothing/accessory/webbing/vest/black =         2,
 		/obj/item/clothing/accessory/webbing/vest =               2,
-		/obj/item/clothing/tie/stethoscope =                      2,
+		/obj/item/clothing/neck/stethoscope =                      2,
 		/obj/item/clothing/glasses/hud/health =                   2,
 		/obj/item/backpack/dufflebag/syndie/med =                 1,
 		/obj/item/clothing/shoes/jackboots/swat/combat =          1,

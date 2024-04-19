@@ -34,7 +34,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/toggleable/corpjacket,
-		/obj/item/clothing/tie/corp
+		/obj/item/clothing/neck/tie/corp
 	)
 
 /obj/item/clothing/under/work/nanotrasen
@@ -64,7 +64,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit_nt.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen,
-		/obj/item/clothing/tie/corp/nanotrasen
+		/obj/item/clothing/neck/tie/corp/nanotrasen
 	)
 
 /obj/item/clothing/under/work/heph
@@ -94,7 +94,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit_heph.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/toggleable/corpjacket/heph,
-		/obj/item/clothing/tie/corp/heph
+		/obj/item/clothing/neck/tie/corp/heph
 	)
 
 //Zeng-Hu
@@ -120,7 +120,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit_zeng.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/toggleable/corpjacket/zeng,
-		/obj/item/clothing/tie/corp/zeng
+		/obj/item/clothing/neck/tie/corp/zeng
 	)
 
 /obj/item/clothing/under/aether

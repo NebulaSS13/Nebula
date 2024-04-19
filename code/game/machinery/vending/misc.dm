@@ -67,7 +67,7 @@
 	)
 	contraband = list(
 		/obj/item/clothing/glasses/eyepatch = 2,
-		/obj/item/clothing/tie/horrible = 2,
+		/obj/item/clothing/neck/tie/horrible = 2,
 		/obj/item/clothing/mask/smokable/pipe = 3
 	)
 

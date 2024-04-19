@@ -5940,7 +5940,7 @@
 	name = "prototype hypospray";
 	origin_tech = null
 	},
-/obj/item/clothing/tie/stethoscope,
+/obj/item/clothing/neck/stethoscope,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "yK" = (
