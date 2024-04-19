@@ -4,7 +4,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/suit/jacket/corp,
-		/obj/item/clothing/accessory/corptie
+		/obj/item/clothing/neck/tie/corp
 	)
 
 /obj/item/clothing/under/formal/corp/nanotrasen
@@ -13,7 +13,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit_nt.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/suit/jacket/corp/nanotrasen,
-		/obj/item/clothing/accessory/corptie/nanotrasen
+		/obj/item/clothing/neck/tie/corp/nanotrasen
 	)
 
 /obj/item/clothing/under/formal/corp/heph
@@ -22,7 +22,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit_heph.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/suit/jacket/corp/heph,
-		/obj/item/clothing/accessory/corptie/heph
+		/obj/item/clothing/neck/tie/corp/heph
 	)
 
 /obj/item/clothing/under/formal/corp/zeng
@@ -31,5 +31,5 @@
 	icon = 'mods/content/corporate/icons/clothing/under/suit_zeng.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/suit/jacket/corp/zeng,
-		/obj/item/clothing/accessory/corptie/zeng
+		/obj/item/clothing/neck/tie/corp/zeng
 	)

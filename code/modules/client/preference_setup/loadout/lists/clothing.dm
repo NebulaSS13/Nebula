@@ -56,7 +56,7 @@
 
 /decl/loadout_option/clothing/dashiki
 	name = "dashiki selection"
-	path = /obj/item/clothing/accessory/dashiki
+	path = /obj/item/clothing/suit/dashiki
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/clothing/thawb

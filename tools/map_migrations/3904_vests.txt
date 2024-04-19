@@ -12,3 +12,4 @@
 /obj/item/clothing/suit/captunic/capjacket/@SUBTYPES : /obj/item/clothing/suit/jacket/captain/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/poncho/roles/@SUBTYPES : /obj/item/clothing/suit/poncho/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/poncho/classic/@SUBTYPES : /obj/item/clothing/suit/poncho/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/dashiki/@SUBTYPES : /obj/item/clothing/suit/dashiki/@SUBTYPES{@OLD}

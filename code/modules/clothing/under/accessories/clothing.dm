@@ -8,21 +8,6 @@
 	desc = "They suspend the illusion of the mime's play."
 	icon = 'icons/clothing/accessories/clothing/suspenders.dmi'
 
-/obj/item/clothing/accessory/dashiki
-	name = "black dashiki"
-	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is green and black."
-	icon = 'icons/clothing/accessories/clothing/dashiki.dmi'
-
-/obj/item/clothing/accessory/dashiki/red
-	name = "red dashiki"
-	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is red."
-	icon = 'icons/clothing/accessories/clothing/dashiki_red.dmi'
-
-/obj/item/clothing/accessory/dashiki/blue
-	name = "blue dashiki"
-	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is blue."
-	icon = 'icons/clothing/accessories/clothing/dashiki_blue.dmi'
-
 /obj/item/clothing/accessory/thawb
 	name = "thawb"
 	desc = "A white, ankle-length robe designed to be cool in hot climates."

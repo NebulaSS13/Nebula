@@ -3,6 +3,9 @@
 	desc = "A simple, comfortable poncho."
 	icon = 'icons/clothing/suit/poncho/classic.dmi'
 	bodytype_equip_flags = null
+	slot_flags = SLOT_TIE | SLOT_OVER_BODY
+	accessory_slot = ACCESSORY_SLOT_DECOR
+	accessory_removable = TRUE
 
 /obj/item/clothing/suit/poncho/colored
 	icon = 'icons/clothing/suit/poncho/colourable.dmi'
