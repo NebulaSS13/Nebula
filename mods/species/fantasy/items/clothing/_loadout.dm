@@ -57,7 +57,7 @@
 
 /decl/loadout_option/clothing/fantasy/suit/cloak
 	name = "cloak"
-	path = /obj/item/clothing/accessory/cloak
+	path = /obj/item/clothing/suit/cloak
 
 /decl/loadout_option/clothing/fantasy/suit/poncho
 	name = "poncho"

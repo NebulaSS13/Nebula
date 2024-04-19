@@ -94,6 +94,6 @@
 
 /decl/loadout_option/suit/cloak
 	name = "plain cloak"
-	path = /obj/item/clothing/accessory/cloak
+	path = /obj/item/clothing/suit/cloak
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	cost = 3

@@ -1,0 +1,1 @@
+/obj/item/clothing/accessory/cloak/@SUBTYPES : /obj/item/clothing/suit/cloak/@SUBTYPES{@OLD}

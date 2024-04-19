@@ -889,8 +889,8 @@
 /obj/structure/closet,
 /obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/accessory/cloak,
-/obj/item/clothing/accessory/cloak,
+/obj/item/clothing/suit/cloak,
+/obj/item/clothing/suit/cloak,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "dR" = (
