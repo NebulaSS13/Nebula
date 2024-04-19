@@ -163,7 +163,7 @@
 	contains = list(/obj/item/belt/medical/emt,
 					/obj/item/radio/headset/headset_med,
 					/obj/item/clothing/under/medical/scrubs/black,
-					/obj/item/clothing/accessory/armband/medgreen,
+					/obj/item/clothing/armband/medgreen,
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/toggle/labcoat,
 					/obj/item/clothing/under/medical,

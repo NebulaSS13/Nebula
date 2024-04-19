@@ -2679,9 +2679,9 @@
 /obj/item/clothing/accessory/webbing/holster/waist,
 /obj/item/clothing/accessory/webbing/holster/waist,
 /obj/item/clothing/accessory/webbing/holster/waist,
-/obj/item/clothing/accessory/armband,
-/obj/item/clothing/accessory/armband,
-/obj/item/clothing/accessory/armband,
+/obj/item/clothing/armband,
+/obj/item/clothing/armband,
+/obj/item/clothing/armband,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
