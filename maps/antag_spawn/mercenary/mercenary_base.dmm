@@ -1832,12 +1832,12 @@
 /area/map_template/merc_spawn)
 "js" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/webbing/vest/brown,
-/obj/item/clothing/accessory/webbing/vest/brown,
-/obj/item/clothing/accessory/webbing/vest,
-/obj/item/clothing/accessory/webbing/vest,
-/obj/item/clothing/accessory/webbing/vest/black,
-/obj/item/clothing/accessory/webbing/vest/black,
+/obj/item/clothing/webbing/vest/brown,
+/obj/item/clothing/webbing/vest/brown,
+/obj/item/clothing/webbing/vest,
+/obj/item/clothing/webbing/vest,
+/obj/item/clothing/webbing/vest/black,
+/obj/item/clothing/webbing/vest/black,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -1959,12 +1959,12 @@
 /area/map_template/merc_spawn)
 "lQ" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/webbing/drop_pouches/white,
-/obj/item/clothing/accessory/webbing/drop_pouches/white,
-/obj/item/clothing/accessory/webbing/drop_pouches/black,
-/obj/item/clothing/accessory/webbing/drop_pouches/black,
-/obj/item/clothing/accessory/webbing/drop_pouches/brown,
-/obj/item/clothing/accessory/webbing/drop_pouches/brown,
+/obj/item/clothing/webbing/drop_pouches/white,
+/obj/item/clothing/webbing/drop_pouches/white,
+/obj/item/clothing/webbing/drop_pouches/black,
+/obj/item/clothing/webbing/drop_pouches/black,
+/obj/item/clothing/webbing/drop_pouches/brown,
+/obj/item/clothing/webbing/drop_pouches/brown,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -2436,15 +2436,15 @@
 /area/map_template/merc_spawn)
 "LD" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/webbing/bandolier,
-/obj/item/clothing/accessory/webbing/bandolier,
-/obj/item/clothing/accessory/webbing/bandolier,
-/obj/item/clothing/accessory/webbing/pouches/large,
-/obj/item/clothing/accessory/webbing/pouches/large,
-/obj/item/clothing/accessory/webbing/pouches,
-/obj/item/clothing/accessory/webbing/pouches,
-/obj/item/clothing/accessory/webbing/holster/thigh,
-/obj/item/clothing/accessory/webbing/holster/thigh,
+/obj/item/clothing/webbing/bandolier,
+/obj/item/clothing/webbing/bandolier,
+/obj/item/clothing/webbing/bandolier,
+/obj/item/clothing/webbing/pouches/large,
+/obj/item/clothing/webbing/pouches/large,
+/obj/item/clothing/webbing/pouches,
+/obj/item/clothing/webbing/pouches,
+/obj/item/clothing/webbing/holster/thigh,
+/obj/item/clothing/webbing/holster/thigh,
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "LI" = (

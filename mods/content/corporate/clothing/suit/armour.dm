@@ -2,7 +2,7 @@
 	starting_accessories = list(/obj/item/clothing/accessory/armor/plate, /obj/item/clothing/accessory/armor/tag/corp)
 
 /obj/item/clothing/suit/armor/pcarrier/nt_medium
-	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/medium, /obj/item/clothing/accessory/webbing/pouches, /obj/item/clothing/accessory/armor/tag/corp)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/medium, /obj/item/clothing/webbing/pouches, /obj/item/clothing/accessory/armor/tag/corp)
 
 /obj/item/clothing/suit/armor/vest/nt
 	name = "corporate armored vest"

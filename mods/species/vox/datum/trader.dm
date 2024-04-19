@@ -51,6 +51,7 @@
 		/obj/item/trash                       = TRADER_SUBTYPES_ONLY,
 		/obj/item/remains                     = TRADER_ALL,
 		/obj/item/clothing/accessory          = TRADER_ALL,
+		/obj/item/clothing/webbing            = TRADER_ALL,
 		/obj/item/robot_parts                 = TRADER_SUBTYPES_ONLY,
 		/obj/item/robot_parts/robot_component = TRADER_BLACKLIST
 	)

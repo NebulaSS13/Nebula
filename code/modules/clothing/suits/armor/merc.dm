@@ -1,6 +1,6 @@
 
 /obj/item/clothing/suit/armor/pcarrier/merc
-	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/merc, /obj/item/clothing/accessory/armguards/merc, /obj/item/clothing/accessory/legguards/merc, /obj/item/clothing/accessory/webbing/pouches/large)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/merc, /obj/item/clothing/accessory/armguards/merc, /obj/item/clothing/accessory/legguards/merc, /obj/item/clothing/webbing/pouches/large)
 
 /obj/item/clothing/accessory/armor/plate/merc
 	name = "heavy armor plate"

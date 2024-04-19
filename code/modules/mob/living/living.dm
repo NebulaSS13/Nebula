@@ -560,7 +560,7 @@ default behaviour is:
 			if(ismob(A) || istype(A,/obj/item/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
-	else if(istype(H.loc,/obj/item/clothing/accessory/webbing/holster) || istype(H.loc,/obj/item/belt/holster))
+	else if(istype(H.loc,/obj/item/clothing/webbing/holster) || istype(H.loc,/obj/item/belt/holster))
 		var/datum/extension/holster/holster = get_extension(src, /datum/extension/holster)
 		if(holster.holstered == H)
 			holster.clear_holster()

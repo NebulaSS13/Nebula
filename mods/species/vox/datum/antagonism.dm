@@ -11,7 +11,7 @@
 	back =       /obj/item/tank/nitrogen
 	uniform =    /obj/item/clothing/under/vox/vox_robes
 	glasses =    /obj/item/clothing/glasses/thermal
-	holster =    /obj/item/clothing/accessory/webbing/holster/armpit
+	holster =    /obj/item/clothing/webbing/holster/armpit
 	suit_store = /obj/item/flashlight
 	l_ear =      /obj/item/radio/headset/raider
 	hands =      list(/obj/item/gun/launcher/alien/spikethrower)
@@ -20,7 +20,7 @@
 /decl/hierarchy/outfit/vox_raider/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	uniform = pick(/obj/item/clothing/under/vox/vox_robes, /obj/item/clothing/under/vox/vox_casual)
 	glasses = pick(/obj/item/clothing/glasses/thermal, /obj/item/clothing/glasses/thermal/plain/eyepatch, /obj/item/clothing/glasses/thermal/plain/monocle)
-	holster = pick(/obj/item/clothing/accessory/webbing/holster/armpit, /obj/item/clothing/accessory/webbing/holster/waist, /obj/item/clothing/accessory/webbing/holster/hip)
+	holster = pick(/obj/item/clothing/webbing/holster/armpit, /obj/item/clothing/webbing/holster/waist, /obj/item/clothing/webbing/holster/hip)
 	. = ..()
 	H.set_internals(locate(/obj/item/tank) in H.contents)
 

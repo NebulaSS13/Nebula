@@ -1,0 +1,1 @@
+/obj/item/clothing/accessory/webbing/@SUBTYPES : /obj/item/clothing/webbing/@SUBTYPES{@OLD}
