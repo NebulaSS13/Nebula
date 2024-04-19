@@ -31,12 +31,12 @@
 
 /decl/loadout_option/clothing/fantasy/uniform/tunic
 	name = "tunic"
-	path = /obj/item/clothing/accessory/tunic
+	path = /obj/item/clothing/shirt/tunic
 	slot = slot_tie_str
 
 /decl/loadout_option/clothing/fantasy/uniform/tunic/short
 	name = "tunic, short"
-	path = /obj/item/clothing/accessory/tunic/short
+	path = /obj/item/clothing/shirt/tunic/short
 
 /decl/loadout_option/clothing/fantasy/uniform/trousers
 	name = "trousers"

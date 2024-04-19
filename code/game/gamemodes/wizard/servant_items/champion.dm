@@ -28,16 +28,15 @@
 		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/bluetunic
-	name = "blue tunic"
-	desc = "A royal blue tunic. Beautifully archaic."
-	icon = 'icons/clothing/under/tunic.dmi'
+/obj/item/clothing/pants/champion
+	name = "champion's garb"
+	desc = "Some dark, archaic leggings."
+	icon = 'icons/clothing/pants/leggings/leggings_champion.dmi'
 	siemens_coefficient = 0.8
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MINOR
 	)
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/blue/champion)
 
 /obj/item/clothing/shoes/jackboots/medievalboots
 	name = "leather boots"

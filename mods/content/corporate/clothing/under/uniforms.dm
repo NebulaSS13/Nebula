@@ -15,13 +15,13 @@
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
-	starting_accessories = list(/obj/item/clothing/accessory/tunic)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp)
 
 /obj/item/clothing/under/executive
 	name = "\improper EXO polo and pants"
 	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Expeditionary Corps Organisation higher-up."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_exec.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/exec)
 
 /obj/item/clothing/under/pilot
 	name = "green flight suit"
@@ -45,13 +45,13 @@
 	name = "\improper NanoTrasen polo and pants"
 	desc = "A fashionable polo and pair of trousers belonging to NanoTrasen, a megacorporation primarily concerned with the research of new and dangerous technologies."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_nt.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/tunic/nanotrasen)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/nanotrasen)
 
 /obj/item/clothing/under/executive/nanotrasen
 	name = "\improper NanoTrasen polo and pants"
 	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a NanoTrasen higher-up."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_exec_nt.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec/nanotrasen)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/exec/nanotrasen)
 
 /obj/item/clothing/under/pilot/nanotrasen
 	name = "red flight suit"
@@ -75,13 +75,13 @@
 	name = "\improper Hephaestus polo and pants"
 	desc = "A fashionable polo and pair of trousers belonging to Hephaestus Industries, a megacorporation primarily concerned with the research and production of weapon systems."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_heph.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/tunic/heph)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/heph)
 
 /obj/item/clothing/under/executive/heph
 	name = "\improper Hephaestus polo and pants"
 	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Hephaestus Industries higher-up."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_exec_heph.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec/heph)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/exec/heph)
 
 /obj/item/clothing/under/pilot/heph
 	name = "cyan flight suit"
@@ -106,13 +106,13 @@
 	name = "\improper Zeng-Hu polo and pants"
 	desc = "A fashionable polo and pair of trousers belonging to Zeng-Hu Pharmaceuticals, a megacorporation primarily concerned with the research and production of medical equipment and pharmaceuticals."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_zeng.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/tunic/zeng)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/zeng)
 
 /obj/item/clothing/under/executive/zeng
 	name = "\improper Zeng-Hu polo and pants"
 	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Zeng-Hu Pharmaceuticals higher-up."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_exec_zeng.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec/zeng)
+	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/exec/zeng)
 
 /obj/item/clothing/under/suit_jacket/corp/zeng
 	name = "\improper Zeng-Hu executive suit"
