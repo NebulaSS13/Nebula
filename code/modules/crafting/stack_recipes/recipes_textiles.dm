@@ -6,7 +6,7 @@
 	abstract_type         = /decl/stack_recipe/textiles
 
 /decl/stack_recipe/textiles/cloak
-	result_type           = /obj/item/clothing/accessory/cloak/hide
+	result_type           = /obj/item/clothing/suit/cloak/hide
 	category              = "clothing"
 
 /decl/stack_recipe/textiles/banner
