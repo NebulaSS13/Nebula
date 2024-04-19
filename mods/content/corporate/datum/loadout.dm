@@ -15,7 +15,7 @@
 
 /decl/loadout_option/accessory/armband_nt
 	name = "corporate armband"
-	path = /obj/item/clothing/accessory/armband/whitegreen
+	path = /obj/item/clothing/armband/whitegreen
 
 /decl/loadout_option/suit/labcoat_corp
 	name = "labcoat, corporate colors"

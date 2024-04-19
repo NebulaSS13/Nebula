@@ -188,7 +188,7 @@
 	dir = 8;
 	pixel_x = -38
 	},
-/obj/item/clothing/accessory/armband/hydro,
+/obj/item/clothing/armband/hydro,
 /turf/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aG" = (
