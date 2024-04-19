@@ -94,7 +94,7 @@
 					/obj/item/clothing/under/lawyer/purpsuit,
 					/obj/item/clothing/under/mailman,
 					/obj/item/clothing/under/dress/dress_saloon,
-					/obj/item/clothing/accessory/suspenders,
+					/obj/item/clothing/suspenders,
 					/obj/item/clothing/suit/toggle/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
 					/obj/item/clothing/under/schoolgirl,

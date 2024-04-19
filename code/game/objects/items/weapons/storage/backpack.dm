@@ -220,7 +220,7 @@
 		/obj/item/clothing/suit/fire,
 		/obj/item/chems/spray/extinguisher,
 		/obj/item/clothing/gloves/fire,
-		/obj/item/clothing/accessory/fire_overpants,
+		/obj/item/clothing/pants/fire_overpants,
 		/obj/item/tank/emergency/oxygen/double/red,
 		/obj/item/clothing/head/hardhat/firefighter,
 		/obj/item/chems/spray/extinguisher

@@ -34,3 +34,8 @@
 	. = ..()
 	var/static/list/pants_slots = list(slot_w_uniform_str, slot_wear_id_str)
 	LAZYDISTINCTADD(., pants_slots)
+
+
+/obj/item/clothing/pants/get_fallback_slot(var/slot)
+	if(slot != BP_L_HAND && slot != BP_R_HAND)
+		return slot_w_uniform_str
