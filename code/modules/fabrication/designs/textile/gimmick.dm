@@ -29,7 +29,7 @@
 
 /datum/fabricator_recipe/textiles/gimmick/ianshirt
 	path = /obj/item/clothing/suit/ianshirt
-	
+
 /datum/fabricator_recipe/textiles/gimmick/luchalibrehonor
 	path = /obj/item/clothing/mask/luchador/rudos
 
@@ -41,7 +41,7 @@
 
 /datum/fabricator_recipe/textiles/gimmick/radicaldude
 	path = /obj/item/clothing/mask/gas/radical
-	
+
 /datum/fabricator_recipe/textiles/gimmick/plaguedoctorsmask
 	path = /obj/item/clothing/mask/gas/plaguedoctor
 
@@ -89,7 +89,7 @@
 
 /datum/fabricator_recipe/textiles/gimmick/gladiator
 	path = /obj/item/clothing/head/helmet/gladiator
-	
+
 /datum/fabricator_recipe/textiles/gimmick/maddoclabcoat
 	path = /obj/item/clothing/suit/toggle/labcoat/mad
 
@@ -106,11 +106,11 @@
 	path = /obj/item/clothing/mask/snorkel
 
 /datum/fabricator_recipe/textiles/gimmick/cap_tunic
-	path = /obj/item/clothing/suit/captunic
+	path = /obj/item/clothing/shirt/tunic/captain
 
 /datum/fabricator_recipe/textiles/gimmick/capjacket
 	path = /obj/item/clothing/suit/captunic/capjacket
-	
+
 /datum/fabricator_recipe/textiles/gimmick/robe
 	path = /obj/item/clothing/suit/robe
 
@@ -125,7 +125,7 @@
 
 /datum/fabricator_recipe/textiles/gimmick/santahat
 	path = /obj/item/clothing/head/santahat
-		
+
 /datum/fabricator_recipe/textiles/gimmick/cape
 	path = /obj/item/clothing/accessory/shouldercape
 

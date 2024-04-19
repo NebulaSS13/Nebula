@@ -11,7 +11,7 @@
 	result_type         = /obj/item/clothing/pants/trousers/braies
 
 /decl/stack_recipe/textiles/tunic
-	result_type         = /obj/item/clothing/accessory/tunic
+	result_type         = /obj/item/clothing/shirt/tunic
 
 /decl/stack_recipe/textiles/tunic_short
-	result_type         = /obj/item/clothing/accessory/tunic/short
+	result_type         = /obj/item/clothing/shirt/tunic/short

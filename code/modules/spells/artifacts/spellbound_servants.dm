@@ -85,17 +85,23 @@
 	name = "Champion"
 	desc = "A knight in shining armor; a warrior, a protector, and a loyal friend."
 	spiel = "Your sword and armor are second to none, but you have no unique supernatural powers beyond summoning the sword to your hands. Protect your Master with your life!"
-	equipment = list(/obj/item/clothing/under/bluetunic = slot_w_uniform_str,
-					/obj/item/clothing/shoes/jackboots/medievalboots = slot_shoes_str)
-	spells = list(/spell/toggle_armor/champion,
-				/spell/toggle_armor/excalibur)
+	equipment = list(
+		/obj/item/clothing/pants/champion = slot_w_uniform_str,
+		/obj/item/clothing/shoes/jackboots/medievalboots = slot_shoes_str
+	)
+	spells = list(
+		/spell/toggle_armor/champion,
+		/spell/toggle_armor/excalibur
+	)
 
 /datum/spellbound_type/servant/familiar
 	name = "Familiar"
 	desc = "A friend! Or are they a pet? They can transform into animals, and take some particular traits from said creatures."
 	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly won't pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
-	equipment = list(/obj/item/clothing/head/bandana/familiarband = slot_head_str,
-					/obj/item/clothing/under/familiargarb = slot_w_uniform_str)
+	equipment = list(
+		/obj/item/clothing/head/bandana/familiarband = slot_head_str,
+		/obj/item/clothing/pants/familiar = slot_w_uniform_str
+	)
 
 /datum/spellbound_type/servant/familiar/modify_servant(var/list/equipment, var/mob/living/carbon/human/H)
 	var/familiar_type

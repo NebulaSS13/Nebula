@@ -1,0 +1,8 @@
+/obj/item/clothing/under/bluetunic/@SUBTYPES : /obj/item/clothing/pants/champion/@SUBTYPES{@OLD}
+/obj/item/clothing/under/familiargarb/@SUBTYPES : /obj/item/clothing/pants/familiar/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/captunic : /obj/item/clothing/shirt/tunic/captain{@OLD}
+/obj/item/clothing/accessory/tunic/nanotrasen : /obj/item/clothing/shirt/tunic/corp/nanotrasen{@OLD}
+/obj/item/clothing/accessory/tunic/heph : /obj/item/clothing/shirt/tunic/corp/heph{@OLD}
+/obj/item/clothing/accessory/tunic/zeng : /obj/item/clothing/shirt/tunic/corp/zeng{@OLD}
+/obj/item/clothing/accessory/tunic/exec/@SUBTYPES : /obj/item/clothing/shirt/tunic/corp/exec/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/tunic/@SUBTYPES : /obj/item/clothing/shirt/tunic/@SUBTYPES{@OLD}
