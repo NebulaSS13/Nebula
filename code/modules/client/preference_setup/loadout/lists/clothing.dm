@@ -61,11 +61,11 @@
 
 /decl/loadout_option/clothing/thawb
 	name = "thawb"
-	path = /obj/item/clothing/accessory/thawb
+	path = /obj/item/clothing/suit/robe/thawb
 
 /decl/loadout_option/clothing/sherwani
 	name = "sherwani, colour select"
-	path = /obj/item/clothing/accessory/sherwani
+	path = /obj/item/clothing/suit/robe/sherwani
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/qipao
