@@ -21,11 +21,14 @@
 	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'
 
 /obj/item/clothing/suit/armor/riot/prepared
-	starting_accessories = list(/obj/item/clothing/accessory/armguards/riot, /obj/item/clothing/accessory/legguards/riot)
+	starting_accessories = list(
+		/obj/item/clothing/gloves/armguards/riot,
+		/obj/item/clothing/shoes/legguards/riot
+	)
 
 // Parts
 
-/obj/item/clothing/accessory/legguards/riot
+/obj/item/clothing/shoes/legguards/riot
 	name = "riot leg guards"
 	desc = "A pair of armored leg pads with heavy padding to protect against melee attacks. Looks like they might impair movement."
 	icon = 'icons/clothing/accessories/armor/legguards_riot.dmi'
@@ -43,7 +46,7 @@
 	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'
 
-/obj/item/clothing/accessory/armguards/riot
+/obj/item/clothing/gloves/armguards/riot
 	name = "riot arm guards"
 	desc = "A pair of armored arm pads with heavy padding to protect against melee attacks."
 	icon = 'icons/clothing/accessories/armor/armguards_riot.dmi'

@@ -28,22 +28,22 @@
 
 /datum/fabricator_recipe/textiles/armor/limb
 	category = "Armor - Limb armor"
-	path = /obj/item/clothing/accessory/legguards/riot
+	path = /obj/item/clothing/shoes/legguards/riot
 
 /datum/fabricator_recipe/textiles/armor/limb/arm_riot
-	path = /obj/item/clothing/accessory/armguards/riot
+	path = /obj/item/clothing/gloves/armguards/riot
 
 /datum/fabricator_recipe/textiles/armor/limb/arm_merc
-	path = /obj/item/clothing/accessory/armguards/merc
+	path = /obj/item/clothing/gloves/armguards/merc
 
 /datum/fabricator_recipe/textiles/armor/limb/leg_merc
-	path = /obj/item/clothing/accessory/legguards/merc
+	path = /obj/item/clothing/shoes/legguards/merc
 
 /datum/fabricator_recipe/textiles/armor/limb/arm_ballistic
-	path = /obj/item/clothing/accessory/armguards/ballistic
+	path = /obj/item/clothing/gloves/armguards/ballistic
 
 /datum/fabricator_recipe/textiles/armor/limb/leg_ballistic
-	path = /obj/item/clothing/accessory/legguards/ballistic
+	path = /obj/item/clothing/shoes/legguards/ballistic
 
 // Speciality vests and plate carriers
 

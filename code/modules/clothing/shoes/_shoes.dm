@@ -30,6 +30,10 @@
 	/// A modifier applied to move delay when walking on snow.
 	var/snow_slowdown_mod   = 0
 
+/obj/item/clothing/shoes/get_fallback_slot(slot)
+	if(slot != BP_L_HAND && slot != BP_R_HAND)
+		return slot_shoes_str
+
 /obj/item/clothing/shoes/Destroy()
 	. = ..()
 	if (hidden_item)
