@@ -91,7 +91,7 @@
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/under/tactical,
 		/obj/item/beartrap,
-		/obj/item/clothing/accessory/badge/press,
+		/obj/item/clothing/badge/press,
 		/obj/item/knife/combat,
 		/obj/item/knife/folding/combat/switchblade,
 	)

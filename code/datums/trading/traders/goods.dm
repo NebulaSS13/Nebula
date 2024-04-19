@@ -175,7 +175,7 @@
 	)
 	possible_trading_items = list(
 		/obj/item/clothing/accessory                 = TRADER_ALL,
-		/obj/item/clothing/accessory/badge           = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/badge                     = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/webbing/holster = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/accessory/medal           = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/webbing         = TRADER_BLACKLIST_ALL,
