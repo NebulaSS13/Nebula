@@ -8,7 +8,7 @@
 
 /decl/loadout_option/clothing/flannel
 	name = "flannel (colorable)"
-	path = /obj/item/clothing/accessory/toggleable/flannel
+	path = /obj/item/clothing/shirt/flannel
 	slot = slot_tie_str
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
@@ -70,12 +70,12 @@
 
 /decl/loadout_option/clothing/qipao
 	name = "qipao blouse, colour select"
-	path = /obj/item/clothing/accessory/qipao
+	path = /obj/item/clothing/shirt/qipao
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/sweater
 	name = "turtleneck sweater, colour select"
-	path = /obj/item/clothing/accessory/sweater
+	path = /obj/item/clothing/shirt/sweater
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/tangzhuang

@@ -1,0 +1,4 @@
+/obj/item/clothing/accessory/toggleable/flannel/@SUBTYPES : /obj/item/clothing/shirt/flannel/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/qipao/@SUBTYPES : /obj/item/clothing/shirt/qipao/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/sweater/@SUBTYPES : /obj/item/clothing/shirt/sweater/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/ubac/@SUBTYPES : /obj/item/clothing/shirt/ubac/@SUBTYPES{@OLD}

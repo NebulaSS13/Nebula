@@ -53,36 +53,6 @@
 	desc = "A long, coat-like frock with fancy embroidery on the cuffs and collar."
 	icon = 'icons/clothing/accessories/clothing/sherwani.dmi'
 
-/obj/item/clothing/accessory/qipao
-	name = "qipao"
-	desc = "A tight-fitting blouse with intricate designs of flowers embroidered on it."
-	icon = 'icons/clothing/accessories/clothing/qipao.dmi'
-
-/obj/item/clothing/accessory/sweater
-	name = "turtleneck sweater"
-	desc = "A stylish sweater to keep you warm on those cold days."
-	icon = 'icons/clothing/accessories/clothing/sweater.dmi'
-
-/obj/item/clothing/accessory/ubac
-	name = "black ubac"
-	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is black."
-	icon = 'icons/clothing/accessories/clothing/ubac.dmi'
-
-/obj/item/clothing/accessory/ubac/blue
-	name = "blue ubac"
-	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is blue."
-	icon = 'icons/clothing/accessories/clothing/ubac_blue.dmi'
-
-/obj/item/clothing/accessory/ubac/tan
-	name = "tan ubac"
-	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is tan."
-	icon = 'icons/clothing/accessories/clothing/ubac_tan.dmi'
-
-/obj/item/clothing/accessory/ubac/green
-	name = "green ubac"
-	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is green."
-	icon = 'icons/clothing/accessories/clothing/ubac_green.dmi'
-
 /obj/item/clothing/accessory/tangzhuang
 	name = "tangzhuang jacket"
 	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."

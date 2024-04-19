@@ -43,16 +43,3 @@
 	name = "zhongshan suit jacket"
 	desc = "A stylish Chinese tunic suit jacket."
 	icon = 'icons/clothing/accessories/clothing/zhongshan.dmi'
-
-/obj/item/clothing/accessory/toggleable/flannel
-	name = "flannel shirt"
-	desc = "A comfy, plaid flannel shirt."
-	icon = 'icons/clothing/accessories/clothing/flannel.dmi'
-
-/obj/item/clothing/accessory/toggleable/flannel/get_assumed_clothing_state_modifiers()
-	var/static/list/expected_state_modifiers = list(
-		GET_DECL(/decl/clothing_state_modifier/buttons),
-		GET_DECL(/decl/clothing_state_modifier/rolled_sleeves),
-		GET_DECL(/decl/clothing_state_modifier/tucked_in)
-	)
-	return expected_state_modifiers
