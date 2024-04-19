@@ -194,7 +194,7 @@
 	boiling_point = 2774
 	weight = MAT_VALUE_NORMAL
 	wall_support_value = MAT_VALUE_VERY_HEAVY // Ideal construction material.
-	hardness = MAT_VALUE_HARD
+	hardness = MAT_VALUE_HARD + 5
 	integrity = 150
 	brute_armor = 5
 	icon_base = 'icons/turf/walls/solid.dmi'
@@ -225,6 +225,7 @@
 	melting_point = 1784
 	boiling_point = null
 	wall_support_value = MAT_VALUE_HEAVY
+	hardness = MAT_VALUE_HARD + 5
 	integrity = 175
 	burn_armor = 10
 	color = "#a5a5a5"
@@ -356,6 +357,7 @@
 	color = "#deddff"
 	weight = MAT_VALUE_VERY_HEAVY
 	wall_support_value = MAT_VALUE_VERY_HEAVY
+	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = @'{"materials":2}'
 	ore_compresses_to = /decl/material/solid/metal/osmium
 	ore_result_amount = 5
@@ -377,6 +379,7 @@
 	boiling_point = 3134
 	color = "#5c5454"
 	hitsound = 'sound/weapons/smash.ogg'
+	hardness = MAT_VALUE_HARD
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
