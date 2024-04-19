@@ -14,7 +14,7 @@
 	desc = "A dark uniform coat worn by Magnitka fleet officers."
 	icon = 'maps/random_ruins/exoplanet_ruins/marooned/icons/uniform_magnitka.dmi'
 
-/obj/item/clothing/accessory/medal/silver/marooned_medal
+/obj/item/clothing/medal/silver/marooned_medal
 	name = "silver medal"
 	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\""
 	icon = 'maps/random_ruins/exoplanet_ruins/marooned/icons/medal_magnitka.dmi'

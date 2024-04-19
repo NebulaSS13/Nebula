@@ -15,6 +15,10 @@
 	var/badge_string = "Detective"
 	var/stored_name
 
+/obj/item/clothing/badge/get_fallback_slot(var/slot)
+	if(slot != BP_L_HAND && slot != BP_R_HAND)
+		return slot_tie_str
+
 /obj/item/clothing/badge/get_initial_accessory_hide_on_states()
 	var/static/list/initial_accessory_hide_on_states = list(
 		/decl/clothing_state_modifier/rolled_down

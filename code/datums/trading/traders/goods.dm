@@ -177,7 +177,7 @@
 		/obj/item/clothing/accessory                 = TRADER_ALL,
 		/obj/item/clothing/badge                     = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/webbing/holster = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/accessory/medal           = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/medal                     = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/webbing         = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/gloves                    = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/gloves/lightrig           = TRADER_BLACKLIST_ALL,

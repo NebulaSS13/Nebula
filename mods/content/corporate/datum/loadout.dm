@@ -1,16 +1,16 @@
 /decl/loadout_option/accessory/ntaward
 	name = "corporate award selection"
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal
+	path = /obj/item/clothing/medal
 	cost = 8
 
 /decl/loadout_option/accessory/ntaward/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"sciences medal" =        /obj/item/clothing/accessory/medal/nanotrasen/bronze,
-		"distinguished service" = /obj/item/clothing/accessory/medal/nanotrasen/silver,
-		"command medal" =         /obj/item/clothing/accessory/medal/nanotrasen/gold
+		"sciences medal" =        /obj/item/clothing/medal/nanotrasen/bronze,
+		"distinguished service" = /obj/item/clothing/medal/nanotrasen/silver,
+		"command medal" =         /obj/item/clothing/medal/nanotrasen/gold
 	)
 
 /decl/loadout_option/accessory/armband_nt
