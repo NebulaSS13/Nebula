@@ -114,10 +114,10 @@
 
 /datum/fabricator_recipe/textiles/job/medical/suithospital
 	path = /obj/item/clothing/suit/hospital
-	
+
 /datum/fabricator_recipe/textiles/job/medical/suitmedicalresponder
-	path = /obj/item/clothing/suit/toggle/fr_jacket
-	
+	path = /obj/item/clothing/suit/jacket/first_responder
+
 /datum/fabricator_recipe/textiles/job/medical/medicalchestrig
 	path = /obj/item/clothing/suit/medical_chest_rig
 
@@ -130,7 +130,7 @@
 	path = /obj/item/clothing/suit/forensics
 
 /datum/fabricator_recipe/textiles/job/security/coatspace_agent
-	path = /obj/item/clothing/suit/toggle/agent_jacket
+	path = /obj/item/clothing/suit/jacket/agent
 
 /datum/fabricator_recipe/textiles/job/security/detcoat
 	path = /obj/item/clothing/suit/det_trench/reinforced

@@ -39,7 +39,7 @@
 
 /decl/hierarchy/outfit/job/librarian
 	name = "Job - Librarian"
-	uniform = /obj/item/clothing/under/suit_jacket/red
+	uniform = /obj/item/clothing/under/formal/red
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
@@ -51,7 +51,7 @@
 	name = "Job - Internal affairs agent"
 	l_ear = /obj/item/radio/headset/heads/ia
 	uniform = /obj/item/clothing/under/internalaffairs
-	suit = /obj/item/clothing/suit/toggle/suit/black
+	suit = /obj/item/clothing/suit/jacket/black
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	hands = list(/obj/item/briefcase)

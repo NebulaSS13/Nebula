@@ -64,7 +64,7 @@
 
 /decl/loadout_option/uniform/corp_exec_jacket
 	name = "corporate colours, liason suit"
-	path = /obj/item/clothing/under/suit_jacket/corp
+	path = /obj/item/clothing/under/formal/corp
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/nanotrasen_poncho
@@ -79,8 +79,8 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/leather_jacket/nanotrasen,
-		/obj/item/clothing/suit/toggle/brown_jacket/nanotrasen
+		/obj/item/clothing/suit/jacket/leather/nanotrasen,
+		/obj/item/clothing/suit/jacket/brown/nanotrasen
 	)
 
 /decl/loadout_option/suit/science_poncho
@@ -93,7 +93,7 @@
 
 /decl/loadout_option/suit/wintercoat_dais
 	name = "winter coat, DAIS"
-	path = /obj/item/clothing/suit/toggle/wintercoat/dais
+	path = /obj/item/clothing/suit/jacket/winter/dais
 
 /decl/loadout_option/suit/leather/get_gear_tweak_options()
 	. = ..()

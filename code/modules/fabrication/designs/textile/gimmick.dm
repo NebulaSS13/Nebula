@@ -109,7 +109,7 @@
 	path = /obj/item/clothing/shirt/tunic/captain
 
 /datum/fabricator_recipe/textiles/gimmick/capjacket
-	path = /obj/item/clothing/suit/captunic/capjacket
+	path = /obj/item/clothing/suit/jacket/captain
 
 /datum/fabricator_recipe/textiles/gimmick/robe
 	path = /obj/item/clothing/suit/robe

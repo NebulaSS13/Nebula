@@ -34,7 +34,7 @@
 /decl/hierarchy/outfit/job/unishi/researcher
 	name = "CTI Research Vessel - Job - Researcher"
 	uniform = /obj/item/clothing/under/engineer
-	suit = /obj/item/clothing/suit/toggle/hoodie
+	suit = /obj/item/clothing/suit/jacket/hoodie
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 	l_pocket = /obj/item/crowbar

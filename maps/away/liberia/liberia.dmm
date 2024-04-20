@@ -3818,7 +3818,7 @@
 /obj/item/clothing/shoes/craftable,
 /obj/item/clothing/under/blazer,
 /obj/item/clothing/under/lawyer,
-/obj/item/clothing/under/suit_jacket/navy,
+/obj/item/clothing/under/formal/navy,
 /obj/random/handgun,
 /obj/item/chems/drinks/bottle/premiumwine,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{

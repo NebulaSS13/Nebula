@@ -27,7 +27,7 @@
 
 	var/wearing_head = usr.get_equipped_item(slot_head_str)
 	if(wearing_head && wearing_head != check_hood)
-		to_chat(usr, SPAN_WARNING("You're already wearing \the [check_hood] on your head!"))
+		to_chat(usr, SPAN_WARNING("You're already wearing \the [wearing_head] on your head!"))
 		return
 
 	var/obj/item/clothing/toggled = toggle_clothing_state(/decl/clothing_state_modifier/hood)

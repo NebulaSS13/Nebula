@@ -28,15 +28,6 @@
 	desc = "A sleek green Expeditionary Corps Organisation flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon = 'mods/content/corporate/icons/clothing/under/pilot.dmi'
 
-/obj/item/clothing/under/suit_jacket/corp
-	name = "\improper EXO executive suit"
-	desc = "A set of Expeditionary Corps Organisation-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
-	icon = 'mods/content/corporate/icons/clothing/under/suit.dmi'
-	starting_accessories = list(
-		/obj/item/clothing/accessory/toggleable/corpjacket,
-		/obj/item/clothing/neck/tie/corp
-	)
-
 /obj/item/clothing/under/work/nanotrasen
 	name = "beige and red coveralls"
 	icon = 'mods/content/corporate/icons/clothing/under/work_nt.dmi'
@@ -57,15 +48,6 @@
 	name = "red flight suit"
 	desc = "A sleek red NanoTrasen flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon = 'mods/content/corporate/icons/clothing/under/pilot_nt.dmi'
-
-/obj/item/clothing/under/suit_jacket/corp/nanotrasen
-	name = "\improper NanoTrasen executive suit"
-	desc = "A set of NanoTrasen-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
-	icon = 'mods/content/corporate/icons/clothing/under/suit_nt.dmi'
-	starting_accessories = list(
-		/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen,
-		/obj/item/clothing/neck/tie/corp/nanotrasen
-	)
 
 /obj/item/clothing/under/work/heph
 	name = "grey and cyan coveralls"
@@ -88,15 +70,6 @@
 	desc = "A sleek cyan Hephaestus Industries flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon = 'mods/content/corporate/icons/clothing/under/pilot_heph.dmi'
 
-/obj/item/clothing/under/suit_jacket/corp/heph
-	name = "\improper Hephaestus executive suit"
-	desc = "A set of Hephaestus Industries-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
-	icon = 'mods/content/corporate/icons/clothing/under/suit_heph.dmi'
-	starting_accessories = list(
-		/obj/item/clothing/accessory/toggleable/corpjacket/heph,
-		/obj/item/clothing/neck/tie/corp/heph
-	)
-
 //Zeng-Hu
 /obj/item/clothing/under/work/zeng
 	name = "beige and gold coveralls"
@@ -113,15 +86,6 @@
 	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Zeng-Hu Pharmaceuticals higher-up."
 	icon = 'mods/content/corporate/icons/clothing/under/smock_exec_zeng.dmi'
 	starting_accessories = list(/obj/item/clothing/shirt/tunic/corp/exec/zeng)
-
-/obj/item/clothing/under/suit_jacket/corp/zeng
-	name = "\improper Zeng-Hu executive suit"
-	desc = "A set of Zeng-Hu Pharmaceuticals-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
-	icon = 'mods/content/corporate/icons/clothing/under/suit_zeng.dmi'
-	starting_accessories = list(
-		/obj/item/clothing/accessory/toggleable/corpjacket/zeng,
-		/obj/item/clothing/neck/tie/corp/zeng
-	)
 
 /obj/item/clothing/under/aether
 	name = "\improper Aether jumpsuit"

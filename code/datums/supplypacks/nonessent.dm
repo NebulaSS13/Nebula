@@ -83,7 +83,7 @@
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
 					/obj/item/clothing/suit/judgerobe,
-					/obj/item/clothing/accessory/wcoat/black,
+					/obj/item/clothing/suit/jacket/waistcoat/black,
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/suit/nun,
@@ -116,20 +116,21 @@
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/nonessent/formal_wear
-	contains = list(/obj/item/clothing/head/bowler,
-					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/toggle/suit/blue,
-					/obj/item/clothing/suit/toggle/suit/purple,
-					/obj/item/clothing/under/suit_jacket,
-					/obj/item/clothing/under/suit_jacket/female,
-					/obj/item/clothing/under/suit_jacket/really_black,
-					/obj/item/clothing/under/suit_jacket/red,
-					/obj/item/clothing/under/lawyer/bluesuit,
-					/obj/item/clothing/under/lawyer/purpsuit,
-					/obj/item/clothing/shoes/color/black,
-					/obj/item/clothing/shoes/color/black,
-					/obj/item/clothing/shoes/craftable,
-					/obj/item/clothing/accessory/wcoat/black)
+	contains = list(
+		/obj/item/clothing/head/bowler,
+		/obj/item/clothing/head/that,
+		/obj/item/clothing/suit/jacket,
+		/obj/item/clothing/suit/jacket/blue,
+		/obj/item/clothing/suit/jacket/purple,
+		/obj/item/clothing/suit/jacket/black,
+		/obj/item/clothing/suit/jacket/burgundy,
+		/obj/item/clothing/suit/jacket/waistcoat,
+		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/shoes/color/black,
+		/obj/item/clothing/shoes/color/black,
+		/obj/item/clothing/shoes/craftable
+	)
 	name = "Costume - Formalwear"
 	containertype = /obj/structure/closet
 	containername = "formalwear for the best occasions."

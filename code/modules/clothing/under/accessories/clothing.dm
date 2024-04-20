@@ -1,23 +1,3 @@
-/obj/item/clothing/accessory/wcoat
-	name = "waistcoat"
-	desc = "A classy waistcoat."
-	icon = 'icons/clothing/accessories/clothing/vest.dmi'
-
-/obj/item/clothing/accessory/wcoat/black
-	color = COLOR_GRAY15
-
-/obj/item/clothing/accessory/wcoat/armored
-	desc = "A classy waistcoat. This one seems suspiciously more durable."
-	color = COLOR_GRAY15
-	armor = list(
-		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
-		ARMOR_LASER = ARMOR_LASER_SMALL,
-		ARMOR_MELEE = ARMOR_MELEE_SMALL,
-		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
-		)
-	body_parts_covered = SLOT_UPPER_BODY
-	origin_tech = @'{"combat":2,"materials":3,"esoteric":2}'
-
 /obj/item/clothing/accessory/suspenders
 	name = "suspenders"
 	desc = "They suspend the illusion of the mime's play."
@@ -27,21 +7,6 @@
 	name = "suspenders"
 	desc = "They suspend the illusion of the mime's play."
 	icon = 'icons/clothing/accessories/clothing/suspenders.dmi'
-
-/obj/item/clothing/accessory/dashiki
-	name = "black dashiki"
-	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is green and black."
-	icon = 'icons/clothing/accessories/clothing/dashiki.dmi'
-
-/obj/item/clothing/accessory/dashiki/red
-	name = "red dashiki"
-	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is red."
-	icon = 'icons/clothing/accessories/clothing/dashiki_red.dmi'
-
-/obj/item/clothing/accessory/dashiki/blue
-	name = "blue dashiki"
-	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is blue."
-	icon = 'icons/clothing/accessories/clothing/dashiki_blue.dmi'
 
 /obj/item/clothing/accessory/thawb
 	name = "thawb"

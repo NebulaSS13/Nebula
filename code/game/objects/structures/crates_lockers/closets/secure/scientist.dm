@@ -70,7 +70,7 @@
 		/obj/item/backpack/parachute,
 		/obj/item/knife/utility,
 		/obj/item/clothing/under/pilot,
-		/obj/item/clothing/suit/toggle/bomber,
+		/obj/item/clothing/suit/jacket/bomber,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/gloves/color/black,

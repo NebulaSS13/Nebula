@@ -887,8 +887,8 @@
 /area/ministation/hall/n)
 "dN" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
+/obj/item/clothing/suit/jacket/winter,
 /obj/item/clothing/suit/cloak,
 /obj/item/clothing/suit/cloak,
 /turf/floor/wood/walnut,
@@ -1008,7 +1008,7 @@
 /area/ministation/supermatter)
 "ew" = (
 /obj/structure/closet/secure_closet/atmos_personal,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
 /obj/item/clothing/under/hazard,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 10
@@ -2364,9 +2364,9 @@
 /area/ministation/ai_sat)
 "jI" = (
 /obj/structure/closet/secure_closet/cargotech,
-/obj/item/clothing/suit/toggle/wintercoat/cargo,
+/obj/item/clothing/suit/jacket/winter/cargo,
 /obj/item/key/cargo_train,
-/obj/item/clothing/suit/toggle/wintercoat/cargo,
+/obj/item/clothing/suit/jacket/winter/cargo,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "jL" = (
@@ -3049,7 +3049,7 @@
 /area/ministation/ai_sat)
 "mJ" = (
 /obj/structure/closet/secure_closet/atmos_personal,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
 /obj/item/clothing/under/hazard,
 /turf/floor/tiled/techfloor,
 /area/ministation/atmospherics)
@@ -3230,8 +3230,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
+/obj/item/clothing/suit/jacket/winter,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "nw" = (
@@ -4052,7 +4052,7 @@
 	},
 /obj/structure/closet/secure_closet/engineering_chief,
 /obj/item/clothing/under/hazard,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
 /obj/item/telebaton,
 /obj/item/sealant_tank/mapped,
 /obj/item/sealant_tank/mapped,
@@ -4160,8 +4160,8 @@
 	level = 2
 	},
 /obj/structure/closet/jcloset,
-/obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
+/obj/item/clothing/suit/jacket/winter,
 /turf/floor/tiled,
 /area/ministation/janitor)
 "sz" = (
@@ -5011,7 +5011,7 @@
 /obj/structure/closet/secure_closet/quartermaster{
 	req_access = list("ACCESS_MINING")
 	},
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "wo" = (
@@ -6247,8 +6247,8 @@
 /area/ministation/mining)
 "BS" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
+/obj/item/clothing/suit/jacket/winter,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "BV" = (
@@ -7644,7 +7644,7 @@
 /obj/structure/closet/secure_closet/engineering_personal{
 	req_access = list("ACCESS_ENGINEERING")
 	},
-/obj/item/clothing/suit/toggle/wintercoat/engineering,
+/obj/item/clothing/suit/jacket/winter/engineering,
 /obj/item/clothing/under/hazard,
 /obj/item/backpack/dufflebag/eng,
 /obj/item/backpack/dufflebag/eng,
@@ -8988,8 +8988,8 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
+/obj/item/clothing/suit/jacket/winter,
 /obj/item/backpack,
 /obj/item/backpack,
 /obj/item/backpack,
@@ -12803,8 +12803,8 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/item/clothing/suit/toggle/wintercoat,
-/obj/item/clothing/suit/toggle/wintercoat,
+/obj/item/clothing/suit/jacket/winter,
+/obj/item/clothing/suit/jacket/winter,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "Vm" = (

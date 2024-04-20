@@ -25,13 +25,6 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 //Captain
-/obj/item/clothing/suit/captunic/capjacket
-	name = "captain's uniform jacket"
-	desc = "A less formal jacket for everyday captain use."
-	icon = 'icons/clothing/suit/cap_jacket.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-	flags_inv = 0
-
 //Chaplain
 /obj/item/clothing/suit/chaplain_hoodie
 	name = "chaplain hoodie"
@@ -160,52 +153,6 @@
 	name = "green hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is green!"
 	icon = 'icons/clothing/suit/hazard_vest/green.dmi'
-
-//Lawyer
-/obj/item/clothing/suit/toggle/suit
-	name = "suit jacket"
-	desc = "A snappy dress jacket."
-	icon = 'icons/clothing/suit/suit_jacket.dmi'
-	blood_overlay_type = "coat"
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-
-/obj/item/clothing/suit/toggle/suit/blue
-	name = "blue suit jacket"
-	color = "#00326e"
-
-/obj/item/clothing/suit/toggle/suit/purple
-	name = "purple suit jacket"
-	color = "#6c316c"
-
-/obj/item/clothing/suit/toggle/suit/black
-	name = "black suit jacket"
-	color = "#1f1f1f"
-
-//Medical
-/obj/item/clothing/suit/toggle/fr_jacket
-	name = "first responder jacket"
-	desc = "A high-visibility jacket worn by medical first responders."
-	icon = 'icons/clothing/suit/responder_jacket.dmi'
-	blood_overlay_type = "armor"
-	allowed = list(
-		/obj/item/stack/medical,
-		/obj/item/chems/dropper,
-		/obj/item/chems/hypospray,
-		/obj/item/chems/inhaler,
-		/obj/item/chems/syringe,
-		/obj/item/scanner/health,
-		/obj/item/scanner/breath,
-		/obj/item/flashlight,
-		/obj/item/radio,
-		/obj/item/tank/emergency,
-		/obj/item/chems/ivbag
-	)
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-
-/obj/item/clothing/suit/toggle/fr_jacket/ems
-	name = "\improper EMS jacket"
-	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
-	icon = 'icons/clothing/suit/emt_jacket.dmi'
 
 /obj/item/clothing/suit/medical_chest_rig
 	name = "\improper MT chest-rig"

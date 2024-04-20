@@ -15,17 +15,17 @@
 
 /obj/structure/closet/gmcloset/WillContain()
 	return list(
-		/obj/item/clothing/head/that = 2,
-		/obj/item/radio/headset/headset_service = 2,
-		/obj/item/clothing/head/hairflower,
-		/obj/item/clothing/head/hairflower/pink,
-		/obj/item/clothing/head/hairflower/yellow,
-		/obj/item/clothing/head/hairflower/blue,
-		/obj/item/clothing/under/sl_suit = 2,
-		/obj/item/clothing/under/bartender = 2,
-		/obj/item/clothing/under/dress/dress_saloon,
-		/obj/item/clothing/accessory/wcoat/black = 2,
-		/obj/item/clothing/shoes/color/black = 2
+		/obj/item/clothing/head/that                   = 2,
+		/obj/item/radio/headset/headset_service        = 2,
+		/obj/item/clothing/head/hairflower             = 1,
+		/obj/item/clothing/head/hairflower/pink        = 1,
+		/obj/item/clothing/head/hairflower/yellow      = 1,
+		/obj/item/clothing/head/hairflower/blue        = 1,
+		/obj/item/clothing/under/sl_suit               = 2,
+		/obj/item/clothing/under/bartender             = 2,
+		/obj/item/clothing/under/dress/dress_saloon    = 1,
+		/obj/item/clothing/suit/jacket/waistcoat/black = 2,
+		/obj/item/clothing/shoes/color/black           = 2
 	)
 
 /*
@@ -85,9 +85,9 @@
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/suit/toggle/suit/blue,
 		/obj/item/clothing/under/lawyer/purpsuit,
-		/obj/item/clothing/suit/toggle/suit/purple,
+		/obj/item/clothing/suit/jacket/blue,
+		/obj/item/clothing/suit/jacket/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black
 	)

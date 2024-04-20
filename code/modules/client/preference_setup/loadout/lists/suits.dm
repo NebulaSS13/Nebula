@@ -8,31 +8,31 @@
 
 /decl/loadout_option/suit/poncho
 	name = "poncho selection"
-	path = /obj/item/clothing/suit/poncho/classic
+	path = /obj/item/clothing/suit/poncho
 	cost = 1
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/suit/suit_jacket
+/decl/loadout_option/suit/jacket
 	name = "standard suit jackets"
-	path = /obj/item/clothing/suit/toggle/suit
+	path = /obj/item/clothing/suit/jacket
 
-/decl/loadout_option/suit/suit_jacket/get_gear_tweak_options()
+/decl/loadout_option/suit/jacket/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/toggle/suit/black,
-		/obj/item/clothing/suit/toggle/suit/blue,
-		/obj/item/clothing/suit/toggle/suit/purple
+		/obj/item/clothing/suit/jacket/black,
+		/obj/item/clothing/suit/jacket/blue,
+		/obj/item/clothing/suit/jacket/purple
 	)
 
-/decl/loadout_option/suit/custom_suit_jacket
+/decl/loadout_option/suit/custom_jacket
 	name = "suit jacket, colour select"
-	path = /obj/item/clothing/suit/toggle/suit
+	path = /obj/item/clothing/suit/jacket
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/suit/hoodie
 	name = "hoodie, colour select"
-	path = /obj/item/clothing/suit/toggle/hoodie
+	path = /obj/item/clothing/suit/jacket/hoodie
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/suit/coat
@@ -48,14 +48,14 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/toggle/bomber,
-		/obj/item/clothing/suit/leather_jacket,
-		/obj/item/clothing/suit/toggle/brown_jacket
+		/obj/item/clothing/suit/jacket/bomber,
+		/obj/item/clothing/suit/jacket/leather,
+		/obj/item/clothing/suit/jacket/brown
 	)
 
 /decl/loadout_option/suit/wintercoat
 	name = "winter coat"
-	path = /obj/item/clothing/suit/toggle/wintercoat
+	path = /obj/item/clothing/suit/jacket/winter
 
 /decl/loadout_option/suit/track
 	name = "track jacket selection"
@@ -88,7 +88,7 @@
 
 /decl/loadout_option/suit/letterman_custom
 	name = "letterman jacket, colour select"
-	path = /obj/item/clothing/suit/letterman
+	path = /obj/item/clothing/suit/jacket/letterman
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	cost = 1
 

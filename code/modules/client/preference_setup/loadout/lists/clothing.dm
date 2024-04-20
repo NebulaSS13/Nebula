@@ -46,17 +46,17 @@
 
 /decl/loadout_option/clothing/wcoat
 	name = "waistcoat, colour select"
-	path = /obj/item/clothing/accessory/wcoat
+	path = /obj/item/clothing/suit/jacket/waistcoat
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/zhongshan
 	name = "zhongshan jacket, colour select"
-	path = /obj/item/clothing/accessory/toggleable/zhongshan
+	path = /obj/item/clothing/suit/jacket/zhongshan
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/dashiki
 	name = "dashiki selection"
-	path = /obj/item/clothing/accessory/dashiki
+	path = /obj/item/clothing/suit/dashiki
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/clothing/thawb

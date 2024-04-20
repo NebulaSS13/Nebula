@@ -30,7 +30,7 @@
 
 /decl/hierarchy/outfit/job/medical/doctor/emergency_physician
 	name = "Job - Emergency physician"
-	suit = /obj/item/clothing/suit/toggle/fr_jacket
+	suit = /obj/item/clothing/suit/jacket/first_responder
 
 /decl/hierarchy/outfit/job/medical/doctor/surgeon
 	name = "Job - Surgeon"
