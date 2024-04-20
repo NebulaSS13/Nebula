@@ -128,7 +128,8 @@
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/outside/woods)
 "Jz" = (
-/obj/structure/bed,
+/obj/structure/bed/simple/ebony,
+/obj/item/bedsheet/furs,
 /obj/abstract/landmark/start/shaded_hills/forester,
 /turf/floor/wood/ebony,
 /area/shaded_hills/forester_hut)

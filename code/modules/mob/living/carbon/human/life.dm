@@ -45,6 +45,8 @@
 		stamina = clamp(stamina + amt, 0, 100)
 		if(stamina <= 0)
 			to_chat(src, SPAN_WARNING("You are exhausted!"))
+			remove_stressor(/datum/stressor/well_rested)
+			add_stressor(/datum/stressor/fatigued, 5 MINUTES)
 			if(MOVING_QUICKLY(src))
 				set_moving_slowly()
 	if(last_stamina != stamina && istype(hud_used))

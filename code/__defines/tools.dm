@@ -62,6 +62,7 @@
 #define IS_HOE(A)         IS_TOOL(A, TOOL_HOE)
 
 // Structure interaction flags
+#define TOOL_INTERACTION_NONE        0
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)
 #define TOOL_INTERACTION_DECONSTRUCT BITFLAG(1)
 #define TOOL_INTERACTION_WIRING      BITFLAG(2)

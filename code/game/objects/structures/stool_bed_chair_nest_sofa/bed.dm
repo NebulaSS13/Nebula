@@ -10,7 +10,7 @@
  */
 /obj/structure/bed
 	name = "bed"
-	desc = "This is used to lie in, sleep in or strap on."
+	desc = "A raised, padded platform for sleeping on. This one has straps for ensuring restful snoozing in microgravity."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "bed"
 	anchored = TRUE
@@ -23,6 +23,7 @@
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
+	user_comfort = 1
 	var/base_icon = "bed"
 	var/padding_color
 

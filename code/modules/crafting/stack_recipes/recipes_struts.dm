@@ -43,7 +43,7 @@
 /decl/stack_recipe/strut/bed
 	result_type                 = /obj/structure/bed
 	required_integrity          = 50
-	required_min_hardness           = MAT_VALUE_FLEXIBLE + 10
+	required_min_hardness       = MAT_VALUE_FLEXIBLE + 10
 	category                    = "furniture"
 
 /decl/stack_recipe/strut/machine

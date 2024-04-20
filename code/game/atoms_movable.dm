@@ -433,15 +433,18 @@
 
 /atom/movable/proc/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] buckles themselves to \the [src]."),\
-			SPAN_NOTICE("You buckle yourself to \the [src]."),\
-			SPAN_NOTICE("You hear metal clanking."))
+		var/decl/pronouns/G = buckled.get_pronouns()
+		visible_message(
+			SPAN_NOTICE("\The [buckled] buckles [G.him][G.self] to \the [src]."),
+			SPAN_NOTICE("You buckle yourself to \the [src]."),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 	else
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] is buckled to \the [src] by \the [buckling]!"),\
-			SPAN_NOTICE("You are buckled to \the [src] by \the [buckling]!"),\
-			SPAN_NOTICE("You hear metal clanking."))
+		visible_message(
+			SPAN_NOTICE("\The [buckled] is buckled to \the [src] by \the [buckling]!"),
+			SPAN_NOTICE("You are buckled to \the [src] by \the [buckling]!"),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 
 /atom/movable/proc/user_unbuckle_mob(mob/user)
 	var/mob/living/M = unbuckle_mob()
@@ -453,16 +456,19 @@
 	return M
 
 /atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
-	if(buckled != buckling)
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] was unbuckled by \the [buckling]!"),\
-			SPAN_NOTICE("You were unbuckled from \the [src] by \the [buckling]."),\
-			SPAN_NOTICE("You hear metal clanking."))
+	if(buckled == buckling)
+		var/decl/pronouns/G = buckled.get_pronouns()
+		visible_message(
+			SPAN_NOTICE("\The [buckled] unbuckled [G.him][G.self] from \the [src]!"),
+			SPAN_NOTICE("You unbuckle yourself from \the [src]."),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 	else
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] unbuckled themselves!"),\
-			SPAN_NOTICE("You unbuckle yourself from \the [src]."),\
-			SPAN_NOTICE("You hear metal clanking."))
+		visible_message(
+			SPAN_NOTICE("\The [buckled] was unbuckled from \the [src] by \the [buckling]!"),
+			SPAN_NOTICE("You were unbuckled from \the [src] by \the [buckling]."),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return
