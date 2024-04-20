@@ -1,0 +1,6 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Running to exhaustion will now cause a mood stressor.}
+  - {tweak: Sleeping in a bed for thirty seconds will remove exhaustion and add a
+      well rested mood boost.}
+delete-after: true
