@@ -123,7 +123,7 @@
 		else
 			if(ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			UnarmedAttack(A, 1)
+			UnarmedAttack(A, TRUE)
 
 		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
@@ -144,7 +144,7 @@
 			else
 				if(ismob(A)) // No instant mob attacking
 					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-				UnarmedAttack(A, 1)
+				UnarmedAttack(A, TRUE)
 
 			trigger_aiming(TARGET_CAN_CLICK)
 			return
@@ -191,7 +191,7 @@
 		to_chat(src, "You cannot attack people before the game has started.")
 		return TRUE
 
-	if(stat || try_maneuver(A))
+	if(stat || try_maneuver(A) || !proximity_flag)
 		return TRUE
 
 	// Handle any prepared ability/spell/power invocations.

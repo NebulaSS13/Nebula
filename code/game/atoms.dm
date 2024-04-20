@@ -919,7 +919,7 @@
 	var/atom/cur_atom = src
 	while (cur_atom && !(cur_atom in container.contents))
 		if (isarea(cur_atom))
-			return
+			return -1
 		if(cur_atom.loc?.storage)
 			.++
 		cur_atom = cur_atom.loc
@@ -933,7 +933,7 @@
 	var/atom/cur_atom = src
 	while (cur_atom && !isturf(cur_atom))
 		if (isarea(cur_atom))
-			return
+			return -1
 		if(cur_atom.loc?.storage)
 			.++
 		cur_atom = cur_atom.loc
