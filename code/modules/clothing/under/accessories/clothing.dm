@@ -8,16 +8,6 @@
 	desc = "They suspend the illusion of the mime's play."
 	icon = 'icons/clothing/accessories/clothing/suspenders.dmi'
 
-/obj/item/clothing/accessory/thawb
-	name = "thawb"
-	desc = "A white, ankle-length robe designed to be cool in hot climates."
-	icon = 'icons/clothing/accessories/clothing/thawb.dmi'
-
-/obj/item/clothing/accessory/sherwani
-	name = "sherwani"
-	desc = "A long, coat-like frock with fancy embroidery on the cuffs and collar."
-	icon = 'icons/clothing/accessories/clothing/sherwani.dmi'
-
 /obj/item/clothing/accessory/tangzhuang
 	name = "tangzhuang jacket"
 	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."
