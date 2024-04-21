@@ -163,6 +163,7 @@
 	name = "Shaded Hills - Downlands"
 	level_id = "shaded_hills_downlands"
 	level_generators = list(
+		/datum/random_map/noise/shaded_hills/woods,
 		/datum/random_map/noise/forage/shaded_hills/grassland
 	)
 	connected_levels = list(
