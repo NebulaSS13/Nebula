@@ -83,7 +83,7 @@
 	if(istype(loc, /obj/structure/wall_sconce))
 		loc.update_icon()
 
-	if(!no_message)
+	if(!no_message && user)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] lights \the [src]."),
 			SPAN_NOTICE("You light \the [src].")
