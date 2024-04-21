@@ -45,7 +45,7 @@
 
 	//Calculate damage
 	var/aforce = W.force
-	if(W.damtype == BRUTE || W.damtype == BURN)
+	if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
 		current_health -= aforce
 
 	//Play a fitting sound

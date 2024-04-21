@@ -130,7 +130,7 @@
 		// The closer we are to impact site, the longer it takes for shield to come back up.
 		S.fail(-(-range + get_dist(src, S)) * 2)
 
-/obj/effect/shield/proc/take_damage(var/damage, var/damtype, var/hitby)
+/obj/effect/shield/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
 	if(!gen)
 		qdel(src)
 		return
@@ -144,20 +144,20 @@
 	impact_effect(round(abs(damage * 2)))
 
 	var/list/field_segments = gen.field_segments
-	switch(gen.take_shield_damage(damage, damtype))
+	switch(gen.take_shield_damage(damage, damage_type))
 		if(SHIELD_ABSORBED)
 			return
 		if(SHIELD_BREACHED_MINOR)
-			fail_adjacent_segments(rand(1, 3), hitby)
+			fail_adjacent_segments(rand(1, 3), inflicter)
 			return
 		if(SHIELD_BREACHED_MAJOR)
-			fail_adjacent_segments(rand(2, 5), hitby)
+			fail_adjacent_segments(rand(2, 5), inflicter)
 			return
 		if(SHIELD_BREACHED_CRITICAL)
-			fail_adjacent_segments(rand(4, 8), hitby)
+			fail_adjacent_segments(rand(4, 8), inflicter)
 			return
 		if(SHIELD_BREACHED_FAILURE)
-			fail_adjacent_segments(rand(8, 16), hitby)
+			fail_adjacent_segments(rand(8, 16), inflicter)
 			for(var/obj/effect/shield/S in field_segments)
 				S.fail(1)
 			return
@@ -199,9 +199,9 @@
 
 // Projectiles
 /obj/effect/shield/bullet_act(var/obj/item/projectile/proj)
-	if(proj.damage_type == BURN)
+	if(proj.atom_damage_type == BURN)
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_HEAT)
-	else if (proj.damage_type == BRUTE)
+	else if (proj.atom_damage_type == BRUTE)
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_PHYSICAL)
 	else
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_EM)
@@ -213,9 +213,9 @@
 
 	if(gen.check_flag(MODEFLAG_HYPERKINETIC))
 		user.visible_message("<span class='danger'>\The [user] [pick(I.attack_verb)] \the [src] with \the [I]!</span>")
-		if(I.damtype == BURN)
+		if(I.atom_damage_type == BURN)
 			take_damage(I.force, SHIELD_DAMTYPE_HEAT)
-		else if (I.damtype == BRUTE)
+		else if (I.atom_damage_type == BRUTE)
 			take_damage(I.force, SHIELD_DAMTYPE_PHYSICAL)
 		else
 			take_damage(I.force, SHIELD_DAMTYPE_EM)
@@ -236,7 +236,7 @@
 
 
 /obj/effect/shield/proc/overcharge_shock(var/mob/living/M)
-	M.take_damage(BURN, rand(20, 40))
+	M.take_damage(rand(20, 40), BURN)
 	SET_STATUS_MAX(M, STAT_WEAK, 5)
 	to_chat(M, "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyses you!</span>")
 	take_damage(10, SHIELD_DAMTYPE_EM)
@@ -301,8 +301,8 @@
 /obj/effect/meteor/shield_impact(var/obj/effect/shield/S)
 	if(!S.gen.check_flag(MODEFLAG_HYPERKINETIC))
 		return
-	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, src)
-	visible_message("<span class='danger'>\The [src] breaks into dust!</span>")
+	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, inflicter = src)
+	visible_message(SPAN_DANGER("\The [src] breaks into dust!"))
 	make_debris()
 	qdel(src)
 

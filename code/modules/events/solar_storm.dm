@@ -44,7 +44,7 @@
 		if(L.increaseBodyTemp(temp_incr))
 			continue
 
-		L.take_damage(BURN, fire_loss)
+		L.take_damage(fire_loss, BURN)
 
 /datum/event/solar_storm/end()
 	command_announcement.Announce("The solar storm has passed the [location_name()]. It is now safe to resume EVA activities. ", "[location_name()] Sensor Array", zlevels = affecting_z)

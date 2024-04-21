@@ -77,9 +77,10 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
-/obj/structure/window/take_damage(damage = 0)
+/obj/structure/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
 	. = ..()
-	playsound(loc, "glasscrack", 100, 1)
+	if(. && damage_type == BRUTE)
+		playsound(loc, "glasscrack", 100, 1)
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -100,7 +101,7 @@
 	var/proj_damage = Proj.get_structure_damage()
 	if(!proj_damage) return
 	..()
-	take_damage(proj_damage)
+	take_damage(proj_damage, Proj.atom_damage_type)
 
 /obj/structure/window/explosion_act(severity)
 	..()
@@ -250,7 +251,7 @@
 			set_anchored(0)
 	else if (!istype(W, /obj/item/paint_sprayer))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
 			user.do_attack_animation(src)
 			hit(W.force)
 			if(current_health <= 7)
@@ -568,7 +569,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/obj/structure/window/reinforced/crescent/take_damage()
+/obj/structure/window/reinforced/crescent/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
 	return
 
 /obj/structure/window/reinforced/crescent/shatter()

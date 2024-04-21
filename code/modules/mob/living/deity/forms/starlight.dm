@@ -43,5 +43,5 @@
 	charge = max(5, charge/100)
 	if(prob(charge))
 		to_chat(user, "<span class='danger'>Your body burns!</span>")
-	user.take_damage(BURN, charge)
+	user.take_damage(charge, BURN)
 	return 1

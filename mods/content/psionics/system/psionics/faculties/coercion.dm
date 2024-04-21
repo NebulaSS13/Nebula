@@ -186,7 +186,7 @@
 			to_chat(user,   SPAN_WARNING("\The [target] resists your glamour, writhing in your grip. You hurriedly release them before too much damage is done, but the psyche is left tattered. They should have no memory of this encounter, at least."))
 			to_chat(target, SPAN_DANGER("You resist \the [user], struggling free of their influence at the cost of your own mind!"))
 			to_chat(target, SPAN_DANGER("You fall into darkness, losing all memory of the encounter..."))
-			target.take_damage(BRAIN, rand(25,40))
+			target.take_damage(rand(25,40), BRAIN)
 			SET_STATUS_MAX(target, STAT_PARA, 10 SECONDS)
 
 		return TRUE

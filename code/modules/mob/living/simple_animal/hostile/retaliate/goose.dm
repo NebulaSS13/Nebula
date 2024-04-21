@@ -25,7 +25,7 @@
 	gender = PLURAL
 	attack_verb = list("smacked around")
 	force = 0
-	damtype = BRUTE
+	atom_damage_type =  BRUTE
 	canremove = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/goose/Retaliate()

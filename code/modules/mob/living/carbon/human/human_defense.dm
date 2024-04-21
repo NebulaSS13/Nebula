@@ -163,7 +163,7 @@ meteor_act
 	if(!affecting)
 		return 0
 
-	var/blocked = get_blocked_ratio(hit_zone, I.damtype, I.damage_flags(), I.armor_penetration, I.force)
+	var/blocked = get_blocked_ratio(hit_zone, I.atom_damage_type, I.damage_flags(), I.armor_penetration, I.force)
 	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
 		effective_force *= 0.66 //reduced effective force...
@@ -180,7 +180,7 @@ meteor_act
 		forcesay(global.hit_appends)	//forcesay checks stat already
 		radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8) //getting beat on can briefly prevent radio use
 
-	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
+	if((I.atom_damage_type == BRUTE || I.atom_damage_type == PAIN) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
 				//Harder to score a stun but if you do it lasts a bit longer
@@ -203,7 +203,7 @@ meteor_act
 	return 1
 
 /mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/attacker, var/effective_force, var/hit_zone)
-	if(W.damtype != BRUTE)
+	if(W.atom_damage_type != BRUTE)
 		return
 
 	if(!should_have_organ(BP_HEART))
@@ -245,7 +245,7 @@ meteor_act
 				bloody_body(src)
 
 /mob/living/carbon/human/proc/projectile_hit_bloody(obj/item/projectile/P, var/effective_force, var/hit_zone, var/obj/item/organ/external/organ)
-	if(P.damage_type != BRUTE || P.nodamage)
+	if(P.atom_damage_type != BRUTE || P.nodamage)
 		return
 	if(!(P.sharp || prob(effective_force*4)))
 		return
@@ -264,7 +264,7 @@ meteor_act
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
 	if(!organ || organ.is_dislocated() || !(organ.limb_flags & ORGAN_FLAG_CAN_DISLOCATE) || blocked >= 100)
 		return 0
-	if(W.damtype != BRUTE)
+	if(W.atom_damage_type != BRUTE)
 		return 0
 
 	//want the dislocation chance to be such that the limb is expected to dislocate after dealing a fraction of the damage needed to break the limb

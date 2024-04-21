@@ -155,7 +155,7 @@
 	if(IS_SCREWDRIVER(W) || IS_CROWBAR(W) || IS_WRENCH(W))
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
 	else
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
 			hit(W.force)
 			if(current_health <= 7)
 				anchored = FALSE
@@ -184,7 +184,7 @@
 		var/aforce = I.force
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<span class='danger'>\The [src] was hit by \the [I].</span>")
-		if(I.damtype == BRUTE || I.damtype == BURN)
+		if(I.atom_damage_type == BRUTE || I.atom_damage_type == BURN)
 			take_damage(aforce)
 		return
 
@@ -219,7 +219,7 @@
 	material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/item/holo
-	damtype = PAIN
+	atom_damage_type =  PAIN
 	no_attack_log = 1
 	max_health = ITEM_HEALTH_NO_DAMAGE
 

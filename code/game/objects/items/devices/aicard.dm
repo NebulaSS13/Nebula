@@ -57,7 +57,7 @@
 			flush = 1
 			to_chat(carded_ai, "Your core files are being wiped!")
 			while (carded_ai && carded_ai.stat != DEAD)
-				carded_ai.take_damage(OXY, 2)
+				carded_ai.take_damage(2, OXY)
 				sleep(10)
 			flush = 0
 	if (href_list["radio"])

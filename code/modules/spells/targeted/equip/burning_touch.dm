@@ -18,7 +18,7 @@
 	icon = 'icons/mob/screen/grabs.dmi'
 	icon_state = "grabbed+1"
 	force = 10
-	damtype = BURN
+	atom_damage_type =  BURN
 	simulated = 0
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/burn_power = 0

@@ -46,11 +46,11 @@
 
 /obj/item/natural_weapon/goatking/fire
 	name = "burning horns"
-	damtype = BURN
+	atom_damage_type =  BURN
 
 /obj/item/natural_weapon/goatking/lightning
 	name = "lightning horns"
-	damtype = ELECTROCUTE
+	atom_damage_type =  ELECTROCUTE
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2
 	name = "emperor of goats"

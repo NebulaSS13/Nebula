@@ -23,24 +23,14 @@
 		return FALSE
 
 	switch(damagetype)
-		if(BRUTE)
-			take_damage(BRUTE, damage)
 		if(BURN)
 			if(MUTATION_COLD_RESISTANCE in mutations)
 				return
-			take_damage(BURN, damage)
-		if(TOX)
-			take_damage(TOX, damage)
-		if(OXY)
-			take_damage(OXY, damage)
-		if(CLONE)
-			take_damage(CLONE, damage)
-		if(PAIN)
-			take_damage(PAIN, damage)
+			take_damage(damage, BURN)
 		if(ELECTROCUTE)
 			electrocute_act(damage, used_weapon, 1, def_zone)
-		if(IRRADIATE)
-			take_damage(IRRADIATE, damage)
+		else
+			take_damage(damage, damagetype)
 	return TRUE
 
 /mob/living/apply_radiation(var/damage = 0)
@@ -69,7 +59,7 @@
 		if(PARALYZE)
 			SET_STATUS_MAX(src, STAT_PARA, effect * blocked_mult(blocked))
 		if(PAIN)
-			take_damage(PAIN, effect * blocked_mult(blocked))
+			take_damage(effect * blocked_mult(blocked), PAIN)
 		if(STUTTER)
 			if(status_flags & CANSTUN) // stun is usually associated with stutter - TODO CANSTUTTER flag?
 				SET_STATUS_MAX(src, STAT_STUTTER, effect * blocked_mult(blocked))

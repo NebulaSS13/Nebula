@@ -24,7 +24,7 @@
 				var/mob/living/carbon/human/H = L
 				H.vessel.remove_any(10)
 			else
-				L.take_damage(BRUTE, 10)
+				L.take_damage(10)
 			to_chat(L, "<span class='danger'>You feel your lifeforce being ripping out of your body!</span>")
 
 			//Do effect

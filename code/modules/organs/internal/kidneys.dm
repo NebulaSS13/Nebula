@@ -21,9 +21,9 @@
 	// what else kidneys can process in our reagent list.
 	if(REAGENT_VOLUME(owner.reagents, /decl/material/liquid/drink/coffee))
 		if(is_bruised())
-			owner.take_damage(TOX, 0.1)
+			owner.take_damage(0.1, TOX)
 		else if(is_broken())
-			owner.take_damage(TOX, 0.3)
+			owner.take_damage(0.3, TOX)
 
 	if(is_bruised())
 		if(prob(5) && REAGENT_VOLUME(reagents, /decl/material/solid/potassium) < 5)
@@ -36,8 +36,8 @@
 	if(!GET_CHEMICAL_EFFECT(owner, CE_ANTITOX))
 		if(prob(33))
 			if(is_broken())
-				owner.take_damage(TOX, 0.5)
+				owner.take_damage(0.5, TOX)
 			if(status & ORGAN_DEAD)
-				owner.take_damage(TOX, 1)
+				owner.take_damage(1, TOX)
 
 

@@ -22,7 +22,7 @@
 	if(material.radioactivity>0 && isliving(hit_atom))
 		var/mob/living/M = hit_atom
 		var/urgh = material.radioactivity
-		M.take_damage(TOX, rand(urgh/2,urgh))
+		M.take_damage(rand(urgh/2,urgh), TOX)
 
 /obj/item/star/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()

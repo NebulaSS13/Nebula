@@ -188,7 +188,7 @@ default behaviour is:
 	set hidden = 1
 	var/current_max_health = get_max_health()
 	if (current_health < (current_max_health/2)) // Health below half of maxhealth.
-		take_damage(BRAIN, current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
+		take_damage(current_max_health * 2) // Deal 2x health in BrainLoss damage, BRAIN, as before but variable.
 		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
 /mob/living/proc/update_body(var/update_icons=1)
@@ -283,8 +283,8 @@ default behaviour is:
 /mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
 	if(status_flags & GODMODE)
 		return
-	take_damage(BRUTE, brute, do_update_health = FALSE)
-	take_damage(BURN, burn)
+	take_damage(brute, do_update_health = FALSE)
+	take_damage(burn, BURN)
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
@@ -294,8 +294,8 @@ default behaviour is:
 // damage MANY external organs, in random order
 /mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
 	if(status_flags & GODMODE)	return 0	//godmode
-	take_damage(BRUTE, brute, do_update_health = FALSE)
-	take_damage(BURN, burn)
+	take_damage(brute, do_update_health = FALSE)
+	take_damage(burn, BURN)
 
 /mob/living/proc/restore_all_organs()
 	return
@@ -781,7 +781,7 @@ default behaviour is:
 		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
 		SET_STATUS_MAX(src, STAT_PARA, rand(8,16))
 		set_status(STAT_JITTER, rand(150,200))
-		take_damage(PAIN, rand(50,60))
+		take_damage(rand(50, 60), PAIN)
 
 /mob/living/proc/get_digestion_product()
 	return null
@@ -873,7 +873,7 @@ default behaviour is:
 		if (!should_have_organ(BP_HEART))
 			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
-			take_damage(BRUTE, 1)
+			take_damage(1)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
 
 /mob/living/CanUseTopicPhysical(mob/user)
@@ -1036,7 +1036,7 @@ default behaviour is:
 				A.alert_on_fall(src)
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
-	take_damage(BRUTE, rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))) * get_fall_height())
+	take_damage(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))) * get_fall_height())
 
 /mob/living/proc/get_toxin_resistance()
 	var/decl/species/species = get_species()

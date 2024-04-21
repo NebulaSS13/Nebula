@@ -82,7 +82,7 @@
 		owner.emote(/decl/emote/audible/scream)
 
 	// Your head asplode.
-	owner.take_damage(BRAIN, value)
+	owner.take_damage(value, BRAIN)
 	if(ishuman(owner))
 		var/mob/living/carbon/human/pop = owner
 		if(pop.should_have_organ(BP_BRAIN))

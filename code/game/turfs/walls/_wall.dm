@@ -116,9 +116,9 @@ var/global/list/wall_fullblend_objects = list(
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
 
 	if(reinf_material)
-		if(Proj.damage_type == BURN)
+		if(Proj.atom_damage_type == BURN)
 			proj_damage /= reinf_material.burn_armor
-		else if(Proj.damage_type == BRUTE)
+		else if(Proj.atom_damage_type == BRUTE)
 			proj_damage /= reinf_material.brute_armor
 
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
@@ -182,9 +182,9 @@ var/global/list/wall_fullblend_objects = list(
 	F.icon_state = "wall_thermite"
 	visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
 
-/turf/wall/proc/take_damage(dam)
-	if(dam)
-		damage = max(0, damage + dam)
+/turf/wall/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+	if(damage)
+		src.damage = max(0, src.damage + damage)
 		update_damage()
 
 /turf/wall/proc/update_damage()

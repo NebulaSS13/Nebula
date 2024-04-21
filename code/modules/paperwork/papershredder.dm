@@ -52,14 +52,14 @@
 	var/decl/material/M = I.material
 	if(M.hardness > MAT_VALUE_FLEXIBLE && M.hardness < MAT_VALUE_RIGID)
 		audible_message(SPAN_WARNING("You hear a loud mechanical grinding!"))
-		take_damage(1, BRUTE, TRUE)
+		take_damage(1, silent = TRUE)
 		spark_at(get_turf(src), 1, FALSE, src)
 		. = TRUE
 
 	else if(M.hardness >= MAT_VALUE_RIGID)
 		audible_message(SPAN_DANGER("You hear rattling and then a loud bang!"))
 		use_power_oneoff(200)
-		take_damage(25, BRUTE, TRUE)
+		take_damage(25, silent = TRUE)
 		set_broken(TRUE, MACHINE_BROKEN_GENERIC)
 		. = FALSE
 

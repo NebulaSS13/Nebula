@@ -50,7 +50,7 @@
 		if(TT.target_zone == BP_EYES && !(BP_EYES in M.get_covered_body_parts()))
 			M.apply_damage(1, BRUTE, BP_EYES, 0, src, 0)
 			M.apply_effects(2, 0, 0, 0, 1, 0, 15)
-	take_damage(TT.speed * w_class, BRUTE)
+	take_damage(TT.speed * w_class)
 
 /obj/item/paper_plane/attack_self(mob/user)
 	if(user.a_intent == I_HURT)

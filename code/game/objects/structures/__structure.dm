@@ -121,7 +121,7 @@
 	set waitfor = FALSE
 	return FALSE
 
-/obj/structure/proc/take_damage(var/damage)
+/obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
 	if(current_health == -1) // This object does not take damage.
 		return
 
@@ -271,7 +271,7 @@
 	return TRUE
 
 /obj/structure/bullet_act(var/obj/item/projectile/Proj)
-	if(take_damage(Proj.get_structure_damage()))
+	if(take_damage(Proj.get_structure_damage(), Proj.atom_damage_type))
 		return PROJECTILE_CONTINUE
 
 /*

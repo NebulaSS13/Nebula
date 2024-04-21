@@ -126,7 +126,7 @@
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
-	damtype = BURN
+	atom_damage_type =  BURN
 	force = 10
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	pickup_sound = 'sound/foley/pickup2.ogg'
@@ -163,7 +163,7 @@
 	desc = "A true extension of the surgeon's body, this marvel combines several medical tools into one modular package."
 	sharp = 1
 	edge = 1
-	damtype = BURN
+	atom_damage_type =  BURN
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel_manager_on"
 	force = 7

@@ -1001,7 +1001,7 @@
 		if(M.current_health == 1)
 			M.gib()
 		else
-			M.take_damage(BRUTE, min(99, M.current_health - 1))
+			M.take_damage(min(99, M.current_health - 1))
 			SET_STATUS_MAX(M, STAT_STUN, 20)
 			SET_STATUS_MAX(M, STAT_WEAK, 20)
 			M.set_status(STAT_STUTTER, 20)

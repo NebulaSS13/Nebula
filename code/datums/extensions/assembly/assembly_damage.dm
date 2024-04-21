@@ -15,7 +15,7 @@
 	H.physically_destroyed()
 	qdel(src)
 
-/datum/extension/assembly/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)
+/datum/extension/assembly/proc/take_assembly_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)
 	//if(!modifiable)
 	//	return
 
@@ -38,20 +38,20 @@
 // Stronger explosions cause serious damage to internal components
 // Minor explosions are mostly mitigitated by casing.
 /datum/extension/assembly/proc/ex_act(var/severity)
-	take_damage(rand(100,200) / severity, 30 / severity)
+	take_assembly_damage(rand(100,200) / severity, 30 / severity)
 
 // EMPs are similar to explosions, but don't cause physical damage to the casing. Instead they screw up the components
 /datum/extension/assembly/proc/emp_act(var/severity)
-	take_damage(rand(100,200) / severity, 50 / severity, 0)
+	take_assembly_damage(rand(100,200) / severity, 50 / severity, 0)
 
 // "Stun" weapons can cause minor damage to components (short-circuits?)
 // "Burn" damage is equally strong against internal components and exterior casing
 // "Brute" damage mostly damages the casing.
 /datum/extension/assembly/proc/bullet_act(var/obj/item/projectile/Proj)
-	switch(Proj.damage_type)
+	switch(Proj.atom_damage_type)
 		if(BRUTE)
-			take_damage(Proj.damage, Proj.damage / 2)
+			take_assembly_damage(Proj.damage, Proj.damage / 2)
 		if(PAIN)
-			take_damage(Proj.damage, Proj.damage / 3, 0)
+			take_assembly_damage(Proj.damage, Proj.damage / 3, 0)
 		if(BURN)
-			take_damage(Proj.damage, Proj.damage / 1.5)
+			take_assembly_damage(Proj.damage, Proj.damage / 1.5)

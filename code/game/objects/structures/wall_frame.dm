@@ -136,7 +136,7 @@
 /obj/structure/wall_frame/bullet_act(var/obj/item/projectile/Proj)
 	var/proj_damage = Proj.get_structure_damage()
 	var/damage = min(proj_damage, 100)
-	take_damage(damage)
+	take_damage(damage, Proj.atom_damage_type)
 	return
 
 /obj/structure/wall_frame/hitby(AM, var/datum/thrownthing/TT)

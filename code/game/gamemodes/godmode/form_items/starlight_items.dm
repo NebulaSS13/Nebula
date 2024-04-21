@@ -108,7 +108,7 @@
 			new /obj/effect/temporary(get_turf(target),3, 'icons/effects/effects.dmi', "fire_goon")
 			charge--
 	else
-		user.take_damage(BURN, 5)
+		user.take_damage(5, BURN)
 		if(prob(5))
 			to_chat(user, "<span class='warning'>\The [src] appears to be out of power!</span>")
 		new /obj/effect/temporary(get_turf(user),3, 'icons/effects/effects.dmi', "fire_goon")
@@ -126,7 +126,7 @@
 /obj/item/sword/blazing
 	name = "blazing blade"
 	icon = 'icons/obj/items/weapon/swords/flaming.dmi'
-	damtype = BURN
+	atom_damage_type =  BURN
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	var/last_near_structure = 0
 	var/mob/living/deity/linked

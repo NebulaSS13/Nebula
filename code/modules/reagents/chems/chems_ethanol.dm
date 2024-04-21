@@ -38,7 +38,7 @@
 
 /decl/material/liquid/ethanol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.take_damage(TOX, removed * 2 * alcohol_toxicity)
+	M.take_damage(removed * 2 * alcohol_toxicity, TOX)
 	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 
 /decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -450,7 +450,7 @@
 
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose > 30)
-		M.take_damage(TOX, 2 * removed)
+		M.take_damage(2 * removed, TOX)
 	if(dose > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)

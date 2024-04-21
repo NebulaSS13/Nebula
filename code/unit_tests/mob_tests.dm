@@ -137,7 +137,7 @@ var/global/default_mobloc = null
 
 /datum/unit_test/mob_damage/start_test()
 	var/list/test = create_test_mob_with_mind(get_safe_turf(), mob_type)
-	var/damage_amount = 4	// Do not raise, if damage >= 5 there is a % chance to reduce damage by half in /obj/item/organ/external/take_damage()
+	var/damage_amount = 4	// Do not raise, if damage >= 5 there is a % chance to reduce damage by half in /obj/item/organ/external/take_organ_damage()
 							// Which makes checks impossible.
 
 	if(isnull(test))

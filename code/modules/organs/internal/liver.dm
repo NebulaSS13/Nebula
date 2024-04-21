@@ -50,7 +50,7 @@
 	// If you're not filtering well, you're in trouble. Ammonia buildup to toxic levels and damage from alcohol
 	if(filter_effect < 2)
 		if(alco)
-			owner.take_damage(TOX, 0.5 * max(2 - filter_effect, 0) * (alcotox + 0.5 * alco))
+			owner.take_damage(0.5 * max(2 - filter_effect, TOX, 0) * (alcotox + 0.5 * alco))
 
 	if(alcotox)
 		take_internal_damage(alcotox, prob(90)) // Chance to warn them

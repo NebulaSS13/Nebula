@@ -25,5 +25,5 @@
 	ADJ_STATUS(H, STAT_CONFUSE, 2)
 	ADJ_STATUS(H, STAT_DIZZY, 2)
 	if(H.hallucination_power > 50)
-		H.take_damage(BRAIN, 5)
+		H.take_damage(5, BRAIN)
 		to_chat(H, "<span class='danger'>You feel your mind tearing apart!</span>")

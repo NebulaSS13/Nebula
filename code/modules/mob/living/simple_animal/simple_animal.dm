@@ -285,15 +285,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	if(bodytemperature < minbodytemp)
 		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 2)
-		take_damage(BURN, cold_damage_per_tick)
+		take_damage(cold_damage_per_tick, BURN)
 	else if(bodytemperature > maxbodytemp)
 		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 1)
-		take_damage(BURN, heat_damage_per_tick)
+		take_damage(heat_damage_per_tick, BURN)
 	else
 		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 0)
 
 	if(!atmos_suitable)
-		take_damage(BRUTE, unsuitable_atmos_damage)
+		take_damage(unsuitable_atmos_damage)
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
@@ -318,11 +318,11 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		return
 
 	var/damage = Proj.damage
-	if(Proj.damtype == STUN)
+	if(Proj.atom_damage_type == STUN)
 		damage = Proj.damage / 6
-	if(Proj.damtype == BRUTE)
+	if(Proj.atom_damage_type == BRUTE)
 		damage = Proj.damage / 2
-	if(Proj.damtype == BURN)
+	if(Proj.atom_damage_type == BURN)
 		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
@@ -331,7 +331,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	bullet_impact_visuals(Proj)
-	take_damage(BRUTE, damage)
+	take_damage(damage)
 	Proj.on_hit(src)
 	return 0
 
@@ -364,7 +364,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				harm_verb = pick(attack.attack_verb)
 				if(attack.sharp || attack.edge)
 					adjustBleedTicks(dealt_damage)
-		take_damage(BRUTE, dealt_damage)
+		take_damage(dealt_damage)
 		user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
 		user.do_attack_animation(src)
 		return TRUE
@@ -396,14 +396,14 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		return 0
 
 	var/damage = O.force
-	if (O.damtype == PAIN)
+	if (O.atom_damage_type == PAIN)
 		damage = 0
-	if (O.damtype == STUN)
+	if (O.atom_damage_type == STUN)
 		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
 		purge = 3
-	take_damage(BRUTE, damage)
+	take_damage(damage)
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)
 
@@ -496,7 +496,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/handle_bleeding()
 	bleed_ticks--
-	take_damage(BRUTE, 1)
+	take_damage(1)
 	blood_splatter(get_turf(src), src, FALSE)
 
 /mob/living/simple_animal/get_digestion_product()

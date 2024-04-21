@@ -119,5 +119,5 @@
 		return H
 	else if(isliving(target_mob))
 		var/mob/living/L = target_mob
-		L.take_damage(BRUTE, damage)
+		L.take_damage(damage)
 		return L

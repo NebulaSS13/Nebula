@@ -81,7 +81,7 @@
 		stance = COMMANDED_HEAL
 		return 0
 	src.visible_message("\The [src] glows green for a moment, healing \the [target_mob]'s wounds.")
-	take_damage(BRUTE, 3)
+	take_damage(3)
 	target_mob.heal_damage(BRUTE, 5, do_update_health = FALSE)
 	target_mob.heal_damage(BURN, 5)
 

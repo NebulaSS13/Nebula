@@ -242,7 +242,7 @@ var/global/list/closets = list()
 	var/proj_damage = Proj.get_structure_damage()
 	if(proj_damage)
 		..()
-		take_damage(proj_damage)
+		take_damage(proj_damage, Proj.atom_damage_type)
 
 /obj/structure/closet/attackby(obj/item/W, mob/user)
 

@@ -65,10 +65,10 @@
 /obj/item/flashlight/flare/proc/update_damage()
 	if(on)
 		force = on_damage
-		damtype = BURN
+		atom_damage_type = BURN
 	else
 		force = initial(force)
-		damtype = initial(damtype)
+		atom_damage_type = initial(atom_damage_type)
 
 /obj/item/flashlight/flare/on_update_icon()
 	var/nofuel = fuel <= 0

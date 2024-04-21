@@ -146,9 +146,9 @@
 	//Only 3 types of damage concern mechs and vehicles
 	switch(damagetype)
 		if(BRUTE)
-			take_damage(BRUTE, damage, target)
+			take_damage(damage, inflicter = target)
 		if(BURN)
-			take_damage(BURN, damage, target)
+			take_damage(damage, BURN, inflicter = target)
 		if(IRRADIATE)
 			for(var/mob/living/pilot in pilots)
 				pilot.apply_damage(damage, IRRADIATE, def_zone, damage_flags, used_weapon)

@@ -76,7 +76,7 @@
 	if(lit || !has_fuel(_fuel_spend_amt))
 		return FALSE
 	lit = TRUE
-	damtype = BURN
+	atom_damage_type =  BURN
 	update_force()
 
 	update_icon()
@@ -116,7 +116,7 @@
 	if(!lit)
 		return FALSE
 	lit = FALSE
-	damtype = BRUTE
+	atom_damage_type =  BRUTE
 	update_force()
 
 	update_icon()

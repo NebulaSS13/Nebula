@@ -134,11 +134,11 @@
 
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj.nodamage)
-		switch(Proj.damage_type)
+		switch(Proj.atom_damage_type)
 			if(BRUTE)
-				take_damage(BRUTE, Proj.damage)
+				take_damage(Proj.damage)
 			if(BURN)
-				take_damage(BURN, Proj.damage)
+				take_damage(Proj.damage, BURN)
 	Proj.on_hit(src,100) //wow this is a terrible hack
 	return 100
 

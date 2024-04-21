@@ -50,7 +50,7 @@
 		"<span class='danger'>You hit \the [src] with \the [W]!</span>",
 		"<span class='danger'>You hear something breaking!</span>"
 		)
-	take_damage(W.force)
+	take_damage(W.force, W.atom_damage_type)
 
 /obj/structure/deity/physically_destroyed(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
@@ -62,7 +62,7 @@
 	. = ..()
 
 /obj/structure/deity/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.damage)
+	take_damage(P.damage, P.atom_damage_type)
 
 /obj/structure/deity/proc/attack_deity(var/mob/living/deity/deity)
 	return

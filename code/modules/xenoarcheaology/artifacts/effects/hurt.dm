@@ -25,7 +25,7 @@
 			to_chat(M, SPAN_DANGER("A wave of painful energy strikes you!"))
 		var/force = amount * weakness
 		M.apply_damages(force, force, force, force)
-		M.take_damage(BRAIN, 0.1 * weakness)
+		M.take_damage(0.1 * weakness, BRAIN)
 		if(strong)
 			M.apply_radiation(25 * weakness)
 			M.set_nutrition(min(50 * weakness, M.nutrition))

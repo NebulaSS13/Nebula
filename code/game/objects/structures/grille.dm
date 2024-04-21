@@ -130,7 +130,7 @@
 
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
 	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
-	switch(Proj.damage_type)
+	switch(Proj.atom_damage_type)
 		if(BRUTE)
 			//bullets
 			if(Proj.original == src || prob(20))
@@ -148,9 +148,9 @@
 
 	if(passthrough)
 		. = PROJECTILE_CONTINUE
-		damage = clamp(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
+		damage = clamp(0, (damage - Proj.damage)*(Proj.atom_damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
-	take_damage(damage*0.2)
+	take_damage(damage*0.2, Proj.atom_damage_type)
 
 /obj/structure/grille/proc/cut_grille()
 	playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -209,7 +209,7 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-		switch(W.damtype)
+		switch(W.atom_damage_type)
 			if(BURN)
 				take_damage(W.force)
 			if(BRUTE)
@@ -252,7 +252,7 @@
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!destroyed)
 		if(exposed_temperature > material.temperature_damage_threshold)
-			take_damage(1)
+			take_damage(1, BURN)
 	..()
 
 // Used in mapping to avoid

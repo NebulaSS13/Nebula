@@ -485,7 +485,7 @@
 	interact(user)
 
 /obj/item/electronic_assembly/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.damage)
+	take_damage(P.damage, P.atom_damage_type)
 
 /obj/item/electronic_assembly/emp_act(severity)
 	. = ..()
