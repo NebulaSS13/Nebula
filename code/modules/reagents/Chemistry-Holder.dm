@@ -300,6 +300,9 @@ var/global/obj/temp_reagents_holder = new
 /* Holder-to-holder and similar procs */
 /datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
 
+	if(amount <= 0)
+		return 0
+
 	if(amount >= total_volume)
 		. = total_volume
 		clear_reagents()
