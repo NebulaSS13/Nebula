@@ -119,7 +119,7 @@
 			new /obj/item/clothing/gloves/color/white(src)
 			new /obj/item/clothing/mask/gas/mime(src)
 			new /obj/item/clothing/head/beret(src)
-			new /obj/item/clothing/accessory/suspenders(src)
+			new /obj/item/clothing/suspenders(src)
 			new /obj/item/pen/crayon/mime(src)
 		if(96)
 			new /obj/item/vampiric(src)

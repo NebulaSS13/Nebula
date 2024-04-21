@@ -78,7 +78,7 @@
 	origin_tech = @'{"materials":3,"engineering":2,"combat":2}'
 
 //Arm guards
-/obj/item/clothing/accessory/armguards
+/obj/item/clothing/gloves/armguards
 	name = "arm guards"
 	desc = "A pair of black arm pads reinforced with armor plating. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/armguards.dmi'
@@ -93,20 +93,23 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
-	accessory_slot = ACCESSORY_SLOT_ARMOR_A
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
+	accessory_slot = ACCESSORY_SLOT_ARMOR_A
+	slot_flags = SLOT_TIE | SLOT_HANDS
+	accessory_slot = ACCESSORY_SLOT_DECOR
+	accessory_removable = TRUE
 
-/obj/item/clothing/accessory/armguards/craftable
+/obj/item/clothing/gloves/armguards/craftable
 	material_armor_multiplier = 1
 	matter = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 //Leg guards
-/obj/item/clothing/accessory/legguards
+/obj/item/clothing/shoes/legguards
 	name = "leg guards"
 	desc = "A pair of armored leg pads in black. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/legguards.dmi'
@@ -121,14 +124,17 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
-	accessory_slot = ACCESSORY_SLOT_ARMOR_L
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
+	accessory_slot = ACCESSORY_SLOT_ARMOR_L
+	slot_flags = SLOT_TIE | SLOT_FEET
+	accessory_slot = ACCESSORY_SLOT_DECOR
+	accessory_removable = TRUE
 
-/obj/item/clothing/accessory/legguards/craftable
+/obj/item/clothing/shoes/legguards/craftable
 	material_armor_multiplier = 1
 	matter = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME

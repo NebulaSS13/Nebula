@@ -37,11 +37,11 @@
 
 /decl/loadout_option/clothing/suspenders
 	name = "suspenders"
-	path = /obj/item/clothing/accessory/suspenders
+	path = /obj/item/clothing/suspenders
 
 /decl/loadout_option/clothing/suspenders/colorable
 	name = "suspenders, colour select"
-	path = /obj/item/clothing/accessory/suspenders/colorable
+	path = /obj/item/clothing/suspenders/colorable
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/wcoat

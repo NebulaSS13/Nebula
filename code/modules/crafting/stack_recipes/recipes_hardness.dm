@@ -7,10 +7,10 @@
 	category          = "improvised armor"
 
 /decl/stack_recipe/hardness/improvised_armour/armguards
-	result_type       = /obj/item/clothing/accessory/armguards/craftable
+	result_type       = /obj/item/clothing/gloves/armguards/craftable
 
 /decl/stack_recipe/hardness/improvised_armour/legguards
-	result_type       = /obj/item/clothing/accessory/legguards/craftable
+	result_type       = /obj/item/clothing/shoes/legguards/craftable
 
 /decl/stack_recipe/hardness/improvised_armour/gauntlets
 	result_type       = /obj/item/clothing/gloves/thick/craftable

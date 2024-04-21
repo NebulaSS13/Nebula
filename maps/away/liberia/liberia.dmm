@@ -700,7 +700,7 @@
 /obj/item/clothing/mask/balaclava,
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/glasses/tacgoggles,
-/obj/item/clothing/accessory/legguards,
+/obj/item/clothing/shoes/legguards,
 /obj/item/clothing/under/syndicate,
 /turf/floor/tiled/dark/monotile,
 /area/liberia/mule)

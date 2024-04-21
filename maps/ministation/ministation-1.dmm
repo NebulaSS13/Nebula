@@ -2935,8 +2935,8 @@
 "oG" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/accessory/armguards/riot,
-/obj/item/clothing/accessory/legguards/riot,
+/obj/item/clothing/gloves/armguards/riot,
+/obj/item/clothing/shoes/legguards/riot,
 /obj/item/clothing/head/helmet/riot,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
@@ -7021,8 +7021,8 @@
 	autoset_access = 0
 	},
 /obj/item/clothing/head/helmet/ablative,
-/obj/item/clothing/accessory/legguards/ablative,
-/obj/item/clothing/accessory/armguards/ablative,
+/obj/item/clothing/shoes/legguards/ablative,
+/obj/item/clothing/gloves/armguards/ablative,
 /obj/item/clothing/suit/armor/laserproof,
 /turf/floor/tiled/dark,
 /area/ministation/security)
