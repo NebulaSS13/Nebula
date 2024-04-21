@@ -30,7 +30,7 @@
 
 /decl/loadout_option/clothing/vest
 	name = "suit vest, colour select"
-	path = /obj/item/clothing/accessory/toggleable
+	path = /obj/item/clothing/suit/jacket/vest
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/suspenders

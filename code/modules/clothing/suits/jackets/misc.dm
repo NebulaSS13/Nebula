@@ -31,3 +31,12 @@
 	name = "captain's uniform jacket"
 	desc = "A less formal jacket for everyday captain use."
 	icon = 'icons/clothing/suit/jackets/captain.dmi'
+
+/obj/item/clothing/suit/jacket/vest
+	name = "vest"
+	desc = "A slick suit vest."
+	icon = 'icons/clothing/accessories/clothing/vest.dmi'
+
+/obj/item/clothing/suit/jacket/vest/black
+	name = "black vest"
+	color = COLOR_GRAY15

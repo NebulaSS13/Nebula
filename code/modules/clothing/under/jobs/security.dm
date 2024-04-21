@@ -96,7 +96,7 @@
 	icon = 'icons/clothing/under/uniform_detective_3.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/neck/tie/long/red,
-		/obj/item/clothing/accessory/toggleable/black_vest
+		/obj/item/clothing/suit/jacket/vest/black
 	)
 
 /obj/item/clothing/head/det
