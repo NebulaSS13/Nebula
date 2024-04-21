@@ -4,12 +4,10 @@
 /decl/loadout_option/clothing
 	category = /decl/loadout_category/clothing
 	abstract_type = /decl/loadout_option/clothing
-	slot = slot_tie_str
 
 /decl/loadout_option/clothing/flannel
 	name = "flannel (colorable)"
 	path = /obj/item/clothing/shirt/flannel
-	slot = slot_tie_str
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/scarf

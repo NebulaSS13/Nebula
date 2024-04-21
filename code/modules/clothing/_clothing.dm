@@ -25,12 +25,18 @@
 	var/markings_state_modifier	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
 	var/should_display_id = TRUE
+	var/fallback_slot
 
 /obj/item/clothing/Initialize()
 
 	. = ..()
 
-	accessory_hide_on_states = get_initial_accessory_hide_on_states()
+	if(accessory_slot)
+		if(isnull(accessory_removable))
+			accessory_removable = TRUE
+		if(isnull(fallback_slot))
+			fallback_slot = slot_tie_str
+		accessory_hide_on_states = get_initial_accessory_hide_on_states()
 
 	if(starting_accessories)
 		for(var/T in starting_accessories)
@@ -46,6 +52,9 @@
 	if(is_accessory())
 		on_removed()
 	return ..()
+
+/obj/item/clothing/get_fallback_slot(slot)
+	return fallback_slot
 
 /obj/item/clothing/get_stored_inventory()
 	. = ..()

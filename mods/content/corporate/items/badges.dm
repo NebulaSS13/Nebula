@@ -24,4 +24,4 @@
 
 /obj/item/clothing/badge/holo/NT/cord
 	icon = 'mods/content/corporate/icons/clothing/accessories/holobadge_cord.dmi'
-	slot_flags = SLOT_FACE | SLOT_TIE
+	slot_flags = SLOT_FACE

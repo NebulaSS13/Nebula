@@ -12,11 +12,8 @@
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	fallback_slot = slot_gloves_str
 	var/obj/item/clothing/ring/covering_ring
-
-/obj/item/clothing/gloves/get_fallback_slot(slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_gloves_str
 
 /obj/item/clothing/gloves/get_associated_equipment_slots()
 	. = ..()

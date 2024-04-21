@@ -4,9 +4,8 @@
 	icon = 'icons/clothing/suit/rough_robe.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	slot_flags = SLOT_OVER_BODY | SLOT_TIE
+	slot_flags = SLOT_OVER_BODY
 	accessory_slot = ACCESSORY_SLOT_DECOR
-	accessory_removable = TRUE
 
 /obj/item/clothing/suit/robe/thawb
 	name = "thawb"

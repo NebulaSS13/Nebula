@@ -47,7 +47,10 @@
 		return TRUE
 
 	if(slot == slot_tie_str)
-		var/obj/item/clothing/uniform = get_equipped_item(slot_w_uniform_str)
+		var/try_equip_slot = W.get_fallback_slot()
+		if(!try_equip_slot || try_equip_slot == slot_tie_str)
+			try_equip_slot = slot_w_uniform_str
+		var/obj/item/clothing/uniform = get_equipped_item(try_equip_slot)
 		if(istype(uniform))
 			uniform.try_attach_accessory(W, src)
 		return TRUE

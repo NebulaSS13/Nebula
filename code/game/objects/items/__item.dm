@@ -9,8 +9,10 @@
 	var/randpixel = 6
 	var/material_health_multiplier = 0.2
 	var/hitsound
-	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
-	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
+	/// This is used to determine on which slots an item can fit.
+	var/slot_flags = SLOT_NONE      
+	/// If it's an item we don't want to log attack_logs with, set this to TRUE
+	var/no_attack_log = 0
 	var/obj/item/master = null
 	var/origin_tech                    //Used by R&D to determine what research bonuses it grants.
 	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"

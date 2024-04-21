@@ -73,8 +73,9 @@ var/global/list/icon_state_cache = list()
 	var/useicon   = get_icon_for_bodytype(bodytype)
 	var/use_state = "[bodytype]-[slot][state_modifier]"
 
+	var/is_not_held_slot = !(slot in global.all_hand_slots)
 	if(bodytype != BODYTYPE_HUMANOID && !check_state_in_icon(use_state, useicon) && use_fallback_if_icon_missing)
-		var/fallback = get_fallback_slot(slot)
+		var/fallback = is_not_held_slot && get_fallback_slot(slot)
 		if(fallback && fallback != slot && check_state_in_icon("[bodytype]-[fallback][state_modifier]", useicon))
 			slot = fallback
 		else
@@ -86,7 +87,7 @@ var/global/list/icon_state_cache = list()
 		use_state = "[bodytype]-[global.bodypart_to_slot_lookup_table[slot]][state_modifier]"
 
 	if(!check_state_in_icon(use_state, useicon))
-		var/fallback = use_fallback_if_icon_missing && get_fallback_slot(slot)
+		var/fallback = use_fallback_if_icon_missing && is_not_held_slot && get_fallback_slot(slot)
 		if(!fallback)
 			return new /image
 		slot = fallback

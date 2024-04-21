@@ -4,12 +4,7 @@
 	icon = 'icons/clothing/accessories/medals/medal_bronze.dmi'
 	w_class = ITEM_SIZE_SMALL
 	accessory_slot = ACCESSORY_SLOT_MEDAL
-	slot_flags = SLOT_UPPER_BODY | SLOT_TIE
-	accessory_removable = TRUE
-
-/obj/item/clothing/medal/get_fallback_slot(var/slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_tie_str
+	slot_flags = SLOT_UPPER_BODY
 
 /obj/item/clothing/medal/bronze
 	name = "bronze medal"

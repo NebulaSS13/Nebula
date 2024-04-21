@@ -1,6 +1,6 @@
 /obj/item/clothing
 	var/accessory_slot
-	var/accessory_removable = FALSE
+	var/accessory_removable
 	/// if it should appear on examine without detailed view
 	var/accessory_high_visibility
 	/// used when an accessory is meant to slow the wearer down when attached to clothing

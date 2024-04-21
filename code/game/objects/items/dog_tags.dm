@@ -3,7 +3,7 @@
 	desc = "Plain identification tags made from a durable metal. They are stamped with a variety of informational details."
 	gender = PLURAL
 	icon = 'icons/clothing/accessories/jewelry/dogtags.dmi'
-	slot_flags = SLOT_FACE | SLOT_TIE
+	slot_flags = SLOT_FACE
 	badge_string = null
 	material = /decl/material/solid/metal/stainlesssteel
 	var/owner_rank

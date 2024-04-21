@@ -33,20 +33,19 @@ var/global/list/string_part_flags = list(
 
 // Strings which corraspond to slot flags, useful for outputting what slot something is.
 var/global/list/string_slot_flags = list(
-	"back" =     SLOT_BACK,
-	"face" =     SLOT_FACE,
-	"waist" =    SLOT_LOWER_BODY,
-	"tail" =     SLOT_TAIL,
-	"ID slot" =  SLOT_ID,
-	"ears" =     SLOT_EARS,
-	"eyes" =     SLOT_EYES,
-	"hands" =    SLOT_HANDS,
-	"head" =     SLOT_HEAD,
-	"feet" =     SLOT_FEET,
-	"exo slot" = SLOT_OVER_BODY,
-	"body" =     SLOT_UPPER_BODY,
-	"uniform" =  SLOT_TIE,
-	"holster" =  SLOT_HOLSTER
+	"back"      = SLOT_BACK,
+	"face"      = SLOT_FACE,
+	"waist"     = SLOT_LOWER_BODY,
+	"tail"      = SLOT_TAIL,
+	"ID slot"   = SLOT_ID,
+	"ears"      = SLOT_EARS,
+	"eyes"      = SLOT_EYES,
+	"hands"     = SLOT_HANDS,
+	"head"      = SLOT_HEAD,
+	"feet"      = SLOT_FEET,
+	"exo slot"  = SLOT_OVER_BODY,
+	"body"      = SLOT_UPPER_BODY,
+	"holster"   = SLOT_HOLSTER
 )
 
 //////////////////////////

@@ -9,19 +9,12 @@
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_OVER)
+	fallback_slot = slot_wear_suit_str
 	var/protects_against_weather = FALSE
 	var/fire_resist = T0C+100
 
-/obj/item/clothing/suit/get_fallback_slot(var/slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_wear_suit_str
-
 /obj/item/clothing/suit/gives_weather_protection()
 	return protects_against_weather
-
-/obj/item/clothing/suit/get_fallback_slot(var/slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_wear_suit_str
 
 /obj/item/clothing/suit/get_associated_equipment_slots()
 	. = ..()

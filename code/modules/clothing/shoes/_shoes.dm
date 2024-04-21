@@ -14,6 +14,7 @@
 	blood_overlay_type = "shoeblood"
 	material = /decl/material/solid/organic/leather
 	origin_tech = @'{"materials":1,"engineering":1}'
+	fallback_slot = slot_shoes_str
 
 	var/can_fit_under_magboots = TRUE
 	var/can_add_cuffs = TRUE
@@ -29,10 +30,6 @@
 	var/footstep_range_mod  = 1
 	/// A modifier applied to move delay when walking on snow.
 	var/snow_slowdown_mod   = 0
-
-/obj/item/clothing/shoes/get_fallback_slot(slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_shoes_str
 
 /obj/item/clothing/shoes/Destroy()
 	. = ..()
