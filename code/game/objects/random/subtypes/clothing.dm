@@ -186,8 +186,8 @@
 		/obj/item/clothing/webbing/holster/hip =    1,
 		/obj/item/clothing/webbing/holster/waist =  1,
 		/obj/item/clothing/webbing/holster/armpit = 1,
-		/obj/item/clothing/accessory/kneepads =               3,
-		/obj/item/clothing/neck/stethoscope =                  2
+		/obj/item/clothing/shoes/kneepads =         3,
+		/obj/item/clothing/neck/stethoscope =       2
 	)
 	return spawnable_choices
 

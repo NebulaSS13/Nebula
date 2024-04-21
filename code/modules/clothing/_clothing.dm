@@ -382,7 +382,3 @@
 	var/obj/item/clothing/U = target
 	U.set_sensors(user)
 
-/obj/item/clothing/get_alt_interactions(var/mob/user)
-	. = ..()
-	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)
-
