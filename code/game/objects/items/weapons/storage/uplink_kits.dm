@@ -71,9 +71,9 @@
 			/obj/item/clothing/gloves/chameleon,
 			/obj/item/clothing/glasses/chameleon,
 			/obj/item/radio/headset/chameleon,
-			/obj/item/clothing/accessory/chameleon,
-			/obj/item/clothing/accessory/chameleon,
-			/obj/item/clothing/accessory/chameleon
+			/obj/item/clothing/chameleon,
+			/obj/item/clothing/chameleon,
+			/obj/item/clothing/chameleon
 		)
 
 // Clerical uplink kit
