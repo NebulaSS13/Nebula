@@ -59,7 +59,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "an" = (
-/obj/item/clothing/accessory/medal/silver/marooned_medal{
+/obj/item/clothing/medal/silver/marooned_medal{
 	desc = "A heart-shaped bronze medal. Has Magnitka flag at top part and engraved name - H. Warda.";
 	name = "\improper Magnitka medal"
 	},

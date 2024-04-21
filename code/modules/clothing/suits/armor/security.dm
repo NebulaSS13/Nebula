@@ -6,7 +6,7 @@
 
 /obj/item/clothing/suit/armor/pcarrier/detective
 	color = COLOR_DARK_GREEN_GRAY
-	starting_accessories = list(/obj/item/clothing/accessory/armor/plate, /obj/item/clothing/accessory/badge)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate, /obj/item/clothing/badge)
 
 /obj/item/clothing/suit/armor/pcarrier/tactical
 	name = "tactical plate carrier"

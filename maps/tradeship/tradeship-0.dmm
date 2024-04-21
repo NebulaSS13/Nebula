@@ -2166,7 +2166,7 @@
 	dir = 4
 	},
 /obj/structure/closet/crate,
-/obj/item/clothing/accessory/medal/gold,
+/obj/item/clothing/medal/gold,
 /obj/item/clothing/accessory/locket,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/floor,

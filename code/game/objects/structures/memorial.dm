@@ -13,8 +13,8 @@
 	var/list/fallen = list()
 
 /obj/structure/memorial/attackby(var/obj/D, var/mob/user)
-	if(istype(D, /obj/item/clothing/accessory/badge/tags))
-		var/obj/item/clothing/accessory/badge/tags/T = D
+	if(istype(D, /obj/item/clothing/badge/tags))
+		var/obj/item/clothing/badge/tags/T = D
 		to_chat(user, "<span class='warning'>You add \the [T.owner_name]'s \the [T] to \the [src].</span>")
 		fallen += "[T.owner_rank] [T.owner_name] | [T.owner_branch]"
 		qdel(T)

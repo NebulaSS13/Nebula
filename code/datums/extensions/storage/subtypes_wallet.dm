@@ -33,8 +33,8 @@
 		/obj/item/paicard,
 		/obj/item/stamp,
 		/obj/item/key,
-		/obj/item/clothing/accessory/badge,
-		/obj/item/clothing/accessory/medal,
+		/obj/item/clothing/badge,
+		/obj/item/clothing/medal,
 		/obj/item/clothing/accessory/armor/tag,
 	)
 

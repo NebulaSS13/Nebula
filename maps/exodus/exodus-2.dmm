@@ -4472,9 +4472,9 @@
 	pixel_x = 4;
 	pixel_y = -28
 	},
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo/cord,
+/obj/item/clothing/badge/holo,
+/obj/item/clothing/badge/holo,
+/obj/item/clothing/badge/holo/cord,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
