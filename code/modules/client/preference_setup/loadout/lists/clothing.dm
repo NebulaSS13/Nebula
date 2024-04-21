@@ -78,5 +78,5 @@
 
 /decl/loadout_option/clothing/tangzhuang
 	name = "tangzhuang jacket, colour select"
-	path = /obj/item/clothing/accessory/tangzhuang
+	path = /obj/item/clothing/suit/jacket/tangzhuang
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
