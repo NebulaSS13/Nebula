@@ -34,6 +34,7 @@
 	liquid_name = "water"
 	solid_name = "snow"
 	gas_name = "steam"
+	codex_name = null
 	uid = "solid_snow"
 	hardness = MAT_VALUE_MALLEABLE
 	dug_drop_type = /obj/item/stack/material/ore/handful
@@ -161,7 +162,7 @@
 // DISPLAY_NAME is needed because of compounds with white spaces in their names
 #define DECLARE_HYDRATE_DNAME_PATH(PATH, NAME, DISPLAY_NAME)               \
 /decl/material/solid/ice/hydrate/##NAME/uid = "solid_hydrate_" + #NAME;    \
-/decl/material/solid/ice/hydrate/##NAME/name = #DISPLAY_NAME + " hydrate"; \
+/decl/material/solid/ice/hydrate/##NAME/name = DISPLAY_NAME + " hydrate"; \
 /decl/material/solid/ice/hydrate/##NAME/heating_products = list(           \
 	PATH = 0.1,                                                            \
 	/decl/material/liquid/water = 0.9                                      \
