@@ -1,4 +1,4 @@
-/obj/item/clothing/accessory/jerkin
+/obj/item/clothing/shirt/jerkin
 	name = "jerkin"
 	desc = "A sturdy jerkin, worn on the upper body."
 	icon = 'mods/species/fantasy/icons/clothing/jerkin.dmi'

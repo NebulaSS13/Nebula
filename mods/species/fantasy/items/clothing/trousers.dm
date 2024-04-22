@@ -10,7 +10,7 @@
 
 /obj/item/clothing/pants/trousers/jerkin/Initialize()
 	. = ..()
-	var/obj/item/clothing/accessory/jerkin/jerkin = new
+	var/obj/item/clothing/shirt/jerkin/jerkin = new
 	attach_accessory(null, jerkin)
 	if(!(jerkin in accessories))
 		qdel(jerkin)
