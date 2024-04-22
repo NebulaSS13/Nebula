@@ -26,7 +26,7 @@
 
 /decl/loadout_option/clothing/fantasy/uniform/jerkin
 	name = "jerkin"
-	path = /obj/item/clothing/accessory/jerkin
+	path = /obj/item/clothing/shirt/jerkin
 	slot = slot_tie_str
 
 /decl/loadout_option/clothing/fantasy/uniform/tunic
