@@ -695,7 +695,7 @@
 	},
 /obj/effect/floor_decal/corner/brown/half,
 /obj/item/belt/holster/security/tactical,
-/obj/item/clothing/accessory/armor/plate/tactical,
+/obj/item/clothing/armor_attachment/plate/tactical,
 /obj/item/clothing/mask/balaclava,
 /obj/item/clothing/mask/balaclava,
 /obj/item/clothing/gloves/insulated,

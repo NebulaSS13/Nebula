@@ -1,17 +1,17 @@
 /obj/item/clothing/suit/armor/vest/heavy/warden
-	starting_accessories = list(/obj/item/clothing/webbing/pouches, /obj/item/clothing/accessory/armor/tag)
+	starting_accessories = list(/obj/item/clothing/webbing/pouches, /obj/item/clothing/armor_attachment/tag)
 
 /obj/item/clothing/suit/armor/vest/heavy/hos
-	starting_accessories = list(/obj/item/clothing/webbing/pouches, /obj/item/clothing/accessory/armor/tag/hos)
+	starting_accessories = list(/obj/item/clothing/webbing/pouches, /obj/item/clothing/armor_attachment/tag/hos)
 
 /obj/item/clothing/suit/armor/pcarrier/detective
 	color = COLOR_DARK_GREEN_GRAY
-	starting_accessories = list(/obj/item/clothing/accessory/armor/plate, /obj/item/clothing/badge)
+	starting_accessories = list(/obj/item/clothing/armor_attachment/plate, /obj/item/clothing/badge)
 
 /obj/item/clothing/suit/armor/pcarrier/tactical
 	name = "tactical plate carrier"
 	color = COLOR_TAN
-	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/tactical, /obj/item/clothing/webbing/pouches/large/tan)
+	starting_accessories = list(/obj/item/clothing/armor_attachment/plate/tactical, /obj/item/clothing/webbing/pouches/large/tan)
 
 /obj/item/clothing/suit/armor/warden
 	name = "warden's jacket"

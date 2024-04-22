@@ -13,16 +13,16 @@
 
 /datum/fabricator_recipe/textiles/armor/plate
 	category = "Armor - Insert plates"
-	path = /obj/item/clothing/accessory/armor/plate
+	path = /obj/item/clothing/armor_attachment/plate
 
 /datum/fabricator_recipe/textiles/armor/plate/medium
-	path = /obj/item/clothing/accessory/armor/plate/medium
+	path = /obj/item/clothing/armor_attachment/plate/medium
 
 /datum/fabricator_recipe/textiles/armor/plate/tactical
-	path = /obj/item/clothing/accessory/armor/plate/tactical
+	path = /obj/item/clothing/armor_attachment/plate/tactical
 
 /datum/fabricator_recipe/textiles/armor/plate/merc
-	path = /obj/item/clothing/accessory/armor/plate/merc
+	path = /obj/item/clothing/armor_attachment/plate/merc
 
 // Limb armor attachments
 
