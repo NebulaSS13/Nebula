@@ -3,7 +3,10 @@
 	desc = "Certifiable skills."
 
 /decl/codex_category/skills/Populate()
-	for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
+	var/list/available_skill_types = global.using_map.get_available_skill_types()
+	for(var/decl/hierarchy/skill/skill in decls_repository.get_decls_of_subtype_unassociated(/decl/hierarchy/skill))
+		if(INSTANCE_IS_ABSTRACT(skill))
+			continue
 		var/list/skill_info = list()
 		if(skill.prerequisites)
 			var/list/reqs = list()
@@ -18,5 +21,7 @@
 			_lore_text = skill.desc,
 			_mechanics_text = jointext(skill_info, "<br>"),
 		)
+		if(!(skill.type in available_skill_types))
+			entry.unsearchable = TRUE
 		items |= entry.name
 	. = ..()
