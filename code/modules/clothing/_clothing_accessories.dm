@@ -10,15 +10,19 @@
 /obj/item/clothing/proc/get_initial_accessory_hide_on_states()
 	return null
 
-/obj/item/clothing/proc/can_attach_accessory(obj/item/clothing/accessory)
-	if(valid_accessory_slots && istype(accessory) && !isnull(accessory.accessory_slot) && (accessory.accessory_slot in valid_accessory_slots))
-		. = 1
-	else
-		return 0
+/obj/item/clothing/proc/can_attach_accessory(obj/item/clothing/accessory, mob/user)
+	if(!length(valid_accessory_slots))
+		to_chat(user, SPAN_WARNING("You cannot attach accessories of any kind to \the [src]."))
+		return FALSE
+	if(!istype(accessory) || isnull(accessory.accessory_slot) || !(accessory.accessory_slot in valid_accessory_slots))
+		to_chat(user, SPAN_WARNING("You cannot attach accessories of this kind to \the [src]."))
+		return FALSE
 	if(LAZYLEN(accessories) && restricted_accessory_slots && (accessory.accessory_slot in restricted_accessory_slots))
 		for(var/obj/item/clothing/other_accessory in accessories)
 			if (other_accessory.accessory_slot == accessory.accessory_slot)
-				return 0
+				to_chat(user, SPAN_WARNING("You cannot attach more accessories of this kind to \the [src]."))
+				return FALSE
+	return TRUE
 
 // Override for action buttons.
 /obj/item/clothing/attack_self(mob/user)
@@ -43,20 +47,16 @@
 	return ..()
 
 /obj/item/clothing/attackby(var/obj/item/I, var/mob/user)
+
 	if(istype(I, /obj/item/clothing))
 
 		var/obj/item/clothing/accessory = I
 		if(!isnull(accessory.accessory_slot))
-
-			if(!valid_accessory_slots || !valid_accessory_slots.len)
-				to_chat(usr, SPAN_WARNING("You cannot attach accessories of any kind to \the [src]."))
-				return TRUE
-
-			if(can_attach_accessory(accessory))
+			if(can_attach_accessory(accessory, user))
 				if(user.try_unequip(accessory))
 					attach_accessory(user, accessory)
 			else
-				to_chat(user, SPAN_WARNING("You cannot attach more accessories of this type to [src]."))
+				to_chat(user, SPAN_WARNING("You cannot attach \the [I] to \the [src]."))
 			return TRUE
 
 	if(length(accessories))
