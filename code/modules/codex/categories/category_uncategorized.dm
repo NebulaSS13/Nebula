@@ -1,6 +1,6 @@
 /decl/codex_category/uncategorized
 	name = "Uncategorized"
-	desc = "A collection uncategorized entries."
+	desc = "A collection of uncategorized entries."
 	defer_population = TRUE
 
 /decl/codex_category/uncategorized/Populate()
