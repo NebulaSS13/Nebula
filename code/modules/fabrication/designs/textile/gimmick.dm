@@ -127,16 +127,16 @@
 	path = /obj/item/clothing/head/santahat
 
 /datum/fabricator_recipe/textiles/gimmick/cape
-	path = /obj/item/clothing/accessory/shouldercape
+	path = /obj/item/clothing/suit/shouldercape
 
 /datum/fabricator_recipe/textiles/gimmick/capegrunt
-	path = /obj/item/clothing/accessory/shouldercape
+	path = /obj/item/clothing/suit/shouldercape
 
 /datum/fabricator_recipe/textiles/gimmick/capeofficer
-	path = /obj/item/clothing/accessory/shouldercape/officer
+	path = /obj/item/clothing/suit/shouldercape/officer
 
 /datum/fabricator_recipe/textiles/gimmick/capecommand
-	path = /obj/item/clothing/accessory/shouldercape/command
+	path = /obj/item/clothing/suit/shouldercape/command
 
 /datum/fabricator_recipe/textiles/gimmick/capegeneral
-	path = /obj/item/clothing/accessory/shouldercape/general
+	path = /obj/item/clothing/suit/shouldercape/general
