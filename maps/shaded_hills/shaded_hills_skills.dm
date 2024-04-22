@@ -7,13 +7,13 @@
 /decl/hierarchy/skill/crafting/carpentry
 	name = "Carpentry"
 	uid =  "skill_crafting_carpentry"
-	desc = "This skill describes your skill with woodworking."
+	desc = "Your ability to construct and repair objects and structures made out of wood, and use woodworking tools."
 	levels = list(
-		"Unskilled"   = "Placeholder.",
-		"Basic"       = "Placeholder.",
-		"Trained"     = "Placeholder.",
-		"Experienced" = "Placeholder.",
-		"Master"      = "Placeholder."
+		"Unskilled"   = "You can use an axe to split wood and cut it into planks, but your splits and cuts are often wasteful and uneven. You can nail pieces of wood together.",
+		"Basic"       = "You've whittled a few things out of wood before, and maybe even done a small construction project or two. You're more effective at using tools like hatchets, knives, and hammers for woodworking.",
+		"Trained"     = "You've received some degree of formal instruction or apprenticeship in woodworking, or have a lot of hands-on practice with woodcraft. Your cuts are cleaner, your whittling is quicker, and your joinery is sturdier.",
+		"Experienced" = "You have a plethora of professional carpentry experience, either as a trade or from running a farmstead or business. You could likely train an apprentice of your own in carpentry.",
+		"Master"      = "Few can match your experience with woodcraft. You fit tight joinery, carve intricate items, and prepare raw material with precision and speed. Trees dream of being worked by your hands."
 	)
 
 /decl/hierarchy/skill/crafting/stonemasonry
