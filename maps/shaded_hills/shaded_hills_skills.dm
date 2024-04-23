@@ -31,13 +31,13 @@
 /decl/hierarchy/skill/crafting/metalwork
 	name = "Metalwork"
 	uid =  "skill_crafting_metalwork"
-	desc = "This skill describes your skill with shaping, forging and casting metal."
+	desc = "Your ability to shape, forge, and cast metal into various decorative or useful objects."
 	levels = list(
-		"Unskilled"   = "Placeholder.",
-		"Basic"       = "Placeholder.",
-		"Trained"     = "Placeholder.",
-		"Experienced" = "Placeholder.",
-		"Master"      = "Placeholder."
+		"Unskilled"   = "You know that a smith uses an anvil and hammer, that metal has to be hot to be worked, and that metal becomes a liquid when heated enough. You've likely never done anything like that yourself, though, and if you have it wasn't very good.",
+		"Basic"       = "You've got some experience working with metals. You know how to keep a workpiece steady enough on the anvil to strike it with a hammer, but you're not sure how to do anything more complex with an anvil. You can pour hot metal into a warmed mould without much splattering.",
+		"Trained"     = "You know the basics of smithing as a trade, like drawing, punching, and bending, and you can crack a cast item out of a mould without breaking it or the mould as often. You know what fuels burn hot enough to melt certain metals, and what metals go into certain alloys.",
+		"Experienced" = "You are either a professional smith or farrier, or someone who works extensively with metal as part of another trade. You have the knowledge necessary to supervise and instruct an untrained apprentice to avoid basic mistakes. You may know about more complex or niche alloys, or have experience working expensive or rare metals.",
+		"Master"      = "To you, metal may as well be putty in your hands and under your hammer. You're able to get many casts from one mould, make and fill moulds of detailed objects, and forge intricate projects all on your own. With enough time, you could train someone enough to become a professional smith of their own."
 	)
 
 /decl/hierarchy/skill/crafting/artifice
@@ -109,6 +109,9 @@
 // METALWORK OVERRIDES
 /decl/material/solid/metal
 	crafting_skill = /decl/hierarchy/skill/crafting/metalwork
+
+/obj/item/chems/mould
+	work_skill = /decl/hierarchy/skill/crafting/metalwork
 
 // CARPENTRY OVERRIDES
 /decl/material/solid/organic/wood
