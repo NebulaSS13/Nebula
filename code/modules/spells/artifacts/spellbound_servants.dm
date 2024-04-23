@@ -173,7 +173,7 @@
 
 /datum/spellbound_type/servant/infiltrator/equip_servant(var/mob/living/carbon/human/H)
 	if(H.gender == MALE)
-		equipment = list(/obj/item/clothing/under/lawyer/infil = slot_w_uniform_str,
+		equipment = list(/obj/item/clothing/pants/slacks/outfit/tie = slot_w_uniform_str,
 						/obj/item/clothing/shoes/dress/infilshoes = slot_shoes_str)
 		spells += /spell/toggle_armor/infiltrator
 	else

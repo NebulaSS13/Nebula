@@ -28,6 +28,7 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/shirt/ubac,
 		/obj/item/clothing/shirt/ubac/blue,
 		/obj/item/clothing/shirt/ubac/tan,
@@ -45,20 +46,12 @@
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/under/sl_suit,
-		/obj/item/clothing/under/formal,
 		/obj/item/clothing/under/lawyer/blue,
-		/obj/item/clothing/under/formal/burgundy,
-		/obj/item/clothing/under/formal/charcoal,
-		/obj/item/clothing/under/formal/checkered,
-		/obj/item/clothing/under/formal/tie,
 		/obj/item/clothing/under/gentlesuit,
-		/obj/item/clothing/under/formal/navy,
 		/obj/item/clothing/under/lawyer/oldman,
 		/obj/item/clothing/under/lawyer/purpsuit,
-		/obj/item/clothing/under/formal/red,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer,
-		/obj/item/clothing/under/formal/tan,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit,
 		/obj/item/clothing/under/internalaffairs/plain,

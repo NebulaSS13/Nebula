@@ -290,15 +290,15 @@
 
 /obj/structure/closet/wardrobe/suit/WillContain()
 	return list(
-		/obj/item/clothing/under/formal/charcoal,
-		/obj/item/clothing/under/formal/navy,
-		/obj/item/clothing/under/formal/burgundy,
-		/obj/item/clothing/under/formal/checkered,
-		/obj/item/clothing/under/formal/tan,
-		/obj/item/clothing/under/formal/red,
+		/obj/item/clothing/pants/slacks,
+		/obj/item/clothing/pants/slacks/outfit/tie,
+		/obj/item/clothing/pants/slacks/tan/outfit,
+		/obj/item/clothing/pants/slacks/red/outfit,
+		/obj/item/clothing/pants/slacks/black/outfit,
+		/obj/item/clothing/pants/slacks/black/outfit/navy,
+		/obj/item/clothing/pants/slacks/black/outfit/burgundy,
+		/obj/item/clothing/pants/slacks/black/outfit/checkered,
 		/obj/item/clothing/under/sl_suit,
-		/obj/item/clothing/under/formal,
-		/obj/item/clothing/under/formal/tie,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/suit/jacket/black,

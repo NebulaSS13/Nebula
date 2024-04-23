@@ -39,7 +39,7 @@
 
 /decl/hierarchy/outfit/job/librarian
 	name = "Job - Librarian"
-	uniform = /obj/item/clothing/under/formal/red
+	uniform = /obj/item/clothing/pants/slacks/red/outfit
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 

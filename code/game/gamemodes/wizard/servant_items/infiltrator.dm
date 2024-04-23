@@ -24,12 +24,6 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
 
-/obj/item/clothing/under/lawyer/infil
-	name = "formal outfit"
-	desc = "A white dress shirt and navy pants. Snazzy."
-	icon = 'icons/clothing/under/formal.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
-
 /obj/item/clothing/shoes/dress/infilshoes
 	name = "black leather shoes"
 	desc = "Dress shoes. Their footsteps are dead silent."

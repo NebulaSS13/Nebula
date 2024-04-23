@@ -30,8 +30,3 @@
 	name = "\improper PCRC uniform"
 	desc = "A uniform belonging to Proxima Centauri Risk Control, a private security firm."
 	icon = 'mods/content/corporate/icons/clothing/under/pcrc.dmi'
-
-/obj/item/clothing/under/guard/pcrcsuit
-	name = "\improper PCRC suit"
-	desc = "A suit belonging to Proxima Centauri Risk Control, a private security firm. This one looks more formal than its utility counterpart."
-	icon = 'mods/content/corporate/icons/clothing/under/suit_pcrc.dmi'

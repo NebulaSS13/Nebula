@@ -19,7 +19,7 @@
 
 /decl/hierarchy/outfit/job/tradeship/mate
 	name = "Tradeship - Job - Tradehouse First Mate"
-	uniform = /obj/item/clothing/under/formal/checkered
+	uniform = /obj/item/clothing/pants/slacks/black/outfit/checkered
 	shoes = /obj/item/clothing/shoes/dress
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	pda_type = /obj/item/modular_computer/pda/cargo
