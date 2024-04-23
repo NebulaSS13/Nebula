@@ -10,7 +10,7 @@
 /obj/structure/closet/wardrobe/red/WillContain()
 	return list(
 		/obj/item/clothing/jumpsuit/security  = 3,
-		/obj/item/clothing/jumpsuit/security2 = 3,
+		/obj/item/clothing/under/security2 = 3,
 		/obj/item/clothing/shoes/jackboots = 3,
 		/obj/item/clothing/head/soft/sec   = 3,
 	)

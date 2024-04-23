@@ -51,15 +51,6 @@
 /datum/fabricator_recipe/textiles/jeancamo
 	path = /obj/item/clothing/pants/casual/camo
 
-/datum/fabricator_recipe/textiles/detsuit
-	path = /obj/item/clothing/under/det
-
-/datum/fabricator_recipe/textiles/detectivegrey
-	path = /obj/item/clothing/under/det/grey
-
-/datum/fabricator_recipe/textiles/detectiveblack
-	path = /obj/item/clothing/under/det/black
-
 // Headwear
 /datum/fabricator_recipe/textiles/hat
 	category = "Headwear"

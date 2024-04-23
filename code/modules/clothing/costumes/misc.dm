@@ -3,6 +3,11 @@
 	desc = "<i>'HONK!'</i>"
 	icon = 'icons/clothing/under/uniform_clown.dmi'
 
+/obj/item/clothing/costume/mime
+	name = "mime costume"
+	desc = "It's not very colourful."
+	icon = 'icons/clothing/under/uniform_mime.dmi'
+
 /obj/item/clothing/costume/owl
 	name = "owl costume"
 	desc = "A jumpsuit with owl wings. Photorealistic owl feathers! Twooooo!"

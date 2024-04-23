@@ -8,7 +8,6 @@
 		/obj/item/clothing/costume/redcoat,
 		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/jumpsuit/captain_fly,
-		/obj/item/clothing/under/det,
 		/obj/item/clothing/jumpsuit/brown,
 		)
 	var/list/raider_shoes = list(

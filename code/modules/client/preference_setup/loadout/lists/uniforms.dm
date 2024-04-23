@@ -58,10 +58,7 @@
 		/obj/item/clothing/under/blazer,
 		/obj/item/clothing/under/blackjumpskirt,
 		/obj/item/clothing/costume/kilt,
-		/obj/item/clothing/dress/hr,
-		/obj/item/clothing/under/det,
-		/obj/item/clothing/under/det/black,
-		/obj/item/clothing/under/det/grey
+		/obj/item/clothing/dress/hr
 	)
 
 /decl/loadout_option/uniform/dress

@@ -20,7 +20,7 @@
 /decl/hierarchy/outfit/tournament_gear/gangster
 	name = "Tournament gear - Gangster"
 	head = /obj/item/clothing/head/det
-	uniform = /obj/item/clothing/under/det
+	uniform = /obj/item/clothing/pants/slacks/outfit/detective
 	suit_store = /obj/item/clothing/suit/det_trench
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	hands = list(

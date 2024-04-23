@@ -28,7 +28,7 @@
 /decl/hierarchy/outfit/job/security/detective
 	name = "Job - Detective"
 	head = /obj/item/clothing/head/det
-	uniform = /obj/item/clothing/under/det
+	uniform = /obj/item/clothing/pants/slacks/outfit/detective
 	suit = /obj/item/clothing/suit/det_trench
 	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress

@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/ministation/doctor/head
 	name = "Ministation - Job - Head Doctor"
 	l_ear = /obj/item/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/under/det/black
+	uniform = /obj/item/clothing/pants/slacks/black/outfit/detective
 	shoes = /obj/item/clothing/shoes/dress
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str

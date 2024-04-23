@@ -114,7 +114,7 @@
 			new /obj/item/pen/crayon/rainbow(src)
 			new /obj/item/chems/spray/waterflower(src)
 		if(95)
-			new /obj/item/clothing/under/mime(src)
+			new /obj/item/clothing/costume/mime(src)
 			new /obj/item/clothing/shoes/color/black(src)
 			new /obj/item/clothing/gloves(src)
 			new /obj/item/clothing/mask/gas/mime(src)

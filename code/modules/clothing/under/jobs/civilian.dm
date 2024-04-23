@@ -73,8 +73,3 @@
 	name = "sensible suit"
 	desc = "It's very... sensible."
 	icon = 'icons/clothing/under/uniform_lawyer_red.dmi'
-
-/obj/item/clothing/under/mime
-	name = "mime's outfit"
-	desc = "It's not very colourful."
-	icon = 'icons/clothing/under/uniform_mime.dmi'

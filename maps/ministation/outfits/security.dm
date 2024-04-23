@@ -49,7 +49,7 @@
 	head = /obj/item/clothing/head/det
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/radio/headset/headset_sec
-	uniform = /obj/item/clothing/under/det
+	uniform = /obj/item/clothing/pants/slacks/outfit/detective
 	suit = /obj/item/clothing/suit/det_trench
 	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress
