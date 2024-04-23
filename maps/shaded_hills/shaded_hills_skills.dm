@@ -19,13 +19,13 @@
 /decl/hierarchy/skill/crafting/stonemasonry
 	name = "Stonemasonry"
 	uid =  "skill_crafting_mason"
-	desc = "This skill describes your skill with stonecarving."
+	desc = "Your ability to chisel, cut, carve, construct with, and knap stone and stone-like materials."
 	levels = list(
-		"Unskilled"   = "Placeholder.",
-		"Basic"       = "Placeholder.",
-		"Trained"     = "Placeholder.",
-		"Experienced" = "Placeholder.",
-		"Master"      = "Placeholder."
+		"Unskilled"   = "You know that a hammer and chisel are used to split and shape stone, and that bricks are joined using mortar or cement, but you're not entirely sure how to do either of those things. If you tried to chisel a sculpture from a block of stone, you'd risk shattering it entirely, or just having the chisel glance off. You know some primitive tools are made by hitting rocks together to break pieces off, but if you tried you'd probably just make noise and little else.",
+		"Basic"       = "You've done some stoneknapping before and have begun developing an understanding of how stone cracks and splits when struck. You can replicate rough forms out of stone, and while your bricks may not be perfect by any means, they're flat enough to be used in a wall.",
+		"Trained"     = "You can do basic sculpting and carving with a hammer and chisel. You work well with bricks, loose stones, concrete, and rock slabs, whether you're knapping a tool out of flint or carving a form into a block of marble. You may not be able to work professionally at this stage, but you could cut it as an apprentice mason.",
+		"Experienced" = "You work with stone in your daily life, either on your homestead or as part of your profession. Your work improves in quality and speed, with fewer mistakes that result in scrapped workpieces, even if with some blows you still take off a little more than you planned.",
+		"Master"      = "Your work is delicate yet firm, always applying the exact amount of force for the desired effect, no more and no less. Mistakes in your work are unheard of, at least while you work without interference. You could be the head of a masons' guild, or at least train someone to work as a mason or stonecarver."
 	)
 
 /decl/hierarchy/skill/crafting/metalwork
