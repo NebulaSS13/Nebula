@@ -1,13 +1,3 @@
-/obj/item/clothing/under/pj
-	name = "red pj's"
-	desc = "Sleepwear."
-	icon = 'icons/clothing/under/pjs_red.dmi'
-
-/obj/item/clothing/under/pj/blue
-	name = "blue pj's"
-	desc = "Sleepwear."
-	icon = 'icons/clothing/under/pjs_blue.dmi'
-
 /obj/item/clothing/under/captain_fly
 	name = "rogue's uniform"
 	desc = "For the man who doesn't care because he's still free."

@@ -2501,7 +2501,8 @@
 /obj/effect/decal/cleanable/blood,
 /obj/item/remains,
 /obj/random/shoes,
-/obj/item/clothing/under/pj/blue,
+/obj/item/clothing/pants/pj/blue,
+/obj/item/clothing/shirt/pj/blue,
 /turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gN" = (

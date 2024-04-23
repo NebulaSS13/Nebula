@@ -138,8 +138,10 @@
 
 /obj/structure/closet/wardrobe/pjs/WillContain()
 	return list(
-		/obj/item/clothing/under/pj = 2,
-		/obj/item/clothing/under/pj/blue = 2,
+		/obj/item/clothing/pants/pj = 1,
+		/obj/item/clothing/pants/pj/blue = 1,
+		/obj/item/clothing/shirt/pj = 1,
+		/obj/item/clothing/shirt/pj/blue = 1,
 		/obj/item/clothing/shoes/color/white = 2,
 		/obj/item/clothing/shoes/slippers = 2,
 	)

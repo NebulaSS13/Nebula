@@ -129,20 +129,24 @@
 	)
 
 	possible_trading_items = list(
+		/obj/item/clothing/pants                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/pants/pj                        = TRADER_BLACKLIST,
+		/obj/item/clothing/pants/shorts                    = TRADER_BLACKLIST,
+		/obj/item/clothing/pants/casual/mustangjeans/monke = TRADER_BLACKLIST,
+		/obj/item/clothing/shirt                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/shirt/pj                        = TRADER_BLACKLIST,
+		/obj/item/clothing/skirt                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/dress                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/dress/wedding                   = TRADER_BLACKLIST,
 		/obj/item/clothing/under                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/under/chameleon                 = TRADER_BLACKLIST,
 		/obj/item/clothing/under/color                     = TRADER_BLACKLIST,
 		/obj/item/clothing/under/gimmick                   = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/lawyer                    = TRADER_BLACKLIST,
-		/obj/item/clothing/under/pj                        = TRADER_BLACKLIST,
-		/obj/item/clothing/under                           = TRADER_BLACKLIST,
-		/obj/item/clothing/pants/shorts                    = TRADER_BLACKLIST,
 		/obj/item/clothing/under/mankini                   = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/syndicate                 = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/tactical                  = TRADER_BLACKLIST,
-		/obj/item/clothing/under/waiter/monke              = TRADER_BLACKLIST,
-		/obj/item/clothing/dress/wedding                   = TRADER_BLACKLIST,
-		/obj/item/clothing/pants/casual/mustangjeans/monke = TRADER_BLACKLIST
+		/obj/item/clothing/under/waiter/monke              = TRADER_BLACKLIST
 	)
 
 /datum/trader/ship/clothingshop/shoes

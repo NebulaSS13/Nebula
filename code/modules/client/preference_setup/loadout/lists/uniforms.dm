@@ -145,7 +145,7 @@
 
 /decl/loadout_option/uniform/kimono
 	name = "kimono, colour select"
-	path = /obj/item/clothing/under/kimono
+	path = /obj/item/clothing/dress/kimono
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/frontier
