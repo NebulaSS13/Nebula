@@ -23,7 +23,7 @@
 		/obj/item/clothing/head/hairflower/blue        = 1,
 		/obj/item/clothing/under/sl_suit               = 2,
 		/obj/item/clothing/under/bartender             = 2,
-		/obj/item/clothing/under/dress/dress_saloon    = 1,
+		/obj/item/clothing/dress/saloon    = 1,
 		/obj/item/clothing/suit/jacket/waistcoat/black = 2,
 		/obj/item/clothing/shoes/color/black           = 2
 	)
@@ -38,7 +38,7 @@
 
 /obj/structure/closet/chefcloset/WillContain()
 	return list(
-		/obj/item/clothing/under/sundress,
+		/obj/item/clothing/dress/sun,
 		/obj/item/clothing/under/waiter = 2,
 		/obj/item/radio/headset/headset_service = 2,
 		/obj/item/box/mousetraps = 2,

@@ -65,26 +65,6 @@
 		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/nursesuit
-	desc = "It's a jumpsuit commonly worn by nursing staff in the medical department."
-	name = "nurse's suit"
-	icon = 'icons/clothing/under/nurse.dmi'
-	permeability_coefficient = 0.50
-	armor = list(
-		ARMOR_BIO = ARMOR_BIO_MINOR
-		)
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
-
-/obj/item/clothing/under/nurse
-	desc = "A dress commonly worn by the nursing staff in the medical department."
-	name = "nurse's dress"
-	icon = 'icons/clothing/under/nurse.dmi'
-	permeability_coefficient = 0.50
-	armor = list(
-		ARMOR_BIO = ARMOR_BIO_MINOR
-		)
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
-
 /obj/item/clothing/under/orderly
 	desc = "A white suit to be worn by medical attendants."
 	name = "orderly's uniform"

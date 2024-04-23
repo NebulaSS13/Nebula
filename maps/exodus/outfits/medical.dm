@@ -50,18 +50,8 @@
 /decl/hierarchy/outfit/job/medical/doctor/nurse
 	name = "Job - Nurse"
 	suit = null
-
-/decl/hierarchy/outfit/job/medical/doctor/nurse/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.gender == FEMALE)
-		if(prob(50))
-			uniform = /obj/item/clothing/under/nursesuit
-		else
-			uniform = /obj/item/clothing/under/nurse
-		head = /obj/item/clothing/head/nursehat
-	else
-		uniform = /obj/item/clothing/under/medical/scrubs/purple
-		head = null
+	uniform = /obj/item/clothing/under/medical/scrubs/purple
+	head = null
 
 /decl/hierarchy/outfit/job/medical/chemist
 	name = "Job - Chemist"

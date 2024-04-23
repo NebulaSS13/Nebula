@@ -129,7 +129,7 @@
 	new/obj/item/clothing/suit/wizrobe/marisa/fake(src.loc)
 
 /obj/abstract/landmark/costume/cutewitch/make_costumes()
-	new /obj/item/clothing/under/sundress(src.loc)
+	new /obj/item/clothing/dress/sun(src.loc)
 	new /obj/item/clothing/head/witchwig(src.loc)
 	new /obj/item/staff/broom(src.loc)
 

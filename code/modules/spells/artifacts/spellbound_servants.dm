@@ -158,7 +158,7 @@
 						/obj/item/clothing/shoes/dress/devilshoes = slot_shoes_str)
 		spells += /spell/toggle_armor/fiend
 	else
-		equipment = list(/obj/item/clothing/under/devildress = slot_w_uniform_str,
+		equipment = list(/obj/item/clothing/dress/devil = slot_w_uniform_str,
 					/obj/item/clothing/shoes/dress/devilshoes = slot_shoes_str)
 		spells += /spell/toggle_armor/fiend/fem
 	..()
@@ -177,7 +177,7 @@
 						/obj/item/clothing/shoes/dress/infilshoes = slot_shoes_str)
 		spells += /spell/toggle_armor/infiltrator
 	else
-		equipment = list(/obj/item/clothing/under/lawyer/infil/fem = slot_w_uniform_str,
+		equipment = list(/obj/item/clothing/dress/white = slot_w_uniform_str,
 					/obj/item/clothing/shoes/dress/infilshoes = slot_shoes_str)
 		spells += /spell/toggle_armor/infiltrator/fem
 	..()

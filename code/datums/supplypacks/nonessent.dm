@@ -93,7 +93,7 @@
 					/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
 					/obj/item/clothing/under/lawyer/purpsuit,
 					/obj/item/clothing/under/mailman,
-					/obj/item/clothing/under/dress/dress_saloon,
+					/obj/item/clothing/dress/saloon,
 					/obj/item/clothing/suspenders,
 					/obj/item/clothing/suit/toggle/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
@@ -103,7 +103,7 @@
 					/obj/item/clothing/under/gladiator,
 					/obj/item/clothing/under/soviet,
 					/obj/item/clothing/under/scratch,
-					/obj/item/clothing/under/wedding/bride_white,
+					/obj/item/clothing/dress/wedding/bride_white,
 					/obj/item/clothing/suit/chef,
 					/obj/item/clothing/suit/apron/overalls,
 					/obj/item/clothing/under/redcoat,
@@ -193,17 +193,17 @@
 
 /decl/hierarchy/supply_pack/nonessent/dresses
 	name = "Costume - Womens formal dress locker"
-	contains = list(/obj/item/clothing/under/wedding/bride_orange,
-					/obj/item/clothing/under/wedding/bride_purple,
-					/obj/item/clothing/under/wedding/bride_blue,
-					/obj/item/clothing/under/wedding/bride_red,
-					/obj/item/clothing/under/wedding/bride_white,
-					/obj/item/clothing/under/sundress,
-					/obj/item/clothing/under/dress/dress_green,
-					/obj/item/clothing/under/dress/dress_pink,
-					/obj/item/clothing/under/dress/dress_orange,
-					/obj/item/clothing/under/dress/dress_yellow,
-					/obj/item/clothing/under/dress/dress_saloon)
+	contains = list(/obj/item/clothing/dress/wedding/bride_orange,
+					/obj/item/clothing/dress/wedding/bride_purple,
+					/obj/item/clothing/dress/wedding/bride_blue,
+					/obj/item/clothing/dress/wedding/bride_red,
+					/obj/item/clothing/dress/wedding/bride_white,
+					/obj/item/clothing/dress/sun,
+					/obj/item/clothing/dress/green,
+					/obj/item/clothing/dress/pink,
+					/obj/item/clothing/dress/orange,
+					/obj/item/clothing/dress/yellow,
+					/obj/item/clothing/dress/saloon)
 	containername = "pretty dress locker"
 	containertype = /obj/structure/closet
 	num_contained = 1
@@ -228,7 +228,7 @@
 					/obj/item/clothing/suit/chaplain_hoodie,
 					/obj/item/clothing/head/chaplain_hood,
 					/obj/item/clothing/suit/holidaypriest,
-					/obj/item/clothing/under/wedding/bride_white,
+					/obj/item/clothing/dress/wedding/bride_white,
 					/obj/item/box/candles = 3)
 	containername = "chaplain equipment crate"
 

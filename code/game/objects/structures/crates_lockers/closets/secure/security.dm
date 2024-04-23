@@ -17,7 +17,7 @@
 		/obj/item/clothing/gloves/captain,
 		/obj/item/gun/energy/gun,
 		/obj/item/telebaton,
-		/obj/item/clothing/under/dress/dress_cap,
+		/obj/item/clothing/dress/cap,
 		/obj/item/clothing/head/caphat/formal,
 		/obj/item/clothing/under/captainformal,
 	)
@@ -44,8 +44,8 @@
 /obj/structure/closet/secure_closet/hop2/WillContain()
 	return list(
 		/obj/item/clothing/under/head_of_personnel,
-		/obj/item/clothing/under/dress/dress_hop,
-		/obj/item/clothing/under/dress/dress_hr,
+		/obj/item/clothing/dress/hop,
+		/obj/item/clothing/dress/hr,
 		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,

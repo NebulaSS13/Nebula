@@ -46,9 +46,3 @@
 	name = "maid's uniform"
 	desc = "The uniform of someone you'd expect to see dusting off the Antique Gun's display case."
 	icon = 'icons/clothing/suit/wizard/servant/inf_dress.dmi'
-
-/obj/item/clothing/under/lawyer/infil/fem
-	name = "white dress"
-	desc = "It's a simple, sleeveless white dress with black trim."
-	icon = 'icons/clothing/under/dresses/dress_white.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET

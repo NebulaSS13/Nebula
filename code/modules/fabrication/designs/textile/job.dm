@@ -42,11 +42,8 @@
 /datum/fabricator_recipe/textiles/job/medical/virologist
 	path = /obj/item/clothing/under/virologist
 
-/datum/fabricator_recipe/textiles/job/medical/nursesuit
-	path = /obj/item/clothing/under/nursesuit
-
 /datum/fabricator_recipe/textiles/job/medical/nurse
-	path = /obj/item/clothing/under/nurse
+	path = /obj/item/clothing/dress/nurse
 
 /datum/fabricator_recipe/textiles/job/medical/medical
 	path = /obj/item/clothing/under/medical

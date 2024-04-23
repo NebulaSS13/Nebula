@@ -47,8 +47,3 @@
 	name = "fiend's robe"
 	icon = 'icons/clothing/suit/wizard/servant/fiend_robe.dmi'
 	desc = "A tattered, black and red robe. Nothing is visible through the holes in its fabric, except for a strange, inky blackness. It looks as if it was stitched together with other clothing..."
-
-/obj/item/clothing/under/devildress
-	name = "old dress"
-	desc = "An elegant - if tattered - black and red dress. There's nothing visible through the holes in the fabric; nothing but darkness."
-	icon = 'icons/clothing/under/dresses/dress_fiend.dmi'

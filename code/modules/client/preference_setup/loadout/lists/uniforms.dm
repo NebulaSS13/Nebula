@@ -65,7 +65,7 @@
 		/obj/item/clothing/under/blazer,
 		/obj/item/clothing/under/blackjumpskirt,
 		/obj/item/clothing/under/kilt,
-		/obj/item/clothing/under/dress/dress_hr,
+		/obj/item/clothing/dress/hr,
 		/obj/item/clothing/under/det,
 		/obj/item/clothing/under/det/black,
 		/obj/item/clothing/under/det/grey
@@ -79,23 +79,23 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/under/sundress_white,
-		/obj/item/clothing/under/dress,
-		/obj/item/clothing/under/dress/dress_green,
-		/obj/item/clothing/under/dress/dress_orange,
-		/obj/item/clothing/under/dress/dress_pink,
-		/obj/item/clothing/under/dress/dress_purple,
-		/obj/item/clothing/under/sundress
+		/obj/item/clothing/dress,
+		/obj/item/clothing/dress/green,
+		/obj/item/clothing/dress/orange,
+		/obj/item/clothing/dress/pink,
+		/obj/item/clothing/dress/purple,
+		/obj/item/clothing/dress/sun,
+		/obj/item/clothing/dress/sun/white
 	)
 
 /decl/loadout_option/uniform/cheongsam
 	name = "cheongsam, colour select"
-	path = /obj/item/clothing/under/cheongsam
+	path = /obj/item/clothing/dress/cheongsam
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/abaya
 	name = "abaya, colour select"
-	path = /obj/item/clothing/under/abaya
+	path = /obj/item/clothing/suit/robe/abaya
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/skirt
@@ -151,3 +151,7 @@
 /decl/loadout_option/uniform/frontier
 	name = "frontier clothes"
 	path = /obj/item/clothing/under/frontier
+
+/decl/loadout_option/uniform/nurse
+	name = "dress, nurse"
+	path = /obj/item/clothing/dress/nurse
