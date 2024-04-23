@@ -136,7 +136,6 @@
 	name = "bunny slippers"
 	desc = "Fluffy!"
 	icon = 'icons/clothing/feet/bunny_slippers.dmi'
-	force = 0
 	bodytype_equip_flags = null
 	w_class = ITEM_SIZE_SMALL
 	can_add_hidden_item = FALSE

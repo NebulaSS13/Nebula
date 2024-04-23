@@ -63,6 +63,10 @@
 
 		clothes = new clothes
 
+		// Check if the clothing has a fallback icon slot.
+		if(!clothes.get_fallback_slot(slot_w_uniform_str))
+			clothing_fails += "null or false fallback slot"
+
 		// Check if the clothing has all expected states.
 		var/decl/species/default_species = get_species_by_key(SPECIES_HUMAN)
 		var/decl/bodytype/default_bodytype = default_species.default_bodytype

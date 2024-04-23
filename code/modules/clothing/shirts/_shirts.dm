@@ -5,7 +5,6 @@
 	slot_flags = SLOT_UPPER_BODY
 	w_class = ITEM_SIZE_SMALL
 	accessory_slot = ACCESSORY_SLOT_DECOR
-	force = 0
 	fallback_slot = slot_w_uniform_str
 
 /obj/item/clothing/shirt/get_associated_equipment_slots()

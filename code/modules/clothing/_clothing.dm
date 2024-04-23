@@ -6,6 +6,7 @@
 	paint_verb = "dyed"
 	replaced_in_loadout = TRUE
 	icon_state = ICON_STATE_WORLD
+	force = 0
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.

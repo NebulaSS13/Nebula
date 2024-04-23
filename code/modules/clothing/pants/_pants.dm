@@ -7,7 +7,6 @@
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_UPPER_BODY // SLOT_LOWER_BODY when pants slot exists
 	w_class = ITEM_SIZE_NORMAL
-	force = 0
 	fallback_slot = slot_w_uniform_str
 	valid_accessory_slots = list(
 		ACCESSORY_SLOT_SENSORS,
