@@ -1,10 +1,13 @@
 /obj/item/clothing
+	/// If not-null, this clothing can be equipped as an accessory.
 	var/accessory_slot
+	/// Can this accessory be removed? Defaults to TRUE.
 	var/accessory_removable
-	/// if it should appear on examine without detailed view
-	var/accessory_high_visibility
-	/// used when an accessory is meant to slow the wearer down when attached to clothing
+	/// How should this accessory behave on mob examine?
+	var/accessory_visibility = ACCESSORY_VISIBILITY_ENSEMBLE
+	/// Used when an accessory is meant to slow the wearer down when attached to clothing
 	var/accessory_slowdown
+	/// What clothing states should hide this accessory?
 	var/list/accessory_hide_on_states
 
 /obj/item/clothing/proc/get_initial_accessory_hide_on_states()

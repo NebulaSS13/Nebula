@@ -239,11 +239,20 @@
 		reconsider_single_icon()
 		update_clothing_icon()
 
+/obj/item/clothing/get_examine_name()
+	var/list/ensemble = list(name)
+	for(var/obj/item/clothing/accessory in accessories)
+		if(accessory.accessory_visibility == ACCESSORY_VISIBILITY_ENSEMBLE)
+			LAZYADD(ensemble, accessory.get_examine_name())
+	if(length(ensemble) <= 1)
+		return ..()
+	return english_list(ensemble, summarize = TRUE)
+
 /obj/item/clothing/get_examine_line()
 	. = ..()
 	var/list/ties
 	for(var/obj/item/clothing/accessory in accessories)
-		if(accessory.accessory_high_visibility)
+		if(accessory.accessory_visibility == ACCESSORY_VISIBILITY_ATTACHMENT)
 			LAZYADD(ties, "\a [accessory.get_examine_line()]")
 	if(LAZYLEN(ties))
 		.+= " with [english_list(ties)] attached"

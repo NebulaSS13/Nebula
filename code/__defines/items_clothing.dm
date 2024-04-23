@@ -20,6 +20,13 @@
 #define ACCESSORY_SLOT_OVER     "Over"
 #define ACCESSORY_SLOT_SENSORS  "Suit Sensors"
 
+// Accessory will be shown as part of the name of the item when examined.
+#define ACCESSORY_VISIBILITY_ENSEMBLE   0
+// Accessory will be shown as 'with a [foo] attached'.
+#define ACCESSORY_VISIBILITY_ATTACHMENT 1
+// Accessory will only be shown on 'view accessories'.
+#define ACCESSORY_VISIBILITY_HIDDEN     2
+
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
 #define HIDEGLOVES         BITFLAG(0)

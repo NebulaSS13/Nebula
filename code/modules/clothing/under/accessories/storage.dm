@@ -4,7 +4,7 @@
 	icon = 'icons/clothing/accessories/storage/webbing.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	accessory_slot = ACCESSORY_SLOT_UTILITY
-	accessory_high_visibility = TRUE
+	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 	storage = /datum/storage/pockets
 
 /obj/item/clothing/webbing/webbing_large

@@ -341,8 +341,8 @@
 	var/obj/item/clothing/copy = ..()
 	if (!copy)
 		return
-	accessory_slot            = copy.accessory_slot
-	accessory_high_visibility = copy.accessory_high_visibility
+	accessory_slot       = copy.accessory_slot
+	accessory_visibility = copy.accessory_visibility
 	return copy
 
 //*****************

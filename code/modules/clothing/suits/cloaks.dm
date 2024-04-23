@@ -9,7 +9,7 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	siemens_coefficient = 0.9
 	accessory_slot = ACCESSORY_SLOT_OVER
-	accessory_high_visibility = TRUE
+	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 
 /obj/item/clothing/suit/cloak/on_update_icon()
 	. = ..()
