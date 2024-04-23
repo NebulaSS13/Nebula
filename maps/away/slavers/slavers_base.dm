@@ -89,7 +89,7 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver3
 	name = "Dead Slaver 3"
-	uniform = /obj/item/clothing/under/pirate
+	uniform = /obj/item/clothing/costume/pirate
 	shoes = /obj/item/clothing/shoes/color/brown
 
 /obj/abstract/landmark/corpse/slavers_base/slaver4
@@ -98,7 +98,7 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver4
 	name = "Dead Slaver 4"
-	uniform = /obj/item/clothing/under/redcoat
+	uniform = /obj/item/clothing/costume/redcoat
 	shoes = /obj/item/clothing/shoes/color/brown
 
 /obj/abstract/landmark/corpse/slavers_base/slaver5

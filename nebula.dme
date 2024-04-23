@@ -1913,6 +1913,8 @@
 #include "code\modules\clothing\clothing_state\clothing_state_sleeves.dm"
 #include "code\modules\clothing\clothing_state\clothing_state_tucked.dm"
 #include "code\modules\clothing\clothing_state\clothing_state_untied.dm"
+#include "code\modules\clothing\costumes\_costume.dm"
+#include "code\modules\clothing\costumes\misc.dm"
 #include "code\modules\clothing\dresses\_dress.dm"
 #include "code\modules\clothing\dresses\job.dm"
 #include "code\modules\clothing\dresses\maxi.dm"

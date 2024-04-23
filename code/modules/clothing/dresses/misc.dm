@@ -52,6 +52,12 @@
 	icon = 'icons/clothing/under/dresses/dress_cheongsam.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 
+/obj/item/clothing/dress/kimono
+	name = "kimono"
+	desc = "A traditional robe with remarkably long sleeves."
+	icon = 'icons/clothing/under/kimono.dmi'
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+
 /obj/item/clothing/dress/gown
 	name = "silk gown"
 	desc = "A long silky sleeveless gown with a flared hem."

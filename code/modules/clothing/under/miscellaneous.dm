@@ -33,12 +33,6 @@
 	desc = "<i>'Special delivery!'</i>"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_mailman.dmi'
 
-/obj/item/clothing/under/sexyclown
-	name = "sexy-clown suit"
-	desc = "It makes you look HONKable!"
-	icon = 'icons/clothing/under/sexyclown.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
-
 /obj/item/clothing/under/vice
 	name = "vice officer's jumpsuit"
 	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
@@ -62,11 +56,6 @@
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
 	should_display_id = FALSE
-
-/obj/item/clothing/under/owl
-	name = "owl uniform"
-	desc = "A jumpsuit with owl wings. Photorealistic owl feathers! Twooooo!"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_owl.dmi'
 
 /obj/item/clothing/under/johnny
 	name = "brown jumpsuit"
@@ -101,50 +90,10 @@
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
 	icon = 'icons/clothing/under/suits/suit_teal.dmi'
 
-/obj/item/clothing/under/schoolgirl
-	name = "schoolgirl uniform"
-	desc = "It's just like one of my Japanese animes!"
-	icon = 'icons/clothing/under/uniform_schoolgirl.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
-
 /obj/item/clothing/under/overalls
 	name = "laborer's overalls"
 	desc = "A set of durable overalls for getting the job done."
 	icon = 'icons/clothing/under/overalls.dmi'
-
-/obj/item/clothing/under/pirate
-	name = "pirate outfit"
-	desc = "Yarr."
-	icon = 'icons/clothing/under/pirate.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
-
-/obj/item/clothing/under/soviet
-	name = "soviet uniform"
-	desc = "For the Motherland!"
-	icon = 'icons/clothing/under/soviet.dmi'
-
-/obj/item/clothing/under/redcoat
-	name = "redcoat uniform"
-	desc = "Looks old."
-	icon = 'icons/clothing/under/redcoat.dmi'
-
-/obj/item/clothing/under/kilt
-	name = "kilt"
-	desc = "Includes shoes and plaid."
-	icon = 'icons/clothing/under/kilt.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_FEET
-
-/obj/item/clothing/under/sexymime
-	name = "sexy mime outfit"
-	desc = "The only time when you DON'T enjoy looking at someone's rack."
-	icon = 'icons/clothing/under/sexymime.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
-
-/obj/item/clothing/under/gladiator
-	name = "gladiator uniform"
-	desc = "Are you not entertained? Is that not why you are here?"
-	icon = 'icons/clothing/under/gladiator.dmi'
-	body_parts_covered = SLOT_LOWER_BODY
 
 /obj/item/clothing/under/blackjumpskirt
 	name = "black jumpskirt"
@@ -198,18 +147,6 @@
 	desc = "A warm looking sweater and a pair of dark blue slacks."
 	icon = 'icons/clothing/under/uniform_turtleneck.dmi'
 
-/obj/item/clothing/under/savage_hunter
-	name = "savage hunter's hides"
-	desc = "Makeshift hides bound together with the sinew, packwax, and leather of some alien creature."
-	icon = 'icons/clothing/under/hides_hunter.dmi'
-	body_parts_covered = SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-
-/obj/item/clothing/under/savage_hunter/female
-	name = "savage huntress's hides"
-	desc = "Makeshift hides bound together with the sinew, packwax, and leather of some alien creature. Includes a chestwrap so as not to leave one topless."
-	icon = 'icons/clothing/under/hides_huntress.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-
 /obj/item/clothing/under/wetsuit
 	name = "tactical wetsuit"
 	desc = "For when you want to scuba dive your way into an enemy base but still want to show off a little skin."
@@ -234,10 +171,4 @@
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_SMALL
-		)
-
-/obj/item/clothing/under/kimono
-	desc = "A traditional robe with remarkably long sleeves, mostly worn by women. <i>Sugoi.</i>"
-	name = "kimono"
-	icon = 'icons/clothing/under/kimono.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+	)

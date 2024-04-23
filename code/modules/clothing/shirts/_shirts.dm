@@ -3,7 +3,6 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_UPPER_BODY
-	w_class = ITEM_SIZE_SMALL
 	accessory_slot = ACCESSORY_SLOT_DECOR
 	fallback_slot = slot_w_uniform_str
 

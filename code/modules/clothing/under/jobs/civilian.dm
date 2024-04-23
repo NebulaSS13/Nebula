@@ -33,11 +33,6 @@
 	name = "chef's uniform"
 	icon = 'icons/clothing/under/uniform_chef.dmi'
 
-/obj/item/clothing/under/clown
-	name = "clown suit"
-	desc = "<i>'HONK!'</i>"
-	icon = 'icons/clothing/under/uniform_clown.dmi'
-
 /obj/item/clothing/under/head_of_personnel
 	desc = "It's a jumpsuit worn by someone who works in the position of \"Head of Personnel\"."
 	name = "head of personnel's jumpsuit"

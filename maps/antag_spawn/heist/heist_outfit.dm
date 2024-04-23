@@ -3,9 +3,9 @@
 	l_ear = /obj/item/radio/headset/raider
 	id_type = /obj/item/card/id/syndicate
 	var/list/raider_uniforms = list(
-		/obj/item/clothing/under/soviet,
-		/obj/item/clothing/under/pirate,
-		/obj/item/clothing/under/redcoat,
+		/obj/item/clothing/costume/soviet,
+		/obj/item/clothing/costume/pirate,
+		/obj/item/clothing/costume/redcoat,
 		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/under/captain_fly,
 		/obj/item/clothing/under/det,

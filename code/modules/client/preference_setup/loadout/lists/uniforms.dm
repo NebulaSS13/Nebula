@@ -64,7 +64,7 @@
 		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/under/blazer,
 		/obj/item/clothing/under/blackjumpskirt,
-		/obj/item/clothing/under/kilt,
+		/obj/item/clothing/costume/kilt,
 		/obj/item/clothing/dress/hr,
 		/obj/item/clothing/under/det,
 		/obj/item/clothing/under/det/black,

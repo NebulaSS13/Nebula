@@ -52,7 +52,7 @@
 	new /obj/item/backpack/chameleon(src.loc)
 
 /obj/abstract/landmark/costume/gladiator/make_costumes()
-	new /obj/item/clothing/under/gladiator(src.loc)
+	new /obj/item/clothing/costume/gladiator(src.loc)
 	new /obj/item/clothing/head/helmet/gladiator(src.loc)
 
 /obj/abstract/landmark/costume/madscientist/make_costumes()
@@ -68,7 +68,7 @@
 	new /obj/item/clothing/shoes/jackboots(src.loc)
 
 /obj/abstract/landmark/costume/nyangirl/make_costumes()
-	new /obj/item/clothing/under/schoolgirl(src.loc)
+	new /obj/item/clothing/costume/schoolgirl(src.loc)
 	new /obj/item/clothing/head/kitty(src.loc)
 
 /obj/abstract/landmark/costume/maid/make_costumes()
@@ -96,7 +96,7 @@
 	new /obj/item/clothing/head/plaguedoctorhat(src.loc)
 
 /obj/abstract/landmark/costume/nightowl/make_costumes()
-	new /obj/item/clothing/under/owl(src.loc)
+	new /obj/item/clothing/costume/owl(src.loc)
 	new /obj/item/clothing/mask/gas/owl_mask(src.loc)
 
 /obj/abstract/landmark/costume/waiter/make_costumes()
@@ -106,14 +106,14 @@
 	new /obj/item/clothing/suit/apron(src.loc)
 
 /obj/abstract/landmark/costume/pirate/make_costumes()
-	new /obj/item/clothing/under/pirate(src.loc)
+	new /obj/item/clothing/costume/pirate(src.loc)
 	new /obj/item/clothing/suit/pirate(src.loc)
 	var/CHOICE = pick( /obj/item/clothing/head/pirate , /obj/item/clothing/mask/bandana/red)
 	new CHOICE(src.loc)
 	new /obj/item/clothing/glasses/eyepatch(src.loc)
 
 /obj/abstract/landmark/costume/commie/make_costumes()
-	new /obj/item/clothing/under/soviet(src.loc)
+	new /obj/item/clothing/costume/soviet(src.loc)
 	new /obj/item/clothing/head/ushanka(src.loc)
 
 /obj/abstract/landmark/costume/imperium_monk/make_costumes()
@@ -140,16 +140,16 @@
 
 /obj/abstract/landmark/costume/sexyclown/make_costumes()
 	new /obj/item/clothing/mask/gas/sexyclown(src.loc)
-	new /obj/item/clothing/under/sexyclown(src.loc)
+	new /obj/item/clothing/costume/sexyclown(src.loc)
 
 /obj/abstract/landmark/costume/sexymime/make_costumes()
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
-	new /obj/item/clothing/under/sexymime(src.loc)
+	new /obj/item/clothing/costume/sexymime(src.loc)
 
 /obj/abstract/landmark/costume/savagehunter/make_costumes()
 	new /obj/item/clothing/mask/spirit(src.loc)
-	new /obj/item/clothing/under/savage_hunter(src.loc)
+	new /obj/item/clothing/costume/savage_hunter(src.loc)
 
 /obj/abstract/landmark/costume/savagehuntress/make_costumes()
 	new /obj/item/clothing/mask/spirit(src.loc)
-	new /obj/item/clothing/under/savage_hunter/female(src.loc)
+	new /obj/item/clothing/costume/savage_hunter/female(src.loc)

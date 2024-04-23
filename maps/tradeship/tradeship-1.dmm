@@ -1101,7 +1101,7 @@
 /obj/random/clothing,
 /obj/item/clothing/mask/gas/clown_hat,
 /obj/item/clothing/shoes/clown_shoes,
-/obj/item/clothing/under/clown,
+/obj/item/clothing/costume/clown,
 /obj/item/stamp/clown,
 /obj/item/backpack/clown,
 /obj/item/bikehorn,

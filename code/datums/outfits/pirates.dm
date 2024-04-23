@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/pirate
 	abstract_type = /decl/hierarchy/outfit/pirate
 	name = "Pirate"
-	uniform = /obj/item/clothing/under/pirate
+	uniform = /obj/item/clothing/costume/pirate
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/eyepatch
 	hands = list(/obj/item/energy_blade/cutlass)
