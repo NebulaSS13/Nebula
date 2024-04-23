@@ -8,6 +8,7 @@
 	slot_flags = SLOT_UPPER_BODY // SLOT_LOWER_BODY when pants slot exists
 	w_class = ITEM_SIZE_NORMAL
 	force = 0
+	fallback_slot = slot_w_uniform_str
 	valid_accessory_slots = list(
 		ACCESSORY_SLOT_SENSORS,
 		ACCESSORY_SLOT_UTILITY,
@@ -34,8 +35,3 @@
 	. = ..()
 	var/static/list/pants_slots = list(slot_w_uniform_str, slot_wear_id_str)
 	LAZYDISTINCTADD(., pants_slots)
-
-
-/obj/item/clothing/pants/get_fallback_slot(var/slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_w_uniform_str

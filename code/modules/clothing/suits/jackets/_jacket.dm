@@ -3,12 +3,11 @@
 	desc                = "A snappy dress jacket."
 	icon                = 'icons/clothing/suit/jackets/jacket.dmi'
 	blood_overlay_type  = "coat"
-	body_parts_covered  = SLOT_UPPER_BODY|SLOT_ARMS
-	cold_protection     = SLOT_UPPER_BODY|SLOT_ARMS
-	slot_flags          = SLOT_OVER_BODY | SLOT_TIE
+	body_parts_covered  = SLOT_UPPER_BODY | SLOT_ARMS
+	cold_protection     = SLOT_UPPER_BODY | SLOT_ARMS
+	slot_flags          = SLOT_OVER_BODY
 	w_class             = ITEM_SIZE_NORMAL
 	accessory_slot      = ACCESSORY_SLOT_DECOR
-	accessory_removable = TRUE
 	valid_accessory_slots = list(
 		ACCESSORY_SLOT_INSIGNIA,
 		ACCESSORY_SLOT_ARMBAND,

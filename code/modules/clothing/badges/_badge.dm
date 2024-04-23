@@ -9,15 +9,11 @@
 	desc = "A leather-backed badge, with gold trimmings."
 	icon = 'icons/clothing/accessories/badges/detectivebadge.dmi'
 	w_class = ITEM_SIZE_SMALL
-	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
+	slot_flags = SLOT_LOWER_BODY
 	accessory_slot = ACCESSORY_SLOT_INSIGNIA
-	accessory_removable = TRUE
 	var/badge_string = "Detective"
 	var/stored_name
 
-/obj/item/clothing/badge/get_fallback_slot(var/slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_tie_str
 
 /obj/item/clothing/badge/get_initial_accessory_hide_on_states()
 	var/static/list/initial_accessory_hide_on_states = list(

@@ -99,9 +99,8 @@
 	)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 	accessory_slot = ACCESSORY_SLOT_ARMOR_A
-	slot_flags = SLOT_TIE | SLOT_HANDS
+	slot_flags = SLOT_HANDS
 	accessory_slot = ACCESSORY_SLOT_DECOR
-	accessory_removable = TRUE
 
 /obj/item/clothing/gloves/armguards/craftable
 	material_armor_multiplier = 1
@@ -130,9 +129,8 @@
 	)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 	accessory_slot = ACCESSORY_SLOT_ARMOR_L
-	slot_flags = SLOT_TIE | SLOT_FEET
+	slot_flags = SLOT_FEET
 	accessory_slot = ACCESSORY_SLOT_DECOR
-	accessory_removable = TRUE
 
 /obj/item/clothing/shoes/legguards/craftable
 	material_armor_multiplier = 1

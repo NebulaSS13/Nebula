@@ -1,13 +1,7 @@
 /obj/item/clothing/accessory
 	abstract_type = /obj/item/clothing/accessory
-	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
 	accessory_slot = ACCESSORY_SLOT_DECOR
-	accessory_removable = TRUE
-
-/obj/item/clothing/accessory/get_fallback_slot(var/slot)
-	if(slot != BP_L_HAND && slot != BP_R_HAND)
-		return slot_tie_str
 
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user)
@@ -29,7 +23,7 @@
 	name = "necklace"
 	desc = "A simple necklace."
 	icon = 'icons/clothing/accessories/jewelry/necklace.dmi'
-	slot_flags = SLOT_FACE | SLOT_TIE
+	slot_flags = SLOT_FACE
 
 //Misc
 /obj/item/clothing/accessory/kneepads

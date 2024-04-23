@@ -72,7 +72,6 @@
 		slot_glasses_str   = list("[NORTH]" = list( 0, -6), "[EAST]" = list( 1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list(-1, -6)),
 		slot_back_str      = list("[NORTH]" = list( 0, -6), "[EAST]" = list( 3, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list(-3, -6)),
 		slot_w_uniform_str = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6)),
-		slot_tie_str       = list("[NORTH]" = list( 0, -5), "[EAST]" = list( 0, -5), "[SOUTH]" = list( 0, -5),  "[WEST]" = list( 0, -5)),
 		slot_wear_id_str   = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6)),
 		slot_wear_suit_str = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6)),
 		slot_belt_str      = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6))

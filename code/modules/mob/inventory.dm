@@ -47,9 +47,24 @@
 		return TRUE
 
 	if(slot == slot_tie_str)
-		var/obj/item/clothing/uniform = get_equipped_item(slot_w_uniform_str)
-		if(istype(uniform))
-			uniform.try_attach_accessory(W, src)
+
+		var/list/check_slots = get_inventory_slots()
+		if(islist(check_slots))
+
+			check_slots = check_slots.Copy()
+			check_slots -= global.all_hand_slots
+
+			var/try_equip_slot = W.get_fallback_slot()
+			if(try_equip_slot)
+				check_slots -= try_equip_slot
+				check_slots.Insert(1, try_equip_slot)
+		
+			for(var/slot_string in check_slots)
+				var/obj/item/clothing/clothes = get_equipped_item(slot_string)
+				if(istype(clothes) && clothes.can_attach_accessory(W, src))
+					clothes.attach_accessory(src, W)
+					break
+
 		return TRUE
 
 	unequip(W)

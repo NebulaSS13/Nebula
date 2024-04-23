@@ -3,7 +3,7 @@
 	desc = "A silver locket that seems to have space for a photo within."
 	slot_flags = 0
 	w_class = ITEM_SIZE_SMALL
-	slot_flags = SLOT_FACE | SLOT_TIE
+	slot_flags = SLOT_FACE
 	icon = 'icons/clothing/accessories/jewelry/locket.dmi'
 	var/open
 	var/obj/item/held

@@ -13,7 +13,7 @@
 
 /obj/item/clothing/badge/holo/cord
 	icon = 'icons/clothing/accessories/badges/holobadge_cord.dmi'
-	slot_flags = SLOT_FACE | SLOT_TIE
+	slot_flags = SLOT_FACE
 
 /obj/item/clothing/badge/holo/set_name(var/new_name)
 	..()

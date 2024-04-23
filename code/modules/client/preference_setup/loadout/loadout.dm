@@ -333,7 +333,7 @@ var/global/list/gear_datums = list()
 	var/description                       // Description of this gear. If left blank will default to the description of the pathed item.
 	var/path                              // Path of item.
 	var/cost = 1                          // Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
-	var/slot                              // Slot to equip to.
+	var/slot = slot_tie_str               // Slot to equip to.
 	var/list/allowed_roles                // Roles that can spawn with this item.
 	var/list/allowed_branches             // Service branches that can spawn with it.
 	var/list/allowed_skills               // Skills required to spawn with this item.
