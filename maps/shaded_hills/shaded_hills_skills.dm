@@ -55,13 +55,13 @@
 /decl/hierarchy/skill/crafting/textiles
 	name = "Textiles"
 	uid =  "skill_crafting_textiles"
-	desc = "This skill describes your skill with cloth, thread and leather."
+	desc = "Your ability to create and mend objects made of cloth, thread, leather, and other fabrics."
 	levels = list(
-		"Unskilled"   = "Placeholder.",
-		"Basic"       = "Placeholder.",
-		"Trained"     = "Placeholder.",
-		"Experienced" = "Placeholder.",
-		"Master"      = "Placeholder."
+		"Unskilled"   = "You can use a sewing needle, but it takes substantial care to not prick yourself with it. With plenty of time, you can weave grass into a basic basket or a mat. Your patch repair jobs are rough and ramshackle and anything you make from scratch is often fragile and misshapen.",
+		"Basic"       = "You've got some experience with a loom or spinning wheel, and you can sew without poking yourself. More advanced stitching, knitting, or weaving techniques are still beyond you, but your handiwork is rapidly improving.",
+		"Trained"     = "You have plenty of experience with weaving, sewing, or spinning, and may even be an apprentice in the trade. You've started to grasp some more advanced techniques and greatly improved your proficiency at the basics.",
+		"Experienced" = "You've reached a near-mastery of basic sewing, weaving, and leatherworking skills, but still have room to improve. You know enough to train someone in the basics of working with textiles, but mastery is not yet within your reach.",
+		"Master"      = "You've never seen a piece of clothing you couldn't mend. You've mastered not just the basics but more advanced techniques as well, making your skill with texiles nearly unmatched. Your knowledge would be suitable to train an apprentice enough to work independently."
 	)
 
 /decl/hierarchy/skill/crafting/sculpting
