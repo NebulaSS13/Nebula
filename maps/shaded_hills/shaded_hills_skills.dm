@@ -90,6 +90,12 @@
 /obj/structure/textiles
 	work_skill = /decl/hierarchy/skill/crafting/textiles
 
+/obj/item/stack/material/skin
+	work_skill = /decl/hierarchy/skill/crafting/textiles
+
+/obj/item/chems/food/butchery/offal
+	work_skill = /decl/hierarchy/skill/crafting/textiles
+
 /decl/material/solid/organic/cloth
 	crafting_skill = /decl/hierarchy/skill/crafting/textiles
 
