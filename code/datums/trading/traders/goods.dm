@@ -140,12 +140,12 @@
 		/obj/item/clothing/dress/wedding                   = TRADER_BLACKLIST,
 		/obj/item/clothing/under                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/under/chameleon                 = TRADER_BLACKLIST,
-		/obj/item/clothing/under/color                     = TRADER_BLACKLIST,
+		/obj/item/clothing/jumpsuit                     = TRADER_BLACKLIST,
 		/obj/item/clothing/under/gimmick                   = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/lawyer                    = TRADER_BLACKLIST,
 		/obj/item/clothing/under/mankini                   = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/syndicate                 = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/under/tactical                  = TRADER_BLACKLIST,
+		/obj/item/clothing/jumpsuit/tactical                  = TRADER_BLACKLIST,
 		/obj/item/clothing/under/waiter/monke              = TRADER_BLACKLIST
 	)
 

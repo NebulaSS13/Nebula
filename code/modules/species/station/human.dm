@@ -40,4 +40,4 @@
 
 /decl/species/human/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey, slot_w_uniform_str)
+		H.equip_to_slot_or_del(new /obj/item/clothing/jumpsuit/grey, slot_w_uniform_str)

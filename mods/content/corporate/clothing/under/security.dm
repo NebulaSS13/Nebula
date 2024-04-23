@@ -7,13 +7,13 @@
 		)
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/security/corp
+/obj/item/clothing/jumpsuit/security/corp
 	icon = 'mods/content/corporate/icons/clothing/under/sec_corporate.dmi'
 
-/obj/item/clothing/under/warden/corp
+/obj/item/clothing/jumpsuit/warden/corp
 	icon = 'mods/content/corporate/icons/clothing/under/warden_corporate.dmi'
 
-/obj/item/clothing/under/head_of_security/corp
+/obj/item/clothing/jumpsuit/head_of_security/corp
 	icon = 'mods/content/corporate/icons/clothing/under/hos_corporate.dmi'
 
 /obj/item/clothing/under/guard/heph

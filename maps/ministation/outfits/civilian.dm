@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/ministation/cargo
 	l_ear = /obj/item/radio/headset/headset_cargo
 	name = "Ministation - Job - Cargo technician"
-	uniform = /obj/item/clothing/under/cargotech
+	uniform = /obj/item/clothing/jumpsuit/cargotech
 	id_type = /obj/item/card/id/ministation/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/ore = 1)
@@ -22,7 +22,7 @@
 /decl/hierarchy/outfit/job/ministation/janitor
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Janitor"
-	uniform = /obj/item/clothing/under/janitor
+	uniform = /obj/item/clothing/jumpsuit/janitor
 	id_type = /obj/item/card/id/ministation/janitor
 	pda_type = /obj/item/modular_computer/pda
 

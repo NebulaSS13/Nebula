@@ -245,7 +245,7 @@
 
 /decl/hierarchy/outfit/corpse/carp_fisher
 	name = "Dead carp fisher"
-	uniform = /obj/item/clothing/under/color/green
+	uniform = /obj/item/clothing/jumpsuit/green
 	suit = /obj/item/clothing/suit/apron/overalls
 	belt = /obj/item/knife/combat
 	shoes = /obj/item/clothing/shoes/jackboots

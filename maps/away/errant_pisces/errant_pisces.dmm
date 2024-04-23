@@ -693,7 +693,7 @@
 /obj/structure/closet,
 /obj/random/tool,
 /obj/random/smokes,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /turf/floor/plating,
 /area/errant_pisces/enginering)
 "ce" = (
@@ -773,7 +773,7 @@
 /obj/structure/closet,
 /obj/random/tech_supply,
 /obj/item/clothing/shoes/jackboots/duty,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /turf/floor/plating,
 /area/errant_pisces/enginering)
 "cr" = (
@@ -2970,9 +2970,12 @@
 /area/errant_pisces/live_storage)
 "hG" = (
 /obj/structure/closet,
-/obj/item/clothing/under/medical/scrubs,
-/obj/item/clothing/under/medical/scrubs,
-/obj/item/clothing/under/medical/scrubs,
+/obj/item/clothing/pants/scrubs,
+/obj/item/clothing/pants/scrubs,
+/obj/item/clothing/pants/scrubs,
+/obj/item/clothing/shirt/scrubs,
+/obj/item/clothing/shirt/scrubs,
+/obj/item/clothing/shirt/scrubs,
 /obj/item/clothing/under/nurse,
 /turf/floor/plating,
 /area/errant_pisces/infirmary)
@@ -3577,7 +3580,7 @@
 "jD" = (
 /obj/structure/table,
 /obj/random/firstaid,
-/obj/item/clothing/under/medical/paramedic,
+/obj/item/clothing/jumpsuit/medical/paramedic,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -4241,7 +4244,7 @@
 /area/errant_pisces/cryo)
 "lB" = (
 /obj/structure/closet,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /turf/floor/tiled,
 /area/errant_pisces/cryo)
 "lC" = (

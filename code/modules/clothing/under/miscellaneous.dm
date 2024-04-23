@@ -1,4 +1,4 @@
-/obj/item/clothing/under/captain_fly
+/obj/item/clothing/jumpsuit/captain_fly
 	name = "rogue's uniform"
 	desc = "For the man who doesn't care because he's still free."
 	icon = 'icons/clothing/under/rogue_captain.dmi'
@@ -18,16 +18,6 @@
 	desc = "It's a very smart uniform with a special pocket for tips."
 	icon = 'icons/clothing/under/uniform_waiter.dmi'
 
-/obj/item/clothing/under/mailman
-	name = "mailman's jumpsuit"
-	desc = "<i>'Special delivery!'</i>"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_mailman.dmi'
-
-/obj/item/clothing/under/vice
-	name = "vice officer's jumpsuit"
-	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
-	icon = 'icons/clothing/under/uniform_vice.dmi'
-
 //This set of uniforms looks fairly fancy and is generally used for high-ranking personnel from what I've seen, so lets give them appropriate ranks.
 /obj/item/clothing/under/centcom
 	name = "\improper Officer's Dress Uniform"
@@ -46,16 +36,6 @@
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
 	should_display_id = FALSE
-
-/obj/item/clothing/under/johnny
-	name = "brown jumpsuit"
-	desc = "A label on the inside of the collar reads, 'johnny~~~'."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_johnny.dmi'
-
-/obj/item/clothing/under/color/rainbow
-	name = "rainbow"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_rainbow.dmi'
-
 /obj/item/clothing/under/psysuit
 	name = "dark undersuit"
 	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."
@@ -95,7 +75,7 @@
 	desc = "A slimming, short jumpskirt."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt_short.dmi'
 
-/obj/item/clothing/under/captainformal
+/obj/item/clothing/jumpsuit/captainformal
 	name = "captain's formal uniform"
 	desc = "A captain's formal-wear, for special occasions."
 	icon = 'icons/clothing/under/uniform_captain_formal.dmi'
@@ -132,7 +112,7 @@
 	desc = "A rugged flannel shirt and denim overalls. A popular style among frontier colonists."
 	icon = 'icons/clothing/under/frontier.dmi'
 
-/obj/item/clothing/under/psych/turtleneck/sweater
+/obj/item/clothing/jumpsuit/psych/turtleneck/sweater
 	name = "sweater"
 	desc = "A warm looking sweater and a pair of dark blue slacks."
 	icon = 'icons/clothing/under/uniform_turtleneck.dmi'
@@ -142,23 +122,3 @@
 	desc = "For when you want to scuba dive your way into an enemy base but still want to show off a little skin."
 	icon = 'icons/clothing/under/wetsuit.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
-
-/obj/item/clothing/under/hazard
-	name = "hazard jumpsuit"
-	desc = "A high visibility jumpsuit made from heat and radiation resistant materials."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hazard.dmi'
-	siemens_coefficient = 0.8
-	armor = list(
-		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
-		ARMOR_RAD = ARMOR_RAD_MINOR
-		)
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-
-/obj/item/clothing/under/sterile
-	name = "sterile jumpsuit"
-	desc = "A sterile white jumpsuit with medical markings. Protects against all manner of biohazards."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sterile.dmi'
-	permeability_coefficient = 0.50
-	armor = list(
-		ARMOR_BIO = ARMOR_BIO_SMALL
-	)

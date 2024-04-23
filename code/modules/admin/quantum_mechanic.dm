@@ -48,7 +48,7 @@
 /decl/hierarchy/outfit/quantum
 	name = "Quantum Mechanic"
 	glasses =  /obj/item/clothing/glasses/sunglasses/quantum
-	uniform =  /obj/item/clothing/under/color/quantum
+	uniform =  /obj/item/clothing/jumpsuit/quantum
 	shoes =    /obj/item/clothing/shoes/color/black/quantum
 	l_ear =    /obj/item/radio/headset/ert/quantum
 	back =     /obj/item/backpack/holding/quantum
@@ -184,7 +184,7 @@
 	return ..()
 
 // Clothes
-/obj/item/clothing/under/color/quantum
+/obj/item/clothing/jumpsuit/quantum
 	name = "quantum mechanic's uniform"
 	desc = "A quantum mechanic's uniform. There is a letter on front that reads 'Q'."
 	icon = 'icons/clothing/under/uniform_quantum.dmi'
@@ -192,7 +192,7 @@
 	heat_protection = SLOT_FULL_BODY
 	siemens_coefficient = 0
 
-/obj/item/clothing/under/color/quantum/attack_hand(mob/user)
+/obj/item/clothing/jumpsuit/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 

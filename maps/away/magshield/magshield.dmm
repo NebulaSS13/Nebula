@@ -1275,7 +1275,7 @@
 /turf/space,
 /area/magshield/north)
 "dI" = (
-/obj/item/clothing/under/color/lightpurple,
+/obj/item/clothing/jumpsuit/lightpurple,
 /turf/floor/airless,
 /area/magshield/north)
 "dJ" = (

@@ -8,7 +8,7 @@
 
 /decl/loadout_option/uniform/jumpsuit
 	name = "jumpsuit, colour select"
-	path = /obj/item/clothing/under/color
+	path = /obj/item/clothing/jumpsuit
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/shortjumpskirt
@@ -18,7 +18,7 @@
 
 /decl/loadout_option/uniform/blackjumpshorts
 	name = "black jumpsuit shorts"
-	path = /obj/item/clothing/under/color/blackjumpshorts
+	path = /obj/item/clothing/jumpsuit/blackjumpshorts
 
 /decl/loadout_option/uniform/shirt
 	name = "shirt selection"
@@ -140,7 +140,7 @@
 
 /decl/loadout_option/uniform/turtleneck
 	name = "sweater, colour select"
-	path = /obj/item/clothing/under/psych/turtleneck/sweater
+	path = /obj/item/clothing/jumpsuit/psych/turtleneck/sweater
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/kimono

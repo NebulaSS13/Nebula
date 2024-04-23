@@ -6596,8 +6596,8 @@
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/jackboots,
 /obj/item/clothing/shoes/jackboots,
-/obj/item/clothing/under/engineer,
-/obj/item/clothing/under/security,
+/obj/item/clothing/jumpsuit/engineer,
+/obj/item/clothing/jumpsuit/security,
 /obj/machinery/light/small{
 	dir = 4
 	},

@@ -8,7 +8,7 @@
 /decl/hierarchy/outfit/job/science/rd
 	name = "Job - Chief Science Officer"
 	l_ear = /obj/item/radio/headset/heads/rd
-	uniform = /obj/item/clothing/under/research_director
+	uniform = /obj/item/clothing/jumpsuit/research_director
 	shoes = /obj/item/clothing/shoes/color/brown
 	hands = list(/obj/item/clipboard)
 	id_type = /obj/item/card/id/science/head
@@ -16,13 +16,13 @@
 
 /decl/hierarchy/outfit/job/science/scientist
 	name = "Job - Scientist"
-	uniform = /obj/item/clothing/under/color/white
+	uniform = /obj/item/clothing/jumpsuit/white
 	id_type = /obj/item/card/id/science
 	suit = /obj/item/clothing/suit/toggle/labcoat/science
 
 /decl/hierarchy/outfit/job/science/roboticist
 	name = "Job - Roboticist"
-	uniform = /obj/item/clothing/under/color/white
+	uniform = /obj/item/clothing/jumpsuit/white
 	shoes = /obj/item/clothing/shoes/color/black
 	belt = /obj/item/belt/utility/full
 	id_type = /obj/item/card/id/science

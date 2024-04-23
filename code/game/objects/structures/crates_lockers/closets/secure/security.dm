@@ -10,7 +10,7 @@
 		/obj/item/clothing/shirt/tunic/captain,
 		/obj/item/clothing/suit/jacket/captain,
 		/obj/item/clothing/head/caphat/cap,
-		/obj/item/clothing/under/captain,
+		/obj/item/clothing/jumpsuit/captain,
 		/obj/item/clothing/head/helmet,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/radio/headset/heads/captain,
@@ -19,7 +19,7 @@
 		/obj/item/telebaton,
 		/obj/item/clothing/dress/cap,
 		/obj/item/clothing/head/caphat/formal,
-		/obj/item/clothing/under/captainformal,
+		/obj/item/clothing/jumpsuit/captainformal,
 	)
 
 /obj/structure/closet/secure_closet/hop
@@ -43,7 +43,7 @@
 
 /obj/structure/closet/secure_closet/hop2/WillContain()
 	return list(
-		/obj/item/clothing/under/head_of_personnel,
+		/obj/item/clothing/jumpsuit/head_of_personnel,
 		/obj/item/clothing/dress/hop,
 		/obj/item/clothing/dress/hr,
 		/obj/item/clothing/under/lawyer/female,
@@ -54,7 +54,7 @@
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/shoes/craftable,
 		/obj/item/clothing/shoes/color/white,
-		/obj/item/clothing/under/head_of_personnel_whimsy,
+		/obj/item/clothing/jumpsuit/head_of_personnel_whimsy,
 		/obj/item/clothing/head/caphat/hop
 	)
 
@@ -68,7 +68,7 @@
 		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
 		/obj/item/clothing/head/HoS,
 		/obj/item/clothing/suit/armor/vest/heavy/hos,
-		/obj/item/clothing/under/head_of_security/jensen,
+		/obj/item/clothing/jumpsuit/head_of_security/jensen,
 		/obj/item/clothing/suit/armor/hos/jensen,
 		/obj/item/clothing/suit/armor/hos,
 		/obj/item/radio/headset/heads/hos,
@@ -95,7 +95,7 @@
 		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/suit/armor/vest/heavy/warden,
-		/obj/item/clothing/under/warden,
+		/obj/item/clothing/jumpsuit/warden,
 		/obj/item/clothing/suit/armor/warden,
 		/obj/item/clothing/head/warden,
 		/obj/item/radio/headset/headset_sec,
@@ -183,7 +183,7 @@
 
 /obj/structure/closet/secure_closet/brig/WillContain()
 	return list(
-		/obj/item/clothing/under/color/orange,
+		/obj/item/clothing/jumpsuit/orange,
 		/obj/item/clothing/shoes/color/orange
 	)
 

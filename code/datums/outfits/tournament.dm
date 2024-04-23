@@ -11,11 +11,11 @@
 
 /decl/hierarchy/outfit/tournament_gear/red
 	name = "Tournament - Red"
-	uniform = /obj/item/clothing/under/color/red
+	uniform = /obj/item/clothing/jumpsuit/red
 
 /decl/hierarchy/outfit/tournament_gear/green
 	name = "Tournament gear - Green"
-	uniform = /obj/item/clothing/under/color/green
+	uniform = /obj/item/clothing/jumpsuit/green
 
 /decl/hierarchy/outfit/tournament_gear/gangster
 	name = "Tournament gear - Gangster"
@@ -43,7 +43,7 @@
 
 /decl/hierarchy/outfit/tournament_gear/janitor
 	name = "Tournament gear - Janitor"
-	uniform = /obj/item/clothing/under/janitor
+	uniform = /obj/item/clothing/jumpsuit/janitor
 	back = /obj/item/backpack
 	hands = list(
 		/obj/item/mop,

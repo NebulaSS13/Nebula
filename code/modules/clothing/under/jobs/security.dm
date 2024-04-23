@@ -8,17 +8,6 @@
 /*
  * Security
  */
-/obj/item/clothing/under/warden
-	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for more robust protection. It has the word \"Warden\" written on the shoulders."
-	name = "warden's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_warden.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_SMALL
-		)
-	siemens_coefficient = 0.9
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
-	)
 
 /obj/item/clothing/head/warden
 	name = "warden's hat"
@@ -26,17 +15,6 @@
 	icon = 'icons/clothing/head/warden.dmi'
 	body_parts_covered = 0
 
-/obj/item/clothing/under/security
-	name = "security officer's jumpsuit"
-	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sec.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_SMALL
-	)
-	siemens_coefficient = 0.9
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
-	)
 
 /obj/item/clothing/under/dispatch
 	name = "dispatcher's uniform"
@@ -51,22 +29,10 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/clothing/under/security2
+/obj/item/clothing/jumpsuit/security2
 	name = "security officer's uniform"
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
 	icon = 'icons/clothing/under/uniform_redshirt.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_SMALL
-		)
-	siemens_coefficient = 0.9
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
-	)
-
-/obj/item/clothing/under/tactical
-	name = "tactical jumpsuit"
-	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
-	icon = 'icons/clothing/under/uniform_swat.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
@@ -138,17 +104,6 @@
 /*
  * Head of Security
  */
-/obj/item/clothing/under/head_of_security
-	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
-	name = "head of security's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_SMALL
-		)
-	siemens_coefficient = 0.8
-	material = /decl/material/solid/organic/leather
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
-	origin_tech = @'{"materials":1,"engineering":1, "combat":1}'
 
 /obj/item/clothing/head/HoS
 	name = "Head of Security hat"
@@ -177,15 +132,6 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = @'{"materials":3,"engineering":1, "combat":2}'
-
-//Jensen cosplay gear
-/obj/item/clothing/under/head_of_security/jensen
-	desc = "You never asked for anything that stylish."
-	name = "head of security's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos_alt.dmi'
-	siemens_coefficient = 0.6
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 	origin_tech = @'{"materials":3,"engineering":1, "combat":2}'
 
 /obj/item/clothing/suit/armor/hos/jensen

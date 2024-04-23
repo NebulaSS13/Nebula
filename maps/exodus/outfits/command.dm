@@ -2,7 +2,7 @@
 	name = "Job - Captain"
 	head = /obj/item/clothing/head/caphat
 	glasses = /obj/item/clothing/glasses/sunglasses
-	uniform = /obj/item/clothing/under/captain
+	uniform = /obj/item/clothing/jumpsuit/captain
 	l_ear = /obj/item/radio/headset/heads/captain
 	shoes = /obj/item/clothing/shoes/color/brown
 	id_type = /obj/item/card/id/gold
@@ -30,7 +30,7 @@
 
 /decl/hierarchy/outfit/job/hop
 	name = "Job - Head of Personnel"
-	uniform = /obj/item/clothing/under/head_of_personnel
+	uniform = /obj/item/clothing/jumpsuit/head_of_personnel
 	l_ear = /obj/item/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/color/brown
 	id_type = /obj/item/card/id/silver

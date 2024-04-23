@@ -15,7 +15,7 @@
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str
 	name = "Ministation - Job - Junior Doctor"
-	uniform = /obj/item/clothing/under/medical
+	uniform = /obj/item/clothing/jumpsuit/medical
 	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/ministation/doctor

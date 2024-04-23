@@ -18,7 +18,7 @@
 
 /decl/hierarchy/outfit/job/service/gardener
 	name = "Job - Gardener"
-	uniform = /obj/item/clothing/under/hydroponics
+	uniform = /obj/item/clothing/jumpsuit/hydroponics
 	suit = /obj/item/clothing/suit/apron
 	gloves = /obj/item/clothing/gloves/thick/botany
 	r_pocket = /obj/item/scanner/plant
@@ -33,7 +33,7 @@
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = "Job - Janitor"
-	uniform = /obj/item/clothing/under/janitor
+	uniform = /obj/item/clothing/jumpsuit/janitor
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
@@ -60,7 +60,7 @@
 
 /decl/hierarchy/outfit/job/chaplain
 	name = "Job - Chaplain"
-	uniform = /obj/item/clothing/under/chaplain
+	uniform = /obj/item/clothing/jumpsuit/chaplain
 	hands = list(/obj/item/bible)
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda/medical

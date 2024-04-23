@@ -92,7 +92,7 @@
 					/obj/item/clothing/under/gimmick/rank/captain/suit,
 					/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
 					/obj/item/clothing/under/lawyer/purpsuit,
-					/obj/item/clothing/under/mailman,
+					/obj/item/clothing/jumpsuit/mailman,
 					/obj/item/clothing/dress/saloon,
 					/obj/item/clothing/suspenders,
 					/obj/item/clothing/suit/toggle/labcoat/mad,
@@ -221,7 +221,7 @@
 
 /decl/hierarchy/supply_pack/nonessent/chaplaingear
 	name = "Costume - Chaplain"
-	contains = list(/obj/item/clothing/under/chaplain,
+	contains = list(/obj/item/clothing/jumpsuit/chaplain,
 					/obj/item/clothing/shoes/color/black,
 					/obj/item/clothing/suit/nun,
 					/obj/item/clothing/head/nun_hood,

@@ -858,7 +858,7 @@
 /area/map_template/rescue_base/base)
 "bZ" = (
 /obj/item/clothing/shoes/color/orange,
-/obj/item/clothing/under/color/orange,
+/obj/item/clothing/jumpsuit/orange,
 /obj/structure/closet{
 	name = "Prisoner's Locker"
 	},
@@ -3169,7 +3169,7 @@
 	name = "Prisoner's Locker"
 	},
 /obj/item/clothing/shoes/color/orange,
-/obj/item/clothing/under/color/orange,
+/obj/item/clothing/jumpsuit/orange,
 /obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
@@ -3228,7 +3228,7 @@
 	name = "Prisoner's Locker"
 	},
 /obj/item/clothing/shoes/color/orange,
-/obj/item/clothing/under/color/orange,
+/obj/item/clothing/jumpsuit/orange,
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "hf" = (

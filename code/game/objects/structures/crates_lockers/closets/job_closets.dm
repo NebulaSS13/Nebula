@@ -56,7 +56,7 @@
 
 /obj/structure/closet/jcloset/WillContain()
 	return list(
-		/obj/item/clothing/under/janitor,
+		/obj/item/clothing/jumpsuit/janitor,
 		/obj/item/radio/headset/headset_service,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/head/soft/purple,

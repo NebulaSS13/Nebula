@@ -12,7 +12,7 @@
 				/obj/item/backpack/satchel/eng
 			)),
 		/obj/item/radio/headset/headset_cargo,
-		/obj/item/clothing/under/miner,
+		/obj/item/clothing/jumpsuit/miner,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/scanner/gas,
