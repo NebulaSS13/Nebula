@@ -9,7 +9,7 @@
 	gloves =     /obj/item/clothing/gloves/vox
 	mask =       /obj/item/clothing/mask/gas/swat/vox
 	back =       /obj/item/tank/nitrogen
-	uniform =    /obj/item/clothing/under/vox/vox_robes
+	uniform =    /obj/item/clothing/suit/robe/vox
 	glasses =    /obj/item/clothing/glasses/thermal
 	holster =    /obj/item/clothing/webbing/holster/armpit
 	suit_store = /obj/item/flashlight
@@ -18,7 +18,7 @@
 	id_type =    /obj/item/card/id/syndicate
 
 /decl/hierarchy/outfit/vox_raider/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
-	uniform = pick(/obj/item/clothing/under/vox/vox_robes, /obj/item/clothing/under/vox/vox_casual)
+	uniform = pick(/obj/item/clothing/suit/robe/vox, /obj/item/clothing/pants/vox)
 	glasses = pick(/obj/item/clothing/glasses/thermal, /obj/item/clothing/glasses/thermal/plain/eyepatch, /obj/item/clothing/glasses/thermal/plain/monocle)
 	holster = pick(/obj/item/clothing/webbing/holster/armpit, /obj/item/clothing/webbing/holster/waist, /obj/item/clothing/webbing/holster/hip)
 	. = ..()
