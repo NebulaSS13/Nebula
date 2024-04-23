@@ -22,10 +22,6 @@
 	path = /obj/item/clothing/suit/toggle/labcoat/science
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/uniform/corporate
-	name = "corporate uniform selection"
-	path = /obj/item/clothing/under
-
 /decl/loadout_option/uniform/corp_polo
 	name = "corporate polo selection"
 	path = /obj/item/clothing/shirt/polo/corp
@@ -35,6 +31,10 @@
 	name = "corporate tunic selection"
 	path = /obj/item/clothing/shirt/tunic/corp
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
+
+/decl/loadout_option/uniform/corporate
+	name = "corporate uniform selection"
+	path = /obj/item/clothing/under
 
 /decl/loadout_option/uniform/corporate/get_gear_tweak_options()
 	. = ..()
@@ -46,7 +46,7 @@
 		/obj/item/clothing/jumpsuit/focal,
 		/obj/item/clothing/under/mbill,
 		/obj/item/clothing/under/saare,
-		/obj/item/clothing/under/guard/pcrc,
+		/obj/item/clothing/under/pcrc,
 		/obj/item/clothing/under/grayson,
 		/obj/item/clothing/under/morpheus,
 		/obj/item/clothing/under/skinner,

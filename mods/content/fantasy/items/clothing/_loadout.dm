@@ -49,7 +49,7 @@
 
 /decl/loadout_option/fantasy/uniform/gown
 	name = "gown"
-	path = /obj/item/clothing/under/gown
+	path = /obj/item/clothing/dress/gown
 
 /decl/loadout_option/fantasy/uniform/braies
 	name = "braies"

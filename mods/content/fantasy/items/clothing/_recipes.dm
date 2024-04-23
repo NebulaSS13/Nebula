@@ -3,8 +3,8 @@
 	category    = "clothing"
 
 /decl/stack_recipe/textiles/gown
-	result_type = /obj/item/clothing/under/gown
-	category    = "clothing"
+	result_type       = /obj/item/clothing/dress/gown
+	category          = "clothing"
 
 /decl/stack_recipe/textiles/trousers
 	result_type = /obj/item/clothing/pants/trousers

@@ -36,3 +36,23 @@
 /obj/item/clothing/shirt/button/corp/zeng
 	name = "\improper Zeng-Hu button-up shirt"
 	desc = "A monogrammed Zeng-Hu Pharmaceuticals-issued shirt that particularly enthusiastic company executives tend to wear."
+
+/obj/item/clothing/shirt/guard
+	name = "green security guard shirt"
+	desc = "A durable shirt worn by Expeditionary Corps Organisation security."
+	icon = 'mods/content/corporate/icons/clothing/under/guard_shirt.dmi'
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
+		)
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/shirt/guard/heph
+	name = "cyan security guard shirt"
+	desc = "A durable shirt worn by subcontracted Hephaestus Industries security."
+	icon = 'mods/content/corporate/icons/clothing/under/guard_shirt_heph.dmi'
+
+/obj/item/clothing/shirt/guard/nanotrasen
+	name = "red security guard shirt"
+	desc = "A durable shirt worn by subcontracted NanoTrasen security."
+	icon = 'mods/content/corporate/icons/clothing/under/guard_shirt_nt.dmi'
+
