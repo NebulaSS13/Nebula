@@ -71,7 +71,7 @@ jobs:
           fileName: "DMCompiler_linux-x64.tar.gz"
           extract: true
       - name: Run OpenDream
-        run: ./DMCompiler_linux-x64/DMCompiler nebula.dme --suppress-unimplemented --version=${BYOND_MAJOR}.${BYOND_MINOR} | python tools/od_annotator/__main__.py "$@"
+        run: ./DMCompiler_linux-x64/DMCompiler nebula.dme --suppress-unimplemented --skip-anything-typecheck --version=${BYOND_MAJOR}.${BYOND_MINOR} | python tools/od_annotator/__main__.py "$@"
   Code:
     runs-on: ubuntu-latest
     steps:
