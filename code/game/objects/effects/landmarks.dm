@@ -72,8 +72,8 @@
 	new /obj/item/clothing/head/kitty(src.loc)
 
 /obj/abstract/landmark/costume/maid/make_costumes()
-	new /obj/item/clothing/under/blackskirt(src.loc)
-	var/CHOICE = pick( /obj/item/clothing/head/beret , /obj/item/clothing/head/rabbitears )
+	new /obj/item/clothing/skirt/red/blouse(src.loc)
+	var/CHOICE = pick(/obj/item/clothing/head/beret, /obj/item/clothing/head/rabbitears)
 	new CHOICE(src.loc)
 	new /obj/item/clothing/glasses/blindfold(src.loc)
 

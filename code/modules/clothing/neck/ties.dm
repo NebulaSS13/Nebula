@@ -22,6 +22,10 @@
 	name = "blue tie"
 	color = "#123c5a"
 
+/obj/item/clothing/neck/tie/green
+	name = "green tie"
+	color = "#009100"
+
 /obj/item/clothing/neck/tie/blue_clip
 	name = "blue tie with a clip"
 	icon = 'icons/clothing/accessories/ties/tie_clip.dmi'

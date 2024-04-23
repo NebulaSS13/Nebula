@@ -100,17 +100,17 @@
 
 /decl/loadout_option/uniform/skirt
 	name = "skirt selection"
-	path = /obj/item/clothing/under/skirt
+	path = /obj/item/clothing/skirt
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/uniform/skirt_c
+/decl/loadout_option/uniform/skirt/short
 	name = "short skirt, colour select"
-	path = /obj/item/clothing/under/skirt_c
+	path = /obj/item/clothing/skirt/short
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/skirt_c/dress
+/decl/loadout_option/uniform/dress
 	name = "simple dress, colour select"
-	path = /obj/item/clothing/under/skirt_c/dress
+	path = /obj/item/clothing/dress/short
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/casual_pants

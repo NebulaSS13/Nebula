@@ -11,4 +11,3 @@
 	. = ..()
 	var/static/list/shirt_slots = list(slot_w_uniform_str, slot_wear_id_str)
 	LAZYDISTINCTADD(., shirt_slots)
-

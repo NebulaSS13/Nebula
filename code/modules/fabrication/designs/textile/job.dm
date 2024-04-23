@@ -28,7 +28,7 @@
 	path = /obj/item/clothing/under/research_director/rdalt
 
 /datum/fabricator_recipe/textiles/job/medical/dress_rd
-	path = /obj/item/clothing/under/research_director/dress_rd
+	path = /obj/item/clothing/skirt/research_director
 
 /datum/fabricator_recipe/textiles/job/medical/chemist
 	path = /obj/item/clothing/under/chemist

@@ -101,12 +101,6 @@
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
 	icon = 'icons/clothing/under/suits/suit_teal.dmi'
 
-/obj/item/clothing/under/blackskirt
-	name = "black skirt"
-	desc = "A black skirt, very fancy!"
-	icon = 'icons/clothing/under/skirts/skirt_black.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
-
 /obj/item/clothing/under/schoolgirl
 	name = "schoolgirl uniform"
 	desc = "It's just like one of my Japanese animes!"

@@ -51,3 +51,8 @@
 	desc = "It is a cheongsam dress."
 	icon = 'icons/clothing/under/dresses/dress_cheongsam.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
+
+/obj/item/clothing/dress/gown
+	name = "silk gown"
+	desc = "A long silky sleeveless gown with a flared hem."
+	icon = 'icons/clothing/under/dresses/dress_gown.dmi'

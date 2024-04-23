@@ -18,15 +18,6 @@
 		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
-/obj/item/clothing/under/research_director/dress_rd
-	name = "chief science officer dress uniform"
-	desc = "Feminine fashion for the style concious CSO. Its fabric provides minor protection from biological contaminants."
-	icon = 'icons/clothing/under/dresses/dress_rd.dmi'
-	armor = list(
-		ARMOR_BIO = ARMOR_BIO_MINOR
-	)
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
-
 /obj/item/clothing/under/chemist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a chemist rank stripe on it."
 	name = "pharmacist's jumpsuit"
