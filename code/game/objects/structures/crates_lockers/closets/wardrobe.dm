@@ -290,26 +290,26 @@
 
 /obj/structure/closet/wardrobe/suit/WillContain()
 	return list(
-		/obj/item/clothing/pants/slacks,
-		/obj/item/clothing/pants/slacks/outfit/tie,
-		/obj/item/clothing/pants/slacks/tan/outfit,
-		/obj/item/clothing/pants/slacks/red/outfit,
-		/obj/item/clothing/pants/slacks/black/outfit,
-		/obj/item/clothing/pants/slacks/black/outfit/navy,
-		/obj/item/clothing/pants/slacks/black/outfit/burgundy,
-		/obj/item/clothing/pants/slacks/black/outfit/checkered,
+		/obj/item/clothing/pants/slacks = 2,
+		/obj/item/clothing/pants/slacks/purple,
+		/obj/item/clothing/pants/slacks/tan,
+		/obj/item/clothing/pants/slacks/red,
+		/obj/item/clothing/pants/slacks/black = 2,
+		/obj/item/clothing/shirt/button = 4,
+		/obj/item/clothing/suit/jacket/waistcoat/black,
+		/obj/item/clothing/neck/tie/long/red,
 		/obj/item/clothing/under/sl_suit,
 		/obj/item/clothing/under/scratch,
-		/obj/item/clothing/under/internalaffairs/plain,
+		/obj/item/clothing/slacks/black,
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/neck/tie/black,
 		/obj/item/clothing/suit/jacket/black,
 		/obj/item/clothing/suit/jacket/blue,
 		/obj/item/clothing/suit/jacket/purple,
 		/obj/item/clothing/under/assistantformal,
-		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/under/lawyer/purpsuit,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/dress,
 	)
@@ -320,7 +320,9 @@
 
 /obj/structure/closet/wardrobe/lawyer_black/WillContain()
 	return list(
-		/obj/item/clothing/under/internalaffairs = 2,
+		/obj/item/clothing/slacks/black = 2,
+		/obj/item/clothing/shirt/button = 2,
+		/obj/item/clothing/neck/tie/long/red = 2,
 		/obj/item/clothing/suit/jacket/black = 2,
 		/obj/item/clothing/shoes/color/brown = 2,
 		/obj/item/clothing/glasses/sunglasses/big = 2,

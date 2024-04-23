@@ -71,10 +71,33 @@
 		/obj/item/clothing/suit/jacket/burgundy
 	)
 
+/obj/item/clothing/slacks/black/outfit/internal_affairs
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/neck/tie/black
+	)
+
+/obj/item/clothing/slacks/black/outfit/nanotrasen
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/neck/tie/long/red
+	)
+
 /obj/item/clothing/pants/slacks/black/outfit/checkered
 	desc = "That's a very nice suit you have there. Shame if something were to happen to it, eh?"
 	starting_accessories = list(
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/neck/tie/black,
 		/obj/item/clothing/suit/jacket/checkered
+	)
+
+/obj/item/clothing/pants/slacks/purple
+	name = "purple slacks"
+	desc = "Some whimsical purple slacks. Not very formal."
+	icon = 'icons/clothing/pants/slacks_purple.dmi'
+
+/obj/item/clothing/pants/slacks/purple/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/suit/jacket/vest/black
 	)

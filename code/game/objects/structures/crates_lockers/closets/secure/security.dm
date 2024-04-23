@@ -46,7 +46,6 @@
 		/obj/item/clothing/jumpsuit/head_of_personnel,
 		/obj/item/clothing/dress/hop,
 		/obj/item/clothing/dress/hr,
-		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/oldman,

@@ -115,7 +115,7 @@
 	..()
 	/// Ordering is important here, dependencies like ID should be after uniform, etc.
 	slot_to_valid_type = list(
-		"[slot_w_uniform_str]" = /obj/item/clothing/under/lawyer/purpsuit,
+		"[slot_w_uniform_str]" = /obj/item/clothing/costume/clown,
 		"[slot_back_str]"      = /obj/item/backpack/clown,
 		"[slot_wear_id_str]"   = /obj/item/card/id,
 		"[slot_glasses_str]"   = /obj/item/clothing/glasses/meson,

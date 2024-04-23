@@ -81,11 +81,12 @@
 
 /obj/structure/closet/lawcloset/WillContain()
 	return list(
-		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/pants/slacks/purple,
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/suit/jacket/vest/black,
 		/obj/item/clothing/suit/jacket/blue,
 		/obj/item/clothing/suit/jacket/purple,
 		/obj/item/clothing/shoes/color/brown,
