@@ -83,11 +83,13 @@
 	accessory.on_attached(src, user)
 	if(accessory.accessory_removable)
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
+	update_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory)
 	if(!accessory || !(accessory in accessories) || !accessory.accessory_removable || !accessory.canremove)
 		return
 	accessory.on_removed(user)
+	update_icon()
 
 /obj/item/clothing/proc/removetie_verb()
 	set name = "Remove Accessory"
@@ -180,16 +182,6 @@
 		var/obj/item/clothing/uniform = loc
 		if(uniform.should_hide_accessory(accessory_hide_on_states))
 			return FALSE
-
-/obj/item/clothing/proc/get_attached_overlay_state()
-	return "attached"
-
-/obj/item/clothing/proc/get_attached_inventory_overlay(var/base_state)
-	var/find_state = "[base_state]-[get_attached_overlay_state()]"
-	if(find_state && check_state_in_icon(find_state, icon))
-		var/image/ret = image(icon, find_state)
-		ret.color = color
-		return ret
 
 /obj/item/clothing/OnDisguise(obj/item/copy, mob/user)
 	. = ..()
