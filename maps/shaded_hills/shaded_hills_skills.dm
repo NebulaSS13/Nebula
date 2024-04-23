@@ -67,13 +67,13 @@
 /decl/hierarchy/skill/crafting/sculpting
 	name = "Sculpting"
 	uid =  "skill_crafting_sculpting"
-	desc = "This skill describes your skill shaping wax, clay, and other soft materials."
+	desc = "Your ability to craft objects out of soft materials like wax or clay."
 	levels = list(
-		"Unskilled"   = "Placeholder.",
-		"Basic"       = "Placeholder.",
-		"Trained"     = "Placeholder.",
-		"Experienced" = "Placeholder.",
-		"Master"      = "Placeholder."
+		"Unskilled"   = "You can mould soft materials into rough shapes, but your work is sloppy and anything more complicated than a pinch-pot is beyond your ken.",
+		"Basic"       = "Your understanding of sculpting has improved to allow you to create more even and symmetrical designs. You likely have experience using a pottery wheel, turntable, or similar device.",
+		"Trained"     = "Your creations have become at once more uniform and more aesthetically pleasing, with a consistent level of quality to them.",
+		"Experienced" = "You have extensive experience with sculpting, able to work with a wide array of materials to form just about anything you set your mind to, as long as you put in the effort.",
+		"Master"      = "You have reached the pinnacle of your craft, able to sculpt clay, wax, and similar materials to your every whim, so much so that a mound of clay may as well be an extension of your will itself."
 	)
 
 // SCULPTING OVERRIDES
