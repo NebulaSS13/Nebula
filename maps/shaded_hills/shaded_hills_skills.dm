@@ -43,13 +43,13 @@
 /decl/hierarchy/skill/crafting/artifice
 	name = "Artifice"
 	uid =  "skill_crafting_artifice"
-	desc = "This skill describes your skill with complex devices and mechanisms."
+	desc = "Your ability to create, install, and comprehend complex devices and mechanisms, as well as your ability to create finely-detailed objects."
 	levels = list(
-		"Unskilled"   = "Placeholder.",
-		"Basic"       = "Placeholder.",
-		"Trained"     = "Placeholder.",
-		"Experienced" = "Placeholder.",
-		"Master"      = "Placeholder."
+		"Unskilled"   = "You know that gears turn together when intermeshed and that axles are used to connect spinning things, but you've never done more work on a machine than hitting it if it's broken. You struggle with the precision needed to work on finely-detailed objects.",
+		"Basic"       = "You know some basic mechanical principles, like the construction of a basic pulley, or how to put a wheel on an axle. You could fix a broken or stuck well winch, but you'd struggle to deal with a malfunctioning windmill or granary. You have a steadier hand than most, able to place small gems on jewelry and connect small mechanisms.",
+		"Trained"     = "You know how to operate and repair machinery, that axles and gears need to be oiled to work smoothly, and how to figure out what's broken when something goes wrong. You might routinely deal with machines enough to have training with them, or just lots of hands-on experience. You can steady your hands greatly when working with delicate objects.",
+		"Experienced" = "You work with machinery and delicate crafts either as part of your trade or in your daily life. You could construct a delicate music box or wind-up toy, and can easily connect mechanical components together.",
+		"Master"      = "You are a machine maestro, conducting a symphony of steadily-whirring mechanical parts. Every one of your creations has the utmost care put into its design and manufacture. Your hand never slips nor wavers when you work."
 	)
 
 /decl/hierarchy/skill/crafting/textiles
