@@ -52,7 +52,7 @@
 		for(var/reagent_type in H.reagents.reagent_volumes)
 			var/decl/material/R = GET_DECL(reagent_type)
 			var/list/reagent  = list()
-			reagent["name"]= R.name
+			reagent["name"]= R.get_reagent_name(H.reagents)
 			reagent["quantity"] = round(REAGENT_VOLUME(H.reagents, R.type),1)
 			reagent["scannable"] = R.scannable
 			scan["reagents"] += list(reagent)

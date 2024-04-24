@@ -60,7 +60,7 @@
 			if(B.reagents && LAZYLEN(B.reagents?.reagent_volumes))
 				for(var/rtype in B.reagents.reagent_volumes)
 					var/decl/material/R = GET_DECL(rtype)
-					to_chat(user, "<span class='notice'>[REAGENT_VOLUME(B.reagents, rtype)] units of [R.name]</span>")
+					to_chat(user, "<span class='notice'>[REAGENT_VOLUME(B.reagents, rtype)] units of [R.get_reagent_name(B.reagents)]</span>")
 
 /obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/chems/glass))
@@ -111,7 +111,7 @@
 			if(B.reagents && LAZYLEN(B.reagents.reagent_volumes))
 				for(var/rtype in B.reagents.reagent_volumes)
 					var/decl/material/R = GET_DECL(rtype)
-					dat += "<br>    [REAGENT_VOLUME(B.reagents, rtype)] units of [R.name], "
+					dat += "<br>    [REAGENT_VOLUME(B.reagents, rtype)] units of [R.get_reagent_name(B.reagents)], "
 				if(B in mixing)
 					dat += "<A href='?src=\ref[src];stop_mix=[i]'><font color='green'>Mixing</font></A> "
 				else

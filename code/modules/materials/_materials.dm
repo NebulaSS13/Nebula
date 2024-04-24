@@ -875,6 +875,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		. = newdata
 
 /decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
+	cached_color = null // colour masking may change
 	. = REAGENT_DATA(reagents, type)
 
 /decl/material/proc/explosion_act(obj/item/chems/holder, severity)
@@ -960,3 +961,21 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// If it's not ignitable but can be boiled, consider vaporizing it.
 	if(!isnull(boiling_point) && burn_temperature >= boiling_point)
 		. = list(type = amount)
+
+/decl/material/proc/get_reagent_name(datum/reagents/holder)
+	if(istype(holder) && holder.reagent_data)
+		var/list/rdata = holder.reagent_data[type]
+		if(rdata)
+			var/data_name = rdata["mask_name"]
+			if(data_name)
+				return data_name
+	return liquid_name
+
+/decl/material/proc/get_reagent_color(datum/reagents/holder)
+	if(istype(holder) && holder.reagent_data)
+		var/list/rdata = holder.reagent_data[type]
+		if(rdata)
+			var/data_color = rdata["mask_color"]
+			if(data_color)
+				return data_color
+	return color
