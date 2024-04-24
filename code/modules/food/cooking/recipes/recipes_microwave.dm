@@ -26,9 +26,3 @@
 		if(!being_cooked.warm)
 			return TRUE
 	return FALSE
-
-/decl/recipe/donkpocket/produce_result(obj/container)
-	for(var/obj/item/chems/food/donkpocket/being_cooked in container.get_contained_external_atoms())
-		if(!being_cooked.warm)
-			warm_up(being_cooked)
-			return list(being_cooked)
