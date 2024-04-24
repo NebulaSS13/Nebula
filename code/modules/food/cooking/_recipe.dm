@@ -67,6 +67,21 @@
 		complexity += isnum(value) ? value : 1
 	complexity += length(uniquelist(items)) // add how many unique items there are; will prioritise burgers over 2 bunbuns and 1 wasted meat, for example
 
+/decl/recipe/proc/can_cook_in(atom/container, cooking_temperature)
+	if(!istype(container))
+		return FALSE
+	if(cooking_temperature < minimum_temperature)
+		return FALSE
+	if(cooking_temperature > maximum_temperature)
+		return FALSE
+	if(!check_reagents(container.reagents))
+		return FALSE
+	if(!check_items(container))
+		return FALSE
+	if(!check_fruit(container))
+		return FALSE
+	return TRUE
+
 /decl/recipe/proc/check_reagents(datum/reagents/avail_reagents)
 	SHOULD_BE_PURE(TRUE)
 	if(length(avail_reagents?.reagent_volumes) < length(reagents))
@@ -151,8 +166,7 @@
 		return produced
 
 	if(ispath(result, /decl/material))
-		world << "placing [result_quantity]x[result] in [container]"
-		container.reagents.add_reagent(result, result_quantity, get_result_data(container, used_ingredients))
+		container.reagents?.add_reagent(result, result_quantity, get_result_data(container, used_ingredients))
 		return null
 
 // Create the actual result atom. Handled by a proc to allow for recipes to override it.
@@ -218,7 +232,7 @@
 
 	// Create our food products.
 	// Note that this will simply put reagents into the container for non-object recipes.
-	if(ispath(result, decl/material))
+	if(ispath(result, /decl/material))
 		var/atom/movable/result_obj = create_result(container, used_ingredients)
 		if(istype(result_obj))
 			LAZYADD(., result_obj)

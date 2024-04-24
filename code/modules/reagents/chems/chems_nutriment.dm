@@ -34,9 +34,10 @@
 	var/data = ..()
 	LAZYINITLIST(data)
 	for(var/taste in newdata)
+		// Temp until nutriment data is reworked.
 		if(taste == "meat_name" || taste == "veg_name")
-			world << "Attempted to mix [taste]: [newdata[taste]]"
 			continue
+		// End temp.
 		if(taste in data)
 			data[taste] += newdata[taste]
 		else

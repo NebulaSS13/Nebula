@@ -1,6 +1,7 @@
 /decl/recipe/soup
 	abstract_type = /decl/recipe/soup
 	reagents = list(/decl/material/liquid/water = 10)
+	reagent_mix = REAGENT_REPLACE
 
 /decl/recipe/soup/stock
 	abstract_type = /decl/recipe/soup/stock
