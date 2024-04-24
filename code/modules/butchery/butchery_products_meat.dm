@@ -1,9 +1,9 @@
 /obj/item/chems/food/butchery/meat
-	name           = "meat"
+	name           = "slab"
 	desc           = "A slab of meat."
 	icon           = 'icons/obj/items/butchery/meat1.dmi'
 	icon_state     = "meat"
-	slice_path     = /obj/item/chems/food/cutlet/raw
+	slice_path     = /obj/item/chems/food/butchery/cutlet/raw
 	slice_num      = 3
 	filling_color  = "#ff1c1c"
 	center_of_mass = @'{"x":16,"y":14}'
@@ -27,8 +27,8 @@
 	return ..()
 
 /obj/item/chems/food/butchery/meat/syntiflesh
-	name = "synthetic meat"
 	desc = "A slab of flesh synthetized from reconstituted biomass or artificially grown from chemicals."
+	meat_name = "synthetic"
 
 // Seperate definitions because some food likes to know if it's human.
 // TODO: rewrite kitchen code to check a var on the meat item so we can remove
@@ -38,27 +38,24 @@
 /obj/item/chems/food/butchery/meat/monkey
 	//same as plain meat
 
-/obj/item/chems/food/butchery/meat/corgi
-	name = "corgi meat"
-	desc = "Tastes like... well, you know."
-
 /obj/item/chems/food/butchery/meat/beef
-	name = "beef slab"
 	desc = "The classic red meat."
+	meat_name = "beef"
 
 /obj/item/chems/food/butchery/meat/goat
-	name = "chevon slab"
 	desc = "Goat meat, to the uncultured."
+	meat_name = "chevon"
 
 /obj/item/chems/food/butchery/meat/chicken
-	name = "chicken piece"
+	name = "piece"
 	desc = "It tastes like you'd expect."
 	material = /decl/material/solid/organic/meat/chicken
+	meat_name = "chicken"
 
 /obj/item/chems/food/butchery/meat/chicken/game
-	name = "game bird piece"
 	desc = "Fresh game meat, harvested from some wild bird."
+	meat_name = "fowl"
 
 /obj/item/chems/food/butchery/meat/corgi
-	name = "corgi meat"
 	desc = "Tastes like... well you know..."
+	meat_name = "dog"

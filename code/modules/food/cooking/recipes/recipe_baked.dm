@@ -14,7 +14,7 @@
 	fruit = list("tomato" = 1)
 	items = list(
 		/obj/item/chems/food/sliceable/flatdough,
-		/obj/item/chems/food/cutlet = 2,
+		/obj/item/chems/food/butchery/cutlet = 2,
 		/obj/item/chems/food/cheesewedge
 	)
 	result = /obj/item/chems/food/sliceable/pizza/meatpizza
@@ -89,7 +89,7 @@
 	display_name = "plain meatbread loaf"
 	items = list(
 		/obj/item/chems/food/dough = 2,
-		/obj/item/chems/food/cutlet = 2,
+		/obj/item/chems/food/butchery/cutlet = 2,
 		/obj/item/chems/food/cheesewedge = 2,
 	)
 	result = /obj/item/chems/food/sliceable/meatbread
@@ -174,7 +174,7 @@
 
 /decl/recipe/baked/enchiladas
 	fruit = list("chili" = 2, "corn" = 1)
-	items = list(/obj/item/chems/food/cutlet)
+	items = list(/obj/item/chems/food/butchery/cutlet)
 	result = /obj/item/chems/food/enchiladas
 
 /decl/recipe/baked/creamcheesebread

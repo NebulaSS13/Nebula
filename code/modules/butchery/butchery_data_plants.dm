@@ -1,5 +1,7 @@
 /decl/butchery_data/animal/mushroom
 
+	meat_name     = "mushroom"
+
 	meat_material = /decl/material/solid/organic/plantmatter
 	meat_type     = /obj/item/chems/food/hugemushroomslice
 
@@ -16,6 +18,8 @@
 	gut_type      = null
 
 /decl/butchery_data/animal/tomato
+
+	meat_name     = "vegetable"
 
 	meat_material = /decl/material/solid/organic/plantmatter
 	meat_type     = /obj/item/chems/food/tomatomeat

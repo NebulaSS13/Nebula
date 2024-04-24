@@ -1,4 +1,5 @@
 /decl/butchery_data/animal/fish
+	meat_name     = "fish"
 	meat_type     = /obj/item/chems/food/butchery/meat/fish
 	meat_material = /decl/material/solid/organic/meat/fish
 	bone_material = /decl/material/solid/organic/bone/fish

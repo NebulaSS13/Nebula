@@ -291,17 +291,6 @@
 	soup_base = "rice_base"
 	soup_overlay = "soup_meatballs"
 
-/decl/material/liquid/nutriment/rice/chazuke
-	name = "chazuke"
-	lore_text = "Green tea over rice. How rustic!"
-	taste_description = "green tea and rice"
-	taste_mult = 0.4
-	nutriment_factor = 1
-	color = "#f1ffdb"
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-	uid = "chem_nutriment_chazuke"
-
 /decl/material/liquid/nutriment/cherryjelly
 	name = "cherry jelly"
 	lore_text = "Totally the best. Only to be spread on foods with excellent lateral symmetry."

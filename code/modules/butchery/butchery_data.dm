@@ -2,6 +2,9 @@
 
 	abstract_type = /decl/butchery_data
 
+	/// Decorative string. 'beef', 'chicken', 'lamb', etc. Uses mob name if unset.
+	var/meat_name
+
 	var/meat_type         = /obj/item/chems/food/butchery/meat
 	var/meat_material     = /decl/material/solid/organic/meat
 	var/meat_amount       = 3

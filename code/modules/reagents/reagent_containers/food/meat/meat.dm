@@ -1,30 +1,3 @@
-// Processed meats
-/obj/item/chems/food/cutlet
-	name = "cutlet"
-	desc = "A tasty meat slice."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "cutlet"
-	bitesize = 2
-	center_of_mass = @'{"x":17,"y":20}'
-	material = /decl/material/solid/organic/meat
-
-/obj/item/chems/food/cutlet/raw
-	desc = "A thin piece of raw meat."
-	icon_state = "rawcutlet"
-	cooked_food = FOOD_RAW
-	backyard_grilling_product = /obj/item/chems/food/cutlet
-	backyard_grilling_announcement = "sizzles as it is grilled through."
-	drying_wetness = 30
-	dried_type = /obj/item/chems/food/jerky/cutlet
-
-/obj/item/chems/food/cutlet/raw/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 1)
-
-/obj/item/chems/food/cutlet/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 2)
-
 /obj/item/chems/food/meatball/raw/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 2)
@@ -55,7 +28,7 @@
 	desc = "A piece of unseasoned cooked meat."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "steak"
-	slice_path = /obj/item/chems/food/cutlet
+	slice_path = /obj/item/chems/food/butchery/cutlet
 	slice_num = 3
 	filling_color = "#7a3d11"
 	center_of_mass = @'{"x":16,"y":13}'

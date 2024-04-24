@@ -11,6 +11,7 @@
 	slice_num           = null
 	max_health          = 180
 	var/fat_material    = /decl/material/solid/organic/meat/gut
+	var/meat_name       = "beef"
 
 /obj/item/chems/food/butchery/Initialize(ml, material_key, mob/living/donor)
 	var/decl/butchery_data/butchery_decl = GET_DECL(donor?.butchery_data)
@@ -24,7 +25,9 @@
 			slice_num = butchery_decl.meat_amount
 	. = ..()
 	if(istype(donor))
-		set_name_from(donor)
+		meat_name = set_meat_name(donor.get_butchery_product_name())
+	if(meat_name)
+		set_meat_name(meat_name)
 
 /obj/item/chems/food/butchery/on_update_icon()
 	..()
@@ -34,8 +37,31 @@
 		var/decl/material/fat = GET_DECL(fat_material)
 		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.color, RESET_COLOR))
 
-/obj/item/chems/food/butchery/proc/set_name_from(mob/living/donor)
-	SetName("[donor.name] [name]")
+/obj/item/chems/food/butchery/proc/set_meat_name(new_meat_name)
+	meat_name = new_meat_name
+	SetName("[meat_name] [initial(name)]")
+
+/obj/item/chems/food/butchery/get_grilled_product()
+	. = ..()
+	if(meat_name && istype(., /obj/item/chems/food/butchery))
+		var/obj/item/chems/food/butchery/meat = .
+		meat.set_meat_name(meat_name)
+
+/obj/item/chems/food/butchery/get_dried_product()
+	. = ..()
+	if(. && meat_name)
+		if(istype(., /obj/item/chems/food/butchery))
+			var/obj/item/chems/food/butchery/meat = .
+			meat.set_meat_name(meat_name)
+		else if(istype(., /obj/item/chems/food/jerky))
+			var/obj/item/chems/food/jerky/jerk = .
+			jerk.set_meat_name(meat_name)
+
+/obj/item/chems/food/butchery/handle_utensil_cutting(obj/item/tool, mob/user)
+	. = ..()
+	if(length(.) && meat_name)
+		for(var/obj/item/chems/food/butchery/meat in .)
+			meat.set_meat_name(meat_name)
 
 /obj/item/chems/food/butchery/offal
 	name                = "offal"
@@ -145,8 +171,9 @@
 	if(donor && !isnull(slice_num))
 		slice_num = max(1, round(slice_num/2))
 
-/obj/item/chems/food/butchery/haunch/side/set_name_from(mob/living/donor)
-	SetName("side of [donor.name] meat")
+/obj/item/chems/food/butchery/haunch/side/set_meat_name(new_meat_name)
+	meat_name = new_meat_name
+	SetName("side of [new_meat_name] meat")
 
 /obj/item/chems/food/butchery/stomach
 	name                = "stomach"
