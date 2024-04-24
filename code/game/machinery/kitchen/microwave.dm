@@ -202,18 +202,6 @@
 /***********************************
 *   Microwave Menu Handling/Cooking
 ************************************/
-/obj/machinery/microwave/proc/select_recipe()
-	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
-	var/highest_count = 0
-	for(var/rtype in all_recipes)
-		var/decl/recipe/recipe = all_recipes[rtype]
-		if(!istype(recipe) || !recipe.can_cook_in(src, cooking_temperature))
-			continue
-		//okay, let's select the most complicated recipe
-		if(recipe.complexity >= highest_count)
-			highest_count = recipe.complexity
-			. = recipe
-
 /obj/machinery/microwave/proc/cook()
 	cook_break = FALSE
 	cook_dirty = FALSE
@@ -228,7 +216,7 @@
 	if (reagents.total_volume && prob(50)) // 50% chance a liquid recipe gets messy
 		dirty += CEILING(reagents.total_volume / 10)
 
-	var/decl/recipe/recipe = select_recipe()
+	var/decl/recipe/recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
 	if (!recipe)
 		failed = TRUE
 		cook_time = update_cook_time()
@@ -241,7 +229,7 @@
 			cook_break = TRUE
 	else
 		failed = FALSE
-		cook_time = update_cook_time(round(recipe.time * 2))
+		cook_time = update_cook_time(round(recipe.cooking_time * 2))
 
 	start()
 
@@ -249,7 +237,7 @@
 	return (ct / cooking_power)
 
 /obj/machinery/microwave/proc/finish_cooking()
-	var/decl/recipe/recipe = select_recipe()
+	var/decl/recipe/recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
 	if(!recipe)
 		return
 	var/result = recipe.result
@@ -257,7 +245,7 @@
 	while(recipe)
 		try
 			cooked_items += recipe.produce_result(src)
-			recipe = select_recipe()
+			recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
 			if (!recipe || (recipe.result != result))
 				break
 		catch(var/exception/E)

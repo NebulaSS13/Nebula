@@ -875,7 +875,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		. = newdata
 
 /decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
-	cached_color = null // colour masking may change
+	reagents.cached_color = null // colour masking may change
 	. = REAGENT_DATA(reagents, type)
 
 /decl/material/proc/explosion_act(obj/item/chems/holder, severity)

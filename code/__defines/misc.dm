@@ -353,3 +353,7 @@
 #else
 #define TYPE_INITIAL(REF, VAR) (REF::VAR)
 #endif
+
+// Used by recipe selection.
+#define RECIPE_CATEGORY_MICROWAVE "microwave"
+#define RECIPE_CATEGORY_POT       "pot"

@@ -1,3 +1,28 @@
+var/global/list/_cooking_recipe_cache = list()
+/proc/select_recipe(category, atom/container, cooking_temperature)
+
+	if(!category)
+		return
+
+	if(!global._cooking_recipe_cache[category])
+		var/list/recipes = list()
+		var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
+		for(var/rtype in all_recipes)
+			var/decl/recipe/recipe = all_recipes[rtype]
+			if(isnull(recipe.container_categories) || (category in recipe.container_categories))
+				recipes += recipe
+		global._cooking_recipe_cache[category] = recipes
+
+	var/list/available_recipes = global._cooking_recipe_cache[category]
+	if(!length(available_recipes))
+		return
+
+	var/highest_count = 0
+	for(var/decl/recipe/recipe as anything in available_recipes)
+		if(recipe.can_cook_in(container, cooking_temperature) && (!. || recipe.complexity >= highest_count))
+			highest_count = recipe.complexity
+			. = recipe
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * *
  * /datum/recipe by rastaf0            13 apr 2011 *
  * /decl/recipe by Neb                 21 may 2021 *
@@ -13,8 +38,10 @@
 	var/list/reagents             // example: = list(/decl/material/liquid/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items                // example: = list(/obj/item/crowbar, /obj/item/welder, /obj/item/screwdriver = 2) // place /foo/bar before /foo
 	var/list/fruit                // example: = list("fruit" = 3)
-	var/time = 100                // Cooking time in deciseconds.
+	var/cooking_time = 10 SECONDS                // Cooking time in deciseconds.
 
+	/// What categories can this recipe be cooked by? Null for any.
+	var/list/container_categories
 	/// How many items to create, or how many reagent units to add.
 	var/result_quantity = 1
 	/// An atom type to create, or a /decl/material type if you want to place a reagent into the container.
@@ -50,6 +77,8 @@
 	var/lore_text         // IC description of recipe/food.
 	var/mechanics_text    // Mechanical description of recipe/food.
 	var/antag_text        // Any antagonist-relevant stuff relating to this recipe.
+
+	var/completion_message
 
 /decl/recipe/validate()
 	. = ..()
@@ -269,6 +298,9 @@
 	/// Set the appropriate flag on the food for stressor updates.
 	for(var/obj/item/chems/food/food in .)
 		food.cooked_food = FOOD_COOKED
+
+	if(completion_message && ATOM_IS_OPEN_CONTAINER(container))
+		container.visible_message(SPAN_NOTICE(completion_message))
 
 	// We only care about the outputs, so we can go home now.
 	if(reagent_mix == REAGENT_REPLACE)

@@ -2332,6 +2332,8 @@
 #include "code\modules\fluids\fluid_mapped.dm"
 #include "code\modules\food\assembled.dm"
 #include "code\modules\food\cooking\_recipe.dm"
+#include "code\modules\food\cooking\cooking_vessels\_cooking_vessel.dm"
+#include "code\modules\food\cooking\cooking_vessels\pot.dm"
 #include "code\modules\food\cooking\recipes\recipe_assembled.dm"
 #include "code\modules\food\cooking\recipes\recipe_baked.dm"
 #include "code\modules\food\cooking\recipes\recipe_boiled.dm"

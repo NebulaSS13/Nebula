@@ -46,7 +46,8 @@ calculate text size per text.
 			if(istype(N) && LAZYACCESS(reagent_data, reagent_type))
 				var/list/taste_data = LAZYACCESS(reagent_data, reagent_type)
 				for(var/taste in taste_data)
-					if(!istext(taste))
+					// Mask check is temp pending rewrite of taste data.
+					if(!istext(taste) || taste == "mask_name" || taste == "mask_color")
 						continue
 					if(taste in tastes)
 						tastes[taste] += taste_data[taste]
