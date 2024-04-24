@@ -1,0 +1,4 @@
+/obj/item/clothing/accessory/kneepads/@SUBTYPES : /obj/item/clothing/shoes/kneepads/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/tangzhuang/@SUBTYPES : /obj/item/clothing/suit/jacket/tangzhuang/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/toggleable/black_vest/@SUBTYPES : /obj/item/clothing/suit/jacket/vest/black/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/toggleable/@SUBTYPES : /obj/item/clothing/suit/jacket/vest/@SUBTYPES{@OLD}

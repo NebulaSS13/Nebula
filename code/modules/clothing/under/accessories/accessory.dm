@@ -25,12 +25,6 @@
 	icon = 'icons/clothing/accessories/jewelry/necklace.dmi'
 	slot_flags = SLOT_FACE
 
-//Misc
-/obj/item/clothing/accessory/kneepads
-	name = "kneepads"
-	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
-	icon = 'icons/clothing/accessories/armor/kneepads.dmi'
-
 //Bracelets
 /obj/item/clothing/accessory/bracelet
 	name = "bracelet"

@@ -31,3 +31,23 @@
 	name = "captain's uniform jacket"
 	desc = "A less formal jacket for everyday captain use."
 	icon = 'icons/clothing/suit/jackets/captain.dmi'
+
+/obj/item/clothing/suit/jacket/vest
+	name = "vest"
+	desc = "A slick suit vest."
+	icon = 'icons/clothing/accessories/clothing/vest.dmi'
+
+/obj/item/clothing/suit/jacket/vest/black
+	name = "black vest"
+	color = COLOR_GRAY15
+
+/obj/item/clothing/suit/jacket/tangzhuang
+	name = "tangzhuang jacket"
+	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."
+	icon = 'icons/clothing/accessories/clothing/tangzuhang.dmi'
+
+/obj/item/clothing/suit/jacket/tangzhuang/get_assumed_clothing_state_modifiers()
+	var/static/list/expected_state_modifiers = list(
+		GET_DECL(/decl/clothing_state_modifier/rolled_sleeves)
+	)
+	return expected_state_modifiers
