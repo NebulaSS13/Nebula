@@ -173,7 +173,7 @@
 
 /obj/item/chems/food/butchery/haunch/side/set_meat_name(new_meat_name)
 	meat_name = new_meat_name
-	SetName("side of [new_meat_name] meat")
+	SetName("side of [new_meat_name]")
 
 /obj/item/chems/food/butchery/stomach
 	name                = "stomach"

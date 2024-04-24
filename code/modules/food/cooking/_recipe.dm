@@ -151,6 +151,7 @@
 		return produced
 
 	if(ispath(result, /decl/material))
+		world << "placing [result_quantity]x[result] in [container]"
 		container.reagents.add_reagent(result, result_quantity, get_result_data(container, used_ingredients))
 		return null
 
@@ -217,10 +218,15 @@
 
 	// Create our food products.
 	// Note that this will simply put reagents into the container for non-object recipes.
-	for(var/_ in 1 to result_quantity)
+	if(ispath(result, decl/material))
 		var/atom/movable/result_obj = create_result(container, used_ingredients)
 		if(istype(result_obj))
 			LAZYADD(., result_obj)
+	else
+		for(var/_ in 1 to result_quantity)
+			var/atom/movable/result_obj = create_result(container, used_ingredients)
+			if(istype(result_obj))
+				LAZYADD(., result_obj)
 
 	// Collect all our ingredient reagents in a buffer.
 	// If we aren't using a buffer, just discard the reagents.
