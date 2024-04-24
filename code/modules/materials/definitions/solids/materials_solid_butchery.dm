@@ -21,6 +21,7 @@
 	hitsound = 'sound/effects/squelch1.ogg'
 	fishing_bait_value = 1
 	nutriment_animal = TRUE
+	soup_overlay = "soup_chunks"
 
 /decl/material/solid/organic/meat/egg
 	name = "egg yolk"
@@ -30,6 +31,7 @@
 	uid = "solid_egg"
 	melting_point = 273
 	boiling_point = 373
+	soup_overlay = "soup_dumplings"
 
 /decl/material/solid/organic/meat/fish
 	name  = "fish meat"
