@@ -4,7 +4,7 @@
 	return combined_food_products
 
 /decl/recipe/slimetoast
-	display_name = "Slime Toast"
+	display_name = "slime toast"
 	reagents = list(/decl/material/liquid/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/slice/bread,
@@ -12,7 +12,7 @@
 	result = /obj/item/chems/food/jelliedtoast/slime
 
 /decl/recipe/slimedonut
-	display_name = "Slime Jelly Donut"
+	display_name = "slime jelly donut"
 	reagents = list(/decl/material/liquid/slimejelly = 5, /decl/material/liquid/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/dough
@@ -20,7 +20,7 @@
 	result = /obj/item/chems/food/donut/jelly/slime
 
 /decl/recipe/slimesandwich
-	display_name = "Slime Sandwich"
+	display_name = "slime sandwich"
 	reagents = list(/decl/material/liquid/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/slice/bread = 2,
