@@ -13,6 +13,7 @@
 	show_robotics_recipes = TRUE
 	name_column = "Fault"
 	treatment_column = "Recommended repair"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /proc/get_chem_effect_display_name(effect)
 	switch(effect)

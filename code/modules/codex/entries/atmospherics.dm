@@ -7,18 +7,21 @@
 	<br>To terminate a pipeline, use a cap to prevent the gas escaping into the environment."
 	include_subtypes = TRUE
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //T-shaped valves
 /datum/codex_entry/atmos_tvalve
 	associated_paths = list(/obj/machinery/atmospherics/tvalve)
 	mechanics_text = "Click this to toggle the mode.  The direction with the green light is where the gas will flow."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Normal valves
 /datum/codex_entry/atmos_valve
 	associated_paths = list(/obj/machinery/atmospherics/valve)
 	mechanics_text = "Click this to turn the valve.  If red, the pipes on each end are seperated.  Otherwise, they are connected."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //TEG ports
 /datum/codex_entry/atmos_circulator
@@ -26,24 +29,28 @@
 	mechanics_text = "This generates electricity, depending on the difference in temperature between each side of the machine.  The meter in \
 	the center of the machine gives an indicator of how much elecrtricity is being generated."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Passive gates
 /datum/codex_entry/atmos_gate
 	associated_paths = list(/obj/machinery/atmospherics/binary/passive_gate)
 	mechanics_text = "This is a one-way regulator, allowing gas to flow only at a specific pressure and flow rate.  If the light is green, it is flowing."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Normal pumps (high power one inherits from this)
 /datum/codex_entry/atmos_pump
 	associated_paths = list(/obj/machinery/atmospherics/binary/pump)
 	mechanics_text = "This moves gas from one pipe to another.  A higher target pressure demands more energy.  The side with the red end is the output."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Vents
 /datum/codex_entry/atmos_vent_pump
 	associated_paths = list(/obj/machinery/atmospherics/unary/vent_pump)
 	mechanics_text = "This pumps the contents of the attached pipe out into the atmosphere, if needed.  It can be controlled from an Air Alarm."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Freezers
 /datum/codex_entry/atmos_freezer
@@ -52,6 +59,7 @@
 	It can be upgraded by replacing the capacitors, manipulators, and matter bins.  It can be deconstructed by screwing the maintenance panel open with a \
 	screwdriver, and then using a crowbar."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Heaters
 /datum/codex_entry/atmos_heater
@@ -60,6 +68,7 @@
 	It can be upgraded by replacing the capacitors, manipulators, and matter bins.  It can be deconstructed by screwing the maintenance panel open with a \
 	screwdriver, and then using a crowbar."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Gas injectors
 /datum/codex_entry/atmos_injector
@@ -67,6 +76,7 @@
 	mechanics_text = "Outputs the pipe's gas into the atmosphere, similar to an airvent.  It can be controlled by a nearby atmospherics computer. \
 	A green light on it means it is on."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Scrubbers
 /datum/codex_entry/atmos_vent_scrubber
@@ -74,6 +84,7 @@
 	mechanics_text = "This filters the atmosphere of harmful gas.  Filtered gas goes to the pipes connected to it, typically a scrubber pipe. \
 	It can be controlled from an Air Alarm.  It can be configured to drain all air rapidly with a 'panic syphon' from an air alarm."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Omni filters
 /datum/codex_entry/atmos_omni_filter
@@ -81,12 +92,14 @@
 	mechanics_text = "Filters gas from a custom input direction, with up to two filtered outputs and a 'everything else' \
 	output.  The filtered output's arrows glow orange."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Omni mixers
 /datum/codex_entry/atmos_omni_mixer
 	associated_paths = list(/obj/machinery/atmospherics/omni/mixer)
 	mechanics_text = "Combines gas from custom input and output directions.  The percentage of combined gas can be defined."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Canisters
 /datum/codex_entry/atmos_canister
@@ -97,6 +110,7 @@
 	*DO NOT* remove the tank until the valve is closed.  A gas analyzer can be used to check the contents of the canister."
 	antag_text = "Canisters can be damaged, spilling their contents into the air, or you can just leave the release valve open."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Portable pumps
 /datum/codex_entry/atmos_power_pump
@@ -105,6 +119,7 @@
 	connecting it to a connector port.  The pump can pump the air in (sucking) or out (blowing), at a specific target pressure.  The powercell inside can be \
 	replaced by using a screwdriver, and then adding a new cell.  A tank of gas can also be attached to the air pump."
 	disambiguator = "machine"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Portable scrubbers
 /datum/codex_entry/atmos_power_scrubber
@@ -113,24 +128,28 @@
 	connecting it to a connector port.  The pump can pump the air in (sucking) or out (blowing), at a specific target pressure.  The powercell inside can be \
 	replaced by using a screwdriver, and then adding a new cell.  A tank of gas can also be attached to the scrubber. "
 	disambiguator = "machine"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Meters
 /datum/codex_entry/atmos_meter
 	associated_paths = list(/obj/machinery/meter)
 	mechanics_text = "Measures the volume and temperature of the pipe under the meter."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 //Pipe dispensers
 /datum/codex_entry/atmos_pipe_dispenser
 	associated_paths = list(/obj/machinery/fabricator/pipe)
 	mechanics_text = "This can be moved by using a wrench.  You will need to wrench it again when you want to use it.  You can put \
 	excess (atmospheric) pipes into the dispenser, as well.  The dispenser requires electricity to function."
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/transfer_valve
 	associated_paths = list(/obj/item/transfer_valve)
 	mechanics_text = "This machine is used to merge the contents of two different gas tanks. Plug the tanks into the transfer, then open the valve to mix them together. You can also attach various assembly devices to trigger this process."
 	antag_text = "With a tank of hot hydrogen and cold oxygen, this benign little atmospheric device becomes an incredibly deadly bomb. You don't want to be anywhere near it when it goes off."
 	disambiguator = "component"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/gas_tank
 	associated_paths = list(/obj/item/tank)
@@ -146,6 +165,7 @@
 	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173?C. \
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 	disambiguator = "atmospherics"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/gas_analyzer
 	associated_paths = list(/obj/item/scanner/gas)
@@ -153,3 +173,4 @@
 	additional output data; Moles and volume shows the moles per gas in the mixture and the total moles and volume; Gas \
 	traits and data describes the traits per gas, how it interacts with the world, and some of its property constants."
 	disambiguator = "equipment"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE

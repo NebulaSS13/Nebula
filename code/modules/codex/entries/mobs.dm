@@ -9,8 +9,10 @@
 	antag_text = "A cryptographic sequencer, available via a traitor uplink, can be used to subvert the drone to your cause."
 	disambiguator = "synthetic"
 	include_subtypes = TRUE
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/uncertified_module
 	associated_paths = list(/obj/item/borg/upgrade/uncertified)
 	mechanics_text = "This special chip will forcibly change a robot's module to a new one. In most cases, this is the only way for the robot to obtain these modules. Once you've unlocked the robot's maintenance hatch with an ID card and opened it with a crowbar, click the bot to install this chip."
 	lore_text = "No TSC, industrial concern, or military organization worth their salt would dare install uncertified hardware on their robotic platforms. Nevertheless, in backwater sectors of the universe, there is a thriving grey market for third-party modular configurations such as this one."
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE

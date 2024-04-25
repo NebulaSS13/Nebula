@@ -25,11 +25,18 @@
 	var/include_subtypes = FALSE
 	/// HTML returned when the entry is used to populate a guide manual.
 	var/guide_html
+	/// The map tech level this entry will appear for.
+	var/available_to_map_tech_level = MAP_TECH_LEVEL_ANY
+	/// If TRUE, the entry will be excluded from search results, category listings, or the index.
+	/// It will only be accessible from items and entries that directly link to it.
+	var/unsearchable = FALSE
 
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE
 
 /datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
+	if(global.using_map.map_tech_level < available_to_map_tech_level)
+		unsearchable = TRUE
 
 	if(_display_name)       name =               _display_name
 	if(_associated_paths)   associated_paths =   _associated_paths
