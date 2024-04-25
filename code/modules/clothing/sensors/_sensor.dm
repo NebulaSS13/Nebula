@@ -2,6 +2,7 @@
 	name = "sensor"
 	abstract_type = /obj/item/clothing/sensor
 	accessory_slot = ACCESSORY_SLOT_SENSORS
+	fallback_slot = slot_tie_str
 
 /obj/item/clothing/sensor/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
 	return new /image

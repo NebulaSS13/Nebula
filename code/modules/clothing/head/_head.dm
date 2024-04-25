@@ -6,6 +6,7 @@
 	w_class             = ITEM_SIZE_SMALL
 	slot_flags          = SLOT_HEAD
 	body_parts_covered  = SLOT_HEAD
+	fallback_slot       = slot_head_str
 
 	var/protects_against_weather = FALSE
 	var/light_applied
