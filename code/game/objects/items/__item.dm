@@ -853,14 +853,20 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
-/obj/item/proc/get_examine_line()
+/obj/item/proc/get_examine_name()
+	. = name
 	if(coating)
-		. = SPAN_WARNING("[html_icon(src)] [gender==PLURAL?"some":"a"] <font color='[coating.get_color()]'>stained</font> [name]")
+		. = SPAN_WARNING("<font color='[coating.get_color()]'>stained</font> [.]")
+	if(gender == PLURAL)
+		. = "some [.]"
 	else
-		. = "[html_icon(src)] \a [src]"
+		. = "\a [.]"
+
+/obj/item/proc/get_examine_line()
+	. = "[html_icon(src)] [get_examine_name()]"
 	var/ID = GetIdCard()
 	if(ID)
-		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
+		. += " <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
 
 /obj/item/proc/on_active_hand()
 

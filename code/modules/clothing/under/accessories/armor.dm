@@ -141,6 +141,7 @@
 	name = "master armor"
 	icon = 'icons/clothing/accessories/tags/tag_small.dmi'
 	icon_state = ICON_STATE_WORLD
+	accessory_visibility = ACCESSORY_VISIBILITY_HIDDEN
 
 //Decorative attachments
 /obj/item/clothing/accessory/armor/tag

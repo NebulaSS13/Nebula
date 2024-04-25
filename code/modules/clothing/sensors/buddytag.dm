@@ -2,7 +2,7 @@
 	name = "buddy tag"
 	desc = "A tiny device, paired up with a counterpart set to same code. When devices are taken apart too far, they start beeping."
 	icon = 'icons/clothing/accessories/buddytag.dmi'
-	accessory_high_visibility = TRUE
+	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 	var/next_search = 0
 	var/on = 0
 	var/id = 1
