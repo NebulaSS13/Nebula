@@ -69,7 +69,7 @@
 	result = /obj/item/chems/food/donut/chaos
 
 /decl/recipe/baked/donut
-	display_name = "Plain Donut"
+	display_name = "plain donut"
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/dough
@@ -77,12 +77,12 @@
 	result = /obj/item/chems/food/donut
 
 /decl/recipe/baked/donut/jelly
-	display_name = "Berry Jelly Donut"
+	display_name = "berry jelly donut"
 	reagents = list(/decl/material/liquid/drink/juice/berry = 5, /decl/material/liquid/nutriment/sugar = 5)
 	result = /obj/item/chems/food/donut/jelly
 
 /decl/recipe/baked/donut/jelly/cherry
-	display_name = "Cherry Jelly Donut"
+	display_name = "cherry jelly donut"
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
 
 /decl/recipe/baked/meatbread
@@ -230,7 +230,7 @@
 	result = /obj/item/chems/food/plumphelmetbiscuit
 
 /decl/recipe/baked/plumphelmetbiscuitvegan
-	display_name = "Vegan Plump Biscuit"
+	display_name = "vegan plump biscuit"
 	fruit = list("plumphelmet" = 1)
 	reagents = list(/decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
 	result = /obj/item/chems/food/plumphelmetbiscuit
