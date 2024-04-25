@@ -1,18 +1,14 @@
 /obj/item/chems/food/butchery/cutlet
-	name           = "cutlet"
-	desc           = "A tasty meat slice."
-	icon           = 'icons/obj/items/butchery/cutlet.dmi'
-	bitesize       = 2
-	center_of_mass = @'{"x":17,"y":20}'
-	material       = /decl/material/solid/organic/meat
-	nutriment_type = /decl/material/solid/organic/meat
-	nutriment_amt  = 1
+	name                = "cutlet"
+	desc                = "A tasty meat slice."
+	icon                = 'icons/obj/items/butchery/cutlet.dmi'
+	bitesize            = 2
+	nutriment_amt       = 1
+	center_of_mass      = @'{"x":17,"y":20}'
 	material_alteration = MAT_FLAG_ALTERATION_NONE
-
-/obj/item/chems/food/butchery/cutlet/Initialize()
-	. = ..()
-	slice_path = null
-	slice_num = null
+	slice_path          = /obj/item/chems/food/butchery/chopped
+	slice_num           = 1
+	cooked_food         = FOOD_COOKED
 
 /obj/item/chems/food/butchery/cutlet/raw
 	desc                           = "A thin piece of raw meat."
@@ -23,7 +19,3 @@
 	drying_wetness                 = 30
 	dried_type                     = /obj/item/chems/food/jerky/cutlet
 	nutriment_amt                  = 2
-
-/obj/item/chems/food/butchery/cutlet/raw/set_meat_name(new_meat_name)
-	. = ..()
-	SetName("raw [name]")

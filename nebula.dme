@@ -1801,6 +1801,7 @@
 #include "code\modules\butchery\butchery_data_reptiles.dm"
 #include "code\modules\butchery\butchery_hook.dm"
 #include "code\modules\butchery\butchery_products.dm"
+#include "code\modules\butchery\butchery_products_chopped.dm"
 #include "code\modules\butchery\butchery_products_cutlet.dm"
 #include "code\modules\butchery\butchery_products_meat.dm"
 #include "code\modules\butchery\butchery_products_meat_fish.dm"

@@ -1,45 +1,56 @@
-/decl/material/liquid/nutriment/soup_stock
+/decl/material/liquid/nutriment/soup
+	name = "abstract soup"
+	abstract_type = /decl/material/liquid/nutriment/soup
+	var/mask_name_suffix = "soup"
+
+/decl/material/liquid/nutriment/soup/initialize_data(var/newdata)
+	var/list/ingredients = LAZYACCESS(newdata, "soup_ingredients")
+	if(length(ingredients))
+		newdata["mask_name"] = "[english_list(ingredients)] [mask_name_suffix]"
+	return newdata
+
+/decl/material/liquid/nutriment/soup/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
+
+	var/list/olddata = LAZYACCESS(reagents.reagent_data, type)
+	var/soup_flags = SOUP_PLAIN
+	var/list/ingredients = list()
+	if(islist(olddata))
+		soup_flags |= olddata["soup_flags"]
+		var/list/old_ingredients = olddata["soup_ingredients"]
+		for(var/ingredient in old_ingredients)
+			ingredients[ingredient] += old_ingredients[ingredient]
+
+	if(islist(newdata))
+		soup_flags |= newdata["soup_flags"]
+		var/list/new_ingredients = newdata["soup_ingredients"]
+		for(var/ingredient in new_ingredients)
+			ingredients[ingredient] += new_ingredients[ingredient]
+
+	. = ..()
+
+	if(length(ingredients))
+		LAZYSET(., "mask_name", "[english_list(ingredients)] [mask_name_suffix]")
+		LAZYSET(., "soup_ingredients", ingredients)
+	else
+		LAZYREMOVE(., "mask_name")
+
+	if(soup_flags)
+		LAZYSET(., "soup_flags", soup_flags)
+	else
+		LAZYREMOVE(., "soup_flags")
+
+/decl/material/liquid/nutriment/soup/stock
 	name = "stock"
 	uid = "liquid_soup_stock"
-	abstract_type = /decl/material/liquid/nutriment/soup_stock
-
-/decl/material/liquid/nutriment/soup_stock/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
-	var/list/ret_data = ..()
-	var/list/olddata = LAZYACCESS(reagents.reagent_data, type)
-	var/mask_name = islist(newdata) && newdata["mask_name"]
-	if(mask_name)
-		if(!islist(olddata) || olddata["mask_name"] == mask_name)
-			LAZYSET(ret_data, "mask_name", mask_name)
-		else if(islist(ret_data))
-			LAZYREMOVE(ret_data, "mask_name")
-	else if(islist(olddata))
-		var/old_stock_name = olddata["mask_name"]
-		if(old_stock_name)
-			LAZYSET(ret_data, "mask_name", old_stock_name)
-		else
-			LAZYREMOVE(ret_data, "mask_name")
-	return ret_data
-
-/decl/material/liquid/nutriment/soup_stock/meat
-	name = "meat stock"
-	uid = "liquid_soup_stock_meat"
-	liquid_name = "meat stock"
-	solid_name = "powdered meat stock"
-	codex_name = "meat stock"
+	mask_name_suffix = "stock"
+	solid_name = "powdered stock"
 	color = "#8a7452"
+	mask_name_suffix = "stock"
 
-/decl/material/liquid/nutriment/soup_stock/vegetable
-	name = "vegetable stock"
-	uid = "liquid_soup_stock_vegetable"
-	liquid_name = "vegetable stock"
-	solid_name = "powdered vegetable stock"
-	codex_name = "vegetable stock"
-	color = "#b0c772"
-
-/decl/material/liquid/nutriment/soup_stock/bone
+/decl/material/liquid/nutriment/soup/stock/bone
 	name = "bone broth"
 	uid = "liquid_soup_stock_bone"
 	liquid_name = "bone broth"
 	solid_name = "powdered bone broth"
-	codex_name = "bone broth"
 	color = "#c0b067"
+	mask_name_suffix = "broth"

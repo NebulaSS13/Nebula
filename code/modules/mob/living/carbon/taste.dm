@@ -47,7 +47,7 @@ calculate text size per text.
 				var/list/taste_data = LAZYACCESS(reagent_data, reagent_type)
 				for(var/taste in taste_data)
 					// Mask check is temp pending rewrite of taste data.
-					if(!istext(taste) || taste == "mask_name" || taste == "mask_color")
+					if(TASTE_IS_DATA)
 						continue
 					if(taste in tastes)
 						tastes[taste] += taste_data[taste]
@@ -76,10 +76,16 @@ calculate text size per text.
 
 		//deal with percentages
 		var/total_taste = 0
-		for(var/taste_desc in tastes)
-			total_taste += tastes[taste_desc]
-		for(var/taste_desc in tastes)
-			var/percent = tastes[taste_desc]/total_taste * 100
+		for(var/taste in tastes)
+			// Mask check is temp pending rewrite of taste data.
+			if(TASTE_IS_DATA)
+				continue
+			total_taste += tastes[taste]
+		for(var/taste in tastes)
+			// Mask check is temp pending rewrite of taste data.
+			if(TASTE_IS_DATA)
+				continue
+			var/percent = tastes[taste]/total_taste * 100
 			if(percent < minimum_percent)
 				continue
 			var/intensity_desc = "a hint of"
@@ -88,8 +94,8 @@ calculate text size per text.
 			else if(percent > minimum_percent * 3)
 				intensity_desc = "the strong flavor of"
 			if(intensity_desc == "")
-				out += "[taste_desc]"
+				out += "[taste]"
 			else
-				out += "[intensity_desc] [taste_desc]"
+				out += "[intensity_desc] [taste]"
 
 	return english_list(out, "something indescribable")

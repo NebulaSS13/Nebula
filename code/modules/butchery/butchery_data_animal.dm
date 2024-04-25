@@ -6,7 +6,7 @@
 /decl/butchery_data/animal/harvest_innards(mob/donor)
 	. = ..()
 	if(stomach_type)
-		var/product = new stomach_type(get_turf(donor), gut_material)
+		var/product = new stomach_type(get_turf(donor), gut_material, donor)
 		LAZYADD(., product)
 
 /decl/butchery_data/animal/corgi

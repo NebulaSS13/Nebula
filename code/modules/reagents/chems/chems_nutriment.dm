@@ -35,7 +35,7 @@
 	LAZYINITLIST(data)
 	for(var/taste in newdata)
 		// Temp until nutriment data is reworked.
-		if(taste == "mask_name" || taste == "mask_color")
+		if(TASTE_IS_DATA)
 			continue
 		// End temp.
 		if(taste in data)
@@ -47,12 +47,12 @@
 	var/totalFlavor = 0
 	for(var/taste in data)
 		// Temp until nutriment data is reworked.
-		if(taste == "mask_name" || taste == "mask_color")
+		if(TASTE_IS_DATA)
 			continue
 		totalFlavor += data[taste]
 	if(totalFlavor)
 		for(var/taste in data)
-			if(taste == "mask_name" || taste == "mask_color")
+			if(TASTE_IS_DATA)
 				continue
 			if(data[taste]/totalFlavor < 0.1)
 				data -= taste

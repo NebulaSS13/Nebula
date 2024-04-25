@@ -10,6 +10,7 @@
 	slice_path          = null
 	slice_num           = null
 	max_health          = 180
+	cooked_food         = FOOD_RAW
 	var/fat_material    = /decl/material/solid/organic/meat/gut
 	var/meat_name       = "beef"
 
@@ -39,29 +40,41 @@
 
 /obj/item/chems/food/butchery/proc/set_meat_name(new_meat_name)
 	meat_name = new_meat_name
-	SetName("[meat_name] [initial(name)]")
+	if(cooked_food == FOOD_RAW)
+		SetName("raw [meat_name] [initial(name)]")
+	else
+		SetName("[meat_name] [initial(name)]")
 
 /obj/item/chems/food/butchery/get_grilled_product()
 	. = ..()
-	if(meat_name && istype(., /obj/item/chems/food/butchery))
-		var/obj/item/chems/food/butchery/meat = .
-		meat.set_meat_name(meat_name)
+	if(. && istype(., /obj/item/chems/food))
+		var/obj/item/chems/food/food = .
+		food.cooked_food = FOOD_COOKED
+		if(meat_name && istype(., /obj/item/chems/food/butchery))
+			var/obj/item/chems/food/butchery/meat = .
+			meat.set_meat_name(meat_name)
 
 /obj/item/chems/food/butchery/get_dried_product()
 	. = ..()
-	if(. && meat_name)
-		if(istype(., /obj/item/chems/food/butchery))
-			var/obj/item/chems/food/butchery/meat = .
-			meat.set_meat_name(meat_name)
-		else if(istype(., /obj/item/chems/food/jerky))
-			var/obj/item/chems/food/jerky/jerk = .
-			jerk.set_meat_name(meat_name)
+	if(. && istype(., /obj/item/chems/food))
+		var/obj/item/chems/food/food = .
+		food.cooked_food = FOOD_COOKED
+		if(meat_name)
+			if(istype(., /obj/item/chems/food/butchery))
+				var/obj/item/chems/food/butchery/meat = .
+				meat.set_meat_name(meat_name)
+			else if(istype(., /obj/item/chems/food/jerky))
+				var/obj/item/chems/food/jerky/jerk = .
+				jerk.set_meat_name(meat_name)
 
 /obj/item/chems/food/butchery/handle_utensil_cutting(obj/item/tool, mob/user)
 	. = ..()
-	if(length(.) && meat_name)
-		for(var/obj/item/chems/food/butchery/meat in .)
-			meat.set_meat_name(meat_name)
+	if(length(.))
+		for(var/obj/item/chems/food/food in .)
+			food.cooked_food = cooked_food
+		if(meat_name)
+			for(var/obj/item/chems/food/butchery/meat in .)
+				meat.set_meat_name(meat_name)
 
 /obj/item/chems/food/butchery/offal
 	name                = "offal"
