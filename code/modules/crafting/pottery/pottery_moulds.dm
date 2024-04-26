@@ -135,7 +135,10 @@
 		if(!squash_item())
 			physically_destroyed(src)
 	else
-		take_damage(rand(10, 20))
+		// At skill 1/5, damage it 3x more. At skill 2/5, damage it 1.5x more.
+		// At skill 3/5 deal base damage, at 4/5 deal 75% damage, and at max skill deal 60% damage.
+		var/damage_modifier = clamp(1 + (user.get_skill_value(work_skill) - SKILL_ADEPT) / (SKILL_MAX - SKILL_BASIC), 0.1, 3)
+		take_damage(rand(5, 10) / damage_modifier)
 
 /obj/item/chems/mould/proc/try_take_impression(mob/user, obj/item/thing)
 
