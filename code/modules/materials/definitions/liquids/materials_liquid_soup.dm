@@ -56,3 +56,10 @@
 	color = "#c0b067"
 	mask_name_suffix = "broth"
 	taste_description = "salty, savoury flavours"
+
+/decl/material/liquid/nutriment/soup/simple
+	name = "soup"
+	liquid_name = "soup"
+	solid_name = "powdered soup"
+	uid = "liquid_soup_simple"
+	mask_name_suffix = "soup"

@@ -6,6 +6,7 @@
 	w_class             = ITEM_SIZE_LARGE
 	volume              = 20
 	nutriment_type      = /decl/material/solid/organic/meat
+	nutriment_desc      = list("umami" = 10)
 	nutriment_amt       = 20
 	slice_path          = null
 	slice_num           = null

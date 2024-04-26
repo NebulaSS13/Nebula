@@ -1,17 +1,30 @@
 /obj/item/chems/cooking_vessel
 
-	abstract_type       = /obj/item/chems/cooking_vessel
-	atom_flags          = ATOM_FLAG_OPEN_CONTAINER
-	obj_flags           = OBJ_FLAG_HOLLOW
-	w_class             = ITEM_SIZE_LARGE
-	icon_state          = ICON_STATE_WORLD
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	storage             = /datum/storage/hopper/industrial
-	material            = /decl/material/solid/metal/stainlesssteel
+	abstract_type                 = /obj/item/chems/cooking_vessel
+	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags                     = OBJ_FLAG_HOLLOW
+	w_class                       = ITEM_SIZE_LARGE
+	icon_state                    = ICON_STATE_WORLD
+	material_alteration           = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	storage                       = /datum/storage/hopper/industrial
+	material                      = /decl/material/solid/metal/stainlesssteel
+	amount_per_transfer_from_this = 15
 
 	var/cooking_category
 	var/started_cooking
 	var/decl/recipe/last_recipe
+
+// TODO: ladle
+/obj/item/chems/cooking_vessel/attackby(obj/item/W, mob/user)
+	if(user.a_intent != I_HURT && W.reagents && ATOM_IS_OPEN_CONTAINER(W))
+		if(W.reagents.total_volume)
+			if(istype(W, /obj/item/chems))
+				var/obj/item/chems/vessel = W
+				if(vessel.standard_pour_into(user, src))
+					return TRUE
+		else if(standard_pour_into(user, W))
+			return TRUE
+	return ..()
 
 /obj/item/chems/cooking_vessel/proc/get_cooking_contents_strings()
 	. = list()

@@ -157,5 +157,4 @@
 			for(var/taste in nutriment_desc)
 				if(nutriment_desc[taste] <= 0)
 					nutriment_desc[taste] = 1
-			nutriment_desc = list("taste" = nutriment_desc)
-		add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)
+		add_to_reagents(nutriment_type, nutriment_amt, list("taste" = nutriment_desc))

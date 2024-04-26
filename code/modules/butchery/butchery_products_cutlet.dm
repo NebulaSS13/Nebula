@@ -9,6 +9,7 @@
 	slice_path          = /obj/item/chems/food/butchery/chopped
 	slice_num           = 1
 	cooked_food         = FOOD_COOKED
+	w_class             = ITEM_SIZE_SMALL
 
 /obj/item/chems/food/butchery/cutlet/raw
 	desc                           = "A thin piece of raw meat."

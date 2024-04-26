@@ -1,9 +1,10 @@
 /obj/item/chems/cooking_vessel/pot
-	name             = "pot"
-	desc             = "A large pot for boiling things."
-	icon             = 'icons/obj/food/cooking_vessels/pot.dmi'
-	volume           = 100
-	cooking_category = RECIPE_CATEGORY_POT
+	name               = "pot"
+	desc               = "A large pot for boiling things."
+	icon               = 'icons/obj/food/cooking_vessels/pot.dmi'
+	volume             = 100
+	cooking_category   = RECIPE_CATEGORY_POT
+	presentation_flags = PRESENTATION_FLAG_NAME
 
 /obj/item/chems/cooking_vessel/pot/get_cooking_contents_strings()
 	. = ..()

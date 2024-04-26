@@ -5,6 +5,7 @@
 	icon          = 'icons/obj/items/butchery/chopped.dmi'
 	bitesize      = 2
 	nutriment_amt = 1
+	w_class       = ITEM_SIZE_TINY
 
 /obj/item/chems/food/butchery/chopped/Initialize()
 	. = ..()
