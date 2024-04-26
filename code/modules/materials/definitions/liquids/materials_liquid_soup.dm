@@ -51,6 +51,7 @@
 
 /decl/material/liquid/nutriment/soup/stock
 	name = "broth"
+	codex_name = "simple broth"
 	uid = "liquid_soup_broth"
 	mask_name_suffix = "broth"
 	solid_name = "stock"

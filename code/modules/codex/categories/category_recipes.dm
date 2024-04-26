@@ -103,11 +103,11 @@
 		var/recipe_name = recipe.display_name || sanitize(initial(recipe_product.name))
 		guide_html += "<h3>[capitalize(recipe_name)]</h3>Cook [english_list(ingredients)] for [CEILING(recipe.cooking_time/10)] second\s."
 
-		entries_to_register += new /datum/codex_entry(             \
-		 _display_name =       "[recipe_name] (microwave recipe)", \
-		 _lore_text =          lore_text,                          \
-		 _mechanics_text =     mechanics_text,                     \
-		 _antag_text =         recipe.antag_text                   \
+		entries_to_register += new /datum/codex_entry(           \
+		 _display_name =       "[recipe_name] (cooking recipe)", \
+		 _lore_text =          lore_text,                        \
+		 _mechanics_text =     mechanics_text,                   \
+		 _antag_text =         recipe.antag_text                 \
 		)
 
 	for(var/datum/codex_entry/entry in entries_to_register)
