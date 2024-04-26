@@ -2402,6 +2402,7 @@
 #include "code\modules\hydroponics\grown.dm"
 #include "code\modules\hydroponics\grown_inedible.dm"
 #include "code\modules\hydroponics\grown_predefined.dm"
+#include "code\modules\hydroponics\processed_grown.dm"
 #include "code\modules\hydroponics\seed.dm"
 #include "code\modules\hydroponics\seed_appearance.dm"
 #include "code\modules\hydroponics\seed_datums.dm"

@@ -24,7 +24,7 @@
 	var/list/roasted_chems         // Chemicals that a roasted/grilled plant product will have.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
-	var/kitchen_tag                // Used by the reagent grinder.
+	var/grown_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/product_type = /obj/item/chems/food/grown
@@ -34,6 +34,13 @@
 	var/hydrotray_only
 	var/base_seed_value = 5 // Used when generating price.
 	var/scannable_result
+	var/grown_is_seed = FALSE
+
+	// Dissection values.
+	var/min_seed_extracted = 1
+	var/max_seed_extracted = 2
+	var/slice_product = /obj/item/chems/food/processed_grown/slice
+	var/slice_amount = 5
 
 	// Cached images for overlays
 	var/image/dead_overlay
@@ -617,10 +624,13 @@
 	// We handle this before we do the rest of the looping, as normal traits don't really include lists.
 	switch(gene.genetype)
 		if(GENE_BIOCHEMISTRY)
-			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
-				if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
-			if(!chems) chems = list()
+			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
+				if(get_trait(trait) > 0)
+					set_trait(trait,get_trait(trait),null,1,0.85)
+
+			if(!chems)
+				chems = list()
 
 			var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
 			for(var/rid in gene_value)
@@ -654,8 +664,12 @@
 			var/list/new_gasses = gene.values["[TRAIT_CONSUME_GASSES]"]
 			consume_gasses |= new_gasses
 			gene.values["[TRAIT_CONSUME_GASSES]"] = null
+
 		if(GENE_METABOLISM)
-			product_type = gene.values["product_type"]
+			product_type  = gene.values["product_type"]
+			slice_product = gene.values["slice_product"]
+			slice_amount  = gene.values["slice_amount"]
+
 			gene.values["product_type"] = null
 
 	for(var/trait in gene.values)
@@ -685,7 +699,9 @@
 		if(GENE_HARDINESS)
 			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE,TRAIT_ENDURANCE)
 		if(GENE_METABOLISM)
-			P.values["product_type"] = product_type
+			P.values["product_type"]  = product_type
+			P.values["slice_product"] = slice_product
+			P.values["slice_amount"]  = slice_amount
 			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_REQUIRES_WATER,TRAIT_ALTER_TEMP)
 		if(GENE_VIGOUR)
 			traits_to_copy = list(TRAIT_PRODUCTION,TRAIT_MATURATION,TRAIT_YIELD,TRAIT_SPREAD)
@@ -780,17 +796,19 @@
 // be put into the global datum list until the product is harvested, though.
 /datum/seed/proc/diverge(var/modified)
 
-	if(get_trait(TRAIT_IMMUTABLE) > 0) return
+	if(get_trait(TRAIT_IMMUTABLE) > 0)
+		return
 
 	//Set up some basic information.
 	var/datum/seed/new_seed = new
-	new_seed.name =            "new line"
-	new_seed.uid =              0
-	new_seed.roundstart =       0
+	new_seed.name             = "new line"
+	new_seed.uid              = 0
+	new_seed.roundstart       = 0
 	new_seed.can_self_harvest = can_self_harvest
-	new_seed.kitchen_tag =      kitchen_tag
-	new_seed.trash_type =       trash_type
-	new_seed.product_type =     product_type
+	new_seed.grown_tag        = grown_tag
+	new_seed.trash_type       = trash_type
+	new_seed.product_type     = product_type
+
 	//Copy over everything else.
 	if(mutants)        new_seed.mutants = mutants.Copy()
 	if(chems)          new_seed.chems = chems.Copy()
@@ -878,7 +896,7 @@
 	clone.can_self_harvest = can_self_harvest
 
 	//misc data
-	clone.kitchen_tag      = kitchen_tag
+	clone.grown_tag        = grown_tag
 	clone.trash_type       = trash_type
 	clone.product_type     = product_type
 	clone.base_seed_value  = base_seed_value
@@ -886,3 +904,25 @@
 
 	clone.update_growth_stages()
 	return clone
+
+/datum/seed/proc/show_slice_message(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
+	if(slice_product == /obj/item/chems/food/processed_grown/chopped)
+		sliced.visible_message(SPAN_NOTICE("\The [user] quickly chops up \the [sliced] with \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/crushed)
+		sliced.visible_message(SPAN_NOTICE("\The [user] methodically crushes \the [sliced] with the handle of \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/sticks)
+		sliced.visible_message(SPAN_NOTICE("\The [user] neatly slices \the [sliced] into sticks with \the [tool]."))
+	else
+		return null
+	return TRUE
+
+/datum/seed/proc/show_slice_message_poor(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
+	if(slice_product == /obj/item/chems/food/processed_grown/chopped)
+		sliced.visible_message(SPAN_NOTICE("\The [user] crudely chops \the [sliced] with \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/crushed)
+		sliced.visible_message(SPAN_NOTICE("\The [user] messily crushes \the [sliced] with the handle of \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/sticks)
+		sliced.visible_message(SPAN_NOTICE("\The [user] roughly slices \the [sliced] into sticks with \the [tool]."))
+	else
+		return null
+	return TRUE

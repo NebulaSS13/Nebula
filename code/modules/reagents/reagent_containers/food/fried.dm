@@ -26,17 +26,6 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/chems/food/rawsticks
-	name = "raw potato sticks"
-	desc = "Uncooked potato stick, not very tasty."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "rawsticks"
-	bitesize = 2
-	center_of_mass = @'{"x":16,"y":12}'
-	nutriment_desc = list("potato" = 3)
-	nutriment_amt = 3
-	material = /decl/material/solid/organic/plantmatter
-
 /obj/item/chems/food/cheesyfries
 	name = "cheesy fries"
 	desc = "Fries. Covered in cheese. Duh."

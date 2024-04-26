@@ -288,7 +288,7 @@
 					activate_pin(2)
 					return FALSE
 
-				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/cutting))
+				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/extracted/cutting))
 					if(!TR.seed)
 						acting_object.visible_message("<span class='notice'>[acting_object] plants [O].</span>")
 						TR.dead = 0

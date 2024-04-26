@@ -144,6 +144,25 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 2
 	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/organic/plantmatter
+	var/plant_type = "pumpkin"
+
+// Duplicated from growns for now. TODO: move sliceability down to other objects like clay.
+/obj/item/clothing/head/pumpkinhead/attackby(obj/item/W, mob/user)
+	if(IS_KNIFE(W) && user.a_intent != I_HURT)
+		var/datum/seed/plant = SSplants.seeds[plant_type]
+		if(!plant || !plant.slice_amount || !plant.slice_product)
+			return ..()
+		var/slice_amount = plant.slice_amount
+		if(W.w_class > ITEM_SIZE_NORMAL || !user.skill_check(SKILL_COOKING, SKILL_BASIC))
+			plant.show_slice_message_poor(user, W, src)
+			slice_amount = rand(1, max(1, round(slice_amount*0.5)))
+		else
+			plant.show_slice_message(user, W, src)
+		for(var/i = 1 to slice_amount)
+			new /obj/item/chems/food/processed_grown/chopped(loc, material?.type, plant)
+		return TRUE
+	return ..()
 
 /*
  * Kitty ears

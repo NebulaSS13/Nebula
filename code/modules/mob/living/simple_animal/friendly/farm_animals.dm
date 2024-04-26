@@ -230,9 +230,9 @@ var/global/chicken_count = 0
 		global.chicken_count -= 1
 
 /mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/chems/food/grown)) //feedin' dem chickens
-		var/obj/item/chems/food/grown/G = O
-		if(G.seed && G.seed.kitchen_tag == "wheat")
+	if(istype(O, /obj/item/chems/food)) //feedin' dem chickens
+		var/obj/item/chems/food/G = O
+		if(findtext(G.get_grown_tag(), "wheat")) // includes chopped, crushed, dried etc.
 			if(!stat && eggsleft < 8)
 				user.visible_message("<span class='notice'>[user] feeds [O] to [name]! It clucks happily.</span>","<span class='notice'>You feed [O] to [name]! It clucks happily.</span>")
 				qdel(O)

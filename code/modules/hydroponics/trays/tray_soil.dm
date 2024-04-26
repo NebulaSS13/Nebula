@@ -127,7 +127,6 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible
 	name = "plant"
 	desc = null
-	icon = 'icons/obj/seeds.dmi'
 	icon_state = "blank"
 	is_spawnable_type = FALSE
 	var/list/connected_zlevels //cached for checking if we someone is obseving us so we should process

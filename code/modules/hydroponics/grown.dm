@@ -11,7 +11,17 @@
 	drying_wetness = 45
 	dried_type = /obj/item/chems/food/grown/dry
 	ingredient_flags = INGREDIENT_FLAG_VEGETABLE
+	var/work_skill = SKILL_BOTANY
+	var/seeds_extracted = FALSE
 	var/datum/seed/seed
+
+/obj/item/chems/food/grown/examine(mob/user, distance)
+	. = ..()
+	if(user && distance <= 1 && seed && user.skill_check(work_skill, SKILL_BASIC))
+		if(seed.grown_is_seed)
+			to_chat(user, SPAN_NOTICE("\The [src] can be planted directly, without having to extract any seeds."))
+		else if(!seeds_extracted && seed.min_seed_extracted)
+			to_chat(user, SPAN_NOTICE("With a knife, you could extract at least [seed.min_seed_extracted] seed\s."))
 
 /obj/item/chems/food/grown/Initialize(mapload, material_key, _seed)
 
@@ -24,6 +34,10 @@
 	if(!istype(seed))
 		PRINT_STACK_TRACE("Grown initializing with null or invalid seed type '[seed || "NULL"]'")
 		return INITIALIZE_HINT_QDEL
+
+	filling_color = seed.get_trait(TRAIT_PRODUCT_COLOUR) || seed.get_trait(TRAIT_FLESH_COLOUR)
+	slice_path    = seed.slice_product
+	slice_num     = seed.slice_amount
 
 	if(!seed.chems && !(dry && seed.dried_chems) && !(backyard_grilling_count > 0 && seed.roasted_chems))
 		return INITIALIZE_HINT_QDEL // No reagent contents, no froot
@@ -42,6 +56,7 @@
 		SetName("[seed.seed_name]")
 	if(seed.product_material)
 		material = seed.product_material
+
 	trash                          = seed.get_trash_type()
 	backyard_grilling_product      = seed.backyard_grilling_product
 	backyard_grilling_rawness      = seed.backyard_grilling_rawness
@@ -190,68 +205,55 @@ var/global/list/_wood_materials = list(
 	/decl/material/solid/organic/wood/yew
 )
 
+/obj/item/chems/food/grown/show_slice_message(mob/user, obj/item/tool)
+	if(!seed?.show_slice_message(user, tool, src))
+		..()
+
+/obj/item/chems/food/grown/show_slice_message_poor(mob/user, obj/item/tool)
+	if(!seed?.show_slice_message_poor(user, tool, src))
+		..()
+
 /obj/item/chems/food/grown/attackby(var/obj/item/W, var/mob/user)
 
-	if(seed)
-		if(seed.get_trait(TRAIT_PRODUCES_POWER) && IS_COIL(W))
-			var/obj/item/stack/cable_coil/C = W
-			if(C.use(5))
-				//TODO: generalize this.
-				to_chat(user, SPAN_NOTICE("You add some cable to \the [src] and slide it inside the battery casing."))
-				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
+	if(!seed || user.a_intent == I_HURT)
+		return ..()
+
+	if(seed.get_trait(TRAIT_PRODUCES_POWER) && IS_COIL(W))
+		var/obj/item/stack/cable_coil/C = W
+		if(C.use(5))
+			//TODO: generalize this.
+			to_chat(user, SPAN_NOTICE("You add some cable to \the [src] and slide it inside the battery casing."))
+			var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
+			qdel(src)
+			user.put_in_hands(pocell)
+			pocell.maxcharge =  seed.get_trait(TRAIT_POTENCY) * 10
+			pocell.charge = pocell.maxcharge
+		return TRUE
+
+	if(IS_KNIFE(W) && !seeds_extracted && !seed.grown_is_seed && seed.min_seed_extracted && user.skill_check(work_skill, SKILL_BASIC))
+		var/seed_result = max(1, rand(seed.min_seed_extracted, seed.max_seed_extracted))
+		visible_message(SPAN_NOTICE("\The [user] uses \the [W] to lever [seed_result] seed\s out of \the [src]."))
+		for(var/i = 1 to seed_result)
+			new /obj/item/seeds/extracted(get_turf(user), material?.type, seed)
+		seeds_extracted = TRUE
+		return TRUE
+
+	if(IS_HATCHET(W) && seed.chems)
+		for(var/wood_mat in global._wood_materials)
+			if(!isnull(seed.chems[wood_mat]))
+				user.visible_message(SPAN_NOTICE("\The [user] makes planks out of \the [src]."))
+				for(var/obj/item/stack/material/stack in SSmaterials.create_object(wood_mat, user.loc, rand(1,2)))
+					stack.add_to_stacks(user, TRUE)
 				qdel(src)
-				user.put_in_hands(pocell)
-				pocell.maxcharge =  seed.get_trait(TRAIT_POTENCY) * 10
-				pocell.charge = pocell.maxcharge
 				return TRUE
 
-		if(W.sharp)
-			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
-				user.show_message(SPAN_NOTICE("You carve a face into \the [src]!"), 1)
-				new /obj/item/clothing/head/pumpkinhead (user.loc)
-				qdel(src)
-				return TRUE
+	var/static/list/rollable_types = list(
+		/obj/item/paper/cig,
+		/obj/item/paper,
+		/obj/item/teleportation_scroll
+	)
 
-			if(seed.chems)
-				if(IS_HATCHET(W))
-					for(var/wood_mat in global._wood_materials)
-						if(!isnull(seed.chems[wood_mat]))
-							user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-							for(var/obj/item/stack/material/stack in SSmaterials.create_object(wood_mat, user.loc, rand(1,2)))
-								stack.add_to_stacks(user, TRUE)
-							qdel(src)
-							return TRUE
-
-
-				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
-					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
-					new /obj/item/chems/food/rawsticks(get_turf(src))
-					qdel(src)
-					return TRUE
-
-				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/carrot]))
-					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
-					new /obj/item/chems/food/carrotfries(get_turf(src))
-					qdel(src)
-					return TRUE
-
-				if(!isnull(seed.chems[/decl/material/liquid/drink/milk/soymilk]))
-					to_chat(user, SPAN_NOTICE("You roughly chop up \the [src]."))
-					new /obj/item/chems/food/soydope(get_turf(src))
-					qdel(src)
-					return TRUE
-
-				if(seed.get_trait(TRAIT_FLESH_COLOUR))
-					to_chat(user, SPAN_NOTICE("You slice up \the [src]."))
-					var/slices = rand(3,5)
-					var/reagents_to_transfer = round(reagents.total_volume/slices)
-					for(var/i in 1 to slices)
-						var/obj/item/chems/food/fruit_slice/F = new(get_turf(src),seed)
-						if(reagents_to_transfer) reagents.trans_to_obj(F,reagents_to_transfer)
-					qdel(src)
-					return TRUE
-
-	if(is_type_in_list(W, list(/obj/item/paper/cig/, /obj/item/paper, /obj/item/teleportation_scroll)))
+	if(is_type_in_list(W, rollable_types))
 
 		if(!dry)
 			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))
@@ -277,6 +279,14 @@ var/global/list/_wood_materials = list(
 		return TRUE
 
 	. = ..()
+
+/obj/item/chems/food/grown/get_grown_tag()
+	if(!seed?.grown_tag)
+		return
+	. = dry ? "dried [seed.grown_tag]" : seed.grown_tag
+
+/obj/item/chems/food/grown/create_slice()
+	return new slice_path(loc, material?.type, seed)
 
 /obj/item/chems/food/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
@@ -350,52 +360,6 @@ var/global/list/_wood_materials = list(
 		return new backyard_grilling_product(loc, null, seed.name)
 	return ..()
 
-// Predefined types for placing on the map.
-
-/obj/item/chems/food/grown/libertycap
-	seed = "libertycap"
-
-/obj/item/chems/food/grown/ambrosiavulgaris
-	seed = "ambrosiavulgaris"
-
-/obj/item/chems/food/fruit_slice
-	name = "fruit slice"
-	desc = "A slice of some tasty fruit."
-	icon = 'icons/obj/hydroponics/hydroponics_misc.dmi'
-	icon_state = ""
-	dried_type = /obj/item/chems/food/fruit_slice
-	var/datum/seed/seed
-
-var/global/list/fruit_icon_cache = list()
-
-/obj/item/chems/food/fruit_slice/Initialize(mapload, var/datum/seed/S)
-	. = ..(mapload)
-
-	if(!istype(S)) // Just a default to prevent crashes on manual creation.
-		S = SSplants.seeds["apple"]
-
-	name = "[S.seed_name] slice"
-	desc = "A slice of \a [S.seed_name]. Tasty, probably."
-	seed = S
-	update_icon()
-
-/obj/item/chems/food/fruit_slice/on_update_icon()
-	. = ..()
-	if(!istype(seed))
-		return
-	var/rind_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-	var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR) || rind_colour
-	if(!fruit_icon_cache["rind-[rind_colour]"])
-		var/image/I = image(icon,"fruit_rind")
-		I.color = rind_colour
-		fruit_icon_cache["rind-[rind_colour]"] = I
-	add_overlay(fruit_icon_cache["rind-[rind_colour]"])
-	if(!fruit_icon_cache["slice-[rind_colour]"])
-		var/image/I = image(icon,"fruit_slice")
-		I.color = flesh_colour
-		fruit_icon_cache["slice-[rind_colour]"] = I
-	add_overlay(fruit_icon_cache["slice-[rind_colour]"])
-
 /obj/item/chems/food/grown/afterattack(atom/target, mob/user, flag)
 	if(!flag && isliving(user))
 		var/mob/living/M = user
@@ -416,3 +380,10 @@ var/global/list/fruit_icon_cache = list()
 		if(check_mat.has_textile_fibers)
 			return TRUE
 	return FALSE
+
+// Predefined types for placing on the map.
+/obj/item/chems/food/grown/libertycap
+	seed = "libertycap"
+
+/obj/item/chems/food/grown/ambrosiavulgaris
+	seed = "ambrosiavulgaris"

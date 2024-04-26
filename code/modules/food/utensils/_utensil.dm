@@ -121,6 +121,18 @@
 /obj/item/chems/food/proc/handle_utensil_spreading(obj/item/utensil/utensil, mob/user)
 	return FALSE
 
+/obj/item/chems/food/proc/show_slice_message(mob/user, obj/item/tool)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] slices \the [src]!"),
+		SPAN_NOTICE("You slice \the [src]!")
+	)
+
+/obj/item/chems/food/proc/show_slice_message_poor(mob/user, obj/item/tool)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] crudely slices \the [src] with \the [tool]!"),
+		SPAN_NOTICE("You crudely slice \the [src] with your [tool.name]!")
+	)
+
 /obj/item/chems/food/proc/handle_utensil_cutting(obj/item/tool, mob/user)
 
 	if(!is_sliceable())
@@ -131,24 +143,23 @@
 		to_chat(user, SPAN_WARNING("You cannot slice \the [src] here! You need a table or at least a tray to do it."))
 		return TRUE
 
-	if (tool.w_class > ITEM_SIZE_NORMAL)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] crudely slices \the [src] with \the [tool]!"),
-			SPAN_NOTICE("You crudely slice \the [src] with your [tool.name]!")
-		)
-		slice_num -= rand(1,min(1,round(slice_num/2)))
+	if (tool.w_class > ITEM_SIZE_NORMAL || !user.skill_check(SKILL_COOKING, SKILL_BASIC))
+		show_slice_message_poor(user, tool)
+		slice_num = rand(1, max(1, round(slice_num*0.5)))
 	else
-		user.visible_message(
-			SPAN_NOTICE("\The [user] slices \the [src]!"),
-			SPAN_NOTICE("You slice \the [src]!")
-		)
+		show_slice_message(user, tool, src)
+
 	var/reagents_per_slice = max(1, round(reagents.total_volume / slice_num))
 	for(var/i = 1 to slice_num)
-		var/atom/movable/slice = new slice_path(loc, material?.type)
-		reagents.trans_to_obj(slice, reagents_per_slice)
-		LAZYADD(., slice)
+		var/atom/movable/slice = create_slice()
+		if(slice)
+			reagents.trans_to_obj(slice, reagents_per_slice)
+			LAZYADD(., slice)
 	qdel(src)
 	return . || TRUE
+
+/obj/item/chems/food/proc/create_slice()
+	return new slice_path(loc, material?.type)
 
 /obj/item/chems/food/proc/do_utensil_interaction(obj/item/tool, mob/user)
 

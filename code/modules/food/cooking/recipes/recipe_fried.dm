@@ -55,7 +55,5 @@
 
 /decl/recipe/fried/fries
 	display_name = "potato chips"
-	items = list(
-		/obj/item/chems/food/rawsticks
-	)
+	fruit = list("potato sticks" = 1)
 	result = /obj/item/chems/food/fries

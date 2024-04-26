@@ -121,7 +121,7 @@
 	slice_num = 5
 	filling_color = "#fada8e"
 	center_of_mass = @'{"x":16,"y":10}'
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "orange" = 15)
+	nutriment_desc = list("cake" = 10, "sweetness" = 10, "oranges" = 15)
 	nutriment_amt = 20
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
