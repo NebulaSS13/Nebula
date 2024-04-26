@@ -430,6 +430,8 @@ var/global/list/gear_datums = list()
 	if(!item)
 		return
 
+	item.loadout_setup(wearer, metadata)
+
 	var/obj/item/old_item = wearer.get_equipped_item(slot)
 	if(wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE, ignore_equipped = TRUE))
 		. = item

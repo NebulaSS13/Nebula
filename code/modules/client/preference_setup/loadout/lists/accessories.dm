@@ -39,11 +39,11 @@
 
 /decl/loadout_option/accessory/locket
 	name = "locket"
-	path = /obj/item/clothing/accessory/locket
+	path = /obj/item/clothing/neck/necklace/locket
 
 /decl/loadout_option/accessory/necklace
 	name = "necklace, colour select"
-	path = /obj/item/clothing/accessory/necklace
+	path = /obj/item/clothing/neck/necklace
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/accessory/bow
@@ -57,6 +57,6 @@
 
 /decl/loadout_option/accessory/bracelet
 	name = "bracelet, color select"
-	path = /obj/item/clothing/accessory/bracelet
+	path = /obj/item/clothing/gloves/bracelet
 	cost = 1
 	loadout_flags = GEAR_HAS_COLOR_SELECTION

@@ -394,7 +394,7 @@
 			interact(user, readonly = FALSE)
 		return TRUE
 
-	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
+	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/gloves/ring/seal))
 		apply_custom_stamp(
 			image('icons/obj/bureaucracy.dmi', icon_state = "paper_[P.icon_state]", pixel_x = rand(-2, 2), pixel_y = rand(-2, 2)),
 			"with \the [P]")

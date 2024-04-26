@@ -312,20 +312,30 @@
 //**Chameleon Accessory**
 //***********************
 
-/obj/item/clothing/accessory/chameleon
+/obj/item/clothing/chameleon
 	name = "tie"
 	icon = 'icons/clothing/accessories/ties/tie.dmi'
 	desc = "A neosilk clip-on tie. It seems to have a small dial on its back."
 	origin_tech = @'{"esoteric":3}'
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
+	w_class = ITEM_SIZE_SMALL
 	var/static/list/clothing_choices
+	var/static/list/decor_types = list(
+		/obj/item/clothing/neck,
+		/obj/item/clothing/badge,
+		/obj/item/clothing/medal,
+		/obj/item/clothing/suspenders,
+		/obj/item/clothing/armband,
+		/obj/item/clothing/webbing,
+		/obj/item/clothing/sensor
+	)
 
-/obj/item/clothing/accessory/chameleon/Initialize()
+/obj/item/clothing/chameleon/Initialize()
 	. = ..()
 	if(!clothing_choices)
-		clothing_choices = generate_chameleon_choices(/obj/item/clothing/accessory)
+		clothing_choices = generate_chameleon_choices(get_non_abstract_types(decor_types))
 
-/obj/item/clothing/accessory/chameleon/verb/change(picked in clothing_choices)
+/obj/item/clothing/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Accessory Appearance"
 	set category = "Chameleon Items"
 	set src in usr
@@ -333,17 +343,8 @@
 	if (!(usr.incapacitated()))
 		if(!ispath(clothing_choices[picked]))
 			return
-
 		disguise(clothing_choices[picked], usr)
 		update_clothing_icon()	//so our overlays update.
-
-/obj/item/clothing/accessory/chameleon/disguise(var/newtype, var/mob/user)
-	var/obj/item/clothing/copy = ..()
-	if (!copy)
-		return
-	accessory_slot       = copy.accessory_slot
-	accessory_visibility = copy.accessory_visibility
-	return copy
 
 //*****************
 //**Chameleon Gun**

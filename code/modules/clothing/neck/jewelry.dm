@@ -1,14 +1,17 @@
-/obj/item/clothing/accessory/locket
+/obj/item/clothing/neck/necklace
+	name = "necklace"
+	desc = "A simple necklace."
+	icon = 'icons/clothing/accessories/jewelry/necklace.dmi'
+	material = /decl/material/solid/metal/silver
+
+/obj/item/clothing/neck/necklace/locket
 	name = "silver locket"
 	desc = "A silver locket that seems to have space for a photo within."
-	slot_flags = 0
-	w_class = ITEM_SIZE_SMALL
-	slot_flags = SLOT_FACE
 	icon = 'icons/clothing/accessories/jewelry/locket.dmi'
 	var/open
 	var/obj/item/held
 
-/obj/item/clothing/accessory/locket/attack_self(mob/user)
+/obj/item/clothing/neck/necklace/locket/attack_self(mob/user)
 	if(!("[get_world_inventory_state()]-open" in icon_states(icon)))
 		to_chat(user, SPAN_WARNING("\The [src] doesn't seem to open."))
 		return TRUE
@@ -21,13 +24,13 @@
 	update_icon()
 	return TRUE
 
-/obj/item/clothing/accessory/locket/on_update_icon()
+/obj/item/clothing/neck/necklace/locket/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	if(open && check_state_in_icon("[icon_state]-open", icon))
 		icon_state = "[icon_state]-open"
 
-/obj/item/clothing/accessory/locket/attackby(var/obj/item/O, mob/user)
+/obj/item/clothing/neck/necklace/locket/attackby(var/obj/item/O, mob/user)
 	if(!open)
 		to_chat(user, SPAN_WARNING("You have to open it first."))
 		return TRUE

@@ -1,0 +1,6 @@
+/obj/item/clothing/accessory/necklace/@SUBTYPES : /obj/item/clothing/neck/necklace/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/locket/@SUBTYPES : /obj/item/clothing/neck/necklace/locket/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/chaplaininsignia/@SUBTYPES : /obj/item/clothing/insignia/@SUBTYPES{@OLD}
+/obj/item/clothing/ring/@SUBTYPES : /obj/item/clothing/gloves/ring/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/bracelet/@SUBTYPES : /obj/item/clothing/gloves/bracelet/@SUBTYPES{@OLD}
+/obj/item/clothing/badge/tags/@SUBTYPES : /obj/item/clothing/dog_tags/@SUBTYPES{@OLD}

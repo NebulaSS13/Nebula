@@ -4,6 +4,7 @@
  */
 
 /obj/item/clothing
+	var/mimicking_state_modifiers = FALSE
 	var/list/clothing_state_modifiers
 
 /obj/item/clothing/proc/get_flat_accessory_list()
@@ -29,6 +30,8 @@
 	return null
 
 /obj/item/clothing/proc/update_clothing_state_toggles()
+	if(mimicking_state_modifiers && clothing_state_modifiers)
+		return FALSE
 	clothing_state_modifiers = null
 	for(var/decl/clothing_state_modifier/modifier in get_available_clothing_state_modifiers())
 		LAZYSET(clothing_state_modifiers, modifier.type, FALSE)

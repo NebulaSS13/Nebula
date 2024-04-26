@@ -1690,7 +1690,7 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/clothing/accessory/bracelet,
+/obj/item/clothing/gloves/bracelet,
 /obj/random/lipstick,
 /obj/random/coin,
 /turf/floor,
@@ -2167,7 +2167,7 @@
 	},
 /obj/structure/closet/crate,
 /obj/item/clothing/medal/gold,
-/obj/item/clothing/accessory/locket,
+/obj/item/clothing/neck/necklace/locket,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)

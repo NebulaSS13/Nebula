@@ -12,7 +12,7 @@
 		/obj/item/box/fancy/crayons,
 		/obj/item/guitar,
 		/obj/item/toy/shipmodel,
-		/obj/item/clothing/accessory/locket,
+		/obj/item/clothing/neck/necklace/locket,
 		/obj/item/binoculars,
 		/obj/item/camera,
 		/obj/item/clothing/neck/tie/bow/ugly

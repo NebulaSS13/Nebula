@@ -236,7 +236,7 @@
 	return FALSE
 
 /obj/item/examine(mob/user, distance)
-	
+
 	var/list/desc_comp = list()
 	desc_comp += "It is a [w_class_description()] item."
 
@@ -1102,3 +1102,5 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return TRUE
 	return ..()
 
+/obj/item/proc/loadout_setup(mob/wearer, metadata)
+	return

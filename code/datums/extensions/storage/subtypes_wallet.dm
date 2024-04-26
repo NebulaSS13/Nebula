@@ -8,7 +8,7 @@
 		/obj/item/cosmetics,
 		/obj/item/grooming,
 		/obj/item/mirror,
-		/obj/item/clothing/accessory/locket,
+		/obj/item/clothing/neck/necklace/locket,
 		/obj/item/clothing/head/hairflower,
 		/obj/item/flashlight/pen,
 		/obj/item/flashlight,
