@@ -1,13 +1,13 @@
 
 /obj/item/clothing/suit/armor/pcarrier/merc
 	starting_accessories = list(
-		/obj/item/clothing/accessory/armor/plate/merc,
+		/obj/item/clothing/armor_attachment/plate/merc,
 		/obj/item/clothing/gloves/armguards/merc,
 		/obj/item/clothing/shoes/legguards/merc,
 		/obj/item/clothing/webbing/pouches/large
 	)
 
-/obj/item/clothing/accessory/armor/plate/merc
+/obj/item/clothing/armor_attachment/plate/merc
 	name = "heavy armor plate"
 	desc = "A diamond-reinforced titanium armor plate, providing state of of the art protection. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/armor_merc.dmi'
