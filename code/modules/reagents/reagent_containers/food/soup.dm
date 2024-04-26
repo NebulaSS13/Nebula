@@ -163,7 +163,7 @@
 	add_to_reagents(/decl/material/liquid/water, 10)
 	if(prob(25))
 		src.desc = "A wish come true!"
-		add_to_reagents(/decl/material/liquid/nutriment, 8, list("something good" = 8))
+		add_to_reagents(/decl/material/liquid/nutriment, 8, list("taste" = list("something good" = 8)))
 
 /obj/item/chems/food/hotchili
 	name = "hot chili"

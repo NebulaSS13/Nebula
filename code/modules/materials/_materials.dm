@@ -207,7 +207,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/armor_degradation_speed
 
 	// Copied reagent values. Todo: integrate.
-	var/taste_description = "old rotten bandaids"
+	var/taste_description
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
 	var/metabolism = REM // This would be 0.2 normally
 	var/ingest_met = 0
@@ -871,12 +871,45 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	M.take_damage(TOX, REM)
 
 /decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
-	if(newdata)
-		. = newdata
+	return newdata
 
 /decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	reagents.cached_color = null // colour masking may change
 	. = REAGENT_DATA(reagents, type)
+	if(!length(newdata))
+		return
+
+	// Sum our existing taste data with the incoming taste data.
+	var/total_taste = 0
+	var/list/tastes = list()
+	var/list/newtastes = LAZYACCESS(newdata, "taste")
+	for(var/taste in newtastes)
+		var/newtaste   = newtastes[taste]
+		tastes[taste] += newtaste
+		total_taste   += newtaste
+
+	// If we have an old taste list, keep it, but if we don't, generate
+	// one to hold our base taste information. This is so pouring nutriment
+	// with a taste list into honey for example won't completely mask the
+	// taste of honey.
+	var/list/oldtastes = LAZYACCESS(., "taste")
+	if(length(oldtastes))
+		for(var/taste in oldtastes)
+			var/oldtaste   = oldtastes[taste]
+			tastes[taste] += oldtaste
+			total_taste   += oldtaste
+	else if(taste_description)
+		tastes[taste_description] += taste_mult
+		total_taste               += taste_mult
+
+	// Cull all tastes below 10% of total
+	if(length(tastes))
+		if(total_taste)
+			for(var/taste in tastes)
+				if((tastes[taste] / total_taste) < 0.1)
+					tastes -= taste
+		if(length(tastes))
+			LAZYSET(., "taste", tastes)
 
 /decl/material/proc/explosion_act(obj/item/chems/holder, severity)
 	SHOULD_CALL_PARENT(TRUE)

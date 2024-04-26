@@ -10,5 +10,3 @@
 #define SOUP_VEGETARIAN BITFLAG(0)
 #define SOUP_CARNIVORE  BITFLAG(1)
 #define SOUP_DAIRY      BITFLAG(2)
-
-#define TASTE_IS_DATA (!istext(taste) || taste == "soup_flags" || taste == "soup_ingredients" || taste == "mask_name" || taste == "mask_color")

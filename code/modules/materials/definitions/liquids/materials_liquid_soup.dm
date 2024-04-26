@@ -11,22 +11,21 @@
 
 /decl/material/liquid/nutriment/soup/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
 
-	var/list/olddata = LAZYACCESS(reagents.reagent_data, type)
 	var/soup_flags = SOUP_PLAIN
 	var/list/ingredients = list()
-	if(islist(olddata))
-		soup_flags |= olddata["soup_flags"]
-		var/list/old_ingredients = olddata["soup_ingredients"]
+
+	. = ..()
+	if(islist(.) && length(.))
+		soup_flags |= .["soup_flags"]
+		var/list/old_ingredients = .["soup_ingredients"]
 		for(var/ingredient in old_ingredients)
 			ingredients[ingredient] += old_ingredients[ingredient]
 
-	if(islist(newdata))
+	if(islist(newdata) && length(newdata))
 		soup_flags |= newdata["soup_flags"]
 		var/list/new_ingredients = newdata["soup_ingredients"]
 		for(var/ingredient in new_ingredients)
 			ingredients[ingredient] += new_ingredients[ingredient]
-
-	. = ..()
 
 	if(length(ingredients))
 		LAZYSET(., "mask_name", "[english_list(ingredients)] [mask_name_suffix]")
@@ -46,6 +45,8 @@
 	solid_name = "powdered stock"
 	color = "#8a7452"
 	mask_name_suffix = "stock"
+	taste_description = "salty, savoury flavours"
+	taste_mult = 1
 
 /decl/material/liquid/nutriment/soup/stock/bone
 	name = "bone broth"
@@ -54,3 +55,4 @@
 	solid_name = "powdered bone broth"
 	color = "#c0b067"
 	mask_name_suffix = "broth"
+	taste_description = "salty, savoury flavours"

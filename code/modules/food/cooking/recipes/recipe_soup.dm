@@ -1,11 +1,14 @@
 /decl/recipe/soup
 	abstract_type = /decl/recipe/soup
-	reagents = list(/decl/material/liquid/water = 10)
 	reagent_mix = REAGENT_REPLACE
 
 /decl/recipe/soup/stock
 	abstract_type = /decl/recipe/soup/stock
 	result_quantity = 10
+	reagents = list(
+		/decl/material/solid/sodiumchloride = 1,
+		/decl/material/liquid/water = 10
+	)
 	minimum_temperature = 100 CELSIUS
 
 /decl/recipe/soup/stock/meat

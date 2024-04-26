@@ -25,39 +25,6 @@
 	liquid_name = name  // avoid 'molten honey'
 	return ..()
 
-/decl/material/liquid/nutriment/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
-
-	if(!islist(newdata) || !newdata.len)
-		return
-
-	//add the new taste data
-	var/data = ..()
-	LAZYINITLIST(data)
-	for(var/taste in newdata)
-		// Temp until nutriment data is reworked.
-		if(TASTE_IS_DATA)
-			continue
-		// End temp.
-		if(taste in data)
-			data[taste] += newdata[taste]
-		else
-			data[taste] = newdata[taste]
-
-	//cull all tastes below 10% of total
-	var/totalFlavor = 0
-	for(var/taste in data)
-		// Temp until nutriment data is reworked.
-		if(TASTE_IS_DATA)
-			continue
-		totalFlavor += data[taste]
-	if(totalFlavor)
-		for(var/taste in data)
-			if(TASTE_IS_DATA)
-				continue
-			if(data[taste]/totalFlavor < 0.1)
-				data -= taste
-	. = data
-
 /decl/material/liquid/nutriment/slime_meat
 	name = "slime-meat"
 	lore_text = "Mollusc meat, or slug meat - something slimy, anyway."
