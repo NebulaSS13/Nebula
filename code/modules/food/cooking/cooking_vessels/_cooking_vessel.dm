@@ -16,7 +16,12 @@
 
 // TODO: ladle
 /obj/item/chems/cooking_vessel/attackby(obj/item/W, mob/user)
-	if(user.a_intent != I_HURT && W.reagents && ATOM_IS_OPEN_CONTAINER(W))
+
+	if(user.a_intent == I_HURT)
+		return ..()
+
+	// Fill or take from the vessel.
+	if(W.reagents && ATOM_IS_OPEN_CONTAINER(W))
 		if(W.reagents.total_volume)
 			if(istype(W, /obj/item/chems))
 				var/obj/item/chems/vessel = W
@@ -24,6 +29,7 @@
 					return TRUE
 		else if(standard_pour_into(user, W))
 			return TRUE
+
 	return ..()
 
 /obj/item/chems/cooking_vessel/proc/get_cooking_contents_strings()

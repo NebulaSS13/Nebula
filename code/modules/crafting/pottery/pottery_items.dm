@@ -43,21 +43,8 @@
 	. = ..()
 	update_icon()
 
-/decl/material
-	var/soup_overlay
-	var/soup_base = "soup_base"
-
 /obj/item/chems/glass/pottery/bowl/on_update_icon()
 	. = ..()
-	if(reagents?.total_volume > 0)
-		var/image/soup_overlay
-		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
-		if(primary_reagent?.soup_base)
-			soup_overlay = overlay_image(icon, primary_reagent.soup_base, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
-		else
-			soup_overlay = overlay_image(icon, "soup_base", reagents.get_color(), RESET_COLOR | RESET_ALPHA)
-		for(var/reagent_type in reagents.reagent_volumes)
-			var/decl/material/reagent = GET_DECL(reagent_type)
-			if(reagent != primary_reagent && reagent.soup_overlay)
-				soup_overlay.overlays += overlay_image(icon, reagent.soup_overlay, reagent.color, RESET_COLOR | RESET_ALPHA)
+	var/image/soup_overlay = get_soup_overlay()
+	if(soup_overlay)
 		add_overlay(soup_overlay)

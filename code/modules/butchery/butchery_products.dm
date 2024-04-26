@@ -12,6 +12,7 @@
 	slice_num           = null
 	max_health          = 180
 	cooked_food         = FOOD_RAW
+	ingredient_flags    = INGREDIENT_FLAG_MEAT
 	var/fat_material    = /decl/material/solid/organic/meat/gut
 	var/meat_name       = "beef"
 
@@ -25,6 +26,7 @@
 			slice_path = butchery_decl.meat_type
 		if(isnull(slice_num))
 			slice_num = butchery_decl.meat_amount
+		ingredient_flags = butchery_decl.meat_flags
 	. = ..()
 	if(istype(donor))
 		meat_name = set_meat_name(donor.get_butchery_product_name())
@@ -51,6 +53,7 @@
 	if(. && istype(., /obj/item/chems/food))
 		var/obj/item/chems/food/food = .
 		food.cooked_food = FOOD_COOKED
+		food.ingredient_flags = ingredient_flags
 		if(meat_name && istype(., /obj/item/chems/food/butchery))
 			var/obj/item/chems/food/butchery/meat = .
 			meat.set_meat_name(meat_name)
@@ -60,6 +63,7 @@
 	if(. && istype(., /obj/item/chems/food))
 		var/obj/item/chems/food/food = .
 		food.cooked_food = FOOD_COOKED
+		food.ingredient_flags = ingredient_flags
 		if(meat_name)
 			if(istype(., /obj/item/chems/food/butchery))
 				var/obj/item/chems/food/butchery/meat = .
@@ -73,6 +77,7 @@
 	if(length(.))
 		for(var/obj/item/chems/food/food in .)
 			food.cooked_food = cooked_food
+			food.ingredient_flags = ingredient_flags
 		if(meat_name)
 			for(var/obj/item/chems/food/butchery/meat in .)
 				meat.set_meat_name(meat_name)

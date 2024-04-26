@@ -15,6 +15,7 @@
 	slice_path                     = /obj/item/chems/food/sashimi
 	slice_num                      = 3
 	meat_name                      = "fish"
+	ingredient_flags               = INGREDIENT_FLAG_MEAT | INGREDIENT_FLAG_FISH
 
 /obj/item/chems/food/butchery/meat/fish/get_meat_icons()
 	var/static/list/meat_icons = list(

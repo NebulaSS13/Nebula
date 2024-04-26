@@ -2,6 +2,7 @@
 	abstract_type = /decl/recipe/soup
 	reagent_mix = REAGENT_REPLACE
 	container_categories = list(RECIPE_CATEGORY_POT)
+	var/precursor_type
 
 /decl/recipe/soup/stock
 	abstract_type = /decl/recipe/soup/stock
@@ -16,7 +17,7 @@
 /decl/recipe/soup/get_result_data(atom/container, list/used_ingredients)
 
 	. = list()
-	var/soup_flags = SOUP_PLAIN
+	var/soup_flags = INGREDIENT_FLAG_PLAIN
 	var/list/taste_strings = list()
 	var/list/ingredients = list()
 	var/list/used_items = used_ingredients["items"]
@@ -27,17 +28,30 @@
 			if(food.nutriment_type && food.nutriment_desc)
 				for(var/taste in food.nutriment_desc)
 					taste_strings[taste] += food.nutriment_desc[taste]
+			soup_flags |= food.ingredient_flags
 
 		if(locate(/obj/item/chems/food/grown) in used_items)
-			soup_flags |= SOUP_VEGETARIAN
 			for(var/obj/item/chems/food/grown/veg in used_items)
 				ingredients[veg.name]++
 
 		if(locate(/obj/item/chems/food/butchery) in used_items)
-			soup_flags |= SOUP_CARNIVORE
 			for(var/obj/item/chems/food/butchery/meat in used_items)
 				if(meat.meat_name)
 					ingredients[meat.meat_name]++
+
+	if(precursor_type)
+		var/list/precursor_data = LAZYACCESS(container.reagents?.reagent_data, precursor_type)
+		var/list/precursor_taste = LAZYACCESS(precursor_data, "taste")
+		if(length(precursor_taste))
+			for(var/taste in precursor_taste)
+				taste_strings[taste] += precursor_taste["taste"]
+		var/list/precursor_ingredients = LAZYACCESS(precursor_data, "soup_ingredients")
+		if(length(precursor_ingredients))
+			for(var/ingredient in precursor_ingredients)
+				ingredients[ingredient] += precursor_ingredients[ingredient]
+		var/precursor_soup_flags = LAZYACCESS(precursor_data, "soup_flags")
+		if(precursor_soup_flags)
+			soup_flags |= precursor_soup_flags
 
 	if(length(taste_strings))
 		.["taste"] = taste_strings
@@ -58,13 +72,13 @@
 
 /decl/recipe/soup/stock/bone
 	display_name = "bone broth"
-	items = list(/obj/item/stack/material/bone = 3)
+	items = list(/obj/item/stack/material/bone = 1)
 	completion_message = "The liquid darkens to a rich brown as the marrow dissolves."
 
 /decl/recipe/soup/stock/bone/get_result_data(atom/container, list/used_ingredients)
 	. = list()
 	.["soup_ingredients"] = list("marrow" = 1)
-	.["soup_flags"] = SOUP_CARNIVORE
+	.["soup_flags"] = INGREDIENT_FLAG_MEAT
 
 /decl/recipe/soup/simple
 	abstract_type = /decl/recipe/soup/simple
@@ -72,30 +86,9 @@
 		/decl/material/liquid/nutriment/soup/stock = 10
 	)
 	result = /decl/material/liquid/nutriment/soup/simple
-	result_quantity = 15
+	result_quantity = 10
 	completion_message = "A savoury smell rises from the soup as the ingredients release their flavour into the broth."
-
-/decl/recipe/soup/simple/get_result_data(atom/container, list/used_ingredients)
-
-	. = ..()
-
-	var/list/stock_data = LAZYACCESS(container.reagents?.reagent_data, /decl/material/liquid/nutriment/soup/stock)
-
-	var/list/taste_strings = LAZYACCESS(stock_data, "taste")
-	if(length(taste_strings))
-		LAZYINITLIST(.["taste"])
-		for(var/taste in taste_strings)
-			.["taste"][taste] += taste_strings[taste]
-
-	var/list/ingredients = LAZYACCESS(stock_data, "soup_ingredients")
-	if(length(ingredients))
-		LAZYINITLIST(.["soup_ingredients"])
-		for(var/ingredient in ingredients)
-			.["soup_ingredients"][ingredient] += ingredients[ingredient]
-
-	var/soup_flags = LAZYACCESS(stock_data, "soup_flags")
-	if(soup_flags)
-		.["soup_flags"] = .["soup_flags"] | soup_flags
+	precursor_type = /decl/material/liquid/nutriment/soup/stock
 
 /decl/recipe/soup/simple/meat
 	display_name = "simple meat soup"
@@ -115,3 +108,30 @@
 		/obj/item/chems/food/butchery/chopped = 1,
 		/obj/item/chems/food/rawsticks = 1
 	)
+
+/decl/recipe/soup/simple/mixed/stew
+	display_name = "mixed stew"
+	precursor_type = /decl/material/liquid/nutriment/soup/simple
+	reagents = list(
+		/decl/material/liquid/nutriment/soup/simple = 10
+	)
+	result_quantity = 10
+	result = /decl/material/liquid/nutriment/soup/stew
+
+/decl/recipe/soup/simple/meat/stew
+	display_name = "meat stew"
+	precursor_type = /decl/material/liquid/nutriment/soup/simple
+	reagents = list(
+		/decl/material/liquid/nutriment/soup/simple = 10
+	)
+	result_quantity = 10
+	result = /decl/material/liquid/nutriment/soup/stew
+
+/decl/recipe/soup/simple/veg/stew
+	display_name = "vegetable stew"
+	precursor_type = /decl/material/liquid/nutriment/soup/simple
+	reagents = list(
+		/decl/material/liquid/nutriment/soup/simple = 10
+	)
+	result_quantity = 10
+	result = /decl/material/liquid/nutriment/soup/stew
