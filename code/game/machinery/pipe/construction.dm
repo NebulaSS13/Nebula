@@ -34,7 +34,7 @@ Buildable meters
 	desc = P.desc
 
 	connect_types = P.connect_types
-	color = P.pipe_color
+	set_color(P.pipe_color)
 	icon = P.build_icon
 	icon_state = P.build_icon_state
 	pipe_class = P.pipe_class

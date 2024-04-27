@@ -37,7 +37,7 @@
 	var/scent = pick(valid_scents)
 	var/smelly = pick(scent_intensity)
 	icon_state = "soap-[shape]"
-	color = pick(valid_colors)
+	set_color(pick(valid_colors))
 	decal_name = pick(decals)
 	desc = "\A [shape] bar of soap. It smells [smelly] of [scent]."
 	update_icon()

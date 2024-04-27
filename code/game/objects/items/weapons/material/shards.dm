@@ -54,7 +54,6 @@
 /obj/item/shard/on_update_icon()
 	. = ..()
 	if(material)
-		color = material.color
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
 		alpha = 255 * (1 - (1 - material.opacity)*(1 - material.opacity))
 	else

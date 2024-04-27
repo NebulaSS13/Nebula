@@ -14,7 +14,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/grooming/comb/colorable/random/Initialize()
-	color = get_random_colour(lower = 150)
+	set_color(get_random_colour(lower = 150))
 	. = ..()
 
 // Looks exactly like a butterfly knife inhand.
