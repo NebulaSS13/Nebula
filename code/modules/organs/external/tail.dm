@@ -1,7 +1,6 @@
 /obj/item/organ/external/tail
 
 	organ_tag = BP_TAIL
-	render_alpha = 0
 	name = "tail"
 	max_damage = 20
 	min_broken_damage = 10
