@@ -43,6 +43,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 		qdel(instance)
 
 /repository/atom_info/proc/get_matter_for(var/path, var/material, var/amount)
+	RETURN_TYPE(/list)
 	var/key = create_key_for(path, material, amount)
 	update_cached_info_for(path, material, amount, key)
 	. = matter_cache[key]
