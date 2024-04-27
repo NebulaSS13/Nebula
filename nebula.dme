@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "code\___opendream_linting.dm"
 #include "code\__globals.dm"
 #include "code\_macros.dm"
 #include "code\client_macros.dm"
