@@ -10,7 +10,7 @@
 	var/material_health_multiplier = 0.2
 	var/hitsound
 	/// This is used to determine on which slots an item can fit.
-	var/slot_flags = SLOT_NONE      
+	var/slot_flags = SLOT_NONE
 	/// If it's an item we don't want to log attack_logs with, set this to TRUE
 	var/no_attack_log = 0
 	var/obj/item/master = null
@@ -424,13 +424,18 @@
 	. = ..()
 	squash_item()
 
+/// Whether this item can be picked up.
+/// Primarily exists to be overridden to prevent, e.g. accessories from being removed by clicking on them while worn.
+/obj/item/proc/can_be_picked_up(mob/user)
+	return !anchored
+
 /obj/item/attack_hand(mob/user)
 
 	. = ..()
 	if(.)
 		return
 
-	if(anchored)
+	if(!can_be_picked_up(user))
 		return ..()
 
 	if(!user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = TRUE))
