@@ -18,11 +18,18 @@ for root, subdirs, files in walk(args.dir):
         if not filename.endswith('.dmi'):
             continue
         file_path = path.join(root, filename)
-        dmi = DMI(file_path)
-        dmi.loadMetadata()
-        number_of_icon_states = len(dmi.states)
-        if number_of_icon_states > 512:
+        try:
+            dmi = DMI(file_path)
+            dmi.loadMetadata()
+            number_of_icon_states = len(dmi.states)
+            if number_of_icon_states > 512:
+                failed = True
+                print("{0} had too many icon states. {1}/512".format(file_path, number_of_icon_states))
+        except AttributeError as e:
             failed = True
-            print("{0} had too many icon states. {1}/512".format(file_path, number_of_icon_states))
+            print("AttributeError when processing {0}. This may indicate an empty icon file.\nException was: {1}".format(file_path, e))
+        except Exception as e:
+            failed = True
+            print("Exception when processing {0}: {1}".format(file_path, e))
 if failed:
     sys.exit(1)
