@@ -535,28 +535,35 @@
 		to_chat(user, SPAN_WARNING("\The [src] already has something growing in it!"))
 		return
 
+	var/plant_noun
 	var/datum/seed/planting_seed = S.seed
 	if(istype(S))
 		planting_seed = S.seed
+		plant_noun = "[planting_seed?.seed_name] [planting_seed.seed_noun]"
 	else if(istype(S, /obj/item/chems/food/grown))
 		var/obj/item/chems/food/grown/fruit = S
 		planting_seed = fruit.seed
+		plant_noun = "[planting_seed?.seed_name]"
+	else if(istype(S, /obj/item/chems/food/processed_grown))
+		var/obj/item/chems/food/processed_grown/fruit = S
+		planting_seed = fruit.seed
+		plant_noun = "[planting_seed?.seed_name]"
 	else
 		CRASH("Invalid or null value passed to plant_seed(): [S || "NULL"]")
 
 	if(!istype(planting_seed))
 		if(istype(S))
 			to_chat(user, SPAN_WARNING("\The [S] seems to be empty. You throw it away."))
-		else if(istype(S, /obj/item/chems/food/grown))
+		else
 			to_chat(user, SPAN_WARNING("\The [S] seems to be rotten. You throw it away."))
 		qdel(S)
 		return
 
 	if(planting_seed.hydrotray_only && !mechanical)
-		to_chat(user, SPAN_WARNING("\The [planting_seed.seed_name] can only be planted in a hydroponics tray."))
+		to_chat(user, SPAN_WARNING("\The [plant_noun] can only be planted in a hydroponics tray."))
 		return
 
-	to_chat(user, SPAN_NOTICE("You plant the [planting_seed.seed_name] [planting_seed.seed_noun]."))
+	to_chat(user, SPAN_NOTICE("You plant the [plant_noun]."))
 	lastproduce = 0
 	set_seed(planting_seed) //Grab the seed datum.
 	dead = 0

@@ -64,6 +64,8 @@
 /obj/item/chems/food/processed_grown/slice
 	icon                = 'icons/obj/grown/fruit_slice.dmi'
 	processed_grown_tag = "slice"
+	slice_path          = /obj/item/chems/food/processed_grown/chopped
+	slice_num           = 1
 
 // Purely a visual distinction.
 /obj/item/chems/food/processed_grown/slice/large
