@@ -3818,7 +3818,7 @@
 /obj/item/clothing/shoes/craftable,
 /obj/item/clothing/under/blazer,
 /obj/item/clothing/under/lawyer,
-/obj/item/clothing/under/formal/navy,
+/obj/item/clothing/pants/slacks/black/outfit/navy,
 /obj/random/handgun,
 /obj/item/chems/drinks/bottle/premiumwine,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -4234,7 +4234,7 @@
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/color/black,
 /obj/item/clothing/under/overalls,
-/obj/item/clothing/under/skirt,
+/obj/item/clothing/skirt,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},

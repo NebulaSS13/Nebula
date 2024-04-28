@@ -2058,7 +2058,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/clothing/under/formal,
+/obj/item/clothing/pants/slacks/outfit,
 /obj/item/clothing/head/that{
 	pixel_x = 4;
 	pixel_y = 6

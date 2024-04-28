@@ -100,6 +100,7 @@
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"
 	name = "clown shoes"
 	icon = 'icons/clothing/feet/clown.dmi'
+	force = 0
 	bodytype_equip_flags = null
 	can_add_hidden_item = FALSE
 	var/footstep = 1	//used for squeeks whilst walking
