@@ -10,7 +10,7 @@
 	var/material_health_multiplier = 0.2
 	var/hitsound
 	/// This is used to determine on which slots an item can fit.
-	var/slot_flags = SLOT_NONE      
+	var/slot_flags = SLOT_NONE
 	/// If it's an item we don't want to log attack_logs with, set this to TRUE
 	var/no_attack_log = 0
 	var/obj/item/master = null
@@ -671,7 +671,7 @@
 	if(!usr.get_empty_hand_slot())
 		to_chat(usr, SPAN_WARNING("Your hands are full."))
 		return
-	usr.UnarmedAttack(src)
+	usr.UnarmedAttack(src, usr.Adjacent(src))
 
 
 //This proc is executed when someone clicks the on-screen UI button. To make the UI button show, set the 'icon_action_button' to the icon_state of the image of the button in screen1_action.dmi

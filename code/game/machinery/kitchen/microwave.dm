@@ -255,9 +255,13 @@
 	var/result = recipe.result
 	var/list/cooked_items = list()
 	while(recipe)
-		cooked_items += recipe.produce_result(src)
-		recipe = select_recipe()
-		if (!recipe || (recipe.result != result))
+		try
+			cooked_items += recipe.produce_result(src)
+			recipe = select_recipe()
+			if (!recipe || (recipe.result != result))
+				break
+		catch(var/exception/E)
+			PRINT_STACK_TRACE("Runtime when processing microwave recipe spawn: [EXCEPTION_TEXT(E)]")
 			break
 
 	//Any leftover reagents are divided amongst the foods
