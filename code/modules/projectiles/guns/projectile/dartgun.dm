@@ -47,10 +47,10 @@
 	. = ..()
 
 /obj/item/gun/projectile/dartgun/consume_next_projectile()
-	. = ..()
-	var/obj/item/projectile/bullet/chemdart/dart = .
+	var/obj/item/projectile/bullet/chemdart/dart = ..()
 	if(istype(dart))
 		fill_dart(dart)
+	return dart
 
 /obj/item/gun/projectile/dartgun/examine(mob/user)
 	. = ..()
