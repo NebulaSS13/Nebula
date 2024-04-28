@@ -57,7 +57,7 @@
 
 /obj/item/wallet/poly/Initialize(ml, material_key)
 	. = ..()
-	color = get_random_colour()
+	set_color(get_random_colour())
 	update_icon()
 
 /obj/item/wallet/poly/verb/change_color()
@@ -72,7 +72,7 @@
 	var/new_color = input(usr, "Pick a new color", "Wallet Color", color) as color|null
 	if(!new_color || new_color == color || usr.incapacitated())
 		return
-	color = new_color
+	set_color(new_color)
 
 /obj/item/wallet/poly/emp_act()
 	icon_state = "wallet-emp"

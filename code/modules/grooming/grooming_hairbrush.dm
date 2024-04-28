@@ -23,5 +23,5 @@
 	material_alteration = MAT_FLAG_ALTERATION_NAME
 
 /obj/item/grooming/brush/colorable/random/Initialize()
-	color = get_random_colour(lower = 150)
+	set_color(get_random_colour(lower = 150))
 	. = ..()

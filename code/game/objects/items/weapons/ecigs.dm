@@ -49,7 +49,7 @@
 
 /obj/item/clothing/mask/smokable/ecig/util/Initialize()
 	. = ..()
-	color = pick(ecig_colors)
+	set_color(pick(ecig_colors))
 
 /obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	. = ..()

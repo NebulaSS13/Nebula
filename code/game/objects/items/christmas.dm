@@ -47,5 +47,5 @@
 
 /obj/item/clothing/head/festive/Initialize()
 	. = ..()
-	color = pick(permitted_colors)
+	set_color(pick(permitted_colors))
 
