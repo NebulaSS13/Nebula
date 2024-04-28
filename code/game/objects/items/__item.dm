@@ -424,13 +424,18 @@
 	. = ..()
 	squash_item()
 
+/// Whether this item can be picked up.
+/// Primarily exists to be overridden to prevent, e.g. accessories from being removed by clicking on them while worn.
+/obj/item/proc/can_be_picked_up(mob/user)
+	return !anchored
+
 /obj/item/attack_hand(mob/user)
 
 	. = ..()
 	if(.)
 		return
 
-	if(anchored)
+	if(!can_be_picked_up(user))
 		return ..()
 
 	if(!user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = TRUE))

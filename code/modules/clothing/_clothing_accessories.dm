@@ -137,9 +137,23 @@
 			accessory.emp_act(severity)
 	..()
 
-/obj/item/clothing/attack_hand(var/mob/user)
+// Make 'strict' a bit less strict, for accessories.
+// If we're checking strictly and our parent is an accessory,
+// This will need to be handled differently if we ever allow non-clothing accessories!
+/obj/item/clothing/can_interact_with_storage(user, strict = FALSE)
+	if((. = ..(user, FALSE)) || !strict) // Ignore the parent strictness check.
+		return .
 	if(istype(loc, /obj/item/clothing))
-		return TRUE //we aren't an object on the ground so don't call parent
+		var/obj/item/clothing/parent = loc
+		return (src in parent.accessories) && loc.can_interact_with_storage(user, strict)
+	return user == loc // Same as in parent, since we pass strict = FALSE to it.
+
+/obj/item/clothing/can_be_picked_up(mob/user)
+	. = ..()
+	var/obj/item/clothing/parent = loc
+	return . && (!istype(parent) || !(src in parent.accessories))
+
+/obj/item/clothing/attack_hand(var/mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
 	if(!length(accessories) || loc != user)
 		return ..()
