@@ -81,3 +81,15 @@
 	storing_object = new_storing_obj
 	for(var/atom/movable/thing in instances)
 		thing.forceMove(new_storing_obj)
+
+/datum/stored_items/proc/get_combined_matter(include_instances = TRUE)
+	var/virtual_amount = amount - length(instances)
+	if(virtual_amount)
+		. = atom_info_repository.get_matter_for(item_path)?.Copy()
+		for(var/key in .)
+			.[key] *= virtual_amount
+	else
+		. = list()
+	if(include_instances)
+		for(var/atom/instance in instances)
+			. = MERGE_ASSOCS_WITH_NUM_VALUES(., instance.get_contained_matter())
