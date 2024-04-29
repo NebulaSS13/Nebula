@@ -53,18 +53,15 @@
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/slacks/black/outfit/internal_affairs,
 		/obj/item/clothing/under/blazer,
 		/obj/item/clothing/under/blackjumpskirt,
-		/obj/item/clothing/costume/kilt,
-		/obj/item/clothing/dress/hr
 	)
 
-/decl/loadout_option/uniform/dress
+/decl/loadout_option/uniform/dress_selection
 	name = "dress selection"
-	path = /obj/item/clothing/under
+	path = /obj/item/clothing/dress
 
-/decl/loadout_option/uniform/dress/get_gear_tweak_options()
+/decl/loadout_option/uniform/dress_selection/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
@@ -97,8 +94,8 @@
 	path = /obj/item/clothing/skirt/short
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/dress
-	name = "simple dress, colour select"
+/decl/loadout_option/uniform/dress_simple
+	name = "short dress, colour select"
 	path = /obj/item/clothing/dress/short
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 

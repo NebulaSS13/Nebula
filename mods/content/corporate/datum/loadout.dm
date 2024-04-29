@@ -32,6 +32,20 @@
 	path = /obj/item/clothing/shirt/tunic/corp
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
+/decl/loadout_option/uniform/corporate_jumpsuit
+	name = "corporate jumpsuit selection"
+	path = /obj/item/clothing/jumpsuit
+
+/decl/loadout_option/uniform/corporate_jumpsuit/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/jumpsuit/aether,
+		/obj/item/clothing/jumpsuit/hephaestus,
+		/obj/item/clothing/jumpsuit/wardt,
+		/obj/item/clothing/jumpsuit/focal
+	)
+
 /decl/loadout_option/uniform/corporate
 	name = "corporate uniform selection"
 	path = /obj/item/clothing/under
@@ -40,10 +54,6 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/jumpsuit/aether,
-		/obj/item/clothing/jumpsuit/hephaestus,
-		/obj/item/clothing/jumpsuit/wardt,
-		/obj/item/clothing/jumpsuit/focal,
 		/obj/item/clothing/under/mbill,
 		/obj/item/clothing/under/saare,
 		/obj/item/clothing/under/pcrc,
@@ -68,13 +78,15 @@
 	path = /obj/item/clothing/shirt/button/corp
 
 /decl/loadout_option/uniform/corp_exec_jacket
+	name = "corporate jacket selection"
 	path = /obj/item/clothing/suit/jacket/corp
-	slot = slot_tie_str
+	slot = slot_wear_suit_str
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_exec_tie
+	name = "corporate tie selection"
 	path = /obj/item/clothing/neck/tie/corp
-	slot = slot_tie_str
+	slot = slot_w_uniform_str
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/nanotrasen_poncho

@@ -5,7 +5,7 @@
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
-		)
+	)
 
 /obj/item/clothing/shirt/polo/corp/nanotrasen
 	name = "\improper NanoTrasen polo shirt"

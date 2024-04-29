@@ -43,7 +43,9 @@
 //SUBCLASSES.  Spawn a bunch of items and disappear likewise
 /obj/abstract/landmark/costume/chameleon/make_costumes()
 	new /obj/item/clothing/mask/chameleon(loc)
-	new /obj/item/clothing/under/chameleon(loc)
+	new /obj/item/clothing/jumpsuit/chameleon(loc)
+	new /obj/item/clothing/shirt/chameleon(loc)
+	new /obj/item/clothing/pants/chameleon(loc)
 	new /obj/item/clothing/glasses/chameleon(loc)
 	new /obj/item/clothing/shoes/chameleon(loc)
 	new /obj/item/clothing/gloves/chameleon(loc)

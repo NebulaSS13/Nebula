@@ -2581,7 +2581,7 @@
 /turf/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
 "gz" = (
-/obj/item/clothing/skirt/black,
+/obj/item/clothing/skirt,
 /obj/item/clothing/head/beret/purple,
 /obj/item/clothing/shoes/dress,
 /obj/structure/closet,

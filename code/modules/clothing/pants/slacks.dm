@@ -71,13 +71,13 @@
 		/obj/item/clothing/suit/jacket/burgundy
 	)
 
-/obj/item/clothing/slacks/black/outfit/internal_affairs
+/obj/item/clothing/pants/slacks/black/outfit/internal_affairs
 	starting_accessories = list(
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/neck/tie/black
 	)
 
-/obj/item/clothing/slacks/black/outfit/nanotrasen
+/obj/item/clothing/pants/slacks/black/outfit/nanotrasen
 	starting_accessories = list(
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/neck/tie/long/red

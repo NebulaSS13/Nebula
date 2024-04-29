@@ -42,8 +42,61 @@
 			.[name] = typepath
 	return sortTim(., /proc/cmp_text_asc)
 
+/obj/item/clothing/pants/chameleon
+	name = "grey slacks"
+	desc = "Crisp grey slacks. Moderately formal. There's a small dial on the waistband."
+	icon = 'icons/clothing/pants/slacks.dmi'
+	origin_tech = @'{"esoteric":3}'
+	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
+	var/static/list/clothing_choices
+
+/obj/item/clothing/pants/chameleon/Initialize()
+	. = ..()
+	if(!clothing_choices)
+		var/static/list/clothing_types = list(
+			/obj/item/clothing/pants,
+			/obj/item/clothing/skirt
+		)
+		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
+
+/obj/item/clothing/pants/chameleon/verb/change(picked in clothing_choices)
+	set name = "Change Pants Appearance"
+	set category = "Chameleon Items"
+	set src in usr
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()
+
+/obj/item/clothing/shirt/chameleon
+	name = "dress shirt"
+	desc = "A crisply pressed white button-up shirt. Somewhat formal. There's a small dial on the cuff."
+	icon = 'icons/clothing/shirts/button_up.dmi'
+	origin_tech = @'{"esoteric":3}'
+	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
+	var/static/list/clothing_choices
+
+/obj/item/clothing/shirt/chameleon/Initialize()
+	. = ..()
+	if(!clothing_choices)
+		var/static/list/clothing_types = list(
+			/obj/item/clothing/shirt
+		)
+		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
+
+/obj/item/clothing/shirt/chameleon/verb/change(picked in clothing_choices)
+	set name = "Change Shirt Appearance"
+	set category = "Chameleon Items"
+	set src in usr
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()
+
 //starts off as a jumpsuit
-/obj/item/clothing/under/chameleon
+/obj/item/clothing/jumpsuit/chameleon
 	name = "jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
@@ -51,12 +104,18 @@
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	var/static/list/clothing_choices
 
-/obj/item/clothing/under/chameleon/Initialize()
+/obj/item/clothing/jumpsuit/chameleon/Initialize()
 	. = ..()
 	if(!clothing_choices)
+		var/static/list/clothing_types = list(
+			/obj/item/clothing/under,
+			/obj/item/clothing/jumpsuit,
+			/obj/item/clothing/dress,
+			/obj/item/clothing/costume
+		)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
 
-/obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
+/obj/item/clothing/jumpsuit/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
 	set category = "Chameleon Items"
 	set src in usr

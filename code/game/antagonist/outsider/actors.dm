@@ -16,7 +16,7 @@
 
 /decl/hierarchy/outfit/actor
 	name =    "Special Role - Actor"
-	uniform = /obj/item/clothing/under/chameleon
+	uniform = /obj/item/clothing/jumpsuit/chameleon
 	shoes =   /obj/item/clothing/shoes/chameleon
 	l_ear =   /obj/item/radio/headset/entertainment
 	id_type = /obj/item/card/id/syndicate

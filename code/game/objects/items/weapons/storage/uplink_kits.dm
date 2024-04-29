@@ -57,7 +57,9 @@
 
 /obj/item/backpack/chameleon/sydie_kit/WillContain()
 	return list(
-			/obj/item/clothing/under/chameleon,
+			/obj/item/clothing/jumpsuit/chameleon,
+			/obj/item/clothing/shirt/chameleon,
+			/obj/item/clothing/pants/chameleon,
 			/obj/item/clothing/suit/chameleon,
 			/obj/item/clothing/shoes/chameleon,
 			/obj/item/clothing/head/chameleon,
