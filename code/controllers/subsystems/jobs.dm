@@ -412,7 +412,6 @@ SUBSYSTEM_DEF(jobs)
 
 	// Equip custom gear loadout, replacing any job items
 	var/list/spawn_in_storage = list()
-	var/list/loadout_taken_slots = list()
 	if(H.client.prefs.Gear() && job.loadout_allowed)
 		for(var/thing in H.client.prefs.Gear())
 			var/decl/loadout_option/G = global.gear_datums[thing]
@@ -445,10 +444,8 @@ SUBSYSTEM_DEF(jobs)
 					to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
 					continue
 
-				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
+				if(!G.slot || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
 					spawn_in_storage.Add(G)
-				else
-					loadout_taken_slots.Add(G.slot)
 
 	// do accessories last so they don't attach to a suit that will be replaced
 	if(H.char_rank && H.char_rank.accessory)
@@ -459,10 +456,12 @@ SUBSYSTEM_DEF(jobs)
 				var/list/accessory_args = accessory_data.Copy()
 				accessory_args[1] = src
 				for(var/i in 1 to amt)
-					H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie_str)
+					var/obj/item/accessory = new accessory_path(arglist(accessory_args))
+					H.equip_to_slot_or_del(accessory, accessory.get_fallback_slot())
 			else
 				for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
-					H.equip_to_slot_or_del(new accessory_path(src), slot_tie_str)
+					var/obj/item/accessory = new accessory_path(src)
+					H.equip_to_slot_or_del(accessory, accessory.get_fallback_slot())
 
 	return spawn_in_storage
 

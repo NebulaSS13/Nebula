@@ -166,12 +166,13 @@
 		add_overlay(get_safety_indicator())
 
 /obj/item/gun/proc/update_base_icon()
+	return
 
 /obj/item/gun/proc/get_safety_indicator()
 	return mutable_appearance(icon, "[get_world_inventory_state()][safety_icon][safety()]")
 
 /obj/item/gun/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && user_mob.can_wield_item(src) && is_held_twohanded(user_mob))
+	if(overlay && user_mob?.can_wield_item(src) && is_held_twohanded(user_mob))
 		var/wielded_state = "[overlay.icon_state]-wielded"
 		if(check_state_in_icon(wielded_state, overlay.icon))
 			overlay.icon_state = wielded_state

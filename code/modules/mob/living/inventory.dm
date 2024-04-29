@@ -18,7 +18,6 @@
 			if(isnull(inv_slot.quick_equip_priority)) // Never quick-equip into some slots.
 				continue
 			_inventory_slot_priority += inv_slot.slot_id
-		_inventory_slot_priority |= slot_tie_str // fallback for non-clothing accessories
 	return _inventory_slot_priority
 
 /mob/living/get_inventory_slot_datum(var/slot)

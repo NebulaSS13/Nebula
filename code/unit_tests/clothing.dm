@@ -53,6 +53,12 @@
 		if(initial_item_state)
 			clothing_fails += "legacy item state set '[initial_item_state]'"
 
+		// Check for old accessory states.
+		for(var/state in icon_states(initial_icon))
+			if(findtext(lowertext(state), "slot_tie"))
+				clothing_fails += "legacy slot_tie state defined"
+				break
+
 		// We don't currently validate clothes specifically for nonhumans.
 		// TODO: make this a loop over all relevant bodytype categories instead.
 		var/check_flags = initial(clothes.bodytype_equip_flags)

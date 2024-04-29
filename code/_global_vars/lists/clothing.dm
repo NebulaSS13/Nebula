@@ -30,7 +30,6 @@ var/global/list/airtight_slots = list(
 
 var/global/list/abstract_inventory_slots = list(
 	slot_in_backpack_str,
-	slot_tie_str,
 	slot_undershirt_str,
 	slot_underpants_str,
 	slot_socks_str

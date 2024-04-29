@@ -50,8 +50,8 @@
 /obj/item/clothing/head/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
 		var/light_overlay
-		if(user_mob.get_bodytype_category() != bodytype)
-			light_overlay = user_mob.get_bodytype()?.get_offset_overlay_image(user_mob, overlay.icon, "[overlay.icon_state]_light", null, slot)
+		if(user_mob?.get_bodytype_category() != bodytype)
+			light_overlay = user_mob?.get_bodytype()?.get_offset_overlay_image(user_mob, overlay.icon, "[overlay.icon_state]_light", null, slot)
 		if(!light_overlay)
 			light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
 		overlay.overlays += light_overlay

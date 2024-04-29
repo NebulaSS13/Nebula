@@ -629,25 +629,11 @@
 	if(!slot || !user)
 		return FALSE
 
-	// Some slots don't have an associated handler as they are shorthand for various setup functions.
-	if(slot in global.abstract_inventory_slots)
-		switch(slot)
+	// Putting stuff into backpacks.
+	if(slot == slot_in_backpack_str)
+		var/obj/item/back = user.get_equipped_item(slot_back_str)
+		return back?.storage?.can_be_inserted(src, user, TRUE)
 
-			// Putting stuff into backpacks.
-			if(slot_in_backpack_str)
-				var/obj/item/back = user.get_equipped_item(slot_back_str)
-				return back?.storage?.can_be_inserted(src, user, TRUE)
-
-			// Equipping accessories.
-			if(slot_tie_str)
-				// Find something to equip the accessory to.
-				for(var/check_slot in list(slot_w_uniform_str, slot_wear_suit_str))
-					var/obj/item/clothing/check_gear = user.get_equipped_item(check_slot)
-					if(istype(check_gear) && check_gear.can_attach_accessory(src))
-						return TRUE
-				if(!disable_warning)
-					to_chat(user, SPAN_WARNING("You need to be wearing something you can attach \the [src] to."))
-				return FALSE
 
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
 	if(!inv_slot)

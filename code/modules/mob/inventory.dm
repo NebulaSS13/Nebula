@@ -62,7 +62,8 @@
 			W.dropInto(loc)
 		return TRUE
 
-	if(slot == slot_tie_str)
+	// Attempt to equip accessories if the slot is already blocked.
+	if(!delete_old_item && get_equipped_item(slot))
 
 		var/list/check_slots = get_inventory_slots()
 		if(islist(check_slots))
@@ -70,11 +71,14 @@
 			check_slots = check_slots.Copy()
 			check_slots -= global.all_hand_slots
 
+			check_slots -= slot
+			check_slots.Insert(1, slot)
+
 			var/try_equip_slot = W.get_fallback_slot()
-			if(try_equip_slot)
+			if(try_equip_slot && slot != try_equip_slot)
 				check_slots -= try_equip_slot
 				check_slots.Insert(1, try_equip_slot)
-		
+
 			for(var/slot_string in check_slots)
 				var/obj/item/clothing/clothes = get_equipped_item(slot_string)
 				if(istype(clothes) && clothes.can_attach_accessory(W, src))
@@ -119,7 +123,7 @@
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	var/obj/item/back = get_equipped_item(slot_back_str) 
+	var/obj/item/back = get_equipped_item(slot_back_str)
 	if(back?.storage?.can_be_inserted(newitem, null, 1))
 		back.storage.handle_item_insertion(src, newitem)
 		return back

@@ -61,7 +61,6 @@
 #define slot_wear_id_str     "slot_wear_id"
 #define slot_gloves_str      "slot_gloves"
 #define slot_glasses_str     "slot_glasses"
-#define slot_tie_str         "slot_tie"
 #define slot_l_store_str     "slot_l_store"
 #define slot_r_store_str     "slot_r_store"
 #define slot_s_store_str     "slot_s_store"
