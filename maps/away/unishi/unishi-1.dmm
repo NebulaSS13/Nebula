@@ -325,7 +325,8 @@
 "aX" = (
 /obj/machinery/button/access/interior{
 	id_tag = "unishi";
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /turf/floor,
 /area/unishi/engineering)
@@ -336,7 +337,8 @@
 "aZ" = (
 /obj/machinery/button/access/exterior{
 	id_tag = "unishi";
-	pixel_x = -28
+	pixel_x = -28;
+	dir = 4
 	},
 /turf/space,
 /area/space)
@@ -677,7 +679,8 @@
 	},
 /obj/machinery/button/ignition{
 	id_tag = "unishi";
-	pixel_x = -28
+	pixel_x = -28;
+	dir = 4
 	},
 /turf/floor,
 /area/unishi/engineroom)

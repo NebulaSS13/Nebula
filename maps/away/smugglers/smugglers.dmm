@@ -50,7 +50,8 @@
 "am" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "asteroid_base_dock_airlock";
-	pixel_x = 25
+	pixel_x = 25;
+	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "asteroid_base_dock_pump"
@@ -107,7 +108,8 @@
 	pixel_x = -25;
 	tag_airpump = "asteroid_base_dock_pump";
 	tag_exterior_door = "asteroid_base_dock_outer";
-	tag_interior_door = "asteroid_base_dock_inner"
+	tag_interior_door = "asteroid_base_dock_inner";
+	dir = 4
 	},
 /obj/machinery/button/access/interior{
 	id_tag = "asteroid_base_dock_airlock";
@@ -255,7 +257,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "asteroid_base_east_airlock";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;

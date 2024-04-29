@@ -24,11 +24,6 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/floor/plating,
 /area/map_template/oldpod)
-"af" = (
-/turf/wall/shuttle/dark{
-	unique_merge_identifier = "oldpod"
-	},
-/area/map_template/oldpod)
 "ag" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 1
@@ -113,7 +108,8 @@
 /area/map_template/oldpod)
 "aq" = (
 /obj/structure/closet/hydrant{
-	pixel_x = 24
+	pixel_x = 24;
+	dir = 8
 	},
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/dirt,
@@ -502,16 +498,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/floor/tiled/white/monotile,
 /area/map_template/oldpod)
-"bh" = (
-/turf/wall/shuttle/dark{
-	unique_merge_identifier = "oldpod"
-	},
-/area/map_template/oldpod)
-"bi" = (
-/turf/wall/shuttle/dark{
-	unique_merge_identifier = "oldpod"
-	},
-/area/map_template/oldpod)
 
 (1,1,1) = {"
 aa
@@ -523,7 +509,7 @@ ae
 ac
 ac
 ac
-bh
+aa
 "}
 (2,1,1) = {"
 ab
@@ -622,7 +608,7 @@ bg
 ac
 "}
 (10,1,1) = {"
-af
+aa
 ac
 ac
 ac
@@ -631,5 +617,5 @@ aN
 ac
 ac
 ac
-bi
+aa
 "}

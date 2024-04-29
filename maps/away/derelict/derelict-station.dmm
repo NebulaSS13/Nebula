@@ -271,7 +271,8 @@
 /area/derelict/ship)
 "aP" = (
 /obj/machinery/light_switch{
-	pixel_x = 27
+	pixel_x = 27;
+	dir = 8
 	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -359,7 +360,8 @@
 /area/derelict/ship)
 "bc" = (
 /obj/machinery/light_switch{
-	pixel_x = 27
+	pixel_x = 27;
+	dir = 8
 	},
 /turf/floor/tiled,
 /area/derelict/ship)
@@ -528,7 +530,8 @@
 /area/derelict/ship)
 "bJ" = (
 /obj/machinery/light_switch{
-	pixel_x = 27
+	pixel_x = 27;
+	dir = 8
 	},
 /obj/machinery/light{
 	dir = 4
@@ -1154,7 +1157,8 @@
 "ea" = (
 /obj/structure/extinguisher_cabinet{
 	icon_state = "extinguisher_empty";
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/floor/airless,
 /area/constructionsite/hallway/fore)
@@ -1367,7 +1371,8 @@
 /obj/machinery/button/access/exterior{
 	id_tag = "constructionsite_airlock";
 	pixel_x = 20;
-	req_access = newlist()
+	req_access = newlist();
+	dir = 8
 	},
 /turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
@@ -1378,7 +1383,8 @@
 /obj/machinery/button/access/interior{
 	id_tag = "constructionsite_airlock";
 	pixel_x = -20;
-	req_access = newlist()
+	req_access = newlist();
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1;
@@ -1493,7 +1499,8 @@
 	tag_airpump = "constructionsite_vent";
 	tag_chamber_sensor = "constructionsite_sensor";
 	tag_exterior_door = "constructionsite_outer";
-	tag_interior_door = "constructionsite_inner"
+	tag_interior_door = "constructionsite_inner";
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10;
@@ -1505,7 +1512,8 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /obj/machinery/airlock_sensor{
 	id_tag = "constructionsite_sensor";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6;
@@ -1765,7 +1773,7 @@
 /area/constructionsite/maintenance)
 "fR" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = 30
+	pixel_y = 29
 	},
 /turf/floor/airless,
 /area/constructionsite/hallway/fore)
@@ -1980,7 +1988,8 @@
 /obj/structure/lattice,
 /obj/structure/extinguisher_cabinet{
 	icon_state = "extinguisher_empty";
-	pixel_x = -30
+	pixel_x = -29;
+	dir = 4
 	},
 /turf/space,
 /area/constructionsite/hallway/fore)
@@ -2248,7 +2257,8 @@
 /area/constructionsite/medical)
 "hS" = (
 /obj/structure/closet/medical_wall/filled{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /turf/floor/airless,
 /area/constructionsite/medical)
@@ -2830,7 +2840,8 @@
 "jQ" = (
 /obj/structure/extinguisher_cabinet{
 	icon_state = "extinguisher_empty";
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/aft)

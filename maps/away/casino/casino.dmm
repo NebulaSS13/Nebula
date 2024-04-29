@@ -112,14 +112,9 @@
 	dir = 2;
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
+	
 	},
 /turf/floor/plating,
-/area/casino/casino_bridge)
-"ao" = (
-/turf/space,
-/turf/wall/shuttle/dark{
-	unique_merge_identifier = "casino_bridge"
-	},
 /area/casino/casino_bridge)
 "ap" = (
 /turf/floor/tiled,
@@ -143,6 +138,7 @@
 	dir = 4;
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
+	
 	},
 /turf/floor/plating,
 /area/casino/casino_bridge)
@@ -297,7 +293,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "casino_weaponry";
 	name = "Weaponry Blast Door contol";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/structure/flora/pottedplant/unusual,
 /obj/machinery/power/apc{
@@ -311,7 +308,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Door contol";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1146,11 +1144,6 @@
 	unique_merge_identifier = "casino_cutter"
 	},
 /area/casino/casino_cutter)
-"dp" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "casino_cutter"
-	},
-/area/casino/casino_cutter)
 "dq" = (
 /obj/structure/fuel_port/hydrogen,
 /turf/wall/shuttle{
@@ -1472,11 +1465,6 @@
 	icon_state = "1-2"
 	},
 /turf/floor/shuttle/blue,
-/area/casino/casino_cutter)
-"ep" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "casino_cutter"
-	},
 /area/casino/casino_cutter)
 "eq" = (
 /obj/structure/cable/yellow{
@@ -1813,6 +1801,7 @@
 	dir = 4;
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
+	
 	},
 /turf/floor/tiled,
 /area/casino/casino_security)
@@ -1903,6 +1892,7 @@
 	dir = 4;
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
+	
 	},
 /turf/floor/tiled,
 /area/casino/casino_security)
@@ -2145,6 +2135,7 @@
 	dir = 4;
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
+	
 	},
 /turf/floor/plating,
 /area/casino/casino_security)
@@ -2318,7 +2309,8 @@
 	tag_airpump = "casino_solar_pump";
 	tag_chamber_sensor = "casino_solar_sensor";
 	tag_exterior_door = "casino_solar_outer";
-	tag_interior_door = "casino_solar_inner"
+	tag_interior_door = "casino_solar_inner";
+	dir = 8
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "casino_solar_sensor";
@@ -4522,12 +4514,6 @@
 	},
 /turf/floor/plating,
 /area/casino/casino_bow)
-"mT" = (
-/turf/space,
-/turf/wall/shuttle/dark{
-	unique_merge_identifier = "casino_bridge"
-	},
-/area/casino/casino_bow)
 "mU" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -4645,39 +4631,45 @@
 "nm" = (
 /obj/structure/bed/chair,
 /obj/machinery/status_display{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
 	id_tag = "Casino_escape_pod_3";
 	name = "Casino escape pod Three controller";
 	pixel_x = 24;
-	tag_door = "Casino escape_pod_3_hatch"
+	tag_door = "Casino escape_pod_3_hatch";
+	dir = 8
 	},
 /turf/floor/plating,
 /area/casino/casino_bow)
 "nn" = (
 /obj/structure/bed/chair,
 /obj/machinery/status_display{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
 	id_tag = "Casino_escape_pod_2";
 	name = "Casino escape pod Two controller";
 	pixel_x = 24;
-	tag_door = "Casino escape_pod_2_hatch"
+	tag_door = "Casino escape_pod_2_hatch";
+	dir = 8
 	},
 /turf/floor/plating,
 /area/casino/casino_bow)
 "no" = (
 /obj/structure/bed/chair,
 /obj/machinery/status_display{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
 	id_tag = "Casino_escape_pod_1";
 	name = "Casino escape pod One controller";
 	pixel_x = 24;
-	tag_door = "escape_pod_17_hatch"
+	tag_door = "escape_pod_17_hatch";
+	dir = 8
 	},
 /turf/floor/plating,
 /area/casino/casino_bow)
@@ -4700,11 +4692,6 @@
 	dir = 4
 	},
 /turf/floor/plating,
-/area/casino/casino_bow)
-"nr" = (
-/turf/wall/shuttle/dark{
-	unique_merge_identifier = "casino_bridge"
-	},
 /area/casino/casino_bow)
 "ns" = (
 /turf/floor/reinforced/airless,
@@ -5032,7 +5019,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Door contol";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/floor/tiled,
 /area/casino/casino_security)
@@ -9884,7 +9872,7 @@ aa
 aa
 aa
 aa
-ao
+al
 am
 at
 at
@@ -10652,7 +10640,7 @@ kC
 nf
 nf
 nf
-nr
+np
 ns
 aa
 aa
@@ -11060,7 +11048,7 @@ kC
 nf
 nf
 nf
-nr
+np
 ns
 aa
 aa
@@ -11468,7 +11456,7 @@ kC
 nf
 nf
 nf
-nr
+np
 ns
 aa
 aa
@@ -11836,10 +11824,10 @@ bP
 ci
 cD
 cV
-dp
+do
 dG
 Ub
-dp
+do
 eG
 eX
 bq
@@ -11938,7 +11926,7 @@ bQ
 cj
 cD
 cV
-dp
+do
 dH
 dW
 eo
@@ -12040,10 +12028,10 @@ bR
 ck
 cD
 cV
-dp
+do
 dI
 dX
-dp
+do
 eG
 eZ
 br
@@ -12142,10 +12130,10 @@ bS
 cl
 cE
 cW
-dp
+do
 Tb
 dY
-dp
+do
 eG
 cF
 br
@@ -12244,10 +12232,10 @@ bq
 bq
 bq
 cU
-dp
+do
 dI
 dZ
-dp
+do
 eG
 cF
 br
@@ -12346,10 +12334,10 @@ bT
 cm
 cF
 cV
-dp
+do
 dJ
 ea
-dp
+do
 eG
 fa
 br
@@ -12451,7 +12439,7 @@ cV
 dq
 dK
 dK
-ep
+do
 eG
 fa
 br
@@ -12484,7 +12472,7 @@ mE
 kC
 mH
 kC
-mT
+mM
 aa
 aa
 aa
@@ -12585,7 +12573,7 @@ mj
 kl
 kC
 kC
-mT
+mM
 aa
 aa
 aa
@@ -12686,7 +12674,7 @@ fA
 fA
 fA
 kC
-mT
+mM
 aa
 aa
 aa

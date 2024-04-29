@@ -213,7 +213,8 @@
 /area/template_noop)
 "aR" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -32
+	pixel_x = -29;
+	dir = 4
 	},
 /turf/floor/carpet/blue2,
 /area/template_noop)

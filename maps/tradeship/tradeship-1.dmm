@@ -2588,7 +2588,7 @@
 	dir = 1
 	},
 /obj/item/radio/intercom{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/floor/lino,
 /area/ship/trade/crew/dorms1)
@@ -2854,7 +2854,7 @@
 	dir = 5
 	},
 /obj/item/radio/intercom{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/floor/lino,
 /area/ship/trade/crew/dorms2)

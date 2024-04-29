@@ -161,7 +161,8 @@
 "ay" = (
 /obj/machinery/light,
 /obj/item/radio/intercom{
-	pixel_x = -32
+	pixel_x = -22;
+	dir = 4
 	},
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 1;
@@ -209,7 +210,8 @@
 /area/ship/scrap/comms)
 "aE" = (
 /obj/machinery/light_switch{
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -246,7 +248,8 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/light_switch{
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/floor/tiled/dark/usedup,
@@ -323,7 +326,7 @@
 "aO" = (
 /obj/machinery/network/message_server{
 	initial_network_id = "freightnet_0451"
-},
+	},
 /turf/floor/bluegrid/airless,
 /area/ship/scrap/comms)
 "aP" = (
@@ -429,7 +432,8 @@
 	dir = 8
 	},
 /obj/item/radio/intercom{
-	pixel_y = -32
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/machinery/alarm{
 	dir = 8;
@@ -452,7 +456,8 @@
 /area/ship/scrap/command/hallway)
 "ba" = (
 /obj/item/radio/intercom{
-	pixel_x = -32
+	pixel_x = -22;
+	dir = 4
 	},
 /obj/item/gun/projectile/shotgun/pump{
 	desc = "When words don't strike hard enough.";
@@ -754,7 +759,8 @@
 "bA" = (
 /obj/structure/emergency_dispenser/south,
 /obj/item/radio/intercom{
-	pixel_x = -32
+	pixel_x = -22;
+	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -775,10 +781,12 @@
 /area/ship/scrap/dock)
 "bC" = (
 /obj/machinery/light_switch{
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /obj/machinery/light_switch{
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /turf/floor/tiled/usedup,
 /area/ship/scrap/dock)
@@ -911,7 +919,8 @@
 /area/ship/scrap/dock)
 "bN" = (
 /obj/item/radio/intercom{
-	pixel_y = -32
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
@@ -932,7 +941,8 @@
 /area/ship/scrap/dock)
 "bP" = (
 /obj/item/radio/intercom{
-	pixel_y = -32
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/machinery/alarm{
 	dir = 4;
@@ -1289,7 +1299,8 @@
 	icon_state = "bulb1"
 	},
 /obj/item/radio/intercom{
-	pixel_x = -32
+	pixel_x = -22;
+	dir = 4
 	},
 /obj/structure/closet/wardrobe/pjs,
 /obj/structure/sign/poster{
@@ -1566,7 +1577,8 @@
 	name = "Bathrooms APC"
 	},
 /obj/machinery/light_switch{
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -1630,7 +1642,8 @@
 	dir = 4
 	},
 /obj/item/radio/intercom{
-	pixel_y = -32
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/structure/ladder,
 /turf/floor/tiled/usedup,
@@ -1641,7 +1654,8 @@
 	dir = 8
 	},
 /obj/machinery/light_switch{
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
@@ -1664,7 +1678,8 @@
 	name = "Dorms APC"
 	},
 /obj/machinery/light_switch{
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /obj/structure/closet/wardrobe/mixed,
 /obj/item/backpack/dufflebag/med,
@@ -1688,7 +1703,8 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/emergency_dispenser/east,
 /obj/machinery/light_switch{
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1709,7 +1725,8 @@
 /area/ship/scrap/cargo)
 "dA" = (
 /obj/machinery/light_switch{
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1739,7 +1756,7 @@
 /area/ship/scrap/crew/kitchen)
 "dF" = (
 /obj/item/radio/intercom{
-	pixel_y = 32
+	pixel_y = 20
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
@@ -1792,7 +1809,7 @@
 	icon_state = "bulb1"
 	},
 /obj/item/radio/intercom{
-	pixel_y = 32
+	pixel_y = 20
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/floor/tiled/usedup,
@@ -1843,7 +1860,7 @@
 /area/ship/scrap/crew/medbay)
 "dQ" = (
 /obj/item/radio/intercom{
-	pixel_y = 32
+	pixel_y = 20
 	},
 /obj/item/bedsheet/medical,
 /obj/structure/curtain/open/privacy,
@@ -2002,7 +2019,8 @@
 /obj/structure/iv_drip,
 /obj/structure/closet/secure_closet/medical_wall/pills{
 	req_access = null;
-	pixel_x = 26
+	pixel_x = 26;
+	dir = 8
 	},
 /turf/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
@@ -2340,7 +2358,8 @@
 	dir = 1
 	},
 /obj/machinery/light_switch{
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/usedup,
@@ -2356,7 +2375,8 @@
 	icon_state = "bulb1"
 	},
 /obj/machinery/light_switch{
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
@@ -2428,10 +2448,12 @@
 	name = "Medical Bay APC"
 	},
 /obj/machinery/light_switch{
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /obj/structure/closet/medical_wall/filled{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/retractor,
@@ -2671,7 +2693,7 @@
 	icon_state = "bulb1"
 	},
 /obj/item/radio/intercom{
-	pixel_y = 32
+	pixel_y = 20
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -2840,7 +2862,7 @@
 	},
 /obj/machinery/network/relay{
 	initial_network_id = "freightnet_0451"
-},
+	},
 /turf/floor/usedup,
 /area/ship/scrap/unused)
 "fA" = (
@@ -2903,7 +2925,8 @@
 	dir = 1
 	},
 /obj/machinery/light_switch{
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/usedup,
@@ -3737,7 +3760,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/radio/intercom{
-	pixel_y = 32
+	pixel_y = 20
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -4137,12 +4160,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/button/ignition{
 	id_tag = "engine";
-	pixel_x = -5
+	pixel_x = -5;
+	dir = 4
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "engwindow";
 	name = "Engine Observation";
-	pixel_x = 6
+	pixel_x = 6;
+	dir = 8
 	},
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
@@ -4154,7 +4179,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "scram";
 	name = "CORE SCRAM";
-	pixel_y = -26
+	pixel_y = -26;
+	dir = 1
 	},
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 1;
@@ -4404,7 +4430,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "radaway";
 	name = "Radiation shields";
-	pixel_x = -24
+	pixel_x = -24;
+	dir = 4
 	},
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/power)
@@ -4453,7 +4480,8 @@
 	},
 /obj/structure/cable,
 /obj/item/radio/intercom{
-	pixel_x = -32
+	pixel_x = -22;
+	dir = 4
 	},
 /turf/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
@@ -5151,7 +5179,7 @@
 	icon_state = "0-4"
 	},
 /obj/item/radio/intercom{
-	pixel_y = 32
+	pixel_y = 20
 	},
 /obj/item/cell/crap,
 /obj/item/cell/crap,
@@ -5180,7 +5208,7 @@
 "Ix" = (
 /obj/machinery/network/router{
 	initial_network_id = "freightnet_0451"
-},
+	},
 /turf/floor/bluegrid/airless,
 /area/ship/scrap/comms)
 "IG" = (

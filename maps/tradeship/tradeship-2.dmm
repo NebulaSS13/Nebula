@@ -3536,7 +3536,7 @@
 	id_tag = "engwindow";
 	name = "Engine Observation";
 	pixel_x = 6;
-	dir = 1;
+	dir = 8;
 	directional_offset = null
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4851,7 +4851,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/radio/intercom{
-	pixel_y = 32
+	pixel_y = 20
 	},
 /obj/structure/cable{
 	icon_state = "4-8"

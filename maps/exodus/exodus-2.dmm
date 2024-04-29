@@ -58170,7 +58170,8 @@
 /obj/machinery/button/access/exterior{
 	id_tag = "engineering_dock_airlock";
 	name = "exterior access button";
-	pixel_x = 25
+	pixel_x = 25;
+	dir = 8
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/engi_shuttle)

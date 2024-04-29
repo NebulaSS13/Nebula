@@ -1536,7 +1536,8 @@
 	tag_airpump = "Harpoon_solar_starboard_pump";
 	tag_chamber_sensor = "Harpoon_solar_starboard_sensor";
 	tag_exterior_door = "Harpoon_solar_starboard_outer";
-	tag_interior_door = "Harpoon_solar_starboard_inner"
+	tag_interior_door = "Harpoon_solar_starboard_inner";
+	dir = 8
 	},
 /turf/floor/plating,
 /area/errant_pisces/solar_starboard)
@@ -1689,7 +1690,8 @@
 	tag_airpump = "Harpoon_solar_port_pump";
 	tag_chamber_sensor = "Harpoon_solar_port_sensor";
 	tag_exterior_door = "Harpoon_solar_port_outer";
-	tag_interior_door = "Harpoon_solar_port_inner"
+	tag_interior_door = "Harpoon_solar_port_inner";
+	dir = 4
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "Harpoon_solar_port_sensor";
@@ -2976,7 +2978,7 @@
 /obj/item/clothing/shirt/scrubs,
 /obj/item/clothing/shirt/scrubs,
 /obj/item/clothing/shirt/scrubs,
-/obj/item/clothing/under/nurse,
+/obj/item/clothing/dress/nurse,
 /turf/floor/plating,
 /area/errant_pisces/infirmary)
 "hH" = (
@@ -3158,7 +3160,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "Harpoon_bd_cell1";
 	name = "Cell 1 blast door-control";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/errant_pisces/live_storage)
@@ -3170,7 +3173,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "Harpoon_bd_cell2";
 	name = "Cell 2 blast door-control";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/errant_pisces/live_storage)
@@ -3178,13 +3182,15 @@
 /obj/machinery/button/blast_door{
 	id_tag = "Harpoon_bd_cell3";
 	name = "Cell 3 blast door-control";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/errant_pisces/live_storage)
 "iu" = (
 /obj/machinery/button/crematorium{
-	pixel_x = -20
+	pixel_x = -20;
+	dir = 4
 	},
 /turf/floor/plating,
 /area/errant_pisces/infirmary)
@@ -3553,7 +3559,8 @@
 "jy" = (
 /obj/machinery/button/access/exterior{
 	id_tag = "Harpoon_ls_airlock";
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /turf/floor/plating,
 /area/errant_pisces/live_storage)
@@ -3747,7 +3754,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "Harpoon_ls_sensor";
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /turf/floor/plating,
 /area/errant_pisces/live_storage)
@@ -4101,7 +4109,8 @@
 	tag_airpump = "Harpoon_ls_pump";
 	tag_chamber_sensor = "Harpoon_ls_sensor";
 	tag_exterior_door = "Harpoon_ls_outer";
-	tag_interior_door = "Harpoon_ls_inner"
+	tag_interior_door = "Harpoon_ls_inner";
+	dir = 8
 	},
 /turf/floor/plating,
 /area/errant_pisces/live_storage)
@@ -4412,7 +4421,8 @@
 /obj/structure/lattice,
 /obj/machinery/button/access/exterior{
 	id_tag = "Harpoon_sci_airlock";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /turf/space,
 /area/errant_pisces/science_wing)
@@ -4436,7 +4446,8 @@
 	tag_airpump = "Harpoon_sci_pump";
 	tag_chamber_sensor = "Harpoon_sci_sensor";
 	tag_exterior_door = "Harpoon_sci_outer";
-	tag_interior_door = "Harpoon_sci_inner"
+	tag_interior_door = "Harpoon_sci_inner";
+	dir = 1
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "Harpoon_sci_sensor";
@@ -4867,7 +4878,8 @@
 	tag_airpump = "Harpoon_dock1_pump";
 	tag_chamber_sensor = "Harpoon_dock1_sensor";
 	tag_exterior_door = "Harpoon_dock1_outer";
-	tag_interior_door = "Harpoon_dock1_inner"
+	tag_interior_door = "Harpoon_dock1_inner";
+	dir = 1
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "Harpoon_dock1_sensor";
@@ -5397,7 +5409,8 @@
 	},
 /obj/machinery/button/access/interior{
 	id_tag = "Harpoon_dock2_airlock";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/floor/plating,
 /area/errant_pisces/aft_hallway)
@@ -5425,7 +5438,8 @@
 	tag_airpump = "Harpoon_dock2_pump";
 	tag_chamber_sensor = "Harpoon_dock2_sensor";
 	tag_exterior_door = "Harpoon_dock2_outer";
-	tag_interior_door = "Harpoon_dock2_inner"
+	tag_interior_door = "Harpoon_dock2_inner";
+	dir = 1
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "Harpoon_dock2_sensor";
@@ -6311,7 +6325,8 @@
 	tag_airpump = "Harpoon_fish_pump";
 	tag_chamber_sensor = "Harpoon_fish_sensor";
 	tag_exterior_door = "Harpoon_fish_outer";
-	tag_interior_door = "Harpoon_fish_inner"
+	tag_interior_door = "Harpoon_fish_inner";
+	dir = 1
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "Harpoon_fish_sensor";

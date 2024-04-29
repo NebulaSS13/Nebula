@@ -244,7 +244,8 @@
 /obj/random/loot,
 /obj/effect/decal/cleanable/vomit,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -32
+	pixel_x = -29;
+	dir = 4
 	},
 /turf/floor/lino,
 /area/template_noop)
