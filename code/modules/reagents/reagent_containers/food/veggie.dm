@@ -43,21 +43,6 @@
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
-/obj/item/chems/food/carrotfries
-	name = "carrot fries"
-	desc = "Tasty fries from fresh carrots."
-	icon_state = "carrotfries"
-	plate = /obj/item/plate
-	filling_color = "#faa005"
-	center_of_mass = @'{"x":16,"y":11}'
-	nutriment_desc = list("carrot" = 3, "salt" = 1)
-	nutriment_amt = 3
-	bitesize = 2
-
-/obj/item/chems/food/carrotfries/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/liquid/eyedrops, 3)
-
 /obj/item/chems/food/hugemushroomslice
 	name = "huge mushroom slice"
 	desc = "A slice from a huge mushroom."

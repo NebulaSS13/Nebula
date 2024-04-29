@@ -130,18 +130,9 @@ var/global/list/_cooking_recipe_cache = list()
 		return FALSE
 	var/list/needed_fruits = fruit.Copy()
 	for(var/obj/item/chems/food/S in container_contents)
-		var/use_tag
-		if(istype(S, /obj/item/chems/food/grown))
-			var/obj/item/chems/food/grown/G = S
-			if(!G.seed || !G.seed.kitchen_tag)
-				continue
-			use_tag = G.dry ? "dried [G.seed.kitchen_tag]" : G.seed.kitchen_tag
-		else if(istype(S, /obj/item/chems/food/fruit_slice))
-			var/obj/item/chems/food/fruit_slice/FS = S
-			if(!FS.seed || !FS.seed.kitchen_tag)
-				continue
-			use_tag = "[FS.seed.kitchen_tag] slice"
-		use_tag = "[S.dry ? "dried " : ""][use_tag]"
+		var/use_tag = S.get_grown_tag()
+		if(!use_tag)
+			continue
 		if(isnull(needed_fruits[use_tag]))
 			continue
 		needed_fruits[use_tag]--
@@ -181,8 +172,8 @@ var/global/list/_cooking_recipe_cache = list()
 
 	if(!istype(container) || QDELETED(container) || !container.simulated)
 		CRASH("Recipe trying to create a result with null or invalid container: [container || "NULL"], [container?.simulated || "NULL"]")
-	if(!container.reagents?.total_volume)
-		CRASH("Recipe trying to create a result in a container with null or zero capacity reagent holder: [container.reagents?.total_volume || "NULL"]")
+	if(!container.reagents?.maximum_volume)
+		CRASH("Recipe trying to create a result in a container with null or zero capacity reagent holder: [container.reagents?.maximum_volume || "NULL"]")
 
 	if(ispath(result, /atom/movable))
 		var/produced = create_result_atom(container, used_ingredients)
@@ -237,13 +228,12 @@ var/global/list/_cooking_recipe_cache = list()
 	// Find fruits that we need.
 	if(LAZYLEN(fruit))
 		var/list/checklist = fruit.Copy()
-		for(var/obj/item/chems/food/grown/fruit in container_contents)
-			if(!fruit.seed?.kitchen_tag || isnull(checklist[fruit.seed.kitchen_tag]))
-				continue
-			if(checklist[fruit.seed.kitchen_tag] > 0)
+		for(var/obj/item/chems/food/food in container_contents)
+			var/check_grown_tag = food.get_grown_tag()
+			if(check_grown_tag && checklist[check_grown_tag] > 0)
 				//We found a thing we need
 				container_contents -= fruit
-				checklist[fruit.seed.kitchen_tag]--
+				checklist[check_grown_tag]--
 				used_ingredients["fruits"] += fruit
 
 	// And lastly deduct necessary quantities of reagents.

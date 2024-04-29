@@ -1,0 +1,5 @@
+/obj/item/chems/food/fruit_slice : /obj/item/chems/food/processed_grown/slice/apple{@OLD}
+/obj/item/chems/food/fruit_slice/@SUBTYPES : /obj/item/chems/food/processed_grown/slice/@SUBTYPES{@OLD}
+/obj/item/chems/food/rawsticks/@SUBTYPES : /obj/item/chems/food/processed_grown/sticks/potato/@SUBTYPES{@OLD}
+/obj/item/chems/food/carrotfries/@SUBTYPES : /obj/item/chems/food/processed_grown/sticks/carrot/@SUBTYPES{@OLD}
+/obj/item/chems/food/soydope/@SUBTYPES : /obj/item/chems/food/processed_grown/chopped/soy/@SUBTYPES{@OLD}

@@ -1,6 +1,6 @@
 /// Items you can craft together. Like bomb making, but with food and less screwdrivers.
 /// Uses format list(ingredient = result_type).
-/// The ingredient can be a typepath or a kitchen_tag string (used for mobs or plants)
+/// The ingredient can be a typepath or a grown_tag string (used for mobs or plants)
 /// The product can be a typepath or a list of typepaths, which will prompt the user.
 /// TODO: validate that these products are properly ordered
 /obj/item/chems/food/proc/get_combined_food_products()
@@ -35,6 +35,9 @@
 
 	return ..()
 
+/obj/item/chems/food/proc/get_grown_tag()
+	return
+
 /obj/item/chems/food/proc/try_create_combination(obj/item/W, mob/user)
 	if(!length(get_combined_food_products()) || !istype(W) || QDELETED(src) || QDELETED(W))
 		return FALSE
@@ -45,10 +48,11 @@
 		return FALSE
 
 	var/create_type = combined_food_products[W.type]
-	if(!create_type && istype(W, /obj/item/chems/food/grown))
-		var/obj/item/chems/food/grown/fruit = W
-		if(fruit.seed?.kitchen_tag)
-			create_type = combined_food_products[fruit.seed.kitchen_tag]
+	if(!create_type && istype(W, /obj/item/chems/food))
+		var/obj/item/chems/food/food = W
+		var/check_grown_tag = food.get_grown_tag()
+		if(check_grown_tag)
+			create_type = combined_food_products[check_grown_tag]
 
 	if(islist(create_type))
 		var/list/names = list()

@@ -99,14 +99,14 @@
 /decl/recipe/soup/simple/veg
 	display_name = "simple vegetable soup"
 	items = list(
-		/obj/item/chems/food/rawsticks = 2
+		/obj/item/chems/food/processed_grown/chopped = 2
 	)
 
 /decl/recipe/soup/simple/mixed
 	display_name = "simple soup"
 	items = list(
 		/obj/item/chems/food/butchery/chopped = 1,
-		/obj/item/chems/food/rawsticks = 1
+		/obj/item/chems/food/processed_grown/chopped = 1
 	)
 
 /decl/recipe/soup/simple/mixed/stew

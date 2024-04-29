@@ -6,6 +6,8 @@
 	chems = list(
 		/decl/material/solid/organic/cloth = list(10,1)
 	)
+	slice_product = null
+	slice_amount = 0
 
 /datum/seed/cotton/New()
 	..()
@@ -26,7 +28,7 @@
 	display_name = "chili plants"
 	chems = list(/decl/material/liquid/capsaicin = list(3,5), /decl/material/liquid/nutriment = list(1,25))
 	mutants = list("icechili")
-	kitchen_tag = "chili"
+	grown_tag = "chili"
 
 /datum/seed/chili/New()
 	..()
@@ -47,7 +49,7 @@
 	display_name = "chilly pepper plant"
 	mutants = null
 	chems = list(/decl/material/liquid/frostoil = list(3,5), /decl/material/liquid/nutriment = list(1,50))
-	kitchen_tag = "icechili"
+	grown_tag = "icechili"
 
 /datum/seed/chili/ice/New()
 	..()
@@ -58,11 +60,13 @@
 // Berry plants/variants.
 /datum/seed/berry
 	name = "berries"
-	seed_name = "berry"
+	seed_name = "berries"
 	display_name = "berry bush"
 	mutants = list("glowberries","poisonberries","blueberries")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/berry = list(10,10))
-	kitchen_tag = "berries"
+	grown_tag = "berries"
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/berry/New()
 	..()
@@ -80,11 +84,11 @@
 
 /datum/seed/berry/blue
 	name = "blueberries"
-	seed_name = "blueberry"
+	seed_name = "blueberries"
 	display_name = "blueberry bush"
 	mutants = list("berries","poisonberries","glowberries")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/berry = list(10,10))
-	kitchen_tag = "blueberries"
+	grown_tag = "blueberries"
 
 /datum/seed/berry/blue/New()
 	..()
@@ -98,7 +102,7 @@
 
 /datum/seed/berry/glow
 	name = "glowberries"
-	seed_name = "glowberry"
+	seed_name = "glowberries"
 	display_name = "glowberry bush"
 	mutants = null
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/solid/metal/uranium = list(3,5))
@@ -118,7 +122,7 @@
 
 /datum/seed/berry/poison
 	name = "poisonberries"
-	seed_name = "poison berry"
+	seed_name = "poison berries"
 	display_name = "poison berry bush"
 	mutants = list("deathberries")
 	chems = list(
@@ -135,7 +139,7 @@
 
 /datum/seed/berry/poison/death
 	name = "deathberries"
-	seed_name = "death berry"
+	seed_name = "death berries"
 	display_name = "death berry bush"
 	mutants = null
 	chems = list(
@@ -158,8 +162,9 @@
 	display_name = "nettle patch"
 	mutants = list("deathnettle")
 	chems = list(/decl/material/liquid/nutriment = list(1,50), /decl/material/liquid/acid = list(0,1))
-	kitchen_tag = "nettle"
-	kitchen_tag = "nettle"
+	grown_tag = "nettle"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/nettle/New()
 	..()
@@ -179,7 +184,7 @@
 	display_name = "death nettle patch"
 	mutants = null
 	chems = list(/decl/material/liquid/nutriment = list(1,50), /decl/material/liquid/acid/polyacid = list(0,1))
-	kitchen_tag = "deathnettle"
+	grown_tag = "deathnettle"
 
 /datum/seed/nettle/death/New()
 	..()
@@ -195,7 +200,7 @@
 	display_name = "tomato plant"
 	mutants = list("bluetomato","bloodtomato")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/tomato = list(10,10))
-	kitchen_tag = "tomato"
+	grown_tag = "tomato"
 
 /datum/seed/tomato/New()
 	..()
@@ -274,7 +279,7 @@
 	display_name = "eggplant vine"
 	mutants = list("realeggplant")
 	chems = list(/decl/material/liquid/nutriment = list(1,10))
-	kitchen_tag = "eggplant"
+	grown_tag = "eggplant"
 
 /datum/seed/eggplant/New()
 	..()
@@ -296,7 +301,7 @@
 	display_name = "apple tree"
 	mutants = list("poisonapple","goldapple")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/apple = list(10,10))
-	kitchen_tag = "apple"
+	grown_tag = "apple"
 
 /datum/seed/apple/New()
 	..()
@@ -323,7 +328,7 @@
 	display_name = "gold apple tree"
 	mutants = null
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/solid/metal/gold = list(1,5))
-	kitchen_tag = "goldapple"
+	grown_tag = "goldapple"
 
 /datum/seed/apple/gold/New()
 	..()
@@ -346,7 +351,9 @@
 		/decl/material/liquid/brute_meds = list(1,10,1),
 		/decl/material/liquid/bromide = list(1,10)
 	)
-	kitchen_tag = "ambrosiavulgaris"
+	grown_tag = "ambrosiavulgaris"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/ambrosia/New()
 	..()
@@ -373,7 +380,7 @@
 		/decl/material/liquid/amphetamines = list(1,10,1),
 		/decl/material/liquid/psychoactives = list(1,10)
 	)
-	kitchen_tag = "ambrosiadeus"
+	grown_tag = "ambrosiadeus"
 
 /datum/seed/ambrosia/deus/New()
 	..()
@@ -389,7 +396,9 @@
 	mutants = list("reishi","amanita","plumphelmet")
 	chems = list(/decl/material/liquid/nutriment = list(1,25))
 	splat_type = /obj/effect/vine
-	kitchen_tag = "mushroom"
+	grown_tag = "mushroom"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/mushroom/make_splat(var/turf/T, var/obj/item/thrown)
 	if(!splat_type || (locate(splat_type) in T))
@@ -433,7 +442,7 @@
 	display_name = "plump helmet mushroom patch"
 	mutants = list("walkingmushroom","towercap")
 	chems = list(/decl/material/liquid/nutriment = list(2,10))
-	kitchen_tag = "plumphelmet"
+	grown_tag = "plumphelmet"
 
 /datum/seed/mushroom/plump/New()
 	..()
@@ -634,6 +643,8 @@
 	seed_name = "harebell"
 	display_name = "harebell patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,20))
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/flower/New()
 	..()
@@ -654,7 +665,7 @@
 		/decl/material/liquid/nutriment = list(1,20),
 		/decl/material/liquid/painkillers/strong = list(1,10)
 	)
-	kitchen_tag = "poppy"
+	grown_tag = "poppy"
 
 /datum/seed/flower/poppy/New()
 	..()
@@ -706,10 +717,12 @@
 //Grapes/varieties
 /datum/seed/grapes
 	name = "grapes"
-	seed_name = "grape"
+	seed_name = "grapes"
 	display_name = "grapevine"
 	mutants = list("greengrapes")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/nutriment/sugar = list(1,5), /decl/material/liquid/drink/juice/grape = list(10,10))
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/grapes/New()
 	..()
@@ -727,7 +740,7 @@
 
 /datum/seed/grapes/green
 	name = "greengrapes"
-	seed_name = "green grape"
+	seed_name = "green grapes"
 	display_name = "green grapevine"
 	mutants = null
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/burn_meds = list(3,5), /decl/material/liquid/drink/juice/grape = list(10,10))
@@ -742,6 +755,8 @@
 	seed_name = "peanut"
 	display_name = "peanut vine"
 	chems = list(/decl/material/liquid/nutriment = list(1,10))
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/peanuts/New()
 	..()
@@ -760,6 +775,8 @@
 	seed_name = "peppercorn"
 	display_name = "black pepper plant"
 	chems = list(/decl/material/solid/blackpepper = list(10,10))
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/peppercorn/New()
 	..()
@@ -778,7 +795,9 @@
 	seed_name = "cabbage"
 	display_name = "cabbage patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,10))
-	kitchen_tag = "cabbage"
+	grown_tag = "cabbage"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/cabbage/New()
 	..()
@@ -801,7 +820,7 @@
 	display_name = "banana tree"
 	chems = list(/decl/material/liquid/drink/juice/banana = list(10,10), /decl/material/solid/potassium = list(2,3))
 	trash_type = /obj/item/bananapeel
-	kitchen_tag = "banana"
+	grown_tag = "banana"
 
 /datum/seed/banana/New()
 	..()
@@ -823,10 +842,12 @@
 	seed_name = "corn"
 	display_name = "ears of corn"
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/nutriment/cornoil = list(1,10))
-	kitchen_tag = "corn"
+	grown_tag = "corn"
 	trash_type = /obj/item/corncob
 	backyard_grilling_product = /obj/item/chems/food/popcorn
 	backyard_grilling_announcement = "pops enthusiastically!"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/corn/New()
 	..()
@@ -847,7 +868,12 @@
 	seed_name = "potato"
 	display_name = "potato patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/potato = list(10,10))
-	kitchen_tag = "potato"
+	grown_tag = "potato"
+	grown_is_seed = TRUE
+	min_seed_extracted = 0
+	max_seed_extracted = 0
+	slice_product = /obj/item/chems/food/processed_grown/sticks
+	slice_amount = 3
 
 /datum/seed/potato/New()
 	..()
@@ -866,7 +892,12 @@
 	seed_name = "garlic"
 	display_name = "garlic plant"
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/garlic = list(10,10))
-	kitchen_tag = "garlic"
+	grown_tag = "garlic"
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
+	grown_is_seed = TRUE
+	min_seed_extracted = 0
+	max_seed_extracted = 0
 
 /datum/seed/garlic/New()
 	..()
@@ -884,7 +915,9 @@
 	seed_name = "onion"
 	display_name = "onion patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/onion = list(10,10))
-	kitchen_tag = "onion"
+	grown_tag = "onion"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/onion/New()
 	..()
@@ -898,11 +931,13 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 5)
 
 /datum/seed/soybean
-	name = "soybean"
-	seed_name = "soybean"
+	name = "soybeans"
+	seed_name = "soybeans"
 	display_name = "soybean patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/drink/milk/soymilk = list(10,20))
-	kitchen_tag = "soybeans"
+	grown_tag = "soybeans"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/soybean/New()
 	..()
@@ -920,7 +955,9 @@
 	seed_name = "wheat"
 	display_name = "wheat patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,25), /decl/material/liquid/nutriment/flour = list(15,15))
-	kitchen_tag = "wheat"
+	grown_tag = "wheat"
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/wheat/New()
 	..()
@@ -940,7 +977,9 @@
 	seed_name = "rice"
 	display_name = "rice paddy"
 	chems = list(/decl/material/liquid/nutriment = list(1,25), /decl/material/liquid/nutriment/rice = list(10,15))
-	kitchen_tag = "rice"
+	grown_tag = "rice"
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/rice/New()
 	..()
@@ -960,7 +999,9 @@
 	seed_name = "carrot"
 	display_name = "carrot patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/eyedrops = list(3,5), /decl/material/liquid/drink/juice/carrot = list(10,20))
-	kitchen_tag = "carrot"
+	grown_tag = "carrot"
+	slice_product = /obj/item/chems/food/processed_grown/sticks
+	slice_amount = 3
 
 /datum/seed/carrots/New()
 	..()
@@ -995,7 +1036,9 @@
 	seed_name = "white-beet"
 	display_name = "white-beet patch"
 	chems = list(/decl/material/liquid/nutriment = list(0,20), /decl/material/liquid/nutriment/sugar = list(1,5))
-	kitchen_tag = "whitebeet"
+	grown_tag = "whitebeet"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/whitebeets/New()
 	..()
@@ -1033,6 +1076,7 @@
 	seed_name = "watermelon"
 	display_name = "watermelon vine"
 	chems = list(/decl/material/liquid/nutriment = list(1,6), /decl/material/liquid/drink/juice/watermelon = list(10,6))
+	slice_product = /obj/item/chems/food/processed_grown/slice/large
 
 /datum/seed/watermelon/New()
 	..()
@@ -1056,7 +1100,17 @@
 	seed_name = "pumpkin"
 	display_name = "pumpkin vine"
 	chems = list(/decl/material/liquid/nutriment = list(1,6))
-	kitchen_tag = "pumpkin"
+	grown_tag = "pumpkin"
+	slice_product = /obj/item/clothing/head/pumpkinhead
+	slice_amount = 1
+
+/datum/seed/pumpkin/show_slice_message(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
+	sliced.visible_message(SPAN_NOTICE("\The [user] carves a face into \the [sliced] with \the [tool]."))
+	return TRUE
+
+/datum/seed/pumpkin/show_slice_message_poor(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
+	sliced.visible_message(SPAN_NOTICE("\The [user] crudely carves a face into \the [sliced] with \the [tool]."))
+	return TRUE
 
 /datum/seed/pumpkin/New()
 	..()
@@ -1076,7 +1130,7 @@
 	seed_name = "lime"
 	display_name = "lime tree"
 	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/drink/juice/lime = list(10,20))
-	kitchen_tag = "lime"
+	grown_tag = "lime"
 
 /datum/seed/citrus/New()
 	..()
@@ -1097,7 +1151,7 @@
 	seed_name = "lemon"
 	display_name = "lemon tree"
 	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/drink/juice/lemon = list(10,20))
-	kitchen_tag = "lemon"
+	grown_tag = "lemon"
 
 /datum/seed/citrus/lemon/New()
 	..()
@@ -1111,7 +1165,7 @@
 	name = "orange"
 	seed_name = "orange"
 	display_name = "orange tree"
-	kitchen_tag = "orange"
+	grown_tag = "orange"
 	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/drink/juice/orange = list(10,20))
 
 /datum/seed/citrus/orange/New()
@@ -1125,8 +1179,10 @@
 	seed_name = "grass"
 	display_name = "grass patch"
 	chems = list(/decl/material/liquid/nutriment = list(1,20))
-	kitchen_tag = "grass"
+	grown_tag = "grass"
 	product_type = /obj/item/stack/material/bundle/grass
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/grass/New()
 	..()
@@ -1147,6 +1203,8 @@
 	seed_name = "cacao"
 	display_name = "cacao tree"
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/nutriment/coco = list(4,5))
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/cocoa/New()
 	..()
@@ -1168,7 +1226,9 @@
 	seed_noun = SEED_NOUN_PITS
 	display_name = "cherry tree"
 	chems = list(/decl/material/liquid/nutriment = list(1,15), /decl/material/liquid/nutriment/sugar = list(1,15), /decl/material/liquid/nutriment/cherryjelly = list(10,15))
-	kitchen_tag = "cherries"
+	grown_tag = "cherries"
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/cherries/New()
 	..()
@@ -1189,6 +1249,8 @@
 	seed_name = "kudzu"
 	display_name = "kudzu vine"
 	chems = list(/decl/material/liquid/nutriment = list(1,50), /decl/material/liquid/antitoxins = list(1,25))
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/kudzu/New()
 	..()
@@ -1208,7 +1270,9 @@
 	seed_name = "S'randar's hand"
 	display_name = "S'randar's hand patch"
 	chems = list(/decl/material/liquid/brute_meds = list(0,10))
-	kitchen_tag = "shand"
+	grown_tag = "shand"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/shand/New()
 	..()
@@ -1228,7 +1292,9 @@
 	seed_name = "Messa's tear"
 	display_name = "Messa's tear patch"
 	chems = list(/decl/material/liquid/nutriment/honey = list(1,10), /decl/material/liquid/burn_meds = list(3,5))
-	kitchen_tag = "mtear"
+	grown_tag = "mtear"
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/mtear/New()
 	..()
@@ -1249,6 +1315,8 @@
 	display_name = "tobacco plant"
 	mutants = list("finetobacco", "puretobacco", "badtobacco")
 	chems = list(/decl/material/solid/tobacco = list(1,10))
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/tobacco/New()
 	..()
@@ -1306,8 +1374,10 @@
 		/decl/material/liquid/nutriment = list(2,12),
 		/decl/material/liquid/bromide = list(3,8)
 	)
-	kitchen_tag = "algae"
+	grown_tag = "algae"
 	exude_gasses = list(/decl/material/gas/methyl_bromide = 3)
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/algae/New()
 	..()
@@ -1330,6 +1400,8 @@
 	display_name = "bamboo thicket"
 	chems = list(/decl/material/solid/organic/wood/bamboo = list(6,1))
 	mutants = null
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/bamboo/New()
 	..()
@@ -1351,6 +1423,8 @@
 	display_name = "tea plant"
 	chems = list(/decl/material/liquid/nutriment = list(1))
 	dried_chems = list(/decl/material/liquid/nutriment/tea = list(10,10))
+	slice_product = /obj/item/chems/food/processed_grown/chopped
+	slice_amount = 3
 
 /datum/seed/tea/New()
 	..()
@@ -1376,6 +1450,8 @@
 	backyard_grilling_product = /obj/item/chems/food/grown/grilled
 	backyard_grilling_announcement = "roasts and darkens."
 	product_material = /decl/material/solid/organic/plantmatter/pith
+	slice_product = /obj/item/chems/food/processed_grown/crushed
+	slice_amount = 3
 
 /datum/seed/coffee/New()
 	..()

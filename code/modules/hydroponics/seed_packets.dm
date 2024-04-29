@@ -1,14 +1,14 @@
-var/global/list/plant_seed_sprites = list()
-
 //Seed packet object/procs.
 /obj/item/seeds
 	name = "packet of seeds"
-	icon = 'icons/obj/seeds.dmi'
+	icon = 'icons/obj/seeds/seed_packets.dmi'
 	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 	abstract_type = /obj/item/seeds
 	max_health = 10 //Can't set a material, otherwise extracting seeds would generate free materials
 
+	var/seed_mask_icon = 'icons/obj/seeds/seed_masks.dmi'
+	var/seed_base_name = "packet"
 	var/datum/seed/seed
 	var/modified = 0
 
@@ -36,57 +36,74 @@ var/global/list/plant_seed_sprites = list()
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 	else if(has_extension(src, /datum/extension/scannable))
 		remove_extension(src, /datum/extension/scannable)
-	update_appearance()
+	update_icon()
+
+/obj/item/seeds/proc/get_seed_packet_state()
+	return seed?.get_trait(TRAIT_PRODUCT_ICON)
 
 //Updates strings and icon appropriately based on seed datum.
-/obj/item/seeds/proc/update_appearance()
-	if(!seed) return
+/obj/item/seeds/on_update_icon()
+	. = ..()
+	if(!seed)
+		return
 
 	// Update icon.
-	overlays.Cut()
-	var/is_seeds = ((seed.seed_noun in list(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES)) ? 1 : 0)
-	var/image/seed_mask
-	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
-	if(plant_seed_sprites[seed_base_key])
-		seed_mask = plant_seed_sprites[seed_base_key]
-	else
-		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
-		if(is_seeds) // Spore glass bits aren't coloured.
-			seed_mask.color = seed.get_trait(TRAIT_PLANT_COLOUR)
-		plant_seed_sprites[seed_base_key] = seed_mask
+	underlays.Cut()
+	icon_state = get_seed_packet_state() || "unknown"
+	color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 
-	var/image/seed_overlay
-	var/seed_overlay_key = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
-	if(plant_seed_sprites[seed_overlay_key])
-		seed_overlay = plant_seed_sprites[seed_overlay_key]
-	else
-		seed_overlay = image('icons/obj/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
-		seed_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-		plant_seed_sprites[seed_overlay_key] = seed_overlay
+	var/static/list/seed_nouns = list(
+		SEED_NOUN_SEEDS,
+		SEED_NOUN_PITS,
+		SEED_NOUN_NODES
+	)
+	var/is_seeds = (seed.seed_noun in seed_nouns)
+	if(seed_mask_icon)
+		if(is_seeds)
+			underlays += overlay_image(seed_mask_icon, "seed-mask", seed.get_trait(TRAIT_PLANT_COLOUR), RESET_COLOR)
+		else
+			add_overlay(overlay_image(seed_mask_icon, "spore-mask"), null, RESET_COLOR)
+	update_strings(is_seeds)
 
-	overlays |= seed_mask
-	overlays |= seed_overlay
-
+/obj/item/seeds/proc/update_strings(is_seeds)
 	if(is_seeds)
-		src.SetName("packet of [seed.seed_name] [seed.seed_noun]")
-		src.desc = "It has a picture of \a [seed.display_name] on the front."
+		SetName("[seed_base_name] of [seed.seed_name] [seed.seed_noun]")
+		desc = "It has a picture of \a [seed.display_name] on the front."
 	else
-		src.SetName("sample of [seed.seed_name] [seed.seed_noun]")
-		src.desc = "It's labelled as coming from \a [seed.display_name]."
+		SetName("sample of [seed.seed_name] [seed.seed_noun]")
+		desc = "It's labelled as coming from \a [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
 	. = ..()
 	if(seed && !seed.roundstart)
 		to_chat(user, "It's tagged as variety #[seed.uid].")
 
-/obj/item/seeds/cutting
-	name = "cuttings"
-	desc = "Some plant cuttings."
+/obj/item/seeds/extracted
+	name = "handful of seeds"
+	desc = "A handful of nondescript seeds."
+	icon = 'icons/obj/seeds/seed_raw.dmi'
+	seed_base_name = "handful"
+	seed_mask_icon = null
 	is_spawnable_type = FALSE
 
-/obj/item/seeds/cutting/update_appearance()
-	..()
-	src.SetName("packet of [seed.seed_name] cuttings")
+/obj/item/seeds/extracted/get_seed_packet_state()
+	return seed.seed_noun
+
+/obj/item/seeds/extracted/update_strings(is_seeds)
+	if(is_seeds)
+		SetName("[seed_base_name] of [seed.seed_name] [seed.seed_noun]")
+	else
+		SetName("sample of [seed.seed_name] [seed.seed_noun]")
+
+/obj/item/seeds/extracted/cutting
+	name = "cuttings"
+	desc = "Some plant cuttings."
+
+/obj/item/seeds/extracted/cutting/get_seed_packet_state()
+	return SEED_NOUN_CUTTINGS
+
+/obj/item/seeds/extracted/cutting/update_strings(is_seeds)
+	SetName("[seed_base_name] of [seed.seed_name] cuttings")
 
 /obj/item/seeds/random
 	seed = null
@@ -162,7 +179,7 @@ var/global/list/plant_seed_sprites = list()
 	seed = "icechili"
 
 /obj/item/seeds/soyaseed
-	seed = "soybean"
+	seed = "soybeans"
 
 /obj/item/seeds/wheatseed
 	seed = "wheat"
