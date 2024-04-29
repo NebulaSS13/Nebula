@@ -6,3 +6,4 @@
 	accessory_slot = ACCESSORY_SLOT_UTILITY
 	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 	storage = /datum/storage/pockets
+	fallback_slot = slot_w_uniform_str
