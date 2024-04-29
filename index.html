@@ -30,7 +30,7 @@ General Public License version 3.
 
 <h3 id="modules">Modules
 <aside>(207 modules,
-    102/4487 macros, 2.3%)</aside></h3>
+    102/4495 macros, 2.3%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -215,7 +215,7 @@ General Public License version 3.
     <li><span class="no-substance">clothing&#x2F;masks&#x2F;</span><a href="code/modules/clothing/masks/cig_crafting.html" title="code&#x2F;modules&#x2F;clothing&#x2F;masks&#x2F;cig_crafting">cig_crafting</a></li>
     <li><span class="no-substance">economy&#x2F;</span><a href="code/modules/economy/worth_cash.html" title="code&#x2F;modules&#x2F;economy&#x2F;worth_cash">worth_cash</a></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;food">food</span><ul class="index-tree">
-    <li><span class="no-substance">cooking&#x2F;recipes&#x2F;</span><a href="code/modules/food/cooking/recipes/recipe_assembled.html" title="code&#x2F;modules&#x2F;food&#x2F;cooking&#x2F;recipes&#x2F;recipe_assembled">recipe_assembled</a></li>
+    <li><span class="no-substance">cooking&#x2F;cooking_vessels&#x2F;</span><a href="code/modules/food/cooking/cooking_vessels/_cooking_vessel.html" title="code&#x2F;modules&#x2F;food&#x2F;cooking&#x2F;cooking_vessels&#x2F;_cooking_vessel">_cooking_vessel</a></li>
     <li><span class="no-substance">utensils&#x2F;</span><a href="code/modules/food/utensils/_utensil.html" title="code&#x2F;modules&#x2F;food&#x2F;utensils&#x2F;_utensil">_utensil</a></li>
     </ul></li>
     <li><span class="no-substance">games&#x2F;</span><a href="code/modules/games/cards.html" title="code&#x2F;modules&#x2F;games&#x2F;cards">cards</a></li>
@@ -357,7 +357,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(236 detailed/455 documented/19591 total, 2.3%)</aside></h3>
+<aside>(237 detailed/456 documented/19613 total, 2.3%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
@@ -590,6 +590,7 @@ It doesn't handle crystalline logic, only setting up organs as crystalline
 on their initial creation.</li>
     <li><a href="decl/bodytype/prosthetic.html" title="&#x2F;decl&#x2F;bodytype&#x2F;prosthetic">prosthetic</a></li>
     </ul></li>
+    <li><a href="decl/butchery_data.html" title="&#x2F;decl&#x2F;butchery_data">butchery_data</a></li>
     <li><a href="decl/chemical_reaction.html" title="&#x2F;decl&#x2F;chemical_reaction">chemical_reaction</a></li>
     <li><a href="decl/cocktail.html" title="&#x2F;decl&#x2F;cocktail">cocktail</a></li>
     <li><a href="decl/comment_mood.html" title="&#x2F;decl&#x2F;comment_mood">comment_mood</a> - Formatting data for comments.</li>
@@ -633,9 +634,7 @@ A list of strings that are used by the end of round credits roll.</li>
     <li><span class="no-substance" title="&#x2F;decl&#x2F;observ&#x2F;sight_set">sight_set</span> - Shuttle Moved/Pre Move Handling</li>
     </ul></li>
     <li><a href="decl/poster_design.html" title="&#x2F;decl&#x2F;poster_design">poster_design</a> - Contains information on what a poster displays.</li>
-    <li class="has-children"><a href="decl/recipe.html" title="&#x2F;decl&#x2F;recipe">recipe</a><ul class="index-tree">
-    <li><span class="no-substance" title="&#x2F;decl&#x2F;recipe&#x2F;sandwich">sandwich</span> - Set the appropriate flag on the food for stressor updates.</li>
-    </ul></li>
+    <li><a href="decl/recipe.html" title="&#x2F;decl&#x2F;recipe">recipe</a></li>
     <li><span class="no-substance" title="&#x2F;decl&#x2F;scent_intensity">scent_intensity</span> - Scent intensity</li>
     <li><a href="decl/singularity_stage.html" title="&#x2F;decl&#x2F;singularity_stage">singularity_stage</a></li>
     <li><a href="decl/spawnpoint.html" title="&#x2F;decl&#x2F;spawnpoint">spawnpoint</a></li>
@@ -795,6 +794,7 @@ Parameters: var/obj/item/card/id</li>
     <li><a href="obj/item/cataloguer.html" title="&#x2F;obj&#x2F;item&#x2F;cataloguer">cataloguer</a></li>
     <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;chems">chems</span><ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;chems&#x2F;condiment">condiment</span> - Condiments</li>
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;chems&#x2F;cooking_vessel">cooking_vessel</span> - Set the appropriate flag on the food for stressor updates.</li>
     <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;chems&#x2F;drinks">drinks</span> - Drinks.<ul class="index-tree">
     <li class="has-children"><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;chems&#x2F;drinks&#x2F;bottle">bottle</span> - Alchohol bottles! -Agouri<ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;chems&#x2F;drinks&#x2F;bottle&#x2F;orangejuice">orangejuice</span> - JUICES AND STUFF</li>
@@ -1013,7 +1013,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/a353cde6f58c4b2d14c7028e29ab84cc97b6f37e">a353cde</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/1dea982c705273b4f5ae3ad6d61ea1d9957140f2">1dea982</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
