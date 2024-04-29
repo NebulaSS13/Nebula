@@ -106,7 +106,7 @@ var/global/obj/temp_reagents_holder = new
 		if(codex && reagent.codex_name)
 			. = reagent.codex_name
 		else
-			. = reagent.name
+			. = reagent.get_reagent_name(src)
 
 /datum/reagents/proc/get_primary_reagent_decl()
 	. = GET_DECL(primary_reagent)
@@ -150,12 +150,12 @@ var/global/obj/temp_reagents_holder = new
 			if(!isnull(R.chilling_point) && R.type != R.bypass_chilling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
 				replace_self_with = R.chilling_products
 				if(R.chilling_message)
-					replace_message = "\The [lowertext(R.name)] [R.chilling_message]"
+					replace_message = "\The [R.get_reagent_name(src)] [R.chilling_message]"
 				replace_sound = R.chilling_sound
 			else if(!isnull(R.heating_point) && R.type != R.bypass_heating_products_for_root_type && LAZYLEN(R.heating_products) && temperature >= R.heating_point)
 				replace_self_with = R.heating_products
 				if(R.heating_message)
-					replace_message = "\The [lowertext(R.name)] [R.heating_message]"
+					replace_message = "\The [R.get_reagent_name(src)] [R.heating_message]"
 				replace_sound = R.heating_sound
 
 		if(isnull(replace_self_with) && !isnull(R.dissolves_in) && !(check_flags & ATOM_FLAG_NO_DISSOLVE) && LAZYLEN(R.dissolves_into))
@@ -166,7 +166,7 @@ var/global/obj/temp_reagents_holder = new
 				if(solvent.solvent_power >= R.dissolves_in)
 					replace_self_with = R.dissolves_into
 					if(R.dissolve_message)
-						replace_message = "\The [lowertext(R.name)] [R.dissolve_message] \the [lowertext(solvent.name)]."
+						replace_message = "\The [R.get_reagent_name(src)] [R.dissolve_message] \the [solvent.get_reagent_name(src)]."
 					replace_sound = R.dissolve_sound
 					break
 
@@ -351,7 +351,7 @@ var/global/obj/temp_reagents_holder = new
 		if(precision)
 			volume = round(volume, precision)
 		if(volume)
-			. += "[current.name] ([volume])"
+			. += "[current.get_reagent_name(src)] ([volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
 /datum/reagents/proc/get_dirtiness()

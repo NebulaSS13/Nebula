@@ -160,7 +160,7 @@
 	max_health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
-	butchery_data = /decl/butchery_data/animal/small/fowl/chick
+	butchery_data = /decl/butchery_data/animal/small/fowl/chicken/chick
 	var/amount_grown = 0
 
 /mob/living/simple_animal/chick/Initialize()
@@ -204,6 +204,7 @@ var/global/chicken_count = 0
 	emote_speech = list("Cluck!","BWAAAAARK BWAK BWAK BWAK!","Bwaak bwak.")
 	emote_hear   = list("clucks")
 	emote_see    = list("pecks at the ground","flaps its wings viciously")
+	butchery_data = /decl/butchery_data/animal/small/fowl/chicken
 	var/eggsleft = 0
 
 /mob/living/simple_animal/fowl/chicken/Initialize()
@@ -265,6 +266,7 @@ var/global/chicken_count = 0
 	emote_speech = list("Wak!","Wak wak wak!","Wak wak.")
 	emote_hear   = list("quacks")
 	emote_see    = list("preens itself", "waggles its tail")
+	butchery_data = /decl/butchery_data/animal/small/fowl/duck
 
 /mob/living/simple_animal/fowl/duck/Initialize()
 	. = ..()

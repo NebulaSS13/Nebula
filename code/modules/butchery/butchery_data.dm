@@ -1,6 +1,10 @@
 /decl/butchery_data
 
-	abstract_type = /decl/butchery_data
+	abstract_type         = /decl/butchery_data
+
+	/// Decorative string. 'beef', 'chicken', 'lamb', etc. Uses mob name if unset.
+	var/meat_name         = "meat"
+	var/meat_flags        = INGREDIENT_FLAG_MEAT
 
 	var/meat_type         = /obj/item/chems/food/butchery/meat
 	var/meat_material     = /decl/material/solid/organic/meat

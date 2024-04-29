@@ -1,18 +1,9 @@
 /decl/butchery_data/animal/bird
+	meat_name     = "fowl"
 	abstract_type = /decl/butchery_data/animal/bird
 	skin_material = /decl/material/solid/organic/skin/feathers
 	meat_type     = /obj/item/chems/food/butchery/meat/chicken/game
 	gut_type      = /obj/item/chems/food/butchery/offal/small
-
-/decl/butchery_data/animal/bird/goose
-	meat_amount   = 6
-	bone_amount   = 8
-	skin_amount   = 8
-
-/decl/butchery_data/animal/bird/goose/dire/harvest_meat(mob/donor)
-	. = ..()
-	var/quill = new /obj/item/pen/fancy/quill(get_turf(donor))
-	LAZYADD(., quill)
 
 /decl/butchery_data/animal/bird/parrot
 	meat_amount   = 3

@@ -10,6 +10,8 @@
 	filling_color = "#fdffd1"
 	volume = 10
 	center_of_mass = @'{"x":16,"y":13}'
+	material = /decl/material/solid/organic/bone/eggshell
+	obj_flags = OBJ_FLAG_HOLLOW
 	nutriment_amt = 3
 	nutriment_type = /decl/material/solid/organic/meat/egg
 

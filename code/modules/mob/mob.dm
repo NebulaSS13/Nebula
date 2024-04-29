@@ -1358,3 +1358,6 @@
 /mob/proc/mob_throw_item(atom/target)
 	return
 
+/mob/living/proc/get_butchery_product_name()
+	var/decl/butchery_data/butchery_decl = GET_DECL(butchery_data)
+	. = butchery_decl?.meat_name || name

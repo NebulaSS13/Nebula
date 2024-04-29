@@ -21,6 +21,7 @@
 	hitsound = 'sound/effects/squelch1.ogg'
 	fishing_bait_value = 1
 	nutriment_animal = TRUE
+	soup_overlay = "soup_chunks"
 
 /decl/material/solid/organic/meat/egg
 	name = "egg yolk"
@@ -30,6 +31,7 @@
 	uid = "solid_egg"
 	melting_point = 273
 	boiling_point = 373
+	soup_overlay = "soup_dumplings"
 
 /decl/material/solid/organic/meat/fish
 	name  = "fish meat"
@@ -204,6 +206,17 @@
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
 	compost_value = 0.5
 	nutriment_animal = TRUE
+
+// Stub to stop eggs melting while being boiled.
+/decl/material/solid/organic/bone/eggshell
+	name                   = "eggshell"
+	uid                    = "solid_eggshell"
+	color                  = "#eae0c8"
+	default_solid_form     = /obj/item/stack/material/lump
+	hardness               = MAT_VALUE_FLEXIBLE
+	weight                 = MAT_VALUE_VERY_LIGHT
+	exoplanet_rarity_gas   = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 
 // Stub for earrings. TODO: put it in clams
 /decl/material/solid/organic/bone/pearl

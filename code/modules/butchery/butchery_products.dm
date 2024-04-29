@@ -6,11 +6,15 @@
 	w_class             = ITEM_SIZE_LARGE
 	volume              = 20
 	nutriment_type      = /decl/material/solid/organic/meat
+	nutriment_desc      = list("umami" = 10)
 	nutriment_amt       = 20
 	slice_path          = null
 	slice_num           = null
 	max_health          = 180
+	cooked_food         = FOOD_RAW
+	ingredient_flags    = INGREDIENT_FLAG_MEAT
 	var/fat_material    = /decl/material/solid/organic/meat/gut
+	var/meat_name       = "beef"
 
 /obj/item/chems/food/butchery/Initialize(ml, material_key, mob/living/donor)
 	var/decl/butchery_data/butchery_decl = GET_DECL(donor?.butchery_data)
@@ -22,9 +26,12 @@
 			slice_path = butchery_decl.meat_type
 		if(isnull(slice_num))
 			slice_num = butchery_decl.meat_amount
+		ingredient_flags = butchery_decl.meat_flags
 	. = ..()
 	if(istype(donor))
-		set_name_from(donor)
+		meat_name = set_meat_name(donor.get_butchery_product_name())
+	if(meat_name)
+		set_meat_name(meat_name)
 
 /obj/item/chems/food/butchery/on_update_icon()
 	..()
@@ -34,8 +41,46 @@
 		var/decl/material/fat = GET_DECL(fat_material)
 		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.color, RESET_COLOR))
 
-/obj/item/chems/food/butchery/proc/set_name_from(mob/living/donor)
-	SetName("[donor.name] [name]")
+/obj/item/chems/food/butchery/proc/set_meat_name(new_meat_name)
+	meat_name = new_meat_name
+	if(cooked_food == FOOD_RAW)
+		SetName("raw [meat_name] [initial(name)]")
+	else
+		SetName("[meat_name] [initial(name)]")
+
+/obj/item/chems/food/butchery/get_grilled_product()
+	. = ..()
+	if(. && istype(., /obj/item/chems/food))
+		var/obj/item/chems/food/food = .
+		food.cooked_food = FOOD_COOKED
+		food.ingredient_flags = ingredient_flags
+		if(meat_name && istype(., /obj/item/chems/food/butchery))
+			var/obj/item/chems/food/butchery/meat = .
+			meat.set_meat_name(meat_name)
+
+/obj/item/chems/food/butchery/get_dried_product()
+	. = ..()
+	if(. && istype(., /obj/item/chems/food))
+		var/obj/item/chems/food/food = .
+		food.cooked_food = FOOD_COOKED
+		food.ingredient_flags = ingredient_flags
+		if(meat_name)
+			if(istype(., /obj/item/chems/food/butchery))
+				var/obj/item/chems/food/butchery/meat = .
+				meat.set_meat_name(meat_name)
+			else if(istype(., /obj/item/chems/food/jerky))
+				var/obj/item/chems/food/jerky/jerk = .
+				jerk.set_meat_name(meat_name)
+
+/obj/item/chems/food/butchery/handle_utensil_cutting(obj/item/tool, mob/user)
+	. = ..()
+	if(length(.))
+		for(var/obj/item/chems/food/food in .)
+			food.cooked_food = cooked_food
+			food.ingredient_flags = ingredient_flags
+		if(meat_name)
+			for(var/obj/item/chems/food/butchery/meat in .)
+				meat.set_meat_name(meat_name)
 
 /obj/item/chems/food/butchery/offal
 	name                = "offal"
@@ -145,8 +190,9 @@
 	if(donor && !isnull(slice_num))
 		slice_num = max(1, round(slice_num/2))
 
-/obj/item/chems/food/butchery/haunch/side/set_name_from(mob/living/donor)
-	SetName("side of [donor.name] meat")
+/obj/item/chems/food/butchery/haunch/side/set_meat_name(new_meat_name)
+	meat_name = new_meat_name
+	SetName("side of [new_meat_name]")
 
 /obj/item/chems/food/butchery/stomach
 	name                = "stomach"

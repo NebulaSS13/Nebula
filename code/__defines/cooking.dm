@@ -5,3 +5,10 @@
 #define FOOD_RAW             -1
 #define FOOD_PREPARED         0
 #define FOOD_COOKED           1
+
+#define INGREDIENT_FLAG_PLAIN     0
+#define INGREDIENT_FLAG_MEAT      BITFLAG(0)
+#define INGREDIENT_FLAG_FISH      BITFLAG(1)
+#define INGREDIENT_FLAG_VEGETABLE BITFLAG(2)
+#define INGREDIENT_FLAG_DAIRY     BITFLAG(3)
+#define INGREDIENT_FLAG_EGG       BITFLAG(4)

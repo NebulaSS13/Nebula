@@ -208,6 +208,26 @@
 		return TRUE
 	return FALSE
 
+/obj/item/chems/proc/get_soup_overlay()
+	if(reagents?.total_volume <= 0)
+		return
+	var/image/soup_overlay
+	var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
+	if(!primary_reagent)
+		return
+	if(primary_reagent.soup_base)
+		soup_overlay = overlay_image(icon, primary_reagent.soup_base, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
+	else
+		soup_overlay = overlay_image(icon, "soup_base", reagents.get_color(), RESET_COLOR | RESET_ALPHA)
+	if(primary_reagent.soup_overlay)
+		soup_overlay.overlays += overlay_image(icon, primary_reagent.soup_overlay, primary_reagent.color, RESET_COLOR | RESET_ALPHA)
+	else
+		for(var/reagent_type in reagents.reagent_volumes)
+			var/decl/material/reagent = GET_DECL(reagent_type)
+			if(reagent != primary_reagent && reagent.soup_overlay)
+				soup_overlay.overlays += overlay_image(icon, reagent.soup_overlay, reagent.color, RESET_COLOR | RESET_ALPHA)
+	return soup_overlay
+
 //
 // Interactions
 //

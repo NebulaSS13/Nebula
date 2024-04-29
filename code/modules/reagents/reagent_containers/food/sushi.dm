@@ -16,13 +16,14 @@
 		if(istype(topping, /obj/item/chems/food/sashimi))
 			var/obj/item/chems/food/sashimi/sashimi = topping
 			fish_type = sashimi.fish_type
-		else if(istype(topping, /obj/item/chems/food/butchery/meat/chicken))
-			fish_type = "chicken"
+		else if(istype(topping, /obj/item/chems/food/butchery/meat))
+			var/obj/item/chems/food/butchery/meat = topping
+			fish_type = meat.meat_name
 		else if(istype(topping, /obj/item/chems/food/friedegg))
 			fish_type = "egg"
 		else if(istype(topping, /obj/item/chems/food/tofu))
 			fish_type = "tofu"
-		else if(istype(topping, /obj/item/chems/food/cutlet/raw) || istype(topping, /obj/item/chems/food/cutlet))
+		else if(istype(topping, /obj/item/chems/food/butchery/cutlet))
 			fish_type = "meat"
 
 		if(topping.reagents)
@@ -121,8 +122,8 @@
 			return
 		if(istype(I, /obj/item/chems/food/friedegg) || \
 		 istype(I, /obj/item/chems/food/tofu) || \
-		 istype(I, /obj/item/chems/food/cutlet) || \
-		 istype(I, /obj/item/chems/food/cutlet/raw) || \
+		 istype(I, /obj/item/chems/food/butchery/cutlet) || \
+		 istype(I, /obj/item/chems/food/butchery/cutlet/raw) || \
 		 istype(I, /obj/item/chems/food/spider) || \
 		 istype(I, /obj/item/chems/food/butchery/meat/chicken))
 			new /obj/item/chems/food/sushi(get_turf(src), src, I)
@@ -139,12 +140,12 @@
 		new /obj/item/chems/food/sushi(get_turf(src), I, src)
 		return
 	. = ..()
-/obj/item/chems/food/cutlet/raw/attackby(var/obj/item/I, var/mob/user)
+/obj/item/chems/food/butchery/cutlet/raw/attackby(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/chems/food/boiledrice))
 		new /obj/item/chems/food/sushi(get_turf(src), I, src)
 		return
 	. = ..()
-/obj/item/chems/food/cutlet/attackby(var/obj/item/I, var/mob/user)
+/obj/item/chems/food/butchery/cutlet/attackby(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/chems/food/boiledrice))
 		new /obj/item/chems/food/sushi(get_turf(src), I, src)
 		return

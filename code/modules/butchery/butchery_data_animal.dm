@@ -6,10 +6,11 @@
 /decl/butchery_data/animal/harvest_innards(mob/donor)
 	. = ..()
 	if(stomach_type)
-		var/product = new stomach_type(get_turf(donor), gut_material)
+		var/product = new stomach_type(get_turf(donor), gut_material, donor)
 		LAZYADD(., product)
 
 /decl/butchery_data/animal/corgi
+	meat_name         = "dog"
 	meat_type         = /obj/item/chems/food/butchery/meat/corgi
 	meat_amount       = 3
 	skin_material     = /decl/material/solid/organic/skin/fur/orange
@@ -22,6 +23,7 @@
 	must_use_hook     = FALSE
 
 /decl/butchery_data/animal/space_bear
+	meat_name         = "bear"
 	meat_type         = /obj/item/chems/food/bearmeat
 	meat_amount       = 10
 	bone_amount       = 20
@@ -30,6 +32,7 @@
 	stomach_type      = /obj/item/chems/food/butchery/stomach
 
 /decl/butchery_data/animal/cat
+	meat_name         = "cat"
 	skin_material     = /decl/material/solid/organic/skin/fur/orange
 	gut_type          = /obj/item/chems/food/butchery/offal/small
 
@@ -60,11 +63,13 @@
 	skin_material     = /decl/material/solid/organic/skin/fur/white
 
 /decl/butchery_data/animal/small/frog
+	meat_name     = "frog"
 	skin_material = null //frog skin doesn't seem very useable
 	skin_type     = null
 	skin_amount   = null
 
 /decl/butchery_data/animal/rabbit
+	meat_name         = "rabbit"
 	skin_material     = /decl/material/solid/organic/skin/fur/white
 	gut_type          = /obj/item/chems/food/butchery/offal/small
 	must_use_hook     = FALSE
@@ -76,6 +81,7 @@
 	skin_material     = /decl/material/solid/organic/skin/fur/black
 
 /decl/butchery_data/animal/antlion
+	meat_name         = "insect"
 	meat_type         = /obj/item/chems/food/xenomeat
 	meat_amount       = 5
 	skin_material     = /decl/material/solid/organic/skin/insect

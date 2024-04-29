@@ -150,8 +150,11 @@
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	if(nutriment_amt && nutriment_type)
-		// TODO: generalize taste as data
-		if(ispath(nutriment_type, /decl/material/liquid/nutriment))
-			add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)
-		else
-			add_to_reagents(nutriment_type, nutriment_amt)
+		// Ensure our taste data is in the expected format.
+		if(nutriment_desc)
+			if(!islist(nutriment_desc))
+				nutriment_desc = list(nutriment_desc)
+			for(var/taste in nutriment_desc)
+				if(nutriment_desc[taste] <= 0)
+					nutriment_desc[taste] = 1
+		add_to_reagents(nutriment_type, nutriment_amt, list("taste" = nutriment_desc))

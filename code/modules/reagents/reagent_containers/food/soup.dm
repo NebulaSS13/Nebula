@@ -50,7 +50,7 @@
 	add_to_reagents(/decl/material/liquid/water,              10)
 
 /obj/item/chems/food/vegetablesoup
-	name = "vegetable soup"
+	name = "veggie soup"
 	desc = "A highly nutritious blend of vegetative goodness. Guaranteed to leave you with a, er, \"souped-up\" sense of wellbeing."
 	icon_state = "vegetablesoup"
 	trash = /obj/item/trash/snack_bowl
@@ -163,7 +163,7 @@
 	add_to_reagents(/decl/material/liquid/water, 10)
 	if(prob(25))
 		src.desc = "A wish come true!"
-		add_to_reagents(/decl/material/liquid/nutriment, 8, list("something good" = 8))
+		add_to_reagents(/decl/material/liquid/nutriment, 8, list("taste" = list("something good" = 8)))
 
 /obj/item/chems/food/hotchili
 	name = "hot chili"
@@ -217,7 +217,7 @@
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 10)
 
 /obj/item/chems/food/stew
-	name = "stew"
+	name = "stewpot"
 	desc = "A nice and warm stew. Healthy and strong."
 	icon_state = "stew"
 	filling_color = "#9e673a"

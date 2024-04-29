@@ -39,7 +39,7 @@
 /decl/recipe/taco
 	items = list(
 		/obj/item/chems/food/doughslice,
-		/obj/item/chems/food/cutlet,
+		/obj/item/chems/food/butchery/cutlet,
 		/obj/item/chems/food/cheesewedge
 	)
 	result = /obj/item/chems/food/taco

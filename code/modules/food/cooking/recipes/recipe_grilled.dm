@@ -8,13 +8,13 @@
 
 /decl/recipe/grilled/meatsteak
 	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
-	items = list(/obj/item/chems/food/cutlet)
+	items = list(/obj/item/chems/food/butchery/cutlet)
 	result = /obj/item/chems/food/meatsteak
 
 /decl/recipe/grilled/loadedsteak
 	reagents = list(/decl/material/liquid/nutriment/garlicsauce = 5)
 	fruit = list("onion" = 1, "mushroom" = 1)
-	items = list(/obj/item/chems/food/cutlet)
+	items = list(/obj/item/chems/food/butchery/cutlet)
 	result = /obj/item/chems/food/loadedsteak
 
 /decl/recipe/grilled/syntisteak
@@ -52,14 +52,14 @@
 
 /decl/recipe/grilled/cutlet
 	items = list(
-		/obj/item/chems/food/cutlet/raw
+		/obj/item/chems/food/butchery/cutlet/raw
 	)
-	result = /obj/item/chems/food/cutlet
+	result = /obj/item/chems/food/butchery/cutlet
 
 /decl/recipe/grilled/meatkabob
 	items = list(
 		/obj/item/stack/material/rods,
-		/obj/item/chems/food/cutlet = 2
+		/obj/item/chems/food/butchery/cutlet = 2
 	)
 	result = /obj/item/chems/food/meatkabob
 

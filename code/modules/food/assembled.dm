@@ -101,11 +101,11 @@
 /obj/item/chems/food/bun/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		/obj/item/chems/food/meatball         = /obj/item/chems/food/burger,
-		/obj/item/chems/food/cutlet           = /obj/item/chems/food/hamburger,
+		/obj/item/chems/food/butchery/cutlet           = /obj/item/chems/food/hamburger,
 		/obj/item/chems/food/sausage          = /obj/item/chems/food/hotdog,
 		/obj/item/robot_parts/head            = /obj/item/chems/food/roburger,
 		/obj/item/holder/corgi                = /obj/item/chems/food/classichotdog,
-		/obj/item/chems/food/cutlet           = /obj/item/chems/food/burger,
+		/obj/item/chems/food/butchery/cutlet           = /obj/item/chems/food/burger,
 		/obj/item/organ/internal/brain        = /obj/item/chems/food/brainburger,
 		/obj/item/chems/food/xenomeat         = /obj/item/chems/food/xenoburger,
 		/obj/item/chems/food/butchery/meat/fish             = /obj/item/chems/food/fishburger,
@@ -168,7 +168,7 @@
 	)
 	return combined_food_products
 
-/obj/item/chems/food/cutlet/raw/get_combined_food_products()
+/obj/item/chems/food/butchery/cutlet/raw/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		/obj/item/chems/food/meatball/raw = /obj/item/chems/food/sausage
 	)
@@ -176,20 +176,20 @@
 
 /obj/item/chems/food/meatball/raw/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/cutlet/raw = /obj/item/chems/food/sausage
+		/obj/item/chems/food/butchery/cutlet/raw = /obj/item/chems/food/sausage
 	)
 	return combined_food_products
 
 /obj/item/chems/food/sausage/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		/obj/item/chems/food/meatball/raw = /obj/item/chems/food/fatsausage,
-		/obj/item/chems/food/cutlet/raw   = /obj/item/chems/food/fatsausage
+		/obj/item/chems/food/butchery/cutlet/raw   = /obj/item/chems/food/fatsausage
 	)
 	return combined_food_products
 
 /obj/item/chems/food/sliceable/flatdough/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/cutlet   = /obj/item/chems/food/meatpie/raw,
+		/obj/item/chems/food/butchery/cutlet   = /obj/item/chems/food/meatpie/raw,
 		/obj/item/chems/food/tofu     = /obj/item/chems/food/tofupie/raw,
 		/obj/item/chems/food/xenomeat = /obj/item/chems/food/xemeatpie/raw,
 		"apple"                       = /obj/item/chems/food/applepie/raw,

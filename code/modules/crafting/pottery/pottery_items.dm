@@ -38,3 +38,13 @@
 	icon = 'icons/obj/pottery/bowl.dmi'
 	amount_per_transfer_from_this = 10
 	volume = 60
+
+/obj/item/chems/glass/pottery/bowl/on_reagent_change()
+	. = ..()
+	update_icon()
+
+/obj/item/chems/glass/pottery/bowl/on_update_icon()
+	. = ..()
+	var/image/soup_overlay = get_soup_overlay()
+	if(soup_overlay)
+		add_overlay(soup_overlay)

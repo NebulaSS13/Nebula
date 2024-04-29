@@ -12,7 +12,7 @@
 	faction = "geese"
 	pry_time = 8 SECONDS
 	break_stuff_probability = 5
-	butchery_data = /decl/butchery_data/animal/bird/goose
+	butchery_data = /decl/butchery_data/animal/small/fowl/goose
 
 	var/enrage_potency = 3
 	var/enrage_potency_loose = 4
@@ -64,4 +64,4 @@
 	enrage_potency = 3
 	loose_threshold = 20
 	max_damage = 35
-	butchery_data = /decl/butchery_data/animal/bird/goose/dire
+	butchery_data = /decl/butchery_data/animal/small/fowl/goose/dire

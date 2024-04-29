@@ -1,4 +1,5 @@
 /decl/butchery_data/animal/fish
+	meat_name     = "fish"
 	meat_type     = /obj/item/chems/food/butchery/meat/fish
 	meat_material = /decl/material/solid/organic/meat/fish
 	bone_material = /decl/material/solid/organic/bone/fish
@@ -8,6 +9,7 @@
 	skin_amount   = 3
 	must_use_hook = FALSE
 	gut_type      = /obj/item/chems/food/butchery/offal/small
+	meat_flags    = INGREDIENT_FLAG_MEAT | INGREDIENT_FLAG_FISH
 
 /decl/butchery_data/animal/fish/small
 	bone_amount   = 1

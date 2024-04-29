@@ -27,15 +27,16 @@
 	reagents = list(/decl/material/liquid/water = 20)
 	reagent_mix = REAGENT_REPLACE // Remove extra water
 	result= /obj/item/chems/food/wishsoup
+	container_categories = list(RECIPE_CATEGORY_MICROWAVE)
 
 /decl/recipe/simmered/hotchili
 	fruit = list("chili" = 1, "tomato" = 1)
-	items = list(/obj/item/chems/food/cutlet)
+	items = list(/obj/item/chems/food/butchery/cutlet)
 	result = /obj/item/chems/food/hotchili
 
 /decl/recipe/simmered/coldchili
 	fruit = list("icechili" = 1, "tomato" = 1)
-	items = list(/obj/item/chems/food/cutlet)
+	items = list(/obj/item/chems/food/butchery/cutlet)
 	result = /obj/item/chems/food/coldchili
 
 /decl/recipe/simmered/tomatosoup

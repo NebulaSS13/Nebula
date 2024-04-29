@@ -10,7 +10,7 @@
 	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
 	drying_wetness = 45
 	dried_type = /obj/item/chems/food/grown/dry
-
+	ingredient_flags = INGREDIENT_FLAG_VEGETABLE
 	var/datum/seed/seed
 
 /obj/item/chems/food/grown/Initialize(mapload, material_key, _seed)
