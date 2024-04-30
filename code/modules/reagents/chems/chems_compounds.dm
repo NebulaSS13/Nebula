@@ -191,7 +191,7 @@
 			to_chat(M, "<span class='warning'>Your [partial_face_protection] partially protects you from the pepperspray!</span>")
 			stun_probability *= 0.5
 		to_chat(M, "<span class='danger'>Your face and throat burn!</span>")
-		if(HAS_STATUS(M, STAT_STUN)  && !M.lying)
+		if(HAS_STATUS(M, STAT_STUN)  && !M.current_posture.prone)
 			SET_STATUS_MAX(M, STAT_WEAK, 4)
 		if(prob(stun_probability))
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")

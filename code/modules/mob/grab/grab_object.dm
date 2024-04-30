@@ -39,7 +39,7 @@
 
 	var/mob/living/affecting_mob = get_affecting_mob()
 	if(affecting_mob)
-		affecting_mob.UpdateLyingBuckledAndVerbStatus()
+		affecting_mob.update_posture()
 		if(ishuman(affecting_mob))
 			var/mob/living/carbon/human/H = affecting_mob
 			var/obj/item/uniform = H.get_equipped_item(slot_w_uniform_str)

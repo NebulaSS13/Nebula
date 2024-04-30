@@ -8,10 +8,10 @@
 	victim.facing_dir = null
 	if(victim.aiming)
 		victim.stop_aiming(no_message=1)
-	victim.UpdateLyingBuckledAndVerbStatus()
+	victim.update_posture()
 
 /decl/status_condition/weakened/handle_status(mob/living/victim, amount)
 	. = ..()
 	if(victim.aiming)
 		victim.stop_aiming(no_message=1)
-	victim.UpdateLyingBuckledAndVerbStatus()
+	victim.update_posture()

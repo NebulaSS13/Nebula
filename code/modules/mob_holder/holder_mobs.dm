@@ -42,7 +42,7 @@
 	return H
 
 /mob/living/proc/scoop_check(var/mob/living/scooper)
-	if(!isliving(scooper) || scooper == src || scooper.lying)
+	if(!isliving(scooper) || scooper == src || scooper.current_posture.prone)
 		return FALSE
 	if(QDELETED(scooper) || QDELETED(src))
 		return FALSE

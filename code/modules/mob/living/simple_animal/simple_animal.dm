@@ -153,7 +153,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		icon_state += "-dead"
 	else if(stat == UNCONSCIOUS && (mob_icon_state_flags & MOB_ICON_HAS_SLEEP_STATE))
 		icon_state += "-sleeping"
-	else if(resting && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
+	else if(current_posture?.deliberate && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 
 	z_flags &= ~ZMM_MANGLE_PLANES
@@ -229,12 +229,11 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
 
 	//Movement
-	if(lying)
+	if(current_posture.prone)
 		if(!incapacitated())
-			lying = FALSE
-			update_icon()
+			set_posture(/decl/posture/standing)
 	else if(!stop_automated_movement && !buckled_mob && wander && !anchored)
-		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
+		if(isturf(src.loc) && !current_posture.prone)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
 				var/direction = pick(global.cardinal)
@@ -603,3 +602,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/can_buckle_mob(var/mob/living/dropping)
 	. = ..() && can_have_rider && (dropping.mob_size <= max_rider_size)
 
+/mob/living/simple_animal/get_available_postures()
+	var/static/list/available_postures = list(
+		/decl/posture/standing,
+		/decl/posture/lying,
+		/decl/posture/lying/deliberate
+	)
+	return available_postures

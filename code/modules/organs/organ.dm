@@ -369,7 +369,7 @@
 		germ_level -= 5	//at germ_level == 500, this should cure the infection in 5 minutes
 	else
 		germ_level -= 3 //at germ_level == 1000, this will cure the infection in 10 minutes
-	if(owner && owner.lying)
+	if(owner && owner.current_posture.prone)
 		germ_level -= 2
 	germ_level = max(0, germ_level)
 

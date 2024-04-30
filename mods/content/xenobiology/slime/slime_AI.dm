@@ -152,7 +152,7 @@
 			if(issilicon(current_target))
 				body.a_intent_change(I_HURT)
 				do_attack = TRUE
-			else if(current_target.client && !current_target.lying && prob(60 + slime.powerlevel * 4))
+			else if(current_target.client && !current_target.current_posture.prone && prob(60 + slime.powerlevel * 4))
 				body.a_intent_change(I_DISARM)
 				do_attack = TRUE
 			else if(slime.check_valid_feed_target(current_target) == FEED_RESULT_VALID)

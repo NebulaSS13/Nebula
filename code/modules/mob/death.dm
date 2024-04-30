@@ -90,7 +90,7 @@
 	set_stat(DEAD)
 	adjust_stamina(-100)
 	reset_plane_and_layer()
-	UpdateLyingBuckledAndVerbStatus()
+	update_posture()
 	if(!gibbed)
 		clear_status_effects()
 

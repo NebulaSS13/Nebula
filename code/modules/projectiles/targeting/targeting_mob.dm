@@ -22,12 +22,3 @@
 	if(thing && aiming.aiming_with != thing)
 		return
 	aiming.cancel_aiming(no_message)
-
-/mob/living/UpdateLyingBuckledAndVerbStatus()
-	var/old_lying         = lying
-	var/old_buckled       = buckled
-	..()
-	if(lying)
-		stop_aiming(no_message=1)
-	else if(old_buckled && !buckled && old_lying)
-		handle_stance() // Force an immediate stance update.

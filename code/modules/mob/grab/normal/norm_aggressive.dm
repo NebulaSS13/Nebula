@@ -21,7 +21,7 @@
 		if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
 			affecting_mob.drop_held_items()
 		// Keeps those who are on the ground down
-		if(affecting_mob.lying)
+		if(affecting_mob.current_posture.prone)
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 4)
 
 /decl/grab/normal/aggressive/can_upgrade(var/obj/item/grab/G)

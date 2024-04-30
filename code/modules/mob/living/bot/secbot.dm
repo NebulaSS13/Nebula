@@ -177,7 +177,7 @@
 /mob/living/bot/secbot/handleAdjacentTarget()
 	var/mob/living/carbon/human/H = target
 	var/threat = check_threat(target)
-	if(awaiting_surrender < SECBOT_WAIT_TIME && istype(H) && !H.lying && threat < SECBOT_THREAT_ATTACK)
+	if(awaiting_surrender < SECBOT_WAIT_TIME && istype(H) && !H.current_posture.prone && threat < SECBOT_THREAT_ATTACK)
 		if(awaiting_surrender == -1)
 			begin_arrest(target, threat)
 		++awaiting_surrender
@@ -204,7 +204,7 @@
 		return FALSE
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && H.lying)
+	if(istype(H) && H.current_posture.prone)
 		cuff_target(H)
 		return TRUE
 

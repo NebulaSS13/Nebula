@@ -744,7 +744,7 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/Process()
 	if(owner)
 		if(pain)
-			pain -= owner.lying ? 3 : 1
+			pain -= owner.current_posture.prone ? 3 : 1
 			if(pain<0)
 				pain = 0
 		// Process wounds, doing healing etc. Only do this every few ticks to save processing power

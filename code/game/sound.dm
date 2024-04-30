@@ -115,7 +115,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 				S.environment = DIZZY
 			else if (M.stat == UNCONSCIOUS)
 				S.environment = UNDERWATER
-			else if (T?.is_flooded(M.lying))
+			else if (T?.is_flooded(M.current_posture.prone))
 				S.environment = UNDERWATER
 			else
 				var/area/A = get_area(src)

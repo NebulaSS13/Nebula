@@ -911,7 +911,7 @@
 	if(!ai_can_move_suit(user, check_user_module = 1))
 		return
 	wearer.lay_down()
-	to_chat(user, "<span class='notice'>\The [wearer] is now [wearer.resting ? "resting" : "getting up"].</span>")
+	to_chat(user, "<span class='notice'>\The [wearer] is now [wearer.current_posture.prone ? "resting" : "getting up"].</span>")
 
 /obj/item/rig/proc/forced_move(var/direction, var/mob/user)
 	if(malfunctioning)

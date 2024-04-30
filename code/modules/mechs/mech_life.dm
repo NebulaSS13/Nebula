@@ -1,9 +1,6 @@
 /mob/living/exosuit/handle_disabilities()
 	return
 
-/mob/living/exosuit/update_lying()
-	lying = FALSE // Prevent carp from proning us
-
 /mob/living/exosuit/handle_regular_status_updates()
 
 	if(!body && !QDELETED(src))

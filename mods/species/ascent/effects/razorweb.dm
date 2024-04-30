@@ -125,7 +125,7 @@
 
 /obj/effect/razorweb/proc/entangle(var/mob/living/L, var/silent)
 
-	if(!istype(L) || !L.simulated || L.lying || (MOVING_DELIBERATELY(L) && prob(25)) || L.is_floating)
+	if(!istype(L) || !L.simulated || L.current_posture.prone || (MOVING_DELIBERATELY(L) && prob(25)) || L.is_floating)
 		return
 
 	var/mob/living/carbon/human/H

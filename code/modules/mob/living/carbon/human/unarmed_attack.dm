@@ -97,7 +97,7 @@
 					target.visible_message(SPAN_DANGER("\The [equipped] was knocked right out of [target]'s grasp!"))
 					target.drop_from_inventory(equipped)
 			if(BP_CHEST)
-				if(!target.lying)
+				if(!target.current_posture.prone)
 					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))
 					if(!T.density)
 						step(target, get_dir(get_turf(user), get_turf(target)))
@@ -112,11 +112,11 @@
 					SPAN_WARNING(G.get_message_for_being_kicked_in_the_dick()))
 				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
-				if(!target.lying)
+				if(!target.current_posture.prone)
 					target.visible_message("<span class='warning'>[target] gives way slightly.</span>")
 					target.apply_effect(attack_damage*3, PAIN, armour)
 	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100)) // Chance to get the usual throwdown as well (25% standard chance)
-		if(!target.lying)
+		if(!target.current_posture.prone)
 			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
 		else
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
@@ -214,7 +214,7 @@
 	var/decl/pronouns/user_gender =   user.get_pronouns()
 	var/decl/pronouns/target_gender = target.get_pronouns()
 	var/attack_string
-	if(!target.lying)
+	if(!target.current_posture.prone)
 		switch(zone)
 			if(BP_HEAD, BP_MOUTH, BP_EYES)
 				// ----- HEAD ----- //
@@ -293,8 +293,8 @@
 /decl/natural_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!istype(target))
 		return FALSE
-	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
-		if((user in target.grabbed_by) && target.lying)
+	if (!user.current_posture.prone && (target.current_posture.prone || (zone in list(BP_L_FOOT, BP_R_FOOT))))
+		if((user in target.grabbed_by) && target.current_posture.prone)
 			return FALSE
 		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
 			if(GET_EXTERNAL_ORGAN(user, foot_tag))

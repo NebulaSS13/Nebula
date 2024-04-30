@@ -54,7 +54,7 @@
 
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
-		var/mod = (lying + (nutrition / get_max_nutrition())) / 2
+		var/mod = (current_posture.prone + (nutrition / get_max_nutrition())) / 2
 		adjust_stamina(max(get_config_value(/decl/config/num/movement_max_stamina_recovery), get_config_value(/decl/config/num/movement_min_stamina_recovery) * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
@@ -394,7 +394,7 @@
 			embedded_flag = 0
 
 	//Resting
-	if(resting)
+	if(current_posture.prone)
 		if(HAS_STATUS(src, STAT_DIZZY))
 			ADJ_STATUS(src, STAT_DIZZY, -15)
 		if(HAS_STATUS(src, STAT_JITTER))

@@ -157,7 +157,7 @@ var/global/list/global/organ_rel_size = list(
 		if(target.a_intent == I_HELP)
 			return zone
 		// you cannot miss if your target is prone or restrained
-		if(target.buckled || target.lying)
+		if(target.buckled || target.current_posture.prone)
 			return zone
 		// if your target is being grabbed aggressively by someone you cannot miss either
 		for(var/obj/item/grab/G in target.grabbed_by)

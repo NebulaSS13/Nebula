@@ -16,7 +16,7 @@
 	if(H.shock_stage >= 40 && prob(3))
 		H.emote(/decl/emote/audible/scream)
 
-	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
+	if(!H.restrained() && H.current_posture.prone && H.shock_stage >= 60 && prob(3))
 		H.custom_emote("thrashes in agony")
 
 	if(!H.restrained() && H.shock_stage < 40 && prob(3))

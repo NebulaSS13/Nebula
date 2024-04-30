@@ -867,7 +867,7 @@
 
 	if(lockcharge != state)
 		lockcharge = state
-		UpdateLyingBuckledAndVerbStatus()
+		update_posture()
 		return 1
 	return 0
 

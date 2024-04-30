@@ -80,9 +80,6 @@
 	var/next_move = null
 	var/real_name = null
 
-	var/resting =    0
-	var/lying =      0
-
 	var/radio_interrupt_cooldown = 0    // TODO move this to /human
 
 	var/list/pinned                     // Lazylist of things pinning this creature to walls (see living_defense.dm)

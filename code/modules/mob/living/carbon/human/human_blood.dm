@@ -88,7 +88,7 @@
 
 				if(ishuman(A))
 					var/mob/living/carbon/human/H = A
-					if(!H.lying)
+					if(!H.current_posture.prone)
 						H.bloody_body(src)
 						H.bloody_hands(src)
 						var/blinding = FALSE
@@ -206,7 +206,7 @@
 				pulse_mod *= 1.25
 	blood_volume *= pulse_mod
 
-	if(lying)
+	if(current_posture.prone)
 		blood_volume *= 1.25
 
 	var/min_efficiency = recent_pump ? 0.5 : 0.3

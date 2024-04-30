@@ -126,7 +126,7 @@
 		if(prob(80))
 			hit_zone = ran_zone(hit_zone, target = src)
 		if(prob(15) && hit_zone != BP_CHEST) // Missed!
-			if(!src.lying)
+			if(!src.current_posture.prone)
 				attack_message = "\The [H] attempted to strike \the [src], but missed!"
 			else
 				var/decl/pronouns/G = get_pronouns()

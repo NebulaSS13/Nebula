@@ -57,13 +57,13 @@
 
 	// First handle being in a submerged environment.
 	var/datum/gas_mixture/breath
-	if(is_flooded(lying))
+	if(is_flooded(current_posture.prone))
 		var/turf/my_turf = get_turf(src)
 
 		//Can we get air from the turf above us?
 		var/can_breathe_air_above = FALSE
 		if(my_turf == location)
-			if(!lying && my_turf.above && !my_turf.above.is_flooded() && my_turf.above.is_open() && can_overcome_gravity())
+			if(!current_posture.prone && my_turf.above && !my_turf.above.is_flooded() && my_turf.above.is_open() && can_overcome_gravity())
 				location = my_turf.above
 				can_breathe_air_above = TRUE
 

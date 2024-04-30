@@ -612,7 +612,7 @@ var/global/list/all_apcs = list()
 		powered_down  = FALSE
 
 /obj/machinery/power/apc/CanUseTopic(mob/user, datum/topic_state/state)
-	if(user.lying)
+	if(user.current_posture.prone)
 		to_chat(user, "<span class='warning'>You must stand to use [src]!</span>")
 		return STATUS_CLOSE
 	if(issilicon(user))

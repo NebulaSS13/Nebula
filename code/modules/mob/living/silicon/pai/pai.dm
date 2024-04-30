@@ -212,6 +212,19 @@ var/global/list/possible_say_verbs = list(
 	set name = "Collapse Chassis"
 	fold()
 
+/mob/living/silicon/pai/get_available_postures()
+
+	if(loc == card)
+		var/static/list/card_postures = list(/decl/posture/standing)
+		return card_postures
+
+	var/static/list/available_postures = list(
+		/decl/posture/standing,
+		/decl/posture/lying,
+		/decl/posture/lying/deliberate,
+	)
+	return available_postures
+
 //from mob -> card
 /mob/living/silicon/pai/proc/fold()
 	if(incapacitated(INCAPACITATION_KNOCKOUT))
@@ -223,8 +236,7 @@ var/global/list/possible_say_verbs = list(
 		return
 	set_special_ability_cooldown(10 SECONDS)
 
-	// Move us into the card and move the card to the ground.
-	resting = 0
+	set_posture(/decl/posture/standing)
 
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/holder/H = loc
@@ -249,14 +261,18 @@ var/global/list/possible_say_verbs = list(
 /mob/living/silicon/pai/lay_down()
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/paicard))
-		resting = 0
+		set_posture(/decl/posture/standing)
 		var/obj/item/rig/rig = src.get_rig()
 		if(rig)
 			rig.force_rest(src)
+		return
+	. = ..()
+	if(current_posture.prone)
+		icon_state = "[chassis]_rest"
+		to_chat(src, SPAN_NOTICE("You are now resting."))
 	else
-		resting = !resting
-		icon_state = resting ? "[chassis]_rest" : "[chassis]"
-		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
+		icon_state = chassis
+		to_chat(src, SPAN_NOTICE("You are now getting up."))
 
 //Overriding this will stop a number of headaches down the track.
 /mob/living/silicon/pai/attackby(obj/item/W, mob/user)

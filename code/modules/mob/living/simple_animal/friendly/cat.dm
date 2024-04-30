@@ -40,7 +40,7 @@
 	..()
 	//MICE!
 	if((src.loc) && isturf(src.loc))
-		if(!resting && !buckled)
+		if(!current_posture.prone && !buckled)
 			for(var/mob/living/simple_animal/mouse/M in loc)
 				if(!M.stat)
 					M.splat()

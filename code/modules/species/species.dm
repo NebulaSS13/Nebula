@@ -434,7 +434,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
 		for(var/type in base_auras)
-			H.add_aura(new type(H))
+			H.add_aura(new type(H), skip_icon_update = TRUE)
 
 /decl/species/proc/remove_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
@@ -611,7 +611,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)
-	if(H.lying)
+	if(H.current_posture.prone)
 		return /obj/effect/decal/cleanable/blood/tracks/body
 	var/obj/item/clothing/suit = H.get_equipped_item(slot_wear_suit_str)
 	if(istype(suit) && (suit.body_parts_covered & SLOT_FEET))

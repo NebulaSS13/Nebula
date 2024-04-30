@@ -159,11 +159,11 @@
 			if(show_ssd && ssd_check())
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
-			else if(lying ||HAS_STATUS(src, STAT_ASLEEP) || player_triggered_sleeping)
+			else if(current_posture.prone ||HAS_STATUS(src, STAT_ASLEEP) || player_triggered_sleeping)
 				player_triggered_sleeping = 0
 				ADJ_STATUS(src, STAT_ASLEEP, -5)
 				if(!HAS_STATUS(src, STAT_ASLEEP))
-					resting = FALSE
+					set_posture(/decl/posture/standing)
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
@@ -201,7 +201,7 @@
 	..()
 
 /mob/living/carbon/slip(slipped_on, stun_duration = 8)
-	if(has_gravity() && !buckled && !lying)
+	if(has_gravity() && !buckled && !current_posture.prone)
 		to_chat(src, SPAN_DANGER("You slipped on [slipped_on]!"))
 		playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)

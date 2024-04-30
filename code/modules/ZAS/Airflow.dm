@@ -38,7 +38,7 @@ Contains helper procs for airflow, called by /connection_group.
 	if(buckled)
 		to_chat(src, SPAN_NOTICE("Air suddenly rushes past you!"))
 		return FALSE
-	if(!lying)
+	if(!current_posture.prone)
 		to_chat(src, SPAN_DANGER("The sudden rush of air knocks you over!"))
 	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	last_airflow_stun = world.time

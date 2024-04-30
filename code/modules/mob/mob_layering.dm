@@ -1,5 +1,5 @@
 /mob/proc/get_base_layer()
-	if(lying)
+	if(current_posture?.prone)
 		return LYING_MOB_LAYER
 	return initial(layer)
 
@@ -50,7 +50,7 @@
 	. = ..()
 
 /mob/living/carbon/human/get_base_layer()
-	if(lying)
+	if(current_posture.prone)
 		return LYING_HUMAN_LAYER
 	. = ..()
 
