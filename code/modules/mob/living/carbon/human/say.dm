@@ -132,11 +132,16 @@
 /mob/living/carbon/human/can_speak(decl/language/speaking)
 	if(ispath(speaking, /decl/language))
 		speaking = GET_DECL(speaking)
-	if(species && speaking && (speaking.name in species.assisted_langs))
-		for(var/obj/item/organ/internal/voicebox/I in get_internal_organs())
-			if(I.is_usable() && I.assists_languages[speaking])
-				return TRUE
-		return FALSE
+	if(!istype(speaking))
+		return ..()
+	if(species)
+		if(speaking.type in species.assisted_langs)
+			for(var/obj/item/organ/internal/voicebox/I in get_internal_organs())
+				if(I.is_usable() && I.assists_languages[speaking])
+					return TRUE
+			return FALSE
+		else if(speaking.type in species.unspeakable_langs)
+			return FALSE
 	. = ..()
 
 /mob/living/carbon/human/parse_language(var/message)

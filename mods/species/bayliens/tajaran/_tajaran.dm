@@ -3,7 +3,7 @@
 #define BODYTYPE_FELINE "feline body"
 #define BODY_FLAG_FELINE BITFLAG(7)
 
-/obj/item/clothing/Initialize()
+/obj/item/clothing/setup_equip_flags()
 	. = ..()
 	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
 		bodytype_equip_flags |= BODY_FLAG_FELINE

@@ -211,7 +211,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/turn_angle
 	var/matrix/M = matrix()
 	M.Scale(desired_scale_x, desired_scale_y)
-	if(lying)
+	if(lying && get_bodytype()?.rotate_on_prone)
 		// This locate is very bad but trying to get it to respect the buckled dir is proving tricky.
 		if((dir & EAST) || (isturf(loc) && (locate(/obj/structure/bed) in loc)))
 			turn_angle = 90
@@ -343,7 +343,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 		var/image/I
 		if(UW.slot_offset_str && LAZYACCESS(root_bodytype.equip_adjust, UW.slot_offset_str))
-			I = root_bodytype.get_offset_overlay_image(UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
+			I = root_bodytype.get_offset_overlay_image(src, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
 		else
 			I = image(icon = UW.icon, icon_state = UW.icon_state)
 			I.color = UW.color

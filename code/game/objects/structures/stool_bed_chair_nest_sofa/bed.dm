@@ -24,6 +24,7 @@
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 	user_comfort = 1
+	obj_flags = OBJ_FLAG_SUPPORT_MOB
 	var/base_icon = "bed"
 	var/padding_color
 

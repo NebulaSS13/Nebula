@@ -36,8 +36,9 @@
 	var/skin_colour                    // skin colour
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
 	var/hair_colour                    // hair colour
-	var/render_alpha = 255
+	var/render_alpha = 255             // Alpha value to use for rendering the icon (slime transparency)
 	var/skip_body_icon_draw = FALSE    // Set to true to skip including this organ on the human body sprite.
+	var/icon_state_modifier            // String modifier to icon_state used for prone icons, etc.
 
 	/// Sprite accessories like hair and markings to apply to the organ icon and owner.
 	VAR_PRIVATE/list/_sprite_accessories

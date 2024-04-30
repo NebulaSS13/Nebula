@@ -50,4 +50,4 @@
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 
 /mob/living/simple_animal/alien/kharmaan/get_dexterity(var/silent)
-	return (DEXTERITY_EQUIP_ITEM|DEXTERITY_HOLD_ITEM)
+	return (DEXTERITY_EQUIP_ITEM)

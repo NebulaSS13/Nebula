@@ -37,12 +37,14 @@
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
+	var/modifier = owner?.get_overlay_state_modifier()
+	var/eye_state = modifier ? "eyes[modifier]" : "eyes"
+	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]-[eye_state]"
 	last_cached_eye_colour = eye_colour
-	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
 	if(!bodytype.eye_icon)
 		return
 	if(!global.eye_icon_cache[last_eye_cache_key])
-		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = "")
+		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = eye_state)
 		if(bodytype.eye_offset)
 			eyes_icon.Shift(NORTH, bodytype.eye_offset)
 		if(bodytype.apply_eye_colour)

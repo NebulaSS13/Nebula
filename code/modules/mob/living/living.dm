@@ -604,6 +604,7 @@ default behaviour is:
 		resting = !resting
 		UpdateLyingBuckledAndVerbStatus()
 		update_icon()
+		update_tail_showing()
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]."))
 
 //called when the mob receives a bright flash
@@ -772,7 +773,12 @@ default behaviour is:
 			fluids.trans_to_holder(touching_reagents, saturation)
 
 /mob/living/proc/needs_wheelchair()
-	return FALSE
+	var/tmp_stance_damage = 0
+	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
+		if(!E || !E.is_usable())
+			tmp_stance_damage += 2
+	return tmp_stance_damage >= 4
 
 /mob/living/proc/seizure()
 	set waitfor = 0
@@ -1448,3 +1454,20 @@ default behaviour is:
 
 /mob/living/proc/handle_footsteps()
 	return
+
+/mob/living/get_movement_delay(var/travel_dir)
+	. = ..()
+	if(stance_damage)
+		. += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
+
+/mob/living/proc/find_mob_supporting_object()
+	for(var/turf/T in RANGE_TURFS(src, 1))
+		if(T.density && T.simulated)
+			return TRUE
+	for(var/obj/O in orange(1, src))
+		if((O.obj_flags & OBJ_FLAG_SUPPORT_MOB) || (O.density && O.anchored))
+			return TRUE
+	return FALSE
+
+/mob/living/proc/is_asystole()
+	return FALSE

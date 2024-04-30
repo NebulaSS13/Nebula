@@ -30,6 +30,8 @@
 /obj/item/clothing/Initialize()
 
 	. = ..()
+	setup_equip_flags()
+
 	if(accessory_slot)
 		if(isnull(accessory_removable))
 			accessory_removable = TRUE
@@ -61,6 +63,13 @@
 
 /obj/item/clothing/proc/is_accessory()
 	return istype(loc, /obj/item/clothing)
+
+/obj/item/clothing/proc/setup_equip_flags()
+	if(!isnull(bodytype_equip_flags))
+		if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+			bodytype_equip_flags |= BODY_FLAG_QUADRUPED
+		else
+			bodytype_equip_flags &= ~BODY_FLAG_QUADRUPED
 
 /obj/item/clothing/can_contaminate()
 	return TRUE

@@ -6,7 +6,7 @@
 	color = "#666666"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_SUPPORT_MOB
 	base_icon = "chair"
 	user_comfort = 0.5
 

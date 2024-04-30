@@ -41,7 +41,8 @@
 		owner.update_tail_showing(FALSE)
 
 /obj/item/organ/external/tail/proc/get_tail()
-	return tail
+	var/modifier = owner?.get_overlay_state_modifier()
+	. = modifier ? "[tail][modifier]" : tail
 
 /obj/item/organ/external/tail/proc/get_tail_icon()
 	return tail_icon

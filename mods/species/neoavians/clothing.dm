@@ -1,21 +1,20 @@
-
-
 //Shoes
-
-/obj/item/clothing/shoes/magboots/Initialize()
+/obj/item/clothing/shoes/magboots/setup_sprite_sheets()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/feet/magboots.dmi')
 
-/obj/item/clothing/shoes/galoshes/Initialize()
+/obj/item/clothing/shoes/galoshes/setup_sprite_sheets()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/feet/galoshes.dmi')
 
 //Gloves
-
-/obj/item/clothing/gloves/Initialize()
+/obj/item/clothing/gloves/setup_equip_flags()
 	. = ..()
 	if(!isnull(bodytype_equip_flags) && !(bodytype_equip_flags & BODY_FLAG_EXCLUDE))
 		bodytype_equip_flags |= BODY_FLAG_AVIAN
+
+/obj/item/clothing/gloves/setup_sprite_sheets()
+	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/gloves.dmi')
 
 //Backpacks & tanks
@@ -26,20 +25,20 @@
 
 //Radsuits (theyre essential?)
 
-/obj/item/clothing/head/radiation/Initialize()
+/obj/item/clothing/head/radiation/setup_sprite_sheets()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/head/rad_helm.dmi')
 
-/obj/item/clothing/suit/radiation/Initialize()
+/obj/item/clothing/suit/radiation/setup_sprite_sheets()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/suit/rad_suit.dmi')
 
 //cloaks
-/obj/item/clothing/suit/cloak/Initialize()
+/obj/item/clothing/suit/cloak/setup_sprite_sheets()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/accessory/cloak.dmi')
 
-/obj/item/clothing/suit/cloak/hide/Initialize()
+/obj/item/clothing/suit/cloak/hide/setup_sprite_sheets()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/accessory/cloak_hide.dmi')
 

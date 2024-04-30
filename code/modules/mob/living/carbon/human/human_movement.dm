@@ -59,8 +59,6 @@
 	if (root_bodytype && bodytemperature < root_bodytype.cold_discomfort_level)
 		tally += (root_bodytype.cold_discomfort_level - bodytemperature) / 10 * 1.75
 
-	tally += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
-
 	if(mRun in mutations)
 		tally = 0
 
@@ -141,7 +139,6 @@
 	return (stamina > 0)
 
 /mob/living/carbon/human/UpdateLyingBuckledAndVerbStatus()
-	var/old_buckled_lying = !!buckled?.buckle_lying
 	var/old_lying = lying
 	. = ..()
 	if(!buckled)
@@ -150,6 +147,5 @@
 				var/mob/M = buckled
 				M.unbuckle_mob()
 			var/decl/bodytype/B = get_bodytype()
-			playsound(loc, B.bodyfall_sounds, 50, TRUE, -1)
-		else if(!lying && !old_buckled_lying)
-			handle_stance() // Force an immediate stance update.
+			if(B)
+				playsound(loc, B.bodyfall_sounds, 50, TRUE, -1)

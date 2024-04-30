@@ -44,6 +44,10 @@ var/global/list/bodytypes_by_category = list()
 	var/manual_dexterity = null
 	/// Determines how the limb behaves with regards to manual attachment/detachment.
 	var/modular_limb_tier = MODULAR_BODYPART_INVALID
+	// Expected organ types per category, used only for stance checking at time of writing.
+	var/list/organs_by_category = list()
+	// Expected organ tags per category, used only for stance checking at time of writing.
+	var/list/organ_tags_by_category = list()
 
 	var/list/onmob_state_modifiers
 	var/health_hud_intensity = 1
@@ -193,6 +197,9 @@ var/global/list/bodytypes_by_category = list()
 		"Your chilly flesh stands out in goosebumps."
 	)
 
+	/// Set to FALSE if the mob will update prone icon based on state rather than transform.
+	var/rotate_on_prone = TRUE
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
@@ -222,10 +229,27 @@ var/global/list/bodytypes_by_category = list()
 			has_limbs[ltag] = list("path" = override_limb_types[ltag])
 
 	//Build organ descriptors
-	for(var/limb_type in has_limbs)
-		var/list/organ_data = has_limbs[limb_type]
-		var/obj/item/organ/limb_path = organ_data["path"]
-		organ_data["descriptor"] = initial(limb_path.name)
+	for(var/organ_tag in has_limbs)
+		var/list/organ_data = has_limbs[organ_tag]
+		var/obj/item/organ/organ = organ_data["path"]
+		organ_data["descriptor"] = initial(organ.name)
+		var/organ_cat = initial(organ.organ_category)
+		if(organ_cat)
+			LAZYADD(organs_by_category[organ_cat], organ)
+			LAZYADD(organ_tags_by_category[organ_cat], organ_tag)
+
+	for(var/organ_tag in has_organ)
+		var/obj/item/organ/organ = has_organ[organ_tag]
+		var/organ_cat = initial(organ.organ_category)
+		if(organ_cat)
+			LAZYADD(organs_by_category[organ_cat], organ)
+			LAZYADD(organ_tags_by_category[organ_cat], organ_tag)
+
+/decl/bodytype/proc/get_expected_organ_count_for_categories(var/list/categories)
+	. = 0
+	for(var/category in categories)
+		if(category && (category in organs_by_category))
+			. += length(organs_by_category[category])
 
 /decl/bodytype/proc/apply_limb_colouration(var/obj/item/organ/external/E, var/icon/applying)
 	return applying

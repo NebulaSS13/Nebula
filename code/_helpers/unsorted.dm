@@ -669,7 +669,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			mobs += M
 	return mobs
 
-
 /proc/parse_zone(zone)
 	var/static/list/zone_to_descriptor_mapping = list(
 		BP_R_HAND = "right hand",
