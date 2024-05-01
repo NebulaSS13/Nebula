@@ -48,14 +48,14 @@
 		else
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 
-/obj/item/chems/cooking_vessel/ProcessAtomTemperature()
+/obj/item/chems/cooking_vessel/Process()
 	. = ..()
 	var/decl/recipe/recipe = select_recipe(cooking_category, src, temperature)
 	if(!recipe) // Too hot, too cold, ingredients changed.
 		//TODO fail last recipe
 		started_cooking = null
 		last_recipe = null
-		return
+		return PROCESS_KILL
 	if(isnull(started_cooking) || recipe != last_recipe)
 		started_cooking = world.time
 	else if((world.time - started_cooking) >= recipe.cooking_time)
@@ -73,9 +73,23 @@
 /obj/item/chems/cooking_vessel/Entered()
 	. = ..()
 	started_cooking = null
+	if(!is_processing)
+		START_PROCESSING(SSobj, src)
 	update_icon()
 
 /obj/item/chems/cooking_vessel/on_reagent_change()
 	. = ..()
 	started_cooking = null
+	if(!is_processing)
+		START_PROCESSING(SSobj, src)
 	update_icon()
+
+/obj/item/chems/cooking_vessel/Destroy()
+	if(is_processing)
+		STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/item/chems/cooking_vessel/ProcessAtomTemperature()
+	. = ..()
+	if(. != PROCESS_KILL && !is_processing)
+		START_PROCESSING(SSobj, src)
