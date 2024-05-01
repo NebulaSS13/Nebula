@@ -124,6 +124,7 @@ nanoui is used to open and update nano browser uis
 	add_stylesheet("shared.css") // this CSS sheet is common to all UIs
 	add_stylesheet("tgui.css") // this CSS sheet is common to all UIs
 	add_stylesheet("icons.css") // this CSS sheet is common to all UIs
+	add_stylesheet("fonts.css") //Common Fonts
 
  /**
   * Set the current status (also known as visibility) of this ui.
