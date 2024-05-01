@@ -25,7 +25,6 @@
 
 	snow_slowdown_mod = -1
 
-	age_descriptor = /datum/appearance_descriptor/age/neoavian
 	holder_icon = 'mods/species/neoavians/icons/holder.dmi'
 
 	butchery_data = /decl/butchery_data/humanoid/avian

@@ -246,7 +246,25 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	LAZYSET(map_admin_faxes, uppertext(replacetext("[system_name]_POLICE.GOV", " ", "_")), list("name" = "[system_name] Police",  "color" = "#1f66a0", "access" = list(access_heads)))
 
 /datum/map/proc/setup_job_lists()
-	return
+
+	// Populate blacklists for any default-blacklisted species.
+	for(var/decl/species/species as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/species))
+		if(!species.job_blacklist_by_default)
+			continue
+		var/found_whitelisted_job = FALSE
+		for(var/datum/job/job as anything in SSjobs.primary_job_datums)
+			if(species.name in job_to_species_whitelist[job.type])
+				found_whitelisted_job = TRUE
+				continue
+			if(job.type in species_to_job_whitelist[species.name])
+				found_whitelisted_job = TRUE
+				continue
+			LAZYDISTINCTADD(species_to_job_blacklist[species.name], job.type)
+			LAZYDISTINCTADD(job_to_species_blacklist[job.type], species.name)
+		// If no jobs are available, mark them as unavailable for this map to avoid player confusion.
+		if(!found_whitelisted_job)
+			species.spawn_flags &= ~SPECIES_CAN_JOIN
+			species.spawn_flags |=  SPECIES_IS_RESTRICTED
 
 /datum/map/proc/send_welcome()
 	return

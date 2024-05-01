@@ -6,7 +6,7 @@
 
 	Descriptors are stored in species/human lists (appearance_descriptors) as a string key (name) indexed
 	to a value (either a personalized value or the shared datum on the species). The general pattern for
-	looking up descriptor data is to iterate the species.appearance_descriptors list for the datum instances
+	looking up descriptor data is to iterate the bodytype.appearance_descriptors list for the datum instances
 	and then check human.appearance_descriptors for the specific value the mob is using.
 
 	This code is really noodly and can be tricky to follow in places. This is due to two different systems
@@ -16,13 +16,14 @@
 
 /mob/living/carbon/human/proc/show_descriptors_to(mob/user)
 	if(LAZYLEN(appearance_descriptors))
+		var/decl/bodytype/bodytype = get_bodytype()
 		if(user == src)
 			for(var/entry in appearance_descriptors)
-				var/datum/appearance_descriptor/descriptor = species.appearance_descriptors[entry]
+				var/datum/appearance_descriptor/descriptor = bodytype.appearance_descriptors[entry]
 				LAZYADD(., "[descriptor.get_first_person_message_start()] [descriptor.get_standalone_value_descriptor(appearance_descriptors[descriptor.name])].")
 		else
 			for(var/entry in appearance_descriptors)
-				var/datum/appearance_descriptor/descriptor = species.appearance_descriptors[entry]
+				var/datum/appearance_descriptor/descriptor = bodytype.appearance_descriptors[entry]
 				LAZYADD(., descriptor.get_comparative_value_descriptor(appearance_descriptors[descriptor.name], user, src))
 
 /datum/appearance_descriptor
@@ -114,8 +115,9 @@
 	var/comparing_value
 	if(ishuman(observer))
 		var/mob/living/carbon/human/human_observer = observer
-		if(LAZYLEN(human_observer.appearance_descriptors) && !isnull(human_observer.species.appearance_descriptors[name]) && !isnull(human_observer.appearance_descriptors[name]))
-			var/datum/appearance_descriptor/obs_descriptor = human_observer.species.appearance_descriptors[name]
+		var/decl/bodytype/human_bodytype = human_observer?.get_bodytype()
+		if(LAZYLEN(human_observer.appearance_descriptors) && !isnull(human_bodytype.appearance_descriptors[name]) && !isnull(human_observer.appearance_descriptors[name]))
+			var/datum/appearance_descriptor/obs_descriptor = human_bodytype.appearance_descriptors[name]
 			comparing_value = human_observer.appearance_descriptors[name] * obs_descriptor.relative_value_comparison_multiplier
 
 	if(. && !isnull(comparing_value))

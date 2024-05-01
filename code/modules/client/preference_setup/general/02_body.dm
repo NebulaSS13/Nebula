@@ -134,8 +134,8 @@
 		last_descriptors = pref.appearance_descriptors.Copy()
 
 	pref.appearance_descriptors = list()
-	for(var/entry in mob_species.appearance_descriptors)
-		var/datum/appearance_descriptor/descriptor = mob_species.appearance_descriptors[entry]
+	for(var/entry in mob_bodytype.appearance_descriptors)
+		var/datum/appearance_descriptor/descriptor = mob_bodytype.appearance_descriptors[entry]
 		if(istype(descriptor))
 			if(isnull(last_descriptors[descriptor.name]))
 				pref.appearance_descriptors[descriptor.name] = descriptor.default_value // Species datums have initial default value.
@@ -157,7 +157,7 @@
 		. += "<h3>Physical Appearance</h3>"
 		. += "<table width = '100%'>"
 		for(var/entry in pref.appearance_descriptors)
-			var/datum/appearance_descriptor/descriptor = mob_species.appearance_descriptors[entry]
+			var/datum/appearance_descriptor/descriptor = mob_bodytype.appearance_descriptors[entry]
 			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td>"
 			if(descriptor.has_custom_value())
 				. += "<td align = 'left' width = '50px'><a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_custom=1'>[descriptor.get_value_text(pref.appearance_descriptors[entry])]</a></td><td align = 'left'>"

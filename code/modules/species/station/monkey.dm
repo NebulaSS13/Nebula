@@ -32,11 +32,6 @@
 	pass_flags = PASS_FLAG_TABLE
 	holder_type = /obj/item/holder
 
-	appearance_descriptors = list(
-		/datum/appearance_descriptor/height = 0.6,
-		/datum/appearance_descriptor/build =  0.6
-	)
-
 	force_cultural_info = list(
 		TAG_CULTURE =   /decl/cultural_info/culture/hidden/monkey,
 		TAG_HOMEWORLD = /decl/cultural_info/location/stateless,

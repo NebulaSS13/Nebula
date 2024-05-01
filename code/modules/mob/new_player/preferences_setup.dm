@@ -37,8 +37,8 @@
 			var/datum/category_item/underwear/WRI = pick(WRC.items)
 			all_underwear[WRC.name] = WRI.name
 
-	for(var/entry in current_species.appearance_descriptors)
-		var/datum/appearance_descriptor/descriptor = current_species.appearance_descriptors[entry]
+	for(var/entry in current_bodytype.appearance_descriptors)
+		var/datum/appearance_descriptor/descriptor = current_bodytype.appearance_descriptors[entry]
 		if(istype(descriptor))
 			appearance_descriptors[descriptor.name] = descriptor.randomize_value()
 

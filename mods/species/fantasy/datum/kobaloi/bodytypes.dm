@@ -15,6 +15,7 @@
 	eye_blend            = ICON_MULTIPLY
 	eye_darksight_range  = 7
 	eye_flash_mod        = 2
+	age_descriptor       = /datum/appearance_descriptor/age
 	override_limb_types  = list(
 		BP_HEAD = /obj/item/organ/external/head/kobaloi,
 		BP_TAIL = /obj/item/organ/external/tail/kobaloi

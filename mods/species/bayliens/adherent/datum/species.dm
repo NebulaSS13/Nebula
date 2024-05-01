@@ -40,8 +40,6 @@
 	shock_vulnerability =     0
 	rarity_value =            6
 
-	age_descriptor = /datum/appearance_descriptor/age/adherent
-
 	warning_low_pressure =    50
 	hazard_low_pressure =     -1
 	strength =                STR_HIGH

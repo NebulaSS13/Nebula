@@ -203,7 +203,7 @@
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-/decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/M)
+/decl/material/liquid/ethanol/coffee/affect_overdose(mob/living/M, total_dose)
 	ADJ_STATUS(M, STAT_JITTER, 5)
 
 /decl/material/liquid/ethanol/melonliquor

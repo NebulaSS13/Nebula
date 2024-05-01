@@ -353,7 +353,7 @@
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M)
+/decl/material/liquid/drink/coffee/affect_overdose(mob/living/M, total_dose)
 	ADJ_STATUS(M, STAT_JITTER, 5)
 	M.add_chemical_effect(CE_PULSE, 1)
 

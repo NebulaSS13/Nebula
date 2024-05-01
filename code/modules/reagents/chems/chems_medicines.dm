@@ -163,7 +163,7 @@
 	if(immunity_to_add > 0)
 		M.adjust_immunity(immunity_to_add) // Rapidly brings someone up to half immunity.
 
-/decl/material/liquid/immunobooster/affect_overdose(var/mob/living/M)
+/decl/material/liquid/immunobooster/affect_overdose(mob/living/M, total_dose)
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	var/mob/living/carbon/human/H = M
@@ -239,7 +239,7 @@
 	if(LAZYACCESS(M.chem_doses, type) > 15)
 		M.adjust_immunity(-0.25)
 
-/decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M)
+/decl/material/liquid/antibiotics/affect_overdose(mob/living/M, total_dose)
 	..()
 	M.adjust_immunity(-0.5)
 	M.immunity = max(M.immunity - 0.25, 0)
@@ -257,7 +257,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_retrovirals"
 
-/decl/material/liquid/retrovirals/affect_overdose(mob/living/M, datum/reagents/holder)
+/decl/material/liquid/retrovirals/affect_overdose(mob/living/M, total_dose)
 	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -406,7 +406,7 @@
 				break
 	..()
 
-/decl/material/liquid/clotting_agent/affect_overdose(var/mob/living/M)
+/decl/material/liquid/clotting_agent/affect_overdose(mob/living/M, total_dose)
 	var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(M, BP_HEART)
 	if(heart && prob(25))
 		heart.take_general_damage(rand(1,3))

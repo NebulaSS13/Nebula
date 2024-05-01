@@ -868,7 +868,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 		. = TRUE
 
-/decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(mob/living/M, total_dose) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.take_damage(REM, TOX)
 

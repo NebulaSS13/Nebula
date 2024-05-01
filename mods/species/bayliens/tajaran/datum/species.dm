@@ -18,9 +18,6 @@
 
 	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE
-
-	age_descriptor = /datum/appearance_descriptor/age/tajaran
-
 	available_bodytypes = list(/decl/bodytype/feline)
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/engineer

@@ -18,10 +18,17 @@
 	eye_flash_mod           = 1.2
 	nail_noun               = "claws"
 
+	age_descriptor = /datum/appearance_descriptor/age/lizard
+
 	default_sprite_accessories = list(
 		SAC_FRILLS = list(
 			/decl/sprite_accessory/frills/lizard/frills_long = "#192e19"
 		)
+	)
+
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 1.25,
+		/datum/appearance_descriptor/build =  1.25
 	)
 
 	override_organ_types = list(

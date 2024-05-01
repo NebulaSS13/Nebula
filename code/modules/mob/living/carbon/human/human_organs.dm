@@ -135,3 +135,6 @@
 /mob/living/carbon/human/delete_organs()
 	. = ..()
 	LAZYCLEARLIST(bad_external_organs)
+
+/mob/living/carbon/human/get_injured_organs()
+	return bad_external_organs
