@@ -44,8 +44,8 @@ var/global/list/_emotes_by_key
 
 	/// Two-dimensional array: first is list of genders, associated to a list of the sound effects to use.
 	var/list/emote_sound = null
-	/// As above, but used when check_synthetic() is true.
-	var/list/emote_sound_synthetic
+	/// If set to a string, will ask the bodytype of the user four a sound effect using the string.
+	var/bodytype_emote_sound
 	/// Volume of sound to play.
 	var/emote_volume = 50
 	/// As above, but used when check_synthetic() is true.
@@ -53,8 +53,8 @@ var/global/list/_emotes_by_key
 
 	/// This sound will be passed to the entire connected z-chunk if set.
 	var/broadcast_sound
-	/// As above but for synthetics.
-	var/broadcast_sound_synthetic
+	/// As above, but for broadcast.
+	var/bodytype_broadcast_sound
 	/// Volume for broadcast sound.
 	var/broadcast_volume = 15
 	/// How far does the sound broadcast.
@@ -146,24 +146,30 @@ var/global/list/_emotes_by_key
 	return emote_message_3p
 
 /decl/emote/proc/get_emote_sound(var/atom/user)
-	var/synth = check_synthetic(user)
-	if(synth && emote_sound_synthetic)
-		return list(
-			"sound" = emote_sound_synthetic,
-			"vol" =   emote_volume_synthetic
-		)
-	if(emote_sound)
-		return list(
-			"sound" = emote_sound,
+
+	var/use_emote_sound = emote_sound
+	if(bodytype_emote_sound && ismob(user))
+		var/mob/user_mob = user
+		var/bodytype_sounds = user_mob?.get_bodytype()?.emote_sounds[bodytype_emote_sound]
+		if(length(bodytype_sounds))
+			use_emote_sound = pick(bodytype_sounds)
+
+	if(use_emote_sound)
+		. = list(
+			"sound" = use_emote_sound,
 			"vol" =   emote_volume
 		)
 
-	if(synth && broadcast_sound_synthetic)
+	var/use_broadcast_sound = broadcast_sound
+	if(bodytype_broadcast_sound && ismob(user))
+		var/mob/user_mob = user
+		var/bodytype_sounds = user_mob?.get_bodytype()?.broadcast_emote_sounds[bodytype_broadcast_sound]
+		if(length(bodytype_sounds))
+			use_broadcast_sound = pick(bodytype_sounds)
+
+	if(use_broadcast_sound)
 		LAZYINITLIST(.)
-		.["broadcast"] = broadcast_sound_synthetic
-	else if(broadcast_sound)
-		LAZYINITLIST(.)
-		.["broadcast"] = broadcast_sound
+		LAZYSET(., "broadcast", use_broadcast_sound)
 
 /decl/emote/proc/finalize_target(var/atom/target)
 	return TRUE

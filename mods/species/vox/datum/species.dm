@@ -57,6 +57,9 @@
 	are in dire need of resources. They are four to five feet tall, reptillian, beaked, tailed and
 	quilled."}
 
+	scream_verb_1p = "shriek"
+	scream_verb_3p = "shrieks"
+
 	hidden_from_codex = FALSE
 
 	taste_sensitivity = TASTE_DULL

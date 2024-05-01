@@ -1235,7 +1235,8 @@
 		/decl/emote/visible/sidestep,
 		/decl/emote/visible/vomit
 	)
-	return default_emotes
+	. = ..() || list()
+	. |= default_emotes
 
 /mob/living/carbon/human/HandleBloodTrail(turf/T, old_loc)
 	// Tracking blood

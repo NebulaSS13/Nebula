@@ -10,6 +10,24 @@
 	eye_flash_mod = 1
 	eye_darksight_range = 2
 	associated_gender = PLURAL
+	emote_sounds = list(
+		"whistle" = list('sound/voice/emotes/longwhistle_robot.ogg'),
+		"qwhistle" = list('sound/voice/emotes/shortwhistle_robot.ogg'),
+		"swhistle" = list('sound/voice/emotes/summon_whistle_robot.ogg'),
+		"wwhistle" = list('sound/voice/emotes/wolfwhistle_robot.ogg')
+	)
+	broadcast_emote_sounds = list(
+		"swhistle" = list('sound/voice/emotes/summon_whistle_robot.ogg')
+	)
+	override_emote_sounds = list(
+		"cough" = list(
+			'sound/voice/emotes/machine_cougha.ogg',
+			'sound/voice/emotes/machine_coughb.ogg'
+		),
+		"sneeze" = list(
+			'sound/voice/emotes/machine_sneeze.ogg'
+		)
+	)
 	bodyfall_sounds = list(
 		'sound/foley/metal1.ogg'
 	)

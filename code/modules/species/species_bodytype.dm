@@ -64,6 +64,7 @@ var/global/list/bodytypes_by_category = list()
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
 	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
+	var/list/default_hug_message
 	var/list/hug_messages = list(
 		BP_L_HAND = list(
 			"$USER$ shakes $TARGET$'s hand.",
@@ -83,6 +84,24 @@ var/global/list/bodytypes_by_category = list()
 		)
 	)
 
+	var/list/override_emote_sounds = list(
+		"cough" = list(
+			'sound/voice/emotes/f_cougha.ogg',
+			'sound/voice/emotes/f_coughb.ogg'
+		),
+		"sneeze" = list(
+			'sound/voice/emotes/f_sneeze.ogg'
+		)
+	)
+	var/list/emote_sounds = list(
+		"whistle"  = list('sound/voice/emotes/longwhistle.ogg'),
+		"qwhistle" = list('sound/voice/emotes/shortwhistle.ogg'),
+		"wwhistle" = list('sound/voice/emotes/wolfwhistle.ogg'),
+		"swhistle" = list('sound/voice/emotes/summon_whistle.ogg')
+	)
+	var/list/broadcast_emote_sounds = list(
+		"swhistle" = list('sound/voice/emotes/summon_whistle.ogg')
+	)
 	var/list/bodyfall_sounds = list(
 		'sound/foley/meat1.ogg',
 		'sound/foley/meat2.ogg'
@@ -204,6 +223,10 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
+
+	if(length(override_emote_sounds))
+		for(var/emote_cat in override_emote_sounds)
+			emote_sounds[emote_cat] = override_emote_sounds[emote_cat]
 
 	if(!pref_name)
 		pref_name = name

@@ -18,3 +18,13 @@
 	icon_deformed         = 'icons/mob/human_races/species/human/deformed_body_male.dmi'
 	associated_gender     = MALE
 	onmob_state_modifiers = null
+	override_emote_sounds = list(
+		"cough" = list(
+			'sound/voice/emotes/m_cougha.ogg',
+			'sound/voice/emotes/m_coughb.ogg',
+			'sound/voice/emotes/m_coughc.ogg'
+		),
+		"sneeze" = list(
+			'sound/voice/emotes/m_sneeze.ogg'
+		)
+	)

@@ -65,10 +65,6 @@
 	emote_message_1p = "You boop."
 	emote_message_3p = "$USER$ boops."
 
-/decl/emote/audible/sneeze
-	key = "sneeze"
-	emote_message_3p = "$USER$ sneezes."
-
 /decl/emote/audible/sniff
 	key = "sniff"
 	emote_message_3p = "$USER$ sniffs."
@@ -151,16 +147,6 @@
 /decl/emote/audible/grunt
 	key = "grunt"
 	emote_message_3p = "$USER$ grunts."
-
-/decl/emote/audible/slap
-	key = "slap"
-	emote_message_1p_target = "<span class='warning'>You slap $TARGET$ across the face!</span>"
-	emote_message_1p = "You slap yourself across the face!"
-	emote_message_3p_target = "<span class='warning'>$USER$ slaps $TARGET$ across the face!</span>"
-	emote_message_3p = "$USER$ slaps $USER_SELF$ across the face!"
-	emote_sound = 'sound/effects/snap.ogg'
-	check_restraints = TRUE
-	check_range = 1
 
 /decl/emote/audible/bug_hiss
 	key = "bughiss"
