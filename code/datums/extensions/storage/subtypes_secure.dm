@@ -15,6 +15,8 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_sound = 'sound/effects/storage/briefcase.ogg'
+	open_sound = 'sound/items/containers/briefcase_unlock.ogg'
+	close_sound = 'sound/items/containers/briefcase_lock.ogg'
 
 /datum/storage/secure/safe
 	max_w_class = ITEM_SIZE_HUGE

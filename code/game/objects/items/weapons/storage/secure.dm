@@ -19,11 +19,24 @@
 	var/icon_locking = "secureb"
 	var/icon_opened = "secure0"
 
-/obj/item/secure_storage/Initialize()
+/obj/item/secure_storage/Initialize(ml, material_key)
 	. = ..()
-	set_extension(src, lock_type)
+	var/datum/extension/lockable/mylock = get_or_create_extension(src, lock_type)
+	events_repository.register(/decl/observ/lock_state_changed, mylock, src, /obj/item/secure_storage/proc/on_lock_state_changed)
 
-/obj/item/secure_storage/attackby(var/obj/item/W, var/mob/user)
+/obj/item/secure_storage/Destroy()
+	var/datum/extension/lockable/mylock = get_extension(src, lock_type)
+	events_repository.unregister(/decl/observ/lock_state_changed, mylock, src, /obj/item/secure_storage/proc/on_lock_state_changed)
+	. = ..()
+
+/obj/item/secure_storage/proc/on_lock_state_changed(datum/extension/lockable/L, old_locked, new_locked)
+	if(new_locked == old_locked)
+		return
+	//Make sure we close all uis when we turn the lock on
+	if(new_locked)
+		storage?.close_all()
+
+/obj/item/secure_storage/attackby(obj/item/W, mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.attackby(W, user))
 		return
@@ -32,7 +45,6 @@
 	if(!lock.locked)
 		. = ..()
 
-
 /obj/item/secure_storage/handle_mouse_drop(atom/over, mob/user, params)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
@@ -40,11 +52,11 @@
 		return TRUE
 	. = ..()
 
-/obj/item/secure_storage/attack_self(var/mob/user)
+/obj/item/secure_storage/attack_self(mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	lock.ui_interact(user)
 
-/obj/item/secure_storage/examine(mob/user, distance)
+/obj/item/secure_storage/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)

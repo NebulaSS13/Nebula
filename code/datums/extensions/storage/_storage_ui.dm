@@ -79,7 +79,7 @@
 	. = ..()
 
 /datum/storage_ui/default/on_open(mob/user)
-	if (user.active_storage)
+	if (user.active_storage && (user.active_storage != _storage)) //prevents the ui closing immediatly on opening
 		user.active_storage.close(user)
 
 /datum/storage_ui/default/after_close(mob/user)
