@@ -197,6 +197,7 @@ var/global/list/bodytypes_by_category = list()
 		"Your chilly flesh stands out in goosebumps."
 	)
 
+	var/list/default_emotes
 	/// Set to FALSE if the mob will update prone icon based on state rather than transform.
 	var/rotate_on_prone = TRUE
 

@@ -396,15 +396,19 @@
 	if(!user.try_unequip(src))
 		return
 
-	var/obj/item/chems/food/organ/O = new(get_turf(src))
-	O.SetName(name)
-	O.appearance = src
+	target.attackby(convert_to_food(user), user)
+
+/obj/item/organ/proc/convert_to_food(mob/user)
+	var/obj/item/chems/food/organ/yum = new(get_turf(src))
+	yum.SetName(name)
+	yum.appearance = src
 	if(reagents && reagents.total_volume)
-		reagents.trans_to(O, reagents.total_volume)
-	transfer_fingerprints_to(O)
-	user.put_in_active_hand(O)
+		reagents.trans_to(yum, reagents.total_volume)
+	transfer_fingerprints_to(yum)
+	if(user)
+		user.put_in_active_hand(yum)
 	qdel(src)
-	target.attackby(O, user)
+	return yum
 
 /obj/item/organ/proc/can_feel_pain()
 	return !(bodytype.body_flags & BODY_FLAG_NO_PAIN)
@@ -629,3 +633,12 @@ var/global/list/ailment_reference_cache = list()
 			return FALSE
 		vital_to_owner = (organ_tag in root_bodytype.vital_organs)
 	return vital_to_owner
+
+/obj/item/organ/proc/place_butcher_product(decl/butchery_data/butchery_decl)
+	if(butchery_decl.meat_type)
+		butchery_decl.place_products(null, material?.type, clamp(w_class, 1, 3), butchery_decl.meat_type)
+
+/obj/item/organ/physically_destroyed(skip_qdel)
+	if(!owner && !BP_IS_PROSTHETIC(src) && species?.butchery_data)
+		place_butcher_product(GET_DECL(species.butchery_data))
+	return ..()
