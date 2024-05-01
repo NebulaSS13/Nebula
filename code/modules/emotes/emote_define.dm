@@ -68,6 +68,8 @@ var/global/list/_emotes_by_key
 	var/check_restraints
 	/// falsy, or a range outside which the emote will not work
 	var/check_range
+	/// For emotes with physical effecets.
+	var/check_adjacent
 	/// Do we need to be awake to emote this?
 	var/conscious = TRUE
 	/// If >0, restricts emote visibility to viewers within range.
@@ -171,8 +173,8 @@ var/global/list/_emotes_by_key
 		LAZYINITLIST(.)
 		LAZYSET(., "broadcast", use_broadcast_sound)
 
-/decl/emote/proc/finalize_target(var/atom/target)
-	return TRUE
+/decl/emote/proc/finalize_target(atom/user, atom/target)
+	return istype(target) && (!check_adjacent || target.Adjacent(user))
 
 /decl/emote/proc/do_emote(var/atom/user, var/extra_params)
 
@@ -180,7 +182,7 @@ var/global/list/_emotes_by_key
 		var/mob/M = user
 		if(M.restrained())
 			to_chat(user, SPAN_WARNING("You are restrained and cannot do that."))
-			return
+			return FALSE
 
 	if(emote_cooldown)
 		var/user_ref = "\ref[user]"
@@ -212,7 +214,7 @@ var/global/list/_emotes_by_key
 
 	if(mandatory_targetted_emote && !target)
 		to_chat(user, SPAN_WARNING("You can't do that to thin air."))
-		return
+		return FALSE
 
 	var/use_1p = get_emote_message_1p(user, target, extra_params)
 	if(use_1p)
@@ -243,14 +245,14 @@ var/global/list/_emotes_by_key
 				var/mob/living/L = user
 				if(HAS_STATUS(L, STAT_SILENCE))
 					M.visible_message(message = "[user] opens their mouth silently!", self_message = "You cannot say anything!", blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
-					return
-				else
-					M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, hearing_distance = use_range, checkghosts = /datum/client_preference/ghost_sight, radio_message = use_radio)
+					return FALSE
+				M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, hearing_distance = use_range, checkghosts = /datum/client_preference/ghost_sight, radio_message = use_radio)
 		else
 			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, range = use_range, checkghosts = /datum/client_preference/ghost_sight)
 
 	do_extra(user, target)
 	do_sound(user)
+	return TRUE
 
 /decl/emote/proc/replace_target_tokens(var/msg, var/atom/target)
 	. = msg

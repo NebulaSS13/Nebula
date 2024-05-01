@@ -16,4 +16,7 @@ SUBSYSTEM_DEF(misc_late)
 			lift.open_doors()
 	turbolifts_to_open.Cut()
 
+	// Pre-populate the emote list.
+	decls_repository.get_decls_of_type(/decl/emote)
+
 	. = ..()

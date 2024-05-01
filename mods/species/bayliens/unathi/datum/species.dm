@@ -12,6 +12,7 @@
 	)
 
 /decl/butchery_data/humanoid/unathi
+	meat_name = "lizard"
 	skin_material = /decl/material/solid/organic/skin/lizard
 
 /decl/species/unathi

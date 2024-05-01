@@ -90,21 +90,6 @@
 	key = "chuckle"
 	emote_message_3p = "$USER$ chuckles."
 
-/decl/emote/audible/cough
-	key = "cough"
-
-/decl/emote/audible/cough/mob_can_use(mob/living/user, assume_available = FALSE)
-	. = ..()
-	if(.)
-		var/obj/item/organ/internal/lungs/lung = user.get_organ(BP_LUNGS)
-		. = lung?.active_breathing && !user.isSynthetic()
-
-/decl/emote/audible/cough/do_emote(var/mob/living/user, var/extra_params)
-	if(!istype(user))
-		to_chat(user, SPAN_WARNING("You are unable to cough."))
-		return
-	user.cough(deliberate = TRUE)
-
 /decl/emote/audible/cry
 	key = "cry"
 	emote_message_3p = "$USER$ cries."

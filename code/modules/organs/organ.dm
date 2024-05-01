@@ -24,6 +24,7 @@
 	var/decl/species/species               // Original species.
 	var/decl/bodytype/bodytype             // Original bodytype.
 	var/list/ailments                      // Current active ailments if any.
+	var/meat_name                          // Taken from first owner.
 
 	// Damage vars.
 	var/damage = 0                         // Current damage to the organ
@@ -564,6 +565,8 @@ var/global/list/ailment_reference_cache = list()
 		return
 
 	owner = target
+	if(owner && isnull(meat_name))
+		meat_name = owner.get_butchery_product_name()
 	vital_to_owner = null
 	action_button_name = initial(action_button_name)
 	if(owner)
@@ -636,7 +639,10 @@ var/global/list/ailment_reference_cache = list()
 
 /obj/item/organ/proc/place_butcher_product(decl/butchery_data/butchery_decl)
 	if(butchery_decl.meat_type)
-		butchery_decl.place_products(null, material?.type, clamp(w_class, 1, 3), butchery_decl.meat_type)
+		var/list/products = butchery_decl.place_products(owner, material?.type, clamp(w_class, 1, 3), butchery_decl.meat_type)
+		if(meat_name)
+			for(var/obj/item/chems/food/butchery/product in products)
+				product.set_meat_name(meat_name)
 
 /obj/item/organ/physically_destroyed(skip_qdel)
 	if(!owner && !BP_IS_PROSTHETIC(src) && species?.butchery_data)

@@ -1,4 +1,5 @@
 /decl/butchery_data/humanoid/skrell
+	meat_name = "calamari"
 	meat_type = /obj/item/chems/food/butchery/meat/fish/octopus/skrell
 	bone_material = /decl/material/solid/organic/bone/cartilage
 

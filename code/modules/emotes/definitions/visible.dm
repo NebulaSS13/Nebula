@@ -365,5 +365,6 @@
 	var/mob/living/carbon/human/H = user
 	if(istype(H))
 		H.vomit(deliberate = TRUE)
-	else
-		to_chat(src, SPAN_WARNING("You are unable to vomit."))
+		return TRUE
+	to_chat(src, SPAN_WARNING("You are unable to vomit."))
+	return FALSE

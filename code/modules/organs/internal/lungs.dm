@@ -362,7 +362,7 @@
 	name = "lungs and gills"
 	has_gills = TRUE
 
-/mob/living/proc/cough(var/deliberate = FALSE)
+/mob/living/proc/cough(silent = FALSE, deliberate = FALSE)
 
 	var/obj/item/organ/internal/lungs/lung = get_organ(BP_LUNGS)
 	if(!lung || !lung.active_breathing || isSynthetic() || stat == DEAD || (deliberate && last_cough + 3 SECONDS > world.time))
@@ -377,7 +377,8 @@
 		to_chat(src, SPAN_WARNING("You cannot do that right now."))
 		return
 
-	audible_message("<b>[src]</b> coughs!", "You cough!", radio_message = "coughs!") // styled like an emote
+	if(!silent)
+		audible_message("<b>[src]</b> coughs!", "You cough!", radio_message = "coughs!") // styled like an emote
 
 	last_cough = world.time
 

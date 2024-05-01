@@ -12,6 +12,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(istype(human_user))
 		human_user.animate_tail_once()
+	return TRUE
 
 /decl/emote/visible/tail/wag
 	key = "wag"
@@ -20,6 +21,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(istype(human_user))
 		human_user.animate_tail_start()
+	return TRUE
 
 /decl/emote/visible/tail/sway
 	key = "sway"
@@ -28,6 +30,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(istype(human_user))
 		human_user.animate_tail_start()
+	return TRUE
 
 /decl/emote/visible/tail/qwag
 	key = "qwag"
@@ -36,6 +39,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(istype(human_user))
 		human_user.animate_tail_fast()
+	return TRUE
 
 /decl/emote/visible/tail/fastsway
 	key = "fastsway"
@@ -44,6 +48,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(istype(human_user))
 		human_user.animate_tail_fast()
+	return TRUE
 
 /decl/emote/visible/tail/swag
 	key = "swag"
@@ -52,6 +57,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(istype(human_user))
 		human_user.animate_tail_stop()
+	return TRUE
 
 /decl/emote/visible/tail/stopsway
 	key = "stopsway"
@@ -60,3 +66,4 @@
 	var/mob/living/carbon/human/human_user = user
 	if(istype(human_user))
 		human_user.animate_tail_stop()
+	return TRUE
