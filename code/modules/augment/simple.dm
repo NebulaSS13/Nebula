@@ -55,7 +55,7 @@
 		return
 	retracting = TRUE
 	holding.canremove = TRUE
-	if(holding.loc == owner)
+	if(owner && holding.loc == owner)
 		if(!owner.drop_from_inventory(holding, src))
 			to_chat(owner, SPAN_WARNING("\The [holding.name] fails to retract."))
 			holding.canremove = FALSE

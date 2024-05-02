@@ -18,21 +18,6 @@
 	organ_tag = pick(allowed_organs)
 	update_parent_organ()
 
-//General expectation is onInstall and onRemoved are overwritten to add effects to augmentee
-/obj/item/organ/internal/augment/on_add_effects()
-	if(..() && istype(owner))
-		onInstall()
-
-/obj/item/organ/internal/augment/on_remove_effects(mob/living/last_owner)
-	onRemove()
-	. = ..()
-
-//#FIXME: merge those with removal/install functions
-/obj/item/organ/internal/augment/proc/onInstall()
-	return
-/obj/item/organ/internal/augment/proc/onRemove()
-	return
-
 /obj/item/organ/internal/augment/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W) && allowed_organs.len > 1)
 		//Here we can adjust location for implants that allow multiple slots
