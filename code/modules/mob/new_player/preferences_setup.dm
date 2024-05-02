@@ -28,8 +28,11 @@
 			hair_colour = current_bodytype.get_random_hair_color()
 			facial_hair_colour = prob(75) ? hair_colour : current_bodytype.get_random_facial_hair_color()
 
-	if(all_underwear)
+	if(!islist(all_underwear))
+		all_underwear = list()
+	else if(length(all_underwear))
 		all_underwear.Cut()
+
 	if(current_bodytype.appearance_flags & HAS_UNDERWEAR)
 		for(var/datum/category_group/underwear/WRC in global.underwear.categories)
 			var/datum/category_item/underwear/WRI = pick(WRC.items)

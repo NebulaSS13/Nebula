@@ -321,9 +321,11 @@
 		if(persistantMind)
 			persistantMind.transfer_to(stored_mmi.brainmob)
 		else
-			var/response = input(find_dead_player(ownerckey, 1), "Your [initial(stored_mmi.name)] has been removed from your body. Do you wish to return to life?", "Robotic Rebirth") as anything in list("Yes", "No")
-			if(response == "Yes")
-				persistantMind.transfer_to(stored_mmi.brainmob)
+			var/mob/dead_player = find_dead_player(ownerckey, 1)
+			if(dead_player?.client)
+				var/response = input(dead_player, "Your [initial(stored_mmi.name)] has been removed from your body. Do you wish to return to life?", "Robotic Rebirth") as anything in list("Yes", "No")
+				if(response == "Yes")
+					persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
 
 //Since the mmi_holder is an horrible hacky pos we turn it into a mmi on drop, since it shouldn't exist outside a mob
