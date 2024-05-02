@@ -107,3 +107,20 @@
  */
 /mob/living/proc/can_devour(atom/movable/victim)
 	return FALSE
+
+/mob/living/verb/sniff_verb()
+	set name = "Sniff"
+	set desc = "Smell the local area."
+	set category = "IC"
+	set src = usr
+
+	var/decl/species/my_species = get_species()
+	if(incapacitated())
+		to_chat(src, SPAN_WARNING("You can't sniff right now."))
+		return
+
+	if(my_species && my_species.sniff_message_3p && my_species.sniff_message_1p)
+		visible_message(SPAN_NOTICE("\The [src] [my_species.sniff_message_3p]."), SPAN_NOTICE(my_species.sniff_message_1p))
+	else
+		visible_message(SPAN_NOTICE("\The [src] sniffs the air."), SPAN_NOTICE("You sniff the air."))
+	LAZYCLEARLIST(smell_cooldown)

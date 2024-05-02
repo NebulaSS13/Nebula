@@ -13,13 +13,13 @@
 	base_eye_color =  "#3f0505"
 	mob_size = MOB_SIZE_LARGE
 	has_organ = list(
-		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/serpentid,
-		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/serpentid,
-		BP_TRACH =             /obj/item/organ/internal/lungs/insectoid/serpentid,
-		BP_HEART =             /obj/item/organ/internal/heart/open,
-		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/serpentid,
-		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
+		BP_BRAIN           = /obj/item/organ/internal/brain/insectoid/serpentid,
+		BP_EYES            = /obj/item/organ/internal/eyes/insectoid/serpentid,
+		BP_TRACH           = /obj/item/organ/internal/lungs/insectoid/serpentid,
+		BP_HEART           = /obj/item/organ/internal/heart/open,
+		BP_LIVER           = /obj/item/organ/internal/liver/insectoid/serpentid,
+		BP_STOMACH         = /obj/item/organ/internal/stomach/insectoid,
+		BP_PHEROMONE_GLAND = /obj/item/organ/internal/pheromone_gland
 	)
 
 	eye_darksight_range = 8
@@ -28,20 +28,20 @@
 	eye_icon = 'mods/species/serpentid/icons/eyes.dmi'
 
 	has_limbs = list(
-		BP_CHEST =        list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
-		BP_GROIN =        list("path" = /obj/item/organ/external/groin/insectoid/serpentid),
-		BP_HEAD =         list("path" = /obj/item/organ/external/head/insectoid/serpentid),
-		BP_L_ARM =        list("path" = /obj/item/organ/external/arm/insectoid),
-		BP_L_HAND =       list("path" = /obj/item/organ/external/hand/insectoid),
+		BP_CHEST        = list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
+		BP_GROIN        = list("path" = /obj/item/organ/external/groin/insectoid/serpentid),
+		BP_HEAD         = list("path" = /obj/item/organ/external/head/insectoid/serpentid),
+		BP_L_ARM        = list("path" = /obj/item/organ/external/arm/insectoid),
+		BP_L_HAND       = list("path" = /obj/item/organ/external/hand/insectoid),
 		BP_L_HAND_UPPER = list("path" = /obj/item/organ/external/hand/insectoid/upper),
-		BP_R_ARM =        list("path" = /obj/item/organ/external/arm/right/insectoid),
-		BP_R_HAND =       list("path" = /obj/item/organ/external/hand/right/insectoid),
+		BP_R_ARM        = list("path" = /obj/item/organ/external/arm/right/insectoid),
+		BP_R_HAND       = list("path" = /obj/item/organ/external/hand/right/insectoid),
 		BP_R_HAND_UPPER = list("path" = /obj/item/organ/external/hand/right/insectoid/upper),
-		BP_R_LEG =        list("path" = /obj/item/organ/external/leg/right/insectoid/serpentid),
-		BP_L_LEG =        list("path" = /obj/item/organ/external/leg/insectoid/serpentid),
-		BP_L_FOOT =       list("path" = /obj/item/organ/external/foot/insectoid/serpentid),
-		BP_R_FOOT =       list("path" = /obj/item/organ/external/foot/right/insectoid/serpentid)
-		)
+		BP_R_LEG        = list("path" = /obj/item/organ/external/leg/right/insectoid/serpentid),
+		BP_L_LEG        = list("path" = /obj/item/organ/external/leg/insectoid/serpentid),
+		BP_L_FOOT       = list("path" = /obj/item/organ/external/foot/insectoid/serpentid),
+		BP_R_FOOT       = list("path" = /obj/item/organ/external/foot/right/insectoid/serpentid)
+	)
 
 	limb_mapping = list(
 		BP_L_HAND = list(BP_L_HAND, BP_L_HAND_UPPER),
