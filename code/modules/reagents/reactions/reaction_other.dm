@@ -63,7 +63,7 @@
 /decl/chemical_reaction/crystal_agent
 	name = "Crystallizing Agent"
 	result = /decl/material/liquid/crystal_agent
-	required_reagents = list(/decl/material/solid/silicon = 1, /decl/material/solid/metal/tungsten = 1, /decl/material/liquid/acid/polyacid = 1)
+	required_reagents = list(/decl/material/solid/silicon = 1, /decl/material/solid/metal/tungsten = 1, /decl/material/liquid/acid = 1)
 	minimum_temperature = 150 CELSIUS
 	maximum_temperature = 200 CELSIUS
 	result_amount = 3
