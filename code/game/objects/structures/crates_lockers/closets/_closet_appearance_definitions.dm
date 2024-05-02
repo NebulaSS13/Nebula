@@ -523,6 +523,7 @@
 	color = COLOR_GRAY40
 
 /decl/closet_appearance/crate/chest
+	color = COLOR_WHITE
 	base_icon =  'icons/obj/closets/bases/chest.dmi'
 
 /decl/closet_appearance/crate/plastic
@@ -655,6 +656,9 @@
 	color = WOOD_COLOR_RICH
 	decals = null
 	extra_decals = null
+
+/decl/closet_appearance/cabinet/nocolor
+	color = COLOR_WHITE
 
 /decl/closet_appearance/cabinet/secure
 	can_lock = TRUE

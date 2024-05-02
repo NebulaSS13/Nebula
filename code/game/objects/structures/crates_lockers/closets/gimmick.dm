@@ -3,6 +3,15 @@
 	desc = "Old will forever be in fashion."
 	closet_appearance = /decl/closet_appearance/cabinet
 
+/obj/structure/closet/cabinet/wooden
+	desc = "A stout cabinet."
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	material = /decl/material/solid/organic/wood
+	closet_appearance = /decl/closet_appearance/cabinet/nocolor
+
+/obj/structure/closet/cabinet/wooden/ebony
+	material = /decl/material/solid/organic/wood/ebony
+
 /obj/structure/closet/acloset
 	name = "strange closet"
 	desc = "It looks alien!"
