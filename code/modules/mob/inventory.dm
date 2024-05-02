@@ -27,6 +27,22 @@
 		to_chat(src, SPAN_WARNING("You are unable to equip that."))
 
 /mob/proc/can_equip_anything_to_slot(var/slot)
+
+	// Held item slots may not have the dexterity to hold an item.
+	if(slot in get_held_item_slots())
+		var/datum/inventory_slot/gripper/hand = get_inventory_slot_datum(slot)
+		// No actual held item slot, this is a bug or an error.
+		if(!istype(hand))
+			return FALSE
+		// Hand is organ based, ask the organ if it has the required dexterity.
+		if(hand.requires_organ_tag)
+			var/obj/item/organ/external/hand_organ = get_organ(hand.requires_organ_tag)
+			if(!(hand_organ.get_manual_dexterity() & DEXTERITY_HOLD_ITEM))
+				return FALSE
+		// Hand is not organ based, ask the gripper slot directly.
+		else if(!(hand.get_dexterity() & DEXTERITY_HOLD_ITEM))
+			return FALSE
+
 	return (slot in get_all_available_equipment_slots())
 
 //This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
