@@ -434,7 +434,7 @@
 	var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(I && istype(I) && istype(affected))
-		target.remove_organ(I, detach = TRUE)
+		target.remove_organ(I, drop_organ = FALSE, detach = TRUE)
 	..()
 
 /decl/surgery_step/robotics/detach_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
