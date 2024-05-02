@@ -187,13 +187,17 @@
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
-	if(!Target && !length(get_held_items()))
+	var/obj/item/I = get_active_hand()
+	if(!istype(I))
 		if(length(get_active_grabs()))
 			for(var/obj/item/grab/grab in get_active_grabs())
 				qdel(grab)
 				. = TRUE
 			return
-	. = drop_from_inventory(get_active_hand(), Target)
+		return FALSE
+	else if(!I.mob_can_unequip(src, get_equipped_slot_for_item(I)))
+		return FALSE
+	. = drop_from_inventory(I, Target)
 
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
@@ -224,7 +228,7 @@
 
 /mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
-		return 1
+		return TRUE
 	var/slot = get_equipped_slot_for_item(I)
 	if(!slot && !istype(I.loc, /obj/item/rig_module))
 		return 1 //already unequipped, so success
