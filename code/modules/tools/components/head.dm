@@ -71,6 +71,12 @@ var/global/list/_tool_properties_cache = list()
 	icon_state           = "shovel"
 	tool_type            = /obj/item/tool/shovel
 
+/obj/item/tool_component/head/handaxe
+	name                 = "hand axe head"
+	desc                 = "The head of a hand axe."
+	icon_state           = "handaxe"
+	tool_type            = /obj/item/tool/axe
+
 /obj/item/tool_component/head/pickaxe
 	name                 = "pickaxe head"
 	desc                 = "The head of a pickaxe."

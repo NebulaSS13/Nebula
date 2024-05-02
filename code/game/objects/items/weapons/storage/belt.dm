@@ -184,7 +184,7 @@
 	icon = 'icons/clothing/belt/machete.dmi'
 	overlay_flags = BELT_OVERLAY_HOLSTER
 	storage = /datum/storage/holster/machete
-	can_holster = list(/obj/item/hatchet/machete)
+	can_holster = list(/obj/item/tool/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 

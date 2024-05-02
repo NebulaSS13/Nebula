@@ -79,7 +79,7 @@
 	desc = "A handsome synthetic leather sheath with matching belt."
 	icon = 'icons/clothing/accessories/holsters/holster_machete.dmi'
 	can_holster = list(
-		/obj/item/hatchet/machete,
+		/obj/item/tool/machete,
 		/obj/item/knife/kitchen/cleaver,
 		/obj/item/sword/katana
 	)

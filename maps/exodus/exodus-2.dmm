@@ -20401,7 +20401,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/crew_quarters/kitchen)
 "aQX" = (
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /obj/item/tool/hoe/mini,
 /obj/effect/floor_decal/corner/lime{
 	dir = 9
@@ -20449,7 +20449,7 @@
 "aRf" = (
 /obj/structure/table,
 /obj/item/tool/hoe/mini,
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /turf/floor/tiled/steel_grid,
 /area/exodus/hydroponics)
 "aRg" = (

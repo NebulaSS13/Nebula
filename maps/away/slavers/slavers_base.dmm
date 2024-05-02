@@ -115,7 +115,7 @@
 /area/slavers_base/mort)
 "aA" = (
 /obj/structure/rack,
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /turf/floor/airless,
 /area/slavers_base/mort)
 "aB" = (
@@ -1796,7 +1796,7 @@
 "fa" = (
 /obj/structure/table,
 /obj/item/firstaid/regular,
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /turf/floor/tiled/airless,
 /area/slavers_base/med)
 "fb" = (

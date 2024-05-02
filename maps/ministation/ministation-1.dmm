@@ -5726,7 +5726,7 @@
 /obj/item/scanner/plant,
 /obj/item/wirecutters/clippers,
 /obj/item/book/skill/service/botany,
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /obj/item/tool/hoe/mini,
 /obj/item/tool/hoe/mini,
 /obj/item/tool/spade,

@@ -14,7 +14,7 @@
 	path = /obj/item/gun/projectile/flare
 
 /datum/fabricator_recipe/arms_ammo/hidden
-	path = /obj/item/hatchet/machete/steel
+	path = /obj/item/tool/machete/steel
 	hidden = TRUE
 
 /datum/fabricator_recipe/arms_ammo/hidden/shotgun
