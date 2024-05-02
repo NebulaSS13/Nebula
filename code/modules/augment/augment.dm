@@ -27,6 +27,11 @@
 		return
 	..()
 
+/obj/item/organ/internal/augment/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
+	. = ..()
+	parent_organ = affected.organ_tag
+	update_parent_organ()
+
 /obj/item/organ/internal/augment/proc/update_parent_organ()
 	//This tries to match a parent organ to an augment slot
 	//This is intended to match the possible positions to a parent organ
@@ -55,7 +60,6 @@
 	else if(organ_tag == BP_AUGMENT_CHEST_ACTIVE || organ_tag == BP_AUGMENT_CHEST_ARMOUR)
 		parent_organ = BP_CHEST
 		descriptor = "chest."
-
 
 /obj/item/organ/internal/augment/examine(mob/user, distance)
 	. = ..()
