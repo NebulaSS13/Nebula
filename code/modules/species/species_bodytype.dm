@@ -64,6 +64,7 @@ var/global/list/bodytypes_by_category = list()
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
 	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
+	var/list/default_hug_message
 	var/list/hug_messages = list(
 		BP_L_HAND = list(
 			"$USER$ shakes $TARGET$'s hand.",
@@ -83,6 +84,24 @@ var/global/list/bodytypes_by_category = list()
 		)
 	)
 
+	var/list/override_emote_sounds = list(
+		"cough" = list(
+			'sound/voice/emotes/f_cougha.ogg',
+			'sound/voice/emotes/f_coughb.ogg'
+		),
+		"sneeze" = list(
+			'sound/voice/emotes/f_sneeze.ogg'
+		)
+	)
+	var/list/emote_sounds = list(
+		"whistle"  = list('sound/voice/emotes/longwhistle.ogg'),
+		"qwhistle" = list('sound/voice/emotes/shortwhistle.ogg'),
+		"wwhistle" = list('sound/voice/emotes/wolfwhistle.ogg'),
+		"swhistle" = list('sound/voice/emotes/summon_whistle.ogg')
+	)
+	var/list/broadcast_emote_sounds = list(
+		"swhistle" = list('sound/voice/emotes/summon_whistle.ogg')
+	)
 	var/list/bodyfall_sounds = list(
 		'sound/foley/meat1.ogg',
 		'sound/foley/meat2.ogg'
@@ -197,12 +216,116 @@ var/global/list/bodytypes_by_category = list()
 		"Your chilly flesh stands out in goosebumps."
 	)
 
+	/// Add emotes to this list to remove them from defaults (ie. blinking for a species with no eyes)
+	var/list/removed_emotes
+	/// Add emotes to this list to add them to the defaults (ie. a humanoid species that also has a purr)
+	var/list/additional_emotes
+	/// Generalized emote list available to mobs with this bodytype.
+	var/list/default_emotes = list(
+		/decl/emote/visible/blink,
+		/decl/emote/audible/synth,
+		/decl/emote/audible/synth/ping,
+		/decl/emote/audible/synth/buzz,
+		/decl/emote/audible/synth/confirm,
+		/decl/emote/audible/synth/deny,
+		/decl/emote/visible/nod,
+		/decl/emote/visible/shake,
+		/decl/emote/visible/shiver,
+		/decl/emote/visible/collapse,
+		/decl/emote/audible/gasp,
+		/decl/emote/audible/sneeze,
+		/decl/emote/audible/sniff,
+		/decl/emote/audible/snore,
+		/decl/emote/audible/whimper,
+		/decl/emote/audible/yawn,
+		/decl/emote/audible/clap,
+		/decl/emote/audible/chuckle,
+		/decl/emote/audible/cough,
+		/decl/emote/audible/cry,
+		/decl/emote/audible/sigh,
+		/decl/emote/audible/laugh,
+		/decl/emote/audible/mumble,
+		/decl/emote/audible/grumble,
+		/decl/emote/audible/groan,
+		/decl/emote/audible/moan,
+		/decl/emote/audible/grunt,
+		/decl/emote/audible/slap,
+		/decl/emote/audible/deathgasp,
+		/decl/emote/audible/giggle,
+		/decl/emote/audible/scream,
+		/decl/emote/visible/airguitar,
+		/decl/emote/visible/blink_r,
+		/decl/emote/visible/bow,
+		/decl/emote/visible/salute,
+		/decl/emote/visible/flap,
+		/decl/emote/visible/aflap,
+		/decl/emote/visible/drool,
+		/decl/emote/visible/eyebrow,
+		/decl/emote/visible/twitch,
+		/decl/emote/visible/dance,
+		/decl/emote/visible/twitch_v,
+		/decl/emote/visible/faint,
+		/decl/emote/visible/frown,
+		/decl/emote/visible/blush,
+		/decl/emote/visible/wave,
+		/decl/emote/visible/glare,
+		/decl/emote/visible/stare,
+		/decl/emote/visible/look,
+		/decl/emote/visible/point,
+		/decl/emote/visible/raise,
+		/decl/emote/visible/grin,
+		/decl/emote/visible/shrug,
+		/decl/emote/visible/smile,
+		/decl/emote/visible/pale,
+		/decl/emote/visible/tremble,
+		/decl/emote/visible/wink,
+		/decl/emote/visible/hug,
+		/decl/emote/visible/dap,
+		/decl/emote/visible/signal,
+		/decl/emote/visible/handshake,
+		/decl/emote/visible/afold,
+		/decl/emote/visible/alook,
+		/decl/emote/visible/eroll,
+		/decl/emote/visible/hbow,
+		/decl/emote/visible/hip,
+		/decl/emote/visible/holdup,
+		/decl/emote/visible/hshrug,
+		/decl/emote/visible/crub,
+		/decl/emote/visible/erub,
+		/decl/emote/visible/fslap,
+		/decl/emote/visible/ftap,
+		/decl/emote/visible/hrub,
+		/decl/emote/visible/hspread,
+		/decl/emote/visible/pocket,
+		/decl/emote/visible/rsalute,
+		/decl/emote/visible/rshoulder,
+		/decl/emote/visible/squint,
+		/decl/emote/visible/tfist,
+		/decl/emote/visible/tilt,
+		/decl/emote/visible/spin,
+		/decl/emote/visible/sidestep,
+		/decl/emote/visible/vomit,
+		/decl/emote/audible/whistle,
+		/decl/emote/audible/whistle/quiet,
+		/decl/emote/audible/whistle/wolf,
+		/decl/emote/audible/whistle/summon
+	)
 	/// Set to FALSE if the mob will update prone icon based on state rather than transform.
 	var/rotate_on_prone = TRUE
 
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
+
+	if(length(removed_emotes))
+		LAZYREMOVE(default_emotes, removed_emotes)
+
+	if(length(additional_emotes))
+		LAZYDISTINCTADD(default_emotes, additional_emotes)
+
+	if(length(override_emote_sounds))
+		for(var/emote_cat in override_emote_sounds)
+			emote_sounds[emote_cat] = override_emote_sounds[emote_cat]
 
 	if(!pref_name)
 		pref_name = name

@@ -72,6 +72,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/unspeakable_langs = list()            // The languages the species can't speak at all.
 	var/list/speech_sounds                    // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                    // The likelihood of a speech sound playing.
+	var/scream_verb_1p = "scream"
+	var/scream_verb_3p = "screams"
 
 	// Combat vars.
 	var/total_health = DEFAULT_SPECIES_HEALTH  // Point at which the mob will enter crit.

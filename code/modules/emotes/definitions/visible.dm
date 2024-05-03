@@ -53,9 +53,10 @@
 	key = "collapse"
 	emote_message_3p = "$USER$ collapses!"
 
-/decl/emote/visible/collapse/do_extra(var/mob/user)
-	if(istype(user))
-		SET_STATUS_MAX(user, STAT_PARA, 2)
+/decl/emote/visible/collapse/do_extra(atom/user)
+	if(ismob(user))
+		var/mob/user_mob = user
+		SET_STATUS_MAX(user_mob, STAT_PARA, 2)
 
 /decl/emote/visible/flash
 	key = "flash"
@@ -113,9 +114,10 @@
 	key = "faint"
 	emote_message_3p = "$USER$ faints."
 
-/decl/emote/visible/faint/do_extra(var/mob/user)
-	if(istype(user) && !HAS_STATUS(user, STAT_ASLEEP))
-		SET_STATUS_MAX(user, STAT_ASLEEP, 10)
+/decl/emote/visible/faint/do_extra(atom/user)
+	var/mob/user_mob = user
+	if(istype(user_mob) && !HAS_STATUS(user_mob, STAT_ASLEEP))
+		SET_STATUS_MAX(user_mob, STAT_ASLEEP, 10)
 
 /decl/emote/visible/frown
 	key = "frown"
@@ -336,9 +338,10 @@
 	emote_message_3p = "$USER$ spins!"
 	emote_delay = 2 SECONDS
 
-/decl/emote/visible/spin/do_extra(mob/user)
-	if(istype(user))
-		user.spin(emote_delay, 1)
+/decl/emote/visible/spin/do_extra(atom/user)
+	if(ismob(user))
+		var/mob/user_mob = user
+		user_mob.spin(emote_delay, 1)
 
 /decl/emote/visible/sidestep
 	key = "sidestep"
@@ -346,12 +349,11 @@
 	emote_message_3p = "$USER$ steps rhythmically and moves side to side."
 	emote_delay = 1.2 SECONDS
 
-/decl/emote/visible/sidestep/do_extra(mob/user)
-	if(istype(user))
-		animate(user, pixel_x = 5, time = 5)
-		sleep(3)
-		animate(user, pixel_x = -5, time = 5)
-		animate(pixel_x = user.default_pixel_x, pixel_y = user.default_pixel_x, time = 2)
+/decl/emote/visible/sidestep/do_extra(atom/user)
+	animate(user, pixel_x = 5, time = 5)
+	sleep(3)
+	animate(user, pixel_x = -5, time = 5)
+	animate(pixel_x = user.default_pixel_x, pixel_y = user.default_pixel_x, time = 2)
 
 /decl/emote/visible/vomit
 	key = "vomit"
@@ -363,5 +365,6 @@
 	var/mob/living/carbon/human/H = user
 	if(istype(H))
 		H.vomit(deliberate = TRUE)
-	else
-		to_chat(src, SPAN_WARNING("You are unable to vomit."))
+		return TRUE
+	to_chat(src, SPAN_WARNING("You are unable to vomit."))
+	return FALSE

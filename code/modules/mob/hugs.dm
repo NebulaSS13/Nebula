@@ -7,7 +7,7 @@ var/global/list/_default_hug_messages = list(
 
 /mob/proc/get_hug_zone_messages(var/zone)
 	var/decl/bodytype/bodytype = get_bodytype()
-	return bodytype?.get_hug_zone_messages(zone) || global._default_hug_messages[zone]
+	return bodytype?.get_hug_zone_messages(zone) || bodytype?.default_hug_message || global._default_hug_messages[zone]
 
 /mob/proc/attempt_hug(var/mob/living/target, var/hug_3p, var/hug_1p)
 

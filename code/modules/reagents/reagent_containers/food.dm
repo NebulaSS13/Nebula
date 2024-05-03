@@ -60,11 +60,9 @@
 	return FALSE
 
 /obj/item/chems/food/attack_self(mob/user)
-	if(is_edible(user))
-		use_on_mob(user, user)
-	else
-		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
-	return TRUE
+	if(is_edible(user) && handle_eaten_by_mob(user, user) != EATEN_INVALID)
+		return TRUE
+	return ..()
 
 /obj/item/chems/food/dragged_onto(var/mob/user)
 	return attack_self(user)

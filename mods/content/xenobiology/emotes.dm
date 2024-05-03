@@ -21,11 +21,13 @@
 	key = "nomood"
 	var/mood
 
-/decl/emote/slime/do_extra(var/mob/living/slime/user)
-	var/datum/ai/slime/slime_ai = user.ai
-	if(istype(slime_ai))
-		slime_ai.mood = mood
-		user.update_icon()
+/decl/emote/slime/do_extra(atom/user)
+	if(ismob(user))
+		var/mob/user_mob = user
+		var/datum/ai/slime/slime_ai = user_mob.ai
+		if(istype(slime_ai))
+			slime_ai.mood = mood
+			user.update_icon()
 
 /decl/emote/slime/mob_can_use(mob/living/user, assume_available = FALSE)
 	return isslime(user) && ..()

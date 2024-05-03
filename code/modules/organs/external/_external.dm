@@ -1079,7 +1079,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			for(var/obj/item/organ/external/organ in remaining_organs)
 				victim.remove_organ(organ, TRUE, TRUE, update_icon = FALSE)
 				if(organ.place_remains_from_dismember_method(disintegrate))
-					qdel(organ)
+					organ.physically_destroyed()
 			victim.dump_contents()
 			qdel(victim)
 		else // We deliberately skip queuing this via remove_organ() above due to potentially immediately deleting the mob.
@@ -1575,15 +1575,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/is_internal()
 	return FALSE
 
+/obj/item/organ/external/place_butcher_product(decl/butchery_data/butchery_decl)
+	if(butchery_decl.bone_type)
+		butchery_decl.place_products(owner, butchery_decl.bone_material, 1, butchery_decl.bone_type)
+	return ..()
+
 // This likely seems excessive, but refer to organ explosion_act() to see how it should be handled before reaching this point.
 /obj/item/organ/external/physically_destroyed(skip_qdel)
-	if(owner)
-		if(limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
-			dismember(FALSE, DISMEMBER_METHOD_BLUNT)
-		else
-			owner.gib()
-	else
+	if(!owner)
 		return ..()
+	if(limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
+		dismember(FALSE, DISMEMBER_METHOD_BLUNT)
+	else
+		owner.gib()
 
 /obj/item/organ/external/is_vital_to_owner()
 	if(isnull(vital_to_owner))

@@ -468,19 +468,24 @@
 	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype)
+	var/decl/bodytype/old_bodytype = get_bodytype()
 	if(ispath(new_bodytype))
 		new_bodytype = GET_DECL(new_bodytype)
 	// No check to see if it's the same as our current one, because we don't have a 'mob bodytype' anymore
 	// just the torso. It's assumed if we call this we want a full regen.
-	if(istype(new_bodytype))
-		mob_size = new_bodytype.mob_size
-		new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
-		apply_bodytype_appearance()
-		force_update_limbs()
-		update_hair()
-		update_eyes()
-		return TRUE
-	return FALSE
+	if(!istype(new_bodytype))
+		return FALSE
+
+	mob_size = new_bodytype.mob_size
+	new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
+	if(istype(old_bodytype))
+		old_bodytype.remove_abilities(src)
+	new_bodytype.grant_abilities(src)
+	apply_bodytype_appearance()
+	force_update_limbs()
+	update_hair()
+	update_eyes()
+	return TRUE
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
@@ -1143,94 +1148,6 @@
 /mob/living/carbon/human/proc/set_age(var/val)
 	var/datum/appearance_descriptor/age = LAZYACCESS(species.appearance_descriptors, "age")
 	LAZYSET(appearance_descriptors, "age", (age ? age.sanitize_value(val) : 30))
-
-/mob/living/carbon/human/get_default_emotes()
-	var/static/list/default_emotes = list(
-		/decl/emote/visible/blink,
-		/decl/emote/audible/synth,
-		/decl/emote/audible/synth/ping,
-		/decl/emote/audible/synth/buzz,
-		/decl/emote/audible/synth/confirm,
-		/decl/emote/audible/synth/deny,
-		/decl/emote/visible/nod,
-		/decl/emote/visible/shake,
-		/decl/emote/visible/shiver,
-		/decl/emote/visible/collapse,
-		/decl/emote/audible/gasp,
-		/decl/emote/audible/sneeze,
-		/decl/emote/audible/sniff,
-		/decl/emote/audible/snore,
-		/decl/emote/audible/whimper,
-		/decl/emote/audible/yawn,
-		/decl/emote/audible/clap,
-		/decl/emote/audible/chuckle,
-		/decl/emote/audible/cough,
-		/decl/emote/audible/cry,
-		/decl/emote/audible/sigh,
-		/decl/emote/audible/laugh,
-		/decl/emote/audible/mumble,
-		/decl/emote/audible/grumble,
-		/decl/emote/audible/groan,
-		/decl/emote/audible/moan,
-		/decl/emote/audible/grunt,
-		/decl/emote/audible/slap,
-		/decl/emote/audible/deathgasp,
-		/decl/emote/audible/giggle,
-		/decl/emote/audible/scream,
-		/decl/emote/visible/airguitar,
-		/decl/emote/visible/blink_r,
-		/decl/emote/visible/bow,
-		/decl/emote/visible/salute,
-		/decl/emote/visible/flap,
-		/decl/emote/visible/aflap,
-		/decl/emote/visible/drool,
-		/decl/emote/visible/eyebrow,
-		/decl/emote/visible/twitch,
-		/decl/emote/visible/dance,
-		/decl/emote/visible/twitch_v,
-		/decl/emote/visible/faint,
-		/decl/emote/visible/frown,
-		/decl/emote/visible/blush,
-		/decl/emote/visible/wave,
-		/decl/emote/visible/glare,
-		/decl/emote/visible/stare,
-		/decl/emote/visible/look,
-		/decl/emote/visible/point,
-		/decl/emote/visible/raise,
-		/decl/emote/visible/grin,
-		/decl/emote/visible/shrug,
-		/decl/emote/visible/smile,
-		/decl/emote/visible/pale,
-		/decl/emote/visible/tremble,
-		/decl/emote/visible/wink,
-		/decl/emote/visible/hug,
-		/decl/emote/visible/dap,
-		/decl/emote/visible/signal,
-		/decl/emote/visible/handshake,
-		/decl/emote/visible/afold,
-		/decl/emote/visible/alook,
-		/decl/emote/visible/eroll,
-		/decl/emote/visible/hbow,
-		/decl/emote/visible/hip,
-		/decl/emote/visible/holdup,
-		/decl/emote/visible/hshrug,
-		/decl/emote/visible/crub,
-		/decl/emote/visible/erub,
-		/decl/emote/visible/fslap,
-		/decl/emote/visible/ftap,
-		/decl/emote/visible/hrub,
-		/decl/emote/visible/hspread,
-		/decl/emote/visible/pocket,
-		/decl/emote/visible/rsalute,
-		/decl/emote/visible/rshoulder,
-		/decl/emote/visible/squint,
-		/decl/emote/visible/tfist,
-		/decl/emote/visible/tilt,
-		/decl/emote/visible/spin,
-		/decl/emote/visible/sidestep,
-		/decl/emote/visible/vomit
-	)
-	return default_emotes
 
 /mob/living/carbon/human/HandleBloodTrail(turf/T, old_loc)
 	// Tracking blood

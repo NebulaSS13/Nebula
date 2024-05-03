@@ -90,15 +90,16 @@
 	damage = 2
 	usable_with_limbs = list(BP_CHEST, BP_GROIN)
 
-/decl/natural_attack/slime_glomp/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
-	..()
-	user.apply_stored_shock_to(target)
+/decl/natural_attack/slime_glomp/apply_effects(mob/living/user, mob/living/target, attack_damage, zone)
+	. = ..()
+	if(.)
+		user.apply_stored_shock_to(target)
 
 /decl/natural_attack/stomp/weak
 	name = "weak stomp"
 	attack_verb = list("jumped on")
 
-/decl/natural_attack/stomp/weak/get_unarmed_damage()
+/decl/natural_attack/stomp/weak/get_unarmed_damage(mob/living/user, mob/living/victim)
 	return damage
 
 /decl/natural_attack/stomp/weak/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
