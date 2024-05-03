@@ -645,7 +645,7 @@
 /turf/floor/tiled,
 /area/ship/trade/loading_bay)
 "bs" = (
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /turf/floor,
 /area/ship/trade/aft_port_underside_maint)
 "bu" = (

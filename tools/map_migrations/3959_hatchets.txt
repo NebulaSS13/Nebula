@@ -1,0 +1,2 @@
+/obj/item/hatchet/machete/@SUBTYPES : /obj/item/tool/machete/@SUBTYPES{@OLD}
+/obj/item/hatchet/@SUBTYPES : /obj/item/tool/axe/hatchet/@SUBTYPES{@OLD}

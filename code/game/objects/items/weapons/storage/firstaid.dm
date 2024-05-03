@@ -158,7 +158,7 @@
 	return list(
 		/obj/item/screwdriver,
 		/obj/item/wrench,
-		/obj/item/hatchet,
+		/obj/item/tool/axe/hatchet,
 		/obj/item/utensil/fork,
 		/obj/item/shard,
 		/obj/item/flame/fuelled/lighter,

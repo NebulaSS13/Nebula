@@ -13,7 +13,7 @@
 		/obj/item/clothing/mask/bandana/botany,
 		/obj/item/clothing/head/bandana/green,
 		/obj/item/tool/hoe/mini,
-		/obj/item/hatchet,
+		/obj/item/tool/axe/hatchet,
 		/obj/item/wirecutters/clippers,
 		/obj/item/chems/spray/plantbgone,
 	)

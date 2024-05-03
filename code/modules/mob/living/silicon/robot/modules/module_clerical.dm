@@ -29,7 +29,7 @@
 		/obj/item/gripper/service,
 		/obj/item/chems/glass/bucket,
 		/obj/item/tool/hoe/mini,
-		/obj/item/hatchet,
+		/obj/item/tool/axe/hatchet,
 		/obj/item/scanner/plant,
 		/obj/item/plants,
 		/obj/item/robot_harvester,

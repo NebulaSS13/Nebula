@@ -785,7 +785,7 @@
 /obj/item/shield/buckler,
 /obj/item/gps/explorer,
 /obj/item/belt/holster/machete,
-/obj/item/hatchet/machete/deluxe,
+/obj/item/tool/machete/deluxe,
 /obj/item/twohanded/spear/steel,
 /turf/floor/tiled/white,
 /area/ministation/science)
@@ -2995,7 +2995,7 @@
 /obj/item/chems/glass/beaker/large,
 /obj/item/scanner/plant,
 /obj/item/scanner/gas,
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /obj/item/tool/hoe/mini,
 /obj/item/wrench,
 /obj/item/wirecutters/clippers,

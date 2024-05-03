@@ -30,7 +30,7 @@
 	path = /obj/item/wrench
 
 /datum/fabricator_recipe/tool/hatchet
-	path = /obj/item/hatchet
+	path = /obj/item/tool/axe/hatchet
 
 /datum/fabricator_recipe/tool/minihoe
 	path = /obj/item/tool/hoe/mini

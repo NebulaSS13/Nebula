@@ -234,7 +234,7 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 
-/obj/item/hatchet/machete/mech
+/obj/item/tool/machete/mech
 	name = "mechete"
 	desc = "That thing is too big to be called a machete. Too big, too thick, too heavy, and too rough, it is more like a large hunk of iron."
 	w_class = ITEM_SIZE_GARGANTUAN
@@ -244,14 +244,14 @@
 	material_force_multiplier = 0.75 // Equals 20 AP with 25 force
 	max_health = ITEM_HEALTH_NO_DAMAGE //Else we need a whole system for replacement blades
 
-/obj/item/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+/obj/item/tool/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
 	if (.)
 		do_attack_effect(target, "smash")
 		if (target.mob_size < user.mob_size) //Damaging attacks overwhelm smaller mobs
 			target.throw_at(get_edge_target_turf(target,get_dir(user, target)),1, 1)
 
-/obj/item/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/tool/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
 	//Case 1: Default, you are hitting something that isn't a mob. Just do whatever, this isn't dangerous or op.
 	if (!isliving(A))
 		return ..()
@@ -261,7 +261,7 @@
 		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
 		return ..()
 
-/obj/item/hatchet/machete/mech/attack_self(mob/living/user)
+/obj/item/tool/machete/mech/attack_self(mob/living/user)
 	. = ..()
 	if (user.a_intent != I_HURT)
 		return
@@ -281,7 +281,7 @@
 
 /obj/item/mech_equipment/mounted_system/melee/machete
 	icon_state = "mech_blade"
-	holding = /obj/item/hatchet/machete/mech
+	holding = /obj/item/tool/machete/mech
 
 
 //Ballistic shield

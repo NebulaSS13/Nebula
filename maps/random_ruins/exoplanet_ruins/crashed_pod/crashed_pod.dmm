@@ -1037,7 +1037,7 @@
 /obj/item/seeds/orangeseed,
 /obj/item/seeds/cornseed,
 /obj/item/seeds/cornseed,
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /obj/item/chems/glass/bucket,
 /obj/item/tool/hoe/mini,
 /obj/item/plantspray/pests,

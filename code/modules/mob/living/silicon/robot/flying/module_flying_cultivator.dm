@@ -11,7 +11,7 @@
 		/obj/item/plants,
 		/obj/item/wirecutters/clippers,
 		/obj/item/tool/hoe/mini/unbreakable,
-		/obj/item/hatchet/unbreakable,
+		/obj/item/tool/axe/hatchet/unbreakable,
 		/obj/item/chems/glass/bucket,
 		/obj/item/scalpel/laser,
 		/obj/item/circular_saw,

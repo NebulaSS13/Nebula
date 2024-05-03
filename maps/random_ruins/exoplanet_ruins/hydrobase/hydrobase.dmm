@@ -833,7 +833,7 @@
 /area/map_template/hydrobase/station/growA)
 "cq" = (
 /obj/structure/closet/secure_closet/hydroponics/hydro,
-/obj/item/hatchet/machete,
+/obj/item/tool/machete,
 /turf/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cr" = (

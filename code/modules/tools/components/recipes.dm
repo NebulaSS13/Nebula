@@ -36,6 +36,9 @@
 /decl/stack_recipe/tool/head/shovel
 	result_type                 = /obj/item/tool_component/head/shovel
 
+/decl/stack_recipe/tool/head/handaxe
+	result_type                 = /obj/item/tool_component/head/handaxe
+
 /decl/stack_recipe/tool/head/sledgehammer
 	difficulty                  = MAT_VALUE_VERY_HARD_DIY
 	result_type                 = /obj/item/tool_component/head/sledgehammer

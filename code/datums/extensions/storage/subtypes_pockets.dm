@@ -13,7 +13,7 @@
 	storage_slots = 2
 	max_w_class = ITEM_SIZE_NORMAL //for knives
 	can_hold = list(
-		/obj/item/hatchet,
+		/obj/item/tool/axe/hatchet,
 		/obj/item/knife,
 	)
 

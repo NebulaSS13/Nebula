@@ -64,7 +64,7 @@
 "kr" = (
 /obj/structure/closet/crate/chest,
 /obj/item/tool/pickaxe/iron,
-/obj/item/hatchet,
+/obj/item/tool/axe/hatchet,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/woven,
 /area/shaded_hills/outside)

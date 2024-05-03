@@ -18,7 +18,7 @@
 		/obj/item/inducer/,
 		/obj/item/robotanalyzer,
 		/obj/item/tool/hoe/mini,
-		/obj/item/hatchet,
+		/obj/item/tool/axe/hatchet,
 		/obj/item/scanner/plant,
 		/obj/item/stack/tape_roll,
 		/obj/item/chems/spray/extinguisher/mini,
