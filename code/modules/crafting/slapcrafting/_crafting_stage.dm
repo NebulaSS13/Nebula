@@ -27,11 +27,12 @@
 			return next_stage
 
 /decl/crafting_stage/proc/progress_to(var/obj/item/thing, var/mob/user, var/obj/item/target)
-	. = is_appropriate_tool(thing) && consume(user, thing, target)
-	if(.)
+	if(consume(user, thing, target))
 		on_progress(user)
+		return TRUE
+	return FALSE
 
-/decl/crafting_stage/proc/is_appropriate_tool(var/obj/item/thing)
+/decl/crafting_stage/proc/is_appropriate_tool(obj/item/thing, obj/item/target)
 	. = istype(thing, completion_trigger_type)
 
 /decl/crafting_stage/proc/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
@@ -41,7 +42,9 @@
 		if(!istype(stack) || stack.amount < stack_consume_amount)
 			on_insufficient_material(user)
 			return FALSE
-		stack.use(stack_consume_amount)
+		var/obj/item/stack/used_stack = stack.split(stack_consume_amount)
+		used_stack.forceMove(target)
+	target?.update_icon()
 
 /decl/crafting_stage/proc/on_insufficient_material(var/mob/user, var/obj/item/stack/thing)
 	if(istype(thing))
@@ -112,7 +115,7 @@
 	progress_message = "You add the robotic arm to the assembly."
 	completion_trigger_type = /obj/item/robot_parts
 
-/decl/crafting_stage/robot_arms/is_appropriate_tool(var/obj/item/thing)
+/decl/crafting_stage/robot_arms/is_appropriate_tool(obj/item/thing, obj/item/target)
 	. = istype(thing, /obj/item/robot_parts/l_arm) || istype(thing, /obj/item/robot_parts/r_arm)
 
 /decl/crafting_stage/empty_storage/can_begin_with(obj/item/thing)

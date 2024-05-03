@@ -2120,6 +2120,7 @@
 #include "code\modules\crafting\slapcrafting\crafting_recipes\improvised_crafting\crafting_butterflyknife.dm"
 #include "code\modules\crafting\slapcrafting\crafting_recipes\improvised_crafting\crafting_crossbow.dm"
 #include "code\modules\crafting\slapcrafting\crafting_recipes\improvised_crafting\crafting_spear_prod.dm"
+#include "code\modules\crafting\slapcrafting\crafting_recipes\tool_crafting\_tool_crafting.dm"
 #include "code\modules\crafting\stack_recipes\_recipe.dm"
 #include "code\modules\crafting\stack_recipes\_recipe_getter.dm"
 #include "code\modules\crafting\stack_recipes\recipe_structures.dm"

@@ -5,11 +5,6 @@
 	material      = /decl/material/solid/organic/wood
 	abstract_type = /obj/item/tool_component/handle
 
-/obj/item/tool_component/handle/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/tool_component/head))
-		return W.attackby(src, user)
-	return ..()
-
 /obj/item/tool_component/handle/short
 	name          = "short tool handle"
 	desc          = "A short, straight rod suitable for use as the handle of a tool."
