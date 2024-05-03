@@ -60,38 +60,64 @@ var/global/list/icon_state_cache = list()
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
 
 	var/state_modifier = user_mob?.get_overlay_state_modifier()
+
 	if(!use_single_icon)
 		var/mob_state = "[item_state || icon_state][state_modifier]"
 		var/mob_icon = global.default_onmob_icons[slot]
 		var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
 		if(istype(root_bodytype))
 			var/use_slot = (bodypart in root_bodytype.equip_adjust) ? bodypart : slot
-			return root_bodytype.get_offset_overlay_image(mob_icon, mob_state, color, use_slot)
+			return root_bodytype.get_offset_overlay_image(user_mob, mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 	var/bodytype  = user_mob?.get_bodytype_category() || BODYTYPE_HUMANOID
 	var/useicon   = get_icon_for_bodytype(bodytype)
-	var/use_state = "[bodytype]-[slot][state_modifier]"
+	var/use_state = "[bodytype]-[slot]"
+	if(state_modifier)
+		use_state = "[use_state][state_modifier]"
 
 	var/is_not_held_slot = !(slot in global.all_hand_slots)
 	if(bodytype != BODYTYPE_HUMANOID && !check_state_in_icon(use_state, useicon) && use_fallback_if_icon_missing)
+
 		var/fallback = is_not_held_slot && get_fallback_slot(slot)
-		if(fallback && fallback != slot && check_state_in_icon("[bodytype]-[fallback][state_modifier]", useicon))
-			slot = fallback
+		if(fallback && fallback != slot)
+			if(state_modifier)
+				if(check_state_in_icon("[bodytype]-[fallback][state_modifier]", useicon))
+					slot = fallback
+			else if(check_state_in_icon("[bodytype]-[fallback]", useicon))
+				slot = fallback
 		else
 			bodytype = BODYTYPE_HUMANOID
 			useicon = get_icon_for_bodytype(bodytype)
-		use_state = "[bodytype]-[slot][state_modifier]"
+
+		if(state_modifier)
+			use_state = "[bodytype]-[slot][state_modifier]"
+			if(!check_state_in_icon(use_state, useicon))
+				use_state = "[bodytype]-[slot]"
+		else
+			use_state = "[bodytype]-[slot]"
 
 	if(!check_state_in_icon(use_state, useicon) && global.bodypart_to_slot_lookup_table[slot])
-		use_state = "[bodytype]-[global.bodypart_to_slot_lookup_table[slot]][state_modifier]"
+
+		var/lookup_slot = global.bodypart_to_slot_lookup_table[slot]
+		if(state_modifier)
+			use_state = "[bodytype]-[lookup_slot][state_modifier]"
+			if(!check_state_in_icon(use_state, useicon))
+				use_state = "[bodytype]-[lookup_slot]"
+		else
+			use_state = "[bodytype]-[lookup_slot]"
 
 	if(!check_state_in_icon(use_state, useicon))
 		var/fallback = use_fallback_if_icon_missing && is_not_held_slot && get_fallback_slot(slot)
 		if(!fallback)
 			return new /image
 		slot = fallback
-		use_state = "[bodytype]-[slot][state_modifier]"
+		if(state_modifier)
+			use_state = "[bodytype]-[slot][state_modifier]"
+			if(!check_state_in_icon(use_state, useicon))
+				use_state = "[bodytype]-[slot]"
+		else
+			use_state = "[bodytype]-[slot]"
 
 	if(!check_state_in_icon(use_state, useicon))
 		return new /image
@@ -115,10 +141,10 @@ var/global/list/icon_state_cache = list()
 	var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
 	if(root_bodytype && root_bodytype.bodytype_category != bodytype)
 		var/list/overlays_to_offset = overlay.overlays
-		overlay = root_bodytype.get_offset_overlay_image(overlay.icon, overlay.icon_state, color, (bodypart || slot))
+		overlay = root_bodytype.get_offset_overlay_image(user_mob, overlay.icon, overlay.icon_state, color, (bodypart || slot))
 		for(var/thing in overlays_to_offset)
 			var/image/I = thing // Technically an appearance but don't think we can cast to those
-			var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(I.icon, I.icon_state, I.color, (bodypart || slot))
+			var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(user_mob, I.icon, I.icon_state, I.color, (bodypart || slot))
 			adjusted_overlay.appearance_flags = I.appearance_flags
 			adjusted_overlay.plane =            I.plane
 			adjusted_overlay.layer =            I.layer

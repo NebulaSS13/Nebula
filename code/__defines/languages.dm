@@ -10,4 +10,3 @@
 #define LANG_FLAG_NO_STUTTER   BITFLAG(8)  // No stuttering, slurring, or other speech problems
 #define LANG_FLAG_ALT_TRANSMIT BITFLAG(9)  // Language is not based on vision or sound (Todo: add this into the say code and use it for the rootspeak languages)
 #define LANG_FLAG_FORBIDDEN    BITFLAG(10) // Language is not to be granted to a mob under any circumstances.
-

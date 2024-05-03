@@ -217,7 +217,7 @@
 			inv_box = sublist[2]
 			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
 		hand_y_offset += world.icon_size
-	if(mymob.client)
+	if(mymob.client && length(hand_hud_objects))
 		mymob.client.screen |= hand_hud_objects
 
 	// Make sure all held items are on the screen and set to the correct screen loc.
@@ -232,14 +232,15 @@
 				if(mymob.client)
 					mymob.client.screen |= held // just to make sure it's visible post-login
 
-	var/hand_x_offset = -(world.icon_size/2)
-	for(var/i = 1 to length(swaphand_hud_objects))
-		var/obj/swap_elem = swaphand_hud_objects[i]
-		swap_elem.screen_loc = "CENTER:[hand_x_offset],BOTTOM:[hand_y_offset]"
-		if(i > 1) // first two elems share a slot
-			hand_x_offset += world.icon_size
-		if(mymob.client)
-			mymob.client.screen |= swap_elem
+	if(length(swaphand_hud_objects))
+		var/hand_x_offset = -(world.icon_size/2)
+		for(var/i = 1 to length(swaphand_hud_objects))
+			var/obj/swap_elem = swaphand_hud_objects[i]
+			swap_elem.screen_loc = "CENTER:[hand_x_offset],BOTTOM:[hand_y_offset]"
+			if(i > 1) // first two elems share a slot
+				hand_x_offset += world.icon_size
+			if(mymob.client)
+				mymob.client.screen |= swap_elem
 
 /datum/hud/proc/BuildInventoryUI()
 

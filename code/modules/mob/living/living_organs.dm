@@ -10,6 +10,9 @@
 /mob/living/proc/get_internal_organs()
 	return
 
+/mob/living/proc/get_organs_by_categories(var/category)
+	return
+
 //Those are meant to be overriden with optimizations
 /mob/living/proc/has_organs()
 	return LAZYLEN(get_organs()) > 0

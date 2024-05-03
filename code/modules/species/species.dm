@@ -68,7 +68,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/age_descriptor = /datum/appearance_descriptor/age
 
 	// Speech vars.
-	var/assisted_langs = list()               // The languages the species can't speak without an assisted organ.
+	var/assisted_langs    = list()            // The languages the species can't speak without an assisted organ.
+	var/unspeakable_langs = list()            // The languages the species can't speak at all.
 	var/list/speech_sounds                    // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                    // The likelihood of a speech sound playing.
 

@@ -71,6 +71,12 @@
 #define ORGAN_FLAG_CAN_DISLOCATE  BITFLAG(7) // The organ can be dislocated.
 #define ORGAN_FLAG_SKELETAL       BITFLAG(8) // The organ has been skeletonized.
 
+// Organ category defines.
+/// Limb contributes only to stance damage calculation (foot)
+#define ORGAN_CATEGORY_STANCE      "stance"
+/// Limb is considered the 'root' of a given stance limb (leg) - also counted for stance damage a la ORGAN_CATEGORY_STANCE
+#define ORGAN_CATEGORY_STANCE_ROOT "stance_root"
+
 // Droplimb types.
 #define DISMEMBER_METHOD_EDGE  0
 #define DISMEMBER_METHOD_BLUNT 1

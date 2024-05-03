@@ -970,14 +970,6 @@
 		. = global.using_map.default_cultural_info[token]
 		PRINT_STACK_TRACE("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(global.using_map.default_cultural_info)]")
 
-/mob/living/carbon/human/needs_wheelchair()
-	var/stance_damage = 0
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
-		if(!E || !E.is_usable())
-			stance_damage += 2
-	return stance_damage >= 4
-
 /mob/living/carbon/human/get_digestion_product()
 	return species.get_digestion_product(src)
 
@@ -1325,3 +1317,6 @@
 	volume = round(volume)
 	if(volume > 0 && range > 0)
 		playsound(T, footsound, volume, 1, range)
+
+/mob/living/get_overlay_state_modifier()
+	return null

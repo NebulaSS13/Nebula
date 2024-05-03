@@ -37,10 +37,65 @@
 	handle_fire()
 	handle_actions()
 	UpdateLyingBuckledAndVerbStatus()
+	handle_grasp()
+	handle_stance()
 	handle_regular_hud_updates()
 	handle_status_effects()
-
 	return 1
+
+/mob/living/proc/handle_grasp()
+	for(var/hand_slot in get_held_item_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		if(!inv_slot?.requires_organ_tag)
+			continue
+		var/holding = inv_slot?.get_equipped_item()
+		if(holding)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.requires_organ_tag)
+			if((!E || !E.is_usable() || E.is_parent_dislocated()) && try_unequip(holding))
+				grasp_damage_disarm(E)
+
+/mob/living/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
+
+	var/list/drop_held_item_slots
+	if(istype(affected))
+		for(var/grasp_tag in (list(affected.organ_tag) | affected.children))
+			var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(grasp_tag)
+			if(inv_slot?.get_equipped_item())
+				LAZYDISTINCTADD(drop_held_item_slots, inv_slot)
+	else if(istype(affected, /datum/inventory_slot))
+		drop_held_item_slots = list(affected)
+
+	if(!LAZYLEN(drop_held_item_slots))
+		return
+
+	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
+		if(!try_unequip(inv_slot.get_equipped_item()))
+			continue
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.slot_id)
+		if(!E)
+			continue
+		if(E.is_robotic())
+			var/decl/pronouns/G = get_pronouns()
+			visible_message("<B>\The [src]</B> drops what [G.he] [G.is] holding, [G.his] [E.name] malfunctioning!")
+			spark_at(src, 5, holder=src)
+			continue
+
+		var/grasp_name = E.name
+		if((E.body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT)) && LAZYLEN(E.children))
+			var/obj/item/organ/external/hand = pick(E.children)
+			grasp_name = hand.name
+
+		if(E.can_feel_pain())
+			var/emote_scream = pick("screams in pain", "lets out a sharp cry", "cries out")
+			var/emote_scream_alt = pick("scream in pain", "let out a sharp cry", "cry out")
+			visible_message(
+				"<B>\The [src]</B> [emote_scream] and drops what they were holding in their [grasp_name]!",
+				null,
+				"You hear someone [emote_scream_alt]!"
+			)
+			custom_pain("The sharp pain in your [E.name] forces you to drop what you were holding in your [grasp_name]!", 30)
+		else
+			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
 /mob/living/proc/handle_living_non_stasis_processes()
 	SHOULD_CALL_PARENT(TRUE)
@@ -507,3 +562,133 @@
 					SET_STATUS_MAX(src, STAT_WEAK, current_size)
 		apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
 	return ..()
+
+#define LIMB_UNUSABLE 2
+#define LIMB_DAMAGED  1
+#define LIMB_IMPAIRED 0.5
+
+/mob/living/proc/handle_stance()
+	set waitfor = FALSE // Can sleep in emotes.
+	// Don't need to process any of this if they aren't standing anyways
+	// unless their stance is damaged, and we want to check if they should stay down
+	if (!stance_damage && (lying || resting) && (life_tick % 4) != 0)
+		return
+
+	stance_damage = 0
+
+	// Buckled to a bed/chair. Stance damage is forced to 0 since they're sitting on something solid
+	if (istype(buckled, /obj/structure/bed))
+		return
+
+	// Can't fall if nothing pulls you down
+	if(!has_gravity())
+		return
+
+	// If we don't have a bodytype, all the limb checking below is going to be nonsensical.
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(!root_bodytype)
+		return
+
+	var/static/list/all_stance_limbs = list(ORGAN_CATEGORY_STANCE, ORGAN_CATEGORY_STANCE_ROOT)
+	var/expected_limbs_for_bodytype = root_bodytype.get_expected_organ_count_for_categories(all_stance_limbs)
+	if(expected_limbs_for_bodytype <= 0)
+		return // we don't care about stance for whatever reason.
+
+	// Is there something in our loc we can prop ourselves on?
+	if(length(loc?.contents))
+		for(var/obj/thing in loc.contents)
+			if(thing.obj_flags & OBJ_FLAG_SUPPORT_MOB)
+				return
+
+	var/found_limbs = 0
+	var/had_limb_pain = FALSE
+	for(var/obj/item/organ/external/limb in get_organs_by_categories(all_stance_limbs))
+		found_limbs++
+		var/add_stance_damage = 0
+		if(limb.is_malfunctioning())
+			// malfunctioning only happens intermittently so treat it as a missing limb when it procs
+			add_stance_damage = LIMB_UNUSABLE
+			if(prob(10))
+				visible_message("\The [src]'s [limb.name] [pick("twitches", "shudders")] and sparks!")
+				spark_at(src, amount = 5, holder = src)
+		else if(!limb.is_usable())
+			add_stance_damage = LIMB_UNUSABLE
+		else if (limb.is_broken())
+			add_stance_damage = LIMB_DAMAGED
+		else if (limb.is_dislocated())
+			add_stance_damage = LIMB_IMPAIRED
+
+		if(add_stance_damage > 0)
+			// Keep track of if any of our limbs can feel pain and has failed,
+			// so we don't scream if it's a prosthetic that has broken.
+			had_limb_pain = had_limb_pain || limb.can_feel_pain()
+			stance_damage += add_stance_damage
+
+	// Add missing limbs as unusable.
+	stance_damage += max(0, expected_limbs_for_bodytype - found_limbs) * LIMB_UNUSABLE
+
+	// Canes and crutches help you stand (if the latter is ever added)
+	// One cane mitigates a broken leg+foot, or a missing foot.
+	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
+	for(var/obj/item/cane/C in get_held_items())
+		stance_damage -= LIMB_UNUSABLE // Counts for a single functional limb.
+
+	// Calculate the expected and actual number of functioning legs we have.
+	var/has_sufficient_working_legs = TRUE
+	var/list/root_limb_tags  = root_bodytype.organ_tags_by_category[ORGAN_CATEGORY_STANCE_ROOT]
+	var/minimum_working_legs = CEILING(length(root_limb_tags) * 0.5)
+	if(minimum_working_legs > 0)
+		var/leg_count = 0
+		has_sufficient_working_legs = FALSE
+		for(var/organ_tag in root_limb_tags)
+			var/obj/item/organ/external/stance_root = GET_EXTERNAL_ORGAN(src, organ_tag)
+			if(!stance_root || !stance_root.is_usable())
+				continue
+			if(!length(stance_root.children))
+				continue
+			// In theory a leg may have multiple children in the future; this
+			// will need to be revisited for fork-legged insect people or whatever.
+			var/has_usable_child = FALSE
+			for(var/child_tag in stance_root.children)
+				var/obj/item/organ/external/stance_child = GET_EXTERNAL_ORGAN(src, child_tag)
+				if(stance_child?.is_usable())
+					has_usable_child = TRUE
+					break
+			if(has_usable_child)
+				leg_count++
+				if(leg_count >= minimum_working_legs)
+					has_sufficient_working_legs = TRUE
+					break
+
+	// Having half or more of our expected number of working legs allows us to mitigate some stance damage.
+	if(has_sufficient_working_legs)
+		if(find_mob_supporting_object()) //it helps to lean on something if you've got another leg to stand on
+			stance_damage -= LIMB_UNUSABLE
+		else
+			stance_damage -= LIMB_DAMAGED
+
+	// standing is poor
+	if(stance_damage >= expected_limbs_for_bodytype || (!MOVING_DELIBERATELY(src) && ((stance_damage >= (expected_limbs_for_bodytype*0.75) && prob(8)) || (stance_damage >= (expected_limbs_for_bodytype*0.5) && prob(2)))))
+		if(!(lying || resting))
+			if(had_limb_pain)
+				emote(/decl/emote/audible/scream)
+			custom_emote(VISIBLE_MESSAGE, "collapses!")
+		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
+
+/mob/living/proc/stance_damage_prone(var/obj/item/organ/external/affected)
+
+	if(affected && (!BP_IS_PROSTHETIC(affected) || affected.is_robotic()))
+		switch(affected.body_part)
+			if(SLOT_FOOT_LEFT, SLOT_FOOT_RIGHT)
+				if(!BP_IS_PROSTHETIC(affected))
+					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
+				else
+					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
+			if(SLOT_LEG_LEFT, SLOT_LEG_RIGHT)
+				if(!BP_IS_PROSTHETIC(affected))
+					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
+				else
+					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
+			else
+				return
+	SET_STATUS_MAX(src, STAT_WEAK, 4)

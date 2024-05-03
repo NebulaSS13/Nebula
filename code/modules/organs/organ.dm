@@ -10,6 +10,7 @@
 
 	// Strings.
 	var/organ_tag = "organ"                // Unique identifier.
+	var/organ_category                     // Identifier for use in organ collections, unused if unset. Would be nice to make this a list, but bodytypes rely on initial() with it.
 	var/parent_organ = BP_CHEST            // Organ holding this object.
 
 	// Status tracking.

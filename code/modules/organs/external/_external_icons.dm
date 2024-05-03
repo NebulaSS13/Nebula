@@ -252,9 +252,10 @@ var/global/list/organ_icon_cache = list()
 	. = ..()
 
 	// Update our cache key and refresh or create our base icon.
+	var/next_state = owner ? "[organ_tag][owner.get_overlay_state_modifier()]" : organ_tag
 	update_limb_icon_file()
-	if(icon_state != organ_tag)
-		icon_state = organ_tag
+	if(icon_state != next_state)
+		icon_state = next_state
 
 	_icon_cache_key = jointext(get_icon_cache_key_components(), null)
 	var/icon/mob_icon = global.organ_icon_cache[_icon_cache_key] || generate_mob_icon()

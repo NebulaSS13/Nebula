@@ -89,11 +89,12 @@
 	return title
 
 /datum/job/proc/equip_job(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+	H.add_language(/decl/language/human/common)
 	if (required_language)
 		H.add_language(required_language)
 		H.set_default_language(required_language)
-	H.add_language(/decl/language/human/common)
-	H.set_default_language(/decl/language/human/common)
+	else
+		H.set_default_language(/decl/language/human/common)
 
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit)

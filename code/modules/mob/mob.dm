@@ -1061,6 +1061,7 @@
 		return gripper.get_dexterity(silent)
 
 	// If this slot requires an organ, do the appropriate organ checks.
+	check_slot = gripper.requires_organ_tag
 	var/obj/item/organ/external/active_hand = GET_EXTERNAL_ORGAN(src, check_slot)
 	if(!active_hand)
 		if(!silent)
@@ -1077,7 +1078,6 @@
 			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't respond properly!"))
 		return (active_hand.get_manual_dexterity() & ~dex_malus)
 	return active_hand.get_manual_dexterity()
-
 
 /mob/proc/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent = FALSE)
 	. = (get_dexterity(silent) & dex_level) == dex_level

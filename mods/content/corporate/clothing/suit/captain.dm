@@ -27,4 +27,3 @@
 /obj/item/clothing/suit/armor/captain/Initialize()
 	. = ..()
 	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1.5)
-

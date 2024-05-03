@@ -42,8 +42,6 @@
 		else
 			vital_organ_missing_time = null
 
-
-
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
 		I.Process()
@@ -54,9 +52,6 @@
 		recheck_bad_external_organs()
 		for(var/obj/item/organ/external/Ex in get_external_organs())
 			LAZYDISTINCTADD(bad_external_organs, Ex)
-
-	handle_stance()
-	handle_grasp()
 
 	if(!force_process && !LAZYLEN(bad_external_organs))
 		return
@@ -81,169 +76,6 @@
 				for(var/datum/wound/W in E.wounds)
 					if (W.infection_check())
 						W.germ_level += 1
-
-/mob/living/carbon/human/proc/Check_Proppable_Object()
-	for(var/turf/T in RANGE_TURFS(src, 1)) //we only care for non-space turfs
-		if(T.density && T.simulated)	//walls work
-			return 1
-
-	for(var/obj/O in orange(1, src))
-		if(O && O.density && O.anchored)
-			return 1
-
-	return 0
-
-/mob/living/carbon/human/proc/handle_stance()
-	set waitfor = FALSE // Can sleep in emotes.
-	// Don't need to process any of this if they aren't standing anyways
-	// unless their stance is damaged, and we want to check if they should stay down
-	if (!stance_damage && (lying || resting) && (life_tick % 4) != 0)
-		return
-
-	stance_damage = 0
-
-	// Buckled to a bed/chair. Stance damage is forced to 0 since they're sitting on something solid
-	if (istype(buckled, /obj/structure/bed))
-		return
-
-	// Can't fall if nothing pulls you down
-	if(!has_gravity())
-		return
-
-	var/limb_pain
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
-		if(!E || !E.is_usable())
-			stance_damage += 2 // let it fail even if just foot&leg
-		else if (E.is_malfunctioning())
-			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
-			stance_damage += 2
-			if(prob(10))
-				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
-				spark_at(src, amount = 5, holder = src)
-		else if (E.is_broken())
-			stance_damage += 1
-		else if (E.is_dislocated())
-			stance_damage += 0.5
-
-		if(E) limb_pain = E.can_feel_pain()
-
-	// Canes and crutches help you stand (if the latter is ever added)
-	// One cane mitigates a broken leg+foot, or a missing foot.
-	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
-	for(var/obj/item/cane/C in get_held_items())
-		stance_damage -= 2
-
-	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
-		var/working_pair = 2
-		var/obj/item/organ/external/LF = GET_EXTERNAL_ORGAN(src, BP_L_FOOT)
-		var/obj/item/organ/external/LL = GET_EXTERNAL_ORGAN(src, BP_L_LEG)
-		var/obj/item/organ/external/RF = GET_EXTERNAL_ORGAN(src, BP_R_FOOT)
-		var/obj/item/organ/external/RL = GET_EXTERNAL_ORGAN(src, BP_R_LEG)
-		if(!LL || !LF) //are we down a limb?
-			working_pair -= 1
-		else if((!LL.is_usable()) || (!LF.is_usable())) //if not, is it usable?
-			working_pair -= 1
-		if(!RL || !RF)
-			working_pair -= 1
-		else if((!RL.is_usable()) || (!RF.is_usable()))
-			working_pair -= 1
-		if(working_pair >= 1)
-			stance_damage -= 1
-			if(Check_Proppable_Object()) //it helps to lean on something if you've got another leg to stand on
-				stance_damage -= 1
-
-	var/list/objects_to_sit_on = list(
-			/obj/item/stool,
-			/obj/structure/bed,
-		)
-
-	for(var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
-		if(locate(type) in src.loc)
-			return
-
-	// standing is poor
-	if(stance_damage >= 4 || (stance_damage >= 2 && prob(2)) || (stance_damage >= 3 && prob(8)))
-		if(!(lying || resting))
-			if(limb_pain)
-				emote(/decl/emote/audible/scream)
-			custom_emote(VISIBLE_MESSAGE, "collapses!")
-		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
-
-/mob/living/carbon/human/proc/handle_grasp()
-	for(var/hand_slot in get_held_item_slots())
-		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
-		if(!inv_slot?.requires_organ_tag)
-			continue
-		var/holding = inv_slot?.get_equipped_item()
-		if(holding)
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.requires_organ_tag)
-			if((!E || !E.is_usable() || E.is_parent_dislocated()) && try_unequip(holding))
-				grasp_damage_disarm(E)
-
-/mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
-
-	if(affected && (!BP_IS_PROSTHETIC(affected) || affected.is_robotic()))
-		switch(affected.body_part)
-			if(SLOT_FOOT_LEFT, SLOT_FOOT_RIGHT)
-				if(!BP_IS_PROSTHETIC(affected))
-					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
-				else
-					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
-			if(SLOT_LEG_LEFT, SLOT_LEG_RIGHT)
-				if(!BP_IS_PROSTHETIC(affected))
-					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
-				else
-					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
-			else
-				return
-	SET_STATUS_MAX(src, STAT_WEAK, 4)
-
-/mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
-
-	var/list/drop_held_item_slots
-	if(istype(affected))
-		for(var/grasp_tag in (list(affected.organ_tag) | affected.children))
-			var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(grasp_tag)
-			if(inv_slot?.get_equipped_item())
-				LAZYDISTINCTADD(drop_held_item_slots, inv_slot)
-	else if(istype(affected, /datum/inventory_slot))
-		drop_held_item_slots = list(affected)
-
-	if(!LAZYLEN(drop_held_item_slots))
-		return
-
-	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
-		if(!try_unequip(inv_slot.get_equipped_item()))
-			continue
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.slot_id)
-		if(!E)
-			continue
-		if(E.is_robotic())
-			var/decl/pronouns/G = get_pronouns()
-			visible_message("<B>\The [src]</B> drops what [G.he] [G.is] holding, [G.his] [E.name] malfunctioning!")
-			spark_at(src, 5, holder=src)
-			continue
-
-		var/grasp_name = E.name
-		if((E.body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT)) && LAZYLEN(E.children))
-			var/obj/item/organ/external/hand = pick(E.children)
-			grasp_name = hand.name
-
-		if(E.can_feel_pain())
-			var/emote_scream = pick("screams in pain", "lets out a sharp cry", "cries out")
-			var/emote_scream_alt = pick("scream in pain", "let out a sharp cry", "cry out")
-			visible_message(
-				"<B>\The [src]</B> [emote_scream] and drops what they were holding in their [grasp_name]!",
-				null,
-				"You hear someone [emote_scream_alt]!"
-			)
-			custom_pain("The sharp pain in your [E.name] forces you to drop what you were holding in your [grasp_name]!", 30)
-		else
-			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
-
-/mob/living/proc/is_asystole()
-	return FALSE
 
 /mob/living/carbon/human/is_asystole()
 	if(isSynthetic())

@@ -134,6 +134,7 @@
 	return origin_tech
 
 /obj/item/Initialize(var/ml, var/material_key)
+
 	if(isnull(current_health))
 		current_health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
 	if(!ispath(material_key, /decl/material))
@@ -142,6 +143,8 @@
 		set_material(material_key)
 
 	. = ..()
+
+	setup_sprite_sheets()
 
 	if(islist(armor))
 		for(var/type in armor)
@@ -1108,4 +1111,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return ..()
 
 /obj/item/proc/loadout_setup(mob/wearer, metadata)
+	return
+
+/obj/item/proc/setup_sprite_sheets()
 	return

@@ -287,7 +287,7 @@ var/global/const/NO_EMAG_ACT = -50
 	dat += text("Blood Type: []<BR>\n", blood_type)
 	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
 	if(front && side)
-		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
+		dat +="<td align = center valign = top>Photo:<br><img src=front.png width=80 border=4><img src=side.png width=80 border=4></td>"
 	dat += "</tr></table>"
 	return jointext(dat,null)
 

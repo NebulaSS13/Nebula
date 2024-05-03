@@ -102,9 +102,10 @@
 
 /obj/item/organ/external/head/generate_mob_icon()
 	var/icon/ret = ..()
-	var/icon/eyes_icon = get_eyes_organ()?.get_onhead_icon()
-	if(eyes_icon)
-		ret.Blend(eyes_icon, ICON_OVERLAY)
+	if(ret)
+		var/icon/eyes_icon = get_eyes_organ()?.get_onhead_icon()
+		if(eyes_icon)
+			ret.Blend(eyes_icon, ICON_OVERLAY)
 	return ret
 
 /obj/item/organ/external/head/get_mob_overlays()
@@ -112,3 +113,12 @@
 	var/image/eye_glow = get_organ_eyes_overlay()
 	if(eye_glow)
 		LAZYADD(., eye_glow)
+
+/obj/item/organ/external/head/gripper/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
+	. = ..()
+	if(. && owner)
+		owner.add_held_item_slot(new /datum/inventory_slot/gripper/mouth)
+
+/obj/item/organ/external/head/gripper/do_uninstall(in_place, detach, ignore_children, update_icon)
+	owner?.remove_held_item_slot(BP_MOUTH)
+	. = ..()
