@@ -16,16 +16,17 @@
 	. = ..()
 	id = "[/obj/item/organ/internal/augment/boost]_[sequential_id(/obj/item/organ/internal/augment/boost)]"
 
-
-/obj/item/organ/internal/augment/boost/onInstall()
-	if(buffs.len)
+/obj/item/organ/internal/augment/boost/on_add_effects()
+	. = ..()
+	if(istype(owner) && buffs.len)
 		var/datum/skill_buff/augment/A
 		A = owner.buff_skill(buffs, 0, buffpath)
 		if(A && istype(A))
 			active = 1
 			A.id = id
 
-/obj/item/organ/internal/augment/boost/onRemove()
+/obj/item/organ/internal/augment/boost/on_remove_effects(mob/living/last_owner)
+	. = ..()
 	debuffing = 0
 	if(!active)
 		return

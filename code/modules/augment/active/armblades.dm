@@ -21,12 +21,12 @@
 	action_button_name = "Deploy blade"
 	icon_state = "armblade"
 	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
-	holding_type = /obj/item/armblade
+	holding = /obj/item/armblade
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	
+
 /obj/item/armblade/claws
 	icon_state = "wolverine"
 	name = "combat claws"
@@ -42,7 +42,7 @@
 	action_button_name = "Deploy claws"
 	icon_state = "wolverine"
 	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
-	holding_type = /obj/item/armblade/claws
+	holding = /obj/item/armblade/claws
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC
 	material = /decl/material/solid/metal/steel

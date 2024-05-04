@@ -42,7 +42,7 @@
 
 /decl/surgery_step/internal/attach_organ/crystal
 	name = "Attach crystalline internal organ"
-	description = "This procedure reattaches a previously detached crystalline internal organ."
+	description = "This procedure attaches a detached crystalline internal organ."
 	allowed_tools = list(/obj/item/stack/medical/resin = 100)
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT | SURGERY_NO_FLESH
 

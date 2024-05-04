@@ -124,7 +124,7 @@
 /decl/chemical_reaction/grenade_reaction/metalfoam
 	name = "Metal Foam"
 	lore_text = "This mixture explodes in a burst of metallic foam. Good for hull repair!"
-	required_reagents = list(/decl/material/solid/metal/aluminium = 3, /decl/material/liquid/foaming_agent = 1, /decl/material/liquid/acid/polyacid = 1)
+	required_reagents = list(/decl/material/solid/metal/aluminium = 3, /decl/material/liquid/foaming_agent = 1, /decl/material/liquid/acid = 1)
 	result_amount = 5
 	mix_message = "The solution foams up violently!"
 
@@ -146,7 +146,7 @@
 /decl/chemical_reaction/grenade_reaction/ironfoam
 	name = "Iron Foam"
 	lore_text = "This mixture explodes in a burst of iron foam. Good for hull repair!"
-	required_reagents = list(/decl/material/solid/metal/iron = 3, /decl/material/liquid/foaming_agent = 1, /decl/material/liquid/acid/polyacid = 1)
+	required_reagents = list(/decl/material/solid/metal/iron = 3, /decl/material/liquid/foaming_agent = 1, /decl/material/liquid/acid = 1)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"
 

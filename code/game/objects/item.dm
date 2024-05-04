@@ -388,6 +388,10 @@
 /obj/item/proc/dropped(var/mob/user, var/play_dropsound = TRUE)
 
 	SHOULD_CALL_PARENT(TRUE)
+
+	if(QDELETED(src))
+		return
+
 	if(randpixel)
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
 	update_twohanding()
@@ -424,7 +428,11 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
+
 	SHOULD_CALL_PARENT(TRUE)
+
+	if(QDELETED(src))
+		return
 
 	add_fingerprint(user)
 

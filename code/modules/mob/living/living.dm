@@ -698,11 +698,7 @@ default behaviour is:
 	return FALSE
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
-	if(!..())
-		return
-	if(I in get_organs())
-		return
-	return 1
+	. = ..() && !(I in get_organs())
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client

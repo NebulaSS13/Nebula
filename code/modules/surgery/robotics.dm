@@ -434,7 +434,7 @@
 	var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(I && istype(I) && istype(affected))
-		target.remove_organ(I, detach = TRUE)
+		target.remove_organ(I, drop_organ = FALSE, detach = TRUE)
 	..()
 
 /decl/surgery_step/robotics/detach_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -447,7 +447,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/attach_organ_robotic
 	name = "Reattach prosthetic organ"
-	description = "This procedure reattaches a decoupled robotic internal organ."
+	description = "This procedure attaches a decoupled robotic internal organ."
 	allowed_tools = list(
 		TOOL_SCREWDRIVER = 100,
 	)
@@ -478,8 +478,8 @@
 	..()
 
 /decl/surgery_step/robotics/attach_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='notice'>[user] has reattached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
-	"<span class='notice'>You have reattached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
+	user.visible_message("<span class='notice'>[user] has attached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
+	"<span class='notice'>You have attached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
 
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/current_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)

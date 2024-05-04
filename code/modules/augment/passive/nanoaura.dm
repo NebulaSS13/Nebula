@@ -25,13 +25,14 @@
 	var/obj/aura/nanoaura/aura = null
 	var/charges = 4
 
+/obj/item/organ/internal/augment/active/nanounit/on_add_effects()
+	. = ..()
+	if(owner)
+		aura = new /obj/aura/nanoaura(owner, src)
 
-/obj/item/organ/internal/augment/active/nanounit/onInstall()
-	aura = new /obj/aura/nanoaura(owner, src)
-
-/obj/item/organ/internal/augment/active/nanounit/onRemove()
+/obj/item/organ/internal/augment/active/nanounit/on_remove_effects(mob/living/last_owner)
 	QDEL_NULL(aura)
-	..()
+	. = ..()
 
 /obj/item/organ/internal/augment/active/nanounit/proc/catastrophic_failure()
 	playsound(owner,'sound/mecha/internaldmgalarm.ogg',25,1)
