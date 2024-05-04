@@ -9,7 +9,7 @@
 	//Tracking.
 	var/uid                        // Unique identifier.
 	var/name                       // Index for global list.
-	var/seed_name                  // Plant name for seed packet.
+	var/product_name               // Plant name for seed packet and product strings.
 	var/seed_noun = SEED_NOUN_SEEDS// Descriptor for packet.
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
@@ -231,7 +231,7 @@
 	if(!splat_type || (locate(splat_type) in T))
 		return
 	var/atom/splat = new splat_type(T, src)
-	splat.SetName("[seed_name] [pick("smear","smudge","splatter")]")
+	splat.SetName("[product_name] [pick("smear","smudge","splatter")]")
 	if(get_trait(TRAIT_BIOLUM))
 		var/clr
 		if(get_trait(TRAIT_BIOLUM_COLOUR))
@@ -256,7 +256,7 @@
 				if(reagent_amounts?[2] && potency > 0)
 					rtotal += round(potency/reagent_amounts[2])
 				if(rid == /decl/material/liquid/nutriment)
-					LAZYSET(data, seed_name, max(1,rtotal))
+					LAZYSET(data, product_name, max(1,rtotal))
 				splat_reagents.add_reagent(rid,max(1,rtotal),data)
 	if(splat_reagents)
 		var/splat_range = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
@@ -408,7 +408,7 @@
 
 	if(prefix)
 		name = "[prefix] [name]"
-	seed_name = name
+	product_name = name
 	display_name = "[name] plant"
 
 //Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
@@ -815,10 +815,10 @@
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
-	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
-	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
-	new_seed.seed_noun =            seed_noun
-	new_seed.traits = traits.Copy()
+	new_seed.product_name = "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][product_name]"
+	new_seed.display_name = "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
+	new_seed.seed_noun    = seed_noun
+	new_seed.traits       = traits.Copy()
 	new_seed.update_growth_stages()
 	return new_seed
 
@@ -872,8 +872,8 @@
 	clone = ..()
 	//!! - Cloning means having an independent working copy, so leave its unique uid - !!
 	clone.roundstart       = FALSE
-	clone.name             = "[seed_name][(roundstart ? " strain #[clone.uid]" : "")]"
-	clone.seed_name        = clone.name
+	clone.name             = "[product_name][(roundstart ? " strain #[clone.uid]" : "")]"
+	clone.product_name     = clone.name
 	clone.display_name     = "[display_name][(roundstart ? " strain #[clone.uid]" : "")]"
 	clone.seed_noun        = seed_noun
 

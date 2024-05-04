@@ -256,7 +256,7 @@
 		set_pin_data(IC_OUTPUT, i, null)
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if(H.seed)
-			set_pin_data(IC_OUTPUT, 1, H.seed.seed_name)
+			set_pin_data(IC_OUTPUT, 1, H.seed.product_name)
 			set_pin_data(IC_OUTPUT, 2, H.age)
 			set_pin_data(IC_OUTPUT, 3, H.seed.get_trait(TRAIT_POTENCY))
 			set_pin_data(IC_OUTPUT, 4, H.seed.get_trait(TRAIT_YIELD))

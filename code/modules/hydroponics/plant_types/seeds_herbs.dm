@@ -9,8 +9,8 @@
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/herb/yarrow
-	name = "yarrow flowers"
-	seed_name = "yarrow"
+	name = "yarrow"
+	product_name = "yarrow flower"
 	display_name = "yarrow patch"
 	chems = list(
 		/decl/material/liquid/nutriment         = list(1,20),
@@ -26,8 +26,8 @@
 	set_trait(TRAIT_PLANT_ICON,"flower4")
 
 /datum/seed/herb/aloe
-	name = "aloe vera"
-	seed_name = "aloe"
+	name = "aloe"
+	product_name = "aloe vera"
 	display_name = "aloe patch"
 	chems = list(
 		/decl/material/liquid/nutriment      = list(1,20),
@@ -44,7 +44,7 @@
 
 /datum/seed/herb/ginseng
 	name = "ginseng"
-	seed_name = "ginseng"
+	product_name = "ginseng root"
 	display_name = "ginseng patch"
 	chems = list(
 		/decl/material/liquid/nutriment          = list(1,20),
@@ -60,8 +60,8 @@
 	set_trait(TRAIT_PLANT_ICON,"grass")
 
 /datum/seed/herb/valerian
-	name = "valerian flowers"
-	seed_name = "valerian"
+	name = "valerian"
+	product_name = "valerian flower"
 	display_name = "valerian patch"
 	chems = list(
 		/decl/material/liquid/nutriment          = list(1,20),
@@ -77,8 +77,8 @@
 	set_trait(TRAIT_PLANT_ICON,"flower4")
 
 /datum/seed/herb/foxglove
-	name = "foxglove flowers"
-	seed_name = "foxglove"
+	name = "foxglove"
+	product_name = "foxglove flower"
 	display_name = "foxglove patch"
 	chems = list(
 		/decl/material/liquid/nutriment           = list(1,20),

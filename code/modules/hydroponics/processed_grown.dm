@@ -72,8 +72,8 @@
 	icon                = 'icons/obj/grown/fruit_slice_large.dmi'
 
 /obj/item/chems/food/processed_grown/slice/update_strings()
-	name = "slice of [seed.seed_name]"
-	desc = "A slice of \a [seed.seed_name]. Tasty, probably."
+	name = "slice of [seed.product_name]"
+	desc = "A slice of \a [seed.product_name]. Tasty, probably."
 
 // Chopped fruit or veg
 /obj/item/chems/food/processed_grown/chopped
@@ -81,8 +81,8 @@
 	processed_grown_tag = "chopped"
 
 /obj/item/chems/food/processed_grown/chopped/update_strings()
-	name = "chopped [seed.seed_name]"
-	desc = "A handful of roughly chopped [seed.seed_name]."
+	name = "chopped [seed.product_name]"
+	desc = "A handful of roughly chopped [seed.product_name]."
 
 // Matchstick veg
 /obj/item/chems/food/processed_grown/sticks
@@ -94,8 +94,8 @@
 	slice_num           = 1
 
 /obj/item/chems/food/processed_grown/sticks/update_strings()
-	name = "[seed.seed_name] sticks"
-	desc = "A handful of [seed.seed_name] sticks."
+	name = "[seed.product_name] sticks"
+	desc = "A handful of [seed.product_name] sticks."
 
 // Crushed nuts/bulbs/flowers
 /obj/item/chems/food/processed_grown/crushed
@@ -104,8 +104,8 @@
 	processed_grown_tag = "crushed"
 
 /obj/item/chems/food/processed_grown/crushed/update_strings()
-	name = "crushed [seed.seed_name]"
-	desc = "A handful of crushed [seed.seed_name]."
+	name = "crushed [seed.product_name]"
+	desc = "A handful of crushed [seed.product_name]."
 
 // Premade types for mapping
 /obj/item/chems/food/processed_grown/slice/apple

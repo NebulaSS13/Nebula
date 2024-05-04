@@ -51,9 +51,9 @@
 	if(backyard_grilling_count > 0)
 		descriptor += "roasted"
 	if(length(descriptor))
-		SetName("[english_list(descriptor)] [seed.seed_name]")
+		SetName("[english_list(descriptor)] [seed.product_name]")
 	else
-		SetName("[seed.seed_name]")
+		SetName("[seed.product_name]")
 	if(seed.product_material)
 		material = seed.product_material
 
@@ -99,7 +99,7 @@
 			if(LAZYACCESS(reagent_amounts,2) && potency > 0)
 				rtotal += round(potency/reagent_amounts[2])
 			if(rid == /decl/material/liquid/nutriment)
-				LAZYSET(data, seed.seed_name, max(1,rtotal))
+				LAZYSET(data, seed.product_name, max(1,rtotal))
 			add_to_reagents(rid,max(1,rtotal),data)
 
 /obj/item/chems/food/grown/proc/update_desc()

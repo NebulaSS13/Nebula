@@ -200,7 +200,7 @@
 			if(!seed)
 				continue
 			dat += "<tr>"
-			dat += "<td>[seed.seed_name]</td>"
+			dat += "<td>[seed.product_name]</td>"
 			dat += "<td>#[seed.uid]</td>"
 			if ("stats" in scanner)
 				dat += "<td>[seed.get_trait(TRAIT_ENDURANCE)]</td><td>[seed.get_trait(TRAIT_YIELD)]</td><td>[seed.get_trait(TRAIT_MATURATION)]</td><td>[seed.get_trait(TRAIT_PRODUCTION)]</td><td>[seed.get_trait(TRAIT_POTENCY)]</td>"

@@ -54,7 +54,7 @@
 
 	var/list/dat = list()
 
-	var/form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
+	var/form_title = "[grown_seed.product_name] (#[grown_seed.uid])"
 	dat += "<h3>Plant data for [form_title]</h3>"
 
 	dat += "<h2>General Data</h2>"

@@ -56,7 +56,7 @@
 
 /datum/seed/merlin_tear
 	name = "merlin tears"
-	seed_name = "merlin tears"
+	product_name = "merlin tears"
 	display_name = "merlin tears"
 	chems = list(/decl/material/liquid/brute_meds = list(3,7), /decl/material/liquid/burn_meds = list(3,7), /decl/material/liquid/antitoxins = list(3,7), /decl/material/liquid/regenerator = list(3,7), /decl/material/liquid/neuroannealer = list(1,2), /decl/material/liquid/eyedrops = list(1,2))
 	grown_tag = "berries"

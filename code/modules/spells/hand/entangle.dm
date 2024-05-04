@@ -28,7 +28,7 @@
 	seed.set_trait(TRAIT_PRODUCT_COLOUR,"#4d4dff")
 	seed.set_trait(TRAIT_SPREAD,2)
 	seed.name = "heirlooms"
-	seed.seed_name = "heirloom"
+	seed.product_name = "heirloom"
 	seed.display_name = "vines"
 	seed.chems = list(/decl/material/liquid/nutriment = list(1,20))
 
