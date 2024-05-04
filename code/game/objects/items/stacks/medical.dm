@@ -60,14 +60,26 @@
 	return ..()
 
 /obj/item/stack/medical/bruise_pack
-	name = "roll of gauze"
-	singular_name = "gauze length"
-	desc = "Some sterile gauze to wrap around bloody stumps."
-	icon_state = "brutepack"
-	origin_tech = @'{"biotech":1}'
-	animal_heal = 5
-	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
-	amount = 10
+	name                = "roll of gauze"
+	singular_name       = "length of gauze"
+	plural_name         = "lengths of gauze"
+	desc                = "Some sterile gauze to wrap around bloody stumps."
+	icon_state          = "brutepack"
+	origin_tech         = @'{"biotech":1}'
+	animal_heal         = 5
+	apply_sounds        = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
+	amount              = 10
+	material            = /decl/material/solid/organic/cloth
+	matter_multiplier   = 0.3
+
+/obj/item/stack/medical/bruise_pack/bandage
+	name                = "bandage"
+	singular_name       = "bandage"
+	plural_name         = "bandages"
+	icon_state          = "bandage"
+	desc                = "Some clean material cut into lengths suitable for bandaging wounds."
+	amount              = 1
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/stack/medical/bruise_pack/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
@@ -104,12 +116,12 @@
 		else if (W.damage_type == BRUISE)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] places a bruise patch over \a [W.desc] on [target]'s [affecting.name]."),
-			    SPAN_NOTICE("You place a bruise patch over \a [W.desc] on [target]'s [affecting.name].") 
+			    SPAN_NOTICE("You place a bruise patch over \a [W.desc] on [target]'s [affecting.name].")
 			)
 		else
 			user.visible_message(
 				SPAN_NOTICE("\The [user] places a bandaid over \a [W.desc] on [target]'s [affecting.name]."),
-				SPAN_NOTICE("You place a bandaid over \a [W.desc] on [target]'s [affecting.name].") 
+				SPAN_NOTICE("You place a bandaid over \a [W.desc] on [target]'s [affecting.name].")
 			)
 		W.bandage()
 		playsound(src, pick(apply_sounds), 25)
@@ -136,7 +148,7 @@
 	apply_sounds = list('sound/effects/ointment.ogg')
 
 /obj/item/stack/medical/ointment/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	
+
 	. = ..()
 	if(. || !ishuman(target))
 		return
@@ -157,7 +169,7 @@
 		return TRUE
 	user.visible_message(
 		SPAN_NOTICE("[user] salved wounds on [target]'s [affecting.name]."),
-	    SPAN_NOTICE("You salved wounds on [target]'s [affecting.name].") 
+	    SPAN_NOTICE("You salved wounds on [target]'s [affecting.name].")
 	)
 	use(1)
 	affecting.salve()
@@ -176,7 +188,7 @@
 	amount = 10
 
 /obj/item/stack/medical/advanced/bruise_pack/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	
+
 	. = ..()
 	if(. || !ishuman(target))
 		return
@@ -189,7 +201,7 @@
 
 	user.visible_message(
 		SPAN_NOTICE("\The [user] starts treating [target]'s [affecting.name]."),
-		SPAN_NOTICE("You start treating [target]'s [affecting.name].") 
+		SPAN_NOTICE("You start treating [target]'s [affecting.name].")
 	)
 	var/used = 0
 	for (var/datum/wound/W in affecting.wounds)
@@ -203,17 +215,17 @@
 		if (W.current_stage <= W.max_bleeding_stage)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] cleans \a [W.desc] on [target]'s [affecting.name] and seals the edges with bioglue."),
-			    SPAN_NOTICE("You clean and seal \a [W.desc] on [target]'s [affecting.name].") 
+			    SPAN_NOTICE("You clean and seal \a [W.desc] on [target]'s [affecting.name].")
 			)
 		else if (W.damage_type == BRUISE)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] places a medical patch over \a [W.desc] on [target]'s [affecting.name]."),
-				SPAN_NOTICE("You place a medical patch over \a [W.desc] on [target]'s [affecting.name].") 
+				SPAN_NOTICE("You place a medical patch over \a [W.desc] on [target]'s [affecting.name].")
 			)
 		else
 			user.visible_message(
 				SPAN_NOTICE("\The [user] smears some bioglue over \a [W.desc] on [target]'s [affecting.name]."),
-			    SPAN_NOTICE("You smear some bioglue over \a [W.desc] on [target]'s [affecting.name].") 
+			    SPAN_NOTICE("You smear some bioglue over \a [W.desc] on [target]'s [affecting.name].")
 			)
 		playsound(src, pick(apply_sounds), 25)
 		W.bandage()
@@ -264,7 +276,7 @@
 		return TRUE
 	user.visible_message(
 		SPAN_NOTICE("[user] covers wounds on [target]'s [affecting.name] with regenerative membrane."),
-		SPAN_NOTICE("You cover wounds on [target]'s [affecting.name] with regenerative membrane.") 
+		SPAN_NOTICE("You cover wounds on [target]'s [affecting.name] with regenerative membrane.")
 	)
 	affecting.heal_damage(0,heal_burn)
 	use(1)
@@ -308,8 +320,8 @@
 
 	if (target != user)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts to apply \the [src] to [target]'s [limb]."), 
-			SPAN_DANGER("You start to apply \the [src] to [target]'s [limb]."), 
+			SPAN_NOTICE("\The [user] starts to apply \the [src] to [target]'s [limb]."),
+			SPAN_DANGER("You start to apply \the [src] to [target]'s [limb]."),
 			SPAN_DANGER("You hear something being wrapped.")
 		)
 	else
@@ -318,16 +330,16 @@
 			to_chat(user, SPAN_WARNING("You can't apply a splint to the arm you're using!"))
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts to apply \the [src] to their [limb]."), 
-			SPAN_DANGER("You start to apply \the [src] to your [limb]."), 
+			SPAN_NOTICE("\The [user] starts to apply \the [src] to their [limb]."),
+			SPAN_DANGER("You start to apply \the [src] to your [limb]."),
 			SPAN_DANGER("You hear something being wrapped.")
 		)
 
 	if(user.do_skilled(5 SECONDS, SKILL_MEDICAL, target))
 		if((target == user && prob(75)) || prob(user.skill_fail_chance(SKILL_MEDICAL,50, SKILL_ADEPT)))
 			user.visible_message(
-				SPAN_DANGER("\The [user] fumbles \the [src]."), 
-				SPAN_DANGER("You fumble \the [src]."), 
+				SPAN_DANGER("\The [user] fumbles \the [src]."),
+				SPAN_DANGER("You fumble \the [src]."),
 				SPAN_DANGER("You hear something being wrapped.")
 			)
 			return TRUE
@@ -338,21 +350,21 @@
 				S.forceMove(affecting)
 				if (target != user)
 					user.visible_message(
-						SPAN_NOTICE("\The [user] finishes applying \the [src] to \the [target]'s [limb]."), 
-						SPAN_DANGER("You finish applying \the [src] to \the [target]'s [limb]."), 
+						SPAN_NOTICE("\The [user] finishes applying \the [src] to \the [target]'s [limb]."),
+						SPAN_DANGER("You finish applying \the [src] to \the [target]'s [limb]."),
 						SPAN_DANGER("You hear something being wrapped.")
 					)
 				else
 					user.visible_message(
-						SPAN_NOTICE("\The [user] successfully applies \the [src] to their [limb]."), 
-						SPAN_DANGER("You successfully apply \the [src] to your [limb]."), 
+						SPAN_NOTICE("\The [user] successfully applies \the [src] to their [limb]."),
+						SPAN_DANGER("You successfully apply \the [src] to your [limb]."),
 						SPAN_DANGER("You hear something being wrapped.")
 					)
 				return TRUE
 			S.dropInto(src.loc) //didn't get applied, so just drop it
 		user.visible_message(
-			SPAN_DANGER("\The [user] fails to apply \the [src]."), 
-			SPAN_DANGER("You fail to apply \the [src]."), 
+			SPAN_DANGER("\The [user] fails to apply \the [src]."),
+			SPAN_DANGER("You fail to apply \the [src]."),
 			SPAN_DANGER("You hear something being wrapped.")
 		)
 	return TRUE
