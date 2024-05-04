@@ -4,6 +4,7 @@
 	display_name = "cotton"
 	product_material = /decl/material/solid/organic/plantmatter/pith/husk
 	chems = list(
+		/decl/material/liquid/nutriment/plant_oil = list(3,10),
 		/decl/material/solid/organic/cloth = list(10,1)
 	)
 	slice_product = null
@@ -684,6 +685,9 @@
 	name = "sunflowers"
 	product_name = "sunflower"
 	display_name = "sunflower patch"
+	chems = list(
+		/decl/material/liquid/nutriment/plant_oil = list(10,10)
+	)
 
 /datum/seed/flower/sunflower/New()
 	..()
@@ -754,7 +758,10 @@
 	name = "peanut"
 	product_name = "peanut"
 	display_name = "peanut vine"
-	chems = list(/decl/material/liquid/nutriment = list(1,10))
+	chems = list(
+		/decl/material/liquid/nutriment = list(1,10),
+		/decl/material/liquid/nutriment/plant_oil = list(1,10)
+	)
 	slice_product = /obj/item/chems/food/processed_grown/chopped
 	slice_amount = 3
 
@@ -934,7 +941,11 @@
 	name = "soybeans"
 	product_name = "soybeans"
 	display_name = "soybean patch"
-	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/drink/milk/soymilk = list(10,20))
+	chems = list(
+		/decl/material/liquid/nutriment = list(1,20),
+		/decl/material/liquid/nutriment/plant_oil = list(3,20),
+		/decl/material/liquid/drink/milk/soymilk = list(7,20)
+	)
 	grown_tag = "soybeans"
 	slice_product = /obj/item/chems/food/processed_grown/chopped
 	slice_amount = 3
