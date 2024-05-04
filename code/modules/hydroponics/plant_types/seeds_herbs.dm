@@ -16,7 +16,7 @@
 		/decl/material/liquid/nutriment         = list(1,20),
 		/decl/material/liquid/brute_meds/yarrow = list(1, 1)
 	)
-	dried_chems = list(/decl/material/liquid/brute_meds/yarrow = list(1,10))
+	dried_chems = list(/decl/material/liquid/brute_meds/yarrow = list(10,10))
 
 /datum/seed/herb/yarrow/New()
 	..()
@@ -30,10 +30,9 @@
 	product_name = "aloe vera"
 	display_name = "aloe patch"
 	chems = list(
-		/decl/material/liquid/nutriment      = list(1,20),
-		/decl/material/liquid/burn_meds/aloe = list(1, 1)
+		/decl/material/liquid/nutriment      = list(1,5),
+		/decl/material/liquid/burn_meds/aloe = list(10,10)
 	)
-	dried_chems = list(/decl/material/liquid/burn_meds/aloe = list(1,10))
 
 /datum/seed/herb/aloe/New()
 	..()
@@ -50,7 +49,7 @@
 		/decl/material/liquid/nutriment          = list(1,20),
 		/decl/material/liquid/antitoxins/ginseng = list(1, 1)
 	)
-	dried_chems = list(/decl/material/liquid/antitoxins/ginseng = list(1,10))
+	dried_chems = list(/decl/material/liquid/antitoxins/ginseng = list(10,10))
 
 /datum/seed/herb/ginseng/New()
 	..()
@@ -67,7 +66,7 @@
 		/decl/material/liquid/nutriment          = list(1,20),
 		/decl/material/liquid/sedatives/valerian = list(1, 1)
 	)
-	dried_chems = list(/decl/material/liquid/sedatives/valerian = list(1,10))
+	dried_chems = list(/decl/material/liquid/sedatives/valerian = list(10,10))
 
 /datum/seed/herb/valerian/New()
 	..()
@@ -84,7 +83,7 @@
 		/decl/material/liquid/nutriment           = list(1,20),
 		/decl/material/liquid/stabilizer/foxglove = list(1, 1)
 	)
-	dried_chems = list(/decl/material/liquid/stabilizer/foxglove = list(1,10))
+	dried_chems = list(/decl/material/liquid/stabilizer/foxglove = list(10,10))
 
 /datum/seed/herb/foxglove/New()
 	..()

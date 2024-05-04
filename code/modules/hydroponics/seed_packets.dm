@@ -342,3 +342,18 @@
 
 /obj/item/seeds/foxglove
 	seed = "foxglove"
+
+/obj/item/seeds/extracted/yarrow
+	seed = "yarrow"
+
+/obj/item/seeds/extracted/aloe
+	seed = "aloe"
+
+/obj/item/seeds/extracted/ginseng
+	seed = "ginseng"
+
+/obj/item/seeds/extracted/valerian
+	seed = "valerian"
+
+/obj/item/seeds/extracted/foxglove
+	seed = "foxglove"
