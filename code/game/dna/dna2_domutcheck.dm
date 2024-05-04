@@ -40,11 +40,11 @@
 				gene.activate(M,connected,flags)
 				if(M)
 					LAZYDISTINCTADD(M.active_genes, gene.type)
-					M.update_icon = 1
+					M.queue_icon_update()
 			// If Gene is NOT active:
 			else
 				testing("[gene.name] deactivated!")
 				gene.deactivate(M,connected,flags)
 				if(M)
 					LAZYREMOVE(M.active_genes, gene.type)
-					M.update_icon = 1
+					M.queue_icon_update()

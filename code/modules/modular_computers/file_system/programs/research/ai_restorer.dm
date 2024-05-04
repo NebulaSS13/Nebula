@@ -73,7 +73,6 @@
 	// If the AI is dead, revive it.
 	if (A.stat == DEAD && !A.should_be_dead())
 		A.set_stat(CONSCIOUS)
-		A.set_posture(/decl/posture/standing)
 		A.switch_from_dead_to_living_mob_list()
 		A.add_ai_verbs()
 		A.update_icon()

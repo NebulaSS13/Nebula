@@ -26,6 +26,8 @@
 		/datum/movement_handler/mob/movement
 	)
 
+	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
+
 	var/shift_to_open_context_menu = FALSE
 
 	var/mob_flags
@@ -124,10 +126,6 @@
 
 	//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/weakref/last_handled_by_mob
-
-	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
-
-	var/update_icon = 1 //Set to 1 to trigger update_icon() at the next life() call
 
 	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
 

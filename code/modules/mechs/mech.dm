@@ -233,3 +233,9 @@
 		hud_power_control?.queue_icon_update()
 	else
 		to_chat(user, SPAN_WARNING("Error: No power cell was detected."))
+
+/mob/living/exosuit/get_available_postures()
+	var/static/list/available_postures = list(
+		/decl/posture/standing
+	)
+	return available_postures
