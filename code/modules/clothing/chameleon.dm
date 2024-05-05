@@ -319,6 +319,7 @@
 	origin_tech = @'{"esoteric":3}'
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	w_class = ITEM_SIZE_SMALL
+	fallback_slot = slot_wear_mask_str
 	var/static/list/clothing_choices
 	var/static/list/decor_types = list(
 		/obj/item/clothing/neck,

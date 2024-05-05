@@ -1112,3 +1112,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/setup_sprite_sheets()
 	return
+
+/obj/item/proc/get_equipment_tint()
+	return TINT_NONE

@@ -27,6 +27,9 @@
 	var/should_display_id = TRUE
 	var/fallback_slot
 
+/obj/item/clothing/get_equipment_tint()
+	return tint
+
 /obj/item/clothing/Initialize()
 
 	. = ..()
