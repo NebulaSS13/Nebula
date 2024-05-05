@@ -10,3 +10,6 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	wrenchable          = FALSE
 	storage             = /datum/storage/hopper/industrial
+
+/obj/structure/reagent_dispensers/barrel/ebony
+	material = /decl/material/solid/organic/wood/ebony

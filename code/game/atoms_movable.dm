@@ -504,8 +504,10 @@
 
 /atom/movable/proc/try_burn_wearer(var/mob/living/holder, var/held_slot, var/delay = 0)
 	set waitfor = FALSE
+
 	if(delay)
 		sleep(delay)
+
 	if(!held_slot || !istype(holder) || QDELETED(holder) || loc != holder)
 		return
 
