@@ -1,0 +1,5 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Using a half-finished slapcrafting recipe in hand will dismantle it.}
+  - {tweak: Crafting tools requires a binding material.}
+delete-after: true
