@@ -1,28 +1,19 @@
 //Toggleable embedded module
 /obj/item/organ/internal/augment/active
 	action_button_name = "Activate"
-	var/obj/item/organ/external/limb
 
 /obj/item/organ/internal/augment/active/proc/activate()
-
-//Give verbs on install
-/obj/item/organ/internal/augment/active/onInstall()
-	limb = GET_EXTERNAL_ORGAN(owner, parent_organ)
-
-/obj/item/organ/internal/augment/active/onRemove()
-	limb = null
+	return
 
 /obj/item/organ/internal/augment/active/proc/can_activate()
-	if(!owner || owner.incapacitated() || !is_usable())
+	if(!owner || owner.incapacitated() || !is_usable() || (status & ORGAN_CUT_AWAY))
 		to_chat(owner, SPAN_WARNING("You can't do that now!"))
 		return FALSE
-
 	return TRUE
-
 
 /obj/item/organ/internal/augment/active/attack_self()
 	. = ..()
-	if(.)
+	if(. && can_activate())
 		activate()
 
 //Need to change icon?
@@ -31,8 +22,3 @@
 	if(.)
 		action.button_icon_state = icon_state
 		action.button?.update_icon()
-
-
-/obj/item/organ/internal/augment/active/Destroy()
-	limb = null
-	. = ..()

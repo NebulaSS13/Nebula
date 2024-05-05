@@ -200,9 +200,9 @@
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
 /obj/item/organ/internal/voxstack/on_add_effects()
-	if(!..() || prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+	. = ..()
+	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
 		return FALSE
-
 	//Need spawn here so that this interactive bit doesn't lock up init
 	if(owner && !backup_inviable())
 		prompt_revive_callback(owner)

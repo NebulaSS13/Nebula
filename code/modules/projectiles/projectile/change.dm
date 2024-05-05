@@ -43,18 +43,29 @@
 		return H
 
 /obj/item/projectile/change/proc/wabbajack(var/mob/M)
-	if(isliving(M) && M.stat != DEAD)
-		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
-			return
-		M.handle_pre_transformation()
-		var/choice = pick(get_random_transformation_options(M))
-		var/mob/living/new_mob = apply_transformation(M, choice)
-		if(new_mob)
+
+	if(!isliving(M) || M.stat == DEAD)
+		return
+
+	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
+		return
+
+	M.handle_pre_transformation()
+	var/choice = pick(get_random_transformation_options(M))
+	var/mob/living/new_mob = apply_transformation(M, choice)
+	if(new_mob)
+		new_mob.a_intent = "hurt"
+		if(M.mind)
 			for (var/spell/S in M.mind.learned_spells)
 				new_mob.add_spell(new S.type)
 			new_mob.a_intent = "hurt"
 			transfer_key_from_mob_to_mob(M, new_mob)
 			to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [choice].</span>")
-			qdel(M)
-		else
-			to_chat(M, "<span class='warning'>Your form morphs into that of \a [choice].</span>")
+	else
+		new_mob = M
+	if(new_mob)
+		to_chat(new_mob, SPAN_WARNING("Your form morphs into that of \a [choice]."))
+
+	if(new_mob != M && !QDELETED(M))
+		qdel(M)
+
