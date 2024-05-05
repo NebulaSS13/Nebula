@@ -7,11 +7,3 @@
 
 /obj/item/tool_component/get_mould_difficulty()
 	return SKILL_NONE
-
-/*
- todo
-	- binding
-	- slapcrafting for assembly
-	- modify properties based on material
-	- credit Tinker's Construct in PR
-*/

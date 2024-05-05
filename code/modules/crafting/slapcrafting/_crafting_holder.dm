@@ -1,4 +1,6 @@
 /obj/item/crafting_holder
+	icon = 'icons/obj/items/crafting_holder.dmi'
+	icon_state = "blank"
 	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
 	max_health = 25
 	var/decl/crafting_stage/current_crafting_stage
@@ -46,6 +48,11 @@
 		qdel(thing)
 	. = ..()
 
+/obj/item/crafting_holder/attack_self(mob/user)
+	dump_contents(get_turf(user))
+	qdel(src)
+	return TRUE
+
 /obj/item/crafting_holder/attackby(var/obj/item/W, var/mob/user)
 
 	if(IS_PEN(W))
@@ -57,7 +64,7 @@
 
 	if(current_crafting_stage)
 		var/decl/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
-		if(next_stage && next_stage.progress_to(W, user, src))
+		if(next_stage && next_stage.is_appropriate_tool(W, src) && next_stage.progress_to(W, user, src))
 			advance_to(next_stage, user, W)
 			return
 
@@ -80,8 +87,22 @@
 
 /obj/item/crafting_holder/on_update_icon()
 	. = ..()
-	icon = current_crafting_stage.item_icon
-	icon_state = current_crafting_stage.item_icon_state
+	if(current_crafting_stage.item_icon && current_crafting_stage.item_icon_state)
+		icon = current_crafting_stage.item_icon
+		icon_state = current_crafting_stage.item_icon_state
+	else
+		icon = initial(icon)
+		icon_state = "blank"
+		for(var/obj/item/thing in contents)
+			var/image/I = new
+			I.appearance = thing
+			I.pixel_x = 0
+			I.pixel_y = 0
+			I.pixel_z = 0
+			I.pixel_w = 0
+			I.layer = FLOAT_LAYER
+			I.plane = FLOAT_PLANE
+			add_overlay(I)
 
 /obj/item/crafting_holder/proc/update_strings()
 	if(current_crafting_stage.item_desc)

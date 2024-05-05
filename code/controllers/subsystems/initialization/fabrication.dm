@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(fabrication)
 	if(QDELETED(target) || QDELETED(thing) || QDELETED(user))
 		return
 	for(var/decl/crafting_stage/initial_stage in SSfabrication.find_crafting_recipes(target.type))
-		if(initial_stage.can_begin_with(target) && initial_stage.is_appropriate_tool(thing))
+		if(initial_stage.can_begin_with(target) && initial_stage.is_appropriate_tool(thing, target))
 			var/obj/item/crafting_holder/H = new /obj/item/crafting_holder(get_turf(target), initial_stage, target, thing, user)
 			if(initial_stage.progress_to(thing, user, H))
 				return H
