@@ -1,6 +1,6 @@
 /datum/seed/diona
 	name = "diona"
-	seed_name = "diona"
+	product_name = "diona"
 	seed_noun = SEED_NOUN_NODES
 	display_name = "diona nymph pods"
 	can_self_harvest = 1

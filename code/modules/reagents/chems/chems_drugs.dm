@@ -72,11 +72,12 @@
 	value = 2
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_sedatives"
+	var/sedative_strength = 1 // A multiplier on dose.
 
 /decl/material/liquid/sedatives/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	ADJ_STATUS(M, STAT_JITTER, -50)
 	var/threshold = 1
-	var/dose = LAZYACCESS(M.chem_doses, type)
+	var/dose = LAZYACCESS(M.chem_doses, type) * sedative_strength
 	if(dose < 0.5 * threshold)
 		if(dose == metabolism * 2 || prob(5))
 			M.emote(/decl/emote/audible/yawn)

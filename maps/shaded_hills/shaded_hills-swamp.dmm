@@ -23,10 +23,9 @@
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/swamp)
 "ll" = (
-/obj/structure/wall_sconce/lantern{
-	dir = 8
-	},
-/turf/floor/wood/ebony,
+/obj/structure/fire_source/fireplace/basalt,
+/obj/item/stack/material/log/mapped/ebony/ten,
+/turf/floor/natural/path/basalt,
 /area/shaded_hills/witch_hut)
 "lC" = (
 /turf/unsimulated/dark_filler,
@@ -37,12 +36,22 @@
 "lZ" = (
 /turf/floor/natural/mud,
 /area/shaded_hills/caves/swamp)
+"nK" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/rock/hematite,
+/obj/item/rock/flint,
+/turf/floor/wood/ebony,
+/area/shaded_hills/witch_hut)
 "oF" = (
 /turf/unsimulated/dark_filler,
 /area/shaded_hills/outside/swamp)
 "oX" = (
 /turf/unsimulated/dark_filler,
 /area/shaded_hills/caves/swamp)
+"pl" = (
+/obj/structure/drying_rack,
+/turf/floor/wood/ebony,
+/area/shaded_hills/witch_hut)
 "sj" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/river/swamp)
@@ -94,11 +103,31 @@
 "EI" = (
 /turf/unsimulated/mask,
 /area/shaded_hills/outside/swamp)
+"Hi" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/pottery/teapot,
+/obj/item/chems/glass/pottery/cup,
+/obj/item/chems/glass/pottery/cup,
+/obj/item/chems/glass/bucket/wood,
+/turf/floor/wood/ebony,
+/area/shaded_hills/witch_hut)
 "Ic" = (
 /turf/floor/natural/clay,
 /area/shaded_hills/outside/river/swamp)
 "Jx" = (
 /obj/structure/table/woodentable/ebony,
+/obj/item/seeds/extracted/aloe,
+/obj/item/seeds/extracted/aloe,
+/obj/item/seeds/extracted/foxglove,
+/obj/item/seeds/extracted/foxglove,
+/obj/item/seeds/extracted/ginseng,
+/obj/item/seeds/extracted/ginseng,
+/obj/item/seeds/extracted/ginseng,
+/obj/item/seeds/extracted/valerian,
+/obj/item/seeds/extracted/valerian,
+/obj/item/seeds/extracted/yarrow,
+/obj/item/seeds/extracted/yarrow,
+/obj/item/seeds/extracted/yarrow,
 /turf/floor/wood/ebony,
 /area/shaded_hills/witch_hut)
 "KA" = (
@@ -135,7 +164,12 @@
 /obj/structure/wall_sconce/lantern{
 	dir = 4
 	},
+/obj/item/chems/glass/mortar,
+/obj/item/rock/basalt,
 /turf/floor/wood/ebony,
+/area/shaded_hills/witch_hut)
+"VA" = (
+/turf/wall/brick/basalt,
 /area/shaded_hills/witch_hut)
 "Xc" = (
 /turf/floor/natural/grass,
@@ -8736,8 +8770,8 @@ Ev
 Ev
 Ev
 BF
-Ev
-Ev
+VA
+VA
 Xt
 TD
 TD
@@ -8889,7 +8923,7 @@ YX
 Ev
 bg
 ll
-Ev
+VA
 Xt
 Xt
 Xt
@@ -9192,7 +9226,7 @@ Ev
 Ev
 Ev
 bg
-bg
+Hi
 aM
 Xt
 BY
@@ -9492,9 +9526,9 @@ Xt
 Xt
 Xt
 Ev
-TR
+nK
 bg
-bg
+pl
 Vl
 Jx
 Ev

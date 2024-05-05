@@ -3,3 +3,18 @@
 
 /obj/item/chems/food/grown/ambrosiadeus
 	seed = "ambrosiadeus"
+
+/obj/item/chems/food/grown/yarrow
+	seed = "yarrow"
+
+/obj/item/chems/food/grown/aloe
+	seed = "aloe"
+
+/obj/item/chems/food/grown/foxglove
+	seed = "foxglove"
+
+/obj/item/chems/food/grown/valerian
+	seed = "valerian"
+
+/obj/item/chems/food/grown/ginseng
+	seed = "ginseng"

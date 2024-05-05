@@ -4,9 +4,9 @@
 	// Update name.
 	if(seed)
 		if(mechanical)
-			name = "[base_name] ([seed.seed_name])"
+			name = "[base_name] ([seed.product_name])"
 		else
-			name = "[seed.seed_name]"
+			name = seed.product_name
 	else
 		SetName(initial(name))
 

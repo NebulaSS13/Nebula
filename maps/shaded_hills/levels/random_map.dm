@@ -57,7 +57,12 @@
 /datum/random_map/noise/forage/shaded_hills
 	abstract_type = /datum/random_map/noise/forage/shaded_hills
 
-/datum/random_map/noise/forage/shaded_hills/grassland
+/datum/random_map/noise/forage/shaded_hills/grassland/New()
+	forage["grass"] |= list(
+		"yarrow",
+		"valerian"
+	)
+	..()
 
 /datum/random_map/noise/forage/shaded_hills/swamp
 	tree_weight = 4
@@ -73,6 +78,10 @@
 	)
 
 /datum/random_map/noise/forage/shaded_hills/swamp/New()
+	forage["grass"] |= list(
+		"aloe",
+		"foxglove"
+	)
 	forage["riverbed"] = list(
 		// the swamp doesn't really have enough flowing water for molluscs to live here or for flint to wash up
 		"algae"
@@ -100,3 +109,10 @@
 		/obj/structure/flora/bush/reedbush = 1,
 		/obj/structure/flora/bush/fernybush = 1,
 	)
+
+/datum/random_map/noise/forage/shaded_hills/woods/New()
+	forage["grass"] |= list(
+		"ginseng",
+		"foxglove"
+	)
+	..()

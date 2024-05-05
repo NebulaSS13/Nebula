@@ -539,15 +539,15 @@
 	var/datum/seed/planting_seed = S.seed
 	if(istype(S))
 		planting_seed = S.seed
-		plant_noun = "[planting_seed?.seed_name] [planting_seed.seed_noun]"
+		plant_noun = "[planting_seed?.product_name] [planting_seed.seed_noun]"
 	else if(istype(S, /obj/item/chems/food/grown))
 		var/obj/item/chems/food/grown/fruit = S
 		planting_seed = fruit.seed
-		plant_noun = "[planting_seed?.seed_name]"
+		plant_noun = "[planting_seed?.product_name]"
 	else if(istype(S, /obj/item/chems/food/processed_grown))
 		var/obj/item/chems/food/processed_grown/fruit = S
 		planting_seed = fruit.seed
-		plant_noun = "[planting_seed?.seed_name]"
+		plant_noun = "[planting_seed?.product_name]"
 	else
 		CRASH("Invalid or null value passed to plant_seed(): [S || "NULL"]")
 

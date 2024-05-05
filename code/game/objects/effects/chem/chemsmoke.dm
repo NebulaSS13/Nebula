@@ -87,9 +87,9 @@
 	show_log = 0
 	var/datum/seed/seed
 
-/datum/effect/effect/system/smoke_spread/chem/spores/New(seed_name)
-	if(seed_name)
-		seed = SSplants.seeds[seed_name]
+/datum/effect/effect/system/smoke_spread/chem/spores/New(seed_id)
+	if(seed_id)
+		seed = SSplants.seeds[seed_id]
 	if(!seed)
 		qdel(src)
 	..()
@@ -232,7 +232,7 @@
 
 /datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(var/turf/T, var/icon/I, var/smoke_duration, var/dist = 1)
 	var/obj/effect/effect/smoke/chem/spores = new /obj/effect/effect/smoke/chem(location)
-	spores.SetName("cloud of [seed.seed_name] [seed.seed_noun]")
+	spores.SetName("cloud of [seed.product_name] [seed.seed_noun]")
 	..(T, I, smoke_duration, dist, passed_smoke=spores)
 
 
