@@ -60,6 +60,10 @@
 	result_type           = /obj/item/bedsheet
 	category              = "bedding"
 
+/decl/stack_recipe/textiles/cloth/bandages
+	result_type           = /obj/item/stack/medical/bruise_pack/bandage
+	category              = "medical"
+
 /decl/stack_recipe/textiles/fur
 	abstract_type         = /decl/stack_recipe/textiles/fur
 	craft_stack_types     = /obj/item/stack/material/skin/pelt
