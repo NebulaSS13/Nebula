@@ -1163,11 +1163,7 @@
 	return TRUE
 
 /mob/proc/handle_pre_transformation()
-	for(var/obj/item/W in contents)
-		if(istype(W, /obj/item/implant))
-			qdel(W)
-		else
-			drop_from_inventory(W)
+	dump_contents()
 
 /mob/get_mass()
 	return mob_size

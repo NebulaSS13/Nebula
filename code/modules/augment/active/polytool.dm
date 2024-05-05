@@ -14,30 +14,38 @@
 		var/obj/item/I = new path (src)
 		I.canremove = FALSE
 		items += I
+		events_repository.register(/decl/observ/moved, I, src, /obj/item/organ/internal/augment/active/polytool/proc/check_holding)
+		events_repository.register(/decl/observ/destroyed, I, src, /obj/item/organ/internal/augment/active/polytool/proc/check_holding)
+		events_repository.register(/decl/observ/item_unequipped, I, src, /obj/item/organ/internal/augment/active/polytool/proc/check_holding)
+
 /obj/item/organ/internal/augment/active/polytool/Destroy()
 	QDEL_NULL_LIST(items)
 	. = ..()
 
-/obj/item/organ/internal/augment/active/polytool/proc/holding_dropped(var/obj/item/I)
-
-	//Stop caring
-	events_repository.unregister(/decl/observ/item_unequipped, I, src)
-
-	if(I.loc != src) //something went wrong and is no longer attached/ it broke
-		I.canremove = 1
+/obj/item/organ/internal/augment/active/polytool/proc/check_holding()
+	for(var/obj/item/I in items)
+		if(QDELETED(I) || (I.loc != src && (!owner || I.loc != owner)))
+			I.canremove = TRUE
+			events_repository.unregister(/decl/observ/moved, I, src)
+			events_repository.unregister(/decl/observ/destroyed, I, src)
+			events_repository.unregister(/decl/observ/item_unequipped, I, src)
+			items -= I
 
 /obj/item/organ/internal/augment/active/polytool/activate()
 	if(!can_activate())
 		return
-	var/slot = null
 
-	if(limb.organ_tag in list(BP_L_ARM, BP_L_HAND))
+	var/slot = null
+	if(parent_organ in list(BP_L_ARM, BP_L_HAND))
 		slot = BP_L_HAND
-	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
+	else if(parent_organ in list(BP_R_ARM, BP_R_HAND))
 		slot = BP_R_HAND
 
-	var/obj/I = owner.get_equipped_item(slot)
+	if(!slot)
+		return
 
+	var/obj/item/organ/external/limb = owner?.get_organ(parent_organ)
+	var/obj/I = owner.get_equipped_item(slot)
 	if(I)
 		if(is_type_in_list(I,paths) && !(I.type in items)) //We don't want several of same but you can replace parts whenever
 			if(!owner.drop_from_inventory(I, src))
@@ -46,8 +54,8 @@
 			items += I
 			var/decl/pronouns/G = owner.get_pronouns()
 			owner.visible_message(
-				SPAN_NOTICE("\The [owner] retracts [G.his] [I.name] into [G.his] [limb.name]."),
-				SPAN_NOTICE("You retract your [I.name] into your [limb.name].")
+				SPAN_NOTICE("\The [owner] retracts [G.his] [I.name] into [G.his] [limb ? limb.name : "limb"]."),
+				SPAN_NOTICE("You retract your [I.name] into your [limb ? limb.name : "limb"].")
 			)
 		else
 			to_chat(owner, SPAN_WARNING("You must drop \the [I] before the polytool can extend."))
@@ -58,9 +66,8 @@
 		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item
 			//Keep track of it, make sure it returns
-			events_repository.register(/decl/observ/item_unequipped, item, src, TYPE_PROC_REF(/obj/item/organ/internal/augment/active/simple, holding_dropped) )
 			var/decl/pronouns/G = owner.get_pronouns()
 			owner.visible_message(
-				SPAN_NOTICE("\The [owner] extends [G.his] [item.name] from [G.his] [limb.name]."),
-				SPAN_NOTICE("You extend your [item.name] from your [limb.name].")
+				SPAN_NOTICE("\The [owner] extends [G.his] [item.name] from [G.his] [limb ? limb.name : "limb"]."),
+				SPAN_NOTICE("You extend your [item.name] from your [limb ? limb.name : "limb"].")
 			)

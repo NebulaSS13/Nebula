@@ -157,6 +157,9 @@
 	if(owner && damage && !(status & ORGAN_DEAD))
 		handle_damage_effects()
 
+/obj/item/organ/internal/proc/has_limited_healing()
+	return !min_regeneration_cutoff_threshold || past_damage_threshold(min_regeneration_cutoff_threshold)
+
 /obj/item/organ/internal/proc/handle_damage_effects()
 	SHOULD_CALL_PARENT(TRUE)
 	if(organ_can_heal())
@@ -164,9 +167,7 @@
 		// Determine the lowest our damage can go with the current state.
 		// If we're under the min regeneration cutoff threshold, we can always heal to zero.
 		// If we don't have one set, we can only heal to the nearest threshold value.
-		var/min_heal_val = 0
-		if(!min_regeneration_cutoff_threshold || past_damage_threshold(min_regeneration_cutoff_threshold))
-			min_heal_val = (get_current_damage_threshold() * damage_threshold_value)
+		var/min_heal_val = has_limited_healing() ? (get_current_damage_threshold() * damage_threshold_value) : 0
 
 		// We clamp/round here so that we don't accidentally heal past the threshold and
 		// cheat our way into a full second threshold of healing.

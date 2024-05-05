@@ -5,7 +5,7 @@
 	var/list/instances		//What items are actually stored
 	var/atom/storing_object
 
-/datum/stored_items/New(atom/_storing_object, _path, _name, _amount = 1)
+/datum/stored_items/New(atom/_storing_object, _path, _name, _amount = 0)
 	if(_storing_object)
 		storing_object = _storing_object
 	if(!istype(storing_object))

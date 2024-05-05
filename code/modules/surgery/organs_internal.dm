@@ -221,7 +221,7 @@
 /decl/surgery_step/internal/replace_organ/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	var/obj/item/organ/internal/O = tool
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, user.get_target_zone())
-	if(BP_IS_PROSTHETIC(O) || istype(O, /obj/item/organ/internal/augment))
+	if(BP_IS_PROSTHETIC(O))
 		if(BP_IS_PROSTHETIC(affected))
 			return SURGERY_SKILLS_ROBOTIC
 		else
@@ -230,42 +230,59 @@
 		return ..()
 
 /decl/surgery_step/internal/replace_organ/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	. = FALSE
+
 	var/obj/item/organ/internal/O = tool
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	if(istype(O) && istype(affected))
-		if(BP_IS_CRYSTAL(O) && !BP_IS_CRYSTAL(affected))
-			to_chat(user, SPAN_WARNING("You cannot install a crystalline organ into a non-crystalline bodypart."))
-		else if(!BP_IS_CRYSTAL(O) && BP_IS_CRYSTAL(affected))
-			to_chat(user, SPAN_WARNING("You cannot install a non-crystalline organ into a crystalline bodypart."))
-		else if(BP_IS_PROSTHETIC(affected) && !BP_IS_PROSTHETIC(O))
-			to_chat(user, SPAN_WARNING("You cannot install a naked organ into a robotic body."))
-		else if(!target.get_bodytype())
-			CRASH("Target ([target]) of surgery [type] has no bodytype!")
-		else
-			var/decl/pronouns/G = O.get_pronouns()
-			if(O.damage > (O.max_damage * 0.75))
-				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
-			else if(O.w_class > affected.cavity_max_w_class)
-				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
-			else
-				var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, O.organ_tag)
-				if(I && (I.parent_organ == affected.organ_tag))
-					to_chat(user, SPAN_WARNING("\The [target] already has \a [O.name]."))
-				else
-					. = TRUE
+	if(!istype(O) || !istype(affected))
+		return FALSE
+
+	if(BP_IS_CRYSTAL(O) && !BP_IS_CRYSTAL(affected))
+		to_chat(user, SPAN_WARNING("You cannot install a crystalline organ into a non-crystalline bodypart."))
+		return FALSE
+
+	if(!BP_IS_CRYSTAL(O) && BP_IS_CRYSTAL(affected))
+		to_chat(user, SPAN_WARNING("You cannot install a non-crystalline organ into a crystalline bodypart."))
+		return FALSE
+
+	if(BP_IS_PROSTHETIC(affected) && !BP_IS_PROSTHETIC(O))
+		to_chat(user, SPAN_WARNING("You cannot install a naked organ into a robotic body."))
+		return FALSE
+
+	if(O.parent_organ != affected.organ_tag)
+		to_chat(user, SPAN_WARNING("\The [O] cannot be installed in \the [affected]."))
+		return FALSE
+
+	if(!target.get_bodytype())
+		PRINT_STACK_TRACE("Target ([target]) of surgery [type] has no bodytype!")
+		return FALSE
+
+	var/decl/pronouns/G = O.get_pronouns()
+	if(O.damage > (O.max_damage * 0.75))
+		to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
+		return FALSE
+
+	if(O.w_class > affected.cavity_max_w_class)
+		to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
+		return FALSE
+
+	var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, O.organ_tag)
+	if(I && (I.parent_organ == affected.organ_tag))
+		to_chat(user, SPAN_WARNING("\The [target] already has \a [O.name]."))
+		return FALSE
+
+	return TRUE
 
 /decl/surgery_step/internal/replace_organ/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts [robotic_surgery ? "reinstalling" : "transplanting"] \the [tool] into [target]'s [affected.name].", \
-	"You start [robotic_surgery ? "reinstalling" : "transplanting"] \the [tool] into [target]'s [affected.name].")
+	user.visible_message("[user] starts [robotic_surgery ? "installing" : "transplanting"] \the [tool] into [target]'s [affected.name].", \
+	"You start [robotic_surgery ? "installing" : "transplanting"] \the [tool] into [target]'s [affected.name].")
 	target.custom_pain("Someone's rooting around in your [affected.name]!",100,affecting = affected)
 	..()
 
 /decl/surgery_step/internal/replace_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>\The [user] has [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>", \
-	"<span class='notice'>You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>")
+	user.visible_message("<span class='notice'>\The [user] has [robotic_surgery ? "installed" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>", \
+	"<span class='notice'>You have [robotic_surgery ? "installed" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>")
 	var/obj/item/organ/O = tool
 	if(istype(O) && user.try_unequip(O, target))
 		//Place the organ but don't attach it yet
@@ -290,7 +307,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/attach_organ
 	name = "Attach internal organ"
-	description = "This procedure reattaches a replaced internal organ."
+	description = "This procedure attaches a replaced internal organ."
 	allowed_tools = list(
 		TOOL_SUTURES = 100,
 		TOOL_CABLECOIL = 75
@@ -362,8 +379,8 @@
 /decl/surgery_step/internal/attach_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/I = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 
-	user.visible_message("<span class='notice'>[user] has reattached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
-	"<span class='notice'>You have reattached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
+	user.visible_message("<span class='notice'>[user] has attached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
+	"<span class='notice'>You have attached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
 
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
