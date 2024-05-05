@@ -39,7 +39,7 @@
 	qdel(src) // NOT qdel.
 
 /obj/machinery/atmospherics/pipe/zpipe/on_update_icon()
-	return
+	color = get_color()
 
 /////////////////////////
 // the elusive up pipe //
