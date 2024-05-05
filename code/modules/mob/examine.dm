@@ -58,12 +58,3 @@
 	show_examined_worn_held_items(user, distance, infix, suffix, hideflags, pronouns)
 	show_other_examine_strings(user, distance, infix, suffix, hideflags, pronouns)
 	to_chat(user, "</quote>")
-
-/mob/living/examine(mob/user, distance, infix, suffix)
-	. = ..()
-	// Update our target dolly.
-	if(user.zone_sel)
-		if(should_have_limb(BP_TAIL))
-			user.zone_sel.icon_state = "zone_sel_tail"
-		else
-			user.zone_sel.icon_state = "zone_sel"

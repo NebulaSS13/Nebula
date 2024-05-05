@@ -36,6 +36,7 @@
 	name = "presence of acid"
 	required_chemicals = list(
 		/decl/material/liquid/acid,
+		/decl/material/liquid/acid/hydrochloric,
 		/decl/material/liquid/acid/polyacid
 	)
 
