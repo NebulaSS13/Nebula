@@ -1,5 +1,3 @@
-
-
 /obj/item/organ/internal/augment/active/polytool/engineer
 	name = "engineering toolset"
 	action_button_name = "Deploy Engineering Tool"

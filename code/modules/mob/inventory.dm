@@ -27,6 +27,22 @@
 		to_chat(src, SPAN_WARNING("You are unable to equip that."))
 
 /mob/proc/can_equip_anything_to_slot(var/slot)
+
+	// Held item slots may not have the dexterity to hold an item.
+	if(slot in get_held_item_slots())
+		var/datum/inventory_slot/gripper/hand = get_inventory_slot_datum(slot)
+		// No actual held item slot, this is a bug or an error.
+		if(!istype(hand))
+			return FALSE
+		// Hand is organ based, ask the organ if it has the required dexterity.
+		if(hand.requires_organ_tag)
+			var/obj/item/organ/external/hand_organ = get_organ(hand.requires_organ_tag)
+			if(!(hand_organ.get_manual_dexterity() & DEXTERITY_HOLD_ITEM))
+				return FALSE
+		// Hand is not organ based, ask the gripper slot directly.
+		else if(!(hand.get_dexterity() & DEXTERITY_HOLD_ITEM))
+			return FALSE
+
 	return (slot in get_all_available_equipment_slots())
 
 //This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
@@ -202,13 +218,17 @@
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
-	if(!Target && !length(get_held_items()))
+	var/obj/item/I = get_active_held_item()
+	if(!istype(I))
 		if(length(get_active_grabs()))
 			for(var/obj/item/grab/grab in get_active_grabs())
 				qdel(grab)
 				. = TRUE
 			return
-	. = drop_from_inventory(get_active_held_item(), Target)
+		return FALSE
+	else if(!I.mob_can_unequip(src, get_equipped_slot_for_item(I)))
+		return FALSE
+	. = drop_from_inventory(I, Target)
 
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
@@ -239,7 +259,7 @@
 
 /mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
-		return 1
+		return TRUE
 	var/slot = get_equipped_slot_for_item(I)
 	if(!slot && !istype(I.loc, /obj/item/rig_module))
 		return 1 //already unequipped, so success
