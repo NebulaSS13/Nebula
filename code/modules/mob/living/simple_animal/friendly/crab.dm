@@ -40,7 +40,7 @@
 /datum/ai/crab/do_process(time_elapsed)
 	. = ..()
 	var/mob/living/simple_animal/crab/crab = body
-	if(!isturf(crab.loc) || crab.resting || crab.buckled)
+	if(!isturf(crab.loc) || crab.current_posture.prone || crab.buckled)
 		return
 	crab.turns_since_move++
 	if(crab.turns_since_move >= crab.turns_per_move)

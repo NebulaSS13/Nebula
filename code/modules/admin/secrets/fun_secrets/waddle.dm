@@ -42,7 +42,7 @@
 
 /datum/extension/waddle/proc/waddle()
 	var/mob/living/L = holder
-	if(!istype(L) || L.incapacitated() || L.lying)
+	if(!istype(L) || L.incapacitated() || L.current_posture.prone)
 		return
 	animate(L, pixel_z = 4, time = 0)
 	animate(pixel_z = 0, transform = turn(matrix(), pick(-12, 0, 12)), time=2)

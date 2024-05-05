@@ -52,9 +52,6 @@
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)
 
-	if(resting)
-		SET_STATUS_MAX(src, STAT_WEAK, 5)
-
 	if (stat != DEAD) //Alive.
 		// This previously used incapacitated(INCAPACITATION_DISRUPTED) but that was setting the robot to be permanently unconscious, which isn't ideal.
 		if(!has_power || incapacitated(INCAPACITATION_STUNNED) || HAS_STATUS(src, STAT_PARA))
@@ -67,7 +64,6 @@
 		cameranet.update_visibility(src, FALSE)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
-	set_density(!lying)
 	if(sdisabilities & BLINDED)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 

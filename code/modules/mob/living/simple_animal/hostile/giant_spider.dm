@@ -133,14 +133,9 @@
 //General spider procs
 /mob/living/simple_animal/hostile/giant_spider/Initialize(var/mapload, var/atom/parent)
 	color = parent?.color || color
-	spider_randomify()
-	update_icon()
-	. = ..()
-
-/mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	set_max_health(rand(initial(max_health), (1.4 * initial(max_health))))
 	eye_colour = pick(allowed_eye_colours)
-	update_icon()
+	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/FindTarget()
 	. = ..()

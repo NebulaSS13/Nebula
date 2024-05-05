@@ -46,7 +46,7 @@
 /mob/living/simple_animal/corgi/Ian/do_delayed_life_action()
 	..()
 	//Feeding, chasing food, FOOOOODDDD
-	if(!resting && !buckled)
+	if(!current_posture.prone && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 5)
 			turns_since_scan = 0
@@ -156,7 +156,7 @@
 
 /mob/living/simple_animal/corgi/Lisa/do_delayed_life_action()
 	..()
-	if(!resting && !buckled)
+	if(!current_posture.prone && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 15)
 			turns_since_scan = 0

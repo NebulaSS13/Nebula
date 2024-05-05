@@ -407,7 +407,7 @@ This function restores all organs.
 
 	var/obj/item/organ/external/floor_organ
 
-	if(!lying)
+	if(!current_posture.prone)
 		var/list/obj/item/organ/external/standing = list()
 		for(var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)

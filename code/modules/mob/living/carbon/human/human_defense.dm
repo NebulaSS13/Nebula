@@ -186,13 +186,13 @@ meteor_act
 				//Harder to score a stun but if you do it lasts a bit longer
 				if(prob(effective_force))
 					apply_effect(20, PARALYZE, blocked)
-					if(lying)
+					if(current_posture.prone)
 						visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
 			else
 				//Easier to score a stun but lasts less time
 				if(prob(effective_force + 5))
 					apply_effect(3, WEAKEN, blocked)
-					if(lying)
+					if(current_posture.prone)
 						visible_message("<span class='danger'>[src] has been knocked down!</span>")
 
 		//Apply blood

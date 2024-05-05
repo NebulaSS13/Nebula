@@ -9,7 +9,7 @@
 	var/buckle_allow_rotation = 0
 	var/buckle_layer_above = FALSE
 	var/buckle_dir = 0
-	var/buckle_lying = -1             // bed-like behavior, forces mob.lying = buckle_lying if != -1
+	var/buckle_lying = -1             // bed-like behavior, forces mob to lie or stand if buckle_lying != -1
 	var/buckle_pixel_shift            // ex. @'{"x":0,"y":0,"z":0}' //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 // require people to be cuffed before being able to buckle. eg: pipes
 	var/buckle_require_same_tile = FALSE
@@ -383,7 +383,7 @@
 	M.facing_dir = null
 	if(!buckle_allow_rotation)
 		M.set_dir(buckle_dir ? buckle_dir : dir)
-	M.UpdateLyingBuckledAndVerbStatus()
+	M.update_posture()
 	M.update_floating()
 	buckled_mob = M
 
@@ -398,7 +398,7 @@
 		. = buckled_mob
 		buckled_mob.buckled = null
 		buckled_mob.anchored = initial(buckled_mob.anchored)
-		buckled_mob.UpdateLyingBuckledAndVerbStatus()
+		buckled_mob.update_posture()
 		buckled_mob.update_floating()
 		buckled_mob = null
 		post_buckle_mob(.)
@@ -435,7 +435,7 @@
 	if(buckled == buckling)
 		var/decl/pronouns/G = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] buckles [G.him][G.self] to \the [src]."),
+			SPAN_NOTICE("\The [buckled] buckles [G.self] to \the [src]."),
 			SPAN_NOTICE("You buckle yourself to \the [src]."),
 			SPAN_NOTICE("You hear metal clanking.")
 		)
@@ -459,7 +459,7 @@
 	if(buckled == buckling)
 		var/decl/pronouns/G = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] unbuckled [G.him][G.self] from \the [src]!"),
+			SPAN_NOTICE("\The [buckled] unbuckled [G.self] from \the [src]!"),
 			SPAN_NOTICE("You unbuckle yourself from \the [src]."),
 			SPAN_NOTICE("You hear metal clanking.")
 		)

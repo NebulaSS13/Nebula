@@ -137,15 +137,3 @@
 
 /mob/living/carbon/human/can_sprint()
 	return (stamina > 0)
-
-/mob/living/carbon/human/UpdateLyingBuckledAndVerbStatus()
-	var/old_lying = lying
-	. = ..()
-	if(!buckled)
-		if(lying && !old_lying && !resting) // fell down
-			if(ismob(buckled))
-				var/mob/M = buckled
-				M.unbuckle_mob()
-			var/decl/bodytype/B = get_bodytype()
-			if(B)
-				playsound(loc, B.bodyfall_sounds, 50, TRUE, -1)

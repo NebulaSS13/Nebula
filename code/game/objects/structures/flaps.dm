@@ -32,7 +32,7 @@
 
 	var/mob/living/M = A
 	if(istype(M))
-		if(M.lying)
+		if(M.current_posture.prone)
 			return ..()
 		for(var/mob_type in mobs_can_pass)
 			if(istype(A, mob_type))

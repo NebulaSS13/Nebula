@@ -75,7 +75,7 @@
 /obj/item/beartrap/proc/attack_mob(mob/L)
 
 	var/target_zone
-	if(L.lying)
+	if(L.current_posture.prone)
 		target_zone = ran_zone()
 	else
 		target_zone = pick(BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG)

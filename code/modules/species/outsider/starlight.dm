@@ -94,7 +94,7 @@
 
 	base_auras = list(
 		/obj/aura/starborn
-		)
+	)
 
 /decl/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
 	..()

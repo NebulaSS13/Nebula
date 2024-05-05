@@ -214,7 +214,7 @@
 		. += T.get_terrain_movement_delay(travel_dir, src)
 	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
-	if(lying) //Crawling, it's slower
+	if(current_posture.prone) //Crawling, it's slower
 		. += (8 + ((GET_STATUS(src, STAT_WEAK) * 3) + (GET_STATUS(src, STAT_CONFUSE) * 2)))
 	. += move_intent.move_delay + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance())
 #undef ENCUMBERANCE_MOVEMENT_MOD
@@ -265,7 +265,7 @@
 			return TRUE
 		if((incapacitation_flags & INCAPACITATION_FORCELYING) && HAS_STATUS(src, STAT_WEAK))
 			return TRUE
-		if((incapacitation_flags & INCAPACITATION_KNOCKOUT)   && (HAS_STATUS(src, STAT_PARA)|| HAS_STATUS(src, STAT_ASLEEP)))
+		if((incapacitation_flags & INCAPACITATION_KNOCKOUT)   && (HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP)))
 			return TRUE
 		if((incapacitation_flags & INCAPACITATION_WEAKENED)   && HAS_STATUS(src, STAT_WEAK))
 			return TRUE
@@ -273,7 +273,7 @@
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if(status_flags & ENABLE_AI)
 		return TRUE
-	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || LAZYLEN(pinned)))
+	if((incapacitation_flags & INCAPACITATION_FORCELYING) && LAZYLEN(pinned))
 		return TRUE
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
 		return TRUE
@@ -586,7 +586,7 @@
 	return 0
 
 /mob/living/carbon/human/pull_damage()
-	if(!lying || get_damage(BRUTE) + get_damage(BURN) < 100)
+	if(!current_posture.prone|| get_damage(BRUTE) + get_damage(BURN) < 100)
 		return FALSE
 	for(var/obj/item/organ/external/e in get_external_organs())
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
@@ -689,41 +689,34 @@
 /mob/proc/can_stand_overridden()
 	return 0
 
-//Updates lying and icons
-/mob/proc/update_lying()
-	if(!resting && cannot_stand() && can_stand_overridden())
-		lying = FALSE
-	else if(buckled)
-		anchored = TRUE
-		if(istype(buckled))
-			if(buckled.buckle_lying == -1)
-				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
-			else
-				lying = buckled.buckle_lying
-			if(buckled.buckle_movable)
-				anchored = FALSE
-	else
-		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
+//Updates lying, transform and icons
+/mob/proc/update_posture(force_update)
 
-/mob/proc/UpdateLyingBuckledAndVerbStatus()
-	var/last_lying = lying
-	update_lying()
-	if(buckled)
-		anchored = (!istype(buckled) || !buckled.buckle_movable)
-	if(lying)
-		set_density(0)
-		drop_held_items()
+	var/list/available_postures = get_available_postures()
+	if(length(available_postures) <= 0)
+		return // No postures, no point doing any of this.
+
+	if(length(available_postures) == 1)
+		// If we only have one posture, use that.
+		. = set_posture(available_postures[1], skip_buckled_update = TRUE)
+	else if(istype(buckled) && buckled.buckle_lying != -1)
+		// If we're buckled to something that forces a posture, use that.
+		. = set_posture(buckled.buckle_lying ? /decl/posture/lying : /decl/posture/standing, skip_buckled_update = TRUE)
+	else if(incapacitated(INCAPACITATION_KNOCKDOWN) || (cannot_stand() && !can_stand_overridden()))
+		// If we're straight up knocked over, set that.
+		if(!current_posture.prone)
+			. = set_posture(/decl/posture/lying, skip_buckled_update = TRUE)
+	else if(!current_posture.deliberate)
+		// If we're not deliberately lying, and we can stand, stand up.
+		. = set_posture(/decl/posture/standing, skip_buckled_update = TRUE)
 	else
-		set_density(initial(density))
+		. = FALSE
+
+	anchored = buckled ? (!istype(buckled) || !buckled.buckle_movable) : initial(anchored)
 	reset_layer()
 
-	//Temporarily moved here from the various life() procs
-	//I'm fixing stuff incrementally so this will likely find a better home.
-	//It just makes sense for now. ~Carn
-	if( update_icon )	//forces a full overlay update
-		update_icon = 0
+	if(. || force_update)
 		update_icon()
-	if( lying != last_lying )
 		update_transform()
 
 /mob/proc/facedir(var/ndir)
@@ -734,7 +727,6 @@
 		buckled.set_dir(ndir)
 	SetMoveCooldown(get_movement_delay(ndir))
 	return 1
-
 
 /mob/verb/eastface()
 	set hidden = 1
@@ -896,7 +888,7 @@
 
 /mob/set_dir()
 	if(facing_dir)
-		if(!canface() || lying || restrained())
+		if(!canface() || current_posture.prone || restrained())
 			facing_dir = null
 		else if(buckled)
 			if(buckled.obj_flags & OBJ_FLAG_ROTATABLE)
@@ -1013,10 +1005,10 @@
 	return gender
 
 /mob/is_fluid_pushable(var/amt)
-	if(..() && !buckled && (lying || !Check_Shoegrip()) && (amt >= mob_size * (lying ? 5 : 10)))
-		if(!lying)
+	if(..() && !buckled && (current_posture.prone || !Check_Shoegrip()) && (amt >= mob_size * (current_posture.prone ? 5 : 10)))
+		if(!current_posture.prone)
 			SET_STATUS_MAX(src, STAT_WEAK, 1)
-			if(lying && prob(10))
+			if(current_posture.prone && prob(10))
 				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
 		return TRUE
 	return FALSE
@@ -1350,7 +1342,7 @@
 	return get_bodytype()?.bodytype_category
 
 /mob/proc/get_overlay_state_modifier()
-	return
+	return current_posture?.overlay_modifier
 
 /mob/proc/nervous_system_failure()
 	return FALSE

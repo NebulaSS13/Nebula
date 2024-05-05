@@ -207,7 +207,7 @@ var/global/list/surgery_tool_exception_cache = list()
 	if(delicate)
 		if(HAS_STATUS(user, STAT_SLUR))
 			. -= 10
-		if(!target.lying)
+		if(!target.current_posture.prone)
 			. -= 30
 		var/turf/T = get_turf(target)
 		if(locate(/obj/machinery/optable, T))

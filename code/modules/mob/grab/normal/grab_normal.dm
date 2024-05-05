@@ -20,7 +20,7 @@
 
 	var/mob/living/affecting = G.get_affecting_mob()
 	var/mob/living/assailant = G.assailant
-	if(affecting && A && A == affecting && !affecting.lying)
+	if(affecting && A && A == affecting && !affecting.current_posture.prone)
 
 		affecting.visible_message(SPAN_DANGER("\The [assailant] is trying to pin \the [affecting] to the ground!"))
 		if(do_mob(assailant, affecting, action_cooldown - 1))
@@ -147,7 +147,7 @@
 	if(!attacker.skill_check(SKILL_COMBAT, SKILL_BASIC))
 		return
 
-	if(target.lying)
+	if(target.current_posture.prone)
 		return
 
 	var/damage = 20

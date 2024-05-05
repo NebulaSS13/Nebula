@@ -20,7 +20,7 @@
 	if(!istype(affecting))
 		return
 	affecting.drop_held_items()
-	if(affecting.lying)
+	if(affecting.current_posture.prone)
 		SET_STATUS_MAX(affecting, STAT_WEAK, 4)
 	affecting.take_damage(OXY, 1)
 	affecting.apply_effect(STUTTER, 5) //It will hamper your voice, being choked and all.

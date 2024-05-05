@@ -100,7 +100,7 @@
 		if(HAS_STATUS(owner, STAT_STUN))
 			return 0
 	if(check_flags & AB_CHECK_LYING)
-		if(owner.lying)
+		if(owner.current_posture.prone)
 			return 0
 	if(check_flags & AB_CHECK_ALIVE)
 		if(owner.stat)

@@ -176,7 +176,7 @@
 	if(!forced && breatheffect && !GET_CHEMICAL_EFFECT(owner, CE_STABLE)) //opiates are bad mmkay
 		safe_pressure_min *= 1 + breatheffect
 
-	if(owner.lying)
+	if(owner.current_posture.prone)
 		safe_pressure_min *= 0.8
 
 	var/failed_inhale = 0

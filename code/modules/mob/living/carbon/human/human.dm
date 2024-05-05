@@ -1184,7 +1184,7 @@
 			old_turf.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
 
 /mob/living/carbon/human/proc/has_footsteps()
-	if(species.silent_steps || buckled || lying || throwing)
+	if(species.silent_steps || buckled || current_posture.prone || throwing)
 		return //people flying, lying down or sitting do not step
 
 	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
@@ -1234,6 +1234,3 @@
 	volume = round(volume)
 	if(volume > 0 && range > 0)
 		playsound(T, footsound, volume, 1, range)
-
-/mob/living/get_overlay_state_modifier()
-	return null

@@ -36,7 +36,7 @@
 	//Check if we're on fire
 	handle_fire()
 	handle_actions()
-	UpdateLyingBuckledAndVerbStatus()
+	update_posture()
 	handle_grasp()
 	handle_stance()
 	handle_regular_hud_updates()
@@ -179,7 +179,7 @@
 				radiation -= 5 * RADIATION_SPEED_COEFFICIENT
 				to_chat(src, "<span class='warning'>You feel weak.</span>")
 				SET_STATUS_MAX(src, STAT_WEAK, 3)
-				if(!lying)
+				if(!current_posture.prone)
 					emote(/decl/emote/visible/collapse)
 			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 				lose_hair()
@@ -555,7 +555,7 @@
 					to_chat(src, SPAN_WARNING("\The [S] pulls \the [hand] from your grip!"))
 					hand.singularity_pull(S, current_size)
 			var/obj/item/shoes = get_equipped_item(slot_shoes_str)
-			if(!lying && !(shoes?.item_flags & ITEM_FLAG_NOSLIP))
+			if(!current_posture.prone && !(shoes?.item_flags & ITEM_FLAG_NOSLIP))
 				var/decl/species/my_species = get_species()
 				if(!my_species?.check_no_slip(src) && prob(current_size*5))
 					to_chat(src, SPAN_DANGER("A strong gravitational force slams you to the ground!"))
@@ -571,7 +571,7 @@
 	set waitfor = FALSE // Can sleep in emotes.
 	// Don't need to process any of this if they aren't standing anyways
 	// unless their stance is damaged, and we want to check if they should stay down
-	if (!stance_damage && (lying || resting) && (life_tick % 4) != 0)
+	if (!stance_damage && current_posture.prone && (life_tick % 4) != 0)
 		return
 
 	stance_damage = 0
@@ -669,7 +669,7 @@
 
 	// standing is poor
 	if(stance_damage >= expected_limbs_for_bodytype || (!MOVING_DELIBERATELY(src) && ((stance_damage >= (expected_limbs_for_bodytype*0.75) && prob(8)) || (stance_damage >= (expected_limbs_for_bodytype*0.5) && prob(2)))))
-		if(!(lying || resting))
+		if(!current_posture.prone)
 			if(had_limb_pain)
 				emote(/decl/emote/audible/scream)
 			custom_emote(VISIBLE_MESSAGE, "collapses!")

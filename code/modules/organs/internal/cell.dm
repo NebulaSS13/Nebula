@@ -51,7 +51,7 @@
 	if(world.time - owner.l_move_time < 15)
 		cost *= 2
 	if(!checked_use(cost) && owner.isSynthetic())
-		if(!owner.lying && !owner.buckled)
+		if(!owner.current_posture.prone && !owner.buckled)
 			to_chat(owner, SPAN_WARNING("You don't have enough energy to function!"))
 		SET_STATUS_MAX(owner, STAT_PARA, 3)
 

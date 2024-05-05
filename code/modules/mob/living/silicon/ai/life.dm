@@ -7,9 +7,6 @@
 		src.cameraFollow = null
 		src.reset_view(null)
 
-/mob/living/silicon/ai/update_lying()
-	lying = FALSE
-
 /mob/living/silicon/ai/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)

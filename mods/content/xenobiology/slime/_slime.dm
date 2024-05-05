@@ -14,7 +14,6 @@
 	speak_emote = list("chirps")
 	max_health = 150
 	gender = NEUTER
-	update_icon = 0
 	see_in_dark = 8
 	status_flags = CANPARALYSE|CANPUSH
 	butchery_data = null
@@ -41,6 +40,12 @@
 	for(var/atom/movable/AM in contents)
 		AM.dropInto(loc)
 	. = ..()
+
+/mob/living/slime/get_available_postures()
+	var/static/list/available_postures = list(
+		/decl/posture/standing
+	)
+	return available_postures
 
 /mob/living/slime/getToxLoss()
 	return toxloss

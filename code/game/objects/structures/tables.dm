@@ -451,7 +451,7 @@
 	var/chance = 20
 	if(ismob(P.original) && get_turf(P.original) == cover)
 		var/mob/M = P.original
-		if (M.lying)
+		if (M.current_posture.prone)
 			chance += 20				//Lying down lets you catch less bullets
 	if(is_flipped)
 		if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets

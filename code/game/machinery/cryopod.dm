@@ -248,7 +248,7 @@
 	clear_control_computer()
 	if(occupant)
 		occupant.forceMove(loc)
-		occupant.resting = 1
+		occupant.set_posture(/decl/posture/lying/deliberate)
 	. = ..()
 
 /obj/machinery/cryopod/Initialize()

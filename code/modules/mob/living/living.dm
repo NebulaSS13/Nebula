@@ -517,8 +517,6 @@ default behaviour is:
 	if(!incapacitated(INCAPACITATION_KNOCKOUT) && last_resist + 2 SECONDS <= world.time)
 		last_resist = world.time
 		resist_grab()
-		if(resting)
-			lay_down()
 		if(!HAS_STATUS(src, STAT_WEAK))
 			process_resist()
 
@@ -593,19 +591,42 @@ default behaviour is:
 	if(resisting)
 		visible_message("<span class='danger'>[src] resists!</span>")
 
-/mob/living/verb/lay_down()
+// Shortcut for people used to typing Rest instead of Change Posture.
+/mob/living/verb/rest_verb()
 	set name = "Rest"
 	set category = "IC"
+	lay_down()
 
-	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
-		setClickCooldown(3)
-		if(resting && !do_after(src, 2 SECONDS, src, incapacitation_flags = ~INCAPACITATION_FORCELYING))
+/mob/living/verb/lay_down()
+	set name = "Change Posture"
+	set category = "IC"
+
+	// No posture, no adjustment.
+	if(length(get_available_postures()) <= 1 || incapacitated(INCAPACITATION_KNOCKOUT) || !canClick())
+		return
+
+	var/list/selectable_postures = get_selectable_postures()
+	if(!length(selectable_postures))
+		return
+
+	var/decl/posture/selected_posture
+	if(length(selectable_postures) == 1)
+		selected_posture = selectable_postures[1]
+	else
+		selected_posture = input(usr, "Which posture do you wish to adopt?", "Change Posture", current_posture) as null|anything in selectable_postures
+		if(!selected_posture || length(get_available_postures()) <= 1 || incapacitated(INCAPACITATION_KNOCKOUT) || !canClick())
 			return
-		resting = !resting
-		UpdateLyingBuckledAndVerbStatus()
-		update_icon()
-		update_tail_showing()
-		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]."))
+		if(current_posture == selected_posture || !(selected_posture in get_selectable_postures()))
+			return
+
+	setClickCooldown(3)
+	to_chat(src, SPAN_NOTICE("You are now [selected_posture.posture_change_message]."))
+	if(current_posture.prone && !selected_posture.prone)
+		if(!do_after(src, 2 SECONDS, src, incapacitation_flags = ~INCAPACITATION_FORCELYING))
+			return
+		if(current_posture == selected_posture || !(selected_posture in get_selectable_postures()))
+			return
+	set_posture(selected_posture)
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
@@ -673,14 +694,16 @@ default behaviour is:
 	to_chat(src, "<span class='notice'>Remember to stay in character for a mob of this type!</span>")
 	return 1
 
-/mob/living/proc/add_aura(var/obj/aura/aura)
+/mob/living/proc/add_aura(var/obj/aura/aura, skip_icon_update = FALSE)
 	LAZYDISTINCTADD(auras,aura)
-	update_icon()
+	if(!skip_icon_update)
+		update_icon()
 	return 1
 
-/mob/living/proc/remove_aura(var/obj/aura/aura)
+/mob/living/proc/remove_aura(var/obj/aura/aura, skip_icon_update = FALSE)
 	LAZYREMOVE(auras,aura)
-	update_icon()
+	if(!skip_icon_update)
+		update_icon()
 	return 1
 
 /mob/living/Destroy()
@@ -733,10 +756,10 @@ default behaviour is:
 	return (!L || L.can_drown())
 
 /mob/living/handle_drowning()
-	if(!can_drown() || !loc?.is_flooded(lying))
+	if(!can_drown() || !loc?.is_flooded(current_posture.prone))
 		return FALSE
 	var/turf/T = get_turf(src)
-	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
+	if(!current_posture.prone && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
 		var/datum/reagents/metabolism/inhaled = get_inhaled_reagents()
@@ -1413,7 +1436,7 @@ default behaviour is:
 
 	HandleBloodTrail(T, old_loc)
 
-	if(lying)
+	if(current_posture.prone)
 		return
 
 	var/turf_wet = T.get_wetness()

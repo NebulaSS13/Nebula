@@ -183,7 +183,7 @@
 
 
 /decl/species/serpentid/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
-	if(attacker.pulling_punches || target.lying || attacker == target)
+	if(attacker.pulling_punches || target.current_posture.prone || attacker == target)
 		return ..(attacker, target)
 	if(world.time < attacker.last_attack + 20)
 		to_chat(attacker, SPAN_NOTICE("You can't attack again so soon."))

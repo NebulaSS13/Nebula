@@ -115,7 +115,7 @@
 		to_chat(owner, SPAN_WARNING("You are blind and cannot see your target!"))
 	else if(!aiming_at || !isturf(aiming_at.loc))
 		to_chat(owner, SPAN_WARNING("You have lost sight of your target!"))
-	else if(owner.incapacitated() || owner.lying || owner.restrained())
+	else if(owner.incapacitated() || owner.current_posture.prone || owner.restrained())
 		to_chat(owner, SPAN_WARNING("You must be conscious and standing to keep track of your target!"))
 	else if(aiming_at.is_invisible_to(owner))
 		to_chat(owner, SPAN_WARNING("Your target has become invisible!"))
@@ -142,7 +142,7 @@
 	if(owner.incapacitated())
 		to_chat(owner, SPAN_WARNING("You cannot You cannot threaten \the [target] with \the [thing] in your current state."))
 		return
-	if(owner.lying)
+	if(owner.current_posture.prone)
 		to_chat(owner, SPAN_WARNING("You cannot threaten \the [target] with \the [thing] while prone."))
 		return
 	if(owner.restrained())

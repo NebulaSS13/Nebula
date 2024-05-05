@@ -53,7 +53,7 @@
 
 	var/mob/living/target
 	for (var/mob/living/L in get_turf(src))
-		if (L != src && (L.lying || L.stat == DEAD))
+		if (L != src && (L.current_posture.prone || L.stat == DEAD))
 			target = L
 			break
 	if (!target)

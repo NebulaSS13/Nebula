@@ -900,7 +900,7 @@ The _flatIcons list is a cache for generated icon files.
 
 		if(ismob(A))
 			var/mob/M = A
-			if(M.lying)
+			if(M.current_posture.prone)
 				atom_icon.BecomeLying()
 
 		var/x_offset = (A.x - target_x) * world.icon_size

@@ -34,13 +34,14 @@
 	if(!prob(1))
 		return
 	var/mob/living/simple_animal/opossum/poss = body
-	poss.resting = (poss.stat == UNCONSCIOUS)
-	if(poss.resting)
+	if(poss.stat == UNCONSCIOUS)
+		poss.set_posture(/decl/posture/lying)
 		poss.wander = FALSE
 		poss.speak_chance = 0
 		poss.set_stat(UNCONSCIOUS)
 		poss.is_angry = FALSE
 	else
+		poss.set_posture(/decl/posture/standing)
 		poss.wander = initial(poss.wander)
 		poss.speak_chance = initial(poss.speak_chance)
 		poss.set_stat(CONSCIOUS)
@@ -62,19 +63,19 @@
 	update_icon()
 
 /mob/living/simple_animal/opossum/proc/respond_to_damage()
-	if(!resting && stat == CONSCIOUS)
+	if(!current_posture.prone && stat == CONSCIOUS)
 		if(!is_angry)
 			is_angry = TRUE
 			custom_emote(src, "hisses!")
 		else
-			resting = TRUE
+			set_posture(/decl/posture/lying/deliberate)
 			custom_emote(src, "dies!")
 		update_icon()
 
 /mob/living/simple_animal/opossum/on_update_icon()
 	..()
 	if(stat == CONSCIOUS && is_angry)
-		if(resting)
+		if(current_posture.prone)
 			icon_state = "world-dead"
 		else
 			icon_state = "world-aaa"
