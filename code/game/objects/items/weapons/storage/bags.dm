@@ -112,3 +112,26 @@
 	new /obj/item/cash/c1000(src)
 	if(length(contents) && storage)
 		storage.make_exact_fit()
+
+/obj/item/bag/sack
+	name = "sack"
+	desc = "A simple sack for carrying goods."
+	icon = 'icons/obj/items/storage/sack.dmi'
+	storage = /datum/storage/bag/sack
+	material = /decl/material/solid/organic/cloth
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
+/obj/item/bag/sack/update_w_class()
+	..()
+	update_icon()
+
+/obj/item/bag/sack/on_update_icon()
+	. = ..()
+	icon_state = get_world_inventory_state()
+	switch(w_class)
+		if(3)
+			icon_state = "[icon_state]1"
+		if(4)
+			icon_state = "[icon_state]2"
+		if(5 to INFINITY)
+			icon_state = "[icon_state]3"

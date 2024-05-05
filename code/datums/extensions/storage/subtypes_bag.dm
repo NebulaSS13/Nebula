@@ -23,6 +23,11 @@
 		return 0 //causes problems if the bag expands and becomes larger than src.loc can hold, so disallow it
 	. = ..()
 
+/datum/storage/bag/sack
+	max_w_class = ITEM_SIZE_LARGE
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	can_hold = list()
+
 /datum/storage/bag/trash
 	max_w_class = ITEM_SIZE_HUGE //can fit a backpack inside a trash bag, seems right
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
