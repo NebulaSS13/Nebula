@@ -433,7 +433,14 @@ var/global/list/gear_datums = list()
 	item.loadout_setup(wearer, metadata)
 
 	var/obj/item/old_item = wearer.get_equipped_item(slot)
-	if(wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE, ignore_equipped = TRUE))
+	var/attached_as_accessory = FALSE
+	if(istype(old_item, /obj/item/clothing) && istype(item, /obj/item/clothing))
+		var/obj/item/clothing/worn = old_item
+		if(worn.can_attach_accessory(item, wearer))
+			worn.attach_accessory(wearer, item)
+			attached_as_accessory = TRUE
+
+	if(!attached_as_accessory && wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE, ignore_equipped = TRUE))
 		. = item
 		if(!old_item)
 			return
