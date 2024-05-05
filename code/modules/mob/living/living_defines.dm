@@ -75,3 +75,5 @@
 
 	/// Whether this mob's ability to stand has been affected
 	var/stance_damage = 0
+
+	var/list/smell_cooldown

@@ -1,0 +1,8 @@
+#ifndef MODPACK_PHEROMONES
+#define MODPACK_PHEROMONES
+#include "_pheromones.dm"
+#include "pheromone_effect.dm"
+#include "pheromone_emotes.dm"
+#include "pheromone_implant.dm"
+#include "pheromone_mob.dm"
+#endif

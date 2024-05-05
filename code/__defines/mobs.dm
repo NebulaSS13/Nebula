@@ -188,7 +188,6 @@
 #define BP_VOICE             "vocal synthesiser"
 #define BP_STACK             "stack"
 #define BP_OPTICS            "optics"
-#define BP_SYSTEM_CONTROLLER "system controller"
 
 //Augmetations
 #define BP_AUGMENT_R_ARM        "right arm augment"
