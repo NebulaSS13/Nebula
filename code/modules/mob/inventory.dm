@@ -65,6 +65,7 @@
 	// Attempt to equip accessories if the slot is already blocked.
 	if(!delete_old_item && get_equipped_item(slot))
 
+		var/attached = FALSE
 		var/list/check_slots = get_inventory_slots()
 		if(islist(check_slots))
 
@@ -83,18 +84,19 @@
 				var/obj/item/clothing/clothes = get_equipped_item(slot_string)
 				if(istype(clothes) && clothes.can_attach_accessory(W, src))
 					clothes.attach_accessory(src, W)
+					attached = TRUE
 					break
 
-		return TRUE
+		if(attached)
+			return TRUE
 
 	unequip(W)
-	if(!isnum(slot))
-		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
-		if(inv_slot)
-			inv_slot.equipped(src, W, redraw_mob, delete_old_item)
-			if(W.action_button_name)
-				update_action_buttons()
-			return TRUE
+	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+	if(inv_slot)
+		inv_slot.equipped(src, W, redraw_mob, delete_old_item)
+		if(W.action_button_name)
+			update_action_buttons()
+		return TRUE
 	to_chat(src, SPAN_WARNING("You are trying to equip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]"))
 	return FALSE
 

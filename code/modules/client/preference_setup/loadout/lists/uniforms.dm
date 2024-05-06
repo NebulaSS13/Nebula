@@ -20,6 +20,22 @@
 	name = "black jumpsuit shorts"
 	path = /obj/item/clothing/under/color/blackjumpshorts
 
+/decl/loadout_option/uniform/shirt
+	name = "shirt selection"
+	path = /obj/item/clothing/shirt
+
+/decl/loadout_option/uniform/shirt/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/shirt/ubac,
+		/obj/item/clothing/shirt/ubac/blue,
+		/obj/item/clothing/shirt/ubac/tan,
+		/obj/item/clothing/shirt/ubac/green,
+		/obj/item/clothing/shirt/tunic,
+		/obj/item/clothing/shirt/tunic/short
+	)
+
 /decl/loadout_option/uniform/suit
 	name = "clothes selection"
 	path = /obj/item/clothing/under

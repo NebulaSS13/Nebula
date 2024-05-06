@@ -135,6 +135,7 @@ var/global/list/gear_datums = list()
 	. += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
 	current_tab = current_tab || global.using_map.loadout_categories[1].type
+	var/list/current_loadout = list()
 	var/decl/loadout_category/current_category_decl = GET_DECL(current_tab)
 	for(var/decl/loadout_category/LC as anything in global.using_map.loadout_categories)
 
@@ -147,6 +148,7 @@ var/global/list/gear_datums = list()
 		for(var/gear in LC.gear)
 			var/decl/loadout_option/G = LC.gear[gear]
 			if(gear in pref.gear_list[pref.gear_slot])
+				current_loadout += G
 				category_cost += G.cost
 
 		if(category == current_category_decl.type)
@@ -161,6 +163,14 @@ var/global/list/gear_datums = list()
 				. += " <a href='?src=\ref[src];select_category=\ref[LC]'>[LC.name] - 0[category_selections]</a> "
 
 	. += "</b></center></td></tr>"
+	. += "<tr><td colspan=3><hr></td></tr>"
+	. += "<tr><td colspan=3><b><center>Current loadout</center></b></td></tr>"
+	. += "<tr><td colspan=3><hr></td></tr>"
+	if(length(current_loadout))
+		for(var/decl/loadout_option/G in current_loadout)
+			. += "<tr><td colspan=2><center>[G.name]</center></td><td><a href>Layer up</a><a href>Layer down</a><a href>Remove</a></td></tr>"
+	else
+		. += "<tr><td colspan=3><center>No equipment selected.</center></td></tr>"
 
 	. += "<tr><td colspan=3><hr></td></tr>"
 	. += "<tr><td colspan=3><b><center>[current_category_decl.name]</center></b></td></tr>"
@@ -439,16 +449,16 @@ var/global/list/gear_datums = list()
 		if(worn.can_attach_accessory(item, wearer))
 			worn.attach_accessory(wearer, item)
 			attached_as_accessory = TRUE
+			return TRUE
 
 	if(!attached_as_accessory && wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE, ignore_equipped = TRUE))
-		. = item
-		if(!old_item)
-			return
-		item.handle_loadout_equip_replacement(old_item)
-		if(old_item.loadout_should_keep(item, wearer))
-			place_in_storage_or_drop(wearer, old_item)
-		else
-			qdel(old_item)
+		if(old_item && wearer.get_equipped_item(slot) != old_item)
+			item.handle_loadout_equip_replacement(old_item)
+			if(old_item.loadout_should_keep(item, wearer))
+				place_in_storage_or_drop(wearer, old_item)
+			else
+				qdel(old_item)
+		return item
 
 /decl/loadout_option/proc/spawn_in_storage_or_drop(mob/living/carbon/human/wearer, metadata)
 	var/obj/item/item = spawn_and_validate_item(wearer, metadata)

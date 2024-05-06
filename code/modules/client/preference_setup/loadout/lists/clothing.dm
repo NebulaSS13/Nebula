@@ -4,6 +4,7 @@
 /decl/loadout_option/clothing
 	category = /decl/loadout_category/clothing
 	abstract_type = /decl/loadout_option/clothing
+	slot = slot_w_uniform_str
 
 /decl/loadout_option/clothing/flannel
 	name = "flannel (colorable)"
@@ -32,6 +33,7 @@
 	name = "suit vest, colour select"
 	path = /obj/item/clothing/suit/jacket/vest
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	slot = slot_wear_suit_str
 
 /decl/loadout_option/clothing/suspenders
 	name = "suspenders"
@@ -46,24 +48,34 @@
 	name = "waistcoat, colour select"
 	path = /obj/item/clothing/suit/jacket/waistcoat
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	slot = slot_wear_suit_str
 
 /decl/loadout_option/clothing/zhongshan
 	name = "zhongshan jacket, colour select"
 	path = /obj/item/clothing/suit/jacket/zhongshan
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	slot = slot_wear_suit_str
 
 /decl/loadout_option/clothing/dashiki
 	name = "dashiki selection"
 	path = /obj/item/clothing/suit/dashiki
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
+	slot = slot_wear_suit_str
 
 /decl/loadout_option/clothing/thawb
 	name = "thawb"
 	path = /obj/item/clothing/suit/robe/thawb
+	slot = slot_wear_suit_str
 
 /decl/loadout_option/clothing/sherwani
 	name = "sherwani, colour select"
 	path = /obj/item/clothing/suit/robe/sherwani
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	slot = slot_wear_suit_str
+
+/decl/loadout_option/clothing/shirt_colourable
+	name = "button-up shirt, colour select"
+	path = /obj/item/clothing/shirt
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/clothing/qipao
@@ -80,3 +92,4 @@
 	name = "tangzhuang jacket, colour select"
 	path = /obj/item/clothing/suit/jacket/tangzhuang
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	slot = slot_wear_suit_str

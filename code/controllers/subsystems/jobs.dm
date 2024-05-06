@@ -397,13 +397,35 @@ SUBSYSTEM_DEF(jobs)
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/attempt_role_assignment(var/mob/new_player/player, var/datum/job/job, var/level, var/decl/game_mode/mode)
-	if(!jobban_isbanned(player, job.title) && \
-	 job.player_old_enough(player.client) && \
-	 player.client.prefs.CorrectLevel(job, level) && \
-	 job.is_position_available())
-		assign_role(player, job.title, mode = mode)
-		return TRUE
-	return FALSE
+	if(jobban_isbanned(player, job.title))
+		return FALSE
+	if(!job.player_old_enough(player.client))
+		return FALSE
+	if(!player.client.prefs.CorrectLevel(job, level))
+		return FALSE
+	if(!job.is_position_available())
+		return FALSE
+	assign_role(player, job.title, mode = mode)
+	return TRUE
+
+/decl/loadout_option/proc/is_permitted(mob/living/wearer, datum/job/job)
+	if(!istype(wearer))
+		return FALSE
+	if(allowed_roles && !(job.type in allowed_roles))
+		return FALSE
+	if(allowed_branches)
+		if(!ishuman(wearer))
+			return FALSE
+		var/mob/living/carbon/human/wearer_human = wearer
+		if(!wearer_human.char_branch || !(wearer_human.char_branch.type in allowed_branches))
+			return FALSE
+	if(allowed_skills)
+		for(var/required in allowed_skills)
+			if(!wearer.skill_check(required, allowed_skills[required]))
+				return FALSE
+	if(whitelisted && (!(wearer.get_species()?.name in whitelisted)))
+		return FALSE
+	return TRUE
 
 /datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/carbon/human/H, var/datum/job/job)
 
@@ -415,37 +437,13 @@ SUBSYSTEM_DEF(jobs)
 	if(H.client.prefs.Gear() && job.loadout_allowed)
 		for(var/thing in H.client.prefs.Gear())
 			var/decl/loadout_option/G = global.gear_datums[thing]
-			if(G)
-				var/permitted = FALSE
-				if(G.allowed_branches)
-					if(H.char_branch && (H.char_branch.type in G.allowed_branches))
-						permitted = TRUE
-				else
-					permitted = TRUE
-
-				if(permitted)
-					if(G.allowed_roles)
-						if(job.type in G.allowed_roles)
-							permitted = TRUE
-						else
-							permitted = FALSE
-					else
-						permitted = TRUE
-
-				if(permitted && G.allowed_skills)
-					for(var/required in G.allowed_skills)
-						if(!H.skill_check(required,G.allowed_skills[required]))
-							permitted = FALSE
-
-				if(G.whitelisted && (!(H.species.name in G.whitelisted)))
-					permitted = FALSE
-
-				if(!permitted)
-					to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
-					continue
-
-				if(!G.slot || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
-					spawn_in_storage.Add(G)
+			if(!istype(G))
+				continue
+			if(!G.is_permitted(H))
+				to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
+				continue
+			if(!G.slot || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
+				spawn_in_storage.Add(G)
 
 	// do accessories last so they don't attach to a suit that will be replaced
 	if(H.char_rank && H.char_rank.accessory)
