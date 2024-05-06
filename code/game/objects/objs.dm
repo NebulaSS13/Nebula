@@ -388,3 +388,8 @@
 // Called when passing the metadata back to the item.
 /obj/proc/take_mould_metadata(list/metadata)
 	return
+
+/obj/try_burn_wearer(var/mob/living/holder, var/held_slot, var/delay = 0)
+	if(obj_flags & OBJ_FLAG_INSULATED_HANDLE)
+		return
+	return ..()

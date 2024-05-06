@@ -22,6 +22,18 @@
 /decl/stack_recipe/soft/bowl
 	result_type                 = /obj/item/chems/glass/pottery/bowl
 
+/decl/stack_recipe/soft/jar
+	result_type                 = /obj/item/chems/glass/pottery/jar
+
+/decl/stack_recipe/soft/bottle
+	result_type                 = /obj/item/chems/glass/pottery/bottle
+
+/decl/stack_recipe/soft/bottle_wide
+	result_type                 = /obj/item/chems/glass/pottery/bottle/wide
+
+/decl/stack_recipe/soft/bottle_tall
+	result_type                 = /obj/item/chems/glass/pottery/bottle/tall
+
 /decl/stack_recipe/soft/stack
 	name                        = "brick"
 	name_plural                 = "bricks"

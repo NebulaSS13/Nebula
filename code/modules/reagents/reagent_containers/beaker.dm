@@ -88,6 +88,20 @@
 	material = /decl/material/solid/metal/steel
 	material_force_multiplier = 0.2
 
+/obj/item/chems/glass/beaker/kettle
+	name = "kettle"
+	desc = "A heavy kettle for heating water."
+	icon = 'icons/obj/items/chem/kettle.dmi'
+	icon_state = ICON_STATE_WORLD
+	volume = 180
+	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	material = /decl/material/solid/metal/iron
+	material_force_multiplier = 0.2
+	obj_flags = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
 /obj/item/chems/glass/beaker/noreact
 	name = "cryostasis beaker"
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."

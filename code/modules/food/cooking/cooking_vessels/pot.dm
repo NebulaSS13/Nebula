@@ -5,6 +5,7 @@
 	volume             = 100
 	cooking_category   = RECIPE_CATEGORY_POT
 	presentation_flags = PRESENTATION_FLAG_NAME
+	obj_flags          = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
 
 /obj/item/chems/cooking_vessel/pot/get_cooking_contents_strings()
 	. = ..()
