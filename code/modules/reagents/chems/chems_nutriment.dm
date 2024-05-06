@@ -57,6 +57,18 @@
 	color = "#ffffff"
 	uid = "chem_nutriment_plant"
 
+/decl/material/liquid/nutriment/plant_oil
+	name = "plant oil"
+	lore_text = "A thin yellow oil pressed from vegetables or nuts. Useful as fuel, or in cooking."
+	uid = "chem_nutriment_plant_oil"
+	melting_point = 273
+	boiling_point = 373
+	taste_description = "oily blandness"
+	burn_product = /decl/material/gas/carbon_monoxide
+	ignition_point = T0C+150
+	accelerant_value = FUEL_VALUE_ACCELERANT
+	gas_flags = XGM_GAS_FUEL
+
 /decl/material/liquid/nutriment/honey
 	name = "honey"
 	lore_text = "A golden yellow syrup, loaded with sugary sweetness."
