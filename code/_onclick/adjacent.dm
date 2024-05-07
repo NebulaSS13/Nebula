@@ -96,13 +96,24 @@ Quick adjacency (to turf):
 		if(T.Adjacent(neighbor,src)) return 1
 	return 0
 
-// This is necessary for storage items not on your person.
+// These overrides are necessary for storage items not on your person.
+// TODO: see if this can just go on an /obj override (may impact /machinery?)
 /obj/item/Adjacent(var/atom/neighbor, var/recurse = 1)
-	if(neighbor == loc) return 1
-	if(istype(loc,/obj/item))
+	if(neighbor == loc)
+		return TRUE
+	if(istype(loc, /obj/item) || istype(loc, /obj/structure))
 		if(recurse > 0)
 			return loc.Adjacent(neighbor,recurse - 1)
-		return 0
+		return FALSE
+	return ..()
+
+/obj/structure/Adjacent(var/atom/neighbor, var/recurse = 1)
+	if(neighbor == loc)
+		return TRUE
+	if(istype(loc, /obj/item) || istype(loc, /obj/structure))
+		if(recurse > 0)
+			return loc.Adjacent(neighbor,recurse - 1)
+		return FALSE
 	return ..()
 
 /*
