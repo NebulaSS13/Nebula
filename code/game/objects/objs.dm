@@ -17,7 +17,7 @@
 	var/sharp = 0		// whether this object cuts
 	var/edge = 0		// whether this object is more likely to dismember
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
-	var/damtype = BRUTE
+	var/atom_damage_type = BRUTE
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
@@ -123,7 +123,7 @@
 		. |= DAM_EDGE
 	if(is_sharp(src))
 		. |= DAM_SHARP
-		if(damtype == BURN)
+		if(atom_damage_type == BURN)
 			. |= DAM_LASER
 
 /obj/attackby(obj/item/O, mob/user)

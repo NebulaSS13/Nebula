@@ -107,7 +107,7 @@
 		projectiletype = /obj/item/projectile/beam/drone/weak
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
-	take_damage(BRUTE, rand(5,10) * (severity + 1))
+	take_damage(rand(5, 10) * (severity + 1))
 	disabled = rand(15, 30)
 	malfunctioning = 1
 	hostile_drone = 1

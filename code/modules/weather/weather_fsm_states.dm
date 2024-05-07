@@ -206,7 +206,7 @@
 
 /decl/state/weather/rain/hail/handle_exposure_effects(var/mob/living/M, var/obj/abstract/weather_system/weather)
 	to_chat(M, SPAN_DANGER("You are pelted by a shower of hail!"))
-	M.take_damage(BRUTE, rand(1,3))
+	M.take_damage(rand(1, 3))
 
 /decl/state/weather/ash
 	name =  "Ash"

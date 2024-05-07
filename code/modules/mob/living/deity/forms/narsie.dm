@@ -45,5 +45,5 @@
 	if(istype(H) && H.should_have_organ(BP_HEART))
 		H.vessel.remove_any(charge)
 	else
-		user.take_damage(BRUTE, charge)
+		user.take_damage(charge)
 	return 1

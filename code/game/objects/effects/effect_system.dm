@@ -239,7 +239,7 @@ steam.start() -- spawns the effect
 	if (!..())
 		return 0
 	M.drop_held_items()
-	M.take_damage(OXY, 1)
+	M.take_damage(1, OXY)
 	M.cough()
 
 /obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

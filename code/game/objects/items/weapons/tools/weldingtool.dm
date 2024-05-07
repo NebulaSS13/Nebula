@@ -293,10 +293,10 @@
 /obj/item/weldingtool/proc/update_physical_damage()
 	if(isOn())
 		force   = tank ? tank.lit_force : initial(force)
-		damtype = BURN
+		atom_damage_type = BURN
 	else
-		damtype = BRUTE
 		force   = tank? tank.unlit_force : initial(force)
+		atom_damage_type = BRUTE
 
 /obj/item/weldingtool/proc/turn_on(var/mob/user)
 	if (!status)

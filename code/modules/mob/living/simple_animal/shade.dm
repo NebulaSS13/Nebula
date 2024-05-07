@@ -32,7 +32,7 @@
 /obj/item/natural_weapon/shade
 	name = "foul touch"
 	attack_verb = list("drained")
-	damtype = BURN
+	atom_damage_type =  BURN
 	force = 10
 
 /mob/living/simple_animal/shade/on_defilement()

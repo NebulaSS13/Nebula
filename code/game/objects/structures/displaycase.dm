@@ -49,7 +49,7 @@
 
 /obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
 	..()
-	take_damage(Proj.get_structure_damage())
+	take_damage(Proj.get_structure_damage(), Proj.atom_damage_type)
 
 /obj/structure/proc/subtract_matter(var/obj/subtracting)
 	if(!length(matter))

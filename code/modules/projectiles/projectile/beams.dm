@@ -6,7 +6,7 @@
 	impact_sounds = list(BULLET_IMPACT_MEAT = SOUNDS_LASER_MEAT, BULLET_IMPACT_METAL = SOUNDS_LASER_METAL)
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 40
-	damage_type = BURN
+	atom_damage_type = BURN
 	sharp = 1 //concentrated burns
 	damage_flags = DAM_LASER
 	eyeblur = 4
@@ -140,7 +140,7 @@
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
 	no_attack_log = 1
-	damage_type = BURN
+	atom_damage_type = BURN
 
 	muzzle_type = /obj/effect/projectile/muzzle/laser/blue
 	tracer_type = /obj/effect/projectile/tracer/laser/blue
@@ -159,7 +159,7 @@
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
 	no_attack_log = 1
-	damage_type = BURN
+	atom_damage_type = BURN
 
 /obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
 	if(ishuman(target))
@@ -173,7 +173,7 @@
 	icon_state = "omnilaser"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
-	damage_type = BURN
+	atom_damage_type = BURN
 
 	muzzle_type = /obj/effect/projectile/muzzle/cult
 	tracer_type = /obj/effect/projectile/tracer/cult
@@ -208,7 +208,7 @@
 	damage_flags = 0
 	sharp = 0 //not a laser
 	damage = 1//flavor burn! still not a laser, dmg will be reduce by energy resistance not laser resistances
-	damage_type = BURN
+	atom_damage_type = BURN
 	eyeblur = 1//Some feedback that you've been hit
 	agony = 40
 
@@ -225,7 +225,7 @@
 	name = "shock beam"
 	agony = 0
 	damage = 15
-	damage_type = ELECTROCUTE
+	atom_damage_type = ELECTROCUTE
 	fire_sound='sound/weapons/pulse.ogg'
 
 /obj/item/projectile/beam/stun/shock/heavy
@@ -239,7 +239,7 @@
 	damage = 15
 	sharp = 1
 	edge = 1
-	damage_type = BURN
+	atom_damage_type = BURN
 	life_span = 5
 	pass_flags = PASS_FLAG_TABLE
 	distance_falloff = 4
@@ -263,7 +263,7 @@
 	sharp = FALSE
 	distance_falloff = 5
 	damage_flags = 0
-	damage_type = STUN
+	atom_damage_type = STUN
 	life_span = 3
 	penetration_modifier = 0
 	var/potency_min = 4
@@ -304,7 +304,7 @@
 	icon_state = "darkb"
 	damage = 40
 	armor_penetration = 35
-	damage_type = BRUTE
+	atom_damage_type = BRUTE
 	muzzle_type = /obj/effect/projectile/muzzle/darkmatter
 	tracer_type = /obj/effect/projectile/tracer/darkmatter
 	impact_type = /obj/effect/projectile/impact/darkmatter
@@ -315,7 +315,7 @@
 	damage_flags = 0
 	sharp = 0 //not a laser
 	agony = 40
-	damage_type = STUN
+	atom_damage_type = STUN
 	muzzle_type = /obj/effect/projectile/muzzle/darkmattertaser
 	tracer_type = /obj/effect/projectile/tracer/darkmattertaser
 	impact_type = /obj/effect/projectile/impact/darkmattertaser
@@ -324,7 +324,7 @@
 	name = "point defense salvo"
 	icon_state = "laser"
 	damage = 15
-	damage_type = ELECTROCUTE //You should be safe inside a voidsuit
+	atom_damage_type = ELECTROCUTE //You should be safe inside a voidsuit
 	sharp = FALSE //"Wide" spectrum beam
 	muzzle_type = /obj/effect/projectile/muzzle/pd
 	tracer_type = /obj/effect/projectile/tracer/pd

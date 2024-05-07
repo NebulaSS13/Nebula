@@ -8,7 +8,7 @@
 
 /datum/phenomena/warp/activate(var/mob/living/L)
 	..()
-	L.take_damage(CLONE, 20)
+	L.take_damage(20, CLONE)
 	SET_STATUS_MAX(L, STAT_WEAK, 2)
 	to_chat(L, "<span class='danger'>You feel your body warp and change underneath you!</span>")
 

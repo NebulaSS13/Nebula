@@ -56,7 +56,7 @@
 		return
 	attempt_attack(global.alldirs)
 
-/obj/effect/blob/proc/take_damage(var/damage)
+/obj/effect/blob/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
 	current_health -= damage
 	if(current_health < 0)
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -154,11 +154,11 @@
 	if(!Proj)
 		return
 
-	switch(Proj.damage_type)
+	switch(Proj.atom_damage_type)
 		if(BRUTE)
-			take_damage(Proj.damage / brute_resist)
+			take_damage(Proj.damage / brute_resist, Proj.atom_damage_type)
 		if(BURN)
-			take_damage((Proj.damage / laser_resist) / fire_resist)
+			take_damage((Proj.damage / laser_resist) / fire_resist, Proj.atom_damage_type)
 	return 0
 
 /obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
@@ -180,7 +180,7 @@
 				return
 
 	var/damage = 0
-	switch(W.damtype)
+	switch(W.atom_damage_type)
 		if(BURN)
 			damage = (W.force / fire_resist)
 			if(IS_WELDER(W))
@@ -188,7 +188,7 @@
 		if(BRUTE)
 			damage = (W.force / brute_resist)
 
-	take_damage(damage)
+	take_damage(damage, W.atom_damage_type)
 	return
 
 /obj/effect/blob/core
@@ -349,7 +349,7 @@ regen() will cover update_icon() for this proc
 	var/types_of_tendril = list("solid", "fire")
 
 /obj/item/blob_tendril/get_heat()
-	. = max(..(), damtype == BURN ? 1000 : 0)
+	. = max(..(), atom_damage_type == BURN ? 1000 : 0)
 
 /obj/item/blob_tendril/Initialize()
 	. = ..()
@@ -364,7 +364,7 @@ regen() will cover update_icon() for this proc
 				origin_tech = @'{"materials":2}'
 			if("fire")
 				desc = "A tendril removed from an asteroclast. It's hot to the touch."
-				damtype = BURN
+				atom_damage_type = BURN
 				force = 15
 				color = COLOR_AMBER
 				origin_tech = @'{"powerstorage":2}'

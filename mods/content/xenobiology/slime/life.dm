@@ -8,9 +8,9 @@
 			change = -(change)
 		bodytemperature += (min(environment.temperature, bodytemperature + change) - bodytemperature)
 	if(bodytemperature <= die_temperature)
-		take_damage(TOX, 200)
+		take_damage(200, TOX)
 	else if(bodytemperature <= hurt_temperature)
-		take_damage(TOX, 30)
+		take_damage(30, TOX)
 
 	// If we're standing on top of a dead mob or small items, we can
 	// ingest it (or just melt it a little if we're too small)
@@ -124,7 +124,7 @@
 
 	// Update starvation and nutrition.
 	if(nutrition <= 0)
-		take_damage(TOX, 2)
+		take_damage(2, TOX)
 		if (client && prob(5))
 			to_chat(src, SPAN_DANGER("You are starving!"))
 	else if(nutrition >= get_grow_nutrition() && amount_grown < SLIME_EVOLUTION_THRESHOLD)

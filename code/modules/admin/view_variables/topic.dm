@@ -581,7 +581,7 @@
 			return
 
 		if(istext(Text))
-			L.take_damage(Text, amount)
+			L.take_damage(amount, Text)
 		else
 			to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]")
 			return

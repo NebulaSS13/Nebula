@@ -70,10 +70,10 @@ var/global/list/slime_pain_messages = list(
 // The return value is the nutrition provided to the slime.
 /mob/living/proc/slime_feed_act(var/mob/living/slime/attacker)
 	var/protection = (1 - get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO))
-	take_damage(CLONE, (attacker.is_adult ? 10 : 5) * protection)
-	take_damage(TOX, 1 * protection)
+	take_damage((attacker.is_adult ? 10 : 5) * protection, CLONE)
+	take_damage(1 * protection, TOX)
 	if(current_health <= 0)
-		take_damage(TOX, 1 * protection)
+		take_damage(1 * protection, TOX)
 	if(prob(15) && client)
 		handle_additional_slime_effects()
 	. = 15 * protection

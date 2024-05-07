@@ -59,7 +59,7 @@
 		update_health()
 
 /mob/living/slime/setToxLoss(var/amount)
-	take_damage(TOX, amount-get_damage(TOX))
+	take_damage(amount-get_damage(TOX), TOX)
 
 /mob/living/slime/Initialize(mapload, var/_stype = /decl/slime_colour/grey)
 
@@ -265,7 +265,7 @@
 				return TRUE
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
-			take_damage(BRUTE, damage)
+			take_damage(damage)
 			return TRUE
 
 	return ..()

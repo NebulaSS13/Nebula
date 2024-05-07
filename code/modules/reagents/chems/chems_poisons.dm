@@ -25,7 +25,7 @@
 		SET_STATUS_MAX(M, STAT_BLURRY, 10)
 
 	if(dose > 1 * threshold)
-		M.take_damage(TOX, removed)
+		M.take_damage(removed, TOX)
 
 /decl/material/liquid/presyncopics
 	name = "presyncopics"

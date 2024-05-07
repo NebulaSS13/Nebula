@@ -133,7 +133,7 @@
 			host.release_control()
 			return
 		if(prob(5))
-			host.take_damage(BRAIN, 0.1)
+			host.take_damage(0.1, BRAIN)
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()

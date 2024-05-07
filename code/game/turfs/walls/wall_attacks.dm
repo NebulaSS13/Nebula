@@ -326,7 +326,7 @@
 
 	user.do_attack_animation(src)
 	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
-	if(W.damtype == BURN)
+	if(W.atom_damage_type == BURN)
 		material_divisor = max(material.burn_armor, reinf_material?.burn_armor)
 	var/effective_force = round(W.force / material_divisor)
 	if(effective_force < 2)

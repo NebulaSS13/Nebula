@@ -253,10 +253,10 @@
 		is_on_fire = !is_on_fire
 		update_icon()
 		if(is_on_fire)
-			damtype = BURN
+			atom_damage_type = BURN
 			START_PROCESSING(SSobj, src)
 		else
 			force = null
-			damtype = BRUTE
+			atom_damage_type = BRUTE
 			STOP_PROCESSING(SSobj, src)
 		return TRUE

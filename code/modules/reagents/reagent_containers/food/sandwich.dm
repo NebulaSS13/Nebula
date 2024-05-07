@@ -89,6 +89,6 @@
 	. = ..()
 	if(. && target == user)
 		//This needs a check for feeding the food to other people, but that could be abusable.
-		if(shard) 
+		if(shard)
 			to_chat(target, SPAN_DANGER("You lacerate yourself on \a [shard] in \the [src]!"))
-			target.take_damage(BRUTE, 5) //TODO: Target head if human.
+			target.take_damage(5) //TODO: Target head if human.

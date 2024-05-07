@@ -292,7 +292,7 @@ var/global/list/turret_icons
 	else
 		//if the turret was attacked with the intention of harming it:
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		take_damage(I.force * 0.5)
+		take_damage(I.force * 0.5, I.atom_damage_type)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
 				attacked = 1
@@ -315,14 +315,14 @@ var/global/list/turret_icons
 		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 		return 1
 
-/obj/machinery/porta_turret/take_damage(var/force)
+/obj/machinery/porta_turret/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent = FALSE)
 	if(!raised && !raising)
-		force = force / 8
-		if(force < 5)
+		damage = damage / 8
+		if(damage < 5)
 			return
 
-	current_health -= force
-	if (force > 5 && prob(45))
+	current_health -= damage
+	if (damage > 5 && prob(45))
 		spark_at(src, amount = 5)
 	if(current_health <= 0)
 		die()	//the death process :(

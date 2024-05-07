@@ -26,7 +26,7 @@
 		if(affecting)
 			affecting.add_pain(CEILING(power/2))
 		else
-			take_damage(PAIN, CEILING(power/2))
+			take_damage(CEILING(power/2), PAIN)
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks

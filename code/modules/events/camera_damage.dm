@@ -15,7 +15,7 @@
 	for(var/obj/machinery/camera/cam in range(severity_range,C))
 		if(is_valid_camera(cam))
 			if(prob(2*severity))
-				cam.take_damage(100, ELECTROCUTE, TRUE)
+				cam.take_damage(100, ELECTROCUTE, silent = TRUE)
 			else
 				if(!cam.wires.IsIndexCut(CAMERA_WIRE_POWER))
 					cam.wires.CutWireIndex(CAMERA_WIRE_POWER)

@@ -263,7 +263,7 @@
 			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
-			take_damage(OXY, 4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
+			take_damage(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, OXY, roughly twenty seconds
 		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, -2)
 
 	return
@@ -366,7 +366,7 @@
 		for(var/obj/item/I in src)
 			if(I.contaminated)
 				total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
-		take_damage(TOX, total_contamination)
+		take_damage(total_contamination, TOX)
 
 	. = ..()
 	if(!.)

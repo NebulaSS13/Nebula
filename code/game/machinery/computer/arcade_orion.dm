@@ -419,7 +419,7 @@
 		if(ORION_TRAIL_CARP)
 			to_chat(usr, "<span class='danger'> Something bit you!</span>")
 			var/mob/living/M = usr
-			M.take_damage(BRUTE, 10)
+			M.take_damage(10)
 		if(ORION_TRAIL_FLUX)
 			if(isliving(usr) && prob(75))
 				var/mob/living/M = usr
@@ -450,8 +450,8 @@
 			for(var/i=0;i<10;i++)
 				sleep(10)
 				SET_STATUS_MAX(M, STAT_STUN, 5)
-				M.take_damage(BRUTE, 10, do_update_health = FALSE)
-				M.take_damage(BURN, 10)
+				M.take_damage(10, do_update_health = FALSE)
+				M.take_damage(10, BURN)
 			usr.gib() //So that people can't cheese it and inject a lot of kelo/bicard before losing
 
 

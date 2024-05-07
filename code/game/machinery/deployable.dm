@@ -52,7 +52,7 @@
 			return
 		return
 	else
-		switch(W.damtype)
+		switch(W.atom_damage_type)
 			if(BURN)
 				current_health -= W.force * 0.75
 			if(BRUTE)

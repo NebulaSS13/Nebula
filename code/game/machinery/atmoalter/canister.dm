@@ -202,7 +202,7 @@
 	return 0
 
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	if(!(Proj.atom_damage_type == BRUTE || Proj.atom_damage_type == BURN))
 		return
 	if(Proj.damage)
 		current_health -= round(Proj.damage / 2)

@@ -27,7 +27,7 @@
 	name = "shadow tendril"
 	attack_verb = list("gripped")
 	hitsound = 'sound/hallucinations/growl1.ogg'
-	damtype = BURN
+	atom_damage_type =  BURN
 	force = 15
 
 /mob/living/simple_animal/hostile/faithless/Process_Spacemove()

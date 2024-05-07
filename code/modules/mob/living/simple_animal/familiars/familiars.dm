@@ -66,7 +66,7 @@
 /obj/item/natural_weapon/horror
 	name = "foul touch"
 	force = 10
-	damtype = BURN
+	atom_damage_type =  BURN
 	attack_verb = list("touched")
 
 /mob/living/simple_animal/familiar/horror/get_death_message(gibbed)

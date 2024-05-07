@@ -142,11 +142,11 @@
 	if(has_power(0))
 		// Self-shutdown mode uses only 10kW, so we don't have any spare power to charge.
 		if(!self_shutdown || carded)
-			take_damage(OXY, AI_POWERUSAGE_NORMAL - AI_POWERUSAGE_RECHARGING)
+			take_damage(AI_POWERUSAGE_NORMAL - AI_POWERUSAGE_RECHARGING, OXY)
 		return
 
 	// Not powered. Gain oxyloss depeding on our power usage.
-	take_damage(OXY, calculate_power_usage())
+	take_damage(calculate_power_usage(), OXY)
 
 // This verb allows the AI to disable or enable the power override mode.
 /mob/living/silicon/ai/proc/ai_power_override()

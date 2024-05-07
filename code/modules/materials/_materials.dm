@@ -758,7 +758,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(injectable_nutrition)
 			adjust_nutrition(M, removed)
 		else
-			M.take_damage(TOX, 0.2 * removed)
+			M.take_damage(0.2 * removed, TOX)
 
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
@@ -781,7 +781,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 							I.take_internal_damage(organ_damage, silent=TRUE)
 							dam = 0
 		if(dam > 0)
-			M.take_damage(TOX, toxicity_targets_organ ? (dam * 0.75) : dam)
+			M.take_damage(toxicity_targets_organ ? (dam * 0.75) : dam, TOX)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
 		M.take_organ_damage(0, removed * solvent_power, override_droplimb = DISMEMBER_METHOD_ACID)
@@ -804,7 +804,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			var/malus_factor = malus_level ? malus_level * 0.25 : 0
 			if(malus_level)
 				nutriment_power *= (1 - malus_factor)
-				M.take_damage(TOX, removed * malus_factor)
+				M.take_damage(removed * malus_factor, TOX)
 		M.adjust_nutrition(nutriment_power)
 	if(hydration_factor)
 		M.adjust_hydration(hydration_factor * removed)
@@ -870,7 +870,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
-	M.take_damage(TOX, REM)
+	M.take_damage(REM, TOX)
 
 /decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	return newdata

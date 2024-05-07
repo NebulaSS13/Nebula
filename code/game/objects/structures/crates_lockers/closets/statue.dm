@@ -50,8 +50,8 @@
 	timer--
 	for(var/mob/living/M in src) //Go-go gadget stasis field
 		M.set_damage(TOX, intialTox)
-		M.take_damage(BURN, intialFire - M.get_damage(BURN), do_update_health = FALSE)
-		M.take_damage(BRUTE, intialBrute - M.get_damage(BRUTE))
+		M.take_damage(intialFire - M.get_damage(BURN), BURN, do_update_health = FALSE)
+		M.take_damage(intialBrute - M.get_damage(BRUTE))
 		M.set_damage(OXY, intialOxy)
 	if (timer <= 0)
 		dump_contents()

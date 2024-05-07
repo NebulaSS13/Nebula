@@ -695,6 +695,7 @@
 #include "code\game\alpha_masks.dm"
 #include "code\game\atom_material.dm"
 #include "code\game\atoms.dm"
+#include "code\game\atoms_damage.dm"
 #include "code\game\atoms_fluids.dm"
 #include "code\game\atoms_init.dm"
 #include "code\game\atoms_layering.dm"

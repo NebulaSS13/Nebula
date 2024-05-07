@@ -132,7 +132,7 @@
 
 	return TRUE
 
-/obj/machinery/door/window/take_damage(var/damage)
+/obj/machinery/door/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent = FALSE)
 	current_health = max(0, current_health - damage)
 	if (current_health <= 0)
 		shatter()

@@ -54,7 +54,7 @@
 		dump_contents()
 		remove_extension(src, /datum/extension/scent)
 		update_icon()
-	take_damage(3, BRUTE, 0, hit_atom)
+	take_damage(3, inflicter = hit_atom)
 
 /obj/item/ashtray/plastic
 	material = /decl/material/solid/organic/plastic

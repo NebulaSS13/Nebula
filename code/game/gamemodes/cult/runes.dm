@@ -312,18 +312,18 @@
 		qdel(src)
 	else if(I.force)
 		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		take_damage(I.force)
+		take_damage(I.force, I.atom_damage_type)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	if(!(Proj.atom_damage_type == BRUTE || Proj.atom_damage_type == BURN))
 		return
-	take_damage(Proj.damage)
+	take_damage(Proj.damage, Proj.atom_damage_type)
 	..()
 
-/obj/effect/cultwall/proc/take_damage(var/amount)
-	current_health -= amount
+/obj/effect/cultwall/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+	current_health -= damage
 	if(current_health <= 0)
 		visible_message("<span class='warning'>\The [src] dissipates.</span>")
 		qdel(src)
@@ -474,7 +474,7 @@
 		if(ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 			if(H.is_asystole())
-				H.take_damage(BRAIN, 2 + casters.len)
+				H.take_damage(2 + casters.len, BRAIN)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)

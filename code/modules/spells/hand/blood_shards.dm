@@ -23,7 +23,7 @@
 	name = "bloodshard"
 	damage = 25
 	icon_state = "blood"
-	damage_type = BRUTE
+	atom_damage_type = BRUTE
 	damage_flags = 0
 
 /obj/item/projectile/blood_shard/on_hit(var/atom/movable/target, var/blocked = 0)

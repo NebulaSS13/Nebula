@@ -48,7 +48,7 @@
 	return last_pain
 
 /mob/living/carbon/human/setHalLoss(var/amount)
-	take_damage(PAIN, get_damage(PAIN)-amount)
+	take_damage(get_damage(PAIN)-amount, PAIN)
 
 /mob/living/carbon/human/adjustHalLoss(var/amount, var/do_update_health = TRUE)
 	var/heal = (amount < 0)
@@ -109,7 +109,7 @@
 	return amount
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
-	take_damage(CLONE, get_damage(CLONE)-amount)
+	take_damage(get_damage(CLONE)-amount, CLONE)
 
 /mob/living/carbon/human/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
 	var/heal = amount < 0
@@ -137,7 +137,7 @@
 	return 0
 
 /mob/living/carbon/human/setOxyLoss(var/amount)
-	take_damage(OXY, amount - get_damage(OXY))
+	take_damage(amount - get_damage(OXY), OXY)
 
 /mob/living/carbon/human/adjustOxyLoss(var/damage, var/do_update_health = TRUE)
 	. = FALSE
@@ -159,7 +159,7 @@
 
 /mob/living/carbon/human/setToxLoss(var/amount)
 	if(!(species.species_flags & SPECIES_FLAG_NO_POISON) && !isSynthetic())
-		take_damage(TOX, get_damage(TOX)-amount)
+		take_damage(get_damage(TOX)-amount, TOX)
 
 // TODO: better internal organ damage procs.
 /mob/living/carbon/human/adjustToxLoss(var/amount, var/do_update_health = TRUE)

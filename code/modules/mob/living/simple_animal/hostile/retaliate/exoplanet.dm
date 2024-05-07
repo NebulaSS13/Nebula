@@ -181,7 +181,7 @@
 
 /obj/item/natural_weapon/charbaby
 	name = "scalding hide"
-	damtype = BURN
+	atom_damage_type =  BURN
 	force = 5
 	attack_verb = list("singed")
 

@@ -58,10 +58,10 @@
 	return TRUE
 
 /datum/extension/deity_be_near/champion/deal_damage(var/mob/living/victim,var/mult)
-	victim.take_damage(OXY, 3 * mult)
+	victim.take_damage(3 * mult, OXY)
 
 /datum/extension/deity_be_near/oracle/deal_damage(var/mob/living/victim, var/mult)
-	victim.take_damage(BURN, mult)
+	victim.take_damage(mult, BURN)
 
 /datum/extension/deity_be_near/traitor/deal_damage(var/mob/living/victim, var/mult)
-	victim.take_damage(PAIN, 5 * mult)
+	victim.take_damage(5 * mult, PAIN)

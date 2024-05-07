@@ -57,9 +57,9 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 	if(LAZYACCESS(M.chem_doses, type) > 5)
-		M.take_damage(TOX, removed)
+		M.take_damage(removed, TOX)
 	if(LAZYACCESS(M.chem_doses, type) > 15)
-		M.take_damage(TOX, removed)
+		M.take_damage(removed, TOX)
 
 /decl/material/liquid/blood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))

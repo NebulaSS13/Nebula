@@ -220,7 +220,7 @@
 		destroy_hits--
 		if (destroy_hits <= 0)
 			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
-			switch (Proj.damage_type)
+			switch (Proj.atom_damage_type)
 				if(BRUTE)
 					physically_destroyed()
 				if(BURN)
@@ -229,7 +229,7 @@
 
 	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(damage, 100), Proj.damage_type)
+		take_damage(min(damage, 100), Proj.atom_damage_type)
 
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
@@ -338,13 +338,13 @@
 		else
 			user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
 			playsound(src.loc, hitsound, 100, 1)
-			take_damage(I.force, I.damtype)
+			take_damage(I.force, I.atom_damage_type)
 		return TRUE
 	return FALSE
 
-/obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
+/obj/machinery/door/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent = FALSE)
 	if(!current_health)
-		..(damage, damtype)
+		..(damage, damage_type)
 		update_icon()
 		return
 
@@ -365,7 +365,7 @@
 	else if(current_health < current_max_health * 3/4 && initialhealth >= current_max_health * 3/4)
 		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
 
-	..(component_damage, damtype)
+	..(component_damage, damage_type)
 	update_icon()
 
 //How much damage should be passed to components inside even when door health is non zero

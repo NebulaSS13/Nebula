@@ -3,7 +3,7 @@
 	gender = PLURAL
 	attack_verb = list("attacked")
 	force = 0
-	damtype = BRUTE
+	atom_damage_type =  BRUTE
 	canremove = FALSE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE //for intent of shocking checks, they're right inside the animal
 	is_spawnable_type = FALSE
@@ -67,7 +67,7 @@
 	gender = NEUTER
 	attack_verb = list("sliced")
 	force = 5
-	damtype = BRUTE
+	atom_damage_type =  BRUTE
 	edge = TRUE
 	show_in_message = TRUE
 

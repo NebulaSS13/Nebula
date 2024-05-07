@@ -66,7 +66,7 @@
 	if(do_mob(src, target, 5 SECONDS))
 		to_chat(target,"<span class='danger'>\The [src] scrapes your flesh from your bones!</span>")
 		to_chat(src,"<span class='danger'>You feed hungrily off \the [target]'s flesh.</span>")
-		target.take_damage(BRUTE, 25)
+		target.take_damage(25)
 		if(target.get_damage(BRUTE) < -target.get_max_health())
 			target.gib()
 		heal_damage(BRUTE, 25)

@@ -78,7 +78,7 @@
 		damage = FLOOR(damage * 0.75)
 	..()
 	if(damage)
-		take_damage(damage)
+		take_damage(damage, Proj.atom_damage_type)
 
 /obj/structure/girder/CanFluidPass(var/coming_from)
 	return TRUE

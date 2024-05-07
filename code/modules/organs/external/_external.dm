@@ -852,7 +852,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.update_body(1)
 
 		germ_level++
-		owner.take_damage(TOX, 1)
+		owner.take_damage(1, TOX)
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /obj/item/organ/external/proc/update_wounds()

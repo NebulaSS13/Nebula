@@ -43,7 +43,7 @@
 /mob/living/carbon/human/corpse/LateInitialize()
 	..()
 	var/current_max_health = get_max_health()
-	take_damage(OXY, current_max_health)//cease life functions
+	take_damage(current_max_health, OXY) //cease life functions
 	set_damage(BRAIN, current_max_health)
 	death()
 	var/obj/item/organ/internal/heart/corpse_heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)

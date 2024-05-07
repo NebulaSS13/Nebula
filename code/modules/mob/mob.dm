@@ -783,8 +783,8 @@
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	LAZYREMOVE(embedded, implant)
-	take_damage(BRUTE, 5, do_update_health = FALSE)
-	take_damage(BURN, 10)
+	take_damage(5, do_update_health = FALSE)
+	take_damage(10, BURN)
 	. = ..()
 
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)

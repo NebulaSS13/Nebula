@@ -76,7 +76,7 @@
 			E?.take_external_damage(burn=2,used_weapon="stovetop")
 		else
 			var/mob/living/M = loc
-			M.take_damage(BURN, 2)
+			M.take_damage(2, BURN)
 		if(prob(2))
 			to_chat(loc,"<span class='danger'>\The [src] is burning you!</span>")
 	return 1

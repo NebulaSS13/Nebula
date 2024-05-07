@@ -81,7 +81,7 @@
 
 		if(secures_occupant)
 			user.visible_message(SPAN_DANGER("\The [user] impales \the [target] on \the [src]!"))
-			target.take_damage(BRUTE, rand(30, 45))
+			target.take_damage(rand(30, 45))
 		else
 			user.visible_message(SPAN_DANGER("\The [user] hangs \the [target] from \the [src]!"))
 
@@ -143,7 +143,7 @@
 /obj/structure/meat_hook/proc/set_carcass_state(var/_state)
 	occupant_state = _state
 	if(occupant)
-		occupant.take_damage(BRUTE, rand(50,60))
+		occupant.take_damage(rand(50, 60))
 		if(occupant.stat != DEAD)
 			occupant.death()
 	if(QDELETED(occupant))
@@ -163,7 +163,7 @@
 	var/last_state = occupant_state
 	var/mob/living/last_occupant = occupant
 
-	occupant.take_damage(BRUTE, rand(50,60))
+	occupant.take_damage(rand(50, 60))
 	update_icon()
 	if(!tool?.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = butchery_string, success_message = butchery_string, check_skill = SKILL_COOKING))
 		return FALSE

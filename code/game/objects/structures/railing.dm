@@ -259,10 +259,10 @@
 			update_icon()
 		return
 
-	if(W.force && (W.damtype == BURN || W.damtype == BRUTE))
+	if(W.force && (W.atom_damage_type == BURN || W.atom_damage_type == BRUTE))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
-		take_damage(W.force)
+		take_damage(W.force, W.atom_damage_type)
 		return
 	. = ..()
 
@@ -281,9 +281,8 @@
 
 /obj/structure/railing/do_climb(var/mob/living/user)
 	. = ..()
-	if(.)
-		if(!anchored || material.is_brittle())
-			take_damage(get_max_health()) // Fatboy
+	if(. && (!anchored || material.is_brittle()))
+		take_damage(get_max_health())
 
 	user.jump_layer_shift()
 	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, jump_layer_shift_end)), 2)

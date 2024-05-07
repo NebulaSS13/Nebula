@@ -98,7 +98,7 @@
 			to_chat(user, "<span class='notice'>Unable to repair while [src] is off.</span>")
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		switch(W.damtype)
+		switch(W.atom_damage_type)
 			if(BURN)
 				current_health -= W.force * fire_dam_coeff
 			if(BRUTE)
