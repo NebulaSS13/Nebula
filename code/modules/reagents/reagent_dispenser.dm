@@ -74,7 +74,7 @@
 
 	// We do this here to avoid putting the vessel straight into storage.
 	// This is usually handled by afterattack on /chems.
-	if(storage && istype(W, /obj/item/chems) && user.a_intent == I_HELP)
+	if(storage && istype(W, /obj/item/chems) && !istype(W, /obj/item/chems/food) && user.a_intent == I_HELP)
 		var/obj/item/chems/vessel = W
 		if(vessel.standard_dispenser_refill(user, src))
 			return TRUE

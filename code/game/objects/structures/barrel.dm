@@ -9,7 +9,7 @@
 	material                  = /decl/material/solid/organic/wood
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	wrenchable                = FALSE
-	storage                   = /datum/storage/hopper/industrial
+	storage                   = /datum/storage/barrel
 	amount_dispensed          = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
 	volume                    = 7500

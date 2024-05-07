@@ -81,6 +81,10 @@
 /datum/storage/pouches/large
 	storage_slots = 4
 
+/datum/storage/barrel
+	max_w_class       = ITEM_SIZE_GARGANTUAN
+	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_GARGANTUAN)
+
 /datum/storage/hopper
 	max_w_class = ITEM_SIZE_NORMAL          // Hopper intake size.
 	max_storage_space = DEFAULT_BOX_STORAGE // Total internal storage size.

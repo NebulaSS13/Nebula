@@ -195,3 +195,40 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 #ifndef UNIT_TEST
 	delete_me = TRUE
 #endif
+
+/obj/abstract/landmark/organize
+	abstract_type = /obj/abstract/landmark/organize
+	var/list/sort_types = list(/obj/item)
+
+/obj/abstract/landmark/organize/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/landmark/organize/LateInitialize()
+	..()
+	var/list/sorting_atoms = list()
+	for(var/atom/movable/AM in loc)
+		if(AM.simulated && !AM.anchored && is_type_in_list(AM, sort_types))
+			sorting_atoms += AM
+	if(length(sorting_atoms))
+		organize(shuffle(sorting_atoms))
+	qdel(src)
+
+/obj/abstract/landmark/organize/proc/organize(list/organize)
+	return
+
+/obj/abstract/landmark/organize/horizontal/organize(list/organize)
+	var/offset = round(world.icon_size / length(organize))
+	var/initial_x = -((offset * length(organize)) / 2)
+	var/sorted_atoms = 0
+	for(var/atom/movable/AM as anything in organize)
+		AM.pixel_x = initial_x + (offset * sorted_atoms)
+		sorted_atoms++
+
+/obj/abstract/landmark/organize/vertical/organize(list/organize)
+	var/offset = round(world.icon_size / length(organize))
+	var/initial_y = -((offset * length(organize)) / 2)
+	var/sorted_atoms = 0
+	for(var/atom/movable/AM as anything in organize)
+		AM.pixel_y = initial_y + (offset * sorted_atoms)
+		sorted_atoms++

@@ -75,6 +75,14 @@
 "fR" = (
 /turf/floor/wood/ebony,
 /area/shaded_hills/tannery)
+"fS" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/pottery/bottle/tall/wine,
+/obj/item/chems/glass/pottery/bottle/tall/wine,
+/obj/item/chems/glass/pottery/bottle/tall/wine,
+/obj/abstract/landmark/organize/horizontal,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/inn)
 "gc" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 8
@@ -105,6 +113,7 @@
 	},
 /obj/structure/table/marble,
 /obj/item/chems/condiment/flour,
+/obj/item/chems/condiment/large/salt,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "hc" = (
@@ -138,6 +147,16 @@
 	pixel_y = 10
 	},
 /turf/floor/wood/ebony,
+/area/shaded_hills/inn)
+"id" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/pottery/bottle/beer,
+/obj/item/chems/glass/pottery/bottle/beer,
+/obj/item/chems/glass/pottery/bottle/beer,
+/obj/item/chems/glass/pottery/bottle/beer,
+/obj/item/chems/glass/pottery/bottle/beer,
+/obj/abstract/landmark/organize/horizontal,
+/turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "ij" = (
 /obj/structure/bed/chair/wood/ebony{
@@ -266,11 +285,10 @@
 "rv" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/glass/pottery/bottle,
-/obj/item/chems/glass/pottery/bottle,
-/obj/item/chems/glass/pottery/bottle/tall,
 /obj/item/chems/glass/pottery/bottle/tall,
 /obj/item/chems/glass/pottery/bottle/wide,
-/obj/item/chems/glass/pottery/bottle/wide,
+/obj/abstract/landmark/organize/horizontal,
+/obj/item/chems/glass/pottery/bottle/wide/whiskey,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "ry" = (
@@ -340,6 +358,25 @@
 /obj/item/chems/condiment/sugar,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
+"wh" = (
+/obj/structure/closet/crate/chest,
+/obj/item/cash/imperial/regalis,
+/obj/item/cash/imperial/regalis,
+/obj/item/cash/imperial/regalis,
+/obj/item/cash/imperial/regalis,
+/obj/item/cash/imperial/regalis,
+/obj/item/cash/imperial/quin,
+/obj/item/cash/imperial/quin,
+/obj/item/cash/imperial/quin,
+/obj/item/cash/imperial/quin,
+/obj/item/cash/imperial/quin,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/turf/floor/natural/path/basalt,
+/area/shaded_hills/general_store)
 "xH" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/slaughterhouse)
@@ -416,8 +453,9 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/general_store)
 "EK" = (
-/obj/item/chems/drinks/bottle/premiumwine,
 /obj/structure/table/marble,
+/obj/item/rock/hematite,
+/obj/item/rock/flint,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "EV" = (
@@ -605,6 +643,8 @@
 /area/shaded_hills/stable)
 "SX" = (
 /obj/structure/table/marble,
+/obj/item/chems/glass/mortar,
+/obj/item/rock/basalt,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "Td" = (
@@ -9171,7 +9211,7 @@ EV
 Ic
 EV
 yz
-bz
+wh
 uM
 yz
 uJ
@@ -9761,7 +9801,7 @@ lF
 Ap
 zj
 Ee
-pi
+fS
 Ap
 Tr
 BG
@@ -9913,7 +9953,7 @@ lF
 lF
 Yp
 Ee
-pi
+id
 lF
 Tr
 BG

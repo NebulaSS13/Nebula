@@ -26,14 +26,15 @@
 	if(!ispath(currency, /decl/currency))
 		return INITIALIZE_HINT_QDEL
 
-	for(var/obj/item/cash/other in loc)
-		if(other == src)
-			continue
-		if(other.currency != currency)
-			continue
-		other.absolute_worth += absolute_worth
-		other.update_from_worth()
-		return INITIALIZE_HINT_QDEL
+	if(isturf(loc))
+		for(var/obj/item/cash/other in loc)
+			if(other == src)
+				continue
+			if(other.currency != currency)
+				continue
+			other.absolute_worth += absolute_worth
+			other.update_from_worth()
+			return INITIALIZE_HINT_QDEL
 
 	if(absolute_worth > 0)
 		update_from_worth()
