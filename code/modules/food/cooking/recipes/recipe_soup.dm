@@ -32,7 +32,13 @@
 
 		if(locate(/obj/item/chems/food/grown) in used_items)
 			for(var/obj/item/chems/food/grown/veg in used_items)
-				ingredients[veg.name]++
+				if(veg.seed)
+					ingredients[veg.seed.product_name]++
+
+		if(locate(/obj/item/chems/food/processed_grown) in used_items)
+			for(var/obj/item/chems/food/processed_grown/veg in used_items)
+				if(veg.seed)
+					ingredients[veg.seed.product_name]++
 
 		if(locate(/obj/item/chems/food/butchery) in used_items)
 			for(var/obj/item/chems/food/butchery/meat in used_items)
