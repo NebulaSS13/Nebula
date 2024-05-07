@@ -77,3 +77,6 @@
 	var/stance_damage = 0
 
 	var/list/smell_cooldown
+
+	/// Whether or not this mob has a client who wishes to sleep indefinitely.
+	var/player_triggered_sleeping = FALSE

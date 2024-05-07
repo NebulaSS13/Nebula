@@ -362,6 +362,11 @@
 	if(stat == DEAD)
 		return FALSE
 
+	// Should we be asleep?
+	var/decl/species/my_species = get_species()
+	if(player_triggered_sleeping || (ssd_check() && my_species?.get_ssd(src)))
+		SET_STATUS_MAX(src, STAT_ASLEEP, 2)
+
 	// Handle some general state updates.
 	if(HAS_STATUS(src, STAT_PARA))
 		set_stat(UNCONSCIOUS)

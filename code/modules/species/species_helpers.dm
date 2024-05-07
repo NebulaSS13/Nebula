@@ -60,3 +60,13 @@ var/global/list/stored_shock_by_ref = list()
 
 /decl/species/proc/get_shock_vulnerability(var/mob/living/carbon/human/H)
 	return shock_vulnerability
+
+/decl/species/proc/adjust_status(mob/living/target, condition, amount)
+	switch(condition)
+		if(STAT_WEAK)
+			return amount * weaken_mod
+		if(STAT_STUN)
+			return amount * stun_mod
+		if(STAT_PARA)
+			return amount * paralysis_mod
+	return amount
