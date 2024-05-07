@@ -771,3 +771,10 @@ var/global/list/plural_words_unchanged = list(
 	if(splited)
 		word = "[jointext(splited, " ", 1, length(splited))] [word]"
 	return word
+
+// Surely we have this defined somewhere already??
+/proc/repeatstring(str, num)
+	. = list()
+	for(var/i = 1 to num)
+		. += str
+	. = JOINTEXT(.)
