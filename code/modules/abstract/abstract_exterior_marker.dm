@@ -12,13 +12,6 @@
 		T.set_outside(set_outside)
 	qdel(src)
 
-/obj/abstract/exterior_marker/Initialize()
-	..()
-	var/turf/T = loc
-	if(istype(T))
-		T.set_outside(set_outside)
-	return INITIALIZE_HINT_QDEL
-
 /obj/abstract/exterior_marker/outside
 	name = "Outside"
 	set_outside = OUTSIDE_NO
