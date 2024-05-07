@@ -2,7 +2,7 @@
 	name           = "slab"
 	desc           = "A slab of meat."
 	icon           = 'icons/obj/items/butchery/meat1.dmi'
-	icon_state     = "meat"
+	icon_state     = ICON_STATE_WORLD
 	slice_path     = /obj/item/chems/food/butchery/cutlet/raw
 	slice_num      = 3
 	filling_color  = "#ff1c1c"
