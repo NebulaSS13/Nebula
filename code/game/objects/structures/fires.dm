@@ -247,10 +247,17 @@
 
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
-	if(istype(thing, /obj/item/chems) && user.a_intent != I_HURT)
-		var/obj/item/chems/chems = thing
-		if(chems.standard_pour_into(src, user))
+	// Gate a few interactions behind intent so they can be bypassed if needed.
+	if(user.a_intent != I_HURT)
+		// Put cooking items onto the fire source.
+		if(istype(thing, /obj/item/chems/cooking_vessel) && user.try_unequip(thing, get_turf(src)))
+			thing.reset_offsets()
 			return TRUE
+		// Pour fuel or water into a fire.
+		if(istype(thing, /obj/item/chems))
+			var/obj/item/chems/chems = thing
+			if(chems.standard_pour_into(src, user))
+				return TRUE
 
 	if(lit == FIRE_LIT && istype(thing, /obj/item/flame))
 		thing.fire_act(return_air(), last_fuel_burn_temperature, 500)
