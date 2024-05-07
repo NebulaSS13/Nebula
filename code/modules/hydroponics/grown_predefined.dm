@@ -4,6 +4,15 @@
 /obj/item/chems/food/grown/ambrosiadeus
 	seed = "ambrosiadeus"
 
+/obj/item/chems/food/grown/potato
+	seed = "potato"
+
+/obj/item/chems/food/grown/carrot
+	seed = "carrot"
+
+/obj/item/chems/food/grown/cabbage
+	seed = "cabbage"
+
 /obj/item/chems/food/grown/yarrow
 	seed = "yarrow"
 

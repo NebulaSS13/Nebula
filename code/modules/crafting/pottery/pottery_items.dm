@@ -72,3 +72,15 @@
 	var/image/soup_overlay = get_soup_overlay()
 	if(soup_overlay)
 		add_overlay(soup_overlay)
+
+/obj/item/chems/glass/pottery/bottle/beer/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/ethanol/beer, reagents.maximum_volume)
+
+/obj/item/chems/glass/pottery/bottle/tall/wine/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/ethanol/wine, reagents.maximum_volume)
+
+/obj/item/chems/glass/pottery/bottle/wide/whiskey/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/ethanol/whiskey, reagents.maximum_volume)
