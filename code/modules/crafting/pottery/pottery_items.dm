@@ -3,6 +3,7 @@
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/stone/pottery
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	presentation_flags = PRESENTATION_FLAG_NAME
 
 /obj/item/chems/glass/pottery/teapot
 	name = "teapot"

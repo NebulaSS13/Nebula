@@ -1,6 +1,6 @@
 /obj/structure/fire_source/kiln
 	name = "kiln"
-	desc = "A hulking oven intended for firing clay."
+	desc = "A hulking oven intended for firing clay or melting ore."
 	icon = 'icons/obj/structures/kiln.dmi'
 	icon_state = ICON_STATE_WORLD
 	density = TRUE

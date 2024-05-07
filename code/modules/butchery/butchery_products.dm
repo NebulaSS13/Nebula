@@ -154,6 +154,7 @@
 	desc                = "A severed leg of some unfortunate beast, cleaned and ready for cooking."
 	icon                = 'icons/obj/items/butchery/haunch.dmi'
 	slice_num           = 2
+	slice_path          = /obj/item/chems/food/butchery/meat
 	w_class             = ITEM_SIZE_HUGE
 	var/bone_material   = /decl/material/solid/organic/bone
 

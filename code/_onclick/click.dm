@@ -115,12 +115,15 @@
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
 	var/sdepth = A.storage_depth(src)
 	var/can_wield_item = check_dexterity(DEXTERITY_WIELD_ITEM, silent = TRUE)
+	world << "hjonk 0 [can_wield_item] [!isturf(A) && A == loc] [sdepth] [sdepth != -1 && sdepth <= 1]"
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
+		world << "hjonk 1"
 		if(W && can_wield_item)
 			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		else
+			world << "hjonk 2"
 			if(ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, TRUE)
