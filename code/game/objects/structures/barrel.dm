@@ -20,13 +20,14 @@
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/structure/reagent_dispensers/barrel/LateInitialize()
+/obj/structure/reagent_dispensers/barrel/LateInitialize(mapload, ...)
 	..()
-	for(var/obj/item/thing in loc)
-		if(!thing.simulated || thing.anchored)
-			continue
-		if(storage.can_be_inserted(thing, null))
-			storage.handle_item_insertion(null, thing)
+	if(mapload)
+		for(var/obj/item/thing in loc)
+			if(!thing.simulated || thing.anchored)
+				continue
+			if(storage.can_be_inserted(thing, null))
+				storage.handle_item_insertion(null, thing)
 
 /obj/structure/reagent_dispensers/barrel/on_reagent_change()
 	. = ..()
