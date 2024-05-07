@@ -1,0 +1,5 @@
+author: MistakeNot4892
+changes:
+  - {admin: 'Build mode ladders have been removed, and build mode relocate and move
+      have been merged.'}
+delete-after: true
