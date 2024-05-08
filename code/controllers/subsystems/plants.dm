@@ -1,19 +1,23 @@
 PROCESSING_SUBSYSTEM_DEF(plants)
-	name = "Plants"
-	priority = SS_PRIORITY_PLANTS
-	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
-	flags = SS_BACKGROUND|SS_POST_FIRE_TIMING
+	name       = "Plants"
+	priority   = SS_PRIORITY_PLANTS
+	runlevels  = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
+	flags      = SS_BACKGROUND|SS_POST_FIRE_TIMING
 	init_order = SS_INIT_PLANTS
-	wait = 60
+	wait       = 60
 
-	var/list/product_descs = list()         // Stores generated fruit descs.
-	var/list/seeds = list()                 // All seed data stored here.
-	var/list/gene_tag_masks = list()        // Gene obfuscation for delicious trial and error goodness.
-	var/list/plant_icon_cache = list()      // Stores images of growth, fruits and seeds.
-	var/list/plant_sprites = list()         // List of all harvested product sprites.
-	var/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
-	var/list/gene_masked_list = list()		// Stored gene masked list, rather than recreating it when needed.
-	var/list/plant_gene_datums = list()		// Stored datum versions of the gene masked list.
+	/// Stores generated fruit descs.
+	var/list/product_descs         = list()
+	/// All seed data stored here.
+	var/list/seeds                 = list()
+	/// Stores images of growth, fruits and seeds.
+	var/list/plant_icon_cache      = list()
+	/// List of all harvested product sprites.
+	var/list/plant_sprites         = list()
+	/// List of all growth sprites plus number of growth stages.
+	var/list/plant_product_sprites = list()
+	/// Precalculated gene decl/mask list for use in botany machine UI.
+	var/list/gene_masked_list      = list()
 
 /datum/controller/subsystem/processing/plants/Initialize()
 	// Build the icon lists.
@@ -38,6 +42,11 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 		if(split)
 			plant_product_sprites |= copytext(icostate,1,split)
 
+	// Pre-init all our gene master datums. This generates mask strings and prepares us for trait copying/mutation.
+	// We'll also populate our masked gene list here for the botany machine UI.
+	for(var/decl/plant_gene/gene in decls_repository.get_decls_of_type_unassociated(/decl/plant_gene))
+		gene_masked_list.Add(list(list("tag" = "\ref[gene]", "mask" = gene.name)))
+
 	// Populate the global seed datum list.
 	for(var/type in subtypesof(/datum/seed))
 		var/datum/seed/S = new type
@@ -45,29 +54,6 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 		seeds[S.name] = S
 		S.roundstart = 1
 
-	//Might as well mask the gene types while we're at it.
-	var/list/gene_datums = decls_repository.get_decls_of_subtype(/decl/plantgene)
-	var/list/used_masks = list()
-	var/list/plant_traits = ALL_GENES
-	while(plant_traits && plant_traits.len)
-		var/gene_tag = pick(plant_traits)
-		var/gene_mask = "[uppertext(num2hex(rand(0,255)))]"
-
-		while(gene_mask in used_masks)
-			gene_mask = "[uppertext(num2hex(rand(0,255)))]"
-
-		var/decl/plantgene/G
-
-		for(var/D in gene_datums)
-			var/decl/plantgene/P = gene_datums[D]
-			if(gene_tag == P.gene_tag)
-				G = P
-				gene_datums -= D
-		used_masks += gene_mask
-		plant_traits -= gene_tag
-		gene_tag_masks[gene_tag] = gene_mask
-		plant_gene_datums[gene_mask] = G
-		gene_masked_list.Add(list(list("tag" = gene_tag, "mask" = gene_mask)))
 	. = ..()
 
 // Proc for creating a random seed type.
@@ -77,13 +63,10 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 	seed.name = "[seed.uid]"
 	seed.base_seed_value = rand(10, 15)
 	seeds[seed.name] = seed
-
 	if(survive_on_station)
 		seed.consume_gasses = null
-		seed.set_trait(TRAIT_IDEAL_HEAT,293)
-		seed.set_trait(TRAIT_HEAT_TOLERANCE,20)
-		seed.set_trait(TRAIT_IDEAL_LIGHT,4)
-		seed.set_trait(TRAIT_LIGHT_TOLERANCE,5)
-		seed.set_trait(TRAIT_LOWKPA_TOLERANCE,25)
-		seed.set_trait(TRAIT_HIGHKPA_TOLERANCE,200)
+		for(var/decl/plant_trait/plant_trait in decls_repository.get_decls_of_type_unassociated(/decl/plant_trait))
+			var/val = plant_trait.get_station_survivable_value()
+			if(!isnull(val))
+				seed.set_trait(plant_trait.type, val)
 	return seed

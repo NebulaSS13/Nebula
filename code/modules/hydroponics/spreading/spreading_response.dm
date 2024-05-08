@@ -11,7 +11,7 @@
 		//wait a tick for the Entered() proc that called HasProximity() to finish (and thus the moving animation),
 		//so we don't appear to teleport from two tiles away when moving into a turf adjacent to vines.
 		spawn(1)
-			if(prob(seed.get_trait(((TRAIT_POTENCY)/2)*3)))
+			if(prob((seed.get_trait(TRAIT_POTENCY) / 2) * 3))
 				entangle(M)
 
 /obj/effect/vine/attack_hand(var/mob/user)
@@ -29,7 +29,7 @@
 	wake_neighbors()
 	if(!is_mature())
 		return
-	if(prob(seed.get_trait(((TRAIT_POTENCY)/2)*3)))
+	if(prob((seed.get_trait(TRAIT_POTENCY) / 2) * 3))
 		entangle(victim)
 	var/mob/living/carbon/human/H = victim
 	if(istype(H) && H.get_equipped_item(slot_shoes_str))

@@ -1,65 +1,53 @@
 //Misc
 #define DEAD_PLANT_COLOUR "#c2a180"
 
-// Definitions for genes (trait groupings)
-#define GENE_BIOCHEMISTRY "biochemistry"
-#define GENE_HARDINESS "hardiness"
-#define GENE_ENVIRONMENT "environment"
-#define GENE_METABOLISM "metabolism"
-#define GENE_STRUCTURE "appearance"
-#define GENE_DIET "diet"
-#define GENE_PIGMENT "pigment"
-#define GENE_OUTPUT "output"
-#define GENE_ATMOSPHERE "atmosphere"
-#define GENE_VIGOUR "vigour"
-#define GENE_FRUIT "fruit"
-#define GENE_SPECIAL "special"
-
-#define ALL_GENES list(GENE_BIOCHEMISTRY,GENE_HARDINESS,GENE_ENVIRONMENT,GENE_METABOLISM,GENE_STRUCTURE,GENE_DIET,GENE_PIGMENT,GENE_OUTPUT,GENE_ATMOSPHERE,GENE_VIGOUR,GENE_FRUIT,GENE_SPECIAL)
-
-//Definitions for traits (individual descriptors)
-#define TRAIT_CHEMS                1
-#define TRAIT_EXUDE_GASSES         2
-#define TRAIT_ALTER_TEMP           3
-#define TRAIT_POTENCY              4
-#define TRAIT_HARVEST_REPEAT       5
-#define TRAIT_PRODUCES_POWER       6
-#define TRAIT_JUICY                7
-#define TRAIT_PRODUCT_ICON         8
-#define TRAIT_PLANT_ICON           9
-#define TRAIT_CONSUME_GASSES       10
-#define TRAIT_REQUIRES_NUTRIENTS   11
-#define TRAIT_NUTRIENT_CONSUMPTION 12
-#define TRAIT_REQUIRES_WATER       13
-#define TRAIT_WATER_CONSUMPTION    14
-#define TRAIT_CARNIVOROUS          15
-#define TRAIT_PARASITE             16
-#define TRAIT_STINGS               17
-#define TRAIT_IDEAL_HEAT           18
-#define TRAIT_HEAT_TOLERANCE       19
-#define TRAIT_IDEAL_LIGHT          20
-#define TRAIT_LIGHT_TOLERANCE      21
-#define TRAIT_LOWKPA_TOLERANCE     22
-#define TRAIT_HIGHKPA_TOLERANCE    23
-#define TRAIT_EXPLOSIVE            24
-#define TRAIT_TOXINS_TOLERANCE     25
-#define TRAIT_PEST_TOLERANCE       26
-#define TRAIT_WEED_TOLERANCE       27
-#define TRAIT_ENDURANCE            28
-#define TRAIT_YIELD                29
-#define TRAIT_SPREAD               30
-#define TRAIT_MATURATION           31
-#define TRAIT_PRODUCTION           32
-#define TRAIT_TELEPORTING          33
-#define TRAIT_PLANT_COLOUR         34
-#define TRAIT_PRODUCT_COLOUR       35
-#define TRAIT_BIOLUM               36
-#define TRAIT_BIOLUM_COLOUR        37
-#define TRAIT_IMMUTABLE            38
-#define TRAIT_FLESH_COLOUR         39
-#define TRAIT_LARGE            	   40
-#define TRAIT_LEAVES_COLOUR        41
-#define TRAIT_PHOTOSYNTHESIS       42
+// Defining these to point to the relevant decl types just to avoid a massive changeset.
+// TODO: rename to PLANT_TRAIT or bare decls to avoid mixing up with GetTrait etc.
+#define TRAIT_CHEMS                /decl/plant_trait/chems
+#define TRAIT_EXUDE_GASSES         /decl/plant_trait/exude_gasses
+#define TRAIT_ALTER_TEMP           /decl/plant_trait/alter_temp
+#define TRAIT_POTENCY              /decl/plant_trait/potency
+#define TRAIT_HARVEST_REPEAT       /decl/plant_trait/harvest_repeat
+#define TRAIT_PRODUCES_POWER       /decl/plant_trait/produces_power
+#define TRAIT_JUICY                /decl/plant_trait/juicy
+#define TRAIT_PRODUCT_ICON         /decl/plant_trait/product_icon
+#define TRAIT_PLANT_ICON           /decl/plant_trait/plant_icon
+#define TRAIT_CONSUME_GASSES       /decl/plant_trait/consume_gasses
+#define TRAIT_REQUIRES_NUTRIENTS   /decl/plant_trait/requires_nutrients
+#define TRAIT_NUTRIENT_CONSUMPTION /decl/plant_trait/nutrient_consumption
+#define TRAIT_REQUIRES_WATER       /decl/plant_trait/requires_water
+#define TRAIT_WATER_CONSUMPTION    /decl/plant_trait/water_consumption
+#define TRAIT_CARNIVOROUS          /decl/plant_trait/carnivorous
+#define TRAIT_PARASITE             /decl/plant_trait/parasite
+#define TRAIT_STINGS               /decl/plant_trait/stings
+#define TRAIT_IDEAL_HEAT           /decl/plant_trait/ideal_heat
+#define TRAIT_HEAT_TOLERANCE       /decl/plant_trait/heat_tolerance
+#define TRAIT_IDEAL_LIGHT          /decl/plant_trait/ideal_light
+#define TRAIT_LIGHT_TOLERANCE      /decl/plant_trait/light_tolerance
+#define TRAIT_LOWKPA_TOLERANCE     /decl/plant_trait/lowkpa_tolerance
+#define TRAIT_HIGHKPA_TOLERANCE    /decl/plant_trait/highkpa_tolerance
+#define TRAIT_EXPLOSIVE            /decl/plant_trait/explosive
+#define TRAIT_TOXINS_TOLERANCE     /decl/plant_trait/toxins_tolerance
+#define TRAIT_PEST_TOLERANCE       /decl/plant_trait/pest_tolerance
+#define TRAIT_WEED_TOLERANCE       /decl/plant_trait/weed_tolerance
+#define TRAIT_ENDURANCE            /decl/plant_trait/endurance
+#define TRAIT_YIELD                /decl/plant_trait/yield
+#define TRAIT_SPREAD               /decl/plant_trait/spread
+#define TRAIT_MATURATION           /decl/plant_trait/maturation
+#define TRAIT_PRODUCTION           /decl/plant_trait/production
+#define TRAIT_TELEPORTING          /decl/plant_trait/teleporting
+#define TRAIT_PLANT_COLOUR         /decl/plant_trait/plant_colour
+#define TRAIT_PRODUCT_COLOUR       /decl/plant_trait/product_colour
+#define TRAIT_BIOLUM               /decl/plant_trait/biolum
+#define TRAIT_BIOLUM_COLOUR        /decl/plant_trait/biolum_colour
+#define TRAIT_IMMUTABLE            /decl/plant_trait/immutable
+#define TRAIT_FLESH_COLOUR         /decl/plant_trait/flesh_colour
+#define TRAIT_LARGE            	   /decl/plant_trait/large
+#define TRAIT_LEAVES_COLOUR        /decl/plant_trait/leaves_colour
+#define TRAIT_PHOTOSYNTHESIS       /decl/plant_trait/photosynthesis
+#define TRAIT_PRODUCT_TYPE         /decl/plant_trait/product_type
+#define TRAIT_SLICE_PRODUCT        /decl/plant_trait/slice_product
+#define TRAIT_SLICE_AMOUNT         /decl/plant_trait/slice_amount
 
 // Seed noun datums
 #define SEED_NOUN_SPORES          "spores"
