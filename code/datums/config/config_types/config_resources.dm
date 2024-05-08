@@ -15,7 +15,7 @@
 /decl/config/text/custom_icon_icon_location
 	uid = "custom_icon_icon_location"
 	default_value = "config/custom_icons/icons"
-	desc = "Uncomment this and set it to a file path relative to the executing binary to prefix all custom icon locations with this location ie. '\[CUSTOM_ICON_ICON_LOCATION\]/\[custom icon path value\]'"
+	desc = "Set this to a file path relative to the executing binary to prefix all custom icon locations with this location ie. '\[CUSTOM_ICON_ICON_LOCATION\]/\[custom icon path value\]'"
 
 /decl/config/lists/resource_urls
 	uid = "resource_urls"

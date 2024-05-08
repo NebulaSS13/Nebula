@@ -29,7 +29,7 @@
 /decl/config/num/autostealth
 	uid = "autostealth"
 	default_value = 0
-	desc = "Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes."
+	desc = "Sets a value in minutes after which to auto-hide staff who are AFK."
 
 /decl/config/toggle/on/guest_jobban
 	uid = "guest_jobban"
@@ -68,12 +68,12 @@
 
 /decl/config/toggle/allow_unsafe_narrates
 	uid = "allow_unsafe_narrates"
-	desc = "Uncomment this to allow admins to narrate using HTML tags."
+	desc = "Determines if admins are allowed to narrate using HTML tags."
 
 /decl/config/toggle/visible_examine
 	uid = "visible_examine"
-	desc = "Uncomment this to show a visible message when someone examines something ('Dave looks at you.')."
+	desc = "Determines if a visible message should be shown when someone examines something ('Dave looks at you.')."
 
 /decl/config/toggle/allow_loadout_customization
 	uid = "loadout_customization"
-	desc = "Uncomment this to allow all loadout items to have name and desc customized by default."
+	desc = "Determines if all loadout items are allowed to have name and desc customized by default."

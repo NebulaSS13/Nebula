@@ -234,7 +234,7 @@
 
 /decl/config/toggle/do_not_prevent_spam
 	uid = "do_not_prevent_spam"
-	desc = "Uncomment this to DISABLE action spam kicking. Not recommended; this helps protect from spam attacks."
+	desc = "Determines if action spam kicking should be DISABLED. Not recommended; this helps protect from spam attacks."
 
 /decl/config/toggle/no_throttle_localhost
 	uid = "no_throttle_localhost"
@@ -307,11 +307,11 @@
 
 /decl/config/toggle/use_alien_whitelist
 	uid = "usealienwhitelist"
-	desc = "Uncomment to restrict non-admins from using humanoid alien races."
+	desc = "Determines if non-admins are restricted from using humanoid alien races."
 
 /decl/config/toggle/use_alien_whitelist_sql
 	uid = "usealienwhitelist_sql"
-	desc = "Uncomment to use the alien whitelist system with SQL instead. (requires the above uncommented as well)."
+	desc = "Determines if the alien whitelist should use SQL instead of the legacy system. (requires the above uncommented as well)."
 
 /decl/config/toggle/forbid_singulo_possession
 	uid = "forbid_singulo_possession"
@@ -326,31 +326,31 @@
 
 /decl/config/toggle/disable_webhook_embeds
 	uid = "disable_webhook_embeds"
-	desc = "Uncomment to make Discord webhooks send in plaintext rather than as embeds."
+	desc = "Determines if Discord webhooks should be sent in plaintext rather than as embeds."
 
 /decl/config/toggle/delist_when_no_admins
 	uid = "delist_when_no_admins"
-	desc = "Uncomment this to remove the server from the hub."
+	desc = "Determines if the server should hide itself from the hub when no admins are online.."
 
 /decl/config/toggle/wait_for_sigusr1_reboot
 	uid = "wait_for_sigusr1_reboot"
-	desc = "Uncomment to make Dream Daemon refuse to reboot for any reason other than SIGUSR1."
+	desc = "Determines if Dream Daemon should refuse to reboot for any reason other than SIGUSR1."
 
 /decl/config/toggle/use_irc_bot
 	uid = "use_irc_bot"
-	desc = "Uncomment to enable sending data to the IRC bot."
+	desc = "Determines if data is sent to the IRC bot. Generally requires MAIN_IRC and associated setup."
 
 /decl/config/toggle/show_typing_indicator_for_whispers
 	uid = "show_typing_indicator_for_whispers"
-	desc = "Uncomment this to show a typing indicator for people writing whispers."
+	desc = "Determinese if a typing indicator shows overhead for people currently writing whispers."
 
 /decl/config/toggle/announce_shuttle_dock_to_irc
 	uid = "announce_shuttle_dock_to_irc"
-	desc = "Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup."
+	desc = "Determines if announce shuttle dock announcements are sent to the main IRC channel, if MAIN_IRC has also been setup."
 
 /decl/config/toggle/guests_allowed
 	uid = "guests_allowed"
-	desc = "Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting)."
+	desc = "Determines whether or not people without a registered ckey (i.e. guest-*) can connect to your server."
 
 /decl/config/toggle/on/ban_legacy_system
 	uid = "ban_legacy_system"

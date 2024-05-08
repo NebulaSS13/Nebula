@@ -120,13 +120,18 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)
 	var/list/comps = list()
-	if(dir & NORTH) comps += "NORTH"
-	if(dir & SOUTH) comps += "SOUTH"
-	if(dir & EAST) comps += "EAST"
-	if(dir & WEST) comps += "WEST"
-	if(dir & UP) comps += "UP"
-	if(dir & DOWN) comps += "DOWN"
-
+	if(dir & NORTH)
+		comps += "NORTH"
+	if(dir & SOUTH)
+		comps += "SOUTH"
+	if(dir & EAST)
+		comps += "EAST"
+	if(dir & WEST)
+		comps += "WEST"
+	if(dir & UP)
+		comps += "UP"
+	if(dir & DOWN)
+		comps += "DOWN"
 	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")
 
 //more or less a logging utility
