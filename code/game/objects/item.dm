@@ -562,7 +562,7 @@
 
 	return TRUE
 
-/obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
+/obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
 	if(!slot || !user || !canremove)
 		return FALSE
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)

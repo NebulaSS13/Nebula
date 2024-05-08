@@ -1,11 +1,11 @@
 /obj/item/grab
-	name = "grab"
-	canremove =    FALSE
-	item_flags =   ITEM_FLAG_NO_BLUDGEON
-	w_class =      ITEM_SIZE_NO_CONTAINER
-	pickup_sound = null
-	drop_sound =   null
-	equip_sound =  null
+	name              = "grab"
+	canremove         = FALSE
+	item_flags        = ITEM_FLAG_NO_BLUDGEON
+	w_class           = ITEM_SIZE_NO_CONTAINER
+	pickup_sound      = null
+	drop_sound        = null
+	equip_sound       = null
 	is_spawnable_type = FALSE
 
 	var/atom/movable/affecting             // Atom being targeted by this grab.
@@ -74,6 +74,11 @@
 
 	if(affecting_mob && assailant?.a_intent == I_HURT)
 		upgrade(TRUE)
+
+/obj/item/grab/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
+	if(dropping)
+		return TRUE
+	return FALSE
 
 /obj/item/grab/examine(mob/user)
 	. = ..()
