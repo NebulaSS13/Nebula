@@ -242,3 +242,7 @@
 
 /mob/living/exosuit/try_awaken(mob/user)
 	return FALSE
+
+/mob/living/exosuit/handle_stance()
+	stance_damage = 0
+	return

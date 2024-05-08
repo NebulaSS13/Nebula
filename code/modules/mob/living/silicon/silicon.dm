@@ -461,3 +461,7 @@
 
 /mob/living/silicon/try_awaken(mob/user)
 	return FALSE
+
+/mob/living/silicon/handle_stance()
+	stance_damage = 0
+	return
