@@ -609,3 +609,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		/decl/posture/lying/deliberate
 	)
 	return available_postures
+
+/mob/living/simple_animal/get_default_3p_hug_message(mob/living/target)
+	return "$USER$ nuzzles $TARGET$."
+
+/mob/living/simple_animal/get_default_1p_hug_message(mob/living/target)
+	return "You nuzzle $TARGET$."

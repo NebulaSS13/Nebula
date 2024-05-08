@@ -974,6 +974,11 @@ default behaviour is:
 	. = ..()
 	if(.)
 
+		if(stat != DEAD)
+			ADJ_STATUS(src, STAT_PARA, -3)
+			ADJ_STATUS(src, STAT_STUN, -3)
+			ADJ_STATUS(src, STAT_WEAK, -3)
+
 		if(fire_stacks >= target.fire_stacks + 3)
 			target.fire_stacks += 1
 			fire_stacks -= 1

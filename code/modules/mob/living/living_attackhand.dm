@@ -89,20 +89,25 @@
 // Returns TRUE if further interactions should be halted, FALSE otherwise.
 /mob/living/proc/try_awaken(mob/user)
 
-	if(stat != UNCONSCIOUS)
-		return FALSE
+	if(isSynthetic() || stat == CONSCIOUS)
+		return user.attempt_hug(src)
 
 	var/decl/pronouns/pronouns = get_pronouns()
 	var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
 	if(uniform)
 		uniform.add_fingerprint(user)
 
+	// They're SSD, so permanently asleep.
 	var/show_ssd = get_species_name()
 	if(show_ssd && ssd_check())
 		user.visible_message(
 			SPAN_NOTICE("\The [user] shakes \the [src] trying to wake [pronouns.him] up!"),
 			SPAN_NOTICE("You shake \the [src], but they do not respond...")
 		)
+		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		. = TRUE
+
+	// Not SSD, so try to wake them up.
 	else if(current_posture?.prone || HAS_STATUS(src, STAT_ASLEEP) || player_triggered_sleeping)
 		player_triggered_sleeping = FALSE
 		ADJ_STATUS(src, STAT_ASLEEP, -5)
@@ -112,12 +117,15 @@
 			SPAN_NOTICE("\The [user] shakes \the [src] trying to wake [pronouns.him] up!"),
 			SPAN_NOTICE("You shake \the [src] trying to wake [pronouns.him] up!")
 		)
-	else
-		user.attempt_hug(src)
+		. = TRUE
 
-	if(stat != DEAD)
-		ADJ_STATUS(src, STAT_PARA, -3)
-		ADJ_STATUS(src, STAT_STUN, -3)
-		ADJ_STATUS(src, STAT_WEAK, -3)
-	playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-	return TRUE
+	if(.)
+		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		if(stat != DEAD)
+			ADJ_STATUS(src, STAT_PARA, -3)
+			ADJ_STATUS(src, STAT_STUN, -3)
+			ADJ_STATUS(src, STAT_WEAK, -3)
+		return
+
+	// Fallback.
+	return user.attempt_hug(src)

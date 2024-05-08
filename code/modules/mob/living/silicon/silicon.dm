@@ -458,3 +458,6 @@
 		/decl/posture/standing
 	)
 	return available_postures
+
+/mob/living/silicon/try_awaken(mob/user)
+	return FALSE

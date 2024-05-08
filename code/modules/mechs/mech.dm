@@ -239,3 +239,6 @@
 		/decl/posture/standing
 	)
 	return available_postures
+
+/mob/living/exosuit/try_awaken(mob/user)
+	return FALSE
