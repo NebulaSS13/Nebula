@@ -15,10 +15,10 @@
 ## Allows admin item spawning.
 #ALLOW_ADMIN_SPAWNING 1
 
-## Uncomment this to allow admins to narrate using HTML tags. Uncomment to enable.
+## Determines if admins are allowed to narrate using HTML tags. Uncomment to enable.
 #ALLOW_UNSAFE_NARRATES
 
-## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes.
+## Sets a value in minutes after which to auto-hide staff who are AFK.
 #AUTOSTEALTH 0
 
 ## Set to 0/1 to disable/enable automatic admin rights for users connecting from the host the server is running on.
@@ -82,15 +82,15 @@
 ## If the first delay has a custom start time. Defined in minutes.
 #EVENT_FIRST_RUN [null,null,{"lower":80,"upper":100}]
 
-## Determines if objectives are disabled.
-#OBJECTIVES_DISABLED 2
+## Determines if objectives are disabled. Valid values: none, verb, and all.
+OBJECTIVES_DISABLED all
 
 ##
 # GAME OPTIONS
 # Configuration options relating to gameplay, such as movement, health and stamina.
 ##
 
-## Uncomment this to modify the length of the spam kicking interval in seconds.
+## Determines the length of the spam kicking interval in seconds.
 #ACT_INTERVAL 0.1
 
 ## Remove the # to let aliens spawn. Uncomment to enable.
@@ -123,13 +123,13 @@
 ## Restricted ERT to be only called by admins. Uncomment to enable.
 #ERT_ADMIN_CALL_ONLY
 
-## Uncomment this to enable expanded alt interactions with objects. Uncomment to enable.
+## Determines if objects should provide expanded alt interactions when alt-clicked, such as use or grab. Uncomment to enable.
 #EXPANDED_ALT_INTERACTIONS
 
 ## Expected round length in hours.
 #EXPECTED_ROUND_LENGTH 3
 
-## Uncomment to allow ghosts to possess any animal. Uncomment to enable.
+## Determines of ghosts are allowed to possess any animal. Uncomment to enable.
 #GHOSTS_CAN_POSSESS_ANIMALS
 
 ## Remove the # to let ghosts spin chairs. Uncomment to enable.
@@ -150,7 +150,7 @@
 ## Maximum stamina recovered per tick when resting.
 #MAXIMUM_STAMINA_RECOVERY 3
 
-## Uncomment this to modify the number of actions permitted per interval before being kicked for spam.
+## Defines the number of actions permitted per interval before a user is kicked for spam.
 #MAX_ACTS_PER_INTERVAL 140
 
 ## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
@@ -174,6 +174,12 @@
 ## Determines the severity of athletics skill when applied to stamina cost.
 #SKILL_SPRINT_COST_RANGE 0.8
 
+## Enables or disables checking for specific tool types by some stack crafting recipes. Uncomment to enable.
+#STACK_CRAFTING_USES_TOOLS
+
+## Enables or disables checking for specific stack types by some stack crafting recipes.
+#STACK_CRAFTING_USES_TYPES 1
+
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
 #WALK_DELAY 4
 
@@ -182,13 +188,13 @@
 # Configuration options relating to the game world and simulation.
 ##
 
-## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR Uncomment to enable.
+## Determines if special 'Easter-egg' events are active on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR Uncomment to enable.
 #ALLOW_HOLIDAYS
 
-## Uncomment this to prevent players from printing copy/pasted circuits.
+## Determines if players can print copy/pasted integrated circuits.
 #ALLOW_IC_PRINTING 1
 
-## Uncomment to allow ghosts to write in blood during Cult rounds.
+## Determines if ghosts are permitted to write in blood during cult rounds.
 #CULT_GHOSTWRITER 1
 
 ## The maximum duration of an exoplanet day, in minutes.
@@ -233,12 +239,12 @@
 #RADIATION_RESISTANCE_MULTIPLIER 1.25
 
 ## Enable/Disable random level generation. Will behave strangely if turned off with a map that expects it on. Uncomment to enable.
-#ROUNDSTART_LEVEL_GENERATION
+ROUNDSTART_LEVEL_GENERATION
 
 ## Unhash this to use iterative explosions, keep it hashed to use circle explosions. Uncomment to enable.
 #USE_ITERATIVE_EXPLOSIONS
 
-## Uncomment to disable the restrictive weldervision overlay.
+## Toggles the restrictive weldervision overlay when wearing welding goggles or a welding helmet.
 #WELDER_VISION 1
 
 ##
@@ -371,20 +377,20 @@
 ##
 
 ## Password used for authorizing external tools that can apply bans.
-#BAN_COMMS_PASSWORD 
+#BAN_COMMS_PASSWORD
 
 ## Password used for authorizing ircbot and other external tools.
-#COMMS_PASSWORD 
+#COMMS_PASSWORD
 
 ## Export address where external tools that monitor logins are located.
-#LOGIN_EXPORT_ADDR 
+#LOGIN_EXPORT_ADDR
 
 ##
 # RESOURCES
 # Configuration options relating to server resources.
 ##
 
-## Uncomment this and set it to a file path relative to the executing binary to prefix all custom icon locations with this location ie. '[CUSTOM_ICON_ICON_LOCATION]/[custom icon path value]'
+## Set this to a file path relative to the executing binary to prefix all custom icon locations with this location ie. '[CUSTOM_ICON_ICON_LOCATION]/[custom icon path value]'
 #CUSTOM_ICON_ICON_LOCATION config/custom_icons/icons
 
 ## Set this to a file path relative to the executing binary to prefix all custom item icon locations with this location ie. '[CUSTOM_ITEM_ICON_LOCATION]/[custom item icon path value]'
@@ -407,7 +413,7 @@
 #ABANDON_ALLOWED 1
 
 ## IRC channel to send adminhelps to. Leave blank to disable adminhelps-to-irc.
-#ADMIN_IRC 
+#ADMIN_IRC
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 #ADMIN_LEGACY_SYSTEM 1
@@ -418,14 +424,14 @@
 ## Allow ghosts to join as maintenance drones.
 #ALLOW_DRONE_SPAWN 1
 
-## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup. Uncomment to enable.
+## Determines if announce shuttle dock announcements are sent to the main IRC channel, if MAIN_IRC has also been setup. Uncomment to enable.
 #ANNOUNCE_SHUTTLE_DOCK_TO_IRC
 
 ## Comment to disable the AOOC channel by default.
 #AOOC_ALLOWED 1
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-#BANAPPEALS 
+#BANAPPEALS
 
 ## Add a # infront of this if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
 #BAN_LEGACY_SYSTEM 1
@@ -436,22 +442,22 @@
 ## Sets the minimum number of cultists needed for ghosts to write in blood.
 #CULT_GHOSTWRITER_REQ_CULTISTS 10
 
-## Uncomment this to remove the server from the hub. Uncomment to enable.
+## Determines if the server should hide itself from the hub when no admins are online.. Uncomment to enable.
 #DELIST_WHEN_NO_ADMINS
 
 ## Uncomment to enable.
 #DISABLE_PLAYER_MICE
 
-## Uncomment to make Discord webhooks send in plaintext rather than as embeds. Uncomment to enable.
+## Determines if Discord webhooks should be sent in plaintext rather than as embeds. Uncomment to enable.
 #DISABLE_WEBHOOK_EMBEDS
 
 ## Discord server permanent invite address.
-#DISCORDURL 
+#DISCORDURL
 
 ## Comment to disable the dead OOC channel by default.
 #DOOC_ALLOWED 1
 
-## Uncomment this to DISABLE action spam kicking. Not recommended; this helps protect from spam attacks. Uncomment to enable.
+## Determines if action spam kicking should be DISABLED. Not recommended; this helps protect from spam attacks. Uncomment to enable.
 #DO_NOT_PREVENT_SPAM
 
 ## A drone will become available every X ticks since last drone spawn. Default is 2 minutes.
@@ -467,20 +473,20 @@
 #FORBID_SINGULO_POSSESSION
 
 ## Discussion forum address.
-#FORUMURL 
+#FORUMURL
 
 ## Defines world FPS. Defaults to 20.
 ## Can also accept ticklag values (0.9, 0.5, etc) which will automatically be converted to FPS.
 #FPS 20
 
 ## GitHub address.
-#GITHUBURL 
+#GITHUBURL
 
-## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting). Uncomment to enable.
+## Determines whether or not people without a registered ckey (i.e. guest-*) can connect to your server. Uncomment to enable.
 #GUESTS_ALLOWED
 
 ## Set a hosted by name for UNIX platforms.
-#HOSTEDBY 
+#HOSTEDBY
 
 ## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to visible. This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly. Uncomment to enable.
 #HUB_VISIBILITY
@@ -489,7 +495,7 @@
 #IRC_BOT_HOST localhost
 
 ## GitHub new issue address.
-#ISSUEREPORTURL 
+#ISSUEREPORTURL
 
 ## Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments.
 #JOBS_HAVE_MINIMAL_ACCESS 1
@@ -545,16 +551,16 @@
 #RESPAWN_DELAY 30
 
 ## Set a server location for world reboot. Don't include the byond://, just give the address and port.
-#SERVER 
+#SERVER
 
 ## Set a server URL for the IRC bot to use; like SERVER, don't include the byond://
 ## Unlike SERVER, this one shouldn't break auto-reconnect.
-#SERVERURL 
+#SERVERURL
 
 ## Server name: This appears at the top of the screen in-game.
 #SERVER_NAME Nebula 13
 
-## Uncomment this to show a typing indicator for people writing whispers. Uncomment to enable.
+## Determinese if a typing indicator shows overhead for people currently writing whispers. Uncomment to enable.
 #SHOW_TYPING_INDICATOR_FOR_WHISPERS
 
 ## SSinitialization throttling.
@@ -563,10 +569,10 @@
 ## Set to 1 to prevent newly-spawned mice from understanding human speech. Uncomment to enable.
 #UNEDUCATED_MICE
 
-## Uncomment to restrict non-admins from using humanoid alien races. Uncomment to enable.
+## Determines if non-admins are restricted from using humanoid alien races. Uncomment to enable.
 #USEALIENWHITELIST
 
-## Uncomment to use the alien whitelist system with SQL instead. (requires the above uncommented as well). Uncomment to enable.
+## Determines if the alien whitelist should use SQL instead of the legacy system. (requires the above uncommented as well). Uncomment to enable.
 #USEALIENWHITELIST_SQL
 
 ## Set to jobban everyone who's key is not listed in data/whitelist.txt from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
@@ -574,17 +580,17 @@
 ##  Uncomment to enable.
 #USEWHITELIST
 
-## Uncomment to enable sending data to the IRC bot. Uncomment to enable.
+## Determines if data is sent to the IRC bot. Generally requires MAIN_IRC and associated setup. Uncomment to enable.
 #USE_IRC_BOT
 
 ## Remove the # in front of this config option to have loyalty implants spawn by default on your server. Uncomment to enable.
 #USE_LOYALTY_IMPLANTS
 
-## Uncomment to make Dream Daemon refuse to reboot for any reason other than SIGUSR1. Uncomment to enable.
+## Determines if Dream Daemon should refuse to reboot for any reason other than SIGUSR1. Uncomment to enable.
 #WAIT_FOR_SIGUSR1_REBOOT
 
 ## Wiki address.
-#WIKIURL 
+#WIKIURL
 
 ##
 # VOTING
@@ -602,7 +608,7 @@
 ## Allow players to initiate a restart vote. Uncomment to enable.
 #ALLOW_VOTE_RESTART
 
-## Uncomment to enable an automatic map vote and switch at end of round. MAP_SWITCHING must also be enabled. Uncomment to enable.
+## Determines if the automatic map vote and switch are called at end of round. MAP_SWITCHING must also be enabled. Uncomment to enable.
 #AUTO_MAP_VOTE
 
 ## Time left (seconds) before round start when automatic gamemote vote is called (default 160).

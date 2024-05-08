@@ -96,19 +96,19 @@
 
 /decl/config/toggle/on/welder_vision
 	uid = "welder_vision"
-	desc = "Uncomment to disable the restrictive weldervision overlay."
+	desc = "Toggles the restrictive weldervision overlay when wearing welding goggles or a welding helmet."
 
 /decl/config/toggle/on/allow_ic_printing
 	uid = "allow_ic_printing"
-	desc = "Uncomment this to prevent players from printing copy/pasted circuits."
+	desc = "Determines if players can print copy/pasted integrated circuits."
 
 /decl/config/toggle/on/cult_ghostwriter
 	uid = "cult_ghostwriter"
-	desc = "Uncomment to allow ghosts to write in blood during Cult rounds."
+	desc = "Determines if ghosts are permitted to write in blood during cult rounds."
 
 /decl/config/toggle/allow_holidays
 	uid = "allow_holidays"
-	desc = "Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR"
+	desc = "Determines if special 'Easter-egg' events are active on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR"
 
 /decl/config/toggle/allow_holidays/update_post_value_set()
 	. = ..()
