@@ -9,7 +9,7 @@
 	. = ..()
 
 /obj/item/ability/psionic/telekinesis/Process()
-	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(!focus || !isturf(focus.loc) || get_dist(get_turf(focus), get_turf(owner)) > psi?.get_rank(PSI_PSYCHOKINESIS))
 		owner.drop_from_inventory(src)
 		return
@@ -30,7 +30,7 @@
 	else
 		return FALSE
 
-	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(_focus.anchored || (check_paramount && psi?.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT))
 		focus = _focus
 		. = attack_self(owner)
@@ -54,7 +54,7 @@
 
 /obj/item/ability/psionic/telekinesis/afterattack(var/atom/target, var/mob/living/user, var/proximity)
 
-	var/datum/ability_handler/psionics/psi = user.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = user.get_ability_handler(/datum/ability_handler/psionics)
 	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !psi?.can_use() || !psi?.spend_power(5))
 		return
 
