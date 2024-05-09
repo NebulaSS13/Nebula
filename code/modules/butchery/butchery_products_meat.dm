@@ -2,7 +2,7 @@
 	name           = "slab"
 	desc           = "A slab of meat."
 	icon           = 'icons/obj/items/butchery/meat1.dmi'
-	icon_state     = "meat"
+	icon_state     = ICON_STATE_WORLD
 	slice_path     = /obj/item/chems/food/butchery/cutlet/raw
 	slice_num      = 3
 	filling_color  = "#ff1c1c"
@@ -13,6 +13,7 @@
 	dried_type     = /obj/item/chems/food/jerky/meat
 	nutriment_type = /decl/material/solid/organic/meat
 	nutriment_amt  = 9
+	w_class        = ITEM_SIZE_NORMAL
 
 /obj/item/chems/food/butchery/meat/proc/get_meat_icons()
 	var/static/list/meat_icons = list(

@@ -3,6 +3,7 @@
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/stone/pottery
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	presentation_flags = PRESENTATION_FLAG_NAME
 
 /obj/item/chems/glass/pottery/teapot
 	name = "teapot"
@@ -72,3 +73,15 @@
 	var/image/soup_overlay = get_soup_overlay()
 	if(soup_overlay)
 		add_overlay(soup_overlay)
+
+/obj/item/chems/glass/pottery/bottle/beer/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/ethanol/beer, reagents.maximum_volume)
+
+/obj/item/chems/glass/pottery/bottle/tall/wine/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/ethanol/wine, reagents.maximum_volume)
+
+/obj/item/chems/glass/pottery/bottle/wide/whiskey/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/ethanol/whiskey, reagents.maximum_volume)

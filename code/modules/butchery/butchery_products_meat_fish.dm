@@ -1,7 +1,7 @@
 /obj/item/chems/food/butchery/meat/fish
 	name                           = "fillet"
 	desc                           = "A fillet of fish."
-	icon_state                     = "fishfillet"
+	icon                           = 'icons/obj/items/butchery/fish.dmi'
 	filling_color                  = "#ffdefe"
 	center_of_mass                 = @'{"x":17,"y":13}'
 	bitesize                       = 6
@@ -34,14 +34,26 @@
 	icon_state                     = "grilledfish"
 	nutriment_amt                  = 8
 	bitesize                       = 2
+	icon                           = 'icons/obj/items/butchery/fish_grilled.dmi'
 	nutriment_desc                 = list("flaky grilled fish" = 5)
-	meat_name                      = "grilled fish"
 	drying_wetness                 = 0
 	dried_type                     = null
 	backyard_grilling_product      = null
 	backyard_grilling_announcement = null
 	slice_path                     = null
 	slice_num                      = null
+	material_alteration            = MAT_FLAG_ALTERATION_NONE
+	cooked_food                    = FOOD_COOKED
+
+/obj/item/chems/food/butchery/meat/fish/grilled/set_meat_name(new_meat_name)
+	. = ..()
+	SetName("grilled [name]")
+
+/obj/item/chems/food/butchery/meat/fish/get_meat_icons()
+	var/static/list/meat_icons = list(
+		'icons/obj/items/butchery/fish_grilled.dmi'
+	)
+	return meat_icons
 
 /obj/item/chems/food/butchery/meat/fish/poison
 	meat_name = "space carp"

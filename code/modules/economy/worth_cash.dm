@@ -19,8 +19,23 @@
 
 /obj/item/cash/Initialize(ml, material_key)
 	. = ..()
+
 	if(!ispath(currency, /decl/currency))
 		currency = global.using_map.default_currency
+
+	if(!ispath(currency, /decl/currency))
+		return INITIALIZE_HINT_QDEL
+
+	if(isturf(loc))
+		for(var/obj/item/cash/other in loc)
+			if(other == src)
+				continue
+			if(other.currency != currency)
+				continue
+			other.absolute_worth += absolute_worth
+			other.update_from_worth()
+			return INITIALIZE_HINT_QDEL
+
 	if(absolute_worth > 0)
 		update_from_worth()
 

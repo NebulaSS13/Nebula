@@ -117,6 +117,7 @@
 	name = "sack"
 	desc = "A simple sack for carrying goods."
 	icon = 'icons/obj/items/storage/sack.dmi'
+	icon_state = ICON_STATE_WORLD
 	storage = /datum/storage/bag/sack
 	material = /decl/material/solid/organic/leather
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC

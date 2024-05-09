@@ -36,6 +36,10 @@
 "eR" = (
 /turf/floor/natural/dirt,
 /area/shaded_hills/caves/unexplored/south)
+"fH" = (
+/obj/structure/reagent_dispensers/barrel/ebony/water,
+/turf/floor/natural/barren,
+/area/shaded_hills/caves/unexplored/south)
 "fO" = (
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/river)
@@ -118,6 +122,7 @@
 /obj/item/rock/flint,
 /obj/item/flame/torch,
 /obj/item/flame/torch,
+/obj/item/bag/sack,
 /turf/floor/woven,
 /area/shaded_hills/caves/unexplored/south)
 "qy" = (
@@ -173,6 +178,7 @@
 /obj/item/flame/torch,
 /obj/item/flame/torch,
 /obj/item/flame/torch,
+/obj/item/bag/sack,
 /turf/floor/woven,
 /area/shaded_hills/outside)
 "EE" = (
@@ -215,6 +221,7 @@
 "FK" = (
 /obj/item/stack/material/ore/coal,
 /obj/abstract/exterior_marker/inside,
+/obj/structure/reagent_dispensers/barrel/ebony/water,
 /turf/floor/woven,
 /area/shaded_hills/outside)
 "Gh" = (
@@ -8668,7 +8675,7 @@ lU
 lU
 lU
 lU
-jj
+fH
 eR
 eR
 Gt

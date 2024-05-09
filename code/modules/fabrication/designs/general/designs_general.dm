@@ -16,6 +16,9 @@
 /datum/fabricator_recipe/jar
 	path = /obj/item/glass_jar
 
+/datum/fabricator_recipe/pot
+	path = /obj/item/chems/cooking_vessel/pot
+
 /datum/fabricator_recipe/radio_headset
 	path = /obj/item/radio/headset
 

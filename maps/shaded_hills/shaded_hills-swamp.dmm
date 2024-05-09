@@ -25,6 +25,7 @@
 "ll" = (
 /obj/structure/fire_source/fireplace/basalt,
 /obj/item/stack/material/log/mapped/ebony/ten,
+/obj/item/chems/glass/beaker/kettle,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/witch_hut)
 "lC" = (
@@ -52,6 +53,10 @@
 /obj/structure/drying_rack,
 /turf/floor/wood/ebony,
 /area/shaded_hills/witch_hut)
+"rP" = (
+/obj/structure/reagent_dispensers/barrel/ebony/water,
+/turf/floor/natural/mud,
+/area/shaded_hills/outside/swamp)
 "sj" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/river/swamp)
@@ -8618,7 +8623,7 @@ Xt
 Xt
 wv
 Xt
-Xt
+rP
 Xt
 TD
 TD

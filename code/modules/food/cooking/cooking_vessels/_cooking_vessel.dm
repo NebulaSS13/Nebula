@@ -21,7 +21,7 @@
 		return ..()
 
 	// Fill or take from the vessel.
-	if(W.reagents && ATOM_IS_OPEN_CONTAINER(W))
+	if(W.reagents && ATOM_IS_OPEN_CONTAINER(W) && !istype(W, /obj/item/chems/food))
 		if(W.reagents.total_volume)
 			if(istype(W, /obj/item/chems))
 				var/obj/item/chems/vessel = W

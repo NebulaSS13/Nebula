@@ -32,7 +32,13 @@
 
 		if(locate(/obj/item/chems/food/grown) in used_items)
 			for(var/obj/item/chems/food/grown/veg in used_items)
-				ingredients[veg.name]++
+				if(veg.seed)
+					ingredients[veg.seed.product_name]++
+
+		if(locate(/obj/item/chems/food/processed_grown) in used_items)
+			for(var/obj/item/chems/food/processed_grown/veg in used_items)
+				if(veg.seed)
+					ingredients[veg.seed.product_name]++
 
 		if(locate(/obj/item/chems/food/butchery) in used_items)
 			for(var/obj/item/chems/food/butchery/meat in used_items)
@@ -93,45 +99,39 @@
 /decl/recipe/soup/simple/meat
 	display_name = "simple meat soup"
 	items = list(
-		/obj/item/chems/food/butchery/chopped = 2
+		/obj/item/chems/food/butchery/chopped = 1
 	)
 
 /decl/recipe/soup/simple/veg
 	display_name = "simple vegetable soup"
 	items = list(
-		/obj/item/chems/food/processed_grown/chopped = 2
+		/obj/item/chems/food/processed_grown/chopped = 1
 	)
 
-/decl/recipe/soup/simple/mixed
-	display_name = "simple soup"
+/decl/recipe/soup/simple/stew
+	abstract_type = /decl/recipe/soup/simple/stew
+	precursor_type = /decl/material/liquid/nutriment/soup/simple
+	reagents = list(
+		/decl/material/liquid/nutriment/soup/simple = 10
+	)
+	result_quantity = 10
+	result = /decl/material/liquid/nutriment/soup/stew
+
+/decl/recipe/soup/simple/stew/mixed
+	display_name = "mixed stew"
 	items = list(
 		/obj/item/chems/food/butchery/chopped = 1,
 		/obj/item/chems/food/processed_grown/chopped = 1
 	)
 
-/decl/recipe/soup/simple/mixed/stew
-	display_name = "mixed stew"
-	precursor_type = /decl/material/liquid/nutriment/soup/simple
-	reagents = list(
-		/decl/material/liquid/nutriment/soup/simple = 10
-	)
-	result_quantity = 10
-	result = /decl/material/liquid/nutriment/soup/stew
-
-/decl/recipe/soup/simple/meat/stew
+/decl/recipe/soup/simple/stew/meat
 	display_name = "meat stew"
-	precursor_type = /decl/material/liquid/nutriment/soup/simple
-	reagents = list(
-		/decl/material/liquid/nutriment/soup/simple = 10
+	items = list(
+		/obj/item/chems/food/butchery/chopped = 2
 	)
-	result_quantity = 10
-	result = /decl/material/liquid/nutriment/soup/stew
 
-/decl/recipe/soup/simple/veg/stew
+/decl/recipe/soup/simple/stew/veg
 	display_name = "vegetable stew"
-	precursor_type = /decl/material/liquid/nutriment/soup/simple
-	reagents = list(
-		/decl/material/liquid/nutriment/soup/simple = 10
+	items = list(
+		/obj/item/chems/food/processed_grown/chopped = 2
 	)
-	result_quantity = 10
-	result = /decl/material/liquid/nutriment/soup/stew
