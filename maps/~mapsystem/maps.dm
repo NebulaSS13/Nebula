@@ -178,7 +178,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	if(!length(loadout_categories))
 		loadout_categories = list()
-		for(var/decl_type in decls_repository.get_decls_of_subtype(/decl/loadout_category))
+		for(var/decl_type in decls_repository.get_decls_of_type(/decl/loadout_category))
 			loadout_categories += decl_type
 
 	for(var/loadout_category in loadout_categories)
