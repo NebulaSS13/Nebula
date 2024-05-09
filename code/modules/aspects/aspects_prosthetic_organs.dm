@@ -86,9 +86,15 @@
 /decl/aspect/prosthetic_organ/brain/apply(mob/living/holder)
 	. = ..()
 	if(.)
+		var/obj/item/organ/external/affected
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(holder, apply_to_organ)
 		if(I)
+			affected = GET_EXTERNAL_ORGAN(holder, I.parent_organ)
 			I.transfer_brainmob_with_organ = FALSE // we don't want to pull them out of the mob
-			I.do_uninstall(TRUE, TRUE, FALSE, FALSE)
+			holder.remove_organ(I, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE)
 			qdel(I)
-		new new_brain_type(holder)
+		var/obj/item/organ/organ = new new_brain_type(holder)
+		if(!affected)
+			affected = GET_EXTERNAL_ORGAN(holder, organ.parent_organ)
+		if(affected)
+			holder.add_organ(organ, affected, TRUE, FALSE, FALSE, TRUE)

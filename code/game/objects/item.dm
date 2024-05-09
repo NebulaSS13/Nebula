@@ -324,13 +324,13 @@
 /obj/item/proc/dragged_onto(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
 
+/obj/item/proc/can_heat_atom(atom/other)
+	return get_heat() > 0 && isflamesource()
+
 /obj/item/afterattack(var/atom/A, var/mob/user, var/proximity)
 	. = ..()
-	if(. || !proximity)
-		return
-	var/atom_heat = get_heat()
-	if(atom_heat > 0)
-		A.handle_external_heating(atom_heat, src, user)
+	if(!. && proximity && can_heat_atom(A))
+		A.handle_external_heating(get_heat(), src, user)
 		return TRUE
 	return FALSE
 
@@ -424,11 +424,11 @@
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup)
-			if(S.collection_mode) //Mode is set to collect all items
-				if(isturf(src.loc))
-					S.gather_all(src.loc, user)
+			//Mode is set to collect all items
+			if(S.collection_mode && isturf(loc))
+				S.gather_all(loc, user)
 				return TRUE
-			else if(S.can_be_inserted(src, user))
+			if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
 				return TRUE
 
@@ -562,7 +562,7 @@
 
 	return TRUE
 
-/obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
+/obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
 	if(!slot || !user || !canremove)
 		return FALSE
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
