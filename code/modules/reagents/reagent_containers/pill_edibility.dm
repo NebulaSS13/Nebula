@@ -1,3 +1,9 @@
+/obj/item/chems/pill/get_food_consumption_method(mob/eater)
+	return EATING_METHOD_EAT
+
+/obj/item/chems/pill/get_edible_material_amount(var/mob/eater)
+	return reagents?.total_volume
+
 /obj/item/chems/pill/get_food_default_transfer_amount(mob/eater)
 	return reagents?.total_volume // Always eat it in one bite.
 

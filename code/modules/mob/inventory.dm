@@ -226,7 +226,7 @@
 				. = TRUE
 			return
 		return FALSE
-	else if(!I.mob_can_unequip(src, get_equipped_slot_for_item(I)))
+	else if(!I.mob_can_unequip(src, get_equipped_slot_for_item(I), dropping = TRUE))
 		return FALSE
 	. = drop_from_inventory(I, Target)
 
