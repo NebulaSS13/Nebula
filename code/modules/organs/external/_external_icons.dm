@@ -149,11 +149,15 @@ var/global/list/organ_icon_cache = list()
 
 /obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_color, var/skip_update = FALSE)
 
+	var/list/refresh_accessories = list()
+
 	var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory_type)
 	if(!accessory_category)
 		if(!accessory_decl)
 			return
 		accessory_category = accessory_decl.accessory_category
+
+	var/decl/sprite_accessory_category/accessory_cat_decl = GET_DECL(accessory_category)
 
 	var/list/accessories = LAZYACCESS(_sprite_accessories, accessory_category)
 	if(!accessories)
@@ -172,17 +176,22 @@ var/global/list/organ_icon_cache = list()
 			return
 		if(LAZYACCESS(accessories, accessory_type) == accessory_color)
 			return
+		if(accessory_cat_decl.single_selection)
+			refresh_accessories |= accessories
+			accessories.Cut()
 		LAZYSET(accessories, accessory_type, accessory_color)
+		refresh_accessories += accessory_decl
 	else
 		if(!(accessory_type in accessories))
 			return
 		remove_sprite_accessory(accessory_type, TRUE)
 
 	if(!skip_update)
-		if(owner && accessory_type)
-			var/decl/sprite_accessory/refresh_accessory = GET_DECL(accessory_type)
-			if(refresh_accessory)
-				refresh_accessory.refresh_mob(owner)
+		if(owner && length(refresh_accessories))
+			for(var/refresh_accessory_type in refresh_accessories)
+				var/decl/sprite_accessory/refresh_accessory = GET_DECL(refresh_accessory_type)
+				if(refresh_accessory)
+					refresh_accessory.refresh_mob(owner)
 		update_icon()
 
 /obj/item/organ/external/proc/get_heritable_sprite_accessories()
