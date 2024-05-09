@@ -9,6 +9,22 @@
 	handle_material           = /decl/material/solid/organic/wood
 	material_force_multiplier = 0.3
 
+/obj/item/tool/pickaxe/get_initial_tool_qualities()
+	var/static/list/tool_qualities = list(
+		TOOL_PICK   = TOOL_QUALITY_DEFAULT,
+		TOOL_SHOVEL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_HAMMER = TOOL_QUALITY_MEDIOCRE
+	)
+	return tool_qualities
+
+/obj/item/tool/pickaxe/get_initial_tool_properties()
+	var/static/list/tool_properties = list(
+		TOOL_PICK = list(
+			TOOL_PROP_EXCAVATION_DEPTH = 200
+		)
+	)
+	return tool_properties
+
 /obj/item/tool/pickaxe/titanium
 	origin_tech               = @'{"materials":3}'
 	material                  = /decl/material/solid/metal/titanium
