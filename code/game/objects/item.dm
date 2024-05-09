@@ -424,11 +424,11 @@
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup)
-			if(S.collection_mode) //Mode is set to collect all items
-				if(isturf(src.loc))
-					S.gather_all(src.loc, user)
+			//Mode is set to collect all items
+			if(S.collection_mode && isturf(loc))
+				S.gather_all(loc, user)
 				return TRUE
-			else if(S.can_be_inserted(src, user))
+			if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
 				return TRUE
 
