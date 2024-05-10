@@ -590,7 +590,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "PA" = (
-/turf/floor/woven,
+/turf/floor/straw,
 /area/shaded_hills/stable)
 "PQ" = (
 /obj/structure/closet/crate/chest,
@@ -698,7 +698,7 @@
 /obj/structure/railing/mapped/ebony{
 	dir = 8
 	},
-/turf/floor/woven,
+/turf/floor/straw,
 /area/shaded_hills/stable)
 "Wl" = (
 /obj/structure/table/woodentable_reinforced/ebony,
