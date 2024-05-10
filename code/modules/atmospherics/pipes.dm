@@ -84,6 +84,7 @@
 	var/turf/T = loc
 	if(level == LEVEL_BELOW_PLATING && isturf(T) && !T.is_plating())
 		hide(1)
+	try_leak()
 
 /obj/machinery/atmospherics/pipe/return_air()
 	if(!parent)
@@ -154,6 +155,7 @@
 			qdel(parent)
 		LAZYREMOVE(nodes_to_networks, reference)
 	update_icon()
+	try_leak()
 
 /obj/machinery/atmospherics/get_color()
 	return pipe_color
@@ -188,6 +190,11 @@
 		if((direction & initialize_directions) && !length(nodes_in_dir(direction)))
 			missing = TRUE
 			break
+	if(!missing)
+		var/datum/gas_mixture/pipeline_air = return_air()
+		var/datum/gas_mixture/environment = loc.return_air()
+		if(pipeline_air.return_pressure() - environment.return_pressure() > fatigue_pressure)
+			missing = TRUE
 	set_leaking(missing)
 
 /obj/machinery/atmospherics/pipe/hide(var/i)
@@ -229,25 +236,17 @@
 	connect_dir_type = SOUTH | NORTH // Overridden if dir is not a cardinal for bent pipes. For straight pipes this is correct.
 
 /obj/machinery/atmospherics/pipe/simple/check_pressure(pressure)
-	// Don't ask me, it happened somehow.
-	if (!isturf(loc))
-		return 1
-
 	var/datum/gas_mixture/environment = loc.return_air()
-
 	var/pressure_difference = pressure - environment.return_pressure()
-
+	try_leak() // if above fatigue pressure, this causes leaks. otherwise it updates it to the correct state based on connected nodes
 	if(pressure_difference > maximum_pressure)
 		burst()
-
+		return FALSE
 	else if(pressure_difference > fatigue_pressure)
-		set_leaking(TRUE)
 		if(prob(5))
 			burst()
-	else
-		try_leak() // rather than setting leaking to off, we let the connection check handle it
-
-	else return 1
+		return FALSE
+	return TRUE
 
 /obj/machinery/atmospherics/pipe/simple/proc/burst()
 	ASSERT(parent)
@@ -271,8 +270,6 @@
 
 	icon_state = "[integrity_key][icon_connect_type]"
 	color = get_color()
-
-	try_leak()
 
 /obj/machinery/atmospherics/pipe/simple/visible
 	level = LEVEL_ABOVE_PLATING
@@ -403,8 +400,6 @@
 		var/list/check_nodes = nodes_in_dir(direction)
 		add_underlay(get_turf(src), length(check_nodes) && check_nodes[1], direction, icon_connect_type)
 
-	try_leak()
-
 /obj/machinery/atmospherics/pipe/manifold/visible
 	icon_state = "map"
 	level = LEVEL_ABOVE_PLATING
@@ -532,8 +527,6 @@
 			continue
 		var/list/check_nodes = nodes_in_dir(direction)
 		add_underlay(get_turf(src), length(check_nodes) && check_nodes[1], direction, icon_connect_type)
-
-	try_leak()
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible
 	icon_state = "map_4way"

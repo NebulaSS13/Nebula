@@ -17,20 +17,16 @@
 
 /obj/machinery/atmospherics/pipe/zpipe/check_pressure(pressure)
 	var/datum/gas_mixture/environment = loc.return_air()
-
 	var/pressure_difference = pressure - environment.return_pressure()
-
+	try_leak() // if above fatigue pressure, this causes leaks. otherwise it updates it to the correct state based on connected nodes
 	if(pressure_difference > maximum_pressure)
 		burst()
-
+		return FALSE
 	else if(pressure_difference > fatigue_pressure)
-		set_leaking(TRUE)
 		if(prob(5))
 			burst()
-	else
-		try_leak() // rather than setting leaking to off, we let the connection check handle it
-
-	else return 1
+		return FALSE
+	return TRUE
 
 /obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 	src.visible_message("<span class='warning'>\The [src] bursts!</span>");
