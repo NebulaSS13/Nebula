@@ -9,9 +9,24 @@
 		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
+	var/list/mobs_to_spawn = list()
 
-/datum/level_data/player_level/shaded_hills/proc/place_mobs()
-	return
+/datum/level_data/player_level/shaded_hills/after_generate_level()
+	. = ..()
+	if(length(mobs_to_spawn))
+		for(var/list/mob_category in mobs_to_spawn)
+			var/list/mob_types = mob_category[1]
+			var/mob_turf  = mob_category[2]
+			var/mob_count = mob_category[3]
+			var/sanity = 1000
+			while(mob_count && sanity)
+				sanity--
+				var/turf/place_mob_at = locate(rand(level_inner_min_x, level_inner_max_x), rand(level_inner_min_y, level_inner_max_y), level_z)
+				if(istype(place_mob_at, mob_turf) && !(locate(/mob/living) in place_mob_at))
+					var/mob_type = pickweight(mob_types)
+					new mob_type(place_mob_at)
+					mob_count--
+					CHECK_TICK
 
 /datum/level_data/player_level/shaded_hills/grassland
 	name = "Shaded Hills - Grassland"
@@ -26,30 +41,25 @@
 		"shaded_hills_swamp"     = SOUTH,
 		"shaded_hills_downlands" = EAST
 	)
-
-/datum/level_data/player_level/shaded_hills/grassland/after_generate_level()
-
-	. = ..()
-
-	// Neither of these procs handle laterally linked levels yet.
-	SSweather.setup_weather_system(src)
-	SSdaycycle.add_linked_levels(get_all_connected_level_ids() | level_id, start_at_night = FALSE, update_interval = 20 MINUTES)
-
-	var/sanity = 100
-	var/mob_count = 0
-	while(mob_count < 10 && sanity)
-		sanity--
-		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
-		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
-			var/mob_type = pickweight(list(
+	mobs_to_spawn = list(
+		list(
+			list(
 				/mob/living/simple_animal/passive/mouse        = 9,
 				/mob/living/simple_animal/passive/rabbit       = 3,
 				/mob/living/simple_animal/passive/rabbit/brown = 3,
 				/mob/living/simple_animal/passive/rabbit/black = 3,
 				/mob/living/simple_animal/opossum              = 5
-			))
-			new mob_type(place_mob_at)
-			mob_count++
+			),
+			/turf/floor/natural/grass,
+			10
+		)
+	)
+
+/datum/level_data/player_level/shaded_hills/grassland/after_generate_level()
+	. = ..()
+	// Neither of these procs handle laterally linked levels yet.
+	SSweather.setup_weather_system(src)
+	SSdaycycle.add_linked_levels(get_all_connected_level_ids() | level_id, start_at_night = FALSE, update_interval = 20 MINUTES)
 
 /datum/level_data/player_level/shaded_hills/swamp
 	name = "Shaded Hills - Swamp"
@@ -61,16 +71,9 @@
 		/datum/random_map/noise/shaded_hills/swamp,
 		/datum/random_map/noise/forage/shaded_hills/swamp
 	)
-
-/datum/level_data/player_level/shaded_hills/swamp/after_generate_level()
-	. = ..()
-	var/sanity = 100
-	var/mob_count = 0
-	while(mob_count < 5 && sanity)
-		sanity--
-		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
-		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
-			var/mob_type = pickweight(list(
+	mobs_to_spawn = list(
+		list(
+			list(
 				/mob/living/simple_animal/passive/mouse        = 6,
 				/mob/living/simple_animal/passive/rabbit       = 2,
 				/mob/living/simple_animal/passive/rabbit/brown = 2,
@@ -79,24 +82,21 @@
 				/mob/living/simple_animal/frog/brown           = 2,
 				/mob/living/simple_animal/frog/yellow          = 2,
 				/mob/living/simple_animal/frog/purple          = 1
-			))
-			new mob_type(place_mob_at)
-			mob_count++
-
-	sanity = 100
-	mob_count = 0
-	while(mob_count < 10 && sanity)
-		sanity--
-		var/turf/floor/natural/mud/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
-		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
-			var/mob_type = pickweight(list(
+			),
+			/turf/floor/natural/grass,
+			5
+		),
+		list(
+			list(
 				/mob/living/simple_animal/frog                 = 3,
 				/mob/living/simple_animal/frog/brown           = 2,
 				/mob/living/simple_animal/frog/yellow          = 2,
 				/mob/living/simple_animal/frog/purple          = 1
-			))
-			new mob_type(place_mob_at)
-			mob_count++
+			),
+			/turf/floor/natural/mud,
+			10
+		)
+	)
 
 /datum/level_data/player_level/shaded_hills/woods
 	name = "Shaded Hills - Woods"
@@ -108,33 +108,26 @@
 		/datum/random_map/noise/shaded_hills/woods,
 		/datum/random_map/noise/forage/shaded_hills/woods
 	)
-
-/datum/level_data/player_level/shaded_hills/woods/after_generate_level()
-	. = ..()
-	var/mob_count = 0
-	var/sanity = 100
-	while(mob_count < 10 && sanity)
-		sanity--
-		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
-		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
-			var/mob_type = pickweight(list(
+	mobs_to_spawn = list(
+		list(
+			list(
 				/mob/living/simple_animal/passive/mouse        = 6,
 				/mob/living/simple_animal/passive/rabbit       = 2,
 				/mob/living/simple_animal/passive/rabbit/brown = 2,
 				/mob/living/simple_animal/passive/rabbit/black = 2,
 				/mob/living/simple_animal/opossum              = 2
-			))
-			new mob_type(place_mob_at)
-			mob_count++
-
-	sanity = 100
-	mob_count = 0
-	while(mob_count < 5 && sanity)
-		sanity--
-		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
-		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
-			new /mob/living/simple_animal/passive/deer(place_mob_at)
-			mob_count++
+			),
+			/turf/floor/natural/grass,
+			10
+		),
+		list(
+			list(
+				/mob/living/simple_animal/passive/deer         = 1
+			),
+			/turf/floor/natural/grass,
+			5
+		)
+	)
 
 /datum/level_data/player_level/shaded_hills/downlands
 	name = "Shaded Hills - Downlands"

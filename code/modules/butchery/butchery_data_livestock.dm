@@ -26,7 +26,7 @@
 
 /decl/butchery_data/animal/ruminant/deer
 	meat_name     = "venison"
-	meat_type     = /obj/item/chems/food/butchery/meat/
+	meat_type     = /obj/item/chems/food/butchery/meat
 	meat_amount   = 5
 	bone_amount   = 9
 	skin_material = /decl/material/solid/organic/skin/deer

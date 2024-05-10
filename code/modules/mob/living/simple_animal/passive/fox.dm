@@ -1,10 +1,11 @@
 /datum/ai/passive/fox
 	var/weakref/hunt_target
+	var/next_hunt = 0
 
 /datum/ai/passive/fox/update_targets()
 	// Fleeing takes precedence.
 	. = ..()
-	if(!.  && !hunt_target) // TODO: generalized nutrition process. && body.get_nutrition() < body.get_max_nutrition() * 0.5)
+	if(!.  && !hunt_target && world.time >= next_hunt) // TODO: generalized nutrition process. && body.get_nutrition() < body.get_max_nutrition() * 0.5)
 		for(var/mob/living/snack in view(body)) //search for a new target
 			if(can_hunt(snack))
 				hunt_target = weakref(snack)
@@ -57,6 +58,7 @@
 		var/obj/item/remains/remains = new remains_type(get_turf(hunt_mob))
 		remains.desc += "These look like they belonged to \a [hunt_mob.name]."
 	body.adjust_nutrition(5 * hunt_mob.get_max_health())
+	next_hunt = world.time + rand(15 MINUTES, 30 MINUTES)
 	if(prob(5))
 		hunt_mob.gib()
 	else
