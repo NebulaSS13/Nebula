@@ -1,6 +1,6 @@
 /obj/screen/zone_selector
 	name = "damage zone"
-	icon_state = "zone_sel"
+	icon_state = "zone_sel_tail"
 	screen_loc = ui_zonesel
 	var/selecting = BP_CHEST
 

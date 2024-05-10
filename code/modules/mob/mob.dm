@@ -1038,7 +1038,7 @@
 /client/verb/body_groin()
 	set name = "body-groin"
 	set hidden = 1
-	toggle_zone_sel(list(BP_GROIN))
+	toggle_zone_sel(list(BP_GROIN,BP_TAIL))
 
 /client/verb/body_r_leg()
 	set name = "body-r-leg"
@@ -1054,7 +1054,7 @@
 	if(!check_has_body_select())
 		return
 	var/obj/screen/zone_selector/selector = mob.zone_sel
-	selector.set_selected_zone(next_in_list(mob.get_target_zone(),zones))
+	selector.set_selected_zone(next_in_list(mob.get_target_zone(), zones))
 
 /mob/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
