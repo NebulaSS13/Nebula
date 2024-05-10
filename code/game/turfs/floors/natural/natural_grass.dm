@@ -1,6 +1,6 @@
 /turf/floor/natural/grass
 	name = "grass"
-	desc = "A patch of grass, growing steadily from the sun's nourishment."
+	desc = "A patch of grass, growing steadily and healthily."
 	possible_states = 1
 	icon = 'icons/turf/flooring/grass.dmi'
 	footstep_type = /decl/footsteps/grass
@@ -75,7 +75,7 @@
 	. = ..()
 	if(icon_state != "scorched")
 		SetName("scorched ground")
-		desc = "What was once lush grass has been reduced to burnt, ashy wastes."
+		desc = "What was once lush grass has been reduced to burnt ashes."
 		icon_state = "scorched"
 		icon_edge_layer = -1
 		footstep_type = /decl/footsteps/asteroid
