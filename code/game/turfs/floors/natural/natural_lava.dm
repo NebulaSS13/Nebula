@@ -1,6 +1,6 @@
 /turf/floor/natural/lava
 	name = "lava"
-	desc = "Incredibly hot molten rock, you can feel the heat radiating even from a distance.."
+	desc = "Incredibly hot molten rock, you can feel the heat radiating even from a distance."
 	icon = 'icons/turf/flooring/lava.dmi'
 	movement_delay = 4
 	dirt_color = COLOR_GRAY20
