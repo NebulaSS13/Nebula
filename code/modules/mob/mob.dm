@@ -1100,10 +1100,11 @@
 
 	// Work out if we have any brain damage impacting our dexterity.
 	var/dex_malus = 0
-	if(getBrainLoss())
+	var/braindamage = getBrainLoss()
+	if(braindamage)
 		var/brainloss_threshold = get_config_value(/decl/config/num/dex_malus_brainloss_threshold)
-		if(getBrainLoss() > brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
-			dex_malus = clamp(CEILING((getBrainLoss()-brainloss_threshold)/10), 0, length(global.dexterity_levels))
+		if(braindamage > brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
+			dex_malus = clamp(CEILING((braindamage-brainloss_threshold)/10), 0, length(global.dexterity_levels))
 			if(dex_malus > 0)
 				dex_malus = global.dexterity_levels[dex_malus]
 
@@ -1116,6 +1117,7 @@
 		return gripper.get_dexterity(silent)
 
 	// If this slot requires an organ, do the appropriate organ checks.
+	check_slot = gripper.requires_organ_tag
 	var/obj/item/organ/external/active_hand = GET_EXTERNAL_ORGAN(src, check_slot)
 	if(!active_hand)
 		if(!silent)
@@ -1132,7 +1134,6 @@
 			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't respond properly!"))
 		return (active_hand.get_manual_dexterity() & ~dex_malus)
 	return active_hand.get_manual_dexterity()
-
 
 /mob/proc/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent = FALSE)
 	. = (get_dexterity(silent) & dex_level) == dex_level
