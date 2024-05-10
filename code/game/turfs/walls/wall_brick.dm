@@ -12,6 +12,14 @@
 /turf/wall/brick/get_dismantle_sound()
 	return 'sound/foley/wooden_drop.ogg' // todo
 
+/turf/wall/brick/update_strings()
+	if(reinf_material)
+		SetName("reinforced [material.solid_name] brick wall")
+		desc = "A brick wall made of [material.solid_name] and reinforced with [reinf_material.solid_name]."
+	else
+		SetName("[material.solid_name] brick wall")
+		desc = "A brick wall made of [material.solid_name]."
+
 // Subtypes.
 /turf/wall/brick/sandstone
 	color = COLOR_GOLD
