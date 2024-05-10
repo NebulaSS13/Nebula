@@ -152,6 +152,11 @@
 	VAR_PROTECTED/UT_turf_exceptions_by_door_type // An associate list of door types/list of allowed turfs
 	///Determines if edge turfs should be centered on the map dimensions.
 	var/origin_is_world_center = TRUE
+	/// If not null, this level will register with a daycycle id/type on New().
+	var/daycycle_id
+	/// Type provided to the above.
+	var/daycycle_type = /datum/daycycle/exoplanet
+
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
@@ -340,6 +345,8 @@
 ///Called during level setup. Run anything that should happen only after the map is fully generated.
 /datum/level_data/proc/after_generate_level()
 	build_border()
+	if(daycycle_id && daycycle_type)
+		SSdaycycle.register_level(level_z, daycycle_id, daycycle_type)
 
 ///Changes anything named we may need to rename accordingly to the parent location name. For instance, exoplanets levels.
 /datum/level_data/proc/adapt_location_name(var/location_name)
@@ -430,10 +437,17 @@
 // Accessors
 //
 /datum/level_data/proc/get_exterior_atmosphere()
-	if(exterior_atmosphere)
-		var/datum/gas_mixture/gas = new
-		gas.copy_from(exterior_atmosphere)
-		return gas
+	if(!exterior_atmosphere)
+		return
+	var/datum/gas_mixture/gas = new
+	gas.copy_from(exterior_atmosphere)
+	if(daycycle_id)
+		var/datum/daycycle/daycycle = SSdaycycle.get_daycycle(daycycle_id)
+		var/temp_mod = daycycle?.current_period?.temperature
+		if(!isnull(temp_mod))
+			gas.temperature = max(1, gas.temperature + temp_mod)
+			gas.update_values()
+	return gas
 
 /datum/level_data/proc/get_display_name()
 	if(!name)
@@ -693,3 +707,9 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 			qdel(monster)
 	template.load(central_turf, centered = TRUE)
 	return TRUE
+
+/datum/level_data/proc/update_turf_ambience()
+	if(SSatoms.atom_init_stage >= INITIALIZATION_INNEW_REGULAR)
+		for(var/turf/level_turf as anything in block(locate(1, 1, level_z), locate(world.maxx, world.maxy, level_z)))
+			level_turf.update_ambient_light_from_z_or_area() // SSambience.queued |= level_turf - seems to be less consistent
+			CHECK_TICK

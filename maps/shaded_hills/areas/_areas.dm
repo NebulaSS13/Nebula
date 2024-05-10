@@ -38,6 +38,5 @@
 	)
 	description = "Birds and insects call from the grasses, and a cool wind gusts from across the river."
 	area_blurb_category = /area/shaded_hills/outside
-	interior_ambient_light_level = 0.4
-	interior_ambient_light_color = "#f3e6ca"
+	interior_ambient_light_modifier = -0.3
 

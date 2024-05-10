@@ -508,8 +508,7 @@
 		PD._theme_forced = theme
 	planet_template.load_new_z(gen_data = PD)
 	if(!daycycle)
-		PD.day_duration = null
-		SSdaycycle.remove_linked_levels(PD.topmost_level_id)
+		SSdaycycle.remove_level(PD.get_linked_level_ids(), PD.daycycle_id)
 
 /client/proc/display_del_log()
 	set category = "Debug"
