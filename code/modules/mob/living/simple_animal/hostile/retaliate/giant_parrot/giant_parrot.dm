@@ -38,7 +38,7 @@
 	set_scale(2)
 	update_icon()
 
-/mob/living/simple_animal/hostile/retaliate/parrot/space/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/parrot/space/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.) && can_act() && !is_on_special_ability_cooldown() && Adjacent(.))
 		var/mob/living/carbon/human/H = .

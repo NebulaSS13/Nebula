@@ -1491,3 +1491,7 @@ default behaviour is:
 
 /mob/living/proc/is_asystole()
 	return FALSE
+
+/mob/living/proc/get_remains_type()
+	var/decl/species/my_species = get_species()
+	return my_species?.remains_type

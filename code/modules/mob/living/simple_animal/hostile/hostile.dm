@@ -116,7 +116,7 @@
 			stance = HOSTILE_STANCE_ATTACKING
 			walk_to(src, target_mob, 1, move_to_delay)
 
-/mob/living/simple_animal/hostile/proc/AttackTarget()
+/mob/living/simple_animal/hostile/proc/handle_attacking_target()
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		LoseTarget()
@@ -132,30 +132,8 @@
 	if(next_move >= world.time)
 		return 0
 	if(get_dist(src, target_mob) <= 1)	//Attacking
-		AttackingTarget()
+		attack_target(target_mob)
 		return 1
-
-/mob/living/simple_animal/hostile/proc/AttackingTarget()
-
-	if(buckled_mob == target_mob && (!faction || buckled_mob.faction != faction))
-
-		visible_message(SPAN_DANGER("\The [src] attempts to unseat \the [buckled_mob]!"))
-		set_dir(pick(global.cardinal))
-		setClickCooldown(attack_delay)
-
-		if(prob(33))
-			unbuckle_mob()
-			if(buckled_mob != target_mob && !QDELETED(target_mob))
-				to_chat(target_mob, SPAN_DANGER("You are thrown off \the [src]!"))
-				SET_STATUS_MAX(target_mob, STAT_WEAK, 3)
-
-		return target_mob
-
-	if(!Adjacent(target_mob))
-		return
-	if(isliving(target_mob))
-		UnarmedAttack(target_mob)
-		return target_mob
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -196,7 +174,7 @@
 				face_atom(target_mob)
 				if(destroy_surroundings)
 					DestroySurroundings()
-				AttackTarget()
+				handle_attacking_target()
 			if(HOSTILE_STANCE_INSIDE) //we aren't inside something so just switch
 				stance = HOSTILE_STANCE_IDLE
 	else

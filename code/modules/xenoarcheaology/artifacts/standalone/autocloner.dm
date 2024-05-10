@@ -29,8 +29,8 @@
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/retaliate/parrot,
 		/mob/living/simple_animal/crab,
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/mouse/rat,
+		/mob/living/simple_animal/passive/mouse,
+		/mob/living/simple_animal/passive/mouse/rat,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/mob/living/simple_animal/hostile/retaliate/goose
 	)

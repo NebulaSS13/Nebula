@@ -112,7 +112,7 @@
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
-			familiar_type = /mob/living/simple_animal/mouse
+			familiar_type = /mob/living/simple_animal/passive/mouse
 		if("Cat")
 			H.mutations |= mRun
 			familiar_type = /mob/living/simple_animal/cat

@@ -1184,7 +1184,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/security_starboard)
 "acE" = (
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/tiled/dark,
 /area/exodus/security/tactical)
 "acF" = (
@@ -2739,7 +2739,7 @@
 /turf/space,
 /area/shuttle/escape_pod_3)
 "afX" = (
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/security_starboard)
 "afY" = (
@@ -9159,7 +9159,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/evahallway)
 "asY" = (
@@ -9552,7 +9552,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/arrivals)
 "auf" = (
@@ -10065,7 +10065,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/security_port)
 "avl" = (
@@ -10543,7 +10543,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/library)
 "awj" = (
@@ -14856,7 +14856,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/mob/living/simple_animal/mouse/brown/Tom,
+/mob/living/simple_animal/passive/mouse/brown/Tom,
 /turf/floor/tiled/dark,
 /area/exodus/security/nuke_storage)
 "aFw" = (
@@ -16148,7 +16148,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/evahallway)
 "aHR" = (
@@ -17493,7 +17493,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/bar)
 "aKP" = (
@@ -29894,7 +29894,7 @@
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/maintenance,
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/locker)
 "blw" = (
@@ -33588,7 +33588,7 @@
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/maintenance,
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/research_shuttle)
 "btf" = (
@@ -43654,7 +43654,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/tiled/steel_grid,
 /area/exodus/research/storage)
 "bMX" = (
@@ -45534,7 +45534,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/engineering)
 "bQU" = (
@@ -50469,7 +50469,7 @@
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/maintenance,
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/research_port)
 "caT" = (
@@ -50539,7 +50539,7 @@
 /turf/floor/tiled/white,
 /area/exodus/medical/patient_c)
 "cbc" = (
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/research_starboard)
 "cbd" = (
@@ -60224,7 +60224,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/research/storage)
 "cyF" = (
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/tiled/steel_grid,
 /area/exodus/maintenance/incinerator)
 "cyG" = (
@@ -62645,7 +62645,7 @@
 /turf/floor/plating,
 /area/exodus/engineering/engine_room)
 "cKI" = (
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/engineering)
 "cKM" = (
@@ -62978,7 +62978,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor/plating,
 /area/exodus/maintenance/engi_engine)
 "cLK" = (

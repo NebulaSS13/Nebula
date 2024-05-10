@@ -218,7 +218,7 @@
 	QDEL_NULL(boss_theme)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/goat/king/attack_target(mob/target)
 	. = ..()
 	if(isliving(target_mob))
 		var/mob/living/L = target_mob
@@ -227,7 +227,7 @@
 			ADJ_STATUS(L, STAT_CONFUSE, 1)
 			visible_message(SPAN_WARNING("\The [L] is bowled over by the impact of [src]'s attack!"))
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/attack_target(mob/target)
 	. = ..()
 	if(current_damtype != BRUTE)
 		special_attacks++

@@ -34,7 +34,7 @@
 		return 0
 	return ..()
 
-/mob/living/simple_animal/hostile/scarybat/AttackingTarget()
+/mob/living/simple_animal/hostile/scarybat/attack_target(mob/target)
 	. =..()
 	var/mob/living/L = .
 	if(istype(L))

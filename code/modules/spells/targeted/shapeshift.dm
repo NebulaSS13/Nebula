@@ -101,8 +101,8 @@
 	feedback = "BP"
 	possible_transformations = list(
 		/mob/living/simple_animal/lizard,
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/mouse/rat,
+		/mob/living/simple_animal/passive/mouse,
+		/mob/living/simple_animal/passive/mouse/rat,
 		/mob/living/simple_animal/corgi
 	)
 

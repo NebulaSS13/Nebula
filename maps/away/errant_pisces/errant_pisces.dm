@@ -42,7 +42,7 @@
 			environment.merge(sharkmaw_chlorine)
 			visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))
 
-/mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
+/mob/living/simple_animal/hostile/carp/shark/attack_target(mob/target)
 	set waitfor = 0//to deal with sleep() possibly stalling other procs
 	. =..()
 	var/mob/living/L = .

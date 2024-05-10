@@ -708,7 +708,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/light,
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor,
 /area/ship/trade/fore_port_underside_maint)
 "bD" = (
@@ -1584,7 +1584,7 @@
 /area/ship/trade/livestock)
 "AO" = (
 /obj/structure/hygiene/drain,
-/mob/living/simple_animal/mouse,
+/mob/living/simple_animal/passive/mouse,
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)
 "AT" = (

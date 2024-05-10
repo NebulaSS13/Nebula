@@ -120,7 +120,7 @@ var/global/list/protected_objects = list(
 	if(destroy_objects)
 		..()
 
-/mob/living/simple_animal/hostile/mimic/AttackingTarget()
+/mob/living/simple_animal/hostile/mimic/attack_target(mob/target)
 	. =..()
 	if(knockdown_people)
 		var/mob/living/L = .
