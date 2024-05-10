@@ -24,9 +24,11 @@
 		burst()
 
 	else if(pressure_difference > fatigue_pressure)
-		//TODO: leak to turf, doing pfshhhhh
+		set_leaking(TRUE)
 		if(prob(5))
 			burst()
+	else
+		try_leak() // rather than setting leaking to off, we let the connection check handle it
 
 	else return 1
 
