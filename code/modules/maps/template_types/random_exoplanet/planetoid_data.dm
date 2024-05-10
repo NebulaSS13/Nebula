@@ -248,12 +248,12 @@
 ///Registers to neccessary processors and begin running all processing needed by the planet
 /datum/planetoid_data/proc/begin_processing()
 	if(daycycle_id)
-		SSdaycycle.register_level(get_linked_level_ids(), daycycle_id, daycycle_type)
+		SSdaycycle.register_level(get_linked_level_zs(), daycycle_id, daycycle_type)
 
 ///Stop running any processing needed by the planet, and unregister from processors.
 /datum/planetoid_data/proc/end_processing()
 	if(daycycle_id)
-		SSdaycycle.remove_level(get_linked_level_ids(), daycycle_id)
+		SSdaycycle.remove_level(get_linked_level_zs(), daycycle_id)
 
 //#TODO: Move this into some SS for planet processing stuff or something?
 /datum/planetoid_data/Process(wait, tick)
@@ -273,6 +273,11 @@
 	if(!fauna)
 		return "alien creature"
 	return fauna.get_random_species_name()
+
+/datum/planetoid_data/proc/get_linked_level_zs()
+	for(var/linked_level_id in get_linked_level_ids())
+		var/datum/level_data/LD = SSmapping.levels_by_id[topmost_level_id]
+		LAZYDISTINCTADD(., LD.level_z)
 
 ///Returns a list of all the level id of the levels associated to this planet
 /datum/planetoid_data/proc/get_linked_level_ids()

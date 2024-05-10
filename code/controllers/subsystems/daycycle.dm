@@ -2,7 +2,7 @@
 SUBSYSTEM_DEF(daycycle)
 	name       = "Day Cycle"
 	priority   = SS_PRIORITY_DAYCYCLE
-	wait       = 10 SECONDS // 1 MINUTE
+	wait       = 10 SECONDS
 	flags      = SS_BACKGROUND | SS_POST_FIRE_TIMING | SS_NO_INIT
 	runlevels  = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	init_order = SS_INIT_TICKER

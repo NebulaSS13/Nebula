@@ -1,9 +1,12 @@
 /datum/daycycle
 	abstract_type = /datum/daycycle
+	var/list/suns = list(
+		new /datum/sun
+	)
 	/// Unique string ID used to register a level with a daycycle.
 	var/daycycle_id
 	/// How long is a full day and night cycle?
-	var/day_duration = 2 MINUTES //30 MINUTES
+	var/day_duration = 30 MINUTES
 	/// How far are we into the current cycle?
 	var/time_of_day = 0
 	/// What world.time did we last update? Used to calculate time progression between ticks.
@@ -25,6 +28,7 @@
 /datum/daycycle/New(_cycle_id)
 	daycycle_id = _cycle_id
 	last_update = world.time
+	current_period = cycle_periods[1]
 	transition_daylight() // pre-populate our values.
 
 /datum/daycycle/proc/add_level(level_z)
@@ -60,6 +64,10 @@
 				to_chat(player, SPAN_NOTICE(FONT_SMALL(current_period.announcement)))
 
 /datum/daycycle/proc/tick()
+
+	for(var/datum/sun/sun in suns)
+		sun.calc_position()
+
 	if(transition_daylight())
 		for(var/level_z in levels_affected)
 			var/datum/level_data/level = SSmapping.levels_by_z[level_z]

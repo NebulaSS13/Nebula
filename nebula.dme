@@ -285,7 +285,6 @@
 #include "code\controllers\subsystems\skybox.dm"
 #include "code\controllers\subsystems\spacedrift.dm"
 #include "code\controllers\subsystems\statistics.dm"
-#include "code\controllers\subsystems\sun.dm"
 #include "code\controllers\subsystems\supply.dm"
 #include "code\controllers\subsystems\throwing.dm"
 #include "code\controllers\subsystems\ticker.dm"
