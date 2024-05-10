@@ -10,6 +10,9 @@
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 
+/datum/level_data/player_level/shaded_hills/proc/place_mobs()
+	return
+
 /datum/level_data/player_level/shaded_hills/grassland
 	name = "Shaded Hills - Grassland"
 	level_id = "shaded_hills_grassland"
@@ -25,10 +28,28 @@
 	)
 
 /datum/level_data/player_level/shaded_hills/grassland/after_generate_level()
+
 	. = ..()
+
 	// Neither of these procs handle laterally linked levels yet.
 	SSweather.setup_weather_system(src)
 	SSdaycycle.add_linked_levels(get_all_connected_level_ids() | level_id, start_at_night = FALSE, update_interval = 20 MINUTES)
+
+	var/sanity = 100
+	var/mob_count = 0
+	while(mob_count < 10 && sanity)
+		sanity--
+		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
+		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
+			var/mob_type = pickweight(list(
+				/mob/living/simple_animal/passive/mouse        = 9,
+				/mob/living/simple_animal/passive/rabbit       = 3,
+				/mob/living/simple_animal/passive/rabbit/brown = 3,
+				/mob/living/simple_animal/passive/rabbit/black = 3,
+				/mob/living/simple_animal/opossum              = 5
+			))
+			new mob_type(place_mob_at)
+			mob_count++
 
 /datum/level_data/player_level/shaded_hills/swamp
 	name = "Shaded Hills - Swamp"
@@ -41,6 +62,42 @@
 		/datum/random_map/noise/forage/shaded_hills/swamp
 	)
 
+/datum/level_data/player_level/shaded_hills/swamp/after_generate_level()
+	. = ..()
+	var/sanity = 100
+	var/mob_count = 0
+	while(mob_count < 5 && sanity)
+		sanity--
+		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
+		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
+			var/mob_type = pickweight(list(
+				/mob/living/simple_animal/passive/mouse        = 6,
+				/mob/living/simple_animal/passive/rabbit       = 2,
+				/mob/living/simple_animal/passive/rabbit/brown = 2,
+				/mob/living/simple_animal/passive/rabbit/black = 2,
+				/mob/living/simple_animal/frog                 = 3,
+				/mob/living/simple_animal/frog/brown           = 2,
+				/mob/living/simple_animal/frog/yellow          = 2,
+				/mob/living/simple_animal/frog/purple          = 1
+			))
+			new mob_type(place_mob_at)
+			mob_count++
+
+	sanity = 100
+	mob_count = 0
+	while(mob_count < 10 && sanity)
+		sanity--
+		var/turf/floor/natural/mud/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
+		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
+			var/mob_type = pickweight(list(
+				/mob/living/simple_animal/frog                 = 3,
+				/mob/living/simple_animal/frog/brown           = 2,
+				/mob/living/simple_animal/frog/yellow          = 2,
+				/mob/living/simple_animal/frog/purple          = 1
+			))
+			new mob_type(place_mob_at)
+			mob_count++
+
 /datum/level_data/player_level/shaded_hills/woods
 	name = "Shaded Hills - Woods"
 	level_id = "shaded_hills_woods"
@@ -51,6 +108,33 @@
 		/datum/random_map/noise/shaded_hills/woods,
 		/datum/random_map/noise/forage/shaded_hills/woods
 	)
+
+/datum/level_data/player_level/shaded_hills/woods/after_generate_level()
+	. = ..()
+	var/mob_count = 0
+	var/sanity = 100
+	while(mob_count < 10 && sanity)
+		sanity--
+		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
+		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
+			var/mob_type = pickweight(list(
+				/mob/living/simple_animal/passive/mouse        = 6,
+				/mob/living/simple_animal/passive/rabbit       = 2,
+				/mob/living/simple_animal/passive/rabbit/brown = 2,
+				/mob/living/simple_animal/passive/rabbit/black = 2,
+				/mob/living/simple_animal/opossum              = 2
+			))
+			new mob_type(place_mob_at)
+			mob_count++
+
+	sanity = 100
+	mob_count = 0
+	while(mob_count < 5 && sanity)
+		sanity--
+		var/turf/floor/natural/grass/place_mob_at = locate(rand(10,world.maxx-10), rand(10,world.maxy-10), level_z)
+		if(istype(place_mob_at) && !(locate(/mob/living) in place_mob_at))
+			new /mob/living/simple_animal/passive/deer(place_mob_at)
+			mob_count++
 
 /datum/level_data/player_level/shaded_hills/downlands
 	name = "Shaded Hills - Downlands"
