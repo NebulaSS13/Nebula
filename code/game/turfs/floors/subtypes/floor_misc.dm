@@ -48,3 +48,10 @@
 	icon_state = "woven"
 	color = COLOR_BEIGE
 	initial_flooring = /decl/flooring/woven
+
+/turf/floor/straw
+	name = "loose straw"
+	// TEMPORARY ICON, CHANGE LATER
+	icon = 'icons/turf/flooring/wildgrass.dmi'
+	icon_state = "0"
+	color = COLOR_WHEAT
