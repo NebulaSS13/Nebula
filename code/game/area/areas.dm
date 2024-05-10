@@ -49,6 +49,7 @@ var/global/list/areas = list()
 	var/sound_env = STANDARD_STATION
 	var/description //A text-based description of what this area is for.
 	var/area_blurb_category // Used to filter description showing across subareas
+	var/const/BLURB_COOLDOWN_TIME = 15 MINUTES
 
 	var/base_turf // The base turf type of the area, which can be used to override the z-level's base turf
 	var/open_turf // The base turf of the area if it has a turf below it in multizi. Overrides turf-specific open type
@@ -346,7 +347,9 @@ var/global/list/mob/living/forced_ambiance_list = new
 		L.update_floating()
 	if(L.ckey)
 		play_ambience(L)
-		do_area_blurb(L)
+		// If we haven't changed blurb categories, don't send a blurb.
+		if(oldarea?.area_blurb_category != area_blurb_category)
+			do_area_blurb(L)
 	L.lastarea = src
 
 
@@ -360,9 +363,10 @@ var/global/list/mob/living/forced_ambiance_list = new
 		return
 	if(L?.get_preference_value(/datum/client_preference/area_info_blurb) != PREF_YES)
 		return
-	if(!(L.ckey in global.area_blurb_stated_to[area_blurb_category]))
-		LAZYADD(global.area_blurb_stated_to[area_blurb_category], L.ckey)
-		to_chat(L, SPAN_NOTICE(FONT_SMALL("[description]")))
+	var/next_message_time = LAZYACCESS(global.area_blurb_stated_to[area_blurb_category], L.ckey)
+	if(isnull(next_message_time) || world.time > next_message_time)
+		LAZYSET(global.area_blurb_stated_to[area_blurb_category], L.ckey, world.time + BLURB_COOLDOWN_TIME)
+		to_chat(L, SPAN_NOTICE(FONT_SMALL(description)))
 
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
