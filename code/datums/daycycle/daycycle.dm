@@ -45,9 +45,8 @@
 
 /datum/daycycle/proc/transition_daylight()
 
-	time_of_day += world.time - last_update
-	if(time_of_day >= day_duration)
-		time_of_day -= day_duration
+	time_of_day = (time_of_day + (world.time - last_update)) % day_duration
+	last_update = world.time
 
 	var/datum/time_of_day/last_period = current_period
 	var/progression_percentage = time_of_day / day_duration
@@ -77,3 +76,9 @@
 /datum/daycycle/exoplanet/New()
 	day_duration = rand(get_config_value(/decl/config/num/exoplanet_min_day_duration), get_config_value(/decl/config/num/exoplanet_max_day_duration)) MINUTES
 	..()
+
+// Dummy daycycle used solely so the sun datum has a chance to tick.
+/datum/daycycle/solars
+	cycle_periods = list(
+		new /datum/time_of_day/permanent_daytime
+	)

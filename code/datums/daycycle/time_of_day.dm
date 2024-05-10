@@ -38,3 +38,11 @@
 	period = 1
 	color = COLOR_NAVY_BLUE
 	power = 0.3
+
+// Dummy period used by solars.
+/datum/time_of_day/permanent_daytime
+	name = null
+	announcement = null
+	color = null
+	power = null
+	period = 1

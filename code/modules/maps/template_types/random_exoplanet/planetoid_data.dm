@@ -71,9 +71,9 @@
 	var/starts_at_night = FALSE
 	///How often do we change day and night. Null means it will stay either night or day forever.
 	/// ID used for registering/deregistering with a daycycle.
-	var/daycycle_id
+	var/daycycle_id = "daycycle_solars"
 	/// Type of daycycle to use.
-	var/daycycle_type = /datum/daycycle/exoplanet
+	var/daycycle_type = /datum/daycycle/solars
 	///Ambient lighting level across the surface. All surface height levels will be set to this.
 	var/surface_light_level
 	///Lighjting color used for the entire surface.
