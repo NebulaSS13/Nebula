@@ -1,6 +1,6 @@
 /turf/floor/natural/grass
 	name = "grass"
-	desc = "You see a patch of grass. The grass is wild and seems to like it here."
+	desc = "A patch of grass, growing steadily from the sun's nourishment."
 	possible_states = 1
 	icon = 'icons/turf/flooring/grass.dmi'
 	footstep_type = /decl/footsteps/grass
