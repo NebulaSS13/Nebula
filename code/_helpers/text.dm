@@ -778,3 +778,8 @@ var/global/list/plural_words_unchanged = list(
 	for(var/i = 1 to num)
 		. += str
 	. = JOINTEXT(.)
+
+/proc/jointext_no_nulls(list/L, Glue, Start = 1, End = 0)
+	var/list/temp = L.Copy()
+	LIST_CLEAR_NULLS(temp)
+	return jointext(temp, Glue, Start, End)

@@ -1,6 +1,7 @@
 /turf/floor/natural
 
 	name = "ground"
+	gender = PLURAL
 	icon = 'icons/turf/flooring/barren.dmi'
 	desc = "Bare, barren sand."
 	icon_state = "0"

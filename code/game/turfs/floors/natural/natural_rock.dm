@@ -1,5 +1,5 @@
 /turf/floor/natural/rock
-	name = "rock floor"
+	name = "rock"
 	desc = "A patch of rough, rocky ground."
 	icon = 'icons/turf/flooring/rock.dmi'
 	icon_edge_layer = EXT_EDGE_VOLCANIC
