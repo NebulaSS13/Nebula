@@ -464,3 +464,5 @@
 /mob/living/silicon/get_total_life_damage()
 	return (getBruteLoss() + getFireLoss())
 
+/mob/living/silicon/get_dexterity(var/silent)
+	return dexterity
