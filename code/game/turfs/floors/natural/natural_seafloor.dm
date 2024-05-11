@@ -1,5 +1,6 @@
 /turf/floor/natural/seafloor
 	name = "sea floor"
+	gender = NEUTER
 	desc = "A thick layer of silt and debris from above."
 	icon = 'icons/turf/flooring/seafloor.dmi'
 	icon_edge_layer = EXT_EDGE_SEAFLOOR

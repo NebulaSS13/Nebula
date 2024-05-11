@@ -71,3 +71,12 @@
 			__BIN_LIST.Insert(__BIN_MID, INPUT);\
 		};\
 	} while(FALSE)
+
+#if DM_VERSION < 515 // legacy, remove once we make 515 mandatory
+/proc/LIST_CLEAR_NULLS(L)
+	var/start_len = L.len
+	L -= new /list(L.len)
+	return start_len - L.len
+#else
+#define LIST_CLEAR_NULLS(L) L.RemoveAll(null)
+#endif
