@@ -297,16 +297,16 @@
 //
 // Level Load/Gen
 //
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a point budget to spend on subtemplates.
 /datum/level_data/proc/get_subtemplate_budget()
 	return 0
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a string identifier for a general category of template.
 /datum/level_data/proc/get_subtemplate_category()
 	return
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a bitflag of template flags that must not be present for a subtemplate to be considered available.
 /datum/level_data/proc/get_subtemplate_blacklist()
 	return
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a bitflag of template flags that must be present for a subtemplate to be considered available.
 /datum/level_data/proc/get_subtemplate_whitelist()
 	return
 
@@ -644,7 +644,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		return //If we don't have any templates, don't bother
 
 	if(!length(possible_subtemplates))
-		log_world("Map subtemplate loader was given no templates to pick from.")
+		log_world("Level [level_id] was given no templates to pick from.")
 		return
 
 	var/list/areas_whitelist = get_subtemplate_areas(template_category, blacklist, whitelist)
@@ -661,7 +661,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		candidate_points_of_interest -= R
 
 	if(budget > 0)
-		log_world("Map subtemplate loader had no templates to pick from with [budget] left to spend.")
+		log_world("Level [level_id] had no templates to pick from with [budget] left to spend.")
 
 ///Attempts several times to find turfs where a subtemplate can be placed.
 /datum/level_data/proc/try_place_subtemplate(var/datum/map_template/template, var/list/area_whitelist)

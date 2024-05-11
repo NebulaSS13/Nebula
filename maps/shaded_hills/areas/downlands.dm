@@ -1,6 +1,9 @@
 /area/shaded_hills/outside/downlands
 	name = "Downlands"
 
+/area/shaded_hills/outside/downlands/poi
+	name = "Deep Downlands"
+
 /area/shaded_hills/inn
 	name = "Inn"
 

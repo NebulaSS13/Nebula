@@ -12,11 +12,23 @@
 	daycycle_type = /datum/daycycle/shaded_hills
 	daycycle_id = "daycycle_shaded_hills"
 
+	var/submap_budget   = 0
+	var/submap_category = null
+	var/submap_area
 	var/list/mobs_to_spawn = list()
 
 
 // Placeholder for more customised values.
 /datum/daycycle/shaded_hills
+
+/datum/level_data/player_level/shaded_hills/get_subtemplate_areas(template_category, blacklist, whitelist)
+	return submap_area ? (islist(submap_area) ? submap_area : list(submap_area)) : null
+
+/datum/level_data/player_level/shaded_hills/get_subtemplate_budget()
+	return submap_budget
+
+/datum/level_data/player_level/shaded_hills/get_subtemplate_category()
+	return submap_category
 
 /datum/level_data/player_level/shaded_hills/after_generate_level()
 	. = ..()
@@ -48,6 +60,10 @@
 		"shaded_hills_swamp"     = SOUTH,
 		"shaded_hills_downlands" = EAST
 	)
+	submap_budget = 5
+	submap_category = MAP_TEMPLATE_CATEGORY_SH_GRASSLAND
+	submap_area = /area/shaded_hills/outside/poi
+
 	mobs_to_spawn = list(
 		list(
 			list(
@@ -76,6 +92,10 @@
 		/datum/random_map/noise/shaded_hills/swamp,
 		/datum/random_map/noise/forage/shaded_hills/swamp
 	)
+	submap_budget = 5
+	submap_category = MAP_TEMPLATE_CATEGORY_SH_SWAMP
+	submap_area = /area/shaded_hills/outside/swamp/poi
+
 	mobs_to_spawn = list(
 		list(
 			list(
@@ -113,6 +133,10 @@
 		/datum/random_map/noise/shaded_hills/woods,
 		/datum/random_map/noise/forage/shaded_hills/woods
 	)
+	submap_budget = 5
+	submap_category = MAP_TEMPLATE_CATEGORY_SH_WOODS
+	submap_area = /area/shaded_hills/outside/woods/poi
+
 	mobs_to_spawn = list(
 		list(
 			list(
@@ -143,6 +167,9 @@
 	connected_levels = list(
 		"shaded_hills_grassland" = WEST
 	)
+	submap_budget = 5
+	submap_category = MAP_TEMPLATE_CATEGORY_SH_DOWNLANDS
+	submap_area = /area/shaded_hills/outside/downlands/poi
 
 /datum/level_data/player_level/shaded_hills/downlands/after_generate_level()
 	. = ..()

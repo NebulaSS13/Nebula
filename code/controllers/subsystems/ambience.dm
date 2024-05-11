@@ -35,6 +35,8 @@ SUBSYSTEM_DEF(ambience)
 		if(isnull(A?.interior_ambient_light_modifier))
 			return FALSE
 		ambient_light_modifier = A.interior_ambient_light_modifier
+	else if(is_outside == OUTSIDE_NO)
+		return FALSE
 
 	// If we're dynamically lit, we want ambient light regardless of neighbors.
 	var/lit = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)

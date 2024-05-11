@@ -196,7 +196,7 @@ SUBSYSTEM_DEF(mapping)
 	. = list()
 	for(var/template_type in subtypesof(/datum/map_template))
 		var/datum/map_template/template = template_type
-		if(initial(template.template_parent_type) != template_type && initial(template.name))
+		if(!TYPE_IS_ABSTRACT(template) && initial(template.template_parent_type) != template_type && initial(template.name))
 			. += new template_type(type) // send name as a param to catch people doing illegal ad hoc creation
 
 /datum/controller/subsystem/mapping/proc/get_template(var/template_name)

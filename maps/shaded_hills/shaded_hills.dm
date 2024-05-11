@@ -17,6 +17,13 @@
 	#include "jobs/visitors.dm"
 	#include "jobs/wilderness.dm"
 
+	#include "submaps/_submaps.dm"
+	#include "submaps/downlands/_downlands.dm"
+	#include "submaps/grassland/_grassland.dm"
+	#include "submaps/swamp/_swamp.dm"
+	#include "submaps/woods/_woods.dm"
+	#include "submaps/woods/bear_den/bear_den.dm"
+
 	#include "levels/_levels.dm"
 	#include "levels/random_map.dm"
 	#include "levels/strata.dm"
