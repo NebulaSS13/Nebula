@@ -148,6 +148,8 @@
 	icon                = 'icons/obj/items/butchery/offal_small.dmi'
 	nutriment_amt       = 5
 	w_class             = ITEM_SIZE_SMALL
+	slice_path          = null
+	slice_num           = null
 
 /obj/item/chems/food/butchery/haunch
 	name                = "haunch"
