@@ -116,14 +116,13 @@
 
 /obj/item/chems/food/butchery/offal/handle_utensil_cutting(obj/item/tool, mob/user)
 	. = ..()
-	if(dry && length(.))
-		for(var/obj/item/chems/food/butchery/offal/guts in .)
-			if(!guts.dry)
-				guts.dry = TRUE
-				guts.SetName("dried [guts.name]")
-			else if(!guts._cleaned)
-				guts._cleaned = TRUE
-				guts.SetName("cleaned [guts.name]")
+	for(var/obj/item/chems/food/butchery/offal/guts in .)
+		if(dry && !guts.dry)
+			guts.dry = TRUE
+			guts.SetName("dried [guts.name]")
+		else if(_cleaned && !guts._cleaned)
+			guts._cleaned = TRUE
+			guts.SetName("cleaned [guts.name]")
 
 /obj/item/chems/food/butchery/offal/fluid_act(var/datum/reagents/fluids)
 	. = ..()
