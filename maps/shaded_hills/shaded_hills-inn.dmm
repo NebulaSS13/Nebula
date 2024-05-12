@@ -386,6 +386,10 @@
 /obj/abstract/landmark/start/shaded_hills/innkeeper,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
+"yu" = (
+/obj/structure/reagent_dispensers/barrel/ebony,
+/turf/floor/wood/ebony,
+/area/shaded_hills/general_store)
 "yz" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/general_store)
@@ -440,6 +444,10 @@
 "BL" = (
 /obj/structure/bed/simple/ebony/cloth,
 /obj/item/bedsheet/yellowed,
+/turf/floor/wood/ebony,
+/area/shaded_hills/general_store)
+"Dn" = (
+/obj/structure/reagent_dispensers/barrel/ebony/oil,
 /turf/floor/wood/ebony,
 /area/shaded_hills/general_store)
 "Ee" = (
@@ -8907,8 +8915,8 @@ TR
 Ic
 EV
 Wg
-uJ
-uJ
+Dn
+yu
 Wg
 eG
 Wg
