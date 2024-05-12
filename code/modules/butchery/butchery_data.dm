@@ -23,6 +23,8 @@
 	var/gut_amount        = 1
 
 	var/butchery_rotation = 270
+	/// A two-element lazylist of the form list(x, y), used to translate the mob's appearance on a butcher hook. Applied after rotation.
+	var/butchery_offset
 	var/must_use_hook     = TRUE
 	var/needs_surface     = FALSE
 

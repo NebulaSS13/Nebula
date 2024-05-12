@@ -44,13 +44,14 @@
 	skin_amount   = 10
 
 /decl/butchery_data/animal/small/fowl
-	meat_name     = "fowl"
-	meat_type     = /obj/item/chems/food/butchery/meat/chicken
-	meat_material = /decl/material/solid/organic/meat/chicken
-	meat_amount   = 2
-	bone_amount   = 2
-	skin_amount   = 2
-	skin_material = /decl/material/solid/organic/skin/feathers
+	meat_name       = "fowl"
+	meat_type       = /obj/item/chems/food/butchery/meat/chicken
+	meat_material   = /decl/material/solid/organic/meat/chicken
+	meat_amount     = 2
+	bone_amount     = 2
+	skin_amount     = 2
+	skin_material   = /decl/material/solid/organic/skin/feathers
+	butchery_offset = list(-10, 0)
 
 /decl/butchery_data/animal/small/fowl/chicken
 	meat_name     = "chicken"
