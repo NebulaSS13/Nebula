@@ -29,7 +29,7 @@
 		ingredient_flags = butchery_decl.meat_flags
 	. = ..()
 	if(istype(donor))
-		meat_name = set_meat_name(donor.get_butchery_product_name())
+		meat_name = donor.get_butchery_product_name()
 	if(meat_name)
 		set_meat_name(meat_name)
 
