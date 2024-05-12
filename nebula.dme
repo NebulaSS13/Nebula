@@ -1077,6 +1077,7 @@
 #include "code\game\objects\items\_item_interactions.dm"
 #include "code\game\objects\items\_item_materials.dm"
 #include "code\game\objects\items\_item_melting.dm"
+#include "code\game\objects\items\_item_reagents.dm"
 #include "code\game\objects\items\apc_frame.dm"
 #include "code\game\objects\items\blackout.dm"
 #include "code\game\objects\items\blueprints.dm"
