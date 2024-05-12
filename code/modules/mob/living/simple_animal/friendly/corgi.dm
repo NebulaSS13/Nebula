@@ -21,9 +21,9 @@
 	butchery_data = /decl/butchery_data/animal/corgi
 
 /mob/living/simple_animal/corgi/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/corgi)
+	return GET_DECL(/decl/bodytype/quadruped/animal/corgi)
 
-/decl/bodytype/animal/corgi/Initialize()
+/decl/bodytype/quadruped/animal/corgi/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 1, -8),
@@ -113,9 +113,9 @@
 	butchery_data = /decl/butchery_data/animal/corgi/puppy
 
 /mob/living/simple_animal/corgi/puppy/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/puppy)
+	return GET_DECL(/decl/bodytype/quadruped/animal/puppy)
 
-/decl/bodytype/animal/puppy/Initialize()
+/decl/bodytype/quadruped/animal/puppy/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 0, -12),

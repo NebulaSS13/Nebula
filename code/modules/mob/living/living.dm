@@ -974,6 +974,11 @@ default behaviour is:
 	. = ..()
 	if(.)
 
+		if(stat != DEAD)
+			ADJ_STATUS(src, STAT_PARA, -3)
+			ADJ_STATUS(src, STAT_STUN, -3)
+			ADJ_STATUS(src, STAT_WEAK, -3)
+
 		if(fire_stacks >= target.fire_stacks + 3)
 			target.fire_stacks += 1
 			fire_stacks -= 1
@@ -1491,3 +1496,11 @@ default behaviour is:
 
 /mob/living/proc/is_asystole()
 	return FALSE
+
+/mob/living/verb/mob_sleep()
+	set name = "Sleep"
+	set category = "IC"
+
+	if(alert("Are you sure you want to [player_triggered_sleeping ? "wake up?" : "sleep for a while? Use 'sleep' again to wake up"]", "Sleep", "No", "Yes") == "Yes")
+		player_triggered_sleeping = !player_triggered_sleeping
+

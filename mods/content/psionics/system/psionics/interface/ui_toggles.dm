@@ -6,13 +6,13 @@
 /obj/screen/psi/armour/on_update_icon()
 	..()
 	var/mob/living/owner = owner_ref.resolve()
-	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi && invisibility == 0)
 		icon_state = psi.use_psi_armour ? "psiarmour_on" : "psiarmour_off"
 
 /obj/screen/psi/armour/handle_click(mob/user, params)
 	var/mob/living/owner = owner_ref?.resolve()
-	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(!psi)
 		return
 	psi.use_psi_armour = !psi.use_psi_armour

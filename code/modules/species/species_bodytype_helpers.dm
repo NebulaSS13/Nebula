@@ -43,3 +43,6 @@
 /decl/bodytype/proc/apply_appearance(var/mob/living/carbon/human/H)
 	if(base_color)
 		H.set_skin_colour(base_color)
+
+/decl/bodytype/proc/adjust_status(mob/living/target, condition, amount)
+	return amount

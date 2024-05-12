@@ -119,63 +119,6 @@
 /mob/proc/swap_hand()
 	SHOULD_CALL_PARENT(TRUE)
 
-/mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
-	if(!is_asystole())
-		if (on_fire)
-			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			if (M.on_fire)
-				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>",
-				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
-			else
-				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>",
-				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
-				if(do_mob(M, src, 15))
-					src.fire_stacks -= 0.5
-					if (prob(10) && (M.fire_stacks <= 0))
-						M.fire_stacks += 1
-					M.IgniteMob()
-					if (M.on_fire)
-						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>",
-						"<span class='danger'>The fire spreads to you as well!</span>")
-					else
-						src.fire_stacks -= 0.5 //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
-						if (src.fire_stacks <= 0)
-							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>",
-							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
-							src.ExtinguishMob()
-							src.fire_stacks = 0
-		else
-			var/t_him = "it"
-			if (src.gender == MALE)
-				t_him = "him"
-			else if (src.gender == FEMALE)
-				t_him = "her"
-
-			var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
-			if(uniform)
-				uniform.add_fingerprint(M)
-
-			var/show_ssd = get_species_name()
-			if(show_ssd && ssd_check())
-				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
-				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
-			else if(current_posture.prone ||HAS_STATUS(src, STAT_ASLEEP) || player_triggered_sleeping)
-				player_triggered_sleeping = 0
-				ADJ_STATUS(src, STAT_ASLEEP, -5)
-				if(!HAS_STATUS(src, STAT_ASLEEP))
-					set_posture(/decl/posture/standing)
-				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
-									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
-			else
-				M.attempt_hug(src)
-
-			if(stat != DEAD)
-				ADJ_STATUS(src, STAT_PARA, -3)
-				ADJ_STATUS(src, STAT_STUN, -3)
-				ADJ_STATUS(src, STAT_WEAK, -3)
-
-			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-
 /mob/living/carbon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(eyecheck() < intensity || override_blindness_check)
 		return ..()
@@ -187,13 +130,6 @@
 
 /mob/living/carbon/restrained()
 	return get_equipped_item(slot_handcuffed_str)
-
-/mob/living/carbon/verb/mob_sleep()
-	set name = "Sleep"
-	set category = "IC"
-
-	if(alert("Are you sure you want to [player_triggered_sleeping ? "wake up?" : "sleep for a while? Use 'sleep' again to wake up"]", "Sleep", "No", "Yes") == "Yes")
-		player_triggered_sleeping = !player_triggered_sleeping
 
 /mob/living/carbon/Bump(var/atom/movable/AM, yes)
 	if(now_pushing || !yes)

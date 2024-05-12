@@ -25,17 +25,76 @@
 			. |= limb.unarmed_attacks
 
 /mob/living/carbon/human/default_help_interaction(mob/user)
-	if(user != src && ishuman(user) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(user.get_target_zone() == BP_R_ARM || user.get_target_zone() == BP_L_ARM))
-		if (performing_cpr)
-			performing_cpr = FALSE
+
+	if(user != src)
+		if(ishuman(user) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(user.get_target_zone() == BP_R_ARM || user.get_target_zone() == BP_L_ARM))
+			if (performing_cpr)
+				performing_cpr = FALSE
+			else
+				performing_cpr = TRUE
+				start_compressions(user, TRUE)
+			return TRUE
+
+		if(apply_pressure(user, user.get_target_zone()))
+			return TRUE
+
+		return ..()
+
+	var/decl/pronouns/G = get_pronouns()
+	visible_message(
+		SPAN_NOTICE("\The [src] examines [G.self]."),
+		SPAN_NOTICE("You check yourself for injuries.")
+	)
+
+	// TODO: move status strings onto the organ and handle crystal/prosthetic limbs.
+	for(var/obj/item/organ/external/org in get_external_organs())
+		var/list/status = list()
+
+		var/feels = 1 + round(org.pain/100, 0.1)
+		var/feels_brute = (org.brute_dam * feels)
+		if(feels_brute > 0)
+			switch(feels_brute / org.max_damage)
+				if(0 to 0.35)
+					status += "slightly sore"
+				if(0.35 to 0.65)
+					status += "very sore"
+				if(0.65 to INFINITY)
+					status += "throbbing with agony"
+
+		var/feels_burn = (org.burn_dam * feels)
+		if(feels_burn > 0)
+			switch(feels_burn / org.max_damage)
+				if(0 to 0.35)
+					status += "tingling"
+				if(0.35 to 0.65)
+					status += "stinging"
+				if(0.65 to INFINITY)
+					status += "burning fiercely"
+
+		if(org.status & ORGAN_MUTATED)
+			status += "misshapen"
+		if(org.status & ORGAN_BLEEDING)
+			status += "<b>bleeding</b>"
+		if(org.is_dislocated())
+			status += "dislocated"
+		if(org.status & ORGAN_BROKEN)
+			status += "hurts when touched"
+
+		if(org.status & ORGAN_DEAD)
+			if(BP_IS_PROSTHETIC(org) || BP_IS_CRYSTAL(org))
+				status += "is irrecoverably damaged"
+			else
+				status += "is grey and necrotic"
+		else if(org.damage >= org.max_damage && org.germ_level >= INFECTION_LEVEL_TWO)
+			status += "is likely beyond saving, and has begun to decay"
+		if(!org.is_usable() || org.is_dislocated())
+			status += "dangling uselessly"
+
+		if(status.len)
+			show_message("My [org.name] is <span class='warning'>[english_list(status)].</span>",1)
 		else
-			performing_cpr = TRUE
-			start_compressions(user, TRUE)
-		return TRUE
-	if(!(user == src && apply_pressure(user, user.get_target_zone())))
-		help_shake_act(user)
-		return TRUE
-	. = ..()
+			show_message("My [org.name] is <span class='notice'>OK.</span>",1)
+	return TRUE
 
 /mob/living/carbon/human/default_disarm_interaction(mob/user)
 	var/decl/species/user_species = user.get_species()
@@ -76,7 +135,6 @@
 
 	last_handled_by_mob = weakref(H)
 	H.last_attack = world.time
-
 
 	if(!affecting)
 		to_chat(user, SPAN_DANGER("They are missing that limb!"))
