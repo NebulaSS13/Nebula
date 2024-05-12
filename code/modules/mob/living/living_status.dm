@@ -9,7 +9,15 @@
 	var/decl/status_condition/cond = GET_DECL(condition)
 	if(!cond.check_can_set(src))
 		return FALSE
+
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		amount = my_species.adjust_status(src, condition, amount)
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_bodytype)
+		amount = my_bodytype.adjust_status(src, condition, amount)
 	amount = clamp(amount, 0, 1000)
+
 	if(amount == PENDING_STATUS(src, condition))
 		return FALSE
 	LAZYSET(pending_status_counters, condition, amount)

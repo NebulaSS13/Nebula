@@ -23,9 +23,9 @@
 	var/mob/flee_target
 
 /mob/living/simple_animal/cat/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/cat)
+	return GET_DECL(/decl/bodytype/quadruped/animal/cat)
 
-/decl/bodytype/animal/cat/Initialize()
+/decl/bodytype/quadruped/animal/cat/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 1,  -9),
@@ -232,9 +232,9 @@
 	butchery_data = /decl/butchery_data/animal/cat/kitten
 
 /mob/living/simple_animal/cat/kitten/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/kitten)
+	return GET_DECL(/decl/bodytype/quadruped/animal/kitten)
 
-/decl/bodytype/animal/kitten/Initialize()
+/decl/bodytype/quadruped/animal/kitten/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 1, -14),

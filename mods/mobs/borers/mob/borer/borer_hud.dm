@@ -14,7 +14,7 @@
 	. = ..()
 
 /datum/hud/borer/FinalizeInstantiation()
-	hud_intent_selector =  new(null, mymob)
+	hud_intent_selector =  new(null, mymob, get_ui_style_data(), get_ui_color(), get_ui_alpha(), UI_ICON_INTENT)
 	adding += hud_intent_selector
 	hud_inject_chemicals = new(null, mymob)
 	hud_leave_host =       new(null, mymob)

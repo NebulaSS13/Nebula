@@ -8,7 +8,7 @@
 
 	var/use_tool_quality = TOOL_QUALITY_WORST
 	var/mob/living/owner = loc
-	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
 		switch(psi.get_rank(PSI_PSYCHOKINESIS))
 			if(PSI_RANK_LATENT)

@@ -511,11 +511,11 @@
 		return TRUE
 
 	if(W.storage?.use_to_pickup)
-		if(W.storage.collection_mode) //Mode is set to collect all items
-			if(isturf(src.loc))
-				W.storage.gather_all(src.loc, user)
+		//Mode is set to collect all items
+		if(W.storage.collection_mode && isturf(src.loc))
+			W.storage.gather_all(src.loc, user)
 			return TRUE
-		else if(W.storage.can_be_inserted(src, user))
+		if(W.storage.can_be_inserted(src, user))
 			W.storage.handle_item_insertion(user, src)
 			return TRUE
 
@@ -662,7 +662,7 @@
 
 	return TRUE
 
-/obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
+/obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
 	if(!slot || !user || !canremove)
 		return FALSE
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)

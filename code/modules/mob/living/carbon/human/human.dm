@@ -828,63 +828,6 @@
 /mob/living/carbon/human/is_invisible_to(var/mob/viewer)
 	return (is_cloaked() || ..())
 
-/mob/living/carbon/human/help_shake_act(mob/living/carbon/M)
-	if(src != M)
-		..()
-	else
-		var/decl/pronouns/G = get_pronouns()
-		visible_message( \
-			SPAN_NOTICE("[src] examines [G.self]."), \
-			SPAN_NOTICE("You check yourself for injuries.") \
-			)
-
-		for(var/obj/item/organ/external/org in get_external_organs())
-			var/list/status = list()
-
-			var/feels = 1 + round(org.pain/100, 0.1)
-			var/feels_brute = (org.brute_dam * feels)
-			if(feels_brute > 0)
-				switch(feels_brute / org.max_damage)
-					if(0 to 0.35)
-						status += "slightly sore"
-					if(0.35 to 0.65)
-						status += "very sore"
-					if(0.65 to INFINITY)
-						status += "throbbing with agony"
-
-			var/feels_burn = (org.burn_dam * feels)
-			if(feels_burn > 0)
-				switch(feels_burn / org.max_damage)
-					if(0 to 0.35)
-						status += "tingling"
-					if(0.35 to 0.65)
-						status += "stinging"
-					if(0.65 to INFINITY)
-						status += "burning fiercely"
-
-			if(org.status & ORGAN_MUTATED)
-				status += "misshapen"
-			if(org.status & ORGAN_BLEEDING)
-				status += "<b>bleeding</b>"
-			if(org.is_dislocated())
-				status += "dislocated"
-			if(org.status & ORGAN_BROKEN)
-				status += "hurts when touched"
-
-			if(org.status & ORGAN_DEAD)
-				if(BP_IS_PROSTHETIC(org) || BP_IS_CRYSTAL(org))
-					status += "is irrecoverably damaged"
-				else
-					status += "is grey and necrotic"
-			else if(org.damage >= org.max_damage && org.germ_level >= INFECTION_LEVEL_TWO)
-				status += "is likely beyond saving, and has begun to decay"
-			if(!org.is_usable() || org.is_dislocated())
-				status += "dangling uselessly"
-			if(status.len)
-				src.show_message("My [org.name] is <span class='warning'>[english_list(status)].</span>",1)
-			else
-				src.show_message("My [org.name] is <span class='notice'>OK.</span>",1)
-
 /mob/living/carbon/human/proc/resuscitate()
 	if(!is_asystole() || !should_have_organ(BP_HEART))
 		return
@@ -1233,3 +1176,6 @@
 	volume = round(volume)
 	if(volume > 0 && range > 0)
 		playsound(T, footsound, volume, 1, range)
+
+/mob/living/carbon/human/try_awaken(mob/user)
+	return !is_asystole() && ..()

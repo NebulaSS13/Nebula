@@ -541,7 +541,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return 1
 
 /mob/proc/ssd_check()
-	return !client && !teleop
+	return !client && !teleop && (last_ckey || !ai)
 
 /mob/proc/try_teleport(var/area/thearea)
 	if(!istype(thearea))

@@ -29,6 +29,10 @@
 	. = ..()
 	src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
+// Override to avoid drinking from this or feeding it to your neighbor.
+/obj/item/chems/spray/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
+
 /obj/item/chems/spray/afterattack(atom/A, mob/user, proximity)
 	if(A?.storage || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/chems) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return

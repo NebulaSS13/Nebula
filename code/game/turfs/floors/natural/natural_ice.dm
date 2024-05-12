@@ -1,5 +1,6 @@
 /turf/floor/natural/ice
 	name = "ice"
+	desc = "A sheet of smooth, slick ice. Be careful not to slip..."
 	icon = 'icons/turf/flooring/ice.dmi'
 	footstep_type = /decl/footsteps/plating
 	base_color = COLOR_LIQUID_WATER

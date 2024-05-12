@@ -593,6 +593,12 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	bodytype_flag = 0
 	bodytype_category = "animal body"
 
+/decl/bodytype/quadruped/animal
+	abstract_type = /decl/bodytype/quadruped/animal
+	name = "quadruped animal"
+	bodytype_flag = 0
+	bodytype_category = "quadrupedal animal body"
+
 /mob/living/simple_animal/proc/get_melee_accuracy()
 	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
 
@@ -609,3 +615,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		/decl/posture/lying/deliberate
 	)
 	return available_postures
+
+/mob/living/simple_animal/get_default_3p_hug_message(mob/living/target)
+	return "$USER$ nuzzles $TARGET$."
+
+/mob/living/simple_animal/get_default_1p_hug_message(mob/living/target)
+	return "You nuzzle $TARGET$."
+
+/mob/living/simple_animal/handle_stance()
+	stance_damage = 0
+	return

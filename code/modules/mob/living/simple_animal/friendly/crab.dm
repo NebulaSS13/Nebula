@@ -20,10 +20,17 @@
 	ai = /datum/ai/crab
 	butchery_data = /decl/butchery_data/animal/arthropod/crab
 
-/mob/living/simple_animal/crab/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/crab)
+// TODO
+/decl/bodytype/hexapod/animal
+	abstract_type = /decl/bodytype/hexapod/animal
+	name = "hexapod animal"
+	bodytype_flag = 0
+	bodytype_category = "hexapodal animal body"
 
-/decl/bodytype/animal/crab/Initialize()
+/mob/living/simple_animal/crab/get_bodytype()
+	return GET_DECL(/decl/bodytype/hexapod/animal/crab)
+
+/decl/bodytype/hexapod/animal/crab/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list(-1, -10),

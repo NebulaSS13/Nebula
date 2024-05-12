@@ -14,7 +14,7 @@
 		for(var/psi in psi_faculties)
 			H.set_psi_rank(psi, psi_faculties[psi], take_larger = TRUE, defer_update = TRUE)
 
-	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
 		psi.update()
 		if(give_psionic_implant_on_join)

@@ -1,3 +1,25 @@
+/proc/emote_replace_target_tokens(var/msg, var/atom/target)
+	. = msg
+	if(istype(target))
+		var/decl/pronouns/target_gender = target.get_pronouns()
+		. = replacetext(., "$TARGET_S$",     target_gender.s)
+		. = replacetext(., "$TARGET_THEY$",  target_gender.he)
+		. = replacetext(., "$TARGET_THEM$",  target_gender.him)
+		. = replacetext(., "$TARGET_THEIR$", target_gender.his)
+		. = replacetext(., "$TARGET_SELF$",  target_gender.self)
+		. = replacetext(., "$TARGET$",       "<b>\the [target]</b>")
+
+/proc/emote_replace_user_tokens(var/msg, var/atom/user)
+	. = msg
+	if(istype(user))
+		var/decl/pronouns/user_gender = user.get_pronouns()
+		. = replacetext(., "$USER_S$",     user_gender.s)
+		. = replacetext(., "$USER_THEY$",  user_gender.he)
+		. = replacetext(., "$USER_THEM$",  user_gender.him)
+		. = replacetext(., "$USER_THEIR$", user_gender.his)
+		. = replacetext(., "$USER_SELF$",  user_gender.self)
+		. = replacetext(., "$USER$",       "<b>\the [user]</b>")
+
 // Note about emote messages:
 // - $USER$ / $TARGET$ will be replaced with the relevant name, in bold.
 // - $USER_THEM$ / $TARGET_THEM$ / $USER_THEIR$ / $TARGET_THEIR$ will be replaced with a
@@ -121,8 +143,8 @@ var/global/list/_emotes_by_key
 		var/emote_string = all_strings[string_key]
 		if(!length(emote_string))
 			continue
-		emote_string = replace_target_tokens(emote_string, dummy_emote_target)
-		emote_string = replace_user_tokens(emote_string, dummy_emote_user)
+		emote_string = emote_replace_target_tokens(emote_string, dummy_emote_target)
+		emote_string = emote_replace_user_tokens(emote_string, dummy_emote_user)
 		emote_string = uppertext(emote_string)
 		for(var/token in tokens)
 			if(findtext(emote_string, token))
@@ -219,20 +241,20 @@ var/global/list/_emotes_by_key
 	var/use_1p = get_emote_message_1p(user, target, extra_params)
 	if(use_1p)
 		if(target)
-			use_1p = replace_target_tokens(use_1p, target)
-		use_1p = "<span class='emote'>[capitalize(replace_user_tokens(use_1p, user))]</span>"
+			use_1p = emote_replace_target_tokens(use_1p, target)
+		use_1p = "<span class='emote'>[capitalize(emote_replace_user_tokens(use_1p, user))]</span>"
 
 	var/use_3p = get_emote_message_3p(user, target, extra_params)
 	if(use_3p)
 		if(target)
-			use_3p = replace_target_tokens(use_3p, target)
-		use_3p = "<span class='emote'>[replace_user_tokens(use_3p, user)]</span>"
+			use_3p = emote_replace_target_tokens(use_3p, target)
+		use_3p = "<span class='emote'>[emote_replace_user_tokens(use_3p, user)]</span>"
 
 	var/use_radio = get_radio_message(user)
 	if(use_radio)
 		if(target)
-			use_radio = replace_target_tokens(use_radio, target)
-		use_radio = replace_user_tokens(use_radio, user)
+			use_radio = emote_replace_target_tokens(use_radio, target)
+		use_radio = emote_replace_user_tokens(use_radio, user)
 
 	var/use_range = emote_range
 	if (!use_range)
@@ -253,28 +275,6 @@ var/global/list/_emotes_by_key
 	do_extra(user, target)
 	do_sound(user)
 	return TRUE
-
-/decl/emote/proc/replace_target_tokens(var/msg, var/atom/target)
-	. = msg
-	if(istype(target))
-		var/decl/pronouns/target_gender = target.get_pronouns()
-		. = replacetext(., "$TARGET_S$",     target_gender.s)
-		. = replacetext(., "$TARGET_THEY$",  target_gender.he)
-		. = replacetext(., "$TARGET_THEM$",  target_gender.him)
-		. = replacetext(., "$TARGET_THEIR$", target_gender.his)
-		. = replacetext(., "$TARGET_SELF$",  target_gender.self)
-		. = replacetext(., "$TARGET$",       "<b>\the [target]</b>")
-
-/decl/emote/proc/replace_user_tokens(var/msg, var/atom/user)
-	. = msg
-	if(istype(user))
-		var/decl/pronouns/user_gender = user.get_pronouns()
-		. = replacetext(., "$USER_S$",     user_gender.s)
-		. = replacetext(., "$USER_THEY$",  user_gender.he)
-		. = replacetext(., "$USER_THEM$",  user_gender.him)
-		. = replacetext(., "$USER_THEIR$", user_gender.his)
-		. = replacetext(., "$USER_SELF$",  user_gender.self)
-		. = replacetext(., "$USER$",       "<b>\the [user]</b>")
 
 /decl/emote/proc/get_radio_message(var/atom/user)
 	if(emote_message_radio_synthetic && check_synthetic(user))

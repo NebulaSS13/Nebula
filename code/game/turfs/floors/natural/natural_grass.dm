@@ -1,5 +1,6 @@
 /turf/floor/natural/grass
 	name = "grass"
+	desc = "A patch of grass, growing steadily and healthily."
 	possible_states = 1
 	icon = 'icons/turf/flooring/grass.dmi'
 	footstep_type = /decl/footsteps/grass
@@ -14,6 +15,7 @@
 
 /turf/floor/natural/grass/wild
 	name = "wild grass"
+	desc = "Tall, lush grass that reaches past your ankles."
 	possible_states = null
 	icon = 'icons/turf/flooring/wildgrass.dmi'
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
@@ -73,6 +75,7 @@
 	. = ..()
 	if(icon_state != "scorched")
 		SetName("scorched ground")
+		desc = "What was once lush grass has been reduced to burnt ashes."
 		icon_state = "scorched"
 		icon_edge_layer = -1
 		footstep_type = /decl/footsteps/asteroid

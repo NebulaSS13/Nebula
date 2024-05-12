@@ -14,7 +14,7 @@
 	dat += "<h2>Summary</h2>"
 	dat += "<hr>"
 
-	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
 
 		// Hi Warhammer 40k rating system, how are you?
@@ -32,7 +32,7 @@
 			// This space intentionally left blank (for Omega-Minus psi vampires. todo)
 			var/decl/special_role/beguiled/beguiled = GET_DECL(/decl/special_role/beguiled)
 			if(viewer != usr && beguiled.is_antagonist(mind) && ishuman(viewer))
-				var/datum/ability_handler/psionics/viewer_psi = viewer.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+				var/datum/ability_handler/psionics/viewer_psi = viewer.get_ability_handler(/datum/ability_handler/psionics)
 				if(viewer_psi && viewer_psi.get_rank(PSI_REDACTION) >= PSI_RANK_GRANDMASTER)
 					dat += "<font color='#FF0000'><b>Their mind has been subverted by another operant psychic; their actions are not their own.</b></font>"
 
