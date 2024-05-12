@@ -160,7 +160,7 @@ var/global/list/telecomms_hubs = list()
 		encryption |= channel.secured
 
 	var/formatted_msg = "<span style='color:[channel?.color || default_color]'><small><b>\[[channel?.name || format_frequency(frequency)]\]</b></small> <span class='name'>"
-	var/send_name = istype(speaker) ? speaker.real_name : ("[speaker]" || "unknown")
+	var/send_name = istype(speaker) ? speaker.GetVoice() : ("[speaker]" || "unknown")
 	var/list/listeners = list() // Dictionary of listener -> boolean (include overmap origin)
 	// Broadcast to all radio devices in our network.
 	for(var/weakref/W as anything in network.connected_radios)
