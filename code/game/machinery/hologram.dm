@@ -114,25 +114,31 @@ var/global/list/holopads = list()
 			else
 				to_chat(user, "<span class='notice'>A request for AI presence was already sent recently.</span>")
 		if("Holocomms")
+
 			if(user.loc != src.loc)
 				to_chat(user, "<span class='info'>Please step onto the holopad.</span>")
 				return
+
 			if(last_request + 200 < world.time) //don't spam other people with requests either, you jerk!
+
 				last_request = world.time
 				var/list/holopadlist = list()
 				var/zlevels = SSmapping.get_connected_levels(z)
-				var/zlevels_long = list()
+				var/list/zlevels_long = list()
+
 				if(holopadType == HOLOPAD_LONG_RANGE && length(reachable_overmaps))
 					for(var/zlevel in global.overmap_sectors)
-						var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(zlevel)]
-						if(!isnull(O) && (O.overmap_id in reachable_overmaps))
+						var/obj/effect/overmap/visitable/O = global.overmap_sectors[zlevel]
+						if(!isnull(O) && (O.overmap_id in reachable_overmaps) && LAZYLEN(O.map_z))
 							zlevels_long |= O.map_z
+
 				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
 					if (H.operable())
 						if(H.z in zlevels)
 							holopadlist["[H.holopad_id]"] = H	//Define a list and fill it with the area of every holopad in the world
 						if (H.holopadType == HOLOPAD_LONG_RANGE && (H.z in zlevels_long))
 							holopadlist["[H.holopad_id]"] = H
+
 				holopadlist = sortTim(holopadlist, /proc/cmp_text_asc)
 				var/temppad = input(user, "Which holopad would you like to contact?", "holopad list") as null|anything in holopadlist
 				targetpad = holopadlist["[temppad]"]
