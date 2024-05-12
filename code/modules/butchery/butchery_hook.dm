@@ -117,6 +117,7 @@
 	var/decl/butchery_data/butchery_data = GET_DECL(occupant.butchery_data)
 	if(butchery_data)
 		M.Turn(butchery_data.butchery_rotation)
+		M.Translate(arglist(butchery_data.butchery_offset))
 	I.transform = M
 
 	add_overlay(I)
