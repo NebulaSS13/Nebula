@@ -16,15 +16,13 @@
 		if(istype(topping, /obj/item/chems/food/sashimi))
 			var/obj/item/chems/food/sashimi/sashimi = topping
 			fish_type = sashimi.fish_type
-		else if(istype(topping, /obj/item/chems/food/butchery/meat))
+		else if(istype(topping, /obj/item/chems/food/butchery))
 			var/obj/item/chems/food/butchery/meat = topping
 			fish_type = meat.meat_name
 		else if(istype(topping, /obj/item/chems/food/friedegg))
 			fish_type = "egg"
 		else if(istype(topping, /obj/item/chems/food/tofu))
 			fish_type = "tofu"
-		else if(istype(topping, /obj/item/chems/food/butchery/cutlet))
-			fish_type = "meat"
 
 		if(topping.reagents)
 			topping.reagents.trans_to(src, topping.reagents.total_volume)
@@ -63,7 +61,7 @@
 	var/fish_type = "fish"
 	var/slices = 1
 
-/obj/item/chems/food/sashimi/Initialize(mapload, var/_fish_type)
+/obj/item/chems/food/sashimi/Initialize(mapload, material_key, var/_fish_type)
 	. = ..(mapload)
 	if(_fish_type) fish_type = _fish_type
 	name = "[fish_type] sashimi"
