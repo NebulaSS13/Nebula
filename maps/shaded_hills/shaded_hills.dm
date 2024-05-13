@@ -23,6 +23,10 @@
 	#include "submaps/swamp/_swamp.dm"
 	#include "submaps/woods/_woods.dm"
 	#include "submaps/woods/bear_den/bear_den.dm"
+	#include "submaps/woods/fairy_rings/fairy_rings.dm"
+	#include "submaps/woods/fox_den/fox_den.dm"
+	#include "submaps/woods/hunter_camp/hunter_camp.dm"
+	#include "submaps/woods/old_cabin/old_cabin.dm"
 
 	#include "levels/_levels.dm"
 	#include "levels/random_map.dm"

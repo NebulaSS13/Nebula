@@ -2,6 +2,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_growing.dmi'
 	icon_state = "bush5-4"
 	color = COLOR_GREEN
+	is_spawnable_type = FALSE
 	var/growth_stage
 	var/dead = FALSE
 	var/sampled = FALSE
@@ -41,10 +42,15 @@
 	return ..()
 
 /obj/structure/flora/plant/Initialize(ml, _mat, _reinf_mat, datum/seed/_plant)
+
 	if(!plant && _plant)
 		plant = _plant
-	if(!plant)
+	if(istext(plant))
+		plant = SSplants.seeds[plant]
+	if(!istype(plant))
+		PRINT_STACK_TRACE("Flora given invalid seed value: [plant || "NULL"]")
 		return INITIALIZE_HINT_QDEL
+
 	name = plant.display_name
 	desc = "A wild [name]."
 	growth_stage = rand(round(plant.growth_stages * 0.65), plant.growth_stages)
@@ -113,3 +119,31 @@
 		if(!harvestable)
 			update_icon()
 	return TRUE
+
+/obj/structure/flora/plant/random_mushroom
+	name = "mushroom"
+	color = COLOR_BEIGE
+	icon_state = "mushroom10-3"
+	is_spawnable_type = TRUE
+
+/obj/structure/flora/plant/random_mushroom/proc/get_mushroom_variants()
+	var/static/list/mushroom_variants = list(
+		"amanita",
+		"destroyingangel"
+	)
+	return mushroom_variants
+
+/obj/structure/flora/plant/random_mushroom/glowing
+	color = COLOR_CYAN
+
+/obj/structure/flora/plant/random_mushroom/glowing/get_mushroom_variants()
+	var/static/list/mushroom_variants = list(
+		"caverncandle",
+		"weepingmoon",
+		"glowbell"
+	)
+	return mushroom_variants
+
+/obj/structure/flora/plant/random_mushroom/Initialize()
+	plant = pick(get_mushroom_variants())
+	return ..()

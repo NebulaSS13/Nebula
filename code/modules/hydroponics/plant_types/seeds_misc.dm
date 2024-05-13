@@ -582,7 +582,7 @@
 
 /datum/seed/mushroom/weepingmoon
 	name = "weepingmoon"
-	product_name = "weepingmoon"
+	product_name = "weeping moon"
 	display_name = "weeping moon patch"
 	mutants = null
 	chems = list(/decl/material/liquid/glowsap = list(1,20))

@@ -11,6 +11,7 @@
 	)
 	daycycle_type = /datum/daycycle/shaded_hills
 	daycycle_id = "daycycle_shaded_hills"
+	template_edge_padding = 0 // we use a strictly delineated subarea, no need for this guard
 
 	var/submap_budget   = 0
 	var/submap_category = null

@@ -1,0 +1,381 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/structure/bed/chair/wood/ebony{
+	dir = 1
+	},
+/turf/floor/wood/ebony,
+/area/template_noop)
+"e" = (
+/obj/structure/bed/simple/ebony/cloth,
+/obj/item/bedsheet/furs,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"f" = (
+/turf/floor/natural/dirt,
+/area/template_noop)
+"g" = (
+/turf/floor/wood/ebony,
+/area/template_noop)
+"i" = (
+/obj/structure/reagent_dispensers/barrel/ebony/wine,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"k" = (
+/obj/structure/coatrack,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"q" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/pottery/cup,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"r" = (
+/obj/structure/bed/chair/bench/ebony{
+	dir = 4
+	},
+/turf/floor/wood/ebony,
+/area/template_noop)
+"s" = (
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"t" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/knife,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"v" = (
+/obj/structure/window/basic/full,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"w" = (
+/obj/structure/bed/chair/wood/ebony,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"x" = (
+/obj/structure/door/ebony,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"y" = (
+/obj/structure/reagent_dispensers/barrel/ebony,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"A" = (
+/obj/structure/closet/crate/chest/ebony,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"E" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/pottery/teapot,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"G" = (
+/obj/item/stack/material/log/mapped/ebony/twenty,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"J" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/food/grown/potato,
+/obj/item/chems/cooking_vessel/pot,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"M" = (
+/obj/structure/door/ebony,
+/turf/floor/natural/path,
+/area/template_noop)
+"N" = (
+/obj/structure/reagent_dispensers/barrel/ebony/water,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"O" = (
+/obj/structure/fire_source/stove,
+/obj/item/chems/glass/beaker/kettle,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"P" = (
+/obj/structure/bed/chair/bench/ebony,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"Q" = (
+/obj/structure/reagent_dispensers/barrel/ebony/beer,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"R" = (
+/obj/structure/table/woodentable/ebony,
+/turf/floor/wood/ebony,
+/area/template_noop)
+"S" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/pottery/bowl,
+/obj/item/chems/glass/pottery/bowl,
+/obj/item/chems/glass/pottery/cup,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"U" = (
+/obj/structure/closet/crate/chest/ebony,
+/turf/floor/natural/path/basalt,
+/area/template_noop)
+"X" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"Y" = (
+/turf/wall/log/ebony,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+f
+f
+f
+f
+f
+a
+a
+a
+f
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+f
+f
+X
+X
+X
+X
+X
+X
+X
+f
+f
+a
+a
+a
+"}
+(3,1,1) = {"
+f
+f
+X
+X
+U
+U
+Q
+i
+U
+X
+X
+f
+f
+a
+a
+"}
+(4,1,1) = {"
+a
+f
+X
+y
+s
+s
+s
+s
+s
+U
+X
+f
+f
+f
+a
+"}
+(5,1,1) = {"
+f
+X
+X
+X
+X
+x
+X
+X
+X
+X
+X
+Y
+Y
+v
+Y
+"}
+(6,1,1) = {"
+Y
+X
+O
+X
+g
+g
+g
+g
+g
+g
+g
+x
+g
+g
+Y
+"}
+(7,1,1) = {"
+Y
+t
+s
+g
+g
+g
+w
+R
+R
+d
+g
+Y
+e
+A
+Y
+"}
+(8,1,1) = {"
+v
+J
+s
+g
+g
+g
+w
+q
+E
+d
+g
+Y
+Y
+Y
+Y
+"}
+(9,1,1) = {"
+Y
+S
+s
+g
+g
+g
+g
+g
+g
+g
+g
+Y
+f
+f
+a
+"}
+(10,1,1) = {"
+Y
+y
+s
+Y
+Y
+x
+Y
+Y
+g
+g
+g
+Y
+Y
+Y
+Y
+"}
+(11,1,1) = {"
+Y
+N
+s
+Y
+k
+g
+P
+Y
+r
+r
+g
+Y
+e
+A
+Y
+"}
+(12,1,1) = {"
+Y
+Y
+G
+Y
+P
+g
+P
+Y
+g
+g
+g
+x
+g
+g
+Y
+"}
+(13,1,1) = {"
+a
+Y
+Y
+Y
+k
+g
+P
+Y
+Y
+v
+Y
+Y
+Y
+v
+Y
+"}
+(14,1,1) = {"
+a
+f
+f
+Y
+Y
+M
+Y
+Y
+f
+f
+f
+f
+a
+a
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+f
+f
+f
+a
+a
+f
+a
+a
+a
+a
+a
+"}
