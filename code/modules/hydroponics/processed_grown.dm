@@ -62,6 +62,7 @@
 
 // Fruit slices. TODO: seed color so orange slices don't get black seeds.
 /obj/item/chems/food/processed_grown/slice
+	name                = "fruit slice"
 	icon                = 'icons/obj/grown/fruit_slice.dmi'
 	processed_grown_tag = "slice"
 	slice_path          = /obj/item/chems/food/processed_grown/chopped
@@ -77,6 +78,7 @@
 
 // Chopped fruit or veg
 /obj/item/chems/food/processed_grown/chopped
+	name                = "chopped produce"
 	icon                = 'icons/obj/grown/chopped.dmi'
 	processed_grown_tag = "chopped"
 
@@ -86,6 +88,7 @@
 
 // Matchstick veg
 /obj/item/chems/food/processed_grown/sticks
+	name                = "vegetable sticks"
 	icon                = 'icons/obj/grown/sticks.dmi'
 	gender              = PLURAL
 	draw_rind           = FALSE
@@ -99,6 +102,7 @@
 
 // Crushed nuts/bulbs/flowers
 /obj/item/chems/food/processed_grown/crushed
+	name                = "crushed produce"
 	icon                = 'icons/obj/grown/crushed.dmi'
 	gender              = PLURAL
 	processed_grown_tag = "crushed"

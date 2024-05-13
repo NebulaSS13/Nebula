@@ -1,6 +1,6 @@
 //Grown foods.
 /obj/item/chems/food/grown
-	name = "fruit"
+	name = "produce"
 	icon = 'icons/obj/hydroponics/hydroponics_products.dmi'
 	icon_state = "blank"
 	randpixel = 5
