@@ -11,3 +11,6 @@
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
 	butchery_data = /decl/butchery_data/animal/reptile/small
+
+/mob/living/simple_animal/lizard/get_remains_type()
+	return /obj/item/remains/lizard

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/mouse
+/mob/living/simple_animal/passive/mouse
 	name = "mouse"
 	real_name = "mouse"
 	desc = "It's a small rodent."
@@ -20,50 +20,44 @@
 	universal_understand = TRUE
 	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_MINISCULE
-	possession_candidate = 1
 	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
-	base_animal_type = /mob/living/simple_animal/mouse
+	base_animal_type = /mob/living/simple_animal/passive/mouse
 	butchery_data = /decl/butchery_data/animal/small/furred
 
-	ai = /datum/ai/mouse
+	ai = /datum/ai/passive/mouse
 
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
 
-/mob/living/simple_animal/mouse/get_dexterity(var/silent)
+/mob/living/simple_animal/passive/mouse/get_remains_type()
+	return /obj/item/remains/mouse
+
+/mob/living/simple_animal/passive/mouse/get_dexterity(var/silent)
 	return DEXTERITY_NONE // Mice are troll bait, give them no power.
 
-/datum/ai/mouse
-	expected_type = /mob/living/simple_animal/mouse
+/datum/ai/passive/mouse
+	expected_type = /mob/living/simple_animal/passive/mouse
 
-/datum/ai/mouse/do_process()
+/datum/ai/passive/mouse/do_process()
 	..()
-	var/mob/living/simple_animal/mouse/mouse = body
+	var/mob/living/simple_animal/passive/mouse/mouse = body
 	if(prob(mouse.speak_chance))
 		playsound(mouse.loc, 'sound/effects/mousesqueek.ogg', 50)
-	if(mouse.stat == CONSCIOUS && prob(0.5))
-		mouse.set_stat(UNCONSCIOUS)
-		mouse.wander = FALSE
-		mouse.speak_chance = 0
-	else if(mouse.stat == UNCONSCIOUS)
-		if(prob(1))
-			mouse.set_stat(CONSCIOUS)
-			mouse.wander = TRUE
-		else if(prob(5))
-			INVOKE_ASYNC(mouse, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
+	if(mouse.stat == UNCONSCIOUS && prob(5))
+		INVOKE_ASYNC(mouse, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
 
-/mob/living/simple_animal/mouse/Initialize()
+/mob/living/simple_animal/passive/mouse/Initialize()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 	if(name == initial(name))
-		name = "[name] ([sequential_id(/mob/living/simple_animal/mouse)])"
+		name = "[name] ([sequential_id(/mob/living/simple_animal/passive/mouse)])"
 	real_name = name
 	set_mouse_icon()
 	. = ..()
 
-/mob/living/simple_animal/mouse/proc/set_mouse_icon()
+/mob/living/simple_animal/passive/mouse/proc/set_mouse_icon()
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
 	switch(body_color)
@@ -78,17 +72,17 @@
 			icon = 'icons/mob/simple_animal/mouse_brown.dmi'
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
-/mob/living/simple_animal/mouse/proc/splat()
+/mob/living/simple_animal/passive/mouse/proc/splat()
 	take_damage(get_max_health()) // Enough damage to kill
 	splatted = TRUE
 	death()
 
-/mob/living/simple_animal/mouse/on_update_icon()
+/mob/living/simple_animal/passive/mouse/on_update_icon()
 	. = ..()
 	if(stat == DEAD && splatted)
 		icon_state = "world-splat"
 
-/mob/living/simple_animal/mouse/Crossed(atom/movable/AM)
+/mob/living/simple_animal/passive/mouse/Crossed(atom/movable/AM)
 	..()
 	if(!ishuman(AM) || stat)
 		return
@@ -98,31 +92,31 @@
 /*
  * Mouse types
  */
-/mob/living/simple_animal/mouse/white
+/mob/living/simple_animal/passive/mouse/white
 	body_color = "white"
 	icon = 'icons/mob/simple_animal/mouse_white.dmi'
 
-/mob/living/simple_animal/mouse/gray
+/mob/living/simple_animal/passive/mouse/gray
 	body_color = "gray"
 	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 
-/mob/living/simple_animal/mouse/brown
+/mob/living/simple_animal/passive/mouse/brown
 	body_color = "brown"
 	icon = 'icons/mob/simple_animal/mouse_brown.dmi'
 
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
-/mob/living/simple_animal/mouse/brown/Tom
+/mob/living/simple_animal/passive/mouse/brown/Tom
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
 
-/mob/living/simple_animal/mouse/brown/Tom/Initialize()
+/mob/living/simple_animal/passive/mouse/brown/Tom/Initialize()
 	. = ..()
 	// Change my name back, don't want to be named Tom (666)
 	SetName(initial(name))
 	real_name = name
 
 // rats, they're the rats (from Polaris)
-/mob/living/simple_animal/mouse/rat
+/mob/living/simple_animal/passive/mouse/rat
 	name = "rat"
 	desc = "A large rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 	body_color = "rat"
@@ -130,5 +124,5 @@
 	butchery_data = /decl/butchery_data/animal/small/furred/gray
 	max_health = 20
 
-/mob/living/simple_animal/mouse/rat/set_mouse_icon()
+/mob/living/simple_animal/passive/mouse/rat/set_mouse_icon()
 	return

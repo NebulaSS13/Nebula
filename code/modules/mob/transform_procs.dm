@@ -248,7 +248,7 @@
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/tomato))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/mouse))
+	if(ispath(MP, /mob/living/simple_animal/passive/mouse))
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
 		return 1

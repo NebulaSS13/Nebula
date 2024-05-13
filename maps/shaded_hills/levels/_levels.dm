@@ -9,6 +9,24 @@
 		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
+	var/list/mobs_to_spawn = list()
+
+/datum/level_data/player_level/shaded_hills/after_generate_level()
+	. = ..()
+	if(length(mobs_to_spawn))
+		for(var/list/mob_category in mobs_to_spawn)
+			var/list/mob_types = mob_category[1]
+			var/mob_turf  = mob_category[2]
+			var/mob_count = mob_category[3]
+			var/sanity = 1000
+			while(mob_count && sanity)
+				sanity--
+				var/turf/place_mob_at = locate(rand(level_inner_min_x, level_inner_max_x), rand(level_inner_min_y, level_inner_max_y), level_z)
+				if(istype(place_mob_at, mob_turf) && !(locate(/mob/living) in place_mob_at))
+					var/mob_type = pickweight(mob_types)
+					new mob_type(place_mob_at)
+					mob_count--
+					CHECK_TICK
 
 /datum/level_data/player_level/shaded_hills/grassland
 	name = "Shaded Hills - Grassland"
@@ -22,6 +40,19 @@
 		"shaded_hills_woods"     = NORTH,
 		"shaded_hills_swamp"     = SOUTH,
 		"shaded_hills_downlands" = EAST
+	)
+	mobs_to_spawn = list(
+		list(
+			list(
+				/mob/living/simple_animal/passive/mouse        = 9,
+				/mob/living/simple_animal/passive/rabbit       = 3,
+				/mob/living/simple_animal/passive/rabbit/brown = 3,
+				/mob/living/simple_animal/passive/rabbit/black = 3,
+				/mob/living/simple_animal/opossum              = 5
+			),
+			/turf/floor/natural/grass,
+			10
+		)
 	)
 
 /datum/level_data/player_level/shaded_hills/grassland/after_generate_level()
@@ -40,6 +71,32 @@
 		/datum/random_map/noise/shaded_hills/swamp,
 		/datum/random_map/noise/forage/shaded_hills/swamp
 	)
+	mobs_to_spawn = list(
+		list(
+			list(
+				/mob/living/simple_animal/passive/mouse        = 6,
+				/mob/living/simple_animal/passive/rabbit       = 2,
+				/mob/living/simple_animal/passive/rabbit/brown = 2,
+				/mob/living/simple_animal/passive/rabbit/black = 2,
+				/mob/living/simple_animal/frog                 = 3,
+				/mob/living/simple_animal/frog/brown           = 2,
+				/mob/living/simple_animal/frog/yellow          = 2,
+				/mob/living/simple_animal/frog/purple          = 1
+			),
+			/turf/floor/natural/grass,
+			5
+		),
+		list(
+			list(
+				/mob/living/simple_animal/frog                 = 3,
+				/mob/living/simple_animal/frog/brown           = 2,
+				/mob/living/simple_animal/frog/yellow          = 2,
+				/mob/living/simple_animal/frog/purple          = 1
+			),
+			/turf/floor/natural/mud,
+			10
+		)
+	)
 
 /datum/level_data/player_level/shaded_hills/woods
 	name = "Shaded Hills - Woods"
@@ -50,6 +107,26 @@
 	level_generators = list(
 		/datum/random_map/noise/shaded_hills/woods,
 		/datum/random_map/noise/forage/shaded_hills/woods
+	)
+	mobs_to_spawn = list(
+		list(
+			list(
+				/mob/living/simple_animal/passive/mouse        = 6,
+				/mob/living/simple_animal/passive/rabbit       = 2,
+				/mob/living/simple_animal/passive/rabbit/brown = 2,
+				/mob/living/simple_animal/passive/rabbit/black = 2,
+				/mob/living/simple_animal/opossum              = 2
+			),
+			/turf/floor/natural/grass,
+			10
+		),
+		list(
+			list(
+				/mob/living/simple_animal/passive/deer         = 1
+			),
+			/turf/floor/natural/grass,
+			5
+		)
 	)
 
 /datum/level_data/player_level/shaded_hills/downlands

@@ -19,7 +19,7 @@
 	butchery_data = /decl/butchery_data/animal/cat
 	base_animal_type = /mob/living/simple_animal/cat
 	var/turns_since_scan = 0
-	var/mob/living/simple_animal/mouse/movement_target
+	var/mob/living/simple_animal/passive/mouse/movement_target
 	var/mob/flee_target
 
 /mob/living/simple_animal/cat/get_bodytype()
@@ -41,7 +41,7 @@
 	//MICE!
 	if((src.loc) && isturf(src.loc))
 		if(!current_posture.prone && !buckled)
-			for(var/mob/living/simple_animal/mouse/M in loc)
+			for(var/mob/living/simple_animal/passive/mouse/M in loc)
 				if(!M.stat)
 					M.splat()
 					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
@@ -49,7 +49,7 @@
 					stop_automated_movement = 0
 					break
 
-	for(var/mob/living/simple_animal/mouse/snack in oview(src,5))
+	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
 		if(snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
@@ -85,7 +85,7 @@
 	if( !movement_target || !(movement_target.loc in oview(src, 4)) )
 		movement_target = null
 		stop_automated_movement = 0
-		for(var/mob/living/simple_animal/mouse/snack in oview(src)) //search for a new target
+		for(var/mob/living/simple_animal/passive/mouse/snack in oview(src)) //search for a new target
 			if(isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break

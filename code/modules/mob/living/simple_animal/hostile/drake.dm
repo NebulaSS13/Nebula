@@ -28,7 +28,7 @@
 /mob/living/simple_animal/hostile/drake/lava_act(datum/gas_mixture/air, temperature, pressure)
 	return
 
-/mob/living/simple_animal/hostile/drake/AttackingTarget()
+/mob/living/simple_animal/hostile/drake/attack_target(mob/target)
 	. = ..()
 	if(empowered_attack)
 		depower()

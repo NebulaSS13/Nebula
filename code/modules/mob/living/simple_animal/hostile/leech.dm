@@ -27,7 +27,7 @@
 		else
 			belly -= 1
 
-/mob/living/simple_animal/hostile/leech/AttackingTarget()
+/mob/living/simple_animal/hostile/leech/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.) && belly <= 75)
 		var/mob/living/carbon/human/H = .

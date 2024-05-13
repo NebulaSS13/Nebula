@@ -104,7 +104,7 @@
 /mob/living/simple_animal/hostile/bear/LoseTarget()
 	..(5)
 
-/mob/living/simple_animal/hostile/bear/AttackingTarget()
+/mob/living/simple_animal/hostile/bear/attack_target(mob/target)
 	if(!Adjacent(target_mob))
 		return
 	custom_emote(1, pick( list("slashes at [target_mob]", "bites [target_mob]") ) )

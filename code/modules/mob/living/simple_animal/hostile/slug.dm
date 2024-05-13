@@ -43,7 +43,7 @@
 	chest.embed_in_organ(holder, FALSE, "\The [src] latches itself onto \the [H]!")
 	holder.sync(src)
 
-/mob/living/simple_animal/hostile/slug/AttackingTarget()
+/mob/living/simple_animal/hostile/slug/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .

@@ -24,6 +24,17 @@
 	skin_material = /decl/material/solid/organic/skin/goat
 	skin_amount   = 8
 
+/decl/butchery_data/animal/ruminant/deer
+	meat_name     = "venison"
+	meat_type     = /obj/item/chems/food/butchery/meat
+	meat_amount   = 5
+	bone_amount   = 9
+	skin_material = /decl/material/solid/organic/skin/deer
+	skin_amount   = 9
+
+/decl/butchery_data/animal/ruminant/deer/buck
+	// todo: drop antlers
+
 /decl/butchery_data/animal/ruminant/cow
 	meat_name     = "beef"
 	meat_type     = /obj/item/chems/food/butchery/meat/beef

@@ -86,7 +86,7 @@
 			set_light(3, 0.2)
 			move_to_delay = 2
 
-/mob/living/simple_animal/hostile/vagrant/AttackingTarget()
+/mob/living/simple_animal/hostile/vagrant/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .

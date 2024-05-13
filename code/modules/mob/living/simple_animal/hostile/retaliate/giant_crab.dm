@@ -65,7 +65,7 @@
 	..()
 	process_grab()
 
-/mob/living/simple_animal/hostile/retaliate/giant_crab/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/giant_crab/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .

@@ -7,9 +7,9 @@
 
 /obj/random/mouse/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/mob/living/simple_animal/mouse/brown = 30,
-		/mob/living/simple_animal/mouse/gray  = 30,
-		/mob/living/simple_animal/mouse/white = 15
+		/mob/living/simple_animal/passive/mouse/brown = 30,
+		/mob/living/simple_animal/passive/mouse/gray  = 30,
+		/mob/living/simple_animal/passive/mouse/white = 15
 	)
 	return spawnable_choices
 

@@ -140,6 +140,10 @@
 	color = COLOR_GRAY40
 	uid = "solid_skin_cow"
 
+/decl/material/solid/organic/skin/deer
+	color = COLOR_BROWN
+	uid = "solid_skin_deer"
+
 /decl/material/solid/organic/skin/shark
 	name = "sharkskin"
 	color = COLOR_PURPLE_GRAY

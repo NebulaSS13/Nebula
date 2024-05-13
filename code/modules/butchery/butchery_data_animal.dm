@@ -9,6 +9,13 @@
 		var/product = new stomach_type(get_turf(donor), gut_material, donor)
 		LAZYADD(., product)
 
+/decl/butchery_data/animal/fox
+	meat_name         = "fox"
+	meat_type         = /obj/item/chems/food/butchery/meat
+	meat_amount       = 3
+	skin_material     = /decl/material/solid/organic/skin/fur/orange
+	gut_type          = /obj/item/chems/food/butchery/offal/small
+
 /decl/butchery_data/animal/corgi
 	meat_name         = "dog"
 	meat_type         = /obj/item/chems/food/butchery/meat/corgi

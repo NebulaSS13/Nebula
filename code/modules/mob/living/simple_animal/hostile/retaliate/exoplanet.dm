@@ -41,8 +41,10 @@
 			continue
 		beast.visible_message(SPAN_DANGER("\The [beast] consumes the body of \the [S]!"))
 		var/turf/T = get_turf(S)
-		var/obj/item/remains/xeno/X = new(T)
-		X.desc += "These look like they belong to \a [S.name]."
+		var/remains_type = S.get_remains_type()
+		if(remains_type)
+			var/obj/item/remains/X = new remains_type(T)
+			X.desc += "These look like they belonged to \a [S.name]."
 		beast.adjust_nutrition(5 * S.get_max_health())
 		if(prob(5))
 			S.gib()
@@ -190,7 +192,7 @@
 	if(. && ishuman(user))
 		reflect_unarmed_damage(user, BURN, "amorphous mass")
 
-/mob/living/simple_animal/hostile/retaliate/beast/charbaby/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_target(mob/target)
 	. = ..()
 	if(isliving(target_mob) && prob(25))
 		var/mob/living/L = target_mob

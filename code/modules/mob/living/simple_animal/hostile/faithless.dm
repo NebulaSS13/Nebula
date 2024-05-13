@@ -38,7 +38,7 @@
 	if(.)
 		audible_emote("wails at [.]")
 
-/mob/living/simple_animal/hostile/faithless/AttackingTarget()
+/mob/living/simple_animal/hostile/faithless/attack_target(mob/target)
 	. =..()
 	var/mob/living/L = .
 	if(istype(L))

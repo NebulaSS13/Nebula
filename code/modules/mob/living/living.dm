@@ -1497,10 +1497,13 @@ default behaviour is:
 /mob/living/proc/is_asystole()
 	return FALSE
 
+/mob/living/proc/get_remains_type()
+	var/decl/species/my_species = get_species()
+	return my_species?.remains_type
+
 /mob/living/verb/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"
 
 	if(alert("Are you sure you want to [player_triggered_sleeping ? "wake up?" : "sleep for a while? Use 'sleep' again to wake up"]", "Sleep", "No", "Yes") == "Yes")
 		player_triggered_sleeping = !player_triggered_sleeping
-
