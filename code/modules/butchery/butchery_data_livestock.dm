@@ -17,20 +17,22 @@
 		LAZYADD(., food)
 
 /decl/butchery_data/animal/ruminant/goat
-	meat_name     = "chevon"
-	meat_type     = /obj/item/chems/food/butchery/meat/goat
-	meat_amount   = 4
-	bone_amount   = 8
-	skin_material = /decl/material/solid/organic/skin/goat
-	skin_amount   = 8
+	meat_name       = "chevon"
+	meat_type       = /obj/item/chems/food/butchery/meat/goat
+	meat_amount     = 4
+	bone_amount     = 8
+	skin_material   = /decl/material/solid/organic/skin/goat
+	skin_amount     = 8
+	butchery_offset = list(-6, 0)
 
 /decl/butchery_data/animal/ruminant/deer
-	meat_name     = "venison"
-	meat_type     = /obj/item/chems/food/butchery/meat
-	meat_amount   = 5
-	bone_amount   = 9
-	skin_material = /decl/material/solid/organic/skin/deer
-	skin_amount   = 9
+	meat_name       = "venison"
+	meat_type       = /obj/item/chems/food/butchery/meat
+	meat_amount     = 5
+	bone_amount     = 9
+	skin_material   = /decl/material/solid/organic/skin/deer
+	skin_amount     = 9
+	butchery_offset = list(-8, 0)
 
 /decl/butchery_data/animal/ruminant/deer/buck
 	// todo: drop antlers
