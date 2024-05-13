@@ -39,7 +39,7 @@
 "dK" = (
 /obj/structure/table/woodentable/ebony,
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "dN" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 8
@@ -142,7 +142,7 @@
 	pixel_y = 10
 	},
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "id" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/glass/pottery/bottle/beer,
@@ -217,7 +217,7 @@
 	dir = 4
 	},
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "lE" = (
 /obj/abstract/level_data_spawner/shaded_hills_downlands,
 /turf/unsimulated/mask,
@@ -270,7 +270,7 @@
 	dir = 8
 	},
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "qG" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/inn)
@@ -292,7 +292,7 @@
 	dir = 4
 	},
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "sJ" = (
 /obj/structure/door/wood/ebony,
 /obj/abstract/landmark/lock_preset/shaded_hills/inn_interior,
@@ -551,11 +551,11 @@
 "Jw" = (
 /obj/structure/bed/chair/wood/ebony,
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "JU" = (
 /obj/structure/railing/mapped/ebony,
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "KG" = (
 /obj/structure/railing/mapped/ebony{
 	dir = 8
@@ -740,7 +740,7 @@
 	dir = 8
 	},
 /turf/floor/wood/ebony,
-/area/shaded_hills/inn)
+/area/shaded_hills/inn/porch)
 "WI" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 8
@@ -765,6 +765,9 @@
 /obj/structure/meat_hook,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
+"Yg" = (
+/turf/floor/wood/ebony,
+/area/shaded_hills/inn/porch)
 "Yp" = (
 /obj/structure/meat_hook,
 /obj/structure/wall_sconce/lantern,
@@ -8609,7 +8612,7 @@ ZY
 ZY
 Ee
 Jw
-ZY
+Yg
 JU
 TR
 TR
@@ -8761,7 +8764,7 @@ ZY
 Jo
 Ee
 dK
-ZY
+Yg
 JU
 TR
 TR
@@ -8913,7 +8916,7 @@ ZY
 ZY
 Ee
 dK
-ZY
+Yg
 JU
 TR
 TR
@@ -9065,7 +9068,7 @@ ZY
 ZY
 Ee
 Jw
-ZY
+Yg
 JU
 TR
 TR
@@ -9217,7 +9220,7 @@ dC
 Ee
 Ee
 dK
-ZY
+Yg
 JU
 TR
 HI
@@ -9369,7 +9372,7 @@ ZY
 US
 Ee
 dK
-ZY
+Yg
 JU
 TR
 TR
@@ -9521,7 +9524,7 @@ ZY
 WY
 Ee
 Jw
-ZY
+Yg
 JU
 TR
 HI
@@ -9673,7 +9676,7 @@ ZY
 Td
 iX
 dK
-ZY
+Yg
 JU
 TR
 TR
@@ -9825,7 +9828,7 @@ ZY
 US
 iX
 dK
-ZY
+Yg
 JU
 TR
 HI
@@ -9977,7 +9980,7 @@ ZY
 cq
 Ee
 Jw
-ZY
+Yg
 JU
 TR
 TR
@@ -10129,7 +10132,7 @@ ZY
 Td
 Ee
 hZ
-ZY
+Yg
 JU
 TR
 TR
@@ -10280,9 +10283,9 @@ ZY
 ZY
 ZY
 Qs
-ZY
-ZY
-ZY
+Yg
+Yg
+Yg
 TR
 TR
 TR
@@ -10432,9 +10435,9 @@ ZY
 lF
 lF
 qG
-ZY
-ZY
-ZY
+Yg
+Yg
+Yg
 TR
 TR
 TR

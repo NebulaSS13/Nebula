@@ -5,22 +5,26 @@
 	name = "Deep Downlands"
 
 /area/shaded_hills/inn
-	name = "Inn"
+	name = "\improper Inn"
+
+/area/shaded_hills/inn/porch
+	name = "\improper Inn Porch"
+	interior_ambient_light_modifier = -0.3 // night is pitch-black on the porch
 
 /area/shaded_hills/stable
-	name = "Stable"
+	name = "\improper Stable"
 
 /area/shaded_hills/farmhouse
-	name = "Farmhouse"
+	name = "\improper Farmhouse"
 
 /area/shaded_hills/slaughterhouse
-	name = "Slaughterhouse"
+	name = "\improper Slaughterhouse"
 
 /area/shaded_hills/tannery
-	name = "Tannery"
+	name = "\improper Tannery"
 
 /area/shaded_hills/general_store
-	name = "General Store"
+	name = "\improper General Store"
 
 /area/shaded_hills/forester_hut
-	name = "Foresters' Hut"
+	name = "\improper Foresters' Hut"

@@ -26,7 +26,7 @@
 	. = ..()
 
 /area/shaded_hills/outside
-	name = "Grasslands"
+	name = "\improper Grasslands"
 	color = COLOR_GREEN
 	is_outside = OUTSIDE_YES
 	ambience = list(
