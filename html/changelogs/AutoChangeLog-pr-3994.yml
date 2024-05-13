@@ -1,0 +1,5 @@
+author: Penelope Haze
+changes:
+  - {tweak: 'Area on-enter flavortext blurbs will be able to be shown to a player
+      again after a 15 minute cooldown, rather than only once ever.'}
+delete-after: true
