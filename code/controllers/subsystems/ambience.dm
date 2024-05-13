@@ -54,8 +54,10 @@ SUBSYSTEM_DEF(ambience)
 		// Check for daycycle ambience.
 		if(level_data.daycycle_id)
 			var/datum/daycycle/daycycle = SSdaycycle.get_daycycle(level_data.daycycle_id)
-			if(daycycle?.current_period?.power)
-				set_ambient_light(daycycle.current_period.color, clamp(daycycle.current_period.power + ambient_light_modifier, 0, 1))
+			var/new_power = daycycle?.current_period?.power
+			if(!isnull(new_power))
+				if(new_power > 0)
+					set_ambient_light(daycycle.current_period.color, clamp(new_power + ambient_light_modifier, 0, 1))
 				return TRUE
 
 		// Apply general level ambience.

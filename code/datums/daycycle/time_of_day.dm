@@ -17,26 +17,28 @@
 	name = "sunrise"
 	announcement = "The sun peeks over the horizon, bathing the world in rosy light."
 	period = 0.1
-	color = COLOR_ORANGE
-	power = 0.2
+	color = COLOR_RED_LIGHT
+	power = 0.5
 
 /datum/time_of_day/daytime
 	name = "daytime"
 	announcement = "The sun rises over the horizon, beginning another day."
 	period = 0.4
+	power = 1
+	color = COLOR_DAYLIGHT
 
 /datum/time_of_day/sunset
 	name = "sunset"
 	announcement = "The sun begins to dip below the horizon, and the daylight fades."
 	period = 0.6
-	color = COLOR_RED
+	color = COLOR_ORANGE
 	power = 0.5
 
 /datum/time_of_day/night
 	name = "night"
 	announcement = "Night falls, blanketing the world in darkness."
 	period = 1
-	color = COLOR_NAVY_BLUE
+	color = COLOR_CYAN_BLUE
 	power = 0.3
 
 // Dummy period used by solars.

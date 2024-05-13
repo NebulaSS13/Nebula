@@ -55,11 +55,11 @@
 			current_period = period
 			break
 
-	. = current_period != last_period && (current_period.color != last_period.color || current_period.power != last_period.power)
-	if(. && current_period.announcement)
+	. = (current_period.color != last_period.color || current_period.power != last_period.power)
+	if(current_period != last_period && current_period.announcement)
 		for(var/mob/player in global.player_list)
 			var/turf/T = get_turf(player)
-			if((T.z in levels_affected) && T.is_outside())
+			if(T && (T.z in levels_affected) && T.is_outside())
 				to_chat(player, SPAN_NOTICE(FONT_SMALL(current_period.announcement)))
 
 /datum/daycycle/proc/tick()
