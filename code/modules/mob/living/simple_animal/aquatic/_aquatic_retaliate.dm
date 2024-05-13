@@ -1,4 +1,5 @@
 /mob/living/simple_animal/hostile/retaliate/aquatic
+	abstract_type = /mob/living/simple_animal/hostile/retaliate/aquatic
 	icon = 'icons/mob/simple_animal/fish_content.dmi'
 	turns_per_move = 5
 	natural_weapon = /obj/item/natural_weapon/bite
