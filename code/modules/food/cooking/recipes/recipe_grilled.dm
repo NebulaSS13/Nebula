@@ -5,6 +5,7 @@
 		RECIPE_CATEGORY_MICROWAVE,
 		RECIPE_CATEGORY_SKILLET
 	)
+	completion_message = "The meat sizzles as it is cooked through."
 
 /decl/recipe/grilled/plainsteak
 	items = list(/obj/item/chems/food/butchery/meat)
@@ -20,6 +21,7 @@
 	fruit = list("onion" = 1, "mushroom" = 1)
 	items = list(/obj/item/chems/food/butchery/cutlet)
 	result = /obj/item/chems/food/loadedsteak
+	completion_message = "The onions and mushroom caramelize around the sizzling meat."
 
 /decl/recipe/grilled/syntisteak
 	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
@@ -31,6 +33,7 @@
 		/obj/item/chems/food/sandwich
 	)
 	result = /obj/item/chems/food/toastedsandwich
+	completion_message = "The outside of the sandwich darkens to a savoury toasted brown."
 
 /decl/recipe/grilled/grilledcheese
 	items = list(
@@ -38,6 +41,7 @@
 		/obj/item/chems/food/cheesewedge,
 	)
 	result = /obj/item/chems/food/grilledcheese
+	completion_message = "The bread toasts and the cheese melts together."
 
 /decl/recipe/grilled/fishfingers
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
@@ -47,6 +51,7 @@
 	)
 	reagent_mix = REAGENT_REPLACE // no raw egg/fish
 	result = /obj/item/chems/food/fishfingers
+	completion_message = "The breading browns and fish fillets sizzle as they are cooked through."
 
 /decl/recipe/grilled/meatball
 	items = list(
@@ -73,3 +78,4 @@
 		/obj/item/chems/food/tofu = 2,
 	)
 	result = /obj/item/chems/food/tofukabob
+	completion_message = "The tofu sizzles and browns as it is cooked through."
