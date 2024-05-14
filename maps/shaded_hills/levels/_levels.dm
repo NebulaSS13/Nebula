@@ -9,7 +9,14 @@
 		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
+	daycycle_type = /datum/daycycle/shaded_hills
+	daycycle_id = "daycycle_shaded_hills"
+
 	var/list/mobs_to_spawn = list()
+
+
+// Placeholder for more customised values.
+/datum/daycycle/shaded_hills
 
 /datum/level_data/player_level/shaded_hills/after_generate_level()
 	. = ..()
@@ -59,8 +66,6 @@
 	. = ..()
 	// Neither of these procs handle laterally linked levels yet.
 	SSweather.setup_weather_system(src)
-	SSdaycycle.add_linked_levels(get_all_connected_level_ids() | level_id, start_at_night = FALSE, update_interval = 20 MINUTES)
-
 /datum/level_data/player_level/shaded_hills/swamp
 	name = "Shaded Hills - Swamp"
 	level_id = "shaded_hills_swamp"
@@ -143,7 +148,6 @@
 	. = ..()
 	// Neither of these procs handle laterally linked levels yet.
 	SSweather.setup_weather_system(src)
-	SSdaycycle.add_linked_levels(get_all_connected_level_ids() | level_id, start_at_night = FALSE, update_interval = 20 MINUTES)
 
 /obj/abstract/level_data_spawner/shaded_hills_grassland
 	level_data_type = /datum/level_data/player_level/shaded_hills/grassland

@@ -68,11 +68,14 @@
 	ring_type_name      = SKYBOX_PLANET_RING_TYPE_SPARSE
 	strata              = /decl/strata/sedimentary
 	engraving_generator = /datum/xenoarch_engraving_flavor
-	day_duration        = 12 MINUTES
+	daycycle_type       = /datum/daycycle/exoplanet/neutralia
 	surface_light_level = 0.5
 	surface_light_color = COLOR_OFF_WHITE
 	flora               = /datum/planet_flora/random/neutralia
 	fauna               = /datum/fauna_generator/neutralia
+
+/datum/daycycle/exoplanet/neutralia
+	day_duration        = 12 MINUTES
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Neutralia Template

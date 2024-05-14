@@ -70,8 +70,10 @@
 	// Day/night cycle tracking.
 	var/starts_at_night = FALSE
 	///How often do we change day and night. Null means it will stay either night or day forever.
-	/// Ensure that the minimum is larger than [maxx * daycycle_column_delay]. Otherwise the right side of the exoplanet can get stuck in a forever day.
-	var/day_duration
+	/// ID used for registering/deregistering with a daycycle.
+	var/daycycle_id = "daycycle_solars"
+	/// Type of daycycle to use.
+	var/daycycle_type = /datum/daycycle/solars
 	///Ambient lighting level across the surface. All surface height levels will be set to this.
 	var/surface_light_level
 	///Lighjting color used for the entire surface.
@@ -102,6 +104,8 @@
 
 ///Generate and sets the planetary id for this planetoid if it doesn't have one yet. Called on instantiation.
 /datum/planetoid_data/proc/generate_planetoid_id()
+	if(isnull(daycycle_id))
+		daycycle_id = "daycycle_[sequential_id(/datum/planetoid_data)]"
 	if(length(id))
 		return
 	return id = "planetoid_[sequential_id(/datum/planetoid_data)]"
@@ -243,12 +247,13 @@
 
 ///Registers to neccessary processors and begin running all processing needed by the planet
 /datum/planetoid_data/proc/begin_processing()
-	if(day_duration)
-		SSdaycycle.add_linked_levels(get_linked_level_ids(), starts_at_night, day_duration)
+	if(daycycle_id)
+		SSdaycycle.register_level(get_linked_level_zs(), daycycle_id, daycycle_type)
 
 ///Stop running any processing needed by the planet, and unregister from processors.
 /datum/planetoid_data/proc/end_processing()
-	SSdaycycle.remove_linked_levels(topmost_level_id)
+	if(daycycle_id)
+		SSdaycycle.remove_level(get_linked_level_zs(), daycycle_id)
 
 //#TODO: Move this into some SS for planet processing stuff or something?
 /datum/planetoid_data/Process(wait, tick)
@@ -268,6 +273,11 @@
 	if(!fauna)
 		return "alien creature"
 	return fauna.get_random_species_name()
+
+/datum/planetoid_data/proc/get_linked_level_zs()
+	for(var/linked_level_id in get_linked_level_ids())
+		var/datum/level_data/LD = SSmapping.levels_by_id[topmost_level_id]
+		LAZYDISTINCTADD(., LD.level_z)
 
 ///Returns a list of all the level id of the levels associated to this planet
 /datum/planetoid_data/proc/get_linked_level_ids()
@@ -376,12 +386,7 @@
 	generate_planet_materials()
 	generate_planetoid_rings()
 	generate_ambient_lighting()
-	generate_daycycle_data()
 	generate_weather()
-
-/datum/planetoid_data/random/proc/generate_daycycle_data()
-	starts_at_night = (surface_light_level > 0.1)
-	day_duration    = rand(get_config_value(/decl/config/num/exoplanet_min_day_duration), get_config_value(/decl/config/num/exoplanet_max_day_duration)) MINUTES
 
 ///If the planet doesn't have a name defined, a name will be randomly generated for it. (Named this way because a global proc generate_planet_name already exists)
 /datum/planetoid_data/random/proc/make_planet_name()

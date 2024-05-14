@@ -16,6 +16,8 @@
 /datum/level_data/planetoid/exoplanet
 	base_area = /area/exoplanet
 	base_turf = /turf/floor/natural/dirt
+	daycycle_id = null // will be generated
+	daycycle_type = /datum/daycycle/exoplanet
 
 ///Level data for generating underground levels on exoplanets
 /datum/level_data/planetoid/exoplanet/underground
