@@ -232,9 +232,9 @@ var/global/list/_cooking_recipe_cache = list()
 			var/check_grown_tag = food.get_grown_tag()
 			if(check_grown_tag && checklist[check_grown_tag] > 0)
 				//We found a thing we need
-				container_contents -= fruit
+				container_contents -= food
 				checklist[check_grown_tag]--
-				used_ingredients["fruits"] += fruit
+				used_ingredients["fruits"] += food
 
 	// And lastly deduct necessary quantities of reagents.
 	if(LAZYLEN(reagents))

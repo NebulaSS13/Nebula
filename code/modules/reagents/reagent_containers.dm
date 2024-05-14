@@ -54,6 +54,8 @@
 
 /obj/item/chems/proc/update_container_name()
 	var/newname = get_base_name()
+	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
+		newname = "[material.solid_name] [newname]"
 	if(presentation_flags & PRESENTATION_FLAG_NAME)
 		var/decl/material/R = reagents?.get_primary_reagent_decl()
 		if(R)
