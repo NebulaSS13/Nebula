@@ -86,14 +86,13 @@
 		dismantle_structure(user)
 		return TRUE
 
+	if(W.isflamesource() && light_source && !light_source.lit)
+		light_source.attackby(W, user)
+		update_icon()
+		return TRUE
+
 	if(istype(W, /obj/item/flame))
 		var/obj/item/flame/flame = W
-
-		if(flame.lit && light_source && light_source.can_manually_light)
-			light_source.attackby(flame, user)
-			update_icon()
-			return TRUE
-
 		if(flame.sconce_can_hold)
 
 			if(light_source)
@@ -106,9 +105,11 @@
 				update_icon()
 			return TRUE
 
-	if(W.isflamesource() && light_source && !light_source.lit)
-		light_source.attackby(W, user)
-		return TRUE
+	// Refilling
+	if(light_source && istype(W, /obj/item/chems))
+		var/obj/item/chems/chem_source = W
+		if(chem_source.standard_pour_into(user, light_source))
+			return TRUE
 
 	return ..()
 

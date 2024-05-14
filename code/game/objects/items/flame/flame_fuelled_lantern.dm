@@ -1,10 +1,11 @@
 /obj/item/flame/fuelled/lantern
 	name                = "oil lantern"
-	desc                = "An unwieldly oil lantern."
+	desc                = "An unwieldy oil lantern."
 	icon                = 'icons/obj/items/flame/lantern.dmi'
 	force               = 10
 	attack_verb         = list ("bludgeoned", "bashed", "whack")
 	w_class             = ITEM_SIZE_NORMAL
+	atom_flags          = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags           = OBJ_FLAG_CONDUCTIBLE
 	slot_flags          = SLOT_LOWER_BODY
 	lit_light_power     = 0.9

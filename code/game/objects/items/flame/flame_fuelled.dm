@@ -68,3 +68,9 @@
 		visible_message(SPAN_WARNING("\The [src]'s flame flickers."))
 		set_light(0)
 		addtimer(CALLBACK(src, TYPE_PROC_REF(.atom, set_light), 2), 4)
+
+/obj/item/flame/fuelled/afterattack(obj/target, mob/user, proximity)
+	if(proximity && !lit && standard_dispenser_refill(user, target)) // To be able to refill lanterns and lighters from reagent dispensers.
+		playsound(src.loc, 'sound/effects/refill.ogg', 50, TRUE, -6)
+		return TRUE
+	return ..()

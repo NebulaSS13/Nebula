@@ -51,3 +51,7 @@
 /obj/structure/reagent_dispensers/barrel/ebony/wine/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/ethanol/wine, reagents.maximum_volume)
+
+/obj/structure/reagent_dispensers/barrel/ebony/oil/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/nutriment/plant_oil, reagents.maximum_volume)
