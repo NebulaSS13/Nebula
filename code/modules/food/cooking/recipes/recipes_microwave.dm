@@ -2,6 +2,10 @@
 	reagents = list(/decl/material/solid/sodiumchloride = 5)
 	fruit = list("corn" = 1)
 	result = /obj/item/chems/food/popcorn
+	container_categories = list(
+		RECIPE_CATEGORY_MICROWAVE,
+		RECIPE_CATEGORY_SKILLET
+	)
 
 /decl/recipe/donkpocket
 	display_name = "warm donk-pocket"

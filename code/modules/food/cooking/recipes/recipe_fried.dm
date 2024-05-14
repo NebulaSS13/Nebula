@@ -2,6 +2,10 @@
 	abstract_type = /decl/recipe/fried
 	//cooking_heat_type = COOKING_HEAT_DIRECT
 	//cooking_medium_type = /decl/material/liquid/oil
+	container_categories = list(
+		RECIPE_CATEGORY_MICROWAVE,
+		RECIPE_CATEGORY_SKILLET
+	)
 
 /decl/recipe/fried/waffles
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 20)
