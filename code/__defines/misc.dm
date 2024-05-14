@@ -357,3 +357,4 @@
 // Used by recipe selection.
 #define RECIPE_CATEGORY_MICROWAVE "microwave"
 #define RECIPE_CATEGORY_POT       "pot"
+#define RECIPE_CATEGORY_SKILLET   "skillet"

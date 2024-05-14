@@ -19,6 +19,9 @@
 /datum/fabricator_recipe/pot
 	path = /obj/item/chems/cooking_vessel/pot
 
+/datum/fabricator_recipe/skillet
+	path = /obj/item/chems/cooking_vessel/skillet
+
 /datum/fabricator_recipe/radio_headset
 	path = /obj/item/radio/headset
 

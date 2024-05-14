@@ -1,6 +1,10 @@
 /decl/recipe/grilled
 	abstract_type = /decl/recipe/grilled
 	//cooking_heat_type = COOKING_HEAT_DIRECT
+	container_categories = list(
+		RECIPE_CATEGORY_MICROWAVE,
+		RECIPE_CATEGORY_SKILLET
+	)
 
 /decl/recipe/grilled/plainsteak
 	items = list(/obj/item/chems/food/butchery/meat)

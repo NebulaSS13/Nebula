@@ -33,9 +33,20 @@
 	return ..()
 
 /obj/item/chems/cooking_vessel/proc/get_cooking_contents_strings()
+
 	. = list()
+
 	for(var/obj/item/thing in get_stored_inventory())
 		. += "\the [thing]"
+
+	if(reagents?.total_volume)
+		for(var/reagent_type in reagents.reagent_volumes)
+			var/decl/material/reagent = GET_DECL(reagent_type)
+			var/reagent_name = reagent.get_reagent_name(reagents)
+			if(!isnull(reagent.boiling_point) && temperature >= reagent.boiling_point)
+				. += "[reagents.reagent_volumes[reagent_type]]u of simmering [reagent_name]"
+			else
+				. += "[reagents.reagent_volumes[reagent_type]]u of [reagent_name]"
 
 /obj/item/chems/cooking_vessel/examine(mob/user, distance)
 	. = ..()
