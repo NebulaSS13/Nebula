@@ -80,6 +80,7 @@
 		/datum/appearance_descriptor/height =      2,
 		/datum/appearance_descriptor/body_length = 1.25
 	)
+	z_flags = ZMM_WIDE_LOAD
 
 /decl/bodytype/crystalline/mantid/gyne/Initialize()
 	equip_adjust = list(

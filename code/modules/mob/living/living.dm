@@ -1391,6 +1391,8 @@ default behaviour is:
 
 /mob/living/proc/can_direct_mount(var/mob/user)
 	if(can_buckle && istype(user) && !user.incapacitated() && user == buckled_mob)
+		if(client && a_intent != I_HELP)
+			return FALSE // do not Ratatouille your colleagues
 		// TODO: Piloting skillcheck for hands-free moving? Stupid but amusing
 		for(var/obj/item/grab/reins in user.get_held_items())
 			if(istype(reins.current_grab, /decl/grab/simple/control) && reins.get_affecting_mob() == src)

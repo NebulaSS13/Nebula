@@ -44,6 +44,11 @@
 	if(base_color)
 		H.set_skin_colour(base_color)
 
+	if(z_flags)
+		H.z_flags = z_flags
+	else
+		H.z_flags = initial(H.z_flags)
+
 	if(!LAZYLEN(appearance_descriptors))
 		H.appearance_descriptors = null
 		return
