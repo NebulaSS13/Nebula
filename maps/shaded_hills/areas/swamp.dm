@@ -9,6 +9,9 @@
 	name = "Swamp"
 	description = "The reek of stagnant water and the chirp of insects filter through the humid air."
 
+/area/shaded_hills/outside/swamp/poi
+	name = "Deep Swamp"
+
 /area/shaded_hills/outside/river/swamp
 	name = "Swampy River"
 	description = "Mud squelches underfoot as the river broadens and splits, feeding a broad expanse of swamp and still water."

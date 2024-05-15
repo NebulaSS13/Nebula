@@ -26,6 +26,9 @@
 		'sound/ambience/ominous3.ogg',
 	)
 
+/area/shaded_hills/outside/poi
+	name = "Deep Grassland"
+
 /area/shaded_hills/outside/river
 	name = "River"
 	color = COLOR_BLUE

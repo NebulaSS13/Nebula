@@ -157,6 +157,10 @@
 	/// Type provided to the above.
 	var/daycycle_type = /datum/daycycle/exoplanet
 
+	/// Extra spacing needed between any random level templates and the transition edge of a level.
+	/// Note that this is more or less unnecessary if you are using a mapped area that doesn't stretch to the edge of the level.
+	var/template_edge_padding = 15
+
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
@@ -297,16 +301,16 @@
 //
 // Level Load/Gen
 //
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a point budget to spend on subtemplates.
 /datum/level_data/proc/get_subtemplate_budget()
 	return 0
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a string identifier for a general category of template.
 /datum/level_data/proc/get_subtemplate_category()
 	return
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a bitflag of template flags that must not be present for a subtemplate to be considered available.
 /datum/level_data/proc/get_subtemplate_blacklist()
 	return
-/// Helper proc for subtemplate generation.
+/// Helper proc for subtemplate generation. Returns a bitflag of template flags that must be present for a subtemplate to be considered available.
 /datum/level_data/proc/get_subtemplate_whitelist()
 	return
 
@@ -644,9 +648,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		return //If we don't have any templates, don't bother
 
 	if(!length(possible_subtemplates))
-		log_world("Map subtemplate loader was given no templates to pick from.")
+		log_world("Level [level_id] was given no templates to pick from.")
 		return
 
+	var/list/repeatable_templates = list()
 	var/list/areas_whitelist = get_subtemplate_areas(template_category, blacklist, whitelist)
 	var/list/candidate_points_of_interest = possible_subtemplates.Copy()
 	//Each iteration needs to either place a subtemplate or strictly decrease either the budget or templates list length (or break).
@@ -658,22 +663,29 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 			//Mark spawned no-duplicate POI globally
 			if(!(R.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 				LAZYDISTINCTADD(SSmapping.banned_template_names, R.name)
+			if(R.template_flags & TEMPLATE_FLAG_GENERIC_REPEATABLE)
+				repeatable_templates |= R
 		candidate_points_of_interest -= R
 
+		// Generic repeatable templates can be picked again if we have remaining budget.
+		if(!length(candidate_points_of_interest) && budget > 0 && length(repeatable_templates))
+			candidate_points_of_interest = repeatable_templates.Copy()
+			repeatable_templates = list()
+
 	if(budget > 0)
-		log_world("Map subtemplate loader had no templates to pick from with [budget] left to spend.")
+		log_world("Level [level_id] had no templates to pick from with [budget] left to spend.")
 
 ///Attempts several times to find turfs where a subtemplate can be placed.
 /datum/level_data/proc/try_place_subtemplate(var/datum/map_template/template, var/list/area_whitelist)
 	//#FIXME: Isn't trying to fit in a subtemplate by rolling randomly a bit inneficient?
 	// Try to place it
-	var/template_full_width  = (2 * TEMPLATE_TAG_MAP_EDGE_PAD) + template.width
-	var/template_full_height = (2 * TEMPLATE_TAG_MAP_EDGE_PAD) + template.height
+	var/template_full_width  = (2 * template_edge_padding) + template.width
+	var/template_full_height = (2 * template_edge_padding) + template.height
 	if((template_full_width > level_inner_width) || (template_full_height > level_inner_height)) // Too big and will never fit.
 		return //Return if it won't even fit on the entire level
 
-	var/template_half_width  = TEMPLATE_TAG_MAP_EDGE_PAD + round(template.width/2)  //Half the template size plus the map edge spacing, for testing from the centerpoint
-	var/template_half_height = TEMPLATE_TAG_MAP_EDGE_PAD + round(template.height/2)
+	var/template_half_width  = template_edge_padding + round(template.width/2)  //Half the template size plus the map edge spacing, for testing from the centerpoint
+	var/template_half_height = template_edge_padding + round(template.height/2)
 	//Try to fit it in somehwere a few times, then give up if we can't
 	var/sanity = 20
 	while(sanity > 0)

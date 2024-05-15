@@ -259,7 +259,7 @@
 	name = "soil"
 	codex_name = "soil"
 	uid = "solid_soil"
-	color = COLOR_BEASTY_BROWN
+	color = "#41311b"
 	value = 0
 	default_solid_form = /obj/item/stack/material/lump/large
 	melting_point = null

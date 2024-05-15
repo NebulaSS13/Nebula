@@ -7,6 +7,9 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/obj/item/drying
 
+/obj/structure/drying_rack/ebony
+	material = /decl/material/solid/organic/wood/ebony
+
 /obj/structure/drying_rack/Destroy()
 	QDEL_NULL(drying)
 	if(is_processing)

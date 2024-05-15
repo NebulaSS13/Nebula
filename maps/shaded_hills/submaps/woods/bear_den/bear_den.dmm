@@ -1,0 +1,328 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/floor/natural/dirt,
+/area/template_noop)
+"f" = (
+/turf/floor/natural/rock/basalt,
+/area/template_noop)
+"k" = (
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"n" = (
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"o" = (
+/turf/floor/natural/grass,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"p" = (
+/turf/floor/natural/grass,
+/area/template_noop)
+"r" = (
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"w" = (
+/obj/item/knife,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/quin,
+/obj/abstract/exterior_marker/inside,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"y" = (
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"z" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/natural/dirt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"C" = (
+/obj/abstract/exterior_marker/inside,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"G" = (
+/obj/item/bone/skull/deer,
+/obj/item/chems/food/butchery/stomach,
+/obj/item/chems/food/butchery/offal,
+/obj/abstract/exterior_marker/inside,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"J" = (
+/turf/floor/natural/grass/wild,
+/area/template_noop)
+"K" = (
+/turf/template_noop,
+/area/template_noop)
+"M" = (
+/mob/living/simple_animal/hostile/bear,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"O" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/natural/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"U" = (
+/obj/abstract/exterior_marker/inside,
+/obj/abstract/exterior_marker/inside,
+/turf/wall/natural/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"V" = (
+/obj/item/cash/imperial/quin,
+/obj/item/cash/imperial/quin,
+/obj/item/cash/imperial/regalis,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+"W" = (
+/obj/abstract/exterior_marker/inside,
+/obj/abstract/exterior_marker/inside,
+/turf/wall/natural/dirt,
+/area/shaded_hills/outside/point_of_interest/bear_den)
+
+(1,1,1) = {"
+K
+K
+K
+K
+K
+a
+K
+K
+K
+a
+a
+a
+a
+K
+"}
+(2,1,1) = {"
+K
+K
+a
+a
+a
+p
+a
+z
+z
+z
+p
+p
+a
+a
+"}
+(3,1,1) = {"
+K
+K
+a
+z
+z
+O
+z
+O
+O
+z
+z
+p
+J
+a
+"}
+(4,1,1) = {"
+K
+a
+z
+W
+W
+O
+O
+O
+U
+z
+z
+z
+p
+a
+"}
+(5,1,1) = {"
+a
+p
+z
+W
+U
+O
+y
+k
+G
+O
+z
+z
+p
+a
+"}
+(6,1,1) = {"
+a
+z
+z
+W
+W
+y
+r
+y
+C
+O
+O
+z
+z
+a
+"}
+(7,1,1) = {"
+a
+z
+O
+W
+C
+n
+n
+y
+C
+k
+z
+z
+z
+K
+"}
+(8,1,1) = {"
+a
+z
+z
+U
+w
+k
+M
+y
+C
+k
+O
+z
+z
+K
+"}
+(9,1,1) = {"
+a
+p
+z
+U
+U
+y
+y
+y
+C
+V
+O
+z
+z
+K
+"}
+(10,1,1) = {"
+K
+a
+o
+z
+z
+O
+y
+n
+C
+U
+O
+z
+a
+K
+"}
+(11,1,1) = {"
+K
+a
+o
+z
+z
+O
+k
+y
+C
+U
+z
+z
+p
+K
+"}
+(12,1,1) = {"
+K
+a
+p
+z
+z
+z
+O
+k
+k
+z
+p
+p
+p
+a
+"}
+(13,1,1) = {"
+K
+a
+a
+p
+J
+z
+z
+k
+f
+p
+J
+J
+a
+K
+"}
+(14,1,1) = {"
+K
+K
+a
+a
+p
+p
+a
+f
+a
+J
+J
+a
+K
+K
+"}
+(15,1,1) = {"
+K
+K
+K
+K
+a
+a
+K
+a
+a
+K
+K
+K
+K
+K
+"}

@@ -11,8 +11,6 @@
 
 ///Width or height of a transition edge area along the map's borders where transition edge turfs are placed to connect levels together.
 #define TRANSITIONEDGE 7
-///Extra spacing needed between any random level templates and the transition edge of a level.
-#define TEMPLATE_TAG_MAP_EDGE_PAD 15
 
 ///Enum value for a level edge that's to be untouched
 #define LEVEL_EDGE_NONE 0
@@ -103,12 +101,13 @@
 #define AREA_FLAG_HIDE_FROM_HOLOMAP    BITFLAG(12) // if we shouldn't be drawn on station holomaps
 
 //Map template flags
-#define TEMPLATE_FLAG_ALLOW_DUPLICATES BITFLAG(0)  // Lets multiple copies of the template to be spawned
-#define TEMPLATE_FLAG_SPAWN_GUARANTEED BITFLAG(1)  // Makes it ignore away site budget and just spawn (only for away sites)
-#define TEMPLATE_FLAG_CLEAR_CONTENTS   BITFLAG(2)  // if it should destroy objects it spawns on top of
-#define TEMPLATE_FLAG_NO_RUINS         BITFLAG(3)  // if it should forbid ruins from spawning on top of it
-#define TEMPLATE_FLAG_NO_RADS          BITFLAG(4)  // Removes all radiation from the template after spawning.
-#define TEMPLATE_FLAG_TEST_DUPLICATES  BITFLAG(5)  // Makes unit testing attempt to spawn mutliple copies of this template. Assumes unit testing is spawning at least one copy.
+#define TEMPLATE_FLAG_ALLOW_DUPLICATES   BITFLAG(0)  // Lets multiple copies of the template to be spawned
+#define TEMPLATE_FLAG_SPAWN_GUARANTEED   BITFLAG(1)  // Makes it ignore away site budget and just spawn (only for away sites)
+#define TEMPLATE_FLAG_CLEAR_CONTENTS     BITFLAG(2)  // if it should destroy objects it spawns on top of
+#define TEMPLATE_FLAG_NO_RUINS           BITFLAG(3)  // if it should forbid ruins from spawning on top of it
+#define TEMPLATE_FLAG_NO_RADS            BITFLAG(4)  // Removes all radiation from the template after spawning.
+#define TEMPLATE_FLAG_TEST_DUPLICATES    BITFLAG(5)  // Makes unit testing attempt to spawn mutliple copies of this template. Assumes unit testing is spawning at least one copy.
+#define TEMPLATE_FLAG_GENERIC_REPEATABLE BITFLAG(6) // Template can be picked repeatedly for the same level gen run.
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.

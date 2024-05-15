@@ -1,0 +1,220 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/door/ebony,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"h" = (
+/turf/template_noop,
+/area/template_noop)
+"i" = (
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"k" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"o" = (
+/obj/structure/drying_rack/ebony,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"u" = (
+/obj/structure/reagent_dispensers/barrel/ebony/beer,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"x" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/flame/torch,
+/obj/item/flame/torch,
+/obj/item/rock/flint,
+/obj/item/rock/hematite,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"z" = (
+/obj/effect/spider/spiderling/mundane,
+/obj/structure/table/woodentable/ebony,
+/obj/structure/wall_sconce/torch{
+	dir = 1
+	},
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"B" = (
+/obj/effect/decal/cleanable/blood,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"D" = (
+/obj/effect/spider/spiderling/mundane,
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/food/grown/carrot,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"H" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/knife,
+/obj/item/chems/food/grown/potato,
+/obj/item/chems/food/grown/potato,
+/obj/item/chems/food/grown/carrot,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"I" = (
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"L" = (
+/obj/effect/spider/spiderling/mundane,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"M" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/log/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"N" = (
+/obj/structure/coatrack,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"S" = (
+/obj/structure/wall_sconce/torch{
+	dir = 1
+	},
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"Z" = (
+/obj/item/remains/human,
+/obj/structure/bed/simple/ebony/cloth,
+/obj/item/bedsheet/furs,
+/obj/effect/decal/cleanable/blood,
+/obj/random/jewelry,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/ebony,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+
+(1,1,1) = {"
+i
+i
+i
+h
+i
+i
+i
+h
+h
+h
+"}
+(2,1,1) = {"
+i
+M
+M
+M
+M
+M
+M
+M
+M
+h
+"}
+(3,1,1) = {"
+i
+M
+x
+I
+I
+a
+I
+I
+a
+i
+"}
+(4,1,1) = {"
+h
+M
+z
+I
+I
+M
+N
+L
+M
+S
+"}
+(5,1,1) = {"
+i
+M
+o
+I
+I
+M
+M
+M
+M
+i
+"}
+(6,1,1) = {"
+h
+M
+o
+I
+I
+M
+I
+Z
+M
+h
+"}
+(7,1,1) = {"
+i
+M
+u
+I
+B
+a
+B
+I
+M
+i
+"}
+(8,1,1) = {"
+i
+M
+D
+H
+I
+M
+I
+k
+M
+i
+"}
+(9,1,1) = {"
+i
+M
+M
+M
+M
+M
+M
+M
+M
+h
+"}
+(10,1,1) = {"
+h
+i
+i
+h
+i
+i
+i
+i
+h
+h
+"}

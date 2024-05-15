@@ -15,6 +15,9 @@
 /area/shaded_hills/outside/woods
 	name = "Woodlands"
 
+/area/shaded_hills/outside/woods/poi
+	name = "Deep Woodlands"
+
 /area/shaded_hills/outside/river/woods
 	name = "Woodland River"
 

@@ -142,6 +142,7 @@
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
+	icon = 'icons/mob/simple_animal/spider.dmi' // updated in Initialize()
 	icon_state = "lesser"
 	anchored = FALSE
 	layer = BELOW_OBJ_LAYER

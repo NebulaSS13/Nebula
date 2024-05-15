@@ -2,6 +2,7 @@
 	abstract_type = /area/shaded_hills
 	icon = 'maps/shaded_hills/areas/icons.dmi'
 	icon_state = "area"
+	base_turf = /turf/floor/natural/rock/basalt
 	fishing_failure_prob = 5
 	fishing_results = list(
 		/mob/living/simple_animal/aquatic/fish               = 10,
