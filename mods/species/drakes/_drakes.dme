@@ -1,0 +1,21 @@
+#ifndef MODPACK_DRAKES
+#define MODPACK_DRAKES
+// BEGIN_INCLUDE
+#include "_drakes.dm"
+#include "culture.dm"
+#include "drake_abilities_friendly.dm"
+#include "drake_abilities_hostile.dm"
+#include "drake_abilities.dm"
+#include "drake_attacks.dm"
+#include "drake_emotes.dm"
+#include "drake_modifiers.dm"
+#include "drake_organs.dm"
+#include "drake_spit.dm"
+#include "drake_traits.dm"
+#include "language.dm"
+#include "sifpod.dm"
+#include "sifsap.dm"
+#include "species.dm"
+#include "species_bodytypes.dm"
+// END_INCLUDE
+#endif

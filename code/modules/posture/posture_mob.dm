@@ -50,6 +50,8 @@
 		set_density(FALSE)
 		drop_held_items()
 		stop_aiming(no_message=1)
+		if(buckled_mob)
+			unbuckle_mob()
 	else
 		set_density(initial(density))
 
