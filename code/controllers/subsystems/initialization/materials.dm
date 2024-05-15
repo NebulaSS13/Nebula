@@ -58,7 +58,7 @@ SUBSYSTEM_DEF(materials)
 	build_material_lists()       // Build core material lists.
 	build_fusion_reaction_list() // Build fusion reaction tree.
 	materials = sortTim(SSmaterials.materials, /proc/cmp_name_asc)
-	materials_by_name = sortTim(SSmaterials.materials_by_name, /proc/cmp_name_or_type_asc, TRUE)
+	materials_by_name = sortTim(SSmaterials.materials_by_name, /proc/cmp_text_asc, FALSE) // sort by key, so DON'T use associative = TRUE
 
 	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
 	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)
