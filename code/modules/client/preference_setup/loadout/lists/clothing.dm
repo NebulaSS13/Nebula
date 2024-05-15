@@ -73,11 +73,6 @@
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	slot = slot_wear_suit_str
 
-/decl/loadout_option/clothing/shirt_colourable
-	name = "button-up shirt, colour select"
-	path = /obj/item/clothing/shirt
-	loadout_flags = GEAR_HAS_COLOR_SELECTION
-
 /decl/loadout_option/clothing/qipao
 	name = "qipao blouse, colour select"
 	path = /obj/item/clothing/shirt/qipao
