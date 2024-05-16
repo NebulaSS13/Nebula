@@ -1,9 +1,9 @@
 /area/shaded_hills/caves/entrance
-	name = "Surface Tunnels"
+	name = "\improper Surface Tunnels"
 	color = COLOR_GRAY80
 
 /area/shaded_hills/caves/unexplored
-	name = "Trackless Deeps - North"
+	name = "\improper Trackless Deeps - North"
 	color = COLOR_GRAY20
 	ambience = list(
 		'sound/ambience/ominous1.ogg',
@@ -13,10 +13,10 @@
 
 // Area coherency test hates that the unexplored area is split by a tunnel.
 /area/shaded_hills/caves/unexplored/south
-	name = "Trackless Deeps - South"
+	name = "\improper Trackless Deeps - South"
 
 /area/shaded_hills/caves/river
-	name = "Silent River"
+	name = "\improper Silent River"
 	color = COLOR_GRAY20
 	description = "The silent, black water catches whatever sparse light survives in the depths, glittering like a river of stars."
 	area_blurb_category = /area/shaded_hills/caves/river
@@ -42,7 +42,7 @@
 	)
 
 /area/shaded_hills/caves
-	name = "Deep Tunnels"
+	name = "\improper Deep Tunnels"
 	color = COLOR_GRAY40
 	is_outside = OUTSIDE_NO
 	description = "The deep dark brings distant, whispering echoes to your ears."

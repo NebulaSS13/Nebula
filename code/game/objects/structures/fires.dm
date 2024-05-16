@@ -31,15 +31,15 @@
 	var/datum/composite_sound/fire_crackles/fire_loop
 	var/datum/composite_sound/grill/grill_loop // Used when food is cooking on the fire.
 
-	var/const/light_range_high =  3
-	var/const/light_range_mid =   2
-	var/const/light_range_low =   1
-	var/const/light_power_high =  0.8
-	var/const/light_power_mid =   0.6
-	var/const/light_power_low =   0.4
-	var/const/light_color_high = "#ffdd55"
-	var/const/light_color_mid =  "#ff9900"
-	var/const/light_color_low =  "#ff0000"
+	var/light_range_high =  3
+	var/light_range_mid =   2
+	var/light_range_low =   1
+	var/light_power_high =  0.8
+	var/light_power_mid =   0.6
+	var/light_power_low =   0.4
+	var/light_color_high = "#ffdd55"
+	var/light_color_mid =  "#ff9900"
+	var/light_color_low =  "#ff0000"
 
 	var/list/affected_exterior_turfs
 	var/next_fuel_consumption = 0
@@ -432,6 +432,13 @@
 	icon_state = "fireplace"
 	density = TRUE
 	material = /decl/material/solid/stone/pottery // brick
+	light_range_high = 6
+	light_range_mid = 3
+	light_range_low = 1
+	light_power_high = 0.9
+	light_color_high = "#e09d37"
+	light_color_mid = "#d47b27"
+	light_color_low = "#e44141"
 
 /obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
 	return FALSE
