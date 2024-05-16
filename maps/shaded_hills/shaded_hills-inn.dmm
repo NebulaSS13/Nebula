@@ -371,6 +371,10 @@
 /obj/item/cash/imperial/crown,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/general_store)
+"wA" = (
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/downlands)
 "xH" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/slaughterhouse)
@@ -529,6 +533,10 @@
 	},
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
+"Iz" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/brick/basalt,
+/area/shaded_hills/outside/downlands)
 "IL" = (
 /obj/structure/door/wood/ebony,
 /turf/floor/wood/ebony,
@@ -561,6 +569,11 @@
 	dir = 8
 	},
 /turf/floor/natural/path/basalt,
+/area/shaded_hills/outside/downlands)
+"Lj" = (
+/obj/structure/reagent_dispensers/well/mapped,
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
 "LK" = (
 /obj/structure/railing/mapped/ebony{
@@ -6333,7 +6346,7 @@ HI
 HI
 HI
 HI
-HI
+TR
 TR
 TR
 EV
@@ -6485,7 +6498,7 @@ HI
 HI
 HI
 HI
-HI
+TR
 TR
 TR
 EV
@@ -6637,7 +6650,7 @@ HI
 HI
 HI
 HI
-HI
+TR
 TR
 TR
 EV
@@ -6787,9 +6800,9 @@ HI
 HI
 HI
 HI
-HI
-HI
-HI
+Iz
+Iz
+Iz
 TR
 TR
 EV
@@ -6939,10 +6952,10 @@ HI
 HI
 HI
 HI
-HI
-HI
-HI
-HI
+wA
+wA
+wA
+TR
 TR
 EV
 Ic
@@ -7091,10 +7104,10 @@ HI
 HI
 HI
 HI
-HI
-HI
-HI
-HI
+wA
+Lj
+wA
+TR
 TR
 EV
 Ic
@@ -7242,10 +7255,10 @@ HI
 HI
 HI
 HI
-HI
-HI
-HI
-HI
+TR
+wA
+wA
+wA
 TR
 TR
 TR
@@ -7394,10 +7407,10 @@ HI
 HI
 HI
 HI
-HI
-HI
 TR
-TR
+Iz
+Iz
+Iz
 TR
 TR
 EV
