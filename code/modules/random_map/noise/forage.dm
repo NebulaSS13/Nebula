@@ -83,8 +83,10 @@
 		)
 	)
 	var/list/trees = list(
-		/obj/structure/flora/tree/hardwood/ebony = 9,
-		/obj/structure/flora/tree/dead/ebony = 1
+		/obj/structure/flora/tree/hardwood/walnut = 9,
+		/obj/structure/flora/tree/dead/walnut = 1,
+		/obj/structure/flora/tree/hardwood/ebony = 1,
+		/obj/structure/flora/tree/dead/ebony = 1,
 	)
 	var/list/cave_trees = list(
 		/obj/structure/flora/tree/softwood/towercap
