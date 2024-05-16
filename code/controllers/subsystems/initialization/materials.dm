@@ -9,7 +9,6 @@ SUBSYSTEM_DEF(materials)
 	var/list/materials
 	var/list/strata
 	var/list/fusion_reactions
-	var/list/materials_by_name =              list()
 	var/list/weighted_minerals_sparse =       list()
 	var/list/weighted_minerals_rich =         list()
 
@@ -58,7 +57,6 @@ SUBSYSTEM_DEF(materials)
 	build_material_lists()       // Build core material lists.
 	build_fusion_reaction_list() // Build fusion reaction tree.
 	materials = sortTim(SSmaterials.materials, /proc/cmp_name_asc)
-	materials_by_name = sortTim(SSmaterials.materials_by_name, /proc/cmp_text_asc, FALSE) // sort by key, so DON'T use associative = TRUE
 
 	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
 	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)
@@ -75,12 +73,10 @@ SUBSYSTEM_DEF(materials)
 	if(LAZYLEN(materials))
 		return
 	materials =         list()
-	materials_by_name = list()
 	var/list/material_decls = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mtype in material_decls)
 		var/decl/material/new_mineral = material_decls[mtype]
 		materials += new_mineral
-		materials_by_name[lowertext(new_mineral.name)] = new_mineral
 		if(new_mineral.sparse_material_weight)
 			weighted_minerals_sparse[new_mineral.type] = new_mineral.sparse_material_weight
 		if(new_mineral.rich_material_weight)
@@ -150,11 +146,6 @@ SUBSYSTEM_DEF(materials)
 		return LD.strata
 	else if(istype(LD.strata, /decl/strata))
 		return LD.strata.type
-
-/datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)
-	if(mat_name)
-		mat_name = lowertext(mat_name)
-		return materials_by_name[mat_name]
 
 /datum/controller/subsystem/materials/proc/get_strata_material_type(var/turf/wall/natural/location)
 	if(!istype(location))

@@ -13,7 +13,7 @@
 	if("has_noticeboard" in tokens)
 		var/obj/structure/noticeboard/board = locate() in creating
 		if(!board)
-			var/decl/material/mat = SSmaterials.get_material_by_name(tokens["noticeboard_material"])
+			var/decl/material/mat = decls_repository.get_decl_by_id_or_var(tokens["noticeboard_material"], /decl/material, "name")
 			board = new(creating, (mat?.type || /decl/material/solid/organic/wood))
 			if("noticeboard_direction" in tokens)
 				board.set_dir(tokens["noticeboard_direction"])
@@ -36,7 +36,7 @@
 	if(istype(board))
 		.["has_noticeboard"] = TRUE
 		.["noticeboard_direction"] = board.dir
-		.["noticeboard_material"] = board.material.name
+		.["noticeboard_material"] = board.material.uid
 
 /decl/persistence_handler/paper/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
 	var/obj/item/paper/paper = thing
