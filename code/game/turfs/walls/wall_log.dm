@@ -1,6 +1,7 @@
 /turf/wall/log
 	icon_state = "log"
 	material = /decl/material/solid/organic/wood
+	color = TYPE_INITIAL(/decl/material/solid/organic/wood, color)
 	girder_material = null
 
 /turf/wall/log/get_dismantle_stack_type()
@@ -21,7 +22,17 @@
 		desc = "A log wall made of [material.solid_name]."
 
 // Subtypes.
-/turf/wall/log/ebony
-	icon_state = "wood"
-	material = /decl/material/solid/organic/wood/ebony
-	color = WOOD_COLOR_BLACK
+#define LOG_WALL_SUBTYPE(material_name) \
+/turf/wall/log/##material_name { \
+	material = /decl/material/solid/organic/wood/##material_name; \
+	color = TYPE_INITIAL(/decl/material/solid/organic/wood/##material_name, color); \
+}
+
+LOG_WALL_SUBTYPE(fungal)
+LOG_WALL_SUBTYPE(ebony)
+LOG_WALL_SUBTYPE(walnut)
+LOG_WALL_SUBTYPE(maple)
+LOG_WALL_SUBTYPE(bamboo)
+LOG_WALL_SUBTYPE(yew)
+
+#undef LOG_WALL_SUBTYPE

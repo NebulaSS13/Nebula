@@ -219,10 +219,19 @@
 
 /obj/structure/door/wood/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = WOOD_COLOR_BLACK
+	color = TYPE_INITIAL(/decl/material/solid/organic/wood/ebony, color)
 
 /obj/structure/door/wood/saloon/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = TYPE_INITIAL(/decl/material/solid/organic/wood/ebony, color)
+
+/obj/structure/door/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
+	color = TYPE_INITIAL(/decl/material/solid/organic/wood/walnut, color)
+
+/obj/structure/door/wood/saloon/walnut
+	material = /decl/material/solid/organic/wood/walnut
+	color = TYPE_INITIAL(/decl/material/solid/organic/wood/walnut, color)
 
 /obj/structure/door/glass
 	material = /decl/material/solid/glass
