@@ -180,7 +180,7 @@ SUBSYSTEM_DEF(fluids)
 		if(current_depth <= FLUID_PUDDLE)
 			continue
 
-		if(lowest_neighbor)
+		if(lowest_neighbor && lowest_neighbor_flow)
 			current_fluid_holder.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow)
 			pending_flows[current_fluid_holder] = TRUE
 			if(lowest_neighbor_flow >= FLUID_PUSH_THRESHOLD)

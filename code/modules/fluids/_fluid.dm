@@ -62,6 +62,14 @@
 			set_overlays("ocean")
 	else
 		cut_overlays()
+// Define FLUID_AMOUNT_DEBUG before this to get a handy overlay of fluid amounts.
+#ifdef FLUID_AMOUNT_DEBUG
+	var/image/I = new()
+	I.maptext = STYLE_SMALLFONTS_OUTLINE("<center>[num2text(reagent_volume)]</center>", 6, COLOR_WHITE, COLOR_BLACK)
+	I.maptext_y = 8
+	I.appearance_flags |= KEEP_APART
+	add_overlay(I)
+#endif
 	compile_overlays()
 
 	if((last_update_depth > FLUID_PUDDLE) != (reagent_volume > FLUID_PUDDLE))

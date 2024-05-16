@@ -60,7 +60,7 @@
 	var/turf/T = get_turf(src)
 	if(istype(T) && !closed_system)
 		var/space_left = reagents ? (reagents.maximum_volume - reagents.total_volume) : 0
-		if(space_left > 0 && reagents.total_volume < 10)
+		if(waterlevel < 100 && space_left > 0 && reagents.total_volume < 10)
 			for(var/step_dir in global.alldirs)
 				var/turf/neighbor = get_step_resolving_mimic(src, step_dir)
 				if(neighbor != loc && neighbor?.reagents?.total_volume && Adjacent(neighbor))
