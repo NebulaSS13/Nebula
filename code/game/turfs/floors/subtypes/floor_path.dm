@@ -38,17 +38,23 @@
 //	initial_flooring = /decl/flooring/path/herringbone
 
 // Material subtypes.
-/turf/floor/natural/path/basalt
-	color = COLOR_DARK_GRAY
-	base_color = COLOR_DARK_GRAY
-	material = /decl/material/solid/stone/basalt
-
-/turf/floor/natural/path/herringbone/basalt
-	color = COLOR_DARK_GRAY
-	base_color = COLOR_DARK_GRAY
-	material = /decl/material/solid/stone/basalt
-
-/turf/floor/natural/path/running_bond/basalt
-	color = COLOR_DARK_GRAY
-	base_color = COLOR_DARK_GRAY
-	material = /decl/material/solid/stone/basalt
+#define PATH_MATERIAL_SUBTYPES(material_name) \
+/turf/floor/natural/path/##material_name { \
+	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	base_color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	material = /decl/material/solid/stone/##material_name; \
+} \
+/turf/floor/natural/path/herringbone/##material_name { \
+	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	base_color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	material = /decl/material/solid/stone/##material_name; \
+} \
+/turf/floor/natural/path/running_bond/##material_name { \
+	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	base_color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	material = /decl/material/solid/stone/##material_name; \
+}
+PATH_MATERIAL_SUBTYPES(basalt)
+PATH_MATERIAL_SUBTYPES(granite)
+PATH_MATERIAL_SUBTYPES(marble)
+#undef PATH_MATERIAL_SUBTYPES

@@ -443,11 +443,32 @@
 /obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
 	return FALSE
 
+#define MATERIAL_FIREPLACE(material_name) \
+/obj/structure/fire_source/fireplace/##material_name { \
+	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	material = /decl/material/solid/stone/##material_name; \
+}
+
 /obj/structure/fire_source/fireplace/basalt
 	material = /decl/material/solid/stone/basalt
 
+/obj/structure/fire_source/fireplace/marble
+	material = /decl/material/solid/stone/marble
+
+/obj/structure/fire_source/fireplace/granite
+	material = /decl/material/solid/stone/granite
+
+/obj/structure/fire_source/fireplace/pottery
+	material = /decl/material/solid/stone/pottery
+
 /obj/structure/fire_source/firepit/basalt
 	material = /decl/material/solid/stone/basalt
+
+/obj/structure/fire_source/firepit/marble
+	material = /decl/material/solid/stone/marble
+
+/obj/structure/fire_source/firepit/granite
+	material = /decl/material/solid/stone/granite
 
 #undef FUEL_CONSUMPTION_CONSTANT
 #undef FIRE_LIT
