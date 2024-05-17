@@ -17,6 +17,10 @@
 	result_type           = /obj/item/bag/sack
 	category              = "storage"
 
+/decl/stack_recipe/textiles/headband
+	result_type           = /obj/item/clothing/head/headband
+	category              = "clothing"
+
 /decl/stack_recipe/textiles/leather
 	abstract_type         = /decl/stack_recipe/textiles/leather
 	craft_stack_types     = /obj/item/stack/material/skin

@@ -8,16 +8,22 @@
 	abstract_type = /decl/loadout_option/clothing/fantasy
 	category = /decl/loadout_category/fantasy/clothing
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	var/list/available_materials = list(
+		/decl/material/solid/organic/leather,
+		/decl/material/solid/organic/skin/feathers,
+		/decl/material/solid/organic/skin/fur,
+		/decl/material/solid/organic/cloth
+	)
 
 /decl/loadout_option/clothing/fantasy/get_gear_tweak_options()
 	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/material])
-	.[/datum/gear_tweak/material] |= list(
-		"leather"  = /decl/material/solid/organic/leather,
-		"feathers" = /decl/material/solid/organic/skin/feathers,
-		"fur"      = /decl/material/solid/organic/skin/fur,
-		"cloth"    = /decl/material/solid/organic/cloth
-	)
+	if(length(available_materials))
+		var/list/mat_options = list()
+		for(var/mat in available_materials)
+			var/decl/material/mat_decl = GET_DECL(mat)
+			mat_options[mat_decl.name] = mat
+		LAZYINITLIST(.[/datum/gear_tweak/material])
+		.[/datum/gear_tweak/material] = mat_options
 
 /decl/loadout_option/clothing/fantasy/uniform
 	name = "loincloth"
@@ -71,6 +77,53 @@
 	name = "bandana"
 	path = /obj/item/clothing/mask/bandana/colourable
 	slot = slot_wear_mask_str
+
+/decl/loadout_option/clothing/fantasy/head
+	name = "headband"
+	path = /obj/item/clothing/head/headband
+	slot = slot_head_str
+
+/decl/loadout_option/clothing/fantasy/head/hood
+	name = "hood"
+	path = /obj/item/clothing/head/hood
+
+/decl/loadout_option/clothing/fantasy/gloves
+	name = "gloves"
+	slot = slot_gloves_str
+	path = /obj/item/clothing/gloves
+
+/decl/loadout_option/clothing/fantasy/gloves/work
+	name = "work gloves"
+	path = /obj/item/clothing/gloves/thick
+	available_materials = list(
+		/decl/material/solid/organic/leather,
+		/decl/material/solid/organic/cloth
+	)
+
+/decl/loadout_option/clothing/fantasy/shoes
+	name = "shoes"
+	path = /obj/item/clothing/shoes/craftable
+	slot = slot_shoes_str
+	available_materials = list(
+		/decl/material/solid/organic/leather,
+		/decl/material/solid/organic/cloth
+	)
+
+/decl/loadout_option/clothing/fantasy/shoes/boots
+	name = "boots"
+	path = /obj/item/clothing/shoes/craftable/boots
+
+/decl/loadout_option/clothing/fantasy/shoes/sandal
+	name = "sandals"
+	slot = slot_shoes_str
+	available_materials = list(
+		/decl/material/solid/organic/leather,
+		/decl/material/solid/organic/wood,
+		/decl/material/solid/organic/wood/mahogany,
+		/decl/material/solid/organic/wood/maple,
+		/decl/material/solid/organic/wood/ebony,
+		/decl/material/solid/organic/wood/walnut
+	)
 
 /decl/loadout_category/fantasy/utility
 	name = "Utility"
