@@ -1469,6 +1469,7 @@
 #include "code\game\objects\structures\wall_sconce.dm"
 #include "code\game\objects\structures\wallframe_spawner.dm"
 #include "code\game\objects\structures\watercloset.dm"
+#include "code\game\objects\structures\well.dm"
 #include "code\game\objects\structures\windoor_assembly.dm"
 #include "code\game\objects\structures\window.dm"
 #include "code\game\objects\structures\window_spawner.dm"
