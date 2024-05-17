@@ -301,34 +301,34 @@
 
 //Handles removing internal organs/implants/items still in the detached limb.
 /obj/item/organ/external/proc/try_remove_internal_item(var/obj/item/W, var/mob/user)
-	switch(stage)
-		if(0)
-			if(W.sharp)
-				user.visible_message(SPAN_DANGER("<b>[user]</b> cuts [src] open with [W]!"))
-				stage++
-				return TRUE
-		if(1)
-			if(istype(W))
-				user.visible_message(SPAN_DANGER("<b>[user]</b> cracks [src] open like an egg with [W]!"))
-				stage++
-				return TRUE
-		if(2)
-			if(W.sharp || istype(W,/obj/item/hemostat) || IS_WIRECUTTER(W))
-				var/list/radial_buttons = make_item_radial_menu_choices(get_contents_recursive())
-				if(LAZYLEN(radial_buttons))
-					var/obj/item/removing = show_radial_menu(user, src, radial_buttons, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
-					if(removing)
-						if(istype(removing, /obj/item/organ))
-							var/obj/item/organ/O = removing
-							O.do_uninstall()
-						removing.forceMove(get_turf(user))
 
-						if(user.get_empty_hand_slot())
-							user.put_in_hands(removing)
-						user.visible_message(SPAN_DANGER("<b>[user]</b> extracts [removing] from [src] with [W]!"))
-				else
-					user.visible_message(SPAN_DANGER("<b>[user]</b> fishes around fruitlessly in [src] with [W]."))
-				return TRUE
+	if(stage == 0 && W.sharp)
+		user.visible_message(SPAN_NOTICE("<b>\The [user]</b> cuts \the [src] open with \the [W]."))
+		stage++
+		return TRUE
+
+	if(stage == 1 && IS_RETRACTOR(W))
+		user.visible_message(SPAN_NOTICE("<b>\The [user]</b> levers \the [src] open with \the [W]."))
+		stage++
+		return TRUE
+
+	if(stage == 2 && (W.sharp || IS_HEMOSTAT(W) || IS_WIRECUTTER(W)))
+		var/list/radial_buttons = make_item_radial_menu_choices(get_contents_recursive())
+		if(LAZYLEN(radial_buttons))
+			var/obj/item/removing = show_radial_menu(user, src, radial_buttons, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
+			if(removing)
+				if(istype(removing, /obj/item/organ))
+					var/obj/item/organ/O = removing
+					O.do_uninstall()
+				removing.forceMove(get_turf(user))
+
+				if(user.get_empty_hand_slot())
+					user.put_in_hands(removing)
+				user.visible_message(SPAN_NOTICE("<b>\The [user]</b> extracts [removing] from \the [src] with \the [W]!"))
+		else
+			user.visible_message(SPAN_NOTICE("<b>\The [user]</b> fishes around fruitlessly in \the [src] with \the [W]."))
+		return TRUE
+
 	return FALSE
 
 //Handles removing child limbs from the detached limb.
