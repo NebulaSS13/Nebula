@@ -47,8 +47,8 @@
 /datum/random_map/noise/forage/shaded_hills/swamp
 	tree_weight = 4
 	trees = list(
-		/obj/structure/flora/tree/hardwood/ebony = 1,
-		/obj/structure/flora/tree/dead/ebony = 2,
+		/obj/structure/flora/tree/hardwood/walnut = 1,
+		/obj/structure/flora/tree/dead/walnut = 2,
 		/obj/structure/flora/bush = 4,
 		/obj/structure/flora/bush/leafybush = 5,
 		/obj/structure/flora/bush/grassybush = 5,
@@ -78,9 +78,11 @@
 /datum/random_map/noise/forage/shaded_hills/woods
 	tree_weight = 7
 	trees = list(
+		/obj/structure/flora/tree/hardwood/walnut = 8,
 		/obj/structure/flora/tree/hardwood/yew = 8,
 		/obj/structure/flora/tree/hardwood/mahogany = 8,
 		/obj/structure/flora/bush/pointybush = 5,
+		/obj/structure/flora/tree/dead/walnut = 1,
 		/obj/structure/flora/tree/dead/yew = 1,
 		/obj/structure/flora/tree/dead/mahogany = 1,
 		/obj/structure/flora/bush/genericbush = 1,
