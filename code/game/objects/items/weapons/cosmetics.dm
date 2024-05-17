@@ -46,6 +46,7 @@
 	return
 
 /obj/item/cosmetics/attack(atom/A, mob/user, target_zone)
+
 	if(!open || !ishuman(A))
 		return ..()
 
