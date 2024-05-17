@@ -329,7 +329,7 @@
 
 /obj/item/afterattack(var/atom/A, var/mob/user, var/proximity)
 	. = ..()
-	if(!. && proximity && can_heat_atom(A))
+	if(!. && proximity && !ismob(A) && can_heat_atom(A))
 		A.handle_external_heating(get_heat(), src, user)
 		return TRUE
 	return FALSE
