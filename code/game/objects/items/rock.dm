@@ -6,6 +6,7 @@
 	edge = TRUE
 	force = 3
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	w_class             = ITEM_SIZE_SMALL
 
 /obj/item/rock/Initialize()
 	. = ..()
