@@ -50,10 +50,14 @@
 /obj/structure/door/update_connections(var/propagate = FALSE)
 	. = ..()
 	if(propagate && isturf(loc))
+		var/has_set_dir = FALSE
 		for(var/turf/wall/W in RANGE_TURFS(loc, 1))
 			W.wall_connections = null
 			W.other_connections = null
 			W.queue_icon_update()
+			if(!has_set_dir)
+				set_dir(get_dir(loc, W))
+				has_set_dir = TRUE
 
 /obj/structure/door/get_material_health_modifier()
 	. = 10

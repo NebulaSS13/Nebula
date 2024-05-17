@@ -45,7 +45,7 @@
 		/obj/item/clothing/shoes/dress/white,
 		/obj/item/clothing/gloves/thick/botany,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/clothing/gloves/color/white,
+		/obj/item/clothing/gloves,
 		/obj/item/clothing/gloves/rainbow,
 		/obj/item/clothing/gloves/insulated/cheap,
 		/obj/item/clothing/glasses/sunglasses,

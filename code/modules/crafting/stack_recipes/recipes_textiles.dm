@@ -52,7 +52,7 @@
 	result_type           = /obj/item/clothing/mask/bandana/colourable
 
 /decl/stack_recipe/textiles/cloth/gloves
-	result_type           = /obj/item/clothing/gloves/color/white
+	result_type           = /obj/item/clothing/gloves
 
 /decl/stack_recipe/textiles/cloth/robe
 	result_type           = /obj/item/clothing/suit/robe

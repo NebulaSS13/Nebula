@@ -2,8 +2,10 @@
 //Gloves
 /obj/item/clothing/gloves
 	name = "gloves"
-	gender = PLURAL //Carn: for grammarically correct text-parsing
+	desc = "A pair of gloves. They don't look special in any way."
+	gender = PLURAL
 	w_class = ITEM_SIZE_SMALL
+	color = COLOR_WHITE
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/hands/gloves_generic.dmi'
 	siemens_coefficient = 0.75

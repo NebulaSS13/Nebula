@@ -58,13 +58,13 @@
 
 /obj/random/gloves/spawn_choices()
 	var/static/list/spawnable_choices = list(
+		/obj/item/clothing/gloves                 = 5,
 		/obj/item/clothing/gloves/insulated       = 3,
 		/obj/item/clothing/gloves/thick           = 6,
 		/obj/item/clothing/gloves/thick/botany    = 5,
 		/obj/item/clothing/gloves/latex           = 4,
 		/obj/item/clothing/gloves/thick/swat      = 3,
 		/obj/item/clothing/gloves/thick/combat    = 3,
-		/obj/item/clothing/gloves/color/white     = 5,
 		/obj/item/clothing/gloves/rainbow         = 1,
 		/obj/item/clothing/gloves/thick/duty      = 5,
 		/obj/item/clothing/gloves/guards          = 3,
