@@ -157,3 +157,12 @@
 /decl/loadout_option/fantasy/utility/shovel
 	name = "shovel"
 	path = /obj/item/tool/shovel/wood
+
+/decl/loadout_option/fantasy/utility/bandolier
+	name = "bandolier"
+	path = /obj/item/clothing/webbing/bandolier/crafted
+	slot = slot_w_uniform_str
+	available_materials = list(
+		/decl/material/solid/organic/leather,
+		/decl/material/solid/organic/cloth
+	)

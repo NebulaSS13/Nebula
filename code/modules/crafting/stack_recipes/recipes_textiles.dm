@@ -17,9 +17,14 @@
 	result_type           = /obj/item/bag/sack
 	category              = "storage"
 
+/decl/stack_recipe/textiles/bandolier
+	result_type           = /obj/item/clothing/webbing/bandolier/crafted
+	category              = "storage"
+
 /decl/stack_recipe/textiles/headband
 	result_type           = /obj/item/clothing/head/headband
 	category              = "clothing"
+
 
 /decl/stack_recipe/textiles/leather
 	abstract_type         = /decl/stack_recipe/textiles/leather

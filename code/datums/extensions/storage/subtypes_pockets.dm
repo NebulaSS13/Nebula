@@ -52,6 +52,11 @@
 		/obj/item/pill_bottle
 	)
 
+/datum/storage/pockets/bandolier/crafted
+	storage_slots = 5
+	max_w_class = ITEM_SIZE_SMALL
+	can_hold = list(/obj/item)
+
 /datum/storage/pockets/suit
 	storage_slots = 2
 	max_w_class = ITEM_SIZE_SMALL
