@@ -47,6 +47,7 @@
 	blood_volume = 800
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 2
+	thirst_factor = DEFAULT_THIRST_FACTOR * 2
 
 	age_descriptor = /datum/appearance_descriptor/age/lizard
 

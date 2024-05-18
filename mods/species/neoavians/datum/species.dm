@@ -44,6 +44,7 @@
 	gluttonous = GLUT_TINY
 	blood_volume = 320
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.6
+	thirst_factor = DEFAULT_THIRST_FACTOR * 1.6
 
 	spawn_flags = SPECIES_CAN_JOIN
 	bump_flag = MONKEY

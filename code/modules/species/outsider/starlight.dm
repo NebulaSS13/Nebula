@@ -84,6 +84,7 @@
 	hazard_low_pressure = 0
 	shock_vulnerability = 0
 	hunger_factor = 0
+	thirst_factor = 0
 	death_message = "dissolves into pure flames!"
 	breath_type = null
 
@@ -129,6 +130,7 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 	hunger_factor = 0
+	thirst_factor = 0
 	breath_type = null
 
 	burn_mod = 10

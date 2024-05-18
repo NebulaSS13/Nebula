@@ -43,6 +43,7 @@
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
+	thirst_factor = DEFAULT_THIRST_FACTOR * 1.2
 	gluttonous = GLUT_TINY
 
 	unarmed_attacks = list(
