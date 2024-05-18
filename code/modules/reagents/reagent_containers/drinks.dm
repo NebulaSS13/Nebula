@@ -199,7 +199,7 @@
 
 /obj/item/chems/drinks/sillycup/on_update_icon()
 	. = ..()
-	if(reagents.total_volume)
+	if(reagents?.total_volume)
 		icon_state = "water_cup"
 	else
 		icon_state = "water_cup_e"
