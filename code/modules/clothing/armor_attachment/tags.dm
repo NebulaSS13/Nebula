@@ -18,38 +18,46 @@
 	name = "\improper O- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as O NEGATIVE."
 	icon = 'icons/clothing/accessories/tags/tag_oneg.dmi'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/tag/opos
 	name = "\improper O+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as O POSITIVE."
 	icon = 'icons/clothing/accessories/tags/tag_opos.dmi'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/tag/apos
 	name = "\improper A+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as A POSITIVE."
 	icon = 'icons/clothing/accessories/tags/tag_apos.dmi'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/tag/aneg
 	name = "\improper A- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as A NEGATIVE."
 	icon = 'icons/clothing/accessories/tags/tag_aneg.dmi'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/tag/bpos
 	name = "\improper B+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as B POSITIVE."
 	icon = 'icons/clothing/accessories/tags/tag_bpos.dmi'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/tag/bneg
 	name = "\improper B- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as B NEGATIVE."
 	icon = 'icons/clothing/accessories/tags/tag_bneg.dmi'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/tag/abpos
 	name = "\improper AB+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as AB POSITIVE."
 	icon = 'icons/clothing/accessories/tags/tag_abpos.dmi'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/tag/abneg
 	name = "\improper AB- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as AB NEGATIVE."
 	icon = 'icons/clothing/accessories/tags/tag_abneg.dmi'
+	draw_on_mob_when_equipped = FALSE

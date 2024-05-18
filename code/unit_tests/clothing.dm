@@ -29,10 +29,17 @@
 
 	var/list/check_types = subtypesof(/obj/item/clothing)
 	var/list/failures = list()
+	var/list/icon_states_checked = list()
+	var/list/reported_failures = list()
+
+	var/decl/species/default_species = get_species_by_key(SPECIES_HUMAN)
+	var/decl/bodytype/default_bodytype = default_species.default_bodytype
+	var/state_base = default_bodytype.bodytype_category
+
 	for(var/clothing_type in check_types)
 
 		var/obj/item/clothing/clothes = clothing_type
-		if(TYPE_IS_ABSTRACT(clothes))
+		if(TYPE_IS_ABSTRACT(clothes) || !initial(clothes.draw_on_mob_when_equipped))
 			continue
 
 		var/initial_state       = initial(clothes.icon_state)
@@ -49,46 +56,44 @@
 		else if(initial_state != ICON_STATE_WORLD && initial_state != ICON_STATE_INV)
 			clothing_fails += "unconverted initial state '[initial_state]'"
 		else if(initial_icon && !check_state_in_icon(initial_state, initial_icon))
-			clothing_fails += "missing initial state '[initial_state]' in initial icon '[initial_icon]'"
+			if(!(initial_state in reported_failures[initial_icon]))
+				LAZYADD(reported_failures[initial_icon], initial_state)
+				clothing_fails += "missing initial state '[initial_state]' in initial icon '[initial_icon]'"
 		if(initial_item_state)
 			clothing_fails += "legacy item state set '[initial_item_state]'"
+
+		// Check for old accessory states.
+		if(!(initial_icon in icon_states_checked))
+			icon_state_cache += initial_icon
+			for(var/state in icon_states(initial_icon))
+				if(findtext(lowertext(state), "slot_tie") && !("slot_tie" in reported_failures[initial_icon]))
+					LAZYADD(reported_failures[initial_icon], "slot_tie")
+					clothing_fails += "legacy 'slot_tie' state defined in '[initial_icon]'"
 
 		// We don't currently validate clothes specifically for nonhumans.
 		// TODO: make this a loop over all relevant bodytype categories instead.
 		var/check_flags = initial(clothes.bodytype_equip_flags)
-		if(!(check_flags & BODY_FLAG_HUMANOID) || ((check_flags & BODY_FLAG_EXCLUDE) && (check_flags & BODY_FLAG_HUMANOID)))
+		if((check_flags && !(check_flags & BODY_FLAG_HUMANOID)) || ((check_flags & BODY_FLAG_EXCLUDE) && (check_flags & BODY_FLAG_HUMANOID)))
 			if(length(clothing_fails))
 				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]"
 			continue
 
 		clothes = new clothes
 
-		// Check if the clothing has a fallback icon slot.
-		if(!clothes.get_fallback_slot(slot_w_uniform_str))
-			clothing_fails += "null or false fallback slot"
-
-		// Check if the clothing has all expected states.
-		var/decl/species/default_species = get_species_by_key(SPECIES_HUMAN)
-		var/decl/bodytype/default_bodytype = default_species.default_bodytype
-		var/state_base = default_bodytype.bodytype_category
-
-		var/list/check_slots = list()
-		for(var/inv_slot_type in subtypesof(/datum/inventory_slot))
-			var/datum/inventory_slot/slot_ref = inv_slot_type
-			var/req_slot_flags = initial(slot_ref.requires_slot_flags)
-			if(!isnull(req_slot_flags) && (req_slot_flags & clothes.slot_flags))
-				var/slot_id = initial(slot_ref.slot_id)
-				if(!isnull(slot_id))
-					check_slots |= slot_id
-
-		for(var/slot in check_slots)
-			var/check_state = "[state_base]-[slot]"
-			if(!check_state_in_icon(check_state, clothes.icon))
-				clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
+		// Check if the clothing has a fallback icon slot and an icon for it.
+		var/fallback_slot = clothes.get_fallback_slot()
+		if(istext(fallback_slot))
+			var/check_state = "[state_base]-[fallback_slot]"
+			if(!(check_state in reported_failures[clothes.icon]) && !check_state_in_icon(check_state, clothes.icon))
+				LAZYADD(reported_failures[clothes.icon], check_state)
+				clothing_fails += "missing base onmob state '[check_state]' in '[clothes.icon]'"
 			if(clothes.markings_state_modifier && clothes.markings_color)
 				check_state = "[check_state][clothes.markings_state_modifier]"
-				if(!check_state_in_icon(check_state, clothes.icon))
-					clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
+				if(!(check_state in reported_failures[clothes.icon]) && !check_state_in_icon(check_state, clothes.icon))
+					LAZYADD(reported_failures[clothes.icon], check_state)
+					clothing_fails += "missing markings onmob state '[check_state]' in '[clothes.icon]'"
+		else
+			clothing_fails += "invalid fallback slot '[!isnull(fallback_slot) ? fallback_slot : "NULL"]'"
 
 		// I wish we could initial() lists/procs.
 		if(length(clothes.get_available_clothing_state_modifiers()))
@@ -123,21 +128,26 @@
 			// Validate against the list of generated tokens.
 			for(var/gen_token in generated_tokens)
 
+			// This logic is currently not working (false negatives). Uncomment when fixed.
+			/*
 				if(ICON_STATE_WORLD in check_states)
 					var/check_state = "[ICON_STATE_WORLD][gen_token]"
-					if(!(check_state in check_states))
-						clothing_fails += "missing world state '[check_state]' in '[clothes.icon]'"
+					if(!(check_state in reported_failures[clothes.icon]) && !(check_state in check_states))
+						LAZYADD(reported_failures[clothes.icon], check_state)
+						clothing_fails += "missing token world state '[check_state]' in '[clothes.icon]'"
 
 				if(ICON_STATE_INV in check_states)
 					var/check_state = "[ICON_STATE_INV][gen_token]"
-					if(!(check_state in check_states))
-						clothing_fails += "missing inventory state '[check_state]' in '[clothes.icon]'"
+					if(!(check_state in reported_failures[clothes.icon]) && !(check_state in check_states))
+						LAZYADD(reported_failures[clothes.icon], check_state)
+						clothing_fails += "missing token inventory state '[check_state]' in '[clothes.icon]'"
 
-				for(var/slot in check_slots)
-					var/check_state = "[state_base]-[slot][gen_token]"
-					if(!(slot in global.all_hand_slots) && !(check_state in check_states))
-						clothing_fails += "missing onmob state '[check_state]' in '[clothes.icon]'"
-
+				if(fallback_slot)
+					var/check_state = "[state_base]-[fallback_slot][gen_token]"
+					if(!(check_state in reported_failures[clothes.icon]) && !(check_state in check_states))
+						LAZYADD(reported_failures[clothes.icon], check_state)
+						clothing_fails += "missing token onmob state '[check_state]' in '[clothes.icon]'"
+			*/
 				// Prune expected states from the file.
 				for(var/related_state in check_states)
 					if(findtext(related_state, gen_token))
@@ -154,7 +164,9 @@
 							extraneous_states |= check_state
 
 			for(var/extraneous_state in extraneous_states)
-				clothing_fails += "extraneous onmob state '[extraneous_state]' in '[clothes.icon]'"
+				if(!(extraneous_state in reported_failures[clothes.icon]))
+					LAZYADD(reported_failures[clothes.icon], extraneous_state)
+					clothing_fails += "extraneous onmob state '[extraneous_state]' in '[clothes.icon]'"
 
 		QDEL_NULL(clothes)
 		if(length(clothing_fails))

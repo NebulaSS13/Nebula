@@ -78,7 +78,6 @@
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob.skip_loadout_preview))
 		// Equip custom gear loadout, replacing any job items
-		var/list/loadout_taken_slots = list()
 		for(var/thing in Gear())
 			var/decl/loadout_option/G = global.gear_datums[thing]
 			if(G)
@@ -97,8 +96,7 @@
 				if(!permitted)
 					continue
 
-				if(G.slot && G.slot != slot_tie_str && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.name]))
-					loadout_taken_slots.Add(G.slot)
+				if(G.slot && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.name]))
 					update_icon = TRUE
 
 	if(update_icon)

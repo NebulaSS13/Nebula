@@ -5,6 +5,9 @@
 	pass_flags = PASS_FLAG_TABLE
 	abstract_type = /obj/item
 
+	/// Set to false to skip state checking and never draw an icon on the mob (except when held)
+	var/draw_on_mob_when_equipped = TRUE
+
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
 	var/material_health_multiplier = 0.2
@@ -629,25 +632,11 @@
 	if(!slot || !user)
 		return FALSE
 
-	// Some slots don't have an associated handler as they are shorthand for various setup functions.
-	if(slot in global.abstract_inventory_slots)
-		switch(slot)
+	// Putting stuff into backpacks.
+	if(slot == slot_in_backpack_str)
+		var/obj/item/back = user.get_equipped_item(slot_back_str)
+		return back?.storage?.can_be_inserted(src, user, TRUE)
 
-			// Putting stuff into backpacks.
-			if(slot_in_backpack_str)
-				var/obj/item/back = user.get_equipped_item(slot_back_str)
-				return back?.storage?.can_be_inserted(src, user, TRUE)
-
-			// Equipping accessories.
-			if(slot_tie_str)
-				// Find something to equip the accessory to.
-				for(var/check_slot in list(slot_w_uniform_str, slot_wear_suit_str))
-					var/obj/item/clothing/check_gear = user.get_equipped_item(check_slot)
-					if(istype(check_gear) && check_gear.can_attach_accessory(src))
-						return TRUE
-				if(!disable_warning)
-					to_chat(user, SPAN_WARNING("You need to be wearing something you can attach \the [src] to."))
-				return FALSE
 
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
 	if(!inv_slot)
@@ -1123,3 +1112,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/setup_sprite_sheets()
 	return
+
+/obj/item/proc/get_equipment_tint()
+	return TINT_NONE

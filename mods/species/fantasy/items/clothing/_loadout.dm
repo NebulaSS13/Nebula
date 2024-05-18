@@ -27,12 +27,11 @@
 /decl/loadout_option/clothing/fantasy/uniform/jerkin
 	name = "jerkin"
 	path = /obj/item/clothing/shirt/jerkin
-	slot = slot_tie_str
 
 /decl/loadout_option/clothing/fantasy/uniform/tunic
 	name = "tunic"
 	path = /obj/item/clothing/shirt/tunic
-	slot = slot_tie_str
+	slot = slot_w_uniform_str
 
 /decl/loadout_option/clothing/fantasy/uniform/tunic/short
 	name = "tunic, short"

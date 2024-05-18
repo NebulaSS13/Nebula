@@ -109,5 +109,5 @@ var/global/list/special_channel_keys = list(
 	. = mouth_slot?.get_equipped_item()
 	if(!.)
 		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-		if(istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/clothing/sealant))
+		if(istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/sealant))
 			. = mask

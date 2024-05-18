@@ -26,7 +26,6 @@ var/global/list/descriptive_slot_names = list(
 	slot_wear_id_str     = "ID",
 	slot_gloves_str      = "Gloves",
 	slot_glasses_str     = "Glasses",
-	slot_tie_str         = "Accessory",
 	slot_l_store_str     = "Left Pocket",
 	slot_r_store_str     = "Right Pocket",
 	slot_s_store_str     = "Suit Storage",

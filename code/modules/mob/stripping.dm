@@ -51,7 +51,8 @@
 			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				toggle_internals(user)
 			return
-		if("tie")
+
+		if("accessory")
 			if(!istype(holder) || !LAZYLEN(holder.accessories))
 				return
 

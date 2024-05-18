@@ -1,4 +1,4 @@
-/obj/item/clothing/sealant
+/obj/item/sealant
 	name = "glob of sealant"
 	desc = "A blob of metal foam sealant."
 	icon = 'icons/effects/sealant.dmi'
@@ -7,7 +7,6 @@
 	throwforce = 0
 	color = "#cccdcc"
 	slowdown_general = 3
-	tint = TINT_BLIND
 	canremove = FALSE
 	slot_flags = SLOT_FULL_BODY
 
@@ -23,7 +22,10 @@
 		slot_shoes_str
 	)
 
-/obj/item/clothing/sealant/equipped(mob/user, slot)
+/obj/item/sealant/get_equipment_tint()
+	return TINT_BLIND
+
+/obj/item/sealant/equipped(mob/user, slot)
 	. = ..()
 	if(hardened)
 		break_apart(user)
@@ -31,20 +33,20 @@
 		to_chat(user, SPAN_DANGER("Hardened globs of metal foam stick to you!"))
 		hardened = TRUE
 
-/obj/item/clothing/sealant/attack_hand(mob/user)
+/obj/item/sealant/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	break_apart(user)
 	return TRUE
 
-/obj/item/clothing/sealant/attackby(obj/item/W, mob/user)
+/obj/item/sealant/attackby(obj/item/W, mob/user)
 	break_apart(user)
 	return TRUE
 
-/obj/item/clothing/sealant/dropped(mob/user)
+/obj/item/sealant/dropped(mob/user)
 	. = ..()
 	break_apart()
 
-/obj/item/clothing/sealant/proc/break_apart(var/mob/user)
+/obj/item/sealant/proc/break_apart(var/mob/user)
 	canremove = TRUE
 	if(user)
 		user.try_unequip(src, user.loc)
@@ -52,15 +54,15 @@
 		user.setClickCooldown(1 SECOND)
 	qdel(src)
 
-/obj/item/clothing/sealant/Bump(atom/A, forced)
+/obj/item/sealant/Bump(atom/A, forced)
 	. = ..()
 	splat(A)
 
-/obj/item/clothing/sealant/throw_impact(atom/hit_atom)
+/obj/item/sealant/throw_impact(atom/hit_atom)
 	. = ..()
 	splat(hit_atom)
 
-/obj/item/clothing/sealant/proc/splat(var/atom/target)
+/obj/item/sealant/proc/splat(var/atom/target)
 	if(splatted)
 		return
 	splatted = TRUE

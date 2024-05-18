@@ -5,7 +5,7 @@
 #define add_clothing_protection(A)	\
 	var/obj/item/clothing/C = A; \
 	flash_protection += C.flash_protection; \
-	equipment_tint_total += C.tint;
+	equipment_tint_total += C.get_equipment_tint();
 
 /mob/living/carbon/human/can_eat(var/food, var/feedback = 1)
 	var/list/status = can_eat_status()

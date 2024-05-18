@@ -4,6 +4,8 @@
 /decl/loadout_option/accessory
 	category = /decl/loadout_category/accessories
 	abstract_type = /decl/loadout_option/accessory
+	slot = slot_w_uniform_str
+	replace_equipped = FALSE
 
 /decl/loadout_option/accessory/tie
 	name = "tie selection"

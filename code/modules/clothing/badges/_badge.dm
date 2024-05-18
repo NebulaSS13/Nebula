@@ -11,6 +11,7 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
 	accessory_slot = ACCESSORY_SLOT_INSIGNIA
+	fallback_slot = slot_w_uniform_str
 	var/badge_string = "Detective"
 	var/stored_name
 

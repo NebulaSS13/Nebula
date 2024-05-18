@@ -5,6 +5,7 @@
 	w_class = ITEM_SIZE_SMALL
 	accessory_slot = ACCESSORY_SLOT_MEDAL
 	slot_flags = SLOT_UPPER_BODY
+	fallback_slot = slot_w_uniform_str
 
 /obj/item/clothing/medal/bronze
 	name = "bronze medal"
