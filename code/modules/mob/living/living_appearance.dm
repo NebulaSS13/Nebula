@@ -11,9 +11,15 @@
 	..()
 	cut_overlays()
 	if(auras)
+		var/decl/bodytype/my_bodytype = get_bodytype()
 		for(var/obj/aura/aura as anything in auras)
 			var/image/A = new()
 			A.appearance = aura
+			if(my_bodytype)
+				if(my_bodytype.pixel_offset_x)
+					A.pixel_x += -(my_bodytype.pixel_offset_x)
+				if(my_bodytype.pixel_offset_y)
+					A.pixel_y += -(my_bodytype.pixel_offset_y)
 			add_overlay(A)
 	try_refresh_visible_overlays()
 

@@ -21,7 +21,7 @@
 		BP_STOMACH         = /obj/item/organ/internal/stomach/insectoid,
 		BP_PHEROMONE_GLAND = /obj/item/organ/internal/pheromone_gland
 	)
-
+	age_descriptor = /datum/appearance_descriptor/age/serpentid
 	eye_darksight_range = 8
 	eye_innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 	eye_contaminant_guard = 1
@@ -42,7 +42,10 @@
 		BP_L_FOOT       = list("path" = /obj/item/organ/external/foot/insectoid/serpentid),
 		BP_R_FOOT       = list("path" = /obj/item/organ/external/foot/right/insectoid/serpentid)
 	)
-
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height =      1.75,
+		/datum/appearance_descriptor/body_length = 1
+	)
 	limb_mapping = list(
 		BP_L_HAND = list(BP_L_HAND, BP_L_HAND_UPPER),
 		BP_R_HAND = list(BP_R_HAND, BP_R_HAND_UPPER)

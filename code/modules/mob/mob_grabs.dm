@@ -12,6 +12,8 @@
 /mob/proc/get_organ(var/organ_tag, var/expected_type)
 	RETURN_TYPE(/obj/item/organ)
 	return
+/mob/proc/get_injured_organs()
+	return
 /mob/proc/get_organs()
 	return
 // End grab casting stubs.

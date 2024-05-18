@@ -26,12 +26,12 @@
 		return TRUE
 
 	var/mob/living/carbon/human/H = user
-	var/decl/species/my_species = istype(H) && H.get_species()
-	if(!istype(my_species))
+	var/decl/bodytype/my_bodytype = istype(H) && H.get_bodytype()
+	if(!istype(my_bodytype))
 		return ..()
 
-	var/datum/appearance_descriptor/age/age = my_species && LAZYACCESS(my_species.appearance_descriptors, "age")
-	if(H.isSynthetic() || !my_species || !age)
+	var/datum/appearance_descriptor/age/age = my_bodytype && LAZYACCESS(my_bodytype.appearance_descriptors, "age")
+	if(H.isSynthetic() || !my_bodytype || !age)
 		to_chat(H, SPAN_WARNING("A feeling of foreboding stills your hand. The fountain is not for your kind."))
 		return
 
@@ -58,8 +58,8 @@
 	else
 		new_age -= rand(5,15)
 
-	var/decl/species/species = user.get_species()
-	var/datum/appearance_descriptor/age/age = LAZYACCESS(species.appearance_descriptors, "age")
+	var/decl/bodytype/bodytype = user.get_bodytype()
+	var/datum/appearance_descriptor/age/age = LAZYACCESS(bodytype.appearance_descriptors, "age")
 	// Let's avoid reverting people to children since that has a lot of baggage attached.
 	var/min_age = age.standalone_value_descriptors[age.standalone_value_descriptors[age.chargen_min_index]]
 	new_age = max(new_age, min_age) // This will clamp to the max defined age already so only need to min()

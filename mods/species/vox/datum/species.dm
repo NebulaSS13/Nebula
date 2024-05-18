@@ -66,8 +66,6 @@
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
-	age_descriptor = /datum/appearance_descriptor/age/vox
-
 	preview_outfit = /decl/hierarchy/outfit/vox_raider
 
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
@@ -97,12 +95,6 @@
 		/decl/bodytype/vox,
 		/decl/bodytype/vox/servitor,
 		/decl/bodytype/vox/servitor/alchemist,
-	)
-
-	appearance_descriptors = list(
-		/datum/appearance_descriptor/height =       0.75,
-		/datum/appearance_descriptor/build =        1.25,
-		/datum/appearance_descriptor/vox_markings = 1
 	)
 
 	available_cultural_info = list(

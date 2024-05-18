@@ -80,3 +80,6 @@
 
 	/// Whether or not this mob has a client who wishes to sleep indefinitely.
 	var/player_triggered_sleeping = FALSE
+
+	/// Organ instances that should report info to Stat().
+	var/list/stat_organs

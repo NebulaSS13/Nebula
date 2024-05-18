@@ -61,6 +61,8 @@ var/global/list/bodytypes_by_category = list()
 
 	var/eye_offset = 0                        // Amount to shift eyes on the Y axis to correct for non-32px height.
 
+	var/z_flags = 0
+
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
 	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
@@ -163,6 +165,12 @@ var/global/list/bodytypes_by_category = list()
 	var/breathing_organ           // If set, this organ is required for breathing.
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
+
+	var/age_descriptor = /datum/appearance_descriptor/age
+	var/list/appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 1,
+		/datum/appearance_descriptor/build =  1
+	)
 
 	/// Losing an organ from this list will give a grace period of `vital_organ_failure_death_delay` then kill the mob.
 	var/list/vital_organs = list(BP_BRAIN)
@@ -368,6 +376,18 @@ var/global/list/bodytypes_by_category = list()
 			LAZYADD(organs_by_category[organ_cat], organ)
 			LAZYADD(organ_tags_by_category[organ_cat], organ_tag)
 
+	if(LAZYLEN(appearance_descriptors))
+		for(var/desctype in appearance_descriptors)
+			var/datum/appearance_descriptor/descriptor = new desctype(appearance_descriptors[desctype])
+			appearance_descriptors -= desctype
+			appearance_descriptors[descriptor.name] = descriptor
+
+	if(!(/datum/appearance_descriptor/age in appearance_descriptors))
+		LAZYINITLIST(appearance_descriptors)
+		var/datum/appearance_descriptor/age/age = new age_descriptor(1)
+		appearance_descriptors.Insert(1, age.name)
+		appearance_descriptors[age.name] = age
+
 /decl/bodytype/proc/get_expected_organ_count_for_categories(var/list/categories)
 	. = 0
 	for(var/category in categories)
@@ -385,6 +405,12 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/validate()
 	. = ..()
+
+	// TODO: Maybe make age descriptors optional, in case someone wants a 'timeless entity' species?
+	if(isnull(age_descriptor))
+		. += "age descriptor was unset"
+	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
+		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
 
 	var/damage_icon = get_damage_overlays()
 	if(damage_icon)

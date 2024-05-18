@@ -16,7 +16,6 @@
 	name_plural         = "Hnoll"
 	description         = "Gnolls!"
 	hidden_from_codex   = FALSE
-	age_descriptor      = /datum/appearance_descriptor/age/hnoll
 	available_bodytypes = list(/decl/bodytype/hnoll)
 	preview_outfit      = /decl/hierarchy/outfit/job/shaded_hills/traveller
 	spawn_flags         = SPECIES_CAN_JOIN

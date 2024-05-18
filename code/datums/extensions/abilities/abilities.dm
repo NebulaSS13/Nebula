@@ -4,6 +4,14 @@
 	expected_type = /mob
 	var/list/ability_handlers
 
+/datum/extension/abilities/Destroy()
+	// Can't use QDEL_NULL_LIST() due to circular calls.
+	for(var/datum/ability_handler/handler in ability_handlers)
+		handler.master = null
+		qdel(handler)
+	ability_handlers = null
+	return ..()
+
 /datum/extension/abilities/proc/update()
 	if(!LAZYLEN(ability_handlers))
 		remove_extension(holder, base_type)

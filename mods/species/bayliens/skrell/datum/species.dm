@@ -61,11 +61,6 @@
 		/decl/blood_type/skrell/noplus,
 		/decl/blood_type/skrell/nominus
 	)
-	appearance_descriptors = list(
-		/datum/appearance_descriptor/height = 1,
-		/datum/appearance_descriptor/build = 0.8,
-		/datum/appearance_descriptor/headtail_length = 1
-	)
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(

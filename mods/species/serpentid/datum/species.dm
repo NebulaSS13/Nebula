@@ -29,7 +29,6 @@
 
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
-	age_descriptor = /datum/appearance_descriptor/age/serpentid
 	butchery_data = /decl/butchery_data/humanoid/serpentid
 	speech_sounds = list('sound/voice/bug.ogg')
 	speech_chance = 2
@@ -69,10 +68,7 @@
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 
 	unarmed_attacks = list(/decl/natural_attack/forelimb_slash)
-	appearance_descriptors = list(
-		/datum/appearance_descriptor/height =      1.75,
-		/datum/appearance_descriptor/body_length = 1
-		)
+
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/audible/bug_hiss) = 40
 	)

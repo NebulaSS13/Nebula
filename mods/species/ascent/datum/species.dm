@@ -57,7 +57,6 @@
 	toxins_mod =            0.8 // Not as biologically fragile as meatboys.
 	radiation_mod =         0.5 // Not as biologically fragile as meatboys.
 
-	age_descriptor = /datum/appearance_descriptor/age/kharmaani
 	rarity_value =            3
 	gluttonous =              2
 	body_temperature =        null
@@ -83,11 +82,6 @@
 		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
 	)
 
-	appearance_descriptors = list(
-		/datum/appearance_descriptor/height =      0.75,
-		/datum/appearance_descriptor/body_length = 0.5
-	)
-
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/visible/ascent_shine, /decl/emote/visible/ascent_dazzle) = 80,
 			list(/decl/emote/visible/ascent_glimmer, /decl/emote/visible/ascent_pulse) = 50,
@@ -111,17 +105,11 @@
 	gluttonous =              3
 	rarity_value =           10
 
-	age_descriptor = /datum/appearance_descriptor/age/kharmaani/gyne
 	blood_volume =         1200
 
 	bump_flag =               HEAVY
 	push_flags =              ALLMOBS
 	swap_flags =              ALLMOBS
-
-	appearance_descriptors = list(
-		/datum/appearance_descriptor/height =      2,
-		/datum/appearance_descriptor/body_length = 1.25
-	)
 
 	force_cultural_info = list(
 		TAG_CULTURE =   /decl/cultural_info/culture/ascent,

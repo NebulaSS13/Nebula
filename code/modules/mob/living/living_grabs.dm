@@ -39,6 +39,11 @@
 	if(!istype(target))
 		return
 
+	if(!force_grab_tag)
+		var/decl/species/my_species = get_species()
+		if(my_species?.grab_type)
+			grab_tag = my_species.grab_type
+
 	face_atom(target)
 	var/obj/item/grab/grab
 	if(ispath(grab_tag, /decl/grab) && can_grab(target, get_target_zone(), defer_hand = defer_hand) && target.can_be_grabbed(src, get_target_zone(), defer_hand))

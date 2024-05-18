@@ -13,10 +13,16 @@
 	base_eye_color    = "#d60093"
 	base_color        = "#526d29"
 	body_flags        = BODY_FLAG_NO_DNA
-
+	age_descriptor = /datum/appearance_descriptor/age/vox
 	cold_level_1 = 80
 	cold_level_2 = 50
 	cold_level_3 = -1
+
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height =       0.75,
+		/datum/appearance_descriptor/build =        1.25,
+		/datum/appearance_descriptor/vox_markings = 1
+	)
 
 	vital_organs = list(
 		BP_STACK,

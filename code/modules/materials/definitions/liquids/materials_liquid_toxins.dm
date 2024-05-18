@@ -118,7 +118,7 @@
 	..()
 	ADJ_STATUS(M, STAT_CONFUSE, 1.5)
 
-/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/M)
+/decl/material/liquid/heartstopper/affect_overdose(mob/living/M, total_dose)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M

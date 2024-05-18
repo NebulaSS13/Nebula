@@ -234,7 +234,7 @@
 		var/size_modifier = (MOB_SIZE_MEDIUM / mob_size)
 		for(var/decl/material/R as anything in tick_dosage_tracker)
 			if(tick_dosage_tracker[R] > (R.overdose * ((R.flags & IGNORE_MOB_SIZE) ? 1 : size_modifier)))
-				R.affect_overdose(src)
+				R.affect_overdose(src, tick_dosage_tracker[R])
 
 	// Update chem dosage.
 	// TODO: refactor chem dosage above isSynthetic() and GODMODE checks.

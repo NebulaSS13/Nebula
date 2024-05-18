@@ -11,7 +11,7 @@
 	health_hud_intensity = 1.75
 	bodytype_flag        = BODY_FLAG_HNOLL
 	appearance_flags     = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
-
+	age_descriptor       = /datum/appearance_descriptor/age/hnoll
 	base_color           = "#ae7d32"
 	base_eye_color       = "#00aa00"
 

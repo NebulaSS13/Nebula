@@ -23,6 +23,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 	var/base_internal_prosthetics_model
 
+	/// Set to true to blacklist this species from all map jobs it is not explicitly whitelisted for.
+	var/job_blacklist_by_default = FALSE
+
 	// A list of customization categories made available in character preferences.
 	var/list/available_accessory_categories = list(
 		SAC_HAIR,
@@ -64,8 +67,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/thirst_factor = DEFAULT_THIRST_FACTOR // Multiplier for thirst.
 	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 	var/silent_steps
-
-	var/age_descriptor = /datum/appearance_descriptor/age
 
 	// Speech vars.
 	var/assisted_langs    = list()            // The languages the species can't speak without an assisted organ.
@@ -178,11 +179,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/list/base_auras
 
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
-
-	var/list/appearance_descriptors = list(
-		/datum/appearance_descriptor/height = 1,
-		/datum/appearance_descriptor/build =  1
-	)
 
 	var/standing_jump_range = 2
 	var/list/maneuvers = list(/decl/maneuver/leap)
@@ -383,18 +379,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	else
 		species_hud = new
 
-	if(LAZYLEN(appearance_descriptors))
-		for(var/desctype in appearance_descriptors)
-			var/datum/appearance_descriptor/descriptor = new desctype(appearance_descriptors[desctype])
-			appearance_descriptors -= desctype
-			appearance_descriptors[descriptor.name] = descriptor
-
-	if(!(/datum/appearance_descriptor/age in appearance_descriptors))
-		LAZYINITLIST(appearance_descriptors)
-		var/datum/appearance_descriptor/age/age = new age_descriptor(1)
-		appearance_descriptors.Insert(1, age.name)
-		appearance_descriptors[age.name] = age
-
 	build_codex_strings()
 
 /decl/species/validate()
@@ -412,11 +396,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		. += "default bodytype is not in available bodytypes list"
 	if(!length(available_bodytypes))
 		. += "missing at least one bodytype"
-	// TODO: Maybe make age descriptors optional, in case someone wants a 'timeless entity' species?
-	if(isnull(age_descriptor))
-		. += "age descriptor was unset"
-	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
-		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
 
 	if(taste_sensitivity < 0)
 		. += "taste_sensitivity ([taste_sensitivity]) was negative"
@@ -761,23 +740,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 //Consider this might be called post-init
 /decl/species/proc/apply_appearance(var/mob/living/carbon/human/H)
 	H.icon_state = lowertext(src.name)
-	update_appearance_descriptors(H)
-
-/decl/species/proc/update_appearance_descriptors(var/mob/living/carbon/human/H)
-	if(!LAZYLEN(src.appearance_descriptors))
-		H.appearance_descriptors = null
-		return
-
-	var/list/new_descriptors = list()
-	//Add missing descriptors, and sanitize any existing ones
-	for(var/desctype in src.appearance_descriptors)
-		var/datum/appearance_descriptor/descriptor = src.appearance_descriptors[desctype]
-		if(H.appearance_descriptors && H.appearance_descriptors[descriptor.name])
-			new_descriptors[descriptor.name] = descriptor.sanitize_value(H.appearance_descriptors[descriptor.name])
-		else
-			new_descriptors[descriptor.name] = descriptor.default_value
-	//Make sure only supported descriptors are left
-	H.appearance_descriptors = new_descriptors
 
 /decl/species/proc/get_preview_icon()
 	if(!preview_icon)

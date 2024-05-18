@@ -41,13 +41,13 @@
 
 /mob/living/get_icon_scale_mult()
 	. = ..()
-	var/decl/species/my_species = get_species()
-	if(!LAZYLEN(appearance_descriptors) || !my_species)
+	var/decl/bodytype/bodytype = get_bodytype()
+	if(!LAZYLEN(appearance_descriptors) || !bodytype)
 		return
 	var/modify_x = 1
 	var/modify_y = 1
 	for(var/entry in appearance_descriptors)
-		var/datum/appearance_descriptor/descriptor = my_species.appearance_descriptors[entry]
+		var/datum/appearance_descriptor/descriptor = bodytype.appearance_descriptors[entry]
 		var/list/new_scale_info = descriptor.get_mob_scale_adjustments(get_bodytype(), appearance_descriptors[entry])
 		if(length(new_scale_info))
 			modify_x += new_scale_info[1]

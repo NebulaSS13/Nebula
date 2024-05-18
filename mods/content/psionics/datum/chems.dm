@@ -2,7 +2,7 @@
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	. = (M.get_ability_handler(/datum/ability_handler/psionics) || (M.mind && wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : ..()
 
-/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M)
+/decl/material/liquid/glowsap/gleam/affect_overdose(mob/living/M, total_dose)
 	..()
 	var/datum/ability_handler/psionics/psi = M.get_ability_handler(/datum/ability_handler/psionics)
 	psi?.check_latency_trigger(30, "a [name] overdose")

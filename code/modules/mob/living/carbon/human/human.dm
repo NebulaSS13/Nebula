@@ -1088,7 +1088,8 @@
 	. = LAZYACCESS(appearance_descriptors, "age") || 30
 
 /mob/living/carbon/human/proc/set_age(var/val)
-	var/datum/appearance_descriptor/age = LAZYACCESS(species.appearance_descriptors, "age")
+	var/decl/bodytype/bodytype = get_bodytype()
+	var/datum/appearance_descriptor/age = LAZYACCESS(bodytype.appearance_descriptors, "age")
 	LAZYSET(appearance_descriptors, "age", (age ? age.sanitize_value(val) : 30))
 
 /mob/living/carbon/human/HandleBloodTrail(turf/T, old_loc)

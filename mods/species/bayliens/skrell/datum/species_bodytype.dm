@@ -19,6 +19,11 @@
 			/decl/sprite_accessory/hair/skrell/short = "#006666"
 		)
 	)
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 1,
+		/datum/appearance_descriptor/build = 0.8,
+		/datum/appearance_descriptor/headtail_length = 1
+	)
 
 	has_organ = list(
 		BP_HEART =   /obj/item/organ/internal/heart,

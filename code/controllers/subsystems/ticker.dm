@@ -281,8 +281,9 @@ Helpers
 		if(!player.ready || !player.mind || !player.mind.assigned_role || !player.mind.assigned_job)
 			continue
 		var/mob/living/newplayer = player.create_character()
-		newplayer.mind.assigned_job.do_spawn_special(newplayer, player, FALSE)
-		qdel(player)
+		if(newplayer?.mind?.assigned_job)
+			newplayer.mind.assigned_job.do_spawn_special(newplayer, player, FALSE)
+			qdel(player)
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in global.player_list)

@@ -16,3 +16,10 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/quadruped),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/quadruped)
 	)
+	var/ridable = TRUE
+	var/riding_offset = @"{'x':0,'y':0,'z':8}"
+
+/decl/bodytype/quadruped/apply_appearance(var/mob/living/carbon/human/H)
+	. = ..()
+	H.can_buckle         = ridable
+	H.buckle_pixel_shift = riding_offset

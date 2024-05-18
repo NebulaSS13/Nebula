@@ -44,5 +44,25 @@
 	if(base_color)
 		H.set_skin_colour(base_color)
 
+	if(z_flags)
+		H.z_flags = z_flags
+	else
+		H.z_flags = initial(H.z_flags)
+
+	if(!LAZYLEN(appearance_descriptors))
+		H.appearance_descriptors = null
+		return
+
+	var/list/new_descriptors = list()
+	//Add missing descriptors, and sanitize any existing ones
+	for(var/desctype in appearance_descriptors)
+		var/datum/appearance_descriptor/descriptor = appearance_descriptors[desctype]
+		if(H.appearance_descriptors && H.appearance_descriptors[descriptor.name])
+			new_descriptors[descriptor.name] = descriptor.sanitize_value(H.appearance_descriptors[descriptor.name])
+		else
+			new_descriptors[descriptor.name] = descriptor.default_value
+	//Make sure only supported descriptors are left
+	H.appearance_descriptors = new_descriptors
+
 /decl/bodytype/proc/adjust_status(mob/living/target, condition, amount)
 	return amount
