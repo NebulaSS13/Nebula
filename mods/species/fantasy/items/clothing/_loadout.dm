@@ -149,3 +149,11 @@
 /decl/loadout_option/fantasy/utility/knife/folding
 	name = "knife, folding"
 	path = /obj/item/bladed/folding
+
+/decl/loadout_option/fantasy/utility/hand_axe
+	name = "hand axe"
+	path = /obj/item/tool/axe
+
+/decl/loadout_option/fantasy/utility/shovel
+	name = "shovel"
+	path = /obj/item/tool/shovel/wood
