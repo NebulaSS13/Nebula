@@ -337,8 +337,13 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			merge(A.zone,B.zone)
 			return
 
+	#ifdef MULTIZAS
+	var/a_to_b = get_dir_multiz(A,B)
+	var/b_to_a = get_dir_multiz(B,A)
+	#else
 	var/a_to_b = get_dir(A,B)
 	var/b_to_a = get_dir(B,A)
+	#endif
 
 	if(!A.connections) A.connections = new
 	if(!B.connections) B.connections = new
