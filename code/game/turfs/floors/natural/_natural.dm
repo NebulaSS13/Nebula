@@ -6,7 +6,6 @@
 	desc = "Bare, barren sand."
 	icon_state = "0"
 	footstep_type = /decl/footsteps/asteroid
-	open_turf_type = /turf/open
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 
 	base_name = "ground"

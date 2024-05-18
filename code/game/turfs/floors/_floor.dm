@@ -13,6 +13,7 @@
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	zone_membership_candidate = TRUE
+	open_turf_type = /turf/open/airless
 
 	var/can_engrave = TRUE
 
