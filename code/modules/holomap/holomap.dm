@@ -20,7 +20,6 @@
 	var/mob/watching_mob
 	var/image/small_station_map
 	var/image/floor_markings
-	var/image/panel
 	/// z-level on which the station map was initialized.
 	var/original_zLevel = 1
 	/// set to FALSE when you initialize the station map on a zLevel that has its own icon formatted for use by station holomaps.
@@ -149,7 +148,7 @@
 		set_light(0)
 	else
 		icon_state = "station_map"
-		set_light(0.8, 0.1, 2, 2, "#1dbe17")
+		set_light(light_range_on, light_power_on, "#1dbe17")
 		// Put the little "map" overlay down where it looks nice
 		if(small_station_map)
 			add_overlay(small_station_map)
