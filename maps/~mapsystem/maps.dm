@@ -164,6 +164,10 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	/// A reagent used to prefill lanterns.
 	var/default_liquid_fuel_type = /decl/material/liquid/fuel
 
+	/// Decl list of backpacks available to outfits and in character generation.
+	var/list/_available_backpacks
+	var/backpacks_setup = FALSE
+
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(LAZYLEN(lobby_tracks) == 1)
@@ -173,6 +177,17 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	else
 		lobby_track_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/music_track) - exclude)
 	return GET_DECL(lobby_track_type)
+
+/datum/map/proc/get_available_backpacks()
+	if(!backpacks_setup)
+		backpacks_setup = TRUE
+		if(length(_available_backpacks))
+			for(var/backpack_type in _available_backpacks)
+				_available_backpacks[backpack_type] = GET_DECL(backpack_type)
+			_available_backpacks[/decl/backpack_outfit/nothing] = GET_DECL(/decl/backpack_outfit/nothing)
+		else
+			_available_backpacks = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+	return _available_backpacks
 
 /datum/map/proc/setup_map()
 

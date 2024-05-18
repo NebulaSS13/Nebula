@@ -17,7 +17,7 @@
 	..()
 	if(!backpacks_by_name)
 		backpacks_by_name = list()
-		var/bos = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+		var/bos = global.using_map.get_available_backpacks()
 		for(var/bo in bos)
 			var/decl/backpack_outfit/backpack_outfit = bos[bo]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit

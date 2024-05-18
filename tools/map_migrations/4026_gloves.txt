@@ -1,0 +1,1 @@
+/obj/item/clothing/gloves/color/@SUBTYPES : /obj/item/clothing/gloves/@SUBTYPES{@OLD}
