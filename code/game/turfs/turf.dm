@@ -521,16 +521,9 @@
 	if(is_outside())
 		if(zone && external_atmosphere_participation)
 			if(can_safely_remove_from_zone())
-				#ifdef MULTIZAS
-				var/dirs = global.cardinalz
-				#else
-				var/dirs = global.cardinal
-				#endif
 				zone.remove(src)
 				// Update neighbors to create edges between zones and exterior
-				for(var/dir in dirs)
-					var/turf/neighbor = get_step(src, dir)
-					SSair.mark_for_update(neighbor)
+				mark_neighbours_for_update()
 			else
 				zone.rebuild()
 	else if(zone_membership_candidate)

@@ -74,6 +74,8 @@
 	var/old_ambient_light_old_g = ambient_light_old_g
 	var/old_ambient_light_old_b = ambient_light_old_b
 
+	var/old_zone_membership_candidate = zone_membership_candidate
+
 	changing_turf = TRUE
 
 	qdel(src)
@@ -157,6 +159,12 @@
 
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)
+
+	// If the new tile never participate in zones (ie it will always have the exterior gas mix regardless of outside status), then upon changing
+	// the tile we update the adjacent neighbors to create new edges.
+	// In rare cases the zone may have already been invalidated, but this should not cause any issues.
+	if(!W.zone_membership_candidate && (W.zone_membership_candidate != old_zone_membership_candidate))
+		mark_neighbours_for_update()
 
 	for(var/atom/movable/AM in W.contents)
 		AM.update_turf_alpha_mask()
