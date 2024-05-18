@@ -59,8 +59,12 @@
 	icon_state = ICON_STATE_WORLD
 	on_update_icon()
 
+/obj/item/bladed/proc/update_base_icon_state()
+	icon_state = get_world_inventory_state()
+
 /obj/item/bladed/on_update_icon()
 	. = ..()
+	update_base_icon_state()
 	if(istype(hilt_material))
 		var/check_state = "[icon_state]-hilt"
 		if(check_state_in_icon(check_state, icon))
@@ -79,6 +83,7 @@
 			var/image/I = overlay_image(icon, check_state, COLOR_WHITE, (RESET_COLOR | RESET_ALPHA))
 			I.alpha = shine
 			add_overlay(I)
+	update_held_icon()
 
 /obj/item/bladed/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)

@@ -1,7 +1,7 @@
 /obj/item/bladed/longsword
 	name                             = "longsword"
 	desc                             = "A long and heavy two-handed blade with a cruciform hilt and guard."
-	icon                             = 'icons/obj/items/sword/longsword.dmi'
+	icon                             = 'icons/obj/items/bladed/longsword.dmi'
 	hilt_material                    = /decl/material/solid/metal/brass
 	guard_material                   = /decl/material/solid/metal/brass
 	pommel_material                  = /decl/material/solid/metal/brass
@@ -15,7 +15,7 @@
 /obj/item/bladed/broadsword
 	name                             = "broadsword"
 	desc                             = "A massive two-handed blade, almost too large to be called a sword."
-	icon                             = 'icons/obj/items/sword/broadsword.dmi'
+	icon                             = 'icons/obj/items/bladed/broadsword.dmi'
 	hilt_material                    = /decl/material/solid/metal/brass
 	guard_material                   = /decl/material/solid/metal/brass
 	pommel_material                  = /decl/material/solid/metal/brass
