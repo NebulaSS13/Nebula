@@ -23,7 +23,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 		switch(psi?.get_rank(faculty))
 			if(PSI_RANK_PARAMOUNT)
 				return new /obj/item/ability/psionic/psiblade/master/grand/paramount(user, user)
@@ -70,7 +70,7 @@
 	if(.)
 
 		var/distance = get_dist(user, target)
-		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 		if(distance > psi?.get_rank(PSI_PSYCHOKINESIS))
 			to_chat(user, "<span class='warning'>Your telekinetic power won't reach that far.</span>")
 			return FALSE

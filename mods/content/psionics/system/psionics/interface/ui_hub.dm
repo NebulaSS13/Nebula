@@ -20,7 +20,7 @@
 
 /obj/screen/psi/hub/on_update_icon()
 	var/mob/living/owner = owner_ref?.resolve()
-	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	icon_state = psi?.suppressed ? "psi_suppressed" : "psi_active"
 	if(world.time < psi?.next_power_use)
 		overlays |= on_cooldown
@@ -44,7 +44,7 @@
 	if(!istype(owner))
 		qdel(src)
 		return
-	var/datum/ability_handler/psionics/psi = owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(!psi)
 		return
 	maptext = "[round((psi.stamina/psi.max_stamina)*100)]%"
@@ -53,7 +53,7 @@
 /obj/screen/psi/hub/handle_click(mob/user, params)
 
 	var/mob/living/owner = owner_ref?.resolve()
-	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(!psi)
 		return
 

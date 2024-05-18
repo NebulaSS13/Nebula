@@ -5,7 +5,7 @@
 /decl/modpack/psionics/get_player_panel_options(var/mob/M)
 	. = list("<b>Psionics:</b><br/>")
 	if(isliving(M))
-		var/datum/ability_handler/psionics/psi = M.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		var/datum/ability_handler/psionics/psi = M.get_ability_handler(/datum/ability_handler/psionics)
 		if(psi)
 			. += "<a href='?src=\ref[psi];remove_psionics=1'>Remove psionics.</a><br/><br/>"
 			. += "<a href='?src=\ref[psi];trigger_psi_latencies=1'>Trigger latencies.</a><br/>"
@@ -27,6 +27,6 @@
 
 /datum/preferences/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 	character = ..()
-	var/datum/ability_handler/psionics/psi = !is_preview_copy && istype(character) && character.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = !is_preview_copy && istype(character) && character.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
 		psi.update()

@@ -87,7 +87,7 @@
 
 	sleep(80)
 
-	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics)
 	psi?.reset()
 
 	to_chat(H, SPAN_NOTICE("\The [src] chimes quietly as it finishes removing the subpersonas from your brain."))
@@ -109,7 +109,7 @@
 	if(.)
 		var/mob/living/carbon/human/H = lastloc
 		if(istype(H))
-			var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+			var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics)
 			psi?.reset()
 		H = loc
 		if(!istype(H) || H.get_equipped_item(slot_head_str) != src)
@@ -149,7 +149,7 @@
 			H.set_psi_rank(faculty, boosted_rank, take_larger = TRUE, temporary = TRUE)
 		else
 			H.set_psi_rank(faculty, unboosted_rank, take_larger = TRUE, temporary = TRUE)
-	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
 		psi.max_stamina = boosted_psipower
 		psi.stamina = psi.max_stamina
