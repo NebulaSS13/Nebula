@@ -90,3 +90,6 @@
 	var/turf/T = GetBelow(src)
 	if(istype(T))
 		T.drill_act()
+
+/turf/open/airless
+	initial_gas = null
