@@ -498,7 +498,6 @@
 	for(var/turf/turf in locs)
 		if(turf.simulated)
 			update_heat_protection(turf)
-			SSair.mark_for_update(turf)
 	return 1
 
 /obj/machinery/door/proc/update_heat_protection(var/turf/source)

@@ -31,7 +31,11 @@
 /atom/movable/proc/update_nearby_tiles(need_rebuild)
 	for(var/turf/turf in locs)
 		if(turf.simulated)
-			SSair.mark_for_update(turf)
+			if(SHOULD_PARTICIPATE_IN_ZONES(turf))
+				SSair.mark_for_update(turf)
+			else // Creates required ZAS edges in the case that the atom is sitting on top of a non-ZAS participating turf.
+				turf.mark_neighbours_for_update()
+
 	fluid_update()
 	return TRUE
 

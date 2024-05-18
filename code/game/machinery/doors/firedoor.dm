@@ -62,9 +62,9 @@
 
 /obj/machinery/door/firedoor/get_blend_objects()
 	var/static/list/blend_objects = list(
-		/obj/machinery/door/firedoor, 
-		/obj/structure/wall_frame, 
-		/turf/unsimulated/wall, 
+		/obj/machinery/door/firedoor,
+		/obj/structure/wall_frame,
+		/turf/unsimulated/wall,
 		/obj/structure/window
 	) // Objects which to blend with
 	return blend_objects
@@ -472,6 +472,14 @@
 
 	update_heat_protection(loc)
 
-	if(istype(source) && source.simulated) SSair.mark_for_update(source)
-	if(istype(destination) && destination.simulated) SSair.mark_for_update(destination)
+	if(istype(source) && source.simulated)
+		if(SHOULD_PARTICIPATE_IN_ZONES(source))
+			SSair.mark_for_update(source)
+		else
+			source.mark_neighbours_for_update()
+	if(istype(destination) && destination.simulated)
+		if(SHOULD_PARTICIPATE_IN_ZONES(destination))
+			SSair.mark_for_update(destination)
+		else
+			destination.mark_neighbours_for_update()
 	return TRUE
