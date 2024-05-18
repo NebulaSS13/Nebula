@@ -274,3 +274,17 @@
 		air = new/datum/gas_mixture
 	air.copy_from(zone.air)
 	air.group_multiplier = 1
+
+// Generally used to mark neighbours of non-ZAS/exterior turfs to create unsimulated edges.
+// TODO: An alternative to this is to allow non-ZAS turfs to create the required edge when calling SSair.mark_turf_for_update() on them.
+/turf/proc/mark_neighbours_for_update()
+	#ifdef MULTIZAS
+	var/dirs = global.cardinalz
+	#else
+	var/dirs = global.cardinal
+	#endif
+	for(var/dir in dirs)
+		var/turf/neighbor = get_step(src, dir)
+		if(!neighbor || !neighbor.simulated || neighbor.changing_turf)
+			continue
+		SSair.mark_for_update(neighbor)
