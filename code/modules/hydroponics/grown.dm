@@ -351,6 +351,9 @@ var/global/list/_wood_materials = list(
 		return new dried_type(loc, null, seed.name)
 	return ..()
 
+/obj/item/chems/food/grown/get_drying_state(var/obj/rack)
+	return seed?.drying_state || ..()
+
 /obj/item/chems/food/grown/grilled
 	backyard_grilling_count = 1 // will get overwritten when actually made
 	color = COLOR_BROWN_ORANGE
