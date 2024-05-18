@@ -62,7 +62,7 @@
 		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, indicator_color=COLOR_YELLOW),
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, indicator_color=COLOR_LIME),
 		)
-	var/decl/plantgene/gene = null
+	var/decl/plant_gene/gene = null
 
 /obj/item/gun/energy/floragun/get_charge_state(var/initial_state)
 	return "[initial_state]100"
@@ -85,16 +85,10 @@
 	set category = "Object"
 	set src in view(1)
 
-	var/genemask = input("Choose a gene to modify.") as null|anything in SSplants.plant_gene_datums
-
-	if(!genemask)
-		return
-
-	gene = SSplants.plant_gene_datums[genemask]
-
-	to_chat(usr, "<span class='info'>You set the [src]'s targeted genetic area to [genemask].</span>")
-
-	return
+	var/decl/plant_gene/new_gene = input("Choose a gene to modify.") as null|anything in decls_repository.get_decls_of_type_unassociated(/decl/plant_gene)
+	if(istype(new_gene))
+		gene = new_gene
+		to_chat(usr, SPAN_INFO("You set the \the [src]'s targeted genetic area to [gene.name]."))
 
 /obj/item/gun/energy/floragun/consume_next_projectile()
 	. = ..()

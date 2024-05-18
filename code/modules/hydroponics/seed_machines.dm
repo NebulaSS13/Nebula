@@ -127,9 +127,7 @@
 
 	var/list/data = list()
 
-	var/list/geneMasks = SSplants.gene_masked_list
-	data["geneMasks"] = geneMasks
-
+	data["geneMasks"] = SSplants.gene_masked_list
 	data["activity"] = active
 	data["degradation"] = degradation
 
@@ -215,21 +213,27 @@
 
 	if(href_list["get_gene"])
 
-		if(!genetics || !loaded_disk) return
+		if(!genetics || !loaded_disk)
+			return
+
+		var/decl/plant_gene/gene_master = locate(href_list["get_gene"])
+		if(ispath(gene_master))
+			gene_master = GET_DECL(gene_master)
+
+		if(!istype(gene_master))
+			return
 
 		last_action = world.time
 		active = 1
 
-		var/datum/plantgene/P = genetics.get_gene(href_list["get_gene"])
-		if(!P) return
-		loaded_disk.genes += P
+		loaded_disk.genes += new /datum/plantgene(gene_master, genetics)
 
 		loaded_disk.genesource = "[genetics.display_name]"
 		if(!genetics.roundstart)
 			loaded_disk.genesource += " (variety #[genetics.uid])"
 
-		loaded_disk.name += " ([SSplants.gene_tag_masks[href_list["get_gene"]]], #[genetics.uid])"
-		loaded_disk.desc += " The label reads \'gene [SSplants.gene_tag_masks[href_list["get_gene"]]], sampled from [genetics.display_name]\'."
+		loaded_disk.name += " ([gene_master.name], #[genetics.uid])"
+		loaded_disk.desc += " The label reads \'gene [gene_master.name], sampled from [genetics.display_name]\'."
 		eject_disk = 1
 
 		degradation += rand(20,60) + user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_ADEPT)
@@ -277,7 +281,7 @@
 
 		for(var/datum/plantgene/P in loaded_disk.genes)
 			if(data["locus"] != "") data["locus"] += ", "
-			data["locus"] += "[SSplants.gene_tag_masks[P.genetype]]"
+			data["locus"] += "[P.genetype.name]"
 
 	else
 		data["disk"] = 0
