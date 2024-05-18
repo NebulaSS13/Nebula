@@ -37,7 +37,7 @@
 		// Hand is organ based, ask the organ if it has the required dexterity.
 		if(hand.requires_organ_tag)
 			var/obj/item/organ/external/hand_organ = get_organ(hand.requires_organ_tag)
-			if(!(hand_organ.get_manual_dexterity() & DEXTERITY_HOLD_ITEM))
+			if(!hand_organ || !(hand_organ.get_manual_dexterity() & DEXTERITY_HOLD_ITEM))
 				return FALSE
 		// Hand is not organ based, ask the gripper slot directly.
 		else if(!(hand.get_dexterity() & DEXTERITY_HOLD_ITEM))
