@@ -15,17 +15,13 @@
 		/decl/material/solid/organic/cloth
 	)
 
-/decl/loadout_option/fantasy/Initialize()
+/decl/loadout_option/fantasy/get_gear_tweak_options()
 	. = ..()
 	if(length(available_materials))
 		for(var/mat in available_materials)
 			var/decl/material/mat_decl = GET_DECL(mat)
 			available_materials -= mat
 			available_materials[mat_decl.name] = mat
-
-/decl/loadout_option/fantasy/get_gear_tweak_options()
-	. = ..()
-	if(length(available_materials))
 		LAZYINITLIST(.[/datum/gear_tweak/material])
 		.[/datum/gear_tweak/material] = available_materials
 
