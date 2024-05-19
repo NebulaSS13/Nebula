@@ -3,7 +3,7 @@
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
 	#include "../../mods/content/scaling_descriptors.dm"
-	#include "../../mods/species/fantasy/_fantasy.dme"
+	#include "../../mods/content/fantasy/_fantasy.dme"
 
 	#include "areas/_areas.dm"
 	#include "areas/downlands.dm"
