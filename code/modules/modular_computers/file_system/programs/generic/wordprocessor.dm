@@ -33,17 +33,6 @@
 	is_edited = FALSE
 	. = ..()
 
-/datum/computer_file/program/wordprocessor/proc/open_file(var/openingfile, var/list/accesses, var/mob/user)
-	var/datum/computer_file/data/F = get_file(openingfile)
-	if(F)
-		if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
-			error = "I/O error: You do not have permission to read file '[openingfile]'."
-			return FALSE
-		open_file = F.filename
-		loaded_data = F.stored_data
-		return TRUE
-	error = "I/O error: Unable to open file '[openingfile]'."
-
 /datum/computer_file/program/wordprocessor/proc/save_file(mob/user)
 	var/datum/computer_file/result = computer.save_file(open_file, file_directory, loaded_data, /datum/computer_file/data/text, null, computer.get_access(user), user)
 	. = FALSE
@@ -117,7 +106,7 @@
 			saving.stored_data = loaded_data
 			view_file_browser(usr, "saveas_file", /datum/computer_file/data/text, OS_WRITE_ACCESS, browser_desc, saving)
 			return TOPIC_HANDLED
-		
+
 		save_file(usr)
 		return TOPIC_REFRESH
 

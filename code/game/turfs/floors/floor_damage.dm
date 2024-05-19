@@ -1,6 +1,3 @@
-/turf/floor/proc/gets_drilled()
-	return
-
 /turf/floor/proc/break_tile_to_plating()
 	if(!is_plating())
 		make_plating()

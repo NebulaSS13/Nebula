@@ -335,9 +335,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		log_unit_test("Loaded template '[PT]' ([PT.type]) at Z-level [world.maxz] with a tallness of [PT.tallness]")
 #endif
 
-/datum/map/proc/get_network_access(var/network)
-	return 0
-
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
 	var/list/candidates = SSmapping.accessible_z_levels.Copy()
