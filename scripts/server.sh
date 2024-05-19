@@ -23,8 +23,6 @@ fi
 touch server_running
 trap "cleanup" EXIT
 
-exec 5>&1 # duplicate fd 5 to fd 1 (stdout); this allows us to echo the log during compilation, but also capture it for saving to logs in the case of a failure
-
 [[ -e stopserver ]] && rm stopserver
 while [[ ! -e stopserver ]]; do
 	MAP="$(cat use_map || echo "example")"
@@ -46,7 +44,7 @@ while [[ ! -e stopserver ]]; do
 
 	# Compile
 	echo "Compiling..."
-	DMoutput="$(./scripts/dm.sh $EXTRA_DM_SH_ARGS -M$MAP $DME.dme | tee /dev/fd/5)" # duplicate output to fd 5 (which is redirected to stdout at the top of this script)
+	DMoutput="$(./scripts/dm.sh $EXTRA_DM_SH_ARGS -M$MAP $DME.dme | tee /dev/fd/2)" # duplicate output to fd 2 for logging purposes
 	DMret=$?
 	cd - # from $GITDIR
 	if [[ $DMret != 0 ]]; then
