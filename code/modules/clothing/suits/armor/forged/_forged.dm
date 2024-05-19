@@ -1,5 +1,5 @@
 /obj/item/clothing/suit/armor/forged
-	abstract_type = /obj/item/clothing/suit/armor/forged/banded
+	abstract_type             = /obj/item/clothing/suit/armor/forged
 	icon_state                = ICON_STATE_WORLD
 	material                  = /decl/material/solid/metal/steel
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC

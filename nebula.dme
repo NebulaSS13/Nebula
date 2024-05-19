@@ -1977,6 +1977,7 @@
 #include "code\modules\clothing\shirts\flannel.dm"
 #include "code\modules\clothing\shirts\hawaii.dm"
 #include "code\modules\clothing\shirts\misc.dm"
+#include "code\modules\clothing\shirts\toga.dm"
 #include "code\modules\clothing\shirts\tunics.dm"
 #include "code\modules\clothing\shirts\ubac.dm"
 #include "code\modules\clothing\shoes\_shoes.dm"

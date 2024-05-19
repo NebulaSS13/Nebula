@@ -55,6 +55,10 @@
 	name = "braies"
 	path = /obj/item/clothing/pants/trousers/braies
 
+/decl/loadout_option/fantasy/uniform/toga
+	name = "toga"
+	path = /obj/item/clothing/shirt/toga
+
 /decl/loadout_option/fantasy/suit
 	name = "robes"
 	path = /obj/item/clothing/suit/robe
