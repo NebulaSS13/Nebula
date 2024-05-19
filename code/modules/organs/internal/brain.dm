@@ -228,9 +228,6 @@
 		set_max_damage(FLOOR(max_damage - 0.25*damage))
 	heal_damage(damage)
 
-/obj/item/organ/internal/brain/get_mechanical_assisted_descriptor()
-	return "machine-interface [name]"
-
 /obj/item/organ/internal/brain/die()
 	if(istype(_brainmob) && _brainmob.stat != DEAD)
 		_brainmob.death()

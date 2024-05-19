@@ -121,9 +121,6 @@
 		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	update_colour()
 
-/obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
-	return "retinal overlayed [name]"
-
 /obj/item/organ/internal/eyes/proc/change_eye_color_verb()
 	set name = "Change Eye Color"
 	set desc = "Changes your robotic eye color."

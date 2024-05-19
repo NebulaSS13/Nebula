@@ -56,9 +56,6 @@
 /obj/item/organ/attack_self(var/mob/user)
 	return (owner && loc == owner && owner == user)
 
-/obj/item/organ/proc/update_organ_health()
-	return
-
 /obj/item/organ/proc/is_broken()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
@@ -474,9 +471,6 @@
 //used by stethoscope
 /obj/item/organ/proc/listen()
 	return
-
-/obj/item/organ/proc/get_mechanical_assisted_descriptor()
-	return "mechanically-assisted [name]"
 
 var/global/list/ailment_reference_cache = list()
 /proc/get_ailment_reference(var/ailment_type)
