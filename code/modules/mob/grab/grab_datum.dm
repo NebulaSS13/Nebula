@@ -66,6 +66,7 @@
 
 /decl/grab/proc/upgrade(var/obj/item/grab/G)
 	if(can_upgrade(G) && upgrade_effect(G))
+		to_chat(G.assailant, SPAN_WARNING("[string_process(G, success_up)]"))
 		return upgrab
 	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_up)]"))
 
@@ -75,6 +76,7 @@
 		let_go(G)
 		return
 	if(can_downgrade(G) && downgrade_effect(G))
+		to_chat(G.assailant, SPAN_NOTICE("[string_process(G, success_down)]"))
 		return downgrab
 	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_down)]"))
 
