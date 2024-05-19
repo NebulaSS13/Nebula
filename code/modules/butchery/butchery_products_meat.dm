@@ -1,19 +1,21 @@
 /obj/item/chems/food/butchery/meat
-	name           = "slab"
-	desc           = "A slab of meat."
-	icon           = 'icons/obj/items/butchery/meat1.dmi'
-	icon_state     = ICON_STATE_WORLD
-	slice_path     = /obj/item/chems/food/butchery/cutlet/raw
-	slice_num      = 3
-	filling_color  = "#ff1c1c"
-	center_of_mass = @'{"x":16,"y":14}'
-	bitesize       = 3
-	utensil_flags  = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
-	drying_wetness = 60
-	dried_type     = /obj/item/chems/food/jerky/meat
-	nutriment_type = /decl/material/solid/organic/meat
-	nutriment_amt  = 9
-	w_class        = ITEM_SIZE_NORMAL
+	name                           = "slab"
+	desc                           = "A slab of meat."
+	icon                           = 'icons/obj/items/butchery/meat1.dmi'
+	icon_state                     = ICON_STATE_WORLD
+	slice_path                     = /obj/item/chems/food/butchery/cutlet/raw
+	slice_num                      = 3
+	filling_color                  = "#ff1c1c"
+	center_of_mass                 = @'{"x":16,"y":14}'
+	bitesize                       = 3
+	utensil_flags                  = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
+	drying_wetness                 = 60
+	dried_type                     = /obj/item/chems/food/jerky/meat
+	nutriment_type                 = /decl/material/solid/organic/meat
+	nutriment_amt                  = 9
+	w_class                        = ITEM_SIZE_NORMAL
+	backyard_grilling_product      = /obj/item/chems/food/meatsteak/grilled
+	backyard_grilling_announcement = "sizzles as it is grilled to medium-rare."
 
 /obj/item/chems/food/butchery/meat/proc/get_meat_icons()
 	var/static/list/meat_icons = list(
