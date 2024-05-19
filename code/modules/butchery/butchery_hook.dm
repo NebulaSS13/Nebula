@@ -51,6 +51,23 @@
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [initial(name)] would be pointless."))
 	return TRUE
 
+/obj/structure/meat_hook/attackby(obj/item/W, mob/user)
+
+	if(istype(W, /obj/item/holder))
+		var/mob/victim = (locate() in W)
+		if(istype(victim) && user.try_unequip(W) && isturf(victim.loc))
+			try_spike(victim, user)
+			return TRUE
+
+	if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
+		var/mob/victim = G.get_affecting_mob()
+		if(istype(victim) && user.try_unequip(W) && isturf(victim.loc))
+			try_spike(victim, user)
+			return TRUE
+
+	return ..()
+
 /obj/structure/meat_hook/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
