@@ -50,7 +50,7 @@ while [[ ! -e stopserver ]]; do
 	DMret=$?
 	cd - # from $GITDIR
 	if [[ $DMret != 0 ]]; then
-		d="$(date '+%X %x')"
+		d="$(date '+%Y-%m-%d_%H-%M-%S')"
 		echo "Compilation failed; saving log to 'data/logs/compile_failure_$d.txt'!"
 		echo $DMoutput >> "data/logs/compile_failure_$d.txt"
 		UPDATE_FAIL=1 # this is probably fatal
