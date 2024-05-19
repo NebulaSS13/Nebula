@@ -138,11 +138,8 @@
 
 /decl/loadout_option/fantasy/utility/striker
 	name = "striker"
-	path = /obj/item/rock
-	available_materials = list(
-		/decl/material/solid/stone/flint,
-		/decl/material/solid/hematite
-	)
+	path = /obj/item/rock/flint/striker
+	available_materials = null
 
 /decl/loadout_option/fantasy/utility/knife
 	name = "knife, belt"
