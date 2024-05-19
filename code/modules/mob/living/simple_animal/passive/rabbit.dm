@@ -10,6 +10,7 @@
 	mob_size = MOB_SIZE_TINY
 	butchery_data = /decl/butchery_data/animal/rabbit
 	speak_chance = 0.5
+	holder_type = /obj/item/holder
 
 /mob/living/simple_animal/passive/rabbit/brown
 	name = "brown rabbit"
