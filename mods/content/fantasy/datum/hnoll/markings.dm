@@ -3,7 +3,7 @@
 	name = "Hnoll Rattail"
 	icon_state = "hair_rattail"
 	species_allowed = list(SPECIES_HNOLL)
-	icon = 'mods/species/fantasy/icons/hnoll/hair.dmi'
+	icon = 'mods/content/fantasy/icons/hnoll/hair.dmi'
 	color_blend = ICON_MULTIPLY
 	uid = "acc_hair_hnoll_rattail"
 
@@ -131,7 +131,7 @@
 	name = "Hnoll Sideburns"
 	icon_state = "facial_sideburns"
 	species_allowed = list(SPECIES_HNOLL)
-	icon = 'mods/species/fantasy/icons/hnoll/facial.dmi'
+	icon = 'mods/content/fantasy/icons/hnoll/facial.dmi'
 	color_blend = ICON_MULTIPLY
 	uid = "acc_fhair_hnoll_sideburns"
 
@@ -163,7 +163,7 @@
 /decl/sprite_accessory/marking/hnoll
 	name = "Hnoll Nose"
 	icon_state = "nose"
-	icon = 'mods/species/fantasy/icons/hnoll/markings.dmi'
+	icon = 'mods/content/fantasy/icons/hnoll/markings.dmi'
 	species_allowed = list(SPECIES_HNOLL)
 	body_parts = list(BP_HEAD)
 	color_blend = ICON_MULTIPLY

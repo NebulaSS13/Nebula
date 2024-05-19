@@ -2,12 +2,12 @@
 	name                 = "humanoid"
 	bodytype_category    = BODYTYPE_HNOLL
 	limb_blend           = ICON_MULTIPLY
-	icon_template        = 'mods/species/fantasy/icons/hnoll/template.dmi'
-	icon_base            = 'mods/species/fantasy/icons/hnoll/body.dmi'
-	icon_deformed        = 'mods/species/fantasy/icons/hnoll/deformed_body.dmi'
+	icon_template        = 'mods/content/fantasy/icons/hnoll/template.dmi'
+	icon_base            = 'mods/content/fantasy/icons/hnoll/body.dmi'
+	icon_deformed        = 'mods/content/fantasy/icons/hnoll/deformed_body.dmi'
 	bandages_icon        = 'icons/mob/bandage.dmi'
-	eye_icon             = 'mods/species/fantasy/icons/hnoll/eyes.dmi'
-	cosmetics_icon       = 'mods/species/fantasy/icons/hnoll/cosmetics.dmi'
+	eye_icon             = 'mods/content/fantasy/icons/hnoll/eyes.dmi'
+	cosmetics_icon       = 'mods/content/fantasy/icons/hnoll/cosmetics.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag        = BODY_FLAG_HNOLL
 	appearance_flags     = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
