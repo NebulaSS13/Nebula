@@ -39,8 +39,8 @@
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	var/modifier = owner?.get_overlay_state_modifier()
 	var/eye_state = modifier ? "eyes[modifier]" : "eyes"
-	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]-[eye_state]"
 	last_cached_eye_colour = eye_colour
+	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]-[eye_state]"
 	if(!bodytype.eye_icon)
 		return
 	if(!global.eye_icon_cache[last_eye_cache_key])

@@ -1108,6 +1108,7 @@
 #include "code\game\objects\items\umbrella.dm"
 #include "code\game\objects\items\waterskin.dm"
 #include "code\game\objects\items\blades\_blade.dm"
+#include "code\game\objects\items\blades\folding.dm"
 #include "code\game\objects\items\blades\knife.dm"
 #include "code\game\objects\items\blades\one_handed.dm"
 #include "code\game\objects\items\blades\two_handed.dm"

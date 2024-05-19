@@ -20,7 +20,7 @@
 	suit =    /obj/item/clothing/suit/wizrobe/psypurple
 	shoes =   /obj/item/clothing/shoes/jackboots
 	back =    /obj/item/backpack/satchel
-	gloves =  /obj/item/clothing/gloves/color/grey
+	gloves =  /obj/item/clothing/gloves/grey
 	id_type = /obj/item/card/id/syndicate
 
 /decl/special_role/paramount/equip_role(var/mob/living/carbon/human/player)

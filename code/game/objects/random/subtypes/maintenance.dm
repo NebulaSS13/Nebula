@@ -171,7 +171,7 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/backpack/medic                           =   5,
 		/obj/item/backpack/satchel/med                     =   5,
 		/obj/item/backpack/messenger/med                   =   5,
-		/obj/item/clothing/gloves/color/white              =   5,
+		/obj/item/clothing/gloves                          =   5,
 		/obj/item/clothing/suit/toggle/labcoat             =   4,
 		/obj/item/clothing/shoes/color/white               =   3,
 		/obj/item/backpack/dufflebag/med                   =   3,

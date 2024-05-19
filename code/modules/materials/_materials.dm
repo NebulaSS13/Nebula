@@ -995,7 +995,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// If it's not ignitable but can be boiled, consider vaporizing it.
 	if(!isnull(boiling_point) && burn_temperature >= boiling_point)
-		. = list(type = amount)
+		LAZYSET(., type, amount)
 
 /decl/material/proc/get_reagent_name(datum/reagents/holder)
 	if(istype(holder) && holder.reagent_data)

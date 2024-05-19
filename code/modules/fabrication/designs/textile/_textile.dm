@@ -100,16 +100,16 @@
 
 /datum/fabricator_recipe/textiles/glove
 	category = "Gloves"
-	path = /obj/item/clothing/gloves/color/white
+	path = /obj/item/clothing/gloves
 
 /datum/fabricator_recipe/textiles/glove/blackglove
-	path = /obj/item/clothing/gloves/color/black
+	path = /obj/item/clothing/gloves/black
 
 /datum/fabricator_recipe/textiles/glove/blackglove
 	path = /obj/item/clothing/gloves/rainbow
 
 /datum/fabricator_recipe/textiles/glove/glovesevening
-	path = /obj/item/clothing/gloves/color/evening
+	path = /obj/item/clothing/gloves/evening
 
 /datum/fabricator_recipe/textiles/glove/glovesbadswat
 	path = /obj/item/clothing/gloves/thick/swat

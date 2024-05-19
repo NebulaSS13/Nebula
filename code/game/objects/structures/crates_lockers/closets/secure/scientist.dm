@@ -73,7 +73,7 @@
 		/obj/item/clothing/suit/jacket/bomber,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/shoes/color/black,
-		/obj/item/clothing/gloves/color/black,
+		/obj/item/clothing/gloves/black,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/flashlight,
 		/obj/item/chems/food/liquidfood,

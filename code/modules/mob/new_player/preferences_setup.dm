@@ -42,7 +42,7 @@
 		if(istype(descriptor))
 			appearance_descriptors[descriptor.name] = descriptor.randomize_value()
 
-	var/list/all_backpacks = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+	var/list/all_backpacks = global.using_map.get_available_backpacks()
 	backpack = all_backpacks[pick(all_backpacks)]
 	blood_type = pickweight(current_species.blood_types)
 	if(H)

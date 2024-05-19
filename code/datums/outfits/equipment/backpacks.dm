@@ -39,6 +39,10 @@
 	path = /obj/item/backpack/satchel/pocketbook
 	flags = BACKPACK_HAS_TYPE_SELECTION
 
+/decl/backpack_outfit/sack
+	name = "Sack"
+	path = /obj/item/bag/sack
+
 /* Code */
 /decl/backpack_outfit
 	var/flags
@@ -176,7 +180,7 @@
 * Helpers *
 **********/
 /proc/get_default_outfit_backpack()
-	var backpacks = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+	var backpacks = global.using_map.get_available_backpacks()
 	for(var/backpack in backpacks)
 		var/decl/backpack_outfit/bo = backpacks[backpack]
 		if(bo.is_default)

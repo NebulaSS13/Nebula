@@ -49,11 +49,17 @@
 
 /obj/structure/door/update_connections(var/propagate = FALSE)
 	. = ..()
-	if(propagate && isturf(loc))
+	if(isturf(loc))
+
+		if(propagate)
+			for(var/turf/wall/W in RANGE_TURFS(loc, 1))
+				W.wall_connections = null
+				W.other_connections = null
+				W.queue_icon_update()
+
 		for(var/turf/wall/W in RANGE_TURFS(loc, 1))
-			W.wall_connections = null
-			W.other_connections = null
-			W.queue_icon_update()
+			set_dir(turn(get_dir(loc, W), 90))
+			break
 
 /obj/structure/door/get_material_health_modifier()
 	. = 10

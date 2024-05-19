@@ -203,13 +203,13 @@
 	return ..()
 
 // Gloves
-/obj/item/clothing/gloves/color/white/quantum
+/obj/item/clothing/gloves/quantum
 	name = "quantum mechanic's gloves"
 	desc = "A pair of modified gloves. The letter 'Ω' is stamped on the side."
 	siemens_coefficient = 0
 	permeability_coefficient = 0
 
-/obj/item/clothing/gloves/color/white/quantum/attack_hand(mob/user)
+/obj/item/clothing/gloves/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 

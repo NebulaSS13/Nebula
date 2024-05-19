@@ -19,6 +19,9 @@
 	)
 	return tool_qualities
 
+/obj/item/tool/shovel/wood
+	material = /decl/material/solid/organic/wood
+
 /obj/item/tool/spade
 	name                = "spade"
 	desc                = "A small tool for digging and moving dirt."

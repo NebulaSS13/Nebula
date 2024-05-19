@@ -34,21 +34,21 @@
 
 	available_cultural_info = list(
 		TAG_HOMEWORLD = list(
-			/decl/cultural_info/location/crux,
-			/decl/cultural_info/location/crux/mountains,
-			/decl/cultural_info/location/crux/steppe,
-			/decl/cultural_info/location/crux/woods,
+			/decl/cultural_info/location/fantasy,
+			/decl/cultural_info/location/fantasy/mountains,
+			/decl/cultural_info/location/fantasy/steppe,
+			/decl/cultural_info/location/fantasy/woods,
 			/decl/cultural_info/location/other
 		),
 		TAG_FACTION =   list(
-			/decl/cultural_info/faction/crux,
+			/decl/cultural_info/faction/fantasy,
 			/decl/cultural_info/faction/other
 		),
 		TAG_CULTURE =   list(
-			/decl/cultural_info/culture/crux,
-			/decl/cultural_info/culture/crux/steppe,
-			/decl/cultural_info/culture/crux/hnoll,
-			/decl/cultural_info/culture/crux/hnoll/aegis,
+			/decl/cultural_info/culture/fantasy,
+			/decl/cultural_info/culture/fantasy/steppe,
+			/decl/cultural_info/culture/fantasy/hnoll,
+			/decl/cultural_info/culture/fantasy/hnoll/aegis,
 			/decl/cultural_info/culture/other
 		),
 		TAG_RELIGION =  list(
