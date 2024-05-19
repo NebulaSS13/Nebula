@@ -66,10 +66,6 @@
 	var/datum/xenoarch_engraving_flavor/engraving_generator = /datum/xenoarch_engraving_flavor
 
 	// *** Ambient Lighting ***
-	//#TODO: Make it so this is handled in a subsystem or something?
-	// Day/night cycle tracking.
-	var/starts_at_night = FALSE
-	///How often do we change day and night. Null means it will stay either night or day forever.
 	/// ID used for registering/deregistering with a daycycle.
 	var/daycycle_id = "daycycle_solars"
 	/// Type of daycycle to use.

@@ -7,7 +7,6 @@
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	material = /decl/material/solid/sand
 	is_fundament_turf = TRUE
-	var/detail_decal
 
 /turf/floor/natural/seafloor/get_plant_growth_rate()
 	return 0.8

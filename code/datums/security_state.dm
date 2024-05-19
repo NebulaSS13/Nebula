@@ -144,9 +144,6 @@
 	var/light_color_class
 	var/light_color_status_display
 
-	var/overlay_alarm
-	var/overlay_status_display
-
 	var/up_description
 	var/down_description
 

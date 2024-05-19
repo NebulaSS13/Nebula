@@ -13,7 +13,6 @@
 	var/changing_state = FALSE
 	var/icon_base
 	var/door_sound_volume = 25
-	var/connections = 0
 
 /obj/structure/door/Initialize()
 	..()
