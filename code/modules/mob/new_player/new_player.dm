@@ -17,6 +17,7 @@
 	var/totalPlayers = 0
 	var/totalPlayersReady = 0
 	var/show_invalid_jobs = 0
+	var/decl/music_track/current_lobby_track
 	var/datum/browser/panel
 
 INITIALIZE_IMMEDIATE(/mob/new_player)
@@ -463,8 +464,9 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	if(get_preference_value(/datum/client_preference/play_lobby_music) == PREF_NO)
 		return
-	var/decl/music_track/new_track = global.using_map.get_lobby_track(global.using_map.lobby_track.type)
+	var/decl/music_track/new_track = global.using_map.get_lobby_track(current_lobby_track || global.using_map.lobby_track.type)
 	if(new_track)
+		current_lobby_track = new_track
 		new_track.play_to(src)
 
 /mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
