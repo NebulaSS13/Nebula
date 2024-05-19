@@ -446,7 +446,7 @@
 /* Uncomment when 515 is the minimum version.
 #define MATERIAL_FIREPLACE(material_name) \
 /obj/structure/fire_source/fireplace/##material_name { \
-	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	color = /decl/material/solid/stone/##material_name::color; \
 	material = /decl/material/solid/stone/##material_name; \
 }
 */

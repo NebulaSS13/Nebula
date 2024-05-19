@@ -226,7 +226,7 @@
 	// Early checks to avoid letting recipes make themselves.
 	if(ispath(result_type, /obj/item/stack))
 		var/obj/item/stack/result_ref = result_type
-		if(stack_type == TYPE_INITIAL(result_ref, crafting_stack_type))
+		if(stack_type == result_ref::crafting_stack_type)
 			return FALSE
 
 	if(required_reinforce_material == MATERIAL_FORBIDDEN && reinf_mat)
@@ -403,4 +403,4 @@
 	. = time
 	if(isnull(time))
 		var/obj/result = result_type
-		. = max(0.5 SECONDS, round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(TYPE_INITIAL(result, w_class)) + CRAFT_TIME_DIFFICULTY(get_skill_difficulty(mat, reinf_mat)), 0.5 SECONDS))
+		. = max(0.5 SECONDS, round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(result::w_class) + CRAFT_TIME_DIFFICULTY(get_skill_difficulty(mat, reinf_mat)), 0.5 SECONDS))
