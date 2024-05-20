@@ -962,7 +962,9 @@
 "dp" = (
 /obj/structure/closet,
 /obj/random/glasses,
-/obj/item/clothing/under/blazer,
+/obj/item/clothing/shirt/button,
+/obj/item/clothing/neck/tie/navy,
+/obj/item/clothing/suit/jacket/blazer,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "dq" = (

@@ -3827,7 +3827,7 @@
 "gM" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/craftable,
-/obj/item/clothing/under/blazer,
+/obj/item/clothing/pants/slacks/red,
 /obj/item/clothing/under/lawyer,
 /obj/item/clothing/pants/slacks/black/outfit/navy,
 /obj/random/handgun,

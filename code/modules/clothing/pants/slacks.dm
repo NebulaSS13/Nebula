@@ -38,6 +38,13 @@
 	desc = "Crisp red slacks. Moderately formal."
 	icon = 'icons/clothing/pants/slacks_red.dmi'
 
+/obj/item/clothing/pants/slacks/red/blazer_outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/neck/tie/navy,
+		/obj/item/clothing/suit/jacket/blazer
+	)
+
 /obj/item/clothing/pants/slacks/red/outfit
 	starting_accessories = list(
 		/obj/item/clothing/shirt/button,

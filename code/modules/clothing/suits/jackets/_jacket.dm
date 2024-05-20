@@ -56,3 +56,8 @@
 	name = "checkered suit jacket"
 	desc = "A lucky suit jacket."
 	icon = 'icons/clothing/suits/jackets/checkered.dmi'
+
+/obj/item/clothing/suit/jacket/blazer
+	name = "blue blazer"
+	desc = "A bold yet conservative navy blazer."
+	icon = 'icons/clothing/suits/jackets/blazer.dmi'

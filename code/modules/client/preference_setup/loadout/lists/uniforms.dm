@@ -63,8 +63,7 @@
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/scratch,
-		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/under/blazer
+		/obj/item/clothing/under/lawyer/bluesuit
 	)
 
 /decl/loadout_option/uniform/dress_selection

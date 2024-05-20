@@ -70,11 +70,6 @@
 	desc = "The very image of a working man. Not that you're probably doing work."
 	icon = 'icons/clothing/uniform_mechanic.dmi'
 
-/obj/item/clothing/under/blazer
-	name = "blue blazer"
-	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie."
-	icon = 'icons/clothing/blazer.dmi'
-
 /obj/item/clothing/jumpsuit/psych/turtleneck/sweater
 	name = "sweater"
 	desc = "A warm looking sweater and a pair of dark blue slacks."
