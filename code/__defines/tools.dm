@@ -55,6 +55,9 @@
 #define IS_PEN(A)         IS_TOOL(A, TOOL_PEN)
 #define IS_PICK(A)        IS_TOOL(A, TOOL_PICK)
 
+#define IS_HEMOSTAT(A)    IS_TOOL(A, TOOL_HEMOSTAT)
+#define IS_RETRACTOR(A)   IS_TOOL(A, TOOL_RETRACTOR)
+
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)
 #define TOOL_INTERACTION_DECONSTRUCT BITFLAG(1)

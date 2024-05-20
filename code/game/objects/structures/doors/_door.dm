@@ -44,9 +44,9 @@
 
 /obj/structure/door/get_blend_objects()
 	var/static/list/blend_objects = list(
-		/obj/structure/wall_frame, 
-		/obj/structure/window, 
-		/obj/structure/grille, 
+		/obj/structure/wall_frame,
+		/obj/structure/window,
+		/obj/structure/grille,
 		/obj/machinery/door
 	)
 	return blend_objects
@@ -173,9 +173,13 @@
 /obj/structure/door/CanFluidPass(coming_from)
 	return !density
 
-/obj/structure/door/Bumped(atom/AM)
-	if(!density || changing_state)
+/obj/structure/door/Bumped(atom/movable/AM)
+	if(!density || changing_state || !istype(AM))
 		return
+
+	if(AM.get_object_size() <= MOB_SIZE_SMALL)
+		return
+
 	if(ismob(AM))
 		var/mob/M = AM
 		if(M.restrained() || issmall(M))

@@ -67,7 +67,7 @@
 	if(.)
 		user.visible_message("<span class='danger'>\The [user]'s eyes flare with light!</span>")
 
-		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 		var/user_rank = psi?.get_rank(faculty)
 		var/obj/item/projectile/pew
 		var/pew_sound

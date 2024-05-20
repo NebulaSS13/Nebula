@@ -51,7 +51,9 @@ var/global/list/limb_icon_cache = list()
 	return ..()
 
 /obj/item/organ/external/proc/update_limb_icon_file()
-	if(!BP_IS_PROSTHETIC(src) && (status & ORGAN_MUTATED))
+	if(!bodytype) // This should not happen.
+		icon = initial(icon)
+	else if(!BP_IS_PROSTHETIC(src) && (status & ORGAN_MUTATED))
 		icon = bodytype.get_base_icon(owner, get_deform = TRUE)
 	else if(owner && (limb_flags & ORGAN_FLAG_SKELETAL))
 		icon = bodytype.get_skeletal_icon(owner)
@@ -100,7 +102,7 @@ var/global/list/organ_icon_cache = list()
 				LAZYADD(., accessory_image)
 
 /obj/item/organ/external/proc/get_icon_cache_key_components()
-	. = list("[icon_state]_[species.name]_[bodytype.name]_[render_alpha]_[icon]")
+	. = list("[icon_state]_[species.name]_[bodytype?.name || "BAD_BODYTYPE"]_[render_alpha]_[icon]")
 	if(status & ORGAN_DEAD)
 		. += "_dead"
 	. += "_tone_[skin_tone]_color_[skin_colour]_[skin_blend]"
@@ -253,6 +255,9 @@ var/global/list/organ_icon_cache = list()
 
 /obj/item/organ/external/on_update_icon()
 	. = ..()
+
+	if(!istext(organ_tag)) // how?? this happened on Scav in relation to runtimes in update_limb_icon_file() so might be unneeded with that fixed
+		return
 
 	// Update our cache key and refresh or create our base icon.
 	update_limb_icon_file()

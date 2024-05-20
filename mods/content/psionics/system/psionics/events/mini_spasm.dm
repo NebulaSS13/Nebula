@@ -41,7 +41,7 @@
 		if(disabilities.len)
 			victim.disabilities |= pick(disabilities)
 
-	var/datum/ability_handler/psionics/psi = victim.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	var/datum/ability_handler/psionics/psi = victim.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
 		to_chat(victim, SPAN_DANGER("A hauntingly familiar sound hisses from [html_icon(source)] \the [source], and your vision flickers!"))
 		psi.backblast(rand(5,15))
@@ -57,7 +57,7 @@
 			victim.adjustBrainLoss(rand(10,20))
 			victim.set_psi_rank(pick_n_take(faculties), 1)
 			sleep(30)
-		psi = victim.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		psi = victim.get_ability_handler(/datum/ability_handler/psionics)
 		psi?.update()
 	sleep(45)
 	psi?.check_latency_trigger(100, "a psionic scream", redactive = TRUE)

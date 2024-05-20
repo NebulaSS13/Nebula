@@ -32,7 +32,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 		user.visible_message(SPAN_DANGER("\The [user] suddenly throws back their head, as though screaming silently!"))
 		to_chat(user, SPAN_DANGER("You strike at all around you with a deafening psionic scream!"))
 		for(var/mob/living/M in orange(user, psi?.get_rank(PSI_COERCION)))
@@ -210,7 +210,7 @@
 		to_chat(user, SPAN_NOTICE("You insinuate your mentality into that of \the [target]..."))
 		to_chat(target, SPAN_WARNING("Your persona is being probed by the psychic lens of \the [user]."))
 		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
-			var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+			var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 			psi?.backblast(rand(5,10))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You retreat from \the [target], holding your new knowledge close."))
@@ -231,7 +231,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
 		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments.."))
 		to_chat(target, SPAN_WARNING("Your mind is being cleansed of ailments by \the [user]."))

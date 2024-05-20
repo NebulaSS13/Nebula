@@ -3,7 +3,7 @@
  */
 /obj/item/storage/box/fancy/vials
 	icon = 'icons/obj/vialbox.dmi'
-	icon_state = "vialbox0"
+	icon_state = "vialbox"
 	name = "vial storage box"
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_TINY

@@ -46,28 +46,33 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 /mob/living/attackby(obj/item/I, mob/user)
 	if(!ismob(user))
-		return 0
+		return TRUE
 	if(can_operate(src,user) != OPERATE_DENY && I.do_surgery(src,user)) //Surgery
-		return 1
+		return TRUE
 	return I.attack(src, user, user.get_target_zone() || ran_zone())
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	var/user_zone_sel = user.get_target_zone()
-	if(user == src && user_zone_sel == BP_MOUTH && can_devour(I, silent = TRUE))
+
+	. = ..()
+	if(.)
+		if(user.a_intent != I_HELP)
+			return
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.get_target_zone())
+		if(!E)
+			return
+		for(var/datum/ailment/ailment in E.ailments)
+			if(ailment.treated_by_item(I))
+				ailment.was_treated_by_item(I, user, src)
+				return
+
+	else if(user == src && user.get_target_zone() == BP_MOUTH && can_devour(I, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
 			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
-			return TRUE
-		if(devour(I))
-			return TRUE
-	if(user.a_intent == I_HELP)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user_zone_sel)
-		if(E)
-			for(var/datum/ailment/ailment in E.ailments)
-				if(ailment.treated_by_item(I))
-					ailment.was_treated_by_item(I, user, src)
-					return TRUE
-	return ..()
+		else
+			devour(I)
+		return TRUE
+
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.

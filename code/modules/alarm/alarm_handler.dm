@@ -3,10 +3,14 @@
 
 /datum/alarm_handler
 	var/category = ""
-	var/list/datum/alarm/alarms = new		// All alarms, to handle cases when an origin has been deleted with one or more active alarms
-	var/list/datum/alarm/alarms_assoc = new	// Associative list of alarms, to efficiently acquire them based on origin.
-	var/list/datum/alarm/alarms_by_z = new	// Associative list of alarms based on origin z level
-	var/list/listeners = new				// A list of all objects interested in alarm changes.
+	/// All alarms, to handle cases when an origin has been deleted with one or more active alarms
+	var/list/datum/alarm/alarms       = list()
+	/// Associative list of alarms, to efficiently acquire them based on origin.
+	var/list/datum/alarm/alarms_assoc = list()
+	/// Associative list of alarms based on origin z level
+	var/list/datum/alarm/alarms_by_z  = list()
+	/// A list of all objects interested in alarm changes.
+	var/list/listeners                = list()
 
 /datum/alarm_handler/proc/process()
 	for(var/datum/alarm/A in alarms)
@@ -54,7 +58,9 @@
 	if(z_level)
 		. = list()
 		for(var/z in SSmapping.get_connected_levels(z_level))
-			. += alarms_by_z[num2text(z)] || list()
+			var/alarms = alarms_by_z[num2text(z)]
+			if(length(alarms))
+				. |= alarms
 	else
 		return alarms
 
@@ -76,7 +82,9 @@
 	if ((alarm.end_time && world.time > alarm.end_time) || !alarm.sources.len)
 		alarms -= alarm
 		alarms_assoc -= alarm.origin
-		alarms_by_z["[alarm.alarm_z()]"] -= alarm
+		var/alarm_key = "[alarm.alarm_z()]"
+		if(islist(alarms_by_z[alarm_key]))
+			alarms_by_z[alarm_key] -= alarm
 		on_alarm_change(alarm, ALARM_CLEARED)
 		return 1
 	return 0
