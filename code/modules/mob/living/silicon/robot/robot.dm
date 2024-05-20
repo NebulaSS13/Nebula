@@ -1127,3 +1127,9 @@
 		/decl/emote/audible/synth/security/halt
 	)
 	return default_emotes
+
+/mob/living/silicon/robot/check_grab_hand()
+	if(locate(/obj/item/grab) in contents)
+		to_chat(src, SPAN_WARNING("You have already grabbed something!"))
+		return FALSE
+	return TRUE
