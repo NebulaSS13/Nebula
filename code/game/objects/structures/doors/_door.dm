@@ -165,9 +165,13 @@
 /obj/structure/door/CanFluidPass(coming_from)
 	return !density
 
-/obj/structure/door/Bumped(atom/AM)
-	if(!density || changing_state)
+/obj/structure/door/Bumped(atom/movable/AM)
+	if(!density || changing_state || !istype(AM))
 		return
+
+	if(AM.get_object_size() <= MOB_SIZE_SMALL)
+		return
+
 	if(ismob(AM))
 		var/mob/M = AM
 		if(M.restrained() || issmall(M))

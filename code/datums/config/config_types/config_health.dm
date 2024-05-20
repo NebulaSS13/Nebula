@@ -17,17 +17,17 @@
 /decl/config/toggle/health_adjust_healing_from_stress
 	uid = "adjust_healing_from_stress"
 	config_flags = CONFIG_FLAG_BOOL
-	desc = "Uncomment to allow stressors to impact shock, healing and blood recovery."
+	desc = "Determines if allow stressors should impact shock, healing and blood recovery."
 
 /decl/config/toggle/health_show_human_death_message
 	uid = "show_human_death_message"
 	config_flags = CONFIG_FLAG_BOOL
-	desc = "Uncomment this line to enable humans showing a visible message upon death ('X seizes up then falls limp, eyes dead and lifeless')."
+	desc = "Determines if humans should show a visible message upon death ('X seizes up then falls limp, eyes dead and lifeless')."
 
 /decl/config/toggle/health_organs_decay
 	uid = "organs_decay"
 	config_flags = CONFIG_FLAG_BOOL
-	desc = "Uncomment to enable organ decay outside of a body or storage item."
+	desc = "Determines if organs should decay outside of a body or storage item."
 
 /decl/config/toggle/on/health_bones_can_break
 	uid = "bones_can_break"

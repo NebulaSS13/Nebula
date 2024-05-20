@@ -61,6 +61,9 @@
 #define IS_HAMMER(A)      IS_TOOL(A, TOOL_HAMMER)
 #define IS_HOE(A)         IS_TOOL(A, TOOL_HOE)
 
+#define IS_HEMOSTAT(A)    IS_TOOL(A, TOOL_HEMOSTAT)
+#define IS_RETRACTOR(A)   IS_TOOL(A, TOOL_RETRACTOR)
+
 // Structure interaction flags
 #define TOOL_INTERACTION_NONE        0
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)

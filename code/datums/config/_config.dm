@@ -116,14 +116,15 @@
 	SHOULD_CALL_PARENT(TRUE)
 	return
 
-/decl/config/proc/get_config_file_text()
-	. = list()
+/decl/config/proc/get_comment_desc_text()
 	if(desc)
 		if(islist(desc))
 			for(var/config_line in desc)
-				. += "## [config_line]"
+				LAZYADD(., "## [config_line]")
 		else
-			. += "## [desc]"
+			LAZYADD(., "## [desc]")
+
+/decl/config/proc/get_comment_value_text()
 	if(config_flags & CONFIG_FLAG_HAS_VALUE)
 		if(compare_values(value, default_value))
 			. += "#[uppertext(uid)] [serialize_default_value()]"
@@ -133,6 +134,19 @@
 		. += uppertext(uid)
 	else
 		. += "#[uppertext(uid)]"
+
+/decl/config/proc/get_config_file_text()
+
+	. = list()
+
+	var/add_desc = get_comment_desc_text()
+	if(!isnull(add_desc))
+		. += add_desc
+
+	var/add_value = get_comment_value_text()
+	if(!isnull(add_value))
+		. += add_value
+
 	return jointext(., "\n")
 
 /decl/config/proc/serialize_value()

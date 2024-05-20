@@ -12,8 +12,13 @@
 		return
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	var/current_rank = psi?.get_rank(faculty)
+	if(!current_rank && !rank)
+		return
 	if(current_rank != rank && (!take_larger || current_rank < rank))
-		psi.set_rank(faculty, rank, defer_update, temporary)
+		if(!psi && rank)
+			psi = get_ability_handler(/datum/ability_handler/psionics, TRUE)
+		if(psi)
+			psi.set_rank(faculty, rank, defer_update, temporary)
 
 /mob/living/proc/deflect_psionic_attack(var/attacker)
 	var/blocked = 100 * get_blocked_ratio(null, PSIONIC)

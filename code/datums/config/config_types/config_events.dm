@@ -14,14 +14,11 @@
 	uid = "objectives_disabled"
 	default_value = CONFIG_OBJECTIVE_NONE
 	desc = "Determines if objectives are disabled."
-
-/decl/config/enum/objectives_disabled/get_enum_map()
-	var/static/list/obj_enum_map = list(
+	enum_map = list(
 		"none" = CONFIG_OBJECTIVE_NONE,
 		"verb" = CONFIG_OBJECTIVE_VERB,
 		"all"  = CONFIG_OBJECTIVE_ALL
 	)
-	return obj_enum_map
 
 // No custom time, no custom time, between 80 to 100 minutes respectively.
 /decl/config/lists/event_first_run

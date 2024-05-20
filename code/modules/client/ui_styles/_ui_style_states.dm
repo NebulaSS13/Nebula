@@ -135,7 +135,6 @@ var/global/list/_ui_expected_states
 			"uphint1"
 		),
 		UI_ICON_ZONE_SELECT = list(
-			"zone_sel",
 			"zone_sel_tail"
 		),
 		UI_ICON_CHARGE = list(

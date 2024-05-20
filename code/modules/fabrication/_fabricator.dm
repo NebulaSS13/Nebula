@@ -52,6 +52,9 @@
 
 	var/species_variation = /decl/species/human // If this fabricator is a variant for a specific species, this will be checked to unlock species-specific designs.
 
+	// If TRUE, will accept atoms with contents.
+	var/ignore_input_contents_length = FALSE
+
 	// If TRUE, fills fabricator with material on initalize
 	var/prefilled = FALSE
 

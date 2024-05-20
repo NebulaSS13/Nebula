@@ -7,6 +7,11 @@
 	color_blend = ICON_MULTIPLY
 	uid = "acc_hair_avian_plumage"
 
+/decl/sprite_accessory/hair/avian/get_hidden_substitute()
+	if(accessory_flags & VERY_SHORT)
+		return src
+	return GET_DECL(/decl/sprite_accessory/hair/bald)
+
 /decl/sprite_accessory/hair/avian/mohawk
 	name = "Avian Mohawk"
 	icon_state = "avian_mohawk"
