@@ -10,8 +10,7 @@
 	origin_tech = @'{"esoteric":2}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
-		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE,
-		/decl/material/liquid/anfo = MATTER_AMOUNT_REINFORCEMENT, //#TODO: Slap RDX in here
+		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE
 	)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
