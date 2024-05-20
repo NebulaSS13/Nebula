@@ -12,7 +12,7 @@
 /decl/hierarchy/outfit/job/tradeship/hand/pre_equip(mob/living/carbon/human/H)
 	..()
 	uniform = pick(list(
-		/obj/item/clothing/under/overalls,
+		/obj/item/clothing/pants/mustard/overalls,
 		/obj/item/clothing/jumpsuit/hazard,
 		/obj/item/clothing/jumpsuit/cargotech,
 		/obj/item/clothing/jumpsuit/black,

@@ -7,3 +7,8 @@
 	name = "tan dress shirt"
 	desc = "A crisply pressed tan button-up shirt. Somewhat formal."
 	icon = 'icons/clothing/shirts/button_up_tan.dmi'
+
+/obj/item/clothing/shirt/button/blue
+	name = "blue dress shirt"
+	desc = "A crisply pressed blue button-up shirt. Tidy."
+	icon = 'icons/clothing/shirts/button_up_blue.dmi'

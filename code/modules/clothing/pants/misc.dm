@@ -12,3 +12,15 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	accessory_slot = ACCESSORY_SLOT_DECOR
+
+
+/obj/item/clothing/pants/mustard
+	name = "mustard pants"
+	desc = "A pair of mustard-yellow pants."
+	icon = 'icons/clothing/under/pants/pants_mustard.dmi'
+
+/obj/item/clothing/pants/mustard/overalls
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button/blue,
+		/obj/item/clothing/suit/apron/overalls/laborer
+	)

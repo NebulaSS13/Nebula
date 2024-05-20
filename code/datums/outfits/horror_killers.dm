@@ -17,7 +17,7 @@
 
 /decl/hierarchy/outfit/masked_killer
 	name = "Masked killer"
-	uniform = /obj/item/clothing/under/overalls
+	uniform = /obj/item/clothing/pants/mustard/overalls
 	shoes = /obj/item/clothing/shoes/color/white
 	gloves = /obj/item/clothing/gloves/latex
 	mask = /obj/item/clothing/mask/surgical
