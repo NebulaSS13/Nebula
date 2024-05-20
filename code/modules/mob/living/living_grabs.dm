@@ -1,13 +1,18 @@
-/mob/living/proc/can_grab(var/atom/movable/target, var/target_zone, var/defer_hand = FALSE)
-	if(!ismob(target) && target.anchored)
-		to_chat(src, SPAN_WARNING("\The [target] won't budge!"))
-		return FALSE
+/mob/living/proc/check_grab_hand(defer_hand)
 	if(defer_hand)
 		if(!get_empty_hand_slot())
 			to_chat(src, SPAN_WARNING("Your hands are full!"))
 			return FALSE
 	else if(get_active_hand())
 		to_chat(src, SPAN_WARNING("Your [parse_zone(get_active_held_item_slot())] is full!"))
+		return FALSE
+	return TRUE
+
+/mob/living/proc/can_grab(var/atom/movable/target, var/target_zone, var/defer_hand = FALSE)
+	if(!ismob(target) && target.anchored)
+		to_chat(src, SPAN_WARNING("\The [target] won't budge!"))
+		return FALSE
+	if(!check_grab_hand(defer_hand))
 		return FALSE
 	if(LAZYLEN(grabbed_by))
 		to_chat(src, SPAN_WARNING("You cannot start grappling while already being grappled!"))
