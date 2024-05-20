@@ -381,7 +381,7 @@ var/global/list/natural_walls = list()
 		ramp_slope_direction = null
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	return ChangeTurf(floor_type || get_base_turf_by_area(src))
+	return ChangeTurf(floor_type || get_base_turf_by_area(src), keep_air = TRUE)
 
 /turf/exterior/wall/proc/pass_geodata_to(obj/O)
 	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)
