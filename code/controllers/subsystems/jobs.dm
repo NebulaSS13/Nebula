@@ -538,13 +538,15 @@ SUBSYSTEM_DEF(jobs)
 		for(var/decl/loadout_option/G in spawn_in_storage)
 			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.name])
 
-	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title || job_title].</B></font>")
+	var/article = job.total_positions == 1 ? "the" : "a"
+	to_chat(H, "<font size = 3><B>You are [article] [alt_title || job_title].</B></font>")
 
-	if(job.description)
-		to_chat(H, SPAN_BOLD("[job.description]"))
+	var/job_description = job.get_description_blurb()
+	if(job_description)
+		to_chat(H, SPAN_BOLD("[job_description]"))
 
 	if(job.supervisors)
-		to_chat(H, "<b>As the [alt_title || job_title] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+		to_chat(H, "<b>As [article] [alt_title || job_title] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
 	if(H.has_headset_in_ears())
 		to_chat(H, "<b>To speak on your department's radio channel use [H.get_department_radio_prefix()]h. For the use of other channels, examine your headset.</b>")

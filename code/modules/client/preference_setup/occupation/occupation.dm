@@ -418,7 +418,8 @@
 			if(job.head_position)
 				dat += "You are in charge of this department."
 
-		dat += "You answer to <b>[job.supervisors]</b> normally."
+		if(job.supervisors)
+			dat += "You answer to <b>[job.supervisors]</b> normally."
 
 		if(job.allowed_branches)
 			dat += "You can be of following ranks:"
