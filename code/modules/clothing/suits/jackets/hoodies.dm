@@ -33,3 +33,14 @@
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_HEAD
 	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
+
+/obj/item/clothing/suit/jacket/hoodie/grim
+	name = "black hoodie"
+	desc = "A generic black hoodie. There's a pattern akin to splattered blood along the bottom."
+	icon = 'icons/clothing/suit/grim_hoodie.dmi'
+	hood = /obj/item/clothing/head/hoodiehood/grim
+
+/obj/item/clothing/head/hoodiehood/grim
+	name = "black hood"
+	desc = "A generic black hood."
+	icon = 'icons/clothing/head/grim_hood.dmi'

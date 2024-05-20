@@ -83,7 +83,7 @@
 		var/static/list/clothing_types = list(
 			/obj/item/clothing/shirt
 		)
-		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
+		clothing_choices = generate_chameleon_choices(clothing_types)
 
 /obj/item/clothing/shirt/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Shirt Appearance"

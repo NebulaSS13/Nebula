@@ -18,6 +18,11 @@
 	desc = "Only for those who can pull it off."
 	icon = 'icons/clothing/under/pants/pants_jeans_black.dmi'
 
+/obj/item/clothing/pants/casual/blackjeans/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/tee/black
+	)
+
 /obj/item/clothing/pants/casual/greyjeans
 	name = "grey jeans"
 	desc = "Only for those who can pull it off."

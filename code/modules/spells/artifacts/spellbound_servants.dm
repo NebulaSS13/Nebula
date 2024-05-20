@@ -186,14 +186,19 @@
 	name = "Overseer"
 	desc = "A ghost, or an imaginary friend; the Overseer is immune to space and can turn invisible at a whim, but has little offensive capabilities."
 	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can't fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
-	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform_str,
-					/obj/item/clothing/shoes/sandal/grimboots = slot_shoes_str,
-					/obj/item/contract/wizard/xray = BP_L_HAND,
-					/obj/item/contract/wizard/telepathy = BP_R_HAND)
-	spells = list(/spell/toggle_armor/overseer,
-				/spell/targeted/ethereal_jaunt,
-				/spell/invisibility,
-				/spell/targeted/revoke)
+	equipment = list(
+		/obj/item/clothing/pants/casual/blackjeans/outfit = slot_w_unifor_str,
+		/obj/item/clothing/suit/hoodie/grim               = slot_wear_suit_str,
+		/obj/item/clothing/shoes/sandal/grimboots         = slot_shoes_str,
+		/obj/item/contract/wizard/xray                    = BP_L_HAND,
+		/obj/item/contract/wizard/telepathy               = BP_R_HAND
+	)
+	spells = list(
+		/spell/toggle_armor/overseer,
+		/spell/targeted/ethereal_jaunt,
+		/spell/invisibility,
+		/spell/targeted/revoke
+	)
 
 /datum/spellbound_type/servant/overseer/equip_servant(var/mob/living/carbon/human/H)
 	..()
