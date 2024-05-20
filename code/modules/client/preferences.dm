@@ -507,3 +507,17 @@ var/global/list/time_prefs_fixed = list()
 		// Preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum).
 		SScharacter_setup.preferences_datums[client.ckey] = src
 		setup()
+
+/datum/preferences/proc/set_species(new_species)
+	species = new_species
+	sanitize_preferences()
+	var/decl/species/mob_species = get_species_decl()
+	mob_species.handle_post_species_pref_set(src)
+	var/decl/bodytype/mob_bodytype = get_bodytype_decl()
+	set_bodytype(mob_bodytype)
+
+/datum/preferences/proc/set_bodytype(new_bodytype)
+	bodytype = new_bodytype
+	sanitize_preferences()
+	var/decl/bodytype/mob_bodytype = get_bodytype_decl()
+	mob_bodytype.handle_post_bodytype_pref_set(src)

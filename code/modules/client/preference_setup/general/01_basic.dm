@@ -63,7 +63,7 @@
 	var/decl/bodytype/bodytype = S.get_bodytype_by_name(pref.bodytype)
 	if(!istype(bodytype) || !(bodytype in S.available_bodytypes))
 		bodytype = S.get_bodytype_by_pronouns(pronouns)
-		pref.bodytype = bodytype.name
+		pref.set_bodytype(bodytype.name)
 
 /datum/category_item/player_setup_item/physical/basic/content()
 
@@ -140,10 +140,9 @@
 	else if(href_list["bodytype"])
 		var/decl/bodytype/new_body = locate(href_list["bodytype"])
 		if(istype(new_body) && CanUseTopic(user) && (new_body in S.available_bodytypes))
-			pref.bodytype = new_body.name
+			pref.set_bodytype(new_body.name)
 			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
 				pref.gender = new_body.associated_gender
-		new_body.handle_post_bodytype_pref_set(pref)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["spawnpoint"])
