@@ -3,6 +3,9 @@
 	desc = "A crisply pressed white button-up shirt. Somewhat formal."
 	icon = 'icons/clothing/shirts/button_up.dmi'
 
+/obj/item/clothing/shirt/button/black
+	paint_color = COLOR_GRAY15
+
 /obj/item/clothing/shirt/button/tan
 	name = "tan dress shirt"
 	desc = "A crisply pressed tan button-up shirt. Somewhat formal."

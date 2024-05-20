@@ -22,8 +22,9 @@
 		/obj/item/clothing/head/hairflower/yellow      = 1,
 		/obj/item/clothing/head/hairflower/blue        = 1,
 		/obj/item/clothing/under/sl_suit               = 2,
-		/obj/item/clothing/under/bartender             = 2,
-		/obj/item/clothing/dress/saloon    = 1,
+		/obj/item/clothing/pants/formal/black          = 2,
+		/obj/item/clothing/shirt/button                = 2,
+		/obj/item/clothing/dress/saloon                = 1,
 		/obj/item/clothing/suit/jacket/waistcoat/black = 2,
 		/obj/item/clothing/shoes/color/black           = 2
 	)

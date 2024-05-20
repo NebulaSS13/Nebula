@@ -37,6 +37,9 @@
 	desc = "A slick suit vest."
 	icon = 'icons/clothing/accessories/clothing/vest.dmi'
 
+/obj/item/clothing/suit/jacket/vest/gray
+	color = "#818181"
+
 /obj/item/clothing/suit/jacket/vest/black
 	name = "black vest"
 	color = COLOR_GRAY15

@@ -1,5 +1,3 @@
-//Formal pants - new pants of this type go in pants.dmi
-
 /obj/item/clothing/pants/formal
 	name = "suit pants"
 	desc = "Plain suit pants."
@@ -12,10 +10,26 @@
 	desc = "Bright red pants. Overflowing with personality."
 	color = "#7f0000"
 
+/obj/item/clothing/pants/formal/gray
+	name = "gray pants"
+	desc = "Ash-gray pants."
+	color = "#707070"
+
+/obj/item/clothing/pants/formal/gray/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button/black,
+		/obj/item/clothing/suit/jacket/vest/gray
+	)
+
 /obj/item/clothing/pants/formal/black
 	name = "black pants"
 	desc = "These pants are dark, like your soul."
 	color = "#1f1f1f"
+
+/obj/item/clothing/pants/formal/black/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button
+	)
 
 /obj/item/clothing/pants/formal/tan
 	name = "tan pants"

@@ -37,11 +37,6 @@
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
 	should_display_id = FALSE
 
-/obj/item/clothing/under/gentlesuit
-	name = "gentlemans suit"
-	desc = "A silk black shirt with a white tie and a matching gray vest and slacks. Feels proper."
-	icon = 'icons/clothing/under/suits/suit_gentleman.dmi'
-
 /obj/item/clothing/under/gimmick
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
@@ -79,11 +74,6 @@
 	name = "blue blazer"
 	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie."
 	icon = 'icons/clothing/under/blazer.dmi'
-
-/obj/item/clothing/under/frontier
-	name = "frontier clothes"
-	desc = "A rugged flannel shirt and denim overalls. A popular style among frontier colonists."
-	icon = 'icons/clothing/under/frontier.dmi'
 
 /obj/item/clothing/jumpsuit/psych/turtleneck/sweater
 	name = "sweater"

@@ -159,7 +159,7 @@
 		/obj/item/clothing/jumpsuit/hazard             = 4,
 		/obj/item/clothing/jumpsuit/sterile            = 4,
 		/obj/item/clothing/pants/casual/camo           = 2,
-		/obj/item/clothing/under/frontier              = 2,
+		/obj/item/clothing/shirt/flannel/red           = 2,
 		/obj/item/clothing/shirt/harness               = 2,
 		/obj/item/clothing/jumpsuit/medical/paramedic  = 2,
 		/obj/item/clothing/suit/apron/overalls/laborer = 2,

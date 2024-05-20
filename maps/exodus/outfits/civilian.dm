@@ -4,7 +4,7 @@
 
 /decl/hierarchy/outfit/job/service/bartender
 	name = "Job - Bartender"
-	uniform = /obj/item/clothing/under/bartender
+	uniform = /obj/item/clothing/pants/formal/black/outfit
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 

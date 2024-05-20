@@ -59,7 +59,6 @@
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/under/sl_suit,
 		/obj/item/clothing/under/lawyer/blue,
-		/obj/item/clothing/under/gentlesuit,
 		/obj/item/clothing/under/lawyer/oldman,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer,
@@ -144,10 +143,6 @@
 	name = "kimono, colour select"
 	path = /obj/item/clothing/dress/kimono
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/uniform/frontier
-	name = "frontier clothes"
-	path = /obj/item/clothing/under/frontier
 
 /decl/loadout_option/uniform/nurse
 	name = "dress, nurse"
