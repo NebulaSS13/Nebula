@@ -735,7 +735,7 @@
 /area/icarus/vessel)
 "cF" = (
 /obj/structure/closet,
-/obj/item/clothing/under/harness,
+/obj/item/clothing/shirt/harness,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cG" = (

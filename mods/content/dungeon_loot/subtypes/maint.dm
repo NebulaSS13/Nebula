@@ -68,7 +68,7 @@
 		/obj/item/clothing/jumpsuit/grey,
 		/obj/item/clothing/under/syndicate/tacticool,
 		/obj/item/clothing/pants/casual/camo,
-		/obj/item/clothing/under/harness,
+		/obj/item/clothing/shirt/harness,
 		/obj/item/clothing/webbing,
 		/obj/item/cash/c1,
 		/obj/item/cash/c10,

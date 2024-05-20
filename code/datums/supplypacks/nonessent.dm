@@ -112,7 +112,7 @@
 					/obj/item/clothing/costume/kilt,
 					/obj/item/clothing/costume/savage_hunter,
 					/obj/item/clothing/costume/savage_hunter/female,
-					/obj/item/clothing/under/wetsuit)
+					/obj/item/clothing/jumpsuit/wetsuit)
 	name = "Costume - Random"
 	containername = "actor costumes crate"
 	supply_method = /decl/supply_method/randomized

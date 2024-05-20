@@ -7,3 +7,10 @@
 	name = "turtleneck sweater"
 	desc = "A stylish sweater to keep you warm on those cold days."
 	icon = 'icons/clothing/shirts/sweater.dmi'
+
+/obj/item/clothing/shirt/harness
+	name = "gear harness"
+	desc = "How minimalist."
+	icon = 'icons/clothing/under/harness.dmi'
+	bodytype_equip_flags = null
+	body_parts_covered = 0

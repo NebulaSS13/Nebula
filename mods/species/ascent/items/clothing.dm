@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/ascent
 	name         = "Ascent - Gyne"
 	mask         = /obj/item/clothing/mask/gas/ascent
-	uniform      = /obj/item/clothing/under/ascent
+	uniform      = /obj/item/clothing/jumpsuit/ascent
 	id_type      = /obj/item/card/id/ascent
 	shoes        = /obj/item/clothing/shoes/magboots/ascent
 	l_ear        = null
@@ -42,7 +42,7 @@
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/magboots/boots_gyne.dmi'
 	)
 
-/obj/item/clothing/under/ascent
+/obj/item/clothing/jumpsuit/ascent
 	name = "mantid undersuit"
 	desc = "A ribbed, spongy undersuit of some sort. It has a big sleeve for a tail, so it probably isn't for humans."
 	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE

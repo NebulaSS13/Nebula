@@ -36,11 +36,6 @@
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
 	should_display_id = FALSE
-/obj/item/clothing/under/psysuit
-	name = "dark undersuit"
-	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psionic.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 
 /obj/item/clothing/under/gentlesuit
 	name = "gentlemans suit"
@@ -85,13 +80,6 @@
 	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie."
 	icon = 'icons/clothing/under/blazer.dmi'
 
-/obj/item/clothing/under/harness
-	name = "gear harness"
-	desc = "How... minimalist."
-	icon = 'icons/clothing/under/harness.dmi'
-	bodytype_equip_flags = null
-	body_parts_covered = 0
-
 /obj/item/clothing/under/frontier
 	name = "frontier clothes"
 	desc = "A rugged flannel shirt and denim overalls. A popular style among frontier colonists."
@@ -101,9 +89,3 @@
 	name = "sweater"
 	desc = "A warm looking sweater and a pair of dark blue slacks."
 	icon = 'icons/clothing/under/uniform_turtleneck.dmi'
-
-/obj/item/clothing/under/wetsuit
-	name = "tactical wetsuit"
-	desc = "For when you want to scuba dive your way into an enemy base but still want to show off a little skin."
-	icon = 'icons/clothing/under/wetsuit.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

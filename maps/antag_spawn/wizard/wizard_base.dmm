@@ -433,7 +433,7 @@
 /area/map_template/wizard_station)
 "bh" = (
 /obj/structure/closet,
-/obj/item/clothing/under/psysuit,
+/obj/item/clothing/jumpsuit/psysuit,
 /obj/item/clothing/suit/wizrobe/psypurple,
 /turf/unsimulated/floor{
 	icon_state = "lino"
