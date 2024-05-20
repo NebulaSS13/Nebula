@@ -57,7 +57,6 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/under/sl_suit,
 		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/under/lawyer/oldman,
 		/obj/item/clothing/under/lawyer/red,

@@ -11,14 +11,3 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/clothing/under/security2
-	name = "security officer's uniform"
-	desc = "It's made of a slightly sturdier material, to allow for robust protection."
-	icon = 'icons/clothing/uniform_redshirt.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_SMALL
-		)
-	siemens_coefficient = 0.9
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
-	)

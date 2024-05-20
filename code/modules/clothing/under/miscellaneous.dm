@@ -8,11 +8,6 @@
 	desc = "A white suit, suitable for an excellent host."
 	icon = 'icons/clothing/scratch.dmi'
 
-/obj/item/clothing/under/sl_suit
-	name = "crisp suit"
-	desc = "It's a very neatly presented suit."
-	icon = 'icons/clothing/uniform_service.dmi'
-
 /obj/item/clothing/under/waiter
 	name = "waiter's outfit"
 	desc = "It's a very smart uniform with a special pocket for tips."

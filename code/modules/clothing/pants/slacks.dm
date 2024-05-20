@@ -33,6 +33,23 @@
 	desc = "Crisp blue slacks. Moderately formal."
 	icon = 'icons/clothing/pants/slacks_blue.dmi'
 
+/obj/item/clothing/pants/slacks/security
+	name = "security slacks"
+	desc = "Dark red, lightly armoured slacks. Moderately formal."
+	icon = 'icons/clothing/pants/security.dmi'
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
+		)
+	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
+
+/obj/item/clothing/pants/slacks/security/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button/security
+	)
+
 /obj/item/clothing/pants/slacks/red
 	name = "red slacks"
 	desc = "Crisp red slacks. Moderately formal."

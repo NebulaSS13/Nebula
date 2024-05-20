@@ -1962,7 +1962,6 @@
 #include "code\modules\clothing\jumpsuits\job.dm"
 #include "code\modules\clothing\jumpsuits\jumpskirt.dm"
 #include "code\modules\clothing\jumpsuits\misc.dm"
-#include "code\modules\clothing\jumpsuits\role.dm"
 #include "code\modules\clothing\masks\_mask.dm"
 #include "code\modules\clothing\masks\boxing.dm"
 #include "code\modules\clothing\masks\breath.dm"

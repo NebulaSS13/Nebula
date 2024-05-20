@@ -33,3 +33,9 @@
 	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."
 	icon = 'icons/clothing/jumpsuits/jumpsuit_psionic.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+
+/obj/item/clothing/jumpsuit/caretaker
+	name = "caretaker's jumpsuit"
+	desc = "A holy jumpsuit. Treat it well."
+	icon = 'icons/clothing/jumpsuits/caretaker.dmi'
+	bodytype_equip_flags = BODY_FLAG_HUMANOID

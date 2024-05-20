@@ -165,9 +165,6 @@
 /datum/fabricator_recipe/textiles/job/security/dispatch
 	path = /obj/item/clothing/under/dispatch
 
-/datum/fabricator_recipe/textiles/job/security/alt
-	path = /obj/item/clothing/under/security2
-
 /datum/fabricator_recipe/textiles/job/security/tacticalofficer
 	path = /obj/item/clothing/jumpsuit/tactical
 

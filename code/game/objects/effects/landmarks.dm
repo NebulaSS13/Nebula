@@ -92,7 +92,8 @@
 	new CHOICE(loc)
 	new /obj/item/clothing/shoes/color/black(loc)
 	new /obj/item/cane(loc)
-	new /obj/item/clothing/under/sl_suit(loc)
+	new /obj/item/clothing/pants/slacks/black(loc)
+	new /obj/item/clothing/shirt/button(loc)
 	new /obj/item/clothing/mask/fakemoustache(loc)
 
 /obj/abstract/landmark/costume/plaguedoctor/make_costumes()

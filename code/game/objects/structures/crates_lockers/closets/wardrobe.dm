@@ -9,10 +9,11 @@
 
 /obj/structure/closet/wardrobe/red/WillContain()
 	return list(
-		/obj/item/clothing/jumpsuit/security  = 3,
-		/obj/item/clothing/under/security2 = 3,
-		/obj/item/clothing/shoes/jackboots = 3,
-		/obj/item/clothing/head/soft/sec   = 3,
+		/obj/item/clothing/jumpsuit/security     = 3,
+		/obj/item/clothing/shirt/button/security = 3,
+		/obj/item/clothing/pants/slacks/security = 3,
+		/obj/item/clothing/shoes/jackboots       = 3,
+		/obj/item/clothing/head/soft/sec         = 3
 	)
 
 /obj/structure/closet/wardrobe/pink
@@ -298,7 +299,8 @@
 		/obj/item/clothing/shirt/button = 4,
 		/obj/item/clothing/suit/jacket/waistcoat/black,
 		/obj/item/clothing/neck/tie/long/red,
-		/obj/item/clothing/under/sl_suit,
+		/obj/item/clothing/pants/slacks/black,
+		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/neck/tie/black,
