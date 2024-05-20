@@ -894,7 +894,7 @@ The _flatIcons list is a cache for generated icon files.
 			var/turf/T = locate(target_x + x_offset, target_y + y_offset, target_z)
 			if(checker && !checker?.can_capture_turf(T))
 				continue
-			else
+			else if(T)
 				render_turfs.Add(T)
 
 	// - Collecting list of atoms to render -
