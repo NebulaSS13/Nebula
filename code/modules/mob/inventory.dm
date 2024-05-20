@@ -219,7 +219,7 @@
 	return FALSE
 
 // Drops a held item from a given slot.
-/mob/proc/drop_from_hand(var/slot, var/atom/Target)
+/mob/proc/drop_from_slot(slot_id, atom/new_loc)
 	return FALSE
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something

@@ -529,25 +529,6 @@
 		return TRUE
 	return FALSE
 
-/// Only used by Sandbox_Spacemove, which is used by nothing
-/// - TODO: Remove this
-/atom/proc/get_global_map_pos()
-	if(!islist(global.global_map) || !length(global.global_map)) return
-	var/cur_x = null
-	var/cur_y = null
-	var/list/y_arr = null
-	for(cur_x=1,cur_x<=global.global_map.len,cur_x++)
-		y_arr = global.global_map[cur_x]
-		cur_y = y_arr.Find(src.z)
-		if(cur_y)
-			break
-//	log_debug("X = [cur_x]; Y = [cur_y]")
-
-	if(cur_x && cur_y)
-		return list("x"=cur_x,"y"=cur_y)
-	else
-		return 0
-
 /**
 	Check if this atom can be passed by another given the flags provided
 

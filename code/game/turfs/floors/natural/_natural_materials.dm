@@ -20,3 +20,12 @@
 
 /turf/floor/natural/get_material()
 	return material
+
+/turf/floor/natural/get_strata_material_type()
+	//Turf strata overrides level strata
+	if(ispath(strata_override, /decl/strata))
+		var/decl/strata/S = GET_DECL(strata_override)
+		if(length(S.base_materials))
+			return pick(S.base_materials)
+	//Otherwise, just use level strata
+	return ..()

@@ -15,12 +15,12 @@
 
 /datum/action/eye/landing/finish_landing
 	name = "Set landing location"
-	procname = "finish_landing"
+	procname = TYPE_PROC_REF(/obj/machinery/computer/shuttle_control/explore, finish_landing)
 	button_icon_state = "shuttle_land"
 	target_type = HOLDER_TARGET
 
 /datum/action/eye/landing/toggle_offsetting
 	name = "Offset landing location"
-	procname = "toggle_offsetting"
+	procname = TYPE_PROC_REF(/mob/observer/eye/landing, toggle_offsetting)
 	button_icon_state = "shuttle_offset"
 	target_type = EYE_TARGET

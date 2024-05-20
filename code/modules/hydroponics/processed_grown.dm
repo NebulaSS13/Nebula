@@ -50,7 +50,7 @@
 
 /obj/item/chems/food/processed_grown/on_update_icon()
 	. = ..()
-	if(!istype(seed))
+	if(!istype(seed) || !draw_rind)
 		return
 	icon_state = get_world_inventory_state()
 	var/rind_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)

@@ -543,16 +543,6 @@
 	beam_index = pcache
 	beam_segments[beam_index] = null
 
-/obj/item/projectile/proc/return_predicted_turf_after_moves(moves, forced_Angle)		//I say predicted because there's no telling that the projectile won't change direction/location in flight.
-	if(!trajectory && isnull(forced_Angle) && isnull(Angle))
-		return FALSE
-	var/datum/point/vector/current = trajectory
-	if(!current)
-		var/turf/T = get_turf(src)
-		current = new(T.x, T.y, T.z, pixel_x, pixel_y, isnull(forced_Angle)? Angle : forced_Angle, pixel_speed)
-	var/datum/point/vector/v = current.return_vector_after_increments(moves)
-	return v.return_turf()
-
 /obj/item/projectile/proc/process_hitscan()
 	set waitfor = FALSE
 	var/safety = range * 3

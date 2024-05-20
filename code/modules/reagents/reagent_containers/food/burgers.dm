@@ -29,7 +29,6 @@
 /obj/item/chems/food/human
 	filling_color = "#d63c3c"
 	material = /decl/material/solid/organic/meat
-	var/hname = ""
 
 /obj/item/chems/food/human/burger
 	name = "-burger"

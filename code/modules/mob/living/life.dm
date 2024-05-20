@@ -131,7 +131,7 @@
 /mob/living/proc/get_thirst_factor()
 	var/decl/species/my_species = get_species()
 	if(my_species)
-		return my_species.hunger_factor
+		return my_species.thirst_factor
 	return 0
 
 // Used to handle non-datum AI.

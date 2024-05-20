@@ -188,15 +188,6 @@
 	x += mpx * multiplier
 	y += mpy * multiplier
 
-/datum/point/vector/proc/return_vector_after_increments(amount = 7, multiplier = 1, force_simulate = FALSE)
-	var/datum/point/vector/v = copy_to()
-	if(force_simulate)
-		for(var/i in 1 to amount)
-			v.increment(multiplier)
-	else
-		v.increment(multiplier * amount)
-	return v
-
 /datum/point/vector/proc/on_z_change()
 	return
 

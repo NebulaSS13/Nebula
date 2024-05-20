@@ -211,6 +211,7 @@ var/global/list/_test_storage_items = list()
 					M.show_message(SPAN_NOTICE("\The [user] puts [W] into [holder]."), VISIBLE_MESSAGE)
 		if(!skip_update)
 			update_ui_after_item_insertion()
+	holder.storage_inserted()
 	holder.update_icon()
 	return 1
 

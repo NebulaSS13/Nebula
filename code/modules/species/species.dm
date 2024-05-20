@@ -448,9 +448,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events.
 	return
 
-/decl/species/proc/handle_new_grab(var/mob/living/carbon/human/H, var/obj/item/grab/G)
-	return
-
 /decl/species/proc/handle_sleeping(var/mob/living/carbon/human/H)
 	if(prob(2) && !H.failed_last_breath && !H.isSynthetic())
 		if(!HAS_STATUS(H, STAT_PARA))
@@ -470,10 +467,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 // As above.
 /decl/species/proc/handle_logout_special(var/mob/living/carbon/human/H)
-	return
-
-// Builds the HUD using species-specific icons and usable slots.
-/decl/species/proc/build_hud(var/mob/living/carbon/human/H)
 	return
 
 /decl/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)

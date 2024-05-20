@@ -1,6 +1,3 @@
-#define DEFIB_TIME_LIMIT (8 MINUTES) //past this many seconds, defib is useless. Currently 8 Minutes
-#define DEFIB_TIME_LOSS  (2 MINUTES) //past this many seconds, brain damage occurs. Currently 2 minutes
-
 //backpack item
 /obj/item/defibrillator
 	name = "auto-resuscitator"
@@ -426,31 +423,6 @@
 
 	admin_attack_log(user, H, "Electrocuted using \a [src]", "Was electrocuted with \a [src]", "used \a [src] to electrocute")
 
-/obj/item/shockpaddles/proc/make_alive(mob/living/carbon/human/M) //This revives the mob
-	var/deadtime = world.time - M.timeofdeath
-
-	M.switch_from_dead_to_living_mob_list()
-	M.timeofdeath = 0
-	M.set_stat(UNCONSCIOUS)
-	M.try_refresh_visible_overlays()
-	M.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
-	M.reload_fullscreen()
-
-	M.emote(/decl/emote/audible/gasp)
-	SET_STATUS_MAX(M, STAT_WEAK, rand(10,25))
-	apply_brain_damage(M, deadtime)
-
-/obj/item/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H, var/deadtime)
-	if(deadtime < DEFIB_TIME_LOSS) return
-
-	if(!H.should_have_organ(BP_BRAIN)) return //no brain
-
-	var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
-	if(!brain) return //no brain
-
-	var/brain_damage = clamp((deadtime - DEFIB_TIME_LOSS)/(DEFIB_TIME_LIMIT - DEFIB_TIME_LOSS)*brain.max_damage, H.get_damage(BRAIN), brain.max_damage)
-	H.set_damage(BRAIN, brain_damage)
-
 /obj/item/shockpaddles/proc/make_announcement(var/message, var/msg_class)
 	audible_message("<b>\The [src]</b> [message]", "\The [src] vibrates slightly.")
 
@@ -611,6 +583,3 @@
 	safety = 0
 	chargetime = (1 SECONDS)
 	burn_damage_amt = 15
-
-#undef DEFIB_TIME_LIMIT
-#undef DEFIB_TIME_LOSS

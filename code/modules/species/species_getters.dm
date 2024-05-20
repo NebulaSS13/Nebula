@@ -4,12 +4,6 @@
 /decl/species/proc/get_additional_examine_text(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/proc/get_examine_name(var/mob/living/carbon/human/H)
-	return name
-
-/decl/species/proc/get_station_variant()
-	return name
-
 /decl/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
 
@@ -24,9 +18,6 @@
 
 /decl/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
 	return vision_flags
-
-/decl/species/proc/get_gender(var/mob/living/carbon/H)
-	return H?.get_gender() || NEUTER
 
 /decl/species/proc/get_surgery_overlay_icon(var/mob/living/carbon/human/H)
 	return 'icons/mob/surgery.dmi'

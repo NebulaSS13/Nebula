@@ -181,7 +181,7 @@ var/global/list/_emotes_by_key
 	if(use_emote_sound)
 		. = list(
 			"sound" = use_emote_sound,
-			"vol" =   emote_volume
+			"vol" =   check_synthetic(user) ? emote_volume_synthetic : emote_volume
 		)
 
 	var/use_broadcast_sound = broadcast_sound

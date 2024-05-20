@@ -48,7 +48,6 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	icon               = 'icons/policetape.dmi'
 	icon_state         = "tape"
 	w_class            = ITEM_SIZE_SMALL
-	var/tmp/unrolled   = 0                         //The amount of tape lenghts we've used so far while laying down a barricade
 	var/tmp/turf/start                             //The turf we started unrolling from
 	var/tmp/weakref/unroller                       //The mob currently unrolling us
 	var/decl/barricade_tape_template/tape_template //Template containing details on how the tape roll will look and behave, along with what it will place down
@@ -196,7 +195,6 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	anchored         = TRUE
 	material         = /decl/material/solid/organic/plastic
 	var/neighbors    = 0                              //Contains all the direction flags of all the neighboring tape_barricades
-	var/nb_neighbors = 0                              //Keep track of our cached neighbors number
 	var/is_lifted    = 0                              //Whether the tape is lifted and we're allowing everyone passage.
 	var/is_crumpled  = 0                              //Whether the tape was damaged
 	var/decl/barricade_tape_template/tape_template   //Details about the behavior and looks of the barricade

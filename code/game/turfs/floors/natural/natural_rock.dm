@@ -7,7 +7,7 @@
 	can_engrave = TRUE
 
 /turf/floor/natural/rock/Initialize(mapload, no_update_icon)
-	material = material || SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone
+	material = material || get_strata_material_type() || /decl/material/solid/stone/sandstone
 	. = ..()
 
 /turf/floor/natural/rock/update_from_material()

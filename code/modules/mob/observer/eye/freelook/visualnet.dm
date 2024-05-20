@@ -86,9 +86,6 @@
 		return
 	major_chunk_change(A)
 
-/datum/visualnet/proc/update_visibility_nocheck(atom/A)
-	update_visibility(A, FALSE)
-
 // Will check if an atom is on a viewable turf. Returns 1 if it is, otherwise returns 0.
 /datum/visualnet/proc/is_visible(var/atom/target)
 	// 0xf = 15

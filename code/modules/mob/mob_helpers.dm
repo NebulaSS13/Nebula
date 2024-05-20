@@ -54,9 +54,6 @@
 		return (M.sdisabilities & DEAFENED) || GET_STATUS(M, STAT_DEAF)
 	return 0
 
-/proc/hasorgans(A) // Fucking really??
-	return ishuman(A)
-
 /proc/iscuffed(var/mob/mob)
 	return ismob(mob) && !!mob.get_equipped_item(slot_handcuffed_str)
 

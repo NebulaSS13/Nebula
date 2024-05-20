@@ -102,6 +102,6 @@
 // Every eye created using a subtype of this extension will have this action added for manual unlooking.
 /datum/action/eye/unlook
 	name = "Stop looking"
-	procname = "unlook"
+	procname = TYPE_PROC_REF(/datum/extension/eye, unlook)
 	button_icon_state = "cancel"
 	target_type = EXTENSION_TARGET

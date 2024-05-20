@@ -166,7 +166,16 @@
 		target_turf.spread_deposit()
 
 /turf/wall/natural/get_default_material()
-	. = GET_DECL(SSmaterials.get_strata_material_type(src) || /decl/material/solid/stone/sandstone)
+	. = GET_DECL(get_strata_material_type() || /decl/material/solid/stone/sandstone)
 
 /turf/wall/natural/on_defilement()
 	ChangeTurf(/turf/wall/cult)
+
+/turf/wall/natural/get_strata_material_type()
+	//Turf strata overrides level strata
+	if(ispath(strata_override, /decl/strata))
+		var/decl/strata/S = GET_DECL(strata_override)
+		if(length(S.base_materials))
+			return pick(S.base_materials)
+	//Otherwise, just use level strata
+	return ..()

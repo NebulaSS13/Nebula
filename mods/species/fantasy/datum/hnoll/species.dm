@@ -21,6 +21,7 @@
 	spawn_flags         = SPECIES_CAN_JOIN
 	flesh_color         = "#ae7d32"
 	hunger_factor       = DEFAULT_HUNGER_FACTOR * 1.2
+	thirst_factor       = DEFAULT_THIRST_FACTOR * 1.2
 	gluttonous          = GLUT_TINY
 	move_trail          = /obj/effect/decal/cleanable/blood/tracks/paw
 	base_external_prosthetics_model = null
