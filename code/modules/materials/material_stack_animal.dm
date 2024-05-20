@@ -31,7 +31,7 @@
 		var/cleaned_sheets = 0
 		while(W.do_tool_interaction(TOOL_KNIFE, user, src, 2 SECONDS, "scraping", "scraping", check_skill = work_skill, set_cooldown = TRUE))
 
-			if(QDELETED(src) || get_amount() <= 0 || QDELETED(user) || (loc != user && !user.Adjacent(src)) || QDELETED(W) || user.get_active_held_item() != W)
+			if(QDELETED(src) || _cleaned || get_amount() <= 0 || QDELETED(user) || (loc != user && !user.Adjacent(src)) || QDELETED(W) || user.get_active_held_item() != W)
 				break
 
 			var/sheets = min(5, get_amount())
@@ -41,7 +41,7 @@
 				cleaned_sheets += product.get_amount()
 				product.add_to_stacks(user, TRUE)
 
-			if(QDELETED(src) || get_amount() <= 0 || QDELETED(user))
+			if(QDELETED(src) || get_amount() <= 0 || QDELETED(user) || _cleaned)
 				break
 
 		if(cleaned_sheets > 0)

@@ -135,7 +135,11 @@
 	result_type            = /obj/structure/closet/crate/chest
 
 /decl/stack_recipe/planks/furniture/meathook
+	result_type            = /obj/structure/meat_hook
+
+/decl/stack_recipe/planks/furniture/meathook/improvised
 	result_type            = /obj/structure/meat_hook/improvised
+	difficulty             = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/planks/furniture/spinning_wheel
 	result_type            = /obj/structure/textiles/spinning_wheel

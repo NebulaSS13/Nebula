@@ -18,12 +18,12 @@
 /decl/loadout_option/fantasy/get_gear_tweak_options()
 	. = ..()
 	if(length(available_materials))
-		var/list/mat_options = list()
 		for(var/mat in available_materials)
 			var/decl/material/mat_decl = GET_DECL(mat)
-			mat_options[mat_decl.name] = mat
+			available_materials -= mat
+			available_materials[mat_decl.name] = mat
 		LAZYINITLIST(.[/datum/gear_tweak/material])
-		.[/datum/gear_tweak/material] = mat_options
+		.[/datum/gear_tweak/material] = available_materials
 
 /decl/loadout_option/fantasy/uniform
 	name = "loincloth"
@@ -130,20 +130,20 @@
 /decl/loadout_option/fantasy/utility
 	abstract_type = /decl/loadout_option/fantasy/utility
 	category = /decl/loadout_category/fantasy/utility
-
-/decl/loadout_option/fantasy/utility/striker
-	name = "flint striker"
-	path = /obj/item/rock/flint
-	available_materials = null
-
-/decl/loadout_option/fantasy/utility/knife
-	name = "knife, belt"
-	path = /obj/item/bladed/knife
 	available_materials = list(
 		/decl/material/solid/metal/iron,
 		/decl/material/solid/metal/copper,
 		/decl/material/solid/metal/bronze
 	)
+
+/decl/loadout_option/fantasy/utility/striker
+	name = "striker"
+	path = /obj/item/rock/flint/striker
+	available_materials = null
+
+/decl/loadout_option/fantasy/utility/knife
+	name = "knife, belt"
+	path = /obj/item/bladed/knife
 
 /decl/loadout_option/fantasy/utility/knife/folding
 	name = "knife, folding"
@@ -156,6 +156,13 @@
 /decl/loadout_option/fantasy/utility/shovel
 	name = "shovel"
 	path = /obj/item/tool/shovel/wood
+	available_materials = list(
+		/decl/material/solid/organic/wood,
+		/decl/material/solid/organic/wood/mahogany,
+		/decl/material/solid/organic/wood/maple,
+		/decl/material/solid/organic/wood/ebony,
+		/decl/material/solid/organic/wood/walnut
+	)
 
 /decl/loadout_option/fantasy/utility/bandolier
 	name = "bandolier"

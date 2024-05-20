@@ -40,9 +40,15 @@
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
+/obj/item/chems/food/meatsteak/grilled
+	plate = null
+
+/obj/item/chems/food/meatsteak/grilled/add_seasoning()
+	return
+
 /obj/item/chems/food/meatsteak
 	name = "meat steak"
-	desc = "A piece of hot spicy meat."
+	desc = "A slab of meat, cooked medium-rare."
 	icon_state = "meatstake"
 	plate = /obj/item/plate
 	filling_color = "#7a3d11"
@@ -50,11 +56,14 @@
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
+/obj/item/chems/food/meatsteak/proc/add_seasoning()
+	add_to_reagents(/decl/material/solid/sodiumchloride, 1)
+	add_to_reagents(/decl/material/solid/blackpepper,    1)
+
 /obj/item/chems/food/meatsteak/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 4)
-	add_to_reagents(/decl/material/solid/sodiumchloride,     1)
-	add_to_reagents(/decl/material/solid/blackpepper,        1)
+	add_seasoning()
 
 /obj/item/chems/food/meatsteak/synthetic
 	name = "meaty steak"

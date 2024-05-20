@@ -51,14 +51,34 @@
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [initial(name)] would be pointless."))
 	return TRUE
 
+/obj/structure/meat_hook/grab_attack(var/obj/item/grab/G)
+	var/mob/victim = G.get_affecting_mob()
+	if(istype(victim) && isturf(victim.loc))
+		try_spike(victim, G.assailant)
+		return TRUE
+	return ..()
+
+/obj/structure/meat_hook/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/holder))
+		var/mob/victim = (locate() in W)
+		if(istype(victim) && user.try_unequip(W))
+			try_spike(victim, user, 1) // Delay to allow the holder to despawn and drop the mob in the loc.
+			return TRUE
+	return ..()
+
 /obj/structure/meat_hook/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
 		try_spike(dropping, user)
 		return TRUE
 
-/obj/structure/meat_hook/proc/try_spike(var/mob/living/target, var/mob/living/user)
-	if(!istype(target) || !Adjacent(user) || user.incapacitated() || target.anchored)
+/obj/structure/meat_hook/proc/try_spike(mob/living/target, mob/living/user, delay)
+
+	set waitfor = FALSE
+	if(delay)
+		sleep(delay)
+
+	if(!istype(target) || QDELETED(target) || !istype(user) || QDELETED(user) || !Adjacent(user) || user.incapacitated() || target.anchored || !target.Adjacent(src))
 		return
 
 	if(!anchored)
