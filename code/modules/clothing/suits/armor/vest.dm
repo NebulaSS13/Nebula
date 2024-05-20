@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/armor/vest
 	name = "armored vest"
 	desc = "An armor vest made of synthetic fibers."
-	icon = 'icons/clothing/suit/armor/vest.dmi'
+	icon = 'icons/clothing/suits/armor/vest.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,

@@ -98,7 +98,7 @@
 //starts off as a jumpsuit
 /obj/item/clothing/jumpsuit/chameleon
 	name = "jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit.dmi'
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = @'{"esoteric":3}'
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
@@ -163,7 +163,7 @@
 
 /obj/item/clothing/suit/chameleon
 	name = "armor"
-	icon = 'icons/clothing/suit/armor/vest.dmi'
+	icon = 'icons/clothing/suits/armor/vest.dmi'
 	desc = "It appears to be a vest of standard armor, except this is embedded with a hidden holographic cloaker, allowing it to change it's appearance, but offering no protection.. It seems to have a small dial inside."
 	origin_tech = @'{"esoteric":3}'
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

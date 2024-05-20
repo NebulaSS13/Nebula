@@ -187,7 +187,7 @@
 /obj/item/clothing/jumpsuit/quantum
 	name = "quantum mechanic's uniform"
 	desc = "A quantum mechanic's uniform. There is a letter on front that reads 'Q'."
-	icon = 'icons/clothing/under/uniform_quantum.dmi'
+	icon = 'icons/clothing/jumpsuits/uniform_quantum.dmi'
 	cold_protection = SLOT_FULL_BODY
 	heat_protection = SLOT_FULL_BODY
 	siemens_coefficient = 0

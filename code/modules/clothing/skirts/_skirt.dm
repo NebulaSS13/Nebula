@@ -1,7 +1,7 @@
 /obj/item/clothing/skirt
 	name = "black skirt"
 	desc = "A black skirt, very fancy!"
-	icon = 'icons/clothing/under/skirts/skirt_black.dmi'
+	icon = 'icons/clothing/skirts/skirt_black.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_UPPER_BODY

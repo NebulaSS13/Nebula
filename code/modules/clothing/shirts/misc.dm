@@ -11,6 +11,6 @@
 /obj/item/clothing/shirt/harness
 	name = "gear harness"
 	desc = "How minimalist."
-	icon = 'icons/clothing/under/harness.dmi'
+	icon = 'icons/clothing/shirts/harness.dmi'
 	bodytype_equip_flags = null
 	body_parts_covered = 0

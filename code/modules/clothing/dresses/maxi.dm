@@ -1,7 +1,7 @@
 /obj/item/clothing/dress/maxi
 	name = "maxi dress"
 	desc = "A sleeveless dress that reaches the wearer's ankles."
-	icon = 'icons/clothing/under/dresses/dress_long.dmi'
+	icon = 'icons/clothing/dresses/dress_long.dmi'
 	flags_inv = HIDESHOES
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET
 

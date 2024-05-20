@@ -2,7 +2,7 @@
 	name = "anomaly suit"
 	desc = "A suit that protects against exotic alien energies and biological contamination."
 	anomaly_shielding = 0.7
-	icon = 'icons/clothing/suit/biosuit/anomaly.dmi'
+	icon = 'icons/clothing/suits/biosuit/anomaly.dmi'
 
 /obj/item/clothing/head/bio_hood/anomaly
 	name = "anomaly hood"

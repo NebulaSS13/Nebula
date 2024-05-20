@@ -123,7 +123,7 @@
 /obj/random/suit
 	name = "random suit"
 	desc = "This is a random piece of outerwear."
-	icon = 'icons/clothing/suit/firesuit.dmi'
+	icon = 'icons/clothing/suits/firesuit.dmi'
 	icon_state = ICON_STATE_WORLD
 
 /obj/random/suit/spawn_choices()
@@ -149,7 +149,7 @@
 /obj/random/clothing
 	name = "random clothes"
 	desc = "This is a random piece of clothing."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit.dmi'
 	icon_state = ICON_STATE_WORLD
 
 /obj/random/clothing/spawn_choices()

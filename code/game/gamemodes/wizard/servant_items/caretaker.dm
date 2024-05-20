@@ -15,7 +15,7 @@
 /obj/item/clothing/suit/caretakercloak
 	name = "holy cloak"
 	desc = "A shining white and blue robe. For some reason, it reminds you of the holidays."
-	icon = 'icons/clothing/suit/wizard/servant/caretaker.dmi'
+	icon = 'icons/clothing/suits/wizard/servant/caretaker.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,

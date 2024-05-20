@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/jacket/first_responder
 	name = "first responder jacket"
 	desc = "A high-visibility jacket worn by medical first responders."
-	icon = 'icons/clothing/suit/jackets/responder.dmi'
+	icon = 'icons/clothing/suits/jackets/responder.dmi'
 	blood_overlay_type = "armor"
 	allowed = list(
 		/obj/item/stack/medical,
@@ -21,4 +21,4 @@
 /obj/item/clothing/suit/jacket/first_responder/ems
 	name = "\improper EMS jacket"
 	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
-	icon = 'icons/clothing/suit/emt_jacket.dmi'
+	icon = 'icons/clothing/suits/emt_jacket.dmi'

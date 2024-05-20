@@ -16,7 +16,7 @@
 
 /obj/item/clothing/suit/space/syndicate
 	name = "red space suit"
-	icon = 'icons/clothing/suit/space/syndicate/red.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/red.dmi'
 	desc = "A crimson spacesuit sporting clean lines and durable plating. Robust, reliable, and slightly suspicious."
 	w_class = ITEM_SIZE_NORMAL
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/energy_blade/sword,/obj/item/handcuffs,/obj/item/tank/emergency)
@@ -42,7 +42,7 @@
 
 /obj/item/clothing/suit/space/syndicate/green
 	name = "green space suit"
-	icon = 'icons/clothing/suit/space/syndicate/green.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/green.dmi'
 
 //Dark green syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/green/dark
@@ -51,7 +51,7 @@
 
 /obj/item/clothing/suit/space/syndicate/green/dark
 	name = "dark green space suit"
-	icon = 'icons/clothing/suit/space/syndicate/darkgreen.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/darkgreen.dmi'
 
 
 //Orange syndicate space suit
@@ -61,7 +61,7 @@
 
 /obj/item/clothing/suit/space/syndicate/orange
 	name = "orange space suit"
-	icon = 'icons/clothing/suit/space/syndicate/orange.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/orange.dmi'
 
 
 //Blue syndicate space suit
@@ -71,7 +71,7 @@
 
 /obj/item/clothing/suit/space/syndicate/blue
 	name = "blue space suit"
-	icon = 'icons/clothing/suit/space/syndicate/blue.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/blue.dmi'
 
 
 //Black syndicate space suit
@@ -81,7 +81,7 @@
 
 /obj/item/clothing/suit/space/syndicate/black
 	name = "black space suit"
-	icon = 'icons/clothing/suit/space/syndicate/black.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/black.dmi'
 
 
 //Black-green syndicate space suit
@@ -91,7 +91,7 @@
 
 /obj/item/clothing/suit/space/syndicate/black/green
 	name = "black and green space suit"
-	icon = 'icons/clothing/suit/space/syndicate/blackgreen.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/blackgreen.dmi'
 
 
 //Black-blue syndicate space suit
@@ -101,7 +101,7 @@
 
 /obj/item/clothing/suit/space/syndicate/black/blue
 	name = "black and blue space suit"
-	icon = 'icons/clothing/suit/space/syndicate/blackblue.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/blackblue.dmi'
 
 
 //Black medical syndicate space suit
@@ -111,7 +111,7 @@
 
 /obj/item/clothing/suit/space/syndicate/black/med
 	name = "black medical space suit"
-	icon = 'icons/clothing/suit/space/syndicate/blackmed.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/blackmed.dmi'
 
 
 //Black-orange syndicate space suit
@@ -121,7 +121,7 @@
 
 /obj/item/clothing/suit/space/syndicate/black/orange
 	name = "black and orange space suit"
-	icon = 'icons/clothing/suit/space/syndicate/blackorange.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/blackorange.dmi'
 
 
 //Black-red syndicate space suit
@@ -131,7 +131,7 @@
 
 /obj/item/clothing/suit/space/syndicate/black/red
 	name = "black and red space suit"
-	icon = 'icons/clothing/suit/space/syndicate/blackred.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/blackred.dmi'
 
 //Black with yellow/red engineering syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/black/engie
@@ -140,4 +140,4 @@
 
 /obj/item/clothing/suit/space/syndicate/black/engie
 	name = "black engineering space suit"
-	icon = 'icons/clothing/suit/space/syndicate/blackengie.dmi'
+	icon = 'icons/clothing/suits/space/syndicate/blackengie.dmi'

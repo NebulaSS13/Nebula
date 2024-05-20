@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/jacket/winter
 	name = "winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
-	icon = 'icons/clothing/suit/wintercoat/coat.dmi'
+	icon = 'icons/clothing/suits/wintercoat/coat.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
@@ -32,7 +32,7 @@
 
 /obj/item/clothing/suit/jacket/winter/captain
 	name = "captain's winter coat"
-	icon = 'icons/clothing/suit/wintercoat/captain.dmi'
+	icon = 'icons/clothing/suits/wintercoat/captain.dmi'
 	hood = /obj/item/clothing/head/winterhood/captain
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
@@ -47,7 +47,7 @@
 
 /obj/item/clothing/suit/jacket/winter/security
 	name = "security winter coat"
-	icon = 'icons/clothing/suit/wintercoat/sec.dmi'
+	icon = 'icons/clothing/suits/wintercoat/sec.dmi'
 	hood = /obj/item/clothing/head/winterhood/security
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
@@ -62,7 +62,7 @@
 
 /obj/item/clothing/suit/jacket/winter/medical
 	name = "medical winter coat"
-	icon = 'icons/clothing/suit/wintercoat/med.dmi'
+	icon = 'icons/clothing/suits/wintercoat/med.dmi'
 	hood = /obj/item/clothing/head/winterhood/medical
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_RESISTANT
@@ -73,7 +73,7 @@
 
 /obj/item/clothing/suit/jacket/winter/science
 	name = "science winter coat"
-	icon = 'icons/clothing/suit/wintercoat/sci.dmi'
+	icon = 'icons/clothing/suits/wintercoat/sci.dmi'
 	hood = /obj/item/clothing/head/winterhood/science
 	armor = list(
 		ARMOR_BOMB = ARMOR_BOMB_MINOR
@@ -84,7 +84,7 @@
 
 /obj/item/clothing/suit/jacket/winter/engineering
 	name = "engineering winter coat"
-	icon = 'icons/clothing/suit/wintercoat/eng.dmi'
+	icon = 'icons/clothing/suits/wintercoat/eng.dmi'
 	hood = /obj/item/clothing/head/winterhood/engineering
 	armor = list(
 		ARMOR_RAD = ARMOR_RAD_MINOR
@@ -96,7 +96,7 @@
 /obj/item/clothing/suit/jacket/winter/engineering/atmos
 	name = "atmospherics winter coat"
 	hood = /obj/item/clothing/head/winterhood/atmos
-	icon = 'icons/clothing/suit/wintercoat/atmos.dmi'
+	icon = 'icons/clothing/suits/wintercoat/atmos.dmi'
 
 /obj/item/clothing/head/winterhood/atmos
 	icon = 'icons/clothing/head/hood_winter_atmos.dmi'
@@ -104,7 +104,7 @@
 /obj/item/clothing/suit/jacket/winter/hydro
 	name = "hydroponics winter coat"
 	hood = /obj/item/clothing/head/winterhood/hydroponics
-	icon = 'icons/clothing/suit/wintercoat/hydro.dmi'
+	icon = 'icons/clothing/suits/wintercoat/hydro.dmi'
 
 /obj/item/clothing/head/winterhood/hydroponics
 	icon = 'icons/clothing/head/hood_winter_hydro.dmi'
@@ -112,7 +112,7 @@
 /obj/item/clothing/suit/jacket/winter/cargo
 	name = "cargo winter coat"
 	hood = /obj/item/clothing/head/winterhood/cargo
-	icon = 'icons/clothing/suit/wintercoat/cargo.dmi'
+	icon = 'icons/clothing/suits/wintercoat/cargo.dmi'
 
 /obj/item/clothing/head/winterhood/cargo
 	icon = 'icons/clothing/head/hood_winter_cargo.dmi'
@@ -120,7 +120,7 @@
 /obj/item/clothing/suit/jacket/winter/miner
 	name = "mining winter coat"
 	hood = /obj/item/clothing/head/winterhood/mining
-	icon = 'icons/clothing/suit/wintercoat/mining.dmi'
+	icon = 'icons/clothing/suits/wintercoat/mining.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_SMALL
 	)

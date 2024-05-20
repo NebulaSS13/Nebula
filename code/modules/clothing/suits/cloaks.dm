@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/cloak // A colorable cloak
 	name = "plain cloak"
 	desc = "A simple, bland cloak."
-	icon = 'icons/clothing/suit/cloaks/_cloak.dmi'
+	icon = 'icons/clothing/suits/cloaks/_cloak.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_OVER_BODY
 	allowed = list(/obj/item/tank/emergency/oxygen)
@@ -51,82 +51,82 @@
 /obj/item/clothing/suit/cloak/captain
 	name = "captain's cloak"
 	desc = "An elaborate cloak meant to be worn by the captain."
-	icon = 'icons/clothing/suit/cloaks/cloak_captain.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_captain.dmi'
 
 /obj/item/clothing/suit/cloak/ce
 	name = "chief engineer's cloak"
 	desc = "An elaborate cloak worn by the chief engineer."
-	icon = 'icons/clothing/suit/cloaks/cloak_ce.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_ce.dmi'
 
 /obj/item/clothing/suit/cloak/cmo
 	name = "chief medical officer's cloak"
 	desc = "An elaborate cloak meant to be worn by the chief medical officer."
-	icon = 'icons/clothing/suit/cloaks/cloak_cmo.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_cmo.dmi'
 
 /obj/item/clothing/suit/cloak/hop
 	name = "head of personnel's cloak"
 	desc = "An elaborate cloak meant to be worn by the head of personnel."
-	icon = 'icons/clothing/suit/cloaks/cloak_hop.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_hop.dmi'
 
 /obj/item/clothing/suit/cloak/rd
 	name = "research director's cloak"
 	desc = "An elaborate cloak meant to be worn by the research director."
-	icon = 'icons/clothing/suit/cloaks/cloak_rd.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_rd.dmi'
 
 /obj/item/clothing/suit/cloak/qm
 	name = "quartermaster's cloak"
 	desc = "An elaborate cloak meant to be worn by the quartermaster."
-	icon = 'icons/clothing/suit/cloaks/cloak_qm.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_qm.dmi'
 
 /obj/item/clothing/suit/cloak/hos
 	name = "head of security's cloak"
 	desc = "An elaborate cloak meant to be worn by the head of security."
-	icon = 'icons/clothing/suit/cloaks/cloak_hos.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_hos.dmi'
 
 /obj/item/clothing/suit/cloak/cargo
 	name = "brown cloak"
 	desc = "A simple brown and black cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_cargo.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_cargo.dmi'
 
 /obj/item/clothing/suit/cloak/mining
 	name = "trimmed purple cloak"
 	desc = "A trimmed purple and brown cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_mining.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_mining.dmi'
 
 /obj/item/clothing/suit/cloak/security
 	name = "red cloak"
 	desc = "A simple red and black cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_security.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_security.dmi'
 
 /obj/item/clothing/suit/cloak/service
 	name = "green cloak"
 	desc = "A simple green and blue cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_service.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_service.dmi'
 
 /obj/item/clothing/suit/cloak/engineer
 	name = "gold cloak"
 	desc = "A simple gold and brown cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_engineer.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_engineer.dmi'
 
 /obj/item/clothing/suit/cloak/atmos
 	name = "yellow cloak"
 	desc = "A trimmed yellow and blue cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_atmospherics.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_atmospherics.dmi'
 
 /obj/item/clothing/suit/cloak/research
 	name = "purple cloak"
 	desc = "A simple purple and white cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_research.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_research.dmi'
 
 /obj/item/clothing/suit/cloak/medical
 	name = "blue cloak"
 	desc = "A simple blue and white cloak."
-	icon = 'icons/clothing/suit/cloaks/cloak_medical.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_medical.dmi'
 
 /obj/item/clothing/suit/cloak/hide
 	name = "cloak"
 	desc = "A ragged cloak made of some sort of thick hide."
-	icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
+	icon = 'icons/clothing/suits/cloaks/cloak_hide.dmi'
 	material = /decl/material/solid/organic/leather
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	armor_type = /datum/extension/armor/ablative

@@ -41,7 +41,7 @@
 /obj/item/clothing/suit/wizrobe
 	name = "wizard robe"
 	desc = "A magnificant, gem-lined robe that seems to radiate power."
-	icon = 'icons/clothing/suit/wizard/wizard.dmi'
+	icon = 'icons/clothing/suits/wizard/wizard.dmi'
 	gas_transfer_coefficient = 0.01 // IT'S MAGICAL OKAY JEEZ +1 TO NOT DIE
 	permeability_coefficient = 0.01
 	armor = list(
@@ -60,41 +60,41 @@
 /obj/item/clothing/suit/wizrobe/red
 	name = "red wizard robe"
 	desc = "A magnificant, red, gem-lined robe that seems to radiate power."
-	icon = 'icons/clothing/suit/wizard/red.dmi'
+	icon = 'icons/clothing/suits/wizard/red.dmi'
 
 /obj/item/clothing/suit/wizrobe/marisa
 	name = "witch robe"
 	desc = "Magic is all about the spell power, ZE!"
-	icon = 'icons/clothing/suit/wizard/marisa.dmi'
+	icon = 'icons/clothing/suits/wizard/marisa.dmi'
 
 /obj/item/clothing/suit/wizrobe/magusblue
 	name = "magus robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
-	icon = 'icons/clothing/suit/wizard/magusblue.dmi'
+	icon = 'icons/clothing/suits/wizard/magusblue.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
 
 /obj/item/clothing/suit/wizrobe/magusred
 	name = "magus robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
-	icon = 'icons/clothing/suit/wizard/magusred.dmi'
+	icon = 'icons/clothing/suits/wizard/magusred.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
 
 /obj/item/clothing/suit/wizrobe/psypurple
 	name = "purple robes"
 	desc = "Heavy, royal purple robes threaded with psychic amplifiers and weird, bulbous lenses. Do not machine wash."
-	icon = 'icons/clothing/suit/wizard/psy.dmi'
+	icon = 'icons/clothing/suits/wizard/psy.dmi'
 	gender = PLURAL
 
 /obj/item/clothing/suit/wizrobe/gentlecoat
 	name = "gentleman's coat"
 	desc = "A heavy threaded tweed gray jacket. For a different sort of Gentleman."
-	icon = 'icons/clothing/suit/wizard/gentleman.dmi'
+	icon = 'icons/clothing/suits/wizard/gentleman.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/suit/wizrobe/fake
 	name = "wizard robe"
 	desc = "A rather dull, blue robe meant to mimick real wizard robes."
-	icon = 'icons/clothing/suit/wizard/fake.dmi'
+	icon = 'icons/clothing/suits/wizard/fake.dmi'
 	armor = null
 	siemens_coefficient = 1.0
 

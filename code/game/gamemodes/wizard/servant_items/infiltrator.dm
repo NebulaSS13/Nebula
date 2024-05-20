@@ -16,7 +16,7 @@
 /obj/item/clothing/suit/infilsuit
 	name = "immaculate suit"
 	desc = "The clothes of an impeccable diplomat. Or perhaps a businessman. Let's not consider the horrors that might arise if it belongs to a lawyer."
-	icon = 'icons/clothing/suit/wizard/servant/inf_suit.dmi'
+	icon = 'icons/clothing/suits/wizard/servant/inf_suit.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MINOR,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
@@ -39,4 +39,4 @@
 /obj/item/clothing/suit/infilsuit/fem
 	name = "maid's uniform"
 	desc = "The uniform of someone you'd expect to see dusting off the Antique Gun's display case."
-	icon = 'icons/clothing/suit/wizard/servant/inf_dress.dmi'
+	icon = 'icons/clothing/suits/wizard/servant/inf_dress.dmi'

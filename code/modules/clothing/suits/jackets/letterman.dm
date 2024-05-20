@@ -2,7 +2,7 @@
 	name = "letterman jacket"
 	desc = "A letter jacket often given to members of a varsity team."
 	color = "#ee1511"
-	icon = 'icons/clothing/suit/letterman.dmi'
+	icon = 'icons/clothing/suits/letterman.dmi'
 	markings_state_modifier = "_sleeves"
 	markings_color = "#ffffff"
 

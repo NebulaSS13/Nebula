@@ -167,7 +167,7 @@
 /obj/item/clothing/under/ec_uniform
 	name = "expeditionary uniform"
 	desc = "An older model of the utility uniform of the SCG Expeditionary Corps. It has a patch on the left sleeve signifying the wearer served on the SEV Icarus."
-	icon = 'icons/clothing/under/uniform_ec.dmi'
+	icon = 'icons/clothing/uniform_ec.dmi'
 
 /obj/structure/sign/double/solgovflag
 	name = "Sol Central Government Flag"

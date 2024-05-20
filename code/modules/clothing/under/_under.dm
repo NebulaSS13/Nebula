@@ -1,6 +1,6 @@
 /obj/item/clothing/under
 	name = "under"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_UPPER_BODY

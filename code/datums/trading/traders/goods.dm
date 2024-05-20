@@ -145,7 +145,7 @@
 		/obj/item/clothing/jumpsuit                        = TRADER_BLACKLIST,
 		/obj/item/clothing/under/gimmick                   = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/lawyer                    = TRADER_BLACKLIST,
-		/obj/item/clothing/under/mankini                   = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/pants/mankini                   = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/syndicate                 = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/jumpsuit/tactical               = TRADER_BLACKLIST,
 		/obj/item/clothing/under/waiter/monke              = TRADER_BLACKLIST

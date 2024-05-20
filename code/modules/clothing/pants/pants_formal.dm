@@ -3,7 +3,7 @@
 	desc = "Plain suit pants."
 	gender = PLURAL
 	body_parts_covered = SLOT_LOWER_BODY|SLOT_LEGS
-	icon = 'icons/clothing/under/pants/pants.dmi'
+	icon = 'icons/clothing/pants/pants.dmi'
 
 /obj/item/clothing/pants/formal/red
 	name = "red pants"
@@ -44,7 +44,7 @@
 /obj/item/clothing/pants/baggy
 	name = "baggy pants"
 	desc = "Plain baggy pants."
-	icon = 'icons/clothing/under/pants/pants_baggy.dmi'
+	icon = 'icons/clothing/pants/pants_baggy.dmi'
 
 /obj/item/clothing/pants/baggy/red
 	name = "baggy red pants"

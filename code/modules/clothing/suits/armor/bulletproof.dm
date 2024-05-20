@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/armor/bulletproof
 	name = "ballistic vest"
 	desc = "An armored vest with heavy plates to protect against ballistic projectiles."
-	icon = 'icons/clothing/suit/armor/ballistic.dmi'
+	icon = 'icons/clothing/suits/armor/ballistic.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

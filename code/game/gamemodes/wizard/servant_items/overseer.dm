@@ -18,7 +18,7 @@
 /obj/item/clothing/suit/straight_jacket/overseercloak
 	name = "grim cloak"
 	desc = "The void of space woven into fabric. It's hard to tell where its edges are."
-	icon = 'icons/clothing/suit/wizard/servant/overseer.dmi'
+	icon = 'icons/clothing/suits/wizard/servant/overseer.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_SHIELDED,
 		ARMOR_BULLET = ARMOR_BALLISTIC_HEAVY,

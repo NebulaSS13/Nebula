@@ -22,7 +22,7 @@
 /obj/item/clothing/suit/bio_suit
 	name = "bio suit"
 	desc = "A suit that protects against biological contamination."
-	icon = 'icons/clothing/suit/biosuit/_biosuit.dmi'
+	icon = 'icons/clothing/suits/biosuit/_biosuit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
@@ -55,41 +55,41 @@
 	icon = 'icons/clothing/head/biosuit/virology.dmi'
 
 /obj/item/clothing/suit/bio_suit/virology
-	icon = 'icons/clothing/suit/biosuit/virology.dmi'
+	icon = 'icons/clothing/suits/biosuit/virology.dmi'
 
 //Security biosuit, grey with red stripe across the chest
 /obj/item/clothing/head/bio_hood/security
 	icon = 'icons/clothing/head/biosuit/security.dmi'
 
 /obj/item/clothing/suit/bio_suit/security
-	icon = 'icons/clothing/suit/biosuit/security.dmi'
+	icon = 'icons/clothing/suits/biosuit/security.dmi'
 
 //Janitor's biosuit, grey with purple arms
 /obj/item/clothing/head/bio_hood/janitor
 	icon = 'icons/clothing/head/biosuit/janitor.dmi'
 
 /obj/item/clothing/suit/bio_suit/janitor
-	icon = 'icons/clothing/suit/biosuit/janitor.dmi'
+	icon = 'icons/clothing/suits/biosuit/janitor.dmi'
 
 //Scientist's biosuit, white with a pink-ish hue
 /obj/item/clothing/head/bio_hood/scientist
 	icon = 'icons/clothing/head/biosuit/scientist.dmi'
 
 /obj/item/clothing/suit/bio_suit/scientist
-	icon = 'icons/clothing/suit/biosuit/scientist.dmi'
+	icon = 'icons/clothing/suits/biosuit/scientist.dmi'
 
 //CMO's biosuit, blue stripe
 /obj/item/clothing/head/bio_hood/cmo
 	icon = 'icons/clothing/head/biosuit/cmo.dmi'
 
 /obj/item/clothing/suit/bio_suit/cmo
-	icon = 'icons/clothing/suit/biosuit/cmo.dmi'
+	icon = 'icons/clothing/suits/biosuit/cmo.dmi'
 
 //Plague Dr mask can be found in clothing/masks/gasmask.dm
 /obj/item/clothing/suit/bio_suit/plaguedoctorsuit
 	name = "plague doctor suit"
 	desc = "It protected doctors from the Black Death, back then. You bet your arse it's gonna help you against space plague."
-	icon = 'icons/clothing/suit/biosuit/plague.dmi'
+	icon = 'icons/clothing/suits/biosuit/plague.dmi'
 	flags_inv = HIDEGLOVES|HIDEJUMPSUIT|HIDETAIL
 	origin_tech = @'{"materials":1,"engineering":1,"biotech":1}'
 	matter = list(
