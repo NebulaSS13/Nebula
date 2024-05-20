@@ -447,6 +447,9 @@
 	)
 	return life_damage_types
 
+/mob/living/silicon/get_dexterity(var/silent)
+	return dexterity
+
 /mob/living/silicon/get_death_message(gibbed)
 	return "gives one shrill beep before falling lifeless."
 

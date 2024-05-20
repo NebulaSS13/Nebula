@@ -76,4 +76,4 @@
 
 /decl/config/toggle/auto_map_vote
 	uid = "auto_map_vote"
-	desc = "Uncomment to enable an automatic map vote and switch at end of round. MAP_SWITCHING must also be enabled."
+	desc = "Determines if the automatic map vote and switch are called at end of round. MAP_SWITCHING must also be enabled."

@@ -241,9 +241,9 @@
 		to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and [G.his] commands."))
 	return 1
 
-/mob/living/silicon/robot/drone/death(gibbed)
+/mob/living/silicon/robot/drone/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
 	. = ..()
-	if(. && !gibbed)
+	if(amount && should_be_dead() && stat == DEAD && !QDELETED(src))
 		gib()
 
 //DRONE MOVEMENT.

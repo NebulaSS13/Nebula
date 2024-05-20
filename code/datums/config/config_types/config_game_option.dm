@@ -102,13 +102,13 @@
 /decl/config/num/max_acts_per_interval
 	uid = "max_acts_per_interval"
 	default_value = 140
-	desc = "Uncomment this to modify the number of actions permitted per interval before being kicked for spam."
+	desc = "Defines the number of actions permitted per interval before a user is kicked for spam."
 
 /decl/config/num/act_interval
 	uid = "act_interval"
 	default_value = 0.1
 	rounding = 0.01
-	desc = "Uncomment this to modify the length of the spam kicking interval in seconds."
+	desc = "Determines the length of the spam kicking interval in seconds."
 
 /decl/config/num/dex_malus_brainloss_threshold
 	uid = "dex_malus_brainloss_threshold"
@@ -141,7 +141,7 @@
 
 /decl/config/toggle/expanded_alt_interactions
 	uid = "expanded_alt_interactions"
-	desc = "Uncomment this to enable expanded alt interactions with objects."
+	desc = "Determines if objects should provide expanded alt interactions when alt-clicked, such as use or grab."
 
 /decl/config/toggle/ert_admin_call_only
 	uid = "ert_admin_call_only"
@@ -149,7 +149,7 @@
 
 /decl/config/toggle/ghosts_can_possess_animals
 	uid = "ghosts_can_possess_animals"
-	desc = "Uncomment to allow ghosts to possess any animal."
+	desc = "Determines of ghosts are allowed to possess any animal."
 
 /decl/config/toggle/assistant_maint
 	uid = "assistant_maint"

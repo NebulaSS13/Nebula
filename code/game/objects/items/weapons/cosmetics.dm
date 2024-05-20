@@ -47,7 +47,7 @@
 
 /obj/item/cosmetics/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!open)
+	if(!open || !ishuman(target))
 		return ..()
 
 	if(istype(target, /obj/item/organ/external/head))

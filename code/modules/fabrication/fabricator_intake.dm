@@ -127,7 +127,7 @@
 
 	// TEMP HACK FIX:
 	// Autolathes currently do not process atom contents. As a workaround, refuse all atoms with contents.
-	if(length(O.contents))
+	if(length(O.contents) && !ignore_input_contents_length)
 		to_chat(user, SPAN_WARNING("\The [src] cannot process an object containing other objects. Empty it out first."))
 		return
 	// REMOVE FIX WHEN LATHES TAKE CONTENTS PLS.
