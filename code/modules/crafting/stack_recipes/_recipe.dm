@@ -296,7 +296,7 @@
 			LAZYDISTINCTADD(material_strings, reinf_mat.use_name)
 		if(LAZYLEN(material_strings))
 			material_strings = "[english_list(material_strings)]"
-	if(amount != 1)
+	if(amount > 1)
 		. = jointext(list("[amount]x", material_strings, name_plural), " ")
 	else
 		. = jointext(list(material_strings, name), " ")
