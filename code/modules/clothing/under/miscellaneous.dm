@@ -60,16 +60,6 @@
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
 	icon = 'icons/clothing/under/suits/suit_teal.dmi'
 
-/obj/item/clothing/under/blackjumpskirt
-	name = "black jumpskirt"
-	desc = "A black jumpskirt, with a pink undershirt."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt.dmi'
-
-/obj/item/clothing/under/shortjumpskirt
-	name = "short jumpskirt"
-	desc = "A slimming, short jumpskirt."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt_short.dmi'
-
 /obj/item/clothing/jumpsuit/captainformal
 	name = "captain's formal uniform"
 	desc = "A captain's formal-wear, for special occasions."

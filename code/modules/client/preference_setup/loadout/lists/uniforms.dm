@@ -11,10 +11,22 @@
 	path = /obj/item/clothing/jumpsuit
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/shortjumpskirt
+/decl/loadout_option/uniform/jumpskirt
 	name = "short jumpskirt, colour select"
-	path = /obj/item/clothing/under/shortjumpskirt
+	path = /obj/item/clothing/jumpsuit/skirt/short
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+
+/decl/loadout_option/uniform/jumpskirt_selection
+	name = "jumpskirt selection"
+	path = /obj/item/clothing/jumpsuit/skirt
+
+/decl/loadout_option/uniform/jumpskirt_selection/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/jumpsuit/skirt,
+		/obj/item/clothing/jumpsuit/skirt/roboticist
+	)
 
 /decl/loadout_option/uniform/blackjumpshorts
 	name = "black jumpsuit shorts"
@@ -53,8 +65,7 @@
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/under/blazer,
-		/obj/item/clothing/under/blackjumpskirt,
+		/obj/item/clothing/under/blazer
 	)
 
 /decl/loadout_option/uniform/dress_selection
