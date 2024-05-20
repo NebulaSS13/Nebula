@@ -32,7 +32,7 @@
 /decl/hierarchy/outfit/tournament_gear/chef
 	name = "Tournament gear - Chef"
 	head = /obj/item/clothing/head/chefhat
-	uniform = /obj/item/clothing/under/chef
+	uniform = /obj/item/clothing/pants/slacks/outfit_chef
 	suit = /obj/item/clothing/suit/chef
 	hands = list(
 		/obj/item/knife/combat,

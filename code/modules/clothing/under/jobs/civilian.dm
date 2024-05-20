@@ -1,9 +1,4 @@
 //Alphabetical order of civilian jobs.
-/obj/item/clothing/under/chef
-	desc = "It's an apron which is given only to the most <b>hardcore</b> chefs in space."
-	name = "chef's uniform"
-	icon = 'icons/clothing/uniform_chef.dmi'
-
 /obj/item/clothing/jumpsuit/head_of_personnel_whimsy
 	desc = "A blue jacket and red tie, with matching red cuffs! Snazzy. Wearing this makes you feel more important than your job title does."
 	name = "head of personnel's suit"
