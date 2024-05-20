@@ -47,11 +47,11 @@
 		. += "<b>Shackle: </b>"
 		if(!pref.is_shackled)
 			. += "<span class='linkOn'>Off</span>"
-			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>On</a>"
+			. += "<a href='byond://?src=\ref[src];toggle_shackle=[pref.is_shackled]'>On</a>"
 			. += "<br>Only shackled synthetics have laws."
 			. += "<hr>"
 		else
-			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
+			. += "<a href='byond://?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
 			. += "<span class='linkOn'>On</span>"
 			. += "<br>You are shackled and have laws that restrict your behaviour."
 			. += "<hr>"
@@ -64,7 +64,7 @@
 				for(var/i in 1 to pref.laws.len)
 					. += "[i]) [pref.laws[i]]<br>"
 
-			. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"
+			. += "Law sets: <a href='byond://?src=\ref[src];lawsets=1'>Load Set</a><br>"
 
 	. = jointext(.,null)
 

@@ -45,17 +45,17 @@
 	. += "<br>Tiles left: [amount]"
 
 /mob/living/bot/floorbot/GetInteractPanel()
-	. = "Improves floors: <a href='?src=\ref[src];command=improve'>[improvefloors ? "Yes" : "No"]</a>"
-	. += "<br>Finds tiles: <a href='?src=\ref[src];command=tiles'>[eattiles ? "Yes" : "No"]</a>"
-	. += "<br>Make single pieces of metal into tiles when empty: <a href='?src=\ref[src];command=make'>[maketiles ? "Yes" : "No"]</a>"
+	. = "Improves floors: <a href='byond://?src=\ref[src];command=improve'>[improvefloors ? "Yes" : "No"]</a>"
+	. += "<br>Finds tiles: <a href='byond://?src=\ref[src];command=tiles'>[eattiles ? "Yes" : "No"]</a>"
+	. += "<br>Make single pieces of metal into tiles when empty: <a href='byond://?src=\ref[src];command=make'>[maketiles ? "Yes" : "No"]</a>"
 
 /mob/living/bot/floorbot/GetInteractMaintenance()
 	. = "Disassembly mode: "
 	switch(emagged)
 		if(0)
-			. += "<a href='?src=\ref[src];command=emag'>Off</a>"
+			. += "<a href='byond://?src=\ref[src];command=emag'>Off</a>"
 		if(1)
-			. += "<a href='?src=\ref[src];command=emag'>On (Caution)</a>"
+			. += "<a href='byond://?src=\ref[src];command=emag'>On (Caution)</a>"
 		if(2)
 			. += "ERROROROROROR-----"
 

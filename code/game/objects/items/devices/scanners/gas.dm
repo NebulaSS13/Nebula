@@ -12,7 +12,7 @@
 	var/mode = DEFAULT_MODE
 
 /obj/item/scanner/gas/get_header()
-	return "[..()]<a href='?src=\ref[src];switchmode=1'>Switch Mode</a>"
+	return "[..()]<a href='byond://?src=\ref[src];switchmode=1'>Switch Mode</a>"
 
 /obj/item/scanner/gas/OnTopic(var/user, var/list/href_list)
 	..()

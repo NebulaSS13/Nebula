@@ -11,7 +11,7 @@
 		if(jobban_isbanned(user, "Records") || jobban_isbanned(user, name))
 			. += "<span class='danger'>You are banned from modifying your [lowertext(name)].</span><br>"
 		else
-			. += "<a href='?src=\ref[src];set_record=1'>[TextPreview(pref.records[record_key], 40)]</a><br>"
+			. += "<a href='byond://?src=\ref[src];set_record=1'>[TextPreview(pref.records[record_key], 40)]</a><br>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/records/OnTopic(var/href,var/list/href_list, var/mob/user)

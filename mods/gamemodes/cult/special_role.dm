@@ -134,7 +134,7 @@
 	if(!iscultist(M) || !M.mind)
 		return
 
-	to_chat(M, "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='?src=\ref[src];confirmleave=1'>ACCEPT</a></span>")
+	to_chat(M, "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='byond://?src=\ref[src];confirmleave=1'>ACCEPT</a></span>")
 
 /decl/special_role/cultist/Topic(href, href_list)
 	if(href_list["confirmleave"])

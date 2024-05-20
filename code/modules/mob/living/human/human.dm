@@ -139,7 +139,7 @@
 	. = ..()
 	for(var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
-		LAZYADD(., "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>")
+		LAZYADD(., "<BR><a href='byond://?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>")
 
 /mob/living/human/OnSelfTopic(href_list)
 	if (href_list["lookitem"])

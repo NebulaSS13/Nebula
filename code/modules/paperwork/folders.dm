@@ -59,7 +59,7 @@
 /obj/item/folder/interact(mob/user)
 	var/dat = "<title>[name]</title>"
 	for(var/obj/item/I in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[I]'>Remove</A> <A href='?src=\ref[src];rename=\ref[I]'>Rename</A> - <A href='?src=\ref[src];examine=\ref[I]'>[I.name]</A><BR>"
+		dat += "<A href='byond://?src=\ref[src];remove=\ref[I]'>Remove</A> <A href='byond://?src=\ref[src];rename=\ref[I]'>Rename</A> - <A href='byond://?src=\ref[src];examine=\ref[I]'>[I.name]</A><BR>"
 
 	user.set_machine(src)
 	show_browser(user, dat, "window=[initial(name)]")

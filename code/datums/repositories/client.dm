@@ -47,7 +47,7 @@ var/global/repository/client/client_repository = new()
 			return "[key]/([name]) (DC)"
 	if(check_if_offline && !client_by_ckey(ckey))
 		return "[key]/([name]) (DC)"
-	return pm_link ? "<a href='?priv_msg=[ref];ticket=\ref[ticket]'>[key]</a>/([name])[rank2text()]" : "[key]/([name])"
+	return pm_link ? "<a href='byond://?priv_msg=[ref];ticket=\ref[ticket]'>[key]</a>/([name])[rank2text()]" : "[key]/([name])"
 
 /datum/client_lite/proc/rank2text()
 	var/client/C = client_by_ckey(ckey)

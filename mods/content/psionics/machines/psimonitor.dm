@@ -78,9 +78,9 @@
 	var/list/dat = list()
 	dat += "<h1>Psi Dampener Monitor</h1>"
 	if(authorized)
-		dat += "<b>[authorized]</b> <a href='?src=\ref[src];logout=1'>Logout</a>"
+		dat += "<b>[authorized]</b> <a href='byond://?src=\ref[src];logout=1'>Logout</a>"
 	else
-		dat += "<a href='?src=\ref[src];login=1'>Login</a>"
+		dat += "<a href='byond://?src=\ref[src];login=1'>Login</a>"
 
 	dat += "<h2>Active Psionic Dampeners</h2><hr>"
 	dat += "<center><table>"
@@ -93,21 +93,21 @@
 		if(implant.malfunction)
 			dat += "<td>ERROR</td><td>ERROR</td>"
 		else
-			dat += "<td>[implant.overload]%</td><td>[authorized ? "<a href='?src=\ref[src];change_mode=\ref[implant]'>[implant.psi_mode]</a>" : "[implant.psi_mode]"]</td>"
+			dat += "<td>[implant.overload]%</td><td>[authorized ? "<a href='byond://?src=\ref[src];change_mode=\ref[implant]'>[implant.psi_mode]</a>" : "[implant.psi_mode]"]</td>"
 		dat += "</tr>"
 	dat += "</table><hr></center>"
 
 	if(show_violations)
-		dat += "<h2>Psionic Control Violations <a href='?src=\ref[src];show_violations=0'>-</a></h2><hr><center><table>"
+		dat += "<h2>Psionic Control Violations <a href='byond://?src=\ref[src];show_violations=0'>-</a></h2><hr><center><table>"
 		if(psi_violations.len)
 			for(var/i =  1 to psi_violations.len)
 				var/entry = psi_violations[i]
-				dat += "<tr><td><br>[entry]</td><td>[authorized ? "<a href='?src=\ref[src];remove_violation=[i]'>Remove</a>" : ""]</td></tr>"
+				dat += "<tr><td><br>[entry]</td><td>[authorized ? "<a href='byond://?src=\ref[src];remove_violation=[i]'>Remove</a>" : ""]</td></tr>"
 		else
 			dat += "<tr><td colspan = 2>None reported.</td></tr>"
 		dat += "</table></center><hr>"
 	else
-		dat += "<h2>Psionic Control Violations <a href='?src=\ref[src];show_violations=1'>+</a></h2><hr>"
+		dat += "<h2>Psionic Control Violations <a href='byond://?src=\ref[src];show_violations=1'>+</a></h2><hr>"
 
 	var/datum/browser/written_digital/popup = new(user, "psi_monitor_\ref[src]", "Psi-Monitor")
 	popup.set_content(jointext(dat,null))

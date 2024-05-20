@@ -11,7 +11,7 @@
 	recipes = _recipes
 
 /datum/stack_recipe_list/proc/get_list_display(mob/user, obj/item/stack/stack)
-	return "<tr><td width = '150px'>[name]</td><td colspan = 4 width = '550px'><a href='?src=\ref[stack];sublist=\ref[src]'>expand</td></tr>"
+	return "<tr><td width = '150px'>[name]</td><td colspan = 4 width = '550px'><a href='byond://?src=\ref[stack];sublist=\ref[src]'>expand</td></tr>"
 
 /*
  * Recipe retrieval proc.

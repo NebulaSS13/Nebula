@@ -6,9 +6,9 @@
 	if(!.)
 		return
 	var/dat = list()
-	dat += "<a href='?src=\ref[src];filter=[filter]'>Refresh</a> Filtering on: "
+	dat += "<a href='byond://?src=\ref[src];filter=[filter]'>Refresh</a> Filtering on: "
 	if(filter)
-		dat += " [filter] <a href='?src=\ref[src]'>Clear</a>"
+		dat += " [filter] <a href='byond://?src=\ref[src]'>Clear</a>"
 	else
 		dat += "None"
 	dat += "<HR>"
@@ -23,9 +23,9 @@
 			continue
 
 		if(receiver)
-			dat += "<tr><td>[pm.station_time]</td><td>[sender.key_name(FALSE)] <a href='?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td>[receiver.key_name(FALSE)] <a href='?src=\ref[src];filter=[receiver.ckey]'>F</a></td></tr>"
+			dat += "<tr><td>[pm.station_time]</td><td>[sender.key_name(FALSE)] <a href='byond://?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td>[receiver.key_name(FALSE)] <a href='byond://?src=\ref[src];filter=[receiver.ckey]'>F</a></td></tr>"
 		else
-			dat += "<tr><td>[pm.station_time]</td><td>[sender.key_name(FALSE)] <a href='?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td></td></tr>"
+			dat += "<tr><td>[pm.station_time]</td><td>[sender.key_name(FALSE)] <a href='byond://?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td></td></tr>"
 		dat += "<tr><td colspan=3>[pm.message]</td></tr>"
 	dat += "</table>"
 

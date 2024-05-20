@@ -60,7 +60,7 @@
 			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
 
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
-		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
+		to_chat(user, "You can <a href='byond://?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 /obj/item/electronic_assembly/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
 	if(!can_take_damage())
@@ -136,7 +136,7 @@
 /obj/item/electronic_assembly/proc/closed_interact(mob/user)
 	var/HTML = list()
 	HTML += "<html><head><title>[src.name]</title></head><body>"
-	HTML += "<br><a href='?src=\ref[src];refresh=1'>\[Refresh\]</a>"
+	HTML += "<br><a href='byond://?src=\ref[src];refresh=1'>\[Refresh\]</a>"
 	HTML += "<br><br>"
 
 	var/listed_components = FALSE
@@ -150,7 +150,7 @@
 			for(var/entry in topic_data)
 				var/href = topic_data[entry]
 				if(href)
-					HTML += "<a href=?src=\ref[circuit];[href]>[entry]</a>"
+					HTML += "<a href='byond://?src=\ref[circuit];[href]'>[entry]</a>"
 				else
 					HTML += entry
 				HTML += "<br>"
@@ -170,11 +170,11 @@
 
 	HTML += "<html><head><title>[name]</title></head><body>"
 
-	HTML += "<a href='?src=\ref[src]'>\[Refresh\]</a>  |  <a href='?src=\ref[src];rename=1'>\[Rename\]</a><br>"
+	HTML += "<a href='byond://?src=\ref[src]'>\[Refresh\]</a>  |  <a href='byond://?src=\ref[src];rename=1'>\[Rename\]</a><br>"
 	HTML += "[total_part_size]/[max_components] space taken up in the assembly.<br>"
 	HTML += "[total_complexity]/[max_complexity] complexity in the assembly.<br>"
 	if(battery)
-		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=\ref[src];remove_cell=1'>\[Remove\]</a>"
+		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='byond://?src=\ref[src];remove_cell=1'>\[Remove\]</a>"
 	else
 		HTML += "<span class='danger'>No power cell detected!</span>"
 
@@ -185,13 +185,13 @@
 		var/start_index = ((components_per_page * interact_page) + 1)
 		for(var/i = start_index to min(length(assembly_components), start_index + (components_per_page - 1)))
 			var/obj/item/integrated_circuit/circuit = assembly_components[i]
-			HTML += "\[ <a href='?src=\ref[src];component=\ref[circuit];set_slot=1'>[i]</a> \] | "
-			HTML += "<a href='?src=\ref[circuit];component=\ref[circuit];rename=1'>\[R\]</a> | "
+			HTML += "\[ <a href='byond://?src=\ref[src];component=\ref[circuit];set_slot=1'>[i]</a> \] | "
+			HTML += "<a href='byond://?src=\ref[circuit];component=\ref[circuit];rename=1'>\[R\]</a> | "
 			if(circuit.removable)
-				HTML += "<a href='?src=\ref[src];component=\ref[circuit];remove=1'>\[-\]</a> | "
+				HTML += "<a href='byond://?src=\ref[src];component=\ref[circuit];remove=1'>\[-\]</a> | "
 			else
 				HTML += "\[-\] | "
-			HTML += "<a href='?src=\ref[circuit];examine=1'>[circuit.displayed_name]</a>"
+			HTML += "<a href='byond://?src=\ref[circuit];examine=1'>[circuit.displayed_name]</a>"
 			HTML += "<br>"
 
 		if(length(assembly_components) > components_per_page)
@@ -200,7 +200,7 @@
 				if((i-1) == interact_page)
 					HTML += " [i]"
 				else
-					HTML += " <a href='?src=\ref[src];select_page=[i-1]'>[i]</a>"
+					HTML += " <a href='byond://?src=\ref[src];select_page=[i-1]'>[i]</a>"
 			HTML += " \]"
 
 	HTML += "</body></html>"

@@ -96,10 +96,10 @@
 	for(var/thing in notices)
 		LAZYADD(dat, "<tr><td>[thing]</td><td>")
 		if(istype(thing, /obj/item/paper))
-			LAZYADD(dat, "<a href='?src=\ref[src];read=\ref[thing]'>Read</a><a href='?src=\ref[src];write=\ref[thing]'>Write</a>")
+			LAZYADD(dat, "<a href='byond://?src=\ref[src];read=\ref[thing]'>Read</a><a href='byond://?src=\ref[src];write=\ref[thing]'>Write</a>")
 		else if(istype(thing, /obj/item/photo))
-			LAZYADD(dat, "<a href='?src=\ref[src];look=\ref[thing]'>Look</a>")
-		LAZYADD(dat, "<a href='?src=\ref[src];remove=\ref[thing]'>Remove</a></td></tr>")
+			LAZYADD(dat, "<a href='byond://?src=\ref[src];look=\ref[thing]'>Look</a>")
+		LAZYADD(dat, "<a href='byond://?src=\ref[src];remove=\ref[thing]'>Remove</a></td></tr>")
 
 	var/datum/browser/popup = new(user, "noticeboard-\ref[src]", "Noticeboard")
 	popup.set_content(jointext(dat, null))

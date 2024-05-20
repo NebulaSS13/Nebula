@@ -389,7 +389,7 @@
 
 	var/dat = display_medical_data(H.get_raw_medical_data(), SKILL_MAX)
 
-	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
+	dat += text("<BR><A href='byond://?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
 	show_browser(usr, dat, "window=scanconsole;size=430x600")
 
 /client/proc/cmd_analyse_health_context(mob/living/human/H as mob in global.human_mob_list)

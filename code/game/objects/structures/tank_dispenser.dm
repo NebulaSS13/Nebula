@@ -70,9 +70,9 @@
 		return ..()
 	var/list/dat = list()
 	var/oxycount = LAZYLEN(oxygen_tanks)
-	dat += "Oxygen tanks: [oxycount] - [oxycount ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
+	dat += "Oxygen tanks: [oxycount] - [oxycount ? "<A href='byond://?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
 	var/hydrocount = LAZYLEN(hydrogen_tanks)
-	dat += "Hydrogen tanks: [hydrocount] - [hydrocount ? "<A href='?src=\ref[src];hydrogen=1'>Dispense</A>" : "empty"]"
+	dat += "Hydrogen tanks: [hydrocount] - [hydrocount ? "<A href='byond://?src=\ref[src];hydrogen=1'>Dispense</A>" : "empty"]"
 	var/datum/browser/popup = new(user, "window=tank_rack")
 	popup.set_content(jointext(dat, "<br>"))
 	popup.open()

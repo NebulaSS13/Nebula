@@ -783,7 +783,7 @@ var/global/list/_item_blood_mask = icon('icons/effects/blood.dmi', "itemblood")
 /obj/item/proc/showoff(mob/user)
 	for(var/mob/M in view(user))
 		if(!user.is_invisible_to(M))
-			M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>", 1)
+			M.show_message("[user] holds up [src]. <a HREF='byond://?src=\ref[M];lookitem=\ref[src]'>Take a closer look.</a>", 1)
 
 /*
 For zooming with scope or binoculars. This is called from
@@ -884,7 +884,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	. = "[html_icon(src)] [get_examine_name()]"
 	var/ID = GetIdCard()
 	if(ID)
-		. += " <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
+		. += " <a href='byond://?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
 
 /obj/item/proc/on_active_hand()
 	return

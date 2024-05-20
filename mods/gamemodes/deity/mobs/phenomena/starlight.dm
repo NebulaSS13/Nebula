@@ -88,7 +88,7 @@
 	html += "<table><tr><td><b>Name</b></td><td><b>Description</b></td></tr>"
 	for(var/type in possible_forms)
 		var/list/form = possible_forms[type]
-		html += "<tr><td><a href='?src=\ref[src];herald=[type];target=\ref[H]'>[type]</a></td><td>[form["description"]]</td></tr>"
+		html += "<tr><td><a href='byond://?src=\ref[src];herald=[type];target=\ref[H]'>[type]</a></td><td>[form["description"]]</td></tr>"
 	html += "</table>"
 	show_browser(linked, jointext(html,null), "window=herald")
 

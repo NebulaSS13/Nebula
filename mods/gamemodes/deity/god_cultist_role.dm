@@ -47,7 +47,7 @@
 	return 1
 
 /decl/special_role/godcultist/get_extra_panel_options(var/datum/mind/player)
-	return "<a href='?src=\ref[src];selectgod=\ref[player]'>\[Select Deity\]</a>"
+	return "<a href='byond://?src=\ref[src];selectgod=\ref[player]'>\[Select Deity\]</a>"
 
 /decl/special_role/godcultist/Topic(href, href_list)
 	if(..())
@@ -102,5 +102,5 @@
 
 	//Make em wait a few seconds.
 	src.visible_message("\The [src] bows their head down, muttering something.", SPAN_NOTICE("You send the message \"[msg]\" to your master."))
-	to_chat(D, "<span class='notice'>\The [src] (<A href='?src=\ref[D];jump=\ref[src];'>J</A>) prays, \"[msg]\"</span>")
+	to_chat(D, "<span class='notice'>\The [src] (<A href='byond://?src=\ref[D];jump=\ref[src];'>J</A>) prays, \"[msg]\"</span>")
 	log_and_message_admins("dprayed, \"[msg]\" to \the [key_name(D)]")

@@ -98,7 +98,7 @@
 
 		. += "<hr><table style='text-align:center'><tr>"
 		. += "<td style='max-width:50%;text-align:right'><font size = 3><b>[capitalize_words(job_map)]</b></font></td>"
-		. += "<td style='max-width:50%;text-align:left'><font size = 3><a href='?src=\ref[src];toggle_map=[job_map]'>[pref.hiding_maps[job_map] ? "Show" : "Hide"]</a></font></td>"
+		. += "<td style='max-width:50%;text-align:left'><font size = 3><a href='byond://?src=\ref[src];toggle_map=[job_map]'>[pref.hiding_maps[job_map] ? "Show" : "Hide"]</a></font></td>"
 		. += "</tr></table>"
 
 		if(!pref.hiding_maps[job_map])
@@ -124,7 +124,7 @@
 					player_branch = mil_branches.get_branch(pref.branches[job.title])
 					if(player_branch)
 						if(LAZYLEN(branch_rank) > 1)
-							branch_string += "<td style='width:10%;text-align:left'><a href='?src=\ref[src];char_branch=1;checking_job=\ref[job]'>[player_branch.name_short || player_branch.name]</a></td>"
+							branch_string += "<td style='width:10%;text-align:left'><a href='byond://?src=\ref[src];char_branch=1;checking_job=\ref[job]'>[player_branch.name_short || player_branch.name]</a></td>"
 						else
 							branch_string += "<td style='width:10%;text-align:left'><span class='linkOff'>[player_branch.name_short || player_branch.name]</span></td>"
 				if(!branch_string)
@@ -135,7 +135,7 @@
 						player_rank = mil_branches.get_rank(player_branch.name, pref.ranks[job.title])
 						if(player_rank)
 							if(LAZYLEN(ranks) > 1)
-								rank_branch_string += "<td style='width:10%;text-align:left'><a href='?src=\ref[src];char_rank=1;checking_job=\ref[job]'>[player_rank.name_short || player_rank.name]</a></td>"
+								rank_branch_string += "<td style='width:10%;text-align:left'><a href='byond://?src=\ref[src];char_rank=1;checking_job=\ref[job]'>[player_rank.name_short || player_rank.name]</a></td>"
 							else
 								rank_branch_string += "<td style='width:10%;text-align:left'><span class='linkOff'>[player_rank.name_short || player_rank.name]</span></td>"
 				if(!rank_branch_string)
@@ -143,11 +143,11 @@
 				rank_branch_string = "[branch_string][rank_branch_string]"
 
 				var/title = job.title
-				var/title_link = length(job.alt_titles) ? "<a href='?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
+				var/title_link = length(job.alt_titles) ? "<a href='byond://?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
 				if((job.head_position) || (title == "AI"))//Bold head jobs
 					title_link = "<b>[title_link]</b>"
 
-				var/help_link = "</td><td width = '10%' align = 'center'><a href='?src=\ref[src];job_info=[title]'>?</a></td>"
+				var/help_link = "</td><td width = '10%' align = 'center'><a href='byond://?src=\ref[src];job_info=[title]'>?</a></td>"
 				lastJob = job
 
 				var/species_name = S.get_root_species_name()
@@ -180,9 +180,9 @@
 
 				var/skill_link
 				if(pref.points_by_job[job] && (!job.available_by_default || current_level != JOB_LEVEL_NEVER))
-					skill_link = "<a class = 'Points' href='?src=\ref[src];set_skills=[title]'>Set Skills</a>"
+					skill_link = "<a class = 'Points' href='byond://?src=\ref[src];set_skills=[title]'>Set Skills</a>"
 				else
-					skill_link = "<a href='?src=\ref[src];set_skills=[title]'>View Skills</a>"
+					skill_link = "<a href='byond://?src=\ref[src];set_skills=[title]'>View Skills</a>"
 				skill_link = "<td>[skill_link]</td>"
 
 				if(!user.skillset.skills_transferable)
@@ -223,7 +223,7 @@
 					else
 						yes_link = "<font color='black'>[yes_link]</font>"
 						no_link = "<font color='#55cc55'>[no_link]</font>"
-					. += "<a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_LOW]'>[yes_link]</a><a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_NEVER]'>[no_link]</a>"
+					. += "<a href='byond://?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_LOW]'>[yes_link]</a><a href='byond://?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_NEVER]'>[no_link]</a>"
 				else if(!job.available_by_default)
 					. += "<font color = '#cccccc'>Not available at roundstart.</font>"
 				else
@@ -237,19 +237,19 @@
 							level_link = "<font color='#55cc55'>High</font>"
 						else
 							level_link = "<font color=black>Never</font>"
-					. += "<a href='?src=\ref[src];set_job=[title];inc_level=-1'>[level_link]</a>"
+					. += "<a href='byond://?src=\ref[src];set_job=[title];inc_level=-1'>[level_link]</a>"
 				. += "</td></tr>"
 			. += "</td></tr></table>"
 			. += "</center></table><center>"
 	. += "<hr/>"
 	switch(pref.alternate_option)
 		if(GET_RANDOM_JOB)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u>"
+			. += "<u><a href='byond://?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u>"
 		if(BE_ASSISTANT)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Be assistant if preference unavailable</a></u>"
+			. += "<u><a href='byond://?src=\ref[src];job_alternative=1'>Be assistant if preference unavailable</a></u>"
 		if(RETURN_TO_LOBBY)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u>"
-	. += "<a href='?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
+			. += "<u><a href='byond://?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u>"
+	. += "<a href='byond://?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
 	. += "<hr/>"
 	. += "</tt><br>"
 	. = jointext(.,null)
@@ -428,7 +428,7 @@
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
 		dat += "<hr style='clear:left;'>"
 		if(get_config_value(/decl/config/text/wikiurl))
-			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
+			dat += "<a href='byond://?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
 
 		var/description = job.get_description_blurb()
 		if(description)

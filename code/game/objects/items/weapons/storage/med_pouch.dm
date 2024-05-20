@@ -40,7 +40,7 @@ Single Use Emergency Pouches
 
 /obj/item/med_pouch/examine(mob/user)
 	. = ..()
-	to_chat(user, "<A href='?src=\ref[src];show_info=1'>Please read instructions before use.</A>")
+	to_chat(user, "<A href='byond://?src=\ref[src];show_info=1'>Please read instructions before use.</A>")
 
 /obj/item/med_pouch/CanUseTopic()
 	return STATUS_INTERACTIVE

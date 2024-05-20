@@ -124,13 +124,13 @@ var/global/list/gear_datums = list()
 		fcolor = COLOR_FONT_ORANGE
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
-	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>"
+	. += "<a href='byond://?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='byond://?src=\ref[src];next_slot=1'>\>\></a>"
 
 	if(max_gear_cost < INFINITY)
 		. += "<b><font color = '[fcolor]'>[pref.total_loadout_cost]/[max_gear_cost]</font> loadout points spent.</b>"
 
-	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
-	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
+	. += "<a href='byond://?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
+	. += "<a href='byond://?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
 
 	. += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
@@ -156,9 +156,9 @@ var/global/list/gear_datums = list()
 			if(LC.max_selections < INFINITY)
 				category_selections = " - [LC.max_selections - pref.total_loadout_selections[category]] remaining"
 			if(category_cost)
-				. += " <a href='?src=\ref[src];select_category=\ref[LC]'><font color = '#e67300'>[LC.name] - [category_cost][category_selections]</font></a> "
+				. += " <a href='byond://?src=\ref[src];select_category=\ref[LC]'><font color = '#e67300'>[LC.name] - [category_cost][category_selections]</font></a> "
 			else
-				. += " <a href='?src=\ref[src];select_category=\ref[LC]'>[LC.name] - 0[category_selections]</a> "
+				. += " <a href='byond://?src=\ref[src];select_category=\ref[LC]'>[LC.name] - 0[category_selections]</a> "
 
 	. += "</b></center></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
@@ -175,9 +175,9 @@ var/global/list/gear_datums = list()
 			if(istype(G))
 				if(G.slot)
 					i++
-					. += "<tr><td colspan=2><center>Layer [i]: [G.name]</center></td><td><a href='?src=\ref[src];gear=\ref[G];layer_lower=1'>Layer under</a><a href='?src=\ref[src];gear=\ref[G];layer_higher=1'>Layer over</a><a href='?src=\ref[src];toggle_gear=\ref[G]'>Remove</a></td></tr>"
+					. += "<tr><td colspan=2><center>Layer [i]: [G.name]</center></td><td><a href='byond://?src=\ref[src];gear=\ref[G];layer_lower=1'>Layer under</a><a href='byond://?src=\ref[src];gear=\ref[G];layer_higher=1'>Layer over</a><a href='byond://?src=\ref[src];toggle_gear=\ref[G]'>Remove</a></td></tr>"
 				else
-					other_gear += "<tr><td colspan=2><center>[G.name]</center></td><td><a href='?src=\ref[src];toggle_gear=\ref[G]'>Remove</a></td></tr>"
+					other_gear += "<tr><td colspan=2><center>[G.name]</center></td><td><a href='byond://?src=\ref[src];toggle_gear=\ref[G]'>Remove</a></td></tr>"
 
 		if(length(other_gear))
 			. += "<tr><td colspan=3><b><hr><center>Other gear</b><hr></center></td></tr>"
@@ -204,7 +204,7 @@ var/global/list/gear_datums = list()
 
 		var/ticked = (G.name in pref.gear_list[pref.gear_slot])
 		var/list/entry = list()
-		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=\ref[G]'>[G.name]</a></td>"
+		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='byond://?src=\ref[src];toggle_gear=\ref[G]'>[G.name]</a></td>"
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
 
@@ -272,7 +272,7 @@ var/global/list/gear_datums = list()
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
 				var/contents = tweak.get_contents(get_tweak_metadata(G, tweak))
 				if(contents)
-					entry += " <a href='?src=\ref[src];gear=\ref[G];tweak=\ref[tweak]'>[contents]</a>"
+					entry += " <a href='byond://?src=\ref[src];gear=\ref[G];tweak=\ref[tweak]'>[contents]</a>"
 			entry += "</td></tr>"
 		if(!hide_unavailable_gear || allowed || ticked)
 			. += entry

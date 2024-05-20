@@ -52,7 +52,7 @@
 		if(pref.species == list_species.name)
 			. += "<span class='linkOn'>[list_species.name]</span> "
 		else
-			. += "<a href='?src=\ref[src];set_species=[list_species.name]'>[list_species.name]</a> "
+			. += "<a href='byond://?src=\ref[src];set_species=[list_species.name]'>[list_species.name]</a> "
 	. += "</center><hr/></td></tr>"
 
 	. += "<tr>"
@@ -71,7 +71,7 @@
 	if(hide_species && length(desc) > 200)
 		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
 	. += "<td width>[desc]</td>"
-	. += "<td width = '50px'><a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a></td>"
+	. += "<td width = '50px'><a href='byond://?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a></td>"
 
 	. += "</tr>"
 

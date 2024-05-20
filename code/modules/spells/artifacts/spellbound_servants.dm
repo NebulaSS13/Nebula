@@ -208,7 +208,7 @@
 	var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/wizard_familiar)
 	for(var/mob/observer/ghost/ghost in global.player_list)
 		if(G.assess_candidate(ghost,null,FALSE))
-			to_chat(ghost, "[SPAN_NOTICE("<b>A wizard is requesting a Spell-Bound Servant!</b>")] (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
+			to_chat(ghost, "[SPAN_NOTICE("<b>A wizard is requesting a Spell-Bound Servant!</b>")] (<a href='byond://?src=\ref[src];master=\ref[user]'>Join</a>)")
 	return TRUE
 
 /obj/effect/cleanable/spellbound/CanUseTopic(var/mob)

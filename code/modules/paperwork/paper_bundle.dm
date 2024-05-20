@@ -200,30 +200,30 @@
 	dat = "<TABLE STYLE='white-space:nowrap; overflow:clip; width:100%; height:2em; table-layout:fixed;'><TR>"
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page > 1)
-		dat += "<A href='?src=\ref[src];first_page=1'>First</A>"
+		dat += "<A href='byond://?src=\ref[src];first_page=1'>First</A>"
 	else
 		dat += "First"
 	dat += "</TD>"
 
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page > 1)
-		dat += "<A href='?src=\ref[src];prev_page=1'>Previous</A>"
+		dat += "<A href='byond://?src=\ref[src];prev_page=1'>Previous</A>"
 	else
 		dat += "Previous"
 	dat += "</TD>"
 
-	dat += "<TD style='text-align:center;'><A href='?src=\ref[src];jump_to=1;'><B>[cur_page]/[length(pages)]</B></A> <A href='?src=\ref[src];remove=1'>Remove</A></TD>"
+	dat += "<TD style='text-align:center;'><A href='byond://?src=\ref[src];jump_to=1;'><B>[cur_page]/[length(pages)]</B></A> <A href='byond://?src=\ref[src];remove=1'>Remove</A></TD>"
 
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page < pages.len)
-		dat += "<A href='?src=\ref[src];next_page=1'>Next</A>"
+		dat += "<A href='byond://?src=\ref[src];next_page=1'>Next</A>"
 	else
 		dat += "Next"
 	dat += "</TD>"
 
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page < pages.len)
-		dat += "<A href='?src=\ref[src];last_page=1'>Last</A>"
+		dat += "<A href='byond://?src=\ref[src];last_page=1'>Last</A>"
 	else
 		dat += "Last"
 	dat += "</TD>"

@@ -203,34 +203,34 @@
 	. = ..()
 	. += "<br>Beaker: "
 	if(reagent_glass)
-		. += "<A href='?src=\ref[src];command=eject'>Loaded \[[reagent_glass.reagents.total_volume]/[reagent_glass.reagents.maximum_volume]\]</a>"
+		. += "<A href='byond://?src=\ref[src];command=eject'>Loaded \[[reagent_glass.reagents.total_volume]/[reagent_glass.reagents.maximum_volume]\]</a>"
 	else
 		. += "None loaded"
 
 /mob/living/bot/medbot/GetInteractPanel()
 	. = "Healing threshold: "
-	. += "<a href='?src=\ref[src];command=adj_threshold;amount=-10'>--</a> "
-	. += "<a href='?src=\ref[src];command=adj_threshold;amount=-5'>-</a> "
+	. += "<a href='byond://?src=\ref[src];command=adj_threshold;amount=-10'>--</a> "
+	. += "<a href='byond://?src=\ref[src];command=adj_threshold;amount=-5'>-</a> "
 	. += "[heal_threshold] "
-	. += "<a href='?src=\ref[src];command=adj_threshold;amount=5'>+</a> "
-	. += "<a href='?src=\ref[src];command=adj_threshold;amount=10'>++</a>"
+	. += "<a href='byond://?src=\ref[src];command=adj_threshold;amount=5'>+</a> "
+	. += "<a href='byond://?src=\ref[src];command=adj_threshold;amount=10'>++</a>"
 
 	. += "<br>Injection level: "
-	. += "<a href='?src=\ref[src];command=adj_inject;amount=-5'>-</a> "
+	. += "<a href='byond://?src=\ref[src];command=adj_inject;amount=-5'>-</a> "
 	. += "[injection_amount] "
-	. += "<a href='?src=\ref[src];command=adj_inject;amount=5'>+</a> "
+	. += "<a href='byond://?src=\ref[src];command=adj_inject;amount=5'>+</a> "
 
-	. += "<br>Reagent source: <a href='?src=\ref[src];command=use_beaker'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a>"
-	. += "<br>Treatment report is [declare_treatment ? "on" : "off"]. <a href='?src=\ref[src];command=declaretreatment'>Toggle</a>"
-	. += "<br>The speaker switch is [vocal ? "on" : "off"]. <a href='?src=\ref[src];command=togglevoice'>Toggle</a>"
+	. += "<br>Reagent source: <a href='byond://?src=\ref[src];command=use_beaker'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a>"
+	. += "<br>Treatment report is [declare_treatment ? "on" : "off"]. <a href='byond://?src=\ref[src];command=declaretreatment'>Toggle</a>"
+	. += "<br>The speaker switch is [vocal ? "on" : "off"]. <a href='byond://?src=\ref[src];command=togglevoice'>Toggle</a>"
 
 /mob/living/bot/medbot/GetInteractMaintenance()
 	. = "Injection mode: "
 	switch(emagged)
 		if(0)
-			. += "<a href='?src=\ref[src];command=emag'>Treatment</a>"
+			. += "<a href='byond://?src=\ref[src];command=emag'>Treatment</a>"
 		if(1)
-			. += "<a href='?src=\ref[src];command=emag'>Random (DANGER)</a>"
+			. += "<a href='byond://?src=\ref[src];command=emag'>Random (DANGER)</a>"
 		if(2)
 			. += "ERROROROROROR-----"
 

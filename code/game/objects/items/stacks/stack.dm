@@ -127,7 +127,7 @@
 	var/datum/stack_recipe_list/recipe_list = recipes
 	if (istype(recipe_list))
 		popup_title = "Crafting [recipe_list.name] with \the [src]"
-		dat += "<p><a href='?src=\ref[src];back=1'>Back</a></p>"
+		dat += "<p><a href='byond://?src=\ref[src];back=1'>Back</a></p>"
 		recipes = recipe_list.recipes
 	else if(islist(recipes) && length(recipes))
 		popup_title = "Crafting with \the [src]"

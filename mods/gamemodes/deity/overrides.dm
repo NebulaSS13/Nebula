@@ -22,6 +22,6 @@
 			M.take_damage(5, PAIN, do_update_health = FALSE)
 			M.take_damage(1, BRUTE)
 			if(prob(10)) //Only annoy them a /bit/
-				to_chat(M, SPAN_DANGER("You feel your insides curdle and burn! \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]"))
+				to_chat(M, SPAN_DANGER("You feel your insides curdle and burn! \[<a href='byond://?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]"))
 		return TRUE
 	return FALSE

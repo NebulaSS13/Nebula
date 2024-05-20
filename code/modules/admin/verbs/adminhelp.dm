@@ -41,7 +41,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 			if(!(word in adminhelp_ignored_words))
 				if(word == "ai" && !ai_found)
 					ai_found = 1
-					msg += "<b>[original_word] <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A></b> "
+					msg += "<b>[original_word] <A HREF='byond://?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A></b> "
 					continue
 				else
 					var/mob/found = ckeys[word]
@@ -52,10 +52,10 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 					if(found)
 						if(!(found in mobs_found))
 							mobs_found += found
-							msg += "<b>[original_word] <A HREF='?_src_=holder;adminmoreinfo=\ref[found]'>(?)</A>"
+							msg += "<b>[original_word] <A HREF='byond://?_src_=holder;adminmoreinfo=\ref[found]'>(?)</A>"
 							if(!ai_found && isAI(found))
 								ai_found = 1
-								msg += " <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A>"
+								msg += " <A HREF='byond://?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A>"
 							msg += "</b> "
 							continue
 		msg += "[original_word] "
@@ -118,7 +118,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	//Options bar:  mob, details ( admin = 2, dev = 3, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 	//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='byond://?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='byond://?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
@@ -131,7 +131,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 			to_chat(X, msg)
 			window_flash(X)
 	//show it to the person adminhelping too
-	to_chat(src, SPAN_BLUE("PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
+	to_chat(src, SPAN_BLUE("PM to-<b>Staff</b> (<a href='byond://?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
 	var/admin_number_present = global.admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)

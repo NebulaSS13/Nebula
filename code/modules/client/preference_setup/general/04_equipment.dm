@@ -114,27 +114,27 @@
 	if(mob_bodytype?.appearance_flags & HAS_UNDERWEAR)
 		for(var/datum/category_group/underwear/UWC in global.underwear.categories)
 			var/item_name = (pref.all_underwear && pref.all_underwear[UWC.name]) ? pref.all_underwear[UWC.name] : "None"
-			. += "[UWC.name]: <a href='?src=\ref[src];change_underwear=[UWC.name]'><b>[item_name]</b></a>"
+			. += "[UWC.name]: <a href='byond://?src=\ref[src];change_underwear=[UWC.name]'><b>[item_name]</b></a>"
 
 			var/datum/category_item/underwear/UWI = UWC.items_by_name[item_name]
 			if(UWI)
 				for(var/datum/gear_tweak/gt in UWI.tweaks)
-					. += " <a href='?src=\ref[src];underwear=[UWC.name];tweak=\ref[gt]'>[gt.get_contents(get_underwear_metadata(UWC.name, gt))]</a>"
+					. += " <a href='byond://?src=\ref[src];underwear=[UWC.name];tweak=\ref[gt]'>[gt.get_contents(get_underwear_metadata(UWC.name, gt))]</a>"
 
 			. += "<br>"
-	. += "<b>Backpack type:</b> <a href='?src=\ref[src];change_backpack=1'><b>[pref.backpack.name]</b></a>"
+	. += "<b>Backpack type:</b> <a href='byond://?src=\ref[src];change_backpack=1'><b>[pref.backpack.name]</b></a>"
 	for(var/datum/backpack_tweak/bt in pref.backpack.tweaks)
-		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
+		. += " <a href='byond://?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
 
 	if(length(global.using_map.survival_box_choices) > 1)
-		. += "<b>Survival box type:</b> <a href='?src=\ref[src];change_survival_box=1'><b>[pref.survival_box_choice]</b></a><br>"
+		. += "<b>Survival box type:</b> <a href='byond://?src=\ref[src];change_survival_box=1'><b>[pref.survival_box_choice]</b></a><br>"
 
 	if(global.using_map.passport_type)
-		. += "<b>Passport:</b> <a href='?src=\ref[src];toggle_passport=1'><b>[pref.give_passport ? "Yes" : "No"]</b></a><br>"
+		. += "<b>Passport:</b> <a href='byond://?src=\ref[src];toggle_passport=1'><b>[pref.give_passport ? "Yes" : "No"]</b></a><br>"
 
 	if(length(global.using_map.starting_cash_choices) > 1)
-		. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[pref.starting_cash_choice]</a><br>"
+		. += "<br><b>Personal finances:</b><br><a href='byond://?src=\ref[src];change_cash_choice=1'>[pref.starting_cash_choice]</a><br>"
 	return jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/equipment/proc/get_underwear_metadata(var/underwear_category, var/datum/gear_tweak/gt)

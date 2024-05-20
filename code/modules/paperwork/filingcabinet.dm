@@ -42,7 +42,7 @@
 	user.set_machine(src)
 	var/dat = "<HR><TABLE>"
 	for(var/obj/item/P in src)
-		dat += "<TR><TD><A href='?src=\ref[src];retrieve=\ref[P]'>[P.name]</A></TD></TR>"
+		dat += "<TR><TD><A href='byond://?src=\ref[src];retrieve=\ref[P]'>[P.name]</A></TD></TR>"
 	dat += "</TABLE>"
 	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=filingcabinet;size=350x300")
 
