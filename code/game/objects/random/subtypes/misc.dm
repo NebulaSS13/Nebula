@@ -27,7 +27,7 @@
 		/obj/item/secure_storage/briefcase/money       = 1,
 		/obj/item/box/syndie_kit/cigarette             = 1,
 		/obj/item/stack/telecrystal                    = 1,
-		/obj/item/clothing/under/syndicate             = 2,
+		/obj/item/clothing/shirt/syndicate             = 2,
 		/obj/item/chems/syringe                        = 3,
 		/obj/item/chems/syringe/steroid                = 2,
 		/obj/item/chems/syringe/drugs                  = 1,

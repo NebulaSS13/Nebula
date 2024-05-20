@@ -154,8 +154,8 @@
 
 /obj/random/clothing/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/under/syndicate/tacticool   = 2,
-		/obj/item/clothing/under/syndicate/combat      = 1,
+		/obj/item/clothing/shirt/syndicate/tacticool   = 2,
+		/obj/item/clothing/shirt/syndicate/combat      = 1,
 		/obj/item/clothing/jumpsuit/hazard             = 4,
 		/obj/item/clothing/jumpsuit/sterile            = 4,
 		/obj/item/clothing/pants/casual/camo           = 2,

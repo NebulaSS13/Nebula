@@ -705,7 +705,8 @@
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/glasses/tacgoggles,
 /obj/item/clothing/shoes/legguards,
-/obj/item/clothing/under/syndicate,
+/obj/item/clothing/shirt/syndicate,
+/obj/item/clothing/pants/casual/camo,
 /turf/floor/tiled/dark/monotile,
 /area/liberia/mule)
 "bt" = (

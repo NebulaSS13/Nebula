@@ -176,10 +176,10 @@
 
 // Tacticool
 /datum/fabricator_recipe/textiles/job/security/tactical
-	path = /obj/item/clothing/under/syndicate
+	path = /obj/item/clothing/shirt/syndicate
 
 /datum/fabricator_recipe/textiles/job/security/syndicatecombat
-	path = /obj/item/clothing/under/syndicate/combat
+	path = /obj/item/clothing/shirt/syndicate/combat
 
 /datum/fabricator_recipe/textiles/job/security/maskbalatact
 	path = /obj/item/clothing/mask/balaclava/tactical

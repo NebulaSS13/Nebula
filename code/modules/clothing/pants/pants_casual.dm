@@ -59,6 +59,21 @@
 	desc = "A pair of woodland camouflage pants. Probably not the best choice for space."
 	icon = 'icons/clothing/pants/pants_camo.dmi'
 
+/obj/item/clothing/pants/casual/camo/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/syndicate
+	)
+
+/obj/item/clothing/pants/casual/camo/outfit_combat
+	starting_accessories = list(
+		/obj/item/clothing/shirt/syndicate/combat
+	)
+
+/obj/item/clothing/pants/casual/camo/outfit_tacticool
+	starting_accessories = list(
+		/obj/item/clothing/shirt/syndicate/tacticool
+	)
+
 /obj/item/clothing/pants/baggy
 	name = "baggy pants"
 	desc = "A nondescript pair of baggy pants."

@@ -118,7 +118,7 @@
 	path = /obj/item/clothing/head/xeno/scarf
 
 /datum/fabricator_recipe/textiles/gimmick/syndicatetactical
-	path = /obj/item/clothing/under/syndicate/tacticool
+	path = /obj/item/clothing/shirt/syndicate/tacticool
 
 /datum/fabricator_recipe/textiles/gimmick/costumesanta
 	path = /obj/item/clothing/suit/santa

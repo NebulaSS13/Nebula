@@ -48,7 +48,7 @@
 		/obj/item/clothing/mask/gas = 2,
 		/obj/item/clothing/shoes/jackboots/swat = 2,
 		/obj/item/clothing/suit/space/void/swat = 2,
-		/obj/item/clothing/under/syndicate/tacticool = 2)
+		/obj/item/clothing/shirt/syndicate/tacticool = 2)
 
 /obj/structure/closet/thunderdome
 	name = "\improper Thunderdome closet"

@@ -145,7 +145,7 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/flashlight/lantern                 =   3,
 		/obj/item/clothing/glasses/material          =   3,
 		/obj/item/clothing/head/soft/yellow          =   3,
-		/obj/item/clothing/under/syndicate/tacticool =   2,
+		/obj/item/clothing/shirt/syndicate/tacticool =   2,
 		/obj/item/clothing/webbing/vest/black        =   2,
 		/obj/item/clothing/webbing/vest/brown        =   2,
 		/obj/item/handcuffs                          =   2,
@@ -154,7 +154,7 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/toolbox/syndicate                  =   1,
 		/obj/item/belt/utility/full                  =   1,
 		/obj/item/destTagger                         =   1,
-		/obj/item/clothing/under/syndicate/combat    =   1,
+		/obj/item/clothing/shirt/syndicate/combat    =   1,
 		/obj/item/beartrap                           =   1
 	)
 	return spawnable_choices
