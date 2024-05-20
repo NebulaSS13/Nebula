@@ -53,6 +53,7 @@ var/global/obj/screen/robot_inventory
 	//Intent
 	action_intent = new /obj/screen/intent/robot(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTENT)
 	action_intent.icon_state = R.a_intent
+
 	adding += action_intent
 	adding += new /obj/screen/robot_panel(null, mymob)
 	adding += new /obj/screen/robot_store(null, mymob)
