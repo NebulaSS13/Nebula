@@ -23,7 +23,7 @@
 		var/turf/spark_turf = get_turf(src)
 		if(loc == user) // held in inventory
 			var/turf/front_spark_turf = get_step_resolving_mimic(spark_turf, user.dir)
-			if(istype(front_spark_turf) && user.Adjacent(front_spark_turf))
+			if(istype(front_spark_turf) && !front_spark_turf.contains_dense_objects() && user.Adjacent(front_spark_turf))
 				spark_turf = front_spark_turf
 		if(spark_turf)
 			spark_at(spark_turf, amount = 2, spark_type = /datum/effect/effect/system/spark_spread/non_electrical)
