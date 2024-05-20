@@ -2085,7 +2085,6 @@
 #include "code\modules\clothing\suits\jackets\waistcoat.dm"
 #include "code\modules\clothing\suits\jackets\wintercoat.dm"
 #include "code\modules\clothing\under\_under.dm"
-#include "code\modules\clothing\under\fated_robes.dm"
 #include "code\modules\clothing\under\miscellaneous.dm"
 #include "code\modules\clothing\under\monkey.dm"
 #include "code\modules\clothing\under\syndicate.dm"
