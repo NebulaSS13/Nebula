@@ -64,8 +64,3 @@
 	name = "workman outfit"
 	desc = "The very image of a working man. Not that you're probably doing work."
 	icon = 'icons/clothing/uniform_mechanic.dmi'
-
-/obj/item/clothing/jumpsuit/psych/turtleneck/sweater
-	name = "sweater"
-	desc = "A warm looking sweater and a pair of dark blue slacks."
-	icon = 'icons/clothing/uniform_turtleneck.dmi'

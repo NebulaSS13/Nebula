@@ -2004,6 +2004,7 @@
 #include "code\modules\clothing\shirts\pajamas.dm"
 #include "code\modules\clothing\shirts\polo.dm"
 #include "code\modules\clothing\shirts\scrubs.dm"
+#include "code\modules\clothing\shirts\sweaters.dm"
 #include "code\modules\clothing\shirts\toga.dm"
 #include "code\modules\clothing\shirts\tshirt.dm"
 #include "code\modules\clothing\shirts\tunics.dm"

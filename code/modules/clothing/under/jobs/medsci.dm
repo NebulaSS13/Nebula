@@ -6,8 +6,3 @@
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
-
-/obj/item/clothing/jumpsuit/psych/turtleneck
-	desc = "A turqouise sweater and a pair of dark blue slacks."
-	name = "turqouise turtleneck"
-	icon = 'icons/clothing/uniform_turtleneck_blue.dmi'

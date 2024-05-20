@@ -108,9 +108,6 @@
 /datum/fabricator_recipe/textiles/job/medical/psych
 	path = /obj/item/clothing/jumpsuit/psych
 
-/datum/fabricator_recipe/textiles/job/medical/turtleneck
-	path = /obj/item/clothing/jumpsuit/psych/turtleneck
-
 // Suits
 /datum/fabricator_recipe/textiles/job/medical/surgicalapron
 	path = /obj/item/clothing/suit/surgicalapron

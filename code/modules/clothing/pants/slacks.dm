@@ -125,3 +125,8 @@
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/suit/jacket/vest/black
 	)
+
+/obj/item/clothing/pants/slacks/navy
+	name = "navy slacks"
+	desc = "Some formal navy blue slacks."
+	icon = 'icons/clothing/pants/slacks_navy.dmi'

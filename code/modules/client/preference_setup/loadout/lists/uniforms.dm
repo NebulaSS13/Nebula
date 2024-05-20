@@ -134,7 +134,7 @@
 
 /decl/loadout_option/uniform/turtleneck
 	name = "sweater, colour select"
-	path = /obj/item/clothing/jumpsuit/psych/turtleneck/sweater
+	path = /obj/item/clothing/shirt/sweater
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/kimono
