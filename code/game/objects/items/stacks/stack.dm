@@ -152,8 +152,14 @@
 
 
 /obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/quantity, mob/user)
+
+	quantity = max(quantity, 1)
+
 	var/required = quantity*recipe.req_amount
-	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
+	var/produced = quantity*recipe.res_amount
+	if(!isnull(recipe.max_res_amount))
+		produced = min(produced, recipe.max_res_amount)
+
 	var/decl/material/mat       = get_material()
 	var/decl/material/reinf_mat = get_reinforced_material()
 
