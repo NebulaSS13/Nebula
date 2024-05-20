@@ -141,9 +141,10 @@
 	)
 
 /decl/loadout_option/fantasy/utility/striker
-	name = "striker"
+	name = "flint striker"
 	path = /obj/item/rock/flint/striker
 	available_materials = null
+	loadout_flags = null
 
 /decl/loadout_option/fantasy/utility/knife
 	name = "knife, belt"
