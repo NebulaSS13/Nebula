@@ -370,6 +370,17 @@
 	if(!SSjobs.job_icons[title])
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
 		if(mannequin)
+			var/decl/species/mannequin_species = get_species_by_key(global.using_map.default_species)
+			if(!is_species_allowed(mannequin_species))
+				// Don't just default to the first species allowed, pick one at random.
+				for(var/other_species in shuffle(get_playable_species()))
+					var/decl/species/other_species_decl = get_species_by_key(other_species)
+					if(is_species_allowed(other_species_decl))
+						mannequin_species = other_species_decl
+						break
+			if(!is_species_allowed(mannequin_species))
+				PRINT_STACK_TRACE("No allowed species allowed for job [title] ([type]), falling back to default!")
+			mannequin.change_species(mannequin_species.name)
 			dress_mannequin(mannequin)
 			mannequin.set_dir(SOUTH)
 			var/icon/preview_icon = getFlatIcon(mannequin)
