@@ -11,7 +11,7 @@
 	var/guestbanned = FALSE                   // If set to 1 this job will be unavalible to guests
 	var/must_fill = FALSE                     // If set to 1 this job will be have priority over other job preferences. Do not recommend on jobs with more than one position.
 	var/not_random_selectable = FALSE         // If set to 1 this job will not be selected when a player asks for a random job.
-	var/description                           // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
+	var/description                           // If set, returns a static description. To add dynamic text, override get_description_blurb, call parent aka . = ..() and then . += "extra text" on the line after that.
 	var/list/event_categories                 // A set of tags used to check jobs for suitability for things like random event selection.
 	var/skip_loadout_preview = FALSE          // Whether or not the job should render loadout items in char preview.
 	var/supervisors = null                    // Supervisors, who this person answers to directly
@@ -370,6 +370,17 @@
 	if(!SSjobs.job_icons[title])
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
 		if(mannequin)
+			var/decl/species/mannequin_species = get_species_by_key(global.using_map.default_species)
+			if(!is_species_allowed(mannequin_species))
+				// Don't just default to the first species allowed, pick one at random.
+				for(var/other_species in shuffle(get_playable_species()))
+					var/decl/species/other_species_decl = get_species_by_key(other_species)
+					if(is_species_allowed(other_species_decl))
+						mannequin_species = other_species_decl
+						break
+			if(!is_species_allowed(mannequin_species))
+				PRINT_STACK_TRACE("No allowed species allowed for job [title] ([type]), falling back to default!")
+			mannequin.change_species(mannequin_species.name)
 			dress_mannequin(mannequin)
 			mannequin.set_dir(SOUTH)
 			var/icon/preview_icon = getFlatIcon(mannequin)

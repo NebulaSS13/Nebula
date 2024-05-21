@@ -9,6 +9,8 @@
 
 /datum/job/shaded_hills/inn/innkeeper
 	title                   = "Innkeeper"
+	supervisors             = "your business and self-interest"
+	description             = "You are the proprietor of the inn, directing your employees and ensuring guests are treated properly, whatever you think that may mean."
 	spawn_positions         = 1
 	total_positions         = 1
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/innkeeper
@@ -27,6 +29,8 @@
 
 /datum/job/shaded_hills/inn/inn_worker
 	title                   = "Inn Worker"
+	supervisors             = "the innkeeper"
+	description             = "You work at the inn, though your exact duties are nebulous. You may be a cook in the kitchen, someone who keeps the lanterns lit and the furniture from falling apart, or something else entirely; either way, you have to earn your keep."
 	spawn_positions         = 3
 	total_positions         = 3
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/inn_worker
@@ -36,6 +40,8 @@
 
 /datum/job/shaded_hills/inn/bartender
 	title                   = "Bartender"
+	supervisors             = "the innkeeper"
+	description             = "You work the bar at the inn and ensure that patrons are fed, slaked, and merry. If you keep the hearth lit and prepare fresh food and drink, you will certainly earn your keep."
 	spawn_positions         = 2
 	total_positions         = 2
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/bartender
@@ -45,6 +51,8 @@
 
 /datum/job/shaded_hills/inn/farmer
 	title                   = "Farmer"
+	supervisors             = "your self-interest"
+	description             = "You grow crops both for your own subsistence and to sell to others like the innkeeper or general store. You are knowledgeable of local plants grown for sustenance, but your knowledge of niche herbs may be spottier."
 	spawn_positions         = 3
 	total_positions         = 3
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/farmer

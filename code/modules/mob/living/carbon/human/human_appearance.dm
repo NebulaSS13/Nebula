@@ -20,7 +20,7 @@
 	if(!new_species)
 		return
 
-	if(species == new_species)
+	if(species?.name == new_species)
 		return
 
 	if(!(new_species in get_all_species()))
@@ -44,14 +44,12 @@
 	if (antag && antag.required_language)
 		add_language(antag.required_language)
 		set_default_language(antag.required_language)
-	reset_hair()
 	try_refresh_visible_overlays()
 	return 1
 
 /mob/living/carbon/human/set_gender(var/new_gender, var/update_body = FALSE)
 	. = ..()
 	if(. && update_body)
-		reset_hair()
 		update_body()
 		update_dna()
 

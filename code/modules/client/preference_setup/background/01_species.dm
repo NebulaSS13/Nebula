@@ -16,7 +16,7 @@
 /datum/category_item/player_setup_item/background/species/proc/sanitize_species()
 
 	if(!pref.species || !get_species_by_key(pref.species))
-		pref.species = global.using_map.default_species
+		pref.set_species(global.using_map.default_species)
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
@@ -89,14 +89,7 @@
 
 		var/choice = href_list["set_species"]
 		if(choice != pref.species)
-
-			pref.species = choice
-			pref.sanitize_preferences()
-			var/decl/species/mob_species = pref.get_species_decl()
-			mob_species.handle_post_species_pref_set(pref)
-			var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
-			mob_bodytype.handle_post_bodytype_pref_set(pref)
-
+			pref.set_species(choice)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	. = ..()
