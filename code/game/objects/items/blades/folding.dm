@@ -52,3 +52,7 @@
 // Only show the inhand sprite when open.
 /obj/item/bladed/folding/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
 	. = open ? ..() : new /image
+
+// TODO: Select hilt, guard, etc. as striking material based on dynamic intents
+/obj/item/bladed/folding/get_striking_material(mob/user, atom/target)
+	. = open ? ..() : hilt_material

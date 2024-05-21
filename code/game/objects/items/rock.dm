@@ -19,7 +19,9 @@
 // TODO: craft a flint striker from a flint and a piece of metal
 /obj/item/rock/attackby(obj/item/W, mob/user)
 
-	if((W.material?.ferrous && material?.type == /decl/material/solid/stone/flint) || (material?.ferrous && W.material?.type == /decl/material/solid/stone/flint))
+	var/decl/material/weapon_material = W.get_striking_material()
+	var/decl/material/our_material = get_material()
+	if((weapon_material?.ferrous && our_material?.type == /decl/material/solid/stone/flint) || (our_material?.ferrous && weapon_material?.type == /decl/material/solid/stone/flint))
 		var/turf/spark_turf = get_turf(src)
 		if(loc == user) // held in inventory
 			var/turf/front_spark_turf = get_step_resolving_mimic(spark_turf, user.dir)
