@@ -53,14 +53,15 @@ var/global/obj/screen/robot_inventory
 	//Intent
 	action_intent = new /obj/screen/intent/robot(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTENT)
 	action_intent.icon_state = R.a_intent
-	adding += action_intent
 
-	adding            += new /obj/screen/robot_panel(        null, mymob)
+	adding += action_intent
+	adding += new /obj/screen/robot_panel(null, mymob)
+	adding += new /obj/screen/robot_store(null, mymob)
+
 	R.hands            = new /obj/screen/robot_module/select(null, mymob)
 	robot_inventory    = new /obj/screen/robot_inventory(    null, mymob)
 	R.cells            = new /obj/screen/robot_charge(       null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_CHARGE)
 	R.healths          = new /obj/screen/robot_health(       null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HEALTH)
-	R.throw_icon       = new /obj/screen/robot_store(        null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTERACTION)
 	R.bodytemp         = new /obj/screen/bodytemp(           null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
 	R.oxygen           = new /obj/screen/robot_oxygen(       null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
 	R.fire             = new /obj/screen/robot_fire(         null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS_FIRE)
@@ -71,7 +72,7 @@ var/global/obj/screen/robot_inventory
 	R.gun_move_icon    = new /obj/screen/gun/move(           null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
 	R.radio_use_icon   = new /obj/screen/gun/radio(          null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
 
-	hud_elements = list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
+	hud_elements = list(R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
 	..()
 
 /datum/hud/proc/toggle_show_robot_modules()
