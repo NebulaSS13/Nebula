@@ -521,6 +521,7 @@
 #include "code\datums\music_tracks\epicintro2015.dm"
 #include "code\datums\music_tracks\epicintro2017.dm"
 #include "code\datums\music_tracks\europa.dm"
+#include "code\datums\music_tracks\fantasy.dm"
 #include "code\datums\music_tracks\floating.dm"
 #include "code\datums\music_tracks\human.dm"
 #include "code\datums\music_tracks\lasers.dm"

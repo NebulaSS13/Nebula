@@ -20,6 +20,11 @@
 	_available_backpacks    = list(
 		/decl/backpack_outfit/sack
 	)
+	lobby_tracks = list(
+		/decl/music_track/dhaka,
+		/decl/music_track/teller,
+		/decl/music_track/suonatore
+	)
 
 /decl/backpack_outfit/sack
 	is_default = TRUE
