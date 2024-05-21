@@ -49,5 +49,6 @@
 		attack_verb = closed_attack_verbs
 	..()
 
-/obj/item/knife/folding/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
+// Only show the inhand sprite when open.
+/obj/item/bladed/folding/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
 	. = open ? ..() : new /image
