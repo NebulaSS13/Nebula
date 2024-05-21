@@ -1,0 +1,4 @@
+author: Penelope Haze
+changes:
+  - {soundadd: 'added lobby music for Shaded Hills, by Kevin Macleod.'}
+delete-after: true
