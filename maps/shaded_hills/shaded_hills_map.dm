@@ -5,3 +5,7 @@
 		/decl/loadout_category/fantasy/clothing,
 		/decl/loadout_category/fantasy/utility
 	)
+
+/decl/spawnpoint/arrivals
+	name = "Queens' Road"
+	spawn_announcement = null
