@@ -1,6 +1,7 @@
 /obj/screen/robot_modules_background
-	icon_state = "block"
-	icon = 'icons/mob/screen/effects.dmi'
+	name              = "module"
+	icon_state        = "block"
+	icon              = 'icons/mob/screen/styles/robot/modules_background.dmi'
 	requires_ui_style = FALSE
 
 /obj/screen/robot_module

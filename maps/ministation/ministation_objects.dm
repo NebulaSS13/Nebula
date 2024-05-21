@@ -1,3 +1,6 @@
+/turf/wall/natural/random/ministation
+	initial_gas = null
+
 /turf/wall/natural/random/ministation/get_weighted_mineral_list()
 	if(prob(80))
 		. = list()
