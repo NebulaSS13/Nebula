@@ -247,6 +247,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/clothing/head/hood
+	name = "hood"
 	icon = 'icons/clothing/head/hood_craftable.dmi'
 	body_parts_covered = SLOT_HEAD
 	min_cold_protection_temperature = T0C - 20

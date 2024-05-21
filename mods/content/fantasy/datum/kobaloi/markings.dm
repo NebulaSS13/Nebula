@@ -1,11 +1,11 @@
 /obj/item/organ/external/tail/kobaloi
-	tail_icon        = 'mods/species/fantasy/icons/kobaloi/body.dmi'
+	tail_icon        = 'mods/content/fantasy/icons/kobaloi/body.dmi'
 	tail             = "tail"
 	tail_blend       = ICON_MULTIPLY
 
 /decl/sprite_accessory/marking/kobaloi
 	abstract_type    = /decl/sprite_accessory/marking/kobaloi
-	icon             = 'mods/species/fantasy/icons/kobaloi/markings.dmi'
+	icon             = 'mods/content/fantasy/icons/kobaloi/markings.dmi'
 	color_blend      = ICON_MULTIPLY
 	species_allowed  = list(SPECIES_KOBALOI)
 	body_parts       = list(BP_HEAD)
@@ -73,7 +73,7 @@
 
 /decl/sprite_accessory/marking/kobaloi/horns
 	abstract_type    = /decl/sprite_accessory/marking/kobaloi/horns
-	icon             = 'mods/species/fantasy/icons/kobaloi/horns.dmi'
+	icon             = 'mods/content/fantasy/icons/kobaloi/horns.dmi'
 
 /decl/sprite_accessory/marking/kobaloi/horns/spikes
 	name             = "Spikes"

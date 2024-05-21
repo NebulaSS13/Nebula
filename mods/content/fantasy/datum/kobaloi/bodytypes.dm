@@ -3,9 +3,9 @@
 	bodytype_category    = BODYTYPE_KOBALOI
 	limb_blend           = ICON_MULTIPLY
 	bandages_icon        = 'icons/mob/bandage.dmi'
-	icon_base            = 'mods/species/fantasy/icons/kobaloi/body.dmi'
-	icon_deformed        = 'mods/species/fantasy/icons/kobaloi/body.dmi'
-	eye_icon             = 'mods/species/fantasy/icons/kobaloi/eyes.dmi'
+	icon_base            = 'mods/content/fantasy/icons/kobaloi/body.dmi'
+	icon_deformed        = 'mods/content/fantasy/icons/kobaloi/body.dmi'
+	eye_icon             = 'mods/content/fantasy/icons/kobaloi/eyes.dmi'
 	base_color           = "#8f974a"
 	base_eye_color       = "#d95763"
 	bodytype_flag        = BODY_FLAG_KOBALOI

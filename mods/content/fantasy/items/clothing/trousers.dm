@@ -1,11 +1,11 @@
 /obj/item/clothing/pants/trousers
 	name                = "trousers"
 	desc                = "Some simple trousers. One leg per leg."
-	icon                = 'mods/species/fantasy/icons/clothing/trousers.dmi'
+	icon                = 'mods/content/fantasy/icons/clothing/trousers.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material            = /decl/material/solid/organic/leather
 	sprite_sheets       = list(
-		BODYTYPE_HNOLL  = 'mods/species/fantasy/icons/clothing/trousers_hnoll.dmi'
+		BODYTYPE_HNOLL  = 'mods/content/fantasy/icons/clothing/trousers_hnoll.dmi'
 	)
 
 /obj/item/clothing/pants/trousers/jerkin/Initialize()
@@ -18,7 +18,7 @@
 /obj/item/clothing/pants/trousers/braies
 	name                = "braies"
 	desc                = "Some short trousers. Comfortable and easy to wear."
-	icon                = 'mods/species/fantasy/icons/clothing/braies.dmi'
+	icon                = 'mods/content/fantasy/icons/clothing/braies.dmi'
 	sprite_sheets       = list(
-		BODYTYPE_HNOLL  = 'mods/species/fantasy/icons/clothing/braies_hnoll.dmi'
+		BODYTYPE_HNOLL  = 'mods/content/fantasy/icons/clothing/braies_hnoll.dmi'
 	)
