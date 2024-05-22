@@ -22,6 +22,7 @@
 		desc = "A log wall made of [material.solid_name]."
 
 // Subtypes.
+/* Uncomment when 515 is the minimum version.
 #define LOG_WALL_SUBTYPE(material_name) \
 /turf/wall/log/##material_name { \
 	material = /decl/material/solid/organic/wood/##material_name; \
@@ -32,7 +33,37 @@ LOG_WALL_SUBTYPE(fungal)
 LOG_WALL_SUBTYPE(ebony)
 LOG_WALL_SUBTYPE(walnut)
 LOG_WALL_SUBTYPE(maple)
+LOG_WALL_SUBTYPE(mahogany)
 LOG_WALL_SUBTYPE(bamboo)
 LOG_WALL_SUBTYPE(yew)
 
 #undef LOG_WALL_SUBTYPE
+*/
+
+/turf/wall/log/fungal
+	material = /decl/material/solid/organic/wood/fungal
+	color = "#e6d8dd"
+
+/turf/wall/log/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = WOOD_COLOR_BLACK
+
+/turf/wall/log/walnut
+	material = /decl/material/solid/organic/wood/walnut
+	color = WOOD_COLOR_CHOCOLATE
+
+/turf/wall/log/maple
+	material = /decl/material/solid/organic/wood/maple
+	color = WOOD_COLOR_PALE
+
+/turf/wall/log/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
+	color = WOOD_COLOR_RICH
+
+/turf/wall/log/bamboo
+	material = /decl/material/solid/organic/wood/bamboo
+	color = WOOD_COLOR_PALE2
+
+/turf/wall/log/yew
+	material = /decl/material/solid/organic/wood/yew
+	color = WOOD_COLOR_YELLOW

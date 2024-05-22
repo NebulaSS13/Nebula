@@ -443,11 +443,13 @@
 /obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
 	return FALSE
 
+/* Uncomment when 515 is the minimum version.
 #define MATERIAL_FIREPLACE(material_name) \
 /obj/structure/fire_source/fireplace/##material_name { \
 	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
 	material = /decl/material/solid/stone/##material_name; \
 }
+*/
 
 /obj/structure/fire_source/fireplace/basalt
 	material = /decl/material/solid/stone/basalt
