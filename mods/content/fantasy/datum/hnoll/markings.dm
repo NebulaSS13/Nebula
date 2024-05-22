@@ -7,6 +7,11 @@
 	color_blend = ICON_MULTIPLY
 	uid = "acc_hair_hnoll_rattail"
 
+/decl/sprite_accessory/hair/hnoll/get_hidden_substitute()
+	if(accessory_flags & VERY_SHORT)
+		return src
+	return GET_DECL(/decl/sprite_accessory/hair/bald)
+
 /decl/sprite_accessory/hair/hnoll/straight
 	name = "Hnoll Straight Hair"
 	icon_state = "hair_straight"
