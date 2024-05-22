@@ -142,6 +142,8 @@
 	W.last_outside_check = OUTSIDE_UNCERTAIN
 	if(W.is_outside != old_outside)
 		W.set_outside(old_outside, skip_weather_update = TRUE)
+	else if(!W.zone_membership_candidate && (old_zone_membership_candidate))
+		update_external_atmos_participation()
 
 	var/turf/below = GetBelow(src)
 	if(below)
@@ -159,12 +161,6 @@
 
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)
-
-	// If the new tile never participate in zones (ie it will always have the exterior gas mix regardless of outside status), then upon changing
-	// the tile we update the adjacent neighbors to create new edges.
-	// In rare cases the zone may have already been invalidated, but this should not cause any issues.
-	if(!W.zone_membership_candidate && (W.zone_membership_candidate != old_zone_membership_candidate))
-		mark_neighbours_for_update()
 
 	for(var/atom/movable/AM in W.contents)
 		AM.update_turf_alpha_mask()

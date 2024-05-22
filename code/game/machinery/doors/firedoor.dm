@@ -473,13 +473,7 @@
 	update_heat_protection(loc)
 
 	if(istype(source) && source.simulated)
-		if(SHOULD_PARTICIPATE_IN_ZONES(source))
-			SSair.mark_for_update(source)
-		else
-			source.mark_neighbours_for_update()
+		SSair.mark_for_update(source)
 	if(istype(destination) && destination.simulated)
-		if(SHOULD_PARTICIPATE_IN_ZONES(destination))
-			SSair.mark_for_update(destination)
-		else
-			destination.mark_neighbours_for_update()
+		SSair.mark_for_update(destination)
 	return TRUE
