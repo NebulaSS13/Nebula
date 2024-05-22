@@ -19,10 +19,7 @@
 		set_opacity(0)
 		for(var/turf/turf in loc)
 			if(turf.simulated)
-				if(SHOULD_PARTICIPATE_IN_ZONES(turf))
-					SSair.mark_for_update(turf)
-				else
-					turf.mark_neighbours_for_update()
+				SSair.mark_for_update(turf)
 	else
 		can_open = WALL_OPENING
 		set_density(1)
@@ -36,10 +33,7 @@
 		set_opacity(1)
 		for(var/turf/turf in loc)
 			if(turf.simulated)
-				if(SHOULD_PARTICIPATE_IN_ZONES(turf))
-					SSair.mark_for_update(turf)
-				else
-					turf.mark_neighbours_for_update()
+				SSair.mark_for_update(turf)
 
 	can_open = WALL_CAN_OPEN
 	update_icon()
@@ -51,11 +45,7 @@
 	for(var/turf/turf in loc)
 		if(turf.simulated)
 			update_thermal(turf)
-			if(SHOULD_PARTICIPATE_IN_ZONES(turf))
-				SSair.mark_for_update(turf)
-			else
-				turf.mark_neighbours_for_update()
-
+			SSair.mark_for_update(turf)
 
 /turf/wall/proc/update_thermal(var/turf/source)
 	if(istype(source) && source.simulated)

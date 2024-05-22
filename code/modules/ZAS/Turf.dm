@@ -29,6 +29,7 @@
 
 		return 1
 
+	var/zas_participation = SHOULD_PARTICIPATE_IN_ZONES(src)
 	var/previously_open = airflow_open_directions
 	airflow_open_directions = 0
 
@@ -83,58 +84,69 @@
 
 			if(TURF_HAS_VALID_ZONE(unsim))
 
-				//Might have assigned a zone, since this happens for each direction.
-				if(!zone)
+				if(zas_participation)
+					//Might have assigned a zone, since this happens for each direction.
+					if(!zone)
 
-					//We do not merge if
-					//    they are blocking us and we are not blocking them, or if
-					//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
-					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))
+						//We do not merge if
+						//    they are blocking us and we are not blocking them, or if
+						//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
+						if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))
+							#ifdef ZASDBG
+							if(verbose)
+								zas_log("[dir2text(d)] is zone blocked.")
+							//dbg(ZAS_ZONE_BLOCKER(d))
+							#endif
+
+							//Postpone this tile rather than exit, since a connection can still be made.
+							if(!postponed) postponed = list()
+							postponed.Add(unsim)
+
+						else
+
+							unsim.zone.add(src)
+
+							#ifdef ZASDBG
+							dbg(zasdbgovl_assigned)
+							if(verbose)
+								zas_log("Added to [zone]")
+							#endif
+
+					else if(unsim.zone != zone)
+
 						#ifdef ZASDBG
 						if(verbose)
-							zas_log("[dir2text(d)] is zone blocked.")
-						//dbg(ZAS_ZONE_BLOCKER(d))
+							zas_log("Connecting to [unsim.zone]")
 						#endif
 
-						//Postpone this tile rather than exit, since a connection can still be made.
-						if(!postponed) postponed = list()
-						postponed.Add(unsim)
+						SSair.connect(src, unsim)
 
-					else
 
-						unsim.zone.add(src)
+				#ifdef ZASDBG
+					else if(verbose)
+						zas_log("[dir2text(d)] has same zone.")
+				#endif
 
-						#ifdef ZASDBG
-						dbg(zasdbgovl_assigned)
-						if(verbose)
-							zas_log("Added to [zone]")
-						#endif
-
-				else if(unsim.zone != zone)
-
+				else
 					#ifdef ZASDBG
 					if(verbose)
-						zas_log("Connecting to [unsim.zone]")
+						zas_log("Connecting non-ZAS turf to [unsim.zone]")
 					#endif
 
-					SSair.connect(src, unsim)
+					SSair.connect(unsim, src)
 
-
-			#ifdef ZASDBG
-				else if(verbose)
-					zas_log("[dir2text(d)] has same zone.")
-
+		#ifdef ZASDBG
 			else if(verbose)
 				zas_log("[dir2text(d)] has an invalid or rebuilding zone.")
-			#endif
+		#endif
 
-		else
+		else if(zas_participation)
 
 			//Postponing connections to tiles until a zone is assured.
 			if(!postponed) postponed = list()
 			postponed.Add(unsim)
 
-	if(!TURF_HAS_VALID_ZONE(src)) //Still no zone, make a new one.
+	if(zas_participation && !TURF_HAS_VALID_ZONE(src)) //Still no zone, make a new one.
 		var/zone/newzone = new/zone()
 		newzone.add(src)
 
@@ -143,10 +155,10 @@
 		if(verbose)
 			zas_log("New zone created for src.")
 
-	ASSERT(zone)
+	ASSERT(!zas_participation || zone)
 	#endif
 
-	//At this point, a zone should have happened. If it hasn't, don't add more checks, fix the bug.
+	//At this point, a zone should have happened if the turf participates in ZAS. If it hasn't, don't add more checks, fix the bug.
 
 	for(var/turf/T in postponed)
 		SSair.connect(src, T)
@@ -274,17 +286,3 @@
 		air = new/datum/gas_mixture
 	air.copy_from(zone.air)
 	air.group_multiplier = 1
-
-// Generally used to mark neighbours of non-ZAS/exterior turfs to create unsimulated edges.
-// TODO: An alternative to this is to allow non-ZAS turfs to create the required edge when calling SSair.mark_turf_for_update() on them.
-/turf/proc/mark_neighbours_for_update()
-	#ifdef MULTIZAS
-	var/dirs = global.cardinalz
-	#else
-	var/dirs = global.cardinal
-	#endif
-	for(var/dir in dirs)
-		var/turf/neighbor = get_step(src, dir)
-		if(!neighbor || !neighbor.simulated || neighbor.changing_turf)
-			continue
-		SSair.mark_for_update(neighbor)

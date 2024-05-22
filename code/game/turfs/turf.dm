@@ -516,21 +516,19 @@
 		if(below)
 			below.update_weather(new_weather)
 
-// Updates turf participation in ZAS according to outside status. Must be called whenever the outside status of a turf may change.
+// Updates turf participation in ZAS according to outside status. Must be called whenever the outside status or zone_membership_candidate variable of a turf may change.
 /turf/proc/update_external_atmos_participation(overwrite_air = TRUE)
 	if(is_outside())
 		if(zone && external_atmosphere_participation)
 			if(can_safely_remove_from_zone())
 				zone.remove(src)
-				// Update neighbors to create edges between zones and exterior
-				mark_neighbours_for_update()
 			else
 				zone.rebuild()
-	else if(zone_membership_candidate)
+	else if(zone_membership_candidate && overwrite_air)
 		// Set the turf's air to the external atmosphere to add to its new zone.
-		if(overwrite_air)
-			air = get_external_air(FALSE)
-		SSair.mark_for_update(src)
+		air = get_external_air(FALSE)
+
+	SSair.mark_for_update(src)
 
 /turf/proc/is_outside()
 

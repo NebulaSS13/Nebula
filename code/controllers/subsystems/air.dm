@@ -134,6 +134,7 @@ SUBSYSTEM_DEF(air)
 
 	var/simulated_turf_count = 0
 	for(var/turf/T in world)
+		// Although update_air_properties can be called on non-ZAS participating turfs for convenience, it is unnecessary on roundstart/reboot.
 		if(!SHOULD_PARTICIPATE_IN_ZONES(T))
 			continue
 		simulated_turf_count++
@@ -367,7 +368,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	ASSERT(isturf(T))
 	#endif
-	if(T.needs_air_update || !SHOULD_PARTICIPATE_IN_ZONES(T))
+	if(T.needs_air_update)
 		return
 	tiles_to_update += T
 	#ifdef ZASDBG
