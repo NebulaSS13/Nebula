@@ -56,6 +56,16 @@
 /obj/item/get_material()
 	. = material
 
+// TODO: Refactor more code to use this where necessary, and then make this use
+// some sort of generalized system for hitting with different parts of an item
+// e.g. pommel vs blade, rifle butt vs bayonet, knife hilt vs blade
+/// What material are we using when we hit things?
+/// Params:
+///   mob/user (the mob striking something with src)
+///   atom/target (the atom being struck with src)
+/obj/item/proc/get_striking_material(mob/user, atom/target)
+	return get_material()
+
 /obj/item/proc/update_force()
 	var/new_force
 	if(!max_force)
