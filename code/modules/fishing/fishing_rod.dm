@@ -286,7 +286,8 @@
 		/obj/item/fishing_line,
 		/obj/item/stack/cable_coil,
 		/obj/item/stack/net_cable_coil,
-		/obj/item/stack/material/bundle
+		/obj/item/stack/material/bundle,
+		/obj/item/stack/material/thread,
 	)
 
 	if(!new_line || !is_type_in_list(new_line, valid_line_types))
