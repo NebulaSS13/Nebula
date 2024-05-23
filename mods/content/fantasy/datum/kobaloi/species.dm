@@ -7,7 +7,6 @@
 	available_bodytypes = list(
 		/decl/bodytype/kobaloi
 	)
-	preview_outfit      = /decl/hierarchy/outfit/job/shaded_hills/traveller
 	base_external_prosthetics_model = null
 
 	available_cultural_info = list(

@@ -37,3 +37,9 @@
 	department_types        = list(
 		/decl/department/shaded_hills/locals
 	)
+
+/decl/species/kobaloi
+	preview_outfit = /decl/hierarchy/outfit/job/shaded_hills/traveller
+
+/decl/species/hnoll
+	preview_outfit = /decl/hierarchy/outfit/job/shaded_hills/traveller

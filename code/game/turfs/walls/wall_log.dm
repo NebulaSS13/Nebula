@@ -1,7 +1,7 @@
 /turf/wall/log
 	icon_state = "log"
 	material = /decl/material/solid/organic/wood
-	color = TYPE_INITIAL(/decl/material/solid/organic/wood, color)
+	color = WOOD_COLOR_GENERIC // TYPE_INITIAL(/decl/material/solid/organic/wood, color)
 	girder_material = null
 
 /turf/wall/log/get_dismantle_stack_type()
