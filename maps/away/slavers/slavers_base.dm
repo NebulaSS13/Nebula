@@ -163,11 +163,11 @@
 
 /decl/hierarchy/outfit/corpse/abolitionist
 	name = "Dead abolitionist"
-	uniform = /obj/item/clothing/under/abol_uniform
+	uniform = /obj/item/clothing/jumpsuit/abolitionist
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/helmet/merc
 
-/obj/item/clothing/under/abol_uniform
+/obj/item/clothing/jumpsuit/abolitionist
 	name = "abolitionist combat suit"
 	desc = "Lightly armored suit worn by abolition extremists during raids. It has green patches on the right sleeve and the chest. There is big green \"A\" on the back."
 	icon = 'maps/away/slavers/icons/uniform.dmi'

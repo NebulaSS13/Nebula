@@ -1,18 +1,9 @@
-/obj/item/clothing/under/work
-	name = "beige and green coveralls"
-	desc = "A pair of beige coveralls made of a strong, canvas-like fabric."
-	icon = 'mods/content/corporate/icons/clothing/under/work.dmi'
-	armor = list(
-		ARMOR_MELEE = ARMOR_MELEE_MINOR,
-		ARMOR_BIO = ARMOR_BIO_MINOR
-		)
-
 /obj/item/clothing/jumpsuit/pilot
 	name = "green flight suit"
 	desc = "A sleek green Expeditionary Corps Organisation flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon = 'mods/content/corporate/icons/clothing/under/pilot.dmi'
 
-/obj/item/clothing/under/jumpsuit/nanotrasen
+/obj/item/clothing/jumpsuit/pilot/nanotrasen
 	name = "red flight suit"
 	desc = "A sleek red NanoTrasen flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon = 'mods/content/corporate/icons/clothing/under/pilot_nt.dmi'
@@ -22,16 +13,25 @@
 	desc = "A sleek cyan Hephaestus Industries flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon = 'mods/content/corporate/icons/clothing/under/pilot_heph.dmi'
 
-/obj/item/clothing/under/work/nanotrasen
+/obj/item/clothing/jumpsuit/work
+	name = "beige and green coveralls"
+	desc = "A pair of beige coveralls made of a strong, canvas-like fabric."
+	icon = 'mods/content/corporate/icons/clothing/under/work.dmi'
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_MINOR,
+		ARMOR_BIO = ARMOR_BIO_MINOR
+	)
+
+/obj/item/clothing/jumpsuit/work/nanotrasen
 	name = "beige and red coveralls"
 	icon = 'mods/content/corporate/icons/clothing/under/work_nt.dmi'
 
-/obj/item/clothing/under/work/heph
+/obj/item/clothing/jumpsuit/work/heph
 	name = "grey and cyan coveralls"
 	icon = 'mods/content/corporate/icons/clothing/under/work_heph.dmi'
 
 //Zeng-Hu
-/obj/item/clothing/under/work/zeng
+/obj/item/clothing/jumpsuit/work/zeng
 	name = "beige and gold coveralls"
 	icon = 'mods/content/corporate/icons/clothing/under/work_zeng.dmi'
 
