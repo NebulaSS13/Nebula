@@ -17,7 +17,7 @@
 	description         = "Gnolls!"
 	hidden_from_codex   = FALSE
 	available_bodytypes = list(/decl/bodytype/hnoll)
-	preview_outfit      = /decl/hierarchy/outfit/job/shaded_hills/traveller
+	preview_outfit      = /decl/hierarchy/outfit/job/generic/fantasy
 	spawn_flags         = SPECIES_CAN_JOIN
 	flesh_color         = "#ae7d32"
 	hunger_factor       = DEFAULT_HUNGER_FACTOR * 1.2
