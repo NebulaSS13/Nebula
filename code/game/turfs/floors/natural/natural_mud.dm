@@ -13,6 +13,10 @@
 		new /obj/item/rock/flint(src)
 	return ..()
 
+// the internet tells me clay holds water well and is full of nutrients plants crave
+/turf/floor/natural/clay/get_plant_growth_rate()
+	return 1.2
+
 /turf/floor/natural/clay/flooded
 	flooded = /decl/material/liquid/water
 
@@ -37,6 +41,9 @@
 		return
 	return ..()
 
+/turf/floor/natural/mud/get_plant_growth_rate()
+	return 1.1
+
 /turf/floor/natural/mud/water
 	color = COLOR_SKY_BLUE
 	reagent_type = /decl/material/liquid/water
@@ -56,6 +63,10 @@
 	icon = 'icons/turf/flooring/seafloor.dmi'
 	is_fundament_turf = TRUE
 	material = /decl/material/solid/soil
+
+// Just wet the damn dirt first!!
+/turf/floor/natural/dry/get_plant_growth_rate()
+	return 0.0
 
 /turf/floor/natural/dry/fluid_act(datum/reagents/fluids)
 	if(fluids?.total_volume < FLUID_SHALLOW)

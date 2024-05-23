@@ -10,6 +10,9 @@
 	material = /decl/material/solid/soil
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 
+/turf/floor/natural/dirt/get_plant_growth_rate()
+	return 1
+
 /turf/floor/natural/dirt/fluid_act(var/datum/reagents/fluids)
 	if(fluids?.total_volume < FLUID_SHALLOW)
 		return ..()
