@@ -6,28 +6,26 @@
 		/obj/item/clothing/costume/soviet,
 		/obj/item/clothing/costume/pirate,
 		/obj/item/clothing/costume/redcoat,
-		/obj/item/clothing/under/serviceoveralls,
-		/obj/item/clothing/jumpsuit/captain_fly,
-		/obj/item/clothing/jumpsuit/brown,
-		)
+		/obj/item/clothing/costume/captain_fly
+	)
 	var/list/raider_shoes = list(
 		/obj/item/clothing/shoes/jackboots,
 		/obj/item/clothing/shoes/workboots,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/dress
-		)
+	)
 	var/list/raider_glasses = list(
 		/obj/item/clothing/glasses/thermal,
 		/obj/item/clothing/glasses/thermal/plain/eyepatch,
 		/obj/item/clothing/glasses/thermal/plain/monocle
-		)
+	)
 	var/list/raider_helmets = list(
 		/obj/item/clothing/head/bearpelt,
 		/obj/item/clothing/head/ushanka,
 		/obj/item/clothing/head/pirate,
 		/obj/item/clothing/mask/bandana/red,
 		/obj/item/clothing/head/hgpiratecap,
-		)
+	)
 	var/list/raider_suits = list(
 		/obj/item/clothing/suit/pirate,
 		/obj/item/clothing/suit/hgpirate,
@@ -37,7 +35,7 @@
 		/obj/item/clothing/suit/jacket/hoodie,
 		/obj/item/clothing/suit/jacket/hoodie/black,
 		/obj/item/clothing/suit/poncho,
-		)
+	)
 	var/list/raider_guns = list(
 		/obj/item/gun/energy/laser,
 		/obj/item/gun/projectile/revolver/lasvolver,
@@ -57,12 +55,12 @@
 		/obj/item/gun/projectile/pistol/holdout,
 		/obj/item/gun/projectile/revolver,
 		/obj/item/gun/projectile/zipgun
-		)
+	)
 	var/list/raider_holster = list(
 		/obj/item/clothing/webbing/holster/armpit,
 		/obj/item/clothing/webbing/holster/waist,
 		/obj/item/clothing/webbing/holster/hip
-		)
+	)
 
 /decl/hierarchy/outfit/raider/Initialize()
 	randomize_clothing()

@@ -58,13 +58,13 @@
 	new /obj/item/clothing/head/helmet/gladiator(loc)
 
 /obj/abstract/landmark/costume/madscientist/make_costumes()
-	new /obj/item/clothing/under/gimmick/rank/captain/suit(loc)
+	new /obj/item/clothing/costume/captain_suit(loc)
 	new /obj/item/clothing/head/flatcap(loc)
 	new /obj/item/clothing/suit/toggle/labcoat/mad(loc)
 	new /obj/item/clothing/glasses/prescription/gglasses(loc)
 
 /obj/abstract/landmark/costume/elpresidente/make_costumes()
-	new /obj/item/clothing/under/gimmick/rank/captain/suit(loc)
+	new /obj/item/clothing/costume/captain_suit(loc)
 	new /obj/item/clothing/head/flatcap(loc)
 	new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(loc)
 	new /obj/item/clothing/shoes/jackboots(loc)

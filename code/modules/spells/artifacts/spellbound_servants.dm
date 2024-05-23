@@ -117,25 +117,6 @@
 			H.mutations |= mRun
 			familiar_type = /mob/living/simple_animal/cat
 		if("Bear")
-			var/obj/item/clothing/under/under = locate() in equipment
-			var/obj/item/clothing/head/head = locate() in equipment
-
-			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
-			if(A)
-				A.armor_values = list(
-					ARMOR_MELEE  = ARMOR_MELEE_VERY_HIGH,
-					ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
-					ARMOR_LASER  = ARMOR_LASER_SMALL,
-					ARMOR_ENERGY = ARMOR_ENERGY_SMALL
-					) //More armor
-			A = get_extension(head, /datum/extension/armor)
-			if(A)
-				A.armor_values = list(
-					ARMOR_MELEE  = ARMOR_MELEE_RESISTANT,
-					ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
-					ARMOR_LASER  = ARMOR_LASER_MINOR,
-					ARMOR_ENERGY = ARMOR_ENERGY_MINOR
-					)
 			familiar_type = /mob/living/simple_animal/hostile/bear
 	var/spell/targeted/shapeshift/familiar/F = new()
 	F.possible_transformations = list(familiar_type)
@@ -154,7 +135,7 @@
 
 /datum/spellbound_type/servant/fiend/equip_servant(var/mob/living/carbon/human/H)
 	if(H.gender == MALE)
-		equipment = list(/obj/item/clothing/under/lawyer/fiendsuit = slot_w_uniform_str,
+		equipment = list(/obj/item/clothing/costume/fiendsuit = slot_w_uniform_str,
 						/obj/item/clothing/shoes/dress/devilshoes = slot_shoes_str)
 		spells += /spell/toggle_armor/fiend
 	else

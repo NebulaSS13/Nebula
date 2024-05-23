@@ -51,18 +51,18 @@
 
 /decl/loadout_option/uniform/suit
 	name = "clothes selection"
-	path = /obj/item/clothing/under
+	path = /obj/item/clothing/costume
 
 /decl/loadout_option/uniform/suit/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/under/lawyer/blue,
-		/obj/item/clothing/under/lawyer/oldman,
-		/obj/item/clothing/under/lawyer/red,
-		/obj/item/clothing/under/lawyer,
+		/obj/item/clothing/costume/lawyer_blue,
+		/obj/item/clothing/costume/oldman,
+		/obj/item/clothing/costume/lawyer_red,
+		/obj/item/clothing/costume/lawyer,
 		/obj/item/clothing/costume/scratch,
-		/obj/item/clothing/under/lawyer/bluesuit
+		/obj/item/clothing/costume/lawyer_bluesuit
 	)
 
 /decl/loadout_option/uniform/dress_selection

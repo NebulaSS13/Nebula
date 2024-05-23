@@ -25,7 +25,7 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 
-/obj/item/clothing/under/lawyer/fiendsuit
+/obj/item/clothing/costume/fiendsuit
 	name = "black suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
 	icon = 'icons/clothing/suits/suit_fiend.dmi'

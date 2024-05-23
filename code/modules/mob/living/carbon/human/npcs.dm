@@ -14,7 +14,7 @@
 		equip_to_appropriate_slot(new /obj/item/clothing/neck/tie/bow/color/red(src))
 		equip_to_appropriate_slot(new /obj/item/clothing/suit/jacket/vest/blue(src))
 	else
-		var/obj/item/clothing/C = new /obj/item/clothing/pants/casual/mustangjeans/monke(src)
+		var/obj/item/clothing/C = new /obj/item/clothing/pants/casual/mustangjeans(src)
 		C.attach_accessory(null, new /obj/item/clothing/shirt/hawaii/random(src))
 		equip_to_appropriate_slot(C)
 		if(prob(10))

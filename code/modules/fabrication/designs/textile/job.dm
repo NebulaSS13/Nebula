@@ -160,7 +160,7 @@
 	path = /obj/item/clothing/jumpsuit/warden
 
 /datum/fabricator_recipe/textiles/job/security/dispatch
-	path = /obj/item/clothing/under/dispatch
+	path = /obj/item/clothing/costume/dispatch
 
 /datum/fabricator_recipe/textiles/job/security/tacticalofficer
 	path = /obj/item/clothing/jumpsuit/tactical

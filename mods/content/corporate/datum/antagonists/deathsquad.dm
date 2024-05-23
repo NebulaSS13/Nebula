@@ -42,7 +42,7 @@
 
 /decl/hierarchy/outfit/commando/leader
 	name =    "Special Role - Deathsquad Leader"
-	uniform =  /obj/item/clothing/under/centcom_officer
+	uniform =  /obj/item/clothing/costume/centcom_officer
 	l_pocket = /obj/item/pinpointer
 	r_pocket = /obj/item/disk/nuclear
 

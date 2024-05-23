@@ -19,7 +19,6 @@
 		ARMOR_BIO = ARMOR_BIO_SMALL
 	)
 
-
 /obj/item/clothing/jumpsuit/captain //Alright, technically not a 'civilian' but its better then giving a .dm file for a single define.
 	desc = "It's a blue jumpsuit with some gold markings denoting the rank of \"Captain\"."
 	name = "captain's jumpsuit"
@@ -30,13 +29,11 @@
 	desc = "It's a jumpsuit worn by the quartermaster. It's specially designed to prevent back injuries caused by pushing paper."
 	icon = 'icons/clothing/jumpsuits/jumpsuit_qm.dmi'
 
-
 /obj/item/clothing/jumpsuit/cargotech
 	name = "cargo technician's jumpsuit"
 	desc = "Shooooorts! They're comfy and easy to wear!"
 	icon = 'icons/clothing/jumpsuits/jumpsuit_cargo.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
-
 
 /obj/item/clothing/jumpsuit/chaplain
 	desc = "It's a black jumpsuit, often worn by religious folk."
@@ -219,3 +216,8 @@
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
+
+/obj/item/clothing/jumpsuit/captainformal
+	name = "captain's formal uniform"
+	desc = "A captain's formal-wear, for special occasions."
+	icon = 'icons/clothing/uniform_captain_formal.dmi'

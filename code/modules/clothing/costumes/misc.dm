@@ -74,3 +74,34 @@
 	name = "white suit"
 	desc = "A white suit, suitable for an excellent host."
 	icon = 'icons/clothing/costumes/scratch.dmi'
+
+/obj/item/clothing/costume/oldman
+	name = "old man's suit"
+	desc = "A classic suit for the older gentleman with built in back support."
+	icon = 'icons/clothing/costumes/uniform_lawyer_old.dmi'
+
+/obj/item/clothing/costume/lawyer
+	name = "black lawyer suit"
+	desc = "Slick threads."
+	icon = 'icons/clothing/costumes/uniform_lawyer_black.dmi'
+
+/obj/item/clothing/costume/lawyer_red
+	name = "red Lawyer suit"
+	icon = 'icons/clothing/costumes/uniform_lawyer_red.dmi'
+
+/obj/item/clothing/costume/lawyer_blue
+	name = "blue Lawyer suit"
+	icon = 'icons/clothing/costumes/uniform_lawyer_blue.dmi'
+
+/obj/item/clothing/costume/lawyer_bluesuit
+	name = "blue suit"
+	desc = "A classy suit."
+	icon = 'icons/clothing/costumes/uniform_lawyer_black.dmi'
+	starting_accessories = list(
+		/obj/item/clothing/neck/tie/red
+	)
+
+/obj/item/clothing/costume/captain_fly
+	name = "rogue's uniform"
+	desc = "For the man who doesn't care because he's still free."
+	icon = 'icons/clothing/rogue_captain.dmi'

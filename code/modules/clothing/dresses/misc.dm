@@ -31,7 +31,7 @@
 /obj/item/clothing/dress/cap
 	name = "captain's dress uniform"
 	desc = "Feminine fashion for the style concious captain."
-	icon = 'icons/clothing/uniform_captain_dress.dmi'
+	icon = 'icons/clothing/dresses/uniform_captain_dress.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/dress/hop

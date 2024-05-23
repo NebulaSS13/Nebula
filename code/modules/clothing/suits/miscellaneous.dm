@@ -66,6 +66,11 @@
 	desc = "A set of rugged overalls."
 	icon = 'icons/clothing/suits/overalls_denim.dmi'
 
+/obj/item/clothing/suit/apron/overalls/service
+	name = "service overalls"
+	desc = "The very image of a working man. Not that you're probably doing work."
+	icon = 'icons/clothing/uniform_mechanic.dmi'
+
 /obj/item/clothing/suit/syndicatefake
 	name = "red space suit replica"
 	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"

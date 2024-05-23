@@ -9,7 +9,7 @@
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
-/obj/item/clothing/under/magintka_uniform
+/obj/item/clothing/costume/magintka_uniform
 	name = "officer uniform"
 	desc = "A dark uniform coat worn by Magnitka fleet officers."
 	icon = 'maps/random_ruins/exoplanet_ruins/marooned/icons/uniform_magnitka.dmi'
@@ -26,7 +26,7 @@
 
 /decl/hierarchy/outfit/marooned_officer
 	name = "Dead Magnitka's fleet officer"
-	uniform = /obj/item/clothing/under/magintka_uniform
+	uniform = /obj/item/clothing/costume/magintka_uniform
 	suit = /obj/item/clothing/suit/jacket/winter
 	shoes = /obj/item/clothing/shoes/jackboots/jungleboots
 	gloves = /obj/item/clothing/gloves/thick

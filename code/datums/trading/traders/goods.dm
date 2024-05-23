@@ -132,7 +132,6 @@
 		/obj/item/clothing/pants                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/pants/pj                        = TRADER_BLACKLIST,
 		/obj/item/clothing/pants/shorts                    = TRADER_BLACKLIST,
-		/obj/item/clothing/pants/casual/mustangjeans/monke = TRADER_BLACKLIST,
 		/obj/item/clothing/pants/chameleon                 = TRADER_BLACKLIST,
 		/obj/item/clothing/shirt                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/shirt/chameleon                 = TRADER_BLACKLIST,
