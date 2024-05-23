@@ -5,6 +5,7 @@
 #include "datum/currencies.dm"
 #include "datum/factions.dm"
 #include "datum/locations.dm"
+#include "datum/outfits.dm"
 #include "datum/overrides.dm"
 #include "datum/hnoll/bodytypes.dm"
 #include "datum/hnoll/culture.dm"
