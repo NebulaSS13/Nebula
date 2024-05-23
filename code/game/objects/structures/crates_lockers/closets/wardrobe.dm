@@ -301,7 +301,7 @@
 		/obj/item/clothing/neck/tie/long/red,
 		/obj/item/clothing/pants/slacks/black,
 		/obj/item/clothing/shirt/button,
-		/obj/item/clothing/under/scratch,
+		/obj/item/clothing/costume/scratch,
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/neck/tie/black,
 		/obj/item/clothing/suit/jacket/black,

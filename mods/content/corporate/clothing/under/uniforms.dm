@@ -7,28 +7,28 @@
 		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/pilot
+/obj/item/clothing/jumpsuit/pilot
 	name = "green flight suit"
 	desc = "A sleek green Expeditionary Corps Organisation flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon = 'mods/content/corporate/icons/clothing/under/pilot.dmi'
+
+/obj/item/clothing/under/jumpsuit/nanotrasen
+	name = "red flight suit"
+	desc = "A sleek red NanoTrasen flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
+	icon = 'mods/content/corporate/icons/clothing/under/pilot_nt.dmi'
+
+/obj/item/clothing/jumpsuit/pilot/heph
+	name = "cyan flight suit"
+	desc = "A sleek cyan Hephaestus Industries flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
+	icon = 'mods/content/corporate/icons/clothing/under/pilot_heph.dmi'
 
 /obj/item/clothing/under/work/nanotrasen
 	name = "beige and red coveralls"
 	icon = 'mods/content/corporate/icons/clothing/under/work_nt.dmi'
 
-/obj/item/clothing/under/pilot/nanotrasen
-	name = "red flight suit"
-	desc = "A sleek red NanoTrasen flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
-	icon = 'mods/content/corporate/icons/clothing/under/pilot_nt.dmi'
-
 /obj/item/clothing/under/work/heph
 	name = "grey and cyan coveralls"
 	icon = 'mods/content/corporate/icons/clothing/under/work_heph.dmi'
-
-/obj/item/clothing/under/pilot/heph
-	name = "cyan flight suit"
-	desc = "A sleek cyan Hephaestus Industries flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
-	icon = 'mods/content/corporate/icons/clothing/under/pilot_heph.dmi'
 
 //Zeng-Hu
 /obj/item/clothing/under/work/zeng

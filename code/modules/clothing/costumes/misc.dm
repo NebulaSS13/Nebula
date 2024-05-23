@@ -69,3 +69,8 @@
 	desc = "Yarr."
 	icon = 'icons/clothing/costumes/pirate.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
+
+/obj/item/clothing/costume/scratch
+	name = "white suit"
+	desc = "A white suit, suitable for an excellent host."
+	icon = 'icons/clothing/costumes/scratch.dmi'

@@ -105,7 +105,10 @@
 	new /obj/item/clothing/mask/gas/owl_mask(loc)
 
 /obj/abstract/landmark/costume/waiter/make_costumes()
-	new /obj/item/clothing/under/waiter(loc)
+	new /obj/item/clothing/pants/slacks/black(loc)
+	new /obj/item/clothing/shirt/button(loc)
+	new /obj/item/clothing/neck/tie/bow/color/red(loc)
+	new /obj/item/clothing/suit/jacket/vest/blue(loc)
 	var/CHOICE= pick( /obj/item/clothing/head/kitty, /obj/item/clothing/head/rabbitears)
 	new CHOICE(loc)
 	new /obj/item/clothing/suit/apron(loc)

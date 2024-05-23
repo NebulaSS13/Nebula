@@ -44,6 +44,9 @@
 	name = "black vest"
 	color = COLOR_GRAY15
 
+/obj/item/clothing/suit/jacket/vest/blue
+	color = "#2b65a8"
+
 /obj/item/clothing/suit/jacket/tangzhuang
 	name = "tangzhuang jacket"
 	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."

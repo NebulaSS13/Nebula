@@ -2089,7 +2089,6 @@
 #include "code\modules\clothing\under\monkey.dm"
 #include "code\modules\clothing\under\syndicate.dm"
 #include "code\modules\clothing\under\jobs\civilian.dm"
-#include "code\modules\clothing\under\jobs\medsci.dm"
 #include "code\modules\clothing\under\jobs\security.dm"
 #include "code\modules\clothing\underwear\base.dm"
 #include "code\modules\clothing\webbing\_webbing.dm"

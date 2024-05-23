@@ -10,6 +10,9 @@
 	desc = "A neosilk hand-tied bowtie."
 	icon = 'icons/clothing/accessories/ties/bowtie.dmi'
 
+/obj/item/clothing/neck/tie/bow/color/red
+	paint_color = COLOR_RED
+
 /obj/item/clothing/neck/tie/bow/ugly
 	name = "horrible bowtie"
 	desc = "A neosilk hand-tied bowtie. This one is disgusting."

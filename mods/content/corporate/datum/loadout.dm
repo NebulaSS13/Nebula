@@ -70,7 +70,7 @@
 
 /decl/loadout_option/uniform/corp_flight
 	name = "corporate colours, flight suit"
-	path = /obj/item/clothing/under/pilot
+	path = /obj/item/clothing/jumpsuit/pilot
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_exec_shirt

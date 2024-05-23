@@ -61,7 +61,7 @@
 		/obj/item/clothing/under/lawyer/oldman,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer,
-		/obj/item/clothing/under/scratch,
+		/obj/item/clothing/costume/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit
 	)
 

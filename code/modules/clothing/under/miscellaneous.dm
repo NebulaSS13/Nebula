@@ -3,16 +3,6 @@
 	desc = "For the man who doesn't care because he's still free."
 	icon = 'icons/clothing/rogue_captain.dmi'
 
-/obj/item/clothing/under/scratch
-	name = "white suit"
-	desc = "A white suit, suitable for an excellent host."
-	icon = 'icons/clothing/scratch.dmi'
-
-/obj/item/clothing/under/waiter
-	name = "waiter's outfit"
-	desc = "It's a very smart uniform with a special pocket for tips."
-	icon = 'icons/clothing/uniform_waiter.dmi'
-
 //This set of uniforms looks fairly fancy and is generally used for high-ranking personnel from what I've seen, so lets give them appropriate ranks.
 /obj/item/clothing/under/centcom
 	name = "\improper Officer's Dress Uniform"
