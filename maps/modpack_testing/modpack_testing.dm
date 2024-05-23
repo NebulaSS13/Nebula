@@ -19,6 +19,7 @@
 	#include "../../mods/content/shackles/_shackles.dme"
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
 	#include "../../mods/content/pheromones/_pheromones.dme"
+	#include "../../mods/content/fantasy/_fantasy.dme"
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
 	#include "../../mods/mobs/borers/_borers.dme"
