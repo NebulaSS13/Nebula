@@ -74,6 +74,24 @@
 		/obj/item/clothing/suit/jacket/charcoal
 	)
 
+/obj/item/clothing/pants/slacks/white
+	name = "white slacks"
+	desc = "Crisp white slacks. Very formal."
+	icon = 'icons/clothing/pants/slacks_white.dmi'
+
+/obj/item/clothing/pants/slacks/white/orderly
+	name = "orderly's slacks"
+	permeability_coefficient = 0.50
+	armor = list(
+		ARMOR_BIO = ARMOR_BIO_MINOR
+	)
+
+/obj/item/clothing/pants/slacks/white/orderly/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button/orderly,
+		/obj/item/clothing/neck/tie/long/red
+	)
+
 /obj/item/clothing/pants/slacks/black
 	name = "black slacks"
 	desc = "Crisp black slacks. Very formal."

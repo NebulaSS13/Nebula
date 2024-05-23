@@ -724,7 +724,6 @@
 "cD" = (
 /obj/structure/closet,
 /obj/random/smokes,
-/obj/item/clothing/under/ec_uniform,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cE" = (
@@ -758,7 +757,6 @@
 /area/icarus/vessel)
 "cJ" = (
 /obj/structure/closet,
-/obj/item/clothing/under/ec_uniform,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cK" = (
@@ -873,7 +871,6 @@
 "db" = (
 /obj/structure/closet,
 /obj/random/drinkbottle,
-/obj/item/clothing/under/ec_uniform,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "dc" = (
@@ -1006,7 +1003,6 @@
 "dx" = (
 /obj/structure/closet,
 /obj/random/shoes,
-/obj/item/clothing/under/ec_uniform,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "dy" = (

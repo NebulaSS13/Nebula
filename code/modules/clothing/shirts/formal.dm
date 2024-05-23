@@ -3,6 +3,13 @@
 	desc = "A crisply pressed white button-up shirt. Somewhat formal."
 	icon = 'icons/clothing/shirts/button_up.dmi'
 
+/obj/item/clothing/shirt/button/orderly
+	name = "orderly's shirt"
+	permeability_coefficient = 0.50
+	armor = list(
+		ARMOR_BIO = ARMOR_BIO_MINOR
+	)
+
 /obj/item/clothing/shirt/button/black
 	paint_color = COLOR_GRAY15
 

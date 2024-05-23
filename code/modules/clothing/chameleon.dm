@@ -108,12 +108,11 @@
 	. = ..()
 	if(!clothing_choices)
 		var/static/list/clothing_types = list(
-			/obj/item/clothing/under,
 			/obj/item/clothing/jumpsuit,
 			/obj/item/clothing/dress,
 			/obj/item/clothing/costume
 		)
-		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
+		clothing_choices = generate_chameleon_choices(clothing_types)
 
 /obj/item/clothing/jumpsuit/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
