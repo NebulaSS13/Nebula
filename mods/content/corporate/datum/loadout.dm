@@ -43,6 +43,7 @@
 		/obj/item/clothing/jumpsuit/aether,
 		/obj/item/clothing/jumpsuit/hephaestus,
 		/obj/item/clothing/jumpsuit/wardt,
+		/obj/item/clothing/jumpsuit/pcrc,
 		/obj/item/clothing/jumpsuit/focal
 	)
 
@@ -56,7 +57,6 @@
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/under/mbill,
 		/obj/item/clothing/under/saare,
-		/obj/item/clothing/under/pcrc,
 		/obj/item/clothing/under/grayson,
 		/obj/item/clothing/under/morpheus,
 		/obj/item/clothing/under/skinner,
@@ -65,7 +65,7 @@
 
 /decl/loadout_option/uniform/corp_overalls
 	name = "corporate colours, coveralls"
-	path = /obj/item/clothing/under/work
+	path = /obj/item/clothing/jumpsuit/work
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_flight
