@@ -291,12 +291,12 @@
 
 /obj/structure/closet/wardrobe/suit/WillContain()
 	return list(
-		/obj/item/clothing/pants/slacks = 2,
+		/obj/item/clothing/pants/slacks,
 		/obj/item/clothing/pants/slacks/purple,
 		/obj/item/clothing/pants/slacks/tan,
 		/obj/item/clothing/pants/slacks/red,
-		/obj/item/clothing/pants/slacks/black = 2,
-		/obj/item/clothing/shirt/button = 4,
+		/obj/item/clothing/pants/slacks/black,
+		/obj/item/clothing/shirt/button = 2,
 		/obj/item/clothing/suit/jacket/waistcoat/black,
 		/obj/item/clothing/neck/tie/long/red,
 		/obj/item/clothing/pants/slacks/black,

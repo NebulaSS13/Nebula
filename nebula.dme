@@ -2088,7 +2088,6 @@
 #include "code\modules\clothing\suits\jackets\track.dm"
 #include "code\modules\clothing\suits\jackets\waistcoat.dm"
 #include "code\modules\clothing\suits\jackets\wintercoat.dm"
-#include "code\modules\clothing\under\miscellaneous.dm"
 #include "code\modules\clothing\underwear\base.dm"
 #include "code\modules\clothing\webbing\_webbing.dm"
 #include "code\modules\clothing\webbing\drop_pouches.dm"
