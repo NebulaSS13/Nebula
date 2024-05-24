@@ -409,6 +409,7 @@
 	var/list/ports = get_ports()
 	for(var/obj/abstract/local_dock/port in ports)
 		res[port.name] = port
+	res["None"] = null
 	return res
 
 /datum/shuttle/proc/get_current_port()
