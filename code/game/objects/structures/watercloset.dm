@@ -457,11 +457,13 @@ var/global/list/hygiene_props = list()
 /obj/structure/hygiene/sink/kitchen
 	name = "kitchen sink"
 	icon_state = "sink_alt"
+	directional_offset = @'{"NORTH":{"y":22},"SOUTH":{"y":28},"EAST":{"x":-22},"WEST":{"x":22}}'
 
 /obj/structure/hygiene/sink/puddle	//splishy splashy ^_^
 	name = "puddle"
 	icon_state = "puddle"
 	clogged = -1 // how do you clog a puddle
+	directional_offset = null
 
 /obj/structure/hygiene/sink/puddle/attack_hand(var/mob/M)
 	flick("puddle-splash", src)
