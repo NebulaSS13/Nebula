@@ -89,9 +89,6 @@
 // Returns TRUE if further interactions should be halted, FALSE otherwise.
 /mob/living/proc/try_awaken(mob/user)
 
-	if(isSynthetic() || stat == CONSCIOUS)
-		return user.attempt_hug(src)
-
 	var/decl/pronouns/pronouns = get_pronouns()
 	var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
 	if(uniform)
