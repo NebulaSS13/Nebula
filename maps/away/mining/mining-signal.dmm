@@ -1863,6 +1863,7 @@
 /area/outpost/abandoned)
 "gi" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/abstract/landmark/proc_caller/floor_breaker,
 /turf/floor/tiled/airless{
 	icon_state = "steel_broken0"
 	},
@@ -1996,6 +1997,7 @@
 /turf/floor/plating,
 /area/outpost/abandoned)
 "gC" = (
+/obj/abstract/landmark/proc_caller/floor_breaker,
 /turf/floor/tiled/airless{
 	icon_state = "steel_broken4"
 	},
