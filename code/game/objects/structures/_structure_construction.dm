@@ -110,7 +110,7 @@
 		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
 		stack.use(used)
 		last_damage_message = null
-		health = clamp(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
+		health = clamp(health + used*DOOR_REPAIR_AMOUNT, health, maxhealth)
 
 /obj/structure/attackby(obj/item/O, mob/user)
 
