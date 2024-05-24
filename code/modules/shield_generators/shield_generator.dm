@@ -88,12 +88,12 @@
 	for(var/obj/item/stock_parts/smes_coil/S in component_parts)
 		full_shield_strength += (S.ChargeCapacity / CELLRATE) * 5
 	max_energy = full_shield_strength * 20
-	current_energy = clamp(0, current_energy, max_energy)
+	current_energy = clamp(current_energy, 0, max_energy)
 
 	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/stock_parts/capacitor)
-	mitigation_em = clamp(0, mitigation_em, mitigation_max)
-	mitigation_physical = clamp(0, mitigation_physical, mitigation_max)
-	mitigation_heat = clamp(0, mitigation_heat, mitigation_max)
+	mitigation_em = clamp(mitigation_em, 0, mitigation_max)
+	mitigation_physical = clamp(mitigation_physical, 0, mitigation_max)
+	mitigation_heat = clamp(mitigation_heat, 0, mitigation_max)
 	..()
 
 
@@ -172,9 +172,9 @@
 			running = SHIELD_RUNNING
 			regenerate_field()
 
-	mitigation_em = clamp(0, mitigation_em - MITIGATION_LOSS_PASSIVE, mitigation_max)
-	mitigation_heat = clamp(0, mitigation_heat - MITIGATION_LOSS_PASSIVE, mitigation_max)
-	mitigation_physical = clamp(0, mitigation_physical - MITIGATION_LOSS_PASSIVE, mitigation_max)
+	mitigation_em = clamp(mitigation_em - MITIGATION_LOSS_PASSIVE, 0, mitigation_max)
+	mitigation_heat = clamp(mitigation_heat - MITIGATION_LOSS_PASSIVE, 0, mitigation_max)
+	mitigation_physical = clamp(mitigation_physical - MITIGATION_LOSS_PASSIVE, 0, mitigation_max)
 
 	if(running == SHIELD_RUNNING)
 		upkeep_power_usage = round((field_segments.len - damaged_segments.len) * ENERGY_UPKEEP_PER_TILE * upkeep_multiplier)
@@ -193,7 +193,7 @@
 		// Now try to recharge our internal energy.
 		var/energy_to_demand
 		if(input_cap)
-			energy_to_demand = clamp(0, max_energy - current_energy, input_cap - energy_buffer)
+			energy_to_demand = clamp(max_energy - current_energy, 0, input_cap - energy_buffer)
 		else
 			energy_to_demand = max(0, max_energy - current_energy)
 		energy_buffer = energy_to_demand - use_power_oneoff(energy_to_demand)
@@ -345,7 +345,7 @@
 		var/new_range = input(user, "Enter new field range (1-[world.maxx]). Leave blank to cancel.", "Field Radius Control", field_radius) as num
 		if(!new_range)
 			return TOPIC_HANDLED
-		target_radius = clamp(1, new_range, world.maxx)
+		target_radius = clamp(new_range, 1, world.maxx)
 		return TOPIC_REFRESH
 
 	if(href_list["set_input_cap"])
@@ -397,9 +397,9 @@
 				mitigation_heat += MITIGATION_HIT_LOSS + MITIGATION_HIT_GAIN
 				energy_to_use *= 1 - (mitigation_heat / 100)
 
-		mitigation_em = clamp(0, mitigation_em, mitigation_max)
-		mitigation_heat = clamp(0, mitigation_heat, mitigation_max)
-		mitigation_physical = clamp(0, mitigation_physical, mitigation_max)
+		mitigation_em = clamp(mitigation_em, 0, mitigation_max)
+		mitigation_heat = clamp(mitigation_heat, 0, mitigation_max)
+		mitigation_physical = clamp(mitigation_physical, 0, mitigation_max)
 
 	current_energy -= energy_to_use
 

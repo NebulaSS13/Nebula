@@ -485,7 +485,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		damage_archived = damage
 
-		damage = max(0, damage + clamp(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
+		damage = max(0, damage + clamp((removed.temperature - critical_temperature) / 150, -damage_rate_limit, damage_inc_limit))
 
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
@@ -518,7 +518,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
 
 		removed.add_thermal_energy(thermal_power)
-		removed.temperature = clamp(0, removed.temperature, 10000)
+		removed.temperature = clamp(removed.temperature, 0, 10000)
 
 		env.merge(removed)
 
