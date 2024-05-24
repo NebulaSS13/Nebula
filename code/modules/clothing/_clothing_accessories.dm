@@ -141,7 +141,10 @@
 // If we're checking strictly and our parent is an accessory,
 // This will need to be handled differently if we ever allow non-clothing accessories!
 /obj/item/clothing/can_interact_with_storage(user, strict = FALSE)
-	if((. = ..(user, FALSE)) || !strict) // Ignore the parent strictness check.
+	if(!istype(loc, /obj/item/clothing) || !strict)
+		return ..()
+	. = ..(user, FALSE) // Ignore the parent strictness check.
+	if(.)
 		return .
 	if(istype(loc, /obj/item/clothing))
 		var/obj/item/clothing/parent = loc
