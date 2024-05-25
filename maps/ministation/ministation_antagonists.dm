@@ -34,7 +34,7 @@
 		"a toy ripley"                       = /obj/item/toy/prize/powerloader,
 		"a collectable top hat"              = /obj/item/clothing/head/collectable/tophat,
 		"a jetpack"                          = /obj/item/tank/jetpack,
-		"a captain's jumpsuit"               = /obj/item/clothing/under/captain,
+		"a captain's jumpsuit"               = /obj/item/clothing/jumpsuit/captain,
 		"a pair of magboots"                 = /obj/item/clothing/shoes/magboots,
 		"the master blueprints"              = /obj/item/blueprints,
 		"a sample of slime extract"          = /obj/item/slime_extract,

@@ -153,14 +153,14 @@
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
 /obj/item/crowbar,
-/obj/item/clothing/under/captain_fly,
-/obj/item/clothing/under/color/blackjumpshorts,
+/obj/item/clothing/jumpsuit/captain_fly,
+/obj/item/clothing/jumpsuit/blackjumpshorts,
 /obj/item/clothing/under/frontier,
-/obj/item/clothing/under/hazard,
-/obj/item/clothing/under/formal,
-/obj/item/clothing/under/formal/charcoal,
+/obj/item/clothing/jumpsuit/hazard,
+/obj/item/clothing/pants/slacks/outfit,
+/obj/item/clothing/pants/slacks/black/outfit,
 /obj/item/clothing/under/syndicate,
-/obj/item/clothing/under/det/grey,
+/obj/item/clothing/pants/slacks/outfit/detective,
 /obj/item/clothing/pants/baggy,
 /obj/item/clothing/pants/casual/youngfolksjeans,
 /obj/item/clothing/suit/jacket/bomber,
@@ -172,7 +172,8 @@
 /obj/item/clothing/suit/toggle/track,
 /obj/item/radio,
 /obj/structure/closet/shipping_wall{
-	pixel_y = -28
+	pixel_y = -28;
+	dir = 1
 	},
 /turf/floor/carpet,
 /area/map_template/colony/command)
@@ -507,7 +508,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/command)
@@ -598,7 +599,7 @@
 /obj/effect/floor_decal/corner/blue,
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -854,7 +855,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
@@ -1360,17 +1361,17 @@
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
 /obj/item/crowbar,
-/obj/item/clothing/under/captain_fly,
-/obj/item/clothing/under/color/blackjumpshorts,
+/obj/item/clothing/jumpsuit/captain_fly,
+/obj/item/clothing/jumpsuit/blackjumpshorts,
 /obj/item/clothing/under/frontier,
-/obj/item/clothing/under/hazard,
-/obj/item/clothing/under/skirt,
-/obj/item/clothing/under/formal,
-/obj/item/clothing/under/formal/navy,
-/obj/item/clothing/under/formal/charcoal,
+/obj/item/clothing/jumpsuit/hazard,
+/obj/item/clothing/skirt,
+/obj/item/clothing/pants/slacks/outfit,
+/obj/item/clothing/pants/slacks/black/outfit/navy,
+/obj/item/clothing/pants/slacks/black/outfit,
 /obj/item/clothing/under/syndicate,
-/obj/item/clothing/under/sterile,
-/obj/item/clothing/under/det/grey,
+/obj/item/clothing/jumpsuit/sterile,
+/obj/item/clothing/pants/slacks/outfit/detective,
 /obj/item/clothing/pants/baggy,
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
@@ -1547,8 +1548,8 @@
 /obj/structure/closet,
 /obj/item/clothing/under/wetsuit,
 /obj/item/clothing/under/wetsuit,
-/obj/item/clothing/under/savage_hunter,
-/obj/item/clothing/under/savage_hunter/female,
+/obj/item/clothing/costume/savage_hunter,
+/obj/item/clothing/costume/savage_hunter/female,
 /obj/item/clothing/under/harness,
 /obj/item/clothing/under/harness,
 /obj/item/clothing/head/cowboy_hat,
@@ -2295,16 +2296,16 @@
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
 /obj/item/crowbar,
-/obj/item/clothing/under/color/blackjumpshorts,
-/obj/item/clothing/under/captain_fly,
+/obj/item/clothing/jumpsuit/blackjumpshorts,
+/obj/item/clothing/jumpsuit/captain_fly,
 /obj/item/clothing/under/frontier,
-/obj/item/clothing/under/hazard,
-/obj/item/clothing/under/skirt,
-/obj/item/clothing/under/formal/navy,
-/obj/item/clothing/under/formal/charcoal,
+/obj/item/clothing/jumpsuit/hazard,
+/obj/item/clothing/skirt,
+/obj/item/clothing/pants/slacks/black/outfit/navy,
+/obj/item/clothing/pants/slacks/black/outfit,
 /obj/item/clothing/under/syndicate,
-/obj/item/clothing/under/sterile,
-/obj/item/clothing/under/det/grey,
+/obj/item/clothing/jumpsuit/sterile,
+/obj/item/clothing/pants/slacks/outfit/detective,
 /obj/item/clothing/pants/baggy,
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
@@ -2743,16 +2744,16 @@
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
 /obj/item/crowbar,
-/obj/item/clothing/under/captain_fly,
-/obj/item/clothing/under/color/blackjumpshorts,
+/obj/item/clothing/jumpsuit/captain_fly,
+/obj/item/clothing/jumpsuit/blackjumpshorts,
 /obj/item/clothing/under/frontier,
-/obj/item/clothing/under/hazard,
-/obj/item/clothing/under/skirt,
-/obj/item/clothing/under/formal,
-/obj/item/clothing/under/formal/navy,
+/obj/item/clothing/jumpsuit/hazard,
+/obj/item/clothing/skirt,
+/obj/item/clothing/pants/slacks/outfit,
+/obj/item/clothing/pants/slacks/black/outfit/navy,
 /obj/item/clothing/under/syndicate,
-/obj/item/clothing/under/sterile,
-/obj/item/clothing/under/det/grey,
+/obj/item/clothing/jumpsuit/sterile,
+/obj/item/clothing/pants/slacks/outfit/detective,
 /obj/item/clothing/pants/baggy,
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
@@ -3638,7 +3639,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -3719,7 +3720,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /turf/floor/wood/walnut,
 /area/map_template/colony/messhall)
@@ -4886,7 +4887,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -4902,7 +4903,7 @@
 /obj/item/box/detergent,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /turf/floor/tiled/white,
 /area/map_template/colony/bathroom)
@@ -4916,7 +4917,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /turf/floor/wood/walnut,
 /area/map_template/colony/commons)
@@ -5454,7 +5455,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/lino,
 /area/map_template/colony)
@@ -5520,7 +5521,8 @@
 /obj/machinery/button/alternate/door/bolts{
 	id_tag = "colj";
 	name = "Jail Bolt Control";
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/jail)
@@ -6054,7 +6056,8 @@
 "lM" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "playablecolonymain_sensor_chamber";
-	pixel_x = 22
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -6109,7 +6112,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "playablecolonymain_sensor_interior";
-	pixel_x = -22
+	pixel_x = -22;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -6227,7 +6231,8 @@
 "ma" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "playablecolonymain_sensor_external";
-	pixel_x = 22
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/machinery/button/access/exterior{
 	id_tag = "playablecolonymain";
@@ -7168,7 +7173,7 @@
 /obj/machinery/light/spot,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /turf/floor/tiled/dark/monotile,
 /area/map_template/colony/jail)
@@ -7205,7 +7210,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -7879,7 +7884,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/wood/walnut,
 /area/map_template/colony/dorms)

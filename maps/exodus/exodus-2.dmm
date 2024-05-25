@@ -15432,7 +15432,7 @@
 /area/exodus/maintenance/auxsolarstarboard)
 "aGz" = (
 /obj/structure/safe,
-/obj/item/clothing/under/color/yellow,
+/obj/item/clothing/jumpsuit/yellow,
 /obj/item/key,
 /obj/item/sword/katana,
 /obj/structure/cable/green{
@@ -20976,7 +20976,7 @@
 /area/exodus/chapel/main)
 "aSm" = (
 /obj/structure/cult/tome,
-/obj/item/clothing/under/formal/red,
+/obj/item/clothing/pants/slacks/red/outfit,
 /obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
@@ -54066,8 +54066,8 @@
 /obj/effect/floor_decal/corner/purple{
 	dir = 9
 	},
-/obj/item/clothing/under/hydroponics,
-/obj/item/clothing/under/hydroponics,
+/obj/item/clothing/jumpsuit/hydroponics,
+/obj/item/clothing/jumpsuit/hydroponics,
 /obj/item/clothing/gloves/thick/botany,
 /obj/item/clothing/gloves/thick/botany,
 /turf/floor/tiled/white,
@@ -58170,7 +58170,8 @@
 /obj/machinery/button/access/exterior{
 	id_tag = "engineering_dock_airlock";
 	name = "exterior access button";
-	pixel_x = 25
+	pixel_x = 25;
+	dir = 8
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/engi_shuttle)
@@ -61401,13 +61402,13 @@
 	dir = 4
 	},
 /obj/structure/closet/secure_closet/personal/patient,
-/obj/item/clothing/under/color/white,
-/obj/item/clothing/under/color/white,
-/obj/item/clothing/under/color/white,
-/obj/item/clothing/under/color/white,
-/obj/item/clothing/under/color/white,
-/obj/item/clothing/under/color/white,
-/obj/item/clothing/under/color/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
 /obj/item/clothing/shoes/color/white,
 /obj/item/clothing/shoes/color/white,
 /obj/item/clothing/shoes/color/white,

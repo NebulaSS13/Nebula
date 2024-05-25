@@ -65,7 +65,7 @@
 		/obj/item/clothing/suit/jacket/brown,
 		/obj/item/clothing/suit/jacket/leather,
 		/obj/item/clothing/suit/apron,
-		/obj/item/clothing/under/color/grey,
+		/obj/item/clothing/jumpsuit/grey,
 		/obj/item/clothing/under/syndicate/tacticool,
 		/obj/item/clothing/pants/casual/camo,
 		/obj/item/clothing/under/harness,
@@ -89,7 +89,7 @@
 	var/static/list/uncommon_loot = list(
 		/obj/item/clothing/shoes/syndigaloshes,
 		/obj/item/clothing/gloves/insulated,
-		/obj/item/clothing/under/tactical,
+		/obj/item/clothing/jumpsuit/tactical,
 		/obj/item/beartrap,
 		/obj/item/clothing/badge/press,
 		/obj/item/knife/combat,

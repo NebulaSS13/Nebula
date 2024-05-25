@@ -272,7 +272,7 @@
 /area/centcom)
 "avn" = (
 /obj/structure/rack,
-/obj/item/clothing/under/color/green,
+/obj/item/clothing/jumpsuit/green,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/tdome/green,
 /obj/item/clothing/head/helmet/thunderdome,
@@ -2058,7 +2058,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/clothing/under/formal,
+/obj/item/clothing/pants/slacks/outfit,
 /obj/item/clothing/head/that{
 	pixel_x = 4;
 	pixel_y = 6
@@ -2379,7 +2379,7 @@
 /area/shuttle/escape_shuttle)
 "fis" = (
 /obj/structure/rack,
-/obj/item/clothing/under/color/green,
+/obj/item/clothing/jumpsuit/green,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/energy_blade/axe,
 /turf/unsimulated/floor{
@@ -2871,7 +2871,7 @@
 /area/tdome/tdomeadmin)
 "lSf" = (
 /obj/structure/rack,
-/obj/item/clothing/under/color/red,
+/obj/item/clothing/jumpsuit/red,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/energy_blade/axe,
 /turf/unsimulated/floor{
@@ -2939,7 +2939,7 @@
 /area/space)
 "nBg" = (
 /obj/structure/rack,
-/obj/item/clothing/under/color/red,
+/obj/item/clothing/jumpsuit/red,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/tdome/red,
 /obj/item/clothing/head/helmet/thunderdome,
@@ -3123,7 +3123,7 @@
 /area/shuttle/escape_shuttle)
 "sfj" = (
 /obj/structure/rack,
-/obj/item/clothing/under/color/green,
+/obj/item/clothing/jumpsuit/green,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/vest,
 /obj/item/clothing/head/helmet/swat,
@@ -3309,7 +3309,7 @@
 /area/shuttle/escape_shuttle)
 "xeT" = (
 /obj/structure/rack,
-/obj/item/clothing/under/color/red,
+/obj/item/clothing/jumpsuit/red,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/vest,
 /obj/item/clothing/head/helmet/swat,

@@ -405,7 +405,7 @@
 	},
 /obj/item/radio/intercom/wizard{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor"
@@ -457,7 +457,7 @@
 /obj/item/staff/gentcane,
 /obj/item/radio/intercom/wizard{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -489,7 +489,7 @@
 "bn" = (
 /obj/item/radio/intercom/wizard{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	dir = 8;
@@ -504,7 +504,7 @@
 /area/map_template/wizard_station)
 "bp" = (
 /obj/item/radio/intercom/wizard{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/unsimulated/floor{
 	icon_state = "cult";

@@ -1731,7 +1731,8 @@
 	tag_airpump = "solars_pump";
 	tag_chamber_sensor = "solars_sensor";
 	tag_exterior_door = "solars_outer";
-	tag_interior_door = "solars_inner"
+	tag_interior_door = "solars_inner";
+	dir = 1
 	},
 /obj/machinery/power/apc{
 	dir = 1;
@@ -2049,7 +2050,8 @@
 /obj/structure/catwalk,
 /obj/machinery/button/blast_door{
 	id_tag = "shipping";
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -2254,7 +2256,8 @@
 /obj/structure/catwalk,
 /obj/machinery/button/blast_door{
 	id_tag = "shipping";
-	pixel_x = 25
+	pixel_x = 25;
+	dir = 8
 	},
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/shipaccess)
@@ -2326,7 +2329,8 @@
 	id_tag = "hydrodock_airlock";
 	name = "interior access button";
 	pixel_x = -24;
-	req_access = newlist()
+	req_access = newlist();
+	dir = 4
 	},
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/shipaccess)
@@ -2577,7 +2581,7 @@
 /turf/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
 "gz" = (
-/obj/item/clothing/under/skirt_c/dress/black,
+/obj/item/clothing/skirt,
 /obj/item/clothing/head/beret/purple,
 /obj/item/clothing/shoes/dress,
 /obj/structure/closet,
@@ -2611,7 +2615,8 @@
 	tag_airpump = "hydrodock_pump";
 	tag_chamber_sensor = "hydrodock_sensor";
 	tag_exterior_door = "hydrodock_outer";
-	tag_interior_door = "hydrodock_inner"
+	tag_interior_door = "hydrodock_inner";
+	dir = 8
 	},
 /obj/structure/catwalk,
 /turf/floor/fixed/alium,

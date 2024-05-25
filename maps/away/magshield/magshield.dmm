@@ -157,10 +157,12 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume,
 /obj/effect/floor_decal/industrial/hatch/blue,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	pixel_x = 25
+	pixel_x = 25;
+	dir = 8
 	},
 /obj/machinery/airlock_sensor{
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /turf/floor/airless,
 /area/magshield/smes_storage)
@@ -673,6 +675,7 @@
 	dir = 4;
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
+	
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/floor/plating,
@@ -732,6 +735,7 @@
 	dir = 4;
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
+	
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/yellow{
@@ -1275,7 +1279,7 @@
 /turf/space,
 /area/magshield/north)
 "dI" = (
-/obj/item/clothing/under/color/lightpurple,
+/obj/item/clothing/jumpsuit/lightpurple,
 /turf/floor/airless,
 /area/magshield/north)
 "dJ" = (
@@ -1648,7 +1652,8 @@
 	pixel_y = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1805,10 +1810,12 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/blue,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	pixel_x = 25
+	pixel_x = 25;
+	dir = 8
 	},
 /obj/machinery/airlock_sensor{
-	pixel_x = -25
+	pixel_x = -25;
+	dir = 4
 	},
 /turf/floor/airless,
 /area/magshield/north)
@@ -2433,7 +2440,8 @@
 	pixel_y = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/floor/airless,
 /area/magshield/east)
@@ -3224,7 +3232,8 @@
 	pixel_y = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/floor/airless,
 /area/magshield/south)

@@ -1707,7 +1707,7 @@
 /area/ship/trade/livestock)
 "Hk" = (
 /obj/item/radio/intercom{
-	pixel_y = 24
+	pixel_y = 20
 	},
 /obj/machinery/optable,
 /obj/machinery/light{

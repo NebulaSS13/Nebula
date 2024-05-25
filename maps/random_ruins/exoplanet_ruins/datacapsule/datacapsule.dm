@@ -20,7 +20,7 @@
 
 /decl/hierarchy/outfit/zombie_science
 	name = "Job - Dead Scientist"
-	uniform = /obj/item/clothing/under/color/white
+	uniform = /obj/item/clothing/jumpsuit/white
 	suit = /obj/item/clothing/suit/bio_suit/anomaly
 	head = /obj/item/clothing/head/bio_hood/anomaly
 

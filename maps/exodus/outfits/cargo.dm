@@ -4,7 +4,7 @@
 
 /decl/hierarchy/outfit/job/cargo/qm
 	name = "Job - Cargo"
-	uniform = /obj/item/clothing/under/cargo
+	uniform = /obj/item/clothing/jumpsuit/cargo
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses
 	hands = list(/obj/item/clipboard)
@@ -18,13 +18,13 @@
 
 /decl/hierarchy/outfit/job/cargo/cargo_tech
 	name = "Job - Cargo technician"
-	uniform = /obj/item/clothing/under/cargotech
+	uniform = /obj/item/clothing/jumpsuit/cargotech
 	id_type = /obj/item/card/id/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/cargo/mining
 	name = "Job - Shaft miner"
-	uniform = /obj/item/clothing/under/miner
+	uniform = /obj/item/clothing/jumpsuit/miner
 	id_type = /obj/item/card/id/cargo
 	pda_type = /obj/item/modular_computer/pda/science
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/ore = 1)

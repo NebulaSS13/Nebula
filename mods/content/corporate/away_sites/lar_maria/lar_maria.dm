@@ -66,7 +66,7 @@
 
 /decl/hierarchy/outfit/corpse/test_subject
 	name = "dead ZHP test subject"
-	uniform = /obj/item/clothing/under/color/orange
+	uniform = /obj/item/clothing/jumpsuit/orange
 	shoes = /obj/item/clothing/shoes/color/orange
 
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard
@@ -79,7 +79,7 @@
 
 /decl/hierarchy/outfit/corpse/zhp_guard
 	name = "Dead ZHP guard"
-	uniform = /obj/item/clothing/under/virologist
+	uniform = /obj/item/clothing/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/armor/pcarrier/light
 	head = /obj/item/clothing/head/soft/zhp_cap
 	shoes = /obj/item/clothing/shoes/jackboots/duty
@@ -132,7 +132,7 @@
 
 /decl/hierarchy/outfit/corpse/zhp_virologist
 	name = "Dead male ZHP virologist"
-	uniform = /obj/item/clothing/under/virologist
+	uniform = /obj/item/clothing/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/color/white
 	gloves = /obj/item/clothing/gloves/latex/nitrile
@@ -154,7 +154,7 @@
 
 /decl/hierarchy/outfit/corpse/zhp_virologist_female
 	name = "Dead female ZHP virologist"
-	uniform = /obj/item/clothing/under/virologist
+	uniform = /obj/item/clothing/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/color/white
 	gloves = /obj/item/clothing/gloves/latex/nitrile

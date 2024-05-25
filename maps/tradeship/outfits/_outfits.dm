@@ -13,10 +13,10 @@
 	..()
 	uniform = pick(list(
 		/obj/item/clothing/under/overalls,
-		/obj/item/clothing/under/hazard,
-		/obj/item/clothing/under/cargotech,
-		/obj/item/clothing/under/color/black,
-		/obj/item/clothing/under/color/grey
+		/obj/item/clothing/jumpsuit/hazard,
+		/obj/item/clothing/jumpsuit/cargotech,
+		/obj/item/clothing/jumpsuit/black,
+		/obj/item/clothing/jumpsuit/grey
 	))
 
 /decl/hierarchy/outfit/job/tradeship/hand/cook

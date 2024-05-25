@@ -178,6 +178,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "merch_radaway";
+	
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -206,6 +207,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "merch_radaway";
+	
 	},
 /turf/floor,
 /area/liberia/engineeringreactor)
@@ -357,7 +359,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "merchantwarehouse";
 	name = "Warehouse Shutters";
-	pixel_x = -24
+	pixel_x = -24;
+	dir = 4
 	},
 /turf/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
@@ -643,6 +646,7 @@
 	dir = 2;
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
+	
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -832,6 +836,7 @@
 	dir = 4;
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
+	
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1134,7 +1139,8 @@
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
 	pixel_y = -28;
-	req_access = list("ACCESS_MERCHANT")
+	req_access = list("ACCESS_MERCHANT");
+	dir = 1
 	},
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 8
@@ -1264,6 +1270,7 @@
 	dir = 4;
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
+	
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1405,7 +1412,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "merchant_ship_sensor";
-	pixel_x = 28
+	pixel_x = 28;
+	dir = 8
 	},
 /obj/structure/catwalk,
 /turf/floor/plating,
@@ -1569,6 +1577,7 @@
 	dir = 4;
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
+	
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -1799,7 +1808,8 @@
 	tag_airpump = "merchant_ship_vent";
 	tag_chamber_sensor = "merchant_ship_sensor";
 	tag_exterior_door = "merchant_ship_exterior";
-	tag_interior_door = "merchant_ship_interior"
+	tag_interior_door = "merchant_ship_interior";
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 1
@@ -2582,7 +2592,8 @@
 	},
 /obj/machinery/button/access/exterior{
 	id_tag = "mule_port_shuttle_dock";
-	pixel_x = -28
+	pixel_x = -28;
+	dir = 4
 	},
 /obj/structure/cable/blue{
 	icon_state = "1-2"
@@ -2812,7 +2823,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 9
@@ -3778,7 +3789,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/floor/tiled/monotile,
 /area/liberia/officeroom)
@@ -3818,7 +3829,7 @@
 /obj/item/clothing/shoes/craftable,
 /obj/item/clothing/under/blazer,
 /obj/item/clothing/under/lawyer,
-/obj/item/clothing/under/formal/navy,
+/obj/item/clothing/pants/slacks/black/outfit/navy,
 /obj/random/handgun,
 /obj/item/chems/drinks/bottle/premiumwine,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -4169,7 +4180,7 @@
 "hy" = (
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -4234,7 +4245,7 @@
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/color/black,
 /obj/item/clothing/under/overalls,
-/obj/item/clothing/under/skirt,
+/obj/item/clothing/skirt,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
@@ -4324,7 +4335,7 @@
 "hQ" = (
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /obj/structure/closet/secure_closet/freezer/kitchen{
 	req_access = newlist()
@@ -5003,6 +5014,7 @@
 /obj/structure/table/glass,
 /obj/machinery/faxmachine/mapped{
 	req_access = list("ACCESS_MERCHANT");
+	
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/dark/monotile,
@@ -6264,7 +6276,8 @@
 "oJ" = (
 /obj/abstract/level_data_spawner/player{
 	name = "Liberia";
-},
+	
+	},
 /turf/space,
 /area/space)
 "oM" = (
@@ -6596,8 +6609,8 @@
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/jackboots,
 /obj/item/clothing/shoes/jackboots,
-/obj/item/clothing/under/engineer,
-/obj/item/clothing/under/security,
+/obj/item/clothing/jumpsuit/engineer,
+/obj/item/clothing/jumpsuit/security,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -6606,7 +6619,7 @@
 "se" = (
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -28
+	pixel_y = -30
 	},
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -8082,6 +8095,7 @@
 	dir = 2;
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
+	
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,

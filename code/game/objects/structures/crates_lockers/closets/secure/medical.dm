@@ -1,14 +1,14 @@
-#define RANDOM_SCRUBS new/datum/atom_creator/weighted(list( \
-				list(/obj/item/clothing/under/medical/scrubs, /obj/item/clothing/head/surgery), \
-				list(/obj/item/clothing/under/medical/scrubs/blue, /obj/item/clothing/head/surgery/blue), \
-				list(/obj/item/clothing/under/medical/scrubs/green, /obj/item/clothing/head/surgery/green), \
-				list(/obj/item/clothing/under/medical/scrubs/purple, /obj/item/clothing/head/surgery/purple), \
-				list(/obj/item/clothing/under/medical/scrubs/black, /obj/item/clothing/head/surgery/black), \
-				list(/obj/item/clothing/under/medical/scrubs/lilac, /obj/item/clothing/head/surgery/lilac), \
-				list(/obj/item/clothing/under/medical/scrubs/teal, /obj/item/clothing/head/surgery/teal), \
-				list(/obj/item/clothing/under/medical/scrubs/heliodor, /obj/item/clothing/head/surgery/heliodor), \
-				list(/obj/item/clothing/under/medical/scrubs/navyblue, /obj/item/clothing/head/surgery/navyblue)\
-			) \
+#define RANDOM_SCRUBS new/datum/atom_creator/weighted(list(                                                                                         \
+				list(/obj/item/clothing/shirt/scrubs,          /obj/item/clothing/pants/scrubs,          /obj/item/clothing/head/surgery),          \
+				list(/obj/item/clothing/shirt/scrubs/blue,     /obj/item/clothing/pants/scrubs/blue,     /obj/item/clothing/head/surgery/blue),     \
+				list(/obj/item/clothing/shirt/scrubs/green,    /obj/item/clothing/pants/scrubs/green,    /obj/item/clothing/head/surgery/green),    \
+				list(/obj/item/clothing/shirt/scrubs/purple,   /obj/item/clothing/pants/scrubs/purple,   /obj/item/clothing/head/surgery/purple),   \
+				list(/obj/item/clothing/shirt/scrubs/black,    /obj/item/clothing/pants/scrubs/black,    /obj/item/clothing/head/surgery/black),    \
+				list(/obj/item/clothing/shirt/scrubs/lilac,    /obj/item/clothing/pants/scrubs/lilac,    /obj/item/clothing/head/surgery/lilac),    \
+				list(/obj/item/clothing/shirt/scrubs/teal,     /obj/item/clothing/pants/scrubs/teal,     /obj/item/clothing/head/surgery/teal),     \
+				list(/obj/item/clothing/shirt/scrubs/heliodor, /obj/item/clothing/pants/scrubs/heliodor, /obj/item/clothing/head/surgery/heliodor), \
+				list(/obj/item/clothing/shirt/scrubs/navyblue, /obj/item/clothing/pants/scrubs/navyblue, /obj/item/clothing/head/surgery/navyblue)  \
+			)                                                                                                                                       \
 		)
 
 /obj/structure/closet/secure_closet/medical1
@@ -39,10 +39,9 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/backpack/medic, /obj/item/backpack/satchel/med)),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/med, 50),
-		/obj/item/clothing/under/nursesuit,
 		/obj/item/clothing/head/nursehat,
-		/obj/item/clothing/under/medical,
-		/obj/item/clothing/under/nurse,
+		/obj/item/clothing/jumpsuit/medical,
+		/obj/item/clothing/dress/nurse = 2,
 		/obj/item/clothing/under/orderly,
 		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/suit/jacket/first_responder,
@@ -96,7 +95,7 @@
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/color/white,
-		/obj/item/clothing/under/chief_medical_officer,
+		/obj/item/clothing/jumpsuit/chief_medical_officer,
 		/obj/item/clothing/suit/toggle/labcoat/cmo,
 		/obj/item/clothing/suit/toggle/labcoat/cmoalt,
 		/obj/item/clothing/gloves/latex,
@@ -152,8 +151,8 @@
 
 /obj/structure/closet/secure_closet/counselor/WillContain()
 	return list(
-		/obj/item/clothing/under/psych,
-		/obj/item/clothing/under/psych/turtleneck,
+		/obj/item/clothing/jumpsuit/psych,
+		/obj/item/clothing/jumpsuit/psych/turtleneck,
 		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/chems/glass/bottle/sedatives,
@@ -187,7 +186,7 @@
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/box/masks,
 		/obj/item/box/gloves,
-		/obj/item/clothing/under/virologist,
+		/obj/item/clothing/jumpsuit/virologist,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/suit/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
@@ -209,6 +208,6 @@
 		/obj/item/chems/syringe,
 		/obj/item/pill_bottle/antidepressants,
 		/obj/item/pill_bottle/stimulants,
-		/obj/item/clothing/under/psych/turtleneck,
-		/obj/item/clothing/under/psych
+		/obj/item/clothing/jumpsuit/psych/turtleneck,
+		/obj/item/clothing/jumpsuit/psych
 	)

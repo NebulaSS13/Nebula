@@ -140,7 +140,7 @@
 	if(has_extension(src, /datum/extension/holster))
 		.[name] = get_extension(src, /datum/extension/holster)
 
-/obj/item/clothing/under/get_holsters()
+/obj/item/clothing/get_holsters()
 	. = ..()
 	var/holster_accessories_by_name = list()
 	for(var/obj/accessory in accessories)

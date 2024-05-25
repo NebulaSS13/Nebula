@@ -4,7 +4,7 @@
 	icon = 'icons/clothing/suit/rough_robe.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	slot_flags = SLOT_OVER_BODY
+	slot_flags = SLOT_UPPER_BODY | SLOT_OVER_BODY
 	accessory_slot = ACCESSORY_SLOT_DECOR
 
 /obj/item/clothing/suit/robe/thawb
@@ -19,3 +19,9 @@
 
 /obj/item/clothing/suit/robe/yellowed
 	paint_color = "#e1cf98"
+
+/obj/item/clothing/suit/robe/abaya
+	name = "abaya"
+	desc = "A loose-fitting, robe-like dress."
+	icon = 'icons/clothing/under/abaya.dmi'
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS

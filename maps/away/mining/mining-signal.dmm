@@ -1023,12 +1023,6 @@
 /obj/structure/table/woodentable,
 /turf/floor/carpet,
 /area/outpost/abandoned)
-"dB" = (
-/turf/floor/natural/barren,
-/turf/wall/shuttle{
-	unique_merge_identifier = "mining_signal"
-	},
-/area/outpost/abandoned)
 "dC" = (
 /obj/machinery/vending/coffee{
 	icon_state = "coffee-broken";
@@ -1162,7 +1156,8 @@
 "dY" = (
 /obj/structure/extinguisher_cabinet{
 	icon_state = "extinguisher_empty";
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/machinery/light/small{
 	dir = 4;
@@ -2161,12 +2156,14 @@
 /obj/machinery/newscaster{
 	icon_state = "newscaster_off";
 	pixel_x = -30;
-	stat = 1
+	stat = 1;
+	dir = 8
 	},
 /obj/machinery/newscaster{
 	icon_state = "crack3";
 	pixel_x = -30;
-	stat = 1
+	stat = 1;
+	dir = 8
 	},
 /obj/structure/cable/orange{
 	icon_state = "1-2"
@@ -18375,7 +18372,7 @@ cs
 cM
 dl
 dm
-dB
+dv
 ab
 ab
 ej
@@ -18576,7 +18573,7 @@ af
 af
 af
 dm
-dB
+dv
 ab
 ab
 ab

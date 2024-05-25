@@ -229,7 +229,8 @@
 "MO" = (
 /obj/abstract/level_data_spawner/main_level{
 	name = "Example Third Deck";
-},
+	
+	},
 /turf/space,
 /area/space)
 "Nz" = (

@@ -26,7 +26,7 @@
 	if(H.incapacitated())
 		return
 
-	var/obj/item/clothing/under/U = H.get_equipped_item(slot_w_uniform_str)
+	var/obj/item/clothing/U = H.get_equipped_item(slot_w_uniform_str)
 	if(istype(U))
 		for(var/obj/S in U.accessories)
 			if(istype(S, /obj/item/clothing/webbing/holster))

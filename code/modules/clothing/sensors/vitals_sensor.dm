@@ -40,7 +40,7 @@
 		if(VITALS_SENSOR_TRACKING)
 			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
-/obj/item/clothing/sensor/vitals/on_attached(obj/item/clothing/S, mob/user)
+/obj/item/clothing/sensor/vitals/on_attached(var/obj/item/clothing/holder, var/mob/user)
 	. = ..()
 	update_removable()
 

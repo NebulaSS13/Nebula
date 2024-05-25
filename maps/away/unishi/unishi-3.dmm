@@ -248,7 +248,8 @@
 /obj/item/clothing/suit/armor/pcarrier/tan,
 /obj/item/clothing/suit/armor/pcarrier/tan,
 /obj/machinery/recharger/wallcharger{
-	pixel_y = -30
+	pixel_y = -30;
+	dir = 1
 	},
 /turf/floor,
 /area/unishi/bridge)

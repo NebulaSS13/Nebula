@@ -1188,7 +1188,8 @@
 "fb" = (
 /obj/machinery/button/access/exterior{
 	id_tag = "yacht_airlock";
-	pixel_x = 24
+	pixel_x = 24;
+	dir = 8
 	},
 /turf/space,
 /area/space)
@@ -1200,7 +1201,8 @@
 /obj/machinery/constructable_frame/computerframe,
 /obj/machinery/button/access/interior{
 	id_tag = "yacht_airlock";
-	pixel_x = -24
+	pixel_x = -24;
+	dir = 4
 	},
 /turf/floor/plating,
 /area/yacht/engine)
@@ -1260,7 +1262,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "yacht_sensor";
-	pixel_y = -24
+	pixel_y = -24;
+	dir = 1
 	},
 /turf/floor/airless,
 /area/yacht/engine)

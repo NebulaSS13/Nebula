@@ -7,7 +7,7 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/backpack = 75,  /obj/item/backpack/satchel/grey = 25)),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag, 25),
-		/obj/item/clothing/under/cargotech,
+		/obj/item/clothing/jumpsuit/cargotech,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
@@ -24,7 +24,7 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/backpack = 75,  /obj/item/backpack/satchel/grey = 25)),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag, 25),
-		/obj/item/clothing/under/cargotech,
+		/obj/item/clothing/jumpsuit/cargotech,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,

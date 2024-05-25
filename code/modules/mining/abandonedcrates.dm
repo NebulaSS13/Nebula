@@ -50,7 +50,7 @@
 			new /obj/item/clothing/pants/shorts/athletic/red(src)
 			new /obj/item/clothing/pants/shorts/athletic/blue(src)
 		if(46 to 50)
-			new/obj/item/clothing/under/chameleon(src)
+			new/obj/item/clothing/jumpsuit/chameleon(src)
 			for(var/i = 0, i < 7, i++)
 				new /obj/item/clothing/neck/tie/horrible(src)
 		if(51 to 52) // Uncommon, 2% each
@@ -107,14 +107,14 @@
 			new /obj/item/firstaid/combat(src) // Probably the least OP
 		if(94) // Why the hell not
 			new /obj/item/backpack/clown(src)
-			new /obj/item/clothing/under/clown(src)
+			new /obj/item/clothing/costume/clown(src)
 			new /obj/item/clothing/shoes/clown_shoes(src)
 			new /obj/item/clothing/mask/gas/clown_hat(src)
 			new /obj/item/bikehorn(src)
 			new /obj/item/pen/crayon/rainbow(src)
 			new /obj/item/chems/spray/waterflower(src)
 		if(95)
-			new /obj/item/clothing/under/mime(src)
+			new /obj/item/clothing/costume/mime(src)
 			new /obj/item/clothing/shoes/color/black(src)
 			new /obj/item/clothing/gloves(src)
 			new /obj/item/clothing/mask/gas/mime(src)

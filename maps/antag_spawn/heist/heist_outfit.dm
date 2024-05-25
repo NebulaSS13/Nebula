@@ -3,13 +3,12 @@
 	l_ear = /obj/item/radio/headset/raider
 	id_type = /obj/item/card/id/syndicate
 	var/list/raider_uniforms = list(
-		/obj/item/clothing/under/soviet,
-		/obj/item/clothing/under/pirate,
-		/obj/item/clothing/under/redcoat,
+		/obj/item/clothing/costume/soviet,
+		/obj/item/clothing/costume/pirate,
+		/obj/item/clothing/costume/redcoat,
 		/obj/item/clothing/under/serviceoveralls,
-		/obj/item/clothing/under/captain_fly,
-		/obj/item/clothing/under/det,
-		/obj/item/clothing/under/color/brown,
+		/obj/item/clothing/jumpsuit/captain_fly,
+		/obj/item/clothing/jumpsuit/brown,
 		)
 	var/list/raider_shoes = list(
 		/obj/item/clothing/shoes/jackboots,
@@ -119,7 +118,7 @@
 				H.put_in_hands(ammobox)
 
 		if(holster)
-			var/obj/item/clothing/under/uniform = H.get_equipped_item(slot_w_uniform_str)
+			var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
 			if(istype(uniform) && uniform.can_attach_accessory(holster))
 				uniform.attackby(holster, H)
 			else

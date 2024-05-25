@@ -6472,19 +6472,19 @@
 /obj/structure/closet/wardrobe/mixed,
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/shoes/sandal,
-/obj/item/clothing/under/color,
-/obj/item/clothing/under/color,
-/obj/item/clothing/under/color,
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit,
+/obj/item/clothing/jumpsuit,
+/obj/item/clothing/jumpsuit,
+/obj/item/clothing/jumpsuit{
 	color = "#ff00ff"
 	},
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit{
 	color = "#000000"
 	},
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit{
 	color = "#008000"
 	},
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit{
 	color = "#808080"
 	},
 /obj/item/clothing/suit/jacket/winter,
@@ -7226,7 +7226,7 @@
 /obj/structure/closet,
 /obj/item/clothing/mask/gas/clown_hat,
 /obj/item/clothing/shoes/clown_shoes,
-/obj/item/clothing/under/clown,
+/obj/item/clothing/costume/clown,
 /obj/item/stamp/clown,
 /obj/item/backpack/clown,
 /obj/item/bikehorn,

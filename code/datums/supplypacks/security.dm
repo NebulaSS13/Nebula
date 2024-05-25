@@ -27,7 +27,7 @@
 
 /decl/hierarchy/supply_pack/security/tacticalarmor
 	name = "Armor - Tactical"
-	contains = list(/obj/item/clothing/under/tactical,
+	contains = list(/obj/item/clothing/jumpsuit/tactical,
 					/obj/item/clothing/suit/armor/pcarrier/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,

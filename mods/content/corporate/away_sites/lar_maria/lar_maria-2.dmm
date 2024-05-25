@@ -1677,8 +1677,10 @@
 "fm" = (
 /obj/structure/closet,
 /obj/item/clothing/head/surgery,
-/obj/item/clothing/under/medical/scrubs,
-/obj/item/clothing/under/medical/scrubs,
+/obj/item/clothing/pants/scrubs,
+/obj/item/clothing/pants/scrubs,
+/obj/item/clothing/shirt/scrubs,
+/obj/item/clothing/shirt/scrubs,
 /obj/item/clothing/suit/toggle/labcoat,
 /obj/item/clothing/suit/toggle/labcoat,
 /obj/random/gloves,

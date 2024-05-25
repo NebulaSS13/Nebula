@@ -782,13 +782,6 @@
 	},
 /turf/floor/tiled/steel_grid,
 /area/example/first)
-"Mo" = (
-/obj/abstract/landmark/latejoin,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/turf/floor/tiled/steel_grid,
-/area/example/first)
 "Nu" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
@@ -2634,7 +2627,7 @@ WW
 Yp
 VY
 kw
-Mo
+kw
 WW
 Yp
 VY
@@ -2688,7 +2681,7 @@ WW
 Yp
 VY
 kw
-Mo
+kw
 WW
 Yp
 VY
@@ -2742,7 +2735,7 @@ WW
 Yp
 VY
 kw
-Mo
+kw
 WW
 Yp
 VY
@@ -2796,7 +2789,7 @@ WW
 Yp
 VY
 kw
-Mo
+kw
 WW
 Yp
 VY
@@ -2850,7 +2843,7 @@ WW
 Yp
 VY
 kw
-Mo
+kw
 WW
 Yp
 VY
@@ -2904,7 +2897,7 @@ gT
 Pp
 VY
 kw
-Mo
+kw
 WW
 Yp
 VY
@@ -2958,7 +2951,7 @@ tA
 LM
 VY
 kw
-Mo
+kw
 WW
 Yp
 VY

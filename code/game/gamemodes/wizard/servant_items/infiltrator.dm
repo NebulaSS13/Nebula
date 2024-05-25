@@ -24,12 +24,6 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
 
-/obj/item/clothing/under/lawyer/infil
-	name = "formal outfit"
-	desc = "A white dress shirt and navy pants. Snazzy."
-	icon = 'icons/clothing/under/formal.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
-
 /obj/item/clothing/shoes/dress/infilshoes
 	name = "black leather shoes"
 	desc = "Dress shoes. Their footsteps are dead silent."
@@ -46,9 +40,3 @@
 	name = "maid's uniform"
 	desc = "The uniform of someone you'd expect to see dusting off the Antique Gun's display case."
 	icon = 'icons/clothing/suit/wizard/servant/inf_dress.dmi'
-
-/obj/item/clothing/under/lawyer/infil/fem
-	name = "white dress"
-	desc = "It's a simple, sleeveless white dress with black trim."
-	icon = 'icons/clothing/under/dresses/dress_white.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET

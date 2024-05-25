@@ -24,12 +24,6 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 
-/obj/item/clothing/under/caretaker
-	name = "caretaker's jumpsuit"
-	desc = "A holy jumpsuit. Treat it well."
-	icon = 'icons/clothing/under/caretaker.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
-
 /obj/item/clothing/shoes/dress/caretakershoes
 	name = "black leather shoes"
 	desc = "Dress shoes. These aren't as shiny as usual."

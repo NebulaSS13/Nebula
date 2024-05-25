@@ -11,7 +11,7 @@
 /area/template_noop)
 "d" = (
 /obj/structure/closet/cabinet,
-/obj/item/clothing/under/color/black,
+/obj/item/clothing/jumpsuit/black,
 /obj/item/clothing/shoes/jackboots/jungleboots,
 /obj/item/clothing/mask/breath,
 /turf/floor/carpet/green,

@@ -1009,7 +1009,7 @@
 "ew" = (
 /obj/structure/closet/secure_closet/atmos_personal,
 /obj/item/clothing/suit/jacket/winter,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 10
 	},
@@ -3050,7 +3050,7 @@
 "mJ" = (
 /obj/structure/closet/secure_closet/atmos_personal,
 /obj/item/clothing/suit/jacket/winter,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /turf/floor/tiled/techfloor,
 /area/ministation/atmospherics)
 "mN" = (
@@ -4051,7 +4051,7 @@
 	dir = 4
 	},
 /obj/structure/closet/secure_closet/engineering_chief,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /obj/item/clothing/suit/jacket/winter,
 /obj/item/telebaton,
 /obj/item/sealant_tank/mapped,
@@ -7645,7 +7645,7 @@
 	req_access = list("ACCESS_ENGINEERING")
 	},
 /obj/item/clothing/suit/jacket/winter/engineering,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /obj/item/backpack/dufflebag/eng,
 /obj/item/backpack/dufflebag/eng,
 /turf/floor/tiled/steel_grid,
@@ -8392,25 +8392,25 @@
 /area/ministation/engine)
 "Hn" = (
 /obj/structure/closet/wardrobe/mixed,
-/obj/item/clothing/under/color,
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit,
+/obj/item/clothing/jumpsuit{
 	color = "#ff00ff"
 	},
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit{
 	color = "#000000"
 	},
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit{
 	color = "#008000"
 	},
-/obj/item/clothing/under/color{
+/obj/item/clothing/jumpsuit{
 	color = "#808080"
 	},
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/shoes/sandal,
-/obj/item/clothing/under/color,
-/obj/item/clothing/under/color,
+/obj/item/clothing/jumpsuit,
+/obj/item/clothing/jumpsuit,
 /turf/floor/wood/walnut,
 /area/ministation/dorms)
 "Ho" = (

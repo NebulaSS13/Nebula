@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/tunnel_clown
 	name = "Tunnel clown"
-	uniform = /obj/item/clothing/under/clown
+	uniform = /obj/item/clothing/costume/clown
 	shoes = /obj/item/clothing/shoes/clown_shoes
 	gloves = /obj/item/clothing/gloves/thick
 	mask = /obj/item/clothing/mask/gas/clown_hat
@@ -38,7 +38,7 @@
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"
-	uniform =  /obj/item/clothing/under/formal
+	uniform =  /obj/item/clothing/pants/slacks/outfit
 	shoes =    /obj/item/clothing/shoes/color/black
 	gloves =   /obj/item/clothing/gloves/thick
 	l_ear =    /obj/item/radio/headset

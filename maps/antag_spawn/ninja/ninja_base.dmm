@@ -386,7 +386,7 @@
 "bb" = (
 /obj/item/radio/intercom/ninja{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	dir = 8;
@@ -778,7 +778,7 @@
 /obj/item/toy/figure/wizard,
 /obj/item/radio/intercom/ninja{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	dir = 8;
@@ -1087,7 +1087,7 @@
 /obj/item/plastique,
 /obj/item/radio/intercom/ninja{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
@@ -1211,6 +1211,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "ninjadoor";
 	name = "Blast Door";
+	
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1271,7 +1272,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "ninjadoor";
 	name = "remote shutter control";
-	pixel_x = 25
+	pixel_x = 25;
+	dir = 8
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"

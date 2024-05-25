@@ -8,7 +8,7 @@
 
 /decl/loadout_option/uniform/jumpsuit
 	name = "jumpsuit, colour select"
-	path = /obj/item/clothing/under/color
+	path = /obj/item/clothing/jumpsuit
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/shortjumpskirt
@@ -18,7 +18,7 @@
 
 /decl/loadout_option/uniform/blackjumpshorts
 	name = "black jumpsuit shorts"
-	path = /obj/item/clothing/under/color/blackjumpshorts
+	path = /obj/item/clothing/jumpsuit/blackjumpshorts
 
 /decl/loadout_option/uniform/shirt
 	name = "shirt selection"
@@ -28,6 +28,7 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/shirt/ubac,
 		/obj/item/clothing/shirt/ubac/blue,
 		/obj/item/clothing/shirt/ubac/tan,
@@ -45,72 +46,57 @@
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/under/sl_suit,
-		/obj/item/clothing/under/formal,
 		/obj/item/clothing/under/lawyer/blue,
-		/obj/item/clothing/under/formal/burgundy,
-		/obj/item/clothing/under/formal/charcoal,
-		/obj/item/clothing/under/formal/checkered,
-		/obj/item/clothing/under/formal/tie,
 		/obj/item/clothing/under/gentlesuit,
-		/obj/item/clothing/under/formal/navy,
 		/obj/item/clothing/under/lawyer/oldman,
-		/obj/item/clothing/under/lawyer/purpsuit,
-		/obj/item/clothing/under/formal/red,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer,
-		/obj/item/clothing/under/formal/tan,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/under/blazer,
 		/obj/item/clothing/under/blackjumpskirt,
-		/obj/item/clothing/under/kilt,
-		/obj/item/clothing/under/dress/dress_hr,
-		/obj/item/clothing/under/det,
-		/obj/item/clothing/under/det/black,
-		/obj/item/clothing/under/det/grey
 	)
 
-/decl/loadout_option/uniform/dress
+/decl/loadout_option/uniform/dress_selection
 	name = "dress selection"
-	path = /obj/item/clothing/under
+	path = /obj/item/clothing/dress
 
-/decl/loadout_option/uniform/dress/get_gear_tweak_options()
+/decl/loadout_option/uniform/dress_selection/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/under/sundress_white,
-		/obj/item/clothing/under/dress,
-		/obj/item/clothing/under/dress/dress_green,
-		/obj/item/clothing/under/dress/dress_orange,
-		/obj/item/clothing/under/dress/dress_pink,
-		/obj/item/clothing/under/dress/dress_purple,
-		/obj/item/clothing/under/sundress
+		/obj/item/clothing/dress,
+		/obj/item/clothing/dress/green,
+		/obj/item/clothing/dress/orange,
+		/obj/item/clothing/dress/pink,
+		/obj/item/clothing/dress/purple,
+		/obj/item/clothing/dress/sun,
+		/obj/item/clothing/dress/sun/white
 	)
 
 /decl/loadout_option/uniform/cheongsam
 	name = "cheongsam, colour select"
-	path = /obj/item/clothing/under/cheongsam
+	path = /obj/item/clothing/dress/cheongsam
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/abaya
 	name = "abaya, colour select"
-	path = /obj/item/clothing/under/abaya
+	path = /obj/item/clothing/suit/robe/abaya
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/skirt
 	name = "skirt selection"
-	path = /obj/item/clothing/under/skirt
+	path = /obj/item/clothing/skirt
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/uniform/skirt_c
+/decl/loadout_option/uniform/skirt/short
 	name = "short skirt, colour select"
-	path = /obj/item/clothing/under/skirt_c
+	path = /obj/item/clothing/skirt/short
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/skirt_c/dress
-	name = "simple dress, colour select"
-	path = /obj/item/clothing/under/skirt_c/dress
+/decl/loadout_option/uniform/dress_simple
+	name = "short dress, colour select"
+	path = /obj/item/clothing/dress/short
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/casual_pants
@@ -140,14 +126,18 @@
 
 /decl/loadout_option/uniform/turtleneck
 	name = "sweater, colour select"
-	path = /obj/item/clothing/under/psych/turtleneck/sweater
+	path = /obj/item/clothing/jumpsuit/psych/turtleneck/sweater
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/kimono
 	name = "kimono, colour select"
-	path = /obj/item/clothing/under/kimono
+	path = /obj/item/clothing/dress/kimono
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/frontier
 	name = "frontier clothes"
 	path = /obj/item/clothing/under/frontier
+
+/decl/loadout_option/uniform/nurse
+	name = "dress, nurse"
+	path = /obj/item/clothing/dress/nurse

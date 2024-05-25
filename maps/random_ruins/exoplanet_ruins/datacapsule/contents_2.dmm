@@ -7,10 +7,6 @@
 /mob/living/simple_animal/hostile/viscerator,
 /turf/template_noop,
 /area/template_noop)
-"d" = (
-/obj/structure/foamedmetal,
-/turf/template_noop,
-/area/template_noop)
 "e" = (
 /turf/template_noop,
 /area/template_noop)
@@ -36,13 +32,13 @@ f
 h
 "}
 (2,1,1) = {"
-d
-d
-d
+a
+a
+a
 b
 "}
 (3,1,1) = {"
-d
+a
 e
 f
 h

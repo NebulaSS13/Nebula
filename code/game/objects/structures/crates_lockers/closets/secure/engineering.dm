@@ -15,7 +15,7 @@
 		)),
 		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/eng, 50),
 		/obj/item/blueprints,
-		/obj/item/clothing/under/chief_engineer,
+		/obj/item/clothing/jumpsuit/chief_engineer,
 		/obj/item/clothing/head/welding,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/shoes/color/brown,

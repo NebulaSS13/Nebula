@@ -3293,7 +3293,8 @@
 /turf/floor/tiled/airless,
 /area/slavers_base/demo)
 "jb" = (
-/obj/item/clothing/under/pj/blue,
+/obj/item/clothing/pants/pj/blue,
+/obj/item/clothing/shirt/pj/blue,
 /obj/effect/decal/cleanable/dirt,
 /turf/floor/tiled/airless,
 /area/slavers_base/demo)

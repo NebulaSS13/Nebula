@@ -32,9 +32,8 @@
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	H.examine_holster(user)
 
-/obj/item/clothing/webbing/holster/on_attached(obj/item/clothing/under/S, mob/user)
+/obj/item/clothing/webbing/holster/on_attached(var/obj/item/clothing/holder, var/mob/user)
 	. = ..()
-	var/obj/item/clothing/holder = loc
 	if(istype(holder))
 		holder.verbs |= /atom/proc/holster_verb
 

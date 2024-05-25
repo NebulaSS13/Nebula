@@ -867,7 +867,7 @@
 /area/icarus/vessel)
 "da" = (
 /obj/structure/closet,
-/obj/item/clothing/under/hazard,
+/obj/item/clothing/jumpsuit/hazard,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "db" = (

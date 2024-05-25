@@ -9,7 +9,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/handcuffs = 1)
 	name = "Ministation - Job - Security Officer"
-	uniform = /obj/item/clothing/under/security
+	uniform = /obj/item/clothing/jumpsuit/security
 	l_pocket = /obj/item/flash
 	r_pocket = /obj/item/handcuffs
 	id_type = /obj/item/card/id/ministation/security
@@ -22,7 +22,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/handcuffs = 1)
 	name = "Ministation - Job - Head of Security"
-	uniform = /obj/item/clothing/under/security
+	uniform = /obj/item/clothing/jumpsuit/security
 	l_pocket = /obj/item/flash
 	r_pocket = /obj/item/handcuffs
 	id_type = /obj/item/card/id/ministation/security
@@ -49,7 +49,7 @@
 	head = /obj/item/clothing/head/det
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/radio/headset/headset_sec
-	uniform = /obj/item/clothing/under/det
+	uniform = /obj/item/clothing/pants/slacks/outfit/detective
 	suit = /obj/item/clothing/suit/det_trench
 	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress
