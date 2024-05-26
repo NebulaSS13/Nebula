@@ -102,6 +102,9 @@
 /datum/fabricator_recipe/industrial/exosuit_gear/drill
 	path = /obj/item/mech_equipment/drill
 
+/datum/fabricator_recipe/industrial/exosuit_gear/ionjets
+	path = /obj/item/mech_equipment/ionjets
+
 /datum/fabricator_recipe/industrial/exosuit_gear/mounted
 	path = /obj/item/mech_equipment/mounted_system/taser
 

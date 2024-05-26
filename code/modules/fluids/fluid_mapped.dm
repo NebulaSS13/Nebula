@@ -25,12 +25,25 @@
 
 /obj/abstract/landmark/mapped_fluid/Initialize()
 	..()
-	var/turf/my_turf = get_turf(src)
-	if(my_turf)
-		my_turf.add_to_reagents(fluid_type, fluid_initial)
-	return INITIALIZE_HINT_QDEL
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/landmark/mapped_fluid/LateInitialize()
+	..()
+	if(fluid_initial > 0)
+		var/turf/my_turf = get_turf(src)
+		if(my_turf)
+			my_turf.add_to_reagents(fluid_type, fluid_initial)
+	qdel(src)
 
 /obj/abstract/landmark/mapped_fluid/fuel
 	name = "spilled fuel"
 	fluid_type = /decl/material/liquid/fuel
 	fluid_initial = 10
+
+/obj/abstract/landmark/mapped_fluid/fill
+	name = "mapped fluid fill"
+
+/obj/abstract/landmark/mapped_fluid/fill/LateInitialize()
+	var/turf/my_turf = get_turf(loc)
+	fluid_initial = -(my_turf.get_physical_height())
+	..()

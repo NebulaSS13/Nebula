@@ -709,7 +709,6 @@ default behaviour is:
 	QDEL_NULL(aiming)
 	QDEL_NULL_LIST(_hallucinations)
 	QDEL_NULL_LIST(aimed_at_by)
-	LAZYCLEARLIST(smell_cooldown)
 	if(stressors) // Do not QDEL_NULL, keys are managed instances.
 		stressors = null
 	if(auras)
@@ -718,6 +717,7 @@ default behaviour is:
 	// done in this order so that icon updates aren't triggered once all our organs are obliterated
 	delete_inventory(TRUE)
 	delete_organs()
+	LAZYCLEARLIST(smell_cooldown)
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()

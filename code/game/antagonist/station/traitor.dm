@@ -93,6 +93,7 @@
 			M.StoreMemory("<b>Code Phrase</b>: [syndicate_code_phrase]", /decl/memory_options/system)
 			M.StoreMemory("<b>Code Response</b>: [syndicate_code_response]", /decl/memory_options/system)
 			to_chat(M, "Listen for the code words, preferably in the order provided, during regular conversations to identify agents in need. Proceed with caution, however, as everyone is a potential foe.")
+			spawn_uplink(M)
 
 		to_chat(player.current, "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>")
 		to_chat(player.current, "<b>Code Phrase</b>: <span class='danger'>[syndicate_code_phrase]</span>")

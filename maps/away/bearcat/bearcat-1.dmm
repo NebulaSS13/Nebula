@@ -894,6 +894,7 @@
 "bX" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/frame/light/small,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/floor/usedup,
 /area/ship/scrap/broken2)
 "bY" = (
@@ -908,6 +909,7 @@
 /obj/machinery/power/apc/derelict{
 	dir = 1
 	},
+/obj/structure/closet/crate/uranium,
 /turf/floor/usedup,
 /area/ship/scrap/broken2)
 "bZ" = (
@@ -1624,6 +1626,8 @@
 /obj/item/clothing/glasses/welding,
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/broken1)
 "dy" = (
@@ -1977,9 +1981,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/storage)
 "ej" = (
-/obj/structure/rack,
-/obj/item/tank/jetpack/oxygen,
-/obj/item/clothing/mask/breath,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/eva)
 "ek" = (
@@ -1989,6 +1991,8 @@
 	icon_state = "bulb1"
 	},
 /obj/structure/rack,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/clothing/mask/breath,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
 /turf/floor/usedup,
@@ -2393,6 +2397,9 @@
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eT" = (
@@ -2417,6 +2424,7 @@
 "eW" = (
 /obj/machinery/suit_cycler,
 /obj/machinery/light/small,
+/obj/item/clothing/shoes/magboots,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/eva)
 "eX" = (
@@ -2426,6 +2434,7 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
+/obj/item/clothing/shoes/magboots,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/eva)
 "eY" = (

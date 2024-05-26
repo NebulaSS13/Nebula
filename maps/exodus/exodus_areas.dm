@@ -749,9 +749,6 @@
 /area/shuttle/arrival/station
 	icon_state = "shuttle"
 
-/area/shuttle/escape_shuttle
-	name = "\improper Emergency Shuttle"
-
 // SUBSTATIONS. (Subtype of maint, that should let them serve as shielded area during radstorm)
 
 /area/exodus/maintenance/substation

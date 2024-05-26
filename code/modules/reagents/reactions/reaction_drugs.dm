@@ -48,13 +48,6 @@
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = (50 CELSIUS) + 100
 
-/decl/chemical_reaction/drug/lube
-	name = "Lubricant"
-	result = /decl/material/liquid/lube
-	required_reagents = list(/decl/material/liquid/water = 1, /decl/material/solid/silicon = 1, /decl/material/liquid/acetone = 1)
-	result_amount = 3
-	mix_message = "The solution becomes thick and slimy."
-
 /decl/chemical_reaction/drug/pacid
 	name = "Polytrinic acid"
 	result = /decl/material/liquid/acid/polyacid
@@ -123,16 +116,6 @@
 	result = /decl/material/liquid/retrovirals
 	required_reagents = list(/decl/material/liquid/antirads = 1, /decl/material/solid/carbon = 1)
 	result_amount = 2
-
-/decl/chemical_reaction/compound/nanitefluid
-	name = "Nanite Fluid"
-	result = /decl/material/liquid/nanitefluid
-	required_reagents = list(/decl/material/liquid/plasticide = 1, /decl/material/solid/metal/aluminium = 1, /decl/material/liquid/lube = 1)
-	catalysts = list(/decl/material/liquid/crystal_agent = 1)
-	result_amount = 3
-	minimum_temperature = (-25 CELSIUS) - 100
-	maximum_temperature = -25 CELSIUS
-	mix_message = "The solution becomes a metallic slime."
 
 /decl/chemical_reaction/drug/antibiotics
 	name = "Antibiotics"

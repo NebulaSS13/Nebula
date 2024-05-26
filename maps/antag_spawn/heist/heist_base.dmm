@@ -761,7 +761,6 @@
 	tag_north = 1;
 	tag_north_con = 2;
 	tag_south = null;
-	tag_south_con = null;
 	tag_west = 1;
 	tag_west_con = 0.5;
 	use_power = 0
@@ -1010,8 +1009,7 @@
 "cz" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "SkipjackShuttersNorth";
-	name = "Blast Doors";
-	
+	name = "Blast Doors"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1377,8 +1375,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
-	name = "Skipjack Shutters";
-	
+	name = "Skipjack Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1404,8 +1401,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 8;
 	id_tag = "SkipjackShuttersEast";
-	name = "Skipjack Shutters";
-	
+	name = "Skipjack Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1476,8 +1472,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
-	name = "Skipjack Shutters";
-	
+	name = "Skipjack Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/floor/plating,

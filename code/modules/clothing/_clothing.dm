@@ -210,13 +210,12 @@
 			appearance = I
 			set_dir(SOUTH)
 			set_appearance = TRUE
-	if(!set_appearance)
+
+	if(!set_appearance && markings_color && markings_state_modifier)
 		icon_state = JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier()))
-		if(markings_state_modifier && markings_color)
-			add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
+		add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
 
 	update_clothing_icon()
-
 
 // Used by washing machines to temporarily make clothes smell
 /obj/item/clothing/proc/change_smell(decl/material/odorant, time = 10 MINUTES)
@@ -261,7 +260,7 @@
 		update_wearer_vision()
 	return ..()
 
-/obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
+/obj/item/clothing/proc/refit_for_bodytype(target_bodytype, skip_rename = FALSE)
 
 	bodytype_equip_flags = 0
 	decls_repository.get_decls_of_subtype(/decl/bodytype) // Make sure they're prefetched so the below list is populated
@@ -272,6 +271,9 @@
 	var/species_icon = LAZYACCESS(sprite_sheets, target_bodytype)
 	if(species_icon && (check_state_in_icon(ICON_STATE_INV, species_icon) || check_state_in_icon(ICON_STATE_WORLD, species_icon)))
 		icon = species_icon
+
+	if(!skip_rename)
+		SetName("refitted [initial(name)]")
 
 	if(last_icon != icon)
 		reconsider_single_icon()

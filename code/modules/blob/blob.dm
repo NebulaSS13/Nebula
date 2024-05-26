@@ -15,9 +15,9 @@
 	max_health = 30
 
 	var/regen_rate = 5
-	var/brute_resist = 4.3
-	var/fire_resist = 0.8
-	var/laser_resist = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
+	var/brute_damage_divisor = 4.3
+	var/fire_damage_divisor = 0.8
+	var/laser_damage_divisor = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_damage_divisor.
 	var/expandType = /obj/effect/blob
 	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 	var/damage_min = 15
@@ -42,7 +42,7 @@
 
 /obj/effect/blob/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(FALSE)
-	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_resist)
+	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_damage_divisor)
 
 /obj/effect/blob/on_update_icon()
 	if(current_health > get_max_health() / 2)
@@ -156,9 +156,9 @@
 
 	switch(Proj.atom_damage_type)
 		if(BRUTE)
-			take_damage(Proj.damage / brute_resist, Proj.atom_damage_type)
+			take_damage(Proj.damage / brute_damage_divisor, Proj.atom_damage_type)
 		if(BURN)
-			take_damage((Proj.damage / laser_resist) / fire_resist, Proj.atom_damage_type)
+			take_damage((Proj.damage / laser_damage_divisor) / fire_damage_divisor, Proj.atom_damage_type)
 	return 0
 
 /obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
@@ -182,11 +182,11 @@
 	var/damage = 0
 	switch(W.atom_damage_type)
 		if(BURN)
-			damage = (W.force / fire_resist)
+			damage = (W.force / fire_damage_divisor)
 			if(IS_WELDER(W))
 				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 		if(BRUTE)
-			damage = (W.force / brute_resist)
+			damage = (W.force / brute_damage_divisor)
 
 	take_damage(damage, W.atom_damage_type)
 	return
@@ -216,28 +216,28 @@ regen() will cover update_icon() for this proc
 /obj/effect/blob/core/proc/process_core_health()
 	switch(get_health_percent())
 		if(75 to INFINITY)
-			brute_resist = 3.5
-			fire_resist = 2
+			brute_damage_divisor = 3.5
+			fire_damage_divisor = 2
 			attack_freq = 5
 			regen_rate = 2
 			times_to_pulse = 4
 			if(reported_low_damage)
 				report_shield_status("high")
 		if(50 to 74)
-			brute_resist = 2.5
-			fire_resist = 1.5
+			brute_damage_divisor = 2.5
+			fire_damage_divisor = 1.5
 			attack_freq = 4
 			regen_rate = 3
 			times_to_pulse = 3
 		if(34 to 49)
-			brute_resist = 1
-			fire_resist = 0.8
+			brute_damage_divisor = 1
+			fire_damage_divisor = 0.8
 			attack_freq = 3
 			regen_rate = 4
 			times_to_pulse = 2
 		if(-INFINITY to 33)
-			brute_resist = 0.5
-			fire_resist = 0.3
+			brute_damage_divisor = 0.5
+			fire_damage_divisor = 0.3
 			regen_rate = 5
 			times_to_pulse = 1
 			if(!reported_low_damage)

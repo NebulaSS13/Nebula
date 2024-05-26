@@ -1210,8 +1210,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	id_tag = "ninjadoor";
-	name = "Blast Door";
-	
+	name = "Blast Door"
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"

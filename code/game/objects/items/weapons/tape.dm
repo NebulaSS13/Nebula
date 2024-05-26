@@ -62,7 +62,6 @@
 		return ..()
 
 	if(user.get_target_zone() == BP_EYES)
-
 		if(!GET_EXTERNAL_ORGAN(target, BP_HEAD))
 			to_chat(user, SPAN_WARNING("\The [target] doesn't have a head."))
 			return TRUE

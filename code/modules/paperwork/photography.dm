@@ -27,6 +27,10 @@
 	. = ..()
 	update_icon()
 
+/obj/item/camera/loaded/Initialize()
+	. = ..()
+	film = new(src)
+
 /obj/item/camera_film/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(uses_left > 1)
@@ -181,7 +185,7 @@
 	icon_state    = "album"
 	item_state    = "briefcase"
 	w_class       = ITEM_SIZE_NORMAL //same as book
-	storage       = /datum/storage/photo_album 
+	storage       = /datum/storage/photo_album
 	material      = /decl/material/solid/organic/plastic
 
 /obj/item/photo_album/handle_mouse_drop(atom/over, mob/user, params)
@@ -210,10 +214,6 @@
 	var/turned_on        = TRUE
 	var/field_of_view    = 3 // squared, so 3 is a 3x3 of tiles
 	var/obj/item/camera_film/film = new //Currently loaded film
-
-/obj/item/camera/loaded/Initialize()
-	film = new(src)
-	return ..()
 
 /obj/item/camera/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)

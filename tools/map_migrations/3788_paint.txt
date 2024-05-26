@@ -1,4 +1,4 @@
-/obj/item/stack/tile/carpetblue/@SUBTYPES : /obj/item/stack/tile/carpet/blue@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetblue/@SUBTYPES : /obj/item/stack/tile/carpet/blue/@SUBTYPES{@OLD}
 /obj/item/stack/tile/carpetblue2/@SUBTYPES : /obj/item/stack/tile/carpet/blue2@SUBTYPES{@OLD}
 /obj/item/stack/tile/carpetblue3/@SUBTYPES : /obj/item/stack/tile/carpet/blue3@SUBTYPES{@OLD}
 /obj/item/stack/tile/carpetmagenta/@SUBTYPES : /obj/item/stack/tile/carpet/magenta@SUBTYPES{@OLD}

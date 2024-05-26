@@ -35,7 +35,7 @@
 /mob/living/carbon/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached, skip_health_update = FALSE)
 	var/obj/item/organ/existing = LAZYACCESS(organs_by_tag, O.organ_tag)
 	if(existing && O != existing)
-		CRASH("mob/living/carbon/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[existing]' in slot '[O.organ_tag]'!")
+		CRASH("mob/living/carbon/add_organ(): '[O]' ([O.type]) tried to overwrite [src]'s existing organ '[existing]' ([existing.type]) with organ_tag '[O.organ_tag]'!")
 	if(O.parent_organ && !LAZYACCESS(organs_by_tag, O.parent_organ))
 		CRASH("mob/living/carbon/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
 

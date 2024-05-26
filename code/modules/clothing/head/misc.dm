@@ -103,6 +103,7 @@
 	name = "green bandana"
 	desc = "It's a green bandana with some fine nanotech lining."
 	icon = 'icons/clothing/head/bandana/green.dmi'
+
 /obj/item/clothing/head/bandana/orange //themij: Taryn Kifer
 	name = "orange bandana"
 	desc = "An orange piece of cloth, worn on the head."

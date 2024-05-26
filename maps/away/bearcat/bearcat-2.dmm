@@ -116,7 +116,8 @@
 /area/ship/scrap/comms)
 "as" = (
 /obj/machinery/door/blast/regular{
-	id_tag = "sensor"
+	id_tag = "sensor";
+	dir = 4
 	},
 /turf/floor/usedup,
 /area/ship/scrap/comms)
@@ -489,6 +490,7 @@
 /obj/item/chems/drinks/glass2/coffeecup/one,
 /obj/item/tank/oxygen,
 /obj/item/clothing/mask/breath/emergency,
+/obj/item/flashlight,
 /turf/floor/wood,
 /area/ship/scrap/command/captain)
 "bd" = (
@@ -1174,6 +1176,7 @@
 	},
 /obj/item/plate/tray,
 /obj/item/circular_saw,
+/obj/item/flashlight/lamp,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "cz" = (
@@ -1201,15 +1204,8 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/cryo)
 "cE" = (
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
 /obj/structure/hygiene/shower{
 	dir = 4
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 1
 	},
 /obj/item/soap,
 /obj/structure/curtain/open/shower,
@@ -1222,17 +1218,6 @@
 	icon_state = "bulb1"
 	},
 /obj/structure/hygiene/toilet,
-/obj/structure/window/reinforced/tinted{
-	dir = 1
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/usedup,
@@ -1531,11 +1516,6 @@
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted,
 /obj/structure/curtain/open/shower,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/usedup,
@@ -1543,15 +1523,6 @@
 "dj" = (
 /obj/structure/hygiene/toilet{
 	dir = 1
-	},
-/obj/structure/window/reinforced/tinted,
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -1561,15 +1532,6 @@
 /obj/structure/hygiene/toilet{
 	dir = 1
 	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
 /obj/machinery/power/apc/derelict{
@@ -2458,6 +2420,7 @@
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/retractor,
 /obj/item/scalpel,
+/obj/item/tank/oxygen,
 /turf/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eP" = (
@@ -4702,6 +4665,7 @@
 /obj/structure/window/reinforced{
 	current_health = 1e+007
 	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "je" = (
@@ -5035,21 +4999,6 @@
 /obj/structure/hygiene/sink{
 	pixel_y = 18
 	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 1
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
 	},
@@ -5122,6 +5071,7 @@
 "uM" = (
 /obj/item/stack/material/sheet/mapped/steel,
 /obj/structure/lattice,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "vs" = (
@@ -5146,6 +5096,10 @@
 /obj/effect/paint/brown,
 /turf/wall/r_wall,
 /area/space)
+"zq" = (
+/obj/item/stack/material/rods,
+/turf/space,
+/area/ship/scrap/maintenance/atmos)
 "zT" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -5198,19 +5152,16 @@
 /turf/wall/r_wall,
 /area/ship/scrap/crew/kitchen)
 "Hd" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/space,
-/area/space)
+/obj/item/stack/material/sheet/mapped/steel,
+/obj/machinery/atmospherics/unary/tank/nitrogen{
+	dir = 1
+	},
+/turf/floor/airless,
+/area/ship/scrap/maintenance/atmos)
 "HQ" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
-"Ix" = (
-/obj/machinery/network/router{
-	initial_network_id = "freightnet_0451"
-	},
-/turf/floor/bluegrid/airless,
-/area/ship/scrap/comms)
 "IG" = (
 /obj/item/shard,
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -5252,6 +5203,12 @@
 	},
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
+"KW" = (
+/obj/item/shard,
+/obj/structure/lattice,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/space,
+/area/ship/scrap/maintenance/atmos)
 "Lp" = (
 /turf/floor/reinforced/airless,
 /area/space)
@@ -5291,6 +5248,12 @@
 	},
 /turf/floor/usedup,
 /area/ship/scrap/hidden)
+"Nc" = (
+/obj/machinery/network/router{
+	initial_network_id = "bearnet"
+	},
+/turf/floor/bluegrid/airless,
+/area/ship/scrap/comms)
 "Od" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/yellow{
@@ -11297,14 +11260,14 @@ wp
 gY
 hx
 hx
-ie
+Hd
 iQ
-hw
+zq
 iP
 Eq
-id
+KW
 Yl
-Hd
+aa
 aa
 aa
 aa
@@ -11548,7 +11511,7 @@ IG
 Mm
 hN
 hx
-hM
+hw
 aa
 aa
 aa
@@ -11995,7 +11958,7 @@ xU
 Yv
 Yv
 ar
-Ix
+Nc
 aO
 aX
 Yv
