@@ -206,7 +206,7 @@
 			victim.apply_effect(6, STUN, blocked)
 			victim.apply_effect(6, WEAKEN, blocked)  //#TODO: geez that might be a bit overkill
 			victim.apply_effect(6, STUTTER, blocked)
-			victim.take_damage(10, targeT_zone = def_zone)
+			victim.take_damage(10, target_zone = def_zone)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light

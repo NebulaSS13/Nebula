@@ -167,7 +167,7 @@
 		attacker.visible_message(SPAN_DANGER("\The [attacker] thrusts [attacker_gender.his] head into \the [target]'s skull!"))
 
 	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE, damage = 10)
-	target.take_damage(damage, target_zone = BP_HEAD, damage_flags)
+	target.take_damage(damage, target_zone = BP_HEAD, damage_flags = damage_flags)
 	attacker.take_damage(10, target_zone = BP_HEAD)
 
 	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))

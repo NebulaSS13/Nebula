@@ -1,3 +1,54 @@
+
+/mob/living/exosuit/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
+
+	if(!damage)
+		return 0
+
+	if(!target_zone)
+		if(damage_flags & DAM_DISPERSED)
+			var/old_damage = damage
+			var/tally
+			silent = FALSE
+			for(var/obj/item/part in list(arms, legs, body, head))
+				tally += part.w_class
+			for(var/obj/item/part in list(arms, legs, body, head))
+				damage = old_damage * part.w_class/tally
+				target_zone = BP_CHEST
+				if(part == arms)
+					target_zone = BP_L_ARM
+				else if(part == legs)
+					target_zone = BP_L_LEG
+				else if(part == head)
+					target_zone = BP_HEAD
+
+				. = .() || .
+			return
+
+		target_zone = ran_zone(target_zone)
+
+	var/list/after_armor = modify_damage_by_armor(target_zone, damage, damage_type, damage_flags, src, armor_pen, TRUE)
+	damage = after_armor[1]
+	damage_type = after_armor[2]
+
+	if(!damage)
+		return 0
+
+	var/target = zoneToComponent(target_zone)
+	//Only 3 types of damage concern mechs and vehicles
+	switch(damage_type)
+		if(BRUTE)
+			take_damage(damage, used_weapon = target)
+		if(BURN)
+			take_damage(damage, BURN, used_weapon = target)
+		if(IRRADIATE)
+			for(var/mob/living/pilot in pilots)
+				pilot.take_damage(damage, IRRADIATE, target_zone = target_zone, damage_flags = damage_flags, used_weapon = used_weapon)
+
+	if((damage_type == BRUTE || damage_type == BURN) && prob(25+(damage*2)))
+		sparks.set_up(3,0,src)
+		sparks.start()
+	return 1
+
 /mob/living/exosuit/explosion_act(severity)
 	. = ..(4) //We want to avoid the automatic handling of damage to contents
 	var/b_loss = 0

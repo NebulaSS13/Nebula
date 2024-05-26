@@ -1,5 +1,5 @@
 /**Basic damage handling for items. Returns the amount of damage taken after armor if the item was damaged.*/
-/obj/item/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone)
+/obj/item/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
 	if(!can_take_damage()) // This object does not take damage.
 		return 0 //Must return a number
 	if(damage < 0)

@@ -322,7 +322,7 @@
 	take_damage(Proj.damage, Proj.atom_damage_type)
 	..()
 
-/obj/effect/cultwall/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone)
+/obj/effect/cultwall/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
 	current_health -= damage
 	if(current_health <= 0)
 		visible_message("<span class='warning'>\The [src] dissipates.</span>")

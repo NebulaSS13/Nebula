@@ -132,7 +132,7 @@
 
 	return TRUE
 
-/obj/machinery/door/window/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, silent = FALSE)
+/obj/machinery/door/window/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
 	current_health = max(0, current_health - damage)
 	if (current_health <= 0)
 		shatter()
