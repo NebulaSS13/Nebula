@@ -385,7 +385,7 @@
 			screamed = TRUE
 			emote(/decl/emote/audible/scream)
 		affecting.status |= ORGAN_DISFIGURED
-	take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)
+	take_damage(severity, BURN, override_droplimb = DISMEMBER_METHOD_ACID)
 
 /mob/living/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/list/checking_slots = get_held_items()

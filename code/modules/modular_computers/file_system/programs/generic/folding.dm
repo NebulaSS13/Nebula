@@ -75,7 +75,7 @@
 						program_status = PROGRAM_STATUS_RUNNING_WARM
 				if(PROGRAM_STATUS_RUNNING_WARM) //50% chance on subsequent ticks to make the program able to crash.
 					to_chat(holder, SPAN_WARNING("\The [host] gets scaldingly hot, burning you!"))
-					holder?.take_overall_damage(0, 0.45) //It checks holder? so that it doesn't cause a runtime error if no one is holding it.
+					holder?.take_damage(0.45, BURN, damage_flags = DAM_DISPERSED) //It checks holder? so that it doesn't cause a runtime error if no one is holding it.
 					if (program_status == PROGRAM_STATUS_RUNNING_WARM)
 						program_status = PROGRAM_STATUS_RUNNING_SCALDING
 				if(PROGRAM_STATUS_RUNNING_SCALDING) //1/3 chance on all following ticks for the program to crash.

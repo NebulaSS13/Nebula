@@ -72,8 +72,9 @@
 		var/rads = radiation/25
 		radiation -= rads
 		adjust_nutrition(rads)
-		heal_overall_damage(rads,rads)
-		heal_damage(rads, OXY, do_update_health = FALSE)
+		heal_damage(rads, BRUTE, do_update_health = FALSE)
+		heal_damage(rads, BURN,  do_update_health = FALSE)
+		heal_damage(rads, OXY,   do_update_health = FALSE)
 		heal_damage(rads, TOX)
 
 /decl/bodytype/diona

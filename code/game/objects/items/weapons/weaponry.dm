@@ -30,7 +30,7 @@
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_DANGER("The rod slips out of your hand and hits your head."))
-		user.take_organ_damage(10)
+		user.take_damage(10)
 		SET_STATUS_MAX(user, STAT_PARA, 20)
 		return TRUE
 

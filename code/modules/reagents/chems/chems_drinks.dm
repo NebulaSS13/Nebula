@@ -197,11 +197,8 @@
 
 /decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
-	M.heal_organ_damage(0, 0.5 * removed)
+	if(!M.HasTrait(/decl/trait/metabolically_inert))
+		M.heal_damage(0.5 * removed, BURN)
 
 /decl/material/liquid/drink/juice/watermelon
 	name = "watermelon juice"
@@ -274,10 +271,8 @@
 
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 10 * removed)
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
-	M.heal_organ_damage(0.5 * removed, 0)
+	if(!M.HasTrait(/decl/trait/metabolically_inert))
+		M.heal_damage(0.5 * removed)
 
 /decl/material/liquid/drink/milk/cream
 	name = "cream"

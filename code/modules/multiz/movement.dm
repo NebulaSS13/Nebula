@@ -225,7 +225,7 @@
 				if(M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
-				M.take_overall_damage(fall_damage)
+				M.take_damage(fall_damage, damage_flags = DAM_DISPERSED)
 		return TRUE
 	return FALSE
 

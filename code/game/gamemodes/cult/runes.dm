@@ -125,19 +125,19 @@
 		spamcheck = 0
 		if(!iscultist(target) && target.loc == get_turf(src)) // They hesitated, resisted, or can't join, and they are still on the rune - burn them
 			if(target.stat == CONSCIOUS)
-				target.take_overall_damage(0, 10)
+				target.take_damage(10, BURN, damage_flags = DAM_DISPERSED)
 				switch(target.get_damage(BURN))
 					if(0 to 25)
 						to_chat(target, "<span class='danger'>Your blood boils as you force yourself to resist the corruption invading every corner of your mind.</span>")
 					if(25 to 45)
 						to_chat(target, "<span class='danger'>Your blood boils and your body burns as the corruption further forces itself into your body and mind.</span>")
-						target.take_overall_damage(0, 3)
+						target.take_damage(3, BURN, damage_flags = DAM_DISPERSED)
 					if(45 to 75)
 						to_chat(target, "<span class='danger'>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble.</span>")
-						target.take_overall_damage(0, 5)
+						target.take_damage(5, BURN, damage_flags = DAM_DISPERSED)
 					if(75 to 100)
 						to_chat(target, "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>")
-						target.take_overall_damage(0, 10)
+						target.take_damage(10, BURN, damage_flags = DAM_DISPERSED)
 
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"] && usr.loc == loc && !iscultist(usr))
@@ -182,7 +182,7 @@
 			showOptions(user)
 			var/warning = 0
 			while(user.loc == src)
-				user.take_organ_damage(0, 2)
+				user.take_damage(2, BURN)
 				if(user.get_damage(BURN) > 50)
 					to_chat(user, "<span class='danger'>Your body can't handle the heat anymore!</span>")
 					leaveRune(user)
@@ -322,7 +322,7 @@
 	take_damage(Proj.damage, Proj.atom_damage_type)
 	..()
 
-/obj/effect/cultwall/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
+/obj/effect/cultwall/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, override_droplimb, do_update_health = TRUE)
 	current_health -= damage
 	if(current_health <= 0)
 		visible_message("<span class='warning'>\The [src] dissipates.</span>")
@@ -357,7 +357,7 @@
 		else if(user.loc != get_turf(src) && soul)
 			soul.reenter_corpse()
 		else
-			user.take_organ_damage(0, 1)
+			user.take_damage(1, BURN)
 		sleep(20)
 	fizzle(user)
 
@@ -470,7 +470,8 @@
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		var/dam_amt = 2 + length(casters)
-		victim.take_organ_damage(dam_amt, dam_amt) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		victim.take_damage(dam_amt, do_update_health = FALSE)
+		victim.take_damage(dam_amt, BURN) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		if(ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 			if(H.is_asystole())
@@ -562,7 +563,8 @@
 			charges -= healburn
 			healbrute = min(healbrute, charges)
 			charges -= healbrute
-		user.heal_organ_damage(healbrute, healburn, 1)
+		user.heal_damage(healbrute, heal_synthetic = TRUE, do_update_health = FALSE)
+		user.heal_damage(healburn, BURN, heal_synthetic = TRUE)
 		statuses += "your wounds mend"
 		if(!charges)
 			return statuses
@@ -748,7 +750,8 @@
 			var/obj/item/nullrod/N = locate() in M
 			if(N)
 				continue
-			M.take_overall_damage(5, 5)
+			M.take_damage(5, do_update_health = FALSE, damage_flags = DAM_DISPERSED)
+			M.take_damage(5, BURN, damage_flags = DAM_DISPERSED)
 			if(!(M in previous))
 				if(M.should_have_organ(BP_HEART))
 					to_chat(M, "<span class='danger'>Your blood boils!</span>")

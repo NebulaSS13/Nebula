@@ -54,7 +54,7 @@
 			var/blood_volume = round(gripping.vessel.total_volume)
 			if(blood_volume > 5)
 				gripping.vessel.remove_any(blood_per_tick)
-				heal_overall_damage(health_per_tick)
+				heal_damage(health_per_tick)
 				if(prob(15))
 					to_chat(gripping, SPAN_DANGER("You feel your fluids being drained!"))
 			else

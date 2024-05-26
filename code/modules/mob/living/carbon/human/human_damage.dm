@@ -90,16 +90,16 @@
 /mob/living/carbon/human/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
 	SHOULD_CALL_PARENT(FALSE) // take/heal overall call update_health regardless of arg
 	if(amount > 0)
-		take_overall_damage(amount, 0)
+		take_damage(amount)
 	else
-		heal_overall_damage(-amount, 0)
+		heal_damage(-amount)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/adjustFireLoss(var/amount, var/do_update_health = TRUE)
 	if(amount > 0)
-		take_overall_damage(0, amount)
+		take_damage(amount, BURN)
 	else
-		heal_overall_damage(0, -amount)
+		heal_damage(-amount, BURN)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/getCloneLoss()
@@ -242,80 +242,6 @@
 		if(O.is_damageable())
 			parts += O
 	return parts
-
-//Heals ONE external organ, organ gets randomly selected from damaged ones.
-//It automatically updates damage overlays if necesary
-//It automatically updates health status
-/mob/living/carbon/human/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
-	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
-	if(!parts.len)	return
-	var/obj/item/organ/external/picked = pick(parts)
-	if(picked.heal_organ_damage(brute,burn,robo_repair = affect_robo))
-		BITSET(hud_updateflag, HEALTH_HUD)
-	update_health()
-
-
-//TODO reorganize damage procs so that there is a clean API for damaging living mobs
-
-/*
-In most cases it makes more sense to use take_damage() instead! And make sure to check armour if applicable.
-*/
-//Damages ONE external organ, organ gets randomly selected from damagable ones.
-//It automatically updates damage overlays if necesary
-//It automatically updates health status
-/mob/living/carbon/human/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
-	var/list/parts = get_damageable_organs()
-	if(!length(parts))
-		return
-	var/obj/item/organ/external/picked = pick(parts)
-	if(picked.take_external_damage(brute, burn, override_droplimb = override_droplimb))
-		BITSET(hud_updateflag, HEALTH_HUD)
-	update_health()
-
-//Heal MANY external organs, in random order
-/mob/living/carbon/human/heal_overall_damage(var/brute, var/burn)
-	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
-
-	while(parts.len && (brute>0 || burn>0) )
-		var/obj/item/organ/external/picked = pick(parts)
-
-		var/brute_was = picked.brute_dam
-		var/burn_was = picked.burn_dam
-
-		picked.heal_organ_damage(brute,burn)
-
-		brute -= (brute_was-picked.brute_dam)
-		burn -= (burn_was-picked.burn_dam)
-
-		parts -= picked
-	update_health()
-	BITSET(hud_updateflag, HEALTH_HUD)
-
-// damage MANY external organs, in random order
-/mob/living/carbon/human/take_overall_damage(var/brute, var/burn, var/sharp = 0, var/edge = 0, var/used_weapon = null)
-	if(status_flags & GODMODE)
-		return	//godmode
-
-	var/list/obj/item/organ/external/parts = get_damageable_organs()
-	if(!parts.len)
-		return
-
-	var/dam_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
-	var/brute_avg = brute / parts.len
-	var/burn_avg = burn / parts.len
-	for(var/obj/item/organ/external/E in parts)
-		if(QDELETED(E))
-			continue
-		if(E.owner != src)
-			continue // The code below may affect the children of an organ.
-
-		if(brute_avg)
-			take_damage(damage = brute_avg, damage_type = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, target_zone = E.organ_tag)
-		if(burn_avg)
-			take_damage(damage = burn_avg, damage_type = BURN, damage_flags = dam_flags, used_weapon = used_weapon, target_zone = E.organ_tag)
-
-	update_health()
-	BITSET(hud_updateflag, HEALTH_HUD)
 
 /*
 This function restores all organs.

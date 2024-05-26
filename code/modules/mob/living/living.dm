@@ -273,33 +273,8 @@ default behaviour is:
 	var/obj/item/organ/external/def_zone = ran_zone(t, target = src)
 	return def_zone
 
-
-// heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
-	heal_damage(BRUTE, brute, do_update_health = FALSE)
-	heal_damage(BURN, do_update_health = update_health)
-
-// damage ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
-	if(status_flags & GODMODE)
-		return
-	take_damage(brute, do_update_health = FALSE)
-	take_damage(burn, BURN)
-
-// heal MANY external organs, in random order
-/mob/living/proc/heal_overall_damage(var/brute, var/burn)
-	heal_damage(BRUTE, brute, do_update_health = FALSE)
-	heal_damage(BURN, burn)
-
-// damage MANY external organs, in random order
-/mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
-	if(status_flags & GODMODE)	return 0	//godmode
-	take_damage(brute, do_update_health = FALSE)
-	take_damage(burn, BURN)
-
 /mob/living/proc/restore_all_organs()
 	return
-
 
 /mob/living/carbon/revive()
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
@@ -340,8 +315,8 @@ default behaviour is:
 
 	// fix all status conditions including blind/deaf
 	clear_status_effects()
-
-	heal_overall_damage(get_damage(BRUTE), get_damage(BURN))
+	set_damage(BRUTE, 0, do_update_heath = FALSE)
+	set_damage(BURN, 0)
 
 	// fix all of our organs
 	restore_all_organs()

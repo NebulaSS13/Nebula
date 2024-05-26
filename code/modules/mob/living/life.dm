@@ -190,7 +190,7 @@
 		radiation -= 3 * RADIATION_SPEED_COEFFICIENT
 		if(!isSynthetic())
 			if(prob(5))
-				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
+				take_damage(5 * RADIATION_SPEED_COEFFICIENT, BURN, damage_flags = DAM_DISPERSED, used_weapon = "Radiation Burns")
 			if(prob(1))
 				to_chat(src, "<span class='warning'>You feel strange!</span>")
 				take_damage(5 * RADIATION_SPEED_COEFFICIENT, CLONE)
@@ -263,7 +263,9 @@
 	var/burn_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
 	var/brute_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BRUTE)
 	if(burn_regen || brute_regen)
-		heal_organ_damage(brute_regen, burn_regen, FALSE) // apply_chemical_effects() calls update_health() if it returns true; don't do it unnecessarily.
+		// apply_chemical_effects() calls update_health() if it returns true; don't do it unnecessarily.
+		heal_damage(brute_regen, do_update_health = FALSE, heal_synthetic = FALSE)
+		heal_damage(burn_regen,  do_update_health = FALSE, heal_synthetic = FALSE)
 		return TRUE
 	return FALSE
 

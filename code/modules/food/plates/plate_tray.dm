@@ -42,7 +42,7 @@
 	if((MUTATION_CLUMSY in user.mutations) && prob(50)) // There is a better way to do this but I'll be damned if I'm the one to fix it.
 		to_chat(user, SPAN_DANGER("You accidentally slam yourself with \the [src]!"))
 		SET_STATUS_MAX(user, STAT_WEAK, 1)
-		user.take_organ_damage(2)
+		user.take_damage(2)
 		if(prob(50))
 			playsound(target, hitsound, 50, 1)
 		. = TRUE

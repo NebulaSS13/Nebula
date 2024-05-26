@@ -102,13 +102,13 @@
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)
-			src.take_organ_damage(0, 16, bypass_armour = TRUE)
+			take_damage(16, BURN, armor_pen = 100)
 			if(prob(50))
 				SET_STATUS_MAX(src, STAT_STUN, rand(5,10))
 			else
 				ADJ_STATUS(src, STAT_CONFUSE, rand(2,40))
 		if(2)
-			src.take_organ_damage(0, 7, bypass_armour = TRUE)
+			take_damage(7, BURN, armor_pen = 100)
 			ADJ_STATUS(src, STAT_CONFUSE, rand(2,30))
 	flash_eyes(affect_silicon = 1)
 	to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
@@ -124,7 +124,7 @@
 		spark_at(loc, amount=5, cardinal_only = TRUE)
 
 		shock_damage *= 0.75	//take reduced damage
-		take_overall_damage(0, shock_damage)
+		take_damage(shock_damage, BURN, damage_flags = DAM_DISPERSED)
 		visible_message("<span class='warning'>\The [src] was shocked by \the [source]!</span>", \
 			"<span class='danger'>Energy pulse detected, system damaged!</span>", \
 			"<span class='warning'>You hear an electrical crack</span>")

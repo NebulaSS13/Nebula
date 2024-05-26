@@ -49,7 +49,7 @@
 				SET_STATUS_MAX(mover, STAT_WEAK, rand(3,4))
 				// TODO: generalized fall damage calc
 				// TODO: take into account falling into fluid from a height/surface tension
-				mover.take_overall_damage(min(1, round(height_difference * 0.05)))
+				mover.take_damage(min(1, round(height_difference * 0.05)), damage_flags = DAM_DISPERSED)
 
 	// Handle non-listener proximity triggers.
 	handle_proximity_update(A)

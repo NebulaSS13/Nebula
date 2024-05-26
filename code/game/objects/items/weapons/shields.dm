@@ -189,7 +189,7 @@
 		to_chat(user, SPAN_DANGER("You beat yourself in the head with [src]."))
 		if(isliving(user))
 			var/mob/living/M = user
-			M.take_organ_damage(5, 0)
+			M.take_damage(5)
 	active = !active
 	if (active)
 		force = 10

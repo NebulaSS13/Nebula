@@ -287,7 +287,7 @@ steam.start() -- spawns the effect
 	if (M.get_equipped_item(slot_wear_suit_str))
 		return 0
 
-	M.take_overall_damage(0, 0.75)
+	M.take_damage(1, BURN)
 	if (world.time > M.last_cough + 2 SECONDS)
 		M.last_cough = world.time
 		M.emote(/decl/emote/audible/gasp)

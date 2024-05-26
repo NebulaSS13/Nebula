@@ -382,12 +382,8 @@
 /decl/material/liquid/nanitefluid/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
-		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.get_internal_organs())
-				if(BP_IS_PROSTHETIC(I))
-					I.heal_organ_damage(20*removed)
+		M.heal_damage(30 * removed, do_update_health = FALSE, heal_synthetic = TRUE)
+		M.heal_damage(30 * removed, BURN, heal_synthetic = TRUE)
 
 /decl/material/liquid/antiseptic
 	name = "antiseptic"

@@ -29,7 +29,7 @@
 #define DAM_LASER     BITFLAG(2)
 #define DAM_BULLET    BITFLAG(3)
 #define DAM_EXPLODE   BITFLAG(4)
-#define DAM_DISPERSED BITFLAG(5) // Makes take_damage calls without specified zone distribute damage rather than randomly choose organ (for humans)
+#define DAM_DISPERSED BITFLAG(5) // Makes take_damage calls without specified zone distribute damage rather than randomly choose a single organ
 #define DAM_BIO       BITFLAG(6) // Toxin damage that should be mitigated by biological (i.e. sterile) armor
 
 #define FIRE_DAMAGE_MODIFIER 0.0215 // Higher values result in more external fire damage to the skin. (default 0.0215)

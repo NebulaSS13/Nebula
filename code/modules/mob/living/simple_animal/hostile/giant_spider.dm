@@ -152,7 +152,7 @@
 		if(current_health < get_max_health())
 			var/obj/item/attacking_with = get_natural_weapon()
 			if(attacking_with)
-				heal_overall_damage(0.2 * attacking_with.force) //heal a bit on hit
+				heal_damage(0.2 * attacking_with.force) //heal a bit on hit
 		if(ishuman(.))
 			var/mob/living/carbon/human/H = .
 			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)

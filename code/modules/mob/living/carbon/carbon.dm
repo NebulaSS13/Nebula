@@ -57,11 +57,7 @@
 	var/d = rand(round(I.force / 4), I.force)
 	visible_message(SPAN_DANGER("\The [user] attacks [src]'s stomach wall with \the [I]!"))
 	playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
-	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
-	if(istype(organ))
-		organ.take_external_damage(d, 0)
-	else
-		take_organ_damage(d)
+	take_damage(d, target_zone = BP_CHEST)
 	if(prob(get_damage(BRUTE) - 50))
 		gib()
 

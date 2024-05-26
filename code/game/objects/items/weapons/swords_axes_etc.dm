@@ -25,7 +25,7 @@
 			var/mob/living/carbon/human/H = user
 			H.take_damage(2*force, BRUTE, target_zone = BP_HEAD)
 		else
-			user.take_organ_damage(2*force)
+			user.take_damage(2*force)
 		return TRUE
 	return ..()
 
@@ -81,6 +81,6 @@
 			var/mob/living/carbon/human/H = user
 			H.take_damage(2*force, target_zone = BP_HEAD)
 		else
-			user.take_organ_damage(2*force)
+			user.take_damage(2*force)
 		return TRUE
 	return ..()

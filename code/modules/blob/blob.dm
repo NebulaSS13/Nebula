@@ -56,7 +56,7 @@
 		return
 	attempt_attack(global.alldirs)
 
-/obj/effect/blob/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
+/obj/effect/blob/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, override_droplimb, do_update_health = TRUE)
 	current_health -= damage
 	if(current_health < 0)
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)

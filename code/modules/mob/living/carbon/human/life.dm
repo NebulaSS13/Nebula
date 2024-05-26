@@ -143,7 +143,7 @@
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(get_damage(BURN))
 		if((MUTATION_COLD_RESISTANCE in mutations) || (prob(1)))
-			heal_organ_damage(0,1)
+			heal_damage(1, BURN)
 
 	// DNA2 - Gene processing.
 	var/list/all_genes = decls_repository.get_decls_of_subtype(/decl/gene)
@@ -220,7 +220,7 @@
 			burn_dam = HEAT_DAMAGE_LEVEL_2
 		else
 			burn_dam = HEAT_DAMAGE_LEVEL_3
-		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
+		take_damage(burn_dam, BURN, damage_flags = DAM_DISPERSED, used_weapon = "High Body Temperature")
 		SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 2)
 
 	else if(bodytemperature <= get_mob_temperature_threshold(COLD_LEVEL_1))
@@ -237,7 +237,7 @@
 			burn_dam = COLD_DAMAGE_LEVEL_3
 		set_stasis(get_cryogenic_factor(bodytemperature), STASIS_COLD)
 		if(!has_chemical_effect(CE_CRYO, 1))
-			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
+			take_damage(burn_dam, BURN, damage_flags = DAM_DISPERSED, used_weapon = "Low Body Temperature")
 			SET_HUD_ALERT_MAX(src, /decl/hud_element/condition/fire, 1)
 
 	// Account for massive pressure differences.  Done by Polymorph
@@ -247,7 +247,7 @@
 	var/high_pressure = species.get_hazard_high_pressure(src)
 	if(adjusted_pressure >= high_pressure)
 		var/pressure_damage = min( ( (adjusted_pressure / high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
-		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
+		take_damage(pressure_damage, damage_flags = DAM_DISPERSED, used_weapon = "High Pressure")
 		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 2)
 	else if(adjusted_pressure >= species.get_warning_high_pressure(src))
 		SET_HUD_ALERT(src, /decl/hud_element/condition/pressure, 1)

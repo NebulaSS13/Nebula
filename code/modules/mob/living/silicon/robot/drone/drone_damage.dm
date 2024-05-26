@@ -3,25 +3,31 @@
 	var/fireloss = 0
 	var/bruteloss = 0
 
-/mob/living/silicon/robot/drone/take_overall_damage(var/brute = 0, var/burn = 0, var/sharp = 0, var/used_weapon = null)
-	bruteloss += brute
-	fireloss += burn
-	update_health()
+/mob/living/silicon/robot/drone/heal_damage(amount, damage_type, do_update_health, heal_synthetic)
+	if(!heal_synthetic)
+		return
+	if(damage_type == BURN)
+		fireloss = clamp(fireloss-amount, 0, get_max_health())
+	else if(damage_type == BRUTE)
+		bruteloss = clamp(bruteloss-amount, 0, get_max_health())
+	else
+		return
+	if(do_update_health)
+		update_health()
 
-/mob/living/silicon/robot/drone/heal_overall_damage(var/brute, var/burn)
-	bruteloss -= brute
-	fireloss -= burn
-	if(bruteloss<0)
-		bruteloss = 0
-	if(fireloss<0)
-		fireloss = 0
-	update_health()
+/mob/living/silicon/robot/drone/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, override_droplimb, do_update_health = TRUE)
 
-/mob/living/silicon/robot/drone/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
-	take_overall_damage(brute, burn)
+	if(status_flags & GODMODE)
+		return
 
-/mob/living/silicon/robot/drone/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
-	heal_overall_damage(brute, burn)
+	if(damage_type == BURN)
+		fireloss = clamp(fireloss+damage, 0, get_max_health())
+	else if(damage_type == BRUTE)
+		bruteloss = clamp(bruteloss+damage, 0, get_max_health())
+	else
+		return
+	if(do_update_health)
+		update_health()
 
 /mob/living/silicon/robot/drone/getFireLoss()
 	return fireloss

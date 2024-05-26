@@ -16,7 +16,6 @@
 			return getHalLoss()
 		if(BRAIN)
 			return getBrainLoss()
-		//if(ELECTROCUTE)
 	return 0
 
 /mob/proc/set_damage(damage_type, amount, do_update_health)
@@ -39,14 +38,17 @@
 			return setHalLoss(amount, do_update_health)
 		if(BRAIN)
 			return setBrainLoss(amount, do_update_health)
-		//if(IRRADIATE)
-		//if(ELECTROCUTE)
+		if(IRRADIATE)
+			radiation = amount
 	return 0
 
-/mob/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
+/mob/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, override_droplimb, do_update_health = TRUE)
 	return
 
-/mob/proc/heal_damage(amount, damage_type, do_update_health)
+/mob/proc/heal_damage(amount, damage_type, do_update_health, heal_synthetic)
+	// heal_damage() can't take an organ target so we can probably assume prosthetics etc are irrelevant here.
+	if(!heal_synthetic && isSynthetic())
+		return
 	return take_damage(-(amount), damage_type, do_update_health = do_update_health)
 
 /// Returns TRUE if updates should happen, FALSE if not.

@@ -443,9 +443,9 @@
 		if(prob(radiation_level*2) && occupant.can_feel_pain())
 			occupant.emote(/decl/emote/audible/scream)
 		if(radiation_level > 2)
-			occupant.take_organ_damage(0, radiation_level*2 + rand(1,3))
+			occupant.take_damage(radiation_level*2 + rand(1,3), BURN)
 		if(radiation_level > 1)
-			occupant.take_organ_damage(0, radiation_level + rand(1,3))
+			occupant.take_damage(radiation_level + rand(1,3), BURN)
 		occupant.take_damage(radiation_level*10, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/machinery/suit_cycler/proc/finished_job()

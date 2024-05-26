@@ -65,7 +65,8 @@
 	for(var/mob/living/M in src)
 		M.dropInto(forced_loc)
 		M.unset_sdisability(MUTED)
-		M.take_overall_damage((M.current_health - current_health - 100),0) //any new damage the statue incurred is transfered to the mob
+		//any new damage the statue incurred is transfered to the mob
+		M.take_damage((M.current_health - current_health - 100), damage_flags = DAM_DISPERSED)
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE

@@ -80,7 +80,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 		if(!contaminant_head_protected() || !contaminant_suit_protected())
 			if(prob(20))
 				to_chat(src, "<span class='danger'>Your skin burns!</span>")
-			take_overall_damage(0, 0.75)
+			take_damage(1, BURN, damage_flags = DAM_DISPERSED)
 
 	//Burn eyes if exposed.
 	if(vsc.contaminant_control.EYE_BURNS)

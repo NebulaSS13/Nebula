@@ -56,7 +56,7 @@
 
 /datum/phenomena/banishing_smite/activate(var/mob/living/L, var/mob/living/deity/user)
 	..()
-	L.take_overall_damage(rand(5,30),0,0,0,"blunt intrument") //Actual spell does 5d10 but maaaybe too much.
+	L.take_damage(rand(5,30), damage_flags = DAM_DISPERSED, used_weapon = "blunt intrument") //Actual spell does 5d10 but maaaybe too much.
 	playsound(get_turf(L), 'sound/effects/bamf.ogg', 100, 1)
 	to_chat(L, "<span class='danger'>Something hard hits you!</span>")
 	if(L.current_health < L.get_max_health()/2) //If it reduces past 50%

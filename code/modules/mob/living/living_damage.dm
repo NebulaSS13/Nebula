@@ -18,7 +18,7 @@
 	if(istype(suit))
 		suit.create_breaches(damtype, damage)
 
-/mob/living/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
+/mob/living/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, override_droplimb, do_update_health = TRUE)
 
 	if(status_flags & GODMODE)
 		return FALSE
@@ -70,9 +70,9 @@
 		damageoverlaytemp = 20
 		switch(damage_type)
 			if(BRUTE)
-				created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
+				created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon, override_droplimb = override_droplimb)
 			if(BURN)
-				created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon)
+				created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon, override_droplimb = override_droplimb)
 			if(PAIN)
 				organ.add_pain(damage)
 			if(CLONE)

@@ -30,7 +30,9 @@
 		return TRUE
 
 	if(!ishuman(target))
-		target.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
+		target.heal_damage(heal_brute/2, do_update_health = FALSE)
+		target.heal_damage(heal_burn/2, BURN)
+
 		user.visible_message( \
 			SPAN_NOTICE("[target] has been applied with [src] by [user]."),
 			SPAN_NOTICE("You apply \the [src] to [target].")

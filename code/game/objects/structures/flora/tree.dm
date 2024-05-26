@@ -52,7 +52,7 @@
 		for(var/turf/T in turfs_to_update)
 			T.update_ambient_light_from_z_or_area()
 
-/obj/structure/flora/tree/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
+/obj/structure/flora/tree/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, override_droplimb, do_update_health = TRUE)
 	. = ..()
 	if(!QDELETED(src) && damage >= 5)
 		shake()

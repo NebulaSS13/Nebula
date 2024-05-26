@@ -145,7 +145,8 @@
 				SPAN_DANGER("You accidentally cut yourself with \the [src]."))
 			if(isliving(user))
 				var/mob/living/M = user
-				M.take_organ_damage(5,5)
+				M.take_damage(5, do_update_health = FALSE)
+				M.take_damage(5, BURN)
 	toggle_active(user)
 	add_fingerprint(user)
 	return TRUE

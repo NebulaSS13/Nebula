@@ -784,7 +784,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.take_damage(toxicity_targets_organ ? (dam * 0.75) : dam, TOX)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
-		M.take_organ_damage(0, removed * solvent_power, override_droplimb = DISMEMBER_METHOD_ACID)
+		M.take_damage(removed * solvent_power, BURN, override_droplimb = DISMEMBER_METHOD_ACID)
 
 	if(narcosis)
 		if(prob(10))
