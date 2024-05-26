@@ -3,16 +3,17 @@
 ///////////////////////////////////////////////
 /**Base class for all things tape, with a limit amount of uses. */
 /obj/item/stack/tape_roll
-	name             = "roll of tape"
-	gender           = NEUTER
-	singular_name    = "length of tape"
-	plural_name      = "lengths of tape"
-	amount           = 32
-	max_amount       = 32
-	w_class          = ITEM_SIZE_SMALL
-	material         = /decl/material/solid/organic/plastic
-	current_health   = 10
-	max_health       = 10
+	name              = "roll of tape"
+	gender            = NEUTER
+	singular_name     = "length of tape"
+	plural_name       = "lengths of tape"
+	amount            = 32
+	max_amount        = 32
+	w_class           = ITEM_SIZE_SMALL
+	material          = /decl/material/solid/organic/plastic
+	current_health    = 10
+	max_health        = 10
+	matter_multiplier = 0.25
 
 /obj/item/stack/tape_roll/can_split()
 	return FALSE

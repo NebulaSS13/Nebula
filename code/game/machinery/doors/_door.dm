@@ -302,7 +302,7 @@
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				current_health = clamp(current_health, current_health + repairing.amount*DOOR_REPAIR_AMOUNT, get_max_health())
+				current_health = clamp(current_health + repairing.amount*DOOR_REPAIR_AMOUNT,current_health, get_max_health())
 				update_icon()
 				qdel(repairing)
 				repairing = null
