@@ -258,7 +258,7 @@
 //TODO reorganize damage procs so that there is a clean API for damaging living mobs
 
 /*
-In most cases it makes more sense to use apply_damage() instead! And make sure to check armour if applicable.
+In most cases it makes more sense to use take_damage() instead! And make sure to check armour if applicable.
 */
 //Damages ONE external organ, organ gets randomly selected from damagable ones.
 //It automatically updates damage overlays if necesary
@@ -310,9 +310,9 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 			continue // The code below may affect the children of an organ.
 
 		if(brute_avg)
-			apply_damage(damage = brute_avg, damagetype = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
+			take_damage(damage = brute_avg, damage_type = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, target_zone = E.organ_tag)
 		if(burn_avg)
-			apply_damage(damage = burn_avg, damagetype = BURN, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
+			take_damage(damage = burn_avg, damage_type = BURN, damage_flags = dam_flags, used_weapon = used_weapon, target_zone = E.organ_tag)
 
 	update_health()
 	BITSET(hud_updateflag, HEALTH_HUD)
@@ -328,62 +328,6 @@ This function restores all organs.
 			current_organ.rejuvenate(ignore_organ_aspects)
 	recheck_bad_external_organs()
 	verbs -= /mob/living/carbon/human/proc/undislocate
-
-/mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
-	if(status_flags & GODMODE)	return	//godmode
-	var/obj/item/organ/external/organ = given_organ
-	if(!organ)
-		if(isorgan(def_zone))
-			organ = def_zone
-		else
-			if(!def_zone)
-				if(damage_flags & DAM_DISPERSED)
-					var/old_damage = damage
-					var/tally
-					silent = TRUE // Will damage a lot of organs, probably, so avoid spam.
-					for(var/zone in organ_rel_size)
-						tally += organ_rel_size[zone]
-					for(var/zone in organ_rel_size)
-						damage = old_damage * organ_rel_size[zone]/tally
-						def_zone = zone
-						. = .() || .
-					return
-				def_zone = ran_zone(def_zone, target = src)
-			organ = GET_EXTERNAL_ORGAN(src, check_zone(def_zone, src))
-
-	//Handle other types of damage
-	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
-		return ..()
-	if(!istype(organ))
-		return 0 // This is reasonable and means the organ is missing.
-
-	handle_suit_punctures(damagetype, damage, def_zone)
-
-	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, silent)
-	damage = after_armor[1]
-	damagetype = after_armor[2]
-	damage_flags = after_armor[3]
-	if(!damage)
-		return 0
-
-	if(damage > 15 && prob(damage*4) && organ.can_feel_pain())
-		make_reagent(round(damage/10), /decl/material/liquid/adrenaline)
-	var/datum/wound/created_wound
-	damageoverlaytemp = 20
-	switch(damagetype)
-		if(BRUTE)
-			created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
-		if(BURN)
-			created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon)
-		if(PAIN)
-			organ.add_pain(damage)
-		if(CLONE)
-			organ.add_genetic_damage(damage)
-
-	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
-	update_health()
-	BITSET(hud_updateflag, HEALTH_HUD)
-	return created_wound
 
 // Find out in how much pain the mob is at the moment.
 /mob/living/carbon/human/proc/get_shock()

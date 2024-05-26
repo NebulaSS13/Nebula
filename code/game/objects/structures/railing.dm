@@ -36,7 +36,7 @@
 	if(!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
-		L.apply_damage(round(material.radioactivity/20),IRRADIATE, damage_flags = DAM_DISPERSED)
+		L.take_damage(round(material.radioactivity/20), IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/structure/railing/Initialize()
 	. = ..()
@@ -196,7 +196,7 @@
 					var/blocked = H.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
 						SET_STATUS_MAX(H, STAT_WEAK, 5)
-					H.apply_damage(8, BRUTE, BP_HEAD)
+					H.take_damage(8, target_zone = BP_HEAD)
 				else
 					if (get_turf(H) == get_turf(src))
 						H.forceMove(get_step(src, dir))

@@ -761,7 +761,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.take_damage(0.2 * removed, TOX)
 
 	if(radioactivity)
-		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
+		M.take_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
 	if(toxicity)
 		M.add_chemical_effect(CE_TOXIN, toxicity)
@@ -825,7 +825,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return FALSE
 
 	if(radioactivity)
-		M.apply_damage((radioactivity / 2) * removed, IRRADIATE)
+		M.take_damage((radioactivity / 2) * removed, IRRADIATE)
 		. = TRUE
 
 	if(dirtiness <= DIRTINESS_STERILE)

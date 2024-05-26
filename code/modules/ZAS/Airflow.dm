@@ -141,13 +141,11 @@ Contains helper procs for airflow, called by /connection_group.
 	if (prob(33))
 		loc:add_blood(src)
 		bloody_body(src)
+
 	var/b_loss = min(airflow_speed, (airborne_acceleration*2)) * vsc.airflow_damage
-
-	apply_damage(b_loss/3, BRUTE, BP_HEAD, used_weapon = "Airflow")
-
-	apply_damage(b_loss/3, BRUTE, BP_CHEST, used_weapon =  "Airflow")
-
-	apply_damage(b_loss/3, BRUTE, BP_GROIN, used_weapon =  "Airflow")
+	take_damage(b_loss/3, target_zone = BP_HEAD,  used_weapon = "airflow")
+	take_damage(b_loss/3, target_zone = BP_CHEST, used_weapon = "airflow")
+	take_damage(b_loss/3, target_zone = BP_GROIN, used_weapon = "airflow")
 
 	if(airflow_speed > 10)
 		SET_STATUS_MAX(src, STAT_PARA, round(airflow_speed * vsc.airflow_stun))

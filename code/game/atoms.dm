@@ -480,7 +480,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(isliving(AM))
 		var/mob/living/M = AM
-		M.apply_damage(TT.speed*5, BRUTE)
+		M.take_damage(TT.speed*5)
 	return TRUE
 
 /**

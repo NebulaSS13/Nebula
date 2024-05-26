@@ -234,7 +234,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>",
 	"<span class='warning'>Your [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>")
-	target.apply_damage(rand(5,10), BURN, affected)
+	target.take_damage(rand(5,10), BURN, target_zone = affected.organ_tag)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -274,7 +274,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user] causes some of \the [target]'s [affected.name] to crumble!</span>",
 	"<span class='warning'>You cause some of \the [target]'s [affected.name] to crumble!</span>")
-	target.apply_damage(rand(5,10), BRUTE, affected)
+	target.take_damage(rand(5,10), target_zone = affected.organ_tag)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -333,7 +333,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user] causes a short circuit in [target]'s [affected.name]!</span>",
 	"<span class='warning'>You cause a short circuit in [target]'s [affected.name]!</span>")
-	target.apply_damage(rand(5,10), BURN, affected)
+	target.take_damage(rand(5,10), BURN, target_zone = affected.organ_tag)
 	..()
 
 //////////////////////////////////////////////////////////////////

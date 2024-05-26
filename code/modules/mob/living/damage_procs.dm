@@ -1,38 +1,3 @@
-/*
-	apply_damage() args
-	damage - How much damage to take
-	damage_type - What type of damage to take, brute, burn
-	def_zone - Where to take the damage if its brute or burn
-
-	Returns
-	standard 0 if fail
-*/
-/mob/living/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
-
-	if(status_flags & GODMODE)
-		return FALSE
-
-	if(!damage)
-		return FALSE
-
-	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, silent)
-	damage = after_armor[1]
-	damagetype = after_armor[2]
-	damage_flags = after_armor[3] // args modifications in case of parent calls
-	if(!damage)
-		return FALSE
-
-	switch(damagetype)
-		if(BURN)
-			if(MUTATION_COLD_RESISTANCE in mutations)
-				return
-			take_damage(damage, BURN)
-		if(ELECTROCUTE)
-			electrocute_act(damage, used_weapon, 1, def_zone)
-		else
-			take_damage(damage, damagetype)
-	return TRUE
-
 /mob/living/apply_radiation(var/damage = 0)
 	if(!damage)
 		return FALSE
@@ -41,12 +6,12 @@
 	return TRUE
 
 /mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/damage_flags = 0)
-	if(brute)	apply_damage(brute, BRUTE, def_zone)
-	if(burn)	apply_damage(burn, BURN, def_zone)
-	if(tox)		apply_damage(tox, TOX, def_zone)
-	if(oxy)		apply_damage(oxy, OXY, def_zone)
-	if(clone)	apply_damage(clone, CLONE, def_zone)
-	if(halloss) apply_damage(halloss, PAIN, def_zone)
+	if(brute)	take_damage(brute,   BRUTE, target_zone = def_zone)
+	if(burn)	take_damage(burn,    BURN,  target_zone = def_zone)
+	if(tox)		take_damage(tox,     TOX,   target_zone = def_zone)
+	if(oxy)		take_damage(oxy,     OXY,   target_zone = def_zone)
+	if(clone)	take_damage(clone,   CLONE, target_zone = def_zone)
+	if(halloss) take_damage(halloss, PAIN,  target_zone = def_zone)
 	return TRUE
 
 /mob/living/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)

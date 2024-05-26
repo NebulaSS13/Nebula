@@ -270,8 +270,8 @@
 			burn = 60
 		if(3)
 			brute = 30
-	apply_damage(brute, BRUTE, damage_flags = DAM_EXPLODE)
-	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
+	take_damage(brute, damage_flags = DAM_EXPLODE)
+	take_damage(burn, BURN, damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
 	var/my_z = get_z(src)

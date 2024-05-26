@@ -197,7 +197,7 @@
 		occupant.apply_effect(6, STUN, blocked)
 		occupant.apply_effect(6, WEAKEN, blocked) //#TODO: geez that might be a bit overkill
 		occupant.apply_effect(6, STUTTER, blocked)
-		occupant.apply_damage(10, BRUTE, def_zone)
+		occupant.take_damage(10, target_zone = def_zone)
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
 		if(isliving(A))
 			var/mob/living/victim = A
@@ -206,7 +206,7 @@
 			victim.apply_effect(6, STUN, blocked)
 			victim.apply_effect(6, WEAKEN, blocked)  //#TODO: geez that might be a bit overkill
 			victim.apply_effect(6, STUTTER, blocked)
-			victim.apply_damage(10, BRUTE, def_zone)
+			victim.take_damage(10, targeT_zone = def_zone)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light

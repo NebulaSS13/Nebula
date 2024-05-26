@@ -29,7 +29,7 @@
 		to_chat(user, SPAN_DANGER("You burn yourself while lighting the lighter."))
 		var/hand_tag = user.get_held_slot_for_item(src)
 		if(hand_tag)
-			user.apply_damage(2, BURN, hand_tag)
+			user.take_damage(2, BURN, target_zone = hand_tag)
 		user.visible_message(SPAN_NOTICE("After a few attempts, \the [user] manages to light \the [src], burning their finger in the process."))
 	playsound(src.loc, "light_bic", 100, 1, -4)
 

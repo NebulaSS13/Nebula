@@ -94,7 +94,7 @@
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, zone)
 		if(E)
 			chambered.put_residue_on(E)
-			H.apply_damage(3, BURN, used_weapon = "Gunpowder Burn", given_organ = E)
+			take_damage(3, BURN, used_weapon = "Gunpowder Burn", target_zone = E.organ_tag, armor_pen = 100)
 
 /obj/item/gun/projectile/handle_click_empty()
 	..()

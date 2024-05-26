@@ -340,7 +340,7 @@
 		else if(user.a_intent != I_HELP)
 			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, user.get_active_held_item_slot())
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
-				user.apply_damage(3, BURN, hand.organ_tag, used_weapon = src)
+				user.take_damage(3, BURN, target_zone = hand.organ_tag, used_weapon = src)
 				var/decl/pronouns/G = user.get_pronouns()
 				user.visible_message( \
 					SPAN_DANGER("\The [user]'s [hand.name] burns and sizzles as [G.he] touch[G.es] the hot [get_fitting_name()]."), \

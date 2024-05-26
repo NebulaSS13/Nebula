@@ -38,7 +38,7 @@
 				C.visible_message("<span class='danger'>[src] explodes in [C]'s hands!</span>", "<span class='danger'>[src] explodes in your face!</span>")
 				C.drop_from_inventory(src)
 				for(var/zone in list(BP_L_HAND, BP_R_HAND))
-					C.apply_damage(rand(10,20), def_zone=zone)
+					C.take_damage(rand(10,20), target_zone = zone)
 			else
 				visible_message("<span class='danger'>[src] explodes!</span>")
 			explosion(get_turf(src), -1, -1, 1)

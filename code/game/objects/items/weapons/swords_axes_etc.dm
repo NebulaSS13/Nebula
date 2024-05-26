@@ -23,7 +23,7 @@
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BP_HEAD)
+			H.take_damage(2*force, BRUTE, target_zone = BP_HEAD)
 		else
 			user.take_organ_damage(2*force)
 		return TRUE
@@ -79,7 +79,7 @@
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BP_HEAD)
+			H.take_damage(2*force, target_zone = BP_HEAD)
 		else
 			user.take_organ_damage(2*force)
 		return TRUE

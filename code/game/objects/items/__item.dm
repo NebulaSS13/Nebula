@@ -717,7 +717,7 @@
 	if(!istype(attacker))
 		return 0
 	var/decl/pronouns/G = attacker.get_pronouns()
-	attacker.apply_damage(force, atom_damage_type, attacker.get_active_held_item_slot(), used_weapon = src)
+	attacker.take_damage(force, atom_damage_type, target_zone = attacker.get_active_held_item_slot(), used_weapon = src)
 	attacker.visible_message(SPAN_DANGER("\The [attacker] hurts [G.his] hand on \the [src]!"))
 	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	playsound(target, hitsound, 50, 1, -1)

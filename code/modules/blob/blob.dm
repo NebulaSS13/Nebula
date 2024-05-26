@@ -56,7 +56,7 @@
 		return
 	attempt_attack(global.alldirs)
 
-/obj/effect/blob/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/effect/blob/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone)
 	current_health -= damage
 	if(current_health < 0)
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -140,7 +140,7 @@
 	var/blob_damage = pick(BRUTE, BURN)
 	L.visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [L]!"), SPAN_DANGER("A tendril flies out from \the [src] and smashes into you!"))
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
+	L.take_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
 
 /obj/effect/blob/proc/attempt_attack(var/list/dirs)
 	var/attackDir = pick(dirs)

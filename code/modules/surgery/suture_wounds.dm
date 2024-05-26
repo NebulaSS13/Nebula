@@ -50,5 +50,5 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message(SPAN_DANGER("[user]'s hand slips, tearing [target]'s [affected.name] with \the [tool]!"), \
 		SPAN_DANGER("Your hand slips, tearing [target]'s [affected.name] with \the [tool]!"))
-	target.apply_damage(3, BRUTE, affected)
+	target.take_damage(3, target_zone = affected.organ_tag, armor_pen = 100)
 	..()

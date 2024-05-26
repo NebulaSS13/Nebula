@@ -57,7 +57,7 @@
 	. = ..()
 
 	for(var/i in 1 to round(crush_damage/AIRLOCK_CRUSH_INCREMENT, 1))
-		apply_damage(AIRLOCK_CRUSH_INCREMENT, BRUTE)
+		take_damage(AIRLOCK_CRUSH_INCREMENT)
 
 	set_status(STAT_STUN, round(crush_damage / 8, 1))
 	set_status(STAT_WEAK, round(crush_damage / 8, 1))

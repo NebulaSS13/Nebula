@@ -171,7 +171,7 @@ var/global/default_mobloc = null
 		if(L)
 			L.last_successful_breath = -INFINITY
 
-	H.apply_damage(damage_amount, damagetype, damage_location)
+	H.take_damage(damage_amount, damagetype, target_zone = damage_location)
 
 	var/ending_damage = damage_check(H, damagetype)
 

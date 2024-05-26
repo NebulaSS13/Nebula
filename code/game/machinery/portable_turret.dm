@@ -315,7 +315,7 @@ var/global/list/turret_icons
 		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 		return 1
 
-/obj/machinery/porta_turret/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent = FALSE)
+/obj/machinery/porta_turret/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, silent = FALSE)
 	if(!raised && !raising)
 		damage = damage / 8
 		if(damage < 5)

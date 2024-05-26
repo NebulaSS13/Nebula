@@ -86,7 +86,7 @@
 	if(M.get_species()?.species_flags & SPECIES_FLAG_IS_PLANT)
 		if(M.get_nutrition() < 500)
 			if(prob(15))
-				M.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
+				M.take_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
 				SET_STATUS_MAX(M, STAT_WEAK, 5)
 				var/decl/pronouns/G = M.get_pronouns()
 				visible_message(

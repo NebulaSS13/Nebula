@@ -569,7 +569,7 @@
 		in_chamber.on_hit(M)
 		if (in_chamber.atom_damage_type != PAIN)
 			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
-			user.apply_damage(in_chamber.damage*2.5, in_chamber.atom_damage_type, BP_HEAD, in_chamber.damage_flags(), used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
+			user.take_damage(in_chamber.damage*2.5, in_chamber.atom_damage_type, target_zone = BP_HEAD, damage_flags = in_chamber.damage_flags(), used_weapon = "point blank shot in the mouth with \a [in_chamber]")
 			user.death()
 		else
 			to_chat(user, "<span class = 'notice'>Ow...</span>")

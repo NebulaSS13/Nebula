@@ -23,7 +23,7 @@
 		radiation = round(((source.energy-150)/50)*5,1)
 	SSradiation.radiate(source, radiation) //Always radiate at max, so a decent dose of radiation is applied
 	for(var/mob/living/M in view(toxrange, source.loc))
-		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
+		M.take_damage(toxdamage, TOX, damage_flags = DAM_DISPERSED)
 
 /decl/singularity_event/mesmerize/handle_event(obj/effect/singularity/source)
 	for(var/mob/living/carbon/M in oviewers(8, source))

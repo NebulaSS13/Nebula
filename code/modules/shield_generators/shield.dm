@@ -130,7 +130,7 @@
 		// The closer we are to impact site, the longer it takes for shield to come back up.
 		S.fail(-(-range + get_dist(src, S)) * 2)
 
-/obj/effect/shield/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/effect/shield/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone)
 	if(!gen)
 		qdel(src)
 		return
@@ -148,16 +148,16 @@
 		if(SHIELD_ABSORBED)
 			return
 		if(SHIELD_BREACHED_MINOR)
-			fail_adjacent_segments(rand(1, 3), inflicter)
+			fail_adjacent_segments(rand(1, 3), used_weapon)
 			return
 		if(SHIELD_BREACHED_MAJOR)
-			fail_adjacent_segments(rand(2, 5), inflicter)
+			fail_adjacent_segments(rand(2, 5), used_weapon)
 			return
 		if(SHIELD_BREACHED_CRITICAL)
-			fail_adjacent_segments(rand(4, 8), inflicter)
+			fail_adjacent_segments(rand(4, 8), used_weapon)
 			return
 		if(SHIELD_BREACHED_FAILURE)
-			fail_adjacent_segments(rand(8, 16), inflicter)
+			fail_adjacent_segments(rand(8, 16), used_weapon)
 			for(var/obj/effect/shield/S in field_segments)
 				S.fail(1)
 			return
@@ -301,7 +301,7 @@
 /obj/effect/meteor/shield_impact(var/obj/effect/shield/S)
 	if(!S.gen.check_flag(MODEFLAG_HYPERKINETIC))
 		return
-	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, inflicter = src)
+	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, used_weapon = src)
 	visible_message(SPAN_DANGER("\The [src] breaks into dust!"))
 	make_debris()
 	qdel(src)

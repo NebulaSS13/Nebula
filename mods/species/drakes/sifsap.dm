@@ -46,6 +46,6 @@
 /decl/material/liquid/sifsap/affect_overdose(mob/living/M, total_dose)
 	if(M.HasTrait(/decl/trait/sivian_biochemistry))
 		return
-	M.apply_damage(1, IRRADIATE)
+	M.take_damage(1, IRRADIATE)
 	SET_STATUS_MAX(M, 5, STAT_DROWSY)
 	return ..()

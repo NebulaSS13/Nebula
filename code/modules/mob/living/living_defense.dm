@@ -33,7 +33,7 @@
 	var/flags = P.damage_flags()
 	var/damaged
 	if(!P.nodamage)
-		damaged = apply_damage(damage, P.atom_damage_type, def_zone, flags, P, P.armor_penetration)
+		damaged = take_damage(damage, P.atom_damage_type, target_zone = def_zone, damage_flags = flags, used_weapon = P, armor_pen = P.armor_penetration)
 		bullet_impact_visuals(P, def_zone, damaged)
 	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
 		. = get_blocked_ratio(def_zone, P.atom_damage_type, flags, P.armor_penetration, P.damage)
@@ -92,7 +92,7 @@
 		apply_effect(stun_amount, EYE_BLUR)
 
 	if (agony_amount)
-		apply_damage(agony_amount, PAIN, def_zone, used_weapon)
+		take_damage(agony_amount, PAIN, target_zone = def_zone, used_weapon = used_weapon)
 		apply_effect(agony_amount/10, STUTTER)
 		apply_effect(agony_amount/10, EYE_BLUR)
 
@@ -123,7 +123,7 @@
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	if(effective_force)
-		return apply_damage(effective_force, I.atom_damage_type, hit_zone, I.damage_flags(), used_weapon=I, armor_pen=I.armor_penetration)
+		return take_damage(effective_force, I.atom_damage_type, target_zone = hit_zone, damage_flags = I.damage_flags(), used_weapon = I, armor_pen = I.armor_penetration)
 
 /mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 
@@ -182,7 +182,7 @@
 			return FALSE
 
 	visible_message(SPAN_DANGER("\The [src] is hit [affecting ? "in \the [affecting.name] " : ""]by \the [O]!"))
-	var/datum/wound/created_wound = apply_damage(throw_damage, dtype, zone, O.damage_flags(), O, O.armor_penetration)
+	var/datum/wound/created_wound = take_damage(throw_damage, dtype, target_zone = zone, damage_flags = O.damage_flags(), used_weapon = O, armor_pen = O.armor_penetration)
 	if(TT?.thrower?.client)
 		admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
 	if(O.can_embed() && (throw_damage > 5*O.w_class)) //Handles embedding for non-humans and simple_animals.
@@ -249,7 +249,7 @@
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
 	visible_message("<span class='danger'>[src] slams into \the [T]!</span>")
 	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
-	apply_damage(speed*5, BRUTE)
+	take_damage(speed*5)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)

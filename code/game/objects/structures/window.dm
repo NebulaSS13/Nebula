@@ -77,7 +77,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
-/obj/structure/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/structure/window/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone)
 	. = ..()
 	if(. && damage_type == BRUTE)
 		playsound(loc, "glasscrack", 100, 1)
@@ -290,13 +290,13 @@
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
 		if(prob(50))
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 2)
-		affecting_mob.apply_damage(10, BRUTE, def_zone, used_weapon = src)
+		affecting_mob.take_damage(10, target_zone = def_zone, used_weapon = src)
 		hit(25)
 		qdel(G)
 	else
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
 		SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
-		affecting_mob.apply_damage(20, BRUTE, def_zone, used_weapon = src)
+		affecting_mob.take_damage(20, target_zone = def_zone, used_weapon = src)
 		hit(50)
 		qdel(G)
 	return TRUE
@@ -569,7 +569,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/obj/structure/window/reinforced/crescent/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/structure/window/reinforced/crescent/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone)
 	return
 
 /obj/structure/window/reinforced/crescent/shatter()

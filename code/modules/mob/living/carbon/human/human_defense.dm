@@ -421,12 +421,12 @@ meteor_act
 				SET_STATUS_MAX(src, STAT_PARA, 10)
 
 	// focus most of the blast on one organ
-	apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
-	apply_damage(0.7 * f_loss, BURN, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+	take_damage(0.7 * b_loss, damage_flags = DAM_EXPLODE, used_weapon = "Explosive blast")
+	take_damage(0.7 * f_loss, BURN, damage_flags = DAM_EXPLODE, used_weapon = "Explosive blast")
 
 	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
-	apply_damage(0.3 * b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
-	apply_damage(0.3 * f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	take_damage(0.3 * b_loss, damage_flags = DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	take_damage(0.3 * f_loss, BURN, damage_flags = DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.

@@ -114,7 +114,7 @@
 	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
 	L.stun_effect_act(stun, agony, def_zone, src)
 	//radiation protection is handled separately from other armour types.
-	L.apply_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
+	L.take_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 	return 1
 

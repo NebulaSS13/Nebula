@@ -320,7 +320,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 /mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
-	apply_damage(2.5*mx, BURN)
+	take_damage(2.5*mx, BURN)
 	return mx
 
 
@@ -355,15 +355,13 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	//minimize this for low-pressure enviroments
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 
-	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
-
-	apply_damage(0.9*mx*head_exposure,  BURN, BP_HEAD,  used_weapon =  "Fire")
-	apply_damage(2.5*mx*chest_exposure, BURN, BP_CHEST, used_weapon =  "Fire")
-	apply_damage(2.0*mx*groin_exposure, BURN, BP_GROIN, used_weapon =  "Fire")
-	apply_damage(0.6*mx*legs_exposure,  BURN, BP_L_LEG, used_weapon =  "Fire")
-	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, used_weapon =  "Fire")
-	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, used_weapon =  "Fire")
-	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, used_weapon =  "Fire")
+	take_damage(0.9*mx*head_exposure,  BURN, target_zone = BP_HEAD,  used_weapon = "fire")
+	take_damage(2.5*mx*chest_exposure, BURN, target_zone = BP_CHEST, used_weapon = "fire")
+	take_damage(2.0*mx*groin_exposure, BURN, target_zone = BP_GROIN, used_weapon = "fire")
+	take_damage(0.6*mx*legs_exposure,  BURN, target_zone = BP_L_LEG, used_weapon = "fire")
+	take_damage(0.6*mx*legs_exposure,  BURN, target_zone = BP_R_LEG, used_weapon = "fire")
+	take_damage(0.4*mx*arms_exposure,  BURN, target_zone = BP_L_ARM, used_weapon = "fire")
+	take_damage(0.4*mx*arms_exposure,  BURN, target_zone = BP_R_ARM, used_weapon = "fire")
 
 	//return a truthy value of whether burning actually happened
 	return mx * (head_exposure + chest_exposure + groin_exposure + legs_exposure + arms_exposure)

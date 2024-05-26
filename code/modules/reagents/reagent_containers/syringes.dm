@@ -157,7 +157,7 @@
 			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
 				to_chat(user, SPAN_WARNING("You miss the vein!"))
 				var/target_zone = check_zone(user.get_target_zone(), T)
-				T.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
+				T.take_damage(3, target_zone = target_zone, damage_flags = DAM_SHARP)
 				return
 
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -293,11 +293,11 @@
 			return
 
 		user.visible_message(SPAN_DANGER("[user] stabs [target] in \the [hit_area] with [src.name]!"))
-		target.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
+		target.take_damage(3, target_zone = target_zone, damage_flags = DAM_SHARP)
 
 	else
 		user.visible_message(SPAN_DANGER("[user] stabs [target] with [src.name]!"))
-		target.apply_damage(3, BRUTE)
+		target.take_damage(3)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/contained_reagents = reagents.get_reagents()

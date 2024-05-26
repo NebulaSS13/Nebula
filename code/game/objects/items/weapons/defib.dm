@@ -353,7 +353,7 @@
 		return
 	if(!user.skill_check(SKILL_MEDICAL, SKILL_BASIC) && !lowskill_revive(H, user))
 		return
-	H.apply_damage(burn_damage_amt, BURN, BP_CHEST)
+	H.take_damage(burn_damage_amt, BURN, target_zone = BP_CHEST)
 
 	//set oxyloss so that the patient is just barely in crit, if possible
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")

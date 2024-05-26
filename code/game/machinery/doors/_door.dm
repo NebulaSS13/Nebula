@@ -342,7 +342,7 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/door/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent = FALSE)
+/obj/machinery/door/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, silent = FALSE)
 	if(!current_health)
 		..(damage, damage_type)
 		update_icon()

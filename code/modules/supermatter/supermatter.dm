@@ -643,7 +643,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		to_chat(user, SPAN_NOTICE("\The [W] flashes into dust as you flinch away from \the [src]."))
 		user.drop_from_inventory(W)
 		Consume(user, W, TRUE)
-	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
+	user.take_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/machinery/power/supermatter/Bumped(atom/AM)
 	if(!Consume(null, AM))

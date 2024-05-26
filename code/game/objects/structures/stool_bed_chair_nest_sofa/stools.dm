@@ -82,7 +82,7 @@
 
 		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 20)
 		SET_STATUS_MAX(target, STAT_WEAK, (10 * (1 - blocked)))
-		target.apply_damage(20, BRUTE, hit_zone, src)
+		target.take_damage(20, target_zone = hit_zone, used_weapon = src)
 		return 1
 
 	return ..()

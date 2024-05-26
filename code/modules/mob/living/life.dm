@@ -565,7 +565,7 @@
 				if(!my_species?.check_no_slip(src) && prob(current_size*5))
 					to_chat(src, SPAN_DANGER("A strong gravitational force slams you to the ground!"))
 					SET_STATUS_MAX(src, STAT_WEAK, current_size)
-		apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
+		take_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
 	return ..()
 
 #define LIMB_UNUSABLE 2

@@ -445,7 +445,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			damage = 120
 		if(3)
 			damage = 30
-	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
+	take_damage(damage, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/proc/SA_attackable(target_mob)
 	if (isliving(target_mob))
@@ -514,7 +514,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
 	if(attacker.a_intent == I_HURT)
-		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, attacker.get_active_held_item_slot(), used_weapon = description)
+		attacker.take_damage(rand(return_damage_min, return_damage_max), damage_type, target_zone = attacker.get_active_held_item_slot(), used_weapon = description)
 		if(rand(25))
 			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))
 

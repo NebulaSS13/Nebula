@@ -121,7 +121,7 @@
 	set waitfor = FALSE
 	return FALSE
 
-/obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone)
 	if(current_health == -1) // This object does not take damage.
 		return
 
@@ -230,7 +230,7 @@
 		if (prob(30 * (1 - blocked)))
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 
-		affecting_mob.apply_damage(8, BRUTE, BP_HEAD)
+		affecting_mob.take_damage(8, target_zone = BP_HEAD)
 		visible_message(SPAN_DANGER("[G.assailant] slams [affecting_mob]'s face against \the [src]!"))
 		if (material)
 			playsound(loc, material.tableslam_noise, 50, 1)

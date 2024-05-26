@@ -13,8 +13,8 @@
 			b_loss = 45
 
 	// spread damage overall
-	apply_damage(b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
-	apply_damage(f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	take_damage(b_loss, damage_flags = DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	take_damage(f_loss, damage_flags = DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
 
 /mob/living/exosuit/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	if(!effect || (blocked >= 100))
@@ -108,55 +108,6 @@
 			return legs
 		else
 			return body
-
-/mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
-	if(!damage)
-		return 0
-
-	if(!def_zone)
-		if(damage_flags & DAM_DISPERSED)
-			var/old_damage = damage
-			var/tally
-			silent = FALSE
-			for(var/obj/item/part in list(arms, legs, body, head))
-				tally += part.w_class
-			for(var/obj/item/part in list(arms, legs, body, head))
-				damage = old_damage * part.w_class/tally
-				def_zone = BP_CHEST
-				if(part == arms)
-					def_zone = BP_L_ARM
-				else if(part == legs)
-					def_zone = BP_L_LEG
-				else if(part == head)
-					def_zone = BP_HEAD
-
-				. = .() || .
-			return
-
-		def_zone = ran_zone(def_zone)
-
-	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, TRUE)
-	damage = after_armor[1]
-	damagetype = after_armor[2]
-
-	if(!damage)
-		return 0
-
-	var/target = zoneToComponent(def_zone)
-	//Only 3 types of damage concern mechs and vehicles
-	switch(damagetype)
-		if(BRUTE)
-			take_damage(damage, inflicter = target)
-		if(BURN)
-			take_damage(damage, BURN, inflicter = target)
-		if(IRRADIATE)
-			for(var/mob/living/pilot in pilots)
-				pilot.apply_damage(damage, IRRADIATE, def_zone, damage_flags, used_weapon)
-
-	if((damagetype == BRUTE || damagetype == BURN) && prob(25+(damage*2)))
-		sparks.set_up(3,0,src)
-		sparks.start()
-	return 1
 
 /mob/living/exosuit/rad_act(var/severity)
 	return FALSE // Pilots already query rads, modify this for radiation alerts and such
