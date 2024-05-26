@@ -3678,7 +3678,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
 "iU" = (
-/obj/machinery/shield_generator,
+/obj/machinery/shield_generator/mapped,
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1
@@ -6828,7 +6828,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/shuttle/outgoing/general)
 "Lm" = (
-/obj/machinery/shield_generator,
+/obj/machinery/shield_generator/mapped,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
