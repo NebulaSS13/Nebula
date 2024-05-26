@@ -316,21 +316,6 @@ meteor_act
 		gear.add_blood(source)
 		update_equipment_overlay(slot_w_uniform_str, redraw_mob = FALSE)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
-
-	// Tox and oxy don't matter to suits.
-	if(damtype != BURN && damtype != BRUTE) return
-
-	// The rig might soak this hit, if we're wearing one.
-	var/obj/item/rig/rig = get_rig()
-	if(rig)
-		rig.take_hit(damage)
-
-	// We may also be taking a suit breach.
-	var/obj/item/clothing/suit/space/suit = get_equipped_item(slot_wear_suit_str)
-	if(istype(suit))
-		suit.create_breaches(damtype, damage)
-
 /mob/living/carbon/human/reagent_permeability()
 	var/perm = 0
 

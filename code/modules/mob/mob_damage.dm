@@ -20,6 +20,10 @@
 	return 0
 
 /mob/proc/set_damage(damage_type, amount, do_update_health)
+
+	if(status_flags & GODMODE)
+		return FALSE
+
 	switch(damage_type)
 		if(BRUTE)
 			return setBruteLoss(amount, do_update_health)
@@ -40,25 +44,7 @@
 	return 0
 
 /mob/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, do_update_health = TRUE)
-	switch(damage_type)
-		if(BRUTE)
-			return adjustBruteLoss(damage, do_update_health)
-		if(BURN)
-			return adjustFireLoss(damage, do_update_health)
-		if(TOX)
-			return adjustToxLoss(damage, do_update_health)
-		if(CLONE)
-			return adjustCloneLoss(damage, do_update_health)
-		if(OXY)
-			return adjustOxyLoss(damage, do_update_health)
-		if(PAIN)
-			return adjustHalLoss(damage, do_update_health)
-		if(IRRADIATE)
-			return apply_radiation(damage)
-		if(BRAIN)
-			return adjustBrainLoss(damage, do_update_health)
-		//if(ELECTROCUTE)
-	return 0
+	return
 
 /mob/proc/heal_damage(amount, damage_type, do_update_health)
 	return take_damage(-(amount), damage_type, do_update_health = do_update_health)
