@@ -315,7 +315,8 @@ default behaviour is:
 
 	// fix all status conditions including blind/deaf
 	clear_status_effects()
-	set_damage(BRUTE, 0, do_update_heath = FALSE)
+	// linter thinks do_update_health is a bad arg here for some reason
+	UNLINT(set_damage(BRUTE, 0, do_update_heath = FALSE))
 	set_damage(BURN, 0)
 
 	// fix all of our organs
