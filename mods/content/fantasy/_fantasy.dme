@@ -24,5 +24,6 @@
 #include "items/clothing/armor.dm"
 #include "items/clothing/jerkin.dm"
 #include "items/clothing/loincloth.dm"
+#include "items/clothing/overrides.dm"
 #include "items/clothing/trousers.dm"
 #endif
