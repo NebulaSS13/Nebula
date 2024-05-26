@@ -292,7 +292,7 @@
 
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		var/fever_temperature = (owner.get_mob_temperature_threshold(HEAT_LEVEL_1) - owner.species.body_temperature - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + owner.species.body_temperature
-		owner.bodytemperature += clamp(0, (fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, fever_temperature - owner.bodytemperature)
+		owner.bodytemperature += clamp((fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, 0, fever_temperature - owner.bodytemperature)
 
 	if (germ_level >= INFECTION_LEVEL_TWO)
 		var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
@@ -376,7 +376,7 @@
 
 /obj/item/organ/proc/heal_damage(amount)
 	if(can_recover())
-		damage = clamp(0, damage - round(amount, 0.1), max_damage)
+		damage = clamp(damage - round(amount, 0.1), 0, max_damage)
 		if(owner)
 			owner.update_health()
 
