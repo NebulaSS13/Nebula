@@ -21,7 +21,7 @@
 	/*  These are defined by the wound type and should not be changed */
 	var/list/stages            // stages such as "cut", "deep cut", etc.
 	var/max_bleeding_stage = 0 // maximum stage at which bleeding should still happen. Beyond this stage bleeding is prevented.
-	var/damage_type = CUT      // one of CUT, PIERCE, BRUISE, BURN
+	var/damage_type = WOUND_CUT      // one of WOUND_CUT, WOUND_PIERCE, WOUND_BRUISE, WOUND_BURN
 	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
@@ -83,9 +83,9 @@
 /datum/wound/proc/is_treated()
 	if(!LAZYLEN(embedded_objects))
 		switch(damage_type)
-			if(BRUISE, CUT, PIERCE)
+			if(WOUND_BRUISE, WOUND_CUT, WOUND_PIERCE)
 				return bandaged
-			if(BURN)
+			if(WOUND_BURN)
 				return salved
 
 	// Checks whether other other can be merged into src.
@@ -123,16 +123,16 @@
 		germ_level = 0	//reset this, just in case
 		return 0
 
-	if (damage_type == BRUISE && !bleeding()) //bruises only infectable if bleeding
+	if (damage_type == WOUND_BRUISE && !bleeding()) //bruises only infectable if bleeding
 		return 0
 
 	var/dam_coef = round(damage/10)
 	switch (damage_type)
-		if (BRUISE)
+		if (WOUND_BRUISE)
 			return prob(dam_coef*5)
-		if (BURN)
+		if (WOUND_BURN)
 			return prob(dam_coef*25)
-		if (CUT)
+		if (WOUND_CUT)
 			return prob(dam_coef*10)
 
 	return 0
@@ -152,7 +152,7 @@
 	if(LAZYLEN(embedded_objects))
 		return amount // heal nothing
 	if(parent_organ)
-		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
+		if(damage_type == WOUND_BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount	//We don't want to heal wounds on irreparable organs.
 		else if(!(parent_organ.brute_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount

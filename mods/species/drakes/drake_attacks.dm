@@ -3,7 +3,7 @@
 		return
 	var/list/open_wounds = list()
 	for(var/datum/wound/wound in bitten?.wounds)
-		if(wound.damage_type != CUT)
+		if(wound.damage_type != WOUND_CUT)
 			continue
 		if(wound.is_treated())
 			continue

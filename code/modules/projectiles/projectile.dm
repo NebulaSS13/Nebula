@@ -331,7 +331,7 @@
 
 /obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
 	//Check if we even broke skin in first place
-	if(!wound || !(wound.damage_type == CUT || wound.damage_type == PIERCE))
+	if(!wound || !(wound.damage_type == WOUND_CUT || wound.damage_type == WOUND_PIERCE))
 		return
 	//Check if we can do nasty stuff inside
 	if(!can_embed() || (organ.species.species_flags & SPECIES_FLAG_NO_EMBED))

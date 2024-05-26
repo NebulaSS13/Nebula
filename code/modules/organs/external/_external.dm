@@ -624,19 +624,19 @@ This function completely restores a damaged organ to perfect condition.
 		I.remove_rejuv()
 	..()
 
-/obj/item/organ/external/proc/createwound(var/type = CUT, var/damage, var/surgical)
+/obj/item/organ/external/proc/createwound(var/type = WOUND_CUT, var/damage, var/surgical)
 
 	if(!owner || damage <= 0)
 		return
 
 	if(BP_IS_CRYSTAL(src) && (damage >= 15 || prob(1)))
-		type = SHATTER
+		type = WOUND_SHATTER
 		playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
 
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Brute damage can possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
-	if(!surgical && (type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30)
+	if(!surgical && (type in list(WOUND_CUT, WOUND_PIERCE, WOUND_BRUISE)) && damage > 15 && local_damage > 30)
 
 		var/internal_damage
 		if(prob(damage) && sever_artery())
@@ -647,17 +647,17 @@ This function completely restores a damaged organ to perfect condition.
 			owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
-	if((type in list(BURN, LASER)) && (damage > 5 || damage + burn_dam >= 15) && !BP_IS_PROSTHETIC(src))
+	if((type in list(WOUND_BURN, WOUND_LASER)) && (damage > 5 || damage + burn_dam >= 15) && !BP_IS_PROSTHETIC(src))
 		var/fluid_loss_severity
 		switch(type)
-			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
-			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
+			if(WOUND_BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
+			if(WOUND_LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
 		var/fluid_loss = (damage/(owner.get_max_health() - get_config_value(/decl/config/num/health_health_threshold_dead))) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
 	if(!surgical && LAZYLEN(wounds) && prob(max(50+(number_wounds-1)*10,90)))
-		if((type == CUT || type == BRUISE) && damage >= 5)
+		if((type == WOUND_CUT || type == WOUND_BRUISE) && damage >= 5)
 			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
 			var/list/compatible_wounds = list()
 			for (var/datum/wound/W in wounds)
@@ -889,7 +889,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		// making it look prettier on scanners
 		heal_amt = round(heal_amt,0.1)
 		var/dam_type = BRUTE
-		if(W.damage_type == BURN)
+		if(W.damage_type == WOUND_BURN)
 			dam_type = BURN
 		if(owner?.can_autoheal(dam_type))
 			W.heal_wound_damage(heal_amt)
@@ -922,7 +922,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			qdel(W)
 			continue
 
-		if(W.damage_type == BURN)
+		if(W.damage_type == WOUND_BURN)
 			burn_dam += W.damage
 		else
 			brute_dam += W.damage
@@ -1317,11 +1317,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(!supplied_wound)
 		for(var/datum/wound/wound in wounds)
-			if((wound.damage_type == CUT || wound.damage_type == PIERCE) && wound.damage >= W.w_class * 5)
+			if((wound.damage_type == WOUND_CUT || wound.damage_type == WOUND_PIERCE) && wound.damage >= W.w_class * 5)
 				supplied_wound = wound
 				break
 	if(!supplied_wound)
-		supplied_wound = createwound(PIERCE, W.w_class * 5)
+		supplied_wound = createwound(WOUND_PIERCE, W.w_class * 5)
 
 	if(!supplied_wound || (W in supplied_wound.embedded_objects)) // Just in case.
 		return

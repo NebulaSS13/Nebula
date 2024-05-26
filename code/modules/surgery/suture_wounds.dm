@@ -13,7 +13,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		for(var/datum/wound/W in affected.wounds)
-			if(W.damage_type == CUT && W.damage >= W.autoheal_cutoff)
+			if(W.damage_type == WOUND_CUT && W.damage >= W.autoheal_cutoff)
 				return TRUE
 		to_chat(user, SPAN_WARNING("\The [target]'s [affected.name] has no wounds that are large enough to need suturing."))
 	return FALSE
@@ -28,7 +28,7 @@
 /decl/surgery_step/suture_wounds/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	for(var/datum/wound/W in affected.wounds)
-		if(W.damage_type == CUT && W.damage >= W.autoheal_cutoff)
+		if(W.damage_type == WOUND_CUT && W.damage >= W.autoheal_cutoff)
 			// Close it up to a point that it can be bandaged and heal naturally!
 			W.heal_wound_damage(rand(10,20)+10)
 			if(W.damage >= W.autoheal_cutoff)

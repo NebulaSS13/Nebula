@@ -76,21 +76,21 @@
 	var/can_cut = !block_cut && !BP_IS_PROSTHETIC(src) && (sharp || prob(brute))
 
 	if(brute)
-		var/to_create = BRUISE
+		var/to_create = WOUND_BRUISE
 		if(can_cut)
-			to_create = CUT
+			to_create = WOUND_CUT
 			//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
 			if(sharp && !edge)
-				to_create = PIERCE
+				to_create = WOUND_PIERCE
 		created_wound = createwound(to_create, brute)
 
 	if(burn)
 		if(laser)
-			createwound(LASER, burn)
+			createwound(WOUND_LASER, burn)
 			if(prob(40))
 				owner.IgniteMob()
 		else
-			createwound(BURN, burn)
+			createwound(WOUND_BURN, burn)
 
 	//Initial pain spike
 	add_pain(0.6*burn + 0.4*brute)
@@ -183,7 +183,7 @@
 			break
 
 		// heal brute damage
-		if(W.damage_type == BURN)
+		if(W.damage_type == WOUND_BURN)
 			burn = W.heal_wound_damage(burn)
 		else
 			brute = W.heal_wound_damage(brute)
