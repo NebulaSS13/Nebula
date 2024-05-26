@@ -5,6 +5,7 @@
 	desc = "A cobbled path made of loose stones."
 	color = COLOR_GRAY
 	base_color = COLOR_GRAY
+	icon_edge_layer = EXT_EDGE_PATH
 	icon = 'icons/turf/flooring/legacy/cobblestone.dmi'
 	icon_state = "0"
 	material = /decl/material/solid/stone/sandstone
@@ -23,7 +24,6 @@
 
 /turf/floor/natural/path/running_bond
 	icon = 'icons/turf/flooring/legacy/running_bond.dmi'
-	icon_edge_layer = -1
 	paving_adjective = null
 	paver_adjective = "staggered"
 	paver_noun = "bricks"
@@ -31,7 +31,6 @@
 
 /turf/floor/natural/path/herringbone
 	icon = 'icons/turf/flooring/legacy/herringbone.dmi'
-	icon_edge_layer = -1
 	paving_adjective = "herringbone"
 	paver_adjective = null
 	paver_noun = "bricks"
