@@ -5,6 +5,7 @@
 	icon = 'icons/turf/flooring/grass.dmi'
 	footstep_type = /decl/footsteps/grass
 	icon_edge_layer = EXT_EDGE_GRASS
+	icon_has_corners = TRUE
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
