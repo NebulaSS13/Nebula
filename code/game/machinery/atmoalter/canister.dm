@@ -1,12 +1,13 @@
 /obj/machinery/portable_atmospherics/canister
-	name                       = "canister: \[CAUTION\]"
-	icon                       = 'icons/obj/atmos.dmi'
-	icon_state                 = "yellow"
-	density                    = TRUE
-	obj_flags                  = OBJ_FLAG_CONDUCTIBLE
-	w_class                    = ITEM_SIZE_GARGANTUAN
-	construct_state            = /decl/machine_construction/pipe/welder
-	uncreated_component_parts  = null
+	name = "canister"
+	icon = 'icons/obj/atmos.dmi'
+	icon_state = "yellow"
+	density = TRUE
+	max_health = 100
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	w_class = ITEM_SIZE_GARGANTUAN
+	construct_state = /decl/machine_construction/pipe/welder
+	uncreated_component_parts = null
 	start_pressure             = 45 ATM
 	volume                     = 1000
 	interact_offline           = TRUE
@@ -14,7 +15,6 @@
 		/decl/material/solid/metal/steel = 10 * SHEET_MATERIAL_AMOUNT
 	)
 
-	var/health                 = 100
 	var/valve_open             = FALSE
 	var/release_pressure       = ONE_ATMOSPHERE
 	var/release_flow_rate      = ATMOS_DEFAULT_VOLUME_PUMP //in L/s
@@ -32,44 +32,45 @@
 	return -1
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent
-	name           = "canister: \[N2O\]"
+	name           = "\improper N2O canister"
 	icon_state     = "redws"
 	canister_color = "redws"
 	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/nitrogen
-	name           = "canister: \[N2\]"
+	name           = "nitrogen canister"
 	icon_state     = "red"
 	canister_color = "red"
 	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/nitrogen/prechilled
-	name           = "canister: \[N2 (Cooling)\]"
+	name           = "cryogenic nitrogen canister"
+	start_pressure = 20 ATM
 
 /obj/machinery/portable_atmospherics/canister/oxygen
-	name           = "canister: \[O2\]"
+	name           = "oxygen canister"
 	icon_state     = "blue"
 	canister_color = "blue"
 	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled
-	name           = "canister: \[O2 (Cryo)\]"
+	name           = "cryogenic oxygen canister"
 	start_pressure = 20 ATM
 
 /obj/machinery/portable_atmospherics/canister/hydrogen
-	name           = "canister: \[Hydrogen\]"
+	name           = "hydrogen canister"
 	icon_state     = "purple"
 	canister_color = "purple"
 	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
-	name           = "canister \[CO2\]"
+	name           = "\improper CO2 canister"
 	icon_state     = "black"
 	canister_color = "black"
 	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/air
-	name           = "canister \[Air\]"
+	name           = "air canister"
 	icon_state     = "grey"
 	canister_color = "grey"
 	can_label      = FALSE
@@ -134,11 +135,12 @@
 
 /obj/machinery/portable_atmospherics/canister/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > temperature_resistance)
-		health -= 5
+		current_health -= 5
 		healthcheck()
+	return ..()
 
 /obj/machinery/portable_atmospherics/canister/proc/healthcheck()
-	if(!destroyed && health <= 10)
+	if(!destroyed && current_health <= 10)
 		var/atom/location = loc
 		location.assume_air(air_contents)
 		destroyed = TRUE
@@ -203,14 +205,14 @@
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 	if(Proj.damage)
-		health -= round(Proj.damage / 2)
+		current_health -= round(Proj.damage / 2)
 		healthcheck()
 	return ..()
 
 /obj/machinery/portable_atmospherics/canister/bash(var/obj/item/W, var/mob/user)
 	. = ..()
 	if(.)
-		health -= W.force
+		current_health -= W.force
 		healthcheck()
 
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W, var/mob/user)
@@ -372,10 +374,10 @@
 
 // Spawn debug tanks.
 /obj/machinery/portable_atmospherics/canister/helium
-	name = "canister \[He\]"
-	icon_state = "black"
+	name           = "helium canister"
+	icon_state     = "black"
 	canister_color = "black"
-	can_label = 0
+	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/helium/Initialize()
 	. = ..()
@@ -383,10 +385,10 @@
 	update_icon()
 
 /obj/machinery/portable_atmospherics/canister/methyl_bromide
-	name = "canister \[CH3Br\]"
-	icon_state = "black"
+	name           = "\improper CH3Br canister"
+	icon_state     = "black"
 	canister_color = "black"
-	can_label = 0
+	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/methyl_bromide/Initialize()
 	. = ..()
@@ -394,10 +396,10 @@
 	update_icon()
 
 /obj/machinery/portable_atmospherics/canister/chlorine
-	name = "canister \[Cl\]"
-	icon_state = "black"
+	name           = "chlorine canister"
+	icon_state     = "black"
 	canister_color = "black"
-	can_label = 0
+	can_label      = FALSE
 
 /obj/machinery/portable_atmospherics/canister/chlorine/Initialize()
 	. = ..()

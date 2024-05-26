@@ -11,7 +11,7 @@
 	force = 5
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = "{'biotech':4,'powerstorage':2}"
+	origin_tech = @'{"biotech":4,"powerstorage":2}'
 	action_button_name = "Remove/Replace Paddles"
 	material = /decl/material/solid/organic/plastic
 	matter = list(
@@ -163,7 +163,7 @@
 	icon = 'icons/obj/defibrillator_compact.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
-	origin_tech = "{'biotech':5,'powerstorage':3}"
+	origin_tech = @'{"biotech":5,"powerstorage":3}'
 
 /obj/item/defibrillator/compact/loaded
 	bcell = /obj/item/cell/high
@@ -422,7 +422,7 @@
 	H.stun_effect_act(2, 120, target_zone)
 	var/burn_damage = H.electrocute_act(burn_damage_amt*2, src, def_zone = target_zone)
 	if(burn_damage > 15 && H.can_feel_pain())
-		H.emote("scream")
+		H.emote(/decl/emote/audible/scream)
 	var/obj/item/organ/internal/heart/doki = locate() in affecting.internal_organs
 	if(istype(doki) && doki.pulse && !doki.open && prob(10))
 		to_chat(doki, SPAN_DANGER("Your [doki] has stopped!"))
@@ -435,14 +435,13 @@
 
 	M.switch_from_dead_to_living_mob_list()
 	M.timeofdeath = 0
-	M.set_stat(UNCONSCIOUS) //Life() can bring them back to consciousness if it needs to.
+	M.set_stat(UNCONSCIOUS)
 	M.try_refresh_visible_overlays()
 	M.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	M.reload_fullscreen()
 
-	M.emote("gasp")
+	M.emote(/decl/emote/audible/gasp)
 	SET_STATUS_MAX(M, STAT_WEAK, rand(10,25))
-	M.updatehealth()
 	apply_brain_damage(M, deadtime)
 
 /obj/item/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H, var/deadtime)

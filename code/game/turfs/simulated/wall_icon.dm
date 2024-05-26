@@ -5,7 +5,7 @@
 		else
 			construction_stage = null
 	if(!material)
-		material = GET_DECL(get_default_material())
+		material = get_default_material()
 	if(material)
 		explosion_resistance = material.explosion_resistance
 		hitsound = material.hitsound
@@ -43,32 +43,6 @@
 		SetName("[material.solid_name] [material.wall_name]")
 		desc = "It seems to be a section of hull plated with [material.solid_name]."
 
-/turf/simulated/wall/proc/get_default_material()
-	. = DEFAULT_WALL_MATERIAL
-
-/turf/simulated/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial, var/decl/material/newgmaterial)
-
-	material = newmaterial
-	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
-	else if(!istype(material))
-		PRINT_STACK_TRACE("Wall has been supplied non-material '[newmaterial]'.")
-		material = GET_DECL(get_default_material())
-
-	reinf_material = newrmaterial
-	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
-	else if(!istype(reinf_material))
-		reinf_material = null
-
-	girder_material = newgmaterial
-	if(ispath(girder_material, /decl/material))
-		girder_material = GET_DECL(girder_material)
-	else if(!istype(girder_material))
-		girder_material = null
-
-	update_material()
-
 /turf/simulated/wall/proc/get_wall_icon()
 	. = (istype(material) && material.icon_base) || 'icons/turf/walls/solid.dmi'
 
@@ -98,6 +72,7 @@
 					if(2)
 						wall_dirs += get_dir(src, T)
 						other_dirs += get_dir(src, T)
+
 			if(handle_structure_blending)
 				var/success = 0
 				for(var/O in T)
@@ -120,19 +95,32 @@
 							if(!blendable)
 								other_dirs += get_dir(src, T)
 						break
+
 		wall_connections = dirs_to_corner_states(wall_dirs)
 		other_connections = dirs_to_corner_states(other_dirs)
 
 	var/material_icon_base = get_wall_icon()
 	var/base_color = material.color
+
+	var/new_icon
+	var/new_icon_state
+	var/new_color
+
 	if(!density)
-		icon = material_icon_base
-		icon_state = "fwall_open"
-		color = base_color
+		new_icon = material_icon_base
+		new_icon_state = "fwall_open"
+		new_color = base_color
 	else
-		icon = get_combined_wall_icon(wall_connections, other_connections, material_icon_base, base_color, paint_color, stripe_color, (material.wall_flags & WALL_HAS_EDGES) && (stripe_color || base_color))
-		icon_state = ""
-		color = null
+		new_icon = get_combined_wall_icon(wall_connections, other_connections, material_icon_base, base_color, paint_color, stripe_color, (material.wall_flags & WALL_HAS_EDGES) && (stripe_color || base_color))
+		new_icon_state = ""
+		new_color = null
+
+	if(icon != new_icon)
+		icon = new_icon
+	if(icon_state != new_icon_state)
+		icon_state = new_icon_state
+	if(color != new_color)
+		color = new_color
 
 	if(apply_reinf_overlay())
 		var/image/I

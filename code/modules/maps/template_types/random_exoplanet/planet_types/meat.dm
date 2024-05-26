@@ -90,7 +90,7 @@
 	name                       = "organic exoplanet"
 	planetoid_data_type        = /datum/planetoid_data/random/meat
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/meat
-	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_HUMAN|RUIN_WATER
+	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_WATER
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/meat
 	prefered_level_data_per_z  = null
@@ -111,7 +111,7 @@
 	water_level_max      = 3
 	water_level_min      = 2
 	land_type            = /turf/exterior/meat
-	water_type           = /turf/exterior/water/stomach
+	water_type           = /turf/exterior/meat/acid
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
@@ -135,12 +135,12 @@
 	dirt_color    = "#c40031"
 	footstep_type = /decl/footsteps/mud
 
-/turf/exterior/water/stomach
+/turf/exterior/meat/get_diggable_resources()
+	return dug ? null : list(/obj/item/stack/material/ore/meat = list(3, 2))
+
+/turf/exterior/meat/acid
 	name         = "juices"
 	desc         = "Half-digested chunks of vines are floating in the puddle of some liquid."
 	gender       = PLURAL
-	icon         = 'icons/turf/exterior/water_still.dmi'
 	reagent_type = /decl/material/liquid/acid/stomach
-	color        = "#c7c27c"
-	base_color   = "#c7c27c"
-	dirt_color   = "#c40031"
+	height       = -(FLUID_SHALLOW)

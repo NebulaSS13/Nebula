@@ -467,7 +467,7 @@
 	if(reagents.has_reagent(/decl/material/liquid/ethanol/vodka))
 		rad_power = 4
 		temperature_gain = 60
-		reagents.remove_any(1)
+		remove_any_reagents(1)
 		if(prob(2))
 			audible_message("<span class='notice'>[src] churns happily</span>")
 	else

@@ -72,16 +72,6 @@
 	species_flags =           SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =             SPECIES_IS_RESTRICTED
 
-	heat_discomfort_strings = list(
-		"You feel brittle and overheated.",
-		"Your overheated carapace flexes uneasily.",
-		"Overheated ichor trickles from your eyes."
-		)
-	cold_discomfort_strings = list(
-		"Frost forms along your carapace.",
-		"You hear a faint crackle of ice as you shift your freezing body.",
-		"Your movements become sluggish under the weight of the chilly conditions."
-		)
 	unarmed_attacks = list(
 		/decl/natural_attack/claws/strong/gloves,
 		/decl/natural_attack/bite/sharp

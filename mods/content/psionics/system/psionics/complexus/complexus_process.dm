@@ -1,4 +1,4 @@
-/datum/psi_complexus/proc/update(var/force)
+/datum/ability_handler/psionics/proc/update(var/force)
 
 	set waitfor = FALSE
 
@@ -70,7 +70,7 @@
 		to_chat(owner, SPAN_NOTICE("<b>Shift-left-click your Psi icon</b> on the bottom right to <b>view a summary of how to use them</b>, or <b>left click</b> it to <b>suppress or unsuppress</b> your psionics. Beware: overusing your gifts can have <b>deadly consequences</b>."))
 		to_chat(owner, "<hr>")
 
-/datum/psi_complexus/Process()
+/datum/ability_handler/psionics/Process()
 
 	var/update_hud
 	if(armor_cost)
@@ -124,7 +124,7 @@
 	if(update_hud)
 		ui.update_icon()
 
-/datum/psi_complexus/proc/attempt_regeneration()
+/datum/ability_handler/psionics/proc/attempt_regeneration()
 
 	var/heal_general =  FALSE
 	var/heal_poison =   FALSE
@@ -241,8 +241,8 @@
 
 	// Heal everything left.
 	if(heal_general && prob(mend_prob) && (owner.getBruteLoss() || owner.getFireLoss() || owner.getOxyLoss()) && spend_power(heal_rate))
-		owner.adjustBruteLoss(-(heal_rate))
-		owner.adjustFireLoss(-(heal_rate))
+		owner.adjustBruteLoss(-(heal_rate), do_update_health = FALSE)
+		owner.adjustFireLoss(-(heal_rate), do_update_health = FALSE)
 		owner.adjustOxyLoss(-(heal_rate))
 		if(prob(25))
 			to_chat(owner, SPAN_NOTICE("Your skin crawls as your autoredactive faculty heals your body."))

@@ -61,4 +61,4 @@
 	spawn_announcement_sound = global.using_map.lifesign_spawn_sound
 
 /decl/special_role/borer/attempt_random_spawn()
-	if(config.aliens_allowed) ..()
+	if(get_config_value(/decl/config/toggle/aliens_allowed)) ..()

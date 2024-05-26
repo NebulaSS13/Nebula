@@ -2,8 +2,8 @@
 var/global/list/current_mob_ambience = list()
 /obj/abstract/weather_system
 
-	// Weakref lists used to track mobs within our weather 
-	// system; alternative to keeping big lists of actual mobs or 
+	// Weakref lists used to track mobs within our weather
+	// system; alternative to keeping big lists of actual mobs or
 	// having mobs constantly poked by weather systems.
 
 	var/tmp/list/mobs_on_cooldown =   list() // Has this mob recently been messed with by the weather?
@@ -15,7 +15,7 @@ var/global/list/current_mob_ambience = list()
 	var/mobref = weakref(M)
 	if(!(mobref in mobs_on_cooldown))
 		mobs_on_cooldown[mobref] = TRUE
-		addtimer(CALLBACK(src, .proc/clear_cooldown, mobref), delay)
+		addtimer(CALLBACK(src, PROC_REF(clear_cooldown), mobref), delay)
 		return TRUE
 	return FALSE
 

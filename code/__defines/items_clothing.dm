@@ -17,6 +17,7 @@
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
 #define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 #define ACCESSORY_SLOT_OVER     "Over"
+#define ACCESSORY_SLOT_SENSORS  "Suit Sensors"
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
@@ -84,11 +85,12 @@
 #define SLOT_TIE         BITFLAG(17)
 #define SLOT_HOLSTER     BITFLAG(18)
 #define SLOT_POCKET      BITFLAG(19)
+#define SLOT_TAIL        BITFLAG(20)
 #define SLOT_LEGS        (SLOT_LEG_LEFT|SLOT_LEG_RIGHT)
 #define SLOT_FEET        (SLOT_FOOT_LEFT|SLOT_FOOT_RIGHT)
 #define SLOT_ARMS        (SLOT_ARM_LEFT|SLOT_ARM_RIGHT)
 #define SLOT_HANDS       (SLOT_HAND_LEFT|SLOT_HAND_RIGHT)
-#define SLOT_FULL_BODY   (SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS|SLOT_UPPER_BODY|SLOT_LOWER_BODY)
+#define SLOT_FULL_BODY   (SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS|SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_TAIL)
 
 // Bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection().
@@ -155,14 +157,10 @@
 #define THROWNOBJ_KNOCKBACK_DIVISOR 2  // Affects how much speed the mob is knocked back with.
 
 // Suit sensor levels
-#define SUIT_SENSOR_OFF      0
-#define SUIT_SENSOR_BINARY   1
-#define SUIT_SENSOR_VITAL    2
-#define SUIT_SENSOR_TRACKING 3
-
-#define SUIT_NO_SENSORS      0
-#define SUIT_HAS_SENSORS     1
-#define SUIT_LOCKED_SENSORS  2
+#define VITALS_SENSOR_OFF      0
+#define VITALS_SENSOR_BINARY   1
+#define VITALS_SENSOR_VITAL    2
+#define VITALS_SENSOR_TRACKING 3
 
 // Hair Flags
 #define VERY_SHORT           BITFLAG(0)
@@ -177,20 +175,21 @@
 #define HUD_JANITOR  BITFLAG(3)
 
 // Limbs.
-#define BP_L_FOOT "l_foot"
-#define BP_R_FOOT "r_foot"
-#define BP_L_LEG  "l_leg"
-#define BP_R_LEG  "r_leg"
-#define BP_L_HAND "l_hand"
-#define BP_R_HAND "r_hand"
+#define BP_L_FOOT       "l_foot"
+#define BP_R_FOOT       "r_foot"
+#define BP_L_LEG        "l_leg"
+#define BP_R_LEG        "r_leg"
+#define BP_L_HAND       "l_hand"
+#define BP_R_HAND       "r_hand"
+#define BP_M_HAND       "midlimb"
 #define BP_L_HAND_UPPER "l_u_hand"
 #define BP_R_HAND_UPPER "r_u_hand"
-#define BP_L_ARM  "l_arm"
-#define BP_R_ARM  "r_arm"
-#define BP_HEAD   "head"
-#define BP_CHEST  "chest"
-#define BP_GROIN  "groin"
-#define BP_TAIL   "tail"
+#define BP_L_ARM        "l_arm"
+#define BP_R_ARM        "r_arm"
+#define BP_HEAD         "head"
+#define BP_CHEST        "chest"
+#define BP_GROIN        "groin"
+#define BP_TAIL         "tail"
 
 // Other inventory-related slots (also organs).
 #define BP_MOUTH  "mouth"
@@ -204,6 +203,7 @@ var/global/list/all_limb_tags = list(
 	BP_R_ARM,
 	BP_L_HAND,
 	BP_R_HAND,
+	BP_M_HAND,
 	BP_L_HAND_UPPER,
 	BP_R_HAND_UPPER,
 	BP_L_LEG,
@@ -217,6 +217,7 @@ var/global/list/all_limb_tags_by_depth = list(
 	BP_L_HAND_UPPER,
 	BP_R_HAND,
 	BP_R_HAND_UPPER,
+	BP_M_HAND,
 	BP_L_ARM,
 	BP_R_ARM,
 	BP_L_FOOT,
@@ -233,10 +234,20 @@ var/global/list/default_onmob_icons = list(
 	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi'
 )
 
+var/global/list/all_hand_slots = list(
+	BP_L_HAND,
+	BP_R_HAND,
+	BP_M_HAND,
+	BP_L_HAND_UPPER,
+	BP_R_HAND_UPPER,
+	BP_MOUTH
+)
+
 // This list should be sorted by display priority/order for mob examine to look nice.
 var/global/list/all_inventory_slots = list(
 	BP_L_HAND,
 	BP_R_HAND,
+	BP_M_HAND,
 	BP_L_HAND_UPPER,
 	BP_R_HAND_UPPER,
 	BP_MOUTH,

@@ -96,17 +96,15 @@
 			break
 
 /mob/living/bot/medbot/UnarmedAttack(var/mob/living/carbon/human/H, var/proximity)
-	if(!..())
+	. = ..()
+	if(.)
 		return
 
-	if(!on)
-		return
-
-	if(!istype(H))
-		return
+	if(!on || !istype(H))
+		return FALSE
 
 	if(busy)
-		return
+		return TRUE
 
 	if(H.stat == DEAD)
 		if(vocal)
@@ -142,10 +140,11 @@
 		if(t == 1)
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_INJECT)
 		else
-			H.reagents.add_reagent(t, injection_amount)
+			H.add_to_reagents(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
 	busy = 0
 	update_icon()
+	return TRUE
 
 /mob/living/bot/medbot/on_update_icon()
 	..()
@@ -285,24 +284,18 @@
 		update_icon()
 		. = 1
 
-/mob/living/bot/medbot/explode()
-	on = 0
-	visible_message("<span class='danger'>[src] blows apart!</span>")
-	var/turf/Tsec = get_turf(src)
-
-	new /obj/item/storage/firstaid(Tsec)
-	new /obj/item/assembly/prox_sensor(Tsec)
-	new /obj/item/scanner/health(Tsec)
-	if (prob(50))
-		new /obj/item/robot_parts/l_arm(Tsec)
-
-	if(reagent_glass)
-		reagent_glass.forceMove(Tsec)
-		reagent_glass = null
-
-	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
-	return
+/mob/living/bot/medbot/gib(do_gibs = TRUE)
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		new /obj/item/storage/firstaid(my_turf)
+		new /obj/item/assembly/prox_sensor(my_turf)
+		new /obj/item/scanner/health(my_turf)
+		if (prob(50))
+			new /obj/item/robot_parts/l_arm(my_turf)
+		if(reagent_glass)
+			reagent_glass.forceMove(my_turf)
+			reagent_glass = null
 
 /mob/living/bot/medbot/confirmTarget(var/mob/living/carbon/human/H)
 	if(!..())

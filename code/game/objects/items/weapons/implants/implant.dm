@@ -30,7 +30,7 @@
 		return 0
 
 	malfunction = MALFUNCTION_TEMPORARY
-	addtimer(CALLBACK(src,.proc/restore),time)
+	addtimer(CALLBACK(src,PROC_REF(restore)),time)
 	return 1
 
 /obj/item/implant/proc/restore()

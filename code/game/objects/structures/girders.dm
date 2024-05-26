@@ -8,7 +8,7 @@
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration =    MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	maxhealth = 100
+	max_health = 100
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
@@ -108,11 +108,11 @@
 			visible_message(SPAN_NOTICE("\The [user] slices apart \the [src] with \the [W]."))
 			dismantle()
 		return TRUE
-	if(istype(W, /obj/item/pickaxe/diamonddrill))
-		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		visible_message(SPAN_NOTICE("\The [user] begins drilling through \the [src] with \the [W]."))
-		if(do_after(user,reinf_material ? 60 : 40,src))
-			visible_message(SPAN_NOTICE("\The [user] drills through \the [src] with \the [W]."))
+
+	if(IS_PICK(W))
+		if(W.get_tool_quality(TOOL_PICK) < TOOL_QUALITY_GOOD)
+			to_chat(user, SPAN_WARNING("\The [W] is not powerful enough to destroy \the [src]."))
+		else if(W.do_tool_interaction(TOOL_PICK, user, src, (reinf_material ? 6 : 4) SECONDS, set_cooldown = TRUE))
 			dismantle()
 		return TRUE
 	// Reinforcing a girder, or turning it into a wall.
@@ -161,7 +161,7 @@
 	var/turf/Tsrc = get_turf(src)
 	Tsrc.ChangeTurf(/turf/simulated/wall)
 	var/turf/simulated/wall/T = get_turf(src)
-	T.set_material(S.material, reinf_material, material)
+	T.set_turf_materials(S.material, reinf_material, null, material)
 	T.can_open = prepped_for_fakewall
 	T.add_hiddenprint(usr)
 	material = null
@@ -196,7 +196,7 @@
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
-	maxhealth = 150
+	max_health = 150
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()

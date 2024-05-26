@@ -49,8 +49,9 @@
 	accept_mobs |= /mob/living/simple_animal/borer
 	. = ..()
 
-/mob/death()
-	var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
-	if(B && B.controlling)
-		B.detach_from_host()
+/mob/death(gibbed)
 	. = ..()
+	if(. && !gibbed)
+		var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
+		if(B && B.controlling)
+			B.detach_from_host()

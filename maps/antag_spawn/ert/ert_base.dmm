@@ -1915,7 +1915,7 @@
 /area/map_template/rescue_base/base)
 "dU" = (
 /obj/structure/table/steel,
-/obj/item/storage/fancy/cigar,
+/obj/item/storage/box/fancy/cigar,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -2194,8 +2194,8 @@
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/inflatable_dispenser,
 /obj/item/inflatable_dispenser,
-/obj/item/pickaxe/diamonddrill,
-/obj/item/pickaxe/diamonddrill,
+/obj/item/tool/drill/diamond,
+/obj/item/tool/drill/diamond,
 /obj/item/storage/briefcase/inflatable{
 	pixel_x = 3;
 	pixel_y = 3
@@ -2283,10 +2283,10 @@
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
@@ -2449,24 +2449,18 @@
 /turf/simulated/wall/titanium,
 /area/map_template/rescue_base/start)
 "eV" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "eW" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "rescuedock";
 	name = "Blast Shutters";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2483,7 +2477,6 @@
 "eY" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescuebridge";
 	name = "Window Shutters Control";
 	pixel_y = -4
@@ -2580,7 +2573,6 @@
 /area/map_template/rescue_base/start)
 "fl" = (
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescuedock";
 	name = "Window Shutters Control";
 	pixel_x = 24;
@@ -2697,13 +2689,10 @@
 	},
 /area/map_template/rescue_base/base)
 "fC" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2759,13 +2748,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fJ" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescueeva";
 	name = "Blast Shutters";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2849,7 +2835,7 @@
 /area/map_template/rescue_base/start)
 "fU" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fV" = (
@@ -2878,7 +2864,6 @@
 /obj/item/tank/jetpack/carbondioxide,
 /obj/item/tank/jetpack/carbondioxide,
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescueeva";
 	name = "Window Shutters Control";
 	pixel_x = 24;
@@ -3150,7 +3135,6 @@
 	},
 /obj/structure/iv_drip,
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescueinfirm";
 	name = "Window Shutters Control";
 	pixel_x = 24;
@@ -3166,13 +3150,10 @@
 /area/map_template/rescue_base/base)
 "gU" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Blast Shutters";
-	opacity = 0
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,
@@ -3219,19 +3200,16 @@
 /area/map_template/rescue_base/start)
 "hb" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescueinfirm";
 	name = "Blast Shutters";
-	opacity = 0
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "hc" = (
-/obj/item/pickaxe/diamonddrill,
+/obj/item/tool/drill/diamond,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},

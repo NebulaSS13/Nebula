@@ -131,12 +131,6 @@
 	if (SSevac.evacuation_controller?.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled the FTL jump.")
 
-/obj/screen/fullscreen/jump_overlay
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "mfoam"
-	screen_loc = ui_entire_screen
-	color = "#ff9900"
-	blend_mode = BLEND_SUBTRACT
 
 #undef EVAC_OPT_ABANDON_SHIP
 #undef EVAC_OPT_JUMP

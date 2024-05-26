@@ -26,7 +26,7 @@
 	if(client)
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
-			if(istype(screenobj) && !screenobj.globalscreen)
+			if(istype(screenobj) && !screenobj.is_global_screen)
 				qdel(screenobj)
 		client.screen = list()
 	if(mind)
@@ -36,7 +36,6 @@
 	return ..()
 
 /mob/proc/remove_screen_obj_references()
-	QDEL_NULL_SCREEN(hands)
 	QDEL_NULL_SCREEN(internals)
 	QDEL_NULL_SCREEN(oxygen)
 	QDEL_NULL_SCREEN(toxin)
@@ -44,6 +43,7 @@
 	QDEL_NULL_SCREEN(bodytemp)
 	QDEL_NULL_SCREEN(healths)
 	QDEL_NULL_SCREEN(throw_icon)
+	QDEL_NULL_SCREEN(maneuver_icon)
 	QDEL_NULL_SCREEN(nutrition_icon)
 	QDEL_NULL_SCREEN(hydration_icon)
 	QDEL_NULL_SCREEN(pressure)
@@ -64,6 +64,7 @@
 	if(ispath(move_intent))
 		move_intent = GET_DECL(move_intent)
 	. = ..()
+	ability_master = new(null, src)
 	refresh_ai_handler()
 	START_PROCESSING(SSmobs, src)
 
@@ -362,13 +363,16 @@
 				break
 
 	// Other incidentals.
-	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
+	var/obj/item/clothing/suit = get_equipped_item(slot_w_uniform_str)
 	if(istype(suit))
 		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
-		if(suit.has_sensor == SUIT_HAS_SENSORS)
-			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
-		if (suit.has_sensor && user.get_multitool())
-			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>[suit.has_sensor == SUIT_LOCKED_SENSORS ? "Unl" : "L"]ock sensors</A>"
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+	if(sensor)
+		if(sensor.get_sensors_locked())
+			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>Unlock vitals sensors</A>"
+		else if(user.get_multitool())
+			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>Lock vitals sensors</A>"
+			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set vitals sensors</A>"
 	if(get_equipped_item(slot_handcuffed_str))
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed_str]'>Handcuffed</A>"
 
@@ -399,7 +403,7 @@
 
 	face_atom(A)
 
-	if(!isghost(src) && config.visible_examine)
+	if(!isghost(src) && get_config_value(/decl/config/toggle/visible_examine))
 		if((A.loc != src || (A in get_held_items())))
 			var/look_target = "at \the [A]"
 			if(isobj(A.loc))
@@ -548,6 +552,9 @@
 		return TOPIC_HANDLED
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
+/mob/proc/get_comments_record()
+	return
+
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
 
 	if(href_list["refresh"])
@@ -563,6 +570,14 @@
 		var/datum/browser/popup = new(user, ckey(name), name, 500, 200)
 		var/list/html = list("<h3>Appearance</h3>")
 		html += replacetext(flavor_text, "\n", "<BR>")
+		var/datum/character_information/comments = get_comments_record()
+		if(comments)
+			if(comments.ic_info)
+				html += "<h3>IC Information</h3>"
+				html += "[comments.ic_info]<br/>"
+			if(comments.ooc_info)
+				html += "<h3>OOC Information</h3>"
+				html += "[comments.ooc_info]<br/>"
 		popup.set_content(jointext(html, null))
 		popup.open()
 		return TOPIC_HANDLED
@@ -590,7 +605,7 @@
 			return TRUE
 	return FALSE
 
-/mob/handle_mouse_drop(atom/over, mob/user)
+/mob/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && user != src && !isAI(user))
 		show_stripping_window(user)
 		return TRUE
@@ -682,7 +697,7 @@
 			if(statpanel("Turf"))
 				stat(listed_turf)
 				for(var/atom/A in listed_turf)
-					if(!A.mouse_opacity)
+					if(!A.simulated || !A.mouse_opacity)
 						continue
 					if(A.invisibility > see_invisible)
 						continue
@@ -700,10 +715,9 @@
 	return 0
 
 //Updates lying and icons
-/mob/proc/UpdateLyingBuckledAndVerbStatus()
-	var/last_lying = lying
+/mob/proc/update_lying()
 	if(!resting && cannot_stand() && can_stand_overridden())
-		lying = 0
+		lying = FALSE
 	else if(buckled)
 		anchored = TRUE
 		if(istype(buckled))
@@ -716,12 +730,16 @@
 	else
 		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 
+/mob/proc/UpdateLyingBuckledAndVerbStatus()
+	var/last_lying = lying
+	update_lying()
+	if(buckled)
+		anchored = (!istype(buckled) || !buckled.buckle_movable)
 	if(lying)
 		set_density(0)
 		drop_held_items()
 	else
 		set_density(initial(density))
-
 	reset_layer()
 
 	//Temporarily moved here from the various life() procs
@@ -776,7 +794,12 @@
 	return
 
 /mob/proc/get_species_name()
-	return ""
+	SHOULD_CALL_PARENT(TRUE)
+	return "Unknown"
+
+/mob/living/get_species_name()
+	var/decl/species/my_species = get_species()
+	return my_species?.name || ..()
 
 /mob/proc/get_visible_implants(var/class = 0)
 	var/list/visible_implants = list()
@@ -806,7 +829,7 @@
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	LAZYREMOVE(embedded, implant)
-	adjustBruteLoss(5)
+	adjustBruteLoss(5, do_update_health = FALSE)
 	adjustFireLoss(10)
 	. = ..()
 
@@ -1015,7 +1038,7 @@
 /client/verb/body_groin()
 	set name = "body-groin"
 	set hidden = 1
-	toggle_zone_sel(list(BP_GROIN))
+	toggle_zone_sel(list(BP_GROIN,BP_TAIL))
 
 /client/verb/body_r_leg()
 	set name = "body-r-leg"
@@ -1031,7 +1054,7 @@
 	if(!check_has_body_select())
 		return
 	var/obj/screen/zone_selector/selector = mob.zone_sel
-	selector.set_selected_zone(next_in_list(mob.get_target_zone(),zones))
+	selector.set_selected_zone(next_in_list(mob.get_target_zone(), zones))
 
 /mob/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
@@ -1062,12 +1085,55 @@
 		return 0
 	return 1
 
-// Let simple mobs press buttons and levers but nothing more complex.
-/mob/proc/get_dexterity(var/silent = FALSE)
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		return my_species.get_manual_dexterity()
-	return DEXTERITY_BASE
+// Mobs further up the chain should override this proc if they want to return a simple dexterity value.
+/mob/proc/get_dexterity(var/silent)
+
+	// Check if we have a slot to use for this.
+	var/check_slot = get_active_held_item_slot()
+	if(!check_slot)
+		return DEXTERITY_NONE
+	var/datum/inventory_slot/gripper/gripper = get_inventory_slot_datum(check_slot)
+	if(!istype(gripper))
+		if(!silent)
+			to_chat(src, "Your [parse_zone(check_slot)] is missing!")
+		return DEXTERITY_NONE
+
+	// Work out if we have any brain damage impacting our dexterity.
+	var/dex_malus = 0
+	var/braindamage = getBrainLoss()
+	if(braindamage)
+		var/brainloss_threshold = get_config_value(/decl/config/num/dex_malus_brainloss_threshold)
+		if(braindamage > brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
+			dex_malus = clamp(CEILING((braindamage-brainloss_threshold)/10), 0, length(global.dexterity_levels))
+			if(dex_malus > 0)
+				dex_malus = global.dexterity_levels[dex_malus]
+
+	// If this slot does not need an organ we just go off the dexterity of the slot itself.
+	if(isnull(gripper.requires_organ_tag))
+		if(dex_malus)
+			if(!silent)
+				to_chat(src, SPAN_WARNING("Your [lowertext(gripper.slot_name)] doesn't respond properly!"))
+			return (gripper.get_dexterity(silent) & ~dex_malus)
+		return gripper.get_dexterity(silent)
+
+	// If this slot requires an organ, do the appropriate organ checks.
+	check_slot = gripper.requires_organ_tag
+	var/obj/item/organ/external/active_hand = GET_EXTERNAL_ORGAN(src, check_slot)
+	if(!active_hand)
+		if(!silent)
+			to_chat(src, "Your [parse_zone(check_slot)] is missing!")
+		return DEXTERITY_NONE
+	if(!active_hand.is_usable())
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your [active_hand.name] is unusable!"))
+		return DEXTERITY_NONE
+
+	// Return our organ dexterity.
+	if(dex_malus)
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't respond properly!"))
+		return (active_hand.get_manual_dexterity() & ~dex_malus)
+	return active_hand.get_manual_dexterity()
 
 /mob/proc/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent = FALSE)
 	. = (get_dexterity(silent) & dex_level) == dex_level
@@ -1087,9 +1153,12 @@
 		to_chat(src, SPAN_WARNING("You scrawl down some meaningless lines."))
 	. = stars(text_content, 5)
 
-// mobs do not have mouths by default
+// mobs do not have mouths by default, unless provided by an organ
 /mob/proc/check_has_mouth()
-	return FALSE
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
+	if(!H || !istype(H) || !H.can_intake_reagents)
+		return FALSE
+	return TRUE
 
 /mob/proc/check_has_eyes()
 	return TRUE
@@ -1302,10 +1371,10 @@
 /mob/verb/whisper_wrapper()
 	set name = ".Whisper"
 	set hidden = TRUE
-	if(config.show_typing_indicator_for_whispers)
+	if(get_config_value(/decl/config/toggle/show_typing_indicator_for_whispers))
 		SStyping.set_indicator_state(client, TRUE)
 	var/message = input("","me (text)") as text|null
-	if(config.show_typing_indicator_for_whispers)
+	if(get_config_value(/decl/config/toggle/show_typing_indicator_for_whispers))
 		SStyping.set_indicator_state(client, FALSE)
 	if (message)
 		whisper(message)
@@ -1313,7 +1382,7 @@
 // Darksight procs.
 /mob/proc/refresh_lighting_master()
 	if(!lighting_master)
-		lighting_master = new
+		lighting_master = new(null, src)
 	if(client)
 		client.screen |= lighting_master
 
@@ -1327,9 +1396,9 @@
 	return
 
 /mob/proc/get_target_zone()
-	return zone_sel?.selecting
+	return zone_sel?.selecting || BP_CHEST
 
-/mob/proc/get_temperature_threshold(var/threshold)
+/mob/proc/get_default_temperature_threshold(threshold)
 	switch(threshold)
 		if(COLD_LEVEL_1)
 			return 243
@@ -1344,7 +1413,22 @@
 		if(HEAT_LEVEL_3)
 			return 1000
 		else
-			CRASH("base get_temperature_threshold() called with invalid threshold value.")
+			CRASH("base get_default_temperature_threshold() called with invalid threshold value.")
+
+/mob/proc/get_mob_temperature_threshold(threshold, bodypart)
+
+	// If we have organs, return the requested organ.
+	if(bodypart)
+		var/obj/item/organ/external/organ = get_organ(bodypart)
+		if(organ?.bodytype)
+			return organ.bodytype.get_body_temperature_threshold(threshold)
+
+	// If we have a bodytype, use that.
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype)
+		return root_bodytype.get_body_temperature_threshold(threshold)
+
+	return get_default_temperature_threshold(threshold)
 
 /mob/proc/get_unique_enzymes()
 	return
@@ -1363,3 +1447,17 @@
 /mob/get_overhead_text_y_offset()
 	return offset_overhead_text_y
 
+/mob/can_be_injected_by(var/atom/injector)
+	return FALSE // Handled elsewhere in syringe logic.
+
+/mob/proc/getBrainLoss()
+	return 0
+
+/mob/proc/get_bodytype_category()
+	return get_bodytype()?.bodytype_category
+
+/mob/proc/get_overlay_state_modifier()
+	return
+
+/mob/proc/nervous_system_failure()
+	return FALSE

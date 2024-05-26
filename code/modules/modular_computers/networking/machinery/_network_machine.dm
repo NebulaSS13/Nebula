@@ -37,8 +37,8 @@
 		install_component(/obj/item/stock_parts/computer/lan_port, FALSE)
 
 /obj/machinery/network/proc/is_overheated()
-	var/turf/simulated/L = loc
-	if(istype(L))
+	var/turf/L = loc
+	if(istype(L) && L.simulated)
 		var/datum/gas_mixture/env = L.return_air()
 		if(env.temperature >= heat_threshold)
 			return TRUE
@@ -53,8 +53,8 @@
 /obj/machinery/network/proc/produce_heat()
 	if (!produces_heat || !use_power || !operable())
 		return
-	var/turf/simulated/L = loc
-	if(istype(L))
+	var/turf/L = loc
+	if(istype(L) && L.simulated)
 		var/datum/gas_mixture/env = L.return_air()
 		var/transfer_moles = 0.25 * env.total_moles
 		var/datum/gas_mixture/removed = env.remove(transfer_moles) // Air is moved through computer vents.

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/device/scanner/breath_scanner.dmi'
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	material = /decl/material/solid/metal/aluminium
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	printout_color = "#deebff"
 	var/mode = 1
 

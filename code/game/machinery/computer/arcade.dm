@@ -12,7 +12,7 @@
 		/obj/item/energy_blade/sword/toy =                       200,
 		/obj/item/gun/projectile/revolver/capgun =               200,
 		/obj/item/gun/launcher/foam/crossbow =                   200,
-		/obj/item/storage/fancy/crayons =                        200,
+		/obj/item/storage/box/fancy/crayons =                    200,
 		/obj/item/toy/spinningtoy =                              200,
 		/obj/item/toy/prize/powerloader =                        100,
 		/obj/item/toy/prize/fireripley =                         100,

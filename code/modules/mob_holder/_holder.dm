@@ -7,7 +7,7 @@
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 	origin_tech = null
 	pixel_y = 8
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	use_single_icon = TRUE
 	item_state = null
 	is_spawnable_type = FALSE
@@ -20,10 +20,10 @@
 
 /obj/item/holder/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE)
-	clear_vis_contents(src)
+	clear_vis_contents()
 	for(var/atom/movable/AM in src)
 		AM.vis_flags |= (VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE)
-		add_vis_contents(src, AM)
+		add_vis_contents(AM)
 
 // No scooping mobs and handing them to people who can't scoop them.
 /obj/item/holder/equipped(mob/user, slot)
@@ -35,7 +35,7 @@
 			break
 
 // Grab our inhands from the mob we're wrapping, if they have any.
-/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	var/mob/M = locate() in contents
 	if(istype(M))
 		icon =  M.get_holder_icon()
@@ -60,7 +60,7 @@
 	destroy_all()
 
 /obj/item/holder/Destroy()
-	clear_vis_contents(src)
+	clear_vis_contents()
 	for(var/atom/movable/AM in src)
 		unregister_all_movement(last_holder, AM)
 		AM.vis_flags = initial(AM.vis_flags)

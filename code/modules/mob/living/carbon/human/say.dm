@@ -58,32 +58,6 @@
 /mob/living/carbon/human/say_understands(mob/speaker, decl/language/speaking)
 	return (!speaking && (issilicon(speaker) || istype(speaker, /mob/announcer) || isbrain(speaker))) || ..()
 
-/mob/living/carbon/human/GetVoice()
-
-	var/voice_sub
-	var/obj/item/rig/rig = get_rig()
-	if(rig?.speech?.voice_holder?.active && rig.speech.voice_holder.voice)
-		voice_sub = rig.speech.voice_holder.voice
-
-	if(!voice_sub)
-
-		var/list/check_gear = list(get_equipped_item(slot_wear_mask_str), get_equipped_item(slot_head_str))
-		if(rig)
-			var/datum/extension/armor/rig/armor_datum = get_extension(rig, /datum/extension/armor)
-			if(istype(armor_datum) && armor_datum.sealed && rig.helmet == get_equipped_item(slot_head_str))
-				check_gear |= rig
-
-		for(var/obj/item/gear in check_gear)
-			if(!gear)
-				continue
-			var/obj/item/voice_changer/changer = locate() in gear
-			if(changer && changer.active && changer.voice)
-				voice_sub = changer.voice
-
-	if(voice_sub)
-		return voice_sub
-	return real_name
-
 /mob/living/carbon/human/say_quote(var/message, var/decl/language/speaking = null)
 	var/verb = "says"
 	var/ending = copytext(message, length(message))

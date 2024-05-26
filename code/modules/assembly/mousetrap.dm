@@ -2,7 +2,7 @@
 	name = "rat trap"
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
-	origin_tech = "{'combat':1}"
+	origin_tech = @'{"combat":1}'
 	material = /decl/material/solid/organic/wood
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/armed = 0
@@ -42,7 +42,7 @@
 					SET_STATUS_MAX(H, STAT_STUN, 3)
 		if(affecting)
 			affecting.take_external_damage(1, 0)
-			H.updatehealth()
+
 	else if(ismouse(target))
 		var/mob/living/simple_animal/mouse/M = target
 		visible_message("<span class='danger'>SPLAT!</span>")

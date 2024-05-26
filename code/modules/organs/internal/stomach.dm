@@ -104,8 +104,8 @@
 					qdel(M)
 					continue
 
-				M.adjustBruteLoss(3)
-				M.adjustFireLoss(3)
+				M.adjustBruteLoss(3, do_update_health = FALSE)
+				M.adjustFireLoss(3, do_update_health = FALSE)
 				M.adjustToxLoss(3)
 
 				var/digestion_product = M.get_digestion_product()

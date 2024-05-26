@@ -1,6 +1,5 @@
 /datum/hud/slime/FinalizeInstantiation()
-	var/obj/screen/using
-	using = new /obj/screen/intent()
-	src.adding += using
-	action_intent = using
+	action_intent = new /obj/screen/intent(null, mymob, mymob, get_ui_style_data(), get_ui_color(), get_ui_alpha(), UI_ICON_INTENT)
+	src.adding = list(action_intent)
+
 	..()

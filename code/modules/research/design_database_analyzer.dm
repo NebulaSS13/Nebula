@@ -114,7 +114,7 @@
 		loaded_item = O
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]."))
 		flick("d_analyzer_la", src)
-		addtimer(CALLBACK(src, .proc/refresh_busy), 1 SECOND)
+		addtimer(CALLBACK(src, PROC_REF(refresh_busy)), 1 SECOND)
 		return TRUE
 
 /obj/machinery/destructive_analyzer/proc/refresh_busy()
@@ -140,12 +140,12 @@
 	else
 		loaded_item = null
 	flick("d_analyzer_process", src)
-	addtimer(CALLBACK(src, .proc/refresh_busy), 2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(refresh_busy)), 2 SECONDS)
 
 /obj/item/research
 	name = "research debugging device"
 	desc = "Instant research tool. For testing purposes only."
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "smes_coil"
-	origin_tech = "{'materials':19,'engineering':19,'exoticmatter':19,'powerstorage':19,'wormholes':19,'biotech':19,'combat':19,'magnets':19,'programming':19,'esoteric':19}"
+	origin_tech = @'{"materials":19,"engineering":19,"exoticmatter":19,"powerstorage":19,"wormholes":19,"biotech":19,"combat":19,"magnets":19,"programming":19,"esoteric":19}'
 	max_health = ITEM_HEALTH_NO_DAMAGE

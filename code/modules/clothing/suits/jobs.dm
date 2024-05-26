@@ -69,7 +69,7 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/taperecorder)
+	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/storage/box/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/taperecorder)
 	protects_against_weather = TRUE
 
 /obj/item/clothing/suit/storage/det_trench/grey
@@ -85,7 +85,7 @@
 		ARMOR_LASER = ARMOR_LASER_SMALL,
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
-	origin_tech = "{'materials':2, 'engineering':2}"
+	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 //Forensics
@@ -101,7 +101,7 @@
 		ARMOR_LASER = ARMOR_LASER_MINOR,
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
-	origin_tech = "{'materials':2, 'engineering':2}"
+	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/suit/storage/forensics/red

@@ -117,7 +117,7 @@
 
 /obj/effect/gateway/active/Initialize()
 	. = ..()
-	addtimer(CALLBACK(src, .proc/create_and_delete), rand(30,60) SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(create_and_delete)), rand(30,60) SECONDS)
 
 
 /obj/effect/gateway/active/proc/create_and_delete()
@@ -150,8 +150,7 @@
 
 	if(isrobot(M))
 		var/mob/living/silicon/robot/Robot = M
-		if(Robot.mmi)
-			qdel(Robot.mmi)
+		QDEL_NULL(Robot.central_processor)
 	else
 		for(var/obj/item/W in M)
 			M.drop_from_inventory(W)

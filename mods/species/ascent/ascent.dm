@@ -8,7 +8,6 @@
 #define BODY_FLAG_ALATE BITFLAG(4)
 #define BODY_FLAG_GYNE  BITFLAG(5)
 
-#define BP_M_HAND       "midlimb"
 
 #define MANTIDIFY(_thing, _name, _desc) \
 ##_thing/ascent/name = _name; \
@@ -19,9 +18,3 @@
 
 /decl/modpack/ascent
 	name = "The Ascent"
-
-/decl/modpack/ascent/pre_initialize()
-	. = ..()
-	global.all_limb_tags |= BP_M_HAND
-	global.all_limb_tags_by_depth.Insert(global.all_limb_tags_by_depth.Find(BP_CHEST)+1,  BP_M_HAND)
-	global.all_inventory_slots |= BP_M_HAND

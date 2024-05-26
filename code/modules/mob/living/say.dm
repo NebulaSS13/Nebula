@@ -160,7 +160,7 @@
 			speaking = get_any_good_language(set_default=TRUE)
 			if (!speaking)
 				to_chat(src, SPAN_WARNING("You don't know a language and cannot speak."))
-				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
+				custom_emote(AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
 				return
 
 	if(handle_mob_specific_speech(message, message_mode, verb, speaking))
@@ -300,10 +300,10 @@
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/animate_speech_bubble, speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
-	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(animate_speech_bubble), speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
+	INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, speaking, italics, speech_bubble_recipients)
 	if(length(eavesdroppers))
-		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers)
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), stars(message), speaking, italics, eavesdroppers)
 
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")
@@ -317,4 +317,27 @@
 	return 1
 
 /mob/proc/GetVoice()
-	return name
+	var/voice_sub
+	var/obj/item/rig/rig = get_rig()
+	if(rig?.speech?.voice_holder?.active && rig.speech.voice_holder.voice)
+		voice_sub = rig.speech.voice_holder.voice
+
+	if(!voice_sub)
+
+		var/list/check_gear = list(get_equipped_item(slot_wear_mask_str), get_equipped_item(slot_head_str))
+		if(rig)
+			var/datum/extension/armor/rig/armor_datum = get_extension(rig, /datum/extension/armor)
+			if(istype(armor_datum) && armor_datum.sealed && rig.helmet == get_equipped_item(slot_head_str))
+				check_gear |= rig
+
+		for(var/obj/item/gear in check_gear)
+			if(!gear)
+				continue
+			var/obj/item/voice_changer/changer = locate() in gear
+			if(changer && changer.active && changer.voice)
+				voice_sub = changer.voice
+
+	if(voice_sub)
+		return voice_sub
+
+	return real_name

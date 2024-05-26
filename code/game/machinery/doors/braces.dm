@@ -9,7 +9,7 @@
 	attack_cooldown = 2.5*DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -25
 	material = /decl/material/solid/metal/steel
-	origin_tech = "{'engineering':3,'materials':2}"
+	origin_tech = @'{"engineering":3,"materials":2}'
 
 // BRACE - Can be installed on airlock to reinforce it and keep it closed.
 /obj/item/airlock_brace
@@ -21,7 +21,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	material_health_multiplier = 0.6
-	origin_tech = "{'engineering':3,'materials':2}"
+	origin_tech = @'{"engineering":3,"materials":2}'
 
 	var/obj/machinery/door/airlock/airlock = null
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/brace/electronics
@@ -102,7 +102,7 @@
 			return
 		if(C.weld(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			health = min(health + rand(20,30), max_health)
+			current_health = min(current_health + rand(20,30), get_max_health())
 			if(!is_damaged())
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else

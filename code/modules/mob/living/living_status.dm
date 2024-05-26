@@ -13,7 +13,7 @@
 	if(amount == PENDING_STATUS(src, condition))
 		return FALSE
 	LAZYSET(pending_status_counters, condition, amount)
-	addtimer(CALLBACK(src, .proc/apply_pending_status_changes), 0, TIMER_UNIQUE)
+	addtimer(CALLBACK(src, PROC_REF(apply_pending_status_changes)), 0, TIMER_UNIQUE)
 	return TRUE
 
 /mob/living/proc/rebuild_status_markers()

@@ -1,11 +1,11 @@
-/mob/living/exosuit/receive_mouse_drop(atom/dropping, mob/user)
+/mob/living/exosuit/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /obj/machinery/portable_atmospherics/canister))
-		body.receive_mouse_drop(dropping, user)
+		body.receive_mouse_drop(dropping, user, params)
 		return TRUE
 
-/mob/living/exosuit/handle_mouse_drop(atom/over, mob/user)
-	if(body?.handle_mouse_drop(over, user))
+/mob/living/exosuit/handle_mouse_drop(atom/over, mob/user, params)
+	if(body?.handle_mouse_drop(over, user, params))
 		return TRUE
 	. = ..()
 
@@ -81,12 +81,12 @@
 	if(!hatch_closed)
 		return max(shared_living_nano_distance(src_object), .) //Either visible to mech(outside) or visible to user (inside)
 
-/mob/living/exosuit/exosuit/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+/mob/living/exosuit/CanUseTopic(mob/user, datum/topic_state/state, href_list)
 	if(user in pilots)
 		return STATUS_INTERACTIVE
 	return ..()
 
-/mob/living/exosuit/get_dexterity(var/silent = FALSE)
+/mob/living/exosuit/get_dexterity(var/silent)
 	return DEXTERITY_FULL
 
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)

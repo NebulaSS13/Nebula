@@ -58,10 +58,16 @@
 		"hot",
 		"cold"
 	)
-
-	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
-
 	var/allow_multiple_instances_on_same_tile = FALSE
+
+/obj/machinery/door/firedoor/get_blend_objects()
+	var/static/list/blend_objects = list(
+		/obj/machinery/door/firedoor, 
+		/obj/structure/wall_frame, 
+		/turf/unsimulated/wall, 
+		/obj/structure/window
+	) // Objects which to blend with
+	return blend_objects
 
 /obj/machinery/door/firedoor/autoset
 	autoset_access = TRUE	//subtype just to make mapping away sites with custom access usage
@@ -461,11 +467,11 @@
 		return TRUE
 
 /obj/machinery/door/firedoor/border/update_nearby_tiles(need_rebuild)
-	var/turf/simulated/source = get_turf(src)
-	var/turf/simulated/destination = get_step(source,dir)
+	var/turf/source = get_turf(src)
+	var/turf/destination = get_step(source,dir)
 
 	update_heat_protection(loc)
 
-	if(istype(source)) SSair.mark_for_update(source)
-	if(istype(destination)) SSair.mark_for_update(destination)
+	if(istype(source) && source.simulated) SSair.mark_for_update(source)
+	if(istype(destination) && destination.simulated) SSair.mark_for_update(destination)
 	return TRUE

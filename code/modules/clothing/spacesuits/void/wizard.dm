@@ -34,8 +34,8 @@
 	siemens_coefficient = 0.7
 	wizard_garb = 1
 	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL //For gloves.
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS
-	cold_protection = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_LEGS | SLOT_FEET | SLOT_ARMS
+	body_parts_covered = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_LEGS | SLOT_FEET | SLOT_ARMS | SLOT_TAIL
+	cold_protection = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_LEGS | SLOT_FEET | SLOT_ARMS | SLOT_TAIL
 
 /obj/item/clothing/suit/space/void/wizard/Initialize()
 	. = ..()

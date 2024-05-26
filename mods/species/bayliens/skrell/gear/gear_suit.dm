@@ -4,7 +4,7 @@
 	desc = "Seems like a wetsuit with reinforced plating seamlessly attached to it. Very chic."
 	allowed = list(
 		/obj/item/rcd,
-		/obj/item/pickaxe,
+		/obj/item/tool,
 		/obj/item/t_scanner,
 		/obj/item/storage/ore,
 		/obj/item/tank
@@ -18,7 +18,7 @@
 		ARMOR_BIO = ARMOR_BIO_SMALL,
 		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
-	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	flags_inv = HIDEJUMPSUIT
 

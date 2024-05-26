@@ -48,7 +48,7 @@
 		icon_state = "[get_world_inventory_state()]_open"
 	update_held_icon()
 
-/obj/item/knife/folding/get_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/knife/folding/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	. = open ? ..() : new /image
 
 //Subtypes

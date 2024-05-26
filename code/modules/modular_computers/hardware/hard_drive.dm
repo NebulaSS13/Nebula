@@ -4,7 +4,7 @@
 	power_usage = 25					// SSD or something with low power usage
 	icon_state = "hdd_normal"
 	hardware_size = 1
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	var/max_capacity = 128
@@ -15,7 +15,7 @@
 	name = "advanced hard drive"
 	desc = "A small hybrid hard drive with 256GQ of storage capacity for use in higher grade computers where balance between power efficiency and capacity is desired."
 	max_capacity = 256
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	power_usage = 50 					// Hybrid, medium capacity and medium power storage
 	icon_state = "hdd_advanced"
 	hardware_size = 2
@@ -26,7 +26,7 @@
 	name = "super hard drive"
 	desc = "A small hard drive with 512GQ of storage capacity for use in cluster storage solutions where capacity is more important than power efficiency."
 	max_capacity = 512
-	origin_tech = "{'programming':3,'engineering':3}"
+	origin_tech = @'{"programming":3,"engineering":3}'
 	power_usage = 100					// High-capacity but uses lots of power, shortening battery life. Best used with APC link.
 	icon_state = "hdd_super"
 	hardware_size = 2
@@ -37,7 +37,7 @@
 	name = "cluster hard drive"
 	desc = "A large storage cluster consisting of multiple hard drives for usage in high capacity storage systems. Has capacity of 2048 GQ."
 	power_usage = 500
-	origin_tech = "{'programming':4,'engineering':4}"
+	origin_tech = @'{"programming":4,"engineering":4}'
 	max_capacity = 2048
 	icon_state = "hdd_cluster"
 	hardware_size = 3
@@ -49,7 +49,7 @@
 	name = "small hard drive"
 	desc = "A small highly efficient solid state drive for portable devices."
 	power_usage = 10
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	max_capacity = 64
 	icon_state = "hdd_small"
 	hardware_size = 1
@@ -60,7 +60,7 @@
 	name = "micro hard drive"
 	desc = "A small micro hard drive for portable devices."
 	power_usage = 2
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	max_capacity = 32
 	icon_state = "hdd_micro"
 	hardware_size = 1

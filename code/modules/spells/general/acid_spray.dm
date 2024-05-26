@@ -21,7 +21,7 @@
 	for(var/mod in list(315, 0, 45))
 		var/obj/effect/effect/water/chempuff/chem = new(get_turf(target))
 		chem.create_reagents(10)
-		chem.reagents.add_reagent(reagent_type,10)
+		chem.add_to_reagents(reagent_type,10)
 		chem.set_color()
 		spawn(0)
 			chem.set_up(get_ranged_target_turf(target, angle2dir(angle+mod), 3))

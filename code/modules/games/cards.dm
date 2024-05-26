@@ -264,7 +264,7 @@ var/global/list/card_decks = list()
 	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
 
-/obj/item/deck/handle_mouse_drop(atom/over, mob/user)
+/obj/item/deck/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && (loc == user || in_range(src, user)) && user.get_empty_hand_slot())
 		user.put_in_hands(src)
 		return TRUE

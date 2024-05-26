@@ -14,10 +14,7 @@
 		return
 	if(!buffer)
 		buffer = data
-		if(latency)
-			addtimer(CALLBACK(src, .proc/transmit), latency)
-		else
-			transmit()
+		addtimer(CALLBACK(src, PROC_REF(transmit)), latency)
 	else
 		buffer |= data
 
@@ -53,7 +50,7 @@
 		start_processing(machine)
 	for(var/thing in transmit_on_change)
 		var/decl/public_access/public_variable/variable = transmit_on_change[thing]
-		variable.register_listener(src, machine, .proc/var_changed)
+		variable.register_listener(src, machine, PROC_REF(var_changed))
 
 /obj/item/stock_parts/radio/transmitter/basic/on_uninstall(obj/machinery/machine)
 	for(var/thing in transmit_on_change)
@@ -93,7 +90,7 @@
 	if(!is_valid_event(machine, event))
 		event = null
 	if(event)
-		event.register_listener(src, machine, .proc/trigger_event)
+		event.register_listener(src, machine, PROC_REF(trigger_event))
 
 /obj/item/stock_parts/radio/transmitter/on_event/on_uninstall(obj/machinery/machine)
 	if(event)

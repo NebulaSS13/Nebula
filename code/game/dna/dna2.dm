@@ -17,23 +17,15 @@
 #define DNA_HARD_BOUNDS    list(1,3490,3500,4095)
 
 // UI Indices (can change to mutblock style, if desired)
-#define DNA_UI_HAIR_R      1
-#define DNA_UI_HAIR_G      2
-#define DNA_UI_HAIR_B      3
-#define DNA_UI_BEARD_R     4
-#define DNA_UI_BEARD_G     5
-#define DNA_UI_BEARD_B     6
-#define DNA_UI_SKIN_TONE   7
-#define DNA_UI_SKIN_R      8
-#define DNA_UI_SKIN_G      9
-#define DNA_UI_SKIN_B      10
-#define DNA_UI_EYES_R      11
-#define DNA_UI_EYES_G      12
-#define DNA_UI_EYES_B      13
-#define DNA_UI_GENDER      14
-#define DNA_UI_BEARD_STYLE 15
-#define DNA_UI_HAIR_STYLE  16
-#define DNA_UI_LENGTH      16 // Update this when you add something, or you WILL break shit.
+#define DNA_UI_SKIN_TONE   1
+#define DNA_UI_SKIN_R      2
+#define DNA_UI_SKIN_G      3
+#define DNA_UI_SKIN_B      4
+#define DNA_UI_EYES_R      5
+#define DNA_UI_EYES_G      6
+#define DNA_UI_EYES_B      7
+#define DNA_UI_GENDER      8
+#define DNA_UI_LENGTH      8 // Update this when you add something, or you WILL break shit.
 
 #define DNA_SE_LENGTH 27
 // For later:
@@ -80,20 +72,20 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 	// New stuff
 	var/species
-	var/list/body_markings = list()
+	var/list/heritable_sprite_accessories = list()
 	var/lineage
 	//#TODO: Keep track of bodytype!!!!!
 
 // Make a copy of this strand.
 /datum/dna/PopulateClone(datum/dna/clone)
 	clone = ..()
-	clone.lineage        = lineage
-	clone.unique_enzymes = unique_enzymes
-	clone.fingerprint    = fingerprint
-	clone.b_type         = b_type
-	clone.real_name      = real_name
-	clone.species        = species || global.using_map.default_species
-	clone.body_markings  = deepCopyList(body_markings)
+	clone.lineage                      = lineage
+	clone.unique_enzymes               = unique_enzymes
+	clone.fingerprint                  = fingerprint
+	clone.b_type                       = b_type
+	clone.real_name                    = real_name
+	clone.species                      = species || global.using_map.default_species
+	clone.heritable_sprite_accessories = deepCopyList(heritable_sprite_accessories)
 	for(var/b in 1 to DNA_SE_LENGTH)
 		clone.SE[b] = SE[b]
 		if(b <= DNA_UI_LENGTH)
@@ -121,21 +113,15 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	// INITIALIZE!
 	ResetUI(1)
 
-	SetUIValueRange(DNA_UI_HAIR_R,  HEX_RED(character.hair_colour),          255, 1)
-	SetUIValueRange(DNA_UI_HAIR_G,  HEX_GREEN(character.hair_colour),        255, 1)
-	SetUIValueRange(DNA_UI_HAIR_B,  HEX_BLUE(character.hair_colour),         255, 1)
+	var/eye_colour = character.get_eye_colour()
+	SetUIValueRange(DNA_UI_EYES_R,  HEX_RED(eye_colour),           255, 1)
+	SetUIValueRange(DNA_UI_EYES_G,  HEX_GREEN(eye_colour),         255, 1)
+	SetUIValueRange(DNA_UI_EYES_B,  HEX_BLUE(eye_colour),          255, 1)
 
-	SetUIValueRange(DNA_UI_BEARD_R, HEX_RED(character.facial_hair_colour),   255, 1)
-	SetUIValueRange(DNA_UI_BEARD_G, HEX_GREEN(character.facial_hair_colour), 255, 1)
-	SetUIValueRange(DNA_UI_BEARD_B, HEX_BLUE(character.facial_hair_colour),  255, 1)
-
-	SetUIValueRange(DNA_UI_EYES_R,  HEX_RED(character.eye_colour),           255, 1)
-	SetUIValueRange(DNA_UI_EYES_G,  HEX_GREEN(character.eye_colour),         255, 1)
-	SetUIValueRange(DNA_UI_EYES_B,  HEX_BLUE(character.eye_colour),          255, 1)
-
-	SetUIValueRange(DNA_UI_SKIN_R,  HEX_RED(character.skin_colour),          255, 1)
-	SetUIValueRange(DNA_UI_SKIN_G,  HEX_GREEN(character.skin_colour),        255, 1)
-	SetUIValueRange(DNA_UI_SKIN_B,  HEX_BLUE(character.skin_colour),         255, 1)
+	var/skin_colour = character.get_skin_colour()
+	SetUIValueRange(DNA_UI_SKIN_R,  HEX_RED(skin_colour),          255, 1)
+	SetUIValueRange(DNA_UI_SKIN_G,  HEX_GREEN(skin_colour),        255, 1)
+	SetUIValueRange(DNA_UI_SKIN_B,  HEX_BLUE(skin_colour),         255, 1)
 
 	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,           1) // Value can be negative.
 
@@ -144,18 +130,11 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	fingerprint    = character.get_full_print(ignore_blockers = TRUE)
 	unique_enzymes = character.get_unique_enzymes()
 
-	// Hair
-	var/list/hair_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
-	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair_types.Find(character.h_style),  length(hair_types), 1)
-
-	// Facial Hair
-	var/list/beard_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
-	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.f_style), length(beard_types), 1)
-
-	body_markings.Cut()
+	heritable_sprite_accessories.Cut()
 	for(var/obj/item/organ/external/E in character.get_external_organs())
-		if(LAZYLEN(E.markings))
-			body_markings[E.organ_tag] = E.markings.Copy()
+		var/list/sprite_accessories = E.get_heritable_sprite_accessories()
+		if(LAZYLEN(sprite_accessories))
+			heritable_sprite_accessories[E.organ_tag] = sprite_accessories
 
 	b_type = character.get_blood_type()
 
@@ -328,7 +307,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	SetSEBlock(block,newBlock,defer)
 
 /proc/EncodeDNABlock(var/value)
-	return add_zero2(num2hex(value,1), 3)
+	return num2hex_padded(value, 3)
 
 /datum/dna/proc/UpdateUI()
 	src.uni_identity=""

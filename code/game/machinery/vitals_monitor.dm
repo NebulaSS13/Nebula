@@ -64,7 +64,7 @@
 	if(beep && victim && victim.get_pulse())
 		playsound(src, 'sound/machines/quiet_beep.ogg', 40)
 
-/obj/machinery/vitals_monitor/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/machinery/vitals_monitor/handle_mouse_drop(atom/over, mob/user, params)
 	if(ishuman(over))
 		if(victim)
 			victim = null

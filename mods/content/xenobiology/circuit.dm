@@ -30,7 +30,7 @@
 		set_pin_data(IC_OUTPUT, 2, T.is_adult)
 		set_pin_data(IC_OUTPUT, 3, T.nutrition/T.get_max_nutrition())
 		set_pin_data(IC_OUTPUT, 4, T.powerlevel)
-		set_pin_data(IC_OUTPUT, 5, round(T.health/T.maxHealth,0.01)*100)
+		set_pin_data(IC_OUTPUT, 5, T.get_health_percent(0.001))
 		set_pin_data(IC_OUTPUT, 6, slime_data.descendants?.Copy())
 		set_pin_data(IC_OUTPUT, 7, T.mutation_chance)
 		set_pin_data(IC_OUTPUT, 8, T.cores)

@@ -72,10 +72,10 @@ var/global/list/slime_pain_messages = list(
 	var/protection = (1 - get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO))
 	adjustCloneLoss((attacker.is_adult ? 10 : 5) * protection)
 	adjustToxLoss(1 * protection)
-	if(health <= 0)
+	if(current_health <= 0)
 		adjustToxLoss(1 * protection)
 	if(prob(15) && client)
 		handle_additional_slime_effects()
 	. = 15 * protection
-	if(stat == DEAD || getCloneLoss() >= maxHealth)
+	if(stat == DEAD || getCloneLoss() >= get_max_health())
 		eaten_by_slime()

@@ -10,4 +10,4 @@
 	if(prob(wander_prob) && !LAZYLEN(body.grabbed_by) && isturf(body.loc)) //won't move if being pulled
 		body.SelfMove(pick(global.cardinal))
 	if(prob(emote_prob))
-		body.emote(pick("scratch","jump","chirp","tail"))
+		body.emote(pick(/decl/emote/visible/scratch, /decl/emote/visible/jump, /decl/emote/audible/chirp, /decl/emote/visible/tail))

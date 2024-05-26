@@ -10,27 +10,56 @@
 	return fluid_can_pass
 
 /turf/proc/remove_fluid(var/amount = 0)
-	var/obj/effect/fluid/F = locate() in src
-	if(F)
-		F.reagents.remove_any(amount)
+	if(reagents)
+		remove_any_reagents(amount)
 
-/turf/return_fluid()
-	return (locate(/obj/effect/fluid) in contents)
+/turf/proc/displace_all_reagents()
+	UPDATE_FLUID_BLOCKED_DIRS(src)
+	var/list/spread_into_neighbors
+	var/turf/neighbor
+	var/coming_from
+	for(var/spread_dir in global.cardinal)
+		if(fluid_blocked_dirs & spread_dir)
+			continue
+		neighbor = get_step(src, spread_dir)
+		if(!neighbor)
+			continue
+		UPDATE_FLUID_BLOCKED_DIRS(neighbor)
+		coming_from = global.reverse_dir[spread_dir]
+		if((neighbor.fluid_blocked_dirs & coming_from) || !neighbor.CanFluidPass(coming_from) || neighbor.is_flooded(absolute = TRUE) || !neighbor.CanFluidPass(global.reverse_dir[spread_dir]))
+			continue
+		LAZYDISTINCTADD(spread_into_neighbors, neighbor)
+	if(length(spread_into_neighbors))
+		var/spreading = round(reagents.total_volume / length(spread_into_neighbors))
+		if(spreading > 0)
+			for(var/turf/spread_into_turf as anything in spread_into_neighbors)
+				reagents.trans_to_turf(spread_into_turf, spreading)
+	reagents?.clear_reagents()
 
-/turf/proc/make_unflooded(var/force)
-	if(force || flooded)
-		flooded = FALSE
-		REMOVE_ACTIVE_FLUID_SOURCE(src)
-		remove_vis_contents(src, global.flood_object)
-		fluid_update() // We are now floodable, so wake up our neighbors.
+/turf/proc/set_flooded(new_flooded, force = FALSE, skip_vis_contents_update = FALSE, mapload = FALSE)
 
-/turf/proc/make_flooded(var/force)
-	if(force || !flooded)
-		flooded = TRUE
-		for(var/obj/effect/fluid/fluid in src)
-			qdel(fluid)
+	// Don't do unnecessary work.
+	if(!force && new_flooded == flooded)
+		return
+
+	// Remove our old overlay if necessary.
+	if(flooded && new_flooded != flooded && !skip_vis_contents_update)
+		var/flood_object = get_flood_overlay(flooded)
+		if(flood_object)
+			remove_vis_contents(src, flood_object)
+
+	// Set our flood state.
+	flooded = new_flooded
+	if(flooded)
+		QDEL_NULL(reagents)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-		add_vis_contents(src, global.flood_object)
+		if(!skip_vis_contents_update)
+			var/flood_object = get_flood_overlay(flooded)
+			if(flood_object)
+				add_vis_contents(flood_object)
+	else if(!mapload)
+		REMOVE_ACTIVE_FLUID_SOURCE(src)
+		fluid_update() // We are now floodable, so wake up our neighbors.
 
 /turf/is_flooded(var/lying_mob, var/absolute)
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))
@@ -39,53 +68,45 @@
 	. = (get_fluid_depth() >= min)
 
 /turf/proc/get_fluid_name()
-	var/obj/effect/fluid/F = return_fluid()
-	if(istype(F) && F.reagents?.primary_reagent)
-		return F.reagents.get_primary_reagent_name()
-	return "liquid"
+	var/decl/material/mat = reagents?.get_primary_reagent_decl()
+	return mat?.liquid_name || "liquid"
 
 /turf/get_fluid_depth()
 	if(is_flooded(absolute=1))
 		return FLUID_MAX_DEPTH
-	var/obj/effect/fluid/F = return_fluid()
-	if(istype(F))
-		return F.reagents.total_volume
 	var/obj/structure/glass_tank/aquarium = locate() in contents
-	if(aquarium && aquarium.reagents && aquarium.reagents.total_volume)
-		return aquarium.reagents.total_volume * TANK_WATER_MULTIPLIER
-	return 0
+	if(aquarium)
+		return aquarium.reagents?.total_volume * TANK_WATER_MULTIPLIER
+	return reagents?.total_volume || 0
 
 /turf/proc/show_bubbles()
 	set waitfor = FALSE
-	if(flooded)
-		return
-	var/obj/effect/fluid/F = locate() in src
-	if(istype(F))
-		flick("bubbles",F)
+	// TODO: make flooding show bubbles.
+	if(!flooded && fluid_overlay)
+		flick("bubbles", fluid_overlay)
 
 /turf/fluid_update(var/ignore_neighbors)
 	fluid_blocked_dirs = null
 	fluid_can_pass = null
 	if(!ignore_neighbors)
 		for(var/checkdir in global.cardinal)
-			var/turf/T = get_step(src, checkdir)
+			var/turf/T = get_step_resolving_mimic(src, checkdir)
 			if(T)
 				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
+	else if(reagents?.total_volume > FLUID_QDEL_POINT)
+		ADD_ACTIVE_FLUID(src)
 
-/turf/proc/add_fluid(var/fluid_type, var/fluid_amount, var/defer_update)
-	var/obj/effect/fluid/F = locate() in src
-	if(!F)
-		F = new(src)
-	if(!QDELETED(F))
-		F.reagents.add_reagent(fluid_type, min(fluid_amount, FLUID_MAX_DEPTH - F.reagents.total_volume), defer_update = defer_update)
+/turf/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE)
+	if(!reagents)
+		create_reagents(FLUID_MAX_DEPTH)
+	return ..()
 
-/turf/proc/get_physical_height()
-	return 0
-
-/turf/simulated/floor/get_physical_height()
-	return flooring?.height || 0
+/turf/get_reagent_space()
+	if(!reagents)
+		create_reagents(FLUID_MAX_DEPTH)
+	return ..()
 
 /turf/fluid_act(var/datum/reagents/fluids)
 	..()
@@ -95,24 +116,67 @@
 			AM.fluid_act(fluids)
 
 /turf/proc/remove_fluids(var/amount, var/defer_update)
-	var/obj/effect/fluid/F = locate() in src
-	if(QDELETED(F) || !F.reagents?.total_volume)
+	if(!reagents?.total_volume)
 		return
-	F.reagents.remove_any(amount, defer_update = defer_update)
-	if(defer_update && !QDELETED(F.reagents))
-		SSfluids.holders_to_update[F.reagents] = TRUE
+	remove_any_reagents(amount, defer_update = defer_update)
+	if(defer_update && !QDELETED(reagents))
+		SSfluids.holders_to_update[reagents] = TRUE
 
 /turf/proc/transfer_fluids_to(var/turf/target, var/amount, var/defer_update)
-	var/obj/effect/fluid/F = locate() in src
-	if(!F || !F.reagents?.total_volume)
+	if(!reagents?.total_volume)
 		return
-	var/obj/effect/fluid/other = locate() in target
-	if(!other)
-		other = new(target)
-	if(!QDELETED(other) && other.reagents)
-		F.reagents.trans_to_holder(other.reagents, min(F.reagents.total_volume, min(FLUID_MAX_DEPTH - other.reagents.total_volume, amount)), defer_update = defer_update)
-		if(defer_update)
-			if(!QDELETED(F.reagents))
-				SSfluids.holders_to_update[F.reagents] = TRUE
-			if(!QDELETED(other.reagents))
-				SSfluids.holders_to_update[other.reagents] = TRUE
+	if(!target.reagents)
+		target.create_reagents(FLUID_MAX_DEPTH)
+	reagents.trans_to_holder(target.reagents, min(reagents.total_volume, min(FLUID_MAX_DEPTH - target.reagents.total_volume, amount)), defer_update = defer_update)
+	if(defer_update)
+		if(!QDELETED(reagents))
+			SSfluids.holders_to_update[reagents] = TRUE
+		if(!QDELETED(target.reagents))
+			SSfluids.holders_to_update[target.reagents] = TRUE
+
+/turf/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	. = ..()
+	if(exposed_temperature >= FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
+		vaporize_fuel(air)
+
+/turf/proc/vaporize_fuel(datum/gas_mixture/air)
+	if(!length(reagents?.reagent_volumes) || !istype(air))
+		return
+	var/update_air = FALSE
+	for(var/rtype in reagents.reagent_volumes)
+		var/decl/material/mat = GET_DECL(rtype)
+		if(mat.gas_flags & XGM_GAS_FUEL)
+			var/moles = round(reagents.reagent_volumes[rtype] / REAGENT_UNITS_PER_GAS_MOLE)
+			if(moles > 0)
+				air.adjust_gas(rtype, moles, FALSE)
+				remove_from_reagents(round(moles * REAGENT_UNITS_PER_GAS_MOLE))
+				update_air = TRUE
+	if(update_air)
+		air.update_values()
+		return TRUE
+	return FALSE
+
+/turf/on_reagent_change()
+
+	..()
+
+	if(reagents?.total_volume > FLUID_QDEL_POINT)
+		ADD_ACTIVE_FLUID(src)
+		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
+		if(primary_reagent)
+			last_slipperiness = primary_reagent.slipperiness
+		if(!fluid_overlay)
+			fluid_overlay = new(src, TRUE)
+		fluid_overlay.update_icon()
+		unwet_floor(FALSE)
+	else
+		QDEL_NULL(fluid_overlay)
+		REMOVE_ACTIVE_FLUID(src)
+		SSfluids.pending_flows -= src
+		if(last_slipperiness > 0)
+			wet_floor(last_slipperiness)
+
+	for(var/checkdir in global.cardinal)
+		var/turf/neighbor = get_step_resolving_mimic(src, checkdir)
+		if(neighbor?.reagents?.total_volume > FLUID_QDEL_POINT)
+			ADD_ACTIVE_FLUID(neighbor)

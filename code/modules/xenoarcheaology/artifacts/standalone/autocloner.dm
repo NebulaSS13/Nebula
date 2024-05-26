@@ -25,7 +25,7 @@
 		/mob/living/simple_animal/cat,
 		/mob/living/simple_animal/corgi,
 		/mob/living/simple_animal/corgi/puppy,
-		/mob/living/simple_animal/chicken,
+		/mob/living/simple_animal/fowl/chicken,
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/retaliate/parrot,
 		/mob/living/simple_animal/crab,

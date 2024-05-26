@@ -11,10 +11,15 @@
 		/datum/job/ministation/computer,
 		/datum/job/ministation/detective,
 		/datum/job/ministation/doctor,
+		/datum/job/ministation/doctor/head,
 		/datum/job/ministation/engineer,
+		/datum/job/ministation/engineer/head,
 		/datum/job/ministation/hop,
 		/datum/job/ministation/janitor,
 		/datum/job/ministation/scientist,
+		/datum/job/ministation/scientist/head,
 		/datum/job/ministation/security,
-		/datum/job/ministation/librarian
+		/datum/job/ministation/security/head,
+		/datum/job/ministation/librarian,
+		/datum/job/ministation/corporate/rep
 	)

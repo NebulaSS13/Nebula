@@ -29,7 +29,7 @@
 
 // Called on multitool click, prints diagnostic information to the user.
 /obj/item/stock_parts/computer/proc/diagnostics()
-	return list("Hardware Integrity Test... (Corruption: [get_percent_damage()]%)")
+	return list("Hardware Integrity Test... (Corruption: [get_percent_damages()]%)")
 
 /obj/item/stock_parts/computer/Initialize()
 	. = ..()

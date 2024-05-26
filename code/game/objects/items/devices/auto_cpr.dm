@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/device/auto_cpr.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'magnets':2,'biotech':2}"
+	origin_tech = @'{"magnets":2,"biotech":2}'
 	slot_flags = SLOT_OVER_BODY
 	material = /decl/material/solid/organic/plastic
 	matter = list(

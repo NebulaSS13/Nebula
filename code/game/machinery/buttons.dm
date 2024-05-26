@@ -24,7 +24,7 @@
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':30}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":30}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 
 	var/active = FALSE
 	var/operating = FALSE

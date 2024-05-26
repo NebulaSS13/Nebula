@@ -14,7 +14,7 @@
 	for(var/chem_name in chemical_types)
 		var/chem = chemical_types[chem_name]
 		if(REAGENT_VOLUME(owner.reagents, chem) < 3)
-			owner.reagents.add_reagent(chem, 5)
+			owner.add_to_reagents(chem, 5)
 
 	// They're also super gross and ooze ichor.
 	if(prob(5))

@@ -22,7 +22,7 @@
 	spawn(3 + metal * 3)
 		Process()
 		checkReagents()
-	addtimer(CALLBACK(src, .proc/remove_foam), 12 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(remove_foam)), 12 SECONDS)
 
 /obj/effect/effect/foam/proc/remove_foam()
 	STOP_PROCESSING(SSobj, src)
@@ -62,14 +62,14 @@
 			F.create_reagents(10)
 			if(reagents)
 				for(var/R in reagents.reagent_volumes)
-					F.reagents.add_reagent(R, 1, safety = 1) //added safety check since reagents in the foam have already had a chance to react
+					F.add_to_reagents(R, 1, safety = 1) //added safety check since reagents in the foam have already had a chance to react
 
 /obj/effect/effect/foam/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume) // foam disolves when heated, except metal foams
 	if(!metal && prob(max(0, exposed_temperature - 475)))
 		flick("[icon_state]-disolve", src)
-
-		spawn(5)
-			qdel(src)
+		QDEL_IN(src, 5)
+		return
+	return ..()
 
 /obj/effect/effect/foam/Crossed(atom/movable/AM)
 	if(metal || !isliving(AM))
@@ -113,9 +113,9 @@
 
 			if(carried_reagents)
 				for(var/id in carried_reagents)
-					F.reagents.add_reagent(id, 1, safety = 1) //makes a safety call because all reagents should have already reacted anyway
+					F.add_to_reagents(id, 1, safety = 1) //makes a safety call because all reagents should have already reacted anyway
 			else
-				F.reagents.add_reagent(/decl/material/liquid/water, 1, safety = 1)
+				F.add_to_reagents(/decl/material/liquid/water, 1, safety = 1)
 
 // wall formed by metal foams, dense and opaque, but easy to break
 

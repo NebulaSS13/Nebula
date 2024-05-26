@@ -107,7 +107,7 @@
 	else
 		to_chat(user, "<span class='warning'>Some strange aura is blocking the way!</span>")
 	canmove = 0
-	addtimer(CALLBACK(src, .proc/allow_move), 2)
+	addtimer(CALLBACK(src, PROC_REF(allow_move)), 2)
 
 /obj/effect/dummy/spell_jaunt/proc/allow_move()
 	canmove = TRUE

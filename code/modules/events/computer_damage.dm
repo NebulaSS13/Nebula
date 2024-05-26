@@ -17,4 +17,4 @@
 		if(prob(50))
 			victim.visible_message("<span class='warning'>[victim] emits some ominous clicks.</span>")
 			var/obj/item/stock_parts/computer/hard_drive/HDD = victim.get_component_of_type(/obj/item/stock_parts/computer/hard_drive)
-			HDD.take_damage(0.5 * HDD.health)
+			HDD.take_damage(0.5 * HDD.current_health)

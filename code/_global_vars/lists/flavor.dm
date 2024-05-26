@@ -130,7 +130,8 @@ GLOBAL_GETTER(cable_colors, /list, SetupCableColors())
 		var/name = special_name_mappings[coil_type] || capitalize(copytext_after_last("[coil_type]", "/"))
 
 		var/obj/item/stack/cable_coil/C = coil_type
+		if(!initial(C.can_have_color))
+			continue
 		var/color = initial(C.color)
-
 		.[name] = color
 	. = sortTim(., /proc/cmp_text_asc)

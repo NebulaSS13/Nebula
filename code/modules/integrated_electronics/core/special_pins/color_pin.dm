@@ -31,13 +31,7 @@
 /datum/integrated_io/color/scramble()
 	if(!is_valid())
 		return
-	var/new_data
-	for(var/i=1;i<=3;i++)
-		var/temp_col = "[num2hex(rand(0,255))]"
-		if(length(temp_col )<2)
-			temp_col  = "0[temp_col]"
-		new_data += temp_col
-	data = new_data
+	data = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
 	push_data()
 
 /datum/integrated_io/color/display_pin_type()

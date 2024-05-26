@@ -156,8 +156,8 @@
 	ret = 0; \
 	if (T.zone) { \
 		for (var/_gzn_dir in gzn_check) { \
-			var/turf/simulated/other = get_step(T, _gzn_dir); \
-			if (istype(other) && other.zone == T.zone) { \
+			var/turf/other = get_step(T, _gzn_dir); \
+			if (istype(other) && other.simulated && other.zone == T.zone) { \
 				var/block; \
 				ATMOS_CANPASS_TURF(block, other, T); \
 				if (!(block & AIR_BLOCKED)) { \
@@ -190,8 +190,8 @@
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf
-			var/turf/simulated/T = get_step(src, dir)
-			if (!istype(T))
+			var/turf/T = get_step(src, dir)
+			if (!istype(T) || !T.simulated)
 				. &= ~dir
 				continue
 			var/connected_dirs

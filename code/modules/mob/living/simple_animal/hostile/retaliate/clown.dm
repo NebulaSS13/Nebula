@@ -9,8 +9,7 @@
 	speak_chance = 0.5
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
-	maxHealth = 75
-	health = 75
+	max_health = 75
 	speed = -1
 	harm_intent_damage = 8
 	can_escape = TRUE

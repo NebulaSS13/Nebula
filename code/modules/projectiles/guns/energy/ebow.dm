@@ -5,7 +5,7 @@
 	icon = 'icons/obj/guns/energy_crossbow.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':2,'magnets':2,'esoteric':5}"
+	origin_tech = @'{"combat":2,"magnets":2,"esoteric":5}'
 	material = /decl/material/solid/metal/steel
 	slot_flags = SLOT_LOWER_BODY
 	silenced = 1

@@ -15,12 +15,6 @@
 	if(populate && reagents.primary_reagent)
 		setLabel(reagents.get_primary_reagent_name())
 
-/obj/item/chems/chem_disp_cartridge/self_feed_message(var/mob/user)
-	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
-	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
-		for(var/R in reagents.reagent_volumes)
-			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
-
 /obj/item/chems/chem_disp_cartridge/examine(mob/user)
 	. = ..()
 	to_chat(user, "It has a capacity of [volume] units.")
@@ -69,7 +63,7 @@
 			return TRUE
 		if(standard_pour_into(user, target))
 			return TRUE
-		if(standard_feed_mob(user, target))
+		if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 			return TRUE
 		if(user.a_intent == I_HURT)
 			if(standard_splash_mob(user,target))

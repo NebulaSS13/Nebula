@@ -19,6 +19,9 @@
 /mob/living/carbon/human/corpse
 	real_name = "corpse"
 
+/mob/living/carbon/human/corpse/get_death_message(gibbed)
+	return SKIP_DEATH_MESSAGE
+
 /mob/living/carbon/human/corpse/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype, obj/abstract/landmark/corpse/corpse)
 	. = ..(mapload, species_name, new_dna, new_bodytype) // do not pass the corpse landmark
 	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
@@ -36,9 +39,10 @@
 
 /mob/living/carbon/human/corpse/LateInitialize()
 	..()
-	adjustOxyLoss(maxHealth)//cease life functions
-	setBrainLoss(maxHealth)
-	death(FALSE, deathmessage = "no message", show_dead_message = FALSE)
+	var/current_max_health = get_max_health()
+	adjustOxyLoss(current_max_health)//cease life functions
+	setBrainLoss(current_max_health)
+	death()
 	var/obj/item/organ/internal/heart/corpse_heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(corpse_heart)
 		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much

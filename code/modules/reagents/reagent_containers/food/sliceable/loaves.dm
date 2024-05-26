@@ -5,7 +5,7 @@
 	slice_path = /obj/item/chems/food/slice/meatbread
 	slices_num = 5
 	filling_color = "#ff7575"
-	center_of_mass = @"{'x':19,'y':9}"
+	center_of_mass = @'{"x":19,"y":9}'
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -13,16 +13,16 @@
 
 /obj/item/chems/food/sliceable/meatbread/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 20)
 
 /obj/item/chems/food/slice/meatbread
 	name = "meatbread slice"
 	desc = "A slice of delicious meatbread."
 	icon_state = "meatbreadslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#ff7575"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/meatbread
 
 /obj/item/chems/food/slice/meatbread/filled
@@ -35,7 +35,7 @@
 	slice_path = /obj/item/chems/food/slice/xenomeatbread
 	slices_num = 5
 	filling_color = "#8aff75"
-	center_of_mass = @"{'x':16,'y':9}"
+	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -43,16 +43,16 @@
 
 /obj/item/chems/food/sliceable/xenomeatbread/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 20)
 
 /obj/item/chems/food/slice/xenomeatbread
 	name = "xenomeatbread slice"
 	desc = "A slice of delicious meatbread. Extra Heretical."
 	icon_state = "xenobreadslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#8aff75"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/xenomeatbread
 
 /obj/item/chems/food/slice/xenomeatbread/filled
@@ -65,7 +65,7 @@
 	slice_path = /obj/item/chems/food/slice/bananabread
 	slices_num = 5
 	filling_color = "#ede5ad"
-	center_of_mass = @"{'x':16,'y':9}"
+	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -73,16 +73,16 @@
 
 /obj/item/chems/food/sliceable/bananabread/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream, 20)
+	add_to_reagents(/decl/material/liquid/nutriment/banana_cream, 20)
 
 /obj/item/chems/food/slice/bananabread
 	name = "banana-nut bread slice"
 	desc = "A slice of delicious banana bread."
 	icon_state = "bananabreadslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#ede5ad"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	whole_path = /obj/item/chems/food/sliceable/bananabread
 
 /obj/item/chems/food/slice/bananabread/filled
@@ -95,7 +95,7 @@
 	slice_path = /obj/item/chems/food/slice/tofubread
 	slices_num = 5
 	filling_color = "#f7ffe0"
-	center_of_mass = @"{'x':16,'y':9}"
+	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("tofu" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -105,10 +105,10 @@
 	name = "tofubread slice"
 	desc = "A slice of delicious tofubread."
 	icon_state = "tofubreadslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#f7ffe0"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/tofubread
 
 /obj/item/chems/food/slice/tofubread/filled
@@ -121,7 +121,7 @@
 	slice_path = /obj/item/chems/food/slice/bread
 	slices_num = 5
 	filling_color = "#ffe396"
-	center_of_mass = @"{'x':16,'y':9}"
+	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 6)
 	nutriment_amt = 6
 	bitesize = 2
@@ -131,10 +131,10 @@
 	name = "bread slice"
 	desc = "A slice of home."
 	icon_state = "breadslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#d27332"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':4}"
+	center_of_mass = @'{"x":16,"y":4}'
 	whole_path = /obj/item/chems/food/sliceable/bread
 
 /obj/item/chems/food/slice/bread/filled
@@ -147,7 +147,7 @@
 	slice_path = /obj/item/chems/food/slice/creamcheesebread
 	slices_num = 5
 	filling_color = "#fff896"
-	center_of_mass = @"{'x':16,'y':9}"
+	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 6, "cream" = 3, "cheese" = 3)
 	nutriment_amt = 5
 	bitesize = 2
@@ -155,16 +155,16 @@
 
 /obj/item/chems/food/sliceable/creamcheesebread/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/slice/creamcheesebread
 	name = "cream cheese bread slice"
 	desc = "A slice of yum!"
 	icon_state = "creamcheesebreadslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#fff896"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/creamcheesebread
 
 /obj/item/chems/food/slice/creamcheesebread/filled

@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	setup = 0
-	health = 0 //destroying the statue kills the mob within
+	current_health = 0 //destroying the statue kills the mob within
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock
 	var/intialFire = 0	//it's a little sloppy I know but it was this or the GODMODE flag. Lesser of two evils.
 	var/intialBrute = 0
@@ -23,7 +23,7 @@
 			L.client.eye = src
 		L.forceMove(src)
 		L.set_sdisability(MUTED)
-		health = L.health + 100 //stoning damaged mobs will result in easier to shatter statues
+		current_health = L.current_health + 100 //stoning damaged mobs will result in easier to shatter statues
 		intialTox = L.getToxLoss()
 		intialFire = L.getFireLoss()
 		intialBrute = L.getBruteLoss()
@@ -40,7 +40,7 @@
 			icon_state = "corgi"
 			desc = "If it takes forever, I will wait for you..."
 
-	if(health == 0) //meaning if the statue didn't find a valid target
+	if(current_health == 0) //meaning if the statue didn't find a valid target
 		return INITIALIZE_HINT_QDEL
 
 	START_PROCESSING(SSobj, src)
@@ -50,7 +50,7 @@
 	timer--
 	for(var/mob/living/M in src) //Go-go gadget stasis field
 		M.setToxLoss(intialTox)
-		M.adjustFireLoss(intialFire - M.getFireLoss())
+		M.adjustFireLoss(intialFire - M.getFireLoss(), do_update_health = FALSE)
 		M.adjustBruteLoss(intialBrute - M.getBruteLoss())
 		M.setOxyLoss(intialOxy)
 	if (timer <= 0)
@@ -65,7 +65,7 @@
 	for(var/mob/living/M in src)
 		M.dropInto(loc)
 		M.unset_sdisability(MUTED)
-		M.take_overall_damage((M.health - health - 100),0) //any new damage the statue incurred is transfered to the mob
+		M.take_overall_damage((M.current_health - current_health - 100),0) //any new damage the statue incurred is transfered to the mob
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
@@ -80,12 +80,12 @@
 	return
 
 /obj/structure/closet/statue/proc/check_health()
-	if(health <= 0)
+	if(current_health <= 0)
 		for(var/mob/M in src)
 			shatter(M)
 
 /obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
+	current_health -= Proj.get_structure_damage()
 	check_health()
 
 	return
@@ -95,16 +95,16 @@
 		M.explosion_act(severity)
 	..()
 	if(!QDELETED(src))
-		health -= 60 / severity
+		current_health -= 60 / severity
 		check_health()
 
 /obj/structure/closet/statue/attackby(obj/item/I, mob/user)
-	health -= I.force
+	current_health -= I.force
 	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
 	check_health()
 
-/obj/structure/closet/statue/receive_mouse_drop(atom/dropping, var/mob/user)
+/obj/structure/closet/statue/receive_mouse_drop(atom/dropping, mob/user, params)
 	return TRUE
 
 /obj/structure/closet/statue/relaymove()

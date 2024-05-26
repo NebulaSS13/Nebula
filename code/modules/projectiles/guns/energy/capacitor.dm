@@ -47,14 +47,13 @@ var/global/list/laser_wavelengths
 	desc = "An excitingly chunky directed energy weapon that uses a modular capacitor array to charge each shot."
 	icon = 'icons/obj/guns/capacitor_pistol.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'materials':4,'powerstorage':4}"
+	origin_tech = @'{"combat":4,"materials":4,"powerstorage":4}'
 	w_class = ITEM_SIZE_NORMAL
 	charge_cost = 100
 	charge_meter = FALSE
 	accuracy = 2
 	fire_delay = 10
 	slot_flags = SLOT_LOWER_BODY
-	power_supply = /obj/item/cell/high
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/variable
 	matter = list(
@@ -70,6 +69,12 @@ var/global/list/laser_wavelengths
 	var/const/capacitor_charge_constant = 10
 	var/decl/laser_wavelength/charging
 	var/decl/laser_wavelength/selected_wavelength
+
+/obj/item/gun/energy/capacitor/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	loaded_cell_type            = loaded_cell_type            || /obj/item/cell/high
+	accepted_cell_type          = accepted_cell_type          || /obj/item/cell
+	power_supply_extension_type = power_supply_extension_type || /datum/extension/loaded_cell/secured
+	return ..(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/energy/capacitor/examine(mob/user, distance)
 	. = ..()
@@ -104,29 +109,17 @@ var/global/list/laser_wavelengths
 		return ..()
 
 	if(IS_SCREWDRIVER(W))
+		// Unload the cell before the caps.
+		if(get_cell())
+			return ..()
 		if(length(capacitors))
 			var/obj/item/stock_parts/capacitor/capacitor = capacitors[1]
 			capacitor.charge = 0
 			user.put_in_hands(capacitor)
 			LAZYREMOVE(capacitors, capacitor)
-		else if(power_supply)
-			user.put_in_hands(power_supply)
-			power_supply = null
-		else
-			to_chat(user, SPAN_WARNING("\The [src] does not have a cell or capacitor installed."))
-			return TRUE
-		playsound(loc, 'sound/items/Screwdriver2.ogg', 25)
-		update_icon()
-		return TRUE
-
-	if(istype(W, /obj/item/cell))
-		if(power_supply)
-			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.try_unequip(W, src))
-			power_supply = W
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
+			playsound(loc, 'sound/items/Screwdriver2.ogg', 25)
 			update_icon()
-		return TRUE
+			return TRUE
 
 	if(istype(W, /obj/item/stock_parts/capacitor))
 		if(length(capacitors) >= max_capacitors)
@@ -167,8 +160,9 @@ var/global/list/laser_wavelengths
 			for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
 				if(capacitor.charge < capacitor.max_charge)
 					charged = FALSE
+					var/obj/item/cell/power_supply = get_cell()
 					var/use_charge_cost = min(charge_cost * capacitor.rating, round((capacitor.max_charge - capacitor.charge) / capacitor_charge_constant))
-					if(power_supply.use(use_charge_cost))
+					if(power_supply?.use(use_charge_cost))
 						capacitor.charge(use_charge_cost * capacitor_charge_constant)
 						update_icon()
 					else
@@ -184,6 +178,7 @@ var/global/list/laser_wavelengths
 	var/total_charge_cost = 0
 	for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
 		total_charge_cost += capacitor.max_charge
+	var/obj/item/cell/power_supply = get_cell()
 	. = round(power_supply?.charge / (total_charge_cost / capacitor_charge_constant))
 
 /obj/item/gun/energy/capacitor/on_update_icon()
@@ -192,7 +187,7 @@ var/global/list/laser_wavelengths
 	I.color = wiring_color
 	I.appearance_flags |= RESET_COLOR
 	add_overlay(I)
-	if(power_supply)
+	if(get_cell())
 		I = image(icon, "[icon_state]-cell")
 		add_overlay(I)
 
@@ -231,7 +226,7 @@ var/global/list/laser_wavelengths
 		I.color = wiring_color
 		I.appearance_flags |= RESET_COLOR
 		overlay.add_overlay(I)
-		if(power_supply)
+		if(get_cell())
 			I = image(overlay.icon, "[overlay.icon_state]-cell")
 			overlay.add_overlay(I)
 		for(var/i = 1 to length(capacitors))
@@ -270,16 +265,21 @@ var/global/list/laser_wavelengths
 	one_hand_penalty = 6
 	fire_delay = 20
 	w_class = ITEM_SIZE_HUGE
-	power_supply = /obj/item/cell/super
+
+/obj/item/gun/energy/capacitor/rifle/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	loaded_cell_type = loaded_cell_type || /obj/item/cell/super
+	return ..(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion
 	name = "linear fusion rifle"
 	desc = "A chunky, angular, carbon-fiber-finish capacitor rifle, shipped complete with a self-charging power cell. The operating instructions seem to be written in backwards Cyrillic."
 	color = COLOR_GRAY40
-	power_supply = /obj/item/cell/infinite
 	capacitors = /obj/item/stock_parts/capacitor/super
 	projectile_type = /obj/item/projectile/beam/variable/split
 	wiring_color = COLOR_GOLD
+
+/obj/item/gun/energy/capacitor/rifle/linear_fusion/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/infinite, accepted_cell_type, /datum/extension/loaded_cell/unremovable, charge_value)
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W))

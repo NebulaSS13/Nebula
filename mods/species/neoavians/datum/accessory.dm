@@ -4,8 +4,13 @@
 	icon_state = "avian_default"
 	icon = 'mods/species/neoavians/icons/hair.dmi'
 	species_allowed = list(SPECIES_AVIAN)
-	blend = ICON_MULTIPLY
+	color_blend = ICON_MULTIPLY
 	uid = "acc_hair_avian_plumage"
+
+/decl/sprite_accessory/hair/avian/get_hidden_substitute()
+	if(accessory_flags & VERY_SHORT)
+		return src
+	return GET_DECL(/decl/sprite_accessory/hair/bald)
 
 /decl/sprite_accessory/hair/avian/mohawk
 	name = "Avian Mohawk"
@@ -45,7 +50,7 @@
 /decl/sprite_accessory/hair/avian/alt
 	name = "Avian Plumage Alt"
 	icon_state = "avian_default_alt"
-	blend = ICON_ADD
+	color_blend = ICON_ADD
 	uid = "acc_hair_avian_plumage_alt"
 
 /decl/sprite_accessory/hair/avian/alt/ears
@@ -120,7 +125,7 @@
 	body_parts = list(BP_HEAD)
 	icon = 'mods/species/neoavians/icons/markings.dmi'
 	species_allowed = list(SPECIES_AVIAN)
-	blend = ICON_MULTIPLY
+	color_blend = ICON_MULTIPLY
 	uid = "acc_marking_avian_beak"
 
 /decl/sprite_accessory/marking/avian/avian
@@ -142,23 +147,23 @@
 /decl/sprite_accessory/marking/avian/additive
 	name = "Beak, Additive (Head)"
 	icon_state = "beak-add"
-	blend = ICON_ADD
+	color_blend = ICON_ADD
 	uid = "acc_marking_avian_beak_alt"
 
 /decl/sprite_accessory/marking/avian/resomi
 	name = "Raptor Ears, Additive (Head)"
 	icon_state = "ears-add"
-	blend = ICON_ADD
+	color_blend = ICON_ADD
 	uid = "acc_marking_avian_raptorears_alt"
 
 /decl/sprite_accessory/marking/avian/wing_feathers/additive
 	name = "Wing Feathers, Additive (Left)"
 	icon_state = "wing_feathers-add"
-	blend = ICON_ADD
+	color_blend = ICON_ADD
 	uid = "acc_marking_avian_wingfeathers_left_alt"
 
 /decl/sprite_accessory/marking/avian/wing_feathers/right/additive
 	name = "Wing Feathers, Additive (Right)"
 	icon_state = "wing_feathers-add"
-	blend = ICON_ADD
+	color_blend = ICON_ADD
 	uid = "acc_marking_avian_wingfeathers_right_alt"

@@ -106,13 +106,10 @@
 "an" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = 0
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -138,13 +135,10 @@
 "at" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = 0
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -192,7 +186,6 @@
 /area/casino/casino_maintenance)
 "aD" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "casino_dock_outer";
 	name = "Docking Port Airlock"
 	},
@@ -284,7 +277,6 @@
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "casino_dock_inner";
 	name = "Docking Port Airlock"
 	},
@@ -926,7 +918,6 @@
 "cD" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "casino_shuttle_control"
 	},
 /obj/machinery/door/firedoor,
@@ -1308,19 +1299,19 @@
 /area/casino/casino_storage)
 "dQ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /obj/random/tool,
@@ -1813,13 +1804,10 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1907,12 +1895,9 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1949,9 +1934,7 @@
 "fA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
-	density = 0;
 	dir = 8;
-	icon_state = "pdoor0";
 	id_tag = "casino_main"
 	},
 /obj/machinery/door/firedoor,
@@ -2070,7 +2053,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fT" = (
@@ -2080,7 +2063,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fU" = (
@@ -2108,7 +2091,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/random/snack,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
@@ -2153,13 +2136,10 @@
 /obj/machinery/door/airlock{
 	name = "Casino"
 	},
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
@@ -2285,8 +2265,8 @@
 /area/casino/casino_mainfloor)
 "gv" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigar,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar,
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/carpet,
@@ -2757,8 +2737,8 @@
 /area/casino/casino_mainfloor)
 "ia" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
-/obj/item/kitchen/utensil/fork,
+/obj/item/plate,
+/obj/item/utensil/fork,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ib" = (
@@ -2845,9 +2825,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
+/obj/item/storage/box/fancy/egg_box,
+/obj/item/storage/box/fancy/egg_box,
+/obj/item/storage/box/fancy/egg_box,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/sugar,
 /turf/simulated/floor/tiled,
@@ -2884,13 +2864,13 @@
 /area/casino/casino_mainfloor)
 "iq" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/chems/food/applepie,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ir" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/chems/food/bigbiteburger,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
@@ -3003,7 +2983,7 @@
 /area/casino/casino_kitchen)
 "iG" = (
 /obj/structure/table/marble,
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "iH" = (
@@ -3071,14 +3051,14 @@
 "iQ" = (
 /obj/machinery/door/firedoor,
 /obj/structure/table/marble,
-/obj/item/trash/tray,
+/obj/item/plate/tray,
 /obj/item/chems/food/stew,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "iR" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
-/obj/item/kitchen/utensil/spoon,
+/obj/item/plate,
+/obj/item/utensil/spoon,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iS" = (
@@ -3492,7 +3472,7 @@
 /area/casino/casino_mainfloor)
 "jU" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/chems/food/waffles,
 /obj/item/chems/drinks/cans/iced_tea,
 /turf/simulated/floor/carpet,
@@ -3639,7 +3619,7 @@
 /area/casino/casino_mainfloor)
 "kp" = (
 /obj/structure/table/marble,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/tiled,
@@ -4248,7 +4228,7 @@
 /area/casino/casino_private_vip)
 "lZ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/wood,
@@ -4574,7 +4554,6 @@
 "mZ" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "Starboard wide window BD"
 	},
 /turf/simulated/floor/plating,

@@ -12,8 +12,7 @@
 	anchored = FALSE
 	density = TRUE
 	icon_state = "barrier0"
-	var/health = 100.0
-	var/maxhealth = 100.0
+	max_health = 100
 	var/locked = 0.0
 
 /obj/machinery/deployable/barrier/Initialize()
@@ -39,10 +38,11 @@
 				return
 		return
 	else if(IS_WRENCH(W))
-		if (src.health < src.maxhealth)
-			src.health = src.maxhealth
-			src.emagged = 0
-			src.req_access = list(access_security)
+		var/current_max_health = get_max_health()
+		if (current_health < current_max_health)
+			current_health = current_max_health
+			emagged = 0
+			req_access = list(access_security)
 			visible_message("<span class='warning'>[user] repairs \the [src]!</span>")
 			return
 		else if (src.emagged > 0)
@@ -54,21 +54,21 @@
 	else
 		switch(W.damtype)
 			if(BURN)
-				src.health -= W.force * 0.75
+				current_health -= W.force * 0.75
 			if(BRUTE)
-				src.health -= W.force * 0.5
-		if (src.health <= 0)
-			src.explode()
+				current_health -= W.force * 0.5
+		if (current_health <= 0)
+			explode()
 		..()
 
 /obj/machinery/deployable/barrier/explosion_act(severity)
 	. = ..()
 	if(. && !QDELETED(src))
 		if(severity == 1)
-			health = 0
+			current_health = 0
 		else if(severity == 2)
-			health -= 25
-		if(health <= 0)
+			current_health -= 25
+		if(current_health <= 0)
 			explode()
 
 /obj/machinery/deployable/barrier/emp_act(severity)

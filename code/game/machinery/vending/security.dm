@@ -18,4 +18,4 @@
 		/obj/item/chems/food/donut = 12,
 		/obj/item/storage/box/evidence = 6
 	)
-	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/storage/box/donut = 2)
+	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/storage/box/fancy/donut = 2)

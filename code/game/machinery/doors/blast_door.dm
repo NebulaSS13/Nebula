@@ -15,9 +15,9 @@
 	can_open_manually = FALSE
 
 	// Icon states for different shutter types. Simply change this instead of rewriting the update_icon proc.
-	var/icon_state_open = null
+	icon_state_open = null
+	icon_state_closed = null
 	var/icon_state_opening = null
-	var/icon_state_closed = null
 	var/icon_state_closing = null
 
 	var/icon_state_open_broken = null
@@ -36,7 +36,6 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
-	var/begins_closed = TRUE
 	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
@@ -55,15 +54,8 @@
 	base_type = /obj/machinery/door/blast
 
 /obj/machinery/door/blast/Initialize()
-	. = ..()
-
-	if(!begins_closed)
-		icon_state = icon_state_open
-		set_density(0)
-		set_opacity(0)
-		layer = open_layer
-
 	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
+	. = ..()
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
@@ -166,7 +158,7 @@
 				to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 			return
 	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
-		var/amt = CEILING((maxhealth - health)/150)
+		var/amt = CEILING((get_max_health() - current_health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
 			return
@@ -195,7 +187,7 @@
 	force_open()
 
 	if(autoclose)
-		addtimer(CALLBACK(src, .proc/close), 15 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
+		addtimer(CALLBACK(src, PROC_REF(close)), 15 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
 
 	return TRUE
 
@@ -217,7 +209,7 @@
 // Parameters: None
 // Description: Fully repairs the blast door.
 /obj/machinery/door/blast/proc/repair()
-	health = maxhealth
+	current_health = get_max_health()
 	set_broken(FALSE)
 	queue_icon_update()
 
@@ -320,7 +312,7 @@
 	icon_state_closed_broken = "closed_broken"
 
 	min_force = 30
-	maxhealth = 1000
+	max_health = 1000
 	block_air_zones = 1
 
 	var/icon_lower_door_open = "open_bottom"
@@ -362,7 +354,7 @@
 	open_sound = 'sound/machines/shutters_open.ogg'
 	close_sound = 'sound/machines/shutters_close.ogg'
 	min_force = 15
-	maxhealth = 500
+	max_health = 500
 	explosion_resistance = 10
 	pry_mod = 0.55
 	frame_type = /obj/structure/door_assembly/blast/shutter

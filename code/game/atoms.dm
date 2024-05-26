@@ -2,7 +2,7 @@
 	/// (DEFINE) Determines where this atom sits in terms of turf plating. See misc.dm
 	var/level = LEVEL_ABOVE_PLATING
 	/// (BITFLAG) See flags.dm
-	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	var/atom_flags = 0
 	/// (FLOAT) The world.time that this atom last bumped another. Used mostly by mobs.
 	var/last_bumped = 0
 	/// (BITFLAG) See flags.dm
@@ -52,6 +52,12 @@
 	var/tmp/default_pixel_z
 	var/tmp/default_pixel_w
 
+	// Health vars largely used by obj and mob.
+	var/current_health
+	var/max_health
+
+/atom/proc/get_max_health()
+	return max_health
 
 /**
 	Adjust variables prior to Initialize() based on the map
@@ -143,7 +149,7 @@
 	Handle an atom entering this atom's proximity
 
 	Called when an atom enters this atom's proximity. Both this and the other atom
-	need to have the PROXMOVE flag (as it helps reduce lag).
+	need to have the MOVABLE_FLAG_PROXMOVE flag (as it helps reduce lag).
 
 	- `AM`: The atom entering proximity
 	- Return: `TRUE` if proximity should continue to be handled, otherwise `FALSE`
@@ -349,6 +355,15 @@
 	for(var/atom/movable/AM in contents)
 		if(!QDELETED(AM) && AM.simulated)
 			LAZYADD(., AM)
+	if(has_extension(src, /datum/extension/loaded_cell))
+		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		var/cell = cell_loaded?.get_cell()
+		if(cell)
+			LAZYREMOVE(., cell)
+
+// Return a list of all temperature-sensitive atoms, defaulting to above.
+/atom/proc/get_contained_temperature_sensitive_atoms()
+	return get_contained_external_atoms()
 
 /// Dump the contents of this atom onto its loc
 /atom/proc/dump_contents()
@@ -421,11 +436,12 @@
 	- `exposed_volume`: The volume of the air
 */
 /atom/proc/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	handle_external_heating(exposed_temperature)
 
 /// Handle this atom being destroyed through melting
-/atom/proc/melt()
-	return
+/atom/proc/handle_melting(list/meltable_materials)
+	SHOULD_CALL_PARENT(TRUE)
 
 /**
 	Handle this atom being exposed to lava. Calls qdel() by default
@@ -460,7 +476,7 @@
 	- `M?`: The mob whose blood will be used
 	- Returns: TRUE if made bloody, otherwise FALSE
 */
-/atom/proc/add_blood(mob/living/carbon/human/M)
+/atom/proc/add_blood(mob/living/M, amount = 2, list/blood_data)
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return FALSE
 
@@ -474,7 +490,7 @@
 			M.dna = new /datum/dna()
 			M.dna.real_name = M.real_name
 		M.check_dna()
-		blood_color = M.species.get_blood_color(M)
+		blood_color = M.get_blood_color()
 	return TRUE
 
 /**
@@ -482,7 +498,7 @@
 
 	- Return: `TRUE` if blood with DNA was removed
 */
-/atom/proc/clean_blood()
+/atom/proc/clean(clean_forensics = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!simulated)
 		return
@@ -496,6 +512,7 @@
 			forensics.remove_data(/datum/forensics/blood_dna)
 			forensics.remove_data(/datum/forensics/gunshot_residue)
 		return TRUE
+	return FALSE
 
 /// Only used by Sandbox_Spacemove, which is used by nothing
 /// - TODO: Remove this
@@ -718,43 +735,50 @@
 		if(M.lying) return //No spamming this on people.
 
 		SET_STATUS_MAX(M, STAT_WEAK, 3)
-		to_chat(M, "<span class='danger'>You topple as \the [src] moves under you!</span>")
-
+		to_chat(M, SPAN_DANGER("You topple as \the [src] moves under you!"))
 		if(prob(25))
-
 			var/damage = rand(15,30)
-			var/mob/living/carbon/human/H = M
-			if(!istype(H))
-				to_chat(H, "<span class='danger'>You land heavily!</span>")
+			var/obj/item/organ/external/affecting = SAFEPICK(M.get_external_organs())
+			if(!affecting)
+				to_chat(M, SPAN_DANGER("You land heavily!"))
 				M.adjustBruteLoss(damage)
-				return
-
-			var/obj/item/organ/external/affecting = pick(H.get_external_organs())
-			if(affecting)
-				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
+			else
+				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
 				affecting.take_external_damage(damage, 0)
 				if(affecting.parent)
 					affecting.parent.add_autopsy_data("Misadventure", damage)
-			else
-				to_chat(H, "<span class='danger'>You land heavily!</span>")
-				H.adjustBruteLoss(damage)
-
-			H.update_damage_overlays()
-			H.updatehealth()
-	return
 
 /// Get the current color of this atom.
 /atom/proc/get_color()
 	return color
 
-/// Set the color of this atom to `new_color`.
-/atom/proc/set_color(new_color)
-	color = new_color
+/* Set the atom colour. This is a stub effectively due to the broad use of direct setting. */
+// TODO: implement this everywhere that it should be used instead of direct setting.
+/atom/proc/set_color(var/new_color)
+	if(isnull(new_color))
+		return reset_color()
+	if(color != new_color)
+		color = new_color
+		return TRUE
+	return FALSE
+
+/atom/proc/reset_color()
+	if(!isnull(color))
+		color = null
+		return TRUE
+	return FALSE
+
+/atom/proc/set_alpha(var/new_alpha)
+	if(alpha != new_alpha)
+		alpha = new_alpha
+		return TRUE
+	return FALSE
 
 /// Get any power cell associated with this atom.
 /atom/proc/get_cell()
 	RETURN_TYPE(/obj/item/cell)
-	return
+	var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+	return cell_loaded?.get_cell()
 
 /**
 	Get any radio associated with this atom.
@@ -867,3 +891,10 @@
 
 /atom/proc/get_overhead_text_y_offset()
 	return 0
+
+/atom/proc/can_be_injected_by(var/atom/injector)
+	return FALSE
+
+/atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
+	set waitfor = FALSE
+	return

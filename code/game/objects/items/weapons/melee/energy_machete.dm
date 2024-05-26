@@ -6,5 +6,5 @@
 	active_throwforce =    17
 	active_parry_chance =  30
 	lighting_color = "#6600cc"
-	origin_tech = "{'magnets':3}"
+	origin_tech = @'{"magnets":3}'
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")

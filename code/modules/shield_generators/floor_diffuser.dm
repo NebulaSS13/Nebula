@@ -26,9 +26,10 @@
 	if(!enabled)
 		return
 	for(var/direction in global.cardinal)
-		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
-		for(var/obj/effect/shield/S in shielded_tile)
-			S.diffuse(5)
+		var/turf/shielded_tile = get_step(get_turf(src), direction)
+		if(shielded_tile?.simulated)
+			for(var/obj/effect/shield/S in shielded_tile)
+				S.diffuse(5)
 
 /obj/machinery/shield_diffuser/on_update_icon()
 	if(alarm)

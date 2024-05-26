@@ -62,7 +62,7 @@
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	wires = /datum/wires/alarm
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':-21}, 'WEST':{'x':21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":-21}, "WEST":{"x":21}}'
 
 	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
@@ -146,7 +146,8 @@
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid
 
-	// breathable air according to human/Life()
+	// breathable air according to default human species
+	// TODO: make it use map default species?
 	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
 	TLV[gas_mat.gas_name] =	list(16, 19, 135, 140) // Partial pressure, kpa
 	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
@@ -175,8 +176,8 @@
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		return
 
-	var/turf/simulated/location = loc
-	if(!istype(location))	return//returns if loc is not simulated
+	var/turf/location = loc
+	if(!istype(location) || !location.simulated)	return//returns if loc is not simulated
 
 	var/datum/gas_mixture/environment = location.return_air()
 
@@ -285,9 +286,9 @@
 
 // Returns whether this air alarm thinks there is a breach, given the sensors that are available to it.
 /obj/machinery/alarm/proc/breach_detected()
-	var/turf/simulated/location = loc
+	var/turf/location = loc
 
-	if(!istype(location))
+	if(!istype(location) || !location.simulated)
 		return 0
 
 	if(breach_detection	== 0)
@@ -795,13 +796,13 @@
 	if(old_area && old_area == alarm_area)
 		alarm_area = null
 		area_uid = null
-		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, PROC_REF(change_area_name))
 	if(new_area)
 		ASSERT(isnull(alarm_area))
 		alarm_area = new_area
 		area_uid = new_area.uid
 		change_area_name(alarm_area, null, alarm_area.name)
-		events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
+		events_repository.register(/decl/observ/name_set, alarm_area, src, PROC_REF(change_area_name))
 		for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 			send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 
@@ -824,7 +825,7 @@ FIRE ALARM
 	frame_type = /obj/item/frame/fire_alarm
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":21}, "WEST":{"x":-21}}'
 
 	var/detecting =    TRUE
 	var/working =      TRUE
@@ -842,38 +843,31 @@ FIRE ALARM
 		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
-/obj/machinery/firealarm/proc/get_cached_overlay(key)
-	if(!LAZYACCESS(overlays_cache, key))
-		var/state
-		switch(key)
-			if(/decl/machine_construction/wall_frame/panel_open)
-				state = "b2"
-			if(/decl/machine_construction/wall_frame/no_wires)
-				state = "b1"
-			if(/decl/machine_construction/wall_frame/no_circuit)
-				state = "b0"
-			else
-				state = key
-		LAZYSET(overlays_cache, key, image(icon, state))
-	return overlays_cache[key]
-
 /obj/machinery/firealarm/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	icon_state = "casing"
 	if(construct_state && !istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
-		overlays += get_cached_overlay(construct_state.type)
+		var/construct_icon_state
+		switch(construct_state.type)
+			if(/decl/machine_construction/wall_frame/panel_open)
+				construct_icon_state = "b2"
+			if(/decl/machine_construction/wall_frame/no_wires)
+				construct_icon_state = "b1"
+			if(/decl/machine_construction/wall_frame/no_circuit)
+				construct_icon_state = "b0"
+		add_overlay(construct_icon_state)
 		set_light(0)
 		return
 
 	if(stat & BROKEN)
-		overlays += get_cached_overlay("broken")
+		add_overlay("broken")
 		set_light(0)
 	else if(stat & NOPOWER)
-		overlays += get_cached_overlay("unpowered")
+		add_overlay("unpowered")
 		set_light(0)
 	else
 		if(!detecting)
-			overlays += get_cached_overlay("fire1")
+			add_overlay("fire1")
 			set_light(2, 0.25, COLOR_RED)
 		else if(isContactLevel(z))
 			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
@@ -884,20 +878,19 @@ FIRE ALARM
 			if(sl.alarm_appearance.alarm_icon)
 				var/image/alert1 = image(sl.icon, sl.alarm_appearance.alarm_icon)
 				alert1.color = sl.alarm_appearance.alarm_icon_color
-				overlays |= alert1
+				add_overlay(alert1)
 
 			if(sl.alarm_appearance.alarm_icon_twotone)
 				var/image/alert2 = image(sl.icon, sl.alarm_appearance.alarm_icon_twotone)
 				alert2.color = sl.alarm_appearance.alarm_icon_twotone_color
-				overlays |= alert2
+				add_overlay(alert2)
 		else
-			overlays += get_cached_overlay("fire0")
+			add_overlay("fire0")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(src.detecting)
-		if(exposed_temperature > T0C+200)
-			src.alarm()			// added check of detector status here
-	return
+	if(detecting && exposed_temperature > T0C+200)
+		alarm()
+	return ..()
 
 /obj/machinery/firealarm/bullet_act()
 	return src.alarm()
@@ -1036,7 +1029,7 @@ FIRE ALARM
 	idle_power_usage = 2
 	active_power_usage = 6
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":21}, "WEST":{"x":-21}}'
 	var/time =         1 SECOND
 	var/timing =       FALSE
 	var/working =      TRUE

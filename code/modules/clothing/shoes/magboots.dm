@@ -11,7 +11,7 @@
 	center_of_mass = null
 	randpixel = 0
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
+	origin_tech = @'{"materials":2,"engineering":2,"magnets":3}'
 	var/magpulse = 0
 	var/obj/item/clothing/shoes/covering_shoes
 	var/online_slowdown = 3
@@ -54,7 +54,7 @@
 		icon_state = new_state
 	update_clothing_icon()
 
-/obj/item/clothing/shoes/magboots/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/shoes/magboots/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		var/new_state = overlay.icon_state
 		if(magpulse)

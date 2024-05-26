@@ -2,8 +2,7 @@
 	name = "space parrot"
 	desc = "It could be some all-knowing being that, for reasons we could never hope to understand, is assuming the shape and general mannerisms of a parrot - or just a rather large bird."
 	gender = FEMALE
-	health = 750 //how sweet it is to be a god!
-	maxHealth = 750
+	max_health = 750
 	mob_size = MOB_SIZE_LARGE
 	speak_emote  = list("professes","speaks unto you","elaborates","proclaims")
 	emote_speech = null
@@ -69,15 +68,13 @@
 	subspecies = list(/decl/parrot_subspecies/black)
 	get_subspecies_name = FALSE
 	natural_weapon = /obj/item/natural_weapon/large
-	health = 300
-	maxHealth = 300
+	max_health = 300
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna
 	name = "giant parrot"
 	desc = "A huge parrot-like bird."
 	get_subspecies_name = FALSE
-	health = 350
-	maxHealth = 350
+	max_health = 350
 	speak_emote = list("squawks")
 	emote_hear = list("preens itself")
 	natural_weapon = /obj/item/natural_weapon/large

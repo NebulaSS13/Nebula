@@ -31,7 +31,7 @@
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [src] is dead."))
 		return FEED_RESULT_DEAD
-	if(M.getCloneLoss() >= M.maxHealth * 1.5)
+	if(M.getCloneLoss() >= M.get_max_health() * 1.5)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [M] is too degraded to feed upon."))
 		return FEED_RESULT_DEAD
@@ -52,9 +52,9 @@
 		feeding_on = null
 	if(victim)
 		feeding_on = weakref(victim)
-		events_repository.register(/decl/observ/moved, src, src, /mob/living/slime/proc/check_feed_target_position)
-		events_repository.register(/decl/observ/moved, victim, src, /mob/living/slime/proc/check_feed_target_position)
-		events_repository.register(/decl/observ/destroyed, victim, src, /mob/living/slime/proc/check_feed_target_position)
+		events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/mob/living/slime, check_feed_target_position))
+		events_repository.register(/decl/observ/moved, victim, src, TYPE_PROC_REF(/mob/living/slime, check_feed_target_position))
+		events_repository.register(/decl/observ/destroyed, victim, src, TYPE_PROC_REF(/mob/living/slime, check_feed_target_position))
 	var/datum/ai/slime/slime_ai = ai
 	if(istype(slime_ai))
 		slime_ai.update_mood()
@@ -102,8 +102,8 @@
 			gain_nutrition(drained)
 			var/heal_amt = FLOOR(drained*0.5)
 			if(heal_amt > 0)
-				adjustOxyLoss(-heal_amt)
-				adjustBruteLoss(-heal_amt)
+				adjustOxyLoss(-heal_amt, do_update_health = FALSE)
+				adjustBruteLoss(-heal_amt, do_update_health = FALSE)
 				adjustCloneLoss(-heal_amt)
 
 	if(ate_victim && feed_mob)

@@ -214,7 +214,6 @@
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -341,7 +340,6 @@
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -355,7 +353,6 @@
 /area/magshield/engine)
 "bb" = (
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -466,7 +463,6 @@
 "bu" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
@@ -475,7 +471,6 @@
 "bv" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -674,13 +669,10 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cc" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -736,13 +728,10 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "ck" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/yellow{
@@ -2570,7 +2559,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hD" = (
-/obj/item/book/manual/magshield_manual,
+/obj/item/book/fluff/magshield_manual,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hE" = (
@@ -3172,7 +3161,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/chems/food/flatbread,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
@@ -3328,14 +3317,14 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jT" = (
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/knife/table,
+/obj/item/utensil/knife,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jU" = (
@@ -3570,7 +3559,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kD" = (
-/obj/item/kitchen/utensil/fork/plastic,
+/obj/item/utensil/fork/plastic,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -3619,7 +3608,7 @@
 /area/magshield/south)
 "kJ" = (
 /obj/structure/table/marble,
-/obj/item/knife/table,
+/obj/item/utensil/knife,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kK" = (
@@ -3686,7 +3675,7 @@
 /area/magshield/south)
 "kT" = (
 /obj/structure/curtain/open/bed,
-/obj/item/knife/table,
+/obj/item/utensil/knife,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kU" = (
@@ -3746,8 +3735,8 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/kitchen/utensil/fork/plastic,
-/obj/item/trash/plate,
+/obj/item/utensil/fork/plastic,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "le" = (

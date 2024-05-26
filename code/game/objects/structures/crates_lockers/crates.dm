@@ -3,7 +3,7 @@
 	desc = "A rectangular steel crate."
 	icon = 'icons/obj/closets/bases/crate.dmi'
 	closet_appearance = /decl/closet_appearance/crate
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	setup = 0
 	storage_types = CLOSET_STORAGE_ITEMS
 	var/rigged = 0
@@ -250,6 +250,19 @@
 		/obj/item/hatchet = 2,
 		/obj/item/wirecutters/clippers = 2,
 		/obj/item/scanner/plant = 2
+	)
+
+/obj/structure/closet/crate/hydroponics/exotic
+	name = "exotic seeds crate"
+	desc = "All you need to destroy that pesky planet."
+
+/obj/structure/closet/crate/hydroponics/exotic/WillContain()
+	return list(
+		/obj/item/seeds/random = 6,
+		/obj/item/seeds/ambrosiavulgarisseed = 2,
+		/obj/item/seeds/kudzuseed,
+		/obj/item/seeds/libertymycelium,
+		/obj/item/seeds/reishimycelium
 	)
 
 /obj/structure/closet/crate/secure/biohazard

@@ -22,7 +22,7 @@
 	weight = MAT_VALUE_NORMAL
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
-	stack_origin_tech = "{'materials':1,'biotech':1}"
+	stack_origin_tech = @'{"materials":1,"biotech":1}'
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
 	destruction_desc = "splinters"
@@ -41,64 +41,11 @@
 	sound_manipulate = 'sound/foley/woodpickup1.ogg'
 	sound_dropped = 'sound/foley/wooddrop1.ogg'
 
-/decl/material/solid/organic/wood/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)	//recipes below don't support composite materials
-		return
-
-	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/ladder(src)
-
-	. += new/datum/stack_recipe/sandals(src)
-	. += new/datum/stack_recipe/tile/wood(src)
-	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)
-	. += new/datum/stack_recipe/furniture/sofa/m(src)
-	. += new/datum/stack_recipe/furniture/sofa/l(src)
-	. += new/datum/stack_recipe/furniture/sofa/r(src)
-	. += new/datum/stack_recipe/crossbowframe(src)
-	. += new/datum/stack_recipe/furniture/coffin/wooden(src)
-	. += new/datum/stack_recipe/beehive_assembly(src)
-	. += new/datum/stack_recipe/beehive_frame(src)
-	. += new/datum/stack_recipe/furniture/bookcase(src)
-	. += new/datum/stack_recipe/furniture/book_cart(src)
-	. += new/datum/stack_recipe/zipgunframe(src)
-	. += new/datum/stack_recipe/coilgun(src)
-	. += new/datum/stack_recipe/stick(src)
-	. += new/datum/stack_recipe/noticeboard(src)
-	. += new/datum/stack_recipe/prosthetic/left_arm(src)
-	. += new/datum/stack_recipe/prosthetic/right_arm(src)
-	. += new/datum/stack_recipe/prosthetic/left_leg(src)
-	. += new/datum/stack_recipe/prosthetic/right_leg(src)
-	. += new/datum/stack_recipe/prosthetic/left_hand(src)
-	. += new/datum/stack_recipe/prosthetic/right_hand(src)
-	. += new/datum/stack_recipe/prosthetic/left_foot(src)
-	. += new/datum/stack_recipe/prosthetic/right_foot(src)
-	. += new/datum/stack_recipe/campfire(src)
-
-/decl/material/solid/organic/wood/mahogany/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/mahogany(src)
-
-/decl/material/solid/organic/wood/maple/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/maple(src)
-
-/decl/material/solid/organic/wood/ebony/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/ebony(src)
-
-/decl/material/solid/organic/wood/walnut/generate_recipes(var/reinforce_material)
-	. = ..()
-	if(holographic || reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/walnut(src)
+/decl/material/solid/organic/wood/fungal
+	name = "towercap"
+	uid = "solid_wood_fungal"
+	color = "#e6d8dd"
+	hardness = MAT_VALUE_FLEXIBLE + 1
 
 /decl/material/solid/organic/wood/holographic
 	name = "holographic wood"

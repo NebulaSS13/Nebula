@@ -38,7 +38,7 @@
 			notadded += kb
 
 	if(length(notadded))
-		addtimer(CALLBACK(src, .proc/announce_conflict, notadded), 5 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(announce_conflict), notadded), 5 SECONDS)
 
 /datum/preferences/proc/announce_conflict(list/notadded)
 	to_chat(client, SPAN_DANGER("There are new keybindings that have defaults that are already bound - the new keybindings will be unbound until updated. You can rebind them in Setup Character or Game Preferences."))

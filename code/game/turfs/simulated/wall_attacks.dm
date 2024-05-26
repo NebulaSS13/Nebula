@@ -17,8 +17,9 @@
 		set_light(0)
 		src.blocks_air = 0
 		set_opacity(0)
-		for(var/turf/simulated/turf in loc)
-			SSair.mark_for_update(turf)
+		for(var/turf/turf in loc)
+			if(turf.simulated)
+				SSair.mark_for_update(turf)
 	else
 		can_open = WALL_OPENING
 		set_density(1)
@@ -30,8 +31,9 @@
 		set_light(1)
 		src.blocks_air = 1
 		set_opacity(1)
-		for(var/turf/simulated/turf in loc)
-			SSair.mark_for_update(turf)
+		for(var/turf/turf in loc)
+			if(turf.simulated)
+				SSair.mark_for_update(turf)
 
 	can_open = WALL_CAN_OPEN
 	update_icon()
@@ -40,13 +42,14 @@
 	if(!SSair)
 		return
 
-	for(var/turf/simulated/turf in loc)
-		update_thermal(turf)
-		SSair.mark_for_update(turf)
+	for(var/turf/turf in loc)
+		if(turf.simulated)
+			update_thermal(turf)
+			SSair.mark_for_update(turf)
 
 
-/turf/simulated/wall/proc/update_thermal(var/turf/simulated/source)
-	if(istype(source))
+/turf/simulated/wall/proc/update_thermal(var/turf/source)
+	if(istype(source) && source.simulated)
 		if(density && opacity)
 			source.thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 		else
@@ -145,7 +148,7 @@
 	// Basic dismantling.
 	if(isnull(construction_stage) || !reinf_material)
 
-		var/cut_delay = 60 - material.cut_delay
+		var/cut_delay = (6 SECONDS) - material.cut_delay
 		var/dismantle_verb
 		var/dismantle_sound
 
@@ -158,7 +161,7 @@
 			var/obj/item/weldingtool/WT = W
 			if(!WT.weld(0,user))
 				return
-			dismantle_verb = "cutting"
+			dismantle_verb = "cutting through"
 			dismantle_sound = 'sound/items/Welder.ogg'
 			cut_delay *= 0.7
 
@@ -178,17 +181,17 @@
 				if(!cutter.slice(user))
 					return TRUE
 			dismantle_sound = "sparks"
-			dismantle_verb = "slicing"
+			dismantle_verb = "slicing through"
 			cut_delay *= 0.5
-		else if(istype(W,/obj/item/pickaxe))
-			var/obj/item/pickaxe/P = W
-			dismantle_verb = P.drill_verb
-			dismantle_sound = P.drill_sound
-			cut_delay -= P.digspeed
+
+		else if(IS_PICK(W))
+			dismantle_verb  = W.get_tool_message(TOOL_PICK)
+			dismantle_sound = W.get_tool_sound(TOOL_PICK)
+			cut_delay       = W.get_expected_tool_use_delay(TOOL_PICK, cut_delay)
 
 		if(dismantle_verb)
 			. = TRUE
-			to_chat(user, "<span class='notice'>You begin [dismantle_verb] through the outer plating.</span>")
+			to_chat(user, "<span class='notice'>You begin [dismantle_verb] \the [src].</span>")
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
@@ -199,8 +202,8 @@
 				return
 
 			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
+			user.visible_message("<span class='warning'>\The [user] finishes [dismantle_verb] \the [src]!</span>")
 			dismantle_wall()
-			user.visible_message("<span class='warning'>\The [src] was torn open by [user]!</span>")
 			return
 
 	//Reinforced dismantling.

@@ -28,20 +28,20 @@
 /obj/item/proc/apply_wear()
 	if(material && can_take_damage() && can_take_wear_damage() && prob(material.hardness))
 		if(material.is_brittle())
-			health = 0
+			current_health = 0
 		else
-			health--
+			current_health--
 		check_health()
 
 /obj/item/proc/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
-	if(health > 0 || !can_take_damage())
+	if(current_health > 0 || !can_take_damage())
 		return //If invincible, or if we're not dead yet, skip
 	if(lastdamtype == BRUTE)
 		if(material?.is_brittle())
 			shatter(consumed)
 			return
 	else if(lastdamtype == BURN)
-		melt()
+		handle_melting()
 		return
 	physically_destroyed()
 
@@ -87,15 +87,15 @@
 	if(new_material)
 		material = GET_DECL(new_material)
 	if(istype(material))
-		//Only set the health if health is null. Some things define their own health value.
+		//Only set the current_health if health is null. Some things define their own health value.
 		if(isnull(max_health))
 			max_health = round(material_health_multiplier * material.integrity, 0.01)
 			if(max_health < 1)
 				//Make sure to warn us if the values we set make the max_health be under 1
 				log_warning("The 'max_health' of '[src]'([type]) made out of '[material]' was calculated as [material_health_multiplier] * [material.integrity] == [max_health], which is smaller than 1.")
 
-		if(isnull(health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
-			health = max_health
+		if(isnull(current_health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
+			current_health = get_max_health()
 
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)

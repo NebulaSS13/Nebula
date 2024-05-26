@@ -184,7 +184,7 @@
 	else
 		reagent = valid_reagents[metadata]
 	if(reagent && gear.reagents)
-		gear.reagents.add_reagent(reagent, REAGENTS_FREE_SPACE(gear.reagents))
+		gear.add_to_reagents(reagent, REAGENTS_FREE_SPACE(gear.reagents))
 	return GEAR_TWEAK_SUCCESS
 
 /*
@@ -203,10 +203,11 @@
 	..()
 
 /datum/gear_tweak/custom_setup/tweak_item(mob/user, obj/item/gear, metadata)
-	var/arglist = list(user)
+	var/list/arglist = list(user)
 	if(length(additional_arguments))
 		arglist += additional_arguments
 	call(gear, custom_setup_proc)(arglist(arglist))
+	arglist.Cut()
 	return GEAR_TWEAK_SUCCESS
 
 /*
@@ -444,3 +445,49 @@ var/global/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
 		gear.set_custom_desc(metadata)
 		return GEAR_TWEAK_SUCCESS
 	return GEAR_TWEAK_SKIPPED
+
+/*
+* Material selection
+*/
+
+/datum/gear_tweak/material
+	var/list/valid_materials
+
+/datum/gear_tweak/material/New(var/list/_valid_materials)
+	if(!length(_valid_materials))
+		CRASH("No material paths given")
+	var/list/duplicate_keys = duplicates(_valid_materials)
+	if(duplicate_keys.len)
+		CRASH("Duplicate material names found: [english_list(duplicate_keys)]")
+	var/list/duplicate_values = duplicates(list_values(_valid_materials))
+	if(duplicate_values.len)
+		CRASH("Duplicate material types found: [english_list(duplicate_values)]")
+	// valid_materials, but with names sanitized to remove \improper
+	var/list/valid_materials_san = list()
+	for(var/mat_name in _valid_materials)
+		if(!istext(mat_name))
+			CRASH("Expected a text key, was [log_info_line(mat_name)]")
+		var/selection_type = _valid_materials[mat_name]
+		if(ispath(selection_type, /decl/material/solid))
+			var/decl/material/solid/mat = GET_DECL(selection_type)
+			if(mat?.phase_at_temperature() != MAT_PHASE_SOLID)
+				CRASH("Expected a room temperature solid, was [log_info_line(mat?.type) || "NULL"]")
+		else
+			CRASH("Expected a /decl/material/solid path, was [log_info_line(selection_type) || "NULL"]")
+		var/mat_name_san = replacetext(mat_name, "\improper", "")
+		valid_materials_san[mat_name_san] = selection_type
+	valid_materials = sortTim(_valid_materials, /proc/cmp_text_asc)
+
+/datum/gear_tweak/material/get_contents(var/metadata)
+	return "Material: [metadata]"
+
+/datum/gear_tweak/material/get_default()
+	return valid_materials[1]
+
+/datum/gear_tweak/material/get_metadata(var/user, var/metadata, title)
+	return input(user, "Choose a material.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in valid_materials
+
+/datum/gear_tweak/material/tweak_gear_data(var/metadata, var/datum/gear_data/gear_data)
+	if(!(metadata in valid_materials))
+		return
+	gear_data.material = valid_materials[metadata]

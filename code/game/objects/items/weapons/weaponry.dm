@@ -117,7 +117,7 @@
 	anchored = TRUE
 	can_buckle = 0 //no manual buckling or unbuckling
 
-	var/health = 25
+	max_health = 25
 	var/countdown = 15
 	var/temporary = 1
 	var/mob/living/carbon/captured = null
@@ -129,7 +129,7 @@
 	desc = "An energized net meant to subdue animals."
 
 	anchored = FALSE
-	health = 5
+	max_health = 5
 	temporary = 0
 	min_free_time = 5
 	max_free_time = 10
@@ -152,11 +152,11 @@
 	if(temporary)
 		countdown--
 	if(captured.buckled != src)
-		health = 0
+		current_health = 0
 	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
 		countdown = 0
 	if(countdown <= 0)
-		health = 0
+		current_health = 0
 	healthcheck()
 
 /obj/effect/energy_net/Move()
@@ -185,7 +185,7 @@
 		reset_plane_and_layer()
 
 /obj/effect/energy_net/proc/healthcheck()
-	if(health <=0)
+	if(current_health <=0)
 		set_density(0)
 		if(countdown <= 0)
 			visible_message("<span class='warning'>\The [src] fades away!</span>")
@@ -194,14 +194,14 @@
 		qdel(src)
 
 /obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
+	current_health -= Proj.get_structure_damage()
 	healthcheck()
 	return 0
 
 /obj/effect/energy_net/explosion_act()
 	..()
 	if(!QDELETED(src))
-		health = 0
+		current_health = 0
 		healthcheck()
 
 /obj/effect/energy_net/attack_hand(var/mob/user)
@@ -211,17 +211,17 @@
 	if(my_species)
 		if(my_species.can_shred(user))
 			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
-			health -= rand(10, 20)
+			current_health -= rand(10, 20)
 		else
-			health -= rand(1,3)
+			current_health -= rand(1,3)
 	else
-		health -= rand(5,8)
+		current_health -= rand(5,8)
 	to_chat(user, SPAN_DANGER("You claw at the energy net."))
 	healthcheck()
 	return TRUE
 
 /obj/effect/energy_net/attackby(obj/item/W, mob/user)
-	health -= W.force
+	current_health -= W.force
 	healthcheck()
 	..()
 
@@ -235,7 +235,7 @@
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
 		)
 	if(do_after(user, rand(min_free_time, max_free_time), src, incapacitation_flags = INCAPACITATION_DISABLED))
-		health = 0
+		current_health = 0
 		healthcheck()
 		return 1
 	else

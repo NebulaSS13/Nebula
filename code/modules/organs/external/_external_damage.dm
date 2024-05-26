@@ -48,10 +48,10 @@
 				burn = max(burn - spillover, 0)
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
-		owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
-		if((limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && config.limbs_can_break)
+		owner.update_health() //droplimb will call update_health() again if it does end up being called
+		if((limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && get_config_value(/decl/config/toggle/on/health_limbs_can_break))
 			var/total_damage = brute_dam + burn_dam + brute + burn + spillover
-			var/threshold = max_damage * config.organ_health_multiplier
+			var/threshold = max_damage * get_config_value(/decl/config/num/health_organ_health_multiplier)
 			if(total_damage > threshold)
 				if(attempt_dismemberment(pure_brute, burn, sharp, edge, used_weapon, spillover, total_damage > threshold*6, override_droplimb = override_droplimb))
 					return
@@ -68,7 +68,7 @@
 	if((status & ORGAN_BROKEN) && brute)
 		jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
-			owner.emote("scream")	//getting hit on broken hand hurts
+			owner.emote(/decl/emote/audible/scream)	//getting hit on broken hand hurts
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
@@ -109,11 +109,11 @@
 
 	//If there are still hurties to dispense
 	if (spillover)
-		owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
+		owner.shock_stage += spillover * get_config_value(/decl/config/num/health_organ_damage_spillover_multiplier)
 
 	// sync the organ's damage with its wounds
 	update_damages()
-	owner.updatehealth()
+	owner.update_health()
 	if(status & ORGAN_BLEEDING)
 		owner.update_bandages()
 
@@ -192,8 +192,8 @@
 		status &= ~ORGAN_BROKEN
 
 	//Sync the organ's damage with its wounds
-	src.update_damages()
-	owner.updatehealth()
+	update_damages()
+	owner.update_health()
 
 	return update_damstate()
 
@@ -206,7 +206,7 @@
 
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
-	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
+	if(!bodytype || (bodytype.body_flags & BODY_FLAG_NO_DNA))
 		return 0
 	if(BP_IS_PROSTHETIC(src))
 		return 0
@@ -282,7 +282,7 @@
 			return
 	pain = max(0,min(max_damage,pain+amount))
 	if(owner && ((amount > 15 && prob(20)) || (amount > 30 && prob(60))))
-		owner.emote("scream")
+		owner.emote(/decl/emote/audible/scream)
 	return pain-last_pain
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)

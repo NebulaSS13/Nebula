@@ -95,7 +95,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/shard_icon                        // Related to above.
 	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
 	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
-	var/list/strut_recipes                // Holder for all the recipes you can build with the struct stack type.
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons
@@ -110,7 +109,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/table_icon_base = "metal"
 	var/table_icon_reinforced = "reinf_metal"
 
-	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
+	var/list/stack_origin_tech = @'{"materials":1}' // Research level for stacks.
 
 	// Attributes
 	/// How rare is this material in exoplanet xenoflora?
@@ -166,6 +165,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/hardness = MAT_VALUE_HARD            // Used for edge damage in weapons.
 	var/reflectiveness = MAT_VALUE_DULL
 
+	var/ferrous = FALSE                       // Can be used as a striker for firemaking.
 	var/weight = MAT_VALUE_NORMAL             // Determines blunt damage/throwforce for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
@@ -226,6 +226,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/fruit_descriptor // String added to fruit desc if this chemical is present.
 
 	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
+	var/decontamination_dose = 0      // Amount required for a decontamination effect, if any.
 	var/solvent_power = MAT_SOLVENT_NONE
 	var/solvent_melt_dose = 0
 	var/solvent_max_damage  = 0
@@ -280,6 +281,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/sound_dropped             //Default sound something like a material stack made of this material does when hitting the ground or placed down
 
 	var/holographic // Set to true if this material is fake/visual only.
+
+	/// Does high temperature baking change this material into something else?
+	var/bakes_into_material
+	var/bakes_into_at_temperature
 
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
@@ -370,6 +375,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 #define FALSEWALL_STATE "fwall_open"
 /decl/material/validate()
 	. = ..()
+
+	if(!isnull(bakes_into_at_temperature))
+		if(!isnull(melting_point) && melting_point <= bakes_into_at_temperature)
+			. += "baking point is set but melting point is lower or equal to it"
+		if(!isnull(boiling_point) && boiling_point <= bakes_into_at_temperature)
+			. += "baking point is set but boiling point is lower or equal to it"
+
 	if(accelerant_value > FUEL_VALUE_NONE && isnull(ignition_point))
 		. += "accelerant value larger than zero but null ignition point"
 	if(!isnull(ignition_point) && accelerant_value <= FUEL_VALUE_NONE)
@@ -494,6 +506,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		else
 			log_warning("Invalid phase '[phase]' passed to get_mols_from_units!")
 			return units
+
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
@@ -501,6 +514,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	hidden_from_codex = TRUE
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	holographic = TRUE
 
 /// Generic material product (sheets, bricks, etc). Used ALL THE TIME.
 /// May return an instance list, a single instance, or nothing if there is no instance produced.
@@ -599,16 +613,21 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG && O.solvent_can_melt(solvent_power) && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
 		O.visible_message(SPAN_DANGER("\The [O] dissolves!"))
-		O.melt()
+		O.handle_melting()
 		holder?.remove_reagent(type, solvent_melt_dose)
 	else if(defoliant && istype(O, /obj/effect/vine))
 		qdel(O)
 	else
+		if(dirtiness <= DIRTINESS_DECONTAMINATE)
+			if(amount >= decontamination_dose && istype(O, /obj/item))
+				var/obj/item/I = O
+				if(I.contaminated)
+					I.decontaminate()
 		if(dirtiness <= DIRTINESS_STERILE)
 			O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
 			O.was_bloodied = null
 		if(dirtiness <= DIRTINESS_CLEAN)
-			O.clean_blood()
+			O.clean()
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
@@ -622,7 +641,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(REAGENT_VOLUME(holder, type) < turf_touch_threshold)
 		return
 
-	if(istype(T, /turf/simulated))
+	if(istype(T) && T.simulated)
 		var/turf/simulated/wall/W = T
 		if(defoliant)
 			for(var/obj/effect/overlay/wallrot/E in W)
@@ -723,7 +742,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(prob(10))
 			M.SelfMove(pick(global.cardinal))
 		if(prob(narcosis))
-			M.emote(pick("twitch", "drool", "moan"))
+			M.emote(pick(/decl/emote/visible/twitch, /decl/emote/visible/drool, /decl/emote/audible/moan))
 
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
@@ -753,30 +772,30 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(dirtiness <= DIRTINESS_CLEAN)
 		for(var/obj/item/thing in M.get_held_items())
-			thing.clean_blood()
+			thing.clean()
 		var/obj/item/mask = M.get_equipped_item(slot_wear_mask_str)
 		if(mask)
-			mask.clean_blood()
+			mask.clean()
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/obj/item/head = H.get_equipped_item(slot_head_str)
 			if(head)
-				head.clean_blood()
+				head.clean()
 			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
 			if(suit)
-				suit.clean_blood()
+				suit.clean()
 			else
 				var/obj/item/uniform = H.get_equipped_item(slot_w_uniform_str)
 				if(uniform)
-					uniform.clean_blood()
+					uniform.clean()
 
 			var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 			if(shoes)
-				shoes.clean_blood()
+				shoes.clean()
 			else
-				H.clean_blood(1)
+				H.clean()
 				return
-		M.clean_blood()
+		M.clean()
 
 	if(solvent_power > MAT_SOLVENT_NONE && removed >= solvent_melt_dose && M.solvent_act(min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), solvent_melt_dose, solvent_power))
 		holder.remove_reagent(type, REAGENT_VOLUME(holder, type))

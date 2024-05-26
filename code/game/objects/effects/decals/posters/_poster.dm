@@ -7,9 +7,9 @@
 	icon               = 'icons/obj/items/posters.dmi'
 	icon_state         = "poster0"
 	anchored           = TRUE
-	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':-32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = @'{"NORTH":{"y":32}, "SOUTH":{"y":-32}, "WEST":{"x":32}, "EAST":{"x":-32}}'
 	material           = /decl/material/solid/organic/paper
-	maxhealth          = 10
+	max_health = 10
 	parts_type         = /obj/item/poster
 	parts_amount       = 1
 
@@ -112,7 +112,7 @@
 	if(ruined == _ruined)
 		return
 	ruined = _ruined
-	health = (!ruined)? max(health, 1) : 0 //setting unruined implies health > 0
+	current_health = (!ruined)? max(current_health, 1) : 0 //setting unruined implies health > 0
 
 	//Make sure we look the part
 	update_appearence()

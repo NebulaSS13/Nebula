@@ -37,7 +37,9 @@
 		var/obj/item/pizzabox/box = new(location)
 		M.forceMove(box)
 		box.pizza = M
-		box.boxtag = "A special order from [origin]"
+		box.box_tag = "A special order from [origin]!"
+		box.update_strings()
+		box.update_icon()
 
 /datum/trader/ship/chinese
 	name = "Chinese Restaurant"
@@ -50,16 +52,22 @@
 	)
 	possible_wanted_items = list()
 	possible_trading_items = list(
+		/obj/item/utensil/chopsticks                    = TRADER_THIS_TYPE,
+		/obj/item/utensil/chopsticks/plastic            = TRADER_THIS_TYPE,
+		/obj/item/chems/condiment/small/soysauce        = TRADER_THIS_TYPE,
+		/obj/item/chems/condiment/capsaicin             = TRADER_THIS_TYPE,
+		/obj/item/chems/food/boiledrice/chazuke         = TRADER_THIS_TYPE,
+		/obj/item/chems/food/katsucurry                 = TRADER_THIS_TYPE,
 		/obj/item/chems/food/meatkabob    	            = TRADER_THIS_TYPE,
-		/obj/item/chems/food/monkeysdelight             = TRADER_THIS_TYPE,
+		/obj/item/chems/food/boiledegg                  = TRADER_THIS_TYPE,
+		/obj/item/chems/food/boiledrice                 = TRADER_THIS_TYPE,
 		/obj/item/chems/food/ricepudding                = TRADER_THIS_TYPE,
-		/obj/item/chems/food/slice/xenomeatbread/filled = TRADER_THIS_TYPE,
 		/obj/item/chems/food/soydope                    = TRADER_THIS_TYPE,
 		/obj/item/chems/food/stewedsoymeat              = TRADER_THIS_TYPE,
 		/obj/item/chems/drinks/dry_ramen                = TRADER_THIS_TYPE
 	)
 
-	var/list/fortunes = list(
+	var/static/list/fortunes = list(
 		"Today it's up to you to create the peacefulness you long for.",
 		"If you refuse to accept anything but the best, you very often get it.",
 		"A smile is your passport into the hearts of others.",
@@ -114,7 +122,6 @@
 		/obj/item/chems/drinks/cans              = TRADER_SUBTYPES_ONLY,
 		/obj/item/chems/drinks/bottle            = TRADER_SUBTYPES_ONLY,
 		/obj/item/chems/drinks/bottle/small      = TRADER_BLACKLIST,
-		/obj/item/chems/food/checker             = TRADER_BLACKLIST_ALL,
 		/obj/item/chems/food/fruit_slice         = TRADER_BLACKLIST,
 		/obj/item/chems/food/slice               = TRADER_BLACKLIST_ALL,
 		/obj/item/chems/food/grown               = TRADER_BLACKLIST_ALL,

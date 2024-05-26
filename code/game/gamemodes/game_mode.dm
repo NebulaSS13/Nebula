@@ -10,6 +10,7 @@ var/global/list/additional_antag_types = list()
 	var/votable = TRUE
 	var/probability = 0
 
+	var/available_by_default = TRUE
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
 	var/end_on_antag_death = FALSE           // Round will end when all antagonists are dead.
@@ -473,7 +474,7 @@ var/global/list/additional_antag_types = list()
 
 /decl/game_mode/proc/create_antagonists()
 
-	if(!config.traitor_scaling)
+	if(!get_config_value(/decl/config/toggle/traitor_scaling))
 		antag_scaling_coeff = 0
 
 	if(length(associated_antags))
@@ -572,7 +573,7 @@ var/global/list/additional_antag_types = list()
 
 	if(!player || !player.current) return
 
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
+	if(get_config_value(/decl/config/enum/objectives_disabled) == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
 		return
 
 	var/obj_count = 1

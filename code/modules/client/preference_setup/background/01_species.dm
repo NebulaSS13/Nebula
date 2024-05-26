@@ -35,7 +35,7 @@
 	var/list/playables = list()
 
 	for(var/s in prefilter)
-		if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
+		if(!check_rights(R_ADMIN, 0) && get_config_value(/decl/config/toggle/use_alien_whitelist))
 			var/decl/species/checking_species = get_species_by_key(s)
 			if(!(checking_species.spawn_flags & SPECIES_CAN_JOIN))
 				continue
@@ -92,12 +92,8 @@
 
 			pref.species = choice
 			pref.sanitize_preferences()
-			//reset hairstyle prefs
-			ResetAllHair()
-			// reset colors
 			var/decl/species/mob_species = pref.get_species_decl()
 			mob_species.handle_post_species_pref_set(pref)
-			// reset markings
 			var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
 			mob_bodytype.handle_post_bodytype_pref_set(pref)
 

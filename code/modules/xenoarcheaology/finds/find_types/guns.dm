@@ -64,13 +64,16 @@
 
 	//10% chance to have an unchargeable cell
 	//15% chance to gain a random amount of starting energy, otherwise start with an empty cell
-	if(prob(10))
-		new_gun.power_supply.maxcharge = 0
-	if(prob(15))
-		new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
-	else
-		new_gun.power_supply.charge = 0
-
+	var/obj/item/cell/power_supply = new_gun.get_cell()
+	if(power_supply)
+		if(prob(10))
+			power_supply.maxcharge = 0
+		if(prob(15))
+			power_supply.charge = rand(0, power_supply.maxcharge)
+		else
+			power_supply.charge = 0
+		power_supply.update_icon()
+		new_gun.update_icon()
 	return new_gun
 
 /decl/archaeological_find/laser/new_icon()

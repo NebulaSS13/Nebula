@@ -6,7 +6,7 @@
 Scent intensity
 *****/
 /decl/scent_intensity
-	var/cooldown = 5 MINUTES 
+	var/cooldown = 5 MINUTES
 	var/intensity = 1
 
 /decl/scent_intensity/proc/PrintMessage(var/mob/user, var/descriptor, var/scent)
@@ -121,18 +121,24 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 *****/
 
 /proc/set_scent_by_reagents(var/atom/smelly_atom)
+	var/decl/material/smelliest = get_smelliest_reagent(smelly_atom.reagents)
+	if(smelliest)
+		set_extension(smelly_atom, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)
+
+// Returns the smelliest reagent of a reagent holder.
+/proc/get_smelliest_reagent(var/datum/reagents/holder)
 	var/decl/material/smelliest
 	var/decl/material/scent_intensity
-	if(!smelly_atom.reagents || !smelly_atom.reagents.total_volume)
+	if(!holder || !holder.total_volume)
 		return
-	for(var/reagent_type in smelly_atom.reagents.reagent_volumes)
+	for(var/reagent_type in holder.reagent_volumes)
 		var/decl/material/R = GET_DECL(reagent_type)
 		if(!R.scent)
 			continue
 		var/decl/scent_intensity/SI = GET_DECL(R.scent_intensity)
-		var/r_scent_intensity = REAGENT_VOLUME(smelly_atom.reagents, reagent_type) * SI.intensity
+		var/r_scent_intensity = REAGENT_VOLUME(holder, reagent_type) * SI.intensity
 		if(r_scent_intensity > scent_intensity)
 			smelliest = R
-			scent_intensity = r_scent_intensity 
-	if(smelliest)
-		set_extension(smelly_atom, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)
+			scent_intensity = r_scent_intensity
+
+	return smelliest

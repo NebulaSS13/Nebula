@@ -91,7 +91,7 @@
 	planetoid_data_type        = /datum/planetoid_data/random/volcanic
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic
 	max_themes                 = 1
-	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
+	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_WATER
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/volcanic
 	prefered_level_data_per_z  = list(
@@ -119,23 +119,7 @@
 	flora_prob           = 3
 	grass_prob           = 0
 	large_flora_prob     = 0
-
-//Squashing most of 1 tile lava puddles
-/datum/random_map/noise/exoplanet/volcanic/cleanup()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
-			if(noise2value(map[current_cell]) < water_level)
-				continue
-			var/frendos
-			for(var/dx in list(-1,0,1))
-				for(var/dy in list(-1,0,1))
-					var/tmp_cell = get_map_cell(x+dx,y+dy)
-					if(tmp_cell && tmp_cell != current_cell && noise2value(map[tmp_cell]) >= water_level)
-						frendos = 1
-						break
-			if(!frendos)
-				map[current_cell] = 1
+	smooth_single_tiles  = TRUE
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas

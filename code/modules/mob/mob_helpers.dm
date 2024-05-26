@@ -24,7 +24,6 @@
 			if(BP_IS_PROSTHETIC(E))
 				robolimb_count++
 		full_prosthetic = robolimb_count > 0 && (robolimb_count == LAZYLEN(limbs)) //If no organs, no way to tell
-		update_emotes()
 	return full_prosthetic
 
 /mob/living/silicon/isSynthetic()
@@ -66,11 +65,12 @@
 
 /proc/getsensorlevel(A)
 	var/mob/M = A
-	if(istype(M))
-		var/obj/item/clothing/under/U = M.get_equipped_item(slot_w_uniform_str)
-		if(istype(U))
-			return U.sensor_mode
-	return SUIT_SENSOR_OFF
+	if(!istype(M))
+		return VITALS_SENSOR_OFF
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = M.get_vitals_sensor()
+	if(sensor)
+		return sensor.sensor_mode
+	return VITALS_SENSOR_OFF
 
 /proc/is_admin(var/mob/user)
 	return check_rights(R_ADMIN, 0, user) != 0

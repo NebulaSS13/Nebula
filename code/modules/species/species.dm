@@ -23,6 +23,21 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 	var/base_internal_prosthetics_model
 
+	// A list of customization categories made available in character preferences.
+	var/list/available_accessory_categories = list(
+		SAC_HAIR,
+		SAC_FACIAL_HAIR,
+		SAC_COSMETICS,
+		SAC_MARKINGS
+	)
+
+	// Lists of accessory types for modpack modification of accessory restrictions.
+	// These lists are pretty broad and indiscriminate in application, don't use
+	// them for fine detail restriction/allowing if you can avoid it.
+	var/list/allow_specific_sprite_accessories
+	var/list/disallow_specific_sprite_accessories
+	var/list/accessory_styles
+
 	var/list/blood_types = list(
 		/decl/blood_type/aplus,
 		/decl/blood_type/aminus,
@@ -37,8 +52,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
 
-	var/static/list/hair_styles
-	var/static/list/facial_hair_styles
 
 	var/organs_icon		//species specific internal organs icons
 
@@ -112,12 +125,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/blood_reagent = /decl/material/liquid/blood
 
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
-	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
-	var/cold_level_2 = 200                                      // Cold damage level 2 below this point.
-	var/cold_level_3 = 120                                      // Cold damage level 3 below this point.
-	var/heat_level_1 = 360                                      // Heat damage level 1 above this point.
-	var/heat_level_2 = 400                                      // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000                                     // Heat damage level 3 above this point.
+
 	var/passive_temp_gain = 0		                            // Species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE             // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE           // High pressure warning.
@@ -125,19 +133,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE               // Dangerously low pressure.
 	var/body_temperature = 310.15	                            // Species will try to stabilize at this temperature.
 	                                                            // (also affects temperature processing)
-	var/heat_discomfort_level = 315                             // Aesthetic messages about feeling warm.
-	var/cold_discomfort_level = 285                             // Aesthetic messages about feeling chilly.
-	var/list/heat_discomfort_strings = list(
-		"You feel sweat drip down your neck.",
-		"You feel uncomfortably warm.",
-		"Your skin prickles in the heat."
-		)
-	var/list/cold_discomfort_strings = list(
-		"You feel chilly.",
-		"You shiver suddenly.",
-		"Your chilly flesh stands out in goosebumps."
-		)
-
 	var/water_soothe_amount
 
 	// HUD data vars.
@@ -232,6 +227,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/preview_icon_path
 	var/preview_outfit = /decl/hierarchy/outfit/job/generic/assistant
 
+	/// List of emote types that this species can use by default.
+	var/list/default_emotes
+
 /decl/species/proc/build_codex_strings()
 
 	if(!codex_description)
@@ -310,6 +308,42 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		available_bodytypes -= bodytype
 		available_bodytypes += GET_DECL(bodytype)
 
+	// Update sprite accessory lists for these species.
+	for(var/accessory_type in allow_specific_sprite_accessories)
+		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+		// If this accessory is species restricted, add us to the list.
+		if(accessory.species_allowed)
+			accessory.species_allowed |= name
+		if(!isnull(accessory.body_flags_allowed))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_allowed |= bodytype.body_flags
+		if(!isnull(accessory.body_flags_denied))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_denied &= ~bodytype.body_flags
+		if(accessory.bodytype_categories_allowed)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed |= bodytype.bodytype_category
+		if(accessory.bodytype_categories_denied)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed -= bodytype.bodytype_category
+
+	for(var/accessory_type in disallow_specific_sprite_accessories)
+		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+		if(accessory.species_allowed)
+			accessory.species_allowed -= name
+		if(!isnull(accessory.body_flags_allowed))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_allowed &= ~bodytype.body_flags
+		if(!isnull(accessory.body_flags_denied))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_denied |= bodytype.body_flags
+		if(accessory.bodytype_categories_allowed)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed -= bodytype.bodytype_category
+		if(accessory.bodytype_categories_denied)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed |= bodytype.bodytype_category
+
 	if(ispath(default_bodytype))
 		default_bodytype = GET_DECL(default_bodytype)
 	else if(length(available_bodytypes) && !default_bodytype)
@@ -387,31 +421,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
 		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
 
-	if(cold_level_3)
-		if(cold_level_2)
-			if(cold_level_3 > cold_level_2)
-				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
-			if(cold_level_1)
-				if(cold_level_3 > cold_level_1)
-					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
-	if(cold_level_2 && cold_level_1)
-		if(cold_level_2 > cold_level_1)
-			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
-
-	if(heat_level_3 != INFINITY)
-		if(heat_level_2 != INFINITY)
-			if(heat_level_3 < heat_level_2)
-				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
-			if(heat_level_1 != INFINITY)
-				if(heat_level_3 < heat_level_1)
-					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
-	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
-		if(heat_level_2 < heat_level_1)
-			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
-
-	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
-		. += "heat and cold damage level thresholds overlap"
-
 	if(taste_sensitivity < 0)
 		. += "taste_sensitivity ([taste_sensitivity]) was negative"
 
@@ -469,9 +478,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/handle_sleeping(var/mob/living/carbon/human/H)
 	if(prob(2) && !H.failed_last_breath && !H.isSynthetic())
 		if(!HAS_STATUS(H, STAT_PARA))
-			H.emote("snore")
+			H.emote(/decl/emote/audible/snore)
 		else
-			H.emote("groan")
+			H.emote(/decl/emote/audible/groan)
 
 /decl/species/proc/handle_environment_special(var/mob/living/carbon/human/H)
 	return
@@ -547,7 +556,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.set_fullscreen(GET_STATUS(H, STAT_BLIND) && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
 	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
-	if(config.welder_vision)
+	if(get_config_value(/decl/config/toggle/on/welder_vision))
 		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
 	var/how_nearsighted = get_how_nearsighted(H)
 	H.set_fullscreen(how_nearsighted, "nearsighted", /obj/screen/fullscreen/oxy, how_nearsighted)
@@ -599,7 +608,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/blood_type/blood = get_blood_decl(H)
 	return istype(blood) ? blood.splatter_name : "blood"
 
-/decl/species/proc/get_blood_color(var/mob/living/carbon/human/H)
+/decl/species/proc/get_species_blood_color(var/mob/living/carbon/human/H)
 	var/decl/blood_type/blood = get_blood_decl(H)
 	return istype(blood) ? blood.splatter_colour : COLOR_BLOOD_HUMAN
 
@@ -615,7 +624,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		return shoes.move_trail
 	return move_trail
 
-/decl/species/proc/handle_trail(var/mob/living/carbon/human/H, var/turf/simulated/T)
+/decl/species/proc/handle_trail(var/mob/living/carbon/human/H, var/turf/T)
 	return
 
 /decl/species/proc/update_skin(var/mob/living/carbon/human/H)
@@ -675,55 +684,28 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] face is horribly mangled!\n")
 
-/decl/species/proc/get_hair_style_types(var/decl/bodytype/bodytype)
+/decl/species/proc/get_available_accessories(var/decl/bodytype/bodytype, accessory_category)
+	. = list()
+	for(var/accessory in get_available_accessory_types(bodytype, accessory_category))
+		. += GET_DECL(accessory)
+
+/decl/species/proc/get_available_accessory_types(decl/bodytype/bodytype, accessory_category)
 	if(!bodytype)
 		bodytype = default_bodytype
-	var/list/hair_styles_by_species = LAZYACCESS(hair_styles, type)
-	if(!hair_styles_by_species)
-		hair_styles_by_species = list()
-		LAZYSET(hair_styles, type, hair_styles_by_species)
-	var/list/hair_style_by_bodytype = hair_styles_by_species[bodytype]
-	if(!hair_style_by_bodytype)
-		hair_style_by_bodytype = list()
-		LAZYSET(hair_styles_by_species, bodytype, hair_style_by_bodytype)
-		var/list/all_hairstyles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
-		for(var/hairstyle in all_hairstyles)
-			var/decl/sprite_accessory/S = all_hairstyles[hairstyle]
-			if(!S.accessory_is_available(null, src, bodytype))
+	var/list/available_accessories = accessory_styles?[bodytype.type]?[accessory_category]
+	if(!available_accessories)
+		available_accessories = list()
+		LAZYINITLIST(accessory_styles)
+		LAZYSET(accessory_styles[bodytype.type], accessory_category, available_accessories)
+		var/decl/sprite_accessory_category/accessory_category_decl = GET_DECL(accessory_category)
+		var/list/all_accessories = decls_repository.get_decls_of_subtype(accessory_category_decl.base_accessory_type)
+		for(var/accessory_style in all_accessories)
+			var/decl/sprite_accessory/check_accessory = all_accessories[accessory_style]
+			if(!check_accessory || !check_accessory.accessory_is_available(null, src, bodytype))
 				continue
-			ADD_SORTED(hair_style_by_bodytype, hairstyle, /proc/cmp_text_asc)
-			hair_style_by_bodytype[hairstyle] = S
-	return hair_style_by_bodytype
-
-/decl/species/proc/get_hair_styles(var/decl/bodytype/bodytype)
-	. = list()
-	for(var/hair in get_hair_style_types(bodytype))
-		. += GET_DECL(hair)
-
-/decl/species/proc/get_facial_hair_style_types(var/decl/bodytype/bodytype)
-	if(!bodytype)
-		bodytype = default_bodytype
-	var/list/facial_hair_styles_by_species = LAZYACCESS(facial_hair_styles, type)
-	if(!facial_hair_styles_by_species)
-		facial_hair_styles_by_species = list()
-		LAZYSET(facial_hair_styles, type, facial_hair_styles_by_species)
-	var/list/facial_hair_style_by_bodytype = facial_hair_styles_by_species[bodytype]
-	if(!facial_hair_style_by_bodytype)
-		facial_hair_style_by_bodytype = list()
-		LAZYSET(facial_hair_styles_by_species, bodytype, facial_hair_style_by_bodytype)
-		var/list/all_facial_styles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
-		for(var/facialhairstyle in all_facial_styles)
-			var/decl/sprite_accessory/S = all_facial_styles[facialhairstyle]
-			if(!S.accessory_is_available(null, src, bodytype))
-				continue
-			ADD_SORTED(facial_hair_style_by_bodytype, facialhairstyle, /proc/cmp_text_asc)
-			facial_hair_style_by_bodytype[facialhairstyle] = S
-	return facial_hair_style_by_bodytype
-
-/decl/species/proc/get_facial_hair_styles(var/decl/bodytype/bodytype)
-	. = list()
-	for(var/hair in get_facial_hair_style_types(bodytype))
-		. += GET_DECL(hair)
+			ADD_SORTED(available_accessories, accessory_style, /proc/cmp_text_asc)
+			available_accessories[accessory_style] = check_accessory
+	return available_accessories
 
 /decl/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
@@ -743,8 +725,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
 		if(pain_level >= pain_power)
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
-			var/decl/emote/E = GET_DECL(pick(pain_emotes))
-			return E.key
+			return pick(pain_emotes)
 
 /decl/species/proc/handle_post_move(var/mob/living/carbon/human/H)
 	handle_exertion(H)
@@ -832,20 +813,3 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
-
-/decl/species/proc/get_species_temperature_threshold(var/threshold)
-	switch(threshold)
-		if(COLD_LEVEL_1)
-			return cold_level_1
-		if(COLD_LEVEL_2)
-			return cold_level_2
-		if(COLD_LEVEL_3)
-			return cold_level_3
-		if(HEAT_LEVEL_1)
-			return heat_level_1
-		if(HEAT_LEVEL_2)
-			return heat_level_2
-		if(HEAT_LEVEL_3)
-			return heat_level_3
-		else
-			CRASH("get_species_temperature_threshold() called with invalid threshold value.")

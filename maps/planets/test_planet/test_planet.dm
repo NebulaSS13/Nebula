@@ -121,7 +121,7 @@
 	name             = "neutralia sky"
 	level_id         = NEUTRALIA_SKY_LEVEL_ID
 	base_area        = /area/exoplanet/neutralia/sky
-	base_turf        = /turf/exterior/open
+	base_turf        = /turf/open
 	border_filler    = /turf/unsimulated/dark_filler
 
 /datum/level_data/planetoid/neutralia/surface

@@ -15,7 +15,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'engineering':4,'materials':2}"
+	origin_tech = @'{"engineering":4,"materials":2}'
 	material = /decl/material/solid/metal/steel
 	var/stored_matter = 0
 	var/max_stored_matter = 120
@@ -128,7 +128,7 @@
 	icon_state = "rcd"
 	item_state = "rcdammo"
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'materials':2}"
+	origin_tech = @'{"materials":2}'
 	material = /decl/material/solid/metal/steel
 	var/remaining = 30
 
@@ -156,7 +156,7 @@
 	desc = "Do not ingest."
 	icon_state = "rcdlarge"
 	remaining = 120
-	origin_tech = "{'materials':4}"
+	origin_tech = @'{"materials":4}'
 
 /obj/item/rcd/borg
 	canRwall = 1

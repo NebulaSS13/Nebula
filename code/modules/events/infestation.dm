@@ -61,8 +61,7 @@
 			num += rand(2,max_number)
 		log_and_message_admins("Vermin infestation spawned ([vermstring] x[num]) in \the [location.proper_name]", location = pick_area_turf(location))
 		while(vermin_turfs.len && num > 0)
-			var/turf/simulated/floor/T = pick(vermin_turfs)
-			vermin_turfs.Remove(T)
+			var/turf/T = pick_n_take(vermin_turfs)
 			num--
 
 			var/spawn_type = pick(spawn_types)

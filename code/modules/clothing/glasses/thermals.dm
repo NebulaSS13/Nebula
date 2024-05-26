@@ -4,7 +4,7 @@
 	gender = NEUTER
 	icon = 'icons/clothing/eyes/scanner_thermal.dmi'
 	action_button_name = "Toggle Goggles"
-	origin_tech = "{'magnets':3}"
+	origin_tech = @'{"magnets":3}'
 	toggleable = TRUE
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
@@ -13,13 +13,13 @@
 /obj/item/clothing/glasses/thermal/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.thermal
+	screen_overlay = global_hud.thermal
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
 	name = "optical meson scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon = 'icons/clothing/eyes/scanner_meson.dmi'
-	origin_tech = "{'magnets':3,'esoteric':4}"
+	origin_tech = @'{"magnets":3,"esoteric":4}'
 
 /obj/item/clothing/glasses/thermal/plain
 	toggleable = FALSE

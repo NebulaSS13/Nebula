@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	action_button_name = "Toggle UV light"
 	material = /decl/material/solid/metal/steel
-	origin_tech = "{'magnets':1,'engineering':1}"
+	origin_tech = @'{"magnets":1,"engineering":1}'
 	z_flags = ZMM_MANGLE_PLANES
 	var/list/scanned = list()
 	var/list/stored_alpha = list()

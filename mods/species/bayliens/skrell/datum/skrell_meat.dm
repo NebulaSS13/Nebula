@@ -1,3 +1,3 @@
 /obj/item/chems/food/fish/octopus/skrell/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/hallucinogenics, 5)
+	add_to_reagents(/decl/material/liquid/hallucinogenics, 5)

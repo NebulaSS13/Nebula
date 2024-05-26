@@ -8,14 +8,9 @@
 	body_parts_covered  = SLOT_HEAD
 
 	var/protects_against_weather = FALSE
-	var/image/light_overlay_image
 	var/light_applied
 	var/brightness_on
 	var/on = 0
-
-/obj/item/clothing/head/equipped(var/mob/user, var/slot)
-	light_overlay_image = null
-	..(user, slot)
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -40,18 +35,15 @@
 
 /obj/item/clothing/head/on_update_icon(var/mob/user)
 	. = ..()
-	if(on)
-		var/cache_key = "[icon]-[get_world_inventory_state()]_icon"
-		if(!light_overlay_cache[cache_key])
-			var/light_state = "[get_world_inventory_state()]_light"
-			if(check_state_in_icon(light_state, icon))
-				light_overlay_cache[cache_key] = image(icon, light_state)
-			else
-				light_overlay_cache[cache_key] = new /image
-		add_overlay(light_overlay_cache[cache_key])
 	update_clothing_icon()
+	if(on)
+		var/light_state = "[icon_state]_light"
+		if(check_state_in_icon(light_state, icon))
+			var/image/light_overlay = image(icon, light_state)
+			light_overlay.appearance_flags |= RESET_COLOR
+			add_overlay(light_overlay)
 
-/obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
 		var/light_overlay
 		if(user_mob.get_bodytype_category() != bodytype)

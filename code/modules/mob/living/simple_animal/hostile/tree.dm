@@ -6,11 +6,8 @@
 	turns_per_move = 5
 	meat_type = /obj/item/chems/food/fish
 	speed = -1
-	maxHealth = 250
-	health = 250
-
+	max_health = 250
 	pixel_x = -16
-
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
 
@@ -20,13 +17,20 @@
 	minbodytemp = 0
 	faction = "carp"
 
+/mob/living/simple_animal/hostile/tree/check_has_mouth()
+	return FALSE
+
 /mob/living/simple_animal/hostile/tree/FindTarget()
 	. = ..()
 	if(.)
 		audible_emote("growls at [.]")
 
-/mob/living/simple_animal/hostile/tree/death(gibbed, deathmessage, show_dead_message)
-	..(null,"is hacked into pieces!", show_dead_message)
-	var/decl/material/mat = GET_DECL(/decl/material/solid/organic/wood)
-	mat.place_shards(loc)
-	qdel(src)
+/mob/living/simple_animal/hostile/tree/get_death_message(gibbed)
+	return "is hacked into pieces!"
+
+/mob/living/simple_animal/hostile/tree/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		var/decl/material/mat = GET_DECL(/decl/material/solid/organic/wood)
+		mat.place_shards(loc)
+		qdel(src)

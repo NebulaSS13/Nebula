@@ -53,7 +53,7 @@
 
 /datum/vote/proc/start_vote()
 	start_time = world.time
-	time_set = (time_set ? time_set : config.vote_period)
+	time_set = (time_set ? time_set : get_config_value(/decl/config/num/vote_period))
 	time_remaining = round(time_set / 10)
 	status = VOTE_STATUS_ACTIVE
 
@@ -68,7 +68,7 @@
 
 //Modifies the vote totals based on non-voting mobs.
 /datum/vote/proc/handle_default_votes()
-	if(!config.vote_no_default)
+	if(!get_config_value(/decl/config/num/vote_no_default))
 		return length(global.clients) - length(voted) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
 
 /datum/vote/proc/tally_result()
@@ -130,7 +130,7 @@
 
 // Checks if the mob is participating in the round sufficiently to vote, as per config settings.
 /datum/vote/proc/mob_not_participating(mob/voter)
-	if(config.vote_no_dead && voter.stat == DEAD && !voter.client.holder)
+	if(get_config_value(/decl/config/num/vote_no_dead) && voter.stat == DEAD && !voter.client.holder)
 		return 1
 
 //null = no toggle set. This is for UI purposes; a text return will give a link (toggle; currently "return") in the vote panel.

@@ -1,6 +1,6 @@
 /atom/movable/get_alt_interactions(var/mob/user)
 	. = ..()
-	if(config.expanded_alt_interactions)
+	if(get_config_value(/decl/config/toggle/expanded_alt_interactions))
 		LAZYADD(., list(
 			/decl/interaction_handler/look,
 			/decl/interaction_handler/grab

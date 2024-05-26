@@ -2634,8 +2634,8 @@
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/clothing/head/hardhat/orange,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -2698,7 +2698,7 @@
 /area/map_template/colony/messhall)
 "fI" = (
 /obj/structure/table/woodentable_reinforced,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
@@ -3327,7 +3327,7 @@
 /obj/item/storage/belt/utility,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/geiger,
 /obj/item/geiger,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3489,7 +3489,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/plating,
 /area/map_template/colony/atmospherics)
@@ -3499,7 +3499,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -3915,7 +3915,7 @@
 	dir = 1
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "hR" = (
@@ -5203,7 +5203,7 @@
 "kc" = (
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -5949,8 +5949,8 @@
 	dir = 8
 	},
 /obj/structure/closet/crate,
-/obj/item/stack/material/reinforced/mapped/plasteel/ten,
-/obj/item/stack/material/reinforced/mapped/plasteel/ten,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/puck/mapped/uranium/ten,
@@ -6331,7 +6331,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
@@ -6386,7 +6385,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6498,7 +6496,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
@@ -6910,7 +6907,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/mob/living/simple_animal/chicken,
+/mob/living/simple_animal/fowl/chicken,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "nm" = (
@@ -7230,7 +7227,6 @@
 	dir = 8
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7416,10 +7412,10 @@
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/pickaxe,
-/obj/item/pickaxe,
-/obj/item/shovel,
-/obj/item/shovel,
+/obj/item/tool/pickaxe,
+/obj/item/tool/pickaxe,
+/obj/item/tool/shovel,
+/obj/item/tool/shovel,
 /obj/item/storage/ore,
 /obj/item/storage/ore,
 /obj/item/storage/backpack/dufflebag/eng,
@@ -7427,7 +7423,7 @@
 /obj/machinery/door/window/northright,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -7810,7 +7806,7 @@
 /turf/exterior/concrete,
 /area/template_noop)
 "vt" = (
-/mob/living/simple_animal/chicken,
+/mob/living/simple_animal/fowl/chicken,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "vJ" = (

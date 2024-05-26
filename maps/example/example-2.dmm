@@ -39,7 +39,7 @@
 /area/example/second)
 "es" = (
 /obj/machinery/light,
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "fJ" = (
 /obj/machinery/light/small{
@@ -143,7 +143,10 @@
 	},
 /obj/machinery/button/access/exterior{
 	id_tag = "upper_level_dock";
-	pixel_y = -21
+	pixel_y = -24;
+	dir = 4;
+	pixel_x = 12;
+	directional_offset = null
 	},
 /turf/simulated/floor,
 /area/example/second)
@@ -178,7 +181,7 @@
 /area/example/second)
 "nB" = (
 /obj/effect/shuttle_landmark/upper_level,
-/turf/simulated/open,
+/turf/open,
 /area/space)
 "nC" = (
 /obj/effect/floor_decal/corner/mauve/mono,
@@ -206,7 +209,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
 "oS" = (
-/turf/simulated/open,
+/turf/open,
 /area/space)
 "pc" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -231,7 +234,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "upper_level_dock_sensor_chamber";
-	pixel_x = 24
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	id_tag = "upper_level_dock";
@@ -310,8 +314,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/button/access/interior{
 	id_tag = "upper_level_dock";
-	pixel_x = 22;
-	pixel_y = 28
+	pixel_x = 24;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
@@ -329,8 +333,8 @@
 /area/example/second)
 "ug" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Example Second Deck";
-},
+	name = "Example Second Deck"
+	},
 /turf/space,
 /area/space)
 "uk" = (
@@ -355,13 +359,13 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
 "wP" = (
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "xk" = (
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "xs" = (
 /turf/space,
@@ -505,7 +509,7 @@
 /area/example/second)
 "GG" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "GP" = (
 /obj/machinery/light{
@@ -581,7 +585,7 @@
 /area/example/second)
 "NY" = (
 /obj/structure/ladder,
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "Pc" = (
 /obj/effect/floor_decal/corner/orange{
@@ -605,11 +609,11 @@
 /area/example/second)
 "QU" = (
 /obj/structure/rack,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/ingot/mapped/gold/ten,
 /obj/item/stack/material/segment/mapped/mhydrogen/ten,
 /obj/item/stack/material/ingot/mapped/silver/ten,
@@ -651,7 +655,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/example/second)
 "VL" = (
-/turf/simulated/open,
+/turf/open,
 /area/turbolift/example/second)
 "Xm" = (
 /obj/structure/iv_drip,
@@ -665,7 +669,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "XE" = (
 /turf/simulated/wall/r_wall/prepainted,

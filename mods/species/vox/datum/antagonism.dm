@@ -49,7 +49,7 @@
 	if(user.mind)
 		user.mind.transfer_to(vox)
 	qdel(user)
-	addtimer(CALLBACK(src, .proc/do_post_voxifying, vox), 1)
+	addtimer(CALLBACK(src, PROC_REF(do_post_voxifying), vox), 1)
 
 /obj/structure/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
 	var/newname = sanitize_safe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)

@@ -17,9 +17,9 @@
 
 /datum/exoplanet_theme/proc/adapt_animal(var/datum/planetoid_data/E, var/mob/A)
 
-/datum/exoplanet_theme/proc/modify_ruin_whitelist(var/whitelist_flags)
+/datum/exoplanet_theme/proc/modify_template_whitelist(var/whitelist_flags)
 
-/datum/exoplanet_theme/proc/modify_ruin_blacklist(var/blacklist_flags)
+/datum/exoplanet_theme/proc/modify_template_blacklist(var/blacklist_flags)
 
 /datum/exoplanet_theme/proc/get_extra_fauna()
 

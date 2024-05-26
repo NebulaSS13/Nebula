@@ -18,8 +18,8 @@
 		return 0 //must return a number
 
 	//Apply damage
-	damage = min(health, damage)
-	health = clamp(health - damage, 0, max_health)
+	damage = min(current_health, damage)
+	current_health = clamp(current_health - damage, 0, get_max_health())
 	check_health(damage, damage_type, damage_flags)
 	return damage
 
@@ -27,6 +27,16 @@
 	if(QDELETED(src))
 		return TRUE
 	. = (!throwing) ? ..() : FALSE
+
+// We only do this for the extension as other stuff that overrides get_cell() handles EMP in an override.
+/obj/item/emp_act(var/severity)
+	// we do not use get_cell() here as some devices may return a non-extension cell
+	var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+	var/obj/item/cell/cell = cell_loaded?.get_cell()
+	if(cell)
+		cell.emp_act(severity)
+		update_icon()
+	return ..()
 
 /obj/item/explosion_act(severity)
 	if(QDELETED(src))
@@ -39,7 +49,7 @@
 	return (mult * (4 - severity)) + (severity != 1? rand(-(mult / severity), (mult / severity)) : 0 )
 
 /obj/item/proc/explosion_severity_damage_multiplier()
-	return CEILING(max_health / 3)
+	return CEILING(get_max_health() / 3)
 
 /obj/item/is_burnable()
 	return simulated
@@ -116,25 +126,3 @@
 		M.take_organ_damage(7)
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
-
-/obj/item/get_examined_damage_string(health_ratio)
-	if(!can_take_damage())
-		return
-	. = ..()
-
-///Returns whether the item can take damages or if its invulnerable
-/obj/item/proc/can_take_damage()
-	return (health != ITEM_HEALTH_NO_DAMAGE) && (max_health != ITEM_HEALTH_NO_DAMAGE)
-
-///Returns whether the object is currently damaged.
-/obj/item/proc/is_damaged()
-	return can_take_damage() && (health < max_health)
-
-///Returns the percentage of health remaining for this object.
-/obj/item/proc/get_percent_health()
-	return can_take_damage()? round((health * 100)/max_health, 0.01) : 100
-
-///Returns the percentage of damage done to this object.
-/obj/item/proc/get_percent_damage()
-	//Clamp from 0 to 100 so health values larger than max_health don't return unhelpful numbers
-	return clamp(100 - get_percent_health(), 0, 100)

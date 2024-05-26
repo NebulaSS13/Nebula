@@ -449,7 +449,7 @@
 /obj/structure/sign/warning/nosmoking_1/heist{
 	pixel_y = 32
 	},
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -856,7 +856,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	markup = 0;
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/box/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -999,7 +999,6 @@
 /area/map_template/skipjack_station/start)
 "cx" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "raider_northwest_lock"
 	},
 /obj/machinery/shield_diffuser,
@@ -1014,12 +1013,9 @@
 /turf/simulated/wall/raidershuttle,
 /area/map_template/skipjack_station/start)
 "cz" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "SkipjackShuttersNorth";
 	name = "Blast Doors";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1176,7 +1172,6 @@
 /area/map_template/skipjack_station/start)
 "cS" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "raider_southwest_lock"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -1306,7 +1301,7 @@
 /area/map_template/skipjack_station/start)
 "di" = (
 /obj/structure/table,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/box/fancy/cigarettes,
 /obj/item/flame/lighter/zippo/random,
 /obj/item/clothing/gloves/insulated,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -1380,13 +1375,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dt" = (
-/obj/machinery/door/blast/shutters{
-	density = 0;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1409,13 +1401,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dy" = (
-/obj/machinery/door/blast/shutters{
-	density = 0;
+/obj/machinery/door/blast/shutters/open{
 	dir = 8;
-	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersEast";
 	name = "Skipjack Shutters";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1483,13 +1472,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dI" = (
-/obj/machinery/door/blast/shutters{
-	density = 0;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,

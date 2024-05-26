@@ -32,7 +32,7 @@
 			dangerous = 1
 	playsound(src, 'sound/effects/phasein.ogg', 25, 1)
 	target = end
-	events_repository.register(/decl/observ/moved, src, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/datum, qdel_self))
 
 	if(delete_after)
 		QDEL_IN(src, delete_after)

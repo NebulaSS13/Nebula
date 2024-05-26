@@ -89,7 +89,7 @@
 	else
 		return ..()
 
-/obj/machinery/gibber/receive_mouse_drop(atom/dropping, mob/user)
+/obj/machinery/gibber/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
 		move_into_gibber(user, dropping)
@@ -167,7 +167,7 @@
 
 	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
 	src.occupant.ghostize()
-	addtimer(CALLBACK(src, .proc/finish_gibbing), gib_time)
+	addtimer(CALLBACK(src, PROC_REF(finish_gibbing)), gib_time)
 
 	var/list/gib_products = occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones()
 	if(!length(gib_products))
@@ -200,7 +200,7 @@
 			if(istype(thing, /obj/item/chems/food/meat))
 				var/obj/item/chems/food/meat/slab = thing
 				slab.SetName("[slab_name] [slab.name]")
-				slab.reagents.add_reagent(/decl/material/liquid/nutriment,slab_nutrition)
+				slab.add_to_reagents(/decl/material/liquid/nutriment,slab_nutrition)
 
 /obj/machinery/gibber/proc/finish_gibbing()
 	operating = 0

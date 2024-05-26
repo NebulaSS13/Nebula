@@ -5,33 +5,35 @@
 	icon_state = ICON_STATE_WORLD
 	one_hand_penalty = 5
 	fire_delay = 20
-	origin_tech = "{'combat':5,'materials':4,'esoteric':2,'magnets':4}"
+	origin_tech = @'{"combat":5,"materials":4,"esoteric":2,"magnets":4}'
 	w_class = ITEM_SIZE_LARGE
 	bulk = GUN_BULK_RIFLE
 	combustion = 1
 
-	var/obj/item/cell/cell                              // Currently installed powercell.
-	var/obj/item/stock_parts/capacitor/capacitor        // Installed capacitor. Higher rating == faster charge between shots.
+	var/obj/item/stock_parts/capacitor/capacitor               // Installed capacitor. Higher rating == faster charge between shots.
 	var/removable_components = TRUE                            // Whether or not the gun can be dismantled.
 	var/gun_unreliable = 15                                    // Percentage chance of detonating in your hands.
 
 	var/obj/item/loaded                                        // Currently loaded object, for retrieval/unloading.
-	var/load_type = /obj/item/stack/material/rods                       // Type of stack to load with.
-	var/load_sheet_max = 1									   // Maximum number of "sheets" you can load from a stack.
+	var/load_type = /obj/item/stack/material/rods              // Type of stack to load with.
+	var/load_sheet_max = 1                                     // Maximum number of "sheets" you can load from a stack.
 	var/projectile_type = /obj/item/projectile/bullet/magnetic // Actual fire type, since this isn't throw_at rod launcher.
 
 	var/power_cost = 950                                       // Cost per fire, should consume almost an entire basic cell.
 	var/power_per_tick                                         // Capacitor charge per process(). Updated based on capacitor rating.
 
+/obj/item/gun/magnetic/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(loaded_cell_type, /obj/item/cell, (removable_components ? /datum/extension/loaded_cell : /datum/extension/loaded_cell/unremovable), charge_value)
+
 /obj/item/gun/magnetic/preloaded
-	cell = /obj/item/cell/high
 	capacitor = /obj/item/stock_parts/capacitor/adv
+
+/obj/item/gun/magnetic/preloaded/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/high, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/magnetic/Initialize()
 	START_PROCESSING(SSobj, src)
-
-	if (ispath(cell))
-		cell = new cell()
+	setup_power_supply()
 	if (ispath(capacitor))
 		capacitor = new capacitor()
 		capacitor.charge = capacitor.max_charge
@@ -45,16 +47,13 @@
 
 /obj/item/gun/magnetic/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	QDEL_NULL(cell)
 	QDEL_NULL(loaded)
 	QDEL_NULL(capacitor)
 	. = ..()
 
-/obj/item/gun/magnetic/get_cell()
-	return cell
-
 /obj/item/gun/magnetic/Process()
 	if(capacitor)
+		var/obj/item/cell/cell = get_cell()
 		if(cell)
 			if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
 				capacitor.charge(power_per_tick)
@@ -65,6 +64,7 @@
 
 /obj/item/gun/magnetic/on_update_icon()
 	. = ..()
+	var/obj/item/cell/cell = get_cell()
 	if(removable_components)
 		if(cell)
 			add_overlay("[icon_state]_cell")
@@ -89,13 +89,10 @@
 
 /obj/item/gun/magnetic/examine(mob/user)
 	. = ..()
-	if(cell)
-		to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
-	if(capacitor)
-		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
-	if(!cell || !capacitor)
+	if(!get_cell() || !capacitor)
 		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking [SPAN_RED("red")]. Maybe you should check the cell or capacitor.</span>")
 	else
+		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
 		if(capacitor.charge < power_cost)
 			to_chat(user, "<span class='notice'>The capacitor charge indicator is [SPAN_ORANGE("amber")].</span>")
 		else
@@ -104,18 +101,6 @@
 /obj/item/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
 
 	if(removable_components)
-		if(istype(thing, /obj/item/cell))
-			if(cell)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
-				return
-			if(!user.try_unequip(thing, src))
-				return
-			cell = thing
-			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [src].</span>")
-			update_icon()
-			return
-
 		if(IS_SCREWDRIVER(thing))
 			if(!capacitor)
 				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
@@ -126,7 +111,6 @@
 			capacitor = null
 			update_icon()
 			return
-
 		if(istype(thing, /obj/item/stock_parts/capacitor))
 			if(capacitor)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
@@ -193,9 +177,8 @@
 	if(loaded)
 		removing = loaded
 		loaded = null
-	else if(cell && removable_components)
-		removing = cell
-		cell = null
+	else if(removable_components && get_cell())
+		return ..()
 	if(removing)
 		user.put_in_hands(removing)
 		user.visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))

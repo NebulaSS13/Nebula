@@ -85,7 +85,7 @@
 	name                       = "shrouded exoplanet"
 	planetoid_data_type        = /datum/planetoid_data/random/shrouded
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
-	ruin_tags_blacklist        = RUIN_HABITAT
+	template_tags_blacklist    = TEMPLATE_TAG_HABITAT
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/shrouded
 	prefered_level_data_per_z  = list(
@@ -109,7 +109,7 @@
 	water_level_max      = 3
 	water_level_min      = 2
 	land_type            = /turf/exterior/shrouded
-	water_type           = /turf/exterior/water/tar
+	water_type           = /turf/exterior/shrouded/tar
 
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()

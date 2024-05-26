@@ -11,8 +11,7 @@
 	speak_chance = 0.5
 	turns_per_move = 5
 	see_in_dark = 6
-	health = 5
-	maxHealth = 5
+	max_health = 5
 	response_harm = "stamps on"
 	density = FALSE
 	minbodytemp = 223		//Below -50 Degrees Celsius
@@ -37,7 +36,7 @@
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
 
-/mob/living/simple_animal/mouse/get_dexterity(var/silent = FALSE)
+/mob/living/simple_animal/mouse/get_dexterity(var/silent)
 	return DEXTERITY_NONE // Mice are troll bait, give them no power.
 
 /datum/ai/mouse
@@ -57,7 +56,7 @@
 			mouse.set_stat(CONSCIOUS)
 			mouse.wander = TRUE
 		else if(prob(5))
-			INVOKE_ASYNC(mouse, /mob/living/simple_animal/proc/audible_emote, "snuffles.")
+			INVOKE_ASYNC(mouse, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
 
 /mob/living/simple_animal/mouse/Initialize()
 	verbs += /mob/living/proc/ventcrawl
@@ -83,7 +82,7 @@
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
 /mob/living/simple_animal/mouse/proc/splat()
-	adjustBruteLoss(maxHealth)  // Enough damage to kill
+	adjustBruteLoss(get_max_health())  // Enough damage to kill
 	splatted = TRUE
 	death()
 
@@ -132,8 +131,7 @@
 	body_color = "rat"
 	icon = 'icons/mob/simple_animal/rat.dmi'
 	skin_material = /decl/material/solid/organic/skin/fur/gray
-	maxHealth = 20
-	health = 20
+	max_health = 20
 
 /mob/living/simple_animal/mouse/rat/set_mouse_icon()
 	return

@@ -15,6 +15,8 @@
 		for(var/slot in get_inventory_slots())
 			all_slots += get_inventory_slot_datum(slot)
 		for(var/datum/inventory_slot/inv_slot as anything in sortTim(all_slots, /proc/cmp_inventory_slot_desc))
+			if(isnull(inv_slot.quick_equip_priority)) // Never quick-equip into some slots.
+				continue
 			_inventory_slot_priority += inv_slot.slot_id
 	return _inventory_slot_priority
 
@@ -39,17 +41,17 @@
 		qdel(existing_slot)
 	LAZYDISTINCTADD(_held_item_slots, held_slot.slot_id)
 	add_inventory_slot(held_slot)
-	if(!get_active_hand())
+	if(!get_active_held_item_slot())
 		select_held_item_slot(held_slot.slot_id)
 	queue_hand_rebuild()
 
 /mob/living/remove_held_item_slot(var/slot)
 	var/datum/inventory_slot/inv_slot = istype(slot, /datum/inventory_slot) ? slot : get_inventory_slot_datum(slot)
 	if(inv_slot)
-		LAZYREMOVE(_held_item_slots, slot)
+		LAZYREMOVE(_held_item_slots, inv_slot.slot_id)
 		remove_inventory_slot(inv_slot)
 		var/held_slots = get_held_item_slots()
-		if(get_active_held_item_slot() == slot && length(held_slots))
+		if(!get_active_held_item_slot() && length(held_slots))
 			select_held_item_slot(held_slots[1])
 		queue_hand_rebuild()
 
@@ -168,7 +170,7 @@
 		if(held)
 			drop_from_inventory(held)
 		qdel(inv_slot)
-	LAZYREMOVE(_inventory_slots, slot)
+	LAZYREMOVE(_inventory_slots, inv_slot.slot_id)
 
 /mob/living/proc/get_jetpack()
 	var/obj/item/tank/jetpack/thrust = get_equipped_item(slot_back_str)
@@ -178,4 +180,31 @@
 		var/obj/item/rig/rig = thrust
 		for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 			return module.jets
+	thrust = get_equipped_item(slot_s_store_str)
+	if(istype(thrust))
+		return thrust
 	return null
+
+/mob/living/verb/quick_equip()
+	set name = "quick-equip"
+	set hidden = 1
+	var/obj/item/I = get_active_hand()
+	if(!I)
+		to_chat(src, SPAN_WARNING("You are not holding anything to equip."))
+		return
+	if(!equip_to_appropriate_slot(I))
+		to_chat(src, SPAN_WARNING("You are unable to equip that."))
+
+/mob/living/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
+	for (var/slot in slots)
+		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
+			return slot
+	if (del_on_fail)
+		qdel(W)
+	return null
+
+//Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
+/mob/living/proc/get_covering_equipped_item_by_zone(var/zone)
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)
+	if(O)
+		return get_covering_equipped_item(O.body_part)

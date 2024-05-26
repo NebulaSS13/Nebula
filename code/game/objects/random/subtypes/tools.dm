@@ -25,16 +25,16 @@
 		/obj/random/tool =                 320,
 		/obj/item/weldingtool/electric =    15,
 		/obj/item/weldingtool/experimental = 3,
-		/obj/item/hydraulic_cutter =         1,
-		/obj/item/power_drill =              1
+		/obj/item/tool/hydraulic_cutter =         1,
+		/obj/item/tool/power_drill =              1
 	)
 	return spawnable_choices
 
 /obj/random/toolbox
 	name = "random toolbox"
 	desc = "This is a random toolbox."
-	icon = 'icons/obj/items/storage/toolbox.dmi'
-	icon_state = "red"
+	icon = 'icons/obj/items/storage/toolboxes/toolbox_red.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/toolbox/spawn_choices()
 	var/static/list/spawnable_choices = list(

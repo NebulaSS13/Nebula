@@ -157,7 +157,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/item/frame/stock_offset/newscaster
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":32}, "WEST":{"x":-32}}'
 
 /obj/machinery/newscaster/Initialize()
 	. = ..()
@@ -927,7 +927,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 		audible_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>")
 		src.alert = 1
 		src.update_icon()
-		addtimer(CALLBACK(src, .proc/reset_alert), alert_delay, TIMER_UNIQUE | TIMER_OVERRIDE) //stay alert for the full time if we get a new one
+		addtimer(CALLBACK(src, PROC_REF(reset_alert)), alert_delay, TIMER_UNIQUE | TIMER_OVERRIDE) //stay alert for the full time if we get a new one
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
 		audible_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>")

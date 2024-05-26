@@ -27,7 +27,7 @@
 /decl/surgery_step/cavity/make_space
 	name = "Hollow out cavity"
 	description = "This procedure is used to prepare a patient to have something large implanted in their body."
-	allowed_tools = list(TOOL_DRILL = 100)
+	allowed_tools = list(TOOL_SURGICAL_DRILL = 100)
 	min_duration = 60
 	max_duration = 80
 

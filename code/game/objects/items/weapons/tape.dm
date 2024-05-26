@@ -10,10 +10,10 @@
 	amount            = 32
 	max_amount        = 32
 	w_class           = ITEM_SIZE_SMALL
-	matter_multiplier = 0.05
 	material          = /decl/material/solid/organic/plastic
-	health            = 10
+	current_health    = 10
 	max_health        = 10
+	matter_multiplier = 0.25
 
 /obj/item/stack/tape_roll/can_split()
 	return FALSE

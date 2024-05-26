@@ -6,7 +6,7 @@
 			species_name += "[species.cyborg_noun] [species.get_root_species_name(src)]"
 		else
 			species_name += "[species.name]"
-		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+		msg += ", <b><font color='[species.get_species_flesh_color(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
 	var/extra_species_text = species.get_additional_examine_text(src)
 	if(extra_species_text)
 		msg += "<br>[extra_species_text]"
@@ -212,6 +212,22 @@
 
 			msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 			msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
+
+	// Show IC/OOC info if available.
+	if(comments_record_id)
+		var/datum/character_information/comments = SScharacter_info.get_record(comments_record_id)
+		if(comments?.show_info_on_examine && (comments.ic_info || comments.ooc_info))
+			msg += "*---------*<br>"
+			if(comments.ic_info)
+				if(length(comments.ic_info) <= 40)
+					msg += "<b>IC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[comments.ic_info]<br/>"
+				else
+					msg += "<b>IC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ic_info,1,37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a><br/>"
+			if(comments.ooc_info)
+				if(length(comments.ooc_info) <= 40)
+					msg += "<b>OOC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[comments.ooc_info]<br/>"
+				else
+					msg += "<b>OOC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ooc_info,1,37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a><br/>"
 
 	msg += "*---------*</span><br>"
 	msg += applying_pressure

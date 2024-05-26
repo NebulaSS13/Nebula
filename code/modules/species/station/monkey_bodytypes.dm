@@ -5,11 +5,12 @@
 	blood_overlays =    'icons/mob/human_races/species/monkey/blood_overlays.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag = BODY_FLAG_MONKEY
+	eye_icon = null
 	override_limb_types = list(
-		BP_HEAD = /obj/item/organ/external/head/no_eyes,
 		BP_TAIL = /obj/item/organ/external/tail/monkey
 	)
 	mob_size = MOB_SIZE_SMALL
+	nail_noun = "nails"
 
 /decl/bodytype/monkey/Initialize()
 	equip_adjust = list(

@@ -34,6 +34,19 @@
 	if(SSpersistence.is_tracking(src, /decl/persistence_handler/book))
 		. = QDEL_HINT_LETMELIVE
 
+/obj/item/book/proc/get_style_css()
+	return {"
+		<style>
+			h1 {font-size: 18px; margin: 15px 0px 5px;}
+			h2 {font-size: 15px; margin: 15px 0px 5px;}
+			h3 {font-size: 13px; margin: 15px 0px 5px;}
+			li {margin: 2px 0px 2px 15px;}
+			ul {margin: 5px; padding: 0px;}
+			ol {margin: 5px; padding: 0px 15px;}
+			body {font-size: 13px; font-family: Verdana;}
+		</style>
+	"}
+
 /obj/item/book/attack_self(var/mob/user)
 	return try_to_read(user) || ..()
 

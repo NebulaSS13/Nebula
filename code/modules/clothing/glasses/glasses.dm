@@ -4,7 +4,7 @@
 	gender = NEUTER
 	icon = 'icons/clothing/eyes/scanner_meson.dmi'
 	action_button_name = "Toggle Goggles"
-	origin_tech = "{'magnets':2,'engineering':2}"
+	origin_tech = @'{"magnets":2,"engineering":2}'
 	toggleable = TRUE
 	vision_flags = SEE_TURFS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
@@ -13,7 +13,7 @@
 /obj/item/clothing/glasses/meson/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.meson
+	screen_overlay = global_hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
 	name = "prescription mesons"
@@ -37,13 +37,13 @@
 /obj/item/clothing/glasses/science/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.science
+	screen_overlay = global_hud.science
 
 /obj/item/clothing/glasses/night
 	name = "night vision goggles"
 	desc = "You can totally see in the dark now!"
 	icon = 'icons/clothing/eyes/night_vision.dmi'
-	origin_tech = "{'magnets':2}"
+	origin_tech = @'{"magnets":2}'
 	darkness_view = 7
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
@@ -53,13 +53,13 @@
 /obj/item/clothing/glasses/night/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.nvg
+	screen_overlay = global_hud.nvg
 
 /obj/item/clothing/glasses/tacgoggles
 	name = "tactical goggles"
 	desc = "Self-polarizing goggles with light amplification for dark environments. Made from durable synthetic."
 	icon = 'icons/clothing/eyes/tactical.dmi'
-	origin_tech = "{'magnets':2,'combat':4}"
+	origin_tech = @'{"magnets":2,"combat":4}'
 	darkness_view = 5
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
@@ -79,7 +79,7 @@
 	desc = "Very confusing glasses."
 	gender = NEUTER
 	icon = 'icons/clothing/eyes/scanner_material.dmi'
-	origin_tech = "{'magnets':3,'engineering':3}"
+	origin_tech = @'{"magnets":3,"engineering":3}'
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
 	vision_flags = SEE_OBJS

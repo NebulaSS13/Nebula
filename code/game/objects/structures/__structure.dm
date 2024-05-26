@@ -3,10 +3,10 @@
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
 	abstract_type = /obj/structure
+	max_health = 50
 
+	var/structure_flags
 	var/last_damage_message
-	var/health = 0
-	var/maxhealth = 50
 	var/hitsound = 'sound/weapons/smash.ogg'
 	var/parts_type
 	var/parts_amount
@@ -38,16 +38,11 @@
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 
-/obj/structure/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
-		return
-	. = ..()
-
 /obj/structure/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 3)
 
-		var/damage_desc = get_examined_damage_string(health / maxhealth)
+		var/damage_desc = get_examined_damage_string()
 		if(length(damage_desc))
 			to_chat(user, damage_desc)
 
@@ -92,7 +87,7 @@
 	return FALSE
 
 /obj/structure/proc/take_damage(var/damage)
-	if(health == -1) // This object does not take damage.
+	if(current_health == -1) // This object does not take damage.
 		return
 
 	if(material && material.is_brittle())
@@ -103,11 +98,11 @@
 			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
 
 	playsound(loc, hitsound, 75, 1)
-	health = clamp(health - damage, 0, maxhealth)
+	var/current_max_health = get_max_health()
+	current_health = clamp(current_health - damage, 0, current_max_health)
+	show_damage_message(current_health/current_max_health)
 
-	show_damage_message(health/maxhealth)
-
-	if(health == 0)
+	if(current_health == 0)
 		physically_destroyed()
 
 /obj/structure/proc/show_damage_message(var/perc)
@@ -134,6 +129,18 @@
 		dmg = round(dmg * material.combustion_effect(get_turf(src),temperature, 0.3))
 	if(dmg)
 		take_damage(dmg)
+
+/obj/structure/ProcessAtomTemperature()
+	var/update_mats = FALSE
+	if(material && material.bakes_into_material && !isnull(material.bakes_into_at_temperature) && temperature >= material.bakes_into_at_temperature)
+		material = GET_DECL(material.bakes_into_material)
+		update_mats = TRUE
+	if(reinf_material && reinf_material.bakes_into_material && !isnull(reinf_material.bakes_into_at_temperature) && temperature >= reinf_material.bakes_into_at_temperature)
+		reinf_material = GET_DECL(reinf_material.bakes_into_material)
+		update_mats = TRUE
+	if(update_mats)
+		update_materials()
+	. = ..()
 
 /obj/structure/Destroy()
 	var/turf/T = get_turf(src)
@@ -222,7 +229,7 @@
 			take_damage(rand(5, 15))
 
 /obj/structure/proc/can_repair(var/mob/user)
-	if(health >= maxhealth)
+	if(current_health >= get_max_health())
 		to_chat(user, SPAN_NOTICE("\The [src] does not need repairs."))
 		return FALSE
 	return TRUE

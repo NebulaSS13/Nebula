@@ -21,7 +21,7 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
 
-	origin_tech = "{'magnets':1,'engineering':1}"
+	origin_tech = @'{"magnets":1,"engineering":1}'
 
 	var/buffer_name
 	var/atom/buffer_object
@@ -55,7 +55,7 @@
 			unregister_buffer(buffer_object)
 			buffer_object = buffer
 			if(buffer_object)
-				events_repository.register(/decl/observ/destroyed, buffer_object, src, /obj/item/multitool/proc/unregister_buffer)
+				events_repository.register(/decl/observ/destroyed, buffer_object, src, TYPE_PROC_REF(/obj/item/multitool, unregister_buffer))
 
 /obj/item/multitool/proc/unregister_buffer(var/atom/buffer_to_unregister)
 	// Only remove the buffered object, don't reset the name

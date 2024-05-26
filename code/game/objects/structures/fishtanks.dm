@@ -24,7 +24,7 @@ var/global/list/fishtank_cache = list()
 	density = TRUE
 	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	mob_offset = TRUE
-	maxhealth = 50
+	max_health = 50
 
 	var/deleting
 	var/fill_type
@@ -60,7 +60,7 @@ var/global/list/fishtank_cache = list()
 	. = ..()
 
 /obj/structure/glass_tank/populate_reagents()
-	reagents.add_reagent(fill_type, reagents.maximum_volume)
+	add_to_reagents(fill_type, reagents.maximum_volume)
 
 /obj/structure/glass_tank/attack_hand(var/mob/user)
 	if(user.a_intent == I_HURT)
@@ -94,11 +94,9 @@ var/global/list/fishtank_cache = list()
 
 /obj/structure/glass_tank/dump_contents()
 	. = ..()
-	if(reagents && reagents.total_volume)
-		var/turf/T = get_turf(src)
-		var/obj/effect/fluid/F = locate() in T
-		if(!F) F = new(T)
-		reagents.trans_to_holder(F.reagents, reagents.total_volume)
+	var/turf/T = get_turf(src)
+	if(reagents?.total_volume && T)
+		reagents.trans_to_turf(T, T.reagents, reagents.total_volume)
 
 var/global/list/global/aquarium_states_and_layers = list(
 	"b" = FLY_LAYER - 0.02,

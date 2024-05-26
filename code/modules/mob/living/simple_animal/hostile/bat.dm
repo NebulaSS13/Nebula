@@ -5,18 +5,13 @@
 	speak_chance = 0
 	turns_per_move = 3
 	speed = 4
-	maxHealth = 20
-	health = 20
-
+	max_health = 20
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite
-
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-
 	environment_smash = 1
-
 	faction = "scarybat"
 	var/mob/living/owner
 
@@ -32,7 +27,7 @@
 /mob/living/simple_animal/hostile/scarybat/FindTarget()
 	. = ..()
 	if(.)
-		emote("flutters towards [.]")
+		custom_emote(VISIBLE_MESSAGE, "flutters towards [.]")
 
 /mob/living/simple_animal/hostile/scarybat/Found(var/atom/A)//This is here as a potential override to pick a specific target if available
 	if(istype(A) && A == owner)

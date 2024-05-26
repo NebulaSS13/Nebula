@@ -12,6 +12,7 @@
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 	if(L)
 		qdel(L)
+
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
@@ -37,7 +38,7 @@
 			else
 				above.ChangeTurf(open_turf_type, update_open_turfs_above = FALSE)
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE, var/keep_height = FALSE)
 	if (!N)
 		return
 
@@ -46,7 +47,7 @@
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !isspaceturf(below))
 			var/area/A = get_area(src)
-			N = A?.open_turf || open_turf_type || /turf/simulated/open
+			N = A?.open_turf || open_turf_type || /turf/open
 
 	if (!(atom_flags & ATOM_FLAG_INITIALIZED))
 		return new N(src)
@@ -68,6 +69,7 @@
 	var/old_is_open =          is_open()
 	var/old_open_turf_type =   open_turf_type
 	var/old_affecting_heat_sources = affecting_heat_sources
+	var/old_height =           get_physical_height()
 
 	var/old_ambience =         ambient_light
 	var/old_ambience_mult =    ambient_light_multiplier
@@ -76,7 +78,6 @@
 	var/old_ambient_light_old_b = ambient_light_old_b
 
 	changing_turf = TRUE
-
 
 	qdel(src)
 	. = new N(src)
@@ -94,16 +95,13 @@
 	if(keep_air)
 		W.air = old_air
 	if(old_fire)
-		if(istype(W, /turf/simulated))
+		if(W.simulated)
 			W.fire = old_fire
 		else if(old_fire)
 			qdel(old_fire)
 
-	if(isnull(W.flooded) && old_flooded != W.flooded)
-		if(old_flooded && !W.density)
-			W.make_flooded()
-		else
-			W.make_unflooded()
+	if(old_flooded != W.flooded)
+		set_flooded(old_flooded)
 
 	// Raise appropriate events.
 	W.post_change()
@@ -156,6 +154,9 @@
 			below.update_external_atmos_participation(!keep_air_below)
 
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
+
+	if(keep_height)
+		W.set_height(old_height)
 
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)
@@ -213,6 +214,6 @@
 	return TRUE
 
 //No idea why resetting the base appearance from New() isn't enough, but without this it doesn't work
-/turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)
+/turf/simulated/shuttle/wall/corner/transport_properties_from(turf/other)
 	. = ..()
 	reset_base_appearance()

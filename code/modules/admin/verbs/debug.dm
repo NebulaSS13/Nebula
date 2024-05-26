@@ -128,10 +128,13 @@
 /client/proc/cmd_debug_tog_aliens()
 	set category = "Server"
 	set name = "Toggle Aliens"
+	if(toggle_config_value(/decl/config/toggle/aliens_allowed))
+		log_admin("[key_name(src)] has turned aliens on.")
+		message_admins("[key_name_admin(src)] has turned aliens on.", 0)
+	else
+		log_admin("[key_name(src)] has turned aliens off.")
+		message_admins("[key_name_admin(src)] has turned aliens off.", 0)
 
-	config.aliens_allowed = !config.aliens_allowed
-	log_admin("[key_name(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].")
-	message_admins("[key_name_admin(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].", 0)
 	SSstatistics.add_field_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in SSmobs.mob_list)
@@ -287,7 +290,7 @@
 	if(!outfit)
 		return
 
-	var/reset_equipment = (outfit.flags&OUTFIT_RESET_EQUIPMENT)
+	var/reset_equipment = (outfit.outfit_flags & OUTFIT_RESET_EQUIPMENT)
 	if(!reset_equipment)
 		reset_equipment = alert("Do you wish to delete all current equipment first?", "Delete Equipment?","Yes", "No") == "Yes"
 
@@ -506,7 +509,7 @@
 	planet_template.load_new_z(gen_data = PD)
 	if(!daycycle)
 		PD.day_duration = null
-		SSdaycyle.remove_linked_levels(PD.topmost_level_id)
+		SSdaycycle.remove_linked_levels(PD.topmost_level_id)
 
 /client/proc/display_del_log()
 	set category = "Debug"

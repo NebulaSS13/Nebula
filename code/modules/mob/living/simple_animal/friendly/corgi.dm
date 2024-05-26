@@ -17,6 +17,7 @@
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
 	base_animal_type = /mob/living/simple_animal/corgi
+	can_buckle = TRUE
 
 	meat_type = /obj/item/chems/food/meat/corgi
 	meat_amount = 3
@@ -129,6 +130,7 @@
 	meat_amount = 1
 	skin_amount = 3
 	bone_amount = 3
+	can_buckle = FALSE
 
 /mob/living/simple_animal/corgi/puppy/get_bodytype()
 	return GET_DECL(/decl/bodytype/animal/puppy)

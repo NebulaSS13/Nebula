@@ -47,7 +47,7 @@
 	desc = "This robe commands authority."
 	icon = 'icons/clothing/suit/judge.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-	allowed = list(/obj/item/storage/fancy/cigarettes,/obj/item/cash)
+	allowed = list(/obj/item/storage/box/fancy/cigarettes,/obj/item/cash)
 	flags_inv = HIDEJUMPSUIT
 
 /obj/item/clothing/suit/apron/overalls
@@ -63,7 +63,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET|SLOT_TAIL
 
 /obj/item/clothing/suit/hastur
 	name = "Hastur's Robes"
@@ -121,7 +121,7 @@
 	name = "straitjacket"
 	desc = "A suit that completely restrains the wearer."
 	icon = 'icons/clothing/suit/straightjacket.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 
@@ -158,7 +158,7 @@
 			shine = material.reflectiveness
 		desc = "A long, thick [material.use_name] coat."
 
-/obj/item/clothing/suit/leathercoat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/suit/leathercoat/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && shine > 0 && slot == slot_wear_suit_str)
 		var/mutable_appearance/S = mutable_appearance(overlay.icon, "shine")
 		S.alpha = max(shine, artificial_shine)/100 * 255

@@ -1,38 +1,54 @@
 /decl/grab
-	var/name = "generic grab"
-	var/decl/grab/upgrab						// The grab that this will upgrade to if it upgrades, null means no upgrade
-	var/decl/grab/downgrab						// The grab that this will downgrade to if it downgrades, null means break grab on downgrade
-	var/stop_move = 0							// Whether or not the grabbed person can move out of the grab
-	var/reverse_facing = 0						// Whether the person being grabbed is facing forwards or backwards.
-	var/shield_assailant = 0					// Whether the person you're grabbing will shield you from bullets.,,
-	var/point_blank_mult = 1					// How much the grab increases point blank damage.
-	var/damage_stage = 1						// Affects how much damage is being dealt using certain actions.
-	var/same_tile = 0							// If the grabbed person and the grabbing person are on the same tile.
-	var/can_throw = 0							// If the grabber can throw the person grabbed.
-	var/downgrade_on_action = 0					// If the grab needs to be downgraded when the grabber does stuff.
-	var/downgrade_on_move = 0					// If the grab needs to be downgraded when the grabber moves.
-	var/force_danger = 0						// If the grab is strong enough to be able to force someone to do something harmful to them.
-	var/restrains = 0							// If the grab acts like cuffs and prevents action from the victim.
-	var/grab_slowdown = 0.15                    // Multiplier for the object size (w_class or mob_size) of the grabbed atom, applied as slowdown.
-	var/shift = 0                               // Whether or not this grab causes atoms to adjust their pixel offsets according to grabber dir.
-	var/adjust_plane = TRUE                     // Whether or not this grab causes atoms to adjust their plane/layer according to grabber dir.
-	var/success_up =   "You get a better grip on $rep_affecting$."
-	var/success_down = "You adjust your grip on $rep_affecting$."
-	var/fail_up =      "You can't get a better grip on $rep_affecting$!"
-	var/fail_down =    "You can't seem to relax your grip on $rep_affecting$!"
-	var/icon
-	var/icon_state
-	var/upgrade_cooldown = 40
-	var/action_cooldown = 40
+	var/name                    = "generic grab"
+	/// Whether or not the grabbed person can move out of the grab
+	var/stop_move               = 0
+	/// Whether the person being grabbed is facing forwards or backwards.
+	var/reverse_facing          = 0
+	/// Whether the person you're grabbing will shield you from bullets.,,
+	var/shield_assailant        = 0
+	/// How much the grab increases point blank damage.
+	var/point_blank_mult        = 1
+	/// Affects how much damage is being dealt using certain actions.
+	var/damage_stage            = 1
+	/// If the grabbed person and the grabbing person are on the same tile.
+	var/same_tile               = 0
+	/// If the grabber can throw the person grabbed.
+	var/can_throw               = 0
+	/// If the grab needs to be downgraded when the grabber does stuff.
+	var/downgrade_on_action     = 0
+	/// If the grab needs to be downgraded when the grabber moves.
+	var/downgrade_on_move       = 0
+	/// If the grab is strong enough to be able to force someone to do something harmful to them.
+	var/force_danger            = 0
+	/// If the grab acts like cuffs and prevents action from the victim.
+	var/restrains               = 0
+	/// Multiplier for the object size (w_class or mob_size) of the grabbed atom, applied as slowdown.
+	var/grab_slowdown           = 0.15
+	/// Whether or not this grab causes atoms to adjust their pixel offsets according to grabber dir.
+	var/shift                   = 0
+	/// Whether or not this grab causes atoms to adjust their plane/layer according to grabber dir.
+	var/adjust_plane            = TRUE
+	var/success_up              = "You get a better grip on $rep_affecting$."
+	var/success_down            = "You adjust your grip on $rep_affecting$."
+	var/fail_up                 = "You can't get a better grip on $rep_affecting$!"
+	var/fail_down               = "You can't seem to relax your grip on $rep_affecting$!"
+	var/grab_icon               = 'icons/mob/screen/grabs.dmi'
+	var/grab_icon_state         = "reinforce"
+	var/upgrade_cooldown        = 40
+	var/action_cooldown         = 40
 	var/can_downgrade_on_resist = 1
 	var/list/break_chance_table = list(100)
-	var/breakability = 2
+	var/breakability            = 2
+	/// The names of different intents for use in attack logs
+	var/help_action             = "help intent"
+	var/disarm_action           = "disarm intent"
+	var/grab_action             = "grab intent"
+	var/harm_action             = "harm intent"
+	/// The grab that this will upgrade to if it upgrades, null means no upgrade
+	var/decl/grab/upgrab
+	/// The grab that this will downgrade to if it downgrades, null means break grab on downgrade
+	var/decl/grab/downgrab
 
-	// The names of different intents for use in attack logs
-	var/help_action =   "help intent"
-	var/disarm_action = "disarm intent"
-	var/grab_action =   "grab intent"
-	var/harm_action =   "harm intent"
 
 /decl/grab/Initialize()
 	if(ispath(upgrab, /decl/grab))

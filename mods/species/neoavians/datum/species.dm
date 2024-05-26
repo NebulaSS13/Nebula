@@ -46,11 +46,6 @@
 	swap_flags = MONKEY|SIMPLE_ANIMAL
 	push_flags = MONKEY|SIMPLE_ANIMAL
 
-	heat_discomfort_strings = list(
-		"Your feathers prickle in the heat.",
-		"You feel uncomfortably warm.",
-		)
-
 	unarmed_attacks = list(
 		/decl/natural_attack/bite/sharp,
 		/decl/natural_attack/claws,
@@ -71,7 +66,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/avian, slot_shoes_str)
 
 /decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
-	return H.skin_colour
+	return H.get_skin_colour()
 
 /decl/hierarchy/outfit/job/generic/assistant/avian
 	name = "Job - Avian Assistant"

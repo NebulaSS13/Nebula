@@ -1,0 +1,4 @@
+/turf/exterior/water/chlorine/@SUBTYPES : /turf/exterior/chlorine_sand/marsh/@SUBTYPES{@OLD}
+/turf/exterior/water/tar/@SUBTYPES : /turf/exterior/shrouded/tar/@SUBTYPES{@OLD}
+/turf/exterior/water/stomach/@SUBTYPES : /turf/exterior/meat/acid/@SUBTYPES{@OLD}
+/turf/exterior/water/@SUBTYPES : /turf/exterior/sand/water/@SUBTYPES{@OLD}

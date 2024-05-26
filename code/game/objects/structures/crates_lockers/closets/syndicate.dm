@@ -126,7 +126,7 @@
 		/obj/item/stack/material/ingot/mapped/silver/fifty,
 		/obj/item/stack/material/puck/mapped/uranium/fifty,
 		/obj/item/stack/material/gemstone/mapped/diamond/fifty,
-		/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 		/obj/item/stack/material/rods/fifty
 	)
 

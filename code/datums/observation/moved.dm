@@ -18,7 +18,7 @@
 
 	// Listen to the parent if possible.
 	if(. && istype(mover.loc, expected_type))
-		register(mover.loc, mover, /atom/movable/proc/recursive_move)
+		register(mover.loc, mover, TYPE_PROC_REF(/atom/movable, recursive_move))
 
 /********************
 * Movement Handling *
@@ -32,8 +32,8 @@
 	. = ..()
 	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
 	if(moved_event.has_listeners(am))
-		events_repository.register(/decl/observ/moved, src, am, /atom/movable/proc/recursive_move)
+		events_repository.register(/decl/observ/moved, src, am, TYPE_PROC_REF(/atom/movable, recursive_move))
 
 /atom/movable/Exited(var/atom/movable/am, atom/new_loc)
 	. = ..()
-	events_repository.unregister(/decl/observ/moved, src, am, /atom/movable/proc/recursive_move)
+	events_repository.unregister(/decl/observ/moved, src, am, TYPE_PROC_REF(/atom/movable, recursive_move))

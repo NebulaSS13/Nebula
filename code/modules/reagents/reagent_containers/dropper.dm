@@ -62,7 +62,7 @@
 			return
 		else
 			trans = reagents.splash(target, amount_per_transfer_from_this, max_spill=0) //sprinkling reagents on generic non-mobs. Droppers are very precise
-			to_chat(user, SPAN_NOTICE("You transfer [trans] units of the solution."))
+			to_chat(user, SPAN_NOTICE("You transfer [trans] unit\s of the solution."))
 
 	else // Taking from something
 
@@ -76,7 +76,7 @@
 
 		var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 
-		to_chat(user, SPAN_NOTICE("You fill the dropper with [trans] units of the solution."))
+		to_chat(user, SPAN_NOTICE("You fill the dropper with [trans] unit\s of the solution."))
 
 /obj/item/chems/dropper/update_container_name()
 	return
@@ -86,7 +86,7 @@
 
 /obj/item/chems/dropper/on_update_icon()
 	. = ..()
-	if(reagents.total_volume)
+	if(reagents?.total_volume)
 		icon_state = "dropper1"
 	else
 		icon_state = "dropper0"

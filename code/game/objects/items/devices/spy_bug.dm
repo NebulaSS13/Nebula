@@ -14,7 +14,7 @@
 	throw_range = 15
 	throw_speed = 3
 
-	origin_tech = "{'programming':1,'engineering':1,'esoteric':3}"
+	origin_tech = @'{"programming":1,"engineering":1,"esoteric":3}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
@@ -62,7 +62,7 @@
 	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY80
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'programming':1,'engineering':1,'esoteric':3}"
+	origin_tech = @'{"programming":1,"engineering":1,"esoteric":3}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
@@ -102,12 +102,12 @@
 
 /obj/item/spy_monitor/proc/pair(var/obj/item/spy_bug/SB, var/mob/living/user)
 	to_chat(user, SPAN_NOTICE("\The [SB] has been paired with \the [src]."))
-	events_repository.register(/decl/observ/destroyed, SB, src, .proc/unpair)
+	events_repository.register(/decl/observ/destroyed, SB, src, PROC_REF(unpair))
 	cameras += SB
 
 /obj/item/spy_monitor/proc/unpair(var/obj/item/spy_bug/SB, var/mob/living/user)
 	to_chat(user, SPAN_NOTICE("\The [SB] has been unpaired from \the [src]."))
-	events_repository.unregister(/decl/observ/destroyed, SB, src, .proc/unpair)
+	events_repository.unregister(/decl/observ/destroyed, SB, src, PROC_REF(unpair))
 	if(selected_camera == SB)
 		selected_camera = null
 	cameras -= SB
@@ -154,4 +154,5 @@
 	broadcasting = 0
 	canhear_range = 1
 	name = "spy device"
-	icon_state = "syn_cypherkey"
+	icon = 'icons/obj/items/device/radio/spybug.dmi'
+	icon_state = ICON_STATE_WORLD

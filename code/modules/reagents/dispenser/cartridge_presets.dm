@@ -9,7 +9,7 @@
  * CART_TYPE: the type suffix to append to the cartridge type path.
  * REAGENT_TYPE: The reagent decl path to fill the cartridge with.
  */
-#define DEFINE_CARTRIDGE_FOR_CHEM(CART_TYPE, REAGENT_TYPE) /obj/item/chems/chem_disp_cartridge/##CART_TYPE/populate_reagents(){reagents.add_reagent(REAGENT_TYPE, reagents.maximum_volume);}
+#define DEFINE_CARTRIDGE_FOR_CHEM(CART_TYPE, REAGENT_TYPE) /obj/item/chems/chem_disp_cartridge/##CART_TYPE/populate_reagents(){add_to_reagents(REAGENT_TYPE, reagents.maximum_volume);}
 
 // Multiple
 DEFINE_CARTRIDGE_FOR_CHEM(water, /decl/material/liquid/water)

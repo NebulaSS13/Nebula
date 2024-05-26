@@ -170,7 +170,7 @@ var/global/const/AIRLOCK_WIRE_SPEAKER = 4096
 				A.aiControlDisabled = 1
 			else if(A.aiControlDisabled == -1)
 				A.aiControlDisabled = 2
-			addtimer(CALLBACK(src, .proc/reset_ai_control, A), 1 SECOND)
+			addtimer(CALLBACK(src, PROC_REF(reset_ai_control), A), 1 SECOND)
 
 		if(AIRLOCK_WIRE_ELECTRIFY)
 			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.

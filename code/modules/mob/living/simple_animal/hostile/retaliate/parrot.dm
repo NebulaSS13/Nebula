@@ -101,12 +101,15 @@
 		held_item = null
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed, deathmessage, show_dead_message)
-	if(held_item)
-		held_item.dropInto(loc)
-		held_item = null
-	walk(src,0)
-	..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed)
+	var/oldloc = loc
+	. = ..()
+	if(. && held_item)
+		if(oldloc)
+			held_item.dropInto(oldloc)
+			held_item = null
+		else
+			QDEL_NULL(held_item)
 
 /mob/living/simple_animal/hostile/retaliate/parrot/Stat()
 	. = ..()
@@ -125,7 +128,7 @@
 		parrot_state = PARROT_SWOOP //The parrot just got hit, it WILL move, now to pick a direction..
 		if(isliving(user))
 			var/mob/living/M = user
-			if(M.health < 50) //Weakened mob? Fight back!
+			if(M.current_health < 50) //Weakened mob? Fight back!
 				parrot_state |= PARROT_ATTACK
 				return
 		parrot_state |= PARROT_FLEE		//Otherwise, fly like a bat out of hell!
@@ -319,9 +322,7 @@
 				return
 
 			//Time for the hurt to begin!
-			var/attacking_with = get_natural_weapon()
-			if(attacking_with)
-				L.attackby(attacking_with, src)
+			UnarmedAttack(L)
 			return
 
 		//Otherwise, fly towards the mob!

@@ -24,9 +24,9 @@
 	qdel(src)
 
 /proc/register_all_movement(var/event_source, var/listener)
-	events_repository.register(/decl/observ/moved, event_source, listener, /atom/movable/proc/recursive_move)
-	events_repository.register(/decl/observ/dir_set, event_source, listener, /atom/proc/recursive_dir_set)
+	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	events_repository.register(/decl/observ/dir_set, event_source, listener, TYPE_PROC_REF(/atom, recursive_dir_set))
 
 /proc/unregister_all_movement(var/event_source, var/listener)
-	events_repository.unregister(/decl/observ/moved, event_source, listener, /atom/movable/proc/recursive_move)
-	events_repository.unregister(/decl/observ/dir_set, event_source, listener, /atom/proc/recursive_dir_set)
+	events_repository.unregister(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	events_repository.unregister(/decl/observ/dir_set, event_source, listener, TYPE_PROC_REF(/atom, recursive_dir_set))

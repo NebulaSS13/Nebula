@@ -8,18 +8,19 @@
 	desc = "It's a table, for putting things on. Or standing on, if you really want to."
 	density = TRUE
 	anchored = TRUE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	layer = TABLE_LAYER
 	throwpass = TRUE
 	// Note that mob_offset also determines whether you can walk from one table to another without climbing.
 	// TODO: add 1px step-up?
 	mob_offset = 12
 	handle_generic_blending = TRUE
-	maxhealth = 10
+	max_health = 10
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
+	structure_flags = STRUCTURE_FLAG_SURFACE
 
 	var/can_flip = TRUE
 	var/is_flipped = FALSE
@@ -464,7 +465,7 @@
 			return TRUE
 	return TRUE
 
-/obj/structure/table/receive_mouse_drop(atom/dropping, mob/user)
+/obj/structure/table/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.try_unequip(dropping))
 		var/obj/item/I = dropping

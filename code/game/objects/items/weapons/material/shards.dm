@@ -120,17 +120,16 @@
 			continue
 		to_chat(M, SPAN_DANGER("You step on \the [src]!"))
 		affecting.take_external_damage(5, 0)
-		M.updatehealth()
 		if(affecting.can_feel_pain())
 			SET_STATUS_MAX(M, STAT_WEAK, 3)
 		return
 
 //Prevent the shard from being allowed to shatter
 /obj/item/shard/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
-	if(health > 0 || !can_take_damage())
+	if(current_health > 0 || !can_take_damage())
 		return //If invincible, or if we're not dead yet, skip
 	if(lastdamtype == BURN)
-		melt()
+		handle_melting()
 		return
 	physically_destroyed()
 

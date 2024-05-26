@@ -19,7 +19,6 @@
 	var/sight_mode = null
 	var/hud_type
 
-
 /obj/item/borg/sight/xray
 	name = "\proper x-ray vision"
 	sight_mode = BORGXRAY

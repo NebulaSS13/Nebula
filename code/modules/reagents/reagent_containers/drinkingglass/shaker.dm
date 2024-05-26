@@ -38,8 +38,8 @@
 	)
 
 /obj/item/chems/drinks/glass2/fitnessflask/proteinshake/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment,         30)
-	reagents.add_reagent(/decl/material/solid/metal/iron,         10)
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
-	reagents.add_reagent(/decl/material/liquid/water,             45)
+	add_to_reagents(/decl/material/liquid/nutriment,         30)
+	add_to_reagents(/decl/material/solid/metal/iron,         10)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/liquid/water,             45)
 

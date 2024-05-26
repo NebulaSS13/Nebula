@@ -436,8 +436,9 @@
 				supplies["[i]"] = max(0,supplies["[i]"] + rand(-10,10))
 		if(ORION_TRAIL_COLLISION)
 			if(prob(90) && !supplies["2"])
-				var/turf/simulated/floor/F = src.loc
-				F.ChangeTurf(/turf/space)
+				var/turf/floor = src.loc
+				if(istype(floor) && floor.simulated)
+					floor.ChangeTurf(/turf/space)
 				src.visible_message("<span class='danger'>Something slams into the floor around \the [src], exposing it to space!</span>", "You hear something crack and break.")
 			else
 				src.visible_message("Something slams into the floor around \the [src] - luckily, it didn't get through!", "You hear something crack.")
@@ -449,7 +450,7 @@
 			for(var/i=0;i<10;i++)
 				sleep(10)
 				SET_STATUS_MAX(M, STAT_STUN, 5)
-				M.adjustBruteLoss(10)
+				M.adjustBruteLoss(10, do_update_health = FALSE)
 				M.adjustFireLoss(10)
 			usr.gib() //So that people can't cheese it and inject a lot of kelo/bicard before losing
 

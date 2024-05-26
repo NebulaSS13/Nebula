@@ -21,7 +21,7 @@
 
 /decl/move_intent/creep/Initialize()
 	. = ..()
-	move_delay = config.creep_delay
+	move_delay = get_config_value(/decl/config/num/movement_creep)
 
 /decl/move_intent/walk
 	name = "Walk"
@@ -29,7 +29,7 @@
 
 /decl/move_intent/walk/Initialize()
 	. = ..()
-	move_delay = config.walk_delay
+	move_delay = get_config_value(/decl/config/num/movement_walk)
 
 /decl/move_intent/run
 	name = "Run"
@@ -38,4 +38,4 @@
 
 /decl/move_intent/run/Initialize()
 	. = ..()
-	move_delay = config.run_delay
+	move_delay = get_config_value(/decl/config/num/movement_run)

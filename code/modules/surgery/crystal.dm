@@ -1,7 +1,7 @@
 /decl/surgery_step/generic/cut_open/crystal
 	name = "Drill keyhole incision"
 	description = "This procedure drills a keyhold incision into crystalline limbs to allow for delicate internal work."
-	allowed_tools = list(TOOL_DRILL = 100)
+	allowed_tools = list(TOOL_SURGICAL_DRILL = 100)
 	fail_string = "cracking"
 	access_string = "a neat hole"
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_FLESH
@@ -37,7 +37,7 @@
 /decl/surgery_step/internal/detach_organ/crystal
 	name = "Detach crystalline internal organ"
 	description = "This procedure severs a crystalline internal organ, allowing it to be removed."
-	allowed_tools = list(TOOL_DRILL = 100)
+	allowed_tools = list(TOOL_SURGICAL_DRILL = 100)
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT | SURGERY_NO_FLESH
 
 /decl/surgery_step/internal/attach_organ/crystal

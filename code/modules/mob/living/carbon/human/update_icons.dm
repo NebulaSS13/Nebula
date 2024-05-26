@@ -17,8 +17,9 @@ var/global/list/_limb_mask_cache = list()
 	TODO: Proper documentation
 	icon_key is [bodytype.get_icon_cache_uid(src)][g][husk][skin_tone]
 */
-var/global/list/human_icon_cache = list()
-var/global/list/tail_icon_cache = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
+var/global/list/human_icon_cache    = list()
+var/global/list/eye_icon_cache      = list()
+var/global/list/tail_icon_cache     = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
 var/global/list/light_overlay_cache = list()
 
 /proc/overlay_image(icon,icon_state,color,flags)
@@ -139,6 +140,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(lying && (root_bodytype.prone_overlay_offset[1] || root_bodytype.prone_overlay_offset[2]))
 		M.Translate(root_bodytype.prone_overlay_offset[1], root_bodytype.prone_overlay_offset[2])
 
+	var/mangle_planes = FALSE
 	for(var/i = 1 to LAZYLEN(visible_overlays))
 		var/entry = visible_overlays[i]
 		if(istype(entry, /image))
@@ -146,11 +148,18 @@ Please contact me on #coderbus IRC. ~Carn x
 			if(i != HO_DAMAGE_LAYER)
 				overlay.transform = M
 			add_overlay(entry)
+			mangle_planes = mangle_planes || overlay.plane >= ABOVE_LIGHTING_PLANE
 		else if(islist(entry))
 			for(var/image/overlay in entry)
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = M
 				add_overlay(overlay)
+				mangle_planes = mangle_planes || overlay.plane >= ABOVE_LIGHTING_PLANE
+
+	if(mangle_planes)
+		z_flags |= ZMM_MANGLE_PLANES
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 	for(var/i = 1 to LAZYLEN(visible_underlays))
 		var/entry = visible_underlays[i]
@@ -162,17 +171,14 @@ Please contact me on #coderbus IRC. ~Carn x
 				underlay.transform = M
 	underlays = visible_underlays
 
-	var/obj/item/organ/external/head/head = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	var/image/I = head?.get_eye_overlay()
-	if(I)
-		z_flags |= ZMM_MANGLE_PLANES
-		add_overlay(I)
-	else
-		z_flags &= ~ZMM_MANGLE_PLANES
-
 /mob/living/proc/get_icon_scale_mult()
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
 	return list(icon_scale_x, icon_scale_y)
+
+/mob/living/carbon/human/update_appearance_flags(add_flags, remove_flags)
+	. = ..()
+	if(.)
+		update_icon()
 
 // Separate and duplicated from human logic due to humans having `lying` and many overlays.
 /mob/living/update_transform()
@@ -198,15 +204,16 @@ Please contact me on #coderbus IRC. ~Carn x
 	// Apply KEEP_TOGETHER so all the component overlays move properly when
 	// applying a transform, or remove it if we aren't doing any transforms
 	// (due to cost).
-	if(!lying && desired_scale_x == 1 && desired_scale_y == 1)
-		appearance_flags &= ~KEEP_TOGETHER
+	if(!lying && desired_scale_x == 1 && desired_scale_y == 1 && !("turf_alpha_mask" in filter_data))
+		update_appearance_flags(remove_flags = KEEP_TOGETHER)
 	else
-		appearance_flags |= KEEP_TOGETHER
+		update_appearance_flags(add_flags = KEEP_TOGETHER)
 
 	// Scale/translate/rotate and apply the transform.
+	var/turn_angle
 	var/matrix/M = matrix()
+	M.Scale(desired_scale_x, desired_scale_y)
 	if(lying)
-		var/turn_angle
 		if(dir & WEST)
 			turn_angle = -90
 		else if(dir & EAST)
@@ -214,16 +221,28 @@ Please contact me on #coderbus IRC. ~Carn x
 		else
 			turn_angle = pick(-90, 90)
 		M.Turn(turn_angle)
-		M.Scale(desired_scale_y, desired_scale_x)
 		M.Translate(turn_angle == 90 ? 1 : -2, (turn_angle == 90 ? -6 : -5) - default_pixel_z)
 	else
-		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, 16 * (desired_scale_y - 1))
 
 	if(transform_animate_time)
 		animate(src, transform = M, time = transform_animate_time)
 	else
 		transform = M
+
+	var/atom/movable/mask = global._alpha_masks[src]
+	if(mask)
+		var/matrix/inverted_transform = matrix()
+		inverted_transform.Scale(desired_scale_y, desired_scale_x)
+		if(lying)
+			inverted_transform.Turn(-turn_angle)
+			inverted_transform.Translate(turn_angle == -90 ? 1 : -2, (turn_angle == -90 ? -6 : -5) - default_pixel_z)
+		else
+			inverted_transform.Translate(0, 16 * (desired_scale_y - 1))
+		if(transform_animate_time)
+			animate(mask, transform = inverted_transform, time = transform_animate_time)
+		else
+			mask.transform = inverted_transform
 
 	return transform
 
@@ -241,65 +260,37 @@ Please contact me on #coderbus IRC. ~Carn x
 				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
 	set_current_mob_overlay(HO_DAMAGE_LAYER, bandage_overlays, update_icons)
 
+/mob/living/carbon/human/proc/get_human_icon_cache_key()
+	. = list()
+	for(var/limb_tag in global.all_limb_tags)
+		. += "[limb_tag]_"
+		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, limb_tag)
+		if(isnull(part) || part.skip_body_icon_draw)
+			. += "skip"
+			continue
+		part.update_icon() // This wil regenerate their icon if needed, and more importantly set their cache key.
+		. += part._icon_cache_key
+	. += "husked_[!!is_husked()]"
+	. = JOINTEXT(.)
+
 //BASE MOB SPRITE
-/mob/living/carbon/human/update_body(var/update_icons=1)
+/mob/living/carbon/human/update_body(var/update_icons = TRUE)
 
 	var/list/limbs = get_external_organs()
 	if(!LAZYLEN(limbs))
 		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
 
-	var/husk_color_mod = rgb(96,88,80)
-	var/husk = is_husked()
-
-	//CACHING: Generate an index key from visible bodyparts.
-	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
-
-	//Create a new, blank icon for our mob to use.
-	if(stand_icon)
-		qdel(stand_icon)
 	var/decl/bodytype/root_bodytype = get_bodytype()
-	stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi',"blank")
+	var/icon_key = get_human_icon_cache_key()
 
-	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
-	if(lip_style)
-		icon_key += "[lip_style]"
-	else
-		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_organ((root_bodytype.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
-
-	for(var/limb_tag in global.all_limb_tags)
-		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, limb_tag)
-		if(isnull(part) || part.skip_body_icon_draw)
-			icon_key += "0"
-			continue
-		for(var/M in part.markings)
-			icon_key += "[M][part.markings[M]]"
-		if(part)
-			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)][part.render_alpha]"
-			icon_key += "[part.skin_tone]"
-			if(part.skin_colour)
-				icon_key += "[part.skin_colour]"
-				icon_key += "[part.skin_blend]"
-			for(var/M in part.markings)
-				icon_key += "[M][part.markings[M]]"
-		if(!BP_IS_PROSTHETIC(part) && (part.status & ORGAN_DEAD))
-			icon_key += "2"
-		else
-			icon_key += "1"
-
-	icon_key = "[icon_key][husk ? 1 : 0]"
-
-	var/icon/base_icon
-	if(human_icon_cache[icon_key])
-		base_icon = human_icon_cache[icon_key]
-	else
+	stand_icon = global.human_icon_cache[icon_key]
+	if(!stand_icon)
 		//BEGIN CACHED ICON GENERATION.
-		base_icon = icon(root_bodytype.icon_template)
+		stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi', "blank")
 		for(var/obj/item/organ/external/part in limbs)
 			if(isnull(part) || part.skip_body_icon_draw)
 				continue
-			var/icon/temp = part.get_icon()
+			var/icon/temp = part.icon
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
@@ -310,34 +301,28 @@ Please contact me on #coderbus IRC. ~Carn x
 					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(!(part.icon_position & RIGHT))
 					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_OVERLAY)
+				stand_icon.Blend(temp2, ICON_OVERLAY)
 				if(part.icon_position & LEFT)
 					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(part.icon_position & RIGHT)
 					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_UNDERLAY)
+				stand_icon.Blend(temp2, ICON_UNDERLAY)
 			else if(part.icon_position & UNDER)
-				base_icon.Blend(temp, ICON_UNDERLAY)
+				stand_icon.Blend(temp, ICON_UNDERLAY)
 			else
-				base_icon.Blend(temp, ICON_OVERLAY)
-
-		if(husk)
-			base_icon.ColorTone(husk_color_mod)
-
+				stand_icon.Blend(temp, ICON_OVERLAY)
 		//Handle husk overlay.
-		if(husk)
+		if(is_husked())
 			var/husk_icon = root_bodytype.get_husk_icon(src)
 			if(husk_icon)
-				var/icon/mask = new(base_icon)
+				var/icon/mask = new(stand_icon)
 				var/icon/husk_over = new(husk_icon, "")
 				mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 				husk_over.Blend(mask, ICON_ADD)
-				base_icon.Blend(husk_over, ICON_OVERLAY)
-
-		human_icon_cache[icon_key] = base_icon
-
-	//END CACHED ICON GENERATION.
-	stand_icon.Blend(base_icon,ICON_OVERLAY)
+				stand_icon.Blend(husk_over, ICON_OVERLAY)
+			else
+				stand_icon.ColorTone("#605850")
+		global.human_icon_cache[icon_key] = stand_icon
 
 	//tail
 	update_tail_showing(0)
@@ -370,8 +355,9 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
+	var/list/new_accessories = head_organ?.get_mob_overlays()
+	set_current_mob_overlay(HO_HAIR_LAYER, new_accessories, update_icons)
 
-	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_hair_icon() : null), update_icons)
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype
 	set_current_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)
@@ -439,6 +425,8 @@ Please contact me on #coderbus IRC. ~Carn x
 		return // No tail data!
 
 	// These values may be null and are generally optional.
+	var/hair_colour     = GET_HAIR_COLOUR(src)
+	var/skin_colour     = get_skin_colour()
 	var/tail_hair       = tail_organ.get_tail_hair()
 	var/tail_blend      = tail_organ.get_tail_blend()
 	var/tail_hair_blend = tail_organ.get_tail_hair_blend()

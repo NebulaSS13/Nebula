@@ -11,8 +11,8 @@
 	credits_topics = list("VOX RITUAL DUELS", "NECK MARKINGS", "ANCIENT SUPERCOMPUTERS")
 
 /mob/living/carbon/human/vox/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
-	h_style = /decl/sprite_accessory/hair/vox/short
-	hair_colour = COLOR_BEASTY_BROWN
+	SET_HAIR_STYLE(src, /decl/sprite_accessory/hair/vox/short, TRUE)
+	SET_HAIR_COLOUR(src, COLOR_BEASTY_BROWN, TRUE)
 	species_name = SPECIES_VOX
 	. = ..()
 

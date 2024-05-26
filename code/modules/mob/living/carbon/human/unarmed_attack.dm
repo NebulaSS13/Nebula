@@ -21,16 +21,6 @@ var/global/list/sparring_attack_cache = list()
 	var/list/usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/is_starting_default = FALSE
 
-/decl/natural_attack/validate()
-	. = ..()
-	if(selector_icon_state)
-		for(var/check_icon_name in global.all_ui_styles)
-			var/check_icon = global.all_ui_styles[check_icon_name]
-			if(!check_state_in_icon(selector_icon_state, check_icon))
-				. += "missing state '[selector_icon_state]' from icon '[check_icon]'"
-	else
-		. += "no selector_icon_state set"
-
 /decl/natural_attack/proc/summarize()
 	var/list/usable_limbs = list()
 	for(var/limb in usable_with_limbs)
@@ -364,3 +354,17 @@ var/global/list/sparring_attack_cache = list()
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()
+
+/decl/natural_attack/forelimb_slash
+	name = "forelimb slash"
+	selector_icon_state = "attack_slash"
+	attack_verb = list("mauled", "slashed", "struck", "pierced")
+	attack_noun = list("forelimb")
+	damage = 8
+	shredding = 1
+	sharp = 1
+	edge = 1
+	delay = 20
+	eye_attack_text = "a forelimb"
+	eye_attack_text_victim = "a forelimb"
+	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)

@@ -97,7 +97,7 @@
 	path = /obj/item/plunger
 
 /datum/fabricator_recipe/fiberglass
-	path = /obj/item/stack/material/reinforced/mapped/fiberglass
+	path = /obj/item/stack/material/sheet/reinforced/mapped/fiberglass
 	category = "Textiles"
 	fabricator_types = list(
 		FABRICATOR_CLASS_GENERAL,
@@ -166,5 +166,12 @@
 /datum/fabricator_recipe/package_wrapper/gift
 	path = /obj/item/stack/package_wrap/gift
 
+/datum/fabricator_recipe/clothes_iron
+	path = /obj/item/ironingiron
+
+/datum/fabricator_recipe/ironing_board
+	path = /obj/item/roller/ironingboard
+
 /datum/fabricator_recipe/duct_tape
 	path = /obj/item/stack/tape_roll/duct_tape
+	pass_multiplier_to_product_new = FALSE // they are printed as single items with 32 uses

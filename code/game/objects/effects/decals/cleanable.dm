@@ -38,8 +38,8 @@
 		SSpersistence.forget_value(src, /decl/persistence_handler/filth)
 	. = ..()
 
-/obj/effect/decal/cleanable/clean_blood(var/ignore = 0)
-	if(!ignore)
+/obj/effect/decal/cleanable/clean(clean_forensics = TRUE)
+	if(clean_forensics)
 		qdel(src)
 		return TRUE
 	. = ..()

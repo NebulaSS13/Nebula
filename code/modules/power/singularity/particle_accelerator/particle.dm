@@ -63,7 +63,6 @@
 /obj/effect/accelerated_particle/proc/toxmob(var/mob/living/M)
 	var/radiation = (energy*2)
 	M.apply_damage((radiation*3),IRRADIATE, damage_flags = DAM_DISPERSED)
-	M.updatehealth()
 
 /obj/effect/accelerated_particle/proc/move(var/lag)
 	set waitfor = FALSE

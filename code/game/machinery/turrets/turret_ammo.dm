@@ -3,7 +3,7 @@
 	desc = "A high capacity ammunition supply designed to mechanically reload magazines with bullets."
 	icon = 'icons/obj/items/storage/ammobox.dmi'
 	icon_state = "ammo"
-	origin_tech = "{'engineering':3,'combat':4}"
+	origin_tech = @'{"engineering":3,"combat":4}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/brass = MATTER_AMOUNT_REINFORCEMENT,

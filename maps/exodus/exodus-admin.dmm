@@ -218,7 +218,7 @@
 /area/centcom)
 "ala" = (
 /obj/item/radio/intercom{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /obj/structure/decoy{
 	name = "A.L.I.C.E."
@@ -336,11 +336,11 @@
 "ayi" = (
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/showcase{
 	desc = "A self-contained autopilot that controls supply drones.";
-	icon_state = "comm_server";
+	icon_state = "showcase_5";
 	name = "Supply Drone Virtual Intelligence"
 	},
 /turf/simulated/floor/plating,
@@ -794,7 +794,7 @@
 /obj/machinery/light,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
@@ -1245,7 +1245,8 @@
 /area/centcom/holding)
 "aLs" = (
 /obj/structure/closet/hydrant{
-	pixel_x = 30
+	pixel_x = 30;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -1315,12 +1316,9 @@
 /turf/space,
 /area/shuttle/escape_shuttle)
 "aLF" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "CentComPort";
-	name = "Security Doors";
-	opacity = 0
+	name = "Security Doors"
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
@@ -1472,7 +1470,8 @@
 "aMg" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "centcom_escape_dock_north_sensor";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/centcom/holding)
@@ -1549,7 +1548,8 @@
 /area/centcom/holding)
 "aMt" = (
 /obj/machinery/status_display{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -1955,7 +1955,8 @@
 /area/centcom/holding)
 "aOZ" = (
 /obj/machinery/status_display{
-	pixel_y = -30
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/warning{
@@ -2130,7 +2131,8 @@
 /area/shuttle/escape_shuttle)
 "bpb" = (
 /obj/structure/closet/hydrant{
-	pixel_x = -30
+	pixel_x = -30;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -2638,7 +2640,7 @@
 /obj/item/chems/drinks/bottle/small/beer,
 /obj/item/chems/drinks/bottle/small/beer,
 /obj/item/flame/lighter/zippo/random,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/box/fancy/cigarettes,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -3022,7 +3024,7 @@
 	name = "tdome2"
 	},
 /obj/machinery/camera/network/television{
-	c_tag = "Thunderdome - Red Team";
+	c_tag = "Thunderdome - Red Team"
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3059,7 +3061,7 @@
 	name = "tdome1"
 	},
 /obj/machinery/camera/network/television{
-	c_tag = "Green Team";
+	c_tag = "Green Team"
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3074,7 +3076,7 @@
 /area/tdome)
 "pQZ" = (
 /obj/machinery/camera/network/television{
-	c_tag = "Thunderdome Arena";
+	c_tag = "Thunderdome Arena"
 	},
 /turf/unsimulated/floor{
 	icon_state = "bcircuit"
@@ -3156,8 +3158,8 @@
 /area/tdome/tdomeadmin)
 "sKA" = (
 /obj/abstract/level_data_spawner/admin_level{
-	name = "Centcomm";
-},
+	name = "Centcomm"
+	},
 /turf/space,
 /area/space)
 "sMD" = (
@@ -3285,7 +3287,6 @@
 "wOU" = (
 /obj/machinery/button/blast_door{
 	dir = 1;
-	icon_state = "computer";
 	id_tag = "thunderdomeaxe";
 	name = "Thunderdome Axe Supply"
 	},

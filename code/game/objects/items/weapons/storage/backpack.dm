@@ -41,7 +41,7 @@
 /obj/item/storage/backpack/holding
 	name = "bag of holding"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
-	origin_tech = "{'wormholes':4}"
+	origin_tech = @'{"wormholes":4}'
 	icon = 'icons/obj/items/storage/backpack/backpack_holding.dmi'
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
@@ -351,7 +351,7 @@
 		/obj/item/crowbar
 	)
 
-/obj/item/storage/backpack/satchel/flat/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/item/storage/backpack/satchel/flat/handle_mouse_drop(atom/over, mob/user, params)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
 		return TRUE
@@ -385,7 +385,7 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/item/storage/backpack/ert/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/storage/backpack/ert/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && slot == slot_back_str && marking_state)
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-[marking_state]")
 		I.color = marking_colour

@@ -10,7 +10,7 @@
 	var/buckle_layer_above = FALSE
 	var/buckle_dir = 0
 	var/buckle_lying = -1             // bed-like behavior, forces mob.lying = buckle_lying if != -1
-	var/buckle_pixel_shift            // ex. @"{'x':0,'y':0,'z':0}" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
+	var/buckle_pixel_shift            // ex. @'{"x":0,"y":0,"z":0}' //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 // require people to be cuffed before being able to buckle. eg: pipes
 	var/buckle_require_same_tile = FALSE
 	var/buckle_sound
@@ -36,6 +36,9 @@
 	var/inertia_next_move = 0
 	var/inertia_move_delay = 5
 	var/atom/movable/inertia_ignore
+
+	// Marker for alpha mask update process. null == never update, TRUE == currently updating, FALSE == finished updating.
+	var/updating_turf_alpha_mask = null
 
 // This proc determines if the instance is preserved when the process() despawn of crypods occurs.
 /atom/movable/proc/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
@@ -145,7 +148,7 @@
 
 	if (A && yes)
 		A.last_bumped = world.time
-		INVOKE_ASYNC(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
+		INVOKE_ASYNC(A, TYPE_PROC_REF(/atom, Bumped), src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
@@ -255,6 +258,15 @@
 				L = thing
 				L.source_atom.update_light()
 
+		// Z-Mimic.
+		if (bound_overlay)
+			// The overlay will handle cleaning itself up on non-openspace turfs.
+			bound_overlay.forceMove(get_step(src, UP))
+			if (bound_overlay.dir != dir)
+				bound_overlay.set_dir(dir)
+		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src))
+			SSzcopy.discover_movable(src)
+
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(TRUE)
@@ -340,7 +352,7 @@
 /atom/movable/proc/can_buckle_mob(var/mob/living/dropping)
 	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.buckled_mob && !buckled_mob)
 
-/atom/movable/receive_mouse_drop(atom/dropping, mob/living/user)
+/atom/movable/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && can_buckle_mob(dropping))
 		user_buckle_mob(dropping, user)
@@ -461,4 +473,61 @@
 
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
+
+/atom/movable/proc/try_burn_wearer(var/mob/living/holder, var/held_slot, var/delay = 0)
+	set waitfor = FALSE
+	if(delay)
+		sleep(delay)
+	if(!held_slot || !istype(holder) || QDELETED(holder) || loc != holder)
+		return
+
+	// TODO: put these flags on the inventory slot or something.
+	var/check_slots
+	if(held_slot in global.all_hand_slots)
+		check_slots = SLOT_HANDS
+	else if(held_slot == BP_MOUTH || held_slot == BP_HEAD)
+		check_slots = SLOT_FACE
+
+	if(check_slots)
+		for(var/obj/item/covering in holder.get_covering_equipped_items(check_slots))
+			if(covering.max_heat_protection_temperature >= temperature)
+				return
+
+	// TODO: less simplistic messages and logic
+	var/datum/inventory_slot/slot = held_slot && holder.get_inventory_slot_datum(held_slot)
+	var/check_organ = slot?.requires_organ_tag
+	if(temperature >= holder.get_mob_temperature_threshold(HEAT_LEVEL_3, check_organ))
+		to_chat(holder, SPAN_DANGER("You are burned by \the [src]!"))
+	else if(temperature >= holder.get_mob_temperature_threshold(HEAT_LEVEL_2, check_organ))
+		if(prob(10))
+			to_chat(holder, SPAN_DANGER("\The [src] is uncomfortably hot..."))
+		return
+	else if(temperature <= holder.get_mob_temperature_threshold(COLD_LEVEL_3, check_organ))
+		to_chat(holder, SPAN_DANGER("You are frozen by \the [src]!"))
+	else if(temperature <= holder.get_mob_temperature_threshold(COLD_LEVEL_2, check_organ))
+		if(prob(10))
+			to_chat(holder, SPAN_DANGER("\The [src] is uncomfortably cold..."))
+		return
+	else
+		return
+
+	var/my_size = get_object_size()
+	var/burn_damage = rand(my_size, round(my_size * 1.5))
+	var/obj/item/organ/external/organ = check_organ && holder.get_organ(check_organ)
+	if(istype(organ))
+		organ.take_external_damage(0, burn_damage)
+	else
+		holder.adjustFireLoss(burn_damage)
+	if(held_slot in holder.get_held_item_slots())
+		holder.drop_from_inventory(src)
+	else
+		. = null // We might keep burning them next time.
+
+/atom/movable/proc/update_appearance_flags(add_flags, remove_flags)
+	var/old_appearance = appearance_flags
+	if(add_flags)
+		appearance_flags |= add_flags
+	if(remove_flags)
+		appearance_flags &= ~remove_flags
+	return old_appearance != appearance_flags
 

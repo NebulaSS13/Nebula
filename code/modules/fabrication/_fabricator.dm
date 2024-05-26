@@ -53,6 +53,9 @@
 
 	var/species_variation = /decl/species/human // If this fabricator is a variant for a specific species, this will be checked to unlock species-specific designs.
 
+	// If TRUE, will accept atoms with contents.
+	var/ignore_input_contents_length = FALSE
+
 	// If TRUE, fills fabricator with material on initalize
 	var/prefilled = FALSE
 
@@ -88,7 +91,7 @@
 	// Get any local network we need to be part of.
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
-	if(SSfabrication.post_recipe_init)
+	if(SSfabrication.initialized)
 		refresh_design_cache()
 	else
 		SSfabrication.queue_design_cache_refresh(src)

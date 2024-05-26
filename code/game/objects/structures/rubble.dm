@@ -6,7 +6,7 @@
 	opacity = TRUE
 	density = TRUE
 	anchored = TRUE
-	maxhealth = 50
+	max_health = 50
 
 	var/list/loot = list(
 		/obj/item/cell,
@@ -66,15 +66,11 @@
 	return TRUE
 
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
-	if (istype(I, /obj/item/pickaxe))
-		var/obj/item/pickaxe/P = I
-		visible_message("[user] starts clearing away \the [src].")
-		if(do_after(user,P.digspeed, src))
-			visible_message("[user] clears away \the [src].")
-			if(lootleft && prob(1))
-				var/obj/item/booty = pickweight(loot)
-				booty = new booty(loc)
-			qdel(src)
+	if(I.do_tool_interaction(TOOL_PICK, user, I, 3 SECONDS, set_cooldown = TRUE))
+		if(lootleft && prob(1))
+			var/obj/item/booty = pickweight(loot)
+			booty = new booty(loc)
+		qdel(src)
 		return TRUE
 	. = ..()
 

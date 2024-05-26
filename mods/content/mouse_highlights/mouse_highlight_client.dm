@@ -11,7 +11,7 @@
 
 /client/New()
 	// Cache our callback as we will potentially be using it (10 / ticklag) times per second,
-	mouseover_callback = CALLBACK(src, .proc/refresh_mouseover_highlight_timer)
+	mouseover_callback = CALLBACK(src, PROC_REF(refresh_mouseover_highlight_timer))
 	. = ..()
 
 // This proc iterates constantly whenever something is being mouseover'd, so that it
@@ -96,8 +96,8 @@
 		mouseover_highlight_dummy.underlays = replaned_underlays
 
 	// Finally update our highlight's vis contents and location .
-	clear_vis_contents(current_highlight)
-	add_vis_contents(current_highlight, mouseover_highlight_dummy)
+	current_highlight.clear_vis_contents()
+	current_highlight.add_vis_contents(mouseover_highlight_dummy)
 	current_highlight.loc = object
 	current_highlight_atom = weakref(AM)
 

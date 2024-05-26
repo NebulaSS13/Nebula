@@ -1,13 +1,18 @@
-/mob/living/proc/can_grab(var/atom/movable/target, var/target_zone, var/defer_hand = FALSE)
-	if(!ismob(target) && target.anchored)
-		to_chat(src, SPAN_WARNING("\The [target] won't budge!"))
-		return FALSE
+/mob/living/proc/check_grab_hand(defer_hand)
 	if(defer_hand)
 		if(!get_empty_hand_slot())
 			to_chat(src, SPAN_WARNING("Your hands are full!"))
 			return FALSE
 	else if(get_active_hand())
 		to_chat(src, SPAN_WARNING("Your [parse_zone(get_active_held_item_slot())] is full!"))
+		return FALSE
+	return TRUE
+
+/mob/living/proc/can_grab(var/atom/movable/target, var/target_zone, var/defer_hand = FALSE)
+	if(!ismob(target) && target.anchored)
+		to_chat(src, SPAN_WARNING("\The [target] won't budge!"))
+		return FALSE
+	if(!check_grab_hand(defer_hand))
 		return FALSE
 	if(LAZYLEN(grabbed_by))
 		to_chat(src, SPAN_WARNING("You cannot start grappling while already being grappled!"))
@@ -25,7 +30,7 @@
 				return FALSE
 	return TRUE
 
-/mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple, var/defer_hand = FALSE)
+/mob/living/proc/make_grab(atom/movable/target, grab_tag = /decl/grab/simple, defer_hand = FALSE, force_grab_tag = FALSE)
 
 	// Resolve to the 'topmost' atom in the buckle chain, as grabbing someone buckled to something tends to prevent further interaction.
 	var/atom/movable/original_target = target
@@ -60,3 +65,6 @@
 /mob/living/ProcessGrabs()
 	if(LAZYLEN(grabbed_by))
 		resist()
+
+/mob/living/give_control_grab(var/mob/living/M)
+	return (isliving(M) && M == buckled_mob) ? M.make_grab(src, /decl/grab/simple/control, force_grab_tag = TRUE) : ..()

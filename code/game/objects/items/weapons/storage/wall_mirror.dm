@@ -10,7 +10,7 @@
 	var/shattered = FALSE
 	var/list/ui_users
 	var/obj/item/storage/internal/mirror_storage/mirror_storage
-	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':29}, 'WEST':{'x':-29}}"
+	directional_offset = @'{"NORTH":{"y":-29}, "SOUTH":{"y":29}, "EAST":{"x":29}, "WEST":{"x":-29}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/mirror/Initialize()
@@ -30,11 +30,12 @@
 
 /obj/item/storage/internal/mirror_storage/WillContain()
 	return list(
-			/obj/item/haircomb/random,
-			/obj/item/haircomb/brush,
+			/obj/item/grooming/comb/colorable/random,
+			/obj/item/grooming/brush/colorable/random,
+			/obj/item/grooming/file,
 			/obj/random/medical/lite,
-			/obj/item/lipstick,
 			/obj/random/lipstick,
+			/obj/random/eyeshadow,
 			/obj/random/soap,
 			/obj/item/chems/spray/cleaner/deodorant,
 			/obj/item/towel/random
@@ -45,8 +46,8 @@
 	clear_ui_users(ui_users)
 	. = ..()
 
-/obj/structure/mirror/handle_mouse_drop(atom/over, mob/user)
-	if(!(. = mirror_storage?.handle_storage_internal_mouse_drop(user, over)))
+/obj/structure/mirror/handle_mouse_drop(atom/over, mob/user, params)
+	if(!(. = mirror_storage?.handle_storage_internal_mouse_drop(user, over, params)))
 		flick("mirror_open",src)
 		return
 	if((. = ..()))

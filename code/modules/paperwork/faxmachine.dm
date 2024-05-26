@@ -14,7 +14,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	name = "circuitboard (fax machine)"
 	build_path = /obj/machinery/faxmachine
 	board_type = "machine"
-	origin_tech = "{'engineering':1, 'programming':1}"
+	origin_tech = @'{"engineering":1, "programming":1}'
 	req_components = list(
 		/obj/item/stock_parts/printer         = 1,
 		/obj/item/stock_parts/manipulator     = 1,
@@ -116,18 +116,18 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	printer     = get_component_of_type(/obj/item/stock_parts/printer)
 
 	if(disk_reader)
-		disk_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/on_insert_disk))
-		disk_reader.register_on_eject( CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		disk_reader.register_on_insert(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_insert_disk)))
+		disk_reader.register_on_eject( CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, update_ui)))
 
 	if(card_reader)
-		card_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/on_insert_card))
-		card_reader.register_on_eject( CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		card_reader.register_on_insert(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_insert_card)))
+		card_reader.register_on_eject( CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, update_ui)))
 
 	if(printer)
-		printer.register_on_printed_page(  CALLBACK(src, /obj/machinery/faxmachine/proc/on_printed_page))
-		printer.register_on_finished_queue(CALLBACK(src, /obj/machinery/faxmachine/proc/on_queue_finished))
-		printer.register_on_print_error(   CALLBACK(src, /obj/machinery/faxmachine/proc/on_print_error))
-		printer.register_on_status_changed(CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		printer.register_on_printed_page(  CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_printed_page)))
+		printer.register_on_finished_queue(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_queue_finished)))
+		printer.register_on_print_error(   CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_print_error)))
+		printer.register_on_status_changed(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, update_ui)))
 
 /obj/machinery/faxmachine/interface_interact(mob/user)
 	ui_interact(user)
@@ -682,6 +682,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	var/msg = "<span class='notice'><b><font color='[font_colour]'>[faxname]: </font>[get_options_bar(sender, 2,1,1)]"
 	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[source_fax];replyorigin=[reply_type]'>REPLY</a>)</b>: "
 	msg += "Receiving '[rcvdcopy.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>view message</a></span>"
+
+	if (istype(doc, /obj/item/paper))
+		var/obj/item/paper/paper = doc
+		SSwebhooks.send(WEBHOOK_FAX_SENT, list("title" = "Incoming fax transmission from [sender] in [faxname] for [dest_display_name].", "body" = "[paper.info]"))
 
 	for(var/client/C in global.admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))

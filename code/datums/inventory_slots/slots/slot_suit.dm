@@ -8,6 +8,7 @@
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_OVER_BODY
 	mob_overlay_layer = HO_SUIT_LAYER
+	quick_equip_priority = 11
 
 /datum/inventory_slot/suit/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	if(prop)

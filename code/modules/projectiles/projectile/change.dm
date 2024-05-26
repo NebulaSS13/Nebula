@@ -25,8 +25,8 @@
 		var/mob/living/silicon/robot/R = new(get_turf(M))
 		R.set_gender(M.get_gender())
 		R.job = ASSIGNMENT_ROBOT
-		R.mmi = new /obj/item/mmi(R)
-		R.mmi.transfer_identity(M)
+		R.central_processor = new /obj/item/organ/internal/brain_interface(R)
+		transfer_key_from_mob_to_mob(M, R)
 		return R
 
 	if(get_species_by_key(choice))
@@ -58,13 +58,14 @@
 		if(M.mind)
 			for (var/spell/S in M.mind.learned_spells)
 				new_mob.add_spell(new S.type)
-			M.mind.transfer_to(new_mob)
-		else
-			new_mob.key = M.key
-		if(new_mob != M && !QDELETED(M))
-			qdel(M)
+			new_mob.a_intent = "hurt"
+			transfer_key_from_mob_to_mob(M, new_mob)
+			to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [choice].</span>")
 	else
 		new_mob = M
-
 	if(new_mob)
 		to_chat(new_mob, SPAN_WARNING("Your form morphs into that of \a [choice]."))
+
+	if(new_mob != M && !QDELETED(M))
+		qdel(M)
+

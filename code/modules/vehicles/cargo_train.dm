@@ -6,19 +6,20 @@
 	on = 0
 	powered = 1
 	locked = 0
-
 	load_item_visible = 1
 	load_offset_x = 0
 	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 7)
-
-	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
 	active_engines = 1
+	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	var/obj/item/key/cargo_train/key
 
 /obj/item/key/cargo_train
-	name = "key"
-	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\"."
+	desc = "A small key on a yellow fob reading \"Choo Choo!\"."
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
+	)
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "train_keys"
 	w_class = ITEM_SIZE_TINY
@@ -360,10 +361,10 @@
 	if(!is_train_head() || !on)
 		move_delay = initial(move_delay)		//so that engines that have been turned off don't lag behind
 	else
-		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains
-		move_delay *= (1 / max(1, active_engines)) * 2 										//overweight penalty (scaled by the number of engines)
-		move_delay += config.run_delay 														//base reference speed
-		move_delay *= 1.1																	//makes cargo trains 10% slower than running when not overweight
+		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines) // limits base overweight so you cant overspeed trains
+		move_delay *= (1 / max(1, active_engines)) * 2                                     // overweight penalty (scaled by the number of engines)
+		move_delay += get_config_value(/decl/config/num/movement_run)      // base reference speed
+		move_delay *= 1.1                                                                  // makes cargo trains 10% slower than running when not overweight
 
 /obj/vehicle/train/cargo/trolley/update_car(var/train_length, var/active_engines)
 	src.train_length = train_length

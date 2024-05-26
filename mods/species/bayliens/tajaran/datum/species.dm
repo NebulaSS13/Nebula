@@ -54,23 +54,6 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
-	cold_level_1 = 200
-	cold_level_2 = 140
-	cold_level_3 = 80
-
-	heat_level_1 = 330
-	heat_level_2 = 380
-	heat_level_3 = 800
-
-	heat_discomfort_level = 294
-	cold_discomfort_level = 230
-
-	heat_discomfort_strings = list(
-		"Your fur prickles in the heat.",
-		"You feel uncomfortably warm.",
-		"Your overheated skin itches."
-	)
-
 	available_cultural_info = list(
 		TAG_CULTURE = list(
 			/decl/cultural_info/culture/tajaran,
@@ -79,13 +62,13 @@
 	)
 
 	default_emotes = list(
-		/decl/emote/human/swish,
-		/decl/emote/human/wag,
-		/decl/emote/human/sway,
-		/decl/emote/human/qwag,
-		/decl/emote/human/fastsway,
-		/decl/emote/human/swag,
-		/decl/emote/human/stopsway,
+		/decl/emote/visible/tail/swish,
+		/decl/emote/visible/tail/wag,
+		/decl/emote/visible/tail/sway,
+		/decl/emote/visible/tail/qwag,
+		/decl/emote/visible/tail/fastsway,
+		/decl/emote/visible/tail/swag,
+		/decl/emote/visible/tail/stopsway,
 		/decl/emote/audible/purr,
 		/decl/emote/audible/purrlong
 	)
@@ -99,4 +82,4 @@
 	autohiss_exempt = list(LANGUAGE_TAJARA)
 
 /decl/species/tajaran/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
-	. = H && H.change_skin_color(rgb(189, 171, 143))
+	. = H?.set_skin_colour(rgb(189, 171, 143))

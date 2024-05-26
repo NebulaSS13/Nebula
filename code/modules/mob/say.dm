@@ -34,8 +34,8 @@ var/global/list/special_channel_keys = list(
 	SStyping.set_indicator_state(client, FALSE)
 	if(!filter_block_message(usr, message))
 		message = sanitize(message)
-		if(can_emote(VISIBLE_MESSAGE))
-			usr.emote("me", usr.emote_type, message)
+		if(can_emote(VISIBLE_MESSAGE, src))
+			usr.custom_emote(usr.emote_type, message)
 		else
 			usr.emote(message)
 

@@ -1,5 +1,6 @@
 /turf/simulated/floor/explosion_act(severity)
-	SHOULD_CALL_PARENT(FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	..()
 	if(severity == 1)
 		ChangeTurf(get_base_turf_by_area(src))
 	else if(severity == 2)
@@ -25,14 +26,13 @@
 		hotspot_expose(1000,CELL_VOLUME)
 
 /turf/simulated/floor/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-
 	var/temp_destroy = get_damage_temperature()
 	if(!burnt && prob(5))
 		burn_tile(exposed_temperature)
 	else if(temp_destroy && exposed_temperature >= (temp_destroy + 100) && prob(1) && !is_plating())
 		make_plating() //destroy the tile, exposing plating
 		burn_tile(exposed_temperature)
-	return
+	return ..()
 
 //should be a little bit lower than the temperature required to destroy the material
 /turf/simulated/floor/proc/get_damage_temperature()

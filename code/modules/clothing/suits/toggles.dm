@@ -59,7 +59,7 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/clothing/suit/storage/toggle/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/suit/storage/toggle/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(buttons && overlay && check_state_in_icon("[overlay.icon_state]_open", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_open"
 	. = ..()
@@ -130,7 +130,7 @@
 		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	hood = /obj/item/clothing/head/winterhood
-	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
+	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/box/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
 	siemens_coefficient = 0.6
 	protects_against_weather = TRUE
 

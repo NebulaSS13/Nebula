@@ -13,7 +13,7 @@
 	throw_range = 5
 
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = "{'combat':1}"
+	origin_tech = @'{"combat":1}'
 	material = /decl/material/solid/metal/steel
 
 	var/fire_sound
@@ -294,7 +294,7 @@
 
 /obj/item/flamethrower/proc/ignite_turf(turf/target)
 	var/datum/gas_mixture/air_transfer = tank.air_contents.remove_ratio(0.02 * (throw_amount / 100))
-	target.add_fluid(/decl/material/liquid/fuel, air_transfer.get_by_flag(XGM_GAS_FUEL) * REAGENT_UNITS_PER_GAS_MOLE * 2)
+	target.add_to_reagents(/decl/material/liquid/fuel, air_transfer.get_by_flag(XGM_GAS_FUEL) * REAGENT_UNITS_PER_GAS_MOLE * 2)
 	air_transfer.remove_by_flag(XGM_GAS_FUEL, 0)
 	target.assume_air(air_transfer)
 	target.create_fire(tank.air_contents.temperature * 2 + 400)

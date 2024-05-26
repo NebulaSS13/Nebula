@@ -15,8 +15,7 @@
 	layer = MOB_LAYER
 	anchored = TRUE
 	density = TRUE
-	health = 150
-	maxHealth = 150
+	max_health = 150
 	mob_bump_flag = HEAVY
 
 	min_target_dist = 0
@@ -52,7 +51,7 @@
 	suffix = num2text(++amount)
 	name = "Mulebot #[suffix]"
 
-/mob/living/bot/mulebot/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/mob/living/bot/mulebot/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!.)
 		load(dropping)
@@ -222,20 +221,14 @@
 	if(load == user)
 		unload(direction)
 
-/mob/living/bot/mulebot/explode()
+/mob/living/bot/mulebot/gib(do_gibs = TRUE)
 	unload(pick(0, 1, 2, 4, 8))
-
-	visible_message("<span class='danger'>[src] blows apart!</span>")
-
-	var/turf/Tsec = get_turf(src)
-	new /obj/item/assembly/prox_sensor(Tsec)
-	new /obj/item/stack/cable_coil/cut(Tsec)
-	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 2, /obj/item/stack/material/rods)
-
-	spark_at(src, cardinal_only = TRUE)
-
-	new /obj/effect/decal/cleanable/blood/oil(Tsec)
-	..()
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		new /obj/item/assembly/prox_sensor(my_turf)
+		new /obj/item/stack/cable_coil/cut(my_turf)
+		SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 2, /obj/item/stack/material/rods)
 
 /mob/living/bot/mulebot/proc/GetBeaconList()
 	var/list/beaconlist = list()
@@ -250,7 +243,7 @@
 	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc) || C.anchored)
 		return
 
-	for(var/obj/structure/plasticflaps/P in src.loc)//Takes flaps into account
+	for(var/obj/structure/flaps/P in src.loc)//Takes flaps into account
 		if(!CanPass(C,P))
 			return
 

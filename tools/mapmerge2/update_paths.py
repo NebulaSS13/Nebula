@@ -31,7 +31,7 @@ default_map_directory = "../../_maps"
 replacement_re = re.compile(r'\s*(?P<path>[^{]*)\s*(\{(?P<props>.*)\})?')
 
 #urgent todo: replace with actual parser, this is slow as janitor in crit
-split_re = re.compile(r'((?:[A-Za-z0-9_\-$]+)\s*=\s*(?:"(?:.+?)"|[^";]*)|@OLD)')
+split_re = re.compile(r'((?:[A-Za-z0-9_\-$]+)\s*=\s*(?:"(?:.+?)"|list\([^;]*\)|[^";]*)|@OLD)')
 
 
 def props_to_string(props):
@@ -75,7 +75,7 @@ def update_path(dmm_data, replacement_string, verbose=False):
         old_path = old_path[:-len("/@SUBTYPES")]
         if verbose:
             print("Looking for subtypes of", old_path)
-        subtypes = r"(?:/\w+)*"
+        subtypes = r"(?P<subpath>(?:/\w+)*)"
 
     replacement_pattern = re.compile(rf"(?P<path>{re.escape(old_path)}{subtypes})\s*(:?{{(?P<props>.*)}})?$")
 
@@ -91,6 +91,22 @@ def update_path(dmm_data, replacement_string, verbose=False):
                 else:
                     return [match.group(0)]
             else:
+                if old_path_props[filter_prop] == "@SET":
+                    continue
+                if old_path_props[filter_prop] == "@NEGATIVE":
+                    try:
+                        if float(old_props[filter_prop]) < 0:
+                            continue
+                        return [match.group(0)]
+                    except ValueError:
+                        return [match.group(0)]
+                if old_path_props[filter_prop] == "@POSITIVE":
+                    try:
+                        if float(old_props[filter_prop]) > 0:
+                            continue
+                        return [match.group(0)]
+                    except ValueError:
+                        return [match.group(0)]
                 if old_props[filter_prop] != old_path_props[filter_prop] or old_path_props[filter_prop] == "@UNSET":
                     return [match.group(0)] #does not match current filter, skip the change.
         if verbose:

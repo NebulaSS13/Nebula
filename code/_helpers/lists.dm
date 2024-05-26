@@ -284,19 +284,20 @@ Checks if a list has the same entries and values as an element of big.
 
 //Returns the next element in parameter list after first appearance of parameter element. If it is the last element of the list or not present in list, returns first element.
 /proc/next_in_list(element, list/L)
-	for(var/i=1, i<L.len, i++)
+	for(var/i = 1 to L.len)
 		if(L[i] == element)
+			if(i >= L.len)
+				return L[1]
 			return L[i+1]
 	return L[1]
 
 //Returns the previous element in parameter list after first appearance of parameter element. If it is the first element of the list or not present in list, returns first element.
 /proc/previous_in_list(element, list/L)
-	for(var/i=1, i<L.len, i++)
+	for(var/i = 1 to L.len)
 		if(L[i] == element)
 			if(i <= 1)
 				return L[L.len]
-			else
-				return L[i-1]
+			return L[i-1]
 	return L[L.len]
 
 /*

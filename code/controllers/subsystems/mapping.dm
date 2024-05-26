@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/map_templates_by_category = list()
 	var/list/map_templates_by_type =     list()
 	var/list/banned_maps =               list()
-	var/list/banned_ruin_names =         list()
+	var/list/banned_template_names =     list()
 
 	// Listing .dmm filenames in the file at this location will blacklist any templates that include them from being used.
 	// Maps must be the full file path to be properly included. ex. "maps/random_ruins/away_sites/example.dmm"
@@ -122,7 +122,7 @@ SUBSYSTEM_DEF(mapping)
 
 	// Initialize z-level objects.
 #ifdef UNIT_TEST
-	config.roundstart_level_generation = FALSE //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
+	set_config_value(/decl/config/toggle/roundstart_level_generation, FALSE) //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
 #endif
 
 	. = ..()

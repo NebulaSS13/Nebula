@@ -10,13 +10,13 @@
 	can_buckle = TRUE
 	material =   /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
-	maxhealth = 200
+	max_health = 200
 	var/secured
 
 /obj/structure/defensive_barrier/Initialize()
 	. = ..()
 	update_icon()
-	events_repository.register(/decl/observ/dir_set, src, src, .proc/update_layers)
+	events_repository.register(/decl/observ/dir_set, src, src, PROC_REF(update_layers))
 
 /obj/structure/defensive_barrier/physically_destroyed(var/skip_qdel)
 	visible_message(SPAN_DANGER("\The [src] was destroyed!"))
@@ -24,7 +24,7 @@
 	. = ..()
 
 /obj/structure/defensive_barrier/Destroy()
-	events_repository.unregister(/decl/observ/dir_set, src, src, .proc/update_layers)
+	events_repository.unregister(/decl/observ/dir_set, src, src, PROC_REF(update_layers))
 	. = ..()
 
 /obj/structure/defensive_barrier/proc/update_layers()
@@ -90,8 +90,8 @@
 	visible_message(SPAN_NOTICE("\The [user] packs up \the [src]."))
 	var/obj/item/defensive_barrier/B = new(get_turf(user), material?.type)
 	playsound(src, 'sound/items/Deconstruct.ogg', 100, 1)
-	B.stored_health = health
-	B.stored_max_health = maxhealth
+	B.stored_health = current_health
+	B.stored_max_health = get_max_health()
 	B.add_fingerprint(user)
 	qdel(src)
 	return TRUE
@@ -197,7 +197,7 @@
 	playsound(src, 'sound/effects/extout.ogg', 100, 1)
 	var/obj/structure/defensive_barrier/B = new(get_turf(user), material?.type)
 	B.set_dir(user.dir)
-	B.health = stored_health
+	B.current_health = stored_health
 	if(loc == user)
 		user.drop_from_inventory(src)
 	qdel(src)

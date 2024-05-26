@@ -23,13 +23,13 @@
 	desc = "Sparkling wine made from exquisite grape varieties by the method of secondary fermentation in a bottle. Bubbling."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "champagne"
-	center_of_mass = @"{'x':12,'y':5}"
+	center_of_mass = @'{"x":12,"y":5}'
 	atom_flags = 0 //starts closed
 
 	var/opening
 
 /obj/item/chems/drinks/bottle/champagne/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/ethanol/champagne, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/ethanol/champagne, reagents.maximum_volume)
 
 /obj/item/chems/drinks/bottle/champagne/open(mob/user)
 	if(ATOM_IS_OPEN_CONTAINER(src))

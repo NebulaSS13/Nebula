@@ -5,8 +5,7 @@
 	icon_state = "egg"
 	pixel_x = -128
 	pixel_y = -128
-	health = 100
-	maxHealth = 100 //I dunno what to do with health at this point.
+	max_health = 100
 	universal_understand = TRUE
 	mob_sort_value = 5
 
@@ -33,7 +32,7 @@
 	eyeobj.possess(src)
 	eyenet.add_source(src)
 
-/mob/living/deity/death()
+/mob/living/deity/death(gibbed)
 	. = ..()
 	if(.)
 		for(var/m in minions)
@@ -67,7 +66,7 @@
 			qdel(items[i])
 		items.Cut()
 
-	death(0)
+	death()
 	if(length(minions))
 		minions.Cut()
 	if(length(structures))

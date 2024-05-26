@@ -40,7 +40,12 @@
 /atom/movable/proc/do_simple_ranged_interaction(var/mob/user)
 	return FALSE
 
-/atom/movable/proc/can_be_injected_by(var/atom/injector)
+/atom/movable/hitby(var/atom/movable/AM)
+	..()
+	if(density && prob(50))
+		do_simple_ranged_interaction()
+
+/atom/movable/can_be_injected_by(var/atom/injector)
 	if(!Adjacent(get_turf(injector)))
 		return FALSE
 	if(!reagents)

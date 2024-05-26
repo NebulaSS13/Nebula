@@ -107,7 +107,7 @@
 	flags_inv = HIDEFACE
 	body_parts_covered = SLOT_FACE|SLOT_EYES
 	action_button_name = "Toggle MUI"
-	origin_tech = "{'programming':5,'engineering':5}"
+	origin_tech = @'{"programming":5,"engineering":5}'
 
 /obj/item/clothing/mask/ai/Initialize()
 	. = ..()

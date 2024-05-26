@@ -29,7 +29,7 @@
 	treated_by_reagent_type = /decl/material/liquid/nutriment/honey
 	treated_by_reagent_dosage = 1
 	medication_treatment_message = "You swallow, finding that your sore throat is rapidly recovering."
-	manual_diagnosis_string = "$USER_HIS$ throat is red and inflamed."
+	manual_diagnosis_string = "$USER_THEIR$ throat is red and inflamed."
 
 /datum/ailment/head/sore_throat/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("You swallow painfully past your sore throat."))
@@ -39,16 +39,16 @@
 	treated_by_reagent_type = /decl/material/liquid/antiseptic
 	treated_by_reagent_dosage = 1
 	medication_treatment_message = "The itching in your sinuses fades away."
-	manual_diagnosis_string = "$USER_HIS$ sinuses are inflamed and running."
+	manual_diagnosis_string = "$USER_THEIR$ sinuses are inflamed and running."
 
 /datum/ailment/head/sneezing/can_apply_to(obj/item/organ/_organ)
-	. = ..()
-	if(. && (!_organ.owner || !_organ.owner.usable_emotes["sneeze"]))
-		return FALSE
+	. = ..() && _organ.owner
+	if(.)
+		var/decl/emote/emote = GET_DECL(/decl/emote/audible/sneeze)
+		return emote.mob_can_use(_organ.owner)
 
 /datum/ailment/head/sneezing/on_ailment_event()
-	if(organ.owner.usable_emotes["sneeze"])
-		organ.owner.emote("sneeze")
+	organ.owner.emote(/decl/emote/audible/sneeze)
 	organ.owner.setClickCooldown(3)
 
 /datum/ailment/sprain
@@ -56,8 +56,8 @@
 	applies_to_organ = list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 	treated_by_item_type = /obj/item/stack/medical/bruise_pack
 	third_person_treatment_message = "$USER$ wraps $TARGET$'s sprained $ORGAN$ in $ITEM$."
-	self_treatment_message = "$USER$ wraps $USER_HIS$ sprained $ORGAN$ in $ITEM$."
-	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
+	self_treatment_message = "$USER$ wraps $USER_THEIR$ sprained $ORGAN$ in $ITEM$."
+	manual_diagnosis_string = "$USER_THEIR$ $ORGAN$ is visibly swollen."
 
 /datum/ailment/sprain/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("Your sprained [organ.name] aches distractingly."))
@@ -70,8 +70,8 @@
 	name = "rash"
 	treated_by_item_type = /obj/item/stack/medical/ointment
 	third_person_treatment_message = "$USER$ salves $TARGET$'s rash-stricken $ORGAN$ with $ITEM$."
-	self_treatment_message = "$USER$ salves $USER_HIS$ rash-stricken $ORGAN$ with $ITEM$."
-	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ is covered in a bumpy red rash."
+	self_treatment_message = "$USER$ salves $USER_THEIR$ rash-stricken $ORGAN$ with $ITEM$."
+	manual_diagnosis_string = "$USER_THEIR$ $ORGAN$ is covered in a bumpy red rash."
 
 /datum/ailment/rash/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("A bright red rash on your [organ.name] itches distractingly."))
@@ -83,12 +83,13 @@
 	applies_to_organ = list(BP_LUNGS)
 	treated_by_reagent_type = /decl/material/liquid/antiseptic
 	medication_treatment_message = "The tickling in your throat fades away."
-	manual_diagnosis_string = "$USER_HIS$ throat is red and inflamed."
+	manual_diagnosis_string = "$USER_THEIR$ throat is red and inflamed."
 
 /datum/ailment/coughing/can_apply_to(obj/item/organ/_organ)
-	. = ..()
-	if(. && (!_organ.owner || !_organ.owner.usable_emotes["cough"]))
-		return FALSE
+	. = ..() && _organ.owner
+	if(.)
+		var/decl/emote/emote = GET_DECL(/decl/emote/audible/cough)
+		return emote.mob_can_use(_organ.owner)
 
 /datum/ailment/coughing/on_ailment_event()
 	organ.owner.cough()
@@ -99,7 +100,7 @@
 	treated_by_chem_effect = CE_PAINKILLER
 	treated_by_chem_effect_strength = 25
 	medication_treatment_message = "The dull pulse of pain in your $ORGAN$ fades away."
-	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
+	manual_diagnosis_string = "$USER_THEIR$ $ORGAN$ is visibly swollen."
 
 /datum/ailment/sore_joint/on_ailment_event()
 	var/obj/item/organ/external/E = organ

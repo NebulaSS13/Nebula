@@ -46,7 +46,7 @@
 	source_hoist.release_hoistee()
 	return TRUE
 
-/obj/effect/hoist_hook/receive_mouse_drop(atom/dropping, mob/user)
+/obj/effect/hoist_hook/receive_mouse_drop(atom/dropping, mob/user, params)
 	// skip the parent buckle logic, handle climbing directly
 	var/mob/living/H = user
 	if(istype(H) && !H.anchored && can_climb(H) && dropping == user)
@@ -83,9 +83,9 @@
 	if (get_turf(AM) != get_turf(source_hook))
 		AM.forceMove(get_turf(source_hook))
 
-	events_repository.register(/decl/observ/destroyed, AM, src, .proc/release_hoistee)
+	events_repository.register(/decl/observ/destroyed, AM, src, PROC_REF(release_hoistee))
 
-/obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user)
+/obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user, params)
 	if(source_hoist.hoistee && isturf(over) && over.Adjacent(source_hoist.hoistee))
 		if(!user.check_dexterity(DEXTERITY_HOLD_ITEM))
 			return TRUE

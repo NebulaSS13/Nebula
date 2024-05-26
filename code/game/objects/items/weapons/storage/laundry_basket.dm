@@ -56,7 +56,7 @@
 	else
 		icon_state = "laundry-empty"
 
-/obj/item/storage/laundry_basket/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/item/storage/laundry_basket/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user)
 		return TRUE
 	. = ..()

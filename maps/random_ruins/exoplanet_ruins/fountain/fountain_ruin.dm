@@ -4,9 +4,9 @@
 	suffixes = list("fountain/fountain_ruin.dmm")
 	cost = 2
 	template_flags = TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_CLEAR_CONTENTS
-	ruin_tags = RUIN_ALIEN
+	template_tags = TEMPLATE_TAG_ALIEN
 
-/turf/simulated/wall/sandstonediamond
+/turf/simulated/wall/brick/sandstonediamond
 	icon_state = "reinforced_stone"
 	material = /decl/material/solid/stone/sandstone
 	reinf_material = /decl/material/solid/gemstone/diamond

@@ -133,7 +133,7 @@
 
 /obj/proximity_listener/proc/SetTrigger(trigger_type, listener_flags)
 	QDEL_NULL(trigger)
-	trigger = new trigger_type(src, /obj/proximity_listener/proc/OnTurfEntered, /obj/proximity_listener/proc/OnTurfsChanged, 7, listener_flags, null, 90, 270)
+	trigger = new trigger_type(src, TYPE_PROC_REF(/obj/proximity_listener, OnTurfEntered), TYPE_PROC_REF(/obj/proximity_listener, OnTurfsChanged), 7, listener_flags, null, 90, 270)
 	trigger.register_turfs()
 
 /obj/proximity_listener/Destroy()

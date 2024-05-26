@@ -25,3 +25,7 @@
 /decl/hierarchy/supply_pack/hydroponics/exoticseeds/Initialize()
 	contains[/obj/item/seeds/diona] = 2
 	. = ..()
+
+/obj/structure/closet/crate/hydroponics/exotic/WillContain()
+	. = ..()
+	.[/obj/item/seeds/diona] = 2

@@ -1,0 +1,4 @@
+/obj/item/stack/material/shiny/@SUBTYPES : /obj/item/stack/material/sheet/shiny/@SUBTYPES{@OLD}
+/obj/item/stack/material/reinforced/@SUBTYPES : /obj/item/stack/material/sheet/reinforced/@SUBTYPES{@OLD}
+/obj/structure/plasticflaps/@SUBTYPES : /obj/structure/flaps/@SUBTYPES{@OLD}
+/obj/item/storage/bag/plastic/@SUBTYPES : /obj/item/storage/bag/flimsy/@SUBTYPES{@OLD}

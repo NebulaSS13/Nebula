@@ -28,9 +28,9 @@ the HUD updates properly! */
 				P.Client.images += patient.hud_list[STATUS_HUD]
 		else
 			var/sensor_level = getsensorlevel(patient)
-			if(sensor_level >= SUIT_SENSOR_VITAL)
+			if(sensor_level >= VITALS_SENSOR_VITAL)
 				P.Client.images += patient.hud_list[HEALTH_HUD]
-			if(sensor_level >= SUIT_SENSOR_BINARY)
+			if(sensor_level >= VITALS_SENSOR_BINARY)
 				P.Client.images += patient.hud_list[LIFE_HUD]
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.

@@ -1,31 +1,30 @@
 var/global/list/global_listen_count = list()
-var/global/list/event_sources_count = list()
-var/global/list/event_listen_count = list()
 
-/proc/cleanup_events(var/source)
+/datum
+	/// Tracks how many event registrations are listening to us. Used in cleanup to prevent dangling references.
+	var/event_source_count = 0
+	/// Tracks how many event registrations we are listening to. Used in cleanup to prevent dangling references.
+	var/event_listen_count = 0
+
+/proc/cleanup_events(var/datum/source)
 	if(global.global_listen_count && global.global_listen_count[source])
 		cleanup_global_listener(source, global.global_listen_count[source])
-	if(global.event_sources_count && global.event_sources_count[source])
-		cleanup_source_listeners(source, global.event_sources_count[source])
-	if(global.event_listen_count && global.event_listen_count[source])
-		cleanup_event_listener(source, global.event_listen_count[source])
+	if(source?.event_source_count > 0)
+		cleanup_source_listeners(source, source?.event_source_count)
+	if(source?.event_listen_count > 0)
+		cleanup_event_listener(source, source?.event_listen_count)
 
 /decl/observ/register(var/datum/event_source, var/datum/listener, var/proc_call)
 	. = ..()
 	if(.)
-		global.event_sources_count[event_source] += 1
-		global.event_listen_count[listener] += 1
+		event_source.event_source_count++
+		listener.event_listen_count++
 
 /decl/observ/unregister(var/datum/event_source, var/datum/listener, var/proc_call)
 	. = ..() // returns the number of events removed
 	if(.)
-		global.event_sources_count[event_source] -= .
-		global.event_listen_count[listener] -= .
-
-		if(global.event_sources_count[event_source] <= 0)
-			global.event_sources_count -= event_source
-		if(global.event_listen_count[listener] <= 0)
-			global.event_listen_count -= listener
+		event_source.event_source_count -= .
+		listener.event_listen_count -= .
 
 /decl/observ/register_global(var/datum/listener, var/proc_call)
 	. = ..()
@@ -52,8 +51,8 @@ var/global/list/event_listen_count = list()
 	if(listen_count > 0)
 		CRASH("Failed to clean up all global listener entries!")
 
-/proc/cleanup_source_listeners(event_source, source_listener_count)
-	global.event_sources_count -= event_source
+/proc/cleanup_source_listeners(datum/event_source, source_listener_count)
+	event_source.event_source_count = 0
 	var/events_removed
 	for(var/entry in global.all_observable_events)
 		var/decl/observ/event = entry
@@ -69,8 +68,8 @@ var/global/list/event_listen_count = list()
 	if(source_listener_count > 0)
 		CRASH("Failed to clean up all event source entries!")
 
-/proc/cleanup_event_listener(listener, listener_count)
-	global.event_listen_count -= listener
+/proc/cleanup_event_listener(datum/listener, listener_count)
+	listener.event_listen_count = 0
 	var/events_removed
 	for(var/entry in global.all_observable_events)
 		var/decl/observ/event = entry

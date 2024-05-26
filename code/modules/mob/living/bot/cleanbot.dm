@@ -21,15 +21,14 @@
 /mob/living/bot/cleanbot/handleIdle()
 	if(!screwloose && !oddbutton && prob(5))
 		visible_message("\The [src] makes an excited beeping booping sound!")
-
 	if(screwloose && prob(5)) // Make a mess
-		if(istype(loc, /turf/simulated))
-			var/turf/simulated/T = loc
-			T.wet_floor()
-
+		if(isturf(loc))
+			var/turf/T = loc
+			if(T.simulated)
+				T.wet_floor()
 	if(oddbutton && prob(5)) // Make a big mess
 		visible_message("Something flies out of [src]. He seems to be acting oddly.")
-		var/obj/effect/decal/cleanable/blood/gibs/gib = new /obj/effect/decal/cleanable/blood/gibs(loc)
+		var/obj/effect/decal/cleanable/blood/gibs/gib = new(loc)
 		var/weakref/g = weakref(gib)
 		ignore_list += g
 		spawn(600)
@@ -55,45 +54,38 @@
 		UnarmedAttack(target)
 
 /mob/living/bot/cleanbot/UnarmedAttack(var/obj/effect/decal/cleanable/D, var/proximity)
-	if(!..())
+
+	. = ..()
+	if(.)
 		return
 
 	if(!istype(D))
-		return
+		return TRUE
 
 	if(D.loc != loc)
-		return
+		return FALSE
 
 	busy = 1
 	visible_message("\The [src] begins to clean up \the [D].")
 	update_icon()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
-	if(do_after(src, cleantime, progress = 0))
-		if(istype(loc, /turf/simulated))
-			var/turf/simulated/f = loc
-			f.dirt = 0
-		if(!D)
-			return
-		qdel(D)
+	if(do_after(src, cleantime, progress = 0) && !QDELETED(D))
 		if(D == target)
 			target = null
+		qdel(D)
 	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
 	update_icon()
+	return TRUE
 
-/mob/living/bot/cleanbot/explode()
-	on = 0
-	visible_message("<span class='danger'>[src] blows apart!</span>")
-	var/turf/Tsec = get_turf(src)
-
-	new /obj/item/chems/glass/bucket(Tsec)
-	new /obj/item/assembly/prox_sensor(Tsec)
-	if(prob(50))
-		new /obj/item/robot_parts/l_arm(Tsec)
-
-	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
-	return
+/mob/living/bot/cleanbot/gib(do_gibs = TRUE)
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		new /obj/item/chems/glass/bucket(my_turf)
+		new /obj/item/assembly/prox_sensor(my_turf)
+		if(prob(50))
+			new /obj/item/robot_parts/l_arm(my_turf)
 
 /mob/living/bot/cleanbot/on_update_icon()
 	..()

@@ -105,7 +105,7 @@
 
 /mob/living/exosuit/premade/powerloader/mechete/spawn_mech_equipment()
 	install_system(new /obj/item/mech_equipment/ballistic_shield(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/melee/mechete(src), HARDPOINT_RIGHT_HAND)
+	install_system(new /obj/item/mech_equipment/mounted_system/melee/machete(src), HARDPOINT_RIGHT_HAND)
 
 /mob/living/exosuit/premade/powerloader/flames_red
 	name = "APLU \"Firestarter\""

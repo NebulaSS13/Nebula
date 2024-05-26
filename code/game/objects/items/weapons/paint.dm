@@ -21,12 +21,12 @@ var/global/list/cached_icons = list()
 	var/amt = reagents.maximum_volume
 	if(pigment)
 		amt = round(amt/2)
-		reagents.add_reagent(pigment, amt)
-	reagents.add_reagent(/decl/material/liquid/paint, amt)
+		add_to_reagents(pigment, amt)
+	add_to_reagents(/decl/material/liquid/paint, amt)
 
 /obj/item/chems/glass/paint/on_update_icon()
 	. = ..()
-	if(reagents.total_volume)
+	if(reagents?.total_volume)
 		add_overlay(overlay_image('icons/obj/reagentfillings.dmi', "paintbucket", reagents.get_color()))
 
 /obj/item/chems/glass/paint/red

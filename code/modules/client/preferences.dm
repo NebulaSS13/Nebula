@@ -189,6 +189,17 @@ var/global/list/time_prefs_fixed = list()
 		update_preview_icon()
 	show_character_previews()
 
+	// This is a bit out of place; we do this here because it means that loading and viewing
+	// a character slot is sufficient to refresh our comment history. Otherwise, you would
+	// have to go back and edit your comments every X days for them to stay visible.
+	if(comments_record_id)
+		for(var/record_id in SScharacter_info._comment_holders_by_id)
+			var/datum/character_information/record = SScharacter_info._comment_holders_by_id[record_id]
+			if(record)
+				for(var/datum/character_comment/comment in record.comments)
+					if(comment.author_id == comments_record_id)
+						comment.last_updated = REALTIMEOFDAY
+
 	var/dat = list("<center>")
 	if(is_guest)
 		dat += SPAN_WARNING("Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance.")
@@ -244,7 +255,6 @@ var/global/list/time_prefs_fixed = list()
 	var/obj/screen/setup_preview/bg/BG = LAZYACCESS(char_render_holders, "BG")
 	if(!BG)
 		BG = new
-		BG.icon = 'icons/effects/32x32.dmi'
 		BG.pref = src
 		LAZYSET(char_render_holders, "BG", BG)
 		client.screen |= BG
@@ -279,13 +289,13 @@ var/global/list/time_prefs_fixed = list()
 	char_render_holders = null
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
-
-	if(!user)	return
-	if(isliving(user)) return
-
+	if(!user)
+		return
+	if(isliving(user))
+		return
 	if(href_list["preference"] == "open_whitelist_forum")
-		if(config.forumurl)
-			direct_output(user, link(config.forumurl))
+		if(get_config_value(/decl/config/text/forumurl))
+			direct_output(user, link(get_config_value(/decl/config/text/forumurl)))
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
@@ -343,6 +353,8 @@ var/global/list/time_prefs_fixed = list()
 
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
+	validate_comments_record() // Make sure a record has been generated for this character.
+	character.comments_record_id = comments_record_id
 	character.personal_aspects = list()
 	var/decl/bodytype/new_bodytype = get_bodytype_decl()
 	if(species == character.get_species_name())
@@ -352,9 +364,10 @@ var/global/list/time_prefs_fixed = list()
 
 	if(be_random_name)
 		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
-		if(culture) real_name = culture.get_random_name(gender)
+		if(culture)
+			real_name = culture.get_random_name(gender)
 
-	if(config.humans_need_surnames)
+	if(get_config_value(/decl/config/toggle/humans_need_surnames))
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
@@ -367,19 +380,10 @@ var/global/list/time_prefs_fixed = list()
 	character.set_gender(gender)
 	character.blood_type = blood_type
 
-	character.eye_colour = eye_colour
+	character.set_eye_colour(eye_colour, skip_update = TRUE)
 
-	character.h_style = h_style
-	character.hair_colour = hair_colour
-
-	character.f_style = f_style
-	character.facial_hair_colour = facial_hair_colour
-
-	character.skin_colour = skin_colour
+	character.set_skin_colour(skin_colour, skip_update = TRUE)
 	character.skin_tone = skin_tone
-
-	character.h_style = h_style
-	character.f_style = f_style
 
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
@@ -399,16 +403,19 @@ var/global/list/time_prefs_fixed = list()
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
 	for(var/obj/item/organ/external/O in character.get_external_organs())
-		LAZYCLEARLIST(O.markings)
+		for(var/decl/sprite_accessory_category/sprite_category in O.get_sprite_accessory_categories())
+			if(!sprite_category.clear_in_pref_apply)
+				continue
+			O.clear_sprite_accessories_by_category(sprite_category.type, skip_update = TRUE)
 
-	for(var/M in body_markings)
-		var/decl/sprite_accessory/marking/mark_datum = GET_DECL(M)
-		var/mark_color = "[body_markings[M]]"
-
-		for(var/bodypart in mark_datum.body_parts)
-			var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
-			if(O)
-				LAZYSET(O.markings, M, mark_color)
+	for(var/accessory_category in sprite_accessories)
+		for(var/accessory in sprite_accessories[accessory_category])
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_colour = sprite_accessories[accessory_category][accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
+				if(O)
+					O.set_sprite_accessory(accessory, accessory_category, accessory_colour, skip_update = TRUE)
 
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()
@@ -466,7 +473,8 @@ var/global/list/time_prefs_fixed = list()
 	dat += "<tt><center>"
 
 	dat += "<b>Select a character slot to load</b><hr>"
-	for(var/i=1, i<= config.character_slots, i++)
+	var/character_slots = get_config_value(/decl/config/num/character_slots)
+	for(var/i = 1 to character_slots)
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
 		if(i==default_slot)
 			name = "<b>[name]</b>"

@@ -23,13 +23,8 @@
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "solid_nullglass"
 
-/decl/material/nullglass/generate_recipes()
-	. = ..()
-	if(!holographic)
-		. += new /datum/stack_recipe/tile/nullglass(src)
-
 /obj/item/shard/nullglass
 	material = MAT_NULLGLASS
-/datum/stack_recipe/tile/nullglass
-	title = "nullglass floor tile"
+/decl/stack_recipe/tile/nullglass
+	name = "nullglass floor tile"
 	result_type = /obj/item/stack/tile/floor_nullglass

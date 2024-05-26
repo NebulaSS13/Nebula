@@ -9,7 +9,7 @@
 	icon               = 'icons/obj/signs/directions.dmi'
 	icon_state         = "direction"
 	//Direction signs are always meant to face south! The arrow on the sign matches the direction it points to.
-	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':32}, 'WEST':{'y':32}, 'EAST':{'y':32}}"
+	directional_offset = @'{"NORTH":{"y":32}, "SOUTH":{"y":32}, "WEST":{"y":32}, "EAST":{"y":32}}'
 
 /obj/structure/sign/directions/update_description()
 	desc = "A direction sign, pointing out \the [name] is [global.dir_name(dir)]."

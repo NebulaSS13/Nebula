@@ -3,18 +3,28 @@
 
 /datum/codex_entry
 	var/name
+	/// Whether or not this entry is stored on the subsystem, or is associated with solely the specific atom.
 	var/store_codex_entry = TRUE
+	/// A list of string search terms associated with this entry.
 	var/list/associated_strings
+	/// A list of typepaths used to populate associated_strings.
 	var/list/associated_paths
+	/// IC text.
 	var/lore_text
+	/// OOC text.
 	var/mechanics_text
+	/// Text shown to antagonists.
 	var/antag_text
+	/// Value used to disambiguate overlapping codex names.
 	var/disambiguator
+	/// A list of category decls that this codex entry belongs to.
 	var/list/categories
 	/// If TRUE, don't create this entry in codex init. Where possible, consider using abstract_type or store_codex_entry = FALSE instead.
 	var/skip_hardcoded_generation = FALSE
 	/// If TRUE, associated_paths is set to include each path's subtypes in New().
 	var/include_subtypes = FALSE
+	/// HTML returned when the entry is used to populate a guide manual.
+	var/guide_html
 
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE
@@ -136,4 +146,5 @@
 			. += "<span class='dmCodexFooter'>"
 			. += footer
 			. += "</span>"
+
 #undef TRIM_LINEBREAKS

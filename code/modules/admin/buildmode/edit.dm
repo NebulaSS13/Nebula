@@ -63,13 +63,13 @@
 	ClearValue()
 	value_to_set = new_value
 	if(istype(value_to_set, /datum))
-		events_repository.register(/decl/observ/destroyed, value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
+		events_repository.register(/decl/observ/destroyed, value_to_set, src, TYPE_PROC_REF(/datum/build_mode/edit, ClearValue))
 
 /datum/build_mode/edit/proc/ClearValue(var/feedback)
 	if(!istype(value_to_set, /datum))
 		return
 
-	events_repository.unregister(/decl/observ/destroyed, value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
+	events_repository.unregister(/decl/observ/destroyed, value_to_set, src, TYPE_PROC_REF(/datum/build_mode/edit, ClearValue))
 	value_to_set = initial(value_to_set)
 	if(feedback)
 		Warn("The selected reference value was deleted. Default value restored.")

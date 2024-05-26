@@ -31,23 +31,20 @@
 				toggle_sensors(user)
 			return
 		if ("lock_sensors")
-			var/obj/item/clothing/under/subject_uniform = get_equipped_item(slot_w_uniform_str)
-			if (!istype(subject_uniform, /obj/item/clothing/under))
+			var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+			if (!istype(sensor))
 				return
-			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
+			visible_message(SPAN_DANGER("\The [user] is trying to [sensor.get_sensors_locked() ? "un" : ""]lock \the [src]'s sensors!"))
 			if (do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-				if (subject_uniform != get_equipped_item(slot_w_uniform_str))
-					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
-					return
-				if (!subject_uniform.has_sensor)
-					to_chat(user, SPAN_WARNING("\The [subject_uniform] has no sensors to lock."))
+				if(QDELETED(sensor) || sensor != get_vitals_sensor())
+					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [sensor] anymore."))
 					return
 				var/obj/item/multitool/user_multitool = user.get_multitool()
 				if (!istype(user_multitool))
-					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [subject_uniform]'s sensors."))
+					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [src]'s sensors."))
 					return
-				subject_uniform.has_sensor = subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
-				visible_message(SPAN_NOTICE("\The [user] [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [subject_uniform]'s suit sensor controls."), range = 2)
+				sensor.toggle_sensors_locked()
+				visible_message(SPAN_NOTICE("\The [user] [sensor.get_sensors_locked() ? "" : "un"]locks \the [src]'s vitals sensor controls."), range = 2)
 			return
 		if("internals")
 			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
@@ -137,13 +134,17 @@
 
 // Modify the current target sensor level.
 /mob/proc/toggle_sensors(var/mob/living/user)
-	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
-	if(!istype(suit))
-		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
+	if(!istype(sensor))
+		to_chat(user, SPAN_WARNING("\The [src] is not wearing a vitals sensor."))
+	if (sensor.get_sensors_locked())
+		to_chat(user, SPAN_WARNING("\The [src]'s suit sensor controls are locked."))
 		return
-	if (suit.has_sensor >= 2)
-		to_chat(user, "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>")
-		return
-
 	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
-	suit.set_sensors(user)
+	sensor.user_set_sensors(user)
+
+/mob/proc/get_vitals_sensor()
+	for(var/check_slot in global.vitals_sensor_equip_slots)
+		var/obj/item/clothing/equipped = get_equipped_item(check_slot)
+		if(istype(equipped))
+			return (locate(/obj/item/clothing/accessory/vitals_sensor) in equipped.accessories)

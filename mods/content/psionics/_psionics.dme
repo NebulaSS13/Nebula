@@ -21,7 +21,6 @@
 #include "items\foundation_implanter.dm"
 #include "items\foundation_labcoat.dm"
 #include "items\foundation_weapon.dm"
-#include "items\grabs.dm"
 #include "items\id_card.dm"
 #include "items\implant.dm"
 #include "items\literature.dm"

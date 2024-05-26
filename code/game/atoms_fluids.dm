@@ -7,9 +7,6 @@
 		reagents.trans_to_holder(fluids, reagents.total_volume)
 		fluids.trans_to_holder(reagents, min(fluids.total_volume, reagents.maximum_volume))
 
-/atom/proc/return_fluid()
-	return null
-
 /atom/proc/check_fluid_depth(var/min)
 	return 0
 

@@ -15,26 +15,11 @@
 /obj/effect/decal/cleanable/ash/attack_hand(var/mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	to_chat(user, "<span class='notice'>[src] sifts through your fingers.</span>")
-	var/turf/simulated/floor/F = get_turf(src)
+	var/turf/F = get_turf(src)
 	if (istype(F))
-		F.dirt += 4
+		F.add_dirt(4)
 	qdel(src)
 	return TRUE
-
-/obj/effect/decal/cleanable/dirt
-	name = "dirt"
-	desc = "Someone should clean that up."
-	gender = PLURAL
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "dirt"
-	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	persistent = TRUE
-
-/obj/effect/decal/cleanable/dirt/Destroy()
-	var/turf/simulated/T = loc
-	. = ..()
-	if(istype(T) && !(locate(/obj/effect/decal/cleanable/dirt) in T))
-		T.dirt = 0
 
 /obj/effect/decal/cleanable/flour
 	name = "flour"
@@ -92,6 +77,7 @@
 	name = "tomato smudge"
 	desc = "It's red."
 	icon = 'icons/effects/tomatodecal.dmi'
+	icon_state = "tomato_floor1"
 	random_icon_states = list("tomato_floor1", "tomato_floor2", "tomato_floor3")
 	persistent = TRUE
 	generic_filth = TRUE
@@ -100,6 +86,7 @@
 	name = "smashed egg"
 	desc = "Seems like this one won't hatch."
 	icon = 'icons/effects/tomatodecal.dmi'
+	icon_state = "smashed_egg1"
 	random_icon_states = list("smashed_egg1", "smashed_egg2", "smashed_egg3")
 	persistent = TRUE
 	generic_filth = TRUE
@@ -108,6 +95,7 @@
 	name = "smashed pie"
 	desc = "It's pie cream from a cream pie."
 	icon = 'icons/effects/tomatodecal.dmi'
+	icon_state = "smashed_pie"
 	random_icon_states = list("smashed_pie")
 	persistent = TRUE
 	generic_filth = TRUE

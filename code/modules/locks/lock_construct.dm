@@ -14,7 +14,7 @@
 	lock_data = generateRandomString(round(material.integrity/50))
 
 /obj/item/lock_construct/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I,/obj/item/key))
+	if(istype(I, /obj/item/key))
 		var/obj/item/key/K = I
 		if(!K.key_data)
 			to_chat(user, SPAN_NOTICE("You fashion \the [I] to unlock \the [src]."))

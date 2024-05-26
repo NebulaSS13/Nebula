@@ -12,7 +12,7 @@
 
 /decl/material/liquid/amphetamines/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(5))
-		M.emote(pick("twitch", "blink_r", "shiver"))
+		M.emote(pick(/decl/emote/visible/twitch, /decl/emote/visible/blink_r, /decl/emote/visible/shiver))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.add_chemical_effect(CE_PULSE, 3)
 
@@ -33,7 +33,7 @@
 	if(prob(50))
 		SET_STATUS_MAX(M, STAT_DROWSY, 3)
 	if(prob(10))
-		M.emote("drool")
+		M.emote(/decl/emote/visible/drool)
 
 /decl/material/liquid/nicotine
 	name = "nicotine"
@@ -79,7 +79,7 @@
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose < 0.5 * threshold)
 		if(dose == metabolism * 2 || prob(5))
-			M.emote("yawn")
+			M.emote(/decl/emote/audible/yawn)
 	else if(dose < 1 * threshold)
 		SET_STATUS_MAX(M, STAT_BLURRY, 10)
 	else if(dose < 2 * threshold)
@@ -148,7 +148,7 @@
 		M.apply_effect(3, STUTTER)
 		ADJ_STATUS(M, STAT_DIZZY, 1)
 		if(prob(5))
-			M.emote(pick("twitch", "giggle"))
+			M.emote(pick(/decl/emote/visible/twitch, /decl/emote/audible/giggle))
 	else if(dose < 2 * threshold)
 		M.apply_effect(3, STUTTER)
 		ADJ_STATUS(M, STAT_JITTER,  2)
@@ -156,7 +156,7 @@
 		SET_STATUS_MAX(M, STAT_DRUGGY, 35)
 
 		if(prob(10))
-			M.emote(pick("twitch", "giggle"))
+			M.emote(pick(/decl/emote/visible/twitch, /decl/emote/audible/giggle))
 	else
 		M.add_chemical_effect(CE_MIND, -1)
 		M.apply_effect(3, STUTTER)
@@ -164,7 +164,7 @@
 		ADJ_STATUS(M, STAT_DIZZY,  5)
 		SET_STATUS_MAX(M, STAT_DRUGGY, 40)
 		if(prob(15))
-			M.emote(pick("twitch", "giggle"))
+			M.emote(pick(/decl/emote/visible/twitch, /decl/emote/audible/giggle))
 
 // Welcome back, Three Eye
 /decl/material/liquid/glowsap/gleam

@@ -3,14 +3,6 @@
 //NOTE: Breathing happens once per FOUR TICKS, unless the last breath fails. In which case it happens once per ONE TICK! So oxyloss healing is done once per 4 ticks while oxyloss damage is applied once per tick!
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
 
-#define HUMAN_CRIT_TIME_CUSHION (10 MINUTES) //approximate time limit to stabilize someone in crit
-#define HUMAN_CRIT_HEALTH_CUSHION (config.health_threshold_crit - config.health_threshold_dead)
-
-//The amount of damage you'll get when in critical condition. We want this to be a HUMAN_CRIT_TIME_CUSHION long deal.
-//There are HUMAN_CRIT_HEALTH_CUSHION hp to get through, so (HUMAN_CRIT_HEALTH_CUSHION/HUMAN_CRIT_TIME_CUSHION) per tick.
-//Breaths however only happen once every MOB_BREATH_DELAY life ticks. The delay between life ticks is set by the mob process.
-#define HUMAN_CRIT_MAX_OXYLOSS ( MOB_BREATH_DELAY * process_schedule_interval("mob") * (HUMAN_CRIT_HEALTH_CUSHION/HUMAN_CRIT_TIME_CUSHION) )
-
 #define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
 #define HEAT_DAMAGE_LEVEL_2 4 //Amount of damage applied when your body temperature passes the 400K point
 #define HEAT_DAMAGE_LEVEL_3 8 //Amount of damage applied when your body temperature passes the 1000K point
@@ -36,36 +28,16 @@
 	var/pressure_alert = 0
 	var/stamina = 100
 
-/mob/living/carbon/human/Life()
-	set invisibility = FALSE
-	set background = BACKGROUND_ENABLED
-
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-
-	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
-
-	..()
-
-	if(life_tick%30==15)
-		hud_updateflag = 1022
-
-	voice = GetVoice()
-
-	//No need to update all of these procs if the guy is dead.
-	if(stat != DEAD && !is_in_stasis())
-		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
-		//Organs and blood
-		handle_organs()
-		handle_shock()
-		handle_pain()
-		handle_stamina()
-
-	if(!handle_some_updates())
-		return											//We go ahead and process them 5 times for HUD images and other stuff though.
-
-	//Update our name based on whether our face is obscured/disfigured
-	SetName(get_visible_name())
+/mob/living/carbon/human/handle_living_non_stasis_processes()
+	. = ..()
+	if(!.)
+		return FALSE
+	last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+	//Organs and blood
+	handle_organs()
+	handle_shock()
+	handle_pain()
+	handle_stamina()
 
 /mob/living/carbon/human/get_stamina()
 	return stamina
@@ -86,7 +58,7 @@
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
 		var/mod = (lying + (nutrition / get_max_nutrition())) / 2
-		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
+		adjust_stamina(max(get_config_value(/decl/config/num/movement_max_stamina_recovery), get_config_value(/decl/config/num/movement_min_stamina_recovery) * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	var/old_stat = stat
@@ -144,7 +116,11 @@
 		return ONE_ATMOSPHERE + pressure_difference
 
 /mob/living/carbon/human/handle_impaired_vision()
-	..()
+
+	. = ..()
+	if(!.)
+		return
+
 	//Vision
 	var/obj/item/organ/vision
 	var/decl/bodytype/root_bodytype = get_bodytype()
@@ -163,10 +139,9 @@
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
-	if(stat != DEAD)
-		if ((disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
-			drop_held_items()
-			cough()
+	if(stat != DEAD && (disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
+		drop_held_items()
+		cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(getFireLoss())
@@ -219,7 +194,7 @@
 	if(relative_density > 0.02) //don't bother if we are in vacuum or near-vacuum
 		var/loc_temp = environment.temperature
 
-		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
+		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
@@ -238,29 +213,29 @@
 		bodytemperature += clamp(temp_adj*relative_density, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
-	if(bodytemperature >= get_temperature_threshold(HEAT_LEVEL_1))
+	if(bodytemperature >= get_mob_temperature_threshold(HEAT_LEVEL_1))
 		//Body temperature is too hot.
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 		var/burn_dam = 0
-		if(bodytemperature < get_temperature_threshold(HEAT_LEVEL_2))
+		if(bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_2))
 			burn_dam = HEAT_DAMAGE_LEVEL_1
-		else if(bodytemperature < get_temperature_threshold(HEAT_LEVEL_3))
+		else if(bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_3))
 			burn_dam = HEAT_DAMAGE_LEVEL_2
 		else
 			burn_dam = HEAT_DAMAGE_LEVEL_3
 		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
 		fire_alert = max(fire_alert, 2)
 
-	else if(bodytemperature <= get_temperature_threshold(COLD_LEVEL_1))
+	else if(bodytemperature <= get_mob_temperature_threshold(COLD_LEVEL_1))
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		var/burn_dam = 0
 
-		if(bodytemperature > get_temperature_threshold(COLD_LEVEL_2))
+		if(bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_2))
 			burn_dam = COLD_DAMAGE_LEVEL_1
-		else if(bodytemperature > get_temperature_threshold(COLD_LEVEL_3))
+		else if(bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_3))
 			burn_dam = COLD_DAMAGE_LEVEL_2
 		else
 			burn_dam = COLD_DAMAGE_LEVEL_3
@@ -382,103 +357,85 @@
 		return TRUE
 
 /mob/living/carbon/human/handle_regular_status_updates()
-	if(!handle_some_updates())
-		return 0
 
-	if(status_flags & GODMODE)	return 0
+	voice = GetVoice()
+	SetName(get_visible_name())
 
-	//SSD check, if a logged player is awake put them back to sleep!
-	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
-		set_status(STAT_SILENCE, 0)
-	else				//ALIVE. LIGHTS ARE ON
-		updatehealth()	//TODO
+	if(status_flags & GODMODE)
+		return FALSE
 
-		if(hallucination_power)
-			handle_hallucinations()
+	if(vsc.contaminant_control.CONTAMINATION_LOSS)
+		var/total_contamination= 0
+		for(var/obj/item/I in src)
+			if(I.contaminated)
+				total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
+		adjustToxLoss(total_contamination)
 
-		if(get_shock() >= species.total_health)
-			if(!stat)
-				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
-				src.visible_message("<B>[src]</B> [species.halloss_message]")
-			SET_STATUS_MAX(src, STAT_PARA, 10)
-
-		if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
-			set_stat(UNCONSCIOUS)
-			animate_tail_reset()
-			adjustHalLoss(-3)
-
-			if(prob(2) && is_asystole() && isSynthetic())
-				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
-		//CONSCIOUS
-		else
-			set_stat(CONSCIOUS)
-
-		// Check everything else.
-
-		//Periodically double-check embedded_flag
-		if(embedded_flag && !(life_tick % 10))
-			if(!embedded_needs_process())
-				embedded_flag = 0
-
-		//Resting
-		if(resting)
-			if(HAS_STATUS(src, STAT_DIZZY))
-				ADJ_STATUS(src, STAT_DIZZY, -15)
-			if(HAS_STATUS(src, STAT_JITTER))
-				ADJ_STATUS(src, STAT_JITTER, -15)
-			adjustHalLoss(-3)
-		else
-			if(HAS_STATUS(src, STAT_DIZZY))
-				ADJ_STATUS(src, STAT_DIZZY, -3)
-			if(HAS_STATUS(src, STAT_JITTER))
-				ADJ_STATUS(src, STAT_JITTER, -3)
-			adjustHalLoss(-1)
-
-		if(HAS_STATUS(src, STAT_DROWSY))
-			SET_STATUS_MAX(src, STAT_BLURRY, 2)
-			var/sleepy = GET_STATUS(src, STAT_DROWSY)
-			if(sleepy > 10)
-				var/zzzchance = min(5, 5*sleepy/30)
-				if((prob(zzzchance) || sleepy >= 60))
-					if(stat == CONSCIOUS)
-						to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
-					SET_STATUS_MAX(src, STAT_ASLEEP, 5)
-
-		// If you're dirty, your gloves will become dirty, too.
-		var/obj/item/gloves = get_equipped_item(slot_gloves_str)
-		if(gloves && germ_level > gloves.germ_level && prob(10))
-			gloves.germ_level += 1
-
-		if(vsc.contaminant_control.CONTAMINATION_LOSS)
-			var/total_contamination= 0
-			for(var/obj/item/I in src)
-				if(I.contaminated)
-					total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
-			adjustToxLoss(total_contamination)
-
-		if(stasis_value > 1 && GET_STATUS(src, STAT_DROWSY) < stasis_value * 4)
-			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
-			if(!stat && prob(1))
-				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
-
-	return 1
-
-/mob/living/carbon/human/handle_regular_hud_updates()
-	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
-		handle_hud_list()
-
-	// now handle what we see on our screen
-
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 
+	if(get_shock() >= species.total_health)
+		if(!stat)
+			to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
+			src.visible_message("<B>[src]</B> [species.halloss_message]")
+		SET_STATUS_MAX(src, STAT_PARA, 10)
+
+	if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
+		set_stat(UNCONSCIOUS)
+		animate_tail_reset()
+		adjustHalLoss(-3)
+		if(prob(2) && is_asystole() && isSynthetic())
+			visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
+	else
+		set_stat(CONSCIOUS)
+
+	// Check everything else.
+	//Periodically double-check embedded_flag
+	if(embedded_flag && !(life_tick % 10))
+		if(!embedded_needs_process())
+			embedded_flag = 0
+
+	//Resting
+	if(resting)
+		if(HAS_STATUS(src, STAT_DIZZY))
+			ADJ_STATUS(src, STAT_DIZZY, -15)
+		if(HAS_STATUS(src, STAT_JITTER))
+			ADJ_STATUS(src, STAT_JITTER, -15)
+		adjustHalLoss(-3)
+	else
+		if(HAS_STATUS(src, STAT_DIZZY))
+			ADJ_STATUS(src, STAT_DIZZY, -3)
+		if(HAS_STATUS(src, STAT_JITTER))
+			ADJ_STATUS(src, STAT_JITTER, -3)
+		adjustHalLoss(-1)
+
+	if(HAS_STATUS(src, STAT_DROWSY))
+		SET_STATUS_MAX(src, STAT_BLURRY, 2)
+		var/sleepy = GET_STATUS(src, STAT_DROWSY)
+		if(sleepy > 10)
+			var/zzzchance = min(5, 5*sleepy/30)
+			if((prob(zzzchance) || sleepy >= 60))
+				if(stat == CONSCIOUS)
+					to_chat(src, SPAN_NOTICE("You are about to fall asleep..."))
+				SET_STATUS_MAX(src, STAT_ASLEEP, 5)
+
+
+/mob/living/carbon/human/handle_regular_hud_updates()
+	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
+	if(life_tick%30==15)
+		hud_updateflag = 1022
+	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
+		handle_hud_list()
+	. = ..()
+	if(!.)
+		return
 	if(stat != DEAD)
-		if(stat == UNCONSCIOUS && health < maxHealth/2)
+		var/half_health = get_max_health()/2
+		if(stat == UNCONSCIOUS && current_health < half_health)
 			//Critical damage passage overlay
 			var/severity = 0
-			switch(health - maxHealth/2)
+			switch(current_health - half_health)
 				if(-20 to -10)			severity = 1
 				if(-30 to -20)			severity = 2
 				if(-40 to -30)			severity = 3
@@ -546,21 +503,23 @@
 					if(damage_image)
 						health_images += damage_image
 
+
 				// Apply a fire overlay if we're burning.
+				var/crit_markers = get_ui_icon(client?.prefs?.UI_style, UI_ICON_CRIT_MARKER)
 				if(on_fire)
-					health_images += image('icons/mob/screen1_health.dmi',"burning")
+					health_images += image(crit_markers, "burning")
 
 				// Show a general pain/crit indicator if needed.
 				if(is_asystole())
-					health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
+					health_images += image(crit_markers, "hardcrit")
 				else if(trauma_val)
 					if(can_feel_pain())
 						if(trauma_val > 0.7)
-							health_images += image('icons/mob/screen1_health.dmi',"softcrit")
+							health_images += image(crit_markers, "softcrit")
 						if(trauma_val >= 1)
-							health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
+							health_images += image(crit_markers, "hardcrit")
 				else if(no_damage)
-					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
+					health_images += image(crit_markers, "fullhealth")
 				healths_ma.overlays += health_images
 			healths.appearance = healths_ma
 
@@ -610,8 +569,8 @@
 					if(260 to 280)			bodytemp.icon_state = "temp-3"
 					else					bodytemp.icon_state = "temp-4"
 			else
-				var/heat_1 = get_temperature_threshold(HEAT_LEVEL_1)
-				var/cold_1 = get_temperature_threshold(COLD_LEVEL_1)
+				var/heat_1 = get_mob_temperature_threshold(HEAT_LEVEL_1)
+				var/cold_1 = get_mob_temperature_threshold(COLD_LEVEL_1)
 				//TODO: precalculate all of this stuff when the species datum is created
 				var/base_temperature = species.body_temperature
 				if(base_temperature == null) //some species don't have a set metabolic temperature
@@ -685,7 +644,7 @@
 
 	var/stress_modifier = get_stress_modifier()
 	if(stress_modifier)
-		stress_modifier *= config.stress_shock_recovery_constant
+		stress_modifier *= get_config_value(/decl/config/num/health_stress_shock_recovery_constant)
 
 	if(is_asystole())
 		shock_stage = max(shock_stage + (BASE_SHOCK_RECOVERY + stress_modifier), 61)
@@ -883,12 +842,12 @@
 
 
 	if(species)
-		if(burn_temperature < get_temperature_threshold(HEAT_LEVEL_2))
+		if(burn_temperature < get_mob_temperature_threshold(HEAT_LEVEL_2))
 			species_heat_mod = 0.5
-		else if(burn_temperature < get_temperature_threshold(HEAT_LEVEL_3))
+		else if(burn_temperature < get_mob_temperature_threshold(HEAT_LEVEL_3))
 			species_heat_mod = 0.75
 
-	burn_temperature -= get_temperature_threshold(HEAT_LEVEL_1)
+	burn_temperature -= get_mob_temperature_threshold(HEAT_LEVEL_1)
 
 	if(burn_temperature < 1)
 		return

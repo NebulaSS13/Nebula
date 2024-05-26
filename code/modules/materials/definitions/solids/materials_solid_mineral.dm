@@ -6,7 +6,7 @@
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
-	stack_origin_tech = "{'materials':5}"
+	stack_origin_tech = @'{"materials":5}'
 	xarch_source_mineral = /decl/material/solid/phosphorus
 	ore_icon_overlay = "nugget"
 	value = 0.8
@@ -32,7 +32,9 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
-	ignition_point = T0C+500
+	melting_point = 4074
+	boiling_point = 4474
+	ignition_point = 774
 	accelerant_value = 0.8
 	burn_product = /decl/material/gas/carbon_monoxide
 	value = 0.8
@@ -61,6 +63,8 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
+	melting_point = 1744
+	boiling_point = 2504
 	color = "#effffe"
 	reflectiveness = MAT_VALUE_SHINY
 	sparse_material_weight = 3
@@ -209,7 +213,7 @@
 	uid = "solid_sand"
 	color = "#e2dbb5"
 	heating_products = list(/decl/material/solid/glass = 1)
-	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_point = 2000 CELSIUS
 	heating_sound = null
 	heating_message = null
 	ore_compresses_to = /decl/material/solid/stone/sandstone
@@ -226,18 +230,28 @@
 
 /decl/material/solid/clay
 	name = "clay"
+	codex_name = "raw clay"
 	uid = "solid_clay"
-	color = COLOR_OFF_WHITE
+	color = "#807f7a"
 	ore_name = "clay"
-	ore_icon_overlay = "lump"
-	heating_products = list(/decl/material/solid/stone/ceramic = 1)
-	heating_point = GENERIC_SMELTING_HEAT_POINT
-	heating_sound = null
-	heating_message = null
 	ore_compresses_to = null
-	ore_icon_overlay = "dust"
+	ore_icon_overlay = "lump"
 	value = 0.8
 	default_solid_form = /obj/item/stack/material/lump
+	bakes_into_material = /decl/material/solid/stone/pottery
+	melting_point = null // Clay is already almost a liquid...
+	bakes_into_at_temperature = 1100 CELSIUS // roughly the temperature expected from a kiln
+
+/decl/material/solid/soil
+	name = "soil"
+	codex_name = "soil"
+	uid = "solid_soil"
+	color = COLOR_BEASTY_BROWN
+	value = 0
+	default_solid_form = /obj/item/stack/material/lump
+	melting_point = null
+	hardness = 0
+	integrity = 0
 
 /decl/material/solid/hematite
 	name = "hematite"
@@ -260,6 +274,7 @@
 	rich_material_weight = 20
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	ferrous = TRUE
 
 /decl/material/solid/rutile
 	name = "rutile"
@@ -380,7 +395,7 @@
 	value = 1.2
 	sparse_material_weight = 10
 	rich_material_weight = 5
-	ignition_point = T0C+500
+	ignition_point = 774
 	accelerant_value = 0.9
 	dirtiness = 15
 	dissolves_into = list(
@@ -412,8 +427,6 @@
 	value = 0.9
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	ignition_point = T0C+1000
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.8,
 		/decl/material/solid/metal/tungsten = 0.2
@@ -442,8 +455,6 @@
 	value = 0.9
 	sparse_material_weight = 15
 	rich_material_weight = 10
-	ignition_point = T0C+1000
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.1,
 		/decl/material/solid/metal/tungsten = 0.6,
@@ -473,8 +484,6 @@
 	value = 1.1
 	sparse_material_weight = 10
 	rich_material_weight = 5
-	ignition_point = T0C+1000
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/platinum = 0.7,
 		/decl/material/solid/metal/iron = 0.1,
@@ -504,8 +513,6 @@
 	value = 0.8
 	sparse_material_weight = 25
 	rich_material_weight = 15
-	ignition_point = T0C+1000
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/zinc = 0.7,
 		/decl/material/solid/metal/iron = 0.2,
@@ -534,8 +541,6 @@
 	value = 0.8
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	ignition_point = T0C+1000
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/lead = 0.7,
 		/decl/material/solid/metal/iron = 0.2,
@@ -564,8 +569,6 @@
 	value = 0.8
 	sparse_material_weight = 5
 	rich_material_weight = 5
-	ignition_point = T0C+1000
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/gold = 0.7,
 		/decl/material/solid/metal/silver = 0.3
@@ -593,8 +596,6 @@
 	value = 0.9
 	sparse_material_weight = 5
 	rich_material_weight = 10
-	ignition_point = T0C+1000
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/chromium = 0.6,
 		/decl/material/solid/metal/lead = 0.4

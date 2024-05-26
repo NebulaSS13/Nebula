@@ -27,17 +27,17 @@
 		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
 		if(src.connected)
 			break
-		events_repository.register(/decl/observ/destroyed, connected, src, .proc/unlink_scanner)
+		events_repository.register(/decl/observ/destroyed, connected, src, PROC_REF(unlink_scanner))
 
 /obj/machinery/body_scanconsole/proc/unlink_scanner(var/obj/machinery/bodyscanner/scanner)
-	events_repository.unregister(/decl/observ/destroyed, scanner, src, .proc/unlink_scanner)
+	events_repository.unregister(/decl/observ/destroyed, scanner, src, PROC_REF(unlink_scanner))
 	connected = null
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
 	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
 		if(D.id_tag == connected.id_tag)
 			connected_displays += D
-			events_repository.register(/decl/observ/destroyed, D, src, .proc/remove_display)
+			events_repository.register(/decl/observ/destroyed, D, src, PROC_REF(remove_display))
 	return !!connected_displays.len
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
@@ -134,7 +134,7 @@
 
 /obj/machinery/body_scanconsole/proc/remove_display(var/obj/machinery/body_scan_display/display)
 	connected_displays -= display
-	events_repository.unregister(/decl/observ/destroyed, display, src, .proc/remove_display)
+	events_repository.unregister(/decl/observ/destroyed, display, src, PROC_REF(remove_display))
 
 /obj/machinery/body_scanconsole/Destroy()
 	. = ..()

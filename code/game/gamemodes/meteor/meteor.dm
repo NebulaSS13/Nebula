@@ -10,6 +10,8 @@
 	required_players = 15				// Definitely not good for low-pop
 	votable = 1
 	shuttle_delay = 2
+	available_by_default = FALSE
+
 	var/next_wave = INFINITY			// Set in post_setup() correctly to take into account potential longer pre-start times.
 	var/alert_sent = 0
 	var/meteor_severity = 1				// Slowly increases the tension at the beginning of meteor strikes. Prevents "tunguska on first wave" style problems.

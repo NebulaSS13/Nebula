@@ -6,6 +6,14 @@
 /obj/item/storage/pill_bottle/brute_meds/WillContain()
 	return list(/obj/item/chems/pill/brute_meds = 21)
 
+/obj/item/storage/pill_bottle/sugariron
+	labeled_name = "sugar-iron"
+	desc = "Contains pills used to assist in blood recovery."
+	wrapper_color = COLOR_MAROON
+
+/obj/item/storage/pill_bottle/sugariron/WillContain()
+	return list(/obj/item/chems/pill/sugariron = 21)
+
 /obj/item/storage/pill_bottle/oxygen
 	labeled_name = "oxygen"
 	desc = "Contains pills used to treat oxygen deprivation."

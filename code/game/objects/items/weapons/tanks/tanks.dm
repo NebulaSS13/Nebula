@@ -426,10 +426,10 @@ var/global/list/global/tank_gauge_cache = list()
 			var/mult = ((air_contents.volume/140)**(1/2)) * (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 			//tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 
-			var/turf/simulated/T = get_turf(src)
-			T.hotspot_expose(air_contents.temperature, 70, 1)
-			if(!T)
+			var/turf/T = get_turf(src)
+			if(!T?.simulated)
 				return
+			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 			T.assume_air(air_contents)
 			explosion(
@@ -458,8 +458,8 @@ var/global/list/global/tank_gauge_cache = list()
 		#endif
 
 		if(integrity <= 0)
-			var/turf/simulated/T = get_turf(src)
-			if(!T)
+			var/turf/T = get_turf(src)
+			if(!T?.simulated)
 				return
 			T.assume_air(air_contents)
 			playsound(get_turf(src), 'sound/weapons/gunshot/shotgun.ogg', 20, 1)
@@ -482,8 +482,8 @@ var/global/list/global/tank_gauge_cache = list()
 			integrity-= 5
 	else if(pressure && (pressure > TANK_LEAK_PRESSURE || air_contents.temperature - T0C > failure_temp))
 		if((integrity <= 19 || leaking) && !valve_welded)
-			var/turf/simulated/T = get_turf(src)
-			if(!T)
+			var/turf/T = get_turf(src)
+			if(!T?.simulated)
 				return
 			var/datum/gas_mixture/environment = loc.return_air()
 			var/env_pressure = environment.return_pressure()

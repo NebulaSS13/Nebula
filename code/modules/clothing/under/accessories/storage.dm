@@ -31,7 +31,7 @@
 		return ..(user)
 	return TRUE
 
-/obj/item/clothing/accessory/storage/handle_mouse_drop(atom/over, mob/user)
+/obj/item/clothing/accessory/storage/handle_mouse_drop(atom/over, mob/user, params)
 	if(istype(over, /obj/screen/inventory))
 		return ..()
 	if(!istype(loc, /obj/item/clothing) && hold?.handle_storage_internal_mouse_drop(user, over))
@@ -112,8 +112,8 @@
 		/obj/item/hatchet,
 		/obj/item/knife,
 	)
-	new /obj/item/knife/table/primitive(hold)
-	new /obj/item/knife/table/primitive(hold)
+	new /obj/item/knife/primitive(hold)
+	new /obj/item/knife/primitive(hold)
 	update_icon()
 
 /obj/item/clothing/accessory/storage/knifeharness/on_update_icon()
@@ -123,7 +123,7 @@
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
 
-/obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		var/contents_count = min(length(contents), 2)
 		if(contents_count > 0 && check_state_in_icon("[overlay.icon_state]-[contents_count]", overlay.icon))

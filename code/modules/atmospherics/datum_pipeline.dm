@@ -255,7 +255,7 @@
 
 			air.temperature -= heat/total_heat_capacity
 			// Only increase the temperature of the target if it's simulated.
-			if(istype(target, /turf/simulated))
+			if(target.simulated)
 				target.temperature += heat/target.heat_capacity
 
 	if(network)
@@ -286,6 +286,6 @@
 	// Previously, the temperature would enter equilibrium at 26C or 294K.
 	// Only would happen if both sides (all 2 square meters of surface area) were exposed to sunlight.  We now assume it aligned edge on.
 	// It currently should stabilise at 129.6K or -143.6C
-	. -= surface * STEFAN_BOLTZMANN_CONSTANT * thermal_conductivity * (surface_temperature - COSMIC_RADIATION_TEMPERATURE) ** 4
+	. -= surface * STEFAN_BOLTZMANN_CONSTANT * thermal_conductivity * (surface_temperature  ** 4 - COSMIC_RADIATION_TEMPERATURE ** 4)
 
 #undef REAGENT_UNITS_PER_PIPE

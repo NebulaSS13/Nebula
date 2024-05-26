@@ -1,38 +1,12 @@
-/mob/living/silicon/robot/Life()
-
-	SHOULD_CALL_PARENT(FALSE)
-
-	set invisibility = FALSE
-	set background = 1
-
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-
-	//Status updates, death etc.
-	clamp_values()
-	handle_regular_status_updates()
-	handle_actions()
-
-	if(client)
-		handle_regular_hud_updates()
-		update_items()
-	if (src.stat != DEAD) //still using power
-		use_power()
-		process_killswitch()
-		process_locks()
-		process_queued_alarms()
-		process_os()
-
-	handle_status_effects()
-	UpdateLyingBuckledAndVerbStatus()
-
-/mob/living/silicon/robot/proc/clamp_values()
-	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
-	set_status(STAT_ASLEEP, 0)
-	adjustBruteLoss(0)
-	adjustToxLoss(0)
-	adjustOxyLoss(0)
-	adjustFireLoss(0)
+/mob/living/silicon/robot/handle_living_non_stasis_processes()
+	. = ..()
+	if(!.)
+		return FALSE
+	use_power()
+	process_killswitch()
+	process_locks()
+	process_queued_alarms()
+	process_os()
 
 /mob/living/silicon/robot/proc/use_power()
 	used_power_this_tick = 0
@@ -67,17 +41,19 @@
 		lights_on = 0
 		set_light(0)
 
-/mob/living/silicon/robot/handle_regular_status_updates()
-	updatehealth()
+/mob/living/silicon/robot/should_be_dead()
+	return current_health < get_config_value(/decl/config/num/health_health_threshold_dead)
 
+/mob/living/silicon/robot/handle_regular_status_updates()
+	SHOULD_CALL_PARENT(FALSE)
+	update_health()
+
+	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)
 
 	if(resting)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
-
-	if(health < config.health_threshold_dead && stat != DEAD) //die only once
-		death()
 
 	if (stat != DEAD) //Alive.
 		// This previously used incapacitated(INCAPACITATION_DISRUPTED) but that was setting the robot to be permanently unconscious, which isn't ideal.
@@ -115,8 +91,9 @@
 	return 1
 
 /mob/living/silicon/robot/handle_regular_hud_updates()
-	..()
-
+	. = ..()
+	if(!.)
+		return
 	var/obj/item/borg/sight/hud/hud = (locate(/obj/item/borg/sight/hud) in src)
 	if(hud && hud.hud)
 		hud.hud.process_hud(src)
@@ -137,7 +114,7 @@
 	if (src.healths)
 		if (src.stat != DEAD)
 			if(isdrone(src))
-				switch(health)
+				switch(current_health)
 					if(35 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(25 to 34)
@@ -153,7 +130,7 @@
 					else
 						src.healths.icon_state = "health6"
 			else
-				switch(health)
+				switch(current_health)
 					if(200 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(150 to 200)
@@ -165,7 +142,7 @@
 					if(0 to 50)
 						src.healths.icon_state = "health4"
 					else
-						if(health > config.health_threshold_dead)
+						if(current_health > get_config_value(/decl/config/num/health_health_threshold_dead))
 							src.healths.icon_state = "health5"
 						else
 							src.healths.icon_state = "health6"
@@ -230,6 +207,7 @@
 			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 
+	update_items()
 	return 1
 
 /mob/living/silicon/robot/handle_vision()
@@ -265,7 +243,7 @@
 	if (src.client)
 		src.client.screen -= src.contents
 		for(var/obj/I in src.contents)
-			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/mmi)))
+			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/organ/internal/brain_interface)))
 				src.client.screen += I
 	if(src.module_state_1)
 		src.module_state_1:screen_loc = ui_inv1
@@ -300,6 +278,9 @@
 	if(on_fire)
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 
-/mob/living/silicon/robot/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
-		IgniteMob()
+//Silicons don't gain stacks from hotspots, but hotspots can ignite them
+/mob/living/silicon/increase_fire_stacks(exposed_temperature)
+	return
+
+/mob/living/silicon/can_ignite()
+	return !on_fire

@@ -27,8 +27,8 @@
 	if (abs(body_temperature_difference) < 0.5)
 		return //fuck this precision
 
-	var/cold_1 = get_temperature_threshold(COLD_LEVEL_1)
-	var/heat_1 = get_temperature_threshold(HEAT_LEVEL_1)
+	var/cold_1 = get_mob_temperature_threshold(COLD_LEVEL_1)
+	var/heat_1 = get_mob_temperature_threshold(HEAT_LEVEL_1)
 	if(bodytemperature < cold_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 		var/nut_remove = 10 * DEFAULT_HUNGER_FACTOR
 		if(get_nutrition() >= nut_remove) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.

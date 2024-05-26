@@ -4,7 +4,7 @@
 
 	..()
 
-	if (HasMovementHandler(/datum/movement_handler/mob/transformation/))
+	if (HasMovementHandler(/datum/movement_handler/mob/transformation))
 		return
 
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
@@ -20,37 +20,47 @@
 
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
-
-	if(stat != DEAD && !is_in_stasis())
-		//Breathing, if applicable
-		handle_breathing()
-		handle_nutrition_and_hydration()
-		handle_immunity()
-		//Body temperature adjusts itself (self-regulation)
-		stabilize_body_temperature()
-
-	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
 	handle_stasis()
 
 	if(stat != DEAD)
+		if(!is_in_stasis())
+			. = handle_living_non_stasis_processes()
 		aura_check(AURA_TYPE_LIFE)
-
-	//Check if we're on fire
-	handle_fire()
 
 	for(var/obj/item/grab/G in get_active_grabs())
 		G.Process()
 
+	//Check if we're on fire
+	handle_fire()
 	handle_actions()
-
 	UpdateLyingBuckledAndVerbStatus()
-
 	handle_regular_hud_updates()
-
 	handle_status_effects()
 
 	return 1
+
+/mob/living/proc/handle_living_non_stasis_processes()
+	SHOULD_CALL_PARENT(TRUE)
+	// hungy
+	handle_nutrition_and_hydration()
+	// Breathing, if applicable
+	handle_breathing()
+	// Mutations and radiation
+	handle_mutations_and_radiation()
+	// Chemicals in the body
+	handle_chemicals_in_body()
+	// Random events (vomiting etc)
+	handle_random_events()
+	// eye, ear, brain damages
+	handle_disabilities()
+	handle_immunity()
+	//Body temperature adjusts itself (self-regulation)
+	stabilize_body_temperature()
+	// Only handle AI stuff if we're not being played.
+	if(!key)
+		handle_legacy_ai()
+	return TRUE
 
 /mob/living/proc/experiences_hunger_and_thirst()
 	return TRUE
@@ -66,6 +76,10 @@
 	if(my_species)
 		return my_species.hunger_factor
 	return 0
+
+// Used to handle non-datum AI.
+/mob/living/proc/handle_legacy_ai()
+	return
 
 /mob/living/proc/handle_nutrition_and_hydration()
 	SHOULD_CALL_PARENT(TRUE)
@@ -85,11 +99,10 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	radiation = clamp(radiation,0,500)
-	var/decl/species/my_species = get_species()
 	var/decl/bodytype/my_bodytype = get_bodytype()
-	if(my_species && my_bodytype && (my_bodytype.appearance_flags & RADIATION_GLOWS))
+	if(my_bodytype?.appearance_flags & RADIATION_GLOWS)
 		if(radiation)
-			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), my_species.get_flesh_colour(src))
+			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), get_flesh_color())
 		else
 			set_light(0)
 
@@ -110,7 +123,7 @@
 				to_chat(src, "<span class='warning'>You feel weak.</span>")
 				SET_STATUS_MAX(src, STAT_WEAK, 3)
 				if(!lying)
-					emote("collapse")
+					emote(/decl/emote/visible/collapse)
 			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 				lose_hair()
 
@@ -123,21 +136,22 @@
 			if(prob(1))
 				to_chat(src, "<span class='warning'>You feel strange!</span>")
 				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
-				emote("gasp")
+				emote(/decl/emote/audible/gasp)
 	if(radiation > 150)
 		damage = 8
 		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
+	var/decl/species/my_species = get_species()
 	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
-		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
-		updatehealth()
+		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 		var/list/limbs = get_external_organs()
 		if(!isSynthetic() && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)
 			if(istype(O))
 				O.add_autopsy_data("Radiation Poisoning", damage)
+
 #undef RADIATION_SPEED_COEFFICIENT
 
 // Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.
@@ -182,9 +196,8 @@
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
-
 	if(apply_chemical_effects())
-		updatehealth()
+		update_health()
 
 	return TRUE
 
@@ -192,9 +205,9 @@
 	var/burn_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
 	var/brute_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BRUTE)
 	if(burn_regen || brute_regen)
-		heal_organ_damage(brute_regen, burn_regen)
+		heal_organ_damage(brute_regen, burn_regen, FALSE) // apply_chemical_effects() calls update_health() if it returns true; don't do it unnecessarily.
 		return TRUE
-
+	return FALSE
 
 /mob/living/proc/handle_random_events()
 	return
@@ -254,37 +267,76 @@
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
 /mob/living/proc/handle_regular_status_updates()
-	updatehealth()
-	if(stat != DEAD)
-		if(HAS_STATUS(src, STAT_PARA))
-			set_stat(UNCONSCIOUS)
-		else if (status_flags & FAKEDEATH)
-			set_stat(UNCONSCIOUS)
-		else
-			set_stat(CONSCIOUS)
+
+	SHOULD_CALL_PARENT(TRUE)
+
+	// Check if we are (or should be) dead at this point.
+	update_health()
+
+	if(!handle_some_updates())
+		return FALSE
+
+	// Godmode just skips most of this processing.
+	if(status_flags & GODMODE)
+		set_stat(CONSCIOUS)
+		germ_level = 0
 		return TRUE
+
+	// TODO: move hallucinations into a status condition decl.
+	if(hallucination_power)
+		handle_hallucinations()
+
+	// Increase germ_level regularly
+	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
+		germ_level++
+	// If you're dirty, your gloves will become dirty, too.
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
+	if(gloves && germ_level > gloves.germ_level && prob(10))
+		gloves.germ_level++
+
+	// If we're dead, don't continue further.
+	if(stat == DEAD)
+		return FALSE
+
+	// Handle some general state updates.
+	if(HAS_STATUS(src, STAT_PARA))
+		set_stat(UNCONSCIOUS)
+	else if (status_flags & FAKEDEATH)
+		set_stat(UNCONSCIOUS)
+	else
+		set_stat(CONSCIOUS)
+	return TRUE
 
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()
 	handle_impaired_hearing()
 
 /mob/living/proc/handle_impaired_vision()
-	if((sdisabilities & BLINDED) || stat) //blindness from disability or unconsciousness doesn't get better on its own
+	SHOULD_CALL_PARENT(TRUE)
+	if(stat == DEAD)
+		SET_STATUS_MAX(src, STAT_BLIND, 0)
+	if(stat != CONSCIOUS && (sdisabilities & BLINDED)) //blindness from disability or unconsciousness doesn't get better on its own
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
+	else
+		return TRUE
+	return FALSE
 
 /mob/living/proc/handle_impaired_hearing()
 	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
 		SET_STATUS_MAX(src, STAT_TINNITUS, 2)
 
+/mob/living/proc/should_do_hud_updates()
+	return client
+
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
-	if(!client)	return 0
-
+	SHOULD_CALL_PARENT(TRUE)
+	if(!should_do_hud_updates())
+		return FALSE
 	handle_hud_icons()
 	handle_vision()
 	handle_low_light_vision()
-
-	return 1
+	return TRUE
 
 /mob/living/proc/handle_low_light_vision()
 
@@ -315,10 +367,8 @@
 
 /mob/living/proc/handle_vision()
 	update_sight()
-
 	if(stat == DEAD)
 		return
-
 	if(is_blind())
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
@@ -326,9 +376,7 @@
 		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 		set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
-
 	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
-
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)

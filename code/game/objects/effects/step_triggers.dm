@@ -5,6 +5,8 @@
 	var/stopper = 1 // stops throwers
 	invisibility = INVISIBILITY_ABSTRACT // nope cant see this shit
 	anchored = TRUE
+	icon = 'icons/misc/mark.dmi'
+	icon_state = "X"
 
 /obj/effect/step_trigger/proc/Trigger(var/atom/movable/A)
 	return 0

@@ -16,7 +16,6 @@ var/global/list/announcers = list()
 	return global.announcers["[z]"]
 
 /obj/item/radio/announcer
-	cell = null
 	canhear_range = 0
 	power_usage =   0
 	listening =     FALSE
@@ -25,6 +24,10 @@ var/global/list/announcers = list()
 	invisibility =  INVISIBILITY_MAXIMUM
 	decrypt_all_messages = TRUE
 	is_spawnable_type = FALSE
+
+/obj/item/radio/announcer/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
+	return
 
 /obj/item/radio/announcer/Destroy()
 	SHOULD_CALL_PARENT(FALSE)

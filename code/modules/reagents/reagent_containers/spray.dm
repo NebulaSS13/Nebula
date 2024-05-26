@@ -29,6 +29,10 @@
 	. = ..()
 	src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
+// Override to avoid drinking from this or feeding it to your neighbor.
+/obj/item/chems/spray/attack(mob/user)
+	return FALSE
+
 /obj/item/chems/spray/afterattack(atom/A, mob/user, proximity)
 	if(istype(A, /obj/item/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/chems) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return
@@ -137,21 +141,21 @@
 	particle_move_delay = 6
 
 /obj/item/chems/spray/cleaner/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/cleaner, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/cleaner, reagents.maximum_volume)
 
 /obj/item/chems/spray/antiseptic
 	name = "antiseptic spray"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
 /obj/item/chems/spray/antiseptic/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antiseptic, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antiseptic, reagents.maximum_volume)
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
 
 /obj/item/chems/spray/hair_remover/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/hair_remover, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/hair_remover, reagents.maximum_volume)
 
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
@@ -164,7 +168,7 @@
 	safety = TRUE
 
 /obj/item/chems/spray/pepper/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
 
 /obj/item/chems/spray/pepper/has_safety()
 	return TRUE
@@ -180,7 +184,7 @@
 	volume = 10
 
 /obj/item/chems/spray/waterflower/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
@@ -192,7 +196,7 @@
 	w_class = ITEM_SIZE_LARGE
 	possible_transfer_amounts = null
 	volume = 600
-	origin_tech = "{'combat':3,'materials':3,'engineering':3}"
+	origin_tech = @'{"combat":3,"materials":3,"engineering":3}'
 	particle_move_delay = 2 //Was hardcoded to 2 before, and 8 was slower than most mob's move speed
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
@@ -219,7 +223,7 @@
 	volume = 100
 
 /obj/item/chems/spray/plantbgone/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/weedkiller, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/weedkiller, reagents.maximum_volume)
 
 /obj/item/chems/spray/plantbgone/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return

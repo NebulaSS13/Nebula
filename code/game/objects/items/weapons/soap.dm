@@ -12,7 +12,7 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
-	material = /decl/material/liquid/cleaner
+	material = /decl/material/liquid/cleaner/soap
 	max_health = 5
 	var/key_data
 
@@ -43,7 +43,7 @@
 	update_icon()
 
 /obj/item/soap/proc/wet()
-	reagents.add_reagent(/decl/material/liquid/cleaner, SOAP_CLEANER_ON_WET)
+	add_to_reagents(/decl/material/liquid/cleaner, SOAP_CLEANER_ON_WET)
 
 /obj/item/soap/Crossed(atom/movable/AM)
 	if(!isliving(AM))
@@ -60,7 +60,7 @@
 		to_chat(user, SPAN_NOTICE("You need to take that [target.name] off before cleaning it."))
 	else if(istype(target,/obj/effect/decal/cleanable/blood))
 		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
-		target.clean_blood() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
+		target.clean() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
 		cleaned = TRUE
 	else if(istype(target,/obj/effect/decal/cleanable))
 		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
@@ -80,7 +80,7 @@
 		wet()
 	else
 		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
-		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
+		target.clean() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
 
 	if(cleaned)
@@ -98,20 +98,22 @@
 			user.visible_message(SPAN_NOTICE("\The [user] cleans \the [target]."))
 			if(reagents)
 				reagents.trans_to(target, reagents.total_volume / 8)
-			target.clean_blood()
+			target.clean()
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return TRUE
 	return ..()
 
 /obj/item/soap/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/key))
-		if(!key_data)
+		if(key_data)
+			to_chat(user, SPAN_WARNING("\The [src] already has a key imprint."))
+		else
 			to_chat(user, SPAN_NOTICE("You imprint \the [I] into \the [src]."))
 			var/obj/item/key/K = I
 			key_data = K.key_data
 			update_icon()
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/soap/on_update_icon()
 	. = ..()

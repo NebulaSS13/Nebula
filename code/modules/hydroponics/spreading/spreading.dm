@@ -45,8 +45,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
 
-	var/health = 10
-	var/max_health = 100
+	current_health = 10
+	max_health = 100
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -72,9 +72,6 @@
 		parent.possible_children = max(0, parent.possible_children - 1)
 
 	seed = newseed
-	if(start_matured)
-		mature_time = 0
-		health = max_health
 	if(!istype(seed))
 		seed = SSplants.seeds[DEFAULT_SEED]
 	if(!seed)
@@ -82,6 +79,10 @@
 
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
+	if(start_matured)
+		mature_time = 0
+		current_health = max_health
+
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
 		mouse_opacity = MOUSE_OPACITY_PRIORITY
 		max_growth = VINE_GROWTH_STAGES
@@ -110,7 +111,7 @@
 
 /obj/effect/vine/on_update_icon()
 	overlays.Cut()
-	var/growth = growth_threshold ? min(max_growth, round(health/growth_threshold)) : 1
+	var/growth = growth_threshold ? min(max_growth, round(current_health/growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)
 		if(at_fringe >= spread_distance-3)
@@ -210,7 +211,7 @@
 			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
 		else
 			seed.harvest(user,0,1)
-		health -= (rand(3,5)*5)
+		current_health -= (rand(3,5)*5)
 	else
 		..()
 		var/damage = W.force
@@ -255,12 +256,12 @@
 		physically_destroyed()
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = clamp(health + value, 0, max_health)
-	if(health <= 0)
+	current_health = clamp(current_health + value, 0, get_max_health())
+	if(current_health <= 0)
 		die_off()
 
 /obj/effect/vine/proc/is_mature()
-	return (health >= (max_health/3) && world.time > mature_time)
+	return (current_health >= (get_max_health()/3) && world.time > mature_time)
 
 /obj/effect/vine/is_burnable()
 	return seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
@@ -281,7 +282,7 @@
 		return
 	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [V]."))
 	playsound(get_turf(V), W.hitsound, 100, 1)
-	var/chop_time = (V.health/W.force) * 0.5 SECONDS
+	var/chop_time = (V.current_health/W.force) * 0.5 SECONDS
 	if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 		chop_time *= 0.5
 	if(do_after(user, chop_time, V, TRUE))

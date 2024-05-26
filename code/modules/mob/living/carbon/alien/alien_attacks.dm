@@ -20,7 +20,6 @@
 				SET_STATUS_MAX(src, STAT_WEAK, rand(10,15))
 				user.visible_message(SPAN_DANGER("\The [user] has weakened \the [src]!"), 1, SPAN_WARNING("You hear someone fall."), 2)
 			adjustBruteLoss(damage)
-			updatehealth()
 		else
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has attempted to punch \the [src]!"), 1)

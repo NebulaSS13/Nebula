@@ -34,7 +34,7 @@
 		. = ..()
 
 
-/obj/item/storage/secure/handle_mouse_drop(atom/over, mob/user)
+/obj/item/storage/secure/handle_mouse_drop(atom/over, mob/user, params)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
 		add_fingerprint(user)

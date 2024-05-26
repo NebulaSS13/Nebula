@@ -6,7 +6,7 @@
 	desc = "This item type is used to spawn random objects at round-start. Only one spawn point for a given group id is selected."
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "x3"
-	invisibility = INVISIBILITY_MAXIMUM
+	invisibility = INVISIBILITY_ABSTRACT
 	var/id     // Group id
 	var/weight // Probability weight for this spawn point
 

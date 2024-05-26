@@ -1,6 +1,6 @@
 /datum/ailment/fault/locking_thumbs
 	name = "self-locking thumbs"
-	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ makes a grinding sound when you move the joints."
+	manual_diagnosis_string = "$USER_THEIR$ $ORGAN$ makes a grinding sound when you move the joints."
 	applies_to_organ = list(
 		BP_L_ARM,
 		BP_L_HAND,

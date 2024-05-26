@@ -18,10 +18,12 @@
 	var/skip_on_strip_display = FALSE
 	var/requires_slot_flags
 	var/requires_organ_tag
-	var/quick_equip_priority = 0 // Higher priority means it will be checked first.
+	var/quick_equip_priority = 0 // Higher priority means it will be checked first. If null, will not be considered for quick equip.
 
 	var/mob_overlay_layer
 	var/alt_mob_overlay_layer
+
+	var/use_overlay_fallback_slot = TRUE
 
 /datum/inventory_slot/Destroy(force)
 	_holding = null
@@ -72,13 +74,13 @@
 		return
 	if(alt_mob_overlay_layer)
 		if(_holding)
-			user.set_current_mob_overlay((_holding.use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id), FALSE)
+			user.set_current_mob_overlay((_holding.use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id, use_fallback_if_icon_missing = use_overlay_fallback_slot), FALSE)
 			user.set_current_mob_overlay((_holding.use_alt_layer ? mob_overlay_layer : alt_mob_overlay_layer), null, redraw_mob)
 		else
 			user.set_current_mob_overlay(mob_overlay_layer, null, FALSE)
 			user.set_current_mob_overlay(alt_mob_overlay_layer, null, redraw_mob)
 	else
-		user.set_current_mob_overlay(mob_overlay_layer, _holding?.get_mob_overlay(user, slot_id), redraw_mob)
+		user.set_current_mob_overlay(mob_overlay_layer, _holding?.get_mob_overlay(user, slot_id, use_fallback_if_icon_missing = use_overlay_fallback_slot), redraw_mob)
 
 /datum/inventory_slot/proc/set_slot(var/obj/item/prop)
 	_holding = prop

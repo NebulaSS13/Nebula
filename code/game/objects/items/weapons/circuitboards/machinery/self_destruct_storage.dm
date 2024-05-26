@@ -2,7 +2,7 @@
 	name = "circuitboard (nuclear cylinder storage)"
 	build_path = /obj/machinery/nuclear_cylinder_storage/buildable
 	board_type = "machine"
-	origin_tech = "{'combat':2,'engineering':2}"
+	origin_tech = @'{"combat":2,"engineering":2}'
 
 	req_components = list(
 		/obj/item/stack/cable_coil = 10,

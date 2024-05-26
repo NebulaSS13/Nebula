@@ -32,7 +32,7 @@
 	listeners = list()
 	listener_status = list()
 
-	events_repository.register(/decl/observ/destroyed, source, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, source, src, TYPE_PROC_REF(/datum, qdel_self))
 
 	player.subscribe(src)
 

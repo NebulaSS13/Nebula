@@ -317,7 +317,7 @@ var/global/list/overmap_helm_computers
 	current_operator = weakref(current_operator_actual)
 	linked.update_operator_skill(current_operator_actual)
 	if (!autopilot && old_operator && viewing_overmap(old_operator))
-		addtimer(CALLBACK(src, /obj/machinery/computer/ship/.proc/unlook, old_operator), 0) // Workaround for linter SHOULD_NOT_SLEEP checks.
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/computer/ship, unlook), old_operator), 0) // Workaround for linter SHOULD_NOT_SLEEP checks.
 
 	log_debug("HELM CONTROL: [current_operator_actual ? current_operator_actual : "NO PILOT"] taking control of [src] from [old_operator ? old_operator : "NO PILOT"] in [get_area_name(src)]. [autopilot ? "(AUTOPILOT MODE)" : null]")
 

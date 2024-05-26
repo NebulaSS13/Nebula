@@ -7,3 +7,4 @@
 	required_enemies = 1
 	end_on_antag_death = FALSE
 	associated_antags = list(/decl/special_role/wizard)
+	probability = 1

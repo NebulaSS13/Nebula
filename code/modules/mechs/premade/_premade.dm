@@ -4,10 +4,22 @@
 	name = "impossible exosuit"
 	desc = "It seems to be saying 'please let me die'."
 	abstract_type = /mob/living/exosuit/premade
+	icon = 'icons/mecha/mecha_preview.dmi'
+	icon_state = "preview"
+	pixel_x = 0
+	pixel_y = 0
 	var/decal
 	var/decal_blend = BLEND_MULTIPLY
 
 /mob/living/exosuit/premade/Initialize()
+
+	// Reset our mapping helpers.
+	default_pixel_x = -8
+	default_pixel_y = 0
+	pixel_x = default_pixel_x
+	pixel_y = default_pixel_y
+	icon = null
+	icon_state = null
 
 	for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
 		if(decal)

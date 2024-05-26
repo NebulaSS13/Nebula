@@ -1,11 +1,11 @@
 /obj/item/grab
-	name = "grab"
-	canremove =    FALSE
-	item_flags =   ITEM_FLAG_NO_BLUDGEON
-	w_class =      ITEM_SIZE_NO_CONTAINER
-	pickup_sound = null
-	drop_sound =   null
-	equip_sound =  null
+	name              = "grab"
+	canremove         = FALSE
+	item_flags        = ITEM_FLAG_NO_BLUDGEON
+	w_class           = ITEM_SIZE_NO_CONTAINER
+	pickup_sound      = null
+	drop_sound        = null
+	equip_sound       = null
 	is_spawnable_type = FALSE
 
 	var/atom/movable/affecting             // Atom being targeted by this grab.
@@ -49,19 +49,19 @@
 	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
 	adjust_position()
 	action_used()
-	INVOKE_ASYNC(assailant, /atom/movable/proc/do_attack_animation, affecting)
+	INVOKE_ASYNC(assailant, TYPE_PROC_REF(/atom/movable, do_attack_animation), affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	update_icon()
 
-	events_repository.register(/decl/observ/moved, affecting, src, .proc/on_affecting_move)
+	events_repository.register(/decl/observ/moved, affecting, src, PROC_REF(on_affecting_move))
 	if(assailant.zone_sel)
-		events_repository.register(/decl/observ/zone_selected, assailant.zone_sel, src, .proc/on_target_change)
+		events_repository.register(/decl/observ/zone_selected, assailant.zone_sel, src, PROC_REF(on_target_change))
 
 	var/obj/item/organ/O = get_targeted_organ()
 	var/decl/pronouns/G = assailant.get_pronouns()
 	if(affecting_mob && O) // may have grabbed a buckled mob, so may be grabbing their holder
 		SetName("[name] (\the [affecting_mob]'s [O.name])")
-		events_repository.register(/decl/observ/dismembered, affecting_mob, src, .proc/on_organ_loss)
+		events_repository.register(/decl/observ/dismembered, affecting_mob, src, PROC_REF(on_organ_loss))
 		if(affecting_mob != assailant)
 			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting_mob]'s [O.name]!"))
 		else
@@ -74,6 +74,11 @@
 
 	if(affecting_mob && assailant?.a_intent == I_HURT)
 		upgrade(TRUE)
+
+/obj/item/grab/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
+	if(dropping)
+		return TRUE
+	return FALSE
 
 /obj/item/grab/examine(mob/user)
 	. = ..()
@@ -95,7 +100,11 @@
 			upgrade()
 
 /obj/item/grab/attack(mob/M, mob/living/user)
-	return FALSE
+	if(affecting == M)
+		var/datum/extension/abilities/abilities = get_extension(user, /datum/extension/abilities)
+		if(abilities?.do_grabbed_invocation(M))
+			return TRUE
+	. = ..()
 
 /obj/item/grab/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(QDELETED(src) || !current_grab || !assailant || proximity_flag) // Close-range is handled in resolve_attackby().
@@ -232,10 +241,10 @@
 
 /obj/item/grab/on_update_icon()
 	. = ..()
-	if(current_grab.icon)
-		icon = current_grab.icon
-	if(current_grab.icon_state)
-		icon_state = current_grab.icon_state
+	if(current_grab.grab_icon)
+		icon = current_grab.grab_icon
+	if(current_grab.grab_icon_state)
+		icon_state = current_grab.grab_icon_state
 
 /obj/item/grab/proc/throw_held()
 	return current_grab.throw_held(src)

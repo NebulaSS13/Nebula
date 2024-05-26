@@ -5,7 +5,7 @@
 	icon = 'icons/obj/items/weapon/energy_blade.dmi'
 
 	icon_state = ICON_STATE_WORLD
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	item_flags = ITEM_FLAG_IS_WEAPON
 	w_class = ITEM_SIZE_SMALL
 	hitsound = 'sound/weapons/genhit.ogg'
@@ -164,7 +164,7 @@
 			add_overlay(emissive_overlay(icon, "[icon_state]-extended"))
 			z_flags |= ZMM_MANGLE_PLANES
 
-/obj/item/energy_blade/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/energy_blade/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-extended", overlay.icon))
 		overlay.overlays += emissive_overlay(overlay.icon, "[overlay.icon_state]-extended")
 	. = ..()

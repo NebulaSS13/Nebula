@@ -18,12 +18,13 @@
 			my_baby.key = key
 	qdel(src)
 
-/mob/living/slime/death(gibbed, deathmessage, show_dead_message)
+/mob/living/slime/death(gibbed)
+	// Handle splitting instead of dying.
 	if(stat != DEAD && !gibbed && is_adult)
 		physically_destroyed()
 		return TRUE
-	. = ..(gibbed, deathmessage, show_dead_message)
-	if(stat == DEAD)
+	. = ..()
+	if(.)
 		set_feeding_on()
 		for(var/atom/movable/AM in contents)
 			AM.dropInto(loc)

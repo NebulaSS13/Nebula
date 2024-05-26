@@ -22,15 +22,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon =  'icons/obj/closets/bases/crate.dmi'
 	color = COLOR_STEEL
 	icon_state = "crate"
-
 	meat_type = /obj/item/chems/food/fish
 	speed = 4
-	maxHealth = 100
-	health = 100
-
+	max_health = 100
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
-
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
@@ -78,18 +74,18 @@ var/global/list/protected_objects = list(/obj/machinery,
 
 		var/obj/item/attacking_with = get_natural_weapon()
 		if(istype(O, /obj/structure))
-			health = (anchored * 50) + 50
+			current_health = (anchored * 50) + 50
 			destroy_objects = 1
 			if(O.density && O.anchored)
 				knockdown_people = 1
 				attacking_with.force = 2 * initial(attacking_with.force)
 		else if(istype(O, /obj/item))
 			var/obj/item/I = O
-			health = 15 * I.w_class
+			current_health = 15 * I.w_class
 			attacking_with.force = 2 + initial(I.force)
 			move_to_delay = 2 * I.w_class
 
-		maxHealth = health
+		set_max_health(current_health)
 		if(creator)
 			src.creator = weakref(creator)
 			faction = "\ref[creator]" // very unique
@@ -98,18 +94,16 @@ var/global/list/protected_objects = list(/obj/machinery,
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/hostile/mimic/death()
+/mob/living/simple_animal/hostile/mimic/death(gibbed)
 	if(!copy_of)
 		return
 	var/atom/movable/C = copy_of.resolve()
-	..(null, "dies!")
-	if(C)
+	. = ..()
+	if(. && C)
 		C.forceMove(src.loc)
-
 		if(istype(C,/obj/structure/closet))
 			for(var/atom/movable/M in src)
 				M.forceMove(C)
-
 		if(istype(C,/obj/item/storage))
 			var/obj/item/storage/S = C
 			for(var/atom/movable/M in src)
@@ -117,11 +111,9 @@ var/global/list/protected_objects = list(/obj/machinery,
 					S.handle_item_insertion(M)
 				else
 					M.forceMove(src.loc)
-
 		for(var/atom/movable/M in src)
 			M.dropInto(loc)
 		qdel(src)
-
 
 /mob/living/simple_animal/hostile/mimic/DestroySurroundings()
 	if(destroy_objects)
@@ -155,9 +147,9 @@ var/global/list/protected_objects = list(/obj/machinery,
 		src.visible_message("<b>\The [src]</b> starts to move!")
 		awake = 1
 
-/mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage)
-	trigger()
+/mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage, var/do_update_health = FALSE)
 	..(damage)
+	trigger()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/attack_hand()
 	trigger()

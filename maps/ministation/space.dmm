@@ -106,7 +106,8 @@
 "au" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "shuttle3_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
@@ -238,13 +239,15 @@
 /area/shuttle/escape_shuttle)
 "aJ" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = -30
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
 "aK" = (
 /obj/machinery/status_display{
-	pixel_y = -30
+	pixel_y = -30;
+	dir = 1
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
@@ -257,7 +260,7 @@
 /area/shuttle/escape_shuttle)
 "aN" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = 30
+	pixel_y = 29
 	},
 /turf/simulated/floor/shuttle/yellow,
 /area/shuttle/escape_shuttle)
@@ -359,7 +362,8 @@
 "hM" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "shuttle2_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
@@ -373,7 +377,8 @@
 "qu" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "shuttle1_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
@@ -404,7 +409,7 @@
 "Kt" = (
 /obj/structure/window/borosilicate_reinforced,
 /obj/structure/showcase{
-	desc = "It's actually a yinglet inside the box piloting the shuttle but don't tell anyone.";
+	desc = "It's actually a possum inside the box piloting the shuttle but don't tell anyone.";
 	icon_state = "message_server_o_off";
 	name = "auto-pilot system"
 	},
@@ -433,6 +438,10 @@
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
+"Pe" = (
+/obj/abstract/level_data_spawner/admin_level,
+/turf/space,
+/area/space)
 "Qd" = (
 /obj/machinery/atmospherics/pipe/manifold{
 	dir = 8
@@ -452,10 +461,6 @@
 "UO" = (
 /obj/effect/step_trigger/teleporter/random,
 /turf/space/transit/north,
-/area/space)
-"YY" = (
-/obj/abstract/level_data_spawner/admin_level,
-/turf/space,
 /area/space)
 
 (1,1,1) = {"
@@ -715,7 +720,7 @@ aa
 aa
 aa
 aa
-aa
+Pe
 aa
 "}
 (3,1,1) = {"
@@ -844,7 +849,7 @@ aa
 aa
 aa
 aa
-YY
+aa
 aa
 aa
 "}
@@ -2006,10 +2011,10 @@ ab
 ab
 ac
 ac
-ac
 Mu
-KH
 ac
+ac
+KH
 ab
 ab
 tC
@@ -2136,10 +2141,10 @@ tC
 ab
 ab
 ab
-ae
-ab
 ab
 ae
+ae
+ab
 ab
 ab
 tC

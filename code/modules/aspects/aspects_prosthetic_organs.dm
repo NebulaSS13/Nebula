@@ -5,30 +5,44 @@
 	aspect_cost = 1
 	category = "Prosthetic Organs"
 	sort_value = 2
+	var/synthetic_bodytype_restricted = FALSE
 	var/apply_to_organ = BP_HEART
 
 /decl/aspect/prosthetic_organ/is_available_to(datum/preferences/pref)
 	. = ..()
 	if(. && pref.species && pref.bodytype)
+
 		var/decl/species/mob_species = pref.get_species_decl()
 		var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+
 		if(!istype(mob_bodytype))
 			return FALSE
+
+		// Synthetic organs are generally unnecessary in FBPs as they have robotic innards regardless.
+		if(synthetic_bodytype_restricted)
+			if(!mob_bodytype.is_robotic)
+				return FALSE
+		else
+			if(mob_bodytype.is_robotic)
+				return FALSE
+
 		if(!(apply_to_organ in mob_bodytype.has_organ))
 			return FALSE
+
 		if(mob_species.species_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
 			return FALSE
+
 		return TRUE
 
 /decl/aspect/prosthetic_organ/applies_to_organ(var/organ)
 	return apply_to_organ && organ == apply_to_organ
 
-/decl/aspect/prosthetic_organ/apply(var/mob/living/carbon/human/holder)
+/decl/aspect/prosthetic_organ/apply(mob/living/holder)
 	. = ..()
 	if(.)
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(holder, apply_to_organ)
 		if(I)
-			I.set_bodytype(holder.species.base_internal_prosthetics_model)
+			I.set_bodytype(I.species.base_internal_prosthetics_model)
 
 /decl/aspect/prosthetic_organ/eyes
 	name = "Prosthetic Eyes"
@@ -61,3 +75,26 @@
 	name = "Prosthetic Stomach"
 	desc = "You have a literal iron stomach."
 	apply_to_organ = BP_STOMACH
+
+/decl/aspect/prosthetic_organ/brain
+	name = "Synthetic Brain"
+	desc = "You are an artificial lifeform, with a mind made of steel and light."
+	apply_to_organ = BP_BRAIN
+	synthetic_bodytype_restricted = TRUE
+	var/new_brain_type = /obj/item/organ/internal/brain/robotic
+
+/decl/aspect/prosthetic_organ/brain/apply(mob/living/holder)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/affected
+		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(holder, apply_to_organ)
+		if(I)
+			affected = GET_EXTERNAL_ORGAN(holder, I.parent_organ)
+			I.transfer_brainmob_with_organ = FALSE // we don't want to pull them out of the mob
+			holder.remove_organ(I, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE)
+			qdel(I)
+		var/obj/item/organ/organ = new new_brain_type(holder)
+		if(!affected)
+			affected = GET_EXTERNAL_ORGAN(holder, organ.parent_organ)
+		if(affected)
+			holder.add_organ(organ, affected, TRUE, FALSE, FALSE, TRUE)

@@ -4,7 +4,8 @@
 	icon = 'icons/obj/items/key.dmi'
 	icon_state = "keys"
 	w_class = ITEM_SIZE_TINY
-	material = DEFAULT_FURNITURE_MATERIAL
+	material = /decl/material/solid/metal/brass
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/key_data
 
 /obj/item/key/proc/get_data(var/mob/user)
@@ -17,7 +18,7 @@
 /obj/item/key/temporary
 	name = "key"
 	desc = "A fragile key with limited uses."
-	material = /decl/material/liquid/cleaner
+	material = /decl/material/liquid/cleaner/soap
 	var/uses = 0
 
 /obj/item/key/temporary/Initialize(mapload, material_key, _data, _uses)

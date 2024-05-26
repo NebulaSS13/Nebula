@@ -100,8 +100,8 @@
 /datum/fauna_generator/proc/register_fauna(var/mob/living/A)
 	if(A in live_fauna)
 		return
-	events_repository.register(/decl/observ/destroyed, A, src, /datum/fauna_generator/proc/on_fauna_death)
-	events_repository.register(/decl/observ/death,     A, src, /datum/fauna_generator/proc/on_fauna_death)
+	events_repository.register(/decl/observ/destroyed, A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
+	events_repository.register(/decl/observ/death,     A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
 	LAZYADD(live_fauna, A)
 
 /datum/fauna_generator/proc/on_fauna_death(var/mob/living/A)
@@ -111,8 +111,8 @@
 /datum/fauna_generator/proc/unregister_fauna(var/mob/living/A)
 	if(!(A in live_fauna))
 		return
-	events_repository.unregister(/decl/observ/destroyed, A, src, /datum/fauna_generator/proc/on_fauna_death)
-	events_repository.unregister(/decl/observ/death,     A, src, /datum/fauna_generator/proc/on_fauna_death)
+	events_repository.unregister(/decl/observ/destroyed, A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
+	events_repository.unregister(/decl/observ/death,     A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
 	LAZYREMOVE(live_fauna, A)
 
 /datum/fauna_generator/proc/generate_fauna(var/datum/gas_mixture/atmosphere, var/list/breath_gases = list(), var/list/toxic_gases = list())
@@ -210,13 +210,13 @@
 	for(var/i = 1 to round(repopulate_megafauna_threshold - length(live_megafauna)))
 		if(prob(90))
 			continue
-		var/turf/simulated/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects))
+		var/turf/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects, /proc/turf_is_simulated))
 		try_spawn_megafauna(T)
 
 	for(var/i = 1 to round(repopulate_fauna_threshold - length(live_fauna)))
 		if(prob(90))
 			continue
-		var/turf/simulated/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects))
+		var/turf/T = pick_area_turf(spawn_area, list(/proc/not_turf_contains_dense_objects, /proc/turf_is_simulated))
 		try_spawn_fauna(T)
 
 	time_last_repop = REALTIMEOFDAY

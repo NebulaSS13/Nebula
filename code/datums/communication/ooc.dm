@@ -1,6 +1,6 @@
 /decl/communication_channel/ooc
 	name = "OOC"
-	config_setting = "ooc_allowed"
+	config_setting = /decl/config/toggle/on/ooc_allowed
 	expected_communicator_type = /client
 	flags = COMMUNICATION_NO_GUESTS
 	log_proc = /proc/log_ooc
@@ -13,7 +13,7 @@
 		return
 
 	if(!C.holder)
-		if(!config.dooc_allowed && (C.mob.stat == DEAD))
+		if(!get_config_value(/decl/config/toggle/on/dooc_allowed) && (C.mob.stat == DEAD))
 			to_chat(C, "<span class='danger'>[name] for dead mobs has been turned off.</span>")
 			return FALSE
 		if(findtext(message, "byond://"))

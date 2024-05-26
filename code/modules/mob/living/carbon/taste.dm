@@ -92,6 +92,3 @@ calculate text size per text.
 				out += "[intensity_desc] [taste_desc]"
 
 	return english_list(out, "something indescribable")
-
-/mob/living/carbon/proc/get_fullness()
-	return nutrition + (REAGENT_VOLUME(reagents, /decl/material/liquid/nutriment) * 25)

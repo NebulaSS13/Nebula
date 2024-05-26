@@ -47,7 +47,7 @@
 	if(.)
 		var/force_emote = species.get_pain_emote(src, power)
 		if(force_emote && prob(power))
-			var/decl/emote/use_emote = usable_emotes[force_emote]
+			var/decl/emote/use_emote = GET_DECL(force_emote)
 			if(!(use_emote.message_type == AUDIBLE_MESSAGE &&HAS_STATUS(src, STAT_SILENCE)))
 				emote(force_emote)
 

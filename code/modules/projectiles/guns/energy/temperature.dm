@@ -10,15 +10,17 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	charge_cost = 10
-	origin_tech = "{'combat':3,'materials':4,'powerstorage':3,'magnets':2}"
+	origin_tech = @'{"combat":3,"materials":4,"powerstorage":3,"magnets":2}'
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	one_hand_penalty = 2
 	projectile_type = /obj/item/projectile/temp
-	power_supply = /obj/item/cell/high
 	combustion = 0
 	indicator_color = COLOR_GREEN
 	var/firing_temperature = T20C
 	var/current_temperature = T20C
+
+/obj/item/gun/energy/temperature/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/high, /obj/item/cell, power_supply_extension_type, charge_value)
 
 /obj/item/gun/energy/temperature/Initialize()
 	. = ..()

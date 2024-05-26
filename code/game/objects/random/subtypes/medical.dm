@@ -53,6 +53,19 @@
 	)
 	return spawnable_choices
 
+/obj/random/medical/pillbottle
+	name = "Random Pill Bottle"
+	desc = "This is a random pill bottle."
+
+/obj/random/medical/pillbottle/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/storage/pill_bottle/antibiotics,
+		/obj/item/storage/pill_bottle/oxygen,
+		/obj/item/storage/pill_bottle/brute_meds,
+		/obj/item/storage/pill_bottle/sugariron
+	)
+	return spawnable_choices
+
 /obj/random/firstaid
 	name = "Random First Aid Kit"
 	desc = "This is a random first aid kit."

@@ -34,6 +34,7 @@ var/global/list/possible_say_verbs = list(
 	holder_type = /obj/item/holder
 	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
+	max_health = 100
 
 	os_type =	/datum/extension/interactive/os/silicon/small
 	starting_stock_parts = list(
@@ -58,8 +59,6 @@ var/global/list/possible_say_verbs = list(
 	var/pai_law0 = "Serve your master."
 	var/pai_laws				// String for additional operating instructions our master might give us
 
-	var/silence_time			// Timestamp when we were silenced (normally via EMP burst), set to null after silence has faded
-
 // Various software-specific vars
 
 	var/secHUD = 0			// Toggles whether the Security HUD is active or not
@@ -83,11 +82,18 @@ var/global/list/possible_say_verbs = list(
 
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	status_flags |= NO_ANTAG
-	if(istype(loc, /obj/item/paicard))
-		card = loc
+	if(!card)
+		if(istype(loc, /obj/item/paicard))
+			card = loc
+		else
+			card.radio = new /obj/item/radio(card)
+	if(istype(card))
+		if(!card.radio)
+			card.radio = new /obj/item/radio(card)
+		silicon_radio = card.radio
+		card.setPersonality(src)
 	else
-		card = new /obj/item/paicard(loc)
-	card.setPersonality(src)
+		return INITIALIZE_HINT_QDEL
 
 	//As a human made device, we'll understand sol common without the need of the translator
 	add_language(/decl/language/human/common, 1)
@@ -95,12 +101,7 @@ var/global/list/possible_say_verbs = list(
 
 	. = ..()
 
-	if(!istype(card))
-		return INITIALIZE_HINT_QDEL
-
-	if(!card.radio)
-		card.radio = new /obj/item/radio(card)
-	silicon_radio = card.radio
+	software = default_pai_software.Copy()
 
 /mob/living/silicon/pai/Destroy()
 	if(card)
@@ -112,9 +113,8 @@ var/global/list/possible_say_verbs = list(
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()
-	if(silence_time)
-		var/timeleft = round((silence_time - world.timeofday)/10 ,1)
-		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+	var/timeleft = round((HAS_STATUS(src, STAT_SILENCE) * SSmobs.wait) / 10, 1)
+	stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 
 /mob/living/silicon/pai/Stat()
 	. = ..()
@@ -137,13 +137,13 @@ var/global/list/possible_say_verbs = list(
 		// 33% chance to change prime directive (based on severity)
 		// 33% chance of no additional effect
 
-	silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
+	SET_STATUS_MAX(src, STAT_SILENCE, 2 MINUTES)
 	to_chat(src, SPAN_DANGER("<b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b>"))
 	if(prob(20))
 		visible_message( \
 			message = SPAN_DANGER("A shower of sparks spray from [src]'s inner workings!"), \
 			blind_message = SPAN_DANGER("You hear and smell the ozone hiss of electrical sparks being expelled violently."))
-		return death(0)
+		return death()
 
 	switch(pick(1,2,3))
 		if(1)
@@ -274,7 +274,6 @@ var/global/list/possible_say_verbs = list(
 	if(W.force)
 		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
 		adjustBruteLoss(W.force)
-		updatehealth()
 	else
 		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 

@@ -41,7 +41,7 @@
 			success = 1
 		else
 			for(var/obj/O in T)
-				for(var/blend_type in blend_objects)
+				for(var/blend_type in get_blend_objects())
 					if( istype(O, blend_type))
 						success = 1
 

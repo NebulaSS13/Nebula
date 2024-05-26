@@ -34,7 +34,7 @@
 	if(ticks_since_last_successful_breath>0) //Suffocating so do not take a breath
 		ticks_since_last_successful_breath--
 		if (prob(10) && !is_asystole() && active_breathe) //Gasp per 10 ticks? Sounds about right.
-			INVOKE_ASYNC(src, .proc/emote, "gasp")
+			INVOKE_ASYNC(src, PROC_REF(emote), "gasp")
 	else
 		//Okay, we can breathe, now check if we can get air
 		var/volume_needed = get_breath_volume()
@@ -57,8 +57,8 @@
 
 	// First handle being in a submerged environment.
 	var/datum/gas_mixture/breath
-	var/turf/my_turf = get_turf(src)
-	if(istype(my_turf) && my_turf.is_flooded(lying))
+	if(is_flooded(lying))
+		var/turf/my_turf = get_turf(src)
 
 		//Can we get air from the turf above us?
 		var/can_breathe_air_above = FALSE

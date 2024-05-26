@@ -42,19 +42,17 @@
 
 	// Produce materials.
 	var/turf/T = get_turf(src)
-	if(istype(T))
-		var/obj/effect/fluid/F = T.return_fluid()
-		if(istype(F))
+	if(istype(T) && T.reagents?.total_volume)
 
-			// Drink more water!
-			var/consuming = min(F.reagents.total_volume, fluid_consumption_per_tick)
-			F.reagents.remove_any(consuming)
-			T.show_bubbles()
+		// Drink more water!
+		var/consuming = min(T.reagents.total_volume, fluid_consumption_per_tick)
+		T.remove_any_reagents(consuming)
+		T.show_bubbles()
 
-			// Gas production.
-			var/datum/gas_mixture/produced = new
-			var/gen_amt = min(1, (gas_generated_per_tick * (consuming/fluid_consumption_per_tick)))
-			produced.adjust_gas(/decl/material/gas/oxygen,  gen_amt)
-			produced.adjust_gas(/decl/material/gas/hydrogen, gen_amt * 2)
-			produced.temperature = T20C //todo water temperature
-			air_contents.merge(produced)
+		// Gas production.
+		var/datum/gas_mixture/produced = new
+		var/gen_amt = min(1, (gas_generated_per_tick * (consuming/fluid_consumption_per_tick)))
+		produced.adjust_gas(/decl/material/gas/oxygen,  gen_amt)
+		produced.adjust_gas(/decl/material/gas/hydrogen, gen_amt * 2)
+		produced.temperature = T20C //todo water temperature
+		air_contents.merge(produced)

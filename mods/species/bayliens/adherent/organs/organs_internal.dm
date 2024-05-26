@@ -14,7 +14,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "adherent-brain"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/internal/brain/adherent/attack_self(var/mob/user)
 	. = ..()
@@ -64,7 +64,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "[base_action_state]-[active ? "on" : "off"]"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/internal/powered/attack_self(var/mob/user)
 	. = ..()
@@ -120,7 +120,7 @@
 
 /obj/item/organ/internal/eyes/adherent/Initialize()
 	. = ..()
-	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 
 /obj/item/organ/internal/cell/adherent
 	name = "piezoelectric core"

@@ -105,7 +105,7 @@
 		var/obj/machinery/shield_generator/S = locate(href_list["ref"]) in shields
 		if(S)
 			deselect_shield()
-			events_repository.register(/decl/observ/destroyed, S, src, /datum/nano_module/program/shields_monitor/proc/deselect_shield)
+			events_repository.register(/decl/observ/destroyed, S, src, TYPE_PROC_REF(/datum/nano_module/program/shields_monitor, deselect_shield))
 			active = S
 		return 1
 

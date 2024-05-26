@@ -18,7 +18,7 @@
 
 /obj/abstract/landmark/start
 	name = "start"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "x"
 	anchored = TRUE
 	invisibility = INVISIBILITY_ABSTRACT

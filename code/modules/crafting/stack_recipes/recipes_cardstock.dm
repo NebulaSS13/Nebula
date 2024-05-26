@@ -1,0 +1,51 @@
+/decl/stack_recipe/cardstock
+	abstract_type     = /decl/stack_recipe/cardstock
+	craft_stack_types = /obj/item/stack/material/cardstock
+
+/decl/stack_recipe/cardstock/box
+	result_type       = /obj/item/storage/box
+
+/decl/stack_recipe/cardstock/box/large
+	result_type       = /obj/item/storage/box/large
+
+/decl/stack_recipe/cardstock/box/donut
+	result_type       = /obj/item/storage/box/fancy/donut/empty
+
+/decl/stack_recipe/cardstock/box/egg
+	result_type       = /obj/item/storage/box/fancy/egg_box/empty
+
+/decl/stack_recipe/cardstock/box/light_tubes
+	result_type       = /obj/item/storage/box/lights/tubes/empty
+
+/decl/stack_recipe/cardstock/box/light_bulbs
+	result_type       = /obj/item/storage/box/lights/bulbs/empty
+
+/decl/stack_recipe/cardstock/box/mouse_traps
+	result_type       = /obj/item/storage/box/mousetraps/empty
+
+/decl/stack_recipe/cardstock/box/pizza
+	result_type       = /obj/item/pizzabox
+
+/decl/stack_recipe/cardstock/cardborg_suit
+	result_type       = /obj/item/clothing/suit/cardborg
+	difficulty        = MAT_VALUE_EASY_DIY
+
+/decl/stack_recipe/cardstock/cardborg_helmet
+	result_type       = /obj/item/clothing/head/cardborg
+	difficulty        = MAT_VALUE_EASY_DIY
+
+/decl/stack_recipe/cardstock/folder
+	result_type       = /obj/item/folder
+	category          = "folders"
+
+/decl/stack_recipe/cardstock/folder/yellow
+	result_type       = /obj/item/folder/yellow
+
+/decl/stack_recipe/cardstock/folder/cyan
+	result_type       = /obj/item/folder/cyan
+
+/decl/stack_recipe/cardstock/folder/red
+	result_type       = /obj/item/folder/red
+
+/decl/stack_recipe/cardstock/folder/blue
+	result_type       = /obj/item/folder/blue

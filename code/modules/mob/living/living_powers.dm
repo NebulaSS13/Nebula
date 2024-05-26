@@ -34,7 +34,7 @@
 	var/turf/T = get_turf(src)
 	var/obj/effect/effect/water/chempuff/chem = new(T)
 	chem.create_reagents(10)
-	chem.reagents.add_reagent(/decl/material/liquid/zombie, 2)
+	chem.add_to_reagents(/decl/material/liquid/zombie, 2)
 	chem.set_up(get_step(T, dir), 2, 10)
 	playsound(T, 'sound/hallucinations/wail.ogg', 20, 1)
 
@@ -67,6 +67,6 @@
 		to_chat(target,"<span class='danger'>\The [src] scrapes your flesh from your bones!</span>")
 		to_chat(src,"<span class='danger'>You feed hungrily off \the [target]'s flesh.</span>")
 		target.adjustBruteLoss(25)
-		if(target.getBruteLoss() < -target.maxHealth)
+		if(target.getBruteLoss() < -target.get_max_health())
 			target.gib()
 		src.adjustBruteLoss(-25)

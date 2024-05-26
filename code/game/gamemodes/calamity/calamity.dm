@@ -9,6 +9,7 @@
 	votable = 0
 	event_delay_mod_moderate = 0.5
 	event_delay_mod_major = 0.75
+	available_by_default = FALSE
 
 /decl/game_mode/calamity/create_antagonists()
 

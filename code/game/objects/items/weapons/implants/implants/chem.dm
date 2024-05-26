@@ -3,7 +3,7 @@ var/global/list/chem_implants = list()
 /obj/item/implant/chem
 	name = "chemical implant"
 	desc = "Injects things."
-	origin_tech = "{'materials':1,'biotech':2}"
+	origin_tech = @'{"materials":1,"biotech":2}'
 	known = 1
 
 /obj/item/implant/chem/get_data()
@@ -54,3 +54,6 @@ var/global/list/chem_implants = list()
 /obj/item/implantcase/chem
 	name = "glass case - 'chem'"
 	imp = /obj/item/implant/chem
+
+/obj/item/implantcase/chem/can_be_injected_by(var/atom/injector)
+	return FALSE
