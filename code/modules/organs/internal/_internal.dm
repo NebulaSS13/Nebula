@@ -212,7 +212,7 @@
 		if(new_max_dam < max_damage)
 			to_chat(user, SPAN_WARNING("Not every part of [src] could be saved; some dead tissue had to be removed, making it more susceptible to damage in the future."))
 			set_max_damage(new_max_dam)
-	heal_damage(damage)
+	heal_organ_damage(damage)
 
 /obj/item/organ/internal/proc/get_scarring_level()
 	. = (absolute_max_damage - max_damage)/absolute_max_damage

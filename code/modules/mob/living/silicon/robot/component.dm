@@ -60,7 +60,7 @@
 
 	if(brute_damage + electronics_damage >= max_damage) destroy()
 
-/datum/robot_component/proc/heal_damage(brute, electronics)
+/datum/robot_component/proc/heal_component_damage(brute, electronics)
 	if(installed != 1)
 		// If it's not installed, can't repair it.
 		return 0

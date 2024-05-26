@@ -148,7 +148,7 @@
 
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
-/datum/wound/proc/heal_damage(amount)
+/datum/wound/proc/heal_wound_damage(amount)
 	if(LAZYLEN(embedded_objects))
 		return amount // heal nothing
 	if(parent_organ)

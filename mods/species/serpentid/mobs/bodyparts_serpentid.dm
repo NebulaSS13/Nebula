@@ -70,7 +70,7 @@
 	var/mob/living/carbon/human/H = owner
 
 	var/oxygenated = GET_CHEMICAL_EFFECT(owner, CE_OXYGENATED)
-	H.heal_damage(OXY, HUMAN_MAX_OXYLOSS * oxygenated)
+	H.heal_damage(HUMAN_MAX_OXYLOSS * oxygenated, OXY)
 
 	if(breath_fail_ratio < 0.25 && oxygenated)
 		SET_HUD_ALERT(H, /decl/hud_element/condition/oxygen, 0)

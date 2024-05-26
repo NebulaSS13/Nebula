@@ -81,7 +81,7 @@
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
 	if(damage > min_damage)
-		heal_damage(damage-min_damage)
+		heal_wound_damage(damage-min_damage)
 	autoheal_cutoff = initial(autoheal_cutoff)
 
 /datum/wound/cut/small

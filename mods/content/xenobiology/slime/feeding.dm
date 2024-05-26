@@ -102,9 +102,9 @@
 			gain_nutrition(drained)
 			var/heal_amt = FLOOR(drained*0.5)
 			if(heal_amt > 0)
-				heal_damage(OXY, heal_amt, do_update_health = FALSE)
-				heal_damage(BRUTE, heal_amt, do_update_health = FALSE)
-				heal_damage(CLONE, heal_amt)
+				heal_damage(heal_amt, OXY,   do_update_health = FALSE)
+				heal_damage(heal_amt, BRUTE, do_update_health = FALSE)
+				heal_damage(heal_amt, CLONE)
 
 	if(ate_victim && feed_mob)
 		if(feed_mob.last_handled_by_mob)

@@ -146,9 +146,9 @@
 		if(target.get_damage(CLONE))
 			to_chat(user, SPAN_NOTICE("You stitch together some of the mangled DNA within \the [target]..."))
 			if(target.get_damage(CLONE) >= removing)
-				target.heal_damage(CLONE, removing)
+				target.heal_damage(removing, CLONE)
 			else
-				target.heal_damage(CLONE, target.get_damage(CLONE))
+				target.heal_damage(target.get_damage(CLONE), CLONE)
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You can find no genetic damage or radiation to heal within \the [target]."))
 		return TRUE
@@ -188,6 +188,6 @@
 				break
 		to_chat(target, SPAN_NOTICE("<font size = 3><b>Life floods back into your body!</b></font>"))
 		target.visible_message(SPAN_NOTICE("\The [target] shudders violently!"))
-		target.heal_damage(OXY, rand(15,20))
+		target.heal_damage(rand(15,20), OXY)
 		target.basic_revival()
 		return TRUE

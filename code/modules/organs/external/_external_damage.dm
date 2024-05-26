@@ -173,7 +173,7 @@
 		victim.take_internal_damage(damage_amt)
 		return TRUE
 
-/obj/item/organ/external/heal_damage(brute, burn, internal = 0, robo_repair = 0)
+/obj/item/organ/external/heal_organ_damage(brute, burn, internal = 0, robo_repair = 0)
 	if(BP_IS_PROSTHETIC(src) && !robo_repair)
 		return
 
@@ -184,9 +184,9 @@
 
 		// heal brute damage
 		if(W.damage_type == BURN)
-			burn = W.heal_damage(burn)
+			burn = W.heal_wound_damage(burn)
 		else
-			brute = W.heal_damage(brute)
+			brute = W.heal_wound_damage(brute)
 
 	if(internal)
 		status &= ~ORGAN_BROKEN

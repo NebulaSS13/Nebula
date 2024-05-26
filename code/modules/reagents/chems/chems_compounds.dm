@@ -387,7 +387,7 @@
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_PROSTHETIC(I))
-					I.heal_damage(20*removed)
+					I.heal_organ_damage(20*removed)
 
 /decl/material/liquid/antiseptic
 	name = "antiseptic"
@@ -424,7 +424,7 @@
 				if((E.brute_dam + E.burn_dam) > 0)
 					if(prob(35))
 						to_chat(M, SPAN_NOTICE("You feel a crawling sensation as fresh crystal grows over your [E.name]."))
-					E.heal_damage(rand(5,8), rand(5,8))
+					E.heal_organ_damage(rand(5,8), rand(5,8))
 					break
 				if(BP_IS_BRITTLE(E))
 					E.status &= ~ORGAN_BRITTLE
@@ -450,7 +450,7 @@
 				continue
 			if(prob(35))
 				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
-			I.heal_damage(rand(1,3))
+			I.heal_organ_damage(rand(1,3))
 			break
 	else
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))

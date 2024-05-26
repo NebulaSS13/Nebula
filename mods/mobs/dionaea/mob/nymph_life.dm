@@ -34,7 +34,7 @@
 		)
 		for(var/damtype in regen_types)
 			if(get_damage(damtype))
-				heal_damage(damtype, 1, do_update_health = FALSE)
+				heal_damage(1, damtype, do_update_health = FALSE)
 				update_health = TRUE
 		if(update_health)
 			update_health()

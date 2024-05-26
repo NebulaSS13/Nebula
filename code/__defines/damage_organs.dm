@@ -7,11 +7,12 @@
 #define BRAIN       "brain"
 #define ELECTROCUTE "electrocute"
 
-#define CUT       "cut"
-#define BRUISE    "bruise"
-#define PIERCE    "pierce"
-#define LASER     "laser"
-#define SHATTER   "shatter"
+#define WOUND_CUT       "cut"
+#define WOUND_BURN      "burn"
+#define WOUND_BRUISE    "bruise"
+#define WOUND_PIERCE    "pierce"
+#define WOUND_LASER     "laser"
+#define WOUND_SHATTER   "shatter"
 
 #define STUN      "stun"
 #define WEAKEN    "weaken"

@@ -376,7 +376,7 @@
 /obj/item/organ/proc/take_general_damage(var/amount, var/silent = FALSE)
 	CRASH("Not Implemented")
 
-/obj/item/organ/proc/heal_damage(amount)
+/obj/item/organ/proc/heal_organ_damage(amount)
 	if(can_recover())
 		damage = clamp(damage - round(amount, 0.1), 0, max_damage)
 		if(owner)

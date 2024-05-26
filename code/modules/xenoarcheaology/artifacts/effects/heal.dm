@@ -27,7 +27,7 @@
 			to_chat(M, SPAN_NOTICE("A wave of energy invigorates you."))
 		var/force = amount * weakness
 		M.apply_damages(-force, -force, -force, -force)
-		M.heal_damage(BRAIN, force)
+		M.heal_damage(force, BRAIN)
 		if(strong)
 			M.apply_radiation(-25 * weakness)
 			M.bodytemperature = M.get_species()?.body_temperature || initial(M.bodytemperature)

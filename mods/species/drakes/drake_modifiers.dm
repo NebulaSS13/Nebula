@@ -27,19 +27,19 @@
 		return 0
 
 	if(!user.HasTrait(/decl/trait/sivian_biochemistry))
-		user.heal_damage(BRUTE, 1, do_update_health = FALSE)
-		user.heal_damage(BURN,  1, do_update_health = TRUE)
+		user.heal_damage(1,       do_update_health = FALSE)
+		user.heal_damage(1, BURN, do_update_health = TRUE)
 		return 1
 
 	if(user.current_health >= user.get_max_health())
 		return 0
 
 	if(user.current_posture?.prone)
-		user.heal_damage(BRUTE, 3, do_update_health = FALSE)
-		user.heal_damage(BURN,  3, do_update_health = FALSE)
-		user.heal_damage(TOX,   2, do_update_health = TRUE)
+		user.heal_damage(3,       do_update_health = FALSE)
+		user.heal_damage(3, BURN, do_update_health = FALSE)
+		user.heal_damage(2, TOX,  do_update_health = TRUE)
 	else
-		user.heal_damage(BRUTE, 2, do_update_health = FALSE)
-		user.heal_damage(BURN,  2, do_update_health = FALSE)
-		user.heal_damage(TOX,   1, do_update_health = TRUE)
+		user.heal_damage(2,       do_update_health = FALSE)
+		user.heal_damage(2, BURN, do_update_health = FALSE)
+		user.heal_damage(1, TOX,  do_update_health = TRUE)
 	return 1

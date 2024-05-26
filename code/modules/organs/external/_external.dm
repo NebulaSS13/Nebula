@@ -567,8 +567,8 @@
 		return 0
 
 	switch(damage_type)
-		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
-		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
+		if(BRUTE) src.heal_organ_damage(repair_amount, 0, 0, 1)
+		if(BURN)  src.heal_organ_damage(0, repair_amount, 0, 1)
 	owner.try_refresh_visible_overlays()
 	if(user == src.owner)
 		var/decl/pronouns/G = user.get_pronouns()
@@ -892,7 +892,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(W.damage_type == BURN)
 			dam_type = BURN
 		if(owner?.can_autoheal(dam_type))
-			W.heal_damage(heal_amt)
+			W.heal_wound_damage(heal_amt)
 
 	// sync the organ's damage with its wounds
 	update_damages()

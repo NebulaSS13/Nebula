@@ -26,7 +26,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("All [R]'s systems are nominal."))
 		return TRUE
-	
+
 	if (ishuman(target))		//Repairing robolimbs
 		var/mob/living/carbon/human/H = target
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
@@ -44,7 +44,7 @@
 				to_chat(user, SPAN_NOTICE("Nothing to fix here."))
 			else if(can_use(1))
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-				S.heal_damage(15, 15, robo_repair = 1)
+				S.heal_organ_damage(15, 15, robo_repair = 1)
 				use(1)
 				user.visible_message(
 					SPAN_NOTICE("\The [user] applies some nanite paste on [user != target ? "[target]'s [S.name]" : "[S]"] with [src]."),

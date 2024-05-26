@@ -180,7 +180,7 @@
 				SPAN_NOTICE("You treat \the [target]'s [O.name] with \the [tool]'s contents."))
 
 			O &= ~ORGAN_DEAD
-			O.heal_damage(O.max_damage * (0.75 * (usable_amount / 5))) //Assuming they're using a dropper and completely pure chems, put the organ back to a working point
+			O.heal_organ_damage(O.max_damage * (0.75 * (usable_amount / 5))) //Assuming they're using a dropper and completely pure chems, put the organ back to a working point
 	else
 		to_chat(user,SPAN_WARNING("You transferred too little for the organ to regenerate!"))
 	qdel(temp_reagents)

@@ -63,10 +63,10 @@
 	// If we have repair capabilities, repair any damage.
 	if(weld_rate && occupant.get_damage(BRUTE))
 		var/repair = weld_rate - use_power_oneoff(weld_power_use * weld_rate, LOCAL) / weld_power_use
-		occupant.heal_damage(BRUTE, repair)
+		occupant.heal_damage(repair, BRUTE)
 	if(wire_rate && occupant.get_damage(BURN))
 		var/repair = wire_rate - use_power_oneoff(wire_power_use * wire_rate, LOCAL) / wire_power_use
-		occupant.heal_damage(BURN, repair)
+		occupant.heal_damage(repair, BURN)
 
 	var/obj/item/cell/target
 	if(isrobot(occupant))

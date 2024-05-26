@@ -53,7 +53,7 @@
 	var/list/datum/robot_component/parts = get_damaged_components(brute, burn)
 	if(!parts.len)	return
 	var/datum/robot_component/picked = pick(parts)
-	picked.heal_damage(brute,burn)
+	picked.heal_component_damage(brute,burn)
 
 /mob/living/silicon/robot/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
 	var/list/components = get_damageable_components()
@@ -95,7 +95,7 @@
 		var/brute_was = picked.brute_damage
 		var/burn_was = picked.electronics_damage
 
-		picked.heal_damage(brute,burn)
+		picked.heal_component_damage(brute,burn)
 
 		brute -= (brute_was-picked.brute_damage)
 		burn -= (burn_was-picked.electronics_damage)

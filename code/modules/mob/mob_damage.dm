@@ -60,7 +60,7 @@
 		//if(ELECTROCUTE)
 	return 0
 
-/mob/proc/heal_damage(damage_type, amount, do_update_health)
+/mob/proc/heal_damage(amount, damage_type, do_update_health)
 	return take_damage(-(amount), damage_type, do_update_health = do_update_health)
 
 /// Returns TRUE if updates should happen, FALSE if not.

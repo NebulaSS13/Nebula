@@ -76,11 +76,11 @@
 		return FALSE
 	set_stat(CONSCIOUS)
 	if(prob(30))
-		heal_damage(OXY, 1, do_update_health = FALSE)
-		heal_damage(TOX, 1, do_update_health = FALSE)
-		heal_damage(BURN, 1, do_update_health = FALSE)
-		heal_damage(CLONE, 1, do_update_health = FALSE)
-		heal_damage(BRUTE, 1)
+		heal_damage(1, OXY,   do_update_health = FALSE)
+		heal_damage(1, TOX,   do_update_health = FALSE)
+		heal_damage(1, BURN,  do_update_health = FALSE)
+		heal_damage(1, CLONE, do_update_health = FALSE)
+		heal_damage(1)
 
 /mob/living/slime/handle_nutrition_and_hydration()
 	. = ..()

@@ -14,7 +14,7 @@
 		psi.stamina = min(psi.max_stamina, psi.stamina + rand(1,3))
 		soothed = TRUE
 	else if(psi.owner.get_damage(BRAIN) > 0)
-		psi.owner.heal_damage(BRAIN, 1)
+		psi.owner.heal_damage(1, BRAIN)
 		soothed = TRUE
 	if(soothed && prob(10))
 		to_chat(psi.owner, SPAN_NOTICE("<i>[pick(balm_messages)]</i>"))

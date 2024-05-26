@@ -129,7 +129,7 @@
 		if(prob(10))
 			for(var/obj/item/organ/internal/I in occupant.get_internal_organs())
 				if(BP_IS_CRYSTAL(I) && I.damage)
-					I.heal_damage(rand(3,5))
+					I.heal_organ_damage(rand(3,5))
 					if(prob(25))
 						to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [I.name]."))
 
@@ -143,7 +143,7 @@
 							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath dissolves the [implanted_object.name]."))
 							qdel(implanted_object)
 					if(E.brute_dam || E.burn_dam)
-						E.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
+						E.heal_organ_damage(rand(3,5), rand(3,5), robo_repair = 1)
 						if(prob(25))
 							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [E.name]."))
 						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))

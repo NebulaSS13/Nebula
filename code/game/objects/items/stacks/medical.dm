@@ -230,7 +230,7 @@
 		playsound(src, pick(apply_sounds), 25)
 		W.bandage()
 		W.disinfect()
-		W.heal_damage(heal_brute)
+		W.heal_wound_damage(heal_brute)
 		used++
 	affecting.update_damages()
 	if(used == amount)
@@ -278,7 +278,7 @@
 		SPAN_NOTICE("[user] covers wounds on [target]'s [affecting.name] with regenerative membrane."),
 		SPAN_NOTICE("You cover wounds on [target]'s [affecting.name] with regenerative membrane.")
 	)
-	affecting.heal_damage(0,heal_burn)
+	affecting.heal_organ_damage(0,heal_burn)
 	use(1)
 	affecting.salve()
 	affecting.disinfect()
@@ -421,5 +421,5 @@
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] patches the fractures on \the [target]'s [affecting.name] with resin."), \
 			SPAN_NOTICE("You patch fractures on \the [target]'s [affecting.name] with resin."))
-		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
+		affecting.heal_organ_damage(heal_brute, heal_burn, robo_repair = TRUE)
 		use(1)

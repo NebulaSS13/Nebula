@@ -226,7 +226,7 @@
 	if(blood_volume < BLOOD_VOLUME_SURVIVE)
 		to_chat(user, SPAN_DANGER("Parts of \the [src] didn't survive the procedure due to lack of air supply!"))
 		set_max_damage(FLOOR(max_damage - 0.25*damage))
-	heal_damage(damage)
+	heal_organ_damage(damage)
 
 /obj/item/organ/internal/brain/die()
 	if(istype(_brainmob) && _brainmob.stat != DEAD)

@@ -308,7 +308,7 @@
 		powerlevel++
 		if(powerlevel > 10)
 			powerlevel = 10
-			heal_damage(TOX, 10)
+			heal_damage(10, TOX)
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0
