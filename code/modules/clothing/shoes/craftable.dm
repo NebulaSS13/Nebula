@@ -13,6 +13,7 @@
 /obj/item/clothing/shoes/craftable/boots
 	name = "boots"
 	desc = "A pair of tall boots."
+	icon = 'icons/clothing/feet/tall_boots.dmi'
 
 /obj/item/clothing/shoes/craftable/set_material(var/new_material)
 	..()
