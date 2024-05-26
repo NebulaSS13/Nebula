@@ -161,7 +161,7 @@
 		input_info = null
 		refreshing_input = TRUE
 		input_flow_setting = input("What would you like to set the rate limit to?", "Set Volume", input_flow_setting) as num|null
-		input_flow_setting = clamp(0, input_flow_setting, ATMOS_DEFAULT_VOLUME_PUMP+500)
+		input_flow_setting = clamp(input_flow_setting, 0, ATMOS_DEFAULT_VOLUME_PUMP+500)
 		signal.data = list ("tag" = input_tag, "set_volume_rate" = input_flow_setting)
 		. = 1
 
@@ -188,7 +188,7 @@
 		output_info = null
 		refreshing_output = TRUE
 		pressure_setting = input("How much pressure would you like to output?", "Set Pressure", pressure_setting) as num|null
-		pressure_setting = clamp(0, pressure_setting, MAX_PUMP_PRESSURE)
+		pressure_setting = clamp(pressure_setting, 0, MAX_PUMP_PRESSURE)
 		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]", "status" = 1)
 		. = 1
 
@@ -196,7 +196,7 @@
 		output_info = null
 		refreshing_output = TRUE
 		pressure_setting = input("How much pressure would you like to maintain inside the core?", "Set Core Pressure", pressure_setting) as num|null
-		pressure_setting = clamp(0, pressure_setting, MAX_PUMP_PRESSURE)
+		pressure_setting = clamp(pressure_setting, 0, MAX_PUMP_PRESSURE)
 		signal.data = list ("tag" = output_tag, "set_external_pressure" = pressure_setting, "checks" = 1, "status" = 1)
 		. = 1
 

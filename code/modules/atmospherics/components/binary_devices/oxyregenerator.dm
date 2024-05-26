@@ -68,7 +68,7 @@
 
 	if (phase == "processing")//processing CO2 in tank
 		if (inner_tank.gas[/decl/material/gas/carbon_dioxide])
-			var/co2_intake = clamp(0, inner_tank.gas[/decl/material/gas/carbon_dioxide], power_setting*wait/10)
+			var/co2_intake = clamp(inner_tank.gas[/decl/material/gas/carbon_dioxide], 0, power_setting*wait/10)
 			last_flow_rate = co2_intake
 			inner_tank.adjust_gas(/decl/material/gas/carbon_dioxide, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
@@ -144,5 +144,5 @@
 		update_icon()
 		return 1
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		power_setting = clamp(1, text2num(href_list["setPower"]), 5)
+		power_setting = clamp(text2num(href_list["setPower"]), 1, 5)
 		return 1
