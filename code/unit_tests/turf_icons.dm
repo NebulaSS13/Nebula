@@ -101,7 +101,7 @@
 					. += "missing icon_state [i] from icon '[icon]'"
 
 		if(icon_edge_layer >= 0)
-			for(var/checkdir in global.cardinal)
+			for(var/checkdir in (icon_has_corners ? global.alldirs : global.cardinal))
 				if(icon_edge_states)
 					for(var/i = 0 to icon_edge_states)
 						var/check_state = "edge[checkdir][i]"
@@ -110,9 +110,3 @@
 				var/check_state = "edge[checkdir]"
 				if(!check_state_in_icon(check_state, icon))
 					. += "missing edge state '[check_state]' in icon '[icon]'"
-
-			if(icon_has_corners)
-				for(var/checkdir in global.cardinal)
-					var/check_state = "corner[checkdir]"
-					if(!check_state_in_icon(check_state, icon))
-						. += "missing corner state '[check_state]' in icon '[icon]'"
