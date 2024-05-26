@@ -11,6 +11,9 @@
 	var/max_amount = 1 // How many instances can be queued at once
 	var/list/required_technology
 	var/list/species_locked
+	/// Set to explicit FALSE to cause n stacks to be created instead of 1 stack of n amount.
+	/// Does not work for non-stacks being created as stacks, do not set to explicit TRUE for non-stacks.
+	var/pass_multiplier_to_product_new
 
 // Populate name and resources from the product type.
 /datum/fabricator_recipe/proc/get_product_name()
@@ -20,6 +23,8 @@
 	..()
 	if(!path)
 		return
+	if(isnull(pass_multiplier_to_product_new))
+		pass_multiplier_to_product_new = ispath(path, /obj/item/stack)
 	if(!name)
 		name = get_product_name()
 	if(required_technology == TRUE)
@@ -57,7 +62,7 @@
 
 /datum/fabricator_recipe/proc/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = list()
-	if(ispath(path, /obj/item/stack))
+	if(ispath(path, /obj/item/stack) && pass_multiplier_to_product_new)
 		. += new path(location, order.multiplier)
 	else
 		for(var/i = 1, i <= order.multiplier, i++)

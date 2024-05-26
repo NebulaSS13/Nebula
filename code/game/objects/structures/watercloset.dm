@@ -329,7 +329,7 @@ var/global/list/hygiene_props = list()
 	if(!on || !istype(M))
 		return
 	var/water_temperature = temperature_settings[watertemp]
-	var/temp_adj = clamp(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
+	var/temp_adj = clamp(water_temperature - M.bodytemperature, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
