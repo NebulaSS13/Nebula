@@ -2958,7 +2958,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "kr" = (
-/obj/machinery/shield_generator{
+/obj/machinery/shield_generator/mapped{
 	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances. This one seems to be in a state of disrepair.";
 	name = "disused shield generator"
 	},

@@ -371,7 +371,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "aR" = (
-/obj/machinery/shield_generator,
+/obj/machinery/shield_generator/mapped,
 /obj/structure/cable,
 /obj/structure/cable/blue{
 	icon_state = "1-2"
