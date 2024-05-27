@@ -107,7 +107,7 @@
 		if(UNIX) lib = "libprof.so"
 		else CRASH("unsupported platform")
 
-	var/init = LIBCALL(lib, "init")()
+	var/init = call_ext(lib, "init")()
 	if("0" != init) CRASH("[lib] init error: [init]")
 
 /world/New()

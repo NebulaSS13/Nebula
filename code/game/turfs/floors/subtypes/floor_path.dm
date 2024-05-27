@@ -38,70 +38,23 @@
 //	initial_flooring = /decl/flooring/path/herringbone
 
 // Material subtypes.
-/* Uncomment when 515 is the required base version.
 #define PATH_MATERIAL_SUBTYPES(material_name) \
 /turf/floor/natural/path/##material_name { \
-	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
-	base_color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	color = /decl/material/solid/stone/##material_name::color; \
+	base_color = /decl/material/solid/stone/##material_name::color; \
 	material = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/natural/path/herringbone/##material_name { \
-	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
-	base_color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	color = /decl/material/solid/stone/##material_name::color; \
+	base_color = /decl/material/solid/stone/##material_name::color; \
 	material = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/natural/path/running_bond/##material_name { \
-	color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
-	base_color = TYPE_INITIAL(/decl/material/solid/stone/##material_name, color); \
+	color = /decl/material/solid/stone/##material_name::color; \
+	base_color = /decl/material/solid/stone/##material_name::color; \
 	material = /decl/material/solid/stone/##material_name; \
 }
 PATH_MATERIAL_SUBTYPES(basalt)
 PATH_MATERIAL_SUBTYPES(granite)
 PATH_MATERIAL_SUBTYPES(marble)
 #undef PATH_MATERIAL_SUBTYPES
-*/
-
-/turf/floor/natural/path/basalt
-	color      = COLOR_DARK_GRAY
-	base_color = COLOR_DARK_GRAY
-	material   = /decl/material/solid/stone/basalt
-
-/turf/floor/natural/path/running_bond/basalt
-	color      = COLOR_DARK_GRAY
-	base_color = COLOR_DARK_GRAY
-	material   = /decl/material/solid/stone/basalt
-
-/turf/floor/natural/path/herringbone/basalt
-	color      = COLOR_DARK_GRAY
-	base_color = COLOR_DARK_GRAY
-	material   = /decl/material/solid/stone/basalt
-
-/turf/floor/natural/path/granite
-	color      = "#615f5f"
-	base_color = "#615f5f"
-	material   = /decl/material/solid/stone/granite
-
-/turf/floor/natural/path/running_bond/granite
-	color      = "#615f5f"
-	base_color = "#615f5f"
-	material   = /decl/material/solid/stone/granite
-
-/turf/floor/natural/path/herringbone/granite
-	color      = "#615f5f"
-	base_color = "#615f5f"
-	material   = /decl/material/solid/stone/granite
-
-/turf/floor/natural/path/marble
-	color      = "#aaaaaa"
-	base_color = "#aaaaaa"
-	material   = /decl/material/solid/stone/marble
-
-/turf/floor/natural/path/running_bond/marble
-	color      = "#aaaaaa"
-	base_color = "#aaaaaa"
-	material   = /decl/material/solid/stone/marble
-
-/turf/floor/natural/path/herringbone/marble
-	color      = "#aaaaaa"
-	base_color = "#aaaaaa"
-	material   = /decl/material/solid/stone/marble

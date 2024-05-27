@@ -130,7 +130,6 @@ var/global/list/localhost_addresses = list(
 
 	deactivate_darkmode(clear_chat = FALSE) // Overwritten if the pref is set later.
 
-	#if DM_VERSION >= 512
 	var/bad_version = byond_version < get_config_value(/decl/config/num/minimum_byond_version)
 	var/bad_build   = byond_build < get_config_value(/decl/config/num/minimum_byond_build)
 
@@ -144,8 +143,6 @@ var/global/list/localhost_addresses = list(
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
-
-	#endif
 
 	var/local_connection = (get_config_value(/decl/config/toggle/on/auto_local_admin) && (isnull(address) || global.localhost_addresses[address]))
 	if(!local_connection)
