@@ -1,5 +1,6 @@
 //TODO: Kill this in lieu of some more dynamic system
 /decl/xenoarch_digsite
+	abstract_type = /decl/xenoarch_digsite
 	var/weight = 85      // how likely it is to appear
 	var/can_have_anomalies = TRUE // if it can spawn full sized anomaly objects
 	var/list/find_types	// find type = weight
