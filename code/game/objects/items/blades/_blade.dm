@@ -55,6 +55,25 @@
 
 	. = ..()
 
+	if(!has_extension(src, /datum/extension/tool))
+		// If this were an `/obj/item/tool` subtype, we could get away with just doing this in `get_initial_tool_qualities()`.
+		var/list/initial_tool_qualities = list(
+			TOOL_SCALPEL =     TOOL_QUALITY_MEDIOCRE,
+			TOOL_SAW =         TOOL_QUALITY_BAD,
+			TOOL_RETRACTOR =   TOOL_QUALITY_BAD,
+			TOOL_SCREWDRIVER = TOOL_QUALITY_BAD,
+		)
+		switch(w_class)
+			if(0 to ITEM_SIZE_SMALL)
+				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_NONE
+			if(ITEM_SIZE_SMALL to ITEM_SIZE_NORMAL) // Since ITEM_SIZE_SMALL was already covered, this is just ITEM_SIZE_NORMAL.
+				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_WORST
+			if(ITEM_SIZE_NORMAL to ITEM_SIZE_LARGE)
+				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_BAD
+			else
+				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_MEDIOCRE
+		set_extension(src, /datum/extension/tool/variable/simple, initial_tool_qualities)
+
 	shine = istype(material) ? clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * ReadHSV(RGBtoHSV(material.color))[3])) : null
 	icon_state = ICON_STATE_WORLD
 	on_update_icon()
