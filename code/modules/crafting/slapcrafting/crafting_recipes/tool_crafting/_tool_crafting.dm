@@ -31,6 +31,10 @@ var/global/list/_tool_crafting_components = list(
 	/obj/item/tool/hammer/sledge = list(
 		/obj/item/tool_component/head/sledgehammer,
 		/obj/item/tool_component/handle/long
+	),
+	/obj/item/tool/axe = list(
+		/obj/item/tool_component/head/handaxe,
+		/obj/item/tool_component/handle/short
 	)
 )
 
