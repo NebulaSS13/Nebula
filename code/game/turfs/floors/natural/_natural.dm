@@ -20,6 +20,8 @@
 	var/icon_edge_layer = -1
 	var/icon_edge_states
 	var/icon_has_corners = FALSE
+	/// The type to use when determining if a turf is our neighbour. If null, defaults to src's type.
+	var/neighbour_type
 
 	///Overrides the level's strata for this turf.
 	var/strata_override
@@ -41,6 +43,8 @@
 
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
+
+	neighbour_type ||= type
 
 	// TEMP: set these so putting tiles over natural turfs doesn't make green sand.
 	base_name       = name

@@ -9,6 +9,7 @@
 	icon = 'icons/turf/flooring/legacy/cobblestone.dmi'
 	icon_state = "0"
 	material = /decl/material/solid/stone/sandstone
+	neighbour_type = /turf/floor/natural/path
 //	initial_flooring = /decl/flooring/path/cobblestone
 	// If null, this is just skipped.
 	var/paving_adjective = "cobbled"
@@ -43,6 +44,7 @@
 	paving_adjective = null
 	paver_adjective = "staggered"
 	paver_noun = "bricks"
+	icon_edge_layer = -1
 //	initial_flooring = /decl/flooring/path/running_bond
 
 /turf/floor/natural/path/herringbone
@@ -50,6 +52,7 @@
 	paving_adjective = "herringbone"
 	paver_adjective = null
 	paver_noun = "bricks"
+	icon_edge_layer = -1
 //	initial_flooring = /decl/flooring/path/herringbone
 
 // Material subtypes.

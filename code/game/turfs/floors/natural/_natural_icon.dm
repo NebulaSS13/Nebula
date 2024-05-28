@@ -25,8 +25,8 @@
 		if(!isturf(turf_to_check) || turf_to_check.density)
 			continue
 
-		// We consider adjacent same-type turfs within our height range to be neighbors.
-		if(istype(turf_to_check, type) && my_height == turf_to_check.get_physical_height())
+		// We consider adjacent turfs of our neighbour_type within our height range to be neighbors.
+		if(istype(turf_to_check, neighbour_type) && my_height == turf_to_check.get_physical_height())
 			neighbors |= direction
 			continue
 
