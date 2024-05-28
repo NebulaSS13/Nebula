@@ -76,7 +76,7 @@ SUBSYSTEM_DEF(xenoarch)
 					archeo_turf.update_icon()
 
 			//have a chance for an artifact to spawn here, but not in animal or plant digsites
-			
+
 			var/decl/xenoarch_digsite/D = GET_DECL(digsite)
 			if(isnull(M.artifact_find) && D.can_have_anomalies)
 				artifact_spawning_turfs.Add(archeo_turf)
@@ -102,7 +102,7 @@ SUBSYSTEM_DEF(xenoarch)
 
 /datum/controller/subsystem/xenoarch/proc/get_random_digsite_type()
 	if(!digsite_types_weighted.len)
-		var/list/digsites = decls_repository.get_decls_of_type(/decl/xenoarch_digsite)
+		var/list/digsites = decls_repository.get_decls_of_subtype(/decl/xenoarch_digsite)
 		for(var/D in digsites)
 			var/decl/xenoarch_digsite/digsite = digsites[D]
 			digsite_types_weighted[D] = digsite.weight
@@ -110,7 +110,7 @@ SUBSYSTEM_DEF(xenoarch)
 
 /datum/controller/subsystem/xenoarch/proc/get_nearest_artifact(var/turf/source)
 	var/artifact_distance = INFINITY
-	var/artifact_id 
+	var/artifact_id
 	for(var/turf/wall/natural/T in artifact_spawning_turfs)
 		if(T.artifact_find)
 			var/cur_dist = get_dist(source, T) * 2
