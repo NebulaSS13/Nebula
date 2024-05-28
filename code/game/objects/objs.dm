@@ -10,6 +10,7 @@
 	current_health = null
 
 	var/obj_flags
+	var/datum/talking_atom/talking_atom
 	var/list/req_access
 	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
@@ -45,6 +46,7 @@
 	UNSETEMPTY(matter)
 
 /obj/Destroy()
+	QDEL_NULL(talking_atom)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 

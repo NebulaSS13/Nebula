@@ -1,26 +1,34 @@
-/obj/var/datum/talking_atom/talking_atom
-
 /datum/talking_atom
 	var/list/heard_words = list()
 	var/last_talk_time = 0
-	var/atom/holder_atom
+	var/obj/holder_obj
 	var/talk_interval = 50
 	var/talk_chance = 10
 
-/datum/talking_atom/New(atom/holder)
-	holder_atom = holder
-	if(holder_atom)
+/datum/talking_atom/New(obj/holder)
+	if(!isobj(holder))
+		CRASH("Expected holder to be /obj, received [holder] ([holder.type])")
+	holder_obj = holder
+	if(holder_obj)
 		START_PROCESSING(SSprocessing, src)
 
+/datum/talking_atom/Destroy(force)
+	if(holder_obj)
+		STOP_PROCESSING(SSprocessing, src)
+	if(holder_obj?.talking_atom == src)
+		holder_obj.talking_atom = null
+	holder_obj = null
+	return ..()
+
 /datum/talking_atom/Process()
-	if(!holder_atom)
+	if(!holder_obj)
 		STOP_PROCESSING(SSprocessing, src)
 
 	else if(heard_words.len >= 1 && world.time > last_talk_time + talk_interval && prob(talk_chance))
 		SaySomething()
 
 /datum/talking_atom/proc/catchMessage(var/msg, var/mob/source)
-	if(!holder_atom)
+	if(!holder_obj)
 		return
 
 	var/list/seperate = list()
@@ -48,10 +56,10 @@
 //		log_debug("Adding [lowertext(seperate[next])] to [lowertext(seperate[Xa])]")
 
 	if(prob(30))
-		var/list/options = list("[holder_atom] seems to be listening intently to [source]...",\
-			"[holder_atom] seems to be focusing on [source]...",\
-			"[holder_atom] seems to turn it's attention to [source]...")
-		holder_atom.loc.visible_message("<span class='notice'>[html_icon(holder_atom)] [pick(options)]</span>")
+		var/list/options = list("[holder_obj] seems to be listening intently to [source]...",\
+			"[holder_obj] seems to be focusing on [source]...",\
+			"[holder_obj] seems to turn it's attention to [source]...")
+		holder_obj.loc.visible_message("<span class='notice'>[html_icon(holder_obj)] [pick(options)]</span>")
 
 	if(prob(20))
 		spawn(2)
@@ -66,7 +74,7 @@
 			log_debug("[X]") */
 
 /datum/talking_atom/proc/SaySomething(var/word = null)
-	if(!holder_atom)
+	if(!holder_obj)
 		return
 
 	var/msg
@@ -105,15 +113,5 @@
 		else
 			msg+="!"
 
-	var/list/listening = viewers(holder_atom)
-	for(var/mob/M in SSmobs.mob_list)
-		if (!M.client)
-			continue //skip monkeys and leavers
-		if (isnewplayer(M))
-			continue
-		if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH)
-			listening|=M
-
-	for(var/mob/M in listening)
-		to_chat(M, "[html_icon(holder_atom)] <b>[holder_atom]</b> reverberates, <span class='notice'>\"[msg]\"</span>")
+	holder_obj.audible_message("[html_icon(holder_obj)] <b>[holder_obj]</b> reverberates, <span class='notice'>\"[msg]\"</span>", check_ghosts = /datum/client_preference/ghost_ears)
 	last_talk_time = world.time
