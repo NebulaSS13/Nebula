@@ -56,3 +56,21 @@
 // TODO: Select hilt, guard, etc. as striking material based on dynamic intents
 /obj/item/bladed/folding/get_striking_material(mob/user, atom/target)
 	. = open ? ..() : hilt_material
+
+/obj/item/bladed/folding/get_tool_speed(archetype)
+	return open ? ..() : 0
+
+/obj/item/bladed/folding/get_tool_quality(archetype)
+	if(open && archetype == TOOL_HATCHET)
+		// If this were an `/obj/item/tool` subtype, we could get away with just doing this based on
+		// `open_item_size` in `get_initial_tool_qualities()`.
+		switch(w_class)
+			if(0 to ITEM_SIZE_SMALL)
+				return TOOL_QUALITY_NONE
+			if(ITEM_SIZE_SMALL to ITEM_SIZE_NORMAL) // Since ITEM_SIZE_SMALL was already covered, this is just ITEM_SIZE_NORMAL.
+				return TOOL_QUALITY_WORST
+			if(ITEM_SIZE_NORMAL to ITEM_SIZE_LARGE)
+				return TOOL_QUALITY_BAD
+			else
+				return TOOL_QUALITY_MEDIOCRE
+	return open ? ..() : 0
