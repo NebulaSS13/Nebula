@@ -182,9 +182,9 @@
 	message = filter_modify_message(message)
 	var/check_ghosts = client ? /datum/client_preference/ghost_sight : null
 	if(m_type == VISIBLE_MESSAGE)
-		visible_message(message, checkghosts = check_ghosts)
+		visible_message(message, check_ghosts = check_ghosts)
 	else
-		audible_message(message, checkghosts = check_ghosts)
+		audible_message(message, check_ghosts = check_ghosts)
 
 // Specific mob type exceptions below.
 /mob/living/silicon/ai/emote(var/act, var/type, var/message)
