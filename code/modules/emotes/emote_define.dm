@@ -266,11 +266,11 @@ var/global/list/_emotes_by_key
 			if(isliving(user))
 				var/mob/living/L = user
 				if(HAS_STATUS(L, STAT_SILENCE))
-					M.visible_message(message = "[user] opens their mouth silently!", self_message = "You cannot say anything!", blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
+					M.visible_message(message = "[user] opens their mouth silently!", self_message = "You cannot say anything!", blind_message = emote_message_impaired, check_ghosts = /datum/client_preference/ghost_sight)
 					return FALSE
-				M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, hearing_distance = use_range, checkghosts = /datum/client_preference/ghost_sight, radio_message = use_radio)
+				M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, hearing_distance = use_range, check_ghosts = /datum/client_preference/ghost_sight, radio_message = use_radio)
 		else
-			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, range = use_range, checkghosts = /datum/client_preference/ghost_sight)
+			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, range = use_range, check_ghosts = /datum/client_preference/ghost_sight)
 
 	do_extra(user, target)
 	do_sound(user)

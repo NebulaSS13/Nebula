@@ -195,7 +195,7 @@
 				hear += I
 	return hear
 
-/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/checkghosts = null)
+/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/check_ghosts = null)
 	var/list/hear = list()
 	DVIEW(hear, range, T, INVISIBILITY_MAXIMUM)
 	var/list/hearturfs = list()
@@ -209,7 +209,7 @@
 			hearturfs += get_turf(AM)
 
 	for(var/mob/M in global.player_list)
-		if(checkghosts && M.stat == DEAD && M.get_preference_value(checkghosts) != PREF_NEARBY)
+		if(check_ghosts && M.stat == DEAD && M.get_preference_value(check_ghosts) != PREF_NEARBY)
 			mobs |= M
 		else if(get_turf(M) in hearturfs)
 			mobs |= M
