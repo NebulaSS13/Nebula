@@ -32,7 +32,8 @@ var/global/list/all_skill_verbs
 	. = ..()
 
 /datum/skillset/proc/get_value(skill_path)
-	. = skill_list[skill_path] || default_value
+	var/decl/hierarchy/skill/skill = GET_DECL(skill_path)
+	. = skill_list[skill_path] || (isnull(skill.default_value) ? src.default_value : skill.default_value)
 	for(var/datum/skill_buff/SB in skill_buffs)
 		. += SB.buffs[skill_path]
 

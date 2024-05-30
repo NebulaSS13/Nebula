@@ -7,6 +7,7 @@
 	var/desc = "Placeholder skill"        // Generic description of this skill.
 	var/difficulty = SKILL_AVERAGE        //Used to compute how expensive the skill is
 	var/default_max = SKILL_ADEPT         //Makes the skill capped at this value in selection unless overriden at job level.
+	var/default_value                     // The specific default value used for this skill. If null, uses the skillset's default.
 	var/prerequisites                     // A list of skill prerequisites, if needed.
 
    	// Names for different skill values, in order from 1 up.
@@ -254,6 +255,7 @@
 		"Experienced" = "You're a pathologist, or detective. You've seen your share of bizarre cases, and spent a lot of time putting pieces of forensic puzzle together, so you're faster now.<br>- You can notice additional details upon examining, such as fibers, partial prints, and gunshot residue.",
 		"Master"      = "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.<br>- You can notice traces of wiped off blood."
 	)
+	default_value = SKILL_NONE // defaulting this to SKILL_DEFAULT leads to a bunch of annoying examine messages
 
 /decl/hierarchy/skill/security/forensics/get_cost(var/level)
 	switch(level)
