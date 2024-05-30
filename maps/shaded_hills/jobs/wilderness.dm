@@ -14,6 +14,13 @@
 	spawn_positions         = 1
 	total_positions         = 1
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/miner
+	min_skill               = list(
+		SKILL_HAULING       = SKILL_ADEPT, // general physical activity
+		SKILL_METALWORK     = SKILL_BASIC, // ore smelting, metallurgy
+		SKILL_STONEMASONRY  = SKILL_BASIC, // experienced working with stone
+		SKILL_SCULPTING     = SKILL_BASIC, // producing clay molds, firing pottery
+	)
+	skill_points            = 20
 
 /obj/abstract/landmark/start/shaded_hills/miner
 	name                    = "Miner"
@@ -25,6 +32,17 @@
 	spawn_positions         = 1
 	total_positions         = 1
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/herbalist
+	min_skill               = list(
+		SKILL_BOTANY        = SKILL_ADEPT, // growing, processing, and identifying plants
+		SKILL_MEDICAL       = SKILL_BASIC, // identifying illnesses and applying medicines
+		SKILL_CHEMISTRY     = SKILL_BASIC, // processing plant extracts into tinctures, ointments, etc
+	)
+	max_skill               = list(
+		SKILL_MEDICAL       = SKILL_MAX,
+		SKILL_ANATOMY       = SKILL_MAX,
+		SKILL_CHEMISTRY     = SKILL_MAX,
+	)
+	skill_points            = 22
 
 /obj/abstract/landmark/start/shaded_hills/herbalist
 	name                    = "Herbalist"
@@ -36,6 +54,13 @@
 	spawn_positions         = 1
 	total_positions         = 1
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/forester
+	min_skill               = list(
+		SKILL_HAULING       = SKILL_ADEPT, // overall physical activity
+		SKILL_BOTANY        = SKILL_BASIC, // growing and harvesting plants, trees, etc
+		SKILL_COOKING       = SKILL_BASIC, // butchery
+		SKILL_CARPENTRY     = SKILL_ADEPT, // tree felling
+	)
+	skill_points            = 22
 
 /obj/abstract/landmark/start/shaded_hills/forester
 	name                    = "Forester"

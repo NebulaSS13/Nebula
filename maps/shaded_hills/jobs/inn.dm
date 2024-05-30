@@ -23,6 +23,15 @@
 		"inn interior" = /decl/material/solid/metal/copper,
 		"inn exterior" = /decl/material/solid/metal/iron
 	)
+	min_skill               = list(
+		// notably: no athletics requirement, and no literacy requirement but i'm less certain on that
+		SKILL_FINANCE       = SKILL_BASIC, // at least competent enough to keep the inn running
+		SKILL_COOKING       = SKILL_ADEPT, // and should at least be skilled enough to run the inn on their own
+	)
+	max_skill               = list(
+		SKILL_CHEMISTRY     = SKILL_ADEPT, // a bit more leeway than most jobs, but still not as good as the herbalist
+	)
+	skill_points            = 22
 
 /obj/abstract/landmark/start/shaded_hills/innkeeper
 	name                    = "Innkeeper"
@@ -34,6 +43,12 @@
 	spawn_positions         = 3
 	total_positions         = 3
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/inn_worker
+	min_skill               = list(
+		SKILL_HAULING       = SKILL_BASIC, // must be fit enough to do basic tasks around the inn
+		SKILL_COOKING       = SKILL_BASIC, // and should be skilled enough to do basic cooking/farming work
+		SKILL_BOTANY        = SKILL_BASIC,
+	)
+	skill_points            = 18
 
 /obj/abstract/landmark/start/shaded_hills/inn_worker
 	name                    = "Inn Worker"
@@ -45,6 +60,10 @@
 	spawn_positions         = 2
 	total_positions         = 2
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/bartender
+	min_skill               = list(
+		SKILL_COOKING       = SKILL_EXPERT // skilled with food and drink
+	)
+	skill_points            = 18
 
 /obj/abstract/landmark/start/shaded_hills/bartender
 	name                    = "Bartender"
@@ -56,6 +75,11 @@
 	spawn_positions         = 3
 	total_positions         = 3
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/farmer
+	min_skill               = list(
+		SKILL_HAULING       = SKILL_ADEPT, // farming can be demanding work
+		SKILL_BOTANY        = SKILL_ADEPT, // must be skilled enough to have plants reliably survive when planted
+	)
+	skill_points            = 18
 
 /obj/abstract/landmark/start/shaded_hills/farmer
 	name                    = "Farmer"

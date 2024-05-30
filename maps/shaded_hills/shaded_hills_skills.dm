@@ -78,53 +78,53 @@
 
 // SCULPTING OVERRIDES
 /decl/material/solid/clay
-	crafting_skill = /decl/hierarchy/skill/crafting/sculpting
+	crafting_skill = SKILL_SCULPTING
 
 /decl/material/solid/soil
-	crafting_skill = /decl/hierarchy/skill/crafting/sculpting
+	crafting_skill = SKILL_SCULPTING
 
 /decl/material/solid/organic/wax
-	crafting_skill = /decl/hierarchy/skill/crafting/sculpting
+	crafting_skill = SKILL_SCULPTING
 
 // TEXTILES OVERRIDES
 /obj/structure/textiles
-	work_skill = /decl/hierarchy/skill/crafting/textiles
+	work_skill = SKILL_TEXTILES
 
 /obj/item/stack/material/skin
-	work_skill = /decl/hierarchy/skill/crafting/textiles
+	work_skill = SKILL_TEXTILES
 
 /obj/item/chems/food/butchery/offal
-	work_skill = /decl/hierarchy/skill/crafting/textiles
+	work_skill = SKILL_TEXTILES
 
 /decl/material/solid/organic/cloth
-	crafting_skill = /decl/hierarchy/skill/crafting/textiles
+	crafting_skill = SKILL_TEXTILES
 
 /decl/material/solid/organic/skin
-	crafting_skill = /decl/hierarchy/skill/crafting/textiles
+	crafting_skill = SKILL_TEXTILES
 
 /decl/material/solid/organic/leather
-	crafting_skill = /decl/hierarchy/skill/crafting/textiles
+	crafting_skill = SKILL_TEXTILES
 
 /decl/material/solid/organic/plantmatter
-	crafting_skill = /decl/hierarchy/skill/crafting/textiles
+	crafting_skill = SKILL_TEXTILES
 
 // STONEMASONRY OVERRIDES
 /decl/material/solid/stone
-	crafting_skill = /decl/hierarchy/skill/crafting/stonemasonry
+	crafting_skill = SKILL_STONEMASONRY
 
 // METALWORK OVERRIDES
 /decl/material/solid/metal
-	crafting_skill = /decl/hierarchy/skill/crafting/metalwork
+	crafting_skill = SKILL_METALWORK
 
 /obj/item/chems/mould
-	work_skill = /decl/hierarchy/skill/crafting/metalwork
+	work_skill = SKILL_METALWORK
 
 // CARPENTRY OVERRIDES
 /decl/material/solid/organic/wood
-	crafting_skill = /decl/hierarchy/skill/crafting/carpentry
+	crafting_skill = SKILL_CARPENTRY
 
 /decl/material/solid/organic/plantmatter/pith // not quite wood but it's basically still wood carving
-	crafting_skill = /decl/hierarchy/skill/crafting/carpentry
+	crafting_skill = SKILL_CARPENTRY
 
 // MISC OVERRIDES
 /decl/stack_recipe
@@ -142,5 +142,6 @@
 		SKILL_ELECTRICAL,
 		SKILL_ATMOS,
 		SKILL_ENGINES,
-		SKILL_DEVICES
+		SKILL_DEVICES,
+		SKILL_CONSTRUCTION, // Anything using this should be replaced with another skill.
 	)
