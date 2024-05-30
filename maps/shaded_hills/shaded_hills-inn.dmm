@@ -476,6 +476,10 @@
 /obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
+"Gq" = (
+/obj/abstract/landmark/start/shaded_hills/traveller/learned,
+/turf/floor/natural/path/basalt,
+/area/shaded_hills/outside/downlands)
 "Gs" = (
 /obj/structure/railing/mapped/ebony{
 	dir = 8
@@ -587,6 +591,10 @@
 "LN" = (
 /turf/wall/log/ebony,
 /area/shaded_hills/farmhouse)
+"Mb" = (
+/obj/abstract/landmark/start/shaded_hills/traveller/learned,
+/turf/floor/natural/path/running_bond/basalt,
+/area/shaded_hills/outside/downlands)
 "Mp" = (
 /obj/structure/wall_sconce/lantern,
 /turf/floor/natural/path/basalt,
@@ -7718,7 +7726,7 @@ cx
 TR
 TR
 EV
-Ic
+Mb
 EV
 TR
 TR
@@ -14254,7 +14262,7 @@ HI
 TR
 TR
 EV
-Ic
+Mb
 EV
 EV
 TR
@@ -22359,9 +22367,9 @@ HI
 TR
 TR
 EV
-EV
+Gq
 Ic
-EV
+Gq
 EV
 TR
 TR

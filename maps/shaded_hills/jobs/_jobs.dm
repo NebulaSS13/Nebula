@@ -2,6 +2,7 @@
 	id_hud_icons            = 'maps/shaded_hills/icons/hud.dmi'
 	allowed_jobs            = list(
 		/datum/job/shaded_hills/visitor/traveller,
+		/datum/job/shaded_hills/visitor/traveller/learned,
 		/datum/job/shaded_hills/local/miner,
 		/datum/job/shaded_hills/local/herbalist,
 		/datum/job/shaded_hills/local/forester,
