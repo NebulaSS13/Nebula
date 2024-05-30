@@ -1,4 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"af" = (
+/obj/abstract/landmark/start/shaded_hills/traveller/learned,
+/turf/floor/natural/path/basalt,
+/area/shaded_hills/outside/woods)
 "bL" = (
 /obj/abstract/landmark/latejoin,
 /turf/floor/natural/path/running_bond/basalt,
@@ -103,6 +107,10 @@
 /obj/structure/railing/mapped/ebony,
 /turf/floor/wood/ebony,
 /area/shaded_hills/outside/river/woods)
+"Co" = (
+/obj/abstract/landmark/start/shaded_hills/traveller/learned,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/woods)
 "DB" = (
 /obj/structure/drying_rack,
 /turf/floor/natural/dirt,
@@ -1881,7 +1889,7 @@ lC
 lC
 lC
 VA
-lU
+Co
 lU
 lU
 lU
@@ -2185,7 +2193,7 @@ lC
 lC
 lC
 VA
-Jd
+af
 LJ
 LJ
 LJ
