@@ -5,6 +5,8 @@
 	#include "../../mods/content/scaling_descriptors.dm"
 	#include "../../mods/content/fantasy/_fantasy.dme"
 
+	#include "_shaded_hills_defines.dm"
+
 	#include "areas/_areas.dm"
 	#include "areas/downlands.dm"
 	#include "areas/grassland.dm"

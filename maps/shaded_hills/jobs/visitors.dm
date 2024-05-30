@@ -14,6 +14,7 @@
 	spawn_positions         = -1
 	total_positions         = -1
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/traveller
+	skill_points            = 20
 
 /obj/abstract/landmark/start/shaded_hills/traveller
 	name                    = "Traveller"
