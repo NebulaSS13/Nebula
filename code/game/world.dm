@@ -131,7 +131,7 @@ var/global/world_topic_last = world.timeofday
 	if(global.using_map.reboot_sound)
 		sound_to(world, sound(pick(global.using_map.reboot_sound)))// random end sounds!! - LastyBatsy
 
-	Master.Shutdown()
+	// Master.Shutdown() // In almost all normal cases, world/Reboot() calls world/Del() which calls Shutdown() on the master controller. Having it here means it runs multiple times.
 
 	var/serverurl = get_config_value(/decl/config/text/server)
 	if(serverurl)	//if you set a server location in configuration, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
