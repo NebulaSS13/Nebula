@@ -106,7 +106,6 @@
 	name              = "excavation pick set"
 	icon              = 'icons/obj/items/storage/excavation.dmi'
 	icon_state        = "excavation"
-	item_state        = "utility"
 	desc              = "A rugged case containing a set of standardized picks used in archaeological digs."
 	item_state        = "syringe_kit"
 	slot_flags        = SLOT_LOWER_BODY

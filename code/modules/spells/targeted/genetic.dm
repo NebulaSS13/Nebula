@@ -81,7 +81,6 @@ code\game\dna\genes\goon_powers.dm
 	spell_flags = NOFACTION
 	invocation_type = SpI_SHOUT
 	charge_max = 60 SECONDS
-	spell_flags = 0
 
 	amt_dizziness = 0
 	amt_eye_blurry = 5

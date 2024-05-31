@@ -1,7 +1,6 @@
 /decl/stack_recipe/tool
 	category = "tool parts"
 	abstract_type               = /decl/stack_recipe/tool
-	category = "tool parts"
 	forbidden_craft_stack_types = null
 	craft_stack_types           = list(
 		/obj/item/stack/material/ore,

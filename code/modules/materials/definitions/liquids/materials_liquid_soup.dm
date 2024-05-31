@@ -59,7 +59,6 @@
 	name              = "broth"
 	codex_name        = "simple broth"
 	uid               = "liquid_soup_broth"
-	mask_name_suffix  = "broth"
 	solid_name        = "stock"
 	color             = "#8a7452"
 	mask_name_suffix  = "broth"

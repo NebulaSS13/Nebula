@@ -236,7 +236,6 @@
 	boiling_point = -33 CELSIUS
 	gas_symbol_html = "NH<sub>3</sub>"
 	gas_symbol = "NH3"
-	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 	taste_description = "mordant"
 	taste_mult = 2
 	lore_text = "A caustic substance commonly used in fertilizer or household cleaners."

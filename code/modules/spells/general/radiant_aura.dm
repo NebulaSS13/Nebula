@@ -1,7 +1,6 @@
 /spell/radiant_aura
 	name = "Radiant aura"
 	desc = "Form a protective layer of light around you, making you immune to laser fire."
-	school = "transmutation"
 	feedback = "ra"
 	invocation_type = SpI_EMOTE
 	invocation = "conjures a sphere of fire around themselves."

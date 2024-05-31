@@ -201,7 +201,6 @@
 	name = "poppy pretzel"
 	desc = "It's all twisted up!"
 	icon_state = "poppypretzel"
-	bitesize = 2
 	filling_color = "#916e36"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("poppy seeds" = 2, "pretzel" = 3)

@@ -118,7 +118,6 @@
 	name = "\improper Hot Foods Display"
 	desc = "A heated storage unit for piping hot meals."
 	icon_state = "fridge_food"
-	icon_state = "fridge_food"
 	icon_contents = "food"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O)

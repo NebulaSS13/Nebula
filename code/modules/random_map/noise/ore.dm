@@ -128,7 +128,7 @@
 	deep_val = 0.8
 	rare_val = 0.7
 	min_rare_ratio = 0.02
-	min_rare_ratio = 0.01
+	min_deep_ratio = 0.01
 
 /datum/random_map/noise/ore/ice
 	surface_metals = list(

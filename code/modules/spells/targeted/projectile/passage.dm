@@ -7,7 +7,6 @@
 
 	school = "conjuration"
 	charge_max = 250
-	spell_flags = 0
 	invocation = "A'YASAMA"
 	invocation_type = SpI_SHOUT
 	range = 15

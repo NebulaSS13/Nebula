@@ -229,8 +229,8 @@
 	build_path = /obj/machinery/merchant_pad
 	board_type = "machine"
 	origin_tech = @'{"programming":6,"wormholes":6,"esoteric":1}'
-	req_components = list(/obj/item/stack/cable_coil = 15)
 	req_components = list(
+		/obj/item/stack/cable_coil = 15,
 		/obj/item/stock_parts/subspace/amplifier = 1,
 		/obj/item/stock_parts/subspace/ansible = 1,
 		/obj/item/stock_parts/subspace/crystal = 1,

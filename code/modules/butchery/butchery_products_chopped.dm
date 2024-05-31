@@ -1,6 +1,5 @@
 /obj/item/chems/food/butchery/chopped
 	name          = "chopped meat"
-	bitesize      = 2
 	desc          = "A handful of chopped meat."
 	icon          = 'icons/obj/items/butchery/chopped.dmi'
 	bitesize      = 2

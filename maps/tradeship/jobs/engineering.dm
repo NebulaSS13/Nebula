@@ -1,8 +1,6 @@
 /datum/job/tradeship_engineer
 	title = "Junior Engineer"
 	supervisors = "the Head Engineer"
-	total_positions = 2
-	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
 	department_types = list(/decl/department/engineering)
 	total_positions = 8
@@ -11,25 +9,25 @@
 	economic_power = 5
 	minimal_player_age = 7
 	access = list(
-		access_eva, 
-		access_engine, 
-		access_engine_equip, 
-		access_tech_storage, 
-		access_maint_tunnels, 
-		access_external_airlocks, 
-		access_construction, 
-		access_atmospherics, 
+		access_eva,
+		access_engine,
+		access_engine_equip,
+		access_tech_storage,
+		access_maint_tunnels,
+		access_external_airlocks,
+		access_construction,
+		access_atmospherics,
 		access_emergency_storage
 	)
 	minimal_access = list(
-		access_eva, 
-		access_engine, 
-		access_engine_equip, 
-		access_tech_storage, 
-		access_maint_tunnels, 
-		access_external_airlocks, 
-		access_construction, 
-		access_atmospherics, 
+		access_eva,
+		access_engine,
+		access_engine_equip,
+		access_tech_storage,
+		access_maint_tunnels,
+		access_external_airlocks,
+		access_construction,
+		access_atmospherics,
 		access_emergency_storage
 	)
 	min_skill = list(
@@ -64,23 +62,23 @@
 	req_admin_notify = 1
 	economic_power = 10
 	ideal_character_age = 50
-	guestbanned = 1	
+	guestbanned = 1
 	must_fill = 1
 	not_random_selectable = 1
 	access = list(
-		access_engine, 
-		access_engine_equip, 
-		access_tech_storage, 
-		access_maint_tunnels, 
+		access_engine,
+		access_engine_equip,
+		access_tech_storage,
+		access_maint_tunnels,
 		access_heads,
 		access_teleporter,
 		access_external_airlocks,
-		access_atmospherics, 
+		access_atmospherics,
 		access_emergency_storage,
 		access_eva,
 		access_bridge,
 		access_construction, access_sec_doors,
-		access_ce, 
+		access_ce,
 		access_RC_announce,
 		access_keycard_auth,
 		access_tcomsat,
@@ -88,9 +86,9 @@
 	)
 	minimal_access = list(
 		access_engine,
-		access_engine_equip, 
-		access_tech_storage, 
-		access_maint_tunnels, 
+		access_engine_equip,
+		access_tech_storage,
+		access_maint_tunnels,
 		access_heads,
 		access_teleporter,
 		access_external_airlocks,

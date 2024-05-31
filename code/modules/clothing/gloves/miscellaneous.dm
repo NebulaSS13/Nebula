@@ -82,7 +82,6 @@
 	cold_protection = SLOT_HANDS
 	heat_protection = SLOT_HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = SLOT_HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	material = /decl/material/solid/organic/cloth
