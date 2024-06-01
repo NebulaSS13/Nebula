@@ -860,7 +860,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_examine_name()
 	. = name
-	if(coating)
+	if(coating?.total_volume)
 		. = SPAN_WARNING("<font color='[coating.get_color()]'>stained</font> [.]")
 	if(gender == PLURAL)
 		. = "some [.]"
