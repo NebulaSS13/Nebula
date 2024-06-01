@@ -47,6 +47,9 @@
 /decl/stack_recipe/textiles/leather/gloves
 	result_type           = /obj/item/clothing/gloves/thick
 
+/decl/stack_recipe/textiles/leather/sling
+	result_type           = /obj/item/gun/launcher/bow/sling
+
 /decl/stack_recipe/textiles/leather/waterskin
 	result_type           = /obj/item/chems/waterskin/crafted
 	required_material     = /decl/material/solid/organic/leather

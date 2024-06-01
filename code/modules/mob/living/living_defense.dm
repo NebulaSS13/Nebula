@@ -190,7 +190,6 @@
 /mob/living/momentum_power(var/atom/movable/AM, var/datum/thrownthing/TT)
 	if(anchored || buckled)
 		return 0
-
 	. = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
 	if(has_gravity() || check_space_footing())
 		. *= 0.5

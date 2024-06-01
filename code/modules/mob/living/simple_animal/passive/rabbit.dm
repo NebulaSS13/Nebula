@@ -2,7 +2,7 @@
 	name = "white rabbit"
 	desc = "A hopping mammal with long ears and a love for carrots."
 	icon = 'icons/mob/simple_animal/rabbit_white.dmi'
-	max_health = 40
+	max_health = 20
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")

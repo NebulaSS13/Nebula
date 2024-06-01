@@ -39,6 +39,22 @@
 	result_type            = /obj/item/chems/glass/bucket/wood
 	difficulty             = MAT_VALUE_EASY_DIY
 
+/decl/stack_recipe/planks/bolt
+	result_type            = /obj/item/stack/material/bow_ammo/bolt
+	difficulty             = MAT_VALUE_EASY_DIY
+
+/decl/stack_recipe/planks/arrow
+	result_type            = /obj/item/stack/material/bow_ammo/arrow
+	difficulty             = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/planks/bow
+	result_type            = /obj/item/gun/launcher/bow/crafted
+	difficulty             = MAT_VALUE_VERY_HARD_DIY
+
+/decl/stack_recipe/planks/bow/fancy
+	name                   = "decorated bow"
+	result_type            = /obj/item/gun/launcher/bow/fancy/crafted
+
 /decl/stack_recipe/planks/noticeboard
 	result_type            = /obj/structure/noticeboard
 	on_floor               = TRUE
