@@ -1,5 +1,5 @@
 /datum/inventory_slot/handcuffs
-	slot_id = "Handcuffs"
+	slot_name = "Handcuffs"
 	slot_id = slot_handcuffed_str
 	skip_on_inventory_display = TRUE // Handcuffs have their own logic on examine.
 	skip_on_strip_display = TRUE // Handcuffs are removed with their own button in the strip menu.
