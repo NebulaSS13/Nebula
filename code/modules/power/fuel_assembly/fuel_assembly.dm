@@ -12,6 +12,11 @@
 	var/luminescence = 0
 	var/initial_amount
 
+// Unmeltable for the time being; TODO proper fix on dev.
+/obj/item/fuel_assembly/handle_melting(list/meltable_materials)
+	SHOULD_CALL_PARENT(FALSE)
+	return
+
 /obj/item/fuel_assembly/Initialize(mapload, var/_material, var/list/makeup, var/_colour)
 	. = ..(mapload, _material)
 	LAZYINITLIST(matter)
