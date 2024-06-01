@@ -138,6 +138,7 @@
 	LAZYADD(., /decl/interaction_handler/remove_id/modular_computer)
 	LAZYADD(., /decl/interaction_handler/remove_pen/modular_computer)
 	LAZYADD(., /decl/interaction_handler/emergency_shutdown)
+	LAZYADD(., /decl/interaction_handler/remove_chargestick)
 
 //
 // Remove ID
@@ -149,7 +150,8 @@
 	. = ..()
 	if(.)
 		var/datum/extension/assembly/assembly = get_extension(target, /datum/extension/assembly)
-		. = !!(assembly?.get_component(PART_CARD))
+		var/obj/item/stock_parts/computer/card_slot/card_slot = assembly?.get_component(PART_CARD)
+		return !!card_slot?.stored_card
 
 /decl/interaction_handler/remove_id/modular_computer/invoked(atom/target, mob/user, obj/item/prop)
 	var/datum/extension/assembly/assembly = get_extension(target, /datum/extension/assembly)
@@ -187,3 +189,25 @@
 
 /decl/interaction_handler/emergency_shutdown/invoked(obj/item/modular_computer/target, mob/user, obj/item/prop)
 	target.emergency_shutdown()
+
+//
+// Remove Charge-stick
+//
+/decl/interaction_handler/remove_chargestick
+	name = "Remove Chargestick"
+	icon = 'icons/screen/radial.dmi'
+	icon_state = "radial_eject"
+	expected_target_type = /obj/item/modular_computer
+
+/decl/interaction_handler/remove_chargestick/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(!.)
+		return .
+	var/datum/extension/assembly/assembly = get_extension(target, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/charge_stick_slot/mstick_slot = assembly.get_component(PART_MSTICK)
+	return !!mstick_slot?.stored_stick
+
+/decl/interaction_handler/remove_chargestick/invoked(atom/target, mob/user, obj/item/prop)
+	var/datum/extension/assembly/assembly = get_extension(target, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/charge_stick_slot/mstick_slot = assembly.get_component(PART_MSTICK)
+	mstick_slot.eject_stick(user)
