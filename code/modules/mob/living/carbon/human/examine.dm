@@ -204,7 +204,7 @@
 					criminal = R.get_criminalStatus()
 
 				msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
-				msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
+				msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=1'>\[View\]</a>\n"
 
 	if(hasHUD(user, HUD_MEDICAL))
 		var/perpname = "wot"
@@ -223,7 +223,7 @@
 				medical = R.get_status()
 
 			msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
-			msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
+			msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=1'>\[View\]</a>\n"
 
 	// Show IC/OOC info if available.
 	if(comments_record_id)
@@ -270,7 +270,7 @@
 /mob/living/carbon/human/getHUDsource(hudtype)
 	var/obj/item/clothing/glasses/G = get_equipped_item(slot_glasses_str)
 	if(!istype(G))
-		return
+		return ..()
 	if(G.glasses_hud_type & hudtype)
 		return G
 	if(G.hud && (G.hud.glasses_hud_type & hudtype))
