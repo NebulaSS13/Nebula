@@ -1,5 +1,10 @@
+/**Sent by the lockable when it's been locked or unlocked. */
 /decl/observ/lock_state_changed
 	name = "lockable state changed"
+
+/**Sent by lockable when the service panel is opened/closed. */
+/decl/observ/lock_panel_state_changed
+	name = "lockable panel state changed"
 
 /decl/observ/keypad_pressed
 	name = "lockable keypad pressed"
@@ -23,37 +28,50 @@
 	/// Whether or not the ability to set the lock is broken.
 	var/l_setshort = FALSE
 	/// Whether or not the lock is being hacked.
-	var/l_hacking = FALSE
+	var/tmp/l_hacking = FALSE
 	/// Whether or not the lock is emagged.
 	var/emagged = FALSE
 	/// Whether or not the lock is digital, and its ability to be brute forced.
 	var/is_digital_lock = FALSE
 	/// Whether or not the lock service panel is open.
 	var/open = FALSE
+	/// Whether we're currently opening the panel or not. (Unskilled people can take a long time to open it)
+	var/tmp/opening_panel = FALSE
 	/// Error text currently displayed to the user. Temporary.
 	var/tmp/error
-	/// The passcode currently inputed so far.
+	/// The passcode currently inputed so far and what is displayed on the UI.
 	var/tmp/code
 
 /datum/extension/lockable/New(holder, is_digital = FALSE)
 	..(holder)
 	is_digital_lock = is_digital
 
+/**
+ Makes the holder play a sound when a keypad key has been pressed.
+ * key: A single key character that was pressed. Any leters between A to Z, any numbers between 0-9, or *, #, ⌗, ⚹.
+ * user: The user inputing the key.
+ * user_only: If set, the key sound will only be sent to the client using the keypad.
+ **/
 /datum/extension/lockable/proc/play_key_sound(key, mob/user, user_only = FALSE)
 	global.play_dtmf_key_sound(holder, key, user, user_only)
 
+///Makes the holder play the success sound, when an operation was successful.
 /datum/extension/lockable/proc/play_success_sound()
 	playsound(holder, 'sound/effects/synth_bell.ogg', 15, FALSE, 0, 2)
 
+///Makes the holder play the failure sound, when an invalid operation has been done.
 /datum/extension/lockable/proc/play_failure_sound()
 	playsound(holder, 'sound/machines/synth_no.ogg', 15, FALSE, 0, 2)
 
+///Makes the holder play the lock's locking sound.
 /datum/extension/lockable/proc/play_lock_sound()
 	playsound(holder, 'sound/items/containers/briefcase_lock.ogg', 15, FALSE, 0, 2)
 
+///Makes the holder play the lock's unlock sound.
 /datum/extension/lockable/proc/play_unlock_sound()
 	playsound(holder, 'sound/machines/mechanical_switch.ogg', 15, FALSE, 0, 2)
 
+///Makes the holder play the sound after a new keycode has been set.
 /datum/extension/lockable/proc/play_code_set_sound()
 	set waitfor = FALSE
 	//Add a slight delay so it doesn't overlap the key sound.
@@ -61,8 +79,9 @@
 	playsound(holder, 'sound/effects/fastbeep.ogg', 15, FALSE, 0, 2)
 
 /datum/extension/lockable/Topic(href, href_list)
-	if((. = ..()) || !can_interact(usr))
+	if((. = ..()) || !can_interact(usr)) //Double check if the user can actually send topics to us.
 		return
+	//Handle a key press
 	if(href_list["key"])
 		pressed_key(href_list["key"], usr)
 		return TOPIC_REFRESH
@@ -165,7 +184,7 @@
 /**
 	Clears the currently entered code and the current error text, and lock the lockable if it's not already.
  */
-/datum/extension/lockable/proc/clear_button(mob/user)
+/datum/extension/lockable/proc/clear_button(mob/user, quiet = FALSE)
 	if(!is_locked())
 		set_locked(TRUE)
 	clear_current_code()
@@ -176,18 +195,21 @@
 	Clear the currently entered code on the ui.
  */
 /datum/extension/lockable/proc/clear_current_code()
-	code  = null
+	//NOTE: Don't trigger a ui update here
+	code = null
 
 /**
 	Clear the currently displayed error text on the ui.
  */
 /datum/extension/lockable/proc/clear_error()
+	//NOTE: Don't trigger a ui update here
 	error = null
 
 /**
 	Sets the error message to be displayed currently.
  */
 /datum/extension/lockable/proc/set_error_message(msg)
+	//NOTE: Don't trigger a ui update here
 	error = msg
 
 /**
@@ -204,6 +226,7 @@
 			play_unlock_sound()
 	clear_current_code()
 	RAISE_EVENT(/decl/observ/lock_state_changed, src, !locked, locked)
+	//TODO: The code below probably should be handled by the event callback on the atom..
 	var/atom/A = holder
 	A.update_icon()
 
@@ -245,10 +268,16 @@
 	Opens the "service panel" for nefarious purposes.
  */
 /datum/extension/lockable/proc/toggle_panel(mob/user)
-	if(user)
-		user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
 	open = !open
-
+	if(user)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [open ? "open" : "close"] the service panel of \the [holder]."),
+			SPAN_NOTICE("You [open ? "open" : "close"] the service panel of \the [holder]."))
+	SSnano.update_uis(src) //The ui is tied to the extension, not the holder
+	RAISE_EVENT(/decl/observ/lock_panel_state_changed, src, !open, open)
+	//TODO: The code below probably should be handled by the event callback on the atom..
+	var/atom/A = holder
+	A.update_icon()
 
 /datum/extension/lockable/nano_host()
 	return holder.nano_host()
@@ -290,6 +319,8 @@
 /datum/extension/lockable/proc/attackby(obj/item/W, mob/user)
 	if(!locked)
 		return
+
+	//TODO: This probably should be handled in a better way.
 	if(!is_digital_lock && istype(W, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = W
 		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "You slice through the lock of \the [holder]."))
@@ -299,8 +330,22 @@
 			return TRUE
 
 	if(IS_SCREWDRIVER(W))
-		if(user.do_skilled(2 SECONDS, SKILL_DEVICES, holder))
-			toggle_panel()
+		if(!opening_panel)
+			var/obj/item/screwdriver/S = W
+			opening_panel = TRUE //Make sure we only have one user/attempt to opens the panel at a time.
+			if(
+				S.do_tool_interaction(
+				TOOL_SCREWDRIVER,
+				user,
+				holder,
+				2 SECONDS,
+				"[open? "closing" : "opening"] the service panel on",
+				null,
+				check_skill = SKILL_DEVICES,
+				check_skill_threshold = SKILL_NONE)
+			)
+				opening_panel = FALSE
+				toggle_panel(user)
 		return TRUE
 
 	if(IS_MULTITOOL(W))
@@ -309,17 +354,24 @@
 
 /**
 	Clears the currently set keycode, hacked state, and shorted state.
-	Called by the hacking proc via timer.
+	Called by the hacking proc via timer after a short delay.
  */
 /datum/extension/lockable/proc/reset_memory()
 	if(!l_hacking)
 		return
-	l_setshort = FALSE
 	l_hacking = FALSE
+	l_setshort = FALSE
 	l_code = null
 	l_set = FALSE
-	var/atom/movable/A = holder
-	A.update_icon()
+	//Make sure the thing is locked, since that's the expected initial state, so the user can input a new code.
+	if(!locked)
+		set_locked(TRUE)
+	else
+		//If already locked, just update the ui and icon
+		SSnano.update_uis(src) //The ui is tied to the extension
+		//TODO: This code should probably be run by a callback on the holder
+		var/atom/A = holder
+		A.update_icon()
 
 /**
 	Called when an emag is used on the holder.
@@ -328,8 +380,8 @@
 	if(emagged)
 		return
 	emagged = TRUE
-	to_chat(user, (feedback || "You short out the lock of \the [holder]."))
-	set_locked(FALSE)
+	to_chat(user, SPAN_NOTICE(feedback || "You short out the lock of \the [holder]."))
+	set_locked(FALSE) //Emagging instantly unlocks the thing.
 	return TRUE
 
 /**
@@ -340,22 +392,45 @@
 	if(!open || l_hacking)
 		return FALSE
 
-	user.show_message(SPAN_NOTICE("Now attempting to reset internal memory, please hold."), 1)
+	//Show a message to let the user know how likely this is to even succeed.
+	var/fail_chance = hack_fail_chance(W, user)
+	var/skill_msg
+	if(fail_chance >= 90)
+		skill_msg = SPAN_WARNING("But, you struggle to make sense of this thing..")
+	else if(fail_chance >= 50)
+		skill_msg = SPAN_YELLOW("But, this lock is complicated. You might need several attempts..")
+	else if(fail_chance >= 20)
+		skill_msg = SPAN_NOTICE("This should only take a few attempts at most.")
+	else
+		skill_msg = SPAN_BLUE("You're confident it shouldn't take long.")
+	to_chat(user, SPAN_NOTICE("You begin trying to force-reset the lock of \the [holder]. ") + skill_msg)
+
+	var/atom/A = holder
 	l_hacking = TRUE
-	if(!user.do_skilled(10 SECONDS, SKILL_ELECTRICAL, holder))
+	//Display the "hacking" icon. TODO: Maybe a callback on the holder be better?
+	A.update_icon()
+	if(!user.do_skilled(10 SECONDS, SKILL_ELECTRICAL, holder, 0.8))
 		l_hacking = FALSE
 	else
-		if (prob(user.skill_fail_chance(SKILL_DEVICES, 40, SKILL_EXPERT)))
+		if (!prob(fail_chance))
 			l_setshort = FALSE
-			user.show_message(SPAN_NOTICE("Internal memory reset. Please give it a few seconds to reinitialize."), 1)
+			to_chat(user, SPAN_NOTICE("You've successfully factory reset the lock! Wait a second for the lock to reinitialize.."))
 			//The callback will handle setting 'l_hacking' to false!
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/extension/lockable, reset_memory)), 3 SECONDS)
 		else
-			user.show_message(SPAN_WARNING("Unable to reset internal memory."), 1)
+			to_chat(user, SPAN_WARNING("\icon[holder] Unauthorized access detected!"))
 			l_hacking = FALSE
 			bad_access_attempt(user)
+	//Clear the "hacking" icon. TODO: Maybe a callback on the holder be better?
+	A.update_icon()
 	return TRUE //We handled the interaction even if it didn't work
 
+/**
+	Returns a percent chance of the given user failing at hacking this lock.
+ */
+/datum/extension/lockable/proc/hack_fail_chance(obj/item/multitool/W, mob/user)
+	//In order to make the lock actually any use at all, make sure not just anybody with a multitool can open it.
+	return user.skill_fail_chance(SKILL_DEVICES, 99, SKILL_MAX, 0.35)
 
 //////////////////////////////////////
 // Lockable Storage
@@ -379,15 +454,15 @@
 	var/shock_strength = 0
 	var/alarm_loudness = 0
 
-/datum/extension/lockable/charge_stick/bad_access_attempt(var/mob/user)
+/datum/extension/lockable/charge_stick/bad_access_attempt(mob/user)
 	if(shock_strength > 0)
 		shock(user, 80)
 	if(alarm_loudness > 0)
 		var/atom/A = holder
 		A.audible_message(SPAN_WARNING("\The [holder] shrills in an annoying tone, alerting those nearby of unauthorized tampering."), hearing_distance = alarm_loudness)
-		playsound(holder, 'sound/effects/alarm.ogg', 50, 1, alarm_loudness)
+		playsound(holder, 'sound/effects/alarm.ogg', 50, TRUE, alarm_loudness)
 
-/datum/extension/lockable/charge_stick/proc/shock(var/mob/living/user, prb)
+/datum/extension/lockable/charge_stick/proc/shock(mob/living/user, prb)
 	if(!prob(prb) || !istype(user))
 		return FALSE
 	spark_at(holder, amount=5, cardinal_only = TRUE)

@@ -11,18 +11,20 @@
 //         Generic Item
 // -----------------------------
 /obj/item/secure_storage
-	name = "secstorage"
+	name = "secure storage (abstract)"
 	w_class = ITEM_SIZE_NORMAL
 	storage = /datum/storage/secure
 	material = /decl/material/solid/metal/steel
+	abstract_type = /obj/item/secure_storage
+	///The type of lockable extension to use for this secure storage.
 	var/lock_type = /datum/extension/lockable/storage
 	var/icon_locking = "secureb"
 	var/icon_opened = "secure0"
 
 /obj/item/secure_storage/Initialize(ml, material_key)
-	. = ..()
 	var/datum/extension/lockable/mylock = get_or_create_extension(src, lock_type)
 	events_repository.register(/decl/observ/lock_state_changed, mylock, src, /obj/item/secure_storage/proc/on_lock_state_changed)
+	. = ..()
 
 /obj/item/secure_storage/Destroy()
 	var/datum/extension/lockable/mylock = get_extension(src, lock_type)
@@ -60,16 +62,17 @@
 	. = ..()
 	if(distance <= 1)
 		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-		to_chat(user, text("The service panel is [lock.open ? "open" : "closed"]."))
+		to_chat(user, SPAN_INFO("The service panel is [lock.open ? "open" : "closed"]."))
 
-/obj/item/secure_storage/emag_act(var/remaining_charges, var/mob/user, var/feedback)
+/obj/item/secure_storage/emag_act(remaining_charges, mob/user, feedback)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	.= lock.emag_act(remaining_charges, user, feedback)
+	. = lock.emag_act(remaining_charges, user, feedback)
 	update_icon()
 
 /obj/item/secure_storage/on_update_icon()
 	. = ..()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	//If update icon is called and the lock hasn't been initialized yet for whatever reasons, just skip
 	if(!istype(lock))
 		return
 	if(lock.emagged)
@@ -111,6 +114,7 @@
 //        Secure Safe
 // -----------------------------
 
+//#TODO: Move to a structure, so we don't have to deal with the item pickup code.
 /obj/item/secure_storage/safe
 	name = "secure safe"
 	icon = 'icons/obj/items/storage/safe.dmi'
