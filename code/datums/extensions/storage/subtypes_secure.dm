@@ -22,3 +22,6 @@
 	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = 56
 	cant_hold = list(/obj/item/secure_storage/briefcase)
+	use_sound = 'sound/effects/storage/box.ogg'
+	open_sound = 'sound/effects/closet_open.ogg'
+	close_sound = 'sound/effects/closet_close.ogg'
