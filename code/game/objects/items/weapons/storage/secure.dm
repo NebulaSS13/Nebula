@@ -133,3 +133,16 @@
 		/obj/item/pen,
 		/obj/item/paper
 	)
+
+/obj/item/secure_storage/safe/attack_hand(mob/user)
+	//The safe acts kinda weird because it's an item that cannot be picked up by default, and we need a way to open the ui.
+	// I added this so if it can be picked up at all, it'll behave like any items. And otherwise it'll open the UI.
+	// The storage extension will cause the base item class to automatically add an alt-interaction to open the storage.
+	if(!can_be_picked_up(user))
+		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+		lock.ui_interact(user)
+		return TRUE
+	. = ..()
+
+/obj/item/secure_storage/safe/empty/WillContain()
+	return
