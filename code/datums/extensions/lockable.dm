@@ -35,6 +35,8 @@
 	var/is_digital_lock = FALSE
 	/// Whether or not the lock service panel is open.
 	var/open = FALSE
+	/// The absolute range in turfs the lockable's sounds can be heard at from the holder's position.
+	var/sound_range = 5
 	/// Whether we're currently opening the panel or not. (Unskilled people can take a long time to open it)
 	var/tmp/opening_panel = FALSE
 	/// Error text currently displayed to the user. Temporary.
@@ -53,30 +55,30 @@
  * user_only: If set, the key sound will only be sent to the client using the keypad.
  **/
 /datum/extension/lockable/proc/play_key_sound(key, mob/user, user_only = FALSE)
-	global.play_dtmf_key_sound(holder, key, user, user_only)
+	global.play_dtmf_key_sound(holder, key, user, user_only, SOUND_RANGE_ABS(sound_range))
 
 ///Makes the holder play the success sound, when an operation was successful.
 /datum/extension/lockable/proc/play_success_sound()
-	playsound(holder, 'sound/effects/synth_bell.ogg', 15, FALSE, 0, 2)
+	playsound(holder, 'sound/effects/synth_bell.ogg', 15, FALSE, SOUND_RANGE_ABS(sound_range), 2)
 
 ///Makes the holder play the failure sound, when an invalid operation has been done.
 /datum/extension/lockable/proc/play_failure_sound()
-	playsound(holder, 'sound/machines/synth_no.ogg', 15, FALSE, 0, 2)
+	playsound(holder, 'sound/machines/synth_no.ogg', 15, FALSE, SOUND_RANGE_ABS(sound_range), 2)
 
 ///Makes the holder play the lock's locking sound.
 /datum/extension/lockable/proc/play_lock_sound()
-	playsound(holder, 'sound/items/containers/briefcase_lock.ogg', 15, FALSE, 0, 2)
+	playsound(holder, 'sound/items/containers/briefcase_lock.ogg', 15, FALSE, SOUND_RANGE_ABS(sound_range), 2)
 
 ///Makes the holder play the lock's unlock sound.
 /datum/extension/lockable/proc/play_unlock_sound()
-	playsound(holder, 'sound/machines/mechanical_switch.ogg', 15, FALSE, 0, 2)
+	playsound(holder, 'sound/machines/mechanical_switch.ogg', 15, FALSE, SOUND_RANGE_ABS(sound_range), 2)
 
 ///Makes the holder play the sound after a new keycode has been set.
 /datum/extension/lockable/proc/play_code_set_sound()
 	set waitfor = FALSE
 	//Add a slight delay so it doesn't overlap the key sound.
 	sleep(0.3 SECOND)
-	playsound(holder, 'sound/effects/fastbeep.ogg', 15, FALSE, 0, 2)
+	playsound(holder, 'sound/effects/fastbeep.ogg', 15, FALSE, SOUND_RANGE_ABS(sound_range), 2)
 
 /datum/extension/lockable/Topic(href, href_list)
 	if((. = ..()) || !can_interact(usr)) //Double check if the user can actually send topics to us.
@@ -451,6 +453,7 @@
 /datum/extension/lockable/charge_stick
 	base_type = /datum/extension/lockable
 	expected_type = /obj/item/charge_stick
+	sound_range = 1
 	var/shock_strength = 0
 	var/alarm_loudness = 0
 
