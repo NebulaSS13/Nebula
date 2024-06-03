@@ -51,5 +51,5 @@
 	req_amount                  = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
 	required_material           = /decl/material/solid/metal/steel
 
-/decl/stack_recipe/strut/machine/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
-	return ..(user, location, amount, null, null)
+/decl/stack_recipe/strut/machine/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
+	return ..(user, location, amount, null, null, paint_color, spent_type, spent_amount)

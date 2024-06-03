@@ -45,7 +45,7 @@
 	difficulty             = MAT_VALUE_HARD_DIY
 	set_dir_on_spawn       = FALSE
 
-/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	. = ..()
 	if(user)
 		for(var/obj/structure/noticeboard/board in .)
@@ -58,7 +58,7 @@
 	var/prosthetic_species = SPECIES_HUMAN
 	var/prosthetic_model   = /decl/bodytype/prosthetic/wooden
 
-/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	. = ..()
 	for(var/obj/item/organ/external/limb in .)
 		limb.set_species(prosthetic_species)

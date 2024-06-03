@@ -707,6 +707,7 @@
 	color = WOOD_COLOR_GENERIC
 	material = /decl/material/solid/organic/wood
 	reinf_material = /decl/material/solid/organic/wood
+	parts_type = /obj/item/stack/material/plank
 
 /obj/structure/table/woodentable/mahogany
 	color = WOOD_COLOR_RICH

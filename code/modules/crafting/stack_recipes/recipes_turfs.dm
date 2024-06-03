@@ -23,7 +23,7 @@
 /decl/stack_recipe/turfs/update_req_amount()
 	return
 
-/decl/stack_recipe/turfs/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+/decl/stack_recipe/turfs/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	var/turf/build_turf = get_turf(location)
 	if(!build_turf)
 		return

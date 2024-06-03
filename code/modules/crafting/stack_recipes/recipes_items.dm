@@ -16,7 +16,7 @@
 	result_type       = /obj/item/paper
 	required_material = /decl/material/solid/organic/paper
 
-/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	. = ..()
 	if(amount <= 1)
 		return .

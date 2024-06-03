@@ -40,7 +40,7 @@
 	result_type                 = /obj/item/stack/material/brick
 	test_result_type            = /obj/item/stack/material/brick/clay
 
-/decl/stack_recipe/soft/stack/spawn_result(user, location, amount)
+/decl/stack_recipe/soft/stack/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	var/obj/item/stack/S = ..()
 	if(istype(S))
 		S.amount = amount
