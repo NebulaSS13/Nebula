@@ -1,7 +1,0 @@
-author: LizLavenza
-changes:
-  - {tweak: enabled edge sprites for path turfs}
-  - {bugfix: fixed grass turfs missing corners}
-  - {bugfix: fixed crafted tall boots missing icons}
-  - {bugfix: fixed sandals in Shaded Hills loadout being normal shoes}
-delete-after: true
