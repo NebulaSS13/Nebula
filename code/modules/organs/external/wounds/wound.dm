@@ -169,6 +169,9 @@
 	// return amount of healing still leftover, can be used for other wounds
 	return amount
 
+/datum/wound/proc/is_open()
+	return current_stage <= max_bleeding_stage && !bandaged
+
 // opens the wound again
 /datum/wound/proc/open_wound(damage)
 	src.damage += damage
@@ -203,7 +206,7 @@
 			return FALSE
 	if(bandaged || clamped)
 		return FALSE
-	return ((bleed_timer > 0 || wound_damage() > bleed_threshold) && current_stage <= max_bleeding_stage)
+	return ((bleed_timer > 0 || wound_damage() > bleed_threshold) && is_open())
 
 /datum/wound/proc/is_surgical()
 	return 0

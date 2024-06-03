@@ -1475,3 +1475,5 @@ default behaviour is:
 		return TRUE
 	return FALSE
 
+/mob/living/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, datum/callback/callback) //If this returns FALSE then callback will not be called.
+	return !length(pinned) && ..()

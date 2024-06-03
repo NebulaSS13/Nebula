@@ -14,6 +14,7 @@
 
 /obj/item/natural_weapon/can_embed()
 	return FALSE
+
 /obj/item/natural_weapon/bite
 	name = "teeth"
 	attack_verb = list("bitten")

@@ -22,6 +22,7 @@
 	icon_state = "harpoon_bomb"
 
 /obj/item/harpoon/bomb/has_embedded()
+	..()
 	if(spent)
 		return
 	audible_message(SPAN_WARNING("\The [src] emits a long, harsh tone!"))

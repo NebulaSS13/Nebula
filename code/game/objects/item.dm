@@ -776,9 +776,14 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
 
 /obj/item/proc/on_active_hand()
-
-/obj/item/proc/has_embedded()
 	return
+
+/obj/item/proc/has_embedded(mob/living/victim)
+	if(istype(victim))
+		LAZYDISTINCTADD(victim.embedded, src)
+		victim.verbs |= /mob/proc/yank_out_object
+		return TRUE
+	return FALSE
 
 /obj/item/proc/get_pressure_weakness(pressure,zone)
 	. = 1
@@ -954,3 +959,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	// delay for 1ds to allow the rest of the call stack to resolve
 	if(!QDELETED(src) && !QDELETED(user) && user.get_equipped_slot_for_item(src) == slot)
 		try_burn_wearer(user, slot, 1)
+
+/obj/item/can_embed()
+	return !anchored && !is_robot_module(src)
