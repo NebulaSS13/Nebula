@@ -18,10 +18,12 @@
 	return 'icons/turf/walls/natural.dmi'
 
 /turf/wall/natural/Initialize(var/ml, var/materialtype, var/rmaterialtype)
-	if(!SSxenoarch.initialized)
-		SSxenoarch.possible_spawn_walls += src
 	. = ..()
-	set_extension(src, /datum/extension/geological_data)
+	var/area/A = get_area(src)
+	if(A.allow_xenoarchaeology_finds)
+		if(!SSxenoarch.initialized)
+			SSxenoarch.possible_spawn_walls += src
+		set_extension(src, /datum/extension/geological_data)
 	// Init ramp state if needed.
 	if(ramp_slope_direction)
 		make_ramp(null, ramp_slope_direction, TRUE)
@@ -146,7 +148,7 @@
 
 /turf/wall/natural/proc/pass_geodata_to(obj/O)
 	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)
-	if(ours.geodata)
+	if(ours?.geodata)
 		ours.geodata.UpdateNearbyArtifactInfo(src)
 		set_extension(O, /datum/extension/geological_data)
 		var/datum/extension/geological_data/newdata = get_extension(O, /datum/extension/geological_data)
