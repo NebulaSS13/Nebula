@@ -26,6 +26,9 @@
 
 /obj/item/stack/tile/proc/try_build_turf(var/mob/user, var/turf/target)
 
+	if(!target.is_plating())
+		return FALSE
+
 	var/ladder = (locate(/obj/structure/ladder) in target)
 	if(ladder)
 		to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
@@ -431,7 +434,6 @@
 	playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
 	if(replace_turf)
 		replace_turf.ChangeTurf(replacement_turf_type, keep_air = TRUE)
-	else
-		target.set_outside(OUTSIDE_NO)
+	target.set_outside(OUTSIDE_NO)
 	to_chat(user, SPAN_NOTICE("You put up a roof over \the [target]."))
 	return TRUE
