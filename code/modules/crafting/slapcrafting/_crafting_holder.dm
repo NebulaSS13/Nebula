@@ -53,6 +53,14 @@
 	qdel(src)
 	return TRUE
 
+/obj/item/crafting_holder/try_slapcrafting(obj/item/W, mob/user)
+	if(current_crafting_stage)
+		var/decl/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
+		if(next_stage && next_stage.is_appropriate_tool(W, src) && next_stage.is_sufficient_amount(user, W) && next_stage.progress_to(W, user, src))
+			advance_to(next_stage, user, W)
+			return TRUE
+	return FALSE
+
 /obj/item/crafting_holder/attackby(var/obj/item/W, var/mob/user)
 
 	if(IS_PEN(W))
@@ -60,13 +68,7 @@
 		if(new_label && !user.incapacitated() && W.loc == user && user.Adjacent(src) && !QDELETED(src))
 			to_chat(user, SPAN_NOTICE("You label \the [src] with '[new_label]'."))
 			label_name = new_label
-		return
-
-	if(current_crafting_stage)
-		var/decl/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
-		if(next_stage && next_stage.is_appropriate_tool(W, src) && next_stage.progress_to(W, user, src))
-			advance_to(next_stage, user, W)
-			return
+		return TRUE
 
 	. = ..()
 

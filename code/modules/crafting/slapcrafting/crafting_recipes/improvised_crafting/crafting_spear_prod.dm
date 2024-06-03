@@ -7,12 +7,12 @@
 	stack_material = null
 	stack_consume_amount = 1
 	next_stages = list(
-		/decl/crafting_stage/spear_blade_shard, 
-		/decl/crafting_stage/spear_blade_blade, 
+		/decl/crafting_stage/spear_blade_shard,
+		/decl/crafting_stage/spear_blade_blade,
 		/decl/crafting_stage/stunprod_wirecutters
 	)
-	
-/decl/crafting_stage/material/stunprod_rod/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
+
+/decl/crafting_stage/material/stunprod_rod/consume_crafting_resource(var/mob/user, var/obj/item/thing, var/obj/item/target)
 	. = ..()
 	if(.)
 		target.set_material(thing?.material.type)
