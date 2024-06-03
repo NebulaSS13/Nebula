@@ -324,6 +324,7 @@
 	if(istype(W,/obj/item/rcd) || istype(W, /obj/item/chems) || !W.force || user.a_intent == I_HELP)
 		return ..()
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
 	if(W.atom_damage_type == BURN)

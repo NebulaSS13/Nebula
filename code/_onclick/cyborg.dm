@@ -79,6 +79,7 @@
 		var/resolved = W.resolve_attackby(A, src, params)
 		if(!resolved && A && W)
 			W.afterattack(A, src, 1, params) // 1 indicates adjacency
+		setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		return
 
 	if(!isturf(loc))
@@ -91,6 +92,7 @@
 			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
+			setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			return
 		else
 			W.afterattack(A, src, 0, params)
