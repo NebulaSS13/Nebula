@@ -117,8 +117,6 @@
 	if(!message || !emoter)
 		return
 
-	message = html_decode(message)
-
 	name_anchor = findtext(message, anchor_char)
 	if(name_anchor > 0) // User supplied emote with visible_emote token (default ^)
 		pretext = copytext(message, 1, name_anchor)
@@ -139,11 +137,7 @@
 		if(end_char != " ")
 			pretext += " "
 
-	// Grab the last character of the emote message.
-	end_char = copytext(subtext, length(subtext), length(subtext) + 1)
-	if(!(end_char in list(".", "?", "!", "\"", "-", "~"))) // gotta include ~ for all you fucking weebs
-		// No punctuation supplied. Tack a period on the end.
-		subtext += "."
+	handle_autopunctuation(subtext)
 
 	// Add a space to the subtext, unless it begins with an apostrophe or comma.
 	if(subtext != ".")
@@ -153,12 +147,9 @@
 		if(start_char != "," && start_char != "'")
 			subtext = " " + subtext
 
-	pretext = capitalize(html_encode(pretext))
-	nametext = html_encode(nametext)
-	subtext = html_encode(subtext)
 	// Store the player's name in a nice bold, naturalement
 	nametext = "<B>[emoter]</B>"
-	return pretext + nametext + subtext
+	return capitalize(pretext) + nametext + subtext
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
 
@@ -171,15 +162,16 @@
 	else
 		input = message
 
-	if(input)
-		message = format_emote(src, message)
-	else
+	if(!input)
 		return
+
+	message = trim(html_encode(message))
+	message = filter_modify_message(message)
+	message = format_emote(src, message)
 
 	if (message)
 		log_emote("[name]/[key] : [message]")
 	//do not show NPC animal emotes to ghosts, it turns into hellscape
-	message = filter_modify_message(message)
 	var/check_ghosts = client ? /datum/client_preference/ghost_sight : null
 	if(m_type == VISIBLE_MESSAGE)
 		visible_message(message, check_ghosts = check_ghosts)

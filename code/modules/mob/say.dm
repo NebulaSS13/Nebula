@@ -111,3 +111,12 @@ var/global/list/special_channel_keys = list(
 		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
 		if(istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/sealant))
 			. = mask
+
+/// Adds punctuation to an emote or speech message automatically.
+/mob/proc/handle_autopunctuation(message)
+	if(!message)
+		return
+	var/end_char = copytext_char(trim_right(strip_html_properly(message)), -1)
+	if(!(end_char in list(".", "?", "!", "-", "~")))
+		message += "."
+	return message
