@@ -27,9 +27,13 @@
 	var/turf/build_turf = get_turf(location)
 	if(!build_turf)
 		return
+	var/build_turf_type = build_turf?.type
 	var/turf/result = build_turf.ChangeTurf(result_type)
 	if(istype(result))
 		result.set_turf_materials(MATERIAL_RECIPE_PARAMS)
+		if(istype(result, /turf/wall) && build_turf_type)
+			var/turf/wall/result_wall = result
+			result_wall.floor_type = build_turf_type
 	return result
 
 /decl/stack_recipe/turfs/wall

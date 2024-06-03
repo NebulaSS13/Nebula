@@ -3,6 +3,7 @@
 	material = /decl/material/solid/organic/wood
 	color = /decl/material/solid/organic/wood::color
 	girder_material = null
+	floor_type = null
 
 /turf/wall/log/get_dismantle_stack_type()
 	return /obj/item/stack/material/log
