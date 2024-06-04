@@ -7,7 +7,7 @@ var/global/list/chat_modifiers_in_use
 	var/list/all_filters = decls_repository.get_decls_of_type(/decl/chat_filter)
 	for(var/filtertype in all_filters)
 		var/decl/chat_filter/chat_filter = all_filters[filtertype]
-		if(!chat_filter.disabled && chat_filter.filter_category != chat_filter.type)
+		if(!chat_filter.disabled)
 			if(chat_filter.can_deny_message)
 				global.chat_blockers_in_use += chat_filter
 			if(chat_filter.can_modify_message)
@@ -31,10 +31,10 @@ var/global/list/chat_modifiers_in_use
 			. = chat_filter.replace(., match)
 
 /decl/chat_filter
+	abstract_type = /decl/chat_filter
 	var/name
 	var/disabled
 	var/summary
-	var/filter_category = /decl/chat_filter
 	var/can_modify_message = FALSE
 	var/can_deny_message = FALSE
 

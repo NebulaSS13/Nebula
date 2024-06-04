@@ -22,7 +22,7 @@
 		var/blood_color
 		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(user, foot_tag)
-			if(stomper && stomper.coating)
+			if(stomper && stomper.coating?.total_volume)
 				blood_color = stomper.coating.get_color()
 				break
 		if(blood_color)
@@ -38,7 +38,7 @@
 		return "[pronouns.He] [pronouns.is] wearing [_holding.get_examine_line()] on [pronouns.his] feet."
 	for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(owner, bp)
-		if(E && E.coating)
+		if(E && E.coating?.total_volume)
 			if(user == owner)
 				return "There's <font color='[E.coating.get_color()]'>something on your feet</font>!"
 			return "There's <font color='[E.coating.get_color()]'>something on [pronouns.his] feet</font>!"

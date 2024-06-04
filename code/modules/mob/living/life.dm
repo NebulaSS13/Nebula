@@ -19,6 +19,7 @@
 		machine = null
 
 	CLEAR_HUD_ALERTS(src) // These will be set again in the various update procs below.
+	handle_hud_glasses() // Clear HUD overlay images. Done early so that organs, etc. can add them back.
 
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
@@ -540,7 +541,6 @@
 
 /mob/living/proc/handle_hud_icons()
 	handle_hud_icons_health()
-	handle_hud_glasses()
 
 /mob/living/proc/handle_hud_icons_health()
 	return

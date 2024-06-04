@@ -162,6 +162,15 @@
 	for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
 		if(!env_info.important_gasses[g])
 			trace_gas += g
+	// not everything in these lists is a subtype of /decl/material/gas, so:
+	for(var/dangerous_gas in env_info.dangerous_gasses)
+		if(env_info.important_gasses[dangerous_gas] || !env_info.dangerous_gasses[dangerous_gas])
+			continue
+		trace_gas |= dangerous_gas
+	for(var/filtered_gas in env_info.filter_gasses)
+		if(env_info.important_gasses[filtered_gas])
+			continue
+		trace_gas |= filtered_gas
 
 	queue_icon_update()
 
