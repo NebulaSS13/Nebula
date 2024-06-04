@@ -109,8 +109,13 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		return 0
 	if(!get_speed())
 		return 0
-	var/num_burns = get_speed() / get_delta_v() + 2 //some padding in case acceleration drops fromm fuel usage
-	var/burns_per_grid = 1/ (burn_delay * get_speed())
+	var/delta_v = get_delta_v() + 2
+	if(delta_v <= 0)
+		return 0
+	var/num_burns = get_speed() / delta_v //some padding in case acceleration drops fromm fuel usage
+	var/burns_per_grid = 1 / (burn_delay * get_speed())
+	if(burns_per_grid <= 0)
+		return 0
 	return round(num_burns / burns_per_grid)
 
 /obj/effect/overmap/visitable/ship/Process(wait, tick)
