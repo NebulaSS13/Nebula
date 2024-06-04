@@ -14,6 +14,7 @@
 #include "datum/hnoll/organs.dm"
 #include "datum/hnoll/species.dm"
 #include "datum/kobaloi/bodytypes.dm"
+#include "datum/kobaloi/clothing.dm"
 #include "datum/kobaloi/culture.dm"
 #include "datum/kobaloi/language.dm"
 #include "datum/kobaloi/markings.dm"
