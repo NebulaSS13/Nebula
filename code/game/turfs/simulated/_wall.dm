@@ -48,6 +48,8 @@ var/global/list/wall_fullblend_objects = list(
 	var/paint_color
 	var/stripe_color
 	var/handle_structure_blending = TRUE
+	var/min_dismantle_amount = 2
+	var/max_dismantle_amount = 2
 
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 
@@ -228,7 +230,7 @@ var/global/list/wall_fullblend_objects = list(
 			placed_girder.prepped_for_fakewall = can_open
 			placed_girder.update_icon()
 		if(material)
-			material.place_dismantled_product(src, devastated, amount = rand(3, 5), drop_type = get_dismantle_stack_type())
+			material.place_dismantled_product(src, devastated, amount = rand(min_dismantle_amount, max_dismantle_amount), drop_type = get_dismantle_stack_type())
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
