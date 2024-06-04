@@ -230,10 +230,12 @@ var/global/list/overmap_unknown_ids = list()
 		var/spd = speed[i]
 		var/abs_spd = abs(spd)
 		if(abs_spd)
-			var/partial_power = clamp(abs_spd / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
-			var/delta_v = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, abs_spd)
-			.[i] = -SIGN(spd) * delta_v
-			burn = TRUE
+			var/base_delta_v = get_delta_v()
+			if(base_delta_v > 0)
+				var/partial_power = clamp(abs_spd / (base_delta_v / KM_OVERMAP_RATE), 0, 1)
+				var/delta_v = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, abs_spd)
+				.[i] = -SIGN(spd) * delta_v
+				burn = TRUE
 
 	if(burn)
 		last_burn = world.time
@@ -244,7 +246,7 @@ var/global/list/overmap_unknown_ids = list()
 	pixel_y = position[2] * (world.icon_size/2)
 
 /obj/effect/overmap/proc/get_delta_v()
-	return
+	return 0
 
 /obj/effect/overmap/proc/get_vessel_mass() //Same as above.
 	return vessel_mass
