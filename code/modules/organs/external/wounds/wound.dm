@@ -201,12 +201,11 @@
 	return 1
 
 /datum/wound/proc/bleeding()
-	for(var/obj/item/thing in embedded_objects)
-		if(thing.w_class > ITEM_SIZE_SMALL)
-			return FALSE
-	if(bandaged || clamped)
-		return FALSE
-	return ((bleed_timer > 0 || wound_damage() > bleed_threshold) && is_open())
+	. = !clamped && is_open() && (bleed_timer > 0 || wound_damage() > bleed_threshold)
+	if(. && length(embedded_objects))
+		for(var/obj/item/thing in embedded_objects)
+			if(thing.w_class > ITEM_SIZE_SMALL)
+				return FALSE
 
 /datum/wound/proc/is_surgical()
 	return 0

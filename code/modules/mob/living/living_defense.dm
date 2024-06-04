@@ -198,14 +198,17 @@
 
 /mob/living/proc/try_embed_in_mob(obj/O, def_zone, embed_damage = 0, dtype = BRUTE, datum/wound/supplied_wound, obj/item/organ/external/affecting, direction)
 
-	if(!istype(O) || !O.can_embed())
+	if(!istype(O))
+		return FALSE
+
+	if(!supplied_wound)
+		supplied_wound = apply_damage(embed_damage, dtype, def_zone, O.damage_flags(), O, O.armor_penetration)
+
+	if(!O.can_embed())
 		return FALSE
 
 	if(!affecting)
 		affecting = get_organ(def_zone)
-
-	if(!supplied_wound)
-		supplied_wound = apply_damage(embed_damage, dtype, def_zone, O.damage_flags(), O, O.armor_penetration)
 
 	if(affecting && supplied_wound?.is_open() && dtype == BRUTE) // Can't embed in a small bruise.
 		var/obj/item/I = O
