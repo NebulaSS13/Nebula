@@ -92,7 +92,10 @@
 	desc = "It's a chair. It looks comfy."
 	icon_state = "comfychair_preview"
 	base_icon = "comfychair"
+	reinf_material = /decl/material/solid/organic/cloth
 
+/obj/structure/bed/chair/comfy/unpadded
+	reinf_material = null
 /obj/structure/bed/chair/comfy/brown
 	reinf_material = /decl/material/solid/organic/leather
 /obj/structure/bed/chair/comfy/red
