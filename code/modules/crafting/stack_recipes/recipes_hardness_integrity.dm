@@ -58,7 +58,7 @@
 	result_type        = /obj/structure/bed/chair/office/comfy
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/comfy
-	result_type        = /obj/structure/bed/chair/comfy
+	result_type        = /obj/structure/bed/chair/comfy/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/arm
 	result_type        = /obj/structure/bed/chair/armchair

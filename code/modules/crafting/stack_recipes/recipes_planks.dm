@@ -89,16 +89,16 @@
 
 /decl/stack_recipe/planks/furniture/sofa
 	name                   = "sofa, middle"
-	result_type            = /obj/structure/bed/sofa/middle
+	result_type            = /obj/structure/bed/sofa/middle/unpadded
 	category               = "seating"
 
 /decl/stack_recipe/planks/furniture/sofa/left
 	name                   = "sofa, left"
-	result_type            = /obj/structure/bed/sofa/left
+	result_type            = /obj/structure/bed/sofa/left/unpadded
 
 /decl/stack_recipe/planks/furniture/sofa/right
 	name                   = "sofa, right"
-	result_type            = /obj/structure/bed/sofa/right
+	result_type            = /obj/structure/bed/sofa/right/unpadded
 
 /decl/stack_recipe/planks/furniture/bookcase
 	result_type            = /obj/structure/bookcase
