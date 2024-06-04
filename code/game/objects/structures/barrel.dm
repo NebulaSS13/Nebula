@@ -13,7 +13,6 @@
 	amount_dispensed          = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
 	volume                    = 7500
-	atom_flags                = ATOM_FLAG_CLIMBABLE
 	movable_flags             = MOVABLE_FLAG_WHEELED
 
 /obj/structure/reagent_dispensers/barrel/Initialize()

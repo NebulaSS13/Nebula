@@ -72,7 +72,6 @@
 	name = "nano battery"
 	desc = "A tiny power cell, commonly seen in low-end portable microcomputers. It's rating is 30 Wh."
 	icon_state = "battery_nano"
-	origin_tech = @'{"powerstorage":1,"engineering":1}'
 	battery_rating = 30
 	material = /decl/material/solid/metal/steel
 	origin_tech = @'{"powerstorage":2,"engineering":1}'

@@ -48,11 +48,10 @@
 /obj/item/rig_module/mounted/energy_blade/mantid
 	name = "nanoblade projector"
 	desc = "A fusion-powered blade nanofabricator of Ascent design."
-	interface_name = "nanoblade projector"
+	interface_name = "nanoblade"
 	interface_desc = "A fusion-powered blade nanofabricator of Ascent design."
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "blade"
-	interface_name = "nanoblade"
 	usable = FALSE
 	gun = null
 

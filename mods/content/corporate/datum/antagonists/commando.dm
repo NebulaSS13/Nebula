@@ -15,13 +15,12 @@
 
 /decl/hierarchy/outfit/mercenary_commando
 	name =    "Special Role - Mercenary Commando"
-	l_ear =   /obj/item/radio/headset/mercenary
+	l_ear =   /obj/item/radio/headset/mercenary/commando
 	id_type = /obj/item/card/id/centcom/ERT
 	uniform = /obj/item/clothing/under/syndicate
 	shoes =   /obj/item/clothing/shoes/jackboots/swat
 	glasses = /obj/item/clothing/glasses/thermal
 	mask =    /obj/item/clothing/mask/gas/syndicate
-	l_ear =   /obj/item/radio/headset/hacked
 	backpack_contents = list(/obj/item/ammo_magazine/box/pistol = 1)
 	hands = list(
 		/obj/item/gun/energy/laser,

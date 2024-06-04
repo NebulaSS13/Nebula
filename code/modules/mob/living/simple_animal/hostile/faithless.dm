@@ -6,7 +6,6 @@
 	turns_per_move = 5
 	response_help_1p = "You wave your hand through $TARGET$."
 	response_help_3p = "$USER$ waves $USER_THEIR$ hand through $TARGET$."
-	speed = -1
 	max_health = 80
 	gene_damage = -1
 

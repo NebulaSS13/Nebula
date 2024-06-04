@@ -63,7 +63,6 @@
 	base_cost = 50
 	category = DEITY_TREE_TRANSMUTATION
 	requirements = list(DEITY_TREE_TRANSMUTATION = 3)
-	category = DEITY_TREE_TRANSMUTATION
 
 /datum/deity_item/boon/single_charge/heal
 	name = "Minor Heal"
@@ -71,7 +70,6 @@
 	base_cost = 15
 	category = DEITY_TREE_TRANSMUTATION
 	requirements = list(DEITY_UNLOCK_HEAL = 1)
-	category = DEITY_TREE_TRANSMUTATION
 	boon_path = /spell/targeted/heal_target/tower
 
 /datum/deity_item/boon/single_charge/heal/major

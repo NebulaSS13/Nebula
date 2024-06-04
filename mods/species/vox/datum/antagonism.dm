@@ -13,7 +13,6 @@
 	glasses =    /obj/item/clothing/glasses/thermal
 	holster =    /obj/item/clothing/webbing/holster/armpit
 	suit_store = /obj/item/flashlight
-	l_ear =      /obj/item/radio/headset/raider
 	hands =      list(/obj/item/gun/launcher/alien/spikethrower)
 	id_type =    /obj/item/card/id/syndicate
 

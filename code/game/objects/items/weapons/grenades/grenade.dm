@@ -6,10 +6,9 @@
 	icon_state = ICON_STATE_WORLD
 	throw_speed = 4
 	throw_range = 20
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY
 	z_flags = ZMM_MANGLE_PLANES
-	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/metal/steel
 	var/active
 	var/det_time = 50

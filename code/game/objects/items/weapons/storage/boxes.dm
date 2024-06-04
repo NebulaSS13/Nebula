@@ -706,7 +706,6 @@
 	name = "assorted parts pack"
 	icon = 'icons/obj/items/storage/part_pack.dmi'
 	icon_state = "big"
-	icon_state = "part"
 	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/box/parts/WillContain()

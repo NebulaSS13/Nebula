@@ -164,7 +164,6 @@
 	icon = 'icons/obj/items/cosmetics/eyeshadow.dmi'
 	icon_state = "eyeshadow_closed"
 	cosmetic_type = /decl/sprite_accessory/cosmetics/eyeshadow
-	abstract_type = /obj/item/cosmetics/eyeshadow
 	apply_to_zone = BP_EYES
 	base_icon_state = "eyeshadow"
 

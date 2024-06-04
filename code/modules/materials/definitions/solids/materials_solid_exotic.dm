@@ -2,7 +2,6 @@
 	name = "metallic hydrogen"
 	uid = "solid_metallic_hydrogen"
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
-	name = "metallic hydrogen"
 	color = "#e6c5de"
 	stack_origin_tech = @'{"materials":6,"powerstorage":6,"magnets":5}'
 	heating_products = list(

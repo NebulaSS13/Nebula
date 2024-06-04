@@ -1,6 +1,5 @@
 /datum/job/tradeship_deckhand
 	title = "Deck Hand"
-	event_categories = list("Janitor", "Gardener")
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "literally everyone, you bottom feeder"

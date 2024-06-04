@@ -22,7 +22,6 @@
 	uniform = /obj/item/clothing/pants/slacks/black/outfit/checkered
 	shoes = /obj/item/clothing/shoes/dress
 	glasses = /obj/item/clothing/glasses/sunglasses/big
-	pda_type = /obj/item/modular_computer/pda/cargo
 	hands = list(/obj/item/clipboard)
 	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop

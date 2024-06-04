@@ -6,8 +6,7 @@
 	item_state                    = "fire_extinguisher"
 	hitsound                      = 'sound/weapons/smash.ogg'
 	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER
-	obj_flags                     = OBJ_FLAG_CONDUCTIBLE
-	obj_flags                     = OBJ_FLAG_HOLLOW
+	obj_flags                     = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW
 	w_class                       = ITEM_SIZE_NORMAL
 	throw_speed                   = 2
 	throw_range                   = 10

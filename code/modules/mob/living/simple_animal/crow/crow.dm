@@ -23,7 +23,6 @@
 
 	stop_automated_movement = TRUE
 	universal_speak = TRUE
-	pass_flags = PASS_FLAG_TABLE
 
 
 /mob/living/simple_animal/crow/get_overlay_state_modifier()

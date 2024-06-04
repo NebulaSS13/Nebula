@@ -5,7 +5,6 @@
 	icon = 'icons/obj/items/holder.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
-	origin_tech = null
 	pixel_y = 8
 	origin_tech = @'{"biotech":1}'
 	use_single_icon = TRUE
