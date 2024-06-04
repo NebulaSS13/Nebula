@@ -1,5 +1,5 @@
 /obj/machinery/shield_generator
-	name = "advanced shield generator"
+	name = "shield generator"
 	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
@@ -10,39 +10,69 @@
 	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal)
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 	stat_immune = 0
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
-	var/list/field_segments = list()	// List of all shield segments owned by this generator.
-	var/list/damaged_segments = list()	// List of shield segments that have failed and are currently regenerating.
-	var/shield_modes = 0				// Enabled shield mode flags
-	var/mitigation_em = 0				// Current EM mitigation
-	var/mitigation_physical = 0			// Current Physical mitigation
-	var/mitigation_heat = 0				// Current Burn mitigation
-	var/mitigation_max = 0				// Maximal mitigation reachable with this generator. Set by RefreshParts()
-	var/max_energy = 0					// Maximal stored energy. In joules. Depends on the type of used SMES coil when constructing this generator.
-	var/current_energy = 0				// Current stored energy.
-	var/field_radius = 1				// Current field radius.
-	var/target_radius = 1               // Desired field radius.
-	var/running = SHIELD_OFF			// Whether the generator is enabled or not.
-	var/input_cap = 1 MEGAWATTS			// Currently set input limit. Set to 0 to disable limits altogether. The shield will try to input this value per tick at most
-	var/upkeep_power_usage = 0			// Upkeep power usage last tick.
-	var/upkeep_multiplier = 1			// Multiplier of upkeep values.
-	var/power_usage = 0					// Total power usage last tick.
-	var/overloaded = 0					// Whether the field has overloaded and shut down to regenerate.
-	var/hacked = 0						// Whether the generator has been hacked by cutting the safety wire.
-	var/offline_for = 0					// The generator will be inoperable for this duration in ticks.
-	var/input_cut = 0					// Whether the input wire is cut.
-	var/mode_changes_locked = 0			// Whether the control wire is cut, locking out changes.
-	var/ai_control_disabled = 0			// Whether the AI control is disabled.
-	var/list/mode_list = null			// A list of shield_mode datums.
-	var/full_shield_strength = 0        // The amount of power shields need to be at full operating strength.
-	var/vessel_reverse_dir	= EAST		// Reverse dir of our vessel
-
-	var/idle_multiplier   = 1           // Trades off cost vs. spin-up time from idle to running
-	var/idle_valid_values = list(1, 2, 5, 10)
-	var/spinup_delay      = 20
-	var/spinup_counter    = 0
+	/// List of all shield segments owned by this generator.
+	var/list/field_segments   = list()
+	/// List of shield segments that have failed and are currently regenerating.
+	var/list/damaged_segments = list()
+	/// Enabled shield mode flags
+	var/shield_modes          = 0
+	/// Current EM mitigation
+	var/mitigation_em         = 0
+	/// Current Physical mitigation
+	var/mitigation_physical   = 0
+	/// Current Burn mitigation
+	var/mitigation_heat       = 0
+	/// Maximal mitigation reachable with this generator. Set by RefreshParts()
+	var/mitigation_max        = 0
+	/// Maximal stored energy. In joules. Depends on the type of used SMES coil when constructing this generator.
+	var/max_energy            = 0
+	/// Current stored energy.
+	var/current_energy        = 0
+	/// Current field radius.
+	var/field_radius          = 1
+	/// Desired field radius.
+	var/target_radius         = 1
+	/// Whether the generator is enabled or not.
+	var/running               = SHIELD_OFF
+	/// Currently set input limit. Set to 0 to disable limits altogether. The shield will try to input this value per tick at most
+	var/input_cap             = 1 MEGAWATTS
+	/// Upkeep power usage last tick.
+	var/upkeep_power_usage    = 0
+	/// Multiplier of upkeep values.
+	var/upkeep_multiplier     = 1
+	/// Total power usage last tick.
+	var/power_usage           = 0
+	/// Whether the field has overloaded and shut down to regenerate.
+	var/overloaded            = 0
+	/// Whether the generator has been hacked by cutting the safety wire.
+	var/hacked                = 0
+	/// The generator will be inoperable for this duration in ticks.
+	var/offline_for           = 0
+	/// Whether the input wire is cut.
+	var/input_cut             = 0
+	/// Whether the control wire is cut, locking out changes.
+	var/mode_changes_locked   = 0
+	/// Whether the AI control is disabled.
+	var/ai_control_disabled   = 0
+	/// The amount of power shields need to be at full operating strength.
+	var/full_shield_strength  = 0
+	/// Reverse dir of our vessel
+	var/vessel_reverse_dir    = EAST
+	/// A list of shield_mode datums.
+	var/list/mode_list
+	// Trades off cost vs. spin-up time from idle to running
+	var/idle_multiplier       = 1
+	var/idle_valid_values     = list(1, 2, 5, 10)
+	var/spinup_delay          = 20
+	var/spinup_counter        = 0
 
 	var/obj/effect/overmap/visitable/last_linked_overmap_object
+
+// We do not anchor by default, so that shield generators in hard storage don't create a terminal.
+/obj/machinery/shield_generator/mapped
+	anchored = TRUE
 
 /obj/machinery/shield_generator/on_update_icon()
 	if(running)
@@ -220,12 +250,6 @@
 	if(offline_for)
 		return SPAN_NOTICE("Wait until \the [src] cools down from emergency shutdown first!")
 	return ..()
-
-/obj/machinery/shield_generator/attackby(obj/item/O, mob/user)
-	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
-		attack_hand_with_interaction_checks(user)
-		return TRUE
-	return component_attackby(O, user)
 
 /obj/machinery/shield_generator/proc/energy_failure()
 	if(running == SHIELD_DISCHARGING)

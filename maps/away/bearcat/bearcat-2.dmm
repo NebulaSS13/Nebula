@@ -4324,7 +4324,7 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/power)
 "in" = (
-/obj/machinery/shield_generator,
+/obj/machinery/shield_generator/mapped,
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1
