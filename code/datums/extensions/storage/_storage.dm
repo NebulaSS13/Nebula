@@ -247,7 +247,7 @@ var/global/list/_test_storage_items = list()
 	W.on_exit_storage(src)
 	if(!skip_update && holder)
 		holder.update_icon()
-	return 1
+	return TRUE
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /datum/storage/proc/on_item_pre_deletion(obj/item/W)
