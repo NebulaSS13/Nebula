@@ -18,7 +18,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 */
 
 /decl/bodytype
-	var/list/equip_adjust = list()
+	var/list/equip_adjust
 	var/list/equip_overlays = list()
 
 /decl/bodytype/proc/get_equip_adjust(mob/mob)
