@@ -374,6 +374,7 @@
 		//TODO: This code should probably be run by a callback on the holder
 		var/atom/A = holder
 		A.update_icon()
+	spark_at(get_turf(holder), amount = 2)
 
 /**
 	Called when an emag is used on the holder.
