@@ -857,6 +857,7 @@ th.bot {
 	padding: 0.5em 1em;
 	margin: 0 2px 2px 0;
 }
+/**Button pressed */
 .linkBtnOS:active {
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 80%),
@@ -864,6 +865,7 @@ th.bot {
 		inset -2px -2px hsl(0, 0%, 80%),
 		inset  2px  2px hsl(0, 0%, 62%);
 }
+/**Button disabled */
 .linkBtnOS.disabled,
 .linkBtnOS.inactive,
 .linkBtnOS:disabled {
@@ -876,6 +878,7 @@ th.bot {
 		inset -2px -2px hsl(0, 0%, 52%),
 		inset  2px  2px hsl(0, 0%, 70%);
 }
+/**Button pressed + disabled */
 .linkBtnOS.disabled:active,
 .linkBtnOS.inactive:active {
 	box-shadow:
@@ -885,7 +888,9 @@ th.bot {
 		inset  2px  2px hsl(0, 0%, 30%);
 }
 
-/** Darker variant */
+/*****************
+ * Darker variant
+ *****************/
 .linkBtnOSDark,
 .linkBtnOSDark:hover{
 	color: hsl(0, 0%, 65%);
@@ -907,9 +912,9 @@ th.bot {
 .linkBtnOSDark.disabled,
 .linkBtnOSDark.inactive,
 .linkBtnOSDark:disabled {
-	color: hsl(0, 0%, 28%);
-	background: hsl(0, 0%, 35%);
-	outline: 1px dotted hsl(0, 0%, 40%);
+	color: hsl(0, 0%, 38%);
+	background: hsl(0, 0%, 45%);
+	outline: 1px dotted hsl(0, 0%, 60%);
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 8%),
 		inset  1px  1px hsl(0, 0%, 50%),
@@ -925,7 +930,9 @@ th.bot {
 		inset  2px  2px hsl(0, 0%, 25%);
 }
 
-/** Dark red variant */
+/*******************
+ * Dark Red Variant
+ *******************/
 .linkBtnOSRed,
 .linkBtnOSRed:hover{
 	color: hsl(20, 50%, 65%);
