@@ -18,8 +18,16 @@
 	abstract_type = /obj/item/secure_storage
 	///The type of lockable extension to use for this secure storage.
 	var/lock_type = /datum/extension/lockable/storage
-	var/icon_locking = "secureb"
-	var/icon_opened = "secure0"
+	///An overlay displayed while the thing is being hacked
+	var/overlay_hack       = "overlay-hack"
+	///An overlay displayed after the thing has been emagged
+	var/overlay_emagged    = "overlay-emagged"
+	///An overlay displayed while it's locked
+	var/overlay_locked     = "overlay-locked"
+	///An overlay displayed while it's unlocked
+	var/overlay_unlocked   = "overlay-unlocked"
+	///An overlay displayed while the service panel is opened
+	var/overlay_panel_open = "overlay-panel-open"
 
 /obj/item/secure_storage/Initialize(ml, material_key)
 	var/datum/extension/lockable/mylock = get_or_create_extension(src, lock_type)
@@ -75,19 +83,28 @@
 	//If update icon is called and the lock hasn't been initialized yet for whatever reasons, just skip
 	if(!istype(lock))
 		return
-	if(lock.emagged)
-		add_overlay(icon_locking)
-	else if(lock.open)
-		add_overlay(icon_opened)
+
+	//Add sevice panel overlay if service panel is opened
+	if(lock.open && length(overlay_panel_open))
+		add_overlay("[icon_state]-[overlay_panel_open]")
+
+	//Pick and add the right LED panel overlay
+	if(lock.l_hacking && length(overlay_hack))
+		add_overlay("[icon_state]-[overlay_hack]")
+	else if(lock.emagged && length(overlay_emagged))
+		add_overlay("[icon_state]-[overlay_emagged]")
+	else if(!lock.locked && length(overlay_unlocked))
+		add_overlay("[icon_state]-[overlay_unlocked]")
+	else if(length(overlay_locked))
+		add_overlay("[icon_state]-[overlay_locked]")
 
 // -----------------------------
 //        Secure Briefcase
 // -----------------------------
 /obj/item/secure_storage/briefcase
 	name = "secure briefcase"
-	icon = 'icons/obj/items/storage/briefcase.dmi'
-	icon_state = "secure"
-	item_state = "sec-case"
+	icon = 'icons/obj/items/storage/briefcase_secure.dmi'
+	icon_state = ICON_STATE_WORLD
 	desc = "A large briefcase with a digital locking system."
 	force = 8.0
 	throw_speed = 1
@@ -118,14 +135,13 @@
 /obj/item/secure_storage/safe
 	name = "secure safe"
 	icon = 'icons/obj/items/storage/safe.dmi'
-	icon_state = "safe"
+	icon_state = ICON_STATE_WORLD
+	overlay_panel_open = null //TODO: Add service panel open overlay
 	force = 8
 	w_class = ITEM_SIZE_STRUCTURE
 	anchored = TRUE
 	density = FALSE
 	lock_type = /datum/extension/lockable/storage/safe
-	icon_locking = "safeb"
-	icon_opened = "safe0"
 	storage = /datum/storage/secure/safe
 
 /obj/item/secure_storage/safe/WillContain()

@@ -26,8 +26,8 @@
 /obj/item/evidence
 	name = "evidence case"
 	desc = "A heavy steel case for storing evidence."
-	icon = 'icons/obj/forensics.dmi'
-	icon_state = "case"
+	icon = 'icons/obj/items/storage/crime_kit.dmi'
+	icon_state = ICON_STATE_WORLD
 	storage = /datum/storage/evidence
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/metal/stainlesssteel
