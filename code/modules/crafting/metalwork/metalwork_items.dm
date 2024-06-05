@@ -16,6 +16,7 @@
 	w_class = ITEM_SIZE_NO_CONTAINER
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	storage = /datum/storage/crucible
+
 	var/max_held = 10
 
 /obj/item/chems/crucible/attackby(obj/item/W, mob/user)
@@ -68,5 +69,5 @@
 		add_overlay(I)
 
 /obj/item/chems/crucible/initialize_reagents()
-	create_reagents(15 * REAGENT_UNITS_PER_MATERIAL_SHEET)
+	create_reagents(300 * REAGENT_UNITS_PER_MATERIAL_SHEET) // holds a single full stack of 200 ore
 	return ..()

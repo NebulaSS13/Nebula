@@ -239,7 +239,6 @@ var/global/list/_test_storage_items = list()
 				break
 		if(!stack.amount || QDELETED(stack))
 			stacks -= stack
-			break
 
 /datum/storage/proc/update_ui_after_item_insertion()
 	prepare_ui()
