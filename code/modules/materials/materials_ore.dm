@@ -142,6 +142,8 @@
 	material = /decl/material/solid/bauxite
 /obj/item/stack/material/ore/rutile
 	material = /decl/material/solid/rutile
+/obj/item/stack/material/ore/galena
+	material = /decl/material/solid/galena
 /obj/item/stack/material/ore/hydrogen_hydrate
 	material = /decl/material/solid/ice/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
 /obj/item/stack/material/ore/methane
