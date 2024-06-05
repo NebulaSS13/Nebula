@@ -172,9 +172,9 @@
 
 /obj/item/Destroy()
 
-	if(LAZYLEN(_weapon_effects))
-		_weapon_effects = null
-		SSweapon_effects.queued_weapons -= src
+	if(LAZYLEN(_item_effects))
+		_item_effects = null
+		SSitem_effects.queued_items -= src
 
 	global.listening_objects -= src
 

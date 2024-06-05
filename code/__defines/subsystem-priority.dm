@@ -58,7 +58,7 @@
 #define SS_PRIORITY_WEATHER       10  // Weather processing.
 #define SS_PRIORITY_DAYCYCLE      10  // Day cycle processing on planetoids
 #define SS_PRIORITY_BLOB           0  // Blob processing.
-#define SS_PRIORITY_WEAPON_EFFECTS 0  // Weapon effect processing.
+#define SS_PRIORITY_item_effects 0  // Weapon effect processing.
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
