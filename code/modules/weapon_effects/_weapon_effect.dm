@@ -6,9 +6,14 @@
 #define WEAPON_EFFECT_LISTENER "weff_listener"
 #define WEAPON_EFFECT_VISIBLE  "weff_visible"
 #define WEAPON_EFFECT_RANGED   "weff_ranged"
+#define WEAPON_EFFECT_PROCESS  "weff_process"
 
 /decl/weapon_effect
 	abstract_type = /decl/weapon_effect
+
+/decl/weapon_effect/proc/do_process_effect(obj/item/weapon, list/parameters)
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /decl/weapon_effect/proc/can_do_strike_effect(mob/user, obj/item/weapon, atom/target, list/parameters)
 	SHOULD_CALL_PARENT(FALSE)

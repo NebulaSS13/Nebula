@@ -35,10 +35,13 @@
 	log_debug("[type]: [user] updated onmob appearance for [weapon] in [slot] for [bodytype]/[bodypart] ([json_encode(args)])")
 
 /decl/weapon_effect/debug/hear_speech(obj/item/weapon, mob/user, message, decl/language/speaking)
-	log_debug("[type]: [weapon] heard [user] say [message] in [speaking]")
+	log_debug("[type]: [weapon] heard [user] say [message] in [speaking] ([json_encode(args)])")
 
 /decl/weapon_effect/debug/examined(obj/item/weapon, mob/user)
-	log_debug("[type]: [user] examined [weapon]")
+	log_debug("[type]: [user] examined [weapon] ([json_encode(args)])")
+
+/decl/weapon_effect/debug/do_process_effect(obj/item/weapon, list/parameters)
+	log_debug("[type]: [weapon] processed ([json_encode(args)])")
 
 /obj/item/sword/katana/debug/Initialize()
 	. = ..()
@@ -48,7 +51,8 @@
 		WEAPON_EFFECT_PARRY    = list("fizz"        = "buzz"),
 		WEAPON_EFFECT_USED     = list("aard"        = "vark"),
 		WEAPON_EFFECT_VISIBLE  = list("ooo"         = "aaa"),
-		WEAPON_EFFECT_LISTENER = list("walla walla" = "bing bong")
+		WEAPON_EFFECT_LISTENER = list("walla walla" = "bing bong"),
+		WEAPON_EFFECT_PROCESS  = list("hyonk"       = "hjonk")
 	))
 	add_weapon_effect(/decl/weapon_effect/charges/fireball, list(
 		WEAPON_EFFECT_VISIBLE,

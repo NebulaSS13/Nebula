@@ -12,8 +12,28 @@
 		LAZYSET(_weapon_effects[effect_category], effect, (effect_parameters[effect_category] || TRUE))
 		. = TRUE
 
-	if(. && (WEAPON_EFFECT_LISTENER in effect_parameters))
-		global.listening_objects |= src
+	if(.)
+		if(WEAPON_EFFECT_LISTENER in effect_parameters)
+			global.listening_objects |= src
+		if(WEAPON_EFFECT_PROCESS in effect_parameters)
+			SSweapon_effects.queued_weapons |= src
+
+/obj/item/proc/remove_weapon_effect(decl/weapon_effect/effect)
+	if(!effect || !length(_weapon_effects))
+		return FALSE
+	var/list/removed_effect_categories = list()
+	for(var/effect_category in _weapon_effects)
+		if(LAZYISIN(_weapon_effects[effect_category], effect))
+			_weapon_effects[effect_category] -= effect
+			if(!length(_weapon_effects[effect_category]))
+				removed_effect_categories |= effect_category
+				LAZYREMOVE(_weapon_effects, effect_category)
+			. = TRUE
+	if(.)
+		if(WEAPON_EFFECT_LISTENER in removed_effect_categories)
+			global.listening_objects -= src
+		if(WEAPON_EFFECT_PROCESS in removed_effect_categories)
+			SSweapon_effects.queued_weapons -= src
 
 /obj/item/proc/get_weapon_effect_parameter(decl/weapon_effect/effect, effect_category, parameter_name)
 	if(!effect || !length(_weapon_effects) || !effect_category || !parameter_name)
@@ -31,18 +51,6 @@
 		return FALSE
 	LAZYSET(effects[effect], parameter_name, parameter_value)
 	return TRUE
-
-/obj/item/proc/remove_weapon_effect(decl/weapon_effect/effect)
-	if(!effect || !length(_weapon_effects))
-		return FALSE
-	for(var/effect_category in _weapon_effects)
-		if(LAZYISIN(_weapon_effects[effect_category], effect))
-			_weapon_effects[effect_category] -= effect
-			if(!length(_weapon_effects[effect_category]))
-				LAZYREMOVE(_weapon_effects, effect_category)
-				if(effect_category == WEAPON_EFFECT_LISTENER)
-					global.listening_objects -= src
-			. = TRUE
 
 /obj/item/proc/get_weapon_effects(effect_category)
 	return length(_weapon_effects) ? LAZYACCESS(_weapon_effects, effect_category) : null
@@ -166,3 +174,10 @@
 		var/list/parameters = weapon_effects[ranged_effect]
 		if(ranged_effect.can_do_ranged_effect(user, src, target, parameters))
 			ranged_effect.do_ranged_effect(user, src, target, parameters)
+
+// PROCESS effects
+/obj/item/proc/process_weapon_effects()
+	var/list/weapon_effects = get_weapon_effects(WEAPON_EFFECT_PROCESS)
+	if(length(weapon_effects))
+		for(var/decl/weapon_effect/process_effect as anything in weapon_effects)
+			process_effect.do_process_effect(src, weapon_effects[process_effect])

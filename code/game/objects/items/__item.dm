@@ -172,7 +172,12 @@
 
 /obj/item/Destroy()
 
+	if(LAZYLEN(_weapon_effects))
+		_weapon_effects = null
+		SSweapon_effects.queued_weapons -= src
+
 	global.listening_objects -= src
+
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
 	QDEL_NULL(coating)
