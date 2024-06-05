@@ -4,26 +4,40 @@
 /obj/item/proc/add_weapon_effect(effect_type, list/effect_parameters)
 	if(!effect_type || !length(effect_parameters))
 		return FALSE
-	var/decl/weapon_effect/add_effect = GET_DECL(effect_type)
-	if(!add_effect)
+	var/decl/weapon_effect/effect = ispath(effect_type) ? GET_DECL(effect_type) : effect_type
+	if(!istype(effect))
 		return FALSE
 	LAZYINITLIST(_weapon_effects)
 	for(var/effect_category in effect_parameters)
-		LAZYSET(_weapon_effects[effect_category], add_effect, (effect_parameters[effect_category] || TRUE))
+		LAZYSET(_weapon_effects[effect_category], effect, (effect_parameters[effect_category] || TRUE))
 		. = TRUE
 
 	if(. && (WEAPON_EFFECT_LISTENER in effect_parameters))
 		global.listening_objects |= src
 
-/obj/item/proc/remove_weapon_effect(effect_type)
-	if(!effect_type || !length(_weapon_effects))
+/obj/item/proc/get_weapon_effect_parameter(decl/weapon_effect/effect, effect_category, parameter_name)
+	if(!effect || !length(_weapon_effects) || !effect_category || !parameter_name)
+		return null
+	var/list/effects = LAZYACCESS(_weapon_effects, effect_category)
+	if(!LAZYISIN(effects, effect))
+		return null
+	return LAZYACCESS(effects[effect], parameter_name)
+
+/obj/item/proc/set_weapon_effect_parameter(decl/weapon_effect/effect, effect_category, parameter_name, parameter_value)
+	if(!effect || !length(_weapon_effects) || !effect_category || !parameter_name)
 		return FALSE
-	var/decl/weapon_effect/removing_effect = GET_DECL(effect_type)
-	if(!removing_effect)
+	var/list/effects = LAZYACCESS(_weapon_effects, effect_category)
+	if(!LAZYISIN(effects, effect))
+		return FALSE
+	LAZYSET(effects[effect], parameter_name, parameter_value)
+	return TRUE
+
+/obj/item/proc/remove_weapon_effect(decl/weapon_effect/effect)
+	if(!effect || !length(_weapon_effects))
 		return FALSE
 	for(var/effect_category in _weapon_effects)
-		if(LAZYISIN(_weapon_effects[effect_category], removing_effect))
-			_weapon_effects[effect_category] -= removing_effect
+		if(LAZYISIN(_weapon_effects[effect_category], effect))
+			_weapon_effects[effect_category] -= effect
 			if(!length(_weapon_effects[effect_category]))
 				LAZYREMOVE(_weapon_effects, effect_category)
 				if(effect_category == WEAPON_EFFECT_LISTENER)
@@ -140,3 +154,15 @@
 		return
 	for(var/decl/weapon_effect/examine_effect as anything in weapon_effects)
 		examine_effect.examined(src, user, distance, weapon_effects[examine_effect])
+
+// RANGED effects
+/obj/item/afterattack(turf/floor/target, mob/user, proximity)
+	if((. = ..()) || proximity)
+		return
+	var/list/weapon_effects = get_weapon_effects(WEAPON_EFFECT_RANGED)
+	if(!length(weapon_effects))
+		return
+	for(var/decl/weapon_effect/ranged_effect as anything in weapon_effects)
+		var/list/parameters = weapon_effects[ranged_effect]
+		if(ranged_effect.can_do_ranged_effect(user, src, target, parameters))
+			ranged_effect.do_ranged_effect(user, src, target, parameters)

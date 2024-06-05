@@ -3909,6 +3909,8 @@
 #include "code\modules\ventcrawl\ventcrawl_multiz.dm"
 #include "code\modules\ventcrawl\ventcrawl_verb.dm"
 #include "code\modules\weapon_effects\_weapon_effect.dm"
+#include "code\modules\weapon_effects\weapon_effect_aura.dm"
+#include "code\modules\weapon_effects\weapon_effect_charges.dm"
 #include "code\modules\weapon_effects\weapon_effect_debug.dm"
 #include "code\modules\weapon_effects\weapon_effect_item.dm"
 #include "code\modules\weather\_weather.dm"
