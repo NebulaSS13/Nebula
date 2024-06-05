@@ -33,7 +33,6 @@
 
 /obj/item/implant/translator/Destroy()
 	removed()
-	global.listening_objects -= src
 	return ..()
 
 /obj/item/implanter/translator

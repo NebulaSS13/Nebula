@@ -16,7 +16,6 @@
 	global.listening_objects += src
 
 /obj/item/assembly/voice/Destroy()
-	global.listening_objects -= src
 	return ..()
 
 /obj/item/assembly/voice/hear_talk(mob/living/M, msg)

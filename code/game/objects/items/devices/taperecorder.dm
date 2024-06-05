@@ -35,7 +35,6 @@
 
 /obj/item/taperecorder/Destroy()
 	QDEL_NULL(wires)
-	global.listening_objects -= src
 	if(mytape)
 		qdel(mytape)
 		mytape = null

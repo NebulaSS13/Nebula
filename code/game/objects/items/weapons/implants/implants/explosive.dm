@@ -163,7 +163,6 @@
 	removed()
 	radio_controller.remove_object(src, frequency)
 	radio_connection = null
-	global.listening_objects -= src
 	return ..()
 
 /obj/item/implanter/explosive

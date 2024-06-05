@@ -22,7 +22,6 @@
 
 /obj/item/clothing/mask/gas/poltergeist/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	global.listening_objects -= src
 	return ..()
 
 /obj/item/clothing/mask/gas/poltergeist/Process()

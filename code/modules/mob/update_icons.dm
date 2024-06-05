@@ -1,5 +1,5 @@
 // TODO: look at all uses of this and refresh_visible_overlays(), probably should be using update_icon().
-/mob/living/proc/try_refresh_visible_overlays()
+/mob/proc/try_refresh_visible_overlays()
 	SHOULD_CALL_PARENT(TRUE)
 	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))
 		return FALSE
@@ -7,13 +7,13 @@
 	apply_visible_overlays()
 	return TRUE
 
-/mob/living/proc/refresh_visible_overlays()
+/mob/proc/refresh_visible_overlays()
 	SHOULD_CALL_PARENT(TRUE)
 	for(var/slot in get_inventory_slots())
 		update_equipment_overlay(slot, FALSE)
 	return TRUE
 
-/mob/living/proc/apply_visible_overlays()
+/mob/proc/apply_visible_overlays()
 	for(var/overlay in get_all_current_mob_overlays())
 		add_overlay(overlay)
 	underlays = get_all_current_mob_underlays()
@@ -43,7 +43,8 @@
 /mob/proc/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(redraw_mob)
-		queue_icon_update()
+		cut_overlays()
+		apply_visible_overlays()
 
 /mob/proc/get_current_mob_underlay(var/underlay_layer)
 	return

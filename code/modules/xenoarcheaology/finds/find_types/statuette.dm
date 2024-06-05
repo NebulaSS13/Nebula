@@ -34,7 +34,6 @@
 
 /obj/item/vampiric/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	global.listening_objects -= src
 	return ..()
 
 /obj/item/vampiric/Process()
