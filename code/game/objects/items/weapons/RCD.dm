@@ -53,9 +53,6 @@
 	. = ..()
 	update_icon()	//Initializes the ammo counter
 
-/obj/item/rcd/Destroy()
-	return ..()
-
 /obj/item/rcd/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/rcd_ammo))
@@ -136,9 +133,9 @@
 // TODO: make this use actual matter.
 /obj/item/rcd_ammo/create_matter()
 	// Formula: 3 MU per wall == 6 steel sheets == 2 sheets per MU, /2 for glass and steel, with a
-	// discount for the outlay of materials (and to make the final costs less obscene). Technically 
-	// this means you can generate steel from nothing by building walls with an RCD and then 
-	// deconstructing them but until we have a unified matter/material system on /atom I think we're 
+	// discount for the outlay of materials (and to make the final costs less obscene). Technically
+	// this means you can generate steel from nothing by building walls with an RCD and then
+	// deconstructing them but until we have a unified matter/material system on /atom I think we're
 	// just going to have to cop it.
 	var/sheets = round((remaining * SHEET_MATERIAL_AMOUNT) * 0.75)
 	matter = list(

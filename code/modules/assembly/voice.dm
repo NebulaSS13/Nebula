@@ -15,9 +15,6 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/assembly/voice/Destroy()
-	return ..()
-
 /obj/item/assembly/voice/hear_talk(mob/living/M, msg)
 	if(listening)
 		recorded = msg
