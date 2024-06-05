@@ -360,7 +360,7 @@
 	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = @'{"materials":2}'
 	ore_compresses_to = /decl/material/solid/metal/osmium
-	ore_result_amount = 5
+	ore_result_amount = 1
 	ore_spread_chance = 10
 	ore_name = "raw platinum"
 	ore_scan_icon = "mineral_rare"

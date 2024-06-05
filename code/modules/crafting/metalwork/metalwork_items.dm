@@ -41,7 +41,7 @@
 		// Attempting to skim off slag.
 		// TODO: check for appropriate vessel material? Check melting point against temperature of crucible?
 		if(reagents?.total_volume && length(reagents.reagent_volumes) > 1)
-			var/removing = min(amount_per_transfer_from_this, W.reagents.maximum_volume - W.reagents.total_volume)
+			var/removing = min(amount_per_transfer_from_this, REAGENTS_FREE_SPACE(W.reagents))
 			if(removing < length(reagents.reagent_volumes)-1)
 				to_chat(user, SPAN_WARNING("\The [W] is full."))
 				return TRUE

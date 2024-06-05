@@ -420,9 +420,7 @@ var/global/obj/temp_reagents_holder = new
 		part /= total_volume
 
 	. = 0
-	for(var/rtype in reagent_volumes)
-		if(LAZYISIN(skip_reagents, rtype))
-			continue
+	for(var/rtype in reagent_volumes - skip_reagents)
 		var/amount_to_transfer = NONUNIT_FLOOR(REAGENT_VOLUME(src, rtype) * part, MINIMUM_CHEMICAL_VOLUME)
 		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE) // We don't react until everything is in place
 		. += amount_to_transfer
