@@ -15,6 +15,10 @@
 	default_job_type        = /datum/job/shaded_hills/visitor/traveller
 	default_department_type = /decl/department/shaded_hills/visitors
 	species_to_job_whitelist = list(
+		/decl/species/grafadreka = list(
+			/datum/job/shaded_hills/caves/dweller,
+			/datum/job/shaded_hills/visitor/traveller
+		),
 		/decl/species/kobaloi = list(
 			/datum/job/shaded_hills/caves/dweller,
 			/datum/job/shaded_hills/visitor/traveller
