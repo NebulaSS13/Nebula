@@ -10,8 +10,8 @@
 	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user
 		to_chat(R, "<span class='notice'>Your systems report damaged components mending by themselves!</span>")
-		R.heal_damage(rand(10,30), do_update_health = FALSE)
-		R.heal_damage(rand(10,30), BURN)
+		R.heal_damage(rand(10,30), do_update_health = FALSE, heal_synthetic = TRUE)
+		R.heal_damage(rand(10,30), BURN, heal_synthetic = TRUE)
 		return 1
 
 /datum/artifact_effect/roboheal/DoEffectAura()
@@ -21,8 +21,8 @@
 			if(world.time - last_message > 200)
 				to_chat(M, "<span class='notice'>SYSTEM ALERT: Beneficial energy field detected!</span>")
 				last_message = world.time
-			M.heal_damage(1, do_update_health = FALSE)
-			M.heal_damage(1, BURN)
+			M.heal_damage(1, do_update_health = FALSE, heal_synthetic = TRUE)
+			M.heal_damage(1, BURN, heal_synthetic = TRUE)
 		return 1
 
 /datum/artifact_effect/roboheal/DoEffectPulse()
@@ -32,6 +32,6 @@
 			if(world.time - last_message > 200)
 				to_chat(M, "<span class='notice'>SYSTEM ALERT: Structural damage has been repaired by energy pulse!</span>")
 				last_message = world.time
-			M.heal_damage(10, do_update_health = FALSE)
-			M.heal_damage(10, BURN)
+			M.heal_damage(10, do_update_health = FALSE, heal_synthetic = TRUE)
+			M.heal_damage(10, BURN, heal_synthetic = TRUE)
 		return 1

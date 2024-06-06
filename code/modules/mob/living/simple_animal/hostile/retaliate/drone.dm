@@ -102,8 +102,8 @@
 	if(prob(1))
 		src.visible_message("<span class='warning'>[html_icon(src)] [src] shudders and shakes as some of it's damaged systems come back online.</span>")
 		spark_at(src, cardinal_only = TRUE)
-		heal_damage(BRUTE, (rand(10,50)), do_update_health = FALSE)
-		heal_damage(BURN, (rand(10,50)))
+		heal_damage(BRUTE, (rand(10,50)), do_update_health = FALSE, heal_synthetic = TRUE)
+		heal_damage(BURN, (rand(10,50)), heal_synthetic = TRUE)
 
 	//spark for no reason
 	if(prob(5))

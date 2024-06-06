@@ -5,7 +5,7 @@
 	layer = MOB_LAYER
 
 /obj/aura/blueforge_aura/life_tick()
-	user.heal_damage(TOX, 10)
+	user.heal_damage(TOX, 10, heal_synthetic = TRUE)
 	return 0
 
 /obj/aura/blueforge_aura/bullet_act(var/obj/item/projectile/P)

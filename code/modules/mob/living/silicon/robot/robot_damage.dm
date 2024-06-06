@@ -17,13 +17,13 @@
 	if(amount > 0)
 		take_damage(amount)
 	else
-		heal_damage(-amount)
+		heal_damage(-amount, heal_synthetic = TRUE)
 
 /mob/living/silicon/robot/adjustFireLoss(var/amount, var/do_update_health = TRUE)
 	if(amount > 0)
 		take_damage(amount, BURN)
 	else
-		heal_damage(-amount, BURN)
+		heal_damage(-amount, BURN, heal_synthetic = TRUE)
 
 /mob/living/silicon/robot/proc/get_damaged_components(var/brute, var/burn, var/destroyed = 0)
 	var/list/datum/robot_component/parts = list()

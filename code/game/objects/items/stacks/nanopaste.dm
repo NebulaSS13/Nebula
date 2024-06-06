@@ -16,8 +16,8 @@
 		var/mob/living/silicon/robot/R = target
 		if (R.get_damage(BRUTE) || R.get_damage(BURN) )
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			R.heal_damage(BRUTE, 15, do_update_health = FALSE)
-			R.heal_damage(BURN, 15)
+			R.heal_damage(BRUTE, 15, do_update_health = FALSE, heal_synthetic = TRUE)
+			R.heal_damage(BURN, 15, heal_synthetic = TRUE)
 			use(1)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] applied some [src] on [R]'s damaged areas."),

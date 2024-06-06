@@ -570,7 +570,7 @@
 			return statuses
 	if(user.get_damage(TOX))
 		use = min(user.get_damage(TOX), charges)
-		user.heal_damage(use, TOX)
+		user.heal_damage(use, TOX, heal_synthetic = TRUE)
 		charges -= use
 		statuses += "your body stings less"
 		if(!charges)

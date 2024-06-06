@@ -47,7 +47,7 @@
 	regen_time++
 	if(regen_time == 2 && current_health < get_max_health()) //slow regen
 		regen_time = 0
-		heal_damage(1)
+		heal_damage(1, heal_synthetic = TRUE)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/get_death_message(gibbed)
 	return "dissipates into thin air."
@@ -82,8 +82,8 @@
 		return 0
 	src.visible_message("\The [src] glows green for a moment, healing \the [target_mob]'s wounds.")
 	take_damage(3)
-	target_mob.heal_damage(BRUTE, 5, do_update_health = FALSE)
-	target_mob.heal_damage(BURN, 5)
+	target_mob.heal_damage(BRUTE, 5, do_update_health = FALSE, heal_synthetic = TRUE)
+	target_mob.heal_damage(BURN, 5, heal_synthetic = TRUE)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(var/mob/speaker,var/text)
 	if(stance != COMMANDED_HEAL || stance != COMMANDED_HEALING) //dont want attack to bleed into heal.

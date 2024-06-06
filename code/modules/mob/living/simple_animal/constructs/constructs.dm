@@ -69,7 +69,7 @@
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
 		if(current_health < get_max_health())
-			heal_damage(BRUTE, 5)
+			heal_damage(BRUTE, 5, heal_synthetic = TRUE)
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] is undamaged.</span>")

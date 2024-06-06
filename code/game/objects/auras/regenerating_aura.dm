@@ -3,11 +3,12 @@
 	var/brute_mult = 1
 	var/fire_mult = 1
 	var/tox_mult = 1
+	var/heal_synthetic = FALSE
 
 /obj/aura/regenerating/life_tick()
-	user.heal_damage(BRUTE, brute_mult, do_update_health = FALSE)
-	user.heal_damage(BURN, fire_mult, do_update_health = FALSE)
-	user.heal_damage(TOX, tox_mult)
+	user.heal_damage(BRUTE, brute_mult, do_update_health = FALSE, heal_synthetic = heal_synthetic)
+	user.heal_damage(BURN, fire_mult, do_update_health = FALSE, heal_synthetic = heal_synthetic)
+	user.heal_damage(TOX, tox_mult, heal_synthetic = heal_synthetic)
 
 /obj/aura/regenerating/human
 	var/nutrition_damage_mult = 1 //How much nutrition it takes to heal regular damage
@@ -39,15 +40,15 @@
 	var/organ_regen = get_config_value(/decl/config/num/health_organ_regeneration_multiplier)
 	if(brute_mult && H.get_damage(BRUTE))
 		update_health = TRUE
-		H.heal_damage(BRUTE, brute_mult * organ_regen, do_update_health = FALSE)
+		H.heal_damage(BRUTE, brute_mult * organ_regen, do_update_health = FALSE, heal_synthetic = heal_synthetic)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(fire_mult && H.get_damage(BURN))
 		update_health = TRUE
-		H.heal_damage(BURN, fire_mult * organ_regen, do_update_health = FALSE)
+		H.heal_damage(BURN, fire_mult * organ_regen, do_update_health = FALSE, heal_synthetic = heal_synthetic)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(tox_mult && H.get_damage(TOX))
 		update_health = TRUE
-		H.heal_damage(TOX, tox_mult * organ_regen, do_update_health = FALSE)
+		H.heal_damage(TOX, tox_mult * organ_regen, do_update_health = FALSE, heal_synthetic = heal_synthetic)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(update_health)
 		H.update_health()

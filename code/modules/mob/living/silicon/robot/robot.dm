@@ -480,7 +480,7 @@
 		var/obj/item/weldingtool/WT = W
 		if (WT.weld(0))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			heal_damage(BRUTE, 30)
+			heal_damage(BRUTE, 30, heal_synthetic = TRUE)
 			add_fingerprint(user)
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
 		else
@@ -494,7 +494,7 @@
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.use(1))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			heal_damage(BURN, 30)
+			heal_damage(BURN, 30, heal_synthetic = TRUE)
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the burnt wires on \the [src]!"))
 
 	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
