@@ -268,13 +268,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			continue
 		var/found_whitelisted_job = FALSE
 		for(var/datum/job/job as anything in SSjobs.primary_job_datums)
-			if((species.name in job_to_species_whitelist[job.type]) || (job.type in species_to_job_whitelist[species.name]))
-				LAZYDISTINCTADD(species_to_job_whitelist[species.name], job.type)
-				LAZYDISTINCTADD(job_to_species_whitelist[job.type], species.name)
+			if((species.type in job_to_species_whitelist[job.type]) || (job.type in species_to_job_whitelist[species.type]))
+				LAZYDISTINCTADD(species_to_job_whitelist[species.type], job.type)
+				LAZYDISTINCTADD(job_to_species_whitelist[job.type], species.type)
 				found_whitelisted_job = TRUE
 			else
-				LAZYDISTINCTADD(species_to_job_blacklist[species.name], job.type)
-				LAZYDISTINCTADD(job_to_species_blacklist[job.type], species.name)
+				LAZYDISTINCTADD(species_to_job_blacklist[species.type], job.type)
+				LAZYDISTINCTADD(job_to_species_blacklist[job.type], species.type)
 
 		// If no jobs are available for the main map, mark the species as unavailable to avoid player confusion.
 		if(!found_whitelisted_job && src == global.using_map)
