@@ -171,8 +171,13 @@
 	message = filter_modify_message(message)
 	message = handle_autopunctuation(message)
 
-	if(speaking && !speaking.can_be_spoken_properly_by(src))
-		message = speaking.muddle(message)
+	if(speaking)
+		var/speech_ability_result = speaking.can_be_spoken_properly_by(src)
+		if(speech_ability_result == SPEECH_RESULT_MUDDLED)
+			message = speaking.muddle(message)
+		else if(speech_ability_result == SPEECH_RESULT_INCAPABLE)
+			to_chat(src, SPAN_WARNING("You don't have the right equipment to communicate in that way!")) // weird phrasing, but needs to cover speaking and signing
+			return
 
 	if(!(speaking && (speaking.flags & LANG_FLAG_NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)

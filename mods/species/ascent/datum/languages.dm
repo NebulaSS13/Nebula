@@ -19,14 +19,14 @@
 /decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
 	var/mob/living/S = speaker
 	if(!istype(S))
-		return FALSE
+		return SPEECH_RESULT_INCAPABLE
 	if(S.isSynthetic())
-		return TRUE
+		return SPEECH_RESULT_GOOD
 	if(ishuman(speaker))
 		var/mob/living/carbon/human/H = speaker
 		if(H.species.name in correct_mouthbits)
-			return TRUE
-	return FALSE
+			return SPEECH_RESULT_GOOD
+	return SPEECH_RESULT_MUDDLED
 
 /decl/language/mantid/muddle(var/message)
 	message = replacetext(message, "...",  ".")

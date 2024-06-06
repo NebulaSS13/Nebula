@@ -24,7 +24,7 @@
 		/datum/job/shaded_hills/caves/dweller = list(
 			/decl/species/human,
 			/decl/species/hnoll
-		)
+		),
 		/decl/species/kobaloi = list(
 			/datum/job/shaded_hills/inn/innkeeper
 		)
