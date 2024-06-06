@@ -58,10 +58,10 @@
 	return TRUE
 
 /datum/extension/deity_be_near/champion/deal_damage(var/mob/living/victim,var/mult)
-	victim.take_damage(3 * mult, OXY)
+	victim.take_damage(3 * mult, OXY, damage_flags = DAM_DISPERSED)
 
 /datum/extension/deity_be_near/oracle/deal_damage(var/mob/living/victim, var/mult)
-	victim.take_damage(mult, BURN)
+	victim.take_damage(mult, BURN, damage_flags = DAM_DISPERSED)
 
 /datum/extension/deity_be_near/traitor/deal_damage(var/mob/living/victim, var/mult)
-	victim.take_damage(5 * mult, PAIN)
+	victim.take_damage(5 * mult, PAIN, damage_flags = DAM_DISPERSED)

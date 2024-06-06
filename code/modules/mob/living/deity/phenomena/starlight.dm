@@ -158,7 +158,7 @@
 /datum/phenomena/burning_glare/activate(var/mob/living/L)
 	..()
 	to_chat(L, "<span class='danger'>You feel yourself burn!</span>")
-	L.take_damage(10, BURN)
+	L.take_damage(10, BURN, damage_flags = DAM_DISPERSED)
 	if(L.get_damage(BURN) > 60)
 		L.fire_stacks += 50
 		L.IgniteMob()

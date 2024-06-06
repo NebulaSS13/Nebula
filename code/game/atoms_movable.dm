@@ -547,7 +547,7 @@
 	if(istype(organ))
 		organ.take_external_damage(0, burn_damage)
 	else
-		holder.take_damage(burn_damage, BURN)
+		holder.take_damage(burn_damage, BURN, target_zone = check_organ)
 	if(held_slot in holder.get_held_item_slots())
 		holder.drop_from_inventory(src)
 	else

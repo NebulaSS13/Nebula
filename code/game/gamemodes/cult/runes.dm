@@ -182,7 +182,7 @@
 			showOptions(user)
 			var/warning = 0
 			while(user.loc == src)
-				user.take_damage(2, BURN)
+				user.take_damage(2, BURN, damage_flags = DAM_DISPERSED)
 				if(user.get_damage(BURN) > 50)
 					to_chat(user, "<span class='danger'>Your body can't handle the heat anymore!</span>")
 					leaveRune(user)
@@ -470,8 +470,8 @@
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		var/dam_amt = 2 + length(casters)
-		victim.take_damage(dam_amt, do_update_health = FALSE)
-		victim.take_damage(dam_amt, BURN) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		victim.take_damage(dam_amt, do_update_health = FALSE, damage_flags = DAM_DISPERSED)
+		victim.take_damage(dam_amt, BURN, damage_flags = DAM_DISPERSED) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		if(ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 			if(H.is_asystole())

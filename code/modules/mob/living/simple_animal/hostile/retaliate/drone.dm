@@ -164,7 +164,7 @@
 
 //ion rifle!
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
-	take_damage(rand(3,15) * (severity + 1), BURN)
+	take_damage(rand(3,15) * (severity + 1), BURN, damage_flags = DAM_DISPERSED)
 	disabled = rand(150, 600)
 	hostile_drone = 0
 	walk(src,0)
