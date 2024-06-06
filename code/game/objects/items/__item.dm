@@ -97,6 +97,9 @@
 	var/paint_color
 	var/paint_verb = "painted"
 
+	/// What dexterity is required to attack with this item?
+	var/needs_attack_dexterity = DEXTERITY_WIELD_ITEM
+
 /obj/item/get_color()
 	if(paint_color)
 		return paint_color

@@ -34,7 +34,7 @@
 
 // Let people with mouth slots pick things up.
 /obj/item/organ/external/head/get_manual_dexterity()
-	. = ..() | DEXTERITY_BASE
+	. = DEXTERITY_SIMPLE_MACHINES | DEXTERITY_HOLD_ITEM | DEXTERITY_EQUIP_ITEM | DEXTERITY_KEYBOARDS | DEXTERITY_TOUCHSCREENS
 
 /obj/item/organ/external/head/examine(mob/user)
 	. = ..()

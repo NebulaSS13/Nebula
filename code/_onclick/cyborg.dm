@@ -71,11 +71,13 @@
 		W.attack_self(src)
 		return
 
-	// cyborgs are prohibited from using storage items so we can I think safely remove (A.loc in contents)
-	var/can_wield_item = check_dexterity(DEXTERITY_WIELD_ITEM, silent = TRUE)
-	if(can_wield_item && (A == loc || (A in loc) || (A in contents)))
-		// No adjacency checks
+	var/check_dexterity_val = A.storage ? DEXTERITY_NONE : (istype(W) ? W.needs_attack_dexterity : DEXTERITY_WIELD_ITEM)
+	var/can_wield_item = (!check_dexterity_val || check_dexterity(check_dexterity_val))
+	if(!can_wield_item)
+		return
 
+	if(A == loc || (A in loc) || (A in contents))
+		// No adjacency checks
 		var/resolved = W.resolve_attackby(A, src, params)
 		if(!resolved && A && W)
 			W.afterattack(A, src, 1, params) // 1 indicates adjacency
@@ -86,18 +88,15 @@
 		return
 
 	var/sdepth = A.storage_depth_turf()
-	if(can_wield_item && (isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1)))
+	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
-
 			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 			setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-			return
 		else
 			W.afterattack(A, src, 0, params)
-			return
-	return
+		return
 
 //Middle click cycles through selected modules.
 /mob/living/silicon/robot/MiddleClickOn(var/atom/A)
