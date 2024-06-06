@@ -39,7 +39,7 @@
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 
 /turf/floor/natural/grass/wild/attackby(obj/item/W, mob/user)
-	if(IS_KNIFE(W))
+	if(IS_KNIFE(W) && !istype(flooring))
 		if(W.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = "harvesting", success_message = "harvesting"))
 			if(QDELETED(src) || !istype(src, /turf/floor/natural/grass/wild))
 				return TRUE

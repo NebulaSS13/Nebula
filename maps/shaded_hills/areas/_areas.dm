@@ -1,5 +1,6 @@
 /area/shaded_hills
 	abstract_type = /area/shaded_hills
+	allow_xenoarchaeology_finds = FALSE
 	icon = 'maps/shaded_hills/areas/icons.dmi'
 	icon_state = "area"
 	base_turf = /turf/floor/natural/rock/basalt

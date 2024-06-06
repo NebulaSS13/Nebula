@@ -182,7 +182,7 @@
 		return
 
 	to_chat(user, SPAN_NOTICE("You [recipe.get_craft_verb(src)] [recipe.get_display_name(producing, mat, reinf_mat)]!"))
-	var/list/atom/results = recipe.spawn_result(user, user.loc, producing, mat, reinf_mat, paint_color)
+	var/list/atom/results = recipe.spawn_result(user, user.loc, producing, mat, reinf_mat, paint_color, crafting_stack_type, expending)
 	var/atom/movable/O = LAZYACCESS(results, 1)
 	if(istype(O) && !QDELETED(O)) // In case of stack merger.
 		O.add_fingerprint(user)

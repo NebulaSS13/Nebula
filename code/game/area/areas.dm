@@ -13,6 +13,9 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
+	// If true, will allow natural walls in this area to have xenoarchaeology finds in them.
+	var/allow_xenoarchaeology_finds = TRUE
+
 	// If set, will modify ambient light of ambiently lit turfs under a ceiling.
 	var/interior_ambient_light_modifier
 	// If set, will apply ambient light of this colour to turfs under a ceiling.

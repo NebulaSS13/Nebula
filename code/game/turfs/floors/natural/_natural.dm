@@ -76,7 +76,7 @@
 
 /turf/floor/natural/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/stack/material/ore) || istype(W, /obj/item/stack/material/lump))
+	if(!istype(flooring) && (istype(W, /obj/item/stack/material/ore) || istype(W, /obj/item/stack/material/lump)))
 
 		if(get_physical_height() >= 0)
 			to_chat(user, SPAN_WARNING("\The [src] is flush with ground level and cannot be backfilled."))

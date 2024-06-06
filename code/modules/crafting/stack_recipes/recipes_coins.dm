@@ -26,7 +26,7 @@
 	if(!istype(denomination))
 		. += "invalid or null denomination: [denomination || "NULL"]"
 
-/decl/stack_recipe/coin/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+/decl/stack_recipe/coin/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	. = ..()
 	if(istype(denomination))
 		for(var/obj/item/coin/coin in .)

@@ -2,6 +2,7 @@
 	icon_state = "brick"
 	material = /decl/material/solid/stone/sandstone
 	girder_material = null
+	floor_type = null
 
 /turf/wall/brick/get_dismantle_stack_type()
 	return /obj/item/stack/material/brick

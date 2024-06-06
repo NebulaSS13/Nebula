@@ -120,9 +120,10 @@
 			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
+			setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		else
 			if(ismob(A)) // No instant mob attacking
-				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+				setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			UnarmedAttack(A, TRUE)
 
 		trigger_aiming(TARGET_CAN_CLICK)
@@ -141,9 +142,10 @@
 				var/resolved = W.resolve_attackby(A,src, params)
 				if(!resolved && A && W)
 					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent
+				setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			else
 				if(ismob(A)) // No instant mob attacking
-					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+					setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 				UnarmedAttack(A, TRUE)
 
 			trigger_aiming(TARGET_CAN_CLICK)

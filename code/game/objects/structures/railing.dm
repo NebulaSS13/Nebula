@@ -29,6 +29,7 @@
 
 /obj/structure/railing/mapped/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	parts_type = /obj/item/stack/material/plank
 	color = WOOD_COLOR_BLACK
 	paint_color = null
 

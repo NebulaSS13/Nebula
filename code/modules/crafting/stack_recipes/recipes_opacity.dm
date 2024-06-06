@@ -24,7 +24,7 @@
 				to_chat(user, SPAN_WARNING("There is already a full-tile window here!"))
 				return FALSE
 
-/decl/stack_recipe/opacity/fullwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+/decl/stack_recipe/opacity/fullwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	. = list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, SOUTHWEST, TRUE))
 	if(paint_color)
 		for(var/obj/structure/window/window in .)
@@ -44,7 +44,7 @@
 				to_chat(user, SPAN_WARNING("There is already a window facing that direction here!"))
 				return FALSE
 
-/decl/stack_recipe/opacity/borderwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color)
+/decl/stack_recipe/opacity/borderwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	. = list(new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, user?.dir, TRUE))
 	if(paint_color)
 		for(var/obj/structure/window/window in .)

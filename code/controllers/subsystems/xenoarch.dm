@@ -17,6 +17,7 @@ SUBSYSTEM_DEF(xenoarch)
 	var/list/possible_spawn_walls    = list()
 
 /datum/controller/subsystem/xenoarch/Initialize(timeofday)
+
 	for(var/turf/wall/natural/M in possible_spawn_walls)
 		if(QDELETED(M) || !M.density || M.ramp_slope_direction || !prob(XENOARCH_SPAWN_CHANCE))
 			continue
@@ -46,6 +47,9 @@ SUBSYSTEM_DEF(xenoarch)
 					continue
 				if(T in processed_turfs)
 					continue
+				var/area/A = get_area(T)
+				if(!A.allow_xenoarchaeology_finds)
+					continue
 				viable_adjacent_turfs.Add(T)
 
 			target_digsite_size = min(target_digsite_size, viable_adjacent_turfs.len)
@@ -55,7 +59,8 @@ SUBSYSTEM_DEF(xenoarch)
 
 		while(turfs_to_process.len)
 			var/turf/wall/natural/archeo_turf = pop(turfs_to_process)
-
+			if(!istype(archeo_turf))
+				continue
 			processed_turfs.Add(archeo_turf)
 			if(isnull(archeo_turf.finds))
 				archeo_turf.finds = list()
@@ -76,7 +81,6 @@ SUBSYSTEM_DEF(xenoarch)
 					archeo_turf.update_icon()
 
 			//have a chance for an artifact to spawn here, but not in animal or plant digsites
-
 			var/decl/xenoarch_digsite/D = GET_DECL(digsite)
 			if(isnull(M.artifact_find) && D.can_have_anomalies)
 				artifact_spawning_turfs.Add(archeo_turf)

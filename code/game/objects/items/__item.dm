@@ -505,12 +505,16 @@
 	if(R.hud_used)
 		R.hud_used.update_robot_modules_display()
 
-/obj/item/attackby(obj/item/W, mob/user)
-
+/obj/item/proc/try_slapcrafting(obj/item/W, mob/user)
 	if(SSfabrication.try_craft_with(src, W, user))
 		return TRUE
-
 	if(SSfabrication.try_craft_with(W, src, user))
+		return TRUE
+	return FALSE
+
+/obj/item/attackby(obj/item/W, mob/user)
+
+	if(try_slapcrafting(W, user))
 		return TRUE
 
 	if(W.storage?.use_to_pickup)

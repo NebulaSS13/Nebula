@@ -218,7 +218,7 @@
 
 	if(is_floor())
 
-		if(istype(W, /obj/item/stack/tile) && is_plating())
+		if(istype(W, /obj/item/stack/tile))
 			var/obj/item/stack/tile/T = W
 			T.try_build_turf(user, src)
 			return TRUE
