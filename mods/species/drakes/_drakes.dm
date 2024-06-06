@@ -7,4 +7,6 @@
 	name = "Grafadreka Species"
 
 /mob/living/carbon/human/grafadreka/Initialize(mapload)
-	. = ..(mapload, SPECIES_GRAFADREKA)
+	// fantasy modpack overrides drake name, so can't use the #define
+	var/decl/species/grafadreka/drakes = GET_DECL(/decl/species/grafadreka)
+	. = ..(mapload, drakes.name)

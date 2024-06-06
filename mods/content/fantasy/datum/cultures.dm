@@ -14,6 +14,9 @@
 	of their home. Most groups are nomadic, following their flocks of aurochs or other livestock between water sources and grazing land."
 
 // Overrides for fantasy maps.
+/decl/cultural_info/location
+	distance_heading = null // hides the 'distance from Sol' section
+
 /decl/cultural_info/culture/other
 	description = "You are from one of the many small, relatively unknown cultures scattered across the land."
 
@@ -28,3 +31,18 @@
 /decl/cultural_info/religion/other
 	name = "Other Religion"
 	description = "You practice no religion, or a small or relatively unknown religion distinct from the major faiths."
+
+// Reskin to remove Icelandic, references to Sif, etc.
+/decl/cultural_info/culture/grafadreka
+	name = "Meredrake Culture"
+	description = "You are a meredrake. Widely assumed to be cousins to true dragons, drakes are intelligent, arguably sapient pack predators without anything in the way of technology or culture, but they can be trained to use tools, and have been known to work well alongside humans or hnoll as companions and working animals."
+
+/decl/cultural_info/location/grafadreka
+	name = "Wilderness"
+	description = "You are from the unsettled tundras and steppe of the Grass Ocean, or the forested downlands, where you probably eked out a life hunting deer or chasing rabbits."
+
+/decl/cultural_info/faction/grafadreka
+	name = "Meredrake Pack"
+
+/decl/cultural_info/religion/grafadreka
+	name = "Meredrake Religion"
