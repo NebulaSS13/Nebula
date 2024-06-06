@@ -38,7 +38,7 @@
 	var/adjusted_air = FALSE
 	for(var/mtype in reagents?.reagent_volumes)
 		var/decl/material/mat = GET_DECL(mtype)
-		if(mat.boiling_point && temperature >= mat.boiling_point)
+		if(!isnull(mat.boiling_point) && temperature >= mat.boiling_point)
 			adjusted_air = TRUE
 			var/removing = REAGENT_VOLUME(reagents, mtype)
 			remove_from_reagents(mtype, removing, defer_update = TRUE)
@@ -56,7 +56,7 @@
 /obj/machinery/material_processing/smeltery/ProcessAtomTemperature()
 	if(use_power)
 		if(temperature < HIGH_SMELTING_HEAT_POINT)
-			temperature = min(temperature + rand(1000, 2000), HIGH_SMELTING_HEAT_POINT)
+			temperature = min(temperature + rand(100, 200), HIGH_SMELTING_HEAT_POINT)
 		else if(temperature > HIGH_SMELTING_HEAT_POINT)
 			temperature = HIGH_SMELTING_HEAT_POINT
 		return TRUE
@@ -70,7 +70,7 @@
 /obj/machinery/material_processing/smeltery/proc/can_eat(var/obj/item/eating)
 	for(var/mtype in eating.matter)
 		var/decl/material/mat = GET_DECL(mtype)
-		if(mat.melting_point > temperature)
+		if(isnull(mat.melting_point) || mat.melting_point > temperature)
 			return FALSE
 	return TRUE
 
