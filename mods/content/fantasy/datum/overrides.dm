@@ -37,3 +37,6 @@
 
 /decl/sprite_accessory/marking/grafadreka
 	species_allowed = list("Meredrake")
+
+/decl/language/grafadreka
+	desc = "Hiss hiss, feed me rabbits."
