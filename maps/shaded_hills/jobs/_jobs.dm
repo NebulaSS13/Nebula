@@ -18,16 +18,15 @@
 		/decl/species/grafadreka = list(
 			/datum/job/shaded_hills/caves/dweller,
 			/datum/job/shaded_hills/visitor/traveller
-		),
-		/decl/species/kobaloi = list(
-			/datum/job/shaded_hills/caves/dweller,
-			/datum/job/shaded_hills/visitor/traveller
 		)
 	)
 	job_to_species_blacklist = list(
 		/datum/job/shaded_hills/caves/dweller = list(
 			/decl/species/human,
 			/decl/species/hnoll
+		)
+		/decl/species/kobaloi = list(
+			/datum/job/shaded_hills/inn/innkeeper
 		)
 	)
 
