@@ -1,0 +1,21 @@
+
+/obj/item/backpack/setup_sprite_sheets()
+	. = ..()
+	if(!(BODYTYPE_GRAFADREKA in sprite_sheets))
+		LAZYSET(sprite_sheets, BODYTYPE_GRAFADREKA, 'mods/species/drakes/icons/clothing/backpack.dmi')
+	if(!(BODYTYPE_GRAFADREKA_HATCHLING in sprite_sheets))
+		LAZYSET(sprite_sheets, BODYTYPE_GRAFADREKA_HATCHLING, 'mods/species/drakes/icons/clothing/hatchling_backpack.dmi')
+
+/obj/item/card/id/setup_sprite_sheets()
+	. = ..()
+	if(!(BODYTYPE_GRAFADREKA in sprite_sheets))
+		LAZYSET(sprite_sheets, BODYTYPE_GRAFADREKA, 'mods/species/drakes/icons/clothing/id.dmi')
+	if(!(BODYTYPE_GRAFADREKA_HATCHLING in sprite_sheets))
+		LAZYSET(sprite_sheets, BODYTYPE_GRAFADREKA_HATCHLING, 'mods/species/drakes/icons/clothing/hatchling_id.dmi')
+
+/obj/item/bag/setup_sprite_sheets()
+	. = ..()
+	if(!(BODYTYPE_GRAFADREKA in sprite_sheets))
+		LAZYSET(sprite_sheets, BODYTYPE_GRAFADREKA, 'mods/species/drakes/icons/clothing/sack.dmi')
+	if(!(BODYTYPE_GRAFADREKA_HATCHLING in sprite_sheets))
+		LAZYSET(sprite_sheets, BODYTYPE_GRAFADREKA_HATCHLING, 'mods/species/drakes/icons/clothing/hatchling_backpack.dmi')

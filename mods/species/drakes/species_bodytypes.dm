@@ -113,6 +113,10 @@
 	)
 	z_flags = ZMM_WIDE_LOAD
 
+	eye_low_light_vision_effectiveness    = 0.15
+	eye_low_light_vision_adjustment_speed = 0.3
+	eye_darksight_range                   = 7
+
 	var/list/sitting_equip_adjust
 	var/list/lying_equip_adjust
 

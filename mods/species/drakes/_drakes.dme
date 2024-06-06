@@ -2,6 +2,7 @@
 #define MODPACK_DRAKES
 // BEGIN_INCLUDE
 #include "_drakes.dm"
+#include "clothing.dm"
 #include "culture.dm"
 #include "drake_abilities_friendly.dm"
 #include "drake_abilities_hostile.dm"
