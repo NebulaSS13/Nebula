@@ -49,8 +49,8 @@
 		return C
 	return 0
 
-/mob/living/silicon/robot/heal_damage(amount, damage_type, do_update_health, heal_synthetic)
-	if(!heal_synthetic)
+/mob/living/silicon/robot/heal_damage(amount, damage_type = BRUTE, do_update_health, heal_synthetic)
+	if(!heal_synthetic || !amount)
 		return
 	// Robots ignore all other damage types currently.
 	if(damage_type != BURN && damage_type != BRUTE)

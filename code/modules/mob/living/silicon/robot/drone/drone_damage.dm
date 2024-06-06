@@ -3,8 +3,8 @@
 	var/fireloss = 0
 	var/bruteloss = 0
 
-/mob/living/silicon/robot/drone/heal_damage(amount, damage_type, do_update_health, heal_synthetic)
-	if(!heal_synthetic)
+/mob/living/silicon/robot/drone/heal_damage(amount, damage_type = BRUTE, do_update_health, heal_synthetic)
+	if(!heal_synthetic || !amount)
 		return
 	if(damage_type == BURN)
 		fireloss = clamp(fireloss-amount, 0, get_max_health())

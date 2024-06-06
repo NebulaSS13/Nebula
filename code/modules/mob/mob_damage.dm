@@ -45,11 +45,13 @@
 /mob/take_damage(damage, damage_type = BRUTE, damage_flags, used_weapon, armor_pen = 0, target_zone, silent = FALSE, override_droplimb, do_update_health = TRUE)
 	return
 
-/mob/proc/heal_damage(amount, damage_type, do_update_health, heal_synthetic)
+/mob/proc/heal_damage(amount, damage_type = BRUTE, do_update_health, heal_synthetic)
+	if(client)
+		to_chat(src, "Healing: [amount], [damage_type], [heal_synthetic ? "healing synthetic" : "not healing synthetic"]")
 	// heal_damage() can't take an organ target so we can probably assume prosthetics etc are irrelevant here.
-	if(!heal_synthetic && isSynthetic())
+	if((!heal_synthetic && isSynthetic()) || !amount)
 		return
-	return take_damage(-(amount), damage_type, do_update_health = do_update_health)
+	return take_damage(-(amount), damage_type, armor_pen = 100, do_update_health = do_update_health)
 
 /// Returns TRUE if updates should happen, FALSE if not.
 /mob/proc/update_health()
