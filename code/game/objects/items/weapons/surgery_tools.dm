@@ -13,7 +13,7 @@
  */
 /obj/item/retractor
 	name = "retractor"
-	desc = "Retracts stuff."
+	desc = "A surgical tool for widening incisions or adjusting bones."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
 	material = /decl/material/solid/metal/steel
@@ -32,7 +32,7 @@
  */
 /obj/item/hemostat
 	name = "hemostat"
-	desc = "You think you have seen this before."
+	desc = "A surgical tool for clamping veins or manipulating internal organs."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
 	material = /decl/material/solid/metal/steel
@@ -52,7 +52,7 @@
  */
 /obj/item/cautery
 	name = "cautery"
-	desc = "This stops bleeding."
+	desc = "A surgical tool for halting bleeding or closing incisions."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	material = /decl/material/solid/metal/steel
@@ -250,6 +250,7 @@
 
 /obj/item/bonesetter
 	name = "bone setter"
+	desc = "A surgical tool for manipulating and setting bones."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone setter"
 	force = 8.0
