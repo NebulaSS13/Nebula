@@ -80,6 +80,56 @@
 	desc                = "Some clean material cut into lengths suitable for bandaging wounds."
 	amount              = 1
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	// Reagents required for a single poultice.
+	var/static/list/poultice_reagent_requirements = list(
+		/decl/material/liquid/antitoxins/ginseng = 1,
+		/decl/material/liquid/brute_meds/yarrow  = 1,
+		/decl/material/liquid/burn_meds/aloe     = 1
+	)
+
+/obj/item/stack/medical/bruise_pack/bandage/proc/get_poultice_requirement_string()
+	. = list()
+	for(var/reagent in poultice_reagent_requirements)
+		var/decl/material/reagent_decl = GET_DECL(reagent)
+		. += "[poultice_reagent_requirements[reagent]] unit\s of [reagent_decl.liquid_name]"
+	. = english_list(.)
+
+/obj/item/stack/medical/bruise_pack/bandage/examine(mob/user, distance)
+	. = ..()
+	var/poultice_requirement_string = get_poultice_requirement_string()
+	if(poultice_requirement_string)
+		to_chat(user, SPAN_NOTICE("With a mixture of [poultice_requirement_string], you could use a bandage to make a herbal poultice."))
+
+/obj/item/stack/medical/bruise_pack/bandage/attackby(obj/item/W, mob/living/user)
+
+	// Making a poultice.
+	if(istype(W, /obj/item/chems) && W.reagents && !istype(W, /obj/item/chems/food) && ATOM_IS_OPEN_CONTAINER(W))
+
+		var/create_poultices = get_amount()
+		var/missing_reagent = FALSE
+		for(var/reagent in poultice_reagent_requirements)
+			var/available_amt = round(REAGENT_VOLUME(W.reagents, reagent) / poultice_reagent_requirements[reagent])
+			if(available_amt)
+				create_poultices = min(create_poultices, available_amt)
+			else
+				missing_reagent = TRUE
+				break
+
+		// If we have enough reagents, create poultices, otherwise, warn the user.
+		if(create_poultices <= 0 || missing_reagent)
+			var/poultice_requirement_string = get_poultice_requirement_string()
+			if(poultice_requirement_string)
+				to_chat(user, SPAN_WARNING("You need at least [poultice_requirement_string] to make one herbal poultice."))
+		else
+			var/obj/item/stack/medical/ointment/poultice/poultices = new(get_turf(src), create_poultices)
+			user.put_in_hands(poultices)
+			user.visible_message("\The [user] carefully pours the herbal mash into the bandage, making [poultices.get_amount()] poultice\s.")
+			for(var/reagent in poultice_reagent_requirements)
+				W.reagents.remove_reagent(reagent, create_poultices * poultice_reagent_requirements[reagent])
+			use(create_poultices)
+		return TRUE
+
+	return ..()
 
 /obj/item/stack/medical/bruise_pack/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
@@ -138,7 +188,7 @@
 
 /obj/item/stack/medical/ointment
 	name = "ointment"
-	desc = "Used to treat those nasty burns."
+	desc = "An antibacterial ointment used to treat burns and prevent infections."
 	gender = PLURAL
 	singular_name = "ointment"
 	icon_state = "ointment"
@@ -146,6 +196,15 @@
 	origin_tech = @'{"biotech":1}'
 	animal_heal = 4
 	apply_sounds = list('sound/effects/ointment.ogg')
+
+/obj/item/stack/medical/ointment/poultice
+	name = "poultice"
+	gender = NEUTER
+	singular_name = "poultice"
+	plural_name = "poultices"
+	icon_state = "poultice"
+	desc = "A bandage soaked in a medicinal herbal mixture, good for treating burns and preventing infections."
+	animal_heal = 3
 
 /obj/item/stack/medical/ointment/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
