@@ -1,22 +1,29 @@
 /decl/cultural_info/faction/fantasy
 	name = "Wanderer"
-	description = "Unbeholden to any particular political or ideological group."
+	description = "You are transient and unbeholden to any particular political or ideological group."
 
 /decl/cultural_info/faction/fantasy/barbarian
-	name = "Independant" // 'social darwinist' doesn't work in a fantasy setting
-	description = "Coming down from the Nine Mothers was a mistake, civilization makes you soft and lazy, everyone should go back to starving in the snow."
+	name = "Steppe Warrior"
+	description = "When the first migrants from the Nine Mothers left the steppe for the downlands, they traded a warrior spirit and \
+	a connection to their ancestors for comfort and riches. You and your compatriots know better. The fat, soft downlanders, safe behind \
+	their walls and fed by their gardens, are little better than placid livestock. They should be shown the true way of the world by force."
 
 /decl/cultural_info/faction/fantasy/centrist
 	name = "Kingdom Citizen"
-	description = "Stability and a reliable source of food are worth petty local tyrants and bureacracy. Status quo good."
+	description = "Firebrand rhetoric and rabble-rousing don't hold a candle to a roof over your head, well-maintained roads, \
+	and a full belly. You might not like the nobles or merchants who run your settlement, but they're probably better than the alternative."
 
 /decl/cultural_info/faction/fantasy/aegis
 	name = "Imperial Revivalist"
-	description = "Divine right of kings! Bring back the Aegis! Authoritarianism is cool actually!"
+	description = "The Aegis may have collapsed over a hundred years ago, but the loss is still keenly felt. You and your fellows \
+	believe that returning the true blood of the Old Queens to the Imperial Throne will resolve the confusion and chaos of the modern \
+	day, and usher in a second golden age beneath their benevolent leadership."
 
 /decl/cultural_info/faction/fantasy/primitivist
 	name = "Anima Primitivist"
-	description = "Civilization sucks, we're killing the sources of anima, return to monke."
+	description = "Before the Imperial Aegis, before towns and cities, the natural world lived and breathed, fought and died and rotted \
+	and was reborn. Civilization has built walls between the people and their true selves, and only by returning to a state of nature, \
+	dismantling the cities and allowing primal anima to flow freely again, can we be truly alive."
 
 // TODO
 // - factions unaligned with splinter kingdom/nine mothers politics - equatorial, coastal, deepwood

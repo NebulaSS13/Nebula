@@ -14,7 +14,11 @@
 /decl/species/hnoll
 	name                = SPECIES_HNOLL
 	name_plural         = "Hnoll"
-	description         = "Gnolls!"
+	description         = "The hnoll are thickly-furred, powerfully built bipeds with a notable resemblance to the steppe \
+	hyenas that often decorate their coinage and art. The oldest hnoll cultures make their home on the Grass Ocean and the \
+	slopes of the Nine Mothers, and the hnoll conquest of the downlands centuries in the past was the inciting moment of \
+	the continent-spanning Imperial Aegis. Hnoll culture is usually matriarchial, favouring stoutness of body and will, \
+	devotion to community, and loyalty to the family over individual glory or strength of arms."
 	hidden_from_codex   = FALSE
 	available_bodytypes = list(/decl/bodytype/hnoll)
 	preview_outfit      = /decl/hierarchy/outfit/job/generic/fantasy
@@ -43,6 +47,10 @@
 		),
 		TAG_FACTION =   list(
 			/decl/cultural_info/faction/fantasy,
+			/decl/cultural_info/faction/fantasy/barbarian,
+			/decl/cultural_info/faction/fantasy/centrist,
+			/decl/cultural_info/faction/fantasy/aegis,
+			/decl/cultural_info/faction/fantasy/primitivist,
 			/decl/cultural_info/faction/other
 		),
 		TAG_CULTURE =   list(
