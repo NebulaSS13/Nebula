@@ -27,4 +27,4 @@
 
 /decl/cultural_info/religion/other
 	name = "Other Religion"
-	description = "You practice a small or relatively unknown religion distinct from the major faiths."
+	description = "You practice no religion, or a small or relatively unknown religion distinct from the major faiths."
