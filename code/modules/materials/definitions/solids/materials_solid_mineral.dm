@@ -2,7 +2,7 @@
 	name = "pitchblende"
 	uid = "solid_pitchblende"
 	color = "#917d1a"
-	ore_result_amount = 5
+	ore_result_amount = 1
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
@@ -26,7 +26,7 @@
 	uid = "solid_graphite"
 	color = "#444444"
 	ore_name = "graphite"
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -60,7 +60,7 @@
 	uid = "solid_quartz"
 	ore_name = "quartz"
 	opacity = 0.5
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -78,7 +78,7 @@
 	name = "fool's gold"
 	uid = "solid_pyrite"
 	ore_name = "pyrite"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -96,7 +96,7 @@
 	name = "spodumene"
 	uid = "solid_spodumene"
 	ore_name = "spodumene"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -112,7 +112,7 @@
 	name = "cinnabar"
 	uid = "solid_cinnabar"
 	ore_name = "cinnabar"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -128,7 +128,7 @@
 	name = "phosphorite"
 	uid = "solid_phosphorite"
 	ore_name = "phosphorite"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -147,7 +147,7 @@
 	uid = "solid_sodium_chloride"
 	lore_text = "A chemical element, readily reacts with water."
 	ore_name = "rock salt"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -166,7 +166,7 @@
 	uid = "solid_potash"
 	lore_text = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
 	ore_name = "potash"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -190,7 +190,7 @@
 	name = "bauxite"
 	uid = "solid_bauxite"
 	ore_name = "bauxite"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -284,7 +284,7 @@
 	heating_point = GENERIC_SMELTING_HEAT_POINT
 	heating_sound = null
 	heating_message = null
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_name = "hematite"
@@ -307,7 +307,7 @@
 	heating_point = GENERIC_SMELTING_HEAT_POINT
 	heating_sound = null
 	heating_message = null
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 15
 	ore_scan_icon = "mineral_uncommon"
 	ore_name = "rutile"
@@ -329,7 +329,7 @@
 	heating_point = GENERIC_SMELTING_HEAT_POINT
 	heating_sound = null
 	heating_message = null
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 10
 	ore_name = "tetrahedrite"
 	ore_scan_icon = "mineral_common"
@@ -351,7 +351,7 @@
 	heating_point = GENERIC_SMELTING_HEAT_POINT
 	heating_sound = null
 	heating_message = null
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 20
 	ore_scan_icon = "mineral_common"
 	ore_name = "magnetite"
@@ -378,7 +378,7 @@
 	heating_point = GENERIC_SMELTING_HEAT_POINT
 	heating_sound = null
 	heating_message = null
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 20
 	ore_scan_icon = "mineral_common"
 	ore_name = "chalcopyrite"
@@ -407,7 +407,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "dense graphite"
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "lump"
@@ -439,7 +439,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "cassiterite"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -467,7 +467,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "wolframite"
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 15
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "lump"
@@ -496,7 +496,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "sperrylite"
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 15
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "lump"
@@ -525,7 +525,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "sphalerite"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 15
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -547,13 +547,14 @@
 	heating_products = list(
 		/decl/material/solid/metal/lead = 0.6,
 		/decl/material/solid/metal/iron = 0.2,
-		/decl/material/solid/slag = 0.2
+		/decl/material/solid/metal/silver = 0.1,
+		/decl/material/solid/slag = 0.1
 	)
 	heating_point = GENERIC_SMELTING_HEAT_POINT
 	heating_sound = null
 	heating_message = null
 	ore_name = "galena"
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
@@ -581,7 +582,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "calaverite"
-	ore_result_amount = 5
+	ore_result_amount = 2
 	ore_spread_chance = 5
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "lump"
@@ -608,7 +609,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "crocoite"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 5
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "lump"
@@ -634,7 +635,7 @@
 	heating_sound = null
 	heating_message = null
 	ore_name = "borax"
-	ore_result_amount = 10
+	ore_result_amount = 3
 	ore_spread_chance = 5
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "lump"

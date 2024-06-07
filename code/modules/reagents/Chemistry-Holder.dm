@@ -115,10 +115,11 @@ var/global/obj/temp_reagents_holder = new
 	total_volume = 0
 	primary_reagent = null
 	for(var/R in reagent_volumes)
-		var/vol = reagent_volumes[R]
+		var/vol = NONUNIT_FLOOR(reagent_volumes[R], MINIMUM_CHEMICAL_VOLUME)
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
 			clear_reagent(R, defer_update = TRUE, force = TRUE) // defer_update is important to avoid infinite recursion
 		else
+			reagent_volumes[R] = vol
 			total_volume += vol
 			if(!primary_reagent || reagent_volumes[primary_reagent] < vol)
 				primary_reagent = R
@@ -398,7 +399,7 @@ var/global/obj/temp_reagents_holder = new
 // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
 // Returns actual amount removed from [src] (not amount transferred to [target]).
 // Use safety = 1 for temporary targets to avoid queuing them up for processing.
-/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/safety = 0, var/defer_update = FALSE)
+/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/safety = 0, var/defer_update = FALSE, list/skip_reagents)
 
 	if(!target || !istype(target))
 		return
@@ -407,9 +408,19 @@ var/global/obj/temp_reagents_holder = new
 	if(!amount)
 		return
 
-	var/part = amount / total_volume
+	var/part = amount
+	if(skip_reagents)
+		var/using_volume = total_volume
+		for(var/rtype in skip_reagents)
+			using_volume -= LAZYACCESS(reagent_volumes, rtype)
+		if(using_volume <= 0)
+			return
+		part /= using_volume
+	else
+		part /= total_volume
+
 	. = 0
-	for(var/rtype in reagent_volumes)
+	for(var/rtype in reagent_volumes - skip_reagents)
 		var/amount_to_transfer = NONUNIT_FLOOR(REAGENT_VOLUME(src, rtype) * part, MINIMUM_CHEMICAL_VOLUME)
 		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE) // We don't react until everything is in place
 		. += amount_to_transfer

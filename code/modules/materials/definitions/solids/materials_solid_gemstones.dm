@@ -27,7 +27,7 @@
 	hardness = MAT_VALUE_VERY_HARD + 20
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	ore_name = "rough diamonds"
-	ore_result_amount = 5
+	ore_result_amount = 1
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_rare"
 	xarch_source_mineral = /decl/material/gas/ammonia

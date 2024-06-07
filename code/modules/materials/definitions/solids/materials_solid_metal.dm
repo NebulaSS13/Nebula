@@ -87,7 +87,7 @@
 	hardness = MAT_VALUE_FLEXIBLE + 5
 	integrity = 100
 	stack_origin_tech = @'{"materials":4}'
-	ore_result_amount = 5
+	ore_result_amount = 1
 	ore_name = "native gold"
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_uncommon"
@@ -174,7 +174,7 @@
 	color = "#d1e6e3"
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	stack_origin_tech = @'{"materials":3}'
-	ore_result_amount = 5
+	ore_result_amount = 1
 	ore_spread_chance = 10
 	ore_name = "native silver"
 	ore_scan_icon = "mineral_uncommon"
@@ -360,7 +360,7 @@
 	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = @'{"materials":2}'
 	ore_compresses_to = /decl/material/solid/metal/osmium
-	ore_result_amount = 5
+	ore_result_amount = 1
 	ore_spread_chance = 10
 	ore_name = "raw platinum"
 	ore_scan_icon = "mineral_rare"

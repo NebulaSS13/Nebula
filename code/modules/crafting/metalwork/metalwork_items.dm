@@ -1,3 +1,11 @@
+/datum/storage/crucible
+	max_w_class = ITEM_SIZE_LARGE
+	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_LARGE)
+	can_hold = list(
+		/obj/item/debris,
+		/obj/item/stack/material
+	)
+
 /obj/item/chems/crucible
 	name = "crucible"
 	desc = "A heavy, thick-walled vessel used for melting down ore."
@@ -7,13 +15,13 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	w_class = ITEM_SIZE_NO_CONTAINER
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-// TODO: storage datum when storage PR is merged.
-//	max_w_class = ITEM_SIZE_LARGE
-//	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_LARGE)
+	storage = /datum/storage/crucible
+
 	var/max_held = 10
 
 /obj/item/chems/crucible/attackby(obj/item/W, mob/user)
 
+	// Fill a mould.
 	if(istype(W, /obj/item/chems/mould))
 		if(W.material?.hardness <= MAT_VALUE_MALLEABLE)
 			to_chat(user, SPAN_WARNING("\The [W] is currently too soft to be used as a mould."))
@@ -21,37 +29,30 @@
 		if(standard_pour_into(user, W))
 			return TRUE
 
-	if(istype(W, /obj/item/debris) || istype(W, /obj/item/stack/material))
+	// Skim off any slag.
+	if(istype(W, /obj/item/chems) && ATOM_IS_OPEN_CONTAINER(W) && W.reagents && !istype(W, /obj/item/chems/food)) // TODO: food not being a container
 
-		if(length(contents) >= max_held)
-			to_chat(user, SPAN_WARNING("\The [src] is full."))
-			return TRUE
+		// Pour contents into the crucible.
+		if(W.reagents.total_volume)
+			var/obj/item/chems/pouring = W
+			if(pouring.standard_pour_into(user, src))
+				return TRUE
 
-		var/obj/item/transferring
-		if(istype(W, /obj/item/stack))
-			var/obj/item/stack/input = W
-			if(input.get_amount() <= 5 && user.try_unequip(input))
-				transferring = input
-			else
-				transferring = input.split(5)
-		else if(user.try_unequip(W))
-			transferring = W
-
-		if(transferring)
-			transferring.forceMove(src)
-			visible_message(SPAN_NOTICE("\The [user] drops \the [transferring] into \the [src]."))
+		// Attempting to skim off slag.
+		// TODO: check for appropriate vessel material? Check melting point against temperature of crucible?
+		if(reagents?.total_volume && length(reagents.reagent_volumes) > 1)
+			var/removing = min(amount_per_transfer_from_this, REAGENTS_FREE_SPACE(W.reagents))
+			if(removing < length(reagents.reagent_volumes)-1)
+				to_chat(user, SPAN_WARNING("\The [W] is full."))
+				return TRUE
+			// Remove a portion, excepting the primary reagent.
+			var/old_amt = W.reagents.total_volume
+			var/decl/material/primary_mat = reagents.get_primary_reagent_decl()
+			reagents.trans_to_holder(W.reagents, removing, skip_reagents = list(primary_mat.type))
+			to_chat(user, SPAN_NOTICE("You skim [W.reagents.total_volume-old_amt] unit\s of slag from the top of \the [primary_mat]."))
 			return TRUE
 
 	return ..()
-
-/obj/item/chems/crucible/attack_hand(mob/user)
-	if(length(contents))
-		var/obj/item/stack = pick(contents)
-		stack.dropInto(get_turf(src))
-		user.put_in_hands(stack)
-		return TRUE
-	return ..()
-// End placeholder interaction. Remove when storage PR is in.
 
 /obj/item/chems/crucible/on_reagent_change()
 	. = ..()
@@ -68,5 +69,5 @@
 		add_overlay(I)
 
 /obj/item/chems/crucible/initialize_reagents()
-	create_reagents(15 * REAGENT_UNITS_PER_MATERIAL_SHEET)
+	create_reagents(300 * REAGENT_UNITS_PER_MATERIAL_SHEET) // holds a single full stack of 200 ore
 	return ..()

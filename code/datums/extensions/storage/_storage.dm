@@ -209,11 +209,36 @@ var/global/list/_test_storage_items = list()
 					M.show_message(SPAN_NOTICE("\The [user] puts [W] into [holder]."), VISIBLE_MESSAGE)
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
 					M.show_message(SPAN_NOTICE("\The [user] puts [W] into [holder]."), VISIBLE_MESSAGE)
+		// Run this regardless of update flag, as it impacts our remaining storage space.
+		consolidate_stacks()
 		if(!skip_update)
 			update_ui_after_item_insertion()
 	holder.storage_inserted()
 	holder.update_icon()
 	return 1
+
+/datum/storage/proc/consolidate_stacks()
+
+	// Collect all stacks.
+	var/list/stacks = list()
+	for(var/obj/item/stack/stack in get_contents())
+		stacks += stack
+
+	// Try to merge them with each other.
+	for(var/obj/item/stack/stack as anything in stacks)
+		for(var/obj/item/stack/other_stack as anything in stacks)
+			if(stack == other_stack)
+				continue
+			if(other_stack.get_amount() >= other_stack.get_max_amount())
+				stacks -= other_stack
+				continue
+			if(!stack.can_merge_stacks(other_stack) && !other_stack.can_merge_stacks(stack))
+				continue
+			stack.transfer_to(other_stack)
+			if(!stack.amount || QDELETED(stack))
+				break
+		if(!stack.amount || QDELETED(stack))
+			stacks -= stack
 
 /datum/storage/proc/update_ui_after_item_insertion()
 	prepare_ui()

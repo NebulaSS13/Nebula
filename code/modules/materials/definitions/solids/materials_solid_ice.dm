@@ -13,7 +13,7 @@
 	removed_by_welder      = TRUE
 	value                  = 0.2
 	sparse_material_weight = 2
-	ore_result_amount      = 7
+	ore_result_amount      = 4
 	rich_material_weight   = 37
 	heating_point          = T20C + 10 // Above room temperature, to avoid drinks melting.
 	uid                    = "solid_ice"
