@@ -40,7 +40,7 @@
 	..()
 
 	var/use_base_color  = get_color()
-	var/use_reinf_color = use_mat_color ? (padding_color || reinf_material?.color) : padding_color
+	var/use_reinf_color = padding_color || ((material_alteration & MAT_FLAG_ALTERATION_COLOR) ? reinf_material?.color : null)
 
 	var/list/overlays_to_add = list(
 		"_over"    = use_base_color,
