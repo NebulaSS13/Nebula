@@ -1250,6 +1250,7 @@
 #include "code\game\objects\items\weapons\staff.dm"
 #include "code\game\objects\items\weapons\stunbaton.dm"
 #include "code\game\objects\items\weapons\surgery_tools.dm"
+#include "code\game\objects\items\weapons\surgery_tools_ancient.dm"
 #include "code\game\objects\items\weapons\swords_axes_etc.dm"
 #include "code\game\objects\items\weapons\tape.dm"
 #include "code\game\objects\items\weapons\tech_disks.dm"

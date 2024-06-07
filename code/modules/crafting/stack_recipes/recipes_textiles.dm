@@ -84,3 +84,10 @@
 /decl/stack_recipe/textiles/fur/bedding
 	result_type           = /obj/item/bedsheet/furs
 	category              = "bedding"
+
+/decl/stack_recipe/textiles/surgical_sutures
+	result_type           = /obj/item/ancient_surgery/sutures
+	craft_stack_types     = list(/obj/item/stack/material/thread)
+	difficulty            = MAT_VALUE_HARD_DIY
+	category              = "medical"
+	available_to_map_tech_level = MAP_TECH_LEVEL_MEDIEVAL

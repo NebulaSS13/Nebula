@@ -84,3 +84,27 @@
 /decl/stack_recipe/hardness/cross
 	result_type       = /obj/item/cross
 	on_floor          = TRUE
+
+/decl/stack_recipe/hardness/surgical
+	abstract_type     = /decl/stack_recipe/hardness/surgical
+	difficulty        = MAT_VALUE_HARD_DIY
+	category          = "medical"
+	available_to_map_tech_level = MAP_TECH_LEVEL_MEDIEVAL
+
+/decl/stack_recipe/hardness/surgical/retractor
+	result_type       = /obj/item/ancient_surgery/retractor
+
+/decl/stack_recipe/hardness/surgical/cautery
+	result_type       = /obj/item/ancient_surgery/cautery
+
+/decl/stack_recipe/hardness/surgical/bonesetter
+	result_type       = /obj/item/ancient_surgery/bonesetter
+
+/decl/stack_recipe/hardness/surgical/scalpel
+	result_type       = /obj/item/ancient_surgery/scalpel
+
+/decl/stack_recipe/hardness/surgical/forceps
+	result_type       = /obj/item/ancient_surgery/forceps
+
+/decl/stack_recipe/hardness/surgical/bonesaw
+	result_type       = /obj/item/ancient_surgery/bonesaw
