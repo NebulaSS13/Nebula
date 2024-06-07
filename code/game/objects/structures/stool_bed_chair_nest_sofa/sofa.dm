@@ -36,44 +36,33 @@
 		to_chat(user, "You anchored \the [src].")
 
 /obj/structure/bed/sofa/on_update_icon()
+
 	..()
-	icon_state = base_icon
 
-	var/base_color = get_color()
-	var/reinf_color = padding_color || reinf_material?.color
+	var/use_base_color  = get_color()
+	var/use_reinf_color = padding_color || ((material_alteration & MAT_FLAG_ALTERATION_COLOR) ? reinf_material?.color : null)
 
-	var/image/I = image(icon, "[icon_state]_over")
-	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-		I.appearance_flags |= RESET_COLOR
-		I.color = base_color
-	add_overlay(I)
-	I = image(icon, "[icon_state]_armrest")
-	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-		I.appearance_flags |= RESET_COLOR
-		I.color = base_color
-	add_overlay(I)
+	var/list/overlays_to_add = list(
+		"_over"    = use_base_color,
+		"_armrest" = use_base_color
+	)
 	if(reinf_material)
-		I =  image(icon, "[icon_state]_padding_over")
-		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_color
-		add_overlay(I)
-		I = image(icon, "[icon_state]_padding_armrest")
-		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_color
-		add_overlay(I)
+		overlays_to_add["_padding_over"]    = use_reinf_color
+		overlays_to_add["_padding_armrest"] = use_reinf_color
 	if(has_special_overlay && buckled_mob)
-		I = image(icon, "[icon_state]_special")
-		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.appearance_flags |= RESET_COLOR
-			I.color = base_color
-		add_overlay(I)
+		overlays_to_add["_special"] = use_base_color
+
+	for(var/overlay in overlays_to_add)
+		var/overlay_state = "[icon_state][overlay]"
+		if(check_state_in_icon(overlay_state, icon))
+			var/overlay_color = overlays_to_add[overlay]
+			var/image/I
+			if(isnull(overlay_color))
+				I = overlay_image(icon, overlay_state)
+			else
+				I = overlay_image(icon, overlay_state, overlay_color, RESET_COLOR)
+			I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+			add_overlay(I)
 
 /obj/structure/bed/sofa/rotate(mob/user)
 	if(!CanPhysicallyInteract(user) || anchored)
@@ -90,6 +79,7 @@
 	update_icon()
 /obj/structure/bed/sofa/middle/unpadded
 	reinf_material = null
+
 /obj/structure/bed/sofa/middle/red
 	padding_color = "#9d2300"
 /obj/structure/bed/sofa/middle/brown

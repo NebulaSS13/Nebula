@@ -435,6 +435,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		. += "heating_products set but heating_point is undefined"
 	if(length(chilling_products) && isnull(chilling_point))
 		. += "chilling_products set but chilling_point is undefined"
+
 	var/list/checking = list(
 		"dissolves" = dissolves_into,
 		"heats" = heating_products,
