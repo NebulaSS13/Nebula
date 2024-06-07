@@ -4090,6 +4090,7 @@
 #include "maps\shaded_hills\shaded_hills_define.dm"
 #include "maps\tradeship\tradeship.dm"
 #include "maps\tradeship\tradeship_define.dm"
+#include "maps\~mapsystem\map_names.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\map_skills.dm"

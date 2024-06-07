@@ -43,7 +43,7 @@
 		if(istype(L))
 			name = L.get_random_name(pick(MALE,FEMALE))
 	if(!name)
-		name = capitalize(pick(global.first_names_female + global.first_names_male)) + " " + capitalize(pick(global.last_names))
+		name = capitalize(pick(global.using_map.first_names_female + global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 	if(length(possible_origins))
 		origin = pick(possible_origins)

@@ -22,7 +22,7 @@
 	)
 
 /decl/language/corvid/get_random_name(gender)
-	. = capitalize((gender == FEMALE) ? pick(global.first_names_female) : pick(global.first_names_male))
+	. = capitalize((gender == FEMALE) ? pick(global.using_map.first_names_female) : pick(global.using_map.first_names_male))
 	. += " [pick(list("Albus","Corax","Corone","Meeki","Insularis","Orru","Sinaloae", "Enca", "Edithae", "Kubaryi"))]"
 	. += " [pick(list("Hyperion","Earth","Mars","Venus","Neith","Luna","Halo","Pandora","Neptune","Triton", "Haumea", "Eris", "Makemake"))]"
 

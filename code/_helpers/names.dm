@@ -2,7 +2,7 @@
 	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
 
 /proc/generate_planet_name()
-	return "[capitalize(pick(global.last_names))]-[pick(global.greek_letters)]"
+	return "[capitalize(pick(global.using_map.last_names))]-[pick(global.greek_letters)]"
 
 /proc/station_name()
 	if(!global.using_map)
@@ -131,9 +131,9 @@ var/global/syndicate_code_response
 			if(1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
 				switch(rand(1,2))//Mainly to add more options later.
 					if(1)
-						code_phrase += pick(pick(global.first_names_male,global.first_names_female))
+						code_phrase += pick(pick(global.using_map.first_names_male,global.using_map.first_names_female))
 						code_phrase += " "
-						code_phrase += pick(global.last_names)
+						code_phrase += pick(global.using_map.last_names)
 					if(2)
 						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1

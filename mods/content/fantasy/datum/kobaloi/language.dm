@@ -5,7 +5,7 @@
 	ask_verb = "asks"
 	exclaim_verb = "exclaims"
 	colour = "indian"
-	key = "k"
+	key = "m"
 	flags = LANG_FLAG_WHITELISTED
 	space_chance = 100 // We generate entire words rather than syllables, so we always need a space.
 
