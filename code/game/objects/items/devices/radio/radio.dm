@@ -129,7 +129,6 @@
 /obj/item/radio/Destroy()
 	QDEL_NULL(wires)
 	QDEL_NULL_LIST(encryption_keys)
-	global.listening_objects -= src
 	set_frequency(null) // clean up the radio connection
 	channels = null
 	. = ..()

@@ -21,7 +21,6 @@
 	global.listening_objects += src
 
 /obj/item/assembly_holder/Destroy()
-	global.listening_objects -= src
 	if(!QDELETED(a_left))
 		a_left.holder = null
 		QDEL_NULL(a_left)

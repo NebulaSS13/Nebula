@@ -690,20 +690,37 @@ default behaviour is:
 	to_chat(src, "<span class='notice'>Remember to stay in character for a mob of this type!</span>")
 	return 1
 
-/mob/living/proc/add_aura(var/obj/aura/aura, skip_icon_update = FALSE)
+/mob/proc/add_aura(var/obj/aura/aura, skip_icon_update = FALSE)
+	return FALSE
+
+/mob/living/add_aura(var/obj/aura/aura, skip_icon_update = FALSE)
+	if(ispath(aura))
+		aura = new aura(src)
+	if(!istype(aura))
+		return FALSE
 	LAZYDISTINCTADD(auras,aura)
 	if(!skip_icon_update)
 		update_icon()
 	return TRUE
 
-/mob/living/proc/has_aura(aura_type)
+/mob/proc/has_aura(aura_type)
+	return FALSE
+
+/mob/living/has_aura(aura_type)
 	return length(auras) && (locate(aura_type) in auras)
 
-/mob/living/proc/remove_aura(var/obj/aura/aura, skip_icon_update = FALSE)
+/mob/proc/remove_aura(var/obj/aura/aura, skip_icon_update = FALSE)
+	return FALSE
+
+/mob/living/remove_aura(var/obj/aura/aura, skip_icon_update = FALSE)
+	if(ispath(aura))
+		aura = locate() in auras
+	if(!istype(aura))
+		return FALSE
 	LAZYREMOVE(auras,aura)
 	if(!skip_icon_update)
 		update_icon()
-	return 1
+	return TRUE
 
 /mob/living/Destroy()
 	QDEL_NULL(aiming)

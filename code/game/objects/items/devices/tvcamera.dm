@@ -19,7 +19,6 @@
 	var/obj/item/radio/radio
 
 /obj/item/camera/tvcamera/Destroy()
-	global.listening_objects -= src
 	QDEL_NULL(radio)
 	. = ..()
 

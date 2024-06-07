@@ -15,7 +15,7 @@
 	if(material && (material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5))
 		apply_wear()
 
-/obj/item/on_parry(damage_source)
+/obj/item/on_parry(mob/user, damage_source, mob/attacker)
 	if(istype(damage_source, /obj/item))
 		apply_wear()
 

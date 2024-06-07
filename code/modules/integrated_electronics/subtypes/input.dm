@@ -829,10 +829,6 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/integrated_circuit/input/microphone/Destroy()
-	global.listening_objects -= src
-	. = ..()
-
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M, text, verb, decl/language/speaking)
 	var/translated = TRUE
 	if(M && text)

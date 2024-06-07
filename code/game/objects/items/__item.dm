@@ -172,6 +172,12 @@
 
 /obj/item/Destroy()
 
+	if(LAZYLEN(_item_effects))
+		_item_effects = null
+		SSitem_effects.queued_items -= src
+
+	global.listening_objects -= src
+
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
 	QDEL_NULL(coating)
@@ -702,11 +708,11 @@
 		if(default_parry_check(user, attacker, damage_source) && prob(parry_chance))
 			user.visible_message(SPAN_DANGER("\The [user] parries [attack_text] with \the [src]!"))
 			playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
-			on_parry(damage_source)
+			on_parry(user, damage_source, attacker)
 			return 1
 	return 0
 
-/obj/item/proc/on_parry(damage_source)
+/obj/item/proc/on_parry(mob/user, damage_source, mob/attacker)
 	return
 
 /obj/item/proc/get_parry_chance(mob/user)
