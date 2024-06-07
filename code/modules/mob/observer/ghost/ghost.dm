@@ -50,9 +50,9 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 				name = body.real_name
 			else
 				if(gender == MALE)
-					name = capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
+					name = capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 				else
-					name = capitalize(pick(global.first_names_female)) + " " + capitalize(pick(global.last_names))
+					name = capitalize(pick(global.using_map.first_names_female)) + " " + capitalize(pick(global.using_map.last_names))
 
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 	else
@@ -66,7 +66,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
-		name = capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
+		name = capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 	real_name = name
 
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)

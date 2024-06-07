@@ -43,6 +43,7 @@
 	#include "shaded_hills_currency.dm"
 	#include "shaded_hills_locks.dm"
 	#include "shaded_hills_map.dm"
+	#include "shaded_hills_names.dm"
 	#include "shaded_hills_skills.dm"
 	#include "shaded_hills_testing.dm"
 	#include "shaded_hills_turfs.dm"
