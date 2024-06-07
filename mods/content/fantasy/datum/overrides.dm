@@ -40,3 +40,11 @@
 
 /decl/language/grafadreka
 	desc = "Hiss hiss, feed me rabbits."
+
+/decl/material/liquid/sifsap
+	name = "drake spittle"
+	lore_text = "A complex chemical slurry brewed up in the gullet of meredrakes."
+
+/obj/aura/sifsap_salve
+	name = "Drakespittle Salve"
+	descriptor = "glowing spittle"
