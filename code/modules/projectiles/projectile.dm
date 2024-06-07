@@ -105,18 +105,17 @@
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
 /obj/item/projectile/proc/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
-	if(blocked >= 100)		return 0//Full block
-	if(!isliving(target))	return 0
-	if(isanimal(target))	return 0
+	if(blocked >= 100)
+		return FALSE
+	if(!isliving(target))
+		return FALSE
 
 	var/mob/living/L = target
-
 	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
 	L.stun_effect_act(stun, agony, def_zone, src)
 	//radiation protection is handled separately from other armour types.
 	L.apply_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
-
-	return 1
+	return TRUE
 
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)

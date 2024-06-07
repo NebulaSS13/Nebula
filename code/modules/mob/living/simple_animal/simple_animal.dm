@@ -312,28 +312,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/proc/audible_emote(var/act_desc)
 	custom_emote(2, act_desc)
 
-/mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
-	if(!Proj || Proj.nodamage)
-		return
-
-	var/damage = Proj.damage
-	if(Proj.atom_damage_type == STUN)
-		damage = Proj.damage / 6
-	if(Proj.atom_damage_type == BRUTE)
-		damage = Proj.damage / 2
-	if(Proj.atom_damage_type == BURN)
-		damage = Proj.damage / 1.5
-	if(Proj.agony)
-		damage += Proj.agony / 6
-		if(current_health < Proj.agony * 3)
-			SET_STATUS_MAX(src, STAT_PARA, Proj.agony / 20)
-			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
-
-	bullet_impact_visuals(Proj)
-	take_damage(damage)
-	Proj.on_hit(src)
-	return 0
-
 /mob/living/simple_animal/get_hug_zone_messages(var/zone)
 	. = ..() || list(response_help_3p, response_help_1p)
 
