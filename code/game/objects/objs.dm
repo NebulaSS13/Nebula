@@ -23,7 +23,6 @@
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
 
-
 /obj/Initialize(mapload)
 	. = ..()
 	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
@@ -158,7 +157,7 @@
 	return ..() && w_class <= round(amt/20)
 
 /obj/proc/can_embed()
-	return is_sharp(src)
+	return FALSE
 
 /obj/examine(mob/user, distance, infix, suffix)
 	. = ..()

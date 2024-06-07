@@ -1459,7 +1459,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				incision = other
 	else
 		for(var/datum/wound/cut/W in wounds)
-			if(W.bandaged || W.current_stage > W.max_bleeding_stage) // Shit's unusable
+			if(!W.is_open()) // Shit's unusable
 				continue
 			if(strict && !W.is_surgical()) //We don't need dirty ones
 				continue

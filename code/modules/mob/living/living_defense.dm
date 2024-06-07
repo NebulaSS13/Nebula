@@ -183,11 +183,9 @@
 			return FALSE
 
 	visible_message(SPAN_DANGER("\The [src] is hit [affecting ? "in \the [affecting.name] " : ""]by \the [O]!"))
-	var/datum/wound/created_wound = apply_damage(throw_damage, dtype, zone, O.damage_flags(), O, O.armor_penetration)
 	if(TT?.thrower?.client)
 		admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
-	if(O.can_embed() && (throw_damage > 5*O.w_class)) //Handles embedding for non-humans and simple_animals.
-		embed_in_mob(O, zone, throw_damage, dtype, created_wound, affecting)
+	try_embed_in_mob(O, zone, throw_damage, dtype, null, affecting, direction = TT.init_dir)
 	return TRUE
 
 /mob/living/momentum_power(var/atom/movable/AM, var/datum/thrownthing/TT)
@@ -198,53 +196,59 @@
 	if(has_gravity() || check_space_footing())
 		. *= 0.5
 
-/mob/living/momentum_do(var/power, var/datum/thrownthing/TT, var/atom/movable/AM)
-	if(power >= 0.75)		//snowflake to enable being pinned to walls
-		var/direction = TT.init_dir
-		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5), callback = CALLBACK(src, TYPE_PROC_REF(/mob/living, pin_to_wall), AM, direction))
-		visible_message(SPAN_DANGER("\The [src] staggers under the impact!"),SPAN_DANGER("You stagger under the impact!"))
-		return
-
-	. = ..()
-
-/mob/living/proc/pin_to_wall(var/obj/O, var/direction)
-	if(!istype(O) || O.loc != src || !O.can_embed())//Projectile is suitable for pinning.
-		return
-
-	var/turf/T = near_wall(direction,2)
-
-	if(T)
-		forceMove(T)
-		visible_message(SPAN_DANGER("[src] is pinned to the wall by [O]!"),SPAN_DANGER("You are pinned to the wall by [O]!"))
-		src.anchored = TRUE
-		LAZYADD(pinned, O)
-		if(!LAZYISIN(embedded,O))
-			embed_in_mob(O)
-
-/mob/living/proc/embed_in_mob(obj/O, def_zone, embed_damage = 0, dtype = BRUTE, datum/wound/supplied_wound, obj/item/organ/external/affecting)
+/mob/living/proc/try_embed_in_mob(obj/O, def_zone, embed_damage = 0, dtype = BRUTE, datum/wound/supplied_wound, obj/item/organ/external/affecting, direction)
 
 	if(!istype(O))
 		return FALSE
 
-	if(affecting && supplied_wound && dtype == BRUTE && isitem(O) && !is_robot_module(O))
+	if(!supplied_wound)
+		supplied_wound = apply_damage(embed_damage, dtype, def_zone, O.damage_flags(), O, O.armor_penetration)
+
+	if(!O.can_embed())
+		return FALSE
+
+	if(!affecting)
+		affecting = get_organ(def_zone)
+
+	if(affecting && supplied_wound?.is_open() && dtype == BRUTE) // Can't embed in a small bruise.
 		var/obj/item/I = O
-		var/sharp = I.can_embed()
+		var/sharp = is_sharp(I)
 		embed_damage *= (1 - get_blocked_ratio(def_zone, BRUTE, O.damage_flags(), O.armor_penetration, I.force))
 
 		//blunt objects should really not be embedding in things unless a huge amount of force is involved
 		var/embed_chance = embed_damage / (sharp ? I.w_class : (I.w_class*3))
-		var/embed_threshold = (sharp ? 5 : 15) * I.w_class
+		var/embed_threshold = (sharp ? 5 : 10) * I.w_class
+		var/sharp_embed_chance = embed_damage/(10*I.w_class)*100
 
 		//Sharp objects will always embed if they do enough damage.
 		//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
-		if((sharp && prob(embed_damage/(10*I.w_class)*100)) || (embed_damage > embed_threshold && prob(embed_chance)))
+		if((sharp && prob(sharp_embed_chance)) || (embed_damage > embed_threshold && prob(embed_chance)))
 			affecting.embed_in_organ(I, supplied_wound = supplied_wound)
-			I.has_embedded()
-			return TRUE
+			I.has_embedded(src)
+			. = TRUE
 
-	O.forceMove(src)
-	LAZYDISTINCTADD(embedded, O)
-	verbs += /mob/proc/yank_out_object
+	// Simple embed for mobs with no limbs.
+	if(!. && !length(get_external_organs()))
+		O.forceMove(src)
+		if(isitem(O))
+			var/obj/item/I = O
+			I.has_embedded(src)
+		. = TRUE
+
+	// Allow a tick for throwing/striking to resolve.
+	if(. && direction)
+		addtimer(CALLBACK(src, PROC_REF(check_embed_pinning), O, direction), 1)
+
+/mob/living/proc/check_embed_pinning(obj/O, direction)
+	if(QDELETED(src) || QDELETED(O) || !isturf(loc) || !(O in embedded) || !direction)
+		return FALSE
+	var/turf/wall = get_step_resolving_mimic(loc, direction)
+	if(!istype(wall) || !wall.density)
+		return FALSE
+	LAZYDISTINCTADD(pinned, O)
+	visible_message("\The [src] is pinned to \the [wall] by \the [O]!")
+	// TODO: cancel all throwing and momentum after this point
+	return TRUE
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
