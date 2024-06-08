@@ -27,6 +27,8 @@
 	var/busy_state                                      // Used for controller processing.
 	var/next_process
 
+	var/move_air = FALSE                                 // Whether or not the turbolift will move air with it.
+
 /datum/turbolift/proc/emergency_stop()
 	queued_floors.Cut()
 	target_floor = null
@@ -139,7 +141,7 @@
 				else if(AM.simulated)
 					qdel(AM)
 
-	origin.move_contents_to(destination)
+	origin.move_contents_to(destination, move_air)
 
 	if((locate(/obj/machinery/power) in destination) || (locate(/obj/structure/cable) in destination))
 		SSmachines.makepowernets()
