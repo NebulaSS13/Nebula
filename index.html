@@ -29,8 +29,8 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(243 modules,
-    103/4514 macros, 2.3%)</aside></h3>
+<aside>(247 modules,
+    105/4516 macros, 2.3%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -50,6 +50,7 @@ General Public License version 3.
     <li><a href="code/__defines/mapping.html" title="code&#x2F;__defines&#x2F;mapping">mapping</a></li>
     <li><a href="code/__defines/misc.html" title="code&#x2F;__defines&#x2F;misc">misc</a></li>
     <li><a href="code/__defines/paperwork.html" title="code&#x2F;__defines&#x2F;paperwork">paperwork</a></li>
+    <li><a href="code/__defines/sound.html" title="code&#x2F;__defines&#x2F;sound">sound</a></li>
     <li><a href="code/__defines/spawn.html" title="code&#x2F;__defines&#x2F;spawn">spawn</a></li>
     <li><a href="code/__defines/tools.html" title="code&#x2F;__defines&#x2F;tools">tools</a></li>
     <li><a href="code/__defines/turfs.html" title="code&#x2F;__defines&#x2F;turfs">turfs</a></li>
@@ -94,6 +95,7 @@ General Public License version 3.
     <li><a href="code/datums/category.html" title="code&#x2F;datums&#x2F;category">category</a></li>
     <li class="has-children"><span title="code&#x2F;datums&#x2F;extensions">extensions</span><ul class="index-tree">
     <li><a href="code/datums/extensions/extensions.html" title="code&#x2F;datums&#x2F;extensions&#x2F;extensions">extensions</a></li>
+    <li><a href="code/datums/extensions/lockable.html" title="code&#x2F;datums&#x2F;extensions&#x2F;lockable">lockable</a></li>
     <li><span class="no-substance">scent&#x2F;</span><a href="code/datums/extensions/scent/_scent.html" title="code&#x2F;datums&#x2F;extensions&#x2F;scent&#x2F;_scent">_scent</a></li>
     <li><span class="no-substance">storage&#x2F;</span><a href="code/datums/extensions/storage/subtypes_belt.html" title="code&#x2F;datums&#x2F;extensions&#x2F;storage&#x2F;subtypes_belt">subtypes_belt</a></li>
     </ul></li>
@@ -192,6 +194,7 @@ General Public License version 3.
     </ul></li>
     </ul></li>
     </ul></li>
+    <li><a href="code/game/sound.html" title="code&#x2F;game&#x2F;sound">sound</a></li>
     </ul></li>
     <li class="has-children"><span title="code&#x2F;modules">modules</span><ul class="index-tree">
     <li class="has-children"><span title="code&#x2F;modules&#x2F;admin">admin</span><ul class="index-tree">
@@ -208,9 +211,12 @@ General Public License version 3.
     <li><a href="code/modules/character_info/_comment.html" title="code&#x2F;modules&#x2F;character_info&#x2F;_comment">_comment</a></li>
     <li><a href="code/modules/character_info/comment_mood.html" title="code&#x2F;modules&#x2F;character_info&#x2F;comment_mood">comment_mood</a></li>
     </ul></li>
-    <li class="has-children"><span class="no-substance">client&#x2F;</span><span title="code&#x2F;modules&#x2F;client&#x2F;preference_setup">preference_setup</span><ul class="index-tree">
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;client">client</span><ul class="index-tree">
+    <li><a href="code/modules/client/asset_cache.html" title="code&#x2F;modules&#x2F;client&#x2F;asset_cache">asset_cache</a></li>
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;client&#x2F;preference_setup">preference_setup</span><ul class="index-tree">
     <li><span class="no-substance">global&#x2F;</span><a href="code/modules/client/preference_setup/global/preferences.html" title="code&#x2F;modules&#x2F;client&#x2F;preference_setup&#x2F;global&#x2F;preferences">preferences</a></li>
     <li><a href="code/modules/client/preference_setup/preference_setup.html" title="code&#x2F;modules&#x2F;client&#x2F;preference_setup&#x2F;preference_setup">preference_setup</a></li>
+    </ul></li>
     </ul></li>
     <li><span class="no-substance">clothing&#x2F;masks&#x2F;</span><a href="code/modules/clothing/masks/cig_crafting.html" title="code&#x2F;modules&#x2F;clothing&#x2F;masks&#x2F;cig_crafting">cig_crafting</a></li>
     <li><span class="no-substance">economy&#x2F;</span><a href="code/modules/economy/worth_cash.html" title="code&#x2F;modules&#x2F;economy&#x2F;worth_cash">worth_cash</a></li>
@@ -395,7 +401,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(249 detailed/504 documented/20025 total, 2.5%)</aside></h3>
+<aside>(252 detailed/510 documented/20030 total, 2.5%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
@@ -429,6 +435,9 @@ Thanks to forum_account for saving the day, the library can be found
     <li><span class="no-substance" title="&#x2F;datum&#x2F;ai_laws&#x2F;tyrant">tyrant</span> - T.Y.R.A.N.T.</li>
     </ul></li>
     <li><a href="datum/alarm_handler.html" title="&#x2F;datum&#x2F;alarm_handler">alarm_handler</a></li>
+    <li><span class="no-substance">asset&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;asset&#x2F;fonts">fonts</span> - Fonts loader
+Fonts for the ui, browser, and nanoui.
+Since the rsc compiler tends to be finnicky.</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;backpack_setup">backpack_setup</span> - Character setup</li>
     <li><a href="datum/backpack_tweak.html" title="&#x2F;datum&#x2F;backpack_tweak">backpack_tweak</a></li>
     <li><a href="datum/browser.html" title="&#x2F;datum&#x2F;browser">browser</a></li>
@@ -489,6 +498,7 @@ and don't call start() in a loop that will be repeated otherwise it'll get spamm
     </ul></li>
     <li class="has-children"><a href="datum/extension.html" title="&#x2F;datum&#x2F;extension">extension</a><ul class="index-tree">
     <li><a href="datum/extension/abilities.html" title="&#x2F;datum&#x2F;extension&#x2F;abilities">abilities</a></li>
+    <li><a href="datum/extension/lockable.html" title="&#x2F;datum&#x2F;extension&#x2F;lockable">lockable</a> - Extension for giving an object a code lock, with it's own ui.</li>
     <li><a href="datum/extension/network_device.html" title="&#x2F;datum&#x2F;extension&#x2F;network_device">network_device</a></li>
     <li class="has-children"><span title="&#x2F;datum&#x2F;extension&#x2F;scent">scent</span> - Scent extensions
 Usage:
@@ -581,6 +591,7 @@ Number of times slept in its destroy.</li>
     <li><a href="datum/sortInstance.html" title="&#x2F;datum&#x2F;sortInstance">sortInstance</a></li>
     <li class="has-children"><a href="datum/storage.html" title="&#x2F;datum&#x2F;storage">storage</a><ul class="index-tree">
     <li><span class="no-substance">belt&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;storage&#x2F;belt&#x2F;medical">medical</span> - obj/item/combitool,</li>
+    <li><a href="datum/storage/secure.html" title="&#x2F;datum&#x2F;storage&#x2F;secure">secure</a></li>
     <li><a href="datum/storage/sheets.html" title="&#x2F;datum&#x2F;storage&#x2F;sheets">sheets</a></li>
     </ul></li>
     <li><span class="no-substance">stored_items&#x2F;</span><a href="datum/stored_items/vending_products.html" title="&#x2F;datum&#x2F;stored_items&#x2F;vending_products">vending_products</a> - Datum used to hold information about a product in a vending machine</li>
@@ -675,6 +686,8 @@ A list of strings that are used by the end of round credits roll.
 A list of strings that are used by the end of round credits roll.</li>
     <li class="has-children"><span class="no-substance" title="&#x2F;decl&#x2F;observ">observ</span><ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;decl&#x2F;observ&#x2F;entered">entered</span> - Dismembered Handling</li>
+    <li><span class="no-substance" title="&#x2F;decl&#x2F;observ&#x2F;lock_panel_state_changed">lock_panel_state_changed</span> - Sent by lockable when the service panel is opened/closed.</li>
+    <li><span class="no-substance" title="&#x2F;decl&#x2F;observ&#x2F;lock_state_changed">lock_state_changed</span> - Sent by the lockable when it's been locked or unlocked.</li>
     <li><span class="no-substance" title="&#x2F;decl&#x2F;observ&#x2F;sight_set">sight_set</span> - Shuttle Moved/Pre Move Handling</li>
     </ul></li>
     <li><a href="decl/plant_gene.html" title="&#x2F;decl&#x2F;plant_gene">plant_gene</a></li>
@@ -956,6 +969,7 @@ Parameters: var/obj/item/card/id</li>
     <li><a href="obj/item/radio/exosuit.html" title="&#x2F;obj&#x2F;item&#x2F;radio&#x2F;exosuit">exosuit</a></li>
     </ul></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;scrying">scrying</span> - Scrying orb</li>
+    <li><a href="obj/item/secure_storage.html" title="&#x2F;obj&#x2F;item&#x2F;secure_storage">secure_storage</a></li>
     <li class="has-children"><a href="obj/item/sign.html" title="&#x2F;obj&#x2F;item&#x2F;sign">sign</a> - Item form of the sign structure. Stores a sign structure type, and creates that structure upon install.
 Takes on the appearence and properties of whatever sign structure type it contains.<ul class="index-tree">
     <li><a href="obj/item/sign/diploma.html" title="&#x2F;obj&#x2F;item&#x2F;sign&#x2F;diploma">diploma</a> - A displayable diploma</li>
@@ -1102,7 +1116,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/65b66b4460c7883080dd780f912f6e95ddca61db">65b66b4</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/34a689fc043e0907d184ae03a9e54f173aa14499">34a689f</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
