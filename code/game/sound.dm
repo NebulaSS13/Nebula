@@ -162,3 +162,54 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 			if ("glasscrack") soundin = pick(global.glasscrack_sound)
 			if ("tray_hit") soundin = pick(global.tray_hit_sound)
 	return soundin
+
+
+///Volume to play DTMF key sounds at. They're pretty loud, so 15 is fine.
+#define VOL_DTMF_KEY 15
+
+/**
+	Plays a DTMF tone (Telephone key press sound) for any valid telephone key.
+	* `source`: The atom that's producing the sound.
+	* `key`: The character of the key pressed.
+	* `user`: The mob actually pressing the key.
+	* `user_only`: Whether the sound should be only heard by the user mob. (Sent to the user's client only)
+	* Returns FALSE if the key is invalid, TRUE if the key was valid and we played a sound.
+ */
+/proc/play_dtmf_key_sound(atom/source, key, mob/user, user_only = FALSE)
+	//NOTE: File paths are all in here inside a big switch, so they're cached into the rsc!
+	var/sound_path
+	switch(lowertext(key))
+		if("0")
+			sound_path = 'sound/machines/phone/key-0.ogg'
+		if("1")
+			sound_path = 'sound/machines/phone/key-1.ogg'
+		if("2", "a", "b", "c")
+			sound_path = 'sound/machines/phone/key-2.ogg'
+		if("3", "d", "e", "f")
+			sound_path = 'sound/machines/phone/key-3.ogg'
+		if("4", "g", "h", "i")
+			sound_path = 'sound/machines/phone/key-4.ogg'
+		if("5", "j", "k", "l")
+			sound_path = 'sound/machines/phone/key-5.ogg'
+		if("6", "m", "n", "o")
+			sound_path = 'sound/machines/phone/key-6.ogg'
+		if("7", "p", "q", "r", "s")
+			sound_path = 'sound/machines/phone/key-7.ogg'
+		if("8", "t", "u", "v")
+			sound_path = 'sound/machines/phone/key-8.ogg'
+		if("9", "w", "x", "y", "z")
+			sound_path = 'sound/machines/phone/key-9.ogg'
+		if("*", "⚹") //Asterisk and actual phone keypad star char for completeness
+			sound_path = 'sound/machines/phone/key-star.ogg'
+		if("#", "⌗") //hash symbol and actual phone keypad square char for completeness
+			sound_path = 'sound/machines/phone/key-square.ogg'
+		else
+			return FALSE
+
+	if(user_only)
+		sound_to(user, sound(sound_path, volume = VOL_DTMF_KEY))
+	else
+		playsound(source, sound_path, VOL_DTMF_KEY, FALSE, 0, 2, envdry = 50, envwet = 10) //tone down the reverbs on this cause it sounds really weird
+	return TRUE
+
+#undef VOL_DTMF_KEY

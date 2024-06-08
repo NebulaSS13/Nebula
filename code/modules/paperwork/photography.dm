@@ -177,11 +177,10 @@
 //#TODO: This thing is awful. Might as well use a trashbag instead since you get the same thing, just with more space....
 /obj/item/photo_album
 	name          = "photo album"
-	icon          = 'icons/obj/photography.dmi'
-	icon_state    = "album"
-	item_state    = "briefcase"
+	icon          = 'icons/obj/photo_album.dmi'
+	icon_state    = ICON_STATE_WORLD
 	w_class       = ITEM_SIZE_NORMAL //same as book
-	storage       = /datum/storage/photo_album 
+	storage       = /datum/storage/photo_album
 	material      = /decl/material/solid/organic/plastic
 
 /obj/item/photo_album/handle_mouse_drop(atom/over, mob/user, params)

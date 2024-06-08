@@ -11,8 +11,7 @@
 /obj/item/briefcase/foundation
 	name = "\improper Foundation briefcase"
 	desc = "A handsome black leather briefcase embossed with a stylized radio telescope."
-	icon_state = "fbriefcase"
-	item_state = "fbriefcase"
+	icon = 'mods/content/psionics/icons/briefcase_foundation.dmi'
 
 /obj/item/briefcase/foundation/disrupts_psionics()
 	return FALSE

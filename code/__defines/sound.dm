@@ -61,3 +61,10 @@
 //Defines for controlling how zsound sounds.
 #define ZSOUND_DRYLOSS_PER_Z -2000 //Affects what happens to the dry channel as the sound travels through z-levels
 #define ZSOUND_DISTANCE_PER_Z 2 //Affects the distance added to the sound per z-level travelled
+
+/**
+ * Returns the `extrarange` parameter for the `/proc/playsound`  if we want the sound range to be exactly the value of RANGE,
+ * instead of being added up to the client's view range.
+ * Is more intuitive and maintainable to use than setting the parameter to a negative value.
+ **/
+#define SOUND_RANGE_ABS(RANGE) (max((world.view * -1) + RANGE, 0))

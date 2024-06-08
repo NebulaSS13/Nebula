@@ -1,0 +1,25 @@
+/**
+ * Put all custom font face @t rules in here. So they're properly loaded by nano.
+ * Preferably, put the font files and their licenses into the 'project_dir'/fonts directory.
+ * Additionally, if the font needs to be loaded by the byond ui, you can add it's path to the 'font_resources' global list.
+ *
+ * Note: Paths should be relative to the user's cache folder where all the nano assets are loaded. ('./')
+ * Note2: The browser seems to support truetype, woff2, and woff as far as custom fonts go. Possibly more.
+ * Note3: Don't add urls linking to the web in here for fonts. Add those in your specific UI if you must, since it will add a delay to fetch the font.
+ */
+
+/** Font for numeric 7 segments lcd screens. */
+@font-face {
+    font-family: 'segment7';
+    src: url('./segment7.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/** Font for monolith runes */
+@font-face {
+    font-family: 'shage';
+    src: url('./Shage.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
