@@ -361,4 +361,4 @@ var/global/list/_test_storage_items = list()
 /datum/storage/proc/play_use_sound(volume = 50)
 	if(!length(use_sound) || !holder)
 		return
-	playsound(holder, close_sound, volume, FALSE, -5)
+	playsound(holder, use_sound, volume, FALSE, -5)
