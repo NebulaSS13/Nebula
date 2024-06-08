@@ -111,7 +111,7 @@
 	icon_state = "reinforced_cult"
 	reinf_material = /decl/material/solid/stone/cult/reinforced
 
-/turf/wall/cult/dismantle_turf(devastated, explode, no_product)
+/turf/wall/cult/dismantle_turf(devastated, explode, no_product, keep_air = TRUE)
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.remove_cultiness(CULTINESS_PER_TURF)
 	. = ..()

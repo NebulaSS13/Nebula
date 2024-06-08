@@ -16,13 +16,13 @@
 	if(is_fundament_turf)
 		return ..()
 	drop_diggable_resources()
-	ChangeTurf(/turf/floor/natural/dirt, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
+	ChangeTurf(/turf/floor/natural/dirt, keep_air = TRUE, keep_height = TRUE)
 
 /turf/floor/natural/dig_farm(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
 	if(is_fundament_turf)
 		return ..()
 	drop_diggable_resources()
-	ChangeTurf(/turf/floor/natural/dirt, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
+	ChangeTurf(/turf/floor/natural/dirt, keep_air = TRUE, keep_height = TRUE)
 
 /turf/floor/natural/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
 	if(is_fundament_turf)
@@ -34,4 +34,4 @@
 		set_physical_height(new_height)
 	else
 		drop_diggable_resources()
-		ChangeTurf(/turf/floor/natural/dirt, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
+		ChangeTurf(/turf/floor/natural/dirt, keep_air = TRUE, keep_height = TRUE)

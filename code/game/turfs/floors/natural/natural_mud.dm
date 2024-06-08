@@ -37,7 +37,7 @@
 
 /turf/floor/natural/mud/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!reagents?.total_volume)
-		ChangeTurf(/turf/floor/natural/dry, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
+		ChangeTurf(/turf/floor/natural/dry, keep_air = TRUE, keep_height = TRUE)
 		return
 	return ..()
 
@@ -71,6 +71,6 @@
 /turf/floor/natural/dry/fluid_act(datum/reagents/fluids)
 	if(fluids?.total_volume < FLUID_SHALLOW)
 		return ..()
-	var/turf/new_turf = ChangeTurf(/turf/floor/natural/mud, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
+	var/turf/new_turf = ChangeTurf(/turf/floor/natural/mud, keep_air = TRUE, keep_height = TRUE)
 	return new_turf.fluid_act(fluids)
 

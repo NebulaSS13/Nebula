@@ -14,7 +14,7 @@
 		var/turf/floor/check_floor = floor_type
 		if(TYPE_IS_ABSTRACT(check_floor))
 			continue
-		floor = floor.ChangeTurf(floor_type, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
+		floor = floor.ChangeTurf(floor_type, FALSE, FALSE, FALSE, FALSE, FALSE)
 		if(istype(floor))
 			var/list/turf_failures = floor.validate_turf()
 			if(length(turf_failures))

@@ -16,7 +16,7 @@
 /turf/floor/natural/dirt/fluid_act(var/datum/reagents/fluids)
 	if(fluids?.total_volume < FLUID_SHALLOW)
 		return ..()
-	var/turf/new_turf = ChangeTurf(/turf/floor/natural/mud, keep_air = TRUE, keep_air_below = TRUE, keep_height = TRUE)
+	var/turf/new_turf = ChangeTurf(/turf/floor/natural/mud, keep_air = TRUE, keep_height = TRUE)
 	return new_turf.fluid_act(fluids)
 
 /turf/floor/natural/dirt/drop_diggable_resources()
