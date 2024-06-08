@@ -118,13 +118,14 @@
 /turf/wall/natural/get_dismantle_sound()
 	return 'sound/effects/rockcrumble.ogg'
 
-/turf/wall/natural/dismantle_turf(devastated, explode, no_product, ramp_update = TRUE)
+// Natural walls are typically dense, and should not contain any air a-la normal walls, so we set keep_air = FALSE by default.
+/turf/wall/natural/dismantle_turf(devastated, explode, no_product, keep_air = FALSE, ramp_update = TRUE)
 	destroy_artifacts(null, INFINITY)
 	if(ramp_update && !ramp_slope_direction)
 		ramp_slope_direction = NORTH // Temporary so we don't let any neighboring ramps use us as supports.
 		update_neighboring_ramps()
 		ramp_slope_direction = null
-	return ..(devastated, explode, no_product)
+	return ..(devastated, explode, no_product, keep_air)
 
 /turf/wall/natural/Bumped(var/atom/movable/AM)
 	. = ..()

@@ -54,4 +54,4 @@
 	if(prob(A.explosion_resistance))
 		return
 	if(severity == 1)
-		ChangeTurf(get_base_turf_by_area(src))
+		ChangeTurf(get_base_turf_by_area(src), keep_air = TRUE)

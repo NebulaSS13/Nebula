@@ -146,7 +146,7 @@ var/global/list/wall_fullblend_objects = list(
 			plant.update_icon()
 			plant.reset_offsets(0)
 
-/turf/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
+/turf/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/update_open_turfs_above = TRUE)
 	clear_plants()
 	. = ..()
 
@@ -229,7 +229,7 @@ var/global/list/wall_fullblend_objects = list(
 	if(material)
 		material.place_dismantled_product(src, devastated, amount = rand(min_dismantle_amount, max_dismantle_amount), drop_type = get_dismantle_stack_type())
 
-/turf/wall/dismantle_turf(devastated, explode, no_product)
+/turf/wall/dismantle_turf(devastated, explode, no_product, keep_air = TRUE)
 
 	playsound(src, get_dismantle_sound(), 100, 1)
 	if(!no_product)
@@ -242,7 +242,7 @@ var/global/list/wall_fullblend_objects = list(
 		else
 			O.forceMove(src)
 	clear_plants()
-	. = ChangeTurf(floor_type || get_base_turf_by_area(src))
+	. = ChangeTurf(floor_type || get_base_turf_by_area(src), keep_air = keep_air)
 
 /turf/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)

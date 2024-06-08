@@ -61,7 +61,7 @@
 	if(istype(A, /turf/floor/cult))
 		var/turf/floor/cult/F = A
 		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
-		F.ChangeTurf(/turf/floor)
+		F.ChangeTurf(/turf/floor, keep_air = TRUE)
 
 
 /obj/item/energy_net

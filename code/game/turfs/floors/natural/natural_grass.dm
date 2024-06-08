@@ -44,7 +44,7 @@
 			if(QDELETED(src) || !istype(src, /turf/floor/natural/grass/wild))
 				return TRUE
 			new /obj/item/stack/material/bundle/grass(src, rand(2,5))
-			ChangeTurf(/turf/floor/natural/grass)
+			ChangeTurf(/turf/floor/natural/grass, keep_air = TRUE)
 		return TRUE
 	return ..()
 
