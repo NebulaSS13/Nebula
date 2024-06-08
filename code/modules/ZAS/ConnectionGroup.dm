@@ -219,6 +219,11 @@ Class Procs:
 	air.group_multiplier = coefficient
 	. = ..()
 
+	// Update the air mix
+	if(coefficient && (B == c.B) && !(B in connecting_turfs))
+		B = pick(connecting_turfs)
+		air = B.return_air()
+
 /connection_edge/unsimulated/erase()
 	A.edges.Remove(src)
 	. = ..()

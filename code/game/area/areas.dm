@@ -140,13 +140,14 @@ var/global/list/areas = list()
 		if(adjacent_turf)
 			adjacent_turf.update_registrations_on_adjacent_area_change()
 
-	T.last_outside_check = OUTSIDE_UNCERTAIN
-	var/outside_changed = T.is_outside() != old_outside
-	if(T.is_outside == OUTSIDE_AREA && outside_changed)
-		T.update_weather()
-		T.update_external_atmos_participation()
+	// Handle updating weather and atmos if the outside status of the turf changed.
+	if(T.is_outside == OUTSIDE_AREA)
+		T.update_external_atmos_participation() // Refreshes outside status and adds exterior air to turf air if necessary.
 
-	if(A.interior_ambient_light_modifier != old_area_ambience || outside_changed)
+	if(T.is_outside() != old_outside)
+		T.update_weather()
+		SSambience.queued |= T
+	else if(A.interior_ambient_light_level != old_area_ambience)
 		SSambience.queued |= T
 
 /turf/proc/update_registrations_on_adjacent_area_change()
