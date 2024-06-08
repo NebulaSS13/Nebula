@@ -244,6 +244,7 @@
 	if(!istype(wall) || !wall.density)
 		return FALSE
 	LAZYDISTINCTADD(pinned, O)
+	walk_to(src, 0) // cancel any automated movement
 	visible_message("\The [src] is pinned to \the [wall] by \the [O]!")
 	// TODO: cancel all throwing and momentum after this point
 	return TRUE

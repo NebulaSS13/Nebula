@@ -8,7 +8,8 @@
 	var/mob/living/simple_animal/critter = body
 	var/atom/flee_target_atom = flee_target?.resolve()
 	if(istype(flee_target_atom) && (flee_target_atom.loc in view(body)))
-		walk_away(body, flee_target_atom, 7, 2)
+		if(body.MayMove())
+			walk_away(body, flee_target_atom, 7, 2)
 		critter.stop_automated_movement = TRUE
 	else
 		flee_target = null
