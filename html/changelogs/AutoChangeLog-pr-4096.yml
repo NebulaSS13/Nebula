@@ -1,0 +1,17 @@
+author: PsyCommando
+changes:
+  - {soundadd: Added phone key tones sounds.}
+  - {soundadd: Added extra briefcases sounds for locking and unlocking.}
+  - {imageadd: 'Modified the secure briefcase, briefcase, secure safe icons with some
+      new overlays, and made them use the new item icon layout format.'}
+  - {balance: "Made it a lot less likely to unlock a secure briefcase/charge stick/safe
+      with a multitool if you don't have a high device skill. So, now anyone with
+      a multitool and a screwdriver won't be able to unlock those in a single try
+      as quickly and easily."}
+  - {bugfix: Secure briefcases cannot quick gather items on the turf while they're
+      locked anymore.}
+  - {bugfix: Storage objects no longer cause the UI to behave weirdly when trying
+      to access it several times in a row. (open alt interaction bug)}
+  - {bugfix: The lockable UI is now properly scaled to it's window.}
+  - {tweak: The lockable UI is a bit more polished overall.}
+delete-after: true
