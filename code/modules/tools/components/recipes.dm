@@ -13,7 +13,8 @@
 	difficulty                  = MAT_VALUE_NORMAL_DIY
 	craft_stack_types = list(
 		/obj/item/stack/material/plank,
-		/obj/item/stack/material/rods
+		/obj/item/stack/material/rods,
+		/obj/item/stack/material/bone
 	)
 
 /decl/stack_recipe/tool/handle/long
