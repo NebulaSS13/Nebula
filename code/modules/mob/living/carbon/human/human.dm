@@ -1295,3 +1295,6 @@
 			var/turf/old_turf = old_loc
 			old_turf.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
 
+/mob/living/carbon/human/remove_implant(obj/item/implant, surgical_removal = FALSE, obj/item/organ/external/affected)
+	if((. = ..()) && !surgical_removal)
+		shock_stage += 20
