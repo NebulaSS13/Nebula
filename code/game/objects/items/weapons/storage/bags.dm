@@ -118,6 +118,7 @@
 	desc = "A simple sack for carrying goods."
 	icon = 'icons/obj/items/storage/sack.dmi'
 	icon_state = ICON_STATE_WORLD
+	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
 	storage = /datum/storage/bag/sack
 	material = /decl/material/solid/organic/leather
