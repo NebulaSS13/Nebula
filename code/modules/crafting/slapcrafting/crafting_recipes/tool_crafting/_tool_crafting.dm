@@ -91,7 +91,6 @@ var/global/list/_tool_crafting_components = list(
 	var/static/list/binding_materials = list(
 		/decl/material/solid/organic/plantmatter/grass/dry,
 		/decl/material/solid/organic/leather,
-		/decl/material/solid/organic/meat/gut,
 		/decl/material/solid/organic/cloth
 	)
 
