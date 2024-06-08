@@ -412,6 +412,11 @@
 	if (amount < max_amount)
 		. = CEILING(. * amount / max_amount)
 
+/obj/item/stack/get_mass() // Scales mass to stack size
+	. = ..()
+	if (amount < max_amount)
+		. *= amount / max_amount // Don't round, this can be non-integer
+
 /obj/item/stack/attack_hand(mob/user)
 	if(!user.is_holding_offhand(src) || !can_split())
 		return ..()
