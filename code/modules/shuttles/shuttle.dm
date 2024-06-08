@@ -237,25 +237,26 @@
 					bug.gib()
 				else
 					qdel(AM) //it just gets atomized I guess? TODO throw it into space somewhere, prevents people from using shuttles as an atom-smasher
-	for(var/area/A in shuttle_area)
-		// if there was a zlevel above our origin, erase our ceiling now we're leaving
-		if(HasAbove(current_location.z))
-			for(var/turf/TO in A.contents)
-				var/turf/TA = GetAbove(TO)
-				if(istype(TA, ceiling_type))
-					TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
-		if(knockdown)
+
+	if(knockdown)
+		for(var/area/A in shuttle_area)
 			A.throw_unbuckled_occupants(4, 1)
 
 	if(logging_home_tag)
 		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
 		s_log.handle_move(current_location, destination)
 
-	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf, TRUE)
+	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
+	create_translated_ceiling(FALSE, turf_translation)
+
+	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf, TRUE, TRUE)
 	current_location = destination
 
-	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
-	create_ceiling()
+	// remove the old ceiling, if it existed
+	for(var/turf/TO in turf_translation)
+		var/turf/TA = GetAbove(TO)
+		if(istype(TA, ceiling_type))
+			TA.ChangeTurf(get_base_turf_by_area(TA), TRUE, TRUE, TRUE)
 
 	handle_pipes_and_power_on_move(new_turfs)
 
@@ -310,10 +311,28 @@
 			if(TD.turf_flags & TURF_FLAG_BACKGROUND)
 				continue
 			var/turf/TA = GetAbove(TD)
-			if(force || (istype(TA, get_base_turf_by_area(TA)) || (istype(TA) && TA.is_open())))
+			if(!istype(TA))
+				continue
+			if(force || (istype(TA, get_base_turf_by_area(TA)) || TA.is_open()))
 				if(get_area(TA) in shuttle_area)
 					continue
-				TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE, TRUE)
+				TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
+
+/datum/shuttle/proc/create_translated_ceiling(force, list/turf_translation)
+	for(var/turf/TS in turf_translation)
+		var/turf/TD = turf_translation[TS]
+
+		if(TS.turf_flags & TURF_FLAG_BACKGROUND)
+			continue
+		var/turf/TAD = GetAbove(TD)
+		var/turf/TAS = GetAbove(TS)
+		if(!istype(TAD))
+			continue
+		if(force || (istype(TAD, get_base_turf_by_area(TAD)) || TAD.is_open()))
+			// Check for multi-z shuttles. Don't create a ceiling where the shuttle is about to be.
+			if((istype(TAS) && (get_area(TAS) in shuttle_area)))
+				continue
+			TAD.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()
