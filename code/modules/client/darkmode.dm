@@ -6,7 +6,7 @@ var/global/darkmode_style = url_encode(file2text('code/modules/client/darkmode.c
 /**
 	Force the light and dark theme css files to be reloaded. Mainly usefule for devs.
  */
-/proc/ReloadModeThemeCss(client/C, quiet = FALSE)
+/proc/ReloadThemeCss(client/C, quiet = FALSE)
 	//Reload the files.
 	//#NOTE: I'm not sure why we're caching those as globals on the server? Would make more sense to load them directly from client local file into the winset()
 	global.lightmode_style = url_encode(file2text('code/modules/client/lightmode.css'))

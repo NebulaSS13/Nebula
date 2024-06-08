@@ -926,6 +926,4 @@ var/global/list/admin_verbs_mod = list(
 	set desc     = "Forces the client to reload its UI theme css file."
 	if(!check_rights(R_DEBUG))
 		return
-	var/datum/D = src
-	ReloadModeThemeCss(D.get_client())
-
+	ReloadThemeCss(src)
