@@ -147,7 +147,7 @@ var/global/list/areas = list()
 	if(T.is_outside() != old_outside)
 		T.update_weather()
 		SSambience.queued |= T
-	else if(A.interior_ambient_light_level != old_area_ambience)
+	else if(A.interior_ambient_light_modifier != old_area_ambience)
 		SSambience.queued |= T
 
 /turf/proc/update_registrations_on_adjacent_area_change()
