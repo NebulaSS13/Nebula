@@ -156,7 +156,7 @@
 	return ..() && w_class <= round(amt/20)
 
 /obj/proc/can_embed()
-	return is_sharp(src)
+	return FALSE
 
 /obj/examine(mob/user, distance, infix, suffix)
 	. = ..()

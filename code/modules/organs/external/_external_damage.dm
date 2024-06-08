@@ -31,7 +31,7 @@
 		owner.bodytemperature += burn
 		burn = 0
 		if(prob(25))
-			owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
+			owner.visible_message(SPAN_WARNING("\The [owner]'s crystalline [name] shines with absorbed energy!"))
 
 	if(used_weapon)
 		add_autopsy_data(used_weapon, brute + burn)
