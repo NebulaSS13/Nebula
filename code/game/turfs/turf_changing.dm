@@ -1,11 +1,11 @@
-/turf/proc/switch_to_base_turf()
+/turf/proc/switch_to_base_turf(keep_air)
 	var/base_turf = get_base_turf_by_area(src)
 	if(base_turf && type != base_turf)
-		return ChangeTurf(base_turf)
+		return ChangeTurf(base_turf, keep_air = keep_air)
 	return src
 
-/turf/proc/dismantle_turf(devastated, explode, no_product)
-	var/turf/new_turf = switch_to_base_turf()
+/turf/proc/dismantle_turf(devastated, explode, no_product, keep_air = TRUE)
+	var/turf/new_turf = switch_to_base_turf(keep_air)
 	if(!no_product && istype(new_turf) && !new_turf.is_open() && !(locate(/obj/structure/lattice) in new_turf))
 		new /obj/structure/lattice(new_turf)
 	return !!new_turf
@@ -31,11 +31,11 @@
 		if(!restrict_type || istype(above, restrict_type))
 			if(respect_area)
 				var/area/A = get_area(above)
-				above.ChangeTurf(A?.open_turf || open_turf_type, update_open_turfs_above = FALSE)
+				above.ChangeTurf(A?.open_turf || open_turf_type, keep_air = TRUE, update_open_turfs_above = FALSE)
 			else
-				above.ChangeTurf(open_turf_type, update_open_turfs_above = FALSE)
+				above.ChangeTurf(open_turf_type, keep_air = TRUE, update_open_turfs_above = FALSE)
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE, var/keep_height = FALSE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/update_open_turfs_above = TRUE, var/keep_height = FALSE)
 	if (!N)
 		return
 
@@ -51,7 +51,6 @@
 
 	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.
-	var/old_air =              air
 	var/old_fire =             fire
 	var/old_above =            above
 	var/old_opacity =          opacity
@@ -76,6 +75,16 @@
 
 	var/old_zone_membership_candidate = zone_membership_candidate
 
+	// Create a copy of the old air value to apply.
+	var/datum/gas_mixture/old_air
+	if(keep_air)
+		// Bypass calling return_air to avoid creating a direct reference to zone air.
+		if(zone)
+			c_copy_air()
+			old_air = air
+		else
+			old_air = return_air()
+
 	changing_turf = TRUE
 
 	qdel(src)
@@ -91,7 +100,7 @@
 		regenerate_ao()
 
 	// Update ZAS, atmos and fire.
-	if(keep_air)
+	if(keep_air && W.can_inherit_air)
 		W.air = old_air
 	if(old_fire)
 		if(W.simulated)
@@ -138,21 +147,24 @@
 
 	// end of lighting stuff
 
+	// In case the turf isn't marked for update in Initialize (e.g. space), we call this to create any unsimulated edges necessary.
+	if(W.zone_membership_candidate != old_zone_membership_candidate)
+		SSair.mark_for_update(src)
+
 	// we check the var rather than the proc, because area outside values usually shouldn't be set on turfs
 	W.last_outside_check = OUTSIDE_UNCERTAIN
 	if(W.is_outside != old_outside)
+		// This will check the exterior atmos participation of this turf and all turfs connected by open space below.
 		W.set_outside(old_outside, skip_weather_update = TRUE)
-	else if(!W.zone_membership_candidate && (old_zone_membership_candidate))
-		update_external_atmos_participation()
-
-	var/turf/below = GetBelow(src)
-	if(below)
-		below.last_outside_check = OUTSIDE_UNCERTAIN
-
-		// If the turf is at the top of the Z-stack and changed its outside status, or if it's changed its open status, let the turf below check if
-		// it should change its ZAS participation
-		if((!HasAbove(z) && (W.is_outside != old_outside)) || W.is_open() != old_is_open)
-			below.update_external_atmos_participation(!keep_air_below)
+	else if(HasBelow(z) && (W.is_open() != old_is_open)) // Otherwise, we do it here if the open status of the turf has changed.
+		var/turf/checking = src
+		while(HasBelow(checking.z))
+			checking = GetBelow(checking)
+			if(!isturf(checking))
+				break
+			checking.update_external_atmos_participation()
+			if(!checking.is_open())
+				break
 
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
 
@@ -165,12 +177,12 @@
 	for(var/atom/movable/AM in W.contents)
 		AM.update_turf_alpha_mask()
 
-/turf/proc/transport_properties_from(turf/other)
-	if(other.zone)
+/turf/proc/transport_properties_from(turf/other, transport_air)
+	if(transport_air && can_inherit_air && (other.zone || other.air))
 		if(!air)
 			make_air()
-		air.copy_from(other.zone.air)
-		other.zone.remove(other)
+		air.copy_from(other.zone ? other.zone.air : other.air)
+		other.zone?.remove(other)
 	if(!istype(other, src.type))
 		return 0
 	src.set_dir(other.dir)

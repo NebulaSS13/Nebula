@@ -10,6 +10,7 @@
 	permit_ao = FALSE
 	z_eventually_space = TRUE
 	turf_flags = TURF_FLAG_BACKGROUND
+	can_inherit_air = FALSE
 
 	open_turf_type = /turf/space
 
@@ -58,7 +59,7 @@
 	if(SSmapping.base_floor_area)
 		var/area/new_area = locate(SSmapping.base_floor_area) || new SSmapping.base_floor_area
 		ChangeArea(src, new_area)
-	ChangeTurf(SSmapping.base_floor_type, keep_air_below = TRUE)
+	ChangeTurf(SSmapping.base_floor_type)
 
 /turf/space/proc/toggle_transit(var/direction)
 	if(edge)
@@ -126,8 +127,8 @@
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
 			A.touch_map_edge(OVERMAP_ID_SPACE)
 
-/turf/space/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
-	return ..(N, tell_universe, TRUE, keep_air, keep_air_below, update_open_turfs_above)
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/update_open_turfs_above = TRUE)
+	return ..(N, tell_universe, TRUE, keep_air, update_open_turfs_above)
 
 /turf/space/is_open()
 	return TRUE
