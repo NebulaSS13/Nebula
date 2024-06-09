@@ -1,3 +1,8 @@
+/**
+ * The CSS for the UI theme supports only the older subset of CSS supported by the 'style' attribute of the byond client's browser windows.
+ * Colors hex values should be in lower case for compatibility reasons.
+ */
+
 body					{font-family: Verdana, sans-serif;}
 
 h1, h2, h3, h4, h5, h6	{color: #a4bad6;font-family: Georgia, Verdana, sans-serif;}

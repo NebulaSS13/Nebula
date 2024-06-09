@@ -1,3 +1,8 @@
+/**
+ * The CSS for the UI theme supports only the older subset of CSS supported by the 'style' attribute of the byond client's browser windows.
+ * Colors hex values should be in lower case for compatibility reasons.
+ */
+
 body					{font-family: Verdana, sans-serif;}
 
 h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: Georgia, Verdana, sans-serif;}
@@ -85,7 +90,7 @@ h1.alert, h2.alert		{color: #000000;}
 .info					{color: #0000cc;}
 .notice					{color: #000099;}
 .subtle					{color: #000099; font-size: 75%; font-style: italic;}
-.alium					{color: #00ff00;}
+.alium					{color: #439c16;}
 .cult					{color: #800080; font-weight: bold; font-style: italic;}
 .cultannounce			{color: #800080; font-style: italic; font-size: 175%;}
 .mfauna					{color: #884422; font-weight: bold; font-size: 125%;}
@@ -95,15 +100,15 @@ h1.alert, h2.alert		{color: #000000;}
 /* General purpose colour classes */
 .font_red               {color: #ff0000;}
 .font_orange            {color: #ff7f00;}
-.font_yellow            {color: #ffff00;}
-.font_green             {color: #00ff00;}
+.font_yellow            {color: #b9aa1d;}
+.font_green             {color: #439c16;}
 .font_blue              {color: #0000ff;}
 .font_violet            {color: #4B0082;}
 .font_purple            {color: #8f00ff;}
 .font_grey              {color: #454545;}
 .font_maroon            {color: #800000;}
-.font_pink              {color: #ff8787;}
-.font_palepink          {color: #ffc4c4;}
+.font_pink              {color: #b86262;}
+.font_palepink          {color: #b68c8c;}
 
 /* Languages */
 
@@ -127,7 +132,7 @@ h1.alert, h2.alert		{color: #000000;}
 
 .interface				{color: #330033;}
 
-.good					{color: #00ff00; font-weight: bold;}
+.good					{color: #439c16; font-weight: bold;}
 .bad					{color: #ee0000; font-weight: bold;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}

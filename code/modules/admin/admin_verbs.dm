@@ -217,7 +217,8 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/spawn_ore_pile,
 	/datum/admins/proc/force_initialize_weather,
 	/datum/admins/proc/force_weather_state,
-	/datum/admins/proc/force_kill_weather
+	/datum/admins/proc/force_kill_weather,
+	/client/proc/force_reload_theme_css,
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(
@@ -918,3 +919,11 @@ var/global/list/admin_verbs_mod = list(
 
 		if("Cancel")
 			return
+
+/client/proc/force_reload_theme_css()
+	set category = "Debug"
+	set name     = "Reload UI Theme CSS"
+	set desc     = "Forces the client to reload its UI theme css file."
+	if(!check_rights(R_DEBUG))
+		return
+	ReloadThemeCss(src)
