@@ -94,7 +94,7 @@
 
 //A "preset" for counting_english_list that displays the list "inline" (comma separated)
 /proc/inline_counting_english_list(list/input, output_icons = TRUE, determiners = DET_NONE, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "", line_prefix = "", first_item_prefix = "", last_item_suffix = "")
-	return counting_english_list(input, output_icons, determiners, nothing_text, and_text, comma_text, final_comma_text)
+	return counting_english_list(input, output_icons, determiners, nothing_text, line_prefix, first_item_prefix, last_item_suffix, and_text, comma_text, final_comma_text)
 
 //Checks for specific types in a list
 /proc/is_type_in_list(datum/thing, list/type_list)

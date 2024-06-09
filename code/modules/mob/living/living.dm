@@ -20,7 +20,9 @@
 
 /mob/living/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	if(admin_paralyzed)
-		to_chat(user, SPAN_OCCULT("OOC: They have been paralyzed by staff. Please avoid interacting with them unless cleared to do so by staff."))
+		to_chat(user, SPAN_OCCULT("OOC: [pronouns.He] [pronouns.has] been paralyzed by staff. Please avoid interacting with [pronouns.him] unless cleared to do so by staff."))
+	if(!length(get_external_organs()) && length(embedded)) // fallback for simple embedding used by limbless mobs
+		to_chat(user, SPAN_WARNING("[pronouns.He] [pronouns.has] [inline_counting_english_list(embedded, determiners = DET_INDEFINITE)] embedded in [pronouns.him]."))
 
 //mob verbs are faster than object verbs. See above.
 /mob/living/pointed(atom/A as mob|obj|turf in view())
