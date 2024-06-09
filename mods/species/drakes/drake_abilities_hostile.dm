@@ -1,7 +1,7 @@
 
 /datum/ability_handler/grafadreka/proc/handle_dismemberment(mob/user, mob/living/victim)
 
-	if(!victim.current_posture?.prone && victim.stat != DEAD)
+	if(victim.stat != DEAD || !victim.current_posture?.prone)
 		return FALSE
 
 	if(!victim.butchery_data)

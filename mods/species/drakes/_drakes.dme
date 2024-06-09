@@ -1,7 +1,13 @@
 #ifndef MODPACK_DRAKES
 #define MODPACK_DRAKES
+
+#ifdef MODPACK_FANTASY
+#warn Fantasy modpack loaded before Drakes modpack, compatibility features will be missing.
+#endif
+
 // BEGIN_INCLUDE
 #include "_drakes.dm"
+#include "clothing.dm"
 #include "culture.dm"
 #include "drake_abilities_friendly.dm"
 #include "drake_abilities_hostile.dm"

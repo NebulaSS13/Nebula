@@ -1,3 +1,24 @@
+// TODO: some way to handle this with a voicebox organ or something along those lines.
+/decl/language
+	var/drake_compatible = FALSE
+
+// These languages shouldn't care about the speaker bodytype.
+/decl/language/noise
+	drake_compatible = null
+/decl/language/cult
+	drake_compatible = null
+/decl/language/cultcommon
+	drake_compatible = null
+/decl/language/binary
+	drake_compatible = null
+/decl/language/alium
+	drake_compatible = null
+
+/decl/language/can_be_spoken_properly_by(var/mob/speaker)
+	. = ..()
+	if(. != SPEECH_RESULT_INCAPABLE && !isnull(drake_compatible) && istype(speaker?.get_bodytype(), /decl/bodytype/quadruped/grafadreka) != drake_compatible)
+		return SPEECH_RESULT_INCAPABLE
+
 /decl/language/grafadreka
 	name = "Drake Language"
 	shorthand = "DR"
@@ -11,6 +32,7 @@
 	machine_understands = 0
 	space_chance = 30
 	syllables = list("hss", "ssh", "khs", "hrr", "rrr", "rrn")
+	drake_compatible = TRUE
 
 /decl/language/grafadreka/get_random_name()
 	var/static/list/drake_names = list(

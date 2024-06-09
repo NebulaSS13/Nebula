@@ -53,7 +53,7 @@
 		return result
 
 /decl/language/proc/can_be_spoken_properly_by(var/mob/speaker)
-	return TRUE
+	return SPEECH_RESULT_GOOD
 
 /decl/language/proc/muddle(var/message)
 	return message
