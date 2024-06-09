@@ -46,7 +46,7 @@
 		/obj/item/gun/energy/ionrifle,
 		/obj/item/gun/energy/taser,
 		/obj/item/gun/energy/crossbow/largecrossbow,
-		/obj/item/gun/launcher/crossbow,
+		/obj/item/gun/launcher/bow/crossbow/powered,
 		/obj/item/gun/launcher/grenade/loaded,
 		/obj/item/gun/launcher/pneumatic,
 		/obj/item/gun/projectile/automatic/smg,

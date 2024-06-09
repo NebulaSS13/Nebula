@@ -1502,6 +1502,43 @@ default behaviour is:
 /mob/living/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, datum/callback/callback) //If this returns FALSE then callback will not be called.
 	return !length(pinned) && ..()
 
+
+/mob/living/remove_implant(obj/item/implant, surgical_removal = FALSE, obj/item/organ/external/affected)
+
+	LAZYREMOVE(embedded, implant)
+
+	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
+		verbs -= /mob/proc/yank_out_object
+
+	for(var/obj/item/O in pinned)
+		if(O == implant)
+			LAZYREMOVE(pinned, O)
+		if(!LAZYLEN(pinned))
+			anchored = FALSE
+	implant.dropInto(loc)
+	implant.add_blood(src)
+	implant.update_icon()
+	if(istype(implant,/obj/item/implant))
+		var/obj/item/implant/imp = implant
+		imp.removed()
+
+	if(!affected) //Grab the organ holding the implant.
+		for(var/obj/item/organ/external/organ in get_external_organs())
+			for(var/obj/item/O in organ.implants)
+				if(O == implant)
+					affected = organ
+					break
+	if(affected)
+		LAZYREMOVE(affected.implants, implant)
+		for(var/datum/wound/wound in affected.wounds)
+			LAZYREMOVE(wound.embedded_objects, implant)
+		if(!surgical_removal)
+			affected.take_external_damage((implant.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
+			if(!BP_IS_PROSTHETIC(affected) && prob(implant.w_class * 5) && affected.sever_artery()) //I'M SO ANEMIC I COULD JUST -DIE-.
+				custom_pain("Something tears wetly in your [affected.name] as [implant] is pulled free!", 50, affecting = affected)
+
+	return TRUE
+
 /mob/living/proc/handle_footsteps()
 	return
 

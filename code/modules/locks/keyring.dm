@@ -43,7 +43,7 @@
 	can_hold = list(
 		/obj/item/key,
 		/obj/item/screwdriver,
-		/obj/item/arrow
+		/obj/item/stack/material/bow_ammo
 	)
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 8
