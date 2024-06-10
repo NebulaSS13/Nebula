@@ -2,6 +2,10 @@
 	return istype(ammo, bow_ammo_type)
 
 /obj/item/gun/launcher/bow/proc/load_arrow(mob/user, obj/item/ammo)
+	if(!istype(string))
+		if(user)
+			to_chat(user, SPAN_WARNING("\The [src] has no bowstring!"))
+		return FALSE
 	if(istype(ammo, /obj/item/stack))
 		var/obj/item/stack/stack = ammo
 		ammo = stack.split(1)
