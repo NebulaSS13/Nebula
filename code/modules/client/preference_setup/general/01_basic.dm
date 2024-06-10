@@ -141,7 +141,7 @@
 		var/decl/bodytype/new_body = locate(href_list["bodytype"])
 		if(istype(new_body) && CanUseTopic(user) && (new_body in S.available_bodytypes))
 			pref.set_bodytype(new_body.name)
-			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
+			if(get_config_value(/decl/config/toggle/on/cisnormativity) && new_body.associated_gender) // Let servers stuck in the 2010s set bodytype default to avoid "confusing" people
 				pref.gender = new_body.associated_gender
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
