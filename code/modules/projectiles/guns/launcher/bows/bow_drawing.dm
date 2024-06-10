@@ -5,7 +5,7 @@
 	return draw_time
 
 /obj/item/gun/launcher/bow/proc/check_can_draw(mob/user)
-	return istype(user) && !QDELETED(user) && !QDELETED(src) && (!require_loaded_to_draw || get_loaded_arrow(user))
+	return istype(user) && !QDELETED(user) && !QDELETED(src) && istype(string) && !QDELETED(string) && (!require_loaded_to_draw || get_loaded_arrow(user))
 
 /obj/item/gun/launcher/bow/proc/start_drawing(var/mob/user)
 
