@@ -34,7 +34,19 @@
 	if(!pref)
 		return
 	// Markings used to be cleared outside of here, but it was always done before every call, so it was moved in here.
-	pref.sprite_accessories = list()
+	// remove invalid accessories for our new bodytype. don't clear the list directly as we did before, to preserve in the case of no default
+	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+	for(var/acc_cat in pref.sprite_accessories)
+		if(!(acc_cat in mob_species.available_accessory_categories))
+			pref.sprite_accessories -= acc_cat
+			continue
+		var/decl/sprite_accessory_category/accessory_category = GET_DECL(acc_cat)
+		for(var/acc in pref.sprite_accessories[acc_cat])
+			var/decl/sprite_accessory/accessory = GET_DECL(acc)
+			if(!istype(accessory, accessory_category.base_accessory_type) || !accessory.accessory_is_available(get_mannequin(pref.client?.ckey), mob_species, mob_bodytype))
+				pref.sprite_accessories[acc_cat] -= acc
+	// apply the defaults
 	for(var/accessory_category in default_sprite_accessories)
 		pref.sprite_accessories[accessory_category] = list()
 		for(var/accessory in default_sprite_accessories[accessory_category])
