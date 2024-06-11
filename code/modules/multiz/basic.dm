@@ -36,19 +36,20 @@ var/global/list/z_levels = list() // Each Z-level is associated with the relevan
 		. = get_step_resolving_mimic(ref, dir)
 
 /proc/get_dir_multiz(turf/us, turf/them)
-	us = get_turf(us)
-	them = get_turf(them)
 	if(!us || !them)
 		return 0
 	if(us.z == them.z)
 		return get_dir(us, them)
 	else
-		var/turf/T = GET_ABOVE(us)
 		var/dir = 0
-		if(T && (T.z == them.z))
-			dir = UP
+		if(them.z > us.z)
+			var/turf/T = GET_ABOVE(us)
+			if(T && (T.z == them.z))
+				dir = UP
+			else
+				return get_dir(us, them)
 		else
-			T = GET_BELOW(us)
+			var/turf/T = GET_BELOW(us)
 			if(T && (T.z == them.z))
 				dir = DOWN
 			else
