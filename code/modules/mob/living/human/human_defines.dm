@@ -76,7 +76,3 @@
 	var/obj/item/tank/internal
 	/// Contains environment tolerances and language information, along with a lot of other stuff, usually set during Initialize().
 	var/decl/species/species
-	/// these two help govern taste. The first is the last time a taste message was shown to the plaer.
-	var/last_taste_time = 0
-	/// the second is the message in question.
-	var/last_taste_text = ""

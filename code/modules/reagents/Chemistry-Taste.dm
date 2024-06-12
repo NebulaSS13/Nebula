@@ -1,4 +1,3 @@
-
 /* what this does:
 catalogue the 'taste strength' of each one
 calculate text size per text.

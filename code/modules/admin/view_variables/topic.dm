@@ -482,9 +482,13 @@
 	else if(href_list["addorgan"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/M = locate(href_list["addorgan"])
+		var/mob/living/M = locate(href_list["addorgan"])
 		if(!istype(M))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living")
+			return
+
+		if(!length(M.get_external_organs())) // quick and dirty check for organs; should always be >0 for humanlike mobs.
+			to_chat(usr, "This can only be done to mobs that implement organs!")
 			return
 
 		var/obj/item/organ/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in subtypesof(/obj/item/organ)
@@ -509,9 +513,13 @@
 	else if(href_list["remorgan"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/M = locate(href_list["remorgan"])
+		var/mob/living/M = locate(href_list["remorgan"])
 		if(!istype(M))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living")
+			return
+
+		if(!length(M.get_external_organs())) // quick and dirty check for organs; should always be >0 for humanlike mobs.
+			to_chat(usr, "This can only be done to mobs that implement organs!")
 			return
 
 		var/obj/item/organ/rem_organ = input("Please choose an organ to remove.","Organ",null) as null|anything in M.get_internal_organs()
