@@ -1470,7 +1470,7 @@
 	set_trait(TRAIT_MATURATION,6)
 	set_trait(TRAIT_PRODUCTION,6)
 	set_trait(TRAIT_YIELD,5)
-	set_trait(TRAIT_PRODUCT_ICON,"grapes")
+	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#a80000")
 	set_trait(TRAIT_PLANT_COLOUR,"#749733")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
