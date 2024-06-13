@@ -58,10 +58,9 @@
 	QDEL_NULL(touching)
 
 	if(reagents == bloodstr)
-		reagents = null
+		bloodstr = null
 	else
 		QDEL_NULL(bloodstr)
-	QDEL_NULL(bloodstr)
 
 	if(loc)
 		for(var/mob/M in contents)
