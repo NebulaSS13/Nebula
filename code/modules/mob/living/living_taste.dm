@@ -1,5 +1,5 @@
 /mob/living
-	/// these two help govern taste. The first is the last time a taste message was shown to the plaer.
+	/// these two help govern taste. The first is the last time a taste message was shown to the player.
 	var/last_taste_time = 0
 	/// the second is the message in question.
 	var/last_taste_text = ""

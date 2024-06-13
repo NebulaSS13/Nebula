@@ -23,7 +23,6 @@ var/global/list/bodytypes_by_category = list()
 	var/icon_template =   'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
 	var/ignited_icon =    'icons/mob/OnFire.dmi'
 	var/associated_gender
-	var/retrievable_via_pronoun = TRUE
 	var/appearance_flags = 0 // Appearance/display related features.
 
 	/// Used when filing your nails.
