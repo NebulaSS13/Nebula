@@ -129,7 +129,7 @@
 	user.set_machine(src)
 	var/list/data = list()
 	data["state"] = state
-	var/name
+	var/product_name
 	var/cost
 	var/type_name
 	var/path
@@ -142,12 +142,11 @@
 			var/list/listed_products = list()
 			for(var/c_product =1 to current_content.len)
 				path = current_content[c_product]
-				var/atom/A = path
-				name = initial(A.name)
+				product_name = atom_info_repository.get_name_for(path)
 				cost = current_content[path]
 				listed_products.Add(list(list(
 					"product_index" = c_product,
-					"name" = name,
+					"name" = product_name,
 					"cost" = cost)))
 			listed_types.Add(list(list(
 				"type_name" = type_name,
