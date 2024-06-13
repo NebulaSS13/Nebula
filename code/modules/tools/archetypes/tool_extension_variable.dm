@@ -34,7 +34,12 @@
 	return (current_tool == archetype) ? ..() : INFINITY
 
 /datum/extension/tool/variable/handle_physical_manipulation(var/mob/user)
-	current_tool = next_in_list(current_tool, tool_values)
+	return switch_tool(next_in_list(current_tool, tool_values), user)
+
+/datum/extension/tool/variable/proc/switch_tool(new_tool, mob/user)
+	if(!(new_tool in tool_values))
+		CRASH("Invalid tool mode [new_tool] passed to [holder]'s [type]!")
+	current_tool = new_tool
 	var/config_sound = LAZYACCESS(tool_config_sounds, current_tool)
 	if(islist(config_sound) && length(config_sound))
 		config_sound = pick(config_sound)
@@ -48,6 +53,7 @@
 	to_chat(user, get_adjustment_message(tool_name))
 	var/atom/A = holder
 	A.update_icon()
+	return TRUE
 
 /datum/extension/tool/variable/proc/get_adjustment_message(tool_name)
 	return SPAN_NOTICE("You adjust \the [holder] to function as [tool_name].")

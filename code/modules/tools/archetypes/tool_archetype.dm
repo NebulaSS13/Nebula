@@ -1,4 +1,5 @@
 /decl/tool_archetype
+	abstract_type = /decl/tool_archetype
 	/// Noun for the tool.
 	var/name         = "tool"
 	/// Boolean value for prefixing 'a' or 'an' to the tool name.
