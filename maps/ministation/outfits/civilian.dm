@@ -14,7 +14,7 @@
 /decl/hierarchy/outfit/job/ministation/bartender
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Bartender"
-	uniform = /obj/item/clothing/under/bartender
+	uniform = /obj/item/clothing/pants/formal/black/outfit
 	id_type = /obj/item/card/id/ministation/bartender
 	pda_type = /obj/item/modular_computer/pda
 	head = /obj/item/clothing/head/chefhat
@@ -29,7 +29,7 @@
 /decl/hierarchy/outfit/job/ministation/librarian
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Librarian"
-	uniform = /obj/item/clothing/under/librarian
+	uniform = /obj/item/clothing/pants/slacks/red/outfit
 	id_type = /obj/item/card/id/ministation/librarian
 	pda_type = /obj/item/modular_computer/pda
 

@@ -661,11 +661,11 @@
 	name = "Clothing Storage"
 	},
 /obj/effect/floor_decal/carpet,
-/obj/item/clothing/under/lawyer,
-/obj/item/clothing/under/lawyer/bluesuit,
+/obj/item/clothing/costume/lawyer,
+/obj/item/clothing/costume/lawyer_bluesuit,
 /obj/item/clothing/jumpsuit/mailman,
 /obj/item/clothing/webbing,
-/obj/item/clothing/under/dispatch,
+/obj/item/clothing/costume/dispatch,
 /turf/unsimulated/floor{
 	icon_state = "carpet";
 	name = "carpet"

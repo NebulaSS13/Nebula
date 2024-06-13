@@ -2,7 +2,7 @@
 /obj/item/clothing/suit/armor/pcarrier
 	name = "plate carrier"
 	desc = "A lightweight plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
-	icon = 'icons/clothing/suit/armor/plate_carrier.dmi'
+	icon = 'icons/clothing/suits/armor/plate_carrier.dmi'
 	color = COLOR_GRAY40
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_C, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L, ACCESSORY_SLOT_ARMOR_S, ACCESSORY_SLOT_ARMOR_M)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_C, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L, ACCESSORY_SLOT_ARMOR_S)

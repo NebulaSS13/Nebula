@@ -117,7 +117,7 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver6
 	name = "Dead Slaver 6"
-	uniform = /obj/item/clothing/under/frontier
+	uniform = /obj/item/clothing/shirt/flannel/red/outfit
 	shoes = /obj/item/clothing/shoes/color/orange
 
 /obj/abstract/landmark/corpse/slavers_base/slave
@@ -163,11 +163,11 @@
 
 /decl/hierarchy/outfit/corpse/abolitionist
 	name = "Dead abolitionist"
-	uniform = /obj/item/clothing/under/abol_uniform
+	uniform = /obj/item/clothing/jumpsuit/abolitionist
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/helmet/merc
 
-/obj/item/clothing/under/abol_uniform
+/obj/item/clothing/jumpsuit/abolitionist
 	name = "abolitionist combat suit"
 	desc = "Lightly armored suit worn by abolition extremists during raids. It has green patches on the right sleeve and the chest. There is big green \"A\" on the back."
 	icon = 'maps/away/slavers/icons/uniform.dmi'

@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/armor/laserproof
 	name = "ablative vest"
 	desc = "An armored vest with advanced shielding to protect against energy weapons."
-	icon = 'icons/clothing/suit/armor/reflective.dmi'
+	icon = 'icons/clothing/suits/armor/reflective.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

@@ -42,7 +42,9 @@
 		/obj/item/clothing/head/nursehat,
 		/obj/item/clothing/jumpsuit/medical,
 		/obj/item/clothing/dress/nurse = 2,
-		/obj/item/clothing/under/orderly,
+		/obj/item/clothing/pants/slacks/white/orderly,
+		/obj/item/clothing/shirt/button/orderly,
+		/obj/item/clothing/neck/tie/long/red,
 		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/suit/jacket/first_responder,
 		/obj/item/clothing/shoes/color/white,
@@ -152,7 +154,8 @@
 /obj/structure/closet/secure_closet/counselor/WillContain()
 	return list(
 		/obj/item/clothing/jumpsuit/psych,
-		/obj/item/clothing/jumpsuit/psych/turtleneck,
+		/obj/item/clothing/shirt/sweater/turquoise,
+		/obj/item/clothing/pants/slacks/navy,
 		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/chems/glass/bottle/sedatives,
@@ -208,6 +211,7 @@
 		/obj/item/chems/syringe,
 		/obj/item/pill_bottle/antidepressants,
 		/obj/item/pill_bottle/stimulants,
-		/obj/item/clothing/jumpsuit/psych/turtleneck,
+		/obj/item/clothing/shirt/sweater/turquoise,
+		/obj/item/clothing/pants/slacks/navy,
 		/obj/item/clothing/jumpsuit/psych
 	)

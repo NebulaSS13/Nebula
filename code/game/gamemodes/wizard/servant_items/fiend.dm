@@ -15,7 +15,7 @@
 /obj/item/clothing/suit/fiendcowl
 	name = "fiend's cowl"
 	desc = "A charred black duster with red trim. In its fabric, you can see the faint outline of millions of eyes."
-	icon = 'icons/clothing/suit/wizard/servant/fiend_cowl.dmi'
+	icon = 'icons/clothing/suits/wizard/servant/fiend_cowl.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_TAIL
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
@@ -25,10 +25,10 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 
-/obj/item/clothing/under/lawyer/fiendsuit
+/obj/item/clothing/costume/fiendsuit
 	name = "black suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
-	icon = 'icons/clothing/under/suits/suit_fiend.dmi'
+	icon = 'icons/clothing/suits/suit_fiend.dmi'
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/dress/devilshoes
@@ -45,5 +45,5 @@
 
 /obj/item/clothing/suit/fiendcowl/fem
 	name = "fiend's robe"
-	icon = 'icons/clothing/suit/wizard/servant/fiend_robe.dmi'
+	icon = 'icons/clothing/suits/wizard/servant/fiend_robe.dmi'
 	desc = "A tattered, black and red robe. Nothing is visible through the holes in its fabric, except for a strange, inky blackness. It looks as if it was stitched together with other clothing..."

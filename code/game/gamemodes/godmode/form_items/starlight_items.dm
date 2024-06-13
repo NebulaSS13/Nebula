@@ -45,7 +45,7 @@
 /obj/item/clothing/suit/armor/sunsuit
 	name = "knight's armor"
 	desc = "Now, you can be the knight in shining armor you've always wanted to be. With complementary sun insignia."
-	icon = 'icons/clothing/suit/deity/star_champion.dmi'
+	icon = 'icons/clothing/suits/deity/star_champion.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
 		ARMOR_BULLET = ARMOR_BALLISTIC_AP,
@@ -64,7 +64,7 @@
 /obj/item/clothing/suit/armor/sunrobe
 	name = "oracle's robe"
 	desc = "The robes of a priest. One that praises the sun, apparently. Well, it certainly reflects light well."
-	icon = 'icons/clothing/suit/deity/star_oracle.dmi'
+	icon = 'icons/clothing/suits/deity/star_oracle.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
 		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
@@ -83,7 +83,7 @@
 	desc = "There is absolutely nothing visible through the fabric. The shadows stick to your skin when you touch it."
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	min_pressure_protection = 0
-	icon = 'icons/clothing/suit/deity/star_traitor.dmi'
+	icon = 'icons/clothing/suits/deity/star_traitor.dmi'
 
 /obj/item/clothing/head/helmet/space/shadowhood
 	name = "traitor's hood"

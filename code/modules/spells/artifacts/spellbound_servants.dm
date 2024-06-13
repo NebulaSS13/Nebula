@@ -117,25 +117,6 @@
 			H.mutations |= mRun
 			familiar_type = /mob/living/simple_animal/cat
 		if("Bear")
-			var/obj/item/clothing/under/under = locate() in equipment
-			var/obj/item/clothing/head/head = locate() in equipment
-
-			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
-			if(A)
-				A.armor_values = list(
-					ARMOR_MELEE  = ARMOR_MELEE_VERY_HIGH,
-					ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
-					ARMOR_LASER  = ARMOR_LASER_SMALL,
-					ARMOR_ENERGY = ARMOR_ENERGY_SMALL
-					) //More armor
-			A = get_extension(head, /datum/extension/armor)
-			if(A)
-				A.armor_values = list(
-					ARMOR_MELEE  = ARMOR_MELEE_RESISTANT,
-					ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
-					ARMOR_LASER  = ARMOR_LASER_MINOR,
-					ARMOR_ENERGY = ARMOR_ENERGY_MINOR
-					)
 			familiar_type = /mob/living/simple_animal/hostile/bear
 	var/spell/targeted/shapeshift/familiar/F = new()
 	F.possible_transformations = list(familiar_type)
@@ -154,7 +135,7 @@
 
 /datum/spellbound_type/servant/fiend/equip_servant(var/mob/living/carbon/human/H)
 	if(H.gender == MALE)
-		equipment = list(/obj/item/clothing/under/lawyer/fiendsuit = slot_w_uniform_str,
+		equipment = list(/obj/item/clothing/costume/fiendsuit = slot_w_uniform_str,
 						/obj/item/clothing/shoes/dress/devilshoes = slot_shoes_str)
 		spells += /spell/toggle_armor/fiend
 	else
@@ -186,14 +167,19 @@
 	name = "Overseer"
 	desc = "A ghost, or an imaginary friend; the Overseer is immune to space and can turn invisible at a whim, but has little offensive capabilities."
 	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can't fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
-	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform_str,
-					/obj/item/clothing/shoes/sandal/grimboots = slot_shoes_str,
-					/obj/item/contract/wizard/xray = BP_L_HAND,
-					/obj/item/contract/wizard/telepathy = BP_R_HAND)
-	spells = list(/spell/toggle_armor/overseer,
-				/spell/targeted/ethereal_jaunt,
-				/spell/invisibility,
-				/spell/targeted/revoke)
+	equipment = list(
+		/obj/item/clothing/pants/casual/blackjeans/outfit = slot_w_uniform_str,
+		/obj/item/clothing/suit/jacket/hoodie/grim        = slot_wear_suit_str,
+		/obj/item/clothing/shoes/sandal/grimboots         = slot_shoes_str,
+		/obj/item/contract/wizard/xray                    = BP_L_HAND,
+		/obj/item/contract/wizard/telepathy               = BP_R_HAND
+	)
+	spells = list(
+		/spell/toggle_armor/overseer,
+		/spell/targeted/ethereal_jaunt,
+		/spell/invisibility,
+		/spell/targeted/revoke
+	)
 
 /datum/spellbound_type/servant/overseer/equip_servant(var/mob/living/carbon/human/H)
 	..()

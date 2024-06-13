@@ -3710,7 +3710,7 @@
 	pixel_y = 24
 	},
 /obj/structure/closet,
-/obj/item/clothing/under/carp,
+/obj/item/clothing/costume/carp,
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
 "jU" = (

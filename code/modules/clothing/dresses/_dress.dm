@@ -1,7 +1,7 @@
 /obj/item/clothing/dress
 	name = "flame dress"
 	desc = "A small black dress with blue flames print on it."
-	icon = 'icons/clothing/under/dresses/dress_fire.dmi'
+	icon = 'icons/clothing/dresses/dress_fire.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_UPPER_BODY

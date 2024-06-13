@@ -1,0 +1,41 @@
+/obj/item/clothing/jumpsuit/psych/turtleneck/sweater/@SUBTYPES : /obj/item/clothing/shirt/sweater/@SUBTYPES{@OLD}
+/obj/item/clothing/jumpsuit/psych/turtleneck/@SUBTYPES : /obj/item/clothing/shirt/sweater/turquoise, /obj/item/clothing/pants/slacks/navy/@SUBTYPES{@OLD}
+/obj/item/clothing/jumpsuit/captain_fly/@SUBTYPES : /obj/item/clothing/costume/captain_fly/@SUBTYPES{@OLD}
+/obj/item/clothing/jumpsuit/head_of_personnel_whimsy/@SUBTYPES : /obj/item/clothing/costume/head_of_personnel_whimsy/@SUBTYPES{@OLD}
+/obj/item/clothing/pants/casual/mustangjeans/monke/@SUBTYPES : /obj/item/clothing/pants/casual/mustangjeans/@SUBTYPES{@OLD}
+/obj/item/clothing/under/caretaker/@SUBTYPES : /obj/item/clothing/jumpsuit/caretaker/@SUBTYPES{@OLD}
+/obj/item/clothing/under/mankini/@SUBTYPES : /obj/item/clothing/pants/mankini/@SUBTYPES{@OLD}
+/obj/item/clothing/under/bartender/@SUBTYPES : /obj/item/clothing/pants/formal/black{@OLD}, /obj/item/clothing/shirt/button{@OLD}
+/obj/item/clothing/under/blazer/@SUBTYPES : /obj/item/clothing/shirt/button{@OLD}, /obj/item/clothing/neck/tie/navy{@OLD}, /obj/item/clothing/suit/jacket/blazer{@OLD}
+/obj/item/clothing/under/librarian/@SUBTYPES : /obj/item/clothing/pants/slacks/red{@OLD}, /obj/item/clothing/shirt/button{@OLD}, /obj/item/clothing/neck/tie/navy{@OLD}, /obj/item/clothing/suit/jacket/charcoal{@OLD}
+/obj/item/clothing/under/overalls/@SUBTYPES : /obj/item/clothing/suit/apron/overalls/laborer/@SUBTYPES{@OLD}
+/obj/item/clothing/under/chef/@SUBTYPES : /obj/item/clothing/pants/slacks/white{@OLD}, /obj/item/clothing/shirt/button{@OLD}
+/obj/item/clothing/under/syndicate/@SUBTYPES : /obj/item/clothing/shirt/syndicate/@SUBTYPES{@OLD}
+/obj/item/clothing/under/sl_suit/@SUBTYPES : /obj/item/clothing/pants/slacks/black{@OLD}, /obj/item/clothing/shirt/button{@OLD}
+/obj/item/clothing/under/orderly/@SUBTYPES : /obj/item/clothing/pants/slacks/white/orderly{@OLD}, /obj/item/clothing/shirt/button/orderly{@OLD}, /obj/item/clothing/neck/tie/long/red{@OLD}
+/obj/item/clothing/under/gimmick/rank/captain/suit/@SUBTYPES : /obj/item/clothing/costume/captain_suit/@SUBTYPES{@OLD}
+/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit/@SUBTYPES : /obj/item/clothing/costume/head_of_personnel_suit/@SUBTYPES{@OLD}
+/obj/item/clothing/under/waiter/monke/@SUBTYPES : /obj/item/clothing/under/waiter/@SUBTYPES{@OLD}
+/obj/item/clothing/under/waiter/@SUBTYPES : /obj/item/clothing/pants/slacks/black{@OLD}, /obj/item/clothing/shirt/button{@OLD}, /obj/item/clothing/neck/tie/bow/color/red{@OLD}, /obj/item/clothing/suit/jacket/vest/blue{@OLD}
+/obj/item/clothing/under/wetsuit/@SUBTYPES : /obj/item/clothing/jumpsuit/wetsuit/@SUBTYPES{@OLD}
+/obj/item/clothing/under/lawyer/bluesuit/@SUBTYPES : /obj/item/clothing/costume/lawyer_bluesuit/@SUBTYPES{@OLD}
+/obj/item/clothing/under/lawyer/red/@SUBTYPES : /obj/item/clothing/costume/lawyer_red/@SUBTYPES{@OLD}
+/obj/item/clothing/under/lawyer/oldman/@SUBTYPES : /obj/item/clothing/costume/oldman/@SUBTYPES{@OLD}
+/obj/item/clothing/under/lawyer/fiendsuit/@SUBTYPES : /obj/item/clothing/costume/fiendsuit/@SUBTYPES{@OLD}
+/obj/item/clothing/under/lawyer/@SUBTYPES : /obj/item/clothing/costume/lawyer/@SUBTYPES{@OLD}
+/obj/item/clothing/under/grimhoodie/@SUBTYPES : /obj/item/clothing/pants/casual/blackjeans{@OLD}, /obj/item/clothing/shirt/tee/black{@OLD}, /obj/item/clothing/suit/jacket/hoodie/grim{@OLD}
+/obj/item/clothing/under/gentlesuit/@SUBTYPES : /obj/item/clothing/shirt/button/black{@OLD}, /obj/item/clothing/suit/jacket/vest/gray{@OLD}
+/obj/item/clothing/under/security2/@SUBTYPES : /obj/item/clothing/shirt/button/security{@OLD}, /obj/item/clothing/pants/slacks/security{@OLD}
+/obj/item/clothing/under/blazer/@SUBTYPES : /obj/item/clothing/shirt/button{@OLD}, /obj/item/clothing/neck/tie/navy{@OLD}, /obj/item/clothing/suit/jacket/blazer{@OLD}
+/obj/item/clothing/under/psysuit/@SUBTYPES : /obj/item/clothing/jumpsuit/psysuit/@SUBTYPES{@OLD}
+/obj/item/clothing/under/skrell/@SUBTYPES : /obj/item/clothing/jumpsuit/skrell/@SUBTYPES{@OLD}
+/obj/item/clothing/under/ascent/@SUBTYPES : /obj/item/clothing/jumpsuit/ascent/@SUBTYPES{@OLD}
+/obj/item/clothing/under/harness/@SUBTYPES : /obj/item/clothing/shirt/harness/@SUBTYPES{@OLD}
+/obj/item/clothing/under/syndicate/tacticool/@SUBTYPES : /obj/item/clothing/shirt/syndicate/tacticool/@SUBTYPES{@OLD}
+/obj/item/clothing/under/work/@SUBTYPES : /obj/item/clothing/jumpsuit/work/@SUBTYPES{@OLD}
+/obj/item/clothing/under/pilot/@SUBTYPES : /obj/item/clothing/jumpsuit/pilot/@SUBTYPES{@OLD}
+/obj/item/clothing/under/pcrc/@SUBTYPES : /obj/item/clothing/jumpsuit/pcrc/@SUBTYPES{@OLD}
+/obj/item/clothing/under/frontier/@SUBTYPES : /obj/item/clothing/shirt/flannel/red{@OLD}, /obj/item/clothing/suit/apron/overalls/denim{@OLD}
+/obj/item/clothing/under/abol_uniform/@SUBTYPES : /obj/item/clothing/jumpsuit/abolitionist/@SUBTYPES{@OLD}
+/obj/item/clothing/under/shortjumpskirt/@SUBTYPES : /obj/item/clothing/jumpsuit/skirt/short/@SUBTYPES{@OLD}
+/obj/item/clothing/under/@SUBTYPES : /obj/item/clothing/costume/@SUBTYPES{@OLD}

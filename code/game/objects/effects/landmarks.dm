@@ -58,13 +58,13 @@
 	new /obj/item/clothing/head/helmet/gladiator(loc)
 
 /obj/abstract/landmark/costume/madscientist/make_costumes()
-	new /obj/item/clothing/under/gimmick/rank/captain/suit(loc)
+	new /obj/item/clothing/costume/captain_suit(loc)
 	new /obj/item/clothing/head/flatcap(loc)
 	new /obj/item/clothing/suit/toggle/labcoat/mad(loc)
 	new /obj/item/clothing/glasses/prescription/gglasses(loc)
 
 /obj/abstract/landmark/costume/elpresidente/make_costumes()
-	new /obj/item/clothing/under/gimmick/rank/captain/suit(loc)
+	new /obj/item/clothing/costume/captain_suit(loc)
 	new /obj/item/clothing/head/flatcap(loc)
 	new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(loc)
 	new /obj/item/clothing/shoes/jackboots(loc)
@@ -92,7 +92,8 @@
 	new CHOICE(loc)
 	new /obj/item/clothing/shoes/color/black(loc)
 	new /obj/item/cane(loc)
-	new /obj/item/clothing/under/sl_suit(loc)
+	new /obj/item/clothing/pants/slacks/black(loc)
+	new /obj/item/clothing/shirt/button(loc)
 	new /obj/item/clothing/mask/fakemoustache(loc)
 
 /obj/abstract/landmark/costume/plaguedoctor/make_costumes()
@@ -104,7 +105,10 @@
 	new /obj/item/clothing/mask/gas/owl_mask(loc)
 
 /obj/abstract/landmark/costume/waiter/make_costumes()
-	new /obj/item/clothing/under/waiter(loc)
+	new /obj/item/clothing/pants/slacks/black(loc)
+	new /obj/item/clothing/shirt/button(loc)
+	new /obj/item/clothing/neck/tie/bow/color/red(loc)
+	new /obj/item/clothing/suit/jacket/vest/blue(loc)
 	var/CHOICE= pick( /obj/item/clothing/head/kitty, /obj/item/clothing/head/rabbitears)
 	new CHOICE(loc)
 	new /obj/item/clothing/suit/apron(loc)

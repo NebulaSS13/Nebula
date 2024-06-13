@@ -43,34 +43,34 @@
 		/obj/item/clothing/jumpsuit/aether,
 		/obj/item/clothing/jumpsuit/hephaestus,
 		/obj/item/clothing/jumpsuit/wardt,
+		/obj/item/clothing/jumpsuit/pcrc,
 		/obj/item/clothing/jumpsuit/focal
 	)
 
 /decl/loadout_option/uniform/corporate
 	name = "corporate uniform selection"
-	path = /obj/item/clothing/under
+	path = /obj/item/clothing/costume
 
 /decl/loadout_option/uniform/corporate/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/under/mbill,
-		/obj/item/clothing/under/saare,
-		/obj/item/clothing/under/pcrc,
-		/obj/item/clothing/under/grayson,
-		/obj/item/clothing/under/morpheus,
-		/obj/item/clothing/under/skinner,
-		/obj/item/clothing/under/dais
+		/obj/item/clothing/costume/mbill,
+		/obj/item/clothing/costume/saare,
+		/obj/item/clothing/costume/grayson,
+		/obj/item/clothing/costume/morpheus,
+		/obj/item/clothing/costume/skinner,
+		/obj/item/clothing/costume/dais
 	)
 
 /decl/loadout_option/uniform/corp_overalls
 	name = "corporate colours, coveralls"
-	path = /obj/item/clothing/under/work
+	path = /obj/item/clothing/jumpsuit/work
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_flight
 	name = "corporate colours, flight suit"
-	path = /obj/item/clothing/under/pilot
+	path = /obj/item/clothing/jumpsuit/pilot
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_exec_shirt

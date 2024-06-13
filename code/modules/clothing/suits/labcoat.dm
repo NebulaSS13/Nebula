@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/toggle/labcoat
 	name = "labcoat"
 	desc = "A suit that protects against minor chemical spills."
-	icon = 'icons/clothing/suit/labcoat/default.dmi'
+	icon = 'icons/clothing/suits/labcoat/default.dmi'
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 	allowed = list(
@@ -35,7 +35,7 @@
 /obj/item/clothing/suit/toggle/labcoat/cmoalt
 	name = "chief medical officer labcoat"
 	desc = "A labcoat with command blue highlights."
-	icon = 'icons/clothing/suit/labcoat/cmo.dmi'
+	icon = 'icons/clothing/suits/labcoat/cmo.dmi'
 
 /obj/item/clothing/suit/toggle/labcoat/mad
 	name = "The Mad's labcoat"
@@ -56,7 +56,7 @@
 
 /obj/item/clothing/suit/toggle/labcoat/blue
 	name = "blue-edged labcoat"
-	icon = 'icons/clothing/suit/labcoat/blue_edge.dmi'
+	icon = 'icons/clothing/suits/labcoat/blue_edge.dmi'
 
 /obj/item/clothing/suit/toggle/labcoat/coat
 	name = "coat"
@@ -70,7 +70,7 @@
 /obj/item/clothing/suit/toggle/labcoat/rd
 	name = "research director's labcoat"
 	desc = "A full-body labcoat covered in designs, denoting it as management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
-	icon = 'icons/clothing/suit/labcoat/rd.dmi'
+	icon = 'icons/clothing/suits/labcoat/rd.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	markings_color = COLOR_BOTTLE_GREEN
 	markings_state_modifier = "_marking"

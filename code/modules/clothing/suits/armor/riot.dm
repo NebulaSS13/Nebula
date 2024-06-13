@@ -2,7 +2,7 @@
 	name = "riot vest"
 	desc = "An armored vest with heavy padding to protect against melee attacks."
 	icon_state = ICON_STATE_WORLD
-	icon = 'icons/clothing/suit/armor/riot.dmi'
+	icon = 'icons/clothing/suits/armor/riot.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

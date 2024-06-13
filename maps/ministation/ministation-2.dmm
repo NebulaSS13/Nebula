@@ -2600,7 +2600,10 @@
 /area/ministation/hall/n3)
 "lh" = (
 /obj/structure/closet,
-/obj/item/clothing/under/librarian,
+/obj/item/clothing/pants/slacks/red,
+/obj/item/clothing/shirt/button,
+/obj/item/clothing/neck/tie/navy,
+/obj/item/clothing/suit/jacket/charcoal,
 /obj/item/clothing/shoes/sandal,
 /obj/item/multitool,
 /turf/floor/wood/mahogany,

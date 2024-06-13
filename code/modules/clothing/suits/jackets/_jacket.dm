@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/jacket
 	name                = "suit jacket"
 	desc                = "A snappy dress jacket."
-	icon                = 'icons/clothing/suit/jackets/jacket.dmi'
+	icon                = 'icons/clothing/suits/jackets/jacket.dmi'
 	blood_overlay_type  = "coat"
 	body_parts_covered  = SLOT_UPPER_BODY | SLOT_ARMS
 	cold_protection     = SLOT_UPPER_BODY | SLOT_ARMS
@@ -35,24 +35,29 @@
 /obj/item/clothing/suit/jacket/tan
 	name = "tan suit jacket"
 	desc = "A cozy suit jacket."
-	icon = 'icons/clothing/suit/jackets/tan.dmi'
+	icon = 'icons/clothing/suits/jackets/tan.dmi'
 
 /obj/item/clothing/suit/jacket/charcoal
 	name = "charcoal suit jacket"
 	desc = "A strict suit jacket."
-	icon = 'icons/clothing/suit/jackets/charcoal.dmi'
+	icon = 'icons/clothing/suits/jackets/charcoal.dmi'
 
 /obj/item/clothing/suit/jacket/navy
 	name = "navy suit jacket"
 	desc = "An official suit jacket."
-	icon = 'icons/clothing/suit/jackets/navy.dmi'
+	icon = 'icons/clothing/suits/jackets/navy.dmi'
 
 /obj/item/clothing/suit/jacket/burgundy
 	name = "burgundy suit jacket"
 	desc = "An expensive suit jacket."
-	icon = 'icons/clothing/suit/jackets/burgundy.dmi'
+	icon = 'icons/clothing/suits/jackets/burgundy.dmi'
 
 /obj/item/clothing/suit/jacket/checkered
 	name = "checkered suit jacket"
 	desc = "A lucky suit jacket."
-	icon = 'icons/clothing/suit/jackets/checkered.dmi'
+	icon = 'icons/clothing/suits/jackets/checkered.dmi'
+
+/obj/item/clothing/suit/jacket/blazer
+	name = "blue blazer"
+	desc = "A bold yet conservative navy blazer."
+	icon = 'icons/clothing/suits/jackets/blazer.dmi'

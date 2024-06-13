@@ -108,9 +108,6 @@
 /datum/fabricator_recipe/textiles/job/medical/psych
 	path = /obj/item/clothing/jumpsuit/psych
 
-/datum/fabricator_recipe/textiles/job/medical/turtleneck
-	path = /obj/item/clothing/jumpsuit/psych/turtleneck
-
 // Suits
 /datum/fabricator_recipe/textiles/job/medical/surgicalapron
 	path = /obj/item/clothing/suit/surgicalapron
@@ -163,10 +160,7 @@
 	path = /obj/item/clothing/jumpsuit/warden
 
 /datum/fabricator_recipe/textiles/job/security/dispatch
-	path = /obj/item/clothing/under/dispatch
-
-/datum/fabricator_recipe/textiles/job/security/alt
-	path = /obj/item/clothing/under/security2
+	path = /obj/item/clothing/costume/dispatch
 
 /datum/fabricator_recipe/textiles/job/security/tacticalofficer
 	path = /obj/item/clothing/jumpsuit/tactical
@@ -182,10 +176,10 @@
 
 // Tacticool
 /datum/fabricator_recipe/textiles/job/security/tactical
-	path = /obj/item/clothing/under/syndicate
+	path = /obj/item/clothing/shirt/syndicate
 
 /datum/fabricator_recipe/textiles/job/security/syndicatecombat
-	path = /obj/item/clothing/under/syndicate/combat
+	path = /obj/item/clothing/shirt/syndicate/combat
 
 /datum/fabricator_recipe/textiles/job/security/maskbalatact
 	path = /obj/item/clothing/mask/balaclava/tactical

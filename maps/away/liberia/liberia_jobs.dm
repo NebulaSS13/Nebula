@@ -40,7 +40,7 @@
 	name = "Job - Merchant - Liberia"
 	shoes = /obj/item/clothing/shoes/color/black
 	l_ear = /obj/item/radio/headset
-	uniform = /obj/item/clothing/under/syndicate/tacticool
+	uniform = /obj/item/clothing/pants/casual/camo/outfit_tacticool
 	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/merchant
 	pda_slot = slot_r_store_str

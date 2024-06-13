@@ -4,13 +4,13 @@
 
 /decl/hierarchy/outfit/job/service/bartender
 	name = "Job - Bartender"
-	uniform = /obj/item/clothing/under/bartender
+	uniform = /obj/item/clothing/pants/formal/black/outfit
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/service/chef
 	name = "Job - Chef"
-	uniform = /obj/item/clothing/under/chef
+	uniform = /obj/item/clothing/pants/slacks/outfit_chef
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
 	id_type = /obj/item/card/id/civilian

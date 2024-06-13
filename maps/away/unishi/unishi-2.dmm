@@ -2069,7 +2069,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	
+
 	},
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2216,7 +2216,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	
+
 	},
 /turf/floor,
 /area/unishi/smresearch)
@@ -2346,7 +2346,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	
+
 	},
 /obj/item/remains,
 /turf/floor,
@@ -2492,7 +2492,9 @@
 "gL" = (
 /obj/effect/decal/cleanable/ash,
 /obj/effect/decal/cleanable/blood,
-/obj/item/clothing/under/blazer,
+/obj/item/clothing/shirt/button,
+/obj/item/clothing/neck/tie/navy,
+/obj/item/clothing/suit/jacket/blazer,
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 4;
 	icon_state = "console"
@@ -2740,7 +2742,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	
+
 	},
 /obj/item/remains,
 /obj/random/shoes,

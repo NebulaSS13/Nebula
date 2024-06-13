@@ -47,7 +47,7 @@
 /decl/hierarchy/outfit/job/generic/chef
 	name = "Job - Default Chef"
 	l_ear = /obj/item/radio/headset/headset_service
-	uniform = /obj/item/clothing/under/chef
+	uniform = /obj/item/clothing/pants/slacks/outfit_chef
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
 	pda_type = /obj/item/modular_computer/pda

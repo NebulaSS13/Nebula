@@ -57,7 +57,7 @@
 			/obj/item/clothing/pants,
 			/obj/item/clothing/skirt
 		)
-		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
+		clothing_choices = generate_chameleon_choices(clothing_types)
 
 /obj/item/clothing/pants/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Pants Appearance"
@@ -83,7 +83,7 @@
 		var/static/list/clothing_types = list(
 			/obj/item/clothing/shirt
 		)
-		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
+		clothing_choices = generate_chameleon_choices(clothing_types)
 
 /obj/item/clothing/shirt/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Shirt Appearance"
@@ -98,7 +98,7 @@
 //starts off as a jumpsuit
 /obj/item/clothing/jumpsuit/chameleon
 	name = "jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit.dmi'
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = @'{"esoteric":3}'
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
@@ -108,12 +108,11 @@
 	. = ..()
 	if(!clothing_choices)
 		var/static/list/clothing_types = list(
-			/obj/item/clothing/under,
 			/obj/item/clothing/jumpsuit,
 			/obj/item/clothing/dress,
 			/obj/item/clothing/costume
 		)
-		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
+		clothing_choices = generate_chameleon_choices(clothing_types)
 
 /obj/item/clothing/jumpsuit/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
@@ -163,7 +162,7 @@
 
 /obj/item/clothing/suit/chameleon
 	name = "armor"
-	icon = 'icons/clothing/suit/armor/vest.dmi'
+	icon = 'icons/clothing/suits/armor/vest.dmi'
 	desc = "It appears to be a vest of standard armor, except this is embedded with a hidden holographic cloaker, allowing it to change it's appearance, but offering no protection.. It seems to have a small dial inside."
 	origin_tech = @'{"esoteric":3}'
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

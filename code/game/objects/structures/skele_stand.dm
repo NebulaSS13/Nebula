@@ -63,22 +63,12 @@
 			SetName(nuname)
 			return 1
 	if(istype(W,/obj/item/clothing))
-		var/slot
-		if(istype(W, /obj/item/clothing/under))
-			slot = slot_w_uniform_str
-		else if(istype(W, /obj/item/clothing/suit))
-			slot = slot_wear_suit_str
-		else if(istype(W, /obj/item/clothing/head))
-			slot = slot_head_str
-		else if(istype(W, /obj/item/clothing/shoes))
-			slot = slot_shoes_str
-		else if(istype(W, /obj/item/clothing/mask))
-			slot = slot_wear_mask_str
-		if(slot)
-			if(swag[slot])
-				to_chat(user,"<span class='notice'>There is already that kind of clothing on \the [src].</span>")
+		var/obj/item/clothing/clothes = W
+		if(clothes.fallback_slot)
+			if(swag[clothes.fallback_slot])
+				to_chat(user,SPAN_NOTICE("There is already that kind of clothing on \the [src]."))
 			else if(user.try_unequip(W, src))
-				swag[slot] = W
+				swag[clothes.fallback_slot] = W
 				update_icon()
 				return 1
 	else

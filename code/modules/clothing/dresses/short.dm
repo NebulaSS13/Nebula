@@ -2,7 +2,7 @@
 /obj/item/clothing/dress/short
 	name = "short dress"
 	desc = "A short plain sleeveless dress."
-	icon = 'icons/clothing/under/dresses/dress_short.dmi'
+	icon = 'icons/clothing/dresses/dress_short.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 // some preset dresses for uniform vendors

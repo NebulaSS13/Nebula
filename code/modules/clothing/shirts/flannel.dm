@@ -10,3 +10,11 @@
 		GET_DECL(/decl/clothing_state_modifier/tucked_in)
 	)
 	return expected_state_modifiers
+
+/obj/item/clothing/shirt/flannel/red
+	paint_color = "#bd2b20"
+
+/obj/item/clothing/shirt/flannel/red/outfit
+	starting_accessories = list(
+
+	)

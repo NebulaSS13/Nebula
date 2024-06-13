@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/jacket/hoodie
 	name = "hoodie"
 	desc = "A warm sweatshirt."
-	icon = 'icons/clothing/suit/hoodie.dmi'
+	icon = 'icons/clothing/suits/hoodie.dmi'
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	hood = /obj/item/clothing/head/hoodiehood
@@ -33,3 +33,14 @@
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_HEAD
 	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
+
+/obj/item/clothing/suit/jacket/hoodie/grim
+	name = "black hoodie"
+	desc = "A generic black hoodie. There's a pattern akin to splattered blood along the bottom."
+	icon = 'icons/clothing/suits/grim_hoodie.dmi'
+	hood = /obj/item/clothing/head/hoodiehood/grim
+
+/obj/item/clothing/head/hoodiehood/grim
+	name = "black hood"
+	desc = "A generic black hood."
+	icon = 'icons/clothing/head/grim_hood.dmi'

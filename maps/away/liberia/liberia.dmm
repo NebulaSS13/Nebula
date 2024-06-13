@@ -178,7 +178,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "merch_radaway";
-	
+
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -207,7 +207,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "merch_radaway";
-	
+
 	},
 /turf/floor,
 /area/liberia/engineeringreactor)
@@ -646,7 +646,7 @@
 	dir = 2;
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	
+
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -705,7 +705,8 @@
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/glasses/tacgoggles,
 /obj/item/clothing/shoes/legguards,
-/obj/item/clothing/under/syndicate,
+/obj/item/clothing/shirt/syndicate,
+/obj/item/clothing/pants/casual/camo,
 /turf/floor/tiled/dark/monotile,
 /area/liberia/mule)
 "bt" = (
@@ -836,7 +837,7 @@
 	dir = 4;
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	
+
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1270,7 +1271,7 @@
 	dir = 4;
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	
+
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1577,7 +1578,7 @@
 	dir = 4;
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	
+
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -3827,8 +3828,8 @@
 "gM" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/craftable,
-/obj/item/clothing/under/blazer,
-/obj/item/clothing/under/lawyer,
+/obj/item/clothing/pants/slacks/red,
+/obj/item/clothing/costume/lawyer,
 /obj/item/clothing/pants/slacks/black/outfit/navy,
 /obj/random/handgun,
 /obj/item/chems/drinks/bottle/premiumwine,
@@ -4244,7 +4245,7 @@
 "hG" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/color/black,
-/obj/item/clothing/under/overalls,
+/obj/item/clothing/suit/apron/overalls/laborer,
 /obj/item/clothing/skirt,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
@@ -5014,7 +5015,7 @@
 /obj/structure/table/glass,
 /obj/machinery/faxmachine/mapped{
 	req_access = list("ACCESS_MERCHANT");
-	
+
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/dark/monotile,
@@ -6276,7 +6277,7 @@
 "oJ" = (
 /obj/abstract/level_data_spawner/player{
 	name = "Liberia";
-	
+
 	},
 /turf/space,
 /area/space)
@@ -8095,7 +8096,7 @@
 	dir = 2;
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	
+
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,

@@ -123,7 +123,7 @@
 /obj/random/suit
 	name = "random suit"
 	desc = "This is a random piece of outerwear."
-	icon = 'icons/clothing/suit/firesuit.dmi'
+	icon = 'icons/clothing/suits/firesuit.dmi'
 	icon_state = ICON_STATE_WORLD
 
 /obj/random/suit/spawn_choices()
@@ -149,22 +149,22 @@
 /obj/random/clothing
 	name = "random clothes"
 	desc = "This is a random piece of clothing."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit.dmi'
 	icon_state = ICON_STATE_WORLD
 
 /obj/random/clothing/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/under/syndicate/tacticool = 2,
-		/obj/item/clothing/under/syndicate/combat    = 1,
-		/obj/item/clothing/jumpsuit/hazard              = 4,
-		/obj/item/clothing/jumpsuit/sterile             = 4,
-		/obj/item/clothing/pants/casual/camo         = 2,
-		/obj/item/clothing/under/frontier            = 2,
-		/obj/item/clothing/under/harness             = 2,
-		/obj/item/clothing/jumpsuit/medical/paramedic   = 2,
-		/obj/item/clothing/under/overalls            = 2,
-		/obj/item/clothing/head/earmuffs             = 2,
-		/obj/item/clothing/jumpsuit/tactical            = 1
+		/obj/item/clothing/shirt/syndicate/tacticool   = 2,
+		/obj/item/clothing/shirt/syndicate/combat      = 1,
+		/obj/item/clothing/jumpsuit/hazard             = 4,
+		/obj/item/clothing/jumpsuit/sterile            = 4,
+		/obj/item/clothing/pants/casual/camo           = 2,
+		/obj/item/clothing/shirt/flannel/red           = 2,
+		/obj/item/clothing/shirt/harness               = 2,
+		/obj/item/clothing/jumpsuit/medical/paramedic  = 2,
+		/obj/item/clothing/suit/apron/overalls/laborer = 2,
+		/obj/item/clothing/head/earmuffs               = 2,
+		/obj/item/clothing/jumpsuit/tactical           = 1
 	)
 	return spawnable_choices
 

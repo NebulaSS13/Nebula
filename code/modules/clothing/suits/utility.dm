@@ -12,7 +12,7 @@
 /obj/item/clothing/suit/fire
 	name = "firesuit"
 	desc = "A suit that protects against fire and heat."
-	icon = 'icons/clothing/suit/firesuit.dmi'
+	icon = 'icons/clothing/suits/firesuit.dmi'
 	w_class = ITEM_SIZE_LARGE//large item
 	flags_inv = HIDETAIL
 
@@ -58,7 +58,7 @@
 /obj/item/clothing/suit/bomb_suit
 	name = "bomb suit"
 	desc = "A suit designed for safety when handling explosives."
-	icon = 'icons/clothing/suit/bombsuit.dmi'
+	icon = 'icons/clothing/suits/bombsuit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
@@ -83,7 +83,7 @@
 	icon = 'icons/clothing/head/bombsuit_olive.dmi'
 
 /obj/item/clothing/suit/bomb_suit/security
-	icon = 'icons/clothing/suit/bombsuit_olive.dmi'
+	icon = 'icons/clothing/suits/bombsuit_olive.dmi'
 	allowed = list(/obj/item/gun/energy,/obj/item/baton,/obj/item/handcuffs)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 
@@ -110,7 +110,7 @@
 /obj/item/clothing/suit/radiation
 	name = "radiation suit"
 	desc = "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
-	icon = 'icons/clothing/suit/rad_suit.dmi'
+	icon = 'icons/clothing/suits/rad_suit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
@@ -157,7 +157,7 @@
 /obj/item/clothing/suit/chem_suit
 	name = "chemical suit"
 	desc = "A suit that protects against chemical contamination."
-	icon = 'icons/clothing/suit/chem_suit.dmi'
+	icon = 'icons/clothing/suits/chem_suit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0

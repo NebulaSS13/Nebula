@@ -132,7 +132,6 @@
 		/obj/item/clothing/pants                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/pants/pj                        = TRADER_BLACKLIST,
 		/obj/item/clothing/pants/shorts                    = TRADER_BLACKLIST,
-		/obj/item/clothing/pants/casual/mustangjeans/monke = TRADER_BLACKLIST,
 		/obj/item/clothing/pants/chameleon                 = TRADER_BLACKLIST,
 		/obj/item/clothing/shirt                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/shirt/chameleon                 = TRADER_BLACKLIST,
@@ -140,15 +139,14 @@
 		/obj/item/clothing/skirt                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/dress                           = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/dress/wedding                   = TRADER_BLACKLIST,
-		/obj/item/clothing/under                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/shirt                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/pants                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/skirt                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/jumpsuit                        = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/jumpsuit/chameleon              = TRADER_BLACKLIST,
 		/obj/item/clothing/jumpsuit                        = TRADER_BLACKLIST,
-		/obj/item/clothing/under/gimmick                   = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/under/lawyer                    = TRADER_BLACKLIST,
-		/obj/item/clothing/under/mankini                   = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/under/syndicate                 = TRADER_BLACKLIST_ALL,
-		/obj/item/clothing/jumpsuit/tactical               = TRADER_BLACKLIST,
-		/obj/item/clothing/under/waiter/monke              = TRADER_BLACKLIST
+		/obj/item/clothing/pants/mankini                   = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/jumpsuit/tactical               = TRADER_BLACKLIST
 	)
 
 /datum/trader/ship/clothingshop/shoes

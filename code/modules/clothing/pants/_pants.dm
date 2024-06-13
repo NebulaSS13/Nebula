@@ -1,6 +1,6 @@
 /obj/item/clothing/pants
 	name = "pants"
-	icon = 'icons/clothing/under/pants/pants.dmi'
+	icon = 'icons/clothing/pants/pants.dmi'
 	icon_state = ICON_STATE_WORLD
 	gender = PLURAL
 	body_parts_covered = SLOT_LOWER_BODY|SLOT_LEGS

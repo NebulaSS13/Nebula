@@ -3,6 +3,11 @@
 	desc = "Crisp grey slacks. Moderately formal."
 	icon = 'icons/clothing/pants/slacks.dmi'
 
+/obj/item/clothing/pants/slacks/outfit_chef
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button
+	)
+
 /obj/item/clothing/pants/slacks/outfit
 	starting_accessories = list(
 		/obj/item/clothing/shirt/button,
@@ -33,16 +38,58 @@
 	desc = "Crisp blue slacks. Moderately formal."
 	icon = 'icons/clothing/pants/slacks_blue.dmi'
 
+/obj/item/clothing/pants/slacks/security
+	name = "security slacks"
+	desc = "Dark red, lightly armoured slacks. Moderately formal."
+	icon = 'icons/clothing/pants/security.dmi'
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
+		)
+	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
+
+/obj/item/clothing/pants/slacks/security/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button/security
+	)
+
 /obj/item/clothing/pants/slacks/red
 	name = "red slacks"
 	desc = "Crisp red slacks. Moderately formal."
 	icon = 'icons/clothing/pants/slacks_red.dmi'
+
+/obj/item/clothing/pants/slacks/red/blazer_outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/neck/tie/navy,
+		/obj/item/clothing/suit/jacket/blazer
+	)
 
 /obj/item/clothing/pants/slacks/red/outfit
 	starting_accessories = list(
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/neck/tie/navy,
 		/obj/item/clothing/suit/jacket/charcoal
+	)
+
+/obj/item/clothing/pants/slacks/white
+	name = "white slacks"
+	desc = "Crisp white slacks. Very formal."
+	icon = 'icons/clothing/pants/slacks_white.dmi'
+
+/obj/item/clothing/pants/slacks/white/orderly
+	name = "orderly's slacks"
+	permeability_coefficient = 0.50
+	armor = list(
+		ARMOR_BIO = ARMOR_BIO_MINOR
+	)
+
+/obj/item/clothing/pants/slacks/white/orderly/outfit
+	starting_accessories = list(
+		/obj/item/clothing/shirt/button/orderly,
+		/obj/item/clothing/neck/tie/long/red
 	)
 
 /obj/item/clothing/pants/slacks/black
@@ -101,3 +148,8 @@
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/suit/jacket/vest/black
 	)
+
+/obj/item/clothing/pants/slacks/navy
+	name = "navy slacks"
+	desc = "Some formal navy blue slacks."
+	icon = 'icons/clothing/pants/slacks_navy.dmi'

@@ -46,14 +46,14 @@
 		/obj/item/clothing/jumpsuit/head_of_personnel,
 		/obj/item/clothing/dress/hop,
 		/obj/item/clothing/dress/hr,
-		/obj/item/clothing/under/lawyer,
-		/obj/item/clothing/under/lawyer/red,
-		/obj/item/clothing/under/lawyer/oldman,
+		/obj/item/clothing/costume/lawyer,
+		/obj/item/clothing/costume/lawyer_red,
+		/obj/item/clothing/costume/oldman,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/shoes/craftable,
 		/obj/item/clothing/shoes/color/white,
-		/obj/item/clothing/jumpsuit/head_of_personnel_whimsy,
+		/obj/item/clothing/costume/head_of_personnel_whimsy,
 		/obj/item/clothing/head/caphat/hop
 	)
 

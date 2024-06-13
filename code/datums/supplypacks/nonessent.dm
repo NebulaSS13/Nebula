@@ -89,8 +89,8 @@
 					/obj/item/clothing/suit/nun,
 					/obj/item/clothing/suit/imperium_monk,
 					/obj/item/clothing/suit/ianshirt,
-					/obj/item/clothing/under/gimmick/rank/captain/suit,
-					/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
+					/obj/item/clothing/costume/captain_suit,
+					/obj/item/clothing/costume/head_of_personnel_suit,
 					/obj/item/clothing/pants/slacks/purple,
 					/obj/item/clothing/shirt/button,
 					/obj/item/clothing/suit/jacket/vest/black,
@@ -101,10 +101,13 @@
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
 					/obj/item/clothing/costume/schoolgirl,
 					/obj/item/clothing/costume/owl,
-					/obj/item/clothing/under/waiter,
+					/obj/item/clothing/pants/slacks/black,
+					/obj/item/clothing/shirt/button,
+					/obj/item/clothing/neck/tie/bow/color/red,
+					/obj/item/clothing/suit/jacket/vest/blue,
 					/obj/item/clothing/costume/gladiator,
 					/obj/item/clothing/costume/soviet,
-					/obj/item/clothing/under/scratch,
+					/obj/item/clothing/costume/scratch,
 					/obj/item/clothing/dress/wedding/bride_white,
 					/obj/item/clothing/suit/chef,
 					/obj/item/clothing/suit/apron/overalls,
@@ -112,7 +115,7 @@
 					/obj/item/clothing/costume/kilt,
 					/obj/item/clothing/costume/savage_hunter,
 					/obj/item/clothing/costume/savage_hunter/female,
-					/obj/item/clothing/under/wetsuit)
+					/obj/item/clothing/jumpsuit/wetsuit)
 	name = "Costume - Random"
 	containername = "actor costumes crate"
 	supply_method = /decl/supply_method/randomized
@@ -127,7 +130,7 @@
 		/obj/item/clothing/suit/jacket/black,
 		/obj/item/clothing/suit/jacket/burgundy,
 		/obj/item/clothing/suit/jacket/waistcoat,
-		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/costume/lawyer_bluesuit,
 		/obj/item/clothing/pants/slacks/purple,
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/suit/jacket/vest/black,

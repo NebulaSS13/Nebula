@@ -9,10 +9,11 @@
 
 /obj/structure/closet/wardrobe/red/WillContain()
 	return list(
-		/obj/item/clothing/jumpsuit/security  = 3,
-		/obj/item/clothing/under/security2 = 3,
-		/obj/item/clothing/shoes/jackboots = 3,
-		/obj/item/clothing/head/soft/sec   = 3,
+		/obj/item/clothing/jumpsuit/security     = 3,
+		/obj/item/clothing/shirt/button/security = 3,
+		/obj/item/clothing/pants/slacks/security = 3,
+		/obj/item/clothing/shoes/jackboots       = 3,
+		/obj/item/clothing/head/soft/sec         = 3
 	)
 
 /obj/structure/closet/wardrobe/pink
@@ -290,25 +291,26 @@
 
 /obj/structure/closet/wardrobe/suit/WillContain()
 	return list(
-		/obj/item/clothing/pants/slacks = 2,
+		/obj/item/clothing/pants/slacks,
 		/obj/item/clothing/pants/slacks/purple,
 		/obj/item/clothing/pants/slacks/tan,
 		/obj/item/clothing/pants/slacks/red,
-		/obj/item/clothing/pants/slacks/black = 2,
-		/obj/item/clothing/shirt/button = 4,
+		/obj/item/clothing/pants/slacks/black,
+		/obj/item/clothing/shirt/button = 2,
 		/obj/item/clothing/suit/jacket/waistcoat/black,
 		/obj/item/clothing/neck/tie/long/red,
-		/obj/item/clothing/under/sl_suit,
-		/obj/item/clothing/under/scratch,
+		/obj/item/clothing/pants/slacks/black,
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/costume/scratch,
 		/obj/item/clothing/shirt/button,
 		/obj/item/clothing/neck/tie/black,
 		/obj/item/clothing/suit/jacket/black,
 		/obj/item/clothing/suit/jacket/blue,
 		/obj/item/clothing/suit/jacket/purple,
-		/obj/item/clothing/under/assistantformal,
-		/obj/item/clothing/under/lawyer,
-		/obj/item/clothing/under/lawyer/red,
-		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/costume/assistantformal,
+		/obj/item/clothing/costume/lawyer,
+		/obj/item/clothing/costume/lawyer_red,
+		/obj/item/clothing/costume/lawyer_bluesuit,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/dress,
 	)

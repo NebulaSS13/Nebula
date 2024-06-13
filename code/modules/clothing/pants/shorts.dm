@@ -2,7 +2,7 @@
 
 /obj/item/clothing/pants/shorts
 	name = "shorts"
-	icon = 'icons/clothing/under/pants/pants_shorts.dmi'
+	icon = 'icons/clothing/pants/pants_shorts.dmi'
 	desc = "95% Polyester, 5% Spandex!"
 	gender = PLURAL
 	body_parts_covered = SLOT_LOWER_BODY
@@ -34,33 +34,33 @@
 /obj/item/clothing/pants/shorts/jeans
 	name = "jeans shorts"
 	desc = "Some jeans! Just in short form!"
-	icon = 'icons/clothing/under/pants/pants_jeans_shorts.dmi'
+	icon = 'icons/clothing/pants/pants_jeans_shorts.dmi'
 
 /obj/item/clothing/pants/shorts/jeans/classic
 	name = "classic jeans shorts"
-	icon = 'icons/clothing/under/pants/pants_jeans_shorts_classic.dmi'
+	icon = 'icons/clothing/pants/pants_jeans_shorts_classic.dmi'
 
 /obj/item/clothing/pants/shorts/jeans/mustang
 	name = "mustang jeans shorts"
-	icon = 'icons/clothing/under/pants/pants_jeans_shorts_mustang.dmi'
+	icon = 'icons/clothing/pants/pants_jeans_shorts_mustang.dmi'
 
 /obj/item/clothing/pants/shorts/jeans/youngfolks
 	name = "young folks jeans shorts"
-	icon = 'icons/clothing/under/pants/pants_jeans_shorts_young.dmi'
+	icon = 'icons/clothing/pants/pants_jeans_shorts_young.dmi'
 
 /obj/item/clothing/pants/shorts/jeans/black
 	name = "black jeans shorts"
-	icon = 'icons/clothing/under/pants/pants_shorts_black.dmi'
+	icon = 'icons/clothing/pants/pants_shorts_black.dmi'
 
 /obj/item/clothing/pants/shorts/jeans/grey
 	name = "grey jeans shorts"
-	icon = 'icons/clothing/under/pants/pants_shorts_grey.dmi'
+	icon = 'icons/clothing/pants/pants_shorts_grey.dmi'
 
 /obj/item/clothing/pants/shorts/khaki
 	name = "khaki shorts"
 	desc = "For that island getaway. It's five o'clock somewhere, right?"
-	icon = 'icons/clothing/under/pants/pants_shorts_tan.dmi'
+	icon = 'icons/clothing/pants/pants_shorts_tan.dmi'
 
 /obj/item/clothing/pants/shorts/khaki/female
 	name = "khaki short shorts"
-	icon = 'icons/clothing/under/pants/pants_shorts_khaki.dmi'
+	icon = 'icons/clothing/pants/pants_shorts_khaki.dmi'
