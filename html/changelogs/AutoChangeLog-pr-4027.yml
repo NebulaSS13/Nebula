@@ -1,4 +1,0 @@
-author: NataKilar
-changes:
-  - {bugfix: Fixed space tiles not creating vacuums in certain conditions}
-delete-after: true
