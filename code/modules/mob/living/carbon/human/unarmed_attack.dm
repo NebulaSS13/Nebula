@@ -40,6 +40,10 @@
 		return PAIN
 	return BRUTE
 
+/decl/natural_attack/proc/get_damage_flags()
+	. |= (sharp && DAM_SHARP)
+	. |= (edge && DAM_EDGE)
+
 /decl/natural_attack/proc/padded_by_user_gear(var/mob/living/carbon/human/user)
 	if(istype(user) && length(usable_with_limbs))
 		for(var/limb_slot in usable_with_limbs)
