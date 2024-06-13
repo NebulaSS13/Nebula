@@ -184,10 +184,10 @@
 	else
 		UnarmedAttack(target)
 
-/mob/living/bot/secbot/proc/cuff_target(var/mob/living/C)
-	if(istype(C) && !C.get_equipped_item(slot_handcuffed_str))
-		handcuffs.place_handcuffs(C, src)
-	resetTarget() //we're done, failed or not. Don't want to get stuck if C is not
+/mob/living/bot/secbot/proc/cuff_target(var/mob/living/target)
+	if(istype(target) && !target.get_equipped_item(slot_handcuffed_str))
+		handcuffs.place_handcuffs(target, src)
+	resetTarget() //we're done, failed or not. Don't want to get stuck if target is not
 
 /mob/living/bot/get_target_zone()
 	if(!client)

@@ -208,13 +208,13 @@
 		prompt_revive_callback(owner)
 	return TRUE
 
-/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/C)
+/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/target)
 	set waitfor = FALSE
-	if(C && !backup_inviable())
+	if(istype(target) && !backup_inviable())
 		prompting = TRUE
 		var/response = alert(find_dead_player(stored_ckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
 		prompting = FALSE
-		if(src && response == "Yes" && owner == C)
+		if(src && response == "Yes" && owner == target)
 			overwrite()
 	sleep(-1)
 	do_backup()

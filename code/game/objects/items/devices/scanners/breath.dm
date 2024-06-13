@@ -27,7 +27,7 @@
 	to_chat(user, .)
 	to_chat(user, "<hr>")
 
-/proc/breath_scan_results(var/mob/living/C, var/verbose, var/skill_level = SKILL_DEFAULT)
+/proc/breath_scan_results(var/mob/living/target, var/verbose, var/skill_level = SKILL_DEFAULT)
 	. = list()
 	var/header = list()
 	var/b
@@ -45,11 +45,11 @@
 		b		= "<b>"
 		endb	= "</b>"
 
-	. += "[b]Breath sample results for \the [C]:[endb]"
+	. += "[b]Breath sample results for \the [target]:[endb]"
 
-	var/obj/item/organ/internal/lungs/lungs = C.get_organ(BP_LUNGS)
+	var/obj/item/organ/internal/lungs/lungs = target.get_organ(BP_LUNGS)
 	var/breathing = "none"
-	if(istype(lungs) && !(C.status_flags & FAKEDEATH))
+	if(istype(lungs) && !(target.status_flags & FAKEDEATH))
 		if(lungs.breath_fail_ratio < 0.3)
 			breathing = "normal"
 		else if(lungs.breath_fail_ratio < 1)
@@ -66,7 +66,7 @@
 
 	// Other general warnings.
 	if(skill_level >= SKILL_BASIC)
-		switch(C.get_damage(OXY))
+		switch(target.get_damage(OXY))
 			if(0 to 25)
 				dat += "<span class='scan_green'>Subject oxygen levels nominal.</span>"
 			if(25 to 50)
@@ -90,14 +90,14 @@
 	. += "[b]Reagent scan:[endb]"
 
 	var/print_reagent_default_message = TRUE
-	if (C.has_chemical_effect(CE_ALCOHOL, 1))
+	if (target.has_chemical_effect(CE_ALCOHOL, 1))
 		. += "<span class='scan_orange'>Alcohol detected in subject's breath.</span>"
 		print_reagent_default_message = FALSE
-	if (C.has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
+	if (target.has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
 		. += "<span class='scan_red'>Subject is suffering from alcohol poisoning.</span>"
 		print_reagent_default_message = FALSE
 
-	var/datum/reagents/inhaled = C.get_inhaled_reagents()
+	var/datum/reagents/inhaled = target.get_inhaled_reagents()
 	if(inhaled && inhaled.total_volume)
 		var/unknown = 0
 		for(var/rtype in inhaled.reagent_volumes)

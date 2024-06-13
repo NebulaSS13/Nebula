@@ -310,15 +310,15 @@ Nurse caste procs
 	//30% chance to stop wandering and do something
 	if(!spooder.busy && prob(30))
 		//first, check for potential food nearby to cocoon
-		for(var/mob/living/C in can_see)
-			if(is_type_in_list(C, spooder.cocoon_blacklist))
+		for(var/mob/living/web_target in can_see)
+			if(is_type_in_list(web_target, spooder.cocoon_blacklist))
 				continue
-			if(C.stat)
-				spooder.cocoon_target = C
+			if(web_target.stat)
+				spooder.cocoon_target = web_target
 				spooder.busy = MOVING_TO_TARGET
-				walk_to(spooder, C, 1, spooder.move_to_delay)
+				walk_to(spooder, web_target, 1, spooder.move_to_delay)
 				//give up if we can't reach them after 10 seconds
-				spooder.GiveUp(C)
+				spooder.GiveUp(web_target)
 				return
 
 		//second, spin a sticky spiderweb on this tile

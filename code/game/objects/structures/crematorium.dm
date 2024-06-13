@@ -121,10 +121,9 @@
 		for(var/mob/living/M in contents)
 			admin_attack_log(A, M, "Began cremating their victim.", "Has begun being cremated.", "began cremating")
 			if(isliving(M))
-				var/mob/living/C = M
 				for(var/I, I < 60, I++)
 
-					if(C.stat >= UNCONSCIOUS || !(C in contents)) //In case we die or are removed at any point.
+					if(M.stat >= UNCONSCIOUS || !(M in contents)) //In case we die or are removed at any point.
 						cremating = 0
 						update_icon()
 						break

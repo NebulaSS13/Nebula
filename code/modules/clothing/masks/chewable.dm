@@ -41,10 +41,10 @@
 	chewtime -= amount
 	if(reagents && reagents.total_volume)
 		if(ishuman(loc))
-			var/mob/living/carbon/human/C = loc
-			if (src == C.get_equipped_item(slot_wear_mask_str) && C.check_has_mouth())
-				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2)
-			add_trace_DNA(C)
+			var/mob/living/carbon/human/user = loc
+			if (src == user.get_equipped_item(slot_wear_mask_str) && user.check_has_mouth())
+				reagents.trans_to_mob(user, REM, CHEM_INGEST, 0.2)
+			add_trace_DNA(user)
 		else
 			STOP_PROCESSING(SSobj, src)
 

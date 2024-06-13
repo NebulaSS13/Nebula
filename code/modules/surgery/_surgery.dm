@@ -142,8 +142,7 @@ var/global/list/surgery_tool_exception_cache = list()
 				 affected.how_open() < open_threshold))
 					return FALSE
 			// Check if clothing is blocking access
-			var/mob/living/carbon/human/C = target
-			var/obj/item/I = C.get_covering_equipped_item_by_zone(target_zone)
+			var/obj/item/I = user.get_covering_equipped_item_by_zone(target_zone)
 			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
 				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
 				return FALSE
