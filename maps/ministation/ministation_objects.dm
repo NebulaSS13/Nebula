@@ -1,5 +1,6 @@
 /turf/exterior/wall/random/ministation
 	initial_gas = null
+	floor_type = /turf/exterior/barren/airless
 
 /turf/exterior/wall/random/ministation/get_weighted_mineral_list()
 	if(prob(80))
