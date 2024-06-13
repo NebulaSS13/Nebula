@@ -15,7 +15,7 @@
 	var/single_selection        = TRUE
 	/// Set to TRUE to apply these markings as defaults when bodytype is set.
 	var/always_apply_defaults   = FALSE
-	/// Whether the default accessories in this category are cleared when prefs are applied.
+	/// Whether the accessories in this category are cleared when prefs are applied.
 	var/clear_in_pref_apply     = FALSE
 
 /decl/sprite_accessory_category/validate()
