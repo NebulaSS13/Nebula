@@ -2801,6 +2801,7 @@
 #include "code\modules\mob\living\living_defines.dm"
 #include "code\modules\mob\living\living_dreams.dm"
 #include "code\modules\mob\living\living_eating.dm"
+#include "code\modules\mob\living\living_electrocution.dm"
 #include "code\modules\mob\living\living_give.dm"
 #include "code\modules\mob\living\living_grabs.dm"
 #include "code\modules\mob\living\living_hallucinations.dm"

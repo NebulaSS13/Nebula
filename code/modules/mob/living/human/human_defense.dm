@@ -85,19 +85,6 @@ meteor_act
 	// Add inherent armor to the end of list so that protective equipment is checked first
 	. += ..()
 
-//this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
-/mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
-	if (!def_zone)
-		return 1.0
-
-	var/siemens_coefficient = max(species.get_shock_vulnerability(src), 0)
-	for(var/slot in global.standard_clothing_slots)
-		var/obj/item/clothing/C = get_equipped_item(slot)
-		if(istype(C) && (C.body_parts_covered & def_zone.body_part)) // Is that body part being targeted covered?
-			siemens_coefficient *= C.siemens_coefficient
-
-	return siemens_coefficient
-
 /mob/living/carbon/human/proc/check_head_coverage()
 	for(var/slot in global.standard_headgear_slots)
 		var/obj/item/clothing/clothes = get_equipped_item(slot)
