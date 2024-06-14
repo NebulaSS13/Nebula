@@ -122,18 +122,18 @@
 	if(usr.incapacitated())
 		return
 
-	var/datum/extension/holster/H = get_holsters()[holster_name]
-	if(!H)
+	var/datum/extension/holster/holster = get_holsters()[holster_name]
+	if(!holster)
 		return
 
-	if(!H.holstered)
-		var/obj/item/W = usr.get_active_held_item()
-		if(!istype(W, /obj/item))
+	if(!holster.holstered)
+		var/obj/item/holding = usr.get_active_held_item()
+		if(!istype(holding, /obj/item))
 			to_chat(usr, "<span class='warning'>You're not holding anything to holster.</span>")
 			return
-		H.holster(W, usr)
+		holster.holster(holding, usr)
 	else
-		H.unholster(usr, 1)
+		holster.unholster(usr, 1)
 
 /atom/proc/get_holsters()
 	. = list()

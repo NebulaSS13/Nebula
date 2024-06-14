@@ -329,37 +329,37 @@
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/proc/despawn_occupant()
 	//Drop all items into the pod.
-	for(var/obj/item/W in occupant.get_equipped_items(include_carried = TRUE))
-		occupant.drop_from_inventory(W)
-		W.forceMove(src)
+	for(var/obj/item/equipped_item in occupant.get_equipped_items(include_carried = TRUE))
+		occupant.drop_from_inventory(equipped_item)
+		equipped_item.forceMove(src)
 		//Make sure we catch anything not handled by qdel() on the items.
-		for(var/obj/item/O in W.get_contained_external_atoms())
-			O.forceMove(src)
+		for(var/obj/item/contained_item in equipped_item.get_contained_external_atoms())
+			contained_item.forceMove(src)
 
 	//Delete all items not on the preservation list.
 	var/list/items = src.contents.Copy()
 	items -= occupant // Don't delete the occupant
 	items -= component_parts
 
-	for(var/obj/item/W in items)
+	for(var/obj/item/frozen_item in items)
 
-		if(!W.preserve_in_cryopod())
-			qdel(W)
+		if(!frozen_item.preserve_in_cryopod())
+			qdel(frozen_item)
 			continue
 		if(control_computer && control_computer.allow_items)
-			control_computer.frozen_items += W
-			W.forceMove(null)
+			control_computer.frozen_items += frozen_item
+			frozen_item.forceMove(null)
 		else
-			W.forceMove(get_turf(src))
+			frozen_item.forceMove(get_turf(src))
 
 	//Update any existing objectives involving this mob.
-	for(var/datum/objective/O in global.all_objectives)
+	for(var/datum/objective/objective in global.all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
-		if(O.target == occupant.mind)
-			if(O.owner && O.owner.current)
-				to_chat(O.owner.current, SPAN_DANGER("You get the feeling your target, [occupant.real_name], is no longer within your reach..."))
-			qdel(O)
+		if(objective.target == occupant.mind)
+			if(objective.owner?.current)
+				to_chat(objective.owner.current, SPAN_DANGER("You get the feeling your target, [occupant.real_name], is no longer within your reach..."))
+			qdel(objective)
 
 	//Handle job slot/tater cleanup.
 	if(occupant.mind)
@@ -373,9 +373,9 @@
 	// Delete them from datacore.
 	var/sanitized_name = occupant.real_name
 	sanitized_name = sanitize(sanitized_name)
-	var/datum/computer_file/report/crew_record/R = get_crewmember_record(sanitized_name)
-	if(R)
-		qdel(R)
+	var/datum/computer_file/report/crew_record/record = get_crewmember_record(sanitized_name)
+	if(record)
+		qdel(record)
 
 	icon_state = base_icon_state
 

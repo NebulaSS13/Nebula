@@ -1,14 +1,14 @@
 //This proc is called whenever someone clicks an inventory ui slot.
 /mob/proc/attack_ui(slot)
-	var/obj/item/W = get_active_held_item()
-	var/obj/item/E = get_equipped_item(slot)
-	if (istype(E))
-		if(istype(W))
-			E.attackby(W,src)
+	var/obj/item/holding = get_active_held_item()
+	var/obj/item/equipped = get_equipped_item(slot)
+	if (istype(equipped))
+		if(istype(holding))
+			equipped.attackby(holding, src)
 		else
-			E.attack_hand(src) // We can assume it's physically accessible if it's on our person.
+			equipped.attack_hand(src) // We can assume it's physically accessible if it's on our person.
 	else
-		equip_to_slot_if_possible(W, slot)
+		equip_to_slot_if_possible(holding, slot)
 
 //This is a SAFE proc. Use this instead of equip_to_slot()!
 //set del_on_fail to have it delete W if it fails to equip

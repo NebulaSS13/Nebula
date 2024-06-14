@@ -1,21 +1,20 @@
 /datum/artifact_trigger/force
 	name = "kinetic impact"
 
-/datum/artifact_trigger/force/on_hit(obj/O, mob/user)
+/datum/artifact_trigger/force/on_hit(obj/item/hit_with, mob/user)
 	. = ..()
-	if(istype(O, /obj/item/projectile))
-		var/obj/item/projectile/P = O
-		return (P.atom_damage_type == BRUTE)
-	else if(istype(O, /obj/item))
-		var/obj/item/W = O
-		return (W.force >= 10)
+	if(istype(hit_with, /obj/item/projectile))
+		var/obj/item/projectile/hit_projectile = hit_with
+		return (hit_projectile.atom_damage_type == BRUTE)
+	else if(istype(hit_with, /obj/item))
+		return (hit_with.force >= 10)
 
 /datum/artifact_trigger/force/on_explosion(severity)
 	return TRUE
 
-/datum/artifact_trigger/force/on_bump(atom/movable/AM)
+/datum/artifact_trigger/force/on_bump(atom/movable/bumper)
 	. = ..()
-	if(isobj(AM))
-		var/obj/O = AM
-		if(O.throwforce >= 10)
+	if(isobj(bumper))
+		var/obj/bump_object = bumper
+		if(bump_object.throwforce >= 10)
 			return TRUE

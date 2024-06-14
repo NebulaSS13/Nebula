@@ -275,17 +275,17 @@
 	expected_target_type = /obj/effect/vine
 
 /decl/interaction_handler/vine_chop/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/effect/vine/V = target
-	var/obj/item/W = user.get_active_held_item()
-	if(!istype(W) || !W.edge || W.w_class < ITEM_SIZE_NORMAL)
+	var/obj/effect/vine/vine = target
+	var/obj/item/holding = user.get_active_held_item()
+	if(!istype(holding) || !holding.edge || holding.w_class < ITEM_SIZE_NORMAL)
 		to_chat(user, SPAN_WARNING("You need a larger or sharper object for this task!"))
 		return
-	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [V]."))
-	playsound(get_turf(V), W.hitsound, 100, 1)
-	var/chop_time = (V.current_health/W.force) * 0.5 SECONDS
+	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [vine]."))
+	playsound(get_turf(vine), holding.hitsound, 100, 1)
+	var/chop_time = (vine.current_health/holding.force) * 0.5 SECONDS
 	if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 		chop_time *= 0.5
-	if(do_after(user, chop_time, V, TRUE))
-		user.visible_message(SPAN_NOTICE("[user] chops down \the [V]."))
-		playsound(get_turf(V), W.hitsound, 100, 1)
-		V.die_off()
+	if(do_after(user, chop_time, vine, TRUE))
+		user.visible_message(SPAN_NOTICE("[user] chops down \the [vine]."))
+		playsound(get_turf(vine), holding.hitsound, 100, 1)
+		vine.die_off()
