@@ -34,6 +34,7 @@ var/global/list/_emotes_by_key
 	return global._emotes_by_key[key]
 
 /decl/emote
+	abstract_type = /decl/emote
 	/// Command to use emote ie. '*[key]'
 	var/key
 	/// First person message ('You do a flip!')

@@ -18,6 +18,10 @@
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rockvault"
 
+/turf/unsimulated/mask/flooded
+	flooded = /decl/material/liquid/water
+	color = COLOR_LIQUID_WATER
+
 /turf/unsimulated/floor/rescue_base
 	icon_state = "asteroidfloor"
 

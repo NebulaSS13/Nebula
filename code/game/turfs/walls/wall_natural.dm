@@ -11,6 +11,10 @@
 	var/static/list/exterior_wall_shine_cache = list()
 	var/being_mined = FALSE
 
+/turf/wall/natural/flooded
+	flooded = /decl/material/liquid/water
+	color = COLOR_LIQUID_WATER
+
 /turf/wall/natural/get_paint_examine_message()
 	return SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
 

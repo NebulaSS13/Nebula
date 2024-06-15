@@ -279,7 +279,10 @@
 /obj/structure/table/update_material_desc(override_desc)
 	desc = initial(desc)
 	if(reinf_material)
-		desc = "[desc] This one has a frame made from [material.solid_name] and \a [top_surface_noun] made from [reinf_material.solid_name]."
+		if(reinf_material == material)
+			desc = "[desc] This one has a frame and \a [top_surface_noun] made from [material.solid_name]."
+		else
+			desc = "[desc] This one has a frame made from [material.solid_name] and \a [top_surface_noun] made from [reinf_material.solid_name]."
 	else if(material)
 		desc = "[desc] This one has a frame made from [material.solid_name]."
 	if(felted)

@@ -110,9 +110,9 @@ var/global/arrest_security_status =  "Arrest"
 	set_employment_record(employment_record)
 
 	// Misc cultural info.
-	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
-	set_faction(H ?    html_decode(H.get_cultural_value(TAG_FACTION)) :   "Unset")
-	set_religion(H ?   html_decode(H.get_cultural_value(TAG_RELIGION)) :  "Unset")
+	set_residence(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
+	set_faction(H ?   html_decode(H.get_cultural_value(TAG_FACTION)) :   "Unset")
+	set_religion(H ?  html_decode(H.get_cultural_value(TAG_RELIGION)) :  "Unset")
 
 	if(H)
 		var/skills = list()
@@ -255,8 +255,8 @@ FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security, TRUE, 
 
 // EMPLOYMENT RECORDS
 FIELD_LONG("Employment Record", employment_record, access_bridge, access_bridge, TRUE)
-FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids, FALSE, TRUE)
-FIELD_SHORT("Faction", faction, access_bridge, access_bridge, FALSE, TRUE)
+FIELD_SHORT("Residence", residence, access_bridge, access_change_ids, FALSE, TRUE)
+FIELD_SHORT("Association", faction, access_bridge, access_bridge, FALSE, TRUE)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge, TRUE)
 
 // ANTAG RECORDS

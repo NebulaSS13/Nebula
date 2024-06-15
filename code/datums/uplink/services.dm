@@ -227,7 +227,7 @@
 	if(random_record)
 		COPY_VALUE(faction)
 		COPY_VALUE(religion)
-		COPY_VALUE(homeSystem)
+		COPY_VALUE(residence)
 		COPY_VALUE(fingerprint)
 		COPY_VALUE(dna)
 		COPY_VALUE(bloodtype)
