@@ -386,7 +386,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	return 1
 
-/mob/living/simple_animal/take_damage(damage, damagetype, def_zone, damage_flags, obj/item/used_weapon, armor_pen, silent, do_update_health)
+/mob/living/simple_animal/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
 	if((damagetype == BRUTE) && damage_flags & (DAM_EDGE | DAM_SHARP | DAM_BULLET)) // damage flags that should cause bleeding
 		adjustBleedTicks(damage)

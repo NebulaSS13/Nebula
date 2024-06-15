@@ -39,7 +39,7 @@
 		//if(ELECTROCUTE)
 	return 0
 
-/mob/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, do_update_health)
+/mob/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	switch(damage_type)
 		if(BRUTE)
 			return adjustBruteLoss(damage, do_update_health)

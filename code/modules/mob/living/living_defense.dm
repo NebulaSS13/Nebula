@@ -208,7 +208,7 @@
 	if(!affecting)
 		affecting = get_organ(def_zone)
 
-	if(affecting && supplied_wound?.is_open() && dtype == BRUTE) // Can't embed in a small bruise.
+	if(affecting && istype(supplied_wound) && supplied_wound.is_open() && dtype == BRUTE) // Can't embed in a small bruise.
 		var/obj/item/I = O
 		var/sharp = is_sharp(I)
 		embed_damage *= (1 - get_blocked_ratio(def_zone, BRUTE, O.damage_flags(), O.armor_penetration, I.force))
@@ -221,7 +221,7 @@
 		//Sharp objects will always embed if they do enough damage.
 		//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
 		if((sharp && prob(sharp_embed_chance)) || (embed_damage > embed_threshold && prob(embed_chance)))
-			affecting.embed_in_organ(I, supplied_wound = supplied_wound)
+			affecting.embed_in_organ(I, supplied_wound = (istype(supplied_wound) ? supplied_wound : null))
 			I.has_embedded(src)
 			. = TRUE
 

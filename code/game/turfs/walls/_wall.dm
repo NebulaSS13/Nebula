@@ -184,7 +184,7 @@ var/global/list/wall_fullblend_objects = list(
 	F.icon_state = "wall_thermite"
 	visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
 
-/turf/wall/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/turf/wall/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(damage)
 		src.damage = max(0, src.damage + damage)
 		update_damage()

@@ -1,4 +1,4 @@
-/obj/machinery/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent = FALSE)
+/obj/machinery/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	//Let's not bother initializing all the components for nothing
 	if(damage <= 0)
 		return
