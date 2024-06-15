@@ -333,17 +333,17 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(!.)
 		var/dealt_damage = harm_intent_damage
 		var/harm_verb = response_harm
-		var/damageflags
-		var/damagetype
+		var/damage_flags
+		var/damage_type
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			var/decl/natural_attack/attack = H.get_unarmed_attack(src)
 			if(istype(attack))
 				dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
 				harm_verb = pick(attack.attack_verb)
-				damageflags = attack.get_damage_flags()
-				damagetype = attack.get_damage_type()
-		take_damage(dealt_damage, damagetype, damageflags, user)
+				damage_flags = attack.get_damage_flags()
+				damage_type = attack.get_damage_type()
+		take_damage(dealt_damage, damage_type, damage_flags = damage_flags, used_weapon = user)
 		user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
 		user.do_attack_animation(src)
 		return TRUE
@@ -388,7 +388,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
-	if((damagetype == BRUTE) && damage_flags & (DAM_EDGE | DAM_SHARP | DAM_BULLET)) // damage flags that should cause bleeding
+	if((damage_type == BRUTE) && (damage_flags & (DAM_EDGE | DAM_SHARP | DAM_BULLET))) // damage flags that should cause bleeding
 		adjustBleedTicks(damage)
 
 /mob/living/simple_animal/get_movement_delay(var/travel_dir)
