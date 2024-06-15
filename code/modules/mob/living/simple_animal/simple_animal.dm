@@ -343,7 +343,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				harm_verb = pick(attack.attack_verb)
 				damage_flags = attack.get_damage_flags()
 				damage_type = attack.get_damage_type()
-		take_damage(dealt_damage, damage_type, damage_flags = damage_flags, used_weapon = user)
+		take_damage(dealt_damage, damage_type, damage_flags = damage_flags, inflicter = user)
 		user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
 		user.do_attack_animation(src)
 		return TRUE
