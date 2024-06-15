@@ -1,5 +1,6 @@
 /decl/language/hnoll
 	name = "Hnoll Tongue"
+	shorthand = "HN"
 	desc = "While every hnoll culture across the Nine Mothers and beyond has their own \
 	local dialect, the matriarches over the years have taken great care to cultivate and \
 	maintain a shared tongue used at the yearly gatherings and for inter-settlement trade. \

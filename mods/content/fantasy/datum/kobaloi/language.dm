@@ -1,5 +1,6 @@
 /decl/language/kobaloi
 	name = "Kobaloi Tongue"
+	shorthand = "KB"
 	desc = "The kobaloi have a huge variety of languages, sometimes differing even between groups in the same cave system, but all of them have some degree of overlap to allow mutual intelligibility."
 	speech_verb = "says"
 	ask_verb = "asks"
