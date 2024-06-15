@@ -1,0 +1,7 @@
+#ifndef GAMEMODE_PACK_METEOR
+#define GAMEMODE_PACK_METEOR
+// BEGIN_INCLUDE
+#include "_meteor.dm"
+#include "gamemode.dm"
+// END_INCLUDE
+#endif

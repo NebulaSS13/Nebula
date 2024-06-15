@@ -3,6 +3,8 @@
 	#include "modpack_testing_lobby.dm"
 	#include "blank.dmm"
 
+	#include "../../mods/gamemodes/meteor/_meteor.dme"
+
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/scaling_descriptors.dm"
 
