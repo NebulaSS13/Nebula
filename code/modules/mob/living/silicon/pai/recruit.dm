@@ -36,7 +36,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 		if(istype(card,/obj/item/paicard) && istype(candidate,/datum/paiCandidate))
 			var/mob/living/silicon/pai/pai = new(card)
 			if(!candidate.name)
-				pai.SetName(pick(global.ninja_names))
+				pai.SetName(pick(global.ai_names))
 			else
 				pai.SetName(candidate.name)
 			pai.real_name = pai.name

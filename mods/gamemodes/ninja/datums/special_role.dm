@@ -16,6 +16,13 @@
 	default_outfit = /decl/hierarchy/outfit/ninja
 	id_title = "Infiltrator"
 	rig_type = /obj/item/rig/light/ninja
+	var/list/ninja_titles
+	var/list/ninja_names
+
+/decl/special_role/ninja/Initialize()
+	ninja_titles = file2list("config/names/ninjatitle.txt")
+	ninja_names = file2list("config/names/ninjaname.txt")
+	return ..()
 
 /decl/special_role/ninja/attempt_random_spawn()
 	if(get_config_value(/decl/config/toggle/ninjas_allowed))
@@ -82,11 +89,9 @@
 
 /decl/special_role/ninja/update_antag_mob(var/datum/mind/player)
 	..()
-	var/ninja_title = pick(global.ninja_titles)
-	var/ninja_name = pick(global.ninja_names)
 	var/mob/living/carbon/human/H = player.current
 	if(istype(H))
-		H.real_name = "[ninja_title] [ninja_name]"
+		H.real_name = "[pick(ninja_titles)] [pick(ninja_names)]"
 		H.SetName(H.real_name)
 	player.name = H.name
 

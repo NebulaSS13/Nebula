@@ -187,21 +187,6 @@
 
 	var/max_reagent_volume = 80 //Used when refilling.
 
-/obj/item/rig_module/chem_dispenser/ninja
-	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream. This variant is made to be extremely light and flexible."
-
-	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
-	charges = list(
-		list("oxygen",       "oxygel",       /decl/material/liquid/oxy_meds,          20),
-		list("stabilizer",   "stabilizer",   /decl/material/liquid/stabilizer,        20),
-		list("antitoxins",   "antitoxins",   /decl/material/liquid/antitoxins,        20),
-		list("glucose",      "glucose",      /decl/material/liquid/nutriment/glucose, 80),
-		list("antirads",    "antirads",      /decl/material/liquid/antirads,          20),
-		list("regenerative", "regenerative", /decl/material/liquid/burn_meds,         20),
-		list("antibiotics",  "antibiotics",  /decl/material/liquid/antibiotics,       20),
-		list("painkillers",  "painkillers",  /decl/material/liquid/painkillers,       20)
-		)
-
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
 
 	if(!ATOM_IS_OPEN_CONTAINER(input_item))
@@ -270,7 +255,7 @@
 	to_chat(target_mob, SPAN_DANGER("You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected."))
 	target_mob.add_to_reagents(charge.product_type, chems_to_use)
 	charge.charges -= chems_to_use
-	if(charge.charges < 0) 
+	if(charge.charges < 0)
 		charge.charges = 0
 	return TRUE
 

@@ -1,4 +1,4 @@
-/obj/item/energy_blade/ninja
+/obj/item/energy_blade/projected
 
 	anchored =          TRUE    // Never spawned outside of inventory, should be fine.
 	armor_penetration = 100
@@ -18,37 +18,37 @@
 
 	var/mob/living/creator
 
-/obj/item/energy_blade/ninja/Initialize()
+/obj/item/energy_blade/projected/Initialize()
 	. = ..()
 	if(!ismob(loc))
 		return INITIALIZE_HINT_QDEL
 
-/obj/item/energy_blade/ninja/is_special_cutting_tool(var/high_power)
+/obj/item/energy_blade/projected/is_special_cutting_tool(var/high_power)
 	return active
 
-/obj/item/energy_blade/ninja/get_storage_cost()
+/obj/item/energy_blade/projected/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/energy_blade/ninja/attack_self(mob/user)
+/obj/item/energy_blade/projected/attack_self(mob/user)
 	user.drop_from_inventory(src)
 
-/obj/item/energy_blade/ninja/equipped(mob/user, slot)
+/obj/item/energy_blade/projected/equipped(mob/user, slot)
 	. = ..()
 	check_loc()
 
-/obj/item/energy_blade/ninja/dropped()
+/obj/item/energy_blade/projected/dropped()
 	. = ..()
 	check_loc()
 
-/obj/item/energy_blade/ninja/on_picked_up(mob/user)
+/obj/item/energy_blade/projected/on_picked_up(mob/user)
 	. = ..()
 	check_loc()
 
-/obj/item/energy_blade/ninja/Move()
+/obj/item/energy_blade/projected/Move()
 	. = ..()
 	if(.)
 		check_loc()
 
-/obj/item/energy_blade/ninja/proc/check_loc()
+/obj/item/energy_blade/projected/proc/check_loc()
 	if(!QDELETED(src) && (loc != creator || !(src in creator?.get_held_items())))
 		qdel(src)

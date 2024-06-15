@@ -28,6 +28,3 @@
 	. = ..()
 	if(user.a_intent == I_HURT)
 		user.mob_throw_item(target, src)
-
-/obj/item/star/ninja
-	material = /decl/material/solid/metal/uranium

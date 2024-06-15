@@ -198,7 +198,7 @@
 		flick("[base_state]deny", src)
 
 /obj/machinery/door/window/bash(obj/item/I, mob/user)
-	//Emags and ninja swords? You may pass.
+	//Emags and energy swords? You may pass.
 	if (istype(I, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = I
 		if(blade.is_special_cutting_tool() && emag_act(10, user))

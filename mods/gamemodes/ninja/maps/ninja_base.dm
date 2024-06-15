@@ -1,6 +1,8 @@
 /datum/map_template/ruin/antag_spawn/ninja
 	name = "Ninja Base"
-	suffixes = list("ninja/ninja_base.dmm")
+	mappaths = list(
+		"mods/gamemodes/ninja/maps/ninja_base.dmm"
+	)
 	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/ninja)
 	apc_test_exempt_areas = list(
@@ -13,7 +15,7 @@
 	warmup_time = 0
 	destination_tags = list(
 		"nav_ninja_start"
-		)
+	)
 	shuttle_area = /area/map_template/ninja_dojo/start
 	current_location = "nav_ninja_start"
 	announcer = "Proximity Sensor Array"

@@ -1,0 +1,14 @@
+#ifndef GAMEMODE_PACK_NINJA
+#define GAMEMODE_PACK_NINJA
+// BEGIN_INCLUDE
+#include "_ninja.dm"
+#include "datums\access.dm"
+#include "datums\ai_lawset.dm"
+#include "datums\config.dm"
+#include "datums\gamemode.dm"
+#include "datums\special_role.dm"
+#include "maps\ninja_base.dm"
+#include "objects\misc_presets.dm"
+#include "objects\rigsuit.dm"
+// END_INCLUDE
+#endif

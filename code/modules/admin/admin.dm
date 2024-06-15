@@ -906,16 +906,6 @@ var/global/BSACooldown = 0
 		message_admins("[key_name_admin(usr)] toggled Aliens off.", 1)
 	SSstatistics.add_field_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/toggle_space_ninja()
-	set category = "Server"
-	set desc="Toggle space ninjas spawning."
-	set name="Toggle Space Ninjas"
-	if(!check_rights(R_ADMIN))
-		return
-	toggle_config_value(/decl/config/toggle/ninjas_allowed)
-	log_and_message_admins("toggled Space Ninjas [get_config_value(/decl/config/toggle/ninjas_allowed) ? "on" : "off"].")
-	SSstatistics.add_field_details("admin_verb","TSN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /datum/admins/proc/delay()
 	set category = "Server"
 	set desc="Delay the game start/end"

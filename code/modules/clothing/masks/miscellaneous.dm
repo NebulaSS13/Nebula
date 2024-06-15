@@ -102,7 +102,7 @@
 /obj/item/clothing/mask/ai
 	name = "camera MIU"
 	desc = "Allows for direct mental connection to accessible camera channels."
-	icon = 'icons/clothing/mask/ninja.dmi'
+	icon = 'icons/clothing/mask/camera_miu.dmi'
 	icon_state = ICON_STATE_WORLD
 	flags_inv = HIDEFACE
 	body_parts_covered = SLOT_FACE|SLOT_EYES

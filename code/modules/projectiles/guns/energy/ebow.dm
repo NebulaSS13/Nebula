@@ -16,15 +16,6 @@
 	charge_meter = 0
 	combustion = 0
 
-/obj/item/gun/energy/crossbow/ninja
-	name = "energy dart thrower"
-	projectile_type = /obj/item/projectile/energy/dart
-	max_shots = 5
-
-/obj/item/gun/energy/crossbow/ninja/mounted
-	use_external_power = 1
-	has_safety = FALSE
-
 /obj/item/gun/energy/crossbow/largecrossbow
 	name = "energy crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
