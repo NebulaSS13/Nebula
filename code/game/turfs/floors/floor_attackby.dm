@@ -12,8 +12,8 @@
 	if(!C || !user)
 		return 0
 
-	if(IS_COIL(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
-		return ..(C, user)
+	if(istype(C, /obj/item/stack/tile/roof) || IS_COIL(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
+		return ..()
 
 	if(!(IS_SCREWDRIVER(C) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)) && try_graffiti(user, C))
 		return TRUE
