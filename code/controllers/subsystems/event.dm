@@ -26,14 +26,22 @@ SUBSYSTEM_DEF(event)
 
 //Subsystem procs
 /datum/controller/subsystem/event/Initialize()
-	if(!all_events)
-		all_events = subtypesof(/datum/event)
+
 	if(!event_containers)
 		event_containers = list(
-				EVENT_LEVEL_MUNDANE 	= new/datum/event_container/mundane,
-				EVENT_LEVEL_MODERATE	= new/datum/event_container/moderate,
-				EVENT_LEVEL_MAJOR 		= new/datum/event_container/major
-			)
+			EVENT_LEVEL_MUNDANE  = new global.using_map.event_container_mundane,
+			EVENT_LEVEL_MODERATE = new global.using_map.event_container_moderate,
+			EVENT_LEVEL_MAJOR    = new global.using_map.event_container_major
+		)
+		all_events = null
+
+	if(!all_events)
+		all_events = list()
+		for(var/datum/event_container/container in event_containers)
+			for(var/datum/event_meta/event in container.available_events)
+				if(event.event_type)
+					all_events |= event.event_type
+
 	global.using_map.populate_overmap_events()
 	. = ..()
 
