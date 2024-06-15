@@ -1,7 +1,7 @@
 /decl/emote/audible/whistle
 	key = "whistle"
 	emote_message_1p = "You whistle a tune."
-	emote_message_3p = "whistles a tune."
+	emote_message_3p = "$USER$ whistles a tune."
 	emote_message_muffled = "$USER$ makes a light spitting noise, a poor attempt at a whistle."
 	emote_message_synthetic_1p = "You whistle a robotic tune."
 	emote_message_synthetic_3p = "$USER$ whistles a robotic tune."
