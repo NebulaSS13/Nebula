@@ -59,6 +59,6 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 
 /obj/item/clothing/dress/gown
-	name = "silk gown"
-	desc = "A long silky sleeveless gown with a flared hem."
+	name = "gown"
+	desc = "A long sleeveless gown with a flared hem."
 	icon = 'icons/clothing/dresses/dress_gown.dmi'
