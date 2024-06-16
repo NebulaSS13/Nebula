@@ -1,6 +1,6 @@
 /decl/cultural_info/location
 	abstract_type = /decl/cultural_info/location
-	desc_type = "Home System"
+	desc_type = "Residence"
 	category = TAG_HOMEWORLD
 	var/distance_heading = "Distance from Sol"
 	var/distance = 0

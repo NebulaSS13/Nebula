@@ -13,6 +13,12 @@
 	self_smell_descriptor = "distressing"
 	scent_color = COLOR_RED
 
+/decl/emote/pheromone/pain
+	key = "scentpain"
+	smell_message = "<span class='danger'>PAIN</span>"
+	self_smell_descriptor = "distressing"
+	scent_color = COLOR_RED
+
 /decl/emote/pheromone/calm
 	key = "scentcalm"
 	smell_message = "<span class='notice'><b>calm</b></span>"

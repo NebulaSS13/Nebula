@@ -12,3 +12,19 @@
 /obj/machinery/network/relay/wall_mounted/Initialize()
 	. = ..()
 	queue_icon_update()
+
+/obj/machinery/network/relay/wall_mounted/south
+	dir = NORTH
+	pixel_y = -21
+
+/obj/machinery/network/relay/wall_mounted/north
+	dir = SOUTH
+	pixel_y = 21
+
+/obj/machinery/network/relay/wall_mounted/west
+	dir = EAST
+	pixel_x = -21
+
+/obj/machinery/network/relay/wall_mounted/east
+	dir = WEST
+	pixel_x = 21

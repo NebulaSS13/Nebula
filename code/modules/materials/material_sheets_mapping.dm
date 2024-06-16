@@ -79,7 +79,7 @@ STACK_SUBTYPES(yew,            "yew",                           solid/organic/wo
 STACK_SUBTYPES(cardboard,      "cardboard",                     solid/organic/cardboard,     cardstock,        null)
 STACK_SUBTYPES(leather,        "leather",                       solid/organic/leather,       skin,             null)
 STACK_SUBTYPES(synthleather,   "synthleather",                  solid/organic/leather/synth, skin,             null)
-STACK_SUBTYPES(bone,           "bone",                          solid/organic/bone,          bone,            null)
+STACK_SUBTYPES(bone,           "bone",                          solid/organic/bone,          bone,             null)
 STACK_SUBTYPES(glass,          "glass",                         solid/glass,                 pane,             null)
 STACK_SUBTYPES(borosilicate,   "borosilicate glass",            solid/glass/borosilicate,    pane,             null)
 STACK_SUBTYPES(aliumium,       "aliumium",                      solid/metal/aliumium,        cubes,            null)
