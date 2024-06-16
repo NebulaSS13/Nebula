@@ -212,6 +212,7 @@ function run_code_tests {
     run_test "check icon state limit (maps)" "python3 tools/check_icon_state_limit.py maps"
     run_test_ci "check changelog builds" "python3 tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs"
     run_test "check files included" "python3 tools/validate_dme.py < nebula.dme"
+    run_test "check modpack files included" "python3 tools/validate_modpacks.py"
 }
 
 function run_byond_tests {
