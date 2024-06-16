@@ -163,7 +163,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
 		return ..()
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(!(H.species.name in ALL_ASCENT_SPECIES))
 			to_chat(H, SPAN_WARNING("You have no idea how to use \the [src]."))
 			return TRUE

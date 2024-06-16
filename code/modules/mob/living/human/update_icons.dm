@@ -102,7 +102,7 @@ If you have any questions/constructive-comments/bugs-to-report/or have a massivl
 Please contact me on #coderbus IRC. ~Carn x
 */
 
-/mob/living/carbon/human/refresh_visible_overlays()
+/mob/living/human/refresh_visible_overlays()
 	update_mutations(FALSE)
 	update_body(FALSE)
 	update_skin(FALSE)
@@ -115,12 +115,12 @@ Please contact me on #coderbus IRC. ~Carn x
 	update_damage_overlays(FALSE)
 	return ..()
 
-/mob/living/carbon/human/on_update_icon()
+/mob/living/human/on_update_icon()
 	if(regenerate_body_icon)
 		regenerate_body_icon = FALSE
 	..()
 
-/mob/living/carbon/human/apply_visible_overlays()
+/mob/living/human/apply_visible_overlays()
 	var/list/visible_overlays
 	var/list/visible_underlays
 	if(is_cloaked())
@@ -177,7 +177,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
 	return list(icon_scale_x, icon_scale_y)
 
-/mob/living/carbon/human/update_appearance_flags(add_flags, remove_flags)
+/mob/living/human/update_appearance_flags(add_flags, remove_flags)
 	. = ..()
 	if(.)
 		update_icon()
@@ -196,7 +196,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		transform = M
 	return transform
 
-/mob/living/carbon/human/update_transform()
+/mob/living/human/update_transform()
 
 	// First, get the correct size.
 	var/list/icon_scale_values = get_icon_scale_mult()
@@ -249,11 +249,11 @@ Please contact me on #coderbus IRC. ~Carn x
 
 	return transform
 
-/mob/living/carbon/human/update_damage_overlays(update_icons = TRUE)
+/mob/living/human/update_damage_overlays(update_icons = TRUE)
 	. = ..()
 	update_bandages(update_icons)
 
-/mob/living/carbon/human/proc/update_bandages(var/update_icons=1)
+/mob/living/human/proc/update_bandages(var/update_icons=1)
 	var/list/bandage_overlays
 	var/bandage_icon = get_bodytype().get_bandages_icon(src)
 	if(bandage_icon)
@@ -263,7 +263,7 @@ Please contact me on #coderbus IRC. ~Carn x
 				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
 	set_current_mob_overlay(HO_DAMAGE_LAYER, bandage_overlays, update_icons)
 
-/mob/living/carbon/human/proc/get_human_icon_cache_key()
+/mob/living/human/proc/get_human_icon_cache_key()
 	. = list()
 	for(var/limb_tag in global.all_limb_tags)
 		. += "[limb_tag]_"
@@ -277,7 +277,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	. = JOINTEXT(.)
 
 //BASE MOB SPRITE
-/mob/living/carbon/human/update_body(var/update_icons = TRUE)
+/mob/living/human/update_body(var/update_icons = TRUE)
 
 	var/list/limbs = get_external_organs()
 	if(!LAZYLEN(limbs))
@@ -333,7 +333,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 //UNDERWEAR OVERLAY
 
-/mob/living/carbon/human/proc/update_underwear(var/update_icons=1)
+/mob/living/human/proc/update_underwear(var/update_icons=1)
 	var/list/undies = list()
 	for(var/entry in worn_underwear)
 
@@ -356,16 +356,16 @@ Please contact me on #coderbus IRC. ~Carn x
 			undies += I
 	set_current_mob_overlay(HO_UNDERWEAR_LAYER, undies, update_icons)
 
-/mob/living/carbon/human/update_hair(var/update_icons=1)
+/mob/living/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
 	var/list/new_accessories = head_organ?.get_mob_overlays()
 	set_current_mob_overlay(HO_HAIR_LAYER, new_accessories, update_icons)
 
-/mob/living/carbon/human/proc/update_skin(var/update_icons=1)
+/mob/living/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype
 	set_current_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)
 
-/mob/living/carbon/human/update_mutations(var/update_icons=1)
+/mob/living/human/update_mutations(var/update_icons=1)
 
 	var/image/standing	= overlay_image('icons/effects/genetics.dmi', flags=RESET_COLOR)
 	var/add_image = 0
@@ -389,7 +389,7 @@ Please contact me on #coderbus IRC. ~Carn x
 /mob/living/proc/update_tail_showing(var/update_icons=1)
 	return
 
-/mob/living/carbon/human/update_tail_showing(var/update_icons=1)
+/mob/living/human/update_tail_showing(var/update_icons=1)
 
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!istype(tail_organ))
@@ -418,7 +418,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
 		set_current_mob_underlay(HU_TAIL_LAYER, tail_image, update_icons)
 
-/mob/living/carbon/human/proc/get_tail_icon_for_organ(var/obj/item/organ/external/tail/tail_organ)
+/mob/living/human/proc/get_tail_icon_for_organ(var/obj/item/organ/external/tail/tail_organ)
 	if(!istype(tail_organ))
 		return
 
@@ -460,7 +460,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		if(tail_organ?.get_tail())
 			update_tail_showing()
 
-/mob/living/carbon/human/proc/set_tail_state(var/t_state)
+/mob/living/human/proc/set_tail_state(var/t_state)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return null
@@ -471,10 +471,10 @@ Please contact me on #coderbus IRC. ~Carn x
 
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
-/mob/living/carbon/human/proc/get_current_tail_image()
+/mob/living/human/proc/get_current_tail_image()
 	return get_current_mob_overlay(HO_TAIL_LAYER) || get_current_mob_underlay(HU_TAIL_LAYER)
 
-/mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
+/mob/living/human/proc/animate_tail_once(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return
@@ -495,7 +495,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(update_icons)
 		queue_icon_update()
 
-/mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
+/mob/living/human/proc/animate_tail_start(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return
@@ -505,7 +505,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		if(update_icons)
 			queue_icon_update()
 
-/mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
+/mob/living/human/proc/animate_tail_fast(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return
@@ -515,7 +515,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		if(update_icons)
 			queue_icon_update()
 
-/mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
+/mob/living/human/proc/animate_tail_reset(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return
@@ -528,19 +528,19 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(update_icons)
 		queue_icon_update()
 
-/mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
+/mob/living/human/proc/animate_tail_stop(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return
 	set_tail_state("[tail_organ.get_tail()]_static")
 
-/mob/living/carbon/human/update_fire(var/update_icons=1)
+/mob/living/human/update_fire(var/update_icons=1)
 	if(on_fire)
 		var/image/standing = overlay_image(get_bodytype()?.get_ignited_icon(src) || 'icons/mob/OnFire.dmi', "Standing", RESET_COLOR)
 		set_current_mob_overlay(HO_FIRE_LAYER, standing, update_icons)
 	else
 		set_current_mob_overlay(HO_FIRE_LAYER, null, update_icons)
 
-/mob/living/carbon/human/hud_reset(full_reset = FALSE)
+/mob/living/human/hud_reset(full_reset = FALSE)
 	if((. = ..()) && internals && internal)
 		internals.icon_state = "internal1"

@@ -49,7 +49,7 @@
 		return HIDING_MOB_LAYER
 	. = ..()
 
-/mob/living/carbon/human/get_base_layer()
+/mob/living/human/get_base_layer()
 	if(current_posture.prone)
 		return LYING_HUMAN_LAYER
 	. = ..()

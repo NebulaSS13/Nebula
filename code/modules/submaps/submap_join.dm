@@ -65,7 +65,7 @@
 		if(istype(other_mob))
 			character = other_mob
 
-		var/mob/living/carbon/human/user_human
+		var/mob/living/human/user_human
 		if(ishuman(character))
 			user_human = character
 			if(job.branch && mil_branches)

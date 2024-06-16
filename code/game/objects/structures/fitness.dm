@@ -14,7 +14,7 @@
 	if(!ishuman(user))
 		return ..()
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	var/synth = H.isSynthetic()
 	if(!synth && H.nutrition < 20)
 		to_chat(H, SPAN_WARNING("You [synth ? "need more energy" : "are too tired"] to use the punching bag. Go [synth ? "recharge" : "eat something"]."))
@@ -51,7 +51,7 @@
 /obj/structure/fitness/weightlifter/attack_hand(mob/user)
 	if(!ishuman(user))
 		return ..()
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	var/synth = H.isSynthetic()
 	if(H.loc != src.loc)
 		to_chat(H, SPAN_WARNING("You must be on the weight machine to use it."))

@@ -127,13 +127,13 @@ Works together with spawning an observer, noted above.
 
 /mob/observer/ghost/proc/process_medHUD(var/mob/M)
 	var/client/C = M.client
-	for(var/mob/living/carbon/human/patient in oview(M, 14))
+	for(var/mob/living/human/patient in oview(M, 14))
 		C.images += patient.hud_list[HEALTH_HUD]
 		C.images += patient.hud_list[STATUS_HUD_OOC]
 
 /mob/observer/ghost/proc/assess_targets(list/target_list, mob/observer/ghost/U)
 	var/client/C = U.client
-	for(var/mob/living/carbon/human/target in target_list)
+	for(var/mob/living/human/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
 	for(var/mob/living/silicon/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]

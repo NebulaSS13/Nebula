@@ -27,7 +27,7 @@
 	global_objectives |= new /datum/objective/nuclear
 	return 1
 
-/decl/special_role/mercenary/equip_role(var/mob/living/carbon/human/player)
+/decl/special_role/mercenary/equip_role(var/mob/living/human/player)
 	. = ..()
 	if(.)
 		var/obj/item/radio/uplink/U = new(get_turf(player), player.mind, DEFAULT_TELECRYSTAL_AMOUNT)

@@ -4,10 +4,10 @@
 /mob/proc/get_holder_color()
 	return color
 
-/mob/living/carbon/human/get_holder_icon()
+/mob/living/human/get_holder_icon()
 	return species.holder_icon || ..()
 
-/mob/living/carbon/human/get_holder_color()
+/mob/living/human/get_holder_color()
 	return species.get_holder_color(src)
 
 //Mob procs for scooping up

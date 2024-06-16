@@ -1,4 +1,4 @@
-/mob/living/carbon/human/show_examined_short_description(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+/mob/living/human/show_examined_short_description(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	var/msg = list("<span class='info'>*---------*\n[user == src ? "You are" : "This is"] <EM>[name]</EM>")
 	if(!(hideflags & HIDEJUMPSUIT) || !(hideflags & HIDEFACE))
 		var/species_name = "\improper "
@@ -20,7 +20,7 @@
 	msg += "<br/>*---------*"
 	to_chat(user, jointext(msg, null))
 
-/mob/living/carbon/human/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+/mob/living/human/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 
 	var/self_examine = (user == src)
 	var/use_He    = self_examine ? "You"  : pronouns.He
@@ -260,14 +260,14 @@
 
 	..()
 
-//Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
+//Helper procedure. Called by /mob/living/human/examine() and /mob/living/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M, hudtype)
 	return !!M.getHUDsource(hudtype)
 
 /mob/proc/getHUDsource(hudtype)
 	return
 
-/mob/living/carbon/human/getHUDsource(hudtype)
+/mob/living/human/getHUDsource(hudtype)
 	var/obj/item/clothing/glasses/G = get_equipped_item(slot_glasses_str)
 	if(!istype(G))
 		return ..()
@@ -293,7 +293,7 @@
 	if(getHUDsource(hudtype))
 		return get_computer_network()
 
-/mob/living/carbon/human/verb/pose()
+/mob/living/human/verb/pose()
 	set name = "Set Pose"
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
@@ -301,7 +301,7 @@
 	var/decl/pronouns/G = get_pronouns()
 	pose = sanitize(input(usr, "This is [src]. [G.He]...", "Pose", null)  as text)
 
-/mob/living/carbon/human/verb/set_flavor()
+/mob/living/human/verb/set_flavor()
 	set name = "Set Flavour Text"
 	set desc = "Sets an extended description of your character's features."
 	set category = "IC"

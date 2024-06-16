@@ -3,9 +3,9 @@
 	desc = "Take pity on a follower, converting a pitance of your power into blood. Don't let them forget your mercy."
 	cost = 20
 	flags = PHENOMENA_FOLLOWER
-	expected_type = /mob/living/carbon/human
+	expected_type = /mob/living/human
 
-/datum/phenomena/exhude_blood/can_activate(var/mob/living/carbon/human/H)
+/datum/phenomena/exhude_blood/can_activate(var/mob/living/human/H)
 	if(!..())
 		return 0
 
@@ -14,7 +14,7 @@
 		return 0
 	return 1
 
-/datum/phenomena/exhude_blood/activate(var/mob/living/carbon/human/H, var/mob/living/deity/user)
+/datum/phenomena/exhude_blood/activate(var/mob/living/human/H, var/mob/living/deity/user)
 	H.adjust_blood(30)
 	to_chat(H,"<span class='notice'>You feel a rush as new blood enters your system.</span>")
 

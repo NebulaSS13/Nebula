@@ -11,7 +11,7 @@
 	description = "Quickly puts an item in the best slot available"
 
 /datum/keybinding/human/quick_equip/down(client/user)
-	var/mob/living/carbon/human/H = user.mob
+	var/mob/living/human/H = user.mob
 	H.quick_equip()
 	return TRUE
 
@@ -22,7 +22,7 @@
 	description = "Draw or holster weapon"
 
 /datum/keybinding/human/holster/down(client/user)
-	var/mob/living/carbon/human/H = user.mob
+	var/mob/living/human/H = user.mob
 	if(H.incapacitated())
 		return
 
@@ -61,6 +61,6 @@
 	description = "Give the item you're currently holding"
 
 /datum/keybinding/human/give/down(client/user)
-	var/mob/living/carbon/human/H = user.mob
+	var/mob/living/human/H = user.mob
 	H.give()
 	return TRUE

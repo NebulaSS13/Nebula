@@ -23,7 +23,7 @@
 	if(S.isSynthetic())
 		return SPEECH_RESULT_GOOD
 	if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
+		var/mob/living/human/H = speaker
 		if(H.species.name in correct_mouthbits)
 			return SPEECH_RESULT_GOOD
 	return SPEECH_RESULT_MUDDLED
@@ -73,7 +73,7 @@
 	if(istype(speaker) && speaker.isSynthetic())
 		return TRUE
 	else if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
+		var/mob/living/human/H = speaker
 		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
 	return FALSE
 

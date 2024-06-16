@@ -1,7 +1,7 @@
 /****************
  true human verbs
 ****************/
-/mob/living/carbon/human/proc/tie_hair()
+/mob/living/human/proc/tie_hair()
 	set name = "Tie Hair"
 	set desc = "Style your hair."
 	set category = "IC"
@@ -39,7 +39,7 @@
 /****************
  misc alien verbs
 ****************/
-/mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
+/mob/living/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
 	set desc = "Whisper silently to someone over a distance."
 	set category = "Abilities"

@@ -1537,9 +1537,9 @@
 "es" = (
 /mob/living/slime,
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "et" = (
@@ -1547,8 +1547,8 @@
 	dir = 4
 	},
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "eu" = (
@@ -1608,16 +1608,16 @@
 /area/unishi/hydro)
 "eB" = (
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "eC" = (
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "eD" = (
@@ -2069,7 +2069,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-
+	
 	},
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2216,7 +2216,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-
+	
 	},
 /turf/floor,
 /area/unishi/smresearch)
@@ -2346,7 +2346,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-
+	
 	},
 /obj/item/remains,
 /turf/floor,
@@ -2742,7 +2742,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-
+	
 	},
 /obj/item/remains,
 /obj/random/shoes,

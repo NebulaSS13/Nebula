@@ -554,7 +554,7 @@ var/global/list/bodytypes_by_category = list()
 			E.encased = apply_encased[E.organ_tag]
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
-/decl/bodytype/proc/create_missing_organs(mob/living/carbon/human/H, fully_replace = FALSE)
+/decl/bodytype/proc/create_missing_organs(mob/living/human/H, fully_replace = FALSE)
 	if(fully_replace)
 		H.delete_organs()
 
@@ -650,7 +650,7 @@ var/global/list/bodytypes_by_category = list()
 				if(O)
 					O.set_sprite_accessory(accessory, null, accessory_colour, skip_update = TRUE)
 
-/decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+/decl/bodytype/proc/customize_preview_mannequin(mob/living/human/dummy/mannequin/mannequin)
 	set_default_sprite_accessories(mannequin)
 	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
 	mannequin.force_update_limbs()
@@ -660,7 +660,7 @@ var/global/list/bodytypes_by_category = list()
 	mannequin.update_hair(0)
 	mannequin.update_icon()
 
-/decl/species/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+/decl/species/proc/customize_preview_mannequin(mob/living/human/dummy/mannequin/mannequin)
 	if(preview_outfit)
 		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
 		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
@@ -719,7 +719,7 @@ var/global/list/bodytypes_by_category = list()
 		else
 			CRASH("get_species_temperature_threshold() called with invalid threshold value.")
 
-/decl/bodytype/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+/decl/bodytype/proc/get_environment_discomfort(var/mob/living/human/H, var/msg_type)
 
 	if(!prob(5))
 		return
@@ -764,5 +764,5 @@ var/global/list/limbs_with_nails = list(
 		)
 	return null
 
-/decl/bodytype/proc/get_movement_slowdown(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_movement_slowdown(var/mob/living/human/H)
 	return movement_slowdown

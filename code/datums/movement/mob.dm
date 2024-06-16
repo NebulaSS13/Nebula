@@ -212,7 +212,7 @@
 /mob/proc/get_stamina_skill_mod()
 	return 1
 
-/mob/living/carbon/human/get_stamina_skill_mod()
+/mob/living/human/get_stamina_skill_mod()
 	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
 	if(species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
 		if(has_gravity())
@@ -221,7 +221,7 @@
 			mod *= 0.8
 	return mod
 
-/mob/living/carbon/human/get_stamina_used_per_step()
+/mob/living/human/get_stamina_used_per_step()
 	return get_config_value(/decl/config/num/movement_min_sprint_cost) + get_config_value(/decl/config/num/movement_skill_sprint_cost_range) * get_stamina_skill_mod()
 
 // Misc. helpers

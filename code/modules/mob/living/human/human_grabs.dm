@@ -1,10 +1,10 @@
-/mob/living/carbon/human/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
+/mob/living/human/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
 	if(defer_hand)
 		. = put_in_hands(grab)
 	else
 		. = put_in_active_hand(grab)
 
-/mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/target_zone, var/defer_hand = FALSE)
+/mob/living/human/can_be_grabbed(var/mob/grabber, var/target_zone, var/defer_hand = FALSE)
 	. = ..()
 	if(.)
 		var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, check_zone(target_zone, src))
@@ -28,7 +28,7 @@
 		if(istype(C))
 			C.leave_evidence(grabber)
 
-/mob/living/carbon/human/make_grab(atom/movable/target, grab_tag = /decl/grab/simple, defer_hand = FALSE, force_grab_tag = FALSE)
+/mob/living/human/make_grab(atom/movable/target, grab_tag = /decl/grab/simple, defer_hand = FALSE, force_grab_tag = FALSE)
 	. = ..()
 	if(.)
 		remove_cloaking_source(species)

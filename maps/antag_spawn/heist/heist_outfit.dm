@@ -66,7 +66,7 @@
 	randomize_clothing()
 	. = ..()
 
-/decl/hierarchy/outfit/raider/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
+/decl/hierarchy/outfit/raider/equip_outfit(mob/living/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	randomize_clothing()
 	. = ..()
 	if(. && H)

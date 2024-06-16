@@ -64,7 +64,7 @@
 	splatter_desc = "A puddle of starstuff."
 	splatter_colour = "#ffff00"
 
-/decl/species/starlight/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/handle_death(var/mob/living/human/H)
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, dust)),0)
 
 /decl/species/starlight/starborn
@@ -97,7 +97,7 @@
 		/obj/aura/starborn
 	)
 
-/decl/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/starborn/handle_death(var/mob/living/human/H)
 	..()
 	var/turf/T = get_turf(H)
 	T.add_to_reagents(/decl/material/liquid/fuel, 20)
@@ -140,7 +140,7 @@
 	radiation_mod = 0
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 
-/decl/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/blueforged/handle_death(var/mob/living/human/H)
 	..()
 	new /obj/effect/temporary(get_turf(H),11, 'icons/mob/mob.dmi', "liquify")
 

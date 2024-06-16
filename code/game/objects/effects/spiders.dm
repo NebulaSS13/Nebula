@@ -23,7 +23,7 @@
 		return TRUE
 	var/showed_msg = FALSE
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
 		if(istype(attack))
 			attack.show_attack(H, src, H.get_target_zone(), 1)

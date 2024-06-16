@@ -101,7 +101,7 @@
 
 	. = ..()
 
-/decl/species/alium/get_species_blood_color(mob/living/carbon/human/H)
+/decl/species/alium/get_species_blood_color(mob/living/human/H)
 	if(istype(H) && H.isSynthetic())
 		return ..()
 	return blood_color
@@ -131,7 +131,7 @@
 		return TRUE
 	to_chat(user, "You're now an alien humanoid of some undiscovered species. Make up what lore you want, no one knows a thing about your species! You can check info about your traits with Check Species Info verb in IC tab.")
 	to_chat(user, "You can't speak any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	new /obj/item/implanter/translator(get_turf(src))
 	H.change_species(SPECIES_ALIEN)
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_CULTURE)

@@ -463,7 +463,7 @@ var/global/list/turret_icons
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
-/obj/machinery/porta_turret/proc/assess_perp(var/mob/living/carbon/human/H)
+/obj/machinery/porta_turret/proc/assess_perp(var/mob/living/human/H)
 	if(!H || !istype(H))
 		return 0
 

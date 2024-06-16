@@ -149,7 +149,7 @@ default behaviour is:
 						if(!tmob.buckled.anchored)
 							step(tmob.buckled, t)
 				if(ishuman(AM))
-					var/mob/living/carbon/human/M = AM
+					var/mob/living/human/M = AM
 					for(var/obj/item/grab/G in M.grabbed_by)
 						step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
@@ -645,7 +645,7 @@ default behaviour is:
 	return FALSE
 
 
-/mob/living/carbon/human/canUnEquip(obj/item/I)
+/mob/living/human/canUnEquip(obj/item/I)
 	. = ..() && !(I in get_organs())
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)

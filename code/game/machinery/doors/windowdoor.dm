@@ -140,7 +140,7 @@
 
 /obj/machinery/door/window/physical_attack_hand(mob/user)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species.can_shred(H))
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message("<span class='danger'>\The [user] smashes against \the [src].</span>", 1)

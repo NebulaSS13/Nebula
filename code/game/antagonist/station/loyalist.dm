@@ -34,7 +34,7 @@
 	if(!..())
 		return
 	global_objectives = list()
-	for(var/mob/living/carbon/human/player in SSmobs.mob_list)
+	for(var/mob/living/human/player in SSmobs.mob_list)
 		if(!player.mind || player.stat == DEAD || !(player.mind.assigned_role in SSjobs.titles_by_department(command_department_id)))
 			continue
 		var/datum/objective/protect/loyal_obj = new

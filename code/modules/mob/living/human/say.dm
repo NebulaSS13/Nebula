@@ -1,4 +1,4 @@
-/mob/living/carbon/human/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
+/mob/living/human/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
 	if(!whispering)
 		var/obj/item/organ/internal/voicebox/voice = locate() in get_internal_organs()
 		// Check if the language they're speaking is vocal and not supplied by a machine, and if they are currently suffocating.
@@ -21,7 +21,7 @@
 			SetName(get_id_name("Unknown"))
 	. = ..(message, speaking, verb, alt_name, whispering)
 
-/mob/living/carbon/human/proc/forcesay(list/append)
+/mob/living/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
 		if(client)
 			var/virgin = 1	//has the text been modified yet?
@@ -55,10 +55,10 @@
 					say(temp)
 				winset(client, "input", "text=[null]")
 
-/mob/living/carbon/human/say_understands(mob/speaker, decl/language/speaking)
+/mob/living/human/say_understands(mob/speaker, decl/language/speaking)
 	return (!speaking && (issilicon(speaker) || istype(speaker, /mob/announcer) || isbrain(speaker))) || ..()
 
-/mob/living/carbon/human/say_quote(var/message, var/decl/language/speaking = null)
+/mob/living/human/say_quote(var/message, var/decl/language/speaking = null)
 	var/verb = "says"
 	var/ending = copytext(message, length(message))
 
@@ -72,7 +72,7 @@
 
 	return verb
 
-/mob/living/carbon/human/handle_speech_problems(var/list/message_data)
+/mob/living/human/handle_speech_problems(var/list/message_data)
 	if(HAS_STATUS(src, STAT_SILENCE) || (sdisabilities & MUTED))
 		to_chat(src, SPAN_WARNING("You are unable to speak!"))
 		message_data[1] = ""
@@ -86,13 +86,13 @@
 
 	return ..(message_data)
 
-/mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	if(message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
 		whisper_say(html_decode(message), speaking, alt_name)
 		return TRUE
 	return ..()
 
-/mob/living/carbon/human/handle_speech_sound()
+/mob/living/human/handle_speech_sound()
 	if(species.speech_sounds && prob(species.speech_chance))
 		var/list/returns[2]
 		var/sound_to_play = species.speech_sounds
@@ -103,7 +103,7 @@
 		return returns
 	return ..()
 
-/mob/living/carbon/human/can_speak(decl/language/speaking)
+/mob/living/human/can_speak(decl/language/speaking)
 	if(ispath(speaking, /decl/language))
 		speaking = GET_DECL(speaking)
 	if(!istype(speaking))
@@ -118,7 +118,7 @@
 			return FALSE
 	. = ..()
 
-/mob/living/carbon/human/parse_language(var/message)
+/mob/living/human/parse_language(var/message)
 	var/prefix = copytext(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
 		return GET_DECL(/decl/language/noise)

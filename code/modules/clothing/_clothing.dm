@@ -364,7 +364,7 @@
 	for(var/obj/item/clothing/accessory in accessories)
 		. = min(., accessory.get_pressure_weakness(pressure,zone))
 
-/obj/item/clothing/proc/check_limb_support(var/mob/living/carbon/human/user)
+/obj/item/clothing/proc/check_limb_support(var/mob/living/human/user)
 	return FALSE
 
 /obj/item/clothing/verb/toggle_suit_sensors()

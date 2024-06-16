@@ -6,10 +6,10 @@ var/global/list/wrapped_species_by_ref = list()
 /decl/species/shapeshifter
 	available_bodytypes = list(/decl/bodytype/shapeshifter)
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/shapeshifter_select_shape,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair,
-		/mob/living/carbon/human/proc/shapeshifter_select_gender,
-		/mob/living/carbon/human/proc/shapeshifter_select_colour
+		/mob/living/human/proc/shapeshifter_select_shape,
+		/mob/living/human/proc/shapeshifter_select_hair,
+		/mob/living/human/proc/shapeshifter_select_gender,
+		/mob/living/human/proc/shapeshifter_select_colour
 	)
 	var/list/valid_transform_species = list()
 	var/monochromatic
@@ -20,31 +20,31 @@ var/global/list/wrapped_species_by_ref = list()
 	valid_transform_species |= default_form
 	. = ..()
 
-/decl/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/human/H)
 	return valid_transform_species
 
-/decl/species/shapeshifter/get_root_species_name(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_root_species_name(var/mob/living/human/H)
 	if(!H) return ..()
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_root_species_name(H)
 
-/decl/species/shapeshifter/handle_pre_spawn(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/handle_pre_spawn(var/mob/living/human/H)
 	..()
 	wrapped_species_by_ref["\ref[H]"] = default_form
 
-/decl/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/handle_post_spawn(var/mob/living/human/H)
 	if(monochromatic)
 		var/skin_colour = H.get_skin_colour()
 		SET_HAIR_COLOUR(H, skin_colour, TRUE)
 		SET_FACIAL_HAIR_COLOUR(H, skin_colour, TRUE)
 	..()
 
-/decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
+/decl/species/shapeshifter/get_pain_emote(var/mob/living/human/H, var/pain_power)
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_pain_emote(H, pain_power)
 
 // Verbs follow.
-/mob/living/carbon/human/proc/shapeshifter_select_hair()
+/mob/living/human/proc/shapeshifter_select_hair()
 
 	set name = "Select Hair"
 	set category = "Abilities"
@@ -66,7 +66,7 @@ var/global/list/wrapped_species_by_ref = list()
 		var/decl/sprite_accessory/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in beardstyles
 		SET_FACIAL_HAIR_STYLE(src, (new_hair ? new_hair.type : /decl/sprite_accessory/facial_hair/shaved), FALSE)
 
-/mob/living/carbon/human/proc/shapeshifter_select_gender()
+/mob/living/human/proc/shapeshifter_select_gender()
 
 	set name = "Select Gender"
 	set category = "Abilities"
@@ -83,7 +83,7 @@ var/global/list/wrapped_species_by_ref = list()
 	visible_message("<span class='notice'>\The [src]'s form contorts subtly.</span>")
 	set_gender(new_gender, TRUE)
 
-/mob/living/carbon/human/proc/shapeshifter_select_shape()
+/mob/living/human/proc/shapeshifter_select_shape()
 
 	set name = "Select Body Shape"
 	set category = "Abilities"
@@ -101,7 +101,7 @@ var/global/list/wrapped_species_by_ref = list()
 	visible_message("<span class='notice'>\The [src] shifts and contorts, taking the form of \a ["\improper [new_species]"]!</span>")
 	try_refresh_visible_overlays()
 
-/mob/living/carbon/human/proc/shapeshifter_select_colour()
+/mob/living/human/proc/shapeshifter_select_colour()
 
 	set name = "Select Body Colour"
 	set category = "Abilities"
@@ -116,7 +116,7 @@ var/global/list/wrapped_species_by_ref = list()
 		return
 	shapeshifter_set_colour(new_skin)
 
-/mob/living/carbon/human/proc/shapeshifter_set_colour(var/new_skin)
+/mob/living/human/proc/shapeshifter_set_colour(var/new_skin)
 	set_skin_colour(new_skin, skip_update = TRUE)
 	var/decl/species/shapeshifter/S = species
 	if(S.monochromatic)

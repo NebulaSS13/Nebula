@@ -16,7 +16,7 @@
 	hands =      list(/obj/item/gun/launcher/alien/spikethrower)
 	id_type =    /obj/item/card/id/syndicate
 
-/decl/hierarchy/outfit/vox_raider/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
+/decl/hierarchy/outfit/vox_raider/equip_outfit(mob/living/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	uniform = pick(/obj/item/clothing/suit/robe/vox, /obj/item/clothing/pants/vox)
 	glasses = pick(/obj/item/clothing/glasses/thermal, /obj/item/clothing/glasses/thermal/plain/eyepatch, /obj/item/clothing/glasses/thermal/plain/monocle)
 	holster = pick(/obj/item/clothing/webbing/holster/armpit, /obj/item/clothing/webbing/holster/waist, /obj/item/clothing/webbing/holster/hip)
@@ -44,14 +44,14 @@
 		return ..()
 
 	var/decl/hierarchy/outfit/outfit = GET_DECL(/decl/hierarchy/outfit/vox_raider)
-	var/mob/living/carbon/human/vox/vox = new(get_turf(src), SPECIES_VOX)
+	var/mob/living/human/vox/vox = new(get_turf(src), SPECIES_VOX)
 	outfit.equip_outfit(vox)
 	if(user.mind)
 		user.mind.transfer_to(vox)
 	qdel(user)
 	addtimer(CALLBACK(src, PROC_REF(do_post_voxifying), vox), 1)
 
-/obj/structure/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
+/obj/structure/mirror/raider/proc/do_post_voxifying(var/mob/living/human/vox)
 	var/newname = sanitize_safe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if(!newname || newname == "")
 		var/decl/cultural_info/voxculture = GET_DECL(/decl/cultural_info/culture/vox/raider)

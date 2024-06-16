@@ -5,12 +5,12 @@ var/global/list/stored_shock_by_ref = list()
 		target.electrocute_act(stored_shock_by_ref["\ref[src]"]*0.9, src)
 		stored_shock_by_ref["\ref[src]"] = 0
 
-/decl/species/proc/toggle_stance(var/mob/living/carbon/human/H)
+/decl/species/proc/toggle_stance(var/mob/living/human/H)
 	if(!H.incapacitated())
 		H.pulling_punches = !H.pulling_punches
 		to_chat(H, "<span class='notice'>You are now [H.pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
 
-/decl/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
+/decl/species/proc/fluid_act(var/mob/living/human/H, var/datum/reagents/fluids)
 	SHOULD_CALL_PARENT(TRUE)
 	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
 	if(water >= 40 && H.get_damage(PAIN))
@@ -23,7 +23,7 @@ var/global/list/stored_shock_by_ref = list()
 		return FALSE
 	else if(!isnull(max_players))
 		var/player_count = 0
-		for(var/mob/living/carbon/human/H in global.living_mob_list_)
+		for(var/mob/living/human/H in global.living_mob_list_)
 			if(H.client && H.key && H.species == src)
 				player_count++
 				if(player_count >= max_players)
@@ -42,23 +42,23 @@ var/global/list/stored_shock_by_ref = list()
 //	pref.hair_colour = default_bodytype.base_hair_color
 //	pref.facial_hair_colour = default_bodytype.base_hair_color
 
-/decl/species/proc/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
+/decl/species/proc/equip_default_fallback_uniform(var/mob/living/human/H)
 	if(istype(H))
 		H.equip_to_slot_or_del(new /obj/item/clothing/shirt/harness, slot_w_uniform_str)
 
-/decl/species/proc/get_hazard_high_pressure(var/mob/living/carbon/human/H)
+/decl/species/proc/get_hazard_high_pressure(var/mob/living/human/H)
 	return hazard_high_pressure
 
-/decl/species/proc/get_warning_high_pressure(var/mob/living/carbon/human/H)
+/decl/species/proc/get_warning_high_pressure(var/mob/living/human/H)
 	return warning_high_pressure
 
-/decl/species/proc/get_warning_low_pressure(var/mob/living/carbon/human/H)
+/decl/species/proc/get_warning_low_pressure(var/mob/living/human/H)
 	return warning_low_pressure
 
-/decl/species/proc/get_hazard_low_pressure(var/mob/living/carbon/human/H)
+/decl/species/proc/get_hazard_low_pressure(var/mob/living/human/H)
 	return hazard_low_pressure
 
-/decl/species/proc/get_shock_vulnerability(var/mob/living/carbon/human/H)
+/decl/species/proc/get_shock_vulnerability(var/mob/living/human/H)
 	return shock_vulnerability
 
 /decl/species/proc/adjust_status(mob/living/target, condition, amount)

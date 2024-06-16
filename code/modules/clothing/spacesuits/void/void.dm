@@ -101,7 +101,7 @@ else if(##equipment_var) {\
 /obj/item/clothing/suit/space/void/equipped(mob/M)
 	..()
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 
 	if(!istype(H)) return
 
@@ -132,7 +132,7 @@ else if(##equipment_var) {\
 /obj/item/clothing/suit/space/void/dropped()
 	..()
 
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 
 	if(helmet)
 		helmet.canremove = 1
@@ -164,7 +164,7 @@ else if(##equipment_var) {\
 		to_chat(usr, "There is no helmet installed.")
 		return
 
-	var/mob/living/carbon/human/H = usr
+	var/mob/living/human/H = usr
 
 	if(!istype(H)) return
 	if(H.incapacitated()) return
@@ -199,7 +199,7 @@ else if(##equipment_var) {\
 		to_chat(usr, "There is no tank inserted.")
 		return
 
-	var/mob/living/carbon/human/H = usr
+	var/mob/living/human/H = usr
 
 	if(!istype(H)) return
 	if(H.incapacitated()) return

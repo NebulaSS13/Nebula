@@ -130,7 +130,7 @@
 			return
 		if(ishuman(target))
 			var/amount = REAGENTS_FREE_SPACE(reagents)
-			var/mob/living/carbon/human/T = target
+			var/mob/living/human/T = target
 			if(!T.dna)
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
 				if(ishuman(target))
@@ -271,7 +271,7 @@
 
 	if(ishuman(target))
 
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 
 		var/target_zone = check_zone(user.get_target_zone(), H)
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, target_zone)
@@ -306,7 +306,7 @@
 	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)
 
-/obj/item/chems/syringe/proc/break_syringe(mob/living/carbon/human/target, mob/living/user)
+/obj/item/chems/syringe/proc/break_syringe(mob/living/human/target, mob/living/user)
 	desc += " It is broken."
 	mode = SYRINGE_BROKEN
 	if(target)

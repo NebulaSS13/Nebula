@@ -168,7 +168,7 @@
 
 	if(ishuman(owner))
 
-		var/mob/living/carbon/human/H = owner
+		var/mob/living/human/H = owner
 
 		// Fix some pain.
 		if(heal_rate > 0)

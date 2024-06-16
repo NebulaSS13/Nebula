@@ -1,13 +1,13 @@
 /datum/unit_test/vision_glasses
 	name = "EQUIPMENT: Vision Template"
 	template = /datum/unit_test/vision_glasses
-	var/mob/living/carbon/human/H = null
+	var/mob/living/human/H = null
 	var/expectation = SEE_INVISIBLE_NOLIGHTING
 	var/glasses_type = null
 	async = 1
 
 /datum/unit_test/vision_glasses/start_test()
-	var/list/test = create_test_mob_with_mind(get_safe_turf(), /mob/living/carbon/human)
+	var/list/test = create_test_mob_with_mind(get_safe_turf(), /mob/living/human)
 	if(isnull(test))
 		fail("Check Runtimed in Mob creation")
 
@@ -129,7 +129,7 @@
 		"[slot_wear_suit_str]" = /obj/item/clothing/suit/chickensuit
 	)
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_equip_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_equip_successful(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	created_atoms |= item
 	subject.equip_to_slot_if_possible(item, which_slot)
 	if(!subject.isEquipped(item))
@@ -138,13 +138,13 @@
 		var/equipped_location = subject.get_equipped_slot_for_item(item)
 		failure_list += "[item] was expected to be equipped to [which_slot] but get_equipped_slot_for_item returned [isnull(equipped_location) ? "NULL" : equipped_location]."
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_unequip_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_unequip_successful(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	created_atoms |= item
 	subject.try_unequip(item)
 	if(subject.isEquipped(item))
 		failure_list += "[item] remained equipped to [subject.get_equipped_slot_for_item(item)] after unEquip was called."
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_equip_failure(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_equip_failure(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	created_atoms |= item
 	subject.equip_to_slot_if_possible(item, which_slot)
 	if(subject.isEquipped(item))
@@ -155,7 +155,7 @@
 		failure_list += "[item] was equipped to [equipped_location] despite failing isEquipped (should not be equipped)."
 
 /datum/unit_test/equipment_slot_test/start_test()
-	var/mob/living/carbon/human/subject = new(get_safe_turf(), SPECIES_HUMAN) // force human so default map species doesn't mess with anything
+	var/mob/living/human/subject = new(get_safe_turf(), SPECIES_HUMAN) // force human so default map species doesn't mess with anything
 	created_atoms |= subject
 	var/list/failures = list()
 

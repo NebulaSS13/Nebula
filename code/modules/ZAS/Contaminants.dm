@@ -49,7 +49,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 
 /mob/proc/contaminate()
 
-/mob/living/carbon/human/contaminate()
+/mob/living/human/contaminate()
 	//See if anything can be contaminated.
 
 	if(!contaminant_suit_protected())
@@ -65,7 +65,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 /mob/proc/handle_contaminants()
 	return
 
-/mob/living/carbon/human/handle_contaminants()
+/mob/living/human/handle_contaminants()
 	//Handles all the bad things contaminants can do.
 
 	//Contamination
@@ -101,7 +101,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 			domutcheck(src,null)
 
 
-/mob/living/carbon/human/proc/burn_eyes()
+/mob/living/human/proc/burn_eyes()
 	var/obj/item/organ/internal/eyes/E = get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 	if(E && !E.bodytype.eye_contaminant_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
@@ -111,7 +111,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 			to_chat(src, "<span class='danger'>You are blinded!</span>")
 			SET_STATUS_MAX(src, STAT_BLIND, 20)
 
-/mob/living/carbon/human/proc/contaminant_head_protected()
+/mob/living/human/proc/contaminant_head_protected()
 	//Checks if the head is adequately sealed.
 	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(!head)
@@ -123,7 +123,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	// Regardless, the head item must cover the face and head. Eyes are checked seperately above.
 	return BIT_TEST_ALL(head.body_parts_covered, SLOT_HEAD|SLOT_FACE)
 
-/mob/living/carbon/human/proc/contaminant_suit_protected()
+/mob/living/human/proc/contaminant_suit_protected()
 	//Checks if the suit is adequately sealed.
 	var/coverage = 0
 	for(var/slot in list(slot_wear_suit_str, slot_gloves_str, slot_shoes_str))
@@ -139,7 +139,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 
 	return BIT_TEST_ALL(coverage, SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS)
 
-/mob/living/carbon/human/proc/suit_contamination()
+/mob/living/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.
 	for(var/slot in list(slot_w_uniform_str, slot_shoes_str, slot_gloves_str))
 		var/obj/item/gear = get_equipped_item(slot)

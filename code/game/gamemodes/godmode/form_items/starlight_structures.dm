@@ -61,7 +61,7 @@
 		to_chat(linked_god,"<span class='warning'>\The [src] disappears from your lack of power!</span>")
 		qdel(src)
 		return
-	var/mob/living/carbon/human/target
+	var/mob/living/human/target
 	if(target_ref)
 		target = target_ref.resolve()
 	if(target)
@@ -87,7 +87,7 @@
 				power_drain -= 3
 	else
 		//Get new target
-		var/mob/living/carbon/human/T = locate() in get_turf(src)
+		var/mob/living/human/T = locate() in get_turf(src)
 		if(T)
 			target_ref = weakref(T)
 			start_time = world.time
@@ -123,7 +123,7 @@
 	if(href_list["accept"] && istype(user,/mob/living/starlight_soul))
 		if(href_list["accept"] != looking_for)
 			return TOPIC_HANDLED
-		var/mob/living/carbon/human/H = new(get_turf(src))
+		var/mob/living/human/H = new(get_turf(src))
 		user.mind.transfer_to(H)
 		H.set_species(possible_forms[looking_for]["species"])
 		for(var/s in possible_forms[looking_for]["spells"])

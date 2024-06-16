@@ -76,7 +76,7 @@ var/global/list/gyne_architecture = list(
 	queens."
 
 /decl/cultural_info/culture/ascent/get_random_name(var/mob/M, var/gender)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	var/lineage = create_gyne_name()
 	if(istype(H) && H.dna.lineage)
 		lineage = H.dna.lineage

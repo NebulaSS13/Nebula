@@ -214,7 +214,7 @@
 		var/tramount = abs(transfer_amount)
 
 		if(ishuman(AM))
-			var/mob/living/carbon/human/H = AM
+			var/mob/living/human/H = AM
 			var/injection_status = H.can_inject(null, BP_CHEST)
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)

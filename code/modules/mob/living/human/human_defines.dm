@@ -1,4 +1,4 @@
-/mob/living/carbon/human
+/mob/living/human
 
 	ai = /datum/ai/human
 	mob_bump_flag = HUMAN

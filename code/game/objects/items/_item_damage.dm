@@ -79,7 +79,7 @@
 			playsound(hit_atom, 'sound/weapons/throwtap.ogg', volume, TRUE, -1)
 
 /obj/item/proc/eyestab(mob/living/M, mob/living/user)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(istype(H))
 		for(var/slot in global.standard_headgear_slots)
 			var/obj/item/protection = H.get_equipped_item(slot)

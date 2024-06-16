@@ -32,7 +32,7 @@
 /obj/item/clothing/badge/proc/set_name(var/new_name)
 	stored_name = new_name
 
-/obj/item/clothing/badge/proc/set_desc(var/mob/living/carbon/human/H)
+/obj/item/clothing/badge/proc/set_desc(var/mob/living/human/H)
 
 /obj/item/clothing/badge/get_examine_line()
 	. = ..()

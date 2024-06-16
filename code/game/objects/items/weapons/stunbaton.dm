@@ -110,7 +110,7 @@
 	var/stun = stunforce
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		affecting = GET_EXTERNAL_ORGAN(H, hit_zone)
 	var/abuser =  user ? "" : "by [user]"
 	if(user && user.a_intent == I_HURT)
@@ -144,7 +144,7 @@
 		deductcharge(hitcost)
 
 		if(ishuman(target))
-			var/mob/living/carbon/human/H = target
+			var/mob/living/human/H = target
 			H.forcesay(global.hit_appends)
 
 	return 1

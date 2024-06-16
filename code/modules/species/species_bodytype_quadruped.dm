@@ -19,7 +19,7 @@
 	var/ridable = TRUE
 	var/riding_offset = @"{'x':0,'y':0,'z':8}"
 
-/decl/bodytype/quadruped/apply_appearance(var/mob/living/carbon/human/H)
+/decl/bodytype/quadruped/apply_appearance(var/mob/living/human/H)
 	. = ..()
 	H.can_buckle         = ridable
 	H.buckle_pixel_shift = riding_offset

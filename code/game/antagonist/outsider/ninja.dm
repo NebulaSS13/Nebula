@@ -84,7 +84,7 @@
 	..()
 	var/ninja_title = pick(global.ninja_titles)
 	var/ninja_name = pick(global.ninja_names)
-	var/mob/living/carbon/human/H = player.current
+	var/mob/living/human/H = player.current
 	if(istype(H))
 		H.real_name = "[ninja_title] [ninja_name]"
 		H.SetName(H.real_name)
@@ -98,7 +98,7 @@
 	hands =   list(/obj/item/modular_computer/pda/ninja)
 	id_type = /obj/item/card/id/syndicate
 
-/decl/special_role/ninja/equip_role(var/mob/living/carbon/human/player)
+/decl/special_role/ninja/equip_role(var/mob/living/human/player)
 	. = ..()
 	if(.)
 		var/decl/uplink_source/pda/uplink_source = GET_DECL(/decl/uplink_source/pda)

@@ -399,7 +399,7 @@
 			shake_camera(user, max(burst_delay*burst, fire_delay), screen_shake)
 
 		if(ishuman(user) && user.is_cloaked()) //shooting will disable a rig cloaking device
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			var/obj/item/rig/rig = H.get_rig()
 			if(rig)
 				for(var/obj/item/rig_module/stealth_field/S in rig.installed_modules)
@@ -510,7 +510,7 @@
 	//shooting while in shock
 	var/shock_dispersion = 0
 	if(ishuman(firer))
-		var/mob/living/carbon/human/mob = firer
+		var/mob/living/human/mob = firer
 		if(mob.shock_stage > 120)
 			shock_dispersion = rand(-4,4)
 		else if(mob.shock_stage > 70)
@@ -541,7 +541,7 @@
 /obj/item/gun/proc/handle_suicide(mob/living/user)
 	if(!ishuman(user))
 		return
-	var/mob/living/carbon/human/M = user
+	var/mob/living/human/M = user
 
 	mouthshoot = 1
 	admin_attacker_log(user, "is attempting to suicide with \a [src]")

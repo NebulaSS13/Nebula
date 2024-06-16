@@ -8,7 +8,7 @@
 	invocation_type = SpI_NONE
 	range = 5
 	max_targets = 1
-	compatible_mobs = list(/mob/living/carbon/human)
+	compatible_mobs = list(/mob/living/human)
 
 	time_between_channels = 50
 	number_of_channels = 0
@@ -16,7 +16,7 @@
 	hud_state = "wiz_boilblood"
 
 /spell/targeted/blood_boil/cast(var/list/targets, var/mob/user)
-	var/mob/living/carbon/human/H = targets[1]
+	var/mob/living/human/H = targets[1]
 	H.bodytemperature += 40
 	if(prob(10))
 		to_chat(H,"<span class='warning'>\The [user] seems to radiate an uncomfortable amount of heat your direction.</span>")

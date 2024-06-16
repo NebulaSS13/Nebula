@@ -27,7 +27,7 @@
 		if(issilicon(A))
 			return FALSE
 		if(ishuman(A))
-			var/mob/living/carbon/human/H = A
+			var/mob/living/human/H = A
 			if(H.isSynthetic())
 				return FALSE
 			var/obj/item/head = H.get_equipped_item(slot_head_str)

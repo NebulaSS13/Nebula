@@ -52,7 +52,7 @@
 		if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
 			continue
 		if(ishuman(target))
-			var/mob/living/carbon/human/H = target
+			var/mob/living/human/H = target
 			if(prob(5 * (1 - H.get_blocked_ratio(null, IRRADIATE, damage_flags = DAM_DISPERSED, armor_pen = radiation_level))))
 				if (prob(75))
 					randmutb(H) // Applies bad mutation

@@ -84,7 +84,7 @@
 			return FALSE
 
 		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			if (H.is_cloaked())
 				return FALSE
 
@@ -125,7 +125,7 @@
 		LostTarget()
 		return 0
 	if (ishuman(target_mob))
-		var/mob/living/carbon/human/H = target_mob
+		var/mob/living/human/H = target_mob
 		if (H.is_cloaked())
 			LoseTarget()
 			return 0

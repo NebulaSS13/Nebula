@@ -70,7 +70,7 @@
 		)
 	return ..()
 
-/decl/bodytype/vox/get_movement_slowdown(var/mob/living/carbon/human/H)
+/decl/bodytype/vox/get_movement_slowdown(var/mob/living/human/H)
 	if(H && global.vox_current_pressure_toggle["\ref[H]"])
 		return 1.5
 	return ..()

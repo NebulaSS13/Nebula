@@ -121,7 +121,7 @@
 /decl/material/liquid/heartstopper/affect_overdose(mob/living/M, total_dose)
 	..()
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(H.stat != UNCONSCIOUS)
 			if(H.ticks_since_last_successful_breath >= 10)
 				H.ticks_since_last_successful_breath = max(10, H.ticks_since_last_successful_breath-10)
@@ -257,7 +257,7 @@
 /decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if (ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/true_dose = LAZYACCESS(H.chem_doses, type) + REAGENT_VOLUME(holder, type)
 		if (true_dose >= amount_to_zombify)
 			H.zombify()

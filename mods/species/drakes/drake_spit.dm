@@ -15,7 +15,7 @@
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.
 	if(ishuman(target))
-		var/mob/living/carbon/human/victim = target
+		var/mob/living/human/victim = target
 		SET_STATUS_MAX(victim, STAT_CONFUSE, max(stun, weaken))
 		stun = 0
 		weaken = 0

@@ -42,7 +42,7 @@
 			var/sample = REAGENT_DATA(S.reagents, /decl/material/liquid/blood)
 			if(islist(sample))
 				var/weakref/R = sample["donor"]
-				var/mob/living/carbon/human/H = R.resolve()
+				var/mob/living/human/H = R.resolve()
 				if(H && istype(H) && H.species && H.dna)
 					loaded_dna = H.dna.Clone()
 					to_chat(user, SPAN_INFO("You inject the blood sample into \the [src]."))

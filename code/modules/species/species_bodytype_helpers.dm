@@ -1,4 +1,4 @@
-/decl/bodytype/proc/get_ignited_icon(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_ignited_icon(var/mob/living/human/H)
 	return ignited_icon
 
 /decl/bodytype/proc/get_icon_cache_uid(var/mob/H)
@@ -6,28 +6,28 @@
 		icon_cache_uid = "[sequential_id(/decl/bodytype)]"
 	return icon_cache_uid
 
-/decl/bodytype/proc/get_bandages_icon(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_bandages_icon(var/mob/living/human/H)
 	return bandages_icon
 
-/decl/bodytype/proc/get_blood_overlays(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_blood_overlays(var/mob/living/human/H)
 	return blood_overlays
 
-/decl/bodytype/proc/get_damage_overlays(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_damage_overlays(var/mob/living/human/H)
 	return damage_overlays
 
-/decl/bodytype/proc/get_husk_icon(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_husk_icon(var/mob/living/human/H)
 	return husk_icon
 
-/decl/bodytype/proc/get_skeletal_icon(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_skeletal_icon(var/mob/living/human/H)
 	return skeletal_icon
 
 /decl/bodytype/proc/get_cosmetics_icon(var/decl/sprite_accessory/cosmetics/cosmetics_style)
 	return cosmetics_icon
 
-/decl/bodytype/proc/get_vulnerable_location(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/get_vulnerable_location(var/mob/living/human/H)
 	return vulnerable_location
 
-/decl/bodytype/proc/get_base_icon(var/mob/living/carbon/human/H, var/get_deform)
+/decl/bodytype/proc/get_base_icon(var/mob/living/human/H, var/get_deform)
 	return get_deform ? icon_deformed : icon_base
 
 /decl/bodytype/proc/handle_post_bodytype_pref_set(datum/preferences/pref)
@@ -52,7 +52,7 @@
 		for(var/accessory in default_sprite_accessories[accessory_category])
 			pref.sprite_accessories[accessory_category][accessory] = default_sprite_accessories[accessory_category][accessory]
 
-/decl/bodytype/proc/apply_appearance(var/mob/living/carbon/human/H)
+/decl/bodytype/proc/apply_appearance(var/mob/living/human/H)
 	if(base_color)
 		H.set_skin_colour(base_color)
 

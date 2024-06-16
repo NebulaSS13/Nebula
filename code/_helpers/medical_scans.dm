@@ -1,5 +1,5 @@
-/mob/living/carbon/human/proc/get_raw_medical_data(var/tag = FALSE)
-	var/mob/living/carbon/human/H = src
+/mob/living/human/proc/get_raw_medical_data(var/tag = FALSE)
+	var/mob/living/human/H = src
 	var/list/scan = list()
 
 	scan["name"] = H.name

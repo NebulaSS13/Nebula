@@ -80,7 +80,7 @@
 	if(!victim || !victim.current_posture.prone || victim.loc != loc)
 		suppressing = FALSE
 		victim = null
-		for(var/mob/living/carbon/human/H in loc)
+		for(var/mob/living/human/H in loc)
 			if(H.current_posture.prone)
 				victim = H
 				break
@@ -93,7 +93,7 @@
 /obj/machinery/optable/on_update_icon()
 	icon_state = "table2-idle"
 	if(ishuman(victim))
-		var/mob/living/carbon/human/H = victim
+		var/mob/living/human/H = victim
 		if(H.get_pulse())
 			icon_state = "table2-active"
 

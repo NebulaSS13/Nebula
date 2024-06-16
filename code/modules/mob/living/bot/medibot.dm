@@ -78,7 +78,7 @@
 /mob/living/bot/medbot/lookForTargets()
 	if(is_tipped) // Don't look for targets if we're incapacitated!
 		return
-	for(var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
+	for(var/mob/living/human/H in view(7, src)) // Time to find a patient!
 		if(confirmTarget(H))
 			target = H
 			if(last_newpatient_speak + 300 < world.time && vocal)
@@ -95,7 +95,7 @@
 				last_newpatient_speak = world.time
 			break
 
-/mob/living/bot/medbot/UnarmedAttack(var/mob/living/carbon/human/H, var/proximity)
+/mob/living/bot/medbot/UnarmedAttack(var/mob/living/human/H, var/proximity)
 	. = ..()
 	if(.)
 		return
@@ -297,7 +297,7 @@
 			reagent_glass.forceMove(my_turf)
 			reagent_glass = null
 
-/mob/living/bot/medbot/confirmTarget(var/mob/living/carbon/human/H)
+/mob/living/bot/medbot/confirmTarget(var/mob/living/human/H)
 	if(!..())
 		return 0
 

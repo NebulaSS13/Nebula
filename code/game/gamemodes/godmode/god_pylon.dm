@@ -42,7 +42,7 @@
 	intuned -= L
 	events_repository.unregister(/decl/observ/destroyed, L, src)
 
-/obj/structure/deity/pylon/OnTopic(var/mob/living/carbon/human/user, var/href_list)
+/obj/structure/deity/pylon/OnTopic(var/mob/living/human/user, var/href_list)
 	if(href_list["vision_jump"])
 		if(istype(user))
 			to_chat(user,"<span class='warning'>You feel your body lurch uncomfortably as your consciousness jumps to \the [src]</span>")

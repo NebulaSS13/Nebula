@@ -14,7 +14,7 @@
 /proc/randmutb(var/mob/living/M)
 	if(!M) return
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
@@ -25,7 +25,7 @@
 /proc/randmutg(var/mob/living/M)
 	if(!M) return
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
@@ -64,7 +64,7 @@
 /mob/proc/UpdateAppearance(var/list/UI=null)
 	return FALSE
 
-/mob/living/carbon/human/UpdateAppearance(var/list/UI=null)
+/mob/living/human/UpdateAppearance(var/list/UI=null)
 
 	if(UI!=null)
 		src.dna.UI=UI

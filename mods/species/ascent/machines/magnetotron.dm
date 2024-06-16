@@ -19,7 +19,7 @@
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
 		return ..()
 
-	var/mob/living/carbon/human/target = locate() in contents
+	var/mob/living/human/target = locate() in contents
 	if(isnull(target))
 		display_message("No biological signature detected in [src].")
 		return TRUE
@@ -58,7 +58,7 @@
 
 
 /obj/machinery/ascent_magnetotron/proc/get_total_gynes()
-	for(var/mob/living/carbon/human/H in global.living_mob_list_)
+	for(var/mob/living/human/H in global.living_mob_list_)
 		if(H.get_species_name() == SPECIES_MANTID_GYNE)
 			. += 1
 

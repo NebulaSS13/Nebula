@@ -41,7 +41,7 @@
 		inhaled.my_atom = src
 	. = ..()
 
-/obj/item/organ/internal/lungs/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+/obj/item/organ/internal/lungs/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place)
 	if(!(. = ..()))
 		return
 	inhaled.my_atom = owner

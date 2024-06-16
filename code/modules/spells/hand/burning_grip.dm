@@ -10,7 +10,7 @@
 	spell_delay = 120
 	hud_state = "wiz_burn"
 	cast_sound = 'sound/magic/fireball.ogg'
-	compatible_targets = list(/mob/living/carbon/human)
+	compatible_targets = list(/mob/living/human)
 
 /spell/hand/burning_grip/valid_target(var/mob/living/L, var/mob/user)
 	if(!..())
@@ -19,7 +19,7 @@
 		return 0
 	return 1
 
-/spell/hand/burning_grip/cast_hand(var/mob/living/carbon/human/H, var/mob/user)
+/spell/hand/burning_grip/cast_hand(var/mob/living/human/H, var/mob/user)
 	var/list/targets = list()
 	for(var/hand_slot in H.get_held_item_slots())
 		targets |= hand_slot

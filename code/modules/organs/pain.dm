@@ -49,7 +49,7 @@
 		if(!(use_emote.message_type == AUDIBLE_MESSAGE &&HAS_STATUS(src, STAT_SILENCE)))
 			emote(force_emote)
 
-/mob/living/carbon/human/proc/handle_pain()
+/mob/living/human/proc/handle_pain()
 	if(stat)
 		return
 	if(!can_feel_pain())

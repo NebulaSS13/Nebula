@@ -1,6 +1,6 @@
 /datum/ai/monkey
 	name = "monkey"
-	expected_type = /mob/living/carbon/human
+	expected_type = /mob/living/human
 	var/list/no_touchie = list(
 		/obj/item/mirror,
 		/obj/structure/mirror

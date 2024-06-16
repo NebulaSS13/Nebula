@@ -6,19 +6,19 @@
 /datum/hallucination/telepathy/start()
 	. = ..()
 	to_chat(holder, SPAN_NOTICE("You expand your mind outwards."))
-	holder.verbs += /mob/living/carbon/human/proc/fakeremotesay
+	holder.verbs += /mob/living/human/proc/fakeremotesay
 
 /datum/hallucination/telepathy/end()
 	. = ..()
 	if(holder)
-		holder.verbs -= /mob/living/carbon/human/proc/fakeremotesay
+		holder.verbs -= /mob/living/human/proc/fakeremotesay
 
-/mob/living/carbon/human/proc/fakeremotesay()
+/mob/living/human/proc/fakeremotesay()
 	set name = "Telepathic Message"
 	set category = "Superpower"
 
 	if(!hallucination_power)
-		src.verbs -= /mob/living/carbon/human/proc/fakeremotesay
+		src.verbs -= /mob/living/human/proc/fakeremotesay
 		return
 
 	if(stat)

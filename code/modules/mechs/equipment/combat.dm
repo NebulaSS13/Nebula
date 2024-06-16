@@ -478,7 +478,7 @@
 				flash_time /= 2
 
 			if(ishuman(O))
-				var/mob/living/carbon/human/H = O
+				var/mob/living/human/H = O
 				flash_time = round(H.getFlashMod() * flash_time)
 				if(flash_time <= 0)
 					return
@@ -524,7 +524,7 @@
 				flash_time /= 2
 
 			if(ishuman(O))
-				var/mob/living/carbon/human/H = O
+				var/mob/living/human/H = O
 				flash_time = round(H.getFlashMod() * flash_time)
 				if(flash_time <= 0)
 					return

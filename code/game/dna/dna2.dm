@@ -109,7 +109,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	if(!defer)
 		UpdateUI()
 
-/datum/dna/proc/ResetUIFrom(var/mob/living/carbon/human/character)
+/datum/dna/proc/ResetUIFrom(var/mob/living/human/character)
 	// INITIALIZE!
 	ResetUI(1)
 
@@ -327,7 +327,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 // BACK-COMPAT!
 //  Just checks our character has all the crap it needs.
-/datum/dna/proc/check_integrity(var/mob/living/carbon/human/character)
+/datum/dna/proc/check_integrity(var/mob/living/human/character)
 	if(character)
 		if(UI.len != DNA_UI_LENGTH)
 			ResetUIFrom(character)
@@ -347,7 +347,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 // BACK-COMPAT!
 //  Initial DNA setup.  I'm kind of wondering why the hell this doesn't just call the above.
-/datum/dna/proc/ready_dna(mob/living/carbon/human/character)
+/datum/dna/proc/ready_dna(mob/living/human/character)
 	ResetUIFrom(character)
 	ResetSE()
 	unique_enzymes = character.get_unique_enzymes()

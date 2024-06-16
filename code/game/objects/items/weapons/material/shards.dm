@@ -25,7 +25,7 @@
 /obj/item/shard/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	. = ..()
 	if(. && !has_handle && ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(!H.get_equipped_item(slot_gloves_str) && !(H.species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
 			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 			if(istype(hand) && !BP_IS_PROSTHETIC(hand))

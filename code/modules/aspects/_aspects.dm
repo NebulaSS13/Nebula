@@ -174,7 +174,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 				do_update = TRUE
 	return do_update
 
-/mob/living/carbon/human/apply_aspects(var/aspect_type)
+/mob/living/human/apply_aspects(var/aspect_type)
 	. = ..(aspect_type)
 	if(.)
 		update_body()

@@ -19,7 +19,7 @@
 /obj/structure/charge_pylon/proc/charge_user(var/mob/living/user)
 	if(next_use > world.time) return
 	next_use = world.time + 10
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	var/obj/item/cell/power_cell
 	if(ishuman(user))
 		var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)

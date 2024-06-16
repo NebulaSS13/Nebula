@@ -107,6 +107,6 @@
 	LAZYDISTINCTADD(available_cultural_info[TAG_CULTURE], /decl/cultural_info/culture/lizard)
 	LAZYSET(default_cultural_info, TAG_CULTURE, /decl/cultural_info/culture/lizard)
 
-/decl/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
+/decl/species/unathi/equip_survival_gear(var/mob/living/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H), slot_shoes_str)

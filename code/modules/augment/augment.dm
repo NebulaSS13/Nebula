@@ -27,7 +27,7 @@
 		return
 	..()
 
-/obj/item/organ/internal/augment/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
+/obj/item/organ/internal/augment/do_install(var/mob/living/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
 	. = ..()
 	parent_organ = affected.organ_tag
 	update_parent_organ()

@@ -1,5 +1,5 @@
 //Lallander was here
-/mob/living/carbon/human/whisper(message as text)
+/mob/living/human/whisper(message as text)
 
 	if(filter_block_message(src, message))
 		return
@@ -24,5 +24,5 @@
 
 
 //This is used by both the whisper verb and human/say() to handle whispering
-/mob/living/carbon/human/proc/whisper_say(var/message, var/decl/language/speaking = null, var/alt_name="", var/verb="whispers")
+/mob/living/human/proc/whisper_say(var/message, var/decl/language/speaking = null, var/alt_name="", var/verb="whispers")
 	say(message, speaking, verb, alt_name, whispering = TRUE)

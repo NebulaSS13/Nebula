@@ -681,7 +681,7 @@
 /turf/add_blood(mob/living/M)
 	if(!simulated || !..() || !ishuman(M))
 		return FALSE
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	var/unique_enzymes = H.get_unique_enzymes()
 	var/blood_type     = H.get_blood_type()
 	if(unique_enzymes && blood_type)

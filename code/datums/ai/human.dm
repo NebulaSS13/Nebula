@@ -1,9 +1,9 @@
 /datum/ai/human
 	name = "human"
-	expected_type = /mob/living/carbon/human
+	expected_type = /mob/living/human
 
 /datum/ai/human/do_process(var/time_elapsed)
-	var/mob/living/carbon/human/H = body
+	var/mob/living/human/H = body
 	if(H.stat != CONSCIOUS)
 		return
 

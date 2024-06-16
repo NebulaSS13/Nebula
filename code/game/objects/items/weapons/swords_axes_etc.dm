@@ -22,7 +22,7 @@
 		to_chat(user, SPAN_WARNING("You club yourself over the head."))
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			H.apply_damage(2*force, BRUTE, BP_HEAD)
 		else
 			user.take_organ_damage(2*force)
@@ -78,7 +78,7 @@
 		to_chat(user, SPAN_DANGER("You club yourself over the head."))
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			H.apply_damage(2*force, BRUTE, BP_HEAD)
 		else
 			user.take_organ_damage(2*force)

@@ -43,7 +43,7 @@
 	survive.owner = player
 	player.objectives |= survive
 
-/decl/special_role/renegade/equip_role(var/mob/living/carbon/human/player)
+/decl/special_role/renegade/equip_role(var/mob/living/human/player)
 	. = ..()
 	if(.)
 		var/gun_type = pick(spawn_guns)

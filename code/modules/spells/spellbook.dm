@@ -161,7 +161,7 @@ var/global/list/artefact_feedback = list(
 			dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	show_browser(user, dat, "window=spellbook")
 
-/obj/item/spellbook/CanUseTopic(var/mob/living/carbon/human/H)
+/obj/item/spellbook/CanUseTopic(var/mob/living/human/H)
 	if(!istype(H))
 		return STATUS_CLOSE
 
@@ -170,7 +170,7 @@ var/global/list/artefact_feedback = list(
 
 	return ..()
 
-/obj/item/spellbook/OnTopic(var/mob/living/carbon/human/user, href_list)
+/obj/item/spellbook/OnTopic(var/mob/living/human/user, href_list)
 	if(href_list["lock"] && !(spellbook.book_flags & NO_LOCKING))
 		if(spellbook.book_flags & LOCKED)
 			spellbook.book_flags &= ~LOCKED

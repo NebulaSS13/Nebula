@@ -117,7 +117,7 @@
 	min_rank =       PSI_RANK_MASTER
 	use_description = "Target the arms or hands on disarm intent to use a ranged attack that may rip the weapons away from the target."
 
-/decl/psionic_power/coercion/spasm/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
+/decl/psionic_power/coercion/spasm/invoke(var/mob/living/user, var/mob/living/human/target)
 	if(!istype(target))
 		return FALSE
 

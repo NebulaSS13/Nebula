@@ -53,5 +53,5 @@
 /obj/item/organ/external/head/utility_frame
 	glowing_eyes = TRUE
 
-/decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
+/decl/species/utility_frame/disfigure_msg(var/mob/living/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

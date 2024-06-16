@@ -332,7 +332,7 @@ var/global/list/hygiene_props = list()
 	var/temp_adj = clamp(water_temperature - M.bodytemperature, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(water_temperature >= H.get_mob_temperature_threshold(HEAT_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is searing hot!"))
 		else if(water_temperature <= H.get_mob_temperature_threshold(COLD_LEVEL_1))

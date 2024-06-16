@@ -25,7 +25,7 @@
 	var/list/bodytype_pairings = get_bodytype_species_pairs()
 	for(var/decl/bodytype/bodytype in bodytype_pairings)
 		var/decl/species/species = bodytype_pairings[bodytype]
-		var/mob/living/carbon/human/test_subject = new(null, species.name, null, bodytype)
+		var/mob/living/human/test_subject = new(null, species.name, null, bodytype)
 		if(test_subject.need_breathe())
 			test_subject.apply_effect(20, STUN, 0)
 			var/obj/item/organ/internal/lungs/L = test_subject.get_organ(test_subject.get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
@@ -36,13 +36,13 @@
 
 /datum/unit_test/human_breath/check_result()
 	for(var/i in test_subjects)
-		var/mob/living/carbon/human/test_subject = test_subjects[i][1]
+		var/mob/living/human/test_subject = test_subjects[i][1]
 		if(test_subject.life_tick < 10) 	// Finish Condition
 			return 0	// Return 0 to try again later.
 
 	var/failcount = 0
 	for(var/i in test_subjects)
-		var/mob/living/carbon/human/test_subject = test_subjects[i][1]
+		var/mob/living/human/test_subject = test_subjects[i][1]
 		var/ending_oxyloss = damage_check(test_subject, OXY)
 		var/starting_oxyloss = test_subjects[i][2]
 		if(starting_oxyloss >= ending_oxyloss)
@@ -60,7 +60,7 @@
 
 var/global/default_mobloc = null
 
-/proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
+/proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
 
 	if(isnull(mobloc))
@@ -77,7 +77,7 @@ var/global/default_mobloc = null
 		test_result["msg"] = "Unable to find a location to create test mob"
 		return test_result
 
-	var/mob/living/carbon/human/H = new mobtype(mobloc)
+	var/mob/living/human/H = new mobtype(mobloc)
 
 	H.mind_initialize("TestKey[rand(0,10000)]")
 
@@ -108,7 +108,7 @@ var/global/default_mobloc = null
 			loss = M.get_damage(PAIN)
 
 	if(!loss && ishuman(M))
-		var/mob/living/carbon/human/H = M            // Synthetics have robot limbs which don't report damage to get_damage(XXX)
+		var/mob/living/human/H = M            // Synthetics have robot limbs which don't report damage to get_damage(XXX)
 		if(H.isSynthetic())                          // So we have to hard code this check or create a different one for them.
 			return H.species.total_health - H.current_health
 	return loss
@@ -131,7 +131,7 @@ var/global/default_mobloc = null
 	name = "MOB: Template for mob damage"
 	template = /datum/unit_test/mob_damage
 	var/damagetype = BRUTE
-	var/mob_type = /mob/living/carbon/human
+	var/mob_type = /mob/living/human
 	var/expected_vulnerability = STANDARD
 	var/damage_location = BP_CHEST
 
@@ -147,7 +147,7 @@ var/global/default_mobloc = null
 		fail(test["msg"])
 		return 0
 
-	var/mob/living/carbon/human/H = locate(test["mobref"])
+	var/mob/living/human/H = locate(test["mobref"])
 
 	if(isnull(H))
 		fail("Test unable to set test mob from reference")
@@ -289,13 +289,13 @@ var/global/default_mobloc = null
 /datum/unit_test/mob_nullspace/start_test()
 	// Simply create one of each species type in nullspace
 	for(var/species_name in get_all_species())
-		var/test_subject = new/mob/living/carbon/human(null, species_name)
+		var/test_subject = new/mob/living/human(null, species_name)
 		test_subjects += test_subject
 	return TRUE
 
 /datum/unit_test/mob_nullspace/check_result()
 	for(var/ts in test_subjects)
-		var/mob/living/carbon/human/H = ts
+		var/mob/living/human/H = ts
 		if(H.life_tick < 10)
 			return FALSE
 
@@ -310,7 +310,7 @@ var/global/default_mobloc = null
 /datum/unit_test/mob_organ_size/start_test()
 	var/failed = FALSE
 	for(var/species_name in get_all_species())
-		var/mob/living/carbon/human/H = new(null, species_name)
+		var/mob/living/human/H = new(null, species_name)
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			for(var/obj/item/organ/internal/I in E.internal_organs)
 				if(I.w_class > E.cavity_max_w_class)

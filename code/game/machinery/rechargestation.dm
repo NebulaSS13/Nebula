@@ -82,7 +82,7 @@
 					C.repair()
 
 	if(ishuman(occupant))
-		var/mob/living/carbon/human/H = occupant
+		var/mob/living/human/H = occupant
 		var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(potato)
 			target = potato.cell
@@ -194,7 +194,7 @@
 		var/mob/living/silicon/robot/R = M
 		return (R.cell)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(H.isSynthetic())
 			return 1
 		var/obj/item/rig/rig = H.get_rig()

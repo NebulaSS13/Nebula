@@ -96,7 +96,7 @@
 		return 1
 	return 0
 
-/mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
+/mob/living/human/make_rune(var/rune, var/cost, var/tome_required)
 	if(should_have_organ(BP_HEART) && vessel && vessel.total_volume < species.blood_volume * 0.7)
 		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
@@ -105,7 +105,7 @@
 /mob/proc/remove_blood_simple(var/blood)
 	return
 
-/mob/living/carbon/human/remove_blood_simple(var/blood)
+/mob/living/human/remove_blood_simple(var/blood)
 	if(should_have_organ(BP_HEART))
 		vessel.remove_any(blood)
 
@@ -115,7 +115,7 @@
 /mob/living/silicon/get_blood_name()
 	return "oil"
 
-/mob/living/carbon/human/get_blood_name()
+/mob/living/human/get_blood_name()
 	if(species)
 		return species.get_blood_name(src)
 	return "blood"
@@ -126,7 +126,7 @@
 /mob/proc/mob_needs_tome()
 	return 0
 
-/mob/living/carbon/human/mob_needs_tome()
+/mob/living/human/mob_needs_tome()
 	return 1
 
 var/global/list/Tier1Runes = list(
@@ -312,7 +312,7 @@ var/global/list/Tier4Runes = list(
 /mob/proc/message_cult_communicate()
 	return
 
-/mob/living/carbon/human/message_cult_communicate()
+/mob/living/human/message_cult_communicate()
 	var/decl/pronouns/G = get_pronouns()
 	visible_message(SPAN_WARNING("\The [src] cuts [G.his] finger and starts drawing on the back of [G.his] hand."))
 

@@ -18,11 +18,11 @@
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/tradeship_robot/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/tradeship_robot/handle_variant_join(var/mob/living/human/H, var/alt_title)
 	if(H)
 		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
-/datum/job/tradeship_robot/equip_job(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/tradeship_robot/equip_job(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	return !!H
 
 /datum/job/tradeship_robot/New()

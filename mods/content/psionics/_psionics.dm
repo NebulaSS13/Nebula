@@ -25,7 +25,7 @@
 		. += "Only available for living mobs, sorry."
 	. = jointext(., null)
 
-/datum/preferences/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
+/datum/preferences/copy_to(mob/living/human/character, is_preview_copy = FALSE)
 	character = ..()
 	var/datum/ability_handler/psionics/psi = !is_preview_copy && istype(character) && character.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)

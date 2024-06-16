@@ -94,7 +94,7 @@
 					blind_message = SPAN_WARNING("You hear a crunching sound.")
 				)
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				if(prob(35))
 					if(prob(80))
 						randmutb(H)
@@ -141,7 +141,7 @@
 
 /obj/item/projectile/beam/mindflayer/on_hit(var/atom/target, var/blocked = 0)
 	if(ishuman(target))
-		var/mob/living/carbon/human/M = target
+		var/mob/living/human/M = target
 		ADJ_STATUS(M, STAT_CONFUSE, rand(5,8))
 
 /obj/item/projectile/chameleon

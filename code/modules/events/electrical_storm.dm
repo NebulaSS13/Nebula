@@ -120,7 +120,7 @@
 				if(prob((0.2 * severity) - 0.2))
 					T.set_broken()
 
-			for(var/mob/living/carbon/human/H in T.area)
+			for(var/mob/living/human/H in T.area)
 				to_chat(H, SPAN_WARNING("You feel the hairs on the back of your neck standing up!"))
 				if(prob(25))
 					if(H.eyecheck() == FLASH_PROTECTION_NONE)
@@ -158,7 +158,7 @@
 			S.adjust_speed(ax, ay)
 
 		last_bounce = world.time + (bounce_delay / severity)
-		for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
+		for(var/mob/living/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
 			if(!(H.z in affecting_z) || isnull(H) || QDELETED(H))
 				continue
 			to_chat(H, SPAN_WARNING("You're shaken about as the storm disrupts the ship's course!"))

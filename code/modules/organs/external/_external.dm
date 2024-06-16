@@ -413,7 +413,7 @@
 		if(can_feel_pain())
 			add_pain(20)
 			owner.apply_effect(5, STUN)
-		owner.verbs |= /mob/living/carbon/human/proc/undislocate
+		owner.verbs |= /mob/living/human/proc/undislocate
 
 /obj/item/organ/external/proc/undislocate(var/skip_pain = FALSE)
 	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
@@ -429,10 +429,10 @@
 		for(var/obj/item/organ/external/limb in owner.get_external_organs())
 			if(limb.is_dislocated())
 				return
-		owner.verbs -= /mob/living/carbon/human/proc/undislocate
+		owner.verbs -= /mob/living/human/proc/undislocate
 
 //If "in_place" is TRUE will make organs skip their install/uninstall effects and  the sub-limbs and internal organs
-/obj/item/organ/external/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/external/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	if(!(. = ..()))
 		return
 
@@ -910,7 +910,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	status &= ~ORGAN_BLEEDING
 	var/clamped = 0
 
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 	if(ishuman(owner))
 		H = owner
 
@@ -1064,7 +1064,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		owner.shock_stage += min_broken_damage
 
 	var/obj/item/organ/external/original_parent = parent
-	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
+	var/mob/living/human/victim = owner //Keep a reference for post-removed().
 	owner.remove_organ(src, TRUE, FALSE, ignore_children, update_icon = FALSE)
 	var/remaining_organs = victim.get_external_organs()
 	if(istype(victim) && !QDELETED(victim))
@@ -1132,7 +1132,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			   HELPERS
 ****************************************************/
 
-/obj/item/organ/external/proc/release_restraints(var/mob/living/carbon/human/holder)
+/obj/item/organ/external/proc/release_restraints(var/mob/living/human/holder)
 	if(!holder)
 		holder = owner
 	if(!holder)
@@ -1339,7 +1339,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/do_uninstall(in_place, detach, ignore_children, update_icon)
 
-	var/mob/living/carbon/human/victim = owner //parent proc clears owner
+	var/mob/living/human/victim = owner //parent proc clears owner
 	if(!(. = ..()))
 		return
 

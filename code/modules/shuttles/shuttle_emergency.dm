@@ -252,7 +252,7 @@
 
 	else if(!emagged && href_list["scanid"])
 		//They selected an empty entry. Try to scan their id.
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if (istype(H))
 			if (!read_authorization(H.get_active_held_item()))	//try to read what's in their hand first
 				read_authorization(H.get_equipped_item(slot_wear_id_str))

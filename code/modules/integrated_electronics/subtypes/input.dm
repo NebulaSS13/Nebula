@@ -140,7 +140,7 @@
 	power_draw_per_use = 40
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
-	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
 	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
@@ -192,7 +192,7 @@
 
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
-	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..

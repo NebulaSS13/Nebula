@@ -18,7 +18,7 @@ var/global/list/limb_icon_cache = list()
 	update_icon()
 	compile_overlays()
 
-/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/human/human)
 	_icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
@@ -38,7 +38,7 @@ var/global/list/limb_icon_cache = list()
 	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = rgb(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
-/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/human/human)
 	..()
 	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 	if(eyes) eyes.update_colour()

@@ -13,7 +13,7 @@
 	)
 
 	var/list/valid_targets = list(
-		/mob/living/carbon/human,
+		/mob/living/human,
 		/mob/living/simple_animal
 	)
 
@@ -40,7 +40,7 @@
 /mob/proc/xenobio_scan_results()
 	. = "Incompatible life form, analysis failed."
 
-/mob/living/carbon/human/xenobio_scan_results()
+/mob/living/human/xenobio_scan_results()
 	. += "Data for \the [src]:"
 	. += "Species:\t[species]"
 	if(species.breath_type)

@@ -19,7 +19,7 @@
 	else
 		..()
 
-/obj/item/organ/internal/augment/AttemptAugmentation(mob/living/carbon/human/user, target_zone)
+/obj/item/organ/internal/augment/AttemptAugmentation(mob/living/human/user, target_zone)
 	if(!istype(user))
 		return ..()
 

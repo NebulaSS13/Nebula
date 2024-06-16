@@ -89,7 +89,7 @@
 //attack_as_weapon
 /obj/item/soap/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(ishuman(target) && user?.a_intent != I_HURT)
-		var/mob/living/carbon/human/victim = target
+		var/mob/living/human/victim = target
 		if(user.get_target_zone() == BP_MOUTH && victim.check_has_mouth())
 			user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
 			if(reagents)

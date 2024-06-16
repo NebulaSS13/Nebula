@@ -68,7 +68,7 @@
 
 /datum/trader/ship/vox/hail(var/mob/user)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species)
 			switch(H.species.name)
 				if(SPECIES_VOX)

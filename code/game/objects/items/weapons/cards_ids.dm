@@ -263,7 +263,7 @@ var/global/const/NO_EMAG_ACT = -50
 	id_card.dna_hash         = get_unique_enzymes()                   || "Unset"
 	id_card.fingerprint_hash = get_full_print(ignore_blockers = TRUE) || "Unset"
 
-/mob/living/carbon/human/set_id_info(var/obj/item/card/id/id_card)
+/mob/living/human/set_id_info(var/obj/item/card/id/id_card)
 	..()
 	id_card.age = get_age()
 	if(global.using_map.flags & MAP_HAS_BRANCH)

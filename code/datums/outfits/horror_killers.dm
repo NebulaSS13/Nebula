@@ -29,7 +29,7 @@
 	r_pocket = /obj/item/scalpel
 	hands = list(/obj/item/twohanded/fireaxe)
 
-/decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/human/H)
 	..()
 	var/victim = get_mannequin(H.ckey)
 	if(victim)
@@ -50,7 +50,7 @@
 	pda_slot = slot_belt_str
 	pda_type = /obj/item/modular_computer/pda/heads
 
-/decl/hierarchy/outfit/reaper/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/reaper/post_equip(var/mob/living/human/H)
 	..()
 	var/obj/item/secure_storage/briefcase/sec_briefcase = new(H)
 	for(var/obj/item/briefcase_item in sec_briefcase)
