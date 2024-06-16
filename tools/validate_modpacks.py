@@ -8,6 +8,11 @@ FORBID_INCLUDE = [
 ]
 
 IGNORE_INCLUDE = [
+    # These are stubs.
+    r'mods/content/dungeon_loot/subtypes/exosuit.dm',
+    # The validator can't detect the weird way these are loaded.
+    r'mods/content/corporate/away_sites/**/*.dm',
+    r'mods/content/government/away_sites/**/*.dm'
 ]
 
 def validate_modpack(dme_path):
@@ -26,6 +31,8 @@ def validate_modpack(dme_path):
             elif line == "// END_INCLUDE":
                 break
             elif not reading:
+                continue
+            elif not line.startswith("#include"):
                 continue
 
             lines.append(line)
@@ -94,7 +101,7 @@ def validate_modpack(dme_path):
             if a_segment != b_segment:
                 return (a_segment > b_segment) - (a_segment < b_segment)
 
-        raise f"Two lines were exactly the same ({a} vs. {b})"
+        raise ValueError(f"Two lines were exactly the same ({a} vs. {b})")
 
     sorted_lines = sorted(lines, key = functools.cmp_to_key(compare_lines))
     for (index, line) in enumerate(lines):

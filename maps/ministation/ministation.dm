@@ -34,7 +34,6 @@ Twice...
 	#include "../../mods/content/government/_government.dme"
 	#include "../../mods/content/modern_earth/_modern_earth.dme"
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
-	#include "../../mods/content/psionics/_psionics.dme"
 	#include "../../mods/content/scaling_descriptors.dm"
 
 	#include "ministation_antagonists.dm"
@@ -69,6 +68,9 @@ Twice...
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
 	#include "../../mods/mobs/borers/_borers.dme"
+
+	// Must come after borers for compatibility.
+	#include "../../mods/content/psionics/_psionics.dme"
 
 	#include "ministation_overmap.dm"
 

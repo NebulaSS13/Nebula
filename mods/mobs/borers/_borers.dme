@@ -1,5 +1,10 @@
 #ifndef CONTENT_PACK_BORERS
 #define CONTENT_PACK_BORERS
+
+#ifdef MODPACK_PSIONICS
+#warn Psionics modpack loaded before Borers modpack, compatibility features will be missing.
+#endif
+
 // BEGIN_INCLUDE
 #include "borer.dm"
 #include "datum\antagonist.dm"
