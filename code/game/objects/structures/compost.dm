@@ -187,7 +187,7 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 	if(compost_amount > 0)
 		// Worms gotta eat...
 		if(worms_are_hungry)
-			reagents.remove_reagent(/decl/material/liquid/fertilizer/compost, worm_drink_amount * WORM_HUNGER_FACTOR)
+			reagents.remove_reagent(/decl/material/liquid/fertilizer/compost, worm_drink_amount * COMPOST_WORM_HUNGER_FACTOR)
 		if(prob(1) && worms < COMPOST_MAX_WORMS)
 			var/obj/item/chems/food/worm/worm = new(src)
 			if(!storage.handle_item_insertion(null, worm))

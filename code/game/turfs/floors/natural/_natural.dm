@@ -14,6 +14,8 @@
 	base_icon_state = "0"
 	base_color = null
 
+	can_engrave = FALSE
+
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
 	var/icon_edge_layer = -1
