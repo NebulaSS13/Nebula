@@ -38,3 +38,9 @@ var/global/list/abstract_inventory_slots = list(
 var/global/list/vitals_sensor_equip_slots = list(
 	slot_w_uniform_str
 )
+
+var/global/list/headphone_slots = list(
+	slot_l_ear_str, 
+	slot_r_ear_str, 
+	slot_head_str
+)

@@ -406,7 +406,7 @@
 	dump_contents() // In case an object was dropped inside or something. Excludes the beaker and component parts.
 	toggle_filter()
 
-/obj/machinery/sleeper/proc/set_occupant(var/mob/living/carbon/occupant)
+/obj/machinery/sleeper/proc/set_occupant(var/mob/living/occupant)
 	src.occupant = occupant
 	if(!occupant)
 		SetName(initial(name))

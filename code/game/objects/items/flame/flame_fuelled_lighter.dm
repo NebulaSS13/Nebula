@@ -22,7 +22,7 @@
 	if(. && user)
 		light_effects(user)
 
-/obj/item/flame/fuelled/lighter/proc/light_effects(mob/living/carbon/user)
+/obj/item/flame/fuelled/lighter/proc/light_effects(mob/living/user)
 	if(prob(95))
 		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light the [src]."))
 	else

@@ -74,7 +74,7 @@
 			SPAN_DANGER("\The [src] suddenly activates!"),
 			SPAN_DANGER("Electricity arcs between \the [src]'s rotating spokes as a powerful magnetic field tugs on every metallic object nearby.")
 		)
-		for(var/mob/living/carbon/M in hear(10, T))
+		for(var/mob/living/M in hear(10, T))
 			eye_safety = M.eyecheck()
 			if(eye_safety < FLASH_PROTECTION_MODERATE)
 				M.flash_eyes()

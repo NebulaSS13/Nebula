@@ -38,7 +38,7 @@
 		return PROJECTILE_FORCE_MISS
 	. = ..()
 
-/mob/living/carbon/get_cuff_breakout_mod()
+/mob/living/get_cuff_breakout_mod()
 	. = ..()
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
@@ -48,7 +48,7 @@
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
 
-/mob/living/carbon/get_special_resist_time()
+/mob/living/get_special_resist_time()
 	. = ..()
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	if(psi && psi.can_use())

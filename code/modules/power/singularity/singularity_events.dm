@@ -26,7 +26,7 @@
 		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
 
 /decl/singularity_event/mesmerize/handle_event(obj/effect/singularity/source)
-	for(var/mob/living/carbon/M in oviewers(8, source))
+	for(var/mob/living/M in oviewers(8, source))
 		if(isbrain(M)) //Ignore brains
 			continue
 		if(M.status_flags & GODMODE)

@@ -13,7 +13,7 @@
 	return TRUE
 
 /mob/living/proc/should_breathe()
-	return FALSE
+	return ((life_tick % 2) == 0 || failed_last_breath || is_asystole())
 
 /mob/living/proc/try_breathe()
 

@@ -291,7 +291,7 @@
 
 /obj/item/camera/proc/get_mobs(turf/the_turf)
 	var/mob_detail
-	for(var/mob/living/carbon/A in the_turf)
+	for(var/mob/living/A in the_turf)
 		if(A.invisibility)
 			continue
 		var/holding

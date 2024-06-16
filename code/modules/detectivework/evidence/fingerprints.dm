@@ -94,7 +94,7 @@
 			return E.get_fingerprint()
 	return fingerprint
 
-/mob/living/carbon/get_full_print(var/ignore_blockers = FALSE)
+/mob/living/carbon/human/get_full_print(var/ignore_blockers = FALSE)
 	if (!ignore_blockers && (mFingerprints in mutations))
 		return null
 	return ..()

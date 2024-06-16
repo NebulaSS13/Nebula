@@ -572,6 +572,7 @@
 #define LIMB_DAMAGED  1
 #define LIMB_IMPAIRED 0.5
 
+
 /mob/living/proc/handle_stance()
 	set waitfor = FALSE // Can sleep in emotes.
 	// Don't need to process any of this if they aren't standing anyways

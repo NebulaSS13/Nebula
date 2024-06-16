@@ -85,19 +85,6 @@ meteor_act
 	// Add inherent armor to the end of list so that protective equipment is checked first
 	. += ..()
 
-//this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
-/mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
-	if (!def_zone)
-		return 1.0
-
-	var/siemens_coefficient = max(species.get_shock_vulnerability(src), 0)
-	for(var/slot in global.standard_clothing_slots)
-		var/obj/item/clothing/C = get_equipped_item(slot)
-		if(istype(C) && (C.body_parts_covered & def_zone.body_part)) // Is that body part being targeted covered?
-			siemens_coefficient *= C.siemens_coefficient
-
-	return siemens_coefficient
-
 /mob/living/carbon/human/proc/check_head_coverage()
 	for(var/slot in global.standard_headgear_slots)
 		var/obj/item/clothing/clothes = get_equipped_item(slot)
@@ -389,7 +376,44 @@ meteor_act
 	if (!def_zone)
 		def_zone = pick(BP_L_HAND, BP_R_HAND)
 
-	return ..(shock_damage, source, base_siemens_coeff, def_zone)
+	shock_damage = apply_shock(shock_damage, def_zone, base_siemens_coeff)
+
+	if(!shock_damage)
+		return 0
+
+	stun_effect_act(agony_amount=shock_damage, def_zone=def_zone)
+
+	playsound(loc, "sparks", 50, 1, -1)
+	if (shock_damage > 15)
+		src.visible_message(
+			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
+			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
+			"<span class='warning'>You hear a heavy electrical crack.</span>" \
+		)
+	else
+		src.visible_message(
+			"<span class='warning'>[src] was shocked[source ? " by the [source]" : ""].</span>", \
+			"<span class='warning'>You feel a shock course through your body.</span>", \
+			"<span class='warning'>You hear a zapping sound.</span>" \
+		)
+
+	switch(shock_damage)
+		if(11 to 15)
+			SET_STATUS_MAX(src, STAT_STUN, 1)
+		if(16 to 20)
+			SET_STATUS_MAX(src, STAT_STUN, 2)
+		if(21 to 25)
+			SET_STATUS_MAX(src, STAT_WEAK, 2)
+		if(26 to 30)
+			SET_STATUS_MAX(src, STAT_WEAK, 5)
+		if(31 to INFINITY)
+			SET_STATUS_MAX(src, STAT_WEAK, 10) //This should work for now, more is really silly and makes you lay there forever
+
+	set_status(STAT_JITTER, min(shock_damage*5, 200))
+
+	spark_at(loc, amount=5, cardinal_only = TRUE)
+
+	return shock_damage
 
 /mob/living/carbon/human/explosion_act(severity)
 	..()
@@ -446,20 +470,6 @@ meteor_act
 		return prob(100 / 2**(head.w_class - brain.w_class - 1))
 	return TRUE
 
-///eyecheck()
-///Returns a number between -1 to 2
-/mob/living/carbon/human/eyecheck()
-	var/total_protection = flash_protection
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	if(root_bodytype.has_organ[root_bodytype.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
-		if(!I?.is_usable())
-			return FLASH_PROTECTION_MAJOR
-		total_protection = I.get_total_protection(flash_protection)
-	else // They can't be flashed if they don't have eyes.
-		return FLASH_PROTECTION_MAJOR
-	return total_protection
-
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if(root_bodytype.has_organ[root_bodytype.vision_organ])
@@ -475,3 +485,14 @@ meteor_act
 		if(I) // get_organ with a type passed already does a typecheck
 			return I.get_flash_mod()
 	return root_bodytype.eye_flash_mod
+
+/*
+Contians the proc to handle radiation.
+Specifically made to do radiation burns.
+*/
+/mob/living/carbon/human/apply_radiation(damage)
+	..()
+	if(!isSynthetic() && !ignore_rads)
+		damage = 0.25 * damage * (species ? species.get_radiation_mod(src) : 1)
+		take_damage(BURN, damage)
+	return TRUE

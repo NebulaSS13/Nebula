@@ -9,7 +9,7 @@
 	faction = "leeches"
 	can_pry = FALSE
 	break_stuff_probability = 5
-	flash_vulnerability = 0
+	flash_protection = FLASH_PROTECTION_MAJOR
 	bleed_colour = COLOR_VIOLET
 
 	var/suck_potency = 8
@@ -64,7 +64,7 @@
 	QDEL_NULL(proxy_listener)
 	. = ..()
 
-/obj/structure/leech_spawner/proc/burst(var/mob/living/carbon/victim)
+/obj/structure/leech_spawner/proc/burst(var/mob/living/victim)
 	if(!proxy_listener || !istype(victim) || !(victim in view(5, src)))
 		return
 	for(var/i in 1 to 12)

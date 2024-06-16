@@ -49,7 +49,7 @@
 
 	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
 	if(!neutered)
-		H.verbs |= /mob/living/carbon/proc/spawn_larvae
+		H.verbs |= /mob/living/proc/spawn_larvae
 
 	if(H.client)
 		H.ghostize(0)

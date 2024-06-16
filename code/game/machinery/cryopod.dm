@@ -523,7 +523,7 @@
 
 	return
 
-/obj/machinery/cryopod/proc/set_occupant(var/mob/living/carbon/occupant, var/silent)
+/obj/machinery/cryopod/proc/set_occupant(var/mob/living/occupant, var/silent)
 	src.occupant = occupant
 	if(!occupant)
 		SetName(initial(name))

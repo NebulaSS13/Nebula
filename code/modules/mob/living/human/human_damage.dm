@@ -329,8 +329,11 @@ This function restores all organs.
 	recheck_bad_external_organs()
 	verbs -= /mob/living/carbon/human/proc/undislocate
 
+
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
-	if(status_flags & GODMODE)	return	//godmode
+	if(status_flags & GODMODE)
+		return	//godmode
+
 	var/obj/item/organ/external/organ = given_organ
 	if(!organ)
 		if(isorgan(def_zone))
@@ -352,8 +355,10 @@ This function restores all organs.
 			organ = GET_EXTERNAL_ORGAN(src, check_zone(def_zone, src))
 
 	//Handle other types of damage
-	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
+	var/static/list/human_handled_damage_types = list(BRUTE, BURN, PAIN, CLONE)
+	if(!(damagetype in human_handled_damage_types))
 		return ..()
+
 	if(!istype(organ))
 		return 0 // This is reasonable and means the organ is missing.
 
@@ -368,6 +373,7 @@ This function restores all organs.
 
 	if(damage > 15 && prob(damage*4) && organ.can_feel_pain())
 		make_reagent(round(damage/10), /decl/material/liquid/adrenaline)
+
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
@@ -397,81 +403,3 @@ This function restores all organs.
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.6
 	return max(0,traumatic_shock)
-
-//Electrical shock
-
-/mob/living/carbon/human/apply_shock(var/shock_damage, var/def_zone, var/base_siemens_coeff = 1.0)
-	var/obj/item/organ/external/initial_organ = GET_EXTERNAL_ORGAN(src, check_zone(def_zone, src))
-	if(!initial_organ)
-		initial_organ = pick(get_external_organs())
-
-	var/obj/item/organ/external/floor_organ
-
-	if(!current_posture.prone)
-		var/list/obj/item/organ/external/standing = list()
-		for(var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
-			if(E && E.is_usable())
-				standing[E.organ_tag] = E
-		if((def_zone == BP_L_FOOT || def_zone == BP_L_LEG) && standing[BP_L_FOOT])
-			floor_organ = standing[BP_L_FOOT]
-		if((def_zone == BP_R_FOOT || def_zone == BP_R_LEG) && standing[BP_R_FOOT])
-			floor_organ = standing[BP_R_FOOT]
-		else
-			floor_organ = standing[pick(standing)]
-
-	if(!floor_organ)
-		floor_organ = pick(get_external_organs())
-
-	var/list/obj/item/organ/external/to_shock = trace_shock(initial_organ, floor_organ)
-
-	if(to_shock && to_shock.len)
-		shock_damage /= to_shock.len
-		shock_damage = round(shock_damage, 0.1)
-	else
-		return 0
-
-	var/total_damage = 0
-
-	for(var/obj/item/organ/external/E in to_shock)
-		total_damage += ..(shock_damage, E.organ_tag, base_siemens_coeff * get_siemens_coefficient_organ(E))
-
-	if(total_damage > 10)
-		local_emp(initial_organ, 3)
-
-	return total_damage
-
-/mob/living/carbon/human/proc/trace_shock(var/obj/item/organ/external/init, var/obj/item/organ/external/floor)
-	var/list/obj/item/organ/external/traced_organs = list(floor)
-
-	if(!init)
-		return
-
-	if(!floor || init == floor)
-		return list(init)
-
-	for(var/obj/item/organ/external/E in list(floor, init))
-		while(E && E.parent_organ)
-			var/candidate = GET_EXTERNAL_ORGAN(src, E.parent_organ)
-			if(!candidate || (candidate in traced_organs))
-				break // Organ parenthood is not guaranteed to be a tree
-			E = candidate
-			traced_organs += E
-			if(E == init)
-				return traced_organs
-
-	return traced_organs
-
-/mob/living/carbon/human/proc/local_emp(var/list/limbs, var/severity = 2)
-	if(!islist(limbs))
-		limbs = list(limbs)
-
-	var/list/EMP = list()
-	for(var/obj/item/organ/external/limb in limbs)
-		EMP += limb
-		if(LAZYLEN(limb.internal_organs))
-			EMP += limb.internal_organs
-		if(LAZYLEN(limb.implants))
-			EMP += limb.implants
-	for(var/atom/E in EMP)
-		E.emp_act(severity)

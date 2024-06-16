@@ -55,7 +55,7 @@
 		var/datum/forensics/F = forensics.evidence[T]
 		other_forensics.add_data(T, F.data)
 
-/obj/item/proc/add_trace_DNA(mob/living/carbon/M)
+/obj/item/proc/add_trace_DNA(mob/living/M)
 	if(!istype(M))
 		return
 	if(M.isSynthetic())

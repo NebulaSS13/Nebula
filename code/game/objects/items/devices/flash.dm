@@ -104,7 +104,7 @@
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	do_flash_animation(user)
-	for(var/mob/living/carbon/M in oviewers(3, null))
+	for(var/mob/living/M in oviewers(3, null))
 		M.handle_flashed(src, rand(str_min,str_max))
 	return TRUE
 
@@ -112,7 +112,7 @@
 	if(broken || !general_flash_check())
 		return FALSE
 	do_flash_animation()
-	for(var/mob/living/carbon/M in oviewers(3, null))
+	for(var/mob/living/M in oviewers(3, null))
 		M.handle_flashed(src, rand(str_min,str_max))
 
 /obj/item/flash/synthetic //not for regular use, weaker effects

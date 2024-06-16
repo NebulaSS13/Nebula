@@ -284,7 +284,7 @@
 		addtimer(CALLBACK(src, PROC_REF(do_shunt), shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 		jumping = TRUE
 		update_icon()
-		for(var/mob/living/carbon/M in global.living_mob_list_)
+		for(var/mob/living/M in global.living_mob_list_)
 			if(!(M.z in ftl_computer.linked.map_z))
 				continue
 			sound_to(M, 'sound/machines/hyperspace_begin.ogg')

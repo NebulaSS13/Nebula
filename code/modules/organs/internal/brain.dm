@@ -70,7 +70,7 @@
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
-/obj/item/organ/internal/brain/do_install(mob/living/carbon/target, affected, in_place, update_icon, detached)
+/obj/item/organ/internal/brain/do_install(mob/living/target, affected, in_place, update_icon, detached)
 	if(!(. = ..()))
 		return
 	if(istype(owner))

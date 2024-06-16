@@ -1,5 +1,5 @@
 //Brain slug proc for voluntary removal of control.
-/mob/living/carbon/proc/release_control()
+/mob/living/proc/release_control()
 
 	set category = "Abilities"
 	set name = "Release Control"
@@ -12,15 +12,15 @@
 
 		B.detach_from_host()
 
-		verbs -= /mob/living/carbon/proc/release_control
-		verbs -= /mob/living/carbon/proc/punish_host
-		verbs -= /mob/living/carbon/proc/spawn_larvae
+		verbs -= /mob/living/proc/release_control
+		verbs -= /mob/living/proc/punish_host
+		verbs -= /mob/living/proc/spawn_larvae
 
 	else
 		to_chat(src, "<span class='danger'>ERROR NO BORER OR BRAINMOB DETECTED IN THIS MOB, THIS IS A BUG !</span>")
 
 //Brain slug proc for tormenting the host.
-/mob/living/carbon/proc/punish_host()
+/mob/living/proc/punish_host()
 	set category = "Abilities"
 	set name = "Torment host"
 	set desc = "Punish your host with agony."
@@ -38,7 +38,7 @@
 		else
 			to_chat(B.host_brain, "<span class='danger'><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></span>")
 
-/mob/living/carbon/proc/spawn_larvae()
+/mob/living/proc/spawn_larvae()
 	set category = "Abilities"
 	set name = "Reproduce"
 	set desc = "Spawn several young."

@@ -302,13 +302,6 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
-
-/mob/living/carbon/revive()
-	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
-	if (cuffs)
-		try_unequip(cuffs, get_turf(src))
-	. = ..()
-
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
@@ -318,6 +311,9 @@ default behaviour is:
 	BITSET(hud_updateflag, LIFE_HUD)
 	ExtinguishMob()
 	fire_stacks = 0
+	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
+	if (cuffs)
+		try_unequip(cuffs, get_turf(src))
 
 /mob/living/proc/rejuvenate()
 
@@ -363,11 +359,25 @@ default behaviour is:
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
 
+	set_nutrition(get_max_nutrition())
+	set_hydration(get_max_hydration())
+
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	reload_fullscreen()
 	return
 
 /mob/living/proc/basic_revival(var/repair_brain = TRUE)
+
+	if(repair_brain && should_have_organ(BP_BRAIN))
+		repair_brain = FALSE
+		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
+		if(brain)
+			if(brain.damage > (brain.max_damage/2))
+				brain.damage = (brain.max_damage/2)
+			if(brain.status & ORGAN_DEAD)
+				brain.status &= ~ORGAN_DEAD
+				START_PROCESSING(SSobj, brain)
+			brain.update_icon()
 
 	if(repair_brain && get_damage(BRAIN) > 50)
 		repair_brain = FALSE
@@ -386,19 +396,6 @@ default behaviour is:
 
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	reload_fullscreen()
-
-/mob/living/carbon/basic_revival(var/repair_brain = TRUE)
-	if(repair_brain && should_have_organ(BP_BRAIN))
-		repair_brain = FALSE
-		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
-		if(brain)
-			if(brain.damage > (brain.max_damage/2))
-				brain.damage = (brain.max_damage/2)
-			if(brain.status & ORGAN_DEAD)
-				brain.status &= ~ORGAN_DEAD
-				START_PROCESSING(SSobj, brain)
-			brain.update_icon()
-	..(repair_brain)
 
 /mob/living
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
@@ -511,6 +508,8 @@ default behaviour is:
 		handle_grabs_after_move(old_loc, Dir)
 		if(active_storage && !active_storage.can_view(src))
 			active_storage.close(src)
+		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
+			germ_level++
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -577,22 +576,6 @@ default behaviour is:
 	if(loc != H)
 		qdel(H)
 
-/mob/living/proc/escape_buckle()
-	if(buckled)
-		if(buckled.can_buckle)
-			buckled.user_unbuckle_mob(src)
-		else
-			to_chat(usr, "<span class='warning'>You can't seem to escape from \the [buckled]!</span>")
-			return
-
-/mob/living/proc/resist_grab()
-	var/resisting = 0
-	for(var/obj/item/grab/G in grabbed_by)
-		resisting++
-		G.handle_resist()
-	if(resisting)
-		visible_message("<span class='danger'>[src] resists!</span>")
-
 // Shortcut for people used to typing Rest instead of Change Posture.
 /mob/living/verb/rest_verb()
 	set name = "Rest"
@@ -632,19 +615,35 @@ default behaviour is:
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(override_blindness_check || !(disabilities & BLINDED))
-		..()
+	if(eyecheck() < intensity || override_blindness_check)
 		overlay_fullscreen("flash", type)
 		spawn(25)
 			if(src)
 				clear_fullscreen("flash", 25)
-		return 1
+		return TRUE
+	return FALSE
 
 /mob/living/proc/has_brain()
 	return TRUE
 
 /mob/living/proc/slip(var/slipped_on, stun_duration = 8)
+
+	var/decl/species/my_species = get_species()
+	if(my_species?.check_no_slip(src))
+		return FALSE
+
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
+	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP))
+		return FALSE
+
+	if(has_gravity() && !buckled && !current_posture?.prone)
+		to_chat(src, SPAN_DANGER("You slipped on [slipped_on]!"))
+		playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
+		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
+		return TRUE
+
 	return FALSE
+
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
 	. = ..() && !(I in get_organs())
@@ -808,6 +807,7 @@ default behaviour is:
 		A.fluid_act(fluids)
 		if(QDELETED(src) || !fluids.total_volume)
 			return
+	// TODO: review saturation logic so we can end up with more than like 15 water in our contact reagents.
 	var/datum/reagents/touching_reagents = get_contact_reagents()
 	if(touching_reagents)
 		var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching_reagents.total_volume)
@@ -838,7 +838,17 @@ default behaviour is:
 	vomit.add_to_reagents(/decl/material/liquid/acid/stomach, 5)
 
 /mob/living/proc/eyecheck()
-	return FLASH_PROTECTION_NONE
+	var/total_protection = flash_protection
+	if(should_have_organ(BP_EYES))
+		var/decl/bodytype/root_bodytype = get_bodytype()
+		if(root_bodytype.has_organ[root_bodytype.vision_organ])
+			var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
+			if(!I?.is_usable())
+				return FLASH_PROTECTION_MAJOR
+			total_protection = I.get_total_protection(flash_protection)
+		else // They can't be flashed if they don't have eyes.
+			return FLASH_PROTECTION_MAJOR
+	return total_protection
 
 /mob/living/proc/get_satiated_nutrition()
 	return 500
@@ -943,7 +953,7 @@ default behaviour is:
 
 /mob/living/proc/should_have_organ(organ_to_check)
 	var/decl/bodytype/root_bodytype = get_bodytype()
-	return root_bodytype?.has_organ[organ_to_check]
+	return !!root_bodytype?.has_organ[organ_to_check]
 
 /// Returns null if the mob's bodytype doesn't have a limb tag by default.
 /// Otherwise, returns the data of the limb instead.
@@ -1543,6 +1553,52 @@ default behaviour is:
 
 /mob/living/proc/handle_footsteps()
 	return
+
+/mob/living/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+
+	var/safety = eyecheck()
+	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
+		return FALSE
+
+	flash_eyes(FLASH_PROTECTION_MODERATE - safety)
+	SET_STATUS_MAX(src, STAT_STUN, (flash_strength / 2))
+	SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
+	SET_STATUS_MAX(src, STAT_CONFUSE, (flash_strength + 2))
+	if(flash_strength > 3)
+		drop_held_items()
+	if(flash_strength > 5)
+		SET_STATUS_MAX(src, STAT_WEAK, 2)
+
+/mob/living/verb/showoff()
+	set name = "Show Held Item"
+	set category = "Object"
+
+	var/obj/item/I = get_active_held_item()
+	if(I && I.simulated)
+		I.showoff(src)
+
+/mob/living/relaymove(var/mob/living/user, direction)
+	if(!istype(user) || !(user in contents) || user.is_on_special_ability_cooldown())
+		return
+	user.set_special_ability_cooldown(5 SECONDS)
+	visible_message(SPAN_DANGER("You hear something rumbling inside [src]'s stomach..."))
+	var/obj/item/I = user.get_active_held_item()
+	if(!I?.force)
+		return
+	var/d = rand(round(I.force / 4), I.force)
+	visible_message(SPAN_DANGER("\The [user] attacks [src]'s stomach wall with \the [I]!"))
+	playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
+	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
+	if(istype(organ))
+		organ.take_external_damage(d, 0)
+	else
+		take_organ_damage(d)
+	if(prob(get_damage(BRUTE) - 50))
+		gib()
+
+/mob/living/hud_reset(full_reset = FALSE)
+	if((. = ..()))
+		queue_hand_rebuild()
 
 /mob/living/get_movement_delay(var/travel_dir)
 	. = ..()

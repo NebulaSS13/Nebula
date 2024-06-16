@@ -73,6 +73,9 @@
 	// Currently only on humans due to the spaghetti code involved, TODO: generalize.
 	var/list/appearance_descriptors
 
+	/// Total level of flash protection
+	var/flash_protection = FLASH_PROTECTION_NONE
+
 	/// Whether this mob's ability to stand has been affected
 	var/stance_damage = 0
 

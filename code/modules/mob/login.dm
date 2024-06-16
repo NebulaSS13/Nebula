@@ -123,4 +123,13 @@
 		for(var/datum/status_marker_holder/marker in global.status_marker_holders)
 			if(marker.mob_image && marker != status_markers)
 				client.images |= marker.mob_image
+
+	for(var/obj/item/gear in get_equipped_items(TRUE))
+		client.screen |= gear
+
+	if(istype(hud_used))
+		hud_used.hidden_inventory_update()
+		hud_used.persistant_inventory_update()
+		update_action_buttons()
+
 	return TRUE

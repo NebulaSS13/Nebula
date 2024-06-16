@@ -31,7 +31,7 @@
 	if(islist(limb_data) && limb_data["has_children"] > 0)
 		. = (LAZYLEN(children) < limb_data["has_children"])
 
-/obj/item/organ/external/proc/can_be_attached_modular_limb(var/mob/living/carbon/user)
+/obj/item/organ/external/proc/can_be_attached_modular_limb(var/mob/living/user)
 	var/bodypart_cat = get_modular_limb_category()
 	if(bodypart_cat == MODULAR_BODYPART_INVALID)
 		return FALSE

@@ -177,11 +177,9 @@
 	var/slab_nutrition = 20
 
 	if(isliving(occupant))
-		var/mob/living/C = occupant
-		slab_nutrition = round(C.get_nutrition() / 15)
-
-	if(ishuman(occupant))
-		slab_name = occupant.real_name
+		slab_nutrition = round(occupant.get_nutrition() / 15)
+		if(ishuman(occupant))
+			slab_name = occupant.real_name
 
 	// Small mobs don't give as much nutrition.
 	if(issmall(src.occupant))

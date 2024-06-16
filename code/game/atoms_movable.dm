@@ -371,14 +371,12 @@
 		return TRUE
 
 /atom/movable/proc/buckle_mob(mob/living/M)
+
 	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
 		return FALSE
+
 	if(!istype(M) || (M.loc != loc) || M.buckled || LAZYLEN(M.pinned) || (buckle_require_restraints && !M.restrained()))
 		return FALSE
-	if(ismob(src))
-		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
-		if(M != src && C.incapacitated())
-			return FALSE
 
 	M.buckled = src
 	M.facing_dir = null

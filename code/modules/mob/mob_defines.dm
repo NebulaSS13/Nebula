@@ -124,7 +124,7 @@
 
 	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 
-	//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
+	//The last mob/living to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/weakref/last_handled_by_mob
 
 	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)

@@ -36,7 +36,6 @@
 /mob/living/apply_radiation(var/damage = 0)
 	if(!damage)
 		return FALSE
-
 	radiation = max(0, radiation + damage)
 	return TRUE
 

@@ -9,14 +9,14 @@
 /datum/artifact_effect/hurt/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(src.effect_range,T))
-			hurt(C, 1, msg_prob = 5)
+		for (var/mob/living/target in range(src.effect_range,T))
+			hurt(target, 1, msg_prob = 5)
 
 /datum/artifact_effect/hurt/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(effect_range, T))
-			hurt(C, 3)
+		for (var/mob/living/target in range(effect_range, T))
+			hurt(target, 3)
 
 /datum/artifact_effect/hurt/proc/hurt(mob/living/M, amount, strong, msg_prob=100)
 	var/weakness = GetAnomalySusceptibility(M)

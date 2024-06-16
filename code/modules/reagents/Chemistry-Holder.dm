@@ -191,36 +191,34 @@ var/global/obj/temp_reagents_holder = new
 	if(!(check_flags & ATOM_FLAG_NO_REACT))
 		var/list/active_reactions = list()
 
-		for(var/decl/chemical_reaction/C in eligible_reactions)
-			if(C.can_happen(src))
-				active_reactions[C] = 1 // The number is going to be 1/(fraction of remaining reagents we are allowed to use), computed below
+		for(var/decl/chemical_reaction/reaction in eligible_reactions)
+			if(reaction.can_happen(src))
+				active_reactions[reaction] = 1 // The number is going to be 1/(fraction of remaining reagents we are allowed to use), computed below
 				reaction_occured = 1
 
 		var/list/used_reagents = list()
 		// if two reactions share a reagent, each is allocated half of it, so we compute this here
-		for(var/decl/chemical_reaction/C in active_reactions)
-			var/list/adding = C.get_used_reagents()
+		for(var/decl/chemical_reaction/reaction in active_reactions)
+			var/list/adding = reaction.get_used_reagents()
 			for(var/R in adding)
-				LAZYADD(used_reagents[R], C)
+				LAZYADD(used_reagents[R], reaction)
 
 		for(var/R in used_reagents)
 			var/counter = length(used_reagents[R])
 			if(counter <= 1)
 				continue // Only used by one reaction, so nothing we need to do.
-			for(var/decl/chemical_reaction/C in used_reagents[R])
-				active_reactions[C] = max(counter, active_reactions[C])
+			for(var/decl/chemical_reaction/reaction in used_reagents[R])
+				active_reactions[reaction] = max(counter, active_reactions[reaction])
 				counter-- //so the next reaction we execute uses more of the remaining reagents
 				// Note: this is not guaranteed to maximize the size of the reactions we do (if one reaction is limited by reagent A, we may be over-allocating reagent B to it)
 				// However, we are guaranteed to fully use up the most profligate reagent if possible.
 				// Further reactions may occur on the next tick, when this runs again.
 
-		for(var/thing in active_reactions)
-			var/decl/chemical_reaction/C = thing
-			C.process(src, active_reactions[C])
+		for(var/decl/chemical_reaction/reaction as anything in active_reactions)
+			reaction.process(src, active_reactions[reaction])
 
-		for(var/thing in active_reactions)
-			var/decl/chemical_reaction/C = thing
-			C.post_reaction(src)
+		for(var/decl/chemical_reaction/reaction as anything in active_reactions)
+			reaction.post_reaction(src)
 
 	update_total()
 
@@ -685,7 +683,7 @@ var/global/obj/temp_reagents_holder = new
 	if(!. && href_list["deconvert"])
 		var/list/data = REAGENT_DATA(src, /decl/material/liquid/water)
 		if(LAZYACCESS(data, "holy"))
-			var/mob/living/carbon/C = locate(href_list["deconvert"])
-			if(istype(C) && !QDELETED(C) && C.mind)
+			var/mob/living/target = locate(href_list["deconvert"])
+			if(istype(target) && !QDELETED(target) && target.mind)
 				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
-				godcult.remove_antagonist(C.mind,1)
+				godcult.remove_antagonist(target.mind,1)

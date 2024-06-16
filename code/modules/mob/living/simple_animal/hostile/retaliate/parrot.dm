@@ -435,14 +435,14 @@
 		return 1
 
 	var/obj/item/stolen_item = null
-	for(var/mob/living/carbon/C in view(1,src))
-		for(var/obj/item/thing in C.get_held_items())
+	for(var/mob/living/target in view(1,src))
+		for(var/obj/item/thing in target.get_held_items())
 			if(can_pick_up(thing))
 				stolen_item = thing
 				break
-		if(stolen_item && C.try_unequip(stolen_item, src))
+		if(stolen_item && target.try_unequip(stolen_item, src))
 			held_item = stolen_item
-			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "<span class='warning'>You snag the [held_item] out of [C]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
+			visible_message("[src] grabs the [held_item] out of [target]'s hand!", "<span class='warning'>You snag the [held_item] out of [target]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
 			return held_item
 
 	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")

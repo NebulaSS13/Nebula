@@ -150,16 +150,16 @@
 
 /obj/item/integrated_circuit/reagent/injector/proc/draw_after(var/weakref/target, var/amount)
 	busy = FALSE
-	var/mob/living/carbon/C = target_nearby(target)
-	if(!C)
+	var/mob/living/target_living = target_nearby(target)
+	if(!target_living)
 		activate_pin(3)
 		return
 	var/atom/movable/acting_object = get_object()
 
-	C.visible_message("<span class='warning'>\The [acting_object] draws blood from \the [C]</span>",
+	target_living.visible_message("<span class='warning'>\The [acting_object] draws blood from \the [target_living]</span>",
 					"<span class='warning'>\The [acting_object] draws blood from you.</span>"
 					)
-	C.take_blood(src, amount)
+	target_living.take_blood(src, amount)
 	activate_pin(2)
 
 

@@ -10,7 +10,7 @@
 	anchored = TRUE
 
 	var/obj/item/tank/tank
-	var/mob/living/carbon/breather
+	var/mob/living/breather
 	var/obj/item/clothing/mask/breath/contained
 
 	var/spawn_type = /obj/item/tank/emergency/oxygen/engi
@@ -35,14 +35,14 @@
 		qdel(tank)
 	if(breather)
 		breather.drop_from_inventory(contained)
-		src.visible_message(SPAN_NOTICE("The mask rapidly retracts just before /the [src] is destroyed!"))
+		src.visible_message(SPAN_NOTICE("The mask rapidly retracts just before \the [src] is destroyed!"))
+	breather = null
 	qdel(contained)
 	contained = null
-	breather = null
 	return ..()
 
 /obj/machinery/oxygen_pump/handle_mouse_drop(atom/over, mob/user, params)
-	if(ishuman(over) && can_apply_to_target(over, user))
+	if(isliving(over) && can_apply_to_target(over, user))
 		user.visible_message(SPAN_NOTICE("\The [user] begins placing the mask onto \the [over].."))
 		if(do_mob(user, over, 25) && can_apply_to_target(over, user))
 			user.visible_message(SPAN_NOTICE("\The [user] has placed \the [src] over \the [over]'s face."))
@@ -67,17 +67,17 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
-	if(C && istype(C))
-		contained.dropInto(C.loc)
-		C.equip_to_slot(contained, slot_wear_mask_str)
+/obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/subject)
+	if(istype(subject))
+		contained.dropInto(subject.loc)
+		subject.equip_to_slot(contained, slot_wear_mask_str)
 		if(tank)
-			tank.forceMove(C)
-		breather = C
+			tank.forceMove(subject)
+		breather = subject
 
-/obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
-	if(C && istype(C))
-		if(!C.internal && tank)
+/obj/machinery/oxygen_pump/proc/set_internals()
+	if(isliving(breather))
+		if(!breather.get_internals() && tank)
 			breather.set_internals(tank)
 		update_use_power(POWER_USE_ACTIVE)
 
@@ -94,7 +94,7 @@
 	breather = null
 	update_use_power(POWER_USE_IDLE)
 
-/obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/carbon/human/target, mob/user)
+/obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/target, mob/user)
 	if(!user)
 		user = target
 	// Check target validity
@@ -104,7 +104,9 @@
 	if(!target.check_has_mouth())
 		to_chat(user, SPAN_WARNING("\The [target] doesn't have a mouth."))
 		return
-
+	if(!target.get_inventory_slot_datum(slot_wear_mask_str))
+		to_chat(user, SPAN_WARNING("\The [target] cannot wear a mask."))
+		return
 	var/obj/item/mask = target.get_equipped_item(slot_wear_mask_str)
 	if(mask && target != breather)
 		to_chat(user, SPAN_WARNING("\The [target] is already wearing a mask."))
@@ -161,14 +163,12 @@
 	else
 		to_chat(user, SPAN_WARNING("It is missing a tank!"))
 
-
 /obj/machinery/oxygen_pump/Process()
-	if(breather)
+	if(istype(breather))
 		if(!can_apply_to_target(breather))
 			detach_mask()
-		else if(!breather.internal && tank)
-			set_internals(breather)
-
+		else if(!breather.get_internals() && tank)
+			set_internals()
 
 //Create rightclick to view tank settings
 /obj/machinery/oxygen_pump/verb/settings()

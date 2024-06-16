@@ -36,7 +36,7 @@ var/global/list/chem_implants = list()
 	if(malfunction || (!ishuman(imp_in)))	return 0
 	if(!amount)
 		amount = rand(1,25)
-	var/mob/living/carbon/R = imp_in
+	var/mob/living/R = imp_in
 	reagents.trans_to_mob(R, amount, CHEM_INJECT)
 	to_chat(R, "<span class='notice'>You hear a faint *beep*.</span>")
 

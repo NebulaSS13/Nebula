@@ -110,9 +110,9 @@
 	if(!worm.host.lastKnownIP)
 		worm.host.lastKnownIP = s2h_ip
 	worm.controlling = TRUE
-	worm.host.verbs += /mob/living/carbon/proc/release_control
-	worm.host.verbs += /mob/living/carbon/proc/punish_host
-	worm.host.verbs += /mob/living/carbon/proc/spawn_larvae
+	worm.host.verbs += /mob/living/proc/release_control
+	worm.host.verbs += /mob/living/proc/punish_host
+	worm.host.verbs += /mob/living/proc/spawn_larvae
 
 	return TRUE
 

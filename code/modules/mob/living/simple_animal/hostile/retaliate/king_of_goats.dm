@@ -21,7 +21,7 @@
 	max_gas = null
 	minbodytemp = 0
 	break_stuff_probability = 35
-	flash_vulnerability = 0
+	flash_protection = FLASH_PROTECTION_MAJOR
 	natural_weapon = /obj/item/natural_weapon/goatking
 	var/current_damtype = BRUTE
 	var/list/elemental_weapons = list(

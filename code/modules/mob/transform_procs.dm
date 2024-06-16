@@ -44,14 +44,17 @@
 /mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/t in get_external_organs())
-		qdel(t)
 	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
 
-/mob/living/carbon/AIize()
+/mob/living/silicon/ai/AIize()
+	return src
+
+/mob/living/AIize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
+	for(var/t in get_external_organs())
+		qdel(t)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)

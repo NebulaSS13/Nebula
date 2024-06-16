@@ -104,7 +104,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 	if(!is_global)
 
 		if(isliving(src))
-			var/mob/living/carbon/M = src
+			var/mob/living/M = src
 			if (istype(M) && M.hallucination_power > 50 && GET_CHEMICAL_EFFECT(M, CE_MIND) < 1)
 				S.environment = PSYCHOTIC
 			else if (HAS_STATUS(M, STAT_DRUGGY))

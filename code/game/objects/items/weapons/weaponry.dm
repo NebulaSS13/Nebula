@@ -120,7 +120,7 @@
 	max_health = 25
 	var/countdown = 15
 	var/temporary = 1
-	var/mob/living/carbon/captured = null
+	var/mob/living/captured = null
 	var/min_free_time = 50
 	var/max_free_time = 85
 
