@@ -97,7 +97,7 @@
 		apply_effect(agony_amount/10, EYE_BLUR)
 
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
-	  return 0 //only carbon liveforms have this proc
+	  return 0 //currently no base implementation, silicons and humans implement it separately
 
 /mob/living/emp_act(severity)
 	for(var/obj/O in get_mob_contents())
