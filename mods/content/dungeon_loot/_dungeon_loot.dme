@@ -1,9 +1,10 @@
 #ifndef MODPACK_DUNGEON_LOOT
 #define MODPACK_DUNGEON_LOOT
-// BEGIN INCLUDE
+// BEGIN_INCLUDE
 #include "_dungeon_loot.dm"
 #include "loot_pile.dm"
-#include "subtypes/exosuit.dm"
-#include "subtypes/maint.dm"
-#include "subtypes/surface.dm"
+#include "subtypes\exosuit.dm"
+#include "subtypes\maint.dm"
+#include "subtypes\surface.dm"
+// END_INCLUDE
 #endif

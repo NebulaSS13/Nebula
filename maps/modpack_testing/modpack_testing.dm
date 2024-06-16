@@ -20,7 +20,6 @@
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/content/modern_earth/_modern_earth.dme"
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
-	#include "../../mods/content/psionics/_psionics.dme"
 	#include "../../mods/content/shackles/_shackles.dme"
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
 	#include "../../mods/content/pheromones/_pheromones.dme"
@@ -29,6 +28,9 @@
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
 	#include "../../mods/mobs/borers/_borers.dme"
+
+	// Must come after borers for compatibility.
+	#include "../../mods/content/psionics/_psionics.dme"
 
 	#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/ascent/_ascent.dme"

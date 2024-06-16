@@ -1,12 +1,8 @@
+#ifdef CONTENT_PACK_BORERS
 /mob/living/simple_animal/borer
 	var/image/aura_image
 
 /mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
-
-	if(!SSmodpacks.loaded_modpacks["Cortical Borers"]) // Borer module not included.
-		log_debug("Attempted spawn of stubbed mobtype [type].")
-		return INITIALIZE_HINT_QDEL
-
 	. = ..()
 	aura_image = create_aura_image(src)
 	aura_image.color = "#aaffaa"
@@ -57,3 +53,4 @@
 			set_ability_cooldown(15 SECONDS)
 
 		return TRUE
+#endif

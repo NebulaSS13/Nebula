@@ -1,6 +1,6 @@
 #ifndef MODPACK_GOVERNMENT
 #define MODPACK_GOVERNMENT
-// BEGIN INCLUDE
+// BEGIN_INCLUDE
 #include "government.dm"
 #include "datum\ai_holo.dm"
 #include "datum\ai_laws.dm"
@@ -8,5 +8,5 @@
 #include "items\cups.dm"
 #include "items\documents.dm"
 #include "ruins\ec_old_crash\ec_old_crash.dm"
-#endif
 // END_INCLUDE
+#endif

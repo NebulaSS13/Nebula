@@ -1,8 +1,9 @@
 #ifndef GAMEMODE_PACK_MIXED
 #define GAMEMODE_PACK_MIXED
-// BEGIN INCLUDES
+// BEGIN_INCLUDE
+#include "_mixed.dm"
 #if defined(GAMEMODE_PACK_HEIST) // TODO: && defined(GAMEMODE_PACK_MERCENARY)
 #include "crossfire.dm"
 #endif
-// END INCLUDES
+// END_INCLUDE
 #endif
