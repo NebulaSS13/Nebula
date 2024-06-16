@@ -1,7 +1,9 @@
 #if !defined(USING_MAP_DATUM)
 
 	#include "../../mods/gamemodes/deity/_deity.dme"
+	#include "../../mods/gamemodes/heist/_heist.dme"
 	#include "../../mods/gamemodes/meteor/_meteor.dme"
+	#include "../../mods/gamemodes/mixed/_mixed.dme"
 
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
