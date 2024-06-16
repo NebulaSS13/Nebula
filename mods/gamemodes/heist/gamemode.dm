@@ -1,7 +1,3 @@
-/*
-HEIST ROUNDTYPE
-*/
-
 /decl/game_mode/heist
 	name = "Heist"
 	uid = "heist"

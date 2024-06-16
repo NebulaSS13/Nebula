@@ -37,21 +37,21 @@
 	while(i<= max_objectives)
 		var/list/goals = list("kidnap","loot","salvage")
 		var/goal = pick(goals)
-		var/datum/objective/heist/O
+		var/datum/objective/O
 
 		if(goal == "kidnap")
 			goals -= "kidnap"
-			O = new /datum/objective/heist/kidnap()
+			O = new /datum/objective/kidnap()
 		else if(goal == "loot")
-			O = new /datum/objective/heist/loot()
+			O = new /datum/objective/loot()
 		else
-			O = new /datum/objective/heist/salvage()
-		O.choose_target()
+			O = new /datum/objective/salvage()
+		O.find_target()
 		global_objectives |= O
 
 		i++
 
-	global_objectives |= new /datum/objective/heist/preserve_crew
+	global_objectives |= new /datum/objective/preserve_crew
 	return 1
 
 /decl/special_role/raider/equip_role(var/mob/living/carbon/human/player)
