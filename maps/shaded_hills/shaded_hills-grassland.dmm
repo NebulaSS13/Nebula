@@ -71,7 +71,7 @@
 "kr" = (
 /obj/structure/closet/crate/chest,
 /obj/item/tool/pickaxe/iron,
-/obj/item/tool/axe/hatchet,
+/obj/item/tool/axe,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/woven,
 /area/shaded_hills/outside)
@@ -96,7 +96,7 @@
 /area/shaded_hills/caves)
 "mG" = (
 /obj/structure/bed/chair/bench/ebony,
-/obj/item/knife/utility,
+/obj/item/bladed/folding,
 /obj/abstract/landmark/start/shaded_hills/miner,
 /turf/floor/natural/barren,
 /area/shaded_hills/outside)
