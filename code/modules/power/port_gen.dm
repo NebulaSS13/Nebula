@@ -481,18 +481,19 @@
 	if(power_output > max_safe_output)
 		icon_state = "potatodanger"
 
-/obj/machinery/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/chems/))
-		var/obj/item/chems/R = O
-		if(R.standard_pour_into(src,user))
-			if(reagents.has_reagent(/decl/material/liquid/ethanol/vodka))
-				audible_message("<span class='notice'>[src] blips happily</span>")
-				playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50, 0)
-			else
-				audible_message("<span class='warning'>[src] blips in disappointment</span>")
-				playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50, 0)
-		return
-	..()
+/obj/machinery/port_gen/pacman/super/potato/attackby(var/obj/item/hit_with, var/mob/user)
+	if(istype(hit_with, /obj/item/chems))
+		var/obj/item/chems/chem_container = hit_with
+		var/old_vodka_amount = REAGENT_VOLUME(reagents, /decl/material/liquid/ethanol/vodka)
+		if(chem_container.standard_pour_into(src,user))
+			if(REAGENT_VOLUME(reagents, /decl/material/liquid/ethanol/vodka) > old_vodka_amount) // yay, booze!
+				audible_message(SPAN_NOTICE("[src] blips happily!"))
+				playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50, FALSE)
+			else // you didn't add any more than we already had
+				audible_message(SPAN_WARNING("[src] blips in disappointment."))
+				playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50, FALSE)
+			return TRUE
+	return ..()
 
 /obj/machinery/port_gen/pacman/mrs
 	name = "portable fusion generator"

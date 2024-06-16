@@ -117,7 +117,7 @@
 			attached_device.attack_self(usr)
 	return 1 // Returning 1 sends an update to attached UIs
 
-/obj/item/transfer_valve/proc/process_activation(var/obj/item/D)
+/obj/item/transfer_valve/proc/process_activation(var/obj/item/activator)
 	if(toggle)
 		toggle = 0
 		toggle_valve()

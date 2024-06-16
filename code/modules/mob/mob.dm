@@ -480,9 +480,9 @@
 	set name = "Activate Held Object"
 	set category = "Object"
 	set src = usr
-	var/obj/item/W = get_active_held_item()
-	W?.attack_self(src)
-	return W
+	var/obj/item/holding = get_active_held_item()
+	holding?.attack_self(src)
+	return holding
 
 /mob/living/mode()
 	if(!..())

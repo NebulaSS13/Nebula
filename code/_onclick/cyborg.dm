@@ -54,10 +54,10 @@
 		return
 	*/
 
-	var/obj/item/W = get_active_held_item()
+	var/obj/item/holding = get_active_held_item()
 
 	// Cyborgs have no range-checking unless there is item use
-	if(!W)
+	if(!holding)
 		A.add_hiddenprint(src)
 		A.attack_robot(src)
 		return
@@ -66,21 +66,21 @@
 	if( buckled )
 		return
 
-	if(W == A)
+	if(holding == A)
 
-		W.attack_self(src)
+		holding.attack_self(src)
 		return
 
-	var/check_dexterity_val = A.storage ? DEXTERITY_NONE : (istype(W) ? W.needs_attack_dexterity : DEXTERITY_WIELD_ITEM)
+	var/check_dexterity_val = A.storage ? DEXTERITY_NONE : (istype(holding) ? holding.needs_attack_dexterity : DEXTERITY_WIELD_ITEM)
 	var/can_wield_item = (!check_dexterity_val || check_dexterity(check_dexterity_val))
 	if(!can_wield_item)
 		return
 
 	if(A == loc || (A in loc) || (A in contents))
 		// No adjacency checks
-		var/resolved = W.resolve_attackby(A, src, params)
-		if(!resolved && A && W)
-			W.afterattack(A, src, 1, params) // 1 indicates adjacency
+		var/resolved = holding.resolve_attackby(A, src, params)
+		if(!resolved && A && holding)
+			holding.afterattack(A, src, 1, params) // 1 indicates adjacency
 		setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		return
 
@@ -90,12 +90,12 @@
 	var/sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
-			var/resolved = W.resolve_attackby(A, src, params)
-			if(!resolved && A && W)
-				W.afterattack(A, src, 1, params) // 1 indicates adjacency
+			var/resolved = holding.resolve_attackby(A, src, params)
+			if(!resolved && A && holding)
+				holding.afterattack(A, src, 1, params) // 1 indicates adjacency
 			setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		else
-			W.afterattack(A, src, 0, params)
+			holding.afterattack(A, src, 0, params)
 		return
 
 //Middle click cycles through selected modules.

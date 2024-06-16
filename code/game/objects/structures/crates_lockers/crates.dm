@@ -16,6 +16,8 @@
 		if(rigged)
 			visible_message("<span class='danger'>There are wires attached to the lid of [src]...</span>")
 			for(var/obj/item/assembly_holder/H in src)
+				// This proc expects an /obj/item, and usr is never that, but it must be non-null for the code to function.
+				// TODO: Rewrite or refactor either this code or the proc itself to avoid that.
 				H.process_activation(usr)
 			for(var/obj/item/assembly/A in src)
 				A.activate()

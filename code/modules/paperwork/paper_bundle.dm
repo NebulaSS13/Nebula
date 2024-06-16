@@ -195,7 +195,7 @@
 
 /obj/item/paper_bundle/interact(mob/user)
 	var/dat
-	var/obj/item/W = LAZYACCESS(pages, cur_page)
+	var/obj/item/cur_page_item = LAZYACCESS(pages, cur_page)
 	//Header
 	dat = "<TABLE STYLE='white-space:nowrap; overflow:clip; width:100%; height:2em; table-layout:fixed;'><TR>"
 	dat += "<TD style='text-align:center;'>"
@@ -230,19 +230,19 @@
 	dat += "</TR></TABLE><HR>"
 
 	//Contents
-	if(istype(W, /obj/item/paper))
-		var/obj/item/paper/P = W
-		dat += "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamp_text]</BODY></HTML>"
+	if(istype(cur_page_item, /obj/item/paper))
+		var/obj/item/paper/cur_paper = cur_page_item
+		dat += "<HTML><HEAD><TITLE>[cur_paper.name]</TITLE></HEAD><BODY>[cur_paper.info][cur_paper.stamp_text]</BODY></HTML>"
 		show_browser(user, dat, "window=[name]")
 		onclose(user, name)
 
-	else if(istype(W, /obj/item/photo))
-		var/obj/item/photo/P = W
+	else if(istype(cur_page_item, /obj/item/photo))
+		var/obj/item/photo/cur_photo = cur_page_item
 		dat += {"
-			<html><head><title>[P.name]</title></head><body style='overflow:hidden'>
-			<div> <img src='tmp_photo.png' width = '180'[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : null ]</body></html>
+			<html><head><title>[cur_photo.name]</title></head><body style='overflow:hidden'>
+			<div> <img src='tmp_photo.png' width = '180'[cur_photo.scribble ? "<div> Written on the back:<br><i>[cur_photo.scribble]</i>" : null ]</body></html>
 		"}
-		send_rsc(user, P.img, "tmp_photo.png")
+		send_rsc(user, cur_photo.img, "tmp_photo.png")
 		show_browser(user, dat, "window=[name]")
 		onclose(user, name)
 	user.set_machine(src)
