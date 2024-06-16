@@ -9,11 +9,15 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 	icon                      = 'icons/obj/structures/compost.dmi'
 	icon_state                = ICON_STATE_WORLD
 	anchored                  = TRUE
-	atom_flags                = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
-	material                  = /decl/material/solid/organic/wood
+	density                   = TRUE
+	atom_flags                = ATOM_FLAG_CLIMBABLE
 	matter                    = null
+	material                  = /decl/material/solid/organic/wood
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	wrenchable                = FALSE
+	possible_transfer_amounts = @"[10,25,50,100]"
+	volume                    = 2000
+	can_toggle_open           = FALSE
 	storage                   = /datum/storage/hopper/industrial/compost
 
 /obj/structure/reagent_dispensers/compost_bin/Initialize()
@@ -29,7 +33,6 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 					qdel(worm)
 					break
 	. = ..()
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER // something seems to be unsetting this :(
 
 /obj/structure/reagent_dispensers/compost_bin/Destroy()
 	if(is_processing)

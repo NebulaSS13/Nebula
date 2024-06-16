@@ -5,7 +5,7 @@
 	icon_state                = ICON_STATE_WORLD
 	anchored                  = TRUE
 	density                   = TRUE
-	atom_flags                = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags                = ATOM_FLAG_CLIMBABLE
 	matter                    = null
 	material                  = /decl/material/solid/stone/granite
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_DESC
@@ -13,11 +13,18 @@
 	amount_dispensed          = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
 	volume                    = 10000
+	can_toggle_open           = FALSE
 
 /obj/structure/reagent_dispensers/well/on_update_icon()
 	. = ..()
 	if(reagents?.total_volume)
 		add_overlay(overlay_image(icon, "[icon_state]-fluid", reagents.get_color(), (RESET_COLOR | RESET_ALPHA)))
+
+/obj/structure/reagent_dispensers/well/on_reagent_change()
+	. = ..()
+	update_icon()
+	if(!is_processing)
+		START_PROCESSING(SSobj, src)
 
 /obj/structure/reagent_dispensers/well/mapped/populate_reagents()
 	. = ..()
@@ -34,9 +41,3 @@
 	if(is_processing)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
-
-/obj/structure/reagent_dispensers/well/mapped/on_reagent_change()
-	. = ..()
-	update_icon()
-	if(!is_processing)
-		START_PROCESSING(SSobj, src)
