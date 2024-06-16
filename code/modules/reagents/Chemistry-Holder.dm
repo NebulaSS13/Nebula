@@ -654,7 +654,6 @@ var/global/obj/temp_reagents_holder = new
 	trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update)
 	// Deferred updates are presumably being done by SSfluids.
 	// Do an immediate fluid_act call rather than waiting for SSfluids to proc.
-	world << "honk"
 	if(!defer_update)
 		target.fluid_act(target.reagents)
 
