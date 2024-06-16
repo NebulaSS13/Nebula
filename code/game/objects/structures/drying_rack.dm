@@ -20,6 +20,14 @@
 /obj/structure/drying_rack/Process()
 	if(!drying)
 		return
+
+	var/decl/state/weather/weather_state = weather?.weather_system?.current_state
+	if(istype(weather_state) && weather_state.is_liquid)
+		return // can't dry in the rain
+
+	if(loc?.is_flooded(TRUE))
+		return // can't dry in the wet
+
 	var/dry_product = drying?.dry_out(src)
 	if(dry_product)
 		if(drying != dry_product)
