@@ -45,23 +45,26 @@
 /obj/item/nullrod/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
 		return
+	return A.nullrod_act(user, src)
 
-	if(istype(A, /obj/structure/deity/altar))
-		var/obj/structure/deity/altar/altar = A
-		if(!altar.linked_god.silenced) //Don't want them to infinity spam it.
-			altar.linked_god.silence(10)
-			new /obj/effect/temporary(get_turf(altar),'icons/effects/effects.dmi',"purple_electricity_constant", 10)
-			altar.visible_message("<span class='notice'>\The [altar] groans in protest as reality settles around \the [src].</span>")
+/atom/proc/nullrod_act(mob/user, obj/item/nullrod/rod)
+	return FALSE
 
-	if(istype(A, /turf/wall/cult))
-		var/turf/wall/cult/W = A
-		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
-		W.ChangeTurf(/turf/wall)
+/turf/wall/cult/nullrod_act(mob/user, obj/item/nullrod/rod)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] touches \the [src] with \the [rod], and the enchantment affecting it fizzles away."),
+		SPAN_NOTICE("You touch \the [src] with \the [rod], and the enchantment affecting it fizzles away.")
+	)
+	ChangeTurf(/turf/wall)
+	return TRUE
 
-	if(istype(A, /turf/floor/cult))
-		var/turf/floor/cult/F = A
-		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
-		F.ChangeTurf(/turf/floor, keep_air = TRUE)
+/turf/floor/cult/nullrod_act(mob/user, obj/item/nullrod/rod)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] touches \the [src] with \the [rod], and the enchantment affecting it fizzles away."),
+		SPAN_NOTICE("You touch \the [src] with \the [rod], and the enchantment affecting it fizzles away.")
+	)
+	ChangeTurf(/turf/floor, keep_air = TRUE)
+	return TRUE
 
 
 /obj/item/energy_net

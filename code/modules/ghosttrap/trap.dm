@@ -189,7 +189,7 @@
 /decl/ghosttrap/cult_shade
 	name = "shade"
 	ghost_trap_message = "They are occupying a soul stone now."
-	ban_checks = list(/decl/special_role/cultist, /decl/special_role/godcultist)
+	ban_checks = list(/decl/special_role/cultist)
 	pref_check = "ghost_shade"
 	can_set_own_name = FALSE
 

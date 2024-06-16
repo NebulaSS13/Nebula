@@ -37,7 +37,3 @@
 		else
 			E.take_external_damage(burn=6, used_weapon = "hot iron")
 			to_chat(H, SPAN_WARNING("You notice that your [E] is burned."))
-
-/spell/hand/burning_grip/tower
-	desc = "Allows you cause an object to heat up intensly in someone's hand, making them drop it and whatever skin is attached."
-	charge_max = 3

@@ -44,10 +44,6 @@
 
 	return "The spell [src] now has a larger explosion."
 
-/spell/targeted/projectile/dumbfire/fireball/tower
-	desc = "Imbue yourself with the power of exploding fire."
-	charge_max = 2
-
 //PROJECTILE
 
 /obj/item/projectile/spell_projectile/fireball

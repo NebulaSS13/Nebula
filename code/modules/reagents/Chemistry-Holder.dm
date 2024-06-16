@@ -677,13 +677,3 @@ var/global/obj/temp_reagents_holder = new
 	else
 		reagents = new/datum/reagents(max_vol, src)
 	return reagents
-
-/datum/reagents/Topic(href, href_list)
-	. = ..()
-	if(!. && href_list["deconvert"])
-		var/list/data = REAGENT_DATA(src, /decl/material/liquid/water)
-		if(LAZYACCESS(data, "holy"))
-			var/mob/living/target = locate(href_list["deconvert"])
-			if(istype(target) && !QDELETED(target) && target.mind)
-				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
-				godcult.remove_antagonist(target.mind,1)

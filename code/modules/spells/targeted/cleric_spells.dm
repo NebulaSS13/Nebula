@@ -32,10 +32,6 @@
 	amt_dam_robo -= 7
 	return "[src] will now heal more."
 
-/spell/targeted/heal_target/tower
-	desc = "Allows you to heal yourself, or others, for a slight amount."
-	charge_max = 2
-
 /spell/targeted/heal_target/touch
 	name = "Healing Touch"
 	desc = "Heals an adjacent target for a reasonable amount of health."
@@ -83,11 +79,6 @@
 
 	return "[src] heals more, and heals organ damage and radiation."
 
-/spell/targeted/heal_target/major/tower
-	charge_max = 1
-	spell_flags = INCLUDEUSER | SELECTABLE
-	desc = "Allows you to heal others for a great amount."
-
 /spell/targeted/heal_target/area
 	name = "Cure Area"
 	desc = "This spell heals everyone in an area."
@@ -113,10 +104,6 @@
 	range += 2
 
 	return "[src] now heals more in a wider area."
-
-/spell/targeted/heal_target/area/tower
-	desc = "Allows you to heal everyone in an area for minor damage."
-	charge_max = 1
 
 /spell/targeted/heal_target/area/slow
 	charge_max = 2 MINUTES
@@ -195,6 +182,20 @@
 		apply_spell_damage(L)
 		charge_max += 300
 		QDEL_NULL(effect)
+
+/obj/effect/rift
+	name = "rift"
+	desc = "a tear in space and time."
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "rift"
+	anchored = TRUE
+	density = FALSE
+
+/obj/effect/rift/Destroy()
+	for(var/o in contents)
+		var/atom/movable/M = o
+		M.dropInto(loc)
+	. = ..()
 
 /spell/targeted/revoke
 	name = "Revoke Death"

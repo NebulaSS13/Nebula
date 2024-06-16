@@ -31,8 +31,3 @@
 	emp_light += 2
 
 	return "You've increased the range of [src]."
-
-/spell/aoe_turf/disable_tech/starlight
-	hidden_from_codex = TRUE
-	charge_max = 600
-	spell_flags = 0

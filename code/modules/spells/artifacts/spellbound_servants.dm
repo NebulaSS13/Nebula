@@ -149,7 +149,7 @@
 	desc = "A spy and a manipulator to the end, capable of hiding in plain sight and falsifying information to your heart's content."
 	spiel = "On the surface, you are a completely normal person, but is that really all you are? People are so easy to fool, do as your Master says, and do it with style!"
 	spells = list(/spell/toggle_armor/infil_items,
-				/spell/targeted/exhude_pleasantness,
+				/spell/targeted/exude_pleasantness,
 				/spell/targeted/genetic/blind/hysteria)
 
 /datum/spellbound_type/servant/infiltrator/equip_servant(var/mob/living/carbon/human/H)

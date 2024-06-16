@@ -4,10 +4,13 @@
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
+// separated into a proc so that deity can modify it
+/obj/item/sword/cultblade/proc/can_use_safely(mob/living/user)
+	return iscultist(user)
+
 /obj/item/sword/cultblade/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
-	if(iscultist(user) || (user.mind in godcult.current_antagonists))
+	if(can_use_safely(user))
 		return ..()
 
 	var/zone = user.get_active_held_item_slot()
