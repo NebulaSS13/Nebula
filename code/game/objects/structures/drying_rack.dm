@@ -21,10 +21,11 @@
 	if(!drying)
 		return
 
-	var/decl/state/weather/weather_state = weather?.weather_system?.current_state
-	if(istype(weather_state) && weather_state.is_liquid)
-		return // can't dry in the rain
-
+	if(isturf(loc))
+		var/turf/my_turf = loc
+		var/decl/state/weather/weather_state = my_turf.weather?.weather_system?.current_state
+		if(istype(weather_state) && weather_state.is_liquid)
+			return // can't dry in the rain
 	if(loc?.is_flooded(TRUE))
 		return // can't dry in the wet
 
