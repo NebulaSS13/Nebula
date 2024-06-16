@@ -35,7 +35,8 @@
 		to_chat(initiator, "<span class='notice'>You scoop up \the [src]!</span>")
 		to_chat(src, "<span class='notice'>\The [initiator] scoops you up!</span>")
 
-	src.forceMove(H)
+	forceMove(H)
+	reset_offsets(0)
 
 	target.status_flags |= PASSEMOTES
 	H.sync(src)
@@ -46,6 +47,9 @@
 		return FALSE
 	if(QDELETED(scooper) || QDELETED(src))
 		return FALSE
-	if(!CanPhysicallyInteract(scooper))
+	if(istype(loc, /obj/item/holder))
+		if(loc.CanUseTopicPhysical(scooper) != STATUS_INTERACTIVE)
+			return FALSE
+	else if(!CanPhysicallyInteract(scooper))
 		return FALSE
 	return !!holder_type && scooper.mob_size > src.mob_size
