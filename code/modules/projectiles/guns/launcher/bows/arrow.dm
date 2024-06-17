@@ -44,6 +44,9 @@
 	desc = "A long, sharp stick, fletched at one end."
 	var/decl/material/fletching_material
 
+/obj/item/stack/material/bow_ammo/arrow/fifteen
+	amount = 15
+
 /obj/item/stack/material/bow_ammo/arrow/Initialize()
 	if(ispath(fletching_material))
 		fletching_material = GET_DECL(fletching_material)
