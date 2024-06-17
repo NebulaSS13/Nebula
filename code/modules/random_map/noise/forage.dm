@@ -8,6 +8,9 @@
 /obj/item/stack/material/ore/basalt/three
 	amount = 3
 
+/obj/item/stack/material/ore/basalt/ten
+	amount = 10
+
 /atom/movable/spawn_boulder
 	name = "material boulder spawner"
 	is_spawnable_type = FALSE

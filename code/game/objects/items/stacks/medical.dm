@@ -87,6 +87,9 @@
 		/decl/material/liquid/burn_meds/aloe     = 1
 	)
 
+/obj/item/stack/medical/bruise_pack/bandage/five
+	amount = 5
+
 /obj/item/stack/medical/bruise_pack/bandage/proc/get_poultice_requirement_string()
 	. = list()
 	for(var/reagent in poultice_reagent_requirements)
@@ -205,6 +208,9 @@
 	icon_state = "poultice"
 	desc = "A bandage soaked in a medicinal herbal mixture, good for treating burns and preventing infections."
 	animal_heal = 3
+
+/obj/item/stack/medical/ointment/poultice/five
+	amount = 5
 
 /obj/item/stack/medical/ointment/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
