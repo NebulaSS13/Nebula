@@ -314,7 +314,8 @@
 	return (fuel > 0)
 
 /obj/structure/fire_source/on_reagent_change()
-	..()
+	if(!(. = ..()))
+		return
 	if(reagents?.total_volume)
 		var/do_steam = FALSE
 		var/list/waste = list()

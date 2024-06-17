@@ -50,8 +50,8 @@
 	var/notified = FALSE
 
 /obj/item/integrated_circuit/reagent/on_reagent_change()
-	..()
-	push_vol()
+	if((. = ..()))
+		push_vol()
 
 /obj/item/integrated_circuit/reagent/smoke/do_work(ord)
 	switch(ord)

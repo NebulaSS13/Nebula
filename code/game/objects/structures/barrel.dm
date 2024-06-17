@@ -36,7 +36,8 @@
 				storage.handle_item_insertion(null, thing)
 
 /obj/structure/reagent_dispensers/barrel/on_reagent_change()
-	. = ..()
+	if(!(. = ..()))
+		return
 	var/primary_mat = reagents?.get_primary_reagent_name()
 	if(primary_mat)
 		SetName("[material.solid_name] [initial(name)] of [primary_mat]")

@@ -65,8 +65,8 @@
 	volume = 60
 
 /obj/item/chems/glass/pottery/bowl/on_reagent_change()
-	. = ..()
-	update_icon()
+	if((. = ..()))
+		update_icon()
 
 /obj/item/chems/glass/pottery/bowl/on_update_icon()
 	. = ..()

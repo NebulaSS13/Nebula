@@ -342,8 +342,7 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/on_reagent_change()
-	..()
-	if(!operating)
+	if((. = ..()) && !operating)
 		SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/dispose(var/mob/user, var/message = TRUE)

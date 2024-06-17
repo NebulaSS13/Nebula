@@ -89,7 +89,8 @@
 	update_icon()
 
 /obj/item/chems/cooking_vessel/on_reagent_change()
-	. = ..()
+	if(!(. = ..()))
+		return
 	started_cooking = null
 	if(!is_processing)
 		START_PROCESSING(SSobj, src)

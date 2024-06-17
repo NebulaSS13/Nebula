@@ -113,7 +113,10 @@
 	return ..()
 
 /turf/floor/natural/on_reagent_change()
-	. = ..()
+
+	if(!(. = ..()))
+		return
+
 	if(!QDELETED(src) && reagent_type && height < 0 && !QDELETED(reagents) && reagents.total_volume < abs(height))
 		add_to_reagents(reagent_type, abs(height) - reagents.total_volume)
 
