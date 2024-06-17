@@ -93,6 +93,7 @@
 					new /obj/structure/catwalk(src, R.material.type)
 					return TRUE
 				return
+
 			var/obj/item/stack/S = C
 			var/decl/flooring/use_flooring
 			var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
@@ -103,21 +104,22 @@
 				if((ispath(S.type, F.build_type) || ispath(S.build_type, F.build_type)) && (isnull(F.build_material) || S.material?.type == F.build_material))
 					use_flooring = F
 					break
-			if(!use_flooring)
-				return
-			// Do we have enough?
-			if(use_flooring.build_cost && S.get_amount() < use_flooring.build_cost)
-				to_chat(user, "<span class='warning'>You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor].</span>")
-				return TRUE
-			// Stay still and focus...
-			if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src))
-				return TRUE
-			if(flooring || !S || !user || !use_flooring)
-				return TRUE
-			if(S.use(use_flooring.build_cost))
-				set_flooring(use_flooring)
-				playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-			return TRUE
+
+			if(use_flooring)
+				// Do we have enough?
+				if(use_flooring.build_cost && S.get_amount() < use_flooring.build_cost)
+					to_chat(user, "<span class='warning'>You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor].</span>")
+					return TRUE
+				// Stay still and focus...
+				if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src))
+					return TRUE
+				if(flooring || !S || !user || !use_flooring)
+					return TRUE
+				if(S.use(use_flooring.build_cost))
+					set_flooring(use_flooring)
+					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
+					return TRUE
+
 		// Repairs and Deconstruction.
 		else if(IS_CROWBAR(C))
 			if(is_floor_damaged())

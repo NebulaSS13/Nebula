@@ -265,15 +265,6 @@
 		if(W?.storage?.collection_mode && W.storage.gather_all(src, user))
 			return TRUE
 
-	// Must be open, but food items should not be filled from sources like this. They're open in order to add condiments, not to be poured into/out of.
-	// TODO: Rewrite open-container-ness or food to make this unnecessary!
-	if(ATOM_IS_OPEN_CONTAINER(W) && !istype(W, /obj/item/chems/food) && W.reagents && reagents?.total_volume >= FLUID_PUDDLE)
-		var/taking = min(reagents.total_volume, REAGENTS_FREE_SPACE(W.reagents))
-		if(taking > 0)
-			to_chat(user, SPAN_NOTICE("You fill \the [W] with [reagents.get_primary_reagent_name()] from \the [src]."))
-			reagents.trans_to(W, taking)
-			return TRUE
-
 	if(istype(W, /obj/item) && storage && storage.use_to_pickup && storage.collection_mode)
 		storage.gather_all(src, user)
 		return TRUE
@@ -288,6 +279,21 @@
 
 	if(IS_COIL(W) && try_build_cable(W, user))
 		return TRUE
+
+	if(reagents?.total_volume >= FLUID_PUDDLE)
+		// Must be open, but food items should not be filled from sources like this. They're open in order to add condiments, not to be poured into/out of.
+		// TODO: Rewrite open-container-ness or food to make this unnecessary!
+		if(ATOM_IS_OPEN_CONTAINER(W) && !istype(W, /obj/item/chems/food) && W.reagents)
+			var/taking = min(reagents.total_volume, REAGENTS_FREE_SPACE(W.reagents))
+			if(taking > 0)
+				to_chat(user, SPAN_NOTICE("You fill \the [W] with [reagents.get_primary_reagent_name()] from \the [src]."))
+				reagents.trans_to(W, taking)
+				return TRUE
+
+		if(user.a_intent == I_HELP)
+			user.visible_message(SPAN_NOTICE("\The [user] dips \the [W] into \the [reagents.get_primary_reagent_name()]."))
+			W.fluid_act(reagents)
+			return TRUE
 
 	return ..()
 

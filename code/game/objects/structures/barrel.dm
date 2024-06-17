@@ -19,6 +19,13 @@
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
+/obj/structure/reagent_dispensers/barrel/attackby(obj/item/W, mob/user)
+	. = ..()
+	if(!. && user.a_intent == I_HELP && reagents?.total_volume > FLUID_PUDDLE)
+		user.visible_message(SPAN_NOTICE("\The [user] dips \the [W] into \the [reagents.get_primary_reagent_name()]."))
+		W.fluid_act(reagents)
+		return TRUE
+
 /obj/structure/reagent_dispensers/barrel/LateInitialize(mapload, ...)
 	..()
 	if(mapload)

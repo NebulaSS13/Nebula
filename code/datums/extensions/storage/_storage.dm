@@ -201,6 +201,12 @@ var/global/list/_test_storage_items = list()
 		var/mob/M = W.loc
 		if(!M.try_unequip(W))
 			return
+
+	if(holder.reagents?.total_volume)
+		W.fluid_act(holder.reagents)
+		if(QDELETED(W))
+			return
+
 	W.forceMove(holder)
 	W.on_enter_storage(src)
 	if(user)
