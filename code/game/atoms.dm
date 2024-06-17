@@ -132,6 +132,9 @@
 /// Handle reagents being modified
 /atom/proc/on_reagent_change()
 	SHOULD_CALL_PARENT(TRUE)
+	if(storage && reagents?.total_volume)
+		for(var/obj/item/thing in get_stored_inventory())
+			thing.fluid_act(reagents)
 
 /**
 	Handle an atom bumping this atom
