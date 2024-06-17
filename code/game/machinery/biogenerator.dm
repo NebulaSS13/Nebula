@@ -59,8 +59,8 @@
 	. = ..()
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
-	..()
-	update_icon()
+	if((. = ..()))
+		update_icon()
 
 /obj/machinery/biogenerator/on_update_icon()
 	if(state == BG_NO_BEAKER)

@@ -55,8 +55,8 @@
 	return ..()
 
 /obj/item/chems/crucible/on_reagent_change()
-	. = ..()
-	queue_icon_update()
+	if((. = ..()))
+		queue_icon_update()
 
 /obj/item/chems/crucible/on_update_icon()
 	. = ..()

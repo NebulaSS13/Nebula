@@ -25,7 +25,8 @@
 	. = ..()
 
 /obj/item/chems/ivbag/on_reagent_change()
-	..()
+	if(!(. = ..()))
+		return
 	if(reagents?.total_volume > volume/2)
 		w_class = ITEM_SIZE_SMALL
 	else

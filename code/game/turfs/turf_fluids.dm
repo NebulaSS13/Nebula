@@ -163,7 +163,8 @@
 
 /turf/on_reagent_change()
 
-	..()
+	if(!(. = ..()))
+		return
 
 	if(reagents?.total_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)

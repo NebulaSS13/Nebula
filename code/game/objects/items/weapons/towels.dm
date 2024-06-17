@@ -32,7 +32,8 @@
 	. = ..()
 
 /obj/item/towel/on_reagent_change()
-	. = ..()
+	if(!(. = ..()))
+		return
 	if(reagents?.total_volume)
 		SetName("damp [initial(name)]")
 		if(!is_processing)

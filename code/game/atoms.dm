@@ -52,12 +52,15 @@
 	var/tmp/default_pixel_z
 	var/tmp/default_pixel_w
 
-	// Health vars largely used by obj and mob.
+	/// (FLOAT) Current remaining health value.
 	var/current_health
+	/// (FLOAT) Theoretical maximum health value.
 	var/max_health
 
-	// /datum/storage instance to use for this obj. Set to a type for instantiation on init.
+	/// (DATUM) /datum/storage instance to use for this obj. Set to a type for instantiation on init.
 	var/datum/storage/storage
+	/// (FLOAT) world.time of last on_reagent_update call, used to prevent recursion due to reagents updating reagents
+	VAR_PRIVATE/_reagent_update_started = 0
 
 /atom/proc/get_max_health()
 	return max_health
@@ -130,11 +133,21 @@
 	return 0
 
 /// Handle reagents being modified
+/atom/proc/try_on_reagent_change()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	set waitfor = FALSE
+	if(_reagent_update_started >= world.time)
+		return FALSE
+	_reagent_update_started = world.time
+	sleep(0) // Defer to end of tick so we don't drop subsequent reagent updates.
+	return on_reagent_change()
+
 /atom/proc/on_reagent_change()
 	SHOULD_CALL_PARENT(TRUE)
 	if(storage && reagents?.total_volume)
 		for(var/obj/item/thing in get_stored_inventory())
 			thing.fluid_act(reagents)
+	return TRUE
 
 /**
 	Handle an atom bumping this atom

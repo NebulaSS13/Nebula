@@ -34,7 +34,8 @@
 		atom_flags = old_atom_flags
 
 /obj/structure/reagent_dispensers/on_reagent_change()
-	..()
+	if(!(. = ..()))
+		return
 	if(reagents?.total_volume > 0)
 		tool_interaction_flags = 0
 	else

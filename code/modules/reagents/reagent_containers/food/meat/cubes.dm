@@ -54,8 +54,7 @@
 		Expand(get_turf(target))
 
 /obj/item/chems/food/monkeycube/on_reagent_change()
-	..()
-	if(!QDELETED(src) && reagents?.has_reagent(/decl/material/liquid/water))
+	if((. = ..()) && !QDELETED(src) && reagents?.has_reagent(/decl/material/liquid/water))
 		Expand()
 
 /obj/item/chems/food/monkeycube/wrapped

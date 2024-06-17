@@ -79,7 +79,7 @@ var/global/obj/temp_reagents_holder = new
 		if(my_atom.reagents == src)
 			my_atom.reagents = null
 			if(total_volume > 0) // we can assume 0 reagents and null reagents are broadly identical for the purposes of atom logic
-				my_atom.on_reagent_change()
+				my_atom.try_on_reagent_change()
 		my_atom = null
 
 /datum/reagents/GetCloneArgs()
@@ -235,16 +235,14 @@ var/global/obj/temp_reagents_holder = new
 	update_total()
 	if(!safety)
 		HANDLE_REACTIONS(src)
-	if(my_atom)
-		my_atom.on_reagent_change()
+	my_atom?.try_on_reagent_change()
 
 ///Set and call updates on the target holder.
 /datum/reagents/proc/set_holder(var/obj/new_holder)
 	if(my_atom == new_holder)
 		return
 	my_atom = new_holder
-	if(my_atom)
-		my_atom.on_reagent_change()
+	my_atom?.try_on_reagent_change()
 	handle_update()
 
 /datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
@@ -333,7 +331,7 @@ var/global/obj/temp_reagents_holder = new
 	LAZYCLEARLIST(reagent_volumes)
 	LAZYCLEARLIST(reagent_data)
 	total_volume = 0
-	my_atom?.on_reagent_change()
+	my_atom?.try_on_reagent_change()
 
 /datum/reagents/proc/get_overdose(var/decl/material/current)
 	if(current)

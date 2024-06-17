@@ -79,10 +79,10 @@
 	desc = new_desc_list.Join("\n")
 
 /obj/item/chems/on_reagent_change()
-	..()
-	update_container_name()
-	update_container_desc()
-	update_icon()
+	if((. = ..()))
+		update_container_name()
+		update_container_desc()
+		update_icon()
 
 /obj/item/chems/verb/set_amount_per_transfer_from_this()
 	set name = "Set Transfer Amount"

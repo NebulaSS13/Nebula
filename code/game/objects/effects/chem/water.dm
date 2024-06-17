@@ -10,8 +10,8 @@
 	QDEL_IN(src, 15 SECONDS) // In case whatever made it forgets to delete it
 
 /obj/effect/effect/water/on_reagent_change()
-	..()
-	set_color(reagents?.get_color())
+	if((. = ..()))
+		set_color(reagents?.get_color())
 
 /obj/effect/effect/water/proc/set_up(var/turf/target, var/step_count = 5, var/delay = 5)
 	if(!target)

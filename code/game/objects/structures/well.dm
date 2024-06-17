@@ -21,7 +21,8 @@
 		add_overlay(overlay_image(icon, "[icon_state]-fluid", reagents.get_color(), (RESET_COLOR | RESET_ALPHA)))
 
 /obj/structure/reagent_dispensers/well/on_reagent_change()
-	. = ..()
+	if(!(. = ..()))
+		return
 	update_icon()
 	if(!is_processing)
 		START_PROCESSING(SSobj, src)
