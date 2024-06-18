@@ -42,6 +42,7 @@
 	#include "outfits/wilderness.dm"
 
 	#include "shaded_hills_currency.dm"
+	#include "shaded_hills_events.dm"
 	#include "shaded_hills_locks.dm"
 	#include "shaded_hills_map.dm"
 	#include "shaded_hills_names.dm"

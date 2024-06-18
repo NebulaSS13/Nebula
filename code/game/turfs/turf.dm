@@ -500,17 +500,16 @@
 	// We have a weather system and we are exposed to it; update our vis contents.
 	if(istype(new_weather) && is_outside())
 		if(weather != new_weather)
-			if(weather)
-				remove_vis_contents(weather.vis_contents_additions)
 			weather = new_weather
-			add_vis_contents(weather.vis_contents_additions)
 			. = TRUE
 
 	// We are indoors or there is no local weather system, clear our vis contents.
 	else if(weather)
-		remove_vis_contents(weather.vis_contents_additions)
 		weather = null
 		. = TRUE
+
+	if(.)
+		update_vis_contents()
 
 	// Propagate our weather downwards if we permit it.
 	if(force_update_below || (is_open() && .))
@@ -605,8 +604,8 @@
 	var/air_graphic = get_air_graphic()
 	if(length(air_graphic))
 		LAZYDISTINCTADD(., air_graphic)
-	if(weather)
-		LAZYADD(., weather)
+	if(length(weather?.vis_contents_additions))
+		LAZYADD(., weather.vis_contents_additions)
 	if(flooded)
 		var/flood_object = get_flood_overlay(flooded)
 		if(flood_object)

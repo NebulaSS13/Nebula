@@ -293,6 +293,12 @@
 	if(!new_line || !is_type_in_list(new_line, valid_line_types))
 		return FALSE
 
+	// TODO: better solution for grass vs dried grass
+	if(istype(new_line, /obj/item/stack/material))
+		var/obj/item/stack/material/stack = new_line
+		if(!stack.special_crafting_check())
+			return FALSE
+
 	if(!new_line.material?.tensile_strength)
 		to_chat(user, SPAN_WARNING("\The [new_line] isn't suitable for the rigors of fishing."))
 		return TRUE

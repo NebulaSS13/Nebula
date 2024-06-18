@@ -19,7 +19,7 @@
 
 /decl/emote/audible/drake_warble
 	key = "dwarble"
-	emote_message_3p = "warbles happily."
+	emote_message_3p = "$USER$ warbles happily."
 
 /decl/emote/audible/drake_purr
 	key = "dpurr"

@@ -41,7 +41,11 @@
 	traits = list(
 		/decl/trait/sivian_biochemistry = TRAIT_LEVEL_EXISTS
 	)
+
+	// Drakes must be whitelisted for jobs to be able to join as them, see maps.dm.
 	job_blacklist_by_default = TRUE
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+
 	var/list/adult_pain_emotes_with_pain_level = list(
 		list(/decl/emote/audible/drake_huff, /decl/emote/audible/drake_rattle) = 20
 	)

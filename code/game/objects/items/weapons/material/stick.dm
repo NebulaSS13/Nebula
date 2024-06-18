@@ -26,7 +26,11 @@
 
 	if(!sharp && (istype(W, /obj/item/stack/material/bolt) || istype(W, /obj/item/stack/material/bundle)))
 
+		// Ugly way to check for dried grass vs regular grass.
 		var/obj/item/stack/material/fuel = W
+		if(!fuel.special_crafting_check())
+			return ..()
+
 		if(fuel.get_amount() < 5)
 			to_chat(user, SPAN_WARNING("You need at least five units of flammable material to create a torch."))
 			return TRUE

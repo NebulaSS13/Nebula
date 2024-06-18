@@ -26,3 +26,8 @@
 
 /area/shaded_hills/caves/unexplored/woods
 	name = "Trackless Deeps - Far North"
+
+/area/shaded_hills/forester_hut
+	name = "\improper Foresters' Hut"
+	fishing_failure_prob = "100"
+	fishing_results = list()

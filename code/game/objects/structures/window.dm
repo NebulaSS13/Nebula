@@ -77,7 +77,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
-/obj/structure/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/structure/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
 	if(. && damage_type == BRUTE)
 		playsound(loc, "glasscrack", 100, 1)
@@ -569,7 +569,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/obj/structure/window/reinforced/crescent/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/structure/window/reinforced/crescent/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	return
 
 /obj/structure/window/reinforced/crescent/shatter()

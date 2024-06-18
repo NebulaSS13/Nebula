@@ -130,7 +130,7 @@
 		// The closer we are to impact site, the longer it takes for shield to come back up.
 		S.fail(-(-range + get_dist(src, S)) * 2)
 
-/obj/effect/shield/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/effect/shield/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(!gen)
 		qdel(src)
 		return

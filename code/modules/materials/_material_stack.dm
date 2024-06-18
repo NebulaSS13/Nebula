@@ -63,6 +63,9 @@
 		LAZYSET(matter, reinf_material.type, MATTER_AMOUNT_REINFORCEMENT)  // No matter_multiplier as this is applied in parent.
 	..()
 
+/obj/item/stack/material/proc/special_crafting_check()
+	return TRUE
+
 /obj/item/stack/material/proc/update_strings()
 	var/prefix_name = name_modifier ? "[name_modifier] " : ""
 	if(amount>1)

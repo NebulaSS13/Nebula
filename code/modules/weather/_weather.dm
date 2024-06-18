@@ -62,8 +62,8 @@
 	for(var/tz in affecting_zs)
 		for(var/turf/T as anything in block(locate(1, 1, tz), locate(world.maxx, world.maxy, tz)))
 			if(T.weather == src)
-				T.remove_vis_contents(vis_contents_additions)
 				T.weather = null
+				T.update_vis_contents()
 	vis_contents_additions.Cut()
 	SSweather.unregister_weather_system(src)
 	QDEL_NULL(lightning_overlay)
@@ -99,3 +99,4 @@
 	alpha             = 0
 	invisibility      = INVISIBILITY_NONE
 	is_spawnable_type = FALSE
+	appearance_flags  = RESET_COLOR | KEEP_APART

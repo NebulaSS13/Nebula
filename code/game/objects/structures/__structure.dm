@@ -121,7 +121,7 @@
 	set waitfor = FALSE
 	return FALSE
 
-/obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(current_health == -1) // This object does not take damage.
 		return
 

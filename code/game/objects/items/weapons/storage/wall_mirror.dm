@@ -38,7 +38,7 @@
 	. = ..()
 	flick("mirror_open",src)
 
-/obj/structure/mirror/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0)
+/obj/structure/mirror/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(prob(damage))
 		visible_message(SPAN_WARNING("[src] shatters!"))
 		shatter()
