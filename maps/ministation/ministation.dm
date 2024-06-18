@@ -15,6 +15,9 @@ Twice...
 		#include "../../code/unit_tests/offset_tests.dm"
 	#endif
 
+	#include "../../mods/gamemodes/heist/_heist.dme"
+	#include "../../mods/gamemodes/mixed/_mixed.dme"
+
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
 	#include "../../mods/content/xenobiology/_xenobiology.dme"

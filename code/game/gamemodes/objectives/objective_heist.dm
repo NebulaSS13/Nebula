@@ -1,10 +1,7 @@
-/datum/objective/heist/proc/choose_target()
-	return
-
-/datum/objective/heist/kidnap
+/datum/objective/kidnap
 	var/list/roles
 
-/datum/objective/heist/kidnap/choose_target()
+/datum/objective/kidnap/find_target()
 	var/list/possible_targets = list()
 	var/list/priority_targets = list()
 
@@ -28,7 +25,7 @@
 		explanation_text = "Free Objective"
 	return target
 
-/datum/objective/heist/loot/choose_target()
+/datum/objective/loot/find_target()
 	var/loot = "an object"
 	switch(rand(1,8))
 		if(1)
@@ -65,8 +62,9 @@
 			loot = "an ion gun"
 
 	explanation_text = "It's a buyer's market out here. Steal [loot] for resale."
+	return target
 
-/datum/objective/heist/salvage/choose_target()
+/datum/objective/salvage/find_target()
 	var/list/loot = list(
 		/decl/material/solid/metal/steel = 300,
 		/decl/material/solid/glass = 200,
@@ -79,6 +77,7 @@
 
 	var/decl/material/mat = GET_DECL(pick(loot))
 	explanation_text = "Ransack the [station_name()] and escape with [loot[mat.type]] unit\s of [mat.solid_name]."
+	return target
 
-/datum/objective/heist/preserve_crew
+/datum/objective/preserve_crew
 	explanation_text = "Do not leave anyone behind, alive or dead."
