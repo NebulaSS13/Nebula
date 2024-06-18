@@ -1,7 +1,13 @@
 #ifndef GAMEMODE_PACK_CULT
 #define GAMEMODE_PACK_CULT
+
+#ifdef GAMEMODE_PACK_DEITY
+#warn Deity modpack loaded before Cult modpack, Nar'sie godform will be unavailable!
+#endif
+
 // BEGIN_INCLUDE
 #include "_cult.dm"
+#include "archaeology.dm"
 #include "flooring.dm"
 #include "gamemode.dm"
 #include "ghosts.dm"
