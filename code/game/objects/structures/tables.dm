@@ -641,6 +641,13 @@
 /obj/structure/table/handle_default_crowbar_attackby(var/mob/user, var/obj/item/crowbar)
 	return !reinf_material && ..()
 
+// For doing surgery on tables
+/obj/structure/table/get_surgery_success_modifier(delicate)
+	return delicate ? -10 : 0
+
+/obj/structure/table/get_surgery_surface_quality(mob/living/victim, mob/living/user)
+	return OPERATE_OKAY
+
 // Table presets.
 /obj/structure/table/frame
 	icon_state = "frame"

@@ -891,9 +891,6 @@
 /atom/proc/singularity_pull(S, current_size)
 	return
 
-/atom/proc/on_defilement()
-	return
-
 /atom/proc/get_overhead_text_x_offset()
 	return 0
 

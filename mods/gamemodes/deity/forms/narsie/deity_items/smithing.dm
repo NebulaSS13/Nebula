@@ -27,8 +27,11 @@
 	base_cost = 75
 	requirements = list(DEITY_BLOOD_CRAFT = 1)
 	recipes = list(/obj/item/clothing/suit/cultrobes/magusred = 80,
-					/obj/item/clothing/head/culthood/magus = 50,
-					/obj/structure/constructshell/cult = 70) //also shield?
+					/obj/item/clothing/head/culthood/magus = 50) //also shield?
+
+// todo: declize /datum/deity_item and move this into decl initialize
+/datum/deity_item/blood_crafting/armored/New()
+	recipes[/obj/structure/constructshell/cult] = 70]
 
 /datum/deity_item/blood_crafting/space
 	name = DEITY_VOID_CRAFT

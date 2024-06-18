@@ -165,3 +165,18 @@
 		new_mob.key = M.key
 
 	to_chat(new_mob, "<B>Your form morphs into that of a corgi.</B>")//Because we don't have cluwnes
+
+/obj/structure/door/cult
+	material = /decl/material/solid/stone/cult
+
+/obj/structure/girder/cult
+	icon= 'icons/obj/cult.dmi'
+	icon_state= "cultgirder"
+	max_health = 150
+	cover = 70
+
+/obj/structure/girder/cult/dismantle_structure(mob/user)
+	material = null
+	reinf_material = null
+	parts_type = null
+	. = ..()

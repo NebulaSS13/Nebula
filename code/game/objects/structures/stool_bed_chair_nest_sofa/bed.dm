@@ -36,6 +36,12 @@
 /obj/structure/bed/get_base_value()
 	. = round(..() * 2.5) // Utility structures should be worth more than their matter (wheelchairs, rollers, etc).
 
+/obj/structure/bed/get_surgery_surface_quality(mob/living/victim, mob/living/user)
+	return OPERATE_PASSABLE
+
+/obj/structure/bed/get_surgery_success_modifier(delicate)
+	return delicate ? -5 : 0
+
 /obj/structure/bed/update_material_name()
 	if(reinf_material)
 		SetName("[reinf_material.adjective_name] [initial(name)]")

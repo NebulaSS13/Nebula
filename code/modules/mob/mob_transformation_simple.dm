@@ -15,12 +15,6 @@ var/global/list/href_to_mob_type = list(
 		"Coffee" =   /mob/living/simple_animal/crab/Coffee,
 		"Parrot" =   /mob/living/simple_animal/hostile/retaliate/parrot,
 		"Poly" =     /mob/living/simple_animal/hostile/retaliate/parrot/Poly,
-	),
-	"Constructs" = list(
-		"Armoured" = /mob/living/simple_animal/construct/armoured,
-		"Builder" =  /mob/living/simple_animal/construct/builder,
-		"Wraith" =   /mob/living/simple_animal/construct/wraith,
-		"Shade" =    /mob/living/simple_animal/shade
 	)
 )
 

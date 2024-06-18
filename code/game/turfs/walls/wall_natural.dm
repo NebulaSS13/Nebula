@@ -175,9 +175,6 @@
 /turf/wall/natural/get_default_material()
 	. = GET_DECL(get_strata_material_type() || /decl/material/solid/stone/sandstone)
 
-/turf/wall/natural/on_defilement()
-	ChangeTurf(/turf/wall/cult)
-
 /turf/wall/natural/get_strata_material_type()
 	//Turf strata overrides level strata
 	if(ispath(strata_override, /decl/strata))

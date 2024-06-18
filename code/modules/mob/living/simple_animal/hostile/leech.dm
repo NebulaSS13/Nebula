@@ -34,7 +34,7 @@
 		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 		if(istype(S) && !length(S.breaches))
 			return
-		H.remove_blood_simple(suck_potency)
+		H.remove_blood(suck_potency, absolute = TRUE)
 		if(current_health < get_max_health())
 			heal_overall_damage(suck_potency / 1.5)
 		belly += clamp(suck_potency, 0, 100)

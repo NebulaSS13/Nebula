@@ -244,10 +244,6 @@
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
 #define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"
 
-#define SOULSTONE_CRACKED -1
-#define SOULSTONE_EMPTY 0
-#define SOULSTONE_ESSENCE 1
-
 //Request Console Department Types
 #define RC_ASSIST 1		//Request Assistance
 #define RC_SUPPLY 2		//Request Supplies

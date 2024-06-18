@@ -69,9 +69,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		name = capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 	real_name = name
 
-	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
-	cult.add_ghost_magic(src)
-
 	ghost_multitool = new(src)
 
 	global.ghost_mob_list += src

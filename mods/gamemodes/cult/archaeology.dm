@@ -1,5 +1,3 @@
-
-
 /decl/archaeological_find/cult
 	item_type = "garments"
 	responsive_reagent = /decl/material/solid/potassium
@@ -22,4 +20,4 @@
 	possible_types = list(
 		/obj/item = 4,
 		/obj/item/soulstone
-		)
+	)

@@ -11,6 +11,17 @@
 	var/decl/species/my_species = get_species()
 	return my_species ? my_species.blood_oxy : TRUE
 
+/mob/proc/get_blood_name()
+	return "blood"
+
+/mob/living/silicon/get_blood_name()
+	return "oil"
+
+/mob/living/human/get_blood_name()
+	if(species)
+		return species.get_blood_name(src)
+	return "blood"
+
 //Gets blood from mob to the container, preserving all data in it.
 /mob/proc/take_blood(obj/item/chems/container, var/amount)
 	var/decl/species/my_species = get_species()
@@ -23,3 +34,9 @@
 	var/data = list()
 	data["donor"] = weakref(src)
 	return data
+
+/// Removes amt units of blood from src, if it has blood.
+/// If absolute is FALSE, rescale amt according to mob size.
+/// Returns the amount of blood removed.
+/mob/proc/remove_blood(amt, absolute = FALSE)
+	return 0

@@ -415,9 +415,8 @@
 	return 0
 
 /turf/proc/remove_cleanables()
-	for(var/obj/effect/O in src)
-		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable))
-			qdel(O)
+	for(var/obj/effect/decal/cleanable/cleanable in src)
+		qdel(cleanable)
 
 /turf/proc/remove_decals()
 	LAZYCLEARLIST(decals)
@@ -643,13 +642,6 @@
 		return 0
 	ChangeTurf(base_turf_type)
 	return 2
-
-/turf/on_defilement()
-	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
-	cult.add_cultiness(CULTINESS_PER_TURF)
-
-/turf/proc/is_defiled()
-	return (locate(/obj/effect/narsie_footstep) in src)
 
 /turf/proc/resolve_to_actual_turf()
 	return src

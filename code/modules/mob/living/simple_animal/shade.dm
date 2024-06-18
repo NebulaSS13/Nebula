@@ -48,3 +48,7 @@
 	if(. && !gibbed)
 		new /obj/item/ectoplasm(src.loc)
 		qdel(src)
+
+/mob/living/simple_animal/shade/mind_initialize()
+	..()
+	mind.assigned_role = "Shade"
