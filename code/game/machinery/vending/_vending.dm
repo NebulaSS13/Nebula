@@ -88,7 +88,7 @@
 
 	build_inventory(populate_parts)
 	return INITIALIZE_HINT_LATELOAD
-	
+
 /obj/machinery/vending/LateInitialize()
 	..()
 	update_icon()
@@ -181,8 +181,8 @@
 		return TRUE
 	if((. = component_attackby(W, user)))
 		return
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(W))
-		wrench_floor_bolts(user)
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(W) || IS_HAMMER(W)))
+		wrench_floor_bolts(user, null, W)
 		power_change()
 		return
 

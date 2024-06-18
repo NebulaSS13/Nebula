@@ -14,6 +14,7 @@
 	var/unwrenched                    = FALSE
 	var/tmp/volume                    = 1000
 	var/amount_dispensed              = 10
+	var/can_toggle_open               = TRUE
 	var/tmp/possible_transfer_amounts = @"[10,25,50,100,500]"
 
 /obj/structure/reagent_dispensers/Initialize(ml, _mat, _reinf_mat)
@@ -21,6 +22,16 @@
 	initialize_reagents()
 	if (!possible_transfer_amounts)
 		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_dispensed
+
+/obj/structure/reagent_dispensers/receive_mouse_drop(atom/dropping, mob/user, params)
+	if(!(. = ..()) && user?.get_active_held_item() == dropping && isitem(dropping))
+		// Awful. Sorry.
+		var/obj/item/item = dropping
+		var/old_atom_flags = atom_flags
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		if(item.standard_pour_into(user, src))
+			. = TRUE
+		atom_flags = old_atom_flags
 
 /obj/structure/reagent_dispensers/on_reagent_change()
 	..()
@@ -311,7 +322,8 @@
 /obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/set_transfer/reagent_dispenser)
-	LAZYADD(., /decl/interaction_handler/toggle_open/reagent_dispenser)
+	if(can_toggle_open)
+		LAZYADD(., /decl/interaction_handler/toggle_open/reagent_dispenser)
 
 //Set amount dispensed
 /decl/interaction_handler/set_transfer/reagent_dispenser

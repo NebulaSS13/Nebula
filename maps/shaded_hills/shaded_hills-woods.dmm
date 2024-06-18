@@ -9,7 +9,7 @@
 /area/shaded_hills/outside/woods)
 "cN" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/knife/kitchen,
+/obj/item/bladed/knife,
 /turf/floor/wood/ebony,
 /area/shaded_hills/forester_hut)
 "dp" = (

@@ -1,6 +1,7 @@
 /// The number of worms influences the rate at which contents are decomposed into compost.
-var/global/const/COMPOST_WORM_EAT_AMOUNT = 50
-var/global/const/COMPOST_MAX_WORMS       = 10
+var/global/const/COMPOST_WORM_EAT_AMOUNT    = 50
+var/global/const/COMPOST_MAX_WORMS          = 10
+var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 
 /obj/structure/reagent_dispensers/compost_bin
 	name                      = "compost bin"
@@ -8,11 +9,15 @@ var/global/const/COMPOST_MAX_WORMS       = 10
 	icon                      = 'icons/obj/structures/compost.dmi'
 	icon_state                = ICON_STATE_WORLD
 	anchored                  = TRUE
-	atom_flags                = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
-	material                  = /decl/material/solid/organic/wood
+	density                   = TRUE
+	atom_flags                = ATOM_FLAG_CLIMBABLE
 	matter                    = null
+	material                  = /decl/material/solid/organic/wood
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	wrenchable                = FALSE
+	possible_transfer_amounts = @"[10,25,50,100]"
+	volume                    = 2000
+	can_toggle_open           = FALSE
 	storage                   = /datum/storage/hopper/industrial/compost
 
 /obj/structure/reagent_dispensers/compost_bin/Initialize()
@@ -28,7 +33,6 @@ var/global/const/COMPOST_MAX_WORMS       = 10
 					qdel(worm)
 					break
 	. = ..()
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER // something seems to be unsetting this :(
 
 /obj/structure/reagent_dispensers/compost_bin/Destroy()
 	if(is_processing)
@@ -186,7 +190,7 @@ var/global/const/COMPOST_MAX_WORMS       = 10
 	if(compost_amount > 0)
 		// Worms gotta eat...
 		if(worms_are_hungry)
-			reagents.remove_reagent(/decl/material/liquid/fertilizer/compost, worm_drink_amount * 0.025)
+			reagents.remove_reagent(/decl/material/liquid/fertilizer/compost, worm_drink_amount * COMPOST_WORM_HUNGER_FACTOR)
 		if(prob(1) && worms < COMPOST_MAX_WORMS)
 			var/obj/item/chems/food/worm/worm = new(src)
 			if(!storage.handle_item_insertion(null, worm))

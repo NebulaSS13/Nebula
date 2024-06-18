@@ -14,7 +14,7 @@
 	return 1
 
 /turf/floor/natural/dirt/fluid_act(var/datum/reagents/fluids)
-	if(fluids?.total_volume < FLUID_SHALLOW)
+	if(fluids?.total_volume < FLUID_PUDDLE)
 		return ..()
 	var/turf/new_turf = ChangeTurf(/turf/floor/natural/mud, keep_air = TRUE, keep_height = TRUE)
 	return new_turf.fluid_act(fluids)

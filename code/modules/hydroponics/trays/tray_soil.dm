@@ -166,7 +166,7 @@
 	..()
 	qdel(src)
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/harvest()
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/harvest(mob/user)
 	..()
 	if(!seed) // Repeat harvests are a thing.
 		qdel(src)

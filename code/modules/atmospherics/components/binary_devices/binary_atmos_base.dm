@@ -30,7 +30,7 @@
 	return TRUE
 
 // Will only be used if you set the anchorable obj flag.
-/obj/machinery/atmospherics/binary/wrench_floor_bolts(user)
+/obj/machinery/atmospherics/binary/wrench_floor_bolts(mob/user, delay = 2 SECONDS, obj/item/tool)
 	. = ..()
 	if(anchored)
 		set_dir(dir) // making sure

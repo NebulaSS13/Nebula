@@ -129,14 +129,18 @@
 			. |= DAM_LASER
 
 /obj/attackby(obj/item/O, mob/user)
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
-		wrench_floor_bolts(user)
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(O) || IS_HAMMER(O)))
+		wrench_floor_bolts(user, null, O)
 		update_icon()
 		return TRUE
 	return ..()
 
-/obj/proc/wrench_floor_bolts(mob/user, delay=20)
-	playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
+/obj/proc/wrench_floor_bolts(mob/user, delay = 2 SECONDS, obj/item/tool)
+	if(!istype(tool) || IS_WRENCH(tool))
+		playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
+	else if(IS_HAMMER(tool))
+		playsound(loc, 'sound/weapons/Genhit.ogg', 100, 1)
+
 	if(anchored)
 		user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 	else

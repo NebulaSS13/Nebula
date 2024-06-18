@@ -43,7 +43,7 @@
 /area/template_noop)
 "t" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/knife,
+/obj/item/bladed/knife,
 /turf/floor/natural/path/basalt,
 /area/template_noop)
 "v" = (

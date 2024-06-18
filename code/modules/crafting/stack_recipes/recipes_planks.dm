@@ -176,3 +176,8 @@
 /decl/stack_recipe/planks/furniture/barrel
 	result_type            = /obj/structure/reagent_dispensers/barrel
 	difficulty             = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/planks/furniture/table_frame
+	result_type            = /obj/structure/table/frame
+	category               = "furniture"
+	difficulty             = MAT_VALUE_HARD_DIY

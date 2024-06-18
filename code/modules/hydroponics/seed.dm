@@ -583,7 +583,7 @@
 	update_growth_stages()
 
 //Place the plant products at the feet of the user.
-/datum/seed/proc/harvest(var/mob/user,var/yield_mod,var/harvest_sample,var/force_amount)
+/datum/seed/proc/harvest(var/mob/user, var/yield_mod, var/harvest_sample, var/force_amount)
 
 	if(!user)
 		return FALSE

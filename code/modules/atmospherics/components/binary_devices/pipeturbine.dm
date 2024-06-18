@@ -99,7 +99,7 @@
 		if (turbine.stat & (BROKEN) || !turbine.anchored || turn(turbine.dir,180) != dir)
 			turbine = null
 
-/obj/machinery/turbinemotor/wrench_floor_bolts(user)
+/obj/machinery/turbinemotor/wrench_floor_bolts(mob/user, delay = 2 SECONDS, obj/item/tool)
 	. = ..()
 	updateConnection()
 

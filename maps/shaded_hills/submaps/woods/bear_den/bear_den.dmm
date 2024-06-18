@@ -22,7 +22,7 @@
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "w" = (
-/obj/item/knife,
+/obj/item/bladed/knife,
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/quin,

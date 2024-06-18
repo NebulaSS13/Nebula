@@ -97,7 +97,7 @@
 	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
 		attack_hand_with_interaction_checks(user)
 		return TRUE
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(O) || IS_HAMMER(O)))
 		return ..()
 	if(stat & (NOPOWER | BROKEN))
 		return

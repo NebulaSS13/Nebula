@@ -154,9 +154,9 @@
 	qdel(src)
 
 /obj/machinery/media/jukebox/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W) && !panel_open)
+	if((IS_WRENCH(W) || IS_HAMMER(W)) && !panel_open)
 		add_fingerprint(user)
-		wrench_floor_bolts(user, 0)
+		wrench_floor_bolts(user, 0, W)
 		power_change()
 		return
 	return ..()
