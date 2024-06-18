@@ -1,5 +1,6 @@
 #if !defined(USING_MAP_DATUM)
 
+	#include "../../mods/gamemodes/deity/_deity.dme"
 	#include "../../mods/gamemodes/meteor/_meteor.dme"
 
 	#include "../../mods/content/mundane.dm"

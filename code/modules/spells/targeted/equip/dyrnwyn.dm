@@ -35,7 +35,3 @@
 
 	material = /decl/material/solid/metal/silver
 	return "Dyrnwyn has been made pure: it is now made of silver."
-
-/spell/targeted/equip_item/dyrnwyn/tower
-	desc = "This spell allows you to summon a golden firey sword for a short duration."
-	charge_max = 1

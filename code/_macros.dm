@@ -38,8 +38,6 @@
 
 #define isliving(A) istype(A, /mob/living)
 
-#define isdeity(A) istype(A, /mob/living/deity)
-
 #define ismouse(A) istype(A, /mob/living/simple_animal/passive/mouse)
 
 #define islizard(A) istype(A, /mob/living/simple_animal/lizard)

@@ -39,7 +39,3 @@
 	block_chance = 60
 
 	return "Your summoned shields will now block more often."
-
-/spell/targeted/equip_item/shield/tower
-	desc = "This spell allows you to summon a magical shield for a short duration."
-	charge_max = 1

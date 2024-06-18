@@ -35,7 +35,3 @@
 /spell/aoe_turf/knock/slow
 	charge_max = 200
 	hidden_from_codex = TRUE
-
-/spell/aoe_turf/knock/tower
-	charge_max = 2
-	hidden_from_codex = TRUE

@@ -13,11 +13,10 @@
 #define CULT_MAX_CULTINESS 1200 // When this value is reached, the game stops checking for updates so we don't recheck every time a tile is converted in endgame
 
 /proc/iscultist(var/mob/player)
-	if(!player.mind)
-		return 0
 	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
-	if(player.mind in cult.current_antagonists)
-		return 1
+	if(player.mind && (player.mind in cult.current_antagonists))
+		return TRUE
+	return FALSE
 
 /decl/special_role/cultist
 	name = "Cultist"

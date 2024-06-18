@@ -34,22 +34,19 @@
 	..()
 	if(ishuman(M))
 		var/list/data = REAGENT_DATA(holder, type)
-		if(data && data["holy"])
-			if(iscultist(M))
-				if(prob(10))
-					var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
-					cult.offer_uncult(M)
-				if(prob(2))
-					var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
-					M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
-			else
-				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
-				if(M.mind && godcult.is_antagonist(M.mind))
-					if(REAGENT_VOLUME(holder, type) > 5)
-						M.take_damage(5, PAIN, do_update_health = FALSE)
-						M.take_damage(1)
-						if(prob(10)) //Only annoy them a /bit/
-							to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]")
+		if(data?["holy"])
+			affect_holy(M, removed, holder)
+
+/decl/material/liquid/water/proc/affect_holy(mob/living/M, removed, datum/reagents/holder)
+	if(iscultist(M))
+		if(prob(10))
+			var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
+			cult.offer_uncult(M)
+		if(prob(2))
+			var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
+			M.visible_message(SPAN_WARNING("\The [M] coughs up \the [S]!"))
+		return TRUE
+	return FALSE
 
 /decl/material/liquid/water/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()

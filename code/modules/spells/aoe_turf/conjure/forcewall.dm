@@ -46,7 +46,3 @@
 	icon_state = "empty"
 	name = "invisible wall"
 	desc = "You have a bad feeling about this."
-
-/spell/aoe_turf/conjure/forcewall/tower
-	desc = "A temporary invincible wall for you to summon."
-	charge_max = 3
