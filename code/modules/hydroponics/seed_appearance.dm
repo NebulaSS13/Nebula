@@ -16,18 +16,19 @@
 		if(SSplants.plant_icon_cache[ikey])
 			dead_overlay = SSplants.plant_icon_cache[ikey]
 		else
-			dead_overlay = image('icons/obj/hydroponics/hydroponics_growing.dmi', "[ikey]")
+			dead_overlay = image('icons/obj/hydroponics/hydroponics_growing.dmi', ikey)
 			dead_overlay.color = DEAD_PLANT_COLOUR
 			SSplants.plant_icon_cache[ikey] = dead_overlay
 	return dead_overlay
 
 /datum/seed/proc/get_harvest_appearance()
 	if(!harvest_overlay)
-		var/ikey = "product-[get_trait(TRAIT_PRODUCT_ICON)]-[get_trait(TRAIT_PLANT_COLOUR)]"
+		var/icon_state = get_trait(TRAIT_PRODUCT_ICON)
+		var/ikey = "product-[icon_state]-[get_trait(TRAIT_PLANT_COLOUR)]"
 		if(SSplants.plant_icon_cache[ikey])
 			harvest_overlay = SSplants.plant_icon_cache[ikey]
 		else
-			harvest_overlay = image('icons/obj/hydroponics/hydroponics_products.dmi', "[ikey]")
+			harvest_overlay = image('icons/obj/hydroponics/hydroponics_products.dmi', icon_state)
 			harvest_overlay.color = get_trait(TRAIT_PRODUCT_COLOUR)
 			SSplants.plant_icon_cache[ikey] = harvest_overlay
 	return harvest_overlay
