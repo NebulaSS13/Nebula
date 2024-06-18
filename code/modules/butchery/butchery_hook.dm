@@ -116,7 +116,7 @@
 		to_chat(user, SPAN_WARNING("You cannot butcher \the [target]."))
 
 /obj/structure/meat_hook/proc/suitable_for_butchery(var/mob/living/victim)
-	return istype(victim) && victim.butchery_data
+	return istype(victim) && victim.butchery_data && (victim.currently_has_skin() || victim.currently_has_innards() || victim.currently_has_bones() || victim.currently_has_meat())
 
 /obj/structure/meat_hook/on_update_icon()
 	..()
@@ -163,9 +163,9 @@
 	SetName(initial(name))
 	update_materials(TRUE) // reset name
 
-/obj/structure/meat_hook/proc/set_carcass_state(var/_state)
+/obj/structure/meat_hook/proc/set_carcass_state(var/_state, var/apply_damage = TRUE)
 	occupant_state = _state
-	if(occupant)
+	if(occupant && apply_damage)
 		occupant.take_damage(rand(50, 60))
 		if(occupant.stat != DEAD)
 			occupant.death()
@@ -198,13 +198,17 @@
 
 		switch(next_state)
 			if(CARCASS_SKINNED)
-				butchery_data.harvest_skin(occupant)
+				if(occupant.currently_has_skin())
+					butchery_data.harvest_skin(occupant)
 			if(CARCASS_GUTTED)
-				butchery_data.harvest_innards(occupant)
+				if(occupant.currently_has_innards())
+					butchery_data.harvest_innards(occupant)
 			if(CARCASS_JOINTED)
-				butchery_data.harvest_bones(occupant)
+				if(occupant.currently_has_bones())
+					butchery_data.harvest_bones(occupant)
 			if(CARCASS_EMPTY)
-				butchery_data.harvest_meat(occupant)
+				if(occupant.currently_has_meat())
+					butchery_data.harvest_meat(occupant)
 		set_carcass_state(next_state)
 		return TRUE
 
@@ -218,17 +222,32 @@
 		return
 	if(!busy)
 		busy = TRUE
-		switch(occupant_state)
-			if(CARCASS_FRESH)
-				do_butchery_step(user, thing, CARCASS_SKINNED, "skinning")
-			if(CARCASS_SKINNED)
-				do_butchery_step(user, thing, CARCASS_GUTTED,  "gutting")
-			if(CARCASS_GUTTED)
-				do_butchery_step(user, thing, CARCASS_JOINTED, "deboning")
-			if(CARCASS_JOINTED)
-				do_butchery_step(user, thing, CARCASS_EMPTY,   "butchering")
-		busy = FALSE
-		return TRUE
+
+	if(occupant_state == CARCASS_FRESH)
+		if(occupant.currently_has_skin())
+			do_butchery_step(user, thing, CARCASS_SKINNED, "skinning")
+		else
+			set_carcass_state(CARCASS_SKINNED, apply_damage = FALSE)
+	if(occupant_state == CARCASS_SKINNED)
+		if(occupant.currently_has_innards())
+			do_butchery_step(user, thing, CARCASS_GUTTED,  "gutting")
+		else
+			set_carcass_state(CARCASS_GUTTED, apply_damage = FALSE)
+	if(occupant_state == CARCASS_GUTTED)
+		if(occupant.currently_has_bones())
+			do_butchery_step(user, thing, CARCASS_JOINTED, "deboning")
+		else
+			set_carcass_state(CARCASS_JOINTED, apply_damage = FALSE)
+	if(occupant_state == CARCASS_JOINTED)
+		if(occupant.currently_has_meat())
+			do_butchery_step(user, thing, CARCASS_EMPTY,   "butchering")
+		else
+			set_carcass_state(CARCASS_EMPTY, apply_damage = FALSE)
+
+	busy = FALSE
+	return TRUE
+
+
 
 #undef CARCASS_EMPTY
 #undef CARCASS_FRESH

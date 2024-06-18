@@ -629,9 +629,15 @@ This function completely restores a damaged organ to perfect condition.
 	if(!owner || damage <= 0)
 		return
 
-	if(BP_IS_CRYSTAL(src) && (damage >= 15 || prob(1)))
+	if(BP_IS_CRYSTAL(src))
 		type = SHATTER
-		playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
+		if(damage >= 15 || prob(1))
+			playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
+	else if((limb_flags & ORGAN_FLAG_SKELETAL) || (BP_IS_PROSTHETIC(src) && !bodytype.is_robotic))
+		if(type == BURN)
+			type = CHARRED
+		else
+			type = SHATTER
 
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Brute damage can possibly trigger an internal wound, too.
@@ -713,7 +719,7 @@ This function completely restores a damaged organ to perfect condition.
 	if(length(ailments))
 		return TRUE
 
-	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED|ORGAN_DISLOCATED))
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_MUTATED|ORGAN_DISLOCATED|ORGAN_DEAD))
 		return TRUE
 
 	if((brute_dam || burn_dam) && !BP_IS_PROSTHETIC(src)) //Robot limbs don't autoheal and thus don't need to process when damaged
@@ -1437,7 +1443,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/get_incision(var/strict)
 
 	var/datum/wound/incision
-	if(BP_IS_CRYSTAL(src))
+	if(BP_IS_CRYSTAL(src) || (limb_flags & ORGAN_FLAG_SKELETAL))
 		for(var/datum/wound/shatter/other in wounds)
 			if(!incision || incision.damage < other.damage)
 				incision = other
@@ -1600,3 +1606,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/default_results = bodytype.get_default_grooming_results(src, tool)
 	if(default_results)
 		. = default_results
+
+/obj/item/organ/external/proc/skeletonize(mob/living/donor)
+	if(limb_flags & ORGAN_FLAG_SKELETAL)
+		return
+	if(!donor)
+		if(!owner)
+			return
+		donor = owner
+	var/decl/butchery_data/butchery_data = GET_DECL(donor.butchery_data)
+	if(!butchery_data?.bone_material)
+		return
+	material = GET_DECL(butchery_data?.bone_material)
+	limb_flags |= ORGAN_FLAG_SKELETAL
+	status |= (ORGAN_DEAD|ORGAN_BRITTLE)
+	_sprite_accessories = null
+	update_icon()

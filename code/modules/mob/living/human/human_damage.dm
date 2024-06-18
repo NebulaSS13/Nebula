@@ -1,8 +1,8 @@
 /mob/living/carbon/human/get_life_damage_types()
-	var/static/list/life_damage_types = list(
+	var/static/list/brain_life_damage_types = list(
 		BRAIN
 	)
-	return life_damage_types
+	return brain_life_damage_types
 
 //Updates the mob's health from organs and mob damage variables
 /mob/living/carbon/human/update_health()

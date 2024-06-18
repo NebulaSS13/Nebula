@@ -412,10 +412,10 @@
 	return yum
 
 /obj/item/organ/proc/can_feel_pain()
-	return bodytype && !(bodytype.body_flags & BODY_FLAG_NO_PAIN)
+	return bodytype && !(bodytype.body_flags & BODY_FLAG_NO_PAIN) && !(status & ORGAN_DEAD)
 
 /obj/item/organ/proc/is_usable()
-	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
+	. = !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/proc/can_recover()
 	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= REALTIMEOFDAY - ORGAN_RECOVERY_THRESHOLD
@@ -437,7 +437,6 @@
 			. += tag ? "<span style='color:#999999'>Necrotic</span>" : "Necrotic"
 	if(BP_IS_BRITTLE(src))
 		. += tag ? "<span class='bad'>Brittle</span>" : "Brittle"
-
 	switch (germ_level)
 		if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
 			. +=  "Mild Infection"

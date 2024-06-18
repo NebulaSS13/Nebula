@@ -57,6 +57,18 @@
 					return /datum/wound/shatter/cracked
 				if(0 to 15)
 					return /datum/wound/shatter/chipped
+		if(CHARRED)
+			switch(damage)
+				if(50 to INFINITY)
+					return /datum/wound/charred/charcoal
+				if(40 to 50)
+					return /datum/wound/charred/charred
+				if(30 to 40)
+					return /datum/wound/charred/burned
+				if(15 to 30)
+					return /datum/wound/charred/seared
+				if(0 to 15)
+					return /datum/wound/charred/singed
 
 	return null //no wound
 
@@ -345,3 +357,18 @@
 
 /datum/wound/shatter/chipped
 	stages = list("chip" = 0)
+
+/datum/wound/charred/charcoal
+	stages = list("crumbling charred area" = 0)
+
+/datum/wound/charred/charred
+	stages = list("charred area" = 0)
+
+/datum/wound/charred/burned
+	stages = list("burned area" = 0)
+
+/datum/wound/charred/seared
+	stages = list("lightly seared area" = 0)
+
+/datum/wound/charred/singed
+	stages = list("singed area" = 0)
