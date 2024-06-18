@@ -61,4 +61,5 @@
 	return
 
 /obj/item/mop/Initialize()
+	. = ..()
 	moppable_types += /obj/effect/rune

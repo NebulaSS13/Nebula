@@ -98,7 +98,7 @@
 	return OPERATE_PASSABLE
 
 /turf/remove_cleanables()
-	for(var/obj/effect/decal/rune/rune in src)
+	for(var/obj/effect/rune/rune in src)
 		qdel(rune)
 
 /* Tier 1 runes below */

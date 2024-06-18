@@ -34,7 +34,7 @@
 /mob/living/do_possession(var/mob/observer/ghost/possessor)
 	if(round_is_spooky(6)) // Six or more active cultists.
 		to_chat(src, SPAN_NOTICE("You reach out with tendrils of ectoplasm and invade the mind of \the [src]..."))
-		to_chat(src, FONT_BOLD("You have assumed direct control of \the [src]."))
+		to_chat(src, SPAN_BOLD("You have assumed direct control of \the [src]."))
 		to_chat(src, SPAN_NOTICE("Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly."))
 		src.universal_speak = TRUE
 		src.universal_understand = TRUE
