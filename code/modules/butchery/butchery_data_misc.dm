@@ -13,19 +13,6 @@
 	gut_type      = null
 	gut_amount    = null
 
-/decl/butchery_data/occult
-	meat_material = /decl/material/solid/stone/cult
-	meat_type     = /obj/item/stack/material/lump
-	bone_material = /decl/material/solid/stone/cult/reinforced
-
-	skin_material = null
-	skin_type     = null
-	skin_amount   = null
-
-	gut_amount    = null
-	gut_material  = null
-	gut_type      = null
-
 /decl/butchery_data/crystal
 	meat_material = /decl/material/solid/gemstone/crystal
 	meat_type     = /obj/item/stack/material/gemstone

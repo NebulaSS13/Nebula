@@ -8,6 +8,7 @@
 // BEGIN_INCLUDE
 #include "_cult.dm"
 #include "archaeology.dm"
+#include "codex.dm"
 #include "flooring.dm"
 #include "gamemode.dm"
 #include "ghosts.dm"
@@ -15,7 +16,6 @@
 #include "holy.dm"
 #include "items.dm"
 #include "materials.dm"
-#include "mob_subtypes.dm"
 #include "narsie.dm"
 #include "objectives.dm"
 #include "overrides.dm"
@@ -28,6 +28,10 @@
 #include "cultify\defile.dm"
 #include "cultify\mob.dm"
 #include "cultify\turf.dm"
+#include "mobs\mob_subtypes.dm"
+#include "mobs\shade.dm"
+#include "mobs\constructs\constructs.dm"
+#include "mobs\constructs\soulstone.dm"
 #include "spells\construct.dm"
 #include "spells\harvest.dm"
 // END_INCLUDE

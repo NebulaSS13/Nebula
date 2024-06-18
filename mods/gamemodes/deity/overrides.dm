@@ -12,10 +12,6 @@
 				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
 				godcult.remove_antagonist(target.mind, TRUE)
 
-/decl/ghosttrap/cult_shade/Initialize()
-	ban_checks |= /decl/special_role/godcultist
-	. = ..()
-
 /decl/material/liquid/water/affect_holy(mob/living/M, removed, datum/reagents/holder)
 	. = ..()
 	if(.)

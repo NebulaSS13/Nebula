@@ -20,8 +20,6 @@
 	faction = "faithless"
 	supernatural = 1
 
-	butchery_data = /decl/butchery_data/occult
-
 /obj/item/natural_weapon/faithless
 	name = "shadow tendril"
 	attack_verb = list("gripped")
@@ -44,9 +42,3 @@
 		if(prob(12))
 			SET_STATUS_MAX(L, STAT_WEAK, 3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
-
-/mob/living/simple_animal/hostile/faithless/cult
-	faction = "cult"
-
-/mob/living/simple_animal/hostile/faithless/cult/on_defilement()
-	return

@@ -21,3 +21,20 @@
 		/obj/item = 4,
 		/obj/item/soulstone
 	)
+
+/decl/xenoarch_digsite/temple/Initialize()
+	find_types[/decl/archaeological_find/cult] = 200
+	find_types[/decl/archaeological_find/cult/sword] = 75
+	return ..()
+
+/decl/xenoarch_digsite/war/Initialize()
+	find_types[/decl/archaeological_find/cult] = 50
+	find_types[/decl/archaeological_find/cult/sword] = 50
+	return ..()
+
+/datum/artifact_trigger/energy/New()
+	var/static/injected = FALSE
+	if(!injected)
+		energetic_things += /obj/item/sword/cultblade
+		injected = TRUE
+	..()

@@ -188,15 +188,6 @@
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 
-/obj/item/belt/soulstone
-	name = "soul stone belt"
-	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away."
-	icon = 'icons/clothing/belt/soulstones.dmi'
-	storage = /datum/storage/belt/soulstone
-
-/obj/item/belt/soulstone/full/WillContain()
-	return list(/obj/item/soulstone = max(1, storage?.storage_slots))
-
 /obj/item/belt/champion
 	name = "championship belt"
 	desc = "Proves to the world that you are the strongest!"

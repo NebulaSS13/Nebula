@@ -265,16 +265,6 @@
 	. = ..()
 	take_damage(rand(1, 5)) //In the destroyed but not utterly threshold.
 
-/obj/structure/grille/cult
-	name = "cult grille"
-	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
-	material = /decl/material/solid/stone/cult
-
-/obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
-	if(air_group)
-		return 0 //Make sure air doesn't drain
-	..()
-
 /obj/structure/grille/proc/is_on_frame()
 	if(locate(/obj/structure/wall_frame) in loc)
 		return TRUE

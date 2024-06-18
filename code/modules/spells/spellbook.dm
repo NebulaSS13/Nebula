@@ -13,7 +13,6 @@ var/global/list/artefact_feedback = list(
 	/obj/item/summoning_stone =            "ST",
 	/obj/item/magic_rock =                 "RA",
 	/obj/item/contract/apprentice =        "CP",
-	/obj/structure/closet/wizard/souls =   "SS",
 	/obj/structure/closet/wizard/scrying = "SO",
 	/obj/item/teleportation_scroll =       "TS",
 	/obj/item/gun/energy/staff =           "ST",

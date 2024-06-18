@@ -3,7 +3,6 @@
 	var/artifact_find_type
 	var/static/potential_finds = list(
 		/obj/machinery/power/supermatter = 5,
-		/obj/structure/constructshell = 5,
 		/obj/machinery/syndicate_beacon = 5,
 		/obj/machinery/power/supermatter/shard = 25,
 		/obj/machinery/auto_cloner = 100,

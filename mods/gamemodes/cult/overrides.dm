@@ -2,6 +2,7 @@
 	var/static/injected = FALSE
 	if(!injected)
 		potential_finds[/obj/structure/cult/pylon] = 50
+		potential_finds[/obj/structure/constructshell] = 5
 		injected = TRUE
 	..()
 
@@ -25,3 +26,39 @@
 		/obj/structure/constructshell             = TRADER_ALL
 	)
 	..()
+
+/datum/trader/ship/clothingshop/hatglovesaccessories/New()
+	possible_trading_items[/obj/item/clothing/head/culthood] = TRADER_BLACKLIST_ALL
+
+/mob/living/silicon/ai
+	shouldnt_see = list(/obj/effect/rune)
+
+// Vent crawling whitelisted items, whoo
+/mob/living/Initialize()
+	. = ..()
+	can_enter_vent_with += list(
+		/obj/item/clothing/head/culthood,
+		/obj/item/clothing/suit/cultrobes,
+		/obj/item/book/tome,
+		/obj/item/sword/cultblade
+	)
+
+/obj/item/vampiric
+	material = /decl/material/solid/stone/cult
+
+/mob/safe_animal(var/MP)
+	. = ..()
+	if(ispath(MP, /mob/living/simple_animal/shade))
+		return 1
+
+/mob/living/simple_animal/hostile/faithless
+	butchery_data = /decl/butchery_data/occult
+
+/mob/living/simple_animal/hostile/faithless/cult
+	faction = "cult"
+
+/mob/living/simple_animal/hostile/faithless/cult/on_defilement()
+	return
+
+/obj/item/mop/Initialize()
+	moppable_types += /obj/effect/rune
