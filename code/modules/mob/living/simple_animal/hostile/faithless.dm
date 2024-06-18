@@ -42,3 +42,11 @@
 		if(prob(12))
 			SET_STATUS_MAX(L, STAT_WEAK, 3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+
+/obj/item/ectoplasm
+	name = "ectoplasm"
+	desc = "Spooky."
+	gender = PLURAL
+	icon = 'icons/obj/items/ectoplasm.dmi'
+	icon_state = ICON_STATE_WORLD
+	material = /decl/material/liquid/drink/compote
