@@ -1,0 +1,6 @@
+author: Penelope Haze
+changes:
+  - {experiment: 'Ammo magazines will not initialize their contents until first interacted
+      with, which makes startup faster but could cause bugs. Report any issues on
+      the issue tracker!'}
+delete-after: true
