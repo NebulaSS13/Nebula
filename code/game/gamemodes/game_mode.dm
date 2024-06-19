@@ -295,7 +295,7 @@ var/global/list/additional_antag_types = list()
 		"REDACTED",
 		"ancient alien artillery",
 		"solar magnetic storms",
-		"sentient time-travelling killbots",
+		"sentient time-traveling killbots",
 		"gravitational anomalies",
 		"wormholes to another dimension",
 		"a telescience mishap",

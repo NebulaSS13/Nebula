@@ -77,3 +77,6 @@
 
 /datum/fabricator_recipe/textiles/overwear/poncho9
 	path = /obj/item/clothing/suit/poncho/cargo
+
+/datum/fabricator_recipe/textiles/overwear/mantle
+	path = /obj/item/clothing/suit/mantle

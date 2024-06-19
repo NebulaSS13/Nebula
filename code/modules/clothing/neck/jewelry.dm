@@ -3,10 +3,23 @@
 	desc = "A simple necklace."
 	icon = 'icons/clothing/accessories/jewelry/necklace.dmi'
 	material = /decl/material/solid/metal/silver
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
+/obj/item/clothing/neck/necklace/prayer_beads
+	name = "prayer beads"
+	desc = "A string of smooth, polished beads."
+	icon = 'icons/clothing/accessories/jewelry/prayer_beads.dmi'
+	material = /decl/material/solid/organic/wood/ebony
+
+/obj/item/clothing/neck/necklace/prayer_beads/gold
+	material = /decl/material/solid/metal/gold
+
+/obj/item/clothing/neck/necklace/prayer_beads/basalt
+	material = /decl/material/solid/stone/basalt
 
 /obj/item/clothing/neck/necklace/locket
-	name = "silver locket"
-	desc = "A silver locket that seems to have space for a photo within."
+	name = "locket"
+	desc = "A locket that seems to have space for a photo within."
 	icon = 'icons/clothing/accessories/jewelry/locket.dmi'
 	var/open
 	var/obj/item/held

@@ -64,6 +64,10 @@
 	path = /obj/item/clothing/suit/robe
 	slot = slot_wear_suit_str
 
+/decl/loadout_option/fantasy/suit/mantle
+	name = "mantle"
+	path = /obj/item/clothing/suit/mantle
+
 /decl/loadout_option/fantasy/suit/cloak
 	name = "cloak"
 	path = /obj/item/clothing/suit/cloak
@@ -127,6 +131,23 @@
 		/decl/material/solid/organic/wood/maple,
 		/decl/material/solid/organic/wood/ebony,
 		/decl/material/solid/organic/wood/walnut
+	)
+
+
+/decl/loadout_option/fantasy/neck
+	abstract_type = /decl/loadout_option/fantasy/neck
+	slot = slot_wear_mask_str
+
+
+/decl/loadout_option/fantasy/neck/prayer_beads
+	name = "prayer beads"
+	path = /obj/item/clothing/neck/necklace/prayer_beads
+	available_materials = list(
+		/decl/material/solid/organic/bone,
+		/decl/material/solid/stone/marble,
+		/decl/material/solid/stone/basalt,
+		/decl/material/solid/organic/wood/mahogany,
+		/decl/material/solid/organic/wood/ebony
 	)
 
 /decl/loadout_category/fantasy/utility

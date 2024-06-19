@@ -23,7 +23,7 @@
 			may cause the estimate to be inaccurate, but will not interrupt the searching process.<br><br> \
 			<b>Life On The Other Side</b><br>\
 			Once you have traversed the Gateway, you may experience some disorientation. Do not panic. \
-			This is a normal side effect of travelling vast distances in a short period of time. You should \
+			This is a normal side effect of traveling vast distances in a short period of time. You should \
 			survey the immediate area, and attempt to locate your complimentary case of space beer. Our \
 			expeditionary teams have ensured the complete safety of all away locations, but in a small \
 			number of cases, the Gateway they have established may not be immediately obvious. \

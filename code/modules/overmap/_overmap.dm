@@ -96,7 +96,7 @@
 		ny = TRANSITIONEDGE + 2
 		nx = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-	testing("[name]: [A] ([A.z],[A.y],[A.z]) travelling from [M] ([M.x],[M.y]).")
+	testing("[name]: [A] ([A.z],[A.y],[A.z]) traveling from [M] ([M.x],[M.y]).")
 
 	var/turf/map = locate(M.x,M.y,assigned_z)
 	var/obj/effect/overmap/visitable/TM

@@ -39,3 +39,12 @@
 	name = "\improper General Store"
 	fishing_failure_prob = "100"
 	fishing_results = list()
+
+
+/area/shaded_hills/shrine
+	name = "\improper Shrine"
+	fishing_failure_prob = "100"
+	fishing_results = list()
+
+/area/shaded_hills/outside/shrine
+	name = "\improper Shrine Grounds"

@@ -17,6 +17,7 @@
 	#include "jobs/_jobs.dm"
 	#include "jobs/caves.dm"
 	#include "jobs/inn.dm"
+	#include "jobs/shrine.dm"
 	#include "jobs/visitors.dm"
 	#include "jobs/wilderness.dm"
 
@@ -38,6 +39,7 @@
 	#include "outfits/_outfits.dm"
 	#include "outfits/caves.dm"
 	#include "outfits/inn.dm"
+	#include "outfits/shrine.dm"
 	#include "outfits/visitors.dm"
 	#include "outfits/wilderness.dm"
 
