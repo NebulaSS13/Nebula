@@ -37,7 +37,7 @@
 		if(!(next_move_dir_sub & movement))
 			next_move_dir_add |= movement
 
-		if(movement && !get_config_value(/decl/config/toggle/allow_diagonal_movement))
+		if(movement && !get_config_value(/decl/config/toggle/on/allow_diagonal_movement))
 			last_move_dir_pressed = movement
 
 	// Client-level keybindings are ones anyone should be able to do at any time
