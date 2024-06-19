@@ -12,30 +12,32 @@
 	pylon_icon_state = "shade"
 	faction = "cult"
 
-	buildables = list(/obj/structure/deity/altar/narsie,
-					/obj/structure/deity/pylon
-					)
-	items = list(/datum/deity_item/general/potential,
-				/datum/deity_item/general/regeneration,
-				/datum/deity_item/boon/eternal_darkness,
-				/datum/deity_item/boon/torment,
-				/datum/deity_item/boon/blood_shard,
-				/datum/deity_item/boon/drain_blood,
-				/datum/deity_item/phenomena/exude_blood,
-				/datum/deity_item/sacrifice,
-				/datum/deity_item/boon/sac_dagger,
-				/datum/deity_item/boon/sac_spell,
-				/datum/deity_item/boon/execution_axe,
-				/datum/deity_item/blood_stone,
-				/datum/deity_item/minions,
-				/datum/deity_item/boon/soul_shard,
-				/datum/deity_item/boon/blood_zombie,
-				/datum/deity_item/boon/tear_veil,
-				/datum/deity_item/phenomena/hellscape,
-				/datum/deity_item/blood_crafting,
-				/datum/deity_item/blood_crafting/armored,
-				/datum/deity_item/blood_crafting/space
-				)
+	buildables = list(
+		/obj/structure/deity/altar/narsie,
+		/obj/structure/deity/pylon
+	)
+	items = list(
+		/datum/deity_item/general/potential,
+		/datum/deity_item/general/regeneration,
+		/datum/deity_item/boon/eternal_darkness,
+		/datum/deity_item/boon/torment,
+		/datum/deity_item/boon/blood_shard,
+		/datum/deity_item/boon/drain_blood,
+		/datum/deity_item/phenomena/exude_blood,
+		/datum/deity_item/sacrifice,
+		/datum/deity_item/boon/sac_dagger,
+		/datum/deity_item/boon/sac_spell,
+		/datum/deity_item/boon/execution_axe,
+		/datum/deity_item/blood_stone,
+		/datum/deity_item/minions,
+		/datum/deity_item/boon/soul_shard,
+		/datum/deity_item/boon/blood_zombie,
+		/datum/deity_item/boon/tear_veil,
+		/datum/deity_item/phenomena/hellscape,
+		/datum/deity_item/blood_crafting/narsie,
+		/datum/deity_item/blood_crafting/armored,
+		/datum/deity_item/blood_crafting/space
+	)
 
 /datum/god_form/narsie/take_charge(var/mob/living/user, var/charge)
 	charge = min(100, charge * 0.25)

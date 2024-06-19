@@ -18,35 +18,35 @@
 	var/power_drain = 7
 	var/looking_for
 	var/static/list/possible_forms = list(
-								"Starborn" = list(
-												"description" = "A species of hardy fire-wreathed soldiers.",
-												"message" = "As a Starborn, you are immune to laser-fire you are a hardy soldier, able to take on the greatest of foes.",
-												"species" = "Starborn"
-											),
-								"Blueforged" = list(
-												"description" = "Trans-dimensional beings with a multitude of miraculous abilities.",
-												"message" = "As a Blueforged, you are immune to all physical damage... except for heat. Not even your god can protect you.",
-												"species" = "Blueforged",
-												"spells" = list(
-													/spell/targeted/ethereal_jaunt,
-													/spell/targeted/shatter,
-													/spell/hand/burning_grip,
-													/spell/aoe_turf/disable_tech,
-													/spell/targeted/projectile/magic_missile,
-													/spell/open_gateway
-												)
-											),
-								"Shadowling" = list(
-												"description" = "Beings that come from a place of no light. They sneak from place to place, disabling everyone they touch..",
-												"message" = "As a Shadow you take damage from the light itself but have the ability to vanish from sight itself.",
-												"species" = "Shadow",
-												"spells" = list(
-															/spell/veil_of_shadows,
-															/spell/targeted/subjugation,
-															/spell/targeted/projectile/magic_missile
-														)
-											)
-										)
+		"Starborn" = list(
+			"description" = "A species of hardy fire-wreathed soldiers.",
+			"message" = "As a Starborn, you are immune to laser-fire you are a hardy soldier, able to take on the greatest of foes.",
+			"species" = "Starborn"
+		),
+		"Blueforged" = list(
+			"description" = "Trans-dimensional beings with a multitude of miraculous abilities.",
+			"message" = "As a Blueforged, you are immune to all physical damage... except for heat. Not even your god can protect you.",
+			"species" = "Blueforged",
+			"spells" = list(
+				/spell/targeted/ethereal_jaunt,
+				/spell/targeted/shatter,
+				/spell/hand/burning_grip,
+				/spell/aoe_turf/disable_tech,
+				/spell/targeted/projectile/magic_missile,
+				/spell/open_gateway
+			)
+		),
+		"Shadowling" = list(
+			"description" = "Beings that come from a place of no light. They sneak from place to place, disabling everyone they touch..",
+			"message" = "As a Shadow you take damage from the light itself but have the ability to vanish from sight itself.",
+			"species" = "Shadow",
+			"spells" = list(
+						/spell/veil_of_shadows,
+						/spell/targeted/subjugation,
+						/spell/targeted/projectile/magic_missile
+					)
+		)
+	)
 
 /obj/structure/deity/gateway/Initialize()
 	. = ..()
@@ -202,7 +202,7 @@
 		return 0
 	charging = 1
 	START_PROCESSING(SSobj, src)
-	src.visible_message("<span class='notice'><b>\The [src]</b> hums, activating.</span>")
+	src.visible_message(SPAN_NOTICE("<b>\The [src]</b> hums, activating."))
 	update_icon()
 	return 1
 
@@ -236,7 +236,7 @@
 			return
 
 		if(charge == 40)
-			src.visible_message("<span class='notice'><b>\The [src]</b> lights up, pulsing with energy.</span>")
+			src.visible_message(SPAN_NOTICE("<b>\The [src]</b> lights up, pulsing with energy."))
 			charging = 0
 			update_icon()
 	else
@@ -256,7 +256,7 @@
 
 /obj/structure/deity/radiant_statue/proc/stop_charging()
 	STOP_PROCESSING(SSobj, src)
-	src.visible_message("<span class='notice'><b>\The [src]</b> powers down, returning to it's dormant form.</span>")
+	src.visible_message(SPAN_NOTICE("<b>\The [src]</b> powers down, returning to its dormant form."))
 	charging = 0
 	update_icon()
 
@@ -264,7 +264,9 @@
 	name = "radiant forge"
 	desc = "a swath of heat and fire permeats from this forge."
 	recipe_feat_list = "Fire Crafting"
-	text_modifications = list("Cost" = "Burn",
-								"Dip" = "fire. Pain envelopes you as dark burns mar your hands and you begin to shape it into something more useful",
-								"Shape" = "You shape the fire, ignoring the painful burns it gives you in the process.",
-								"Out" = "flames")
+	text_modifications = list(
+		"Cost" = "Burn",
+		"Dip" = "fire. Pain envelopes you as dark burns mar your hands and you begin to shape it into something more useful",
+		"Shape" = "You shape the fire, ignoring the painful burns it gives you in the process.",
+		"Out" = "flames"
+	)
