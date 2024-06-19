@@ -837,12 +837,20 @@ default behaviour is:
 /mob/living/proc/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
 	vomit.add_to_reagents(/decl/material/liquid/acid/stomach, 5)
 
+/mob/living/proc/get_flash_mod()
+	var/vision_organ_tag = get_vision_organ_tag()
+	if(vision_organ_tag)
+		var/obj/item/organ/internal/eyes/I = get_organ(vision_organ_tag, /obj/item/organ/internal/eyes)
+		if(I) // get_organ with a type passed already does a typecheck
+			return I.get_flash_mod()
+	return get_bodytype()?.eye_flash_mod
+
 /mob/living/proc/eyecheck()
 	var/total_protection = flash_protection
 	if(should_have_organ(BP_EYES))
-		var/decl/bodytype/root_bodytype = get_bodytype()
-		if(root_bodytype.has_organ[root_bodytype.vision_organ])
-			var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
+		var/vision_organ_tag = get_vision_organ_tag()
+		if(vision_organ_tag && get_bodytype()?.has_organ[vision_organ_tag])
+			var/obj/item/organ/internal/eyes/I = get_organ(vision_organ_tag, /obj/item/organ/internal/eyes)
 			if(!I?.is_usable())
 				return FLASH_PROTECTION_MAJOR
 			total_protection = I.get_total_protection(flash_protection)
@@ -1198,7 +1206,7 @@ default behaviour is:
 		var/how_open = round(E.how_open())
 		if(how_open <= 0)
 			continue
-		var/surgery_icon = E.species.get_surgery_overlay_icon(src)
+		var/surgery_icon = E.get_surgery_overlay_icon()
 		if(!surgery_icon)
 			continue
 		if(!total)
@@ -1633,3 +1641,14 @@ default behaviour is:
 		for(var/obj/item/organ/organ in stat_organs)
 			var/list/organ_info = organ.get_stat_info()
 			stat(organ_info[1], organ_info[2])
+
+/mob/living/proc/get_vision_organ_tag()
+	return get_bodytype()?.vision_organ
+
+/mob/living/proc/get_darksight_range()
+	var/vision_organ_tag = get_vision_organ_tag()
+	if(vision_organ_tag)
+		var/obj/item/organ/internal/eyes/I = get_organ(vision_organ_tag, /obj/item/organ/internal/eyes)
+		if(istype(I))
+			return I.get_darksight_range()
+	return get_bodytype()?.eye_darksight_range

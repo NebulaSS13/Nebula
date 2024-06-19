@@ -21,22 +21,24 @@
 	return ..()
 
 /mob/living/carbon/human/death(gibbed)
-	. = ..()
-	if(.)
-		BITSET(hud_updateflag, HEALTH_HUD)
-		BITSET(hud_updateflag, STATUS_HUD)
-		BITSET(hud_updateflag, LIFE_HUD)
-		//Handle species-specific deaths.
-		callHook("death", list(src, gibbed))
-		handle_hud_list()
-		if(!gibbed)
-			animate_tail_stop()
-			handle_organs()
-			if(species.death_sound)
-				playsound(loc, species.death_sound, 80, 1, 1)
-		if(SSticker.mode)
-			SSticker.mode.check_win()
-		species.handle_death(src)
+	if(!(. = ..()))
+		return
+
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
+
+	//Handle species-specific deaths.
+	callHook("death", list(src, gibbed))
+	handle_hud_list()
+	if(!gibbed)
+		animate_tail_stop()
+		handle_organs()
+		if(species.death_sound)
+			playsound(loc, species.death_sound, 80, 1, 1)
+	if(SSticker.mode)
+		SSticker.mode.check_win()
+	species.handle_death(src)
 
 /mob/living/carbon/human/proc/is_husked()
 	return (MUTATION_HUSK in mutations)

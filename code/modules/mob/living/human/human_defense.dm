@@ -471,20 +471,12 @@ meteor_act
 	return TRUE
 
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	if(root_bodytype.has_organ[root_bodytype.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
+	var/vision_organ_tag = get_vision_organ_tag()
+	if(vision_organ_tag)
+		var/obj/item/organ/internal/eyes/I = get_organ(vision_organ_tag, /obj/item/organ/internal/eyes)
 		if(I)
 			I.additional_flash_effects(intensity)
 	return ..()
-
-/mob/living/carbon/human/proc/getFlashMod()
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	if(root_bodytype.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
-		if(I) // get_organ with a type passed already does a typecheck
-			return I.get_flash_mod()
-	return root_bodytype.eye_flash_mod
 
 /*
 Contians the proc to handle radiation.

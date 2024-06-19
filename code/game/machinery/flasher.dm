@@ -75,12 +75,12 @@
 				continue
 			if(ishuman(O))
 				var/mob/living/carbon/human/H = O
-				flash_time = round(H.getFlashMod() * flash_time)
+				flash_time = round(H.get_flash_mod() * flash_time)
 				if(flash_time <= 0)
 					return
-				var/vision_organ = H.get_bodytype()?.vision_organ
-				if(vision_organ)
-					var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, vision_organ)
+				var/vision_organ_tag = H.get_vision_organ_tag()
+				if(vision_organ_tag)
+					var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, vision_organ_tag)
 					if(E && E.is_bruised() && prob(E.damage + 50))
 						H.flash_eyes()
 						E.damage += rand(1, 5)

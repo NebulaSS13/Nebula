@@ -307,13 +307,13 @@
 /obj/item/organ/external/proc/sever_artery()
 	var/obj/item/organ/internal/heart/heart_path = bodytype?.has_organ[BP_HEART]
 	if(heart_path)
-		if(!BP_IS_PROSTHETIC(src) && !(status & ORGAN_ARTERY_CUT) && !initial(heart_path.open))
+		if(!BP_IS_PROSTHETIC(src) && !(limb_flags & ORGAN_FLAG_SKELETAL) && !(status & ORGAN_ARTERY_CUT) && !initial(heart_path.open))
 			status |= ORGAN_ARTERY_CUT
 			return TRUE
 	return FALSE
 
 /obj/item/organ/external/proc/sever_tendon()
-	if((limb_flags & ORGAN_FLAG_HAS_TENDON) && !BP_IS_PROSTHETIC(src) && !(status & ORGAN_TENDON_CUT))
+	if((limb_flags & ORGAN_FLAG_HAS_TENDON) && !BP_IS_PROSTHETIC(src) && !(limb_flags & ORGAN_FLAG_SKELETAL) && !(status & ORGAN_TENDON_CUT))
 		status |= ORGAN_TENDON_CUT
 		return TRUE
 	return FALSE

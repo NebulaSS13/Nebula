@@ -120,11 +120,11 @@
 
 	//Vision
 	var/obj/item/organ/vision
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	if(root_bodytype.vision_organ)
-		vision = GET_INTERNAL_ORGAN(src, root_bodytype.vision_organ)
+	var/vision_organ_tag = get_vision_organ_tag()
+	if(vision_organ_tag)
+		vision = GET_INTERNAL_ORGAN(src, vision_organ_tag)
 
-	if(!root_bodytype.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
+	if(!vision_organ_tag) // Presumably if a species has no vision organs, they see via some other means.
 		set_status(STAT_BLIND, 0)
 		set_status(STAT_BLURRY, 0)
 	else if(!vision || (vision && !vision.is_usable()))   // Vision organs cut out or broken? Permablind.

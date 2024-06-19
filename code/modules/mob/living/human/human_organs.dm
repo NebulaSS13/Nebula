@@ -4,7 +4,7 @@
 	var/list/bad_external_organs
 	/// organs grouped by category, largely used for stance calc
 	var/list/organs_by_category
-	/// organs indexed by organ_tag 
+	/// organs indexed by organ_tag
 	var/list/organs_by_tag
 	/// unassociated list of internal organs
 	var/tmp/list/internal_organs
@@ -151,6 +151,13 @@
 		if(E.need_process())
 			LAZYDISTINCTADD(bad_external_organs, E)
 
+/mob/living/carbon/human/proc/check_vital_organ_missing()
+	return get_bodytype()?.check_vital_organ_missing(src)
+
+/mob/living/carbon/human/proc/process_internal_organs()
+	for(var/obj/item/organ/I in internal_organs)
+		I.Process()
+
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
 
@@ -158,20 +165,18 @@
 	// Set a timer after this point, since we want a little bit of
 	// wiggle room before the body dies for good (brain transplants).
 	if(stat != DEAD)
-		var/decl/bodytype/root_bodytype = get_bodytype()
-		if(root_bodytype.check_vital_organ_missing(src))
+		if(check_vital_organ_missing())
 			SET_STATUS_MAX(src, STAT_PARA, 5)
 			if(vital_organ_missing_time)
 				if(world.time >= vital_organ_missing_time)
 					death()
 			else
-				vital_organ_missing_time = world.time + root_bodytype.vital_organ_failure_death_delay
+				vital_organ_missing_time = world.time + max(get_bodytype()?.vital_organ_failure_death_delay, 5 SECONDS)
 		else
 			vital_organ_missing_time = null
 
 	//processing internal organs is pretty cheap, do that first.
-	for(var/obj/item/organ/I in internal_organs)
-		I.Process()
+	process_internal_organs()
 
 	var/force_process = should_recheck_bad_external_organs()
 

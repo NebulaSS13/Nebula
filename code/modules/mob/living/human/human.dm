@@ -10,7 +10,7 @@
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/step_count
-	
+
 /mob/living/carbon/human/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 
 	current_health = max_health
@@ -312,14 +312,6 @@
 	flavor_texts[key] = msg
 	set_flavor()
 
-/mob/living/carbon/human/proc/get_darksight_range()
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	if(root_bodytype.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
-		if(istype(I))
-			return I.get_darksight_range()
-	return root_bodytype.eye_darksight_range
-
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)
 		for(var/slot in list(slot_head_str, slot_shoes_str, slot_w_uniform_str, slot_wear_suit_str, slot_glasses_str, slot_l_ear_str, slot_r_ear_str, slot_gloves_str))
@@ -366,7 +358,7 @@
 
 /mob/living/carbon/human/proc/vomit(var/timevomit = 1, var/level = 3, var/deliberate = FALSE)
 
-	set waitfor = 0
+	set waitfor = FALSE
 
 	if(!check_has_mouth() || isSynthetic() || !timevomit || !level || stat == DEAD || lastpuke)
 		return
@@ -1046,7 +1038,7 @@
 /mob/living/carbon/human/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
 	var/safety = eyecheck()
 	if(safety < FLASH_PROTECTION_MODERATE)
-		flash_strength = round(getFlashMod() * flash_strength)
+		flash_strength = round(get_flash_mod() * flash_strength)
 		if(safety > FLASH_PROTECTION_NONE)
 			flash_strength = (flash_strength / 2)
 	. = ..()
@@ -1213,3 +1205,15 @@
 	..()
 	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
 	bodytemperature += temp_inc
+
+/mob/living/carbon/human/currently_has_skin()
+	return currently_has_meat()
+
+/mob/living/carbon/human/currently_has_innards()
+	return length(get_internal_organs())
+
+/mob/living/carbon/human/currently_has_meat()
+	for(var/obj/item/organ/external/limb in get_external_organs())
+		if(istype(limb.material, /decl/material/solid/organic/meat))
+			return TRUE
+	return FALSE

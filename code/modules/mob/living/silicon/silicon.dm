@@ -456,12 +456,6 @@
 		adjustBruteLoss(5, do_update_health = FALSE)
 		adjustFireLoss(10)
 
-/mob/living/silicon/get_death_message(gibbed)
-	return "gives one shrill beep before falling lifeless."
-
-/mob/living/silicon/get_self_death_message(gibbed)
-	return "You have suffered a critical system failure, and are dead."
-
 /mob/living/silicon/get_available_postures()
 	var/static/list/available_postures = list(
 		/decl/posture/standing

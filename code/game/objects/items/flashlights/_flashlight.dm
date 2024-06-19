@@ -111,13 +111,14 @@
 
 		var/obj/item/organ/vision
 		var/decl/bodytype/root_bodytype = target.get_bodytype()
-		if(!root_bodytype?.vision_organ || !target.should_have_organ(root_bodytype.vision_organ))
+		var/vision_organ_tag = target.get_vision_organ_tag()
+		if(!vision_organ_tag || !target.should_have_organ(vision_organ_tag))
 			to_chat(user, SPAN_WARNING("You can't find anything on \the [target] to direct \the [src] into!"))
 			return TRUE
 
-		vision = GET_INTERNAL_ORGAN(target, root_bodytype.vision_organ)
+		vision = GET_INTERNAL_ORGAN(target, vision_organ_tag)
 		if(!vision)
-			vision = root_bodytype.has_organ[root_bodytype.vision_organ]
+			vision = root_bodytype.has_organ[vision_organ_tag]
 			var/decl/pronouns/G = target.get_pronouns()
 			to_chat(user, SPAN_WARNING("\The [target] is missing [G.his] [initial(vision.name)]!"))
 			return TRUE

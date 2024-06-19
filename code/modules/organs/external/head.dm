@@ -93,7 +93,7 @@
 /obj/item/organ/external/head/proc/get_eyes_organ()
 	RETURN_TYPE(/obj/item/organ/internal/eyes)
 	if(owner)
-		return owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+		return owner.get_organ((owner.get_vision_organ_tag() || BP_EYES), /obj/item/organ/internal/eyes)
 	return locate(/obj/item/organ/internal/eyes) in contents
 
 /obj/item/organ/external/head/get_icon_cache_key_components()

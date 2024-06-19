@@ -1,10 +1,10 @@
 /mob/living
 	var/list/traits
 
-/mob/living/proc/HasTrait(trait_type)
+/mob/living/proc/HasTrait(trait_type, trait_level = TRAIT_LEVEL_EXISTS)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	return (trait_type in GetTraits())
+	return (trait_type in traits) && (!trait_level || traits[trait_type] >= trait_level)
 
 /mob/living/proc/GetTraitLevel(trait_type)
 	SHOULD_NOT_SLEEP(TRUE)

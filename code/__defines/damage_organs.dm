@@ -12,6 +12,7 @@
 #define PIERCE    "pierce"
 #define LASER     "laser"
 #define SHATTER   "shatter"
+#define CHARRED   "charred"
 
 #define STUN      "stun"
 #define WEAKEN    "weaken"

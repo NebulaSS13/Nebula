@@ -96,15 +96,32 @@
 			continue
 		LAZYADD(., organ)
 
+// TODO: make meat spikes use/set these.
+/mob/living/proc/currently_has_skin()
+	return TRUE
+
+/mob/living/proc/currently_has_innards()
+	return TRUE
+
+/mob/living/proc/currently_has_bones()
+	return TRUE
+
+/mob/living/proc/currently_has_meat()
+	return TRUE
+
 /decl/butchery_data/proc/get_all_products(mob/living/donor)
-	for(var/thing in harvest_skin(donor))
-		LAZYDISTINCTADD(., thing)
-	for(var/thing in harvest_innards(donor))
-		LAZYDISTINCTADD(., thing)
-	for(var/thing in harvest_bones(donor))
-		LAZYDISTINCTADD(., thing)
-	for(var/thing in harvest_meat(donor))
-		LAZYDISTINCTADD(., thing)
+	if(!donor || donor.currently_has_skin())
+		for(var/thing in harvest_skin(donor))
+			LAZYDISTINCTADD(., thing)
+	if(!donor || donor.currently_has_innards())
+		for(var/thing in harvest_innards(donor))
+			LAZYDISTINCTADD(., thing)
+	if(!donor || donor.currently_has_bones())
+		for(var/thing in harvest_bones(donor))
+			LAZYDISTINCTADD(., thing)
+	if(!donor || donor.currently_has_meat())
+		for(var/thing in harvest_meat(donor))
+			LAZYDISTINCTADD(., thing)
 
 /decl/butchery_data/proc/get_monetary_worth(mob/living/donor)
 	. = 0

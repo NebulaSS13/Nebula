@@ -90,6 +90,8 @@
 		. += "Splinted"
 	if(status & ORGAN_BLEEDING)
 		. += "Bleeding"
+	if(limb_flags & ORGAN_FLAG_SKELETAL)
+		. += "Skeletal"
 	if(status & ORGAN_BROKEN)
 		. += capitalize(broken_description)
 	if (LAZYLEN(implants))
