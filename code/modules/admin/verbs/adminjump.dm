@@ -116,13 +116,13 @@
 		return
 
 	if(get_config_value(/decl/config/toggle/on/admin_jump))
-		var/list/keys = list()
-		for(var/mob/M in global.player_list)
+		var/list/client/keys = list()
+		for(var/mob/M in global.player_list) // excludes /mob/new_player
 			keys += M.client
-		var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in sortKey(keys)
+		var/client/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in sortKey(keys)
 		if(!selection)
 			return
-		var/mob/M = selection:mob
+		var/mob/M = selection.mob
 
 		if(!M)
 			return

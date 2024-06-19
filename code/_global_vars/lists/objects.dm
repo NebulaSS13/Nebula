@@ -5,7 +5,6 @@ var/global/list/hud_icon_reference = list()
 var/global/list/listening_objects = list() // List of objects that need to be able to hear, used to avoid recursive searching through contents.
 var/global/list/global_map = list()
 
-var/global/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 var/global/datum/universal_state/universe = new
 
 /// Vowels.

@@ -6,7 +6,7 @@
 	material = /decl/material/solid/metal/stainlesssteel
 	var/obj/item/tank/tank_one
 	var/obj/item/tank/tank_two
-	var/obj/item/attached_device
+	var/obj/item/assembly/attached_device
 	var/mob/attacher = null
 	var/valve_open = 0
 	var/toggle = 1
@@ -110,7 +110,7 @@
 	else if(attached_device)
 		if(href_list["rem_device"])
 			attached_device.dropInto(loc)
-			attached_device:holder = null
+			attached_device.holder = null
 			attached_device = null
 			update_icon()
 		if(href_list["device"])
