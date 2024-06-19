@@ -8,7 +8,7 @@
 #if defined(GAMEMODE_PACK_REVOLUTIONARY)
 #include "siege.dm"
 #endif
-#if defined(GAMEMODE_PACK_REVOLUTIONARY) // TODO: && defined(GAMEMODE_PACK_CULT)
+#if defined(GAMEMODE_PACK_REVOLUTIONARY) && defined(GAMEMODE_PACK_CULT)
 #include "uprising.dm"
 #endif
 // END_INCLUDE
