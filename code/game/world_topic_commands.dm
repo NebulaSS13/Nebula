@@ -85,7 +85,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 	s["enter"] =   get_config_value(/decl/config/toggle/on/enter_allowed)
 	s["vote"] =    get_config_value(/decl/config/toggle/vote_mode)
 	s["ai"] =      !!length(empty_playable_ai_cores)
-	s["host"] =    host || null
+	s["host"] =    get_config_value(/decl/config/text/hosted_by)
 
 	// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 	s["players"] = 0

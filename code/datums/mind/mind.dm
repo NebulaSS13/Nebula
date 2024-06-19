@@ -302,8 +302,8 @@
 
 				var/mob/def_target = null
 				var/objective_list[] = list(/datum/objective/assassinate, /datum/objective/protect, /datum/objective/debrain)
-				if (objective&&(objective.type in objective_list) && objective:target)
-					def_target = objective.target?.current
+				if (objective?.target && (objective.type in objective_list))
+					def_target = objective.target.current
 
 				var/new_target = input("Select target:", "Objective target", def_target) as null|anything in possible_targets
 				if (!new_target) return
@@ -313,12 +313,12 @@
 				if (!istype(M) || !M.mind || new_target == "Free objective")
 					new_objective = new objective_path
 					new_objective.owner = src
-					new_objective:target = null
+					new_objective.target = null
 					new_objective.explanation_text = "Free objective"
 				else
 					new_objective = new objective_path
 					new_objective.owner = src
-					new_objective:target = M.mind
+					new_objective.target = M.mind
 					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.get_special_role_name(M.mind.assigned_role)]."
 
 			if ("hijack")

@@ -257,6 +257,9 @@
 
 	if(!check_rights(R_BAN))	return
 
+	if(!owner || !istype(owner, /client))
+		return
+
 	establish_db_connection()
 	if(!dbcon.IsConnected())
 		return
@@ -271,21 +274,18 @@
 		ban_number++;
 
 	if(ban_number == 0)
-		to_chat(usr, "<span class='warning'>Database update failed due to a ban id not being present in the database.</span>")
+		to_chat(owner, "<span class='warning'>Database update failed due to a ban id not being present in the database.</span>")
 		return
 
 	if(ban_number > 1)
-		to_chat(usr, "<span class='warning'>Database update failed due to multiple bans having the same ID. Contact the database admin.</span>")
+		to_chat(owner, "<span class='warning'>Database update failed due to multiple bans having the same ID. Contact the database admin.</span>")
 		return
 
-	if(!src.owner || !istype(src.owner, /client))
-		return
+	var/unban_ckey = owner.ckey
+	var/unban_computerid = owner.computer_id
+	var/unban_ip = owner.address
 
-	var/unban_ckey = src.owner:ckey
-	var/unban_computerid = src.owner:computer_id
-	var/unban_ip = src.owner:address
-
-	message_admins("[key_name_admin(usr)] has lifted [pckey]'s ban.",1)
+	message_admins("[key_name_admin(owner)] has lifted [pckey]'s ban.",1)
 
 	var/DBQuery/query_update = dbcon.NewQuery("UPDATE `erro_ban` SET `unbanned` = TRUE, `unbanned_datetime` = NOW(), `unbanned_ckey` = '[unban_ckey]', `unbanned_computerid` = '[unban_computerid]', `unbanned_ip` = '[unban_ip]' WHERE `id` = [id]")
 	query_update.Execute()

@@ -234,12 +234,13 @@
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
 	if(.)
-		visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
+		visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
 		var/tforce = 0
 		if(ismob(AM))
 			tforce = 3 * TT.speed
-		else
-			tforce = AM:throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		else if(isobj(AM))
+			var/obj/hitter_obj = AM
+			tforce = hitter_obj.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src.loc, hitsound, 100, 1)
 		take_damage(tforce)
 
