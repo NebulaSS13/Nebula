@@ -16,7 +16,7 @@
 <h1>obj <aside>/<a href="obj.html">obj</a></aside><aside> inherits /<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L1">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L1">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 1"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
@@ -41,28 +41,28 @@ Can be easily nulled out or fully overriden without having to rewrite the comple
 An alternative to using a list for defining our starting reagents since apparently overriding the value of a list creates an (init) proc each time.</td></tr>
             <tr><th><a href="obj.html#proc/update_directional_offset">update_directional_offset</a></th><td>Applies the offset stored in the directional_offset json list depending on the current direction.
 force will force the default offset to be 0 if there are no directional_offset string.</td></tr></table>
-    <h2 id="var">Var Details</h2><h3 id="var/current_health">current_health
+    <h2 id="var">Var Details</h2><h3 id="var/current_health"><aside class="parent"><a title="/atom" href="atom.html#var/current_health">&uarr;</a></aside>current_health
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L10">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L10">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 10"/></a></h3>
-        <p>The current health of the obj. Leave to null, unless you want the object to start at a different health than max_health.</p><h3 id="var/max_health">max_health
+        <p>The current health of the obj. Leave to null, unless you want the object to start at a different health than max_health.</p><h3 id="var/max_health"><aside class="parent"><a title="/atom" href="atom.html#var/max_health">&uarr;</a></aside>max_health
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L8">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L8">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 8"/></a></h3>
         <p>The maximum health that the object can have. If set to ITEM_HEALTH_NO_DAMAGE, the object won't take any damage.</p><h2 id="proc">Proc Details</h2><h3 id="proc/Initialize">Initialize<aside>(mapload) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L27">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L27">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 27"/></a></aside>
         </h3>
         <p>JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{&quot;NORTH&quot;:{&quot;x&quot;:12,&quot;y&quot;:5}, &quot;EAST&quot;:{&quot;x&quot;:10,&quot;y&quot;:50}}'</p><h3 id="proc/WillContain"><aside class="declaration">proc </aside>WillContain<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L285">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L285">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 285"/></a></aside>
         </h3>
         <p>Returns a list with the contents that may be spawned in this object.
@@ -70,44 +70,44 @@ This shouldn't include things that are necessary for the object to operate, like
 Its mainly for populating storage and the like.</p><h3 id="proc/can_take_damage"><aside class="declaration">proc </aside>can_take_damage<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs_damage.dm#L10">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs_damage.dm#L10">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs_damage.dm 10"/></a></aside>
         </h3>
         <p>Returns TRUE if this object can take damage.</p><h3 id="proc/get_examined_damage_string"><aside class="declaration">proc </aside>get_examined_damage_string<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L301">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L301">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 301"/></a></aside>
         </h3>
         <p>Returns a text string to describe the current damage level of the item, or null if non-applicable.</p><h3 id="proc/get_percent_damages"><aside class="declaration">proc </aside>get_percent_damages<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs_damage.dm#L22">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs_damage.dm#L22">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs_damage.dm 22"/></a></aside>
         </h3>
         <p>Returns the percentage of damage done to this object.</p><h3 id="proc/get_percent_health"><aside class="declaration">proc </aside>get_percent_health<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs_damage.dm#L16">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs_damage.dm#L16">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs_damage.dm 16"/></a></aside>
         </h3>
         <p>Returns the percentage of health remaining for this object.</p><h3 id="proc/initialize_reagents"><aside class="declaration">proc </aside>initialize_reagents<aside>(populate) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L255">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L255">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 255"/></a></aside>
         </h3>
         <p>Init starting reagents and/or reagent var. Not called at the /obj level.
 populate: If set to true, we expect map load/admin spawned reagents to be set.</p><h3 id="proc/is_damaged"><aside class="declaration">proc </aside>is_damaged<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs_damage.dm#L4">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs_damage.dm#L4">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs_damage.dm 4"/></a></aside>
         </h3>
         <p>Returns whether this object is damaged.</p><h3 id="proc/is_wall_mounted"><aside class="declaration">proc </aside>is_wall_mounted<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L239">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L239">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 239"/></a></aside>
         </h3>
         <p>Returns whether the object should be considered as hanging off a wall.
@@ -115,7 +115,7 @@ This is userful because wall-mounted things are actually on the adjacent floor t
 Which means we have to deal with directional offsets differently. Such as with buttons mounted on a table, or on a wall.</p><h3 id="proc/populate_reagents"><aside class="declaration">proc </aside>populate_reagents<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L267">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L267">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 267"/></a></aside>
         </h3>
         <p>Actually populates the reagents.
@@ -123,14 +123,14 @@ Can be easily nulled out or fully overriden without having to rewrite the comple
 An alternative to using a list for defining our starting reagents since apparently overriding the value of a list creates an (init) proc each time.</p><h3 id="proc/update_directional_offset"><aside class="declaration">proc </aside>update_directional_offset<aside>(force) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/8d420a1ac55a8de584dc6eac4f9eb79f42624710/code/game/objects/objs.dm#L216">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/15deea639cfd81a63e2cedf3ffd7252b17e26e6d/code/game/objects/objs.dm#L216">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 216"/></a></aside>
         </h3>
         <p>Applies the offset stored in the directional_offset json list depending on the current direction.
 force will force the default offset to be 0 if there are no directional_offset string.</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/8d420a1ac55a8de584dc6eac4f9eb79f42624710">8d420a1</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/15deea639cfd81a63e2cedf3ffd7252b17e26e6d">15deea6</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
