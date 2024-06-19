@@ -5,6 +5,7 @@
 	#endif
 
 	#include "../../mods/gamemodes/heist/_heist.dme"
+	#include "../../mods/gamemodes/ninja/_ninja.dme"
 	#include "../../mods/gamemodes/mixed/_mixed.dme"
 
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"

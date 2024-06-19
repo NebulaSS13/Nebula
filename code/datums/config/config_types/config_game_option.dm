@@ -28,7 +28,6 @@
 		/decl/config/toggle/assistant_maint,
 		/decl/config/toggle/ghost_interaction,
 		/decl/config/toggle/aliens_allowed,
-		/decl/config/toggle/ninjas_allowed,
 		/decl/config/toggle/allow_character_comments,
 		/decl/config/num/hide_comments_older_than,
 		/decl/config/toggle/stack_crafting_uses_tools,
@@ -162,10 +161,6 @@
 /decl/config/toggle/aliens_allowed
 	uid = "aliens_allowed"
 	desc = "Remove the # to let aliens spawn."
-
-/decl/config/toggle/ninjas_allowed
-	uid = "ninjas_allowed"
-	desc = "Remove the # to let ninjas spawn."
 
 /decl/config/toggle/allow_character_comments
 	uid = "allow_character_comments"
