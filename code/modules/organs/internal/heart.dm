@@ -68,7 +68,7 @@
 	//If heart is stopped, it isn't going to restart itself randomly.
 	if(pulse == PULSE_NONE)
 		return
-	
+
 	//and if it's beating, let's see if it should
 	var/should_stop = prob(80) && oxy < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
 	should_stop = should_stop || prob(max(0, owner.get_damage(BRAIN) - owner.get_max_health() * 0.75)) //brain failing to work heart properly
@@ -219,7 +219,7 @@
 
 	. = "[pulsesound] pulse"
 
-/obj/item/organ/internal/heart/rejuvenate(ignore_organ_aspects)
+/obj/item/organ/internal/heart/rejuvenate(ignore_organ_traits)
 	. = ..()
 	if(!BP_IS_PROSTHETIC(src))
 		pulse = PULSE_NORM

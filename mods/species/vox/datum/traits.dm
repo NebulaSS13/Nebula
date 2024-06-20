@@ -1,20 +1,23 @@
-/decl/aspect/build_references()
+/decl/trait/build_references()
 	. = ..()
 	LAZYDISTINCTADD(blocked_species, SPECIES_VOX)
 
-/decl/aspect/vox/build_references()
+/decl/trait/vox
+	abstract_type = /decl/trait/vox
+
+/decl/trait/vox/build_references()
 	. = ..()
 	blocked_species = null
 	permitted_species = list(SPECIES_VOX)
 
 // Bonuses or maluses to skills/checks/actions.
-/decl/aspect/vox/psyche
+/decl/trait/vox/psyche
 	name = "Apex-Edited"
-	desc = "Coming soon!"
+	description = "Coming soon!"
 	category = "Psyche"
 
 // Perks for interacting with vox equipment.
-/decl/aspect/vox/symbiosis
+/decl/trait/vox/symbiosis
 	name = "Self-Maintaining Equipment"
-	desc = "Coming soon!"
+	description = "Coming soon!"
 	category = "Symbiosis"

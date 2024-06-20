@@ -595,7 +595,7 @@
 /*
 This function completely restores a damaged organ to perfect condition.
 */
-/obj/item/organ/external/rejuvenate(var/ignore_organ_aspects)
+/obj/item/organ/external/rejuvenate(var/ignore_organ_traits)
 
 	damage_state = "00"
 	brute_dam = 0
@@ -610,10 +610,9 @@ This function completely restores a damaged organ to perfect condition.
 		qdel(wound)
 	number_wounds = 0
 
-
 	// handle internal organs
 	for(var/obj/item/organ/current_organ in internal_organs)
-		current_organ.rejuvenate(ignore_organ_aspects)
+		current_organ.rejuvenate(ignore_organ_traits)
 
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
@@ -623,7 +622,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	undislocate(TRUE)
 
-	. = ..() // Clear damage, reapply aspects.
+	. = ..() // Clear damage, reapply traits.
 
 	if(owner)
 		owner.update_health()

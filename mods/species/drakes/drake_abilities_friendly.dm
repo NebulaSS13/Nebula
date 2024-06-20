@@ -100,6 +100,6 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 				W.salve()
 				W.disinfect()
 	// Everyone else is just poisoned.
-	else if(!friend.HasTrait(/decl/trait/sivian_biochemistry))
+	else if(!friend.has_trait(/decl/trait/sivian_biochemistry))
 		friend.take_damage(rand(1,2), TOX)
 	return TRUE

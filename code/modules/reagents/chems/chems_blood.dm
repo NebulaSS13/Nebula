@@ -54,7 +54,7 @@
 	blood_splatter(T, W?.resolve() || holder.my_atom, 1)
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 	if(LAZYACCESS(M.chem_doses, type) > 5)
 		M.take_damage(removed, TOX)

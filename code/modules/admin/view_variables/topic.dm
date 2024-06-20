@@ -442,7 +442,7 @@
 			return
 		var/list/possibleverbs = list()
 		possibleverbs += "Cancel" 								// One for the top...
-		possibleverbs += typesof(/mob/proc,/mob/verb,/mob/living/proc,/mob/living/verb)
+		possibleverbs += typesof(/mob/proc, /mob/verb, /mob/living/proc, /mob/living/verb)
 		switch(H.type)
 			if(/mob/living/human)
 				possibleverbs += typesof(/mob/living/human/verb, /mob/living/human/proc)

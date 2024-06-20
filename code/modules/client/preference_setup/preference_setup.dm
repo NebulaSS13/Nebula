@@ -10,10 +10,10 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	sort_order = 2
 	category_item_type = /datum/category_item/player_setup_item/physical
 
-/datum/category_group/player_setup_category/aspect_preferences
-	name = "Aspects"
+/datum/category_group/player_setup_category/trait_preferences
+	name = "Traits"
 	sort_order = 3
-	category_item_type = /datum/category_item/player_setup_item/aspects
+	category_item_type = /datum/category_item/player_setup_item/traits
 
 /datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
 	. = ""

@@ -31,20 +31,20 @@
 	color = "#c6e2ff"
 
 /decl/material/liquid/sifsap/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(M.HasTrait(/decl/trait/sivian_biochemistry))
+	if(M.has_trait(/decl/trait/sivian_biochemistry))
 		if(!drake_add_sap(M, removed))
 			M.adjust_nutrition(toxicity * removed)
 		return
 	return affect_blood(M, removed * 0.7)
 
 /decl/material/liquid/sifsap/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(M.HasTrait(/decl/trait/sivian_biochemistry))
+	if(M.has_trait(/decl/trait/sivian_biochemistry))
 		return
 	M.add_chemical_effect(CE_PULSE, -1)
 	return ..()
 
 /decl/material/liquid/sifsap/affect_overdose(mob/living/M, total_dose)
-	if(M.HasTrait(/decl/trait/sivian_biochemistry))
+	if(M.has_trait(/decl/trait/sivian_biochemistry))
 		return
 	M.apply_damage(1, IRRADIATE)
 	SET_STATUS_MAX(M, 5, STAT_DROWSY)

@@ -320,12 +320,12 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 /*
 This function restores all organs.
 */
-/mob/living/human/restore_all_organs(var/ignore_organ_aspects)
+/mob/living/human/restore_all_organs(var/ignore_organ_traits)
 	get_bodytype()?.create_missing_organs(src) // root body part should never be missing on a mob
 	for(var/bodypart in global.all_limb_tags_by_depth)
 		var/obj/item/organ/external/current_organ = GET_EXTERNAL_ORGAN(src, bodypart)
 		if(current_organ)
-			current_organ.rejuvenate(ignore_organ_aspects)
+			current_organ.rejuvenate(ignore_organ_traits)
 	recheck_bad_external_organs()
 	verbs -= /mob/living/human/proc/undislocate
 
