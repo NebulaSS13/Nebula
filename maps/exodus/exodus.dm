@@ -7,6 +7,7 @@
 	#include "../../mods/gamemodes/ninja/_ninja.dme"
 	#include "../../mods/gamemodes/revolution/_revolution.dme"
 	#include "../../mods/gamemodes/traitor/_traitor.dme"
+	#include "../../mods/gamemodes/spyvspy/_spyvspy.dme"
 	#include "../../mods/gamemodes/mixed/_mixed.dme"
 
 	#include "../../mods/content/mundane.dm"
