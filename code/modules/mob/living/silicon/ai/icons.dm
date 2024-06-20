@@ -9,7 +9,7 @@ var/global/list/ai_icon_subtypes
 		for(var/ai_icon_type in subtypesof(/datum/ai_icon))
 			ai_icon_subtypes[ai_icon_type] = new ai_icon_type
 	return global.ai_icon_subtypes
-	
+
 /datum/ai_icon
 	var/name
 	var/icon = 'icons/mob/AI.dmi'
@@ -40,7 +40,7 @@ var/global/list/ai_icon_subtypes
 	name = "[name] (Malf)"
 
 /datum/ai_icon/malf/may_used_by_ai(var/mob/living/silicon/ai/AI)
-	return istype(AI) && AI.is_traitor()
+	return istype(AI) && AI.is_malfunctioning()
 
 /datum/ai_icon/red
 	name = "Red"

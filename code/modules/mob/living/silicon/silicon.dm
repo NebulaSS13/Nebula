@@ -337,9 +337,8 @@
 	to_chat(src, "[A.alarm_name()]! ([(cameratext)? cameratext : "No Camera"])")
 
 
-/mob/living/silicon/proc/is_traitor()
-	var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
-	return mind && (mind in traitors.current_antagonists)
+/mob/living/silicon/proc/is_malfunctioning()
+	return FALSE
 
 /mob/living/silicon/reset_view()
 	..()

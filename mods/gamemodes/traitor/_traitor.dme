@@ -1,0 +1,10 @@
+#ifndef GAMEMODE_PACK_TRAITOR
+#define GAMEMODE_PACK_TRAITOR
+// BEGIN_INCLUDE
+#include "_traitor.dm"
+#include "gamemode.dm"
+#include "overrides.dm"
+#include "special_role.dm"
+#include "syndicatebeacon.dm"
+// END_INCLUDE
+#endif
