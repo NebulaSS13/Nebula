@@ -22,9 +22,9 @@
 /datum/job/shaded_hills/visitor/traveller/learned
 	title                   = "Itinerant Scholar"
 	// todo: outfits for alt-titles?
-	alt_titles              = list("Itinerant Monk", "Traveling Doctor", "Dilettante")
+	alt_titles              = list("Itinerant Monk", "Travelling Doctor", "Dilettante")
 	supervisors             = "your conscience"
-	description             = "You are a skilled professional who has traveled to this area from elsewhere. You may be a doctor, a scholar, a monk, or some other highly-educated individual with rare skills. Whatever your reason for coming here, you are likely one of the only individuals in the area to possess your unique skillset."
+	description             = "You are a skilled professional who has travelled to this area from elsewhere. You may be a doctor, a scholar, a monk, or some other highly-educated individual with rare skills. Whatever your reason for coming here, you are likely one of the only individuals in the area to possess your unique skillset."
 	spawn_positions         = 2
 	total_positions         = 2
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/traveller/scholar
@@ -67,9 +67,9 @@
 
 
 /datum/job/shaded_hills/visitor/traveller/cleric
-	title                   = "Traveling Cleric"
+	title                   = "Travelling Cleric"
 	supervisors             = "your vows, and your faith"
-	description             = "You are an ordained person of faith, traveling the lands on the business of your order, to preach, or simply to experience new people and cultures. You are battle-trained, but are also a healer."
+	description             = "You are an ordained person of faith, travelling the lands on the business of your order, to preach, or simply to experience new people and cultures. You are battle-trained, but are also a healer."
 	spawn_positions         = 2
 	total_positions         = 2
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/traveller/cleric
@@ -87,5 +87,5 @@
 	skill_points            = 22
 
 /obj/abstract/landmark/start/shaded_hills/cleric
-	name                    = "Traveling Cleric"
+	name                    = "Travelling Cleric"
 

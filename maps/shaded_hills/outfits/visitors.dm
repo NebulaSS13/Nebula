@@ -12,8 +12,8 @@
 	)
 
 /decl/hierarchy/outfit/job/shaded_hills/traveller/scholar
-	name    = "Shaded Hills - Traveling Scholar"
+	name    = "Shaded Hills - Itinerant Scholar"
 
 /decl/hierarchy/outfit/job/shaded_hills/traveller/cleric
-	name    = "Shaded Hills - Traveling Cleric"
+	name    = "Shaded Hills - Travelling Cleric"
 
