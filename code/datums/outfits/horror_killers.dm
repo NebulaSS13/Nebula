@@ -34,7 +34,7 @@
 	var/victim = get_mannequin(H.ckey)
 	if(victim)
 		for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
-			carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
+			carried_item.add_blood(victim) //Oh yes, there will be blood... just not blood from the killer because that's odd
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"

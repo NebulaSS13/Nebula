@@ -147,7 +147,7 @@
 	return list(loc)
 
 /atom/PopulateClone(atom/clone)
-	//Not entirely sure about icon stuff. Some legacy things would need it copied, but not more recently coded atoms..
+	//Not entirely sure about icon stuff. Some legacy things would need it copied, but not more recently coded atoms.
 	clone.appearance = appearance
 	clone.set_invisibility(invisibility)
 

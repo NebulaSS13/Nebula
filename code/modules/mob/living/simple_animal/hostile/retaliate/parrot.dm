@@ -125,7 +125,7 @@
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 		parrot_interest = user
-		parrot_state = PARROT_SWOOP //The parrot just got hit, it WILL move, now to pick a direction..
+		parrot_state = PARROT_SWOOP //The parrot just got hit, it WILL move, now to pick a direction...
 		if(isliving(user))
 			var/mob/living/M = user
 			if(M.current_health < 50) //Weakened mob? Fight back!
@@ -209,7 +209,7 @@
 			SelfMove(pick(global.cardinal))
 			return
 
-		if(!held_item && !parrot_perch) //If we've got nothing to do.. look for something to do.
+		if(!held_item && !parrot_perch) //If we've got nothing to do, look for something to do.
 			var/atom/movable/AM = search_for_perch_and_item() //This handles checking through lists so we know it's either a perch or stealable item
 			if(AM)
 				if((isitem(AM) && can_pick_up(AM)) || isliving(AM))	//If stealable item

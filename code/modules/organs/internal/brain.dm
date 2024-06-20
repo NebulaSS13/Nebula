@@ -68,7 +68,7 @@
 	if(istype(_brainmob) && _brainmob?.client) //if thar be a brain inside... the brain.
 		to_chat(user, "You can feel the small spark of life still left in this one.")
 	else
-		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
+		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later.")
 
 /obj/item/organ/internal/brain/do_install(mob/living/carbon/target, affected, in_place, update_icon, detached)
 	if(!(. = ..()))
