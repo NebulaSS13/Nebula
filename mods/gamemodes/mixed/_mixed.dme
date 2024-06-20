@@ -5,5 +5,11 @@
 #if defined(GAMEMODE_PACK_HEIST) // TODO: && defined(GAMEMODE_PACK_MERCENARY)
 #include "crossfire.dm"
 #endif
+#if defined(GAMEMODE_PACK_REVOLUTIONARY)
+#include "siege.dm"
+#endif
+#if defined(GAMEMODE_PACK_REVOLUTIONARY) // TODO: && defined(GAMEMODE_PACK_CULT)
+#include "uprising.dm"
+#endif
 // END_INCLUDE
 #endif

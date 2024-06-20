@@ -49,3 +49,12 @@
 
 /decl/special_role/revolutionary/proc/spawn_uplink(var/mob/living/human/revolutionary_mob)
 	setup_uplink_source(revolutionary_mob, DEFAULT_TELECRYSTAL_AMOUNT)
+
+/mob/living/proc/convert_to_rev(mob/M in able_mobs_in_oview(src))
+	set name = "Recruit to Faction"
+	set category = "Abilities"
+
+	if(!M.mind || !M.client)
+		return
+
+	convert_to_faction(M.mind, GET_DECL(/decl/special_role/revolutionary))

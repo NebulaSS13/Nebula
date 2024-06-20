@@ -41,3 +41,12 @@
 		loyal_obj.target = player.mind
 		loyal_obj.explanation_text = "Protect [player.real_name], the [player.mind.assigned_role]."
 		global_objectives += loyal_obj
+
+/mob/living/proc/convert_to_loyalist(mob/M in able_mobs_in_oview(src))
+	set name = "Convince Recidivist"
+	set category = "Abilities"
+
+	if(!M.mind || !M.client)
+		return
+
+	convert_to_faction(M.mind, GET_DECL(/decl/special_role/loyalist))
