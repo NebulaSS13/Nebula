@@ -3,19 +3,13 @@
 	anchored = TRUE
 	icon = 'icons/obj/cult.dmi'
 
-/obj/structure/cult/talisman
-	name = "Altar"
-	desc = "A bloodstained altar dedicated to Nar-Sie."
-	icon_state = "talismanaltar"
-
-
 /obj/structure/cult/forge
-	name = "Daemon forge"
+	name = "\improper Daemon forge"
 	desc = "A forge used in crafting the unholy weapons used by the armies of Nar-Sie."
 	icon_state = "forge"
 
 /obj/structure/cult/pylon
-	name = "Pylon"
+	name = "pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon = 'icons/obj/structures/pylon.dmi'
 	icon_state = "pylon"
@@ -74,7 +68,7 @@
 	return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
 
 /obj/structure/cult/tome
-	name = "Desk"
+	name = "desk"
 	desc = "A desk covered in arcane manuscripts and tomes in unknown languages. Looking at the text makes your skin crawl."
 	icon_state = "tomealtar"
 
@@ -88,24 +82,6 @@
 	icon = 'magic_pillar.dmi'
 */
 
-/obj/effect/gateway
-	name = "gateway"
-	desc = "You're pretty sure that abyss is staring back."
-	icon = 'icons/obj/cult.dmi'
-	icon_state = "hole"
-	density = TRUE
-	anchored = TRUE
-	var/spawnable = null
-
-/obj/effect/gateway/active
-	light_range=5
-	light_color="#ff0000"
-	spawnable=list(
-		/mob/living/simple_animal/hostile/scarybat,
-		/mob/living/simple_animal/hostile/creature,
-		/mob/living/simple_animal/hostile/faithless
-	)
-
 /obj/effect/gateway/active/cult
 	light_range=5
 	light_color="#ff0000"
@@ -114,57 +90,6 @@
 		/mob/living/simple_animal/hostile/creature/cult,
 		/mob/living/simple_animal/hostile/faithless/cult
 	)
-
-/obj/effect/gateway/active/Initialize()
-	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(create_and_delete)), rand(30,60) SECONDS)
-
-
-/obj/effect/gateway/active/proc/create_and_delete()
-	var/t = pick(spawnable)
-	new t(src.loc)
-	qdel(src)
-
-/obj/effect/gateway/active/Crossed(var/atom/movable/AM)
-	if(!isliving(AM))
-		return
-
-	var/mob/living/M = AM
-	if(M.stat == DEAD)
-		return
-
-	if(M.HasMovementHandler(/datum/movement_handler/mob/transformation))
-		return
-
-	M.handle_pre_transformation()
-
-	if(iscultist(M))
-		return
-	if(!ishuman(M) && !isrobot(M))
-		return
-
-	M.AddMovementHandler(/datum/movement_handler/mob/transformation)
-	M.icon = null
-	M.overlays.len = 0
-	M.set_invisibility(INVISIBILITY_ABSTRACT)
-
-	if(isrobot(M))
-		var/mob/living/silicon/robot/Robot = M
-		QDEL_NULL(Robot.central_processor)
-	else
-		for(var/obj/item/W in M)
-			M.drop_from_inventory(W)
-			if(istype(W, /obj/item/implant))
-				qdel(W)
-
-	var/mob/living/new_mob = new /mob/living/simple_animal/corgi(AM.loc)
-	new_mob.a_intent = I_HURT
-	if(M.mind)
-		M.mind.transfer_to(new_mob)
-	else
-		new_mob.key = M.key
-
-	to_chat(new_mob, "<B>Your form morphs into that of a corgi.</B>")//Because we don't have cluwnes
 
 /obj/structure/door/cult
 	material = /decl/material/solid/stone/cult
@@ -190,3 +115,6 @@
 	if(air_group)
 		return 0 //Make sure air doesn't drain
 	..()
+
+/obj/structure/talisman_altar
+	desc = "A bloodstained altar dedicated to Nar-Sie."

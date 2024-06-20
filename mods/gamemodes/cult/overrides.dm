@@ -63,3 +63,8 @@
 /obj/item/mop/Initialize()
 	. = ..()
 	moppable_types += /obj/effect/rune
+
+/obj/effect/gateway/active/can_transform(mob/victim)
+	if(iscultist(victim))
+		return FALSE
+	return ..()
