@@ -1,6 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aM" = (
 /obj/structure/window/basic/full,
+/obj/structure/wall_frame/log/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/witch_hut)
 "bg" = (
