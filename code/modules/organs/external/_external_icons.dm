@@ -25,7 +25,7 @@ var/global/list/limb_icon_cache = list()
 		return null
 	return species?.get_surgery_overlay_icon(owner)
 
-/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/human/human)
 	_icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
@@ -36,7 +36,7 @@ var/global/list/limb_icon_cache = list()
 	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = human.get_skin_colour()
 
-/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/human/human)
 	..()
 	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 	if(eyes) eyes.update_colour()

@@ -221,7 +221,7 @@
 	if(!..())
 		return 0
 
-	var/mob/living/carbon/human/H = holder.wearer
+	var/mob/living/human/H = holder.wearer
 
 	if(!charge_selected)
 		to_chat(H, SPAN_WARNING("You have not selected a chemical type."))
@@ -537,7 +537,7 @@
 	if(!active)
 		return passive_power_cost
 
-	var/mob/living/carbon/human/H = holder.wearer
+	var/mob/living/human/H = holder.wearer
 
 	var/temp_adj = min(H.bodytemperature - thermostat, max_cooling) //Actually copies the original CU code
 

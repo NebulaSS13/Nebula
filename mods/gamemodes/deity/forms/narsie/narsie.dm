@@ -41,7 +41,7 @@
 	charge = min(100, charge * 0.25)
 	if(prob(charge))
 		to_chat(user, SPAN_WARNING("You feel drained..."))
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(istype(H) && H.should_have_organ(BP_HEART))
 		H.vessel.remove_any(charge)
 	else

@@ -70,7 +70,7 @@
 
 		if("prosthetics")
 
-			var/mob/living/carbon/human/H = target
+			var/mob/living/human/H = target
 			to_chat(user, SPAN_NOTICE("Analyzing Results for \the [H]:"))
 			to_chat(user, "Key: [SPAN_ORANGE("Electronics")]/[SPAN_RED("Brute")]")
 			var/obj/item/organ/internal/cell/C = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)

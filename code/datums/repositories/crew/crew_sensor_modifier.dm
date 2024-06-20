@@ -13,8 +13,8 @@
 	may_process_proc = null
 	. = ..()
 
-/crew_sensor_modifier/proc/may_process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos)
+/crew_sensor_modifier/proc/may_process_crew_data(var/mob/living/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos)
 	return holder && may_process_proc ? call(holder, may_process_proc)(H, S, pos) : TRUE
 
-/crew_sensor_modifier/proc/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos, var/list/crew_data)
+/crew_sensor_modifier/proc/process_crew_data(var/mob/living/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos, var/list/crew_data)
 	return MOD_SUIT_SENSORS_HANDLED

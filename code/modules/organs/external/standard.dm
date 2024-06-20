@@ -144,7 +144,7 @@
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	var/gripper_type = /datum/inventory_slot/gripper/left_hand
 
-/obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
+/obj/item/organ/external/hand/do_install(mob/living/human/target, affected, in_place, update_icon, detached)
 	. = ..()
 	if(. && owner && gripper_type)
 		owner.add_held_item_slot(new gripper_type)

@@ -18,7 +18,7 @@
 	. = null
 
 /spell/veil_of_shadows/cast(var/list/targets, var/mob/user)
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	H.AddMovementHandler(/datum/movement_handler/mob/incorporeal)
 	if(H.add_cloaking_source(src))
 		H.visible_message(SPAN_WARNING("\The [H] shrinks from view!"))
@@ -26,7 +26,7 @@
 	timer_id = addtimer(CALLBACK(src,PROC_REF(cancel_veil)),duration, TIMER_STOPPABLE)
 
 /spell/veil_of_shadows/proc/cancel_veil()
-	var/mob/living/carbon/human/H = holder
+	var/mob/living/human/H = holder
 	H.RemoveMovementHandler(/datum/movement_handler/mob/incorporeal)
 	deltimer(timer_id)
 	timer_id = null
@@ -38,7 +38,7 @@
 		events_repository.register(/decl/observ/moved, H,src,PROC_REF(drop_cloak))
 
 /spell/veil_of_shadows/proc/drop_cloak()
-	var/mob/living/carbon/human/H = holder
+	var/mob/living/human/H = holder
 	if(H.remove_cloaking_source(src))
 		H.visible_message(SPAN_NOTICE("\The [H] appears from nowhere!"))
 	events_repository.unregister(/decl/observ/moved, H,src)

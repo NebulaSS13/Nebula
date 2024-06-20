@@ -67,7 +67,7 @@
 	to_chat(owner, "<span class='danger'>You feel air rushing through your trachea!</span>")
 
 /obj/item/organ/internal/lungs/insectoid/serpentid/handle_failed_breath()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/human/H = owner
 
 	var/oxygenated = GET_CHEMICAL_EFFECT(owner, CE_OXYGENATED)
 	H.heal_damage(OXY, HUMAN_MAX_OXYLOSS * oxygenated)
@@ -148,7 +148,7 @@
 				playsound(owner.loc, 'sound/effects/angrybug.ogg', 60, 0)
 				owner.skin_state = SKIN_THREAT
 				owner.update_skin()
-				addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living/carbon/human, reset_skin)), 10 SECONDS, TIMER_UNIQUE)
+				addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living/human, reset_skin)), 10 SECONDS, TIMER_UNIQUE)
 		else if(owner.skin_state == SKIN_THREAT)
 			owner.reset_skin()
 

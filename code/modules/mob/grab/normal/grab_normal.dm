@@ -118,8 +118,8 @@
 	return FALSE
 
 /decl/grab/normal/proc/attack_eye(var/obj/item/grab/G)
-	var/mob/living/carbon/human/target = G.get_affecting_mob()
-	var/mob/living/carbon/human/attacker = G.assailant
+	var/mob/living/human/target = G.get_affecting_mob()
+	var/mob/living/human/attacker = G.assailant
 	if(!istype(target) || !istype(attacker))
 		return
 	var/decl/natural_attack/attack = attacker.get_unarmed_attack(target, BP_EYES)
@@ -140,8 +140,8 @@
 	return 1
 
 /decl/grab/normal/proc/headbutt(var/obj/item/grab/G)
-	var/mob/living/carbon/human/target = G.get_affecting_mob()
-	var/mob/living/carbon/human/attacker = G.assailant
+	var/mob/living/human/target = G.get_affecting_mob()
+	var/mob/living/human/attacker = G.assailant
 	if(!istype(target)	 || !istype(attacker))
 		return
 	if(!attacker.skill_check(SKILL_COMBAT, SKILL_BASIC))
@@ -214,7 +214,7 @@
 				return FALSE
 	return TRUE
 
-/decl/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
+/decl/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/human/user, var/obj/item/I)
 	switch(G.target_zone)
 		if(BP_HEAD)
 			return attack_throat(G, I, user)

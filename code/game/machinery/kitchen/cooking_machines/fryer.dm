@@ -31,7 +31,7 @@
 
 	var/target_zone = user.get_target_zone()
 	if(ishuman(victim) && !(target_zone in list(BP_GROIN, BP_CHEST)))
-		var/mob/living/carbon/human/H = victim
+		var/mob/living/human/H = victim
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, target_zone)
 		if(!E)
 			to_chat(user, "<span class='warning'>They are missing that body part!</span>")

@@ -17,7 +17,7 @@
 
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		affecting = GET_EXTERNAL_ORGAN(H, zone)
 
 	if(affecting)

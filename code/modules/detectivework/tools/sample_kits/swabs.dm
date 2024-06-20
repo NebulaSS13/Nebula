@@ -21,7 +21,7 @@
 	if(!ishuman(target))
 		return ..()
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	var/time_to_take = H.a_intent == I_HELP ? 1 SECOND : 3 SECONDS
 	user.visible_message(SPAN_NOTICE("\The [user] starts swabbing a sample from \the [H]."))
 	if(!do_mob(user, H, time_to_take))

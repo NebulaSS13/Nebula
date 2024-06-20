@@ -411,7 +411,7 @@
 				to_chat(usr, "<span class='warning'>The sounds of battle fill your ears...</span>")
 		if(ORION_TRAIL_ILLNESS)
 			if(ishuman(usr))
-				var/mob/living/carbon/human/M = usr
+				var/mob/living/human/M = usr
 				to_chat(M, "<span class='warning'>An overpowering wave of nausea consumes over you. You hunch over, your stomach's contents preparing for a spectacular exit.</span>")
 				M.vomit()
 			else

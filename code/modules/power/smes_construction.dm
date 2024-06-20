@@ -143,7 +143,7 @@
 	if (!intensity)
 		return
 
-	var/mob/living/carbon/human/h_user = null
+	var/mob/living/human/h_user = null
 	if (!ishuman(user))
 		return
 	else

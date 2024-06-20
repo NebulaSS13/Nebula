@@ -15,7 +15,7 @@
 	)
 	var/info
 
-/obj/item/passport/proc/set_info(mob/living/carbon/human/H)
+/obj/item/passport/proc/set_info(mob/living/human/H)
 	if(!istype(H))
 		return
 

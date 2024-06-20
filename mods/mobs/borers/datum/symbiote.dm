@@ -56,10 +56,10 @@ var/global/list/symbiote_starting_points = list()
 			to_chat(prefs.client.mob, SPAN_WARNING("You are not whitelisted for [check_whitelist] roles."))
 		. = FALSE
 
-/datum/job/symbiote/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/symbiote/handle_variant_join(var/mob/living/human/H, var/alt_title)
 
 	var/mob/living/simple_animal/borer/symbiote/symbiote = new
-	var/mob/living/carbon/human/host
+	var/mob/living/human/host
 	try
 		// No clean way to handle kicking them back to the lobby at this point, so dump
 		// them into xenobio or latejoin instead if there are zero viable hosts left.
@@ -96,7 +96,7 @@ var/global/list/symbiote_starting_points = list()
 	qdel(H)
 	return symbiote
 
-/datum/job/symbiote/equip_preview(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade, var/additional_skips)
+/datum/job/symbiote/equip_preview(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade, var/additional_skips)
 	if(!preview_slug)
 		preview_slug = new
 	H.appearance = preview_slug
@@ -104,7 +104,7 @@ var/global/list/symbiote_starting_points = list()
 
 /datum/job/symbiote/proc/find_valid_hosts(var/just_checking)
 	. = list()
-	for(var/mob/living/carbon/human/H in global.player_list)
+	for(var/mob/living/human/H in global.player_list)
 		if(H.stat == DEAD || !H.client || !H.ckey || !H.has_brain())
 			continue
 		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)

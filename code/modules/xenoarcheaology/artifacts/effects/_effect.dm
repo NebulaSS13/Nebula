@@ -107,7 +107,7 @@
 	. += " Activation index involves [trigger]."
 
 //returns 0..1, with 1 being no protection and 0 being fully protected
-/proc/GetAnomalySusceptibility(var/mob/living/carbon/human/H)
+/proc/GetAnomalySusceptibility(var/mob/living/human/H)
 	if(!istype(H))
 		return 1
 

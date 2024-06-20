@@ -362,7 +362,7 @@
 	. = ..() && user.check_has_mouth() && !user.isSynthetic()
 
 /decl/emote/visible/vomit/do_emote(var/atom/user, var/extra_params)
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(istype(H))
 		H.vomit(deliberate = TRUE)
 		return TRUE

@@ -102,7 +102,7 @@
 	. = ..()
 	if(!ishuman(.))
 		return
-	var/mob/living/carbon/human/new_character = .
+	var/mob/living/human/new_character = .
 	if(new_character.client?.prefs?.is_shackled && new_character.get_bodytype().can_be_shackled && new_character.mind)
 		new_character.mind.set_shackle(new_character.client.prefs.get_lawset(), TRUE) // Silent as laws will be announced on Login() anyway.
 

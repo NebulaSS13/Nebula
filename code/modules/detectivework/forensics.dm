@@ -11,7 +11,7 @@
 	if(!fingerprintshidden)
 		fingerprintshidden = list()
 	if (ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if (H.get_equipped_item(slot_gloves_str))
 			src.fingerprintshidden += "\[[time_stamp()]\] (Wearing gloves). Real name: [H.real_name], Key: [H.key]"
 			return 0

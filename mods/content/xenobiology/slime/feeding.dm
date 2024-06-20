@@ -22,7 +22,7 @@
 			to_chat(src, SPAN_WARNING("\The [M] is protected from your feeding."))
 		return FEED_RESULT_INVALID
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_NO_POISON) || (H.get_bodytype()?.body_flags & BODY_FLAG_NO_DNA))
 			if(!silent)
 				to_chat(src, SPAN_WARNING("You cannot feed on \the [M]."))

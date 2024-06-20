@@ -770,7 +770,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(toxicity_targets_organ && ishuman(M))
 			var/organ_damage = dam * M.get_toxin_resistance()
 			if(organ_damage > 0)
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, toxicity_targets_organ)
 				if(I)
 					var/can_damage = I.max_damage - I.damage
@@ -845,7 +845,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(mask)
 			mask.clean()
 		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			var/obj/item/head = H.get_equipped_item(slot_head_str)
 			if(head)
 				head.clean()

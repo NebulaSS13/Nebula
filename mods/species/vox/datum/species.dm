@@ -29,7 +29,7 @@
 	)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/toggle_vox_pressure_seal
+		/mob/living/human/proc/toggle_vox_pressure_seal
 	)
 
 	unarmed_attacks = list(
@@ -133,7 +133,7 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/decl/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
+/decl/species/vox/equip_survival_gear(var/mob/living/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask_str)
 	var/obj/item/backpack/backpack = H.get_equipped_item(slot_back_str)
 	if(istype(backpack))
@@ -150,14 +150,14 @@
 // Ideally this would all be on bodytype, but pressure is handled per-mob currently.
 var/global/list/vox_current_pressure_toggle = list()
 
-/decl/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
+/decl/species/vox/disfigure_msg(var/mob/living/human/H)
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped beyond recognition!\n")
 
 /decl/species/vox/skills_from_age(age)
 	. = 8
 
-/decl/species/vox/handle_death(var/mob/living/carbon/human/H)
+/decl/species/vox/handle_death(var/mob/living/human/H)
 	..()
 	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK, /obj/item/organ/internal/voxstack)
 	if (stack)
@@ -168,23 +168,23 @@ var/global/list/vox_current_pressure_toggle = list()
 	emote_message_3p = "$USER$ SHRIEKS!"
 	emote_sound = 'mods/species/vox/sounds/shriek1.ogg'
 
-/decl/species/vox/get_warning_low_pressure(var/mob/living/carbon/human/H)
+/decl/species/vox/get_warning_low_pressure(var/mob/living/human/H)
 	if(H && global.vox_current_pressure_toggle["\ref[H]"])
 		return 50
 	return ..()
 
-/decl/species/vox/get_hazard_low_pressure(var/mob/living/carbon/human/H)
+/decl/species/vox/get_hazard_low_pressure(var/mob/living/human/H)
 	if(H && global.vox_current_pressure_toggle["\ref[H]"])
 		return 0
 	return ..()
 
-/mob/living/carbon/human/proc/toggle_vox_pressure_seal()
+/mob/living/human/proc/toggle_vox_pressure_seal()
 	set name = "Toggle Vox Pressure Seal"
 	set category = "Abilities"
 	set src = usr
 
 	if(!istype(species, /decl/species/vox))
-		verbs -= /mob/living/carbon/human/proc/toggle_vox_pressure_seal
+		verbs -= /mob/living/human/proc/toggle_vox_pressure_seal
 		return
 
 	if(incapacitated(INCAPACITATION_KNOCKOUT))

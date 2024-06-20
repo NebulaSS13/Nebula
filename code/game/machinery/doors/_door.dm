@@ -391,7 +391,7 @@
 		else if(current_health < current_max_health && get_dist(src, user) <= 1)
 			to_chat(user, "\The [src] has some minor scuffing.")
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if (emagged && istype(H) && (H.skill_check(SKILL_COMPUTER, SKILL_ADEPT) || H.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT)))
 		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
 

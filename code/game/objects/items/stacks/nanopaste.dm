@@ -28,7 +28,7 @@
 		return TRUE
 	
 	if (ishuman(target))		//Repairing robolimbs
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
 
 		if(!S)

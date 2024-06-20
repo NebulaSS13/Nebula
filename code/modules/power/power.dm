@@ -215,7 +215,7 @@
 	if(PN)
 		PN.trigger_warning(5)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(H.species.get_shock_vulnerability(H) <= 0)
 			return
 		var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)

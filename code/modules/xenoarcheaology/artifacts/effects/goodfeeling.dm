@@ -31,18 +31,18 @@
 /datum/artifact_effect/goodfeeling/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/human/H in range(effect_range,T))
+		for (var/mob/living/human/H in range(effect_range,T))
 			affect_human(H, 5, 5)
 		return 1
 
 /datum/artifact_effect/goodfeeling/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/human/H in range(effect_range,T))
+		for (var/mob/living/human/H in range(effect_range,T))
 			affect_human(H, 50, 50)
 		return 1
 
-/datum/artifact_effect/goodfeeling/proc/affect_human(mob/living/carbon/human/H, message_prob, dizziness_prob)
+/datum/artifact_effect/goodfeeling/proc/affect_human(mob/living/human/H, message_prob, dizziness_prob)
 	if(H.stat)
 		return
 	if(prob(message_prob))

@@ -739,9 +739,9 @@
 	else if(href_list["monkeyone"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["monkeyone"])
+		var/mob/living/human/H = locate(href_list["monkeyone"])
 		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
 
 		log_and_message_admins("attempting to monkeyize [key_name_admin(H)]")
@@ -750,9 +750,9 @@
 	else if(href_list["corgione"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["corgione"])
+		var/mob/living/human/H = locate(href_list["corgione"])
 		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
 
 		log_and_message_admins("attempting to corgize [key_name_admin(H)]")
@@ -788,9 +788,9 @@
 	else if(href_list["makeai"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["makeai"])
+		var/mob/living/human/H = locate(href_list["makeai"])
 		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
 
 		log_and_message_admins("AIized [key_name_admin(H)]!")
@@ -799,9 +799,9 @@
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["makerobot"])
+		var/mob/living/human/H = locate(href_list["makerobot"])
 		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
 
 		usr.client.cmd_admin_robotize(H)
@@ -935,9 +935,9 @@
 	else if(href_list["adminspawnprayreward"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["adminspawnprayreward"])
+		var/mob/living/human/H = locate(href_list["adminspawnprayreward"])
 		if(!ishuman(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
 
 		var/obj/item/C = new global.using_map.pray_reward_type(get_turf(H))
@@ -1019,9 +1019,9 @@
 
 
 	else if(href_list["SyndicateReply"])
-		var/mob/living/carbon/human/H = locate(href_list["SyndicateReply"])
+		var/mob/living/human/H = locate(href_list["SyndicateReply"])
 		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
 		var/obj/item/l_ear = H.get_equipped_item(slot_l_ear_str)
 		var/obj/item/r_ear = H.get_equipped_item(slot_r_ear_str)
@@ -1604,7 +1604,7 @@
 /mob/living/proc/can_centcom_reply()
 	return 0
 
-/mob/living/carbon/human/can_centcom_reply()
+/mob/living/human/can_centcom_reply()
 	for(var/slot in global.ear_slots)
 		var/obj/item/radio/headset/radio = get_equipped_item(slot)
 		if(istype(radio))

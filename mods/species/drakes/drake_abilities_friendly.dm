@@ -21,7 +21,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 	if(length(friend.get_external_organs()))
 		var/list/injured_organs = friend.get_injured_organs()
 		if(length(injured_organs))
-			var/mob/living/carbon/human/H = friend
+			var/mob/living/human/H = friend
 			for (var/obj/item/organ/external/E in H.bad_external_organs)
 				if(!length(E.wounds))
 					continue

@@ -31,7 +31,7 @@
 
 	// Things they will automatically refuse
 	var/list/blacklisted_trade_items = list(
-		/mob/living/carbon/human
+		/mob/living/human
 	)
 
 /datum/trader/New()
@@ -197,7 +197,7 @@
 /datum/trader/proc/hail(var/mob/user)
 	var/specific
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species)
 			specific = H.species.name
 	else if(issilicon(user))

@@ -80,7 +80,7 @@
 /turf/floor/carpet,
 /area/map_template/wizard_station)
 "ap" = (
-/mob/living/carbon/human/monkey{
+/mob/living/human/monkey{
 	name = "Murphey"
 	},
 /turf/unsimulated/floor{

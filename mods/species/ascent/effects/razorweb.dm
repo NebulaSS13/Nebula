@@ -128,7 +128,7 @@
 	if(!istype(L) || !L.simulated || L.current_posture.prone || (MOVING_DELIBERATELY(L) && prob(25)) || L.is_floating)
 		return
 
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 	if(ishuman(L))
 		H = L
 		if(species_immunity_list[H.species.name])

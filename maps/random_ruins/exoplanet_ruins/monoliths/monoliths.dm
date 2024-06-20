@@ -58,7 +58,7 @@
 		to_chat(user, SPAN_NOTICE("\The [src] is still."))
 		return TRUE
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(H.isSynthetic())
 		to_chat(user, SPAN_NOTICE("\The [src] is still."))
 		return TRUE

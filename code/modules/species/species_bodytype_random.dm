@@ -9,7 +9,7 @@
 }
 
 #define SETUP_RANDOM_COLOR_SETTER(X, Y)\
-/mob/living/carbon/human/proc/randomize_##X(){\
+/mob/living/human/proc/randomize_##X(){\
 	var/decl/bodytype/root_bodytype = get_bodytype();\
 	if(!root_bodytype){\
 		return;\
@@ -45,7 +45,7 @@ SETUP_RANDOM_COLOR_SETTER(eye_color, set_eye_colour)
 /decl/bodytype/proc/get_random_skin_tone()
 	return random_skin_tone(src)
 
-/mob/living/carbon/human/proc/randomize_skin_tone()
+/mob/living/human/proc/randomize_skin_tone()
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if(!root_bodytype)
 		return

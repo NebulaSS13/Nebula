@@ -101,7 +101,7 @@
 			return E.get_fingerprint()
 	return fingerprint
 
-/mob/living/carbon/human/get_full_print(var/ignore_blockers = FALSE)
+/mob/living/human/get_full_print(var/ignore_blockers = FALSE)
 	if (!ignore_blockers && has_genetic_condition(GENE_COND_NO_FINGERPRINTS))
 		return null
 	return ..()

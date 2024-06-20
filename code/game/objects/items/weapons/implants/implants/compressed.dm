@@ -71,7 +71,7 @@
 				to_chat(user, "<span class='warning'>The matter compressor safeties prevent you from doing that.</span>")
 			return
 		if(ishuman(A.loc))
-			var/mob/living/carbon/human/H = A.loc
+			var/mob/living/human/H = A.loc
 			if(!H.try_unequip(A))
 				return
 		else if(isobj(A.loc) && A.loc.storage)

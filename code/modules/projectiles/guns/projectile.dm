@@ -92,7 +92,7 @@
 /obj/item/gun/projectile/process_point_blank(obj/projectile, atom/movable/firer, atom/target)
 	..()
 	if(chambered && ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		var/zone = BP_CHEST
 		if(isliving(firer))
 			var/mob/living/user = firer

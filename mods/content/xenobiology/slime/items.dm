@@ -99,7 +99,7 @@
 		return TRUE
 	visible_message(SPAN_WARNING("A craggy humanoid figure coalesces into being!"))
 
-	var/mob/living/carbon/human/G = new(src.loc)
+	var/mob/living/human/G = new(src.loc)
 	G.set_species(SPECIES_GOLEM)
 	G.key = ghost.key
 

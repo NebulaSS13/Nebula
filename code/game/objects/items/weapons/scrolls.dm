@@ -33,7 +33,7 @@
 		return 1
 	if (!ishuman(usr))
 		return 1
-	var/mob/living/carbon/human/H = usr
+	var/mob/living/human/H = usr
 	if ((usr == src.loc || (in_range(src, usr) && isturf(src.loc))))
 		usr.set_machine(src)
 		if (href_list["spell_teleport"])

@@ -44,7 +44,7 @@
 	. |= (sharp && DAM_SHARP)
 	. |= (edge && DAM_EDGE)
 
-/decl/natural_attack/proc/padded_by_user_gear(var/mob/living/carbon/human/user)
+/decl/natural_attack/proc/padded_by_user_gear(var/mob/living/human/user)
 	if(istype(user) && length(usable_with_limbs))
 		for(var/limb_slot in usable_with_limbs)
 			var/obj/item/gear = user.get_covering_equipped_item_by_zone(limb_slot)
@@ -52,7 +52,7 @@
 				return TRUE
 	return FALSE
 
-/decl/natural_attack/proc/resolve_to_soft_variant(var/mob/living/carbon/human/user)
+/decl/natural_attack/proc/resolve_to_soft_variant(var/mob/living/human/user)
 	. = src
 	if(istype(user) && (user.pulling_punches || padded_by_user_gear(user)))
 		var/decl/natural_attack/soft_variant = get_sparring_variant()
@@ -62,7 +62,7 @@
 /decl/natural_attack/proc/get_sparring_variant()
 	return GET_DECL(sparring_variant_type)
 
-/decl/natural_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
+/decl/natural_attack/proc/is_usable(var/mob/living/human/user, var/mob/target, var/zone)
 	if(!user.restrained() && !user.incapacitated())
 		for(var/etype in usable_with_limbs)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, etype)
@@ -132,7 +132,7 @@
 
 	return TRUE
 
-/decl/natural_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/proc/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 	var/msg = "\The [user] [pick(attack_verb)] \the [target]"
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(affecting)
@@ -143,7 +143,7 @@
 		user.visible_message(SPAN_DANGER("[msg]!"))
 		playsound(user.loc, attack_sound, 25, 1, -1)
 
-/decl/natural_attack/proc/handle_eye_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target)
+/decl/natural_attack/proc/handle_eye_attack(var/mob/living/human/user, var/mob/living/human/target)
 	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(target, BP_EYES)
 	var/decl/pronouns/G = user.get_pronouns()
 	if(eyes)
@@ -177,7 +177,7 @@
 	sharp = 1
 	edge = 1
 
-/decl/natural_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/bite/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 
 	if(user.get_item_blocking_speech())
 		return 0
@@ -200,7 +200,7 @@
 	sparring_variant_type = /decl/natural_attack/light_strike/punch
 	is_starting_default = TRUE
 
-/decl/natural_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/punch/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
@@ -262,7 +262,7 @@
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 	sparring_variant_type = /decl/natural_attack/light_strike/kick
 
-/decl/natural_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/kick/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()
@@ -273,7 +273,7 @@
 		return damage
 	return damage + (shoes ? shoes.force : 0)
 
-/decl/natural_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/kick/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
@@ -294,7 +294,7 @@
 	damage = 0
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 
-/decl/natural_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/stomp/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(!istype(target))
 		return FALSE
 	if (!user.current_posture.prone && (target.current_posture.prone || (zone in list(BP_L_FOOT, BP_R_FOOT))))
@@ -309,7 +309,7 @@
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	return damage + (shoes ? shoes.force : 0)
 
-/decl/natural_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/stomp/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
@@ -357,7 +357,7 @@
 	attack_noun = list("foot")
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 
-/decl/natural_attack/light_strike/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/light_strike/kick/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()

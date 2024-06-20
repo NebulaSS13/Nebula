@@ -20,7 +20,7 @@
 
 	// Reference data.
 	var/datum/mob_snapshot/organ_appearance
-	var/mob/living/carbon/human/owner      // Current mob owning the organ.
+	var/mob/living/human/owner      // Current mob owning the organ.
 	var/decl/species/species               // Original species.
 	var/decl/bodytype/bodytype             // Original bodytype.
 	var/list/ailments                      // Current active ailments if any.
@@ -555,7 +555,7 @@ var/global/list/ailment_reference_cache = list()
 // 3. When attaching a detached organ through surgery this is called.
 // The organ may be inside an external organ that's not inside a mob, or inside a mob
 //detached : If true, the organ will be installed in a detached state, otherwise it will be added in an attached state
-/obj/item/organ/proc/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
+/obj/item/organ/proc/do_install(var/mob/living/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
 	//Make sure to force the flag accordingly
 	set_detached(detached)
 	if(QDELETED(src))

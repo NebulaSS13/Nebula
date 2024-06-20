@@ -29,7 +29,7 @@
 		usr.real_name = usr.name_archive
 		usr.SetName(usr.real_name)
 		if(ishuman(usr))
-			var/mob/living/carbon/human/H = usr
+			var/mob/living/human/H = usr
 			H.SetName(H.get_visible_name())
 
 	usr.forceMove(O.loc) // Appear where the object you were controlling is -- TLE

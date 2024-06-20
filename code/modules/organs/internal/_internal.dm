@@ -38,7 +38,7 @@
 	if(species.organs_icon)
 		icon = species.organs_icon
 
-/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/internal/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
 
 	if(!affected)
@@ -291,7 +291,7 @@
 	return brainmob?.key
 
 // This might need revisiting to stop people successfully implanting brains in groins and transferring minds.
-/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/internal/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
 	if(transfer_brainmob_with_organ && istype(owner))
 		var/mob/living/brainmob = get_brainmob(create_if_missing = FALSE)

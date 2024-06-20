@@ -1,4 +1,4 @@
-/datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
+/datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/human/H)
 
 	if(!H)
 		H = client?.mob
@@ -48,7 +48,7 @@
 	if(H)
 		copy_to(H)
 
-/datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/dummy/mannequin)
+/datum/preferences/proc/dress_preview_mob(var/mob/living/human/dummy/mannequin)
 
 	if(!mannequin)
 		return
@@ -104,7 +104,7 @@
 		mannequin.compile_overlays()
 
 /datum/preferences/proc/update_preview_icon()
-	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client?.ckey)
+	var/mob/living/human/dummy/mannequin/mannequin = get_mannequin(client?.ckey)
 	if(mannequin)
 		mannequin.delete_inventory(TRUE)
 		dress_preview_mob(mannequin)

@@ -7,14 +7,14 @@
 	var/name = "all in bank account"
 	var/transfer_mult = 1
 
-/decl/starting_cash_choice/proc/get_cash_objects(var/mob/living/carbon/human/owner, var/datum/money_account/owner_account)
+/decl/starting_cash_choice/proc/get_cash_objects(var/mob/living/human/owner, var/datum/money_account/owner_account)
 	return
 
 /decl/starting_cash_choice/credstick
 	name = "all on charge stick"
 	uid = "starting_cash_stick"
 
-/decl/starting_cash_choice/credstick/get_cash_objects(var/mob/living/carbon/human/owner, var/datum/money_account/owner_account)
+/decl/starting_cash_choice/credstick/get_cash_objects(var/mob/living/human/owner, var/datum/money_account/owner_account)
 	var/obj/item/charge_stick/credstick = new
 	credstick.creator = owner.real_name
 	credstick.currency = owner_account.currency
@@ -31,7 +31,7 @@
 	name = "all in cash"
 	uid = "starting_cash_cash"
 
-/decl/starting_cash_choice/cash/get_cash_objects(var/mob/living/carbon/human/owner, var/datum/money_account/owner_account)
+/decl/starting_cash_choice/cash/get_cash_objects(var/mob/living/human/owner, var/datum/money_account/owner_account)
 	var/obj/item/cash/cash = new
 	cash.set_currency(owner_account.currency)
 	cash.adjust_worth(FLOOR(owner_account.money * transfer_mult))
@@ -48,7 +48,7 @@
 	transfer_mult = 0.5
 	uid = "starting_cash_cash_stick_split"
 
-/decl/starting_cash_choice/split/get_cash_objects(var/mob/living/carbon/human/owner, var/datum/money_account/owner_account)
+/decl/starting_cash_choice/split/get_cash_objects(var/mob/living/human/owner, var/datum/money_account/owner_account)
 	. = list()
 	var/obj/item/cash/cash = new
 	cash.set_currency(owner_account.currency)

@@ -134,7 +134,7 @@
 /obj/item/holder/proc/sync(var/mob/living/M)
 	SetName(M.name)
 	desc = M.desc
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H))
 		last_holder = H
 		register_all_movement(H, M)

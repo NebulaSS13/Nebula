@@ -1,4 +1,4 @@
-/decl/special_role/proc/equip_role(var/mob/living/carbon/human/player)
+/decl/special_role/proc/equip_role(var/mob/living/human/player)
 
 	SHOULD_CALL_PARENT(TRUE)
 
@@ -31,10 +31,10 @@
 
 	return TRUE
 
-/decl/special_role/proc/unequip_role(var/mob/living/carbon/human/player)
+/decl/special_role/proc/unequip_role(var/mob/living/human/player)
 	return istype(player)
 
-/decl/special_role/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
+/decl/special_role/proc/equip_rig(var/rig_type, var/mob/living/human/player)
 	set waitfor = FALSE
 	if(istype(player) && ispath(rig_type))
 		var/obj/item/rig/rig = new rig_type(player)

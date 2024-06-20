@@ -4,14 +4,14 @@
 	screen_loc = ui_attack_selector
 
 /obj/screen/default_attack_selector/Destroy()
-	var/mob/living/carbon/human/owner = owner_ref?.resolve()
+	var/mob/living/human/owner = owner_ref?.resolve()
 	if(istype(owner) && owner.attack_selector == src)
 		owner.attack_selector = null
 	. = ..()
 
 /obj/screen/default_attack_selector/handle_click(mob/user, params)
 
-	var/mob/living/carbon/human/owner = owner_ref?.resolve()
+	var/mob/living/human/owner = owner_ref?.resolve()
 	if(user != owner)
 		return FALSE
 
@@ -28,6 +28,6 @@
 	return TRUE
 
 /obj/screen/default_attack_selector/on_update_icon()
-	var/mob/living/carbon/human/owner = owner_ref?.resolve()
+	var/mob/living/human/owner = owner_ref?.resolve()
 	var/decl/natural_attack/attack = istype(owner) && owner.default_attack
 	icon_state = attack?.selector_icon_state || "attack_none"

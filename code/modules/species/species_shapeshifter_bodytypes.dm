@@ -13,22 +13,22 @@
 		return DISMEMBER_METHOD_BLUNT
 	return ..()
 
-/decl/bodytype/shapeshifter/get_base_icon(var/mob/living/carbon/human/H, var/get_deform)
+/decl/bodytype/shapeshifter/get_base_icon(var/mob/living/human/H, var/get_deform)
 	if(!H) return ..(null, get_deform)
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.default_bodytype.get_base_icon(H, get_deform)
 
-/decl/bodytype/shapeshifter/get_blood_overlays(var/mob/living/carbon/human/H)
+/decl/bodytype/shapeshifter/get_blood_overlays(var/mob/living/human/H)
 	if(!H) return ..()
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.default_bodytype.get_blood_overlays(H)
 
-/decl/bodytype/shapeshifter/get_damage_overlays(var/mob/living/carbon/human/H)
+/decl/bodytype/shapeshifter/get_damage_overlays(var/mob/living/human/H)
 	if(!H) return ..()
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.default_bodytype.get_damage_overlays(H)
 
-/decl/bodytype/shapeshifter/get_husk_icon(var/mob/living/carbon/human/H)
+/decl/bodytype/shapeshifter/get_husk_icon(var/mob/living/human/H)
 	if(H)
 		var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 		if(S) return S.default_bodytype.get_husk_icon(H)

@@ -97,7 +97,7 @@ var/global/list/narsie_list = list()
 				targets += cult_nh_mind.current
 		// If we have no valid cultists, go for any human.
 		if(!length(targets))
-			for(var/mob/living/carbon/human/food in global.living_mob_list_)
+			for(var/mob/living/human/food in global.living_mob_list_)
 				if(food.stat)
 					var/turf/pos = get_turf(food)
 					if(pos?.z in current_zs)

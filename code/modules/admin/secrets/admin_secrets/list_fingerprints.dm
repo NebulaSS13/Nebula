@@ -7,7 +7,7 @@
 		return
 	var/dat = "<B>Showing Fingerprints.</B><HR>"
 	dat += "<table cellspacing=5><tr><th>Name</th><th>Fingerprints</th></tr>"
-	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+	for(var/mob/living/human/H in SSmobs.mob_list)
 		if(H.ckey)
 			dat += "<tr><td>[H]</td><td>[H.get_full_print(ignore_blockers = TRUE) || "null"]</td></tr>"
 	dat += "</table>"

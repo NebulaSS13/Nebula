@@ -137,7 +137,7 @@
 					if(W.bleeding())
 						if(temp.applied_pressure)
 							if(ishuman(temp.applied_pressure))
-								var/mob/living/carbon/human/H = temp.applied_pressure
+								var/mob/living/human/H = temp.applied_pressure
 								H.bloody_hands(src, 0)
 							//somehow you can apply pressure to every wound on the organ at the same time
 							//you're basically forced to do nothing at all, so let's make it pretty effective

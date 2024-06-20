@@ -4,7 +4,7 @@
 /mob/proc/check_rig_status(check_offline)
 	return 0
 
-/mob/living/carbon/human/check_rig_status(check_offline)
+/mob/living/human/check_rig_status(check_offline)
 	var/obj/item/rig/rig = get_rig()
 	if(!rig || rig.canremove)
 		return 0 //not wearing a rig control unit or it's offline or unsealed
@@ -109,12 +109,12 @@
 	..()
 
 // Some space suits are equipped with reactive membranes that support broken limbs
-/obj/item/clothing/suit/space/rig/proc/can_support(var/mob/living/carbon/human/user)
+/obj/item/clothing/suit/space/rig/proc/can_support(var/mob/living/human/user)
 	if(user.get_equipped_item(slot_wear_suit_str) != src)
 		return 0 //not wearing the suit
 	return user.check_rig_status(1)
 
-/obj/item/clothing/suit/space/rig/check_limb_support(var/mob/living/carbon/human/user)
+/obj/item/clothing/suit/space/rig/check_limb_support(var/mob/living/human/user)
 
 	// If this isn't set, then we don't need to care.
 	if(!istype(user) || isnull(supporting_limbs))
@@ -132,7 +132,7 @@
 				to_chat(user, "<span class='notice'>\The [src] stops supporting your [E.name].</span>")
 		supporting_limbs.Cut()
 
-/obj/item/clothing/suit/space/rig/proc/handle_fracture(var/mob/living/carbon/human/user, var/obj/item/organ/external/E)
+/obj/item/clothing/suit/space/rig/proc/handle_fracture(var/mob/living/human/user, var/obj/item/organ/external/E)
 	if(!istype(user) || isnull(supporting_limbs) || !can_support(user))
 		return
 	if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
@@ -145,7 +145,7 @@
 	if(!A || !proximity)
 		return 0
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(!istype(H))
 		return 0
 

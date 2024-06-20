@@ -452,7 +452,7 @@
 	if(dose > 30)
 		M.take_damage(2 * removed, TOX)
 	if(dose > 60 && ishuman(M) && prob(5))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
 		if(heart)
 			if(dose < 120)

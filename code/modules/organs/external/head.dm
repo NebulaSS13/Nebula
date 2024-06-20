@@ -114,7 +114,7 @@
 	if(eye_glow)
 		LAZYADD(., eye_glow)
 
-/obj/item/organ/external/head/gripper/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
+/obj/item/organ/external/head/gripper/do_install(mob/living/human/target, affected, in_place, update_icon, detached)
 	. = ..()
 	if(. && owner)
 		owner.add_held_item_slot(new /datum/inventory_slot/gripper/mouth)

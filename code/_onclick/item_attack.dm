@@ -61,7 +61,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return TRUE
 	return I.use_on_mob(src, user)
 
-/mob/living/carbon/human/attackby(obj/item/I, mob/user)
+/mob/living/human/attackby(obj/item/I, mob/user)
 
 	. = ..()
 	if(.)

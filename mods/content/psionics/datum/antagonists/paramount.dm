@@ -23,7 +23,7 @@
 	gloves =  /obj/item/clothing/gloves/grey
 	id_type = /obj/item/card/id/syndicate
 
-/decl/special_role/paramount/equip_role(var/mob/living/carbon/human/player)
+/decl/special_role/paramount/equip_role(var/mob/living/human/player)
 	. = ..()
 	if(.)
 		player.set_psi_rank(PSI_REDACTION, 3,     defer_update = TRUE)

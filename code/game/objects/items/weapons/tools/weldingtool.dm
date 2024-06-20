@@ -344,7 +344,7 @@
 
 /obj/item/weldingtool/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user?.get_target_zone())
 		if(!S || !S.is_robotic() || user.a_intent != I_HELP)
 			return ..()

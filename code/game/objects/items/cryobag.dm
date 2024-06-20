@@ -131,7 +131,7 @@
 	qdel(src)
 
 /obj/structure/closet/body_bag/cryobag/blank/WillContain()
-	return list(/mob/living/carbon/human/blank)
+	return list(/mob/living/human/blank)
 
 /obj/structure/closet/body_bag/cryobag/blank/Initialize()
 	. = ..()

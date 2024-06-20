@@ -381,7 +381,7 @@
 		objectives -= objective
 
 	else if(href_list["implant"])
-		var/mob/living/carbon/human/H = current
+		var/mob/living/human/H = current
 
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
 
@@ -515,7 +515,7 @@
 		src.client.verbs += /client/proc/aooc
 
 //HUMAN
-/mob/living/carbon/human/mind_initialize()
+/mob/living/human/mind_initialize()
 	..()
 	if(!mind.assigned_role)
 		mind.assigned_role = global.using_map.default_job_title

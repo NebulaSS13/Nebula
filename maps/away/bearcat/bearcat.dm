@@ -125,7 +125,7 @@
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 
-/decl/hierarchy/outfit/deadcap/post_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/deadcap/post_equip(mob/living/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
 	if(uniform)

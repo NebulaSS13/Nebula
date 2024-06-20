@@ -54,7 +54,7 @@
 		return TRUE
 
 	// This properly handles mouth coverage/presence, but should probably be replaced later.
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(user == H)
 		if(!H.can_eat(src))
 			return TRUE

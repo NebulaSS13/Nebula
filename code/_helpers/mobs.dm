@@ -209,7 +209,7 @@
 				continue
 			//They need a brain!
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				if(H.should_have_organ(BP_BRAIN) && !H.has_brain())
 					continue
 			if(M.ckey == find_key)

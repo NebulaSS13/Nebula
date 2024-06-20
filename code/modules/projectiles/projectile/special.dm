@@ -137,7 +137,7 @@
 
 /obj/item/projectile/beam/mindflayer/on_hit(var/atom/target, var/blocked = 0)
 	if(ishuman(target))
-		var/mob/living/carbon/human/M = target
+		var/mob/living/human/M = target
 		ADJ_STATUS(M, STAT_CONFUSE, rand(5,8))
 
 /obj/item/projectile/chameleon

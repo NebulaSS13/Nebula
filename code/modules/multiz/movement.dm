@@ -16,7 +16,7 @@
 /mob/proc/move_down()
 	SelfMove(DOWN)
 
-/mob/living/carbon/human/move_up()
+/mob/living/human/move_up()
 	var/turf/old_loc = loc
 	..()
 	if(loc != old_loc)
@@ -48,7 +48,7 @@
 /mob/proc/can_overcome_gravity()
 	return FALSE
 
-/mob/living/carbon/human/can_overcome_gravity()
+/mob/living/human/can_overcome_gravity()
 	//First do species check
 	if(species && species.can_overcome_gravity(src))
 		return 1
@@ -162,7 +162,7 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
-/mob/living/carbon/human/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/mob/living/human/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	if(..())
 		return species.can_fall(src)
 
@@ -239,7 +239,7 @@
 		return 100
 	return BASE_STORAGE_COST(w_class)
 
-/mob/living/carbon/human/apply_fall_damage(var/turf/landing)
+/mob/living/human/apply_fall_damage(var/turf/landing)
 	if(status_flags & GODMODE)
 		return
 	if(species && species.handle_fall_special(src, landing))
@@ -268,7 +268,7 @@
 			victim.dislocate()
 			to_chat(src, "<span class='warning'>You feel a sickening pop as your [victim.joint] is wrenched out of the socket.</span>")
 
-/mob/living/carbon/human/proc/climb_up(atom/A)
+/mob/living/human/proc/climb_up(atom/A)
 	if(!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.
 		return FALSE
 
@@ -375,7 +375,7 @@
 /mob/living/simple_animal/can_float()
 	return is_aquatic
 
-/mob/living/carbon/human/can_float()
+/mob/living/human/can_float()
 	return species.can_float(src)
 
 /mob/living/silicon/can_float()

@@ -91,7 +91,7 @@
 	if(istype(M))
 		M.update_floating()
 	if(covering_shoes)
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 		if(istype(H) && shoes != src)
 			H.equip_to_slot_if_possible(covering_shoes, slot_shoes_str, disable_warning = TRUE)
@@ -102,7 +102,7 @@
 
 /obj/item/clothing/shoes/magboots/dropped(var/mob/user)
 	..()
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(covering_shoes)
 		if(istype(H))
 			H.equip_to_slot_if_possible(covering_shoes, slot_shoes_str, disable_warning = TRUE)

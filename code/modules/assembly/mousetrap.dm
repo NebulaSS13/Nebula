@@ -30,7 +30,7 @@
 		return
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		switch(type)
 			if("feet")
 				if(!H.get_equipped_item(slot_shoes_str))

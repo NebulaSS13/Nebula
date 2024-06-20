@@ -96,7 +96,7 @@
 	idle ++
 
 	if(ishuman(loc))
-		var/mob/living/carbon/human/user = loc
+		var/mob/living/human/user = loc
 
 		if (!lit || !ec_cartridge || !ec_cartridge.reagents.total_volume)//no cartridge
 			if(!ec_cartridge.reagents.total_volume)

@@ -154,7 +154,7 @@ var/global/list/areas = list()
 	for(var/obj/machinery/door/firedoor/door in src)
 		door.update_area_registrations()
 
-/area/proc/alert_on_fall(var/mob/living/carbon/human/H)
+/area/proc/alert_on_fall(var/mob/living/human/H)
 	return
 
 /area/proc/get_cameras()
@@ -405,7 +405,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 		return
 
 	if(ishuman(mob))
-		var/mob/living/carbon/human/H = mob
+		var/mob/living/human/H = mob
 		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_ADEPT)))
 			if(!MOVING_DELIBERATELY(H))
 				ADJ_STATUS(H, STAT_STUN, 6)

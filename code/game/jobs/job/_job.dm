@@ -88,7 +88,7 @@
 /datum/job/dd_SortValue()
 	return title
 
-/datum/job/proc/equip_job(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/proc/equip_job(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	H.add_language(/decl/language/human/common)
 	if (required_language)
 		H.add_language(required_language)
@@ -113,7 +113,7 @@
 			var/obj/item/key/new_key = new(get_turf(H), lock_keys[lock_key] || /decl/material/solid/metal/iron, lock_key)
 			keyring.storage?.handle_item_insertion(null, new_key)
 
-/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/proc/get_outfit(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]
 	if(allowed_branches && branch)
@@ -123,14 +123,14 @@
 	. = . || outfit_type
 	. = outfit_by_type(.)
 
-/datum/job/proc/create_cash_on_hand(var/mob/living/carbon/human/H, var/datum/money_account/M)
+/datum/job/proc/create_cash_on_hand(var/mob/living/human/H, var/datum/money_account/M)
 	if(!istype(M) || !H.client?.prefs?.starting_cash_choice)
 		return 0
 	for(var/obj/item/thing in H.client.prefs.starting_cash_choice.get_cash_objects(H, M))
 		. += thing.get_base_value()
 		H.equip_to_storage_or_put_in_hands(thing)
 
-/datum/job/proc/get_total_starting_money(var/mob/living/carbon/human/H)
+/datum/job/proc/get_total_starting_money(var/mob/living/human/H)
 	. = 4 * rand(75, 100) * economic_power
 	// Get an average economic power for our cultures.
 	var/culture_mod =   0
@@ -148,7 +148,7 @@
 	. *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
 	. = round(.)
 
-/datum/job/proc/setup_account(var/mob/living/carbon/human/H)
+/datum/job/proc/setup_account(var/mob/living/human/H)
 	if(!account_allowed || (H.mind && H.mind.initial_account))
 		return
 
@@ -176,7 +176,7 @@
 		H.mind.initial_account = M
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade, var/additional_skips)
+/datum/job/proc/equip_preview(mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade, var/additional_skips)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)
 		return FALSE
@@ -196,14 +196,14 @@
 		return max(0, minimal_player_age - C.player_age)
 	return 0
 
-/datum/job/proc/apply_fingerprints(var/mob/living/carbon/human/target)
+/datum/job/proc/apply_fingerprints(var/mob/living/human/target)
 	if(!istype(target))
 		return 0
 	for(var/obj/item/item in target.contents)
 		apply_fingerprints_to_item(target, item)
 	return 1
 
-/datum/job/proc/apply_fingerprints_to_item(var/mob/living/carbon/human/holder, var/obj/item/item)
+/datum/job/proc/apply_fingerprints_to_item(var/mob/living/human/holder, var/obj/item/item)
 	item.add_fingerprint(holder,1)
 	if(item.contents.len)
 		for(var/obj/item/sub_item in item.contents)
@@ -368,7 +368,7 @@
 
 /datum/job/proc/get_job_icon()
 	if(!SSjobs.job_icons[title])
-		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
+		var/mob/living/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
 		if(mannequin)
 			var/decl/species/mannequin_species = get_species_by_key(global.using_map.default_species)
 			if(!is_species_allowed(mannequin_species))
@@ -415,7 +415,7 @@
 	if(LAZYLEN(reasons))
 		. = reasons
 
-/datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
+/datum/job/proc/dress_mannequin(var/mob/living/human/dummy/mannequin/mannequin)
 	if(mannequin)
 		mannequin.delete_inventory(TRUE)
 		equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)
@@ -487,7 +487,7 @@
 		return TRUE
 	return FALSE
 
-/datum/job/proc/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/proc/handle_variant_join(var/mob/living/human/H, var/alt_title)
 	return
 
 /datum/job/proc/check_special_blockers(var/datum/preferences/prefs)

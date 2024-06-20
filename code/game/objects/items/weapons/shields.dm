@@ -206,7 +206,7 @@
 		to_chat(user, SPAN_NOTICE("\The [src] can now be concealed."))
 
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		H.update_inhand_overlays()
 
 	add_fingerprint(user)

@@ -48,7 +48,7 @@
 	var/decl/item_modifier/target_modification
 	var/target_bodytype
 
-	var/mob/living/carbon/human/occupant
+	var/mob/living/human/occupant
 	var/obj/item/clothing/suit/space/void/suit
 	var/obj/item/clothing/head/helmet/space/helmet
 	var/obj/item/clothing/shoes/magboots/boots

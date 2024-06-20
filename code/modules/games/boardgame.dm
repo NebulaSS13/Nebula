@@ -132,7 +132,7 @@
 				if(I)
 					selected = text2num(s)
 				else
-					var/mob/living/carbon/human/H = locate(href_list["person"])
+					var/mob/living/human/H = locate(href_list["person"])
 					if(!istype(H))
 						return
 					var/obj/item/O = H.get_active_held_item()

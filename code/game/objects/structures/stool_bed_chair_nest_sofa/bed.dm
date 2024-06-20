@@ -236,7 +236,7 @@
 	beaker = null
 	queue_icon_update()
 
-/obj/structure/bed/roller/proc/attach_iv(mob/living/carbon/human/target, mob/user)
+/obj/structure/bed/roller/proc/attach_iv(mob/living/human/target, mob/user)
 	if(!beaker)
 		return
 	if(do_IV_hookup(target, user, beaker))
@@ -244,7 +244,7 @@
 		queue_icon_update()
 		START_PROCESSING(SSobj,src)
 
-/obj/structure/bed/roller/proc/detach_iv(mob/living/carbon/human/target, mob/user)
+/obj/structure/bed/roller/proc/detach_iv(mob/living/human/target, mob/user)
 	visible_message("\The [target] is taken off the IV on \the [src].")
 	iv_attached = FALSE
 	queue_icon_update()

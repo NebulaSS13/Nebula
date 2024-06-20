@@ -4,7 +4,7 @@
 	cost = 100
 	cooldown = 60 SECONDS
 	flags = PHENOMENA_FOLLOWER
-	expected_type = /mob/living/carbon/human
+	expected_type = /mob/living/human
 	var/static/list/possible_forms = list(
 									"Champion" = list("description" = "A protector of the faith. Fully protected by knightly armor, a Champion can shoot fire from their hands.",
 													"armor" = /obj/item/clothing/suit/armor/sunsuit,
@@ -31,7 +31,7 @@
 	return valid_for_herald(a)
 
 /datum/phenomena/herald/proc/valid_for_herald(var/a)
-	var/mob/living/carbon/human/H = a
+	var/mob/living/human/H = a
 	if(!istype(H))
 		return FALSE
 	var/obj/item/I = H.get_equipped_item(slot_wear_suit_str)
@@ -81,7 +81,7 @@
 		linked.remove_phenomena(name)
 		show_browser(linked, null, "window=herald")
 
-/datum/phenomena/herald/activate(var/mob/living/carbon/human/H)
+/datum/phenomena/herald/activate(var/mob/living/human/H)
 	var/list/html = list()
 	html += "<center><h2>Heralds</h2></center>"
 	html += "<br><i>Pick the type of herald you want.</i></br>"

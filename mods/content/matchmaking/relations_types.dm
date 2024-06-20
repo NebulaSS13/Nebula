@@ -15,11 +15,11 @@
 
 /datum/relation/kid_friend/get_candidates()
 	var/list/creche = ..()
-	var/mob/living/carbon/human/holdermob = holder.current
+	var/mob/living/human/holdermob = holder.current
 
 	if(istype(holdermob))
 		for(var/datum/relation/kid in creche)
-			var/mob/living/carbon/human/kidmob = kid.holder.current
+			var/mob/living/human/kidmob = kid.holder.current
 			if(!istype(kidmob))
 				continue
 			if(abs(holdermob.get_age() - kidmob.get_age()) > 3)
@@ -93,10 +93,10 @@
 /datum/relation/spessnam/get_candidates()
 	var/list/warbuds = ..()
 	var/list/branchmates = list()
-	var/mob/living/carbon/human/holdermob = holder.current
+	var/mob/living/human/holdermob = holder.current
 	if(istype(holdermob) && global.using_map && (global.using_map.flags & MAP_HAS_BRANCH))
 		for(var/datum/relation/buddy in warbuds)
-			var/mob/living/carbon/human/buddymob = buddy.holder.current
+			var/mob/living/human/buddymob = buddy.holder.current
 			if(!istype(buddymob))
 				continue
 			if(holdermob.char_branch == buddymob.char_branch)

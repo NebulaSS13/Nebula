@@ -55,7 +55,7 @@
 	if(!ishuman(loc))
 		return PROCESS_KILL
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(H.get_equipped_slot_for_item(src) != slot_wear_suit_str)
 		return PROCESS_KILL
 

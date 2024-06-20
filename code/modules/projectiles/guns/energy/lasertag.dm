@@ -10,7 +10,7 @@
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 
-/obj/item/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
+/obj/item/gun/energy/lasertag/special_check(var/mob/living/human/M)
 	if(ishuman(M) && !istype(M.get_equipped_item(slot_wear_suit_str), required_vest))
 		to_chat(M, SPAN_WARNING("You need to be wearing your laser tag vest!"))
 		return FALSE
