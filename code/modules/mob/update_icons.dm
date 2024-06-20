@@ -57,7 +57,7 @@
 	if(redraw_mob)
 		queue_icon_update()
 
-/mob/proc/update_mutations()
+/mob/proc/update_genetic_conditions()
 	return
 
 /mob/proc/update_hair(var/update_icons=1)

@@ -38,10 +38,10 @@
 
 	if(do_after(target, 10 SECONDS, src, TRUE))
 		// Convert to gyne successfully.
-		target.dna.lineage = create_gyne_name()
-		target.real_name = "[rand(1, 99)] [target.dna.lineage]"
-		target.name = target.real_name
-		target.dna.real_name = target.real_name
+		var/lineage = create_gyne_name()
+		target.set_gyne_lineage(lineage)
+		target.real_name = "[rand(1, 99)] [lineage]"
+		target.SetName(target.real_name)
 
 		target.visible_message(SPAN_NOTICE("[target] molts away their shell, emerging as a new gyne."))
 		spark_at(src, cardinal_only = TRUE)

@@ -27,7 +27,7 @@
 	/// Whether or not we should try to transfer a brainmob when removed or replaced in a mob.
 	var/transfer_brainmob_with_organ = FALSE
 
-/obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
+/obj/item/organ/internal/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
 	. = ..()
@@ -276,7 +276,6 @@
 		if(update_brainmob)
 			brainmob.SetName(M.real_name)
 			brainmob.real_name = M.real_name
-			brainmob.dna = M.dna?.Clone()
 			brainmob.languages = M.languages?.Copy()
 			brainmob.default_language = M.default_language
 			to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))

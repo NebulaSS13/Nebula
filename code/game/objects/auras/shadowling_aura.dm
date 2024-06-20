@@ -4,14 +4,13 @@
 
 /obj/aura/shadowling_aura/added_to(var/mob/living/L)
 	..()
-	if(!(MUTATION_SPACERES in L.mutations))
-		L.mutations += MUTATION_SPACERES
+	if(L.add_genetic_condition(GENE_COND_SPACE_RESISTANCE))
 		added_mutation = TRUE
 
 /obj/aura/shadowling_aura/removed()
 	if(added_mutation)
 		added_mutation = FALSE
-		user.mutations -= MUTATION_SPACERES
+		user.remove_genetic_condition(GENE_COND_SPACE_RESISTANCE)
 	..()
 
 /obj/aura/shadowling_aura/bullet_act(var/obj/item/projectile/P)

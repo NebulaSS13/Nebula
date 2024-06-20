@@ -87,12 +87,18 @@
 
 /mob/living/simple_animal/borer/handle_disabilities()
 	. = ..()
-	sdisabilities = 0
 	if(host)
-		if(host.sdisabilities & BLINDED)
-			sdisabilities |= BLINDED
-		if(host.sdisabilities & DEAFENED)
-			sdisabilities |= DEAFENED
+		if(host.has_genetic_condition(GENE_COND_BLINDED))
+			add_genetic_condition(GENE_COND_BLINDED)
+		else
+			remove_genetic_condition(GENE_COND_BLINDED)
+		if(host.has_genetic_condition(GENE_COND_DEAFENED))
+			add_genetic_condition(GENE_COND_DEAFENED)
+		else
+			remove_genetic_condition(GENE_COND_DEAFENED)
+	else
+		remove_genetic_condition(GENE_COND_BLINDED)
+		remove_genetic_condition(GENE_COND_DEAFENED)
 
 /mob/living/simple_animal/borer/handle_living_non_stasis_processes()
 	. = ..()

@@ -816,17 +816,6 @@
 
 		usr.client.cmd_admin_animalize(M)
 
-	else if(href_list["togmutate"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["togmutate"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
-			return
-		var/block=text2num(href_list["block"])
-		usr.client.cmd_admin_toggle_block(H,block)
-		show_player_panel(H)
-
 	else if(href_list["adminplayeropts"])
 		var/mob/M = locate(href_list["adminplayeropts"])
 		show_player_panel(M)
@@ -1519,6 +1508,7 @@
 					ckey = LAST_CKEY(M)
 			show_player_info(ckey)
 		return
+
 	if(href_list["setstaffwarn"])
 		var/mob/M = locate(href_list["setstaffwarn"])
 		if(!ismob(M)) return
@@ -1541,6 +1531,7 @@
 				show_player_panel(M)
 			if("No")
 				return
+
 	if(href_list["removestaffwarn"])
 		var/mob/M = locate(href_list["removestaffwarn"])
 		if(!ismob(M)) return
@@ -1584,6 +1575,31 @@
 				log_debug("Couldn't get computer network for [log_info_line(D)], where network_id is '[D.network_id]'.")
 		else
 			log_debug("Tried to send a fax to an invalid machine!:[log_info_line(F)]\nhref:[log_info_line(href_list)]")
+
+	if(href_list["toggle_mutation"])
+		var/mob/M = locate(href_list["toggle_mutation"])
+		var/decl/genetic_condition/condition = locate(href_list["block"])
+		if(istype(condition) && istype(M) && !QDELETED(M))
+			var/result
+			var/had_condition
+			if(M.has_genetic_condition(condition.type))
+				had_condition = TRUE
+				result = M.remove_genetic_condition(condition.type)
+			else
+				had_condition = FALSE
+				result = M.add_genetic_condition(condition.type)
+			if(!isnull(result))
+				if(result)
+					if(had_condition)
+						log_debug("Removed genetic condition [condition.name] from \the [M] ([M.ckey]).")
+					else
+						log_debug("Added genetic condition [condition.name] to \the [M] ([M.ckey]).")
+				else
+					log_debug("Failed to toggle genetic condition [condition.name] on \the [M] ([M.ckey]).")
+			else
+				log_debug("Could not apply genetic condition [condition.name] to \the [M] ([M.ckey]).")
+			show_player_panel(M)
+		return
 
 /mob/living/proc/can_centcom_reply()
 	return 0

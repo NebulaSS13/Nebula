@@ -90,8 +90,6 @@
 	if (newname)
 		player.real_name = newname
 		player.SetName(player.real_name)
-		if(player.dna)
-			player.dna.real_name = newname
 	if(player.mind) player.mind.name = player.name
 	// Update any ID cards.
 	update_access(player)

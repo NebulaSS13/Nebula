@@ -794,7 +794,6 @@ var/global/list/admin_verbs_mod = list(
 	if(update_hair)
 		M.update_hair()
 	M.update_body()
-	M.check_dna(M)
 
 /client/proc/free_slot_submap()
 	set name = "Free Job Slot (Submap)"

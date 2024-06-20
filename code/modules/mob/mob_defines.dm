@@ -76,9 +76,6 @@
 	var/damageoverlaytemp = 0
 	var/obj/machinery/machine = null
 
-	var/sdisabilities = 0	//Carbon
-	var/disabilities = 0	//Carbon
-
 	var/next_move = null
 	var/real_name = null
 
@@ -114,11 +111,6 @@
 
 	var/can_pull_size = ITEM_SIZE_STRUCTURE // Maximum w_class the mob can pull.
 	var/can_pull_mobs = MOB_PULL_SAME       // Whether or not the mob can pull other mobs.
-
-	var/datum/dna/dna = null//Carbon
-	var/list/active_genes
-	var/list/mutations = list() // TODO: Lazylist this var.
-	//see: setup.dm for list of mutations
 
 	var/radiation = 0.0//Carbon
 

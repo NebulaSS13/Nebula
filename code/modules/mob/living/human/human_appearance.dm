@@ -17,6 +17,7 @@
 			update_body()
 
 /mob/living/carbon/human/proc/change_species(var/new_species, var/new_bodytype = null)
+
 	if(!new_species)
 		return
 
@@ -27,11 +28,9 @@
 		return
 
 	set_species(new_species, new_bodytype)
-	dna.ready_dna(src)
 
 	//Handle spawning stuff
 	species.handle_pre_spawn(src)
-	UpdateAppearance()
 	apply_species_appearance()
 	apply_bodytype_appearance()
 	apply_species_cultural_info()
@@ -51,7 +50,6 @@
 	. = ..()
 	if(. && update_body)
 		update_body()
-		update_dna()
 
 /mob/living/carbon/human/proc/randomize_gender()
 	var/decl/pronouns/pronouns = pick(species.available_pronouns)
@@ -92,10 +90,6 @@
 	update_body()
 	return 1
 
-/mob/living/carbon/human/proc/update_dna()
-	check_dna()
-	dna.ready_dna(src)
-
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
 	for(var/current_species_name in get_all_species())
@@ -114,8 +108,3 @@
 		valid_species += current_species_name
 
 	return valid_species
-
-/mob/living/carbon/human/proc/force_update_limbs()
-	for(var/obj/item/organ/external/O in get_external_organs())
-		O.sync_colour_to_human(src)
-	update_body(0)

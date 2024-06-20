@@ -97,7 +97,7 @@
 		if(istype(ojob) && ojob.info)
 			to_chat(character, ojob.info)
 
-		if(user_human && user_human.disabilities & NEARSIGHTED)
+		if(user_human && user_human.has_genetic_condition(GENE_COND_NEARSIGHTED))
 			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), slot_glasses_str)
 			if(equipped)
 				var/obj/item/clothing/glasses/G = user_human.get_equipped_item(slot_glasses_str)

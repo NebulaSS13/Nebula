@@ -4,19 +4,18 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 	mob_sort_value = 6
-	dna = new /datum/dna()
 	max_health = 150
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/step_count
 
-/mob/living/carbon/human/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+/mob/living/carbon/human/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
 
 	current_health = max_health
 	setup_hud_overlays()
 	var/list/newargs = args.Copy(2)
-	setup(arglist(newargs))
+	setup_human(arglist(newargs))
 	global.human_mob_list |= src
 
 	if(!bloodstr)
@@ -141,13 +140,6 @@
 	for(var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
 		LAZYADD(., "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>")
-
-
-// TODO: remove when is_husked is moved to a parent type (or if husking is removed)
-/mob/living/carbon/human/identity_is_visible()
-	if(is_husked())
-		return FALSE
-	return ..()
 
 /mob/living/carbon/human/OnSelfTopic(href_list)
 	if (href_list["lookitem"])
@@ -395,11 +387,9 @@
 		germ_level += n
 
 /mob/living/carbon/human/revive()
-
 	get_bodytype().create_missing_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
 	reset_blood()
-
 	if(!client || !key) //Don't boot out anyone already in the mob.
 		for(var/mob/living/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
 			if(brain.real_name == src.real_name && brain.mind)
@@ -407,7 +397,6 @@
 				qdel(brain.loc)
 				break
 	ticks_since_last_successful_breath = 0
-	UpdateAppearance()
 	..()
 
 /mob/living/add_blood(mob/living/M, amount = 2, list/blood_data)
@@ -473,7 +462,11 @@
 		custom_pain(msg,40,affecting = organ)
 	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
-/mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype)
+/mob/proc/set_bodytype(var/decl/bodytype/new_bodytype)
+	return
+
+/mob/living/carbon/human/set_bodytype(var/decl/bodytype/new_bodytype)
+
 	var/decl/bodytype/old_bodytype = get_bodytype()
 	if(ispath(new_bodytype))
 		new_bodytype = GET_DECL(new_bodytype)
@@ -493,10 +486,13 @@
 	update_eyes()
 	return TRUE
 
+/mob/proc/set_species(var/new_species_name, var/new_bodytype = null)
+	return
+
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
 // For transforming an existing mob, look at change_species()
-/mob/living/carbon/human/proc/set_species(var/new_species_name, var/new_bodytype = null)
+/mob/living/carbon/human/set_species(var/new_species_name, var/new_bodytype = null)
 	if(!new_species_name)
 		CRASH("set_species on mob '[src]' was passed a null species name '[new_species_name]'!")
 	var/new_species = get_species_by_key(new_species_name)
@@ -512,8 +508,6 @@
 
 	//Update our species
 	species = new_species
-	if(dna)
-		dna.species = new_species_name
 	holder_type = null
 	if(species.holder_type)
 		holder_type = species.holder_type
@@ -982,21 +976,17 @@
 		return
 	real_name = newname
 	SetName(newname)
-	if(dna)
-		dna.real_name = newname
 	if(mind)
 		mind.name = newname
 
 //Human mob specific init code. Meant to be used only on init.
-/mob/living/carbon/human/proc/setup(species_name = null, datum/dna/new_dna = null, decl/bodytype/new_bodytype = null)
-
-	if(new_dna)
-		species_name = new_dna.species
-		src.dna = new_dna
+/mob/living/carbon/human/proc/setup_human(species_name, datum/mob_snapshot/supplied_appearance)
+	if(supplied_appearance)
+		species_name = supplied_appearance.root_species
 	else if(!species_name)
 		species_name = global.using_map.default_species //Humans cannot exist without a species!
 
-	set_species(species_name, new_bodytype)
+	set_species(species_name, supplied_appearance?.root_bodytype)
 	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
 	if(!get_skin_colour())
 		set_skin_colour(root_bodytype.base_color, skip_update = TRUE)
@@ -1007,17 +997,17 @@
 	if(!blood_type && length(species?.blood_types))
 		blood_type = pickweight(species.blood_types)
 
-	if(new_dna)
-		set_real_name(new_dna.real_name)
+	if(supplied_appearance)
+		set_real_name(supplied_appearance.real_name)
 	else
 		try_generate_default_name()
-		dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
 
 	species.handle_pre_spawn(src)
 	apply_species_cultural_info()
 	species.handle_post_spawn(src)
 
-	UpdateAppearance() //Apply dna appearance to mob, causes DNA to change because filler values are regenerated
+	supplied_appearance?.apply_appearance_to(src)
+
 	//Prevent attempting to create blood container if its already setup
 	if(!vessel)
 		reset_blood()
@@ -1032,7 +1022,7 @@
 		SetName(initial(name))
 
 //Runs last after setup and after the parent init has been executed.
-/mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
+/mob/living/carbon/human/proc/post_setup(species_name, datum/mob_snapshot/supplied_appearance)
 	try_refresh_visible_overlays() //Do this exactly once per setup
 
 /mob/living/carbon/human/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
@@ -1173,6 +1163,12 @@
 	volume = round(volume)
 	if(volume > 0 && range > 0)
 		playsound(T, footsound, volume, 1, range)
+
+/mob/living/carbon/human/get_skin_tone(value)
+	return skin_tone
+
+/mob/living/carbon/human/set_skin_tone(value)
+	skin_tone = value
 
 /mob/living/carbon/human/try_awaken(mob/user)
 	return !is_asystole() && ..()

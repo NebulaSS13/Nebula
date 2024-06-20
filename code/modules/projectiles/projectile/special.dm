@@ -93,15 +93,11 @@
 					SPAN_DANGER("\The [M] writhes in pain as [G.his] vacuoles boil."),
 					blind_message = SPAN_WARNING("You hear a crunching sound.")
 				)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(prob(35))
-					if(prob(80))
-						randmutb(H)
-						domutcheck(H,null)
-					else
-						randmutg(H)
-						domutcheck(H,null)
+			if(prob(35))
+				if(prob(80))
+					M.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/disability)))
+				else
+					M.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/superpower)))
 		else
 			M.heal_damage(BURN, rand(5,15))
 			M.show_message(SPAN_DANGER("The radiation beam singes you!"))

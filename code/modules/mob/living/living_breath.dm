@@ -5,7 +5,7 @@
 	return FALSE
 
 /mob/living/proc/need_breathe()
-	if(mNobreath in mutations)
+	if(has_genetic_condition(GENE_COND_NO_BREATH))
 		return FALSE
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if(!root_bodytype || !root_bodytype.breathing_organ || !should_have_organ(root_bodytype.breathing_organ))

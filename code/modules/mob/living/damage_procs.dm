@@ -24,7 +24,7 @@
 
 	switch(damagetype)
 		if(BURN)
-			if(MUTATION_COLD_RESISTANCE in mutations)
+			if(has_genetic_condition(GENE_COND_COLD_RESISTANCE))
 				return
 			take_damage(damage, BURN, damage_flags, used_weapon, armor_pen)
 		if(ELECTROCUTE)

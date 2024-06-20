@@ -17,7 +17,7 @@
 	thrown_material_force_multiplier = 1 // as above
 
 /obj/item/kitchen/rollingpin/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.try_unequip(src))
+	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50) && user.try_unequip(src))
 		to_chat(user, SPAN_DANGER("\The [src] slips out of your hand and hits your head."))
 		user.take_organ_damage(10)
 		SET_STATUS_MAX(user, STAT_PARA, 2)

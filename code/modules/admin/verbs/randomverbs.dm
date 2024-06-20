@@ -427,10 +427,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.mind.assigned_role = global.using_map.default_job_title//If they somehow got a null assigned role.
 
 	//DNA
-	if(new_character.dna)
-		new_character.dna.ready_dna(new_character)
-		if(record_found)//Pull up their name from database records if they did have a mind.
-			new_character.dna.unique_enzymes = record_found.get_dna()
+	if(record_found)//Pull up their name from database records if they did have a mind.
+		new_character.set_unique_enzymes(record_found.get_dna())
 	new_character.key = G_found.key
 
 	/*

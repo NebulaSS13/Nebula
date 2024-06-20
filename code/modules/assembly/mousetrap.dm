@@ -54,7 +54,7 @@
 	pulse_device(0)
 
 /obj/item/assembly/mousetrap/proc/toggle_arming(var/mob/user)
-	if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		var/which_hand = user.get_active_held_item_slot()
 		triggered(user, which_hand)
 		user.visible_message(SPAN_DANGER("\The [user] accidentally sets off [src], hurting their fingers."), \

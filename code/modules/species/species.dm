@@ -543,7 +543,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/get_how_nearsighted(var/mob/living/carbon/human/H)
 	var/prescriptions = short_sighted
-	if(H.disabilities & NEARSIGHTED)
+	if(H.has_genetic_condition(GENE_COND_NEARSIGHTED))
 		prescriptions += 7
 	if(H.equipment_prescription)
 		prescriptions -= H.equipment_prescription

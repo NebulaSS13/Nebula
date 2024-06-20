@@ -7,7 +7,7 @@
 		remoteview_target = null
 		return
 
-	if(!(mMorph in mutations))
+	if(!has_genetic_condition(GENE_COND_SHAPESHIFTER))
 		src.verbs -= /mob/living/carbon/human/proc/morph
 		return
 
@@ -67,7 +67,6 @@
 
 	update_hair()
 	try_refresh_visible_overlays()
-	check_dna()
 
 	var/decl/pronouns/G = get_pronouns()
 	visible_message("<span class='notice'>\The [src] morphs and changes [G.his] appearance!</span>", "<span class='notice'>You change your appearance!</span>", "<span class='warning'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</span>")
@@ -81,7 +80,7 @@
 		remoteview_target = null
 		return
 
-	if(!(mRemotetalk in src.mutations))
+	if(!has_genetic_condition(GENE_COND_REMOTE_TALK))
 		src.verbs -= /mob/living/carbon/human/proc/remotesay
 		return
 	var/list/creatures = list()
@@ -92,7 +91,7 @@
 		return
 
 	var/say = sanitize(input("What do you wish to say"))
-	if(mRemotetalk in target.mutations)
+	if(target.has_genetic_condition(GENE_COND_REMOTE_TALK))
 		target.show_message("<span class='notice'>You hear [src.real_name]'s voice: [say]</span>")
 	else
 		target.show_message("<span class='notice'>You hear a voice that seems to echo around the room: [say]</span>")
@@ -110,7 +109,7 @@
 		reset_view(0)
 		return
 
-	if(!(mRemote in src.mutations))
+	if(!has_genetic_condition(GENE_COND_REMOTE_VIEW))
 		remoteview_target = null
 		reset_view(0)
 		src.verbs -= /mob/living/carbon/human/proc/remoteobserve

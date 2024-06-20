@@ -43,7 +43,7 @@
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return ..()
 
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(user, SPAN_WARNING("You can't figure out how to work \the [src]..."))
 		place_handcuffs(user, user)
 		return TRUE

@@ -241,20 +241,18 @@
 
 	if(M.isSynthetic())
 		return
-
 	var/mob/living/carbon/human/H = M
 	if(istype(H) && (H.get_bodytype()?.body_flags & BODY_FLAG_NO_DNA))
 		return
 
-	if(M.dna)
-		if(prob(removed * 0.1)) // Approx. one mutation per 10 injected/20 ingested/30 touching units
-			randmuti(M)
-			if(prob(98))
-				randmutb(M)
-			else
-				randmutg(M)
-			domutcheck(M, null)
-			M.UpdateAppearance()
+	if(prob(removed * 0.1)) // Approx. one mutation per 10 injected/20 ingested/30 touching units
+		H.set_unique_enzymes(num2text(random_id(/mob, 1000000, 9999999)))
+		if(prob(98))
+			M.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/disability)))
+		else
+			M.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/superpower)))
+
+
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
 
 /decl/material/liquid/lactate

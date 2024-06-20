@@ -19,7 +19,7 @@
 	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
 
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over the floor.")
 		to_chat(user, "<span class='notice'><b>Scan results for the floor:</b></span>")
 		to_chat(user, "Overall Status: Healthy</span>")

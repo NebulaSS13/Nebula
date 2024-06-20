@@ -99,7 +99,7 @@
 	if(..())
 		return 1
 
-	var/user = usr
+	var/mob/user = usr
 	if(href_list["electronic_warfare"])
 		electronic_warfare = text2num(href_list["electronic_warfare"])
 		to_chat(user, "<span class='notice'>Electronic warfare [electronic_warfare ? "enabled" : "disabled"].</span>")
@@ -146,9 +146,7 @@
 			if("Blood Type")
 				var/default = blood_type
 				if(default == initial(blood_type) && ishuman(user))
-					var/mob/living/carbon/human/H = user
-					if(H.dna)
-						default = H.dna.b_type
+					default = user.get_blood_type()
 				var/new_blood_type = sanitize(input(user,"What blood type would you like to be written on this card?","Agent Card Blood Type",default) as null|text)
 				if(!isnull(new_blood_type) && CanUseTopic(user, state))
 					src.blood_type = new_blood_type

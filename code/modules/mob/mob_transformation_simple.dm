@@ -77,9 +77,6 @@ var/global/list/href_to_mob_type = list(
 		M.SetName(name)
 		M.real_name = real_name
 
-	if(dna)
-		M.dna = dna.Clone()
-
 	if(mind)
 		mind.transfer_to(M)
 	if(!M.key) // ghost minds are inactive for reasons that escape me

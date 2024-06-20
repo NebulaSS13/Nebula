@@ -29,8 +29,6 @@
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	change_species(species.primitive_form)
-	dna.SetSEState(global.MONKEYBLOCK,1)
-	dna.SetSEValueRange(global.MONKEYBLOCK,0xDAC, 0xFFF)
 
 	to_chat(src, "<B>You are now [species.name]. </B>")
 	qdel(animation)
@@ -263,8 +261,8 @@
 
 
 /mob/living/carbon/human/proc/zombify()
-	make_husked()
-	mutations |= MUTATION_CLUMSY
+	add_genetic_condition(GENE_COND_HUSK)
+	add_genetic_condition(GENE_COND_CLUMSY)
 	src.visible_message("<span class='danger'>\The [src]'s skin decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift.</span>")
 	if (src.mind)
 		if (src.mind.assigned_special_role == "Zombie")

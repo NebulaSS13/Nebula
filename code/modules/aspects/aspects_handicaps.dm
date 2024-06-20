@@ -11,8 +11,7 @@
 /decl/aspect/handicap/impaired_vision/apply(mob/living/holder)
 	. = ..()
 	if(.)
-		holder.dna.SetSEState(global.GLASSESBLOCK,1,0)
-		holder.disabilities |= NEARSIGHTED
+		holder.add_genetic_condition(GENE_COND_NEARSIGHTED)
 		var/equipped = holder.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(holder), slot_glasses_str)
 		if(equipped)
 			var/obj/item/clothing/glasses/G = holder.get_equipped_item(slot_glasses_str)

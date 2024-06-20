@@ -278,7 +278,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 							atmos_suitable = FALSE
 							break
 		//Atmos effect
-		if(!(MUTATION_SPACERES in mutations) && abs(environment.temperature - bodytemperature) > 40)
+		if(!has_genetic_condition(GENE_COND_SPACE_RESISTANCE) && abs(environment.temperature - bodytemperature) > 40)
 			bodytemperature += ((environment.temperature - bodytemperature) / 5)
 
 	if(bodytemperature < minbodytemp)

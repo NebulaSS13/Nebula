@@ -117,24 +117,28 @@ var/global/repository/decls/decls_repository = new
 			. += decl
 
 /repository/decls/proc/get_decls_of_type_unassociated(var/decl_prototype)
+	RETURN_TYPE(/list)
 	. = fetched_decl_instances[decl_prototype]
 	if(!.)
 		. = get_decls_unassociated(typesof(decl_prototype))
 		fetched_decl_instances[decl_prototype] = .
 
 /repository/decls/proc/get_decls_of_subtype_unassociated(var/decl_prototype)
+	RETURN_TYPE(/list)
 	. = fetched_decl_subinstances[decl_prototype]
 	if(!.)
 		. = get_decls_unassociated(subtypesof(decl_prototype))
 		fetched_decl_subinstances[decl_prototype] = .
 
 /repository/decls/proc/get_decls_of_type(var/decl_prototype)
+	RETURN_TYPE(/list)
 	. = fetched_decl_types[decl_prototype]
 	if(!.)
 		. = get_decls(typesof(decl_prototype))
 		fetched_decl_types[decl_prototype] = .
 
 /repository/decls/proc/get_decls_of_subtype(var/decl_prototype)
+	RETURN_TYPE(/list)
 	. = fetched_decl_subtypes[decl_prototype]
 	if(!.)
 		. = get_decls(subtypesof(decl_prototype))

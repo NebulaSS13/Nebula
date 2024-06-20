@@ -56,11 +56,7 @@
 		other_forensics.add_data(T, F.data)
 
 /obj/item/proc/add_trace_DNA(mob/living/M)
-	if(!istype(M))
-		return
-	if(M.isSynthetic())
-		return
-	if(istype(M.dna))
+	if(istype(M) && M.has_genetic_information())
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
 		forensics.add_from_atom(/datum/forensics/trace_dna, M)
 

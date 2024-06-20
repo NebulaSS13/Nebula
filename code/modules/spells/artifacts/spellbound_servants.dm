@@ -107,14 +107,14 @@
 	var/familiar_type
 	switch(input(H,"Choose your desired animal form:", "Form") as anything in list("Space Pike", "Mouse", "Cat", "Bear"))
 		if("Space Pike")
-			H.mutations |= mNobreath
-			H.mutations |= MUTATION_SPACERES
+			H.add_genetic_condition(GENE_COND_NO_BREATH)
+			H.add_genetic_condition(GENE_COND_SPACE_RESISTANCE)
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
 			familiar_type = /mob/living/simple_animal/passive/mouse
 		if("Cat")
-			H.mutations |= mRun
+			H.add_genetic_condition(GENE_COND_RUNNING)
 			familiar_type = /mob/living/simple_animal/cat
 		if("Bear")
 			familiar_type = /mob/living/simple_animal/hostile/bear
@@ -148,9 +148,11 @@
 	name = "Infiltrator"
 	desc = "A spy and a manipulator to the end, capable of hiding in plain sight and falsifying information to your heart's content."
 	spiel = "On the surface, you are a completely normal person, but is that really all you are? People are so easy to fool, do as your Master says, and do it with style!"
-	spells = list(/spell/toggle_armor/infil_items,
-				/spell/targeted/exude_pleasantness,
-				/spell/targeted/genetic/blind/hysteria)
+	spells = list(
+		/spell/toggle_armor/infil_items,
+		/spell/targeted/exude_pleasantness,
+		/spell/targeted/genetic/blind/hysteria
+	)
 
 /datum/spellbound_type/servant/infiltrator/equip_servant(var/mob/living/carbon/human/H)
 	if(H.gender == MALE)

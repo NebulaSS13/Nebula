@@ -58,7 +58,7 @@
 		src.mind.assigned_special_role = "Borer Husk"
 		src.mind.transfer_to(host)
 
-	H.make_husked()
+	H.add_genetic_condition(GENE_COND_HUSK)
 
 	var/obj/item/organ/internal/borer/B = new(H)
 	if(islist(chemical_types))

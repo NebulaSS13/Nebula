@@ -186,7 +186,7 @@
 		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
 		if(prob(GET_STATUS(M, STAT_TINNITUS) - 5))
 			to_chat(M, SPAN_DANGER("You can't hear anything!"))
-			M.set_sdisability(DEAFENED)
+			M.add_genetic_condition(GENE_COND_DEAFENED)
 	else
 		if(GET_STATUS(M, STAT_TINNITUS) >= 5)
 			to_chat(M, SPAN_DANGER("Your ears start to ring!"))

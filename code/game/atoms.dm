@@ -511,17 +511,11 @@
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return FALSE
 
-	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialize it.
+	if(!islist(blood_DNA))	//if our list of DNA doesn't exist yet (or isn't a list) initialize it.
 		blood_DNA = list()
 
 	was_bloodied = 1
-	blood_color = COLOR_BLOOD_HUMAN
-	if(istype(M))
-		if (!istype(M.dna, /datum/dna))
-			M.dna = new /datum/dna()
-			M.dna.real_name = M.real_name
-		M.check_dna()
-		blood_color = M.get_blood_color()
+	blood_color = istype(M) ? M.get_blood_color() : COLOR_BLOOD_HUMAN
 	return TRUE
 
 /**

@@ -37,9 +37,10 @@
 
 /obj/abstract/landmark/corpse/Initialize()
 	..()
-	if(!species) species = global.using_map.default_species
+	if(!species)
+		species = global.using_map.default_species
 	var/species_choice = islist(species) ? pickweight(species) : species
-	my_corpse = weakref(new /mob/living/carbon/human/corpse(loc, species_choice, null, null, src))
+	my_corpse = weakref(new /mob/living/carbon/human/corpse(loc, species_choice, null, src))
 	return INITIALIZE_HINT_QDEL
 
 /obj/abstract/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)

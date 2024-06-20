@@ -273,7 +273,7 @@
 	// Hot air hurts :(
 	var/cold_1 = bodytype.get_body_temperature_threshold(COLD_LEVEL_1)
 	var/heat_1 = bodytype.get_body_temperature_threshold(HEAT_LEVEL_1)
-	if((breath.temperature < cold_1 || breath.temperature > heat_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
+	if((breath.temperature < cold_1 || breath.temperature > heat_1) && !owner.has_genetic_condition(GENE_COND_COLD_RESISTANCE))
 		var/damage = 0
 		if(breath.temperature <= cold_1)
 			if(prob(20))

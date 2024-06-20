@@ -1,4 +1,3 @@
-//todo
 /datum/artifact_effect/dnaswitch
 	name = "dnaswitch"
 	origin_type = EFFECT_ORGANIC
@@ -39,13 +38,24 @@
 			mess_dna(H, 25, 75, 75)
 		return 1
 
+// Swapped to radiation pending readding of mutations.
 /datum/artifact_effect/dnaswitch/proc/mess_dna(mob/living/carbon/human/H, scramble_prob, UI_scramble_prob, message_prob)
 	var/weakness = GetAnomalySusceptibility(H)
-	if(prob(weakness * 100))
+	if(prob(weakness * 100) && H.has_genetic_information())
 		if(prob(message_prob))
 			to_chat(H, "<span class='alium'>[pick(feels)]</span>")
-		if(scramble_prob)
+		if(prob(scramble_prob) )
 			if(prob(UI_scramble_prob))
-				scramble(1, H, weakness * severity)
-			else
-				scramble(0, H, weakness * severity)
+				H.set_unique_enzymes(num2text(random_id(/mob, 1000000, 9999999)))
+			var/gene_scramble_prob = weakness * severity
+			if(prob(gene_scramble_prob))
+				H.randomize_gender()
+			if(prob(gene_scramble_prob))
+				H.randomize_skin_tone()
+			if(prob(gene_scramble_prob))
+				H.randomize_skin_color()
+			if(prob(gene_scramble_prob))
+				H.randomize_eye_color()
+			if(prob(gene_scramble_prob))
+				var/decl/genetic_condition/condition = pick(decls_repository.get_decls_of_type_unassociated(/decl/genetic_condition))
+				H.add_genetic_condition(condition.type)
