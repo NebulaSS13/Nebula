@@ -164,3 +164,27 @@
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_HULL
 	stripe_color = COLOR_HULL
+
+/obj/structure/wall_frame/log
+	name = "low log wall"
+	desc = "A section of log wall with empty space for fitting a window or simply letting air in."
+	icon = 'icons/obj/structures/log_wall_frame.dmi'
+	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC // material color is applied in on_update_icon
+
+/obj/structure/wall_frame/log/Initialize()
+	color = null // clear mapping preview color
+	. = ..()
+
+#define LOW_LOG_WALL_SUBTYPE(material_name) \
+/obj/structure/wall_frame/log/##material_name { \
+	material = /decl/material/solid/organic/wood/##material_name; \
+	color = /decl/material/solid/organic/wood/##material_name::color; \
+}
+
+LOW_LOG_WALL_SUBTYPE(fungal)
+LOW_LOG_WALL_SUBTYPE(ebony)
+LOW_LOG_WALL_SUBTYPE(walnut)
+LOW_LOG_WALL_SUBTYPE(maple)
+LOW_LOG_WALL_SUBTYPE(mahogany)
+LOW_LOG_WALL_SUBTYPE(bamboo)
+LOW_LOG_WALL_SUBTYPE(yew)

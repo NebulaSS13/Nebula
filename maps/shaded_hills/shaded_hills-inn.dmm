@@ -34,6 +34,7 @@
 /area/shaded_hills/inn)
 "dH" = (
 /obj/structure/window/basic/full,
+/obj/structure/wall_frame/log/ebony,
 /turf/wall/log/ebony,
 /area/shaded_hills/general_store)
 "dK" = (
@@ -166,6 +167,7 @@
 /area/shaded_hills/inn)
 "iX" = (
 /obj/structure/window/basic/full,
+/obj/structure/wall_frame/log/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/inn)
 "iZ" = (
@@ -519,6 +521,7 @@
 /area/shaded_hills/inn)
 "HE" = (
 /obj/structure/window/basic/full,
+/obj/structure/wall_frame/log/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/stable)
 "HF" = (
@@ -547,6 +550,7 @@
 /area/shaded_hills/tannery)
 "IQ" = (
 /obj/structure/window/basic/full,
+/obj/structure/wall_frame/log/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/farmhouse)
 "IS" = (
