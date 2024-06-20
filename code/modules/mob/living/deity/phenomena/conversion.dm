@@ -40,7 +40,7 @@
 		return 0
 	var/obj/structure/deity/altar/A = locate() in get_turf(L)
 	if(!A || A.linked_god != linked)
-		to_chat(linked,"<span class='warning'>\The [L] needs to be on \a [linked.get_type_name(/obj/structure/deity/altar)] to be forcefully converted..</span>")
+		to_chat(linked,"<span class='warning'>\The [L] needs to be on \a [linked.get_type_name(/obj/structure/deity/altar)] to be forcefully converted.</span>")
 		return 0
 
 	return 1

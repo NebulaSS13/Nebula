@@ -98,7 +98,7 @@
 
 /obj/item/chems/food/tofuburger
 	name = "tofu burger"
-	desc = "What.. is that meat?"
+	desc = "What... is that meat?"
 	icon_state = "tofuburger"
 	filling_color = "#fffee0"
 	center_of_mass = @'{"x":16,"y":10}'
@@ -191,7 +191,7 @@
 
 /obj/item/chems/food/jellyburger
 	name = "jelly burger"
-	desc = "Culinary delight..?"
+	desc = "Culinary delight...?"
 	icon_state = "jellyburger"
 	filling_color = "#b572ab"
 	center_of_mass = @'{"x":16,"y":11}'

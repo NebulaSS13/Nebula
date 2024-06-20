@@ -95,7 +95,7 @@
 		//This seemed to be the best sound for hitting a force field.
 		playsound(src.loc, 'sound/effects/EMPulse.ogg', 100, 1)
 		check_failure()
-		//The shield becomes dense to absorb the blow.. purely asthetic.
+		//The shield becomes dense to absorb the blow. Purely asthetic.
 		set_opacity(1)
 		spawn(20)
 			if(!QDELETED(src))

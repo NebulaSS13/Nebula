@@ -61,7 +61,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["set_global_limit"])
-		var/newlim = input("Input new thrust limit (0..100%)", "Thrust limit", linked.get_thrust_limit() * 100) as num
+		var/newlim = input("Input new thrust limit (0-100%)", "Thrust limit", linked.get_thrust_limit() * 100) as num
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
 		var/thrust_limit = clamp(newlim / 100, 0, 1)
@@ -76,7 +76,7 @@
 	if(href_list["engine"])
 		if(href_list["set_limit"])
 			var/datum/extension/ship_engine/E = locate(href_list["engine"])
-			var/newlim = input("Input new thrust limit (0..100)", "Thrust limit", E.thrust_limit) as num
+			var/newlim = input("Input new thrust limit (0-100)", "Thrust limit", E.thrust_limit) as num
 			if(!CanInteract(user, state))
 				return
 			var/limit = clamp(newlim/100, 0, 1)

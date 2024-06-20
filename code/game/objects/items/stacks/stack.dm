@@ -437,7 +437,7 @@
 
 /**Whether a stack has the capability to be split. */
 /obj/item/stack/proc/can_split()
-	return !(uses_charge && !force) //#TODO: The !force was a hacky way to tell if its a borg or rigsuit module. Probably would be good to find a better way..
+	return !(uses_charge && !force) //#TODO: The !force was a hacky way to tell if its a borg or rigsuit module. Probably would be good to find a better way...
 
 /**Whether a stack type has the capability to be merged. */
 /obj/item/stack/proc/can_merge_stacks(var/obj/item/stack/other)

@@ -33,7 +33,7 @@
 
 /decl/emote/audible/gnarl
 	key = "gnarl"
-	emote_message_3p = "$USER$ gnarls and shows its teeth.."
+	emote_message_3p = "$USER$ gnarls and shows its teeth."
 
 /decl/emote/audible/multichirp
 	key = "mchirp"

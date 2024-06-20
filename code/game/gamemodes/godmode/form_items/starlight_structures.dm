@@ -37,7 +37,7 @@
 												)
 											),
 								"Shadowling" = list(
-												"description" = "Beings that come from a place of no light. They sneak from place to place, disabling everyone they touch..",
+												"description" = "Beings that come from a place of no light. They sneak from place to place, disabling everyone they touch.",
 												"message" = "As a Shadow you take damage from the light itself but have the ability to vanish from sight itself.",
 												"species" = "Shadow",
 												"spells" = list(

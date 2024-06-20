@@ -331,7 +331,7 @@ var/global/list/meteors_cataclysm = list(\
 // This is the final solution against shields - a single impact can bring down most shield generators.
 /obj/effect/meteor/supermatter
 	name = "supermatter shard"
-	desc = "Oh god, what will be next..?"
+	desc = "Oh god, what will be next...?"
 	icon = 'icons/obj/supermatter_32.dmi'
 	icon_state = "supermatter"
 

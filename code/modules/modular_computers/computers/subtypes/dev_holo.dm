@@ -75,7 +75,7 @@
 
 	update_lighting()
 
-// Subtypes. It's not exactly.. well, presets, so i'll put it here for now.
+// Subtypes. It's not exactly... well, presets, so i'll put it here for now.
 
 /obj/item/modular_computer/holotablet/round
 	name = "round holotablet"

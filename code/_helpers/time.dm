@@ -126,7 +126,7 @@ var/global/round_start_time = 0
 		return last_round_duration
 
 	var/mills = round_duration_in_ticks // 1/10 of a second, not real milliseconds but whatever
-	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
+	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for reference or something
 	var/mins = round((mills % 36000) / 600)
 	var/hours = round(mills / 36000)
 

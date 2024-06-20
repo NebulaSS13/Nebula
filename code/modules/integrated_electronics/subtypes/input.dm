@@ -195,7 +195,7 @@
 	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in view(get_turf(src))) // Like the medbot's analyzer it can be used at range.
 
 		var/current_max_health = H.get_max_health()
 		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
@@ -254,7 +254,7 @@
 		return
 	for(var/i=1, i<=outputs.len, i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in view(get_turf(src))) // Like the medbot's analyzer it can be used at range.
 		if(H.seed)
 			set_pin_data(IC_OUTPUT, 1, H.seed.seed_name)
 			set_pin_data(IC_OUTPUT, 2, H.age)
@@ -297,7 +297,7 @@
 		return
 	for(var/i=1, i<=outputs.len, i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in view(get_turf(src))) // Like the medbot's analyzer it can be used at range.
 		if(H.seed)
 			for(var/chem_path in H.seed.chems)
 				var/decl/material/R = chem_path

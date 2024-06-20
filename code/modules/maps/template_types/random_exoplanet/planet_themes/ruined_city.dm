@@ -25,7 +25,7 @@
 	var/datum/level_data/LD = SSmapping.levels_by_id[E.surface_level_id]
 	var/area/A = LD.get_base_area_instance()
 	if(istype(A, world.area))
-		PRINT_STACK_TRACE("Got '[world.area]' area as area for the surface level '[LD]' of planetoid '[E]'.") //Don't modify the ambience of the space area..
+		PRINT_STACK_TRACE("Got '[world.area]' area as area for the surface level '[LD]' of planetoid '[E]'.") //Don't modify the ambience of the space area.
 	LAZYDISTINCTADD(A.ambience, spooky_ambience)
 
 /datum/exoplanet_theme/ruined_city/get_sensor_data()
