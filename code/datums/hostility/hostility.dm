@@ -34,7 +34,7 @@
 
 /decl/hostility/laser_tag/can_special_target(atom/holder, atom/movable/target)
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		if(enemy_vest_type && istype(H.get_equipped_item(slot_wear_suit_str), enemy_vest_type))
 			return TRUE
 	return FALSE

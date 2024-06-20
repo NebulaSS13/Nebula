@@ -206,11 +206,11 @@
 	if(!ghost_ability_check())
 		return
 
-	var/list/mob/living/carbon/human/choices = list()
-	for(var/mob/living/carbon/human/H in range(1))
+	var/list/mob/living/human/choices = list()
+	for(var/mob/living/human/H in range(1))
 		choices += H
 
-	var/mob/living/carbon/human/choice = input(src, "Whom do you want to scratch?") as null|anything in choices
+	var/mob/living/human/choice = input(src, "Whom do you want to scratch?") as null|anything in choices
 	if(!choice)
 		return
 
@@ -234,11 +234,11 @@
 	if(!ghost_ability_check())
 		return
 
-	var/list/mob/living/carbon/human/choices = list()
-	for(var/mob/living/carbon/human/H in range(1))
+	var/list/mob/living/human/choices = list()
+	for(var/mob/living/human/H in range(1))
 		choices += H
 
-	var/mob/living/carbon/human/choice = input(src, "Whom do you want to scare?") as null|anything in choices
+	var/mob/living/human/choice = input(src, "Whom do you want to scare?") as null|anything in choices
 	if(!choice)
 		return
 

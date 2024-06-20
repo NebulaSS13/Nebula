@@ -1,4 +1,4 @@
-/mob/living/carbon/human/process_resist()
+/mob/living/human/process_resist()
 
 	//drop && roll
 	if(on_fire && !buckled)
@@ -29,7 +29,7 @@
 	if(get_equipped_item(slot_handcuffed_str))
 		spawn() escape_handcuffs()
 
-/mob/living/carbon/human/proc/escape_handcuffs()
+/mob/living/human/proc/escape_handcuffs()
 	//This line represent a significant buff to grabs...
 	// We don't have to check the click cooldown because /mob/living/verb/resist() has done it for us, we can simply set the delay
 	setClickCooldown(100)
@@ -43,7 +43,7 @@
 	//A default in case you are somehow cuffed with something that isn't an obj/item/handcuffs type
 	var/breakouttime = istype(cuffs) ? cuffs.breakouttime : 2 MINUTES
 
-	var/mob/living/carbon/human/H = src
+	var/mob/living/human/H = src
 	if(istype(H) && istype(H.get_equipped_item(slot_gloves_str), /obj/item/clothing/gloves/rig))
 		breakouttime /= 2
 
@@ -95,7 +95,7 @@
 	drop_from_inventory(cuffs)
 	return
 
-/mob/living/carbon/human/proc/break_handcuffs()
+/mob/living/human/proc/break_handcuffs()
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
 	visible_message(
 		"<span class='danger'>[src] is trying to break \the [cuffs]!</span>",

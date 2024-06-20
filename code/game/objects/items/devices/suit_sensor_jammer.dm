@@ -186,7 +186,7 @@
 		sjm.enable()
 	jammer_method = sjm
 
-/obj/item/suit_sensor_jammer/proc/may_process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos)
+/obj/item/suit_sensor_jammer/proc/may_process_crew_data(var/mob/living/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos)
 	if(!pos)
 		return FALSE
 	var/turf/T = get_turf(src)

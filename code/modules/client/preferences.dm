@@ -344,7 +344,7 @@ var/global/list/time_prefs_fixed = list()
 	update_setup_window(usr)
 	return 1
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
+/datum/preferences/proc/copy_to(mob/living/human/character, is_preview_copy = FALSE)
 
 	if(!player_setup)
 		return // WHY IS THIS EVEN HAPPENING.

@@ -14,7 +14,7 @@
 	duration = 25 SECONDS
 	cooldown_min = 35 SECONDS
 	delete_old = 0
-	compatible_mobs = list(/mob/living/carbon/human)
+	compatible_mobs = list(/mob/living/human)
 
 	hud_state = "purge1"
 

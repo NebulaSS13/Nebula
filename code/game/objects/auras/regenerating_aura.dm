@@ -21,11 +21,11 @@
 	var/innate_heal = TRUE // Whether the aura is on, basically.
 
 
-/obj/aura/regenerating/human/proc/external_regeneration_effect(var/obj/item/organ/external/O, var/mob/living/carbon/human/H)
+/obj/aura/regenerating/human/proc/external_regeneration_effect(var/obj/item/organ/external/O, var/mob/living/human/H)
 	return
 
 /obj/aura/regenerating/human/life_tick()
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(!istype(H))
 		. = 0
 		CRASH("Someone gave [user.type] a [src.type] aura. This is invalid.")

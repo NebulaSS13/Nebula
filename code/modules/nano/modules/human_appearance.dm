@@ -2,12 +2,12 @@
 	name = "Appearance Editor"
 	available_to_ai = FALSE
 	var/flags = APPEARANCE_ALL_HAIR
-	var/mob/living/carbon/human/owner = null
+	var/mob/living/human/owner = null
 	var/check_whitelist
 	var/list/whitelist
 	var/list/blacklist
 
-/datum/nano_module/appearance_changer/New(var/location, var/mob/living/carbon/human/H, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list())
+/datum/nano_module/appearance_changer/New(var/location, var/mob/living/human/H, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list())
 	..()
 	owner = H
 	src.check_whitelist = check_species_whitelist

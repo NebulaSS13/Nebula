@@ -25,7 +25,7 @@
 		to_chat(user, "Overall Status: Healthy</span>")
 		return
 
-	var/mob/living/carbon/human/scan_subject = null
+	var/mob/living/human/scan_subject = null
 	if (ishuman(target))
 		scan_subject = target
 	else if (istype(target, /obj/structure/closet/body_bag))
@@ -36,7 +36,7 @@
 				scan_content.Add(L)
 
 			if (scan_content.len == 1)
-				for(var/mob/living/carbon/human/L in scan_content)
+				for(var/mob/living/human/L in scan_content)
 					scan_subject = L
 			else if (scan_content.len > 1)
 				to_chat(user, "<span class='warning'>\The [scanner] picks up multiple readings inside \the [target], too close together to scan properly.</span>")
@@ -57,7 +57,7 @@
 	to_chat(user, .)
 	to_chat(user, "<hr>")
 
-/proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_level = SKILL_DEFAULT)
+/proc/medical_scan_results(var/mob/living/human/H, var/verbose, var/skill_level = SKILL_DEFAULT)
 	. = list()
 	var/header = list()
 	var/b

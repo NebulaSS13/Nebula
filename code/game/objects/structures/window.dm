@@ -151,7 +151,7 @@
 	if (user.a_intent && user.a_intent == I_HURT)
 
 		if (ishuman(user))
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			if(H.species.can_shred(H))
 				attack_generic(H,25)
 				return

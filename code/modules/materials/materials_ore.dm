@@ -110,7 +110,7 @@
 /obj/item/stack/material/ore/throw_impact(atom/hit_atom)
 	. = ..()
 	if(icon_state == "dust")
-		var/mob/living/carbon/human/H = hit_atom
+		var/mob/living/human/H = hit_atom
 		if(istype(H) && H.check_has_eyes() && prob(85))
 			to_chat(H, SPAN_DANGER("Some of \the [src] gets in your eyes!"))
 			ADJ_STATUS(H, STAT_BLIND, 5)

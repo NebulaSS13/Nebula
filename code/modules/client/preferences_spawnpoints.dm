@@ -95,7 +95,7 @@
 /obj/abstract/landmark/latejoin/cryo
 	spawn_decl = /decl/spawnpoint/cryo
 
-/decl/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
+/decl/spawnpoint/cryo/after_join(mob/living/human/victim)
 	if(!istype(victim) || victim.buckled) // They may have spawned with a wheelchair; don't move them into a pod in that case.
 		return
 

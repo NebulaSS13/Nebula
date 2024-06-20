@@ -58,7 +58,7 @@
 	sleep(5) // wait for animation to finish
 
 	if(prob(35))
-		for(var/mob/living/carbon/human/L in src)
+		for(var/mob/living/human/L in src)
 			var/list/obj/item/organ/external/crush = L.get_damageable_organs()
 			if(!crush.len)
 				return

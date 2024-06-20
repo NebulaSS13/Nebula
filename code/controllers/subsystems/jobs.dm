@@ -416,7 +416,7 @@ SUBSYSTEM_DEF(jobs)
 	if(allowed_branches)
 		if(!ishuman(wearer))
 			return FALSE
-		var/mob/living/carbon/human/wearer_human = wearer
+		var/mob/living/human/wearer_human = wearer
 		if(!wearer_human.char_branch || !(wearer_human.char_branch.type in allowed_branches))
 			return FALSE
 	if(allowed_skills)
@@ -427,7 +427,7 @@ SUBSYSTEM_DEF(jobs)
 		return FALSE
 	return TRUE
 
-/datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/carbon/human/H, var/datum/job/job)
+/datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/human/H, var/datum/job/job)
 
 	if(!H || !H.client)
 		return
@@ -463,7 +463,7 @@ SUBSYSTEM_DEF(jobs)
 
 	return spawn_in_storage
 
-/datum/controller/subsystem/jobs/proc/equip_job_title(var/mob/living/carbon/human/H, var/job_title, var/joined_late = 0)
+/datum/controller/subsystem/jobs/proc/equip_job_title(var/mob/living/human/H, var/job_title, var/joined_late = 0)
 	if(!H)
 		return
 

@@ -62,7 +62,7 @@
 
 /obj/item/clothing/mask/monitor/equipped()
 	..()
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H) && H.get_equipped_item(slot_wear_mask_str) == src)
 		canremove = 0
 		to_chat(H, SPAN_NOTICE("\The [src] connects to your display output."))
@@ -89,7 +89,7 @@
 	set category = "IC"
 	set src in usr
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(!istype(H) || H != usr)
 		return
 

@@ -45,7 +45,7 @@
 	if (!is_in_slot())
 		return
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 
 	var/temp_adj = min(H.bodytemperature - thermostat, max_cooling)
 
@@ -65,7 +65,7 @@
 // Checks whether the cooling unit is being worn on the back/suit slot.
 // That way you can't carry it in your hands while it's running to cool yourself down.
 /obj/item/suit_cooling_unit/proc/is_in_slot()
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(!istype(H))
 		return 0
 	return H.get_equipped_item(slot_back_str) == src || H.get_equipped_item(slot_s_store_str) == src

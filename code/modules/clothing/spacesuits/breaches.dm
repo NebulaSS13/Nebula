@@ -193,7 +193,7 @@
 			return
 
 		if(ishuman(loc))
-			var/mob/living/carbon/human/H = loc
+			var/mob/living/human/H = loc
 			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
 				return
@@ -211,7 +211,7 @@
 	else if(IS_WELDER(W))
 
 		if(ishuman(loc))
-			var/mob/living/carbon/human/H = loc
+			var/mob/living/human/H = loc
 			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
 				return
@@ -239,7 +239,7 @@
 		if(!target_breach)
 			to_chat(user, "There are no open breaches to seal with \the [W].")
 		else
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			if(!istype(H))
 				return
 

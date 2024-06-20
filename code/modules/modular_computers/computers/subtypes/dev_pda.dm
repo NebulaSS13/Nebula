@@ -24,7 +24,7 @@
 
 /obj/item/modular_computer/pda/on_update_icon()
 	. = ..()
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H) && H.get_equipped_item(slot_wear_id_str) == src)
 		H.update_equipment_overlay(slot_wear_id_str)
 

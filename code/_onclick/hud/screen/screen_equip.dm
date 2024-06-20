@@ -4,5 +4,5 @@
 
 /obj/screen/equip/handle_click(mob/user, params)
 	if(ishuman(usr))
-		var/mob/living/carbon/human/H = usr
+		var/mob/living/human/H = usr
 		H.quick_equip()

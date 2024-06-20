@@ -99,12 +99,12 @@
 /obj/item/bible/attack_self(mob/user)
 	if(!ishuman(user))
 		return
-	var/mob/living/carbon/human/preacher = user
+	var/mob/living/human/preacher = user
 	if(preacher.mind?.assigned_job?.is_holy)
 		preacher.visible_message("\The [preacher] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
 		if(do_after(preacher, 5 SECONDS))
 			preacher.visible_message("\The [preacher] reads a passage from \the [src].", "You read a passage from \the [src].")
-			for(var/mob/living/carbon/human/H in view(preacher))
+			for(var/mob/living/human/H in view(preacher))
 				if(preacher.get_cultural_value(TAG_RELIGION) == H.get_cultural_value(TAG_RELIGION))
 					to_chat(H, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 

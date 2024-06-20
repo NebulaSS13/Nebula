@@ -1,7 +1,7 @@
-/mob/living/carbon/human
+/mob/living/human
 	move_intents = list(/decl/move_intent/walk)
 
-/mob/living/carbon/human/get_movement_delay(var/travel_dir)
+/mob/living/human/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 
 	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_GROIN) // gets bodytype slowdown, which can be reset by set_bodytype
@@ -64,11 +64,11 @@
 
 	return (tally+get_config_value(/decl/config/num/movement_human))
 
-/mob/living/carbon/human/size_strength_mod()
+/mob/living/human/size_strength_mod()
 	. = ..()
 	. += species.strength
 
-/mob/living/carbon/human/space_do_move(var/allow_move, var/direction)
+/mob/living/human/space_do_move(var/allow_move, var/direction)
 	if(allow_move == 1)
 		var/obj/item/tank/jetpack/thrust = get_jetpack()
 		if(thrust && thrust.on && prob(skill_fail_chance(SKILL_EVA, 10, SKILL_ADEPT)))
@@ -83,7 +83,7 @@
 
 	. = ..()
 
-/mob/living/carbon/human/slip_chance(var/prob_slip = 5)
+/mob/living/human/slip_chance(var/prob_slip = 5)
 	if(!..())
 		return 0
 	//Check hands and mod slip
@@ -96,7 +96,7 @@
 			prob_slip -= 1
 	return prob_slip
 
-/mob/living/carbon/human/Check_Shoegrip()
+/mob/living/human/Check_Shoegrip()
 	if(species.check_no_slip(src))
 		return 1
 	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
@@ -104,7 +104,7 @@
 		return 1
 	return 0
 
-/mob/living/carbon/human/Move()
+/mob/living/human/Move()
 	. = ..()
 	if(.) //We moved
 
@@ -131,7 +131,7 @@
 			var/turf/B = GetAbove(src)
 			up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
-/mob/living/carbon/human/proc/handle_leg_damage()
+/mob/living/human/proc/handle_leg_damage()
 	if(!can_feel_pain())
 		return
 	var/crutches = 0
@@ -145,5 +145,5 @@
 			else
 				E.add_pain(10)
 
-/mob/living/carbon/human/can_sprint()
+/mob/living/human/can_sprint()
 	return (stamina > 0)

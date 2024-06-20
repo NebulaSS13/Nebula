@@ -1,22 +1,22 @@
-/mob/living/carbon/human
+/mob/living/human
 	var/_skin_colour
 
-/mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list(), var/datum/topic_state/state = global.default_topic_state)
+/mob/living/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list(), var/datum/topic_state/state = global.default_topic_state)
 	var/datum/nano_module/appearance_changer/AC = new(location, src, check_species_whitelist, species_whitelist, species_blacklist)
 	AC.flags = flags
 	AC.ui_interact(user, state = state)
 
-/mob/living/carbon/human/get_skin_colour()
+/mob/living/human/get_skin_colour()
 	return _skin_colour
 
-/mob/living/carbon/human/set_skin_colour(var/new_color, var/skip_update = FALSE)
+/mob/living/human/set_skin_colour(var/new_color, var/skip_update = FALSE)
 	if((. = ..()))
 		_skin_colour = new_color
 		if(!skip_update)
 			force_update_limbs()
 			update_body()
 
-/mob/living/carbon/human/proc/change_species(var/new_species, var/new_bodytype = null)
+/mob/living/human/proc/change_species(var/new_species, var/new_bodytype = null)
 
 	if(!new_species)
 		return
@@ -46,16 +46,16 @@
 	try_refresh_visible_overlays()
 	return 1
 
-/mob/living/carbon/human/set_gender(var/new_gender, var/update_body = FALSE)
+/mob/living/human/set_gender(var/new_gender, var/update_body = FALSE)
 	. = ..()
 	if(. && update_body)
 		update_body()
 
-/mob/living/carbon/human/proc/randomize_gender()
+/mob/living/human/proc/randomize_gender()
 	var/decl/pronouns/pronouns = pick(species.available_pronouns)
 	set_gender(pronouns.name, TRUE)
 
-/mob/living/carbon/human/proc/reset_hair()
+/mob/living/human/proc/reset_hair()
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	var/decl/sprite_accessory_category/hair/hair_category = GET_DECL(SAC_HAIR)
 	var/list/valid_hairstyles = species?.get_available_accessories(root_bodytype, SAC_HAIR)
@@ -82,7 +82,7 @@
 
 	update_hair()
 
-/mob/living/carbon/human/proc/change_skin_tone(var/tone)
+/mob/living/human/proc/change_skin_tone(var/tone)
 	if(skin_tone == tone || !(get_bodytype().appearance_flags & HAS_A_SKIN_TONE))
 		return
 	skin_tone = tone
@@ -90,7 +90,7 @@
 	update_body()
 	return 1
 
-/mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
+/mob/living/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
 	for(var/current_species_name in get_all_species())
 		var/decl/species/current_species = get_species_by_key(current_species_name)

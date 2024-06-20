@@ -170,7 +170,7 @@ var/global/list/card_decks = list()
 	if(!ishuman(usr) || usr.incapacitated() || !Adjacent(usr))
 		return
 
-	var/mob/living/carbon/human/user = usr
+	var/mob/living/human/user = usr
 	if(!cards.len)
 		to_chat(usr, "There are no cards in the deck.")
 		return

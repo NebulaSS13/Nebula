@@ -155,7 +155,7 @@
 			if("DNA Hash")
 				var/default = dna_hash
 				if(default == initial(dna_hash) && ishuman(user))
-					var/mob/living/carbon/human/H = user
+					var/mob/living/human/H = user
 					var/unique_enzymes = H.get_unique_enzymes()
 					if(unique_enzymes)
 						default = unique_enzymes
@@ -167,7 +167,7 @@
 			if("Fingerprint Hash")
 				var/default = fingerprint_hash
 				if(default == initial(fingerprint_hash) && ishuman(user))
-					var/mob/living/carbon/human/H = user
+					var/mob/living/human/H = user
 					default = H.get_full_print(ignore_blockers = TRUE)
 				var/new_fingerprint_hash = sanitize(input(user,"What fingerprint hash would you like to be written on this card?","Agent Card Fingerprint Hash",default) as null|text)
 				if(!isnull(new_fingerprint_hash) && CanUseTopic(user, state))

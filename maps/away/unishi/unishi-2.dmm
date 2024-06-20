@@ -1537,9 +1537,9 @@
 "es" = (
 /mob/living/slime,
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "et" = (
@@ -1547,8 +1547,8 @@
 	dir = 4
 	},
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "eu" = (
@@ -1608,16 +1608,16 @@
 /area/unishi/hydro)
 "eB" = (
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "eC" = (
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
 /turf/floor/reinforced,
 /area/unishi/xenobio)
 "eD" = (

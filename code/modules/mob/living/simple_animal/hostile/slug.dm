@@ -31,7 +31,7 @@
 		return ..()
 	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))
 
-/mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/carbon/human/H)
+/mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 	if(istype(S) && !length(S.breaches))
 		S.create_breaches(BRUTE, 20)
@@ -46,7 +46,7 @@
 /mob/living/simple_animal/hostile/slug/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(prob(H.get_damage(BRUTE)/2))
 			attach(H)
 
@@ -63,7 +63,7 @@
 /obj/item/holder/slug/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/mob/living/simple_animal/hostile/slug/V = contents[1]
 	if(!V.stat && ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		if(do_mob(user, H, 30))
 			V.attach(H)
 			qdel(src)

@@ -596,7 +596,7 @@
 /mob/proc/pull_damage()
 	return 0
 
-/mob/living/carbon/human/pull_damage()
+/mob/living/human/pull_damage()
 	if(!current_posture.prone|| get_damage(BRUTE) + get_damage(BURN) < 100)
 		return FALSE
 	for(var/obj/item/organ/external/e in get_external_organs())
@@ -831,7 +831,7 @@
 	if(U.get_empty_hand_slot())
 		U.put_in_hands(selection)
 	if(ishuman(U))
-		var/mob/living/carbon/human/human_user = U
+		var/mob/living/human/human_user = U
 		human_user.bloody_hands(src)
 	return 1
 

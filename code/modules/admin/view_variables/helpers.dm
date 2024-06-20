@@ -69,7 +69,7 @@
 		<option value='?_src_=vars;setstatuscond=\ref[src]'>Set Status Condition</option>
 		"}
 
-/mob/living/carbon/human/get_view_variables_options()
+/mob/living/human/get_view_variables_options()
 	return ..() + {"
 		<option value='?_src_=vars;refreshoverlays=\ref[src]'>Refresh Visible Overlays</option>
 		<option value='?_src_=vars;setspecies=\ref[src]'>Set Species</option>

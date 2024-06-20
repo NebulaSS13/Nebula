@@ -475,7 +475,7 @@ var/global/list/gear_datums = list()
 	if(metadata && !islist(metadata))
 		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
-/decl/loadout_option/proc/spawn_on_mob(mob/living/carbon/human/wearer, metadata)
+/decl/loadout_option/proc/spawn_on_mob(mob/living/human/wearer, metadata)
 	var/obj/item/item = spawn_and_validate_item(wearer, metadata)
 	if(!item)
 		return
@@ -500,14 +500,14 @@ var/global/list/gear_datums = list()
 				qdel(old_item)
 		return item
 
-/decl/loadout_option/proc/spawn_in_storage_or_drop(mob/living/carbon/human/wearer, metadata)
+/decl/loadout_option/proc/spawn_in_storage_or_drop(mob/living/human/wearer, metadata)
 	var/obj/item/item = spawn_and_validate_item(wearer, metadata)
 	if(!item)
 		return
 
 	place_in_storage_or_drop(wearer, item)
 
-/decl/loadout_option/proc/place_in_storage_or_drop(mob/living/carbon/human/wearer, obj/item/item)
+/decl/loadout_option/proc/place_in_storage_or_drop(mob/living/human/wearer, obj/item/item)
 	var/atom/placed_in = wearer.equip_to_storage(item)
 	if(placed_in)
 		to_chat(wearer, SPAN_NOTICE("Placing \the [item] in your [placed_in.name]!"))
@@ -518,7 +518,7 @@ var/global/list/gear_datums = list()
 	else
 		to_chat(wearer, SPAN_DANGER("Dropping \the [item] on the ground!"))
 
-/decl/loadout_option/proc/spawn_and_validate_item(mob/living/carbon/human/H, metadata)
+/decl/loadout_option/proc/spawn_and_validate_item(mob/living/human/H, metadata)
 	PRIVATE_PROC(TRUE)
 
 	var/obj/item/item = spawn_item(H, H, metadata)

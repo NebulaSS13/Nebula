@@ -19891,7 +19891,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/mob/living/carbon/human/monkey/punpun,
+/mob/living/human/monkey/punpun,
 /turf/floor/lino,
 /area/exodus/crew_quarters/bar)
 "aPK" = (

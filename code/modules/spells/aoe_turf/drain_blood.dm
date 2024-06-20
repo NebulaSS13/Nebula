@@ -21,7 +21,7 @@
 				continue
 			//Hurt target
 			if(ishuman(L))
-				var/mob/living/carbon/human/H = L
+				var/mob/living/human/H = L
 				H.vessel.remove_any(10)
 			else
 				L.take_damage(10)
@@ -35,7 +35,7 @@
 
 			//Heal self
 			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
+				var/mob/living/human/H = user
 				var/amount = min(10, H.species.blood_volume - H.vessel.total_volume)
 				if(amount > 0)
 					H.adjust_blood(amount)

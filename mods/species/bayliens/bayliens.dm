@@ -1,7 +1,7 @@
 /decl/modpack/bayliens
 	name = "Baystation 12 Aliens"
 
-/mob/living/carbon/human/Process_Spacemove(allow_movement)
+/mob/living/human/Process_Spacemove(allow_movement)
 	. = ..()
 	if(.)
 		return

@@ -96,7 +96,7 @@
 			if(eaten >= MAX_INTAKE_ORE_PER_TICK)
 				break
 		if(emagged)
-			for(var/mob/living/carbon/human/H in input_turf)
+			for(var/mob/living/human/H in input_turf)
 				for(var/obj/item/organ/external/eating in H.get_external_organs())
 					if(!eating.simulated || eating.anchored || !can_eat(eating) || !prob(5))
 						continue

@@ -52,7 +52,7 @@
 /obj/item/clothing/gloves/equipped()
 	. = ..()
 	if(covering_ring)
-		var/mob/living/carbon/human/H = loc
+		var/mob/living/human/H = loc
 		if(istype(H) && H.get_equipped_item(slot_gloves_str) != src)
 			H.equip_to_slot_if_possible(covering_ring, slot_gloves_str, disable_warning = TRUE)
 		var/obj/item/gloves = H.get_equipped_item(slot_gloves_str)
@@ -62,7 +62,7 @@
 
 /obj/item/clothing/gloves/dropped(var/mob/user)
 	..()
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(covering_ring)
 		if(istype(H))
 			H.equip_to_slot_if_possible(covering_ring, slot_gloves_str, disable_warning = TRUE)

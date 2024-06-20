@@ -48,7 +48,7 @@ var/global/list/surgery_tool_exception_cache = list()
 	/// Any additional information to add to the codex entry for this step.
 	var/list/additional_codex_lines
 	/// What mob type does this surgery apply to.
-	var/expected_mob_type = /mob/living/carbon/human
+	var/expected_mob_type = /mob/living/human
 	/// Sound (or list of sounds) to play on end step.
 	var/end_step_sound = "rustle"
 	/// Sound (or list of sounds) to play on fail step.
@@ -161,13 +161,13 @@ var/global/list/surgery_tool_exception_cache = list()
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
 	if(ishuman(user) && prob(60))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if (blood_level)
 			H.bloody_hands(target,2)
 		if (blood_level > 1)
 			H.bloody_body(target,2)
 	if(shock_level && ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		H.shock_stage = max(H.shock_stage, shock_level)
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
@@ -196,7 +196,7 @@ var/global/list/surgery_tool_exception_cache = list()
 			. += 20
 
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		. -= round(H.shock_stage * 0.5)
 		if(GET_STATUS(H, STAT_BLURRY))
 			. -= 20
@@ -219,7 +219,7 @@ var/global/list/surgery_tool_exception_cache = list()
 			. -= 10
 	. = max(., 0)
 
-/proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)
+/proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/human/user)
 	if(!istype(user) || !istype(E)) return
 
 	var/germ_level = user.germ_level

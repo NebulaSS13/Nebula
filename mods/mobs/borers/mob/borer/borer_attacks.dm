@@ -21,7 +21,7 @@
 		return TRUE
 	// end TODO
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 	if(!E)
 		to_chat(src, SPAN_WARNING("\The [H] does not have a head!"))

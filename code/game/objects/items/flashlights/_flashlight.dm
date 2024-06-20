@@ -136,7 +136,7 @@
 	return ..()
 
 /obj/item/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
-	var/mob/living/carbon/human/H = vision.owner
+	var/mob/living/human/H = vision.owner
 
 	if(H == user)	//can't look into your own eyes buster
 		return

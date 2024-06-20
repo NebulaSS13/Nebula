@@ -41,7 +41,7 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/space/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.) && can_act() && !is_on_special_ability_cooldown() && Adjacent(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(prob(70))
 			SET_STATUS_MAX(H, STAT_WEAK, rand(2,3))
 			set_special_ability_cooldown(ability_cooldown / 1.5)

@@ -27,19 +27,19 @@
 /datum/artifact_effect/dnaswitch/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effect_range,T))
+		for(var/mob/living/human/H in range(effect_range,T))
 			mess_dna(H, 100, 50, 30)
 		return 1
 
 /datum/artifact_effect/dnaswitch/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effect_range, T))
+		for(var/mob/living/human/H in range(effect_range, T))
 			mess_dna(H, 25, 75, 75)
 		return 1
 
 // Swapped to radiation pending readding of mutations.
-/datum/artifact_effect/dnaswitch/proc/mess_dna(mob/living/carbon/human/H, scramble_prob, UI_scramble_prob, message_prob)
+/datum/artifact_effect/dnaswitch/proc/mess_dna(mob/living/human/H, scramble_prob, UI_scramble_prob, message_prob)
 	var/weakness = GetAnomalySusceptibility(H)
 	if(prob(weakness * 100) && H.has_genetic_information())
 		if(prob(message_prob))

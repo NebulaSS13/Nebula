@@ -9,7 +9,7 @@
 /decl/hierarchy/outfit/job/tradeship/hand
 	name = "Tradeship - Job - Deck Hand"
 
-/decl/hierarchy/outfit/job/tradeship/hand/pre_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/tradeship/hand/pre_equip(mob/living/human/H)
 	..()
 	uniform = pick(list(
 		/obj/item/clothing/pants/mustard/overalls,

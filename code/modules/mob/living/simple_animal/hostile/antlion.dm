@@ -63,7 +63,7 @@
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
 	set_special_ability_cooldown(ability_cooldown)
-	for(var/mob/living/carbon/human/H in get_turf(src))
+	for(var/mob/living/human/H in get_turf(src))
 		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		SET_STATUS_MAX(H, STAT_WEAK, 1)

@@ -51,7 +51,7 @@
 	if(stat & BROKEN)
 		to_chat(user, SPAN_WARNING("It is completely demolished."))
 
-/obj/machinery/camera/apply_visual(mob/living/carbon/human/M)
+/obj/machinery/camera/apply_visual(mob/living/human/M)
 	if(!M.client || !istype(M))
 		return
 	M.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
@@ -60,7 +60,7 @@
 	M.machine_visual = src
 	return 1
 
-/obj/machinery/camera/remove_visual(mob/living/carbon/human/M)
+/obj/machinery/camera/remove_visual(mob/living/human/M)
 	if(!M.client || !istype(M))
 		return
 	M.clear_fullscreen("fishbed",0)
@@ -183,7 +183,7 @@
 			visible_message(SPAN_WARNING("[src] was hit by [O]!"))
 		take_damage(O.throwforce, O.atom_damage_type)
 
-/obj/machinery/camera/physical_attack_hand(mob/living/carbon/human/user)
+/obj/machinery/camera/physical_attack_hand(mob/living/human/user)
 	if(!istype(user))
 		return
 	if(user.species.can_shred(user))

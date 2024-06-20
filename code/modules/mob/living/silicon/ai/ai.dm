@@ -378,7 +378,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 
 		if(!istype(H) || (html_decode(href_list["trackname"]) == H.get_visible_name()) || (html_decode(href_list["trackname"]) == H.get_id_name()))
 			ai_actual_track(target)

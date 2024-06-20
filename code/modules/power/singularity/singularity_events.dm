@@ -33,7 +33,7 @@
 			continue
 		if(M.stat == CONSCIOUS)
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				if(istype(H.get_equipped_item(slot_glasses_str), /obj/item/clothing/glasses/meson))
 					if(source.current_stage.stage_size != STAGE_SUPER)
 						to_chat(H, SPAN_WARNING("You look directly into \the [source]. Good thing you had your protective eyewear on!"))

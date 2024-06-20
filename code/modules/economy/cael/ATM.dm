@@ -441,14 +441,14 @@
 
 	interact(usr)
 
-/obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user)
+/obj/machinery/atm/proc/scan_user(mob/living/human/human_user)
 	if(!authenticated_account)
 		var/obj/item/card/id/I = human_user.GetIdCard()
 		if(istype(I))
 			return I
 
 // put the currently held id on the ground or in the hand of the user
-/obj/machinery/atm/proc/release_held_id(mob/living/carbon/human/human_user)
+/obj/machinery/atm/proc/release_held_id(mob/living/human/human_user)
 	if(!held_card)
 		return
 

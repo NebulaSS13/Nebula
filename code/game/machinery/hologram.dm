@@ -77,7 +77,7 @@ var/global/list/holopads = list()
 	// Update our desc.
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[holopad_id]'"
 
-/obj/machinery/hologram/holopad/interface_interact(var/mob/living/carbon/human/user) //Carn: Hologram requests.
+/obj/machinery/hologram/holopad/interface_interact(var/mob/living/human/user) //Carn: Hologram requests.
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	if(incoming_connection && caller_id)

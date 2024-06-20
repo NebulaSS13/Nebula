@@ -76,7 +76,7 @@
 		B.set_dir(newdir)
 	bloodiness--
 
-/proc/equip_wheelchair(mob/living/carbon/human/H) //Proc for spawning in a wheelchair if a new character has no legs. Used in new_player.dm
+/proc/equip_wheelchair(mob/living/human/H) //Proc for spawning in a wheelchair if a new character has no legs. Used in new_player.dm
 	var/obj/structure/bed/chair/wheelchair/W = new(get_turf(H))
 	if(isturf(H.loc))
 		W.buckle_mob(H)

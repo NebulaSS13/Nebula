@@ -33,7 +33,7 @@
 		if(!(G.target_zone in list(BP_CHEST, BP_HEAD)))
 			to_chat(G.assailant, SPAN_WARNING("You need to be grabbing their torso or head for this!"))
 			return FALSE
-		var/mob/living/carbon/human/affecting_mob = G.get_affecting_mob()
+		var/mob/living/human/affecting_mob = G.get_affecting_mob()
 		if(istype(affecting_mob))
 			var/obj/item/clothing/C = affecting_mob.get_equipped_item(slot_head_str)
 			if(istype(C)) //hardsuit helmets etc

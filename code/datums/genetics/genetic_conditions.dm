@@ -12,7 +12,7 @@
 	/// Icon to pull mob underlays from.
 	var/underlay_icon   = 'icons/effects/genetics.dmi'
 	/// Type that this gene can apply to.
-	var/expected_type   = /mob/living/carbon/human
+	var/expected_type   = /mob/living/human
 	/// Required return result from isSynthetic() for the gene to activate, if not null.
 	var/check_synthetic = FALSE
 	/// Set to FALSE if mob snapshots should not include this condition.
@@ -53,7 +53,7 @@
 
 /decl/genetic_condition/superpower/remoteview
 	name               = "Remote Viewing"
-	grant_verb         = /mob/living/carbon/human/proc/remoteobserve
+	grant_verb         = /mob/living/human/proc/remoteobserve
 	activation_message = "Your mind expands."
 
 /decl/genetic_condition/superpower/running
@@ -62,12 +62,12 @@
 
 /decl/genetic_condition/superpower/remotetalk
 	name               = "Telepathy"
-	grant_verb         = /mob/living/carbon/human/proc/remotesay
+	grant_verb         = /mob/living/human/proc/remotesay
 	activation_message = "You expand your mind outwards."
 
 /decl/genetic_condition/superpower/morph
 	name               = "Morph"
-	grant_verb         = /mob/living/carbon/human/proc/morph
+	grant_verb         = /mob/living/human/proc/morph
 	activation_message = "Your skin feels strange."
 
 /decl/genetic_condition/superpower/cold_resist

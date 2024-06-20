@@ -54,7 +54,7 @@
 	SetName("[initial(name)] (\the [M])")
 	update_icon()
 
-/obj/item/forensics/sample/print/proc/can_take_print_from(mob/living/carbon/human/H, user)
+/obj/item/forensics/sample/print/proc/can_take_print_from(mob/living/human/H, user)
 	if(LAZYLEN(evidence))
 		return
 
@@ -76,7 +76,7 @@
 	if(!ishuman(target))
 		return ..()
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(!can_take_print_from(H, user))
 		return 1
 

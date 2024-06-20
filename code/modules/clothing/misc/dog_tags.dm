@@ -24,7 +24,7 @@
 /obj/item/clothing/dog_tags/loadout_setup(mob/wearer, metadata)
 	owner_name = wearer.real_name
 
-	var/mob/living/carbon/human/H = wearer
+	var/mob/living/human/H = wearer
 	if(!istype(H))
 		return
 

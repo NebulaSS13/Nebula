@@ -6,7 +6,7 @@
 	anchored = TRUE
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
-	var/mob/living/carbon/human/victim = null
+	var/mob/living/human/victim = null
 	var/obj/machinery/optable/table = null
 
 /obj/machinery/computer/operating/Initialize()

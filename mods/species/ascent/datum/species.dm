@@ -88,10 +88,10 @@
 			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
 		)
 
-/decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
+/decl/species/mantid/handle_sleeping(var/mob/living/human/H)
 	return
 
-/decl/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
+/decl/species/mantid/equip_survival_gear(var/mob/living/human/H, var/extendedtank = 1)
 	return
 
 /decl/species/mantid/gyne

@@ -244,7 +244,7 @@
 	//would check is_broken() and is_malfunctioning() here too but is_malfunctioning()
 	//is probabilistic so we can't do that and it would be unfair to just check one.
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, M.get_empty_hand_slot())
 		if(istype(hand) && hand.is_usable())
 			return TRUE
@@ -751,7 +751,7 @@
 	if(!istype(M))
 		return TRUE
 	if(!blood_data && ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
 	var/sample_dna = LAZYACCESS(blood_data, "blood_DNA")
 	if(sample_dna)
@@ -788,7 +788,7 @@ var/global/list/_item_blood_mask = icon('icons/effects/blood.dmi', "itemblood")
 /*
 For zooming with scope or binoculars. This is called from
 modules/mob/mob_movement.dm if you move you will be zoomed out
-modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
+modules/mob/living/human/life.dm if you die, you will be zoomed out.
 */
 //Looking through a scope or binoculars should /not/ improve your periphereal vision. Still, increase viewsize a tiny bit so that sniping isn't as restricted to NSEW
 /obj/item/proc/zoom(mob/user, var/tileoffset = 14,var/viewsize = 9) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
@@ -799,7 +799,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	var/devicename = zoomdevicename || name
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(user.incapacitated(INCAPACITATION_DISABLED))
 		to_chat(user, SPAN_WARNING("You are unable to focus through the [devicename]."))
 		return

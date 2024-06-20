@@ -105,13 +105,13 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/decl/species/skrell/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
+/decl/species/skrell/fluid_act(var/mob/living/human/H, var/datum/reagents/fluids)
 	. = ..()
 	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
 	if(water >= 40 && H.hydration < 400) //skrell passively absorb water.
 		H.hydration += 1
 
-/decl/species/skrell/handle_trail(mob/living/carbon/human/H, turf/T, old_loc)
+/decl/species/skrell/handle_trail(mob/living/human/H, turf/T, old_loc)
 	var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 	if(!shoes)
 		var/list/bloodDNA

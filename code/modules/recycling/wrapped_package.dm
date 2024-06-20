@@ -268,7 +268,7 @@
 		/obj/item,
 		/obj/structure,
 		/obj/machinery,
-		/mob/living/carbon/human,
+		/mob/living/human,
 	)
 	return type_whitelist
 

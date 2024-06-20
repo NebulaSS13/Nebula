@@ -10,7 +10,7 @@ var/global/repository/follow/follow_repository = new()
 
 	var/list/excluded_subtypes = list(
 		/obj/machinery/atmospherics, // Atmos stuff calls initialize time and time again..,
-		/mob/living/carbon/human/dummy/mannequin
+		/mob/living/human/dummy/mannequin
 	)
 
 /repository/follow/New()
@@ -167,9 +167,9 @@ var/global/repository/follow/follow_repository = new()
 
 /datum/follow_holder/human
 	sort_order = 2
-	followed_type = /mob/living/carbon/human
+	followed_type = /mob/living/human
 
-/datum/follow_holder/human/get_suffix(var/mob/living/carbon/human/H)
+/datum/follow_holder/human/get_suffix(var/mob/living/human/H)
 	suffix = "\[[H.species.name]\]"
 	return ..()
 

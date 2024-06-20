@@ -49,7 +49,7 @@
 /obj/item/clothing/glasses/emp_act(severity)
 	if(electric)
 		if(ishuman(src.loc))
-			var/mob/living/carbon/human/M = src.loc
+			var/mob/living/human/M = src.loc
 			if(M.get_equipped_item(slot_glasses_str) != src)
 				to_chat(M, SPAN_DANGER("\The [src] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
 			else

@@ -64,7 +64,7 @@
 
 	if(world.timeofday < next_event) //Checks if it's time for the next crash chance.
 		return
-	var/mob/living/holder = computer.holder.get_recursive_loc_of_type(/mob/living/carbon/human)
+	var/mob/living/holder = computer.holder.get_recursive_loc_of_type(/mob/living/human)
 	var/host = computer.get_physical_host()
 	if(program_status > PROGRAM_STATUS_CRASHED)
 		if(PROGRAM_STATUS_RUNNING_SCALDING >= program_status)

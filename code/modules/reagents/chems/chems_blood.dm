@@ -64,7 +64,7 @@
 /decl/material/liquid/blood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/volume = REAGENT_VOLUME(holder, type)
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		H.inject_blood(volume, holder)
 		holder.remove_reagent(type, volume)
 

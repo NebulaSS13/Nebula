@@ -10,7 +10,7 @@
 	center_of_mass = @'{"x":16,"y":14}'
 
 	var/growing = FALSE
-	var/monkey_type = /mob/living/carbon/human/monkey
+	var/monkey_type = /mob/living/human/monkey
 	var/wrapper_type
 
 /obj/item/chems/food/monkeycube/populate_reagents()

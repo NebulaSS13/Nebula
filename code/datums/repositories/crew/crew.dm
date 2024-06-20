@@ -53,7 +53,7 @@ var/global/datum/repository/crew/crew_repository = new()
 		var/turf/pos = get_turf(sensor)
 		if(!pos || pos.z != z_level || sensor.sensor_mode == VITALS_SENSOR_OFF)
 			continue
-		var/mob/living/carbon/human/H = sensor.loc?.loc
+		var/mob/living/human/H = sensor.loc?.loc
 		if(!istype(H))
 			continue
 		var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
@@ -82,7 +82,7 @@ var/global/datum/repository/crew/crew_repository = new()
 	. = cache_data_alert[num2text(z_level)]
 
 /datum/repository/crew/proc/scan()
-	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+	for(var/mob/living/human/H in SSmobs.mob_list)
 		var/sensor = H.get_vitals_sensor()
 		if(sensor)
 			LAZYDISTINCTADD(., sensor)
@@ -94,7 +94,7 @@ var/global/datum/repository/crew/crew_repository = new()
 			if(. & MOD_SUIT_SENSORS_REJECTED)
 				return
 
-/datum/repository/crew/proc/process_crew_data(var/datum/priority_queue/modifiers, var/mob/living/carbon/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos, var/list/crew_data)
+/datum/repository/crew/proc/process_crew_data(var/datum/priority_queue/modifiers, var/mob/living/human/H, var/obj/item/clothing/sensor/vitals/S, var/turf/pos, var/list/crew_data)
 	var/current_priority = INFINITY
 	var/list/modifiers_of_this_priority = list()
 

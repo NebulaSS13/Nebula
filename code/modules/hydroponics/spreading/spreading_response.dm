@@ -31,7 +31,7 @@
 		return
 	if(prob((seed.get_trait(TRAIT_POTENCY) / 2) * 3))
 		entangle(victim)
-	var/mob/living/carbon/human/H = victim
+	var/mob/living/human/H = victim
 	if(istype(H) && H.get_equipped_item(slot_shoes_str))
 		return
 	seed.do_thorns(victim,src)
@@ -74,7 +74,7 @@
 		return
 
 	if(ishuman(victim))
-		var/mob/living/carbon/human/H = victim
+		var/mob/living/human/H = victim
 		if(H.species.species_flags & SPECIES_FLAG_NO_TANGLE)
 			return
 

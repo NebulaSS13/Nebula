@@ -84,7 +84,7 @@
 /obj/structure/boulder/Bumped(AM)
 	. = ..()
 	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
+		var/mob/living/human/H = AM
 		for(var/obj/item/P in H.get_inactive_held_items())
 			if(IS_PICK(P))
 				attackby(P, H)

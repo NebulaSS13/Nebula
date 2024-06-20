@@ -23,7 +23,7 @@
 
 /obj/item/scanner/autopsy/scan(atom/A, mob/user)
 	if(ishuman(A))
-		var/mob/living/carbon/human/M = A
+		var/mob/living/human/M = A
 		set_target(M, user)
 		timeofdeath = M.timeofdeath
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.get_target_zone())

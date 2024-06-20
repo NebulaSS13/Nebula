@@ -63,7 +63,7 @@ var/global/list/singularity_beacons = list()
 			addtimer(CALLBACK(src, PROC_REF(selfdestruct)), rand(5, 20) SECONDS)
 			return
 		if(ishuman(M))
-			var/mob/living/carbon/human/N = M
+			var/mob/living/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
 			var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
 			traitors.add_antagonist(N.mind)

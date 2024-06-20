@@ -1,4 +1,4 @@
-/mob/living/carbon/human/gib(do_gibs = TRUE)
+/mob/living/human/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)
 	. = ..()
 	if(.)
@@ -15,12 +15,12 @@
 				E.dropInto(my_turf)
 				E.throw_at(get_edge_target_turf(E, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
-/mob/living/carbon/human/get_death_message(gibbed)
+/mob/living/human/get_death_message(gibbed)
 	if(get_config_value(/decl/config/toggle/health_show_human_death_message))
 		return species.get_species_death_message(src) || "seizes up and falls limp..."
 	return ..()
 
-/mob/living/carbon/human/death(gibbed)
+/mob/living/human/death(gibbed)
 	if(!(. = ..()))
 		return
 
@@ -40,7 +40,7 @@
 		SSticker.mode.check_win()
 	species.handle_death(src)
 
-/mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
+/mob/living/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())
 		if(!limb.parent_organ) // don't dismember root
 			continue

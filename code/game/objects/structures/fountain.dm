@@ -25,7 +25,7 @@
 		to_chat(user,  SPAN_WARNING("\The [src] is still and lifeless..."))
 		return TRUE
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	var/decl/bodytype/my_bodytype = istype(H) && H.get_bodytype()
 	if(!istype(my_bodytype))
 		return ..()
@@ -42,7 +42,7 @@
 		visible_message("\The [H] retracts their hand suddenly.")
 	return TRUE
 
-/obj/structure/fountain/proc/time_dilation(var/mob/living/carbon/human/user)
+/obj/structure/fountain/proc/time_dilation(var/mob/living/human/user)
 
 	for(var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)

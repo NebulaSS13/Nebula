@@ -101,7 +101,7 @@
 
 		if(ismob(scanned))
 			if(ishuman(scanned))
-				var/mob/living/carbon/human/H = scanned
+				var/mob/living/human/H = scanned
 				if(H.get_bodytype()?.appearance_flags & HAS_SKIN_COLOR)
 					I.color = H.get_skin_colour()
 					I.icon = 'icons/mob/mob.dmi'
@@ -129,7 +129,7 @@
 	for(var/turf/T in range(scan_range, center))
 		for(var/mob/M in T.contents)
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				if(H.is_cloaked())
 					. += M
 			else if(M.alpha < 255)

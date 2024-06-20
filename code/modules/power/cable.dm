@@ -537,7 +537,7 @@ By design, d1 is the smallest direction and d2 is the highest
 //you can use wires to heal robotics
 /obj/item/stack/cable_coil/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(ishuman(target) && user.a_intent == I_HELP)
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
 		if(!S || !BP_IS_PROSTHETIC(S) || user.a_intent != I_HELP)
 			return ..()

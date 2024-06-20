@@ -188,7 +188,7 @@ var/global/list/possible_say_verbs = list(
 	else if(ismob(card.loc))
 		var/mob/holder = card.loc
 		if(ishuman(holder))
-			var/mob/living/carbon/human/H = holder
+			var/mob/living/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.get_external_organs())
 				if(card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))

@@ -71,7 +71,7 @@
 /obj/item/sword/excalibur/Process()
 	if(isliving(loc))
 		if(ishuman(loc))
-			var/mob/living/carbon/human/H = loc
+			var/mob/living/human/H = loc
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 			E?.take_external_damage(burn=2,used_weapon="stovetop")
 		else
