@@ -1,12 +1,3 @@
-/mob/living/proc/convert_to_rev(mob/M in able_mobs_in_oview(src))
-	set name = "Recruit to Faction"
-	set category = "Abilities"
-
-	if(!M.mind || !M.client)
-		return
-
-	convert_to_faction(M.mind, GET_DECL(/decl/special_role/revolutionary))
-
 /mob/living/proc/convert_to_faction(var/datum/mind/player, var/decl/special_role/faction)
 
 	if(!player || !faction || !player.current)
@@ -46,12 +37,3 @@
 		else
 			to_chat(player, "<span class='danger'>You reject this traitorous cause!</span>")
 	to_chat(src, "<span class='danger'>\The [player.current] does not support the [faction.faction_descriptor]!</span>")
-
-/mob/living/proc/convert_to_loyalist(mob/M in able_mobs_in_oview(src))
-	set name = "Convince Recidivist"
-	set category = "Abilities"
-
-	if(!M.mind || !M.client)
-		return
-
-	convert_to_faction(M.mind, GET_DECL(/decl/special_role/loyalist))

@@ -1,0 +1,9 @@
+#ifndef GAMEMODE_PACK_REVOLUTION
+#define GAMEMODE_PACK_REVOLUTION
+// BEGIN_INCLUDE
+#include "_revolution.dm"
+#include "gamemode.dm"
+#include "loyalist.dm"
+#include "revolutionary.dm"
+// END_INCLUDE
+#endif
