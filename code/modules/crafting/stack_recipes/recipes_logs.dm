@@ -8,3 +8,6 @@
 	craft_stack_types           = /obj/item/stack/material/log
 	forbidden_craft_stack_types = /obj/item/stack/material/ore
 	difficulty                  = MAT_VALUE_HARD_DIY
+/decl/stack_recipe/logs/wall_frame
+	result_type                 = /obj/structure/wall_frame/log
+	difficulty                  = MAT_VALUE_HARD_DIY
