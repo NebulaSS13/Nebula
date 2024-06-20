@@ -131,10 +131,8 @@
 		if(ishuman(target))
 			var/amount = REAGENTS_FREE_SPACE(reagents)
 			var/mob/living/carbon/human/T = target
-			if(!T.dna)
+			if(!T.vessel?.total_volume)
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
-				if(ishuman(target))
-					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 
 			var/allow = T.can_inject(user, check_zone(user.get_target_zone(), T))

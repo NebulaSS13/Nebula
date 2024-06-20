@@ -6,58 +6,41 @@ code\game\dna\genes\goon_powers.dm
 */
 /spell/targeted/genetic
 	name = "Genetic modifier"
-	desc = "This spell inflicts a set of mutations and disabilities upon the target."
-
-	var/disabilities = 0 //bits
-	var/list/mutations = list() //mutation strings
-	duration = 100 //deciseconds
-
+	desc = "This spell inflicts a set of genetic conditions upon the target."
+	duration = 10 SECONDS
+	var/list/genetic_conditions = list()
 
 /spell/targeted/genetic/cast(list/targets)
 	..()
 	for(var/mob/living/target in targets)
-		for(var/x in mutations)
-			target.mutations.Add(x)
-		target.disabilities |= disabilities
-		target.update_mutations()	//update target's mutation overlays
-		spawn(duration)
-			for(var/x in mutations)
-				target.mutations.Remove(x)
-			target.disabilities &= ~disabilities
-			target.update_mutations()
-	return
+		for(var/x in genetic_conditions)
+			target.add_genetic_condition(x, duration)
 
 /spell/targeted/genetic/blind
 	name = "Blind"
 	desc = "This spell inflicts a target with temporary blindness. Does not require wizard garb."
 	feedback = "BD"
-	disabilities = 1
 	school = "illusion"
 	duration = 300
-
 	charge_max = 300
-
 	spell_flags = 0
 	invocation = "Sty Kaly."
 	invocation_type = SpI_WHISPER
 	message = "<span class='danger'>Your eyes cry out in pain!</span>"
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 1, Sp_POWER = 3)
 	cooldown_min = 50
-
 	range = 7
 	max_targets = 0
-
 	amt_eye_blind = 10
 	amt_eye_blurry = 20
-
 	hud_state = "wiz_blind"
 	cast_sound = 'sound/magic/blind.ogg'
+	genetic_conditions = list(GENE_COND_BLINDED)
 
 /spell/targeted/genetic/blind/empower_spell()
 	if(!..())
 		return 0
-	duration += 100
-
+	duration += 10 SECONDS
 	return "[src] will now blind for a longer period of time."
 
 /spell/targeted/genetic/blind/hysteria
@@ -81,12 +64,10 @@ code\game\dna\genes\goon_powers.dm
 	spell_flags = NOFACTION
 	invocation_type = SpI_SHOUT
 	charge_max = 60 SECONDS
-
+	spell_flags = 0
 	amt_dizziness = 0
 	amt_eye_blurry = 5
 	amt_stunned = 1
-
 	effect_state = "electricity_constant"
 	effect_duration = 5
-
 	hud_state = "wiz_starburst"

@@ -350,18 +350,18 @@
 	. += "Electric charge strength:\t[powerlevel]"
 	. += "Health:\t[get_health_percent()]%"
 
-	var/list/mutations = slime_data.descendants?.Copy()
-	if(!mutations.len)
+	var/list/slime_mutations = slime_data.descendants?.Copy()
+	if(!length(slime_mutations))
 		. += "This slime will never mutate."
 	else
 		var/list/mutationChances = list()
-		for(var/i in mutations)
+		for(var/i in slime_mutations)
 			if(i == slime_type)
 				continue
 			if(mutationChances[i])
-				mutationChances[i] += mutation_chance / mutations.len
+				mutationChances[i] += mutation_chance / length(slime_mutations)
 			else
-				mutationChances[i] = mutation_chance / mutations.len
+				mutationChances[i] = mutation_chance / length(slime_mutations)
 
 		var/list/mutationTexts = list("[slime_data.name] ([100 - mutation_chance]%)")
 		for(var/i in mutationChances)

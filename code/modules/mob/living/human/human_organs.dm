@@ -125,13 +125,6 @@
 	// If the root organ ever changes/isn't always the chest, this will need to be changed.
 	return get_organ(BP_CHEST, /obj/item/organ)?.bodytype
 
-/mob/living/carbon/human/proc/update_eyes(update_icons = TRUE)
-	var/obj/item/organ/internal/eyes/eyes = get_organ((get_bodytype()?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	if(eyes)
-		eyes.update_colour()
-		if(update_icons)
-			queue_icon_update()
-
 /mob/living/carbon/human/proc/get_bodypart_name(var/zone)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, zone)
 	return E?.name
@@ -209,16 +202,16 @@
 					if (W.infection_check())
 						W.germ_level += 1
 
-/mob/living/carbon/human/is_asystole()
-	if(isSynthetic())
-		var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
-		if(!C || !C.is_usable() || !C.percent())
-			return TRUE
-	else if(should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
-		if(!istype(heart) || !heart.is_working())
-			return TRUE
-	return FALSE
+/mob/living/carbon/human/proc/Check_Proppable_Object()
+	for(var/turf/T in RANGE_TURFS(src, 1)) //we only care for non-space turfs
+		if(T.density && T.simulated)	//walls work
+			return 1
+
+	for(var/obj/O in orange(1, src))
+		if(O && O.density && O.anchored)
+			return 1
+
+	return 0
 
 /mob/living/carbon/human/on_lost_organ(var/obj/item/organ/O)
 	if(!(. = ..()))

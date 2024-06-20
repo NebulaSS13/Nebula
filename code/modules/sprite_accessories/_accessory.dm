@@ -6,9 +6,9 @@
 	The process of adding in new hairstyles has been made pain-free and easy to do.
 	Enjoy! - Doohl
 
-	Notice: This all gets automatically compiled in a list in dna2.dm, so you do not
-	have to define any UI values for sprite accessories manually for hair and facial
-	hair. Just add in new hair types and the game will naturally adapt.
+	Notice: This all gets automatically compiled in a list via the decl rfepository,
+	so you do not have to add sprite accessories manually to any lists etc. Just add
+	in new hair types and the game will naturally adapt.
 
 	Changing icon states, icon files and names should not represent any risks to
 	existing savefiles, but please do not change decl uids unless you are very sure

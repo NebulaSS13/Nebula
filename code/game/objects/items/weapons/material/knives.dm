@@ -40,7 +40,7 @@
 /obj/item/knife/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	if(user.a_intent != I_HELP && user.get_target_zone() == BP_EYES)
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))
+		if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 			target = user
 		return eyestab(target, user)
 	return ..()

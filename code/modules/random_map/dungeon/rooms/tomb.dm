@@ -25,7 +25,7 @@
 					M = new /mob/living/carbon/human()
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)
-					H.make_husked()
+					H.add_genetic_condition(GENE_COND_HUSK)
 				else
 					M = new type()
 				M.death()
@@ -41,7 +41,7 @@
 					M = new /mob/living/carbon/human()
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)
-					H.make_husked()
+					H.add_genetic_condition(GENE_COND_HUSK)
 				else
 					M = new type()
 				M.death()

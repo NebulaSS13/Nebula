@@ -9,7 +9,7 @@
 	. = ..()
 	//TODO: fix husking
 	if(. && stat == DEAD && (get_damage(BRUTE) - get_damage(BURN)) < get_config_value(/decl/config/num/health_health_threshold_dead))
-		make_husked()
+		add_genetic_condition(GENE_COND_HUSK)
 
 /mob/living/carbon/human/adjustBrainLoss(var/amount, var/do_update_health = TRUE)
 	if(!(status_flags & GODMODE) && should_have_organ(BP_BRAIN))

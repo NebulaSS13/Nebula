@@ -219,7 +219,7 @@
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
 				injection_delay += INJECTION_PORT_DELAY
-			if(!H.dna || !injection_status)
+			if(!H.vessel?.total_volume || !injection_status)
 				activate_pin(3)
 				return
 			H.visible_message(

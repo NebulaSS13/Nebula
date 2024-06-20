@@ -56,7 +56,7 @@
 			var/decl/species/species = get_species_by_key(species_name)
 			for(var/decl/bodytype/bodytype_data in species.available_bodytypes)
 				if(bodytype_data.bodytype_category == bodytype_category)
-					return species_name
+					return species
 	return ..()
 
 /decl/bodytype/prosthetic/apply_bodytype_organ_modifications(obj/item/organ/org)

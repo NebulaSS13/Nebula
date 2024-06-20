@@ -131,36 +131,25 @@
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		SET_STATUS_MAX(src, STAT_BLURRY, 1)
 	// Non-genetic blindness; covered eyes will heal faster.
-	else if(!(sdisabilities & BLINDED) && equipment_tint_total >= TINT_BLIND)
+	else if(!has_genetic_condition(GENE_COND_BLINDED) && equipment_tint_total >= TINT_BLIND)
 		ADJ_STATUS(src, STAT_BLURRY, -1)
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
-	if(stat != DEAD && (disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
+	if(stat != DEAD && has_genetic_condition(GENE_COND_COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
 		drop_held_items()
 		cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
-	if(get_damage(BURN))
-		if((MUTATION_COLD_RESISTANCE in mutations) || (prob(1)))
-			heal_organ_damage(0,1)
-
-	// DNA2 - Gene processing.
-	var/list/all_genes = decls_repository.get_decls_of_subtype(/decl/gene)
-	for(var/gene_type in all_genes)
-		var/decl/gene/gene = all_genes[gene_type]
-		if(!gene.block)
-			continue
-		if(gene.is_active(src))
-			gene.OnMobLife(src)
-
+	if(get_damage(BURN) && (has_genetic_condition(GENE_COND_COLD_RESISTANCE) || (prob(1))))
+		heal_organ_damage(0,1)
 	..()
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 
 	..()
 
-	if(!environment || (MUTATION_SPACERES in mutations))
+	if(!environment || has_genetic_condition(GENE_COND_SPACE_RESISTANCE))
 		return
 
 	//Stuff like water absorbtion happens here.
@@ -313,7 +302,7 @@
 	return get_thermal_protection(thermal_protection_flags)
 
 /mob/living/carbon/human/get_cold_protection(temperature)
-	if(MUTATION_COLD_RESISTANCE in mutations)
+	if(has_genetic_condition(GENE_COND_COLD_RESISTANCE))
 		return 1 //Fully protected from the cold.
 
 	temperature = max(temperature, 2.7) //There is an occasional bug where the temperature is miscalculated in ares with a small amount of gas on them, so this is necessary to ensure that that bug does not affect this calculation. Space's temperature is 2.7K and most suits that are intended to protect against any cold, protect down to 2.0K.
@@ -858,7 +847,6 @@
 	shock_stage = 0
 	..()
 	adjust_stamina(100)
-	UpdateAppearance()
 
 /mob/living/carbon/human/reset_view(atom/A)
 	..()
@@ -879,7 +867,7 @@
 			set_sight(sight|viewflags)
 	if(eyeobj && eyeobj.owner != src)
 		reset_view(null)
-	if((mRemote in mutations) && remoteview_target && remoteview_target.stat != CONSCIOUS)
+	if(has_genetic_condition(GENE_COND_REMOTE_VIEW) && remoteview_target && remoteview_target.stat != CONSCIOUS)
 		remoteview_target = null
 		reset_view(null, 0)
 
@@ -888,5 +876,5 @@
 
 /mob/living/carbon/human/update_living_sight()
 	..()
-	if(GET_CHEMICAL_EFFECT(src, CE_THIRDEYE) || (MUTATION_XRAY in mutations))
+	if(GET_CHEMICAL_EFFECT(src, CE_THIRDEYE) || has_genetic_condition(GENE_COND_XRAY))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

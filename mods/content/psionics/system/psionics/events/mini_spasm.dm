@@ -34,12 +34,12 @@
 	set waitfor = FALSE
 
 	if(isliving(victim) && !victim.isSynthetic())
-		var/list/disabilities = list(NEARSIGHTED, EPILEPSY, TOURETTES, NERVOUS)
-		for(var/disability in disabilities)
-			if(victim.disabilities & disability)
-				disabilities -= disability
-		if(disabilities.len)
-			victim.disabilities |= pick(disabilities)
+		var/list/spasm_disabilities = list(GENE_COND_NEARSIGHTED, GENE_COND_EPILEPSY, GENE_COND_TOURETTES, GENE_COND_NERVOUS)
+		for(var/spasm_disability in spasm_disabilities)
+			if(victim.has_genetic_condition(spasm_disability))
+				spasm_disabilities -= spasm_disability
+		if(length(spasm_disabilities))
+			victim.add_genetic_condition(pick(spasm_disabilities))
 
 	var/datum/ability_handler/psionics/psi = victim.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)

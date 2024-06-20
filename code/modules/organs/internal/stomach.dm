@@ -119,7 +119,7 @@
 		var/alcohol_volume = REAGENT_VOLUME(ingested, /decl/material/liquid/ethanol)
 
 		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
-		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
+		if(alcohol_threshold_met && owner.has_genetic_condition(GENE_COND_EPILEPSY) && prob(20))
 			owner.seizure()
 
 		// Alcohol counts as double volume for the purposes of vomit probability

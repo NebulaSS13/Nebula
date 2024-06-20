@@ -66,7 +66,7 @@
 	if(molt == 5)
 		if(do_after(nymph, 10 SECONDS, nymph, FALSE))
 			var/mob/living/carbon/human/H = new(get_turf(usr), SPECIES_MANTID_ALATE)
-			H.dna.lineage = nymph.dna.lineage
+			H.set_gyne_lineage(nymph.get_gyne_lineage())
 			H.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [H.get_gyne_name()]"
 			H.nutrition = nymph.nutrition * 0.25 // Homgry after molt.
 			nymph.mind.transfer_to(H)

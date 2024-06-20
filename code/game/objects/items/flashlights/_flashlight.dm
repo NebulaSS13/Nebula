@@ -100,7 +100,7 @@
 	if(on && user.get_target_zone() == BP_EYES && target.should_have_organ(BP_HEAD))
 
 		add_fingerprint(user)
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
+		if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
 
 		for(var/slot in global.standard_headgear_slots)
@@ -146,7 +146,7 @@
 		if(vision.owner.stat == DEAD || H.is_blind())	//mob is dead or fully blind
 			to_chat(user, SPAN_WARNING("\The [H]'s pupils do not react to the light!"))
 			return
-		if(MUTATION_XRAY in H.mutations)
+		if(H.has_genetic_condition(GENE_COND_XRAY))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils give an eerie glow!"))
 		if(vision.damage)
 			to_chat(user, SPAN_WARNING("There's visible damage to [H]'s [vision.name]!"))

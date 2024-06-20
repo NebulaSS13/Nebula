@@ -31,8 +31,9 @@
 	if(ismob(obj))
 		var/mob/victim = obj
 		victim.radiation += 50
-		randmutb(victim)
-		domutcheck(victim, null)
+	if(ismob(obj))
+		var/mob/mob = obj
+		mob.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/disability)))
 	spawn(0)
 		qdel(src)
 

@@ -198,7 +198,8 @@
 		if(prob(30))
 			toggle_safety()
 			return 1
-	if((MUTATION_CLUMSY in M.mutations) && prob(40)) //Clumsy handling
+
+	if(M.has_genetic_condition(GENE_COND_CLUMSY) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
 		if(P)
 			var/pew_loc = pick(BP_L_FOOT, BP_R_FOOT)

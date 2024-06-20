@@ -59,7 +59,7 @@
 	if (root_bodytype && bodytemperature < root_bodytype.cold_discomfort_level)
 		tally += (root_bodytype.cold_discomfort_level - bodytemperature) / 10 * 1.75
 
-	if(mRun in mutations)
+	if(has_genetic_condition(GENE_COND_RUNNING))
 		tally = 0
 
 	return (tally+get_config_value(/decl/config/num/movement_human))

@@ -25,7 +25,7 @@
 		icon_state = "[icon_state]-burnt"
 
 /obj/item/flash/proc/clown_check(var/mob/user)
-	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(user && user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
 		user.try_unequip(src)
 		return 0

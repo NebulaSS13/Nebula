@@ -68,7 +68,7 @@ There are several things that need to be remembered:
 		update_equipment_overlay(slot_wear_suit_str)
 
 >	There are also these special cases:
-		update_mutations()	//handles updating your appearance for certain mutations.  e.g TK head-glows
+		update_genetic_conditions()	//handles updating your appearance for certain mutations.  e.g TK head-glows
 		update_damage_overlays()	//handles damage overlays for brute/burn damage //(will rename this when I geta round to it)
 		update_body()	//Handles updating your mob's icon to reflect their gender/race/complexion etc
 		update_hair()	//Handles updating your hair overlay (used to be update_face, but mouth and
@@ -103,7 +103,7 @@ Please contact me on #coderbus IRC. ~Carn x
 */
 
 /mob/living/carbon/human/refresh_visible_overlays()
-	update_mutations(FALSE)
+	update_genetic_conditions(FALSE)
 	update_body(FALSE)
 	update_skin(FALSE)
 	update_underwear(FALSE)
@@ -273,7 +273,7 @@ Please contact me on #coderbus IRC. ~Carn x
 			continue
 		part.update_icon() // This wil regenerate their icon if needed, and more importantly set their cache key.
 		. += part._icon_cache_key
-	. += "husked_[!!is_husked()]"
+	. += "husked_[!!has_genetic_condition(GENE_COND_HUSK)]"
 	. = JOINTEXT(.)
 
 //BASE MOB SPRITE
@@ -315,7 +315,7 @@ Please contact me on #coderbus IRC. ~Carn x
 			else
 				stand_icon.Blend(temp, ICON_OVERLAY)
 		//Handle husk overlay.
-		if(is_husked())
+		if(has_genetic_condition(GENE_COND_HUSK))
 			var/husk_icon = root_bodytype.get_husk_icon(src)
 			if(husk_icon)
 				var/icon/mask = new(stand_icon)
@@ -365,24 +365,13 @@ Please contact me on #coderbus IRC. ~Carn x
 	// todo: make this use bodytype
 	set_current_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)
 
-/mob/living/carbon/human/update_mutations(var/update_icons=1)
-
-	var/image/standing	= overlay_image('icons/effects/genetics.dmi', flags=RESET_COLOR)
-	var/add_image = 0
-	var/g = "m"
-	if(gender == FEMALE)	g = "f"
-	// DNA2 - Drawing underlays.
-	var/list/all_genes = decls_repository.get_decls_of_subtype(/decl/gene)
-	for(var/gene_type in all_genes)
-		var/decl/gene/gene = all_genes[gene_type]
-		if(!gene.block)
-			continue
-		if(gene.is_active(src))
-			var/underlay=gene.OnDrawUnderlays(src,g)
-			if(underlay)
-				standing.underlays += underlay
-				add_image = 1
-	set_current_mob_overlay(HO_MUTATIONS_LAYER, (add_image ? standing : null), update_icons)
+/mob/living/carbon/human/update_genetic_conditions(var/update_icons=1)
+	var/list/condition_overlays = null
+	for(var/decl/genetic_condition/condition as anything in get_genetic_conditions())
+		var/condition_overlay = condition.get_mob_overlay()
+		if(condition_overlay)
+			LAZYADD(condition_overlays, condition_overlay)
+	set_current_mob_overlay(HO_CONDITION_LAYER, condition_overlays, update_icons)
 
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv

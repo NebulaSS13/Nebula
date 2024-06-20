@@ -271,15 +271,7 @@
 	if(LAZYACCESS(M.chem_doses, type) > 10)
 		ADJ_STATUS(M, STAT_DIZZY, 5)
 		ADJ_STATUS(M, STAT_JITTER, 5)
-	var/needs_update = M.mutations.len > 0
-	M.mutations.Cut()
-	M.disabilities = 0
-	M.sdisabilities = 0
-	if(needs_update && ishuman(M))
-		M.dna.ResetUI()
-		M.dna.ResetSE()
-		domutcheck(M, null, MUTCHK_FORCED)
-		M.update_icon()
+	M.reset_genetic_conditions()
 
 /decl/material/liquid/adrenaline
 	name = "adrenaline"

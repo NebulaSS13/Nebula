@@ -247,10 +247,10 @@
 	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
 
 /mob/proc/is_blind()
-	return ((sdisabilities & BLINDED) || incapacitated(INCAPACITATION_KNOCKOUT) || HAS_STATUS(src, STAT_BLIND))
+	return (has_genetic_condition(GENE_COND_BLINDED) || incapacitated(INCAPACITATION_KNOCKOUT) || HAS_STATUS(src, STAT_BLIND))
 
 /mob/proc/is_deaf()
-	return ((sdisabilities & DEAFENED) || incapacitated(INCAPACITATION_KNOCKOUT) || HAS_STATUS(src, STAT_DEAF))
+	return (has_genetic_condition(GENE_COND_DEAFENED) || incapacitated(INCAPACITATION_KNOCKOUT) || HAS_STATUS(src, STAT_DEAF))
 
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)
@@ -1292,6 +1292,9 @@
 /mob/proc/get_unique_enzymes()
 	return
 
+/mob/proc/set_unique_enzymes(value)
+	return
+
 /mob/proc/get_blood_type()
 	return
 
@@ -1327,6 +1330,31 @@
 /mob/proc/swap_hand()
 	SHOULD_CALL_PARENT(TRUE)
 
+/mob/proc/set_skin_tone(value)
+	return
+
+/mob/proc/get_skin_tone(value)
+	return
+
+/mob/proc/force_update_limbs()
+	return
+
+/mob/proc/update_eyes(update_icons = TRUE)
+	var/obj/item/organ/internal/eyes/eyes = get_organ((get_bodytype()?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	if(eyes)
+		eyes.update_colour()
+		if(update_icons)
+			queue_icon_update()
+
+/mob/proc/has_genetic_information()
+	if(isSynthetic())
+		return FALSE
+	var/decl/bodytype/bodytype = get_bodytype()
+	if(bodytype?.body_flags & BODY_FLAG_NO_DNA)
+		return FALSE
+	return TRUE
+
 /mob/living/proc/get_butchery_product_name()
 	var/decl/butchery_data/butchery_decl = GET_DECL(butchery_data)
 	. = butchery_decl?.meat_name || name
+

@@ -64,10 +64,10 @@
 		cameranet.update_visibility(src, FALSE)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
-	if(sdisabilities & BLINDED)
+	if(has_genetic_condition(GENE_COND_BLINDED))
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
-	if(src.sdisabilities & DEAFENED)
+	if(has_genetic_condition(GENE_COND_DEAFENED))
 		src.set_status(STAT_DEAF, 1)
 
 	//update the state of modules and components here
@@ -199,7 +199,7 @@
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		else
 			clear_fullscreen("blind")
-			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+			set_fullscreen(has_genetic_condition(GENE_COND_NEARSIGHTED), "impaired", /obj/screen/fullscreen/impaired, 1)
 			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 
@@ -209,7 +209,7 @@
 /mob/living/silicon/robot/handle_vision()
 	..()
 
-	if (src.stat == DEAD || (MUTATION_XRAY in mutations) || (src.sight_mode & BORGXRAY))
+	if (src.stat == DEAD || has_genetic_condition(GENE_COND_XRAY) || (src.sight_mode & BORGXRAY))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		set_see_in_dark(8)
 		set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)

@@ -96,10 +96,8 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	//Genetic Corruption
 	if(vsc.contaminant_control.GENETIC_CORRUPTION)
 		if(rand(1,10000) < vsc.contaminant_control.GENETIC_CORRUPTION)
-			randmutb(src)
+			add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/disability)))
 			to_chat(src, "<span class='danger'>High levels of toxins cause you to spontaneously mutate!</span>")
-			domutcheck(src,null)
-
 
 /mob/living/carbon/human/proc/burn_eyes()
 	var/obj/item/organ/internal/eyes/E = get_organ(BP_EYES, /obj/item/organ/internal/eyes)

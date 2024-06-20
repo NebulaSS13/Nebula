@@ -39,7 +39,7 @@
 	. = ..()
 
 /obj/item/plate/tray/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if((MUTATION_CLUMSY in user.mutations) && prob(50)) // There is a better way to do this but I'll be damned if I'm the one to fix it.
+	if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50)) // There is a better way to do this but I'll be damned if I'm the one to fix it.
 		to_chat(user, SPAN_DANGER("You accidentally slam yourself with \the [src]!"))
 		SET_STATUS_MAX(user, STAT_WEAK, 1)
 		user.take_organ_damage(2)

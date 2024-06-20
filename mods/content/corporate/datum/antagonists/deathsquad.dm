@@ -79,7 +79,6 @@
 		var/decl/pronouns/pronouns = pick(H.species.available_pronouns)
 		H.set_gender(pronouns.name)
 		H.set_age(rand(25,45))
-		H.dna.ready_dna(H)
 
 /decl/special_role/deathsquad/create_antagonist()
 	if(..() && !deployed)

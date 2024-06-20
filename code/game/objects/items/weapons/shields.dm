@@ -185,7 +185,7 @@
 	return base_block_chance
 
 /obj/item/shield/energy/attack_self(mob/user)
-	if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(user, SPAN_DANGER("You beat yourself in the head with [src]."))
 		if(isliving(user))
 			var/mob/living/M = user

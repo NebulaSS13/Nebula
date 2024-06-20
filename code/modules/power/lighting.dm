@@ -333,7 +333,7 @@
 			if(istype(G) && G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
 				prot = TRUE
 
-		if(prot > 0 || (MUTATION_COLD_RESISTANCE in user.mutations))
+		if(prot > 0 || user.has_genetic_condition(GENE_COND_COLD_RESISTANCE))
 			to_chat(user, "You remove the [get_fitting_name()].")
 		else if(istype(user) && user.is_telekinetic())
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")

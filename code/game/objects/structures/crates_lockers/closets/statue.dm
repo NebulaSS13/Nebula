@@ -22,7 +22,7 @@
 			L.client.perspective = EYE_PERSPECTIVE
 			L.client.eye = src
 		L.forceMove(src)
-		L.set_sdisability(MUTED)
+		L.add_genetic_condition(GENE_COND_MUTED)
 		current_health = L.current_health + 100 //stoning damaged mobs will result in easier to shatter statues
 		intialTox = L.get_damage(TOX)
 		intialFire = L.get_damage(BURN)
@@ -64,7 +64,7 @@
 
 	for(var/mob/living/M in src)
 		M.dropInto(forced_loc)
-		M.unset_sdisability(MUTED)
+		M.remove_genetic_condition(GENE_COND_MUTED)
 		M.take_overall_damage((M.current_health - current_health - 100),0) //any new damage the statue incurred is transfered to the mob
 		if(M.client)
 			M.client.eye = M.client.mob

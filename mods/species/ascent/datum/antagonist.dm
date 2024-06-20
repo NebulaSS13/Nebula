@@ -17,10 +17,10 @@
 
 /decl/special_role/hunter/update_antag_mob(var/datum/mind/player, var/preserve_appearance)
 	. = ..()
-	var lineage = create_gyne_name();
+	var/lineage = create_gyne_name()
 	if(ishuman(player.current))
 		var/mob/living/carbon/human/H = player.current
-		H.dna.lineage = lineage; // This makes all antag ascent have the same lineage on get_random_name.
+		H.set_gyne_lineage(lineage) // This makes all antag ascent have the same lineage on get_random_name.
 		if(!leader && is_species_whitelisted(player.current, SPECIES_MANTID_GYNE))
 			leader = player
 			if(H.species.get_root_species_name() != SPECIES_MANTID_GYNE)

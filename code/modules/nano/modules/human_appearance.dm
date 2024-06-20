@@ -43,38 +43,32 @@
 	if(href_list["skin_color"] && can_change_skin_color())
 		var/new_skin = input(usr, "Choose your character's skin colour: ", "Skin Color", owner.get_skin_colour()) as color|null
 		if(new_skin && can_still_topic(state) && owner.set_skin_colour(new_skin))
-			update_dna()
 			return TRUE
 
 	if(href_list["hair"])
 		var/decl/sprite_accessory/hair = locate(href_list["hair"])
 		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR)) && SET_HAIR_STYLE(owner, hair.type, FALSE))
-			update_dna()
 			return TRUE
 
 	if(href_list["hair_color"] && can_change(APPEARANCE_HAIR_COLOR))
 		var/new_hair = input("Please select hair color.", "Hair Color", GET_HAIR_COLOUR(owner)) as color|null
 		if(new_hair && can_still_topic(state) && SET_HAIR_COLOUR(owner, new_hair, FALSE))
-			update_dna()
 			return TRUE
 
 	if(href_list["facial_hair"])
 		var/decl/sprite_accessory/facial_hair = locate(href_list["facial_hair"])
 		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR)) && SET_FACIAL_HAIR_STYLE(owner, facial_hair.type, FALSE))
-			update_dna()
 			return TRUE
 
 	if(href_list["facial_hair_color"] && can_change(APPEARANCE_FACIAL_HAIR_COLOR))
 		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", GET_FACIAL_HAIR_COLOUR(owner)) as color|null
 		if(new_facial && can_still_topic(state) && SET_FACIAL_HAIR_COLOUR(owner, new_facial, FALSE))
-			update_dna()
 			return TRUE
 
 	if(href_list["eye_color"])
 		if(can_change(APPEARANCE_EYE_COLOR))
 			var/new_eyes = input("Please select eye color.", "Eye Color", owner.get_eye_colour()) as color|null
 			if(new_eyes && can_still_topic(state) && owner.set_eye_colour(new_eyes))
-				update_dna()
 				return TRUE
 
 	return FALSE
@@ -142,10 +136,6 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-
-/datum/nano_module/appearance_changer/proc/update_dna()
-	if(owner && (flags & APPEARANCE_UPDATE_DNA))
-		owner.update_dna()
 
 /datum/nano_module/appearance_changer/proc/can_change(var/flag)
 	return owner && (flags & flag)

@@ -18,7 +18,7 @@
 	material = /decl/material/solid/organic/wood
 
 /obj/item/classic_baton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(user, SPAN_WARNING("You club yourself over the head."))
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
@@ -74,7 +74,7 @@
 		icon = 'icons/obj/items/weapon/telebaton.dmi'
 
 /obj/item/telebaton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(on && (MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(on && user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(user, SPAN_DANGER("You club yourself over the head."))
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))

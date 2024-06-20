@@ -3,12 +3,12 @@
 	status_flags = GODMODE|CANPUSH
 	virtual_mob = null
 
-/mob/living/carbon/human/dummy/mannequin/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+/mob/living/carbon/human/dummy/mannequin/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
 	. = ..()
 	STOP_PROCESSING(SSmobs, src)
 	global.human_mob_list -= src
 
-/mob/living/carbon/human/dummy/selfdress/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+/mob/living/carbon/human/dummy/selfdress/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
@@ -22,8 +22,8 @@
 /mob/living/carbon/human/corpse/get_death_message(gibbed)
 	return SKIP_DEATH_MESSAGE
 
-/mob/living/carbon/human/corpse/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype, obj/abstract/landmark/corpse/corpse)
-	. = ..(mapload, species_name, new_dna, new_bodytype) // do not pass the corpse landmark
+/mob/living/carbon/human/corpse/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance, obj/abstract/landmark/corpse/corpse)
+	. = ..(mapload, species_name, supplied_appearance) // do not pass the corpse landmark
 	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
 	if(culture)
 		var/newname = culture.get_random_name(src, gender, species.name)
@@ -65,7 +65,7 @@
 /mob/living/carbon/human/monkey
 	gender = PLURAL
 
-/mob/living/carbon/human/monkey/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+/mob/living/carbon/human/monkey/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
 	if(gender == PLURAL)
 		gender = pick(MALE, FEMALE)
 	species_name = SPECIES_MONKEY

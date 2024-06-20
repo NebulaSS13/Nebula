@@ -38,7 +38,6 @@
 	if(getName)
 		H.real_name = getName
 		H.SetName(getName)
-		H.dna.real_name = getName
 		if(H.mind)
 			H.mind.name = H.name
 	return TRUE

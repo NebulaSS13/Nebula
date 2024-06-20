@@ -24,7 +24,7 @@
 			H.adjust_nutrition(-1 * egg_metabolic_cost)
 			H.visible_message(SPAN_NOTICE("\icon[H] [H] carelessly deposits an egg on \the [get_turf(src)]."))
 			var/obj/structure/insectoid_egg/egg = new(get_turf(H)) // splorp
-			egg.lineage = H.dna.lineage
+			egg.lineage = H.get_gyne_lineage()
 
 /obj/item/organ/external/foot/insectoid/mantid
 	name = "left tail tip"

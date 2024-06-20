@@ -40,21 +40,6 @@
 		SSticker.mode.check_win()
 	species.handle_death(src)
 
-/mob/living/carbon/human/proc/is_husked()
-	return (MUTATION_HUSK in mutations)
-
-/mob/living/carbon/human/proc/make_husked()
-	if(is_husked())
-		return
-
-	SET_FACIAL_HAIR_STYLE(src, /decl/sprite_accessory/facial_hair/shaved, TRUE)
-	SET_HAIR_STYLE(src, /decl/sprite_accessory/hair/bald, FALSE)
-
-	mutations.Add(MUTATION_HUSK)
-	for(var/obj/item/organ/external/E in get_external_organs())
-		E.status |= ORGAN_DISFIGURED
-	update_body(1)
-
 /mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())
 		if(!limb.parent_organ) // don't dismember root

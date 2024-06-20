@@ -41,12 +41,12 @@
 
 /obj/item/organ/internal/eyes/serpentid/Initialize()
 	. = ..()
-	if(dna)
-		color = rgb(dna.GetUIValue(DNA_UI_EYES_R), dna.GetUIValue(DNA_UI_EYES_G), dna.GetUIValue(DNA_UI_EYES_B))
+	if(owner)
+		color = owner.get_eye_colour()
 
-/obj/item/organ/internal/eyes/insectoid/serpentid/set_dna(var/datum/dna/new_dna)
+/obj/item/organ/internal/eyes/insectoid/serpentid/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
 	. = ..()
-	color = rgb(new_dna.GetUIValue(DNA_UI_EYES_R), new_dna.GetUIValue(DNA_UI_EYES_G), new_dna.GetUIValue(DNA_UI_EYES_B))
+	color = supplied_appearance?.eye_color
 
 /obj/item/organ/internal/liver/insectoid/serpentid
 	name = "toxin filter"

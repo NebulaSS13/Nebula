@@ -58,10 +58,9 @@
 				to_chat(M, SPAN_DANGER("Your [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
 
 				// Don't cure being nearsighted
-				if(!(M.disabilities & NEARSIGHTED))
-					M.disabilities |= NEARSIGHTED
-					spawn(100)
-						M.disabilities &= ~NEARSIGHTED
+				if(!M.has_genetic_condition(GENE_COND_NEARSIGHTED))
+					M.add_genetic_condition(GENE_COND_NEARSIGHTED, 10 SECONDS)
+
 		if(toggleable && active)
 			set_active(FALSE)
 

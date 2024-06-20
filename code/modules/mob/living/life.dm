@@ -435,14 +435,14 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(stat == DEAD)
 		SET_STATUS_MAX(src, STAT_BLIND, 0)
-	if(stat != CONSCIOUS && (sdisabilities & BLINDED)) //blindness from disability or unconsciousness doesn't get better on its own
+	if(stat != CONSCIOUS && has_genetic_condition(GENE_COND_BLINDED)) //blindness from disability or unconsciousness doesn't get better on its own
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 	else
 		return TRUE
 	return FALSE
 
 /mob/living/proc/handle_impaired_hearing()
-	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
+	if(has_genetic_condition(GENE_COND_DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
 		SET_STATUS_MAX(src, STAT_TINNITUS, 2)
 
 /mob/living/proc/should_do_hud_updates()
@@ -493,7 +493,7 @@
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
 		clear_fullscreen("blind")
-		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+		set_fullscreen(has_genetic_condition(GENE_COND_NEARSIGHTED), "impaired", /obj/screen/fullscreen/impaired, 1)
 		set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)

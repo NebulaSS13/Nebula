@@ -490,11 +490,12 @@ var/global/list/bodytypes_by_category = list()
 	if(tail_data)
 		var/obj/item/organ/external/tail/tail_organ = LAZYACCESS(tail_data, "path")
 		if(ispath(tail_organ, /obj/item/organ/external/tail))
-			var/use_species = get_user_species_for_validation()
+			var/decl/species/use_species = get_user_species_for_validation()
 			if(use_species)
-				var/datum/dna/dummy_dna = new
-				dummy_dna.species = use_species
-				tail_organ = new tail_organ(null, null, dummy_dna, src)
+				var/datum/mob_snapshot/dummy_appearance = new
+				dummy_appearance.root_species  = use_species
+				dummy_appearance.root_bodytype = src
+				tail_organ = new tail_organ(null, null, dummy_appearance)
 				var/tail_icon  = tail_organ.get_tail_icon()
 				var/tail_state = tail_organ.get_tail()
 				if(tail_icon && tail_state)
@@ -506,7 +507,7 @@ var/global/list/bodytypes_by_category = list()
 					if(!tail_state)
 						. += "missing tail state"
 				qdel(tail_organ)
-				qdel(dummy_dna)
+				qdel(dummy_appearance)
 			else
 				. += "could not find a species with this bodytype available for tail organ validation"
 		else
@@ -573,12 +574,15 @@ var/global/list/bodytypes_by_category = list()
 				qdel(O)
 
 	//Create missing limbs
+	var/datum/mob_snapshot/supplied_data = H.get_mob_snapshot(force = TRUE)
+	supplied_data.root_bodytype = src // This may not have been set on the target mob torso yet.
+
 	for(var/limb_type in has_limbs)
 		if(GET_EXTERNAL_ORGAN(H, limb_type)) //Skip existing
 			continue
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
-		var/obj/item/organ/external/E = new limb_path(H, null, H.dna, src) //explicitly specify the dna and bodytype
+		var/obj/item/organ/external/E = new limb_path(H, null, supplied_data) //explicitly specify the dna and bodytype
 		if(E.parent_organ)
 			var/list/parent_organ_data = has_limbs[E.parent_organ]
 			parent_organ_data["has_children"]++
@@ -589,7 +593,7 @@ var/global/list/bodytypes_by_category = list()
 		if(GET_INTERNAL_ORGAN(H, organ_tag)) //Skip existing
 			continue
 		var/organ_type = has_organ[organ_tag]
-		var/obj/item/organ/O = new organ_type(H, null, H.dna, src)
+		var/obj/item/organ/O = new organ_type(H, null, supplied_data)
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
@@ -654,7 +658,7 @@ var/global/list/bodytypes_by_category = list()
 	set_default_sprite_accessories(mannequin)
 	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
 	mannequin.force_update_limbs()
-	mannequin.update_mutations(0)
+	mannequin.update_genetic_conditions(0)
 	mannequin.update_body(0)
 	mannequin.update_underwear(0)
 	mannequin.update_hair(0)
@@ -697,9 +701,11 @@ var/global/list/bodytypes_by_category = list()
 			qdel(innard)
 
 	// Install any necessary new organs.
+	var/datum/mob_snapshot/supplied_data = limb.owner.get_mob_snapshot(force = TRUE)
+	supplied_data.root_bodytype = src
 	for(var/organ_tag in replacing_organs)
 		var/organ_type = replacing_organs[organ_tag]
-		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, limb.owner.dna, src)
+		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, supplied_data)
 		limb.owner.add_organ(new_innard, GET_EXTERNAL_ORGAN(limb.owner, new_innard.parent_organ), FALSE, FALSE)
 
 /decl/bodytype/proc/get_body_temperature_threshold(var/threshold)
@@ -745,7 +751,7 @@ var/global/list/bodytypes_by_category = list()
 	for(var/species_name in get_all_species())
 		var/decl/species/species = get_species_by_key(species_name)
 		if(src in species.available_bodytypes)
-			return species_name
+			return species
 
 // Defined as a global so modpacks can add to it.
 var/global/list/limbs_with_nails = list(

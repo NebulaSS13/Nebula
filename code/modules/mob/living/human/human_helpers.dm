@@ -218,9 +218,7 @@
 			to_chat(src, "<span class='danger'>You go blind!</span>")
 			SET_STATUS_MAX(src, STAT_BLIND, 5)
 			SET_STATUS_MAX(src, STAT_BLURRY, 5)
-			disabilities |= NEARSIGHTED
-			spawn(100)
-				disabilities &= ~NEARSIGHTED
+			add_genetic_condition(GENE_COND_NEARSIGHTED, 10 SECONDS)
 
 /mob/living/carbon/human
 	var/list/cloaking_sources
@@ -287,11 +285,6 @@
 
 	UNSETEMPTY(cloaking_sources)
 	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
-
-/mob/living/carbon/human/set_sdisability(sdisability)
-	if(isSynthetic())
-		return // Can't cure disabilites, so don't give them.
-	..()
 
 /mob/living/carbon/human/proc/has_meson_effect()
 	var/datum/global_hud/global_hud = get_global_hud()

@@ -21,7 +21,7 @@
 
 /obj/item/robotanalyzer/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		user.visible_message(
 			SPAN_WARNING("\The [user] has analyzed the floor's vitals!"),
 			self_message = SPAN_WARNING("You try to analyze the floor's vitals!"))

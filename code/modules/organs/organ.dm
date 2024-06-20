@@ -19,8 +19,8 @@
 	var/vital_to_owner                     // Cache var for vitality to current owner.
 
 	// Reference data.
+	var/datum/mob_snapshot/organ_appearance
 	var/mob/living/carbon/human/owner      // Current mob owning the organ.
-	var/datum/dna/dna                      // Original DNA.
 	var/decl/species/species               // Original species.
 	var/decl/bodytype/bodytype             // Original bodytype.
 	var/list/ailments                      // Current active ailments if any.
@@ -46,7 +46,7 @@
 		do_uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own/contain them
 	species = null
 	bodytype = null
-	QDEL_NULL(dna)
+	QDEL_NULL(organ_appearance)
 	QDEL_NULL_LIST(ailments)
 	return ..()
 
@@ -63,43 +63,42 @@
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN) || (status & ORGAN_DEAD))
 
 //Third argument may be a dna datum; if null will be set to holder's dna.
-/obj/item/organ/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
+/obj/item/organ/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance)
 	. = ..(mapload, material_key)
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
-	setup(given_dna, new_bodytype)
+	setup_organ(supplied_appearance)
 	initialize_reagents()
 
-/obj/item/organ/proc/setup(datum/dna/given_dna, decl/bodytype/new_bodytype)
+/obj/item/organ/proc/setup_organ(datum/mob_snapshot/supplied_appearance)
 	//Null DNA setup
-	if(!given_dna)
-		if(dna)
-			given_dna = dna //Use existing if possible
+	if(!supplied_appearance)
+		if(organ_appearance)
+			supplied_appearance = organ_appearance //Use existing if possible
 		else if(owner)
-			if(owner.dna)
-				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
+			if(owner)
+				supplied_appearance = owner.get_mob_snapshot() //Grab our owner's appearance info if we don't have any, and they have
 			else
-				//The owner having no DNA can be a valid reason to keep our dna null in some cases
-				log_debug("obj/item/organ/setup(): [src] had null dna, with a owner with null dna!")
-				dna = null //#TODO: Not sure that's really legal
+				//The owner having no DNA can be a valid reason to keep our appearance data null in some cases
+				log_debug("obj/item/organ/setup(): [src] had null appearance data, with a owner with null appearance data!")
+				organ_appearance = null //#TODO: Not sure that's really legal
 				return
 		else
-			//If we have NO OWNER and given_dna, just make one up for consistency
-			given_dna = new/datum/dna()
-			given_dna.check_integrity() //Defaults everything
+			//If we have NO OWNER and supplied_appearance, just make one up for consistency
+			supplied_appearance = new
 	// order of bodytype preference: new, current, owner, species
-	new_bodytype ||= bodytype || owner?.get_bodytype()
+	var/decl/bodytype/new_bodytype = supplied_appearance?.root_bodytype || bodytype || owner?.get_bodytype()
 	if(ispath(new_bodytype, /decl/bodytype))
 		new_bodytype = GET_DECL(new_bodytype)
 	if(!new_bodytype)
-		// this can be fine if dna with species is passed
+		// this can be fine if appearance data with species is passed
 		log_debug("obj/item/organ/setup(): [src] had null bodytype, with an owner with null bodytype!")
 	bodytype = new_bodytype // used in later setup procs
-	if((bodytype?.body_flags & BODY_FLAG_NO_DNA) || !given_dna)
-		// set_bodytype will unset invalid dna anyway, so set_dna(null) is unnecessary
-		set_species(given_dna?.species || owner?.get_species() || global.using_map.default_species)
+	if((bodytype?.body_flags & BODY_FLAG_NO_DNA) || !supplied_appearance)
+		// set_bodytype will unset invalid appearance data anyway, so set_dna(null) is unnecessary
+		set_species(owner?.get_species() || global.using_map.default_species)
 	else
-		set_dna(given_dna)
+		copy_from_mob_snapshot(supplied_appearance)
 
 //Called on initialization to add the neccessary reagents
 
@@ -117,15 +116,17 @@
 	if(reagent_to_add)
 		add_to_reagents(reagent_to_add, reagents.maximum_volume)
 
-/obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
+/obj/item/organ/proc/copy_from_mob_snapshot(var/datum/mob_snapshot/supplied_appearance)
 	if(istype(bodytype) && (bodytype.body_flags & BODY_FLAG_NO_DNA))
-		QDEL_NULL(dna)
+		QDEL_NULL(organ_appearance)
 		return
-	if(new_dna != dna) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
-		QDEL_NULL(dna)
-		dna = new_dna.Clone()
-	blood_DNA = list(dna.unique_enzymes = dna.b_type)
-	set_species(dna.species)
+	if(supplied_appearance != organ_appearance) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
+		QDEL_NULL(organ_appearance)
+		organ_appearance = supplied_appearance.Clone()
+	blood_DNA = list(organ_appearance.unique_enzymes = organ_appearance.blood_type)
+	set_species(organ_appearance.root_species?.name || global.using_map.default_species)
+	if(organ_appearance.root_bodytype)
+		set_bodytype(organ_appearance.root_bodytype)
 
 /obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
@@ -153,7 +154,7 @@
 		reagents.clear_reagents()
 		populate_reagents()
 	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
-		QDEL_NULL(dna)
+		QDEL_NULL(organ_appearance)
 	reset_status()
 	return TRUE
 
@@ -312,9 +313,9 @@
 		return
 	if(BP_IS_PROSTHETIC(src))
 		return
-	if(dna)
+	if(organ_appearance)
 		if(!rejecting)
-			if(owner.is_blood_incompatible(dna.b_type))
+			if(owner.is_blood_incompatible(organ_appearance.blood_type))
 				rejecting = 1
 		else
 			rejecting++ //Rejection severity increases over time.
@@ -328,7 +329,7 @@
 						germ_level += rand(2,3)
 					if(501 to INFINITY)
 						germ_level += rand(3,5)
-						var/decl/blood_type/blood_decl = dna?.b_type && get_blood_type_by_name(dna.b_type)
+						var/decl/blood_type/blood_decl = organ_appearance?.blood_type && get_blood_type_by_name(organ_appearance.blood_type)
 						if(istype(blood_decl))
 							owner.add_to_reagents(blood_decl.transfusion_fail_reagent, round(rand(2,4) * blood_decl.transfusion_fail_percentage))
 						else

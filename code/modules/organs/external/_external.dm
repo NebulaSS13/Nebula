@@ -81,6 +81,13 @@
 	var/image/hud_damage_image
 	var/fingerprint
 
+/obj/item/organ/external/proc/set_fingerprint(value)
+	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !BP_IS_PROSTHETIC(src))
+		fingerprint = value
+	else
+		for(var/obj/item/organ/external/E in children)
+			E.set_fingerprint(value)
+
 /obj/item/organ/external/proc/get_fingerprint()
 
 	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !BP_IS_PROSTHETIC(src))
@@ -102,7 +109,7 @@
 		F.completeness = rand(10,90)
 		forensics.add_data(/datum/forensics/fingerprints, F)
 
-/obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
+/obj/item/organ/external/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL && isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
@@ -144,8 +151,16 @@
 	if(.)
 		update_icon(TRUE)
 
-/obj/item/organ/external/set_dna(var/datum/dna/new_dna)
+/obj/item/organ/external/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
 	_icon_cache_key = null
+	if(organ_tag in supplied_appearance?.sprite_accessories)
+		var/list/sprite_cats = supplied_appearance.sprite_accessories[organ_tag]
+		for(var/category in sprite_cats)
+			var/list/marklist = sprite_cats[category]
+			for(var/accessory in marklist)
+				set_sprite_accessory(accessory, null, marklist[accessory], skip_update = TRUE)
+	else
+		clear_sprite_accessories(skip_update = TRUE)
 	return ..()
 
 /obj/item/organ/external/reset_status()
@@ -1607,6 +1622,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(default_results)
 		. = default_results
 
+/obj/item/organ/external/proc/get_sprite_accessories(copy = FALSE)
+	if(copy)
+		return _sprite_accessories?.Copy()
+	return _sprite_accessories
+
 /obj/item/organ/external/proc/skeletonize(mob/living/donor)
 	if(limb_flags & ORGAN_FLAG_SKELETAL)
 		return
@@ -1622,3 +1642,4 @@ Note that amputating the affected organ does in fact remove the infection from t
 	status |= (ORGAN_DEAD|ORGAN_BRITTLE)
 	_sprite_accessories = null
 	update_icon()
+
