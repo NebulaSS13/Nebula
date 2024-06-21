@@ -27,6 +27,7 @@
 	blood_overlays      = 'mods/species/drakes/icons/blood.dmi'
 	eye_icon            = 'mods/species/drakes/icons/eyes.dmi'
 	icon_template       = 'mods/species/drakes/icons/template.dmi'
+	skeletal_icon       = 'mods/species/drakes/icons/skeleton.dmi'
 	bodytype_category   = BODYTYPE_GRAFADREKA
 	eye_blend           = ICON_MULTIPLY
 	limb_blend          = ICON_MULTIPLY
