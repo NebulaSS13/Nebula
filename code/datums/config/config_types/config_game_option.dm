@@ -21,7 +21,7 @@
 		/decl/config/num/default_darksight_effectiveness,
 		/decl/config/toggle/grant_default_darksight,
 		/decl/config/num/expected_round_length,
-		/decl/config/toggle/allow_diagonal_movement,
+		/decl/config/toggle/on/allow_diagonal_movement,
 		/decl/config/toggle/expanded_alt_interactions,
 		/decl/config/toggle/ert_admin_call_only,
 		/decl/config/toggle/ghosts_can_possess_animals,
@@ -134,7 +134,7 @@
 	uid = "grant_default_darksight"
 	desc = "Whether or not all human mobs have very basic darksight by default."
 
-/decl/config/toggle/allow_diagonal_movement
+/decl/config/toggle/on/allow_diagonal_movement
 	uid = "allow_diagonal_movement"
 	desc = "Allow multiple input keys to be pressed for diagonal movement."
 
