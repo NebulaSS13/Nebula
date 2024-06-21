@@ -20,6 +20,7 @@
 	destroy_surroundings = 0
 	gene_damage = -1
 	butchery_data = /decl/butchery_data/synthetic
+	bleed_colour = SYNTH_BLOOD_COLOR
 
 	var/datum/effect/effect/system/trail/ion_trail
 

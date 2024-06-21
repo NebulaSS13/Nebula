@@ -1,3 +1,4 @@
+// todo: declize /datum/deity_item
 /datum/deity_item
 	var/name
 	var/desc

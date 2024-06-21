@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	unique = 1
 	carved = 2 // Don't carve it
+	can_dissolve_text = FALSE // Or dissolve it
 
 /obj/item/book/tome/attack_self(var/mob/user)
 	if(!iscultist(user))
@@ -86,7 +87,7 @@
 			damage = 2
 	visible_message("<span class='warning'>\The [src] slices open a finger and begins to chant and paint symbols on the floor.</span>", "<span class='notice'>[self]</span>", "You hear chanting.")
 	if(do_after(src, timer))
-		remove_blood_simple(cost * damage)
+		remove_blood(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
 		var/obj/effect/rune/R = new rune(T, get_blood_color(), get_blood_name())
@@ -102,32 +103,11 @@
 		return
 	..()
 
-/mob/proc/remove_blood_simple(var/blood)
-	return
-
-/mob/living/human/remove_blood_simple(var/blood)
-	if(should_have_organ(BP_HEART))
-		vessel.remove_any(blood)
-
-/mob/proc/get_blood_name()
-	return "blood"
-
-/mob/living/silicon/get_blood_name()
-	return "oil"
-
-/mob/living/human/get_blood_name()
-	if(species)
-		return species.get_blood_name(src)
-	return "blood"
-
-/mob/living/simple_animal/construct/get_blood_name()
-	return "ichor"
-
 /mob/proc/mob_needs_tome()
-	return 0
+	return FALSE
 
 /mob/living/human/mob_needs_tome()
-	return 1
+	return TRUE
 
 var/global/list/Tier1Runes = list(
 	/mob/proc/convert_rune,
@@ -288,7 +268,7 @@ var/global/list/Tier4Runes = list(
 		return
 
 	message_cult_communicate()
-	remove_blood_simple(3)
+	remove_blood(3)
 
 	var/input = input(src, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
 	if(!input)

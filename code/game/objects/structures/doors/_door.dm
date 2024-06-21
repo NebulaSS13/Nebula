@@ -210,9 +210,6 @@
 /obj/structure/door/walnut
 	material = /decl/material/solid/organic/wood/walnut
 
-/obj/structure/door/cult
-	material = /decl/material/solid/stone/cult
-
 /obj/structure/door/wood/saloon
 	material = /decl/material/solid/organic/wood
 	opacity = FALSE

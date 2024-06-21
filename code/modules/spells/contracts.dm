@@ -115,10 +115,6 @@
 /obj/item/contract/boon/wizard
 	contract_master = "\improper Wizard Academy"
 
-/obj/item/contract/boon/wizard/artificer
-	path = /spell/aoe_turf/conjure/construct
-	desc = "This contract has a passage dedicated to an entity known as 'Nar-Sie'."
-
 /obj/item/contract/boon/wizard/fireball
 	path = /spell/targeted/projectile/dumbfire/fireball
 	desc = "This contract feels warm to the touch."

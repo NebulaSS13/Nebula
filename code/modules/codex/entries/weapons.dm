@@ -12,10 +12,6 @@
 	it can be concealed in your pocket or bag."
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
-/datum/codex_entry/cultblade
-	associated_paths = list(/obj/item/sword/cultblade)
-	antag_text = "This sword is a powerful weapon, capable of severing limbs easily, if they are targeted. Nonbelievers are unable to use this weapon."
-
 /datum/codex_entry/spear
 	associated_paths = list(/obj/item/twohanded/spear)
 	associated_strings = list("spear")

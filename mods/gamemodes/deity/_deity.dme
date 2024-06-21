@@ -11,6 +11,8 @@
 #include "overrides.dm"
 #include "extensions\deity_be_near.dm"
 #include "forms\forms.dm"
+// These should only load if cult is loaded.
+#ifdef GAMEMODE_PACK_CULT
 #include "forms\narsie\items.dm"
 #include "forms\narsie\narsie.dm"
 #include "forms\narsie\structures.dm"
@@ -19,6 +21,7 @@
 #include "forms\narsie\deity_items\sacrificing.dm"
 #include "forms\narsie\deity_items\smithing.dm"
 #include "forms\narsie\spells\tear_veil.dm"
+#endif
 #include "forms\starlight\items.dm"
 #include "forms\starlight\mobs.dm"
 #include "forms\starlight\starlight.dm"
@@ -49,6 +52,7 @@
 #include "mobs\say.dm"
 #include "mobs\freelook\cultnet.dm"
 #include "mobs\freelook\mask.dm"
+#include "mobs\items\blood_crafting.dm"
 #include "mobs\items\deity_item.dm"
 #include "mobs\items\general.dm"
 #include "mobs\items\generic.dm"
@@ -68,6 +72,7 @@
 #include "spells\open_gateway.dm"
 #include "spells\vision.dm"
 #include "structures\altar.dm"
+#include "structures\blood_forge.dm"
 #include "structures\pylon.dm"
 #include "structures\structures.dm"
 #include "structures\trap.dm"

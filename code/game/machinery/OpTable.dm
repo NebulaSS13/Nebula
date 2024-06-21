@@ -133,3 +133,6 @@
 	. = ..()
 	if(stat & (NOPOWER|BROKEN))
 		suppressing = FALSE
+
+/obj/machinery/optable/get_surgery_surface_quality(mob/living/victim, mob/living/user)
+	return OPERATE_IDEAL

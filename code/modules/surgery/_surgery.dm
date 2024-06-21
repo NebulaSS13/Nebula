@@ -208,16 +208,13 @@ var/global/list/surgery_tool_exception_cache = list()
 			. -= 10
 		if(!target.current_posture.prone)
 			. -= 30
-		var/turf/T = get_turf(target)
-		if(locate(/obj/machinery/optable, T))
-			. -= 0
-		else if(locate(/obj/structure/bed, T))
-			. -= 5
-		else if(locate(/obj/structure/table, T))
-			. -= 10
-		else if(locate(/obj/effect/rune/, T))
-			. -= 10
+	var/turf/T = get_turf(target)
+	for(var/obj/interfering in T)
+		. += interfering.get_surgery_success_modifier(delicate)
 	. = max(., 0)
+
+/obj/proc/get_surgery_success_modifier(delicate)
+	return 0
 
 /proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/human/user)
 	if(!istype(user) || !istype(E)) return
@@ -322,22 +319,18 @@ var/global/list/surgery_tool_exception_cache = list()
 /obj/item/stack/handle_post_surgery()
 	use(1)
 
+/obj/proc/get_surgery_surface_quality(mob/living/victim)
+	return OPERATE_DENY
+
 //check if mob is lying down on something we can operate him on.
-/proc/can_operate(mob/living/M, mob/living/user)
-	var/turf/T = get_turf(M)
-	if(locate(/obj/machinery/optable, T))
-		. = OPERATE_IDEAL
-	else if(locate(/obj/structure/table, T))
-		. = OPERATE_OKAY
-	else if(locate(/obj/structure/bed, T))
-		. = OPERATE_PASSABLE
-	else if(locate(/obj/effect/rune, T))
-		. = OPERATE_PASSABLE
-	else
-		. = OPERATE_DENY
-	if(. != OPERATE_DENY && M == user)
-		var/hitzone = check_zone(user.get_target_zone(), M)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(M, M.get_active_held_item_slot())
+/proc/can_operate(mob/living/victim, mob/living/user)
+	var/turf/T = get_turf(victim)
+	for(var/obj/surface in T)
+		. = max(., surface.get_surgery_surface_quality(victim, user))
+	if(. != OPERATE_DENY && victim == user)
+		var/hitzone = check_zone(user.get_target_zone(), victim)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(victim, victim.get_active_held_item_slot())
+		// TODO: write some generalized helper for this that handles single-organ limbs, more-than-two-organ limbs, etc
 		if(E && (E.organ_tag == hitzone || E.parent_organ == hitzone))
 			to_chat(user, SPAN_WARNING("You can't operate on the same arm you're using to hold the surgical tool!"))
 			return OPERATE_DENY

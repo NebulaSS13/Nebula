@@ -42,8 +42,6 @@
 
 #define islizard(A) istype(A, /mob/living/simple_animal/lizard)
 
-#define isconstruct(A) istype(A, /mob/living/simple_animal/construct)
-
 #define isnewplayer(A) istype(A, /mob/new_player)
 
 #define isobj(A) istype(A, /obj)

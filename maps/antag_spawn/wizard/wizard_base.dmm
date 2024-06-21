@@ -513,7 +513,7 @@
 	},
 /area/map_template/wizard_station)
 "bq" = (
-/obj/structure/cult/pylon,
+/obj/structure/fake_pylon,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"
@@ -562,7 +562,7 @@
 	},
 /area/map_template/wizard_station)
 "bx" = (
-/obj/structure/cult/talisman,
+/obj/structure/talisman_altar,
 /obj/item/knife/ritual,
 /turf/unsimulated/floor{
 	icon_state = "cult";
@@ -577,7 +577,7 @@
 	},
 /area/map_template/wizard_station)
 "bz" = (
-/obj/effect/gateway/active/cult,
+/obj/effect/gateway/active/spooky,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"

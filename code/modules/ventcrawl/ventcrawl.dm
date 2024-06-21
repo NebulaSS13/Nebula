@@ -10,11 +10,7 @@ var/global/list/ventcrawl_machinery = list(
 	/obj/item/radio/borg,
 	/obj/item/holder,
 	/obj/machinery/camera,
-	/obj/item/clothing/head/culthood,
-	/obj/item/clothing/suit/cultrobes,
-	/obj/item/book/tome,
-	/obj/item/paper/,
-	/obj/item/sword/cultblade
+	/obj/item/paper
 	)
 
 /mob/living

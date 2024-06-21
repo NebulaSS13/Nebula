@@ -31,6 +31,7 @@
 	bleed_colour = "#331111"
 	gene_damage = -1
 	butchery_data = /decl/butchery_data/occult
+	hud_used = /datum/hud/construct
 
 	z_flags = ZMM_MANGLE_PLANES
 	glowing_eyes = TRUE
@@ -42,6 +43,9 @@
 
 /mob/living/simple_animal/construct/on_defilement()
 	return
+
+/mob/living/simple_animal/construct/get_blood_name()
+	return "ichor"
 
 /mob/living/simple_animal/construct/Initialize()
 	. = ..()
@@ -85,14 +89,6 @@
 		else
 			to_chat(user, SPAN_DANGER("It looks severely dented!"))
 
-/obj/item/ectoplasm
-	name = "ectoplasm"
-	desc = "Spooky."
-	gender = PLURAL
-	icon = 'icons/obj/items/ectoplasm.dmi'
-	icon_state = ICON_STATE_WORLD
-	material = /decl/material/liquid/drink/compote
-
 /////////////////Juggernaut///////////////
 
 
@@ -114,6 +110,7 @@
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
+	hud_used = /datum/hud/construct/juggernaut
 
 /obj/item/natural_weapon/juggernaut
 	name = "armored gauntlet"
@@ -148,6 +145,10 @@
 
 	return (..(P))
 
+/mob/living/simple_animal/construct/armoured/mind_initialize()
+	..()
+	mind.assigned_role = "Juggernaut"
+	mind.assigned_special_role = "Cultist"
 
 
 ////////////////////////Wraith/////////////////////////////////////////////
@@ -165,6 +166,7 @@
 	environment_smash = 1
 	see_in_dark = 7
 	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
+	hud_used = /datum/hud/construct/wraith
 
 /obj/item/natural_weapon/wraith
 	name = "wicked blade"
@@ -173,6 +175,11 @@
 	hitsound = 'sound/weapons/rapidslice.ogg'
 	edge = TRUE
 	force = 25
+
+/mob/living/simple_animal/construct/wraith/mind_initialize()
+	..()
+	mind.assigned_role = "Wraith"
+	mind.assigned_special_role = "Cultist"
 
 /////////////////////////////Artificer/////////////////////////
 
@@ -189,17 +196,25 @@
 	natural_weapon = /obj/item/natural_weapon/cult_builder
 	speed = 0
 	environment_smash = 1
-	construct_spells = list(/spell/aoe_turf/conjure/construct/lesser,
-							/spell/aoe_turf/conjure/wall,
-							/spell/aoe_turf/conjure/floor,
-							/spell/aoe_turf/conjure/soulstone,
-							/spell/aoe_turf/conjure/pylon
-							)
+	construct_spells = list(
+		/spell/aoe_turf/conjure/construct/lesser,
+		/spell/aoe_turf/conjure/wall,
+		/spell/aoe_turf/conjure/floor,
+		/spell/aoe_turf/conjure/soulstone,
+		/spell/aoe_turf/conjure/pylon
+	)
+	hud_used = /datum/hud/construct/artificer
 
 /obj/item/natural_weapon/cult_builder
 	name = "heavy arms"
 	attack_verb = list("rammed")
 	force = 5
+
+
+/mob/living/simple_animal/construct/builder/mind_initialize()
+	..()
+	mind.assigned_role = "Artificer"
+	mind.assigned_special_role = "Cultist"
 
 /////////////////////////////Behemoth/////////////////////////
 
@@ -219,6 +234,7 @@
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
+	hud_used = /datum/hud/construct/juggernaut
 
 /obj/item/natural_weapon/juggernaut/behemoth
 	force = 50
@@ -237,10 +253,11 @@
 	speed = -1
 	environment_smash = 1
 	see_in_dark = 7
+	hud_used = /datum/hud/construct/harvester
 
 	construct_spells = list(
-			/spell/targeted/harvest
-		)
+		/spell/targeted/harvest
+	)
 
 /obj/item/natural_weapon/harvester
 	name = "malicious spike"

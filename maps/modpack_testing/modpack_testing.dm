@@ -3,6 +3,7 @@
 	#include "modpack_testing_lobby.dm"
 	#include "blank.dmm"
 
+	#include "../../mods/gamemodes/cult/_cult.dme"
 	#include "../../mods/gamemodes/deity/_deity.dme"
 	#include "../../mods/gamemodes/heist/_heist.dme"
 	#include "../../mods/gamemodes/meteor/_meteor.dme"

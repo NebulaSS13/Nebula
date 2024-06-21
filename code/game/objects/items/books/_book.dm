@@ -17,6 +17,9 @@
 	var/carved = 0	 // Has the book been hollowed out for use as a secret storage item?
 	var/obj/item/store	//What's in the book?
 	var/last_modified_ckey
+	/// If TRUE, mild solvents can dissolve ink off the page.
+	/// If FALSE, the user instead receives a message about how the text doesn't seem to be normal ink.
+	var/can_dissolve_text = TRUE
 
 	// Copied from paper. Todo: generalize.
 	var/const/deffont = "Verdana"

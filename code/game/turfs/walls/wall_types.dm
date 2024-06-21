@@ -95,34 +95,6 @@
 	if(prob(explosion_resistance))
 		..()
 
-//Cult wall
-/turf/wall/cult
-	icon_state = "cult"
-	color = COLOR_RED_GRAY
-	material = /decl/material/solid/stone/cult
-
-/turf/wall/cult/on_defilement()
-	return
-
-/turf/wall/cult/is_defiled()
-	return TRUE
-
-/turf/wall/cult/reinf
-	icon_state = "reinforced_cult"
-	reinf_material = /decl/material/solid/stone/cult/reinforced
-
-/turf/wall/cult/dismantle_turf(devastated, explode, no_product, keep_air = TRUE)
-	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
-	cult.remove_cultiness(CULTINESS_PER_TURF)
-	. = ..()
-
-/turf/wall/cult/can_join_with(var/turf/wall/W)
-	if(material && W.material && material.icon_base == W.material.icon_base)
-		return 1
-	else if(istype(W, /turf/wall))
-		return 1
-	return 0
-
 /turf/wall/shuttle
 	material = /decl/material/solid/metal/titanium
 	paint_color = COLOR_BEIGE

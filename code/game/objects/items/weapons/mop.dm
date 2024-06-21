@@ -16,9 +16,8 @@
 	var/mopspeed = 40
 	var/list/moppable_types = list(
 		/obj/effect/decal/cleanable,
-		/obj/effect/rune,
 		/obj/structure/catwalk
-		)
+	)
 
 /obj/item/mop/Initialize()
 	. = ..()

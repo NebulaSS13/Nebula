@@ -99,9 +99,7 @@
 			new /obj/item/seeds/random(src)
 		if(89, 90)
 			new /obj/item/organ/internal/heart(src)
-		if(91)
-			new /obj/item/soulstone(src)
-		if(92)
+		if(91,92)
 			new /obj/item/sword/katana(src)
 		if(93)
 			new /obj/item/firstaid/combat(src) // Probably the least OP

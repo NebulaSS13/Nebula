@@ -20,8 +20,6 @@
 	faction = "faithless"
 	supernatural = 1
 
-	butchery_data = /decl/butchery_data/occult
-
 /obj/item/natural_weapon/faithless
 	name = "shadow tendril"
 	attack_verb = list("gripped")
@@ -45,8 +43,10 @@
 			SET_STATUS_MAX(L, STAT_WEAK, 3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
-/mob/living/simple_animal/hostile/faithless/cult
-	faction = "cult"
-
-/mob/living/simple_animal/hostile/faithless/cult/on_defilement()
-	return
+/obj/item/ectoplasm
+	name = "ectoplasm"
+	desc = "Spooky."
+	gender = PLURAL
+	icon = 'icons/obj/items/ectoplasm.dmi'
+	icon_state = ICON_STATE_WORLD
+	material = /decl/material/liquid/drink/compote

@@ -635,23 +635,22 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	return
 
-#define ACID_MELT_DOSE 10
 /decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
 
 	if(solvent_power >= MAT_SOLVENT_MILD)
 		if(istype(O, /obj/item/paper))
 			var/obj/item/paper/paperaffected = O
 			paperaffected.clearpaper()
-			to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the paper."))
-		else if(istype(O, /obj/item/book) && REAGENT_VOLUME(holder, type) >= 5)
-			if(istype(O, /obj/item/book/tome))
-				to_chat(usr, SPAN_WARNING("The solution does nothing. Whatever this is, it isn't normal ink."))
-			else
-				var/obj/item/book/affectedbook = O
+			O.visible_message(SPAN_NOTICE("The solution dissolves the ink on the paper."), range = 1)
+		else if(istype(O, /obj/item/book) && amount >= 5)
+			var/obj/item/book/affectedbook = O
+			if(affectedbook.can_dissolve_text)
 				affectedbook.dat = null
-				to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
+				O.visible_message(SPAN_NOTICE("The solution dissolves the ink on the book."), range = 1)
+			else
+				O.visible_message(SPAN_WARNING("The solution does nothing. Whatever this is, it isn't normal ink."), range = 1)
 
-	if(solvent_power >= MAT_SOLVENT_STRONG && O.solvent_can_melt(solvent_power) && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
+	if(solvent_power >= MAT_SOLVENT_STRONG && O.solvent_can_melt(solvent_power) && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (amount > solvent_melt_dose))
 		O.visible_message(SPAN_DANGER("\The [O] dissolves!"))
 		O.handle_melting()
 		holder?.remove_reagent(type, solvent_melt_dose)
@@ -664,7 +663,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				if(I.contaminated)
 					I.decontaminate()
 		if(dirtiness <= DIRTINESS_STERILE)
-			O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
+			O.germ_level -= min(amount*20, O.germ_level)
 			O.was_bloodied = null
 		if(dirtiness <= DIRTINESS_CLEAN)
 			O.clean()

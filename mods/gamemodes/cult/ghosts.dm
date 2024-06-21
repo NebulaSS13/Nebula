@@ -16,6 +16,36 @@
 				M.verbs += /mob/observer/ghost/proc/bloodless_doodle
 				M.verbs += /mob/observer/ghost/proc/toggle_visiblity
 
+/proc/round_is_spooky(var/spookiness_threshold = get_config_value(/decl/config/num/cult_ghostwriter_req_cultists))
+	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
+	return (cult.current_antagonists.len > spookiness_threshold)
+
+// ghost attack - make lights flicker like an AI, but even spookier!
+/obj/machinery/light/attack_ghost(mob/user)
+	if(round_is_spooky())
+		src.flicker(rand(2,5))
+	else return ..()
+
+/obj/item/t_scanner/can_scan_mob(mob/victim)
+	if(round_is_spooky() && isobserver(victim))
+		return TRUE
+	return ..()
+
+/mob/living/do_possession(var/mob/observer/ghost/possessor)
+	if(round_is_spooky(6)) // Six or more active cultists.
+		to_chat(src, SPAN_NOTICE("You reach out with tendrils of ectoplasm and invade the mind of \the [src]..."))
+		to_chat(src, SPAN_BOLD("You have assumed direct control of \the [src]."))
+		to_chat(src, SPAN_NOTICE("Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly."))
+		src.universal_speak = TRUE
+		src.universal_understand = TRUE
+		//src.on_defilement() // Maybe another time.
+		return TRUE
+
+/mob/observer/ghost/Initialize()
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
+	cult.add_ghost_magic(src)
+	return ..()
+
 /mob/observer/ghost/proc/ghost_ability_check()
 	var/turf/T = get_turf(src)
 	if(is_holy_turf(T))
@@ -288,3 +318,11 @@
 		to_chat(src, "<span class='info'>You are now visible.</span>")
 		set_invisibility(INVISIBILITY_NONE)
 		mouse_opacity = MOUSE_OPACITY_UNCLICKABLE // This is so they don't make people invincible to melee attacks by hovering over them
+
+//ATTACK GHOST IGNORING PARENT RETURN VALUE
+// If we're spooky, ghosts can use the spirit board
+/obj/item/spirit_board/attack_ghost(var/mob/observer/ghost/user)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
+	if(cult.max_cult_rating >= CULT_GHOSTS_2)
+		spirit_board_pick_letter(user)
+	return ..()

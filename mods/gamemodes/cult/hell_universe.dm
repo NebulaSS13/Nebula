@@ -40,3 +40,9 @@ In short:
 	for(var/mob/living/simple_animal/M in SSmobs.mob_list)
 		if(M && !M.client)
 			M.set_stat(DEAD)
+
+// Disable Narsie when we enter other (non-hell) universe states
+/datum/universal_state/supermatter_cascade/OnEnter()
+	// Disable Nar-Sie.
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
+	cult.allow_narsie = 0

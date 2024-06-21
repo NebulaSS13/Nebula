@@ -12,11 +12,6 @@
 	antag_text = "Allows creation of special items by feeding your blood into it. Only usable by cultists of the aligned deity."
 	disambiguator = "occult"
 
-/datum/codex_entry/deity/blood_stone
-	associated_paths = list(/obj/structure/deity/blood_stone)
-	antag_text = "Allows the user to feed blood directly to the aligned deity, granting it power."
-	disambiguator = "occult"
-
 /datum/codex_entry/deity/gateway
 	associated_paths = list(/obj/structure/deity/gateway)
 	antag_text = "Stand within the gateway to be transported to an unknown dimension and transformed into a flaming Starborn, a mysterious Blueforged or a subtle Shadowling."

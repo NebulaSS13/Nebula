@@ -159,11 +159,6 @@
 		/obj/item/tool/xeno/hand
 	)
 
-/datum/storage/belt/soulstone
-	can_hold = list(
-		/obj/item/soulstone
-	)
-
 /datum/storage/belt/champion
 	storage_slots = null
 	max_storage_space = ITEM_SIZE_SMALL

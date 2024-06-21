@@ -121,12 +121,13 @@
 	return bled
 #undef BLOOD_SPRAY_DISTANCE
 
-/mob/living/human/proc/remove_blood(var/amt)
+/mob/living/human/remove_blood(amt, absolute = FALSE)
 	if(!should_have_organ(BP_HEART)) //TODO: Make drips come from the reagents instead.
 		return 0
 	if(!amt)
 		return 0
-	amt *= ((src.mob_size/MOB_SIZE_MEDIUM) ** 0.5)
+	if(!absolute)
+		amt *= ((src.mob_size/MOB_SIZE_MEDIUM) ** 0.5)
 	return vessel.remove_any(amt)
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.

@@ -119,60 +119,7 @@
 		update_icon()
 
 		for(var/mob/living/M in contents)
-			admin_attack_log(A, M, "Began cremating their victim.", "Has begun being cremated.", "began cremating")
-			if(isliving(M))
-				for(var/I, I < 60, I++)
-
-					if(M.stat >= UNCONSCIOUS || !(M in contents)) //In case we die or are removed at any point.
-						cremating = 0
-						update_icon()
-						break
-
-					sleep(0.5 SECONDS)
-
-					if(QDELETED(src))
-						return
-
-					if(prob(40))
-						var/desperation = rand(1,5)
-						switch(desperation) //This is messy. A better solution would probably be to make more sounds, but...
-							if(1)
-								playsound(loc, 'sound/weapons/genhit.ogg', 45, 1)
-								shake_animation(2)
-								playsound(loc, 'sound/weapons/genhit.ogg', 45, 1)
-							if(2)
-								playsound(loc, 'sound/effects/grillehit.ogg', 45, 1)
-								shake_animation(3)
-								playsound(loc, 'sound/effects/grillehit.ogg', 45, 1)
-							if(3)
-								playsound(src, 'sound/effects/bang.ogg', 45, 1)
-								if(prob(50))
-									playsound(src, 'sound/effects/bang.ogg', 45, 1)
-									shake_animation()
-								else
-									shake_animation(5)
-							if(4)
-								playsound(src, 'sound/effects/clang.ogg', 45, 1)
-								shake_animation(5)
-							if(5)
-								playsound(src, 'sound/weapons/smash.ogg', 50, 1)
-								if(prob(50))
-									playsound(src, 'sound/weapons/smash.ogg', 50, 1)
-									shake_animation(9)
-								else
-									shake_animation()
-
-			if(round_is_spooky())
-				if(prob(50))
-					playsound(src, 'sound/effects/ghost.ogg', 10, 5)
-				else
-					playsound(src, 'sound/effects/ghost2.ogg', 10, 5)
-
-			if (!M.stat)
-				M.audible_message("[M]'s screams cease, as does any movement within the [src]. All that remains is a dull, empty silence.")
-
-			admin_attack_log(M, A, "Cremated their victim.", "Was cremated.", "cremated")
-			M.dust()
+			on_cremate_mob(A, M)
 
 		for(var/obj/O in contents) //obj instead of obj/item so that bodybags and ashes get destroyed. We dont want tons and tons of ash piling up
 			if(!istype(O, connected_tray))
@@ -184,6 +131,59 @@
 		locked = initial(locked)
 		playsound(src, 'sound/effects/spray.ogg', 50, 1)
 		update_icon()
+	
+// This proc sucks. Actually, all of crematorium code just sucks.
+// TODO: REWRITE OR REMOVE
+/obj/structure/crematorium/proc/on_cremate_mob(atom/cause, mob/living/victim)
+	admin_attack_log(cause, victim, "Began cremating their victim.", "Has begun being cremated.", "began cremating")
+	if(isliving(victim))
+		for(var/I, I < 60, I++)
+
+			if(victim.stat >= UNCONSCIOUS || !(victim in contents)) //In case we die or are removed at any point.
+				cremating = 0
+				update_icon()
+				break
+
+			sleep(0.5 SECONDS)
+
+			if(QDELETED(src))
+				return FALSE
+
+			if(prob(40))
+				var/desperation = rand(1,5)
+				switch(desperation) //This is messy. A better solution would probably be to make more sounds, but...
+					if(1)
+						playsound(loc, 'sound/weapons/genhit.ogg', 45, 1)
+						shake_animation(2)
+						playsound(loc, 'sound/weapons/genhit.ogg', 45, 1)
+					if(2)
+						playsound(loc, 'sound/effects/grillehit.ogg', 45, 1)
+						shake_animation(3)
+						playsound(loc, 'sound/effects/grillehit.ogg', 45, 1)
+					if(3)
+						playsound(src, 'sound/effects/bang.ogg', 45, 1)
+						if(prob(50))
+							playsound(src, 'sound/effects/bang.ogg', 45, 1)
+							shake_animation()
+						else
+							shake_animation(5)
+					if(4)
+						playsound(src, 'sound/effects/clang.ogg', 45, 1)
+						shake_animation(5)
+					if(5)
+						playsound(src, 'sound/weapons/smash.ogg', 50, 1)
+						if(prob(50))
+							playsound(src, 'sound/weapons/smash.ogg', 50, 1)
+							shake_animation(9)
+						else
+							shake_animation()
+
+	if (!victim.stat)
+		victim.audible_message("[victim]'s screams cease, as does any movement within \the [src]. All that remains is a dull, empty silence.")
+
+	admin_attack_log(victim, cause, "Cremated their victim.", "Was cremated.", "cremated")
+	victim.dust()
+	return TRUE
 
 /obj/structure/crematorium_tray
 	name = "crematorium tray"

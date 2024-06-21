@@ -20,11 +20,6 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(target)
 
-	if(target.mind && LAZYLEN(target.mind.learned_spells))
-		target.silence_spells(300) //30 seconds
-		to_chat(target, SPAN_DANGER("You've been silenced!"))
-		return TRUE
-
 	if (!user.check_dexterity(DEXTERITY_WEAPONS))
 		return TRUE
 
@@ -33,14 +28,18 @@
 		user.take_organ_damage(10)
 		SET_STATUS_MAX(user, STAT_PARA, 20)
 		return TRUE
-
-	if(iscultist(target))
-		target.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [target]'s head."))
-		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
-		cult.offer_uncult(target)
+	
+	if (holy_act(target, user))
 		return TRUE
 
 	return ..()
+
+/obj/item/nullrod/proc/holy_act(mob/living/target, mob/living/user)
+	if(target.mind && LAZYLEN(target.mind.learned_spells))
+		target.silence_spells(30 SECONDS)
+		to_chat(target, SPAN_DANGER("You've been silenced!"))
+		return TRUE
+	return FALSE
 
 /obj/item/nullrod/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
@@ -49,22 +48,6 @@
 
 /atom/proc/nullrod_act(mob/user, obj/item/nullrod/rod)
 	return FALSE
-
-/turf/wall/cult/nullrod_act(mob/user, obj/item/nullrod/rod)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] touches \the [src] with \the [rod], and the enchantment affecting it fizzles away."),
-		SPAN_NOTICE("You touch \the [src] with \the [rod], and the enchantment affecting it fizzles away.")
-	)
-	ChangeTurf(/turf/wall)
-	return TRUE
-
-/turf/floor/cult/nullrod_act(mob/user, obj/item/nullrod/rod)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] touches \the [src] with \the [rod], and the enchantment affecting it fizzles away."),
-		SPAN_NOTICE("You touch \the [src] with \the [rod], and the enchantment affecting it fizzles away.")
-	)
-	ChangeTurf(/turf/floor, keep_air = TRUE)
-	return TRUE
 
 
 /obj/item/energy_net

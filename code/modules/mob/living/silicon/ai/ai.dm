@@ -55,7 +55,6 @@ var/global/list/ai_verbs_default = list(
 	anchored = TRUE // -- TLE
 	density = TRUE
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
-	shouldnt_see = list(/obj/effect/rune)
 	max_health = 200
 
 	silicon_camera = /obj/item/camera/siliconcam/ai_camera
