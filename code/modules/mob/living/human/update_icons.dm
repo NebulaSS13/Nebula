@@ -137,7 +137,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	// We are somehow updating with no torso, or a torso with no bodytype (probably gibbing). No point continuing.
 	if(!root_bodytype)
 		return
-	
+
 	var/matrix/M = matrix()
 	if(current_posture?.prone && (root_bodytype.prone_overlay_offset[1] || root_bodytype.prone_overlay_offset[2]))
 		M.Translate(root_bodytype.prone_overlay_offset[1], root_bodytype.prone_overlay_offset[2])
@@ -412,6 +412,14 @@ Please contact me on #coderbus IRC. ~Carn x
 		return
 
 	var/tail_state = tail_organ.get_tail()
+	if(tail_organ.limb_flags & ORGAN_FLAG_SKELETAL)
+		if(!tail_organ.bodytype?.skeletal_icon)
+			return
+		var/tail_cache_key = "[tail_state][tail_organ.bodytype.skeletal_icon]_skeletal"
+		if(!global.tail_icon_cache[tail_cache_key])
+			global.tail_icon_cache[tail_cache_key] = icon(tail_organ.bodytype.skeletal_icon, tail_state)
+		return global.tail_icon_cache[tail_cache_key]
+
 	var/tail_icon  = tail_organ.get_tail_icon()
 	if(!tail_state || !tail_icon)
 		return // No tail data!
@@ -451,7 +459,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/human/proc/set_tail_state(var/t_state)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
-	if(!tail_organ)
+	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return null
 	var/image/tail_overlay = get_current_tail_image()
 	if(tail_overlay && check_state_in_icon(tail_overlay.icon, t_state))
@@ -465,7 +473,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/human/proc/animate_tail_once(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
-	if(!tail_organ)
+	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
 	var/t_state = "[tail_organ.get_tail()]_once"
 
@@ -486,7 +494,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/human/proc/animate_tail_start(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
-	if(!tail_organ)
+	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
 	var/tail_states = tail_organ.get_tail_states()
 	if(tail_states)
@@ -496,7 +504,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/human/proc/animate_tail_fast(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
-	if(!tail_organ)
+	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
 	var/tail_states = tail_organ.get_tail_states()
 	if(tail_states)
@@ -506,7 +514,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/human/proc/animate_tail_reset(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
-	if(!tail_organ)
+	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
 	var/tail_states = tail_organ.get_tail_states(src)
 	if(stat != DEAD && tail_states)
@@ -519,7 +527,7 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/human/proc/animate_tail_stop(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
-	if(!tail_organ)
+	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
 	set_tail_state("[tail_organ.get_tail()]_static")
 
