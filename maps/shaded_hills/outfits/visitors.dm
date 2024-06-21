@@ -10,3 +10,10 @@
 		/obj/item/stack/medical/ointment/poultice/five   = 1,
 		/obj/item/chems/waterskin/crafted/wine           = 1
 	)
+
+/decl/hierarchy/outfit/job/shaded_hills/traveller/scholar
+	name    = "Shaded Hills - Itinerant Scholar"
+
+/decl/hierarchy/outfit/job/shaded_hills/traveller/cleric
+	name    = "Shaded Hills - Travelling Cleric"
+

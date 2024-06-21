@@ -56,7 +56,7 @@
 /datum/uplink_item/item/stealth_items/sneakies
 	name = "Sneakies"
 	desc = "A fashionable pair of polished dress shoes. The soles are made in a way so that any \
-	tracks you leave look like they are traveling in the opposite direction."
+	tracks you leave look like they are travelling in the opposite direction."
 	item_cost = 4
 	path = /obj/item/clothing/shoes/dress/sneakies
 

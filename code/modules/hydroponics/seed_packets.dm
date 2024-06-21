@@ -367,3 +367,18 @@
 
 /obj/item/seeds/extracted/foxglove
 	seed = "foxglove"
+
+/obj/item/seeds/extracted/cabbage
+	seed = "cabbage"
+
+/obj/item/seeds/extracted/carrot
+	seed = "carrot"
+
+/obj/item/seeds/extracted/potato
+	seed = "potato"
+
+/obj/item/seeds/extracted/wheat
+	seed = "wheat"
+
+/obj/item/seeds/extracted/rice
+	seed = "rice"
