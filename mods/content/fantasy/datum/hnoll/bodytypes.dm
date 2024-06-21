@@ -8,6 +8,7 @@
 	bandages_icon        = 'icons/mob/bandage.dmi'
 	eye_icon             = 'mods/content/fantasy/icons/hnoll/eyes.dmi'
 	cosmetics_icon       = 'mods/content/fantasy/icons/hnoll/cosmetics.dmi'
+	skeletal_icon        = 'mods/content/fantasy/icons/hnoll/skeleton.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag        = BODY_FLAG_HNOLL
 	appearance_flags     = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR

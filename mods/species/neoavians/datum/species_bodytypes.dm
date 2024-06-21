@@ -3,6 +3,7 @@
 	bodytype_category    = BODYTYPE_AVIAN
 	icon_base            = 'mods/species/neoavians/icons/body.dmi'
 	blood_overlays       = 'mods/species/neoavians/icons/blood_avian.dmi'
+	skeletal_icon        = 'mods/species/neoavians/icons/skeleton.dmi'
 	limb_blend           = ICON_MULTIPLY
 	bodytype_flag        = BODY_FLAG_AVIAN
 	eye_icon             = 'mods/species/neoavians/icons/eyes.dmi'

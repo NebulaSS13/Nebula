@@ -6,6 +6,7 @@
 	icon_base            = 'mods/content/fantasy/icons/kobaloi/body.dmi'
 	icon_deformed        = 'mods/content/fantasy/icons/kobaloi/body.dmi'
 	eye_icon             = 'mods/content/fantasy/icons/kobaloi/eyes.dmi'
+	skeletal_icon        = 'mods/content/fantasy/icons/kobaloi/skeleton.dmi'
 	base_color           = "#8f974a"
 	base_eye_color       = "#d95763"
 	bodytype_flag        = BODY_FLAG_KOBALOI

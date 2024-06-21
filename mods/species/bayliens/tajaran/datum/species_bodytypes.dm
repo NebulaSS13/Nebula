@@ -6,6 +6,7 @@
 	icon_base            = 'mods/species/bayliens/tajaran/icons/body.dmi'
 	icon_deformed        = 'mods/species/bayliens/tajaran/icons/deformed_body.dmi'
 	bandages_icon        = 'icons/mob/bandage.dmi'
+	skeletal_icon        = 'mods/species/bayliens/tajaran/icons/skeleton.dmi'
 	cosmetics_icon       = 'mods/species/bayliens/tajaran/icons/cosmetics.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag        = BODY_FLAG_FELINE
