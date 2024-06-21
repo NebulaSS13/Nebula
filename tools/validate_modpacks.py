@@ -4,19 +4,55 @@ import glob
 import sys
 import os
 
-FORBID_INCLUDE = [
+"""
+Paths to search for modpacks in.
+Works best if search paths are only one-deep, so that nested modpacks can be added separately.
+"""
+MODPACK_ROOTS = [
+    r'mods/content/*/*.dme',
+    r'mods/gamemodes/*/*.dme',
+    r'mods/mobs/*/*.dme',
+    r'mods/species/*/*.dme'
+    # Example nested modpack configuration:
+    # r'mods/some_downstream/*/*.dme'
 ]
 
-IGNORE_INCLUDE = [
-    # These are stubs.
-    r'mods/content/dungeon_loot/subtypes/exosuit.dm',
-    # The validator can't detect the weird way these are loaded.
-    r'mods/content/corporate/away_sites/**/*.dm',
-    r'mods/content/government/away_sites/**/*.dm'
+"""
+A list of DME paths to not run validation on.
+Useful for excluding the outermost DME in a nested-modpack situation.
+"""
+IGNORE_MODPACKS = [
+    # Example:
+    # r'mods/some_downstream/some_downstream.dme/*.dme'
 ]
+
+"""
+A dictionary mapping of modpack roots ('mods/content/corporate')
+to a list of globs matching files to forbid inclusion of.
+If a file matches any of the globs, validation fails.
+"""
+FORBID_INCLUDE = {
+    # Example:
+    # r'mods/content/whatever/_whatever.dme' : [r'mods/content/whatever/README.md', r'mods/content/whatever/something/something_docs.md']
+}
+
+"""
+A dictionary mapping of modpack roots ('mods/content/corporate')
+to a list of globs matching files ('mods/content/corporate/away_sites/**/*.dm) to ignore when checking for inclusion.
+If a file matching any of the globs is not included, validation will NOT fail.
+"""
+IGNORE_INCLUDE = {
+    # The validator can't detect the weird way these are loaded.
+    r'mods/content/corporate': [
+        r'mods/content/corporate/away_sites/**/*.dm',
+    ],
+    r'mods/content/government': [
+        r'mods/content/government/away_sites/**/*.dm'
+    ]
+}
 
 def validate_modpack(dme_path):
-    (modpack_root, dme_name) = os.path.split(dme_path)
+    (modpack_path, dme_name) = os.path.split(dme_path)
     reading = False
     lines = []
     total = 0
@@ -38,18 +74,23 @@ def validate_modpack(dme_path):
             lines.append(line)
 
     offset = total - len(lines)
-    print(f"{offset} lines were ignored in output")
+    print(f"{offset} lines were ignored in {dme_name}")
     modpack_failed = False
 
-    for code_file in glob.glob("**/*.dm", root_dir=modpack_root, recursive=True):
+    for code_file in glob.glob("**/*.dm", root_dir=modpack_path, recursive=True):
+        full_file = os.path.join(modpack_path, code_file)
         dm_path = code_file.replace('/', '\\')
-        full_file = os.path.join(modpack_root, code_file)
 
         included = f"#include \"{dm_path}\"" in lines
         forbid_include = False
 
         ignored = False
-        for ignore in IGNORE_INCLUDE:
+
+        modpack_ignores = []
+        if modpack_path in IGNORE_INCLUDE:
+            modpack_ignores = IGNORE_INCLUDE[modpack_path]
+
+        for ignore in modpack_ignores:
             if not fnmatch.fnmatch(full_file, ignore):
                 continue
 
@@ -59,14 +100,18 @@ def validate_modpack(dme_path):
         if ignored:
             continue
 
-        for forbid in FORBID_INCLUDE:
+        modpack_forbids = []
+        if modpack_path in FORBID_INCLUDE:
+            modpack_forbids = FORBID_INCLUDE[modpack_path]
+
+        for forbid in modpack_forbids:
             if not fnmatch.fnmatch(full_file, forbid):
                 continue
 
             forbid_include = True
 
             if included:
-                print(f"{os.path.join(modpack_root,dm_path)} should not be included")
+                print(f"{os.path.join(modpack_path,dm_path)} should not be included")
                 print(f"::error file={full_file},line=1,title=DME Validator::File should not be included")
                 modpack_failed = True
 
@@ -74,7 +119,7 @@ def validate_modpack(dme_path):
             continue
 
         if not included:
-            print(f"{os.path.join(modpack_root,dm_path)} is not included")
+            print(f"{os.path.join(modpack_path,dm_path)} is not included")
             print(f"::error file={full_file},line=1,title=DME Validator::File is not included")
             modpack_failed = True
 
@@ -112,8 +157,12 @@ def validate_modpack(dme_path):
     return modpack_failed
 
 failed = False
-for modpack_dme in glob.glob("mods/**/*.dme", recursive=True):
-    failed = validate_modpack(modpack_dme) or failed
+for modpack_root in MODPACK_ROOTS:
+    for modpack_dme in glob.glob(modpack_root, recursive=True):
+        modpack_dme = modpack_dme.replace('\\', '/')
+        if modpack_dme in IGNORE_MODPACKS:
+            continue
+        failed = validate_modpack(modpack_dme) or failed
 
 if failed:
     sys.exit(1)
