@@ -1,11 +1,11 @@
 /mob/living/slime/physically_destroyed()
 	if(is_adult)
-		var/datum/ai/slime/my_ai = ai
+		var/datum/mob_controller/slime/my_ai = ai
 		var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 		var/list/babies = list()
 		for(var/i in 1 to 2)
 			var/mob/living/slime/baby = new slime_data.child_type(loc, slime_type)
-			var/datum/ai/slime/baby_ai = baby.ai
+			var/datum/mob_controller/slime/baby_ai = baby.ai
 			if(istype(my_ai) && istype(baby_ai))
 				baby_ai.rabid = TRUE
 				baby_ai.observed_friends = my_ai.observed_friends?.Copy()

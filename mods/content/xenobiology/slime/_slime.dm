@@ -17,7 +17,7 @@
 	see_in_dark = 8
 	status_flags = CANPARALYSE|CANPUSH
 	butchery_data = null
-	ai = /datum/ai/slime
+	ai = /datum/mob_controller/slime
 	hud_used = /datum/hud/slime
 	nutrition = 800
 
@@ -167,7 +167,7 @@
 	..(-abs(amount), do_update_health) // Heals them
 
 /mob/living/slime/bullet_act(var/obj/item/projectile/Proj)
-	var/datum/ai/slime/slime_ai = ai
+	var/datum/mob_controller/slime/slime_ai = ai
 	if(istype(slime_ai))
 		slime_ai.attacked += 10
 		slime_ai.adjust_friendship(Proj.firer, -5)
@@ -190,13 +190,13 @@
 	. = ..()
 	if(new_amount != last_amount && isslime(victim))
 		var/mob/living/slime/slime = victim
-		if(istype(slime.ai, /datum/ai/slime))
-			var/datum/ai/slime/slime_ai = slime.ai
+		if(istype(slime.ai, /datum/mob_controller/slime))
+			var/datum/mob_controller/slime/slime_ai = slime.ai
 			slime_ai.update_mood()
 
 /mob/living/slime/proc/adjust_friendship(var/mob/user, var/amount)
 	if(user && amount != 0)
-		var/datum/ai/slime/slime_ai = ai
+		var/datum/mob_controller/slime/slime_ai = ai
 		if(istype(slime_ai))
 			return slime_ai.adjust_friendship(user, amount)
 
@@ -255,7 +255,7 @@
 			return TRUE
 		if(I_HURT)
 			var/damage = rand(1, 9)
-			var/datum/ai/slime/slime_ai = ai
+			var/datum/mob_controller/slime/slime_ai = ai
 			if(istype(slime_ai))
 				slime_ai.attacked += 10
 				slime_ai.adjust_friendship(user, -5)
@@ -272,7 +272,7 @@
 
 /mob/living/slime/attackby(var/obj/item/W, var/mob/user)
 	if(W.force > 0)
-		var/datum/ai/slime/slime_ai = ai
+		var/datum/mob_controller/slime/slime_ai = ai
 		if(istype(slime_ai))
 			slime_ai.attacked += 10
 			slime_ai.adjust_friendship(user, -5)

@@ -37,16 +37,15 @@
 	emote_see    = list("flutters its wings")
 	natural_weapon = /obj/item/natural_weapon/beak
 	speak_chance = 1 // 1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
-	turns_per_move = 5
+	turns_per_wander = 5
 	response_harm = "swats"
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	universal_speak = TRUE
 	butchery_data = /decl/butchery_data/animal/bird/parrot
 
 	var/parrot_state = PARROT_WANDER // Hunt for a perch when created
 	var/parrot_sleep_max = 25        // The time the parrot sits while perched before looking around. Mosly a way to avoid the parrot's AI in life() being run every single tick.
 	var/parrot_sleep_dur = 25        // Same as above, this is the var that physically counts down
-	var/parrot_speed = 5             // Movement delay in ticks. Higher number = slower.
 	var/parrot_been_shot = 0         // Parrots get a speed bonus after being shot. This will deincrement every Life() and at 0 the parrot will return to regular speed.
 	//The thing the parrot is currently interested in. This gets used for items the parrot wants to pick up, mobs it wants to steal from,
 	//mobs it wants to attack or mobs that have attacked it
@@ -198,7 +197,7 @@
 //-----WANDERING - This is basically a 'I dont know what to do yet' state
 	else if(parrot_state == PARROT_WANDER)
 		//Stop movement, we'll set it later
-		walk(src, 0)
+		stop_automove()
 		parrot_interest = null
 
 		//Wander around aimlessly. This will help keep the loops from searches down
@@ -236,7 +235,7 @@
 				return
 //-----STEALING
 	else if(parrot_state == (PARROT_SWOOP | PARROT_STEAL))
-		walk(src,0)
+		stop_automove()
 		if(!parrot_interest || held_item)
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
 			return
@@ -260,12 +259,13 @@
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
 			return
 
-		walk_to(src, parrot_interest, 1, parrot_speed)
+		set_moving_slowly()
+		start_automove(parrot_interest)
 		return
 
 //-----RETURNING TO PERCH
 	else if(parrot_state == (PARROT_SWOOP | PARROT_RETURN))
-		walk(src, 0)
+		stop_automove()
 		if(!parrot_perch || !isturf(parrot_perch.loc)) //Make sure the perch exists and somehow isnt inside of something else.
 			parrot_perch = null
 			parrot_state = PARROT_WANDER
@@ -278,17 +278,24 @@
 			update_icon()
 			return
 
-		walk_to(src, parrot_perch, 1, parrot_speed)
+		set_moving_slowly()
+		start_automove(parrot_perch)
 		return
 
 //-----FLEEING
 	else if(parrot_state == (PARROT_SWOOP | PARROT_FLEE))
-		walk(src,0)
+		stop_automove()
 		give_up()
 		if(!parrot_interest || !isliving(parrot_interest)) //Sanity
 			parrot_state = PARROT_WANDER
 
-		walk_away(src, parrot_interest, 1, parrot_speed-parrot_been_shot)
+		var/static/datum/automove_metadata/_parrot_flee_automove_metadata = new(
+			_move_delay = 2,
+			_acceptable_distance = 7,
+			_avoid_target = TRUE
+		)
+		set_moving_quickly()
+		start_automove(parrot_interest, metadata = _parrot_flee_automove_metadata)
 		parrot_been_shot--
 		return
 
@@ -325,12 +332,13 @@
 
 		//Otherwise, fly towards the mob!
 		else
-			walk_to(src, parrot_interest, 1, parrot_speed)
+			set_moving_quickly()
+			start_automove(parrot_interest)
 		return
 
 //-----STATE MISHAP
 	else //This should not happen. If it does lets reset everything and try again
-		walk(src,0)
+		stop_automove()
 		parrot_interest = null
 		parrot_perch = null
 		drop_held_item()

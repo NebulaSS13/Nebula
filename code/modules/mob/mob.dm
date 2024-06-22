@@ -1,4 +1,7 @@
 /mob/Destroy() //This makes sure that mobs with clients/keys are not just deleted from the game.
+
+	stop_automove()
+
 	STOP_PROCESSING(SSmobs, src)
 	global.dead_mob_list_ -= src
 	global.living_mob_list_ -= src
@@ -60,9 +63,9 @@
 /mob/Initialize()
 	if(ispath(skillset))
 		skillset = new skillset(src)
-	if(!move_intent)
+	if(!ispath(move_intent) || !(move_intent in move_intents))
 		move_intent = move_intents[1]
-	if(ispath(move_intent))
+	if(!istype(move_intent))
 		move_intent = GET_DECL(move_intent)
 	. = ..()
 	ability_master = new(null, src)
@@ -216,7 +219,13 @@
 		. += 6
 	if(current_posture.prone) //Crawling, it's slower
 		. += (8 + ((GET_STATUS(src, STAT_WEAK) * 3) + (GET_STATUS(src, STAT_CONFUSE) * 2)))
-	. += move_intent.move_delay + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance())
+	var/_automove_delay = get_automove_delay()
+	if(isnull(_automove_delay))
+		. += move_intent.move_delay
+	else
+		. += _automove_delay
+	. = max(. + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance()), 1)
+
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()
@@ -1358,3 +1367,7 @@
 	var/decl/butchery_data/butchery_decl = GET_DECL(butchery_data)
 	. = butchery_decl?.meat_name || name
 
+/mob/reset_movement_delay()
+	var/datum/movement_handler/mob/delay/delay = locate() in movement_handlers
+	if(istype(delay))
+		delay.next_move = world.time

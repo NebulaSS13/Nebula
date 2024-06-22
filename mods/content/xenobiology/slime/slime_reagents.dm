@@ -19,8 +19,8 @@
 	if(isslime(M))
 		M.take_damage(10 * removed, TOX)
 		var/mob/living/slime/S = M
-		if(istype(S) && istype(S.ai, /datum/ai/slime))
-			var/datum/ai/slime/slime_ai = S.ai
+		if(istype(S) && istype(S.ai, /datum/mob_controller/slime))
+			var/datum/mob_controller/slime/slime_ai = S.ai
 			if(slime_ai.current_target)
 				slime_ai.current_target = null
 			S.set_feeding_on()
@@ -29,7 +29,7 @@
 				SPAN_DANGER("\The [S]'s flesh sizzles where \the [name] touches it!"), \
 				SPAN_DANGER("Your flesh is burned by \the [name]!"))
 			SET_STATUS_MAX(M, STAT_CONFUSE, 2)
-			var/datum/ai/slime/slime_ai = M.ai
+			var/datum/mob_controller/slime/slime_ai = M.ai
 			if(istype(slime_ai))
 				slime_ai.attacked = max(slime_ai.attacked, rand(7,10)) // angery
 

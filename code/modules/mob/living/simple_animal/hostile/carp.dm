@@ -3,13 +3,13 @@
 	desc = "A ferocious, fang-bearing creature that resembles a fish."
 	icon = 'icons/mob/simple_animal/space_carp.dmi'
 	speak_chance = 0
-	turns_per_move = 3
-	speed = 2
 	max_health = 50
+	turns_per_wander = 3
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite
 	pry_time = 10 SECONDS
 	pry_desc = "biting"
+	base_movement_delay = 2
 
 	//Space carp aren't affected by atmos.
 	min_gas = null
@@ -21,6 +21,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	butchery_data = /decl/butchery_data/animal/fish/space_carp
 	var/carp_color = COLOR_PURPLE
+
 
 /mob/living/simple_animal/hostile/carp/Initialize()
 	. = ..()

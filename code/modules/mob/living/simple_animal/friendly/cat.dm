@@ -8,7 +8,7 @@
 	emote_hear   = list("meows","mews")
 	emote_see    = list("shakes their head", "shivers")
 	speak_chance = 0.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	see_in_dark = 6
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
@@ -46,7 +46,7 @@
 					M.splat()
 					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
 					movement_target = null
-					stop_automated_movement = 0
+					stop_wandering = FALSE
 					break
 
 	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
@@ -56,7 +56,7 @@
 
 	turns_since_scan++
 	if (turns_since_scan > 5)
-		walk_to(src,0)
+		stop_automove()
 		turns_since_scan = 0
 
 		if (flee_target) //fleeing takes precendence
@@ -80,30 +80,33 @@
 	//if our target is neither inside a turf or inside a human(???), stop
 	if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 		movement_target = null
-		stop_automated_movement = 0
+		stop_wandering = FALSE
 	//if we have no target or our current one is out of sight/too far away
 	if( !movement_target || !(movement_target.loc in oview(src, 4)) )
 		movement_target = null
-		stop_automated_movement = 0
+		stop_wandering = FALSE
 		for(var/mob/living/simple_animal/passive/mouse/snack in oview(src)) //search for a new target
 			if(isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break
 
 	if(movement_target)
-		stop_automated_movement = 1
-		walk_to(src,movement_target,0,3)
+		set_moving_quickly()
+		stop_wandering = TRUE
+		start_automove(movement_target)
 
 /mob/living/simple_animal/cat/proc/handle_flee_target()
 	//see if we should stop fleeing
 	if (flee_target && !(flee_target.loc in view(src)))
 		flee_target = null
-		stop_automated_movement = 0
+		stop_wandering = FALSE
 
 	if (flee_target)
 		if(prob(25)) say("HSSSSS")
-		stop_automated_movement = 1
-		walk_away(src, flee_target, 7, 2)
+		set_moving_quickly()
+		stop_wandering = TRUE
+		start_automove(flee_target, metadata = global._flee_automove_metadata)
+
 
 /mob/living/simple_animal/cat/proc/set_flee_target(atom/A)
 	if(A)
@@ -137,32 +140,41 @@
 	var/mob/living/human/friend
 	var/befriend_job = null
 
+/mob/living/simple_animal/cat/fluff
+	var/follow_dist = 4
+
+/mob/living/simple_animal/cat/fluff/get_acceptable_automove_distance_from_target()
+	. = follow_dist
+	if(friend)
+		if(friend.stat >= DEAD || friend.is_asystole()) //danger
+			. = 1
+		else if (friend.stat || friend.current_health <= 50) //danger or just sleeping
+			. = 2
+	else
+		. = follow_dist
+	return max(. - 2, 1)
+
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
 	if (!QDELETED(friend))
-		var/follow_dist = 4
-		if (friend.stat >= DEAD || friend.is_asystole()) //danger
-			follow_dist = 1
-		else if (friend.stat || friend.current_health <= 50) //danger or just sleeping
-			follow_dist = 2
-		var/near_dist = max(follow_dist - 2, 1)
+		var/near_dist = get_acceptable_automove_distance_from_target()
 		var/current_dist = get_dist(src, friend)
 
 		if (movement_target != friend)
 			if (current_dist > follow_dist && !ismouse(movement_target) && (friend in oview(src)))
 				//stop existing movement
-				walk_to(src,0)
+				stop_automove()
 				turns_since_scan = 0
 
 				//walk to friend
-				stop_automated_movement = 1
+				stop_wandering = TRUE
 				movement_target = friend
-				walk_to(src, movement_target, near_dist, 4)
+				start_automove(movement_target)
 
 		//already following and close enough, stop
 		else if (current_dist <= near_dist)
-			walk_to(src,0)
+			stop_automove()
 			movement_target = null
-			stop_automated_movement = 0
+			stop_wandering = FALSE
 			if (prob(10))
 				say("Meow!")
 

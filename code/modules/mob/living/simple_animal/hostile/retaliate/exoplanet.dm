@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast
-	ai = /datum/ai/beast
+	ai = /datum/mob_controller/beast
 	nutrition = 300
 	var/list/prey
 
@@ -24,10 +24,10 @@
 				if(!attack_same && L.faction != faction)
 					LAZYDISTINCTADD(prey, weakref(L))
 
-/datum/ai/beast
+/datum/mob_controller/beast
 	expected_type = /mob/living/simple_animal/hostile/retaliate/beast
 
-/datum/ai/beast/do_process(time_elapsed)
+/datum/mob_controller/beast/do_process(time_elapsed)
 	var/mob/living/simple_animal/hostile/retaliate/beast/beast = body
 	var/nut = beast.get_nutrition()
 	var/max_nut = beast.get_max_nutrition()
@@ -78,9 +78,11 @@
 	desc = "A fast, armoured predator accustomed to hiding and ambushing in cold terrain."
 	faction = "samak"
 	icon = 'icons/mob/simple_animal/samak.dmi'
-	move_to_delay = 2
+	move_intents = list(
+		/decl/move_intent/walk/animal_fast,
+		/decl/move_intent/run/animal_fast
+	)
 	max_health = 125
-	speed = 2
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
 	speak_chance = 2.5
@@ -90,6 +92,7 @@
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 	)
+	base_movement_delay = 2
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
 	desc = "A fast, armoured predator accustomed to hiding and ambushing."
@@ -100,9 +103,11 @@
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
 	faction = "diyaab"
 	icon = 'icons/mob/simple_animal/diyaab.dmi'
-	move_to_delay = 3
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
 	max_health = 25
-	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	cold_damage_per_tick = 0
 	speak_chance = 2.5
@@ -110,15 +115,18 @@
 	emote_see    = list("sniffs the air cautiously","looks around")
 	emote_hear   = list("snuffles")
 	mob_size = MOB_SIZE_SMALL
+	base_movement_delay = 1
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak
 	name = "shantak"
 	desc = "A piglike creature with a bright iridiscent mane that sparkles as though lit by an inner light. Don't be fooled by its beauty though."
 	faction = "shantak"
 	icon = 'icons/mob/simple_animal/shantak.dmi'
-	move_to_delay = 3
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
 	max_health = 75
-	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
 	speak_chance = 1
@@ -155,15 +163,18 @@
 	desc = "It looks like a crustacean with an exceedingly hard carapace. Watch the pinchers!"
 	faction = "crab"
 	icon = 'icons/mob/simple_animal/royalcrab.dmi'
-	move_to_delay = 3
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
 	max_health = 150
-	speed = 1
 	natural_weapon = /obj/item/natural_weapon/pincers
 	speak_chance = 0.5
 	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT
 		)
+	base_movement_delay = 1
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
 	name = "charbaby"
@@ -172,14 +183,14 @@
 	mob_size = MOB_SIZE_LARGE
 	max_health = 45
 	natural_weapon = /obj/item/natural_weapon/charbaby
-	speed = 2
 	return_damage_min = 2
 	return_damage_max = 3
 	harm_intent_damage = 1
 	blood_color = COLOR_NT_RED
 	natural_armor = list(
 		ARMOR_LASER = ARMOR_LASER_HANDGUNS
-		)
+	)
+	base_movement_delay = 2
 
 /obj/item/natural_weapon/charbaby
 	name = "scalding hide"

@@ -14,7 +14,7 @@
 	response_help_3p = "$USER$ waves $USER_THEIR$ hand through $TARGET$."
 	response_harm =    "agitates"
 	response_disarm =  "fans at"
-	ai = /datum/ai/nanomachines
+	ai = /datum/mob_controller/nanomachines
 
 	var/regen_time = 0
 	var/emergency_protocols = 0
@@ -25,10 +25,10 @@
 	force = 2
 	sharp = TRUE
 
-/datum/ai/nanomachines
+/datum/mob_controller/nanomachines
 	expected_type = /mob/living/simple_animal/hostile/commanded/nanomachine
 
-/datum/ai/nanomachines/do_process(time_elapsed)
+/datum/mob_controller/nanomachines/do_process(time_elapsed)
 	. = ..()
 	var/mob/living/simple_animal/hostile/commanded/nanomachine/swarm = body
 	switch(swarm.stance)
@@ -63,7 +63,8 @@
 /mob/living/simple_animal/hostile/commanded/nanomachine/proc/move_to_heal()
 	if(!target_mob)
 		return 0
-	walk_to(src,target_mob,1,move_to_delay)
+	set_moving_quickly()
+	start_automove(target_mob)
 	if(Adjacent(target_mob))
 		stance = COMMANDED_HEALING
 

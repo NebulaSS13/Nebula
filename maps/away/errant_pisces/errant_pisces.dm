@@ -21,9 +21,8 @@
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
 	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
-	turns_per_move = 5
+	turns_per_wander = 5
 	butchery_data = /decl/butchery_data/animal/fish/space_carp/shark
-	speed = 2
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35

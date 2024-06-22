@@ -8,19 +8,19 @@
 	emote_hear   = list("brays")
 	emote_see    = list("shakes its head", "stamps a foot", "glares around")
 	speak_chance = 0.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	see_in_dark = 6
 	faction = "goat"
 	max_health = 40
 	natural_weapon = /obj/item/natural_weapon/hooves
 	butchery_data = /decl/butchery_data/animal/ruminant/goat
-	ai = /datum/ai/goat
+	ai = /datum/mob_controller/goat
 	var/datum/reagents/udder = null
 
-/datum/ai/goat
+/datum/mob_controller/goat
 	expected_type = /mob/living/simple_animal/hostile/retaliate/goat
 
-/datum/ai/goat/do_process(time_elapsed)
+/datum/mob_controller/goat/do_process(time_elapsed)
 	//chance to go crazy and start wacking stuff
 	var/mob/living/simple_animal/hostile/retaliate/goat/goat = body
 	if(!length(goat.enemies) && prob(1))
@@ -91,7 +91,7 @@
 	emote_hear   = list("brays")
 	emote_see    = list("shakes its head")
 	speak_chance = 0.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	see_in_dark = 6
 	max_health = 50
 	butchery_data = /decl/butchery_data/animal/ruminant/cow
@@ -156,7 +156,7 @@
 	emote_hear   = list("cheeps")
 	emote_see    = list("pecks at the ground","flaps its tiny wings")
 	speak_chance = 1
-	turns_per_move = 2
+	turns_per_wander = 2
 	max_health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
@@ -183,7 +183,7 @@
 	mob_size = MOB_SIZE_SMALL
 	butchery_data = /decl/butchery_data/animal/small/fowl
 	speak_chance = 2
-	turns_per_move = 3
+	turns_per_wander = 3
 	abstract_type = /mob/living/simple_animal/fowl
 	var/body_color
 

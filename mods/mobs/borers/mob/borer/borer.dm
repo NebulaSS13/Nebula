@@ -9,10 +9,10 @@
 	response_help_1p = "You poke $TARGET$."
 	response_disarm =  "prods"
 	response_harm =    "stamps on"
+	base_movement_delay = 5
 
-	speed = 5
 	a_intent = I_HURT
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	status_flags = CANPUSH
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	wander = 0

@@ -1,11 +1,15 @@
 /mob/living/simple_animal/hostile
 	faction = "hostile"
-	stop_automated_movement_when_pulled = 0
+	stop_wandering_when_pulled = FALSE
 	a_intent = I_HURT
 	response_help_3p = "$USER$ pokes $TARGET$."
 	response_help_1p = "You poke $TARGET$."
 	response_disarm =  "shoves"
 	response_harm =    "strikes"
+	move_intents = list(
+		/decl/move_intent/walk/animal_slow,
+		/decl/move_intent/run/animal_slow
+	)
 
 	var/stance = HOSTILE_STANCE_IDLE	//Used to determine behavior
 	var/mob/living/target_mob
@@ -17,7 +21,6 @@
 	var/casingtype
 	var/fire_desc = "fires" //"X fire_desc at Y!"
 	var/ranged_range = 6 //tiles of range for ranged attackers to attack
-	var/move_to_delay = 4 //delay for the automated movement.
 
 	var/list/friends = list()
 	var/break_stuff_probability = 10
@@ -58,7 +61,7 @@
 		return null
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
-	stop_automated_movement = 0
+	stop_wandering = FALSE
 	for(var/atom/A in ListTargets(10))
 		var/atom/F = Found(A)
 		if(F)
@@ -100,9 +103,10 @@
 	if(!can_act())
 		return
 	if(HAS_STATUS(src, STAT_CONFUSE))
-		walk_to(src, pick(orange(2, src)), 1, move_to_delay)
+		set_moving_slowly()
+		start_automove(pick(orange(2, src)))
 		return
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	if(QDELETED(target_mob) || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
@@ -111,13 +115,15 @@
 				if(!move_only)
 					OpenFire(target_mob)
 			else
-				walk_to(src, target_mob, 1, move_to_delay)
+				set_moving_quickly()
+				start_automove(target_mob)
 		else
 			stance = HOSTILE_STANCE_ATTACKING
-			walk_to(src, target_mob, 1, move_to_delay)
+			set_moving_quickly()
+			start_automove(target_mob)
 
 /mob/living/simple_animal/hostile/proc/handle_attacking_target()
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	if(!target_mob || SA_attackable(target_mob))
 		LoseTarget()
 		return 0
@@ -138,11 +144,11 @@
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
-	walk(src, 0)
+	stop_automove()
 
 /mob/living/simple_animal/hostile/proc/LostTarget()
 	stance = HOSTILE_STANCE_IDLE
-	walk(src, 0)
+	stop_automove()
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	return hearers(src, dist)-src
@@ -150,12 +156,12 @@
 /mob/living/simple_animal/hostile/handle_regular_status_updates()
 	. = ..()
 	if(!.)
-		walk(src, 0)
+		stop_automove()
 
 /mob/living/simple_animal/hostile/do_delayed_life_action()
 	..()
 	if(!can_act())
-		walk(src, 0)
+		stop_automove()
 		kick_stance()
 		return 0
 
@@ -180,7 +186,7 @@
 	else
 		if(stance != HOSTILE_STANCE_INSIDE)
 			stance = HOSTILE_STANCE_INSIDE
-			walk(src,0)
+			stop_automove()
 			target_mob = null
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
@@ -238,11 +244,11 @@
 	return TRUE
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings() //courtesy of Lohikar
-	if(!can_act())
+	if(!can_act() || !target_mob)
 		return
 	if(prob(break_stuff_probability) && !Adjacent(target_mob))
 		face_atom(target_mob)
-		var/turf/targ = get_step_towards(src, target_mob)
+		var/turf/targ = get_step_resolving_mimic(get_turf(src), get_dir(src, target_mob))
 		if(!targ)
 			return
 

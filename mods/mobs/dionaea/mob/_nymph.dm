@@ -28,7 +28,7 @@
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
 	hud_used = /datum/hud/diona_nymph
 
-	ai = /datum/ai/nymph
+	ai = /datum/mob_controller/nymph
 
 	z_flags = ZMM_MANGLE_PLANES
 

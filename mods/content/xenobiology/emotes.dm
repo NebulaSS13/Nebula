@@ -24,7 +24,7 @@
 /decl/emote/slime/do_extra(atom/user)
 	if(ismob(user))
 		var/mob/user_mob = user
-		var/datum/ai/slime/slime_ai = user_mob.ai
+		var/datum/mob_controller/slime/slime_ai = user_mob.ai
 		if(istype(slime_ai))
 			slime_ai.mood = mood
 			user.update_icon()

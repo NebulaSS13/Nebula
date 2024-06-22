@@ -15,7 +15,7 @@
 	var/turf/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		for(var/mob/living/slime/slime in viewers(location, 7))
-			var/datum/ai/slime/slime_ai = slime.ai
+			var/datum/mob_controller/slime/slime_ai = slime.ai
 			if(istype(slime_ai))
 				slime_ai.rabid = TRUE
 				slime.visible_message(SPAN_DANGER("\The [slime] is driven into a frenzy!"))

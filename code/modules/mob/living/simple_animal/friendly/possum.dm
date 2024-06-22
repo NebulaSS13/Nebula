@@ -9,7 +9,7 @@
 	emote_see    = list("forages for trash", "lounges")
 	pass_flags = PASS_FLAG_TABLE
 	speak_chance = 0.5
-	turns_per_move = 3
+	turns_per_wander = 3
 	see_in_dark = 6
 	max_health = 50
 	response_harm = "stamps on"
@@ -24,13 +24,13 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
-	ai = /datum/ai/opossum
+	ai = /datum/mob_controller/opossum
 	var/is_angry = FALSE
 
-/datum/ai/opossum
+/datum/mob_controller/opossum
 	expected_type = /mob/living/simple_animal/opossum
 
-/datum/ai/opossum/do_process(time_elapsed)
+/datum/mob_controller/opossum/do_process(time_elapsed)
 	. = ..()
 	if(!prob(1))
 		return

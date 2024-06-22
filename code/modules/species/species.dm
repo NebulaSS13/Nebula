@@ -198,7 +198,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/manual_dexterity = DEXTERITY_FULL
 
-	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs. This will override mob AIs.
+	var/datum/mob_controller/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs. This will override mob AIs.
 
 	var/exertion_emote_chance =    5
 	var/exertion_effect_chance =   0

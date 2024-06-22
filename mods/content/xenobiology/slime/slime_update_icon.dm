@@ -11,7 +11,7 @@
 
 	..()
 
-	var/datum/ai/slime/slime_ai = ai
+	var/datum/mob_controller/slime/slime_ai = ai
 	if(stat != DEAD && istype(slime_ai) && slime_ai.mood)
 		add_overlay(image(slime_data.mood_icon, "aslime-[slime_ai.mood]"))
 

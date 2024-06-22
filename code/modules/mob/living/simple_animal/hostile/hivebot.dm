@@ -10,7 +10,6 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	speed = 4
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 		)
@@ -25,7 +24,7 @@
 /mob/living/simple_animal/hostile/hivebot/range
 	desc = "A junky looking robot with four spiky legs. It's equipped with some kind of small-bore gun."
 	ranged = 1
-	speed = 7
+	base_movement_delay = 7
 
 /mob/living/simple_animal/hostile/hivebot/rapid
 	ranged = 1
@@ -83,7 +82,6 @@ The megabot
 	icon = 'icons/mob/simple_animal/megabot.dmi'
 	max_health = 440
 	natural_weapon = /obj/item/natural_weapon/circular_saw
-	speed = 0
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL
@@ -94,6 +92,7 @@ The megabot
 
 	pixel_x = -32
 	default_pixel_x = -32
+	base_movement_delay = 0
 
 	var/attack_mode = ATTACK_MODE_MELEE
 	var/num_shots

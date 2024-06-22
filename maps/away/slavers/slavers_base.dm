@@ -134,9 +134,8 @@
 	desc = "Vigiliant fighter against slavery."
 	icon = 'maps/away/slavers/icons/abolitionist.dmi'
 	speak_chance = 0
-	turns_per_move = 5
-	speed = 4
-	stop_automated_movement_when_pulled = 0
+	turns_per_wander = 5
+	stop_wandering_when_pulled = FALSE
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE

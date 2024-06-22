@@ -1,8 +1,8 @@
-/datum/ai/human
+/datum/mob_controller/human
 	name = "human"
 	expected_type = /mob/living/human
 
-/datum/ai/human/do_process(var/time_elapsed)
+/datum/mob_controller/human/do_process(var/time_elapsed)
 	var/mob/living/human/H = body
 	if(H.stat != CONSCIOUS)
 		return

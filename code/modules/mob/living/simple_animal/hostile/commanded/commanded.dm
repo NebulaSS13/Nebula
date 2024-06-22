@@ -3,7 +3,7 @@
 	stance = COMMANDED_STOP
 	natural_weapon = /obj/item/natural_weapon
 	density = FALSE
-	ai = /datum/ai/commanded
+	ai = /datum/mob_controller/commanded
 	var/list/command_buffer = list()
 	var/list/known_commands = list("stay", "stop", "attack", "follow")
 	var/mob/master = null //undisputed master. Their commands hold ultimate sway and ultimate power.
@@ -22,10 +22,10 @@
 		command_buffer.Add(lowertext(html_decode(message)))
 	return 0
 
-/datum/ai/commanded
+/datum/mob_controller/commanded
 	expected_type = /mob/living/simple_animal/hostile/commanded
 
-/datum/ai/commanded/do_process(time_elapsed)
+/datum/mob_controller/commanded/do_process(time_elapsed)
 	..()
 	var/mob/living/simple_animal/hostile/commanded/com = body
 	while(com.command_buffer.len > 1)
@@ -69,11 +69,12 @@
 
 
 /mob/living/simple_animal/hostile/commanded/proc/follow_target()
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	if(!target_mob)
 		return
 	if(target_mob in ListTargets(10))
-		walk_to(src,target_mob,1,move_to_delay)
+		set_moving_slowly()
+		start_automove(target_mob)
 
 /mob/living/simple_animal/hostile/commanded/proc/commanded_stop() //basically a proc that runs whenever we are asked to stay put. Probably going to remain unused.
 	return
@@ -123,7 +124,7 @@
 
 /mob/living/simple_animal/hostile/commanded/proc/attack_command(var/mob/speaker,var/text)
 	target_mob = null //want me to attack something? Well I better forget my old target.
-	walk_to(src,0)
+	stop_automove()
 	stance = HOSTILE_STANCE_IDLE
 	if(text == "attack" || findtext(text,"everyone") || findtext(text,"anybody") || findtext(text, "somebody") || findtext(text, "someone")) //if its just 'attack' then just attack anybody, same for if they say 'everyone', somebody, anybody. Assuming non-pickiness.
 		allowed_targets = list("everyone")//everyone? EVERYONE
@@ -136,16 +137,16 @@
 /mob/living/simple_animal/hostile/commanded/proc/stay_command(var/mob/speaker,var/text)
 	target_mob = null
 	stance = COMMANDED_STOP
-	stop_automated_movement = 1
-	walk_to(src,0)
+	stop_wandering = TRUE
+	stop_automove()
 	return 1
 
 /mob/living/simple_animal/hostile/commanded/proc/stop_command(var/mob/speaker,var/text)
 	allowed_targets = list()
-	walk_to(src,0)
+	stop_automove()
 	target_mob = null //gotta stop SOMETHIN
 	stance = HOSTILE_STANCE_IDLE
-	stop_automated_movement = 0
+	stop_wandering = FALSE
 	return 1
 
 /mob/living/simple_animal/hostile/commanded/proc/follow_command(var/mob/speaker,var/text)

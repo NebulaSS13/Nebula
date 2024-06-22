@@ -4,10 +4,12 @@
 	desc = "You get the feeling you should run."
 	icon = 'icons/mob/simple_animal/vagrant.dmi'
 	max_health = 60
-	speed = 5
 	speak_chance = 0
-	turns_per_move = 4
-	move_to_delay = 4
+	turns_per_wander = 4
+	move_intents = list(
+		/decl/move_intent/walk/animal_fast,
+		/decl/move_intent/run/animal_fast
+	)
 	break_stuff_probability = 0
 	faction = "vagrant"
 	harm_intent_damage = 3
@@ -20,6 +22,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	bleed_colour = "#aad9de"
 	nutrition = 100
+	base_movement_delay = 5
 
 	var/cloaked = 0
 	var/mob/living/human/gripping = null
@@ -34,7 +37,7 @@
 	. = ..()
 	if(isliving(Proj.firer) && (target_mob != Proj.firer) && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
-		turns_per_move = 3
+		turns_per_wander = 3
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
@@ -60,8 +63,8 @@
 			else
 				gripping = null
 
-		if(turns_per_move != initial(turns_per_move))
-			turns_per_move = initial(turns_per_move)
+		if(turns_per_wander != initial(turns_per_wander))
+			turns_per_wander = initial(turns_per_wander)
 
 	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
 		cloaked = 1
@@ -79,12 +82,12 @@
 			alpha = 75
 			set_light(0)
 			icon_state = initial(icon_state)
-			move_to_delay = initial(move_to_delay)
+			set_moving_slowly()
 		else //It's fight time
 			alpha = 255
 			icon_state += "-glowing"
 			set_light(3, 0.2)
-			move_to_delay = 2
+			set_moving_quickly()
 
 /mob/living/simple_animal/hostile/vagrant/attack_target(mob/target)
 	. = ..()

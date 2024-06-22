@@ -1,7 +1,6 @@
 /mob/living/simple_animal/aquatic
 	icon = 'icons/mob/simple_animal/fish_content.dmi'
-	turns_per_move = 5
-	speed = 4
+	turns_per_wander = 5
 	mob_size = MOB_SIZE_SMALL
 	emote_see = list("glubs", "blubs", "bloops")
 	base_animal_type = /mob/living/simple_animal/aquatic

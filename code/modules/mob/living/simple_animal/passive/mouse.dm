@@ -9,7 +9,7 @@
 	emote_see    = list("runs in a circle", "shakes", "scritches at something")
 	pass_flags = PASS_FLAG_TABLE
 	speak_chance = 0.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	see_in_dark = 6
 	max_health = 5
 	response_harm = "stamps on"
@@ -26,7 +26,7 @@
 	base_animal_type = /mob/living/simple_animal/passive/mouse
 	butchery_data = /decl/butchery_data/animal/small/furred
 
-	ai = /datum/ai/passive/mouse
+	ai = /datum/mob_controller/passive/mouse
 
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
@@ -37,10 +37,10 @@
 /mob/living/simple_animal/passive/mouse/get_dexterity(var/silent)
 	return DEXTERITY_NONE // Mice are troll bait, give them no power.
 
-/datum/ai/passive/mouse
+/datum/mob_controller/passive/mouse
 	expected_type = /mob/living/simple_animal/passive/mouse
 
-/datum/ai/passive/mouse/do_process()
+/datum/mob_controller/passive/mouse/do_process()
 	..()
 	var/mob/living/simple_animal/passive/mouse/mouse = body
 	if(prob(mouse.speak_chance))

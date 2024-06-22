@@ -6,15 +6,15 @@
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	base_animal_type = /mob/living/simple_animal/construct
+	base_movement_delay = -1
 
 	response_help_1p = "You think better of touching $TARGET$."
 	response_help_3p = "$USER$ thinks better of touching $TARGET$."
 	response_disarm =  "flails at"
 	response_harm =    "punches"
 	icon = 'icons/mob/simple_animal/shade.dmi'
-	speed = -1
 	a_intent = I_HURT
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	status_flags = CANPUSH
 	universal_speak = FALSE
 	universal_understand = TRUE
@@ -104,13 +104,13 @@
 	harm_intent_damage = 0
 	natural_weapon = /obj/item/natural_weapon/juggernaut
 	mob_size = MOB_SIZE_LARGE
-	speed = 3
 	environment_smash = 2
 	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
 	hud_used = /datum/hud/construct/juggernaut
+	base_movement_delay = 3
 
 /obj/item/natural_weapon/juggernaut
 	name = "armored gauntlet"
@@ -150,11 +150,7 @@
 	mind.assigned_role = "Juggernaut"
 	mind.assigned_special_role = "Cultist"
 
-
 ////////////////////////Wraith/////////////////////////////////////////////
-
-
-
 /mob/living/simple_animal/construct/wraith
 	name = "Wraith"
 	real_name = "Wraith"
@@ -162,7 +158,6 @@
 	icon = 'icons/mob/simple_animal/construct_floating.dmi'
 	max_health = 75
 	natural_weapon = /obj/item/natural_weapon/wraith
-	speed = -1
 	environment_smash = 1
 	see_in_dark = 7
 	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
@@ -194,7 +189,6 @@
 	response_harm = "viciously beaten"
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/cult_builder
-	speed = 0
 	environment_smash = 1
 	construct_spells = list(
 		/spell/aoe_turf/conjure/construct/lesser,
@@ -204,6 +198,7 @@
 		/spell/aoe_turf/conjure/pylon
 	)
 	hud_used = /datum/hud/construct/artificer
+	base_movement_delay = 0
 
 /obj/item/natural_weapon/cult_builder
 	name = "heavy arms"
@@ -229,19 +224,17 @@
 	response_harm = "harmlessly punches"
 	harm_intent_damage = 0
 	natural_weapon = /obj/item/natural_weapon/juggernaut/behemoth
-	speed = 5
 	environment_smash = 2
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
 	hud_used = /datum/hud/construct/juggernaut
+	base_movement_delay = 5
 
 /obj/item/natural_weapon/juggernaut/behemoth
 	force = 50
 
 ////////////////////////Harvester////////////////////////////////
-
-
 
 /mob/living/simple_animal/construct/harvester
 	name = "Harvester"
@@ -250,11 +243,9 @@
 	icon = 'icons/mob/simple_animal/construct_harvester.dmi'
 	max_health = 150
 	natural_weapon = /obj/item/natural_weapon/harvester
-	speed = -1
 	environment_smash = 1
 	see_in_dark = 7
 	hud_used = /datum/hud/construct/harvester
-
 	construct_spells = list(
 		/spell/targeted/harvest
 	)

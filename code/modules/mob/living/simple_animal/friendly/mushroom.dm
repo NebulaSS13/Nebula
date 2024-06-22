@@ -4,7 +4,7 @@
 	icon = 'icons/mob/simple_animal/mushroom.dmi'
 	mob_size = MOB_SIZE_SMALL
 	speak_chance = 0
-	turns_per_move = 1
+	turns_per_wander = 1
 	max_health = 5
 	harm_intent_damage = 5
 	pass_flags = PASS_FLAG_TABLE

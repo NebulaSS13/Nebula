@@ -38,4 +38,4 @@
 		TAG_FACTION =   /decl/cultural_info/faction/other
 	)
 
-	ai = /datum/ai/monkey
+	ai = /datum/mob_controller/monkey

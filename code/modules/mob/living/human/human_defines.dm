@@ -1,6 +1,6 @@
 /mob/living/human
 
-	ai = /datum/ai/human
+	ai = /datum/mob_controller/human
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY

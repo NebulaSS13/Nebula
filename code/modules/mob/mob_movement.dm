@@ -1,9 +1,9 @@
 /mob
 	var/moving           = FALSE
 
-/mob/proc/SelfMove(var/direction)
+/atom/movable/proc/SelfMove(var/direction)
 	if(DoMove(direction, src) & MOVEMENT_HANDLED)
-		return TRUE // Doesn't necessarily mean the mob physically moved
+		return TRUE // Doesn't necessarily mean the atom physically moved
 
 /mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	. = current_posture.prone || ..() || !mover.density
@@ -313,7 +313,7 @@
 	var/choice = input(usr, "Select a default walk.", "Set Default Walk") as null|anything in get_movement_datums_by_missing_flag(MOVE_INTENT_QUICK)
 	if(choice && (choice in get_movement_datums_by_missing_flag(MOVE_INTENT_QUICK)))
 		default_walk_intent = choice
-		to_chat(src, "You will now default to [default_walk_intent] when moving deliberately.")
+		to_chat(src, SPAN_NOTICE("You will now default to [default_walk_intent] when moving deliberately."))
 
 /mob/verb/SetDefaultRun()
 	set name = "Set Default Run"
@@ -322,7 +322,7 @@
 	var/choice = input(usr, "Select a default run.", "Set Default Run") as null|anything in get_movement_datums_by_flag(MOVE_INTENT_QUICK)
 	if(choice && (choice in get_movement_datums_by_flag(MOVE_INTENT_QUICK)))
 		default_run_intent = choice
-		to_chat(src, "You will now default to [default_run_intent] when moving quickly.")
+		to_chat(src, SPAN_NOTICE("You will now default to [default_run_intent] when moving quickly."))
 
 /client/verb/setmovingslowly()
 	set hidden = 1
@@ -347,7 +347,7 @@
 		set_move_intent(default_run_intent)
 
 /mob/proc/can_sprint()
-	return FALSE
+	return TRUE
 
 /mob/proc/adjust_stamina(var/amt)
 	return

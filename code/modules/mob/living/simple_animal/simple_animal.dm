@@ -1,3 +1,4 @@
+
 /mob/living/simple_animal
 	name = "animal"
 	max_health = 20
@@ -10,6 +11,13 @@
 
 	icon_state = ICON_STATE_WORLD
 	buckle_pixel_shift = @"{'x':0,'y':0,'z':8}"
+
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
+
+	var/base_movement_delay = 4
 
 	var/can_have_rider = TRUE
 	var/max_rider_size = MOB_SIZE_SMALL
@@ -25,11 +33,12 @@
 	/// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
 	var/list/emote_see
 
-	var/turns_per_move = 1
-	var/turns_since_move = 0
-	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
+	/// Wandering tracking vars.
+	var/turns_per_wander = 1
+	var/turns_since_wander = 0
 	var/wander = TRUE // Does the mob wander around when idle?
-	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is grabbing it.
+	var/stop_wandering = FALSE //Use this to temporarely stop random movement or to if you write special movement code for animals.
+	var/stop_wandering_when_pulled = TRUE //When set to 1 this stops the animal from moving when someone is grabbing it.
 
 	//Interaction
 	var/response_help_1p = "You pet $TARGET$."
@@ -53,7 +62,6 @@
 	)
 
 	var/unsuitable_atmos_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
-	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
 	var/obj/item/natural_weapon/natural_weapon
@@ -184,7 +192,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		if(can_bleed && bleed_ticks > 0)
 			handle_bleeding()
 		if(is_aquatic && !submerged())
-			walk(src, 0)
+			stop_automove()
 			if(HAS_STATUS(src, STAT_PARA) <= 2) // gated to avoid redundant update_icon() calls.
 				SET_STATUS_MAX(src, STAT_PARA, 3)
 				update_icon()
@@ -231,15 +239,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(current_posture.prone)
 		if(!incapacitated())
 			set_posture(/decl/posture/standing)
-	else if(!stop_automated_movement && !buckled_mob && wander && !anchored)
-		if(isturf(src.loc) && !current_posture.prone)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
-			turns_since_move++
-			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
-				var/direction = pick(global.cardinal)
-				var/turf/move_to = get_step(loc, direction)
-				if(turf_is_safe(move_to))
-					SelfMove(direction)
-					turns_since_move = 0
+	else if(!stop_wandering && !buckled_mob && wander && !anchored && isturf(src.loc) && !current_posture.prone)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
+		turns_since_wander++
+		if(turns_since_wander >= turns_per_wander && (!(stop_wandering_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
+			set_moving_slowly()
+			var/direction = pick(global.cardinal)
+			var/turf/move_to = get_step(loc, direction)
+			if(turf_is_safe(move_to))
+				SelfMove(direction)
+				turns_since_wander = 0
 
 	//Speaking
 	if(prob(speak_chance))
@@ -398,15 +406,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		adjustBleedTicks(damage)
 
 /mob/living/simple_animal/get_movement_delay(var/travel_dir)
-	var/tally = ..() //Incase I need to add stuff other than "speed" later
-
-	tally += speed
-	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
-		if(tally <= 0)
-			tally = 1
-		tally *= purge
-
-	return tally+get_config_value(/decl/config/num/movement_animal)
+	. = max(1, ..() + base_movement_delay + get_config_value(/decl/config/num/movement_animal))
+	//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
+	if(purge)
+		. *= purge
 
 /mob/living/simple_animal/Stat()
 	. = ..()

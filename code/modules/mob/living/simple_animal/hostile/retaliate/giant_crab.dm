@@ -7,7 +7,7 @@
 	emote_hear = list("clicks")
 	emote_see = list("clacks")
 	speak_chance = 0.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	butchery_data = /decl/butchery_data/animal/arthropod/crab/giant
 	can_escape = TRUE //snip snip
 	break_stuff_probability = 15
@@ -23,7 +23,7 @@
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL
 		)
 	ability_cooldown = 2 MINUTES
-	ai = /datum/ai/giant_crab
+	ai = /datum/mob_controller/giant_crab
 
 	var/mob/living/human/victim //the human we're grabbing
 	var/grab_duration = 3 //duration of disable in life ticks to simulate a grab
@@ -31,10 +31,10 @@
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
 	var/continue_grab_prob = 35 //probability that a successful grab will be extended by one life tick
 
-/datum/ai/giant_crab
+/datum/mob_controller/giant_crab
 	expected_type = /mob/living/simple_animal/hostile/retaliate/giant_crab
 
-/datum/ai/giant_crab/do_process(time_elapsed)
+/datum/mob_controller/giant_crab/do_process(time_elapsed)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/giant_crab/crab = body
 	if((crab.current_health > crab.get_max_health() / 1.5) && length(crab.enemies) && prob(10))

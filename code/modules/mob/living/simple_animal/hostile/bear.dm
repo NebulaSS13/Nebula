@@ -8,10 +8,10 @@
 	emote_hear   = list("rawrs","grumbles","grawls")
 	emote_see    = list("stares ferociously", "stomps")
 	speak_chance = 0.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	see_in_dark = 6
 	response_harm = "pokes"
-	stop_automated_movement_when_pulled = 0
+	stop_wandering_when_pulled = FALSE
 	max_health = 60
 	natural_weapon = /obj/item/natural_weapon/claws/strong
 	can_escape = TRUE
@@ -41,7 +41,7 @@
 	switch(stance)
 
 		if(HOSTILE_STANCE_TIRED)
-			stop_automated_movement = 1
+			stop_wandering = TRUE
 			stance_step++
 			if(stance_step >= 10) //rests for 10 ticks
 				if(target_mob && (target_mob in ListTargets(10)))
@@ -50,7 +50,7 @@
 					stance = HOSTILE_STANCE_IDLE
 
 		if(HOSTILE_STANCE_ALERT)
-			stop_automated_movement = 1
+			stop_wandering = TRUE
 			var/found_mob = 0
 			if(target_mob && (target_mob in ListTargets(10)))
 				if(!(SA_attackable(target_mob)))
@@ -76,7 +76,7 @@
 				custom_emote(1, "is worn out and needs to rest." )
 				stance = HOSTILE_STANCE_TIRED
 				stance_step = 0
-				walk(src, 0) //This stops the bear's walking
+				stop_automove()
 				return
 
 

@@ -50,10 +50,10 @@
 		else
 			player_baby.key = key
 
-		var/datum/ai/slime/my_ai = ai
+		var/datum/mob_controller/slime/my_ai = ai
 		for(var/mob/living/slime/baby in babies)
 			step_away(baby, src)
-			var/datum/ai/slime/baby_ai = baby.ai
+			var/datum/mob_controller/slime/baby_ai = baby.ai
 			if(istype(baby_ai) && istype(my_ai))
 				baby_ai.observed_friends = my_ai.observed_friends?.Copy()
 	qdel(src)

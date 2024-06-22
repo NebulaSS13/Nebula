@@ -8,7 +8,7 @@
 	emote_see      = list("shakes its head", "stamps a hoof", "looks around quickly")
 	emote_speech   = list("Ough!", "Ourgh!", "Mroough!", "Broough?")
 	speak_chance   = 0.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	see_in_dark    = 6
 	faction        = "deer"
 	max_health     = 60

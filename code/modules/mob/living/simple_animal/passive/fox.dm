@@ -1,8 +1,8 @@
-/datum/ai/passive/fox
+/datum/mob_controller/passive/fox
 	var/weakref/hunt_target
 	var/next_hunt = 0
 
-/datum/ai/passive/fox/update_targets()
+/datum/mob_controller/passive/fox/update_targets()
 	// Fleeing takes precedence.
 	. = ..()
 	if(!.  && !hunt_target && world.time >= next_hunt) // TODO: generalized nutrition process. && body.get_nutrition() < body.get_max_nutrition() * 0.5)
@@ -13,10 +13,10 @@
 
 	return . || !!hunt_target
 
-/datum/ai/passive/fox/proc/can_hunt(mob/living/victim)
+/datum/mob_controller/passive/fox/proc/can_hunt(mob/living/victim)
 	return !victim.isSynthetic() && (victim.stat == DEAD || victim.get_object_size() < body.get_object_size())
 
-/datum/ai/passive/fox/do_process(time_elapsed)
+/datum/mob_controller/passive/fox/do_process(time_elapsed)
 
 	..()
 
@@ -27,13 +27,14 @@
 	var/atom/hunt_target_atom = hunt_target?.resolve()
 	if(!isliving(hunt_target_atom) || QDELETED(hunt_target_atom) || !(hunt_target_atom in view(body)))
 		hunt_target = null
-		critter.stop_automated_movement = FALSE
+		critter.stop_wandering = FALSE
 		return
 
 	// Find or pursue the target.
 	if(!body.Adjacent(hunt_target_atom))
-		critter.stop_automated_movement = 1
-		walk_to(body, hunt_target_atom, 0, 3)
+		critter.set_moving_quickly()
+		critter.stop_wandering = TRUE
+		body.start_automove(hunt_target_atom)
 		return
 
 	// Hunt/consume the target.
@@ -43,7 +44,8 @@
 
 	if(QDELETED(hunt_mob))
 		hunt_target = null
-		critter.stop_automated_movement = FALSE
+		critter.set_moving_slowly()
+		critter.stop_wandering = FALSE
 		return
 
 	if(hunt_mob.stat != DEAD)
@@ -51,7 +53,7 @@
 
 	// Eat the mob.
 	hunt_target = null
-	critter.stop_automated_movement = FALSE
+	critter.stop_wandering = FALSE
 	body.visible_message(SPAN_DANGER("\The [body] consumes the body of \the [hunt_mob]!"))
 	var/remains_type = hunt_mob.get_remains_type()
 	if(remains_type)
@@ -69,7 +71,7 @@
 	desc           = "A cunning and graceful predatory mammal, known for its red fur and eerie screams."
 	icon           = 'icons/mob/simple_animal/fox.dmi'
 	natural_weapon = /obj/item/natural_weapon/bite/weak
-	ai             = /datum/ai/passive/fox
+	ai             = /datum/mob_controller/passive/fox
 	mob_size       = MOB_SIZE_SMALL
 	emote_speech   = list("Yip!","AIEE!","YIPE!")
 	speak_emote    = list("yelps", "yips", "hisses", "screams")
