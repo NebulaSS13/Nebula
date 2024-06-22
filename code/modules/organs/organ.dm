@@ -338,16 +338,17 @@
 /obj/item/organ/proc/remove_rejuv()
 	qdel(src)
 
-/obj/item/organ/proc/rejuvenate(var/ignore_organ_aspects)
+/obj/item/organ/proc/rejuvenate(var/ignore_organ_traits)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!owner)
 		PRINT_STACK_TRACE("rejuvenate() called on organ of type [type] with no owner.")
 	damage = 0
 	reset_status()
-	if(!ignore_organ_aspects && length(owner?.personal_aspects))
-		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
-			if(aspect.applies_to_organ(organ_tag))
-				aspect.apply(owner)
+	if(!ignore_organ_traits)
+		for(var/trait_type in owner.get_traits())
+			var/decl/trait/trait = GET_DECL(trait_type)
+			if(trait.applies_to_organ(organ_tag) && trait.reapply_on_rejuvenation)
+				trait.apply_trait(owner)
 
 /obj/item/organ/proc/reset_status()
 	vital_to_owner = null // organ modifications might need this to be recalculated

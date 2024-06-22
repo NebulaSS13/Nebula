@@ -353,7 +353,8 @@ var/global/list/time_prefs_fixed = list()
 	player_setup.sanitize_setup()
 	validate_comments_record() // Make sure a record has been generated for this character.
 	character.comments_record_id = comments_record_id
-	character.personal_aspects = list()
+	character.traits = null
+
 	var/decl/bodytype/new_bodytype = get_bodytype_decl()
 	if(species == character.get_species_name())
 		character.set_bodytype(new_bodytype)
@@ -415,6 +416,10 @@ var/global/list/time_prefs_fixed = list()
 				if(O)
 					O.set_sprite_accessory(accessory, accessory_category, accessory_colour, skip_update = TRUE)
 
+	if(length(traits))
+		for(var/trait_type in traits)
+			character.set_trait(trait_type, traits[trait_type] || TRAIT_LEVEL_EXISTS)
+
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()
 
@@ -426,17 +431,8 @@ var/global/list/time_prefs_fixed = list()
 	character.update_icon()
 	character.update_transform()
 
-	if(length(aspects))
-		for(var/atype in aspects)
-			character.personal_aspects |= GET_DECL(atype)
-		character.need_aspect_sort = TRUE
-		character.apply_aspects(ASPECTS_PHYSICAL)
-
 	if(is_preview_copy)
 		return
-
-	if(length(aspects))
-		character.apply_aspects(ASPECTS_MENTAL)
 
 	for(var/token in cultural_info)
 		character.set_cultural_value(token, cultural_info[token], defer_language_update = TRUE)

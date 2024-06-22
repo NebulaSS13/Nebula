@@ -111,7 +111,7 @@
 /decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	if(ishuman(M))
@@ -202,7 +202,7 @@
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	if(ishuman(M))

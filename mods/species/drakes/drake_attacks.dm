@@ -1,5 +1,5 @@
 /proc/drake_infect_wounds(var/obj/item/organ/external/bitten)
-	if(bitten.owner?.HasTrait(/decl/trait/sivian_biochemistry))
+	if(bitten.owner?.has_trait(/decl/trait/sivian_biochemistry))
 		return
 	var/list/open_wounds = list()
 	for(var/datum/wound/wound in bitten?.wounds)

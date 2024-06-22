@@ -14,7 +14,7 @@
 		/decl/config/num/loadout_slots,
 		/decl/config/num/max_maint_drones,
 		/decl/config/num/drone_build_time,
-		/decl/config/num/max_character_aspects,
+		/decl/config/num/max_character_traits,
 		/decl/config/text/irc_bot_host,
 		/decl/config/text/main_irc,
 		/decl/config/text/admin_irc,
@@ -159,10 +159,10 @@
 	desc = "A drone will become available every X ticks since last drone spawn. Default is 2 minutes."
 	default_value = 1200
 
-/decl/config/num/max_character_aspects
-	uid = "max_character_aspects"
+/decl/config/num/max_character_traits
+	uid = "max_character_traits"
 	default_value = 5
-	desc = "Remove the # to define a different cap for aspect points in chargen."
+	desc = "Remove the # to define a different cap for trait points in chargen."
 
 /decl/config/text/irc_bot_host
 	uid = "irc_bot_host"

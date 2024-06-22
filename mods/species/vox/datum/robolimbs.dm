@@ -7,4 +7,4 @@
 	name = "Improvised"
 	icon_base = 'mods/species/vox/icons/body/improvised_cyberlimbs.dmi'
 
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/bodytype/prosthetic/vox, arkmade, 2)
+DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/vox, arkmade, 2)

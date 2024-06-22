@@ -16,4 +16,4 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	material = /decl/material/solid/organic/wood
 
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/bodytype/prosthetic/wooden, pirate, 0)
+DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/wooden, pirate, 0)

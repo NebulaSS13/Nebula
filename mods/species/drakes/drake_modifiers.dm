@@ -27,7 +27,7 @@
 			user.remove_aura(src)
 		return 0
 
-	if(!user.HasTrait(/decl/trait/sivian_biochemistry))
+	if(!user.has_trait(/decl/trait/sivian_biochemistry))
 		user.heal_damage(BRUTE, 1, do_update_health = FALSE)
 		user.heal_damage(BURN,  1, do_update_health = TRUE)
 		return 1

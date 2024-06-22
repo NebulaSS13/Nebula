@@ -386,9 +386,13 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	for(var/trait_type in traits)
 		var/trait_level = traits[trait_type]
-		var/decl/trait/T = GET_DECL(trait_type)
-		if(!T.validate_level(trait_level))
+		var/decl/trait/trait = GET_DECL(trait_type)
+		if(!trait.validate_level(trait_level))
 			. += "invalid levels for species trait [trait_type]"
+		if(name in trait.blocked_species)
+			. += "trait [trait.name] prevents this species from taking it"
+		if(trait.permitted_species && !(name in trait.permitted_species))
+			. += "trait [trait.name] does not permit this species to take it"
 
 	if(!length(blood_types))
 		. += "missing at least one blood type"

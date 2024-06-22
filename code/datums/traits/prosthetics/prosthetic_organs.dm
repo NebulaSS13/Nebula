@@ -1,14 +1,14 @@
-/decl/aspect/prosthetic_organ
+/decl/trait/prosthetic_organ
 	name = "Prosthetic Heart"
-	aspect_flags = ASPECTS_PHYSICAL
-	desc = "You have a synthetic heart."
-	aspect_cost = 1
+	description = "You have a synthetic heart."
+	trait_cost = 1
+	available_at_chargen = TRUE
 	category = "Prosthetic Organs"
-	sort_value = 2
+	reapply_on_rejuvenation = TRUE
 	var/synthetic_bodytype_restricted = FALSE
 	var/apply_to_organ = BP_HEART
 
-/decl/aspect/prosthetic_organ/is_available_to(datum/preferences/pref)
+/decl/trait/prosthetic_organ/is_available_to(datum/preferences/pref)
 	. = ..()
 	if(. && pref.species && pref.bodytype)
 
@@ -34,56 +34,56 @@
 
 		return TRUE
 
-/decl/aspect/prosthetic_organ/applies_to_organ(var/organ)
+/decl/trait/prosthetic_organ/applies_to_organ(var/organ)
 	return apply_to_organ && organ == apply_to_organ
 
-/decl/aspect/prosthetic_organ/apply(mob/living/holder)
+/decl/trait/prosthetic_organ/apply_trait(mob/living/holder)
 	. = ..()
 	if(.)
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(holder, apply_to_organ)
 		if(I)
 			I.set_bodytype(I.species.base_internal_prosthetics_model)
 
-/decl/aspect/prosthetic_organ/eyes
+/decl/trait/prosthetic_organ/eyes
 	name = "Prosthetic Eyes"
-	desc = "Your vision is augmented."
+	description = "Your vision is augmented."
 	apply_to_organ = BP_EYES
 	incompatible_with = list(
-		/decl/aspect/handicap/impaired_vision,
-		/decl/aspect/handicap/colourblind,
-		/decl/aspect/handicap/colourblind/protanopia,
-		/decl/aspect/handicap/colourblind/tritanopia,
-		/decl/aspect/handicap/colourblind/achromatopsia
+		/decl/trait/malus/impaired_vision,
+		/decl/trait/malus/colourblind,
+		/decl/trait/malus/colourblind/protanopia,
+		/decl/trait/malus/colourblind/tritanopia,
+		/decl/trait/malus/colourblind/achromatopsia
 	)
 
-/decl/aspect/prosthetic_organ/kidneys
+/decl/trait/prosthetic_organ/kidneys
 	name = "Prosthetic Kidneys"
-	desc = "You have synthetic kidneys."
+	description = "You have synthetic kidneys."
 	apply_to_organ = BP_KIDNEYS
 
-/decl/aspect/prosthetic_organ/liver
+/decl/trait/prosthetic_organ/liver
 	name = "Prosthetic Liver"
-	desc = "You have a literal iron liver."
+	description = "You have a literal iron liver."
 	apply_to_organ = BP_LIVER
 
-/decl/aspect/prosthetic_organ/lungs
+/decl/trait/prosthetic_organ/lungs
 	name = "Prosthetic Lungs"
-	desc = "You have synthetic lungs."
+	description = "You have synthetic lungs."
 	apply_to_organ = BP_LUNGS
 
-/decl/aspect/prosthetic_organ/stomach
+/decl/trait/prosthetic_organ/stomach
 	name = "Prosthetic Stomach"
-	desc = "You have a literal iron stomach."
+	description = "You have a literal iron stomach."
 	apply_to_organ = BP_STOMACH
 
-/decl/aspect/prosthetic_organ/brain
+/decl/trait/prosthetic_organ/brain
 	name = "Synthetic Brain"
-	desc = "You are an artificial lifeform, with a mind made of steel and light."
+	description = "You are an artificial lifeform, with a mind made of steel and light."
 	apply_to_organ = BP_BRAIN
 	synthetic_bodytype_restricted = TRUE
 	var/new_brain_type = /obj/item/organ/internal/brain/robotic
 
-/decl/aspect/prosthetic_organ/brain/apply(mob/living/holder)
+/decl/trait/prosthetic_organ/brain/apply_trait(mob/living/holder)
 	. = ..()
 	if(.)
 		var/obj/item/organ/external/affected
