@@ -443,20 +443,24 @@ var/global/list/all_apcs = list()
 		return wires.Interact(user)
 	return ..()
 
-/obj/machinery/power/apc/bash(obj/item/W, mob/user)
-	if (!(user.a_intent == I_HURT) || (W.item_flags & ITEM_FLAG_NO_BLUDGEON))
+/obj/machinery/power/apc/bash(obj/item/used_item, mob/user)
+	if (!(user.a_intent == I_HURT) || (used_item.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		return
 
-	if(!panel_open && W.force >= 5 && W.w_class >= ITEM_SIZE_NORMAL)
+	if(!used_item.user_can_wield(user))
+		return FALSE
+
+	. = ..()
+	if(. && !panel_open && used_item.w_class >= ITEM_SIZE_NORMAL)
 		if (((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden))	&& prob(20))
-			playsound(get_turf(src), 'sound/weapons/smash.ogg', 75, 1)
+			playsound(get_turf(src), 'sound/weapons/smash.ogg', 75, TRUE)
 			if(force_open_panel(user) == MCS_CHANGE)
 				cover_removed = TRUE
-				user.visible_message("<span class='danger'>The APC cover was knocked down with the [W.name] by [user.name]!</span>", \
-					"<span class='danger'>You knock down the APC cover with your [W.name]!</span>", \
-					"You hear a bang.")
-			return TRUE
-	return ..()
+				user.visible_message(
+					SPAN_DANGER("\The [user] knocks open the APC cover with \the [used_item]!"),
+					SPAN_DANGER("You knock down the APC cover with your [used_item.name]!"),
+					"You hear a bang."
+				)
 
 // attack with hand - remove cell (if cover open) or interact with the APC
 

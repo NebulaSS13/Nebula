@@ -330,18 +330,24 @@
 		emagged = TRUE
 		return 1
 
-/obj/machinery/door/bash(obj/item/I, mob/user)
-	if(density && user.a_intent == I_HURT && !(I.item_flags & ITEM_FLAG_NO_BLUDGEON))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-		if(I.force < min_force)
-			user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I] with no visible effect.</span>")
-		else
-			user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
-			playsound(src.loc, hitsound, 100, 1)
-			take_damage(I.force, I.atom_damage_type)
-		return TRUE
-	return FALSE
+/obj/machinery/door/bash(obj/item/weapon, mob/user)
+	if(isliving(user) && user.a_intent != I_HURT)
+		return FALSE
+	if(!weapon.user_can_wield(user))
+		return FALSE
+	if(weapon.item_flags & ITEM_FLAG_NO_BLUDGEON)
+		return FALSE
+	if(!density)
+		return FALSE
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
+	if(weapon.force < min_force)
+		user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [weapon] with no visible effect.</span>")
+	else
+		user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [weapon]!</span>")
+		playsound(src.loc, hitsound, 100, 1)
+		take_damage(weapon.force, weapon.atom_damage_type)
+	return TRUE
 
 /obj/machinery/door/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(!current_health)

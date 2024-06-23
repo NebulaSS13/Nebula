@@ -44,12 +44,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(!.)
 		return bash(W,user)
 
-/atom/movable/proc/bash(obj/item/W, mob/user)
+/atom/movable/proc/bash(obj/item/weapon, mob/user)
 	if(isliving(user) && user.a_intent == I_HELP)
 		return FALSE
-	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON)
+	if(!weapon.user_can_wield(user))
 		return FALSE
-	visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
+	if(weapon.item_flags & ITEM_FLAG_NO_BLUDGEON)
+		return FALSE
+	visible_message(SPAN_DANGER("[src] has been hit by [user] with [weapon]."))
 	return TRUE
 
 /mob/living/attackby(obj/item/I, mob/user)

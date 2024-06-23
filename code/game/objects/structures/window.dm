@@ -288,6 +288,8 @@
 /obj/structure/window/bash(obj/item/weapon, mob/user)
 	if(isliving(user) && user.a_intent == I_HELP)
 		return FALSE
+	if(!weapon.user_can_wield(user))
+		return FALSE
 	if(weapon.item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return FALSE
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
