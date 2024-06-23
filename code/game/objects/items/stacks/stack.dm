@@ -86,6 +86,8 @@
 		I.maptext_y = 2
 		I.maptext = STYLE_SMALLFONTS_OUTLINE(get_amount(), 6, (color || COLOR_WHITE), COLOR_BLACK)
 		add_overlay(I)
+	else
+		compile_overlays() // prevent maptext from showing when we're dropped
 
 /obj/item/stack/Move()
 	var/on_turf = isturf(loc)
