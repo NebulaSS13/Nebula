@@ -52,6 +52,10 @@
 	craft_stack_types          = /obj/item/stack/material/brick
 	difficulty                 = MAT_VALUE_HARD_DIY
 
+/decl/stack_recipe/turfs/wall/brick/shutter
+	name                       = "shuttered brick wall"
+	result_type                = /turf/wall/brick/shutter
+
 /decl/stack_recipe/turfs/floor/brick
 	name                       = "cobblestone path"
 	result_type                = /turf/floor/natural/path

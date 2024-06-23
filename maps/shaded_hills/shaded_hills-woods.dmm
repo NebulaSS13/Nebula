@@ -164,6 +164,9 @@
 /obj/structure/wall_sconce/lantern,
 /turf/floor/wood/ebony,
 /area/shaded_hills/forester_hut)
+"MU" = (
+/turf/wall/log/ebony/shutter,
+/area/shaded_hills/forester_hut)
 "Oi" = (
 /obj/structure/closet/crate/chest/ebony,
 /turf/floor/wood/ebony,
@@ -19597,7 +19600,7 @@ YO
 YO
 YO
 ES
-SI
+MU
 TP
 lb
 lb
@@ -19907,7 +19910,7 @@ lb
 lb
 lb
 JJ
-SI
+MU
 kx
 kx
 ES
@@ -20207,7 +20210,7 @@ ES
 ES
 SI
 SI
-SI
+MU
 SI
 SI
 SI

@@ -1,8 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aM" = (
-/obj/structure/window/basic/full,
-/obj/structure/wall_frame/log/ebony,
-/turf/floor/natural/path/basalt,
+/turf/wall/log/ebony/shutter,
 /area/shaded_hills/witch_hut)
 "bg" = (
 /turf/floor/wood/ebony,
@@ -8926,7 +8924,7 @@ Xt
 Xt
 Xt
 Xt
-Ev
+aM
 vz
 YX
 Ev
@@ -9084,7 +9082,7 @@ bg
 SE
 bg
 bg
-aM
+Ev
 Xt
 Xt
 Xt
@@ -9388,7 +9386,7 @@ bg
 bg
 bg
 KA
-aM
+Ev
 Xt
 BY
 lE
@@ -9688,7 +9686,7 @@ Xt
 Xt
 Ev
 Ev
-Ev
+aM
 Ev
 Ev
 Ev

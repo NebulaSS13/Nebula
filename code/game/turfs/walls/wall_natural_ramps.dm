@@ -27,7 +27,7 @@
 		blocks_air = initial(blocks_air)
 		density    = initial(density)
 		color      = initial(color)
-		set_opacity(!material || material.opacity >= 0.5)
+		refresh_opacity()
 
 		icon = 'icons/turf/walls/natural.dmi'
 		icon_state = "blank"

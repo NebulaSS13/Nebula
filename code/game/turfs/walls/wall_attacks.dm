@@ -5,36 +5,22 @@
 		return
 
 	SSradiation.resistance_cache.Remove(src)
-
+	can_open = WALL_OPENING
+	sleep(15)
 	if(density)
-		can_open = WALL_OPENING
-		sleep(15)
-		set_density(0)
-		set_opacity(0)
+		set_density(FALSE)
 		blocks_air = ZONE_BLOCKED
-		update_icon()
-		update_air()
-		set_light(0)
-		src.blocks_air = 0
-		set_opacity(0)
-		for(var/turf/turf in loc)
-			if(turf.simulated)
-				SSair.mark_for_update(turf)
 	else
-		can_open = WALL_OPENING
-		set_density(1)
-		set_opacity(1)
+		set_density(TRUE)
 		blocks_air = AIR_BLOCKED
-		update_icon()
-		update_air()
-		sleep(15)
-		set_light(1)
-		src.blocks_air = 1
-		set_opacity(1)
-		for(var/turf/turf in loc)
-			if(turf.simulated)
-				SSair.mark_for_update(turf)
 
+	for(var/turf/turf in loc)
+		if(turf.simulated)
+			SSair.mark_for_update(turf)
+	set_light(density)
+	update_icon()
+	update_air()
+	refresh_opacity()
 	can_open = WALL_CAN_OPEN
 	update_icon()
 
@@ -62,22 +48,37 @@
 		else
 			to_chat(user, "<span class='danger'>\The [material.solid_name] [material.rotting_touch_message]!</span>")
 			dismantle_turf()
-			return
+			return TRUE
 
-	if(!can_open)
+	if(can_open)
+		toggle_open(user)
+		return TRUE
+
+	if(!isnull(shutter_state))
+		shutter_state = !shutter_state
+		refresh_opacity()
+		blocks_air = shutter_state ? ZONE_BLOCKED : AIR_BLOCKED
+		if(simulated)
+			SSair.mark_for_update(src)
+		visible_message(SPAN_NOTICE("\The [user] [shutter_state ? "opens" : "closes"] the shutter."))
+		update_icon()
+		if(shutter_sound)
+			playsound(src, shutter_sound, 25, 1)
+		return TRUE
+
+	if (isnull(construction_stage) || !reinf_material)
 		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
 		playsound(src, hitsound, 25, 1)
-	else if (isnull(construction_stage) || !reinf_material)
-		toggle_open(user)
+		return TRUE
 
 /turf/wall/attack_hand(var/mob/user)
 	radiate()
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(ishuman(user))
-		var/mob/living/human/H = user
-		var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
-		if(hand && try_graffiti(H, hand))
+	if(isliving(user))
+		var/mob/living/user_living = user
+		var/obj/item/hand = GET_EXTERNAL_ORGAN(user_living, user_living.get_active_held_item_slot())
+		if(hand && try_graffiti(user_living, hand))
 			return TRUE
 	. = ..()
 	if(!.)

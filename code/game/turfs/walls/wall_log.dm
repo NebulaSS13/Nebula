@@ -7,6 +7,10 @@
 	min_dismantle_amount = 3
 	max_dismantle_amount = 5
 
+/turf/wall/log/shutter
+	shutter_state = FALSE
+	icon_state = "log_shutter"
+
 /turf/wall/log/get_dismantle_stack_type()
 	return /obj/item/stack/material/log
 
@@ -29,6 +33,10 @@
 /turf/wall/log/##material_name { \
 	material = /decl/material/solid/organic/wood/##material_name; \
 	color = /decl/material/solid/organic/wood/##material_name::color; \
+}; \
+/turf/wall/log/##material_name/shutter { \
+	shutter_state = FALSE; \
+	icon_state = "log_shutter"; \
 }
 
 LOG_WALL_SUBTYPE(fungal)
