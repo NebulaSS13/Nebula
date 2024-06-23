@@ -144,27 +144,15 @@
 	name = "boxing gloves"
 	desc = "Because you really needed another excuse to punch your crewmates."
 
-/obj/structure/window/holowindow/full
+/obj/structure/window/reinforced/holowindow/full
 	dir = NORTHEAST
-	icon_state = "window_full"
+	icon_state = "rwindow_full"
 
-/obj/structure/window/reinforced/holowindow/attackby(obj/item/W, mob/user)
-
-	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
-
-	if(IS_SCREWDRIVER(W) || IS_CROWBAR(W) || IS_WRENCH(W))
-		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
-	else
-		if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
-			hit(W.force)
-			if(current_health <= 7)
-				anchored = FALSE
-				update_nearby_icons()
-				step(src, get_dir(user, src))
-		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		..()
-	return
+/obj/structure/window/reinforced/holowindow/attackby(obj/item/weapon, mob/user)
+	if(IS_SCREWDRIVER(weapon) || IS_CROWBAR(weapon) || IS_WRENCH(weapon))
+		to_chat(user, SPAN_NOTICE("It's a holowindow, you can't dismantle it!"))
+		return TRUE
+	return bash(weapon, user)
 
 /obj/structure/window/reinforced/holowindow/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -173,6 +161,7 @@
 	qdel(src)
 	return
 
+// This subtype is deleted when a ready button in the same area is pressed.
 /obj/structure/window/reinforced/holowindow/disappearing
 
 /obj/machinery/door/window/holowindoor/attackby(obj/item/I, mob/user)
@@ -199,14 +188,15 @@
 			close()
 
 	else if (src.density)
-		flick(text("[]deny", src.base_state), src)
+		flick("[base_state]deny", src)
 
-/obj/machinery/door/window/holowindoor/shatter(var/display_message = 1)
-	src.set_density(0)
-	playsound(src, "shatter", 70, 1)
+/obj/machinery/door/window/holowindoor/shatter(var/display_message = TRUE)
+	set_density(FALSE)
+	playsound(loc, "shatter", 70, TRUE)
 	if(display_message)
 		visible_message("[src] fades away as it shatters!")
-	qdel(src)
+	animate(src, 0.5 SECONDS, alpha = 0)
+	QDEL_IN_CLIENT_TIME(src, 0.5 SECONDS)
 
 /obj/structure/bed/holobed
 	tool_interaction_flags = 0
