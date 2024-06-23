@@ -635,7 +635,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		return
 
 	for(var/gas in level_data.exterior_atmosphere.gas)
-		var/gas_amt = level_data.exterior_atmosphere[gas]
+		var/gas_amt = level_data.exterior_atmosphere.gas[gas]
 		if(min_gas)
 			min_gas[gas] = round(gas_amt * 0.5)
 		if(max_gas)
