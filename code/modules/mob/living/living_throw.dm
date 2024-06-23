@@ -7,6 +7,8 @@
 	if(incapacitated() || !target || istype(target, /obj/screen) || !istype(item) || !(item in get_held_items()))
 		return FALSE
 
+	var/place_item = a_intent != I_HURT && Adjacent(target)
+
 	if(istype(item, /obj/item/grab))
 		var/obj/item/grab/G = item
 		item = G.throw_held()
@@ -21,14 +23,12 @@
 				var/end_T_descriptor = "<font color='#6b4400'>[start_T] \[[end_T.x],[end_T.y],[end_T.z]\] ([end_T.loc])</font>"
 				admin_attack_log(usr, mob, "Threw the victim from [start_T_descriptor] to [end_T_descriptor].", "Was from [start_T_descriptor] to [end_T_descriptor].", "threw, from [start_T_descriptor] to [end_T_descriptor], ")
 		drop_from_inventory(G)
-	else if(!try_unequip(item, play_dropsound = FALSE))
+	else if(!try_unequip(item, play_dropsound = place_item && !isliving(target)))
 		return FALSE
 
 	// Hand items to a nearby target, or place them on the turf.
-	if(a_intent != I_HURT && Adjacent(target) && isitem(item) && !QDELETED(item) && !QDELETED(target))
-		if(!try_unequip(item))
-			return FALSE
-		item.dropInto(get_turf(target))
+	if(place_item && !QDELETED(item) && !QDELETED(target))
+		// We've already been unequipped above.
 		if(isliving(target))
 			var/mob/living/mob = target
 			if(length(mob.get_held_item_slots()))
@@ -42,6 +42,8 @@
 					to_chat(src, SPAN_NOTICE("You offer \the [item] to \the [mob]."))
 					do_give(mob)
 				return TRUE
+			to_chat(src, SPAN_WARNING("\The [mob] has no way to hold \the [item]!"))
+			return TRUE
 		if(!QDELETED(item))
 			item.forceMove(get_turf(target))
 		return TRUE
