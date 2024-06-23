@@ -404,7 +404,7 @@
 			continue
 		var/transfer = transfer_to(item)
 		if(user && transfer)
-			to_chat(user, SPAN_NOTICE("You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."))
+			to_chat(user, SPAN_NOTICE("You add [item.get_string_for_amount(transfer)] to the stack. It now contains [item.amount] [item.singular_name]\s."))
 		if(!amount)
 			break
 	return !QDELETED(src)
