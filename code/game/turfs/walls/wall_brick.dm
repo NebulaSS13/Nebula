@@ -6,6 +6,10 @@
 	min_dismantle_amount = 3
 	max_dismantle_amount = 5
 
+/turf/wall/brick/shutter
+	shutter_state = FALSE
+	icon_state = "brick_shutter"
+
 /turf/wall/brick/get_dismantle_stack_type()
 	return /obj/item/stack/material/brick
 
@@ -28,6 +32,10 @@
 /turf/wall/brick/##material_name { \
 	color = /decl/material/solid/stone/##material_name::color; \
 	material = /decl/material/solid/stone/##material_name; \
+}; \
+/turf/wall/brick/##material_name/shutter { \
+	shutter_state = FALSE; \
+	icon_state = "brick_shutter"; \
 }
 
 MATERIAL_BRICK_WALL(sandstone)

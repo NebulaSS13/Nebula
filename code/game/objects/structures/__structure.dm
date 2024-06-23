@@ -10,7 +10,7 @@
 
 	var/structure_flags
 	var/last_damage_message
-	var/hitsound = 'sound/weapons/smash.ogg'
+	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/parts_type
 	var/parts_amount
 	var/footstep_type

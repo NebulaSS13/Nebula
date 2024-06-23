@@ -51,9 +51,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "dH" = (
-/obj/structure/window/basic/full,
-/obj/structure/wall_frame/log/ebony,
-/turf/wall/log/ebony,
+/turf/wall/log/ebony/shutter,
 /area/shaded_hills/general_store)
 "dK" = (
 /obj/structure/table/woodentable/ebony,
@@ -101,6 +99,9 @@
 "ft" = (
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/shrine)
+"fw" = (
+/turf/wall/brick/basalt/shutter,
+/area/shaded_hills/slaughterhouse)
 "fK" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
 /turf/floor/natural/path/herringbone/basalt,
@@ -218,9 +219,7 @@
 /turf/wall/brick/basalt,
 /area/shaded_hills/outside/shrine)
 "iX" = (
-/obj/structure/window/basic/full,
-/obj/structure/wall_frame/log/ebony,
-/turf/floor/natural/path/basalt,
+/turf/wall/log/ebony/shutter,
 /area/shaded_hills/inn)
 "iZ" = (
 /obj/structure/fire_source/fireplace/basalt,
@@ -774,9 +773,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "HE" = (
-/obj/structure/window/basic/full,
-/obj/structure/wall_frame/log/ebony,
-/turf/floor/natural/path/basalt,
+/turf/wall/log/ebony/shutter,
 /area/shaded_hills/stable)
 "HF" = (
 /obj/structure/textiles/spinning_wheel/ebony,
@@ -803,9 +800,7 @@
 /turf/floor/wood/ebony,
 /area/shaded_hills/tannery)
 "IQ" = (
-/obj/structure/window/basic/full,
-/obj/structure/wall_frame/log/ebony,
-/turf/floor/natural/path/basalt,
+/turf/wall/log/ebony/shutter,
 /area/shaded_hills/farmhouse)
 "IS" = (
 /turf/floor/natural/mud/water/deep,
@@ -8580,7 +8575,7 @@ TR
 Wg
 Wg
 dH
-dH
+Wg
 dH
 Wg
 Wg
@@ -8729,13 +8724,13 @@ EV
 Ic
 EV
 Gs
-Wg
+dH
 uJ
 uJ
 WI
 uJ
 uJ
-Wg
+dH
 HI
 QQ
 fR
@@ -8887,7 +8882,7 @@ uJ
 uJ
 uJ
 uJ
-dH
+Wg
 HI
 QQ
 fR
@@ -9033,7 +9028,7 @@ EV
 Ic
 EV
 QS
-Wg
+dH
 uJ
 uJ
 sM
@@ -9185,7 +9180,7 @@ TR
 Ic
 TR
 Mp
-dH
+Wg
 GQ
 uJ
 sM
@@ -9466,7 +9461,7 @@ cx
 cx
 TR
 TR
-Ee
+iX
 yn
 Im
 ZY
@@ -9922,7 +9917,7 @@ TR
 cx
 TR
 TR
-Ee
+iX
 VW
 lF
 lF
@@ -10226,7 +10221,7 @@ TR
 TR
 TR
 TR
-Ee
+iX
 ON
 lF
 Ap
@@ -10530,7 +10525,7 @@ TR
 TR
 HI
 TR
-Ee
+iX
 ZE
 lF
 lF
@@ -10858,11 +10853,11 @@ EV
 TR
 EV
 TR
-xH
+fw
 IS
 Br
 Bx
-xH
+fw
 HI
 HI
 gp
@@ -11144,7 +11139,7 @@ qG
 Ee
 Ee
 Ee
-Ee
+iX
 Ee
 Ee
 Ee
@@ -11747,7 +11742,7 @@ TR
 HI
 TR
 nn
-nn
+HE
 nn
 nn
 nn
@@ -12066,7 +12061,7 @@ Ak
 Ak
 Ak
 Ak
-HE
+nn
 TR
 TR
 EV
@@ -12225,7 +12220,7 @@ EV
 Ic
 EV
 TR
-LN
+IQ
 bv
 qP
 qP
@@ -12674,7 +12669,7 @@ Ak
 Ak
 Ak
 Ak
-nn
+HE
 KG
 EV
 EV
@@ -12985,7 +12980,7 @@ Ic
 Ic
 EV
 TR
-IQ
+LN
 cl
 qP
 qP
@@ -13130,7 +13125,7 @@ or
 Ak
 Ak
 Ak
-nn
+HE
 UU
 EV
 EV
@@ -13446,7 +13441,7 @@ qP
 qP
 qP
 qP
-LN
+IQ
 FD
 Rl
 Rl
@@ -13876,19 +13871,19 @@ TR
 TR
 nn
 nn
+HE
 nn
 nn
 nn
+HE
 nn
 nn
 nn
+HE
 nn
 nn
 nn
-nn
-nn
-nn
-nn
+HE
 nn
 nn
 TR
@@ -13897,7 +13892,7 @@ EV
 Ic
 qP
 hc
-LN
+IQ
 HF
 ra
 gg

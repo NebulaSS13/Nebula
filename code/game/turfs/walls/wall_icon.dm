@@ -1,3 +1,6 @@
+/turf/wall/proc/refresh_opacity()
+	return set_opacity(!(!density || shutter_state == TRUE || (istype(material) && material.opacity < 0.5)))
+
 /turf/wall/proc/update_material(var/update_neighbors)
 	if(construction_stage != -1)
 		if(reinf_material)
@@ -12,7 +15,7 @@
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
 		explosion_resistance = reinf_material.explosion_resistance
 	update_strings()
-	set_opacity(material.opacity >= 0.5)
+	refresh_opacity()
 	SSradiation.resistance_cache.Remove(src)
 	if(update_neighbors)
 		var/iterate_turfs = list()
@@ -148,6 +151,31 @@
 	var/image/texture = material.get_wall_texture()
 	if(texture)
 		add_overlay(texture)
+
+	if(!isnull(shutter_state) && shutter_icon)
+		var/decl/material/shutter_mat = shutter_material || material
+		var/list/shutters
+		for(var/stepdir in global.cardinal)
+			var/turf/neighbor = get_step_resolving_mimic(src, stepdir)
+			if(!istype(neighbor) || neighbor.density)
+				continue
+			LAZYADD(shutters, image(shutter_icon, num2text(shutter_state), dir = stepdir))
+			if(shutter_state)
+				var/turf/other_neighbor = get_step_resolving_mimic(src, global.reverse_dir[stepdir])
+				if(istype(other_neighbor))
+					var/light_amt   = 255 * other_neighbor.get_lumcount()
+					if(light_amt > 0)
+						var/image/light_overlay = emissive_overlay(shutter_icon, "glow", dir = stepdir, color = other_neighbor.get_avg_color())
+						light_overlay.alpha = light_amt
+						light_overlay.appearance_flags |= RESET_COLOR|RESET_ALPHA
+						LAZYADD(shutters, light_overlay)
+
+		if(length(shutters))
+			var/image/shutter_image = new /image
+			shutter_image.overlays = shutters
+			shutter_image.color = shutter_mat.color
+			shutter_image.appearance_flags |= RESET_COLOR|RESET_ALPHA
+			add_overlay(shutter_image)
 
 	if(damage != 0 && SSmaterials.wall_damage_overlays)
 		var/integrity = material.integrity

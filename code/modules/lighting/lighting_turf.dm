@@ -151,11 +151,11 @@
 		lum_g += L.apparent_g
 		lum_b += L.apparent_b
 
-	lum_r = CLAMP01(lum_r / 4) * 255
-	lum_g = CLAMP01(lum_g / 4) * 255
-	lum_b = CLAMP01(lum_b / 4) * 255
+	lum_r = CLAMP01(lum_r / length(corners)) * 255
+	lum_g = CLAMP01(lum_g / length(corners)) * 255
+	lum_b = CLAMP01(lum_b / length(corners)) * 255
 
-	return rgb(lum_r, lum_b, lum_g)
+	return rgb(lum_r, lum_g, lum_b)
 
 #define SCALE(targ,min,max) (targ - min) / (max - min)
 
