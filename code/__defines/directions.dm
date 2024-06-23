@@ -6,7 +6,7 @@
 #define N_NORTHEAST 32
 #define N_NORTHWEST 512
 #define N_SOUTHEAST 64
-#define N_SOUTHWEST 1024 
+#define N_SOUTHWEST 1024
 
 #define CORNER_NONE             0
 #define CORNER_COUNTERCLOCKWISE 1
@@ -42,6 +42,22 @@
 		ret[i] = "[.]"
 
 	return ret
+
+/proc/corner_states_to_dirs(list/corners)
+	if(!istype(corners)) return
+
+	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
+	. = list()
+
+	for(var/i = 1 to ret.len)
+		var/dir = ret[i]
+		var/corner = text2num(corners[i])
+		if(corner & CORNER_DIAGONAL)
+			. |= dir
+		if(corner & CORNER_COUNTERCLOCKWISE)
+			. |= turn(dir, 45)
+		if(corner & CORNER_CLOCKWISE)
+			. |= turn(dir, -45)
 
 // Similar to dirs_to_corner_states(), but returns an *ordered* list, requiring (in order), dir=NORTH, SOUTH, EAST, WEST
 // Note that this means this proc can be used as:

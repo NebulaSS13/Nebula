@@ -44,7 +44,9 @@ var/global/list/wall_fullblend_objects = list(
 	var/decl/material/girder_material = /decl/material/solid/metal/steel
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
+	/// A list of connections to walls for each corner, used for icon generation. Can be converted to a list of dirs with corner_states_to_dirs().
 	var/list/wall_connections
+	/// A list of connections to non-walls for each corner, used for icon generation. Can be converted to a list of dirs with corner_states_to_dirs().
 	var/list/other_connections
 	var/floor_type = /turf/floor/plating //turf it leaves after destruction
 	var/paint_color
