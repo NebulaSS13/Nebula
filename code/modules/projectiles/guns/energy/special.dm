@@ -150,11 +150,11 @@
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
 			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
-				return 0
+				return FALSE
 		spark_at(src, amount = 5, holder = src)
-		return 1
+		return TRUE
 	handle_click_empty(M)
-	return 0
+	return FALSE
 
 /obj/item/gun/energy/plasmacutter/is_special_cutting_tool(var/high_power)
 	return TRUE

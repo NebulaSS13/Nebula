@@ -244,69 +244,74 @@ var/global/list/closets = list()
 		..()
 		take_damage(proj_damage, Proj.atom_damage_type)
 
-/obj/structure/closet/attackby(obj/item/W, mob/user)
+/obj/structure/closet/attackby(obj/item/used_item, mob/user)
 
-	if(user.a_intent == I_HURT && W.force)
+	if(user.a_intent == I_HURT && used_item.force)
 		return ..()
 
-	if(!opened && (istype(W, /obj/item/stack/material) || IS_WRENCH(W)) )
+	if(!opened && (istype(used_item, /obj/item/stack/material) || IS_WRENCH(used_item)) )
 		return ..()
+
+	var/can_wield = used_item.user_can_wield(user, silent = TRUE)
 
 	if(opened)
-		if(istype(W, /obj/item/grab))
-			var/obj/item/grab/G = W
-			receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
-			return TRUE
-		if(IS_WELDER(W))
-			var/obj/item/weldingtool/WT = W
-			if(WT.weld(0,user))
-				slice_into_parts(WT, user)
+		if(can_wield)
+			if(istype(used_item, /obj/item/grab))
+				var/obj/item/grab/G = used_item
+				receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
 				return TRUE
-		if(istype(W, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = W
-			if(cutter.slice(user))
-				slice_into_parts(W, user)
-			return TRUE
+			if(IS_WELDER(used_item))
+				var/obj/item/weldingtool/WT = used_item
+				if(WT.weld(0,user))
+					slice_into_parts(WT, user)
+					return TRUE
+			if(istype(used_item, /obj/item/gun/energy/plasmacutter))
+				var/obj/item/gun/energy/plasmacutter/cutter = used_item
+				if(cutter.slice(user))
+					slice_into_parts(used_item, user)
+				return TRUE
+			if(istype(used_item, /obj/item/laundry_basket) && used_item.contents.len && used_item.storage)
+				var/turf/T = get_turf(src)
+				for(var/obj/item/I in used_item.storage.get_contents())
+					used_item.storage.remove_from_storage(user, I, T, TRUE)
+				used_item.storage.finish_bulk_removal()
+				user.visible_message(
+					SPAN_NOTICE("\The [user] empties \the [used_item] into \the [src]."),
+					SPAN_NOTICE("You empty \the [used_item] into \the [src]."),
+					SPAN_NOTICE("You hear rustling of clothes.")
+				)
+				return TRUE
 
-		if(istype(W, /obj/item/laundry_basket) && W.contents.len && W.storage)
-			var/turf/T = get_turf(src)
-			for(var/obj/item/I in W.storage.get_contents())
-				W.storage.remove_from_storage(user, I, T, TRUE)
-			W.storage.finish_bulk_removal()
-			user.visible_message(
-				SPAN_NOTICE("\The [user] empties \the [W] into \the [src]."),
-				SPAN_NOTICE("You empty \the [W] into \the [src]."),
-				SPAN_NOTICE("You hear rustling of clothes.")
-			)
-			return TRUE
-
-		if(user.try_unequip(W, loc))
-			W.pixel_x = 0
-			W.pixel_y = 0
-			W.pixel_z = 0
-			W.pixel_w = 0
+		if(user.try_unequip(used_item, loc))
+			used_item.pixel_x = 0
+			used_item.pixel_y = 0
+			used_item.pixel_z = 0
+			used_item.pixel_w = 0
 			return TRUE
 		return FALSE
 
-	if(try_key_unlock(W, user))
+	if(!can_wield)
+		return attack_hand_with_interaction_checks(user)
+
+	if(try_key_unlock(used_item, user))
 		return TRUE
 
-	if(try_install_lock(W, user))
+	if(try_install_lock(used_item, user))
 		return TRUE
 
-	if(istype(W, /obj/item/energy_blade))
-		var/obj/item/energy_blade/blade = W
-		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
+	if(istype(used_item, /obj/item/energy_blade))
+		var/obj/item/energy_blade/blade = used_item
+		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [used_item]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			spark_at(loc, amount=5)
 			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 			open(user)
 		return TRUE
 
-	if(istype(W, /obj/item/stack/package_wrap))
+	if(istype(used_item, /obj/item/stack/package_wrap))
 		return FALSE //Return false to get afterattack to be called
 
-	if(IS_WELDER(W) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weldingtool/WT = W
+	if(IS_WELDER(used_item) && (setup & CLOSET_CAN_BE_WELDED))
+		var/obj/item/weldingtool/WT = used_item
 		if(!WT.weld(0,user))
 			if(WT.isOn())
 				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
@@ -316,7 +321,7 @@ var/global/list/closets = list()
 		user.visible_message(SPAN_WARNING("\The [src] has been [welded?"welded shut":"unwelded"] by \the [user]."), blind_message = "You hear welding.", range = 3)
 		return TRUE
 	else if(setup & CLOSET_HAS_LOCK)
-		togglelock(user, W)
+		togglelock(user, used_item)
 		return TRUE
 
 	return attack_hand_with_interaction_checks(user)

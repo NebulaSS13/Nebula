@@ -1,23 +1,25 @@
 /obj/structure
 	var/datum/lock/lock
 
-/obj/structure/proc/try_key_unlock(obj/item/I, mob/user)
+/obj/structure/proc/try_key_unlock(obj/item/used_item, mob/user)
 	if(!lock)
 		return FALSE
-	if(istype(I, /obj/item/key))
-		if(lock.toggle(I))
-			to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [I]."))
+	if(!used_item.user_can_wield(user))
+		return FALSE
+	if(istype(used_item, /obj/item/key))
+		if(lock.toggle(used_item))
+			to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [used_item]."))
 		else
-			to_chat(user, SPAN_WARNING("\The [I] does not fit in the lock!"))
+			to_chat(user, SPAN_WARNING("\The [used_item] does not fit in the lock!"))
 		return TRUE
-	if(istype(I, /obj/item/keyring))
-		for(var/obj/item/key/key in I)
+	if(istype(used_item, /obj/item/keyring))
+		for(var/obj/item/key/key in used_item)
 			if(lock.toggle(key))
 				to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [key]."))
 				return TRUE
-		to_chat(user, SPAN_WARNING("\The [I] has no keys that fit in the lock!"))
+		to_chat(user, SPAN_WARNING("\The [used_item] has no keys that fit in the lock!"))
 		return TRUE
-	if(lock.pick_lock(I,user))
+	if(lock.pick_lock(used_item,user))
 		return TRUE
 	if(lock.isLocked())
 		to_chat(user, SPAN_WARNING("\The [src] is locked!"))

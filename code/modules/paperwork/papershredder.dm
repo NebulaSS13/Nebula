@@ -112,15 +112,16 @@
 		return
 	return TRUE
 
-/obj/machinery/papershredder/attackby(var/obj/item/W, var/mob/user)
-	if(!has_extension(W, /datum/extension/tool)) //Silently skip tools
-		var/trying_to_smack = !(W.item_flags & ITEM_FLAG_NO_BLUDGEON) && user && user.a_intent == I_HURT
-		if(W.storage)
-			empty_bin(user, W)
+/obj/machinery/papershredder/attackby(var/obj/item/used_item, var/mob/user)
+	//Silently skip tools, and things we don't have the dexterity to use
+	if(!has_extension(used_item, /datum/extension/tool) && used_item.user_can_wield(user, silent = TRUE))
+		var/trying_to_smack = !(used_item.item_flags & ITEM_FLAG_NO_BLUDGEON) && user && user.a_intent == I_HURT
+		if(used_item.storage)
+			empty_bin(user, used_item)
 			return TRUE
 
-		else if(!trying_to_smack && can_shred(W))
-			shred(W, user)
+		else if(!trying_to_smack && can_shred(used_item))
+			shred(used_item, user)
 			return TRUE
 	return ..()
 

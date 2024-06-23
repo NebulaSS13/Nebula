@@ -238,6 +238,10 @@ var/global/list/surgery_tool_exception_cache = list()
 	if(!zone)
 		return FALSE // Erroneous mob interaction
 
+	// there IS a rule that says dogs can't do surgery, actually. section 13a, the "No Dr. Air Bud" Rule
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+		return TRUE // prevent other interactions because we've shown a message
+
 	var/decl/bodytype/root_bodytype = M.get_bodytype()
 	if(root_bodytype && length(LAZYACCESS(root_bodytype.limb_mapping, zone)) > 1)
 		zone = input("Which bodypart do you wish to operate on?", "Non-standard surgery") as null|anything in root_bodytype.limb_mapping[zone]
