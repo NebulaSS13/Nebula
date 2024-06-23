@@ -47,8 +47,10 @@
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/shrine)
 "dC" = (
-/obj/structure/door/wood/ebony,
-/turf/floor/natural/path/herringbone/basalt,
+/obj/structure/door/wood/ebony{
+	dir = 4
+	},
+/turf/floor/wood/ebony,
 /area/shaded_hills/inn)
 "dH" = (
 /turf/wall/log/ebony/shutter,
@@ -206,6 +208,12 @@
 /area/shaded_hills/inn)
 "ij" = (
 /obj/structure/bed/chair/wood/ebony{
+	dir = 4
+	},
+/turf/floor/wood/ebony,
+/area/shaded_hills/general_store)
+"iC" = (
+/obj/structure/door/wood/ebony{
 	dir = 4
 	},
 /turf/floor/wood/ebony,
@@ -785,6 +793,12 @@
 "Ic" = (
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/downlands)
+"Il" = (
+/obj/structure/door/wood/ebony{
+	dir = 4
+	},
+/turf/floor/wood/ebony,
+/area/shaded_hills/shrine)
 "Im" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 4
@@ -796,7 +810,9 @@
 /turf/wall/brick/basalt,
 /area/shaded_hills/outside/downlands)
 "IL" = (
-/obj/structure/door/wood/ebony,
+/obj/structure/door/wood/ebony{
+	dir = 4
+	},
 /turf/floor/wood/ebony,
 /area/shaded_hills/tannery)
 "IQ" = (
@@ -817,6 +833,13 @@
 "Jo" = (
 /obj/structure/wall_sconce/lantern,
 /turf/floor/wood/ebony,
+/area/shaded_hills/inn)
+"Jp" = (
+/obj/abstract/landmark/lock_preset/shaded_hills/inn_interior,
+/obj/structure/door/wood/ebony{
+	dir = 4
+	},
+/turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "Jt" = (
 /obj/structure/closet/cabinet/wooden/ebony,
@@ -854,8 +877,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/shrine)
 "Kh" = (
-/obj/structure/window/basic/full,
-/turf/wall/log/ebony,
+/turf/wall/log/ebony/shutter,
 /area/shaded_hills/shrine)
 "KG" = (
 /obj/structure/railing/mapped/ebony{
@@ -965,6 +987,9 @@
 /obj/structure/railing/mapped/ebony,
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/downlands)
+"RG" = (
+/turf/wall/brick/basalt/shutter,
+/area/shaded_hills/shrine)
 "RO" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 8
@@ -1015,6 +1040,12 @@
 	},
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
+"Ti" = (
+/obj/structure/door/wood/ebony{
+	dir = 4
+	},
+/turf/floor/wood/ebony,
+/area/shaded_hills/farmhouse)
 "Tr" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /turf/floor/wood/ebony,
@@ -1039,6 +1070,10 @@
 "TR" = (
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
+"TZ" = (
+/obj/structure/door/wood/ebony,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/shrine)
 "UD" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/flame/candle,
@@ -9336,7 +9371,7 @@ Wg
 Dn
 yu
 Wg
-eG
+iC
 Wg
 Wg
 HI
@@ -9616,7 +9651,7 @@ TR
 Ee
 Ee
 Ee
-iH
+Jp
 Ee
 Ee
 Ee
@@ -12527,7 +12562,7 @@ TR
 LN
 LN
 LN
-WO
+Ti
 LN
 LN
 TR
@@ -13286,7 +13321,7 @@ VU
 VU
 LN
 LN
-WO
+Ti
 LN
 LN
 LN
@@ -18399,7 +18434,7 @@ By
 iK
 QB
 QB
-AE
+Il
 QB
 CR
 CR
@@ -18553,10 +18588,10 @@ iK
 kv
 kv
 QB
-PG
+Il
 QB
 QB
-PG
+Il
 QB
 QB
 CR
@@ -18719,7 +18754,7 @@ XM
 XM
 XM
 CR
-AE
+PG
 kv
 kv
 kv
@@ -19160,7 +19195,7 @@ kv
 kv
 kv
 kv
-Yc
+RG
 XH
 Vj
 CR
@@ -19312,7 +19347,7 @@ kv
 iK
 kv
 kv
-AE
+TZ
 Vj
 Vj
 TM
@@ -19470,7 +19505,7 @@ CR
 Ot
 bW
 CR
-AE
+PG
 ft
 ft
 ft
@@ -20078,7 +20113,7 @@ uK
 Gb
 Vj
 Vj
-AE
+TZ
 ft
 Zx
 XY
