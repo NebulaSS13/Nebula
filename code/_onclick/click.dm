@@ -114,15 +114,13 @@
 	//Atoms on your person
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
 	var/sdepth = A.storage_depth(src)
-	var/check_dexterity_val = A.storage ? DEXTERITY_NONE : (istype(holding) ? holding.needs_attack_dexterity : DEXTERITY_WIELD_ITEM)
-	var/can_wield_item = holding && (!check_dexterity_val || check_dexterity(check_dexterity_val))
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
-		if(can_wield_item)
+		if(holding)
 			var/resolved = holding.resolve_attackby(A, src, params)
 			if(!resolved && A && holding)
 				holding.afterattack(A, src, 1, params) // 1 indicates adjacency
 			setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-		else if(!holding)
+		else
 			if(ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			UnarmedAttack(A, TRUE)
@@ -138,13 +136,13 @@
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
-			if(can_wield_item)
+			if(holding)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = holding.resolve_attackby(A,src, params)
 				if(!resolved && A && holding)
 					holding.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 				setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-			else if(!holding)
+			else
 				if(ismob(A)) // No instant mob attacking
 					setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 				UnarmedAttack(A, TRUE)
