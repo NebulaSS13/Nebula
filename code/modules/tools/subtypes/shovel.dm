@@ -22,6 +22,9 @@
 /obj/item/tool/shovel/wood
 	material = /decl/material/solid/organic/wood
 
+/obj/item/tool/shovel/one_material/Initialize(ml, material_key, _handle_material, _binding_material, override_tool_qualities, override_tool_properties)
+	return ..(ml, material_key, material_key, _binding_material, override_tool_qualities, override_tool_properties)
+
 /obj/item/tool/spade
 	name                = "spade"
 	desc                = "A small tool for digging and moving dirt."
