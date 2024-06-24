@@ -178,11 +178,11 @@
 
 /decl/loadout_option/fantasy/utility/hand_axe
 	name = "hand axe"
-	path = /obj/item/tool/axe
+	path = /obj/item/tool/axe/ebony
 
 /decl/loadout_option/fantasy/utility/shovel
 	name = "shovel"
-	path = /obj/item/tool/shovel/wood
+	path = /obj/item/tool/shovel/one_material
 	available_materials = list(
 		/decl/material/solid/organic/wood,
 		/decl/material/solid/organic/wood/mahogany,
