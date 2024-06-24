@@ -138,6 +138,12 @@
 				I = image(_get_wall_subicon(reinf_material.icon_reinf, wall_connections, reinf_color))
 			add_overlay(I)
 
+// Update icon on ambient light change, for shutter overlays.
+/turf/wall/update_ambient_light_from_z_or_area()
+	. = ..()
+	if(shutter_state)
+		queue_icon_update()
+
 /turf/wall/on_update_icon()
 	. = ..()
 	cut_overlays()
@@ -155,7 +161,10 @@
 	if(!isnull(shutter_state) && shutter_icon)
 		var/decl/material/shutter_mat = shutter_material || material
 		var/list/shutters
+		var/list/connected = corner_states_to_dirs(wall_connections) | corner_states_to_dirs(other_connections) // merge the lists
 		for(var/stepdir in global.cardinal)
+			if(stepdir in connected)
+				continue
 			var/turf/neighbor = get_step_resolving_mimic(src, stepdir)
 			if(!istype(neighbor) || neighbor.density)
 				continue
