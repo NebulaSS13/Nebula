@@ -207,14 +207,14 @@
 		var/new_row = 5
 		for(var/i = clamp_sheets to max_multiplier step clamp_sheets)
 			var/producing = FLOOR(i * products_per_sheet)
-			. += "<a href='?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i];returning=\ref[sublist]'>[producing]x</a>"
+			. += "<a href='byond://?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i];returning=\ref[sublist]'>[producing]x</a>"
 			if(new_row == 0)
 				new_row = 5
 				. += "<br>"
 			else
 				new_row--
 	else
-		. += "<a href='?src=\ref[stack];make=\ref[src];producing=[FLOOR(clamp_sheets * products_per_sheet)];expending=[clamp_sheets];returning=\ref[sublist]'>1x</a>"
+		. += "<a href='byond://?src=\ref[stack];make=\ref[src];producing=[FLOOR(clamp_sheets * products_per_sheet)];expending=[clamp_sheets];returning=\ref[sublist]'>1x</a>"
 
 	. += "</td>"
 	. += "</tr>"

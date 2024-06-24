@@ -153,8 +153,8 @@
 	if(!istype(holder))
 		return
 	. = list()
-	. += "ID tag: <a href='?src=\ref[src];set_tag=1'>[controller.id_tag]</a><br>"
-	. += "Frequency: <a href='?src=\ref[src];set_freq=1'>[controller.frequency]</a><br>"
+	. += "ID tag: <a href='byond://?src=\ref[src];set_tag=1'>[controller.id_tag]</a><br>"
+	. += "Frequency: <a href='byond://?src=\ref[src];set_freq=1'>[controller.frequency]</a><br>"
 	. += "Likely tags used by controller:<br>"
 	var/list/tags = controller.program?.get_receive_filters(TRUE)
 	if(!length(tags))

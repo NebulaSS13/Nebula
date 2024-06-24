@@ -141,13 +141,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	HTML += "<table border='1' style='undefined;table-layout: fixed; width: 80%'>"
 
 	if(assembly)
-		HTML += "<a href='?src=\ref[src];return=1'>\[Return to Assembly\]</a><br>"
+		HTML += "<a href='byond://?src=\ref[src];return=1'>\[Return to Assembly\]</a><br>"
 
-	HTML += "<a href='?src=\ref[src];refresh=1'>\[Refresh\]</a>  |  "
-	HTML += "<a href='?src=\ref[src];rename=1'>\[Rename\]</a>  |  "
-	HTML += "<a href='?src=\ref[src];scan=1'>\[Copy Ref\]</a>"
+	HTML += "<a href='byond://?src=\ref[src];refresh=1'>\[Refresh\]</a>  |  "
+	HTML += "<a href='byond://?src=\ref[src];rename=1'>\[Rename\]</a>  |  "
+	HTML += "<a href='byond://?src=\ref[src];scan=1'>\[Copy Ref\]</a>"
 	if(assembly && removable)
-		HTML += "  |  <a href='?src=\ref[assembly];component=\ref[src];remove=1'>\[Remove\]</a>"
+		HTML += "  |  <a href='byond://?src=\ref[assembly];component=\ref[src];remove=1'>\[Remove\]</a>"
 	HTML += "<br>"
 
 	HTML += "<colgroup>"
@@ -169,13 +169,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				if(1)
 					io = get_pin_ref(IC_INPUT, i)
 					if(io)
-						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
-						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
+						words += "<b><a href='byond://?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
+						<a href='byond://?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
 						if(io.linked.len)
 							for(var/k in 1 to io.linked.len)
 								var/datum/integrated_io/linked = io.linked[k]
-								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
-								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
+								words += "<a href='byond://?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
+								@ <a href='byond://?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
 
 						if(LAZYLEN(outputs) > LAZYLEN(inputs))
 							height = 1
@@ -188,13 +188,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				if(3)
 					io = get_pin_ref(IC_OUTPUT, i)
 					if(io)
-						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
-						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
+						words += "<b><a href='byond://?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
+						<a href='byond://?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
 						if(io.linked.len)
 							for(var/k in 1 to io.linked.len)
 								var/datum/integrated_io/linked = io.linked[k]
-								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
-								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
+								words += "<a href='byond://?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
+								@ <a href='byond://?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
 
 						if(LAZYLEN(inputs) > LAZYLEN(outputs))
 							height = 1
@@ -205,13 +205,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		var/datum/integrated_io/io = activators[i]
 		var/words = list()
 
-		words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'><font color='FF0000'>[io]</font></a> "
-		words += "<a href='?src=\ref[src];act=data;pin=\ref[io]'><font color='FF0000'>[io.data?"\<PULSE OUT\>":"\<PULSE IN\>"]</font></a></b><br>"
+		words += "<b><a href='byond://?src=\ref[src];act=wire;pin=\ref[io]'><font color='FF0000'>[io]</font></a> "
+		words += "<a href='byond://?src=\ref[src];act=data;pin=\ref[io]'><font color='FF0000'>[io.data?"\<PULSE OUT\>":"\<PULSE IN\>"]</font></a></b><br>"
 		if(io.linked.len)
 			for(var/k in 1 to io.linked.len)
 				var/datum/integrated_io/linked = io.linked[k]
-				words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'><font color='FF0000'>[linked]</font></a> \
-				@ <a href='?src=\ref[linked.holder]'><font color='FF0000'>[linked.holder.displayed_name]</font></a><br>"
+				words += "<a href='byond://?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'><font color='FF0000'>[linked]</font></a> \
+				@ <a href='byond://?src=\ref[linked.holder]'><font color='FF0000'>[linked.holder.displayed_name]</font></a><br>"
 
 		HTML += "<tr>"
 		HTML += "<td colspan='3' align='center'>[jointext(words, null)]</td>"

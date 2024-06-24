@@ -168,7 +168,7 @@
 		to_chat(D, "<span class='danger'>You ran over \the [victim]!</span>")
 		visible_message("<span class='danger'>\The [src] ran over \the [victim]!</span>")
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey]), driven by [D.name] ([D.ckey])</font>")
-		msg_admin_attack("[D.name] ([D.ckey]) ran over [victim.name] ([victim.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+		msg_admin_attack("[D.name] ([D.ckey]) ran over [victim.name] ([victim.ckey]). (<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 	else
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 

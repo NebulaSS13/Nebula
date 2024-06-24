@@ -98,19 +98,19 @@
 /obj/item/clipboard/interact(mob/user)
 	var/dat = "<title>Clipboard</title>"
 	if(stored_pen)
-		dat += "<A href='?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"
+		dat += "<A href='byond://?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"
 	else
-		dat += "<A href='?src=\ref[src];addpen=1'>Add Pen</A><BR><HR>"
+		dat += "<A href='byond://?src=\ref[src];addpen=1'>Add Pen</A><BR><HR>"
 
 	dat += "<TABLE style='table-layout:fixed; white-space:nowrap;'>"
 	for(var/i = 1 to LAZYLEN(papers))
 		var/obj/item/P = papers[i]
-		dat += "<TR><TD style='width:45%; overflow:hidden; text-overflow:ellipsis;'><A href='?src=\ref[src];examine=\ref[P]'>[P.name]</A></TD>"
+		dat += "<TR><TD style='width:45%; overflow:hidden; text-overflow:ellipsis;'><A href='byond://?src=\ref[src];examine=\ref[P]'>[P.name]</A></TD>"
 		if(i == 1)
-			dat += "<TD/><TD><A href='?src=\ref[src];write=\ref[P]'>Write</A></TD>"
+			dat += "<TD/><TD><A href='byond://?src=\ref[src];write=\ref[P]'>Write</A></TD>"
 		else
 			dat += "<TD/><TD/>"
-		dat += "<TD><A href='?src=\ref[src];remove=\ref[P]'>Remove</A></TD><TD><A href='?src=\ref[src];rename=\ref[P]'>Rename</A></TD></TR>"
+		dat += "<TD><A href='byond://?src=\ref[src];remove=\ref[P]'>Remove</A></TD><TD><A href='byond://?src=\ref[src];rename=\ref[P]'>Rename</A></TD></TR>"
 	dat += "</TABLE>"
 
 	user.set_machine(src)

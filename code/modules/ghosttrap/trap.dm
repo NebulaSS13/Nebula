@@ -39,7 +39,7 @@
 		if(pref_check && !O.client.wishes_to_be_role(pref_check))
 			continue
 		if(O.client)
-			to_chat(O, "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
+			to_chat(O, "[request_string] <a href='byond://?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
 
 /decl/ghosttrap/proc/unregister_target(var/target)
 	LAZYREMOVE(request_timeouts, target)

@@ -200,7 +200,7 @@
 			break
 
 	if(istype(caller) && (ticked || caller.get_trait_total() + trait_cost <= get_config_value(/decl/config/num/max_character_traits)) && !incompatible_trait_taken)
-		result += "<a href='?src=\ref[caller];toggle_trait=\ref[src]'>[ticked ? "<font color='#E67300'>[name]</font>" : "[name]"] ([trait_cost])</a>"
+		result += "<a href='byond://?src=\ref[caller];toggle_trait=\ref[src]'>[ticked ? "<font color='#E67300'>[name]</font>" : "[name]"] ([trait_cost])</a>"
 	else
 		result += ticked ? "<font color='#E67300'>[name]</font>" : "[name]"
 

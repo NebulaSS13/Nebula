@@ -6,26 +6,26 @@
 
 /atom/get_view_variables_header()
 	return {"
-		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>
+		<a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>
 		<br><font size='1'>
-		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a>
-		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a>
-		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
+		<a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a>
+		<a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a>
+		<a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		</font>
 		"}
 
 /mob/living/get_view_variables_header()
 	return {"
-		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
-		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
-		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
+		<a href='byond://?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
+		<br><a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
+		<br><a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
-		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BRUTE]'>[get_damage(BRUTE)]</a>
-		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BURN]'>[get_damage(BURN)]</a>
-		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[TOX]'>[get_damage(TOX)]</a>
-		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[OXY]'>[get_damage(OXY)]</a>
-		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[CLONE]'>[get_damage(CLONE)]</a>
-		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BP_BRAIN]'>[get_damage(BRAIN)]</a>
+		BRUTE:<a href='byond://?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BRUTE]'>[get_damage(BRUTE)]</a>
+		FIRE:<a href='byond://?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BURN]'>[get_damage(BURN)]</a>
+		TOXIN:<a href='byond://?_src_=vars;mobToDamage=\ref[src];adjustDamage=[TOX]'>[get_damage(TOX)]</a>
+		OXY:<a href='byond://?_src_=vars;mobToDamage=\ref[src];adjustDamage=[OXY]'>[get_damage(OXY)]</a>
+		CLONE:<a href='byond://?_src_=vars;mobToDamage=\ref[src];adjustDamage=[CLONE]'>[get_damage(CLONE)]</a>
+		BRAIN:<a href='byond://?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BP_BRAIN]'>[get_damage(BRAIN)]</a>
 		</font>
 		"}
 
@@ -118,18 +118,18 @@
 
 /datum/proc/make_view_variables_variable_entry(var/varname, var/value, var/hide_watch = 0)
 	return {"
-			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
-			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
-			(<a href='?_src_=vars;datummass=\ref[src];varnamemass=[varname]'>M</a>)
-			[hide_watch ? "" : "(<a href='?_src_=vars;datumwatch=\ref[src];varnamewatch=[varname]'>W</a>)"]
+			(<a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
+			(<a href='byond://?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
+			(<a href='byond://?_src_=vars;datummass=\ref[src];varnamemass=[varname]'>M</a>)
+			[hide_watch ? "" : "(<a href='byond://?_src_=vars;datumwatch=\ref[src];varnamewatch=[varname]'>W</a>)"]
 			"}
 
 // No mass editing of clients
 /client/make_view_variables_variable_entry(var/varname, var/value, var/hide_watch = 0)
 	return {"
-			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
-			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
-			[hide_watch ? "" : "(<a href='?_src_=vars;datumwatch=\ref[src];varnamewatch=[varname]'>W</a>)"]
+			(<a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
+			(<a href='byond://?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
+			[hide_watch ? "" : "(<a href='byond://?_src_=vars;datumwatch=\ref[src];varnamewatch=[varname]'>W</a>)"]
 			"}
 
 // These methods are all procs and don't use stored lists to avoid VV exploits

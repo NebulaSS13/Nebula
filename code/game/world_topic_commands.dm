@@ -319,8 +319,8 @@ var/global/list/decl/topic_command/topic_commands = list()
 	if(rank == "Unknown")
 		rank = "Staff"
 
-	var/message =	SPAN_RED("[rank] PM from <b><a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a></b>: [params["msg"]]")
-	var/amessage =  SPAN_BLUE("[rank] PM from <a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a> to <b>[key_name(C)]</b> : [params["msg"]]")
+	var/message =	SPAN_RED("[rank] PM from <b><a href='byond://?irc_msg=[params["sender"]]'>[params["sender"]]</a></b>: [params["msg"]]")
+	var/amessage =  SPAN_BLUE("[rank] PM from <a href='byond://?irc_msg=[params["sender"]]'>[params["sender"]]</a> to <b>[key_name(C)]</b> : [params["msg"]]")
 
 	C.received_irc_pm = world.time
 	C.irc_admin = params["sender"]

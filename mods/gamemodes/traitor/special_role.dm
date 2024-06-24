@@ -9,7 +9,7 @@
 	blocked_job_event_categories = list(ASSIGNMENT_COMPUTER)
 
 /decl/special_role/traitor/get_extra_panel_options(var/datum/mind/player)
-	return "<a href='?src=\ref[player];common=crystals'>\[set crystals\]</a><a href='?src=\ref[src];spawn_uplink=\ref[player.current]'>\[spawn uplink\]</a>"
+	return "<a href='byond://?src=\ref[player];common=crystals'>\[set crystals\]</a><a href='byond://?src=\ref[src];spawn_uplink=\ref[player.current]'>\[spawn uplink\]</a>"
 
 /decl/special_role/traitor/Topic(href, href_list)
 	if (..())

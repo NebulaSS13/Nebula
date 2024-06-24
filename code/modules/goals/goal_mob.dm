@@ -30,8 +30,8 @@
 	else
 		to_chat(src, SPAN_NOTICE("<font size = 3><b>You have no personal goals this round.</b></font>"))
 	if(allow_modification && LAZYLEN(mind.goals) < 5)
-		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
-	
+		to_chat(src, SPAN_NOTICE("<a href='byond://?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
+
 	for(var/dept_key in mind.assigned_job?.department_types)
 		var/decl/department/dept = SSjobs.get_department_by_type(dept_key)
 		if(dept)

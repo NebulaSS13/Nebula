@@ -331,16 +331,16 @@
 			var/decl/department/dept = all_departments[dtype]
 			var/list/print_jobs = SSjobs.titles_by_department(dtype)
 			jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-			jobs += "<tr align='center' bgcolor='[dept.display_color]'><th colspan='[length(print_jobs)]'><a href='?src=\ref[src];jobban_category=[dept.name];jobban_mob_target=\ref[M]'>[capitalize(dept.name)] Positions</a></th></tr><tr align='center'>"
+			jobs += "<tr align='center' bgcolor='[dept.display_color]'><th colspan='[length(print_jobs)]'><a href='byond://?src=\ref[src];jobban_category=[dept.name];jobban_mob_target=\ref[M]'>[capitalize(dept.name)] Positions</a></th></tr><tr align='center'>"
 			for(var/jobPos in print_jobs)
 				var/datum/job/job = SSjobs.get_by_title(jobPos)
 				if(!job)
 					continue
 				if(jobban_isbanned(M, job.title))
-					jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[job.title];jobban_mob_target=\ref[M]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+					jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[job.title];jobban_mob_target=\ref[M]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
 					counter++
 				else
-					jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[job.title];jobban_mob_target=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+					jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[job.title];jobban_mob_target=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 					counter++
 				if(counter >= MAX_JOBBAN_CELLS)
 					jobs += "</tr><tr>"
@@ -350,20 +350,20 @@
 	// Other non-human bans.
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccffcc'><th colspan='2><a href='?src=\ref[src];jobban_category=miscnonhumanroles;jobban_mob_target=\ref[M]'>Other Positions</a></th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ccffcc'><th colspan='2><a href='byond://?src=\ref[src];jobban_category=miscnonhumanroles;jobban_mob_target=\ref[M]'>Other Positions</a></th></tr><tr align='center'>"
 		if(jobban_isbanned(M, "pAI"))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=pAI;jobban_mob_target=\ref[M]'><font color=red>pAI</font></a></td>"
+			jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=pAI;jobban_mob_target=\ref[M]'><font color=red>pAI</font></a></td>"
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=pAI;jobban_mob_target=\ref[M]'>pAI</a></td>"
+			jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=pAI;jobban_mob_target=\ref[M]'>pAI</a></td>"
 		if(jobban_isbanned(M, "AntagHUD"))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=AntagHUD;jobban_mob_target=\ref[M]'><font color=red>AntagHUD</font></a></td>"
+			jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=AntagHUD;jobban_mob_target=\ref[M]'><font color=red>AntagHUD</font></a></td>"
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=AntagHUD;jobban_mob_target=\ref[M]'>AntagHUD</a></td>"
+			jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=AntagHUD;jobban_mob_target=\ref[M]'>AntagHUD</a></td>"
 		jobs += "</tr></table>"
 
 	//Antagonist (Orange)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ffeeaa'><th colspan='10'><a href='?src=\ref[src];jobban_category=Syndicate;jobban_mob_target=\ref[M]'>Antagonist Positions</a></th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ffeeaa'><th colspan='10'><a href='byond://?src=\ref[src];jobban_category=Syndicate;jobban_mob_target=\ref[M]'>Antagonist Positions</a></th></tr><tr align='center'>"
 
 		// Antagonists.
 		#define ANTAG_COLUMNS 5
@@ -374,9 +374,9 @@
 			if(!antag)
 				continue
 			if(jobban_isbanned(M, antag.type))
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=\ref[antag];jobban_mob_target=\ref[M]'><font color=red>[replacetext("[antag.name]", " ", "&nbsp")]</font></a></td>"
+				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=\ref[antag];jobban_mob_target=\ref[M]'><font color=red>[replacetext("[antag.name]", " ", "&nbsp")]</font></a></td>"
 			else
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=\ref[antag];jobban_mob_target=\ref[M]'>[replacetext("[antag.name]", " ", "&nbsp")]</a></td>"
+				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=\ref[antag];jobban_mob_target=\ref[M]'>[replacetext("[antag.name]", " ", "&nbsp")]</a></td>"
 			if(i % ANTAG_COLUMNS == 0 && i < length(all_antag_types))
 				jobs += "</tr><tr align='center'>"
 			i++
@@ -389,9 +389,9 @@
 		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
 		for(var/entry in misc_roles)
 			if(jobban_isbanned(M, entry))
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[entry];jobban_mob_target=\ref[M]'><font color=red>[entry]</font></a></td>"
+				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[entry];jobban_mob_target=\ref[M]'><font color=red>[entry]</font></a></td>"
 			else
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[entry];jobban_mob_target=\ref[M]'>[entry]</a></td>"
+				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[entry];jobban_mob_target=\ref[M]'>[entry]</a></td>"
 		jobs += "</tr></table>"
 
 	// Channels
@@ -401,9 +401,9 @@
 		for(var/channel_type in channels)
 			var/decl/communication_channel/channel = channels[channel_type]
 			if(jobban_isbanned(M, channel.name))
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[channel.name];jobban_mob_target=\ref[M]'><font color=red>[channel.name]</font></a></td>"
+				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[channel.name];jobban_mob_target=\ref[M]'><font color=red>[channel.name]</font></a></td>"
 			else
-				jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[channel.name];jobban_mob_target=\ref[M]'>[channel.name]</a></td>"
+				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[channel.name];jobban_mob_target=\ref[M]'>[channel.name]</a></td>"
 		jobs += "</tr></table>"
 
 	// Finalize and display.
@@ -690,9 +690,9 @@
 		var/dat = {"<B>What mode do you wish to play?</B><HR>"}
 		var/list/mode_names = get_config_value(/decl/config/lists/mode_names)
 		for(var/mode in get_config_value(/decl/config/lists/mode_allowed))
-			dat += {"<A href='?src=\ref[src];c_mode2=[mode]'>[mode_names[mode]]</A><br>"}
-		dat += {"<A href='?src=\ref[src];c_mode2=secret'>Secret</A><br>"}
-		dat += {"<A href='?src=\ref[src];c_mode2=random'>Random</A><br>"}
+			dat += {"<A href='byond://?src=\ref[src];c_mode2=[mode]'>[mode_names[mode]]</A><br>"}
+		dat += {"<A href='byond://?src=\ref[src];c_mode2=secret'>Secret</A><br>"}
+		dat += {"<A href='byond://?src=\ref[src];c_mode2=random'>Random</A><br>"}
 		dat += {"Now: [SSticker.master_mode]"}
 		show_browser(usr, dat, "window=c_mode")
 
@@ -706,8 +706,8 @@
 		var/dat = {"<B>What game mode do you want to force secret to be? Use this if you want to change the game mode, but want the players to believe it's secret. This will only work if the current game mode is secret.</B><HR>"}
 		var/list/mode_names = get_config_value(/decl/config/lists/mode_names)
 		for(var/mode in get_config_value(/decl/config/lists/mode_allowed))
-			dat += {"<A href='?src=\ref[src];f_secret2=[mode]'>[mode_names[mode]]</A><br>"}
-		dat += {"<A href='?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
+			dat += {"<A href='byond://?src=\ref[src];f_secret2=[mode]'>[mode_names[mode]]</A><br>"}
+		dat += {"<A href='byond://?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
 		dat += {"Now: [secret_force_mode]"}
 		show_browser(usr, dat, "window=f_secret")
 
@@ -930,7 +930,7 @@
 		to_chat(src.owner, "Name = <b>[M.name]</b>; Real_name = [M.real_name]; Mind_name = [M.mind?"[M.mind.name]":""]; Key = <b>[M.key]</b>;")
 		to_chat(src.owner, "Location = [location_description];")
 		to_chat(src.owner, "[special_role_description]")
-		to_chat(src.owner, "(<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[M]'>VV</A>) ([admin_jump_link(M, src)]) (<A HREF='?src=\ref[src];secretsadmin=show_round_status'>RS</A>)")
+		to_chat(src.owner, "(<a href='byond://?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='byond://?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='byond://?_src_=vars;Vars=\ref[M]'>VV</A>) ([admin_jump_link(M, src)]) (<A HREF='byond://?src=\ref[src];secretsadmin=show_round_status'>RS</A>)")
 
 	else if(href_list["adminspawnprayreward"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
@@ -1052,7 +1052,7 @@
 
 			for (var/page = 1, page <= B.pages.len, page++)
 				var/obj/pageobj = B.pages[page]
-				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
+				data += "<A href='byond://?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
 			show_browser(usr, data, "window=[B.name]")
 		else
@@ -1617,7 +1617,7 @@
 	return list()
 
 /atom/movable/extra_admin_link(var/source, var/prefix, var/sufix, var/short_links)
-	return list("<A HREF='?[source];adminplayerobservefollow=\ref[src]'>[prefix][short_links ? "J" : "JMP"][sufix]</A>")
+	return list("<A HREF='byond://?[source];adminplayerobservefollow=\ref[src]'>[prefix][short_links ? "J" : "JMP"][sufix]</A>")
 
 /client/extra_admin_link(source, var/prefix, var/sufix, var/short_links)
 	return mob ? mob.extra_admin_link(source, prefix, sufix, short_links) : list()
@@ -1625,12 +1625,12 @@
 /mob/extra_admin_link(var/source, var/prefix, var/sufix, var/short_links)
 	. = ..()
 	if(client && eyeobj)
-		. += "<A HREF='?[source];adminplayerobservefollow=\ref[eyeobj]'>[prefix][short_links ? "E" : "EYE"][sufix]</A>"
+		. += "<A HREF='byond://?[source];adminplayerobservefollow=\ref[eyeobj]'>[prefix][short_links ? "E" : "EYE"][sufix]</A>"
 
 /mob/observer/ghost/extra_admin_link(var/source, var/prefix, var/sufix, var/short_links)
 	. = ..()
 	if(mind && (mind.current && !isghost(mind.current)))
-		. += "<A HREF='?[source];adminplayerobservefollow=\ref[mind.current]'>[prefix][short_links ? "B" : "BDY"][sufix]</A>"
+		. += "<A HREF='byond://?[source];adminplayerobservefollow=\ref[mind.current]'>[prefix][short_links ? "B" : "BDY"][sufix]</A>"
 
 /proc/admin_jump_link(var/datum/target, var/source, var/delimiter = "|", var/prefix, var/sufix, var/short_links)
 	if(!istype(target))

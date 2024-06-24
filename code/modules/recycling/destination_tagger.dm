@@ -29,7 +29,7 @@
 
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center><br>"
 	dat += "<div class='item'>"
-	dat += "<div class='itemLabel'>Current Selection:</div> <div class='itemContents'><a href='?src=\ref[src];input_tag=1'>[current_tag ? current_tag : "None"]</a></div>"
+	dat += "<div class='itemLabel'>Current Selection:</div> <div class='itemContents'><a href='byond://?src=\ref[src];input_tag=1'>[current_tag ? current_tag : "None"]</a></div>"
 	dat += "</div>"
 
 	dat += "<h4>Tag History:</h4>"
@@ -38,7 +38,7 @@
 	for(var/prevdest in last_used_tags)
 		if(cnt % 4 == 0)
 			dat += "</tr><tr>"
-		dat += "<td><a href='?src=\ref[src];set_tag=[prevdest]'>[prevdest]</a></td>"
+		dat += "<td><a href='byond://?src=\ref[src];set_tag=[prevdest]'>[prevdest]</a></td>"
 		++cnt
 	dat += "</tr></table></tt>"
 

@@ -113,12 +113,12 @@
 	if(!istype(terminal))
 		return
 	. = list()
-	. += "ID tag: <a href='?src=\ref[src];input_tag=1'>[terminal.id_tag]</a><br>"
+	. += "ID tag: <a href='byond://?src=\ref[src];input_tag=1'>[terminal.id_tag]</a><br>"
 	. += "Nearby controllers:<br>"
 
 	var/list/controllers
 	for(var/obj/machinery/embedded_controller/radio/C in range(12, terminal))
-		LAZYADD(controllers, "<tr> <td>[C]</td><td><a href='?src=\ref[src];set_tag=\"[C.id_tag]\"'>[C.id_tag]</a></td> </tr>")
+		LAZYADD(controllers, "<tr> <td>[C]</td><td><a href='byond://?src=\ref[src];set_tag=\"[C.id_tag]\"'>[C.id_tag]</a></td> </tr>")
 
 	if(!LAZYLEN(controllers))
 		. += "None."

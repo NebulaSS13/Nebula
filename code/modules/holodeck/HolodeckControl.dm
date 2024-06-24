@@ -41,9 +41,9 @@
 
 	dat += "<B>Holodeck Control System</B><BR>"
 	if(!islocked)
-		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=green>(UNLOCKED)</font></A><BR>"
+		dat += "Holodeck is <A href='byond://?src=\ref[src];togglehololock=1'><font color=green>(UNLOCKED)</font></A><BR>"
 	else
-		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=red>(LOCKED)</font></A><BR>"
+		dat += "Holodeck is <A href='byond://?src=\ref[src];togglehololock=1'><font color=red>(LOCKED)</font></A><BR>"
 		show_browser(user, dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
@@ -63,10 +63,10 @@
 		return
 
 	for(var/prog in supported_programs)
-		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>([prog])</A><BR>"
+		dat += "<A href='byond://?src=\ref[src];program=[supported_programs[prog]]'>([prog])</A><BR>"
 
 	dat += "<BR>"
-	dat += "<A href='?src=\ref[src];program=[global.using_map.holodeck_off_program[programs_list_id]]'>(Turn Off)</A><BR>"
+	dat += "<A href='byond://?src=\ref[src];program=[global.using_map.holodeck_off_program[programs_list_id]]'>(Turn Off)</A><BR>"
 
 	dat += "<BR>"
 	dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
@@ -77,15 +77,15 @@
 			if (emagged)
 				dat += "<font color=red><b>ERROR</b>: Cannot re-enable Safety Protocols.</font><BR>"
 			else
-				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
+				dat += "<A href='byond://?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
 		else
-			dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
 
 	dat += "<BR>"
 
 	if(safety_disabled)
 		for(var/prog in restricted_programs)
-			dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>(<font color=red>Begin [prog]</font>)</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];program=[restricted_programs[prog]]'>(<font color=red>Begin [prog]</font>)</A><BR>"
 			dat += "Ensure the holodeck is empty before testing.<BR>"
 			dat += "<BR>"
 		dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
@@ -93,9 +93,9 @@
 		dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
 
 	if(linkedholodeck.has_gravity)
-		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=green>(ON)</font></A><BR>"
+		dat += "Gravity is <A href='byond://?src=\ref[src];gravity=1'><font color=green>(ON)</font></A><BR>"
 	else
-		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=blue>(OFF)</font></A><BR>"
+		dat += "Gravity is <A href='byond://?src=\ref[src];gravity=1'><font color=blue>(OFF)</font></A><BR>"
 	show_browser(user, dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return

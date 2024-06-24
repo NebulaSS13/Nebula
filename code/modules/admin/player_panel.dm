@@ -75,15 +75,15 @@
 
 					body += "</td><td align='center'>";
 
-					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>Player Panel</a> - "
-					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>Notes</a> - "
-					body += "<a href='?_src_=vars;Vars="+ref+"'>View Vars</a> - "
-					body += "<a href='?src=\ref[src];show_special_roles="+ref+"'>Special Roles</a> - "
-					body += "<a href='?src=\ref[usr];priv_msg="+ref+"'>Send PM</a> - "
-					body += "<a href='?src=\ref[src];narrateto="+ref+"'>Direct Narrate</a> - "
-					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>Jump To</a><br>"
+					body += "<a href='byond://?src=\ref[src];adminplayeropts="+ref+"'>Player Panel</a> - "
+					body += "<a href='byond://?src=\ref[src];notes=show;mob="+ref+"'>Notes</a> - "
+					body += "<a href='byond://?_src_=vars;Vars="+ref+"'>View Vars</a> - "
+					body += "<a href='byond://?src=\ref[src];show_special_roles="+ref+"'>Special Roles</a> - "
+					body += "<a href='byond://?src=\ref[usr];priv_msg="+ref+"'>Send PM</a> - "
+					body += "<a href='byond://?src=\ref[src];narrateto="+ref+"'>Direct Narrate</a> - "
+					body += "<a href='byond://?src=\ref[src];adminplayerobservejump="+ref+"'>Jump To</a><br>"
 					if(antagonist > 0)
-						body += "<font size='2'><a href='?src=\ref[src];show_round_status=1'><font color='red'><b>Antagonist</b></font></a></font>";
+						body += "<font size='2'><a href='byond://?src=\ref[src];show_round_status=1'><font color='red'><b>Antagonist</b></font></a></font>";
 
 					body += "</td></tr></table>";
 
@@ -194,7 +194,7 @@
 			<tr id='title_tr'>
 				<td align='center'>
 					<font size='5'><b>Player panel</b></font><br>
-					Hover over a line to see more information, or click <a href='?src=\ref[src];show_round_status=1'>here</a> to check round info.
+					Hover over a line to see more information, or click <a href='byond://?src=\ref[src];show_round_status=1'>here</a> to check round info.
 					<p>
 				</td>
 			</tr>
@@ -288,14 +288,14 @@
 
 		if(SSevac.evacuation_controller)
 			if (SSevac.evacuation_controller.is_idle())
-				dat += "<a href='?src=\ref[src];call_shuttle=1'>Call Evacuation</a><br>"
+				dat += "<a href='byond://?src=\ref[src];call_shuttle=1'>Call Evacuation</a><br>"
 			else
 				var/timeleft = SSevac.evacuation_controller.get_eta()
 				if (SSevac.evacuation_controller.waiting_to_leave())
 					dat += "ETA: [(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
-					dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
+					dat += "<a href='byond://?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
 
-		dat += "<a href='?src=\ref[src];delay_round_end=1'>[SSticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"
+		dat += "<a href='byond://?src=\ref[src];delay_round_end=1'>[SSticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"
 		dat += "<hr>"
 		var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 		for(var/antag_type in all_antag_types)

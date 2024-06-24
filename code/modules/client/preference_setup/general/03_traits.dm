@@ -135,7 +135,7 @@
 			category_label = "[category_label] ([trait_spent])"
 		if(trait_category_id == selected_category)
 			category_label = "<font color = '#e67300'>[category_label]</font>"
-		header += "<td><a href='?src=\ref[src];select_category=[trait_category.name]'>[category_label]</a></td>"
+		header += "<td><a href='byond://?src=\ref[src];select_category=[trait_category.name]'>[category_label]</a></td>"
 
 	. += "<table align = 'center'><tr>[header]</tr></table>"
 	. += "<table align = 'center'>[body]</table>"

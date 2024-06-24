@@ -49,8 +49,8 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 					</td>
 					<td width='50%'>
 						<div align='center'>
-							<a href='?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
-							[A ? "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[A.x];Y=[A.y];Z=[A.z]'>Jump To</a>":""]
+							<a href='byond://?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
+							[A ? "<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[A.x];Y=[A.y];Z=[A.z]'>Jump To</a>":""]
 							<form>
 								<select name='file'
 								        size='1'
@@ -124,7 +124,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 		dat += "<h1>[make_view_variables_value(D)]</h1>"
 		for(var/v in user.client.watched_variables[D])
 			dat += "<div class='var'>"
-			dat += "(<a href='?_src_=vars;datumunwatch=\ref[D];varnameunwatch=[v]'>X</a>) "
+			dat += "(<a href='byond://?_src_=vars;datumunwatch=\ref[D];varnameunwatch=[v]'>X</a>) "
 			dat += "[D.make_view_variables_variable_entry(v, D.get_variable_value(v), 1)] [v] = [make_view_variables_value(D.get_variable_value(v), v)]"
 			dat += "</div>"
 
@@ -164,12 +164,12 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	else if(istype(value, /datum))
 		var/datum/DA = value
 		if("[DA]" == "[DA.type]" || !"[DA]")
-			vtext = "<a href='?_src_=vars;Vars=\ref[DA]'>\ref[DA]</a> - [DA.type]"
+			vtext = "<a href='byond://?_src_=vars;Vars=\ref[DA]'>\ref[DA]</a> - [DA.type]"
 		else
-			vtext = "<a href='?_src_=vars;Vars=\ref[DA]'>\ref[DA]</a> - [DA] ([DA.type])"
+			vtext = "<a href='byond://?_src_=vars;Vars=\ref[DA]'>\ref[DA]</a> - [DA] ([DA.type])"
 	else if(istype(value, /client))
 		var/client/C = value
-		vtext = "<a href='?_src_=vars;Vars=\ref[C]'>\ref[C]</a> - [C] ([C.type])"
+		vtext = "<a href='byond://?_src_=vars;Vars=\ref[C]'>\ref[C]</a> - [C] ([C.type])"
 	else if(islist(value))
 		var/list/L = value
 		vtext = "/list ([L.len])"

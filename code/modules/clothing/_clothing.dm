@@ -295,13 +295,13 @@
 	if(LAZYLEN(ties))
 		.+= " with [english_list(ties)] attached"
 	if(LAZYLEN(accessories) > LAZYLEN(ties))
-		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
+		.+= ". <a href='byond://?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
 	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
 	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
-		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
+		to_chat(user, SPAN_WARNING("It has some <a href='byond://?src=\ref[src];list_armor_damage=1'>damage</a>."))
 
 	if(LAZYLEN(accessories))
 		to_chat(user, "It has the following attached: [counting_english_list(accessories)]")

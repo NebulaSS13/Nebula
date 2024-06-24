@@ -104,7 +104,7 @@
 	html += "<table><tr><td>Name</td><td>Description</td></tr>"
 	for(var/a in possible_forms)
 		var/list/form = possible_forms[a]
-		html += "<tr><td><a href='?src=\ref[src];spawn_type=[a]'>[a]</a></td><td>[form["description"]]</td></tr>"
+		html += "<tr><td><a href='byond://?src=\ref[src];spawn_type=[a]'>[a]</a></td><td>[form["description"]]</td></tr>"
 	html += "</table>"
 	show_browser(linked_god, jointext(html, null), "window=gateway")
 
@@ -142,7 +142,7 @@
 			to_chat(usr, SPAN_NOTICE("\The [src] is now looking for a [looking_for]."))
 			for(var/l in get_turf(linked_god))
 				if(istype(l, /mob/living/starlight_soul))
-					to_chat(l, "<span class='notice'>\The [src] is looking for a soul to become a [looking_for]. Accept?</span> (<a href='?\ref[src];accept=[looking_for]'>Yes</a>)")
+					to_chat(l, "<span class='notice'>\The [src] is looking for a soul to become a [looking_for]. Accept?</span> (<a href='byond://?\ref[src];accept=[looking_for]'>Yes</a>)")
 			addtimer(CALLBACK(src, PROC_REF(stop_looking_for), FALSE), 30 SECONDS)
 		show_browser(linked_god, null, "window=gateway")
 		return TOPIC_HANDLED

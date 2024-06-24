@@ -141,21 +141,21 @@
 	dat += "<tr><td>Target temperature:</td><td>"
 
 	if(target_temperature > min_temperature)
-		dat += "<a href='?src=\ref[src];adjust_temperature=-[heating_power]'>-</a> "
+		dat += "<a href='byond://?src=\ref[src];adjust_temperature=-[heating_power]'>-</a> "
 
 	dat += "[target_temperature - T0C]C"
 
 	if(target_temperature < max_temperature)
-		dat += " <a href='?src=\ref[src];adjust_temperature=[heating_power]'>+</a>"
+		dat += " <a href='byond://?src=\ref[src];adjust_temperature=[heating_power]'>+</a>"
 
 	dat += "</td></tr>"
 
 	dat += "<tr><td>Current temperature:</td><td>[FLOOR(temperature - T0C)]C</td></tr>"
 
 	dat += "<tr><td>Loaded container:</td>"
-	dat += "<td>[container ? "[container.name] ([FLOOR(container.temperature - T0C)]C) <a href='?src=\ref[src];remove_container=1'>Remove</a>" : "None."]</td></tr>"
+	dat += "<td>[container ? "[container.name] ([FLOOR(container.temperature - T0C)]C) <a href='byond://?src=\ref[src];remove_container=1'>Remove</a>" : "None."]</td></tr>"
 
-	dat += "<tr><td>Switched:</td><td><a href='?src=\ref[src];toggle_power=1'>[use_power == POWER_USE_ACTIVE ? "On" : "Off"]</a></td></tr>"
+	dat += "<tr><td>Switched:</td><td><a href='byond://?src=\ref[src];toggle_power=1'>[use_power == POWER_USE_ACTIVE ? "On" : "Off"]</a></td></tr>"
 	dat += "</table>"
 
 	var/datum/browser/popup = new(user, "\ref[src]-reagent_temperature_window", "[capitalize(name)]")

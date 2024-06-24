@@ -29,7 +29,7 @@
 
 /obj/item/clothing/gloves/ring/material/get_examine_line()
 	. = ..()
-	. += " <a href='?src=\ref[src];examine=1'>\[View\]</a>"
+	. += " <a href='byond://?src=\ref[src];examine=1'>\[View\]</a>"
 
 /obj/item/clothing/gloves/ring/material/wood
 	material = /decl/material/solid/organic/wood/walnut

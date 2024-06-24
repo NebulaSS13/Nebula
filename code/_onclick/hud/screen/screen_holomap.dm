@@ -60,7 +60,7 @@
 /obj/screen/holomap_legend/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, map_color, text)
 	. = ..()
 	saved_color = map_color
-	maptext = "<a href='?src=\ref[src]' style=\"font-family: 'Small Fonts'; color: [map_color]; -dm-text-outline: 1 [COLOR_BLACK]; font-size: 6px\">[text]</a>"
+	maptext = "<a href='byond://?src=\ref[src]' style=\"font-family: 'Small Fonts'; color: [map_color]; -dm-text-outline: 1 [COLOR_BLACK]; font-size: 6px\">[text]</a>"
 	alpha = 255
 
 /obj/screen/holomap_legend/handle_click(mob/user, params)

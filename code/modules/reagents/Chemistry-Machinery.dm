@@ -194,7 +194,7 @@
 			#define MAX_PILL_SPRITE 25 //max icon state of the pill sprites
 			var/dat = "<table>"
 			for(var/i = 1 to MAX_PILL_SPRITE)
-				dat += "<tr><td><a href=\"?src=\ref[src]&pill_sprite=[i]\"><img src=\"pill[i].png\" /></a></td></tr>"
+				dat += "<tr><td><a href=\"byond://?src=\ref[src]&pill_sprite=[i]\"><img src=\"pill[i].png\" /></a></td></tr>"
 			dat += "</table>"
 			show_browser(user, dat, "window=chem_master")
 			return
@@ -226,7 +226,7 @@
 		. += "Blood Type: [LAZYACCESS(blood_data, "blood_type")]<br>DNA: [LAZYACCESS(blood_data, "blood.DNA")]"
 	else
 		. += "[reagent.lore_text]"
-	. += "<BR><BR><BR><A href='?src=\ref[src];main=1'>(Back)</A>"
+	. += "<BR><BR><BR><A href='byond://?src=\ref[src];main=1'>(Back)</A>"
 	. = JOINTEXT(.)
 
 /obj/machinery/chem_master/proc/create_bottle(mob/user)
@@ -261,16 +261,16 @@
 	if(!beaker)
 		dat += "Please insert beaker.<BR>"
 		if(loaded_pill_bottle?.storage)
-			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.storage.max_storage_space]\]</A><BR><BR>"
+			dat += "<A href='byond://?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.storage.max_storage_space]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
-		dat += "<A href='?src=\ref[src];close=1'>Close</A>"
+		dat += "<A href='byond://?src=\ref[src];close=1'>Close</A>"
 	else
 		var/datum/reagents/R = beaker.reagents
-		dat += "<A href='?src=\ref[src];eject=1'>Eject beaker and Clear Buffer</A><BR>"
-		dat += "Toggle purification mode: <A href='?src=\ref[src];toggle_sloppy=1'>[sloppy ? "Quick" : "Thorough"]</A><BR>"
+		dat += "<A href='byond://?src=\ref[src];eject=1'>Eject beaker and Clear Buffer</A><BR>"
+		dat += "Toggle purification mode: <A href='byond://?src=\ref[src];toggle_sloppy=1'>[sloppy ? "Quick" : "Thorough"]</A><BR>"
 		if(loaded_pill_bottle?.storage)
-			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.storage.max_storage_space]\]</A><BR><BR>"
+			dat += "<A href='byond://?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.storage.max_storage_space]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
 		if(!R.total_volume)
@@ -280,24 +280,24 @@
 			for(var/rtype in R.reagent_volumes)
 				var/decl/material/G = GET_DECL(rtype)
 				dat += "[G.use_name], [REAGENT_VOLUME(R, rtype)] Units - "
-				dat += "<A href='?src=\ref[src];analyze=\ref[G]'>(Analyze)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=1'>(1)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=5'>(5)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=10'>(10)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=[REAGENT_VOLUME(R, rtype)]'>(All)</A> "
-				dat += "<A href='?src=\ref[src];addcustom=\ref[G]'>(Custom)</A><BR>"
+				dat += "<A href='byond://?src=\ref[src];analyze=\ref[G]'>(Analyze)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=1'>(1)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=5'>(5)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=10'>(10)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=[REAGENT_VOLUME(R, rtype)]'>(All)</A> "
+				dat += "<A href='byond://?src=\ref[src];addcustom=\ref[G]'>(Custom)</A><BR>"
 
-		dat += "<HR>Transfer to <A href='?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
+		dat += "<HR>Transfer to <A href='byond://?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
 		if(reagents.total_volume)
 			for(var/rtype in reagents.reagent_volumes)
 				var/decl/material/N = GET_DECL(rtype)
 				dat += "[N.use_name], [REAGENT_VOLUME(reagents, rtype)] Units - "
-				dat += "<A href='?src=\ref[src];analyze=\ref[N]'>(Analyze)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=1'>(1)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=5'>(5)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=10'>(10)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=[REAGENT_VOLUME(reagents, rtype)]'>(All)</A> "
-				dat += "<A href='?src=\ref[src];removecustom=\ref[N]'>(Custom)</A><BR>"
+				dat += "<A href='byond://?src=\ref[src];analyze=\ref[N]'>(Analyze)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=1'>(1)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=5'>(5)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=10'>(10)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=[REAGENT_VOLUME(reagents, rtype)]'>(All)</A> "
+				dat += "<A href='byond://?src=\ref[src];removecustom=\ref[N]'>(Custom)</A><BR>"
 		else
 			dat += "Empty<BR>"
 		dat += extra_options()
@@ -307,11 +307,11 @@
 //Use to add extra stuff to the end of the menu.
 /obj/machinery/chem_master/proc/extra_options()
 	. = list()
-	. += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (30 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
-	. += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
-	. += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)</A>"
-	. += "<BR><A href='?src=\ref[src];label_color=1'>Bottle Label Color:</a><span style='color:[bottle_label_color];border: 1px solid black;'>\t▉</span>"
-	. += "<BR><A href='?src=\ref[src];lid_color=1'>Bottle Lid Color:</a><span style='color:[bottle_lid_color];border: 1px solid black;'>\t▉</span>"
+	. += "<HR><BR><A href='byond://?src=\ref[src];createpill=1'>Create pill (30 units max)</A><a href=\"byond://?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
+	. += "<A href='byond://?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
+	. += "<A href='byond://?src=\ref[src];createbottle=1'>Create bottle (60 units max)</A>"
+	. += "<BR><A href='byond://?src=\ref[src];label_color=1'>Bottle Label Color:</a><span style='color:[bottle_label_color];border: 1px solid black;'>\t▉</span>"
+	. += "<BR><A href='byond://?src=\ref[src];lid_color=1'>Bottle Lid Color:</a><span style='color:[bottle_lid_color];border: 1px solid black;'>\t▉</span>"
 	return JOINTEXT(.)
 
 /obj/machinery/chem_master/condimaster
@@ -326,4 +326,4 @@
 	reagents.trans_to_obj(P,50)
 
 /obj/machinery/chem_master/condimaster/extra_options()
-	return "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
+	return "<A href='byond://?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"

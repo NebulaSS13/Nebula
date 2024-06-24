@@ -83,7 +83,7 @@ var/global/datum/error_viewer/error_cache/error_cache
 	if (linear)
 		back_to_param += ";viewruntime_linear=1"
 
-	return "<a href='?src=\ref[src];viewruntime=\ref[src][back_to_param]'>[linktext]</a>"
+	return "<a href='byond://?src=\ref[src];viewruntime=\ref[src][back_to_param]'>[linktext]</a>"
 
 /datum/error_viewer/error_cache
 	var/list/errors = list()
@@ -194,12 +194,12 @@ var/global/datum/error_viewer/error_cache/error_cache
 	var/html = build_header(back_to, linear)
 	html += "[name]<div class='runtime'>[desc]</div>"
 	if (usr_ref)
-		html += "<br><b>usr</b>: <a href='?_src_=vars;Vars=[usr_ref]'>VV</a>"
-		html += " <a href='?_src_=holder;adminplayeropts=[usr_ref]'>PP</a>"
-		html += " <a href='?_src_=holder;adminplayerobservefollow=[usr_ref]'>Follow</a>"
+		html += "<br><b>usr</b>: <a href='byond://?_src_=vars;Vars=[usr_ref]'>VV</a>"
+		html += " <a href='byond://?_src_=holder;adminplayeropts=[usr_ref]'>PP</a>"
+		html += " <a href='byond://?_src_=holder;adminplayerobservefollow=[usr_ref]'>Follow</a>"
 		if (istype(usr_loc))
-			html += "<br><b>usr.loc</b>: <a href='?_src_=vars;Vars=\ref[usr_loc]'>VV</a>"
-			html += " <a href='?_src_=holder;adminplayerobservecoodjump=1;X=[usr_loc.x];Y=[usr_loc.y];Z=[usr_loc.z]'>JMP</a>"
+			html += "<br><b>usr.loc</b>: <a href='byond://?_src_=vars;Vars=\ref[usr_loc]'>VV</a>"
+			html += " <a href='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[usr_loc.x];Y=[usr_loc.y];Z=[usr_loc.z]'>JMP</a>"
 
 	browse_to(user, html)
 

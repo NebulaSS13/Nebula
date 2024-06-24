@@ -206,15 +206,15 @@ var/global/list/time_prefs_fixed = list()
 	else
 
 		dat += "<b>Slot</b> - "
-		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a><br>"
+		dat += "<a href='byond://?src=\ref[src];load=1'>Load slot</a> - "
+		dat += "<a href='byond://?src=\ref[src];save=1'>Save slot</a> - "
+		dat += "<a href='byond://?src=\ref[src];resetslot=1'>Reset slot</a> - "
+		dat += "<a href='byond://?src=\ref[src];reload=1'>Reload slot</a><br>"
 
 		dat += "<b>Preview</b> - "
-		dat += "<a href='?src=\ref[src];cycle_bg=1'>Cycle background</a> - "
-		dat += "<a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a> - "
-		dat += "<a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
+		dat += "<a href='byond://?src=\ref[src];cycle_bg=1'>Cycle background</a> - "
+		dat += "<a href='byond://?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a> - "
+		dat += "<a href='byond://?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
 
 	dat += "<br>"
 	dat += player_setup.header()
@@ -467,7 +467,7 @@ var/global/list/time_prefs_fixed = list()
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
 		if(i==default_slot)
 			name = "<b>[name]</b>"
-		dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
+		dat += "<a href='byond://?src=\ref[src];changeslot=[i]'>[name]</a><br>"
 
 	dat += "<hr>"
 	dat += "</center></tt>"

@@ -679,8 +679,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		reply_type = "UNKNOWN"
 
 	var/msg = "<span class='notice'><b><font color='[font_colour]'>[faxname]: </font>[get_options_bar(sender, 2,1,1)]"
-	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[source_fax];replyorigin=[reply_type]'>REPLY</a>)</b>: "
-	msg += "Receiving '[rcvdcopy.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>view message</a></span>"
+	msg += "(<A HREF='byond://?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='byond://?_src_=holder;FaxReply=\ref[sender];originfax=\ref[source_fax];replyorigin=[reply_type]'>REPLY</a>)</b>: "
+	msg += "Receiving '[rcvdcopy.name]' via secure connection ... <a href='byond://?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>view message</a></span>"
 
 	if (istype(doc, /obj/item/paper))
 		var/obj/item/paper/paper = doc

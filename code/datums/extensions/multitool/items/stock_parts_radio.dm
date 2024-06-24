@@ -6,7 +6,7 @@
 	var/obj/item/stock_parts/radio/radio = holder
 	if(radio.status & PART_STAT_INSTALLED)
 		return STATUS_CLOSE
-	return ..()	
+	return ..()
 
 /datum/extension/interactive/multitool/radio/interact(obj/item/multitool/M, mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
@@ -34,15 +34,15 @@
 	var/obj/item/stock_parts/radio/radio = holder
 	var/list/dat = list()
 
-	dat += "<a href='?src=\ref[src];unlink=1'>Unlink Machine</a><br>"
+	dat += "<a href='byond://?src=\ref[src];unlink=1'>Unlink Machine</a><br>"
 	var/obj/machinery/actual_machine = machine && machine.resolve()
 	if(actual_machine && actual_machine.can_apply_preset_to(radio))
-		dat += "<a href='?src=\ref[src];stockreset=1'>Reset to Machine Defaults</a><br>"
+		dat += "<a href='byond://?src=\ref[src];stockreset=1'>Reset to Machine Defaults</a><br>"
 	dat += "<b>Configuration for \the [radio].</b><br>"
-	dat += "Frequency: <a href='?src=\ref[src];frequency=1'>[radio.frequency || "none"]</a><br>"
-	dat += "ID: <a href='?src=\ref[src];id_tag=1'>[radio.id_tag || "none"]</a><br>"
-	dat += "Filter: <a href='?src=\ref[src];filter=1'>[radio.filter || "none"]</a><br>"
-	dat += "Encryption key: <a href='?src=\ref[src];encryption=1'>[radio.encryption || "none"]</a><br>"
+	dat += "Frequency: <a href='byond://?src=\ref[src];frequency=1'>[radio.frequency || "none"]</a><br>"
+	dat += "ID: <a href='byond://?src=\ref[src];id_tag=1'>[radio.id_tag || "none"]</a><br>"
+	dat += "Filter: <a href='byond://?src=\ref[src];filter=1'>[radio.filter || "none"]</a><br>"
+	dat += "Encryption key: <a href='byond://?src=\ref[src];encryption=1'>[radio.encryption || "none"]</a><br>"
 	return JOINTEXT(dat)
 
 /datum/extension/interactive/multitool/radio/on_topic(href, href_list, user)
@@ -98,13 +98,13 @@
 	. += "<table>"
 	for(var/thing in selected_events)
 		. += "<tr>"
-		. += "<td><a href='?src=\ref[src];[table_tag]=1;remove=[thing]'>(-)</a></td>"
-		. += "<td><a href='?src=\ref[src];[table_tag]=1;rename=[thing]'>[thing]</a></td>"
+		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;remove=[thing]'>(-)</a></td>"
+		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;rename=[thing]'>[thing]</a></td>"
 		var/decl/public_access/variable = selected_events[thing]
-		. += "<td><a href='?src=\ref[src];[table_tag]=1;new_val=[thing]'>[variable.name]</a></td>"
-		. += "<td><a href='?src=\ref[src];[table_tag]=1;desc=\ref[variable]'>(?)</a></td>"
+		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;new_val=[thing]'>[variable.name]</a></td>"
+		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;desc=\ref[variable]'>(?)</a></td>"
 		. += "</tr>"
-	. += "<tr><td><a href='?src=\ref[src];[table_tag]=1;add=1'>(+)</a></td></tr>"
+	. += "<tr><td><a href='byond://?src=\ref[src];[table_tag]=1;add=1'>(+)</a></td></tr>"
 	. += "</table>"
 
 /datum/extension/interactive/multitool/radio/proc/event_list_topic(list/selected_events, list/valid_events, mob/user, href_list)
@@ -202,9 +202,9 @@
 
 	dat += "<b>Choose event:</b><br>"
 	if(radio.event)
-		dat += "<a href='?src=\ref[src];event=1;new_val=event'>[radio.event]</a>  (<a href='?src=\ref[src];event=1;desc=\ref[radio.event]'>?</a>)"
+		dat += "<a href='byond://?src=\ref[src];event=1;new_val=event'>[radio.event]</a>  (<a href='byond://?src=\ref[src];event=1;desc=\ref[radio.event]'>?</a>)"
 	else
-		dat += "<a href='?src=\ref[src];event=1;add=1'>(+)</a>"
+		dat += "<a href='byond://?src=\ref[src];event=1;add=1'>(+)</a>"
 	dat += "<br>"
 	dat += "<b>Transmit on event:</b><br>"
 	dat += event_list_to_selection_table("on_event", radio.transmit_on_event)

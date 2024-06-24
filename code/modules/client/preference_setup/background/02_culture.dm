@@ -96,7 +96,7 @@
 			if(pref.cultural_info[token] == culture_data.type)
 				. += "<span class='linkOn'>[culture_data.name]</span> "
 			else
-				. += "<a href='?src=\ref[src];set_token_entry_[token]=\ref[culture_data]'>[culture_data.name]</a> "
+				. += "<a href='byond://?src=\ref[src];set_token_entry_[token]=\ref[culture_data]'>[culture_data.name]</a> "
 		. += "</center><hr/></td></tr>"
 
 		var/list/culture_info = culture.get_description(!hidden[token])
@@ -105,7 +105,7 @@
 		. += "</td><td>"
 		. += "[culture_info["body"] || "No description."]"
 		. += "</td><td width = '50px'>"
-		. += "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
+		. += "<a href='byond://?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
 		. += "</td></tr>"
 		. += "</table><hr>"
 

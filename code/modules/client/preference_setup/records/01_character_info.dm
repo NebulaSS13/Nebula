@@ -12,21 +12,21 @@
 	var/datum/character_information/comments = SScharacter_info.get_record(pref.comments_record_id, TRUE)
 	. = list("<b>IC/OOC information preferences:</b><br/>")
 	if(get_config_value(/decl/config/toggle/allow_character_comments))
-		. += "<a href='?src=\ref[src];toggle_comments=1'>[comments.allow_comments ? "Allowing and displaying comments." : "Not allowing or displaying comments."]</a><br/>"
-	. += "<a href='?src=\ref[src];toggle_examine_info=1'>[comments.show_info_on_examine ? "Showing IC and OOC info on examine." : "Not showing IC and OOC info on examine."]</a><br/>"
+		. += "<a href='byond://?src=\ref[src];toggle_comments=1'>[comments.allow_comments ? "Allowing and displaying comments." : "Not allowing or displaying comments."]</a><br/>"
+	. += "<a href='byond://?src=\ref[src];toggle_examine_info=1'>[comments.show_info_on_examine ? "Showing IC and OOC info on examine." : "Not showing IC and OOC info on examine."]</a><br/>"
 
 	var/is_banned = jobban_isbanned(user, "Records") || jobban_isbanned(user, name)
 	. += "<br/><b>IC information:</b><br/>"
 	if(is_banned)
 		. += "<span class='danger'>You are banned from modifying your IC character information.</span><br>"
 	else
-		. += "<a href='?src=\ref[src];set_ic_info=1'>[TextPreview(comments.ic_info, 40)]</a><br>"
+		. += "<a href='byond://?src=\ref[src];set_ic_info=1'>[TextPreview(comments.ic_info, 40)]</a><br>"
 
 	. += "<br/><b>OOC information:</b><br/>"
 	if(is_banned)
 		. += "<span class='danger'>You are banned from modifying your OOC character information.</span><br>"
 	else
-		. += "<a href='?src=\ref[src];set_ooc_info=1'>[TextPreview(comments.ooc_info, 40)]</a><br>"
+		. += "<a href='byond://?src=\ref[src];set_ooc_info=1'>[TextPreview(comments.ooc_info, 40)]</a><br>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/records/character_info/OnTopic(var/href,var/list/href_list, var/mob/user)

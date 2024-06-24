@@ -94,10 +94,10 @@
 	dat += "<center><h4><font color='blue'[message]</h5></center>"
 
 	if(auth)
-		dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;<font color='green'>\[Authenticated\]</font></a>&#09;/"
-		dat += " Server Power: <A href='?src=\ref[src];active=1'>[linked_server?.active ? "<font color='green'>\[On\]</font>":"<font color='red'>\[Off\]</font>"]</a></h4>"
+		dat += "<h4><dd><A href='byond://?src=\ref[src];auth=1'>&#09;<font color='green'>\[Authenticated\]</font></a>&#09;/"
+		dat += " Server Power: <A href='byond://?src=\ref[src];active=1'>[linked_server?.active ? "<font color='green'>\[On\]</font>":"<font color='red'>\[Off\]</font>"]</a></h4>"
 	else
-		dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;<font color='red'>\[Unauthenticated\]</font></a>&#09;/"
+		dat += "<h4><dd><A href='byond://?src=\ref[src];auth=1'>&#09;<font color='red'>\[Unauthenticated\]</font></a>&#09;/"
 		dat += " Server Power: <u>[linked_server?.active ? "<font color='green'>\[On\]</font>":"<font color='red'>\[Off\]</font>"]</u></h4>"
 
 	if(hacking || emag)
@@ -112,19 +112,19 @@
 		if(0)
 			//&#09; = TAB
 			var/i = 0
-			dat += "<dd><A href='?src=\ref[src];find=1'>&#09;[++i]. Link To A Server</a></dd>"
+			dat += "<dd><A href='byond://?src=\ref[src];find=1'>&#09;[++i]. Link To A Server</a></dd>"
 			if(auth)
 				if(!linked_server || (linked_server.stat & (NOPOWER|BROKEN)))
 					dat += "<dd><A>&#09;ERROR: Server not found!</A><br></dd>"
 				else
-					dat += "<dd><A href='?src=\ref[src];viewr=1'>&#09;[++i]. View Request Console Logs </a></br></dd>"
-					dat += "<dd><A href='?src=\ref[src];clearr=1'>&#09;[++i]. Clear Request Console Logs</a><br></dd>"
-					dat += "<dd><A href='?src=\ref[src];pass=1'>&#09;[++i]. Set Custom Key</a><br></dd>"
+					dat += "<dd><A href='byond://?src=\ref[src];viewr=1'>&#09;[++i]. View Request Console Logs </a></br></dd>"
+					dat += "<dd><A href='byond://?src=\ref[src];clearr=1'>&#09;[++i]. Clear Request Console Logs</a><br></dd>"
+					dat += "<dd><A href='byond://?src=\ref[src];pass=1'>&#09;[++i]. Set Custom Key</a><br></dd>"
 			else
 				dat += "<br><hr><dd><span class='notice'>Please authenticate with the server in order to show additional options.</span>"
 			if((isAI(user) || isrobot(user)) && (user.mind.assigned_special_role && user.mind.original == user))
 				//Malf/Traitor AIs can bruteforce into the system to gain the Key.
-				dat += "<dd><A href='?src=\ref[src];hack=1'><i><font color='Red'>*&@#. Bruteforce Key</font></i></font></a></dd>"
+				dat += "<dd><A href='byond://?src=\ref[src];hack=1'><i><font color='Red'>*&@#. Bruteforce Key</font></i></font></a></dd>"
 
 		//Hacking screen.
 		if(2)
@@ -182,7 +182,7 @@
 				var/id_auth = "Unauthenticated"					 - 15%
 				var/priority = "Normal"							 - 10%
 			*/
-			dat += "<center><A href='?src=\ref[src];back=1'>Back</a> - <A href='?src=\ref[src];refresh=1'>Refresh</center><hr>"
+			dat += "<center><A href='byond://?src=\ref[src];back=1'>Back</a> - <A href='byond://?src=\ref[src];refresh=1'>Refresh</center><hr>"
 			dat += {"<table border='1' width='100%'><tr><th width = '5%'>X</th><th width='15%'>Sending Dep.</th><th width='15%'>Receiving Dep.</th>
 			<th width='300px' word-wrap: break-word>Message</th><th width='15%'>Stamp</th><th width='15%'>ID Auth.</th><th width='15%'>Priority.</th></tr>"}
 			for(var/datum/data_rc_msg/rc in linked_server.rc_msgs)
@@ -191,7 +191,7 @@
 					break
 				// Del - Sender   - Recepient - Message
 				// X   - Al Green - Your Mom  - WHAT UP!?
-				dat += {"<tr><td width = '5%'><center><A href='?src=\ref[src];deleter=\ref[rc]' style='color: rgb(255,0,0)'>X</a></center></td><td width='15%'>[rc.send_dpt]</td>
+				dat += {"<tr><td width = '5%'><center><A href='byond://?src=\ref[src];deleter=\ref[rc]' style='color: rgb(255,0,0)'>X</a></center></td><td width='15%'>[rc.send_dpt]</td>
 				<td width='15%'>[rc.rec_dpt]</td><td width='300px'>[rc.message]</td><td width='15%'>[rc.stamp]</td><td width='15%'>[rc.id_auth]</td><td width='15%'>[rc.priority]</td></tr>"}
 			dat += "</table>"
 

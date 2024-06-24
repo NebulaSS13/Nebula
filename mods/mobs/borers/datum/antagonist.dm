@@ -23,7 +23,7 @@
 	spawn_announcement_delay = 5000
 
 /decl/special_role/borer/get_extra_panel_options(var/datum/mind/player)
-	return "<a href='?src=\ref[src];move_to_spawn=\ref[player.current]'>\[put in host\]</a>"
+	return "<a href='byond://?src=\ref[src];move_to_spawn=\ref[player.current]'>\[put in host\]</a>"
 
 /decl/special_role/borer/create_objectives(var/datum/mind/player)
 	if(!..())

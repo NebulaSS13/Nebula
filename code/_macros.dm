@@ -92,7 +92,7 @@
 
 /proc/place_meta_charset(content)
 	if(istext(content))
-		content = "<meta charset=\"utf-8\">" + content
+		content = "<!DOCTYPE html><meta charset=\"utf-8\">" + content
 	return content
 
 #define to_chat(target, message)                            target << (message)

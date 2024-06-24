@@ -70,7 +70,7 @@
 	. = list()
 	. += "<table>"
 	. += "<tr><td><b>Name:</b></td><td>[name]</td>"
-	. += "<tr><td><b>Power:</b></td><td>[use_power?("<font color = 'green'>Injecting</font>"):("<font color = 'red'>Offline</font>")]</td><td><a href='?src=\ref[src];toggle_power=\ref[src]'>Toggle</a></td></tr>"
+	. += "<tr><td><b>Power:</b></td><td>[use_power?("<font color = 'green'>Injecting</font>"):("<font color = 'red'>Offline</font>")]</td><td><a href='byond://?src=\ref[src];toggle_power=\ref[src]'>Toggle</a></td></tr>"
 	. = JOINTEXT(.)
 
 /obj/machinery/atmospherics/unary/outlet_injector/OnTopic(mob/user, href_list, datum/topic_state/state)

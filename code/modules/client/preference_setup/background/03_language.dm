@@ -139,7 +139,7 @@
 			if(free_languages[lang])
 				LAZYADD(., "<td width = '200px'><b>[lang_instance.name] <i>(required)</i></b></td>")
 			else
-				LAZYADD(., "<td width = '200px'><b>[lang_instance.name] <a href='?src=\ref[src];remove_language=[i]'>Remove</a></b></td>")
+				LAZYADD(., "<td width = '200px'><b>[lang_instance.name] <a href='byond://?src=\ref[src];remove_language=[i]'>Remove</a></b></td>")
 			LAZYADD(., "<td>[lang_instance.desc || "No information avaliable."]</td>")
 			LAZYADD(., "</tr>")
 
@@ -158,7 +158,7 @@
 			var/i = 0
 			for(var/decl/language/lang in available_languages)
 				i++
-				var/language_link = "<a href='?src=\ref[src];add_language=\ref[lang]'>[lang.name]</a>"
+				var/language_link = "<a href='byond://?src=\ref[src];add_language=\ref[lang]'>[lang.name]</a>"
 				if(i == 5)
 					i = 0
 					language_link += "<br>"
