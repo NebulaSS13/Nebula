@@ -61,7 +61,7 @@
 		reinf_material = GET_DECL(reinf_material)
 	. = ..()
 	update_materials()
-	if(lock)
+	if(lock && !istype(loc))
 		lock = new /datum/lock(src, lock)
 	if(!CanFluidPass())
 		fluid_update(TRUE)
