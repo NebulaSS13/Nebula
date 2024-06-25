@@ -62,3 +62,16 @@
 		ITEM_EFFECT_VISIBLE,
 		ITEM_EFFECT_WIELDED
 	))
+
+/obj/item/staff/fireball
+	name = "staff of fireball"
+	icon_state = "starstaff"
+	material = /decl/material/solid/organic/wood/ebony
+	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE)
+
+/obj/item/staff/fireball/Initialize(ml, material_key)
+	. = ..()
+	add_item_effect(/decl/item_effect/charges/fireball, list(
+		ITEM_EFFECT_VISIBLE,
+		ITEM_EFFECT_RANGED   = list("charges" = 5)
+	))
