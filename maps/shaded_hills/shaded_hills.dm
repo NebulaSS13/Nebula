@@ -52,8 +52,13 @@
 	#include "shaded_hills_testing.dm"
 	#include "shaded_hills_turfs.dm"
 
+	// Caverns are below grassland and must be compiled in that order for multiz.
+	#include "shaded_hills-caverns.dmm"
 	#include "shaded_hills-grassland.dmm"
+	// Dungeon is under inn and must be compiled in that order for multiz.
+	#include "shaded_hills-dungeon.dmm"
 	#include "shaded_hills-inn.dmm"
+	// Other levels are lateral and compile order doesn't matter.
 	#include "shaded_hills-swamp.dmm"
 	#include "shaded_hills-woods.dmm"
 

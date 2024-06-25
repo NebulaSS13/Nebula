@@ -2,6 +2,8 @@
 #define MAP_TEMPLATE_CATEGORY_SH_SWAMP     "template_sh_swamp"
 #define MAP_TEMPLATE_CATEGORY_SH_WOODS     "template_sh_woods"
 #define MAP_TEMPLATE_CATEGORY_SH_DOWNLANDS "template_sh_downlands"
+#define MAP_TEMPLATE_CATEGORY_SH_DUNGEON   "template_sh_dungeon"
+#define MAP_TEMPLATE_CATEGORY_SH_CAVERNS   "template_sh_caverns"
 
 /datum/map_template/shaded_hills
 	abstract_type = /datum/map_template/shaded_hills

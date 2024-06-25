@@ -1,3 +1,6 @@
+/obj/abstract/map_data/shaded_hills
+	height = 2
+
 /datum/level_data/player_level/shaded_hills
 	use_global_exterior_ambience = FALSE
 	base_area = null
@@ -18,9 +21,10 @@
 	var/submap_area
 	var/list/mobs_to_spawn = list()
 
-
-// Placeholder for more customised values.
-/datum/daycycle/shaded_hills
+// Randomized time of day to start at.
+/datum/daycycle/shaded_hills/New()
+	time_of_day = rand(day_duration)
+	..()
 
 /datum/level_data/player_level/shaded_hills/get_subtemplate_areas(template_category, blacklist, whitelist)
 	return submap_area ? (islist(submap_area) ? submap_area : list(submap_area)) : null
@@ -83,6 +87,7 @@
 	. = ..()
 	// Neither of these procs handle laterally linked levels yet.
 	SSweather.setup_weather_system(src)
+
 /datum/level_data/player_level/shaded_hills/swamp
 	name = "Shaded Hills - Swamp"
 	level_id = "shaded_hills_swamp"
@@ -178,6 +183,30 @@
 	// Neither of these procs handle laterally linked levels yet.
 	SSweather.setup_weather_system(src)
 
+/datum/level_data/player_level/shaded_hills/caverns
+	name = "Shaded Hills - Caverns"
+	level_id = "shaded_hills_caverns"
+	connected_levels = list(
+		"shaded_hills_dungeon" = EAST
+	)
+	submap_budget = 5
+	submap_category = MAP_TEMPLATE_CATEGORY_SH_CAVERNS
+	submap_area = /area/shaded_hills/caves/deep/poi
+	level_generators = list(
+		/datum/random_map/automata/cave_system/shaded_hills,
+		/datum/random_map/noise/ore/rich
+	)
+
+/datum/level_data/player_level/shaded_hills/dungeon
+	name = "Shaded Hills - Dungeon"
+	level_id = "shaded_hills_dungeon"
+	connected_levels = list(
+		"shaded_hills_caverns" = WEST
+	)
+	submap_budget = 5
+	submap_category = MAP_TEMPLATE_CATEGORY_SH_DUNGEON
+	submap_area = /area/shaded_hills/caves/dungeon/poi
+
 /obj/abstract/level_data_spawner/shaded_hills_grassland
 	level_data_type = /datum/level_data/player_level/shaded_hills/grassland
 
@@ -189,3 +218,9 @@
 
 /obj/abstract/level_data_spawner/shaded_hills_downlands
 	level_data_type = /datum/level_data/player_level/shaded_hills/downlands
+
+/obj/abstract/level_data_spawner/shaded_hills_caverns
+	level_data_type = /datum/level_data/player_level/shaded_hills/caverns
+
+/obj/abstract/level_data_spawner/shaded_hills_dungeon
+	level_data_type = /datum/level_data/player_level/shaded_hills/dungeon
