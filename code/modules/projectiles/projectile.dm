@@ -495,7 +495,7 @@
 
 //Returns true if the target atom is on our current turf and above the right layer
 /obj/item/projectile/proc/can_hit_target(atom/target, var/list/passthrough)
-	return (target && ((target.layer >= TURF_LAYER + 0.3) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
+	return (target && ((target.layer >= STRUCTURE_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
 
 /proc/calculate_projectile_Angle_and_pixel_offsets(mob/user, params)
 	var/list/mouse_control = params2list(params)
