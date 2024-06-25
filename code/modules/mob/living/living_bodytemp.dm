@@ -41,3 +41,8 @@
 		if(get_hydration() >= hyd_remove)
 			adjust_hydration(-hyd_remove)
 			bodytemperature += min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)
+
+/// This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc.
+/// Temperature parameter is the temperature you're being exposed to.
+/mob/living/proc/get_heat_protection_flags(temperature)
+	return 0

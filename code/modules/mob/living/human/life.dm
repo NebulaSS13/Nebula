@@ -268,8 +268,7 @@
 		bodytemperature += round(robolimb_count/2)
 	return ..()
 
-//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. See setup.dm for the full list)
-/mob/living/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
+/mob/living/human/get_heat_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
 	for(var/slot in global.standard_clothing_slots)
@@ -810,36 +809,6 @@
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
-
-/mob/living/human/handle_fire()
-	if(..())
-		return
-
-	var/burn_temperature = fire_burn_temperature()
-	var/thermal_protection = get_heat_protection(burn_temperature)
-
-	if (thermal_protection < 1 && bodytemperature < burn_temperature)
-		bodytemperature += round(BODYTEMP_HEATING_MAX*(1-thermal_protection), 1)
-
-	var/species_heat_mod = 1
-
-	var/protected_limbs = get_heat_protection_flags(burn_temperature)
-
-
-	if(species)
-		if(burn_temperature < get_mob_temperature_threshold(HEAT_LEVEL_2))
-			species_heat_mod = 0.5
-		else if(burn_temperature < get_mob_temperature_threshold(HEAT_LEVEL_3))
-			species_heat_mod = 0.75
-
-	burn_temperature -= get_mob_temperature_threshold(HEAT_LEVEL_1)
-
-	if(burn_temperature < 1)
-		return
-
-	for(var/obj/item/organ/external/E in get_external_organs())
-		if(!(E.body_part & protected_limbs) && prob(20))
-			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = "fire")
 
 /mob/living/human/rejuvenate()
 	reset_blood()
