@@ -156,7 +156,9 @@
 	def_zone = check_zone(target_zone)
 	firer = shooter
 	var/direct_target
-	if(get_turf(target) == get_turf(src))
+	var/turf/actual_target_turf = get_turf(target)
+	actual_target_turf = actual_target_turf?.resolve_to_actual_turf()
+	if(actual_target_turf == get_turf(src))
 		direct_target = target
 	preparePixelProjectile(target, shooter ? shooter : get_turf(src), params, forced_spread)
 	return fire(Angle_override, direct_target)
@@ -383,7 +385,7 @@
 			qdel(src)
 			return
 		var/turf/target = locate(clamp(starting + xo, 1, world.maxx), clamp(starting + yo, 1, world.maxy), starting.z)
-		setAngle(get_projectile_angle(src, target))
+		setAngle(get_projectile_angle(src, target.resolve_to_actual_turf()))
 	if(dispersion)
 		var/DeviationAngle = (dispersion * 15)
 		setAngle(Angle + rand(-DeviationAngle, DeviationAngle))
@@ -417,6 +419,7 @@
 /obj/item/projectile/proc/preparePixelProjectile(atom/target, atom/source, params, Angle_offset = 0)
 	var/turf/curloc = get_turf(source)
 	var/turf/targloc = get_turf(target)
+	targloc = targloc?.resolve_to_actual_turf()
 	forceMove(get_turf(source))
 	starting = get_turf(source)
 	original = target
@@ -495,7 +498,7 @@
 
 //Returns true if the target atom is on our current turf and above the right layer
 /obj/item/projectile/proc/can_hit_target(atom/target, var/list/passthrough)
-	return (target && ((target.layer >= TURF_LAYER + 0.3) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
+	return (target && ((target.layer >= STRUCTURE_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
 
 /proc/calculate_projectile_Angle_and_pixel_offsets(mob/user, params)
 	var/list/mouse_control = params2list(params)

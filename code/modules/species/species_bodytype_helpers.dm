@@ -1,5 +1,8 @@
-/decl/bodytype/proc/get_ignited_icon(var/mob/living/human/H)
+/decl/bodytype/proc/get_ignited_icon(var/mob/living/human/victim)
 	return ignited_icon
+
+/decl/bodytype/proc/get_ignited_icon_state(mob/living/victim)
+	return "Standing"
 
 /decl/bodytype/proc/get_icon_cache_uid(var/mob/H)
 	if(!icon_cache_uid)

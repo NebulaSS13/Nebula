@@ -293,6 +293,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(!atmos_suitable)
 		take_damage(unsuitable_atmos_damage)
 
+/mob/living/simple_animal/get_mob_temperature_threshold(threshold, bodypart)
+	if(threshold >= HEAT_LEVEL_1)
+		return maxbodytemp
+	if(threshold <= COLD_LEVEL_1)
+		return minbodytemp
+	return ..()
+
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
 	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
@@ -448,15 +455,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
 	W.forceMove(get_turf(src))
 	return 1
-
-/mob/living/simple_animal/handle_fire()
-	return
-/mob/living/simple_animal/update_fire()
-	return
-/mob/living/simple_animal/IgniteMob()
-	return
-/mob/living/simple_animal/ExtinguishMob()
-	return
 
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick

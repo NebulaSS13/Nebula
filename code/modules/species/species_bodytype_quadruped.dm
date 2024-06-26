@@ -23,3 +23,6 @@
 	. = ..()
 	H.can_buckle         = ridable
 	H.buckle_pixel_shift = riding_offset
+
+/decl/bodytype/quadruped/get_ignited_icon_state(mob/living/victim)
+	return "Generic_mob_burning"

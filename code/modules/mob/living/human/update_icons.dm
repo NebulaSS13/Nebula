@@ -531,13 +531,6 @@ Please contact me on #coderbus IRC. ~Carn x
 		return
 	set_tail_state("[tail_organ.get_tail()]_static")
 
-/mob/living/human/update_fire(var/update_icons=1)
-	if(on_fire)
-		var/image/standing = overlay_image(get_bodytype()?.get_ignited_icon(src) || 'icons/mob/OnFire.dmi', "Standing", RESET_COLOR)
-		set_current_mob_overlay(HO_FIRE_LAYER, standing, update_icons)
-	else
-		set_current_mob_overlay(HO_FIRE_LAYER, null, update_icons)
-
 /mob/living/human/hud_reset(full_reset = FALSE)
 	if((. = ..()) && internals && internal)
 		internals.icon_state = "internal1"
