@@ -13,17 +13,15 @@
 	icon = 'icons/mob/simple_animal/crow.dmi'
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
-
-	emote_speech = list("Caw.", "Caw?", "Caw!", "CAW.")
 	speak_emote  = list("caws")
-	emote_hear   = list("caws")
-	emote_see    = list("hops")
-
+	ai = /datum/mob_controller/crow
 	natural_weapon = /obj/item/natural_weapon/crow_claws
-
-	stop_wandering = TRUE
 	universal_speak = TRUE
 
+/datum/mob_controller/crow
+	emote_speech = list("Caw.", "Caw?", "Caw!", "CAW.")
+	emote_hear   = list("caws")
+	emote_see    = list("hops")
 
 /mob/living/simple_animal/crow/get_overlay_state_modifier()
 	return (stat == DEAD) ? "-dead" : null

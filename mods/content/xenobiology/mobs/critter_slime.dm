@@ -5,10 +5,12 @@
 	speak_emote = list("chirps")
 	max_health = 100
 	response_harm = "stamps on"
-	emote_see = list("jiggles", "bounces in place")
 	gene_damage = -1
-
+	ai = /datum/mob_controller/pet_slime
 	var/slime_type = /decl/slime_colour/grey
+
+/datum/mob_controller/pet_slime
+	emote_see = list("jiggles", "bounces in place")
 
 /mob/living/simple_animal/slime/Initialize(var/ml, var/_stype = /decl/slime_colour/grey)
 	. = ..()

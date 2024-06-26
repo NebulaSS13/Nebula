@@ -4,12 +4,7 @@
 	desc = "It's an opossum, a small scavenging marsupial."
 	icon = 'icons/mob/simple_animal/possum.dmi'
 	speak_emote  = list("hisses")
-	emote_speech = list("Hiss!","Aaa!","Aaa?")
-	emote_hear   = list("hisses")
-	emote_see    = list("forages for trash", "lounges")
 	pass_flags = PASS_FLAG_TABLE
-	speak_chance = 0.5
-	turns_per_wander = 3
 	see_in_dark = 6
 	max_health = 50
 	response_harm = "stamps on"
@@ -20,7 +15,6 @@
 	universal_understand = TRUE
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
-	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
@@ -28,23 +22,29 @@
 	var/is_angry = FALSE
 
 /datum/mob_controller/opossum
+	emote_speech = list("Hiss!","Aaa!","Aaa?")
+	emote_hear   = list("hisses")
+	emote_see    = list("forages for trash", "lounges")
+	speak_chance = 0.25
+	turns_per_wander = 6
 	expected_type = /mob/living/simple_animal/opossum
+	can_escape_buckles = TRUE
 
 /datum/mob_controller/opossum/do_process(time_elapsed)
 	. = ..()
-	if(!prob(1))
+	if(!prob(0.5))
 		return
 	var/mob/living/simple_animal/opossum/poss = body
 	if(poss.stat == UNCONSCIOUS)
+		do_wander = FALSE
+		speak_chance = 0
 		poss.set_posture(/decl/posture/lying)
-		poss.wander = FALSE
-		poss.speak_chance = 0
 		poss.set_stat(UNCONSCIOUS)
 		poss.is_angry = FALSE
 	else
+		do_wander = initial(do_wander)
+		speak_chance = initial(speak_chance)
 		poss.set_posture(/decl/posture/standing)
-		poss.wander = initial(poss.wander)
-		poss.speak_chance = initial(poss.speak_chance)
 		poss.set_stat(CONSCIOUS)
 		if(prob(10))
 			poss.is_angry = TRUE

@@ -3,16 +3,19 @@
 	desc = "A small, slimy amphibian. Likes to eat flies."
 	icon = 'icons/mob/simple_animal/frog_green.dmi'
 	speak_emote = list("ribbits","croaks")
-	emote_speech = list("Ribbit!","Riiibit!")
-	emote_hear = list("ribbits","croaks")
-	emote_see = list("hops","inflates its vocal sac","catches a fly with its tongue")
 	response_harm = "stamps on"
 	density = FALSE
 	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_MINISCULE
 	max_health = 5
 	butchery_data = /decl/butchery_data/animal/small/frog
-	speak_chance = 0.5
+	ai = /datum/mob_controller/frog
+
+/datum/mob_controller/frog
+	emote_speech = list("Ribbit!","Riiibit!")
+	emote_hear = list("ribbits","croaks")
+	emote_see = list("hops","inflates its vocal sac","catches a fly with its tongue")
+	speak_chance = 0.25
 
 /mob/living/simple_animal/frog/brown
 	name = "brown frog"

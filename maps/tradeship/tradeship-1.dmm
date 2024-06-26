@@ -3094,7 +3094,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/mob/living/simple_animal/cat/fluff/ran,
+/mob/living/simple_animal/passive/cat/fluff/ran,
 /turf/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "Qg" = (

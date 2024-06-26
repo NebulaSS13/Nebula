@@ -1,23 +1,21 @@
 /datum/mob_controller/monkey
-	name = "monkey"
 	expected_type = /mob/living/human
-	var/list/no_touchie = list(
+	var/static/list/no_touchie = list(
 		/obj/item/mirror,
 		/obj/structure/mirror
 	)
 
 /datum/mob_controller/monkey/do_process(var/time_elapsed)
+
+	. = ..()
 	if(body.incapacitated())
 		return
-
-	if(prob(33) && isturf(body.loc) && !LAZYLEN(body.grabbed_by)) //won't move if being pulled
-		body.SelfMove(pick(global.cardinal))
 
 	var/obj/held = body.get_active_held_item()
 	if(held && prob(1))
 		var/turf/T = get_random_turf_in_range(body, 7, 2)
 		if(T)
-			if(istype(held, /obj/item/gun) && prob(80))
+			if(istype(held, /obj/item/gun) && prob(40))
 				var/obj/item/gun/G = held
 				G.Fire(T, body)
 			else
@@ -25,7 +23,7 @@
 		else
 			body.try_unequip(held)
 
-	if(!held && !body.restrained() && prob(5))
+	if(!held && !body.restrained() && prob(2.5))
 		var/list/touchables = list()
 		for(var/obj/O in range(1,get_turf(body)))
 			if(O.simulated && CanPhysicallyInteractWith(body, O) && !is_type_in_list(O, no_touchie))

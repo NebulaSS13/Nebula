@@ -1,0 +1,4 @@
+/mob/living/simple_animal/hostile/faithless/@SUBTYPES : /mob/living/simple_animal/hostile/revenant/@SUBTYPES{@OLD}
+/mob/living/simple_animal/hostile/drake/@SUBTYPES : /mob/living/simple_animal/hostile/space_dragon/@SUBTYPES{@OLD}
+/mob/living/simple_animal/hostile/retaliate/@SUBTYPES : /mob/living/simple_animal/hostile/@SUBTYPES{@OLD}
+/mob/living/simple_animal/cat/@SUBTYPES : /mob/living/simple_animal/passive/cat/@SUBTYPES{@OLD}

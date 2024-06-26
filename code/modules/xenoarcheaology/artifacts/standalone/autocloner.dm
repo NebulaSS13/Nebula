@@ -22,17 +22,17 @@
 
 /obj/machinery/auto_cloner/proc/get_passive_mob_types()
 	. = list(
-		/mob/living/simple_animal/cat,
+		/mob/living/simple_animal/passive/cat,
 		/mob/living/simple_animal/corgi,
 		/mob/living/simple_animal/corgi/puppy,
 		/mob/living/simple_animal/fowl/chicken,
 		/mob/living/simple_animal/cow,
-		/mob/living/simple_animal/hostile/retaliate/parrot,
+		/mob/living/simple_animal/hostile/parrot,
 		/mob/living/simple_animal/crab,
 		/mob/living/simple_animal/passive/mouse,
 		/mob/living/simple_animal/passive/mouse/rat,
-		/mob/living/simple_animal/hostile/retaliate/goat,
-		/mob/living/simple_animal/hostile/retaliate/goose
+		/mob/living/simple_animal/hostile/goat,
+		/mob/living/simple_animal/hostile/goose
 	)
 
 /obj/machinery/auto_cloner/Initialize()

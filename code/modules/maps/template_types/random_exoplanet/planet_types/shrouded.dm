@@ -49,9 +49,9 @@
 
 /datum/fauna_generator/shrouded
 	fauna_types = list(
-		/mob/living/simple_animal/hostile/retaliate/royalcrab,
-		/mob/living/simple_animal/hostile/retaliate/jelly/alt,
-		/mob/living/simple_animal/hostile/retaliate/beast/shantak/alt,
+		/mob/living/simple_animal/hostile/royalcrab,
+		/mob/living/simple_animal/hostile/jelly/alt,
+		/mob/living/simple_animal/hostile/beast/shantak/alt,
 		/mob/living/simple_animal/hostile/leech
 	)
 

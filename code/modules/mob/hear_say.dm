@@ -110,9 +110,8 @@
 	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
 		if(!say_understands(speaker,language))
 			if(isanimal(speaker))
-				var/mob/living/simple_animal/S = speaker
-				if(LAZYLEN(S.emote_speech))
-					message = pick(S.emote_speech)
+				if(LAZYLEN(speaker.ai?.emote_speech))
+					message = pick(speaker.ai.emote_speech)
 				else
 					return
 			else

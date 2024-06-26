@@ -33,14 +33,14 @@
 
 /decl/hierarchy/supply_pack/livecargo/goat
 	name = "Live - Goat"
-	contains = list(/mob/living/simple_animal/hostile/retaliate/goat)
+	contains = list(/mob/living/simple_animal/hostile/goat)
 	containertype = /obj/structure/largecrate/animal
 	containername = "goat crate"
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/livecargo/goose
 	name = "Live - Goose"
-	contains = list(/mob/living/simple_animal/hostile/retaliate/goose)
+	contains = list(/mob/living/simple_animal/hostile/goose)
 	containertype = /obj/structure/largecrate/animal
 	containername = "goose containment unit"
 	access = access_hydroponics

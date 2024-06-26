@@ -18,27 +18,13 @@
 	)
 
 	var/base_movement_delay = 4
+	ai = /datum/mob_controller
 
 	var/can_have_rider = TRUE
 	var/max_rider_size = MOB_SIZE_SMALL
 
 	/// Does the percentage health show in the stat panel for the mob?
 	var/show_stat_health = TRUE
-	/// A prob chance of speaking.
-	var/speak_chance = 0
-	/// Strings shown when this mob speaks and is not understood.
-	var/list/emote_speech
-	/// Hearable emotes that this mob can randomly perform.
-	var/list/emote_hear
-	/// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
-	var/list/emote_see
-
-	/// Wandering tracking vars.
-	var/turns_per_wander = 1
-	var/turns_since_wander = 0
-	var/wander = TRUE // Does the mob wander around when idle?
-	var/stop_wandering = FALSE //Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/stop_wandering_when_pulled = TRUE //When set to 1 this stops the animal from moving when someone is grabbing it.
 
 	//Interaction
 	var/response_help_1p = "You pet $TARGET$."
@@ -46,7 +32,6 @@
 	var/response_disarm =  "pushes aside"
 	var/response_harm =    "kicks"
 	var/harm_intent_damage = 3
-	var/can_escape = FALSE // 'smart' simple animals such as human enemies, or things small, big, sharp or strong enough to power out of a net
 
 	//Temperature effect
 	var/minbodytemp = 250
@@ -102,6 +87,14 @@
 	// Visible message shown when the mob dies.
 	var/death_message = "dies!"
 
+	// Ranged attack handling vars.
+	var/burst_projectile = FALSE
+	var/projectiletype
+	var/projectilesound
+	var/casingtype
+	var/fire_desc = "fires" //"X fire_desc at Y!"
+	var/ranged_range = 6 //tiles of range for ranged attackers to attack
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
@@ -124,6 +117,10 @@
 
 /mob/living/simple_animal/proc/setup_languages()
 	add_language(/decl/language/animal)
+
+/mob/living/simple_animal/proc/apply_attack_effects(mob/living/target)
+	set waitfor = FALSE
+	return
 
 var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/proc/check_mob_icon_states(var/sa_initializing = FALSE)
@@ -184,6 +181,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..()
 
 /mob/living/simple_animal/handle_regular_status_updates()
+
 	if(purge)
 		purge -= 1
 
@@ -196,76 +194,16 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			if(HAS_STATUS(src, STAT_PARA) <= 2) // gated to avoid redundant update_icon() calls.
 				SET_STATUS_MAX(src, STAT_PARA, 3)
 				update_icon()
+	else
+		// Cancel any trailing walking if we're dead.
+		stop_automove()
 
 /mob/living/simple_animal/handle_some_updates()
 	. = ..() && (!z || living_observers_present(SSmapping.get_connected_levels(z)))
 
-/mob/living/simple_animal/handle_legacy_ai()
-	. = ..()
-	handle_async_life_action()
-
-// Handles timed stuff in Life()
-/mob/living/simple_animal/proc/handle_async_life_action()
-	set waitfor = FALSE
-	if(performing_delayed_life_action)
-		return
-	if(client)
-		return
-	performing_delayed_life_action = TRUE
-	do_delayed_life_action()
-	performing_delayed_life_action = FALSE
-
-/mob/living/simple_animal/proc/turf_is_safe(turf/target)
-	if(!istype(target))
+/mob/living/simple_animal/turf_is_safe(turf/target)
+	if((. = ..()) && is_aquatic != target.submerged())
 		return FALSE
-	if(target.is_open() && target.has_gravity() && !can_overcome_gravity())
-		return FALSE
-	if(is_aquatic != target.submerged())
-		return FALSE
-	return TRUE
-
-// For saner overriding; only override this.
-/mob/living/simple_animal/proc/do_delayed_life_action()
-	if(buckled && can_escape)
-		if(istype(buckled, /obj/effect/energy_net))
-			var/obj/effect/energy_net/Net = buckled
-			Net.escape_net(src)
-		else if(prob(50))
-			escape(src, buckled)
-		else if(prob(50))
-			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
-
-	//Movement
-	if(current_posture.prone)
-		if(!incapacitated())
-			set_posture(/decl/posture/standing)
-	else if(!stop_wandering && !buckled_mob && wander && !anchored && isturf(src.loc) && !current_posture.prone)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
-		turns_since_wander++
-		if(turns_since_wander >= turns_per_wander && (!(stop_wandering_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
-			set_moving_slowly()
-			var/direction = pick(global.cardinal)
-			var/turf/move_to = get_step(loc, direction)
-			if(turf_is_safe(move_to))
-				SelfMove(direction)
-				turns_since_wander = 0
-
-	//Speaking
-	if(prob(speak_chance))
-		var/action = pick(
-			LAZYLEN(emote_speech); "emote_speech",
-			LAZYLEN(emote_hear);   "emote_hear",
-			LAZYLEN(emote_see);    "emote_see"
-		)
-		switch(action)
-			if("emote_speech")
-				if(length(emote_speech))
-					say(pick(emote_speech))
-			if("emote_hear")
-				if(length(emote_hear))
-					audible_emote("[pick(emote_hear)].")
-			if("emote_see")
-				if(length(emote_see))
-					visible_emote("[pick(emote_see)].")
 
 /mob/living/simple_animal/handle_environment(datum/gas_mixture/environment)
 	. = ..()
@@ -307,10 +245,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(threshold <= COLD_LEVEL_1)
 		return minbodytemp
 	return ..()
-
-/mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
-	O.unbuckle_mob(M)
-	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
 
 /mob/living/simple_animal/get_gibbed_icon()
 	return icon
@@ -380,31 +314,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	return ..()
 
-/mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
-
-	visible_message(SPAN_DANGER("\The [src] has been attacked with \the [O] by \the [user]!"))
-
-	if(O.force <= resistance)
-		to_chat(user, SPAN_WARNING("This weapon is ineffective; it does no damage."))
-		return 0
-
-	var/damage = O.force
-	if (O.atom_damage_type == PAIN)
-		damage = 0
-	if (O.atom_damage_type == STUN)
-		damage = (O.force / 8)
-	if(supernatural && istype(O,/obj/item/nullrod))
-		damage *= 2
-		purge = 3
-	take_damage(damage, O.atom_damage_type, O.damage_flags())
-
-	return 1
-
-/mob/living/simple_animal/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
-	. = ..()
-	if((damage_type == BRUTE) && (damage_flags & (DAM_EDGE | DAM_SHARP | DAM_BULLET))) // damage flags that should cause bleeding
-		adjustBleedTicks(damage)
-
 /mob/living/simple_animal/get_movement_delay(var/travel_dir)
 	. = max(1, ..() + base_movement_delay + get_config_value(/decl/config/num/movement_animal))
 	//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
@@ -438,13 +347,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		if(3)
 			damage = 30
 	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
-
-/mob/living/simple_animal/proc/SA_attackable(target_mob)
-	if (isliving(target_mob))
-		var/mob/living/L = target_mob
-		if(!L.stat && L.current_health >= 0)
-			return (0)
-	return 1
 
 /mob/living/simple_animal/say(var/message)
 	var/verb = "says"
@@ -501,8 +403,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/get_speech_bubble_state_modifier()
 	return ..() || "rough"
 
-/mob/living/simple_animal/proc/can_act()
-	return !(QDELETED(src) || incapacitated() || (is_aquatic && !submerged()))
+/mob/living/simple_animal/can_act()
+	return ..() && !(is_aquatic && !submerged())
 
 /mob/living/simple_animal/experiences_hunger_and_thirst()
 	// return !supernatural && !isSynthetic()
@@ -585,3 +487,56 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/handle_stance()
 	stance_damage = 0
 	return
+
+/mob/living/simple_animal/proc/get_pry_desc()
+	return "prying"
+
+/mob/living/simple_animal/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
+	if(!can_pry_door())
+		return
+	visible_message(SPAN_DANGER("\The [user] begins [get_pry_desc()] at \the [pesky_door]!"))
+	if(istype(ai))
+		ai.pause()
+	if(do_after(user, delay, pesky_door))
+		pesky_door.open(1)
+	else
+		visible_message(SPAN_NOTICE("\The [user] is interrupted."))
+	if(istype(ai))
+		ai.resume()
+
+/mob/living/simple_animal/has_ranged_attack()
+	return !!projectiletype && get_ranged_attack_distance() > 0
+
+/mob/living/simple_animal/proc/shoot_wrapper(target, location, user)
+	if(shoot_at(target, location, user) && casingtype)
+		new casingtype(loc)
+
+/mob/living/simple_animal/proc/shoot_at(var/atom/target, var/atom/start)
+	if(!start)
+		start = get_turf(src)
+	if(!can_act() || !istype(target) || !istype(start) || target == start || !has_ranged_attack())
+		return FALSE
+	var/obj/item/projectile/A = new projectiletype(get_turf(start))
+	if(!A)
+		return FALSE
+	playsound(start, projectilesound, 100, 1)
+	A.launch(target, get_exposed_defense_zone(target), src)
+	return TRUE
+
+/mob/living/simple_animal/get_ranged_attack_distance()
+	return ranged_range
+
+/mob/living/simple_animal/handle_ranged_attack(atom/target)
+	if(!has_ranged_attack() || !istype(target))
+		return
+	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
+	if(burst_projectile)
+		var/datum/callback/shoot_cb = CALLBACK(src, PROC_REF(shoot_wrapper), target, loc)
+		addtimer(shoot_cb, 1)
+		addtimer(shoot_cb, 4)
+		addtimer(shoot_cb, 6)
+	else
+		shoot_at(target, loc, src)
+
+/mob/living/simple_animal/can_eat_food_currently(obj/eating, mob/user, consumption_method)
+	return TRUE

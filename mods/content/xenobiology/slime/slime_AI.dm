@@ -1,6 +1,5 @@
 /datum/mob_controller/slime
 	expected_type = /mob/living/slime
-	run_interval = 1 SECOND
 	var/mood
 	var/chase_target = 0
 	var/mob/living/leader

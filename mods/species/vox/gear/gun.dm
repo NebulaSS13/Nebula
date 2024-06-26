@@ -94,7 +94,7 @@
 	smoke_amt = 5
 	smoke_spread = 1
 
-	possible_transformations = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/lesser)
+	possible_transformations = list(/mob/living/simple_animal/hostile/parrot/space/lesser)
 
 	hud_state = "wiz_vox"
 

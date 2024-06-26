@@ -190,7 +190,7 @@
 	if(dormant)
 		events_repository.unregister(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/effect/spider, disturbed))
 	STOP_PROCESSING(SSobj, src)
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
+	stop_automove()
 	. = ..()
 
 /obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)

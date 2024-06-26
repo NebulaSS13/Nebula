@@ -5,12 +5,15 @@
 	max_health = 20
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	speak_emote = list("chitters")
-	emote_hear = list("chitters")
-	emote_see = list("hops","lifts its head","sniffs the air","wiggles its tail")
 	mob_size = MOB_SIZE_TINY
 	butchery_data = /decl/butchery_data/animal/rabbit
-	speak_chance = 0.5
 	holder_type = /obj/item/holder
+	ai = /datum/mob_controller/passive/rabbit
+
+/datum/mob_controller/passive/rabbit
+	emote_hear = list("chitters")
+	emote_see = list("hops","lifts its head","sniffs the air","wiggles its tail")
+	speak_chance = 0.25
 
 /mob/living/simple_animal/passive/rabbit/brown
 	name = "brown rabbit"

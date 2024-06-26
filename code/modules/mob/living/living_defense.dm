@@ -20,14 +20,13 @@
 		. += natural_armor
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
-
+	var/oldhealth = current_health
 	//Being hit while using a deadman switch
 	var/obj/item/assembly/signaler/signaler = get_active_held_item()
 	if(istype(signaler) && signaler.deadman)
 		log_and_message_admins("has triggered a signaler deadman's switch")
 		src.visible_message("<span class='warning'>[src] triggers their deadman's switch!</span>")
 		signaler.signal()
-
 	//Armor
 	var/damage = P.damage
 	var/flags = P.damage_flags()
@@ -38,6 +37,8 @@
 	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
 		. = get_blocked_ratio(def_zone, P.atom_damage_type, flags, P.armor_penetration, P.damage)
 	P.on_hit(src, ., def_zone)
+	if(istype(ai) && isliving(P.firer) && !ai.get_target() && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+		ai.retaliate(P.firer)
 
 // For visuals and blood splatters etc
 /mob/living/proc/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone, var/damage)
@@ -119,6 +120,8 @@
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 	if(I.atom_damage_type == BRUTE && prob(33))
 		blood_splatter(get_turf(loc), src)
+	if(istype(ai))
+		ai.retaliate(user)
 
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
@@ -130,6 +133,9 @@
 /mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 
 	. = ..()
+	if(istype(ai))
+		ai.retaliate(TT.thrower)
+
 	if(.)
 
 		if(isliving(AM))

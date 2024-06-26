@@ -88,7 +88,7 @@
 	spawnable=list(
 		/mob/living/simple_animal/hostile/scarybat/cult,
 		/mob/living/simple_animal/hostile/creature/cult,
-		/mob/living/simple_animal/hostile/faithless/cult
+		/mob/living/simple_animal/hostile/revenant/cult
 	)
 
 /obj/structure/door/cult

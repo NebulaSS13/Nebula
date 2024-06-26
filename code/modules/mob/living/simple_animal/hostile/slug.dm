@@ -4,7 +4,6 @@
 	desc = "A vicious, viscous little creature, it has a mouth of too many teeth and a penchant for blood."
 	icon = 'icons/mob/simple_animal/slug.dmi'
 	response_harm = "stomps on"
-	destroy_surroundings = 0
 	max_health = 15
 	move_intents = list(
 		/decl/move_intent/walk/animal_fast,
@@ -13,21 +12,27 @@
 	density = TRUE
 	min_gas = null
 	mob_size = MOB_SIZE_MINISCULE
-	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
 	natural_weapon = /obj/item/natural_weapon/bite
 	holder_type = /obj/item/holder/slug
+	ai = /datum/mob_controller/aggressive/slug
 	faction = "Hostile Fauna"
 	base_movement_delay = 0
 
+/datum/mob_controller/aggressive/slug
+	try_destroy_surroundings = FALSE
+	can_escape_buckles = TRUE
+
+/datum/mob_controller/aggressive/slug/list_targets(var/dist = 7)
+	. = ..()
+	var/mob/living/simple_animal/hostile/slug/slug = body
+	if(istype(slug))
+		for(var/mob/living/M in .)
+			if(slug.check_friendly_species(M))
+				. -= M
+
 /mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/M)
 	return istype(M) && M.faction == faction
-
-/mob/living/simple_animal/hostile/slug/ListTargets(var/dist = 7)
-	. = ..()
-	for(var/mob/living/M in .)
-		if(check_friendly_species(M))
-			. -= M
 
 /mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/target, var/mob/living/initiator)
 	if(target == initiator || check_friendly_species(initiator))
@@ -46,10 +51,10 @@
 	chest.embed_in_organ(holder, FALSE, "\The [src] latches itself onto \the [H]!")
 	holder.sync(src)
 
-/mob/living/simple_animal/hostile/slug/attack_target(mob/target)
+/mob/living/simple_animal/hostile/slug/apply_attack_effects(mob/living/target)
 	. = ..()
-	if(ishuman(.))
-		var/mob/living/human/H = .
+	if(ishuman(target))
+		var/mob/living/human/H = target
 		if(prob(H.get_damage(BRUTE)/2))
 			attach(H)
 

@@ -148,7 +148,7 @@ var/global/list/artefact_feedback = list(
 				dat += " <A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]];contract=1;'>Make Contract</a>"
 			dat += "<br><i>[desc]</i><br><br>"
 		dat += "<br>"
-		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
+		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorise your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
 			if(investing_time)
 				dat += "<center><b>Currently investing in a slot...</b></center>"
@@ -233,10 +233,10 @@ var/global/list/artefact_feedback = list(
 			investing_time = 0
 			has_sacrificed = 0
 			user.spellremove()
-			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
+			temp = "All spells and investments have been removed. You may now memorise a new set of spells."
 			SSstatistics.add_field_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 		else
-			to_chat(user, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
+			to_chat(user, "<span class='warning'>You must be in the wizard academy to re-memorise your spells.</span>")
 		. = TOPIC_REFRESH
 
 	src.interact(user)

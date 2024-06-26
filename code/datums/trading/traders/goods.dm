@@ -342,9 +342,9 @@ Sells devices, odds and ends, and medical stuff
 		/mob/living/simple_animal/tindalos                        = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/tomato                          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/yithian                         = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/diyaab  = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/shantak = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/samak   = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/diyaab  = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/shantak = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/samak   = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/carp                    = TRADER_THIS_TYPE
 	)
 	possible_trading_items = list(

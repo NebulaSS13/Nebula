@@ -5,20 +5,22 @@
 	icon = 'icons/mob/simple_animal/crab.dmi'
 	mob_size = MOB_SIZE_SMALL
 	speak_emote = list("clicks")
-	emote_hear = list("clicks")
-	emote_see = list("clacks")
-	speak_chance = 0.5
-	turns_per_wander = 5
 	response_harm = "stamps on"
-	stop_wandering = TRUE
 	possession_candidate = 1
-	can_escape = TRUE //snip snip
 	pass_flags = PASS_FLAG_TABLE
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 		)
 	ai = /datum/mob_controller/crab
 	butchery_data = /decl/butchery_data/animal/arthropod/crab
+
+/datum/mob_controller/crab
+	emote_hear = list("clicks")
+	emote_see = list("clacks")
+	speak_chance = 0.25
+	turns_per_wander = 10
+	wander_directions = list(EAST, WEST) // they only go sideways...
+	can_escape_buckles = TRUE //snip snip
 
 // TODO
 /decl/bodytype/hexapod/animal
@@ -43,19 +45,6 @@
 		)
 	)
 	. = ..()
-
-/datum/mob_controller/crab
-	expected_type = /mob/living/simple_animal/crab
-
-/datum/mob_controller/crab/do_process(time_elapsed)
-	. = ..()
-	var/mob/living/simple_animal/crab/crab = body
-	if(!isturf(crab.loc) || crab.current_posture.prone || crab.buckled)
-		return
-	crab.turns_since_wander++
-	if(crab.turns_since_wander >= crab.turns_per_wander)
-		crab.Move(get_step(crab,pick(4,8)))
-		crab.turns_since_wander = 0
 
 //COFFEE! SQUEEEEEEEEE!
 /mob/living/simple_animal/crab/Coffee

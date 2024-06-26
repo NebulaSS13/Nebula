@@ -476,7 +476,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	if(. == SAFE_PERP)
 		return SAFE_PERP
 
-	if(!istype(src, /mob/living/simple_animal/hostile/retaliate/goat))
+	if(!istype(src, /mob/living/simple_animal/hostile/goat))
 		threatcount += 4
 	return threatcount
 

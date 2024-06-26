@@ -592,7 +592,7 @@
 	},
 /area/map_template/wizard_station)
 "bB" = (
-/mob/living/simple_animal/hostile/retaliate/goat{
+/mob/living/simple_animal/hostile/goat{
 	name = "Experiment 97d"
 	},
 /turf/unsimulated/floor{

@@ -28,7 +28,7 @@
 		user.take_organ_damage(10)
 		SET_STATUS_MAX(user, STAT_PARA, 20)
 		return TRUE
-	
+
 	if (holy_act(target, user))
 		return TRUE
 
@@ -219,6 +219,7 @@
 
 
 /obj/effect/energy_net/proc/escape_net(mob/user)
+	set waitfor = FALSE
 	visible_message(
 		"<span class='warning'>\The [user] attempts to free themselves from \the [src]!</span>",
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
@@ -227,5 +228,4 @@
 		current_health = 0
 		healthcheck()
 		return 1
-	else
-		return 0
+	return 0

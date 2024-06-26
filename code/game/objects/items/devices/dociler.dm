@@ -40,11 +40,7 @@
 		target.faction = user.faction
 	else
 		target.faction = null
-	if(istype(target, /mob/living/simple_animal/hostile))
-		var/mob/living/simple_animal/hostile/H = target
-		H.LoseTarget()
-		H.attack_same = 0
-		H.friends += weakref(user)
+	target.ai?.pacify(user)
 	target.desc += "<br><span class='notice'>It looks especially docile.</span>"
 	var/name = input(user, "Would you like to rename \the [target]?", "Dociler", target.name) as text
 	if(length(name))

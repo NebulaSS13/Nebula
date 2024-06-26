@@ -29,7 +29,7 @@
 
 	possible_wanted_items = list(
 		/mob/living/simple_animal/corgi                           = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/cat                             = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/passive/cat                     = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/crab                            = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/lizard                          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/passive/mouse                   = TRADER_THIS_TYPE,
@@ -41,18 +41,18 @@
 		/mob/living/simple_animal/fowl/chicken                    = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/fowl/duck                       = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/yithian                         = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/diyaab  = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/diyaab  = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/bear                    = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/shantak = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/parrot        = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/samak   = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/goat          = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/shantak = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/parrot        = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/samak   = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/goat          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/carp                    = TRADER_THIS_TYPE
 	)
 
 	possible_trading_items = list(
 		/mob/living/simple_animal/corgi                           = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/cat                             = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/passive/cat                     = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/crab                            = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/lizard                          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/passive/mouse                   = TRADER_THIS_TYPE,
@@ -64,12 +64,12 @@
 		/mob/living/simple_animal/fowl/chicken                    = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/fowl/duck                       = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/yithian                         = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/diyaab  = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/diyaab  = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/bear                    = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/shantak = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/parrot        = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/beast/samak   = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/goat          = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/shantak = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/parrot        = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/beast/samak   = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/hostile/goat          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/carp                    = TRADER_THIS_TYPE,
 		/obj/item/dociler                                         = TRADER_THIS_TYPE,
 		/obj/structure/dogbed                                     = TRADER_THIS_TYPE

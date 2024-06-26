@@ -2,9 +2,7 @@
 	name = "maintenance drone"
 	desc = "A small robot. It looks angry."
 	icon = 'icons/mob/simple_animal/drone.dmi'
-	emote_speech = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
 	speak_emote  = list("blares","buzzes","beeps")
-	speak_chance = 0.5
 	max_health = 50
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	faction = "silicon"
@@ -14,13 +12,14 @@
 	mob_size = MOB_SIZE_TINY
 	gene_damage = -1
 	attack_delay = DEFAULT_QUICK_COOLDOWN
+	ai = /datum/mob_controller/aggressive/rogue_drone
 	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
 
-/mob/living/simple_animal/hostile/rogue_drone/Initialize()
-	. = ..()
-	name = "[initial(name)] ([random_id(type,100,999)])"
+/datum/mob_controller/aggressive/rogue_drone
+	emote_speech = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
+	speak_chance = 0.25
 
-/mob/living/simple_animal/hostile/rogue_drone/ValidTarget(var/atom/A)
+/datum/mob_controller/aggressive/rogue_drone/valid_target(var/atom/A)
 	. = ..()
 	if(.)
 		if(issilicon(A))
@@ -34,6 +33,10 @@
 				return FALSE
 			if(istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cardborg) && istype(head, /obj/item/clothing/head/cardborg))
 				return FALSE
+
+/mob/living/simple_animal/hostile/rogue_drone/Initialize()
+	. = ..()
+	name = "[initial(name)] ([random_id(type,100,999)])"
 
 /mob/living/simple_animal/hostile/rogue_drone/death(gibbed)
 	. = ..()

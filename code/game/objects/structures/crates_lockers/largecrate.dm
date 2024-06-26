@@ -42,7 +42,7 @@
 		name = "[name] ([critter.name])"
 
 /obj/structure/largecrate/animal/cat
-	animal_type = /mob/living/simple_animal/cat
+	animal_type = /mob/living/simple_animal/passive/cat
 
 /obj/structure/largecrate/animal/cow
 	animal_type = /mob/living/simple_animal/cow

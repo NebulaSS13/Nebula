@@ -19,6 +19,10 @@
 	tracer_type = /obj/effect/projectile/tracer/laser
 	impact_type = /obj/effect/projectile/impact/laser
 
+/obj/item/projectile/beam/megabot
+	damage = 45
+	distance_falloff = 0.5
+
 /obj/item/projectile/beam/variable
 	muzzle_type = /obj/effect/projectile/muzzle/variable
 	tracer_type = /obj/effect/projectile/tracer/variable

@@ -1,16 +1,12 @@
-
 /mob/living/simple_animal/hostile/vagrant
 	name = "creature"
 	desc = "You get the feeling you should run."
 	icon = 'icons/mob/simple_animal/vagrant.dmi'
 	max_health = 60
-	speak_chance = 0
-	turns_per_wander = 4
 	move_intents = list(
 		/decl/move_intent/walk/animal_fast,
 		/decl/move_intent/run/animal_fast
 	)
-	break_stuff_probability = 0
 	faction = "vagrant"
 	harm_intent_damage = 3
 	natural_weapon = /obj/item/natural_weapon/bite/weak
@@ -22,6 +18,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	bleed_colour = "#aad9de"
 	nutrition = 100
+	ai = /datum/mob_controller/aggressive/vagrant
 	base_movement_delay = 5
 
 	var/cloaked = 0
@@ -29,16 +26,21 @@
 	var/blood_per_tick = 3
 	var/health_per_tick = 0.8
 
+/datum/mob_controller/aggressive/vagrant
+	speak_chance = 0
+	turns_per_wander = 8
+	break_stuff_probability = 0
+
 /mob/living/simple_animal/hostile/vagrant/Process_Spacemove()
 	return 1
 
 /mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = current_health
 	. = ..()
-	if(isliving(Proj.firer) && (target_mob != Proj.firer) && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
-		target_mob = Proj.firer
-		turns_per_wander = 3
-		MoveToTarget()
+	if(istype(ai) && isliving(Proj.firer) && (ai.get_target() != Proj.firer) && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
+		ai.set_target(Proj.firer)
+		ai.turns_per_wander = 6
+		ai.move_to_target()
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
 	. = ..()
@@ -63,10 +65,12 @@
 			else
 				gripping = null
 
-		if(turns_per_wander != initial(turns_per_wander))
-			turns_per_wander = initial(turns_per_wander)
+		// I suspect the original coder mistook this var for movement delay.
+		// Changing wander time makes no sense in this context.
+		if(istype(ai) && ai.turns_per_wander != initial(ai.turns_per_wander))
+			ai.turns_per_wander = initial(ai.turns_per_wander)
 
-	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
+	if(istype(ai) && ai.get_stance() == STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
 
@@ -89,10 +93,10 @@
 			set_light(3, 0.2)
 			set_moving_quickly()
 
-/mob/living/simple_animal/hostile/vagrant/attack_target(mob/target)
+/mob/living/simple_animal/hostile/vagrant/apply_attack_effects(mob/living/target)
 	. = ..()
-	if(ishuman(.))
-		var/mob/living/human/H = .
+	if(ishuman(target))
+		var/mob/living/human/H = target
 		if(gripping == H)
 			SET_STATUS_MAX(H, STAT_WEAK, 1)
 			SET_STATUS_MAX(H, STAT_STUN, 1)

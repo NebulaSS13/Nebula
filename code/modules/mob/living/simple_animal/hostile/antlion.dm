@@ -4,8 +4,6 @@
 	icon = 'icons/mob/simple_animal/antlion.dmi'
 	mob_size = MOB_SIZE_MEDIUM
 	speak_emote = list("clicks")
-	emote_hear = list("clicks its mandibles")
-	emote_see = list("shakes the sand off itself")
 	response_harm = "strikes"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
@@ -16,25 +14,37 @@
 	)
 	ability_cooldown = 30 SECONDS
 	butchery_data = /decl/butchery_data/animal/antlion
+	ai = /datum/mob_controller/aggressive/antlion
 	var/healing = FALSE
 	var/heal_amount = 6
 
+/datum/mob_controller/aggressive/antlion
+	emote_hear = list("clicks its mandibles")
+	emote_see = list("shakes the sand off itself")
+
 /mob/living/simple_animal/hostile/antlion/handle_regular_status_updates()
 	. = ..()
-	process_healing() //this needs to occur before if(!.) because of stop_automation
-	if(. && !is_on_special_ability_cooldown() && can_act() && target_mob)
+	process_healing()
+	if(. && !is_on_special_ability_cooldown() && can_act() && istype(ai) && ai.get_target())
 		vanish()
 
 /mob/living/simple_animal/hostile/antlion/proc/vanish()
+	if(invisibility >= INVISIBILITY_OBSERVER)
+		return
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
+	set_density(FALSE)
 	set_invisibility(INVISIBILITY_OBSERVER)
+	set_special_ability_cooldown(5 SECONDS)
 	prep_burrow(TRUE)
 	addtimer(CALLBACK(src, PROC_REF(diggy)), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/antlion/proc/diggy()
+	if(!istype(ai))
+		return
 	var/list/turf_targets
-	if(target_mob)
-		for(var/turf/T in range(1, get_turf(target_mob)))
+	var/current_target = get_turf(ai.get_target())
+	if(current_target)
+		for(var/turf/T in range(1, current_target))
 			if(!T.is_floor())
 				continue
 			if(!T.z != src.z)
@@ -60,6 +70,7 @@
 	if(!T)
 		return
 	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
+	set_density(TRUE)
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
 	set_special_ability_cooldown(ability_cooldown)
@@ -73,8 +84,11 @@
 		heal_overall_damage(rand(heal_amount), rand(heal_amount))
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
-	stop_wandering = new_bool
-	stop_automation = new_bool
+	if(istype(ai))
+		if(new_bool)
+			ai.pause()
+		else
+			ai.resume()
 	healing = new_bool
 
 /mob/living/simple_animal/hostile/antlion/mega
@@ -89,9 +103,12 @@
 		)
 	heal_amount = 9
 	ability_cooldown = 45 SECONDS
-	can_escape = TRUE
-	break_stuff_probability = 25
 	butchery_data = /decl/butchery_data/animal/antlion/queen
+	ai = /datum/mob_controller/aggressive/antlion/mega
+
+/datum/mob_controller/aggressive/antlion/mega
+	break_stuff_probability = 25
+	can_escape_buckles = TRUE
 
 /obj/item/natural_weapon/bite/megalion
 	name = "mandibles"

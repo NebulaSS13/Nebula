@@ -6,15 +6,56 @@
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	density = FALSE
-	stop_wandering = TRUE
-	wander = FALSE
 	anchored = TRUE
 	faction = "cute ghost dogs"
 	supernatural = 1
+	ai = /datum/mob_controller/faithful_hound
 
-	var/password
-	var/list/allowed_mobs = list() //Who we allow past us
+/datum/mob_controller/faithful_hound
+	do_wander = FALSE
 	var/last_check = 0
+	var/password
+
+/datum/mob_controller/faithful_hound/check_memory(mob/speaker, message)
+	return password && message && findtext(lowertext(message), lowertext(password))
+
+/datum/mob_controller/faithful_hound/memorise(mob/speaker, message)
+	password = message
+
+/datum/mob_controller/faithful_hound/do_process()
+	. = ..()
+	if(body.stat || body.client || world.time <= last_check)
+		return
+	last_check = world.time + 5 SECONDS
+	var/aggressiveness = 0 //The closer somebody is to us, the more aggressive we are
+	var/list/mobs = list()
+	var/list/objs = list()
+	get_mobs_and_objs_in_view_fast(get_turf(body), 5, mobs, objs, 0)
+	for(var/mob/living/mailman in mobs)
+		if((mailman == body) || is_friend(mailman) || mailman.faction == body.faction)
+			continue
+		body.face_atom(mailman)
+		var/new_aggress = 1
+		var/dist = get_dist(mailman, body)
+		if(dist < 2) //Attack! Attack!
+			body.a_intent = I_HURT
+			body.ClickOn(mailman)
+			return
+		if(dist == 2)
+			new_aggress = 3
+		else if(dist == 3)
+			new_aggress = 2
+		else
+			new_aggress = 1
+		aggressiveness = max(aggressiveness, new_aggress)
+
+	switch(aggressiveness)
+		if(1)
+			body.audible_message("\The [body] growls.")
+		if(2)
+			body.audible_message(SPAN_WARNING("\The [body] barks threateningly!"))
+		if(3)
+			body.visible_message(SPAN_DANGER("\The [body] snaps at the air!"))
 
 /mob/living/simple_animal/faithful_hound/get_death_message(gibbed)
 	return "disappears!"
@@ -26,43 +67,13 @@
 		qdel(src)
 
 /mob/living/simple_animal/faithful_hound/Destroy()
-	allowed_mobs.Cut()
 	return ..()
 
-/mob/living/simple_animal/faithful_hound/do_delayed_life_action()
-	..()
-	if(!stat && !client && world.time > last_check)
-		last_check = world.time + 5 SECONDS
-		var/aggressiveness = 0 //The closer somebody is to us, the more aggressive we are
-		var/list/mobs = list()
-		var/list/objs = list()
-		get_mobs_and_objs_in_view_fast(get_turf(src),5, mobs, objs, 0)
-		for(var/mob/living/m in mobs)
-			if((m == src) || (m in allowed_mobs) || m.faction == faction)
-				continue
-			var/new_aggress = 1
-			var/mob/living/M = m
-			var/dist = get_dist(M, src)
-			if(dist < 2) //Attack! Attack!
-				UnarmedAttack(M, TRUE)
-				return .
-			else if(dist == 2)
-				new_aggress = 3
-			else if(dist == 3)
-				new_aggress = 2
-			else
-				new_aggress = 1
-			aggressiveness = max(aggressiveness, new_aggress)
-		switch(aggressiveness)
-			if(1)
-				src.audible_message("\The [src] growls.")
-			if(2)
-				src.audible_message("<span class='warning'>\The [src] barks threateningly!</span>")
-			if(3)
-				src.visible_message("<span class='danger'>\The [src] snaps at the air!</span>")
-
 /mob/living/simple_animal/faithful_hound/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
-	if(password && findtext(message,password))
-		allowed_mobs |= speaker
-		spawn(10)
-			src.visible_message("<span class='notice'>\The [src] nods in understanding towards \the [speaker].</span>")
+	set waitfor = FALSE
+	if(!ai?.check_memory(speaker, message))
+		return
+	ai.add_friend(speaker)
+	sleep(1 SECOND)
+	if(!QDELETED(src) && !QDELETED(speaker) && ai?.is_friend(speaker))
+		visible_message(SPAN_NOTICE("\The [src] nods in understanding towards \the [speaker]."))

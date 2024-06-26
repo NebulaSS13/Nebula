@@ -11,8 +11,8 @@
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_gold.dmi'
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a cute critter.")
 	var/list/possible_mobs = list(
-		/mob/living/simple_animal/cat,
-		/mob/living/simple_animal/cat/kitten,
+		/mob/living/simple_animal/passive/cat,
+		/mob/living/simple_animal/passive/cat/kitten,
 		/mob/living/simple_animal/corgi,
 		/mob/living/simple_animal/corgi/puppy,
 		/mob/living/simple_animal/cow,
