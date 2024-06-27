@@ -1,13 +1,13 @@
 // Static movement denial
-/datum/movement_handler/no_move/MayMove()
+/datum/movement_handler/no_move/MayMove(mob/mover, is_external)
 	return MOVEMENT_STOP
 
 // Anchor check
-/datum/movement_handler/anchored/MayMove()
+/datum/movement_handler/anchored/MayMove(mob/mover, is_external)
 	return host.anchored ? MOVEMENT_STOP : MOVEMENT_PROCEED
 
 // Movement relay
-/datum/movement_handler/move_relay/DoMove(var/direction, var/mover)
+/datum/movement_handler/move_relay/DoMove(direction, mob/mover, is_external)
 	var/atom/movable/AM = host.loc
 	if(!istype(AM))
 		return
@@ -25,13 +25,13 @@
 	..()
 	src.delay = max(1, delay)
 
-/datum/movement_handler/delay/DoMove()
+/datum/movement_handler/delay/DoMove(direction, mob/mover, is_external)
 	next_move = world.time + delay
 
-/datum/movement_handler/delay/MayMove()
+/datum/movement_handler/delay/MayMove(mob/mover, is_external)
 	return world.time >= next_move ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 // Relay self
-/datum/movement_handler/move_relay_self/DoMove(var/direction, var/mover)
+/datum/movement_handler/move_relay_self/DoMove(direction, mob/mover, is_external)
 	host.relaymove(mover, direction)
 	return MOVEMENT_HANDLED
