@@ -424,7 +424,7 @@
 /obj/item/paper_bundle/DefaultTopicState()
 	return global.paper_topic_state
 
-//We don't contain any matter, since we're not really a material thing..
+//We don't contain any matter, since we're not really a material thing.
 /obj/item/paper_bundle/create_matter()
 	UNSETEMPTY(matter)
 

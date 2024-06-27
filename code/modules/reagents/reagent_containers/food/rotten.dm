@@ -42,7 +42,7 @@
 
 /obj/item/chems/food/old/hotdog
 	name = "hotdog"
-	desc = "This one is probably only marginally less safe to eat than when it was first created.."
+	desc = "This is probably only marginally less safe to eat than when it was first created."
 	icon_state = "ancient_hotdog"
 
 /obj/item/chems/food/old/taco

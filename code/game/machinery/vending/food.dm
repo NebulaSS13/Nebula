@@ -26,7 +26,7 @@
 		/obj/item/chems/food/syndicake = 6
 	)
 
-//a food variant of the boda machine - It carries slavic themed foods.. Mostly beer snacks
+//a food variant of the boda machine - It carries slavic themed foods. Mostly beer snacks
 /obj/machinery/vending/snix
 	name = "Snix"
 	desc = "An old snack vending machine, how did it get here? And are the snacks still good?"

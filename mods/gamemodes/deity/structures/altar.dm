@@ -52,9 +52,9 @@
 		if(3)
 			text = "You feel like your thought are being overriden..."
 		if(2)
-			text = "You can't.... concentrate.. must... resist!"
+			text = "You can't... concentrate... must... resist!"
 		if(1)
-			text = "Can't... resist. ... anymore."
+			text = "Can't... resist... anymore."
 			to_chat(linked_god, SPAN_WARNING("\The [target] is getting close to conversion!"))
 	to_chat(target, "<span class='cult'>[text]. <a href='byond://?src=\ref[src];resist=\ref[target]'>Resist Conversion</a></span>")
 

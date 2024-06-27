@@ -112,7 +112,7 @@
 	if(href_list["confirm"])
 		var/obj/machinery/faxmachine/F = destination_ref.resolve()
 		if(!istype(F))
-			to_chat(usr, "The destination machines doesn't exist anymore..")
+			to_chat(usr, "The destination machine doesn't exist anymore.")
 			return
 		switch(alert("Are you sure you want to send the fax as is?",, "Yes", "No"))
 			if("Yes")

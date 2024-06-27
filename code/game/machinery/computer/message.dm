@@ -54,7 +54,7 @@
 /obj/machinery/computer/message_monitor/emag_act(var/remaining_charges, var/mob/user)
 
 	// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.
-	// It'll take more time if there's more characters in the password..
+	// It'll take more time if there's more characters in the password.
 	if(!emag && operable())
 		var/obj/machinery/network/message_server/linked_server = get_message_server()
 		if(linked_server)

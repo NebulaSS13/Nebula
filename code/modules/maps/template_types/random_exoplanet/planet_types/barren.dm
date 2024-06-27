@@ -36,7 +36,7 @@
 // Planetoid Data
 ////////////////////////////////////////////////////////////////////////////
 
-//#FIXME: Barren is kind of a wide encompassing planet type. There's a lot of extremes to take into accounts for a single type..
+//#FIXME: Barren is kind of a wide encompassing planet type. There's a lot of extremes to take into accounts for a single type...
 
 /datum/planetoid_data/random/barren
 	habitability_class             = null

@@ -231,7 +231,7 @@
 	if(.)
 		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
-		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments.."))
+		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments..."))
 		to_chat(target, SPAN_WARNING("Your mind is being cleansed of ailments by \the [user]."))
 		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
 			psi?.backblast(rand(5,10))

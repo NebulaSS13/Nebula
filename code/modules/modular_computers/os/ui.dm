@@ -177,7 +177,7 @@
 	var/obj/item/cell/battery = battery_module?.get_cell()
 	if(battery)
 		switch(battery.percent())
-			if(80 to 200) // 100 should be maximal but just in case..
+			if(80 to 200) // 100 should be maximal but just in case...
 				data["PC_batteryicon"] = "batt_100.gif"
 			if(60 to 80)
 				data["PC_batteryicon"] = "batt_80.gif"
