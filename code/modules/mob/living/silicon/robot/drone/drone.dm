@@ -74,19 +74,19 @@
 
 /mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	if(!istype(possessor) || !possessor.client || !possessor.ckey)
-		return 0
+		return FALSE
 	if(!get_config_value(/decl/config/toggle/on/allow_drone_spawn))
-		to_chat(src, "<span class='danger'>Playing as drones is not currently permitted.</span>")
-		return 0
+		to_chat(possessor, SPAN_DANGER("Playing as drones is not currently permitted."))
+		return FALSE
 	if(too_many_active_drones())
-		to_chat(src, "<span class='danger'>The maximum number of active drones has been reached..</span>")
-		return 0
+		to_chat(possessor, SPAN_DANGER("The maximum number of active drones has been reached."))
+		return FALSE
 	if(jobban_isbanned(possessor,ASSIGNMENT_ROBOT))
-		to_chat(usr, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
-		return 0
+		to_chat(possessor, SPAN_DANGER("You are banned from playing synthetics and cannot spawn as a drone."))
+		return FALSE
 	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 /mob/living/silicon/robot/drone/do_possession(var/mob/observer/ghost/possessor)
 	if(!(istype(possessor) && possessor.ckey))
@@ -134,7 +134,7 @@
 
 //Redefining some robot procs...
 /mob/living/silicon/robot/drone/fully_replace_character_name(pickedName as text)
-	// Would prefer to call the grandparent proc but this isn't possible, so..
+	// Would prefer to call the grandparent proc but this isn't possible, so...
 	real_name = pickedName
 	SetName(real_name)
 

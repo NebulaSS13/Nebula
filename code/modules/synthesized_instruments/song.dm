@@ -48,7 +48,7 @@
 
 	var/note_num = delta1+delta2+global.musical_config.nn2no[note]
 	if (note_num < 0 || note_num > 127)
-		CRASH("play_synthesized note failed because of 0..127 condition, [note], [acc], [oct]")
+		CRASH("play_synthesized note failed because of 0-127 condition, [note], [acc], [oct]")
 
 	var/datum/sample_pair/pair = src.instrument_data.sample_map[global.musical_config.n2t(note_num)]
 	#define Q 0.083 // 1/12

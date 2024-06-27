@@ -330,7 +330,7 @@
 
 /decl/config/toggle/delist_when_no_admins
 	uid = "delist_when_no_admins"
-	desc = "Determines if the server should hide itself from the hub when no admins are online.."
+	desc = "Determines if the server should hide itself from the hub when no admins are online."
 
 /decl/config/toggle/wait_for_sigusr1_reboot
 	uid = "wait_for_sigusr1_reboot"

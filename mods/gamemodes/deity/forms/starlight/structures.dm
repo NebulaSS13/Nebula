@@ -20,7 +20,7 @@
 	var/static/list/possible_forms = list(
 		"Starborn" = list(
 			"description" = "A species of hardy fire-wreathed soldiers.",
-			"message" = "As a Starborn, you are immune to laser-fire you are a hardy soldier, able to take on the greatest of foes.",
+			"message" = "As a Starborn, you are immune to laser-fire. You are a hardy soldier, able to take on the greatest of foes.",
 			"species" = "Starborn"
 		),
 		"Blueforged" = list(
@@ -37,7 +37,7 @@
 			)
 		),
 		"Shadowling" = list(
-			"description" = "Beings that come from a place of no light. They sneak from place to place, disabling everyone they touch..",
+			"description" = "Beings that come from a place of no light. They sneak from place to place, disabling everyone they touch.",
 			"message" = "As a Shadow you take damage from the light itself but have the ability to vanish from sight itself.",
 			"species" = "Shadow",
 			"spells" = list(

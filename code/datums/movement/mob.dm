@@ -165,7 +165,7 @@
 
 	return MOVEMENT_PROCEED
 
-// Finally.. the last of the mob movement junk
+// Finally... the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
 	. = MOVEMENT_HANDLED
 

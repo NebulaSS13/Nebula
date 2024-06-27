@@ -79,7 +79,7 @@
 /obj/item/box/fancy/cigarettes/killthroat/populate_reagents()
 	add_to_reagents(/decl/material/liquid/fuel, (max(1, storage?.max_storage_space) * 4))
 
-// New exciting ways to kill your lungs! - Earthcrusher //
+// New exciting ways to kill your lungs! - Sunbeamstress //
 
 /obj/item/box/fancy/cigarettes/luckystars
 	name = "pack of Lucky Stars"

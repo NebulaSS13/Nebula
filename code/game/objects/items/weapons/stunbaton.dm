@@ -168,7 +168,7 @@
 	if (R)
 		return ..()
 	else	// Stop pretending and get out of your cardborg suit, human.
-		to_chat(user, "<span class='warning'>You don't seem to be able to interact with this by yourself..</span>")
+		to_chat(user, "<span class='warning'>You don't seem to be able to interact with this by yourself.</span>")
 		add_fingerprint(user)
 	return 0
 

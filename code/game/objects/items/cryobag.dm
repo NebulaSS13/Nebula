@@ -111,7 +111,7 @@
 
 /obj/item/usedcryobag
 	name = "used stasis bag"
-	desc = "Pretty useless now.."
+	desc = "Pretty useless now..."
 	icon_state = "bodybag_used"
 	icon = 'icons/obj/closets/cryobag.dmi'
 	material = /decl/material/solid/organic/plastic

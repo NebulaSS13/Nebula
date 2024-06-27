@@ -303,7 +303,7 @@
 /obj/item/frame/button/airlock_controller/kit/warn_not_setup(mob/user)
 	to_chat(user, SPAN_WARNING("First, use a multitool on the kit to properly setup the controller's software!"))
 
-//Let them also hit it with a circuitboard if they so wish. But multitool is better when you don't want to print one for nothing..
+//Let them also hit it with a circuitboard if they so wish. But multitool is better when you don't want to print one for nothing.
 /obj/item/frame/button/airlock_controller/kit/attackby(obj/item/W, mob/user)
 	if(!IS_MULTITOOL(W))
 		return ..()

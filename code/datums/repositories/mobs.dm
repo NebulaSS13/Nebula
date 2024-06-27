@@ -7,7 +7,7 @@ var/global/repository/mob/mob_repository = new()
 	..()
 	mobs_ = list()
 
-// A lite mob is unique per ckey and mob real name/ref (ref conflicts possible.. but oh well)
+// A lite mob is unique per ckey and mob real name/ref (ref conflicts possible... but oh well)
 /repository/mob/proc/get_lite_mob(var/mob/M)
 	. = mobs_[mob2unique(M)]
 	if(!.)

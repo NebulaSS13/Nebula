@@ -50,7 +50,7 @@
 	for(var/obj/item/stack/material/ore/O in ores)
 		if(total_ores >= maximum_ores)
 			if(user)
-				to_chat(user, SPAN_WARNING("You insert only what you can.."))
+				to_chat(user, SPAN_WARNING("You insert only what you can."))
 			break
 		inserted += O.amount
 		insert_ore(O)

@@ -135,7 +135,7 @@
 	// This IF cuts on data transferred to client, so i guess it's worth it.
 	if(prog.downloaderror) // Download errored. Wait until user resets the program.
 		data["error"] = prog.downloaderror
-	if(prog.current_transfer) // Download running. Wait please..
+	if(prog.current_transfer) // Download running. Wait please...
 		data |= prog.current_transfer.get_ui_data()
 		data["downloadspeed"] = prog.current_transfer.get_transfer_speed()
 		var/datum/computer_file/program/P = prog.current_transfer.transferring

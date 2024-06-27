@@ -112,9 +112,9 @@ var/global/list/meteors_major = list(
 /datum/event/meteor_wave/overmap/tick()
 	if(!victim)
 		return
-	if (victim.is_still() || victim.get_helm_skill() >= SKILL_ADEPT) //Unless you're standing or good at your job..
+	if (victim.is_still() || victim.get_helm_skill() >= SKILL_ADEPT) //Unless you're standing still or good at your job...
 		start_side = pick(global.cardinal)
-	else //..Meteors mostly fly in your face
+	else //... Meteors mostly fly in your face
 		start_side = prob(90) ? victim.fore_dir : pick(global.cardinal)
 	..()
 
