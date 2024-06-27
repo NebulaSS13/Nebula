@@ -3,6 +3,7 @@
 	abstract_type = /decl/chemical_reaction/grenade_reaction
 	result_amount = 1
 	chemical_reaction_flags = CHEM_REACTION_FLAG_OVERFLOW_CONTAINER
+	reaction_category = REACTION_TYPE_COMPOUND
 
 /decl/chemical_reaction/grenade_reaction/explosion_potassium
 	name = "Explosion"
