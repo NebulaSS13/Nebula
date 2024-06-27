@@ -185,7 +185,7 @@
 		if(e in output_list)
 			continue
 		output_list.Add(e)
-		
+
 	set_pin_data(IC_OUTPUT, 1, output_list)
 	push_data()
 	activate_pin(2)
@@ -332,7 +332,6 @@
 	outputs = list(
 		"joined text" = IC_PINTYPE_STRING
 		)
-	icon_state = "addition"
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	cooldown_per_use = 1
 

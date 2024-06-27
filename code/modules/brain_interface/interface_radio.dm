@@ -2,7 +2,7 @@
 	name = "radio-enabled neural interface"
 	desc = "A complex life support shell that interfaces between a brain and an electronic device. This one comes with a built-in radio."
 	origin_tech = @'{"biotech":4}'
-	var/VAR_PRIVATE/weakref/_radio
+	VAR_PRIVATE/weakref/_radio
 
 /obj/item/organ/internal/brain_interface/radio_enabled/empty
 	holding_brain = null

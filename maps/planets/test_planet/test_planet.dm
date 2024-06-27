@@ -68,11 +68,14 @@
 	ring_type_name      = SKYBOX_PLANET_RING_TYPE_SPARSE
 	strata              = /decl/strata/sedimentary
 	engraving_generator = /datum/xenoarch_engraving_flavor
-	day_duration        = 12 MINUTES
+	daycycle_type       = /datum/daycycle/exoplanet/neutralia
 	surface_light_level = 0.5
 	surface_light_color = COLOR_OFF_WHITE
 	flora               = /datum/planet_flora/random/neutralia
 	fauna               = /datum/fauna_generator/neutralia
+
+/datum/daycycle/exoplanet/neutralia
+	day_duration        = 12 MINUTES
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Neutralia Template
@@ -115,7 +118,7 @@
 	parent_planetoid     = "neutralia"
 	level_max_width      = 128
 	level_max_height     = 128
-	loop_turf_type       = /turf/unsimulated/mimic_edge/transition/loop
+	loop_turf_type       = /turf/mimic_edge/transition/loop
 
 /datum/level_data/planetoid/neutralia/sky
 	name             = "neutralia sky"
@@ -128,21 +131,21 @@
 	name             = "neutralia surface"
 	level_id         = NEUTRALIA_SURFACE_LEVEL_ID
 	base_area        = /area/exoplanet/neutralia
-	base_turf        = /turf/exterior/barren
+	base_turf        = /turf/floor/natural/barren
 	border_filler    = /turf/unsimulated/dark_filler
 
 /datum/level_data/planetoid/neutralia/underground
 	name             = "neutralia underground"
 	level_id         = "neutralia_underground"
 	base_area        = /area/exoplanet/underground/neutralia
-	base_turf        = /turf/exterior/barren
+	base_turf        = /turf/floor/natural/barren
 	border_filler    = /turf/unsimulated/mineral
 
 /datum/level_data/planetoid/neutralia/underground/bottom
 	name      = "neutralia abyssal depths"
 	level_id  = "neutralia_abyssal_depths"
 	base_area = /area/exoplanet/underground/neutralia/bottom
-	base_turf = /turf/exterior/rock/volcanic
+	base_turf = /turf/floor/natural/rock/volcanic
 
 /obj/abstract/level_data_spawner/neutralia/sky
 	level_data_type = /datum/level_data/planetoid/neutralia/sky

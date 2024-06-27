@@ -23,11 +23,7 @@
 	max_gas = null
 	minbodytemp = 0
 
-	meat_type = /obj/item/chems/food/bearmeat
-	meat_amount = 10
-	bone_amount = 20
-	skin_amount = 20
-	skin_material = /decl/material/solid/organic/skin/fur/heavy
+	butchery_data = /decl/butchery_data/animal/space_bear
 
 	var/stance_step = 0
 
@@ -108,7 +104,7 @@
 /mob/living/simple_animal/hostile/bear/LoseTarget()
 	..(5)
 
-/mob/living/simple_animal/hostile/bear/AttackingTarget()
+/mob/living/simple_animal/hostile/bear/attack_target(mob/target)
 	if(!Adjacent(target_mob))
 		return
 	custom_emote(1, pick( list("slashes at [target_mob]", "bites [target_mob]") ) )
@@ -116,12 +112,12 @@
 	var/damage = rand(20,30)
 
 	if(ishuman(target_mob))
-		var/mob/living/carbon/human/H = target_mob
+		var/mob/living/human/H = target_mob
 		var/dam_zone = pick(BP_CHEST, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG)
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, ran_zone(dam_zone, target = H))
 		H.apply_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
 		return H
 	else if(isliving(target_mob))
 		var/mob/living/L = target_mob
-		L.adjustBruteLoss(damage)
+		L.take_damage(damage)
 		return L

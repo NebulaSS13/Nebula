@@ -166,7 +166,7 @@
 	if(!smash_check(1))
 		return //won't always break on the first hit
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(istype(H) && H.headcheck(hit_zone))
 		var/obj/item/organ/affecting = GET_EXTERNAL_ORGAN(H, hit_zone) //headcheck should ensure that affecting is not null
 		user.visible_message(SPAN_DANGER("\The [user] smashes \the [src] into [H]'s [affecting.name]!"))
@@ -244,9 +244,10 @@
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
 
-/obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
+/obj/item/broken_bottle/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	. = ..()
+	if(.)
+		playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 
 /obj/item/chems/drinks/bottle/gin
 	name = "Griffeater Gin"

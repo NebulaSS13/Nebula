@@ -134,7 +134,7 @@
 		if(!newname || !channel)
 			return
 		channel.add_status_message("Channel renamed from [channel.title] to [newname] by operator.")
-		channel.title = newname
+		channel.change_title(newname, src)
 	if(href_list["PRG_deletechannel"])
 		. = 1
 		if(channel && ((channel.operator == src) || netadmin_mode))

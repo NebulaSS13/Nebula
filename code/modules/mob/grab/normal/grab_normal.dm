@@ -20,7 +20,7 @@
 
 	var/mob/living/affecting = G.get_affecting_mob()
 	var/mob/living/assailant = G.assailant
-	if(affecting && A && A == affecting && !affecting.lying)
+	if(affecting && A && A == affecting && !affecting.current_posture.prone)
 
 		affecting.visible_message(SPAN_DANGER("\The [assailant] is trying to pin \the [affecting] to the ground!"))
 		if(do_mob(assailant, affecting, action_cooldown - 1))
@@ -118,8 +118,8 @@
 	return FALSE
 
 /decl/grab/normal/proc/attack_eye(var/obj/item/grab/G)
-	var/mob/living/carbon/human/target = G.get_affecting_mob()
-	var/mob/living/carbon/human/attacker = G.assailant
+	var/mob/living/human/target = G.get_affecting_mob()
+	var/mob/living/human/attacker = G.assailant
 	if(!istype(target) || !istype(attacker))
 		return
 	var/decl/natural_attack/attack = attacker.get_unarmed_attack(target, BP_EYES)
@@ -140,14 +140,14 @@
 	return 1
 
 /decl/grab/normal/proc/headbutt(var/obj/item/grab/G)
-	var/mob/living/carbon/human/target = G.get_affecting_mob()
-	var/mob/living/carbon/human/attacker = G.assailant
+	var/mob/living/human/target = G.get_affecting_mob()
+	var/mob/living/human/attacker = G.assailant
 	if(!istype(target)	 || !istype(attacker))
 		return
 	if(!attacker.skill_check(SKILL_COMBAT, SKILL_BASIC))
 		return
 
-	if(target.lying)
+	if(target.current_posture.prone)
 		return
 
 	var/damage = 20
@@ -214,7 +214,7 @@
 				return FALSE
 	return TRUE
 
-/decl/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
+/decl/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/human/user, var/obj/item/I)
 	switch(G.target_zone)
 		if(BP_HEAD)
 			return attack_throat(G, I, user)
@@ -228,7 +228,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if(!W.edge || !W.force || W.atom_damage_type != BRUTE)
 		return 0 //unsuitable weapon
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
@@ -250,7 +250,7 @@
 	var/total_damage = 0
 	for(var/i in 1 to 3)
 		var/damage = min(W.force*1.5, 20)*damage_mod
-		affecting.apply_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
+		affecting.apply_damage(damage, W.atom_damage_type, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
 		total_damage += damage
 
 	if(total_damage)
@@ -272,7 +272,7 @@
 		return
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if(!W.edge || !W.force || W.atom_damage_type != BRUTE)
 		return 0 //unsuitable weapon
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O || !(O.limb_flags & ORGAN_FLAG_HAS_TENDON) || (O.status & ORGAN_TENDON_CUT))

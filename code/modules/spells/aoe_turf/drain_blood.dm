@@ -21,10 +21,10 @@
 				continue
 			//Hurt target
 			if(ishuman(L))
-				var/mob/living/carbon/human/H = L
+				var/mob/living/human/H = L
 				H.vessel.remove_any(10)
 			else
-				L.adjustBruteLoss(10)
+				L.take_damage(10)
 			to_chat(L, "<span class='danger'>You feel your lifeforce being ripping out of your body!</span>")
 
 			//Do effect
@@ -35,14 +35,14 @@
 
 			//Heal self
 			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
+				var/mob/living/human/H = user
 				var/amount = min(10, H.species.blood_volume - H.vessel.total_volume)
 				if(amount > 0)
 					H.adjust_blood(amount)
 					continue
-			L.adjustBruteLoss(-5, do_update_health = FALSE)
-			L.adjustFireLoss(-2.5, do_update_health = FALSE)
-			L.adjustToxLoss(-2.5)
+			L.heal_damage(BRUTE, 5, do_update_health = FALSE)
+			L.heal_damage(BURN, 2.5, do_update_health = FALSE)
+			L.heal_damage(TOX, 2.5)
 
 /obj/item/projectile/beam/blood_effect
 	name = "blood jet"

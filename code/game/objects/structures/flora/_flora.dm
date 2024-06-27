@@ -22,9 +22,7 @@
 
 // We rely on overrides to spawn appropriate materials for flora structures.
 /obj/structure/flora/create_dismantled_products(turf/T)
-	matter = null
-	material = null
-	reinf_material = null
+	clear_materials()
 	return ..()
 
 /obj/structure/flora/attackby(obj/item/O, mob/user)
@@ -45,8 +43,7 @@
 		playsound(src, snd_cut, 40, TRUE)
 
 /obj/structure/flora/proc/cut_down(var/obj/item/I, var/mob/user)
-
-	dismantle()
+	dismantle_structure(user)
 	return TRUE
 
 //Drop some bits when destroyed
@@ -64,7 +61,10 @@
 
 /**Returns an instance of the object the plant leaves behind when destroyed. Null means it leaves nothing. */
 /obj/structure/flora/proc/create_remains()
-	return new remains_type(get_turf(src), material, reinf_material)
+	var/obj/item/remains = new remains_type(get_turf(src), material, reinf_material)
+	if((istype(remains) || istype(remains, /obj/structure)) && paint_color)
+		remains.set_color(paint_color)
+	return remains
 
 ////////////////////////////////////////
 // Floral Remains

@@ -17,7 +17,3 @@
 			T.wet_floor(50)
 			new /obj/effect/temporary(T, 3, 'icons/effects/effects.dmi', "sonar_ping")
 	return ..()
-
-/spell/hand/slippery_surface/tower
-	desc = "Allows you to slicken a small patch of floor. Anyone without sure-footing will find it hard to stay upright."
-	charge_max = 2

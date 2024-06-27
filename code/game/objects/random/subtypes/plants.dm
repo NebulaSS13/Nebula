@@ -6,10 +6,10 @@
 
 /obj/random/seaweed/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/structure/flora/seaweed =       3,
-		/obj/structure/flora/seaweed/mid =   3,
+		/obj/structure/flora/seaweed       = 3,
+		/obj/structure/flora/seaweed/mid   = 3,
 		/obj/structure/flora/seaweed/large = 2,
-		/obj/structure/flora/seaweed/glow =  1
+		/obj/structure/flora/seaweed/glow  = 1
 	)
 	return spawnable_choices
 

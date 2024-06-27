@@ -34,17 +34,16 @@
 				TOOL_PROP_PEN_FONT   = pen_font)))
 	make_pen_description()
 
-/obj/item/pen/attack(atom/A, mob/user, target_zone)
+/obj/item/pen/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(isliving(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
-		var/mob/living/M = A
-		var/obj/item/organ/external/head/head = M.get_organ(BP_HEAD, /obj/item/organ/external/head)
+	if(user.a_intent == I_HELP && user.get_target_zone() == BP_HEAD)
+		var/obj/item/organ/external/head/head = target.get_organ(BP_HEAD, /obj/item/organ/external/head)
 		if(istype(head))
 			head.write_on(user, "[stroke_color_name] [medium_name]")
 			return TRUE
 
-	if(istype(A, /obj/item/organ/external/head))
-		var/obj/item/organ/external/head/head = A
+	if(istype(target, /obj/item/organ/external/head))
+		var/obj/item/organ/external/head/head = target
 		head.write_on(user, "[stroke_color_name] [medium_name]")
 		return TRUE
 

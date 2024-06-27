@@ -3,73 +3,73 @@
 // Holographic tables are in code/modules/tables/presets.dm
 // Holographic racks are in code/modules/tables/rack.dm
 
-/turf/simulated/floor/holofloor
+/turf/floor/holofloor
 	thermal_conductivity = 0
 
-/turf/simulated/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
+/turf/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
 
-/turf/simulated/floor/holofloor/attackby(obj/item/W, mob/user)
+/turf/floor/holofloor/attackby(obj/item/W, mob/user)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-/turf/simulated/floor/holofloor/set_flooring()
+/turf/floor/holofloor/set_flooring(var/decl/flooring/newflooring, skip_update)
 	return
 
-/turf/simulated/floor/holofloor/carpet
+/turf/floor/holofloor/carpet
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "brown"
 	initial_flooring = /decl/flooring/carpet
 
-/turf/simulated/floor/holofloor/concrete
+/turf/floor/holofloor/concrete
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "brown"
 	initial_flooring = /decl/flooring/carpet
 
-/turf/simulated/floor/holofloor/concrete
+/turf/floor/holofloor/concrete
 	name = "floor"
 	icon = 'icons/turf/flooring/misc.dmi'
 	icon_state = "concrete"
 	initial_flooring = null
 
-/turf/simulated/floor/holofloor/tiled
+/turf/floor/holofloor/tiled
 	name = "floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
 
-/turf/simulated/floor/holofloor/tiled/dark
+/turf/floor/holofloor/tiled/dark
 	name = "dark floor"
 	icon_state = "dark"
 	initial_flooring = /decl/flooring/tiling/dark
 
-/turf/simulated/floor/holofloor/tiled/stone
+/turf/floor/holofloor/tiled/stone
 	name = "stone floor"
 	icon_state = "stone"
 	initial_flooring = /decl/flooring/tiling/stone
 
-/turf/simulated/floor/holofloor/lino
+/turf/floor/holofloor/lino
 	name = "lino"
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_state = "lino"
 	initial_flooring = /decl/flooring/linoleum
 
-/turf/simulated/floor/holofloor/wood
+/turf/floor/holofloor/wood
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"
 	color = WOOD_COLOR_CHOCOLATE
 	initial_flooring = /decl/flooring/wood
 
-/turf/simulated/floor/holofloor/grass
+/turf/floor/holofloor/grass
 	name = "lush grass"
-	icon = 'icons/turf/flooring/grass.dmi'
+	icon = 'icons/turf/flooring/fakegrass.dmi'
 	icon_state = "grass0"
-	initial_flooring = /decl/flooring/grass
+	initial_flooring = /decl/flooring/fake_grass
 
-/turf/simulated/floor/holofloor/snow
+/turf/floor/holofloor/snow
 	name = "snow"
 	base_name = "snow"
 	icon = 'icons/turf/floors.dmi'
@@ -77,60 +77,61 @@
 	icon_state = "snow"
 	base_icon_state = "snow"
 
-/turf/simulated/floor/holofloor/space
+/turf/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
 
-/turf/simulated/floor/holofloor/reinforced
+/turf/floor/holofloor/reinforced
 	icon = 'icons/turf/flooring/tiles.dmi'
 	initial_flooring = /decl/flooring/reinforced
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
 
-/turf/simulated/floor/holofloor/space/Initialize()
+/turf/floor/holofloor/space/Initialize()
 	. = ..()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
-/turf/simulated/floor/holofloor/beach
+/turf/floor/holofloor/beach
 	desc = "Uncomfortably gritty for a hologram."
 	base_desc = "Uncomfortably gritty for a hologram."
 	icon = 'icons/misc/beach.dmi'
 	base_icon = 'icons/misc/beach.dmi'
 	initial_flooring = null
-	abstract_type = /turf/simulated/floor/holofloor/beach
+	abstract_type = /turf/floor/holofloor/beach
 
-/turf/simulated/floor/holofloor/beach/sand
+/turf/floor/holofloor/beach/sand
 	name = "sand"
 	icon_state = "desert0"
 	base_icon_state = "desert0"
 
-/turf/simulated/floor/holofloor/beach/coastline
+/turf/floor/holofloor/beach/coastline
 	name = "coastline"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
+	base_icon = 'icons/misc/beach2.dmi'
 	base_icon_state = "sandwater"
 
-/turf/simulated/floor/holofloor/beach/water
+/turf/floor/holofloor/beach/water
 	name = "water"
 	icon_state = "seashallow"
 	base_icon_state = "seashallow"
 
-/turf/simulated/floor/holofloor/desert
+/turf/floor/holofloor/desert
 	name = "desert sand"
 	base_name = "desert sand"
 	desc = "Uncomfortably gritty for a hologram."
 	base_desc = "Uncomfortably gritty for a hologram."
-	icon_state = "asteroid"
-	base_icon_state = "asteroid"
-	icon = 'icons/turf/flooring/asteroid.dmi'
-	base_icon = 'icons/turf/flooring/asteroid.dmi'
+	icon_state = "0"
+	base_icon_state = "0"
+	icon = 'icons/turf/flooring/barren.dmi'
+	base_icon = 'icons/turf/flooring/barren.dmi'
 	initial_flooring = null
 
-/turf/simulated/floor/holofloor/desert/Initialize(var/ml)
+/turf/floor/holofloor/desert/Initialize(var/ml)
 	. = ..()
 	if(prob(10))
-		overlays += "asteroid[rand(0,9)]"
+		LAZYADD(decals, image('icons/turf/flooring/decals.dmi', "asteroid[rand(0,9)]"))
 
 /obj/structure/holostool
 	name = "stool"
@@ -154,7 +155,7 @@
 	if(IS_SCREWDRIVER(W) || IS_CROWBAR(W) || IS_WRENCH(W))
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
 	else
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
 			hit(W.force)
 			if(current_health <= 7)
 				anchored = FALSE
@@ -183,7 +184,7 @@
 		var/aforce = I.force
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<span class='danger'>\The [src] was hit by \the [I].</span>")
-		if(I.damtype == BRUTE || I.damtype == BURN)
+		if(I.atom_damage_type == BRUTE || I.atom_damage_type == BURN)
 			take_damage(aforce)
 		return
 
@@ -218,7 +219,7 @@
 	material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/item/holo
-	damtype = PAIN
+	atom_damage_type =  PAIN
 	no_attack_log = 1
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
@@ -396,8 +397,7 @@
 /mob/living/simple_animal/hostile/carp/holodeck
 	icon = 'icons/mob/simple_animal/holocarp.dmi'
 	alpha = 127
-	meat_amount = 0
-	meat_type = null
+	butchery_data = null
 
 /mob/living/simple_animal/hostile/carp/holodeck/carp_randomify()
 	return

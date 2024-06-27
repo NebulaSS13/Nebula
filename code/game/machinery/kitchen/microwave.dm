@@ -27,7 +27,7 @@
 	var/end_time = 0
 	var/cooking_power = 1
 
-
+	var/cooking_temperature = 93 CELSIUS // 200 F apparently?
 
 // see code/modules/food/recipes_microwave.dm for recipes
 
@@ -52,25 +52,25 @@
 /obj/machinery/microwave/attackby(var/obj/item/O, var/mob/user)
 	if(broken > 0)
 		if(broken == 2 && IS_SCREWDRIVER(O)) // If it's broken and they're using a screwdriver
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] starts to fix part of [src]."), \
-				SPAN_NOTICE("You start to fix part of [src].") \
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts to fix part of [src]."),
+				SPAN_NOTICE("You start to fix part of [src].")
 			)
 			if (do_after(user, 20, src))
-				user.visible_message( \
-					SPAN_NOTICE("\The [user] fixes part of [src]."), \
-					SPAN_NOTICE("You have fixed part of [src].") \
+				user.visible_message(
+					SPAN_NOTICE("\The [user] fixes part of [src]."),
+					SPAN_NOTICE("You have fixed part of [src].")
 				)
 				broken = 1 // Fix it a bit
 		else if(broken == 1 && IS_WRENCH(O)) // If it's broken and they're doing the wrench
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] starts to fix part of [src]."), \
-				SPAN_NOTICE("You start to fix part of [src].") \
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts to fix part of [src]."),
+				SPAN_NOTICE("You start to fix part of [src].")
 			)
 			if (do_after(user, 20, src))
-				user.visible_message( \
-					SPAN_NOTICE("\The [user] fixes [src]."), \
-					SPAN_NOTICE("You have fixed [src].") \
+				user.visible_message(
+					SPAN_NOTICE("\The [user] fixes [src]."),
+					SPAN_NOTICE("You have fixed [src].")
 				)
 				broken = 0 // Fix it!
 				dirty = 0 // just to be sure
@@ -84,14 +84,14 @@
 		return
 	else if(dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/chems/spray/cleaner) || istype(O, /obj/item/chems/glass/rag)) // If they're trying to clean it then let them
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] starts to clean [src]."), \
-				SPAN_NOTICE("You start to clean [src].") \
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts to clean [src]."),
+				SPAN_NOTICE("You start to clean [src].")
 			)
 			if (do_after(user, 20, src))
-				user.visible_message( \
-					SPAN_NOTICE("\The [user] has cleaned [src]."), \
-					SPAN_NOTICE("You have cleaned [src].") \
+				user.visible_message(
+					SPAN_NOTICE("\The [user] has cleaned [src]."),
+					SPAN_NOTICE("You have cleaned [src].")
 				)
 				dirty = 0 // It's clean!
 				broken = 0 // just to be sure
@@ -100,10 +100,7 @@
 		else //Otherwise bad luck!!
 			to_chat(user, SPAN_WARNING("It's dirty!"))
 			return 1
-	else if(istype(O,/obj/item/chems/glass) || \
-	        istype(O,/obj/item/chems/drinks) || \
-	        istype(O,/obj/item/chems/condiment) \
-		)
+	else if(istype(O,/obj/item/chems/glass) || istype(O,/obj/item/chems/drinks) || istype(O,/obj/item/chems/condiment) )
 		if (!O.reagents)
 			return 1
 		return // transfer is handled in afterattack
@@ -112,15 +109,15 @@
 		to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [G.affecting] in this [src]."))
 		return 1
 	else if(IS_WRENCH(O))
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] begins [anchored ? "securing" : "unsecuring"] [src]."), \
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins [anchored ? "securing" : "unsecuring"] [src]."),
 			SPAN_NOTICE("You attempt to [anchored ? "secure" : "unsecure"] [src].")
-			)
+		)
 		if (do_after(user,20, src))
 			anchored = !anchored
-			user.visible_message( \
-			SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] [src]."), \
-			SPAN_NOTICE("You [anchored ? "secure" : "unsecure"] [src].")
+			user.visible_message(
+				SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] [src]."),
+				SPAN_NOTICE("You [anchored ? "secure" : "unsecure"] [src].")
 			)
 		else
 			to_chat(user, SPAN_NOTICE("You decide not to do that."))
@@ -130,21 +127,24 @@
 			return 1
 		if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
-			if(S.use(1))
-				new O.type (src)
-				user.visible_message( \
-					SPAN_NOTICE("\The [user] has added one of [O] to \the [src]."), \
-					SPAN_NOTICE("You add one of [O] to \the [src]."))
-				SSnano.update_uis(src)
-			return
-		else
-			if (!user.try_unequip(O, src))
+			if(S.get_amount() > 1)
+				var/obj/item/stack/new_stack = S.split(1)
+				if(new_stack)
+					new_stack.forceMove(src)
+					user.visible_message(
+						SPAN_NOTICE("\The [user] has added \a [new_stack.singular_name] to \the [src]."),
+						SPAN_NOTICE("You add one of [O] to \the [src].")
+					)
+					SSnano.update_uis(src)
 				return
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."), \
-				SPAN_NOTICE("You add \the [O] to \the [src]."))
-			SSnano.update_uis(src)
+		if (!user.try_unequip(O, src))
 			return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."),
+			SPAN_NOTICE("You add \the [O] to \the [src].")
+		)
+		SSnano.update_uis(src)
+		return
 	else
 		to_chat(user, SPAN_WARNING("You have no idea what you can cook with \the [O]."))
 	SSnano.update_uis(src)
@@ -202,18 +202,6 @@
 /***********************************
 *   Microwave Menu Handling/Cooking
 ************************************/
-/obj/machinery/microwave/proc/select_recipe()
-	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
-	var/highest_count = 0
-	for(var/rtype in all_recipes)
-		var/decl/recipe/recipe = all_recipes[rtype]
-		if(!istype(recipe) || !recipe.check_reagents(reagents) || !recipe.check_items(src) || !recipe.check_fruit(src))
-			continue
-		//okay, let's select the most complicated recipe
-		if(recipe.complexity >= highest_count)
-			highest_count = recipe.complexity
-			. = recipe
-
 /obj/machinery/microwave/proc/cook()
 	cook_break = FALSE
 	cook_dirty = FALSE
@@ -228,7 +216,7 @@
 	if (reagents.total_volume && prob(50)) // 50% chance a liquid recipe gets messy
 		dirty += CEILING(reagents.total_volume / 10)
 
-	var/decl/recipe/recipe = select_recipe()
+	var/decl/recipe/recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
 	if (!recipe)
 		failed = TRUE
 		cook_time = update_cook_time()
@@ -241,7 +229,7 @@
 			cook_break = TRUE
 	else
 		failed = FALSE
-		cook_time = update_cook_time(round(recipe.time * 2))
+		cook_time = update_cook_time(round(recipe.cooking_time * 2))
 
 	start()
 
@@ -249,15 +237,19 @@
 	return (ct / cooking_power)
 
 /obj/machinery/microwave/proc/finish_cooking()
-	var/decl/recipe/recipe = select_recipe()
+	var/decl/recipe/recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
 	if(!recipe)
 		return
 	var/result = recipe.result
 	var/list/cooked_items = list()
 	while(recipe)
-		cooked_items += recipe.make_food(src)
-		recipe = select_recipe()
-		if (!recipe || (recipe.result != result))
+		try
+			cooked_items += recipe.produce_result(src)
+			recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
+			if (!recipe || (recipe.result != result))
+				break
+		catch(var/exception/E)
+			PRINT_STACK_TRACE("Runtime when processing microwave recipe spawn: [EXCEPTION_TEXT(E)]")
 			break
 
 	//Any leftover reagents are divided amongst the foods
@@ -286,10 +278,10 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in get_contained_external_atoms())
-		if (!istype(O,/obj/item/chems/food) && !istype(O, /obj/item/grown))
-			return 1
-	return 0
+	for(var/obj/O in get_contained_external_atoms())
+		if(!istype(O,/obj/item/chems/food))
+			return TRUE
+	return FALSE
 
 /obj/machinery/microwave/proc/start()
 	start_time = REALTIMEOFDAY
@@ -350,8 +342,7 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/on_reagent_change()
-	..()
-	if(!operating)
+	if((. = ..()) && !operating)
 		SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/dispose(var/mob/user, var/message = TRUE)
@@ -379,7 +370,7 @@
 	if(!reagents.reagent_volumes[material_type])
 		SSnano.update_uis(src)
 		return // should not happen, must be a UI glitch or href hacking
-	var/obj/item/chems/held_container = user.get_active_hand()
+	var/obj/item/chems/held_container = user.get_active_held_item()
 	var/decl/material/M = GET_DECL(material_type)
 	if(istype(held_container))
 		var/amount_to_move = min(REAGENTS_FREE_SPACE(held_container.reagents), REAGENT_VOLUME(reagents, material_type))

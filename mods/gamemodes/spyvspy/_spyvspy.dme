@@ -1,0 +1,9 @@
+#ifndef GAMEMODE_PACK_SPYVSPY
+#define GAMEMODE_PACK_SPYVSPY
+#include "..\traitor\_traitor.dme"
+// BEGIN_INCLUDE
+#include "_spyvspy.dm"
+#include "gamemode.dm"
+#include "special_role.dm"
+// END_INCLUDE
+#endif

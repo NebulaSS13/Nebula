@@ -246,7 +246,7 @@ var/global/list/all_conveyor_switches = list()
 		id_tag = C.id_tag
 
 /obj/item/conveyor_construct/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || user.incapacitated())
+	if(!proximity || !istype(A, /turf/floor) || user.incapacitated())
 		return
 	var/area/area = get_area(A)
 	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))
@@ -278,7 +278,7 @@ var/global/list/all_conveyor_switches = list()
 	id_tag = sequential_id("conveyor_switch_construct")
 
 /obj/item/conveyor_switch_construct/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || user.incapacitated())
+	if(!proximity || !istype(A, /turf/floor) || user.incapacitated())
 		return
 	var/area/area = get_area(A)
 	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))
@@ -300,7 +300,7 @@ var/global/list/all_conveyor_switches = list()
 	desc = "An one-way conveyor control switch assembly."
 
 /obj/item/conveyor_switch_construct/oneway/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || user.incapacitated())
+	if(!proximity || !istype(A, /turf/floor) || user.incapacitated())
 		return
 	var/area/area = get_area(A)
 	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))

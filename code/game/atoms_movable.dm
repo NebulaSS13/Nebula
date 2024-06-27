@@ -9,7 +9,7 @@
 	var/buckle_allow_rotation = 0
 	var/buckle_layer_above = FALSE
 	var/buckle_dir = 0
-	var/buckle_lying = -1             // bed-like behavior, forces mob.lying = buckle_lying if != -1
+	var/buckle_lying = -1             // bed-like behavior, forces mob to lie or stand if buckle_lying != -1
 	var/buckle_pixel_shift            // ex. @'{"x":0,"y":0,"z":0}' //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 // require people to be cuffed before being able to buckle. eg: pipes
 	var/buckle_require_same_tile = FALSE
@@ -267,6 +267,15 @@
 		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src))
 			SSzcopy.discover_movable(src)
 
+		if(isturf(loc))
+			var/turf/T = loc
+			if(T.reagents)
+				fluid_act(T.reagents)
+
+		for(var/mob/viewer in storage?.storage_ui?.is_seeing)
+			if(!storage.can_view(viewer))
+				storage.close(viewer)
+
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(TRUE)
@@ -274,6 +283,7 @@
 		hit_atom.hitby(src, TT)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, datum/callback/callback) //If this returns FALSE then callback will not be called.
+
 	. = TRUE
 	if (!target || speed <= 0 || QDELETED(src) || (target.z != src.z))
 		return FALSE
@@ -282,6 +292,8 @@
 
 	var/datum/thrownthing/TT = new(src, target, range, speed, thrower, callback)
 	throwing = TT
+
+	storage?.close_all()
 
 	pixel_z = 0
 	if(spin && does_spin)
@@ -359,20 +371,18 @@
 		return TRUE
 
 /atom/movable/proc/buckle_mob(mob/living/M)
+
 	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
 		return FALSE
+
 	if(!istype(M) || (M.loc != loc) || M.buckled || LAZYLEN(M.pinned) || (buckle_require_restraints && !M.restrained()))
 		return FALSE
-	if(ismob(src))
-		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
-		if(M != src && C.incapacitated())
-			return FALSE
 
 	M.buckled = src
 	M.facing_dir = null
 	if(!buckle_allow_rotation)
 		M.set_dir(buckle_dir ? buckle_dir : dir)
-	M.UpdateLyingBuckledAndVerbStatus()
+	M.update_posture()
 	M.update_floating()
 	buckled_mob = M
 
@@ -387,7 +397,7 @@
 		. = buckled_mob
 		buckled_mob.buckled = null
 		buckled_mob.anchored = initial(buckled_mob.anchored)
-		buckled_mob.UpdateLyingBuckledAndVerbStatus()
+		buckled_mob.update_posture()
 		buckled_mob.update_floating()
 		buckled_mob = null
 		post_buckle_mob(.)
@@ -422,15 +432,18 @@
 
 /atom/movable/proc/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] buckles themselves to \the [src]."),\
-			SPAN_NOTICE("You buckle yourself to \the [src]."),\
-			SPAN_NOTICE("You hear metal clanking."))
+		var/decl/pronouns/G = buckled.get_pronouns()
+		visible_message(
+			SPAN_NOTICE("\The [buckled] buckles [G.self] to \the [src]."),
+			SPAN_NOTICE("You buckle yourself to \the [src]."),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 	else
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] is buckled to \the [src] by \the [buckling]!"),\
-			SPAN_NOTICE("You are buckled to \the [src] by \the [buckling]!"),\
-			SPAN_NOTICE("You hear metal clanking."))
+		visible_message(
+			SPAN_NOTICE("\The [buckled] is buckled to \the [src] by \the [buckling]!"),
+			SPAN_NOTICE("You are buckled to \the [src] by \the [buckling]!"),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 
 /atom/movable/proc/user_unbuckle_mob(mob/user)
 	var/mob/living/M = unbuckle_mob()
@@ -442,16 +455,19 @@
 	return M
 
 /atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
-	if(buckled != buckling)
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] was unbuckled by \the [buckling]!"),\
-			SPAN_NOTICE("You were unbuckled from \the [src] by \the [buckling]."),\
-			SPAN_NOTICE("You hear metal clanking."))
+	if(buckled == buckling)
+		var/decl/pronouns/G = buckled.get_pronouns()
+		visible_message(
+			SPAN_NOTICE("\The [buckled] unbuckled [G.self] from \the [src]!"),
+			SPAN_NOTICE("You unbuckle yourself from \the [src]."),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 	else
-		visible_message(\
-			SPAN_NOTICE("\The [buckled] unbuckled themselves!"),\
-			SPAN_NOTICE("You unbuckle yourself from \the [src]."),\
-			SPAN_NOTICE("You hear metal clanking."))
+		visible_message(
+			SPAN_NOTICE("\The [buckled] was unbuckled from \the [src] by \the [buckling]!"),
+			SPAN_NOTICE("You were unbuckled from \the [src] by \the [buckling]."),
+			SPAN_NOTICE("You hear metal clanking.")
+		)
 
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return
@@ -474,10 +490,23 @@
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
 
+// TODO: account for reagents and matter.
+/atom/movable/get_thermal_mass()
+	if(!simulated)
+		return 0
+	return max(ITEM_SIZE_MIN, get_object_size()) * THERMAL_MASS_CONSTANT
+
+/atom/movable/get_thermal_mass_coefficient()
+	if(!simulated)
+		return 0
+	return (max(ITEM_SIZE_MIN, MOB_SIZE_MIN) * THERMAL_MASS_CONSTANT) / get_thermal_mass()
+
 /atom/movable/proc/try_burn_wearer(var/mob/living/holder, var/held_slot, var/delay = 0)
 	set waitfor = FALSE
+
 	if(delay)
 		sleep(delay)
+
 	if(!held_slot || !istype(holder) || QDELETED(holder) || loc != holder)
 		return
 
@@ -517,7 +546,7 @@
 	if(istype(organ))
 		organ.take_external_damage(0, burn_damage)
 	else
-		holder.adjustFireLoss(burn_damage)
+		holder.take_damage(burn_damage, BURN)
 	if(held_slot in holder.get_held_item_slots())
 		holder.drop_from_inventory(src)
 	else
@@ -531,3 +560,5 @@
 		appearance_flags &= ~remove_flags
 	return old_appearance != appearance_flags
 
+/atom/movable/proc/end_throw()
+	throwing = null

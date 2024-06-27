@@ -13,10 +13,12 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
-	// If set, will apply ambient light of this power to turfs under a ceiling.
-	var/interior_ambient_light_level
+	// If true, will allow natural walls in this area to have xenoarchaeology finds in them.
+	var/allow_xenoarchaeology_finds = TRUE
+
+	// If set, will modify ambient light of ambiently lit turfs under a ceiling.
+	var/interior_ambient_light_modifier
 	// If set, will apply ambient light of this colour to turfs under a ceiling.
-	var/interior_ambient_light_color
 
 	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
 	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
@@ -49,6 +51,7 @@ var/global/list/areas = list()
 	var/sound_env = STANDARD_STATION
 	var/description //A text-based description of what this area is for.
 	var/area_blurb_category // Used to filter description showing across subareas
+	var/const/BLURB_COOLDOWN_TIME = 15 MINUTES
 
 	var/base_turf // The base turf type of the area, which can be used to override the z-level's base turf
 	var/open_turf // The base turf of the area if it has a turf below it in multizi. Overrides turf-specific open type
@@ -117,7 +120,7 @@ var/global/list/areas = list()
 	if(old_area == A)
 		return
 
-	var/old_area_ambience = old_area?.interior_ambient_light_level
+	var/old_area_ambience = old_area?.interior_ambient_light_modifier
 
 	A.contents.Add(T)
 	if(old_area)
@@ -137,33 +140,28 @@ var/global/list/areas = list()
 		if(adjacent_turf)
 			adjacent_turf.update_registrations_on_adjacent_area_change()
 
-	T.last_outside_check = OUTSIDE_UNCERTAIN
-	var/outside_changed = T.is_outside() != old_outside
-	if(T.is_outside == OUTSIDE_AREA && outside_changed)
-		T.update_weather()
-		T.update_external_atmos_participation()
+	// Handle updating weather and atmos if the outside status of the turf changed.
+	if(T.is_outside == OUTSIDE_AREA)
+		T.update_external_atmos_participation() // Refreshes outside status and adds exterior air to turf air if necessary.
 
-	if(A.interior_ambient_light_level != old_area_ambience || outside_changed)
+	if(T.is_outside() != old_outside)
+		T.update_weather()
+		SSambience.queued |= T
+	else if(A.interior_ambient_light_modifier != old_area_ambience)
 		SSambience.queued |= T
 
 /turf/proc/update_registrations_on_adjacent_area_change()
 	for(var/obj/machinery/door/firedoor/door in src)
 		door.update_area_registrations()
 
-/area/proc/alert_on_fall(var/mob/living/carbon/human/H)
+/area/proc/alert_on_fall(var/mob/living/human/H)
 	return
-
-/area/proc/get_contents()
-	return contents
 
 /area/proc/get_cameras()
 	var/list/cameras = list()
 	for (var/obj/machinery/camera/C in src)
 		cameras += C
 	return cameras
-
-/area/proc/is_shuttle_locked()
-	return 0
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
@@ -352,7 +350,9 @@ var/global/list/mob/living/forced_ambiance_list = new
 		L.update_floating()
 	if(L.ckey)
 		play_ambience(L)
-		do_area_blurb(L)
+		// If we haven't changed blurb categories, don't send a blurb.
+		if(oldarea?.area_blurb_category != area_blurb_category)
+			do_area_blurb(L)
 	L.lastarea = src
 
 
@@ -366,9 +366,10 @@ var/global/list/mob/living/forced_ambiance_list = new
 		return
 	if(L?.get_preference_value(/datum/client_preference/area_info_blurb) != PREF_YES)
 		return
-	if(!(L.ckey in global.area_blurb_stated_to[area_blurb_category]))
-		LAZYADD(global.area_blurb_stated_to[area_blurb_category], L.ckey)
-		to_chat(L, SPAN_NOTICE(FONT_SMALL("[description]")))
+	var/next_message_time = LAZYACCESS(global.area_blurb_stated_to[area_blurb_category], L.ckey)
+	if(isnull(next_message_time) || world.time > next_message_time)
+		LAZYSET(global.area_blurb_stated_to[area_blurb_category], L.ckey, world.time + BLURB_COOLDOWN_TIME)
+		to_chat(L, SPAN_NOTICE(FONT_SMALL(description)))
 
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
@@ -404,7 +405,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 		return
 
 	if(ishuman(mob))
-		var/mob/living/carbon/human/H = mob
+		var/mob/living/human/H = mob
 		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_ADEPT)))
 			if(!MOVING_DELIBERATELY(H))
 				ADJ_STATUS(H, STAT_STUN, 6)
@@ -419,7 +420,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 		addtimer(CALLBACK(src, PROC_REF(throw_unbuckled_occupant), M, maxrange, speed, direction), 0)
 
 /area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction)
-	if(iscarbon(M))
+	if(isliving(M))
 		if(M.buckled)
 			to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
 			shake_camera(M, 3, 1)
@@ -447,35 +448,10 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /atom/proc/has_gravity()
 	var/area/A = get_area(src)
-	if(A && A.has_gravity())
-		return 1
-	return 0
-
-/mob/has_gravity()
-	if(!lastarea)
-		lastarea = get_area(src)
-	if(!lastarea || !lastarea.has_gravity())
-		return 0
-
-	return 1
+	return A?.has_gravity()
 
 /turf/has_gravity()
-	var/area/A = loc
-	if(A && A.has_gravity())
-		return 1
-	return 0
-
-/area/proc/get_dimensions()
-	var/list/res = list("x"=1,"y"=1)
-	var/list/min = list("x"=world.maxx,"y"=world.maxy)
-	for(var/turf/T in src)
-		res["x"] = max(T.x, res["x"])
-		res["y"] = max(T.y, res["y"])
-		min["x"] = min(T.x, min["x"])
-		min["y"] = min(T.y, min["y"])
-	res["x"] = res["x"] - min["x"] + 1
-	res["y"] = res["y"] - min["y"] + 1
-	return res
+	return loc.has_gravity()
 
 /area/proc/has_turfs()
 	return !!(locate(/turf) in src)

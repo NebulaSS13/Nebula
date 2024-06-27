@@ -9,19 +9,15 @@
 	anchored = TRUE
 	opacity =  TRUE
 
-	var/datum/lock/lock
 	var/has_window = FALSE
 	var/changing_state = FALSE
 	var/icon_base
 	var/door_sound_volume = 25
-	var/connections = 0
 
 /obj/structure/door/Initialize()
 	..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	if(lock)
-		lock = new /datum/lock(src, lock)
 	if(!icon_base)
 		icon_base = material.door_icon_base
 	update_icon()
@@ -39,7 +35,6 @@
 
 /obj/structure/door/Destroy()
 	update_nearby_tiles()
-	QDEL_NULL(lock)
 	return ..()
 
 /obj/structure/door/get_blend_objects()
@@ -53,11 +48,20 @@
 
 /obj/structure/door/update_connections(var/propagate = FALSE)
 	. = ..()
-	if(propagate && isturf(loc))
-		for(var/turf/simulated/wall/W in RANGE_TURFS(loc, 1))
-			W.wall_connections = null
-			W.other_connections = null
-			W.queue_icon_update()
+	if(isturf(loc))
+
+		if(propagate)
+			for(var/turf/wall/W in RANGE_TURFS(loc, 1))
+				W.wall_connections = null
+				W.other_connections = null
+				W.queue_icon_update()
+
+		for(var/turf/wall/W in RANGE_TURFS(loc, 1))
+			var/turf_dir = get_dir(loc, W)
+			if(turf_dir & (turf_dir - 1)) // if diagonal
+				continue // skip diagonals
+			set_dir(turn(get_dir(loc, W), 90))
+			break
 
 /obj/structure/door/get_material_health_modifier()
 	. = 10
@@ -73,12 +77,12 @@
 
 /obj/structure/door/attack_hand(mob/user)
 	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
-		return density ? open() : close()
+		return density ? open(user) : close(user)
 	return ..()
 
-/obj/structure/door/proc/close()
-	set waitfor = 0
-	if(!can_close())
+/obj/structure/door/proc/close(mob/user)
+	set waitfor = FALSE
+	if(!can_close(user))
 		return FALSE
 	flick("[icon_base]_closing", src)
 	playsound(src, material.dooropen_noise, door_sound_volume, 1)
@@ -90,9 +94,9 @@
 	post_change_state()
 	return TRUE
 
-/obj/structure/door/proc/open()
-	set waitfor = 0
-	if(!can_open())
+/obj/structure/door/proc/open(mob/user)
+	set waitfor = FALSE
+	if(!can_open(user))
 		return FALSE
 	flick("[icon_base]_opening", src)
 	playsound(src, material.dooropen_noise, door_sound_volume, 1)
@@ -104,18 +108,19 @@
 	post_change_state()
 	return TRUE
 
-/obj/structure/door/proc/can_open()
-	if(lock && lock.isLocked())
-		return FALSE
+/obj/structure/door/update_lock_overlay()
+	return // TODO
+
+/obj/structure/door/proc/can_open(mob/user)
+	if(lock)
+		try_unlock(user, user?.get_active_held_item())
+		if(lock.isLocked())
+			to_chat(user, SPAN_WARNING("\The [src] is locked."))
+			return FALSE
 	return density && !changing_state
 
 /obj/structure/door/proc/can_close()
 	return !density && !changing_state
-
-/obj/structure/door/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1 && lock)
-		to_chat(user, SPAN_NOTICE("It appears to have a lock."))
 
 /obj/structure/door/attack_ai(mob/living/user)
 	return attack_hand_with_interaction_checks(user)
@@ -131,37 +136,26 @@
 		to_chat(user, SPAN_WARNING("\The [src] must be closed before it can be repaired."))
 		return FALSE
 
+/obj/structure/door/can_install_lock()
+	return TRUE
+
 /obj/structure/door/attackby(obj/item/I, mob/user)
 	add_fingerprint(user, 0, I)
 
 	if((user.a_intent == I_HURT && I.force) || istype(I, /obj/item/stack/material))
 		return ..()
 
-	if(lock)
-		if(istype(I, /obj/item/key))
-			if(lock.toggle(I))
-				to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [I]."))
-			else
-				to_chat(user, SPAN_WARNING("\The [I] does not fit in the lock!"))
-			return TRUE
-		if(lock.pick_lock(I,user))
-			return TRUE
-		if(lock.isLocked())
-			to_chat(user, SPAN_WARNING("\The [src] is locked!"))
+	if(try_key_unlock(I, user))
 		return TRUE
 
-	if(istype(I,/obj/item/lock_construct))
-		if(lock)
-			to_chat(user, SPAN_WARNING("\The [src] already has a lock."))
-		else
-			var/obj/item/lock_construct/L = I
-			lock = L.create_lock(src,user)
-		return
+	if(try_install_lock(I, user))
+		return TRUE
 
 	if(density)
-		open()
+		open(user)
 	else
-		close()
+		close(user)
+	return TRUE
 
 /obj/structure/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group)
@@ -184,7 +178,7 @@
 		var/mob/M = AM
 		if(M.restrained() || issmall(M))
 			return
-	open()
+	open(ismob(AM) ? AM : null)
 
 /obj/structure/door/iron
 	material = /decl/material/solid/metal/iron
@@ -219,12 +213,25 @@
 /obj/structure/door/walnut
 	material = /decl/material/solid/organic/wood/walnut
 
-/obj/structure/door/cult
-	material = /decl/material/solid/stone/cult
-
 /obj/structure/door/wood/saloon
 	material = /decl/material/solid/organic/wood
 	opacity = FALSE
+
+/obj/structure/door/wood/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
+
+/obj/structure/door/wood/saloon/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
+
+/obj/structure/door/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
+	color = /decl/material/solid/organic/wood/walnut::color
+
+/obj/structure/door/wood/saloon/walnut
+	material = /decl/material/solid/organic/wood/walnut
+	color = /decl/material/solid/organic/wood/walnut::color
 
 /obj/structure/door/glass
 	material = /decl/material/solid/glass

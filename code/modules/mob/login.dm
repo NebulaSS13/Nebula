@@ -19,10 +19,10 @@
 					is_multikeying = 1
 				if(matches)
 					if(M.client)
-						message_admins("<font color='red'><B>Notice: </B></font><font color='blue'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.</font>", 1)
+						message_admins("<font color='red'><B>Notice: </B></font><font color='blue'><A href='byond://?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='byond://?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.</font>", 1)
 						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)].")
 					else
-						message_admins("<font color='red'><B>Notice: </B></font><font color='blue'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in). </font>", 1)
+						message_admins("<font color='red'><B>Notice: </B></font><font color='blue'><A href='byond://?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in). </font>", 1)
 						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
 		if(is_multikeying && !client.warned_about_multikeying)
 			client.warned_about_multikeying = 1
@@ -123,4 +123,13 @@
 		for(var/datum/status_marker_holder/marker in global.status_marker_holders)
 			if(marker.mob_image && marker != status_markers)
 				client.images |= marker.mob_image
+
+	for(var/obj/item/gear in get_equipped_items(TRUE))
+		client.screen |= gear
+
+	if(istype(hud_used))
+		hud_used.hidden_inventory_update()
+		hud_used.persistant_inventory_update()
+		update_action_buttons()
+
 	return TRUE

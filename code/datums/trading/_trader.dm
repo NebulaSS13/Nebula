@@ -31,7 +31,7 @@
 
 	// Things they will automatically refuse
 	var/list/blacklisted_trade_items = list(
-		/mob/living/carbon/human
+		/mob/living/human
 	)
 
 /datum/trader/New()
@@ -43,7 +43,7 @@
 		if(istype(L))
 			name = L.get_random_name(pick(MALE,FEMALE))
 	if(!name)
-		name = capitalize(pick(global.first_names_female + global.first_names_male)) + " " + capitalize(pick(global.last_names))
+		name = capitalize(pick(global.using_map.first_names_female + global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 	if(length(possible_origins))
 		origin = pick(possible_origins)
@@ -197,7 +197,7 @@
 /datum/trader/proc/hail(var/mob/user)
 	var/specific
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species)
 			specific = H.species.name
 	else if(issilicon(user))

@@ -15,7 +15,7 @@
 	if((movement_dir & EAST) && (movement_dir & WEST))
 		movement_dir &= ~(EAST|WEST)
 
-	if(!get_config_value(/decl/config/toggle/allow_diagonal_movement))
+	if(!get_config_value(/decl/config/toggle/on/allow_diagonal_movement))
 		if(movement_dir & user.last_move_dir_pressed)
 			movement_dir = user.last_move_dir_pressed
 		else

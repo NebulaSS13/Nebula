@@ -1,0 +1,2 @@
+/mob/living/simple_animal/rabbit/@SUBTYPES : /mob/living/simple_animal/passive/rabbit/@SUBTYPES{@OLD}
+/mob/living/simple_animal/mouse/@SUBTYPES : /mob/living/simple_animal/passive/mouse/@SUBTYPES{@OLD}

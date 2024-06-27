@@ -3,7 +3,7 @@
 	desc = "The culinary base of every self-respecting eloquent gentleman."
 	icon_state = "meatbread"
 	slice_path = /obj/item/chems/food/slice/meatbread
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#ff7575"
 	center_of_mass = @'{"x":19,"y":9}'
 	nutriment_desc = list("bread" = 10)
@@ -13,7 +13,7 @@
 
 /obj/item/chems/food/sliceable/meatbread/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 20)
+	add_to_reagents(/decl/material/solid/organic/meat, 20)
 
 /obj/item/chems/food/slice/meatbread
 	name = "meatbread slice"
@@ -33,7 +33,7 @@
 	desc = "The culinary base of every self-respecting eloquent gentleman. Extra heretical."
 	icon_state = "xenomeatbread"
 	slice_path = /obj/item/chems/food/slice/xenomeatbread
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#8aff75"
 	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 10)
@@ -43,7 +43,7 @@
 
 /obj/item/chems/food/sliceable/xenomeatbread/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 20)
+	add_to_reagents(/decl/material/solid/organic/meat, 20)
 
 /obj/item/chems/food/slice/xenomeatbread
 	name = "xenomeatbread slice"
@@ -63,7 +63,7 @@
 	desc = "A heavenly and filling treat."
 	icon_state = "bananabread"
 	slice_path = /obj/item/chems/food/slice/bananabread
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#ede5ad"
 	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 10)
@@ -93,7 +93,7 @@
 	desc = "Like meatbread but for vegetarians. Not guaranteed to give superpowers."
 	icon_state = "tofubread"
 	slice_path = /obj/item/chems/food/slice/tofubread
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#f7ffe0"
 	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("tofu" = 10)
@@ -119,7 +119,7 @@
 	desc = "Some plain old bread."
 	icon_state = "bread"
 	slice_path = /obj/item/chems/food/slice/bread
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#ffe396"
 	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 6)
@@ -145,7 +145,7 @@
 	desc = "Yum yum yum!"
 	icon_state = "creamcheesebread"
 	slice_path = /obj/item/chems/food/slice/creamcheesebread
-	slices_num = 5
+	slice_num = 5
 	filling_color = "#fff896"
 	center_of_mass = @'{"x":16,"y":9}'
 	nutriment_desc = list("bread" = 6, "cream" = 3, "cheese" = 3)
@@ -155,7 +155,7 @@
 
 /obj/item/chems/food/sliceable/creamcheesebread/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/solid/organic/meat, 15)
 
 /obj/item/chems/food/slice/creamcheesebread
 	name = "cream cheese bread slice"

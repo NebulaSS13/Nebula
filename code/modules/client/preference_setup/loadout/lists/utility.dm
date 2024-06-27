@@ -8,7 +8,7 @@
 
 /decl/loadout_option/utility/briefcase
 	name = "briefcase"
-	path = /obj/item/storage/briefcase
+	path = /obj/item/briefcase
 
 /decl/loadout_option/utility/clipboard
 	name = "clipboard"
@@ -43,7 +43,7 @@
 
 /decl/loadout_option/utility/photo_album
 	name = "photo album"
-	path = /obj/item/storage/photo_album
+	path = /obj/item/photo_album
 
 /decl/loadout_option/utility/film_roll
 	name = "film roll"

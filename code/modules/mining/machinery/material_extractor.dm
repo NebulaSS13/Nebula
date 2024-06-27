@@ -94,9 +94,8 @@
 				break
 
 /obj/machinery/material_processing/extractor/on_reagent_change()
-	..()
 
-	if(!reagents)
+	if(!(. = ..()) || !reagents)
 		return
 
 	var/adjusted_reagents = FALSE

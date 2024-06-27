@@ -17,13 +17,13 @@
 /obj/item/scanner/autopsy/is_valid_scan_target(atom/O)
 	return ishuman(O) || istype(O, /obj/item/organ/external)
 
-/obj/item/scanner/autopsy/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
+/obj/item/scanner/autopsy/do_surgery(mob/living/M, mob/living/user, fuckup_prob)
 	if(istype(M))
 		scan(M,user)
 
 /obj/item/scanner/autopsy/scan(atom/A, mob/user)
 	if(ishuman(A))
-		var/mob/living/carbon/human/M = A
+		var/mob/living/human/M = A
 		set_target(M, user)
 		timeofdeath = M.timeofdeath
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.get_target_zone())
@@ -34,20 +34,20 @@
 			visible_message(SPAN_WARNING("[src] states, 'The access incision is missing.'"))
 			return
 
-		add_data(S)
+		add_autopsy_data(S)
 		for(var/T in M.chem_doses)
 			var/decl/material/R = T
 			chemtraces |= initial(R.name)
 
 	else if(istype(A, /obj/item/organ/external))
 		set_target(A, user)
-		add_data(A)
+		add_autopsy_data(A)
 
 	scan_title = "Autopsy Report ([target_name])"
 	scan_data = get_formatted_data()
 	playsound(src, 'sound/effects/fastbeep.ogg', 10)
 
-/obj/item/scanner/autopsy/proc/add_data(var/obj/item/organ/external/O)
+/obj/item/scanner/autopsy/proc/add_autopsy_data(var/obj/item/organ/external/O)
 	if(!length(O.autopsy_data))
 		return
 

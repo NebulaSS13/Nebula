@@ -4,7 +4,7 @@
 	name = "reactive teleport armor"
 	desc = "Someone separated our Chief Science Officer from their own head!"
 	icon_state = ICON_STATE_WORLD
-	icon = 'icons/clothing/suit/armor/reactive.dmi'
+	icon = 'icons/clothing/suits/armor/reactive.dmi'
 	blood_overlay_type = "armor"
 	armor = null
 	var/active = 0

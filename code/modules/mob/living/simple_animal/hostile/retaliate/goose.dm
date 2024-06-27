@@ -12,12 +12,7 @@
 	faction = "geese"
 	pry_time = 8 SECONDS
 	break_stuff_probability = 5
-
-	meat_type = /obj/item/chems/food/meat/chicken/game
-	meat_amount = 6
-	bone_amount = 8
-	skin_amount = 8
-	skin_material = /decl/material/solid/organic/skin/feathers
+	butchery_data = /decl/butchery_data/animal/small/fowl/goose
 
 	var/enrage_potency = 3
 	var/enrage_potency_loose = 4
@@ -30,7 +25,7 @@
 	gender = PLURAL
 	attack_verb = list("smacked around")
 	force = 0
-	damtype = BRUTE
+	atom_damage_type =  BRUTE
 	canremove = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/goose/Retaliate()
@@ -55,8 +50,8 @@
 	if(!loose && prob(25) && (attacking_with && attacking_with.force >= loose_threshold)) //second wind
 		loose = TRUE
 		set_max_health(initial(max_health) * 1.5)
-		setBruteLoss(0)
-		setFireLoss(0)
+		set_damage(BRUTE, 0)
+		set_damage(BURN, 0)
 		enrage_potency = enrage_potency_loose
 		desc += " The [name] is loose! Oh no!"
 		update_icon()
@@ -69,4 +64,4 @@
 	enrage_potency = 3
 	loose_threshold = 20
 	max_damage = 35
-	skull_type = /obj/item/pen/fancy/quill
+	butchery_data = /decl/butchery_data/animal/small/fowl/goose/dire

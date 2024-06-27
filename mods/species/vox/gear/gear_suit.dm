@@ -1,4 +1,4 @@
-/obj/item/clothing/suit/space/void/Initialize()
+/obj/item/clothing/suit/space/void/setup_equip_flags()
 	. = ..()
 	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
 		bodytype_equip_flags |= BODY_FLAG_VOX

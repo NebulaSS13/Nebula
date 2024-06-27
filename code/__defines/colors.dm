@@ -98,7 +98,7 @@
 #define COLOR_ROYAL_BLUE       "#0033ff"
 #define COLOR_VERDANT_GREEN    "#287d00"
 #define COLOR_SCIENCE_PURPLE   "#6633cc"
-
+#define COLOR_DAYLIGHT         "#f3e6ca"
 
 #define PIPE_COLOR_GREY        "#808080"
 #define PIPE_COLOR_RED         "#ff0000"
@@ -148,7 +148,7 @@ var/global/list/telecomms_colours = list(
 #define WOOD_COLOR_RICH        "#792f27"
 #define WOOD_COLOR_PALE        "#d2bc9d"
 #define WOOD_COLOR_PALE2       "#e6d2ba"
-#define WOOD_COLOR_BLACK       "#332521"
+#define WOOD_COLOR_BLACK       "#39342c"
 #define WOOD_COLOR_CHOCOLATE   "#543c30"
 #define WOOD_COLOR_YELLOW      "#e3994e"
 

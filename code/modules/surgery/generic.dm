@@ -51,7 +51,7 @@
 	user.visible_message("<span class='notice'>[user] has made [access_string] on [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have made [access_string] on [target]'s [affected.name] with \the [tool].</span>",)
 	affected.createwound(CUT, CEILING(affected.min_broken_damage/2), TRUE)
-	if(tool.damtype == BURN)
+	if(tool.atom_damage_type == BURN)
 		affected.clamp_organ()
 		playsound(target, 'sound/items/Welder.ogg', 15, 1)
 	else

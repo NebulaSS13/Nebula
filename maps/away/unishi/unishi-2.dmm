@@ -3,45 +3,45 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/library)
 "ac" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/library)
 "ad" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/space)
 "ae" = (
 /obj/structure/table/woodentable,
 /obj/random/advdevice,
 /obj/item/flashlight/lamp,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "af" = (
 /obj/structure/bed/chair/comfy/brown{
 	dir = 8
 	},
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "ah" = (
 /obj/structure/bed/chair/comfy/brown{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "ai" = (
 /obj/structure/table/woodentable,
 /obj/item/flashlight/lamp,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "aj" = (
 /obj/machinery/vending/coffee,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "ak" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/unishi/library)
 "al" = (
 /obj/machinery/power/apc{
@@ -53,13 +53,13 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "am" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "an" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -67,18 +67,18 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "ao" = (
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "ap" = (
 /obj/machinery/fabricator/book,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "ar" = (
 /obj/structure/bookcase/manuals/engineering,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "as" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -86,11 +86,11 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "at" = (
 /obj/structure/bookcase/manuals/medical,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "au" = (
 /obj/machinery/light{
@@ -101,21 +101,21 @@
 	pixel_x = -23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "av" = (
 /obj/structure/bookcase,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "aw" = (
 /obj/structure/bookcase/manuals/xenoarchaeology,
-/turf/simulated/floor/carpet/red,
+/turf/floor/carpet/red,
 /area/unishi/library)
 "ax" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/chem)
 "ay" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/unishi/chem)
 "az" = (
 /obj/machinery/door/airlock/glass/research,
@@ -124,7 +124,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/library)
 "aA" = (
 /obj/structure/closet/secure_closet/chemical{
@@ -141,7 +141,7 @@
 	pixel_x = -23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -150,7 +150,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aC" = (
 /obj/machinery/power/apc{
@@ -167,7 +167,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aD" = (
 /obj/machinery/door/airlock/glass/research{
@@ -183,7 +183,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/chem)
 "aE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -195,7 +195,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "aF" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -211,40 +211,40 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled/white/monotile,
+/turf/floor/tiled/white/monotile,
 /area/unishi/common)
 "aG" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/common)
 "aH" = (
 /obj/structure/table,
 /obj/item/stock_parts/circuitboard/solar_control,
 /obj/item/bot_kit,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "aI" = (
 /obj/structure/table,
 /obj/item/integrated_circuit/converter/text2num,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "aJ" = (
 /obj/structure/table,
 /obj/item/stock_parts/circuitboard/helm,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "aK" = (
 /obj/structure/table,
 /obj/item/stock_parts/circuitboard/robotics,
 /obj/item/stock_parts/circuitboard/protolathe,
 /obj/item/stock_parts/circuitboard/helm,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "aL" = (
 /obj/machinery/smartfridge/chemistry,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aM" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aN" = (
 /obj/item/chems/chem_disp_cartridge/acetone,
@@ -252,19 +252,19 @@
 /obj/item/chems/chem_disp_cartridge/eyedrops,
 /obj/structure/rack,
 /obj/item/chems/syringe/antitoxin,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aO" = (
 /obj/structure/sign/department/chemistry{
 	dir = 4
 	},
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/chem)
 "aP" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "aQ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -274,7 +274,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "aR" = (
 /obj/structure/closet/crate/secure/biohazard,
@@ -282,29 +282,29 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "aT" = (
 /obj/machinery/chemical_dispenser/full,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aU" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "aV" = (
 /obj/structure/table/reinforced,
 /obj/item/chems/spray/cleaner,
 /obj/item/chems/dropper,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/chem)
 "aW" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "aX" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -314,24 +314,24 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "aY" = (
 /obj/machinery/door/airlock/glass/research{
 	dir = 4;
 	icon_state = "closed"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "aZ" = (
 /obj/structure/closet/crate/secure/explosives,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "ba" = (
 /obj/structure/closet/secure_closet/scientist{
 	req_access = newlist()
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bb" = (
 /obj/structure/bed/chair/office/dark{
@@ -341,7 +341,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "bc" = (
 /obj/machinery/alarm{
@@ -349,13 +349,13 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "bd" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/chem)
 "be" = (
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -363,53 +363,53 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bg" = (
 /obj/structure/closet/crate/hydroponics,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bh" = (
 /obj/structure/closet/crate/hydroponics/beekeeping,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bi" = (
 /obj/structure/closet/crate/rcd,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bj" = (
 /obj/machinery/chem_master,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "bk" = (
 /obj/structure/table/reinforced,
 /obj/item/chems/glass/beaker/large,
 /obj/item/chems/glass/beaker/advanced,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "bl" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/unishi/common)
 "bm" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/unishi/classroom)
 "bn" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/classroom)
 "bo" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bp" = (
 /obj/structure/railing/mapped,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bq" = (
 /obj/structure/stairs/long/east,
 /obj/structure/railing/mapped,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "br" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -418,7 +418,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -427,11 +427,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bt" = (
 /obj/structure/bed/chair,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bu" = (
 /obj/machinery/power/apc{
@@ -443,26 +443,26 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bv" = (
 /obj/structure/bed/chair,
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bw" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/classroom)
 "bx" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "by" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -477,7 +477,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -489,7 +489,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -502,7 +502,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bB" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -517,7 +517,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -529,14 +529,14 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bE" = (
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bG" = (
 /obj/structure/closet/firecloset,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bH" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -548,7 +548,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bI" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -557,7 +557,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bJ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -568,7 +568,7 @@
 	dir = 8;
 	pixel_x = 32
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bK" = (
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
@@ -581,7 +581,7 @@
 	icon_state = "16-0"
 	},
 /obj/structure/cable/yellow,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bL" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{
@@ -597,18 +597,18 @@
 /area/unishi/common)
 "bO" = (
 /obj/machinery/floodlight,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bP" = (
 /obj/item/flashlight/upgraded,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bQ" = (
 /obj/structure/table,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -617,7 +617,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bS" = (
 /obj/structure/table,
@@ -627,7 +627,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -636,7 +636,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bU" = (
 /obj/machinery/door/airlock/glass/research{
@@ -649,7 +649,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/classroom)
 "bV" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -661,7 +661,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "bW" = (
 /obj/machinery/alarm{
@@ -669,35 +669,35 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bX" = (
 /obj/machinery/portable_atmospherics/canister/hydrogen,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bY" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "bZ" = (
 /obj/machinery/portable_atmospherics/canister/sleeping_agent,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "ca" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "cb" = (
 /obj/structure/table,
 /obj/random/powercell,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "cc" = (
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "cd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -708,19 +708,19 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "ce" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "cf" = (
 /obj/machinery/portable_atmospherics/canister/chlorine,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "cg" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "ch" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -732,7 +732,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "ci" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -741,7 +741,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "cj" = (
 /obj/machinery/door/airlock/glass/research{
@@ -754,7 +754,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "ck" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -763,7 +763,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "cl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -772,13 +772,13 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "cm" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "cn" = (
 /obj/machinery/computer/modular/telescreen/preset/generic{
@@ -787,29 +787,29 @@
 /obj/structure/table/glass,
 /obj/item/pen/green,
 /obj/item/paper_bin,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
 /obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/classroom)
 "cp" = (
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "cq" = (
 /obj/structure/tank_rack,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "cr" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/meeting)
 "cs" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/unishi/meeting)
 "ct" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/meeting)
 "cu" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -819,33 +819,33 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "cv" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "cw" = (
 /obj/structure/sign/warning/biohazard,
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/toxins)
 "cx" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/toxins)
 "cy" = (
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/unishi/toxins)
 "cz" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cA" = (
 /obj/structure/bed/chair/office/comfy/black,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cB" = (
 /obj/machinery/power/apc{
@@ -858,14 +858,14 @@
 	icon_state = "0-4"
 	},
 /obj/structure/closet/crate/bin,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cC" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/meeting)
 "cD" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -882,7 +882,7 @@
 	icon_state = "1-4"
 	},
 /obj/structure/closet/crate/bin,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "cE" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -891,7 +891,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "cF" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -902,7 +902,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/toxins)
 "cG" = (
 /obj/machinery/atmospherics/portables_connector{
@@ -921,71 +921,71 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "cH" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "cI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/unishi/toxins)
 "cJ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/toxins)
 "cK" = (
 /obj/machinery/door/blast/regular{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/toxins)
 "cL" = (
 /obj/machinery/door/blast/regular{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "cM" = (
 /obj/structure/bed/chair/office/comfy/black{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cN" = (
 /obj/structure/table/woodentable,
 /obj/item/paper_bin,
 /obj/item/pen/fancy,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cO" = (
 /obj/structure/table/woodentable,
 /obj/item/pen/fancy,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cP" = (
 /obj/structure/table/woodentable,
 /obj/item/folder/yellow,
 /obj/item/pen/green,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cQ" = (
 /obj/effect/floor_decal/cti,
-/turf/simulated/floor/tiled/white/monotile,
+/turf/floor/tiled/white/monotile,
 /area/unishi/meeting)
 "cR" = (
 /obj/machinery/door/airlock/glass/research{
 	dir = 4;
 	icon_state = "closed"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/meeting)
 "cS" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -993,25 +993,25 @@
 	dir = 4;
 	id_tag = "prototype_chamber_blast"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/toxins)
 "cT" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "cU" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "cV" = (
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/toxins)
 "cW" = (
 /obj/structure/bed/chair/office/comfy/black{
@@ -1020,7 +1020,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cX" = (
 /obj/structure/table/woodentable,
@@ -1030,7 +1030,7 @@
 /obj/random/clipboard,
 /obj/item/folder/cyan,
 /obj/item/pen/reagent/sleepy,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cY" = (
 /obj/structure/table/woodentable,
@@ -1039,7 +1039,7 @@
 	},
 /obj/item/folder/yellow,
 /obj/item/pen/green,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "cZ" = (
 /obj/structure/table/woodentable,
@@ -1051,7 +1051,7 @@
 	},
 /obj/item/folder/yellow,
 /obj/item/pen/green,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "da" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1060,7 +1060,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "db" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -1070,24 +1070,24 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/meeting)
 "dc" = (
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dd" = (
 /obj/machinery/vending/bombresearch,
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "de" = (
 /obj/machinery/door/airlock/glass/science,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/toxins)
 "df" = (
 /obj/structure/bed/chair/office/comfy/black{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "dg" = (
 /obj/structure/bed/chair/office/comfy/black{
@@ -1098,14 +1098,14 @@
 	pixel_y = -22;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "dh" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/meeting)
 "di" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/meeting)
 "dj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1114,7 +1114,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "dk" = (
 /obj/machinery/door/blast/regular/open{
@@ -1131,7 +1131,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/toxins)
 "dl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1140,7 +1140,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dm" = (
 /obj/structure/closet/bombcloset,
@@ -1150,7 +1150,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dn" = (
 /obj/item/transfer_valve,
@@ -1159,23 +1159,23 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/floor/tiled/techmaint,
 /area/unishi/toxins)
 "do" = (
 /obj/structure/sign/warning/fire{
 	dir = 8;
 	pixel_x = 32
 	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/floor/tiled/techmaint,
 /area/unishi/toxins)
 "dp" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/toxins)
 "dq" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/rnd)
 "dr" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/unishi/rnd)
 "ds" = (
 /obj/machinery/door/blast/regular/open{
@@ -1183,11 +1183,11 @@
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/toxins)
 "dt" = (
 /obj/machinery/light,
-/turf/simulated/floor/tiled/steel_grid,
+/turf/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "du" = (
 /obj/machinery/alarm{
@@ -1195,10 +1195,10 @@
 	pixel_y = -22;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/floor/tiled/techmaint,
 /area/unishi/toxins)
 "dv" = (
-/turf/simulated/floor/tiled/techmaint,
+/turf/floor/tiled/techmaint,
 /area/unishi/toxins)
 "dw" = (
 /obj/effect/shuttle_landmark/nav_unishi/nav2,
@@ -1206,23 +1206,23 @@
 /area/space)
 "dx" = (
 /obj/machinery/computer/modular/preset/aislot/research,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dy" = (
 /obj/machinery/computer/modular/preset/aislot/research,
 /obj/random/smokes,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dz" = (
 /obj/machinery/fabricator,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dA" = (
 /obj/machinery/design_database,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dB" = (
 /obj/machinery/power/apc{
@@ -1234,14 +1234,14 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dC" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/rnd)
 "dD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1252,44 +1252,44 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "dE" = (
 /obj/structure/closet/crate/bin,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "dF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 6
 	},
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/toxins)
 "dG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 4
 	},
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/toxins)
 "dH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
 	dir = 1
 	},
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/toxins)
 "dI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 10
 	},
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/toxins)
 "dJ" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/hydro)
 "dK" = (
 /obj/structure/bed/chair/office{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dL" = (
 /obj/structure/bed/chair/office{
@@ -1298,7 +1298,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1307,7 +1307,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dN" = (
 /obj/structure/bed/chair/office{
@@ -1319,7 +1319,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1328,7 +1328,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dP" = (
 /obj/machinery/door/airlock/glass/research{
@@ -1342,7 +1342,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/rnd)
 "dQ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1357,7 +1357,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "dR" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -1365,7 +1365,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/hydro)
 "dS" = (
 /obj/machinery/atmospherics/valve,
@@ -1379,12 +1379,12 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "dT" = (
 /obj/effect/vine,
 /obj/machinery/vending/hydronutrients,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "dU" = (
 /obj/effect/vine,
@@ -1392,30 +1392,30 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "dV" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "dW" = (
 /obj/effect/wingrille_spawn/reinforced/full,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/hydro)
 "dX" = (
 /obj/machinery/fabricator/imprinter,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dY" = (
 /obj/machinery/destructive_analyzer,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "dZ" = (
 /obj/machinery/fabricator/protolathe,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "ea" = (
 /obj/structure/table/glass,
@@ -1429,15 +1429,15 @@
 /obj/item/stack/material/ingot/mapped/silver/ten,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "eb" = (
 /obj/machinery/fabricator/replicator,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/rnd)
 "ec" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/rnd)
 "ed" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1447,30 +1447,30 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "ee" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "ef" = (
 /obj/machinery/smartfridge,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/hydro)
 "eg" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eh" = (
 /obj/machinery/atmospherics/valve{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "ei" = (
 /obj/effect/vine,
@@ -1478,36 +1478,36 @@
 	dir = 1
 	},
 /obj/item/seeds/quantumatoseed,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "ej" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "ek" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "el" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/xenobio)
 "em" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/xenobio)
 "en" = (
 /obj/structure/sign/warning/biohazard,
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/xenobio)
 "eo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "ep" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -1515,7 +1515,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/hydro)
 "eq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
@@ -1524,7 +1524,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "er" = (
 /obj/effect/vine,
@@ -1532,45 +1532,45 @@
 	dir = 8;
 	icon_state = "freezer"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "es" = (
 /mob/living/slime,
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
-/turf/simulated/floor/reinforced,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "et" = (
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
-/turf/simulated/floor/reinforced,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "eu" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "ev" = (
 /obj/structure/table/glass,
 /obj/item/scanner/xenobio,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/random/smokes,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "ew" = (
 /obj/structure/table/glass,
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -1580,7 +1580,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "ex" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -1588,50 +1588,50 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/xenobio)
 "ey" = (
 /obj/item/seeds/random,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "ez" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/hydro)
 "eA" = (
 /obj/machinery/atmospherics/valve{
 	dir = 8
 	},
 /obj/item/seeds/random,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eB" = (
 /mob/living/slime,
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
-/turf/simulated/floor/reinforced,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "eC" = (
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/mob/living/carbon/human/monkey,
-/mob/living/carbon/human/monkey,
-/turf/simulated/floor/reinforced,
+/mob/living/human/monkey,
+/mob/living/human/monkey,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "eD" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "eE" = (
 /obj/machinery/smartfridge/secure/extract,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "eF" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/structure/sign/department/xenobio_3,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/xenobio)
 "eG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1640,7 +1640,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "eH" = (
 /obj/machinery/door/airlock/glass/research{
@@ -1651,7 +1651,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/hydro)
 "eI" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
@@ -1660,41 +1660,41 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eJ" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/unary/heater{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eK" = (
 /obj/item/sign/diploma/fake/medical,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/xenobio)
 "eL" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "eM" = (
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "eN" = (
 /obj/structure/closet/crate/bin,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "eO" = (
 /obj/machinery/optable,
 /obj/item/scalpel,
 /obj/item/circular_saw,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "eP" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -1702,7 +1702,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/xenobio)
 "eQ" = (
 /obj/effect/vine,
@@ -1711,7 +1711,7 @@
 	},
 /obj/item/seeds/random,
 /obj/item/seeds/random,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eR" = (
 /obj/effect/vine,
@@ -1724,7 +1724,7 @@
 /obj/item/seeds/random,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eS" = (
 /obj/effect/vine,
@@ -1734,19 +1734,19 @@
 /obj/item/seeds/random,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eT" = (
 /obj/machinery/botany/editor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "eU" = (
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "eV" = (
 /obj/machinery/door/window/eastleft,
 /obj/machinery/door/window/westleft,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/unishi/xenobio)
 "eW" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1757,7 +1757,7 @@
 	pixel_y = -22;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "eX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1766,7 +1766,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "eY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1775,7 +1775,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/xenobio)
 "eZ" = (
 /obj/machinery/door/airlock/glass/research{
@@ -1789,11 +1789,11 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/xenobio)
 "fa" = (
 /obj/machinery/vending/snack,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fb" = (
 /obj/effect/vine,
@@ -1801,7 +1801,7 @@
 	dir = 5
 	},
 /obj/machinery/seed_extractor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "fc" = (
 /obj/effect/vine,
@@ -1809,7 +1809,7 @@
 	dir = 4
 	},
 /obj/structure/reagent_dispensers/watertank,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "fd" = (
 /obj/effect/vine,
@@ -1828,7 +1828,7 @@
 	pixel_y = -22;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "fe" = (
 /obj/effect/vine,
@@ -1836,11 +1836,11 @@
 /obj/item/seeds/random,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "ff" = (
 /obj/machinery/botany/extractor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/unishi/hydro)
 "fg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1849,10 +1849,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fh" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/common)
 "fi" = (
 /obj/structure/flora/pottedplant/overgrown,
@@ -1864,7 +1864,7 @@
 	pixel_x = -23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1873,7 +1873,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1885,7 +1885,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fl" = (
 /obj/machinery/power/apc{
@@ -1903,7 +1903,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fm" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
@@ -1914,7 +1914,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fn" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1923,7 +1923,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fo" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1932,60 +1932,60 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fp" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "fq" = (
 /obj/machinery/door/airlock/science,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "fr" = (
 /obj/structure/sign/warning/radioactive{
 	dir = 4
 	},
-/turf/simulated/wall,
+/turf/wall,
 /area/unishi/common)
 "fs" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "ft" = (
 /obj/machinery/door/airlock/science,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/common)
 "fu" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor,
+/turf/floor,
 /area/space)
 "fv" = (
 /obj/structure/flora/pottedplant/aquatic,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fx" = (
 /obj/machinery/computer/log_printer/prof1,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fy" = (
 /obj/structure/table/woodentable,
 /obj/random/snack,
 /obj/item/flashlight/lamp,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fz" = (
 /obj/machinery/computer/log_printer/prof2,
@@ -1993,44 +1993,44 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fA" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/plantspray/weeds,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fB" = (
 /obj/structure/bed/chair/office/comfy/black{
 	dir = 4
 	},
 /obj/machinery/light,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fC" = (
 /obj/structure/table/woodentable,
 /obj/item/paper_bin,
 /obj/item/flashlight/lamp,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fD" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fE" = (
 /obj/structure/bed/chair/office/comfy/black{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fF" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
 /obj/machinery/light,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2039,7 +2039,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/white/monotile,
+/turf/floor/tiled/white/monotile,
 /area/unishi/common)
 "fH" = (
 /obj/structure/bed/chair/office/comfy/black{
@@ -2048,27 +2048,28 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fI" = (
 /obj/machinery/light,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fJ" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/plantspray/weedkiller,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/common)
 "fK" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/smresearch)
 "fL" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/unishi/smresearch)
 "fM" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
+
 	},
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2078,23 +2079,23 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/warning/fulltile,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "fN" = (
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/unishi/smresearch)
 "fO" = (
 /obj/structure/sign/warning/radioactive{
 	dir = 4
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/unishi/smresearch)
 "fP" = (
 /obj/structure/closet/radiation,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2105,7 +2106,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fR" = (
 /obj/machinery/power/apc{
@@ -2117,7 +2118,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fS" = (
 /obj/structure/closet/radiation,
@@ -2129,7 +2130,7 @@
 	pixel_x = -23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fT" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2141,28 +2142,28 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fU" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /obj/structure/closet/crate/bin,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fV" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /obj/item/remains,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "fW" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen,
 /obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "fX" = (
 /obj/machinery/atmospherics/portables_connector,
@@ -2170,7 +2171,7 @@
 	dir = 4
 	},
 /obj/item/remains,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "fY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2179,53 +2180,54 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/unishi/smresearch)
 "fZ" = (
 /obj/machinery/atmospherics/unary/tank/air,
 /obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "ga" = (
 /obj/machinery/atmospherics/unary/tank/carbon_dioxide,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gb" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen,
 /obj/machinery/light/small,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gc" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gd" = (
 /obj/machinery/atmospherics/unary/tank/oxygen,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "ge" = (
 /obj/structure/closet/crate/secure/large/supermatter/experimentalsm,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gf" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
+
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gg" = (
 /obj/item/remains,
-/obj/item/clothing/under/chief_engineer,
+/obj/item/clothing/jumpsuit/chief_engineer,
 /obj/random/shoes,
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gh" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
@@ -2234,7 +2236,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gi" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
@@ -2243,7 +2245,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gj" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
@@ -2252,30 +2254,30 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gk" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/structure/window/borosilicate_reinforced,
 /obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gl" = (
 /obj/machinery/atmospherics/binary/pump/high_power/on{
 	target_pressure = 15000
 	},
 /obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gm" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/structure/window/borosilicate_reinforced,
 /obj/item/remains,
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
 /obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gn" = (
 /turf/space,
@@ -2283,18 +2285,18 @@
 "go" = (
 /obj/effect/decal/cleanable/vomit,
 /obj/item/defibrillator,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gp" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 5
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
 /obj/item/remains,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gr" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
@@ -2305,7 +2307,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gs" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
@@ -2313,16 +2315,16 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gt" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gu" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/yellow,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gv" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
@@ -2330,9 +2332,10 @@
 	},
 /obj/machinery/button/mass_driver{
 	id_tag = "unishi_sm_eject";
-	pixel_x = 24
+	pixel_x = 24;
+	dir = 8
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gw" = (
 /obj/structure/lattice,
@@ -2343,9 +2346,10 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
+
 	},
 /obj/item/remains,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gy" = (
 /obj/item/remains,
@@ -2353,7 +2357,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2362,7 +2366,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2371,10 +2375,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gB" = (
 /obj/item/remains,
@@ -2387,7 +2391,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gC" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -2404,7 +2408,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -2418,7 +2422,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -2430,9 +2434,9 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
+/obj/item/clothing/suit/toggle/labcoat/genetics,
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gF" = (
 /obj/machinery/emitter/anchored/on,
@@ -2445,7 +2449,7 @@
 /obj/machinery/power/terminal,
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gG" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -2453,22 +2457,23 @@
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "unishi_eject";
-	pixel_x = 22
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/smresearch)
 "gI" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 4
 	},
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/smresearch)
 "gJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -2487,7 +2492,9 @@
 "gL" = (
 /obj/effect/decal/cleanable/ash,
 /obj/effect/decal/cleanable/blood,
-/obj/item/clothing/under/blazer,
+/obj/item/clothing/shirt/button,
+/obj/item/clothing/neck/tie/navy,
+/obj/item/clothing/suit/jacket/blazer,
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 4;
 	icon_state = "console"
@@ -2495,31 +2502,32 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gM" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/remains,
 /obj/random/shoes,
-/obj/item/clothing/under/pj/blue,
-/turf/simulated/floor/tiled/techfloor,
+/obj/item/clothing/pants/pj/blue,
+/obj/item/clothing/shirt/pj/blue,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gN" = (
-/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
+/obj/item/clothing/suit/toggle/labcoat/chemist,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
+/obj/item/clothing/suit/toggle/labcoat/cmoalt,
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gP" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
@@ -2538,14 +2546,14 @@
 	sensor_name = "Engine Core";
 	sensor_tag = "engine_sensor"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gQ" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gR" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
@@ -2553,18 +2561,18 @@
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gS" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gT" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "gU" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -2582,11 +2590,11 @@
 /area/space)
 "gW" = (
 /obj/structure/sign/warning/radioactive,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/smresearch)
 "gX" = (
 /obj/item/remains,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gY" = (
 /obj/item/paper/crumpled/bloody{
@@ -2594,21 +2602,21 @@
 	},
 /obj/item/usedcryobag,
 /obj/item/clothing/suit/space/void/medical,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gZ" = (
 /obj/item/geiger,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "ha" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hb" = (
 /obj/item/book/manual/engineering_construction,
@@ -2617,17 +2625,17 @@
 	dir = 4;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hc" = (
 /obj/machinery/door/airlock/hatch{
 	dir = 8
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "hd" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/turf/simulated/floor/reinforced/nitrogen/engine,
+/turf/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "he" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -2643,13 +2651,13 @@
 	use_power = 1;
 	volume_rate = 700
 	},
-/turf/simulated/floor/reinforced/nitrogen/engine,
+/turf/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "hf" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/turf/simulated/floor/reinforced/nitrogen/engine,
+/turf/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "hg" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -2661,21 +2669,21 @@
 "hh" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/remains,
-/obj/item/clothing/suit/storage/toggle/labcoat/science{
+/obj/item/clothing/suit/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hi" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/remains,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hj" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hk" = (
 /obj/machinery/atmospherics/omni/filter{
@@ -2684,7 +2692,7 @@
 	tag_south = 2;
 	tag_west = 6
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hl" = (
 /obj/machinery/atmospherics/omni/filter{
@@ -2696,14 +2704,14 @@
 	dir = 4;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hm" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "hn" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
@@ -2717,7 +2725,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/nitrogen/engine,
+/turf/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "ho" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
@@ -2727,26 +2735,27 @@
 /obj/machinery/mass_driver{
 	id_tag = "unishi_sm_eject"
 	},
-/turf/simulated/floor/reinforced/nitrogen/engine,
+/turf/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "hp" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
+
 	},
 /obj/item/remains,
 /obj/random/shoes,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "hq" = (
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hr" = (
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hs" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
@@ -2754,67 +2763,67 @@
 /obj/random/shoes,
 /obj/machinery/light/small,
 /obj/item/remains,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "ht" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hu" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 5
 	},
-/turf/simulated/floor/reinforced/nitrogen/engine,
+/turf/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "hv" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
-/turf/simulated/floor/reinforced/nitrogen/engine,
+/turf/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "hw" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/smresearch)
 "hx" = (
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "hy" = (
 /obj/machinery/door/blast/regular{
 	id_tag = "unishi_eject"
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/floor/reinforced/nitrogen,
 /area/unishi/smresearch)
 "hz" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/unishi/smresearch)
 "hA" = (
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "hB" = (
 /obj/item/remains,
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "hC" = (
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/unishi/smresearch)
 "hD" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/smresearch)
 "hE" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/unishi/smresearch)
 "hF" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -2833,16 +2842,16 @@
 "qW" = (
 /obj/structure/table,
 /obj/machinery/reagent_temperature,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "xD" = (
 /obj/machinery/reagentgrinder,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 "OW" = (
 /obj/structure/table,
 /obj/machinery/reagent_temperature/cooler,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/unishi/chem)
 
 (1,1,1) = {"

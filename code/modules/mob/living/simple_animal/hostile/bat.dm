@@ -34,17 +34,10 @@
 		return 0
 	return ..()
 
-/mob/living/simple_animal/hostile/scarybat/AttackingTarget()
+/mob/living/simple_animal/hostile/scarybat/attack_target(mob/target)
 	. =..()
 	var/mob/living/L = .
 	if(istype(L))
 		if(prob(15))
 			SET_STATUS_MAX(L, STAT_STUN, 1)
 			L.visible_message("<span class='danger'>\the [src] scares \the [L]!</span>")
-
-/mob/living/simple_animal/hostile/scarybat/cult
-	faction = "cult"
-	supernatural = 1
-
-/mob/living/simple_animal/hostile/scarybat/cult/on_defilement()
-	return

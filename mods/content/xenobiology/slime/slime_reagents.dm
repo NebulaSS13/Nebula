@@ -15,9 +15,9 @@
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/water/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	..()
+	. = ..()
 	if(isslime(M))
-		M.adjustToxLoss(10 * removed)
+		M.take_damage(10 * removed, TOX)
 		var/mob/living/slime/S = M
 		if(istype(S) && istype(S.ai, /datum/ai/slime))
 			var/datum/ai/slime/slime_ai = S.ai
@@ -36,7 +36,7 @@
 /decl/material/liquid/water/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(isslime(M))
-		M.adjustToxLoss(2 * removed)
+		M.take_damage(2 * removed, TOX)
 
 /decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()

@@ -76,15 +76,18 @@
 				. = SUBSTANCE_TAKEN_SOME
 
 /obj/machinery/fabricator/proc/can_ingest(var/obj/item/thing)
-	. = (has_recycler || istype(thing, /obj/item/stack/material))
+	if(istype(thing, /obj/item/debris))
+		return TRUE
+	var/obj/item/stack/material/stack = thing
+	return istype(stack) && !stack.reinf_material
 
-/obj/machinery/fabricator/proc/show_intake_message(var/mob/user, var/value, var/thing)
+/obj/machinery/fabricator/proc/show_intake_message(var/mob/user, var/value, var/thing, var/took_reagents)
 	if(value == SUBSTANCE_TAKEN_FULL)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] to capacity with \the [thing]."))
 	else if(value == SUBSTANCE_TAKEN_SOME)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] from \the [thing]."))
 	else if(value == SUBSTANCE_TAKEN_ALL)
-		to_chat(user, SPAN_NOTICE("You dump \the [thing] into \the [src]."))
+		to_chat(user, SPAN_NOTICE("You [took_reagents ? "empty" : "dump"] \the [thing] into \the [src]."))
 	else
 		to_chat(user, SPAN_WARNING("\The [src] cannot process \the [thing]."))
 
@@ -94,7 +97,7 @@
 	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
 		attack_hand_with_interaction_checks(user)
 		return TRUE
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(O) || IS_HAMMER(O)))
 		return ..()
 	if(stat & (NOPOWER | BROKEN))
 		return
@@ -133,7 +136,7 @@
 	var/atom_name = O.name
 	var/reagents_taken = take_reagents(O, user)
 	if(reagents_taken != SUBSTANCE_TAKEN_NONE)
-		show_intake_message(user, reagents_taken, atom_name)
+		show_intake_message(user, reagents_taken, atom_name, took_reagents = TRUE)
 		updateUsrDialog()
 		return TRUE
 	// Take everything if we have a recycler.

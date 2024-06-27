@@ -3,7 +3,7 @@
 
 	var/welcome_text = "<center><font size = 3><b>[global.using_map.station_name]</b> Sensor Readings:</font><br>"
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
-	welcome_text += "<hr>Current system:<br /><b>[exodus ? system_name() : "Unknown"]</b><br /><br>"
+	welcome_text += "<hr>Current system:<br /><b>[global.using_map.system_name || "Unknown"]</b><br /><br>"
 
 	if(exodus) //If the overmap is disabled, it's possible for there to be no exodus.
 		var/list/space_things = list()

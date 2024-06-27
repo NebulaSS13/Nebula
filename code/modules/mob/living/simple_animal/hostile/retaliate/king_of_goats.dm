@@ -11,7 +11,6 @@
 	speak_emote = list("brays in a booming voice")
 	emote_hear = list("brays in a booming voice")
 	emote_see = list("stamps a mighty foot, shaking the surroundings")
-	meat_amount = 12
 	response_harm = "assaults"
 	max_health = 500
 	mob_size = MOB_SIZE_LARGE
@@ -22,7 +21,7 @@
 	max_gas = null
 	minbodytemp = 0
 	break_stuff_probability = 35
-	flash_vulnerability = 0
+	flash_protection = FLASH_PROTECTION_MAJOR
 	natural_weapon = /obj/item/natural_weapon/goatking
 	var/current_damtype = BRUTE
 	var/list/elemental_weapons = list(
@@ -47,17 +46,16 @@
 
 /obj/item/natural_weapon/goatking/fire
 	name = "burning horns"
-	damtype = BURN
+	atom_damage_type =  BURN
 
 /obj/item/natural_weapon/goatking/lightning
 	name = "lightning horns"
-	damtype = ELECTROCUTE
+	atom_damage_type =  ELECTROCUTE
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2
 	name = "emperor of goats"
 	desc = "The King of Kings, God amongst men, and your superior in every way."
 	icon = 'icons/mob/simple_animal/goat_king_phase_2.dmi'
-	meat_amount = 36
 	max_health = 750
 	natural_weapon = /obj/item/natural_weapon/goatking/unleashed
 	elemental_weapons = list(
@@ -153,16 +151,16 @@
 			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
 			stop_automation = TRUE
 			if(do_after(src, 6 SECONDS, src))
-				var/initial_brute = getBruteLoss()
-				var/initial_burn = getFireLoss()
+				var/initial_brute = get_damage(BRUTE)
+				var/initial_burn = get_damage(BURN)
 				visible_message(SPAN_MFAUNA("\The [src] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(src,pick(global.cardinal)), -1, 2, 2, 3, 6)
 				explosion(get_step(src,pick(global.cardinal)), -1, 1, 4, 4, 6)
 				explosion(get_step(src,pick(global.cardinal)), -1, 3, 4, 3, 6)
 				stop_automation = FALSE
 				spellscast += 2
-				setBruteLoss(initial_brute)
-				setFireLoss(initial_burn)
+				set_damage(BRUTE, initial_brute)
+				set_damage(BURN, initial_burn)
 			else
 				visible_message(SPAN_NOTICE("The [src] loses concentration and huffs haughtily."))
 				stop_automation = FALSE
@@ -220,7 +218,7 @@
 	QDEL_NULL(boss_theme)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/goat/king/attack_target(mob/target)
 	. = ..()
 	if(isliving(target_mob))
 		var/mob/living/L = target_mob
@@ -229,7 +227,7 @@
 			ADJ_STATUS(L, STAT_CONFUSE, 1)
 			visible_message(SPAN_WARNING("\The [L] is bowled over by the impact of [src]'s attack!"))
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/attack_target(mob/target)
 	. = ..()
 	if(current_damtype != BRUTE)
 		special_attacks++

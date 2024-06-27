@@ -6,7 +6,7 @@ LINEN BINS
 
 /obj/item/bedsheet
 	name = "bedsheet"
-	desc = "A surprisingly soft linen bedsheet."
+	desc = "A surprisingly soft bedsheet."
 	icon = 'icons/obj/bedsheets/bedsheet.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state = "bedsheet"
@@ -29,6 +29,11 @@ LINEN BINS
 			qdel(src)
 		return
 	..()
+
+/obj/item/bedsheet/yellowed
+	desc = "A surprisingly soft bedsheet. This one is old and yellowed."
+	paint_color = COLOR_BEIGE
+	paint_verb = "stained"
 
 /obj/item/bedsheet/blue
 	icon = 'icons/obj/bedsheets/bedsheet_blue.dmi'
@@ -102,10 +107,10 @@ LINEN BINS
 	stored = max_stored //Mapped ones start with some unspawned sheets
 	. = ..()
 
-/obj/structure/bedsheetbin/dump_contents()
+/obj/structure/bedsheetbin/dump_contents(atom/forced_loc = loc, mob/user)
 	//Dump all sheets, even unspawned ones
 	for(var/i = 1 to get_amount())
-		remove_sheet()
+		remove_sheet(forced_loc)
 	. = ..()
 
 /**Returns the total amount of sheets contained, including unspawned ones. */
@@ -176,7 +181,7 @@ LINEN BINS
 	remove_sheet()
 	return TRUE
 
-/obj/structure/bedsheetbin/proc/remove_sheet()
+/obj/structure/bedsheetbin/proc/remove_sheet(atom/drop_loc = loc)
 	if(get_amount() < 1)
 		return
 
@@ -187,13 +192,13 @@ LINEN BINS
 		LAZYREMOVE(sheets, B)
 	else if(stored > 0)
 		stored--
-		B = new /obj/item/bedsheet(loc)
-	B.dropInto(loc)
+		B = new /obj/item/bedsheet(drop_loc)
+	B.dropInto(drop_loc)
 	update_icon()
 
 	//Drop the hidden thingie
 	if(hidden)
-		hidden.dropInto(loc)
+		hidden.dropInto(drop_loc)
 		visible_message(SPAN_NOTICE("\The [hidden] falls out!"))
 		hidden = null
 

@@ -5,7 +5,6 @@
 	icon = 'icons/obj/items/holder.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
-	origin_tech = null
 	pixel_y = 8
 	origin_tech = @'{"biotech":1}'
 	use_single_icon = TRUE
@@ -35,7 +34,7 @@
 			break
 
 // Grab our inhands from the mob we're wrapping, if they have any.
-/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
 	var/mob/M = locate() in contents
 	if(istype(M))
 		icon =  M.get_holder_icon()
@@ -120,19 +119,22 @@
 	for(var/mob/M in contents)
 		M.show_stripping_window(usr)
 
-/obj/item/holder/attack(mob/target, mob/user)
+/obj/item/holder/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
 	// Devour on click on self with holder
-	if(target == user && iscarbon(user))
-		var/mob/living/carbon/M = user
+	if(target == user && isliving(user))
+		var/mob/living/M = user
 		for(var/mob/victim in src.contents)
 			M.devour(victim)
 		update_state()
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/item/holder/proc/sync(var/mob/living/M)
 	SetName(M.name)
 	desc = M.desc
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H))
 		last_holder = H
 		register_all_movement(H, M)

@@ -57,7 +57,7 @@
 		return
 
 	//Using prints from severed hand items!
-	var/obj/item/organ/external/E = M.get_active_hand()
+	var/obj/item/organ/external/E = M.get_active_held_item()
 	if(istype(E) && E.get_fingerprint())
 		full_print = E.get_fingerprint()
 		ignore_gloves = 1
@@ -87,6 +87,13 @@
 /mob/proc/get_full_print(ignore_blockers)
 	return null
 
+/mob/proc/set_fingerprint(value)
+	return
+
+/mob/living/set_fingerprint(value)
+	for(var/obj/item/organ/external/E in get_external_organs())
+		E.set_fingerprint(value)
+
 /mob/living/get_full_print(var/ignore_blockers = FALSE)
 	if(!ignore_blockers)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, get_active_held_item_slot())
@@ -94,7 +101,7 @@
 			return E.get_fingerprint()
 	return fingerprint
 
-/mob/living/carbon/get_full_print(var/ignore_blockers = FALSE)
-	if (!ignore_blockers && (mFingerprints in mutations))
+/mob/living/human/get_full_print(var/ignore_blockers = FALSE)
+	if (!ignore_blockers && has_genetic_condition(GENE_COND_NO_FINGERPRINTS))
 		return null
 	return ..()

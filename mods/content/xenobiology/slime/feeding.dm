@@ -22,7 +22,7 @@
 			to_chat(src, SPAN_WARNING("\The [M] is protected from your feeding."))
 		return FEED_RESULT_INVALID
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_NO_POISON) || (H.get_bodytype()?.body_flags & BODY_FLAG_NO_DNA))
 			if(!silent)
 				to_chat(src, SPAN_WARNING("You cannot feed on \the [M]."))
@@ -31,7 +31,7 @@
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [src] is dead."))
 		return FEED_RESULT_DEAD
-	if(M.getCloneLoss() >= M.get_max_health() * 1.5)
+	if(M.get_damage(CLONE) >= M.get_max_health() * 1.5)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [M] is too degraded to feed upon."))
 		return FEED_RESULT_DEAD
@@ -102,9 +102,9 @@
 			gain_nutrition(drained)
 			var/heal_amt = FLOOR(drained*0.5)
 			if(heal_amt > 0)
-				adjustOxyLoss(-heal_amt, do_update_health = FALSE)
-				adjustBruteLoss(-heal_amt, do_update_health = FALSE)
-				adjustCloneLoss(-heal_amt)
+				heal_damage(OXY, heal_amt, do_update_health = FALSE)
+				heal_damage(BRUTE, heal_amt, do_update_health = FALSE)
+				heal_damage(CLONE, heal_amt)
 
 	if(ate_victim && feed_mob)
 		if(feed_mob.last_handled_by_mob)

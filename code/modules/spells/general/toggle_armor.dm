@@ -43,11 +43,11 @@
 	name = "Greytide Worldwide"
 	invocation_type = SpI_EMOTE
 	invocation = "screams incoherently!"
-	armor_pieces = list(/obj/item/clothing/under/color/grey = slot_w_uniform_str,
+	armor_pieces = list(/obj/item/clothing/jumpsuit/grey = slot_w_uniform_str,
 						/obj/item/clothing/gloves/insulated/cheap = slot_gloves_str,
 						/obj/item/clothing/mask/gas = slot_wear_mask_str,
 						/obj/item/clothing/shoes/color/black = slot_shoes_str,
-						/obj/item/storage/toolbox/mechanical = BP_R_HAND,
+						/obj/item/toolbox/mechanical = BP_R_HAND,
 						/obj/item/chems/spray/extinguisher = BP_L_HAND)
 
 /spell/toggle_armor/caretaker

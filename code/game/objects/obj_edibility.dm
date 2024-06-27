@@ -174,7 +174,7 @@
 	return EATEN_SUCCESS
 
 /obj/attack_animal(var/mob/user)
-	if((isanimal(user) || isalien(user)) && is_edible(user) && handle_eaten_by_mob(user) == EATEN_SUCCESS)
+	if(isanimal(user) && is_edible(user) && handle_eaten_by_mob(user) == EATEN_SUCCESS)
 		// TODO: put this in the mob AI.
 		spawn(5)
 			if(user && QDELETED(src) && !user.client)

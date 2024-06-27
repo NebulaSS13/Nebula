@@ -32,7 +32,6 @@
 
 /obj/item/spy_bug/Destroy()
 	QDEL_NULL(radio)
-	global.listening_objects -= src
 	return ..()
 
 /obj/item/spy_bug/examine(mob/user, distance)
@@ -80,7 +79,6 @@
 	global.listening_objects += src
 
 /obj/item/spy_monitor/Destroy()
-	global.listening_objects -= src
 	selected_camera = null
 	cameras.Cut()
 	return ..()

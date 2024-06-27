@@ -14,30 +14,34 @@
 
 /decl/backpack_outfit/backpack
 	name = "Backpack"
-	path = /obj/item/storage/backpack
+	path = /obj/item/backpack
 	is_default = TRUE
 
 /decl/backpack_outfit/rucksack
 	name = "Rucksack"
-	path = /obj/item/storage/backpack/rucksack
+	path = /obj/item/backpack/rucksack
 	flags = BACKPACK_HAS_TYPE_SELECTION
 
 /decl/backpack_outfit/satchel
 	name = "Satchel"
-	path = /obj/item/storage/backpack/satchel
+	path = /obj/item/backpack/satchel
 
 /decl/backpack_outfit/satchel/Initialize()
 	. = ..()
-	tweaks += new/datum/backpack_tweak/selection/specified_types_as_list(typesof(/obj/item/storage/backpack/satchel/leather) + /obj/item/storage/backpack/satchel/grey)
+	tweaks += new/datum/backpack_tweak/selection/specified_types_as_list(typesof(/obj/item/backpack/satchel/leather) + /obj/item/backpack/satchel/grey)
 
 /decl/backpack_outfit/messenger_bag
 	name = "Messenger bag"
-	path = /obj/item/storage/backpack/messenger
+	path = /obj/item/backpack/messenger
 
 /decl/backpack_outfit/pocketbook
 	name = "Pocketbook"
-	path = /obj/item/storage/backpack/satchel/pocketbook
+	path = /obj/item/backpack/satchel/pocketbook
 	flags = BACKPACK_HAS_TYPE_SELECTION
+
+/decl/backpack_outfit/sack
+	name = "Sack"
+	path = /obj/item/bag/sack
 
 /* Code */
 /decl/backpack_outfit
@@ -93,7 +97,7 @@
 /datum/backpack_tweak/proc/get_backpack_type(var/given_backpack_type)
 	return given_backpack_type
 
-/datum/backpack_tweak/proc/tweak_backpack(var/obj/item/storage/backpack/backpack, var/metadata)
+/datum/backpack_tweak/proc/tweak_backpack(var/obj/item/backpack/backpack, var/metadata)
 	return
 
 
@@ -120,7 +124,7 @@
 		if(!istext(selection_key))
 			CRASH("Expected a valid selection key, was [log_info_line(selection_key)]")
 		var/selection_type = selections[selection_key]
-		if(!ispath(selection_type, /obj/item/storage/backpack))
+		if(!ispath(selection_type, /obj/item/backpack))
 			CRASH("Expected a valid selection value, was [log_info_line(selection_type)]")
 
 	src.selections = selections
@@ -176,7 +180,7 @@
 * Helpers *
 **********/
 /proc/get_default_outfit_backpack()
-	var backpacks = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+	var backpacks = global.using_map.get_available_backpacks()
 	for(var/backpack in backpacks)
 		var/decl/backpack_outfit/bo = backpacks[backpack]
 		if(bo.is_default)

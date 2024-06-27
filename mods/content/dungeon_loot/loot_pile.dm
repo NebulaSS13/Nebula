@@ -62,7 +62,7 @@
 		return TRUE
 
 	//You already searched this one
-	if(!allow_multiple_looting && (user.ckey in searched_by))
+	if(!allow_multiple_looting && LAZYISIN(user.ckey, searched_by))
 		to_chat(L, SPAN_WARNING("You can't find anything else vaguely useful in \the [src]. Another set of eyes might, however."))
 		return TRUE
 
@@ -72,7 +72,7 @@
 		return TRUE
 
 	// You found something!
-	searched_by |= user.ckey
+	LAZYDISTINCTADD(searched_by, user.ckey)
 	var/obj/item/loot = null
 	var/span = "notice" // Blue
 

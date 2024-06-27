@@ -269,24 +269,6 @@
 	to_chat(M, "<span class = 'alert'>You have been [muteunmute] from [mute_string].</span>")
 	SSstatistics.add_field_details("admin_verb","MUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_add_random_ai_law()
-	set category = "Fun"
-	set name = "Add Random AI Law"
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
-		return
-	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
-	if(confirm != "Yes") return
-	log_admin("[key_name(src)] has added a random AI law.")
-	message_admins("[key_name_admin(src)] has added a random AI law.", 1)
-
-	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
-	if(show_log == "Yes")
-		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
-
-	IonStorm(0)
-	SSstatistics.add_field_details("admin_verb","ION") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /*
 Allow admins to set players to be able to respawn/bypass 30 min wait, without the admin having to edit variables directly
 Ccomp's first proc.
@@ -413,7 +395,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(usr, SPAN_WARNING("There is no active key like that in the game or the person is not currently a ghost."))
 		return
 
-	var/mob/living/carbon/human/new_character = new(get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN)) //The mob being spawned.
+	var/mob/living/human/new_character = new(get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN)) //The mob being spawned.
 	var/datum/computer_file/report/crew_record/record_found			//Referenced to later to either randomize or not randomize the character.
 	if(G_found.mind && !G_found.mind.active)
 		record_found = get_crewmember_record(G_found.real_name)
@@ -432,9 +414,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(!new_character.real_name)
 		if(new_character.gender == MALE)
-			new_character.real_name = capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
+			new_character.real_name = capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 		else
-			new_character.real_name = capitalize(pick(global.first_names_female)) + " " + capitalize(pick(global.last_names))
+			new_character.real_name = capitalize(pick(global.using_map.first_names_female)) + " " + capitalize(pick(global.using_map.last_names))
 	new_character.SetName(new_character.real_name)
 
 	if(G_found.mind && !G_found.mind.active)
@@ -445,10 +427,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.mind.assigned_role = global.using_map.default_job_title//If they somehow got a null assigned role.
 
 	//DNA
-	if(new_character.dna)
-		new_character.dna.ready_dna(new_character)
-		if(record_found)//Pull up their name from database records if they did have a mind.
-			new_character.dna.unique_enzymes = record_found.get_dna()
+	if(record_found)//Pull up their name from database records if they did have a mind.
+		new_character.set_unique_enzymes(record_found.get_dna())
 	new_character.key = G_found.key
 
 	/*
@@ -537,7 +517,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!input)
 		return
 	if(!customname)
-		customname = "[command_name()] Update"
+		customname = "[global.using_map.boss_name] Update"
 
 	// Even admin must bow to the whim of the autolanguagefilter.
 	if(filter_block_message(mob, input) || filter_block_message(mob, customname))
@@ -662,17 +642,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		log_and_message_admins("used gibself.")
 		SSstatistics.add_field_details("admin_verb","GIBS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/update_world()
-	// If I see anyone granting powers to specific keys like the code that was here,
-	// I will both remove their SVN access and permanently ban them from my servers.
-	return
-
 /client/proc/cmd_admin_check_contents(mob/living/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
 	set name = "Check Contents"
-
-	var/list/L = M.get_contents()
-	for(var/t in L)
+	for(var/t in M.get_mob_contents())
 		to_chat(usr, "[t]")
 	SSstatistics.add_field_details("admin_verb","CC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

@@ -1,21 +1,32 @@
-var/global/list/plant_seed_sprites = list()
-
 //Seed packet object/procs.
 /obj/item/seeds
 	name = "packet of seeds"
-	icon = 'icons/obj/seeds.dmi'
+	icon = 'icons/obj/seeds/seed_packets.dmi'
 	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 	abstract_type = /obj/item/seeds
 	max_health = 10 //Can't set a material, otherwise extracting seeds would generate free materials
+	material = /decl/material/solid/organic/plantmatter/pith
 
-	var/seed_type
+	var/seed_mask_icon = 'icons/obj/seeds/seed_masks.dmi'
+	var/seed_base_name = "packet"
 	var/datum/seed/seed
 	var/modified = 0
 
-/obj/item/seeds/Initialize()
+/obj/item/seeds/Initialize(loc, material, _seed)
+	if(isnull(seed) && !isnull(_seed))
+		seed = _seed
 	update_seed()
+	initialize_reagents()
 	. = ..()
+
+/obj/item/seeds/initialize_reagents()
+	create_reagents(3)
+	. = ..()
+
+/obj/item/seeds/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/nutriment/plant_oil, 3)
 
 /obj/item/seeds/get_single_monetary_worth()
 	. = seed ? seed.get_monetary_value() : ..()
@@ -26,284 +37,348 @@ var/global/list/plant_seed_sprites = list()
 
 //Grabs the appropriate seed datum from the global list.
 /obj/item/seeds/proc/update_seed()
-	if(!seed && seed_type && !isnull(SSplants.seeds) && SSplants.seeds[seed_type])
-		seed = SSplants.seeds[seed_type]
-		if(seed?.scannable_result)
-			set_extension(src, /datum/extension/scannable, seed.scannable_result)
-		else if(has_extension(src, /datum/extension/scannable))
-			remove_extension(src, /datum/extension/scannable)
-	update_appearance()
+	if(istext(seed) && SSplants.seeds[seed])
+		seed = SSplants.seeds[seed]
+	if(seed && !istype(seed))
+		PRINT_STACK_TRACE("Seed packet was supplied invalid seed name '[seed]'!")
+		seed = null
+	if(seed?.scannable_result)
+		set_extension(src, /datum/extension/scannable, seed.scannable_result)
+	else if(has_extension(src, /datum/extension/scannable))
+		remove_extension(src, /datum/extension/scannable)
+	update_icon()
+
+/obj/item/seeds/proc/get_seed_packet_state()
+	return seed?.get_trait(TRAIT_PRODUCT_ICON)
 
 //Updates strings and icon appropriately based on seed datum.
-/obj/item/seeds/proc/update_appearance()
-	if(!seed) return
+/obj/item/seeds/on_update_icon()
+	. = ..()
+	if(!seed)
+		return
 
 	// Update icon.
-	overlays.Cut()
-	var/is_seeds = ((seed.seed_noun in list(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES)) ? 1 : 0)
-	var/image/seed_mask
-	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
-	if(plant_seed_sprites[seed_base_key])
-		seed_mask = plant_seed_sprites[seed_base_key]
-	else
-		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
-		if(is_seeds) // Spore glass bits aren't coloured.
-			seed_mask.color = seed.get_trait(TRAIT_PLANT_COLOUR)
-		plant_seed_sprites[seed_base_key] = seed_mask
+	underlays.Cut()
+	icon_state = get_seed_packet_state() || "unknown"
+	color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 
-	var/image/seed_overlay
-	var/seed_overlay_key = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
-	if(plant_seed_sprites[seed_overlay_key])
-		seed_overlay = plant_seed_sprites[seed_overlay_key]
-	else
-		seed_overlay = image('icons/obj/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
-		seed_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-		plant_seed_sprites[seed_overlay_key] = seed_overlay
+	var/static/list/seed_nouns = list(
+		SEED_NOUN_SEEDS,
+		SEED_NOUN_PITS,
+		SEED_NOUN_NODES
+	)
+	var/is_seeds = (seed.seed_noun in seed_nouns)
+	if(seed_mask_icon)
+		if(is_seeds)
+			underlays += overlay_image(seed_mask_icon, "seed-mask", seed.get_trait(TRAIT_PLANT_COLOUR), RESET_COLOR)
+		else
+			add_overlay(overlay_image(seed_mask_icon, "spore-mask"), null, RESET_COLOR)
+	update_strings(is_seeds)
 
-	overlays |= seed_mask
-	overlays |= seed_overlay
-
+/obj/item/seeds/proc/update_strings(is_seeds)
 	if(is_seeds)
-		src.SetName("packet of [seed.seed_name] [seed.seed_noun]")
-		src.desc = "It has a picture of \a [seed.display_name] on the front."
+		SetName("[seed_base_name] of [seed.product_name] [seed.seed_noun]")
+		desc = "It has a picture of \a [seed.display_name] on the front."
 	else
-		src.SetName("sample of [seed.seed_name] [seed.seed_noun]")
-		src.desc = "It's labelled as coming from \a [seed.display_name]."
+		SetName("sample of [seed.product_name] [seed.seed_noun]")
+		desc = "It's labelled as coming from \a [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
 	. = ..()
 	if(seed && !seed.roundstart)
 		to_chat(user, "It's tagged as variety #[seed.uid].")
 
-/obj/item/seeds/cutting
-	name = "cuttings"
-	desc = "Some plant cuttings."
+/obj/item/seeds/extracted
+	name = "handful of seeds"
+	desc = "A handful of nondescript seeds."
+	icon = 'icons/obj/seeds/seed_raw.dmi'
+	seed_base_name = "handful"
+	seed_mask_icon = null
 	is_spawnable_type = FALSE
 
-/obj/item/seeds/cutting/update_appearance()
-	..()
-	src.SetName("packet of [seed.seed_name] cuttings")
+/obj/item/seeds/extracted/get_seed_packet_state()
+	return seed.seed_noun
+
+/obj/item/seeds/extracted/update_strings(is_seeds)
+	if(is_seeds)
+		SetName("[seed_base_name] of [seed.display_name] [seed.seed_noun]")
+	else
+		SetName("sample of [seed.display_name] [seed.seed_noun]")
+
+/obj/item/seeds/extracted/cutting
+	name = "cuttings"
+	desc = "Some plant cuttings."
+
+/obj/item/seeds/extracted/cutting/get_seed_packet_state()
+	return SEED_NOUN_CUTTINGS
+
+/obj/item/seeds/extracted/cutting/update_strings(is_seeds)
+	SetName("[seed_base_name] of [seed.display_name] cuttings")
 
 /obj/item/seeds/random
-	seed_type = null
+	seed = null
 
 /obj/item/seeds/random/Initialize()
 	seed = SSplants.create_random_seed()
-	seed_type = seed.name
 	. = ..()
 
 /obj/item/seeds/chiliseed
-	seed_type = "chili"
+	seed = "chili"
 
 /obj/item/seeds/plastiseed
-	seed_type = "plastic"
+	seed = "plastic"
 
 /obj/item/seeds/grapeseed
-	seed_type = "grapes"
+	seed = "grapes"
 
 /obj/item/seeds/greengrapeseed
-	seed_type = "greengrapes"
+	seed = "greengrapes"
 
 /obj/item/seeds/peanutseed
-	seed_type = "peanut"
+	seed = "peanut"
 
 /obj/item/seeds/cabbageseed
-	seed_type = "cabbage"
+	seed = "cabbage"
 
 /obj/item/seeds/shandseed
-	seed_type = "shand"
+	seed = "shand"
 
 /obj/item/seeds/mtearseed
-	seed_type = "mtear"
+	seed = "mtear"
 
 /obj/item/seeds/berryseed
-	seed_type = "berries"
+	seed = "berries"
 
 /obj/item/seeds/blueberryseed
-	seed_type = "blueberries"
+	seed = "blueberries"
 
 /obj/item/seeds/glowberryseed
-	seed_type = "glowberries"
+	seed = "glowberries"
 
 /obj/item/seeds/bananaseed
-	seed_type = "banana"
+	seed = "banana"
 
 /obj/item/seeds/eggplantseed
-	seed_type = "eggplant"
+	seed = "eggplant"
 
 /obj/item/seeds/bloodtomatoseed
-	seed_type = "bloodtomato"
+	seed = "bloodtomato"
 
 /obj/item/seeds/tomatoseed
-	seed_type = "tomato"
+	seed = "tomato"
 
 /obj/item/seeds/killertomatoseed
-	seed_type = "killertomato"
+	seed = "killertomato"
 
 /obj/item/seeds/bluetomatoseed
-	seed_type = "bluetomato"
+	seed = "bluetomato"
 
 /obj/item/seeds/quantumatoseed
-	seed_type = "quantumato"
+	seed = "quantumato"
 
 /obj/item/seeds/cornseed
-	seed_type = "corn"
+	seed = "corn"
 
 /obj/item/seeds/poppyseed
-	seed_type = "poppies"
+	seed = "poppies"
 
 /obj/item/seeds/potatoseed
-	seed_type = "potato"
+	seed = "potato"
 
 /obj/item/seeds/icepepperseed
-	seed_type = "icechili"
+	seed = "icechili"
 
 /obj/item/seeds/soyaseed
-	seed_type = "soybean"
+	seed = "soybeans"
 
 /obj/item/seeds/wheatseed
-	seed_type = "wheat"
+	seed = "wheat"
 
 /obj/item/seeds/riceseed
-	seed_type = "rice"
+	seed = "rice"
 
 /obj/item/seeds/carrotseed
-	seed_type = "carrot"
+	seed = "carrot"
 
 /obj/item/seeds/reishimycelium
-	seed_type = "reishi"
+	seed = "reishi"
 
 /obj/item/seeds/amanitamycelium
-	seed_type = "amanita"
+	seed = "amanita"
 
 /obj/item/seeds/angelmycelium
-	seed_type = "destroyingangel"
+	seed = "destroyingangel"
 
 /obj/item/seeds/libertymycelium
-	seed_type = "libertycap"
+	seed = "libertycap"
 
 /obj/item/seeds/chantermycelium
-	seed_type = "mushrooms"
+	seed = "mushrooms"
 
 /obj/item/seeds/towercap
-	seed_type = "towercap"
+	seed = "towercap"
 
 /obj/item/seeds/glowbell
-	seed_type = "glowbell"
+	seed = "glowbell"
 
 /obj/item/seeds/plumpmycelium
-	seed_type = "plumphelmet"
+	seed = "plumphelmet"
 
 /obj/item/seeds/walkingmushroommycelium
-	seed_type = "walkingmushroom"
+	seed = "walkingmushroom"
 
 /obj/item/seeds/nettleseed
-	seed_type = "nettle"
+	seed = "nettle"
 
 /obj/item/seeds/deathnettleseed
-	seed_type = "deathnettle"
+	seed = "deathnettle"
 
 /obj/item/seeds/weeds
-	seed_type = "weeds"
+	seed = "weeds"
 
 /obj/item/seeds/harebell
-	seed_type = "harebells"
+	seed = "harebells"
 
 /obj/item/seeds/sunflowerseed
-	seed_type = "sunflowers"
+	seed = "sunflowers"
 
 /obj/item/seeds/lavenderseed
-	seed_type = "lavender"
+	seed = "lavender"
 
 /obj/item/seeds/brownmold
-	seed_type = "mold"
+	seed = "mold"
 
 /obj/item/seeds/appleseed
-	seed_type = "apple"
+	seed = "apple"
 
 /obj/item/seeds/poisonedappleseed
-	seed_type = "poisonapple"
+	seed = "poisonapple"
 
 /obj/item/seeds/goldappleseed
-	seed_type = "goldapple"
+	seed = "goldapple"
 
 /obj/item/seeds/ambrosiavulgarisseed
-	seed_type = "biteleaf"
+	seed = "ambrosiavulgaris"
 
 /obj/item/seeds/ambrosiadeusseed
-	seed_type = "ambrosiadeus"
+	seed = "ambrosiadeus"
 
 /obj/item/seeds/whitebeetseed
-	seed_type = "whitebeet"
+	seed = "whitebeet"
 
 /obj/item/seeds/sugarcaneseed
-	seed_type = "sugarcane"
+	seed = "sugarcane"
 
 /obj/item/seeds/watermelonseed
-	seed_type = "watermelon"
+	seed = "watermelon"
 
 /obj/item/seeds/pumpkinseed
-	seed_type = "pumpkin"
+	seed = "pumpkin"
 
 /obj/item/seeds/limeseed
-	seed_type = "lime"
+	seed = "lime"
 
 /obj/item/seeds/lemonseed
-	seed_type = "lemon"
+	seed = "lemon"
 
 /obj/item/seeds/orangeseed
-	seed_type = "orange"
+	seed = "orange"
 
 /obj/item/seeds/poisonberryseed
-	seed_type = "poisonberries"
+	seed = "poisonberries"
 
 /obj/item/seeds/deathberryseed
-	seed_type = "deathberries"
+	seed = "deathberries"
 
 /obj/item/seeds/grassseed
-	seed_type = "grass"
+	seed = "grass"
 
 /obj/item/seeds/cocoapodseed
-	seed_type = "cocoa"
+	seed = "cocoa"
 
 /obj/item/seeds/cherryseed
-	seed_type = "cherry"
+	seed = "cherry"
 
 /obj/item/seeds/tobaccoseed
-	seed_type = "tobacco"
+	seed = "tobacco"
 
 /obj/item/seeds/finetobaccoseed
-	seed_type = "finetobacco"
+	seed = "finetobacco"
 
 /obj/item/seeds/puretobaccoseed
-	seed_type = "puretobacco"
+	seed = "puretobacco"
 
 /obj/item/seeds/kudzuseed
-	seed_type = "kudzu"
+	seed = "kudzu"
 
 /obj/item/seeds/peppercornseed
-	seed_type = "peppercorn"
+	seed = "peppercorn"
 
 /obj/item/seeds/garlicseed
-	seed_type = "garlic"
+	seed = "garlic"
 
 /obj/item/seeds/onionseed
-	seed_type = "onion"
+	seed = "onion"
 
 /obj/item/seeds/algaeseed
-	seed_type = "algae"
+	seed = "algae"
 
 /obj/item/seeds/bamboo
-	seed_type = "bamboo"
+	seed = "bamboo"
 
 /obj/item/seeds/clam
-	seed_type = "clam"
+	seed = "clam"
 
 /obj/item/seeds/barnacle
-	seed_type = "barnacle"
+	seed = "barnacle"
 
 /obj/item/seeds/mollusc
-	seed_type = "mollusc"
+	seed = "mollusc"
 
 /obj/item/seeds/cotton
-	seed_type = "cotton"
+	seed = "cotton"
+
+/obj/item/seeds/yarrow
+	seed = "yarrow"
+
+/obj/item/seeds/aloe
+	seed = "aloe"
+
+/obj/item/seeds/ginseng
+	seed = "ginseng"
+
+/obj/item/seeds/valerian
+	seed = "valerian"
+
+/obj/item/seeds/foxglove
+	seed = "foxglove"
+
+/obj/item/seeds/extracted/yarrow
+	seed = "yarrow"
+
+/obj/item/seeds/extracted/aloe
+	seed = "aloe"
+
+/obj/item/seeds/extracted/ginseng
+	seed = "ginseng"
+
+/obj/item/seeds/extracted/valerian
+	seed = "valerian"
+
+/obj/item/seeds/extracted/foxglove
+	seed = "foxglove"
+
+/obj/item/seeds/extracted/cabbage
+	seed = "cabbage"
+
+/obj/item/seeds/extracted/carrot
+	seed = "carrot"
+
+/obj/item/seeds/extracted/potato
+	seed = "potato"
+
+/obj/item/seeds/extracted/wheat
+	seed = "wheat"
+
+/obj/item/seeds/extracted/rice
+	seed = "rice"

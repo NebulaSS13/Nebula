@@ -1,11 +1,13 @@
 #ifndef CONTENT_PACK_NEOAVIANS
 #define CONTENT_PACK_NEOAVIANS
+// BEGIN_INCLUDE
 #include "_neoavians.dm"
 #include "clothing.dm"
-#include "machinery/suit_cycler.dm"
-#include "datum/language.dm"
-#include "datum/loadout.dm"
-#include "datum/species.dm"
-#include "datum/accessory.dm"
-#include "datum/species_bodytypes.dm"
+#include "datum\accessory.dm"
+#include "datum\language.dm"
+#include "datum\loadout.dm"
+#include "datum\species.dm"
+#include "datum\species_bodytypes.dm"
+#include "machinery\suit_cycler.dm"
+// END_INCLUDE
 #endif

@@ -78,7 +78,7 @@
 		damage = FLOOR(damage * 0.75)
 	..()
 	if(damage)
-		take_damage(damage)
+		take_damage(damage, Proj.atom_damage_type)
 
 /obj/structure/girder/CanFluidPass(var/coming_from)
 	return TRUE
@@ -106,14 +106,14 @@
 		visible_message(SPAN_NOTICE("\The [user] begins slicing apart \the [src] with \the [W]."))
 		if(do_after(user,reinf_material ? 40: 20,src))
 			visible_message(SPAN_NOTICE("\The [user] slices apart \the [src] with \the [W]."))
-			dismantle()
+			dismantle_structure(user)
 		return TRUE
 
 	if(IS_PICK(W))
 		if(W.get_tool_quality(TOOL_PICK) < TOOL_QUALITY_GOOD)
 			to_chat(user, SPAN_WARNING("\The [W] is not powerful enough to destroy \the [src]."))
 		else if(W.do_tool_interaction(TOOL_PICK, user, src, (reinf_material ? 6 : 4) SECONDS, set_cooldown = TRUE))
-			dismantle()
+			dismantle_structure(user)
 		return TRUE
 	// Reinforcing a girder, or turning it into a wall.
 	if(istype(W, /obj/item/stack/material))
@@ -159,8 +159,8 @@
 		to_chat(user, SPAN_NOTICE("You create a false wall! Push on it to open or close the passage."))
 
 	var/turf/Tsrc = get_turf(src)
-	Tsrc.ChangeTurf(/turf/simulated/wall)
-	var/turf/simulated/wall/T = get_turf(src)
+	Tsrc.ChangeTurf(/turf/wall)
+	var/turf/wall/T = get_turf(src)
 	T.set_turf_materials(S.material, reinf_material, null, material)
 	T.can_open = prepped_for_fakewall
 	T.add_hiddenprint(usr)
@@ -192,18 +192,6 @@
 	..()
 	if(severity == 1 || (severity == 2 && prob(30)) || (severity == 3 && prob(5)))
 		physically_destroyed()
-
-/obj/structure/girder/cult
-	icon= 'icons/obj/cult.dmi'
-	icon_state= "cultgirder"
-	max_health = 150
-	cover = 70
-
-/obj/structure/girder/cult/dismantle()
-	material = null
-	reinf_material = null
-	parts_type = null
-	. = ..()
 
 /obj/structure/girder/wood
 	material = /decl/material/solid/organic/wood/mahogany

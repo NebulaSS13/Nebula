@@ -1,8 +1,18 @@
-/mob/living/carbon/proc/get_gyne_name()
-	return dna?.lineage || create_gyne_name()
+var/global/list/gyne_lineage = list()
+/mob/living/proc/get_gyne_name()
+	. = get_gyne_lineage()
+	if(!.)
+		. = create_gyne_name()
+		set_gyne_lineage(.)
+
+/mob/living/proc/get_gyne_lineage()
+	return global.gyne_lineage["\ref[src]"]
+
+/mob/living/proc/set_gyne_lineage(value)
+	global.gyne_lineage["\ref[src]"] = value
 
 /proc/create_gyne_name()
-	return "[capitalize(pick(global.gyne_architecture))] [capitalize(pick(global.gyne_geoforms))]"
+	. = "[capitalize(pick(global.gyne_architecture))] [capitalize(pick(global.gyne_geoforms))]"
 
 //Thanks to:
 // - https://en.wikipedia.org/wiki/List_of_landforms
@@ -76,10 +86,10 @@ var/global/list/gyne_architecture = list(
 	queens."
 
 /decl/cultural_info/culture/ascent/get_random_name(var/mob/M, var/gender)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	var/lineage = create_gyne_name()
-	if(istype(H) && H.dna.lineage)
-		lineage = H.dna.lineage
+	if(istype(H) && H.get_gyne_lineage())
+		lineage = H.get_gyne_lineage()
 	if(gender == MALE)
 		return "[random_id(/decl/species/mantid, 10000, 99999)] [lineage]"
 	else

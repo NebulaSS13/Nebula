@@ -14,28 +14,24 @@
 	duration = 300 //30 seconds
 	max_targets = 1
 	equipped_summons = list("active hand" = /obj/item/sword)
-	delete_old = 0
+	delete_old = FALSE
 	var/material = /decl/material/solid/metal/gold
 
 	hud_state = "gen_immolate"
 
 
 /spell/targeted/equip_item/dyrnwyn/summon_item(var/new_type)
-	var/obj/item/W = new new_type(null,material)
-	W.SetName("\improper Dyrnwyn")
-	W.damtype = BURN
-	W.hitsound = 'sound/items/welder2.ogg'
-	LAZYSET(W.slowdown_per_slot, BP_L_HAND, 1)
-	LAZYSET(W.slowdown_per_slot, BP_R_HAND, 1)
-	return W
+	var/obj/item/sword = new new_type(null,material)
+	sword.SetName("\improper Dyrnwyn")
+	sword.atom_damage_type = BURN
+	sword.hitsound = 'sound/items/welder2.ogg'
+	LAZYSET(sword.slowdown_per_slot, BP_L_HAND, 1)
+	LAZYSET(sword.slowdown_per_slot, BP_R_HAND, 1)
+	return sword
 
 /spell/targeted/equip_item/dyrnwyn/empower_spell()
 	if(!..())
-		return 0
+		return FALSE
 
 	material = /decl/material/solid/metal/silver
 	return "Dyrnwyn has been made pure: it is now made of silver."
-
-/spell/targeted/equip_item/dyrnwyn/tower
-	desc = "This spell allows you to summon a golden firey sword for a short duration."
-	charge_max = 1

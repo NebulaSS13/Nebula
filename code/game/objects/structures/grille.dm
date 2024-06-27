@@ -102,7 +102,7 @@
 	var/damage_dealt = 1
 	var/attack_message = "kicks"
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species.can_shred(H))
 			attack_message = "mangles"
 			damage_dealt = 5
@@ -130,7 +130,7 @@
 
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
 	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
-	switch(Proj.damage_type)
+	switch(Proj.atom_damage_type)
 		if(BRUTE)
 			//bullets
 			if(Proj.original == src || prob(20))
@@ -148,9 +148,9 @@
 
 	if(passthrough)
 		. = PROJECTILE_CONTINUE
-		damage = clamp((damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 0, 10) //if the bullet passes through then the grille avoids most of the damage
+		damage = clamp((damage - Proj.damage)*(Proj.atom_damage_type == BRUTE? 0.4 : 1), 0, 10) //if the bullet passes through then the grille avoids most of the damage
 
-	take_damage(damage*0.2)
+	take_damage(damage*0.2, Proj.atom_damage_type)
 
 /obj/structure/grille/proc/cut_grille()
 	playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -159,7 +159,10 @@
 	else
 		set_density(0)
 		if(material)
-			material.create_object(get_turf(src), 1, parts_type)
+			var/res = material.create_object(get_turf(src), 1, parts_type)
+			if(paint_color)
+				for(var/obj/item/thing in res)
+					thing.set_color(paint_color)
 		destroyed = TRUE
 		parts_amount = 1
 		update_icon()
@@ -206,7 +209,7 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-		switch(W.damtype)
+		switch(W.atom_damage_type)
 			if(BURN)
 				take_damage(W.force)
 			if(BRUTE)
@@ -248,8 +251,8 @@
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!destroyed)
-		if(exposed_temperature > material.melting_point)
-			take_damage(1)
+		if(exposed_temperature > material.temperature_damage_threshold)
+			take_damage(1, BURN)
 	..()
 
 // Used in mapping to avoid
@@ -261,16 +264,6 @@
 /obj/structure/grille/broken/Initialize()
 	. = ..()
 	take_damage(rand(1, 5)) //In the destroyed but not utterly threshold.
-
-/obj/structure/grille/cult
-	name = "cult grille"
-	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
-	material = /decl/material/solid/stone/cult
-
-/obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
-	if(air_group)
-		return 0 //Make sure air doesn't drain
-	..()
 
 /obj/structure/grille/proc/is_on_frame()
 	if(locate(/obj/structure/wall_frame) in loc)

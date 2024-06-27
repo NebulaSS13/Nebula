@@ -38,7 +38,7 @@
 
 	if(prob(vermin_probability))
 		if(prob(80))
-			new /mob/living/simple_animal/mouse(T)
+			new /mob/living/simple_animal/passive/mouse(T)
 		else
 			new /mob/living/simple_animal/lizard(T)
 

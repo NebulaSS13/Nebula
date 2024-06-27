@@ -64,7 +64,7 @@
 	bitesize = 2
 /obj/item/chems/food/meatballspagetti/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
 /obj/item/chems/food/spesslaw
 	name = "spaghetti & too many meatballs"
@@ -78,4 +78,4 @@
 
 /obj/item/chems/food/spesslaw/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)

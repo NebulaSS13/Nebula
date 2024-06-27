@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/death(gibbed)
+/mob/living/simple_animal/alien/diona/death(gibbed)
 	. = ..()
 	if(.)
 		var/obj/structure/diona_gestalt/gestalt = loc

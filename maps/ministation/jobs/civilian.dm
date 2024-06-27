@@ -1,5 +1,5 @@
 /datum/job/ministation/assistant
-	title = "Assistant"
+	title = "Recruit"
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "absolutely everyone"

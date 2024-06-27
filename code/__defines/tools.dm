@@ -10,6 +10,8 @@
 #define TOOL_SHOVEL         /decl/tool_archetype/shovel
 #define TOOL_PICK           /decl/tool_archetype/pick
 #define TOOL_HAMMER         /decl/tool_archetype/hammer
+#define TOOL_KNIFE          /decl/tool_archetype/knife
+#define TOOL_HOE            /decl/tool_archetype/hoe
 
 // Misc tools.
 #define TOOL_PEN            /decl/tool_archetype/pen
@@ -36,9 +38,10 @@
 #define TOOL_QUALITY_BEST     2
 
 // Tool speeds (smaller values mean a shorter delay)
-#define TOOL_SPEED_WORST   3
-#define TOOL_SPEED_DEFAULT 1
-#define TOOL_SPEED_BEST  0.5
+#define TOOL_SPEED_WORST    3
+#define TOOL_SPEED_MEDIOCRE 2
+#define TOOL_SPEED_DEFAULT  1
+#define TOOL_SPEED_BEST   0.5
 
 // Helper macros for interaction checks.
 #define IS_TOOL(A, T)     (isatom(A) && A.get_tool_quality(T) > 0)
@@ -54,11 +57,15 @@
 #define IS_SHOVEL(A)      IS_TOOL(A, TOOL_SHOVEL)
 #define IS_PEN(A)         IS_TOOL(A, TOOL_PEN)
 #define IS_PICK(A)        IS_TOOL(A, TOOL_PICK)
+#define IS_KNIFE(A)       IS_TOOL(A, TOOL_KNIFE)
+#define IS_HAMMER(A)      IS_TOOL(A, TOOL_HAMMER)
+#define IS_HOE(A)         IS_TOOL(A, TOOL_HOE)
 
 #define IS_HEMOSTAT(A)    IS_TOOL(A, TOOL_HEMOSTAT)
 #define IS_RETRACTOR(A)   IS_TOOL(A, TOOL_RETRACTOR)
 
 // Structure interaction flags
+#define TOOL_INTERACTION_NONE        0
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)
 #define TOOL_INTERACTION_DECONSTRUCT BITFLAG(1)
 #define TOOL_INTERACTION_WIRING      BITFLAG(2)

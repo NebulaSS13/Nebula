@@ -98,7 +98,7 @@
 			to_chat(user, "<span class='notice'>Unable to repair while [src] is off.</span>")
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		switch(W.damtype)
+		switch(W.atom_damage_type)
 			if(BURN)
 				current_health -= W.force * fire_dam_coeff
 			if(BRUTE)
@@ -221,7 +221,7 @@
 		turn_on()
 		return
 
-/obj/vehicle/proc/insert_cell(var/obj/item/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/proc/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
 	if(cell)
 		return
 	if(!istype(C))
@@ -232,7 +232,7 @@
 	powercheck()
 	to_chat(usr, "<span class='notice'>You install [C] in [src].</span>")
 
-/obj/vehicle/proc/remove_cell(var/mob/living/carbon/human/H)
+/obj/vehicle/proc/remove_cell(var/mob/living/human/H)
 	if(!cell)
 		return
 

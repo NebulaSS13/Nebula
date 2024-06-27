@@ -16,8 +16,8 @@
 	var/list/holdingitems = list()
 
 	var/list/bag_whitelist = list(
-		/obj/item/storage/pill_bottle,
-		/obj/item/storage/plants
+		/obj/item/pill_bottle,
+		/obj/item/plants
 		)
 	var/blacklisted_types = list()
 	var/item_size_limit = ITEM_SIZE_HUGE
@@ -71,29 +71,29 @@
 		return FALSE
 
 	if(is_type_in_list(O, bag_whitelist))
-		var/obj/item/storage/bag = O
-		var/failed = TRUE
-		for(var/obj/item/G in O)
-			if(!G.reagents || !G.reagents.total_volume)
-				continue
-			failed = FALSE
-			bag.remove_from_storage(G, src)
-			holdingitems += G
-			if(LAZYLEN(holdingitems) >= limit)
-				break
+		if(O.storage)
+			var/failed = TRUE
+			for(var/obj/item/G in O)
+				if(!G.reagents || !G.reagents.total_volume)
+					continue
+				failed = FALSE
+				O.storage.remove_from_storage(user, G, src)
+				holdingitems += G
+				if(LAZYLEN(holdingitems) >= limit)
+					break
 
-		if(failed)
-			to_chat(user, SPAN_NOTICE("Nothing in \the [O] is usable."))
-			return TRUE
-		bag.finish_bulk_removal()
+			if(failed)
+				to_chat(user, SPAN_NOTICE("Nothing in \the [O] is usable."))
+				return TRUE
+			O.storage.finish_bulk_removal()
 
-		if(!length(O.contents))
-			to_chat(user, "You empty \the [O] into \the [src].")
-		else
-			to_chat(user, "You fill \the [src] from \the [O].")
+			if(!length(O.contents))
+				to_chat(user, "You empty \the [O] into \the [src].")
+			else
+				to_chat(user, "You fill \the [src] from \the [O].")
 
-		SSnano.update_uis(src)
-		return FALSE
+			SSnano.update_uis(src)
+			return FALSE
 
 	if(O.w_class > item_size_limit)
 		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))
@@ -226,7 +226,7 @@
 	if(CanPhysicallyInteractWith(user, src))
 		interface_interact(user)
 
-/obj/machinery/reagentgrinder/proc/attempt_skill_effect(mob/living/carbon/human/user)
+/obj/machinery/reagentgrinder/proc/attempt_skill_effect(mob/living/human/user)
 	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
 		return FALSE
 	var/hand = pick(BP_L_HAND, BP_R_HAND)
@@ -266,11 +266,11 @@
 	obj_flags = null
 	grind_sound = 'sound/machines/juicer.ogg'
 	blacklisted_types = list(/obj/item/stack/material)
-	bag_whitelist = list(/obj/item/storage/plants)
+	bag_whitelist = list(/obj/item/plants)
 	item_size_limit = ITEM_SIZE_SMALL
 	skill_to_check = SKILL_COOKING
 
-/obj/machinery/reagentgrinder/juicer/attempt_skill_effect(mob/living/carbon/human/user)
+/obj/machinery/reagentgrinder/juicer/attempt_skill_effect(mob/living/human/user)
 	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
 		return
 	visible_message(SPAN_NOTICE("\The [src] whirrs violently and spills its contents all over \the [user]!"))

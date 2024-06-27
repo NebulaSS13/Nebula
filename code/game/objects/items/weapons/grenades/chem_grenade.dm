@@ -39,9 +39,7 @@
 		to_chat(user, "<span class='warning'>You prime \the [name]!</span>")
 		activate(user)
 		add_fingerprint(user)
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			C.throw_mode_on()
+		user.toggle_throw_mode(TRUE)
 
 /obj/item/grenade/chem_grenade/on_update_icon()
 	. = ..()
@@ -155,7 +153,7 @@
 	if(ismob(loc))
 		var/mob/M = loc
 		M.drop_from_inventory(src)
-		M.throw_mode_off()
+		M.toggle_throw_mode(FALSE)
 
 	for(var/obj/item/chems/glass/G in beakers)
 		G.reagents.trans_to_obj(src, G.reagents.total_volume)

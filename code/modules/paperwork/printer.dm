@@ -82,7 +82,7 @@
 		return remove_toner(user)
 	return ..()
 
-/obj/item/stock_parts/printer/dump_contents()
+/obj/item/stock_parts/printer/dump_contents(atom/forced_loc = loc, mob/user)
 	. = ..()
 	LAZYREMOVE(., print_queue) //Don't drop our stored copies, those are gonna get deleted
 	remove_paper() //Dump the blank paper we contain

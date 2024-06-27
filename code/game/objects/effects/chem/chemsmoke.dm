@@ -87,9 +87,9 @@
 	show_log = 0
 	var/datum/seed/seed
 
-/datum/effect/effect/system/smoke_spread/chem/spores/New(seed_name)
-	if(seed_name)
-		seed = SSplants.seeds[seed_name]
+/datum/effect/effect/system/smoke_spread/chem/spores/New(seed_id)
+	if(seed_id)
+		seed = SSplants.seeds[seed_id]
 	if(!seed)
 		qdel(src)
 	..()
@@ -135,7 +135,7 @@
 	var/area/A = get_area(location)
 
 	var/where = "[A.proper_name] | [location.x], [location.y]"
-	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>[where]</a>"
+	var/whereLink = "<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>[where]</a>"
 
 	if(show_log)
 		var/atom/location = carry?.get_reaction_loc(CHEM_REACTION_FLAG_OVERFLOW_CONTAINER)
@@ -143,7 +143,7 @@
 			var/mob/M = get_mob_by_key(location.fingerprintslast)
 			var/more = ""
 			if(M)
-				more = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
+				more = "(<A HREF='byond://?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
 			log_and_message_admins("A chemical smoke reaction has taken place in ([whereLink])[contained]. Last associated key is [location.fingerprintslast][more].")
 		else
 			log_and_message_admins("A chemical smoke reaction has taken place in ([whereLink]). No associated key.")
@@ -232,7 +232,7 @@
 
 /datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(var/turf/T, var/icon/I, var/smoke_duration, var/dist = 1)
 	var/obj/effect/effect/smoke/chem/spores = new /obj/effect/effect/smoke/chem(location)
-	spores.SetName("cloud of [seed.seed_name] [seed.seed_noun]")
+	spores.SetName("cloud of [seed.product_name] [seed.seed_noun]")
 	..(T, I, smoke_duration, dist, passed_smoke=spores)
 
 
@@ -249,7 +249,7 @@
 			for(var/D in global.cardinal)
 				var/turf/target = get_step(current, D)
 				if(wallList)
-					if(istype(target, /turf/simulated/wall))
+					if(istype(target, /turf/wall))
 						if(!(target in wallList))
 							wallList += target
 						continue

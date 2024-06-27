@@ -13,12 +13,12 @@
 	if(ishuman(holder))
 		return holder
 
-/spell/invisibility/cast(var/mob/living/carbon/human/H, var/mob/user)
+/spell/invisibility/cast(var/mob/living/human/H, var/mob/user)
 	on = !on
 	if(on)
 		if(H.add_cloaking_source(src))
 			playsound(get_turf(H), 'sound/effects/teleport.ogg', 90, 1)
-			H.mutations |= MUTATION_CLUMSY
+			H.add_genetic_condition(GENE_COND_CLUMSY)
 	else if(H.remove_cloaking_source(src))
 		playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 90, 1)
-		H.mutations -= MUTATION_CLUMSY
+		H.remove_genetic_condition(GENE_COND_CLUMSY)

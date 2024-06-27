@@ -1,6 +1,7 @@
 //Load a random map template from the list. Maploader handles it to avoid order of init madness
 /obj/abstract/landmark/map_load_mark
 	name = "map loader landmark"
+	is_spawnable_type = FALSE
 	var/centered = TRUE
 	var/list/map_template_names	//list of template names to pick from
 
@@ -67,7 +68,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 /obj/abstract/landmark/clear
 	name = "clear turf"
 	icon_state = "clear"
-	//Don't set deleteme to true, since we work inside lateinitialize
+	//Don't set delete_me to true, since we work inside lateinitialize
 
 /obj/abstract/landmark/clear/Initialize()
 	..()
@@ -75,12 +76,9 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 
 /obj/abstract/landmark/clear/LateInitialize()
 	. = ..()
-	var/turf/simulated/wall/simulated_wall = get_turf(src)
-	if(istype(simulated_wall))
-		simulated_wall.dismantle_wall(TRUE, TRUE, TRUE)
-	else if(istype(simulated_wall, /turf/exterior/wall))
-		var/turf/exterior/wall/exterior_wall = simulated_wall
-		exterior_wall.dismantle_wall(TRUE)
+	var/turf/wall/wall = get_turf(src)
+	if(istype(wall))
+		wall.dismantle_turf(TRUE, TRUE, TRUE)
 	qdel(src)
 
 //Applies fire act to the turf
@@ -188,8 +186,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	return TRUE
 
 /obj/abstract/landmark/proc_caller/floor_burner
-	type_to_find = /turf/simulated/floor
-	proc_to_call = /turf/simulated/floor/proc/burn_tile
+	type_to_find = /turf/floor
+	proc_to_call = /turf/floor/proc/burn_tile
 	arguments_to_pass = null
 
 /// Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.
@@ -197,3 +195,40 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 #ifndef UNIT_TEST
 	delete_me = TRUE
 #endif
+
+/obj/abstract/landmark/organize
+	abstract_type = /obj/abstract/landmark/organize
+	var/list/sort_types = list(/obj/item)
+
+/obj/abstract/landmark/organize/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/landmark/organize/LateInitialize()
+	..()
+	var/list/sorting_atoms = list()
+	for(var/atom/movable/AM in loc)
+		if(AM.simulated && !AM.anchored && is_type_in_list(AM, sort_types))
+			sorting_atoms += AM
+	if(length(sorting_atoms))
+		organize(shuffle(sorting_atoms))
+	qdel(src)
+
+/obj/abstract/landmark/organize/proc/organize(list/organize)
+	return
+
+/obj/abstract/landmark/organize/horizontal/organize(list/organize)
+	var/offset = round(world.icon_size / length(organize))
+	var/initial_x = -((offset * length(organize)) / 2)
+	var/sorted_atoms = 0
+	for(var/atom/movable/AM as anything in organize)
+		AM.pixel_x = initial_x + (offset * sorted_atoms)
+		sorted_atoms++
+
+/obj/abstract/landmark/organize/vertical/organize(list/organize)
+	var/offset = round(world.icon_size / length(organize))
+	var/initial_y = -((offset * length(organize)) / 2)
+	var/sorted_atoms = 0
+	for(var/atom/movable/AM as anything in organize)
+		AM.pixel_y = initial_y + (offset * sorted_atoms)
+		sorted_atoms++

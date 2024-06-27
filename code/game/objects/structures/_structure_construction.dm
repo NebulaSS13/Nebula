@@ -32,7 +32,7 @@
 			return TRUE
 		playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] completely dismantles \the [src] with \the [welder]."))
-		dismantle()
+		dismantle_structure(user)
 		return TRUE
 	return FALSE
 
@@ -47,7 +47,7 @@
 			return TRUE
 		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] completely dismantles \the [src] with \the [crowbar]."))
-		dismantle()
+		dismantle_structure(user)
 		return TRUE
 	return FALSE
 
@@ -118,7 +118,7 @@
 	if(O.force && user.a_intent == I_HURT)
 		attack_animation(user)
 		visible_message(SPAN_DANGER("\The [src] has been [pick(O.attack_verb)] with \the [O] by \the [user]!"))
-		take_damage(O.force)
+		take_damage(O.force, O.atom_damage_type)
 		. = TRUE
 
 	else if(IS_WRENCH(O))
@@ -138,6 +138,8 @@
 	if(.)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		add_fingerprint(user)
+		return
+	return ..()
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
 	if(environment_smash >= 1)

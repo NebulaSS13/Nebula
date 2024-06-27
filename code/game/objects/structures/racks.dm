@@ -35,7 +35,7 @@
 		auto_align(O, click_params)
 		return TRUE
 
-/obj/structure/rack/holorack/dismantle()
+/obj/structure/rack/holorack/dismantle_structure(mob/user)
 	material = null
 	reinf_material = null
 	parts_type = null

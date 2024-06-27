@@ -36,7 +36,7 @@
 // make a screeching noise to drive people mad
 /obj/structure/bed/roller/ironingboard/Move()
 	var/turf/T = get_turf(src)
-	if(isspaceturf(T) || istype(T, /turf/simulated/floor/carpet))
+	if(isspaceturf(T) || istype(T, /turf/floor/carpet))
 		return
 	playsound(T, pick(move_sounds), 75, 1)
 
@@ -84,7 +84,7 @@
 
 		// anti-wrinkle "massage"
 		if(buckled_mob && ishuman(buckled_mob))
-			var/mob/living/carbon/human/H = buckled_mob
+			var/mob/living/human/H = buckled_mob
 			var/zone = user.get_target_zone()
 			var/parsed = parse_zone(zone)
 

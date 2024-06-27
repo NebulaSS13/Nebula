@@ -58,7 +58,7 @@
 	return FALSE
 
 /obj/item/organ/internal/stomach/proc/get_devour_time(var/atom/movable/food)
-	if(iscarbon(food) || isanimal(food))
+	if(isliving(food))
 		var/mob/living/L = food
 		if((species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_SIZE_TINY) && !ishuman(food)) // Anything MOB_SIZE_TINY or smaller
 			return DEVOUR_SLOW
@@ -104,9 +104,9 @@
 					qdel(M)
 					continue
 
-				M.adjustBruteLoss(3, do_update_health = FALSE)
-				M.adjustFireLoss(3, do_update_health = FALSE)
-				M.adjustToxLoss(3)
+				M.take_damage(3,       do_update_health = FALSE)
+				M.take_damage(3, BURN, do_update_health = FALSE)
+				M.take_damage(3, TOX)
 
 				var/digestion_product = M.get_digestion_product()
 				if(digestion_product)
@@ -119,7 +119,7 @@
 		var/alcohol_volume = REAGENT_VOLUME(ingested, /decl/material/liquid/ethanol)
 
 		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
-		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
+		if(alcohol_threshold_met && owner.has_genetic_condition(GENE_COND_EPILEPSY) && prob(20))
 			owner.seizure()
 
 		// Alcohol counts as double volume for the purposes of vomit probability

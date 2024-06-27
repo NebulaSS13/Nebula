@@ -20,7 +20,9 @@
 		/decl/config/toggle/on/cult_ghostwriter,
 		/decl/config/toggle/allow_holidays,
 		/decl/config/toggle/humans_need_surnames,
-		/decl/config/toggle/roundstart_level_generation
+		/decl/config/toggle/roundstart_level_generation,
+		/decl/config/toggle/lights_start_on,
+		/decl/config/toggle/on/cisnormativity
 	)
 
 /decl/config/num/exterior_ambient_light
@@ -125,3 +127,11 @@
 /decl/config/toggle/roundstart_level_generation
 	uid = "roundstart_level_generation"
 	desc = "Enable/Disable random level generation. Will behave strangely if turned off with a map that expects it on."
+
+/decl/config/toggle/lights_start_on
+	uid = "lights_start_on"
+	desc = "If true, most lightswitches start on by default. Otherwise, they start off."
+
+/decl/config/toggle/on/cisnormativity
+	uid = "cisnormativity"
+	desc = "If true, when bodytype is changed in character creation, selected pronouns are also changed."

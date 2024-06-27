@@ -50,7 +50,7 @@
 		return TRUE
 
 	if(a_intent == I_HURT)
-		if(prob(15) && !M.lying)
+		if(prob(15) && !M.current_posture.prone)
 			M.visible_message( \
 				SPAN_DANGER("\The [src] pounces at \the [M]!"), \
 				SPAN_DANGER("\The [src] pounces at you!"))

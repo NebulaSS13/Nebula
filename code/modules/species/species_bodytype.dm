@@ -44,8 +44,12 @@ var/global/list/bodytypes_by_category = list()
 	var/manual_dexterity = null
 	/// Determines how the limb behaves with regards to manual attachment/detachment.
 	var/modular_limb_tier = MODULAR_BODYPART_INVALID
+	// Expected organ types per category, used only for stance checking at time of writing.
+	var/list/organs_by_category = list()
+	// Expected organ tags per category, used only for stance checking at time of writing.
+	var/list/organ_tags_by_category = list()
 
-	var/uniform_state_modifier
+	var/list/onmob_state_modifiers
 	var/health_hud_intensity = 1
 
 	var/pixel_offset_x = 0                    // Used for offsetting large icons.
@@ -57,9 +61,12 @@ var/global/list/bodytypes_by_category = list()
 
 	var/eye_offset = 0                        // Amount to shift eyes on the Y axis to correct for non-32px height.
 
+	var/z_flags = 0
+
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
 	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
+	var/list/default_hug_message
 	var/list/hug_messages = list(
 		BP_L_HAND = list(
 			"$USER$ shakes $TARGET$'s hand.",
@@ -79,6 +86,24 @@ var/global/list/bodytypes_by_category = list()
 		)
 	)
 
+	var/list/override_emote_sounds = list(
+		"cough" = list(
+			'sound/voice/emotes/f_cougha.ogg',
+			'sound/voice/emotes/f_coughb.ogg'
+		),
+		"sneeze" = list(
+			'sound/voice/emotes/f_sneeze.ogg'
+		)
+	)
+	var/list/emote_sounds = list(
+		"whistle"  = list('sound/voice/emotes/longwhistle.ogg'),
+		"qwhistle" = list('sound/voice/emotes/shortwhistle.ogg'),
+		"wwhistle" = list('sound/voice/emotes/wolfwhistle.ogg'),
+		"swhistle" = list('sound/voice/emotes/summon_whistle.ogg')
+	)
+	var/list/broadcast_emote_sounds = list(
+		"swhistle" = list('sound/voice/emotes/summon_whistle.ogg')
+	)
 	var/list/bodyfall_sounds = list(
 		'sound/foley/meat1.ogg',
 		'sound/foley/meat2.ogg'
@@ -94,7 +119,7 @@ var/global/list/bodytypes_by_category = list()
 	var/list/matter =     null
 	/// The reagent organs are filled with, which currently affects what mobs that eat the organ will receive.
 	/// TODO: Remove this in a later matter edibility refactor.
-	var/edible_reagent =  /decl/material/liquid/nutriment/protein
+	var/edible_reagent =  /decl/material/solid/organic/meat
 	/// A bitfield representing various bodytype-specific features.
 	var/body_flags = 0
 	/// Used to modify the arterial_bleed_severity of organs.
@@ -140,6 +165,12 @@ var/global/list/bodytypes_by_category = list()
 	var/breathing_organ           // If set, this organ is required for breathing.
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
+
+	var/age_descriptor = /datum/appearance_descriptor/age
+	var/list/appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 1,
+		/datum/appearance_descriptor/build =  1
+	)
 
 	/// Losing an organ from this list will give a grace period of `vital_organ_failure_death_delay` then kill the mob.
 	var/list/vital_organs = list(BP_BRAIN)
@@ -193,9 +224,116 @@ var/global/list/bodytypes_by_category = list()
 		"Your chilly flesh stands out in goosebumps."
 	)
 
+	/// Add emotes to this list to remove them from defaults (ie. blinking for a species with no eyes)
+	var/list/removed_emotes
+	/// Add emotes to this list to add them to the defaults (ie. a humanoid species that also has a purr)
+	var/list/additional_emotes
+	/// Generalized emote list available to mobs with this bodytype.
+	var/list/default_emotes = list(
+		/decl/emote/visible/blink,
+		/decl/emote/audible/synth,
+		/decl/emote/audible/synth/ping,
+		/decl/emote/audible/synth/buzz,
+		/decl/emote/audible/synth/confirm,
+		/decl/emote/audible/synth/deny,
+		/decl/emote/visible/nod,
+		/decl/emote/visible/shake,
+		/decl/emote/visible/shiver,
+		/decl/emote/visible/collapse,
+		/decl/emote/audible/gasp,
+		/decl/emote/audible/sneeze,
+		/decl/emote/audible/sniff,
+		/decl/emote/audible/snore,
+		/decl/emote/audible/whimper,
+		/decl/emote/audible/yawn,
+		/decl/emote/audible/clap,
+		/decl/emote/audible/chuckle,
+		/decl/emote/audible/cough,
+		/decl/emote/audible/cry,
+		/decl/emote/audible/sigh,
+		/decl/emote/audible/laugh,
+		/decl/emote/audible/mumble,
+		/decl/emote/audible/grumble,
+		/decl/emote/audible/groan,
+		/decl/emote/audible/moan,
+		/decl/emote/audible/grunt,
+		/decl/emote/audible/slap,
+		/decl/emote/audible/deathgasp,
+		/decl/emote/audible/giggle,
+		/decl/emote/audible/scream,
+		/decl/emote/visible/airguitar,
+		/decl/emote/visible/blink_r,
+		/decl/emote/visible/bow,
+		/decl/emote/visible/salute,
+		/decl/emote/visible/flap,
+		/decl/emote/visible/aflap,
+		/decl/emote/visible/drool,
+		/decl/emote/visible/eyebrow,
+		/decl/emote/visible/twitch,
+		/decl/emote/visible/dance,
+		/decl/emote/visible/twitch_v,
+		/decl/emote/visible/faint,
+		/decl/emote/visible/frown,
+		/decl/emote/visible/blush,
+		/decl/emote/visible/wave,
+		/decl/emote/visible/glare,
+		/decl/emote/visible/stare,
+		/decl/emote/visible/look,
+		/decl/emote/visible/point,
+		/decl/emote/visible/raise,
+		/decl/emote/visible/grin,
+		/decl/emote/visible/shrug,
+		/decl/emote/visible/smile,
+		/decl/emote/visible/pale,
+		/decl/emote/visible/tremble,
+		/decl/emote/visible/wink,
+		/decl/emote/visible/hug,
+		/decl/emote/visible/dap,
+		/decl/emote/visible/signal,
+		/decl/emote/visible/handshake,
+		/decl/emote/visible/afold,
+		/decl/emote/visible/alook,
+		/decl/emote/visible/eroll,
+		/decl/emote/visible/hbow,
+		/decl/emote/visible/hip,
+		/decl/emote/visible/holdup,
+		/decl/emote/visible/hshrug,
+		/decl/emote/visible/crub,
+		/decl/emote/visible/erub,
+		/decl/emote/visible/fslap,
+		/decl/emote/visible/ftap,
+		/decl/emote/visible/hrub,
+		/decl/emote/visible/hspread,
+		/decl/emote/visible/pocket,
+		/decl/emote/visible/rsalute,
+		/decl/emote/visible/rshoulder,
+		/decl/emote/visible/squint,
+		/decl/emote/visible/tfist,
+		/decl/emote/visible/tilt,
+		/decl/emote/visible/spin,
+		/decl/emote/visible/sidestep,
+		/decl/emote/visible/vomit,
+		/decl/emote/audible/whistle,
+		/decl/emote/audible/whistle/quiet,
+		/decl/emote/audible/whistle/wolf,
+		/decl/emote/audible/whistle/summon
+	)
+	/// Set to FALSE if the mob will update prone icon based on state rather than transform.
+	var/rotate_on_prone = TRUE
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
+
+	if(length(removed_emotes))
+		LAZYREMOVE(default_emotes, removed_emotes)
+
+	if(length(additional_emotes))
+		LAZYDISTINCTADD(default_emotes, additional_emotes)
+
+	if(length(override_emote_sounds))
+		for(var/emote_cat in override_emote_sounds)
+			emote_sounds[emote_cat] = override_emote_sounds[emote_cat]
 
 	if(!pref_name)
 		pref_name = name
@@ -222,10 +360,39 @@ var/global/list/bodytypes_by_category = list()
 			has_limbs[ltag] = list("path" = override_limb_types[ltag])
 
 	//Build organ descriptors
-	for(var/limb_type in has_limbs)
-		var/list/organ_data = has_limbs[limb_type]
-		var/obj/item/organ/limb_path = organ_data["path"]
-		organ_data["descriptor"] = initial(limb_path.name)
+	for(var/organ_tag in has_limbs)
+		var/list/organ_data = has_limbs[organ_tag]
+		var/obj/item/organ/organ = organ_data["path"]
+		organ_data["descriptor"] = initial(organ.name)
+		var/organ_cat = initial(organ.organ_category)
+		if(organ_cat)
+			LAZYADD(organs_by_category[organ_cat], organ)
+			LAZYADD(organ_tags_by_category[organ_cat], organ_tag)
+
+	for(var/organ_tag in has_organ)
+		var/obj/item/organ/organ = has_organ[organ_tag]
+		var/organ_cat = initial(organ.organ_category)
+		if(organ_cat)
+			LAZYADD(organs_by_category[organ_cat], organ)
+			LAZYADD(organ_tags_by_category[organ_cat], organ_tag)
+
+	if(LAZYLEN(appearance_descriptors))
+		for(var/desctype in appearance_descriptors)
+			var/datum/appearance_descriptor/descriptor = new desctype(appearance_descriptors[desctype])
+			appearance_descriptors -= desctype
+			appearance_descriptors[descriptor.name] = descriptor
+
+	if(!(/datum/appearance_descriptor/age in appearance_descriptors))
+		LAZYINITLIST(appearance_descriptors)
+		var/datum/appearance_descriptor/age/age = new age_descriptor(1)
+		appearance_descriptors.Insert(1, age.name)
+		appearance_descriptors[age.name] = age
+
+/decl/bodytype/proc/get_expected_organ_count_for_categories(var/list/categories)
+	. = 0
+	for(var/category in categories)
+		if(category && (category in organs_by_category))
+			. += length(organs_by_category[category])
 
 /decl/bodytype/proc/apply_limb_colouration(var/obj/item/organ/external/E, var/icon/applying)
 	return applying
@@ -238,6 +405,12 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/validate()
 	. = ..()
+
+	// TODO: Maybe make age descriptors optional, in case someone wants a 'timeless entity' species?
+	if(isnull(age_descriptor))
+		. += "age descriptor was unset"
+	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
+		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
 
 	var/damage_icon = get_damage_overlays()
 	if(damage_icon)
@@ -317,11 +490,12 @@ var/global/list/bodytypes_by_category = list()
 	if(tail_data)
 		var/obj/item/organ/external/tail/tail_organ = LAZYACCESS(tail_data, "path")
 		if(ispath(tail_organ, /obj/item/organ/external/tail))
-			var/use_species = get_user_species_for_validation()
+			var/decl/species/use_species = get_user_species_for_validation()
 			if(use_species)
-				var/datum/dna/dummy_dna = new
-				dummy_dna.species = use_species
-				tail_organ = new tail_organ(null, null, dummy_dna, src)
+				var/datum/mob_snapshot/dummy_appearance = new
+				dummy_appearance.root_species  = use_species
+				dummy_appearance.root_bodytype = src
+				tail_organ = new tail_organ(null, null, dummy_appearance)
 				var/tail_icon  = tail_organ.get_tail_icon()
 				var/tail_state = tail_organ.get_tail()
 				if(tail_icon && tail_state)
@@ -333,7 +507,7 @@ var/global/list/bodytypes_by_category = list()
 					if(!tail_state)
 						. += "missing tail state"
 				qdel(tail_organ)
-				qdel(dummy_dna)
+				qdel(dummy_appearance)
 			else
 				. += "could not find a species with this bodytype available for tail organ validation"
 		else
@@ -381,7 +555,7 @@ var/global/list/bodytypes_by_category = list()
 			E.encased = apply_encased[E.organ_tag]
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
-/decl/bodytype/proc/create_missing_organs(mob/living/carbon/human/H, fully_replace = FALSE)
+/decl/bodytype/proc/create_missing_organs(mob/living/human/H, fully_replace = FALSE)
 	if(fully_replace)
 		H.delete_organs()
 
@@ -400,12 +574,15 @@ var/global/list/bodytypes_by_category = list()
 				qdel(O)
 
 	//Create missing limbs
+	var/datum/mob_snapshot/supplied_data = H.get_mob_snapshot(force = TRUE)
+	supplied_data.root_bodytype = src // This may not have been set on the target mob torso yet.
+
 	for(var/limb_type in has_limbs)
 		if(GET_EXTERNAL_ORGAN(H, limb_type)) //Skip existing
 			continue
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
-		var/obj/item/organ/external/E = new limb_path(H, null, H.dna, src) //explicitly specify the dna and bodytype
+		var/obj/item/organ/external/E = new limb_path(H, null, supplied_data) //explicitly specify the dna and bodytype
 		if(E.parent_organ)
 			var/list/parent_organ_data = has_limbs[E.parent_organ]
 			parent_organ_data["has_children"]++
@@ -416,7 +593,7 @@ var/global/list/bodytypes_by_category = list()
 		if(GET_INTERNAL_ORGAN(H, organ_tag)) //Skip existing
 			continue
 		var/organ_type = has_organ[organ_tag]
-		var/obj/item/organ/O = new organ_type(H, null, H.dna, src)
+		var/obj/item/organ/O = new organ_type(H, null, supplied_data)
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
@@ -437,7 +614,7 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/proc/get_limb_from_zone(limb)
 	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb
 
-/decl/bodytype/proc/check_vital_organ_missing(mob/living/carbon/H)
+/decl/bodytype/proc/check_vital_organ_missing(mob/living/H)
 	if(length(vital_organs))
 		for(var/organ_tag in vital_organs)
 			var/obj/item/organ/O = H.get_organ(organ_tag, /obj/item/organ)
@@ -477,17 +654,17 @@ var/global/list/bodytypes_by_category = list()
 				if(O)
 					O.set_sprite_accessory(accessory, null, accessory_colour, skip_update = TRUE)
 
-/decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+/decl/bodytype/proc/customize_preview_mannequin(mob/living/human/dummy/mannequin/mannequin)
 	set_default_sprite_accessories(mannequin)
 	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
 	mannequin.force_update_limbs()
-	mannequin.update_mutations(0)
+	mannequin.update_genetic_conditions(0)
 	mannequin.update_body(0)
 	mannequin.update_underwear(0)
 	mannequin.update_hair(0)
 	mannequin.update_icon()
 
-/decl/species/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+/decl/species/proc/customize_preview_mannequin(mob/living/human/dummy/mannequin/mannequin)
 	if(preview_outfit)
 		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
 		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
@@ -524,9 +701,11 @@ var/global/list/bodytypes_by_category = list()
 			qdel(innard)
 
 	// Install any necessary new organs.
+	var/datum/mob_snapshot/supplied_data = limb.owner.get_mob_snapshot(force = TRUE)
+	supplied_data.root_bodytype = src
 	for(var/organ_tag in replacing_organs)
 		var/organ_type = replacing_organs[organ_tag]
-		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, limb.owner.dna, src)
+		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, supplied_data)
 		limb.owner.add_organ(new_innard, GET_EXTERNAL_ORGAN(limb.owner, new_innard.parent_organ), FALSE, FALSE)
 
 /decl/bodytype/proc/get_body_temperature_threshold(var/threshold)
@@ -546,7 +725,7 @@ var/global/list/bodytypes_by_category = list()
 		else
 			CRASH("get_species_temperature_threshold() called with invalid threshold value.")
 
-/decl/bodytype/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+/decl/bodytype/proc/get_environment_discomfort(var/mob/living/human/H, var/msg_type)
 
 	if(!prob(5))
 		return
@@ -572,7 +751,7 @@ var/global/list/bodytypes_by_category = list()
 	for(var/species_name in get_all_species())
 		var/decl/species/species = get_species_by_key(species_name)
 		if(src in species.available_bodytypes)
-			return species_name
+			return species
 
 // Defined as a global so modpacks can add to it.
 var/global/list/limbs_with_nails = list(
@@ -590,3 +769,6 @@ var/global/list/limbs_with_nails = list(
 			"descriptor" = nail_noun
 		)
 	return null
+
+/decl/bodytype/proc/get_movement_slowdown(var/mob/living/human/H)
+	return movement_slowdown

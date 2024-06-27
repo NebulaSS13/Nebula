@@ -17,11 +17,9 @@
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
 	species_flags = SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 
-	meat_type = null
-	bone_material = null
-	skin_material = null
+	butchery_data = /decl/butchery_data/crystal
 
 	breath_type = null
 	poison_types = null
@@ -41,7 +39,7 @@
 
 	traits = list(/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS)
 
-/decl/species/golem/handle_post_spawn(var/mob/living/carbon/human/H)
+/decl/species/golem/handle_post_spawn(var/mob/living/human/H)
 	if(H.mind)
 		H.mind.reset()
 		H.mind.assigned_role = "Golem"

@@ -35,12 +35,6 @@
 		"stripe2" = COLOR_GOLD
 	)
 
-/obj/item/modular_computer/pda/ninja
-	color = COLOR_GRAY20
-	decals = list(
-		"stripe" = COLOR_BLACK
-	)
-
 /obj/item/modular_computer/pda/heads
 	color = COLOR_NAVY_BLUE
 

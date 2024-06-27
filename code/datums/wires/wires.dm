@@ -112,10 +112,10 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 		html += "<tr>"
 		html += "<td[row_options1]><font color='[colour_name]'>&#9724;</font>[capitalize(colour_name)]</td>"
 		html += "<td[row_options2]>"
-		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
-		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
-		html += " <A href='?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A>"
-		html += " <A href='?src=\ref[src];action=1;examine=[colour]'>Examine</A></td></tr>"
+		html += "<A href='byond://?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
+		html += " <A href='byond://?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
+		html += " <A href='byond://?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A>"
+		html += " <A href='byond://?src=\ref[src];action=1;examine=[colour]'>Examine</A></td></tr>"
 	html += "</table>"
 	html += "</div>"
 
@@ -131,7 +131,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 		var/mob/living/L = usr
 		if(CanUse(L) && href_list["action"])
 
-			var/obj/item/I = L.get_active_hand()
+			var/obj/item/I = L.get_active_held_item()
 			var/obj/item/offhand_item = usr?.get_rig()?.selected_module
 
 			holder.add_hiddenprint(L)

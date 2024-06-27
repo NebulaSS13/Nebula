@@ -1,14 +1,14 @@
 //This proc is called whenever someone clicks an inventory ui slot.
 /mob/proc/attack_ui(slot)
-	var/obj/item/W = get_active_hand()
-	var/obj/item/E = get_equipped_item(slot)
-	if (istype(E))
-		if(istype(W))
-			E.attackby(W,src)
+	var/obj/item/holding = get_active_held_item()
+	var/obj/item/equipped = get_equipped_item(slot)
+	if (istype(equipped))
+		if(istype(holding))
+			equipped.attackby(holding, src)
 		else
-			E.attack_hand(src) // We can assume it's physically accessible if it's on our person.
+			equipped.attack_hand(src) // We can assume it's physically accessible if it's on our person.
 	else
-		equip_to_slot_if_possible(W, slot)
+		equip_to_slot_if_possible(holding, slot)
 
 //This is a SAFE proc. Use this instead of equip_to_slot()!
 //set del_on_fail to have it delete W if it fails to equip
@@ -62,20 +62,41 @@
 			W.dropInto(loc)
 		return TRUE
 
-	if(slot == slot_tie_str)
-		var/obj/item/clothing/under/uniform = get_equipped_item(slot_w_uniform_str)
-		if(istype(uniform))
-			uniform.try_attach_accessory(W, src)
-		return TRUE
+	// Attempt to equip accessories if the slot is already blocked.
+	if(!delete_old_item && get_equipped_item(slot))
+
+		var/attached = FALSE
+		var/list/check_slots = get_inventory_slots()
+		if(islist(check_slots))
+
+			check_slots = check_slots.Copy()
+			check_slots -= global.all_hand_slots
+
+			check_slots -= slot
+			check_slots.Insert(1, slot)
+
+			var/try_equip_slot = W.get_fallback_slot()
+			if(try_equip_slot && slot != try_equip_slot)
+				check_slots -= try_equip_slot
+				check_slots.Insert(1, try_equip_slot)
+
+			for(var/slot_string in check_slots)
+				var/obj/item/clothing/clothes = get_equipped_item(slot_string)
+				if(istype(clothes) && clothes.can_attach_accessory(W, src))
+					clothes.attach_accessory(src, W)
+					attached = TRUE
+					break
+
+		if(attached)
+			return TRUE
 
 	unequip(W)
-	if(!isnum(slot))
-		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
-		if(inv_slot)
-			inv_slot.equipped(src, W, redraw_mob, delete_old_item)
-			if(W.action_button_name)
-				update_action_buttons()
-			return TRUE
+	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+	if(inv_slot)
+		inv_slot.equipped(src, W, redraw_mob, delete_old_item)
+		if(W.action_button_name)
+			update_action_buttons()
+		return TRUE
 	to_chat(src, SPAN_WARNING("You are trying to equip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]"))
 	return FALSE
 
@@ -104,16 +125,16 @@
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	var/obj/item/storage/backpack = get_equipped_item(slot_back_str)
-	if(istype(backpack) && backpack.can_be_inserted(newitem, null, 1))
-		newitem.forceMove(backpack)
-		return backpack
+	var/obj/item/back = get_equipped_item(slot_back_str)
+	if(back?.storage?.can_be_inserted(newitem, null, 1))
+		back.storage.handle_item_insertion(src, newitem)
+		return back
 
 	// Try to place it in any item that can store stuff, on the mob.
-	for(var/obj/item/storage/S in src.contents)
-		if(S.can_be_inserted(newitem, null, 1))
-			newitem.forceMove(S)
-			return S
+	for(var/obj/item/thing in contents)
+		if(thing?.storage?.can_be_inserted(newitem, null, 1))
+			thing.storage.handle_item_insertion(src, newitem)
+			return thing
 
 /mob/proc/equip_to_storage_or_drop(obj/item/newitem)
 	var/stored = equip_to_storage(newitem)
@@ -130,7 +151,7 @@
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
 
 //Returns the thing in our active hand
-/mob/proc/get_active_hand()
+/mob/proc/get_active_held_item()
 	RETURN_TYPE(/obj/item)
 	return null
 
@@ -145,7 +166,7 @@
 /mob/proc/get_held_items()
 	for(var/obj/item/thing in get_inactive_held_items())
 		LAZYADD(., thing)
-	var/obj/item/thing = get_active_hand()
+	var/obj/item/thing = get_active_held_item()
 	if(istype(thing))
 		LAZYADD(., thing)
 
@@ -198,12 +219,12 @@
 	return FALSE
 
 // Drops a held item from a given slot.
-/mob/proc/drop_from_hand(var/slot, var/atom/Target)
+/mob/proc/drop_from_slot(slot_id, atom/new_loc)
 	return FALSE
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
-	var/obj/item/I = get_active_hand()
+	var/obj/item/I = get_active_held_item()
 	if(!istype(I))
 		if(length(get_active_grabs()))
 			for(var/obj/item/grab/grab in get_active_grabs())
@@ -249,6 +270,12 @@
 	if(!slot && !istype(I.loc, /obj/item/rig_module))
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
+
+/obj/item/proc/get_equipped_slot()
+	if(!ismob(loc))
+		return null
+	var/mob/mob = loc
+	return mob.get_equipped_slot_for_item(src)
 
 /mob/proc/get_equipped_slot_for_item(obj/item/I)
 	var/list/slots = get_inventory_slots()
@@ -360,7 +387,7 @@
 
 /// If this proc returns false, reconsider_client_screen_presence will set the item's screen_loc to null.
 /mob/proc/item_should_have_screen_presence(obj/item/item, slot)
-	if(!slot || !hud_used)
+	if(!slot || !istype(hud_used))
 		return FALSE
 	if(hud_used.inventory_shown)
 		return TRUE

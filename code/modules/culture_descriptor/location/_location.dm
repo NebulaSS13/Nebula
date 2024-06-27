@@ -1,7 +1,8 @@
 /decl/cultural_info/location
 	abstract_type = /decl/cultural_info/location
-	desc_type = "Home System"
+	desc_type = "Residence"
 	category = TAG_HOMEWORLD
+	var/distance_heading = "Distance from Sol"
 	var/distance = 0
 	var/ruling_body = "Other Faction"
 	var/capital
@@ -16,6 +17,6 @@
 		. += "<b>Capital:</b> [capital]."
 	if(!isnull(ruling_body))
 		. += "<b>Territory:</b> [ruling_body]."
-	if(!isnull(distance))
-		. += "<b>Distance from Sol:</b> [distance]."
+	if(!isnull(distance) && !isnull(distance_heading))
+		. += "<b>[distance_heading]:</b> [distance]."
 	. += ..()

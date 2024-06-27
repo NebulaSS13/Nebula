@@ -21,14 +21,13 @@
 		/decl/config/num/default_darksight_effectiveness,
 		/decl/config/toggle/grant_default_darksight,
 		/decl/config/num/expected_round_length,
-		/decl/config/toggle/allow_diagonal_movement,
+		/decl/config/toggle/on/allow_diagonal_movement,
 		/decl/config/toggle/expanded_alt_interactions,
 		/decl/config/toggle/ert_admin_call_only,
 		/decl/config/toggle/ghosts_can_possess_animals,
 		/decl/config/toggle/assistant_maint,
 		/decl/config/toggle/ghost_interaction,
 		/decl/config/toggle/aliens_allowed,
-		/decl/config/toggle/ninjas_allowed,
 		/decl/config/toggle/allow_character_comments,
 		/decl/config/num/hide_comments_older_than,
 		/decl/config/toggle/stack_crafting_uses_tools,
@@ -135,7 +134,7 @@
 	uid = "grant_default_darksight"
 	desc = "Whether or not all human mobs have very basic darksight by default."
 
-/decl/config/toggle/allow_diagonal_movement
+/decl/config/toggle/on/allow_diagonal_movement
 	uid = "allow_diagonal_movement"
 	desc = "Allow multiple input keys to be pressed for diagonal movement."
 
@@ -162,10 +161,6 @@
 /decl/config/toggle/aliens_allowed
 	uid = "aliens_allowed"
 	desc = "Remove the # to let aliens spawn."
-
-/decl/config/toggle/ninjas_allowed
-	uid = "ninjas_allowed"
-	desc = "Remove the # to let ninjas spawn."
 
 /decl/config/toggle/allow_character_comments
 	uid = "allow_character_comments"

@@ -1,17 +1,17 @@
 /datum/map/ministation
 	name = "Ministation"
-	full_name = "Ministation Zebra"
+	full_name = "Tradepost Zebra"
 	path = "ministation"
 	ground_noun = "floor"
 
-	station_name = "Space Station Zebra"
+	station_name = "Tradepost Zebra"
 	station_short = "Zebra"
 
-	dock_name     = "Finite Beginnings Free Dock"
-	boss_name     = "Trade Administration"
+	dock_name     = "Salvia Station"
+	boss_name     = "Trademaster"
 	boss_short    = "Admin"
-	company_name  = "Free Trade Union Residual Delta"
-	company_short = "RD"
+	company_name  = "Tradehouse Administration"
+	company_short = "Admin"
 
 	default_law_type = /datum/ai_laws/nanotrasen
 
@@ -20,6 +20,10 @@
 	overmap_ids = list(OVERMAP_ID_SPACE)
 	num_exoplanets = 3
 	away_site_budget = 3
+	lobby_tracks = list(
+		/decl/music_track/absconditus,
+		/decl/music_track/level3_mod
+	)
 
 	shuttle_docked_message = "The public ferry to %dock_name% has docked with the station. It will depart in approximately %ETD%"
 	shuttle_leaving_dock   = "The public ferry has left the station. Estimate %ETA% until the ferry docks at %dock_name%."
@@ -64,4 +68,4 @@
 
 /datum/map/ministation/get_map_info()
 	return "You're aboard the <b>[station_name],</b> an older station once used for unethical economic research. It has long since been repurposed as deep space communication relay, though only on paper. \
-	Onboard activity is at the whims of the [boss_name] who treat the station as a dumping ground for less desired personnel."
+	Onboard activity is at the whims of the [boss_name] who treat the station as a dumping ground for less desired tradehouse personnel."

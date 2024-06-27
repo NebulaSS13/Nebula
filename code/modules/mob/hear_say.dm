@@ -130,7 +130,7 @@
 	var/speaker_name = vname ? vname : speaker.name
 
 	if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
+		var/mob/living/human/H = speaker
 		if(H.voice && !vname)
 			speaker_name = H.voice
 
@@ -141,18 +141,18 @@
 
 	if(isAI(src) && !hard_to_hear)
 		var/jobname // the mob's "job"
-		var/mob/living/carbon/human/impersonating //The crew member being impersonated, if any.
+		var/mob/living/human/impersonating //The crew member being impersonated, if any.
 
 		if (ishuman(speaker))
-			var/mob/living/carbon/human/H = speaker
+			var/mob/living/human/H = speaker
 
 			if(istype(H.get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/chameleon/voice))
 				changed_voice = 1
 				var/list/impersonated = new()
-				var/mob/living/carbon/human/I = impersonated[speaker_name]
+				var/mob/living/human/I = impersonated[speaker_name]
 
 				if(!I)
-					for(var/mob/living/carbon/human/M in SSmobs.mob_list)
+					for(var/mob/living/human/M in SSmobs.mob_list)
 						if(M.real_name == speaker_name)
 							I = M
 							impersonated[speaker_name] = I
@@ -168,8 +168,6 @@
 			else
 				jobname = H.get_assignment()
 
-		else if (iscarbon(speaker)) // Nonhuman carbon mob
-			jobname = "No id"
 		else if (isAI(speaker))
 			jobname = "AI"
 		else if (isrobot(speaker))
@@ -214,8 +212,8 @@
 		formatted = language.format_message_radio(message, nverb)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
-	if(sdisabilities & DEAFENED || GET_STATUS(src, STAT_DEAF))
-		var/mob/living/carbon/human/H = src
+	if(has_genetic_condition(GENE_COND_DEAFENED) || GET_STATUS(src, STAT_DEAF))
+		var/mob/living/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
 			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
 	else if(vsource)

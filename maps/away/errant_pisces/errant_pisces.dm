@@ -22,7 +22,7 @@
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
 	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
 	turns_per_move = 5
-	meat_type = /obj/item/chems/food/sharkmeat
+	butchery_data = /decl/butchery_data/animal/fish/space_carp/shark
 	speed = 2
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
@@ -33,7 +33,7 @@
 	return
 
 /mob/living/simple_animal/hostile/carp/shark/death(gibbed)
-	..()
+	. = ..()
 	if(. && !gibbed)
 		var/datum/gas_mixture/environment = loc.return_air()
 		if (environment)
@@ -42,7 +42,7 @@
 			environment.merge(sharkmaw_chlorine)
 			visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))
 
-/mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
+/mob/living/simple_animal/hostile/carp/shark/attack_target(mob/target)
 	set waitfor = 0//to deal with sleep() possibly stalling other procs
 	. =..()
 	var/mob/living/L = .
@@ -59,6 +59,10 @@
 				L.forceMove(T)
 			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
+/decl/butchery_data/animal/fish/space_carp/shark
+	meat_type = /obj/item/chems/food/sharkmeat
+	must_use_hook = TRUE
+
 /obj/item/chems/food/sharkmeat
 	name = "cosmoshark fillet"
 	desc = "A fillet of cosmoshark meat."
@@ -69,11 +73,12 @@
 
 /obj/item/chems/food/sharkmeat/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
-	add_to_reagents(/decl/material/liquid/psychoactives,     1)
-	add_to_reagents(/decl/material/gas/chlorine,             1)
+	add_to_reagents(/decl/material/solid/organic/meat,   5)
+	add_to_reagents(/decl/material/liquid/psychoactives, 1)
+	add_to_reagents(/decl/material/gas/chlorine,         1)
 
-/obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
+//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
+/obj/structure/net
 	name = "industrial net"
 	desc = "A sturdy industrial net of synthetic belts reinforced with plasteel threads."
 	icon = 'maps/away/errant_pisces/icons/net.dmi'
@@ -87,11 +92,12 @@
 	update_connections()
 	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
 		var/turf/T = get_turf(src)
-		for (var/turf/AT in T.CardinalTurfs(FALSE))
-			for (var/obj/structure/net/N in AT)
-				if (type != N.type)//net-walls cause update for net-walls and floors for floors but not for each other
-					continue
-				N.update_connections()
+		if(T)
+			for (var/turf/AT in T.CardinalTurfs(FALSE))
+				for (var/obj/structure/net/N in AT)
+					if (type != N.type)//net-walls cause update for net-walls and floors for floors but not for each other
+						continue
+					N.update_connections()
 
 /obj/structure/net/get_examined_damage_string()
 	if(!can_take_damage())
@@ -117,7 +123,7 @@
 			if (!do_after(user, 20, src))
 				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
 				return
-			take_damage(20 * (1 + (SH.force-10)/10)) //the sharper the faster, every point of force above 10 adds 10 % to damage
+			take_damage(20 * (1 + (SH.force-10)/10), W.atom_damage_type) //the sharper the faster, every point of force above 10 adds 10 % to damage
 		new /obj/item/stack/net(src.loc)
 		qdel(src)
 		return TRUE
@@ -131,18 +137,19 @@
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
-	if(P.damage_type != BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
+	if(P.atom_damage_type != BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return
 	visible_message("<span class='warning'>\The [P] hits \the [src] and tears it!</span>")
-	take_damage(P.damage)
+	take_damage(P.damage, P.atom_damage_type)
 
 /obj/structure/net/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
 	overlays.Cut()
 	var/turf/T = get_turf(src)
-	for (var/turf/AT in T.CardinalTurfs(FALSE))
-		if((locate(/obj/structure/net) in AT) || (locate(/obj/structure/lattice) in AT))//connects to another net objects or walls/floors or lattices
-			var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
-			overlays += I
+	if(T)
+		for (var/turf/AT in T.CardinalTurfs(FALSE))
+			if((locate(/obj/structure/net) in AT) || (locate(/obj/structure/lattice) in AT))//connects to another net objects or walls/floors or lattices
+				var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
+				overlays += I
 
 /obj/structure/net/net_wall
 	icon_state = "net_w"
@@ -153,19 +160,20 @@
 	. = ..()
 	if (mapload)//if it's pre-mapped, it should put floor-net below itself
 		var/turf/T = get_turf(src)
-		for (var/obj/structure/net/N in T)
-			if (N.type != /obj/structure/net/net_wall)//if there's net that is not a net-wall, we don't need to spawn it
-				return
-		new /obj/structure/net(T)
-
+		if(T)
+			for (var/obj/structure/net/N in T)
+				if (N.type != /obj/structure/net/net_wall)//if there's net that is not a net-wall, we don't need to spawn it
+					return
+			new /obj/structure/net(T)
 
 /obj/structure/net/net_wall/update_connections()//this is different for net-walls because they only connect to walls and net-walls
 	overlays.Cut()
 	var/turf/T = get_turf(src)
-	for (var/turf/AT in T.CardinalTurfs(FALSE))
-		if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/simulated/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
-			var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
-			overlays += I
+	if(T)
+		for (var/turf/AT in T.CardinalTurfs(FALSE))
+			if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
+				var/image/I = image(icon,"[icon_state]_ol_[get_dir(src,AT)]")
+				overlays += I
 
 /obj/item/stack/net
 	name = "industrial net roll"
@@ -182,7 +190,6 @@
 	max_amount = 30
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
-	lock_picking_level = 3
 
 /obj/item/stack/net/Initialize()
 	. = ..()
@@ -202,9 +209,10 @@
 	if (!has_gravity())
 		return 1
 	var/turf/T = get_turf(src)
-	for (var/turf/AT in T.CardinalTurfs(FALSE))
-		if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/simulated/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
-			return 1
+	if(T)
+		for (var/turf/AT in T.CardinalTurfs(FALSE))
+			if ((locate(/obj/structure/net/net_wall) in AT) || istype(AT, /turf/wall)  || istype(AT, /turf/unsimulated/wall))//connects to another net-wall objects or walls
+				return 1
 	return 0
 
 /obj/item/stack/net/attack_self(mob/user)//press while holding to lay one. If there's net already, place wall
@@ -226,7 +234,7 @@
 	if (amount < 1)
 		qdel(src)
 
-/obj/item/clothing/under/carp //as far as I know sprites are taken from /tg/
+/obj/item/clothing/costume/carp //as far as I know sprites are taken from /tg/
 	name = "space carp suit"
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
 	icon = 'maps/away/errant_pisces/icons/carpsuit.dmi'
@@ -237,7 +245,7 @@
 
 /decl/hierarchy/outfit/corpse/carp_fisher
 	name = "Dead carp fisher"
-	uniform = /obj/item/clothing/under/color/green
+	uniform = /obj/item/clothing/jumpsuit/green
 	suit = /obj/item/clothing/suit/apron/overalls
 	belt = /obj/item/knife/combat
 	shoes = /obj/item/clothing/shoes/jackboots

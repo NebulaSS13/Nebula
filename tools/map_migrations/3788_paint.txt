@@ -1,0 +1,8 @@
+/obj/item/stack/tile/carpetblue/@SUBTYPES : /obj/item/stack/tile/carpet/blue@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetblue2/@SUBTYPES : /obj/item/stack/tile/carpet/blue2@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetblue3/@SUBTYPES : /obj/item/stack/tile/carpet/blue3@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetmagenta/@SUBTYPES : /obj/item/stack/tile/carpet/magenta@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetpurple/@SUBTYPES : /obj/item/stack/tile/carpet/purple/@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetorange/@SUBTYPES : /obj/item/stack/tile/carpet/orange/@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetgreen/@SUBTYPES : /obj/item/stack/tile/carpet/green/@SUBTYPES{@OLD}
+/obj/item/stack/tile/carpetred/@SUBTYPES : /obj/item/stack/tile/carpet/red/@SUBTYPES{@OLD}

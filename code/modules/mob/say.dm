@@ -64,14 +64,6 @@ var/global/list/special_channel_keys = list(
 			verb ="asks"
 	return verb
 
-/mob/proc/get_ear()
-	// returns an atom representing a location on the map from which this
-	// mob can hear things
-
-	// should be overloaded for all mobs whose "ear" is separate from their "mob"
-
-	return get_turf(src)
-
 /mob/proc/check_speech_punctuation_state(var/text)
 	var/ending = copytext(text, length(text))
 	if (ending == "?")
@@ -117,5 +109,14 @@ var/global/list/special_channel_keys = list(
 	. = mouth_slot?.get_equipped_item()
 	if(!.)
 		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-		if(istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/clothing/sealant))
+		if(istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/sealant))
 			. = mask
+
+/// Adds punctuation to an emote or speech message automatically.
+/mob/proc/handle_autopunctuation(message)
+	if(!message)
+		return
+	var/end_char = copytext_char(trim_right(strip_html_properly(message)), -1)
+	if(!(end_char in list(".", "?", "!", "-", "~")))
+		message += "."
+	return message

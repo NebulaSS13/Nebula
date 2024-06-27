@@ -72,10 +72,11 @@
 		add_overlay(I)
 
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
+	. = ..()
 	if(plated_tile)
 		var/plate_path = plated_tile.build_type
-		new plate_path(T)
-	. = ..()
+		LAZYADD(., new plate_path(T))
+		plated_tile = null
 
 /obj/structure/catwalk/explosion_act(severity)
 	..()
@@ -111,7 +112,7 @@
 			var/obj/item/gun/energy/plasmacutter/cutter = C
 			if(!cutter.slice(user))
 				return
-			dismantle(user)
+			dismantle_structure(user)
 			return TRUE
 
 		if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)

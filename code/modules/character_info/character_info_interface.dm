@@ -55,9 +55,9 @@
 	if(ckey == user.ckey)
 		has_new_comments = FALSE
 
-	var/list/dat = list("<b>Viewing:</b> <a href='?src=\ref[src];change_viewed=1'>[name]</a><br/>")
+	var/list/dat = list("<b>Viewing:</b> <a href='byond://?src=\ref[src];change_viewed=1'>[name]</a><br/>")
 	var/datum/character_information/viewer = user.client.viewing_character_info_as && SScharacter_info.get_record(user.client.viewing_character_info_as, TRUE)
-	dat += "<b>Viewing as:</b> <a href='?src=\ref[src];change_viewer=1'>[viewer?.name || "Nobody"]</a><br/>"
+	dat += "<b>Viewing as:</b> <a href='byond://?src=\ref[src];change_viewer=1'>[viewer?.name || "Nobody"]</a><br/>"
 	dat += "<center><h2>IC Info</h2></center>"
 	dat += "<center>[ic_info || "None supplied."]</center><br/>"
 	dat += "<center><h2>OOC Info</h2></center>"
@@ -68,10 +68,10 @@
 		dat += "<center>This character page is not currently accepting or displaying comments.</center>"
 	else
 		if(user.client?.show_comments_legend)
-			dat += "<center><a href='?src=\ref[src];show_legend=0'>Hide legend</a></center>"
+			dat += "<center><a href='byond://?src=\ref[src];show_legend=0'>Hide legend</a></center>"
 			dat += get_comment_mood_legend()
 		else
-			dat += "<center><a href='?src=\ref[src];show_legend=1'>Show legend</a></center>"
+			dat += "<center><a href='byond://?src=\ref[src];show_legend=1'>Show legend</a></center>"
 		dat += "<br/>"
 
 		var/list/other_comments = list()
@@ -87,9 +87,9 @@
 		if(my_comment)
 			dat += my_comment.get_comment_html(src, user, COMMENT_CANDYSTRIPE_ONE)
 		else if(viewer)
-			dat += "<tr><td width = 700px colspan = 3><center>You have not left a comment for this character. <a href='?src=\ref[src];create_comment=1'>Leave one now?</a></center></td></tr>"
+			dat += "<tr><td width = 700px colspan = 3><center>You have not left a comment for this character. <a href='byond://?src=\ref[src];create_comment=1'>Leave one now?</a></center></td></tr>"
 		else
-			dat += "<tr><td width = 700px colspan = 3><center><b>You cannot leave a comment anonymously. Click <a href='?src=\ref[src];change_viewer=1'>here</a> to select one of your saved characters.</b></center></td></tr>"
+			dat += "<tr><td width = 700px colspan = 3><center><b>You cannot leave a comment anonymously. Click <a href='byond://?src=\ref[src];change_viewer=1'>here</a> to select one of your saved characters.</b></center></td></tr>"
 		dat += "</table>"
 
 		dat += "<center><h3>Other Comments</h3></center>"
@@ -226,7 +226,7 @@
 	set src = usr
 
 	var/list/dat = SScharacter_info.get_character_manifest_html()
-	dat += "<a href='?src=\ref[SScharacter_info];download_manifest=1'>Download as HTML</a>"
+	dat += "<a href='byond://?src=\ref[SScharacter_info];download_manifest=1'>Download as HTML</a>"
 
 	var/datum/browser/popup = new(usr, "character_matrix", "Character Matrix", 800, 800)
 	popup.set_content(JOINTEXT(dat))

@@ -50,8 +50,8 @@
 	var/notified = FALSE
 
 /obj/item/integrated_circuit/reagent/on_reagent_change()
-	..()
-	push_vol()
+	if((. = ..()))
+		push_vol()
 
 /obj/item/integrated_circuit/reagent/smoke/do_work(ord)
 	switch(ord)
@@ -150,16 +150,16 @@
 
 /obj/item/integrated_circuit/reagent/injector/proc/draw_after(var/weakref/target, var/amount)
 	busy = FALSE
-	var/mob/living/carbon/C = target_nearby(target)
-	if(!C)
+	var/mob/living/target_living = target_nearby(target)
+	if(!target_living)
 		activate_pin(3)
 		return
 	var/atom/movable/acting_object = get_object()
 
-	C.visible_message("<span class='warning'>\The [acting_object] draws blood from \the [C]</span>",
+	target_living.visible_message("<span class='warning'>\The [acting_object] draws blood from \the [target_living]</span>",
 					"<span class='warning'>\The [acting_object] draws blood from you.</span>"
 					)
-	C.take_blood(src, amount)
+	target_living.take_blood(src, amount)
 	activate_pin(2)
 
 
@@ -213,19 +213,20 @@
 
 		var/tramount = abs(transfer_amount)
 
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
-			var/injection_status = C.can_inject(null, BP_CHEST)
+		if(ishuman(AM))
+			var/mob/living/human/H = AM
+			var/injection_status = H.can_inject(null, BP_CHEST)
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
 				injection_delay += INJECTION_PORT_DELAY
-			if(!C.dna || !injection_status)
+			if(!H.vessel?.total_volume || !injection_status)
 				activate_pin(3)
 				return
-			C.visible_message("<span class='danger'>\The [acting_object] is trying to take a blood sample from [C]!</span>", \
-								"<span class='danger'>\The [acting_object] is trying to take a blood sample from you!</span>")
+			H.visible_message(
+				SPAN_DANGER("\The [acting_object] is trying to take a blood sample from \the [H]!"),
+				SPAN_DANGER("\The [acting_object] is trying to take a blood sample from you!"))
 			busy = TRUE
-			addtimer(CALLBACK(src, PROC_REF(draw_after), weakref(C), tramount), injection_delay)
+			addtimer(CALLBACK(src, PROC_REF(draw_after), weakref(H), tramount), injection_delay)
 			return
 
 		else

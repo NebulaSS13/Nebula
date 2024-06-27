@@ -92,13 +92,13 @@
 		else
 			dat+= ">"
 		if(!isobserver(user))
-			dat += "<a href='?src=\ref[src];select=[i];person=\ref[user]'></a>"
+			dat += "<a href='byond://?src=\ref[src];select=[i];person=\ref[user]'></a>"
 		dat += "</td>"
 
 	dat += "</table>"
 
 	if(selected >= 0 && !isobserver(user))
-		dat += "<br><A href='?src=\ref[src];remove=0'>Remove Selected Piece</A>"
+		dat += "<br><A href='byond://?src=\ref[src];remove=0'>Remove Selected Piece</A>"
 	show_browser(user, jointext(dat, null), "window=boardgame;size=430x500") // 50px * 8 squares + 30 margin
 	onclose(usr, "boardgame")
 
@@ -132,10 +132,10 @@
 				if(I)
 					selected = text2num(s)
 				else
-					var/mob/living/carbon/human/H = locate(href_list["person"])
+					var/mob/living/human/H = locate(href_list["person"])
 					if(!istype(H))
 						return
-					var/obj/item/O = H.get_active_hand()
+					var/obj/item/O = H.get_active_held_item()
 					if(!O)
 						return
 					addPiece(O,H,text2num(s))

@@ -11,7 +11,7 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ac" = (
 /obj/structure/catwalk,
@@ -21,7 +21,7 @@
 /obj/machinery/porta_turret{
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ad" = (
 /obj/structure/catwalk,
@@ -31,11 +31,11 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ae" = (
 /obj/effect/paint/red,
-/turf/simulated/wall/r_titanium,
+/turf/wall/r_titanium,
 /area/map_template/merc_shuttle)
 "af" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -46,7 +46,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "merc_external"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ag" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -60,7 +60,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "merc_external"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ah" = (
 /obj/structure/catwalk,
@@ -68,7 +68,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/shipsensors,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ai" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -83,13 +83,13 @@
 	id_tag = "merc_external"
 	},
 /obj/effect/paint/red,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "aj" = (
 /obj/machinery/computer/ship/helm{
 	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "ak" = (
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle{
@@ -102,24 +102,24 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "al" = (
 /obj/machinery/power/terminal{
 	dir = 1
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "am" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
+/turf/wall/r_titanium,
 /area/map_template/merc_shuttle)
 "an" = (
 /obj/machinery/door/blast/regular{
 	id_tag = "merc_bsa"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/map_template/merc_shuttle)
 "ao" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -134,7 +134,7 @@
 	id_tag = "merc_external"
 	},
 /obj/effect/paint/red,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ap" = (
 /obj/structure/table/steel_reinforced,
@@ -146,7 +146,7 @@
 	name = "Protective Shutters Control";
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aq" = (
 /obj/structure/bed/chair/shuttle/blue{
@@ -161,7 +161,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "ar" = (
 /obj/structure/cable{
@@ -178,7 +178,7 @@
 	pixel_y = 32;
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "as" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -193,7 +193,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "at" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -205,13 +205,13 @@
 	id_tag = "merc_external"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "au" = (
 /obj/machinery/disperser/front{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/map_template/merc_shuttle)
 "av" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -220,29 +220,29 @@
 	id_tag = "merc_bsa_shutters"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "aw" = (
 /obj/machinery/computer/ship/disperser,
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "ax" = (
 /obj/machinery/computer/ship/sensors,
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "ay" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "az" = (
 /obj/machinery/network/relay/long_range{
 	initial_network_id = "mercnet";
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aA" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -257,7 +257,7 @@
 	id_tag = "merc_external"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "aB" = (
 /obj/machinery/disperser/middle{
@@ -266,13 +266,13 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/map_template/merc_shuttle)
 "aC" = (
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aD" = (
 /obj/structure/table/steel_reinforced,
@@ -293,7 +293,7 @@
 /obj/machinery/recharger{
 	pixel_x = 6
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -301,7 +301,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aF" = (
 /obj/machinery/disperser/back{
@@ -311,7 +311,7 @@
 	icon_state = "1-4"
 	},
 /obj/structure/ship_munition/disperser_charge/emp,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/map_template/merc_shuttle)
 "aG" = (
 /obj/structure/cable{
@@ -323,20 +323,20 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "merc_bsa"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/map_template/merc_shuttle)
 "aH" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aI" = (
 /obj/machinery/pointdefense_control{
 	initial_id_tag = "merc_pd";
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -345,7 +345,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/hologram/holopad/longrange/remoteship,
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aK" = (
 /obj/structure/catwalk,
@@ -355,12 +355,12 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "aL" = (
 /obj/effect/paint/black,
 /obj/effect/paint/red,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_shuttle)
 "aM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -386,7 +386,7 @@
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -399,7 +399,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aO" = (
 /obj/structure/cable{
@@ -418,7 +418,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aP" = (
 /obj/structure/bed/chair/shuttle/blue{
@@ -434,7 +434,7 @@
 /obj/machinery/computer/ship/navigation/telescreen{
 	pixel_y = -32
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aQ" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -449,26 +449,27 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "aR" = (
 /obj/effect/paint/red,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_shuttle)
 "aS" = (
 /obj/structure/closet/medical_wall/filled{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 4
 	},
 /obj/item/chems/spray/cleaner,
 /obj/item/chems/spray/antiseptic,
 /obj/item/defibrillator/loaded,
-/obj/item/storage/firstaid/combat,
+/obj/item/firstaid/combat,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/surgical,
 /obj/item/bodybag/cryobag,
 /obj/item/chems/ivbag/blood/nanoblood,
-/obj/item/storage/firstaid/adv,
-/turf/simulated/floor/tiled/white,
+/obj/item/firstaid/adv,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "aT" = (
 /obj/structure/iv_drip,
@@ -476,7 +477,7 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -489,7 +490,7 @@
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aV" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -499,7 +500,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aW" = (
 /obj/machinery/power/smes/buildable/preset{
@@ -510,7 +511,7 @@
 	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_io = 1, /obj/item/stock_parts/smes_coil/super_capacity = 1)
 	},
 /obj/structure/cable,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "aX" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -524,7 +525,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "aY" = (
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -533,30 +534,30 @@
 	id_tag = "merc_fuel"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "aZ" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
-/turf/simulated/wall/r_titanium,
+/turf/wall/r_titanium,
 /area/map_template/merc_shuttle)
 "ba" = (
 /obj/effect/paint/red,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_shuttle)
 "bb" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bc" = (
 /obj/machinery/door/window{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -566,7 +567,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "be" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -576,7 +577,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bf" = (
 /obj/machinery/atmospherics/portables_connector,
@@ -584,7 +585,7 @@
 /obj/machinery/power/terminal{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bg" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -596,7 +597,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "bh" = (
 /obj/structure/handrail,
@@ -608,7 +609,7 @@
 	id_tag = "merc_shuttle_sensor";
 	pixel_y = 25
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bi" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -623,7 +624,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "bj" = (
 /obj/machinery/bodyscanner{
@@ -632,7 +633,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bk" = (
 /obj/structure/cable{
@@ -641,7 +642,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bl" = (
 /obj/machinery/door/window{
@@ -656,7 +657,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bm" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -674,7 +675,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bn" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -683,7 +684,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bo" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -695,7 +696,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bp" = (
 /obj/machinery/door/airlock/external{
@@ -706,21 +707,21 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bq" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 10
 	},
-/turf/simulated/wall/r_titanium,
+/turf/wall/r_titanium,
 /area/map_template/merc_shuttle)
 "br" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/binary/passive_gate,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "bs" = (
 /obj/machinery/shield_diffuser,
@@ -734,23 +735,23 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bt" = (
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/structure/table,
 /obj/item/stack/nanopaste,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /obj/machinery/body_scanconsole,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bu" = (
 /obj/machinery/optable,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bv" = (
 /obj/machinery/sleeper/standard{
@@ -759,7 +760,7 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bw" = (
 /obj/structure/cable{
@@ -767,7 +768,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bx" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -778,7 +779,7 @@
 	},
 /obj/effect/shuttle_landmark/merc/start,
 /obj/effect/overmap/visitable/ship/landable/merc,
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "by" = (
 /obj/structure/table/steel,
@@ -804,7 +805,7 @@
 /obj/item/binoculars,
 /obj/item/binoculars,
 /obj/item/binoculars,
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bz" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -816,7 +817,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "bA" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -826,7 +827,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bB" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -836,7 +837,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bC" = (
 /obj/machinery/shield_diffuser,
@@ -848,7 +849,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bD" = (
 /obj/machinery/door/airlock,
@@ -857,15 +858,15 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bE" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/map_template/merc_shuttle)
 "bF" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_shuttle/rear)
 "bG" = (
 /obj/machinery/light/small{
@@ -873,7 +874,7 @@
 	},
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "bH" = (
 /obj/structure/cable{
@@ -885,11 +886,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "bJ" = (
 /obj/structure/handrail{
@@ -906,7 +907,7 @@
 	dir = 4;
 	id_tag = "merc_shuttle_pump_out_internal"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bK" = (
 /obj/machinery/atmospherics/unary/vent_pump/tank{
@@ -925,14 +926,14 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/turf/floor/reinforced/carbon_dioxide,
 /area/map_template/merc_shuttle/rear)
 "bL" = (
 /obj/machinery/door/blast/regular{
 	dir = 4;
 	id_tag = "merc_fuel_vent"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/map_template/merc_shuttle/rear)
 "bN" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -942,7 +943,7 @@
 	id_tag = "merc_igniter";
 	pixel_y = 26
 	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/turf/floor/reinforced/carbon_dioxide,
 /area/map_template/merc_shuttle/rear)
 "bP" = (
 /obj/structure/cable{
@@ -960,14 +961,14 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
 /obj/effect/paint/black,
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/map_template/merc_shuttle/rear)
 "bR" = (
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -977,7 +978,7 @@
 	},
 /obj/effect/paint/black,
 /obj/machinery/meter,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "bS" = (
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -988,11 +989,11 @@
 	id_tag = "merc_fuel"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "bT" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/map_template/merc_shuttle/rear)
 "bU" = (
 /obj/structure/catwalk,
@@ -1003,11 +1004,11 @@
 	pressure_checks_default = 2;
 	use_power = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "bV" = (
 /obj/effect/paint/red,
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_shuttle/rear)
 "bX" = (
 /obj/structure/cable{
@@ -1019,7 +1020,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bY" = (
 /obj/machinery/atmospherics/portables_connector{
@@ -1047,14 +1048,14 @@
 	pixel_x = -6;
 	pixel_y = 26
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bZ" = (
 /obj/machinery/atmospherics/valve/open,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "ca" = (
 /obj/machinery/fabricator/hacked,
@@ -1070,7 +1071,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cb" = (
 /obj/effect/paint/black,
@@ -1078,7 +1079,7 @@
 	dir = 8;
 	name = "External to Fuel Storage"
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/map_template/merc_shuttle/rear)
 "cc" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -1096,7 +1097,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cd" = (
 /obj/machinery/computer/air_control{
@@ -1112,7 +1113,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "ce" = (
 /obj/structure/catwalk,
@@ -1125,21 +1126,21 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cf" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 5
 	},
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_shuttle/rear)
 "cg" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_shuttle/rear)
 "ch" = (
 /obj/machinery/power/apc/hyper{
@@ -1158,7 +1159,7 @@
 	icon_state = "0-4"
 	},
 /obj/structure/handrail,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "ci" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -1168,7 +1169,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cj" = (
 /obj/effect/floor_decal/industrial/shutoff,
@@ -1183,7 +1184,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "ck" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1192,7 +1193,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cl" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
@@ -1214,13 +1215,13 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/item/storage/briefcase/inflatable,
-/obj/item/storage/briefcase/inflatable,
+/obj/item/briefcase/inflatable,
+/obj/item/briefcase/inflatable,
 /obj/item/inflatable_dispenser,
 /obj/item/spaceflare,
 /obj/item/spaceflare,
 /obj/item/spaceflare,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cm" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -1230,7 +1231,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cn" = (
 /obj/structure/cable{
@@ -1243,7 +1244,7 @@
 	icon_state = "2-8"
 	},
 /obj/structure/handrail,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "co" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -1258,7 +1259,7 @@
 	id_tag = "merc_external"
 	},
 /obj/effect/paint/red,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cp" = (
 /obj/structure/catwalk,
@@ -1269,7 +1270,7 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cq" = (
 /obj/machinery/computer/ship/engines,
@@ -1277,14 +1278,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cr" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cs" = (
 /obj/machinery/power/terminal{
@@ -1294,7 +1295,7 @@
 /obj/machinery/atmospherics/unary/engine/terminal{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "ct" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
@@ -1308,7 +1309,7 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cv" = (
 /obj/machinery/atmospherics/valve/shutoff{
@@ -1318,7 +1319,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/shutoff,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cw" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -1330,7 +1331,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cx" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1346,7 +1347,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cy" = (
 /obj/structure/cable{
@@ -1364,13 +1365,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cA" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cB" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -1380,7 +1381,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cC" = (
 /obj/effect/floor_decal/industrial/outline/orange,
@@ -1388,7 +1389,7 @@
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide{
 	start_pressure = 15000
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cD" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -1403,7 +1404,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cE" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -1415,7 +1416,7 @@
 	},
 /obj/structure/ship_munition/disperser_charge/explosive,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cF" = (
 /obj/machinery/power/terminal{
@@ -1430,7 +1431,7 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cG" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1446,7 +1447,7 @@
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide{
 	start_pressure = 15000
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cH" = (
 /obj/structure/fuel_port/hydrogen{
@@ -1456,7 +1457,7 @@
 	level = 2
 	},
 /obj/effect/floor_decal/industrial/shutoff,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cI" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1466,7 +1467,7 @@
 	dir = 4;
 	target_pressure = 15000
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cJ" = (
 /obj/structure/fuel_port/hydrogen{
@@ -1479,7 +1480,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cK" = (
 /obj/machinery/atmospherics/binary/pump/high_power/on{
@@ -1491,7 +1492,7 @@
 	icon_state = "bulb1"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cL" = (
 /obj/structure/cable/yellow{
@@ -1500,7 +1501,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cM" = (
 /obj/structure/catwalk,
@@ -1516,7 +1517,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cN" = (
 /obj/machinery/teleport/hub,
@@ -1524,7 +1525,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cO" = (
 /obj/machinery/teleport/station,
@@ -1532,7 +1533,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cP" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -1542,7 +1543,7 @@
 /obj/machinery/constructable_frame/computerframe/deconstruct{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -1550,7 +1551,7 @@
 	},
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cR" = (
 /obj/structure/table/steel_reinforced,
@@ -1558,13 +1559,13 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
-/obj/item/storage/toolbox/syndicate,
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
+/obj/item/toolbox/syndicate,
+/obj/item/backpack/dufflebag/syndie/ammo,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cS" = (
 /obj/machinery/port_gen/pacman,
@@ -1575,20 +1576,20 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cT" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cU" = (
 /obj/machinery/network/acl{
 	initial_network_id = "mercnet";
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/map_template/merc_spawn)
 "cX" = (
 /obj/structure/handrail{
@@ -1599,10 +1600,10 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/machinery/light/small,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "cY" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/space)
 "dh" = (
 /obj/structure/window/reinforced/crescent{
@@ -1620,16 +1621,16 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "dk" = (
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "dP" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/map_template/merc_spawn)
 "eb" = (
 /obj/abstract/landmark{
@@ -1639,24 +1640,24 @@
 	dir = 1
 	},
 /obj/structure/bed/chair/office,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "ec" = (
 /obj/structure/bed/chair/office{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "ex" = (
 /obj/effect/floor_decal/industrial/outline,
 /obj/machinery/suit_cycler/nonstandard/mercenary{
 	locked = 0
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "eA" = (
 /obj/structure/railing,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "eP" = (
 /obj/structure/closet/crate/uranium,
@@ -1667,26 +1668,26 @@
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "fq" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/space)
 "ft" = (
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "fx" = (
 /obj/machinery/computer/ship/engines{
 	dir = 8;
 	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/space)
 "fC" = (
 /obj/structure/ore_box,
@@ -1696,7 +1697,7 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "fV" = (
 /obj/machinery/mining/drill,
@@ -1706,7 +1707,7 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "gc" = (
 /obj/structure/catwalk,
@@ -1715,7 +1716,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "merc_shuttle_exterior_sensor";
-	pixel_y = -28
+	pixel_y = -28;
+	dir = 1
 	},
 /obj/machinery/power/terminal{
 	dir = 8
@@ -1732,7 +1734,7 @@
 	pixel_y = -32;
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "gk" = (
 /obj/random/medical,
@@ -1740,7 +1742,7 @@
 /area/space)
 "gy" = (
 /obj/machinery/vitals_monitor,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "gI" = (
 /obj/structure/railing{
@@ -1749,20 +1751,20 @@
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "gW" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "gZ" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "ha" = (
 /obj/structure/railing{
@@ -1781,19 +1783,19 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "hG" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/space)
 "hV" = (
 /obj/structure/railing{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "hX" = (
 /obj/structure/rack,
@@ -1804,12 +1806,12 @@
 /obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "iv" = (
 /obj/structure/closet/crate/secure/explosives,
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "iB" = (
 /obj/structure/rack,
@@ -1822,29 +1824,29 @@
 /obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "iN" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "js" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest/black,
-/obj/item/clothing/accessory/storage/vest/black,
+/obj/item/clothing/webbing/vest/brown,
+/obj/item/clothing/webbing/vest/brown,
+/obj/item/clothing/webbing/vest,
+/obj/item/clothing/webbing/vest,
+/obj/item/clothing/webbing/vest/black,
+/obj/item/clothing/webbing/vest/black,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "jE" = (
 /obj/structure/bed/chair/shuttle/blue{
@@ -1855,7 +1857,7 @@
 	pixel_x = 23;
 	pixel_y = -3
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "jF" = (
 /obj/effect/shuttle_landmark/merc/nav1,
@@ -1863,7 +1865,7 @@
 /area/space)
 "jJ" = (
 /obj/structure/railing,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "jP" = (
 /obj/machinery/acting/changer,
@@ -1871,13 +1873,13 @@
 /obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "kc" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "kf" = (
 /obj/structure/rack,
@@ -1886,7 +1888,7 @@
 /obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "km" = (
 /obj/structure/rack,
@@ -1895,7 +1897,7 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "ks" = (
 /obj/abstract/landmark{
@@ -1908,28 +1910,28 @@
 /obj/structure/bed/chair/office{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "kI" = (
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "kQ" = (
 /obj/structure/closet/crate/med_crate/toxin,
-/obj/item/storage/box/bodybags,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
-/obj/item/storage/belt/medical/emt,
-/obj/item/storage/belt/medical/emt,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
+/obj/item/box/bodybags,
+/obj/item/box/gloves,
+/obj/item/box/masks,
+/obj/item/belt/medical/emt,
+/obj/item/belt/medical/emt,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "kS" = (
 /obj/structure/railing,
@@ -1942,33 +1944,33 @@
 /obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "lq" = (
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "ls" = (
 /obj/machinery/mining/drill,
 /obj/structure/railing/mapped/no_density{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "lQ" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/drop_pouches/white,
-/obj/item/clothing/accessory/storage/drop_pouches/white,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
+/obj/item/clothing/webbing/drop_pouches/white,
+/obj/item/clothing/webbing/drop_pouches/white,
+/obj/item/clothing/webbing/drop_pouches/black,
+/obj/item/clothing/webbing/drop_pouches/black,
+/obj/item/clothing/webbing/drop_pouches/brown,
+/obj/item/clothing/webbing/drop_pouches/brown,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "mi" = (
 /obj/structure/catwalk,
@@ -1978,39 +1980,39 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "mm" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/wrench,
 /obj/item/cell/hyper,
 /obj/machinery/light/small,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "mR" = (
 /obj/structure/railing/mapped/no_density{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "nd" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "nk" = (
 /obj/random/medical,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "nE" = (
 /obj/machinery/fabricator/pipe/disposal,
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "nN" = (
 /obj/machinery/port_gen/pacman,
@@ -2018,36 +2020,36 @@
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "nQ" = (
 /obj/machinery/fabricator/pipe,
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "nR" = (
 /obj/structure/tank_rack/oxygen,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "oW" = (
 /obj/structure/inflatable/door,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "oY" = (
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "ph" = (
 /obj/structure/inflatable/door,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "pj" = (
 /obj/machinery/vending/cola{
@@ -2056,7 +2058,7 @@
 	name = "hacked Robust Softdrinks"
 	},
 /obj/machinery/light/spot,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "qa" = (
 /obj/abstract/landmark{
@@ -2065,52 +2067,52 @@
 /obj/effect/overmap/visitable/merc_base{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "qq" = (
 /obj/machinery/mining/brace,
 /obj/machinery/light/spot,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "qA" = (
 /obj/machinery/constructable_frame/computerframe/deconstruct{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/space)
 "qX" = (
 /obj/structure/undies_wardrobe,
 /obj/machinery/light/spot,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "rf" = (
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "rB" = (
 /obj/structure/inflatable/wall,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "rR" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "sf" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "sl" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "sC" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -2121,42 +2123,42 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "tW" = (
 /obj/structure/closet/wardrobe/suit,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "uv" = (
 /obj/machinery/computer/ship/helm{
 	dir = 1;
 	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/space)
 "uG" = (
 /obj/machinery/port_gen/pacman,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "uV" = (
 /obj/structure/table,
 /obj/abstract/landmark{
 	name = "Nuclear-Code"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "va" = (
 /obj/structure/table,
 /obj/item/modular_computer/pda/mercenary,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "vg" = (
 /obj/structure/table,
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
-/turf/simulated/floor/tiled,
+/obj/item/backpack/dufflebag/syndie/ammo,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "vM" = (
 /obj/structure/rack,
@@ -2167,7 +2169,7 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "vO" = (
 /obj/structure/cable{
@@ -2180,14 +2182,14 @@
 	_output_on = 1;
 	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_io = 1, /obj/item/stock_parts/smes_coil/super_capacity = 1)
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "vU" = (
 /obj/machinery/network/mainframe{
 	initial_network_id = "mercnet";
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/map_template/merc_spawn)
 "wG" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2196,47 +2198,47 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "xb" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "xi" = (
 /obj/structure/rack,
 /obj/item/rig/merc/empty,
 /obj/item/rig/merc/empty,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "xw" = (
 /obj/machinery/network/router{
 	initial_network_id = "mercnet";
 	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/map_template/merc_spawn)
 "yr" = (
 /obj/machinery/computer/message_monitor,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/map_template/merc_spawn)
 "yz" = (
 /obj/effect/shuttle_landmark/merc/nav3,
 /turf/space,
 /area/space)
 "zg" = (
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "zo" = (
-/obj/item/storage/box/smokes,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/flashbangs,
+/obj/item/box/smokes,
+/obj/item/box/teargas,
+/obj/item/box/flashbangs,
 /obj/structure/rack,
 /obj/item/grenade/anti_photon,
 /obj/item/grenade/anti_photon,
 /obj/item/grenade/anti_photon,
-/obj/item/storage/box/frags,
+/obj/item/box/frags,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "vault"
@@ -2247,7 +2249,7 @@
 	dir = 8;
 	markup = 0;
 	name = "hacked cigarette machine";
-	products = list(/obj/item/storage/box/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/box/fancy/cigarettes = 10, /obj/item/box/matches = 10, /obj/item/flame/fuelled/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /obj/structure/railing/mapped/no_density{
 	dir = 8
@@ -2255,21 +2257,21 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Ak" = (
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/space)
 "CL" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "DM" = (
 /obj/vehicle/bike/electric,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/map_template/merc_spawn)
 "Fm" = (
 /obj/structure/rack,
@@ -2279,19 +2281,19 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Fy" = (
 /obj/structure/closet/crate/secure/explosives,
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "FD" = (
 /obj/structure/railing,
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "FG" = (
 /obj/machinery/vending/coffee{
@@ -2301,20 +2303,20 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "FH" = (
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "FO" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "Ge" = (
 /obj/structure/closet/crate/medical,
@@ -2330,7 +2332,7 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Hg" = (
 /obj/structure/rack,
@@ -2345,10 +2347,10 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Hz" = (
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/map_template/merc_spawn)
 "HU" = (
 /obj/structure/closet/crate/uranium,
@@ -2358,14 +2360,14 @@
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/item/stack/material/puck/mapped/uranium/ten,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "HV" = (
 /obj/machinery/power/apc/high{
 	pixel_y = -26
 	},
 /obj/structure/cable,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "HZ" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -2375,7 +2377,7 @@
 	},
 /obj/effect/paint/red,
 /obj/structure/cable,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle)
 "Im" = (
 /obj/structure/window/reinforced/crescent{
@@ -2386,7 +2388,7 @@
 /area/space)
 "Ip" = (
 /obj/structure/inflatable/wall,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "IB" = (
 /obj/structure/rack,
@@ -2394,7 +2396,7 @@
 /obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Jc" = (
 /obj/effect/shuttle_landmark/merc/nav4,
@@ -2404,18 +2406,18 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Kl" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "Ko" = (
 /obj/machinery/mech_recharger,
 /obj/structure/mech_wreckage/military,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "Kz" = (
 /obj/structure/rack,
@@ -2425,31 +2427,31 @@
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "KP" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "LD" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/pouches/large,
-/obj/item/clothing/accessory/storage/pouches/large,
-/obj/item/clothing/accessory/storage/pouches,
-/obj/item/clothing/accessory/storage/pouches,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/turf/simulated/floor/plating,
+/obj/item/clothing/webbing/bandolier,
+/obj/item/clothing/webbing/bandolier,
+/obj/item/clothing/webbing/bandolier,
+/obj/item/clothing/webbing/pouches/large,
+/obj/item/clothing/webbing/pouches/large,
+/obj/item/clothing/webbing/pouches,
+/obj/item/clothing/webbing/pouches,
+/obj/item/clothing/webbing/holster/thigh,
+/obj/item/clothing/webbing/holster/thigh,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "LI" = (
 /obj/machinery/mining/brace,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "LY" = (
 /obj/structure/closet/crate,
@@ -2462,18 +2464,18 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Mj" = (
 /obj/structure/inflatable/wall,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "MD" = (
 /obj/structure/closet/wardrobe/red,
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "MO" = (
 /obj/structure/rack,
@@ -2483,7 +2485,7 @@
 /obj/item/clothing/head/helmet/merc,
 /obj/item/clothing/head/helmet/merc,
 /obj/item/clothing/head/helmet/merc,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "MZ" = (
 /obj/effect/spawner/newbomb/timer/syndicate,
@@ -2501,13 +2503,13 @@
 /obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Nd" = (
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Nm" = (
 /obj/structure/table/steel_reinforced,
@@ -2516,7 +2518,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "NX" = (
 /obj/item/chems/ivbag/blood/nanoblood,
@@ -2524,67 +2526,67 @@
 /area/space)
 "NZ" = (
 /obj/machinery/network/telecomms_hub/mercenary,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/map_template/merc_spawn)
 "Ok" = (
 /obj/machinery/mining/brace,
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Or" = (
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "OB" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
 /obj/random/medical/lite,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "Pb" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "PE" = (
 /obj/structure/rack,
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
-/obj/item/storage/box/handcuffs{
+/obj/item/box/handcuffs{
 	pixel_x = 4;
 	pixel_y = 2
 	},
-/obj/item/storage/box/handcuffs{
+/obj/item/box/handcuffs{
 	pixel_x = 4;
 	pixel_y = 2
 	},
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "PH" = (
 /obj/machinery/floodlight,
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "PK" = (
 /obj/machinery/port_gen/pacman/super,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "PZ" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/floor/tiled/airless,
 /area/space)
 "Qa" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Qb" = (
 /obj/machinery/vending/engineering{
@@ -2593,38 +2595,38 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "QF" = (
 /obj/structure/rack,
 /obj/item/suit_cooling_unit,
 /obj/item/suit_cooling_unit,
 /obj/item/suit_cooling_unit,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "QJ" = (
 /obj/structure/rack,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
-/turf/simulated/floor/plating,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "QW" = (
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
-/turf/simulated/floor/plating,
+/obj/item/backpack/dufflebag/syndie/ammo,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "QX" = (
 /obj/structure/rack,
 /obj/item/rig/merc/heavy/empty,
 /obj/item/rig/merc/heavy/empty,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Rh" = (
 /obj/structure/closet/wardrobe/medic_white,
 /obj/structure/railing/mapped/no_density{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "RT" = (
 /obj/abstract/landmark{
@@ -2636,14 +2638,14 @@
 /obj/structure/bed/chair/office{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "Sd" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Tf" = (
 /obj/structure/rack,
@@ -2656,12 +2658,12 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Tu" = (
 /obj/machinery/port_gen/pacman/super,
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Ua" = (
 /obj/machinery/mech_recharger,
@@ -2669,7 +2671,7 @@
 	shuttle_name = "Desperado"
 	},
 /mob/living/exosuit/premade/heavy/merc,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "UA" = (
 /obj/structure/catwalk,
@@ -2679,7 +2681,7 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "UP" = (
 /obj/machinery/vending/tool,
@@ -2687,7 +2689,7 @@
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "UT" = (
 /obj/abstract/landmark{
@@ -2697,7 +2699,7 @@
 	dir = 1
 	},
 /obj/structure/bed/chair/office,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/map_template/merc_spawn)
 "Vw" = (
 /obj/structure/inflatable/wall,
@@ -2712,7 +2714,7 @@
 	dir = 1;
 	markup = 0
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Xz" = (
 /obj/structure/closet/wardrobe/mixed,
@@ -2722,16 +2724,16 @@
 /obj/structure/railing/mapped/no_density{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "XD" = (
 /obj/machinery/vending/engivend{
 	req_access = list()
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "XS" = (
-/turf/simulated/wall/titanium,
+/turf/wall/titanium,
 /area/map_template/merc_spawn)
 "Ya" = (
 /obj/structure/rack,
@@ -2745,7 +2747,7 @@
 	dir = 1
 	},
 /obj/item/rig/medical/equipped,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "YT" = (
 /obj/structure/closet/crate,
@@ -2762,7 +2764,7 @@
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_spawn)
 "Zx" = (
 /obj/structure/catwalk,
@@ -2772,7 +2774,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/map_template/merc_shuttle/rear)
 
 (1,1,1) = {"

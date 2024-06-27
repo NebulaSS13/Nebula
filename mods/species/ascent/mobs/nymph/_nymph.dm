@@ -9,17 +9,16 @@
 #define ANYMPH_NUTRITION_MOLT    125   // How much nutrition it takes to molt.
 #define ANYMPH_TIME_MOLT         300   // How long to wait between molts.
 
-/mob/living/carbon/alien/ascent_nymph
+/mob/living/simple_animal/alien/kharmaan
 	name = "mantid nymph"
 	desc = "It's a little alien skittery critter. Hiss."
 	icon = 'mods/species/ascent/icons/species/nymph.dmi'
 	icon_state = ICON_STATE_WORLD
-	death_msg = "expires with a pitiful hiss..."
+	death_message = "expires with a pitiful hiss..."
 	max_health = 60
 	available_maneuvers = list(/decl/maneuver/leap)
 
 	only_species_language = 1
-	voice_name = "mantid nymph"
 	speak_emote = list("hisses", "chitters")
 	universal_understand = FALSE
 	universal_speak = FALSE
@@ -30,27 +29,25 @@
 	holder_type = /obj/item/holder/ascent_nymph
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
-	hud_type = /datum/hud/ascent_nymph
+	hud_used = /datum/hud/ascent_nymph
 
 	var/crystal_reserve = 1000
 	var/last_molt = 0
 	var/molt
 
-/mob/living/carbon/alien/ascent_nymph/get_jump_distance()
+/mob/living/simple_animal/alien/kharmaan/setup_languages()
+	add_language(/decl/language/mantid)
+	add_language(/decl/language/mantid/nonvocal)
+
+/mob/living/simple_animal/alien/kharmaan/get_jump_distance()
 	return 3
 
-/mob/living/carbon/alien/ascent_nymph/Initialize(var/mapload)
+/mob/living/simple_animal/alien/kharmaan/Initialize(var/mapload)
 	update_icon()
 	. = ..(mapload)
 	add_inventory_slot(new /datum/inventory_slot/head/simple)
 	add_held_item_slot(new /datum/inventory_slot/gripper/mouth/nymph/ascent)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 
-/mob/living/carbon/alien/ascent_nymph/get_dexterity(var/silent)
-	return (DEXTERITY_EQUIP_ITEM|DEXTERITY_HOLD_ITEM)
-
-/mob/living/carbon/alien/ascent_nymph/on_update_icon()
-	..()
-	icon_state = ICON_STATE_WORLD
-	if(stat != CONSCIOUS || lying)
-		icon_state += "-dead"
+/mob/living/simple_animal/alien/kharmaan/get_dexterity(var/silent)
+	return (DEXTERITY_EQUIP_ITEM)

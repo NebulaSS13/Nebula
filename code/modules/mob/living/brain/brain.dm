@@ -72,8 +72,11 @@
 /mob/living/brain/say_understands(var/other)
 	. = ishuman(other) || (is_in_interface() && issilicon(other)) || ..()
 
-/mob/living/brain/UpdateLyingBuckledAndVerbStatus()
-	return
+/mob/living/brain/get_available_postures()
+	var/static/list/available_postures = list(
+		/decl/posture/standing
+	)
+	return available_postures
 
 /mob/living/brain/isSynthetic()
 	return istype(get_container(), /obj/item/organ/internal/brain/robotic)

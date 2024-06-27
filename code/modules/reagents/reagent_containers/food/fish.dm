@@ -1,68 +1,3 @@
-/obj/item/chems/food/fish
-	name = "fillet"
-	desc = "A fillet of fish."
-	icon_state = "fishfillet"
-	filling_color = "#ffdefe"
-	center_of_mass = @'{"x":17,"y":13}'
-	bitesize = 6
-	nutriment_amt = 6
-	nutriment_type = /decl/material/liquid/nutriment/protein
-	var/fish_type = "fish"
-
-/obj/item/chems/food/fish/Initialize()
-	. = ..()
-	name = "[fish_type] [initial(name)]"
-
-// This will remove carp poison etc. Deliberate, meant to be similar to preparing pufferfish.
-/obj/item/chems/food/fish/attackby(var/obj/item/W, var/mob/user)
-	if(is_sharp(W) && (locate(/obj/structure/table) in loc))
-		var/mob/M = loc
-		if(istype(M) && !M.try_unequip(src))
-			return
-
-		var/toxin_amt = REAGENT_VOLUME(reagents, /decl/material/liquid/carpotoxin)
-		if(toxin_amt && !prob(user.skill_fail_chance(SKILL_COOKING, 100, SKILL_PROF)))
-			remove_from_reagents(/decl/material/liquid/carpotoxin, toxin_amt)
-		user.visible_message("<span class='notice'>\The [user] slices \the [src] into thin strips.</span>")
-
-		var/transfer_amt = FLOOR(reagents.total_volume * 0.3)
-		for(var/i = 1 to 3)
-			var/obj/item/chems/food/sashimi/sashimi = new(get_turf(src), fish_type)
-			reagents.trans_to(sashimi, transfer_amt)
-		qdel(src)
-
-	else
-		..()
-
-/obj/item/chems/food/fish/poison
-	fish_type = "space carp"
-
-/obj/item/chems/food/fish/poison/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/liquid/carpotoxin, 6)
-
-/obj/item/chems/food/fish/shark
-	fish_type = "shark"
-
-/obj/item/chems/food/fish/carp
-	fish_type = "carp"
-
-/obj/item/chems/food/fish/octopus
-	fish_type = "tako"
-
-/obj/item/chems/food/fish/mollusc
-	name = "meat"
-	desc = "Some slimy meat from clams or molluscs."
-	fish_type = "mollusc"
-	nutriment_type = /decl/material/liquid/nutriment/slime_meat
-
-/obj/item/chems/food/fish/mollusc/clam
-	fish_type = "clam"
-
-/obj/item/chems/food/fish/mollusc/barnacle
-	fish_type = "barnacle"
-
-
 // Molluscs!
 /obj/item/trash/mollusc_shell
 	name = "mollusc shell"
@@ -89,24 +24,38 @@
 	matter = list(
 		/decl/material/solid/organic/bone/fish = MATTER_AMOUNT_SECONDARY,
 	)
-	var/meat_type = /obj/item/chems/food/fish/mollusc
+	var/meat_type = /obj/item/chems/food/butchery/meat/fish/mollusc
 	var/shell_type = /obj/item/trash/mollusc_shell
 
 /obj/item/mollusc/barnacle
 	name = "barnacle"
 	desc = "A hull barnacle, probably freshly scraped off a spaceship."
 	icon_state = "barnacle"
-	meat_type = /obj/item/chems/food/fish/mollusc/barnacle
+	meat_type = /obj/item/chems/food/butchery/meat/fish/mollusc/barnacle
 	shell_type = /obj/item/trash/mollusc_shell/barnacle
 
 /obj/item/mollusc/clam
 	name = "clam"
 	desc = "A free-ranging space clam."
 	icon_state = "clam"
-	meat_type = /obj/item/chems/food/fish/mollusc/clam
+	meat_type = /obj/item/chems/food/butchery/meat/fish/mollusc/clam
 	shell_type = /obj/item/trash/mollusc_shell/clam
 
-/obj/item/mollusc/proc/crack_shell(var/mob/user)
+// This is not a space clam...
+/obj/item/mollusc/barnacle/fished
+	desc = "A squat little barnacle, somehow pried from its perch."
+/obj/item/mollusc/clam/fished
+	desc = "A regular old bivalve. Full of secrets, probably."
+
+// Subtype to avoid exploiting aquaculture to make infinite pearls.
+/obj/item/mollusc/clam/fished/pearl/crack_shell(mob/user)
+	. = ..()
+	if(prob(10))
+		to_chat(user, SPAN_NOTICE("You find a pearl!"))
+		var/obj/item/stack/material/lump/pearl = new(get_turf(user), 1, /decl/material/solid/organic/bone/pearl)
+		user.put_in_hands(pearl)
+
+/obj/item/mollusc/proc/crack_shell(mob/user)
 	playsound(loc, "fracture", 80, 1)
 	if(user && loc == user)
 		user.drop_from_inventory(src)

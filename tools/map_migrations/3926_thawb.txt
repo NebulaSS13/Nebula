@@ -1,0 +1,2 @@
+/obj/item/accessory/thawb/@SUBTYPES : /obj/item/clothing/suit/robe/thawb/@SUBTYPES{@OLD}
+/obj/item/accessory/sherwani/@SUBTYPES : /obj/item/clothing/suit/robe/sherwani/@SUBTYPES{@OLD}

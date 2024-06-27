@@ -101,9 +101,12 @@ def compare_lines(a, b):
 
     raise f"Two lines were exactly the same ({a} vs. {b})"
 
+failed = False
 sorted_lines = sorted(lines, key = functools.cmp_to_key(compare_lines))
 for (index, line) in enumerate(lines):
     if sorted_lines[index] != line:
         print(f"The include at line {index + offset} is out of order ({line}, expected {sorted_lines[index]})")
-        print(f"::error file=tgstation.dme,line={index+offset},title=DME Validator::The include at line {index + offset} is out of order ({line}, expected {sorted_lines[index]})")
-        sys.exit(1)
+        print(f"::error file=nebula.dme,line={index+offset},title=DME Validator::The include at line {index + offset} is out of order ({line}, expected {sorted_lines[index]})")
+        failed = True
+if failed:
+    sys.exit(1)

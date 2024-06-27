@@ -19,12 +19,12 @@
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
 		return ..()
 
-	var/mob/living/carbon/human/target = locate() in contents
+	var/mob/living/human/target = locate() in contents
 	if(isnull(target))
 		display_message("No biological signature detected in [src].")
 		return TRUE
 
-	if(!isspecies(target, SPECIES_MANTID_ALATE))
+	if(target.get_species_name() != SPECIES_MANTID_ALATE)
 		display_message("Invalid biological signature detected. Safety mechanisms engaged, only alates may undergo metamorphosis.")
 		return TRUE
 
@@ -38,10 +38,10 @@
 
 	if(do_after(target, 10 SECONDS, src, TRUE))
 		// Convert to gyne successfully.
-		target.dna.lineage = create_gyne_name()
-		target.real_name = "[rand(1, 99)] [target.dna.lineage]"
-		target.name = target.real_name
-		target.dna.real_name = target.real_name
+		var/lineage = create_gyne_name()
+		target.set_gyne_lineage(lineage)
+		target.real_name = "[rand(1, 99)] [lineage]"
+		target.SetName(target.real_name)
 
 		target.visible_message(SPAN_NOTICE("[target] molts away their shell, emerging as a new gyne."))
 		spark_at(src, cardinal_only = TRUE)
@@ -58,9 +58,9 @@
 
 
 /obj/machinery/ascent_magnetotron/proc/get_total_gynes()
-	for(var/mob/living/carbon/human/H in global.living_mob_list_)
-		if(isspecies(H, SPECIES_MANTID_GYNE))
-			.+= 1
+	for(var/mob/living/human/H in global.living_mob_list_)
+		if(H.get_species_name() == SPECIES_MANTID_GYNE)
+			. += 1
 
 /obj/item/stock_parts/circuitboard/ascent_magnetotron
 	name = "circuitboard (Ascent magnetotron)"

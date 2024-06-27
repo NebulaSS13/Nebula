@@ -6,7 +6,7 @@
 		return TRUE // Doesn't necessarily mean the mob physically moved
 
 /mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	. = lying || ..() || !mover.density
+	. = current_posture.prone || ..() || !mover.density
 
 /mob/proc/SetMoveCooldown(var/timeout)
 	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
@@ -39,9 +39,9 @@
 			attack_self()
 			return
 		if(SOUTHWEST)
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				C.toggle_throw_mode()
+			if(isliving(usr))
+				var/mob/living/M = usr
+				M.toggle_throw_mode()
 			else
 				to_chat(usr, "<span class='warning'>This mob type cannot throw items.</span>")
 			return
@@ -55,14 +55,14 @@
 	if(length(get_active_grabs()))
 		. = TRUE
 	else
-		var/obj/item/hand = get_active_hand()
+		var/obj/item/hand = get_active_held_item()
 		. = hand?.can_be_dropped_by_client(src)
 	if(.)
 		drop_item()
 
 /client/verb/swap_hand()
 	set hidden = 1
-	if(iscarbon(mob))
+	if(ismob(mob))
 		var/mob/M = mob
 		M.swap_hand()
 	if(isrobot(mob))
@@ -76,14 +76,10 @@
 		mob.mode()
 	return
 
-/client/verb/toggle_throw_mode()
-	set hidden = 1
-	if(!iscarbon(mob))
-		return
-	if (!mob.stat && isturf(mob.loc) && !mob.restrained())
-		mob:toggle_throw_mode()
-	else
-		return
+/client/verb/toggle_throw_mode_verb()
+	set hidden = TRUE
+	if(!mob.stat && isturf(mob.loc) && !mob.restrained())
+		mob.toggle_throw_mode()
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(newloc, direct)
@@ -279,7 +275,7 @@
 /mob/proc/set_move_intent(var/decl/move_intent/next_intent)
 	if(next_intent && move_intent != next_intent && next_intent.can_be_used_by(src))
 		move_intent = next_intent
-		if(hud_used)
+		if(istype(hud_used))
 			hud_used.move_intent.icon_state = move_intent.hud_icon_state
 		return TRUE
 	return FALSE

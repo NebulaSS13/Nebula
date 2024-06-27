@@ -15,7 +15,7 @@
 		borer.detach_from_host()
 		borer.leave_host()
 
-/mob/living/carbon/human/handle_hud_list()
+/mob/living/human/handle_hud_list()
 	var/last_hud_bitfield = hud_updateflag
 	. = ..()
 	if(stat != DEAD && has_brain_worms() && BITTEST(last_hud_bitfield, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
@@ -26,7 +26,7 @@
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
 		holder2.icon_state = "hudbrainworm"
 
-/mob/living/carbon/human/say_understands(mob/speaker, decl/language/speaking)
+/mob/living/human/say_understands(mob/speaker, decl/language/speaking)
 	return has_brain_worms() || ..()
 
 /obj/item/organ/internal/brain/do_uninstall(in_place, detach, ignore_children)
@@ -35,15 +35,6 @@
 		if(borer)
 			borer.detach_from_host()
 	. = ..()
-
-/mob/living/carbon/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
-	. = ..()
-	if(. && !QDELETED(implant) && isborer(implant))
-		var/mob/living/simple_animal/borer/worm = implant
-		if(worm.controlling)
-			release_control()
-		worm.detach_from_host()
-		worm.leave_host()
 
 /obj/item/glass_jar/Initialize()
 	accept_mobs |= /mob/living/simple_animal/borer
@@ -55,3 +46,11 @@
 		var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
 		if(B && B.controlling)
 			B.detach_from_host()
+
+/mob/living/human/remove_implant(obj/item/implant, surgical_removal = FALSE, obj/item/organ/external/affected)
+	if((. = ..()) && !QDELETED(implant) && isborer(implant))
+		var/mob/living/simple_animal/borer/worm = implant
+		if(worm.controlling)
+			release_control()
+		worm.detach_from_host()
+		worm.leave_host()

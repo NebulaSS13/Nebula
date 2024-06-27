@@ -1,7 +1,8 @@
-/turf/exterior/wall/random/ministation
+/turf/wall/natural/random/ministation
 	initial_gas = null
+	floor_type = /turf/floor/natural/barren/airless
 
-/turf/exterior/wall/random/ministation/get_weighted_mineral_list()
+/turf/wall/natural/random/ministation/get_weighted_mineral_list()
 	if(prob(80))
 		. = list()
 	else if(prob(75))

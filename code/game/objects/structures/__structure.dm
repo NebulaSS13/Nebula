@@ -5,13 +5,39 @@
 	abstract_type = /obj/structure
 	max_health = 50
 
+	/// Multiplier for degree of comfort offered to mobs buckled to this furniture.
+	var/user_comfort = 0 // TODO: extremely uncomfortable chairs
+
 	var/structure_flags
 	var/last_damage_message
-	var/hitsound = 'sound/weapons/smash.ogg'
+	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/parts_type
 	var/parts_amount
 	var/footstep_type
 	var/mob_offset
+
+	var/paint_color
+	var/paint_verb = "painted"
+
+/obj/structure/get_color()
+	if(paint_color)
+		return paint_color
+	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		return material.color
+	return initial(color)
+
+/obj/structure/set_color(new_color)
+	if(new_color == COLOR_WHITE)
+		new_color = null
+	if(paint_color != new_color)
+		paint_color = new_color
+	if(paint_color)
+		color = paint_color
+	else if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		color = material.color
+	else
+		color = new_color
+	return FALSE
 
 /obj/structure/create_matter()
 	..()
@@ -35,16 +61,25 @@
 		reinf_material = GET_DECL(reinf_material)
 	. = ..()
 	update_materials()
+	if(lock && !istype(loc))
+		lock = new /datum/lock(src, lock)
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 
 /obj/structure/examine(mob/user, distance, infix, suffix)
 	. = ..()
+
 	if(distance <= 3)
+
+		if(distance <= 1 && lock)
+			to_chat(user, SPAN_NOTICE("\The [src] appears to have a lock, opened by '[lock.lock_data]'."))
 
 		var/damage_desc = get_examined_damage_string()
 		if(length(damage_desc))
 			to_chat(user, damage_desc)
+
+		if(paint_color)
+			to_chat(user, "\The [src] has been <font color='[paint_color]'>[paint_verb]</font>.")
 
 		if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
 			if(anchored)
@@ -86,7 +121,7 @@
 	set waitfor = FALSE
 	return FALSE
 
-/obj/structure/proc/take_damage(var/damage)
+/obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(current_health == -1) // This object does not take damage.
 		return
 
@@ -120,7 +155,7 @@
 
 /obj/structure/physically_destroyed(var/skip_qdel)
 	if(..(TRUE))
-		return dismantle()
+		return dismantle_structure()
 
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
@@ -143,6 +178,7 @@
 	. = ..()
 
 /obj/structure/Destroy()
+	QDEL_NULL(lock)
 	var/turf/T = get_turf(src)
 	. = ..()
 	if(T)
@@ -235,7 +271,7 @@
 	return TRUE
 
 /obj/structure/bullet_act(var/obj/item/projectile/Proj)
-	if(take_damage(Proj.get_structure_damage()))
+	if(take_damage(Proj.get_structure_damage(), Proj.atom_damage_type))
 		return PROJECTILE_CONTINUE
 
 /*

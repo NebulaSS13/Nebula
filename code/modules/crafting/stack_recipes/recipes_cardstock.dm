@@ -1,27 +1,29 @@
 /decl/stack_recipe/cardstock
 	abstract_type     = /decl/stack_recipe/cardstock
 	craft_stack_types = /obj/item/stack/material/cardstock
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE // not exactly high tech, but donuts etc are not medieval
 
 /decl/stack_recipe/cardstock/box
-	result_type       = /obj/item/storage/box
+	result_type       = /obj/item/box
+	category          = "cardstock boxes"
 
 /decl/stack_recipe/cardstock/box/large
-	result_type       = /obj/item/storage/box/large
+	result_type       = /obj/item/box/large
 
 /decl/stack_recipe/cardstock/box/donut
-	result_type       = /obj/item/storage/box/fancy/donut/empty
+	result_type       = /obj/item/box/fancy/donut/empty
 
 /decl/stack_recipe/cardstock/box/egg
-	result_type       = /obj/item/storage/box/fancy/egg_box/empty
+	result_type       = /obj/item/box/fancy/egg_box/empty
 
 /decl/stack_recipe/cardstock/box/light_tubes
-	result_type       = /obj/item/storage/box/lights/tubes/empty
+	result_type       = /obj/item/box/lights/tubes/empty
 
 /decl/stack_recipe/cardstock/box/light_bulbs
-	result_type       = /obj/item/storage/box/lights/bulbs/empty
+	result_type       = /obj/item/box/lights/bulbs/empty
 
 /decl/stack_recipe/cardstock/box/mouse_traps
-	result_type       = /obj/item/storage/box/mousetraps/empty
+	result_type       = /obj/item/box/mousetraps/empty
 
 /decl/stack_recipe/cardstock/box/pizza
 	result_type       = /obj/item/pizzabox

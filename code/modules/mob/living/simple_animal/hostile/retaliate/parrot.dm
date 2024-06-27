@@ -41,9 +41,7 @@
 	response_harm = "swats"
 	stop_automated_movement = 1
 	universal_speak = TRUE
-	meat_type = /obj/item/chems/food/meat/chicken/game
-	meat_amount = 3
-	skin_material = /decl/material/solid/organic/skin/feathers
+	butchery_data = /decl/butchery_data/animal/bird/parrot
 
 	var/parrot_state = PARROT_WANDER // Hunt for a perch when created
 	var/parrot_sleep_max = 25        // The time the parrot sits while perched before looking around. Mosly a way to avoid the parrot's AI in life() being run every single tick.
@@ -125,7 +123,7 @@
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 		parrot_interest = user
-		parrot_state = PARROT_SWOOP //The parrot just got hit, it WILL move, now to pick a direction..
+		parrot_state = PARROT_SWOOP //The parrot just got hit, it WILL move, now to pick a direction...
 		if(isliving(user))
 			var/mob/living/M = user
 			if(M.current_health < 50) //Weakened mob? Fight back!
@@ -209,7 +207,7 @@
 			SelfMove(pick(global.cardinal))
 			return
 
-		if(!held_item && !parrot_perch) //If we've got nothing to do.. look for something to do.
+		if(!held_item && !parrot_perch) //If we've got nothing to do, look for something to do.
 			var/atom/movable/AM = search_for_perch_and_item() //This handles checking through lists so we know it's either a perch or stealable item
 			if(AM)
 				if((isitem(AM) && can_pick_up(AM)) || isliving(AM))	//If stealable item
@@ -437,14 +435,14 @@
 		return 1
 
 	var/obj/item/stolen_item = null
-	for(var/mob/living/carbon/C in view(1,src))
-		for(var/obj/item/thing in C.get_held_items())
+	for(var/mob/living/target in view(1,src))
+		for(var/obj/item/thing in target.get_held_items())
 			if(can_pick_up(thing))
 				stolen_item = thing
 				break
-		if(stolen_item && C.try_unequip(stolen_item, src))
+		if(stolen_item && target.try_unequip(stolen_item, src))
 			held_item = stolen_item
-			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "<span class='warning'>You snag the [held_item] out of [C]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
+			visible_message("[src] grabs the [held_item] out of [target]'s hand!", "<span class='warning'>You snag the [held_item] out of [target]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
 			return held_item
 
 	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")

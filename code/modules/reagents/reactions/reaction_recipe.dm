@@ -45,7 +45,11 @@
 /decl/chemical_reaction/recipe/batter
 	name = "Plain Batter"
 	result = /decl/material/liquid/nutriment/batter
-	required_reagents = list(/decl/material/liquid/nutriment/protein/egg = 3, /decl/material/liquid/nutriment/flour = 5, /decl/material/liquid/drink/milk = 5)
+	required_reagents = list(
+		/decl/material/solid/organic/meat/egg = 3,
+		/decl/material/liquid/nutriment/flour = 5,
+		/decl/material/liquid/drink/milk      = 5
+	)
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy batter."
 
@@ -82,14 +86,20 @@
 /decl/chemical_reaction/recipe/mayo
 	name = "Vinegar Mayo"
 	result = /decl/material/liquid/nutriment/mayo
-	required_reagents = list(/decl/material/liquid/nutriment/vinegar = 5, /decl/material/liquid/nutriment/protein/egg = 5)
+	required_reagents = list(
+		/decl/material/liquid/nutriment/vinegar = 5,
+		/decl/material/solid/organic/meat/egg   = 5
+	)
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy, creamy substance."
 
 /decl/chemical_reaction/recipe/mayo2
 	name = "Lemon Mayo"
 	result = /decl/material/liquid/nutriment/mayo
-	required_reagents = list(/decl/material/liquid/drink/juice/lemon = 5, /decl/material/liquid/nutriment/protein/egg = 5)
+	required_reagents = list(
+		/decl/material/liquid/drink/juice/lemon = 5,
+		/decl/material/solid/organic/meat/egg   = 5
+	)
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy, creamy substance."
 
@@ -108,10 +118,3 @@
 	result_amount = 6
 	mix_message = "The broth of the noodles takes on a hellish red gleam."
 	hidden_from_codex = TRUE
-
-/decl/chemical_reaction/recipe/chazuke
-	name = "Chazuke"
-	result = /decl/material/liquid/nutriment/rice/chazuke
-	required_reagents = list(/decl/material/liquid/nutriment/rice = 10, /decl/material/liquid/drink/tea/green = 1)
-	result_amount = 10
-	mix_message = "The tea mingles with the rice."

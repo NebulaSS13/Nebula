@@ -33,6 +33,6 @@
 		if(environment && environment.return_pressure() >= MIN_WIND_PRESSURE) // Arbitrary low pressure bound.
 			var/absolute_strength = abs(wind_strength)
 			if(absolute_strength <= 0.5 || !wind_direction)
-				to_chat(M, SPAN_NOTICE("The wind is calm."))
+				to_chat(M, SPAN_NOTICE(FONT_SMALL("The wind is calm.")))
 			else
-				to_chat(M, SPAN_NOTICE("The wind is blowing[absolute_strength > 2 ? " strongly" : ""] towards the [dir2text(wind_direction)]."))
+				to_chat(M, SPAN_NOTICE(FONT_SMALL("The wind is blowing[absolute_strength > 2 ? " strongly" : ""] towards the [dir2text(wind_direction)].")))

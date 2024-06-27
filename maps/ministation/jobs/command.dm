@@ -1,6 +1,6 @@
 /datum/job/ministation/captain
 	title = "Captain"
-	supervisors = "your profit margin, your conscience, and the watchful eye of the Company Rep"
+	supervisors = "your profit margin, your conscience, and the watchful eye of the Tradehouse Rep"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/captain
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
@@ -29,7 +29,7 @@
 	must_fill = 1
 	not_random_selectable = 1
 
-/datum/job/ministation/captain/equip_job(var/mob/living/carbon/human/H)
+/datum/job/ministation/captain/equip_job(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
 	if(H)
 		H.verbs |= /mob/proc/freetradeunion_rename_company
@@ -38,7 +38,7 @@
 	return get_all_station_access()
 
 /mob/proc/freetradeunion_rename_company()
-	set name = "Defect from Corporate Control"
+	set name = "Defect from Tradehouse"
 	set category = "Captain's Powers"
 	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", global.using_map.company_name), MAX_NAME_LEN)
 	if(!company)
@@ -112,7 +112,8 @@
 		access_hop,
 		access_RC_announce,
 		access_keycard_auth,
-		access_gateway
+		access_gateway,
+		access_cameras
 	)
 	minimal_access = list(
 		access_security,
@@ -155,7 +156,8 @@
 		access_hop,
 		access_RC_announce,
 		access_keycard_auth,
-		access_gateway
+		access_gateway,
+		access_cameras
 	)
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,

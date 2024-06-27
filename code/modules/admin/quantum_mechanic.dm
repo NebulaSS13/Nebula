@@ -6,7 +6,7 @@
 // Most of their superhuman qualities can be toggled off if you need a normal human for testing biological functions
 */
 
-#define isquantum(X) istype(X, /mob/living/carbon/human/quantum)
+#define isquantum(X) istype(X, /mob/living/human/quantum)
 /client/proc/spawn_quantum_mechanic()
 	set category = "Debug"
 	set name = "Spawn Quantum Mechanic"
@@ -20,7 +20,7 @@
 		return
 
 	var/T = get_turf(mob)
-	var/mob/living/carbon/human/quantum/Q = new (T)
+	var/mob/living/human/quantum/Q = new (T)
 
 	prefs.copy_to(Q)
 
@@ -48,15 +48,15 @@
 /decl/hierarchy/outfit/quantum
 	name = "Quantum Mechanic"
 	glasses =  /obj/item/clothing/glasses/sunglasses/quantum
-	uniform =  /obj/item/clothing/under/color/quantum
+	uniform =  /obj/item/clothing/jumpsuit/quantum
 	shoes =    /obj/item/clothing/shoes/color/black/quantum
 	l_ear =    /obj/item/radio/headset/ert/quantum
-	back =     /obj/item/storage/backpack/holding/quantum
+	back =     /obj/item/backpack/holding/quantum
 	head =     /obj/item/clothing/head/beret
-	belt =     /obj/item/storage/belt/utility/full/quantum
+	belt =     /obj/item/belt/utility/full/quantum
 	id_slot =  slot_wear_id_str
 
-/mob/living/carbon/human/quantum
+/mob/living/human/quantum
 	status_flags = NO_ANTAG
 	universal_understand = TRUE
 	var/fall_override = TRUE
@@ -76,17 +76,17 @@
 		/datum/movement_handler/mob/movement
 	)
 
-/mob/living/carbon/human/quantum/can_inject(mob/user, target_zone)
+/mob/living/human/quantum/can_inject(mob/user, target_zone)
 	if(user == src)
 		return ..()
 	to_chat(user, SPAN_DANGER("\The [src] disarms you before you can inject them."))
 	user.drop_item()
 	return FALSE
 
-/mob/living/carbon/human/quantum/binarycheck()
+/mob/living/human/quantum/binarycheck()
 	return TRUE
 
-/mob/living/carbon/human/quantum/proc/delete_self()
+/mob/living/human/quantum/proc/delete_self()
 	if(QDELETED(src))
 		return
 
@@ -102,7 +102,7 @@
 
 	QDEL_IN(src, 7)
 
-/mob/living/carbon/human/quantum/verb/quantum_antigrav()
+/mob/living/human/quantum/verb/quantum_antigrav()
 	set name = "Toggle Gravity"
 	set desc = "Toggles falling."
 	set category = "Ω"
@@ -114,7 +114,7 @@
 		fall_override = TRUE
 		to_chat(usr, SPAN_NOTICE("You will no longer fall."))
 
-/mob/living/carbon/human/quantum/verb/quantum_walk()
+/mob/living/human/quantum/verb/quantum_walk()
 	set name = "Toggle Phase Walking"
 	set desc = "Uses quantum technology to phase through solid matter and move quickly."
 	set category = "Ω"
@@ -127,7 +127,7 @@
 		usr.ReplaceMovementHandler(/datum/movement_handler/mob/incorporeal)
 		to_chat(usr, SPAN_NOTICE("You will now phase through solid matter."))
 
-/mob/living/carbon/human/quantum/verb/quantum_recover()
+/mob/living/human/quantum/verb/quantum_recover()
 	set name = "Rejuvenate Self"
 	set desc = "Use quantum powers you to restore your health."
 	set category = "Ω"
@@ -135,14 +135,14 @@
 
 	revive()
 
-/mob/living/carbon/human/quantum/verb/quantum_quit()
+/mob/living/human/quantum/verb/quantum_quit()
 	set name = "Teleport Out"
 	set desc = "Activate quantum magic to leave and return to your original mob (if you have one)."
 	set category = "Ω"
 
 	delete_self()
 
-/mob/living/carbon/human/quantum/verb/quantum_tgm()
+/mob/living/human/quantum/verb/quantum_tgm()
 	set name = "Toggle Godmode"
 	set desc = "Enable or disable god mode. For testing things that require you to be vulnerable."
 	set category = "Ω"
@@ -151,11 +151,10 @@
 	to_chat(usr, SPAN_NOTICE("God mode is now [(status_flags & GODMODE) ? "enabled" : "disabled"]."))
 
 // Bag o Holding
-/obj/item/storage/backpack/holding/quantum
-	storage_slots = 56
-	max_w_class = 400
+/obj/item/backpack/holding/quantum
+	storage = /datum/storage/bag/quantum
 
-/obj/item/storage/backpack/holding/quantum/attack_hand(mob/user)
+/obj/item/backpack/holding/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 
@@ -185,15 +184,15 @@
 	return ..()
 
 // Clothes
-/obj/item/clothing/under/color/quantum
+/obj/item/clothing/jumpsuit/quantum
 	name = "quantum mechanic's uniform"
 	desc = "A quantum mechanic's uniform. There is a letter on front that reads 'Q'."
-	icon = 'icons/clothing/under/uniform_quantum.dmi'
+	icon = 'icons/clothing/jumpsuits/uniform_quantum.dmi'
 	cold_protection = SLOT_FULL_BODY
 	heat_protection = SLOT_FULL_BODY
 	siemens_coefficient = 0
 
-/obj/item/clothing/under/color/quantum/attack_hand(mob/user)
+/obj/item/clothing/jumpsuit/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 
@@ -204,13 +203,13 @@
 	return ..()
 
 // Gloves
-/obj/item/clothing/gloves/color/white/quantum
+/obj/item/clothing/gloves/quantum
 	name = "quantum mechanic's gloves"
 	desc = "A pair of modified gloves. The letter 'Ω' is stamped on the side."
 	siemens_coefficient = 0
 	permeability_coefficient = 0
 
-/obj/item/clothing/gloves/color/white/quantum/attack_hand(mob/user)
+/obj/item/clothing/gloves/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 
@@ -292,13 +291,13 @@
 	return ..()
 
 // Belt
-/obj/item/storage/belt/utility/full/quantum/Initialize()
+/obj/item/belt/utility/full/quantum/Initialize()
 	. = ..()
 	// Full set of tools
 	new /obj/item/multitool(src)
 
-/mob/living/carbon/human/quantum/restrained()
+/mob/living/human/quantum/restrained()
 	return FALSE
 
-/mob/living/carbon/human/quantum/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
+/mob/living/human/quantum/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return fall_override ? FALSE : ..()

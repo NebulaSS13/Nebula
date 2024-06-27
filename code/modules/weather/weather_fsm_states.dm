@@ -77,6 +77,9 @@
 			if(LAZYLEN(protected_by))
 				handle_protected_effects(M, weather, pick(protected_by))
 
+/decl/state/weather/proc/adjust_temperature(initial_temperature)
+	return initial_temperature
+
 /decl/state/weather/proc/show_to(var/mob/living/M, var/obj/abstract/weather_system/weather)
 	to_chat(M, descriptor)
 
@@ -85,9 +88,22 @@
 	icon_state = "blank"
 	descriptor = "The weather is calm."
 	transitions = list(
+		/decl/state_transition/weather/cold,
+		/decl/state_transition/weather/rain
+	)
+
+/decl/state/weather/cold
+	name = "Cold"
+	icon_state = "blank"
+	descriptor = "There is a chill on the breeze."
+	transitions = list(
+		/decl/state_transition/weather/calm,
 		/decl/state_transition/weather/snow,
 		/decl/state_transition/weather/rain
 	)
+
+/decl/state/weather/cold/adjust_temperature(initial_temperature)
+	return max(initial_temperature - 10, min(initial_temperature, T0C))
 
 /decl/state/weather/snow
 	name = "Light Snow"
@@ -106,6 +122,9 @@
 		"Flakes of snow drift gently past."
 	)
 
+/decl/state/weather/snow/adjust_temperature(initial_temperature)
+	return min(initial_temperature - 20, T0C)
+
 /decl/state/weather/snow/medium
 	name =  "Snow"
 	icon_state = "snowfall_med"
@@ -114,6 +133,9 @@
 		/decl/state_transition/weather/snow,
 		/decl/state_transition/weather/snow_heavy
 	)
+
+/decl/state/weather/snow/heavy/adjust_temperature(initial_temperature)
+	return min(initial_temperature - 25, T0C)
 
 /decl/state/weather/snow/heavy
 	name =  "Heavy Snow"
@@ -125,6 +147,9 @@
 		"Thick flurries of snow swirl around you."
 	)
 	cosmetic_span_class = "warning"
+
+/decl/state/weather/snow/heavy/adjust_temperature(initial_temperature)
+	return min(initial_temperature - 30, T0C)
 
 /decl/state/weather/rain
 	name =  "Light Rain"
@@ -181,7 +206,7 @@
 
 /decl/state/weather/rain/hail/handle_exposure_effects(var/mob/living/M, var/obj/abstract/weather_system/weather)
 	to_chat(M, SPAN_DANGER("You are pelted by a shower of hail!"))
-	M.adjustBruteLoss(rand(1,3))
+	M.take_damage(rand(1, 3))
 
 /decl/state/weather/ash
 	name =  "Ash"

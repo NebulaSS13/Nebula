@@ -6,6 +6,7 @@
 	icon_base            = 'mods/species/bayliens/tajaran/icons/body.dmi'
 	icon_deformed        = 'mods/species/bayliens/tajaran/icons/deformed_body.dmi'
 	bandages_icon        = 'icons/mob/bandage.dmi'
+	skeletal_icon        = 'mods/species/bayliens/tajaran/icons/skeleton.dmi'
 	cosmetics_icon       = 'mods/species/bayliens/tajaran/icons/cosmetics.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag        = BODY_FLAG_FELINE
@@ -14,6 +15,8 @@
 	base_color           = "#ae7d32"
 	base_eye_color       = "#00aa00"
 	nail_noun            = "claws"
+
+	age_descriptor = /datum/appearance_descriptor/age/tajaran
 
 	eye_darksight_range  = 7
 	eye_flash_mod        = 2

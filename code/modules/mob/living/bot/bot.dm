@@ -4,13 +4,7 @@
 	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = TRUE
 	density = FALSE
-
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	butchery_data = null
 
 	var/obj/item/card/id/botcard = null
 	var/list/botcard_access = list()
@@ -66,8 +60,12 @@
 		set_status(STAT_STUN, 0)
 		set_status(STAT_PARA, 0)
 
-/mob/living/bot/get_total_life_damage()
-	return getFireLoss() + getBruteLoss()
+/mob/living/bot/get_life_damage_types()
+	var/static/list/life_damage_types = list(
+		BURN,
+		BRUTE
+	)
+	return life_damage_types
 
 /mob/living/bot/get_dusted_remains()
 	return /obj/effect/decal/cleanable/blood/oil
@@ -166,7 +164,7 @@
 	return
 
 /mob/living/bot/proc/GetInteractStatus()
-	. = "Status: <A href='?src=\ref[src];command=toggle'>[on ? "On" : "Off"]</A>"
+	. = "Status: <A href='byond://?src=\ref[src];command=toggle'>[on ? "On" : "Off"]</A>"
 	. += "<BR>Behaviour controls are [locked ? "locked" : "unlocked"]"
 	. += "<BR>Maintenance panel is [open ? "opened" : "closed"]"
 

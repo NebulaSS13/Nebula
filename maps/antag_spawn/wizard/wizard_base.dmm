@@ -7,8 +7,8 @@
 /area/map_template/wizard_station)
 "ac" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/cultpack,
-/turf/simulated/floor/carpet,
+/obj/item/backpack/cultpack,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ad" = (
 /turf/unsimulated/wall/fakeglass{
@@ -23,15 +23,15 @@
 /area/map_template/wizard_station)
 "af" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/satchel/grey/withwallet,
-/turf/simulated/floor/carpet,
+/obj/item/backpack/satchel/grey/withwallet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ag" = (
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ah" = (
 /obj/structure/undies_wardrobe,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ai" = (
 /turf/unsimulated/wall/fakeglass{
@@ -40,7 +40,7 @@
 /area/map_template/wizard_station)
 "aj" = (
 /obj/structure/door/wood,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ak" = (
 /obj/structure/table/woodentable,
@@ -50,7 +50,7 @@
 	pixel_y = 8
 	},
 /obj/item/chems/drinks/flask/barflask,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "al" = (
 /obj/structure/table/woodentable,
@@ -63,7 +63,7 @@
 "am" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/rd,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "an" = (
 /obj/structure/table/woodentable,
@@ -75,12 +75,12 @@
 /area/map_template/wizard_station)
 "ao" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/satchel/grey/withwallet,
+/obj/item/backpack/satchel/grey/withwallet,
 /obj/item/clothing/glasses/eyepatch/monocle,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "ap" = (
-/mob/living/carbon/human/monkey{
+/mob/living/human/monkey{
 	name = "Murphey"
 	},
 /turf/unsimulated/floor{
@@ -102,7 +102,7 @@
 	name = "Teleport-Scroll"
 	},
 /obj/item/toy/figure/ninja,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "as" = (
 /obj/structure/table/woodentable,
@@ -158,18 +158,18 @@
 /obj/abstract/landmark/start{
 	name = "wizard"
 	},
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "az" = (
 /obj/structure/aliumizer,
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "aA" = (
 /obj/item/radio/intercom/wizard{
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/simulated/floor/carpet,
+/turf/floor/carpet,
 /area/map_template/wizard_station)
 "aB" = (
 /obj/structure/bookcase{
@@ -283,7 +283,7 @@
 /area/map_template/wizard_station)
 "aO" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/cups,
+/obj/item/box/cups,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -301,7 +301,7 @@
 /area/map_template/wizard_station)
 "aQ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -319,7 +319,7 @@
 /area/map_template/wizard_station)
 "aS" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/candle_box,
+/obj/item/box/candles,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -364,7 +364,7 @@
 /area/map_template/wizard_station)
 "aY" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -405,7 +405,7 @@
 	},
 /obj/item/radio/intercom/wizard{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor"
@@ -433,7 +433,7 @@
 /area/map_template/wizard_station)
 "bh" = (
 /obj/structure/closet,
-/obj/item/clothing/under/psysuit,
+/obj/item/clothing/jumpsuit/psysuit,
 /obj/item/clothing/suit/wizrobe/psypurple,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -451,13 +451,14 @@
 	desc = "A set of fancy shoes that are as functional as they are comfortable.";
 	name = "Gentlemans Shoes"
 	},
-/obj/item/clothing/under/gentlesuit,
+/obj/item/clothing/shirt/button/black,
+/obj/item/clothing/suit/jacket/vest/gray,
 /obj/item/clothing/suit/wizrobe/gentlecoat,
 /obj/item/clothing/head/wizard/cap,
 /obj/item/staff/gentcane,
 /obj/item/radio/intercom/wizard{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -474,7 +475,7 @@
 /area/map_template/wizard_station)
 "bl" = (
 /obj/structure/closet,
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -489,7 +490,7 @@
 "bn" = (
 /obj/item/radio/intercom/wizard{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/unsimulated/floor{
 	dir = 8;
@@ -504,7 +505,7 @@
 /area/map_template/wizard_station)
 "bp" = (
 /obj/item/radio/intercom/wizard{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/unsimulated/floor{
 	icon_state = "cult";
@@ -512,14 +513,14 @@
 	},
 /area/map_template/wizard_station)
 "bq" = (
-/obj/structure/cult/pylon,
+/obj/structure/fake_pylon,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"
 	},
 /area/map_template/wizard_station)
 "br" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"
@@ -561,7 +562,7 @@
 	},
 /area/map_template/wizard_station)
 "bx" = (
-/obj/structure/cult/talisman,
+/obj/structure/talisman_altar,
 /obj/item/knife/ritual,
 /turf/unsimulated/floor{
 	icon_state = "cult";
@@ -576,7 +577,7 @@
 	},
 /area/map_template/wizard_station)
 "bz" = (
-/obj/effect/gateway/active/cult,
+/obj/effect/gateway/active/spooky,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"

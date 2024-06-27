@@ -99,7 +99,7 @@
 	if(..())
 		return 1
 
-	var/user = usr
+	var/mob/user = usr
 	if(href_list["electronic_warfare"])
 		electronic_warfare = text2num(href_list["electronic_warfare"])
 		to_chat(user, "<span class='notice'>Electronic warfare [electronic_warfare ? "enabled" : "disabled"].</span>")
@@ -146,9 +146,7 @@
 			if("Blood Type")
 				var/default = blood_type
 				if(default == initial(blood_type) && ishuman(user))
-					var/mob/living/carbon/human/H = user
-					if(H.dna)
-						default = H.dna.b_type
+					default = user.get_blood_type()
 				var/new_blood_type = sanitize(input(user,"What blood type would you like to be written on this card?","Agent Card Blood Type",default) as null|text)
 				if(!isnull(new_blood_type) && CanUseTopic(user, state))
 					src.blood_type = new_blood_type
@@ -157,7 +155,7 @@
 			if("DNA Hash")
 				var/default = dna_hash
 				if(default == initial(dna_hash) && ishuman(user))
-					var/mob/living/carbon/human/H = user
+					var/mob/living/human/H = user
 					var/unique_enzymes = H.get_unique_enzymes()
 					if(unique_enzymes)
 						default = unique_enzymes
@@ -169,7 +167,7 @@
 			if("Fingerprint Hash")
 				var/default = fingerprint_hash
 				if(default == initial(fingerprint_hash) && ishuman(user))
-					var/mob/living/carbon/human/H = user
+					var/mob/living/human/H = user
 					default = H.get_full_print(ignore_blockers = TRUE)
 				var/new_fingerprint_hash = sanitize(input(user,"What fingerprint hash would you like to be written on this card?","Agent Card Fingerprint Hash",default) as null|text)
 				if(!isnull(new_fingerprint_hash) && CanUseTopic(user, state))

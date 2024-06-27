@@ -15,6 +15,7 @@ var/global/list/angle_step_to_dir = list(
 	icon = null
 	icon_state = null
 	screen_loc = "CENTER,CENTER"
+	is_spawnable_type = FALSE
 
 	var/interval_colour =        "#7e6f96"
 	var/bearing_colour =         COLOR_WHITE

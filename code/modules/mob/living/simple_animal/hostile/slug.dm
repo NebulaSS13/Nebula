@@ -23,15 +23,15 @@
 /mob/living/simple_animal/hostile/slug/ListTargets(var/dist = 7)
 	. = ..()
 	for(var/mob/living/M in .)
-		if(M.faction == faction)
+		if(check_friendly_species(M))
 			. -= M
 
-/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/target, var/mob/living/initiator)
-	if(target == initiator || (istype(initiator) && initiator.faction == faction))
+/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/target, var/mob/living/initiator)
+	if(target == initiator || check_friendly_species(initiator))
 		return ..()
 	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))
 
-/mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/carbon/human/H)
+/mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 	if(istype(S) && !length(S.breaches))
 		S.create_breaches(BRUTE, 20)
@@ -43,11 +43,11 @@
 	chest.embed_in_organ(holder, FALSE, "\The [src] latches itself onto \the [H]!")
 	holder.sync(src)
 
-/mob/living/simple_animal/hostile/slug/AttackingTarget()
+/mob/living/simple_animal/hostile/slug/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
-		if(prob(H.getBruteLoss()/2))
+		var/mob/living/human/H = .
+		if(prob(H.get_damage(BRUTE)/2))
 			attach(H)
 
 /mob/living/simple_animal/hostile/slug/handle_regular_status_updates()
@@ -60,13 +60,12 @@
 			var/datum/reagents/R = L.reagents
 			R.add_reagent(/decl/material/liquid/presyncopics, 0.5)
 
-/obj/item/holder/slug/attack(var/mob/target, var/mob/user)
+/obj/item/holder/slug/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/mob/living/simple_animal/hostile/slug/V = contents[1]
 	if(!V.stat && ishuman(target))
-		var/mob/living/carbon/human/H = target
-		if(!do_mob(user, H, 30))
-			return
-		V.attach(H)
-		qdel(src)
-		return
-	..()
+		var/mob/living/human/H = target
+		if(do_mob(user, H, 30))
+			V.attach(H)
+			qdel(src)
+		return TRUE
+	return ..()

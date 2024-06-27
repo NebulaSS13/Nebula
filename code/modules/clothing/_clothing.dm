@@ -3,29 +3,87 @@
 	siemens_coefficient = 0.9
 	origin_tech = @'{"materials":1,"engineering":1}'
 	material = /decl/material/solid/organic/cloth
+	paint_verb = "dyed"
+	replaced_in_loadout = TRUE
+	w_class = ITEM_SIZE_SMALL
+	icon_state = ICON_STATE_WORLD
+	force = 0
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
 	var/tint = TINT_NONE							  // Sets the item's level of visual impairment tint.
-
 	var/bodytype_equip_flags    // Bitfields; if null, checking is skipped. Determine if a given mob can equip this item or not.
 
-	var/list/accessories = list()
+	var/list/accessories
+
 	var/list/valid_accessory_slots
-	var/list/restricted_accessory_slots
+
+	var/list/restricted_accessory_slots = list(
+		ACCESSORY_SLOT_UTILITY,
+		ACCESSORY_SLOT_HOLSTER,
+		ACCESSORY_SLOT_ARMBAND,
+		ACCESSORY_SLOT_RANK,
+		ACCESSORY_SLOT_DEPT,
+		ACCESSORY_SLOT_OVER
+	)
+
 	var/list/starting_accessories
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
 	var/ironed_state = WRINKLES_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 	var/volume_multiplier = 1
-	var/markings_icon	// simple colored overlay that would be applied to the icon
+	var/markings_state_modifier	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
+	var/should_display_id = TRUE
+	var/fallback_slot
+
+/obj/item/clothing/get_equipment_tint()
+	return tint
 
 /obj/item/clothing/Initialize()
+
 	. = ..()
-	if(markings_icon && markings_color)
+	setup_equip_flags()
+
+	if(accessory_slot)
+		if(isnull(accessory_removable))
+			accessory_removable = TRUE
+		if(isnull(fallback_slot))
+			fallback_slot = slot_w_uniform_str
+		accessory_hide_on_states = get_initial_accessory_hide_on_states()
+
+	if(starting_accessories)
+		for(var/T in starting_accessories)
+			attach_accessory(null, new T(src))
+	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
+		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
+
+	if(update_clothing_state_toggles() || (markings_color && markings_state_modifier))
 		update_icon()
+
+/obj/item/clothing/Destroy()
+	if(is_accessory())
+		on_removed()
+	return ..()
+
+/obj/item/clothing/get_fallback_slot(slot)
+	return fallback_slot
+
+/obj/item/clothing/get_stored_inventory()
+	. = ..()
+	if(length(.) && length(accessories))
+		. -= accessories
+
+/obj/item/clothing/proc/is_accessory()
+	return istype(loc, /obj/item/clothing)
+
+/obj/item/clothing/proc/setup_equip_flags()
+	if(!isnull(bodytype_equip_flags))
+		if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+			bodytype_equip_flags |= BODY_FLAG_QUADRUPED
+		else
+			bodytype_equip_flags &= ~BODY_FLAG_QUADRUPED
 
 /obj/item/clothing/can_contaminate()
 	return TRUE
@@ -69,41 +127,96 @@
 
 /obj/item/clothing/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 
-	if(overlay)
+	if(!overlay)
+		return ..()
 
-		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
-			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
+	// Synchronize our modifiers.
+	// Holder takes precedence, if we're attached as an accessory.
+	var/list/sync_modifiers = list(overlay.icon_state)
+	var/obj/item/clothing/holder = istype(loc, /obj/item/clothing) ? loc : null
+	var/list/modifiers = list()
+	if(length(clothing_state_modifiers))
+		modifiers |= clothing_state_modifiers
+	if(length(holder?.clothing_state_modifiers))
+		modifiers |= holder.clothing_state_modifiers
+	for(var/modifier_type in modifiers)
+		var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
+		// Do we even care about this one?
+		if(!modifier.applies_icon_state_modifier)
+			continue
+		if(!(modifier_type in clothing_state_modifiers))
+			continue
+		if(holder?.clothing_state_modifiers && !holder.clothing_state_modifiers[modifier_type])
+			continue
+		if(!LAZYACCESS(clothing_state_modifiers, modifier_type))
+			continue
+		LAZYADD(sync_modifiers, modifier.icon_state_modifier)
 
-		if(!(slot in user_mob?.get_held_item_slots()))
-			if(blood_DNA)
-				var/mob_blood_overlay = user_mob.get_bodytype()?.get_blood_overlays(user_mob)
-				if(mob_blood_overlay)
-					var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
-					bloodsies.appearance_flags |= NO_CLIENT_COLOR
-					overlay.overlays += bloodsies
-			if(markings_icon && markings_color)
-				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
+	var/new_state = JOINTEXT(sync_modifiers)
+	if(check_state_in_icon(new_state, overlay.icon))
+		overlay.icon_state = new_state
+
+	// Apply our bodytype modifier if any applies. At time of writing this is restricted to some specific
+	// uniforms with a 'feminine' version that looks like someone has used an industrial press on their waist.
+	var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
+	if(slot in root_bodytype?.onmob_state_modifiers)
+		new_state = jointext(list(overlay.icon_state, root_bodytype.onmob_state_modifiers[slot]), "-")
+		if(check_state_in_icon(new_state, overlay.icon))
+			overlay.icon_state = new_state
+
+	// Apply any marking overlays that we have defined.
+	if(markings_state_modifier && markings_color)
+		new_state = JOINTEXT(list(overlay.icon_state, markings_state_modifier))
+		if(check_state_in_icon(new_state, overlay.icon))
+			overlay.overlays += mutable_appearance(overlay.icon, new_state, markings_color)
+
+	// Apply a bloodied effect if the mob has been besmirched.
+	// Don't do this for inhands as the overlay is generally not slot based.
+	// TODO: make this slot based and masked to the onmob overlay?
+	if(!(slot in user_mob?.get_held_item_slots()) && blood_DNA && blood_overlay_type)
+		var/mob_blood_overlay = user_mob?.get_bodytype()?.get_blood_overlays(user_mob)
+		if(mob_blood_overlay)
+			var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
+			bloodsies.appearance_flags |= NO_CLIENT_COLOR
+			overlay.overlays += bloodsies
 
 	// We apply accessory overlays after calling parent so accessories are not offset twice.
 	overlay = ..()
 	if(overlay && length(accessories))
-		for(var/obj/item/clothing/accessory/A in accessories)
-			if(A.should_overlay())
-				overlay.overlays += A.get_mob_overlay(user_mob, slot, bodypart)
+		for(var/obj/item/clothing/accessory in accessories)
+			if(accessory.should_overlay())
+				overlay.overlays += accessory.get_mob_overlay(user_mob, slot, bodypart)
 	return overlay
+
+/obj/item/clothing/set_dir(ndir)
+	// Avoid rendering the profile or back sides of the mob overlay we used when accessories are rendered.
+	if(length(accessories))
+		ndir = SOUTH
+	return ..()
 
 /obj/item/clothing/on_update_icon()
 	. = ..()
-	var/base_state = get_world_inventory_state()
-	if(markings_icon && markings_color)
-		add_overlay(mutable_appearance(icon, "[base_state][markings_icon]", markings_color))
-	var/list/new_overlays
-	for(var/obj/item/clothing/accessory/accessory in accessories)
-		var/image/I = accessory.get_attached_inventory_overlay(base_state)
+
+	// Clothing does not generally align with each other's world icons, so we just use the mob overlay in this case.
+	var/set_appearance = FALSE
+	if(length(accessories))
+		var/image/I = get_mob_overlay(ismob(loc) ? loc : null, get_fallback_slot())
 		if(I)
-			LAZYADD(new_overlays, I)
-	if(LAZYLEN(new_overlays))
-		add_overlay(new_overlays)
+			I.plane = plane
+			I.layer = layer
+			I.alpha = alpha
+			I.color = color
+			I.name = name
+			appearance = I
+			set_dir(SOUTH)
+			set_appearance = TRUE
+	if(!set_appearance)
+		icon_state = JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier()))
+		if(markings_state_modifier && markings_color)
+			add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
+
+	update_clothing_icon()
+
 
 // Used by washing machines to temporarily make clothes smell
 /obj/item/clothing/proc/change_smell(decl/material/odorant, time = 10 MINUTES)
@@ -117,9 +230,9 @@
 /obj/item/clothing/proc/get_fibers()
 	. = "material from \a [name]"
 	var/list/acc = list()
-	for(var/obj/item/clothing/accessory/A in accessories)
-		if(prob(40) && A.get_fibers())
-			acc += A.get_fibers()
+	for(var/obj/item/clothing/accessory in accessories)
+		if(prob(40) && accessory.get_fibers())
+			acc += accessory.get_fibers()
 	if(acc.len)
 		. += " with traces of [english_list(acc)]"
 
@@ -127,15 +240,6 @@
 	add_fingerprint(source)
 	if(prob(10))
 		ironed_state = WRINKLES_WRINKLY
-
-/obj/item/clothing/Initialize()
-	. = ..()
-	if(starting_accessories)
-		for(var/T in starting_accessories)
-			var/obj/item/clothing/accessory/tie = new T(src)
-			src.attach_accessory(null, tie)
-	if(markings_color && markings_icon)
-		update_icon()
 
 /obj/item/clothing/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
@@ -152,6 +256,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
 
 /obj/item/clothing/equipped(var/mob/user)
+	update_icon()
 	if(needs_vision_update())
 		update_wearer_vision()
 	return ..()
@@ -172,22 +277,31 @@
 		reconsider_single_icon()
 		update_clothing_icon()
 
+/obj/item/clothing/get_examine_name()
+	var/list/ensemble = list(name)
+	for(var/obj/item/clothing/accessory in accessories)
+		if(accessory.accessory_visibility == ACCESSORY_VISIBILITY_ENSEMBLE)
+			LAZYADD(ensemble, accessory.get_examine_name())
+	if(length(ensemble) <= 1)
+		return ..()
+	return english_list(ensemble, summarize = TRUE)
+
 /obj/item/clothing/get_examine_line()
 	. = ..()
-	var/list/ties = list()
-	for(var/obj/item/clothing/accessory/accessory in accessories)
-		if(accessory.high_visibility)
-			ties += "\a [accessory.get_examine_line()]"
-	if(ties.len)
+	var/list/ties
+	for(var/obj/item/clothing/accessory in accessories)
+		if(accessory.accessory_visibility == ACCESSORY_VISIBILITY_ATTACHMENT)
+			LAZYADD(ties, "\a [accessory.get_examine_line()]")
+	if(LAZYLEN(ties))
 		.+= " with [english_list(ties)] attached"
-	if(accessories.len > ties.len)
-		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
+	if(LAZYLEN(accessories) > LAZYLEN(ties))
+		.+= ". <a href='byond://?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
 	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
 	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
-		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
+		to_chat(user, SPAN_WARNING("It has some <a href='byond://?src=\ref[src];list_armor_damage=1'>damage</a>."))
 
 	if(LAZYLEN(accessories))
 		to_chat(user, "It has the following attached: [counting_english_list(accessories)]")
@@ -202,7 +316,7 @@
 	if(rags)
 		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
 
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in accessories
 	if(sensor)
 		switch(sensor.sensor_mode)
 			if(VITALS_SENSOR_OFF)
@@ -213,6 +327,13 @@
 				to_chat(user, "Its vital tracker appears to be enabled.")
 			if(VITALS_SENSOR_TRACKING)
 				to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
+
+	if(length(clothing_state_modifiers))
+		var/list/interactions = list()
+		for(var/modifier_type in clothing_state_modifiers)
+			var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
+			interactions += modifier.name
+		to_chat(user, SPAN_SUBTLE("Use alt-click to [english_list(interactions, and_text = " or ")]."))
 
 #undef RAG_COUNT
 
@@ -238,12 +359,12 @@
 			return TOPIC_HANDLED
 	. = ..()
 
-/obj/item/clothing/get_pressure_weakness(pressure,zone)
-	. = ..()
-	for(var/obj/item/clothing/accessory/A in accessories)
-		. = min(., A.get_pressure_weakness(pressure,zone))
+/obj/item/clothing/get_pressure_weakness(pressure, zone)
+	. = (body_parts_covered & zone) ? ..() : 1
+	for(var/obj/item/clothing/accessory in accessories)
+		. = min(., accessory.get_pressure_weakness(pressure,zone))
 
-/obj/item/clothing/proc/check_limb_support(var/mob/living/carbon/human/user)
+/obj/item/clothing/proc/check_limb_support(var/mob/living/human/user)
 	return FALSE
 
 /obj/item/clothing/verb/toggle_suit_sensors()
@@ -255,7 +376,7 @@
 /obj/item/clothing/proc/set_sensors(mob/user)
 	if (isobserver(user) || user.incapacitated())
 		return
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in accessories
 	if(sensor)
 		sensor.user_set_sensors(user)
 
@@ -264,22 +385,49 @@
 	if(!istype(old_item, /obj/item/clothing) || !(ACCESSORY_SLOT_SENSORS in valid_accessory_slots))
 		return
 	var/obj/item/clothing/old_clothes = old_item
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in old_clothes.accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in old_clothes.accessories
 	if(!sensor)
 		return
-	sensor.removable = TRUE // This will be refreshed by remove_accessory/attach_accessory
+	sensor.accessory_removable = TRUE // This will be refreshed by remove_accessory/attach_accessory
 	old_clothes.remove_accessory(null, sensor)
 	attach_accessory(null, sensor)
 
+/obj/item/clothing/proc/get_hood()
+	return null
 
-/decl/interaction_handler/clothing_set_sensors
-	name = "Set Sensors Level"
-	expected_target_type = /obj/item/clothing/under
+/obj/item/clothing/proc/remove_hood(skip_update = FALSE)
+	var/obj/item/check_hood = get_hood()
+	if(!istype(check_hood) || check_hood.loc == src)
+		return
+	if(ismob(check_hood.loc))
+		var/mob/M = check_hood.loc
+		M.drop_from_inventory(check_hood)
+	check_hood.forceMove(src)
+	if(!skip_update)
+		update_clothing_icon()
 
-/decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
-	var/obj/item/clothing/under/U = target
-	U.set_sensors(user)
+/obj/item/clothing/dropped()
+	. = ..()
+	remove_hood(skip_update = TRUE)
+	update_icon()
 
 /obj/item/clothing/get_alt_interactions(var/mob/user)
 	. = ..()
+	var/list/all_clothing_state_modifiers = list()
+	for(var/obj/item/clothing/accessory in get_flat_accessory_list())
+		for(var/modifier_type in accessory.clothing_state_modifiers)
+			all_clothing_state_modifiers |= modifier_type
+	for(var/modifier_type in all_clothing_state_modifiers)
+		var/decl/clothing_state_modifier/modifier = GET_DECL(modifier_type)
+		if(modifier.alt_interaction_type)
+			LAZYADD(., modifier.alt_interaction_type)
 	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)
+
+/decl/interaction_handler/clothing_set_sensors
+	name = "Set Sensors Level"
+	expected_target_type = /obj/item/clothing
+
+/decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
+	var/obj/item/clothing/U = target
+	U.set_sensors(user)
+

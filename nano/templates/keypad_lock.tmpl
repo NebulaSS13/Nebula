@@ -1,106 +1,113 @@
-<div class='item'>
-	<div class="itemLabelWider">
-		Lock Status:
-	</div>
-	<div style="float:right">
+<style>
+	#lcd_screen {
+		margin: 0 auto;
+		width: 80%;
+		border: 2px solid hsl(0, 0%, 43%);
+		text-align: left;
+		padding: 0.2em 0.8em 0.2em 0.8em;
+		font-family: 'segment7', monospace;
+		font-size: large;
+		font-weight: 800;
+		/*color: hsl(22, 20%, 50%);*/
+		color: hsl(120, 20%, 40%);
+		background-color:hsl(0, 0%, 25%);
+		box-shadow: hsla(0, 0%, 0%, 0.35) 0px -0.5em 0.2em -0.2em inset;
+	}
+	/* Keypad style */
+	#keypad_frame {
+		margin: 0 auto;
+  		width: 60%;
+	}
+	#keypad_frame fieldset{
+		border-radius: 2em;
+		border-width: 0.3em;
+		border-color: hsl(0, 0%, 33%);
+		background-color: hsl(0, 0%, 12%);
+		padding: 10px;
+	}
+	#keypad_frame legend{
+		margin: 0 auto;
+		width:auto;
+	}
+	#keypad_frame table{
+		border-collapse: collapse;
+		border-style: hidden;
+	}
+	#keypad_frame td{
+		padding: 4px;
+		width: 42px;
+	}
+	#keypad_frame tr{
+		height: 40px;
+	}
+	#error_display{
+		overflow: visible;
+		text-align: center;
+		width: 100%;
+		min-height: 2em;
+		height: 4em;
+	}
+</style>
+
+<!-- Helper that displays the lock/unlocked icon -->
+{{function show_locked_icon() { }}
+	<span>
 		{{if data.locked}}
-			LOCKED
+			<span class="uiIcon16 icon-locked" style="transform: scale(1.5);"/>
 		{{else}}
-			UNLOCKED
+			<span class="uiIcon16 icon-unlocked" style="transform: scale(1.5);"/>
 		{{/if}}
-	</div>
+	</span>
+{{ } }}
+
+<!-- Helper to make the link for a given key on the keypad -->
+{{function make_number_button(key, is_disabled, btn_id, btn_class){ }}
+	{{:helper.link(key, null, {'key' : key}, is_disabled ? 'disabled' : null, btn_class? btn_class : 'linkBtnOSDark', btn_id)}}
+{{ } }}
+
+<!--Error Display-->
+<div class="item" id="error_display">
+	{{if data.error}}
+		<div class="bad"><b>{{:data.error}}</b></div>
+	{{/if}}
+	{{if data.status}}
+		<div><b>{{:data.status}}</b></div>
+	{{/if}}
 </div>
-{{if data.error}}
-	<div class='item'>
-		<div class="itemLabelWider" style="padding: 10px">
-			<font color=red><b>{{:data.error}}</b></font>
-		</div>
-	</div>
-{{/if}}
-<div style="margin:0 auto;width:180px">
-	<fieldset style="background-color: #202020;padding: 10px">
-		<legend style="text-align:center">Keypad</legend> 
-		<div style="margin:0 auto;width: 145px;border:2px solid #6e6e6e;background-color:#404040;text-align:center">
+<!-- The actual keypad -->
+<div id="keypad_frame">
+	<fieldset>
+		<legend>{{show_locked_icon();}} Keypad</legend>
+		<!--Keycode LCD-->
+		<div id="lcd_screen" unselectable="on">
 			{{:data.input_code}}
 		</div>
-		<center>
-			<table style="border-collapse: collapse;border-style: hidden">
-				<tr style="height: 40px">
-					<td style="border: 2px solid #6e6e6e;padding: 4px;width: 42px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('1' , null, {'key' : '1'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 2px solid #6e6e6e;padding: 4px;width: 42px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('2' , null, {'key' : '2'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 2px solid #6e6e6e;padding: 4px;width: 42px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('3' , null, {'key' : '3'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-				</tr>
-				<tr style="height: 40px">
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('4' , null, {'key' : '4'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('5' , null, {'key' : '5'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('6' , null, {'key' : '6'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-				</tr>
-				<tr style="height: 40px">
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('7' , null, {'key' : '7'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('8' , null, {'key' : '8'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 1px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('9' , null, {'key' : '9'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-				</tr>
-				<tr style="height: 50px">
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('C' , null, {'key' : 'C'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('0' , null, {'key' : '0'}, data.disabled ? 'disabled' : null, null)}}
-						</div>
-					</td>
-					<td style="border: 2px solid #6e6e6e;padding: 4px">
-						<div style="margin:0 auto;width:23px">
-							{{:helper.link('E' , null, {'key' : 'E'}, data.disabled || !data.locked ? 'disabled' : null, null)}}
-						</div>
-					</td>
-				</tr>
-			</table>
-		<center>
+		<!--Spacer-->
+		<div style="min-height: 2em;max-height: 2em;" />
+		<!--Keypad-->
+		<table>
+			<tr>
+				<td>{{make_number_button('1', data.disabled || !data.locked);}}</td>
+				<td>{{make_number_button('2', data.disabled || !data.locked);}}</td>
+				<td>{{make_number_button('3', data.disabled || !data.locked);}}</td>
+			</tr>
+			<tr>
+				<td>{{make_number_button('4', data.disabled || !data.locked);}}</td>
+				<td>{{make_number_button('5', data.disabled || !data.locked);}}</td>
+				<td>{{make_number_button('6', data.disabled || !data.locked);}}</td>
+			</tr>
+			<tr>
+				<td>{{make_number_button('7', data.disabled || !data.locked);}}</td>
+				<td>{{make_number_button('8', data.disabled || !data.locked);}}</td>
+				<td>{{make_number_button('9', data.disabled || !data.locked);}}</td>
+			</tr>
+			<tr>
+				<td>{{make_number_button('C', data.disabled, null, 'linkBtnOSRed');}}</td>
+				<td>{{make_number_button('0', data.disabled || !data.locked);}}</td>
+				<td>{{make_number_button('E', data.disabled || !data.locked);}}</td>
+			</tr>
+		</table>
 	</fieldset>
 </div>
-{{if data.status}}
-	<div class='item'>
-		<div style="float:right">
-			<b>{{:data.status}}</b>
-		</div>
-	</div>
-{{/if}}
+<!-- Spacer -->
+<div style='min-height: 2em; height: 3em;' />

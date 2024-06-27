@@ -1,15 +1,27 @@
 /obj/structure/boulder
 	name = "boulder"
-	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
+	desc = "A large boulder, somewhat bigger than a small boulder."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "boulder1"
 	density = TRUE
 	opacity = TRUE
 	anchored = TRUE
 	material = /decl/material/solid/stone/sandstone
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
+
+/obj/structure/boulder/excavated
+	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
+
+/obj/structure/boulder/basalt
+	material = /decl/material/solid/stone/basalt
+
+/obj/structure/boulder/create_dismantled_products(turf/T)
+	new /obj/item/stack/material/ore(T, rand(3,5), material?.type)
+	matter = null
+	material = null
+	return ..()
 
 /obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration)
 	. = ..()
@@ -46,8 +58,8 @@
 				SPAN_DANGER("\The [src] suddenly crumbles away."),
 				SPAN_DANGER("\The [src] has disintegrated under your onslaught. Any secrets it was holding are long gone.")
 			)
-			qdel(src)
-			return
+			physically_destroyed()
+			return TRUE
 
 		if(prob(excavation_level))
 			//success
@@ -64,7 +76,7 @@
 					SPAN_DANGER("\The [src] suddenly crumbles away."),
 					SPAN_DANGER("\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.")
 				)
-			qdel(src)
+			physically_destroyed()
 		return TRUE
 
 	return ..()
@@ -72,7 +84,7 @@
 /obj/structure/boulder/Bumped(AM)
 	. = ..()
 	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
+		var/mob/living/human/H = AM
 		for(var/obj/item/P in H.get_inactive_held_items())
 			if(IS_PICK(P))
 				attackby(P, H)

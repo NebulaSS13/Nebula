@@ -3,7 +3,7 @@
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "ice_1"
 	damage = 20
-	damage_type = BURN
+	atom_damage_type = BURN
 	damage_flags = 0
 
 /obj/item/projectile/forcebolt/strong
@@ -20,7 +20,7 @@
 	icon_state = "fireball"
 	fire_sound = 'sound/magic/fireball.ogg'
 	damage = 20
-	damage_type = BURN
+	atom_damage_type = BURN
 	damage_flags = 0
 
 	var/ex_severe = -1

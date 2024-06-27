@@ -78,7 +78,6 @@
 	result = /decl/material/liquid/burn_meds
 	required_reagents = list(/decl/material/solid/silicon = 1, /decl/material/solid/carbon = 1)
 	result_amount = 2
-	log_is_important = 1
 
 /decl/chemical_reaction/drug/presyncopics
 	name = "Presyncopics"

@@ -26,14 +26,14 @@
 		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
 
 /decl/singularity_event/mesmerize/handle_event(obj/effect/singularity/source)
-	for(var/mob/living/carbon/M in oviewers(8, source))
+	for(var/mob/living/M in oviewers(8, source))
 		if(isbrain(M)) //Ignore brains
 			continue
 		if(M.status_flags & GODMODE)
 			continue
 		if(M.stat == CONSCIOUS)
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				if(istype(H.get_equipped_item(slot_glasses_str), /obj/item/clothing/glasses/meson))
 					if(source.current_stage.stage_size != STAGE_SUPER)
 						to_chat(H, SPAN_WARNING("You look directly into \the [source]. Good thing you had your protective eyewear on!"))

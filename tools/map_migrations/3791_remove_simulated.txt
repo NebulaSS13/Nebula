@@ -1,0 +1,2 @@
+/turf/simulated/wall/@SUBTYPES : /turf/wall/@SUBTYPES{@OLD}
+/turf/simulated/floor/@SUBTYPES : /turf/floor/@SUBTYPES{@OLD}

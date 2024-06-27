@@ -13,8 +13,17 @@
 	handle_material    = /decl/material/solid/organic/wood
 
 /obj/item/tool/shovel/get_initial_tool_qualities()
-	var/static/list/tool_qualities = list(TOOL_SHOVEL = TOOL_QUALITY_DEFAULT)
+	var/static/list/tool_qualities = list(
+		TOOL_SHOVEL = TOOL_QUALITY_DEFAULT,
+		TOOL_HOE    = TOOL_QUALITY_BAD
+	)
 	return tool_qualities
+
+/obj/item/tool/shovel/wood
+	material = /decl/material/solid/organic/wood
+
+/obj/item/tool/shovel/one_material/Initialize(ml, material_key, _handle_material, _binding_material, override_tool_qualities, override_tool_properties)
+	return ..(ml, material_key, material_key, _binding_material, override_tool_qualities, override_tool_properties)
 
 /obj/item/tool/spade
 	name                = "spade"
@@ -35,5 +44,9 @@
 	return null
 
 /obj/item/tool/spade/get_initial_tool_qualities()
-	var/static/list/tool_qualities = list(TOOL_SHOVEL = TOOL_QUALITY_BAD)
+	var/static/list/tool_qualities = list(
+		TOOL_SHOVEL = TOOL_QUALITY_BAD,
+		TOOL_HOE    = TOOL_QUALITY_MEDIOCRE
+
+	)
 	return tool_qualities

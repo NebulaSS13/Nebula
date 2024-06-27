@@ -1,15 +1,11 @@
 /datum/codex_entry/scannable/flora
 	category = /decl/codex_category/flora
 
-/datum/plantgene
-	var/genetype    // Label used when applying trait.
-	var/list/values // Values to copy into the target seed datum.
-
 /datum/seed
 	//Tracking.
 	var/uid                        // Unique identifier.
 	var/name                       // Index for global list.
-	var/seed_name                  // Plant name for seed packet.
+	var/product_name               // Plant name for seed packet and product strings.
 	var/seed_noun = SEED_NOUN_SEEDS// Descriptor for packet.
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
@@ -17,97 +13,78 @@
 	var/scanned                    // If it was scanned with a plant analyzer.
 	var/can_self_harvest = 0       // Mostly used for living mobs.
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
-	var/list/traits = list()       // Initialized in New()
+	var/list/_traits               // Initialized in New()
 	var/list/mutants               // Possible predefined mutant varieties, if any.
 	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
+	var/list/dried_chems           // Chemicals that a dried plant product will have.
+	var/list/roasted_chems         // Chemicals that a roasted/grilled plant product will have.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
-	var/kitchen_tag                // Used by the reagent grinder.
+	var/grown_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/product_type = /obj/item/chems/food/grown
+	var/product_material
 	var/force_layer
 	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
 	var/hydrotray_only
 	var/base_seed_value = 5 // Used when generating price.
 	var/scannable_result
+	var/grown_is_seed = FALSE
+
+	// Dissection values.
+	var/min_seed_extracted = 1
+	var/max_seed_extracted = 2
+	var/slice_product = /obj/item/chems/food/processed_grown/slice
+	var/slice_amount = 5
 
 	// Cached images for overlays
 	var/image/dead_overlay
 	var/image/harvest_overlay
 	var/list/growing_overlays
 
+	// Backyard grilling vars. Not passed through genetics.
+	var/backyard_grilling_rawness      = 20
+	var/backyard_grilling_product      = /obj/item/chems/food/badrecipe
+	var/backyard_grilling_announcement = "smokes and chars!"
+
+	// Used to show an icon when drying in a rack.
+	var/drying_state = "grown"
+
 /datum/seed/New()
-
-	set_trait(TRAIT_IMMUTABLE,            0)            // If set, plant will never mutate. If -1, plant is highly mutable.
-	set_trait(TRAIT_HARVEST_REPEAT,       0)            // If 1, this plant will fruit repeatedly.
-	set_trait(TRAIT_PRODUCES_POWER,       0)            // Can be used to make a battery.
-	set_trait(TRAIT_JUICY,                0)            // When thrown, causes a splatter decal.
-	set_trait(TRAIT_EXPLOSIVE,            0)            // When thrown, acts as a grenade.
-	set_trait(TRAIT_CARNIVOROUS,          0)            // 0 = none, 1 = eat pests in tray, 2 = eat living things  (when a vine).
-	set_trait(TRAIT_PARASITE,             0)            // 0 = no, 1 = gain health from weed level.
-	set_trait(TRAIT_STINGS,               0)            // Can cause damage/inject reagents when thrown or handled.
-	set_trait(TRAIT_YIELD,                0)            // Amount of product.
-	set_trait(TRAIT_SPREAD,               0)            // 0 limits plant to tray, 1 = creepers, 2 = vines.
-	set_trait(TRAIT_MATURATION,           0)            // Time taken before the plant is mature.
-	set_trait(TRAIT_PRODUCTION,           0)            // Time before harvesting can be undertaken again.
-	set_trait(TRAIT_TELEPORTING,          0)            // Uses the teleport tomato effect.
-	set_trait(TRAIT_BIOLUM,               0)            // Plant is bioluminescent.
-	set_trait(TRAIT_ALTER_TEMP,           0)            // If set, the plant will periodically alter local temp by this amount.
-	set_trait(TRAIT_PRODUCT_ICON,         0)            // Icon to use for fruit coming from this plant.
-	set_trait(TRAIT_PLANT_ICON,           0)            // Icon to use for the plant growing in the tray.
-	set_trait(TRAIT_PRODUCT_COLOUR,       0)            // Colour to apply to product icon.
-	set_trait(TRAIT_BIOLUM_COLOUR,        0)            // The colour of the plant's radiance.
-	set_trait(TRAIT_POTENCY,              1)            // General purpose plant strength value.
-	set_trait(TRAIT_REQUIRES_NUTRIENTS,   1)            // The plant can starve.
-	set_trait(TRAIT_REQUIRES_WATER,       1)            // The plant can become dehydrated.
-	set_trait(TRAIT_WATER_CONSUMPTION,    3)            // Plant drinks this much per tick.
-	set_trait(TRAIT_LIGHT_TOLERANCE,      3)            // Departure from ideal that is survivable.
-	set_trait(TRAIT_TOXINS_TOLERANCE,     5)            // Resistance to poison.
-	set_trait(TRAIT_PEST_TOLERANCE,       5)            // Threshold for pests to impact health.
-	set_trait(TRAIT_WEED_TOLERANCE,       5)            // Threshold for weeds to impact health.
-	set_trait(TRAIT_IDEAL_LIGHT,          5)            // Preferred light level in luminosity.
-	set_trait(TRAIT_HEAT_TOLERANCE,       20)           // Departure from ideal that is survivable.
-	set_trait(TRAIT_LOWKPA_TOLERANCE,     25)           // Low pressure capacity.
-	set_trait(TRAIT_ENDURANCE,            100)          // Maximum plant HP when growing.
-	set_trait(TRAIT_HIGHKPA_TOLERANCE,    200)          // High pressure capacity.
-	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
-	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
-	set_trait(TRAIT_PLANT_COLOUR,         "#46b543")    // Colour of the plant icon.
-	set_trait(TRAIT_PHOTOSYNTHESIS,       1)            // If it turns CO2 into oxygen
-
 	update_growth_stages()
-
-	uid = "[sequential_id(/datum/seed/)]"
+	uid = "[sequential_id(/datum/seed)]"
 
 // TODO integrate other traits.
 /datum/seed/proc/get_monetary_value()
 	. = 1
-	// Positives!
-	. += 3 * get_trait(TRAIT_HARVEST_REPEAT)
-	. += 3 * get_trait(TRAIT_PRODUCES_POWER)
-	. += 5 * get_trait(TRAIT_CARNIVOROUS)
-	. += 5 * get_trait(TRAIT_PARASITE)
-	. += 5 * get_trait(TRAIT_TELEPORTING)
-	// Negatives!
-	. -= 2 * get_trait(TRAIT_STINGS)
-	. -= 2 * get_trait(TRAIT_EXPLOSIVE)
+	for(var/decl/plant_trait/plant_trait in decls_repository.get_decls_of_subtype_unassociated(/decl/plant_trait))
+		. += plant_trait.get_worth_of_value(get_trait(plant_trait.type))
 	. = max(1, round(. * base_seed_value))
-
-/datum/seed/proc/get_trait(var/trait)
-	return traits["[trait]"]
 
 /datum/seed/proc/get_trash_type()
 	return trash_type
 
-/datum/seed/proc/set_trait(var/trait,var/nval,var/ubound,var/lbound, var/degrade)
-	if(!isnull(degrade)) nval *= degrade
-	if(!isnull(ubound))  nval = min(nval,ubound)
-	if(!isnull(lbound))  nval = max(nval,lbound)
-	traits["[trait]"] =  nval
+/datum/seed/proc/set_trait(var/trait, var/nval, var/ubound, var/lbound, var/degrade)
+	if(!isnull(degrade))
+		nval *= degrade
+	if(!isnull(ubound))
+		nval = min(nval,ubound)
+	if(!isnull(lbound))
+		nval = max(nval,lbound)
 
-	if(trait == TRAIT_PLANT_ICON)
-		update_growth_stages()
+	var/decl/plant_trait/plant_trait = GET_DECL(trait)
+	if(!istype(plant_trait) || nval == plant_trait.default_value)
+		LAZYREMOVE(_traits, trait)
+	else
+		LAZYSET(_traits, trait, nval)
+	plant_trait.handle_post_trait_set(src)
+
+/datum/seed/proc/get_trait(var/trait)
+	if(trait in _traits)
+		return _traits[trait]
+	var/decl/plant_trait/plant_trait = GET_DECL(trait)
+	return plant_trait.default_value
 
 /datum/seed/proc/create_spores(var/turf/T)
 	if(!T)
@@ -130,7 +107,7 @@
 	qdel(R)
 
 // Does brute damage to a target.
-/datum/seed/proc/do_thorns(var/mob/living/carbon/human/target, var/obj/item/fruit, var/target_limb)
+/datum/seed/proc/do_thorns(var/mob/living/human/target, var/obj/item/fruit, var/target_limb)
 
 	if(!get_trait(TRAIT_CARNIVOROUS))
 		return
@@ -170,7 +147,7 @@
 	target.apply_damage(damage, BRUTE, target_limb, damage_flags, used_weapon = "Thorns")
 
 // Adds reagents to a target.
-/datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)
+/datum/seed/proc/do_sting(var/mob/living/human/target, var/obj/item/fruit)
 	if(!get_trait(TRAIT_STINGS))
 		return
 
@@ -214,7 +191,7 @@
 	if(!splat_type || (locate(splat_type) in T))
 		return
 	var/atom/splat = new splat_type(T, src)
-	splat.SetName("[seed_name] [pick("smear","smudge","splatter")]")
+	splat.SetName("[product_name] [pick("smear","smudge","splatter")]")
 	if(get_trait(TRAIT_BIOLUM))
 		var/clr
 		if(get_trait(TRAIT_BIOLUM_COLOUR))
@@ -239,7 +216,7 @@
 				if(reagent_amounts?[2] && potency > 0)
 					rtotal += round(potency/reagent_amounts[2])
 				if(rid == /decl/material/liquid/nutriment)
-					LAZYSET(data, seed_name, max(1,rtotal))
+					LAZYSET(data, product_name, max(1,rtotal))
 				splat_reagents.add_reagent(rid,max(1,rtotal),data)
 	if(splat_reagents)
 		var/splat_range = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
@@ -271,7 +248,12 @@
 			origin_turf.visible_message(SPAN_DANGER("\The [thrown] splatters against [target]!"))
 		splatter(origin_turf,thrown)
 
-/datum/seed/proc/handle_plant_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
+/datum/seed/proc/handle_plant_environment(var/obj/machinery/portable_atmospherics/hydroponics/holder, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
+
+	var/growth_rate = 1
+	var/turf/current_turf = isturf(holder) ? holder : get_turf(holder)
+	if(istype(holder) && !holder.mechanical && current_turf)
+		growth_rate = current_turf.get_plant_growth_rate()
 
 	var/health_change = 0
 	// Handle gas consumption.
@@ -286,15 +268,15 @@
 				missing_gas++
 
 		if(missing_gas > 0)
-			health_change += missing_gas * HYDRO_SPEED_MULTIPLIER
+			health_change += missing_gas * growth_rate
 
 	// Process it.
 	var/pressure = environment.return_pressure()
 	if(pressure < get_trait(TRAIT_LOWKPA_TOLERANCE)|| pressure > get_trait(TRAIT_HIGHKPA_TOLERANCE))
-		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+		health_change += rand(1,3) * growth_rate
 
 	if(abs(environment.temperature - get_trait(TRAIT_IDEAL_HEAT)) > get_trait(TRAIT_HEAT_TOLERANCE))
-		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+		health_change += rand(1,3) * growth_rate
 
 	// Handle gas production.
 	if(exude_gasses && exude_gasses.len && !check_only)
@@ -317,7 +299,7 @@
 		light_supplied = current_turf.get_lumcount() * 5
 	if(light_supplied)
 		if(abs(light_supplied - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
-			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+			health_change += rand(1,3) * growth_rate
 
 	for(var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
 		if(smoke.reagents.has_reagent(/decl/material/liquid/weedkiller))
@@ -386,7 +368,7 @@
 
 	if(prefix)
 		name = "[prefix] [name]"
-	seed_name = name
+	product_name = name
 	display_name = "[name] plant"
 
 //Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
@@ -595,108 +577,16 @@
 
 //Mutates a specific trait/set of traits.
 /datum/seed/proc/apply_gene(var/datum/plantgene/gene)
-
-	if(!gene || !gene.values || get_trait(TRAIT_IMMUTABLE) > 0) return
-
-	// Splicing products has some detrimental effects on yield and lifespan.
-	// We handle this before we do the rest of the looping, as normal traits don't really include lists.
-	switch(gene.genetype)
-		if(GENE_BIOCHEMISTRY)
-			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
-				if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
-
-			if(!chems) chems = list()
-
-			var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
-			for(var/rid in gene_value)
-
-				var/list/gene_chem = gene_value[rid]
-
-				if(!chems[rid])
-					chems[rid] = gene_chem.Copy()
-					continue
-
-				for(var/i=1;i<=gene_chem.len;i++)
-
-					if(isnull(gene_chem[i])) gene_chem[i] = 0
-
-					if(chems[rid][i])
-						chems[rid][i] = max(1,round((gene_chem[i] + chems[rid][i])/2))
-					else
-						chems[rid][i] = gene_chem[i]
-
-			var/list/new_gasses = gene.values["[TRAIT_EXUDE_GASSES]"]
-			if(islist(new_gasses))
-				if(!exude_gasses) exude_gasses = list()
-				exude_gasses |= new_gasses
-				for(var/gas in exude_gasses)
-					exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
-
-			gene.values["[TRAIT_EXUDE_GASSES]"] = null
-			gene.values["[TRAIT_CHEMS]"] = null
-
-		if(GENE_DIET)
-			var/list/new_gasses = gene.values["[TRAIT_CONSUME_GASSES]"]
-			consume_gasses |= new_gasses
-			gene.values["[TRAIT_CONSUME_GASSES]"] = null
-		if(GENE_METABOLISM)
-			product_type = gene.values["product_type"]
-			gene.values["product_type"] = null
-
-	for(var/trait in gene.values)
-		set_trait(trait,gene.values["[trait]"])
-
+	if(!istype(gene) || !gene?.values || get_trait(TRAIT_IMMUTABLE) > 0)
+		return
+	gene.genetype.modify_seed(gene, src)
 	update_growth_stages()
 
-//Returns a list of the desired trait values.
-/datum/seed/proc/get_gene(var/genetype)
-
-	if(!genetype) return 0
-
-	var/list/traits_to_copy
-	var/datum/plantgene/P = new()
-	P.genetype = genetype
-	P.values = list()
-
-	switch(genetype)
-		if(GENE_BIOCHEMISTRY)
-			P.values["[TRAIT_CHEMS]"] =        chems
-			P.values["[TRAIT_EXUDE_GASSES]"] = exude_gasses
-			traits_to_copy = list(TRAIT_POTENCY)
-		if(GENE_OUTPUT)
-			traits_to_copy = list(TRAIT_PRODUCES_POWER,TRAIT_BIOLUM)
-		if(GENE_ATMOSPHERE)
-			traits_to_copy = list(TRAIT_HEAT_TOLERANCE,TRAIT_LOWKPA_TOLERANCE,TRAIT_HIGHKPA_TOLERANCE)
-		if(GENE_HARDINESS)
-			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE,TRAIT_ENDURANCE)
-		if(GENE_METABOLISM)
-			P.values["product_type"] = product_type
-			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_REQUIRES_WATER,TRAIT_ALTER_TEMP)
-		if(GENE_VIGOUR)
-			traits_to_copy = list(TRAIT_PRODUCTION,TRAIT_MATURATION,TRAIT_YIELD,TRAIT_SPREAD)
-		if(GENE_DIET)
-			P.values["[TRAIT_CONSUME_GASSES]"] = consume_gasses
-			traits_to_copy = list(TRAIT_CARNIVOROUS,TRAIT_PARASITE,TRAIT_NUTRIENT_CONSUMPTION,TRAIT_WATER_CONSUMPTION)
-		if(GENE_ENVIRONMENT)
-			traits_to_copy = list(TRAIT_IDEAL_HEAT,TRAIT_IDEAL_LIGHT,TRAIT_LIGHT_TOLERANCE)
-		if(GENE_PIGMENT)
-			traits_to_copy = list(TRAIT_PLANT_COLOUR,TRAIT_PRODUCT_COLOUR,TRAIT_BIOLUM_COLOUR,TRAIT_LEAVES_COLOUR)
-		if(GENE_STRUCTURE)
-			traits_to_copy = list(TRAIT_PLANT_ICON,TRAIT_PRODUCT_ICON,TRAIT_HARVEST_REPEAT,TRAIT_LARGE)
-		if(GENE_FRUIT)
-			traits_to_copy = list(TRAIT_STINGS,TRAIT_EXPLOSIVE,TRAIT_FLESH_COLOUR,TRAIT_JUICY)
-		if(GENE_SPECIAL)
-			traits_to_copy = list(TRAIT_TELEPORTING)
-
-	for(var/trait in traits_to_copy)
-		P.values["[trait]"] = get_trait(trait)
-	return (P ? P : 0)
-
 //Place the plant products at the feet of the user.
-/datum/seed/proc/harvest(var/mob/user,var/yield_mod,var/harvest_sample,var/force_amount)
+/datum/seed/proc/harvest(var/mob/user, var/yield_mod, var/harvest_sample, var/force_amount)
 
 	if(!user)
-		return
+		return FALSE
 
 	if(!force_amount && get_trait(TRAIT_YIELD) == 0 && !harvest_sample)
 		if(istype(user)) to_chat(user, "<span class='danger'>You fail to harvest anything useful.</span>")
@@ -709,10 +599,7 @@
 			SSplants.seeds[name] = src
 
 		if(harvest_sample)
-			var/obj/item/seeds/seeds = new(get_turf(user))
-			seeds.seed_type = name
-			seeds.update_seed()
-			return
+			return new /obj/item/seeds(get_turf(user), null, src)
 
 		var/total_yield = 0
 		if(!isnull(force_amount))
@@ -737,7 +624,7 @@
 				. += new product_type(get_turf(user), using_yield)
 		else
 			for(var/i = 1 to total_yield)
-				var/obj/item/product = new product_type(get_turf(user),name)
+				var/obj/item/product = new product_type(get_turf(user), null, src)
 				. += product
 
 				if(get_trait(TRAIT_PRODUCT_COLOUR) && istype(product, /obj/item/chems/food))
@@ -768,27 +655,29 @@
 // be put into the global datum list until the product is harvested, though.
 /datum/seed/proc/diverge(var/modified)
 
-	if(get_trait(TRAIT_IMMUTABLE) > 0) return
+	if(get_trait(TRAIT_IMMUTABLE) > 0)
+		return
 
 	//Set up some basic information.
 	var/datum/seed/new_seed = new
-	new_seed.name =            "new line"
-	new_seed.uid =              0
-	new_seed.roundstart =       0
+	new_seed.name             = "new line"
+	new_seed.uid              = 0
+	new_seed.roundstart       = 0
 	new_seed.can_self_harvest = can_self_harvest
-	new_seed.kitchen_tag =      kitchen_tag
-	new_seed.trash_type =       trash_type
-	new_seed.product_type =     product_type
+	new_seed.grown_tag        = grown_tag
+	new_seed.trash_type       = trash_type
+	new_seed.product_type     = product_type
+
 	//Copy over everything else.
 	if(mutants)        new_seed.mutants = mutants.Copy()
 	if(chems)          new_seed.chems = chems.Copy()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
-	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
-	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
-	new_seed.seed_noun =            seed_noun
-	new_seed.traits = traits.Copy()
+	new_seed.product_name = "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][product_name]"
+	new_seed.display_name = "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
+	new_seed.seed_noun    = seed_noun
+	new_seed._traits      = deepCopyList(_traits)
 	new_seed.update_growth_stages()
 	return new_seed
 
@@ -842,13 +731,13 @@
 	clone = ..()
 	//!! - Cloning means having an independent working copy, so leave its unique uid - !!
 	clone.roundstart       = FALSE
-	clone.name             = "[seed_name][(roundstart ? " strain #[clone.uid]" : "")]"
-	clone.seed_name        = clone.name
+	clone.name             = "[product_name][(roundstart ? " strain #[clone.uid]" : "")]"
+	clone.product_name     = clone.name
 	clone.display_name     = "[display_name][(roundstart ? " strain #[clone.uid]" : "")]"
 	clone.seed_noun        = seed_noun
 
 	//Seed traits
-	clone.traits           = traits.Copy()
+	clone._traits          = deepCopyList(_traits)
 	clone.mutants          = mutants?.Copy()
 	clone.chems            = chems?.Copy()
 	clone.consume_gasses   = consume_gasses?.Copy()
@@ -866,7 +755,7 @@
 	clone.can_self_harvest = can_self_harvest
 
 	//misc data
-	clone.kitchen_tag      = kitchen_tag
+	clone.grown_tag        = grown_tag
 	clone.trash_type       = trash_type
 	clone.product_type     = product_type
 	clone.base_seed_value  = base_seed_value
@@ -874,3 +763,25 @@
 
 	clone.update_growth_stages()
 	return clone
+
+/datum/seed/proc/show_slice_message(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
+	if(slice_product == /obj/item/chems/food/processed_grown/chopped)
+		sliced.visible_message(SPAN_NOTICE("\The [user] quickly chops up \the [sliced] with \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/crushed)
+		sliced.visible_message(SPAN_NOTICE("\The [user] methodically crushes \the [sliced] with the handle of \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/sticks)
+		sliced.visible_message(SPAN_NOTICE("\The [user] neatly slices \the [sliced] into sticks with \the [tool]."))
+	else
+		return null
+	return TRUE
+
+/datum/seed/proc/show_slice_message_poor(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
+	if(slice_product == /obj/item/chems/food/processed_grown/chopped)
+		sliced.visible_message(SPAN_NOTICE("\The [user] crudely chops \the [sliced] with \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/crushed)
+		sliced.visible_message(SPAN_NOTICE("\The [user] messily crushes \the [sliced] with the handle of \the [tool]."))
+	else if(slice_product == /obj/item/chems/food/processed_grown/sticks)
+		sliced.visible_message(SPAN_NOTICE("\The [user] roughly slices \the [sliced] into sticks with \the [tool]."))
+	else
+		return null
+	return TRUE

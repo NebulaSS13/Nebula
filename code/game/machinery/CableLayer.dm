@@ -82,10 +82,10 @@
 	last_piece = null
 
 /obj/machinery/cablelayer/proc/dismantle_floor(var/turf/new_turf)
-	if(istype(new_turf, /turf/simulated/floor))
-		var/turf/simulated/floor/T = new_turf
+	if(istype(new_turf, /turf/floor))
+		var/turf/floor/T = new_turf
 		if(!T.is_plating())
-			T.make_plating(!(T.broken || T.burnt))
+			T.make_plating(!T.is_floor_damaged())
 	return new_turf.is_plating()
 
 /obj/machinery/cablelayer/proc/layCable(var/turf/new_turf,var/M_Dir)

@@ -50,7 +50,7 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 			if(special_role_name)
 				strings += special_role_name
 		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			if(H.species)
 				strings += H.species.name
 		for(var/text in strings)
@@ -128,20 +128,22 @@ var/global/world_topic_last = world.timeofday
 	return TC.try_use(T, addr, master, key)
 
 /world/Reboot(var/reason)
+
+	if(get_config_value(/decl/config/toggle/wait_for_sigusr1_reboot) && reason != 3)
+		text2file("foo", "reboot_called")
+		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
+		global.Master.restart_timeout = 5 MINUTES
+		return
+
 	if(global.using_map.reboot_sound)
 		sound_to(world, sound(pick(global.using_map.reboot_sound)))// random end sounds!! - LastyBatsy
 
-	Master.Shutdown()
+	// Master.Shutdown() // In almost all normal cases, world/Reboot() calls world/Del() which calls Shutdown() on the master controller. Having it here means it runs multiple times.
 
 	var/serverurl = get_config_value(/decl/config/text/server)
 	if(serverurl)	//if you set a server location in configuration, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 		for(var/client/C in global.clients)
 			to_chat(C, link("byond://[serverurl]"))
-
-	if(get_config_value(/decl/config/toggle/wait_for_sigusr1_reboot) && reason != 3)
-		text2file("foo", "reboot_called")
-		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
-		return
 
 	game_log("World rebooted at [time_stamp()]")
 

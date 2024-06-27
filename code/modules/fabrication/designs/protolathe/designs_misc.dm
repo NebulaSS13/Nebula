@@ -12,10 +12,10 @@
 	path = /obj/item/ano_scanner
 
 /datum/fabricator_recipe/protolathe/misc/bag_holding
-	path = /obj/item/storage/backpack/holding
+	path = /obj/item/backpack/holding
 
 /datum/fabricator_recipe/protolathe/misc/dufflebag_holding
-	path = /obj/item/storage/backpack/holding/duffle
+	path = /obj/item/backpack/holding/duffle
 
 /datum/fabricator_recipe/protolathe/misc/beaker
 	path = /obj/item/chems/glass/beaker/noreact
@@ -39,7 +39,7 @@
 	path = /obj/item/mop/advanced
 
 /datum/fabricator_recipe/protolathe/misc/advancedtrash
-	path = /obj/item/storage/bag/trash/advanced
+	path = /obj/item/bag/trash/advanced
 
 /datum/fabricator_recipe/protolathe/misc/holosign
 	path = /obj/item/holosign_creator
@@ -48,7 +48,7 @@
 	path = /obj/item/encryptionkey/binary
 
 /datum/fabricator_recipe/protolathe/misc/chameleon
-	path = /obj/item/storage/backpack/chameleon/sydie_kit
+	path = /obj/item/backpack/chameleon/sydie_kit
 
 /datum/fabricator_recipe/protolathe/misc/ship_tracker
 	path = /obj/item/ship_tracker

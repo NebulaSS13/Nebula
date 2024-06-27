@@ -4,6 +4,5 @@ SUBSYSTEM_DEF(misc)
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/misc/Initialize()
-	setupgenetics()
 	transfer_controller = new
 	. = ..()

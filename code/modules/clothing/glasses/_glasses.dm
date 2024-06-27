@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = SLOT_EYES
 	slot_flags = SLOT_EYES
+	fallback_slot = slot_glasses_str
 
 	var/vision_flags =     0
 	var/darkness_view =    0
@@ -17,7 +18,7 @@
 	var/active =           TRUE
 	var/electric =         FALSE //if the glasses should be disrupted by EMP
 
-	var/hud_type
+	var/glasses_hud_type
 	var/obj/screen/screen_overlay
 	var/obj/item/clothing/glasses/hud/hud // Hud glasses, if any
 	var/activation_sound =   'sound/items/goggles_charge.ogg'
@@ -48,7 +49,7 @@
 /obj/item/clothing/glasses/emp_act(severity)
 	if(electric)
 		if(ishuman(src.loc))
-			var/mob/living/carbon/human/M = src.loc
+			var/mob/living/human/M = src.loc
 			if(M.get_equipped_item(slot_glasses_str) != src)
 				to_chat(M, SPAN_DANGER("\The [src] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
 			else
@@ -57,10 +58,9 @@
 				to_chat(M, SPAN_DANGER("Your [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
 
 				// Don't cure being nearsighted
-				if(!(M.disabilities & NEARSIGHTED))
-					M.disabilities |= NEARSIGHTED
-					spawn(100)
-						M.disabilities &= ~NEARSIGHTED
+				if(!M.has_genetic_condition(GENE_COND_NEARSIGHTED))
+					M.add_genetic_condition(GENE_COND_NEARSIGHTED, 10 SECONDS)
+
 		if(toggleable && active)
 			set_active(FALSE)
 

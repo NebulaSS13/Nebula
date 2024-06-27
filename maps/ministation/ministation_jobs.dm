@@ -8,7 +8,7 @@
 		/datum/job/ministation/captain,
 		/datum/job/ministation/cargo,
 		/datum/job/ministation/robot,
-		/datum/job/ministation/computer,
+		/datum/job/computer,
 		/datum/job/ministation/detective,
 		/datum/job/ministation/doctor,
 		/datum/job/ministation/doctor/head,
@@ -21,5 +21,5 @@
 		/datum/job/ministation/security,
 		/datum/job/ministation/security/head,
 		/datum/job/ministation/librarian,
-		/datum/job/ministation/corporate/rep
+		/datum/job/ministation/tradehouse/rep
 	)

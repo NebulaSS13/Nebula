@@ -31,13 +31,13 @@
 	origin = "SGS Severance"
 
 	possible_wanted_items = list(
-		/obj/item/chems/food/human         = TRADER_SUBTYPES_ONLY,
-		/obj/item/chems/food/meat/human    = TRADER_THIS_TYPE,
-		/mob/living/carbon/human           = TRADER_ALL
+		/obj/item/chems/food/human               = TRADER_SUBTYPES_ONLY,
+		/obj/item/chems/food/butchery/meat/human = TRADER_THIS_TYPE,
+		/mob/living/human                 = TRADER_ALL
 	)
 
 	possible_trading_items = list(
-		/obj/item/gun/projectile/automatic = TRADER_SUBTYPES_ONLY
+		/obj/item/gun/projectile/automatic       = TRADER_SUBTYPES_ONLY
 	)
 
 	blacklisted_trade_items = null
@@ -105,14 +105,6 @@
 	)
 
 	possible_wanted_items = list(
-		/mob/living/simple_animal/construct              = TRADER_SUBTYPES_ONLY,
-		/obj/item/sword/cultblade                        = TRADER_THIS_TYPE,
-		/obj/item/clothing/head/culthood                 = TRADER_ALL,
-		/obj/item/clothing/suit/space/cult               = TRADER_ALL,
-		/obj/item/clothing/suit/cultrobes                = TRADER_ALL,
-		/obj/item/clothing/head/helmet/space/cult        = TRADER_ALL,
-		/obj/structure/cult                              = TRADER_SUBTYPES_ONLY,
-		/obj/structure/constructshell                    = TRADER_ALL,
 		/mob/living/simple_animal/familiar               = TRADER_SUBTYPES_ONLY,
 		/mob/living/simple_animal/familiar/pet           = TRADER_BLACKLIST,
 		/mob/living/simple_animal/hostile/mimic          = TRADER_ALL

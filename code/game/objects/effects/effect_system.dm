@@ -98,6 +98,7 @@ steam.start() -- spawns the effect
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	pass_flags = PASS_FLAG_TABLE
 	var/spark_sound = "sparks"
 
 /obj/effect/sparks/struck
@@ -197,13 +198,13 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/Crossed(atom/movable/AM)
 	..()
-	if(iscarbon(AM))
-		affect(AM)
+	if(isliving(AM))
+		affect_mob(AM)
 
-/obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
-	if (!istype(M))
+/obj/effect/effect/smoke/proc/affect_mob(var/mob/living/M)
+	if(!istype(M))
 		return 0
-	if(M.internal != null && M.check_for_airtight_internals(FALSE))
+	if(M.get_internals() != null && M.check_for_airtight_internals(FALSE))
 		return FALSE
 	return TRUE
 
@@ -231,19 +232,15 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/bad/Move()
 	..()
-	for(var/mob/living/carbon/M in get_turf(src))
-		affect(M)
+	for(var/mob/living/M in get_turf(src))
+		affect_mob(M)
 
-/obj/effect/effect/smoke/bad/affect(var/mob/living/carbon/M)
+/obj/effect/effect/smoke/bad/affect_mob(var/mob/living/M)
 	if (!..())
 		return 0
 	M.drop_held_items()
-	M.adjustOxyLoss(1)
-	if (M.coughedtime != 1)
-		M.coughedtime = 1
-		M.cough()
-		spawn ( 20 )
-			M.coughedtime = 0
+	M.take_damage(1, OXY)
+	M.cough()
 
 /obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -259,20 +256,17 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/sleepy/Move()
 	..()
-	for(var/mob/living/carbon/M in get_turf(src))
-		affect(M)
+	for(var/mob/living/M in get_turf(src))
+		affect_mob(M)
 
-/obj/effect/effect/smoke/sleepy/affect(mob/living/carbon/M)
+/obj/effect/effect/smoke/sleepy/affect_mob(var/mob/living/M)
 	if (!..())
 		return 0
 
 	M.drop_held_items()
 	ADJ_STATUS(M, STAT_ASLEEP, 1)
-	if (M.coughedtime != 1)
-		M.coughedtime = 1
-		M.cough()
-		spawn ( 20 )
-			M.coughedtime = 0
+	M.cough()
+
 /////////////////////////////////////////////
 // Mustard Gas
 /////////////////////////////////////////////
@@ -284,21 +278,19 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/mustard/Move()
 	..()
-	for(var/mob/living/carbon/human/R in get_turf(src))
-		affect(R)
+	for(var/mob/living/M in get_turf(src))
+		affect_mob(M)
 
-/obj/effect/effect/smoke/mustard/affect(var/mob/living/carbon/human/R)
-	if (!..())
+/obj/effect/effect/smoke/mustard/affect_mob(var/mob/living/M)
+	if (!..() || !isliving(M))
 		return 0
-	if (R.get_equipped_item(slot_wear_suit_str))
+	if (M.get_equipped_item(slot_wear_suit_str))
 		return 0
 
-	R.take_overall_damage(0, 0.75)
-	if (R.coughedtime != 1)
-		R.coughedtime = 1
-		R.emote(/decl/emote/audible/gasp)
-		spawn (20)
-			R.coughedtime = 0
+	M.take_overall_damage(0, 0.75)
+	if (world.time > M.last_cough + 2 SECONDS)
+		M.last_cough = world.time
+		M.emote(/decl/emote/audible/gasp)
 
 /////////////////////////////////////////////
 // Smoke spread

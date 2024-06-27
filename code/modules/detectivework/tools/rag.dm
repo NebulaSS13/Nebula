@@ -89,46 +89,48 @@
 			user.visible_message("\The [user] finishes wiping off the [A]!")
 			reagents.splash(A, FLUID_QDEL_POINT)
 
-/obj/item/chems/glass/rag/attack(atom/target, mob/user , flag)
-	if(isliving(target))
-		var/mob/living/M = target
-		if(on_fire)
+/obj/item/chems/glass/rag/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
+	if(on_fire)
+		user.visible_message(
+			SPAN_DANGER("\The [user] hits \the [target] with \the [src]!"),
+			SPAN_DANGER("You hit \the [target] with \the [src]!")
+		)
+		user.do_attack_animation(target)
+		admin_attack_log(user, target, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
+		target.IgniteMob()
+		return TRUE
+
+	if(reagents.total_volume)
+		if(user.get_target_zone() != BP_MOUTH)
+			wipe_down(target, user)
+			return TRUE
+
+		if (!target.has_danger_grab(user))
+			to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
+			return TRUE
+
+		user.do_attack_animation(src)
+		user.visible_message(
+			SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
+			SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
+			SPAN_WARNING("You hear some struggling and muffled cries of surprise.")
+		)
+
+		var/grab_time = 6 SECONDS
+		if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+			grab_time = 3 SECONDS
+
+		if (do_after(user, grab_time, target))
 			user.visible_message(
-				SPAN_DANGER("\The [user] hits \the [target] with \the [src]!"),
-				SPAN_DANGER("You hit \the [target] with \the [src]!")
+				SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
+				SPAN_DANGER("You smother \the [target] with \the [src]!")
 			)
-			user.do_attack_animation(target)
-			admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
-			M.IgniteMob()
-		else if(reagents.total_volume)
-			if(user.get_target_zone() == BP_MOUTH)
-				if (!M.has_danger_grab(user))
-					to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
-					return
-
-				user.do_attack_animation(src)
-				user.visible_message(
-					SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
-					SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
-					SPAN_WARNING("You hear some struggling and muffled cries of surprise.")
-				)
-
-				var/grab_time = 6 SECONDS
-				if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
-					grab_time = 3 SECONDS
-
-				if (do_after(user, grab_time, target))
-					user.visible_message(
-						SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
-						SPAN_DANGER("You smother \the [target] with \the [src]!")
-					)
-					var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INHALE)
-					var/contained_reagents = reagents.get_reagents()
-					admin_inject_log(user, M, src, contained_reagents, trans_amt)
-					update_name()
-			else
-				wipe_down(target, user)
-		return
+			var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INHALE)
+			var/contained_reagents = reagents.get_reagents()
+			admin_inject_log(user, target, src, contained_reagents, trans_amt)
+			update_name()
+		return TRUE
 
 	return ..()
 
@@ -149,7 +151,7 @@
 	if(!on_fire && istype(A) && (src in user))
 		if(ATOM_IS_OPEN_CONTAINER(A) && !(A in user))
 			remove_contents(user, A)
-		else if(!ismob(A)) //mobs are handled in attack() - this prevents us from wiping down people while smothering them.
+		else if(!ismob(A)) //mobs are handled in use_on_mob() - this prevents us from wiping down people while smothering them.
 			wipe_down(A, user)
 		return
 

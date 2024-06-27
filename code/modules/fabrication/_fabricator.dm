@@ -15,7 +15,6 @@
 	base_type =       /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/panel_closed
 
-	var/has_recycler = TRUE
 	var/color_selectable = FALSE // Allows selecting a color by the user in the UI, to do with as you please.
 	var/selected_color = "white"
 
@@ -79,8 +78,6 @@
 			var/decl/material/mat = GET_DECL(thing)
 			material_names += "[storage_capacity[thing]] [mat.use_name]"
 		to_chat(user, SPAN_NOTICE("It can store [english_list(material_names)]."))
-	if(has_recycler)
-		to_chat(user, SPAN_NOTICE("It has a built-in shredder that can recycle most items, although any materials it cannot use will be wasted."))
 
 /obj/machinery/fabricator/Initialize()
 
@@ -193,7 +190,7 @@
 		update_current_build(wait)
 
 /obj/machinery/fabricator/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(stat & NOPOWER)
 		icon_state = "[base_icon_state]_d"
 	else if(currently_building)
@@ -204,7 +201,7 @@
 	var/list/new_overlays = material_overlays.Copy()
 	if(panel_open)
 		new_overlays += panel_image
-	overlays = new_overlays
+	set_overlays(new_overlays)
 
 /obj/machinery/fabricator/proc/remove_mat_overlay(var/mat_overlay)
 	material_overlays -= mat_overlay

@@ -14,6 +14,7 @@
 	opacity = TRUE
 	min_fluid_opacity = FLUID_MAX_ALPHA
 	max_fluid_opacity = 240
+	compost_value = 1 // yum
 
 	chilling_products = list(
 		/decl/material/liquid/coagulated_blood = 1
@@ -33,18 +34,17 @@
 		.["species"] = .["species"] || global.using_map.default_species
 
 /decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
-	var/list/data = REAGENT_DATA(reagents, type)
+	. = ..()
 	if(LAZYACCESS(newdata, "trace_chem"))
 		var/list/other_chems = LAZYACCESS(newdata, "trace_chem")
-		if(!data)
-			data = newdata.Copy()
-		else if(!data["trace_chem"])
-			data["trace_chem"] = other_chems.Copy()
+		if(!.)
+			. = newdata.Copy()
+		else if(!.["trace_chem"])
+			.["trace_chem"] = other_chems.Copy()
 		else
-			var/list/my_chems = data["trace_chem"]
+			var/list/my_chems = .["trace_chem"]
 			for(var/chem in other_chems)
 				my_chems[chem] = my_chems[chem] + other_chems[chem]
-	. = data
 
 /decl/material/liquid/blood/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	var/data = REAGENT_DATA(holder, type)
@@ -54,23 +54,17 @@
 	blood_splatter(T, W?.resolve() || holder.my_atom, 1)
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 	if(LAZYACCESS(M.chem_doses, type) > 5)
-		M.adjustToxLoss(removed)
+		M.take_damage(removed, TOX)
 	if(LAZYACCESS(M.chem_doses, type) > 15)
-		M.adjustToxLoss(removed)
-
-/decl/material/liquid/blood/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.isSynthetic())
-			return
+		M.take_damage(removed, TOX)
 
 /decl/material/liquid/blood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/volume = REAGENT_VOLUME(holder, type)
-		var/mob/living/carbon/H = M
+		var/mob/living/human/H = M
 		H.inject_blood(volume, holder)
 		holder.remove_reagent(type, volume)
 
@@ -87,3 +81,4 @@
 	toxicity = 4
 	value = 0
 	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON
+	compost_value = 1 // yum

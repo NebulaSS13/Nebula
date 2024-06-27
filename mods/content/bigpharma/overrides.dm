@@ -7,28 +7,28 @@
 /obj/item/chems/glass/bottle
 	obfuscated_meds_type = /datum/extension/obfuscated_medication/bottle
 
-/obj/item/storage/pill_bottle/foil_pack
+/obj/item/pill_bottle/foil_pack
 	obfuscated_meds_type = /datum/extension/obfuscated_medication/foil_pack
 
-/obj/item/storage/pill_bottle/happy
+/obj/item/pill_bottle/happy
 	obfuscated_meds_type = null
 
 /obj/item/chems/pill/happy
 	obfuscated_meds_type = null
 
-/obj/item/storage/pill_bottle/zoom
+/obj/item/pill_bottle/zoom
 	obfuscated_meds_type = null
 
 /obj/item/chems/pill/zoom
 	obfuscated_meds_type = null
 
-/obj/item/storage/pill_bottle/gleam
+/obj/item/pill_bottle/gleam
 	obfuscated_meds_type = null
 
 /obj/item/chems/pill/gleam
 	obfuscated_meds_type = null
 
-/obj/item/storage/pill_bottle/assorted
+/obj/item/pill_bottle/assorted
 	obfuscated_meds_type = null
 
 /obj/item/chems/pill/detergent

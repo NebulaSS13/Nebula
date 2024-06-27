@@ -40,19 +40,21 @@
 		TRADER_BRIBE_REFUSAL     = "Krrkkrhkkhh! You ask too much! It must be moving on."
 	)
 	possible_wanted_items = list(
-		/obj/item/                      = TRADER_SUBTYPES_ONLY,
+		/obj/item                       = TRADER_SUBTYPES_ONLY,
 		/obj/item/stack/material        = TRADER_SUBTYPES_ONLY,
 		/obj/item/stack/material/cyborg = TRADER_BLACKLIST_ALL,
 		/obj/item/organ                 = TRADER_SUBTYPES_ONLY,
 	)
 
 	possible_trading_items = list(
-		/obj/item/gun/projectile/dartgun/vox  = TRADER_SUBTYPES_ONLY,
-		/obj/item/trash                       = TRADER_SUBTYPES_ONLY,
-		/obj/item/remains                     = TRADER_ALL,
-		/obj/item/clothing/accessory          = TRADER_ALL,
-		/obj/item/robot_parts                 = TRADER_SUBTYPES_ONLY,
-		/obj/item/robot_parts/robot_component = TRADER_BLACKLIST
+		/obj/item/gun/projectile/dartgun/vox      = TRADER_SUBTYPES_ONLY,
+		/obj/item/trash                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/remains                         = TRADER_ALL,
+		/obj/item/clothing/armor_attachment/plate = TRADER_ALL,
+		/obj/item/clothing/webbing                = TRADER_ALL,
+		/obj/item/clothing/sensor                 = TRADER_ALL,
+		/obj/item/robot_parts                     = TRADER_SUBTYPES_ONLY,
+		/obj/item/robot_parts/robot_component     = TRADER_BLACKLIST
 	)
 
 	mob_transfer_message = "<span class='danger'>You are transported to " + TRADER_TOKEN_ORIGIN + ". When the transportation dizziness wears off, you find you are surrounded by cackling vox...</span>"
@@ -66,7 +68,7 @@
 
 /datum/trader/ship/vox/hail(var/mob/user)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species)
 			switch(H.species.name)
 				if(SPECIES_VOX)

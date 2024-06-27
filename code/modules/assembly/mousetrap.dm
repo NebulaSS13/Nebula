@@ -30,7 +30,7 @@
 		return
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		switch(type)
 			if("feet")
 				if(!H.get_equipped_item(slot_shoes_str))
@@ -44,7 +44,7 @@
 			affecting.take_external_damage(1, 0)
 
 	else if(ismouse(target))
-		var/mob/living/simple_animal/mouse/M = target
+		var/mob/living/simple_animal/passive/mouse/M = target
 		visible_message("<span class='danger'>SPLAT!</span>")
 		M.splat()
 	playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
@@ -54,7 +54,7 @@
 	pulse_device(0)
 
 /obj/item/assembly/mousetrap/proc/toggle_arming(var/mob/user)
-	if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		var/which_hand = user.get_active_held_item_slot()
 		triggered(user, which_hand)
 		user.visible_message(SPAN_DANGER("\The [user] accidentally sets off [src], hurting their fingers."), \

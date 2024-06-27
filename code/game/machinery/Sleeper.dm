@@ -15,7 +15,7 @@
 	active_power_usage = 1 KILOWATTS //builtin health analyzer, dialysis machine, injectors.
 	pixel_z = -8
 
-	var/mob/living/carbon/human/occupant
+	var/mob/living/human/occupant
 	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0
 	var/pump
@@ -406,7 +406,7 @@
 	dump_contents() // In case an object was dropped inside or something. Excludes the beaker and component parts.
 	toggle_filter()
 
-/obj/machinery/sleeper/proc/set_occupant(var/mob/living/carbon/occupant)
+/obj/machinery/sleeper/proc/set_occupant(var/mob/living/occupant)
 	src.occupant = occupant
 	if(!occupant)
 		SetName(initial(name))

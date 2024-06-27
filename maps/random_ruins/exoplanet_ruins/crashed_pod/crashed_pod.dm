@@ -1,5 +1,3 @@
-var/global/list/crashed_pod_areas = list()
-
 /datum/map_template/ruin/exoplanet/crashed_pod
 	name = "crashed survival pod"
 	description = "A crashed survival pod from a destroyed ship."

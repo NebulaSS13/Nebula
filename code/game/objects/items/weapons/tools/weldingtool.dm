@@ -293,10 +293,10 @@
 /obj/item/weldingtool/proc/update_physical_damage()
 	if(isOn())
 		force   = tank ? tank.lit_force : initial(force)
-		damtype = BURN
+		atom_damage_type = BURN
 	else
-		damtype = BRUTE
 		force   = tank? tank.unlit_force : initial(force)
+		atom_damage_type = BRUTE
 
 /obj/item/weldingtool/proc/turn_on(var/mob/user)
 	if (!status)
@@ -342,27 +342,22 @@
 	else
 		return turn_on(user)
 
-/obj/item/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, target_zone)
-
+/obj/item/weldingtool/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(ishuman(target))
+		var/mob/living/human/H = target
+		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user?.get_target_zone())
 		if(!S || !S.is_robotic() || user.a_intent != I_HELP)
 			return ..()
-
 		if(BP_IS_BRITTLE(S))
-			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it."))
+			to_chat(user, SPAN_WARNING("\The [target]'s [S.name] is hard and brittle - \the [src]  cannot repair it."))
 			return TRUE
-
 		if(!welding)
-			to_chat(user, SPAN_WARNING("You'll need to turn [src] on to patch the damage on [M]'s [S.name]!"))
+			to_chat(user, SPAN_WARNING("You'll need to turn [src] on to patch the damage on [target]'s [S.name]!"))
 			return TRUE
-
 		if(S.robo_repair(15, BRUTE, "some dents", src, user))
 			weld(1, user)
 			return TRUE
-	else
-		return ..()
+	return ..()
 
 /obj/item/weldingtool/get_autopsy_descriptors()
 	if(isOn())

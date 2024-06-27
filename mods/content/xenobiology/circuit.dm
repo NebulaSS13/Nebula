@@ -23,7 +23,7 @@
 	var/mob/living/slime/T = get_pin_data_as_type(IC_INPUT, 1, /mob/living/slime)
 	if(!isslime(T)) //Invalid input
 		return
-	if(T in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(T in view(get_turf(src))) // Like the medbot's analyzer it can be used at range.
 
 		var/decl/slime_colour/slime_data = GET_DECL(T.slime_type)
 		set_pin_data(IC_OUTPUT, 1, slime_data.name)

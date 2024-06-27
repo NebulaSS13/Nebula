@@ -32,7 +32,9 @@ var/global/datum/uplink/uplink = new()
 	var/item_cost = 0
 	var/list/antag_costs = list()			// Allows specific antag roles to purchase at a different cost
 	var/datum/uplink_category/category		// Item category
-	var/list/decl/special_role/antag_roles = list("Exclude", /decl/special_role/deity)	// Antag roles this item is displayed to. If empty, display to all. If it includes 'Exclude", anybody except this role can view it
+	/// Antag roles this item is displayed to. If empty, display to all. If it includes 'Exclude", anybody except this role can view it
+	/// Examples: list(/decl/special_role/someone); list("Exclude", /decl/special_role/whoever); etc
+	var/list/decl/special_role/antag_roles
 
 /datum/uplink_item/item
 	var/path = null
@@ -129,7 +131,7 @@ var/global/datum/uplink/uplink = new()
 		if(L.len) I = L[1]
 
 	if(istype(I) && ishuman(user))
-		var/mob/living/carbon/human/A = user
+		var/mob/living/human/A = user
 		A.put_in_hands(I)
 	return I
 

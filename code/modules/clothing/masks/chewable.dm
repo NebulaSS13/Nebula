@@ -41,10 +41,10 @@
 	chewtime -= amount
 	if(reagents && reagents.total_volume)
 		if(ishuman(loc))
-			var/mob/living/carbon/human/C = loc
-			if (src == C.get_equipped_item(slot_wear_mask_str) && C.check_has_mouth())
-				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2)
-			add_trace_DNA(C)
+			var/mob/living/human/user = loc
+			if (src == user.get_equipped_item(slot_wear_mask_str) && user.check_has_mouth())
+				reagents.trans_to_mob(user, REM, CHEM_INGEST, 0.2)
+			add_trace_DNA(user)
 		else
 			STOP_PROCESSING(SSobj, src)
 
@@ -65,6 +65,7 @@
 	chewtime = 300
 	brand = "tobacco"
 	material = /decl/material/solid/organic/plantmatter
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/trash/cigbutt/spitwad
 	name = "spit wad"
@@ -124,6 +125,7 @@
 	chem_volume = 50
 	chewtime = 300
 	material = /decl/material/liquid/nutriment/sugar
+	draw_on_mob_when_equipped = FALSE
 	var/initial_payload_amount = 3
 
 /obj/item/clothing/mask/chewable/candy/populate_reagents()
@@ -175,6 +177,7 @@
 	icon = 'icons/clothing/mask/chewables/lollipop.dmi'
 	type_butt = /obj/item/trash/cigbutt/lollibutt
 	initial_payload_amount = 10
+	draw_on_mob_when_equipped = TRUE
 
 /obj/item/clothing/mask/chewable/candy/lolli/on_update_icon()
 	. = ..()
@@ -218,10 +221,6 @@
 	name = "medicine lollipop"
 	desc = "A sucrose sphere on a small handle, it has been infused with medication."
 	initial_payload_amount = 15
-
-/obj/item/clothing/mask/chewable/candy/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/sugar, 4) //6u in total
 
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds/get_possible_initial_reagents()
 	return list(

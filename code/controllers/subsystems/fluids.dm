@@ -129,7 +129,7 @@ SUBSYSTEM_DEF(fluids)
 		// Wash our turf.
 		current_fluid_holder.fluid_act(reagent_holder)
 
-		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/exterior) && (current_fluid_holder.reagents?.total_volume + current_fluid_holder.get_physical_height()) > 0))
+		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/floor) && (current_fluid_holder.turf_flags & TURF_FLAG_ABSORB_LIQUID) && (current_fluid_holder.reagents?.total_volume + current_fluid_holder.get_physical_height()) > 0))
 			removing = round(current_depth * 0.5)
 			if(removing > 0)
 				current_fluid_holder.remove_fluids(removing, defer_update = TRUE)
@@ -147,7 +147,7 @@ SUBSYSTEM_DEF(fluids)
 				UPDATE_FLUID_BLOCKED_DIRS(other_fluid_holder)
 				if(!(other_fluid_holder.fluid_blocked_dirs & UP) && other_fluid_holder.CanFluidPass(UP))
 					if(!QDELETED(other_fluid_holder) && other_fluid_holder.reagents?.total_volume < FLUID_MAX_DEPTH)
-						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume), defer_update = TRUE)
+						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume))
 						current_depth = current_fluid_holder.get_fluid_depth()
 
 		// Flow into the lowest level neighbor.
@@ -180,8 +180,8 @@ SUBSYSTEM_DEF(fluids)
 		if(current_depth <= FLUID_PUDDLE)
 			continue
 
-		if(lowest_neighbor)
-			current_fluid_holder.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow, defer_update = TRUE)
+		if(lowest_neighbor && lowest_neighbor_flow)
+			current_fluid_holder.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow)
 			pending_flows[current_fluid_holder] = TRUE
 			if(lowest_neighbor_flow >= FLUID_PUSH_THRESHOLD)
 				current_fluid_holder.last_flow_strength = lowest_neighbor_flow

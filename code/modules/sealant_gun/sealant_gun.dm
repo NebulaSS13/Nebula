@@ -35,7 +35,7 @@
 /obj/item/gun/launcher/sealant/consume_next_projectile()
 	if(loaded_tank?.foam_charges >= foam_charges_per_shot)
 		loaded_tank.foam_charges -= foam_charges_per_shot
-		. = new /obj/item/clothing/sealant(src)
+		. = new /obj/item/sealant(src)
 
 /obj/item/gun/launcher/sealant/Initialize()
 	. = ..()

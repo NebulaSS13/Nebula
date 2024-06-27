@@ -1,0 +1,1 @@
+/obj/item/clothing/accessory/armor/@SUBTYPES : /obj/item/clothing/armor_attachment/@SUBTYPES{@OLD}

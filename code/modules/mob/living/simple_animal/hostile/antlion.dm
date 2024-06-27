@@ -13,16 +13,9 @@
 	natural_weapon = /obj/item/natural_weapon/bite
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
-		)
+	)
 	ability_cooldown = 30 SECONDS
-
-	meat_type =     /obj/item/chems/food/xenomeat
-	meat_amount =   5
-	skin_material = /decl/material/solid/organic/skin/insect
-	skin_amount =   15
-	bone_material = /decl/material/solid/organic/bone/cartilage
-	bone_amount =   10
-
+	butchery_data = /decl/butchery_data/animal/antlion
 	var/healing = FALSE
 	var/heal_amount = 6
 
@@ -70,7 +63,7 @@
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
 	set_special_ability_cooldown(ability_cooldown)
-	for(var/mob/living/carbon/human/H in get_turf(src))
+	for(var/mob/living/human/H in get_turf(src))
 		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		SET_STATUS_MAX(H, STAT_WEAK, 1)
@@ -98,11 +91,7 @@
 	ability_cooldown = 45 SECONDS
 	can_escape = TRUE
 	break_stuff_probability = 25
-
-	meat_amount =   10
-	skin_material = /decl/material/solid/organic/skin/insect
-	skin_amount =   25
-	bone_amount =   15
+	butchery_data = /decl/butchery_data/animal/antlion/queen
 
 /obj/item/natural_weapon/bite/megalion
 	name = "mandibles"

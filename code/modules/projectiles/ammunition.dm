@@ -4,11 +4,10 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "pistolcasing"
 	randpixel = 10
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	throwforce = 1
 	w_class = ITEM_SIZE_TINY
-	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/metal/brass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	drop_sound = list(
@@ -24,6 +23,11 @@
 	var/spent_icon = "pistolcasing-spent"
 	var/bullet_color = COLOR_COPPER
 	var/marking_color
+
+/obj/item/ammo_casing/get_contained_external_atoms()
+	. = ..()
+	if(. && BB)
+		LAZYREMOVE(., BB)
 
 /obj/item/ammo_casing/Initialize()
 	if(ispath(projectile_type))
@@ -68,7 +72,7 @@
 	var/obj/item/gun/G = get_recursive_loc_of_type(/obj/item/gun)
 	if(G)
 		put_residue_on(G)
-		var/mob/living/carbon/human/H = G.get_recursive_loc_of_type(/mob/living/carbon/human)
+		var/mob/living/human/H = G.get_recursive_loc_of_type(/mob/living/human)
 		if(H)
 			var/holding_slot = H.get_held_slot_for_item(G)
 			if(holding_slot)
@@ -151,8 +155,24 @@
 	var/list/icon_keys = list()		//keys
 	var/list/ammo_states = list()	//values
 
+	/// Determines whether or not we wait until the first time our contents are gotten to initialize contents. May lead to icon bugs if not handled delicately.
+	var/lazyload_contents = TRUE
+	/// Whether or not our contents have been initialized or not, used in lazyloaded contents.
+	var/contents_initialized = FALSE
+
 /obj/item/ammo_magazine/box
 	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/ammo_magazine/proc/create_initial_contents()
+	if(contents_initialized || !initial_ammo || !ammo_type)
+		return
+	for(var/i in 1 to initial_ammo)
+		stored_ammo += new ammo_type(src)
+
+/obj/item/ammo_magazine/proc/get_stored_ammo_count()
+	. = length(stored_ammo)
+	if(!contents_initialized)
+		. += initial_ammo
 
 /obj/item/ammo_magazine/Initialize()
 	. = ..()
@@ -162,9 +182,8 @@
 	if(isnull(initial_ammo))
 		initial_ammo = max_ammo
 
-	if(initial_ammo)
-		for(var/i in 1 to initial_ammo)
-			stored_ammo += new ammo_type(src)
+	if(!lazyload_contents)
+		create_initial_contents()
 	if(caliber)
 		LAZYINSERT(labels, caliber, 1)
 	if(LAZYLEN(labels))
@@ -177,7 +196,7 @@
 		if(C.caliber != caliber)
 			to_chat(user, "<span class='warning'>[C] does not fit into [src].</span>")
 			return
-		if(stored_ammo.len >= max_ammo)
+		if(get_stored_ammo_count() >= max_ammo)
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
 			return
 		if(!user.try_unequip(C, src))
@@ -188,6 +207,7 @@
 	else ..()
 
 /obj/item/ammo_magazine/attack_self(mob/user)
+	create_initial_contents()
 	if(!stored_ammo.len)
 		to_chat(user, "<span class='notice'>[src] is already empty!</span>")
 		return
@@ -202,6 +222,7 @@
 /obj/item/ammo_magazine/attack_hand(mob/user)
 	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
+	create_initial_contents()
 	if(!stored_ammo.len)
 		to_chat(user, SPAN_NOTICE("\The [src] is already empty!"))
 		return TRUE
@@ -218,18 +239,20 @@
 /obj/item/ammo_magazine/on_update_icon()
 	. = ..()
 	if(multiple_sprites)
-		//find the lowest key greater than or equal to stored_ammo.len
+		//find the lowest key greater than or equal to our ammo count
 		var/new_state = null
+		var/self_ammo_count = get_stored_ammo_count()
 		for(var/idx in 1 to icon_keys.len)
-			var/ammo_count = icon_keys[idx]
-			if (ammo_count >= stored_ammo.len)
+			var/icon_ammo_count = icon_keys[idx]
+			if (icon_ammo_count >= self_ammo_count)
 				new_state = ammo_states[idx]
 				break
 		icon_state = (new_state)? new_state : initial(icon_state)
 
 /obj/item/ammo_magazine/examine(mob/user)
 	. = ..()
-	to_chat(user, "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!")
+	var/self_ammo_count = get_stored_ammo_count()
+	to_chat(user, "There [(self_ammo_count == 1)? "is" : "are"] [self_ammo_count] round\s left!")
 
 //magazine icon state caching
 var/global/list/magazine_icondata_keys = list()

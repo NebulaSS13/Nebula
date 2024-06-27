@@ -23,7 +23,7 @@
 /obj/item/knife/Initialize(ml, material_key)
 	. = ..()
 	if(!has_extension(src, /datum/extension/tool))
-		set_extension(src, /datum/extension/tool/variable, list(
+		set_extension(src, /datum/extension/tool/variable/simple, list(
 			TOOL_SCALPEL =     TOOL_QUALITY_MEDIOCRE,
 			TOOL_SAW =         TOOL_QUALITY_BAD,
 			TOOL_RETRACTOR =   TOOL_QUALITY_BAD,
@@ -37,16 +37,12 @@
 			handle_color = pick(valid_handle_colors)
 		add_overlay(overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR|RESET_ALPHA))
 
-/obj/item/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
-	if(!istype(M))
-		return ..()
+/obj/item/knife/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(user.a_intent != I_HELP)
-		if(user.get_target_zone() == BP_EYES)
-			if((MUTATION_CLUMSY in user.mutations) && prob(50))
-				M = user
-			return eyestab(M, user)
-
+	if(user.a_intent != I_HELP && user.get_target_zone() == BP_EYES)
+		if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
+			target = user
+		return eyestab(target, user)
 	return ..()
 
 /obj/item/knife/can_take_wear_damage()

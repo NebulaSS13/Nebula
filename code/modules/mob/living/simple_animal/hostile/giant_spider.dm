@@ -33,14 +33,7 @@
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 	base_animal_type = /mob/living/simple_animal/hostile/giant_spider
-
-	meat_type = /obj/item/chems/food/spider
-	meat_amount = 3
-	bone_material = null
-	bone_amount =   0
-	skin_material = /decl/material/solid/organic/skin/insect
-	skin_amount =   5
-
+	butchery_data = /decl/butchery_data/animal/arthropod/giant_spider
 	glowing_eyes = TRUE
 	ai = /datum/ai/giant_spider
 
@@ -63,7 +56,7 @@
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
-	meat_amount = 4
+	butchery_data = /decl/butchery_data/animal/arthropod/giant_spider/guard
 	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 5
@@ -113,7 +106,7 @@
 	hunt_chance = 25
 	can_escape = TRUE
 	pry_time = 5 SECONDS
-	flash_vulnerability = 2 //sensitive eyes for stalking prey
+	flash_protection = FLASH_PROTECTION_REDUCED
 	does_spin = FALSE
 	available_maneuvers = list(/decl/maneuver/leap/spider)
 	ability_cooldown = 3 MINUTES
@@ -133,21 +126,16 @@
 	fire_desc = "spits venom"
 	ranged_range = 6
 	pry_time = 7 SECONDS
-	flash_vulnerability = 2
+	flash_protection = FLASH_PROTECTION_REDUCED
 
 	var/venom_charge = 16
 
 //General spider procs
 /mob/living/simple_animal/hostile/giant_spider/Initialize(var/mapload, var/atom/parent)
 	color = parent?.color || color
-	spider_randomify()
-	update_icon()
-	. = ..()
-
-/mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	set_max_health(rand(initial(max_health), (1.4 * initial(max_health))))
 	eye_colour = pick(allowed_eye_colours)
-	update_icon()
+	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/FindTarget()
 	. = ..()
@@ -158,7 +146,7 @@
 			if(prob(15))
 				custom_emote(1,"locks its eyes on [.]")
 
-/mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
+/mob/living/simple_animal/hostile/giant_spider/attack_target(mob/target)
 	. = ..()
 	if(isliving(.))
 		if(current_health < get_max_health())
@@ -166,7 +154,7 @@
 			if(attacking_with)
 				heal_overall_damage(0.2 * attacking_with.force) //heal a bit on hit
 		if(ishuman(.))
-			var/mob/living/carbon/human/H = .
+			var/mob/living/human/H = .
 			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 			if(istype(S) && !length(S.breaches))
 				return
@@ -284,10 +272,10 @@ Nurse caste procs
 	. = ..()
 	divorce()
 
-/mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
+/mob/living/simple_animal/hostile/giant_spider/nurse/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(prob(infest_chance) && max_eggs)
 			var/list/limbs = H.get_external_organs()
 			var/obj/item/organ/external/O = LAZYLEN(limbs)? pick(limbs) : null
@@ -322,15 +310,15 @@ Nurse caste procs
 	//30% chance to stop wandering and do something
 	if(!spooder.busy && prob(30))
 		//first, check for potential food nearby to cocoon
-		for(var/mob/living/C in can_see)
-			if(is_type_in_list(C, spooder.cocoon_blacklist))
+		for(var/mob/living/web_target in can_see)
+			if(is_type_in_list(web_target, spooder.cocoon_blacklist))
 				continue
-			if(C.stat)
-				spooder.cocoon_target = C
+			if(web_target.stat)
+				spooder.cocoon_target = web_target
 				spooder.busy = MOVING_TO_TARGET
-				walk_to(spooder, C, 1, spooder.move_to_delay)
+				walk_to(spooder, web_target, 1, spooder.move_to_delay)
 				//give up if we can't reach them after 10 seconds
-				spooder.GiveUp(C)
+				spooder.GiveUp(web_target)
 				return
 
 		//second, spin a sticky spiderweb on this tile

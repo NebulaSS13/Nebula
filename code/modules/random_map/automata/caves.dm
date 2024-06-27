@@ -1,26 +1,20 @@
 /datum/random_map/automata/cave_system
 	iterations = 5
 	descriptor = "moon caves"
-	wall_type =  /turf/exterior/wall
-	floor_type = /turf/exterior/barren
+	wall_type =  /turf/wall/natural
+	floor_type = /turf/floor/natural/barren
 	target_turf_type = /turf/unsimulated/mask
 
-	var/mineral_turf = /turf/exterior/wall/random
-	var/list/ore_turfs = list()
-	var/list/minerals_sparse
-	var/list/minerals_rich
-
-/datum/random_map/automata/cave_system/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
-	if(!minerals_sparse) 
-		minerals_sparse = SSmaterials.weighted_minerals_sparse
-	if(!minerals_rich)   
-		minerals_rich =   SSmaterials.weighted_minerals_rich
-	..()
+	var/sparse_mineral_turf = /turf/wall/natural/random
+	var/rich_mineral_turf   = /turf/wall/natural/random/high_chance
+	var/list/ore_turfs      = list()
 
 /datum/random_map/automata/cave_system/get_appropriate_path(var/value)
 	switch(value)
-		if(DOOR_CHAR, EMPTY_CHAR)
-			return mineral_turf
+		if(DOOR_CHAR)
+			return sparse_mineral_turf
+		if(EMPTY_CHAR)
+			return rich_mineral_turf
 		if(FLOOR_CHAR)
 			return floor_type
 		if(WALL_CHAR)
@@ -69,37 +63,19 @@
 	if(!origin_x) origin_x = 1
 	if(!origin_y) origin_y = 1
 	if(!origin_z) origin_z = 1
-
 	var/tmp_cell
 	var/new_path
 	var/num_applied = 0
 	for (var/thing in block(locate(origin_x, origin_y, origin_z), locate(limit_x, limit_y, origin_z)))
 		var/turf/T = thing
-		new_path = null
 		if (!T || (target_turf_type && !istype(T, target_turf_type)))
 			continue
-
 		tmp_cell = TRANSLATE_COORD(T.x, T.y)
-
-		var/minerals
-		switch (map[tmp_cell])
-			if(DOOR_CHAR)
-				new_path = mineral_turf
-				minerals = pickweight(minerals_sparse)
-			if(EMPTY_CHAR)
-				new_path = mineral_turf
-				minerals = pickweight(minerals_rich)
-			if(FLOOR_CHAR)
-				new_path = floor_type
-			if(WALL_CHAR)
-				new_path = wall_type
-
+		new_path = get_appropriate_path(map[tmp_cell])
 		if (!new_path)
 			continue
-
 		num_applied += 1
-		T.ChangeTurf(new_path, minerals)
+		T.ChangeTurf(new_path)
 		get_additional_spawns(map[tmp_cell], T)
 		CHECK_TICK
-
 	game_log("ASGEN", "Applied [num_applied] turfs.")

@@ -63,7 +63,7 @@
 		<body>
 			<center><h1>Area Air Control</h1></center>
 			<font color="red">[status]</font><br>
-			<a href="?src=\ref[src];scan=1">Scan</a>
+			<a href="byond://?src=\ref[src];scan=1">Scan</a>
 			<table border="1" width="90%">"}
 	for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in connectedscrubbers)
 		dat += {"
@@ -74,8 +74,8 @@
 						Flow Rate: [round(scrubber.last_flow_rate,0.1)] L/s<br>
 					</td>
 					<td width="150">
-						<a class="green" href="?src=\ref[src];scrub=\ref[scrubber];toggle=1">Turn On</a>
-						<a class="red" href="?src=\ref[src];scrub=\ref[scrubber];toggle=0">Turn Off</a><br>
+						<a class="green" href="byond://?src=\ref[src];scrub=\ref[scrubber];toggle=1">Turn On</a>
+						<a class="red" href="byond://?src=\ref[src];scrub=\ref[scrubber];toggle=0">Turn Off</a><br>
 						Load: [round(scrubber.last_power_draw)] W
 					</td>
 				</tr>"}
@@ -133,46 +133,22 @@
 	zone = "This computer is working in a wired network limited to this area."
 
 /obj/machinery/computer/area_atmos/area/validscrubber(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber)
-	if(!isobj(scrubber))
-		return 0
-
-	/*
-	wow this is stupid, someone help me
-	*/
-	var/turf/T_src = get_turf(src)
-	if(!T_src.loc) return 0
-	var/area/A_src = T_src.loc
-
-	var/turf/T_scrub = get_turf(scrubber)
-	if(!T_scrub.loc) return 0
-	var/area/A_scrub = T_scrub.loc
-
-	if(A_scrub != A_src)
-		return 0
-
-	return 1
+	return isobj(scrubber) && (get_area(scrubber) == get_area(src))
 
 /obj/machinery/computer/area_atmos/area/scanscrubbers()
-	connectedscrubbers = new()
 
-	var/found = 0
+	var/area/A = get_area(src)
+	if(!A)
+		return
 
-	var/turf/T = get_turf(src)
-	if(!T.loc) return
-	var/area/A = T.loc
+	connectedscrubbers = list()
 	for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in SSmachines.machinery)
 		var/turf/T2 = get_turf(scrubber)
-		if(T2 && T2.loc)
-			var/area/A2 = T2.loc
-			if(istype(A2) && A2 == A)
-				connectedscrubbers += scrubber
-				found = 1
-
-
-	if(!found)
+		if(get_area(T2) == A)
+			connectedscrubbers += scrubber
+	if(!length(connectedscrubbers))
 		status = "ERROR: No scrubber found!"
-
-	src.updateUsrDialog()
+	updateUsrDialog()
 
 /obj/machinery/computer/area_atmos/tag
 	name = "heavy scrubber control"

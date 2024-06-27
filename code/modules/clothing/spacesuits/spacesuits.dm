@@ -26,6 +26,7 @@
 	brightness_on = 4
 	light_wedge = LIGHT_WIDE
 	on = 0
+	replaced_in_loadout = FALSE
 
 	var/obj/machinery/camera/camera
 	var/tinted = null	//Set to non-null for toggleable tint helmets
@@ -98,7 +99,7 @@
 	update_tint()
 
 /obj/item/clothing/head/helmet/space/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && tint && check_state_in_icon("[overlay.icon_state]_dark", overlay.icon))
+	if(overlay && get_equipment_tint() && check_state_in_icon("[overlay.icon_state]_dark", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_dark"
 	. = ..()
 
@@ -107,7 +108,7 @@
 	var/base_icon_state = get_world_inventory_state()
 	if(!base_icon_state)
 		base_icon_state = initial(icon_state)
-	if(tint && check_state_in_icon("[base_icon_state]_dark", icon))
+	if(get_equipment_tint() && check_state_in_icon("[base_icon_state]_dark", icon))
 		icon_state = "[base_icon_state]_dark"
 	else
 		icon_state = base_icon_state
@@ -143,6 +144,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
 	protects_against_weather = TRUE
+	replaced_in_loadout = FALSE
 
 /obj/item/clothing/suit/space/Initialize()
 	. = ..()

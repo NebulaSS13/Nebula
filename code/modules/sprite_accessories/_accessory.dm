@@ -6,9 +6,9 @@
 	The process of adding in new hairstyles has been made pain-free and easy to do.
 	Enjoy! - Doohl
 
-	Notice: This all gets automatically compiled in a list in dna2.dm, so you do not
-	have to define any UI values for sprite accessories manually for hair and facial
-	hair. Just add in new hair types and the game will naturally adapt.
+	Notice: This all gets automatically compiled in a list via the decl rfepository,
+	so you do not have to add sprite accessories manually to any lists etc. Just add
+	in new hair types and the game will naturally adapt.
 
 	Changing icon states, icon files and names should not represent any risks to
 	existing savefiles, but please do not change decl uids unless you are very sure
@@ -142,16 +142,21 @@
 	if(!icon_state)
 		return null
 	LAZYINITLIST(cached_icons[organ.bodytype])
-	LAZYINITLIST(cached_icons[organ.bodytype][organ.organ_tag])
-	var/icon/accessory_icon = cached_icons[organ.bodytype][organ.organ_tag][color]
+	LAZYINITLIST(cached_icons[organ.bodytype][organ.icon_state])
+	var/icon/accessory_icon = cached_icons[organ.bodytype][organ.icon_state][color]
 	if(!accessory_icon)
-		accessory_icon = icon(get_accessory_icon(organ), icon_state) // make a new one to avoid mutating the base
+		// make a new one to avoid mutating the base
+		var/marking_modifier = organ.owner?.get_overlay_state_modifier()
+		if(marking_modifier)
+			accessory_icon = icon(get_accessory_icon(organ), "[icon_state][marking_modifier]")
+		else
+			accessory_icon = icon(get_accessory_icon(organ), icon_state)
 		if(!accessory_icon)
-			cached_icons[organ.bodytype][organ.organ_tag][color] = null
+			cached_icons[organ.bodytype][organ.icon_state][color] = null
 			return null
 		if(mask_to_bodypart)
 			accessory_icon.Blend(get_limb_mask_for(organ), ICON_MULTIPLY)
 		if(!isnull(color) && !isnull(color_blend))
 			accessory_icon.Blend(color, color_blend)
-		cached_icons[organ.bodytype][organ.organ_tag][color] = accessory_icon
+		cached_icons[organ.bodytype][organ.icon_state][color] = accessory_icon
 	return accessory_icon

@@ -1,8 +1,10 @@
 #define BODY_FLAG_EXCLUDE        BITFLAG(0)
 #define BODY_FLAG_HUMANOID       BITFLAG(1)
 #define BODY_FLAG_MONKEY         BITFLAG(2)
+#define BODY_FLAG_QUADRUPED      BITFLAG(3)
 
 #define BODYTYPE_HUMANOID        "humanoid body"
+#define BODYTYPE_QUADRUPED       "quadruped body"
 #define BODYTYPE_OTHER           "alien body"
 #define BODYTYPE_MONKEY          "small humanoid body"
 

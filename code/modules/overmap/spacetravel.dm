@@ -43,5 +43,5 @@
 /mob/overmap_can_discard()
 	return isnull(client)
 
-/mob/living/carbon/human/overmap_can_discard()
+/mob/living/human/overmap_can_discard()
 	return isnull(client) && (!last_ckey || stat == DEAD)

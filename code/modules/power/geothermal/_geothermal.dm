@@ -81,13 +81,15 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 
 /obj/effect/geyser/underwater/Initialize(ml)
 	. = ..()
-	for(var/turf/exterior/seafloor/T in RANGE_TURFS(loc, 5))
+	if(!loc)
+		return INITIALIZE_HINT_QDEL
+	for(var/turf/floor/natural/seafloor/T in RANGE_TURFS(loc, 5))
 		var/dist = get_dist(loc, T)-1
 		if(prob(100 - (dist * 20)))
 			if(prob(25))
-				T = T.ChangeTurf(/turf/exterior/clay)
+				T = T.ChangeTurf(/turf/floor/natural/clay)
 			else
-				T = T.ChangeTurf(/turf/exterior/mud)
+				T = T.ChangeTurf(/turf/floor/natural/mud)
 		if(prob(50 - (dist * 10)))
 			new /obj/random/seaweed(T)
 

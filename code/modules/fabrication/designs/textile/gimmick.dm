@@ -10,7 +10,7 @@
 	path = /obj/item/clothing/suit/redtag
 
 /datum/fabricator_recipe/textiles/gimmick/mantle
-	path = /obj/item/clothing/suit/fated
+	path = /obj/item/clothing/suit/mantle/fated
 
 /datum/fabricator_recipe/textiles/gimmick/syndicatefake
 	path = /obj/item/clothing/suit/syndicatefake
@@ -29,7 +29,7 @@
 
 /datum/fabricator_recipe/textiles/gimmick/ianshirt
 	path = /obj/item/clothing/suit/ianshirt
-	
+
 /datum/fabricator_recipe/textiles/gimmick/luchalibrehonor
 	path = /obj/item/clothing/mask/luchador/rudos
 
@@ -41,7 +41,7 @@
 
 /datum/fabricator_recipe/textiles/gimmick/radicaldude
 	path = /obj/item/clothing/mask/gas/radical
-	
+
 /datum/fabricator_recipe/textiles/gimmick/plaguedoctorsmask
 	path = /obj/item/clothing/mask/gas/plaguedoctor
 
@@ -89,9 +89,9 @@
 
 /datum/fabricator_recipe/textiles/gimmick/gladiator
 	path = /obj/item/clothing/head/helmet/gladiator
-	
+
 /datum/fabricator_recipe/textiles/gimmick/maddoclabcoat
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/mad
+	path = /obj/item/clothing/suit/toggle/labcoat/mad
 
 /datum/fabricator_recipe/textiles/gimmick/holidaypriest
 	path = /obj/item/clothing/suit/holidaypriest
@@ -106,37 +106,34 @@
 	path = /obj/item/clothing/mask/snorkel
 
 /datum/fabricator_recipe/textiles/gimmick/cap_tunic
-	path = /obj/item/clothing/suit/captunic
+	path = /obj/item/clothing/shirt/tunic/captain
 
 /datum/fabricator_recipe/textiles/gimmick/capjacket
-	path = /obj/item/clothing/suit/captunic/capjacket
-	
-/datum/fabricator_recipe/textiles/gimmick/robe
-	path = /obj/item/clothing/suit/robe
+	path = /obj/item/clothing/suit/jacket/captain
 
 /datum/fabricator_recipe/textiles/gimmick/xeno
 	path = /obj/item/clothing/head/xeno/scarf
 
 /datum/fabricator_recipe/textiles/gimmick/syndicatetactical
-	path = /obj/item/clothing/under/syndicate/tacticool
+	path = /obj/item/clothing/shirt/syndicate/tacticool
 
 /datum/fabricator_recipe/textiles/gimmick/costumesanta
 	path = /obj/item/clothing/suit/santa
 
 /datum/fabricator_recipe/textiles/gimmick/santahat
 	path = /obj/item/clothing/head/santahat
-		
+
 /datum/fabricator_recipe/textiles/gimmick/cape
-	path = /obj/item/clothing/accessory/shouldercape
+	path = /obj/item/clothing/suit/shouldercape
 
 /datum/fabricator_recipe/textiles/gimmick/capegrunt
-	path = /obj/item/clothing/accessory/shouldercape
+	path = /obj/item/clothing/suit/shouldercape
 
 /datum/fabricator_recipe/textiles/gimmick/capeofficer
-	path = /obj/item/clothing/accessory/shouldercape/officer
+	path = /obj/item/clothing/suit/shouldercape/officer
 
 /datum/fabricator_recipe/textiles/gimmick/capecommand
-	path = /obj/item/clothing/accessory/shouldercape/command
+	path = /obj/item/clothing/suit/shouldercape/command
 
 /datum/fabricator_recipe/textiles/gimmick/capegeneral
-	path = /obj/item/clothing/accessory/shouldercape/general
+	path = /obj/item/clothing/suit/shouldercape/general

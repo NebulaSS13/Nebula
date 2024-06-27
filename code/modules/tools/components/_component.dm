@@ -5,10 +5,5 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	w_class = ITEM_SIZE_SMALL
 
-/*
- todo
-	- binding
-	- slapcrafting for assembly
-	- modify properties based on material
-	- credit Tinker's Construct in PR
-*/
+/obj/item/tool_component/get_mould_difficulty()
+	return SKILL_NONE

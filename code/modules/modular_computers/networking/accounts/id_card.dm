@@ -5,7 +5,7 @@
 	detail_color = COLOR_SKY_BLUE
 
 /obj/item/card/id/network/Initialize()
-	set_extension(src, /datum/extension/network_device/id_card)
+	set_extension(src, /datum/extension/network_device/id_card, network_id)
 	return ..()
 
 /obj/item/card/id/network/GetAccess(var/ignore_account)
@@ -86,7 +86,7 @@
 
 		current_account = null
 		return TOPIC_REFRESH
-	
+
 	if(href_list["login_account"])
 		if(login_account())
 			to_chat(usr, SPAN_NOTICE("Account successfully logged in."))

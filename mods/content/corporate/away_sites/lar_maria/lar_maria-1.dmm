@@ -11,24 +11,24 @@
 /turf/space,
 /area/space)
 "ac" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/cells)
 "ad" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/morgue)
 "ae" = (
 /obj/structure/disposalpipe/segment,
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/morgue)
 "af" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/vir_hallway)
 "ag" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/vir_main)
 "ah" = (
 /obj/structure/disposalpipe/segment,
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/vir_main)
 "ai" = (
 /obj/structure/cable{
@@ -44,7 +44,7 @@
 	dir = 4;
 	icon_state = "16-0"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "aj" = (
 /obj/structure/cable{
@@ -59,7 +59,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "al" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -72,30 +72,30 @@
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "am" = (
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
 /obj/machinery/disposal,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "an" = (
 /obj/structure/closet/crate/trashcart,
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "ao" = (
 /obj/structure/disposalpipe/segment,
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/cells)
 "ap" = (
 /obj/structure/ladder,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "aq" = (
 /obj/structure/cable{
@@ -106,7 +106,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "as" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -118,7 +118,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "at" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -134,7 +134,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "au" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -146,7 +146,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "av" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -158,7 +158,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "aw" = (
 /obj/machinery/door/airlock/virology,
@@ -172,7 +172,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "ax" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -184,56 +184,56 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "ay" = (
 /obj/machinery/smartfridge/chemistry,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "az" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aA" = (
 /obj/structure/table/glass,
 /obj/item/paper,
 /obj/item/folder/cyan,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aB" = (
 /obj/structure/table/glass,
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /obj/item/chems/spray/cleaner,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aG" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aH" = (
 /obj/structure/hygiene/sink{
 	pixel_y = 20
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aI" = (
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
 /obj/machinery/disposal,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aJ" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aK" = (
 /obj/structure/bed,
@@ -241,19 +241,19 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aL" = (
 /obj/structure/closet/secure_closet/personal/patient,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aM" = (
 /obj/machinery/door/airlock/virology,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "aN" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/morgue)
 "aO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -265,40 +265,40 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "aP" = (
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aQ" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aR" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aT" = (
 /obj/machinery/door/window/westleft,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aU" = (
 /obj/structure/bed/padded,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "aV" = (
 /obj/structure/bed/padded,
 /obj/item/poster,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "aW" = (
 /obj/structure/bed/padded,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "aX" = (
 /obj/structure/bed/padded,
@@ -307,12 +307,12 @@
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "aY" = (
 /obj/structure/bed/padded,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "aZ" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -320,7 +320,7 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "ba" = (
 /obj/structure/disposalpipe/trunk{
@@ -330,17 +330,17 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bb" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bc" = (
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bd" = (
 /obj/machinery/door/window/eastright,
@@ -348,14 +348,14 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "be" = (
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bf" = (
 /obj/machinery/door/window/westleft,
@@ -363,29 +363,29 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bg" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bh" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bi" = (
 /obj/structure/morgue,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "bj" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "bk" = (
 /obj/structure/morgue{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "bl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -393,7 +393,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "bm" = (
 /obj/structure/window/reinforced,
@@ -406,63 +406,63 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bn" = (
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /obj/machinery/door/window/northleft,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bo" = (
 /obj/structure/table/glass,
 /obj/item/paper_bin,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bp" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bq" = (
 /obj/machinery/computer/modular,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "br" = (
 /obj/structure/table/glass,
 /obj/item/paper,
 /obj/item/pen/blue,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bs" = (
 /obj/structure/table/glass,
 /obj/item/paper/lar_maria/note_4,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bt" = (
 /obj/structure/table/glass,
 /obj/item/flashlight/pen,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bu" = (
 /obj/structure/closet/crate/freezer,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bv" = (
 /obj/structure/bed,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bw" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bx" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "by" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -473,7 +473,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bA" = (
 /obj/machinery/door/airlock/security,
@@ -488,7 +488,7 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -497,11 +497,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bC" = (
 /obj/structure/mattress/dirty,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bD" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -509,20 +509,20 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bE" = (
 /obj/structure/mattress/dirty,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bF" = (
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bG" = (
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "bH" = (
 /obj/structure/window/reinforced,
@@ -533,7 +533,7 @@
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -542,92 +542,92 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bJ" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /obj/structure/table/glass,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/box/masks,
+/obj/item/box/gloves,
 /obj/item/chems/spray/antiseptic,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bK" = (
 /obj/structure/table/glass,
 /obj/item/folder/cyan,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bL" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bM" = (
 /obj/structure/table/glass,
 /obj/item/paper,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bN" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bO" = (
 /obj/structure/table/glass,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bQ" = (
 /obj/structure/closet/emcloset,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bR" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bS" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/newspaper,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bT" = (
 /obj/machinery/light,
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bU" = (
 /obj/structure/closet/crate/freezer/rations,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bV" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "bW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "bX" = (
 /obj/structure/morgue,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "bY" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "bZ" = (
 /obj/machinery/power/apc{
@@ -638,7 +638,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "ca" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -648,23 +648,23 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /obj/structure/table/glass,
-/obj/item/storage/box/bodybags,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/bodybags,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cc" = (
 /obj/machinery/door/airlock/security,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/cells)
 "cd" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "ce" = (
 /obj/machinery/door/window/westleft,
@@ -673,12 +673,12 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cf" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "cg" = (
 /obj/structure/morgue{
@@ -690,7 +690,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "ch" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -707,7 +707,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "ci" = (
 /obj/machinery/door/airlock/virology,
@@ -715,25 +715,25 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cj" = (
 /obj/machinery/door/airlock/virology,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "ck" = (
 /obj/machinery/door/window/northright,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cl" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/item/clothing/head/surgery,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cm" = (
 /obj/structure/window/reinforced{
@@ -742,19 +742,19 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cn" = (
 /obj/machinery/door/window/northright,
-/obj/item/storage/firstaid/surgery,
-/turf/simulated/floor/tiled/white,
+/obj/item/firstaid/surgery,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "co" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cp" = (
 /obj/structure/window/reinforced{
@@ -764,15 +764,15 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cq" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cr" = (
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cs" = (
 /obj/structure/hygiene/sink{
@@ -783,13 +783,13 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/cells)
 "ct" = (
 /obj/structure/hygiene/toilet{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/cells)
 "cu" = (
 /obj/structure/hygiene/toilet{
@@ -797,7 +797,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/cells)
 "cv" = (
 /obj/structure/hygiene/sink{
@@ -809,17 +809,17 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/cells)
 "cw" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cx" = (
 /obj/structure/mattress/dirty,
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cy" = (
 /obj/structure/crematorium{
@@ -829,7 +829,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "cz" = (
 /obj/machinery/button/crematorium{
@@ -840,7 +840,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "cA" = (
 /obj/machinery/power/apc{
@@ -857,7 +857,7 @@
 	dir = 5
 	},
 /mob/living/simple_animal/hostile/lar_maria/virologist/female,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "cB" = (
 /obj/machinery/door/airlock/virology,
@@ -871,7 +871,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "cC" = (
 /obj/structure/cable{
@@ -886,41 +886,41 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "cD" = (
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
 /mob/living/simple_animal/hostile/lar_maria/virologist,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cF" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cG" = (
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /obj/machinery/optable,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cH" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist/female,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cI" = (
 /obj/structure/table/glass,
 /obj/item/scalpel,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cJ" = (
 /obj/structure/window/reinforced{
@@ -929,17 +929,17 @@
 /obj/machinery/optable,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cK" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cL" = (
 /obj/structure/bed,
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cM" = (
 /obj/machinery/light/small{
@@ -948,22 +948,22 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cN" = (
 /obj/machinery/door/airlock/security,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cO" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/sec_wing)
 "cP" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/deck/cards,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "cQ" = (
 /obj/machinery/light{
@@ -972,7 +972,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "cR" = (
 /obj/structure/closet/crate/freezer/rations,
@@ -980,12 +980,12 @@
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "cS" = (
 /obj/structure/closet/emcloset,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "cT" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -994,7 +994,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1003,7 +1003,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1013,7 +1013,7 @@
 	dir = 4
 	},
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cW" = (
 /obj/machinery/light/small{
@@ -1025,7 +1025,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1038,12 +1038,12 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cY" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "cZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1056,7 +1056,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "da" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1065,13 +1065,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "db" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "dc" = (
 /obj/effect/decal/cleanable/blood,
@@ -1079,7 +1079,7 @@
 	dir = 4;
 	id_tag = "Cells_ld_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "dd" = (
 /obj/structure/sign/warning/biohazard{
@@ -1087,7 +1087,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "de" = (
 /obj/machinery/door/firedoor,
@@ -1098,18 +1098,18 @@
 	dir = 4;
 	id_tag = "CellsBD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "df" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "dg" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "dh" = (
 /obj/machinery/door/airlock/virology,
@@ -1118,13 +1118,13 @@
 	dir = 4;
 	id_tag = "CellsBD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "di" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1137,7 +1137,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dk" = (
 /obj/structure/sign/warning/biohazard{
@@ -1150,7 +1150,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dl" = (
 /obj/structure/cable{
@@ -1159,7 +1159,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1167,7 +1167,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dn" = (
 /obj/structure/sign/warning/biohazard{
@@ -1177,51 +1177,51 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "do" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dp" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dq" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dr" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/vir_aux)
 "ds" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dt" = (
 /obj/structure/closet/secure_closet/personal/patient,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "du" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dv" = (
 /obj/structure/closet/secure_closet/personal/patient,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dw" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1230,7 +1230,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "dy" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1239,11 +1239,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "dz" = (
 /obj/structure/closet/crate/trashcart,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "dA" = (
 /obj/machinery/door/airlock/security{
@@ -1254,14 +1254,14 @@
 	dir = 4;
 	id_tag = "CellsBD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "dB" = (
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "dC" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "dD" = (
 /obj/machinery/door/airlock/virology,
@@ -1271,12 +1271,12 @@
 	dir = 4;
 	id_tag = "CellsBD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "dE" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1286,7 +1286,7 @@
 	dir = 5
 	},
 /obj/machinery/light,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1296,7 +1296,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1306,12 +1306,12 @@
 	dir = 4
 	},
 /mob/living/simple_animal/hostile/lar_maria/guard,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dI" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1320,7 +1320,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1332,44 +1332,44 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dL" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dM" = (
 /obj/structure/bed,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dN" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dO" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dP" = (
 /obj/structure/bed/padded,
 /obj/item/deck/tarot,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "dQ" = (
 /obj/structure/reagent_dispensers/watertank,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "dR" = (
 /obj/structure/bed/padded,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "dS" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/sec_wing)
 "dT" = (
 /obj/structure/bed/padded,
 /obj/item/clothing/suit/armor/riot,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "dU" = (
 /obj/structure/hygiene/toilet{
@@ -1379,7 +1379,7 @@
 	dir = 1
 	},
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/sec_wing)
 "dW" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -1387,23 +1387,23 @@
 	dir = 2;
 	id_tag = "CellsBD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "dX" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/vir_ward)
 "dY" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/vir_ward)
 "dZ" = (
 /obj/machinery/door/window/southright,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "ea" = (
 /obj/machinery/door/window/southright,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eb" = (
 /obj/machinery/light/small{
@@ -1411,20 +1411,20 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "ec" = (
 /obj/structure/curtain/open/bed,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ed" = (
 /obj/structure/curtain/open/bed,
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ee" = (
 /obj/machinery/door/airlock/security,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/sec_wing)
 "ef" = (
 /obj/structure/rack,
@@ -1432,27 +1432,27 @@
 /obj/item/shield/riot,
 /obj/item/clothing/head/helmet/riot,
 /obj/item/clothing/suit/armor/riot,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eg" = (
 /obj/machinery/computer/modular,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eh" = (
 /obj/structure/bed/roller,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ei" = (
 /obj/structure/bed/roller,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ej" = (
 /obj/structure/bed/roller,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ek" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1461,28 +1461,28 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "el" = (
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "em" = (
-/obj/item/storage/box/freezer,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/freezer,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "en" = (
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
 /obj/machinery/disposal,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eo" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/vir_aux)
 "ep" = (
 /obj/structure/lattice,
@@ -1498,7 +1498,7 @@
 /obj/structure/bed/padded,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "er" = (
 /obj/structure/bed/padded,
@@ -1507,14 +1507,14 @@
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "es" = (
 /obj/structure/closet/crate/freezer/rations,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "et" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eu" = (
 /obj/structure/table/steel_reinforced,
@@ -1527,20 +1527,20 @@
 	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPcells_access_airlock_inner"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ev" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ew" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ex" = (
 /obj/structure/table/steel_reinforced,
@@ -1572,29 +1572,29 @@
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ey" = (
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -32
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ez" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eA" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eC" = (
 /obj/machinery/door/airlock/virology,
@@ -1602,7 +1602,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eD" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1612,26 +1612,26 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "eE" = (
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -32
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eF" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/syringes,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/syringes,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eG" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /obj/structure/table/glass,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1641,39 +1641,39 @@
 	dir = 6
 	},
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "eI" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/paper_bin,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eJ" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/smokes,
 /obj/item/gun/energy/taser,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eK" = (
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eL" = (
 /obj/structure/rack,
-/obj/item/storage/box/handcuffs,
-/turf/simulated/floor/tiled,
+/obj/item/box/handcuffs,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eM" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eN" = (
 /obj/structure/closet,
-/obj/item/clothing/under/color/red,
+/obj/item/clothing/jumpsuit/red,
 /obj/item/gun/projectile/shotgun/pump,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eO" = (
 /obj/machinery/power/apc{
@@ -1686,7 +1686,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eP" = (
 /obj/structure/table/steel_reinforced,
@@ -1697,11 +1697,11 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eQ" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eR" = (
 /obj/machinery/power/apc{
@@ -1711,7 +1711,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1720,7 +1720,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eT" = (
 /obj/machinery/door/airlock/virology,
@@ -1731,7 +1731,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1744,7 +1744,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "eV" = (
 /obj/machinery/alarm{
@@ -1752,36 +1752,36 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "eX" = (
 /obj/machinery/smartfridge/chemistry,
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eY" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/freezer,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/freezer,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eZ" = (
 /obj/structure/bed/chair/office/dark,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fa" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fb" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/pillbottles,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/beakers,
+/obj/item/box/pillbottles,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fc" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "fd" = (
 /obj/machinery/light,
@@ -1789,42 +1789,42 @@
 	dir = 8
 	},
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "fe" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ff" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/chems/spray/pepper,
 /obj/item/deck/cards,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fg" = (
 /obj/structure/rack,
 /obj/item/baton,
 /obj/item/baton,
 /obj/item/baton,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fh" = (
 /obj/structure/rack,
 /obj/item/clothing/head/helmet/ballistic,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fi" = (
 /obj/structure/closet,
 /obj/item/shield/riot,
-/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunammo,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1834,7 +1834,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fk" = (
 /obj/structure/table/steel_reinforced,
@@ -1849,7 +1849,7 @@
 	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPsec__access_airlock_inner"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fl" = (
 /obj/structure/table/steel_reinforced,
@@ -1857,31 +1857,31 @@
 	id_tag = "Tech_access_BD";
 	name = "Communications Access"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fm" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fn" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/handcuffs,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fo" = (
 /obj/structure/bed/roller,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "fp" = (
 /obj/structure/sign/warning/biohazard{
 	pixel_x = 32
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "fq" = (
 /obj/machinery/power/apc{
@@ -1894,23 +1894,23 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/computer/modular,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fr" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/table/glass,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/masks,
+/obj/item/box/gloves,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fs" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/autoinjectors,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/autoinjectors,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "ft" = (
 /obj/machinery/chem_master,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fu" = (
 /obj/structure/closet/crate/freezer/rations,
@@ -1923,24 +1923,24 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "fv" = (
 /obj/structure/rack,
 /obj/item/flamethrower/full,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fw" = (
 /obj/structure/rack,
-/obj/item/storage/box/glowsticks,
+/obj/item/box/glowsticks,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fx" = (
 /obj/structure/closet,
-/obj/item/clothing/under/color/red,
-/turf/simulated/floor/tiled,
+/obj/item/clothing/jumpsuit/red,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fy" = (
 /obj/machinery/door/airlock/security,
@@ -1950,7 +1950,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fz" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1969,7 +1969,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "fA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1981,7 +1981,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "fB" = (
 /obj/machinery/door/airlock/virology,
@@ -1995,7 +1995,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2007,7 +2007,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2023,7 +2023,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2034,14 +2034,14 @@
 	current_health = 1e+006
 	},
 /obj/machinery/door/window/eastright,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fH" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/cells)
 "fI" = (
 /obj/structure/hygiene/sink{
@@ -2051,7 +2051,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/cells)
 "fJ" = (
 /obj/machinery/light/small{
@@ -2063,7 +2063,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "fK" = (
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
@@ -2075,7 +2075,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "fL" = (
 /obj/machinery/door/blast/regular{
@@ -2096,7 +2096,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fM" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2112,7 +2112,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2124,7 +2124,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2141,7 +2141,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fP" = (
 /obj/structure/reagent_dispensers/peppertank{
@@ -2154,7 +2154,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fQ" = (
 /obj/structure/reagent_dispensers/peppertank{
@@ -2167,7 +2167,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fR" = (
 /obj/machinery/door/airlock/security,
@@ -2181,7 +2181,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fS" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -2192,7 +2192,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fT" = (
 /obj/machinery/light{
@@ -2211,7 +2211,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2224,7 +2224,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2239,7 +2239,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fW" = (
 /obj/structure/sign/warning/biohazard{
@@ -2254,7 +2254,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fX" = (
 /obj/machinery/door/airlock/virology{
@@ -2274,7 +2274,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fY" = (
 /obj/machinery/light/small{
@@ -2289,7 +2289,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fZ" = (
 /obj/machinery/door/airlock/virology{
@@ -2309,7 +2309,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ga" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2324,12 +2324,12 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "gb" = (
 /obj/machinery/door/airlock/virology,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "gc" = (
 /obj/structure/window/reinforced{
@@ -2341,28 +2341,28 @@
 /obj/structure/hygiene/shower{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "gd" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist/female,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "ge" = (
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "gf" = (
 /obj/structure/closet/crate,
 /obj/item/folder/cyan,
 /obj/item/knife/folding,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "gg" = (
 /obj/structure/closet,
-/obj/item/clothing/under/color/orange,
-/obj/item/clothing/under/color/orange,
+/obj/item/clothing/jumpsuit/orange,
+/obj/item/clothing/jumpsuit/orange,
 /obj/item/clothing/shoes/color/orange,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "gh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2375,11 +2375,11 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "gi" = (
 /obj/machinery/door/airlock/security,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gj" = (
 /obj/structure/bed/chair{
@@ -2387,18 +2387,18 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "gk" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/dice/d12,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "gl" = (
 /obj/structure/closet,
-/obj/item/clothing/under/color/orange,
+/obj/item/clothing/jumpsuit/orange,
 /obj/item/clothing/shoes/color/orange,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "gm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2406,36 +2406,36 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "gn" = (
 /obj/structure/closet/emcloset,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "go" = (
 /obj/machinery/vending/coffee,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gp" = (
 /obj/machinery/vending/cola,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gq" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/machinery/vending/snack,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gr" = (
 /obj/machinery/vending/cigarette,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gs" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gt" = (
 /obj/structure/closet/crate/radiation,
@@ -2443,14 +2443,14 @@
 /obj/item/stack/material/aerogel/mapped/tritium/ten,
 /obj/item/wirecutters,
 /obj/item/wrench,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gu" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gv" = (
 /obj/machinery/power/apc{
@@ -2461,7 +2461,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "gw" = (
 /obj/machinery/door/airlock/virology{
@@ -2471,11 +2471,11 @@
 	dir = 4;
 	id_tag = "VirAccessBD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gx" = (
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gy" = (
 /obj/machinery/light{
@@ -2491,14 +2491,14 @@
 	tag_exterior_sensor = "ZHPvirology_access_airlock_sensor";
 	tag_interior_door = "ZHPvirology_access_airlock_inner"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gz" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/vir_access)
 "gA" = (
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "gB" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2508,13 +2508,13 @@
 	dir = 9
 	},
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "gC" = (
 /obj/structure/closet/crate,
 /obj/item/poster,
 /obj/item/inflatable_duck,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "gD" = (
 /obj/machinery/light{
@@ -2526,27 +2526,27 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "gE" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gF" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gG" = (
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gH" = (
 /obj/machinery/power/smes/buildable,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gI" = (
 /obj/structure/cable/yellow{
@@ -2556,26 +2556,26 @@
 	dir = 8
 	},
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gJ" = (
 /obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gK" = (
 /obj/machinery/portable_atmospherics/canister/empty/oxygen,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gL" = (
 /obj/machinery/suit_cycler,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gM" = (
 /obj/structure/closet/l3closet/security,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2584,7 +2584,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "gO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2597,7 +2597,7 @@
 	id_tag = "ZHPvirology_access_airlock";
 	pixel_y = -25
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "gP" = (
 /obj/machinery/door/airlock/virology{
@@ -2613,7 +2613,7 @@
 	dir = 4;
 	id_tag = "VirAccessBD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2622,7 +2622,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gR" = (
 /obj/effect/decal/cleanable/blood,
@@ -2630,33 +2630,33 @@
 	id_tag = "ZHPvirology_access_airlock_sensor";
 	pixel_x = 25
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gS" = (
 /obj/structure/bed/padded,
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "gT" = (
 /obj/structure/bed/padded,
 /obj/item/newspaper,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/cells)
 "gU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "gV" = (
 /obj/structure/closet,
-/obj/item/clothing/under/color/orange,
-/obj/item/clothing/under/color/orange,
+/obj/item/clothing/jumpsuit/orange,
+/obj/item/clothing/jumpsuit/orange,
 /obj/item/clothing/shoes/color/orange,
 /obj/item/clothing/shoes/color/orange,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "gW" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gX" = (
 /obj/machinery/alarm{
@@ -2664,7 +2664,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gY" = (
 /obj/machinery/door/airlock/virology{
@@ -2672,20 +2672,20 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "gZ" = (
 /obj/machinery/door/airlock/virology{
 	id_tag = "ZHPvirology_access_airlock_outer"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ha" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "hb" = (
 /obj/structure/bed/chair{
@@ -2696,72 +2696,72 @@
 	pixel_y = -22
 	},
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "hc" = (
 /obj/structure/table/steel_reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "hd" = (
 /obj/structure/stairs/long,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "he" = (
 /obj/structure/closet,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hf" = (
 /obj/structure/closet,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hg" = (
 /obj/structure/closet,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hh" = (
 /obj/structure/closet,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hi" = (
 /obj/structure/table,
 /obj/item/towel,
 /obj/random/soap,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hj" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/vir_access)
 "hk" = (
 /obj/structure/hygiene/shower,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "hl" = (
 /obj/structure/hygiene/shower,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "hm" = (
 /obj/structure/hygiene/shower,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "hn" = (
 /obj/structure/closet/l3closet/virology,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ho" = (
 /obj/structure/closet/l3closet/virology,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hp" = (
 /obj/structure/closet/l3closet/virology,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hq" = (
 /obj/structure/sign/warning/biohazard{
@@ -2769,7 +2769,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hr" = (
 /obj/structure/sign/warning/biohazard{
@@ -2780,7 +2780,7 @@
 	pixel_x = 25;
 	pixel_y = 15
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hs" = (
 /obj/machinery/door/airlock/security,
@@ -2794,11 +2794,11 @@
 	dir = 4;
 	id_tag = "Cells_dock_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "ht" = (
 /obj/structure/bed/chair,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hu" = (
 /obj/machinery/power/apc{
@@ -2809,34 +2809,34 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hx" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "hy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hA" = (
 /obj/structure/closet/crate/trashcart,
 /obj/item/ashtray/plastic,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "hB" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -2845,16 +2845,16 @@
 	dir = 4;
 	id_tag = "Cells_dock_BD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "hC" = (
 /obj/structure/table/steel_reinforced,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "hD" = (
 /obj/structure/rack,
 /obj/item/gun/energy/taser,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "hE" = (
 /obj/structure/table,
@@ -2862,11 +2862,11 @@
 	pixel_x = -30
 	},
 /obj/random/smokes,
-/obj/item/storage/box/matches,
+/obj/item/box/matches,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hF" = (
 /obj/structure/bed/chair{
@@ -2875,13 +2875,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hG" = (
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hH" = (
 /obj/machinery/door/airlock/virology,
@@ -2890,13 +2890,13 @@
 	dir = 4;
 	id_tag = "VirAccessBD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2909,7 +2909,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hK" = (
 /obj/machinery/light,
@@ -2919,7 +2919,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2928,7 +2928,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hM" = (
 /obj/machinery/door/airlock/virology,
@@ -2938,7 +2938,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2948,7 +2948,7 @@
 	dir = 4
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "hO" = (
 /obj/machinery/light/small,
@@ -2958,7 +2958,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "hP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2969,14 +2969,14 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "hQ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hR" = (
 /obj/machinery/light,
@@ -2984,7 +2984,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2997,7 +2997,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hT" = (
 /obj/machinery/door/airlock/virology,
@@ -3011,7 +3011,7 @@
 	dir = 4;
 	id_tag = "VirAccessBD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hU" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -3020,7 +3020,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hV" = (
 /obj/structure/hygiene/shower{
@@ -3031,12 +3031,12 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "hW" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/poster,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "hX" = (
 /obj/structure/rack,
@@ -3044,7 +3044,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "hY" = (
 /obj/machinery/light{
@@ -3055,7 +3055,7 @@
 	dir = 4
 	},
 /obj/item/paper/lar_maria/note_7,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hZ" = (
 /obj/structure/bed/chair{
@@ -3065,7 +3065,7 @@
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ia" = (
 /obj/machinery/light{
@@ -3075,22 +3075,22 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ib" = (
 /obj/item/paper/lar_maria/note_8,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ic" = (
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "id" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "ie" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3102,7 +3102,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "if" = (
 /obj/machinery/door/airlock/security,
@@ -3120,7 +3120,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ig" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3132,7 +3132,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ih" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3144,25 +3144,25 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ii" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ij" = (
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ik" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "il" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3175,7 +3175,7 @@
 	alarm_id = "xenobio4_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "im" = (
 /obj/machinery/light{
@@ -3187,7 +3187,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "in" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3196,7 +3196,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "io" = (
 /obj/machinery/light/small{
@@ -3208,7 +3208,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "ip" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -3217,7 +3217,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "iq" = (
 /obj/machinery/light{
@@ -3229,7 +3229,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "ir" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3242,7 +3242,7 @@
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "is" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3252,7 +3252,7 @@
 	dir = 4
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "it" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3261,12 +3261,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "iu" = (
 /obj/machinery/door/airlock/security,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iv" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -3275,15 +3275,15 @@
 	dir = 2;
 	id_tag = "VirAccessBD"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iw" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "ix" = (
 /obj/effect/decal/cleanable/blood,
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "iy" = (
 /obj/structure/hygiene/shower{
@@ -3292,17 +3292,17 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "iz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "iA" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/ashtray/plastic,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "iB" = (
 /obj/structure/table/steel_reinforced,
@@ -3319,7 +3319,7 @@
 	name = "Cells Dock Lockdown";
 	pixel_y = 7
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iC" = (
 /obj/structure/table/steel_reinforced,
@@ -3327,7 +3327,7 @@
 	id_tag = "VirAccessBD";
 	name = "Virology Access Lockdown"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iD" = (
 /obj/machinery/light{
@@ -3336,7 +3336,7 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/item/gun/energy/taser,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iE" = (
 /obj/structure/closet,
@@ -3344,20 +3344,20 @@
 	dir = 1;
 	level = 2
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "iF" = (
 /obj/structure/closet,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "iG" = (
 /obj/structure/hygiene/shower{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "iH" = (
 /obj/structure/hygiene/shower{
@@ -3365,7 +3365,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/vir_access)
 "iI" = (
 /obj/structure/closet/l3closet/virology,
@@ -3373,32 +3373,32 @@
 	dir = 1;
 	level = 2
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "iJ" = (
 /obj/structure/closet/l3closet/virology,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/vir_access)
 "iK" = (
 /obj/structure/bed/chair{
 	dir = 8
 	},
 /obj/item/gun/energy/taser,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iL" = (
 /obj/machinery/light,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iM" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
 /mob/living/simple_animal/hostile/lar_maria/guard,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iN" = (
 /obj/machinery/door/airlock/external{
@@ -3410,21 +3410,21 @@
 	dir = 4;
 	id_tag = "Cells_dock_BD"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "iO" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "ZHPCells_airlock_pump"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "iP" = (
 /obj/machinery/door/airlock/external{
 	id_tag = "ZHPCells_airlock_outer"
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/cells)
 "iQ" = (
 /obj/effect/shuttle_landmark/automatic,
@@ -3434,7 +3434,7 @@
 /obj/machinery/atmospherics/valve/shutoff{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "kb" = (
 /obj/structure/cable{
@@ -3443,7 +3443,7 @@
 /obj/machinery/atmospherics/valve/shutoff{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/morgue)
 "lb" = (
 /obj/structure/hygiene/sink{
@@ -3453,7 +3453,7 @@
 /obj/structure/mirror{
 	pixel_x = 25
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/sec_wing)
 
 (1,1,1) = {"

@@ -1,5 +1,6 @@
 #ifndef MODPACK_BAYLIENS
 #define MODPACK_BAYLIENS
+// BEGIN_INCLUDE
 #include "bayliens.dm"
 #include "adherent\_adherent.dm"
 #include "adherent\datum\culture.dm"
@@ -20,12 +21,14 @@
 #include "skrell\datum\faction.dm"
 #include "skrell\datum\language.dm"
 #include "skrell\datum\location.dm"
+#include "skrell\datum\pronouns_skrell.dm"
 #include "skrell\datum\religion.dm"
 #include "skrell\datum\skrell_meat.dm"
-#include "skrell\datum\species_bodytype.dm"
 #include "skrell\datum\species.dm"
-#include "skrell\datum\pronouns_skrell.dm"
+#include "skrell\datum\species_bodytype.dm"
+#include "skrell\gear\ammo.dm"
 #include "skrell\gear\clustertool.dm"
+#include "skrell\gear\fabrication_designs.dm"
 #include "skrell\gear\gear.dm"
 #include "skrell\gear\gear_ears.dm"
 #include "skrell\gear\gear_head.dm"
@@ -34,13 +37,11 @@
 #include "skrell\gear\gear_suit.dm"
 #include "skrell\gear\gear_under.dm"
 #include "skrell\turfs\flooring.dm"
-#include "skrell\gear\ammo.dm"
-#include "skrell\gear\fabrication_designs.dm"
 #include "tajaran\_tajaran.dm"
 #include "tajaran\datum\accessory.dm"
+#include "tajaran\datum\blood.dm"
 #include "tajaran\datum\culture.dm"
 #include "tajaran\datum\emotes.dm"
-#include "tajaran\datum\blood.dm"
 #include "tajaran\datum\language.dm"
 #include "tajaran\datum\species.dm"
 #include "tajaran\datum\species_bodytypes.dm"
@@ -57,4 +58,5 @@
 #include "unathi\datum\species_bodytypes.dm"
 #include "unathi\datum\sprite_accessory.dm"
 #include "unathi\organs\organs_internal.dm"
+// END_INCLUDE
 #endif

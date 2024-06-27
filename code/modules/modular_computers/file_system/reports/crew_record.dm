@@ -23,13 +23,13 @@ var/global/arrest_security_status =  "Arrest"
 	. = ..()
 	global.all_crew_records.Remove(src)
 
-/datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/carbon/human/H)
+/datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/human/H)
 
 	if(istype(H))
 		photo_front = getFlatIcon(H, SOUTH, always_use_defdir = 1)
 		photo_side = getFlatIcon(H, WEST, always_use_defdir = 1)
 	else
-		var/mob/living/carbon/human/dummy = new()
+		var/mob/living/human/dummy = new()
 		photo_front = getFlatIcon(dummy, SOUTH, always_use_defdir = 1)
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = 1)
 		qdel(dummy)
@@ -110,13 +110,13 @@ var/global/arrest_security_status =  "Arrest"
 	set_employment_record(employment_record)
 
 	// Misc cultural info.
-	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
-	set_faction(H ?    html_decode(H.get_cultural_value(TAG_FACTION)) :   "Unset")
-	set_religion(H ?   html_decode(H.get_cultural_value(TAG_RELIGION)) :  "Unset")
+	set_residence(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
+	set_faction(H ?   html_decode(H.get_cultural_value(TAG_FACTION)) :   "Unset")
+	set_religion(H ?  html_decode(H.get_cultural_value(TAG_RELIGION)) :  "Unset")
 
 	if(H)
 		var/skills = list()
-		for(var/decl/hierarchy/skill/S in global.skills)
+		for(var/decl/hierarchy/skill/S in global.using_map.get_available_skills())
 			var/level = H.get_skill_value(S.type)
 			if(level > SKILL_NONE)
 				skills += "[S.name], [S.levels[level]]"
@@ -202,7 +202,7 @@ var/global/arrest_security_status =  "Arrest"
 			return CR
 	return null
 
-/proc/GetAssignment(var/mob/living/carbon/human/H)
+/proc/GetAssignment(var/mob/living/human/H)
 	if(!H)
 		return "Unassigned"
 	if(!H.mind)
@@ -255,8 +255,8 @@ FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security, TRUE, 
 
 // EMPLOYMENT RECORDS
 FIELD_LONG("Employment Record", employment_record, access_bridge, access_bridge, TRUE)
-FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids, FALSE, TRUE)
-FIELD_SHORT("Faction", faction, access_bridge, access_bridge, FALSE, TRUE)
+FIELD_SHORT("Residence", residence, access_bridge, access_change_ids, FALSE, TRUE)
+FIELD_SHORT("Association", faction, access_bridge, access_bridge, FALSE, TRUE)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge, TRUE)
 
 // ANTAG RECORDS

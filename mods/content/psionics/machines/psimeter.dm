@@ -33,7 +33,7 @@
 		var/found
 		for(var/mob/living/H in range(1, src))
 			found = TRUE
-			dat += "<tr><td>[H.name]</td><td><a href='?src=\ref[src];assay=\ref[H]'>Conduct Assay</a>"
+			dat += "<tr><td>[H.name]</td><td><a href='byond://?src=\ref[src];assay=\ref[H]'>Conduct Assay</a>"
 		if(!found)
 			dat += "<tr><td colspan = 2>No candidates found.</td></tr>"
 		dat += "<table>"

@@ -11,6 +11,13 @@
 		"senescent" =      45
 	)
 
+/decl/butchery_data/humanoid/serpentid
+	skin_material     = /decl/material/solid/organic/skin/insect
+
+	bone_material     = null
+	bone_amount       = null
+	bone_type         = null
+
 /decl/species/serpentid
 	name = SPECIES_SERPENTID
 	name_plural = "Serpentids"
@@ -22,9 +29,7 @@
 
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
-	age_descriptor = /datum/appearance_descriptor/age/serpentid
-	skin_material = /decl/material/solid/organic/skin/insect
-	bone_material = null
+	butchery_data = /decl/butchery_data/humanoid/serpentid
 	speech_sounds = list('sound/voice/bug.ogg')
 	speech_chance = 2
 	warning_low_pressure = 50
@@ -39,7 +44,7 @@
 	)
 
 	rarity_value = 4
-	hud_type = /datum/hud_data/serpentid
+	species_hud = /datum/hud_data/serpentid
 	total_health = 200
 	brute_mod = 0.9
 	burn_mod =  1.35
@@ -63,16 +68,13 @@
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 
 	unarmed_attacks = list(/decl/natural_attack/forelimb_slash)
-	appearance_descriptors = list(
-		/datum/appearance_descriptor/height =      1.75,
-		/datum/appearance_descriptor/body_length = 1
-		)
+
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
 	var/list/skin_overlays = list()
 
-/decl/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)
+/decl/species/serpentid/can_overcome_gravity(var/mob/living/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
 	if(mixture)
@@ -85,12 +87,12 @@
 
 	return FALSE
 
-/decl/species/serpentid/handle_environment_special(var/mob/living/carbon/human/H)
+/decl/species/serpentid/handle_environment_special(var/mob/living/human/H)
 	if(!H.on_fire && H.fire_stacks < 2)
 		H.fire_stacks += 0.2
 	return
 
-/decl/species/serpentid/can_fall(var/mob/living/carbon/human/H)
+/decl/species/serpentid/can_fall(var/mob/living/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 	var/turf/T = GetBelow(H.loc)
 	for(var/obj/O in T)
@@ -102,7 +104,7 @@
 			return FALSE
 	return TRUE
 
-/decl/species/serpentid/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+/decl/species/serpentid/handle_fall_special(var/mob/living/human/H, var/turf/landing)
 
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 	var/turf/T = GetBelow(H.loc)
@@ -122,13 +124,13 @@
 
 	return FALSE
 
-/decl/species/serpentid/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
+/decl/species/serpentid/can_shred(var/mob/living/human/H, var/ignore_intent, var/ignore_antag)
 	if(!H.get_equipped_item(slot_handcuffed_str) || H.buckled)
 		return ..(H, ignore_intent, TRUE)
 	else
 		return 0
 
-/decl/species/serpentid/handle_movement_delay_special(var/mob/living/carbon/human/H)
+/decl/species/serpentid/handle_movement_delay_special(var/mob/living/human/H)
 	var/tally = 0
 
 	H.remove_cloaking_source(src)
@@ -140,7 +142,7 @@
 	return tally
 
 // todo: make this on bodytype
-/decl/species/serpentid/update_skin(var/mob/living/carbon/human/H)
+/decl/species/serpentid/update_skin(var/mob/living/human/H)
 
 	if(H.stat)
 		H.skin_state = SKIN_NORMAL
@@ -176,8 +178,8 @@
 			return(threat_image)
 
 
-/decl/species/serpentid/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
-	if(attacker.pulling_punches || target.lying || attacker == target)
+/decl/species/serpentid/disarm_attackhand(var/mob/living/human/attacker, var/mob/living/human/target)
+	if(attacker.pulling_punches || target.current_posture.prone || attacker == target)
 		return ..(attacker, target)
 	if(world.time < attacker.last_attack + 20)
 		to_chat(attacker, SPAN_NOTICE("You can't attack again so soon."))

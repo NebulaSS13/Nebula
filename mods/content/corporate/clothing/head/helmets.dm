@@ -9,7 +9,9 @@
 	icon = 'mods/content/corporate/icons/clothing/head/pcrc.dmi'
 
 /obj/item/clothing/head/helmet/corp/nt/guard
-	starting_accessories = list(/obj/item/clothing/accessory/armor/helmcover/corp)
+	starting_accessories = list(
+		/obj/item/clothing/armor_attachment/helmcover/corp
+	)
 
 /obj/item/clothing/head/helmet/corp/nt/pilot
 	name = "corporate pilot's helmet"

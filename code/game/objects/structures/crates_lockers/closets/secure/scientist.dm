@@ -5,8 +5,8 @@
 
 /obj/structure/closet/secure_closet/scientist/WillContain()
 	return list(
-		/obj/item/clothing/under/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/jumpsuit/white,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
@@ -20,14 +20,14 @@
 
 /obj/structure/closet/secure_closet/xenobio/WillContain()
 	return list(
-		/obj/item/clothing/under/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/jumpsuit/white,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clipboard,
-		/obj/item/storage/belt/general
+		/obj/item/belt/general
 	)
 
 /obj/structure/closet/secure_closet/research_director
@@ -39,7 +39,7 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/scientist = 2,
 		/obj/item/clothing/head/bio_hood/scientist = 2,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/radio/headset/heads/rd,
@@ -56,8 +56,8 @@
 	return list(
 		/obj/item/assembly/signaler,
 		/obj/item/gun/launcher/syringe/rapid,
-		/obj/item/storage/box/syringegun,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/syringegun,
+		/obj/item/box/syringes,
 		/obj/item/chems/glass/bottle/sedatives
 	)
 
@@ -67,19 +67,19 @@
 
 /obj/structure/closet/secure_closet/pilot/WillContain()
 	return list(
-		/obj/item/storage/backpack/parachute,
+		/obj/item/backpack/parachute,
 		/obj/item/knife/utility,
-		/obj/item/clothing/under/pilot,
-		/obj/item/clothing/suit/storage/toggle/bomber,
+		/obj/item/clothing/jumpsuit/pilot,
+		/obj/item/clothing/suit/jacket/bomber,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/shoes/color/black,
-		/obj/item/clothing/gloves/color/black,
+		/obj/item/clothing/gloves/black,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/flashlight,
 		/obj/item/chems/food/liquidfood,
 		/obj/item/chems/drinks/cans/waterbottle,
-		/obj/item/storage/box/flares,
+		/obj/item/box/flares,
 		/obj/item/cell/device,
 		/obj/item/radio,
-		/obj/item/storage/backpack/satchel
+		/obj/item/backpack/satchel
 	)

@@ -29,18 +29,10 @@
 		usr.real_name = usr.name_archive
 		usr.SetName(usr.real_name)
 		if(ishuman(usr))
-			var/mob/living/carbon/human/H = usr
+			var/mob/living/human/H = usr
 			H.SetName(H.get_visible_name())
 
 	usr.forceMove(O.loc) // Appear where the object you were controlling is -- TLE
 	usr.client.eye = usr
 	usr.control_object = null
 	SSstatistics.add_field_details("admin_verb","RO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/proc/givetestverbs(mob/M as mob in SSmobs.mob_list)
-	set desc = "Give this guy possess/release verbs"
-	set category = "Debug"
-	set name = "Give Possessing Verbs"
-	M.verbs += /proc/possess
-	M.verbs += /proc/release
-	SSstatistics.add_field_details("admin_verb","GPV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

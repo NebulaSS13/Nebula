@@ -1,19 +1,19 @@
-/decl/loadout_option/accessory/chaplaininsignia
-	name = "chaplain insignia"
-	path = /obj/item/clothing/accessory/chaplaininsignia
+/decl/loadout_option/accessory/insignia
+	name = "religious insignia"
+	path = /obj/item/clothing/insignia
 	cost = 1
 	allowed_roles = list(/datum/job/chaplain)
 
-/decl/loadout_option/accessory/chaplaininsignia/Initialize()
+/decl/loadout_option/accessory/insignia/Initialize()
 	. = ..()
 	var/insignia = list()
-	insignia["chaplain insignia (christianity)"] = /obj/item/clothing/accessory/chaplaininsignia
-	insignia["chaplain insignia (judaism)"] = /obj/item/clothing/accessory/chaplaininsignia/judaism
-	insignia["chaplain insignia (islam)"] = /obj/item/clothing/accessory/chaplaininsignia/islam
-	insignia["chaplain insignia (buddhism)"] = /obj/item/clothing/accessory/chaplaininsignia/buddhism
-	insignia["chaplain insignia (hinduism)"] = /obj/item/clothing/accessory/chaplaininsignia/hinduism
-	insignia["chaplain insignia (sikhism)"] = /obj/item/clothing/accessory/chaplaininsignia/sikhism
-	insignia["chaplain insignia (baha'i faith)"] = /obj/item/clothing/accessory/chaplaininsignia/bahaifaith
-	insignia["chaplain insignia (jainism)"] = /obj/item/clothing/accessory/chaplaininsignia/jainism
-	insignia["chaplain insignia (taoism)"] = /obj/item/clothing/accessory/chaplaininsignia/taoism
+	insignia["chaplain insignia (christianity)"] = /obj/item/clothing/insignia/christian
+	insignia["chaplain insignia (judaism)"]      = /obj/item/clothing/insignia/judaism
+	insignia["chaplain insignia (islam)"]        = /obj/item/clothing/insignia/islam
+	insignia["chaplain insignia (buddhism)"]     = /obj/item/clothing/insignia/buddhism
+	insignia["chaplain insignia (hinduism)"]     = /obj/item/clothing/insignia/hinduism
+	insignia["chaplain insignia (sikhism)"]      = /obj/item/clothing/insignia/sikhism
+	insignia["chaplain insignia (baha'i faith)"] = /obj/item/clothing/insignia/bahaifaith
+	insignia["chaplain insignia (jainism)"]      = /obj/item/clothing/insignia/jainism
+	insignia["chaplain insignia (taoism)"]       = /obj/item/clothing/insignia/taoism
 	gear_tweaks += new/datum/gear_tweak/path(insignia)

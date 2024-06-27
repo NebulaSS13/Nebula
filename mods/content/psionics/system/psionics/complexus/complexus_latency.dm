@@ -14,5 +14,6 @@
 	var/decl/psionic_faculty/faculty_decl = SSpsi.get_faculty(faculty)
 	to_chat(owner, SPAN_DANGER("You scream internally as your [faculty_decl.name] faculty is forced into operancy by [source]!"))
 	next_latency_trigger = world.time + rand(600, 1800) * new_rank
-	if(!redactive) owner.adjustBrainLoss(rand(trigger_strength * 2, trigger_strength * 4))
+	if(!redactive)
+		owner.take_damage(rand(trigger_strength * 2, trigger_strength * 4), BRAIN)
 	return TRUE

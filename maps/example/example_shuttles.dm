@@ -27,7 +27,7 @@
 		"STARBOARD" = "example_shuttle_starboard",
 		"PORT" = "example_shuttle_port"
 	)
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling
+	ceiling_type = /turf/floor/shuttle_ceiling
 
 /obj/abstract/turbolift_spawner/example
 	name = "Testing Site elevator placeholder"
@@ -39,7 +39,7 @@
 	wall_type =     null
 	firedoor_type = null
 	light_type =    null
-	floor_type =  /turf/simulated/floor/tiled/techfloor
+	floor_type =  /turf/floor/tiled/techfloor
 	button_type = /obj/structure/lift/button/standalone
 	panel_type =  /obj/structure/lift/panel/standalone
 	areas_to_use = list(

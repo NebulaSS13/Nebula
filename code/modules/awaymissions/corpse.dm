@@ -21,9 +21,11 @@
 
 /obj/abstract/landmark/corpse
 	name = "Unknown"
+	abstract_type = /obj/abstract/landmark/corpse
 	var/species                                       // List of species to pick from.
 	var/corpse_outfits = list(/decl/hierarchy/outfit) // List of outfits to pick from. Uses pickweight()
 	var/spawn_flags = (~0)
+	var/weakref/my_corpse
 
 	var/skin_colors_per_species   = list() // Custom skin colors, per species -type-, if any. For example if you want dead aliens to always have blue hair, or similar
 	var/skin_tones_per_species    = list() // Custom skin tones, per species -type-, if any. See above as to why.
@@ -35,12 +37,13 @@
 
 /obj/abstract/landmark/corpse/Initialize()
 	..()
-	if(!species) species = global.using_map.default_species
+	if(!species)
+		species = global.using_map.default_species
 	var/species_choice = islist(species) ? pickweight(species) : species
-	new /mob/living/carbon/human/corpse(loc, species_choice, null, null, src)
+	my_corpse = weakref(new /mob/living/human/corpse(loc, species_choice, null, src))
 	return INITIALIZE_HINT_QDEL
 
-/obj/abstract/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)
+/obj/abstract/landmark/corpse/proc/randomize_appearance(var/mob/living/human/M, species_choice)
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
 		if(species_choice in genders_per_species)
@@ -98,7 +101,7 @@
 		M.SetName(name)
 	M.real_name = M.name
 
-/obj/abstract/landmark/corpse/proc/equip_corpse_outfit(var/mob/living/carbon/human/M)
+/obj/abstract/landmark/corpse/proc/equip_corpse_outfit(var/mob/living/human/M)
 	var/adjustments = 0
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_SURVIVAL)  ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR) : adjustments
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_ID_PDA)    ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)        : adjustments

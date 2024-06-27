@@ -16,9 +16,7 @@
 	cyborg_noun = null
 	base_external_prosthetics_model = null
 	blood_types = list(/decl/blood_type/coolant)
-
 	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
-	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
 	species_flags =         SPECIES_FLAG_NO_POISON
 	spawn_flags =           SPECIES_CAN_JOIN
@@ -55,5 +53,5 @@
 /obj/item/organ/external/head/utility_frame
 	glowing_eyes = TRUE
 
-/decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
+/decl/species/utility_frame/disfigure_msg(var/mob/living/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

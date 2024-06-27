@@ -25,7 +25,7 @@
 	default_outfit = /decl/hierarchy/outfit/foundation
 	id_title = "Foundation Agent"
 
-/decl/special_role/foundation/equip_role(var/mob/living/carbon/human/player)
+/decl/special_role/foundation/equip_role(var/mob/living/human/player)
 	. = ..()
 	if(.)
 		player.set_psi_rank(PSI_REDACTION,     3, defer_update = TRUE)
@@ -38,11 +38,11 @@
 /decl/hierarchy/outfit/foundation
 	name = "Cuchulain Foundation Agent"
 	glasses =  /obj/item/clothing/glasses/sunglasses
-	uniform =  /obj/item/clothing/under/suit_jacket/charcoal
+	uniform =  /obj/item/clothing/pants/slacks/black/outfit
 	shoes =    /obj/item/clothing/shoes/color/black
-	hands =    list(/obj/item/storage/briefcase/foundation)
+	hands =    list(/obj/item/briefcase/foundation)
 	l_ear =    /obj/item/radio/headset/foundation
-	holster =  /obj/item/clothing/accessory/storage/holster/armpit
+	holster =  /obj/item/clothing/webbing/holster/armpit
 	id_type = /obj/item/card/id/foundation
 	id_slot =  slot_wear_id_str
 

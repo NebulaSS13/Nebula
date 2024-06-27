@@ -38,7 +38,21 @@
 		. = ..()
 	someone_is_cutting = FALSE
 
-/obj/structure/flora/tree/take_damage(damage)
+/obj/structure/flora/tree/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	if(!ml && protects_against_weather)
+		for(var/turf/T in RANGE_TURFS(src, 1))
+			T.update_ambient_light_from_z_or_area()
+
+// I hate doing things that aren't cleanup in Destroy(), but this should still update even when admin-deleted.
+/obj/structure/flora/tree/Destroy()
+	var/list/turfs_to_update = RANGE_TURFS(src, 1)
+	. = ..()
+	if(protects_against_weather)
+		for(var/turf/T in turfs_to_update)
+			T.update_ambient_light_from_z_or_area()
+
+/obj/structure/flora/tree/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
 	if(!QDELETED(src) && damage >= 5)
 		shake()
@@ -69,10 +83,12 @@
 
 /obj/structure/flora/tree/create_dismantled_products(turf/T)
 	if(log_type)
-		new log_type(T, rand(max(1,round(log_amount*0.5)), log_amount), material?.type, reinf_material?.type)
+		LAZYADD(., new log_type(T, rand(max(1,round(log_amount*0.5)), log_amount), material?.type, reinf_material?.type))
 	if(stump_type)
 		var/obj/structure/flora/stump/stump = new stump_type(T, material, reinf_material)
-		stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees..
+		stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees...
+		if(paint_color)
+			stump.set_color()
 	. = ..()
 
 /obj/structure/flora/tree/pine
@@ -81,6 +97,7 @@
 	icon         = 'icons/obj/flora/pinetrees.dmi'
 	icon_state   = "pine_1"
 	stump_type   = /obj/structure/flora/stump/tree/pine
+	opacity      = TRUE
 
 /obj/structure/flora/tree/pine/init_appearance()
 	icon_state = "pine_[rand(1, 3)]"
@@ -108,18 +125,28 @@
 
 /obj/structure/flora/tree/dead/ebony
 	icon_state = "dead_ebony_1"
+	material   = /decl/material/solid/organic/wood/ebony
+	stump_type = /obj/structure/flora/stump/tree/ebony
 
 /obj/structure/flora/tree/dead/mahogany
 	icon_state = "dead_mahogany_1"
+	material   = /decl/material/solid/organic/wood/mahogany
+	stump_type = /obj/structure/flora/stump/tree/mahogany
 
 /obj/structure/flora/tree/dead/walnut
 	icon_state = "dead_walnut_1"
+	material   = /decl/material/solid/organic/wood/walnut
+	stump_type = /obj/structure/flora/stump/tree/walnut
 
 /obj/structure/flora/tree/dead/maple
 	icon_state = "dead_maple_1"
+	material   = /decl/material/solid/organic/wood/maple
+	stump_type = /obj/structure/flora/stump/tree/maple
 
 /obj/structure/flora/tree/dead/yew
 	icon_state = "dead_yew_1"
+	material   = /decl/material/solid/organic/wood/yew
+	stump_type = /obj/structure/flora/stump/tree/yew
 
 /obj/structure/flora/tree/softwood
 	icon          = 'icons/obj/flora/softwood.dmi'
@@ -146,6 +173,7 @@
 	icon_state = "mahogany_1"
 	material   = /decl/material/solid/organic/wood/mahogany
 	stump_type = /obj/structure/flora/stump/tree/mahogany
+	opacity    = TRUE
 
 /obj/structure/flora/tree/hardwood/maple
 	name       = "maple tree"
@@ -158,6 +186,7 @@
 	icon_state = "yew_1"
 	material   = /decl/material/solid/organic/wood/yew
 	stump_type = /obj/structure/flora/stump/tree/yew
+	opacity    = TRUE
 
 /obj/structure/flora/tree/hardwood/walnut
 	name       = "walnut tree"

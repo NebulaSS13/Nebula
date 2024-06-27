@@ -84,7 +84,7 @@
 	path = /obj/item/stock_parts/circuitboard/account_database
 
 /datum/fabricator_recipe/imprinter/circuit/holo
-	path = /obj/item/stock_parts/circuitboard/holodeckcontrol
+	path = /obj/item/stock_parts/circuitboard/holodeck_control
 
 /datum/fabricator_recipe/imprinter/circuit/aiupload
 	path = /obj/item/stock_parts/circuitboard/aiupload
@@ -109,6 +109,9 @@
 
 /datum/fabricator_recipe/imprinter/circuit/autolathe
 	path = /obj/item/stock_parts/circuitboard/autolathe
+
+/datum/fabricator_recipe/imprinter/circuit/recycler
+	path = /obj/item/stock_parts/circuitboard/recycler
 
 /datum/fabricator_recipe/imprinter/circuit/replicator
 	path = /obj/item/stock_parts/circuitboard/replicator

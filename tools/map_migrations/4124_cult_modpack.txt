@@ -1,0 +1,1 @@
+/obj/structure/cult/talisman : /obj/structure/talisman_altar{@OLD}

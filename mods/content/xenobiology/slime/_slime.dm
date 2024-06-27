@@ -14,17 +14,11 @@
 	speak_emote = list("chirps")
 	max_health = 150
 	gender = NEUTER
-	update_icon = 0
 	see_in_dark = 8
 	status_flags = CANPARALYSE|CANPUSH
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	butchery_data = null
 	ai = /datum/ai/slime
-	hud_type = /datum/hud/slime
+	hud_used = /datum/hud/slime
 	nutrition = 800
 
 	var/is_adult = FALSE
@@ -47,6 +41,12 @@
 		AM.dropInto(loc)
 	. = ..()
 
+/mob/living/slime/get_available_postures()
+	var/static/list/available_postures = list(
+		/decl/posture/standing
+	)
+	return available_postures
+
 /mob/living/slime/getToxLoss()
 	return toxloss
 
@@ -59,7 +59,7 @@
 		update_health()
 
 /mob/living/slime/setToxLoss(var/amount)
-	adjustToxLoss(amount-getToxLoss())
+	take_damage(amount-get_damage(TOX), TOX)
 
 /mob/living/slime/Initialize(mapload, var/_stype = /decl/slime_colour/grey)
 
@@ -265,7 +265,7 @@
 				return TRUE
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
-			adjustBruteLoss(damage)
+			take_damage(damage)
 			return TRUE
 
 	return ..()
@@ -308,7 +308,7 @@
 		powerlevel++
 		if(powerlevel > 10)
 			powerlevel = 10
-			adjustToxLoss(-10)
+			heal_damage(TOX, 10)
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0
@@ -350,18 +350,18 @@
 	. += "Electric charge strength:\t[powerlevel]"
 	. += "Health:\t[get_health_percent()]%"
 
-	var/list/mutations = slime_data.descendants?.Copy()
-	if(!mutations.len)
+	var/list/slime_mutations = slime_data.descendants?.Copy()
+	if(!length(slime_mutations))
 		. += "This slime will never mutate."
 	else
 		var/list/mutationChances = list()
-		for(var/i in mutations)
+		for(var/i in slime_mutations)
 			if(i == slime_type)
 				continue
 			if(mutationChances[i])
-				mutationChances[i] += mutation_chance / mutations.len
+				mutationChances[i] += mutation_chance / length(slime_mutations)
 			else
-				mutationChances[i] = mutation_chance / mutations.len
+				mutationChances[i] = mutation_chance / length(slime_mutations)
 
 		var/list/mutationTexts = list("[slime_data.name] ([100 - mutation_chance]%)")
 		for(var/i in mutationChances)
@@ -376,6 +376,3 @@
 
 /mob/living/slime/can_change_intent()
 	return TRUE
-
-/mob/living/slime/get_telecomms_race_info()
-	return list("Slime", FALSE)

@@ -4,6 +4,14 @@
 		#include "../../code/unit_tests/offset_tests.dm"
 	#endif
 
+	#include "../../mods/gamemodes/cult/_cult.dme"
+	#include "../../mods/gamemodes/heist/_heist.dme"
+	#include "../../mods/gamemodes/ninja/_ninja.dme"
+	#include "../../mods/gamemodes/revolution/_revolution.dme"
+	#include "../../mods/gamemodes/traitor/_traitor.dme"
+	#include "../../mods/gamemodes/spyvspy/_spyvspy.dme"
+	#include "../../mods/gamemodes/mixed/_mixed.dme"
+
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
 	#include "../../mods/content/dungeon_loot/_dungeon_loot.dme"
@@ -13,15 +21,19 @@
 	#include "../../mods/content/government/_government.dme"
 	#include "../../mods/content/modern_earth/_modern_earth.dme"
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
-	#include "../../mods/content/psionics/_psionics.dme"
 	#include "../../mods/content/scaling_descriptors.dm"
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
+	#include "../../mods/content/pheromones/_pheromones.dme"
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
 	#include "../../mods/mobs/borers/_borers.dme"
 
+	// Must come after borers for compatibility.
+	#include "../../mods/content/psionics/_psionics.dme"
+
 	#include "../../mods/species/ascent/_ascent.dme"
+	#include "../../mods/species/drakes/_drakes.dme"
 	#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"

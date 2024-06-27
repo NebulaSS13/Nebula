@@ -26,8 +26,8 @@
 /obj/item/depth_scanner/proc/scan_atom(var/mob/user, var/atom/A)
 	user.visible_message("<span class='notice'>\The [user] scans \the [A], the air around them humming gently.</span>")
 
-	if(istype(A, /turf/exterior/wall))
-		var/turf/exterior/wall/M = A
+	if(istype(A, /turf/wall/natural))
+		var/turf/wall/natural/M = A
 		if((M.finds && M.finds.len) || M.artifact_find)
 
 			//create a new scanlog entry
@@ -72,7 +72,7 @@
 /obj/item/depth_scanner/interact(var/mob/user)
 	var/dat = "<b>Coordinates with positive matches</b><br>"
 
-	dat += "<A href='?src=\ref[src];clear=0'>== Clear all ==</a><br>"
+	dat += "<A href='byond://?src=\ref[src];clear=0'>== Clear all ==</a><br>"
 
 	if(current)
 		dat += "Time: [current.time]<br>"
@@ -84,7 +84,7 @@
 			dat += "Anomaly material: [responsive_carriers[current.material]]<br>"
 		else
 			dat += "Anomaly material: Unknown<br>"
-		dat += "<A href='?src=\ref[src];clear=[current.record_index]'>clear entry</a><br>"
+		dat += "<A href='byond://?src=\ref[src];clear=[current.record_index]'>clear entry</a><br>"
 	else
 		dat += "Select an entry from the list<br>"
 		dat += "<br><br><br><br>"
@@ -92,12 +92,12 @@
 	if(positive_locations.len)
 		for(var/index = 1 to positive_locations.len)
 			var/datum/depth_scan/D = positive_locations[index]
-			dat += "<A href='?src=\ref[src];select=[index]'>[D.time], coords: [D.coords]</a><br>"
+			dat += "<A href='byond://?src=\ref[src];select=[index]'>[D.time], coords: [D.coords]</a><br>"
 	else
 		dat += "No entries recorded."
 
 	dat += "<hr>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
+	dat += "<A href='byond://?src=\ref[src];refresh=1'>Refresh</a><br>"
 	var/datum/browser/popup = new(user, "depth_scanner", "Results", 300, 500)
 	popup.set_content(dat)
 	popup.open()

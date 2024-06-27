@@ -25,7 +25,7 @@
 	var/datum/level_data/LD = SSmapping.levels_by_id[E.surface_level_id]
 	var/area/A = LD.get_base_area_instance()
 	if(istype(A, world.area))
-		PRINT_STACK_TRACE("Got '[world.area]' area as area for the surface level '[LD]' of planetoid '[E]'.") //Don't modify the ambience of the space area..
+		PRINT_STACK_TRACE("Got '[world.area]' area as area for the surface level '[LD]' of planetoid '[E]'.") //Don't modify the ambience of the space area.
 	LAZYDISTINCTADD(A.ambience, spooky_ambience)
 
 /datum/exoplanet_theme/ruined_city/get_sensor_data()
@@ -103,15 +103,14 @@
 
 /datum/random_map/city/get_appropriate_path(var/value)
 	if(value == ROAD_VALUE && prob(99))
-		return /turf/exterior/concrete/reinforced/road
+		return /turf/floor/concrete/reinforced/road
 
-/datum/random_map/city/get_additional_spawns(var/value, var/turf/simulated/floor/T)
-	if(istype(T, /turf/exterior/concrete/reinforced/road))
+/datum/random_map/city/get_additional_spawns(var/value, var/turf/floor/T)
+	if(istype(T, /turf/floor/concrete/reinforced/road))
 		if(prob(1))
 			new/obj/structure/rubble/house(T)
 		if(prob(5))
-			var/turf/exterior/concrete/C = T
-			C.set_broken(TRUE)
+			T.set_floor_broken(TRUE)
 
 /datum/random_map/city/apply_to_map()
 	..()
@@ -119,46 +118,46 @@
 		building.apply_to_map()
 
 // Buildings
-/turf/simulated/wall/concrete
+/turf/wall/concrete
 	icon_state = "stone"
 	floor_type = null
 	material = /decl/material/solid/stone/concrete
 
 //Generic ruin
 /datum/random_map/maze/concrete
-	wall_type =  /turf/simulated/wall/concrete
-	floor_type = /turf/exterior/concrete/reinforced
+	wall_type =  /turf/wall/concrete
+	floor_type = /turf/floor/concrete/reinforced
 	preserve_map = 0
 
 /datum/random_map/maze/concrete/get_appropriate_path(var/value)
 	if(value == WALL_VALUE)
 		if(prob(80))
-			return /turf/simulated/wall/concrete
+			return /turf/wall/concrete
 		else
-			return /turf/exterior/concrete/reinforced/damaged
+			return /turf/floor/concrete/reinforced/damaged
 	return ..()
 
-/datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/simulated/floor/T)
+/datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/floor/T)
 	if(!istype(T))
 		return
 	if(prob(10))
 		new/obj/item/remains/xeno/charred(T)
-	if((T.broken && prob(80)) || prob(10))
+	if((T.is_floor_broken() && prob(80)) || prob(10))
 		new/obj/structure/rubble/house(T)
 	if(prob(1))
 		new/obj/abstract/landmark/exoplanet_spawn/animal(T)
 
 //Artifact containment lab
-/turf/simulated/wall/containment
+/turf/wall/containment
 	paint_color = COLOR_GRAY20
-	floor_type = /turf/simulated/floor/fixed/alium/airless
+	floor_type = /turf/floor/fixed/alium/airless
 
-/turf/simulated/wall/containment/Initialize(var/ml)
+/turf/wall/containment/Initialize(var/ml)
 	. = ..(ml, /decl/material/solid/stone/concrete, /decl/material/solid/metal/aliumium)
 
 /datum/random_map/maze/lab
-	wall_type =  /turf/simulated/wall/containment
-	floor_type = /turf/simulated/floor/fixed/alium/airless
+	wall_type =  /turf/wall/containment
+	floor_type = /turf/floor/fixed/alium/airless
 	preserve_map = 0
 	var/artifacts_to_spawn = 1
 
@@ -200,7 +199,7 @@
 		return floor_type
 	. = ..()
 
-/datum/random_map/maze/lab/get_additional_spawns(var/value, var/turf/simulated/floor/T)
+/datum/random_map/maze/lab/get_additional_spawns(var/value, var/turf/floor/T)
 	if(!istype(T))
 		return
 

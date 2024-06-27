@@ -8,8 +8,5 @@
 /datum/fabricator_recipe/food/fries
 	path = /obj/item/chems/food/fries
 
-/datum/fabricator_recipe/food/soydope
-	path = /obj/item/chems/food/soydope
-
 /datum/fabricator_recipe/food/ricepudding
 	path = /obj/item/chems/food/ricepudding

@@ -74,7 +74,7 @@
 		return TRUE
 	. = ..()
 
-/obj/structure/rubble/dismantle()
+/obj/structure/rubble/dismantle_structure(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	qdel(src)
 	. = TRUE

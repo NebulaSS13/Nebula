@@ -108,10 +108,10 @@
 	return 1
 
 /obj/machinery/pipelayer/proc/dismantle_floor(var/turf/new_turf)
-	if(istype(new_turf, /turf/simulated/floor))
-		var/turf/simulated/floor/T = new_turf
+	if(istype(new_turf, /turf/floor))
+		var/turf/floor/T = new_turf
 		if(!T.is_plating())
-			T.make_plating(!(T.broken || T.burnt))
+			T.make_plating(!T.is_floor_damaged())
 	return new_turf.is_plating()
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)

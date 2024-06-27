@@ -42,11 +42,9 @@
 			if(prob(blocked))
 				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
 				continue
-			if(prob(60) && iscarbon(M))
-				var/mob/living/carbon/C = M
-				if(C.can_feel_pain())
-					M.emote(/decl/emote/audible/scream)
-			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a psionic scream!"))
+			if(prob(60) && M.can_feel_pain())
+				to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a psionic scream!"))
+				M.emote(/decl/emote/audible/scream)
 			M.flash_eyes()
 			SET_STATUS_MAX(M, STAT_BLIND,   3)
 			SET_STATUS_MAX(M, STAT_DEAF,    6)
@@ -119,7 +117,7 @@
 	min_rank =       PSI_RANK_MASTER
 	use_description = "Target the arms or hands on disarm intent to use a ranged attack that may rip the weapons away from the target."
 
-/decl/psionic_power/coercion/spasm/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
+/decl/psionic_power/coercion/spasm/invoke(var/mob/living/user, var/mob/living/human/target)
 	if(!istype(target))
 		return FALSE
 
@@ -188,7 +186,7 @@
 			to_chat(user,   SPAN_WARNING("\The [target] resists your glamour, writhing in your grip. You hurriedly release them before too much damage is done, but the psyche is left tattered. They should have no memory of this encounter, at least."))
 			to_chat(target, SPAN_DANGER("You resist \the [user], struggling free of their influence at the cost of your own mind!"))
 			to_chat(target, SPAN_DANGER("You fall into darkness, losing all memory of the encounter..."))
-			target.adjustBrainLoss(rand(25,40))
+			target.take_damage(rand(25,40), BRAIN)
 			SET_STATUS_MAX(target, STAT_PARA, 10 SECONDS)
 
 		return TRUE
@@ -233,7 +231,7 @@
 	if(.)
 		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics)
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
-		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments.."))
+		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments..."))
 		to_chat(target, SPAN_WARNING("Your mind is being cleansed of ailments by \the [user]."))
 		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
 			psi?.backblast(rand(5,10))
@@ -245,7 +243,7 @@
 		if(coercion_rank >= PSI_RANK_GRANDMASTER)
 			ADJ_STATUS(target, STAT_PARA, -1)
 		target.set_status(STAT_DROWSY, 0)
-		if(iscarbon(target))
-			var/mob/living/carbon/M = target
+		if(isliving(target))
+			var/mob/living/M = target
 			M.adjust_hallucination(-30)
 		return TRUE

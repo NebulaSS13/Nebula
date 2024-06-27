@@ -29,7 +29,7 @@
 		/obj/item/plate = 10,
 		/obj/item/plate/platter = 5,
 		/obj/item/chems/glass/beaker/bowl = 2,
-		/obj/item/storage/tray/metal/aluminium = 8,
+		/obj/item/plate/tray/metal/aluminium = 8,
 		/obj/item/knife/kitchen = 3,
 		/obj/item/kitchen/rollingpin = 2,
 		/obj/item/chems/drinks/pitcher = 2,
@@ -38,15 +38,15 @@
 		/obj/item/chems/drinks/glass2/carafe = 2,
 		/obj/item/chems/drinks/glass2/square = 8,
 		/obj/item/clothing/suit/chef/classic = 2,
-		/obj/item/storage/lunchbox = 3,
-		/obj/item/storage/lunchbox/heart = 3,
-		/obj/item/storage/lunchbox/cat = 3,
-		/obj/item/storage/lunchbox/mars = 3,
-		/obj/item/storage/lunchbox/cti = 3,
-		/obj/item/storage/lunchbox/syndicate = 3,
+		/obj/item/lunchbox = 3,
+		/obj/item/lunchbox/heart = 3,
+		/obj/item/lunchbox/cat = 3,
+		/obj/item/lunchbox/mars = 3,
+		/obj/item/lunchbox/cti = 3,
+		/obj/item/lunchbox/syndicate = 3,
 		/obj/item/knife/kitchen/cleaver = 1
 	)
-	contraband = list(/obj/item/knife/kitchen/cleaver/bronze = 1,/obj/item/storage/tray/metal/silver = 1)
+	contraband = list(/obj/item/knife/kitchen/cleaver/bronze = 1,/obj/item/plate/tray/metal/silver = 1)
 
 /obj/machinery/vending/fashionvend
 	name = "Smashing Fashions"
@@ -63,11 +63,11 @@
 		/obj/item/clothing/glasses/eyepatch/monocle = 5,
 		/obj/item/clothing/glasses/sunglasses = 5,
 		/obj/random/makeup = 3,
-		/obj/item/storage/wallet/poly = 2
+		/obj/item/wallet/poly = 2
 	)
 	contraband = list(
 		/obj/item/clothing/glasses/eyepatch = 2,
-		/obj/item/clothing/accessory/horrible = 2,
+		/obj/item/clothing/neck/tie/horrible = 2,
 		/obj/item/clothing/mask/smokable/pipe = 3
 	)
 
@@ -91,16 +91,16 @@
 		/obj/item/deck/cag/black = 5,
 		/obj/item/pack/cardemon = 6,
 		/obj/item/pack/spaceball = 6,
-		/obj/item/storage/pill_bottle/dice_nerd = 5,
-		/obj/item/storage/pill_bottle/dice = 5,
-		/obj/item/storage/box/checkers = 2,
-		/obj/item/storage/box/checkers/chess/red = 2,
-		/obj/item/storage/box/checkers/chess = 2,
+		/obj/item/pill_bottle/dice_nerd = 5,
+		/obj/item/pill_bottle/dice = 5,
+		/obj/item/box/checkers = 2,
+		/obj/item/box/checkers/chess/red = 2,
+		/obj/item/box/checkers/chess = 2,
 		/obj/item/board = 2
 	)
 	contraband = list(
 		/obj/item/chems/spray/waterflower = 2,
-		/obj/item/storage/box/snappops = 3,
+		/obj/item/box/snappops = 3,
 		/obj/item/spirit_board = 1,
 		/obj/item/gun/projectile/revolver/capgun = 1,
 		/obj/item/ammo_magazine/caps = 4

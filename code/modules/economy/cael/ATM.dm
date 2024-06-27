@@ -144,7 +144,7 @@
 		if(emagged > 0)
 			t += "<span class='bad'><b>LOCKED</b><br>Unauthorized terminal access detected!<br>This ATM has been locked down.</span></div><BR>"
 		else
-			t += "<a href='?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "No card inserted"]</a></div><BR>"
+			t += "<a href='byond://?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "No card inserted"]</a></div><BR>"
 			t += "<div class='statusDisplay'>"
 			if(ticks_left_locked_down > 0)
 				t += "<span class='bad'>Maximum number of pin attempts exceeded! Access to this ATM has been temporarily disabled.</span></div>"
@@ -156,17 +156,17 @@
 						if(CHANGE_SECURITY_LEVEL)
 							t += "Select a new security level for this account:<br><hr>"
 							if(authenticated_account.security_level != 0)
-								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=0'>Select Minimum Security</a><BR>"
+								t += "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=0'>Select Minimum Security</a><BR>"
 							else
 								t += "<span class='good'><b>Minimum security set: </b></span><BR>"
 							t += "Either the account number or card is required to access this account. EFTPOS transactions will require a card and ask for a pin, but not verify the pin is correct.<hr>"
 							if(authenticated_account.security_level != 1)
-								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=1'>Select Moderate Security</a><BR>"
+								t += "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=1'>Select Moderate Security</a><BR>"
 							else
 								t += "<span class='average'><b>Moderate Security set: </b></span><BR>"
 							t += "An account number and pin must be manually entered to access this account and process transactions.<hr>"
 							if(authenticated_account.security_level != 2)
-								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=2'>Select Maximum Security</a><BR>"
+								t += "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=2'>Select Maximum Security</a><BR>"
 							else
 								t += "<span class='bad'><b>Maximum security Set: </b></span><BR>"
 							t += "High - In addition to account number, a pin and a card is required to access this account and process transactions.<hr><br>"
@@ -191,10 +191,10 @@
 								t += "<td>[T.get_source_name()]</td>"
 								t += "</tr>"
 							t += "</table>"
-							t += "<A href='?src=\ref[src];choice=print_transaction'>Print</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=print_transaction'>Print</a><br>"
 						if(TRANSFER_FUNDS)
 							t += "<b>Account balance:</b> [authenticated_account.format_value_by_currency(authenticated_account.money)]<br>"
-							t += "<form name='transfer' action='?src=\ref[src]' method='get'>"
+							t += "<form name='transfer' action='byond://?src=\ref[src]' method='get'>"
 							t += "<input type='hidden' name='src' value='\ref[src]'>"
 							t += "<input type='hidden' name='choice' value='transfer'>"
 							t += "Target account number: <input type='text' name='target_acc_number' value='' style='width:200px; background-color:white;'><br>"
@@ -204,21 +204,21 @@
 							t += "</form>"
 						else
 							t += "<b>Account balance:</b> [authenticated_account.format_value_by_currency(authenticated_account.money)]"
-							t += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
+							t += "<form name='withdrawal' action='byond://?src=\ref[src]' method='get'>"
 							t += "<input type='hidden' name='src' value='\ref[src]'>"
 							t += "<input type='radio' name='choice' value='withdrawal' checked> Cash  <input type='radio' name='choice' value='e_withdrawal'> Chargecard<br>"
 							t += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw'>"
 							t += "</form>"
-							t += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
-							t += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
-							t += "<A href='?src=\ref[src];choice=view_screen;view_screen=3'>View transaction log</a><br>"
-							t += "<A href='?src=\ref[src];choice=balance_statement'>Print balance statement</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=3'>View transaction log</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=balance_statement'>Print balance statement</a><br>"
 
 					//Logout/back buttons, put here for some modularity and for less repeated code
 					if(view_screen == NO_SCREEN)
-						t += "<A href='?src=\ref[src];choice=logout'>Logout</a><br></div>"
+						t += "<A href='byond://?src=\ref[src];choice=logout'>Logout</a><br></div>"
 					else
-						t += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a></div>"
+						t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=0'>Back</a></div>"
 
 			else
 				//change our display depending on account security levels
@@ -228,7 +228,7 @@
 					t += "This account requires a PIN to access. For security reasons the account # will need re-entered or ID bound to this account re-scanned."
 				else
 					t += "<span class='bad'><b>Due to the security settings on this account, all information needs to be re-entered and the ID bound to this account placed in the slot above.</b></span><BR>"
-				t += "<form name='atm_auth' action='?src=\ref[src]' method='get'>"
+				t += "<form name='atm_auth' action='byond://?src=\ref[src]' method='get'>"
 				t += "<input type='hidden' name='src' value='\ref[src]'>"
 				t += "<input type='hidden' name='choice' value='attempt_auth'>"
 				t += "<b>Account:</b> <input type='text' id='account_num' name='account_num' style='width:250px; background-color:white;'><BR><BR>"
@@ -428,7 +428,7 @@
 					if(emagged > 0)
 						to_chat(usr, "[html_icon(src)] <span class='warning'>The ATM card reader rejected your ID because this machine has been sabotaged!</span>")
 					else
-						var/obj/item/I = usr.get_active_hand()
+						var/obj/item/I = usr.get_active_held_item()
 						if (istype(I, /obj/item/card/id))
 							if(!usr.try_unequip(I, src))
 								return
@@ -441,14 +441,14 @@
 
 	interact(usr)
 
-/obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user)
+/obj/machinery/atm/proc/scan_user(mob/living/human/human_user)
 	if(!authenticated_account)
 		var/obj/item/card/id/I = human_user.GetIdCard()
 		if(istype(I))
 			return I
 
 // put the currently held id on the ground or in the hand of the user
-/obj/machinery/atm/proc/release_held_id(mob/living/carbon/human/human_user)
+/obj/machinery/atm/proc/release_held_id(mob/living/human/human_user)
 	if(!held_card)
 		return
 
@@ -456,6 +456,6 @@
 	authenticated_account = null
 	account_security_level = 0
 
-	if(ishuman(human_user) && !human_user.get_active_hand())
+	if(ishuman(human_user) && !human_user.get_active_held_item())
 		human_user.put_in_hands(held_card)
 	held_card = null

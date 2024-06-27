@@ -26,7 +26,7 @@
 		if(affecting)
 			affecting.add_pain(CEILING(power/2))
 		else
-			adjustHalLoss(CEILING(power/2))
+			take_damage(CEILING(power/2), PAIN)
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks
@@ -42,16 +42,14 @@
 			to_chat(src, "<span class='warning'>[message]</span>")
 	next_pain_time = world.time + max(30 SECONDS - power, 10 SECONDS)
 
-/mob/living/carbon/custom_pain(var/message, var/power, var/force, var/obj/item/organ/external/affecting, var/nohalloss)
-	. = ..()
-	if(.)
-		var/force_emote = species.get_pain_emote(src, power)
-		if(force_emote && prob(power))
-			var/decl/emote/use_emote = GET_DECL(force_emote)
-			if(!(use_emote.message_type == AUDIBLE_MESSAGE &&HAS_STATUS(src, STAT_SILENCE)))
-				emote(force_emote)
+	var/decl/species/my_species = get_species()
+	var/force_emote = my_species?.get_pain_emote(src, power)
+	if(force_emote && prob(power))
+		var/decl/emote/use_emote = GET_DECL(force_emote)
+		if(!(use_emote.message_type == AUDIBLE_MESSAGE &&HAS_STATUS(src, STAT_SILENCE)))
+			emote(force_emote)
 
-/mob/living/carbon/human/proc/handle_pain()
+/mob/living/human/proc/handle_pain()
 	if(stat)
 		return
 	if(!can_feel_pain())
@@ -100,14 +98,15 @@
 
 
 	if(prob(1))
-		switch(getToxLoss())
+		var/tox_damage = get_damage(TOX)
+		switch(tox_damage)
 			if(5 to 17)
-				custom_pain("Your body stings slightly.", getToxLoss())
+				custom_pain("Your body stings slightly.", tox_damage)
 			if(17 to 35)
-				custom_pain("Your body stings.", getToxLoss())
+				custom_pain("Your body stings.", tox_damage)
 			if(35 to 60)
-				custom_pain("Your body stings strongly.", getToxLoss())
+				custom_pain("Your body stings strongly.", tox_damage)
 			if(60 to 100)
-				custom_pain("Your whole body hurts badly.", getToxLoss())
+				custom_pain("Your whole body hurts badly.", tox_damage)
 			if(100 to INFINITY)
-				custom_pain("Your body aches all over, it's driving you mad.", getToxLoss())
+				custom_pain("Your body aches all over, it's driving you mad.", tox_damage)

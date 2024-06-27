@@ -13,22 +13,14 @@
 	faction = "goat"
 	max_health = 40
 	natural_weapon = /obj/item/natural_weapon/hooves
-
-	meat_type = /obj/item/chems/food/meat/goat
-	meat_amount = 4
-	bone_amount = 8
-	skin_material = /decl/material/solid/organic/skin/goat
-	skin_amount = 8
-
+	butchery_data = /decl/butchery_data/animal/ruminant/goat
 	ai = /datum/ai/goat
-
 	var/datum/reagents/udder = null
 
 /datum/ai/goat
 	expected_type = /mob/living/simple_animal/hostile/retaliate/goat
 
 /datum/ai/goat/do_process(time_elapsed)
-
 	//chance to go crazy and start wacking stuff
 	var/mob/living/simple_animal/hostile/retaliate/goat/goat = body
 	if(!length(goat.enemies) && prob(1))
@@ -102,12 +94,7 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	max_health = 50
-
-	meat_type = /obj/item/chems/food/meat/beef
-	meat_amount = 6
-	bone_amount = 10
-	skin_material = /decl/material/solid/organic/skin/cow
-	skin_amount = 10
+	butchery_data = /decl/butchery_data/animal/ruminant/cow
 
 	var/datum/reagents/udder = null
 	var/static/list/responses = list(
@@ -173,13 +160,7 @@
 	max_health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
-
-	meat_type = /obj/item/chems/food/meat/chicken
-	meat_amount = 1
-	bone_amount = 3
-	skin_amount = 3
-	skin_material = /decl/material/solid/organic/skin/feathers
-
+	butchery_data = /decl/butchery_data/animal/small/fowl/chicken/chick
 	var/amount_grown = 0
 
 /mob/living/simple_animal/chick/Initialize()
@@ -200,9 +181,7 @@
 	max_health = 10
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
-	meat_type = /obj/item/chems/food/meat/chicken
-	meat_amount = 2
-	skin_material = /decl/material/solid/organic/skin/feathers
+	butchery_data = /decl/butchery_data/animal/small/fowl
 	speak_chance = 2
 	turns_per_move = 3
 	abstract_type = /mob/living/simple_animal/fowl
@@ -225,6 +204,7 @@ var/global/chicken_count = 0
 	emote_speech = list("Cluck!","BWAAAAARK BWAK BWAK BWAK!","Bwaak bwak.")
 	emote_hear   = list("clucks")
 	emote_see    = list("pecks at the ground","flaps its wings viciously")
+	butchery_data = /decl/butchery_data/animal/small/fowl/chicken
 	var/eggsleft = 0
 
 /mob/living/simple_animal/fowl/chicken/Initialize()
@@ -250,9 +230,9 @@ var/global/chicken_count = 0
 		global.chicken_count -= 1
 
 /mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/chems/food/grown)) //feedin' dem chickens
-		var/obj/item/chems/food/grown/G = O
-		if(G.seed && G.seed.kitchen_tag == "wheat")
+	if(istype(O, /obj/item/chems/food)) //feedin' dem chickens
+		var/obj/item/chems/food/G = O
+		if(findtext(G.get_grown_tag(), "wheat")) // includes chopped, crushed, dried etc.
 			if(!stat && eggsleft < 8)
 				user.visible_message("<span class='notice'>[user] feeds [O] to [name]! It clucks happily.</span>","<span class='notice'>You feed [O] to [name]! It clucks happily.</span>")
 				qdel(O)
@@ -286,6 +266,7 @@ var/global/chicken_count = 0
 	emote_speech = list("Wak!","Wak wak wak!","Wak wak.")
 	emote_hear   = list("quacks")
 	emote_see    = list("preens itself", "waggles its tail")
+	butchery_data = /decl/butchery_data/animal/small/fowl/duck
 
 /mob/living/simple_animal/fowl/duck/Initialize()
 	. = ..()

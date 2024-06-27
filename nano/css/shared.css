@@ -823,3 +823,151 @@ th.bot {
 	border-width: 1px;
 	border-color: #000000;
 }
+
+/***********************************
+	Fancy OS-like Button
+************************************/
+
+/* A button that looks like an operating system button */
+.linkBtnOS,
+.linkBtnOS:hover,
+.linkBtnOSDark,
+.linkBtnOSDark:hover,
+.linkBtnOSRed,
+.linkBtnOSRed:hover {
+	float: none;
+	min-width: 1em;
+	height: 1em;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: none;
+	white-space: nowrap;
+	cursor: pointer;
+	border: none;
+	color: hsl(0, 0%, 20%);
+	background: hsl(0, 0%, 55%);
+	outline: 1px dotted hsl(0, 0%, 15%);
+	outline-offset: -4px;
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 16%),
+		inset  1px  1px hsl(0, 0%, 80%),
+		inset -2px -2px hsl(0, 0%, 62%),
+		inset  2px  2px hsl(0, 0%, 80%);
+	padding: 0.5em 1em;
+	margin: 0 2px 2px 0;
+}
+/**Button pressed */
+.linkBtnOS:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 80%),
+		inset  1px  1px hsl(0, 0%, 16%),
+		inset -2px -2px hsl(0, 0%, 80%),
+		inset  2px  2px hsl(0, 0%, 62%);
+}
+/**Button disabled */
+.linkBtnOS.disabled,
+.linkBtnOS.inactive,
+.linkBtnOS:disabled {
+	color: hsl(0, 0%, 45%);
+	background: hsl(0, 0%, 55%);
+	outline: 1px dotted hsl(0, 0%, 40%);
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 36%),
+		inset  1px  1px hsl(0, 0%, 70%),
+		inset -2px -2px hsl(0, 0%, 52%),
+		inset  2px  2px hsl(0, 0%, 70%);
+}
+/**Button pressed + disabled */
+.linkBtnOS.disabled:active,
+.linkBtnOS.inactive:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 70%),
+		inset  1px  1px hsl(0, 0%, 16%),
+		inset -2px -2px hsl(0, 0%, 70%),
+		inset  2px  2px hsl(0, 0%, 30%);
+}
+
+/*****************
+ * Darker variant
+ *****************/
+.linkBtnOSDark,
+.linkBtnOSDark:hover{
+	color: hsl(0, 0%, 65%);
+	background: hsl(0, 0%, 35%);
+	outline: 1px dotted hsl(0, 0%, 45%);
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 8%),
+		inset  1px  1px hsl(0, 0%, 60%),
+		inset -2px -2px hsl(0, 0%, 32%),
+		inset  2px  2px hsl(0, 0%, 60%);
+}
+.linkBtnOSDark:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 60%),
+		inset  1px  1px hsl(0, 0%, 8%),
+		inset -2px -2px hsl(0, 0%, 60%),
+		inset  2px  2px hsl(0, 0%, 32%);
+}
+.linkBtnOSDark.disabled,
+.linkBtnOSDark.inactive,
+.linkBtnOSDark:disabled {
+	color: hsl(0, 0%, 38%);
+	background: hsl(0, 0%, 45%);
+	outline: 1px dotted hsl(0, 0%, 60%);
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 8%),
+		inset  1px  1px hsl(0, 0%, 50%),
+		inset -2px -2px hsl(0, 0%, 32%),
+		inset  2px  2px hsl(0, 0%, 50%);
+}
+.linkBtnOSDark.disabled:active,
+.linkBtnOSDark.inactive:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 50%),
+		inset  1px  1px hsl(0, 0%, 8%),
+		inset -2px -2px hsl(0, 0%, 50%),
+		inset  2px  2px hsl(0, 0%, 25%);
+}
+
+/*******************
+ * Dark Red Variant
+ *******************/
+.linkBtnOSRed,
+.linkBtnOSRed:hover{
+	color: hsl(20, 50%, 65%);
+	background: hsl(20, 70%, 35%);
+	outline: 1px dotted hsl(20, 40%, 45%);
+	box-shadow:
+		inset -1px -1px hsl(20, 50%, 8%),
+		inset  1px  1px hsl(20, 50%, 60%),
+		inset -2px -2px hsl(20, 50%, 32%),
+		inset  2px  2px hsl(20, 50%, 60%);
+}
+.linkBtnOSRed:active {
+	box-shadow:
+		inset -1px -1px hsl(20, 50%, 60%),
+		inset  1px  1px hsl(20, 50%, 8%),
+		inset -2px -2px hsl(20, 50%, 60%),
+		inset  2px  2px hsl(20, 50%, 32%);
+}
+.linkBtnOSRed.disabled,
+.linkBtnOSRed.inactive,
+.linkBtnOSRed:disabled {
+	color: hsl(20, 20%, 28%);
+	background: hsl(20, 40%, 35%);
+	outline: 1px dotted hsl(20, 20%, 40%);
+	box-shadow:
+		inset -1px -1px hsl(20, 20%, 8%),
+		inset  1px  1px hsl(20, 20%, 50%),
+		inset -2px -2px hsl(20, 20%, 32%),
+		inset  2px  2px hsl(20, 20%, 50%);
+}
+.linkBtnOSRed.disabled:active,
+.linkBtnOSRed.inactive:active {
+	box-shadow:
+		inset -1px -1px hsl(20, 20%, 50%),
+		inset  1px  1px hsl(20, 20%, 8%),
+		inset -2px -2px hsl(20, 20%, 50%),
+		inset  2px  2px hsl(20, 20%, 25%);
+}

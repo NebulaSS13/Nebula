@@ -37,11 +37,11 @@
 		work_modes = h.children
 	work_mode = work_modes[1]
 
-/obj/item/rcd/attack()
-	return 0
+/obj/item/rcd/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/rcd/proc/can_use(var/mob/user,var/turf/T)
-	return (user.Adjacent(T) && user.get_active_hand() == src && !user.incapacitated())
+	return (user.Adjacent(T) && user.get_active_held_item() == src && !user.incapacitated())
 
 /obj/item/rcd/examine(mob/user)
 	. = ..()
@@ -52,9 +52,6 @@
 /obj/item/rcd/Initialize()
 	. = ..()
 	update_icon()	//Initializes the ammo counter
-
-/obj/item/rcd/Destroy()
-	return ..()
 
 /obj/item/rcd/attackby(obj/item/W, mob/user)
 
@@ -136,9 +133,9 @@
 // TODO: make this use actual matter.
 /obj/item/rcd_ammo/create_matter()
 	// Formula: 3 MU per wall == 6 steel sheets == 2 sheets per MU, /2 for glass and steel, with a
-	// discount for the outlay of materials (and to make the final costs less obscene). Technically 
-	// this means you can generate steel from nothing by building walls with an RCD and then 
-	// deconstructing them but until we have a unified matter/material system on /atom I think we're 
+	// discount for the outlay of materials (and to make the final costs less obscene). Technically
+	// this means you can generate steel from nothing by building walls with an RCD and then
+	// deconstructing them but until we have a unified matter/material system on /atom I think we're
 	// just going to have to cop it.
 	var/sheets = round((remaining * SHEET_MATERIAL_AMOUNT) * 0.75)
 	matter = list(
@@ -263,7 +260,7 @@
 /decl/hierarchy/rcd_mode/airlock/basic
 	cost = 10
 	delay = 5 SECONDS
-	handles_type = /turf/simulated/floor
+	handles_type = /turf/floor
 	work_type = /obj/machinery/door/airlock
 
 /decl/hierarchy/rcd_mode/airlock/basic/can_handle_work(var/rcd, var/turf/target)
@@ -278,7 +275,7 @@
 /decl/hierarchy/rcd_mode/floor_and_walls/base_turf
 	cost = 1
 	delay = 2 SECONDS
-	work_type = /turf/simulated/floor/airless
+	work_type = /turf/floor/airless
 
 /decl/hierarchy/rcd_mode/floor_and_walls/base_turf/can_handle_work(var/rcd, var/turf/target)
 	return istype(target) && (isspaceturf(target) || istype(target, get_base_turf_by_area(target)))
@@ -286,8 +283,8 @@
 /decl/hierarchy/rcd_mode/floor_and_walls/floor_turf
 	cost = 3
 	delay = 2 SECONDS
-	handles_type = /turf/simulated/floor
-	work_type = /turf/simulated/wall
+	handles_type = /turf/floor
+	work_type = /turf/wall
 
 /*
 	Deconstruction
@@ -306,7 +303,7 @@
 /decl/hierarchy/rcd_mode/deconstruction/floor
 	cost = 9
 	delay = 2 SECONDS
-	handles_type = /turf/simulated/floor
+	handles_type = /turf/floor
 
 /decl/hierarchy/rcd_mode/deconstruction/floor/get_work_result(var/target)
 	return get_base_turf_by_area(target)
@@ -314,8 +311,8 @@
 /decl/hierarchy/rcd_mode/deconstruction/wall
 	cost = 9
 	delay = 2 SECONDS
-	handles_type = /turf/simulated/wall
-	work_type = /turf/simulated/floor
+	handles_type = /turf/wall
+	work_type = /turf/floor
 
-/decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/rcd/rcd, var/turf/simulated/wall/target)
+/decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/rcd/rcd, var/turf/wall/target)
 	return ..() && (rcd.canRwall || !target.reinf_material)

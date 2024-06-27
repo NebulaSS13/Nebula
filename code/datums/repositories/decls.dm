@@ -24,7 +24,9 @@ var/global/repository/decls/decls_repository = new
 	var/list/fetched_decls =                 list()
 	var/list/fetched_decl_ids =              list()
 	var/list/fetched_decl_types =            list()
+	var/list/fetched_decl_instances =        list()
 	var/list/fetched_decl_subtypes =         list()
+	var/list/fetched_decl_subinstances =     list()
 	var/list/fetched_decl_paths_by_type =    list()
 	var/list/fetched_decl_paths_by_subtype = list()
 
@@ -114,13 +116,29 @@ var/global/repository/decls/decls_repository = new
 		if(decl)
 			. += decl
 
+/repository/decls/proc/get_decls_of_type_unassociated(var/decl_prototype)
+	RETURN_TYPE(/list)
+	. = fetched_decl_instances[decl_prototype]
+	if(!.)
+		. = get_decls_unassociated(typesof(decl_prototype))
+		fetched_decl_instances[decl_prototype] = .
+
+/repository/decls/proc/get_decls_of_subtype_unassociated(var/decl_prototype)
+	RETURN_TYPE(/list)
+	. = fetched_decl_subinstances[decl_prototype]
+	if(!.)
+		. = get_decls_unassociated(subtypesof(decl_prototype))
+		fetched_decl_subinstances[decl_prototype] = .
+
 /repository/decls/proc/get_decls_of_type(var/decl_prototype)
+	RETURN_TYPE(/list)
 	. = fetched_decl_types[decl_prototype]
 	if(!.)
 		. = get_decls(typesof(decl_prototype))
 		fetched_decl_types[decl_prototype] = .
 
 /repository/decls/proc/get_decls_of_subtype(var/decl_prototype)
+	RETURN_TYPE(/list)
 	. = fetched_decl_subtypes[decl_prototype]
 	if(!.)
 		. = get_decls(subtypesof(decl_prototype))

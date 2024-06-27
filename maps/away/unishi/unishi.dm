@@ -8,7 +8,6 @@
 
 /decl/submap_archetype/derelict/unishi
 	descriptor = "derelict research vessel"
-	map = "SRV Verne"
 	crew_jobs = list(
 		/datum/job/submap/unishi_crew,
 		/datum/job/submap/unishi_researcher
@@ -28,7 +27,7 @@
 
 /datum/map_template/ruin/away_site/unishi
 	name = "University Ship"
-	description = "CTI research ship.."
+	description = "CTI research ship."
 	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
 	cost = 2
 	area_usage_test_exempted_root_areas = list(/area/unishi)

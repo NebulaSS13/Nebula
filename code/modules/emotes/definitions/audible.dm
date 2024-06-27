@@ -33,7 +33,7 @@
 
 /decl/emote/audible/gnarl
 	key = "gnarl"
-	emote_message_3p = "$USER$ gnarls and shows its teeth.."
+	emote_message_3p = "$USER$ gnarls and shows its teeth."
 
 /decl/emote/audible/multichirp
 	key = "mchirp"
@@ -65,10 +65,6 @@
 	emote_message_1p = "You boop."
 	emote_message_3p = "$USER$ boops."
 
-/decl/emote/audible/sneeze
-	key = "sneeze"
-	emote_message_3p = "$USER$ sneezes."
-
 /decl/emote/audible/sniff
 	key = "sniff"
 	emote_message_3p = "$USER$ sniffs."
@@ -93,21 +89,6 @@
 /decl/emote/audible/chuckle
 	key = "chuckle"
 	emote_message_3p = "$USER$ chuckles."
-
-/decl/emote/audible/cough
-	key = "cough"
-
-/decl/emote/audible/cough/mob_can_use(mob/living/user, assume_available = FALSE)
-	. = ..()
-	if(.)
-		var/obj/item/organ/internal/lungs/lung = user.get_organ(BP_LUNGS)
-		. = lung?.active_breathing && !user.isSynthetic()
-
-/decl/emote/audible/cough/do_emote(var/mob/living/carbon/user, var/extra_params)
-	if(!istype(user))
-		to_chat(user, SPAN_WARNING("You are unable to cough."))
-		return
-	user.cough(deliberate = TRUE)
 
 /decl/emote/audible/cry
 	key = "cry"
@@ -144,23 +125,9 @@
 	key = "giggle"
 	emote_message_3p = "$USER$ giggles."
 
-/decl/emote/audible/scream
-	key = "scream"
-	emote_message_3p = "$USER$ screams!"
-
 /decl/emote/audible/grunt
 	key = "grunt"
 	emote_message_3p = "$USER$ grunts."
-
-/decl/emote/audible/slap
-	key = "slap"
-	emote_message_1p_target = "<span class='warning'>You slap $TARGET$ across the face!</span>"
-	emote_message_1p = "You slap yourself across the face!"
-	emote_message_3p_target = "<span class='warning'>$USER$ slaps $TARGET$ across the face!</span>"
-	emote_message_3p = "$USER$ slaps $USER_SELF$ across the face!"
-	emote_sound = 'sound/effects/snap.ogg'
-	check_restraints = TRUE
-	check_range = 1
 
 /decl/emote/audible/bug_hiss
 	key = "bughiss"

@@ -154,7 +154,7 @@
 
 /obj/machinery/ftl_shunt/core/physical_attack_hand(var/mob/user)
 	if(sabotaged)
-		var/mob/living/carbon/human/h_user = user
+		var/mob/living/human/h_user = user
 		if(!istype(h_user))
 			return TRUE
 		var/skill_delay = user.skill_delay_mult(SKILL_ENGINES, 0.3)
@@ -222,7 +222,7 @@
 		return FTL_START_FAILURE_FUEL
 
 	if(sabotaged)
-		for(var/mob/living/carbon/human/H in global.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
+		for(var/mob/living/human/H in global.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
 			if(!(H.z in ftl_computer.linked.map_z))
 				continue
 			if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
@@ -284,7 +284,7 @@
 		addtimer(CALLBACK(src, PROC_REF(do_shunt), shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 		jumping = TRUE
 		update_icon()
-		for(var/mob/living/carbon/M in global.living_mob_list_)
+		for(var/mob/living/M in global.living_mob_list_)
 			if(!(M.z in ftl_computer.linked.map_z))
 				continue
 			sound_to(M, 'sound/machines/hyperspace_begin.ogg')
@@ -311,7 +311,7 @@
 	else
 		shunt_sev = SHUNT_SEVERITY_CRITICAL
 
-	for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
+	for(var/mob/living/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
 		sound_to(H, 'sound/machines/hyperspace_end.ogg')
 
 		if(!(H.z in ftl_computer.linked.map_z))
@@ -373,7 +373,7 @@
 				if(prob(50))
 					A.overload_lighting(50)
 
-/obj/machinery/ftl_shunt/core/proc/handle_spacefloat(var/mob/living/carbon/human/H)
+/obj/machinery/ftl_shunt/core/proc/handle_spacefloat(var/mob/living/human/H)
 	if(!H.check_space_footing())
 		 //Flip a coin ...
 		to_chat(H, SPAN_WARNING("Being untethered from a ship entering FTL is a bad idea, but you roll the dice..."))
@@ -391,7 +391,7 @@
 	switch(sabotaged)
 		if(SHUNT_SABOTAGE_MINOR)
 			announcetxt = shunt_sabotage_text_minor
-			for(var/mob/living/carbon/human/H in view(7))
+			for(var/mob/living/human/H in view(7))
 				H.show_message(SPAN_DANGER("\The [src] emits a flash of incredibly bright, searing light!"), VISIBLE_MESSAGE)
 				H.flash_eyes(FLASH_PROTECTION_NONE)
 			empulse(src, 8, 10)
@@ -416,7 +416,7 @@
 					continue
 				A.energy_fail(rand(100,120))
 
-			for(var/mob/living/carbon/human/H in view(7)) //scary text if you're in view, because you're fucked now boy.
+			for(var/mob/living/human/H in view(7)) //scary text if you're in view, because you're fucked now boy.
 				H.show_message(SPAN_DANGER("The light around \the [src] warps before it emits a flash of incredibly bright, searing light!"), VISIBLE_MESSAGE)
 				H.flash_eyes(FLASH_PROTECTION_NONE)
 

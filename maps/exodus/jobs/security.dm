@@ -85,7 +85,7 @@
 	)
 	event_categories = list(ASSIGNMENT_SECURITY)
 
-/datum/job/hos/equip_job(var/mob/living/carbon/human/H)
+/datum/job/hos/equip_job(var/mob/living/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(H)

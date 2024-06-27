@@ -14,38 +14,11 @@
 			var/decl/cultural_info/current_culture = GET_DECL(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
-	return capitalize(pick(gender == FEMALE ? global.first_names_female : global.first_names_male)) + " " + capitalize(pick(global.last_names))
+	return capitalize(pick(gender == FEMALE ? global.using_map.first_names_female : global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 /proc/random_skin_tone(var/decl/bodytype/current_bodytype)
-	var/bodytype_tone = current_bodytype ? 35 - current_bodytype.max_skin_tone() : -185
-	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
-		if("caucasian")		. = -10
-		if("afroamerican")	. = -115
-		if("african")		. = -165
-		if("latino")		. = -55
-		if("albino")		. = 34
-		else				. = rand(bodytype_tone,34)
-
-	return min(max(. + rand(-25, 25), bodytype_tone), 34)
-
-/proc/skintone2racedescription(tone)
-	switch (tone)
-		if(30 to INFINITY)		return "albino"
-		if(20 to 30)			return "pale"
-		if(5 to 15)				return "light skinned"
-		if(-10 to 5)			return "white"
-		if(-25 to -10)			return "tan"
-		if(-45 to -25)			return "darker skinned"
-		if(-65 to -45)			return "brown"
-		if(-INFINITY to -65)	return "black"
-		else					return "unknown"
-
-/proc/RoundHealth(health)
-	var/list/icon_states = icon_states('icons/mob/hud_med.dmi')
-	for(var/icon_state in icon_states)
-		if(health >= text2num(icon_state))
-			return icon_state
-	return icon_states[icon_states.len] // If we had no match, return the last element
+	var/adjusted_max_skin_tone = current_bodytype ? 35 - current_bodytype.max_skin_tone() : -185
+	return clamp(rand(current_bodytype ? 35 - current_bodytype.max_skin_tone() : -185, 34), adjusted_max_skin_tone, 34)
 
 //checks whether this item is a module of the robot it is located in.
 /proc/is_robot_module(var/obj/item/thing)
@@ -72,7 +45,7 @@
 
 	var/target_loc = target.loc
 
-	var/holding = check_holding && user.get_active_hand()
+	var/holding = check_holding && user.get_active_held_item()
 	var/datum/progressbar/progbar
 	if (progress)
 		progbar = new(user, time, target)
@@ -102,7 +75,7 @@
 			. = 0
 			break
 
-		if(check_holding && user.get_active_hand() != holding)
+		if(check_holding && user.get_active_held_item() != holding)
 			. = 0
 			break
 
@@ -131,7 +104,7 @@
 	if(!user.Process_Spacemove(0) && user.inertia_dir)
 		drifting = 1
 
-	var/holding = user.get_active_hand()
+	var/holding = user.get_active_held_item()
 
 	var/datum/progressbar/progbar
 	if (progress)
@@ -165,7 +138,7 @@
 			break
 
 		if(check_holding)
-			if(user.get_active_hand() != holding)
+			if(user.get_active_held_item() != holding)
 				. = 0
 				break
 
@@ -236,7 +209,7 @@
 				continue
 			//They need a brain!
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				if(H.should_have_organ(BP_BRAIN) && !H.has_brain())
 					continue
 			if(M.ckey == find_key)

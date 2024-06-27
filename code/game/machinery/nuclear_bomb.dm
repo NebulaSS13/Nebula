@@ -229,7 +229,7 @@ var/global/bomb_set
 			yes_code = 0
 			auth = null
 		else
-			var/obj/item/I = usr.get_active_hand()
+			var/obj/item/I = usr.get_active_held_item()
 			if(istype(I, /obj/item/disk/nuclear))
 				if(!usr.try_unequip(I, src))
 					return 1
@@ -390,10 +390,10 @@ var/global/bomb_set
 	return ..()
 
 //====the nuclear football (holds the disk and instructions)====
-/obj/item/storage/secure/briefcase/nukedisk
+/obj/item/secure_storage/briefcase/nukedisk
 	desc = "A large briefcase with a digital locking system."
 
-/obj/item/storage/secure/briefcase/nukedisk/WillContain()
+/obj/item/secure_storage/briefcase/nukedisk/WillContain()
 	return list(
 		/obj/item/disk/nuclear,
 		/obj/item/pinpointer,
@@ -401,7 +401,7 @@ var/global/bomb_set
 		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap
 	)
 
-/obj/item/storage/secure/briefcase/nukedisk/examine(mob/user)
+/obj/item/secure_storage/briefcase/nukedisk/examine(mob/user)
 	. = ..()
 	to_chat(user,"On closer inspection, you see \a [global.using_map.company_name] emblem is etched into the front of it.")
 
@@ -461,7 +461,7 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
-	for(var/turf/simulated/floor/T in get_area(src))
+	for(var/turf/floor/T in get_area(src))
 		if(istype(T.flooring, /decl/flooring/reinforced/circuit/red))
 			flash_tiles += T
 	update_icon()
@@ -546,7 +546,7 @@ var/global/bomb_set
 
 	if(!last_turf_state || target_icon_state != last_turf_state)
 		for(var/thing in flash_tiles)
-			var/turf/simulated/floor/T = thing
+			var/turf/floor/T = thing
 			if(!istype(T.flooring, /decl/flooring/reinforced/circuit/red))
 				flash_tiles -= T
 				continue

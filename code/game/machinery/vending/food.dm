@@ -11,8 +11,8 @@
 	base_type = /obj/machinery/vending/snack
 	products = list(
 		/obj/item/clothing/mask/chewable/candy/lolli = 8,
-		/obj/item/storage/chewables/candy/gum = 4,
-		/obj/item/storage/chewables/candy/cookies = 4,
+		/obj/item/chewables/candy/gum = 4,
+		/obj/item/chewables/candy/cookies = 4,
 		/obj/item/chems/food/candy = 6,
 		/obj/item/chems/drinks/dry_ramen = 6,
 		/obj/item/chems/food/chips = 6,
@@ -26,7 +26,7 @@
 		/obj/item/chems/food/syndicake = 6
 	)
 
-//a food variant of the boda machine - It carries slavic themed foods.. Mostly beer snacks
+//a food variant of the boda machine - It carries slavic themed foods. Mostly beer snacks
 /obj/machinery/vending/snix
 	name = "Snix"
 	desc = "An old snack vending machine, how did it get here? And are the snacks still good?"
@@ -257,9 +257,9 @@
 		/obj/item/chems/drinks/glass2/fitnessflask/proteinshake = 8,
 		/obj/item/chems/drinks/glass2/fitnessflask = 8,
 		/obj/item/chems/food/candy/proteinbar = 8,
-		/obj/item/storage/mre/random = 8,
-		/obj/item/storage/mre/menu9 = 4,
-		/obj/item/storage/mre/menu10 = 4,
+		/obj/item/mre/random = 8,
+		/obj/item/mre/menu9 = 4,
+		/obj/item/mre/menu10 = 4,
 		/obj/item/towel/random = 8
 	)
 	contraband = list(/obj/item/chems/syringe/steroid = 4)

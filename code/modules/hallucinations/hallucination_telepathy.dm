@@ -6,19 +6,19 @@
 /datum/hallucination/telepathy/start()
 	. = ..()
 	to_chat(holder, SPAN_NOTICE("You expand your mind outwards."))
-	holder.verbs += /mob/living/carbon/human/proc/fakeremotesay
+	holder.verbs += /mob/living/human/proc/fakeremotesay
 
 /datum/hallucination/telepathy/end()
 	. = ..()
 	if(holder)
-		holder.verbs -= /mob/living/carbon/human/proc/fakeremotesay
+		holder.verbs -= /mob/living/human/proc/fakeremotesay
 
-/mob/living/carbon/human/proc/fakeremotesay()
+/mob/living/human/proc/fakeremotesay()
 	set name = "Telepathic Message"
 	set category = "Superpower"
 
 	if(!hallucination_power)
-		src.verbs -= /mob/living/carbon/human/proc/fakeremotesay
+		src.verbs -= /mob/living/human/proc/fakeremotesay
 		return
 
 	if(stat)
@@ -29,8 +29,8 @@
 		to_chat(usr, SPAN_WARNING("Chemicals in your blood prevent you from using your power!"))
 
 	var/list/creatures = list()
-	for(var/mob/living/carbon/C in SSmobs.mob_list)
-		creatures += C
+	for(var/mob/living/creature in SSmobs.mob_list)
+		creatures += creature
 	creatures -= usr
 	var/mob/target = input("Who do you want to project your mind to?") as null|anything in creatures
 	if (isnull(target))

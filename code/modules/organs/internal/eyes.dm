@@ -31,18 +31,20 @@
 	organ_properties = ORGAN_PROP_PROSTHETIC
 	icon = 'icons/obj/robot_component.dmi'
 
-/obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
+/obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
 	. = ..()
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
+	var/modifier = owner?.get_overlay_state_modifier()
+	var/eye_state = modifier ? "eyes[modifier]" : "eyes"
 	last_cached_eye_colour = eye_colour
-	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
+	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]-[eye_state]"
 	if(!bodytype.eye_icon)
 		return
 	if(!global.eye_icon_cache[last_eye_cache_key])
-		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = "")
+		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = eye_state)
 		if(bodytype.eye_offset)
 			eyes_icon.Shift(NORTH, bodytype.eye_offset)
 		if(bodytype.apply_eye_colour)
@@ -88,7 +90,7 @@
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1
 
-/obj/item/organ/internal/eyes/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
+/obj/item/organ/internal/eyes/do_install(mob/living/human/target, affected, in_place, update_icon, detached)
 	// Apply our eye colour to the target.
 	if(istype(target) && eye_colour)
 		target.set_eye_colour(eye_colour, skip_update = TRUE)
@@ -118,9 +120,6 @@
 		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	update_colour()
-
-/obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
-	return "retinal overlayed [name]"
 
 /obj/item/organ/internal/eyes/proc/change_eye_color_verb()
 	set name = "Change Eye Color"

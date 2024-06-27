@@ -238,3 +238,20 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	flash_protection = FLASH_PROTECTION_MAJOR
+
+/obj/item/clothing/head/headband
+	name = "headband"
+	desc = "It's a simple headband."
+	icon = 'icons/clothing/head/headband.dmi'
+	material = /decl/material/solid/organic/leather
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
+/obj/item/clothing/head/hood
+	name = "hood"
+	icon = 'icons/clothing/head/hood_craftable.dmi'
+	body_parts_covered = SLOT_HEAD
+	min_cold_protection_temperature = T0C - 20
+	cold_protection = SLOT_HEAD
+	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
+	material = /decl/material/solid/organic/cloth
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC

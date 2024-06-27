@@ -95,11 +95,11 @@ var/global/list/rpd_pipe_selection_skilled = list()
 	. = list()
 	. += "<table>"
 	if(color_options)
-		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
+		. += "<tr><td>Color</td><td><a href='byond://?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
 	for(var/category in pipe_categories)
 		. += "<tr><td><font color = '#517087'><strong>[category]</strong></font></td></tr>"
 		for(var/datum/fabricator_recipe/pipe/pipe in pipe_categories[category])
-			. += "<tr><td>[pipe.name]</td><td>[P.type == pipe.type ? "<span class='linkOn'>Select</span>" : "<a href='?src=\ref[src];select=\ref[pipe]'>Select</a>"]</td></tr>"
+			. += "<tr><td>[pipe.name]</td><td>[P.type == pipe.type ? "<span class='linkOn'>Select</span>" : "<a href='byond://?src=\ref[src];select=\ref[pipe]'>Select</a>"]</td></tr>"
 	.+= "</table>"
 	. = JOINTEXT(.)
 

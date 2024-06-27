@@ -1,13 +1,13 @@
 /datum/unit_test/vision_glasses
 	name = "EQUIPMENT: Vision Template"
 	template = /datum/unit_test/vision_glasses
-	var/mob/living/carbon/human/H = null
+	var/mob/living/human/H = null
 	var/expectation = SEE_INVISIBLE_NOLIGHTING
 	var/glasses_type = null
 	async = 1
 
 /datum/unit_test/vision_glasses/start_test()
-	var/list/test = create_test_mob_with_mind(get_safe_turf(), /mob/living/carbon/human)
+	var/list/test = create_test_mob_with_mind(get_safe_turf(), /mob/living/human)
 	if(isnull(test))
 		fail("Check Runtimed in Mob creation")
 
@@ -58,11 +58,13 @@
 /datum/unit_test/storage_capacity_test/start_test()
 	var/bad_tests = 0
 
-	// obj/item/storage/internal cannot be tested sadly, as they expect their host object to create them
-	for(var/storage_type in subtypesof(/obj/item/storage) - typesof(/obj/item/storage/internal))
-		var/obj/item/storage/S = new storage_type(null) //should be fine to put it in nullspace...
-		var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\]"
-		bad_tests += test_storage_capacity(S, bad_msg)
+	for(var/storage_type in typesof(/obj))
+		var/obj/thing = storage_type
+		if(TYPE_IS_ABSTRACT(thing) || !ispath(initial(thing.storage), /datum/storage))
+			continue
+		thing = new thing //should be fine to put it in nullspace...
+		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type] | [thing.storage]\]"
+		bad_tests += test_storage_capacity(thing.storage, bad_msg)
 
 	if(bad_tests)
 		fail("\[[bad_tests]\] Some storage item types were not able to hold their default initial contents.")
@@ -71,26 +73,33 @@
 
 	return 1
 
-/proc/test_storage_capacity(obj/item/storage/S, var/bad_msg)
+/proc/test_storage_capacity(datum/storage/storage, bad_msg)
 	var/bad_tests = 0
-
-	if(!isnull(S.storage_slots) && S.contents.len > S.storage_slots)
-		log_unit_test("[bad_msg] Contains more items than it has slots for ([S.contents.len] / [S.storage_slots]). [ascii_reset]")
+	var/list/contents = storage?.get_contents()
+	var/atom/movable/thing = storage?.holder
+	if(!istype(thing))
+		log_unit_test("[bad_msg] Null or invalid storage holder [istype(thing, /datum) ? thing.type : (thing || "NULL")]. [ascii_reset]")
+	else if(isnull(storage))
+		log_unit_test("[bad_msg] Null storage extension. [ascii_reset]")
+		bad_tests++
+	else if(!isnull(storage.storage_slots) && length(contents) > storage.storage_slots)
+		log_unit_test("[bad_msg] Contains more items than it has slots for ([length(contents)] / [storage.storage_slots]). [ascii_reset]")
 		bad_tests++
 
-	var/total_storage_space = 0
-	for(var/obj/item/I in S.contents)
-		if(I.w_class > S.max_w_class)
-			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [S.max_w_class]). [ascii_reset]")
-			bad_tests++
-		if(istype(I, /obj/item/storage) && I.w_class >= S.w_class)
-			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [S.w_class]). [ascii_reset]")
-			bad_tests++
-		total_storage_space += I.get_storage_cost()
+	if(thing && storage)
+		var/total_storage_space = 0
+		for(var/obj/item/I in contents)
+			if(I.w_class > storage.max_w_class)
+				log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [storage.max_w_class]). [ascii_reset]")
+				bad_tests++
+			if(I.storage && I.w_class >= thing.get_object_size())
+				log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [thing.get_object_size()]). [ascii_reset]")
+				bad_tests++
+			total_storage_space += I.get_storage_cost()
 
-	if(total_storage_space > S.max_storage_space)
-		log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [S.max_storage_space]). [ascii_reset]")
-		bad_tests++
+		if(total_storage_space > storage.max_storage_space)
+			log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [storage.max_storage_space]). [ascii_reset]")
+			bad_tests++
 
 	return bad_tests
 
@@ -106,8 +115,8 @@
 	..()
 	/// Ordering is important here, dependencies like ID should be after uniform, etc.
 	slot_to_valid_type = list(
-		"[slot_w_uniform_str]" = /obj/item/clothing/under/lawyer/purpsuit,
-		"[slot_back_str]"      = /obj/item/storage/backpack/clown,
+		"[slot_w_uniform_str]" = /obj/item/clothing/costume/clown,
+		"[slot_back_str]"      = /obj/item/backpack/clown,
 		"[slot_wear_id_str]"   = /obj/item/card/id,
 		"[slot_glasses_str]"   = /obj/item/clothing/glasses/meson,
 		"[slot_wear_mask_str]" = /obj/item/clothing/mask/gas/sexyclown,
@@ -116,11 +125,11 @@
 		"[slot_gloves_str]"    = /obj/item/clothing/gloves/rainbow,
 		"[slot_l_ear_str]"     = /obj/item/clothing/head/hairflower,
 		"[slot_r_ear_str]"     = /obj/item/clothing/head/hairflower,
-		"[slot_belt_str]"      = /obj/item/storage/ore, // note: this should be an item without ITEM_FLAG_IS_BELT
+		"[slot_belt_str]"      = /obj/item/ore, // note: this should be an item without ITEM_FLAG_IS_BELT
 		"[slot_wear_suit_str]" = /obj/item/clothing/suit/chickensuit
 	)
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_equip_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_equip_successful(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	created_atoms |= item
 	subject.equip_to_slot_if_possible(item, which_slot)
 	if(!subject.isEquipped(item))
@@ -129,13 +138,13 @@
 		var/equipped_location = subject.get_equipped_slot_for_item(item)
 		failure_list += "[item] was expected to be equipped to [which_slot] but get_equipped_slot_for_item returned [isnull(equipped_location) ? "NULL" : equipped_location]."
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_unequip_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_unequip_successful(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	created_atoms |= item
 	subject.try_unequip(item)
 	if(subject.isEquipped(item))
 		failure_list += "[item] remained equipped to [subject.get_equipped_slot_for_item(item)] after unEquip was called."
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_equip_failure(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_equip_failure(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	created_atoms |= item
 	subject.equip_to_slot_if_possible(item, which_slot)
 	if(subject.isEquipped(item))
@@ -146,7 +155,7 @@
 		failure_list += "[item] was equipped to [equipped_location] despite failing isEquipped (should not be equipped)."
 
 /datum/unit_test/equipment_slot_test/start_test()
-	var/mob/living/carbon/human/subject = new(get_safe_turf(), SPECIES_HUMAN) // force human so default map species doesn't mess with anything
+	var/mob/living/human/subject = new(get_safe_turf(), SPECIES_HUMAN) // force human so default map species doesn't mess with anything
 	created_atoms |= subject
 	var/list/failures = list()
 

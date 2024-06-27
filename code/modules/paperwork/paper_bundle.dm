@@ -45,7 +45,7 @@
 		return TRUE
 
 	// burning
-	else if(istype(W, /obj/item/flame))
+	else if(W.isflamesource())
 		burnpaper(W, user)
 		return TRUE
 
@@ -167,7 +167,7 @@
 /obj/item/paper_bundle/proc/burn_callback(var/obj/item/flame/P, var/mob/user, var/span_class)
 	if(QDELETED(P) || QDELETED(user))
 		return
-	if(!Adjacent(user) || user.get_active_hand() != P || !P.lit)
+	if(!Adjacent(user) || user.get_active_held_item() != P || !P.lit)
 		to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 		return
 	user.visible_message( \
@@ -176,10 +176,10 @@
 	new /obj/effect/decal/cleanable/ash(loc)
 	qdel(src)
 
-/obj/item/paper_bundle/proc/burnpaper(var/obj/item/flame/P, var/mob/user)
-	if(!P.lit || user.incapacitated())
+/obj/item/paper_bundle/proc/burnpaper(var/obj/item/P, var/mob/user)
+	if(!P.isflamesource() || user.incapacitated())
 		return
-	var/span_class = istype(P, /obj/item/flame/lighter/zippo) ? "rose" : "warning"
+	var/span_class = istype(P, /obj/item/flame/fuelled/lighter/zippo) ? "rose" : "warning"
 	var/decl/pronouns/G = user.get_pronouns()
 	user.visible_message( \
 		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!</span>", \
@@ -195,54 +195,54 @@
 
 /obj/item/paper_bundle/interact(mob/user)
 	var/dat
-	var/obj/item/W = LAZYACCESS(pages, cur_page)
+	var/obj/item/cur_page_item = LAZYACCESS(pages, cur_page)
 	//Header
 	dat = "<TABLE STYLE='white-space:nowrap; overflow:clip; width:100%; height:2em; table-layout:fixed;'><TR>"
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page > 1)
-		dat += "<A href='?src=\ref[src];first_page=1'>First</A>"
+		dat += "<A href='byond://?src=\ref[src];first_page=1'>First</A>"
 	else
 		dat += "First"
 	dat += "</TD>"
 
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page > 1)
-		dat += "<A href='?src=\ref[src];prev_page=1'>Previous</A>"
+		dat += "<A href='byond://?src=\ref[src];prev_page=1'>Previous</A>"
 	else
 		dat += "Previous"
 	dat += "</TD>"
 
-	dat += "<TD style='text-align:center;'><A href='?src=\ref[src];jump_to=1;'><B>[cur_page]/[length(pages)]</B></A> <A href='?src=\ref[src];remove=1'>Remove</A></TD>"
+	dat += "<TD style='text-align:center;'><A href='byond://?src=\ref[src];jump_to=1;'><B>[cur_page]/[length(pages)]</B></A> <A href='byond://?src=\ref[src];remove=1'>Remove</A></TD>"
 
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page < pages.len)
-		dat += "<A href='?src=\ref[src];next_page=1'>Next</A>"
+		dat += "<A href='byond://?src=\ref[src];next_page=1'>Next</A>"
 	else
 		dat += "Next"
 	dat += "</TD>"
 
 	dat += "<TD style='text-align:center;'>"
 	if(cur_page < pages.len)
-		dat += "<A href='?src=\ref[src];last_page=1'>Last</A>"
+		dat += "<A href='byond://?src=\ref[src];last_page=1'>Last</A>"
 	else
 		dat += "Last"
 	dat += "</TD>"
 	dat += "</TR></TABLE><HR>"
 
 	//Contents
-	if(istype(W, /obj/item/paper))
-		var/obj/item/paper/P = W
-		dat += "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamp_text]</BODY></HTML>"
+	if(istype(cur_page_item, /obj/item/paper))
+		var/obj/item/paper/cur_paper = cur_page_item
+		dat += "<HTML><HEAD><TITLE>[cur_paper.name]</TITLE></HEAD><BODY>[cur_paper.info][cur_paper.stamp_text]</BODY></HTML>"
 		show_browser(user, dat, "window=[name]")
 		onclose(user, name)
 
-	else if(istype(W, /obj/item/photo))
-		var/obj/item/photo/P = W
+	else if(istype(cur_page_item, /obj/item/photo))
+		var/obj/item/photo/cur_photo = cur_page_item
 		dat += {"
-			<html><head><title>[P.name]</title></head><body style='overflow:hidden'>
-			<div> <img src='tmp_photo.png' width = '180'[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : null ]</body></html>
+			<html><head><title>[cur_photo.name]</title></head><body style='overflow:hidden'>
+			<div> <img src='tmp_photo.png' width = '180'[cur_photo.scribble ? "<div> Written on the back:<br><i>[cur_photo.scribble]</i>" : null ]</body></html>
 		"}
-		send_rsc(user, P.img, "tmp_photo.png")
+		send_rsc(user, cur_photo.img, "tmp_photo.png")
 		show_browser(user, dat, "window=[name]")
 		onclose(user, name)
 	user.set_machine(src)
@@ -424,7 +424,7 @@
 /obj/item/paper_bundle/DefaultTopicState()
 	return global.paper_topic_state
 
-//We don't contain any matter, since we're not really a material thing..
+//We don't contain any matter, since we're not really a material thing.
 /obj/item/paper_bundle/create_matter()
 	UNSETEMPTY(matter)
 

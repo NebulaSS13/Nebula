@@ -3,7 +3,7 @@
 	icon_state = "spark"
 	temperature = T0C + 300
 	damage = 0
-	damage_type = BURN
+	atom_damage_type = BURN
 	damage_flags = 0
 	distance_falloff = 2.5
 
@@ -25,7 +25,7 @@
 	if(!istype(T)) return
 
 	//blind and confuse adjacent people
-	for (var/mob/living/carbon/M in viewers(T, flash_range))
+	for (var/mob/living/M in viewers(T, flash_range))
 		if(M.eyecheck() < FLASH_PROTECTION_MAJOR)
 			M.flash_eyes()
 			ADJ_STATUS(M, STAT_BLURRY, brightness / 2)
@@ -88,7 +88,7 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	agony = 50
 	damage = 2
-	damage_type = BURN
+	atom_damage_type = BURN
 	eyeblur = 1//Some feedback that you've been hit
 	step_delay = 0.7
 
@@ -104,21 +104,21 @@
 	icon_state = "declone"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	damage = 30
-	damage_type = CLONE
+	atom_damage_type = CLONE
 	irradiate = 40
 
 /obj/item/projectile/energy/dart
 	name = "dart"
 	icon_state = "toxin"
 	damage = 5
-	damage_type = TOX
+	atom_damage_type = TOX
 	weaken = 5
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
 	icon_state = "cbbolt"
 	damage = 10
-	damage_type = TOX
+	atom_damage_type = TOX
 	nodamage = 0
 	agony = 40
 	stutter = 10
@@ -132,7 +132,7 @@
 	name = "neuro"
 	icon_state = "neurotoxin"
 	damage = 5
-	damage_type = TOX
+	atom_damage_type = TOX
 	weaken = 5
 
 /obj/item/projectile/energy/radiation
@@ -140,7 +140,7 @@
 	icon_state = "energy"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 20
-	damage_type = TOX
+	atom_damage_type = TOX
 	irradiate = 20
 
 /obj/item/projectile/energy/plasmastun
@@ -151,13 +151,13 @@
 	life_span = 4
 	damage = 5
 	agony = 70
-	damage_type = BURN
+	atom_damage_type = BURN
 	vacuum_traversal = 0
 	var/min_dizziness_amt = 60
 	var/med_dizziness_amt = 120
 	var/max_dizziness_amt = 300
 
-/obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
+/obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/M)
 
 	if(!istype(M))
 		return
@@ -168,7 +168,7 @@
 	if(M.get_sound_volume_multiplier() < 0.2)
 		ear_safety += 2
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(istype(H.get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet))
 			ear_safety += 1
 
@@ -186,7 +186,7 @@
 		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
 		if(prob(GET_STATUS(M, STAT_TINNITUS) - 5))
 			to_chat(M, SPAN_DANGER("You can't hear anything!"))
-			M.set_sdisability(DEAFENED)
+			M.add_genetic_condition(GENE_COND_DEAFENED)
 	else
 		if(GET_STATUS(M, STAT_TINNITUS) >= 5)
 			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
@@ -201,7 +201,7 @@
 	fire_sound = 'sound/effects/basscannon.ogg'
 	damage = 5
 	armor_penetration = 40
-	damage_type = BRUTE
+	atom_damage_type = BRUTE
 	vacuum_traversal = 0
 	penetration_modifier = 0.2
 	penetrating = 1
@@ -209,7 +209,7 @@
 	med_dizziness_amt = 60
 	max_dizziness_amt = 120
 
-/obj/item/projectile/energy/plasmastun/sonic/bang(var/mob/living/carbon/M)
+/obj/item/projectile/energy/plasmastun/sonic/bang(var/mob/living/M)
 	..()
 	if(istype(M, /atom/movable) && M.simulated && !M.anchored)
 		M.throw_at(get_edge_target_turf(M, get_dir(src, M)), rand(1,5), 6)
@@ -227,4 +227,4 @@
 	fire_sound = 'sound/weapons/eLuger.ogg'
 	damage = 10
 	armor_penetration = 35
-	damage_type = BRUTE
+	atom_damage_type = BRUTE

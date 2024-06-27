@@ -6,13 +6,7 @@
 	natural_weapon = /obj/item/natural_weapon/bite/shark
 	break_stuff_probability = 15
 	faction = "sharks"
-
-	meat_type = /obj/item/chems/food/fish/shark
-	meat_amount = 5
-	bone_amount = 15
-	skin_amount = 15
-	bone_material = /decl/material/solid/organic/bone/cartilage
-	skin_material = /decl/material/solid/organic/skin/shark
+	butchery_data = /decl/butchery_data/animal/fish/shark
 
 /obj/item/natural_weapon/bite/shark
 	force = 20
@@ -31,10 +25,7 @@
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/giantshark
 	break_stuff_probability = 35
-
-	meat_amount = 10
-	bone_amount = 30
-	skin_amount = 30
+	butchery_data = /decl/butchery_data/animal/fish/shark/large
 
 /obj/item/natural_weapon/bite/giantshark
 	force = 40

@@ -25,3 +25,4 @@ var/global/list/all_objectives = list()
 			possible_targets += possible_target
 	if(possible_targets.len > 0)
 		target = pick(possible_targets)
+	return target

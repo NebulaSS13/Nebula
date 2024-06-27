@@ -45,10 +45,10 @@
 		if(length(label))
 			to_chat(user, "Its label text reads '[SPAN_ITALIC(label)]'.")
 	else
-		to_chat(user, SPAN_NOTICE("You're too far away to tell much more.."))
+		to_chat(user, SPAN_NOTICE("You're too far away to tell much more."))
 
-/obj/item/hand_labeler/attack(mob/living/M, mob/living/user, target_zone, animate)
-	return //No attacking
+/obj/item/hand_labeler/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/hand_labeler/afterattack(atom/movable/A, mob/user, proximity)
 	if(safety || !proximity || !istype(A) || A == loc)
@@ -91,7 +91,7 @@
 	update_icon()
 
 /obj/item/hand_labeler/proc/show_action_radial_menu(var/mob/user)
-	//#TODO: Cache some of that stuff..
+	//#TODO: Cache some of that stuff.
 	var/image/btn_power = image('icons/screen/radial.dmi', icon_state = safety? "radial_power" : "radial_power_off")
 	btn_power.plane = FLOAT_PLANE
 	btn_power.layer = FLOAT_LAYER
@@ -232,12 +232,12 @@
 	update_icon()
 	return TRUE
 
-/obj/item/hand_labeler/dump_contents()
+/obj/item/hand_labeler/dump_contents(atom/forced_loc = loc, mob/user)
 	. = ..()
 	//Dump label paper left
 	if(labels_left > 0)
 		var/decl/material/M = GET_DECL(/decl/material/solid/organic/paper)
-		var/turf/T          = get_turf(src)
+		var/turf/T          = get_turf(forced_loc)
 		var/total_sheets    = round((labels_left * LABEL_MATERIAL_COST) / SHEET_MATERIAL_AMOUNT)
 		var/leftovers       = round((labels_left * LABEL_MATERIAL_COST) % SHEET_MATERIAL_AMOUNT)
 		M.create_object(T, total_sheets)

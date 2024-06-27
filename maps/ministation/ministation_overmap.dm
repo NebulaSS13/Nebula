@@ -1,8 +1,6 @@
 /obj/effect/overmap/visitable/ship/ministation
-	name = "Space Station Zebra"
+	name = "Tradepost Zebra"
 	color = "#00ffff"
-	start_x = 4
-	start_y = 4
 	vessel_mass = 5000
 	max_speed = 1/(2 SECONDS)
 	burn_delay = 2 SECONDS
@@ -13,6 +11,7 @@
 		"nav_ministation_bridge_north",
 		"nav_ministation_arrivals_south"
 	)
+
 
 	//exploration and rescue shuttles can only dock port side, b/c there's only one door.
 	initial_restricted_waypoints = list(

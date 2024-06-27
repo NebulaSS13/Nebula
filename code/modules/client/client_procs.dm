@@ -125,11 +125,11 @@ var/global/list/localhost_addresses = list(
 
 	switch (connection)
 		if ("seeker", "web") // check for invalid connection type. do nothing if valid
+			pass()
 		else return null
 
 	deactivate_darkmode(clear_chat = FALSE) // Overwritten if the pref is set later.
 
-	#if DM_VERSION >= 512
 	var/bad_version = byond_version < get_config_value(/decl/config/num/minimum_byond_version)
 	var/bad_build   = byond_build < get_config_value(/decl/config/num/minimum_byond_build)
 
@@ -143,8 +143,6 @@ var/global/list/localhost_addresses = list(
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
-
-	#endif
 
 	var/local_connection = (get_config_value(/decl/config/toggle/on/auto_local_admin) && (isnull(address) || global.localhost_addresses[address]))
 	if(!local_connection)
@@ -678,7 +676,7 @@ var/global/const/MAX_VIEW = 41
 	// winget() does not work for F1 and F2
 	for(var/key in communication_hotkeys)
 		if(!(key in list("F1","F2")) && !winget(src, "default-\ref[key]", "command"))
-			to_chat(src, SPAN_WARNING("You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>"))
+			to_chat(src, SPAN_WARNING("You probably entered the game with a different keyboard layout.\n<a href='byond://?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>"))
 			break
 
 /client/proc/get_byond_membership()
@@ -697,6 +695,6 @@ var/global/const/MAX_VIEW = 41
 /client/verb/drop_item()
 	set hidden = 1
 	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
-		var/obj/item/I = mob.get_active_hand()
+		var/obj/item/I = mob.get_active_held_item()
 		if(I && I.can_be_dropped_by_client(mob))
 			mob.drop_item()

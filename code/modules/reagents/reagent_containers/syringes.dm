@@ -39,8 +39,8 @@
 
 
 /obj/item/chems/syringe/on_reagent_change()
-	. = ..()
-	update_icon()
+	if((. = ..()))
+		update_icon()
 
 /obj/item/chems/syringe/on_picked_up(mob/user)
 	. = ..()
@@ -128,13 +128,11 @@
 		if(reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("There is already a blood sample in this syringe."))
 			return
-		if(iscarbon(target))
+		if(ishuman(target))
 			var/amount = REAGENTS_FREE_SPACE(reagents)
-			var/mob/living/carbon/T = target
-			if(!T.dna)
+			var/mob/living/human/T = target
+			if(!T.vessel?.total_volume)
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
-				if(ishuman(target))
-					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 
 			var/allow = T.can_inject(user, check_zone(user.get_target_zone(), T))
@@ -218,7 +216,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/user)
 	if(bag.opened || !bag.contains_body)
 		return
 
@@ -226,7 +224,7 @@
 	if(L)
 		injectMob(L, user, bag)
 
-/obj/item/chems/syringe/proc/injectMob(var/mob/living/carbon/target, var/mob/living/carbon/user, var/atom/trackTarget)
+/obj/item/chems/syringe/proc/injectMob(var/mob/living/target, var/mob/living/user, var/atom/trackTarget)
 	if(!trackTarget)
 		trackTarget = target
 
@@ -267,11 +265,11 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/syringestab(var/mob/living/target, var/mob/living/user)
 
 	if(ishuman(target))
 
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 
 		var/target_zone = check_zone(user.get_target_zone(), H)
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, target_zone)
@@ -306,7 +304,7 @@
 	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)
 
-/obj/item/chems/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
+/obj/item/chems/syringe/proc/break_syringe(mob/living/human/target, mob/living/user)
 	desc += " It is broken."
 	mode = SYRINGE_BROKEN
 	if(target)

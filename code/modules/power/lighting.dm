@@ -49,13 +49,12 @@
 	var/current_mode = null
 
 /obj/machinery/light/get_color()
-	return lightbulb ? lightbulb.get_color() : null
+	return lightbulb?.get_color()
 
 /obj/machinery/light/set_color(color)
-	if (!lightbulb)
-		return
-	lightbulb.set_color(color)
-	queue_icon_update()
+	. = lightbulb?.set_color(color)
+	if(.)
+		queue_icon_update()
 
 // the smaller bulb light fixture
 /obj/machinery/light/small
@@ -318,7 +317,7 @@
 		return TRUE
 
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species.can_shred(H))
 			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass.")
 			broken()
@@ -328,13 +327,13 @@
 	if(on)
 
 		var/prot = FALSE
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H))
 			var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
 			if(istype(G) && G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
 				prot = TRUE
 
-		if(prot > 0 || (MUTATION_COLD_RESISTANCE in user.mutations))
+		if(prot > 0 || user.has_genetic_condition(GENE_COND_COLD_RESISTANCE))
 			to_chat(user, "You remove the [get_fitting_name()].")
 		else if(istype(user) && user.is_telekinetic())
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
@@ -355,12 +354,6 @@
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
 	return TRUE
-
-// ghost attack - make lights flicker like an AI, but even spookier!
-/obj/machinery/light/attack_ghost(mob/user)
-	if(round_is_spooky())
-		src.flicker(rand(2,5))
-	else return ..()
 
 // break the light and make sparks if was on
 /obj/machinery/light/proc/broken(var/skip_sound_and_sparks = 0)
@@ -441,7 +434,6 @@
 
 /obj/machinery/light/navigation/on_update_icon()
 	. = ..() // this will handle pixel offsets
-	overlays.Cut()
 	icon_state = "nav[delay][!!(lightbulb && on)]"
 
 /obj/machinery/light/navigation/attackby(obj/item/W, mob/user)

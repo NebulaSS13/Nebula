@@ -95,48 +95,48 @@
 		set_dir(pick(global.cardinal))
 		update_light()
 
-/obj/item/flashlight/attack(mob/living/M, mob/living/user)
-	add_fingerprint(user)
-	if(on && user.get_target_zone() == BP_EYES)
+/obj/item/flashlight/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
+	if(on && user.get_target_zone() == BP_EYES && target.should_have_organ(BP_HEAD))
+
+		add_fingerprint(user)
+		if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
 
-		var/mob/living/carbon/human/H = M	//mob has protective eyewear
-		if(istype(H))
-			for(var/slot in global.standard_headgear_slots)
-				var/obj/item/clothing/C = H.get_equipped_item(slot)
-				if(istype(C) && (C.body_parts_covered & SLOT_EYES))
-					to_chat(user, SPAN_WARNING("You're going to need to remove [C] first."))
-					return
+		for(var/slot in global.standard_headgear_slots)
+			var/obj/item/clothing/C = target.get_equipped_item(slot)
+			if(istype(C) && (C.body_parts_covered & SLOT_EYES))
+				to_chat(user, SPAN_WARNING("You're going to need to remove [C] first."))
+				return TRUE
 
-			var/obj/item/organ/vision
-			var/decl/bodytype/root_bodytype = H.get_bodytype()
-			if(!root_bodytype.vision_organ || !H.should_have_organ(root_bodytype.vision_organ))
-				to_chat(user, SPAN_WARNING("You can't find anything on [H] to direct [src] into!"))
-				return
+		var/obj/item/organ/vision
+		var/decl/bodytype/root_bodytype = target.get_bodytype()
+		var/vision_organ_tag = target.get_vision_organ_tag()
+		if(!vision_organ_tag || !target.should_have_organ(vision_organ_tag))
+			to_chat(user, SPAN_WARNING("You can't find anything on \the [target] to direct \the [src] into!"))
+			return TRUE
 
-			vision = GET_INTERNAL_ORGAN(H, root_bodytype.vision_organ)
-			if(!vision)
-				vision = root_bodytype.has_organ[root_bodytype.vision_organ]
-				var/decl/pronouns/G = H.get_pronouns()
-				to_chat(user, SPAN_WARNING("\The [H] is missing [G.his] [initial(vision.name)]!"))
-				return
+		vision = GET_INTERNAL_ORGAN(target, vision_organ_tag)
+		if(!vision)
+			vision = root_bodytype.has_organ[vision_organ_tag]
+			var/decl/pronouns/G = target.get_pronouns()
+			to_chat(user, SPAN_WARNING("\The [target] is missing [G.his] [initial(vision.name)]!"))
+			return TRUE
 
-			user.visible_message(
-				SPAN_NOTICE("\The [user] directs [src] into [M]'s [vision.name]."),
-				SPAN_NOTICE("You direct [src] into [M]'s [vision.name].")
-			)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] directs [src] into [target]'s [vision.name]."),
+			SPAN_NOTICE("You direct [src] into [target]'s [vision.name].")
+		)
+		inspect_vision(vision, user)
 
-			inspect_vision(vision, user)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
+		target.flash_eyes()
+		return TRUE
 
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
-			M.flash_eyes()
-	else
-		return ..()
+	return ..()
 
 /obj/item/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
-	var/mob/living/carbon/human/H = vision.owner
+	var/mob/living/human/H = vision.owner
 
 	if(H == user)	//can't look into your own eyes buster
 		return
@@ -146,13 +146,13 @@
 		if(vision.owner.stat == DEAD || H.is_blind())	//mob is dead or fully blind
 			to_chat(user, SPAN_WARNING("\The [H]'s pupils do not react to the light!"))
 			return
-		if(MUTATION_XRAY in H.mutations)
+		if(H.has_genetic_condition(GENE_COND_XRAY))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils give an eerie glow!"))
 		if(vision.damage)
 			to_chat(user, SPAN_WARNING("There's visible damage to [H]'s [vision.name]!"))
 		else if(HAS_STATUS(H, STAT_BLURRY))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils react slower than normally."))
-		if(H.getBrainLoss() > 15)
+		if(H.get_damage(BRAIN) > 15)
 			to_chat(user, SPAN_NOTICE("There's visible lag between left and right pupils' reactions."))
 
 		var/static/list/pinpoint = list(

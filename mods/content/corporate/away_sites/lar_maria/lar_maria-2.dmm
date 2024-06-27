@@ -12,20 +12,20 @@
 /turf/space,
 /area/space)
 "ad" = (
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "ae" = (
 /obj/abstract/map_data{
 	height = 2
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "af" = (
 /obj/effect/overmap/visitable/sector/lar_maria,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "ah" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/solar_control)
 "ai" = (
 /obj/effect/floor_decal/solarpanel,
@@ -33,7 +33,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aj" = (
 /obj/structure/cable/yellow{
@@ -42,7 +42,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "ak" = (
 /obj/structure/cable/yellow{
@@ -54,7 +54,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "al" = (
 /obj/structure/cable/yellow{
@@ -66,19 +66,19 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "am" = (
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "an" = (
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "ao" = (
 /obj/structure/cable/yellow{
@@ -90,7 +90,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "ap" = (
 /obj/structure/cable/yellow{
@@ -99,17 +99,17 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "ar" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "au" = (
 /obj/machinery/port_gen/pacman/super,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "av" = (
 /obj/structure/closet/crate/radiation,
@@ -117,44 +117,44 @@
 /obj/item/stack/cable_coil/orange,
 /obj/item/wrench,
 /obj/item/wirecutters,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aw" = (
 /obj/structure/closet/crate,
 /obj/random/tool,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "ax" = (
 /obj/structure/closet/crate,
 /obj/random/tool,
 /obj/random/tool,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "az" = (
 /obj/machinery/power/solar_control/autostart,
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aA" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/yellow,
 /obj/machinery/power/solar,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aB" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aC" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aD" = (
 /obj/structure/cable/yellow{
@@ -163,7 +163,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aE" = (
 /obj/structure/cable/yellow{
@@ -180,7 +180,7 @@
 	pixel_x = 25;
 	pixel_y = 25
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aF" = (
 /obj/machinery/door/firedoor,
@@ -190,7 +190,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aG" = (
 /obj/structure/cable/yellow{
@@ -212,7 +212,7 @@
 	tag_exterior_door = "ZHPWestSolar_outer";
 	tag_interior_door = "ZHPWestSolar_inner"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aH" = (
 /obj/machinery/door/firedoor,
@@ -222,7 +222,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aI" = (
 /obj/structure/cable/yellow{
@@ -241,10 +241,10 @@
 	pixel_x = -25;
 	pixel_y = 25
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aJ" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aK" = (
 /obj/structure/cable/yellow{
@@ -263,7 +263,7 @@
 	pixel_x = 25;
 	pixel_y = 25
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aL" = (
 /obj/machinery/door/firedoor,
@@ -274,7 +274,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aM" = (
 /obj/structure/cable/yellow{
@@ -297,7 +297,7 @@
 	id_tag = "ZHPEastSolar_sensor";
 	pixel_y = 25
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aN" = (
 /obj/machinery/door/firedoor,
@@ -308,7 +308,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aO" = (
 /obj/structure/cable/yellow{
@@ -326,14 +326,14 @@
 	pixel_x = -25;
 	pixel_y = 25
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aP" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aQ" = (
 /obj/structure/cable/yellow{
@@ -341,7 +341,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aR" = (
 /obj/structure/cable/yellow{
@@ -350,7 +350,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aS" = (
 /obj/structure/cable/yellow{
@@ -359,14 +359,14 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aT" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
 /obj/machinery/power/tracker,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aU" = (
 /obj/effect/floor_decal/solarpanel,
@@ -374,7 +374,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aV" = (
 /obj/structure/cable/yellow{
@@ -386,7 +386,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aW" = (
 /obj/effect/floor_decal/solarpanel,
@@ -394,44 +394,44 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "aX" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aY" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "aZ" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "ba" = (
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bb" = (
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bc" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bd" = (
 /obj/effect/floor_decal/solarpanel,
@@ -439,7 +439,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "be" = (
 /obj/effect/floor_decal/solarpanel,
@@ -447,17 +447,17 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "bf" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "bg" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -466,7 +466,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -475,7 +475,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -484,60 +484,60 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bl" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "bn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bp" = (
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "br" = (
 /obj/machinery/suit_cycler,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bs" = (
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bt" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bu" = (
 /obj/structure/rack,
 /obj/random/toolbox,
 /obj/random/material,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bv" = (
 /obj/machinery/atmospherics/unary/outlet_injector,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "bw" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/library)
 "bx" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/atmos)
 "by" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -548,7 +548,7 @@
 	dir = 1;
 	pixel_y = -25
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bz" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -560,7 +560,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bA" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -570,7 +570,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bB" = (
 /obj/machinery/power/apc{
@@ -583,20 +583,20 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bC" = (
 /obj/structure/rack,
 /obj/random/toolbox,
 /obj/random/smokes,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "bD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/atmos)
 "bE" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/dorms)
 "bF" = (
 /obj/machinery/door/firedoor,
@@ -605,20 +605,20 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/engineering,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bG" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/engineering,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bI" = (
 /obj/structure/bookcase,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "bJ" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen{
@@ -627,19 +627,19 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bK" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bM" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bN" = (
 /obj/machinery/portable_atmospherics/powered/pump,
@@ -647,7 +647,7 @@
 	dir = 10;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bO" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
@@ -655,111 +655,111 @@
 	dir = 6;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bR" = (
 /obj/structure/rack,
 /obj/random/tool,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bS" = (
 /obj/structure/rack,
 /obj/random/tank,
 /obj/random/tool,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 6
 	},
 /obj/structure/closet/emcloset,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 9
 	},
 /obj/structure/closet/firecloset,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "bV" = (
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "bW" = (
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "bX" = (
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "bY" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "bZ" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "ca" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cb" = (
 /obj/structure/closet/emcloset,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cc" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cd" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "ce" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cf" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cg" = (
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "ch" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "ci" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cj" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -769,120 +769,120 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "ck" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cl" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 10
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cm" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cn" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "co" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/dorms)
 "cp" = (
 /obj/machinery/door/airlock,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cq" = (
 /obj/machinery/door/airlock,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cr" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/engineering_guide,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cs" = (
 /obj/structure/bookcase,
 /obj/item/book/fluff/stasis,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cu" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/medical_diagnostics_manual,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cv" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/detective,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cx" = (
 /obj/structure/bookcase,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cy" = (
 /obj/structure/bookcase,
 /obj/item/book/fluff/anomaly_spectroscopy,
 /obj/item/book/fluff/anomaly_testing,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cz" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cA" = (
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cB" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cC" = (
 /obj/machinery/atmospherics/valve/open,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cD" = (
 /obj/structure/table/woodentable,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cE" = (
 /obj/structure/table/woodentable,
 /obj/random/smokes,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cF" = (
 /obj/structure/table/woodentable,
 /obj/random/toy,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cG" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/glowsticks,
-/turf/simulated/floor/wood,
+/obj/item/box/glowsticks,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cH" = (
 /obj/structure/table/woodentable,
 /obj/random/smokes,
 /obj/random/drinkbottle,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cI" = (
 /obj/machinery/computer/modular{
 	dir = 8
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cJ" = (
 /obj/structure/window/basic{
@@ -890,7 +890,7 @@
 	},
 /obj/structure/table,
 /obj/item/paper,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cK" = (
 /obj/structure/window/basic{
@@ -902,7 +902,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cL" = (
 /obj/structure/window/basic{
@@ -911,7 +911,7 @@
 /obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen/red,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cM" = (
 /obj/structure/window/basic{
@@ -923,7 +923,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cN" = (
 /obj/structure/window/basic{
@@ -931,7 +931,7 @@
 	},
 /obj/structure/table,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cO" = (
 /obj/structure/window/basic{
@@ -943,7 +943,7 @@
 /obj/structure/table,
 /obj/item/paper/lar_maria/note_2,
 /obj/item/paper/lar_maria/note_3,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cP" = (
 /obj/structure/window/basic{
@@ -952,24 +952,24 @@
 /obj/machinery/computer/modular{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cR" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cS" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cT" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -978,63 +978,63 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cU" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cV" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cW" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cX" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "cY" = (
 /obj/structure/bed/chair/comfy/purple{
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "cZ" = (
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "da" = (
 /obj/structure/bookcase/manuals/medical,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "db" = (
 /obj/structure/bed/chair/comfy/black{
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dc" = (
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "de" = (
 /obj/structure/bed/chair/comfy/brown{
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "df" = (
 /obj/structure/closet,
@@ -1042,30 +1042,30 @@
 /obj/random/smokes,
 /obj/random/snack,
 /obj/random/snack,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dg" = (
 /obj/structure/bookcase/manuals/engineering,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dh" = (
 /obj/structure/window/basic,
 /obj/machinery/computer/modular{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "di" = (
 /obj/structure/window/basic{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dj" = (
 /obj/structure/bed/chair/office/light{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dk" = (
 /obj/machinery/light{
@@ -1075,7 +1075,7 @@
 /obj/machinery/computer/modular{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dl" = (
 /obj/machinery/atmospherics/unary/tank/oxygen{
@@ -1084,65 +1084,65 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dm" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dn" = (
 /obj/machinery/atmospherics/omni/mixer{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "do" = (
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dp" = (
 /obj/machinery/atmospherics/omni/filter{
 	dir = 4
 	},
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dr" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan,
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "ds" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dt" = (
 /obj/structure/bed/padded,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "du" = (
 /obj/machinery/light,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dv" = (
 /obj/structure/closet,
 /obj/random/masks,
 /obj/random/accessory,
 /obj/random/smokes,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dw" = (
 /obj/random/closet,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dx" = (
 /obj/structure/bed/padded,
 /obj/random/plushie,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dy" = (
 /obj/structure/window/basic,
@@ -1151,7 +1151,7 @@
 	},
 /obj/structure/table,
 /obj/item/folder/blue,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dz" = (
 /obj/structure/window/basic,
@@ -1159,60 +1159,60 @@
 /obj/item/paper_bin,
 /obj/item/pen/blue,
 /obj/item/paper,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dA" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/blue,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dB" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dC" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 10
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dD" = (
 /obj/machinery/atmospherics/binary/oxyregenerator,
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dF" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dG" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dH" = (
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dI" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dJ" = (
 /obj/structure/window/basic{
@@ -1221,17 +1221,17 @@
 /obj/machinery/computer/modular{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dK" = (
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dL" = (
 /obj/machinery/photocopier,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dM" = (
 /obj/structure/table,
@@ -1242,18 +1242,18 @@
 	pixel_x = 25;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "dN" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 5
 	},
 /obj/structure/closet/emcloset,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dP" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
@@ -1263,7 +1263,7 @@
 	dir = 1;
 	pixel_y = -25
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
@@ -1276,7 +1276,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dR" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
@@ -1286,7 +1286,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dS" = (
 /obj/machinery/power/apc{
@@ -1297,42 +1297,42 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dT" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 9
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dV" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dW" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "dX" = (
 /obj/structure/bed/padded,
 /obj/random/plushie/large,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dY" = (
 /obj/structure/closet,
 /obj/random/loot,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "dZ" = (
 /obj/structure/closet,
 /obj/random/shoes,
 /obj/random/snack,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "ea" = (
 /obj/structure/table,
 /obj/item/paper_bin,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "eb" = (
 /obj/structure/window/basic{
@@ -1341,18 +1341,18 @@
 /obj/structure/bed/chair/office/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "ec" = (
 /obj/structure/table,
 /obj/item/pen/blue,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "ed" = (
 /obj/structure/table,
 /obj/item/pen/crayon/orange,
 /obj/item/paper,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "ee" = (
 /obj/structure/window/basic{
@@ -1362,16 +1362,16 @@
 	dir = 8
 	},
 /obj/machinery/light,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "ef" = (
 /obj/structure/closet/crate/paper_refill,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "eg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "eh" = (
 /obj/machinery/power/apc{
@@ -1383,56 +1383,56 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "ei" = (
 /obj/structure/bed/chair/comfy/beige,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "ej" = (
 /obj/machinery/botany,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "ek" = (
 /obj/structure/bed/chair/comfy/brown,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "el" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "em" = (
 /obj/machinery/suit_cycler,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "en" = (
 /obj/structure/closet,
 /obj/random/loot,
 /obj/random/accessory,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "eo" = (
 /obj/structure/bed/chair/comfy/green,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "ep" = (
 /obj/structure/closet,
 /obj/random/accessory,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "eq" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/head_m)
 "er" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/head_m)
 "es" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "et" = (
 /obj/machinery/door/firedoor,
@@ -1441,25 +1441,25 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/library)
 "eu" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/office)
 "ev" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/office)
 "ew" = (
 /obj/machinery/optable,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/office)
 "ex" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "ey" = (
 /obj/structure/bed/padded,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "ez" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1468,50 +1468,50 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eB" = (
 /obj/structure/closet/emcloset,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eC" = (
 /obj/structure/table/woodentable,
 /obj/item/paper_bin,
 /obj/item/pen/blue,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eD" = (
 /obj/structure/bed/chair/office/light,
 /obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eE" = (
 /obj/structure/filing_cabinet/chestdrawer,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eF" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/handcuffs,
-/turf/simulated/floor/wood,
+/obj/item/box/handcuffs,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "eG" = (
 /obj/structure/table/woodentable,
 /obj/random/smokes,
 /obj/random/snack,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "eH" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/beakers,
-/turf/simulated/floor/wood,
+/obj/item/box/beakers,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "eI" = (
 /obj/structure/hygiene/toilet,
@@ -1520,7 +1520,7 @@
 	},
 /obj/random/trash,
 /mob/living/simple_animal/hostile/lar_maria/virologist,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "eJ" = (
 /obj/structure/hygiene/toilet,
@@ -1528,13 +1528,13 @@
 	dir = 1
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "eK" = (
 /obj/structure/hygiene/urinal{
 	pixel_x = -30
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "eL" = (
 /obj/machinery/light{
@@ -1543,21 +1543,21 @@
 /obj/random/trash,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "eN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "eO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "eP" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/office)
 "eQ" = (
 /obj/machinery/light{
@@ -1565,84 +1565,84 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table,
-/obj/item/storage/firstaid/surgery,
-/turf/simulated/floor/tiled/white,
+/obj/item/firstaid/surgery,
+/turf/floor/tiled/white,
 /area/lar_maria/office)
 "eR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eT" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eU" = (
 /obj/structure/table/woodentable,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eV" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eW" = (
 /obj/machinery/computer/modular,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "eX" = (
 /obj/machinery/door/airlock,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "eY" = (
 /obj/structure/hygiene/urinal{
 	pixel_x = -30
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "eZ" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fb" = (
 /obj/machinery/door/airlock/medical,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/office)
 "fc" = (
 /obj/machinery/door/airlock/medical,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fe" = (
 /obj/machinery/door/window/southleft,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "ff" = (
 /obj/structure/window/basic,
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fg" = (
 /obj/structure/window/basic,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fh" = (
 /obj/machinery/door/firedoor,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fi" = (
 /obj/machinery/alarm{
@@ -1650,17 +1650,17 @@
 	pixel_y = -25
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fj" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fk" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fl" = (
 /obj/machinery/power/apc{
@@ -1672,17 +1672,19 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fm" = (
 /obj/structure/closet,
 /obj/item/clothing/head/surgery,
-/obj/item/clothing/under/medical/scrubs,
-/obj/item/clothing/under/medical/scrubs,
-/obj/item/clothing/suit/storage/toggle/labcoat,
-/obj/item/clothing/suit/storage/toggle/labcoat,
+/obj/item/clothing/pants/scrubs,
+/obj/item/clothing/pants/scrubs,
+/obj/item/clothing/shirt/scrubs,
+/obj/item/clothing/shirt/scrubs,
+/obj/item/clothing/suit/toggle/labcoat,
+/obj/item/clothing/suit/toggle/labcoat,
 /obj/random/gloves,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fn" = (
 /obj/machinery/light{
@@ -1691,40 +1693,40 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fo" = (
 /obj/structure/bed/chair/office/light,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fp" = (
 /obj/structure/table,
 /obj/item/folder/blue,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fq" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fr" = (
 /obj/structure/table,
 /obj/item/towel,
 /obj/random/soap,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fs" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "ft" = (
 /obj/machinery/washing_machine,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1736,7 +1738,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fw" = (
 /obj/machinery/door/airlock,
@@ -1751,7 +1753,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1763,7 +1765,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "fy" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1775,7 +1777,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "fz" = (
 /obj/machinery/light{
@@ -1784,87 +1786,87 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fA" = (
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fB" = (
 /obj/structure/bed/chair/office/light,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fD" = (
 /obj/structure/table,
 /obj/item/pen/blue,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fE" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fF" = (
 /obj/structure/table/woodentable,
 /obj/item/staff/gentcane,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fG" = (
 /obj/structure/table/woodentable,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fH" = (
 /obj/structure/table/woodentable,
 /obj/random/drinkbottle,
 /obj/random/contraband,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fI" = (
 /obj/structure/table/woodentable,
 /obj/random/toolbox,
 /obj/item/scalpel,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fJ" = (
 /obj/structure/table/woodentable,
 /obj/random/snack,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fK" = (
 /obj/machinery/door/airlock,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fL" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "fM" = (
 /obj/structure/table,
 /obj/random/gloves,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fN" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fO" = (
 /obj/structure/table/steel,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fP" = (
 /obj/structure/table/steel,
 /obj/random/firstaid,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1874,7 +1876,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fR" = (
 /obj/machinery/power/apc{
@@ -1886,64 +1888,64 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fS" = (
 /obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/paper,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fT" = (
 /obj/structure/table,
 /obj/item/paper/lar_maria/note_9,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "fU" = (
 /obj/machinery/vending/engivend{
 	req_access = list()
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fV" = (
 /mob/living/simple_animal/hostile/lar_maria/guard,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fW" = (
 /obj/structure/bookcase,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fX" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist/female,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fY" = (
 /obj/structure/closet,
 /obj/random/handgun,
 /obj/random/powercell,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "fZ" = (
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "ga" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "gb" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "gc" = (
 /obj/machinery/door/airlock,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "gd" = (
 /obj/structure/hygiene/toilet{
@@ -1953,10 +1955,10 @@
 	dir = 4
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "ge" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/head_f)
 "gf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1964,19 +1966,19 @@
 	icon_state = "1-2"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "gg" = (
 /obj/structure/rack,
 /obj/random/firstaid,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gh" = (
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1986,23 +1988,23 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gk" = (
 /obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gl" = (
 /obj/structure/bed/chair/office/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gm" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -2010,7 +2012,7 @@
 	dir = 4;
 	pixel_x = -25
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "gn" = (
 /obj/machinery/power/apc{
@@ -2022,26 +2024,26 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "go" = (
 /obj/structure/bed/padded,
 /obj/abstract/landmark/corpse/lar_maria/virologist,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/dorms)
 "gp" = (
 /obj/random/trash,
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "gq" = (
 /obj/structure/table,
 /obj/item/towel,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "gr" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "gs" = (
 /obj/machinery/door/airlock,
@@ -2050,22 +2052,22 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gt" = (
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "gu" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/mess_hall)
 "gv" = (
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/mess_hall)
 "gw" = (
 /obj/machinery/door/airlock,
@@ -2074,30 +2076,30 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/lar_maria/mess_hall)
 "gx" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/mess_hall)
 "gy" = (
 /obj/structure/closet/athletic_mixed,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "gz" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/lar_maria/hallway)
 "gA" = (
 /obj/structure/reagent_dispensers/watertank,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "gB" = (
 /obj/structure/closet/l3closet/janitor,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "gC" = (
 /obj/structure/table,
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "gD" = (
 /turf/open,
@@ -2111,7 +2113,7 @@
 	dir = 8
 	},
 /obj/item/stool,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "gF" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2120,13 +2122,13 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "gG" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "gH" = (
 /obj/structure/window/basic{
@@ -2140,117 +2142,117 @@
 	dir = 8
 	},
 /obj/item/stool,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "gI" = (
 /obj/machinery/vending/cigarette,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gJ" = (
 /obj/machinery/vending/coffee,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gK" = (
 /obj/machinery/vending/games,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gN" = (
 /obj/structure/table,
 /obj/random/snack,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gO" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gP" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/machinery/computer/arcade,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gQ" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gR" = (
 /obj/structure/table,
 /obj/item/plate,
 /obj/item/utensil/fork,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gS" = (
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gT" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gU" = (
 /obj/machinery/door/window/westright,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "gV" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "gW" = (
 /obj/structure/hygiene/sink/kitchen{
 	pixel_y = 25
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "gX" = (
 /obj/machinery/alarm{
 	pixel_y = 23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "gY" = (
 /obj/machinery/door/airlock/freezer,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "gZ" = (
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ha" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hb" = (
 /obj/structure/closet/crate/trashcart,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "hc" = (
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "hd" = (
 /obj/structure/bed/chair{
@@ -2259,7 +2261,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "he" = (
 /obj/machinery/light{
@@ -2272,14 +2274,14 @@
 	dir = 8
 	},
 /obj/item/stool,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hg" = (
 /obj/structure/window/basic{
 	dir = 4
 	},
 /obj/item/stool,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hh" = (
 /obj/machinery/light{
@@ -2298,48 +2300,48 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hj" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hk" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
 /obj/item/utensil/fork,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hl" = (
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hm" = (
 /obj/machinery/cooker/grill,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hn" = (
 /obj/structure/closet/secure_closet/freezer/meat,
 /obj/random/snack,
 /obj/random/snack,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ho" = (
 /obj/structure/closet/secure_closet/freezer/kitchen{
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hp" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/head_f)
 "hq" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /mob/living/simple_animal/hostile/lar_maria/virologist/female,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "hr" = (
 /obj/structure/table,
@@ -2349,21 +2351,21 @@
 	pixel_y = 23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "hs" = (
 /obj/structure/table,
 /obj/item/towel,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "ht" = (
 /obj/structure/mopbucket,
 /obj/item/mop,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "hu" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "hv" = (
 /obj/machinery/power/apc{
@@ -2372,7 +2374,7 @@
 	pixel_x = 24
 	},
 /obj/random/trash,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "hw" = (
 /obj/structure/cable{
@@ -2381,13 +2383,13 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hx" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2400,7 +2402,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hz" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2411,7 +2413,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2421,7 +2423,7 @@
 	icon_state = "4-8"
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2433,7 +2435,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hC" = (
 /obj/machinery/door/firedoor,
@@ -2444,7 +2446,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hD" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -2454,7 +2456,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2463,7 +2465,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2473,7 +2475,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2482,76 +2484,76 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hH" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hI" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
 /obj/item/kitchen/rollingpin,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hJ" = (
 /obj/machinery/cooker/fryer,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hK" = (
 /obj/structure/closet/secure_closet/freezer/meat,
 /obj/random/snack,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hL" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hM" = (
 /obj/structure/table/marble,
 /obj/item/chems/glass/beaker,
 /obj/random/snack,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hN" = (
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "hO" = (
 /obj/structure/table,
 /obj/item/towel,
 /obj/random/soap,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "hP" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "hQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "hR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "hS" = (
 /obj/machinery/door/airlock,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "hT" = (
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hU" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hV" = (
 /obj/structure/cable{
@@ -2560,7 +2562,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2568,13 +2570,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "hY" = (
 /obj/machinery/door/firedoor,
@@ -2582,73 +2584,73 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hZ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "ia" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "ib" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "ic" = (
 /obj/item/utensil/fork,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "id" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
 /obj/item/chems/condiment/flour,
-/obj/item/storage/box/fancy/egg_box,
-/turf/simulated/floor/tiled/white,
+/obj/item/box/fancy/egg_box,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ie" = (
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "if" = (
 /obj/machinery/cooker/oven,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ig" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/random/snack,
 /obj/random/snack,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ih" = (
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ii" = (
 /obj/machinery/chem_master/condimaster,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ij" = (
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "ik" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "il" = (
 /obj/structure/closet/athletic_mixed,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "in" = (
 /obj/machinery/power/apc{
@@ -2661,14 +2663,14 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/washing_machine,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "io" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "ip" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2680,7 +2682,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2689,7 +2691,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "ir" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2702,7 +2704,7 @@
 	pixel_y = 23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "is" = (
 /obj/machinery/light{
@@ -2714,7 +2716,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "it" = (
 /obj/machinery/door/firedoor,
@@ -2724,7 +2726,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iu" = (
 /obj/structure/cable{
@@ -2733,7 +2735,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iv" = (
 /obj/structure/cable{
@@ -2743,15 +2745,15 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iw" = (
 /obj/item/paper/lar_maria/note_6,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "ix" = (
 /obj/structure/closet/emcloset,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2759,7 +2761,7 @@
 	dir = 4;
 	pixel_x = -25
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iz" = (
 /obj/structure/bed/chair{
@@ -2767,43 +2769,43 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iA" = (
 /obj/structure/table,
 /obj/item/paper/lar_maria/note_3,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iB" = (
 /obj/structure/table,
 /obj/item/plate,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iC" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
 /obj/item/plate,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iD" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iE" = (
 /obj/structure/table/marble,
 /obj/machinery/cooker/cereal,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iF" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/random/snack,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "iG" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "iH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2811,7 +2813,7 @@
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "iI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2824,7 +2826,7 @@
 	icon_state = "1-4"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "iJ" = (
 /obj/machinery/door/airlock,
@@ -2839,7 +2841,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "iK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2850,7 +2852,7 @@
 	icon_state = "1-8"
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2859,13 +2861,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2873,14 +2875,14 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iO" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2888,18 +2890,18 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iR" = (
 /obj/structure/closet/firecloset,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "iS" = (
 /obj/machinery/vending/snack,
@@ -2907,52 +2909,52 @@
 	dir = 1;
 	level = 2
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iT" = (
 /obj/machinery/vending/cola,
 /obj/machinery/light,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iU" = (
 /obj/machinery/vending/fitness,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iV" = (
 /obj/machinery/light,
 /obj/machinery/computer/arcade,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iW" = (
 /obj/structure/table,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iX" = (
 /obj/machinery/vending/dinnerware,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iY" = (
 /obj/structure/table/marble,
 /obj/machinery/microwave,
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iZ" = (
 /obj/structure/table/marble,
 /obj/item/plate,
 /obj/item/utensil/fork,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ja" = (
 /obj/structure/table/marble,
 /obj/item/paper/lar_maria/note_9,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "jb" = (
 /obj/machinery/gibber,
-/turf/simulated/floor/tiled/freezer,
+/turf/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "jc" = (
 /obj/structure/cable/yellow{
@@ -2961,27 +2963,27 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "jd" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/lar_maria/hallway)
 "je" = (
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "jf" = (
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/hallway)
 "jg" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "jh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2992,14 +2994,14 @@
 	pixel_x = 25;
 	pixel_y = -25
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "ji" = (
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "ZHPDock_airlock_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "jj" = (
 /obj/machinery/door/airlock/external/bolted{
@@ -3007,38 +3009,38 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "jk" = (
 /obj/structure/grille,
-/turf/simulated/floor/reinforced,
+/turf/floor/reinforced,
 /area/space)
 "jm" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "ZHPDock_airlock_pump"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "jn" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "ZHPDock_airlock_sensor";
 	pixel_x = 25
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "jo" = (
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "ZHPDock_airlock_outer"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/hallway)
 "jp" = (
 /obj/structure/lattice,
 /turf/space,
 /area/space)
 "jq" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "jr" = (
 /obj/machinery/button/access/exterior{
@@ -3046,7 +3048,7 @@
 	pixel_x = 25;
 	pixel_y = 15
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/space)
 "kb" = (
 /obj/structure/bed/chair{
@@ -3055,7 +3057,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "lb" = (
 /obj/structure/bed/chair{
@@ -3064,7 +3066,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "mb" = (
 /obj/structure/lattice,
@@ -3084,7 +3086,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "ob" = (
 /obj/structure/ladder,
@@ -3092,14 +3094,14 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/solar_control)
 "ok" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "pb" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -3108,7 +3110,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "qb" = (
 /obj/structure/rack,
@@ -3117,7 +3119,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "rb" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen{
@@ -3129,7 +3131,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "sb" = (
 /obj/machinery/atmospherics/portables_connector{
@@ -3140,14 +3142,14 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "tb" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
 /obj/machinery/light/small,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "ub" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -3156,7 +3158,7 @@
 	icon_state = "warning"
 	},
 /obj/machinery/light/small,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "vb" = (
 /obj/structure/hygiene/sink{
@@ -3170,7 +3172,7 @@
 	pixel_y = 23;
 	req_access = newlist()
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "wb" = (
 /obj/structure/hygiene/sink{
@@ -3181,7 +3183,7 @@
 	pixel_x = 30
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "xb" = (
 /obj/structure/hygiene/sink{
@@ -3192,32 +3194,32 @@
 /obj/structure/mirror{
 	pixel_x = -30
 	},
-/turf/simulated/floor/tiled/white,
+/turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "Ag" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "DG" = (
 /obj/machinery/computer/modular{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/lar_maria/office)
 "FZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 "YS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 10
 	},
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/lar_maria/atmos)
 
 (1,1,1) = {"

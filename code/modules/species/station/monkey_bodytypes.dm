@@ -12,6 +12,11 @@
 	mob_size = MOB_SIZE_SMALL
 	nail_noun = "nails"
 
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 0.6,
+		/datum/appearance_descriptor/build =  0.6
+	)
+
 /decl/bodytype/monkey/Initialize()
 	equip_adjust = list(
 		BP_L_HAND =          list("[NORTH]" = list( 1, 3), "[EAST]" = list(-3, 2), "[SOUTH]" = list(-1, 3), "[WEST]" = list( 3, 2)),

@@ -83,6 +83,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	// Issue being that the only way I could think of doing it was very messy, slow and honestly overengineered.
 	// So we'll have this hardcode instead.
 	var/turf/T
+	// This is to resolve the proper diagonal direction relative to the corner position for mimiced turfs.
+	var/Tc
 
 
 	// Diagonal one is easy.
@@ -99,24 +101,26 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 	// Now the horizontal one.
 	T = get_step_resolving_mimic(t1, horizontal)
+	Tc = t1.x + (horizontal == EAST  ? 1 : -1)
 	if (T) // Ditto.
 		if (!T.corners)
 			T.corners = new(4)
 
 		t3 = T
-		t3i = REVERSE_LIGHTING_CORNER_DIAGONAL[((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
+		t3i = REVERSE_LIGHTING_CORNER_DIAGONAL[((Tc > x) ? EAST : WEST) | ((t1.y > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
 		T.corners[t3i] = src
 		if (T.ambient_light)
 			has_ambience = TRUE
 
 	// And finally the vertical one.
 	T = get_step_resolving_mimic(t1, vertical)
+	Tc = t1.y + (vertical   == NORTH ? 1 : -1)
 	if (T)
 		if (!T.corners)
 			T.corners = new(4)
 
 		t4 = T
-		t4i = REVERSE_LIGHTING_CORNER_DIAGONAL[((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
+		t4i = REVERSE_LIGHTING_CORNER_DIAGONAL[((t1.x > x) ? EAST : WEST) | ((Tc > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
 		T.corners[t4i] = src
 		if (T.ambient_light)
 			has_ambience = TRUE

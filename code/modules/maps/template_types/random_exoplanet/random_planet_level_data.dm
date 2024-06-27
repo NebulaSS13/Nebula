@@ -3,8 +3,8 @@
 /datum/level_data/planetoid
 	level_flags                  = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	border_filler                = /turf/unsimulated/mineral
-	loop_turf_type               = /turf/exterior/mimic_edge/transition/loop
-	transition_turf_type         = /turf/exterior/mimic_edge/transition
+	loop_turf_type               = /turf/mimic_edge/transition/loop
+	transition_turf_type         = /turf/mimic_edge/transition
 	use_global_exterior_ambience = FALSE
 	forbid_strata                = null
 
@@ -15,12 +15,14 @@
 ///Level data for generating surface levels on exoplanets
 /datum/level_data/planetoid/exoplanet
 	base_area = /area/exoplanet
-	base_turf = /turf/exterior/dirt
+	base_turf = /turf/floor/natural/dirt
+	daycycle_id = null // will be generated
+	daycycle_type = /datum/daycycle/exoplanet
 
 ///Level data for generating underground levels on exoplanets
 /datum/level_data/planetoid/exoplanet/underground
 	base_area = /area/exoplanet/underground
-	base_turf = /turf/exterior/rock
+	base_turf = /turf/floor/natural/rock
 	level_generators = list(
 		/datum/random_map/noise/exoplanet/mantle,
 		/datum/random_map/automata/cave_system/mantle,

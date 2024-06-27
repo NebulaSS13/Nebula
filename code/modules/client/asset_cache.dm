@@ -45,7 +45,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	client.sending |= asset_name
 	var/job = ++client.last_asset_job
 
-	direct_output(client, browse("<script>window.location.href='?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser"))
+	direct_output(client, browse("<script>window.location.href='byond://?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser"))
 
 	var/t = 0
 	var/timeout_time = (ASSET_CACHE_SEND_TIMEOUT * client.sending.len) + ASSET_CACHE_SEND_TIMEOUT
@@ -85,7 +85,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	client.sending |= unreceived
 	var/job = ++client.last_asset_job
 
-	direct_output(client, browse("<script>window.location.href='?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser"))
+	direct_output(client, browse("<script>window.location.href='byond://?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser"))
 
 	var/t = 0
 	var/timeout_time = ASSET_CACHE_SEND_TIMEOUT * client.sending.len
@@ -237,6 +237,27 @@ var/global/template_file_name = "all_templates.json"
 	var/datum/asset/nanoui/nano_asset = get_asset_datum(/datum/asset/nanoui)
 	if(nano_asset)
 		nano_asset.recompute_and_resend_templates()
+
+/**
+ * Fonts loader
+ * Fonts for the ui, browser, and nanoui.
+ * Since the rsc compiler tends to be finnicky.
+ */
+/datum/asset/fonts
+	var/fonts_path = "fonts/"
+	var/list/font_files = list()
+
+/datum/asset/fonts/register()
+	var/list/filenames = flist(fonts_path)
+	for(var/filename in filenames)
+		//#TODO: Maybe send only .ttf and .woff files? Not sure if including licenses/readmes is needed for caching?
+		if(copytext(filename, length(filename)) != "/")
+			if(fexists(fonts_path + filename))
+				font_files[filename] = fcopy_rsc(fonts_path + filename)
+				register_asset(filename, font_files[filename])
+
+/datum/asset/fonts/send(client)
+	send_asset_list(client, font_files, FALSE)
 
 /*
 	Asset cache

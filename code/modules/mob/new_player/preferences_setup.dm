@@ -1,4 +1,4 @@
-/datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
+/datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/human/H)
 
 	if(!H)
 		H = client?.mob
@@ -37,18 +37,18 @@
 			var/datum/category_item/underwear/WRI = pick(WRC.items)
 			all_underwear[WRC.name] = WRI.name
 
-	for(var/entry in current_species.appearance_descriptors)
-		var/datum/appearance_descriptor/descriptor = current_species.appearance_descriptors[entry]
+	for(var/entry in current_bodytype.appearance_descriptors)
+		var/datum/appearance_descriptor/descriptor = current_bodytype.appearance_descriptors[entry]
 		if(istype(descriptor))
 			appearance_descriptors[descriptor.name] = descriptor.randomize_value()
 
-	var/list/all_backpacks = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+	var/list/all_backpacks = global.using_map.get_available_backpacks()
 	backpack = all_backpacks[pick(all_backpacks)]
 	blood_type = pickweight(current_species.blood_types)
 	if(H)
 		copy_to(H)
 
-/datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/dummy/mannequin)
+/datum/preferences/proc/dress_preview_mob(var/mob/living/human/dummy/mannequin)
 
 	if(!mannequin)
 		return
@@ -78,7 +78,6 @@
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob.skip_loadout_preview))
 		// Equip custom gear loadout, replacing any job items
-		var/list/loadout_taken_slots = list()
 		for(var/thing in Gear())
 			var/decl/loadout_option/G = global.gear_datums[thing]
 			if(G)
@@ -97,8 +96,7 @@
 				if(!permitted)
 					continue
 
-				if(G.slot && G.slot != slot_tie_str && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.name]))
-					loadout_taken_slots.Add(G.slot)
+				if(G.slot && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.name]))
 					update_icon = TRUE
 
 	if(update_icon)
@@ -106,7 +104,7 @@
 		mannequin.compile_overlays()
 
 /datum/preferences/proc/update_preview_icon()
-	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client?.ckey)
+	var/mob/living/human/dummy/mannequin/mannequin = get_mannequin(client?.ckey)
 	if(mannequin)
 		mannequin.delete_inventory(TRUE)
 		dress_preview_mob(mannequin)

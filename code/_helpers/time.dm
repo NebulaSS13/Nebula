@@ -47,22 +47,6 @@
 
 	return jointext(result, ", ")
 
-/proc/get_game_time()
-	var/static/time_offset = 0
-	var/static/last_time = 0
-	var/static/last_usage = 0
-
-	var/wtime = world.time
-	var/wusage = world.tick_usage * 0.01
-
-	if(last_time < wtime && last_usage > 1)
-		time_offset += last_usage - 1
-
-	last_time = wtime
-	last_usage = wusage
-
-	return wtime + (time_offset + wusage) * world.tick_lag
-
 var/global/roundstart_hour
 var/global/station_date = ""
 var/global/next_station_date_change = 1 DAY
@@ -83,18 +67,6 @@ var/global/next_station_date_change = 1 DAY
 
 /proc/time_stamp()
 	return time2text(station_time_in_ticks, "hh:mm:ss")
-
-/* Returns 1 if it is the selected month and day */
-/proc/isDay(var/month, var/day)
-	if(isnum(month) && isnum(day))
-		var/MM = text2num(time2text(world.timeofday, "MM")) // get the current month
-		var/DD = text2num(time2text(world.timeofday, "DD")) // get the current day
-		if(month == MM && day == DD)
-			return 1
-
-		// Uncomment this out when debugging!
-		//else
-			//return 1
 
 var/global/next_duration_update = 0
 var/global/last_round_duration = 0
@@ -126,7 +98,7 @@ var/global/round_start_time = 0
 		return last_round_duration
 
 	var/mills = round_duration_in_ticks // 1/10 of a second, not real milliseconds but whatever
-	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
+	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for reference or something
 	var/mins = round((mills % 36000) / 600)
 	var/hours = round(mills / 36000)
 

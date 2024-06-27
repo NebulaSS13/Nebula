@@ -11,12 +11,12 @@
 	var/list/objs = list()
 	var/turf/T = get_turf(src)
 	get_mobs_and_objs_in_view_fast(T, 7, victims, objs)
-	for(var/mob/living/carbon/M in victims)
+	for(var/mob/living/M in victims)
 		bang(T, M)
 
 	for(var/obj/effect/blob/B in objs) //Blob damage here
 		var/damage = round(30/(get_dist(B,T)+1))
-		B.take_damage(damage)
+		B.take_damage(damage, BURN)
 
 	new /obj/effect/sparks(loc)
 	new /obj/effect/effect/smoke/illumination(loc, 5, 30, 1, "#ffffff")
@@ -26,7 +26,7 @@
 // Called during the loop that bangs people in lockers/containers and when banging
 // people in normal view.  Could theroetically be called during other explosions.
 // -- Polymorph
-/obj/item/grenade/flashbang/proc/bang(var/turf/T , var/mob/living/carbon/M)
+/obj/item/grenade/flashbang/proc/bang(var/turf/T , var/mob/living/M)
 	to_chat(M, SPAN_DANGER("BANG"))
 	playsound(src, 'sound/weapons/flashbang.ogg', 100)
 

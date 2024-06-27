@@ -37,11 +37,6 @@
 	var/datum/planetoid_data/P = get_planetoid_data()
 	return P.atmosphere
 
-///Returns the /area atom for the surface of the planetoid
-/obj/effect/overmap/visitable/sector/planetoid/proc/get_surface_area()
-	var/datum/planetoid_data/P = get_planetoid_data()
-	return P.surface_area
-
 ///Returns the strata associated to the planetoid we represent
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_strata()
 	var/datum/planetoid_data/P = get_planetoid_data()

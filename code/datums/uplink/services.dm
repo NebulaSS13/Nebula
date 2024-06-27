@@ -44,8 +44,8 @@
 	addtimer(CALLBACK(src, PROC_REF(finalize_announce)), 2)
 
 /datum/uplink_item/item/services/fake_update_annoncement/proc/finalize_announce()
-	name = "[command_name()] Update Announcement"
-	desc = "Causes a falsified [command_name()] Update."
+	name = "[global.using_map.boss_name] Update Announcement"
+	desc = "Causes a falsified [global.using_map.boss_name] Update."
 
 /***************
 * Service Item *
@@ -227,14 +227,14 @@
 	if(random_record)
 		COPY_VALUE(faction)
 		COPY_VALUE(religion)
-		COPY_VALUE(homeSystem)
+		COPY_VALUE(residence)
 		COPY_VALUE(fingerprint)
 		COPY_VALUE(dna)
 		COPY_VALUE(bloodtype)
 	var/datum/job/job = SSjobs.get_by_title(new_record.get_job())
 	if(job)
 		var/skills = list()
-		for(var/decl/hierarchy/skill/S in global.skills)
+		for(var/decl/hierarchy/skill/S in global.using_map.get_available_skills())
 			var/level = job.min_skill[S.type]
 			if(prob(10))
 				level = min(rand(1,3), job.max_skill[S.type])

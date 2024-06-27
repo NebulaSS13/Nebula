@@ -155,7 +155,7 @@ var/global/list/laser_wavelengths
 	if(!charging && istype(user))
 		charging = selected_wavelength
 		playsound(loc, 'sound/effects/capacitor_whine.ogg', 100, 0)
-		while(!QDELETED(user) && length(capacitors) && charging && user.get_active_hand() == src)
+		while(!QDELETED(user) && length(capacitors) && charging && user.get_active_held_item() == src)
 			var/charged = TRUE
 			for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
 				if(capacitor.charge < capacitor.max_charge)

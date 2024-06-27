@@ -1,0 +1,4 @@
+/obj/item/clothing/accessory/suspenders/@SUBTYPES : /obj/item/clothing/suspenders/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/armguards/@SUBTYPES : /obj/item/clothing/gloves/armguards/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/legguards/@SUBTYPES : /obj/item/clothing/shoes/legguards/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/fire_overpants/@SUBTYPES : /obj/item/clothing/pants/fire_overpants/@SUBTYPES{@OLD}

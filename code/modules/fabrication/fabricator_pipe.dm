@@ -12,13 +12,14 @@
 	color_selectable = TRUE
 
 /obj/machinery/fabricator/pipe/on_update_icon()
+	return // no icons
 
 /obj/machinery/fabricator/pipe/CanUseTopic(mob/user)
 	if(!anchored)
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/fabricator/pipe/wrench_floor_bolts()
+/obj/machinery/fabricator/pipe/wrench_floor_bolts(mob/user, delay = 2 SECONDS, obj/item/tool)
 	..()
 	update_use_power(anchored ? POWER_USE_IDLE : POWER_USE_OFF)
 

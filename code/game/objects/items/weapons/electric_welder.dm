@@ -51,7 +51,7 @@
 /obj/item/weldingtool/electric/use_fuel(var/amount)
 	var/obj/item/cell/cell = get_cell()
 	if(cell)
-		return cell.use(amount * CELLRATE) > 0
+		return cell.use(amount * CELLRATE * fuel_cost_multiplier) > 0
 	return FALSE
 
 /obj/item/weldingtool/electric/on_update_icon()

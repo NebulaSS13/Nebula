@@ -3,6 +3,26 @@
 var/global/lightmode_style = url_encode(file2text('code/modules/client/lightmode.css'))
 var/global/darkmode_style = url_encode(file2text('code/modules/client/darkmode.css'))
 
+/**
+	Force the light and dark theme css files to be reloaded. Mainly usefule for devs.
+ */
+/proc/ReloadThemeCss(client/C, quiet = FALSE)
+	//Reload the files.
+	//#NOTE: I'm not sure why we're caching those as globals on the server? Would make more sense to load them directly from client local file into the winset()
+	global.lightmode_style = url_encode(file2text('code/modules/client/lightmode.css'))
+	global.darkmode_style  = url_encode(file2text('code/modules/client/darkmode.css'))
+
+	//Tell our client to set their output window style.
+	var/pref_mode = C.get_preference_value(/datum/client_preference/chat_color_mode)
+	var/style_string
+	if(pref_mode == PREF_LIGHTMODE)
+		style_string = global.lightmode_style
+	else
+		style_string = global.darkmode_style
+	winset(C, "output", "style = [style_string]")
+	if(!quiet)
+		to_chat(C, "Reloaded client CSS stylesheet for current theme.")
+
 /*
 This lets you switch chat themes by using winset and CSS loading.
 Things to note:

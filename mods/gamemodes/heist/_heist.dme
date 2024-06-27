@@ -1,0 +1,21 @@
+#ifndef GAMEMODE_PACK_HEIST
+#define GAMEMODE_PACK_HEIST
+
+#ifdef MODPACK_VOX
+#warn Vox modpack loaded before Heist modpack, compatibility features will be missing.
+#endif
+#ifdef GAMEMODE_PACK_MIXED
+#warn Mixed gamemodes modpack loaded before Heist modpack, Heist combination modes will be missing.
+#endif
+
+// BEGIN_INCLUDE
+#include "_heist.dm"
+#include "areas.dm"
+#include "gamemode.dm"
+#include "heist_base.dm"
+#include "outfit.dm"
+#include "presets.dm"
+#include "shuttle.dm"
+#include "special_role.dm"
+// END_INCLUDE
+#endif

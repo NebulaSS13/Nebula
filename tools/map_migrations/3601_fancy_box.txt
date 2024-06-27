@@ -1,5 +1,6 @@
 # REPATH /fancy to /box/fancy
 /obj/item/storage/fancy/@SUBTYPES : /obj/item/storage/box/fancy/@SUBTYPES{@OLD}
+/obj/item/storage/box/donut/@SUBTYPES : /obj/item/storage/box/fancy/donut/@SUBTYPES{@OLD
 # REPATH PIZZA SLICES
 /obj/item/chems/food/slice/vegetablepizza/@SUBTYPES : /obj/item/chems/food/slice/pizza/vegetable/@SUBTYPES{@OLD} 
 /obj/item/chems/food/slice/meatpizza/@SUBTYPES : /obj/item/chems/food/slice/pizza/meat/@SUBTYPES{@OLD} 

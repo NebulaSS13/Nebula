@@ -48,7 +48,7 @@ var/global/list/surgery_tool_exception_cache = list()
 	/// Any additional information to add to the codex entry for this step.
 	var/list/additional_codex_lines
 	/// What mob type does this surgery apply to.
-	var/expected_mob_type = /mob/living/carbon/human
+	var/expected_mob_type = /mob/living/human
 	/// Sound (or list of sounds) to play on end step.
 	var/end_step_sound = "rustle"
 	/// Sound (or list of sounds) to play on fail step.
@@ -142,8 +142,7 @@ var/global/list/surgery_tool_exception_cache = list()
 				 affected.how_open() < open_threshold))
 					return FALSE
 			// Check if clothing is blocking access
-			var/mob/living/carbon/human/C = target
-			var/obj/item/I = C.get_covering_equipped_item_by_zone(target_zone)
+			var/obj/item/I = user.get_covering_equipped_item_by_zone(target_zone)
 			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
 				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
 				return FALSE
@@ -162,13 +161,13 @@ var/global/list/surgery_tool_exception_cache = list()
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
 	if(ishuman(user) && prob(60))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if (blood_level)
 			H.bloody_hands(target,2)
 		if (blood_level > 1)
 			H.bloody_body(target,2)
 	if(shock_level && ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		H.shock_stage = max(H.shock_stage, shock_level)
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
@@ -197,7 +196,7 @@ var/global/list/surgery_tool_exception_cache = list()
 			. += 20
 
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		. -= round(H.shock_stage * 0.5)
 		if(GET_STATUS(H, STAT_BLURRY))
 			. -= 20
@@ -207,20 +206,17 @@ var/global/list/surgery_tool_exception_cache = list()
 	if(delicate)
 		if(HAS_STATUS(user, STAT_SLUR))
 			. -= 10
-		if(!target.lying)
+		if(!target.current_posture.prone)
 			. -= 30
-		var/turf/T = get_turf(target)
-		if(locate(/obj/machinery/optable, T))
-			. -= 0
-		else if(locate(/obj/structure/bed, T))
-			. -= 5
-		else if(locate(/obj/structure/table, T))
-			. -= 10
-		else if(locate(/obj/effect/rune/, T))
-			. -= 10
+	var/turf/T = get_turf(target)
+	for(var/obj/interfering in T)
+		. += interfering.get_surgery_success_modifier(delicate)
 	. = max(., 0)
 
-/proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)
+/obj/proc/get_surgery_success_modifier(delicate)
+	return 0
+
+/proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/human/user)
 	if(!istype(user) || !istype(E)) return
 
 	var/germ_level = user.germ_level
@@ -290,7 +286,7 @@ var/global/list/surgery_tool_exception_cache = list()
 			return TRUE
 
 	// Otherwise we can make a start on surgery!
-	else if(istype(M) && !QDELETED(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
+	else if(istype(M) && !QDELETED(M) && user.a_intent != I_HURT && user.get_active_held_item() == src)
 		// Double-check this in case it changed between initial check and now.
 		if(zone in global.surgeries_in_progress[operation_ref])
 			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
@@ -323,22 +319,18 @@ var/global/list/surgery_tool_exception_cache = list()
 /obj/item/stack/handle_post_surgery()
 	use(1)
 
+/obj/proc/get_surgery_surface_quality(mob/living/victim)
+	return OPERATE_DENY
+
 //check if mob is lying down on something we can operate him on.
-/proc/can_operate(mob/living/carbon/M, mob/living/carbon/user)
-	var/turf/T = get_turf(M)
-	if(locate(/obj/machinery/optable, T))
-		. = OPERATE_IDEAL
-	else if(locate(/obj/structure/table, T))
-		. = OPERATE_OKAY
-	else if(locate(/obj/structure/bed, T))
-		. = OPERATE_PASSABLE
-	else if(locate(/obj/effect/rune, T))
-		. = OPERATE_PASSABLE
-	else
-		. = OPERATE_DENY
-	if(. != OPERATE_DENY && M == user)
-		var/hitzone = check_zone(user.get_target_zone(), M)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(M, M.get_active_held_item_slot())
+/proc/can_operate(mob/living/victim, mob/living/user)
+	var/turf/T = get_turf(victim)
+	for(var/obj/surface in T)
+		. = max(., surface.get_surgery_surface_quality(victim, user))
+	if(. != OPERATE_DENY && victim == user)
+		var/hitzone = check_zone(user.get_target_zone(), victim)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(victim, victim.get_active_held_item_slot())
+		// TODO: write some generalized helper for this that handles single-organ limbs, more-than-two-organ limbs, etc
 		if(E && (E.organ_tag == hitzone || E.parent_organ == hitzone))
 			to_chat(user, SPAN_WARNING("You can't operate on the same arm you're using to hold the surgical tool!"))
 			return OPERATE_DENY

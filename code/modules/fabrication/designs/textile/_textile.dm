@@ -1,5 +1,5 @@
 /datum/fabricator_recipe/textiles
-	path = /obj/item/clothing/under/color/grey
+	path = /obj/item/clothing/jumpsuit/grey
 	category = "Textiles"
 	fabricator_types = list(FABRICATOR_CLASS_TEXTILE)
 
@@ -51,15 +51,6 @@
 /datum/fabricator_recipe/textiles/jeancamo
 	path = /obj/item/clothing/pants/casual/camo
 
-/datum/fabricator_recipe/textiles/detsuit
-	path = /obj/item/clothing/under/det
-
-/datum/fabricator_recipe/textiles/detectivegrey
-	path = /obj/item/clothing/under/det/grey
-
-/datum/fabricator_recipe/textiles/detectiveblack
-	path = /obj/item/clothing/under/det/black
-
 // Headwear
 /datum/fabricator_recipe/textiles/hat
 	category = "Headwear"
@@ -100,16 +91,16 @@
 
 /datum/fabricator_recipe/textiles/glove
 	category = "Gloves"
-	path = /obj/item/clothing/gloves/color/white
+	path = /obj/item/clothing/gloves
 
 /datum/fabricator_recipe/textiles/glove/blackglove
-	path = /obj/item/clothing/gloves/color/black
+	path = /obj/item/clothing/gloves/black
 
 /datum/fabricator_recipe/textiles/glove/blackglove
 	path = /obj/item/clothing/gloves/rainbow
 
 /datum/fabricator_recipe/textiles/glove/glovesevening
-	path = /obj/item/clothing/gloves/color/evening
+	path = /obj/item/clothing/gloves/evening
 
 /datum/fabricator_recipe/textiles/glove/glovesbadswat
 	path = /obj/item/clothing/gloves/thick/swat

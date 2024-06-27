@@ -1,28 +1,28 @@
 //Let's get some REAL contraband stuff in here. Because come on, getting brigged for LIPSTICK is no fun.
 
 //Illicit drugs~
-/obj/item/storage/pill_bottle/happy
+/obj/item/pill_bottle/happy
 	name = "bottle of Happy pills"
 	desc = "Highly illegal drug. When you want to see the rainbow."
 	wrapper_color = COLOR_PINK
 
-/obj/item/storage/pill_bottle/happy/WillContain()
+/obj/item/pill_bottle/happy/WillContain()
 	return list(/obj/item/chems/pill/happy = 10)
 
-/obj/item/storage/pill_bottle/zoom
+/obj/item/pill_bottle/zoom
 	name = "bottle of Zoom pills"
 	desc = "Highly illegal drug. Trade brain for speed."
 	wrapper_color = COLOR_BLUE
 
-/obj/item/storage/pill_bottle/zoom/WillContain()
+/obj/item/pill_bottle/zoom/WillContain()
 	return list(/obj/item/chems/pill/zoom = 10)
 
-/obj/item/storage/pill_bottle/gleam
+/obj/item/pill_bottle/gleam
 	name = "bottle of Gleam pills"
 	desc = "Highly illegal drug. Stimulates rarely used portions of the brain."
 	wrapper_color = COLOR_BLUE
 
-/obj/item/storage/pill_bottle/gleam/WillContain()
+/obj/item/pill_bottle/gleam/WillContain()
 	return list(/obj/item/chems/pill/gleam = 10)
 
 /obj/item/chems/glass/beaker/vial/random

@@ -13,7 +13,7 @@
  */
 /obj/item/retractor
 	name = "retractor"
-	desc = "Retracts stuff."
+	desc = "A surgical tool for widening incisions or adjusting bones."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
 	material = /decl/material/solid/metal/steel
@@ -32,7 +32,7 @@
  */
 /obj/item/hemostat
 	name = "hemostat"
-	desc = "You think you have seen this before."
+	desc = "A surgical tool for clamping veins or manipulating internal organs."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
 	material = /decl/material/solid/metal/steel
@@ -52,7 +52,7 @@
  */
 /obj/item/cautery
 	name = "cautery"
-	desc = "This stops bleeding."
+	desc = "A surgical tool for halting bleeding or closing incisions."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	material = /decl/material/solid/metal/steel
@@ -126,7 +126,7 @@
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
-	damtype = BURN
+	atom_damage_type =  BURN
 	force = 10
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	pickup_sound = 'sound/foley/pickup2.ogg'
@@ -163,7 +163,7 @@
 	desc = "A true extension of the surgeon's body, this marvel combines several medical tools into one modular package."
 	sharp = 1
 	edge = 1
-	damtype = BURN
+	atom_damage_type =  BURN
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel_manager_on"
 	force = 7
@@ -250,6 +250,7 @@
 
 /obj/item/bonesetter
 	name = "bone setter"
+	desc = "A surgical tool for manipulating and setting bones."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone setter"
 	force = 8.0

@@ -6,7 +6,6 @@
 	turns_per_move = 5
 	response_help_1p = "You wave your hand through $TARGET$."
 	response_help_3p = "$USER$ waves $USER_THEIR$ hand through $TARGET$."
-	speed = -1
 	max_health = 80
 	gene_damage = -1
 
@@ -21,18 +20,11 @@
 	faction = "faithless"
 	supernatural = 1
 
-	meat_type =     null
-	meat_amount =   0
-	bone_material = null
-	bone_amount =   0
-	skin_material = null
-	skin_amount =   0
-
 /obj/item/natural_weapon/faithless
 	name = "shadow tendril"
 	attack_verb = list("gripped")
 	hitsound = 'sound/hallucinations/growl1.ogg'
-	damtype = BURN
+	atom_damage_type =  BURN
 	force = 15
 
 /mob/living/simple_animal/hostile/faithless/Process_Spacemove()
@@ -43,7 +35,7 @@
 	if(.)
 		audible_emote("wails at [.]")
 
-/mob/living/simple_animal/hostile/faithless/AttackingTarget()
+/mob/living/simple_animal/hostile/faithless/attack_target(mob/target)
 	. =..()
 	var/mob/living/L = .
 	if(istype(L))
@@ -51,8 +43,10 @@
 			SET_STATUS_MAX(L, STAT_WEAK, 3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
-/mob/living/simple_animal/hostile/faithless/cult
-	faction = "cult"
-
-/mob/living/simple_animal/hostile/faithless/cult/on_defilement()
-	return
+/obj/item/ectoplasm
+	name = "ectoplasm"
+	desc = "Spooky."
+	gender = PLURAL
+	icon = 'icons/obj/items/ectoplasm.dmi'
+	icon_state = ICON_STATE_WORLD
+	material = /decl/material/liquid/drink/compote

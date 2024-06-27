@@ -1,8 +1,6 @@
-/obj/item/storage/mech
+/obj/item/mech_storage
 	w_class = ITEM_SIZE_NO_CONTAINER
-	max_w_class = ITEM_SIZE_LARGE
-	storage_slots = 4
-	use_sound = 'sound/effects/storage/toolbox.ogg'
+	storage = /datum/storage/mech
 	anchored = TRUE
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
@@ -12,7 +10,7 @@
 		. = E.Adjacent(neighbor, recurse)
 	return . || ..()
 
-/obj/item/storage/mech/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
+/obj/item/mech_storage/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
 	var/obj/item/mech_component/chassis/C = loc
 	if(istype(C))
 		. = C.Adjacent(neighbor, recurse-1)
@@ -30,7 +28,7 @@
 	var/obj/item/robot_parts/robot_component/diagnosis_unit/diagnostics
 	var/obj/item/robot_parts/robot_component/armour/exosuit/m_armour
 	var/obj/machinery/portable_atmospherics/canister/air_supply
-	var/obj/item/storage/mech/storage_compartment
+	var/obj/item/mech_storage/storage_compartment
 	var/datum/gas_mixture/cockpit
 	var/transparent_cabin = FALSE
 	var/hide_pilot =        FALSE

@@ -15,7 +15,6 @@
 	stop_automated_movement = 1
 	status_flags = CANPUSH
 	natural_weapon = /obj/item/natural_weapon/bite/weak
-	friendly = "prods"
 	wander = 0
 	pass_flags = PASS_FLAG_TABLE
 	universal_understand = TRUE
@@ -44,7 +43,7 @@
 	var/has_reproduced                      // Whether or not the borer has reproduced, for objective purposes.
 	var/roundstart                          // Whether or not this borer has been mapped and should not look for a player initially.
 	var/neutered                            // 'borer lite' mode - fewer powers, less hostile to the host.
-	var/mob/living/carbon/human/host        // Human host for the brain worm.
+	var/mob/living/human/host        // Human host for the brain worm.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 
 /obj/item/holder/borer
@@ -88,12 +87,18 @@
 
 /mob/living/simple_animal/borer/handle_disabilities()
 	. = ..()
-	sdisabilities = 0
 	if(host)
-		if(host.sdisabilities & BLINDED)
-			sdisabilities |= BLINDED
-		if(host.sdisabilities & DEAFENED)
-			sdisabilities |= DEAFENED
+		if(host.has_genetic_condition(GENE_COND_BLINDED))
+			add_genetic_condition(GENE_COND_BLINDED)
+		else
+			remove_genetic_condition(GENE_COND_BLINDED)
+		if(host.has_genetic_condition(GENE_COND_DEAFENED))
+			add_genetic_condition(GENE_COND_DEAFENED)
+		else
+			remove_genetic_condition(GENE_COND_DEAFENED)
+	else
+		remove_genetic_condition(GENE_COND_BLINDED)
+		remove_genetic_condition(GENE_COND_DEAFENED)
 
 /mob/living/simple_animal/borer/handle_living_non_stasis_processes()
 	. = ..()
@@ -103,7 +108,7 @@
 	if(!host || host.stat)
 		return
 
-	if(prob(host.getBrainLoss()/20))
+	if(prob(host.get_damage(BRAIN)/20))
 		INVOKE_ASYNC(host, TYPE_PROC_REF(/mob, say), "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 	if(stat)
@@ -134,7 +139,7 @@
 			host.release_control()
 			return
 		if(prob(5))
-			host.adjustBrainLoss(0.1)
+			host.take_damage(0.1, BRAIN)
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()
@@ -153,16 +158,16 @@
 	if(!host || !controlling) return
 
 	if(ishuman(host))
-		var/mob/living/carbon/human/H = host
+		var/mob/living/human/H = host
 		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 		LAZYREMOVE(head.implants, src)
 
 	controlling = FALSE
 
 	host.remove_language(/decl/language/corticalborer)
-	host.verbs -= /mob/living/carbon/proc/release_control
-	host.verbs -= /mob/living/carbon/proc/punish_host
-	host.verbs -= /mob/living/carbon/proc/spawn_larvae
+	host.verbs -= /mob/living/proc/release_control
+	host.verbs -= /mob/living/proc/punish_host
+	host.verbs -= /mob/living/proc/spawn_larvae
 
 	if(host_brain)
 

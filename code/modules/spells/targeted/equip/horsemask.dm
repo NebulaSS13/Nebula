@@ -14,7 +14,7 @@
 	cooldown_min = 30 //30 deciseconds reduction per rank
 	selection_type = "range"
 
-	compatible_mobs = list(/mob/living/carbon/human)
+	compatible_mobs = list(/mob/living/human)
 
 	hud_state = "wiz_horse"
 	cast_sound = 'sound/magic/horsehead_curse.ogg'

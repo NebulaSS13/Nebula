@@ -117,12 +117,12 @@ var/global/list/message_servers = list()
 			if(priority > 1)
 				playsound(Console.loc, 'sound/machines/chime.ogg', 80, 1)
 				Console.audible_message("[html_icon(Console)]<span class='warning'>\The [Console] announces: 'High priority message received from [sender]!'</span>", hearing_distance = 8)
-				Console.message_log += "<FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></FONT><BR>[authmsg]"
+				Console.message_log += "<FONT color='red'>High Priority message from <A href='byond://?src=\ref[Console];write=[sender]'>[sender]</A></FONT><BR>[authmsg]"
 			else
 				if(!Console.silent)
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					Console.audible_message("[html_icon(Console)]<span class='notice'>\The [Console] announces: 'Message received from [sender].'</span>", hearing_distance = 5)
-				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
+				Console.message_log += "<B>Message from <A href='byond://?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
 			Console.set_light(2, 0.5)
 
 
@@ -154,7 +154,7 @@ var/global/list/message_servers = list()
 /obj/machinery/network/message_server/proc/send_to_department(var/department, var/message, var/tone)
 	var/reached = 0
 
-	for(var/mob/living/carbon/human/H in global.human_mob_list)
+	for(var/mob/living/human/H in global.human_mob_list)
 		var/obj/item/modular_computer/pda/pda = locate() in H
 		if(!pda)
 			continue

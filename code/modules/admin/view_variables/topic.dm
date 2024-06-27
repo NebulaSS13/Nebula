@@ -25,9 +25,9 @@
 	else if(href_list["dressup"])
 		if(!check_rights(R_VAREDIT))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["dressup"])
+		var/mob/living/human/H = locate(href_list["dressup"])
 		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
 		var/decl/hierarchy/outfit/outfit = input("Select outfit.", "Select equipment.") as null|anything in outfits()
 		if(!outfit)
@@ -252,9 +252,9 @@
 	else if(href_list["makemonkey"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["makemonkey"])
+		var/mob/living/human/H = locate(href_list["makemonkey"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living/human")
 			return
 
 		if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")	return
@@ -266,9 +266,9 @@
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["makerobot"])
+		var/mob/living/human/H = locate(href_list["makerobot"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living/human")
 			return
 
 		if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")	return
@@ -280,9 +280,9 @@
 	else if(href_list["makeai"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["makeai"])
+		var/mob/living/human/H = locate(href_list["makeai"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living/human")
 			return
 
 		if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")	return
@@ -293,9 +293,9 @@
 
 	else if(href_list["addailment"])
 
-		var/mob/living/carbon/human/H = locate(href_list["addailment"])
+		var/mob/living/human/H = locate(href_list["addailment"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living/human")
 			return
 		var/obj/item/organ/O = input("Select a limb to add the ailment to.", "Add Ailment") as null|anything in H.get_organs()
 		if(QDELETED(H) || QDELETED(O) || O.owner != H)
@@ -317,9 +317,9 @@
 
 	else if(href_list["remailment"])
 
-		var/mob/living/carbon/human/H = locate(href_list["remailment"])
+		var/mob/living/human/H = locate(href_list["remailment"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living/human")
 			return
 		var/list/all_ailments = list()
 		for(var/obj/item/organ/O in H.get_organs())
@@ -339,9 +339,9 @@
 	else if(href_list["setspecies"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["setspecies"])
+		var/mob/living/human/H = locate(href_list["setspecies"])
 		if(!istype(H))
-			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/carbon/human"))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/human"))
 			return
 
 		var/new_species = input("Please choose a new species.","Species",null) as null|anything in get_all_species()
@@ -361,9 +361,9 @@
 	else if(href_list["setbodytype"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["setbodytype"])
+		var/mob/living/human/H = locate(href_list["setbodytype"])
 		if(!istype(H))
-			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/carbon/human"))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/human"))
 			return
 
 		var/new_bodytype = input("Please choose a new bodytype.","Bodytype",null) as null|anything in H.species.available_bodytypes
@@ -442,14 +442,14 @@
 			return
 		var/list/possibleverbs = list()
 		possibleverbs += "Cancel" 								// One for the top...
-		possibleverbs += typesof(/mob/proc,/mob/verb,/mob/living/proc,/mob/living/verb)
+		possibleverbs += typesof(/mob/proc, /mob/verb, /mob/living/proc, /mob/living/verb)
 		switch(H.type)
-			if(/mob/living/carbon/human)
-				possibleverbs += typesof(/mob/living/carbon/proc,/mob/living/carbon/verb,/mob/living/carbon/human/verb,/mob/living/carbon/human/proc)
+			if(/mob/living/human)
+				possibleverbs += typesof(/mob/living/human/verb, /mob/living/human/proc)
 			if(/mob/living/silicon/robot)
-				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/robot/proc,/mob/living/silicon/robot/verb)
+				possibleverbs += typesof(/mob/living/silicon/proc, /mob/living/silicon/robot/proc, /mob/living/silicon/robot/verb)
 			if(/mob/living/silicon/ai)
-				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/ai/proc,/mob/living/silicon/ai/verb)
+				possibleverbs += typesof(/mob/living/silicon/proc, /mob/living/silicon/ai/proc, /mob/living/silicon/ai/verb)
 		possibleverbs -= H.verbs
 		possibleverbs += "Cancel" 								// ...And one for the bottom
 
@@ -482,9 +482,13 @@
 	else if(href_list["addorgan"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/M = locate(href_list["addorgan"])
+		var/mob/living/M = locate(href_list["addorgan"])
 		if(!istype(M))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon")
+			to_chat(usr, "This can only be done to instances of type /mob/living")
+			return
+
+		if(!length(M.get_external_organs())) // quick and dirty check for organs; should always be >0 for humanlike mobs.
+			to_chat(usr, "This can only be done to mobs that implement organs!")
 			return
 
 		var/obj/item/organ/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in subtypesof(/obj/item/organ)
@@ -509,9 +513,13 @@
 	else if(href_list["remorgan"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/M = locate(href_list["remorgan"])
+		var/mob/living/M = locate(href_list["remorgan"])
 		if(!istype(M))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon")
+			to_chat(usr, "This can only be done to instances of type /mob/living")
+			return
+
+		if(!length(M.get_external_organs())) // quick and dirty check for organs; should always be >0 for humanlike mobs.
+			to_chat(usr, "This can only be done to mobs that implement organs!")
 			return
 
 		var/obj/item/organ/rem_organ = input("Please choose an organ to remove.","Organ",null) as null|anything in M.get_internal_organs()
@@ -560,9 +568,9 @@
 	else if(href_list["refreshoverlays"])
 		if(!check_rights(0))
 			return
-		var/mob/living/carbon/human/H = locate(href_list["refreshoverlays"])
+		var/mob/living/human/H = locate(href_list["refreshoverlays"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, "This can only be done to instances of type /mob/living/human")
 			return
 		H.try_refresh_visible_overlays()
 
@@ -580,22 +588,11 @@
 			to_chat(usr, "Mob doesn't exist anymore")
 			return
 
-		switch(Text)
-			if(BRUTE)
-				L.adjustBruteLoss(amount)
-			if(BURN)
-				L.adjustFireLoss(amount)
-			if(TOX)
-				L.adjustToxLoss(amount)
-			if(OXY)
-				L.adjustOxyLoss(amount)
-			if(BP_BRAIN)
-				L.adjustBrainLoss(amount)
-			if(CLONE)
-				L.adjustCloneLoss(amount)
-			else
-				to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]")
-				return
+		if(istext(Text))
+			L.take_damage(amount, Text)
+		else
+			to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]")
+			return
 
 		if(amount != 0)
 			log_admin("[key_name(usr)] dealt [amount] amount of [Text] damage to [L]")
@@ -685,15 +682,13 @@
 			to_chat(usr, "This can only be done to instances of type /obj/item")
 			return
 
-		var/new_material = input("Please choose a new material.","Materials",null) as null|anything in SSmaterials.materials_by_name
-		if(!new_material)
+		var/decl/material/new_material = input("Please choose a new material.","Materials",null) as null|anything in decls_repository.get_decls_of_subtype_unassociated(/decl/material)
+		if(!istype(new_material))
 			return
 		if(QDELETED(I))
 			to_chat(usr, "Item doesn't exist anymore")
 			return
-
-		var/decl/material/M = SSmaterials.materials_by_name[new_material]
-		I.set_material(M.type)
+		I.set_material(new_material.type)
 		to_chat(usr, "Set material of [I] to [I.get_material()].")
 
 	if(href_list["datumrefresh"])

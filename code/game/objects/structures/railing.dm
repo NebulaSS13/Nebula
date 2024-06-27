@@ -16,17 +16,22 @@
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
-	var/painted_color
 	var/broken =    FALSE
 	var/neighbor_status = 0
 
 /obj/structure/railing/mapped
 	anchored = TRUE
 	color = COLOR_ORANGE
-	painted_color = COLOR_ORANGE
+	paint_color = COLOR_ORANGE
 
 /obj/structure/railing/mapped/no_density
 	density = FALSE
+
+/obj/structure/railing/mapped/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	parts_type = /obj/item/stack/material/plank
+	color = WOOD_COLOR_BLACK
+	paint_color = null
 
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
@@ -55,9 +60,6 @@
 		desc = "A simple [material.solid_name] railing designed to protect against careless trespass."
 	else
 		..()
-
-/obj/structure/railing/update_material_colour(override_colour)
-	. = ..(painted_color || override_colour)
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE
@@ -182,7 +184,7 @@
 	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
 		var/obj/item/grab/G = W
 		if(ishuman(G.affecting))
-			var/mob/living/carbon/human/H = G.get_affecting_mob()
+			var/mob/living/human/H = G.get_affecting_mob()
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
 				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
@@ -258,10 +260,10 @@
 			update_icon()
 		return
 
-	if(W.force && (W.damtype == BURN || W.damtype == BRUTE))
+	if(W.force && (W.atom_damage_type == BURN || W.atom_damage_type == BRUTE))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
-		take_damage(W.force)
+		take_damage(W.force, W.atom_damage_type)
 		return
 	. = ..()
 
@@ -280,9 +282,8 @@
 
 /obj/structure/railing/do_climb(var/mob/living/user)
 	. = ..()
-	if(.)
-		if(!anchored || material.is_brittle())
-			take_damage(get_max_health()) // Fatboy
+	if(. && (!anchored || material.is_brittle()))
+		take_damage(get_max_health())
 
 	user.jump_layer_shift()
 	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, jump_layer_shift_end)), 2)

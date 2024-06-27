@@ -92,7 +92,6 @@ Class Procs:
 	var/reason_broken = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
 	var/emagged = 0
-	var/malf_upgraded = 0
 	var/datum/wires/wires //wire datum, if any. If you place a type path, it will be autoinitialized.
 	var/use_power = POWER_USE_IDLE
 		//0 = dont run the auto
@@ -186,9 +185,6 @@ Class Procs:
 	if(!new_state != !(stat & NOINPUT))
 		stat ^= NOINPUT
 		return TRUE
-
-/proc/is_operable(var/obj/machinery/M, var/mob/user)
-	return istype(M) && M.operable()
 
 /obj/machinery/proc/is_broken(var/additional_flags = 0)
 	return (stat & (BROKEN|additional_flags))
@@ -383,8 +379,7 @@ Class Procs:
 		if(stash)
 			stash.stash(expelled_components)
 
-	for(var/obj/O in src)
-		O.dropInto(loc)
+	dump_contents()
 
 	qdel(src)
 	return frame
@@ -395,12 +390,9 @@ Class Procs:
 /datum/proc/remove_visual(mob/M)
 	return
 
-/obj/machinery/proc/malf_upgrade(var/mob/living/silicon/ai/user)
-	return 0
-
 /obj/machinery/CouldUseTopic(var/mob/user)
 	..()
-	if(clicksound && iscarbon(user))
+	if(clicksound && isliving(user))
 		playsound(src, clicksound, clickvol)
 
 /obj/machinery/proc/display_parts(mob/user)
@@ -427,12 +419,12 @@ Class Procs:
 
 	if((stat & NOPOWER))
 		if(interact_offline)
-			to_chat(user, "It is not receiving <a href ='?src=\ref[src];power_text=1'>power</a>.")
+			to_chat(user, "It is not receiving <a href='byond://?src=\ref[src];power_text=1'>power</a>.")
 		else
-			to_chat(user, "It is not receiving <a href ='?src=\ref[src];power_text=1'>power</a>, making it hard to interact with.")
+			to_chat(user, "It is not receiving <a href='byond://?src=\ref[src];power_text=1'>power</a>, making it hard to interact with.")
 
 	if(construct_state && construct_state.mechanics_info())
-		to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
+		to_chat(user, "It can be <a href='byond://?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
 	var/list/missing = missing_parts()
 	if(missing)
 		var/list/parts = list()

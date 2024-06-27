@@ -3,6 +3,15 @@
 	desc = "Old will forever be in fashion."
 	closet_appearance = /decl/closet_appearance/cabinet
 
+/obj/structure/closet/cabinet/wooden
+	desc = "A stout cabinet."
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	material = /decl/material/solid/organic/wood
+	closet_appearance = /decl/closet_appearance/cabinet/nocolor
+
+/obj/structure/closet/cabinet/wooden/ebony
+	material = /decl/material/solid/organic/wood/ebony
+
 /obj/structure/closet/acloset
 	name = "strange closet"
 	desc = "It looks alien!"
@@ -22,7 +31,7 @@
 /obj/structure/closet/gimmick/russian/WillContain()
 	return list(
 		/obj/item/clothing/head/ushanka = 5,
-		/obj/item/clothing/under/soviet = 5)
+		/obj/item/clothing/costume/soviet = 5)
 
 /obj/structure/closet/gimmick/tacticool
 	name = "tacticool gear closet"
@@ -39,7 +48,7 @@
 		/obj/item/clothing/mask/gas = 2,
 		/obj/item/clothing/shoes/jackboots/swat = 2,
 		/obj/item/clothing/suit/space/void/swat = 2,
-		/obj/item/clothing/under/syndicate/tacticool = 2)
+		/obj/item/clothing/shirt/syndicate/tacticool = 2)
 
 /obj/structure/closet/thunderdome
 	name = "\improper Thunderdome closet"
@@ -57,7 +66,7 @@
 		/obj/item/energy_blade/sword = 3,
 		/obj/item/gun/energy/laser = 3,
 		/obj/item/baton = 3,
-		/obj/item/storage/box/flashbangs = 3,
+		/obj/item/box/flashbangs = 3,
 		/obj/item/clothing/head/helmet/thunderdome = 3
 	)
 
@@ -71,6 +80,6 @@
 		/obj/item/energy_blade/sword = 3,
 		/obj/item/gun/energy/laser = 3,
 		/obj/item/baton = 3,
-		/obj/item/storage/box/flashbangs = 3,
+		/obj/item/box/flashbangs = 3,
 		/obj/item/clothing/head/helmet/thunderdome = 3
 	)

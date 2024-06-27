@@ -66,6 +66,7 @@
 
 /decl/grab/proc/upgrade(var/obj/item/grab/G)
 	if(can_upgrade(G) && upgrade_effect(G))
+		to_chat(G.assailant, SPAN_WARNING("[string_process(G, success_up)]"))
 		return upgrab
 	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_up)]"))
 
@@ -75,6 +76,7 @@
 		let_go(G)
 		return
 	if(can_downgrade(G) && downgrade_effect(G))
+		to_chat(G.assailant, SPAN_NOTICE("[string_process(G, success_down)]"))
 		return downgrab
 	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_down)]"))
 
@@ -214,7 +216,7 @@
 
 /decl/grab/proc/item_attack(var/obj/item/grab/G, var/obj/item)
 
-/decl/grab/proc/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I, var/target_zone)
+/decl/grab/proc/resolve_item_attack(var/obj/item/grab/G, var/mob/living/human/user, var/obj/item/I, var/target_zone)
 	return 0
 
 /decl/grab/proc/handle_resist(var/obj/item/grab/G)

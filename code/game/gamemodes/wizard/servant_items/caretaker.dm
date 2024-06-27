@@ -15,7 +15,7 @@
 /obj/item/clothing/suit/caretakercloak
 	name = "holy cloak"
 	desc = "A shining white and blue robe. For some reason, it reminds you of the holidays."
-	icon = 'icons/clothing/suit/wizard/servant/caretaker.dmi'
+	icon = 'icons/clothing/suits/wizard/servant/caretaker.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
@@ -23,12 +23,6 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
-
-/obj/item/clothing/under/caretaker
-	name = "caretaker's jumpsuit"
-	desc = "A holy jumpsuit. Treat it well."
-	icon = 'icons/clothing/under/caretaker.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/dress/caretakershoes
 	name = "black leather shoes"

@@ -18,7 +18,14 @@ var/global/list/limb_icon_cache = list()
 	update_icon()
 	compile_overlays()
 
-/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/proc/get_surgery_overlay_icon()
+	if(limb_flags & ORGAN_FLAG_SKELETAL)
+		return null
+	if(BP_IS_PROSTHETIC(src))
+		return null
+	return species?.get_surgery_overlay_icon(owner)
+
+/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/human/human)
 	_icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
@@ -29,16 +36,7 @@ var/global/list/limb_icon_cache = list()
 	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = human.get_skin_colour()
 
-/obj/item/organ/external/proc/sync_colour_to_dna()
-	_icon_cache_key = null
-	skin_tone = null
-	skin_colour = null
-	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (bodytype.appearance_flags & HAS_A_SKIN_TONE))
-		skin_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
-	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
-		skin_colour = rgb(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
-
-/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/human/human)
 	..()
 	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 	if(eyes) eyes.update_colour()
@@ -53,10 +51,10 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/update_limb_icon_file()
 	if(!bodytype) // This should not happen.
 		icon = initial(icon)
+	else if(limb_flags & ORGAN_FLAG_SKELETAL)
+		icon = bodytype.get_skeletal_icon(owner)
 	else if(!BP_IS_PROSTHETIC(src) && (status & ORGAN_MUTATED))
 		icon = bodytype.get_base_icon(owner, get_deform = TRUE)
-	else if(owner && (limb_flags & ORGAN_FLAG_SKELETAL))
-		icon = bodytype.get_skeletal_icon(owner)
 	else
 		icon = bodytype.get_base_icon(owner)
 
@@ -65,14 +63,20 @@ var/global/list/organ_icon_cache = list()
 
 	// Generate base icon with colour and tone.
 	var/icon/ret = bodytype.apply_limb_colouration(src, new /icon(icon, icon_state))
-	if(status & ORGAN_DEAD)
+	if(limb_flags & ORGAN_FLAG_SKELETAL)
+		global.organ_icon_cache[_icon_cache_key] = ret
+		return ret
+
+	if((status & ORGAN_DEAD))
 		ret.ColorTone(rgb(10,50,0))
 		ret.SetIntensity(0.7)
+
 	if(skin_tone)
 		if(skin_tone >= 0)
 			ret.Blend(rgb(skin_tone, skin_tone, skin_tone), ICON_ADD)
 		else
 			ret.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
+
 	if((bodytype.appearance_flags & HAS_SKIN_COLOR) && skin_colour)
 		ret.Blend(skin_colour, skin_blend)
 
@@ -81,8 +85,11 @@ var/global/list/organ_icon_cache = list()
 		var/list/draw_accessories = _sprite_accessories[accessory_category]
 		for(var/accessory in draw_accessories)
 			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
-			if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
-				ret.Blend(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory] || COLOR_WHITE), accessory_decl.layer_blend)
+			if(!istype(accessory_decl))
+				continue
+			if(!isnull(accessory_decl.sprite_overlay_layer) || !accessory_decl.draw_accessory)
+				continue
+			ret.Blend(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory] || COLOR_WHITE), accessory_decl.layer_blend)
 	if(render_alpha < 255)
 		ret += rgb(,,,render_alpha)
 	global.organ_icon_cache[_icon_cache_key] = ret
@@ -93,16 +100,26 @@ var/global/list/organ_icon_cache = list()
 		var/list/draw_accessories = _sprite_accessories[accessory_category]
 		for(var/accessory in draw_accessories)
 			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
-			if(istype(accessory_decl) && !isnull(accessory_decl.sprite_overlay_layer))
-				var/image/accessory_image = image(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory] || COLOR_WHITE))
-				if(accessory_decl.sprite_overlay_layer != FLOAT_LAYER)
-					accessory_image.layer = accessory_decl.sprite_overlay_layer
-				if(accessory_decl.layer_blend != ICON_OVERLAY)
-					accessory_image.blend_mode = iconMode2blendMode(accessory_decl.layer_blend)
-				LAZYADD(., accessory_image)
+			if(!istype(accessory_decl))
+				continue
+			if(isnull(accessory_decl.sprite_overlay_layer) || !accessory_decl.draw_accessory)
+				continue
+			var/image/accessory_image = image(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory] || COLOR_WHITE))
+			if(accessory_decl.sprite_overlay_layer != FLOAT_LAYER)
+				accessory_image.layer = accessory_decl.sprite_overlay_layer
+			if(accessory_decl.layer_blend != ICON_OVERLAY)
+				accessory_image.blend_mode = iconMode2blendMode(accessory_decl.layer_blend)
+			LAZYADD(., accessory_image)
 
 /obj/item/organ/external/proc/get_icon_cache_key_components()
+
 	. = list("[icon_state]_[species.name]_[bodytype?.name || "BAD_BODYTYPE"]_[render_alpha]_[icon]")
+
+	// Skeletons don't care about most icon appearance stuff.
+	if(limb_flags & ORGAN_FLAG_SKELETAL)
+		. += "_skeletal_[skin_blend]"
+		return
+
 	if(status & ORGAN_DEAD)
 		. += "_dead"
 	. += "_tone_[skin_tone]_color_[skin_colour]_[skin_blend]"
@@ -260,9 +277,10 @@ var/global/list/organ_icon_cache = list()
 		return
 
 	// Update our cache key and refresh or create our base icon.
+	var/next_state = owner ? "[organ_tag][owner.get_overlay_state_modifier()]" : organ_tag
 	update_limb_icon_file()
-	if(icon_state != organ_tag)
-		icon_state = organ_tag
+	if(icon_state != next_state)
+		icon_state = next_state
 
 	_icon_cache_key = jointext(get_icon_cache_key_components(), null)
 	var/icon/mob_icon = global.organ_icon_cache[_icon_cache_key] || generate_mob_icon()

@@ -3,8 +3,6 @@
 	department_types = list(/decl/department/medical)
 	head_position = 0
 	supervisors = "the Head Doctor and the Captain"
-	total_positions = 2
-	spawn_positions = 2
 	alt_titles = list()
 	skill_points = 24
 	min_skill = list(
@@ -54,7 +52,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	skill_points = 28
-	guestbanned = 1	
+	guestbanned = 1
 	must_fill = 1
 	not_random_selectable = 1
 	selection_color = "#026865"

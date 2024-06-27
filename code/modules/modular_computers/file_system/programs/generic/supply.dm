@@ -180,7 +180,7 @@
 		var/idname = "*None Provided*"
 		var/idrank = "*None Provided*"
 		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			idname = H.get_authentification_name()
 			idrank = H.get_assignment()
 		else if(issilicon(user))
@@ -320,7 +320,7 @@
 			continue // No children
 		category_names.Add(sp.name)
 		var/list/category[0]
-		for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())
+		for(var/decl/hierarchy/supply_pack/spc in sp.get_descendants())
 			if((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
 				continue
 			category.Add(list(list(

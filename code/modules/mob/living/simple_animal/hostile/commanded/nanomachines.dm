@@ -81,9 +81,9 @@
 		stance = COMMANDED_HEAL
 		return 0
 	src.visible_message("\The [src] glows green for a moment, healing \the [target_mob]'s wounds.")
-	adjustBruteLoss(3)
-	target_mob.adjustBruteLoss(-5, do_update_health = FALSE)
-	target_mob.adjustFireLoss(-5)
+	take_damage(3)
+	target_mob.heal_damage(BRUTE, 5, do_update_health = FALSE)
+	target_mob.heal_damage(BURN, 5)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(var/mob/speaker,var/text)
 	if(stance != COMMANDED_HEAL || stance != COMMANDED_HEALING) //dont want attack to bleed into heal.

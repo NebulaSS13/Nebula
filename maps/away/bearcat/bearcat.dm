@@ -8,7 +8,6 @@
 
 /decl/submap_archetype/derelict/bearcat
 	descriptor = "derelict cargo vessel"
-	map = "Bearcat Wreck"
 	crew_jobs = list(
 		/datum/job/submap/bearcat_captain,
 		/datum/job/submap/bearcat_crewman
@@ -80,7 +79,7 @@
 	name = "Lower Deck"
 	landmark_tag = "nav_bearcat_lift_bottom"
 	base_area = /area/ship/scrap/cargo/lower
-	base_turf = /turf/simulated/floor
+	base_turf = /turf/floor
 
 /obj/machinery/door/airlock/autoname/command
 	door_color = COLOR_COMMAND_BLUE
@@ -88,40 +87,33 @@
 /obj/machinery/door/airlock/autoname/engineering
 	door_color = COLOR_AMBER
 
-/turf/simulated/floor/usedup
+/turf/floor/usedup
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
-/turf/simulated/floor/tiled/usedup
+/turf/floor/tiled/usedup
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
-/turf/simulated/floor/tiled/dark/usedup
+/turf/floor/tiled/dark/usedup
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
-/turf/simulated/floor/tiled/white/usedup
+/turf/floor/tiled/white/usedup
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
-/obj/abstract/landmark/deadcap
+/obj/abstract/landmark/corpse/deadcap
 	name = "Dead Captain"
+	corpse_outfits = list(/decl/hierarchy/outfit/deadcap)
+	delete_me = FALSE //  we handle this in LateInit
 
-/obj/abstract/landmark/deadcap/Initialize()
+/obj/abstract/landmark/corpse/deadcap/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-// chair may need to init first
-/obj/abstract/landmark/deadcap/LateInitialize()
-	..()
-	var/turf/T = get_turf(src)
-	var/mob/living/carbon/human/corpse = new(T)
-	scramble(1,corpse,100)
-	corpse.real_name = "Captain"
-	corpse.name = "Captain"
-	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/deadcap)
-	outfit.equip_outfit(corpse)
-	var/corpse_health = corpse.get_max_health()
-	corpse.adjustOxyLoss(corpse_health)
-	corpse.setBrainLoss(corpse_health)
-	corpse.death()
-	var/obj/structure/bed/chair/C = locate() in T
+/obj/abstract/landmark/corpse/deadcap/LateInitialize()
+	var/mob/corpse = my_corpse?.resolve()
+	if(!istype(corpse))
+		return
+	corpse.SetName("Captain")
+	var/obj/structure/bed/chair/C = locate() in loc
 	if(C)
 		C.buckle_mob(corpse)
 	qdel(src)
@@ -129,15 +121,15 @@
 /decl/hierarchy/outfit/deadcap
 	name = "Derelict Captain"
 	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
-	suit = /obj/item/clothing/suit/storage/toggle/wintercoat
+	suit = /obj/item/clothing/suit/jacket/winter
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 
-/decl/hierarchy/outfit/deadcap/post_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/deadcap/post_equip(mob/living/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
 	if(uniform)
-		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
+		var/obj/item/clothing/shirt/hawaii/random/eyegore = new()
 		if(uniform.can_attach_accessory(eyegore))
 			uniform.attach_accessory(null, eyegore)
 		else

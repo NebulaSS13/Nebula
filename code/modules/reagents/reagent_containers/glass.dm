@@ -25,10 +25,9 @@
 		/obj/structure/table,
 		/obj/structure/closet,
 		/obj/structure/hygiene/sink,
-		/obj/item/storage,
 		/obj/item/grenade/chem_grenade,
 		/mob/living/bot/medbot,
-		/obj/item/storage/secure/safe,
+		/obj/item/secure_storage/safe,
 		/obj/structure/iv_drip,
 		/obj/machinery/disposal,
 		/mob/living/simple_animal/cow,
@@ -54,23 +53,26 @@
 		to_chat(user,SPAN_NOTICE("The airtight lid seals it completely."))
 
 /obj/item/chems/glass/attack_self()
-	..()
-	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
-		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
-	else
-		to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
-		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	update_icon()
+	. = ..()
+	if(!.)
+		if(ATOM_IS_OPEN_CONTAINER(src))
+			to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
+			atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
+		else
+			to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
+			atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		update_icon()
 
-/obj/item/chems/glass/attack(mob/M, mob/user, def_zone)
+/obj/item/chems/glass/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
-		return	..()
+		return ..()
 	return FALSE
 
 /obj/item/chems/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity) //Is the container open & are they next to whatever they're clicking?
 		return FALSE //If not, do nothing.
+	if(target?.storage)
+		return TRUE
 	for(var/type in can_be_placed_into) //Is it something it can be placed into?
 		if(istype(target, type))
 			return TRUE

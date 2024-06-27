@@ -56,7 +56,7 @@
 		if(owner_name != last_owner_name)
 			output += "<B>[current.real_name]'s Memories</B><HR>"
 			last_owner_name = owner_name
-		output += "[M.memory] <a href='?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"
+		output += "[M.memory] <a href='byond://?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"
 
 	if(objectives.len > 0)
 		output += "<HR><B>Objectives:</B>"

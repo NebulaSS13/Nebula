@@ -12,17 +12,6 @@
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/plant_protein, 6)
 
-/obj/item/chems/food/soydope
-	name = "soy dope"
-	desc = "Dope from a soy."
-	icon_state = "soydope"
-	plate = /obj/item/plate
-	filling_color = "#c4bf76"
-	center_of_mass = @'{"x":16,"y":10}'
-	nutriment_desc = list("slime" = 2, "soy" = 2)
-	nutriment_amt = 2
-	bitesize = 2
-
 /obj/item/chems/food/tofukabob
 	name = "tofu-kabob"
 	icon_state = "kabob"

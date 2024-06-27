@@ -29,7 +29,7 @@
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		open(user)
 	else if(is_edible(user))
-		attack(user, user)
+		use_on_mob(user, user)
 	else
 		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 	return TRUE
@@ -211,7 +211,7 @@
 //	icon states.
 
 /obj/item/chems/drinks/teapot
-	name = "teapot"
+	name = "china teapot"
 	desc = "An elegant teapot. It simply oozes class."
 	icon_state = "teapot"
 	item_state = "teapot"
@@ -219,6 +219,7 @@
 	volume = 120
 	center_of_mass = @'{"x":17,"y":7}'
 	material = /decl/material/solid/stone/ceramic
+	obj_flags = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
 
 /obj/item/chems/drinks/pitcher
 	name = "insulated pitcher"
@@ -230,6 +231,7 @@
 	filling_states = @"[15,30,50,70,85,100]"
 	base_icon = "pitcher"
 	material = /decl/material/solid/metal/stainlesssteel
+	obj_flags = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
 
 /obj/item/chems/drinks/flask
 	name = "\improper Captain's flask"

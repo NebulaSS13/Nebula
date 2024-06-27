@@ -2,7 +2,7 @@
 	name = "bolt of change"
 	icon_state = "ice_1"
 	damage = 0
-	damage_type = BURN
+	atom_damage_type = BURN
 	damage_flags = 0
 	nodamage = 1
 
@@ -16,7 +16,7 @@
 	for(var/t in get_all_species())
 		. += t
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		. -= H.species.name
 
 /obj/item/projectile/change/proc/apply_transformation(var/mob/M, var/choice)
@@ -30,7 +30,7 @@
 		return R
 
 	if(get_species_by_key(choice))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!istype(H))
 			H = new(get_turf(M))
 			H.set_gender(M.get_gender())

@@ -12,7 +12,7 @@ var/global/datum/matchmaker/matchmaker = new()
 			R.holder = character.mind
 			R.info = character.client.prefs.relations_info[T]
 			character.mind.gen_relations_info = character.client.prefs.relations_info["general"]
-	if(!iscarbon(character))
+	if(!ishuman(character))
 		return TRUE
 	if(!job.create_record)
 		return TRUE
@@ -151,10 +151,10 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(other && other.finalized)
 		to_chat(holder.current,"<span class='warning'>Your connection with [other.holder] is now confirmed!</span>")
 		to_chat(other.holder.current,"<span class='warning'>Your connection with [holder] is now confirmed!</span>")
-		var/list/candidates = filter_list(global.player_list, /mob/living/carbon/human)
+		var/list/candidates = filter_list(global.player_list, /mob/living/human)
 		candidates -= holder.current
 		candidates -= other.holder.current
-		for(var/mob/living/carbon/human/M in candidates)
+		for(var/mob/living/human/M in candidates)
 			if(!M.mind || M.stat == DEAD || !valid_candidate(M.mind))
 				candidates -= M
 				continue
@@ -193,11 +193,11 @@ var/global/datum/matchmaker/matchmaker = new()
 	for(var/datum/relation/R in relations)
 		dat += "<b>[R.other.finalized ? "\[F\] " : ""][R.other.holder]</b>, [R.other.holder.role_alt_title ? R.other.holder.role_alt_title : R.other.holder.assigned_role]."
 		if (!R.finalized)
-			dat += " <a href='?src=\ref[src];del_relation=\ref[R]'>Remove</a>"
+			dat += " <a href='byond://?src=\ref[src];del_relation=\ref[R]'>Remove</a>"
 			editable = 1
 		dat += "<br>[R.desc]"
 		dat += "<br>"
-		dat += "<b>Things they know about you:</b>[!R.finalized ?"<a href='?src=\ref[src];info_relation=\ref[R]'>Edit</a>" : ""]<br>[R.info ? "[R.info]" : " Nothing specific."]"
+		dat += "<b>Things they know about you:</b>[!R.finalized ?"<a href='byond://?src=\ref[src];info_relation=\ref[R]'>Edit</a>" : ""]<br>[R.info ? "[R.info]" : " Nothing specific."]"
 		if(R.other.info)
 			dat += "<br><b>Things you know about them:</b><br>[R.other.info]<br>[R.other.holder.gen_relations_info]"
 		dat += "<hr>"
@@ -209,7 +209,7 @@ var/global/datum/matchmaker/matchmaker = new()
 
 	var/datum/browser/popup = new(usr, "relations", "Relationship Info")
 	if(editable)
-		dat.Insert(1,"<a href='?src=\ref[src];relations_close=1;'>Finalize edits and close</a><br>")
+		dat.Insert(1,"<a href='byond://?src=\ref[src];relations_close=1;'>Finalize edits and close</a><br>")
 		popup.set_window_options("focus=0;can_close=0;can_minimize=1;can_maximize=0;can_resize=1;titlebar=1;")
 	popup.set_content(jointext(dat,null))
 	popup.open()

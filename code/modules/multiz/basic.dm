@@ -34,3 +34,25 @@ var/global/list/z_levels = list() // Each Z-level is associated with the relevan
 		. = GetBelow(ref)?.resolve_to_actual_turf()
 	else
 		. = get_step_resolving_mimic(ref, dir)
+
+/proc/get_dir_multiz(turf/us, turf/them)
+	if(!us || !them)
+		return 0
+	if(us.z == them.z)
+		return get_dir(us, them)
+	else
+		var/dir = 0
+		if(them.z > us.z)
+			var/turf/T = GET_ABOVE(us)
+			if(T && (T.z == them.z))
+				dir = UP
+			else
+				return get_dir(us, them)
+		else
+			var/turf/T = GET_BELOW(us)
+			if(T && (T.z == them.z))
+				dir = DOWN
+			else
+				return get_dir(us, them)
+
+		return (dir | get_dir(us, them))

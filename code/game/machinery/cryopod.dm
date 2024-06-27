@@ -23,7 +23,7 @@
 	var/list/frozen_items = list()
 	var/list/_admin_logs = list() // _ so it shows first in VV
 
-	var/storage_type = "crewmembers"
+	var/storage_desc = "crewmembers"
 	var/storage_name = "Cryogenic Oversight Control"
 	var/allow_items = 1
 
@@ -37,7 +37,7 @@
 	icon = 'icons/obj/robot_storage.dmi'
 	icon_state = "console"
 
-	storage_type = "cyborgs"
+	storage_desc = "cyborgs"
 	storage_name = "Robotic Storage Control"
 	allow_items = 0
 
@@ -52,18 +52,18 @@
 
 	dat += "<hr/><br/><b>[storage_name]</b><br/>"
 	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
-	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
+	dat += "<a href='byond://?src=\ref[src];log=1'>View storage log</a>.<br>"
 	if(allow_items)
-		dat += "<a href='?src=\ref[src];view=1'>View objects</a>.<br>"
-		dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
-		dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
+		dat += "<a href='byond://?src=\ref[src];view=1'>View objects</a>.<br>"
+		dat += "<a href='byond://?src=\ref[src];item=1'>Recover object</a>.<br>"
+		dat += "<a href='byond://?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
 
 	show_browser(user, dat, "window=cryopod_console")
 	onclose(user, "cryopod_console")
 
 /obj/machinery/computer/cryopod/OnTopic(user, href_list, state)
 	if(href_list["log"])
-		var/dat = "<b>Recently stored [storage_type]</b><br/><hr/><br/>"
+		var/dat = "<b>Recently stored [storage_desc]</b><br/><hr/><br/>"
 		for(var/person in frozen_crew)
 			dat += "[person]<br/>"
 		dat += "<hr/>"
@@ -151,7 +151,7 @@
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_name = "Cryogenic Oversight"
 	var/on_enter_occupant_message = "You feel cool air surround you. You go numb as your senses turn inward."
-	var/allow_occupant_types = list(/mob/living/carbon/human)
+	var/allow_occupant_types = list(/mob/living/human)
 	var/disallow_occupant_types = list()
 
 	var/mob/living/occupant       // Person waiting to be despawned.
@@ -248,7 +248,7 @@
 	clear_control_computer()
 	if(occupant)
 		occupant.forceMove(loc)
-		occupant.resting = 1
+		occupant.set_posture(/decl/posture/lying/deliberate)
 	. = ..()
 
 /obj/machinery/cryopod/Initialize()
@@ -329,40 +329,37 @@
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/proc/despawn_occupant()
 	//Drop all items into the pod.
-	for(var/obj/item/W in occupant.get_equipped_items(include_carried = TRUE))
-		occupant.drop_from_inventory(W)
-		W.forceMove(src)
-
+	for(var/obj/item/equipped_item in occupant.get_equipped_items(include_carried = TRUE))
+		occupant.drop_from_inventory(equipped_item)
+		equipped_item.forceMove(src)
 		//Make sure we catch anything not handled by qdel() on the items.
-		for(var/obj/item/O in W.get_contained_external_atoms())
-			if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
-				continue
-			O.forceMove(src)
+		for(var/obj/item/contained_item in equipped_item.get_contained_external_atoms())
+			contained_item.forceMove(src)
 
 	//Delete all items not on the preservation list.
 	var/list/items = src.contents.Copy()
 	items -= occupant // Don't delete the occupant
 	items -= component_parts
 
-	for(var/obj/item/W in items)
+	for(var/obj/item/frozen_item in items)
 
-		if(!W.preserve_in_cryopod())
-			qdel(W)
+		if(!frozen_item.preserve_in_cryopod())
+			qdel(frozen_item)
 			continue
 		if(control_computer && control_computer.allow_items)
-			control_computer.frozen_items += W
-			W.forceMove(null)
+			control_computer.frozen_items += frozen_item
+			frozen_item.forceMove(null)
 		else
-			W.forceMove(get_turf(src))
+			frozen_item.forceMove(get_turf(src))
 
 	//Update any existing objectives involving this mob.
-	for(var/datum/objective/O in global.all_objectives)
+	for(var/datum/objective/objective in global.all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
-		if(O.target == occupant.mind)
-			if(O.owner && O.owner.current)
-				to_chat(O.owner.current, SPAN_DANGER("You get the feeling your target, [occupant.real_name], is no longer within your reach..."))
-			qdel(O)
+		if(objective.target == occupant.mind)
+			if(objective.owner?.current)
+				to_chat(objective.owner.current, SPAN_DANGER("You get the feeling your target, [occupant.real_name], is no longer within your reach..."))
+			qdel(objective)
 
 	//Handle job slot/tater cleanup.
 	if(occupant.mind)
@@ -376,9 +373,9 @@
 	// Delete them from datacore.
 	var/sanitized_name = occupant.real_name
 	sanitized_name = sanitize(sanitized_name)
-	var/datum/computer_file/report/crew_record/R = get_crewmember_record(sanitized_name)
-	if(R)
-		qdel(R)
+	var/datum/computer_file/report/crew_record/record = get_crewmember_record(sanitized_name)
+	if(record)
+		qdel(record)
 
 	icon_state = base_icon_state
 
@@ -526,7 +523,7 @@
 
 	return
 
-/obj/machinery/cryopod/proc/set_occupant(var/mob/living/carbon/occupant, var/silent)
+/obj/machinery/cryopod/proc/set_occupant(var/mob/living/occupant, var/silent)
 	src.occupant = occupant
 	if(!occupant)
 		SetName(initial(name))

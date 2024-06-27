@@ -1,54 +1,8 @@
-var/global/church_name = null
-/proc/church_name()
-	if (church_name)
-		return church_name
-
-	var/name = ""
-
-	name += pick("Holy", "United", "First", "Second", "Last")
-
-	if (prob(20))
-		name += " Space"
-
-	name += " " + pick("Church", "Cathedral", "Body", "Worshippers", "Movement", "Witnesses")
-	name += " of [religion_name()]"
-
-	return name
-
-var/global/command_name
-/proc/command_name()
-	if (global.command_name)
-		return global.command_name
-	global.command_name = "[global.using_map.boss_name]"
-	return global.command_name
-
-/proc/change_command_name(var/name)
-	global.command_name = name
-	return global.command_name
-
-var/global/religion_name = null
-/proc/religion_name()
-	if (religion_name)
-		return religion_name
-
-	var/name = ""
-
-	name += pick("bee", "science", "edu", "captain", "assistant", "monkey", "alien", "space", "unit", "sprocket", "gadget", "bomb", "revolution", "beyond", "station", "goon", "robot", "ivor", "hobnob")
-	name += pick("ism", "ia", "ology", "istism", "ites", "ick", "ian", "ity")
-
-	return capitalize(name)
-
-/proc/system_name()
-	return global.using_map.system_name ? global.using_map.system_name : generate_system_name()
-
 /proc/generate_system_name()
 	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
 
 /proc/generate_planet_name()
-	return "[capitalize(pick(global.last_names))]-[pick(global.greek_letters)]"
-
-/proc/generate_planet_type()
-	return pick("terrestial planet", "ice planet", "dwarf planet", "desert planet", "ocean planet", "lava planet", "gas giant", "forest planet")
+	return "[capitalize(pick(global.using_map.last_names))]-[pick(global.greek_letters)]"
 
 /proc/station_name()
 	if(!global.using_map)
@@ -98,21 +52,10 @@ var/global/religion_name = null
 
 	return global.using_map.station_name
 
-/proc/world_name(var/name)
-	global.using_map.station_name = name
-
-	var/config_server_name = get_config_value(/decl/config/text/server_name)
-	if (config_server_name)
-		world.name = "[config_server_name]: [name]"
-	else
-		world.name = name
-
-	return name
-
 var/global/syndicate_name = null
 /proc/syndicate_name()
-	if (syndicate_name)
-		return syndicate_name
+	if (global.syndicate_name)
+		return global.syndicate_name
 
 	var/name = ""
 
@@ -136,7 +79,7 @@ var/global/syndicate_name = null
 		name += pick("-", "*", "")
 		name += pick("Tech", "Sun", "Co", "Tek", "X", "Inc", "Gen", "Star", "Dyne", "Code", "Hive")
 
-	syndicate_name = name
+	global.syndicate_name = name
 	return name
 
 
@@ -188,9 +131,9 @@ var/global/syndicate_code_response
 			if(1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
 				switch(rand(1,2))//Mainly to add more options later.
 					if(1)
-						code_phrase += pick(pick(global.first_names_male,global.first_names_female))
+						code_phrase += pick(pick(global.using_map.first_names_male,global.using_map.first_names_female))
 						code_phrase += " "
-						code_phrase += pick(global.last_names)
+						code_phrase += pick(global.using_map.last_names)
 					if(2)
 						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1
@@ -215,12 +158,6 @@ var/global/syndicate_code_response
 			code_phrase += ", "
 
 	return code_phrase
-
-/proc/get_name(var/atom/A)
-	return A.name
-
-/proc/get_name_and_coordinates(var/atom/A)
-	return "[A.name] \[[A.x],[A.y],[A.z]\]"
 
 /proc/get_area_proper_name(var/area/A)
 	return A.proper_name

@@ -150,3 +150,7 @@
 /decl/loadout_option/head/balaclava
 	name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava
+
+/decl/loadout_option/head/nurse
+	name = "nurse's hat"
+	path = /obj/item/clothing/head/nursehat

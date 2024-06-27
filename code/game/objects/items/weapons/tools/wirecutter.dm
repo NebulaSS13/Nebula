@@ -38,17 +38,18 @@
 		ret.color = handle_color
 	return ret
 
-/obj/item/wirecutters/attack(mob/living/carbon/C, mob/user)
-	var/obj/item/handcuffs/cable/cuffs = C.get_equipped_item(slot_handcuffed_str)
-	if(istype(C) && user.a_intent == I_HELP && (istype(cuffs)))
-		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
-		"You cut \the [C]'s restraints with \the [src]!",\
-		"You hear cable being cut.")
-		C.try_unequip(cuffs)
+/obj/item/wirecutters/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+
+	var/obj/item/handcuffs/cable/cuffs = target.get_equipped_item(slot_handcuffed_str)
+	if(user.a_intent == I_HELP && istype(cuffs) && target.try_unequip(cuffs))
+		user.visible_message(
+			"\The [usr] cuts \the [target]'s restraints with \the [src]!",
+			"You cut \the [target]'s restraints with \the [src]!",
+			"You hear cable being cut."
+		)
 		qdel(cuffs)
-		if(C.buckled && C.buckled.buckle_require_restraints)
-			C.buckled.unbuckle_mob()
-		C.update_equipment_overlay(slot_handcuffed_str)
-		return
-	else
-		..()
+		if(target.buckled?.buckle_require_restraints)
+			target.buckled.unbuckle_mob()
+		return TRUE
+
+	return ..()

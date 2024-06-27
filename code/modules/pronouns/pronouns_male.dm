@@ -2,6 +2,7 @@
 	name = MALE
 	bureaucratic_term  = "male"
 	informal_term = "guy"
+	honorific = "Mr."
 
 	He   = "He"
 	he   = "he"

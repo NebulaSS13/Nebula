@@ -61,12 +61,12 @@
 		return
 
 	// If we have repair capabilities, repair any damage.
-	if(weld_rate && occupant.getBruteLoss())
+	if(weld_rate && occupant.get_damage(BRUTE))
 		var/repair = weld_rate - use_power_oneoff(weld_power_use * weld_rate, LOCAL) / weld_power_use
-		occupant.adjustBruteLoss(-repair)
-	if(wire_rate && occupant.getFireLoss())
+		occupant.heal_damage(BRUTE, repair)
+	if(wire_rate && occupant.get_damage(BURN))
 		var/repair = wire_rate - use_power_oneoff(wire_power_use * wire_rate, LOCAL) / wire_power_use
-		occupant.adjustFireLoss(-repair)
+		occupant.heal_damage(BURN, repair)
 
 	var/obj/item/cell/target
 	if(isrobot(occupant))
@@ -82,7 +82,7 @@
 					C.repair()
 
 	if(ishuman(occupant))
-		var/mob/living/carbon/human/H = occupant
+		var/mob/living/human/H = occupant
 		var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(potato)
 			target = potato.cell
@@ -194,7 +194,7 @@
 		var/mob/living/silicon/robot/R = M
 		return (R.cell)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(H.isSynthetic())
 			return 1
 		var/obj/item/rig/rig = H.get_rig()

@@ -23,12 +23,10 @@
 	if(!owner)
 		return
 
-	if (germ_level > INFECTION_LEVEL_ONE)
-		if(prob(1))
-			to_chat(owner, "<span class='danger'>Your skin itches.</span>")
-	if (germ_level > INFECTION_LEVEL_TWO)
-		if(prob(1))
-			spawn owner.vomit()
+	if (germ_level > INFECTION_LEVEL_ONE && prob(1))
+		to_chat(owner, SPAN_DANGER("Your skin itches."))
+	if (germ_level > INFECTION_LEVEL_TWO && prob(1))
+		owner.vomit()
 
 	//Detox can heal small amounts of damage
 	if (damage < max_damage && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN))
@@ -50,7 +48,7 @@
 	// If you're not filtering well, you're in trouble. Ammonia buildup to toxic levels and damage from alcohol
 	if(filter_effect < 2)
 		if(alco)
-			owner.adjustToxLoss(0.5 * max(2 - filter_effect, 0) * (alcotox + 0.5 * alco))
+			owner.take_damage(0.5 * max(2 - filter_effect, TOX, 0) * (alcotox + 0.5 * alco))
 
 	if(alcotox)
 		take_internal_damage(alcotox, prob(90)) // Chance to warn them

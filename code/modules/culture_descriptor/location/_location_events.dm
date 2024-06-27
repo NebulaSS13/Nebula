@@ -130,9 +130,9 @@
 		. += "and their partner announced the birth of their [pick("first","second","third")] child on [location.name] early this morning. \
 			Doctors say the child is well, and the parents are considering "
 		if(prob(50))
-			. += capitalize(pick(global.first_names_female))
+			. += capitalize(pick(global.using_map.first_names_female))
 		else
-			. += capitalize(pick(global.first_names_male))
+			. += capitalize(pick(global.using_map.first_names_male))
 		. += " for the name."
 	else if(prob(50))
 		. += "announced their [pick("split","break up","marriage","engagement")] with [pick("TV host","webcast personality","superstar","model","actor","singer")] \

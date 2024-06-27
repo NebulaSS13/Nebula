@@ -30,15 +30,13 @@
 		if(direction in list(NORTH, EAST))
 			T = get_step(T, direction)
 
-		if( istype(T, /turf/simulated/wall))
+		if( istype(T, /turf/wall))
 			success = 1
 			if(propagate)
-				var/turf/simulated/wall/W = T
+				var/turf/wall/W = T
 				W.wall_connections = null
 				W.other_connections = null
 				W.queue_icon_update()
-		else if( istype(T, /turf/simulated/shuttle/wall))
-			success = 1
 		else
 			for(var/obj/O in T)
 				for(var/blend_type in get_blend_objects())

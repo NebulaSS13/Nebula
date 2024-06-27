@@ -1,7 +1,7 @@
 /decl/loadout_option/mask/skrell
 	name = "skrellian gill cover"
 	path = /obj/item/clothing/mask/gas/skrell
-	whitelisted = list(BODYTYPE_SKRELL)
+	whitelisted = list(SPECIES_SKRELL)
 
 /obj/item/clothing/mask/gas/skrell
 	name = "skrellian gill cover"
@@ -12,5 +12,5 @@
 
 /obj/item/clothing/mask/gas/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && user?.get_bodytype()?.name != BODYTYPE_SKRELL)
+	if(. && user?.get_species_name() != SPECIES_SKRELL)
 		return FALSE

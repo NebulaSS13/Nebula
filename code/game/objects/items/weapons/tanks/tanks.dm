@@ -39,7 +39,6 @@ var/global/list/global/tank_gauge_cache = list()
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
-	material = /decl/material/solid/metal/steel
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
@@ -229,11 +228,11 @@ var/global/list/global/tank_gauge_cache = list()
 		proxyassembly.assembly.attack_self(user)
 
 /obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/mob/living/carbon/location = get_recursive_loc_of_type(/mob/living/carbon)
+	var/mob/living/location = get_recursive_loc_of_type(/mob/living)
 
 	var/using_internal
 	if(istype(location))
-		if(location.internal==src)
+		if(location.get_internals() == src)
 			using_internal = 1
 
 	// this is the data which will be sent to the ui
@@ -248,13 +247,13 @@ var/global/list/global/tank_gauge_cache = list()
 	if(istype(location))
 		var/mask_check = 0
 
-		if(location.internal == src)	// if tank is current internal
+		if(location.get_internals() == src)	// if tank is current internal
 			mask_check = 1
 		else if(src in location)		// or if tank is in the mobs possession
-			if(!location.internal)		// and they do not have any active internals
+			if(!location.get_internals())		// and they do not have any active internals
 				mask_check = 1
 		else if(istype(loc, /obj/item/rig) && (loc in location))	// or the rig is in the mobs possession
-			if(!location.internal)		// and they do not have any active internals
+			if(!location.get_internals())		// and they do not have any active internals
 				mask_check = 1
 
 		if(mask_check)
@@ -262,7 +261,7 @@ var/global/list/global/tank_gauge_cache = list()
 			if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))
 				data["maskConnected"] = 1
 			else if(ishuman(location))
-				var/mob/living/carbon/human/H = location
+				var/mob/living/human/H = location
 				var/obj/item/head = H.get_equipped_item(slot_head_str)
 				if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
 					data["maskConnected"] = 1
@@ -301,8 +300,8 @@ var/global/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/proc/toggle_valve(var/mob/user)
 
-	var/mob/living/carbon/location
-	if(iscarbon(loc))
+	var/mob/living/location
+	if(isliving(loc))
 		location = loc
 	else if(istype(loc,/obj/item/rig))
 		var/obj/item/rig/rig = loc
@@ -311,7 +310,7 @@ var/global/list/global/tank_gauge_cache = list()
 	else
 		return
 
-	if(location.internal == src)
+	if(location.get_internals() == src)
 		to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
 		location.set_internals(null)
 	else
@@ -320,7 +319,7 @@ var/global/list/global/tank_gauge_cache = list()
 		if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			can_open_valve = 1
 		else if(ishuman(location))
-			var/mob/living/carbon/human/H = location
+			var/mob/living/human/H = location
 			var/obj/item/head = H.get_equipped_item(slot_head_str)
 			if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
 				can_open_valve = 1

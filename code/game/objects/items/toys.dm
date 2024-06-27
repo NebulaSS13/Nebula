@@ -64,7 +64,8 @@
 		to_chat(user, "It's [reagents?.total_volume > 0? "filled with liquid sloshing around" : "empty"].")
 
 /obj/item/chems/water_balloon/on_reagent_change()
-	..()
+	if(!(. = ..()))
+		return
 	w_class = (reagents?.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
 	//#TODO: Maybe acids should handle eating their own containers themselves?
 	for(var/reagent in reagents?.reagent_volumes)
@@ -186,7 +187,7 @@
 
 /obj/item/toy/snappop/Crossed(atom/movable/AM)
 	//i guess carp and shit shouldn't set them off
-	var/mob/living/carbon/M = AM
+	var/mob/living/M = AM
 	if(!istype(M) || MOVING_DELIBERATELY(M))
 		return
 	to_chat(M, SPAN_WARNING("You step on the snap pop!"))

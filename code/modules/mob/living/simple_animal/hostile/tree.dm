@@ -4,7 +4,7 @@
 	icon = 'icons/mob/simple_animal/pinetree.dmi'
 	speak_chance = 0
 	turns_per_move = 5
-	meat_type = /obj/item/chems/food/fish
+	butchery_data = null
 	speed = -1
 	max_health = 250
 	pixel_x = -16

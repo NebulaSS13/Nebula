@@ -14,7 +14,7 @@
 	. = ..()
 
 /datum/hud/borer/FinalizeInstantiation()
-	hud_intent_selector =  new(null, mymob)
+	hud_intent_selector =  new(null, mymob, get_ui_style_data(), get_ui_color(), get_ui_alpha(), UI_ICON_INTENT)
 	adding += hud_intent_selector
 	hud_inject_chemicals = new(null, mymob)
 	hud_leave_host =       new(null, mymob)
@@ -37,7 +37,7 @@
 	..()
 
 /mob/living/simple_animal/borer
-	hud_type = /datum/hud/borer
+	hud_used = /datum/hud/borer
 
 /mob/living/simple_animal/borer/proc/reset_ui_callback()
 	if(!is_on_special_ability_cooldown())
@@ -78,7 +78,7 @@
 		return
 
 	to_chat(worm, SPAN_NOTICE("You begin delicately adjusting your connection to the host brain..."))
-	if(!do_after(worm, 100+(worm.host.getBrainLoss()*5) || !worm.host || !worm.can_use_borer_ability()))
+	if(!do_after(worm, 100+(worm.host.get_damage(BRAIN)*5) || !worm.host || !worm.can_use_borer_ability()))
 		return
 
 	to_chat(worm, SPAN_DANGER("You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system."))
@@ -110,9 +110,9 @@
 	if(!worm.host.lastKnownIP)
 		worm.host.lastKnownIP = s2h_ip
 	worm.controlling = TRUE
-	worm.host.verbs += /mob/living/carbon/proc/release_control
-	worm.host.verbs += /mob/living/carbon/proc/punish_host
-	worm.host.verbs += /mob/living/carbon/proc/spawn_larvae
+	worm.host.verbs += /mob/living/proc/release_control
+	worm.host.verbs += /mob/living/proc/punish_host
+	worm.host.verbs += /mob/living/proc/spawn_larvae
 
 	return TRUE
 

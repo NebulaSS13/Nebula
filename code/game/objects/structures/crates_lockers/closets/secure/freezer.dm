@@ -19,8 +19,8 @@
 
 /obj/structure/closet/secure_closet/freezer/meat/WillContain()
 	return list(
-		/obj/item/chems/food/meat/beef = 8,
-		/obj/item/chems/food/fish = 4
+		/obj/item/chems/food/butchery/meat/beef = 8,
+		/obj/item/chems/food/butchery/meat/fish = 4
 	)
 
 /obj/structure/closet/secure_closet/freezer/fridge
@@ -32,7 +32,7 @@
 	return list(
 		/obj/item/chems/drinks/milk = 6,
 		/obj/item/chems/drinks/soymilk = 4,
-		/obj/item/storage/box/fancy/egg_box = 4
+		/obj/item/box/fancy/egg_box = 4
 	)
 
 /obj/structure/closet/secure_closet/freezer/money

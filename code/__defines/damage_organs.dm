@@ -4,6 +4,7 @@
 #define OXY         "oxy"
 #define CLONE       "clone"
 #define PAIN        "pain"
+#define BRAIN       "brain"
 #define ELECTROCUTE "electrocute"
 
 #define CUT       "cut"
@@ -11,6 +12,7 @@
 #define PIERCE    "pierce"
 #define LASER     "laser"
 #define SHATTER   "shatter"
+#define CHARRED   "charred"
 
 #define STUN      "stun"
 #define WEAKEN    "weaken"
@@ -69,6 +71,12 @@
 #define ORGAN_FLAG_DEFORMED       BITFLAG(6) // The organ is permanently disfigured.
 #define ORGAN_FLAG_CAN_DISLOCATE  BITFLAG(7) // The organ can be dislocated.
 #define ORGAN_FLAG_SKELETAL       BITFLAG(8) // The organ has been skeletonized.
+
+// Organ category defines.
+/// Limb contributes only to stance damage calculation (foot)
+#define ORGAN_CATEGORY_STANCE      "stance"
+/// Limb is considered the 'root' of a given stance limb (leg) - also counted for stance damage a la ORGAN_CATEGORY_STANCE
+#define ORGAN_CATEGORY_STANCE_ROOT "stance_root"
 
 // Droplimb types.
 #define DISMEMBER_METHOD_EDGE  0

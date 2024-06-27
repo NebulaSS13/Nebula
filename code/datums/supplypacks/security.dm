@@ -3,7 +3,7 @@
 
 /decl/hierarchy/supply_pack/security/specialops
 	name = "Grenades - Special Ops supplies"
-	contains = list(/obj/item/storage/box/emps,
+	contains = list(/obj/item/box/emps,
 					/obj/item/grenade/smokebomb = 3,
 					/obj/item/grenade/chem_grenade/incendiary)
 	containername = "special ops crate"
@@ -27,12 +27,12 @@
 
 /decl/hierarchy/supply_pack/security/tacticalarmor
 	name = "Armor - Tactical"
-	contains = list(/obj/item/clothing/under/tactical,
+	contains = list(/obj/item/clothing/jumpsuit/tactical,
 					/obj/item/clothing/suit/armor/pcarrier/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/tacgoggles,
-					/obj/item/storage/belt/holster/security/tactical,
+					/obj/item/belt/holster/security/tactical,
 					/obj/item/clothing/shoes/jackboots/tactical,
 					/obj/item/clothing/gloves/tactical)
 	containertype = /obj/structure/closet/crate/secure
@@ -41,8 +41,8 @@
 
 /decl/hierarchy/supply_pack/security/blackguards
 	name = "Armor - Arm and leg guards, black"
-	contains = list(/obj/item/clothing/accessory/armguards = 2,
-					/obj/item/clothing/accessory/legguards = 2)
+	contains = list(/obj/item/clothing/gloves/armguards = 2,
+					/obj/item/clothing/shoes/legguards = 2)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
 	access = access_armory
@@ -52,8 +52,8 @@
 	contains = list(/obj/item/shield/riot = 4,
 					/obj/item/clothing/head/helmet/riot = 4,
 					/obj/item/clothing/suit/armor/riot = 4,
-					/obj/item/storage/box/flashbangs,
-					/obj/item/storage/box/teargas)
+					/obj/item/box/flashbangs,
+					/obj/item/box/teargas)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "riot armor crate"
 	access = access_armory
@@ -101,7 +101,7 @@
 /decl/hierarchy/supply_pack/security/ion
 	name = "Weapons - Electromagnetic"
 	contains = list(/obj/item/gun/energy/ionrifle = 2,
-					/obj/item/storage/box/emps)
+					/obj/item/box/emps)
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "electromagnetic weapons crate"
 	access = access_armory
@@ -117,22 +117,22 @@
 
 /decl/hierarchy/supply_pack/security/flashbang
 	name = "Weapons - Flashbangs"
-	contains = list(/obj/item/storage/box/flashbangs = 2)
+	contains = list(/obj/item/box/flashbangs = 2)
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "flashbang crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/teargas
 	name = "Weapons - Tear gas grenades"
-	contains = list(/obj/item/storage/box/teargas = 2)
+	contains = list(/obj/item/box/teargas = 2)
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "tear gas grenades crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/shotgunammo
 	name = "Ammunition - Lethal shells"
-	contains = list(/obj/item/storage/box/ammo/shotgunammo = 2,
-					/obj/item/storage/box/ammo/shotgunshells = 2)
+	contains = list(/obj/item/box/ammo/shotgunammo = 2,
+					/obj/item/box/ammo/shotgunshells = 2)
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "lethal shotgun shells crate"
 	access = access_security
@@ -140,7 +140,7 @@
 
 /decl/hierarchy/supply_pack/security/shotgunbeanbag
 	name = "Ammunition - Beanbag shells"
-	contains = list(/obj/item/storage/box/ammo/beanbags = 3)
+	contains = list(/obj/item/box/ammo/beanbags = 3)
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "beanbag shotgun shells crate"
 	access = access_security
@@ -192,7 +192,7 @@
 
 /decl/hierarchy/supply_pack/security/detectivegear
 	name = "Forensics - investigation equipment"
-	contains = list(/obj/item/storage/box/evidence = 2,
+	contains = list(/obj/item/box/evidence = 2,
 					/obj/item/radio/headset/headset_sec,
 					/obj/item/stack/tape_roll/barricade_tape/police,
 					/obj/item/clothing/glasses/sunglasses,
@@ -203,9 +203,9 @@
 					/obj/item/taperecorder,
 					/obj/item/scanner/spectrometer,
 					/obj/item/camera_film = 2,
-					/obj/item/storage/photo_album,
+					/obj/item/photo_album,
 					/obj/item/scanner/reagent,
-					/obj/item/storage/briefcase/crimekit = 2)
+					/obj/item/briefcase/crimekit = 2)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "forensic equipment crate"
 	access = access_forensics_lockers

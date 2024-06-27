@@ -1,70 +1,92 @@
 /decl/loadout_option/accessory/ntaward
 	name = "corporate award selection"
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal
+	path = /obj/item/clothing/medal
 	cost = 8
 
 /decl/loadout_option/accessory/ntaward/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"sciences medal" =        /obj/item/clothing/accessory/medal/nanotrasen/bronze,
-		"distinguished service" = /obj/item/clothing/accessory/medal/nanotrasen/silver,
-		"command medal" =         /obj/item/clothing/accessory/medal/nanotrasen/gold
+		"sciences medal" =        /obj/item/clothing/medal/nanotrasen/bronze,
+		"distinguished service" = /obj/item/clothing/medal/nanotrasen/silver,
+		"command medal" =         /obj/item/clothing/medal/nanotrasen/gold
 	)
 
 /decl/loadout_option/accessory/armband_nt
 	name = "corporate armband"
-	path = /obj/item/clothing/accessory/armband/whitegreen
+	path = /obj/item/clothing/armband/whitegreen
 
 /decl/loadout_option/suit/labcoat_corp
 	name = "labcoat, corporate colors"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
+	path = /obj/item/clothing/suit/toggle/labcoat/science
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
+
+/decl/loadout_option/uniform/corp_polo
+	name = "corporate polo selection"
+	path = /obj/item/clothing/shirt/polo/corp
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
+
+/decl/loadout_option/uniform/corp_tunic
+	name = "corporate tunic selection"
+	path = /obj/item/clothing/shirt/tunic/corp
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
+
+/decl/loadout_option/uniform/corporate_jumpsuit
+	name = "corporate jumpsuit selection"
+	path = /obj/item/clothing/jumpsuit
+
+/decl/loadout_option/uniform/corporate_jumpsuit/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/jumpsuit/aether,
+		/obj/item/clothing/jumpsuit/hephaestus,
+		/obj/item/clothing/jumpsuit/wardt,
+		/obj/item/clothing/jumpsuit/pcrc,
+		/obj/item/clothing/jumpsuit/focal
+	)
 
 /decl/loadout_option/uniform/corporate
 	name = "corporate uniform selection"
-	path = /obj/item/clothing/under
+	path = /obj/item/clothing/costume
 
 /decl/loadout_option/uniform/corporate/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/under/polo/nanotrasen,
-		/obj/item/clothing/under/polo/heph,
-		/obj/item/clothing/under/polo/zeng,
-		/obj/item/clothing/under/mbill,
-		/obj/item/clothing/under/saare,
-		/obj/item/clothing/under/aether,
-		/obj/item/clothing/under/hephaestus,
-		/obj/item/clothing/under/guard/pcrc,
-		/obj/item/clothing/under/guard/pcrcsuit,
-		/obj/item/clothing/under/wardt,
-		/obj/item/clothing/under/grayson,
-		/obj/item/clothing/under/focal,
-		/obj/item/clothing/under/morpheus,
-		/obj/item/clothing/under/skinner,
-		/obj/item/clothing/under/dais
+		/obj/item/clothing/costume/mbill,
+		/obj/item/clothing/costume/saare,
+		/obj/item/clothing/costume/grayson,
+		/obj/item/clothing/costume/morpheus,
+		/obj/item/clothing/costume/skinner,
+		/obj/item/clothing/costume/dais
 	)
-
-/decl/loadout_option/uniform/corp_exec
-	name = "corporate colours, senior researcher"
-	path = /obj/item/clothing/under/executive
-	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_overalls
 	name = "corporate colours, coveralls"
-	path = /obj/item/clothing/under/work
+	path = /obj/item/clothing/jumpsuit/work
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_flight
 	name = "corporate colours, flight suit"
-	path = /obj/item/clothing/under/pilot
+	path = /obj/item/clothing/jumpsuit/pilot
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
+/decl/loadout_option/uniform/corp_exec_shirt
+	name = "corporate colours, slacks"
+	path = /obj/item/clothing/shirt/button/corp
+
 /decl/loadout_option/uniform/corp_exec_jacket
-	name = "corporate colours, liason suit"
-	path = /obj/item/clothing/under/suit_jacket/corp
+	name = "corporate jacket selection"
+	path = /obj/item/clothing/suit/jacket/corp
+	slot = slot_wear_suit_str
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
+
+/decl/loadout_option/uniform/corp_exec_tie
+	name = "corporate tie selection"
+	path = /obj/item/clothing/neck/tie/corp
+	slot = slot_w_uniform_str
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/nanotrasen_poncho
@@ -79,8 +101,8 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/storage/leather_jacket/nanotrasen,
-		/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+		/obj/item/clothing/suit/jacket/leather/nanotrasen,
+		/obj/item/clothing/suit/jacket/brown/nanotrasen
 	)
 
 /decl/loadout_option/suit/science_poncho
@@ -89,13 +111,13 @@
 
 /decl/loadout_option/suit/hoodie_nt
 	name = "hoodie, NanoTrasen"
-	path = /obj/item/clothing/suit/storage/toggle/hoodie/nt
+	path = /obj/item/clothing/suit/toggle/nt_hoodie
 
 /decl/loadout_option/suit/wintercoat_dais
 	name = "winter coat, DAIS"
-	path = /obj/item/clothing/suit/storage/toggle/wintercoat/dais
+	path = /obj/item/clothing/suit/jacket/winter/dais
 
 /decl/loadout_option/suit/leather/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
-	.[/datum/gear_tweak/path/specified_types_list] |= /obj/item/clothing/suit/storage/mbill
+	.[/datum/gear_tweak/path/specified_types_list] |= /obj/item/clothing/suit/mbill

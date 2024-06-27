@@ -1,27 +1,34 @@
 /decl/bodytype/lizard
-	name =                   "feminine"
-	bodytype_category =      BODYTYPE_HUMANOID
-	husk_icon =              'mods/species/bayliens/unathi/icons/husk.dmi'
-	icon_base =              'mods/species/bayliens/unathi/icons/body_female.dmi'
-	icon_deformed =          'mods/species/bayliens/unathi/icons/deformed_body_female.dmi'
-	cosmetics_icon =         'mods/species/bayliens/unathi/icons/cosmetics.dmi'
-	blood_overlays =         'icons/mob/human_races/species/human/blood_overlays.dmi'
-	bandages_icon =          'icons/mob/bandage.dmi'
-	limb_icon_intensity =    0.7
-	health_hud_intensity =   2
-	associated_gender =      FEMALE
-	uniform_state_modifier = "_f"
-	movement_slowdown =      0.5
-	base_color = "#066000"
-	appearance_flags = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
-	eye_darksight_range = 3
-	eye_flash_mod = 1.2
-	nail_noun = "claws"
+	name                    = "feminine"
+	bodytype_category       = BODYTYPE_HUMANOID
+	husk_icon               = 'mods/species/bayliens/unathi/icons/husk.dmi'
+	icon_base               = 'mods/species/bayliens/unathi/icons/body_female.dmi'
+	icon_deformed           = 'mods/species/bayliens/unathi/icons/deformed_body_female.dmi'
+	cosmetics_icon          = 'mods/species/bayliens/unathi/icons/cosmetics.dmi'
+	blood_overlays          = 'icons/mob/human_races/species/human/blood_overlays.dmi'
+	bandages_icon           = 'icons/mob/bandage.dmi'
+	limb_icon_intensity     = 0.7
+	health_hud_intensity    = 2
+	associated_gender       = FEMALE
+	onmob_state_modifiers   = list(slot_w_uniform_str = "f")
+	movement_slowdown       = 0.5
+	base_color              = "#066000"
+	appearance_flags        = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	eye_darksight_range     = 3
+	eye_flash_mod           = 1.2
+	nail_noun               = "claws"
+
+	age_descriptor = /datum/appearance_descriptor/age/lizard
 
 	default_sprite_accessories = list(
 		SAC_FRILLS = list(
 			/decl/sprite_accessory/frills/lizard/frills_long = "#192e19"
 		)
+	)
+
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 1.25,
+		/datum/appearance_descriptor/build =  1.25
 	)
 
 	override_organ_types = list(
@@ -62,11 +69,11 @@
 	return ..()
 
 /decl/bodytype/lizard/masculine
-	name =                   "masculine"
-	icon_base =              'mods/species/bayliens/unathi/icons/body_male.dmi'
-	icon_deformed =          'mods/species/bayliens/unathi/icons/deformed_body_male.dmi'
-	associated_gender =      MALE
-	uniform_state_modifier = null
+	name                  = "masculine"
+	icon_base             = 'mods/species/bayliens/unathi/icons/body_male.dmi'
+	icon_deformed         = 'mods/species/bayliens/unathi/icons/deformed_body_male.dmi'
+	associated_gender     = MALE
+	onmob_state_modifiers = null
 
 /obj/item/organ/external/tail/lizard
 	tail_icon = 'mods/species/bayliens/unathi/icons/tail.dmi'

@@ -2,6 +2,7 @@
 	var/name = PLURAL
 	var/bureaucratic_term  = "other"
 	var/informal_term = "hoopy frood"
+	var/honorific = "Mx."
 	var/pronoun_string
 
 	var/He   = "They"

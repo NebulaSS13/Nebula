@@ -13,13 +13,7 @@
 	a_intent =     I_HURT
 	mob_size =     MOB_SIZE_LARGE
 	atom_flags = ATOM_FLAG_SHIELD_CONTENTS | ATOM_FLAG_BLOCK_DIAGONAL_FACING
-
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	butchery_data = null
 
 	var/emp_damage = 0
 
@@ -204,7 +198,7 @@
 	to_chat(user, "It menaces with reinforcements of [material].")
 
 /mob/living/exosuit/return_air()
-	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc.return_air()
+	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc?.return_air()
 
 /mob/living/exosuit/GetIdCards(list/exceptions)
 	. = ..()
@@ -239,3 +233,16 @@
 		hud_power_control?.queue_icon_update()
 	else
 		to_chat(user, SPAN_WARNING("Error: No power cell was detected."))
+
+/mob/living/exosuit/get_available_postures()
+	var/static/list/available_postures = list(
+		/decl/posture/standing
+	)
+	return available_postures
+
+/mob/living/exosuit/try_awaken(mob/user)
+	return FALSE
+
+/mob/living/exosuit/handle_stance()
+	stance_damage = 0
+	return

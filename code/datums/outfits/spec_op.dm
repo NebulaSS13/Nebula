@@ -1,13 +1,13 @@
 /decl/hierarchy/outfit/spec_op_officer
 	name = "Spec Ops - Officer"
-	uniform = /obj/item/clothing/under/syndicate/combat
+	uniform = /obj/item/clothing/pants/casual/camo/outfit_combat
 	suit = /obj/item/clothing/suit/armor/officer
 	l_ear = /obj/item/radio/headset/ert
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	head = /obj/item/clothing/head/beret
 	belt = /obj/item/gun/energy/pulse_pistol
-	back = /obj/item/storage/backpack/satchel
+	back = /obj/item/backpack/satchel
 	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
 	gloves = /obj/item/clothing/gloves/thick/combat
 
@@ -26,13 +26,13 @@
 
 /decl/hierarchy/outfit/ert
 	name = "Spec Ops - Emergency response team"
-	uniform = /obj/item/clothing/under/syndicate/combat
+	uniform = /obj/item/clothing/pants/casual/camo/outfit_combat
 	shoes = /obj/item/clothing/shoes/jackboots/swat
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_ear = /obj/item/radio/headset/ert
 	belt = /obj/item/gun/energy/gun
 	glasses = /obj/item/clothing/glasses/sunglasses
-	back = /obj/item/storage/backpack/satchel
+	back = /obj/item/backpack/satchel
 	pda_type = /obj/item/modular_computer/pda/ert
 
 	id_slot = slot_wear_id_str
@@ -40,10 +40,10 @@
 
 /decl/hierarchy/outfit/mercenary
 	name = "Spec Ops - Mercenary"
-	uniform = /obj/item/clothing/under/syndicate
+	uniform = /obj/item/clothing/pants/casual/camo/outfit
 	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
 	l_ear = /obj/item/radio/headset/mercenary
-	belt = /obj/item/storage/belt/holster/security
+	belt = /obj/item/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_pocket = /obj/item/chems/pill/cyanide

@@ -17,15 +17,12 @@
 	name = "Shadow"
 	name_plural = "shadows"
 	description = "A being of pure darkness, hates the light and all that comes with it."
-
-	meat_type = null
-	bone_material = null
-	skin_material = null
+	butchery_data = null
 
 	available_bodytypes = list(/decl/bodytype/starlight/shadow)
 
 	unarmed_attacks = list(/decl/natural_attack/claws/strong, /decl/natural_attack/bite/sharp)
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 
 	blood_types = list(
 		/decl/blood_type/shadowstuff
@@ -37,7 +34,7 @@
 
 	species_flags = SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED
 
-/decl/species/starlight/shadow/handle_environment_special(var/mob/living/carbon/human/H)
+/decl/species/starlight/shadow/handle_environment_special(var/mob/living/human/H)
 	if(H.is_in_stasis() || H.stat == DEAD || H.isSynthetic())
 		return
 	var/light_amount = 0

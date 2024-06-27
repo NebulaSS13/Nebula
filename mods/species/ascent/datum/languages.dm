@@ -19,14 +19,14 @@
 /decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
 	var/mob/living/S = speaker
 	if(!istype(S))
-		return FALSE
+		return SPEECH_RESULT_INCAPABLE
 	if(S.isSynthetic())
-		return TRUE
+		return SPEECH_RESULT_GOOD
 	if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
+		var/mob/living/human/H = speaker
 		if(H.species.name in correct_mouthbits)
-			return TRUE
-	return FALSE
+			return SPEECH_RESULT_GOOD
+	return SPEECH_RESULT_MUDDLED
 
 /decl/language/mantid/muddle(var/message)
 	message = replacetext(message, "...",  ".")
@@ -73,7 +73,7 @@
 	if(istype(speaker) && speaker.isSynthetic())
 		return TRUE
 	else if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
+		var/mob/living/human/H = speaker
 		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
 	return FALSE
 
@@ -89,9 +89,9 @@
 	shorthand = "KB"
 
 #define isascentdrone(X) istype(X, /mob/living/silicon/robot/flying/ascent)
-/decl/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
+/decl/language/mantid/worldnet/check_special_condition(var/mob/living/other)
 	if(isascentdrone(other))
 		return TRUE
-	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.internal_organs))
+	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.get_internal_organs()))
 		return TRUE
 	return FALSE

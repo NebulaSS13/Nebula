@@ -52,12 +52,12 @@
 
 /obj/item/a_gift/attack_self(mob/M)
 	var/gift_type = pick(
-		/obj/item/storage/wallet,
-		/obj/item/storage/photo_album,
-		/obj/item/storage/box/snappops,
-		/obj/item/storage/box/fancy/crayons,
-		/obj/item/storage/backpack/holding,
-		/obj/item/storage/belt/champion,
+		/obj/item/wallet,
+		/obj/item/photo_album,
+		/obj/item/box/snappops,
+		/obj/item/box/fancy/crayons,
+		/obj/item/backpack/holding,
+		/obj/item/belt/champion,
 		/obj/item/tool/pickaxe/titanium,
 		/obj/item/pen/invisible,
 		/obj/random/makeup,
@@ -92,11 +92,11 @@
 		/obj/item/chems/food/grown/ambrosiavulgaris,
 		/obj/item/paicard,
 		/obj/item/synthesized_instrument/violin,
-		/obj/item/storage/belt/utility/full,
-		/obj/item/clothing/accessory/horrible,
-		/obj/item/storage/box/large/foam_gun,
-		/obj/item/storage/box/large/foam_gun/burst,
-		/obj/item/storage/box/large/foam_gun/revolver)
+		/obj/item/belt/utility/full,
+		/obj/item/clothing/neck/tie/horrible,
+		/obj/item/box/large/foam_gun,
+		/obj/item/box/large/foam_gun/burst,
+		/obj/item/box/large/foam_gun/revolver)
 
 	if(!ispath(gift_type,/obj/item))	return
 

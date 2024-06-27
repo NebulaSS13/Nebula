@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(mapping)
 	/// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 	var/list/map_levels
 	/// The turf type used when generating floors between Z-levels at startup.
-	var/base_floor_type = /turf/simulated/floor/airless
+	var/base_floor_type = /turf/floor/airless
 	/// Replacement area, if a base_floor_type is generated. Leave blank to skip.
 	var/base_floor_area
 	/// A list of connected z-levels to avoid repeatedly rebuilding connections
@@ -59,7 +59,42 @@ SUBSYSTEM_DEF(mapping)
 /datum/controller/subsystem/mapping/PreInit()
 	reindex_lists()
 
+#ifdef UNIT_TEST
+/datum/controller/subsystem/mapping/proc/test_load_map_templates()
+	for(var/map_template_name in map_templates)
+		var/datum/map_template/map_template = get_template(map_template_name)
+		// Away sites are supposed to be tested separately in the Away Site environment
+		if(SSunit_tests.is_tested_separately(map_template))
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is tested separately.")
+			continue
+		if(map_template.is_runtime_generated())
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is generated at runtime.")
+			continue
+		load_template(map_template)
+		if(map_template.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
+			load_template(map_template)
+	log_unit_test("Map templates loaded.")
+
+/datum/controller/subsystem/mapping/proc/load_template(datum/map_template/map_template)
+	// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
+	if(map_template.tallness == 1)
+		increment_world_z_size(/datum/level_data/unit_test)
+		var/turf/center = WORLD_CENTER_TURF(world.maxz)
+		if(!center)
+			CRASH("'[map_template]' (size: [map_template.width]x[map_template.height]) couldn't locate center turf at ([WORLD_CENTER_X][WORLD_CENTER_Y][world.maxz]) with world size ([WORLD_SIZE_TO_STRING])")
+		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(center)]")
+		map_template.load(center, centered = TRUE)
+	else // Multi-Z templates are loaded using different means
+		log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
+		map_template.load_new_z()
+#endif
+
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+
+#ifdef UNIT_TEST
+	// Shouldn't we be forcing this to true?
+	set_config_value(/decl/config/toggle/roundstart_level_generation, FALSE)
+#endif
 
 	reindex_lists()
 
@@ -96,16 +131,6 @@ SUBSYSTEM_DEF(mapping)
 	// Build away sites.
 	global.using_map.build_away_sites()
 	global.using_map.build_planets()
-	for(var/z = old_maxz + 1 to world.maxz)
-		var/datum/level_data/level = levels_by_z[z]
-		if(!istype(level))
-			level = new /datum/level_data/space(z)
-			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
-		level.setup_level_data()
-
-	// Generate turbolifts last, since away sites may have elevators to generate too.
-	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
-		turbolift.build_turbolift()
 
 	// Resize the world to the max template size to fix a BYOND bug with world resizing breaking events.
 	// REMOVE WHEN THIS IS FIXED: https://www.byond.com/forum/post/2833191
@@ -120,10 +145,22 @@ SUBSYSTEM_DEF(mapping)
 	if (new_maxy > world.maxy)
 		world.maxy = new_maxy
 
-	// Initialize z-level objects.
 #ifdef UNIT_TEST
-	set_config_value(/decl/config/toggle/roundstart_level_generation, FALSE) //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
+	// Load all map templates if we're unit testing.
+	test_load_map_templates()
 #endif
+
+	// Check/associated/setup our level data objects.
+	for(var/z = old_maxz + 1 to world.maxz)
+		var/datum/level_data/level = levels_by_z[z]
+		if(!istype(level))
+			level = new /datum/level_data/space(z)
+			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
+		level.setup_level_data()
+
+	// Generate turbolifts last, since away sites may have elevators to generate too.
+	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
+		turbolift.build_turbolift()
 
 	. = ..()
 
@@ -159,7 +196,7 @@ SUBSYSTEM_DEF(mapping)
 	. = list()
 	for(var/template_type in subtypesof(/datum/map_template))
 		var/datum/map_template/template = template_type
-		if(initial(template.template_parent_type) != template_type && initial(template.name))
+		if(!TYPE_IS_ABSTRACT(template) && initial(template.template_parent_type) != template_type && initial(template.name))
 			. += new template_type(type) // send name as a param to catch people doing illegal ad hoc creation
 
 /datum/controller/subsystem/mapping/proc/get_template(var/template_name)

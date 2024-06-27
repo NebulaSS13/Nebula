@@ -9,7 +9,7 @@
 	faction = "leeches"
 	can_pry = FALSE
 	break_stuff_probability = 5
-	flash_vulnerability = 0
+	flash_protection = FLASH_PROTECTION_MAJOR
 	bleed_colour = COLOR_VIOLET
 
 	var/suck_potency = 8
@@ -27,14 +27,14 @@
 		else
 			belly -= 1
 
-/mob/living/simple_animal/hostile/leech/AttackingTarget()
+/mob/living/simple_animal/hostile/leech/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.) && belly <= 75)
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 		if(istype(S) && !length(S.breaches))
 			return
-		H.remove_blood_simple(suck_potency)
+		H.remove_blood(suck_potency, absolute = TRUE)
 		if(current_health < get_max_health())
 			heal_overall_damage(suck_potency / 1.5)
 		belly += clamp(suck_potency, 0, 100)
@@ -64,7 +64,7 @@
 	QDEL_NULL(proxy_listener)
 	. = ..()
 
-/obj/structure/leech_spawner/proc/burst(var/mob/living/carbon/victim)
+/obj/structure/leech_spawner/proc/burst(var/mob/living/victim)
 	if(!proxy_listener || !istype(victim) || !(victim in view(5, src)))
 		return
 	for(var/i in 1 to 12)

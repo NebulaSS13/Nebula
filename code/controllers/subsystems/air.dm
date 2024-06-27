@@ -134,6 +134,7 @@ SUBSYSTEM_DEF(air)
 
 	var/simulated_turf_count = 0
 	for(var/turf/T in world)
+		// Although update_air_properties can be called on non-ZAS participating turfs for convenience, it is unnecessary on roundstart/reboot.
 		if(!SHOULD_PARTICIPATE_IN_ZONES(T))
 			continue
 		simulated_turf_count++
@@ -337,8 +338,13 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			merge(A.zone,B.zone)
 			return
 
+	#ifdef MULTIZAS
+	var/a_to_b = get_dir_multiz(A,B)
+	var/b_to_a = get_dir_multiz(B,A)
+	#else
 	var/a_to_b = get_dir(A,B)
 	var/b_to_a = get_dir(B,A)
+	#endif
 
 	if(!A.connections) A.connections = new
 	if(!B.connections) B.connections = new
@@ -362,7 +368,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	ASSERT(isturf(T))
 	#endif
-	if(T.needs_air_update || !SHOULD_PARTICIPATE_IN_ZONES(T))
+	if(T.needs_air_update)
 		return
 	tiles_to_update += T
 	#ifdef ZASDBG
@@ -419,23 +425,6 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		edges += edge
 		edge.recheck()
 		return edge
-
-/datum/controller/subsystem/air/proc/has_same_air(turf/A, turf/B)
-	if(A.initial_gas)
-		if(!B.initial_gas)
-			return 0
-		for(var/g in A.initial_gas)
-			if(A.initial_gas[g] != B.initial_gas[g])
-				return 0
-	if(B.initial_gas)
-		if(!A.initial_gas)
-			return 0
-		for(var/g in B.initial_gas)
-			if(A.initial_gas[g] != B.initial_gas[g])
-				return 0
-	if(A.temperature != B.temperature)
-		return 0
-	return 1
 
 /datum/controller/subsystem/air/proc/remove_edge(connection_edge/E)
 	edges -= E

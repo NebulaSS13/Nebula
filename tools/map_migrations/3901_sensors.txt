@@ -1,0 +1,2 @@
+/obj/item/clothing/accessory/vitals_sensor/@SUBTYPES : /obj/item/clothing/sensor/vitals/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/buddytag/@SUBTYPES : /obj/item/clothing/sensor/buddytag/@SUBTYPES{@OLD}

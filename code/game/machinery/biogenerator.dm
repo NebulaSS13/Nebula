@@ -28,25 +28,25 @@
 		"Food" = list(
 			/obj/item/chems/drinks/milk/smallcarton = 30,
 			/obj/item/chems/drinks/milk = 50,
-			/obj/item/chems/food/meat/syntiflesh = 50,
-			/obj/item/storage/box/fancy/egg_box = 300),
+			/obj/item/chems/food/butchery/meat/syntiflesh = 50,
+			/obj/item/box/fancy/egg_box = 300),
 		"Nutrients" = list(
 			/obj/item/chems/glass/bottle/eznutrient = 60,
 			/obj/item/chems/glass/bottle/left4zed = 120,
 			/obj/item/chems/glass/bottle/robustharvest = 120),
 		"Leather" = list(
-			/obj/item/storage/wallet/leather = 100,
+			/obj/item/wallet/leather = 100,
 			/obj/item/clothing/gloves/thick/botany = 250,
-			/obj/item/storage/belt/utility = 300,
-			/obj/item/storage/backpack/satchel = 400,
-			/obj/item/storage/bag/cash = 400,
+			/obj/item/belt/utility = 300,
+			/obj/item/backpack/satchel = 400,
+			/obj/item/bag/cash = 400,
 			/obj/item/clothing/shoes/workboots = 400,
 			/obj/item/clothing/shoes/craftable = 400,
 			/obj/item/clothing/shoes/dress = 400,
 			/obj/item/clothing/suit/leathercoat = 500,
-			/obj/item/clothing/suit/storage/toggle/brown_jacket = 500,
-			/obj/item/clothing/suit/storage/toggle/bomber = 500,
-			/obj/item/clothing/suit/storage/toggle/wintercoat = 500,
+			/obj/item/clothing/suit/jacket/brown = 500,
+			/obj/item/clothing/suit/jacket/bomber = 500,
+			/obj/item/clothing/suit/jacket/winter = 500,
 			/obj/item/stack/material/bolt/mapped/cloth/ten = 300,
 			/obj/item/stack/material/bolt/mapped/cloth = 30,
 			/obj/item/stack/material/skin/mapped/leather/ten = 300,
@@ -59,8 +59,8 @@
 	. = ..()
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
-	..()
-	update_icon()
+	if((. = ..()))
+		update_icon()
 
 /obj/machinery/biogenerator/on_update_icon()
 	if(state == BG_NO_BEAKER)
@@ -96,22 +96,21 @@
 
 	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
-	else if(istype(O, /obj/item/storage/plants))
-		var/obj/item/storage/plants/P = O
-		var/hadPlants = 0
-		for(var/obj/item/chems/food/grown/G in P.contents)
-			hadPlants = 1
-			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
-			ingredients++
-			if(ingredients >= capacity)
-				to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
-				break
-		P.finish_bulk_removal() //Now do the UI stuff once.
-		if(!hadPlants)
-			to_chat(user, "<span class='notice'>\The [P] has no produce inside.</span>")
-		else if(ingredients < capacity)
-			to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
-
+	else if(isobj(O))
+		if(O.storage)
+			var/hadPlants = 0
+			for(var/obj/item/chems/food/grown/G in O.storage.get_contents())
+				hadPlants = 1
+				O.storage.remove_from_storage(user, G, src, TRUE)
+				ingredients++
+				if(ingredients >= capacity)
+					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
+					break
+			O.storage.finish_bulk_removal() //Now do the UI stuff once.
+			if(!hadPlants)
+				to_chat(user, "<span class='notice'>\The [O] has no produce inside.</span>")
+			else if(ingredients < capacity)
+				to_chat(user, "<span class='notice'>You empty \the [O] into \the [src].</span>")
 
 	else if(!istype(O, /obj/item/chems/food/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
@@ -129,7 +128,7 @@
 	user.set_machine(src)
 	var/list/data = list()
 	data["state"] = state
-	var/name
+	var/product_name
 	var/cost
 	var/type_name
 	var/path
@@ -142,12 +141,11 @@
 			var/list/listed_products = list()
 			for(var/c_product =1 to current_content.len)
 				path = current_content[c_product]
-				var/atom/A = path
-				name = initial(A.name)
+				product_name = atom_info_repository.get_name_for(path)
 				cost = current_content[path]
 				listed_products.Add(list(list(
 					"product_index" = c_product,
-					"name" = name,
+					"name" = product_name,
 					"cost" = cost)))
 			listed_types.Add(list(list(
 				"type_name" = type_name,

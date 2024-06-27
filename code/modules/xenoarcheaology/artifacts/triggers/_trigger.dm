@@ -4,7 +4,7 @@
 
 //There procs should return TRUE if trigger is activated, FALSE if nothing happens
 
-/datum/artifact_trigger/proc/on_hit(obj/O, mob/user)
+/datum/artifact_trigger/proc/on_hit(obj/item/hit_with, mob/user)
 	return FALSE
 
 /datum/artifact_trigger/proc/on_touch(mob/M)

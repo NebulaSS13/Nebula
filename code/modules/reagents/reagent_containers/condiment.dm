@@ -42,11 +42,12 @@
 			if(length(tmp_label))
 				to_chat(user, SPAN_NOTICE("You set the label to \"[tmp_label]\"."))
 				label_text = tmp_label
-				name = addtext(name," ([label_text])")
 			else
 				to_chat(user, SPAN_NOTICE("You remove the label."))
 				label_text = null
-				on_reagent_change()
+			update_container_name()
+			update_container_desc()
+			update_icon()
 		return
 
 /obj/item/chems/condiment/afterattack(var/obj/target, var/mob/user, var/proximity)
@@ -77,8 +78,8 @@
 
 /obj/item/chems/condiment/on_reagent_change()
 	is_special_bottle = reagents?.total_volume && special_bottles[reagents?.primary_reagent]
-	..()
-	update_center_of_mass()
+	if((. = ..()))
+		update_center_of_mass()
 
 /obj/item/chems/condiment/update_container_name()
 	name = is_special_bottle ? initial(is_special_bottle.name) : initial(name)
@@ -366,7 +367,7 @@
 	icon_state = "packet_medium"
 
 /obj/item/chems/condiment/small/packet/protein/populate_reagents()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/solid/organic/meat, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/crayon
 	name = "crayon powder packet"

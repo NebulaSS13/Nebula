@@ -16,7 +16,7 @@
 /mob/proc/move_down()
 	SelfMove(DOWN)
 
-/mob/living/carbon/human/move_up()
+/mob/living/human/move_up()
 	var/turf/old_loc = loc
 	..()
 	if(loc != old_loc)
@@ -48,7 +48,7 @@
 /mob/proc/can_overcome_gravity()
 	return FALSE
 
-/mob/living/carbon/human/can_overcome_gravity()
+/mob/living/human/can_overcome_gravity()
 	//First do species check
 	if(species && species.can_overcome_gravity(src))
 		return 1
@@ -71,26 +71,6 @@
 			if(locate(type) in src.loc)
 				return 1
 	return 0
-
-/mob/proc/can_ztravel()
-	return 0
-
-/mob/living/carbon/human/can_ztravel()
-	if(Process_Spacemove())
-		return 1
-
-	if(Check_Shoegrip())	//scaling hull with magboots
-		for(var/turf/T in RANGE_TURFS(src, 1))
-			if(T.density && T.simulated)
-				return 1
-
-/mob/living/silicon/robot/can_ztravel()
-	if(Process_Spacemove()) //Checks for active jetpack
-		return 1
-
-	for(var/turf/T in RANGE_TURFS(src, 1)) //Robots get "magboots"
-		if(T.density && T.simulated)
-			return 1
 
 //FALLING STUFF
 
@@ -182,14 +162,14 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
-/mob/living/carbon/human/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/mob/living/human/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	if(..())
 		return species.can_fall(src)
 
 /atom/movable/proc/protected_from_fall_damage(var/turf/landing)
 	if(!!(locate(/obj/structure/stairs) in landing))
 		return TRUE
-	var/turf/exterior/wall/ramp = landing
+	var/turf/wall/natural/ramp = landing
 	if(istype(ramp) && ramp.ramp_slope_direction) // walking down a ramp
 		return TRUE
 
@@ -197,7 +177,7 @@
 	. = ..()
 	if(!.)
 		// This is very silly, but it can be refined and made more appropriate as our multiz turf system is expanded.
-		var/obj/item/storage/backpack/parachute/parachute = get_equipped_item(slot_back_str)
+		var/obj/item/backpack/parachute/parachute = get_equipped_item(slot_back_str)
 		if(istype(parachute) && parachute.packed)
 			parachute.packed = FALSE
 			return TRUE
@@ -259,7 +239,7 @@
 		return 100
 	return BASE_STORAGE_COST(w_class)
 
-/mob/living/carbon/human/apply_fall_damage(var/turf/landing)
+/mob/living/human/apply_fall_damage(var/turf/landing)
 	if(status_flags & GODMODE)
 		return
 	if(species && species.handle_fall_special(src, landing))
@@ -288,7 +268,7 @@
 			victim.dislocate()
 			to_chat(src, "<span class='warning'>You feel a sickening pop as your [victim.joint] is wrenched out of the socket.</span>")
 
-/mob/living/carbon/human/proc/climb_up(atom/A)
+/mob/living/human/proc/climb_up(atom/A)
 	if(!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.
 		return FALSE
 
@@ -310,21 +290,59 @@
 	set desc = "If you want to know what's above."
 	set category = "IC"
 
-	if(client && !is_physically_disabled())
-		if(z_eye)
-			reset_view(null)
-			qdel(z_eye)
-			z_eye = null
+	if(!client || is_physically_disabled())
+		to_chat(src, SPAN_WARNING("You can't look up right now."))
+		return
+
+	if(z_eye)
+		reset_view(null)
+		qdel(z_eye)
+		z_eye = null
+		return
+
+	var/turf/above = GetAbove(src)
+	if(istype(above) && TURF_IS_MIMICKING(above))
+		z_eye = new /atom/movable/z_observer/z_up(src, src)
+		to_chat(src, SPAN_NOTICE("You look up."))
+		reset_view(z_eye)
+		return
+
+	if(above)
+		to_chat(src, SPAN_NOTICE("You can see \the [above]."))
+		return
+
+	check_sky()
+
+/mob/living/verb/check_sky()
+	set name = "Check Sky"
+	if(!client || is_physically_disabled() || !isturf(loc))
+		to_chat(src, SPAN_WARNING("You can't check the sky right now."))
+		return
+
+	var/turf/my_turf = loc
+	if(!my_turf.is_outside())
+		var/cannot_see_outside = TRUE
+		for(var/turf/neighbor in view(3, src))
+			if(neighbor.is_outside())
+				cannot_see_outside = FALSE
+				break
+		if(cannot_see_outside)
+			to_chat(src, SPAN_WARNING("You are indoors, and cannot see the sky from here."))
 			return
-		var/turf/above = GetAbove(src)
-		if(istype(above) && TURF_IS_MIMICKING(above))
-			z_eye = new /atom/movable/z_observer/z_up(src, src)
-			to_chat(src, "<span class='notice'>You look up.</span>")
-			reset_view(z_eye)
-			return
-		to_chat(src, "<span class='notice'>You can see \the [above ? above : "ceiling"].</span>")
+
+	var/obj/abstract/weather_system/weather = SSweather.weather_by_z[my_turf.z]
+	var/decl/state/weather/current_weather = weather?.weather_system?.current_state
+	if(istype(current_weather) && current_weather.descriptor)
+		to_chat(src, SPAN_NOTICE(current_weather.descriptor))
 	else
-		to_chat(src, "<span class='notice'>You can't look up right now.</span>")
+		to_chat(src, SPAN_NOTICE("The weather is indeterminate."))
+
+	var/datum/level_data/level = SSmapping.levels_by_z[my_turf.z]
+	var/datum/daycycle/daycycle = level?.daycycle_id && SSdaycycle.get_daycycle(level.daycycle_id)
+	if(daycycle?.current_period?.name)
+		to_chat(src, SPAN_NOTICE("It is currently [daycycle.current_period.name]."))
+	else
+		to_chat(src, SPAN_NOTICE("The time of day is indeterminate."))
 
 /mob/living/verb/lookdown()
 	set name = "Look Down"
@@ -357,7 +375,7 @@
 /mob/living/simple_animal/can_float()
 	return is_aquatic
 
-/mob/living/carbon/human/can_float()
+/mob/living/human/can_float()
 	return species.can_float(src)
 
 /mob/living/silicon/can_float()

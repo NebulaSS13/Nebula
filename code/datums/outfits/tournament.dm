@@ -11,17 +11,17 @@
 
 /decl/hierarchy/outfit/tournament_gear/red
 	name = "Tournament - Red"
-	uniform = /obj/item/clothing/under/color/red
+	uniform = /obj/item/clothing/jumpsuit/red
 
 /decl/hierarchy/outfit/tournament_gear/green
 	name = "Tournament gear - Green"
-	uniform = /obj/item/clothing/under/color/green
+	uniform = /obj/item/clothing/jumpsuit/green
 
 /decl/hierarchy/outfit/tournament_gear/gangster
 	name = "Tournament gear - Gangster"
 	head = /obj/item/clothing/head/det
-	uniform = /obj/item/clothing/under/det
-	suit_store = /obj/item/clothing/suit/storage/det_trench
+	uniform = /obj/item/clothing/pants/slacks/outfit/detective
+	suit_store = /obj/item/clothing/suit/det_trench
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	hands = list(
 		/obj/item/knife/combat,
@@ -32,7 +32,7 @@
 /decl/hierarchy/outfit/tournament_gear/chef
 	name = "Tournament gear - Chef"
 	head = /obj/item/clothing/head/chefhat
-	uniform = /obj/item/clothing/under/chef
+	uniform = /obj/item/clothing/pants/slacks/outfit_chef
 	suit = /obj/item/clothing/suit/chef
 	hands = list(
 		/obj/item/knife/combat,
@@ -43,8 +43,8 @@
 
 /decl/hierarchy/outfit/tournament_gear/janitor
 	name = "Tournament gear - Janitor"
-	uniform = /obj/item/clothing/under/janitor
-	back = /obj/item/storage/backpack
+	uniform = /obj/item/clothing/jumpsuit/janitor
+	back = /obj/item/backpack
 	hands = list(
 		/obj/item/mop,
 		/obj/item/chems/glass/bucket
@@ -53,7 +53,7 @@
 	r_pocket = /obj/item/grenade/chem_grenade/cleaner
 	backpack_contents = list(/obj/item/stack/tile/floor = 6)
 
-/decl/hierarchy/outfit/tournament_gear/janitor/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/tournament_gear/janitor/post_equip(var/mob/living/human/H)
 	..()
 	var/obj/item/chems/glass/bucket/bucket = locate(/obj/item/chems/glass/bucket) in H
 	if(bucket)

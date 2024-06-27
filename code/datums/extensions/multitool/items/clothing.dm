@@ -1,8 +1,3 @@
-/obj/item/clothing/Initialize()
-	. = ..()
-	if(ACCESSORY_SLOT_SENSORS in valid_accessory_slots)
-		set_extension(src, /datum/extension/interactive/multitool/items/clothing)
-
 /datum/extension/interactive/multitool/items/clothing/interact(var/obj/item/multitool/M, var/mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
 		return
@@ -10,7 +5,7 @@
 	if(!istype(uniform))
 		to_chat(user, SPAN_WARNING("\The [user] is not wearing an appropriate uniform."))
 		return
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in uniform.accessories
+	var/obj/item/clothing/sensor/vitals/sensor = locate() in uniform.accessories
 	if(!sensor)
 		to_chat(user, SPAN_WARNING("\The [uniform] doesn't have a vitals sensors attached."))
 		return

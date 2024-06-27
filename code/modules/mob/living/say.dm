@@ -100,25 +100,6 @@
 	returns[2] = null
 	return returns
 
-/mob/living/proc/get_speech_ending(verb, var/ending)
-	if(ending=="!")
-		return pick("exclaims","shouts","yells")
-	if(ending=="?")
-		return "asks"
-	return verb
-
-/mob/living/proc/format_say_message(var/message = null)
-	if(!message)
-		return
-
-	message = html_decode(message)
-
-	var/end_char = copytext_char(message, -1)
-	if(!(end_char in list(".", "?", "!", "-", "~")))
-		message += "."
-
-	return html_encode(message)
-
 /mob/living/proc/handle_mob_specific_speech(message, message_mode, verb = "says", decl/language/speaking)
 	SHOULD_CALL_PARENT(TRUE)
 	return FALSE
@@ -149,7 +130,8 @@
 		else
 			message = copytext_char(message, 3)
 
-	message = trim_left(message)
+	// trim pre-language-parsing so we can get language and radio keys
+	message = trim(message)
 
 	//parse the language code and consume it
 	if(!speaking)
@@ -184,13 +166,18 @@
 		else
 			verb = say_quote(message, speaking)
 
-	message = trim_left(message)
+	message = trim(html_encode(message)) // trim again post-language-parsing
 	message = handle_autohiss(message, speaking)
-	message = format_say_message(message)
 	message = filter_modify_message(message)
+	message = handle_autopunctuation(message)
 
-	if(speaking && !speaking.can_be_spoken_properly_by(src))
-		message = speaking.muddle(message)
+	if(speaking)
+		var/speech_ability_result = speaking.can_be_spoken_properly_by(src)
+		if(speech_ability_result == SPEECH_RESULT_MUDDLED)
+			message = speaking.muddle(message)
+		else if(speech_ability_result == SPEECH_RESULT_INCAPABLE)
+			to_chat(src, SPAN_WARNING("You don't have the right equipment to communicate in that way!")) // weird phrasing, but needs to cover speaking and signing
+			return
 
 	if(!(speaking && (speaking.flags & LANG_FLAG_NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)

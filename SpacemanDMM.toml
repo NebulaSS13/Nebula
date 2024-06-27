@@ -51,3 +51,22 @@ macro_undefined_no_definition = "error"
 
 # Raised by Object Tree
 override_precedes_definition = "error"
+
+[map_renderer]
+hide_invisible = [
+	"/obj/effect/step_trigger",
+	"/obj/abstract",
+]
+
+[map_renderer.render_passes]
+overlays = false
+gravity-gen = false
+pretty = false
+icon-smoothing = false
+icon-smoothing-2016 = true
+smart-cables = false
+# TODO: add support for directional_offsets var to Jupyterkat's fork?
+offsets = false
+# maybe also add support for our random spawners?
+random = false
+spawners = false

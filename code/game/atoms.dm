@@ -52,12 +52,24 @@
 	var/tmp/default_pixel_z
 	var/tmp/default_pixel_w
 
-	// Health vars largely used by obj and mob.
+	/// (FLOAT) Current remaining health value.
 	var/current_health
+	/// (FLOAT) Theoretical maximum health value.
 	var/max_health
+
+	/// (DATUM) /datum/storage instance to use for this obj. Set to a type for instantiation on init.
+	var/datum/storage/storage
+	/// (FLOAT) world.time of last on_reagent_update call, used to prevent recursion due to reagents updating reagents
+	VAR_PRIVATE/_reagent_update_started = 0
 
 /atom/proc/get_max_health()
 	return max_health
+
+/atom/proc/get_health_ratio()
+	return current_health/get_max_health()
+
+/atom/proc/get_health_percent(var/sigfig = 1)
+	return round(get_health_ratio()*100, sigfig)
 
 /**
 	Adjust variables prior to Initialize() based on the map
@@ -121,8 +133,21 @@
 	return 0
 
 /// Handle reagents being modified
+/atom/proc/try_on_reagent_change()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	set waitfor = FALSE
+	if(_reagent_update_started >= world.time)
+		return FALSE
+	_reagent_update_started = world.time
+	sleep(0) // Defer to end of tick so we don't drop subsequent reagent updates.
+	return on_reagent_change()
+
 /atom/proc/on_reagent_change()
 	SHOULD_CALL_PARENT(TRUE)
+	if(storage && reagents?.total_volume)
+		for(var/obj/item/thing in get_stored_inventory())
+			thing.fluid_act(reagents)
+	return TRUE
 
 /**
 	Handle an atom bumping this atom
@@ -361,15 +386,21 @@
 		if(cell)
 			LAZYREMOVE(., cell)
 
+// Return a list of all stored (in inventory) atoms, defaulting to above.
+/atom/proc/get_stored_inventory()
+	SHOULD_CALL_PARENT(TRUE)
+	return get_contained_external_atoms()
+
 // Return a list of all temperature-sensitive atoms, defaulting to above.
 /atom/proc/get_contained_temperature_sensitive_atoms()
+	SHOULD_CALL_PARENT(TRUE)
 	return get_contained_external_atoms()
 
 /// Dump the contents of this atom onto its loc
-/atom/proc/dump_contents()
+/atom/proc/dump_contents(atom/forced_loc = loc, mob/user)
 	for(var/thing in get_contained_external_atoms())
 		var/atom/movable/AM = thing
-		AM.dropInto(loc)
+		AM.dropInto(forced_loc)
 		if(ismob(AM))
 			var/mob/M = AM
 			if(M.client)
@@ -480,17 +511,11 @@
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return FALSE
 
-	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialize it.
+	if(!islist(blood_DNA))	//if our list of DNA doesn't exist yet (or isn't a list) initialize it.
 		blood_DNA = list()
 
 	was_bloodied = 1
-	blood_color = COLOR_BLOOD_HUMAN
-	if(istype(M))
-		if (!istype(M.dna, /datum/dna))
-			M.dna = new /datum/dna()
-			M.dna.real_name = M.real_name
-		M.check_dna()
-		blood_color = M.get_blood_color()
+	blood_color = istype(M) ? M.get_blood_color() : COLOR_BLOOD_HUMAN
 	return TRUE
 
 /**
@@ -513,25 +538,6 @@
 			forensics.remove_data(/datum/forensics/gunshot_residue)
 		return TRUE
 	return FALSE
-
-/// Only used by Sandbox_Spacemove, which is used by nothing
-/// - TODO: Remove this
-/atom/proc/get_global_map_pos()
-	if(!islist(global.global_map) || !length(global.global_map)) return
-	var/cur_x = null
-	var/cur_y = null
-	var/list/y_arr = null
-	for(cur_x=1,cur_x<=global.global_map.len,cur_x++)
-		y_arr = global.global_map[cur_x]
-		cur_y = y_arr.Find(src.z)
-		if(cur_y)
-			break
-//	log_debug("X = [cur_x]; Y = [cur_y]")
-
-	if(cur_x && cur_y)
-		return list("x"=cur_x,"y"=cur_y)
-	else
-		return 0
 
 /**
 	Check if this atom can be passed by another given the flags provided
@@ -732,7 +738,7 @@
 		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
-		if(M.lying) return //No spamming this on people.
+		if(M.current_posture.prone) return //No spamming this on people.
 
 		SET_STATUS_MAX(M, STAT_WEAK, 3)
 		to_chat(M, SPAN_DANGER("You topple as \the [src] moves under you!"))
@@ -741,7 +747,7 @@
 			var/obj/item/organ/external/affecting = SAFEPICK(M.get_external_organs())
 			if(!affecting)
 				to_chat(M, SPAN_DANGER("You land heavily!"))
-				M.adjustBruteLoss(damage)
+				M.take_damage(damage)
 			else
 				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
 				affecting.take_external_damage(damage, 0)
@@ -872,7 +878,9 @@
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	RETURN_TYPE(/list)
-	return list()
+	. = list()
+	if(storage)
+		. += /decl/interaction_handler/storage_open
 
 /atom/proc/can_climb_from_below(var/mob/climber)
 	return FALSE
@@ -881,9 +889,6 @@
 	return 0
 
 /atom/proc/singularity_pull(S, current_size)
-	return
-
-/atom/proc/on_defilement()
 	return
 
 /atom/proc/get_overhead_text_x_offset()
@@ -895,6 +900,49 @@
 /atom/proc/can_be_injected_by(var/atom/injector)
 	return FALSE
 
+//Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
+//Returns -1 if the atom was not found on container.
+/atom/proc/storage_depth(atom/container)
+	. = 0
+	var/atom/cur_atom = src
+	while (cur_atom && !(cur_atom in container.contents))
+		if (isarea(cur_atom))
+			return -1
+		if(cur_atom.loc?.storage)
+			.++
+		cur_atom = cur_atom.loc
+	if (!cur_atom)
+		return -1	//inside something with a null loc.
+
+//Like storage depth, but returns the depth to the nearest turf
+//Returns -1 if no top level turf (a loc was null somewhere, or a non-turf atom's loc was an area somehow).
+/atom/proc/storage_depth_turf()
+	. = 0
+	var/atom/cur_atom = src
+	while (cur_atom && !isturf(cur_atom))
+		if (isarea(cur_atom))
+			return -1
+		if(cur_atom.loc?.storage)
+			.++
+		cur_atom = cur_atom.loc
+	if (!cur_atom)
+		. = -1	//inside something with a null loc.
+
+/atom/proc/storage_inserted(atom/movable/thing)
+	return
+
+/atom/proc/storage_removed(atom/movable/thing)
+	return
+
 /atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
 	set waitfor = FALSE
+	return
+
+/atom/proc/get_thermal_mass()
+	return 0
+
+/atom/proc/get_thermal_mass_coefficient()
+	return 1
+
+/atom/proc/spark_act(obj/effect/sparks/sparks)
 	return

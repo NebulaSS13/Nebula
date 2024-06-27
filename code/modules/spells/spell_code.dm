@@ -62,7 +62,6 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/override_base = ""
 
 
-	var/mob/living/deity/connected_god //Do we have this spell based off a boon from a god?
 	var/obj/screen/connected_button
 
 	var/hidden_from_codex = FALSE
@@ -121,8 +120,6 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 			break
 		if(cast_check(1,user, targets)) //we check again, otherwise you can choose a target and then wait for when you are no longer able to cast (I.E. Incapacitated) to use it.
 			invocation(user, targets)
-			if(connected_god && !connected_god.take_charge(user, max(1, charge_max/10)))
-				break
 			take_charge(user, skipcharge)
 			before_cast(targets) //applies any overlays and effects
 			if(prob(critfailchance))
@@ -149,15 +146,15 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 /spell/proc/adjust_var(mob/living/target = usr, type, amount) //handles the adjustment of the var when the spell is used. has some hardcoded types
 	switch(type)
 		if("bruteloss")
-			target.adjustBruteLoss(amount)
+			target.take_damage(amount)
 		if("fireloss")
-			target.adjustFireLoss(amount)
+			target.take_damage(amount, BURN)
 		if("toxloss")
-			target.adjustToxLoss(amount)
+			target.take_damage(amount, TOX)
 		if("oxyloss")
-			target.adjustOxyLoss(amount)
+			target.take_damage(amount, OXY)
 		if("brainloss")
-			target.adjustBrainLoss(amount)
+			target.take_damage(amount, BRAIN)
 		if("stunned")
 			ADJ_STATUS(target, STAT_STUN, amount)
 		if("weakened")
@@ -389,9 +386,6 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		incap_flags |= INCAPACITATION_KNOCKOUT
 
 	return do_after(user,delay, incapacitation_flags = incap_flags)
-
-/spell/proc/set_connected_god(var/mob/living/deity/god)
-	connected_god = god
 
 /proc/view_or_range(distance = world.view , center = usr , type)
 	switch(type)

@@ -8,11 +8,13 @@
 	anchored                          = FALSE
 	material                          = /decl/material/solid/organic/plastic
 	matter                            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
-	max_health = 100
+	max_health                        = 100
 	tool_interaction_flags            = TOOL_INTERACTION_DECONSTRUCT
+	var/wrenchable                    = TRUE
 	var/unwrenched                    = FALSE
 	var/tmp/volume                    = 1000
 	var/amount_dispensed              = 10
+	var/can_toggle_open               = TRUE
 	var/tmp/possible_transfer_amounts = @"[10,25,50,100,500]"
 
 /obj/structure/reagent_dispensers/Initialize(ml, _mat, _reinf_mat)
@@ -21,8 +23,19 @@
 	if (!possible_transfer_amounts)
 		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_dispensed
 
+/obj/structure/reagent_dispensers/receive_mouse_drop(atom/dropping, mob/user, params)
+	if(!(. = ..()) && user?.get_active_held_item() == dropping && isitem(dropping))
+		// Awful. Sorry.
+		var/obj/item/item = dropping
+		var/old_atom_flags = atom_flags
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		if(item.standard_pour_into(user, src))
+			. = TRUE
+		atom_flags = old_atom_flags
+
 /obj/structure/reagent_dispensers/on_reagent_change()
-	..()
+	if(!(. = ..()))
+		return
 	if(reagents?.total_volume > 0)
 		tool_interaction_flags = 0
 	else
@@ -49,24 +62,40 @@
 	. = ..()
 	if(unwrenched)
 		to_chat(user, SPAN_WARNING("Someone has wrenched open its tap - it's spilling everywhere!"))
-	if(distance > 2)
-		return
 
-	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "Its refilling cap is open.")
-	else
-		to_chat(user, "Its refilling cap is closed.")
+	if(distance <= 2)
 
-	if(reagents?.total_volume)
-		to_chat(user, "It contains [reagents.total_volume] units of fluid.")
-	else
-		to_chat(user, "It's empty.")
+		if(wrenchable)
+			if(ATOM_IS_OPEN_CONTAINER(src))
+				to_chat(user, "Its refilling cap is open.")
+			else
+				to_chat(user, "Its refilling cap is closed.")
 
-	if(reagents?.maximum_volume)
-		to_chat(user, "It may contain up to [reagents.maximum_volume] units of fluid.")
+		to_chat(user, SPAN_NOTICE("It contains:"))
+		if(LAZYLEN(reagents?.reagent_volumes))
+			for(var/rtype in reagents.reagent_volumes)
+				var/decl/material/R = GET_DECL(rtype)
+				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] unit\s of [R.liquid_name]."))
+		else
+			to_chat(user, SPAN_NOTICE("Nothing."))
+
+		if(reagents?.maximum_volume)
+			to_chat(user, "It may contain up to [reagents.maximum_volume] unit\s of fluid.")
 
 /obj/structure/reagent_dispensers/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W))
+
+	// We do this here to avoid putting the vessel straight into storage.
+	// This is usually handled by afterattack on /chems.
+	// The item must be an open container, but food items should not be filled from sources like this.
+	// They're open in order to add condiments, not to be poured into/out of.
+	// TODO: Rewrite open-container-ness or food to make this unnecessary!
+	if(storage && ATOM_IS_OPEN_CONTAINER(W) && !istype(W, /obj/item/chems/food) && user.a_intent == I_HELP)
+		if(W.standard_dispenser_refill(user, src))
+			return TRUE
+		if(W.standard_pour_into(user, src))
+			return TRUE
+
+	if(wrenchable && IS_WRENCH(W))
 		unwrenched = !unwrenched
 		visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s tap [unwrenched ? "open" : "shut"]."))
 		if(unwrenched)
@@ -74,17 +103,6 @@
 			leak()
 		return TRUE
 	. = ..()
-
-/obj/structure/reagent_dispensers/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 2)
-		to_chat(user, SPAN_NOTICE("It contains:"))
-		if(LAZYLEN(reagents?.reagent_volumes))
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/R = GET_DECL(rtype)
-				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] units of [R.name]"))
-		else
-			to_chat(user, SPAN_NOTICE("Nothing."))
 
 /obj/structure/reagent_dispensers/verb/set_amount_dispensed()
 	set name = "Set amount dispensed"
@@ -207,7 +225,7 @@
 			else
 				log_and_message_admins("shot a fuel tank outside the world.")
 
-		if((Proj.damage_flags & DAM_EXPLODE) || (Proj.damage_type == BURN) || (Proj.damage_type == ELECTROCUTE) || (Proj.damage_type == BRUTE))
+		if((Proj.damage_flags & DAM_EXPLODE) || (Proj.atom_damage_type == BURN) || (Proj.atom_damage_type == ELECTROCUTE) || (Proj.atom_damage_type == BRUTE))
 			try_detonate_reagents()
 
 	return ..()
@@ -265,13 +283,12 @@
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W, mob/user)
 	//Allow refilling with a box
-	if((cups < max_cups) && istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		for(var/obj/item/chems/drinks/C in S)
+	if(cups < max_cups && W?.storage)
+		for(var/obj/item/chems/drinks/C in W.storage.get_contents())
 			if(cups >= max_cups)
 				break
 			if(istype(C, cup_type))
-				S.remove_from_storage(C, src)
+				W.storage.remove_from_storage(user, C, src)
 				qdel(C)
 				cups++
 		return TRUE
@@ -306,7 +323,8 @@
 /obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/set_transfer/reagent_dispenser)
-	LAZYADD(., /decl/interaction_handler/toggle_open/reagent_dispenser)
+	if(can_toggle_open)
+		LAZYADD(., /decl/interaction_handler/toggle_open/reagent_dispenser)
 
 //Set amount dispensed
 /decl/interaction_handler/set_transfer/reagent_dispenser

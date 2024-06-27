@@ -140,12 +140,12 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 		apply_spell_damage(target)
 
 /spell/targeted/proc/apply_spell_damage(mob/living/target)
-	target.adjustBruteLoss(amt_dam_brute, do_update_health = FALSE)
-	target.adjustFireLoss(amt_dam_fire, do_update_health = FALSE)
-	target.adjustToxLoss(amt_dam_tox, do_update_health = FALSE)
-	target.adjustOxyLoss(amt_dam_oxy)
+	target.take_damage(amt_dam_brute,      do_update_health = FALSE)
+	target.take_damage(amt_dam_fire, BURN, do_update_health = FALSE)
+	target.take_damage(amt_dam_tox,  TOX,  do_update_health = FALSE)
+	target.take_damage(amt_dam_oxy,  OXY)
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		for(var/obj/item/organ/internal/affecting in H.get_internal_organs())
 			if(affecting && istype(affecting))
 				affecting.heal_damage(amt_organ, amt_organ)
@@ -154,7 +154,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 				var/dam = BP_IS_PROSTHETIC(affecting) ? -amt_dam_robo : amt_organ
 				affecting.heal_damage(dam, dam, robo_repair = BP_IS_PROSTHETIC(affecting))
 		H.adjust_blood(amt_blood)
-		H.adjustBrainLoss(amt_brain)
+		H.take_damage(amt_brain, BRAIN)
 		H.radiation += min(H.radiation, amt_radiation)
 
 	target.update_icon()

@@ -1,4 +1,4 @@
-// It.. uses a lot of power.  Everything under power is engineering stuff, at least.
+// It... uses a lot of power.  Everything under power is engineering stuff, at least.
 
 /obj/machinery/computer/gravity_control_computer
 	name = "Gravity Generator Control"

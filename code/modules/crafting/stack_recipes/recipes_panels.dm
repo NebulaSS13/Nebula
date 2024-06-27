@@ -1,9 +1,10 @@
 /decl/stack_recipe/panels
 	abstract_type     = /decl/stack_recipe/panels
 	craft_stack_types = /obj/item/stack/material/panel
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/panels/bag
-	result_type       = /obj/item/storage/bag/flimsy
+	result_type       = /obj/item/bag/flimsy
 	on_floor          = TRUE
 
 /decl/stack_recipe/panels/ivbag
@@ -36,6 +37,7 @@
 	one_per_turf      = TRUE
 	on_floor          = TRUE
 	difficulty        = MAT_VALUE_HARD_DIY
+	category          = "furniture"
 
 /decl/stack_recipe/panels/furniture/crate
 	result_type       = /obj/structure/closet/crate/plastic

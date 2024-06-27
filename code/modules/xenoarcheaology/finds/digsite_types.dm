@@ -1,5 +1,6 @@
 //TODO: Kill this in lieu of some more dynamic system
 /decl/xenoarch_digsite
+	abstract_type = /decl/xenoarch_digsite
 	var/weight = 85      // how likely it is to appear
 	var/can_have_anomalies = TRUE // if it can spawn full sized anomaly objects
 	var/list/find_types	// find type = weight
@@ -50,13 +51,11 @@
 
 /decl/xenoarch_digsite/temple
 	find_types = list(
-		/decl/archaeological_find/cult = 200,
 		/decl/archaeological_find/statuette = 200,
 		/decl/archaeological_find/bowl/urn = 100,
 		/decl/archaeological_find/bowl = 100,
 		/decl/archaeological_find/knife = 100,
 		/decl/archaeological_find/crystal = 100,
-		/decl/archaeological_find/cult/sword = 75,
 		/decl/archaeological_find = 50,
 		/decl/archaeological_find/trap = 25,
 		/decl/archaeological_find/sword = 10,
@@ -72,8 +71,6 @@
 		/decl/archaeological_find/laser = 75,
 		/decl/archaeological_find/sword = 75,
 		/decl/archaeological_find = 50,
-		/decl/archaeological_find/cult = 50,
-		/decl/archaeological_find/cult/sword = 50,
 		/decl/archaeological_find/mask = 50,
 		/decl/archaeological_find/trap = 25,
 		/decl/archaeological_find/tool = 25

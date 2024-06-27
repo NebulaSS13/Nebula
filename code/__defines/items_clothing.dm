@@ -8,6 +8,7 @@
 #define ACCESSORY_SLOT_RANK     "Rank"
 #define ACCESSORY_SLOT_DEPT		"Department"
 #define ACCESSORY_SLOT_DECOR    "Decor"
+#define ACCESSORY_SLOT_NECK     "Neck"
 #define ACCESSORY_SLOT_MEDAL    "Medal"
 #define ACCESSORY_SLOT_INSIGNIA "Insignia"
 #define ACCESSORY_SLOT_ARMOR_C  "Chest armor"
@@ -18,6 +19,27 @@
 #define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 #define ACCESSORY_SLOT_OVER     "Over"
 #define ACCESSORY_SLOT_SENSORS  "Suit Sensors"
+
+// Accessory will be shown as part of the name of the item when examined.
+#define ACCESSORY_VISIBILITY_ENSEMBLE   0
+// Accessory will be shown as 'with a [foo] attached'.
+#define ACCESSORY_VISIBILITY_ATTACHMENT 1
+// Accessory will only be shown on 'view accessories'.
+#define ACCESSORY_VISIBILITY_HIDDEN     2
+
+#define UNIFORM_DEFAULT_ACCESSORIES list( \
+	ACCESSORY_SLOT_SENSORS,               \
+	ACCESSORY_SLOT_UTILITY,               \
+	ACCESSORY_SLOT_HOLSTER,               \
+	ACCESSORY_SLOT_ARMBAND,               \
+	ACCESSORY_SLOT_RANK,                  \
+	ACCESSORY_SLOT_DEPT,                  \
+	ACCESSORY_SLOT_DECOR,                 \
+	ACCESSORY_SLOT_NECK,                  \
+	ACCESSORY_SLOT_MEDAL,                 \
+	ACCESSORY_SLOT_INSIGNIA,              \
+	ACCESSORY_SLOT_OVER                   \
+)
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
@@ -53,7 +75,6 @@
 #define slot_wear_id_str     "slot_wear_id"
 #define slot_gloves_str      "slot_gloves"
 #define slot_glasses_str     "slot_glasses"
-#define slot_tie_str         "slot_tie"
 #define slot_l_store_str     "slot_l_store"
 #define slot_r_store_str     "slot_r_store"
 #define slot_s_store_str     "slot_s_store"
@@ -65,6 +86,7 @@
 #define slot_socks_str       "slot_socks"
 
 // Bodypart coverage bitflags.
+#define SLOT_NONE        0
 #define SLOT_UPPER_BODY  BITFLAG(0)
 #define SLOT_LOWER_BODY  BITFLAG(1)
 #define SLOT_OVER_BODY   BITFLAG(2)
@@ -82,10 +104,9 @@
 #define SLOT_HEAD        BITFLAG(14)
 #define SLOT_ID          BITFLAG(15)
 #define SLOT_BACK        BITFLAG(16)
-#define SLOT_TIE         BITFLAG(17)
-#define SLOT_HOLSTER     BITFLAG(18)
-#define SLOT_POCKET      BITFLAG(19)
-#define SLOT_TAIL        BITFLAG(20)
+#define SLOT_HOLSTER     BITFLAG(17)
+#define SLOT_POCKET      BITFLAG(18)
+#define SLOT_TAIL        BITFLAG(19)
 #define SLOT_LEGS        (SLOT_LEG_LEFT|SLOT_LEG_RIGHT)
 #define SLOT_FEET        (SLOT_FOOT_LEFT|SLOT_FOOT_RIGHT)
 #define SLOT_ARMS        (SLOT_ARM_LEFT|SLOT_ARM_RIGHT)
@@ -241,31 +262,4 @@ var/global/list/all_hand_slots = list(
 	BP_L_HAND_UPPER,
 	BP_R_HAND_UPPER,
 	BP_MOUTH
-)
-
-// This list should be sorted by display priority/order for mob examine to look nice.
-var/global/list/all_inventory_slots = list(
-	BP_L_HAND,
-	BP_R_HAND,
-	BP_M_HAND,
-	BP_L_HAND_UPPER,
-	BP_R_HAND_UPPER,
-	BP_MOUTH,
-	slot_w_uniform_str,
-	slot_head_str,
-	slot_wear_suit_str,
-	slot_s_store_str,
-	slot_back_str,
-	slot_gloves_str,
-	slot_belt_str,
-	slot_shoes_str,
-	slot_wear_mask_str,
-	slot_glasses_str,
-	slot_l_ear_str,
-	slot_r_ear_str,
-	slot_wear_id_str,
-	slot_handcuffed_str,
-	slot_tie_str,
-	slot_l_store_str,
-	slot_r_store_str
 )

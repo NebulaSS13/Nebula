@@ -8,6 +8,11 @@
 	desc = "neat and tidy."
 	stress_value = -(STRESSOR_DEGREE_MILD)
 
+/datum/stressor/ate_raw_food
+	name = "Ate Raw Food"
+	desc = "queasy from raw food."
+	stress_value = STRESSOR_DEGREE_MILD
+
 /datum/stressor/hungry
 	name = "Hungry"
 	desc = "hungry."
@@ -35,4 +40,38 @@
 /datum/stressor/used_chems
 	name = "Used Chems"
 	desc = "recovering after the use of medication."
+	stress_value = STRESSOR_DEGREE_MODERATE
+
+/datum/stressor/comfortable
+	name = "Comfortable"
+	desc = "comfortable."
+	stress_value = -(STRESSOR_DEGREE_MILD)
+	incompatible_with_stressors = list(/datum/stressor/comfortable_very)
+
+/datum/stressor/comfortable_very
+	name = "Very Comfortable"
+	desc = "very comfortable."
+	stress_value = -(STRESSOR_DEGREE_MODERATE)
+	suppress_stressors = list(/datum/stressor/comfortable)
+
+/datum/stressor/uncomfortable
+	name = "Uncomfortable"
+	desc = "uncomfortable."
+	stress_value = STRESSOR_DEGREE_MILD
+	incompatible_with_stressors = list(/datum/stressor/uncomfortable_very)
+
+/datum/stressor/uncomfortable_very
+	name = "Very Uncomfortable"
+	desc = "very uncomfortable."
+	stress_value = STRESSOR_DEGREE_MODERATE
+	suppress_stressors = list(/datum/stressor/uncomfortable)
+
+/datum/stressor/well_rested
+	name = "Well Rested"
+	desc = "well rested."
+	stress_value = -(STRESSOR_DEGREE_MODERATE)
+
+/datum/stressor/fatigued
+	name = "Fatigued"
+	desc = "fatigued."
 	stress_value = STRESSOR_DEGREE_MODERATE

@@ -38,50 +38,52 @@
 			return
 		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
 
-/obj/item/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
+/obj/item/handcuffs/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
-		return
+		return ..()
 
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>Uh ... how do those things work?!</span>")
+	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
+		to_chat(user, SPAN_WARNING("You can't figure out how to work \the [src]..."))
 		place_handcuffs(user, user)
-		return
+		return TRUE
 
-	// only carbons can be cuffed
-	if(istype(C))
-		if(!C.get_equipped_item(slot_handcuffed_str))
-			if (C == user)
+	// only humans can be cuffed for now
+	if(ishuman(target))
+		var/mob/living/human/H = target
+		if(!H.get_equipped_item(slot_handcuffed_str))
+			if (H == user)
 				place_handcuffs(user, user)
-				return
+				return TRUE
 
 			//check for an aggressive grab (or robutts)
-			if(C.has_danger_grab(user))
-				place_handcuffs(C, user)
+			if(H.has_danger_grab(user))
+				place_handcuffs(H, user)
 			else
-				to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
+				to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [H] before you can put \the [src] on!"))
 		else
-			to_chat(user, "<span class='warning'>\The [C] is already handcuffed!</span>")
-	else
-		..()
+			to_chat(user, SPAN_WARNING("\The [H] is already handcuffed!"))
+		return TRUE
 
-/obj/item/handcuffs/proc/place_handcuffs(var/mob/living/carbon/target, var/mob/user)
+	return ..()
+
+/obj/item/handcuffs/proc/place_handcuffs(var/mob/living/target, var/mob/user)
 	playsound(src.loc, cuff_sound, 30, 1, -2)
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(!istype(H))
 		return 0
 
 	if (!H.has_organ_for_slot(slot_handcuffed_str))
-		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
+		to_chat(user, SPAN_WARNING("\The [H] needs at least two wrists before you can cuff them together!"))
 		return 0
 
 	var/obj/item/gloves = H.get_equipped_item(slot_gloves_str)
 	if((gloves && (gloves.item_flags & ITEM_FLAG_NOCUFFS)) && !elastic)
-		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [gloves]!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] won't fit around \the [gloves]!"))
 		return 0
 
-	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
+	user.visible_message(SPAN_DANGER("\The [user] is attempting to put [cuff_type] on \the [H]!"))
 
 	if(!do_after(user,30, target))
 		return 0
@@ -108,11 +110,11 @@
 	return 1
 
 var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world can chew their restraints every 2.6 seconds
-/mob/living/carbon/human/RestrainedClickOn(var/atom/A)
+/mob/living/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time) return
 
-	var/mob/living/carbon/human/H = A
+	var/mob/living/human/H = A
 	if (!H.get_equipped_item(slot_handcuffed_str)) return
 	if (H.a_intent != I_HURT) return
 	if (H.get_target_zone() != BP_MOUTH) return

@@ -73,7 +73,7 @@
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O)
 	if(istype(O,/obj/item/chems/glass))
 		return 1
-	if(istype(O,/obj/item/storage/pill_bottle))
+	if(istype(O,/obj/item/pill_bottle))
 		return 1
 	if(istype(O,/obj/item/chems/pill))
 		return 1
@@ -84,7 +84,7 @@
 	desc = "A refrigerated storage unit for fruits and vegetables."
 
 /obj/machinery/smartfridge/produce/accept_check(var/obj/item/O)
-	return istype(O, /obj/item/grown) || istype(O, /obj/item/chems/food/grown)
+	return istype(O, /obj/item/chems/food/grown)
 
 /obj/machinery/smartfridge/sheets
 	name = "raw material storage"
@@ -99,7 +99,7 @@
 	icon_contents = "chem"
 
 /obj/machinery/smartfridge/chemistry/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/chems))
+	if(istype(O,/obj/item/pill_bottle) || istype(O,/obj/item/chems))
 		return 1
 	return 0
 
@@ -118,80 +118,11 @@
 	name = "\improper Hot Foods Display"
 	desc = "A heated storage unit for piping hot meals."
 	icon_state = "fridge_food"
-	icon_state = "fridge_food"
 	icon_contents = "food"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O)
 	if(istype(O,/obj/item/chems/food) || istype(O,/obj/item/utensil))
 		return 1
-
-/obj/machinery/smartfridge/drying_rack
-	name = "drying rack"
-	desc = "A machine for drying plants."
-	icon_state = "drying_rack"
-
-/obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O)
-	if(istype(O, /obj/item/chems/food/))
-		var/obj/item/chems/food/S = O
-		return !!S.dried_type
-	else if(istype(O, /obj/item/stack/material))
-		return istype(O.material, /decl/material/solid/organic/skin)
-	return 0
-
-/obj/machinery/smartfridge/drying_rack/Process()
-	..()
-	if(inoperable())
-		return
-	if(contents.len)
-		dry()
-		update_icon()
-
-/obj/machinery/smartfridge/drying_rack/on_update_icon()
-	overlays.Cut()
-	if(inoperable())
-		if(contents.len)
-			icon_state = "drying_rack-plant-off"
-		else
-			icon_state = "drying_rack-off"
-	else
-		icon_state = "drying_rack"
-	if(contents.len)
-		icon_state = "drying_rack-plant"
-		if(!inoperable())
-			icon_state = "drying_rack-close"
-
-/obj/machinery/smartfridge/drying_rack/proc/dry()
-	for(var/datum/stored_items/I in item_records)
-		for(var/thing in I.instances)
-			var/remove_thing = FALSE
-			if(istype(thing, /obj/item/chems/food))
-				var/obj/item/chems/food/S = thing
-				if(S.dry || !I.get_specific_product(get_turf(src), S))
-					continue
-				var/result = S.on_dry(get_turf(src))
-				if(result != S)
-					remove_thing = TRUE
-				else
-					I.instances -= thing
-					I.amount--
-
-			else if(istype(thing, /obj/item/stack/material))
-				var/obj/item/stack/material/skin = thing
-				if(!istype(skin.material, /decl/material/solid/organic/skin))
-					continue
-				var/decl/material/solid/organic/skin/skin_mat = skin.material
-				if(!skin_mat.tans_to)
-					continue
-				for(var/atom/item_to_stock in SSmaterials.create_object(skin_mat.tans_to, get_turf(src), skin.amount))
-					stock_item(item_to_stock)
-				remove_thing = TRUE
-
-			if(remove_thing)
-				I.instances -= thing
-				I.amount--
-				qdel(thing)
-				return
-
 
 /obj/machinery/smartfridge/Process()
 	if(stat & (BROKEN|NOPOWER))
@@ -262,18 +193,17 @@
 		update_icon()
 		return TRUE
 
-	if(istype(O, /obj/item/storage))
-		var/obj/item/storage/bag/P = O
+	if(O.storage)
 		var/plants_loaded = 0
-		for(var/obj/G in P.contents)
-			if(accept_check(G) && P.remove_from_storage(G, src, 1))
+		for(var/obj/G in O.storage.get_contents())
+			if(accept_check(G) && O.storage.remove_from_storage(user, G, src, TRUE))
 				plants_loaded++
 				stock_item(G)
-		P.finish_bulk_removal()
+		O.storage.finish_bulk_removal()
 
 		if(plants_loaded)
-			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")
-			if(P.contents.len > 0)
+			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [O].</span>", "<span class='notice'>You load \the [src] with the contents of \the [O].</span>")
+			if(length(O.storage.get_contents()) > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
 		return TRUE
 	return ..()

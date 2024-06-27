@@ -1,16 +1,13 @@
-#define TURF_REMOVE_CROWBAR     1
-#define TURF_REMOVE_SCREWDRIVER 2
-#define TURF_REMOVE_SHOVEL      4
-#define TURF_REMOVE_WRENCH      8
-#define TURF_CAN_BREAK          16
-#define TURF_CAN_BURN           32
-#define TURF_HAS_EDGES  		64
-#define TURF_HAS_CORNERS		128
-#define TURF_HAS_INNER_CORNERS	256
-#define TURF_IS_FRAGILE         512
-#define TURF_ACID_IMMUNE        1024
-#define TURF_IS_WET             2048
-#define TURF_HAS_RANDOM_BORDER	4096
+#define TURF_REMOVE_CROWBAR     BITFLAG(0)
+#define TURF_REMOVE_SCREWDRIVER BITFLAG(1)
+#define TURF_REMOVE_SHOVEL      BITFLAG(2)
+#define TURF_REMOVE_WRENCH      BITFLAG(3)
+#define TURF_CAN_BREAK          BITFLAG(4)
+#define TURF_CAN_BURN           BITFLAG(5)
+#define TURF_IS_FRAGILE         BITFLAG(6)
+#define TURF_ACID_IMMUNE        BITFLAG(7)
+#define TURF_IS_WET             BITFLAG(8)
+#define TURF_HAS_RANDOM_BORDER  BITFLAG(9)
 
 //Used for floor/wall smoothing
 #define SMOOTH_NONE 0	//Smooth only with itself
@@ -37,7 +34,6 @@
 #define EXT_EDGE_OCEAN         (10 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_SEAFLOOR      (11 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_VOLCANIC      (12 * EXT_LAYER_CONSTANT)
-#define EXT_EDGE_PATH          (13 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_DIRT          (20 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_BARREN        (21 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_CLAY          (21 * EXT_LAYER_CONSTANT)
@@ -46,5 +42,6 @@
 #define EXT_EDGE_CHLORINE_SAND (31 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_WATER         (40 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_GRASS         (51 * EXT_LAYER_CONSTANT)
-#define EXT_EDGE_GRASS_WILD    (52 * EXT_LAYER_CONSTANT)
+#define EXT_EDGE_PATH          (52 * EXT_LAYER_CONSTANT)
+#define EXT_EDGE_GRASS_WILD    (53 * EXT_LAYER_CONSTANT)
 #define EXT_EDGE_SNOW          (60 * EXT_LAYER_CONSTANT)

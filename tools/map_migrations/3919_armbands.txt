@@ -1,0 +1,1 @@
+/obj/item/clothing/accessory/armband/@SUBTYPES : /obj/item/clothing/armband/@SUBTYPES{@OLD}

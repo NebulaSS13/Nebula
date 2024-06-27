@@ -13,37 +13,37 @@
 
 /datum/fabricator_recipe/textiles/armor/plate
 	category = "Armor - Insert plates"
-	path = /obj/item/clothing/accessory/armor/plate
+	path = /obj/item/clothing/armor_attachment/plate
 
 /datum/fabricator_recipe/textiles/armor/plate/medium
-	path = /obj/item/clothing/accessory/armor/plate/medium
+	path = /obj/item/clothing/armor_attachment/plate/medium
 
 /datum/fabricator_recipe/textiles/armor/plate/tactical
-	path = /obj/item/clothing/accessory/armor/plate/tactical
+	path = /obj/item/clothing/armor_attachment/plate/tactical
 
 /datum/fabricator_recipe/textiles/armor/plate/merc
-	path = /obj/item/clothing/accessory/armor/plate/merc
+	path = /obj/item/clothing/armor_attachment/plate/merc
 
 // Limb armor attachments
 
 /datum/fabricator_recipe/textiles/armor/limb
 	category = "Armor - Limb armor"
-	path = /obj/item/clothing/accessory/legguards/riot
+	path = /obj/item/clothing/shoes/legguards/riot
 
 /datum/fabricator_recipe/textiles/armor/limb/arm_riot
-	path = /obj/item/clothing/accessory/armguards/riot
+	path = /obj/item/clothing/gloves/armguards/riot
 
 /datum/fabricator_recipe/textiles/armor/limb/arm_merc
-	path = /obj/item/clothing/accessory/armguards/merc
+	path = /obj/item/clothing/gloves/armguards/merc
 
 /datum/fabricator_recipe/textiles/armor/limb/leg_merc
-	path = /obj/item/clothing/accessory/legguards/merc
+	path = /obj/item/clothing/shoes/legguards/merc
 
 /datum/fabricator_recipe/textiles/armor/limb/arm_ballistic
-	path = /obj/item/clothing/accessory/armguards/ballistic
+	path = /obj/item/clothing/gloves/armguards/ballistic
 
 /datum/fabricator_recipe/textiles/armor/limb/leg_ballistic
-	path = /obj/item/clothing/accessory/legguards/ballistic
+	path = /obj/item/clothing/shoes/legguards/ballistic
 
 // Speciality vests and plate carriers
 
@@ -92,23 +92,3 @@
 
 /datum/fabricator_recipe/textiles/helmet/thunderdome
 	path = /obj/item/clothing/head/helmet/thunderdome
-
-var/global/list/melee_mats = list(
-	/decl/material/solid/gemstone/diamond = ARMOR_MELEE_SHIELDED,
-	/decl/material/solid/metal/plasteel = ARMOR_MELEE_SHIELDED,
-	/decl/material/solid/metal/titanium = ARMOR_MELEE_VERY_HIGH,
-	/decl/material/solid/metal/steel = ARMOR_MELEE_MAJOR,
-	/decl/material/solid/metal/iron = ARMOR_MELEE_KNIVES,
-	/decl/material/solid/organic/leather = ARMOR_MELEE_KNIVES,
-	/decl/material/solid/organic/plastic = ARMOR_MELEE_SMALL
-)
-
-var/global/list/bullet_mats = list(
-	/decl/material/solid/gemstone/diamond = ARMOR_BALLISTIC_AP,
-	/decl/material/solid/metal/plasteel = ARMOR_BALLISTIC_RIFLE,
-	/decl/material/solid/metal/titanium = ARMOR_BALLISTIC_RESISTANT,
-	/decl/material/solid/metal/steel = ARMOR_BALLISTIC_PISTOL,
-	/decl/material/solid/metal/iron = ARMOR_BALLISTIC_SMALL,
-	/decl/material/solid/organic/leather = ARMOR_BALLISTIC_MINOR,
-	/decl/material/solid/organic/plastic = ARMOR_BALLISTIC_MINOR
-)

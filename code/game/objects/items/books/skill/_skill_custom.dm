@@ -94,7 +94,7 @@
 	..()
 
 /obj/item/book/skill/custom/proc/can_write(var/obj/item/pen, var/mob/user)
-	if(user.get_active_hand() == pen && CanPhysicallyInteractWith(user,src) && !QDELETED(src) && !QDELETED(pen))
+	if(user.get_active_held_item() == pen && CanPhysicallyInteractWith(user,src) && !QDELETED(src) && !QDELETED(pen))
 		return TRUE
 	else
 		to_chat(user,SPAN_DANGER("How can you expect to write anything when you can't physically put pen to paper?"))
@@ -132,7 +132,7 @@
 
 	//Choosing the skill
 	var/list/skill_choices = list()
-	for(var/decl/hierarchy/skill/S in global.skills)
+	for(var/decl/hierarchy/skill/S in global.using_map.get_available_skills())
 		if(user.skill_check(S.type, SKILL_BASIC))
 			LAZYADD(skill_choices, S)
 	var/decl/hierarchy/skill/skill_choice = input(user, "What subject does your textbook teach?", "Textbook skill selection") as null|anything in skill_choices

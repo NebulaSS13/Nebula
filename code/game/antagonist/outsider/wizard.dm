@@ -64,7 +64,7 @@
 	wizard.current.real_name = "[pick(global.wizard_first)] [pick(global.wizard_second)]"
 	wizard.current.SetName(wizard.current.real_name)
 
-/decl/special_role/wizard/equip_role(var/mob/living/carbon/human/wizard_mob)
+/decl/special_role/wizard/equip_role(var/mob/living/human/wizard_mob)
 	default_outfit = pick(decls_repository.get_decl_paths_of_subtype(/decl/hierarchy/outfit/wizard))
 	. = ..()
 
@@ -102,14 +102,14 @@ Made a proc so this is not repeated 14 (or more) times.*/
 	return 0
 
 // Humans can wear clothes.
-/mob/living/carbon/human/wearing_wiz_garb()
-	if(!is_wiz_garb(get_equipped_item(slot_wear_suit_str)) && (!src.species.hud || (slot_wear_suit_str in src.species.hud.equip_slots)))
+/mob/living/human/wearing_wiz_garb()
+	if(!is_wiz_garb(get_equipped_item(slot_wear_suit_str)) && (!istype(species.species_hud) || (slot_wear_suit_str in species.species_hud.equip_slots)))
 		to_chat(src, "<span class='warning'>I don't feel strong enough without my robe.</span>")
 		return 0
-	if(!is_wiz_garb(get_equipped_item(slot_shoes_str)) && (!species.hud || (slot_shoes_str in src.species.hud.equip_slots)))
+	if(!is_wiz_garb(get_equipped_item(slot_shoes_str)) && (!istype(species.species_hud) || (slot_shoes_str in species.species_hud.equip_slots)))
 		to_chat(src, "<span class='warning'>I don't feel strong enough without my sandals.</span>")
 		return 0
-	if(!is_wiz_garb(get_equipped_item(slot_head_str)) && (!species.hud || (slot_head_str in src.species.hud.equip_slots)))
+	if(!is_wiz_garb(get_equipped_item(slot_head_str)) && (!istype(species.species_hud) || (slot_head_str in species.species_hud.equip_slots)))
 		to_chat(src, "<span class='warning'>I don't feel strong enough without my hat.</span>")
 		return 0
 	return 1

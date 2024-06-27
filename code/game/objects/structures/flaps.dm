@@ -14,7 +14,7 @@
 
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
-		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/passive/mouse,
 		/mob/living/silicon/robot/drone
 		)
 	var/airtight = FALSE
@@ -32,7 +32,7 @@
 
 	var/mob/living/M = A
 	if(istype(M))
-		if(M.lying)
+		if(M.current_posture.prone)
 			return ..()
 		for(var/mob_type in mobs_can_pass)
 			if(istype(A, mob_type))

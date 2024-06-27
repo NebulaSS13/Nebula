@@ -163,11 +163,11 @@
 		to_chat(usr, "<span class='warning'>The suit is not initialized.</span>")
 		return 0
 
-	if(usr.lying || usr.incapacitated(INCAPACITATION_DISRUPTED))
+	if(usr.current_posture.prone || usr.incapacitated(INCAPACITATION_DISRUPTED))
 		to_chat(usr, "<span class='warning'>You cannot use the suit in this state.</span>")
 		return 0
 
-	if(holder.wearer && holder.wearer.lying)
+	if(holder.wearer && holder.wearer.current_posture.prone)
 		to_chat(usr, "<span class='warning'>The suit cannot function while the wearer is prone.</span>")
 		return 0
 
@@ -263,7 +263,7 @@
 /obj/item/rig_module/proc/accepts_item(var/obj/item/input_device)
 	return 0
 
-/mob/living/carbon/human/Stat()
+/mob/living/human/Stat()
 	. = ..()
 
 	var/obj/item/rig/R = get_equipped_item(slot_back_str)

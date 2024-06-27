@@ -16,16 +16,16 @@
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
-	skin_material = /decl/material/solid/organic/skin/fur/orange
+	butchery_data = /decl/butchery_data/animal/cat
 	base_animal_type = /mob/living/simple_animal/cat
 	var/turns_since_scan = 0
-	var/mob/living/simple_animal/mouse/movement_target
+	var/mob/living/simple_animal/passive/mouse/movement_target
 	var/mob/flee_target
 
 /mob/living/simple_animal/cat/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/cat)
+	return GET_DECL(/decl/bodytype/quadruped/animal/cat)
 
-/decl/bodytype/animal/cat/Initialize()
+/decl/bodytype/quadruped/animal/cat/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 1,  -9),
@@ -40,8 +40,8 @@
 	..()
 	//MICE!
 	if((src.loc) && isturf(src.loc))
-		if(!resting && !buckled)
-			for(var/mob/living/simple_animal/mouse/M in loc)
+		if(!current_posture.prone && !buckled)
+			for(var/mob/living/simple_animal/passive/mouse/M in loc)
 				if(!M.stat)
 					M.splat()
 					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
@@ -49,7 +49,7 @@
 					stop_automated_movement = 0
 					break
 
-	for(var/mob/living/simple_animal/mouse/snack in oview(src,5))
+	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
 		if(snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
@@ -85,7 +85,7 @@
 	if( !movement_target || !(movement_target.loc in oview(src, 4)) )
 		movement_target = null
 		stop_automated_movement = 0
-		for(var/mob/living/simple_animal/mouse/snack in oview(src)) //search for a new target
+		for(var/mob/living/simple_animal/passive/mouse/snack in oview(src)) //search for a new target
 			if(isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break
@@ -132,20 +132,9 @@
 	. = ..()
 	set_flee_target(TT.thrower? TT.thrower : src.loc)
 
-/mob/living/simple_animal/cat/harvest_skin()
-	. = ..()
-	. += new/obj/item/cat_hide(get_turf(src))
-
-/obj/item/cat_hide
-	name = "cat hide"
-	desc = "The by-product of cat farming."
-	icon = 'icons/obj/items/sheet_hide.dmi'
-	icon_state = "sheet-cat"
-	material = /decl/material/solid/organic/leather/fur
-
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
-	var/mob/living/carbon/human/friend
+	var/mob/living/human/friend
 	var/befriend_job = null
 
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
@@ -206,7 +195,7 @@
 	set src in view(1)
 
 	if(!friend)
-		var/mob/living/carbon/human/H = usr
+		var/mob/living/human/H = usr
 		if(istype(H) && (!befriend_job || H.job == befriend_job))
 			friend = usr
 			. = 1
@@ -229,7 +218,7 @@
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
 	icon = 'icons/mob/simple_animal/cat_black.dmi'
-	skin_material = /decl/material/solid/organic/skin/fur/black
+	butchery_data = /decl/butchery_data/animal/cat/black
 	holder_type = /obj/item/holder/runtime
 
 /obj/item/holder/runtime
@@ -240,14 +229,12 @@
 	desc = "D'aaawwww"
 	icon = 'icons/mob/simple_animal/kitten.dmi'
 	gender = NEUTER
-	meat_amount = 1
-	bone_amount = 3
-	skin_amount = 3
+	butchery_data = /decl/butchery_data/animal/cat/kitten
 
 /mob/living/simple_animal/cat/kitten/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/kitten)
+	return GET_DECL(/decl/bodytype/quadruped/animal/kitten)
 
-/decl/bodytype/animal/kitten/Initialize()
+/decl/bodytype/quadruped/animal/kitten/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 1, -14),

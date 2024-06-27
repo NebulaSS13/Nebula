@@ -1,37 +1,25 @@
 /*
  * Pill Bottles
  */
-/obj/item/storage/pill_bottle
+/obj/item/pill_bottle
 	name = "pill bottle"
 	desc = "It's an airtight container for storing medication."
 	icon_state = "pill_canister"
 	icon = 'icons/obj/items/storage/pillbottle.dmi'
 	item_state = "contsolid"
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
+	storage = /datum/storage/pillbottle
 	obj_flags = OBJ_FLAG_HOLLOW
-	max_storage_space = 21
-	can_hold = list(
-		/obj/item/chems/pill,
-		/obj/item/dice,
-		/obj/item/paper
-	)
-	allow_quick_gather = 1
-	use_to_pickup = 1
-	use_sound = 'sound/effects/storage/pillbottle.ogg'
 	material = /decl/material/solid/organic/plastic
-
 	var/pop_sound = 'sound/effects/peelz.ogg'
 	var/wrapper_color
 	/// If a string, a label with this value will be added.
 	var/labeled_name = null
 
-/obj/item/storage/pill_bottle/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
-	. = ..()
-	if(. && pop_sound)
-		playsound(get_turf(src), pop_sound, 50)
+/obj/item/pill_bottle/proc/pop_pill(var/mob/user)
 
-/obj/item/storage/pill_bottle/proc/pop_pill(var/mob/user)
+	if(!storage)
+		return FALSE
 
 	var/target_mouth = (user.get_target_zone() == BP_MOUTH)
 	if(target_mouth)
@@ -49,10 +37,10 @@
 		return TRUE
 
 	var/obj/item/chems/pill/pill = pick(pills_here)
-	if(remove_from_storage(pill, user))
+	if(storage.remove_from_storage(user, pill, user))
 		if(target_mouth)
 			user.visible_message(SPAN_NOTICE("\The [user] pops a pill from \the [src]."))
-			pill.attack(user, user)
+			pill.use_on_mob(user, user)
 		else
 			if(user.put_in_inactive_hand(pill))
 				to_chat(user, SPAN_NOTICE("You take \the [pill] out of \the [src]."))
@@ -61,19 +49,19 @@
 				to_chat(user, SPAN_DANGER("You fumble around with \the [src] and drop \the [pill]."))
 	return TRUE
 
-/obj/item/storage/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
+/obj/item/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
 	. = (proximity_flag && user == target && pop_pill(user)) || ..()
 
-/obj/item/storage/pill_bottle/attack_self(mob/user)
+/obj/item/pill_bottle/attack_self(mob/user)
 	. = pop_pill(user) || ..()
 
-/obj/item/storage/pill_bottle/Initialize()
+/obj/item/pill_bottle/Initialize()
 	. = ..()
 	update_icon()
 	if(istext(labeled_name))
 		attach_label(null, null, labeled_name)
 
-/obj/item/storage/pill_bottle/on_update_icon()
+/obj/item/pill_bottle/on_update_icon()
 	. = ..()
 	if(wrapper_color)
 		add_overlay(overlay_image(icon, "pillbottle_wrap", wrapper_color, RESET_COLOR))

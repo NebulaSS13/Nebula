@@ -70,28 +70,27 @@
 	. = max(round(.), 5)
 
 // Returns a failure message as a string if the interaction fails.
-/datum/extension/tool/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/prefix_message, var/suffix_message,var/check_skill_threshold, var/check_skill_prob = 50, var/set_cooldown = FALSE)
+/proc/handle_tool_interaction(var/archetype, var/mob/user, var/obj/item/tool, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/prefix_message, var/suffix_message, var/check_skill_threshold, var/check_skill_prob = 50, var/set_cooldown = FALSE)
 
 	if(!istype(user) || !istype(target))
 		return TOOL_USE_FAILURE_NOMESSAGE
 
 	var/decl/tool_archetype/tool_archetype = GET_DECL(archetype)
-	var/check_result = tool_archetype.can_use_tool(holder, fuel_expenditure)
+	var/check_result = tool_archetype.can_use_tool(tool, fuel_expenditure)
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 
-	check_result = tool_archetype.handle_pre_interaction(user, holder, fuel_expenditure)
+	check_result = tool_archetype.handle_pre_interaction(user, tool, fuel_expenditure)
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 
-	var/use_message = get_tool_message(archetype)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] begins [prefix_message][start_message || use_message] \the [target] with \the [holder][suffix_message]."),
-		SPAN_NOTICE("You begin [prefix_message][start_message || use_message] \the [target] with \the [holder][suffix_message].")
+		SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.tool_message] \the [target] with \the [tool]."),
+		SPAN_NOTICE("You begin [start_message || tool_archetype.tool_message] \the [target] with \the [tool].")
 	)
 
-	//If no sound overrides, grab the archetype's sound/sound list
-	var/use_sound = get_tool_sound(archetype)
+	var/datum/extension/tool/tool_data = get_extension(tool, /datum/extension/tool)
+	var/use_sound = istype(tool_data) ? tool_data.get_tool_sound(archetype) : null
 	if(islist(use_sound))
 		if(length(use_sound))
 			use_sound = pick(use_sound)
@@ -102,7 +101,7 @@
 
 	// If we have a delay, reduce it by the tool speed and then further reduce via skill if necessary.
 	// Skill multiplier is applied to delay do_skilled() so skip it in get_expected_tool_use_delay()
-	var/use_delay = delay ? get_expected_tool_use_delay(archetype, delay, user, check_skill = FALSE) : 0
+	var/use_delay = delay ? (tool_data ? tool_data.get_expected_tool_use_delay(archetype, delay, user, check_skill = FALSE) : delay) : 0
 	if(use_delay)
 		if(check_skill)
 			if(!user.do_skilled(delay, check_skill, target, check_holding = TRUE, set_cooldown = set_cooldown))
@@ -114,10 +113,10 @@
 	// Basic skill check for the action - do it post-delay so they can't just spamclick.
 	if(check_skill && check_skill_threshold && check_skill_prob)
 		if(prob(user.skill_fail_chance(check_skill, check_skill_prob, check_skill_threshold)))
-			to_chat(user, SPAN_WARNING("You fumble hopelessly with \the [holder]."))
+			to_chat(user, SPAN_WARNING("You fumble hopelessly with \the [tool]."))
 			return TOOL_USE_FAILURE
 
-	check_result = tool_archetype.handle_post_interaction(user, holder, fuel_expenditure)
+	check_result = tool_archetype.handle_post_interaction(user, tool, fuel_expenditure)
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 

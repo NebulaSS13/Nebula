@@ -12,12 +12,14 @@
 /obj/structure/artifact/Initialize()
 	. = ..()
 
-	var/effecttype = pick(subtypesof(/datum/artifact_effect))
-	my_effect = new effecttype(src)
+	if(!ispath(my_effect))
+		my_effect = pick(subtypesof(/datum/artifact_effect))
+	my_effect = new my_effect(src)
 
-	if(prob(75))
-		effecttype = pick(subtypesof(/datum/artifact_effect))
-		secondary_effect = new effecttype(src)
+	if(prob(75) && !ispath(secondary_effect))
+		secondary_effect = pick(subtypesof(/datum/artifact_effect))
+	if(ispath(secondary_effect))
+		secondary_effect = new secondary_effect(src)
 		if(prob(75))
 			secondary_effect.ToggleActivate(0)
 
@@ -136,3 +138,7 @@
 	..()
 	if(!QDELETED(src) && fluids?.total_volume)
 		check_triggers(/datum/artifact_trigger/proc/on_fluid_act, fluids)
+
+// Premade subtypes for mapping or testing.
+/obj/structure/artifact/dnascramble
+	my_effect = /datum/artifact_effect/dnaswitch

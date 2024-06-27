@@ -621,6 +621,7 @@ SUBSYSTEM_DEF(zcopy)
 		switch (appearance:plane)
 			if (DEFAULT_PLANE, FLOAT_PLANE)
 				// fine
+				EMPTY_BLOCK_GUARD
 			else
 				plane_needs_fix = TRUE
 
@@ -845,7 +846,7 @@ SUBSYSTEM_DEF(zcopy)
 /datum/controller/subsystem/zcopy/proc/fmt_label(label, atom/target, vv = TRUE)
 	. = "\icon[target] <b>\[[label]\]</b> "
 	if (vv)
-		. += "(<a href='?_src_=vars;Vars=\ref[target]'>VV</a>) "
+		. += "(<a href='byond://?_src_=vars;Vars=\ref[target]'>VV</a>) "
 
 /datum/controller/subsystem/zcopy/proc/debug_fmt_planelist(list/things, list/out, turf/original)
 	if (things)

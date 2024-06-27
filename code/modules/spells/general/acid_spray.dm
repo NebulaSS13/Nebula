@@ -22,10 +22,5 @@
 		var/obj/effect/effect/water/chempuff/chem = new(get_turf(target))
 		chem.create_reagents(10)
 		chem.add_to_reagents(reagent_type,10)
-		chem.set_color()
 		spawn(0)
 			chem.set_up(get_ranged_target_turf(target, angle2dir(angle+mod), 3))
-
-/spell/acid_spray/tower
-	desc = "The simplest form of aggressive conjuration: acid spray is quite effective in melting both man and object."
-	charge_max = 2

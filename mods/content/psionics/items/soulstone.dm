@@ -1,3 +1,4 @@
+#ifdef GAMEMODE_PACK_CULT
 /obj/item/soulstone/disrupts_psionics()
 	. = !full ? src : FALSE
 
@@ -11,3 +12,4 @@
 	if(. > 0)
 		. = max(0, . - rand(2,5))
 		shatter()
+#endif

@@ -104,9 +104,8 @@
 /decl/fusion_reaction/helium_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	set waitfor = FALSE
 	. = 1
-	var/datum/event/wormholes/WM = /datum/event/wormholes
+	var/datum/event/wormholes/WM = new /datum/event/wormholes(new /datum/event_meta(EVENT_LEVEL_MAJOR))
 	WM.setup(affected_z_levels = SSmapping.get_connected_levels(holder))
-	new WM(new /datum/event_meta(EVENT_LEVEL_MAJOR))
 
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()
@@ -116,7 +115,7 @@
 	// Copied from the SM for proof of concept. //Not any more --Cirra //Use the whole z proc --Leshana
 	SSradiation.z_radiate(locate(1, 1, holder.z), radiation_level, 1)
 
-	for(var/mob/living/carbon/human/H in global.living_mob_list_)
+	for(var/mob/living/human/H in global.living_mob_list_)
 		var/turf/T = get_turf(H)
 		if(T && (holder.z == T.z))
 			H.set_hallucination(rand(100,150), 51)

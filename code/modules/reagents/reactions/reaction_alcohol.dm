@@ -2,6 +2,16 @@
 	abstract_type = /decl/chemical_reaction/recipe
 	reaction_category = REACTION_TYPE_RECIPE
 
+/decl/chemical_reaction/recipe/enzyme
+	name = "Universal Enzyme"
+	required_reagents = list(
+		/decl/material/liquid/enzyme/rennet = 1,
+		/decl/material/liquid/acid/polyacid = 1
+	)
+	minimum_temperature = 100 CELSIUS
+	result = /decl/material/liquid/enzyme
+	result_amount = 2
+
 /decl/chemical_reaction/recipe/moonshine
 	name = "Moonshine"
 	result = /decl/material/liquid/ethanol/moonshine

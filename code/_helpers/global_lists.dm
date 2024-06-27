@@ -4,7 +4,6 @@
 
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mannequins_
 
 // Uplinks
@@ -16,9 +15,6 @@ var/global/datum/category_collection/underwear/underwear = new()
 // Visual nets
 var/global/list/datum/visualnet/visual_nets = list()
 var/global/datum/visualnet/camera/cameranet = new()
-
-// Runes
-var/global/list/rune_list = new()
 
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
 var/global/list/string_part_flags = list(
@@ -37,20 +33,19 @@ var/global/list/string_part_flags = list(
 
 // Strings which corraspond to slot flags, useful for outputting what slot something is.
 var/global/list/string_slot_flags = list(
-	"back" =     SLOT_BACK,
-	"face" =     SLOT_FACE,
-	"waist" =    SLOT_LOWER_BODY,
-	"tail" =     SLOT_TAIL,
-	"ID slot" =  SLOT_ID,
-	"ears" =     SLOT_EARS,
-	"eyes" =     SLOT_EYES,
-	"hands" =    SLOT_HANDS,
-	"head" =     SLOT_HEAD,
-	"feet" =     SLOT_FEET,
-	"exo slot" = SLOT_OVER_BODY,
-	"body" =     SLOT_UPPER_BODY,
-	"uniform" =  SLOT_TIE,
-	"holster" =  SLOT_HOLSTER
+	"back"      = SLOT_BACK,
+	"face"      = SLOT_FACE,
+	"waist"     = SLOT_LOWER_BODY,
+	"tail"      = SLOT_TAIL,
+	"ID slot"   = SLOT_ID,
+	"ears"      = SLOT_EARS,
+	"eyes"      = SLOT_EYES,
+	"hands"     = SLOT_HANDS,
+	"head"      = SLOT_HEAD,
+	"feet"      = SLOT_FEET,
+	"exo slot"  = SLOT_OVER_BODY,
+	"body"      = SLOT_UPPER_BODY,
+	"holster"   = SLOT_HOLSTER
 )
 
 //////////////////////////
@@ -64,7 +59,7 @@ var/global/list/string_slot_flags = list(
 		mannequins_ = new()
 	. = mannequins_[ckey]
 	if(!.)
-		. = new /mob/living/carbon/human/dummy/mannequin()
+		. = new /mob/living/human/dummy/mannequin()
 		mannequins_[ckey] = .
 
 /hook/global_init/proc/makeDatumRefLists()
@@ -83,7 +78,6 @@ var/global/list/string_slot_flags = list(
 // This is all placeholder procs for an eventual PR to change them to use decls.
 var/global/list/all_species
 var/global/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
-var/global/list/all_bodytypes = list()
 var/global/list/bodytype_species_pairs = list() // A list of bodytypes -> species, used for mainly unit testing.
 /proc/build_species_lists()
 	if(global.all_species)
@@ -111,9 +105,6 @@ var/global/list/bodytype_species_pairs = list() // A list of bodytypes -> specie
 /proc/get_playable_species()
 	build_species_lists()
 	. = global.playable_species
-/proc/get_all_bodytypes()
-	build_species_lists()
-	. = global.all_bodytypes
 /proc/get_bodytype_species_pairs()
 	build_species_lists()
 	. = global.bodytype_species_pairs

@@ -32,6 +32,7 @@
 	for(var/turf/turf in locs)
 		if(turf.simulated)
 			SSair.mark_for_update(turf)
+
 	fluid_update()
 	return TRUE
 

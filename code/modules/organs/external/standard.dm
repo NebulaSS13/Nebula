@@ -92,6 +92,7 @@
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
+	organ_category = ORGAN_CATEGORY_STANCE_ROOT
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 /obj/item/organ/external/leg/right
@@ -116,6 +117,7 @@
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
+	organ_category = ORGAN_CATEGORY_STANCE
 
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
@@ -142,13 +144,13 @@
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	var/gripper_type = /datum/inventory_slot/gripper/left_hand
 
-/obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
+/obj/item/organ/external/hand/do_install(mob/living/human/target, affected, in_place, update_icon, detached)
 	. = ..()
 	if(. && owner && gripper_type)
 		owner.add_held_item_slot(new gripper_type)
 
 /obj/item/organ/external/hand/do_uninstall(in_place, detach, ignore_children, update_icon)
-	if(!in_place)
+	if(gripper_type)
 		owner?.remove_held_item_slot(organ_tag)
 	. = ..()
 

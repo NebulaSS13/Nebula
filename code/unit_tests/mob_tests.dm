@@ -25,7 +25,7 @@
 	var/list/bodytype_pairings = get_bodytype_species_pairs()
 	for(var/decl/bodytype/bodytype in bodytype_pairings)
 		var/decl/species/species = bodytype_pairings[bodytype]
-		var/mob/living/carbon/human/test_subject = new(null, species.name, null, bodytype)
+		var/mob/living/human/test_subject = new(null, species.name, null, bodytype)
 		if(test_subject.need_breathe())
 			test_subject.apply_effect(20, STUN, 0)
 			var/obj/item/organ/internal/lungs/L = test_subject.get_organ(test_subject.get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
@@ -36,13 +36,13 @@
 
 /datum/unit_test/human_breath/check_result()
 	for(var/i in test_subjects)
-		var/mob/living/carbon/human/test_subject = test_subjects[i][1]
+		var/mob/living/human/test_subject = test_subjects[i][1]
 		if(test_subject.life_tick < 10) 	// Finish Condition
 			return 0	// Return 0 to try again later.
 
 	var/failcount = 0
 	for(var/i in test_subjects)
-		var/mob/living/carbon/human/test_subject = test_subjects[i][1]
+		var/mob/living/human/test_subject = test_subjects[i][1]
 		var/ending_oxyloss = damage_check(test_subject, OXY)
 		var/starting_oxyloss = test_subjects[i][2]
 		if(starting_oxyloss >= ending_oxyloss)
@@ -60,12 +60,12 @@
 
 var/global/default_mobloc = null
 
-/proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
+/proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
 
 	if(isnull(mobloc))
 		if(!default_mobloc)
-			for(var/turf/simulated/floor/tiled/T in world)
+			for(var/turf/floor/tiled/T in world)
 				if(!T.zone?.air)
 					continue
 				var/pressure = T.zone.air.return_pressure()
@@ -77,7 +77,7 @@ var/global/default_mobloc = null
 		test_result["msg"] = "Unable to find a location to create test mob"
 		return test_result
 
-	var/mob/living/carbon/human/H = new mobtype(mobloc)
+	var/mob/living/human/H = new mobtype(mobloc)
 
 	H.mind_initialize("TestKey[rand(0,10000)]")
 
@@ -95,20 +95,20 @@ var/global/default_mobloc = null
 
 	switch(damage_type)
 		if(BRUTE)
-			loss = M.getBruteLoss()
+			loss = M.get_damage(BRUTE)
 		if(BURN)
-			loss = M.getFireLoss()
+			loss = M.get_damage(BURN)
 		if(TOX)
-			loss = M.getToxLoss()
+			loss = M.get_damage(TOX)
 		if(OXY)
-			loss = M.getOxyLoss()
+			loss = M.get_damage(OXY)
 		if(CLONE)
-			loss = M.getCloneLoss()
+			loss = M.get_damage(CLONE)
 		if(PAIN)
-			loss = M.getHalLoss()
+			loss = M.get_damage(PAIN)
 
 	if(!loss && ishuman(M))
-		var/mob/living/carbon/human/H = M            // Synthetics have robot limbs which don't report damage to getXXXLoss()
+		var/mob/living/human/H = M            // Synthetics have robot limbs which don't report damage to get_damage(XXX)
 		if(H.isSynthetic())                          // So we have to hard code this check or create a different one for them.
 			return H.species.total_health - H.current_health
 	return loss
@@ -131,13 +131,13 @@ var/global/default_mobloc = null
 	name = "MOB: Template for mob damage"
 	template = /datum/unit_test/mob_damage
 	var/damagetype = BRUTE
-	var/mob_type = /mob/living/carbon/human
+	var/mob_type = /mob/living/human
 	var/expected_vulnerability = STANDARD
 	var/damage_location = BP_CHEST
 
 /datum/unit_test/mob_damage/start_test()
 	var/list/test = create_test_mob_with_mind(get_safe_turf(), mob_type)
-	var/damage_amount = 4	// Do not raise, if damage >= 5 there is a % chance to reduce damage by half in /obj/item/organ/external/take_damage()
+	var/damage_amount = 4	// Do not raise, if damage >= 5 there is a % chance to reduce damage by half in /obj/item/organ/external/take_organ_damage()
 							// Which makes checks impossible.
 
 	if(isnull(test))
@@ -147,7 +147,7 @@ var/global/default_mobloc = null
 		fail(test["msg"])
 		return 0
 
-	var/mob/living/carbon/human/H = locate(test["mobref"])
+	var/mob/living/human/H = locate(test["mobref"])
 
 	if(isnull(H))
 		fail("Test unable to set test mob from reference")
@@ -289,13 +289,13 @@ var/global/default_mobloc = null
 /datum/unit_test/mob_nullspace/start_test()
 	// Simply create one of each species type in nullspace
 	for(var/species_name in get_all_species())
-		var/test_subject = new/mob/living/carbon/human(null, species_name)
+		var/test_subject = new/mob/living/human(null, species_name)
 		test_subjects += test_subject
 	return TRUE
 
 /datum/unit_test/mob_nullspace/check_result()
 	for(var/ts in test_subjects)
-		var/mob/living/carbon/human/H = ts
+		var/mob/living/human/H = ts
 		if(H.life_tick < 10)
 			return FALSE
 
@@ -310,7 +310,7 @@ var/global/default_mobloc = null
 /datum/unit_test/mob_organ_size/start_test()
 	var/failed = FALSE
 	for(var/species_name in get_all_species())
-		var/mob/living/carbon/human/H = new(null, species_name)
+		var/mob/living/human/H = new(null, species_name)
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			for(var/obj/item/organ/internal/I in E.internal_organs)
 				if(I.w_class > E.cavity_max_w_class)
@@ -320,91 +320,6 @@ var/global/default_mobloc = null
 		fail("A mob had an internal organ too large for its external organ.")
 	else
 		pass("All mob organs fit.")
-	return TRUE
-
-// ============================================================================
-
-//
-// Tests butchery products.
-//
-
-/datum/unit_test/mob_butchery
-	name = "MOB: All Living Mobs Shall Have Valid Products When Butchery Values Are Set"
-	async = 1
-	var/list/failed =      list()
-	var/list/check_meat =  list()
-	var/list/check_skin =  list()
-	var/list/check_bones = list()
-
-/datum/unit_test/mob_butchery/start_test()
-
-	for(var/mobtype in subtypesof(/mob/living))
-
-		// Humans use species for their products and are
-		// difficult to properly unit test because of this.
-		if(ispath(mobtype, /mob/living/carbon/human))
-			continue
-
-		var/mob/living/animal = mobtype
-
-		var/mtype = ispath(initial(animal.meat_type))
-		var/mcount = initial(animal.meat_amount) > 0
-		if(mtype && mcount)
-			check_meat += mobtype
-		else if(mtype && !mcount)
-			failed[mobtype] = "valid meat_type but meat_amount ([mcount]) is below or equal to zero"
-		else if(!mtype && mcount)
-			failed[mobtype] = "invalid meat_type ([mtype]) but meat_amount above zero"
-
-		var/smat =   initial(animal.skin_material)
-		var/stype =  (smat && istype(GET_DECL(smat), /decl/material))
-		var/scount = initial(animal.skin_amount) > 0
-		if(stype && scount)
-			check_skin += mobtype
-		else if(stype && !scount)
-			failed[mobtype] = "valid skin_material but skin_amount is below or equal to zero"
-		else if(!stype && scount)
-			failed[mobtype] = "invalid skin_material ([smat]) but skin_amount above zero"
-
-		var/bmat =   initial(animal.bone_material)
-		var/btype =  (bmat && istype(GET_DECL(bmat), /decl/material))
-		var/bcount = initial(animal.bone_amount) > 0
-		if(btype && bcount)
-			check_bones += mobtype
-		else if(btype && !bcount)
-			failed += "[mobtype] - valid bone_material but bone_amount is below or equal to zero"
-		else if(!btype && bcount)
-			failed += "[mobtype] - invalid bone_material ([bmat]) but bone_amount above zero"
-
-	var/list/spawned_mobs = list()
-	for(var/mobtype in check_skin)
-		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
-		spawned_mobs[mobtype] = M
-		if(!length(M.harvest_skin()))
-			failed += "[mobtype] - invalid skin products"
-	for(var/mobtype in check_bones)
-		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
-		spawned_mobs[mobtype] = M
-		if(!length(M.harvest_bones()))
-			failed += "[mobtype] - invalid bone products"
-	for(var/mobtype in check_meat)
-		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
-		spawned_mobs[mobtype] = M
-		if(!length(M.harvest_meat()))
-			failed += "[mobtype] - invalid meat products"
-	for(var/thing in spawned_mobs)
-		var/mob/living/M = spawned_mobs[thing]
-		if(!QDELETED(M))
-			qdel(M)
-	spawned_mobs.Cut()
-
-	return TRUE
-
-/datum/unit_test/mob_butchery/check_result()
-	if(length(failed))
-		fail("Some living mobs with butchery values have invalid values or do not produce valid products:\n[jointext(failed, "\n")]")
-	else
-		pass("All living mobs with butchery values produce valid products.")
 	return TRUE
 
 // ============================================================================

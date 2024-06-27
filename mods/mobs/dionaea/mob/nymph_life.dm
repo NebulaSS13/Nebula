@@ -1,5 +1,5 @@
 //Dionaea regenerate health and nutrition in light.
-/mob/living/carbon/alien/diona/handle_environment(datum/gas_mixture/environment)
+/mob/living/simple_animal/alien/diona/handle_environment(datum/gas_mixture/environment)
 
 	..()
 
@@ -26,17 +26,15 @@
 
 	if(radiation >= 50 || light_amount > 2) //if there's enough light, heal
 		var/update_health = FALSE
-		if(getBruteLoss())
-			update_health = TRUE
-			adjustBruteLoss(-1, do_update_health = FALSE)
-		if(getFireLoss())
-			update_health = TRUE
-			adjustFireLoss(-1, do_update_health = FALSE)
-		if(getToxLoss())
-			update_health = TRUE
-			adjustToxLoss(-1, do_update_health = FALSE)
-		if(getOxyLoss())
-			update_health = TRUE
-			adjustOxyLoss(-1, do_update_health = FALSE)
+		var/static/list/regen_types = list(
+			BRUTE,
+			BURN,
+			TOX,
+			OXY
+		)
+		for(var/damtype in regen_types)
+			if(get_damage(damtype))
+				heal_damage(damtype, 1, do_update_health = FALSE)
+				update_health = TRUE
 		if(update_health)
 			update_health()

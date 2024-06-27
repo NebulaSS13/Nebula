@@ -19,8 +19,6 @@
 	max_health = 40
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
-
-	var/paint_color
 	var/stripe_color
 	var/list/connections
 	var/list/other_connections
@@ -86,7 +84,7 @@
 			visible_message(SPAN_NOTICE("\The [user] begins slicing through \the [src] with \the [W]."))
 			if(do_after(user, 20,src))
 				visible_message(SPAN_NOTICE("\The [user] slices \the [src] apart with \the [W]."))
-				dismantle()
+				dismantle_structure(user)
 			return TRUE
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -138,7 +136,7 @@
 /obj/structure/wall_frame/bullet_act(var/obj/item/projectile/Proj)
 	var/proj_damage = Proj.get_structure_damage()
 	var/damage = min(proj_damage, 100)
-	take_damage(damage)
+	take_damage(damage, Proj.atom_damage_type)
 	return
 
 /obj/structure/wall_frame/hitby(AM, var/datum/thrownthing/TT)
@@ -155,13 +153,6 @@
 			return
 		take_damage(tforce)
 
-/obj/structure/wall_frame/get_color()
-	return paint_color
-
-/obj/structure/wall_frame/set_color(new_color)
-	paint_color = new_color
-	update_icon()
-
 //Subtypes
 /obj/structure/wall_frame/standard
 	paint_color = COLOR_WALL_GUNMETAL
@@ -173,3 +164,27 @@
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_HULL
 	stripe_color = COLOR_HULL
+
+/obj/structure/wall_frame/log
+	name = "low log wall"
+	desc = "A section of log wall with empty space for fitting a window or simply letting air in."
+	icon = 'icons/obj/structures/log_wall_frame.dmi'
+	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC // material color is applied in on_update_icon
+
+/obj/structure/wall_frame/log/Initialize()
+	color = null // clear mapping preview color
+	. = ..()
+
+#define LOW_LOG_WALL_SUBTYPE(material_name) \
+/obj/structure/wall_frame/log/##material_name { \
+	material = /decl/material/solid/organic/wood/##material_name; \
+	color = /decl/material/solid/organic/wood/##material_name::color; \
+}
+
+LOW_LOG_WALL_SUBTYPE(fungal)
+LOW_LOG_WALL_SUBTYPE(ebony)
+LOW_LOG_WALL_SUBTYPE(walnut)
+LOW_LOG_WALL_SUBTYPE(maple)
+LOW_LOG_WALL_SUBTYPE(mahogany)
+LOW_LOG_WALL_SUBTYPE(bamboo)
+LOW_LOG_WALL_SUBTYPE(yew)

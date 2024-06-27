@@ -197,7 +197,6 @@ Class Procs:
 
 /connection_edge/unsimulated/var/turf/B
 /connection_edge/unsimulated/var/datum/gas_mixture/air
-/connection_edge/unsimulated/var/list/inner_turfs = list()
 
 /connection_edge/unsimulated/New(zone/A, turf/B)
 	src.A = A
@@ -213,14 +212,17 @@ Class Procs:
 /connection_edge/unsimulated/add_connection(connection/c)
 	. = ..()
 	connecting_turfs.Add(c.B)
-	inner_turfs |= c.A
 	air.group_multiplier = coefficient
 
 /connection_edge/unsimulated/remove_connection(connection/c)
 	connecting_turfs.Remove(c.B)
-	inner_turfs.Remove(c.A)
 	air.group_multiplier = coefficient
 	. = ..()
+
+	// Update the air mix
+	if(coefficient && (B == c.B) && !(B in connecting_turfs))
+		B = pick(connecting_turfs)
+		air = B.return_air()
 
 /connection_edge/unsimulated/erase()
 	A.edges.Remove(src)
@@ -252,10 +254,6 @@ Class Procs:
 	// does not specially handle the less common case of a simulated room exposed to an unsimulated pressurized turf.
 	if(!A.air.compare(air, vacuum_exception = 1))
 		SSair.mark_edge_active(src)
-
-/connection_edge/unsimulated/update_post_merge()
-	for(var/turf/T in inner_turfs)
-		SSair.mark_for_update(T)
 
 /proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 	//This implements a simplistic version of the Stefan-Boltzmann law.

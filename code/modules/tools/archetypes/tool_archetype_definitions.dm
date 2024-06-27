@@ -48,3 +48,29 @@
 	name         = "hammer"
 	tool_sound   = 'sound/weapons/Genhit.ogg'
 	tool_message = "striking"
+
+/decl/tool_archetype/hoe
+	name         = "hoe"
+	tool_sound   = 'sound/items/shovel_dirt.ogg'
+	tool_message = "tilling"
+
+/decl/tool_archetype/knife
+	name         = "knife"
+	tool_sound   = 'sound/weapons/bladeslice.ogg'
+	tool_message = "cutting"
+
+/decl/tool_archetype/knife/get_default_quality(obj/item/tool)
+	if(tool)
+		if(tool.sharp && tool.edge)
+			return TOOL_QUALITY_DEFAULT
+		else if(tool.sharp || tool.edge)
+			return TOOL_QUALITY_MEDIOCRE
+	return ..()
+
+/decl/tool_archetype/knife/get_default_speed(obj/item/tool)
+	if(tool)
+		if(tool.sharp && tool.edge)
+			return TOOL_SPEED_DEFAULT
+		else if(tool.sharp || tool.edge)
+			return TOOL_SPEED_MEDIOCRE
+	return ..()

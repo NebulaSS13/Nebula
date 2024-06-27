@@ -9,7 +9,7 @@
 	if(istype(AM, /obj/item/clothing/))
 		LAZYADD(sources, AM)
 	else if(ishuman(AM))
-		var/mob/living/carbon/human/M = AM
+		var/mob/living/human/M = AM
 		var/covered = 0
 		for(var/slot in list(slot_wear_suit_str, slot_gloves_str, slot_w_uniform_str))
 			var/obj/item/clothing/C = M.get_equipped_item(slot)

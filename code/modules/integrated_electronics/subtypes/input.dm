@@ -140,7 +140,7 @@
 	power_draw_per_use = 40
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
-	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
 	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
@@ -192,20 +192,20 @@
 
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
-	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in view(get_turf(src))) // Like the medbot's analyzer it can be used at range.
 
 		var/current_max_health = H.get_max_health()
 		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
 		set_pin_data(IC_OUTPUT, 2, (H.stat == CONSCIOUS))
-		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / current_max_health))
-		set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.getFireLoss()  / current_max_health))
-		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss()   / current_max_health))
-		set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.getOxyLoss()   / current_max_health))
-		set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.getCloneLoss() / current_max_health))
+		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.get_damage(BRUTE) / current_max_health))
+		set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.get_damage(BURN)  / current_max_health))
+		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.get_damage(TOX)   / current_max_health))
+		set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.get_damage(OXY)   / current_max_health))
+		set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.get_damage(CLONE) / current_max_health))
 		set_pin_data(IC_OUTPUT, 8, H.get_pulse_as_number())
 		set_pin_data(IC_OUTPUT, 9, H.get_blood_oxygenation())
 		set_pin_data(IC_OUTPUT, 10, damage_to_severity(H.get_shock()))
@@ -254,9 +254,9 @@
 		return
 	for(var/i=1, i<=outputs.len, i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in view(get_turf(src))) // Like the medbot's analyzer it can be used at range.
 		if(H.seed)
-			set_pin_data(IC_OUTPUT, 1, H.seed.seed_name)
+			set_pin_data(IC_OUTPUT, 1, H.seed.product_name)
 			set_pin_data(IC_OUTPUT, 2, H.age)
 			set_pin_data(IC_OUTPUT, 3, H.seed.get_trait(TRAIT_POTENCY))
 			set_pin_data(IC_OUTPUT, 4, H.seed.get_trait(TRAIT_YIELD))
@@ -297,7 +297,7 @@
 		return
 	for(var/i=1, i<=outputs.len, i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in view(get_turf(src))) // Like the medbot's analyzer it can be used at range.
 		if(H.seed)
 			for(var/chem_path in H.seed.chems)
 				var/decl/material/R = chem_path
@@ -829,10 +829,6 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/integrated_circuit/input/microphone/Destroy()
-	global.listening_objects -= src
-	. = ..()
-
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M, text, verb, decl/language/speaking)
 	var/translated = TRUE
 	if(M && text)
@@ -865,7 +861,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/storage/))
+	if(ignore_bags && A.storage)
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -897,7 +893,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/storage))
+	if(ignore_bags && A.storage)
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()

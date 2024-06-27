@@ -45,7 +45,7 @@
 
 	//Calculate damage
 	var/aforce = W.force
-	if(W.damtype == BRUTE || W.damtype == BURN)
+	if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
 		current_health -= aforce
 
 	//Play a fitting sound
@@ -95,7 +95,7 @@
 		//This seemed to be the best sound for hitting a force field.
 		playsound(src.loc, 'sound/effects/EMPulse.ogg', 100, 1)
 		check_failure()
-		//The shield becomes dense to absorb the blow.. purely asthetic.
+		//The shield becomes dense to absorb the blow. Purely asthetic.
 		set_opacity(1)
 		spawn(20)
 			if(!QDELETED(src))

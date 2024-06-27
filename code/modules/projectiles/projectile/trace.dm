@@ -1,5 +1,5 @@
 //Helper proc to check if you can hit them or not.
-/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASS_FLAG_TABLE|PASS_FLAG_GLASS|PASS_FLAG_GRILLE)
+/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, pass_flags=PASS_FLAG_TABLE|PASS_FLAG_GLASS|PASS_FLAG_GRILLE, lifespan = null)
 	if(!istype(target) || !istype(firer))
 		return 0
 
@@ -7,6 +7,8 @@
 
 	//Set the flags and pass flags to that of the real projectile...
 	trace.pass_flags = pass_flags
+	if(lifespan)
+		trace.life_span = lifespan
 
 	return trace.launch(target) //Test it!
 

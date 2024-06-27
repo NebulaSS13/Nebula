@@ -35,7 +35,6 @@
 
 /obj/item/taperecorder/Destroy()
 	QDEL_NULL(wires)
-	global.listening_objects -= src
 	if(mytape)
 		qdel(mytape)
 		mytape = null
@@ -107,14 +106,6 @@
 			mytape.record_speech("[M.name] [speaking.format_message_plain(msg, verb)]")
 		else
 			mytape.record_speech("[M.name] [verb], \"[msg]\"")
-
-
-/obj/item/taperecorder/see_emote(mob/M, text, var/emote_type)
-	if(emote_type != AUDIBLE_MESSAGE) //only hearable emotes
-		return
-	if(mytape && recording)
-		mytape.record_speech("[strip_html_properly(text)]")
-
 
 /obj/item/taperecorder/show_message(msg, type, alt, alt_type)
 	var/recordedtext
@@ -470,7 +461,7 @@
 	var/list/output = list("<center>")
 	for(var/i=1, i < timestamp.len, i++)
 		var/time = "\[[time2text(timestamp[i]*10,"mm:ss")]\]"
-		output += "[time]<br><a href='?src=\ref[src];cut_after=[i]'>-----CUT------</a><br>"
+		output += "[time]<br><a href='byond://?src=\ref[src];cut_after=[i]'>-----CUT------</a><br>"
 	output += "</center>"
 
 	var/datum/browser/popup = new(user, "tape_cutting", "Cutting tape", 170, 600)

@@ -6,6 +6,7 @@
 	overlay_slot = BP_MOUTH
 	ui_label = "M"
 	hand_sort_priority = 3
+	dexterity = DEXTERITY_SIMPLE_MACHINES | DEXTERITY_HOLD_ITEM | DEXTERITY_EQUIP_ITEM | DEXTERITY_KEYBOARDS | DEXTERITY_TOUCHSCREENS
 
 /datum/inventory_slot/gripper/mouth/simple
 	requires_organ_tag = null

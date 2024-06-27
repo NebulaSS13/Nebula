@@ -24,15 +24,15 @@
 
 /obj/item/modular_computer/pda/on_update_icon()
 	. = ..()
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H) && H.get_equipped_item(slot_wear_id_str) == src)
 		H.update_equipment_overlay(slot_wear_id_str)
 
 // PDA box
-/obj/item/storage/box/PDAs
+/obj/item/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
 	icon_state = "pdabox"
 
-/obj/item/storage/box/PDAs/WillContain()
+/obj/item/box/PDAs/WillContain()
 	return list(/obj/item/modular_computer/pda = 5)

@@ -7,7 +7,7 @@
 	access = list(access_ascent)
 
 /obj/item/card/id/ascent/GetAccess()
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H) && !(H.species.name in ALL_ASCENT_SPECIES))
 		. = list()
 	else
@@ -38,7 +38,7 @@
 	organ_properties = ORGAN_PROP_PROSTHETIC
 	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
-/obj/item/organ/internal/controller/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/internal/controller/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
 	if(detached || !owner)
 		return
@@ -51,7 +51,7 @@
 	if(owner)
 		var/datum/extension/access_provider/owner_access = get_extension(owner, /datum/extension/access_provider)
 		owner_access?.unregister_id(src)
-	var/mob/living/carbon/H = owner
+	var/mob/living/H = owner
 	. = ..()
 	if(H && !(locate(type) in H.get_internal_organs()))
 		H.remove_language(/decl/language/mantid/worldnet)

@@ -22,8 +22,8 @@
 	var/volume = 100
 	var/max_loops
 	var/direct
-
 	var/timerid
+	var/started = FALSE
 
 /datum/composite_sound/New(list/_output_atoms=list(), start_immediately=FALSE, _direct=FALSE)
 	if(!mid_sounds)
@@ -46,6 +46,7 @@
 		LAZYDISTINCTADD(output_atoms, add_thing)
 	if(timerid)
 		return
+	started = TRUE
 	on_start()
 
 /datum/composite_sound/proc/stop(atom/remove_thing)
@@ -53,6 +54,7 @@
 		LAZYREMOVE(output_atoms, remove_thing)
 	if(!timerid)
 		return
+	started = FALSE
 	on_stop()
 	deltimer(timerid)
 	timerid = null

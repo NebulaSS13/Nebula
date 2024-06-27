@@ -169,6 +169,9 @@
 	// return amount of healing still leftover, can be used for other wounds
 	return amount
 
+/datum/wound/proc/is_open()
+	return current_stage <= max_bleeding_stage && !bandaged
+
 // opens the wound again
 /datum/wound/proc/open_wound(damage)
 	src.damage += damage
@@ -198,12 +201,11 @@
 	return 1
 
 /datum/wound/proc/bleeding()
-	for(var/obj/item/thing in embedded_objects)
-		if(thing.w_class > ITEM_SIZE_SMALL)
-			return FALSE
-	if(bandaged || clamped)
-		return FALSE
-	return ((bleed_timer > 0 || wound_damage() > bleed_threshold) && current_stage <= max_bleeding_stage)
+	. = !clamped && is_open() && (bleed_timer > 0 || wound_damage() > bleed_threshold)
+	if(. && length(embedded_objects))
+		for(var/obj/item/thing in embedded_objects)
+			if(thing.w_class > ITEM_SIZE_SMALL)
+				return FALSE
 
 /datum/wound/proc/is_surgical()
 	return 0

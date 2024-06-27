@@ -67,6 +67,22 @@
 	var/unique_enzymes
 	var/blood_type = "A+"
 
+	var/last_cough = 0
+
 	// Used to track appearance descriptor datums.
 	// Currently only on humans due to the spaghetti code involved, TODO: generalize.
 	var/list/appearance_descriptors
+
+	/// Total level of flash protection
+	var/flash_protection = FLASH_PROTECTION_NONE
+
+	/// Whether this mob's ability to stand has been affected
+	var/stance_damage = 0
+
+	var/list/smell_cooldown
+
+	/// Whether or not this mob has a client who wishes to sleep indefinitely.
+	var/player_triggered_sleeping = FALSE
+
+	/// Organ instances that should report info to Stat().
+	var/list/stat_organs

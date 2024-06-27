@@ -8,7 +8,7 @@
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 10
-	damtype = BURN
+	atom_damage_type =  BURN
 	force = 10
 	hitsound = 'sound/magic/forcewall.ogg'
 	max_health = ITEM_HEALTH_NO_DAMAGE
@@ -37,6 +37,6 @@
 	if(isliving(user))
 		var/mob/living/M = user
 		if(icon_state == "[name][sides]")
-			M.adjustBruteLoss(-30)
+			M.heal_damage(BRUTE, 30)
 		else if(icon_state == "[name]1")
-			M.adjustBruteLoss(30)
+			M.take_damage(30)

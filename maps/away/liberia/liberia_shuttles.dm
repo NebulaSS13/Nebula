@@ -30,4 +30,4 @@
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS
 	skill_needed = SKILL_BASIC
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling
+	ceiling_type = /turf/floor/shuttle_ceiling

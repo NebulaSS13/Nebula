@@ -6,7 +6,7 @@
 	anchored = TRUE
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
-	var/mob/living/carbon/human/victim = null
+	var/mob/living/human/victim = null
 	var/obj/machinery/optable/table = null
 
 /obj/machinery/computer/operating/Initialize()
@@ -30,7 +30,7 @@
 
 	user.set_machine(src)
 	var/dat = "<HEAD><TITLE>Operating Computer</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += "<A HREF='?src=\ref[user];mach_close=op'>Close</A><br><br>" //| <A HREF='?src=\ref[user];update=1'>Update</A>"
+	dat += "<A HREF='byond://?src=\ref[user];mach_close=op'>Close</A><br><br>" //| <A HREF='byond://?src=\ref[user];update=1'>Update</A>"
 	if(src.table && (src.table.check_victim()))
 		src.victim = src.table.victim
 		dat += {"

@@ -11,7 +11,6 @@
 	time_between_channels = 200
 	hud_state = "wiz_air"
 	var/list/air_change = list(/decl/material/gas/oxygen = ONE_ATMOSPHERE)
-	number_of_channels = 0
 
 /spell/create_air/choose_targets()
 	var/air = holder.return_air()
@@ -23,7 +22,3 @@
 	var/datum/gas_mixture/environment = targets[1]
 	for(var/gas in air_change)
 		environment.adjust_gas(gas, air_change[gas])
-
-/spell/create_air/tower
-	desc = "Allows you to generate a livable atmosphere in the area you are in."
-	charge_max = 5

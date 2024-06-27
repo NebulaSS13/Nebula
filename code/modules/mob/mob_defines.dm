@@ -26,6 +26,8 @@
 		/datum/movement_handler/mob/movement
 	)
 
+	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
+
 	var/shift_to_open_context_menu = FALSE
 
 	var/mob_flags
@@ -74,14 +76,8 @@
 	var/damageoverlaytemp = 0
 	var/obj/machinery/machine = null
 
-	var/sdisabilities = 0	//Carbon
-	var/disabilities = 0	//Carbon
-
 	var/next_move = null
 	var/real_name = null
-
-	var/resting =    0
-	var/lying =      0
 
 	var/radio_interrupt_cooldown = 0    // TODO move this to /human
 
@@ -109,30 +105,19 @@
 	var/decl/move_intent/default_walk_intent
 	var/decl/move_intent/default_run_intent
 
-	var/obj/item/storage/active_storage
+	var/datum/storage/active_storage
 	var/obj/buckled = null//Living
 	var/in_throw_mode = 0
 
 	var/can_pull_size = ITEM_SIZE_STRUCTURE // Maximum w_class the mob can pull.
 	var/can_pull_mobs = MOB_PULL_SAME       // Whether or not the mob can pull other mobs.
 
-	var/datum/dna/dna = null//Carbon
-	var/list/active_genes
-	var/list/mutations = list() // TODO: Lazylist this var.
-	//see: setup.dm for list of mutations
-
 	var/radiation = 0.0//Carbon
-
-	var/voice_name = "unidentifiable voice"
 
 	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 
-	//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
+	//The last mob/living to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/weakref/last_handled_by_mob
-
-	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
-
-	var/update_icon = 1 //Set to 1 to trigger update_icon() at the next life() call
 
 	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
 

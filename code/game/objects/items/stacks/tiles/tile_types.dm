@@ -15,16 +15,19 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_amount = 100
 	icon = 'icons/obj/tiles.dmi'
-	matter_multiplier = 0.15
+	matter_multiplier = 0.2
 	force = 1
 	throwforce = 1
 	throw_speed = 5
 	throw_range = 20
 	item_flags = 0
 	obj_flags = 0
-	var/replacement_turf_type = /turf/simulated/floor
+	var/replacement_turf_type = /turf/floor
 
 /obj/item/stack/tile/proc/try_build_turf(var/mob/user, var/turf/target)
+
+	if(!target.is_plating())
+		return FALSE
 
 	var/ladder = (locate(/obj/structure/ladder) in target)
 	if(ladder)
@@ -36,13 +39,12 @@
 		to_chat(user, SPAN_WARNING("The tiles need some support, build a lattice first."))
 		return FALSE
 
-	if(!use(1))
-		return FALSE
-
-	playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
-	target.ChangeTurf(replacement_turf_type, keep_air = TRUE)
-	qdel(lattice)
-	return TRUE
+	if(use(1))
+		playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
+		target.ChangeTurf(replacement_turf_type, keep_air = TRUE)
+		qdel(lattice)
+		return TRUE
+	return FALSE
 
 /*
  * Grass
@@ -53,6 +55,17 @@
 	desc = "A patch of grass like they often use on golf courses."
 	icon_state = "tile_grass"
 	origin_tech = @'{"biotech":1}'
+
+/obj/item/stack/tile/woven
+	name = "woven tile"
+	singular_name = "woven floor tile"
+	desc = "A piece of woven material suitable for covering the floor."
+	icon_state = "woven"
+	origin_tech = @'{"biotech":1}'
+	material = /decl/material/solid/organic/plantmatter/grass/dry
+	color = COLOR_BEIGE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	replacement_turf_type = /turf/floor/woven
 
 /*
  * Wood
@@ -262,81 +275,100 @@
 	name = "brown carpet"
 	singular_name = "brown carpet"
 	desc = "A piece of brown carpet."
-	icon_state = "tile_carpetbrown"
+	icon_state = "tile_carpet"
+	material = /decl/material/solid/organic/cloth
+	paint_color = "#6e391d"
+	var/detail_color = "#aa6300"
+
+/obj/item/stack/tile/carpet/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/stack/tile/carpet/on_update_icon()
+	. = ..()
+	color = get_color()
+	set_overlays(overlay_image(icon, "[icon_state]-detail", detail_color, RESET_COLOR))
 
 /obj/item/stack/tile/carpet/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetblue
+/obj/item/stack/tile/carpet/blue
 	name = "blue carpet"
 	desc = "A piece of blue and gold carpet."
 	singular_name = "blue carpet"
-	icon_state = "tile_carpetblue"
+	paint_color = "#464858"
 
-/obj/item/stack/tile/carpetblue/fifty
+/obj/item/stack/tile/carpet/blue/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetblue2
+/obj/item/stack/tile/carpet/blue2
 	name = "pale blue carpet"
 	desc = "A piece of blue and pale blue carpet."
 	singular_name = "pale blue carpet"
-	icon_state = "tile_carpetblue2"
+	paint_color = "#356287"
+	detail_color = "#868e96"
 
-/obj/item/stack/tile/carpetblue2/fifty
+/obj/item/stack/tile/carpet/blue2/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetblue3
+/obj/item/stack/tile/carpet/blue3
 	name = "sea blue carpet"
 	desc = "A piece of blue and green carpet."
 	singular_name = "sea blue carpet"
-	icon_state = "tile_carpetblue3"
+	detail_color = "#528c3c"
+	paint_color = "#356287"
 
-/obj/item/stack/tile/carpetblue3/fifty
+/obj/item/stack/tile/carpet/blue3/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetmagenta
+/obj/item/stack/tile/carpet/magenta
 	name = "magenta carpet"
 	desc = "A piece of magenta carpet."
 	singular_name = "magenta carpet"
-	icon_state = "tile_carpetmagenta"
+	paint_color = "#91265e"
+	detail_color = "#be6208"
 
-/obj/item/stack/tile/carpetmagenta/fifty
+/obj/item/stack/tile/carpet/magenta/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetpurple
+/obj/item/stack/tile/carpet/purple
 	name = "purple carpet"
 	desc = "A piece of purple carpet."
 	singular_name = "purple carpet"
-	icon_state = "tile_carpetpurple"
+	paint_color = "#4f3365"
+	detail_color = "#a25204"
 
-/obj/item/stack/tile/carpetpurple/fifty
+/obj/item/stack/tile/carpet/purple/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetorange
+/obj/item/stack/tile/carpet/orange
 	name = "orange carpet"
 	desc = "A piece of orange carpet."
 	singular_name = "orange carpet"
-	icon_state = "tile_carpetorange"
+	paint_color = "#9d480c"
+	detail_color = "#d07708"
 
-/obj/item/stack/tile/carpetorange/fifty
+/obj/item/stack/tile/carpet/orange/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetgreen
+/obj/item/stack/tile/carpet/green
 	name = "green carpet"
 	desc = "A piece of green carpet."
 	singular_name = "green carpet"
-	icon_state = "tile_carpetgreen"
+	paint_color = "#2a6e47"
+	detail_color = "#328e63"
 
-/obj/item/stack/tile/carpetgreen/fifty
+/obj/item/stack/tile/carpet/green/fifty
 	amount = 50
 
-/obj/item/stack/tile/carpetred
+/obj/item/stack/tile/carpet/red
 	name = "red carpet"
 	desc = "A piece of red carpet."
 	singular_name = "red carpet"
-	icon_state = "tile_carpetred"
+	paint_color = "#873221"
+	detail_color = "#aa6300"
 
-/obj/item/stack/tile/carpetred/fifty
+/obj/item/stack/tile/carpet/red/fifty
 	amount = 50
 
 /obj/item/stack/tile/pool
@@ -354,6 +386,14 @@
 	matter_multiplier = 0.3
 	icon_state = "tile"
 	material = /decl/material/solid/metal/steel
+
+/obj/item/stack/tile/roof/woven
+	name = "woven roofing tile"
+	desc = "A flimsy, woven roofing tile."
+	icon_state = "woven"
+	material = /decl/material/solid/organic/plantmatter/grass/dry
+	replacement_turf_type = /turf/floor/woven
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/stack/tile/roof/try_build_turf(var/mob/user, var/turf/target)
 
@@ -394,7 +434,6 @@
 	playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
 	if(replace_turf)
 		replace_turf.ChangeTurf(replacement_turf_type, keep_air = TRUE)
-	else
-		target.set_outside(OUTSIDE_NO)
+	target.set_outside(OUTSIDE_NO)
 	to_chat(user, SPAN_NOTICE("You put up a roof over \the [target]."))
 	return TRUE

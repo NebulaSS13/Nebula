@@ -13,10 +13,12 @@
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
+	backyard_grilling_product = /obj/item/chems/food/toastedsandwich
+	backyard_grilling_announcement = "is toasted golden brown."
 
 /obj/item/chems/food/sandwich/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 
 /obj/item/chems/food/toastedsandwich
 	name = "toasted sandwich"
@@ -32,7 +34,7 @@
 
 /obj/item/chems/food/toastedsandwich/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 	add_to_reagents(/decl/material/solid/carbon,             2)
 
 /obj/item/chems/food/grilledcheese
@@ -48,7 +50,7 @@
 
 /obj/item/chems/food/grilledcheese/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
 /obj/item/chems/food/baguette
 	name = "baguette"

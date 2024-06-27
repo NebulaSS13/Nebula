@@ -13,7 +13,7 @@
 	)
 
 	var/list/valid_targets = list(
-		/mob/living/carbon/human,
+		/mob/living/human,
 		/mob/living/simple_animal
 	)
 
@@ -40,7 +40,7 @@
 /mob/proc/xenobio_scan_results()
 	. = "Incompatible life form, analysis failed."
 
-/mob/living/carbon/human/xenobio_scan_results()
+/mob/living/human/xenobio_scan_results()
 	. += "Data for \the [src]:"
 	. += "Species:\t[species]"
 	if(species.breath_type)
@@ -53,7 +53,7 @@
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if(root_bodytype)
 		. += "Temperature comfort zone:\t[root_bodytype.cold_discomfort_level] K to [root_bodytype.heat_discomfort_level] K"
-	. += "Pressure comfort zone:\t[species.warning_low_pressure] kPa to [species.warning_high_pressure] kPa"
+	. += "Pressure comfort zone:\t[species.get_warning_low_pressure(src)] kPa to [species.get_warning_high_pressure(src)] kPa"
 	. = jointext(., "<br>")
 
 /mob/living/simple_animal/xenobio_scan_results()

@@ -8,7 +8,7 @@
 /decl/status_condition/sleeping/handle_changed_amount(var/mob/living/victim, var/new_amount, var/last_amount)
 	. = ..()
 	victim.facing_dir = null
-	victim.UpdateLyingBuckledAndVerbStatus()
+	victim.update_posture()
 	victim.handle_dreams()
 	victim.get_species()?.handle_sleeping(victim)
 

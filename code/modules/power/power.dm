@@ -183,7 +183,7 @@
 //power_source is a source of electricity, can be powercell, area, apc, cable, powernet or null
 //source is an object caused electrocuting (airlock, grille, etc)
 //No animations will be performed by this proc.
-/proc/electrocute_mob(mob/living/carbon/M, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
+/proc/electrocute_mob(mob/living/M, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
 	var/area/source_area
 	if(istype(power_source,/area))
 		source_area = power_source
@@ -215,8 +215,8 @@
 	if(PN)
 		PN.trigger_warning(5)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.species.siemens_coefficient <= 0)
+		var/mob/living/human/H = M
+		if(H.species.get_shock_vulnerability(H) <= 0)
 			return
 		var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
 		if(istype(G) && G.siemens_coefficient == 0)

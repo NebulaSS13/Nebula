@@ -10,6 +10,9 @@
 	target = /decl/state/weather/calm
 	likelihood_weighting = 50
 
+/decl/state_transition/weather/cold
+	target = /decl/state/weather/cold
+
 /decl/state_transition/weather/snow
 	target = /decl/state/weather/snow
 

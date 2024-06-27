@@ -21,9 +21,9 @@
 /decl/language/human/get_random_name(var/gender)
 	if (prob(80))
 		if(gender==FEMALE)
-			return capitalize(pick(global.first_names_female)) + " " + capitalize(pick(global.last_names))
+			return capitalize(pick(global.using_map.first_names_female)) + " " + capitalize(pick(global.using_map.last_names))
 		else
-			return capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
+			return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 	else
 		return ..()
 

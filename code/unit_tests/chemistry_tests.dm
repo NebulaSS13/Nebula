@@ -196,11 +196,11 @@
 			if(chem_type in excepted_types)
 				continue
 			var/atom/chem = chem_type
-			if(TYPE_IS_ABSTRACT(chem))
+			if(!TYPE_IS_SPAWNABLE(chem))
 				continue
 			chem = new chem(spawn_spot)
 			if(QDELETED(chem))
-				failures += "- [type] qdeleted after Initialize()"
+				failures += "- [chem.type] qdeleted after Initialize()"
 				continue
 			chem_refs[chem.type] = weakref(chem)
 

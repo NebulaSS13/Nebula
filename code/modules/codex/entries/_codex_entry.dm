@@ -25,11 +25,18 @@
 	var/include_subtypes = FALSE
 	/// HTML returned when the entry is used to populate a guide manual.
 	var/guide_html
+	/// The map tech level this entry will appear for.
+	var/available_to_map_tech_level = MAP_TECH_LEVEL_ANY
+	/// If TRUE, the entry will be excluded from search results, category listings, or the index.
+	/// It will only be accessible from items and entries that directly link to it.
+	var/unsearchable = FALSE
 
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE
 
 /datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
+	if(global.using_map.map_tech_level < available_to_map_tech_level)
+		unsearchable = TRUE
 
 	if(_display_name)       name =               _display_name
 	if(_associated_paths)   associated_paths =   _associated_paths
@@ -63,10 +70,10 @@
 	if(!name)
 		if(length(associated_strings))
 			name = associated_strings[1]
-		else
+		else if(store_codex_entry)
 			CRASH("Attempted to instantiate unnamed codex entry with no associated strings!")
 
-	if(store_codex_entry)
+	if(name && store_codex_entry)
 		SScodex.all_entries += src
 		LAZYDISTINCTADD(associated_strings, codex_sanitize(name))
 		for(var/associated_string in associated_strings)
@@ -107,10 +114,10 @@
 	. = list()
 	if(presenting_to)
 		var/datum/codex_entry/linked_entry = SScodex.get_entry_by_string("nexus")
-		. += "<a href='?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[presenting_to]'>Home</a>"
+		. += "<a href='byond://?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[presenting_to]'>Home</a>"
 		if(presenting_to.client)
-			. += "<a href='?src=\ref[presenting_to.client];codex_search=1'>Search Codex</a>"
-			. += "<a href='?src=\ref[presenting_to.client];codex_index=1'>List All Entries</a>"
+			. += "<a href='byond://?src=\ref[presenting_to.client];codex_search=1'>Search Codex</a>"
+			. += "<a href='byond://?src=\ref[presenting_to.client];codex_index=1'>List All Entries</a>"
 	. += "<hr><h2>[name]</h2>"
 
 /datum/codex_entry/proc/get_codex_footer(var/mob/presenting_to)

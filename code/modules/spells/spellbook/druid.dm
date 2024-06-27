@@ -29,7 +29,6 @@
 		/spell/area_teleport =                    2,
 		/spell/portal_teleport =                  2,
 		/spell/noclothes =                        1,
-		/obj/structure/closet/wizard/souls =      1,
 		/obj/item/magic_rock =                    1,
 		/obj/item/summoning_stone =               2,
 		/obj/item/contract/wizard/telepathy =     1,
@@ -39,6 +38,6 @@
 		/obj/item/seeds,
 		/obj/item/wirecutters/clippers,
 		/obj/item/scanner/plant,
-		/obj/item/hatchet,
-		/obj/item/minihoe
+		/obj/item/tool/axe/hatchet,
+		/obj/item/tool/hoe/mini
 	)

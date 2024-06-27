@@ -30,11 +30,11 @@
 	src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
 // Override to avoid drinking from this or feeding it to your neighbor.
-/obj/item/chems/spray/attack(mob/user)
+/obj/item/chems/spray/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	return FALSE
 
 /obj/item/chems/spray/afterattack(atom/A, mob/user, proximity)
-	if(istype(A, /obj/item/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/chems) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
+	if(A?.storage || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/chems) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
 	if(istype(A, /spell))
@@ -76,12 +76,11 @@
 /obj/item/chems/spray/proc/create_chempuff(var/atom/movable/target, var/particle_amount)
 	set waitfor = FALSE
 
-	var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
+	var/obj/effect/effect/water/chempuff/D = new(get_turf(src))
 	D.create_reagents(amount_per_transfer_from_this)
 	if(QDELETED(src))
 		return
 	reagents.trans_to_obj(D, amount_per_transfer_from_this)
-	D.set_color()
 	D.set_up(get_turf(target), particle_amount? particle_amount : spray_particles, particle_move_delay)
 	return D
 

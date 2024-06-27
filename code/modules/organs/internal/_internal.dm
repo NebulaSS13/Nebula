@@ -27,7 +27,7 @@
 	/// Whether or not we should try to transfer a brainmob when removed or replaced in a mob.
 	var/transfer_brainmob_with_organ = FALSE
 
-/obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
+/obj/item/organ/internal/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
 	. = ..()
@@ -38,7 +38,7 @@
 	if(species.organs_icon)
 		icon = species.organs_icon
 
-/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/internal/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
 
 	if(!affected)
@@ -276,7 +276,6 @@
 		if(update_brainmob)
 			brainmob.SetName(M.real_name)
 			brainmob.real_name = M.real_name
-			brainmob.dna = M.dna?.Clone()
 			brainmob.languages = M.languages?.Copy()
 			brainmob.default_language = M.default_language
 			to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
@@ -292,7 +291,7 @@
 	return brainmob?.key
 
 // This might need revisiting to stop people successfully implanting brains in groins and transferring minds.
-/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/internal/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
 	if(transfer_brainmob_with_organ && istype(owner))
 		var/mob/living/brainmob = get_brainmob(create_if_missing = FALSE)

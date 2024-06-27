@@ -29,7 +29,7 @@
 ////////////////////////////////
 
 ///Simulated turf meant to replicate the appearence of another.
-/turf/simulated/mimic_edge
+/turf/mimic_edge
 	name             = MIMIC_EDGE_NAME
 	desc             = MIMIC_EDGE_DESC
 	icon             = null
@@ -38,7 +38,7 @@
 	permit_ao        = FALSE //would need AO proxy
 	blocks_air       = TRUE  //would need air zone proxy
 	dynamic_lighting = FALSE //Would need lighting proxy
-	abstract_type    = /turf/simulated/mimic_edge
+	abstract_type    = /turf/mimic_edge
 
 	///Mimicked turf's x position
 	var/mimic_x
@@ -49,7 +49,7 @@
 	///Ref to the dummy overlay
 	var/obj/effect/overlay/click_bait/click_eater
 
-/turf/simulated/mimic_edge/Initialize(ml)
+/turf/mimic_edge/Initialize(ml)
 	. = ..()
 	//Clear ourselves from the ambient queue
 	SSambience.queued -= src
@@ -57,199 +57,47 @@
 	click_eater = new(src) //#TODO: get rid of that once we got proper proxy atom handling
 	setup_mimic()
 
-/turf/simulated/mimic_edge/Destroy()
+/turf/mimic_edge/Destroy()
 	QDEL_NULL(click_eater) //Make sure we get rid of it if the turf is somehow replaced by map gen to prevent them accumulating.
 	return ..()
 
-/turf/simulated/mimic_edge/Crossed(atom/movable/O)
+/turf/mimic_edge/Crossed(atom/movable/O)
 	. = ..()
 	if(isobserver(O))
 		var/turf/drop_turf = get_mimic_turf()
 		if(drop_turf)
 			O.forceMove(drop_turf)
 
-/turf/simulated/mimic_edge/resolve_to_actual_turf()
+/turf/mimic_edge/resolve_to_actual_turf()
 	return get_mimic_turf()
 
 //Properly install itself, and allow overriding how the target turf is picked
-/turf/simulated/mimic_edge/proc/setup_mimic()
+/turf/mimic_edge/proc/setup_mimic()
 	return
 
-/turf/simulated/mimic_edge/on_update_icon()
+/turf/mimic_edge/on_update_icon()
 	return
 
-/turf/simulated/mimic_edge/get_vis_contents_to_add()
+/turf/mimic_edge/get_vis_contents_to_add()
 	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), list())
 
-/turf/simulated/mimic_edge/proc/get_mimic_turf()
+/turf/mimic_edge/proc/get_mimic_turf()
 	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
 
-/turf/simulated/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
+/turf/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
 	mimic_z = _z? _z : z
 	mimic_x = _x
 	mimic_y = _y
 	update_vis_contents()
 
 //Prevent ambient completely, we're not a real turf
-/turf/simulated/mimic_edge/set_ambient_light(color, multiplier)
+/turf/mimic_edge/set_ambient_light(color, multiplier)
 	return
-/turf/simulated/mimic_edge/update_ambient_light(no_corner_update)
+/turf/mimic_edge/update_ambient_light(no_corner_update)
 	return
-/turf/simulated/mimic_edge/update_ambient_light_from_z_or_area()
+/turf/mimic_edge/update_ambient_light_from_z_or_area()
 	return
-/turf/simulated/mimic_edge/lighting_build_overlay(now)
-	return
-
-////////////////////////////////
-// Unsimulated Mimic Edges
-////////////////////////////////
-
-///Unsimulated turf meant to replicate the appearence of another.
-/turf/unsimulated/mimic_edge
-	name             = MIMIC_EDGE_NAME
-	desc             = MIMIC_EDGE_DESC
-	icon             = null
-	icon_state       = null
-	density          = FALSE
-	permit_ao        = FALSE
-	blocks_air       = TRUE
-	dynamic_lighting = FALSE
-	abstract_type    = /turf/unsimulated/mimic_edge
-
-	///Mimicked turf's x position
-	var/mimic_x
-	///Mimicked turf's y position
-	var/mimic_y
-	///Mimicked turf's z position
-	var/mimic_z
-	///Ref to the dummy overlay
-	var/obj/effect/overlay/click_bait/click_eater
-
-/turf/unsimulated/mimic_edge/Initialize(ml)
-	. = ..()
-	//Clear ourselves from the ambient queue
-	SSambience.queued -= src
-	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
-	click_eater = new(src)
-	setup_mimic()
-
-/turf/unsimulated/mimic_edge/Destroy()
-	QDEL_NULL(click_eater)
-	return ..()
-
-/turf/unsimulated/mimic_edge/Crossed(atom/movable/O)
-	. = ..()
-	if(isobserver(O))
-		var/turf/drop_turf = get_mimic_turf()
-		if(drop_turf)
-			O.forceMove(drop_turf)
-
-/turf/unsimulated/mimic_edge/resolve_to_actual_turf()
-	return get_mimic_turf()
-
-//Properly install itself, and allow overriding how the target turf is picked
-/turf/unsimulated/mimic_edge/proc/setup_mimic()
-	return
-
-/turf/unsimulated/mimic_edge/on_update_icon()
-	return
-
-/turf/unsimulated/mimic_edge/get_vis_contents_to_add()
-	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), list())
-
-/turf/unsimulated/mimic_edge/proc/get_mimic_turf()
-	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
-
-/turf/unsimulated/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
-	mimic_z = _z? _z : z
-	mimic_x = _x
-	mimic_y = _y
-	update_vis_contents()
-
-//Prevent ambient completely, we're not a real turf
-/turf/unsimulated/mimic_edge/set_ambient_light(color, multiplier)
-	return
-/turf/unsimulated/mimic_edge/update_ambient_light(no_corner_update)
-	return
-/turf/unsimulated/mimic_edge/update_ambient_light_from_z_or_area()
-	return
-/turf/unsimulated/mimic_edge/lighting_build_overlay(now)
-	return
-
-////////////////////////////////
-// Exterior Mimic Edges
-////////////////////////////////
-
-///Exterior turf meant to replicate the appearence of another.
-/turf/exterior/mimic_edge
-	name             = MIMIC_EDGE_NAME
-	desc             = MIMIC_EDGE_DESC
-	icon             = null
-	icon_state       = null
-	density          = FALSE
-	permit_ao        = FALSE
-	blocks_air       = TRUE
-	dynamic_lighting = FALSE
-	abstract_type    = /turf/exterior/mimic_edge
-
-	///Mimicked turf's x position
-	var/mimic_x
-	///Mimicked turf's y position
-	var/mimic_y
-	///Mimicked turf's z position
-	var/mimic_z
-	///Ref to the dummy overlay
-	var/obj/effect/overlay/click_bait/click_eater
-
-/turf/exterior/mimic_edge/Initialize(ml)
-	. = ..()
-	//Clear ourselves from the ambient queue
-	SSambience.queued -= src
-	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
-	click_eater = new(src)
-	setup_mimic()
-
-/turf/exterior/mimic_edge/Destroy()
-	QDEL_NULL(click_eater)
-	return ..()
-
-/turf/exterior/mimic_edge/Crossed(atom/movable/O)
-	. = ..()
-	if(isobserver(O))
-		var/turf/drop_turf = get_mimic_turf()
-		if(drop_turf)
-			O.forceMove(drop_turf)
-
-/turf/exterior/mimic_edge/resolve_to_actual_turf()
-	return get_mimic_turf()
-
-//Properly install itself, and allow overriding how the target turf is picked
-/turf/exterior/mimic_edge/proc/setup_mimic()
-	return
-
-/turf/exterior/mimic_edge/on_update_icon()
-	return
-
-/turf/exterior/mimic_edge/get_vis_contents_to_add()
-	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), list())
-
-/turf/exterior/mimic_edge/proc/get_mimic_turf()
-	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
-
-/turf/exterior/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
-	mimic_z = _z? _z : z
-	mimic_x = _x
-	mimic_y = _y
-	update_vis_contents()
-
-//Prevent ambient completely, we're not a real turf
-/turf/exterior/mimic_edge/set_ambient_light(color, multiplier)
-	return
-/turf/exterior/mimic_edge/update_ambient_light(no_corner_update)
-	return
-/turf/exterior/mimic_edge/update_ambient_light_from_z_or_area()
-	return
-/turf/exterior/mimic_edge/lighting_build_overlay(now)
+/turf/mimic_edge/lighting_build_overlay(now)
 	return
 
 ////////////////////////////////
@@ -346,10 +194,10 @@
 ////////////////////////////////
 
 ///When soemthing touches this turf, it gets transported to the connected level matching the direction of the edge on the map
-/turf/simulated/mimic_edge/transition/setup_mimic()
+/turf/mimic_edge/transition/setup_mimic()
 	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, shared_transition_edge_get_valid_level_data(src))
 	set_mimic_turf(coord[1], coord[2], coord[3])
-/turf/simulated/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
+/turf/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
 	. = ..()
 	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
 		return
@@ -357,51 +205,17 @@
 		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
-/turf/unsimulated/mimic_edge/transition/flooded
+/turf/mimic_edge/transition/flooded
 	flooded = /decl/material/liquid/water
-
-/turf/unsimulated/mimic_edge/transition/setup_mimic()
-	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, shared_transition_edge_get_valid_level_data(src))
-	set_mimic_turf(coord[1], coord[2], coord[3])
-/turf/unsimulated/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
-	. = ..()
-	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
-		return
-	if(istype(AM, /obj/effect/projectile)) //#FIXME: Once we support projectiles going through levels properly remove this
-		return
-	shared_transition_edge_bumped(src, AM, mimic_z)
-
-/turf/exterior/mimic_edge/transition/setup_mimic()
-	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, shared_transition_edge_get_valid_level_data(src))
-	set_mimic_turf(coord[1], coord[2], coord[3])
-/turf/exterior/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
-	. = ..()
-	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
-		return
-	if(istype(AM, /obj/effect/projectile)) //#FIXME: Once we support projectiles going through levels properly remove this
-		return
-	shared_transition_edge_bumped(src, AM, mimic_z)
 
 ////////////////////////////////
 // Loop Edges
 ////////////////////////////////
 
 ///When something touches this turf, it gets transported to the symmetrically opposite turf it's mimicking.
-/turf/simulated/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z)
+/turf/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z)
 	. = ..(_x, _y)
-/turf/simulated/mimic_edge/transition/loop/setup_mimic()
-	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, SSmapping.levels_by_z[src.z])
-	set_mimic_turf(coord[1], coord[2], coord[3])
-
-/turf/unsimulated/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z)
-	. = ..(_x, _y)
-/turf/unsimulated/mimic_edge/transition/loop/setup_mimic()
-	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, SSmapping.levels_by_z[src.z])
-	set_mimic_turf(coord[1], coord[2], coord[3])
-
-/turf/exterior/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z)
-	. = ..(_x, _y)
-/turf/exterior/mimic_edge/transition/loop/setup_mimic()
+/turf/mimic_edge/transition/loop/setup_mimic()
 	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, SSmapping.levels_by_z[src.z])
 	set_mimic_turf(coord[1], coord[2], coord[3])
 

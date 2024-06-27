@@ -20,7 +20,6 @@
 	var/panic = 0 //is this scrubber panicked?
 
 	var/welded = 0
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
 	build_icon_state = "scrubber"
 
 	uncreated_component_parts = list(

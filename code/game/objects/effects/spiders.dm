@@ -23,7 +23,7 @@
 		return TRUE
 	var/showed_msg = FALSE
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
 		if(istype(attack))
 			attack.show_attack(H, src, H.get_target_zone(), 1)
@@ -142,6 +142,7 @@
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
+	icon = 'icons/mob/simple_animal/spider.dmi' // updated in Initialize()
 	icon_state = "lesser"
 	anchored = FALSE
 	layer = BELOW_OBJ_LAYER

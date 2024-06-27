@@ -2,6 +2,7 @@
 	name = FEMALE
 	bureaucratic_term  = "female"
 	informal_term = "lady"
+	honorific = "Ms."
 
 	He   = "She"
 	he   = "she"

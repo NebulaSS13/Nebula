@@ -3,47 +3,47 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/simulated/wall/wood,
+/turf/wall/wood,
 /area/template_noop)
 "c" = (
 /obj/machinery/port_gen/pacman,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "d" = (
 /obj/structure/closet/cabinet,
-/obj/item/clothing/under/color/black,
+/obj/item/clothing/jumpsuit/black,
 /obj/item/clothing/shoes/jackboots/jungleboots,
 /obj/item/clothing/mask/breath,
-/turf/simulated/floor/carpet/green,
+/turf/floor/carpet/green,
 /area/template_noop)
 "e" = (
-/turf/simulated/floor/carpet/green,
+/turf/floor/carpet/green,
 /area/template_noop)
 "f" = (
 /obj/structure/bed,
 /obj/item/bedsheet,
-/turf/simulated/floor/carpet/green,
+/turf/floor/carpet/green,
 /area/template_noop)
 "g" = (
 /obj/structure/window/reinforced/full,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "h" = (
 /obj/structure/table/woodentable,
 /obj/item/board,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "i" = (
 /obj/item/flashlight/lamp/green,
 /obj/structure/table/woodentable,
-/turf/simulated/floor/carpet/green,
+/turf/floor/carpet/green,
 /area/template_noop)
 "j" = (
 /obj/structure/table/woodentable,
 /obj/item/clothing/mask/smokable/pipe/cobpipe,
-/obj/item/storage/chewables/rollable/generic,
+/obj/item/chewables/rollable/generic,
 /obj/item/ashtray,
-/turf/simulated/floor/carpet/green,
+/turf/floor/carpet/green,
 /area/template_noop)
 "k" = (
 /obj/structure/table/woodentable,
@@ -54,7 +54,7 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "l" = (
 /obj/structure/table/woodentable,
@@ -63,14 +63,14 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "m" = (
 /obj/structure/closet/crate/freezer,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "n" = (
 /obj/machinery/cooker/oven,
@@ -80,30 +80,30 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "o" = (
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "p" = (
 /obj/structure/bed/chair/wood{
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "q" = (
 /obj/structure/table/woodentable,
 /obj/item/book/manual/detective,
 /obj/item/ashtray,
 /obj/item/deck/cards,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "r" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "s" = (
 /obj/structure/table/woodentable,
@@ -111,47 +111,47 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/item/knife/kitchen/cleaver,
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "t" = (
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "u" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "w" = (
-/turf/simulated/floor/wood/usedup,
+/turf/floor/wood/usedup,
 /area/template_noop)
 "x" = (
 /obj/structure/table/woodentable,
 /obj/item/flashlight/lamp,
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "y" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "z" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "A" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "B" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "C" = (
 /obj/structure/table/woodentable,
@@ -159,7 +159,7 @@
 	desc = "A cheap, beat-up old laptop.";
 	name = "old laptop"
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "D" = (
 /obj/structure/bed/chair/wood{
@@ -168,42 +168,42 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/floor/tiled/monotile,
 /area/template_noop)
 "E" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "F" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "G" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "H" = (
 /obj/structure/door/wood,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "I" = (
 /obj/structure/rack,
 /obj/item/gun/projectile/zipgun,
-/obj/item/storage/box/ammo/shotgunshells,
-/turf/simulated/floor/wood,
+/obj/item/box/ammo/shotgunshells,
+/turf/floor/wood,
 /area/template_noop)
 "J" = (
 /obj/structure/closet,
 /obj/item/stack/material/sheet/mapped/steel/ten,
 /obj/item/stack/material/plank/mapped/wood/fifty,
-/obj/item/stack/tile/carpetgreen/fifty,
+/obj/item/stack/tile/carpet/green/fifty,
 /obj/item/stack/material/pane/mapped/rglass/ten,
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "L" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
@@ -227,12 +227,12 @@
 /area/template_noop)
 "Q" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 "S" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/wood,
+/turf/floor/wood,
 /area/template_noop)
 
 (1,1,1) = {"

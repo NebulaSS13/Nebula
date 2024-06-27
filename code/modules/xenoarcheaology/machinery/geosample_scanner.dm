@@ -287,7 +287,7 @@
 
 	var/anom_found = 0
 	var/datum/extension/geological_data/GD = get_extension(scanned_item, /datum/extension/geological_data)
-	if(GD && GD.geodata)
+	if(GD?.geodata)
 		data = " - Spectometric analysis on mineral sample has determined type [responsive_carriers[GD.geodata.source_mineral]]<br>"
 		data += " - Radiometric dating shows age of [GD.geodata.age * 1000] years<br>"
 		data += " - Chromatographic analysis shows the following materials present:<br>"

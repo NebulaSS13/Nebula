@@ -31,6 +31,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
+	replaced_in_loadout = FALSE
 	var/up = 0
 	var/base_state
 
@@ -143,6 +144,31 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 2
 	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/organic/plantmatter
+	var/plant_type = "pumpkin"
+
+// Duplicated from growns for now. TODO: move sliceability down to other objects like clay.
+/obj/item/clothing/head/pumpkinhead/attackby(obj/item/W, mob/user)
+	if(IS_KNIFE(W) && user.a_intent != I_HURT)
+		var/datum/seed/plant = SSplants.seeds[plant_type]
+		if(!plant)
+			return ..()
+		var/slice_amount = plant.slice_amount
+		if(W.w_class > ITEM_SIZE_NORMAL || !user.skill_check(SKILL_COOKING, SKILL_BASIC))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] crudely slices \the [src] with \the [W]!"),
+				SPAN_NOTICE("You crudely slice \the [src] with your [W.name]!")
+			)
+			slice_amount = rand(1, max(1, round(slice_amount*0.5)))
+		else
+			user.visible_message(
+				SPAN_NOTICE("\The [user] slices \the [src]!"),
+				SPAN_NOTICE("You slice \the [src]!")
+			)
+		for(var/i = 1 to slice_amount)
+			new /obj/item/chems/food/processed_grown/chopped(loc, material?.type, plant)
+		return TRUE
+	return ..()
 
 /*
  * Kitty ears
@@ -227,10 +253,10 @@
 		is_on_fire = !is_on_fire
 		update_icon()
 		if(is_on_fire)
-			damtype = BURN
+			atom_damage_type = BURN
 			START_PROCESSING(SSobj, src)
 		else
 			force = null
-			damtype = BRUTE
+			atom_damage_type = BRUTE
 			STOP_PROCESSING(SSobj, src)
 		return TRUE

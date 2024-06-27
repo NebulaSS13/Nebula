@@ -1,39 +1,28 @@
 // Tiles
 /decl/stack_recipe/tile
 	abstract_type       = /decl/stack_recipe/tile
-	req_amount          = 1
-	res_amount          = 4
-	max_res_amount      = 20
 	difficulty          = MAT_VALUE_NORMAL_DIY
 	apply_material_name = FALSE
 	category            = "tiling"
-
-/decl/stack_recipe/tile/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/item/stack/S = ..()
-	if(istype(S))
-		S.amount = amount
-		if(user)
-			S.add_to_stacks(user, 1)
-	return S
 
 /decl/stack_recipe/tile/wood
 	result_type         = /obj/item/stack/tile/wood
 	required_material   = /decl/material/solid/organic/wood
 
-/decl/stack_recipe/tile/mahogany
+/decl/stack_recipe/tile/wood/mahogany
 	result_type         = /obj/item/stack/tile/mahogany
 	required_material   = /decl/material/solid/organic/wood/mahogany
 
-/decl/stack_recipe/tile/maple
+/decl/stack_recipe/tile/wood/maple
 	result_type         = /obj/item/stack/tile/maple
 	required_material   = /decl/material/solid/organic/wood/maple
 
-/decl/stack_recipe/tile/ebony
+/decl/stack_recipe/tile/wood/ebony
 	difficulty          = MAT_VALUE_VERY_HARD_DIY
 	result_type         = /obj/item/stack/tile/ebony
 	required_material   = /decl/material/solid/organic/wood/ebony
 
-/decl/stack_recipe/tile/walnut
+/decl/stack_recipe/tile/wood/walnut
 	result_type         = /obj/item/stack/tile/walnut
 	required_material   = /decl/material/solid/organic/wood/walnut
 
@@ -41,6 +30,7 @@
 /decl/stack_recipe/tile/steel
 	abstract_type     = /decl/stack_recipe/tile/steel
 	required_material = /decl/material/solid/metal/steel
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/tile/steel/floor
 	result_type       = /obj/item/stack/tile/floor
@@ -78,6 +68,7 @@
 /decl/stack_recipe/tile/panels
 	abstract_type = /decl/stack_recipe/tile/panels
 	craft_stack_types = /obj/item/stack/material/panel
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/tile/panels/floor
 	result_type       = /obj/item/stack/tile/floor_white

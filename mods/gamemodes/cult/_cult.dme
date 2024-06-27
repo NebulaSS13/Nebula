@@ -1,0 +1,40 @@
+#ifndef GAMEMODE_PACK_CULT
+#define GAMEMODE_PACK_CULT
+
+#ifdef GAMEMODE_PACK_DEITY
+#warn Deity modpack loaded before Cult modpack, Nar'sie godform will be unavailable!
+#endif
+
+// BEGIN_INCLUDE
+#include "_cult.dm"
+#include "archaeology.dm"
+#include "codex.dm"
+#include "flooring.dm"
+#include "gamemode.dm"
+#include "ghosts.dm"
+#include "ghosttrap.dm"
+#include "hell_universe.dm"
+#include "holy.dm"
+#include "items.dm"
+#include "materials.dm"
+#include "narsie.dm"
+#include "objectives.dm"
+#include "overrides.dm"
+#include "ritual.dm"
+#include "runes.dm"
+#include "special_role.dm"
+#include "structures.dm"
+#include "talisman.dm"
+#include "wizard.dm"
+#include "cultify\de-cultify.dm"
+#include "cultify\defile.dm"
+#include "cultify\mob.dm"
+#include "cultify\turf.dm"
+#include "mobs\mob_subtypes.dm"
+#include "mobs\shade.dm"
+#include "mobs\constructs\constructs.dm"
+#include "mobs\constructs\soulstone.dm"
+#include "spells\construct.dm"
+#include "spells\harvest.dm"
+// END_INCLUDE
+#endif

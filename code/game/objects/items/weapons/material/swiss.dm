@@ -24,7 +24,7 @@
 	var/static/list/sharp_tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_GBLADE, SWISSKNF_WBLADE)
 
 /obj/item/knife/folding/swiss/Initialize(ml, material_key)
-	set_extension(src, /datum/extension/tool/variable, list(
+	set_extension(src, /datum/extension/tool/variable/simple, list(
 		TOOL_CROWBAR =     TOOL_QUALITY_MEDIOCRE,
 		TOOL_SCREWDRIVER = TOOL_QUALITY_MEDIOCRE,
 		TOOL_WIRECUTTERS = TOOL_QUALITY_MEDIOCRE,
@@ -109,7 +109,7 @@
 	if(active_tool != null)
 		add_overlay(overlay_image(icon, active_tool, flags = RESET_COLOR))
 
-/obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
 	. = (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE) ? ..() : new /image
 
 /obj/item/knife/folding/swiss/resolve_attackby(obj/target, mob/user)

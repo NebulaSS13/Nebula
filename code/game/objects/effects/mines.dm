@@ -6,7 +6,7 @@
 	layer = OBJ_LAYER
 	icon = 'icons/obj/items/weapon/landmine.dmi'
 	icon_state = "uglymine"
-	var/triggerproc = "explode" //name of the proc thats called when the mine is triggered
+	var/triggerproc = PROC_REF(explode) // the proc that's called when the mine is triggered
 	var/triggered = 0
 
 /obj/effect/mine/Initialize()
@@ -28,9 +28,12 @@
 
 /obj/effect/mine/proc/triggerrad(obj)
 	spark_at(src, cardinal_only = TRUE)
-	obj:radiation += 50
-	randmutb(obj)
-	domutcheck(obj,null)
+	if(ismob(obj))
+		var/mob/victim = obj
+		victim.radiation += 50
+	if(ismob(obj))
+		var/mob/mob = obj
+		mob.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/disability)))
 	spawn(0)
 		qdel(src)
 
@@ -64,7 +67,9 @@
 
 /obj/effect/mine/proc/triggerkick(obj)
 	spark_at(src, cardinal_only = TRUE)
-	qdel(obj:client)
+	if(ismob(obj))
+		var/mob/victim = obj
+		qdel(victim.client)
 	spawn(0)
 		qdel(src)
 
@@ -76,24 +81,24 @@
 /obj/effect/mine/dnascramble
 	name = "Radiation Mine"
 	icon_state = "uglymine"
-	triggerproc = "triggerrad"
+	triggerproc = PROC_REF(triggerrad)
 
 /obj/effect/mine/flame
 	name = "Incendiary Mine"
 	icon_state = "uglymine"
-	triggerproc = "triggerflame"
+	triggerproc = PROC_REF(triggerflame)
 
 /obj/effect/mine/kick
 	name = "Kick Mine"
 	icon_state = "uglymine"
-	triggerproc = "triggerkick"
+	triggerproc = PROC_REF(triggerkick)
 
 /obj/effect/mine/n2o
 	name = "N2O Mine"
 	icon_state = "uglymine"
-	triggerproc = "triggern2o"
+	triggerproc = PROC_REF(triggern2o)
 
 /obj/effect/mine/stun
 	name = "Stun Mine"
 	icon_state = "uglymine"
-	triggerproc = "triggerstun"
+	triggerproc = PROC_REF(triggerstun)

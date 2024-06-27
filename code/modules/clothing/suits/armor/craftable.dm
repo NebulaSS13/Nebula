@@ -3,7 +3,7 @@
 	name = "improvised armour"
 	desc = "An improvised set of armour."
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	icon = 'icons/clothing/suit/armor/improvised.dmi'
+	icon = 'icons/clothing/suits/armor/improvised.dmi'
 	material = /decl/material/solid/metal/steel
 	armor_degradation_speed = 1
 	armor_type = /datum/extension/armor/ablative

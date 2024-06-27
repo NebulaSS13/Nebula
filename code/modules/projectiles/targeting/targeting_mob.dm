@@ -22,8 +22,3 @@
 	if(thing && aiming.aiming_with != thing)
 		return
 	aiming.cancel_aiming(no_message)
-
-/mob/living/UpdateLyingBuckledAndVerbStatus()
-	..()
-	if(lying)
-		stop_aiming(no_message=1)

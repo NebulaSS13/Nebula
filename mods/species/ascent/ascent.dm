@@ -8,6 +8,7 @@
 #define BODY_FLAG_ALATE BITFLAG(4)
 #define BODY_FLAG_GYNE  BITFLAG(5)
 
+#define BP_SYSTEM_CONTROLLER "system controller"
 
 #define MANTIDIFY(_thing, _name, _desc) \
 ##_thing/ascent/name = _name; \

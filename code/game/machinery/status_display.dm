@@ -170,7 +170,7 @@
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	var/decl/security_level/sl = security_state.current_security_level
 
-	set_light(sl.light_range, sl.light_power, sl.light_color_alarm)
+	set_light(sl.light_range, sl.light_power, sl.light_color_status_display)
 
 	if(sl.alarm_appearance.display_icon)
 		var/image/alert1 = image(sl.icon, sl.alarm_appearance.display_icon)

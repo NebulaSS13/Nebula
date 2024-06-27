@@ -79,7 +79,7 @@
 		if(src.Move(T))
 			return
 
-/mob/living/carbon/airlock_crush(var/crush_damage)
+/mob/living/human/airlock_crush(var/crush_damage)
 	. = ..()
 	if (can_feel_pain())
 		emote(/decl/emote/audible/scream)

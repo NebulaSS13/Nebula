@@ -63,25 +63,25 @@
 	var/warning_message
 	var/warning_prob = 10
 	var/dosage = LAZYACCESS(M.chem_doses, type)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(dosage >= 3)
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15
-		M.adjustOxyLoss(10,20)
+		M.take_damage(10, OXY,20)
 		if(istype(H))
-			H.co2_alert = 1
+			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 1)
 	else if(dosage >= 1.5)
 		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
-		M.adjustOxyLoss(3,5)
+		M.take_damage(3, OXY,5)
 		if(istype(H))
-			H.co2_alert = 1
+			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 1)
 	else if(dosage >= 0.25)
 		warning_message = pick("a little dizzy","short of breath")
 		warning_prob = 10
 		if(istype(H))
-			H.co2_alert = 0
+			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 0)
 	else if(istype(H))
-		H.co2_alert = 0
+		SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 0)
 	if(istype(H) && dosage > 1 && H.ticks_since_last_successful_breath < 15)
 		H.ticks_since_last_successful_breath++
 	if(warning_message && prob(warning_prob))
@@ -107,7 +107,7 @@
 	. = ..()
 	if(!ishuman(M))
 		return
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	for(var/obj/item/organ/external/E in H.get_external_organs())
 		for(var/obj/effect/spider/spider in E.implants)
 			if(prob(25))
@@ -236,7 +236,6 @@
 	boiling_point = -33 CELSIUS
 	gas_symbol_html = "NH<sub>3</sub>"
 	gas_symbol = "NH3"
-	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 	taste_description = "mordant"
 	taste_mult = 2
 	lore_text = "A caustic substance commonly used in fertilizer or household cleaners."

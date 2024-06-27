@@ -97,11 +97,11 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/chems/condiment/flour,
 		/obj/item/chems/drinks/milk,
 		/obj/item/chems/drinks/milk,
-		/obj/item/storage/box/fancy/egg_box,
+		/obj/item/box/fancy/egg_box,
 		/obj/item/chems/food/tofu,
 		/obj/item/chems/food/tofu,
-		/obj/item/chems/food/meat,
-		/obj/item/chems/food/meat)
+		/obj/item/chems/food/butchery/meat,
+		/obj/item/chems/food/butchery/meat)
 
 /datum/supply_drop_loot/armour
 	name = "Armour"
@@ -144,17 +144,17 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/medical/New()
 	..()
 	contents = list(
-		/obj/item/storage/firstaid/regular,
-		/obj/item/storage/firstaid/trauma,
-		/obj/item/storage/firstaid/fire,
-		/obj/item/storage/firstaid/toxin,
-		/obj/item/storage/firstaid/o2,
-		/obj/item/storage/firstaid/adv,
+		/obj/item/firstaid/regular,
+		/obj/item/firstaid/trauma,
+		/obj/item/firstaid/fire,
+		/obj/item/firstaid/toxin,
+		/obj/item/firstaid/o2,
+		/obj/item/firstaid/adv,
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/chems/glass/bottle/stabilizer,
 		/obj/item/chems/glass/bottle/sedatives,
-		/obj/item/storage/box/syringes,
-		/obj/item/storage/box/autoinjectors)
+		/obj/item/box/syringes,
+		/obj/item/box/autoinjectors)
 
 /datum/supply_drop_loot/power
 	name = "Power"

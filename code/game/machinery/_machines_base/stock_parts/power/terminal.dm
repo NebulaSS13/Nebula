@@ -85,6 +85,7 @@
 		return
 	if(istype(new_loc) && (terminal.loc == get_step(new_loc, terminal_dir)))
 		return     // This location is fine
+	// TODO: disconnect and drop the terminal as an item instead of deleting it.
 	machine.visible_message(SPAN_WARNING("The terminal is ripped out of \the [machine]!"))
 	qdel(terminal) // will handle everything via the destroyed event
 

@@ -6,8 +6,6 @@
 	name          = "chlorine exoplanet"
 	desc          = "An exoplanet with a chlorine based ecosystem. Large quantities of liquid chlorine are present."
 	color         = "#c9df9f"
-	surface_color = "#a3b879"
-	water_color   = COLOR_BOTTLE_GREEN
 
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine/get_atmosphere_color()
 	return "#e5f2bd"
@@ -18,7 +16,7 @@
 
 /datum/level_data/planetoid/exoplanet/chlorine
 	base_area                      = /area/exoplanet/chlorine
-	base_turf                      = /turf/exterior/chlorine_sand
+	base_turf                      = /turf/floor/natural/chlorine_sand
 	exterior_atmosphere            = null
 	exterior_atmos_temp            = null
 	level_generators               = list(
@@ -72,6 +70,8 @@
 	surface_light_gen_level_max    = 0.85
 	flora                          = /datum/planet_flora/random/chlorine
 	fauna                          = /datum/fauna_generator/chlorine
+	surface_color 				   = "#a3b879"
+	water_color  				   = COLOR_BOTTLE_GREEN
 	possible_rock_colors           = list(
 		COLOR_GRAY80,
 		COLOR_PALE_GREEN_GRAY,
@@ -100,8 +100,8 @@
 
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor           = "chlorine exoplanet"
-	land_type            = /turf/exterior/chlorine_sand
-	water_type           = /turf/exterior/chlorine_sand/marsh
+	land_type            = /turf/floor/natural/chlorine_sand
+	water_type           = /turf/floor/natural/chlorine_sand/marsh
 	water_level_min      = 2
 	water_level_max      = 3
 	fauna_prob           = 2
@@ -122,4 +122,4 @@
 		'sound/effects/wind/desert4.ogg',
 		'sound/effects/wind/desert5.ogg'
 	)
-	base_turf = /turf/exterior/chlorine_sand
+	base_turf = /turf/floor/natural/chlorine_sand

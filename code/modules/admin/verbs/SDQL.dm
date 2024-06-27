@@ -93,8 +93,13 @@
 						if(istype(m, f2))
 							from_objs += m
 
-				else if(text_starts_with(f, "/turf/simulated"))
-					for(var/turf/simulated/m in world)
+				else if(text_starts_with(f, "/turf/floor"))
+					for(var/turf/floor/m in world)
+						if(istype(m, f2))
+							from_objs += m
+
+				else if(text_starts_with(f, "/turf/wall"))
+					for(var/turf/wall/m in world)
 						if(istype(m, f2))
 							from_objs += m
 
@@ -162,8 +167,13 @@
 							if(istype(m, f2))
 								objs += m
 
-					else if(text_starts_with(f, "/turf/simulated"))
-						for(var/turf/simulated/m in from_obj)
+					else if(text_starts_with(f, "/turf/floor"))
+						for(var/turf/floor/m in from_obj)
+							if(istype(m, f2))
+								objs += m
+
+					else if(text_starts_with(f, "/turf/wall"))
+						for(var/turf/wall/m in from_obj)
 							if(istype(m, f2))
 								objs += m
 
@@ -313,16 +323,16 @@
 					var/atom/a = t
 
 					if(a.x)
-						text += "<a href='?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t] at ([a.x], [a.y], [a.z])<br>"
+						text += "<a href='byond://?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t] at ([a.x], [a.y], [a.z])<br>"
 
 					else if(a.loc && a.loc.x)
-						text += "<a href='?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t] in [a.loc] at ([a.loc.x], [a.loc.y], [a.loc.z])<br>"
+						text += "<a href='byond://?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t] in [a.loc] at ([a.loc.x], [a.loc.y], [a.loc.z])<br>"
 
 					else
-						text += "<a href='?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t]<br>"
+						text += "<a href='byond://?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t]<br>"
 
 				else
-					text += "<a href='?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t]<br>"
+					text += "<a href='byond://?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t]<br>"
 
 				//text += "[t]<br>"
 			show_browser(usr, text, "window=sdql_result")

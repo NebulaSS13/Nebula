@@ -68,7 +68,7 @@ var/global/list/default_uplink_source_priority = list(
 	name = "Implant"
 	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
 
-/decl/uplink_source/implant/setup_uplink_source(var/mob/living/carbon/human/H, var/amount)
+/decl/uplink_source/implant/setup_uplink_source(var/mob/living/human/H, var/amount)
 	if(!istype(H))
 		return SETUP_FAILED
 

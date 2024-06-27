@@ -81,10 +81,7 @@ SUBSYSTEM_DEF(jobs)
 					if((ASSIGNMENT_ROBOT in J.event_categories) || (ASSIGNMENT_COMPUTER in J.event_categories))
 						J.total_positions = 0
 
-	// Init skills.
-	if(!global.skills.len)
-		GET_DECL(/decl/hierarchy/skill)
-	if(!global.skills.len)
+	if(!length(global.using_map.get_available_skills()))
 		log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
 
 	// Update title and path tracking, submap list, etc.
@@ -400,58 +397,53 @@ SUBSYSTEM_DEF(jobs)
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/attempt_role_assignment(var/mob/new_player/player, var/datum/job/job, var/level, var/decl/game_mode/mode)
-	if(!jobban_isbanned(player, job.title) && \
-	 job.player_old_enough(player.client) && \
-	 player.client.prefs.CorrectLevel(job, level) && \
-	 job.is_position_available())
-		assign_role(player, job.title, mode = mode)
-		return TRUE
-	return FALSE
+	if(jobban_isbanned(player, job.title))
+		return FALSE
+	if(!job.player_old_enough(player.client))
+		return FALSE
+	if(!player.client.prefs.CorrectLevel(job, level))
+		return FALSE
+	if(!job.is_position_available())
+		return FALSE
+	assign_role(player, job.title, mode = mode)
+	return TRUE
 
-/datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/carbon/human/H, var/datum/job/job)
+/decl/loadout_option/proc/is_permitted(mob/living/wearer, datum/job/job)
+	if(!istype(wearer))
+		return FALSE
+	if(allowed_roles && !(job.type in allowed_roles))
+		return FALSE
+	if(allowed_branches)
+		if(!ishuman(wearer))
+			return FALSE
+		var/mob/living/human/wearer_human = wearer
+		if(!wearer_human.char_branch || !(wearer_human.char_branch.type in allowed_branches))
+			return FALSE
+	if(allowed_skills)
+		for(var/required in allowed_skills)
+			if(!wearer.skill_check(required, allowed_skills[required]))
+				return FALSE
+	if(whitelisted && (!(wearer.get_species()?.name in whitelisted)))
+		return FALSE
+	return TRUE
+
+/datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/human/H, var/datum/job/job)
 
 	if(!H || !H.client)
 		return
 
 	// Equip custom gear loadout, replacing any job items
 	var/list/spawn_in_storage = list()
-	var/list/loadout_taken_slots = list()
 	if(H.client.prefs.Gear() && job.loadout_allowed)
 		for(var/thing in H.client.prefs.Gear())
 			var/decl/loadout_option/G = global.gear_datums[thing]
-			if(G)
-				var/permitted = FALSE
-				if(G.allowed_branches)
-					if(H.char_branch && (H.char_branch.type in G.allowed_branches))
-						permitted = TRUE
-				else
-					permitted = TRUE
-
-				if(permitted)
-					if(G.allowed_roles)
-						if(job.type in G.allowed_roles)
-							permitted = TRUE
-						else
-							permitted = FALSE
-					else
-						permitted = TRUE
-
-				if(permitted && G.allowed_skills)
-					for(var/required in G.allowed_skills)
-						if(!H.skill_check(required,G.allowed_skills[required]))
-							permitted = FALSE
-
-				if(G.whitelisted && (!(H.species.name in G.whitelisted)))
-					permitted = FALSE
-
-				if(!permitted)
-					to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
-					continue
-
-				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
-					spawn_in_storage.Add(G)
-				else
-					loadout_taken_slots.Add(G.slot)
+			if(!istype(G))
+				continue
+			if(!G.is_permitted(H))
+				to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
+				continue
+			if(!G.slot || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
+				spawn_in_storage.Add(G)
 
 	// do accessories last so they don't attach to a suit that will be replaced
 	if(H.char_rank && H.char_rank.accessory)
@@ -462,14 +454,16 @@ SUBSYSTEM_DEF(jobs)
 				var/list/accessory_args = accessory_data.Copy()
 				accessory_args[1] = src
 				for(var/i in 1 to amt)
-					H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie_str)
+					var/obj/item/accessory = new accessory_path(arglist(accessory_args))
+					H.equip_to_slot_or_del(accessory, accessory.get_fallback_slot())
 			else
 				for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
-					H.equip_to_slot_or_del(new accessory_path(src), slot_tie_str)
+					var/obj/item/accessory = new accessory_path(src)
+					H.equip_to_slot_or_del(accessory, accessory.get_fallback_slot())
 
 	return spawn_in_storage
 
-/datum/controller/subsystem/jobs/proc/equip_job_title(var/mob/living/carbon/human/H, var/job_title, var/joined_late = 0)
+/datum/controller/subsystem/jobs/proc/equip_job_title(var/mob/living/human/H, var/job_title, var/joined_late = 0)
 	if(!H)
 		return
 
@@ -544,13 +538,15 @@ SUBSYSTEM_DEF(jobs)
 		for(var/decl/loadout_option/G in spawn_in_storage)
 			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.name])
 
-	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title || job_title].</B></font>")
+	var/article = job.total_positions == 1 ? "the" : "a"
+	to_chat(H, "<font size = 3><B>You are [article] [alt_title || job_title].</B></font>")
 
-	if(job.description)
-		to_chat(H, SPAN_BOLD("[job.description]"))
+	var/job_description = job.get_description_blurb()
+	if(job_description)
+		to_chat(H, SPAN_BOLD("[job_description]"))
 
 	if(job.supervisors)
-		to_chat(H, "<b>As the [alt_title || job_title] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+		to_chat(H, "<b>As [article] [alt_title || job_title] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
 	if(H.has_headset_in_ears())
 		to_chat(H, "<b>To speak on your department's radio channel use [H.get_department_radio_prefix()]h. For the use of other channels, examine your headset.</b>")

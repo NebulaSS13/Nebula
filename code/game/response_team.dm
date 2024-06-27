@@ -64,7 +64,7 @@ var/global/can_call_ert
 /proc/percentage_dead()
 	var/total = 0
 	var/deadcount = 0
-	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+	for(var/mob/living/human/H in SSmobs.mob_list)
 		if(H.client) // Monkeys and mice don't have a client, amirite?
 			if(H.stat == DEAD) deadcount++
 			total++
@@ -76,23 +76,13 @@ var/global/can_call_ert
 /proc/percentage_antagonists()
 	var/total = 0
 	var/antagonists = 0
-	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+	for(var/mob/living/human/H in SSmobs.mob_list)
 		if(is_special_character(H) >= 1)
 			antagonists++
 		total++
 
 	if(total == 0) return 0
 	else return round(100 * antagonists / total)
-
-// Increments the ERT chance automatically, so that the later it is in the round,
-// the more likely an ERT is to be able to be called.
-/proc/increment_ert_chance()
-	while(send_emergency_team == 0) // There is no ERT at the time.
-		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-		var/index = security_state.all_security_levels.Find(security_state.current_security_level)
-		ert_base_chance += 2**index
-		sleep(600 * 3) // Minute * Number of Minutes
-
 
 /proc/trigger_armed_response_team(var/force = 0)
 	if(!can_call_ert && !force)

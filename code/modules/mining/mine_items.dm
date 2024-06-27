@@ -8,15 +8,15 @@
 /obj/structure/closet/secure_closet/miner/WillContain()
 	return list(
 		new /datum/atom_creator/weighted(list(
-				/obj/item/storage/backpack/industrial,
-				/obj/item/storage/backpack/satchel/eng
+				/obj/item/backpack/industrial,
+				/obj/item/backpack/satchel/eng
 			)),
 		/obj/item/radio/headset/headset_cargo,
-		/obj/item/clothing/under/miner,
+		/obj/item/clothing/jumpsuit/miner,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/scanner/gas,
-		/obj/item/storage/ore,
+		/obj/item/ore,
 		/obj/item/flashlight/lantern,
 		/obj/item/tool/shovel,
 		/obj/item/tool/pickaxe,
@@ -85,7 +85,7 @@
 	if(use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!
 		var/obj/item/stack/flag/newflag = new src.type(T, 1)
 		newflag.set_up()
-		if(istype(T, /turf/exterior))
+		if(T.can_be_dug())
 			user.visible_message("\The [user] plants \the [newflag.singular_name] firmly in the ground.")
 		else
 			user.visible_message("\The [user] attaches \the [newflag.singular_name] firmly to the ground.")

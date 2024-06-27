@@ -32,8 +32,8 @@
 	. = ..()
 	if(filled)
 		var/obj/item/chems/food/whole = new whole_path()
-		if(whole && whole.slices_num)
-			var/reagent_amount = whole.reagents.total_volume/whole.slices_num
+		if(whole && whole.slice_num)
+			var/reagent_amount = whole.reagents.total_volume/whole.slice_num
 			whole.reagents.trans_to_obj(src, reagent_amount)
 
 		qdel(whole)

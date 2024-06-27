@@ -24,7 +24,7 @@ var/global/list/possible_say_verbs = list(
 	icon = 'icons/mob/robots/pai/pai_drone.dmi'
 	icon_state = ICON_STATE_WORLD
 	mob_sort_value = 3
-	hud_type = /datum/hud/pai
+	hud_used = /datum/hud/pai
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
@@ -86,7 +86,7 @@ var/global/list/possible_say_verbs = list(
 		if(istype(loc, /obj/item/paicard))
 			card = loc
 		else
-			card.radio = new /obj/item/radio(card)
+			card = new /obj/item/paicard(src)
 	if(istype(card))
 		if(!card.radio)
 			card.radio = new /obj/item/radio(card)
@@ -188,7 +188,7 @@ var/global/list/possible_say_verbs = list(
 	else if(ismob(card.loc))
 		var/mob/holder = card.loc
 		if(ishuman(holder))
-			var/mob/living/carbon/human/H = holder
+			var/mob/living/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.get_external_organs())
 				if(card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))
@@ -212,6 +212,19 @@ var/global/list/possible_say_verbs = list(
 	set name = "Collapse Chassis"
 	fold()
 
+/mob/living/silicon/pai/get_available_postures()
+
+	if(loc == card)
+		var/static/list/card_postures = list(/decl/posture/standing)
+		return card_postures
+
+	var/static/list/available_postures = list(
+		/decl/posture/standing,
+		/decl/posture/lying,
+		/decl/posture/lying/deliberate,
+	)
+	return available_postures
+
 //from mob -> card
 /mob/living/silicon/pai/proc/fold()
 	if(incapacitated(INCAPACITATION_KNOCKOUT))
@@ -223,8 +236,7 @@ var/global/list/possible_say_verbs = list(
 		return
 	set_special_ability_cooldown(10 SECONDS)
 
-	// Move us into the card and move the card to the ground.
-	resting = 0
+	set_posture(/decl/posture/standing)
 
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/holder/H = loc
@@ -249,14 +261,18 @@ var/global/list/possible_say_verbs = list(
 /mob/living/silicon/pai/lay_down()
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/paicard))
-		resting = 0
+		set_posture(/decl/posture/standing)
 		var/obj/item/rig/rig = src.get_rig()
 		if(rig)
 			rig.force_rest(src)
+		return
+	. = ..()
+	if(current_posture.prone)
+		icon_state = "[chassis]_rest"
+		to_chat(src, SPAN_NOTICE("You are now resting."))
 	else
-		resting = !resting
-		icon_state = resting ? "[chassis]_rest" : "[chassis]"
-		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
+		icon_state = chassis
+		to_chat(src, SPAN_NOTICE("You are now getting up."))
 
 //Overriding this will stop a number of headaches down the track.
 /mob/living/silicon/pai/attackby(obj/item/W, mob/user)
@@ -273,7 +289,7 @@ var/global/list/possible_say_verbs = list(
 		return
 	if(W.force)
 		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
-		adjustBruteLoss(W.force)
+		take_damage(W.force)
 	else
 		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 

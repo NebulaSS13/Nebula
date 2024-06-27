@@ -4,7 +4,6 @@
 #define FAX_ADMIN_COOLDOWN  30 SECONDS    //Cooldown after faxing an admin
 
 var/global/list/allfaxes       = list()
-var/global/list/alldepartments = list()
 var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to admins
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -243,7 +242,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 			if(C)
 				eject_card(user)
 			else
-				var/obj/item/card/id/ID = user.get_active_hand()
+				var/obj/item/card/id/ID = user.get_active_held_item()
 				if(!istype(ID) && !istype(ID, /obj/item/card/data))
 					to_chat(user, SPAN_WARNING("You need to hold a valid id/data card!"))
 				else if(card_reader.should_swipe)
@@ -260,7 +259,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 			to_chat(user, SPAN_WARNING("There's already a [scanner_item] in \the [src]!"))
 			return TOPIC_NOACTION
 		else
-			var/obj/item/I = user.get_active_hand()
+			var/obj/item/I = user.get_active_held_item()
 			if(I)
 				insert_scanner_item(I, user)
 			else
@@ -285,7 +284,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		if(!disk_reader)
 			to_chat(user, SPAN_WARNING("There is no disk drive installed on \the [src]!"))
 			return TOPIC_NOACTION
-		var/obj/item/disk/D = user.get_active_hand()
+		var/obj/item/disk/D = user.get_active_held_item()
 		if(!istype(D))
 			to_chat(user, SPAN_WARNING("You need to hold a valid data disk!"))
 			return TOPIC_NOACTION
@@ -680,8 +679,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		reply_type = "UNKNOWN"
 
 	var/msg = "<span class='notice'><b><font color='[font_colour]'>[faxname]: </font>[get_options_bar(sender, 2,1,1)]"
-	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[source_fax];replyorigin=[reply_type]'>REPLY</a>)</b>: "
-	msg += "Receiving '[rcvdcopy.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>view message</a></span>"
+	msg += "(<A HREF='byond://?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='byond://?_src_=holder;FaxReply=\ref[sender];originfax=\ref[source_fax];replyorigin=[reply_type]'>REPLY</a>)</b>: "
+	msg += "Receiving '[rcvdcopy.name]' via secure connection ... <a href='byond://?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>view message</a></span>"
 
 	if (istype(doc, /obj/item/paper))
 		var/obj/item/paper/paper = doc

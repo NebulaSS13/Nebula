@@ -8,7 +8,6 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = 0
-	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
 	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -34,12 +33,12 @@
 			var/obj/item/projectile/bullet/pellet/PP = chambered_round.BB
 			damage = PP.damage*PP.pellets
 		if(damage > 5)
-			var/mob/living/carbon/C = loc
-			if(istype(C))
-				C.visible_message("<span class='danger'>[src] explodes in [C]'s hands!</span>", "<span class='danger'>[src] explodes in your face!</span>")
-				C.drop_from_inventory(src)
+			var/mob/living/user = loc
+			if(istype(user))
+				user.visible_message("<span class='danger'>[src] explodes in [user]'s hands!</span>", "<span class='danger'>[src] explodes in your face!</span>")
+				user.drop_from_inventory(src)
 				for(var/zone in list(BP_L_HAND, BP_R_HAND))
-					C.apply_damage(rand(10,20), def_zone=zone)
+					user.apply_damage(rand(10,20), def_zone=zone)
 			else
 				visible_message("<span class='danger'>[src] explodes!</span>")
 			explosion(get_turf(src), -1, -1, 1)

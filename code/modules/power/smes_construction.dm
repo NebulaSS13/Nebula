@@ -82,15 +82,6 @@
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
 	var/emp_proof = 0			// Whether the SMES is EMP proof
 
-/obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
-	..()
-	malf_upgraded = 1
-	emp_proof = 1
-	RefreshParts()
-	to_chat(user, "\The [src] has been upgraded. It's transfer rate and capacity has increased, and it is now resistant against EM pulses.")
-	return 1
-
-
 /obj/machinery/power/smes/buildable/max_cap_in_out/Initialize()
 	. = ..()
 	charge = capacity
@@ -133,10 +124,6 @@
 		capacity += C.ChargeCapacity
 		input_level_max += C.IOCapacity
 		output_level_max += C.IOCapacity
-	if(malf_upgraded)
-		capacity *= 1.2
-		input_level_max *= 2
-		output_level_max *= 2
 	charge = clamp(charge, 0, capacity)
 
 // Proc: total_system_failure()
@@ -156,7 +143,7 @@
 	if (!intensity)
 		return
 
-	var/mob/living/carbon/human/h_user = null
+	var/mob/living/human/h_user = null
 	if (!ishuman(user))
 		return
 	else
@@ -168,7 +155,7 @@
 	var/obj/item/clothing/gloves/G = h_user.get_equipped_item(slot_gloves_str)
 	if(istype(G) && G.siemens_coefficient == 0)
 		user_protected = 1
-	log_and_message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
+	log_and_message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
 
 	switch (intensity)
 		if (0 to 15)
@@ -220,7 +207,7 @@
 			// Sparks, Near - instantkill shock, Strong EMP, 25% light overload, 5% APC failure. 50% of SMES explosion. This is bad.
 			spark_at(src, amount = 10, cardinal_only = TRUE)
 			to_chat(h_user, SPAN_WARNING("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is <span class='danger'>\"Oh shit...\"</span>"))
-			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
+			// Remember, we have few gigajoules of electricity here. Turn them into crispy toast.
 			h_user.electrocute_act(rand(170,210), src, def_zone = ran_zone(null))
 			SET_STATUS_MAX(h_user, STAT_PARA, 8)
 			spawn(0)
@@ -243,7 +230,7 @@
 						return
 					src.ping("DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...")
 					explosion(src.loc,1,2,4,8)
-					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
+					// Not sure if this is necessary, but just in case the SMES *somehow* survived.
 					qdel(src)
 
 /obj/machinery/power/smes/buildable/proc/check_total_system_failure(var/mob/user)
@@ -308,7 +295,7 @@
 		if(!(stat & BROKEN))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
-			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src) && IS_CROWBAR(user.get_active_hand()))
+			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src) && IS_CROWBAR(user.get_active_held_item()))
 				return MCS_BLOCK
 			if(check_total_system_failure(user))
 				return MCS_BLOCK

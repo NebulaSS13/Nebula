@@ -107,7 +107,7 @@
 	return 0
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
-	take_damage(Proj.get_structure_damage())
+	take_damage(Proj.get_structure_damage(), Proj.atom_damage_type)
 	if(QDELETED(src))
 		return PROJECTILE_CONTINUE
 
@@ -139,7 +139,7 @@
 
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
 
-	if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
+	if((W.atom_damage_type == BRUTE || W.atom_damage_type == BURN) && (W.can_puncture() || W.force > 10))
 		visible_message(SPAN_DANGER("\The [user] pierces \the [src] with \the [W]!"))
 		deflate(TRUE)
 		return TRUE
@@ -225,9 +225,9 @@
 	if(ismob(user))
 		var/mob/M = user
 		if(M.client)
-			if(iscarbon(M))
-				var/mob/living/carbon/C = M
-				if(!C.get_equipped_item(slot_handcuffed_str))
+			if(isliving(M))
+				var/mob/living/holder = M
+				if(!holder.get_equipped_item(slot_handcuffed_str))
 					SwitchState()
 			else
 				SwitchState()
@@ -300,17 +300,15 @@
 	to_chat(user, "<span class='notice'>The inflatable door is too torn to be inflated!</span>")
 	add_fingerprint(user)
 
-/obj/item/storage/briefcase/inflatable
+/obj/item/briefcase/inflatable
 	name = "inflatable barrier box"
 	desc = "Contains inflatable walls and doors."
 	icon = 'icons/obj/items/storage/inflatables.dmi'
-	icon_state = "inf_box"
-	item_state = "syringe_kit"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-	can_hold = list(/obj/item/inflatable)
+	storage = /datum/storage/briefcase/inflatables
 
-/obj/item/storage/briefcase/inflatable/WillContain()
+/obj/item/briefcase/inflatable/WillContain()
 	return list(
 			/obj/item/inflatable/door = 2,
 			/obj/item/inflatable      = 3

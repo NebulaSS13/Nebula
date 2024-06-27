@@ -118,8 +118,3 @@
 
 /obj/effect/dummy/spell_jaunt/bullet_act(blah)
 	return
-
-/spell/targeted/ethereal_jaunt/tower
-	desc = "Allows you to liquify for a short duration, letting them pass through all dense objects."
-	charge_max = 2
-	spell_flags = Z2NOCAST | INCLUDEUSER

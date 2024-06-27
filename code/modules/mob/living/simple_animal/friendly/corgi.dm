@@ -18,15 +18,12 @@
 	pass_flags = PASS_FLAG_TABLE
 	base_animal_type = /mob/living/simple_animal/corgi
 	can_buckle = TRUE
-
-	meat_type = /obj/item/chems/food/meat/corgi
-	meat_amount = 3
-	skin_material = /decl/material/solid/organic/skin/fur/orange
+	butchery_data = /decl/butchery_data/animal/corgi
 
 /mob/living/simple_animal/corgi/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/corgi)
+	return GET_DECL(/decl/bodytype/quadruped/animal/corgi)
 
-/decl/bodytype/animal/corgi/Initialize()
+/decl/bodytype/quadruped/animal/corgi/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 1, -8),
@@ -36,17 +33,6 @@
 		)
 	)
 	. = ..()
-
-/mob/living/simple_animal/corgi/harvest_skin()
-	. = ..()
-	. += new/obj/item/corgi_hide(get_turf(src))
-
-/obj/item/corgi_hide
-	name = "corgi hide"
-	desc = "The by-product of corgi farming."
-	icon = 'icons/obj/items/sheet_hide.dmi'
-	icon_state = "sheet-corgi"
-	material = /decl/material/solid/organic/skin/fur/orange
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
@@ -60,7 +46,7 @@
 /mob/living/simple_animal/corgi/Ian/do_delayed_life_action()
 	..()
 	//Feeding, chasing food, FOOOOODDDD
-	if(!resting && !buckled)
+	if(!current_posture.prone && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 5)
 			turns_since_scan = 0
@@ -107,10 +93,6 @@
 				if(QDELETED(src) || client)
 					return
 
-/obj/item/chems/food/meat/corgi
-	name = "corgi meat"
-	desc = "Tastes like... well you know..."
-
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
 	if(istype(O, /obj/item/newspaper))
 		if(!stat)
@@ -127,15 +109,13 @@
 	real_name = "corgi"
 	desc = "It's a corgi puppy."
 	icon = 'icons/mob/simple_animal/puppy.dmi'
-	meat_amount = 1
-	skin_amount = 3
-	bone_amount = 3
 	can_buckle = FALSE
+	butchery_data = /decl/butchery_data/animal/corgi/puppy
 
 /mob/living/simple_animal/corgi/puppy/get_bodytype()
-	return GET_DECL(/decl/bodytype/animal/puppy)
+	return GET_DECL(/decl/bodytype/quadruped/animal/puppy)
 
-/decl/bodytype/animal/puppy/Initialize()
+/decl/bodytype/quadruped/animal/puppy/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list( 0, -12),
@@ -176,7 +156,7 @@
 
 /mob/living/simple_animal/corgi/Lisa/do_delayed_life_action()
 	..()
-	if(!resting && !buckled)
+	if(!current_posture.prone && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 15)
 			turns_since_scan = 0

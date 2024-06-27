@@ -14,7 +14,7 @@
 	z_flags = ZMM_MANGLE_PLANES
 	layer = ABOVE_WINDOW_LAYER
 
-	var/on = 0
+	var/on = null // if null, takes from config option on init
 	var/area/connected_area = null
 	var/other_area = null
 
@@ -42,6 +42,8 @@
 
 /obj/machinery/light_switch/LateInitialize()
 	. = ..()
+	if(isnull(on))
+		on = get_config_value(/decl/config/toggle/lights_start_on)
 	connected_area?.set_lightswitch(on)
 	update_icon()
 

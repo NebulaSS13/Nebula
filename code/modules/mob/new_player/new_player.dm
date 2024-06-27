@@ -8,6 +8,7 @@
 	movement_handlers = list()
 	anchored = TRUE	//  don't get pushed around
 	virtual_mob = null // Hear no evil, speak no evil
+	is_spawnable_type = FALSE
 
 	var/ready = 0
 	/// Referenced when you want to delete the new_player later on in the code.
@@ -16,6 +17,7 @@
 	var/totalPlayers = 0
 	var/totalPlayersReady = 0
 	var/show_invalid_jobs = 0
+	var/decl/music_track/current_lobby_track
 	var/datum/browser/panel
 
 INITIALIZE_IMMEDIATE(/mob/new_player)
@@ -130,7 +132,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			if(isnull(client.holder))
 				announce_ghost_joinleave(src)
 
-			var/mob/living/carbon/human/dummy/mannequin = get_mannequin(client.ckey)
+			var/mob/living/human/dummy/mannequin = get_mannequin(client.ckey)
 			if(mannequin)
 				client.prefs.dress_preview_mob(mannequin)
 				observer.set_appearance(mannequin)
@@ -350,7 +352,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	spawning = 1
 	close_spawn_windows()
 
-	var/mob/living/carbon/human/new_character
+	var/mob/living/human/new_character
 
 	var/decl/species/chosen_species
 	if(client.prefs.species)
@@ -438,9 +440,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		return global.using_map.default_species
 	return chosen_species.name
 
-/mob/new_player/is_ready()
-	return ready && ..()
-
 /mob/new_player/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	return
 
@@ -465,8 +464,9 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	if(get_preference_value(/datum/client_preference/play_lobby_music) == PREF_NO)
 		return
-	var/decl/music_track/new_track = global.using_map.get_lobby_track(global.using_map.lobby_track.type)
+	var/decl/music_track/new_track = global.using_map.get_lobby_track(current_lobby_track || global.using_map.lobby_track.type)
 	if(new_track)
+		current_lobby_track = new_track
 		new_track.play_to(src)
 
 /mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)

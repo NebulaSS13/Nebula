@@ -154,33 +154,32 @@
 	interact(user, readonly = TRUE)
 	return TRUE
 
-/obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/paper/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/target_zone = user.get_target_zone()
 	if(target_zone == BP_EYES)
 		user.visible_message(
-			SPAN_NOTICE("You show the paper to [M]."),
-			SPAN_NOTICE("[user] holds up a paper and shows it to [M].")
+			SPAN_NOTICE("You show the paper to [target]."),
+			SPAN_NOTICE("[user] holds up a paper and shows it to [target].")
 		)
-		M.examinate(src)
+		target.examinate(src)
 		return TRUE
 
 	target_zone = check_zone(target_zone)
-	if(M.get_organ_sprite_accessory_by_category(SAC_COSMETICS, target_zone))
-		var/mob/living/carbon/human/H = M
-		if(H == user)
+	if(target.get_organ_sprite_accessory_by_category(SAC_COSMETICS, target_zone))
+		if(target == user)
 			to_chat(user, SPAN_NOTICE("You wipe off the makeup with [src]."))
-			H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
+			target.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] begins to wipe \the [H]'s makeup  off with \the [src]."),
-			SPAN_NOTICE("You begin to wipe off [H]'s makeup .")
+			SPAN_NOTICE("\The [user] begins to wipe \the [target]'s makeup  off with \the [src]."),
+			SPAN_NOTICE("You begin to wipe off [target]'s makeup .")
 		)
-		if(do_after(user, 10, H) && do_after(H, 10, check_holding = 0))	//user needs to keep their active hand, H does not.
+		if(do_after(user, 10, target) && do_after(target, 10, check_holding = 0))	//user needs to keep their active hand, H does not.
 			user.visible_message(
-				SPAN_NOTICE("\The [user] wipes \the [H]'s makeup  off with \the [src]."),
-				SPAN_NOTICE("You wipe off \the [H]'s makeup .")
+				SPAN_NOTICE("\The [user] wipes \the [target]'s makeup  off with \the [src]."),
+				SPAN_NOTICE("You wipe off \the [target]'s makeup .")
 			)
-		H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
+		target.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 		return TRUE
 
 	. = ..()
@@ -225,8 +224,8 @@
 	info_links = info
 	var/i = 0
 	for(i=1,i<=fields,i++)
-		addtofield(i, "<font face=\"[deffont]\"><A href='?src=\ref[src];write=[i]'>write</A></font>", 1)
-	info_links = info_links + "<font face=\"[deffont]\"><A href='?src=\ref[src];write=end'>write</A></font>"
+		addtofield(i, "<font face=\"[deffont]\"><A href='byond://?src=\ref[src];write=[i]'>write</A></font>", 1)
+	info_links = info_links + "<font face=\"[deffont]\"><A href='byond://?src=\ref[src];write=end'>write</A></font>"
 
 /obj/item/paper/proc/clearpaper()
 	info = null
@@ -284,11 +283,11 @@
 
 	return t
 
-/obj/item/paper/proc/burnpaper(obj/item/flame/P, mob/user)
+/obj/item/paper/proc/burnpaper(obj/item/P, mob/user)
 	var/class = "warning"
 
-	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/flame/lighter/zippo))
+	if(P.isflamesource() && !user.restrained())
+		if(istype(P, /obj/item/flame/fuelled/lighter/zippo))
 			class = "rose"
 
 		var/decl/pronouns/G = user.get_pronouns()
@@ -296,7 +295,7 @@
 		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 
 		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
+			if(get_dist(src, user) < 2 && user.get_active_held_item() == P && P.isflamesource())
 				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
@@ -324,9 +323,9 @@
 			return TOPIC_NOACTION
 
 		//If we got a pen that's not in our hands, make sure to move it over
-		if(user.get_active_hand() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
+		if(user.get_active_held_item() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
 			to_chat(user, SPAN_NOTICE("You grab your trusty [I.name]!"))
-		else if(user.get_active_hand() != I)
+		else if(user.get_active_held_item() != I)
 			to_chat(user, SPAN_WARNING("You'd use your trusty [I.name], but your hands are full!"))
 			return TOPIC_NOACTION
 
@@ -395,7 +394,7 @@
 			interact(user, readonly = FALSE)
 		return TRUE
 
-	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
+	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/gloves/ring/seal))
 		apply_custom_stamp(
 			image('icons/obj/bureaucracy.dmi', icon_state = "paper_[P.icon_state]", pixel_x = rand(-2, 2), pixel_y = rand(-2, 2)),
 			"with \the [P]")
@@ -403,7 +402,7 @@
 		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
 		return TRUE
 
-	else if(istype(P, /obj/item/flame))
+	else if(P.isflamesource())
 		burnpaper(P, user)
 		return TRUE
 
@@ -496,7 +495,7 @@
 		to_chat(usr, SPAN_WARNING("You can't do that in your current state!"))
 		return
 
-	if((MUTATION_CLUMSY in usr.mutations) && prob(50))
+	if(usr.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(usr, SPAN_WARNING("You cut yourself on the paper."))
 		return
 	var/n_name = sanitize_safe(input(usr, "What would you like to name the paper?", "Paper Naming", name) as text, MAX_NAME_LEN)

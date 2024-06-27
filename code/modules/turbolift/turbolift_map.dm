@@ -8,8 +8,8 @@
 	var/lift_size_y = 2 // ie. a 3x3 lift would have a value of 2 in each of these variables.
 
 	// Various turf and door types used when generating the turbolift floors.
-	var/wall_type =     /turf/simulated/wall/elevator
-	var/floor_type =    /turf/simulated/floor/tiled/dark
+	var/wall_type =     /turf/wall/elevator
+	var/floor_type =    /turf/floor/tiled/dark
 	var/door_type =     /obj/machinery/door/airlock/lift
 	var/firedoor_type = /obj/machinery/door/firedoor
 	var/button_type =   /obj/structure/lift/button
@@ -21,9 +21,13 @@
 	var/floor_departure_sound
 	var/floor_arrival_sound
 
+	var/turf_id
+
 INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 /obj/abstract/turbolift_spawner/Initialize()
 	. = ..()
+	if(!turf_id)
+		turf_id = sequential_id(type)
 	if(SSmapping.initialized)
 		build_turbolift()
 	else
@@ -165,7 +169,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 						swap_to = floor_type
 
 				if(checking.type != swap_to)
-					checking.ChangeTurf(swap_to)
+					var/turf/wall/wall = checking.ChangeTurf(swap_to)
+					if(istype(wall) && turf_id)
+						wall.unique_merge_identifier = turf_id
+						wall.queue_icon_update()
 					// Let's make absolutely sure that we have the right turf.
 					checking = locate(tx,ty,cz)
 

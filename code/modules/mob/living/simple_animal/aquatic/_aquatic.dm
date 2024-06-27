@@ -6,13 +6,8 @@
 	emote_see = list("glubs", "blubs", "bloops")
 	base_animal_type = /mob/living/simple_animal/aquatic
 	is_aquatic = TRUE
-
-	meat_type = /obj/item/chems/food/fish
-	meat_amount = 1
-	bone_amount = 1
-	skin_amount = 2
-	bone_material = /decl/material/solid/organic/bone/fish
-	skin_material = /decl/material/solid/organic/skin/fish
+	butchery_data = /decl/butchery_data/animal/fish/small
+	holder_type = /obj/item/holder
 
 /mob/living/simple_animal/aquatic/Initialize()
 	. = ..()

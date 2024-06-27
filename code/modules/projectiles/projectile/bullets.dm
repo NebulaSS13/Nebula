@@ -3,7 +3,7 @@
 	icon_state = "bullet"
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	damage = 50
-	damage_type = BRUTE
+	atom_damage_type = BRUTE
 	damage_flags = DAM_BULLET | DAM_SHARP
 	nodamage = 0
 	embed = 1
@@ -35,8 +35,10 @@
 		mob_passthrough_check = 0
 	. = ..()
 
-	if(. == 1 && iscarbon(target_mob))
-		damage *= 0.7 //squishy mobs absorb KE
+	if(. == 1 && isliving(target_mob))
+		var/mob/living/squish = target_mob
+		if(!squish.isSynthetic())
+			damage *= 0.7 //squishy mobs absorb KE
 
 /obj/item/projectile/bullet/can_embed()
 	//prevent embedding if the projectile is passing through the mob
@@ -55,7 +57,7 @@
 	var/chance = damage
 	if(has_extension(A, /datum/extension/penetration))
 		var/datum/extension/penetration/P = get_extension(A, /datum/extension/penetration)
-		chance = P.PenetrationProbability(chance, damage, damage_type)
+		chance = P.PenetrationProbability(chance, damage, atom_damage_type)
 
 	if(prob(chance))
 		if(A.opacity)
@@ -164,7 +166,7 @@
 	name = "cap"
 	invisibility = INVISIBILITY_ABSTRACT
 	fire_sound = null
-	damage_type = PAIN
+	atom_damage_type = PAIN
 	damage_flags = 0
 	damage = 0
 	nodamage = 1

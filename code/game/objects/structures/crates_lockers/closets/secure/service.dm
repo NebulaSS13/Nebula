@@ -5,15 +5,15 @@
 
 /obj/structure/closet/secure_closet/chaplain/WillContain()
 	return list(
-		/obj/item/clothing/under/chaplain,
+		/obj/item/clothing/jumpsuit/chaplain,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/suit/chaplain_hoodie,
-		/obj/item/storage/candle_box = 2,
-		/obj/item/storage/candle_box/incense,
+		/obj/item/box/candles = 2,
+		/obj/item/box/candles/incense,
 		/obj/item/deck/tarot,
 		/obj/item/chems/drinks/bottle/holywater,
 		/obj/item/nullrod,
-		/obj/item/storage/bible,
-		/obj/item/storage/belt/general,
+		/obj/item/bible,
+		/obj/item/belt/general,
 		/obj/item/urn
 	)

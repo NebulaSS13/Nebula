@@ -111,7 +111,7 @@ var/global/vs_control/vsc = new
 			vw = vars[ch]
 			if("[ch]_DESC" in vars) vw_desc = vars["[ch]_DESC"]
 			if("[ch]_NAME" in vars) vw_name = vars["[ch]_NAME"]
-		dat += "<b>[vw_name] = [vw]</b> <A href='?src=\ref[src];changevar=[ch]'>\[Change\]</A><br>"
+		dat += "<b>[vw_name] = [vw]</b> <A href='byond://?src=\ref[src];changevar=[ch]'>\[Change\]</A><br>"
 		dat += "<i>[vw_desc]</i><br><br>"
 	show_browser(user, dat, "window=settings")
 
@@ -307,15 +307,15 @@ var/global/vs_control/vsc = new
 			connection_insulation 			= initial(connection_insulation)
 			connection_temperature_delta 	= initial(connection_temperature_delta)
 
-			contaminant_control.CONTAMINANT_DMG 					= initial(contaminant_control.CONTAMINANT_DMG)
-			contaminant_control.CLOTH_CONTAMINATION 		= initial(contaminant_control.CLOTH_CONTAMINATION)
-			contaminant_control.STRICT_PROTECTION_ONLY 			= initial(contaminant_control.STRICT_PROTECTION_ONLY)
-			contaminant_control.GENETIC_CORRUPTION 			= initial(contaminant_control.GENETIC_CORRUPTION)
-			contaminant_control.SKIN_BURNS 					= initial(contaminant_control.SKIN_BURNS)
-			contaminant_control.EYE_BURNS 					= initial(contaminant_control.EYE_BURNS)
-			contaminant_control.CONTAMINATION_LOSS 			= initial(contaminant_control.CONTAMINATION_LOSS)
-			contaminant_control.CONTAMINANT_HALLUCINATION 		= initial(contaminant_control.CONTAMINANT_HALLUCINATION)
-			contaminant_control.N2O_HALLUCINATION 			= initial(contaminant_control.N2O_HALLUCINATION)
+			contaminant_control.CONTAMINANT_DMG           = initial(contaminant_control.CONTAMINANT_DMG)
+			contaminant_control.CLOTH_CONTAMINATION       = initial(contaminant_control.CLOTH_CONTAMINATION)
+			contaminant_control.STRICT_PROTECTION_ONLY    = initial(contaminant_control.STRICT_PROTECTION_ONLY)
+			contaminant_control.GENETIC_CORRUPTION        = initial(contaminant_control.GENETIC_CORRUPTION)
+			contaminant_control.SKIN_BURNS                = initial(contaminant_control.SKIN_BURNS)
+			contaminant_control.EYE_BURNS                 = initial(contaminant_control.EYE_BURNS)
+			contaminant_control.CONTAMINATION_LOSS        = initial(contaminant_control.CONTAMINATION_LOSS)
+			contaminant_control.CONTAMINANT_HALLUCINATION = initial(contaminant_control.CONTAMINANT_HALLUCINATION)
+			contaminant_control.N2O_HALLUCINATION         = initial(contaminant_control.N2O_HALLUCINATION)
 
 
 	to_world("<span class='notice'><b>[key_name(user)] changed the global contaminant/ZAS settings to \"[def]\"</b></span>")

@@ -3,7 +3,7 @@
 *****************/
 /datum/unit_test/proximity
 	template = /datum/unit_test/proximity
-	var/turf/simulated/wall/wall
+	var/turf/wall/wall
 	var/obj/proximity_listener/proximity_listener
 
 /datum/unit_test/proximity/New()
@@ -20,7 +20,7 @@
 	..()
 
 /datum/unit_test/proximity/proc/SetWallOpacity(opacity)
-	for(var/turf/simulated/wall/wall in range(7, proximity_listener))
+	for(var/turf/wall/wall in range(7, proximity_listener))
 		wall.set_opacity(opacity)
 
 /datum/unit_test/proximity/visibility

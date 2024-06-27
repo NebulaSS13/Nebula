@@ -1,0 +1,13 @@
+/obj/item/clothing/accessory : /obj/item/clothing/neck/tie{@OLD}
+/obj/item/clothing/accessory/scarf/@SUBTYPES : /obj/item/clothing/neck/scarf/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/stethoscope/@SUBTYPES : /obj/item/clothing/neck/stethoscope/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/long/@SUBTYPES : /obj/item/clothing/neck/tie/long/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/black/@SUBTYPES : /obj/item/clothing/neck/tie/black/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/red/@SUBTYPES : /obj/item/clothing/neck/tie/red/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/blue/@SUBTYPES : /obj/item/clothing/neck/tie/blue/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/blue_clip/@SUBTYPES : /obj/item/clothing/neck/tie/blue_clip/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/navy/@SUBTYPES : /obj/item/clothing/neck/tie/navy/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/horrible/@SUBTYPES : /obj/item/clothing/neck/tie/horrible/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/brown/@SUBTYPES : /obj/item/clothing/neck/tie/brown/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/bow/@SUBTYPES : /obj/item/clothing/neck/tie/bow/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/corptie/@SUBTYPES : /obj/item/clothing/neck/tie/corp/@SUBTYPES{@OLD}

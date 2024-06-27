@@ -156,6 +156,12 @@
 	secure = TRUE
 	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
+/area/ministation/mining
+	name = "\improper Mineral Processing"
+	req_access = list(access_mining)
+	icon_state = "mining_production"
+	secure = TRUE
+
 /area/ministation/bridge
 	name = "\improper Bridge"
 	req_access = list(access_heads)
@@ -269,8 +275,8 @@
 	icon_state = "light_blue"
 	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
-/area/ministation/company_rep
-	name = "\improper Company Representative Chamber"
+/area/ministation/tradehouse_rep
+	name = "\improper Tradehouse Representative Chamber"
 	req_access = list(access_lawyer)
 	icon_state = "brown"
 
@@ -322,14 +328,14 @@
 	arrival_sound = null
 	lift_announce_str = null
 
-/area/turbolift/alert_on_fall(var/mob/living/carbon/human/H)
+/area/turbolift/alert_on_fall(var/mob/living/human/H)
 	if(H.client && SSpersistence.elevator_fall_shifts > 0)
 		SSwebhooks.send(WEBHOOK_ELEVATOR_FALL, list("text" = "We managed to make it [SSpersistence.elevator_fall_shifts] shift\s without someone falling down an elevator shaft."))
 		SSpersistence.elevator_fall_shifts = -1
 
 /area/turbolift/l1
 	name = "Station Level 1"
-	base_turf = /turf/simulated/floor
+	base_turf = /turf/floor
 
 /area/turbolift/l2
 	name = "Station Level 2"

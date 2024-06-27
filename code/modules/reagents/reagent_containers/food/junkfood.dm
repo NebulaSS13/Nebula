@@ -10,7 +10,7 @@
 
 /obj/item/chems/food/sosjerky/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
 /obj/item/chems/food/no_raisin
 	name = "raisins"
@@ -97,7 +97,7 @@
 
 /obj/item/chems/food/squid/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
 /obj/item/chems/food/croutons
 	name = "croutons"
@@ -124,7 +124,7 @@
 
 /obj/item/chems/food/salo/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 8)
+	add_to_reagents(/decl/material/solid/organic/meat, 8)
 
 /obj/item/chems/food/driedfish
 	name = "vobla"
@@ -139,7 +139,7 @@
 
 /obj/item/chems/food/driedfish/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
 /obj/item/chems/food/liquidfood
 	name = "\improper LiquidFood MRE"
@@ -167,7 +167,7 @@
 
 /obj/item/chems/food/meatcube/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/solid/organic/meat, 15)
 
 /obj/item/chems/food/tastybread
 	name = "bread tube"
@@ -206,7 +206,7 @@
 /obj/item/chems/food/candy/proteinbar/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment,         9)
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/organic/meat, 4)
 	add_to_reagents(/decl/material/liquid/nutriment/sugar,   4)
 
 /obj/item/chems/food/candy/donor
@@ -558,7 +558,26 @@
 
 /obj/item/chems/food/donkpocket/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/solid/organic/meat, 2)
+
+/obj/item/chems/food/donkpocket/grill(var/atom/heat_source)
+
+	backyard_grilling_rawness--
+	if(backyard_grilling_rawness <= 0)
+		backyard_grilling_rawness = initial(backyard_grilling_rawness)
+
+		// We're already warm, so we burn.
+		if(warm)
+			var/obj/item/chems/food/badrecipe/whoops = new
+			whoops.dropInto(loc)
+			visible_message(SPAN_DANGER("\The [src] chars and blackens!"))
+			qdel(src)
+			return whoops
+
+		// Otherwise we just warm up.
+		heat()
+		visible_message(SPAN_NOTICE("\The [src] steams gently!"))
+		return src
 
 /obj/item/chems/food/donkpocket/proc/heat()
 	if(warm)

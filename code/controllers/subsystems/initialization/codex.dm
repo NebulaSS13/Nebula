@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(codex)
 		var/datum/codex_entry/linked_entry = get_entry_by_string(key)
 		var/replacement = linkRegex.group[4]
 		if(linked_entry)
-			replacement = "<a href='?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[viewer]'>[replacement]</a>"
+			replacement = "<a href='byond://?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[viewer]'>[replacement]</a>"
 		string = replacetextEx(string, linkRegex.match, replacement)
 	return string
 
@@ -112,6 +112,8 @@ SUBSYSTEM_DEF(codex)
 			results = list()
 			for(var/entry_title in entries_by_string)
 				var/datum/codex_entry/entry = entries_by_string[entry_title]
+				if(entry.unsearchable) // This entry can only be opened directly from links, and does not show up in search results.
+					continue
 				if(findtext(entry.name, searching) || findtext(entry.lore_text, searching) || findtext(entry.mechanics_text, searching) || findtext(entry.antag_text, searching))
 					results |= entry
 		search_cache[searching] = sortTim(results, /proc/cmp_name_asc)

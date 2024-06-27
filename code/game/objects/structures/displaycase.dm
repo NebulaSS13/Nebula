@@ -49,7 +49,7 @@
 
 /obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
 	..()
-	take_damage(Proj.get_structure_damage())
+	take_damage(Proj.get_structure_damage(), Proj.atom_damage_type)
 
 /obj/structure/proc/subtract_matter(var/obj/subtracting)
 	if(!length(matter))
@@ -64,7 +64,7 @@
 			matter -= mat
 	UNSETEMPTY(matter)
 
-/obj/structure/displaycase/dismantle()
+/obj/structure/displaycase/dismantle_structure(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
@@ -75,7 +75,10 @@
 	if(.)
 		set_density(0)
 		destroyed = TRUE
-		subtract_matter(new /obj/item/shard(get_turf(src), material?.type))
+		var/obj/item/shard/shard = new(get_turf(src), material?.type)
+		if(paint_color)
+			shard.set_color(paint_color)
+		subtract_matter(shard)
 		playsound(src, "shatter", 70, 1)
 		update_icon()
 

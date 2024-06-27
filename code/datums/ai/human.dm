@@ -1,9 +1,9 @@
 /datum/ai/human
 	name = "human"
-	expected_type = /mob/living/carbon/human
+	expected_type = /mob/living/human
 
 /datum/ai/human/do_process(var/time_elapsed)
-	var/mob/living/carbon/human/H = body
+	var/mob/living/human/H = body
 	if(H.stat != CONSCIOUS)
 		return
 
@@ -16,7 +16,7 @@
 	if(H.shock_stage >= 40 && prob(3))
 		H.emote(/decl/emote/audible/scream)
 
-	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
+	if(!H.restrained() && H.current_posture.prone && H.shock_stage >= 60 && prob(3))
 		H.custom_emote("thrashes in agony")
 
 	if(!H.restrained() && H.shock_stage < 40 && prob(3))

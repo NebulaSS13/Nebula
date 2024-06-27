@@ -25,7 +25,7 @@
 		icon_state = "[icon_state]-burnt"
 
 /obj/item/flash/proc/clown_check(var/mob/user)
-	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(user && user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
 		user.try_unequip(src)
 		return 0
@@ -80,22 +80,22 @@
 	return TRUE
 
 //attack_as_weapon
-/obj/item/flash/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/flash/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!user || !M || !general_flash_check(user))
+	if(!user || !target || !general_flash_check(user))
 		return FALSE
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	do_flash_animation(user, M)
+	do_flash_animation(user, target)
 
-	if(M.stat != DEAD && M.handle_flashed(src, rand(str_min,str_max)))
-		admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
-		if(!M.isSynthetic())
-			user.visible_message(SPAN_DANGER("[user] blinds [M] with \the [src]!"))
+	if(target.stat != DEAD && target.handle_flashed(src, rand(str_min,str_max)))
+		admin_attack_log(user, target, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
+		if(!target.isSynthetic())
+			user.visible_message(SPAN_DANGER("\The [user] blinds \the [target] with \the [src]!"))
 		else
-			user.visible_message(SPAN_DANGER("[user] overloads [M]'s sensors with \the [src]!"))
+			user.visible_message(SPAN_DANGER("\The [user] overloads \the [target]'s sensors with \the [src]!"))
 	else
-		user.visible_message(SPAN_WARNING("[user] fails to blind [M] with \the [src]!"))
+		user.visible_message(SPAN_WARNING("\The [user] fails to blind \the [target] with \the [src]!"))
 	return TRUE
 
 /obj/item/flash/attack_self(mob/user, flag = 0, emp = 0)
@@ -104,7 +104,7 @@
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	do_flash_animation(user)
-	for(var/mob/living/carbon/M in oviewers(3, null))
+	for(var/mob/living/M in oviewers(3, null))
 		M.handle_flashed(src, rand(str_min,str_max))
 	return TRUE
 
@@ -112,7 +112,7 @@
 	if(broken || !general_flash_check())
 		return FALSE
 	do_flash_animation()
-	for(var/mob/living/carbon/M in oviewers(3, null))
+	for(var/mob/living/M in oviewers(3, null))
 		M.handle_flashed(src, rand(str_min,str_max))
 
 /obj/item/flash/synthetic //not for regular use, weaker effects

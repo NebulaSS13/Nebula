@@ -124,6 +124,7 @@ nanoui is used to open and update nano browser uis
 	add_stylesheet("shared.css") // this CSS sheet is common to all UIs
 	add_stylesheet("tgui.css") // this CSS sheet is common to all UIs
 	add_stylesheet("icons.css") // this CSS sheet is common to all UIs
+	add_stylesheet("fonts.css") //Common Fonts
 
  /**
   * Set the current status (also known as visibility) of this ui.
@@ -250,7 +251,7 @@ nanoui is used to open and update nano browser uis
 	stylesheets.Add(file)
 
  /**
-  * Add a JavsScript script to this UI
+  * Add a JavaScript script to this UI
   * These must be added before the UI has been opened, adding after that will have no effect
   *
   * @param file string The name of the JavaScript file from /nano/js (e.g. "my_script.js")

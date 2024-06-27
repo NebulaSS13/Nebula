@@ -72,7 +72,7 @@
 /obj/effect/bluegoast
 	name = "echo"
 	desc = "It's not going to punch you, is it?"
-	var/mob/living/carbon/human/daddy
+	var/mob/living/human/daddy
 	anchored = TRUE
 	var/reality = 0
 	simulated = 0
@@ -119,9 +119,9 @@
 	return daddy.examine(arglist(args))
 
 /obj/effect/bluegoast/proc/blueswitch()
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 	if(ishuman(daddy))
-		H = new(get_turf(src), daddy.species.name, daddy.dna.Clone(), daddy.get_bodytype())
+		H = new(get_turf(src), daddy.species.name, daddy.get_mob_snapshot(force = TRUE), daddy.get_bodytype())
 		for(var/obj/item/entry in daddy.get_equipped_items(TRUE))
 			daddy.remove_from_mob(entry) //steals instead of copies so we don't end up with duplicates
 			H.equip_to_appropriate_slot(entry)

@@ -27,10 +27,6 @@ var/global/repository/uplink_purchases/uplink_purchase_repository = new()
 			pur_log += "[upe.purchased_items[UI]]x[UI.log_icon()][UI.name]"
 		to_world(english_list(pur_log, nothing_text = ""))
 
-
-/proc/debug_print()
-	uplink_purchase_repository.print_entries()
-
 /uplink_purchase_entry
 	var/total_cost
 	var/list/purchased_items

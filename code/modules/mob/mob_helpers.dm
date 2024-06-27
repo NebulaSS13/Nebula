@@ -13,10 +13,10 @@
 		return FALSE //M is too small to wield this
 	return TRUE
 
-/mob/living/proc/isSynthetic()
+/mob/proc/isSynthetic()
 	return 0
 
-/mob/living/carbon/human/isSynthetic()
+/mob/living/human/isSynthetic()
 	if(isnull(full_prosthetic))
 		robolimb_count = 0
 		var/list/limbs = get_external_organs()
@@ -32,7 +32,7 @@
 /mob/proc/isMonkey()
 	return 0
 
-/mob/living/carbon/human/isMonkey()
+/mob/living/human/isMonkey()
 	return istype(species, /decl/species/monkey)
 
 
@@ -51,11 +51,8 @@
 /proc/isdeaf(A)
 	if(isliving(A))
 		var/mob/living/M = A
-		return (M.sdisabilities & DEAFENED) || GET_STATUS(M, STAT_DEAF)
+		return M.has_genetic_condition(GENE_COND_DEAFENED) || GET_STATUS(M, STAT_DEAF)
 	return 0
-
-/proc/hasorgans(A) // Fucking really??
-	return ishuman(A)
 
 /proc/iscuffed(var/mob/mob)
 	return ismob(mob) && !!mob.get_equipped_item(slot_handcuffed_str)
@@ -67,17 +64,13 @@
 	var/mob/M = A
 	if(!istype(M))
 		return VITALS_SENSOR_OFF
-	var/obj/item/clothing/accessory/vitals_sensor/sensor = M.get_vitals_sensor()
+	var/obj/item/clothing/sensor/vitals/sensor = M.get_vitals_sensor()
 	if(sensor)
 		return sensor.sensor_mode
 	return VITALS_SENSOR_OFF
 
 /proc/is_admin(var/mob/user)
 	return check_rights(R_ADMIN, 0, user) != 0
-
-
-/proc/hsl2rgb(h, s, l)
-	return //TODO: Implement
 
 /*
 	Miss Chance
@@ -161,7 +154,7 @@ var/global/list/global/organ_rel_size = list(
 		if(target.a_intent == I_HELP)
 			return zone
 		// you cannot miss if your target is prone or restrained
-		if(target.buckled || target.lying)
+		if(target.buckled || target.current_posture.prone)
 			return zone
 		// if your target is being grabbed aggressively by someone you cannot miss either
 		for(var/obj/item/grab/G in target.grabbed_by)
@@ -242,30 +235,6 @@ var/global/list/global/organ_rel_size = list(
 		newphrase+="[newletter]";counter-=1
 	return newphrase
 
-/proc/stutter(n)
-	var/te = html_decode(n)
-	var/t = ""//placed before the message. Not really sure what it's for.
-	n = length_char(n)//length of the entire word
-	var/p = null
-	p = 1//1 is the start of any word
-	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
-		var/n_letter = copytext_char(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
-		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
-			if (prob(10))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
-			else
-				if (prob(20))
-					n_letter = text("[n_letter]-[n_letter]-[n_letter]")
-				else
-					if (prob(5))
-						n_letter = null
-					else
-						n_letter = text("[n_letter]-[n_letter]")
-		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
-		p++//for each letter p is increased to find where the next letter will be.
-	return sanitize(t)
-
-
 /proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
 	/* Turn text into complete gibberish! */
 	var/returntext = ""
@@ -282,35 +251,6 @@ var/global/list/global/organ_rel_size = list(
 		returntext += letter
 
 	return returntext
-
-
-/proc/ninjaspeak(n)
-/*
-The difference with stutter is that this proc can stutter more than 1 letter
-The issue here is that anything that does not have a space is treated as one word (in many instances). For instance, "LOOKING," is a word, including the comma.
-It's fairly easy to fix if dealing with single letters but not so much with compounds of letters./N
-*/
-	var/te = html_decode(n)
-	var/t = ""
-	n = length_char(n)
-	var/p = 1
-	while(p <= n)
-		var/n_letter
-		var/n_mod = rand(1,4)
-		if(p+n_mod>n+1)
-			n_letter = copytext_char(te, p, n+1)
-		else
-			n_letter = copytext_char(te, p, p+n_mod)
-		if (prob(50))
-			if (prob(30))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]")
-			else
-				n_letter = text("[n_letter]-[n_letter]")
-		else
-			n_letter = text("[n_letter]")
-		t = text("[t][n_letter]")
-		p=p+n_mod
-	return sanitize(t)
 
 #define TICKS_PER_RECOIL_ANIM 2
 #define PIXELS_PER_STRENGTH_VAL 16
@@ -330,13 +270,6 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 #undef TICKS_PER_RECOIL_ANIM
 #undef PIXELS_PER_STRENGTH_VAL
-
-/proc/findname(msg)
-	for(var/mob/M in SSmobs.mob_list)
-		if (M.real_name == text("[msg]"))
-			return 1
-	return 0
-
 
 /mob/proc/abiotic(var/full_body = FALSE)
 	. = FALSE
@@ -378,7 +311,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = intent_numeric((intent_numeric(a_intent)+1) % 4)
 			if("left")
 				a_intent = intent_numeric((intent_numeric(a_intent)+3) % 4)
-		if(hud_used && hud_used.action_intent)
+		if(istype(hud_used) && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
 	else if(isrobot(src))
@@ -389,7 +322,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = I_HURT
 			if("right","left")
 				a_intent = intent_numeric(intent_numeric(a_intent) - 3)
-		if(hud_used && hud_used.action_intent)
+		if(istype(hud_used) && hud_used.action_intent)
 			if(a_intent == I_HURT)
 				hud_used.action_intent.icon_state = I_HURT
 			else
@@ -485,16 +418,11 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
 	if(stat == DEAD)
 		return SAFE_PERP
-
-	return 0
-
-/mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
 	if(get_equipped_item(slot_handcuffed_str))
 		return SAFE_PERP
+	return 0
 
-	return ..()
-
-/mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
+/mob/living/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
 		return SAFE_PERP
@@ -561,11 +489,11 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /mob/observer/ghost/get_multitool()
 	return can_admin_interact() && ..(ghost_multitool)
 
-/mob/living/carbon/human/get_multitool()
-	return ..(get_active_hand())
+/mob/living/human/get_multitool()
+	return ..(get_active_held_item())
 
 /mob/living/silicon/robot/get_multitool()
-	return ..(get_active_hand())
+	return ..(get_active_held_item())
 
 /mob/living/silicon/ai/get_multitool()
 	return ..(aiMulti)
@@ -600,12 +528,10 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	SetName(new_name)
 	if(mind)
 		mind.name = new_name
-	if(dna)
-		dna.real_name = real_name
 	return 1
 
 /mob/proc/ssd_check()
-	return !client && !teleop
+	return !client && !teleop && (last_ckey || !ai)
 
 /mob/proc/try_teleport(var/area/thearea)
 	if(!istype(thearea))
@@ -671,12 +597,6 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		return null
 	return choice
 
-/mob/proc/set_sdisability(sdisability)
-	sdisabilities |= sdisability
-
-/mob/proc/unset_sdisability(sdisability)
-	sdisabilities &= ~sdisability
-
 /mob/proc/get_accumulated_vision_handlers()
 	var/result[2]
 	var/asight = 0
@@ -706,7 +626,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
  */
 /mob/proc/get_accessible_pen()
 	//We might save a few loop iterations by just looking in the active hand first
-	var/obj/item/I = get_active_hand()
+	var/obj/item/I = get_active_held_item()
 	if(IS_PEN(I))
 		return I
 	//Look if we're holding a pen elsewhere

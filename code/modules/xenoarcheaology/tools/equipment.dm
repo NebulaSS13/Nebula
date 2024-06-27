@@ -2,7 +2,7 @@
 	name = "anomaly suit"
 	desc = "A suit that protects against exotic alien energies and biological contamination."
 	anomaly_shielding = 0.7
-	icon = 'icons/clothing/suit/biosuit/anomaly.dmi'
+	icon = 'icons/clothing/suits/biosuit/anomaly.dmi'
 
 /obj/item/clothing/head/bio_hood/anomaly
 	name = "anomaly hood"
@@ -27,7 +27,7 @@
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/storage/excavation,
+		/obj/item/excavation,
 		/obj/item/tool,
 		/obj/item/scanner/breath,
 		/obj/item/measuring_tape,
@@ -37,7 +37,7 @@
 		/obj/item/gps,
 		/obj/item/pinpointer/radio,
 		/obj/item/radio/beacon,
-		/obj/item/storage/bag/fossils
+		/obj/item/bag/fossils
 	)
 
 /obj/item/clothing/head/helmet/space/void/excavation
@@ -56,34 +56,11 @@
 /obj/item/clothing/suit/space/void/excavation/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/excavation
 
-/obj/item/storage/belt/archaeology
+/obj/item/belt/archaeology
 	name = "excavation gear-belt"
 	desc = "Can hold various excavation gear."
 	icon = 'icons/clothing/belt/gearbelt.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state = ACCESSORY_SLOT_UTILITY
-	can_hold = list(
-		/obj/item/core_sampler,
-		/obj/item/pinpointer/radio,
-		/obj/item/radio/beacon,
-		/obj/item/gps,
-		/obj/item/measuring_tape,
-		/obj/item/flashlight,
-		/obj/item/tool,
-		/obj/item/depth_scanner,
-		/obj/item/camera,
-		/obj/item/paper,
-		/obj/item/photo,
-		/obj/item/folder,
-		/obj/item/pen,
-		/obj/item/folder,
-		/obj/item/clipboard,
-		/obj/item/anodevice,
-		/obj/item/clothing/glasses,
-		/obj/item/wrench,
-		/obj/item/storage/excavation,
-		/obj/item/anobattery,
-		/obj/item/ano_scanner,
-		/obj/item/stack/tape_roll/barricade_tape/research
-	)
+	storage = /datum/storage/belt/archaeology
 	material = /decl/material/solid/organic/leather/synth

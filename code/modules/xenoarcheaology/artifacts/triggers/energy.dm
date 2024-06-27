@@ -1,7 +1,6 @@
 /datum/artifact_trigger/energy
 	name = "applied high energy"
 	var/static/list/energetic_things = list(
-		/obj/item/sword/cultblade,
 		/obj/item/card/emag,
 		/obj/item/multitool
 	)
@@ -10,9 +9,9 @@
 	. = ..()
 	if(istype(O, /obj/item/projectile))
 		var/obj/item/projectile/P = O
-		. = (P.damage_type == BURN) || (P.damage_type == ELECTROCUTE)
+		. = (P.atom_damage_type == BURN) || (P.atom_damage_type == ELECTROCUTE)
 	if(istype(O,/obj/item/baton))
-		var/obj/item/baton/B = O 
+		var/obj/item/baton/B = O
 		. = B.status
 	else if (istype(O,/obj/item/energy_blade))
 		var/obj/item/energy_blade/E = O

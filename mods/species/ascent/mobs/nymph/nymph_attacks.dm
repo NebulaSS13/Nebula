@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/ascent_nymph/UnarmedAttack(var/atom/A)
+/mob/living/simple_animal/alien/kharmaan/UnarmedAttack(var/atom/A)
 
 	. = ..()
 	if(.)

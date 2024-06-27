@@ -64,18 +64,17 @@
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
 
 // Appearance change flags
-#define APPEARANCE_UPDATE_DNA        BITFLAG(0)
-#define APPEARANCE_RACE              (BITFLAG(1)|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_GENDER            BITFLAG(2)
-#define APPEARANCE_BODY              (BITFLAG(3)|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_SKIN              BITFLAG(4)
-#define APPEARANCE_HAIR              BITFLAG(5)
-#define APPEARANCE_HAIR_COLOR        BITFLAG(6)
-#define APPEARANCE_FACIAL_HAIR       BITFLAG(7)
-#define APPEARANCE_FACIAL_HAIR_COLOR BITFLAG(8)
-#define APPEARANCE_EYE_COLOR         BITFLAG(9)
+#define APPEARANCE_RACE              BITFLAG(0)
+#define APPEARANCE_GENDER            BITFLAG(1)
+#define APPEARANCE_BODY              BITFLAG(2)
+#define APPEARANCE_SKIN              BITFLAG(3)
+#define APPEARANCE_HAIR              BITFLAG(4)
+#define APPEARANCE_HAIR_COLOR        BITFLAG(5)
+#define APPEARANCE_FACIAL_HAIR       BITFLAG(6)
+#define APPEARANCE_FACIAL_HAIR_COLOR BITFLAG(7)
+#define APPEARANCE_EYE_COLOR         BITFLAG(8)
 #define APPEARANCE_ALL_HAIR          (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
-#define APPEARANCE_ALL               (APPEARANCE_UPDATE_DNA|APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_BODY|APPEARANCE_SKIN|APPEARANCE_EYE_COLOR|APPEARANCE_ALL_HAIR)
+#define APPEARANCE_ALL               (APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_BODY|APPEARANCE_SKIN|APPEARANCE_EYE_COLOR|APPEARANCE_ALL_HAIR)
 
 // Click cooldown
 #define DEFAULT_ATTACK_COOLDOWN 8 //Default timeout for aggressive actions
@@ -98,11 +97,14 @@
 #define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)
 
 // Defines mob sizes, used by lockers and to determine what is considered a small sized mob, etc.
-#define MOB_SIZE_LARGE  		40
-#define MOB_SIZE_MEDIUM 		20
-#define MOB_SIZE_SMALL 		10
-#define MOB_SIZE_TINY 		5
-#define MOB_SIZE_MINISCULE	1
+#define MOB_SIZE_LARGE     40
+#define MOB_SIZE_MEDIUM    20
+#define MOB_SIZE_SMALL     10
+#define MOB_SIZE_TINY      5
+#define MOB_SIZE_MINISCULE 1
+
+#define MOB_SIZE_MIN       MOB_SIZE_MINISCULE
+#define MOB_SIZE_MAX       MOB_SIZE_LARGE
 
 // Defines how strong the species is compared to humans. Think like strength in D&D
 #define STR_VHIGH       2
@@ -141,14 +143,14 @@
 #define DRONE_SPAWN_DELAY  round(get_config_value(/decl/config/num/respawn_delay) / 3)
 
 // Incapacitation flags, used by the mob/proc/incapacitated() proc
-#define INCAPACITATION_NONE 0
-#define INCAPACITATION_RESTRAINED 1
-#define INCAPACITATION_BUCKLED_PARTIALLY 2
-#define INCAPACITATION_BUCKLED_FULLY 4
-#define INCAPACITATION_STUNNED 8
-#define INCAPACITATION_FORCELYING 16 //needs a better name - represents being knocked down BUT still conscious.
-#define INCAPACITATION_KNOCKOUT 32
-#define INCAPACITATION_WEAKENED 64
+#define INCAPACITATION_NONE              0
+#define INCAPACITATION_RESTRAINED        BITFLAG(0)
+#define INCAPACITATION_BUCKLED_PARTIALLY BITFLAG(1)
+#define INCAPACITATION_BUCKLED_FULLY     BITFLAG(2)
+#define INCAPACITATION_STUNNED           BITFLAG(3)
+#define INCAPACITATION_FORCELYING        BITFLAG(4) //needs a better name - represents being knocked down BUT still conscious.
+#define INCAPACITATION_KNOCKOUT          BITFLAG(5)
+#define INCAPACITATION_WEAKENED          BITFLAG(6)
 
 #define INCAPACITATION_UNRESISTING (INCAPACITATION_KNOCKOUT|INCAPACITATION_STUNNED)
 #define INCAPACITATION_DISRUPTED   (INCAPACITATION_UNRESISTING|INCAPACITATION_WEAKENED)
@@ -185,7 +187,6 @@
 #define BP_VOICE             "vocal synthesiser"
 #define BP_STACK             "stack"
 #define BP_OPTICS            "optics"
-#define BP_SYSTEM_CONTROLLER "system controller"
 
 //Augmetations
 #define BP_AUGMENT_R_ARM        "right arm augment"
@@ -222,14 +223,14 @@
 #define MOB_PULL_SAME 2
 #define MOB_PULL_LARGER 3
 
-//carbon taste sensitivity defines, used in mob/living/carbon/proc/ingest
+// Taste sensitivity defines, used in mob/living/proc/ingest.
 #define TASTE_HYPERSENSITIVE 3 //anything below 5%
 #define TASTE_SENSITIVE 2 //anything below 7%
 #define TASTE_NORMAL 1 //anything below 15%
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
 
-// One 'unit' of taste sensitivity probability, used in mob/living/carbon/proc/ingest
+// One 'unit' of taste sensitivity probability, used in mob/living/proc/ingest
 #define TASTE_DEGREE_PROB 15
 
 //Used by show_message() and emotes
@@ -306,9 +307,9 @@
 #define DEXTERITY_KEYBOARDS       BITFLAG(4)
 #define DEXTERITY_TOUCHSCREENS    BITFLAG(5)
 // TODO: actually get grab code to check this one.
-#define DEXTERITY_GRAPPLE         BITFLAG(6)
-#define DEXTERITY_WEAPONS         BITFLAG(7)
-#define DEXTERITY_COMPLEX_TOOLS   BITFLAG(8)
+#define DEXTERITY_GRAPPLE         BITFLAG(6) // Can the mob grab other mobs?
+#define DEXTERITY_WEAPONS         BITFLAG(7) // Can the mob use guns?
+#define DEXTERITY_COMPLEX_TOOLS   BITFLAG(8) // Can the mob use complex items like flashlights, handcuffs, etc?
 #define DEXTERITY_BASE (DEXTERITY_SIMPLE_MACHINES|DEXTERITY_HOLD_ITEM|DEXTERITY_WIELD_ITEM|DEXTERITY_EQUIP_ITEM)
 #define DEXTERITY_FULL (DEXTERITY_BASE|DEXTERITY_KEYBOARDS|DEXTERITY_TOUCHSCREENS|DEXTERITY_GRAPPLE|DEXTERITY_WEAPONS|DEXTERITY_COMPLEX_TOOLS)
 
@@ -322,7 +323,7 @@ var/global/list/dexterity_levels = list(
 	"[DEXTERITY_BASE]"
 )
 
-// used in /mob/living/carbon/human/can_inject, and by various callers of that proc
+// used in /mob/living/human/can_inject, and by various callers of that proc
 #define CAN_INJECT 1
 #define INJECTION_PORT 2
 #define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
@@ -346,7 +347,7 @@ var/global/list/dexterity_levels = list(
 #define NEUTER_ANIMATE "animate singular neutral"
 
 // Equipment Overlays Indices //
-#define HO_MUTATIONS_LAYER  1
+#define HO_CONDITION_LAYER  1
 #define HO_SKIN_LAYER       2
 #define HO_DAMAGE_LAYER     3
 #define HO_SURGERY_LAYER    4 //bs12 specific.

@@ -1,8 +1,7 @@
 /obj/item/clothing/suit/armor/vest
 	name = "armored vest"
 	desc = "An armor vest made of synthetic fibers."
-	icon_state = ICON_STATE_WORLD
-	icon = 'icons/clothing/suit/armor/vest.dmi'
+	icon = 'icons/clothing/suits/armor/vest.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
@@ -23,4 +22,6 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
-	starting_accessories = list(/obj/item/clothing/accessory/storage/pouches)
+	starting_accessories = list(
+		/obj/item/clothing/webbing/pouches
+	)

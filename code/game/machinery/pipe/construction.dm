@@ -34,7 +34,7 @@ Buildable meters
 	desc = P.desc
 
 	connect_types = P.connect_types
-	color = P.pipe_color
+	set_color(P.pipe_color)
 	icon = P.build_icon
 	icon_state = P.build_icon_state
 	pipe_class = P.pipe_class
@@ -42,7 +42,7 @@ Buildable meters
 	constructed_path = P.base_type || P.type
 
 //called when a turf is attacked with a pipe item
-/obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
+/obj/item/pipe/afterattack(turf/floor/target, mob/user, proximity)
 	if(!proximity) return
 	if(istype(target))
 		user.try_unequip(src, target)

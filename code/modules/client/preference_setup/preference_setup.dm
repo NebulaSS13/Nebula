@@ -10,10 +10,10 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	sort_order = 2
 	category_item_type = /datum/category_item/player_setup_item/physical
 
-/datum/category_group/player_setup_category/aspect_preferences
-	name = "Aspects"
+/datum/category_group/player_setup_category/trait_preferences
+	name = "Traits"
 	sort_order = 3
-	category_item_type = /datum/category_item/player_setup_item/aspects
+	category_item_type = /datum/category_item/player_setup_item/traits
 
 /datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
 	. = ""
@@ -95,7 +95,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		if(PS == selected_category)
 			dat += "[PS.name] "	// TODO: Check how to properly mark a href/button selected in a classic browser window
 		else
-			dat += "<a href='?src=\ref[src];category=\ref[PS]'>[PS.name]</a> "
+			dat += "<a href='byond://?src=\ref[src];category=\ref[PS]'>[PS.name]</a> "
 	return dat
 
 /datum/category_collection/player_setup_collection/proc/content(var/mob/user)

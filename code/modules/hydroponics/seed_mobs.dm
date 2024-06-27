@@ -13,6 +13,4 @@
 
 			var/total_yield = rand(1,3)
 			for(var/j = 0;j<=total_yield;j++)
-				var/obj/item/seeds/S = new(get_turf(host))
-				S.seed_type = name
-				S.update_seed()
+				new /obj/item/seeds(get_turf(host), null, name)

@@ -164,15 +164,15 @@
 	var/datum/mind/backup
 	var/prompting = FALSE // Are we waiting for a user prompt?
 
-/obj/item/organ/internal/voxstack/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
-	var/decl/species/dna_species = given_dna && get_species_by_key(given_dna.species)
-	. = ..(mapload, material_key, given_dna, dna_species?.base_internal_prosthetics_model)
+/obj/item/organ/internal/voxstack/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
+	var/decl/species/dna_species = supplied_appearance && supplied_appearance.root_species
+	. = ..(mapload, material_key, supplied_appearance, dna_species?.base_internal_prosthetics_model)
 	do_backup()
 
 /obj/item/organ/internal/voxstack/examine(mob/user)
 	. = ..()
 
-	var/user_vox = isspecies(user, SPECIES_VOX)
+	var/user_vox = user.get_species_name() == SPECIES_VOX // TODO use bodytype flags instead so subspecies are included
 	if (istype(backup))
 		var/owner_viable = find_dead_player(stored_ckey, TRUE)
 		if (user_vox)
@@ -208,13 +208,13 @@
 		prompt_revive_callback(owner)
 	return TRUE
 
-/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/carbon/C)
+/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/target)
 	set waitfor = FALSE
-	if(C && !backup_inviable())
+	if(istype(target) && !backup_inviable())
 		prompting = TRUE
 		var/response = alert(find_dead_player(stored_ckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
 		prompting = FALSE
-		if(src && response == "Yes" && owner == C)
+		if(src && response == "Yes" && owner == target)
 			overwrite()
 	sleep(-1)
 	do_backup()

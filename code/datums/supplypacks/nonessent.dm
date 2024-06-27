@@ -11,10 +11,10 @@
 /decl/hierarchy/supply_pack/nonessent/artscrafts
 	name = "Art - Arts and Crafts supplies"
 	contains = list(
-		/obj/item/storage/box/fancy/crayons,
+		/obj/item/box/fancy/crayons,
 		/obj/item/camera,
 		/obj/item/camera_film = 2,
-		/obj/item/storage/photo_album,
+		/obj/item/photo_album,
 		/obj/item/chems/glass/paint/red,
 		/obj/item/chems/glass/paint/green,
 		/obj/item/chems/glass/paint/blue,
@@ -83,53 +83,61 @@
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
 					/obj/item/clothing/suit/judgerobe,
-					/obj/item/clothing/accessory/wcoat/black,
+					/obj/item/clothing/suit/jacket/waistcoat/black,
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/suit/nun,
 					/obj/item/clothing/suit/imperium_monk,
 					/obj/item/clothing/suit/ianshirt,
-					/obj/item/clothing/under/gimmick/rank/captain/suit,
-					/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
-					/obj/item/clothing/under/lawyer/purpsuit,
-					/obj/item/clothing/under/mailman,
-					/obj/item/clothing/under/dress/dress_saloon,
-					/obj/item/clothing/accessory/suspenders,
-					/obj/item/clothing/suit/storage/toggle/labcoat/mad,
+					/obj/item/clothing/costume/captain_suit,
+					/obj/item/clothing/costume/head_of_personnel_suit,
+					/obj/item/clothing/pants/slacks/purple,
+					/obj/item/clothing/shirt/button,
+					/obj/item/clothing/suit/jacket/vest/black,
+					/obj/item/clothing/jumpsuit/mailman,
+					/obj/item/clothing/dress/saloon,
+					/obj/item/clothing/suspenders,
+					/obj/item/clothing/suit/toggle/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
-					/obj/item/clothing/under/schoolgirl,
-					/obj/item/clothing/under/owl,
-					/obj/item/clothing/under/waiter,
-					/obj/item/clothing/under/gladiator,
-					/obj/item/clothing/under/soviet,
-					/obj/item/clothing/under/scratch,
-					/obj/item/clothing/under/wedding/bride_white,
+					/obj/item/clothing/costume/schoolgirl,
+					/obj/item/clothing/costume/owl,
+					/obj/item/clothing/pants/slacks/black,
+					/obj/item/clothing/shirt/button,
+					/obj/item/clothing/neck/tie/bow/color/red,
+					/obj/item/clothing/suit/jacket/vest/blue,
+					/obj/item/clothing/costume/gladiator,
+					/obj/item/clothing/costume/soviet,
+					/obj/item/clothing/costume/scratch,
+					/obj/item/clothing/dress/wedding/bride_white,
 					/obj/item/clothing/suit/chef,
 					/obj/item/clothing/suit/apron/overalls,
-					/obj/item/clothing/under/redcoat,
-					/obj/item/clothing/under/kilt,
-					/obj/item/clothing/under/savage_hunter,
-					/obj/item/clothing/under/savage_hunter/female,
-					/obj/item/clothing/under/wetsuit)
+					/obj/item/clothing/costume/redcoat,
+					/obj/item/clothing/costume/kilt,
+					/obj/item/clothing/costume/savage_hunter,
+					/obj/item/clothing/costume/savage_hunter/female,
+					/obj/item/clothing/jumpsuit/wetsuit)
 	name = "Costume - Random"
 	containername = "actor costumes crate"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/nonessent/formal_wear
-	contains = list(/obj/item/clothing/head/bowler,
-					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/storage/toggle/suit/blue,
-					/obj/item/clothing/suit/storage/toggle/suit/purple,
-					/obj/item/clothing/under/suit_jacket,
-					/obj/item/clothing/under/suit_jacket/female,
-					/obj/item/clothing/under/suit_jacket/really_black,
-					/obj/item/clothing/under/suit_jacket/red,
-					/obj/item/clothing/under/lawyer/bluesuit,
-					/obj/item/clothing/under/lawyer/purpsuit,
-					/obj/item/clothing/shoes/color/black,
-					/obj/item/clothing/shoes/color/black,
-					/obj/item/clothing/shoes/craftable,
-					/obj/item/clothing/accessory/wcoat/black)
+	contains = list(
+		/obj/item/clothing/head/bowler,
+		/obj/item/clothing/head/that,
+		/obj/item/clothing/suit/jacket,
+		/obj/item/clothing/suit/jacket/blue,
+		/obj/item/clothing/suit/jacket/purple,
+		/obj/item/clothing/suit/jacket/black,
+		/obj/item/clothing/suit/jacket/burgundy,
+		/obj/item/clothing/suit/jacket/waistcoat,
+		/obj/item/clothing/costume/lawyer_bluesuit,
+		/obj/item/clothing/pants/slacks/purple,
+		/obj/item/clothing/shirt/button,
+		/obj/item/clothing/suit/jacket/vest/black,
+		/obj/item/clothing/shoes/color/black,
+		/obj/item/clothing/shoes/color/black,
+		/obj/item/clothing/shoes/craftable
+	)
 	name = "Costume - Formalwear"
 	containertype = /obj/structure/closet
 	containername = "formalwear for the best occasions."
@@ -192,17 +200,17 @@
 
 /decl/hierarchy/supply_pack/nonessent/dresses
 	name = "Costume - Womens formal dress locker"
-	contains = list(/obj/item/clothing/under/wedding/bride_orange,
-					/obj/item/clothing/under/wedding/bride_purple,
-					/obj/item/clothing/under/wedding/bride_blue,
-					/obj/item/clothing/under/wedding/bride_red,
-					/obj/item/clothing/under/wedding/bride_white,
-					/obj/item/clothing/under/sundress,
-					/obj/item/clothing/under/dress/dress_green,
-					/obj/item/clothing/under/dress/dress_pink,
-					/obj/item/clothing/under/dress/dress_orange,
-					/obj/item/clothing/under/dress/dress_yellow,
-					/obj/item/clothing/under/dress/dress_saloon)
+	contains = list(/obj/item/clothing/dress/wedding/bride_orange,
+					/obj/item/clothing/dress/wedding/bride_purple,
+					/obj/item/clothing/dress/wedding/bride_blue,
+					/obj/item/clothing/dress/wedding/bride_red,
+					/obj/item/clothing/dress/wedding/bride_white,
+					/obj/item/clothing/dress/sun,
+					/obj/item/clothing/dress/green,
+					/obj/item/clothing/dress/pink,
+					/obj/item/clothing/dress/orange,
+					/obj/item/clothing/dress/yellow,
+					/obj/item/clothing/dress/saloon)
 	containername = "pretty dress locker"
 	containertype = /obj/structure/closet
 	num_contained = 1
@@ -220,15 +228,15 @@
 
 /decl/hierarchy/supply_pack/nonessent/chaplaingear
 	name = "Costume - Chaplain"
-	contains = list(/obj/item/clothing/under/chaplain,
+	contains = list(/obj/item/clothing/jumpsuit/chaplain,
 					/obj/item/clothing/shoes/color/black,
 					/obj/item/clothing/suit/nun,
 					/obj/item/clothing/head/nun_hood,
 					/obj/item/clothing/suit/chaplain_hoodie,
 					/obj/item/clothing/head/chaplain_hood,
 					/obj/item/clothing/suit/holidaypriest,
-					/obj/item/clothing/under/wedding/bride_white,
-					/obj/item/storage/candle_box = 3)
+					/obj/item/clothing/dress/wedding/bride_white,
+					/obj/item/box/candles = 3)
 	containername = "chaplain equipment crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
@@ -246,7 +254,7 @@
 	name = "Rec - Aromatherapy"
 	contains = list(
 		/obj/item/paper/aromatherapy_disclaimer,
-		/obj/item/storage/candle_box/scented = 3,
-		/obj/item/storage/candle_box/incense = 6,
-		/obj/item/flame/lighter/random)
+		/obj/item/box/candles/scented = 3,
+		/obj/item/box/candles/incense = 6,
+		/obj/item/flame/fuelled/lighter/random)
 	containername = "aromatherapy crate"

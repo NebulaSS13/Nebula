@@ -8,30 +8,30 @@
 
 /obj/random/contraband/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/grooming/comb =                               4,
-		/obj/item/storage/pill_bottle/painkillers =        3,
-		/obj/item/storage/pill_bottle/strong_painkillers = 1,
-		/obj/item/storage/pill_bottle/happy =              2,
-		/obj/item/storage/pill_bottle/zoom =               2,
-		/obj/item/chems/glass/beaker/vial/random/toxin =   1,
-		/obj/item/chems/glass/beaker/sulphuric =           1,
-		/obj/item/poster =                                 5,
-		/obj/item/butterflyblade =                         3,
-		/obj/item/butterflyhandle =                        3,
-		/obj/item/baton/cattleprod =                       1,
-		/obj/item/knife/combat =                           1,
-		/obj/item/knife/folding =                          1,
-		/obj/item/knife/folding/wood =                     1,
-		/obj/item/knife/folding/combat/balisong =          2,
-		/obj/item/knife/folding/combat/switchblade =       1,
-		/obj/item/storage/secure/briefcase/money =         1,
-		/obj/item/storage/box/syndie_kit/cigarette =       1,
-		/obj/item/stack/telecrystal =                      1,
-		/obj/item/clothing/under/syndicate =               2,
-		/obj/item/chems/syringe =                          3,
-		/obj/item/chems/syringe/steroid =                  2,
-		/obj/item/chems/syringe/drugs =                    1,
-		/obj/item/chems/food/egg/lizard =                  3
+		/obj/item/grooming/comb                        = 4,
+		/obj/item/pill_bottle/painkillers              = 3,
+		/obj/item/pill_bottle/strong_painkillers       = 1,
+		/obj/item/pill_bottle/happy                    = 2,
+		/obj/item/pill_bottle/zoom                     = 2,
+		/obj/item/chems/glass/beaker/vial/random/toxin = 1,
+		/obj/item/chems/glass/beaker/sulphuric         = 1,
+		/obj/item/poster                               = 5,
+		/obj/item/butterflyblade                       = 3,
+		/obj/item/butterflyhandle                      = 3,
+		/obj/item/baton/cattleprod                     = 1,
+		/obj/item/knife/combat                         = 1,
+		/obj/item/knife/folding                        = 1,
+		/obj/item/knife/folding/wood                   = 1,
+		/obj/item/knife/folding/combat/balisong        = 2,
+		/obj/item/knife/folding/combat/switchblade     = 1,
+		/obj/item/secure_storage/briefcase/money       = 1,
+		/obj/item/box/syndie_kit/cigarette             = 1,
+		/obj/item/stack/telecrystal                    = 1,
+		/obj/item/clothing/shirt/syndicate             = 2,
+		/obj/item/chems/syringe                        = 3,
+		/obj/item/chems/syringe/steroid                = 2,
+		/obj/item/chems/syringe/drugs                  = 1,
+		/obj/item/chems/food/egg/lizard                = 3
 	)
 	return spawnable_choices
 
@@ -88,10 +88,27 @@
 		/obj/item/pen/blue,
 		/obj/item/pen/red,
 		/obj/item/pen/multi,
-		/obj/item/storage/box/matches,
+		/obj/item/box/matches,
 		/obj/item/stack/material/cardstock/mapped/cardboard,
-		/obj/item/storage/box/fancy/cigarettes,
+		/obj/item/box/fancy/cigarettes,
 		/obj/item/deck/cards
+	)
+	return spawnable_choices
+
+/obj/random/natural_debris // Natural crap that you might fish out of a river in unspoiled countryside.
+	name = "random natural detritus"
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "remains"
+
+// We really have a limited amount of random crap, don't we...
+/obj/random/natural_debris/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/remains/mouse,
+		/obj/item/remains/lizard,
+		/obj/item/stick,
+		/obj/item/trash/mollusc_shell,
+		/obj/item/trash/mollusc_shell/clam,
+		/obj/item/trash/mollusc_shell/barnacle
 	)
 	return spawnable_choices
 
@@ -106,16 +123,16 @@
 	var/static/list/spawnable_choices
 	if(!spawnable_choices)
 		spawnable_choices = list(
-			/obj/effect/decal/cleanable/generic = 20,
+			/obj/effect/decal/cleanable/generic            = 20,
 			/obj/effect/decal/cleanable/spiderling_remains = 95,
-			/obj/item/remains/mouse = 95,
-			/obj/item/remains/robot = 95,
-			/obj/item/paper/crumpled = 95,
-			/obj/item/inflatable/torn = 95,
-			/obj/effect/decal/cleanable/molten_item = 95,
-			/obj/item/shard = 95,
-			/obj/item/hand/missing_card = 95,
-			/obj/random/useful = 4
+			/obj/item/remains/mouse                        = 95,
+			/obj/item/remains/robot                        = 95,
+			/obj/item/paper/crumpled                       = 95,
+			/obj/item/inflatable/torn                      = 95,
+			/obj/effect/decal/cleanable/molten_item        = 95,
+			/obj/item/shard                                = 95,
+			/obj/item/hand/missing_card                    = 95,
+			/obj/random/useful                             =  4
 		)
 		for(var/trash_type in subtypesof(/obj/item/trash))
 			spawnable_choices[trash_type] = 95
@@ -160,11 +177,11 @@
 
 /obj/random/coin/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/coin/gold =     3,
-		/obj/item/coin/silver =   4,
-		/obj/item/coin/diamond =  2,
-		/obj/item/coin/iron =     4,
-		/obj/item/coin/uranium =  3,
+		/obj/item/coin/gold     = 3,
+		/obj/item/coin/silver   = 4,
+		/obj/item/coin/diamond  = 2,
+		/obj/item/coin/iron     = 4,
+		/obj/item/coin/uranium  = 3,
 		/obj/item/coin/platinum = 1
 	)
 	return spawnable_choices
@@ -172,7 +189,7 @@
 /obj/random/material //Random materials for building stuff
 	name = "random material"
 	desc = "This is a random material."
-	icon = 'icons/obj/materials.dmi'
+	icon = 'icons/obj/items/stacks/materials.dmi'
 	icon_state = "sheet"
 
 /obj/random/material/spawn_choices()
@@ -206,10 +223,10 @@
 
 /obj/random/soap/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/soap =                        12,
-		/obj/item/chems/glass/rag =              2,
-		/obj/item/chems/spray/cleaner =          2,
-		/obj/item/grenade/chem_grenade/cleaner = 1
+		/obj/item/soap                         = 12,
+		/obj/item/chems/glass/rag              =  2,
+		/obj/item/chems/spray/cleaner          =  2,
+		/obj/item/grenade/chem_grenade/cleaner =  1
 	)
 	return spawnable_choices
 
@@ -242,18 +259,18 @@
 
 /obj/random/smokes/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/box/fancy/cigarettes =                      5,
-		/obj/item/storage/box/fancy/cigarettes/dromedaryco =          4,
-		/obj/item/storage/box/fancy/cigarettes/killthroat =           1,
-		/obj/item/storage/box/fancy/cigarettes/luckystars =           3,
-		/obj/item/storage/box/fancy/cigarettes/jerichos =             3,
-		/obj/item/storage/box/fancy/cigarettes/menthols =             2,
-		/obj/item/storage/box/fancy/cigarettes/carcinomas =           3,
-		/obj/item/storage/box/fancy/cigarettes/professionals =        2,
-		/obj/item/storage/box/fancy/cigar =                           1,
-		/obj/item/clothing/mask/smokable/cigarette =              2,
-		/obj/item/clothing/mask/smokable/cigarette/menthol =      2,
-		/obj/item/clothing/mask/smokable/cigarette/cigar =        1,
+		/obj/item/box/fancy/cigarettes                          = 5,
+		/obj/item/box/fancy/cigarettes/dromedaryco              = 4,
+		/obj/item/box/fancy/cigarettes/killthroat               = 1,
+		/obj/item/box/fancy/cigarettes/luckystars               = 3,
+		/obj/item/box/fancy/cigarettes/jerichos                 = 3,
+		/obj/item/box/fancy/cigarettes/menthols                 = 2,
+		/obj/item/box/fancy/cigarettes/carcinomas               = 3,
+		/obj/item/box/fancy/cigarettes/professionals            = 2,
+		/obj/item/box/fancy/cigar                               = 1,
+		/obj/item/clothing/mask/smokable/cigarette              = 2,
+		/obj/item/clothing/mask/smokable/cigarette/menthol      = 2,
+		/obj/item/clothing/mask/smokable/cigarette/cigar        = 1,
 		/obj/item/clothing/mask/smokable/cigarette/cigar/cohiba = 1,
 		/obj/item/clothing/mask/smokable/cigarette/cigar/havana = 1
 	)
@@ -267,32 +284,32 @@
 
 /obj/random/storage/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/secure/briefcase =               2,
-		/obj/item/storage/briefcase =                      4,
-		/obj/item/storage/briefcase/inflatable =           3,
-		/obj/item/storage/backpack =                       5,
-		/obj/item/storage/backpack/satchel =               5,
-		/obj/item/storage/backpack/dufflebag =             2,
-		/obj/item/storage/box =                            5,
-		/obj/item/storage/box/donkpockets =                3,
-		/obj/item/storage/box/sinpockets =                 1,
-		/obj/item/storage/box/fancy/donut =                      2,
-		/obj/item/storage/box/cups =                       3,
-		/obj/item/storage/box/mousetraps =                 4,
-		/obj/item/storage/box/engineer =                   3,
-		/obj/item/storage/box/autoinjectors =              2,
-		/obj/item/storage/box/beakers =                    3,
-		/obj/item/storage/box/syringes =                   3,
-		/obj/item/storage/box/gloves =                     3,
-		/obj/item/storage/box/large =                      2,
-		/obj/item/storage/box/glowsticks =                 3,
-		/obj/item/storage/wallet =                         1,
-		/obj/item/storage/ore =                            2,
-		/obj/item/storage/belt/utility/full =              2,
-		/obj/item/storage/belt/medical/emt =               2,
-		/obj/item/storage/belt/medical =                   2,
-		/obj/item/storage/belt/holster/security =          2,
-		/obj/item/storage/belt/holster/security/tactical = 1
+		/obj/item/secure_storage/briefcase       = 2,
+		/obj/item/briefcase                      = 4,
+		/obj/item/briefcase/inflatable           = 3,
+		/obj/item/backpack                       = 5,
+		/obj/item/backpack/satchel               = 5,
+		/obj/item/backpack/dufflebag             = 2,
+		/obj/item/box                            = 5,
+		/obj/item/box/donkpockets                = 3,
+		/obj/item/box/sinpockets                 = 1,
+		/obj/item/box/fancy/donut                = 2,
+		/obj/item/box/cups                       = 3,
+		/obj/item/box/mousetraps                 = 4,
+		/obj/item/box/engineer                   = 3,
+		/obj/item/box/autoinjectors              = 2,
+		/obj/item/box/beakers                    = 3,
+		/obj/item/box/syringes                   = 3,
+		/obj/item/box/gloves                     = 3,
+		/obj/item/box/large                      = 2,
+		/obj/item/box/glowsticks                 = 3,
+		/obj/item/wallet                         = 1,
+		/obj/item/ore                            = 2,
+		/obj/item/belt/utility/full              = 2,
+		/obj/item/belt/medical/emt               = 2,
+		/obj/item/belt/medical                   = 2,
+		/obj/item/belt/holster/security          = 2,
+		/obj/item/belt/holster/security/tactical = 1
 	)
 	return spawnable_choices
 
@@ -304,11 +321,11 @@
 
 /obj/random/cash/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/cash/c1 =    4,
-		/obj/item/cash/c10 =   3,
-		/obj/item/cash/c20 =   3,
-		/obj/item/cash/c50 =   2,
-		/obj/item/cash/c100 =  2,
+		/obj/item/cash/c1    = 4,
+		/obj/item/cash/c10   = 3,
+		/obj/item/cash/c20   = 3,
+		/obj/item/cash/c50   = 2,
+		/obj/item/cash/c100  = 2,
 		/obj/item/cash/c1000 = 1
 	)
 	return spawnable_choices
@@ -321,47 +338,47 @@
 
 /obj/random/loot/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/random/energy =                                     10,
-		/obj/random/projectile =                                 10,
-		/obj/random/voidhelmet =                                 10,
-		/obj/random/voidsuit =                                   10,
-		/obj/random/hardsuit =                                   10,
-		/obj/item/clothing/mask/muzzle =                          7,
-		/obj/item/clothing/mask/gas/syndicate =                  10,
-		/obj/item/clothing/glasses/night =                        3,
-		/obj/item/clothing/glasses/thermal =                      1,
-		/obj/item/clothing/glasses/welding/superior =             7,
-		/obj/item/clothing/head/collectable/petehat =             4,
-		/obj/item/clothing/suit/armor/pcarrier/merc =             3,
-		/obj/item/clothing/suit/straight_jacket =                 6,
-		/obj/item/clothing/head/helmet/merc =                     3,
-		/obj/item/stack/material/gemstone/mapped/diamond/ten =    7,
-		/obj/item/stack/material/pane/mapped/rborosilicate/ten =  7,
-		/obj/item/stack/material/brick/mapped/marble/ten =        8,
-		/obj/item/stack/material/ingot/mapped/gold/ten =          7,
-		/obj/item/stack/material/ingot/mapped/silver/ten =        7,
-		/obj/item/stack/material/ingot/mapped/osmium/ten =        7,
-		/obj/item/stack/material/ingot/mapped/platinum/ten =      8,
-		/obj/item/stack/material/aerogel/mapped/tritium/ten =     7,
-		/obj/item/stack/material/segment/mapped/mhydrogen/ten =   6,
-		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten = 9,
-		/obj/item/stack/material/ingot/mapped/copper/ten =        8,
-		/obj/item/storage/box/monkeycubes =                       5,
-		/obj/item/storage/firstaid/surgery =                      4,
-		/obj/item/cell/infinite =                                 1,
-		/obj/random/archaeological_find =                         2,
-		/obj/item/multitool/hacktool =                            2,
-		/obj/item/surgicaldrill =                                 7,
-		/obj/item/sutures =                                       7,
-		/obj/item/retractor =                                     7,
-		/obj/item/hemostat =                                      7,
-		/obj/item/cautery =                                       7,
-		/obj/item/bonesetter =                                    7,
-		/obj/item/bonegel =                                       7,
-		/obj/item/circular_saw =                                  7,
-		/obj/item/scalpel =                                       7,
-		/obj/item/baton/loaded =                                  9,
-		/obj/item/radio/headset/hacked =                          6
+		/obj/random/energy                                            = 10,
+		/obj/random/projectile                                        = 10,
+		/obj/random/voidhelmet                                        = 10,
+		/obj/random/voidsuit                                          = 10,
+		/obj/random/hardsuit                                          = 10,
+		/obj/item/clothing/mask/gas/syndicate                         = 10,
+		/obj/item/clothing/mask/muzzle                                =  7,
+		/obj/item/clothing/glasses/night                              =  3,
+		/obj/item/clothing/glasses/thermal                            =  1,
+		/obj/item/clothing/glasses/welding/superior                   =  7,
+		/obj/item/clothing/head/collectable/petehat                   =  4,
+		/obj/item/clothing/suit/armor/pcarrier/merc                   =  3,
+		/obj/item/clothing/suit/straight_jacket                       =  6,
+		/obj/item/clothing/head/helmet/merc                           =  3,
+		/obj/item/stack/material/gemstone/mapped/diamond/ten          =  7,
+		/obj/item/stack/material/pane/mapped/rborosilicate/ten        =  7,
+		/obj/item/stack/material/brick/mapped/marble/ten              =  8,
+		/obj/item/stack/material/ingot/mapped/gold/ten                =  7,
+		/obj/item/stack/material/ingot/mapped/silver/ten              =  7,
+		/obj/item/stack/material/ingot/mapped/osmium/ten              =  7,
+		/obj/item/stack/material/ingot/mapped/platinum/ten            =  8,
+		/obj/item/stack/material/aerogel/mapped/tritium/ten           =  7,
+		/obj/item/stack/material/segment/mapped/mhydrogen/ten         =  6,
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten =  9,
+		/obj/item/stack/material/ingot/mapped/copper/ten              =  8,
+		/obj/item/box/monkeycubes                                     =  5,
+		/obj/item/firstaid/surgery                                    =  4,
+		/obj/item/cell/infinite                                       =  1,
+		/obj/random/archaeological_find                               =  2,
+		/obj/item/multitool/hacktool                                  =  2,
+		/obj/item/surgicaldrill                                       =  7,
+		/obj/item/sutures                                             =  7,
+		/obj/item/retractor                                           =  7,
+		/obj/item/hemostat                                            =  7,
+		/obj/item/cautery                                             =  7,
+		/obj/item/bonesetter                                          =  7,
+		/obj/item/bonegel                                             =  7,
+		/obj/item/circular_saw                                        =  7,
+		/obj/item/scalpel                                             =  7,
+		/obj/item/baton/loaded                                        =  9,
+		/obj/item/radio/headset/hacked                                =  6
 	)
 	return spawnable_choices
 
@@ -485,6 +502,35 @@
 
 /obj/random/single/lighter
 	name = "randomly spawned lighter"
-	icon = 'icons/obj/items/lighters.dmi'
-	icon_state = "lighter"
-	spawn_object = /obj/item/flame/lighter
+	icon = 'icons/obj/items/flame/lighter.dmi'
+	icon_state = ICON_STATE_WORLD
+	spawn_object = /obj/item/flame/fuelled/lighter
+
+/obj/random/jewelry
+	name = "Random Jewelry"
+	desc = "Shiny things."
+	icon = 'icons/obj/items/grooming/comb.dmi'
+	icon_state = ICON_STATE_WORLD
+	color = COLOR_GOLD
+
+/obj/random/jewelry/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/clothing/ears/stud/wood                = 10,
+		/obj/item/clothing/ears/dangle/wood              = 10,
+		/obj/item/clothing/gloves/bracelet               = 10,
+		/obj/item/clothing/neck/necklace                 = 10,
+		/obj/item/clothing/gloves/ring/material/silver   = 5,
+		/obj/item/clothing/gloves/ring/material/bronze   = 5,
+		/obj/item/clothing/gloves/ring/material/gold     = 3,
+		/obj/item/clothing/ears/stud/silver              = 3,
+		/obj/item/clothing/ears/dangle/silver            = 3,
+		/obj/item/clothing/ears/stud/gold                = 3,
+		/obj/item/clothing/ears/dangle/gold              = 3,
+		/obj/item/clothing/gloves/ring/material/platinum = 1,
+		/obj/item/clothing/ears/stud/platinum            = 1,
+		/obj/item/clothing/ears/dangle/platinum          = 1,
+		/obj/item/clothing/ears/stud/diamond             = 1,
+		/obj/item/clothing/ears/dangle/diamond           = 1
+
+	)
+	return spawnable_choices

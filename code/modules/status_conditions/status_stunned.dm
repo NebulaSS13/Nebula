@@ -9,8 +9,8 @@
 /decl/status_condition/stunned/handle_changed_amount(var/mob/living/victim, var/new_amount, var/last_amount)
 	. = ..()
 	victim.facing_dir = null
-	victim.UpdateLyingBuckledAndVerbStatus()
+	victim.update_posture()
 
 /decl/status_condition/stunned/handle_status(mob/living/victim, amount)
 	. = ..()
-	victim.UpdateLyingBuckledAndVerbStatus()
+	victim.update_posture()

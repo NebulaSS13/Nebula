@@ -197,7 +197,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/Process()
-	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
+	if(!parent || !loc) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
 	else if(parent.air?.compare(loc.return_air()))
 		update_sound(0)
@@ -268,8 +268,7 @@
 		integrity_key += "[!!length(nodes_in_dir(direction))]"
 
 	icon_state = "[integrity_key][icon_connect_type]"
-	if(!isnull(pipe_color))
-		color = pipe_color
+	color = get_color()
 
 	try_leak()
 
@@ -391,7 +390,7 @@
 	icon_state = null
 	cut_overlays()
 	var/image/I = image(icon, "core[icon_connect_type]")
-	I.color = pipe_color
+	I.color = get_color()
 	add_overlay(I)
 	add_overlay("clamps[icon_connect_type]")
 
@@ -521,7 +520,7 @@
 	icon_state = null
 	cut_overlays()
 	var/image/I = image(icon, "4way[icon_connect_type]")
-	I.color = pipe_color
+	I.color = get_color()
 	add_overlay(I)
 	add_overlay("clamps_4way[icon_connect_type]")
 
@@ -636,7 +635,7 @@
 
 /obj/machinery/atmospherics/pipe/cap/on_update_icon(var/safety = 0)
 	icon_state = "cap[icon_connect_type]"
-	color = pipe_color
+	color = get_color()
 
 /obj/machinery/atmospherics/pipe/cap/visible
 	level = LEVEL_ABOVE_PLATING

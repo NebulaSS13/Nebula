@@ -6,9 +6,6 @@
 
 /* Current unused keys, please update when you use one.
  * e
- * j
- * l
- * m
  * n
  * r
  * t
@@ -56,7 +53,7 @@
 		return result
 
 /decl/language/proc/can_be_spoken_properly_by(var/mob/speaker)
-	return TRUE
+	return SPEECH_RESULT_GOOD
 
 /decl/language/proc/muddle(var/message)
 	return message
@@ -64,9 +61,9 @@
 /decl/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!length(syllables))
 		if(gender==FEMALE)
-			return capitalize(pick(global.first_names_female)) + " " + capitalize(pick(global.last_names))
+			return capitalize(pick(global.using_map.first_names_female)) + " " + capitalize(pick(global.using_map.last_names))
 		else
-			return capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
+			return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i = 0;i<name_count;i++)
@@ -110,6 +107,11 @@
 	. = capitalize(.)
 	. = trim(.)
 
+/decl/language/proc/get_next_scramble_token()
+	if(length(syllables))
+		return pick(syllables)
+	return "..."
+
 /decl/language/proc/scramble_word(var/input)
 	if(!syllables || !syllables.len)
 		return stars(input)
@@ -126,7 +128,7 @@
 	var/capitalize = 0
 
 	while(length(scrambled_text) < input_size)
-		var/next = pick(syllables)
+		var/next = get_next_scramble_token()
 		if(capitalize)
 			next = capitalize(next)
 			capitalize = 0
@@ -135,7 +137,7 @@
 		if(chance <= 5)
 			scrambled_text += ". "
 			capitalize = 1
-		else if(chance > 5 && chance <= space_chance)
+		else if(chance <= space_chance)
 			scrambled_text += " "
 
 	// Add it to cache, cutting old entries if the list is too long

@@ -144,9 +144,6 @@
 	var/light_color_class
 	var/light_color_status_display
 
-	var/overlay_alarm
-	var/overlay_status_display
-
 	var/up_description
 	var/down_description
 
@@ -222,6 +219,7 @@
 
 	light_color_alarm = COLOR_GREEN
 	light_color_class = "font_green"
+	light_color_status_display = COLOR_GREEN
 
 
 	alarm_appearance = /datum/alarm_appearance/green
@@ -235,6 +233,7 @@
 	light_power = 1
 	light_color_alarm = COLOR_BLUE
 	light_color_class = "font_blue"
+	light_color_status_display = COLOR_BLUE
 
 	alarm_appearance = /datum/alarm_appearance/blue
 
@@ -248,6 +247,7 @@
 	light_power = 2
 	light_color_alarm = COLOR_RED
 	light_color_class = "font_red"
+	light_color_status_display = COLOR_RED
 
 	alarm_appearance = /datum/alarm_appearance/red
 
@@ -261,6 +261,7 @@
 	light_power = 2
 	light_color_alarm = COLOR_RED
 	light_color_class = "font_red"
+	light_color_status_display = COLOR_RED
 
 	alarm_appearance = /datum/alarm_appearance/delta
 

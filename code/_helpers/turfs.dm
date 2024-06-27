@@ -6,12 +6,6 @@
 		mloc = mloc.loc
 	return mloc
 
-/proc/turf_clear(turf/T)
-	for(var/atom/A in T)
-		if(A.simulated)
-			return 0
-	return 1
-
 // Picks a turf without a mob from the given list of turfs, if one exists.
 // If no such turf exists, picks any random turf from the given list of turfs.
 /proc/pick_mobless_turf_if_exists(var/list/start_turfs)
@@ -63,9 +57,6 @@
 /proc/is_station_turf(var/turf/T)
 	return T && isStationLevel(T.z)
 
-/proc/has_air(var/turf/T)
-	return !!T.return_air()
-
 /proc/IsTurfAtmosUnsafe(var/turf/T)
 	if(isspaceturf(T)) // Space tiles
 		return "Spawn location is open to space."
@@ -105,7 +96,7 @@
 	return turf_map
 
 
-/proc/translate_turfs(var/list/translation, var/area/base_area = null, var/turf/base_turf, var/ignore_background)
+/proc/translate_turfs(var/list/translation, var/area/base_area = null, var/turf/base_turf, var/ignore_background, var/translate_air)
 	. = list()
 	for(var/turf/source in translation)
 
@@ -114,21 +105,21 @@
 		if(target)
 			if(base_area)
 				ChangeArea(target, get_area(source))
-				. += transport_turf_contents(source, target, ignore_background)
+				. += transport_turf_contents(source, target, ignore_background, translate_air)
 				ChangeArea(source, base_area)
 			else
-				. += transport_turf_contents(source, target, ignore_background)
+				. += transport_turf_contents(source, target, ignore_background, translate_air)
 	//change the old turfs
 	for(var/turf/source in translation)
 		if(ignore_background && (source.turf_flags & TURF_FLAG_BACKGROUND))
 			continue
 		var/old_turf = source.prev_type || base_turf || get_base_turf_by_area(source)
-		source.ChangeTurf(old_turf, keep_air_below = TRUE)
+		source.ChangeTurf(old_turf, keep_air = !translate_air)
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
 //If ignore_background is set to true, turfs with TURF_FLAG_BACKGROUND set will only translate anchored contents.
 //Returns the new turf, or list(new turf, source) if a background turf was ignored and things may have been left behind.
-/proc/transport_turf_contents(turf/source, turf/target, ignore_background)
+/proc/transport_turf_contents(turf/source, turf/target, ignore_background, translate_air)
 	var/target_type = target.type
 	var/turf/new_turf
 
@@ -137,8 +128,8 @@
 	if(is_background)
 		new_turf = target
 	else
-		new_turf = target.ChangeTurf(source.type, 1, 1)
-		new_turf.transport_properties_from(source)
+		new_turf = target.ChangeTurf(source.type, 1, 1, !translate_air)
+		new_turf.transport_properties_from(source, translate_air)
 		new_turf.prev_type = target_type
 
 	for(var/obj/O in source)

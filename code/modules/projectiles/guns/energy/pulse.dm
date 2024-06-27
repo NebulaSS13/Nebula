@@ -11,7 +11,6 @@
 	max_shots = 21
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty=1 //a bit heavy
-	burst_delay = 1
 	burst_delay = 3
 	burst = 3
 	accuracy = -1

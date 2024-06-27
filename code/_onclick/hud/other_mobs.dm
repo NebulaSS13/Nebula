@@ -1,21 +1,3 @@
-/mob/living/simple_animal/construct
-	hud_type = /datum/hud/construct
-
-/mob/living/simple_animal/construct/armoured
-	hud_type = /datum/hud/construct/juggernaut
-
-/mob/living/simple_animal/construct/behemoth
-	hud_type = /datum/hud/construct/juggernaut
-
-/mob/living/simple_animal/construct/builder
-	hud_type = /datum/hud/construct/artificer
-
-/mob/living/simple_animal/construct/wraith
-	hud_type = /datum/hud/construct/wraith
-
-/mob/living/simple_animal/construct/harvester
-	hud_type = /datum/hud/construct/harvester
-
 /datum/hud/construct/get_ui_style_data()
 	return GET_DECL(/decl/ui_style/construct)
 

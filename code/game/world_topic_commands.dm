@@ -85,7 +85,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 	s["enter"] =   get_config_value(/decl/config/toggle/on/enter_allowed)
 	s["vote"] =    get_config_value(/decl/config/toggle/vote_mode)
 	s["ai"] =      !!length(empty_playable_ai_cores)
-	s["host"] =    host || null
+	s["host"] =    get_config_value(/decl/config/text/hosted_by)
 
 	// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 	s["players"] = 0
@@ -275,15 +275,15 @@ var/global/list/decl/topic_command/topic_commands = list()
 		if(isliving(M))
 			var/mob/living/L = M
 			info["damage"] = list2params(list(
-				oxy = L.getOxyLoss(),
-				tox = L.getToxLoss(),
-				fire = L.getFireLoss(),
-				brute = L.getBruteLoss(),
-				clone = L.getCloneLoss(),
-				brain = L.getBrainLoss()
+				oxy   = L.get_damage(OXY),
+				tox   = L.get_damage(TOX),
+				fire  = L.get_damage(BURN),
+				brute = L.get_damage(BRUTE),
+				clone = L.get_damage(CLONE),
+				brain = L.get_damage(BRAIN)
 			))
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				info["species"] = H.species.name
 			else
 				info["species"] = "non-human"
@@ -319,8 +319,8 @@ var/global/list/decl/topic_command/topic_commands = list()
 	if(rank == "Unknown")
 		rank = "Staff"
 
-	var/message =	SPAN_RED("[rank] PM from <b><a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a></b>: [params["msg"]]")
-	var/amessage =  SPAN_BLUE("[rank] PM from <a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a> to <b>[key_name(C)]</b> : [params["msg"]]")
+	var/message =	SPAN_RED("[rank] PM from <b><a href='byond://?irc_msg=[params["sender"]]'>[params["sender"]]</a></b>: [params["msg"]]")
+	var/amessage =  SPAN_BLUE("[rank] PM from <a href='byond://?irc_msg=[params["sender"]]'>[params["sender"]]</a> to <b>[key_name(C)]</b> : [params["msg"]]")
 
 	C.received_irc_pm = world.time
 	C.irc_admin = params["sender"]

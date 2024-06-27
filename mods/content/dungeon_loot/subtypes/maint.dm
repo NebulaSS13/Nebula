@@ -32,20 +32,20 @@
 		/obj/item/clothing/mask/breath,
 		/obj/item/chems/glass/rag,
 		/obj/item/chems/food/liquidfood,
-		/obj/item/storage/secure/briefcase,
-		/obj/item/storage/briefcase,
-		/obj/item/storage/backpack,
-		/obj/item/storage/backpack/satchel,
-		/obj/item/storage/backpack/dufflebag,
-		/obj/item/storage/box,
-		/obj/item/storage/wallet,
+		/obj/item/secure_storage/briefcase,
+		/obj/item/briefcase,
+		/obj/item/backpack,
+		/obj/item/backpack/satchel,
+		/obj/item/backpack/dufflebag,
+		/obj/item/box,
+		/obj/item/wallet,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/shoes/dress,
 		/obj/item/clothing/shoes/dress/white,
 		/obj/item/clothing/gloves/thick/botany,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/clothing/gloves/color/white,
+		/obj/item/clothing/gloves,
 		/obj/item/clothing/gloves/rainbow,
 		/obj/item/clothing/gloves/insulated/cheap,
 		/obj/item/clothing/glasses/sunglasses,
@@ -57,19 +57,19 @@
 		/obj/item/clothing/head/hardhat/red,
 		/obj/item/clothing/head/ushanka,
 		/obj/item/clothing/head/welding,
-		/obj/item/clothing/suit/storage/hazardvest,
+		/obj/item/clothing/suit/hazardvest,
 		/obj/item/clothing/suit/space/emergency,
-		/obj/item/clothing/suit/storage/toggle/bomber,
+		/obj/item/clothing/suit/jacket/bomber,
 		/obj/item/clothing/suit/bio_suit/general,
-		/obj/item/clothing/suit/storage/toggle/hoodie/black,
-		/obj/item/clothing/suit/storage/toggle/brown_jacket,
-		/obj/item/clothing/suit/storage/leather_jacket,
+		/obj/item/clothing/suit/jacket/hoodie/black,
+		/obj/item/clothing/suit/jacket/brown,
+		/obj/item/clothing/suit/jacket/leather,
 		/obj/item/clothing/suit/apron,
-		/obj/item/clothing/under/color/grey,
-		/obj/item/clothing/under/syndicate/tacticool,
+		/obj/item/clothing/jumpsuit/grey,
+		/obj/item/clothing/shirt/syndicate/tacticool,
 		/obj/item/clothing/pants/casual/camo,
-		/obj/item/clothing/under/harness,
-		/obj/item/clothing/accessory/storage,
+		/obj/item/clothing/shirt/harness,
+		/obj/item/clothing/webbing,
 		/obj/item/cash/c1,
 		/obj/item/cash/c10,
 		/obj/item/cash/c20,
@@ -89,9 +89,9 @@
 	var/static/list/uncommon_loot = list(
 		/obj/item/clothing/shoes/syndigaloshes,
 		/obj/item/clothing/gloves/insulated,
-		/obj/item/clothing/under/tactical,
+		/obj/item/clothing/jumpsuit/tactical,
 		/obj/item/beartrap,
-		/obj/item/clothing/accessory/badge/press,
+		/obj/item/clothing/badge/press,
 		/obj/item/knife/combat,
 		/obj/item/knife/folding/combat/switchblade,
 	)
@@ -117,7 +117,7 @@
 
 /obj/structure/loot_pile/maint/trash/get_common_loot()
 	var/static/list/common_loot = list(
-		/obj/item/trash/candle,
+		/obj/item/flame/candle/spent,
 		/obj/item/trash/candy,
 		/obj/item/trash/candy/proteinbar,
 		/obj/item/trash/cigbutt/spitgum,
@@ -161,9 +161,9 @@
 		/obj/item/plate,
 		/obj/item/plate/tray,
 		/obj/item/chems/syringe/steroid,
-		/obj/item/storage/pill_bottle/zoom,
-		/obj/item/storage/pill_bottle/happy,
-		/obj/item/storage/pill_bottle/painkillers
+		/obj/item/pill_bottle/zoom,
+		/obj/item/pill_bottle/happy,
+		/obj/item/pill_bottle/painkillers
 	)
 	return uncommon_loot
 
@@ -179,47 +179,47 @@
 
 /obj/structure/loot_pile/maint/boxfort/get_common_loot()
 	var/static/list/common_loot = list(
-		/obj/item/storage/box,
-		/obj/item/storage/box/beakers,
-		/obj/item/storage/box/botanydisk,
-		/obj/item/storage/box/cups,
-		/obj/item/storage/box/botanydisk,
-		/obj/item/storage/box/donkpockets,
-		/obj/item/storage/box/fancy/donut,
-		/obj/item/storage/box/fancy/donut/empty,
-		/obj/item/storage/box/evidence,
-		/obj/item/storage/box/lights/mixed,
-		/obj/item/storage/box/lights/tubes,
-		/obj/item/storage/box/lights/bulbs,
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/masks,
-		/obj/item/storage/box/ids,
-		/obj/item/storage/box/mousetraps,
-		/obj/item/storage/box/syringes,
-		/obj/item/storage/box/survival,
-		/obj/item/storage/box/gloves,
-		/obj/item/storage/box/PDAs,
+		/obj/item/box,
+		/obj/item/box/beakers,
+		/obj/item/box/botanydisk,
+		/obj/item/box/cups,
+		/obj/item/box/botanydisk,
+		/obj/item/box/donkpockets,
+		/obj/item/box/fancy/donut,
+		/obj/item/box/fancy/donut/empty,
+		/obj/item/box/evidence,
+		/obj/item/box/lights/mixed,
+		/obj/item/box/lights/tubes,
+		/obj/item/box/lights/bulbs,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/masks,
+		/obj/item/box/ids,
+		/obj/item/box/mousetraps,
+		/obj/item/box/syringes,
+		/obj/item/box/survival,
+		/obj/item/box/gloves,
+		/obj/item/box/PDAs,
 	)
 	return common_loot
 
 /obj/structure/loot_pile/maint/boxfort/get_uncommon_loot()
 	var/static/list/uncommon_loot = list(
-		/obj/item/storage/box/sinpockets,
-		/obj/item/storage/box/ammo/practiceshells,
-		/obj/item/storage/box/ammo/blanks,
-		/obj/item/storage/box/smokes,
-		/obj/item/storage/box/metalfoam,
-		/obj/item/storage/box/handcuffs
+		/obj/item/box/sinpockets,
+		/obj/item/box/ammo/practiceshells,
+		/obj/item/box/ammo/blanks,
+		/obj/item/box/smokes,
+		/obj/item/box/metalfoam,
+		/obj/item/box/handcuffs
 	)
 	return uncommon_loot
 
 /obj/structure/loot_pile/maint/boxfort/get_rare_loot()
 	var/static/list/rare_loot = list(
-		/obj/item/storage/box/flashbangs,
-		/obj/item/storage/box/empslite,
-		/obj/item/storage/box/ammo/flashshells,
-		/obj/item/storage/box/ammo/stunshells,
-		/obj/item/storage/box/teargas,
+		/obj/item/box/flashbangs,
+		/obj/item/box/empslite,
+		/obj/item/box/ammo/flashshells,
+		/obj/item/box/ammo/stunshells,
+		/obj/item/box/teargas,
 	)
 	return rare_loot
 
@@ -275,6 +275,7 @@
 		/obj/item/stock_parts/circuitboard/broken,
 		/obj/item/stock_parts/circuitboard/arcade,
 		/obj/item/stock_parts/circuitboard/autolathe,
+		/obj/item/stock_parts/circuitboard/recycler,
 		/obj/item/stock_parts/circuitboard/atmos_alert,
 		/obj/item/stock_parts/circuitboard/air_alarm,
 		/obj/item/stock_parts/circuitboard/fax_machine,

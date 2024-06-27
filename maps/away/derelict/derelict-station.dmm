@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/simulated/wall/raidershuttle,
+/turf/wall/raidershuttle,
 /area/derelict/ship)
 "ac" = (
 /obj/structure/window/reinforced{
@@ -13,7 +13,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ad" = (
 /obj/structure/window/reinforced{
@@ -26,7 +26,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ae" = (
 /obj/structure/window/reinforced{
@@ -42,7 +42,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "af" = (
 /obj/structure/window/reinforced{
@@ -52,30 +52,30 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ag" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "ah" = (
 /obj/machinery/sleeper/standard,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "ai" = (
 /obj/item/cell,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aj" = (
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ak" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "al" = (
 /obj/structure/shuttle/engine/propulsion{
@@ -86,23 +86,23 @@
 /area/derelict/ship)
 "am" = (
 /obj/machinery/computer/modular/preset/medical,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "an" = (
 /obj/random/maintenance,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "ao" = (
 /obj/structure/table,
 /obj/random/firstaid,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "ap" = (
 /obj/machinery/door/airlock/glass,
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aq" = (
 /obj/structure/shuttle/engine/heater{
@@ -111,7 +111,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/derelict/ship)
 "ar" = (
 /obj/structure/shuttle/engine/propulsion{
@@ -121,15 +121,15 @@
 /area/derelict/ship)
 "as" = (
 /obj/item/scalpel,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "at" = (
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "au" = (
 /obj/machinery/constructable_frame/computerframe,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "av" = (
 /obj/structure/grille,
@@ -140,7 +140,7 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aw" = (
 /obj/structure/grille,
@@ -148,7 +148,7 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ax" = (
 /obj/structure/grille,
@@ -159,13 +159,13 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ay" = (
 /obj/machinery/door/airlock/glass{
 	name = "Hibernation Pods"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "az" = (
 /obj/machinery/light{
@@ -174,52 +174,52 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aA" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aB" = (
 /obj/structure/table,
 /obj/item/cell,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aC" = (
 /obj/item/multitool,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aD" = (
 /obj/item/cell{
 	charge = 100;
 	maxcharge = 15000
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aE" = (
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aF" = (
 /obj/machinery/door/airlock/glass,
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aG" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aH" = (
 /obj/machinery/fabricator/pipe,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aI" = (
 /obj/structure/shuttle/engine/propulsion{
@@ -232,18 +232,18 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aK" = (
 /obj/structure/table,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aL" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aM" = (
 /obj/structure/grille,
@@ -256,31 +256,32 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aN" = (
 /obj/structure/table,
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aO" = (
 /obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aP" = (
 /obj/machinery/light_switch{
-	pixel_x = 27
+	pixel_x = 27;
+	dir = 8
 	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aQ" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aR" = (
 /obj/structure/lattice,
@@ -294,7 +295,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "aT" = (
 /obj/structure/bed,
@@ -302,7 +303,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aU" = (
 /obj/machinery/light{
@@ -311,26 +312,26 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aV" = (
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aW" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/maintenance)
 "aX" = (
 /obj/structure/table,
 /obj/random/handgun,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aY" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "aZ" = (
 /obj/structure/grille,
@@ -344,24 +345,25 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ba" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bb" = (
 /obj/structure/table,
 /obj/item/tank/oxygen,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bc" = (
 /obj/machinery/light_switch{
-	pixel_x = 27
+	pixel_x = 27;
+	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bd" = (
 /obj/structure/grille,
@@ -375,71 +377,71 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "be" = (
 /obj/random/loot,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bf" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bg" = (
 /obj/random/closet,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bh" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bi" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bj" = (
 /obj/structure/table,
 /obj/item/scanner/gas,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bk" = (
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bl" = (
 /obj/machinery/door/airlock/glass,
-/turf/simulated/floor/shuttle/white,
+/turf/floor/shuttle/white,
 /area/derelict/ship)
 "bm" = (
 /obj/machinery/door/airlock/glass{
 	name = "Living Module"
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/floor/shuttle/white,
 /area/derelict/ship)
 "bn" = (
 /obj/random/hostile,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bo" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bp" = (
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bq" = (
 /obj/random/cash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "br" = (
 /obj/structure/table,
 /obj/random/loot,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bs" = (
 /obj/structure/bed,
@@ -447,71 +449,71 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bt" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bu" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bv" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/bridge)
 "bw" = (
 /obj/structure/grille,
 /obj/machinery/door/blast/regular/open,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bx" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "by" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "bz" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bA" = (
 /obj/random/material,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bB" = (
 /obj/structure/table,
 /obj/item/modular_computer/laptop,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "bC" = (
 /obj/structure/table,
 /obj/random/drinkbottle,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bD" = (
 /obj/structure/table,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bE" = (
 /obj/structure/table,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bF" = (
 /turf/space,
 /area/constructionsite/maintenance)
 "bG" = (
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bH" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/maintenance)
@@ -524,35 +526,36 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "bJ" = (
 /obj/machinery/light_switch{
-	pixel_x = 27
+	pixel_x = 27;
+	dir = 8
 	},
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bK" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "bL" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bM" = (
 /obj/random/trash,
 /obj/structure/table,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "bN" = (
 /obj/random/closet,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "bO" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bP" = (
 /obj/structure/table,
@@ -560,15 +563,15 @@
 	info = "\\\[center]\\\[b]ATTN: Regarding Meteor Storms\\\[/b]\[/center]\\\[br]\\\[br]We've recently heard mutterings from the Atmospheric Technicians that the meteor showers in this sector are becoming too much. However, this should be disregarded.\\\[br]\\\[br] High Command has assured us that our shields can easily keep pace with any meteor storm and then some. Any uneasiness the crew may feel should be disspelled swiftly. Thank you.";
 	name = "ATTN: Regarding Meteor Storms"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bQ" = (
 /obj/structure/table,
 /obj/random/material,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "bR" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/bridge)
@@ -576,11 +579,11 @@
 /obj/random/hostile{
 	spawn_nothing_percentage = 60
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "bT" = (
 /obj/structure/bed/chair,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bU" = (
 /obj/structure/rack,
@@ -589,20 +592,20 @@
 /obj/item/tank/emergency/oxygen,
 /obj/item/tank/emergency/oxygen,
 /obj/random/tank,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bV" = (
 /obj/structure/rack,
 /obj/item/clothing/mask/breath,
 /obj/item/cell,
 /obj/random/hardsuit,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bW" = (
 /obj/structure/rack,
-/obj/item/storage/toolbox/syndicate,
+/obj/item/toolbox/syndicate,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "bX" = (
 /obj/structure/cable{
@@ -613,20 +616,20 @@
 	name = "west bump";
 	pixel_x = -24
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "bY" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "bZ" = (
 /obj/item/cell{
 	charge = 100;
 	maxcharge = 15000
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ca" = (
 /obj/structure/cable/yellow{
@@ -635,7 +638,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cb" = (
 /obj/structure/cable/yellow{
@@ -644,210 +647,210 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cc" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar_control,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cd" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "ce" = (
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "cf" = (
 /obj/random/handgun,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "cg" = (
 /obj/item/stack/cable_coil,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ch" = (
 /obj/structure/cable/yellow,
 /obj/machinery/power/terminal,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "ci" = (
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/door/blast/regular/open,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "cj" = (
 /obj/random/hostile{
 	spawn_nothing_percentage = 60
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "ck" = (
 /obj/random/junk,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "cl" = (
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/door/blast/regular,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "cm" = (
 /obj/random/closet,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/material,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "cn" = (
-/turf/simulated/wall/raidershuttle,
+/turf/wall/raidershuttle,
 /area/space)
 "co" = (
 /obj/machinery/door/airlock/glass{
 	name = "Pod Bay"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "cp" = (
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cq" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cr" = (
 /obj/machinery/power/smes/batteryrack,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cs" = (
 /obj/machinery/computer/modular,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "ct" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "cu" = (
 /obj/random/closet,
 /obj/random/energy,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "cv" = (
 /obj/structure/bookcase/manuals/engineering,
 /obj/effect/decal/cleanable/cobweb,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cw" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cx" = (
 /obj/structure/bookcase,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "cy" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "cz" = (
 /obj/structure/bookcase/manuals/xenoarchaeology,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cA" = (
 /obj/structure/bookcase,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cB" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "cC" = (
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "cD" = (
 /obj/structure/table/marble,
 /obj/random/coin,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cE" = (
 /obj/structure/table/marble,
 /obj/machinery/microwave,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cF" = (
 /obj/structure/table/marble,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cG" = (
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/hallway/fore)
 "cI" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/hallway/fore)
 "cJ" = (
 /obj/structure/table,
 /obj/item/screwdriver,
 /obj/machinery/light,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "cK" = (
 /obj/structure/table,
 /obj/item/radio/off,
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/derelict/ship)
 "cL" = (
 /obj/machinery/fabricator,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cM" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/excavation,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cN" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "cO" = (
 /obj/structure/bookcase/manuals/xenoarchaeology,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "cP" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cQ" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/ripley_build_and_repair,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cR" = (
 /obj/structure/noticeboard{
 	default_pixel_x = 32
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/bridge)
 "cS" = (
 /obj/effect/decal/cleanable/cobweb,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cT" = (
 /obj/structure/window/reinforced,
@@ -855,7 +858,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cU" = (
 /obj/structure/window/reinforced,
@@ -866,7 +869,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cV" = (
 /obj/structure/window/reinforced,
@@ -878,7 +881,7 @@
 	},
 /obj/structure/cable/yellow,
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cW" = (
 /obj/structure/window/reinforced,
@@ -886,22 +889,22 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/derelict/ship)
 "cX" = (
 /obj/machinery/fabricator/book,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "cY" = (
 /obj/structure/filing_cabinet/tall,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "cZ" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "Bridge"
 	},
 /obj/machinery/door/blast/regular,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "da" = (
 /obj/structure/closet/secure_closet/freezer/fridge{
@@ -909,209 +912,209 @@
 	locked = 0
 	},
 /obj/random/contraband,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "db" = (
 /obj/structure/table/marble,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dc" = (
 /obj/structure/table/marble,
 /obj/item/kitchen/rollingpin,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "de" = (
 /obj/random/closet,
 /obj/random/voidhelmet,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "df" = (
 /obj/structure/rack,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dg" = (
 /obj/structure/bookcase/manuals/medical,
 /obj/item/book/manual/nuclear,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "dh" = (
 /obj/random/trash,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "di" = (
 /obj/structure/rack,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dj" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dk" = (
 /obj/structure/table/marble,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dl" = (
 /obj/structure/table/marble,
 /obj/random/gloves,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dm" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dn" = (
 /obj/structure/table/marble,
 /obj/random/drinkbottle,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "do" = (
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dp" = (
 /obj/structure/rack,
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dq" = (
 /obj/structure/rack,
 /obj/random/hat,
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dr" = (
 /obj/random/junk,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/hallway/fore)
 "ds" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dt" = (
 /obj/structure/table,
 /obj/random/toy,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "du" = (
 /obj/structure/table,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dv" = (
 /obj/structure/grille,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dw" = (
-/turf/simulated/floor/holofloor/tiled/dark,
+/turf/floor/holofloor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "dx" = (
 /obj/random/junk,
 /obj/structure/table,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dy" = (
 /obj/random/snack,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dz" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/fore)
 "dA" = (
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dB" = (
 /obj/machinery/door/airlock/glass{
 	name = "Library"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dC" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "dD" = (
 /obj/structure/grille/broken,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "dE" = (
 /obj/structure/grille,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "dF" = (
 /obj/structure/sign/warning/secure_area,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/fore)
 "dG" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "Bridge"
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dH" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "Bridge"
 	},
-/turf/simulated/floor/holofloor/tiled/dark,
+/turf/floor/holofloor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "dI" = (
 /obj/machinery/door/airlock/glass{
 	name = "Kitchen"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dJ" = (
 /obj/structure/table/marble,
 /obj/machinery/door/blast/shutters,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "dK" = (
 /obj/structure/table/marble,
 /obj/machinery/door/blast/shutters/open,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dL" = (
 /obj/structure/table,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "dM" = (
 /obj/structure/table,
 /obj/machinery/door/blast/shutters/open,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dN" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dO" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/space)
 "dP" = (
 /obj/structure/grille/broken,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dQ" = (
 /obj/random/smokes,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dR" = (
 /obj/structure/lattice,
@@ -1119,16 +1122,16 @@
 /area/constructionsite/hallway/fore)
 "dS" = (
 /obj/random/snack,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dT" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dU" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dV" = (
 /obj/structure/lattice,
@@ -1138,59 +1141,60 @@
 "dW" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "dX" = (
 /obj/effect/shuttle_landmark/derelict/nav2,
 /turf/space,
 /area/space)
 "dY" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/storage)
 "dZ" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "ea" = (
 /obj/structure/extinguisher_cabinet{
 	icon_state = "extinguisher_empty";
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "eb" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/teleporter)
 "ec" = (
 /obj/machinery/mech_recharger,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "ed" = (
 /obj/machinery/fabricator/industrial,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "ee" = (
 /obj/structure/table,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "ef" = (
 /obj/structure/table,
 /obj/random/material,
 /obj/random/material,
 /obj/random/coin,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eg" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/storage)
 "ei" = (
 /obj/structure/table,
 /obj/random/medical,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "ej" = (
 /obj/machinery/shieldgen,
@@ -1201,7 +1205,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ek" = (
 /obj/machinery/shieldgen,
@@ -1212,7 +1216,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "el" = (
 /obj/machinery/portable_atmospherics/canister/air,
@@ -1223,7 +1227,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "em" = (
 /obj/machinery/portable_atmospherics/canister/air,
@@ -1234,7 +1238,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "en" = (
 /obj/structure/table/reinforced,
@@ -1249,23 +1253,23 @@
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ep" = (
 /obj/structure/table/reinforced,
 /obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "er" = (
 /obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/toolbox,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "es" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/storage)
@@ -1273,18 +1277,18 @@
 /obj/structure/bed/chair/office/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/storage)
 "eu" = (
 /obj/machinery/optable{
 	name = "Robotics Operating Table"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "ev" = (
 /obj/random/closet,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "ew" = (
 /obj/machinery/shieldgen,
@@ -1292,7 +1296,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ex" = (
 /obj/machinery/shieldgen,
@@ -1300,7 +1304,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ey" = (
 /obj/machinery/portable_atmospherics/canister/air,
@@ -1308,7 +1312,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ez" = (
 /obj/machinery/portable_atmospherics/canister/air,
@@ -1316,10 +1320,10 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eA" = (
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eB" = (
 /obj/structure/table/reinforced,
@@ -1332,7 +1336,7 @@
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eC" = (
 /obj/structure/table/reinforced,
@@ -1340,36 +1344,37 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eD" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eE" = (
 /obj/machinery/door/airlock/glass/science{
 	name = "Robotics"
 	},
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/storage)
 "eF" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eG" = (
 /obj/structure/sign/department/science_1,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/fore)
 "eH" = (
 /obj/machinery/button/access/exterior{
 	id_tag = "constructionsite_airlock";
 	pixel_x = 20;
-	req_access = newlist()
+	req_access = newlist();
+	dir = 8
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "eI" = (
 /obj/structure/sign/warning/vacuum{
@@ -1378,16 +1383,17 @@
 /obj/machinery/button/access/interior{
 	id_tag = "constructionsite_airlock";
 	pixel_x = -20;
-	req_access = newlist()
+	req_access = newlist();
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eJ" = (
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "eK" = (
 /obj/structure/cable/blue{
@@ -1395,36 +1401,36 @@
 	},
 /obj/machinery/port_gen/pacman,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eL" = (
 /obj/structure/skele_stand,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eM" = (
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eN" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eO" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/storage)
 "eP" = (
 /obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
 /obj/machinery/door/blast/shutters,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eQ" = (
 /obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
 /obj/machinery/door/blast/shutters,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "eR" = (
 /obj/machinery/door/airlock/external{
@@ -1432,7 +1438,7 @@
 	id_tag = "constructionsite_outer";
 	locked = 1
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/constructionsite/teleporter)
 "eS" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -1442,7 +1448,7 @@
 	dir = 9;
 	icon_state = "warning"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/constructionsite/teleporter)
 "eU" = (
 /obj/machinery/door/airlock/external{
@@ -1450,36 +1456,36 @@
 	id_tag = "constructionsite_inner";
 	locked = 1
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/constructionsite/teleporter)
 "eV" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "eW" = (
 /obj/structure/cable/blue,
 /obj/machinery/port_gen/pacman,
 /obj/machinery/power/terminal,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eX" = (
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eY" = (
 /obj/random/hostile,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "eZ" = (
 /obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
 /obj/machinery/door/blast/shutters/open,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "fa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
@@ -1493,25 +1499,27 @@
 	tag_airpump = "constructionsite_vent";
 	tag_chamber_sensor = "constructionsite_sensor";
 	tag_exterior_door = "constructionsite_outer";
-	tag_interior_door = "constructionsite_inner"
+	tag_interior_door = "constructionsite_inner";
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/constructionsite/teleporter)
 "fb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /obj/machinery/airlock_sensor{
 	id_tag = "constructionsite_sensor";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/constructionsite/teleporter)
 "fc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
@@ -1522,7 +1530,7 @@
 	id_tag = "constructionsite_inner";
 	locked = 1
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/constructionsite/teleporter)
 "fd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
@@ -1532,25 +1540,25 @@
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "fe" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "ff" = (
 /obj/structure/cable/blue{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "fg" = (
 /obj/structure/cable/blue{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "fh" = (
 /obj/machinery/power/smes/batteryrack,
@@ -1558,7 +1566,7 @@
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fi" = (
 /obj/effect/shuttle_landmark/derelict/nav1,
@@ -1567,12 +1575,12 @@
 "fj" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "fk" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/storage)
@@ -1580,13 +1588,13 @@
 /obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/storage)
 "fm" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/storage)
 "fn" = (
 /obj/structure/window/basic{
@@ -1600,31 +1608,31 @@
 	dir = 4;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fo" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "fp" = (
 /obj/structure/cable/blue{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "fq" = (
 /obj/structure/cable/blue{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/turf/floor/tiled,
 /area/constructionsite/teleporter)
 "fr" = (
 /obj/structure/cable/blue{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fs" = (
 /obj/structure/cable/blue{
@@ -1635,11 +1643,11 @@
 	},
 /obj/machinery/fabricator,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ft" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "fu" = (
 /obj/structure/window/basic,
@@ -1647,13 +1655,13 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fw" = (
 /obj/structure/cable/blue,
@@ -1665,53 +1673,53 @@
 	name = "south bump";
 	pixel_y = -24
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fx" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen/prechilled,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "fy" = (
 /obj/machinery/fabricator/imprinter,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/storage)
 "fz" = (
 /obj/machinery/destructive_analyzer,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "fA" = (
 /obj/machinery/fabricator/protolathe{
 	stat = 1
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "fB" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/storage)
 "fC" = (
 /obj/machinery/fabricator/pipe,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fD" = (
 /obj/machinery/fabricator/pipe/disposal,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fE" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fF" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fG" = (
 /obj/machinery/light,
 /obj/structure/closet/crate/solar,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/loot,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fH" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1719,7 +1727,7 @@
 	icon_state = "warning"
 	},
 /obj/machinery/constructable_frame/computerframe,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fI" = (
 /obj/machinery/teleport/station,
@@ -1727,7 +1735,7 @@
 	dir = 1;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fJ" = (
 /obj/machinery/teleport/hub,
@@ -1735,78 +1743,78 @@
 	dir = 1;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fK" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "fL" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/solar)
 "fM" = (
 /obj/random/closet,
 /obj/random/material,
 /obj/random/contraband,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "fN" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/solar)
 "fO" = (
 /obj/structure/lattice,
 /turf/space,
 /area/constructionsite/solar)
 "fP" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/solar)
 "fQ" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/maintenance)
 "fR" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = 30
+	pixel_y = 29
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "fS" = (
 /obj/random/junk,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "fT" = (
 /obj/effect/overmap/visitable/sector/derelict,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/solar)
 "fU" = (
 /turf/space,
 /area/constructionsite/solar)
 "fV" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/solar)
 "fW" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/solar)
 "fX" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "fY" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/solar)
 "fZ" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/solar)
 "ga" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "gb" = (
 /obj/effect/shuttle_landmark/derelict/nav3,
@@ -1814,7 +1822,7 @@
 /area/space)
 "gc" = (
 /obj/random/firstaid,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "gd" = (
 /obj/structure/lattice,
@@ -1825,82 +1833,78 @@
 /obj/structure/rack,
 /obj/random/plushie,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "gf" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "AI Upload Access"
 	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/hallway/fore)
 "gg" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/ai)
 "gh" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gi" = (
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "gj" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "gk" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/space)
 "gl" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "gm" = (
 /obj/structure/sign/warning/lethal_turrets,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/ai)
 "gn" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "AI Upload"
 	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "go" = (
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
-"gp" = (
-/obj/machinery/porta_turret_construct,
-/turf/simulated/floor/tiled/dark/airless,
-/area/constructionsite/ai)
 "gq" = (
 /obj/effect/decal/cleanable/blood/oil,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gr" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/space)
 "gs" = (
 /obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "gt" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "gu" = (
 /obj/random/loot,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gv" = (
 /obj/random/trash,
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "gw" = (
 /obj/machinery/drone_fabricator/derelict,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gx" = (
 /obj/structure/cable/blue{
@@ -1911,15 +1915,15 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gy" = (
 /obj/machinery/computer/drone_control,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gz" = (
 /obj/random/hostile,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "gA" = (
 /obj/structure/lattice,
@@ -1929,13 +1933,13 @@
 /obj/machinery/door/airlock/highsecurity{
 	name = "Messaging Server"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "gC" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "Messaging Server"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/ai)
 "gD" = (
 /obj/structure/showcase{
@@ -1944,75 +1948,76 @@
 	icon_state = "4";
 	name = "Deactivated AI Core"
 	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "gE" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "Cyborg Station"
 	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "gF" = (
 /obj/structure/cable/blue{
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "gG" = (
 /obj/effect/decal/cleanable/blood/oil,
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "gH" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "Cyborg Station"
 	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/hallway/fore)
 "gI" = (
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "gJ" = (
 /obj/random/material,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/space)
 "gK" = (
 /obj/machinery/recharge_station,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gL" = (
 /obj/structure/lattice,
 /obj/structure/extinguisher_cabinet{
 	icon_state = "extinguisher_empty";
-	pixel_x = -30
+	pixel_x = -29;
+	dir = 4
 	},
 /turf/space,
 /area/constructionsite/hallway/fore)
 "gM" = (
 /obj/machinery/porta_turret/stationary,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gN" = (
 /obj/random/junk,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gO" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/aft)
 "gP" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/aft)
 "gQ" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "gR" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/aft)
 "gS" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "gT" = (
 /obj/structure/lattice,
@@ -2020,42 +2025,42 @@
 /area/constructionsite/hallway/aft)
 "gU" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "gV" = (
 /obj/structure/grille,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "gW" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "gX" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "gY" = (
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "gZ" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "AI Upload Access"
 	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/floor/bluegrid/airless,
 /area/constructionsite/hallway/aft)
 "ha" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "hb" = (
 /obj/effect/floor_decal/plaque{
 	desc = "To commemorate the beginning of the Eternity Project, a station that will ferry us through the stars forever without fail.";
 	name = "Eternity Project Dedication Plaque"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "hc" = (
 /obj/structure/lattice,
@@ -2068,11 +2073,11 @@
 	opened = 1
 	},
 /obj/random/plushie/large,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/maintenance)
 "he" = (
 /obj/random/trash,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/aft)
@@ -2080,18 +2085,18 @@
 /obj/machinery/door/airlock/double/glass{
 	name = "Emergency Entrance"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "hg" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/aft)
 "hh" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/aft)
@@ -2101,14 +2106,14 @@
 /area/space)
 "hj" = (
 /obj/structure/door_assembly,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "hk" = (
 /obj/machinery/mech_recharger,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hl" = (
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hm" = (
 /obj/structure/table,
@@ -2117,51 +2122,51 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hn" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/medical)
 "ho" = (
 /obj/machinery/sleeper/standard,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hp" = (
 /obj/structure/iv_drip,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hq" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hr" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "hs" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/atmospherics)
 "ht" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/atmospherics)
 "hu" = (
 /obj/item/frame/light,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hv" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hx" = (
 /obj/random/junk,
 /obj/effect/floor_decal/corner/green{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hy" = (
 /obj/effect/floor_decal/corner/green,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hz" = (
 /obj/item/chems/ivbag,
@@ -2170,76 +2175,76 @@
 /obj/structure/closet/medical_wall{
 	name = "Blood Closet"
 	},
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/aft)
 "hA" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "hC" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hD" = (
 /obj/machinery/door/airlock/glass/medical{
 	name = "Medbay"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hE" = (
 /obj/structure/door_assembly{
 	name = "Medbay"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hF" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "hG" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "hH" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hI" = (
 /obj/structure/table,
 /obj/random/firstaid,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hJ" = (
 /obj/structure/sign/department/examroom,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/medical)
 "hK" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hL" = (
 /obj/machinery/disposal,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hM" = (
 /obj/structure/table,
 /obj/random/medical,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hN" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hO" = (
 /obj/structure/fireaxecabinet{
 	pixel_x = 32
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "hP" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/atmospherics)
 "hQ" = (
 /obj/structure/girder,
@@ -2248,25 +2253,26 @@
 "hR" = (
 /obj/item/roller,
 /obj/item/roller,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hS" = (
 /obj/structure/closet/medical_wall/filled{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hT" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "hU" = (
 /obj/structure/closet/firecloset,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "hV" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/atmospherics)
 "hW" = (
 /obj/structure/lattice,
@@ -2274,26 +2280,26 @@
 /area/constructionsite/medical)
 "hX" = (
 /obj/random/medical/lite,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hY" = (
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "hZ" = (
 /obj/item/roller,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "ia" = (
 /obj/random/closet,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "ib" = (
 /turf/space,
 /area/constructionsite/medical)
 "ic" = (
 /obj/structure/mech_wreckage/powerloader,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "id" = (
 /obj/structure/closet/secure_closet/atmos_personal{
@@ -2302,19 +2308,19 @@
 	},
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "ie" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "if" = (
 /obj/structure/iv_drip,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "ig" = (
 /obj/random/snack,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "ih" = (
 /obj/structure/lattice,
@@ -2325,46 +2331,46 @@
 /obj/machinery/door/airlock/glass/medical{
 	name = "Medbay Storage"
 	},
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/aft)
 "ij" = (
 /obj/machinery/door/airlock/glass/atmos{
 	name = "Atmospherics"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "ik" = (
 /obj/random/firstaid,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "il" = (
-/obj/item/storage/box/freezer,
-/turf/simulated/floor/airless,
+/obj/item/box/freezer,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "im" = (
 /obj/random/closet,
 /obj/random/masks,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "in" = (
 /obj/random/tool,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/atmospherics)
 "io" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "ip" = (
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "iq" = (
 /obj/random/ammo,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "ir" = (
 /obj/structure/lattice,
@@ -2380,7 +2386,7 @@
 	dir = 4
 	},
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "iv" = (
 /turf/space,
@@ -2398,7 +2404,7 @@
 /obj/random/junk,
 /obj/random/masks,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "iy" = (
 /obj/machinery/computer/air_control{
@@ -2412,7 +2418,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "iz" = (
 /obj/structure/grille,
@@ -2430,7 +2436,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/floor/plating,
 /area/constructionsite/atmospherics)
 "iA" = (
 /obj/machinery/atmospherics/unary/vent_pump/tank{
@@ -2446,7 +2452,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/airmix,
+/turf/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iB" = (
 /obj/machinery/light/small{
@@ -2455,7 +2461,7 @@
 /obj/machinery/air_sensor/dist{
 	id_tag = "d_air_sensor"
 	},
-/turf/simulated/floor/reinforced/airmix,
+/turf/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iC" = (
 /obj/structure/girder,
@@ -2464,21 +2470,21 @@
 "iD" = (
 /obj/structure/lattice,
 /obj/structure/sign/warning/nosmoking_1,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/medical)
 "iE" = (
 /obj/structure/sign/department/bluecross_2,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/aft)
 "iF" = (
 /obj/structure/sign/warning/compressed_gas,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/hallway/aft)
 "iG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/atmospherics)
 "iH" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -2487,40 +2493,40 @@
 	id_tag = "d_air_in";
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/airmix,
+/turf/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iI" = (
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/reinforced/airmix,
+/turf/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iJ" = (
 /obj/machinery/door/airlock/glass/medical{
 	name = "Medbay"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "iK" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/atmospherics)
 "iL" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "iM" = (
 /obj/effect/floor_decal/plaque{
 	desc = "In memory of Earl Whitenmeinster. We'll never forget you.";
 	name = "Whitenmeister Memorial Hall Plaque"
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/aft)
 "iN" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "iO" = (
 /obj/machinery/computer/air_control{
@@ -2533,7 +2539,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "iP" = (
 /obj/machinery/atmospherics/unary/vent_pump/tank{
@@ -2550,7 +2556,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/oxygen,
+/turf/floor/reinforced/oxygen,
 /area/constructionsite/atmospherics)
 "iQ" = (
 /obj/machinery/light/small{
@@ -2559,20 +2565,20 @@
 /obj/machinery/air_sensor{
 	id_tag = "d_o2_sensor"
 	},
-/turf/simulated/floor/reinforced/oxygen,
+/turf/floor/reinforced/oxygen,
 /area/constructionsite/atmospherics)
 "iR" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/medical)
 "iS" = (
 /obj/random/material,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "iT" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 10
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "iU" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -2581,11 +2587,11 @@
 	id_tag = "d_o2_in";
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/oxygen,
+/turf/floor/reinforced/oxygen,
 /area/constructionsite/atmospherics)
 "iV" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/reinforced/oxygen,
+/turf/floor/reinforced/oxygen,
 /area/constructionsite/atmospherics)
 "iW" = (
 /obj/structure/lattice,
@@ -2596,26 +2602,26 @@
 /obj/structure/cable/blue{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/atmospherics)
 "iY" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite)
 "iZ" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ja" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jb" = (
 /obj/structure/cable/blue{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "jc" = (
 /obj/machinery/computer/air_control{
@@ -2628,7 +2634,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "jd" = (
 /obj/machinery/atmospherics/unary/vent_pump/tank{
@@ -2645,7 +2651,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/floor/reinforced/nitrogen,
 /area/constructionsite/atmospherics)
 "je" = (
 /obj/machinery/light/small{
@@ -2654,11 +2660,11 @@
 /obj/machinery/air_sensor{
 	id_tag = "d_n2_sensor"
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/floor/reinforced/nitrogen,
 /area/constructionsite/atmospherics)
 "jf" = (
 /obj/random/smokes,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jg" = (
 /obj/structure/lattice,
@@ -2667,41 +2673,41 @@
 "jh" = (
 /obj/structure/table,
 /obj/structure/bedsheetbin/mapped,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ji" = (
 /obj/structure/table,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jj" = (
 /obj/structure/table,
 /obj/random/hat,
 /obj/random/gloves,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jk" = (
 /obj/structure/table,
 /obj/random/gloves,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jl" = (
 /obj/structure/table,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jm" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jn" = (
 /obj/structure/table,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "jo" = (
 /obj/structure/table,
 /obj/structure/closet/body_bag/cryobag,
 /obj/structure/closet/body_bag/cryobag,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/medical)
 "jp" = (
 /obj/structure/cable/blue,
@@ -2709,14 +2715,14 @@
 	name = "south bump";
 	pixel_y = -24
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "jq" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 5
 	},
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 "jr" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -2725,68 +2731,68 @@
 	id_tag = "d_n2_in";
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/floor/reinforced/nitrogen,
 /area/constructionsite/atmospherics)
 "js" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/floor/reinforced/nitrogen,
 /area/constructionsite/atmospherics)
 "jt" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite)
 "ju" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jv" = (
 /obj/structure/door_assembly,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jw" = (
 /turf/space,
 /area/constructionsite)
 "jx" = (
 /obj/structure/lattice,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jy" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jz" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jA" = (
 /obj/structure/lattice,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite)
 "jB" = (
 /obj/random/clothing,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jC" = (
 /obj/structure/coatrack,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jD" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite)
 "jE" = (
 /obj/structure/closet/cabinet,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jF" = (
 /obj/structure/bed,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jG" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jH" = (
 /obj/structure/lattice,
@@ -2797,133 +2803,134 @@
 /obj/machinery/door/airlock{
 	name = "Cabin"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jJ" = (
 /obj/random/hat,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jK" = (
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jL" = (
 /obj/random/snack,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jM" = (
 /obj/machinery/door/airlock{
 	name = "Bunk Room"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jN" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite)
 "jO" = (
 /obj/item/bedsheet,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jP" = (
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jQ" = (
 /obj/structure/extinguisher_cabinet{
 	icon_state = "extinguisher_empty";
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/aft)
 "jR" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jS" = (
 /obj/random/maintenance/clean,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jT" = (
 /obj/machinery/washing_machine,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jU" = (
 /obj/structure/table,
 /obj/random/clothing,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jV" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite)
 "jW" = (
 /obj/random/clothing,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jX" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "jY" = (
 /obj/item/clothing/head/radiation,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "jZ" = (
 /obj/machinery/constructable_frame,
 /obj/random/material,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ka" = (
 /obj/machinery/door/airlock/glass/engineering,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kb" = (
 /obj/random/obstruction,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kc" = (
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kd" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ke" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kf" = (
 /obj/random/action_figure,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kg" = (
 /obj/random/voidhelmet,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kh" = (
 /obj/structure/table,
 /obj/random/hardsuit,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "ki" = (
 /obj/random/hostile,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "kj" = (
 /obj/random/hostile,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kk" = (
 /obj/structure/table,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite)
@@ -2931,80 +2938,80 @@
 /obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/random/powercell,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "km" = (
 /obj/machinery/power/terminal{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kn" = (
 /obj/machinery/power/smes/buildable,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ko" = (
 /obj/structure/rack,
 /obj/random/tool,
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kp" = (
 /obj/structure/rack,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kq" = (
 /obj/random/glasses,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kr" = (
-/obj/machinery/shield_generator{
+/obj/machinery/shield_generator/mapped{
 	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances. This one seems to be in a state of disrepair.";
 	name = "disused shield generator"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ks" = (
 /obj/random/junk,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "kt" = (
 /obj/machinery/power/breakerbox,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ku" = (
 /obj/structure/rack,
 /obj/random/toolbox,
 /obj/random/loot,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "kv" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "kw" = (
 /obj/random/closet,
 /obj/random/loot,
 /obj/random/junk,
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "kx" = (
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite)
 "ky" = (
 /obj/structure/closet/radiation,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/hallway/aft)
 "kz" = (
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/engineering)
 "kA" = (
 /obj/machinery/door/airlock/glass/engineering{
 	name = "Engine Access"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kC" = (
 /obj/effect/shuttle_landmark/derelict/nav6,
@@ -3012,7 +3019,7 @@
 /area/space)
 "kD" = (
 /obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kE" = (
 /obj/structure/lattice,
@@ -3020,60 +3027,60 @@
 /area/constructionsite/engineering)
 "kF" = (
 /obj/random/junk,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kG" = (
 /obj/machinery/door/airlock/glass/engineering,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kH" = (
 /obj/structure/sign/warning/compressed_gas,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/engineering)
 "kJ" = (
 /turf/space,
 /area/constructionsite/engineering)
 "kK" = (
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "kL" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "kM" = (
 /obj/structure/sign/warning/radioactive,
-/turf/simulated/wall,
+/turf/wall,
 /area/constructionsite/engineering)
 "kN" = (
 /obj/structure/table,
 /obj/random/tool,
 /obj/random/maintenance,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kP" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kQ" = (
 /obj/random/maintenance,
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/engineering)
 "kR" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kS" = (
 /obj/structure/table,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kT" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kU" = (
 /obj/structure/table,
@@ -3081,10 +3088,10 @@
 /obj/random/material,
 /obj/random/material,
 /obj/random/material,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kV" = (
-/turf/simulated/floor/airless{
+/turf/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/engineering)
@@ -3092,12 +3099,12 @@
 /obj/structure/table,
 /obj/random/toolbox,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kX" = (
 /obj/structure/table,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "kY" = (
 /obj/structure/grille/broken,
@@ -3107,7 +3114,7 @@
 "kZ" = (
 /obj/structure/rack,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "la" = (
 /obj/structure/grille,
@@ -3116,55 +3123,55 @@
 /area/constructionsite/engineering)
 "lb" = (
 /obj/random/hostile,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lc" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "ld" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "le" = (
 /obj/machinery/rad_collector,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lf" = (
 /obj/structure/table,
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lg" = (
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lh" = (
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "li" = (
 /obj/structure/table,
 /obj/random/tool,
 /obj/random/voidsuit,
 /obj/random/coin,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lj" = (
 /obj/structure/table,
 /obj/random/toolbox,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lk" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "ll" = (
 /obj/structure/closet/radiation,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lm" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "ln" = (
 /obj/random/maintenance,
@@ -3174,41 +3181,41 @@
 /obj/machinery/door/airlock/glass/engineering{
 	name = "SMES"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lp" = (
 /obj/structure/cable/blue{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lq" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lr" = (
 /obj/structure/rack,
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "ls" = (
 /obj/structure/cable/blue{
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lt" = (
 /obj/structure/rack,
 /obj/random/toolbox,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lu" = (
-/turf/simulated/wall/r_wall,
+/turf/wall/r_wall,
 /area/AIsattele)
 "lv" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable/blue,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lw" = (
 /obj/machinery/power/terminal{
@@ -3217,13 +3224,13 @@
 /obj/structure/cable/blue{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lx" = (
 /obj/structure/cable/blue{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "ly" = (
 /obj/structure/cable/blue{
@@ -3235,13 +3242,13 @@
 /obj/structure/cable/blue{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lz" = (
 /obj/structure/cable/blue{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lA" = (
 /obj/machinery/power/terminal{
@@ -3250,37 +3257,37 @@
 /obj/structure/cable/blue{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lB" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lC" = (
 /obj/machinery/constructable_frame/computerframe,
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lD" = (
 /obj/machinery/teleport/station,
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lE" = (
 /obj/machinery/teleport/hub,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lF" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable/blue{
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lG" = (
 /obj/machinery/power/terminal{
@@ -3289,7 +3296,7 @@
 /obj/structure/cable/blue{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lH" = (
 /obj/structure/cable/blue{
@@ -3298,46 +3305,46 @@
 /obj/structure/cable/blue{
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lI" = (
 /obj/item/shard{
 	icon_state = "medium"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lJ" = (
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lK" = (
 /obj/structure/cable,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lL" = (
 /obj/structure/rack,
 /obj/item/clothing/gloves/insulated,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lM" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lN" = (
 /obj/structure/cable/blue,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "lO" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lP" = (
 /obj/item/cell,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lQ" = (
 /obj/structure/grille/broken,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lR" = (
 /turf/space,
@@ -3345,11 +3352,11 @@
 "lS" = (
 /obj/structure/table,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lT" = (
 /obj/random/hostile,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lU" = (
 /obj/structure/lattice,
@@ -3358,24 +3365,24 @@
 "lV" = (
 /obj/structure/closet,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lW" = (
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lX" = (
 /obj/structure/grille/broken,
 /turf/space,
 /area/AIsattele)
 "lY" = (
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 1;
 	pixel_y = -1
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/AIsattele)
 "lZ" = (
 /obj/machinery/emitter{
@@ -3383,11 +3390,11 @@
 	dir = 4;
 	state = 2
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "ma" = (
 /obj/machinery/field_generator,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "mb" = (
 /obj/machinery/emitter{
@@ -3395,11 +3402,11 @@
 	dir = 8;
 	state = 2
 	},
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "mc" = (
 /obj/machinery/singularity_generator,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/engineering)
 "md" = (
 /obj/effect/shuttle_landmark/derelict/nav7,
@@ -3417,12 +3424,12 @@
 /obj/machinery/camera/motion{
 	c_tag = "Construction Site Teleporter"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "nn" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/floor/tiled/dark/airless,
 /area/constructionsite/atmospherics)
 "ob" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -3435,33 +3442,33 @@
 /obj/machinery/camera/motion{
 	c_tag = "Construction Site Teleporter Airlock"
 	},
-/turf/simulated/floor,
+/turf/floor,
 /area/constructionsite/teleporter)
 "AR" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "BO" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "DP" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/aft)
 "Lk" = (
 /obj/structure/grille/broken,
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/hallway/fore)
 "Yw" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/abstract/landmark/allowed_leak,
-/turf/simulated/floor/airless,
+/turf/floor/airless,
 /area/constructionsite/atmospherics)
 
 (1,1,1) = {"
@@ -22522,7 +22529,7 @@ aR
 aR
 gg
 gg
-gp
+gh
 gi
 gh
 gi
@@ -23734,11 +23741,11 @@ aR
 aR
 gg
 gg
-gp
+gh
 gi
 gh
 gi
-gp
+gh
 gg
 gg
 aR

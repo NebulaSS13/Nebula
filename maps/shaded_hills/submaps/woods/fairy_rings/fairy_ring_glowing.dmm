@@ -1,0 +1,95 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"h" = (
+/turf/floor/natural/grass,
+/area/shaded_hills/outside/point_of_interest/fairy_ring)
+"j" = (
+/turf/floor/natural/barren,
+/area/shaded_hills/outside/point_of_interest/fairy_ring)
+"A" = (
+/obj/structure/flora/plant/random_mushroom/glowing,
+/turf/floor/natural/grass,
+/area/shaded_hills/outside/point_of_interest/fairy_ring)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+h
+a
+a
+"}
+(2,1,1) = {"
+a
+h
+h
+A
+h
+A
+h
+a
+"}
+(3,1,1) = {"
+h
+h
+A
+j
+j
+j
+A
+h
+"}
+(4,1,1) = {"
+h
+j
+j
+j
+j
+j
+A
+h
+"}
+(5,1,1) = {"
+h
+A
+j
+j
+j
+j
+j
+h
+"}
+(6,1,1) = {"
+a
+h
+A
+j
+j
+h
+A
+h
+"}
+(7,1,1) = {"
+a
+h
+h
+h
+A
+A
+a
+a
+"}
+(8,1,1) = {"
+a
+a
+h
+h
+h
+a
+a
+a
+"}

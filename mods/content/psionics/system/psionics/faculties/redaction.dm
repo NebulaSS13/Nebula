@@ -46,7 +46,7 @@
 	min_rank =        PSI_RANK_OPERANT
 	use_description = "Target a patient while on help intent at melee range to mend a variety of maladies, such as bleeding or broken bones. Higher ranks in this faculty allow you to mend a wider range of problems."
 
-/decl/psionic_power/redaction/mend/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
+/decl/psionic_power/redaction/mend/invoke(var/mob/living/user, var/mob/living/human/target)
 	if(!istype(user) || !istype(target))
 		return FALSE
 	. = ..()
@@ -129,7 +129,7 @@
 	min_rank =        PSI_RANK_GRANDMASTER
 	use_description = "Target a patient while on help intent at melee range to cleanse radiation and genetic damage from a patient."
 
-/decl/psionic_power/redaction/cleanse/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
+/decl/psionic_power/redaction/cleanse/invoke(var/mob/living/user, var/mob/living/human/target)
 	if(!istype(user) || !istype(target))
 		return FALSE
 	. = ..()
@@ -143,12 +143,12 @@
 			else
 				target.radiation = 0
 			return TRUE
-		if(target.getCloneLoss())
+		if(target.get_damage(CLONE))
 			to_chat(user, SPAN_NOTICE("You stitch together some of the mangled DNA within \the [target]..."))
-			if(target.getCloneLoss() >= removing)
-				target.adjustCloneLoss(-removing)
+			if(target.get_damage(CLONE) >= removing)
+				target.heal_damage(CLONE, removing)
 			else
-				target.adjustCloneLoss(-(target.getCloneLoss()))
+				target.heal_damage(CLONE, target.get_damage(CLONE))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You can find no genetic damage or radiation to heal within \the [target]."))
 		return TRUE
@@ -188,6 +188,6 @@
 				break
 		to_chat(target, SPAN_NOTICE("<font size = 3><b>Life floods back into your body!</b></font>"))
 		target.visible_message(SPAN_NOTICE("\The [target] shudders violently!"))
-		target.adjustOxyLoss(-rand(15,20))
+		target.heal_damage(OXY, rand(15,20))
 		target.basic_revival()
 		return TRUE

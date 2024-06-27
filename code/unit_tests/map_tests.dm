@@ -264,10 +264,13 @@
 /datum/unit_test/storage_map_test/start_test()
 	var/bad_tests = 0
 
-	for(var/obj/item/storage/S in world)
-		if(isPlayerLevel(S.z))
-			var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\] \[[S.x] / [S.y] / [S.z]\]"
-			bad_tests += test_storage_capacity(S, bad_msg)
+// We have to ifdef this because _test_storage_items doesn't exist when UNIT_TEST isn't defined.
+#ifdef UNIT_TEST
+	for(var/datum/storage/storage in global._test_storage_items)
+		if(storage.holder?.z && isPlayerLevel(storage.holder.z))
+			var/bad_msg = "[ascii_red]--------------- [storage.holder.name] \[[storage.holder.type]\] \[[storage.holder.x] / [storage.holder.y] / [storage.holder.z]\]"
+			bad_tests += test_storage_capacity(storage, bad_msg)
+#endif
 
 	if(bad_tests)
 		fail("\[[bad_tests]\] Some on-map storage items were not able to hold their initial contents.")
@@ -275,7 +278,6 @@
 		pass("All on-map storage items were able to hold their initial contents.")
 
 	return 1
-
 /datum/unit_test/map_image_map_test
 	name = "MAP: All map levels shall have a corresponding map image."
 

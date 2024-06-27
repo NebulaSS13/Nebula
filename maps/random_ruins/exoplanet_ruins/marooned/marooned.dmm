@@ -22,11 +22,11 @@
 /turf/template_noop,
 /area/template_noop)
 "ag" = (
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/map_template/marooned)
 "ah" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/map_template/marooned)
 "ai" = (
 /obj/abstract/landmark/scorcher,
@@ -40,14 +40,14 @@
 "ak" = (
 /obj/machinery/computer/dummy,
 /obj/effect/floor_decal/corner/red/full,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "al" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
 /obj/machinery/atmospherics/binary/oxyregenerator,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "am" = (
 /obj/abstract/landmark/corpse/marooned_officer,
@@ -56,10 +56,10 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/item/gun/projectile/revolver,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "an" = (
-/obj/item/clothing/accessory/medal/silver/marooned_medal{
+/obj/item/clothing/medal/silver/marooned_medal{
 	desc = "A heart-shaped bronze medal. Has Magnitka flag at top part and engraved name - H. Warda.";
 	name = "\improper Magnitka medal"
 	},
@@ -68,7 +68,7 @@
 	dir = 6
 	},
 /obj/item/paper/marooned/note09,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "ao" = (
 /obj/structure/lattice,
@@ -88,13 +88,13 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "aq" = (
 /obj/machinery/space_heater,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/floor_decal/steeldecal/steel_decals_central7,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "ar" = (
 /obj/item/paper/marooned/note03{
@@ -105,11 +105,11 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "as" = (
 /obj/machinery/door/airlock/centcom,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/map_template/marooned)
 "at" = (
 /obj/structure/closet/crate/freezer,
@@ -117,28 +117,28 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "au" = (
 /obj/structure/closet/crate/freezer,
 /obj/structure/handrail,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "av" = (
 /obj/item/paper/marooned/note06,
 /obj/random/trash,
 /obj/item/paper/marooned/note08,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aw" = (
 /obj/machinery/space_heater,
 /obj/structure/handrail,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "ax" = (
 /obj/machinery/suit_cycler,
 /obj/effect/floor_decal/industrial/outline,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "ay" = (
 /obj/structure/closet/crate/freezer,
@@ -151,18 +151,18 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "az" = (
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/effect/decal/cleanable/blood/drip,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aA" = (
 /obj/random/trash,
 /obj/effect/floor_decal/steeldecal/steel_decals_central7,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aB" = (
 /obj/item/paper/marooned/note07{
@@ -171,7 +171,7 @@
 /obj/random/trash,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/structure/bed,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aC" = (
 /obj/structure/shuttle/engine/propulsion,
@@ -189,19 +189,19 @@
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/effect/floor_decal/industrial/outline,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "aE" = (
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aF" = (
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aG" = (
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aH" = (
 /obj/structure/handrail{
@@ -211,7 +211,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline,
-/turf/simulated/floor/tiled/techfloor,
+/turf/floor/tiled/techfloor,
 /area/map_template/marooned)
 "aI" = (
 /obj/item/wirecutters,
@@ -221,11 +221,11 @@
 	dir = 8;
 	icon_state = "0-5"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aJ" = (
 /obj/effect/decal/cleanable/blood/drip,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aL" = (
 /obj/structure/inflatable/wall,
@@ -233,7 +233,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/map_template/marooned)
 "aM" = (
 /obj/structure/inflatable/door,
@@ -242,7 +242,7 @@
 	icon_state = "1-6"
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aN" = (
 /obj/structure/inflatable/wall,
@@ -250,7 +250,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aO" = (
 /obj/structure/inflatable/door,
@@ -260,12 +260,12 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/door/airlock/centcom,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/floor/tiled/steel_ridged,
 /area/map_template/marooned)
 "aP" = (
 /obj/structure/fuel_port/hydrogen,
 /obj/effect/paint/black,
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/map_template/marooned)
 "aQ" = (
 /obj/structure/inflatable/wall,
@@ -298,11 +298,11 @@
 /turf/template_noop,
 /area/template_noop)
 "aU" = (
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/template_noop)
 "aV" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/ocp_wall,
+/turf/wall/ocp_wall,
 /area/template_noop)
 "aW" = (
 /obj/item/stock_parts/computer/battery_module{

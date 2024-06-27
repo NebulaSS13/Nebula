@@ -5,6 +5,7 @@
 	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 
+	color = GLASS_COLOR
 	layer = SIDE_WINDOW_LAYER
 	anchored = TRUE
 	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CAN_BE_PAINTED
@@ -23,8 +24,6 @@
 	var/polarized = 0
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
-	var/paint_color
-	var/base_color // The windows initial color. Used for resetting purposes.
 	var/list/connections
 	var/list/other_connections
 
@@ -57,10 +56,6 @@
 // Updating connections may depend on material properties.
 /obj/structure/window/LateInitialize()
 	..()
-	//set_anchored(!constructed) // calls update_connections, potentially
-
-	base_color = get_color()
-
 	update_connections(1)
 	update_icon()
 	update_nearby_tiles(need_rebuild=1)
@@ -82,9 +77,10 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
-/obj/structure/window/take_damage(damage = 0)
+/obj/structure/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
-	playsound(loc, "glasscrack", 100, 1)
+	if(. && damage_type == BRUTE)
+		playsound(loc, "glasscrack", 100, 1)
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -92,7 +88,11 @@
 		visible_message(SPAN_DANGER("\The [src] shatters!"))
 
 	var/debris_count = is_fulltile() ? 4 : 1
-	material.place_shards(loc, debris_count)
+	var/list/shards = material.place_shards(loc, debris_count)
+	if(paint_color)
+		for(var/obj/item/thing in shards)
+			thing.set_color(paint_color)
+
 	if(reinf_material)
 		reinf_material.create_object(loc, debris_count, /obj/item/stack/material/rods)
 	qdel(src)
@@ -101,7 +101,7 @@
 	var/proj_damage = Proj.get_structure_damage()
 	if(!proj_damage) return
 	..()
-	take_damage(proj_damage)
+	take_damage(proj_damage, Proj.atom_damage_type)
 
 /obj/structure/window/explosion_act(severity)
 	..()
@@ -138,7 +138,7 @@
 		else if(isobj(AM))
 			var/obj/item/I = AM
 			tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		if(reinf_material) 
+		if(reinf_material)
 			tforce *= 0.25
 		if(current_health - tforce <= 7 && !reinf_material)
 			set_anchored(FALSE)
@@ -151,7 +151,7 @@
 	if (user.a_intent && user.a_intent == I_HURT)
 
 		if (ishuman(user))
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			if(H.species.can_shred(H))
 				attack_generic(H,25)
 				return
@@ -202,7 +202,7 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
-			dismantle()
+			dismantle_structure(user)
 	else if(IS_COIL(W) && is_fulltile())
 		if (polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
@@ -233,7 +233,7 @@
 			toggle()
 		else
 			var/response = input(user, "New Window ID:", name, id) as null | text
-			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_hand() != W)
+			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_held_item() != W)
 				return
 			id = sanitize_safe(response, MAX_NAME_LEN)
 			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
@@ -251,7 +251,7 @@
 			set_anchored(0)
 	else if (!istype(W, /obj/item/paint_sprayer))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
 			user.do_attack_animation(src)
 			hit(W.force)
 			if(current_health <= 7)
@@ -265,12 +265,15 @@
 // TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
-	var/list/products = material.create_object(loc, is_fulltile() ? 4 : 2)
+	. = material.create_object(loc, is_fulltile() ? 4 : 2)
 	if(reinf_material)
-		for(var/obj/item/stack/material/S in products)
+		for(var/obj/item/stack/material/S in .)
 			S.reinf_material = reinf_material
 			S.update_strings()
 			S.update_icon()
+	if(paint_color)
+		for(var/obj/item/thing in .)
+			thing.set_color(paint_color)
 
 /obj/structure/window/grab_attack(var/obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)
@@ -347,7 +350,6 @@
 	. = ..(user)
 	if(reinf_material)
 		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.solid_name] lattice."))
-
 	if (reinf_material)
 		switch (construction_state)
 			if (0)
@@ -356,31 +358,12 @@
 				to_chat(user, SPAN_WARNING("The window is pried into the frame but not yet fastened."))
 			if (2)
 				to_chat(user, SPAN_NOTICE("The window is fastened to the frame."))
-
 	if (anchored)
 		to_chat(user, SPAN_NOTICE("It is fastened to \the [get_turf(src)]."))
 	else
 		to_chat(user, SPAN_WARNING("It is not fastened to anything."))
-
-	if (paint_color)
-		to_chat(user, SPAN_NOTICE("The glass is stained with paint."))
-
 	if (polarized)
 		to_chat(user, SPAN_NOTICE("It appears to be wired."))
-
-/obj/structure/window/get_color()
-	if (paint_color)
-		return paint_color
-	else if (material)
-		var/decl/material/window = get_material()
-		return window.color
-	else if (base_color)
-		return base_color
-	return ..()
-
-/obj/structure/window/set_color()
-	paint_color = color
-	queue_icon_update()
 
 /obj/structure/window/proc/set_anchored(var/new_anchored)
 	if(anchored == new_anchored)
@@ -413,14 +396,7 @@
 
 	..()
 
-	if (paint_color)
-		color = paint_color
-	else if (material)
-		var/decl/material/window = get_material()
-		color = window.color
-	else
-		color = GLASS_COLOR
-
+	color = get_color()
 	layer = FULL_WINDOW_LAYER
 	if(!is_fulltile())
 		layer = SIDE_WINDOW_LAYER
@@ -449,10 +425,10 @@
 			add_overlay(I)
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	var/melting_point = material.melting_point
+	var/damage_point = material.temperature_damage_threshold
 	if(reinf_material)
-		melting_point += 0.25*reinf_material.melting_point
-	if(exposed_temperature > melting_point)
+		damage_point += 0.25*reinf_material.temperature_damage_threshold
+	if(exposed_temperature > damage_point)
 		hit(damage_per_fire_tick, 0)
 	..()
 
@@ -593,7 +569,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/obj/structure/window/reinforced/crescent/take_damage()
+/obj/structure/window/reinforced/crescent/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	return
 
 /obj/structure/window/reinforced/crescent/shatter()

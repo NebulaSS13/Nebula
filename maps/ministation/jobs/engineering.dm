@@ -17,7 +17,8 @@
 		access_external_airlocks,
 		access_construction,
 		access_atmospherics,
-		access_emergency_storage
+		access_emergency_storage,
+		access_cameras
 	)
 	minimal_access = list(
 		access_eva,
@@ -28,7 +29,8 @@
 		access_external_airlocks,
 		access_construction,
 		access_atmospherics,
-		access_emergency_storage
+		access_emergency_storage,
+		access_cameras
 	)
 	min_skill = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
@@ -87,7 +89,8 @@
 		access_kitchen,
 		access_robotics,
 		access_hydroponics,
-		access_ai_upload
+		access_ai_upload,
+		access_cameras
 	)
 	minimal_access = list(
 		access_engine,
@@ -110,11 +113,12 @@
 		access_kitchen,
 		access_robotics,
 		access_hydroponics,
-		access_ai_upload
+		access_ai_upload,
+		access_cameras
 	)
 	minimal_player_age = 14
 	supervisors = "the Captain"
-	outfit_type = /decl/hierarchy/outfit/job/ministation/engineer/head
+	outfit_type = /decl/hierarchy/outfit/job/ministation/chief_engineer
 	min_skill = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_COMPUTER     = SKILL_ADEPT,

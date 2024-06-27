@@ -12,16 +12,16 @@
 
 /obj/random/mre/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/mre,
-		/obj/item/storage/mre/menu2,
-		/obj/item/storage/mre/menu3,
-		/obj/item/storage/mre/menu4,
-		/obj/item/storage/mre/menu5,
-		/obj/item/storage/mre/menu6,
-		/obj/item/storage/mre/menu7,
-		/obj/item/storage/mre/menu8,
-		/obj/item/storage/mre/menu9,
-		/obj/item/storage/mre/menu10
+		/obj/item/mre,
+		/obj/item/mre/menu2,
+		/obj/item/mre/menu3,
+		/obj/item/mre/menu4,
+		/obj/item/mre/menu5,
+		/obj/item/mre/menu6,
+		/obj/item/mre/menu7,
+		/obj/item/mre/menu8,
+		/obj/item/mre/menu9,
+		/obj/item/mre/menu10
 	)
 	return spawnable_choices
 
@@ -32,14 +32,14 @@
 
 /obj/random/mre/main/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/mrebag,
-		/obj/item/storage/mrebag/menu2,
-		/obj/item/storage/mrebag/menu3,
-		/obj/item/storage/mrebag/menu4,
-		/obj/item/storage/mrebag/menu5,
-		/obj/item/storage/mrebag/menu6,
-		/obj/item/storage/mrebag/menu7,
-		/obj/item/storage/mrebag/menu8
+		/obj/item/mrebag,
+		/obj/item/mrebag/menu2,
+		/obj/item/mrebag/menu3,
+		/obj/item/mrebag/menu4,
+		/obj/item/mrebag/menu5,
+		/obj/item/mrebag/menu6,
+		/obj/item/mrebag/menu7,
+		/obj/item/mrebag/menu8
 	)
 	return spawnable_choices
 

@@ -390,7 +390,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>")
-	target.adjustToxLoss(5)
+	target.take_damage(5, TOX)
 	affected.createwound(CUT, 5)
 	for(var/internal in affected.internal_organs)
 		var/obj/item/organ/internal/I = internal

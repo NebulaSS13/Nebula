@@ -29,16 +29,16 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/human/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/mob/living/human/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/projectile/P = damage_source
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
-	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(SSmaterials.get_armor_key(P.damage_type, P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
+	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(SSmaterials.get_armor_key(P.atom_damage_type, P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
 		visible_message("<span class='danger'>\The [src] deflects [attack_text]!</span>")
 		P.redirect(P.starting.x + rand(-2,2), P.starting.y + rand(-2,2), get_turf(src), src)
 		return PROJECTILE_FORCE_MISS
 	. = ..()
 
-/mob/living/carbon/get_cuff_breakout_mod()
+/mob/living/get_cuff_breakout_mod()
 	. = ..()
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
@@ -48,7 +48,7 @@
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
 
-/mob/living/carbon/get_special_resist_time()
+/mob/living/get_special_resist_time()
 	. = ..()
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	if(psi && psi.can_use())

@@ -132,7 +132,7 @@
 
 	return TRUE
 
-/obj/machinery/door/window/take_damage(var/damage)
+/obj/machinery/door/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	current_health = max(0, current_health - damage)
 	if (current_health <= 0)
 		shatter()
@@ -140,7 +140,7 @@
 
 /obj/machinery/door/window/physical_attack_hand(mob/user)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.species.can_shred(H))
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message("<span class='danger'>\The [user] smashes against \the [src].</span>", 1)
@@ -198,7 +198,7 @@
 		flick("[base_state]deny", src)
 
 /obj/machinery/door/window/bash(obj/item/I, mob/user)
-	//Emags and ninja swords? You may pass.
+	//Emags and energy swords? You may pass.
 	if (istype(I, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = I
 		if(blade.is_special_cutting_tool() && emag_act(10, user))

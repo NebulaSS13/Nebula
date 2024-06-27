@@ -6,10 +6,9 @@
 	icon_state = ICON_STATE_WORLD
 	throw_speed = 4
 	throw_range = 20
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY
 	z_flags = ZMM_MANGLE_PLANES
-	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/metal/steel
 	var/active
 	var/det_time = 50
@@ -40,7 +39,7 @@
 		add_overlay("[icon_state]-pin")
 
 /obj/item/grenade/proc/clown_check(var/mob/living/user)
-	if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 		to_chat(user, "<span class='warning'>Huh? How does this thing work?</span>")
 		det_time = fail_det_time
 		activate(user)
@@ -65,15 +64,13 @@
 		to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")
 		activate(user)
 		add_fingerprint(user)
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			C.throw_mode_on()
+		user.toggle_throw_mode(TRUE)
 
 /obj/item/grenade/proc/activate(mob/user)
 	if(active)
 		return
 	if(user)
-		msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 	active = TRUE
 	update_icon()
 	playsound(loc, arm_sound, 75, 0, -3)

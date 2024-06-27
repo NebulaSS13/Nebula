@@ -44,7 +44,7 @@
 	interact(user)
 	return TRUE
 
-/obj/structure/undies_wardrobe/interact(var/mob/living/carbon/human/H)
+/obj/structure/undies_wardrobe/interact(var/mob/living/human/H)
 	var/id = H.GetIdCard()
 
 	var/dat = list()
@@ -52,11 +52,11 @@
 	dat += "You may claim [id ? length(global.underwear.categories) - LAZYACCESS(amount_of_underwear_by_id_card, id) : 0] more article\s this shift.<br><br>"
 	dat += "<b>Available Categories</b><br><hr>"
 	for(var/datum/category_group/underwear/UWC in global.underwear.categories)
-		dat += "[UWC.name] <a href='?src=\ref[src];select_underwear=[UWC.name]'>(Select)</a><br>"
+		dat += "[UWC.name] <a href='byond://?src=\ref[src];select_underwear=[UWC.name]'>(Select)</a><br>"
 	dat = jointext(dat,null)
 	show_browser(H, dat, "window=wardrobe;size=400x250")
 
-/obj/structure/undies_wardrobe/proc/human_who_can_use_underwear(var/mob/living/carbon/human/H)
+/obj/structure/undies_wardrobe/proc/human_who_can_use_underwear(var/mob/living/human/H)
 	if(!istype(H) || !(H.get_bodytype()?.appearance_flags & HAS_UNDERWEAR))
 		return FALSE
 	return TRUE
@@ -71,7 +71,7 @@
 	if(..())
 		return TRUE
 
-	var/mob/living/carbon/human/H = usr
+	var/mob/living/human/H = usr
 	if(href_list["select_underwear"])
 		var/datum/category_group/underwear/UWC = global.underwear.categories_by_name[href_list["select_underwear"]]
 		if(!UWC)

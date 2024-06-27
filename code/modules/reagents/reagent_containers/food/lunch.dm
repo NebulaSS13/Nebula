@@ -22,7 +22,7 @@ var/global/list/lunchables_snacks_ = list(
 									/obj/item/chems/food/spacetwinkie,
 									/obj/item/chems/food/cheesiehonkers,
 									/obj/item/chems/food/poppypretzel,
-									/obj/item/chems/food/carrotfries,
+									/obj/item/chems/food/processed_grown/sticks/carrot,
 									/obj/item/chems/food/candiedapple,
 									/obj/item/chems/food/applepie,
 									/obj/item/chems/food/cherrypie,

@@ -38,7 +38,7 @@
 		deintegrate()
 		return
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H) && H.get_equipped_item(slot_head_str) == src)
 		integrate()
 		return
@@ -76,7 +76,7 @@
 	if(canremove)
 		return
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(!istype(H) || H.get_equipped_item(slot_head_str) != src)
 		canremove = TRUE
 		return
@@ -107,7 +107,7 @@
 	var/lastloc = loc
 	. = ..()
 	if(.)
-		var/mob/living/carbon/human/H = lastloc
+		var/mob/living/human/H = lastloc
 		if(istype(H))
 			var/datum/ability_handler/psionics/psi = H.get_ability_handler(/datum/ability_handler/psionics)
 			psi?.reset()
@@ -132,7 +132,7 @@
 		to_chat(usr, SPAN_NOTICE("You still have [max_boosted_faculties - LAZYLEN(boosted_faculties)] facult[LAZYLEN(boosted_faculties) == 1 ? "y" : "ies"] to select. Use \the [src] in-hand to select them."))
 		return
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(!istype(H) || H.get_equipped_item(slot_head_str) != src)
 		to_chat(usr, SPAN_WARNING("\The [src] must be worn on your head in order to be activated."))
 		return

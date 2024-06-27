@@ -1,6 +1,6 @@
 /mob/living/simple_animal/aquatic/fish
-	name = "small fish"
-	desc = "Glub glub."
+	name = "small fry"
+	desc = "A small fish of an indeterminate species."
 	faction = "fishes"
 	max_health = 10
 	mob_size = MOB_SIZE_TINY
@@ -10,13 +10,41 @@
 	mob_swap_flags = 0
 	mob_push_flags = 0
 	mob_always_swap = 1
-	meat_amount = 1
-	bone_amount = 3
-	skin_amount = 3
+	butchery_data = /decl/butchery_data/animal/fish/small
 
 /mob/living/simple_animal/aquatic/fish/grump
+	name = "small fish"
 	icon = 'icons/mob/simple_animal/fish_grump.dmi'
 
-/mob/living/simple_animal/aquatic/fish/judge
+/mob/living/simple_animal/aquatic/fish/large
+	name = "smallmouth bass"
 	icon = 'icons/mob/simple_animal/fish_judge.dmi'
-	meat_amount = 2
+	butchery_data = /decl/butchery_data/animal/fish/medium
+	mob_size = MOB_SIZE_SMALL
+
+/mob/living/simple_animal/aquatic/fish/large/bass
+	name = "largemouth bass"
+	icon = 'icons/mob/simple_animal/fish_bass.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/javelin
+	name = "javelin"
+	icon = 'icons/mob/simple_animal/fish_javelin.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/koi
+	name = "koi"
+	icon = 'icons/mob/simple_animal/fish_koi.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/pike
+	name = "pike"
+	icon = 'icons/mob/simple_animal/fish_pike.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/salmon
+	name = "salmon"
+	icon = 'icons/mob/simple_animal/fish_salmon.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/trout
+	name = "trout"
+	icon = 'icons/mob/simple_animal/fish_trout.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/trout/river
+	name = "rainbow trout"

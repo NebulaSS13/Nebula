@@ -11,7 +11,6 @@
 		access_cent_storage
 	)
 	antaghud_indicator = "huddeathsquad"
-	default_access = list(access_cent_specops)
 
 	hard_cap = 4
 	hard_cap_round = 8
@@ -30,8 +29,7 @@
 /decl/hierarchy/outfit/commando
 	name =     "Special Role - Deathsquad Commando"
 	l_ear =    /obj/item/radio/headset/ert
-	uniform =  /obj/item/clothing/under/color/green
-	l_ear =    /obj/item/radio/headset/hacked
+	uniform =  /obj/item/clothing/jumpsuit/green
 	l_pocket = /obj/item/plastique
 	shoes =    /obj/item/clothing/shoes/jackboots/swat
 	glasses =  /obj/item/clothing/glasses/thermal
@@ -44,11 +42,11 @@
 
 /decl/hierarchy/outfit/commando/leader
 	name =    "Special Role - Deathsquad Leader"
-	uniform =  /obj/item/clothing/under/centcom_officer
+	uniform =  /obj/item/clothing/costume/centcom_officer
 	l_pocket = /obj/item/pinpointer
 	r_pocket = /obj/item/disk/nuclear
 
-/decl/special_role/deathsquad/equip_role(var/mob/living/carbon/human/player)
+/decl/special_role/deathsquad/equip_role(var/mob/living/human/player)
 	if (player.mind == leader)
 		default_outfit = /decl/hierarchy/outfit/commando/leader
 	else
@@ -67,7 +65,7 @@
 	else
 		syndicate_commando_rank = pick("Lieutenant", "Captain", "Major")
 
-	var/syndicate_commando_name = pick(global.last_names)
+	var/syndicate_commando_name = pick(global.using_map.last_names)
 
 	var/datum/preferences/A = new() //Randomize appearance for the commando.
 	A.randomize_appearance_and_body_for(player.current)
@@ -76,12 +74,11 @@
 	player.current.real_name = player.name
 	player.current.SetName(player.current.name)
 
-	var/mob/living/carbon/human/H = player.current
+	var/mob/living/human/H = player.current
 	if(istype(H))
 		var/decl/pronouns/pronouns = pick(H.species.available_pronouns)
 		H.set_gender(pronouns.name)
 		H.set_age(rand(25,45))
-		H.dna.ready_dna(H)
 
 /decl/special_role/deathsquad/create_antagonist()
 	if(..() && !deployed)

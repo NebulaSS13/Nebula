@@ -139,7 +139,7 @@
 	if(!target)
 		return 0
 
-	var/mob/living/carbon/human/H = holder.wearer
+	var/mob/living/human/H = holder.wearer
 
 	if(!charge_selected)
 		to_chat(H, "<span class='danger'>You have not selected a grenade type.</span>")
@@ -340,8 +340,8 @@
 	activate_string = "Project Blade"
 	deactivate_string = "Cancel Blade"
 
-	interface_name = "spider fang blade"
-	interface_desc = "A lethal energy projector that can shape a blade projected from the hand of the wearer or launch radioactive darts."
+	interface_name = "energy blade"
+	interface_desc = "A lethal energy projector that can shape a blade projected from the hand of the wearer."
 
 	usable = 0
 	selectable = 1
@@ -350,12 +350,10 @@
 	active_power_cost = 0.5 KILOWATTS
 	passive_power_cost = 0
 
-	gun = /obj/item/gun/energy/crossbow/ninja/mounted
-
 /obj/item/rig_module/mounted/energy_blade/Process()
 
 	if(holder && holder.wearer)
-		if(!(locate(/obj/item/energy_blade/ninja) in holder.wearer))
+		if(!(locate(/obj/item/energy_blade/projected) in holder.wearer))
 			deactivate()
 			return 0
 
@@ -369,7 +367,7 @@
 		deactivate()
 		return
 
-	var/obj/item/energy_blade/ninja/blade = new(M)
+	var/obj/item/energy_blade/projected/blade = new(M)
 	blade.creator = M
 	M.put_in_hands(blade)
 
@@ -378,31 +376,31 @@
 
 /obj/item/rig_module/mounted/energy_blade/deactivate()
 	..()
-	for(var/obj/item/energy_blade/ninja/blade in (holder?.wearer))
+	for(var/obj/item/energy_blade/projected/blade in (holder?.wearer))
 		qdel(blade)
 
 /obj/item/rig_module/fabricator
 
 	name = "matter fabricator"
 	desc = "A self-contained microfactory system for hardsuit integration."
-	selectable = 1
-	usable = 1
+	selectable = TRUE
+	usable = TRUE
 	use_power_cost = 5 KILOWATTS
 	icon_state = "enet"
 
 	engage_string = "Fabricate Star"
 
-	interface_name = "death blossom launcher"
-	interface_desc = "An integrated microfactory that produces poisoned throwing stars from thin air and electricity."
+	interface_name = "throwing star launcher"
+	interface_desc = "An integrated microfactory that produces throwing stars from thin air and electricity."
 
-	var/fabrication_type = /obj/item/star/ninja
+	var/fabrication_type = /obj/item/star
 	var/fire_force = 30
 	var/fire_distance = 10
 
 /obj/item/rig_module/fabricator/engage(atom/target)
 
 	if(!..())
-		return 0
+		return FALSE
 
 	var/mob/living/H = holder.wearer
 
@@ -420,7 +418,7 @@
 			to_chat(H, SPAN_BLUE("<b>You quickly fabricate \a [new_weapon].</b>"))
 			H.put_in_hands(new_weapon)
 
-	return 1
+	return TRUE
 
 /obj/item/rig_module/fabricator/wf_sign
 	name = "wet floor sign fabricator"

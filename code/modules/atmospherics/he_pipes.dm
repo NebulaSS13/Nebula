@@ -78,7 +78,7 @@
 
 			var/heat_limit = 1000
 
-			var/mob/living/carbon/human/H = buckled_mob
+			var/mob/living/human/H = buckled_mob
 			if(istype(H) && H.species)
 				heat_limit = H.get_mob_temperature_threshold(HEAT_LEVEL_3)
 

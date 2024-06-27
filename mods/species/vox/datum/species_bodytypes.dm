@@ -13,11 +13,16 @@
 	base_eye_color    = "#d60093"
 	base_color        = "#526d29"
 	body_flags        = BODY_FLAG_NO_DNA
-
-
+	age_descriptor = /datum/appearance_descriptor/age/vox
 	cold_level_1 = 80
 	cold_level_2 = 50
 	cold_level_3 = -1
+
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height =       0.75,
+		/datum/appearance_descriptor/build =        1.25,
+		/datum/appearance_descriptor/vox_markings = 1
+	)
 
 	vital_organs = list(
 		BP_STACK,
@@ -63,6 +68,11 @@
 			slot_undershirt_str = list("[NORTH]" = list(0, -1), "[EAST]" = list(0, -1), "[SOUTH]" = list( 0, -1),  "[WEST]" = list( 0, -1)),
 			slot_back_str       = list("[NORTH]" = list(0,  0), "[EAST]" = list(3,  0), "[SOUTH]" = list( 0,  0),  "[WEST]" = list(-3,  0))
 		)
+	return ..()
+
+/decl/bodytype/vox/get_movement_slowdown(var/mob/living/human/H)
+	if(H && global.vox_current_pressure_toggle["\ref[H]"])
+		return 1.5
 	return ..()
 
 /decl/bodytype/vox/servitor

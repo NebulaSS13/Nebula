@@ -17,14 +17,17 @@
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)
+	ore_result_amount = 4
+	sound_manipulate = 'sound/foley/rockscrape.ogg'
+	sound_dropped    = 'sound/foley/rockscrape.ogg'
 
-// Placeholder for firemaking.
 /decl/material/solid/stone/sandstone
 	name = "sandstone"
 	uid = "solid_sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
 	melting_point = T0C + 600
+	hardness = MAT_VALUE_RIGID + 5
 
 /decl/material/solid/stone/flint
 	name      = "flint"
@@ -40,7 +43,7 @@
 	color                  = "#615f5f"
 	exoplanet_rarity_plant = MAT_RARITY_MUNDANE
 	exoplanet_rarity_gas   = MAT_RARITY_MUNDANE
-	hardness               = MAT_VALUE_HARD + 5
+	hardness               = MAT_VALUE_HARD
 	melting_point          = T0C + 1260
 	brute_armor            = 15
 	explosion_resistance   = 15
@@ -56,7 +59,7 @@
 	uid = "solid_pottery"
 	lore_text = "A hard but brittle substance produced by firing clay in a kiln."
 	color = "#cd8f75"
-	melting_point = 1750 // Arbitrary, hotter than the kiln currently reaches.
+	melting_point = 2000 // Arbitrary, hotter than the kiln currently reaches.
 
 /decl/material/solid/stone/ceramic
 	name = "ceramic"
@@ -67,6 +70,7 @@
 
 	dissolves_in = MAT_SOLVENT_IMMUNE
 	dissolves_into = null
+
 /decl/material/solid/stone/marble
 	name = "marble"
 	uid = "solid_marble"
@@ -90,6 +94,7 @@
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
+	melting_point  = T0C + 1200
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
 /decl/material/solid/stone/concrete
@@ -98,6 +103,7 @@
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	color = COLOR_GRAY
 	value = 0.9
+	melting_point  = T0C + 1200
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/image/texture
@@ -109,24 +115,3 @@
 
 /decl/material/solid/stone/concrete/get_wall_texture()
 	return texture
-
-/decl/material/solid/stone/cult
-	name = "disturbing stone"
-	uid = "solid_stone_cult"
-	icon_base = 'icons/turf/walls/cult.dmi'
-	icon_reinf = 'icons/turf/walls/reinforced_cult.dmi'
-	color = "#402821"
-	shard_type = SHARD_STONE_PIECE
-	conductive = 0
-	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	hidden_from_codex = TRUE
-	reflectiveness = MAT_VALUE_DULL
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-
-/decl/material/solid/stone/cult/place_dismantled_girder(var/turf/target)
-	return list(new /obj/structure/girder/cult(target))
-
-/decl/material/solid/stone/cult/reinforced
-	name = "runic inscriptions"
-	uid = "solid_runes_cult"

@@ -261,6 +261,8 @@
 		switch(get_pin_data(IC_INPUT, 2))
 			if(0)
 				var/list/harvest_output = TR.harvest()
+				if(harvest_output && !islist(harvest_output))
+					harvest_output = list(harvest_output)
 				for(var/i in 1 to length(harvest_output))
 					harvest_output[i] = weakref(harvest_output[i])
 
@@ -286,7 +288,7 @@
 					activate_pin(2)
 					return FALSE
 
-				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/cutting))
+				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/extracted/cutting))
 					if(!TR.seed)
 						acting_object.visible_message("<span class='notice'>[acting_object] plants [O].</span>")
 						TR.dead = 0
@@ -319,11 +321,7 @@
 		return
 	var/list/seed_output = list()
 	for(var/i in 1 to rand(1,4))
-		var/obj/item/seeds/seeds = new(get_turf(O))
-		seeds.seed = SSplants.seeds[O.plantname]
-		seeds.seed_type = SSplants.seeds[O.seed.name]
-		seeds.update_seed()
-		seed_output += weakref(seeds)
+		seed_output += weakref(new /obj/item/seeds(get_turf(O), null, O.seed))
 	qdel(O)
 
 	if(seed_output.len)

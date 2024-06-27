@@ -13,6 +13,7 @@
 	show_robotics_recipes = TRUE
 	name_column = "Fault"
 	treatment_column = "Recommended repair"
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /proc/get_chem_effect_display_name(effect)
 	switch(effect)
@@ -43,8 +44,8 @@
 			continue
 		ailment_table += "<tr><td>[ailment.name]</td><td>"
 		var/list/ailment_cures = list()
-		if(ailment.treated_by_item_type)
-			var/obj/item/thing = ailment.treated_by_item_type
+		var/list/treated_by_types = islist(ailment.treated_by_item_type) ? ailment.treated_by_item_type : list(ailment.treated_by_item_type)
+		for(var/obj/item/thing as anything in treated_by_types) // if you put a non-item in here you deserve to have your face eaten by runtime errors
 			ailment_cures += "[ailment.treated_by_item_cost] x [initial(thing.name)]"
 		if(ailment.treated_by_reagent_type)
 			var/decl/material/mat = GET_DECL(ailment.treated_by_reagent_type)

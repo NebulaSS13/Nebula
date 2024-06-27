@@ -3,7 +3,7 @@
 		if(!get_empty_hand_slot())
 			to_chat(src, SPAN_WARNING("Your hands are full!"))
 			return FALSE
-	else if(get_active_hand())
+	else if(get_active_held_item())
 		to_chat(src, SPAN_WARNING("Your [parse_zone(get_active_held_item_slot())] is full!"))
 		return FALSE
 	return TRUE
@@ -43,6 +43,11 @@
 
 	if(!istype(target))
 		return
+
+	if(!force_grab_tag)
+		var/decl/species/my_species = get_species()
+		if(my_species?.grab_type)
+			grab_tag = my_species.grab_type
 
 	face_atom(target)
 	var/obj/item/grab/grab

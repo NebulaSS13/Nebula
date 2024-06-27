@@ -1,10 +1,10 @@
 /datum/seed/diona
 	name = "diona"
-	seed_name = "diona"
+	product_name = "diona"
 	seed_noun = SEED_NOUN_NODES
 	display_name = "diona nymph pods"
 	can_self_harvest = 1
-	product_type = /mob/living/carbon/alien/diona
+	product_type = /mob/living/simple_animal/alien/diona
 
 /datum/seed/diona/New()
 	..()
@@ -20,7 +20,7 @@
 	set_trait(TRAIT_PLANT_ICON,"alien4")
 
 /obj/item/seeds/diona
-	seed_type = "diona"
+	seed = "diona"
 
 /decl/hierarchy/supply_pack/hydroponics/exoticseeds/Initialize()
 	contains[/obj/item/seeds/diona] = 2

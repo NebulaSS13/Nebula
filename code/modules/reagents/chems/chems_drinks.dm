@@ -5,6 +5,7 @@
 	value = 0.4
 	abstract_type = /decl/material/liquid/drink
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Please, no more berry juice atmosphere planets.
+	compost_value = 1
 
 	var/nutrition = 0 // Per unit
 	var/hydration = 6 // Per unit
@@ -14,10 +15,10 @@
 	var/adj_temp = 0
 
 /decl/material/liquid/drink/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
+	M.take_damage(removed, TOX) // Probably not a good idea; not very deadly though
 
 /decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	if(nutrition)
@@ -40,7 +41,7 @@
 
 /decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	if(!M.HasTrait(/decl/trait/metabolically_inert))
+	if(!M.has_trait(/decl/trait/metabolically_inert))
 		M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
 
 /decl/material/liquid/drink/juice/banana
@@ -115,10 +116,10 @@
 /decl/material/liquid/drink/juice/lime/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
-	M.adjustToxLoss(-0.5 * removed)
+	M.heal_damage(TOX, 0.5 * removed)
 
 /decl/material/liquid/drink/juice/orange
 	name = "orange juice"
@@ -134,10 +135,10 @@
 /decl/material/liquid/drink/juice/orange/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
-	M.adjustOxyLoss(-2 * removed)
+	M.heal_damage(OXY, 2 * removed)
 
 /decl/material/liquid/poisonberryjuice
 	name = "poison berry juice"
@@ -197,7 +198,7 @@
 /decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	M.heal_organ_damage(0, 0.5 * removed)
@@ -273,7 +274,7 @@
 
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 10 * removed)
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	M.heal_organ_damage(0.5 * removed, 0)
@@ -339,7 +340,7 @@
 	if(adj_temp > 0)
 		holder.remove_reagent(/decl/material/liquid/frostoil, 10 * removed)
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -352,7 +353,7 @@
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M)
+/decl/material/liquid/drink/coffee/affect_overdose(mob/living/M, total_dose)
 	ADJ_STATUS(M, STAT_JITTER, 5)
 	M.add_chemical_effect(CE_PULSE, 1)
 
@@ -512,7 +513,7 @@
 /decl/material/liquid/drink/mutagencola/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
@@ -642,7 +643,7 @@
 /decl/material/liquid/drink/hell_ramen/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
@@ -661,10 +662,10 @@
 /decl/material/liquid/drink/tea/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
-	M.adjustToxLoss(-0.5 * removed)
+	M.heal_damage(TOX, 0.5 * removed)
 
 /decl/material/liquid/drink/tea/black
 	name = "black tea"
@@ -836,7 +837,7 @@
 /decl/material/liquid/drink/beastenergy/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	if(M.HasTrait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
 	ADJ_STATUS(M, STAT_DROWSY, -7)

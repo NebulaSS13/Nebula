@@ -42,7 +42,7 @@
 
 #define ATMOS_CANPASS_MOVABLE(ret, AM, TARG_TURF) \
 	switch (AM.atmos_canpass) { \
-		if (CANPASS_ALWAYS) { } \
+		if (CANPASS_ALWAYS) { EMPTY_BLOCK_GUARD } \
 		if (CANPASS_DENSITY) { \
 			if (AM.density) { \
 				ret |= AIR_BLOCKED; \

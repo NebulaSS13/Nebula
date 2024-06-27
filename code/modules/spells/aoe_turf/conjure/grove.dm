@@ -12,7 +12,7 @@
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 3, Sp_POWER = 1)
 
 	summon_amt = 47
-	summon_type = list(/turf/simulated/floor/grass)
+	summon_type = list(/turf/floor/fake_grass)
 	var/spread = 0
 	var/datum/seed/seed
 	var/seed_type = /datum/seed/merlin_tear
@@ -56,10 +56,10 @@
 
 /datum/seed/merlin_tear
 	name = "merlin tears"
-	seed_name = "merlin tears"
+	product_name = "merlin tears"
 	display_name = "merlin tears"
 	chems = list(/decl/material/liquid/brute_meds = list(3,7), /decl/material/liquid/burn_meds = list(3,7), /decl/material/liquid/antitoxins = list(3,7), /decl/material/liquid/regenerator = list(3,7), /decl/material/liquid/neuroannealer = list(1,2), /decl/material/liquid/eyedrops = list(1,2))
-	kitchen_tag = "berries"
+	grown_tag = "berries"
 
 /datum/seed/merlin_tear/New()
 	..()

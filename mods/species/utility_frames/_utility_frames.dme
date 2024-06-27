@@ -1,9 +1,11 @@
 #ifndef MODPACK_UTILITY_FRAMES
 #define MODPACK_UTILITY_FRAMES
-#include "../../content/shackles/_shackles.dme"
+#include "..\..\content\shackles\_shackles.dme"
+// BEGIN_INCLUDE
 #include "_utility_frames.dm"
+#include "markings.dm"
 #include "species.dm"
 #include "species_bodytypes.dm"
-#include "markings.dm"
-#include "aspects.dm"
+#include "traits.dm"
+// END_INCLUDE
 #endif

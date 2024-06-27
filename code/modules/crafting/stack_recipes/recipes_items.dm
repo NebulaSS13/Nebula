@@ -3,6 +3,8 @@
 	result_type       = /obj/item/grenade/chem_grenade
 	difficulty        = MAT_VALUE_VERY_HARD_DIY
 	required_material = /decl/material/solid/metal/aluminium
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
+	category          = "weapons"
 
 /decl/stack_recipe/candle
 	result_type       = /obj/item/flame/candle
@@ -12,18 +14,22 @@
 /decl/stack_recipe/paper_sheets
 	name              = "sheet of paper"
 	result_type       = /obj/item/paper
-	res_amount        = 4
-	max_res_amount    = 30
 	required_material = /decl/material/solid/organic/paper
 
-/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/item/paper/P = ..()
-	if(amount > 1)
-		var/obj/item/paper_bundle/B = new(location)
-		B.merge(P)
-		for(var/i = 1 to (amount - 1))
-			if(B.get_amount_papers() >= B.max_pages)
-				B = new(location)
-			B.merge(new /obj/item/paper(location))
-		return B
-	return P
+/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
+	. = ..()
+	if(amount <= 1)
+		return .
+	var/obj/item/paper_bundle/bundle = new (location)
+	var/list/bundles = list(bundle)
+	var/remaining = amount
+	for(var/obj/item/paper/paper in .)
+		remaining--
+		if(bundle.get_amount_papers() >= bundle.max_pages)
+			if(remaining == 0)
+				bundles += paper // not a bundle, this is an exception for single overflow pages
+				break
+			bundle = new(location)
+			bundles += bundle
+		bundle.merge(paper)
+	return bundles

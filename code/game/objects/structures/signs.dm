@@ -62,12 +62,12 @@
 	sign_type = null
 	return S
 
-///Attempts installing the sign and ask the user for direction and etc..
+///Attempts installing the sign and ask the user for direction and etc.
 /obj/item/sign/proc/try_install(var/turf/targeted_turf, var/mob/user)
 	var/facing      = get_cardinal_dir(user, targeted_turf) || user.dir
 	var/install_dir = global.reverse_dir[facing]
 	//If we used the screwdriver on the panel, it'll be in the active hand
-	var/obj/item/screwdriver/S = user.get_active_hand()
+	var/obj/item/screwdriver/S = user.get_active_held_item()
 	if(!istype(S))
 		//Otherwise it should be in one of the offhand slots
 		for(S in user.get_inactive_held_items())
@@ -111,7 +111,7 @@
 	if(QDELETED(src))
 		return TRUE
 	if(screwdriver.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 3 SECONDS, "taking down", "taking down"))
-		dismantle()
+		dismantle_structure(user)
 	return TRUE
 
 /obj/structure/sign/hide()
@@ -127,9 +127,9 @@
 		copy_extension(src, S, /datum/extension/forensic_evidence)
 		copy_extension(src, S, /datum/extension/scent)
 		transfer_fingerprints_to(S)
-	matter = null
-	material = null
-	reinf_material = null
+		if(paint_color)
+			S.set_color(paint_color)
+	clear_materials()
 
 /obj/structure/sign/double/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
 	return FALSE

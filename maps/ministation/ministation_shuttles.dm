@@ -55,7 +55,7 @@
 	current_location = "nav_ministation_science_dock_shuttle"
 
 /obj/effect/shuttle_landmark/science_dock
-	name = "Science Department Docking Arm"
+	name = "Tradepost Science Department Docking Arm"
 	docking_controller = "ministation_science_dock"
 	landmark_tag = "nav_ministation_science_dock_shuttle"
 
@@ -81,7 +81,7 @@
 	wall_type =     null
 	firedoor_type = null
 	light_type =    null
-	floor_type =  /turf/simulated/floor/tiled/steel_grid
+	floor_type =  /turf/floor/tiled/steel_grid
 	button_type = /obj/structure/lift/button/standalone
 	panel_type =  /obj/structure/lift/panel/standalone
 	areas_to_use = list(

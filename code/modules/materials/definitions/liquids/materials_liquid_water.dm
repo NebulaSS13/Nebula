@@ -22,6 +22,7 @@
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
 	slipperiness = 8
+	slippery_amount = 5
 	dirtiness = DIRTINESS_CLEAN
 	turf_touch_threshold = 0.1
 	chilling_point = T0C
@@ -33,22 +34,11 @@
 	..()
 	if(ishuman(M))
 		var/list/data = REAGENT_DATA(holder, type)
-		if(data && data["holy"])
-			if(iscultist(M))
-				if(prob(10))
-					var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
-					cult.offer_uncult(M)
-				if(prob(2))
-					var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
-					M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
-			else
-				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
-				if(M.mind && godcult.is_antagonist(M.mind))
-					if(REAGENT_VOLUME(holder, type) > 5)
-						M.adjustHalLoss(5, do_update_health = FALSE)
-						M.adjustBruteLoss(1)
-						if(prob(10)) //Only annoy them a /bit/
-							to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]")
+		if(data?["holy"])
+			affect_holy(M, removed, holder)
+
+/decl/material/liquid/water/proc/affect_holy(mob/living/M, removed, datum/reagents/holder)
+	return FALSE
 
 /decl/material/liquid/water/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()

@@ -1,4 +1,4 @@
-MANTIDIFY(/obj/item/storage/bag/trash/purple,   "sample collection carrier", "material storage")
+MANTIDIFY(/obj/item/bag/trash/purple,   "sample collection carrier", "material storage")
 MANTIDIFY(/obj/item/tool/drill/diamond,         "lithobliterator",           "drilling")
 MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "propulsion")
 
@@ -53,11 +53,11 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	add_to_reagents(/decl/material/liquid/water, 10)
 	. = ..()
 
-/obj/item/storage/box/water/ascent
+/obj/item/box/water/ascent
 	name = "box of hydration cylinders"
 	desc = "A box full of bottled water."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 	icon_state = "box"
 
-/obj/item/storage/box/water/ascent/WillContain()
+/obj/item/box/water/ascent/WillContain()
 	return list(/obj/item/chems/drinks/cans/waterbottle/ascent = 7)

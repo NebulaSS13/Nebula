@@ -64,8 +64,7 @@
 
 /obj/item/contract/wizard/xray/contract_effect(mob/user)
 	..()
-	if (!(MUTATION_XRAY in user.mutations))
-		user.mutations.Add(MUTATION_XRAY)
+	if (user.add_genetic_condition(GENE_COND_XRAY))
 		user.set_sight(user.sight|SEE_MOBS|SEE_OBJS|SEE_TURFS)
 		user.set_see_in_dark(8)
 		user.set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
@@ -80,15 +79,7 @@
 
 /obj/item/contract/wizard/telepathy/contract_effect(mob/user)
 	..()
-	if (!ishuman(user))
-		return 0
-	var/mob/living/carbon/human/H = user
-	if (mRemotetalk in H.mutations)
-		return 0
-	H.mutations.Add(mRemotetalk)
-	H.verbs += /mob/living/carbon/human/proc/remotesay
-	to_chat(H, "<span class='notice'>You expand your mind outwards.</span>")
-	return 1
+	return user.add_genetic_condition(GENE_COND_REMOTE_TALK)
 
 /obj/item/contract/boon
 	name = "boon contract"
@@ -123,10 +114,6 @@
 
 /obj/item/contract/boon/wizard
 	contract_master = "\improper Wizard Academy"
-
-/obj/item/contract/boon/wizard/artificer
-	path = /spell/aoe_turf/conjure/construct
-	desc = "This contract has a passage dedicated to an entity known as 'Nar-Sie'."
 
 /obj/item/contract/boon/wizard/fireball
 	path = /spell/targeted/projectile/dumbfire/fireball

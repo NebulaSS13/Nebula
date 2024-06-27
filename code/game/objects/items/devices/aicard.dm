@@ -57,7 +57,7 @@
 			flush = 1
 			to_chat(carded_ai, "Your core files are being wiped!")
 			while (carded_ai && carded_ai.stat != DEAD)
-				carded_ai.adjustOxyLoss(2)
+				carded_ai.take_damage(2, OXY)
 				sleep(10)
 			flush = 0
 	if (href_list["radio"])
@@ -124,12 +124,6 @@
 	carded_ai.calculate_power_usage()
 	carded_ai = null
 	update_icon()
-
-/obj/item/aicard/see_emote(mob/living/M, text)
-	if(carded_ai && carded_ai.client)
-		var/rendered = "<span class='message'>[text]</span>"
-		carded_ai.show_message(rendered, 2)
-	..()
 
 /obj/item/aicard/show_message(msg, type, alt, alt_type)
 	if(carded_ai && carded_ai.client)

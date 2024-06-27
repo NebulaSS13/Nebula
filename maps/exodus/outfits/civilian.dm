@@ -4,13 +4,13 @@
 
 /decl/hierarchy/outfit/job/service/bartender
 	name = "Job - Bartender"
-	uniform = /obj/item/clothing/under/bartender
+	uniform = /obj/item/clothing/pants/formal/black/outfit
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/service/chef
 	name = "Job - Chef"
-	uniform = /obj/item/clothing/under/chef
+	uniform = /obj/item/clothing/pants/slacks/outfit_chef
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
 	id_type = /obj/item/card/id/civilian
@@ -18,7 +18,7 @@
 
 /decl/hierarchy/outfit/job/service/gardener
 	name = "Job - Gardener"
-	uniform = /obj/item/clothing/under/hydroponics
+	uniform = /obj/item/clothing/jumpsuit/hydroponics
 	suit = /obj/item/clothing/suit/apron
 	gloves = /obj/item/clothing/gloves/thick/botany
 	r_pocket = /obj/item/scanner/plant
@@ -27,19 +27,19 @@
 
 /decl/hierarchy/outfit/job/service/gardener/Initialize()
 	. = ..()
-	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/hydroponics
-	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/hyd
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/hyd
+	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/backpack/hydroponics
+	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/backpack/satchel/hyd
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/backpack/messenger/hyd
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = "Job - Janitor"
-	uniform = /obj/item/clothing/under/janitor
+	uniform = /obj/item/clothing/jumpsuit/janitor
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/librarian
 	name = "Job - Librarian"
-	uniform = /obj/item/clothing/under/suit_jacket/red
+	uniform = /obj/item/clothing/pants/slacks/red/outfit
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
@@ -50,17 +50,17 @@
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = "Job - Internal affairs agent"
 	l_ear = /obj/item/radio/headset/heads/ia
-	uniform = /obj/item/clothing/under/internalaffairs
-	suit = /obj/item/clothing/suit/storage/toggle/suit/black
+	uniform = /obj/item/clothing/pants/slacks/black/outfit/internal_affairs
+	suit = /obj/item/clothing/suit/jacket/black
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
-	hands = list(/obj/item/storage/briefcase)
+	hands = list(/obj/item/briefcase)
 	id_type = /obj/item/card/id/civilian/internal_affairs_agent
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/chaplain
 	name = "Job - Chaplain"
-	uniform = /obj/item/clothing/under/chaplain
-	hands = list(/obj/item/storage/bible)
+	uniform = /obj/item/clothing/jumpsuit/chaplain
+	hands = list(/obj/item/bible)
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda/medical

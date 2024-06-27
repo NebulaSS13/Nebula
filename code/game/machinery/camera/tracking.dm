@@ -221,7 +221,7 @@
 		var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
 		return D && D.is_functional() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
-/mob/living/carbon/human/tracking_status()
+/mob/living/human/tracking_status()
 	if(is_cloaked())
 		. = TRACKING_TERMINATE
 	else

@@ -97,20 +97,20 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
 	return
 
-/obj/vehicle/train/cargo/engine/insert_cell(var/obj/item/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/engine/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
 	..()
 	update_stats()
 
-/obj/vehicle/train/cargo/engine/remove_cell(var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/engine/remove_cell(var/mob/living/human/H)
 	..()
 	update_stats()
 
 /obj/vehicle/train/cargo/engine/Bump(atom/Obstacle)
 	var/obj/machinery/door/D = Obstacle
-	var/mob/living/carbon/human/H = load
+	var/mob/living/human/H = load
 	if(istype(D) && istype(H))
 		D.Bumped(H)		//a little hacky, but hey, it works, and respects access rights
 
@@ -164,11 +164,11 @@
 /obj/vehicle/train/cargo/engine/crossed_mob(var/mob/living/victim)
 	..()
 	if(is_train_head() && ishuman(load))
-		var/mob/living/carbon/human/D = load
+		var/mob/living/human/D = load
 		to_chat(D, "<span class='danger'>You ran over \the [victim]!</span>")
 		visible_message("<span class='danger'>\The [src] ran over \the [victim]!</span>")
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey]), driven by [D.name] ([D.ckey])</font>")
-		msg_admin_attack("[D.name] ([D.ckey]) ran over [victim.name] ([victim.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+		msg_admin_attack("[D.name] ([D.ckey]) ran over [victim.name] ([victim.ckey]). (<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 	else
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 

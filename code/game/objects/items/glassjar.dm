@@ -12,7 +12,7 @@
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 	var/list/accept_mobs = list(
 		/mob/living/simple_animal/lizard,
-		/mob/living/simple_animal/mouse
+		/mob/living/simple_animal/passive/mouse
 	)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
 

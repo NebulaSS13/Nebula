@@ -76,7 +76,7 @@
 		var/transformer_max_health = transformer.get_max_health()
 		var/damage = transformer.set_max_health(transformer_max_health-round(transformer_max_health*(transformer.get_health_ratio())))
 		for(var/i in 1 to CEILING(damage/10))
-			transformer.adjustBruteLoss(10)
+			transformer.take_damage(10)
 	if(target.mind)
 		target.mind.transfer_to(transformer)
 	else
@@ -101,8 +101,8 @@
 	feedback = "BP"
 	possible_transformations = list(
 		/mob/living/simple_animal/lizard,
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/mouse/rat,
+		/mob/living/simple_animal/passive/mouse,
+		/mob/living/simple_animal/passive/mouse/rat,
 		/mob/living/simple_animal/corgi
 	)
 

@@ -7,9 +7,3 @@
 	name = "rescue shuttle control console"
 	initial_access = list(access_cent_specops)
 	shuttle_tag = "Rescue"
-
-/obj/machinery/computer/shuttle_control/multi/ninja
-	name = "stealth shuttle control console"
-	initial_access = list(access_ninja)
-	shuttle_tag = "Ninja"
-

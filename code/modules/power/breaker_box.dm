@@ -46,18 +46,18 @@
 
 /obj/machinery/power/breakerbox/attack_ai(mob/living/silicon/ai/user)
 	if(update_locked)
-		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
+		to_chat(user, SPAN_WARNING("System locked. Please try again later."))
 		return
 
 	if(busy)
-		to_chat(user, "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>")
+		to_chat(user, SPAN_WARNING("System is busy. Please wait until current operation is finished before changing power settings."))
 		return
 
 	busy = 1
-	to_chat(user, "<span class='good'>Updating power settings..</span>")
+	to_chat(user, SPAN_GOOD("Updating power settings..."))
 	if(do_after(user, 50, src))
 		set_state(!on)
-		to_chat(user, "<span class='good'>Update Completed. New setting:[on ? "on": "off"]</span>")
+		to_chat(user, SPAN_GOOD("Update completed. New setting:[on ? "on": "off"]"))
 		update_locked = 1
 		spawn(600)
 			update_locked = 0

@@ -48,7 +48,7 @@
 	var/decl/item_modifier/target_modification
 	var/target_bodytype
 
-	var/mob/living/carbon/human/occupant
+	var/mob/living/human/occupant
 	var/obj/item/clothing/suit/space/void/suit
 	var/obj/item/clothing/head/helmet/space/helmet
 	var/obj/item/clothing/shoes/magboots/boots
@@ -299,26 +299,26 @@
 	else if(locked)
 		dat += "<br><font color='red'><B>The [model_text ? "[model_text] " : ""]suit cycler is currently locked. Please contact your system administrator.</b></font>"
 		if(allowed(user))
-			dat += "<br><a href='?src=\ref[src];toggle_lock=1'>Unlock unit</a>"
+			dat += "<br><a href='byond://?src=\ref[src];toggle_lock=1'>Unlock unit</a>"
 	else
 		dat += "<h1>Suit cycler</h1>"
-		dat += "<B>Welcome to the [model_text ? "[model_text] " : ""]suit cycler control panel. <a href='?src=\ref[src];toggle_lock=1'>Lock unit</a></B><HR>"
+		dat += "<B>Welcome to the [model_text ? "[model_text] " : ""]suit cycler control panel. <a href='byond://?src=\ref[src];toggle_lock=1'>Lock unit</a></B><HR>"
 
 		dat += "<h2>Maintenance</h2>"
-		dat += "<b>Helmet: </b> [helmet ? "\the [helmet]" : "no helmet stored" ]. <A href='?src=\ref[src];eject_helmet=1'>Eject</a><br/>"
-		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='?src=\ref[src];eject_suit=1'>Eject</a><br/>"
-		dat += "<b>Boots: </b> [boots ? "\the [boots]" : "no boots stored" ]. <A href='?src=\ref[src];eject_boots=1'>Eject</a>"
+		dat += "<b>Helmet: </b> [helmet ? "\the [helmet]" : "no helmet stored" ]. <A href='byond://?src=\ref[src];eject_helmet=1'>Eject</a><br/>"
+		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='byond://?src=\ref[src];eject_suit=1'>Eject</a><br/>"
+		dat += "<b>Boots: </b> [boots ? "\the [boots]" : "no boots stored" ]. <A href='byond://?src=\ref[src];eject_boots=1'>Eject</a>"
 
 		if(can_repair && istype(suit))
-			dat += "[(suit.damage ? " <A href='?src=\ref[src];repair_suit=1'>Repair</a>" : "")]"
+			dat += "[(suit.damage ? " <A href='byond://?src=\ref[src];repair_suit=1'>Repair</a>" : "")]"
 
 		dat += "<br/><b>UV decontamination systems:</b> <font color = '[emagged ? "red'>SYSTEM ERROR" : "green'>READY"]</font><br>"
 		dat += "Output level: [radiation_level]<br>"
-		dat += "<A href='?src=\ref[src];select_rad_level=1'>Select power level</a> <A href='?src=\ref[src];begin_decontamination=1'>Begin decontamination cycle</a><br><hr>"
+		dat += "<A href='byond://?src=\ref[src];select_rad_level=1'>Select power level</a> <A href='byond://?src=\ref[src];begin_decontamination=1'>Begin decontamination cycle</a><br><hr>"
 
 		dat += "<h2>Customisation</h2>"
-		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_bodytype=1'>[target_bodytype]</a>."
-		dat += "<br><A href='?src=\ref[src];apply_paintjob=1'>Apply customisation routine</a><br><hr>"
+		dat += "<b>Target product:</b> <A href='byond://?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='byond://?src=\ref[src];select_bodytype=1'>[target_bodytype]</a>."
+		dat += "<br><A href='byond://?src=\ref[src];apply_paintjob=1'>Apply customisation routine</a><br><hr>"
 
 	var/datum/browser/written_digital/popup = new(user, "suit_cycler", "Suit Cycler")
 	popup.set_content(JOINTEXT(dat))

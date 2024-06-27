@@ -41,12 +41,12 @@
 
 /obj/item/organ/internal/eyes/serpentid/Initialize()
 	. = ..()
-	if(dna)
-		color = rgb(dna.GetUIValue(DNA_UI_EYES_R), dna.GetUIValue(DNA_UI_EYES_G), dna.GetUIValue(DNA_UI_EYES_B))
+	if(owner)
+		color = owner.get_eye_colour()
 
-/obj/item/organ/internal/eyes/insectoid/serpentid/set_dna(var/datum/dna/new_dna)
+/obj/item/organ/internal/eyes/insectoid/serpentid/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
 	. = ..()
-	color = rgb(new_dna.GetUIValue(DNA_UI_EYES_R), new_dna.GetUIValue(DNA_UI_EYES_G), new_dna.GetUIValue(DNA_UI_EYES_B))
+	color = supplied_appearance?.eye_color
 
 /obj/item/organ/internal/liver/insectoid/serpentid
 	name = "toxin filter"
@@ -67,19 +67,19 @@
 	to_chat(owner, "<span class='danger'>You feel air rushing through your trachea!</span>")
 
 /obj/item/organ/internal/lungs/insectoid/serpentid/handle_failed_breath()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/human/H = owner
 
 	var/oxygenated = GET_CHEMICAL_EFFECT(owner, CE_OXYGENATED)
-	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * oxygenated))
+	H.heal_damage(OXY, HUMAN_MAX_OXYLOSS * oxygenated)
 
 	if(breath_fail_ratio < 0.25 && oxygenated)
-		H.oxygen_alert = 0
+		SET_HUD_ALERT(H, /decl/hud_element/condition/oxygen, 0)
 	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
-		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
+		H.take_damage(HUMAN_MAX_OXYLOSS * breath_fail_ratio, OXY)
 		if(oxygenated)
-			H.oxygen_alert = 1
+			SET_HUD_ALERT(H, /decl/hud_element/condition/oxygen, 1)
 		else
-			H.oxygen_alert = 2
+			SET_HUD_ALERT(H, /decl/hud_element/condition/oxygen, 2)
 
 /obj/item/organ/internal/brain/insectoid/serpentid
 	var/lowblood_tally = 0
@@ -148,7 +148,7 @@
 				playsound(owner.loc, 'sound/effects/angrybug.ogg', 60, 0)
 				owner.skin_state = SKIN_THREAT
 				owner.update_skin()
-				addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living/carbon/human, reset_skin)), 10 SECONDS, TIMER_UNIQUE)
+				addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living/human, reset_skin)), 10 SECONDS, TIMER_UNIQUE)
 		else if(owner.skin_state == SKIN_THREAT)
 			owner.reset_skin()
 

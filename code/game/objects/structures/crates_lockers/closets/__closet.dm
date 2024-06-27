@@ -55,6 +55,12 @@ var/global/list/closets = list()
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
 
+/obj/structure/closet/update_lock_overlay()
+	return // TODO
+
+/obj/structure/closet/can_install_lock()
+	return !(setup & CLOSET_HAS_LOCK) // CLOSET_HAS_LOCK refers to the access lock, not a physical lock.
+
 /obj/structure/closet/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && !opened)
@@ -81,18 +87,23 @@ var/global/list/closets = list()
 	if(air_group || (height==0 || wall_mounted)) return 1
 	return (!density)
 
-/obj/structure/closet/proc/can_open()
+/obj/structure/closet/proc/can_open(mob/user)
 	if((setup & CLOSET_HAS_LOCK) && locked)
-		return 0
+		return FALSE
 	if((setup & CLOSET_CAN_BE_WELDED) && welded)
-		return 0
-	return 1
+		return FALSE
+	if(lock)
+		if(user)
+			try_unlock(user, user.get_active_held_item())
+		if(lock.isLocked())
+			return FALSE
+	return TRUE
 
-/obj/structure/closet/proc/can_close()
+/obj/structure/closet/proc/can_close(mob/user)
 	for(var/obj/structure/closet/closet in get_turf(src))
 		if(closet != src)
-			return 0
-	return 1
+			return FALSE
+	return TRUE
 
 /obj/structure/closet/proc/store_contents()
 	var/stored_units = 0
@@ -104,31 +115,31 @@ var/global/list/closets = list()
 	if(storage_types & CLOSET_STORAGE_STRUCTURES)
 		stored_units += store_structures(stored_units)
 
-/obj/structure/closet/proc/open()
-	if(src.opened)
+/obj/structure/closet/proc/open(mob/user)
+	if(opened)
 		return 0
 
-	if(!src.can_open())
+	if(!can_open(user))
 		return 0
 
 	dump_contents()
 
-	src.opened = 1
-	playsound(src.loc, open_sound, 50, 1, -3)
+	opened = TRUE
+	playsound(loc, open_sound, 50, 1, -3)
 	density = FALSE
 	update_icon()
-	return 1
+	return TRUE
 
-/obj/structure/closet/proc/close()
-	if(!src.opened)
+/obj/structure/closet/proc/close(mob/user)
+	if(!opened)
 		return 0
-	if(!src.can_close())
+	if(!can_close(user))
 		return 0
 
 	store_contents()
-	src.opened = 0
+	opened = 0
 
-	playsound(src.loc, close_sound, 50, 0, -3)
+	playsound(loc, close_sound, 50, 0, -3)
 	if(!wall_mounted)
 		density = TRUE
 
@@ -212,7 +223,7 @@ var/global/list/closets = list()
 /obj/structure/closet/proc/toggle(mob/user)
 	if(locked)
 		togglelock(user)
-	else if(!(src.opened ? src.close() : src.open()))
+	else if(!(opened ? close(user) : open(user)))
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
 		update_icon()
 
@@ -231,7 +242,7 @@ var/global/list/closets = list()
 	var/proj_damage = Proj.get_structure_damage()
 	if(proj_damage)
 		..()
-		take_damage(proj_damage)
+		take_damage(proj_damage, Proj.atom_damage_type)
 
 /obj/structure/closet/attackby(obj/item/W, mob/user)
 
@@ -244,7 +255,7 @@ var/global/list/closets = list()
 	if(opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
-			src.receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
+			receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
 			return TRUE
 		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
@@ -257,15 +268,14 @@ var/global/list/closets = list()
 				slice_into_parts(W, user)
 			return TRUE
 
-		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
-			var/obj/item/storage/laundry_basket/LB = W
+		if(istype(W, /obj/item/laundry_basket) && W.contents.len && W.storage)
 			var/turf/T = get_turf(src)
-			for(var/obj/item/I in LB.contents)
-				LB.remove_from_storage(I, T, 1)
-			LB.finish_bulk_removal()
+			for(var/obj/item/I in W.storage.get_contents())
+				W.storage.remove_from_storage(user, I, T, TRUE)
+			W.storage.finish_bulk_removal()
 			user.visible_message(
-				SPAN_NOTICE("\The [user] empties \the [LB] into \the [src]."),
-				SPAN_NOTICE("You empty \the [LB] into \the [src]."),
+				SPAN_NOTICE("\The [user] empties \the [W] into \the [src]."),
+				SPAN_NOTICE("You empty \the [W] into \the [src]."),
 				SPAN_NOTICE("You hear rustling of clothes.")
 			)
 			return TRUE
@@ -278,12 +288,18 @@ var/global/list/closets = list()
 			return TRUE
 		return FALSE
 
+	if(try_key_unlock(W, user))
+		return TRUE
+
+	if(try_install_lock(W, user))
+		return TRUE
+
 	if(istype(W, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = W
 		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
-			spark_at(src.loc, amount=5)
-			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			open()
+			spark_at(loc, amount=5)
+			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
+			open(user)
 		return TRUE
 
 	if(istype(W, /obj/item/stack/package_wrap))
@@ -295,12 +311,12 @@ var/global/list/closets = list()
 			if(WT.isOn())
 				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 			return
-		src.welded = !src.welded
-		src.update_icon()
+		welded = !welded
+		update_icon()
 		user.visible_message(SPAN_WARNING("\The [src] has been [welded?"welded shut":"unwelded"] by \the [user]."), blind_message = "You hear welding.", range = 3)
 		return TRUE
 	else if(setup & CLOSET_HAS_LOCK)
-		src.togglelock(user, W)
+		togglelock(user, W)
 		return TRUE
 
 	return attack_hand_with_interaction_checks(user)
@@ -328,11 +344,10 @@ var/global/list/closets = list()
 	return ..()
 
 /obj/structure/closet/relaymove(mob/user)
-	if(user.stat || !isturf(src.loc))
+	if(user.stat || !isturf(loc))
 		return
-
-	if(!src.open())
-		to_chat(user, "<span class='notice'>It won't budge!</span>")
+	if(!open(user))
+		to_chat(user, SPAN_WARNING("\The [src] won't budge!"))
 
 /obj/structure/closet/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
@@ -344,7 +359,7 @@ var/global/list/closets = list()
 /obj/structure/closet/attack_ghost(mob/ghost)
 	if(ghost.client && ghost.client.inquisitive_ghost)
 		ghost.examinate(src)
-		if (!src.opened)
+		if (!opened)
 			to_chat(ghost, "It contains: [english_list(contents)].")
 
 /obj/structure/closet/verb/verb_toggleopen()
@@ -356,8 +371,8 @@ var/global/list/closets = list()
 		return
 
 	if(ishuman(usr))
-		src.add_fingerprint(usr)
-		src.toggle(usr)
+		add_fingerprint(usr)
+		toggle(usr)
 	else
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
 
@@ -404,7 +419,7 @@ var/global/list/closets = list()
 			breakout = 0
 			return FALSE
 
-		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
+		playsound(loc, 'sound/effects/grillehit.ogg', 100, 1)
 		shake_animation()
 		add_fingerprint(escapee)
 
@@ -412,22 +427,21 @@ var/global/list/closets = list()
 	breakout = 0
 	to_chat(escapee, "<span class='warning'>You successfully break out!</span>")
 	visible_message("<span class='danger'>\The [escapee] successfully broke out of \the [src]!</span>")
-	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
-	break_open()
+	playsound(loc, 'sound/effects/grillehit.ogg', 100, 1)
+	QDEL_NULL(lock)
+	break_open(escapee)
 	shake_animation()
 
-/obj/structure/closet/proc/break_open()
-	welded = 0
-
+/obj/structure/closet/proc/break_open(mob/user)
+	welded = FALSE
 	if((setup & CLOSET_HAS_LOCK) && locked)
 		make_broken()
-
 	//Do this to prevent contents from being opened into nullspace
 	//#TODO: There's probably a better way to do this?
 	if(istype(loc, /obj/item/parcel))
 		var/obj/item/parcel/P = loc
 		P.unwrap()
-	open()
+	open(user)
 
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
 	return opened ? loc : null
@@ -445,10 +459,10 @@ var/global/list/closets = list()
 		return FALSE
 	if(!CanPhysicallyInteract(user))
 		return FALSE
-	if(src.opened)
+	if(opened)
 		to_chat(user, "<span class='notice'>Close \the [src] first.</span>")
 		return FALSE
-	if(src.broken)
+	if(broken)
 		to_chat(user, "<span class='warning'>\The [src] appears to be broken.</span>")
 		return FALSE
 	if(user.loc == src)
@@ -484,7 +498,7 @@ var/global/list/closets = list()
 	if(!broken && (setup & CLOSET_HAS_LOCK))
 		if(prob(50/severity))
 			locked = !locked
-			src.update_icon()
+			update_icon()
 		if(prob(20/severity) && !opened)
 			if(!locked)
 				open()

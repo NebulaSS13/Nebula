@@ -6,39 +6,37 @@
 /obj/item/clothing/suit/apron
 	name = "apron"
 	desc = "A basic blue apron."
-	icon = 'icons/clothing/suit/apron.dmi'
+	icon = 'icons/clothing/suits/apron.dmi'
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 	bodytype_equip_flags = null
-	allowed = list (/obj/item/chems/spray/plantbgone,/obj/item/scanner/plant,/obj/item/seeds,/obj/item/chems/glass/bottle,/obj/item/minihoe)
+	allowed = list (
+		/obj/item/chems/spray/plantbgone,
+		/obj/item/scanner/plant,
+		/obj/item/seeds,
+		/obj/item/chems/glass/bottle,
+		/obj/item/tool/hoe/mini
+	)
+
+/obj/item/clothing/suit/apron/colourable
+	desc = "A basic apron, good for protecting your clothes."
+	icon = 'icons/clothing/suits/apron_colourable.dmi'
+	color = null
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 //Captain
-/obj/item/clothing/suit/captunic
-	name = "captain's parade tunic"
-	desc = "Worn by a Captain to show their class."
-	icon = 'icons/clothing/suit/cap_tunic.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	flags_inv = HIDEJUMPSUIT
-
-/obj/item/clothing/suit/captunic/capjacket
-	name = "captain's uniform jacket"
-	desc = "A less formal jacket for everyday captain use."
-	icon = 'icons/clothing/suit/cap_jacket.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-	flags_inv = 0
-
 //Chaplain
 /obj/item/clothing/suit/chaplain_hoodie
 	name = "chaplain hoodie"
 	desc = "This suit says to you 'hush'!"
-	icon = 'icons/clothing/suit/chaplain.dmi'
+	icon = 'icons/clothing/suits/chaplain.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
 //Chaplain
 /obj/item/clothing/suit/nun
 	name = "nun robe"
 	desc = "Maximum piety in this star system."
-	icon = 'icons/clothing/suit/nun.dmi'
+	icon = 'icons/clothing/suits/nun.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 
@@ -46,7 +44,7 @@
 /obj/item/clothing/suit/chef
 	name = "chef's apron"
 	desc = "An apron used by a high class chef."
-	icon = 'icons/clothing/suit/chef.dmi'
+	icon = 'icons/clothing/suits/chef.dmi'
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
@@ -56,27 +54,40 @@
 /obj/item/clothing/suit/chef/classic
 	name = "classic chef's apron"
 	desc = "A basic, dull, white chef's apron."
-	icon = 'icons/clothing/suit/apron_chef.dmi'
+	icon = 'icons/clothing/suits/apron_chef.dmi'
 	bodytype_equip_flags = null
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 
 //Detective
-/obj/item/clothing/suit/storage/det_trench
+/obj/item/clothing/suit/det_trench
 	name = "brown trenchcoat"
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. This one wouldn't block much of anything."
-	icon = 'icons/clothing/suit/detective_brown.dmi'
+	icon = 'icons/clothing/suits/detective_brown.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/storage/box/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/taperecorder)
+	allowed = list(
+		/obj/item/tank/emergency,
+		/obj/item/flashlight,
+		/obj/item/gun/energy,
+		/obj/item/gun/projectile,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/baton,
+		/obj/item/handcuffs,
+		/obj/item/box/fancy/cigarettes,
+		/obj/item/flame/fuelled/lighter,
+		/obj/item/taperecorder
+	)
 	protects_against_weather = TRUE
+	storage = /datum/storage/pockets/suit
 
-/obj/item/clothing/suit/storage/det_trench/grey
+/obj/item/clothing/suit/det_trench/grey
 	name = "grey trenchcoat"
-	icon = 'icons/clothing/suit/detective_grey.dmi'
+	icon = 'icons/clothing/suits/detective_grey.dmi'
 
-/obj/item/clothing/suit/storage/det_trench/reinforced
+/obj/item/clothing/suit/det_trench/reinforced
 	name = "reinforced trenchcoat"
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. The coat is externally impact resistant - perfect for your next act of autodefenestration!"
 	armor = list(
@@ -89,10 +100,10 @@
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 //Forensics
-/obj/item/clothing/suit/storage/forensics
+/obj/item/clothing/suit/forensics
 	name = "jacket"
 	desc = "A forensics technician jacket."
-	icon = 'icons/clothing/suit/forensic_red.dmi'
+	icon = 'icons/clothing/suits/forensic_red.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/taperecorder)
 	armor = list(
@@ -103,21 +114,22 @@
 		)
 	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
+	storage = /datum/storage/pockets/suit
 
-/obj/item/clothing/suit/storage/forensics/red
+/obj/item/clothing/suit/forensics/red
 	name = "red jacket"
 	desc = "A red forensics technician jacket."
 
-/obj/item/clothing/suit/storage/forensics/blue
+/obj/item/clothing/suit/forensics/blue
 	name = "blue jacket"
 	desc = "A blue forensics technician jacket."
-	icon = 'icons/clothing/suit/forensic_blue.dmi'
+	icon = 'icons/clothing/suits/forensic_blue.dmi'
 
 //Engineering
-/obj/item/clothing/suit/storage/hazardvest
+/obj/item/clothing/suit/hazardvest
 	name = "hazard vest"
 	desc = "A high-visibility vest used in work zones."
-	icon = 'icons/clothing/suit/hazard_vest/orange.dmi'
+	icon = 'icons/clothing/suits/hazard_vest/orange.dmi'
 	blood_overlay_type = "armor"
 	bodytype_equip_flags = null
 	allowed = list (
@@ -137,61 +149,15 @@
 	)
 	body_parts_covered = SLOT_UPPER_BODY
 
-/obj/item/clothing/suit/storage/hazardvest/green
+/obj/item/clothing/suit/hazardvest/green
 	name = "green hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is green!"
-	icon = 'icons/clothing/suit/hazard_vest/green.dmi'
+	icon = 'icons/clothing/suits/hazard_vest/green.dmi'
 
-//Lawyer
-/obj/item/clothing/suit/storage/toggle/suit
-	name = "suit jacket"
-	desc = "A snappy dress jacket."
-	icon = 'icons/clothing/suit/suit_jacket.dmi'
-	blood_overlay_type = "coat"
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-
-/obj/item/clothing/suit/storage/toggle/suit/blue
-	name = "blue suit jacket"
-	color = "#00326e"
-
-/obj/item/clothing/suit/storage/toggle/suit/purple
-	name = "purple suit jacket"
-	color = "#6c316c"
-
-/obj/item/clothing/suit/storage/toggle/suit/black
-	name = "black suit jacket"
-	color = "#1f1f1f"
-
-//Medical
-/obj/item/clothing/suit/storage/toggle/fr_jacket
-	name = "first responder jacket"
-	desc = "A high-visibility jacket worn by medical first responders."
-	icon = 'icons/clothing/suit/responder_jacket.dmi'
-	blood_overlay_type = "armor"
-	allowed = list(
-		/obj/item/stack/medical,
-		/obj/item/chems/dropper,
-		/obj/item/chems/hypospray,
-		/obj/item/chems/inhaler,
-		/obj/item/chems/syringe,
-		/obj/item/scanner/health,
-		/obj/item/scanner/breath,
-		/obj/item/flashlight,
-		/obj/item/radio,
-		/obj/item/tank/emergency,
-		/obj/item/chems/ivbag
-	)
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-
-/obj/item/clothing/suit/storage/toggle/fr_jacket/ems
-	name = "\improper EMS jacket"
-	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
-	icon = 'icons/clothing/suit/emt_jacket.dmi'
-
-/obj/item/clothing/suit/storage/medical_chest_rig
+/obj/item/clothing/suit/medical_chest_rig
 	name = "\improper MT chest-rig"
 	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
-	icon = 'icons/clothing/suit/med_chest.dmi'
+	icon = 'icons/clothing/suits/med_chest.dmi'
 	blood_overlay_type = "armor"
 	allowed = list(
 		/obj/item/stack/medical,
@@ -208,11 +174,12 @@
 		/obj/item/clothing/head/hardhat/ems
 	)
 	body_parts_covered = SLOT_UPPER_BODY
+	storage = /datum/storage/pockets/suit
 
 /obj/item/clothing/suit/surgicalapron
 	name = "surgical apron"
 	desc = "A sterile blue apron for performing surgery."
-	icon = 'icons/clothing/suit/apron_surgery.dmi'
+	icon = 'icons/clothing/suits/apron_surgery.dmi'
 	blood_overlay_type = "armor"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	allowed = list(

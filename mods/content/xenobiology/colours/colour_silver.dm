@@ -16,7 +16,7 @@
 	var/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		playsound(location, 'sound/effects/phasein.ogg', 100, 1)
-		for(var/mob/living/carbon/human/M in viewers(location, null))
+		for(var/mob/living/human/M in viewers(location, null))
 			if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
 				M.flash_eyes()
 		for(var/i = 1, i <= 4 + rand(1,2), i++)

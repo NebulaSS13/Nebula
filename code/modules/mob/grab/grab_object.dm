@@ -39,9 +39,9 @@
 
 	var/mob/living/affecting_mob = get_affecting_mob()
 	if(affecting_mob)
-		affecting_mob.UpdateLyingBuckledAndVerbStatus()
+		affecting_mob.update_posture()
 		if(ishuman(affecting_mob))
-			var/mob/living/carbon/human/H = affecting_mob
+			var/mob/living/human/H = affecting_mob
 			var/obj/item/uniform = H.get_equipped_item(slot_w_uniform_str)
 			if(uniform)
 				uniform.add_fingerprint(assailant)
@@ -99,10 +99,10 @@
 		else
 			upgrade()
 
-/obj/item/grab/attack(mob/M, mob/living/user)
-	if(affecting == M)
+/obj/item/grab/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	if(affecting == target)
 		var/datum/extension/abilities/abilities = get_extension(user, /datum/extension/abilities)
-		if(abilities?.do_grabbed_invocation(M))
+		if(abilities?.do_grabbed_invocation(target))
 			return TRUE
 	. = ..()
 
@@ -151,7 +151,7 @@
 */
 
 /obj/item/grab/proc/on_target_change(obj/screen/zone_selector/zone, old_sel, new_sel)
-	if(src != assailant.get_active_hand())
+	if(src != assailant.get_active_held_item())
 		return // Note that because of this condition, there's no guarantee that target_zone = old_sel
 	if(target_zone == new_sel)
 		return
@@ -200,7 +200,7 @@
 
 /obj/item/grab/proc/action_used()
 	if(ishuman(assailant))
-		var/mob/living/carbon/human/H = assailant
+		var/mob/living/human/H = assailant
 		H.remove_cloaking_source(H.species)
 	last_action = world.time
 	leave_forensic_traces()
@@ -213,7 +213,7 @@
 
 /obj/item/grab/proc/leave_forensic_traces()
 	if(ishuman(affecting))
-		var/mob/living/carbon/human/affecting_mob = affecting
+		var/mob/living/human/affecting_mob = affecting
 		var/obj/item/clothing/C = affecting_mob.get_covering_equipped_item_by_zone(target_zone)
 		if(istype(C))
 			C.leave_evidence(assailant)

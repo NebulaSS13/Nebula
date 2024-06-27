@@ -126,7 +126,7 @@
 	else if(aiRestorePowerRoutine)
 		return AI_POWERUSAGE_RESTORATION
 
-	if(getOxyLoss())
+	if(get_damage(OXY))
 		return AI_POWERUSAGE_RECHARGING
 	return AI_POWERUSAGE_NORMAL
 
@@ -142,11 +142,11 @@
 	if(has_power(0))
 		// Self-shutdown mode uses only 10kW, so we don't have any spare power to charge.
 		if(!self_shutdown || carded)
-			adjustOxyLoss(AI_POWERUSAGE_NORMAL - AI_POWERUSAGE_RECHARGING)
+			take_damage(AI_POWERUSAGE_NORMAL - AI_POWERUSAGE_RECHARGING, OXY)
 		return
 
 	// Not powered. Gain oxyloss depeding on our power usage.
-	adjustOxyLoss(calculate_power_usage())
+	take_damage(calculate_power_usage(), OXY)
 
 // This verb allows the AI to disable or enable the power override mode.
 /mob/living/silicon/ai/proc/ai_power_override()
@@ -196,11 +196,14 @@
 	use_power = POWER_USE_ACTIVE
 	power_channel = EQUIP
 	invisibility = INVISIBILITY_ABSTRACT
+	is_spawnable_type = FALSE
 	var/mob/living/silicon/ai/powered_ai = null
 
 /obj/machinery/ai_powersupply/Initialize()
 	. = ..()
 	powered_ai = loc
+	if(!istype(powered_ai))
+		return INITIALIZE_HINT_QDEL
 	powered_ai.psupply = src
 
 /obj/machinery/ai_powersupply/Destroy()

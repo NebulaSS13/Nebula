@@ -21,6 +21,6 @@
 	if(!istype(affecting))
 		return
 	affecting.drop_held_items()
-	if(affecting.lying)
+	if(affecting.current_posture.prone)
 		SET_STATUS_MAX(affecting, STAT_WEAK, 4)
-	affecting.adjustOxyLoss(1)
+	affecting.take_damage(1, OXY)

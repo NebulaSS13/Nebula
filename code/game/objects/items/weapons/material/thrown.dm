@@ -22,12 +22,9 @@
 	if(material.radioactivity>0 && isliving(hit_atom))
 		var/mob/living/M = hit_atom
 		var/urgh = material.radioactivity
-		M.adjustToxLoss(rand(urgh/2,urgh))
+		M.take_damage(rand(urgh/2,urgh), TOX)
 
 /obj/item/star/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
 	if(user.a_intent == I_HURT)
-		user.throw_item(target, src)
-
-/obj/item/star/ninja
-	material = /decl/material/solid/metal/uranium
+		user.mob_throw_item(target, src)

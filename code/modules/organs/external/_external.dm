@@ -11,7 +11,7 @@
 	scale_max_damage_to_species_health = TRUE
 	abstract_type = /obj/item/organ/external
 
-	var/slowdown = 0
+	var/_slowdown = 0
 	var/tmp/_icon_cache_key
 	// Strings
 	var/broken_description             // fracture string if any.
@@ -35,8 +35,7 @@
 	var/skin_tone                      // Skin tone.
 	var/skin_colour                    // skin colour
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
-	var/hair_colour                    // hair colour
-	var/render_alpha = 255
+	var/render_alpha = 255             // Alpha value to use for rendering the icon (slime transparency)
 	var/skip_body_icon_draw = FALSE    // Set to true to skip including this organ on the human body sprite.
 
 	/// Sprite accessories like hair and markings to apply to the organ icon and owner.
@@ -82,6 +81,13 @@
 	var/image/hud_damage_image
 	var/fingerprint
 
+/obj/item/organ/external/proc/set_fingerprint(value)
+	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !BP_IS_PROSTHETIC(src))
+		fingerprint = value
+	else
+		for(var/obj/item/organ/external/E in children)
+			E.set_fingerprint(value)
+
 /obj/item/organ/external/proc/get_fingerprint()
 
 	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !BP_IS_PROSTHETIC(src))
@@ -103,7 +109,7 @@
 		F.completeness = rand(10,90)
 		forensics.add_data(/datum/forensics/fingerprints, F)
 
-/obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
+/obj/item/organ/external/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL && isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
@@ -142,12 +148,19 @@
 	. = ..(new_bodytype, override_material)
 	if(bodytype != old_bodytype && apply_to_internal_organs)
 		bodytype.rebuild_internal_organs(src, override_material)
-	slowdown = bodytype.movement_slowdown
 	if(.)
 		update_icon(TRUE)
 
-/obj/item/organ/external/set_dna(var/datum/dna/new_dna)
+/obj/item/organ/external/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
 	_icon_cache_key = null
+	if(organ_tag in supplied_appearance?.sprite_accessories)
+		var/list/sprite_cats = supplied_appearance.sprite_accessories[organ_tag]
+		for(var/category in sprite_cats)
+			var/list/marklist = sprite_cats[category]
+			for(var/accessory in marklist)
+				set_sprite_accessory(accessory, null, marklist[accessory], skip_update = TRUE)
+	else
+		clear_sprite_accessories(skip_update = TRUE)
 	return ..()
 
 /obj/item/organ/external/reset_status()
@@ -415,7 +428,7 @@
 		if(can_feel_pain())
 			add_pain(20)
 			owner.apply_effect(5, STUN)
-		owner.verbs |= /mob/living/carbon/human/proc/undislocate
+		owner.verbs |= /mob/living/human/proc/undislocate
 
 /obj/item/organ/external/proc/undislocate(var/skip_pain = FALSE)
 	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
@@ -431,14 +444,10 @@
 		for(var/obj/item/organ/external/limb in owner.get_external_organs())
 			if(limb.is_dislocated())
 				return
-		owner.verbs -= /mob/living/carbon/human/proc/undislocate
-
-/obj/item/organ/external/update_organ_health()
-	damage = min(max_damage, (brute_dam + burn_dam))
-	return
+		owner.verbs -= /mob/living/human/proc/undislocate
 
 //If "in_place" is TRUE will make organs skip their install/uninstall effects and  the sub-limbs and internal organs
-/obj/item/organ/external/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/external/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	if(!(. = ..()))
 		return
 
@@ -586,7 +595,7 @@
 /*
 This function completely restores a damaged organ to perfect condition.
 */
-/obj/item/organ/external/rejuvenate(var/ignore_organ_aspects)
+/obj/item/organ/external/rejuvenate(var/ignore_organ_traits)
 
 	damage_state = "00"
 	brute_dam = 0
@@ -601,10 +610,9 @@ This function completely restores a damaged organ to perfect condition.
 		qdel(wound)
 	number_wounds = 0
 
-
 	// handle internal organs
 	for(var/obj/item/organ/current_organ in internal_organs)
-		current_organ.rejuvenate(ignore_organ_aspects)
+		current_organ.rejuvenate(ignore_organ_traits)
 
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
@@ -614,7 +622,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	undislocate(TRUE)
 
-	. = ..() // Clear damage, reapply aspects.
+	. = ..() // Clear damage, reapply traits.
 
 	if(owner)
 		owner.update_health()
@@ -635,9 +643,15 @@ This function completely restores a damaged organ to perfect condition.
 	if(!owner || damage <= 0)
 		return
 
-	if(BP_IS_CRYSTAL(src) && (damage >= 15 || prob(1)))
+	if(BP_IS_CRYSTAL(src))
 		type = SHATTER
-		playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
+		if(damage >= 15 || prob(1))
+			playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
+	else if((limb_flags & ORGAN_FLAG_SKELETAL) || (BP_IS_PROSTHETIC(src) && !bodytype.is_robotic))
+		if(type == BURN)
+			type = CHARRED
+		else
+			type = SHATTER
 
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Brute damage can possibly trigger an internal wound, too.
@@ -719,7 +733,7 @@ This function completely restores a damaged organ to perfect condition.
 	if(length(ailments))
 		return TRUE
 
-	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED|ORGAN_DISLOCATED))
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_MUTATED|ORGAN_DISLOCATED|ORGAN_DEAD))
 		return TRUE
 
 	if((brute_dam || burn_dam) && !BP_IS_PROSTHETIC(src)) //Robot limbs don't autoheal and thus don't need to process when damaged
@@ -744,7 +758,7 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/Process()
 	if(owner)
 		if(pain)
-			pain -= owner.lying ? 3 : 1
+			pain -= owner.current_posture.prone ? 3 : 1
 			if(pain<0)
 				pain = 0
 		// Process wounds, doing healing etc. Only do this every few ticks to save processing power
@@ -852,7 +866,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.update_body(1)
 
 		germ_level++
-		owner.adjustToxLoss(1)
+		owner.take_damage(1, TOX)
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /obj/item/organ/external/proc/update_wounds()
@@ -916,7 +930,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	status &= ~ORGAN_BLEEDING
 	var/clamped = 0
 
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 	if(ishuman(owner))
 		H = owner
 
@@ -1070,7 +1084,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		owner.shock_stage += min_broken_damage
 
 	var/obj/item/organ/external/original_parent = parent
-	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
+	var/mob/living/human/victim = owner //Keep a reference for post-removed().
 	owner.remove_organ(src, TRUE, FALSE, ignore_children, update_icon = FALSE)
 	var/remaining_organs = victim.get_external_organs()
 	if(istype(victim) && !QDELETED(victim))
@@ -1079,7 +1093,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			for(var/obj/item/organ/external/organ in remaining_organs)
 				victim.remove_organ(organ, TRUE, TRUE, update_icon = FALSE)
 				if(organ.place_remains_from_dismember_method(disintegrate))
-					qdel(organ)
+					organ.physically_destroyed()
 			victim.dump_contents()
 			qdel(victim)
 		else // We deliberately skip queuing this via remove_organ() above due to potentially immediately deleting the mob.
@@ -1138,7 +1152,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			   HELPERS
 ****************************************************/
 
-/obj/item/organ/external/proc/release_restraints(var/mob/living/carbon/human/holder)
+/obj/item/organ/external/proc/release_restraints(var/mob/living/human/holder)
 	if(!holder)
 		holder = owner
 	if(!holder)
@@ -1170,16 +1184,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(!W.disinfected)
 			return 0
 	return 1
-
-/obj/item/organ/external/proc/bandage()
-	var/rval = 0
-	status &= ~ORGAN_BLEEDING
-	for(var/datum/wound/W in wounds)
-		rval |= !W.bandaged
-		W.bandaged = 1
-	if(rval)
-		owner.update_surgery()
-	return rval
 
 /obj/item/organ/external/proc/salve()
 	var/rval = 0
@@ -1355,7 +1359,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/do_uninstall(in_place, detach, ignore_children, update_icon)
 
-	var/mob/living/carbon/human/victim = owner //parent proc clears owner
+	var/mob/living/human/victim = owner //parent proc clears owner
 	if(!(. = ..()))
 		return
 
@@ -1453,13 +1457,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/get_incision(var/strict)
 
 	var/datum/wound/incision
-	if(BP_IS_CRYSTAL(src))
+	if(BP_IS_CRYSTAL(src) || (limb_flags & ORGAN_FLAG_SKELETAL))
 		for(var/datum/wound/shatter/other in wounds)
 			if(!incision || incision.damage < other.damage)
 				incision = other
 	else
 		for(var/datum/wound/cut/W in wounds)
-			if(W.bandaged || W.current_stage > W.max_bleeding_stage) // Shit's unusable
+			if(!W.is_open()) // Shit's unusable
 				continue
 			if(strict && !W.is_surgical()) //We don't need dirty ones
 				continue
@@ -1515,7 +1519,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		to_chat(owner, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(owner.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
-		add_pain(clamp(0, max_halloss - owner.getHalLoss(), 30))
+		add_pain(clamp(0, max_halloss - owner.get_damage(PAIN), 30))
 
 //Adds autopsy data for used_weapon.
 /obj/item/organ/external/proc/add_autopsy_data(var/used_weapon, var/damage)
@@ -1575,15 +1579,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/is_internal()
 	return FALSE
 
+/obj/item/organ/external/place_butcher_product(decl/butchery_data/butchery_decl)
+	if(butchery_decl.bone_type)
+		butchery_decl.place_products(owner, butchery_decl.bone_material, 1, butchery_decl.bone_type)
+	return ..()
+
 // This likely seems excessive, but refer to organ explosion_act() to see how it should be handled before reaching this point.
 /obj/item/organ/external/physically_destroyed(skip_qdel)
-	if(owner)
-		if(limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
-			dismember(FALSE, DISMEMBER_METHOD_BLUNT)
-		else
-			owner.gib()
-	else
+	if(!owner)
 		return ..()
+	if(limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
+		dismember(FALSE, DISMEMBER_METHOD_BLUNT)
+	else
+		owner.gib()
 
 /obj/item/organ/external/is_vital_to_owner()
 	if(isnull(vital_to_owner))
@@ -1612,3 +1620,25 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/default_results = bodytype.get_default_grooming_results(src, tool)
 	if(default_results)
 		. = default_results
+
+/obj/item/organ/external/proc/get_sprite_accessories(copy = FALSE)
+	if(copy)
+		return _sprite_accessories?.Copy()
+	return _sprite_accessories
+
+/obj/item/organ/external/proc/skeletonize(mob/living/donor)
+	if(limb_flags & ORGAN_FLAG_SKELETAL)
+		return
+	if(!donor)
+		if(!owner)
+			return
+		donor = owner
+	var/decl/butchery_data/butchery_data = GET_DECL(donor.butchery_data)
+	if(!butchery_data?.bone_material)
+		return
+	material = GET_DECL(butchery_data?.bone_material)
+	limb_flags |= ORGAN_FLAG_SKELETAL
+	status |= (ORGAN_DEAD|ORGAN_BRITTLE)
+	_sprite_accessories = null
+	update_icon()
+

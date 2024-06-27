@@ -16,7 +16,7 @@
 	return TRUE
 
 /obj/machinery/acting/wardrobe/proc/dispense()
-	new /obj/item/storage/backpack/chameleon/sydie_kit(src.loc)
+	new /obj/item/backpack/chameleon/sydie_kit(src.loc)
 	src.visible_message("\The [src] beeps, dispensing a small box onto the floor.", "You hear a beeping sound followed by a thumping noise of some kind.")
 	active = TRUE
 
@@ -32,13 +32,12 @@
 	SHOULD_CALL_PARENT(FALSE)
 	if(!ishuman(user))
 		return ..()
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	H.change_appearance(APPEARANCE_ALL, H.loc, H, H.generate_valid_species(), state = global.z_topic_state)
 	var/getName = sanitize(input(H, "Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)
 	if(getName)
 		H.real_name = getName
 		H.SetName(getName)
-		H.dna.real_name = getName
 		if(H.mind)
 			H.mind.name = H.name
 	return TRUE

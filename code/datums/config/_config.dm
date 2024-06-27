@@ -13,7 +13,7 @@
 
 	// Get our actual value (loading from text etc. may change data type)
 	var/decl/config/config_option = GET_DECL(config_decl)
-	if((config_option.config_flags & CONFIG_FLAG_NUM) && istext(new_value))
+	if((config_option.config_flags & (CONFIG_FLAG_NUM|CONFIG_FLAG_BOOL)) && istext(new_value))
 		new_value = text2num(new_value)
 	else if((config_option.config_flags & (CONFIG_FLAG_ENUM|CONFIG_FLAG_TEXT)) && isnum(new_value))
 		new_value = num2text(new_value)
@@ -79,6 +79,8 @@
 	else
 		if((config_flags & (CONFIG_FLAG_NUM|CONFIG_FLAG_ENUM)) && !isnum(default_value))
 			. += "has numeric or enum flag but not numeric default_value"
+		else if((config_flags & CONFIG_FLAG_BOOL) && default_value != TRUE && default_value != FALSE)
+			. += "has bool flag but not TRUE (1) or FALSE (0) default_value"
 		else if((config_flags & CONFIG_FLAG_TEXT) && !istext(default_value))
 			. += "has text flag but not text default_value"
 		else if((config_flags & CONFIG_FLAG_LIST) && !islist(default_value))

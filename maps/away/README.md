@@ -24,7 +24,7 @@ BUT HEED MY RUMINATIONS
 
 Away maps are expected to work whether you're on a specific main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map. You can use content packages to define content that is only included for particular maps, as the away sites are tested with all packages enabled.
 
-e.g. you can use `/area/space`, or `/turf/simulated/wall`, because neither are specific to a given map. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use `/obj/random_multi/single_item/punitelly`, because Punitelli only exists when `punitelli.dm` is compiled.
+e.g. you can use `/area/space`, or `/turf/wall`, because neither are specific to a given map. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use `/obj/random_multi/single_item/punitelly`, because Punitelli only exists when `punitelli.dm` is compiled.
 
 To make life easier, you can uncheck your main map definition then recompile, to make sure these types aren't available while you're mapping.
 

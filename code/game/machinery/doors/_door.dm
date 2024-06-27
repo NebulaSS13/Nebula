@@ -54,9 +54,9 @@
 
 /obj/machinery/door/get_blend_objects()
 	var/static/list/blend_objects = list(
-		/obj/structure/wall_frame, 
-		/obj/structure/window, 
-		/obj/structure/grille, 
+		/obj/structure/wall_frame,
+		/obj/structure/window,
+		/obj/structure/grille,
 		/obj/machinery/door
 	) // Objects which to blend with
 	return blend_objects
@@ -220,7 +220,7 @@
 		destroy_hits--
 		if (destroy_hits <= 0)
 			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
-			switch (Proj.damage_type)
+			switch (Proj.atom_damage_type)
 				if(BRUTE)
 					physically_destroyed()
 				if(BURN)
@@ -229,17 +229,18 @@
 
 	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(damage, 100), Proj.damage_type)
+		take_damage(min(damage, 100), Proj.atom_damage_type)
 
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
 	if(.)
-		visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
+		visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
 		var/tforce = 0
 		if(ismob(AM))
 			tforce = 3 * TT.speed
-		else
-			tforce = AM:throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		else if(isobj(AM))
+			var/obj/hitter_obj = AM
+			tforce = hitter_obj.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src.loc, hitsound, 100, 1)
 		take_damage(tforce)
 
@@ -338,13 +339,13 @@
 		else
 			user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
 			playsound(src.loc, hitsound, 100, 1)
-			take_damage(I.force, I.damtype)
+			take_damage(I.force, I.atom_damage_type)
 		return TRUE
 	return FALSE
 
-/obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
+/obj/machinery/door/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(!current_health)
-		..(damage, damtype)
+		..(damage, damage_type)
 		update_icon()
 		return
 
@@ -365,7 +366,7 @@
 	else if(current_health < current_max_health * 3/4 && initialhealth >= current_max_health * 3/4)
 		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
 
-	..(component_damage, damtype)
+	..(component_damage, damage_type)
 	update_icon()
 
 //How much damage should be passed to components inside even when door health is non zero
@@ -390,7 +391,7 @@
 		else if(current_health < current_max_health && get_dist(src, user) <= 1)
 			to_chat(user, "\The [src] has some minor scuffing.")
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if (emagged && istype(H) && (H.skill_check(SKILL_COMPUTER, SKILL_ADEPT) || H.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT)))
 		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
 
@@ -498,7 +499,6 @@
 	for(var/turf/turf in locs)
 		if(turf.simulated)
 			update_heat_protection(turf)
-			SSair.mark_for_update(turf)
 	return 1
 
 /obj/machinery/door/proc/update_heat_protection(var/turf/source)
@@ -532,15 +532,15 @@
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 
-		if( istype(T, /turf/simulated/wall))
+		if( istype(T, /turf/wall))
 			success = 1
 			if(propagate)
-				for(var/turf/simulated/wall/W in RANGE_TURFS(T, 1))
+				for(var/turf/wall/W in RANGE_TURFS(T, 1))
 					W.wall_connections = null
 					W.other_connections = null
 					W.queue_icon_update()
 
-		else if( istype(T, /turf/simulated/shuttle/wall) ||	istype(T, /turf/unsimulated/wall))
+		else if(istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
 			for(var/obj/O in T)

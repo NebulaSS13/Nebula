@@ -8,7 +8,7 @@
 	emote_see = list("clacks")
 	speak_chance = 0.5
 	turns_per_move = 5
-	meat_amount = 12
+	butchery_data = /decl/butchery_data/animal/arthropod/crab/giant
 	can_escape = TRUE //snip snip
 	break_stuff_probability = 15
 	faction = "crabs"
@@ -25,7 +25,7 @@
 	ability_cooldown = 2 MINUTES
 	ai = /datum/ai/giant_crab
 
-	var/mob/living/carbon/human/victim //the human we're grabbing
+	var/mob/living/human/victim //the human we're grabbing
 	var/grab_duration = 3 //duration of disable in life ticks to simulate a grab
 	var/grab_damage = 6 //brute damage before reductions, per crab's life tick
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
@@ -65,10 +65,10 @@
 	..()
 	process_grab()
 
-/mob/living/simple_animal/hostile/retaliate/giant_crab/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/giant_crab/attack_target(mob/target)
 	. = ..()
 	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(victim == H)
 			if(!Adjacent(victim))
 				release_grab()

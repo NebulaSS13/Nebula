@@ -110,7 +110,7 @@
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
 // Unlike the base item "tray", robotrays ONLY pick up food, drinks and condiments.
 
-/obj/item/storage/tray/robotray
+/obj/item/plate/tray/robotray
 	name = "RoboTray"
 	desc = "An autoloading tray specialized for carrying refreshments."
 
@@ -174,8 +174,8 @@
 	item_state = "sheet-metal"
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
-/obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)
-	return
+/obj/item/form_printer/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+	return FALSE
 
 /obj/item/form_printer/afterattack(atom/target, mob/living/user, flag, params)
 
@@ -374,8 +374,8 @@
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5
 	var/list/fuel_types = list(
-		/obj/item/chems/food/meat = 2,
-		/obj/item/chems/food/fish = 1.5
+		/obj/item/chems/food/butchery/meat = 2,
+		/obj/item/chems/food/butchery/meat/fish = 1.5
 	)
 
 /obj/item/bioreactor/attack_self(var/mob/user)

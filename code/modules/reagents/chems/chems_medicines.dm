@@ -12,7 +12,7 @@
 
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, BP_EYES)
 		if(E && istype(E) && !E.is_broken())
 			ADJ_STATUS(M, STAT_BLURRY, -5)
@@ -54,7 +54,7 @@
 	..()
 	if(ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + REAGENT_VOLUME(holder, type))/100)
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(E.status & ORGAN_ARTERY_CUT && prob(2 + REAGENT_VOLUME(holder, type) / overdose))
 				E.status &= ~ORGAN_ARTERY_CUT
@@ -64,7 +64,7 @@
 /decl/material/liquid/brute_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
-	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.getBruteLoss())))
+	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.get_damage(BRUTE))))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /decl/material/liquid/burn_meds
@@ -83,7 +83,7 @@
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, removed, var/datum/reagents/holder)
 	..()
 	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
-	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.getFireLoss())))
+	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.get_damage(BURN))))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 #undef ADJUSTED_REGEN_VAL
 
@@ -102,6 +102,7 @@
 
 /decl/material/liquid/adminordrazine/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	affect_blood(M, removed, holder)
+	return TRUE
 
 /decl/material/liquid/adminordrazine/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.rejuvenate()
@@ -117,6 +118,7 @@
 	fruit_descriptor = "astringent"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antitoxins"
+	var/antitoxin_strength = 1 // effect multiplier
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
 		/decl/material/liquid/zombiepowder
@@ -124,11 +126,11 @@
 
 /decl/material/liquid/antitoxins/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(remove_generic)
-		ADJ_STATUS(M, STAT_DROWSY, -6 * removed)
-		M.adjust_hallucination(-9 * removed)
+		ADJ_STATUS(M, STAT_DROWSY, -6 * removed * antitoxin_strength)
+		M.adjust_hallucination(-9 * removed * antitoxin_strength)
 		M.add_chemical_effect(CE_ANTITOX, 1)
 
-	var/removing = (4 * removed)
+	var/removing = (4 * removed * antitoxin_strength)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	for(var/R in ingested?.reagent_volumes)
 		var/decl/material/chem = GET_DECL(R)
@@ -155,16 +157,18 @@
 	uid = "chem_immunobooster"
 
 /decl/material/liquid/immunobooster/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(ishuman(M) && REAGENT_VOLUME(holder, type) < REAGENTS_OVERDOSE)
-		var/mob/living/carbon/human/H = M
-		H.immunity = min(H.immunity_norm * 0.5, removed + H.immunity) // Rapidly brings someone up to half immunity.
+	if(REAGENT_VOLUME(holder, type) >= REAGENTS_OVERDOSE)
+		return
+	var/immunity_to_add = clamp((M.immunity_norm / 2) - M.get_immunity(), 0, removed)
+	if(immunity_to_add > 0)
+		M.adjust_immunity(immunity_to_add) // Rapidly brings someone up to half immunity.
 
-/decl/material/liquid/immunobooster/affect_overdose(var/mob/living/M)
+/decl/material/liquid/immunobooster/affect_overdose(mob/living/M, total_dose)
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(istype(H))
-		H.immunity -= 0.5 //inverse effects when abused
+		M.adjust_immunity(-0.5)
 
 /decl/material/liquid/stimulants
 	name = "stimulants"
@@ -228,15 +232,16 @@
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
-	M.immunity = max(M.immunity - 0.1, 0)
+	M.adjust_immunity(-0.1)
 	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
 	if(volume > 10)
-		M.immunity = max(M.immunity - 0.3, 0)
+		M.adjust_immunity(-0.3)
 	if(LAZYACCESS(M.chem_doses, type) > 15)
-		M.immunity = max(M.immunity - 0.25, 0)
+		M.adjust_immunity(-0.25)
 
-/decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M)
+/decl/material/liquid/antibiotics/affect_overdose(mob/living/M, total_dose)
 	..()
+	M.adjust_immunity(-0.5)
 	M.immunity = max(M.immunity - 0.25, 0)
 	if(prob(2))
 		M.immunity_norm = max(M.immunity_norm - 1, 0)
@@ -252,29 +257,21 @@
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_retrovirals"
 
-/decl/material/liquid/retrovirals/affect_overdose(mob/living/M, datum/reagents/holder)
+/decl/material/liquid/retrovirals/affect_overdose(mob/living/M, total_dose)
 	. = ..()
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!BP_IS_PROSTHETIC(E) && prob(25) && !(E.status & ORGAN_MUTATED))
 				E.mutate()
 				E.limb_flags |= ORGAN_FLAG_DEFORMED
 
 /decl/material/liquid/retrovirals/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustCloneLoss(-20 * removed)
+	M.heal_damage(CLONE, 20 * removed)
 	if(LAZYACCESS(M.chem_doses, type) > 10)
 		ADJ_STATUS(M, STAT_DIZZY, 5)
 		ADJ_STATUS(M, STAT_JITTER, 5)
-	var/needs_update = M.mutations.len > 0
-	M.mutations.Cut()
-	M.disabilities = 0
-	M.sdisabilities = 0
-	if(needs_update && ishuman(M))
-		M.dna.ResetUI()
-		M.dna.ResetSE()
-		domutcheck(M, null, MUTCHK_FORCED)
-		M.update_icon()
+	M.reset_genetic_conditions()
 
 /decl/material/liquid/adrenaline
 	name = "adrenaline"
@@ -301,7 +298,7 @@
 	if(volume >= 5 && M.is_asystole())
 		holder.remove_reagent(type, 5)
 		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			if(H.resuscitate())
 				var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
 				heart.take_internal_damage(heart.max_damage * 0.15)
@@ -355,7 +352,7 @@
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		ADJ_STATUS(H, STAT_CONFUSE, 1)
 		ADJ_STATUS(H, STAT_DROWSY, 1)
 
@@ -401,7 +398,7 @@
 				break
 	..()
 
-/decl/material/liquid/clotting_agent/affect_overdose(var/mob/living/M)
+/decl/material/liquid/clotting_agent/affect_overdose(mob/living/M, total_dose)
 	var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(M, BP_HEART)
 	if(heart && prob(25))
 		heart.take_general_damage(rand(1,3))

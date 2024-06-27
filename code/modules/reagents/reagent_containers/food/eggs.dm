@@ -10,8 +10,10 @@
 	filling_color = "#fdffd1"
 	volume = 10
 	center_of_mass = @'{"x":16,"y":13}'
+	material = /decl/material/solid/organic/bone/eggshell
+	obj_flags = OBJ_FLAG_HOLLOW
 	nutriment_amt = 3
-	nutriment_type = /decl/material/liquid/nutriment/protein/egg
+	nutriment_type = /decl/material/solid/organic/meat/egg
 
 /obj/item/chems/food/egg/afterattack(obj/O, mob/user, proximity)
 	// Don't crack eggs into appliances if you're on help intent.
@@ -74,9 +76,9 @@
 
 /obj/item/chems/food/egg/lizard/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein/egg, 5)
+	add_to_reagents(/decl/material/solid/organic/meat/egg, 5)
 	if(prob(30))	//extra nutriment
-		add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+		add_to_reagents(/decl/material/solid/organic/meat, 5)
 
 /obj/item/chems/food/friedegg
 	name = "fried egg"
@@ -88,7 +90,7 @@
 
 /obj/item/chems/food/friedegg/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/organic/meat, 3)
 	add_to_reagents(/decl/material/solid/sodiumchloride,     1)
 	add_to_reagents(/decl/material/solid/blackpepper,        1)
 
@@ -101,7 +103,7 @@
 
 /obj/item/chems/food/boiledegg/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
 /obj/item/chems/food/omelette
 	name = "cheese omelette"
@@ -114,7 +116,7 @@
 
 /obj/item/chems/food/omelette/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 8)
+	add_to_reagents(/decl/material/solid/organic/meat, 8)
 
 /obj/item/chems/food/chawanmushi
 	name = "chawanmushi"
@@ -127,4 +129,4 @@
 
 /obj/item/chems/food/chawanmushi/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
+	add_to_reagents(/decl/material/solid/organic/meat, 5)

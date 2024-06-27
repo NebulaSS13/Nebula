@@ -31,7 +31,7 @@
 		owner.bodytemperature += burn
 		burn = 0
 		if(prob(25))
-			owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
+			owner.visible_message(SPAN_WARNING("\The [owner]'s crystalline [name] shines with absorbed energy!"))
 
 	if(used_weapon)
 		add_autopsy_data(used_weapon, brute + burn)
@@ -197,13 +197,6 @@
 
 	return update_damstate()
 
-// Brute/burn
-/obj/item/organ/external/proc/get_brute_damage()
-	return brute_dam
-
-/obj/item/organ/external/proc/get_burn_damage()
-	return burn_dam
-
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
 	if(!bodytype || (bodytype.body_flags & BODY_FLAG_NO_DNA))
@@ -314,13 +307,13 @@
 /obj/item/organ/external/proc/sever_artery()
 	var/obj/item/organ/internal/heart/heart_path = bodytype?.has_organ[BP_HEART]
 	if(heart_path)
-		if(!BP_IS_PROSTHETIC(src) && !(status & ORGAN_ARTERY_CUT) && !initial(heart_path.open))
+		if(!BP_IS_PROSTHETIC(src) && !(limb_flags & ORGAN_FLAG_SKELETAL) && !(status & ORGAN_ARTERY_CUT) && !initial(heart_path.open))
 			status |= ORGAN_ARTERY_CUT
 			return TRUE
 	return FALSE
 
 /obj/item/organ/external/proc/sever_tendon()
-	if((limb_flags & ORGAN_FLAG_HAS_TENDON) && !BP_IS_PROSTHETIC(src) && !(status & ORGAN_TENDON_CUT))
+	if((limb_flags & ORGAN_FLAG_HAS_TENDON) && !BP_IS_PROSTHETIC(src) && !(limb_flags & ORGAN_FLAG_SKELETAL) && !(status & ORGAN_TENDON_CUT))
 		status |= ORGAN_TENDON_CUT
 		return TRUE
 	return FALSE
@@ -357,36 +350,38 @@
 //   and the brute damage dealt exceeds the tearoff threshold, the organ is torn off.
 /obj/item/organ/external/proc/attempt_dismemberment(brute, burn, sharp, edge, used_weapon, spillover, force_droplimb, override_droplimb)
 	//Check edge eligibility
-	var/edge_eligible = 0
+	var/edge_eligible = FALSE
 	if(edge)
+		// used_weapon can be a string sometimes, for some reason
+		// todo: refactor to avoid?
 		if(istype(used_weapon,/obj/item))
-			var/obj/item/W = used_weapon
-			if(W.w_class >= w_class)
-				edge_eligible = 1
+			var/obj/item/used_item = used_weapon
+			if(used_item.w_class >= w_class)
+				edge_eligible = TRUE
 		else
-			edge_eligible = 1
+			edge_eligible = TRUE
 	else if(sharp)
 		brute = 0.5 * brute
 	if(force_droplimb)
 		if(burn)
-			dismember(0, (override_droplimb || DISMEMBER_METHOD_BURN))
+			dismember(FALSE, (override_droplimb || DISMEMBER_METHOD_BURN))
 		else if(brute)
-			dismember(0, (override_droplimb || (edge_eligible ? DISMEMBER_METHOD_EDGE : DISMEMBER_METHOD_BLUNT)))
+			dismember(FALSE, (override_droplimb || (edge_eligible ? DISMEMBER_METHOD_EDGE : DISMEMBER_METHOD_BLUNT)))
 		return TRUE
 
 	if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE)
 		if(prob(brute))
-			dismember(0, (override_droplimb || DISMEMBER_METHOD_EDGE))
+			dismember(FALSE, (override_droplimb || DISMEMBER_METHOD_EDGE))
 			return TRUE
 	else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
 		if(prob(burn/3))
-			dismember(0, (override_droplimb || DISMEMBER_METHOD_BURN))
+			dismember(FALSE, (override_droplimb || DISMEMBER_METHOD_BURN))
 			return TRUE
 	else if(brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
 		if(prob(brute))
-			dismember(0, (override_droplimb || DISMEMBER_METHOD_BLUNT))
+			dismember(FALSE, (override_droplimb || DISMEMBER_METHOD_BLUNT))
 			return TRUE
 	else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF)
 		if(prob(brute/3))
-			dismember(0, (override_droplimb || DISMEMBER_METHOD_EDGE))
+			dismember(FALSE, (override_droplimb || DISMEMBER_METHOD_EDGE))
 			return TRUE
