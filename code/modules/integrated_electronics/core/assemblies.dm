@@ -72,7 +72,7 @@
 		visible_message(SPAN_DANGER("\The [src] starts to break apart!"))
 
 /obj/item/electronic_assembly/proc/check_interactivity(mob/user)
-	return (!user.incapacitated() && CanUseTopic(user))
+	return (!user.incapacitated() && CanUseTopic(user) && user_can_wield(user))
 
 /obj/item/electronic_assembly/GetAccess()
 	. = list()
