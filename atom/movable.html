@@ -16,38 +16,51 @@
 <h1>movable <aside>/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/bc21f10bedf2da02857b5fbabcbe268d65e83a45/(builtins)#L1">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/(builtins)#L1">
         <img src="git.png" width="16" height="16" title="(builtins) 1"/></a></h1>
 
 <p>Virtual Mob Creation</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
             <tr><th><a href="atom/movable.html#var/bound_overlay">bound_overlay</a></th><td>The mimic (if any) that's <em>directly</em> copying us.</td></tr>
             <tr><th><a href="atom/movable.html#var/z_flags">z_flags</a></th><td>Movable-level Z-Mimic flags. This uses ZMM_* flags, not ZM_* flags.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
             <tr><th><a href="atom/movable.html#proc/animate_filter">animate_filter</a></th><td>Animate a given filter on this atom. All params after the first are passed to animate().</td></tr>
+            <tr><th><a href="atom/movable.html#proc/can_do_automated_move">can_do_automated_move</a></th><td>Generalized entrypoint for checking CanMove and such on /mob.</td></tr>
             <tr><th><a href="atom/movable.html#proc/dropInto">dropInto</a></th><td>Attempt to drop this atom onto the destination.</td></tr>
+            <tr><th><a href="atom/movable.html#proc/failed_automove">failed_automove</a></th><td>Called by SSautomove when an atom fails to move in circumstances where it would like to. As with finished_automove, does not imply unregistering from SSautomove.</td></tr>
+            <tr><th><a href="atom/movable.html#proc/finished_automove">finished_automove</a></th><td>Called when an atom is within the acceptable parameters for not moving further (ideal range). Does not necessarily imply the atom has unregistered (see stop_automove()).</td></tr>
+            <tr><th><a href="atom/movable.html#proc/get_acceptable_automove_distance_from_target">get_acceptable_automove_distance_from_target</a></th><td>Used by some mobs to vary the acceptable distance from target when automoving.</td></tr>
+            <tr><th><a href="atom/movable.html#proc/get_automove_target">get_automove_target</a></th><td>Should return a reference to the current atom target.</td></tr>
             <tr><th><a href="atom/movable.html#proc/keybind_face_direction">keybind_face_direction</a></th><td>A wrapper for setDir that should only be able to fail by living mobs.</td></tr>
+            <tr><th><a href="atom/movable.html#proc/start_automove">start_automove</a></th><td>Registers an atom with SSautomove, including a move handler and metadata. Moving will begin next tick.</td></tr>
+            <tr><th><a href="atom/movable.html#proc/stop_automove">stop_automove</a></th><td>Cancels automoving and unregisters the atom from the subsystem, including the current processing run.</td></tr>
             <tr><th><a href="atom/movable.html#proc/wrapping_paper_needed_to_wrap">wrapping_paper_needed_to_wrap</a></th><td>Returns the amount of sheets of wrapping paper that the given object would need to be wrapped.</td></tr></table>
     <h2 id="var">Var Details</h2><h3 id="var/bound_overlay"><aside class="declaration">var </aside>bound_overlay
             <aside>&ndash; /tmp/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/openspace/mimic</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/bc21f10bedf2da02857b5fbabcbe268d65e83a45/code/modules/multiz/zmimic/mimic_movable.dm#L3">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/modules/multiz/zmimic/mimic_movable.dm#L3">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_movable.dm 3"/></a></h3>
         <p>The mimic (if any) that's <em>directly</em> copying us.</p><h3 id="var/z_flags"><aside class="declaration">var </aside>z_flags
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/bc21f10bedf2da02857b5fbabcbe268d65e83a45/code/modules/multiz/zmimic/mimic_movable.dm#L5">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/modules/multiz/zmimic/mimic_movable.dm#L5">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_movable.dm 5"/></a></h3>
         <p>Movable-level Z-Mimic flags. This uses ZMM_* flags, not ZM_* flags.</p><h2 id="proc">Proc Details</h2><h3 id="proc/animate_filter"><aside class="declaration">proc </aside>animate_filter<aside>(filter_name, /list/params) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/bc21f10bedf2da02857b5fbabcbe268d65e83a45/code/_helpers/visual_filters.dm#L62">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/_helpers/visual_filters.dm#L62">
         <img src="git.png" width="16" height="16" title="code&#x2F;_helpers&#x2F;visual_filters.dm 62"/></a></aside>
         </h3>
-        <p>Animate a given filter on this atom. All params after the first are passed to animate().</p><h3 id="proc/dropInto"><aside class="declaration">proc </aside>dropInto<aside>(/<a href="atom.html">atom</a>/destination) 
+        <p>Animate a given filter on this atom. All params after the first are passed to animate().</p><h3 id="proc/can_do_automated_move"><aside class="declaration">proc </aside>can_do_automated_move<aside>(variant_move_delay) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/bc21f10bedf2da02857b5fbabcbe268d65e83a45/code/game/atoms.dm#L612">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/datums/movement/automove.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;movement&#x2F;automove.dm 39"/></a></aside>
+        </h3>
+        <p>Generalized entrypoint for checking CanMove and such on /mob.</p><h3 id="proc/dropInto"><aside class="declaration">proc </aside>dropInto<aside>(/<a href="atom.html">atom</a>/destination) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/game/atoms.dm#L612">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 612"/></a></aside>
         </h3>
         <p>Attempt to drop this atom onto the destination.</p>
@@ -55,23 +68,59 @@
 <ul>
 <li><code>destination</code>: The atom that this atom is dropped onto.</li>
 <li>Return: The result of the forceMove() at the end.</li>
-</ul><h3 id="proc/keybind_face_direction"><aside class="declaration">proc </aside>keybind_face_direction<aside>(direction) 
+</ul><h3 id="proc/failed_automove"><aside class="declaration">proc </aside>failed_automove<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/bc21f10bedf2da02857b5fbabcbe268d65e83a45/code/game/atoms_movable.dm#L358">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/datums/movement/automove.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;movement&#x2F;automove.dm 25"/></a></aside>
+        </h3>
+        <p>Called by SSautomove when an atom fails to move in circumstances where it would like to. As with finished_automove, does not imply unregistering from SSautomove.</p><h3 id="proc/finished_automove"><aside class="declaration">proc </aside>finished_automove<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/datums/movement/automove.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;movement&#x2F;automove.dm 20"/></a></aside>
+        </h3>
+        <p>Called when an atom is within the acceptable parameters for not moving further (ideal range). Does not necessarily imply the atom has unregistered (see stop_automove()).</p><h3 id="proc/get_acceptable_automove_distance_from_target"><aside class="declaration">proc </aside>get_acceptable_automove_distance_from_target<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/datums/movement/automove.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;movement&#x2F;automove.dm 31"/></a></aside>
+        </h3>
+        <p>Used by some mobs to vary the acceptable distance from target when automoving.</p><h3 id="proc/get_automove_target"><aside class="declaration">proc </aside>get_automove_target<aside>(/<a href="datum.html">datum</a>/automove_metadata/metadata) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/datums/movement/automove.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;movement&#x2F;automove.dm 35"/></a></aside>
+        </h3>
+        <p>Should return a reference to the current atom target.</p><h3 id="proc/keybind_face_direction"><aside class="declaration">proc </aside>keybind_face_direction<aside>(direction) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/game/atoms_movable.dm#L358">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms_movable.dm 358"/></a></aside>
         </h3>
         <p>A wrapper for setDir that should only be able to fail by living mobs.</p>
-<p>Called from [/atom/movable/proc/keyLoop], this exists to be overwritten by living mobs with a check to see if we're actually alive enough to change directions</p><h3 id="proc/wrapping_paper_needed_to_wrap"><aside class="declaration">proc </aside>wrapping_paper_needed_to_wrap<aside>() 
+<p>Called from [/atom/movable/proc/keyLoop], this exists to be overwritten by living mobs with a check to see if we're actually alive enough to change directions</p><h3 id="proc/start_automove"><aside class="declaration">proc </aside>start_automove<aside>(target, movement_type, /<a href="datum.html">datum</a>/automove_metadata/metadata) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/bc21f10bedf2da02857b5fbabcbe268d65e83a45/code/modules/recycling/package_wrapper.dm#L3">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/datums/movement/automove.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;movement&#x2F;automove.dm 15"/></a></aside>
+        </h3>
+        <p>Registers an atom with SSautomove, including a move handler and metadata. Moving will begin next tick.</p><h3 id="proc/stop_automove"><aside class="declaration">proc </aside>stop_automove<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/datums/movement/automove.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;movement&#x2F;automove.dm 9"/></a></aside>
+        </h3>
+        <p>Cancels automoving and unregisters the atom from the subsystem, including the current processing run.</p><h3 id="proc/wrapping_paper_needed_to_wrap"><aside class="declaration">proc </aside>wrapping_paper_needed_to_wrap<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21/code/modules/recycling/package_wrapper.dm#L3">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;recycling&#x2F;package_wrapper.dm 3"/></a></aside>
         </h3>
         <p>Returns the amount of sheets of wrapping paper that the given object would need to be wrapped.</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/bc21f10bedf2da02857b5fbabcbe268d65e83a45">bc21f10</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/dd6a9a1cbe4a0a1fb75530716d4a17c8fb7c8a21">dd6a9a1</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
