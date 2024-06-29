@@ -41,7 +41,7 @@
 /datum/movement_handler/mob/delay/exosuit
 	expected_host_type = /mob/living/exosuit
 
-/datum/movement_handler/mob/delay/exosuit/MayMove(mover, is_external)
+/datum/movement_handler/mob/delay/exosuit/MayMove(mob/mover, is_external)
 	var/mob/living/exosuit/exosuit = host
 	if(mover && (mover != exosuit) && (!(mover in exosuit.pilots)) && is_external)
 		return MOVEMENT_PROCEED
@@ -49,7 +49,7 @@
 		return MOVEMENT_PROCEED
 	return MOVEMENT_STOP
 
-/datum/movement_handler/mob/delay/exosuit/DoMove(direction, mover, is_external) //Delay must be handled by other handlers.
+/datum/movement_handler/mob/delay/exosuit/DoMove(direction, mob/mover, is_external) //Delay must be handled by other handlers.
 	return
 
 /mob/living/exosuit/SetMoveCooldown(timeout)
@@ -65,7 +65,7 @@
 /datum/movement_handler/mob/exosuit
 	expected_host_type = /mob/living/exosuit
 
-/datum/movement_handler/mob/exosuit/MayMove(var/mob/mover, var/is_external)
+/datum/movement_handler/mob/exosuit/MayMove(mob/mover, is_external)
 	var/mob/living/exosuit/exosuit = host
 	if((!(mover in exosuit.pilots) && mover != exosuit) || exosuit.incapacitated() || mover.incapacitated())
 		return MOVEMENT_STOP
@@ -89,7 +89,7 @@
 
 	return MOVEMENT_PROCEED
 
-/datum/movement_handler/mob/exosuit/DoMove(var/direction, var/mob/mover, var/is_external)
+/datum/movement_handler/mob/exosuit/DoMove(direction, mob/mover, is_external)
 	var/mob/living/exosuit/exosuit = host
 	var/moving_dir = direction
 
@@ -123,12 +123,12 @@
 	expected_host_type = /mob/living/exosuit
 
 // Space movement
-/datum/movement_handler/mob/space/exosuit/DoMove(var/direction, var/mob/mover)
+/datum/movement_handler/mob/space/exosuit/DoMove(direction, mob/mover, is_external)
 	if(!mob.has_gravity() && (!allow_move || (allow_move == -1 && mob.handle_spaceslipping())))
 		return MOVEMENT_HANDLED
 	mob.inertia_dir = 0
 
-/datum/movement_handler/mob/space/exosuit/MayMove(var/mob/mover, var/is_external)
+/datum/movement_handler/mob/space/exosuit/MayMove(mob/mover, is_external)
 	if((mover != host) && is_external)
 		return MOVEMENT_PROCEED
 
