@@ -2,10 +2,13 @@
 	name = "space pike"
 	desc = "A bigger, angrier cousin of the space carp."
 	icon = 'icons/mob/simple_animal/spaceshark.dmi'
-	turns_per_move = 2
-	move_to_delay = 2
+	turns_per_wander = 2
+	move_intents = list(
+		/decl/move_intent/walk/animal_fast,
+		/decl/move_intent/run/animal_fast
+	)
+	base_movement_delay = 1
 	attack_same = 1
-	speed = 1
 	mob_size = MOB_SIZE_LARGE
 	offset_overhead_text_x = 16
 	pixel_x = -16

@@ -562,3 +562,8 @@
 
 /atom/movable/proc/end_throw()
 	throwing = null
+
+/atom/movable/proc/reset_movement_delay()
+	var/datum/movement_handler/delay/delay = locate() in movement_handlers
+	if(istype(delay))
+		delay.next_move = world.time

@@ -6,8 +6,10 @@
 	response_harm = "stomps on"
 	destroy_surroundings = 0
 	max_health = 15
-	speed = 0
-	move_to_delay = 0
+	move_intents = list(
+		/decl/move_intent/walk/animal_fast,
+		/decl/move_intent/run/animal_fast
+	)
 	density = TRUE
 	min_gas = null
 	mob_size = MOB_SIZE_MINISCULE
@@ -16,6 +18,7 @@
 	natural_weapon = /obj/item/natural_weapon/bite
 	holder_type = /obj/item/holder/slug
 	faction = "Hostile Fauna"
+	base_movement_delay = 0
 
 /mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/M)
 	return istype(M) && M.faction == faction

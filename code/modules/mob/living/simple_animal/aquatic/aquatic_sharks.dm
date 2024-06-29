@@ -15,10 +15,12 @@
 	name = "gigacretoxyrhina"
 	desc = "That is a lot of shark."
 	icon = 'icons/mob/simple_animal/spaceshark.dmi'
-	turns_per_move = 2
-	move_to_delay = 2
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
+	turns_per_wander = 2
 	attack_same = 1
-	speed = 0
 	mob_size = MOB_SIZE_LARGE
 	pixel_x = -16
 	max_health = 400

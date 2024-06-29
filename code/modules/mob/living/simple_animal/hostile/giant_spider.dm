@@ -12,7 +12,7 @@
 	emote_hear = list("chitters")
 	emote_see = list("rubs its forelegs together", "wipes its fangs", "stops suddenly")
 	speak_chance = 2.5
-	turns_per_move = 5
+	turns_per_wander = 5
 	see_in_dark = 10
 	response_harm = "pokes"
 	max_health = 125
@@ -21,8 +21,10 @@
 	cold_damage_per_tick = 20
 	faction = "spiders"
 	pass_flags = PASS_FLAG_TABLE
-	move_to_delay = 3
-	speed = 1
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
 	max_gas = list(
 		/decl/material/gas/chlorine = 1,
 		/decl/material/gas/carbon_dioxide = 5,
@@ -35,7 +37,8 @@
 	base_animal_type = /mob/living/simple_animal/hostile/giant_spider
 	butchery_data = /decl/butchery_data/animal/arthropod/giant_spider
 	glowing_eyes = TRUE
-	ai = /datum/ai/giant_spider
+	ai = /datum/mob_controller/giant_spider
+	base_movement_delay = 1
 
 	var/poison_per_bite = 6
 	var/poison_type = /decl/material/liquid/venom
@@ -60,10 +63,13 @@
 	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 5
-	speed = 2
-	move_to_delay = 4
+	move_intents = list(
+		/decl/move_intent/walk/animal_slow,
+		/decl/move_intent/run/animal_slow
+	)
 	break_stuff_probability = 15
 	pry_time = 6 SECONDS
+	base_movement_delay = 2
 
 	var/vengance
 	var/berserking
@@ -76,10 +82,10 @@
 	max_health = 80
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
-	speed = 0
 	poison_type = /decl/material/liquid/sedatives
 	break_stuff_probability = 10
 	pry_time = 9 SECONDS
+	base_movement_delay = 0
 
 	var/atom/cocoon_target
 	var/fed = 0
@@ -100,8 +106,10 @@
 	max_health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 10
-	speed = -1
-	move_to_delay = 2
+	move_intents = list(
+		/decl/move_intent/walk/animal_fast,
+		/decl/move_intent/run/animal_fast
+	)
 	break_stuff_probability = 30
 	hunt_chance = 25
 	can_escape = TRUE
@@ -110,7 +118,7 @@
 	does_spin = FALSE
 	available_maneuvers = list(/decl/maneuver/leap/spider)
 	ability_cooldown = 3 MINUTES
-
+	base_movement_delay = 0
 	var/leap_range = 5
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
@@ -120,7 +128,10 @@
 	max_health = 90
 	poison_per_bite = 15
 	ranged = TRUE
-	move_to_delay = 2
+	move_intents = list(
+		/decl/move_intent/walk/animal_fast,
+		/decl/move_intent/run/animal_fast
+	)
 	projectiletype = /obj/item/projectile/venom
 	projectilesound = 'sound/effects/hypospray.ogg'
 	fire_desc = "spits venom"
@@ -164,21 +175,22 @@
 			if(prob(poison_per_bite))
 				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 
-/datum/ai/giant_spider
+/datum/mob_controller/giant_spider
 	expected_type = /mob/living/simple_animal/hostile/giant_spider
 
-/datum/ai/giant_spider/do_process()
+/datum/mob_controller/giant_spider/do_process()
 	var/mob/living/simple_animal/hostile/giant_spider/spooder = body
 	if(spooder.stance == HOSTILE_STANCE_IDLE)
 		//chance to skitter madly away
 		if(!spooder.busy && prob(spooder.hunt_chance))
-			spooder.stop_automated_movement = 1
-			walk_to(spooder, pick(orange(20, spooder)), 1, spooder.move_to_delay)
-			addtimer(CALLBACK(spooder, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automated_movement)), 5 SECONDS)
+			spooder.stop_wandering = TRUE
+			spooder.set_moving_quickly()
+			spooder.start_automove(pick(orange(20, spooder)))
+			addtimer(CALLBACK(spooder, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automove)), 5 SECONDS)
 
-/mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
-	stop_automated_movement = 0
-	walk(src,0)
+/mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automove()
+	stop_wandering = FALSE
+	stop_automove()
 	kick_stance()
 
 /mob/living/simple_animal/hostile/giant_spider/proc/divorce()
@@ -188,12 +200,12 @@
 Guard caste procs
 ****************/
 /mob/living/simple_animal/hostile/giant_spider/guard
-	ai = /datum/ai/giant_spider/guard
+	ai = /datum/mob_controller/giant_spider/guard
 
-/datum/ai/giant_spider/guard
+/datum/mob_controller/giant_spider/guard
 	expected_type = /mob/living/simple_animal/hostile/giant_spider/guard
 
-/datum/ai/giant_spider/guard/do_process(time_elapsed)
+/datum/mob_controller/giant_spider/guard/do_process(time_elapsed)
 	. = ..()
 	var/mob/living/simple_animal/hostile/giant_spider/guard/spooder = body
 	if(spooder.berserking)
@@ -227,16 +239,17 @@ Guard caste procs
 		return 1
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/protect(mob/nurse)
-	stop_automated_movement = 1
-	walk_to(src, nurse, 2, move_to_delay)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automated_movement)), 5 SECONDS)
+	stop_wandering = TRUE
+	var/static/datum/automove_metadata/_spider_guard_metadata = new(_acceptable_distance = 2)
+	start_automove(nurse, metadata = _spider_guard_metadata)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automove)), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message("<span class='danger'>\The [src] chitters wildly!</span>")
 	var/obj/item/attacking_with = get_natural_weapon()
 	if(attacking_with)
 		attacking_with.force = initial(attacking_with.force) + 5
-	move_to_delay--
+	set_moving_quickly()
 	break_stuff_probability = 45
 	addtimer(CALLBACK(src, PROC_REF(calm_down)), 3 MINUTES)
 
@@ -246,7 +259,7 @@ Guard caste procs
 	var/obj/item/attacking_with = get_natural_weapon()
 	if(attacking_with)
 		attacking_with.force = initial(attacking_with.force)
-	move_to_delay++
+	set_moving_slowly()
 	break_stuff_probability = 10
 
 /****************
@@ -290,20 +303,20 @@ Nurse caste procs
 			if(cocoon_target == C && get_dist(src,cocoon_target) > 1)
 				cocoon_target = null
 			busy = 0
-			stop_automated_movement = 0
+			stop_wandering = FALSE
 
 /mob/living/simple_animal/hostile/giant_spider/nurse
-	ai = /datum/ai/giant_spider/nurse
+	ai = /datum/mob_controller/giant_spider/nurse
 
-/datum/ai/giant_spider/nurse
+/datum/mob_controller/giant_spider/nurse
 	expected_type = /mob/living/simple_animal/hostile/giant_spider/nurse
 
-/datum/ai/giant_spider/nurse/do_process(time_elapsed)
+/datum/mob_controller/giant_spider/nurse/do_process(time_elapsed)
 	. = ..()
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/spooder = body
 	if(spooder.stance != HOSTILE_STANCE_IDLE)
 		spooder.busy = 0
-		spooder.stop_automated_movement = 0
+		spooder.stop_wandering = FALSE
 		return
 
 	var/list/can_see = view(spooder, 10)
@@ -316,7 +329,7 @@ Nurse caste procs
 			if(web_target.stat)
 				spooder.cocoon_target = web_target
 				spooder.busy = MOVING_TO_TARGET
-				walk_to(spooder, web_target, 1, spooder.move_to_delay)
+				spooder.start_automove(web_target)
 				//give up if we can't reach them after 10 seconds
 				spooder.GiveUp(web_target)
 				return
@@ -326,19 +339,19 @@ Nurse caste procs
 		if(!W)
 			spooder.busy = SPINNING_WEB
 			spooder.visible_message(SPAN_NOTICE("\The [spooder] begins to secrete a sticky substance."))
-			spooder.stop_automated_movement = 1
+			spooder.stop_wandering = TRUE
 			spawn(4 SECONDS)
 				if(spooder.busy == SPINNING_WEB)
 					new /obj/effect/spider/stickyweb(spooder.loc)
 					spooder.busy = 0
-					spooder.stop_automated_movement = 0
+					spooder.stop_wandering = FALSE
 		else
 			//third, lay an egg cluster there
 			var/obj/effect/spider/eggcluster/E = locate() in get_turf(spooder)
 			if(!E && spooder.fed > 0 && spooder.max_eggs)
 				spooder.busy = LAYING_EGGS
 				spooder.visible_message(SPAN_NOTICE("\The [spooder] begins to lay a cluster of eggs."))
-				spooder.stop_automated_movement = 1
+				spooder.stop_wandering = TRUE
 				spawn(5 SECONDS)
 					if(spooder.busy == LAYING_EGGS)
 						E = locate() in get_turf(spooder)
@@ -347,7 +360,7 @@ Nurse caste procs
 							spooder.max_eggs--
 							spooder.fed--
 						spooder.busy = 0
-						spooder.stop_automated_movement = 0
+						spooder.stop_wandering = FALSE
 			else
 				//fourthly, cocoon any nearby items so those pesky pinkskins can't use them
 				for(var/obj/O in can_see)
@@ -361,8 +374,8 @@ Nurse caste procs
 					if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
 						spooder.cocoon_target = O
 						spooder.busy = MOVING_TO_TARGET
-						spooder.stop_automated_movement = 1
-						walk_to(spooder, O, 1, spooder.move_to_delay)
+						spooder.stop_wandering = TRUE
+						spooder.start_automove(O)
 						//give up if we can't reach them after 10 seconds
 						spooder.GiveUp(O)
 
@@ -370,8 +383,8 @@ Nurse caste procs
 		if(spooder.Adjacent(spooder.cocoon_target))
 			spooder.busy = SPINNING_COCOON
 			spooder.visible_message(SPAN_NOTICE("\The [spooder] begins to secrete a sticky substance around \the [spooder.cocoon_target]."))
-			spooder.stop_automated_movement = 1
-			walk(spooder,0)
+			spooder.stop_wandering = TRUE
+			spooder.stop_automove()
 			spawn(5 SECONDS)
 				if(spooder.busy == SPINNING_COCOON)
 					if(spooder.cocoon_target && isturf(spooder.cocoon_target.loc) && get_dist(spooder, spooder.cocoon_target) <= 1)
@@ -399,7 +412,7 @@ Nurse caste procs
 						if(large_cocoon)
 							C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
 					spooder.busy = 0
-					spooder.stop_automated_movement = 0
+					spooder.stop_wandering = FALSE
 
 /*****************
 Hunter caste procs
@@ -415,7 +428,7 @@ Hunter caste procs
 /mob/living/simple_animal/hostile/giant_spider/hunter/perform_maneuver(var/maneuver, var/atom/target)
 	if(!isliving(target) || get_dist(src, target) <= 3)
 		return FALSE
-	walk(src,0)
+	stop_automove()
 	var/first_stop_automation
 	if(stop_automation)
 		first_stop_automation = stop_automation

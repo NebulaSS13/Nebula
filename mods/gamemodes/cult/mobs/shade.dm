@@ -1,5 +1,5 @@
 /mob/living/simple_animal/shade
-	name = "Shade"
+	name = "shade"
 	real_name = "Shade"
 	desc = "A bound spirit"
 	icon = 'icons/mob/simple_animal/shade.dmi'
@@ -16,14 +16,14 @@
 	maxbodytemp = 4000
 	min_gas = null
 	max_gas = null
-	speed = -1
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	faction = "cult"
 	supernatural = 1
 	status_flags = CANPUSH
 	gene_damage = -1
 	bleed_colour = "#181933"
 	butchery_data = null
+	base_movement_delay = -1
 
 /mob/living/simple_animal/shade/check_has_mouth()
 	return FALSE

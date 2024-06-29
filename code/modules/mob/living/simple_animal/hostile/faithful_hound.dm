@@ -6,7 +6,7 @@
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	density = FALSE
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 	wander = FALSE
 	anchored = TRUE
 	faction = "cute ghost dogs"

@@ -82,7 +82,7 @@
 	var/decl/pronouns/G = get_pronouns()
 	face_atom(A)
 	if(attack_delay)
-		walk_to(src, 0) // Cancel any baked-in movement.
+		stop_automove() // Cancel any baked-in movement.
 		do_windup_animation(A, attack_delay, no_reset = TRUE)
 		if(!do_after(src, attack_delay, A) || !Adjacent(A))
 			visible_message(SPAN_NOTICE("\The [src] misses [G.his] attack on \the [A]!"))

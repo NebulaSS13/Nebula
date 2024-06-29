@@ -4975,7 +4975,6 @@
 /mob/living/simple_animal/crow{
 	desc = "She's not a real doctor but she is a real bird.";
 	name = "Dr. Bird";
-	stop_automated_movement = 0
 	},
 /turf/floor/tiled/white,
 /area/ministation/medical)

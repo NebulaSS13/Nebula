@@ -1,7 +1,7 @@
-/decl/slime_comment/proc/get_comment(var/datum/ai/slime/holder)
+/decl/slime_comment/proc/get_comment(var/datum/mob_controller/slime/holder)
 	return
 
-/decl/slime_comment/general/get_comment(var/datum/ai/slime/holder)
+/decl/slime_comment/general/get_comment(var/datum/mob_controller/slime/holder)
 	. = list("Rawr...", "Blop...", "Blorble...")
 	if(holder.mood == ":3")
 		. += "Purr..."
@@ -19,7 +19,7 @@
 		. += list("Nom...", "Tasty...")
 	return pick(.)
 
-/decl/slime_comment/hungry/get_comment(var/datum/ai/slime/holder)
+/decl/slime_comment/hungry/get_comment(var/datum/mob_controller/slime/holder)
 	if(prob(2))
 		. = list()
 		var/tension = 10
@@ -34,7 +34,7 @@
 		if(length(.) && prob(tension))
 			return pick(.)
 
-/decl/slime_comment/zap/get_comment(var/datum/ai/slime/holder)
+/decl/slime_comment/zap/get_comment(var/datum/mob_controller/slime/holder)
 	if(holder.slime.powerlevel > 3)
 		. = list("Bzzz...")
 		if(holder.slime.powerlevel > 5)
@@ -43,11 +43,11 @@
 			. += "Zap... Bzz..."
 		return pick(.)
 
-/decl/slime_comment/rabid/get_comment(var/datum/ai/slime/holder)
+/decl/slime_comment/rabid/get_comment(var/datum/mob_controller/slime/holder)
 	if (holder.rabid || holder.attacked)
 		return pick("Hrr...", "Nhuu...", "Unn...")
 
-/decl/slime_comment/friends/get_comment(var/datum/ai/slime/holder)
+/decl/slime_comment/friends/get_comment(var/datum/mob_controller/slime/holder)
 	var/slimes_near = 0
 	var/dead_slimes = 0
 	var/friends_near = list()

@@ -55,7 +55,7 @@
 		events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/mob/living/slime, check_feed_target_position))
 		events_repository.register(/decl/observ/moved, victim, src, TYPE_PROC_REF(/mob/living/slime, check_feed_target_position))
 		events_repository.register(/decl/observ/destroyed, victim, src, TYPE_PROC_REF(/mob/living/slime, check_feed_target_position))
-	var/datum/ai/slime/slime_ai = ai
+	var/datum/mob_controller/slime/slime_ai = ai
 	if(istype(slime_ai))
 		slime_ai.update_mood()
 	update_icon()

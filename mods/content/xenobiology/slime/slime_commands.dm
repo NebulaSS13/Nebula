@@ -1,25 +1,25 @@
 /decl/slime_command
 	var/list/triggers
 
-/decl/slime_command/proc/resolve(var/speaker, var/spoken, var/datum/ai/slime/holder)
+/decl/slime_command/proc/resolve(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
 	for(var/trigger in triggers)
 		if(findtext(spoken, trigger))
 			return get_response(speaker, spoken, holder)
 
-/decl/slime_command/proc/get_response(var/speaker, var/spoken, var/datum/ai/slime/holder)
+/decl/slime_command/proc/get_response(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
 	return
 
 /decl/slime_command/hello
 	triggers = list("hello", "hi")
 
-/decl/slime_command/hello/get_response(var/speaker, var/spoken, var/datum/ai/slime/holder)
+/decl/slime_command/hello/get_response(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
 	holder.adjust_friendship(speaker, rand(1,2))
 	return pick("Hello...", "Hi...")
 
 /decl/slime_command/follow
 	triggers = list("follow")
 
-/decl/slime_command/follow/get_response(var/speaker, var/spoken, var/datum/ai/slime/holder)
+/decl/slime_command/follow/get_response(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
 	if(holder.leader)
 		if(holder.leader == speaker)
 			return pick("Yes...", "Lead...", "Following...")
@@ -35,7 +35,7 @@
 /decl/slime_command/stop
 	triggers = list("stop")
 
-/decl/slime_command/stop/get_response(var/speaker, var/spoken, var/datum/ai/slime/holder)
+/decl/slime_command/stop/get_response(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
 	var/friendship = LAZYACCESS(holder.observed_friends, weakref(speaker))
 	if(holder.slime.feeding_on)
 		if(friendship > 4)
@@ -64,7 +64,7 @@
 /decl/slime_command/stay
 	triggers = list("stay")
 
-/decl/slime_command/stay/get_response(var/speaker, var/spoken, var/datum/ai/slime/holder)
+/decl/slime_command/stay/get_response(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
 	var/friendship = LAZYACCESS(holder.observed_friends, weakref(speaker))
 	if(holder.leader)
 		if(holder.leader == speaker)

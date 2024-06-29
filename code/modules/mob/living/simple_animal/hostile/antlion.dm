@@ -73,7 +73,7 @@
 		heal_overall_damage(rand(heal_amount), rand(heal_amount))
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
-	stop_automated_movement = new_bool
+	stop_wandering = new_bool
 	stop_automation = new_bool
 	healing = new_bool
 

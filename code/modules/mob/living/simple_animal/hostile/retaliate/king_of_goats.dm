@@ -16,7 +16,10 @@
 	mob_size = MOB_SIZE_LARGE
 	mob_bump_flag = HEAVY
 	can_escape = TRUE
-	move_to_delay = 3
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
@@ -105,7 +108,10 @@
 	icon = 'icons/mob/simple_animal/goat_master.dmi'
 	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/goathorns
-	move_to_delay = 3
+	move_intents = list(
+		/decl/move_intent/walk/animal,
+		/decl/move_intent/run/animal
+	)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/Retaliate()
 	..()
@@ -116,12 +122,7 @@
 	set waitfor = FALSE
 	..()
 	if(spellscast < 5)
-		if(prob(5) && move_to_delay != 1) //speed buff
-			spellscast++
-			visible_message(SPAN_MFAUNA("\The [src] shimmers and seems to phase in and out of reality itself!"))
-			move_to_delay = 1
-
-		else if(prob(5)) //stun move
+		if(prob(5)) //stun move
 			spellscast++
 			visible_message(SPAN_MFAUNA("\The [src]' fleece flashes with blinding light!"))
 			new /obj/item/grenade/flashbang/instant(src.loc)

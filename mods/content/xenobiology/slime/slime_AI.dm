@@ -1,4 +1,4 @@
-/datum/ai/slime
+/datum/mob_controller/slime
 	expected_type = /mob/living/slime
 	run_interval = 1 SECOND
 	var/mood
@@ -14,11 +14,11 @@
 	var/next_core_logic_run = 0
 	var/holding_still = 0 // AI variable, cooloff-ish for how long it's going to stay in one place
 
-/datum/ai/slime/New()
+/datum/mob_controller/slime/New()
 	..()
 	slime = body
 
-/datum/ai/slime/Destroy()
+/datum/mob_controller/slime/Destroy()
 	observed_friends = null
 	friendship_cooldown = null
 	current_target = null
@@ -26,7 +26,7 @@
 	slime = null
 	. = ..()
 
-/datum/ai/slime/proc/assess_target(var/mob/living/target)
+/datum/mob_controller/slime/proc/assess_target(var/mob/living/target)
 	if(!istype(target) || isslime(target) || (weakref(target) in observed_friends))
 		return FALSE
 	if(target.stat != DEAD && (rabid || attacked))
@@ -35,7 +35,7 @@
 		return TRUE
 	return FALSE
 
-/datum/ai/slime/proc/update_mood()
+/datum/mob_controller/slime/proc/update_mood()
 	if(!slime || !body)
 		return
 	body.a_intent_change(I_HELP)
@@ -58,7 +58,7 @@
 		mood = new_mood
 		body.update_icon()
 
-/datum/ai/slime/do_process(time_elapsed)
+/datum/mob_controller/slime/do_process(time_elapsed)
 	. = ..()
 	if(attacked > 0)
 		attacked = clamp(attacked--, 0, 50)
@@ -75,7 +75,7 @@
 		handle_core_logic()
 	handle_speech_and_mood()
 
-/datum/ai/slime/proc/get_best_target(var/list/targets)
+/datum/mob_controller/slime/proc/get_best_target(var/list/targets)
 	if(!length(targets))
 		return
 	if(rabid || attacked)
@@ -86,7 +86,7 @@
 			return M
 	. = targets[1]
 
-/datum/ai/slime/proc/handle_targets()
+/datum/mob_controller/slime/proc/handle_targets()
 
 	if(!slime || !body)
 		return
@@ -123,7 +123,7 @@
 		else if(prob(hunger ? 50 : 33))
 			body.SelfMove(pick(global.cardinal))
 
-/datum/ai/slime/proc/handle_core_logic()
+/datum/mob_controller/slime/proc/handle_core_logic()
 
 	if(!slime || !body)
 		return
@@ -168,7 +168,7 @@
 
 	next_core_logic_run = world.time + max(body?.get_movement_delay(), 5) + added_delay
 
-/datum/ai/slime/proc/handle_speech_and_mood()
+/datum/mob_controller/slime/proc/handle_speech_and_mood()
 
 	if(!slime || !body)
 		return
@@ -204,7 +204,7 @@
 			if(length(possible_comments))
 				body.say(pick(possible_comments))
 
-/datum/ai/slime/proc/adjust_friendship(var/atom/user, var/amount)
+/datum/mob_controller/slime/proc/adjust_friendship(var/atom/user, var/amount)
 	if(ismob(user))
 		if(QDELETED(user))
 			return FALSE

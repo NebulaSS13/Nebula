@@ -81,7 +81,7 @@
 	if(working || stat || !on || a == src) //can't touch itself
 		return
 	if(isturf(a) || get_dist(src,a) > 1)
-		walk_to(src,a,0,get_movement_delay(get_dir(src, a)))
+		start_automove(a)
 	else if(istype(a, /obj/item))
 		pickup(a)
 	else

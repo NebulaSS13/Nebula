@@ -25,17 +25,17 @@ var/global/list/protected_objects = list(
 	color = COLOR_STEEL
 	icon_state = "crate"
 	butchery_data = null
-	speed = 4
 	max_health = 100
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-
 	faction = "mimic"
-	move_to_delay = 8
-
+	move_intents = list(
+		/decl/move_intent/walk/animal_very_slow,
+		/decl/move_intent/run/animal_very_slow
+	)
 	var/weakref/copy_of
 	var/weakref/creator // the creator
 	var/destroy_objects = 0
@@ -85,7 +85,29 @@ var/global/list/protected_objects = list(
 			var/obj/item/I = O
 			current_health = 15 * I.w_class
 			attacking_with.force = 2 + initial(I.force)
-			move_to_delay = 2 * I.w_class
+
+			if(I.w_class <= ITEM_SIZE_SMALL)
+				move_intents = list(
+					/decl/move_intent/walk/animal_fast,
+					/decl/move_intent/run/animal_fast
+				)
+			else if(I.w_class <= ITEM_SIZE_NO_CONTAINER)
+				move_intents = list(
+					/decl/move_intent/walk/animal,
+					/decl/move_intent/run/animal
+				)
+			else if(I.w_class <= ITEM_SIZE_STRUCTURE)
+				move_intents = list(
+					/decl/move_intent/walk/animal_slow,
+					/decl/move_intent/run/animal_slow
+				)
+			else
+				move_intents = list(
+					/decl/move_intent/walk/animal_very_slow,
+					/decl/move_intent/run/animal_very_slow
+				)
+			move_intent = GET_DECL(move_intents[1])
+
 
 		set_max_health(current_health)
 		if(creator)
@@ -136,7 +158,7 @@ var/global/list/protected_objects = list(
 
 /mob/living/simple_animal/hostile/mimic/sleeping
 	wander = FALSE
-	stop_automated_movement = 1
+	stop_wandering = TRUE
 
 	var/awake = 0
 

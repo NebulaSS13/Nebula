@@ -3,8 +3,7 @@
 	desc = "A swarm of cute little blood sucking bats - they look pretty upset."
 	icon = 'icons/mob/simple_animal/bats.dmi'
 	speak_chance = 0
-	turns_per_move = 3
-	speed = 4
+	turns_per_wander = 3
 	max_health = 20
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite

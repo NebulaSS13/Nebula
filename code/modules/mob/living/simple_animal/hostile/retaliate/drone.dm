@@ -7,20 +7,23 @@
 	ranged = 1
 	rapid = 0
 	speak_chance = 2.5
-	turns_per_move = 3
+	turns_per_wander = 3
 	emote_speech = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see    = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
-	stop_automated_movement_when_pulled = 0
+	stop_wandering_when_pulled = FALSE
 	max_health = 300
-	speed = 8
-	move_to_delay = 6
+	move_intents = list(
+		/decl/move_intent/walk/animal_slow,
+		/decl/move_intent/run/animal_slow
+	)
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
 	gene_damage = -1
 	butchery_data = /decl/butchery_data/synthetic
 	bleed_colour = SYNTH_BLOOD_COLOR
+	base_movement_delay = 8
 
 	var/datum/effect/effect/system/trail/ion_trail
 
@@ -131,7 +134,7 @@
 			else
 				src.visible_message("<span class='notice'>[html_icon(src)] [src] suddenly lies still and quiet.</span>")
 			disabled = rand(150, 600)
-			walk(src,0)
+			stop_automove()
 
 	if(exploding && prob(20))
 		if(prob(50))
@@ -144,7 +147,7 @@
 		exploding = 1
 		set_stat(UNCONSCIOUS)
 		wander = TRUE
-		walk(src,0)
+		stop_automove()
 		spawn(rand(50,150))
 			if(!disabled && exploding)
 				explosion(get_turf(src), 0, 1, 4, 7)
@@ -168,7 +171,7 @@
 	take_damage(rand(3,15) * (severity + 1), BURN)
 	disabled = rand(150, 600)
 	hostile_drone = 0
-	walk(src,0)
+	stop_automove()
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/get_death_message(gibbed)
 	return "suddenly breaks apart."

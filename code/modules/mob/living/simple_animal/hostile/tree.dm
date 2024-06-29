@@ -3,13 +3,13 @@
 	desc = "A pissed off tree-like alien. It seems annoyed with the festivities..."
 	icon = 'icons/mob/simple_animal/pinetree.dmi'
 	speak_chance = 0
-	turns_per_move = 5
+	turns_per_wander = 5
 	butchery_data = null
-	speed = -1
 	max_health = 250
 	pixel_x = -16
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
+	base_movement_delay = -1
 
 	//Space carp aren't affected by atmos.
 	min_gas = null

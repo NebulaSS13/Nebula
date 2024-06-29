@@ -76,7 +76,7 @@
 	if(stat == DEAD)
 		return FALSE
 
-	walk(src, 0)
+	stop_automove()
 	facing_dir = null
 
 	if(!gibbed)

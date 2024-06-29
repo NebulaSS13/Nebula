@@ -3,20 +3,16 @@
 	desc = "The Wish Granter's faith in humanity, incarnate"
 	icon = 'icons/mob/simple_animal/faithless.dmi'
 	speak_chance = 0
-	turns_per_move = 5
+	turns_per_wander = 5
 	response_help_1p = "You wave your hand through $TARGET$."
 	response_help_3p = "$USER$ waves $USER_THEIR$ hand through $TARGET$."
 	max_health = 80
 	gene_damage = -1
-
 	harm_intent_damage = 10
 	natural_weapon = /obj/item/natural_weapon/faithless
-
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	speed = 4
-
 	faction = "faithless"
 	supernatural = 1
 

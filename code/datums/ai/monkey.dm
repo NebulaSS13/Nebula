@@ -1,4 +1,4 @@
-/datum/ai/monkey
+/datum/mob_controller/monkey
 	name = "monkey"
 	expected_type = /mob/living/human
 	var/list/no_touchie = list(
@@ -6,7 +6,7 @@
 		/obj/structure/mirror
 	)
 
-/datum/ai/monkey/do_process(var/time_elapsed)
+/datum/mob_controller/monkey/do_process(var/time_elapsed)
 	if(body.incapacitated())
 		return
 

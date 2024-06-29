@@ -150,7 +150,7 @@
 	..()
 	events_repository.unregister(/decl/observ/moved, target, src)
 	awaiting_surrender = -1
-	walk_to(src, 0)
+	stop_automove()
 
 /mob/living/bot/secbot/startPatrol()
 	if(!locked) // Stop running away when we set you up

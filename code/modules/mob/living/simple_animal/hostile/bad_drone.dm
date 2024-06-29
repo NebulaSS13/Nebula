@@ -11,7 +11,6 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	speed = 4
 	mob_size = MOB_SIZE_TINY
 	gene_damage = -1
 	attack_delay = DEFAULT_QUICK_COOLDOWN

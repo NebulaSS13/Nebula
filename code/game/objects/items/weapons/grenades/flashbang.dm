@@ -80,10 +80,6 @@
 	if(!ear_safety)
 		sound_to(M, 'sound/weapons/flash_ring.ogg')
 
-/obj/item/grenade/flashbang/Destroy()
-	walk(src, 0) // Because we might have called walk_away, we must stop the walk loop or BYOND keeps an internal reference to us forever.
-	return ..()
-
 /obj/item/grenade/flashbang/instant
 	invisibility = INVISIBILITY_MAXIMUM
 	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
@@ -123,10 +119,10 @@
 	. = ..() //Segments should never exist except part of the clusterbang, since these immediately 'do their thing' and asplode
 	banglet = 1
 	activate()
-	var/stepdist = rand(1,4)//How far to step
-	var/temploc = src.loc//Saves the current location to know where to step away from
-	walk_away(src,temploc,stepdist)//I must go, my people need me
+	//I must go, my people need me
 	addtimer(CALLBACK(src, PROC_REF(detonate)), rand(15,60))
+	if(isturf(loc)) // Don't hurl yourself around if you're not on a turf.
+		throw_at(get_edge_target_turf(loc, pick(global.cardinal)), rand(1, 4), 5, null, TRUE)
 
 /obj/item/grenade/flashbang/clusterbang/segment/detonate()
 	var/numspawned = rand(4,8)
@@ -142,7 +138,6 @@
 	. = ..() //Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
 	banglet = 1
 	activate()
-	var/stepdist = rand(1,3)
-	var/temploc = src.loc
-	walk_away(src,temploc,stepdist)
 	addtimer(CALLBACK(src, PROC_REF(detonate)), rand(15,60))
+	if(isturf(loc)) // See Initialize() for above.
+		throw_at(get_edge_target_turf(loc, pick(global.cardinal)), rand(1, 3), 5, null, TRUE)

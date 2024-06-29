@@ -21,7 +21,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/crow_claws
 
-	stop_automated_movement = TRUE
+	stop_wandering = TRUE
 	universal_speak = TRUE
 
 
