@@ -48,3 +48,10 @@
 	description = "The deep dark brings distant, whispering echoes to your ears."
 	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 	area_blurb_category = /area/shaded_hills/caves
+
+
+/area/shaded_hills/caves/deep
+	name = "\improper Deep Caverns"
+
+/area/shaded_hills/caves/deep/poi
+	name = "\improper Deepest Caverns"

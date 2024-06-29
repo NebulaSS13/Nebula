@@ -1,4 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aP" = (
+/obj/structure/flora/tree/dead/ebony,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/shrine)
 "aU" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 1;
@@ -531,6 +535,10 @@
 /obj/abstract/exterior_marker/inside,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
+"xk" = (
+/obj/structure/flora/tree/dead/mahogany,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/shrine)
 "xH" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/slaughterhouse)
@@ -661,6 +669,10 @@
 /obj/structure/bed/chair/bench/ebony,
 /turf/floor/wood/ebony,
 /area/shaded_hills/inn)
+"BI" = (
+/obj/abstract/map_data/shaded_hills,
+/turf/unsimulated/mask,
+/area/shaded_hills/outside/downlands)
 "BL" = (
 /obj/structure/bed/simple/ebony/cloth,
 /obj/item/bedsheet/yellowed,
@@ -906,6 +918,9 @@
 /obj/abstract/landmark/start/shaded_hills/traveller/learned,
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/downlands)
+"Mo" = (
+/turf/open,
+/area/shaded_hills/outside/shrine)
 "Mp" = (
 /obj/structure/wall_sconce/lantern,
 /turf/floor/natural/path/basalt,
@@ -2744,7 +2759,7 @@ Wm
 Wm
 Wm
 Wm
-Wm
+BI
 Wm
 Wm
 lC
@@ -20253,9 +20268,9 @@ By
 By
 By
 By
-kv
-kv
-kv
+aP
+Mo
+xk
 kv
 kv
 By
@@ -20406,7 +20421,7 @@ xU
 xU
 xU
 kv
-kv
+aP
 kv
 kv
 By

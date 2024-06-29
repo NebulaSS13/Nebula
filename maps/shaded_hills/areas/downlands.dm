@@ -48,3 +48,9 @@
 
 /area/shaded_hills/outside/shrine
 	name = "\improper Shrine Grounds"
+
+/area/shaded_hills/caves/dungeon
+	name = "\improper Deep Dungeon"
+
+/area/shaded_hills/caves/dungeon/poi
+	name = "\improper Deepest Dungeon"
