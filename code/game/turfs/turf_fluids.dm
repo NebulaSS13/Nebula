@@ -69,15 +69,15 @@
 
 /turf/proc/get_fluid_name()
 	var/decl/material/mat = reagents?.get_primary_reagent_decl()
-	return mat?.liquid_name || "liquid"
+	return mat.get_reagent_name(reagents, MAT_PHASE_LIQUID) || "liquid"
 
 /turf/get_fluid_depth()
 	if(is_flooded(absolute=1))
 		return FLUID_MAX_DEPTH
 	var/obj/structure/glass_tank/aquarium = locate() in contents
 	if(aquarium)
-		return aquarium.reagents?.total_volume * TANK_WATER_MULTIPLIER
-	return reagents?.total_volume || 0
+		return aquarium.reagents?.total_liquid_volume * TANK_WATER_MULTIPLIER
+	return reagents?.total_liquid_volume || 0
 
 /turf/proc/show_bubbles()
 	set waitfor = FALSE
@@ -95,7 +95,7 @@
 				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-	else if(reagents?.total_volume > FLUID_QDEL_POINT)
+	else if(reagents?.total_liquid_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 
 /turf/get_reagents()
@@ -121,17 +121,21 @@
 			AM.fluid_act(fluids)
 
 /turf/proc/remove_fluids(var/amount, var/defer_update)
-	if(!reagents?.total_volume)
+	if(!reagents?.total_liquid_volume)
 		return
-	remove_any_reagents(amount, defer_update = defer_update)
+	remove_any_reagents(amount, defer_update = defer_update, removed_phases = MAT_PHASE_LIQUID)
 	if(defer_update && !QDELETED(reagents))
 		SSfluids.holders_to_update[reagents] = TRUE
 
 /turf/proc/transfer_fluids_to(var/turf/target, var/amount, var/defer_update = TRUE)
-	if(!reagents?.total_volume)
+	// No flowing of reagents without liquids, but this proc should not be called if liquids are not present regardless.
+	if(!reagents?.total_liquid_volume)
 		return
 	if(!target.reagents)
 		target.create_reagents(FLUID_MAX_DEPTH)
+
+	// We reference total_volume instead of total_liquid_volume here because the maximum volume limits of the turfs still respect solid volumes, even if the fluid
+	// system mostly cares about the liquid volume.
 	reagents.trans_to_turf(target, min(reagents.total_volume, min(target.reagents.maximum_volume - target.reagents.total_volume, amount)), defer_update = defer_update)
 	if(defer_update)
 		if(!QDELETED(reagents))
@@ -166,7 +170,10 @@
 	if(!(. = ..()))
 		return
 
-	if(reagents?.total_volume > FLUID_QDEL_POINT)
+	if(reagents?.total_liquid_volume < FLUID_SLURRY)
+		dump_solid_reagents()
+
+	if(reagents?.total_liquid_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 		if(primary_reagent && (REAGENT_VOLUME(reagents, primary_reagent.type) >= primary_reagent.slippery_amount))
@@ -177,6 +184,7 @@
 		unwet_floor(FALSE)
 	else
 		QDEL_NULL(fluid_overlay)
+		reagents?.clear_reagents()
 		REMOVE_ACTIVE_FLUID(src)
 		SSfluids.pending_flows -= src
 		if(last_slipperiness > 0)
@@ -184,5 +192,27 @@
 
 	for(var/checkdir in global.cardinal)
 		var/turf/neighbor = get_step_resolving_mimic(src, checkdir)
-		if(neighbor?.reagents?.total_volume > FLUID_QDEL_POINT)
+		if(neighbor?.reagents?.total_liquid_volume > FLUID_QDEL_POINT)
 			ADD_ACTIVE_FLUID(neighbor)
+
+/turf/proc/dump_solid_reagents(datum/reagents/solids)
+	if(!istype(solids))
+		solids = reagents
+	if(LAZYLEN(solids?.solid_volumes))
+		var/list/matter_list = list()
+		for(var/reagent_type in solids.solid_volumes)
+			var/reagent_amount = solids.solid_volumes[reagent_type]
+			matter_list[reagent_type] = reagent_amount/REAGENT_UNITS_PER_MATERIAL_UNIT
+			solids.remove_reagent(reagent_type, reagent_amount, defer_update = TRUE, removed_phases = MAT_PHASE_SOLID)
+
+		var/obj/item/debris/scraps/chemical/scraps = locate() in contents
+		if(!scraps)
+			scraps = new(src)
+		if(!LAZYLEN(scraps.matter))
+			scraps.matter = matter_list
+		else
+			for(var/mat_type in matter_list)
+				scraps.matter[mat_type] += matter_list[mat_type]
+
+		scraps.update_primary_material()
+		solids.handle_update()

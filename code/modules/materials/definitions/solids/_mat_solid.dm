@@ -18,6 +18,8 @@
 		liquid_name = "molten [name]"
 	if(!gas_name)
 		gas_name = "vaporized [name]"
+	if(!solution_name)
+		solution_name = "[name] solution"
 	if(!ore_compresses_to)
 		ore_compresses_to = type
 	. = ..()

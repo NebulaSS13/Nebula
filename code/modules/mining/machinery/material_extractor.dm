@@ -244,6 +244,8 @@
 	for(var/mtype in reagents.reagent_volumes)
 		index += 1
 		var/decl/material/mat = GET_DECL(mtype)
+
+		// TODO: Must be revised once state changes are in. Reagent names might be a litle odd in the meantime.
 		var/is_liquid = mat.phase_at_temperature(temperature, ONE_ATMOSPHERE) == MAT_PHASE_LIQUID
 
 		data["reagents"] += list(list("label" = "[mat.liquid_name] ([reagents.reagent_volumes[mtype]] U)", "index" = index, "liquid" = is_liquid))

@@ -100,7 +100,7 @@ SUBSYSTEM_DEF(fluids)
 		i++
 		current_fluid_holder = processing_fluids[i]
 
-		if(QDELETED(current_fluid_holder) || !current_fluid_holder.reagents?.total_volume)
+		if(QDELETED(current_fluid_holder) || !current_fluid_holder.reagents?.total_liquid_volume)
 			REMOVE_ACTIVE_FLUID(current_fluid_holder)
 			continue
 
@@ -110,13 +110,16 @@ SUBSYSTEM_DEF(fluids)
 
 		reagent_holder = current_fluid_holder.reagents
 		UPDATE_FLUID_BLOCKED_DIRS(current_fluid_holder)
-		current_depth = reagent_holder?.total_volume || 0
+		current_depth = reagent_holder?.total_liquid_volume || 0
 
 		// How is this happening
 		if(QDELETED(reagent_holder) || current_depth == -1.#IND || current_depth == 1.#IND)
 			REMOVE_ACTIVE_FLUID(current_fluid_holder)
 			continue
 
+		// Mimimum depth for creation of slurries.
+		if(current_depth < FLUID_SLURRY)
+			current_fluid_holder.dump_solid_reagents()
 		// Evaporation: todo, move liquid into current_fluid_holder.zone air contents if applicable.
 		if(current_depth <= FLUID_PUDDLE && prob(60))
 			current_fluid_holder.remove_fluids(min(current_depth, 1), defer_update = TRUE)
@@ -129,7 +132,7 @@ SUBSYSTEM_DEF(fluids)
 		// Wash our turf.
 		current_fluid_holder.fluid_act(reagent_holder)
 
-		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/floor) && (current_fluid_holder.turf_flags & TURF_FLAG_ABSORB_LIQUID) && (current_fluid_holder.reagents?.total_volume + current_fluid_holder.get_physical_height()) > 0))
+		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/floor) && (current_fluid_holder.turf_flags & TURF_FLAG_ABSORB_LIQUID) && (current_fluid_holder.reagents?.total_liquid_volume + current_fluid_holder.get_physical_height()) > 0))
 			removing = round(current_depth * 0.5)
 			if(removing > 0)
 				current_fluid_holder.remove_fluids(removing, defer_update = TRUE)
@@ -146,8 +149,8 @@ SUBSYSTEM_DEF(fluids)
 			if(other_fluid_holder)
 				UPDATE_FLUID_BLOCKED_DIRS(other_fluid_holder)
 				if(!(other_fluid_holder.fluid_blocked_dirs & UP) && other_fluid_holder.CanFluidPass(UP))
-					if(!QDELETED(other_fluid_holder) && other_fluid_holder.reagents?.total_volume < FLUID_MAX_DEPTH)
-						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume))
+					if(!QDELETED(other_fluid_holder) && other_fluid_holder.reagents?.total_liquid_volume < FLUID_MAX_DEPTH)
+						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_liquid_volume))
 						current_depth = current_fluid_holder.get_fluid_depth()
 
 		// Flow into the lowest level neighbor.
@@ -165,7 +168,7 @@ SUBSYSTEM_DEF(fluids)
 			if((neighbor.fluid_blocked_dirs & coming_from) || !neighbor.CanFluidPass(coming_from) || neighbor.is_flooded(absolute = TRUE) || !neighbor.CanFluidPass(global.reverse_dir[spread_dir]))
 				continue
 			other_fluid_holder = neighbor
-			neighbor_depth = (other_fluid_holder?.reagents?.total_volume || 0) + neighbor.get_physical_height()
+			neighbor_depth = (other_fluid_holder?.reagents?.total_liquid_volume || 0) + neighbor.get_physical_height()
 			flow_amount = round((current_turf_depth - neighbor_depth)*0.5)
 			// TODO: multiply flow amount or minimum transfer amount by some
 			// viscosity calculation to allow for piles of jelly vs piles of water.
@@ -223,7 +226,7 @@ SUBSYSTEM_DEF(fluids)
 		if(!istype(current_fluid_holder) || QDELETED(current_fluid_holder))
 			continue
 		var/pushed_something = FALSE
-		if(current_fluid_holder.reagents?.total_volume > FLUID_SHALLOW && current_fluid_holder.last_flow_strength >= 10)
+		if(current_fluid_holder.reagents?.total_liquid_volume > FLUID_SHALLOW && current_fluid_holder.last_flow_strength >= 10)
 			for(var/atom/movable/AM as anything in current_fluid_holder.get_contained_external_atoms())
 				if(AM.is_fluid_pushable(current_fluid_holder.last_flow_strength))
 					AM.pushed(current_fluid_holder.last_flow_dir)

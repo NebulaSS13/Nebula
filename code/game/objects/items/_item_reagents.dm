@@ -64,6 +64,11 @@
 		return TRUE
 
 	var/trans = reagents.trans_to(target, amount)
-	playsound(src, 'sound/effects/pour.ogg', 25, 1)
+
+	// Sounds more like pouring small pellets or dust.
+	if(!length(reagents.liquid_volumes))
+		playsound(src, 'sound/effects/refill.ogg', 25, 1)
+	else
+		playsound(src, 'sound/effects/pour.ogg', 25, 1)
 	to_chat(user, SPAN_NOTICE("You transfer [trans] unit\s of the solution to \the [target].  \The [src] now contains [src.reagents.total_volume] units."))
 	return TRUE

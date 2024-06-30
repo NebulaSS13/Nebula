@@ -6,8 +6,8 @@ var/global/obj/temp_reagents_holder = new
 /atom/proc/remove_from_reagents(reagent_type, amount, safety = FALSE, defer_update = FALSE)
 	return reagents?.remove_reagent(reagent_type, amount, safety, defer_update)
 
-/atom/proc/remove_any_reagents(amount = 1, defer_update = FALSE)
-	return reagents?.remove_any(amount, defer_update)
+/atom/proc/remove_any_reagents(amount = 1, defer_update = FALSE, removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
+	return reagents?.remove_any(amount, defer_update, removed_phases)
 
 /atom/proc/get_reagent_space()
 	if(!reagents?.maximum_volume)
@@ -57,9 +57,16 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents
 	var/primary_reagent
 	var/list/reagent_volumes
+
+	var/list/liquid_volumes
+	var/list/solid_volumes		// This should be taken as powders/flakes, rather than large solid pieces of material.
+
 	var/list/reagent_data
 	var/total_volume = 0
 	var/maximum_volume = 120
+
+	var/total_liquid_volume // Used to determine when to create fluids in world and the like.
+
 	var/atom/my_atom
 	var/cached_color
 
@@ -74,6 +81,10 @@ var/global/obj/temp_reagents_holder = new
 	if(SSfluids.holders_to_update[src])
 		SSfluids.holders_to_update -= src
 	reagent_volumes = null
+
+	liquid_volumes = null
+	solid_volumes = null
+
 	reagent_data = null
 	if(my_atom)
 		if(my_atom.reagents == src)
@@ -89,6 +100,8 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/PopulateClone(datum/reagents/clone)
 	clone.primary_reagent = primary_reagent
 	clone.reagent_volumes = reagent_volumes?.Copy()
+	clone.liquid_volumes  = liquid_volumes?.Copy()
+	clone.solid_volumes   = solid_volumes?.Copy()
 	clone.reagent_data    = listDeepClone(reagent_data, TRUE)
 	clone.total_volume    = total_volume
 	clone.maximum_volume  = maximum_volume
@@ -106,26 +119,58 @@ var/global/obj/temp_reagents_holder = new
 		if(codex && reagent.codex_name)
 			. = reagent.codex_name
 		else
-			. = reagent.get_reagent_name(src)
+			if(LIQUID_VOLUME(src, reagent.type) >= SOLID_VOLUME(src, reagent.type))
+				return reagent.get_reagent_name(src, MAT_PHASE_LIQUID)
+			else
+				return reagent.get_reagent_name(src, MAT_PHASE_SOLID)
 
 /datum/reagents/proc/get_primary_reagent_decl()
 	. = GET_DECL(primary_reagent)
 
 /datum/reagents/proc/update_total() // Updates volume.
 	total_volume = 0
+	total_liquid_volume = 0
 	primary_reagent = null
-	for(var/R in reagent_volumes)
-		var/vol = CHEMS_QUANTIZE(reagent_volumes[R])
+
+	reagent_volumes = list()
+	var/primary_liquid = null
+	for(var/R in liquid_volumes)
+		var/vol = CHEMS_QUANTIZE(liquid_volumes[R])
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
 			clear_reagent(R, defer_update = TRUE, force = TRUE) // defer_update is important to avoid infinite recursion
 		else
-			reagent_volumes[R] = vol
+			LAZYSET(liquid_volumes, R, vol)
+			LAZYSET(reagent_volumes, R, vol)
 			total_volume += vol
-			if(!primary_reagent || reagent_volumes[primary_reagent] < vol)
-				primary_reagent = R
+			total_liquid_volume += vol
+			if(!primary_liquid || liquid_volumes[primary_liquid] < vol)
+				primary_liquid = R
+
+	var/primary_solid = null
+	for(var/R in solid_volumes)
+		var/vol = CHEMS_QUANTIZE(solid_volumes[R])
+		if(vol < MINIMUM_CHEMICAL_VOLUME)
+			clear_reagent(R, defer_update = TRUE, force = TRUE)
+		else
+			LAZYSET(solid_volumes, R, vol)
+			if(!reagent_volumes?[R])
+				LAZYSET(reagent_volumes, R, vol)
+			else
+				reagent_volumes[R] += vol
+			total_volume += vol
+			if(!primary_solid || (solid_volumes[primary_solid] < vol))
+				primary_solid = R
+
+	if(solid_volumes?[primary_solid] > liquid_volumes?[primary_liquid])
+		primary_reagent = primary_solid
+	else // By default, take the primary_liquid as the primary_reagent.
+		primary_reagent = primary_liquid
+
+	UNSETEMPTY(reagent_volumes)
 
 	if(total_volume > maximum_volume)
 		remove_any(total_volume-maximum_volume)
+
 
 /datum/reagents/proc/process_reactions()
 
@@ -245,7 +290,7 @@ var/global/obj/temp_reagents_holder = new
 	my_atom?.try_on_reagent_change()
 	handle_update()
 
-/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
+/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE, var/phase)
 
 	amount = CHEMS_QUANTIZE(min(amount, REAGENTS_FREE_SPACE(src)))
 	if(amount <= 0)
@@ -254,6 +299,26 @@ var/global/obj/temp_reagents_holder = new
 	var/decl/material/newreagent = GET_DECL(reagent_type)
 	if(!istype(newreagent))
 		return FALSE
+
+	if(!phase)
+		// By default, assume the reagent phase at STP.
+		phase = newreagent.phase_at_temperature()
+		// Assume it's in solution, somehow.
+		if(phase == MAT_PHASE_GAS)
+			phase = MAT_PHASE_LIQUID
+
+	var/list/phase_volumes
+	if(phase == MAT_PHASE_LIQUID)
+		LAZYINITLIST(liquid_volumes)
+		phase_volumes = liquid_volumes
+	else
+		LAZYINITLIST(solid_volumes)
+		phase_volumes = solid_volumes
+
+	if(!phase_volumes[reagent_type])
+		phase_volumes[reagent_type] = amount
+	else
+		phase_volumes[reagent_type] += amount
 
 	LAZYINITLIST(reagent_volumes)
 	if(!reagent_volumes[reagent_type])
@@ -269,7 +334,9 @@ var/global/obj/temp_reagents_holder = new
 			LAZYSET(reagent_data, reagent_type, newreagent.mix_data(src, data, amount))
 	if(reagent_volumes.len > 1) // otherwise if we have a mix of reagents, uncache as well
 		cached_color = null
+
 	UNSETEMPTY(reagent_volumes)
+	UNSETEMPTY(phase_volumes)
 
 	if(defer_update)
 		total_volume = clamp(total_volume + amount, 0, maximum_volume) // approximation, call update_total() if deferring
@@ -277,23 +344,45 @@ var/global/obj/temp_reagents_holder = new
 		handle_update(safety)
 	return TRUE
 
-/datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
+/datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE, var/removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
 	amount = CHEMS_QUANTIZE(amount)
 	if(!isnum(amount) || amount <= 0 || REAGENT_VOLUME(src, reagent_type) <= 0)
 		return FALSE
-	reagent_volumes[reagent_type] -= amount
-	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
+
+	var/removed = 0
+	if((removed_phases & MAT_PHASE_LIQUID) && LIQUID_VOLUME(src, reagent_type) > 0)
+
+		removed += min(liquid_volumes[reagent_type], amount)
+		liquid_volumes[reagent_type] -= removed
+
+	// If both liquid and solid reagents are being removed, we prioritize the liquid reagents.
+	if((removed < amount) && (removed_phases & MAT_PHASE_SOLID) && SOLID_VOLUME(src, reagent_type) > 0)
+
+		var/solid_removed = min(solid_volumes[reagent_type], amount - removed)
+		solid_volumes[reagent_type] -= solid_removed
+
+		removed += solid_removed
+
+	if(removed == 0)
+		return FALSE
+
+	// If removed < amount, a reagent has been removed completely from a state, so uncache the color.
+	if((LAZYLEN(liquid_volumes) > 1 || LAZYLEN(solid_volumes) > 1) || (removed < amount))
 		cached_color = null
 	if(defer_update)
-		total_volume = clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
+		total_volume = clamp(total_volume - removed, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
 		handle_update(safety)
 	return TRUE
 
 /datum/reagents/proc/clear_reagent(var/reagent_type, var/defer_update = FALSE, var/force = FALSE)
-	. = force || !!(REAGENT_VOLUME(src, reagent_type) || REAGENT_DATA(src, reagent_type))
+	. = force || !!REAGENT_DATA(src, reagent_type) || !!REAGENT_VOLUME(src, reagent_type)
 	if(.)
+
 		var/amount = LAZYACCESS(reagent_volumes, reagent_type)
+		LAZYREMOVE(liquid_volumes, reagent_type)
+		LAZYREMOVE(solid_volumes, reagent_type)
+
 		LAZYREMOVE(reagent_volumes, reagent_type)
 		LAZYREMOVE(reagent_data, reagent_type)
 		if(primary_reagent == reagent_type)
@@ -305,29 +394,36 @@ var/global/obj/temp_reagents_holder = new
 		else
 			handle_update()
 
-/datum/reagents/proc/has_reagent(var/reagent_type, var/amount)
-	. = REAGENT_VOLUME(src, reagent_type)
+/datum/reagents/proc/has_reagent(var/reagent_type, var/amount, var/phase)
+	if(phase)
+		if(phase == MAT_PHASE_SOLID)
+			. = SOLID_VOLUME(src, reagent_type)
+		else if(phase == MAT_PHASE_LIQUID)
+			. = LIQUID_VOLUME(src, reagent_type)
+	else
+		. = REAGENT_VOLUME(src, reagent_type)
 	if(. && amount)
 		. = (. >= amount)
 
-/datum/reagents/proc/has_any_reagent(var/list/check_reagents)
+/datum/reagents/proc/has_any_reagent(var/list/check_reagents, var/phase)
 	for(var/check in check_reagents)
-		var/vol = REAGENT_VOLUME(src, check)
-		if(vol > 0 && vol >= check_reagents[check])
+		if(has_reagent(check, check_reagents[check], phase))
 			return TRUE
 	return FALSE
 
-/datum/reagents/proc/has_all_reagents(var/list/check_reagents)
-	if(LAZYLEN(reagent_volumes) < LAZYLEN(check_reagents))
-		return FALSE
+/datum/reagents/proc/has_all_reagents(var/list/check_reagents, var/phase)
+	. = TRUE
 	for(var/check in check_reagents)
-		if(REAGENT_VOLUME(src, check) < check_reagents[check])
-			return FALSE
-	return TRUE
+		. = min(., has_reagent(check, check_reagents[check], phase))
+		if(!.)
+			return
 
 /datum/reagents/proc/clear_reagents()
 	for(var/reagent in reagent_volumes)
 		clear_reagent(reagent, defer_update = TRUE)
+
+	LAZYCLEARLIST(liquid_volumes)
+	LAZYCLEARLIST(solid_volumes)
 	LAZYCLEARLIST(reagent_volumes)
 	LAZYCLEARLIST(reagent_data)
 	total_volume = 0
@@ -340,7 +436,7 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/get_reagents(scannable_only = 0, precision)
 	. = list()
-	for(var/rtype in reagent_volumes)
+	for(var/rtype in liquid_volumes)
 		var/decl/material/current= GET_DECL(rtype)
 		if(scannable_only && !current.scannable)
 			continue
@@ -348,7 +444,16 @@ var/global/obj/temp_reagents_holder = new
 		if(precision)
 			volume = round(volume, precision)
 		if(volume)
-			. += "[current.get_reagent_name(src)] ([volume])"
+			. += "[current.get_reagent_name(src, MAT_PHASE_LIQUID)] ([volume])"
+	for(var/rtype in solid_volumes)
+		var/decl/material/current= GET_DECL(rtype)
+		if(scannable_only && !current.scannable)
+			continue
+		var/volume = REAGENT_VOLUME(src, rtype)
+		if(precision)
+			volume = round(volume, precision)
+		if(volume)
+			. += "[current.get_reagent_name(src, MAT_PHASE_SOLID)] ([volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
 /datum/reagents/proc/get_dirtiness()
@@ -358,15 +463,39 @@ var/global/obj/temp_reagents_holder = new
 	return . / length(reagent_volumes)
 
 /* Holder-to-holder and similar procs */
-/datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
+/datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE, var/removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID)) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
 
 	if(amount <= 0)
 		return 0
 
-	if(amount >= total_volume)
-		. = total_volume
-		clear_reagents()
-		return
+	// The list we're iterating over to remove reagents.
+	var/list/removing_volumes
+	var/removing_volumes_total
+	// Shortcut if we're removing both liquids and solids (most cases).
+	if((removed_phases & MAT_PHASE_LIQUID) && (removed_phases & MAT_PHASE_SOLID))
+		if(amount >= total_volume)
+			. = total_volume
+			clear_reagents()
+			return
+
+		removing_volumes = reagent_volumes
+		removing_volumes_total = total_volume
+
+	else if(removed_phases & MAT_PHASE_LIQUID)
+		if(!LAZYLEN(liquid_volumes))
+			return 0
+
+		removing_volumes = liquid_volumes
+		removing_volumes_total = total_liquid_volume
+
+	else if(removed_phases & MAT_PHASE_SOLID)
+		if(!LAZYLEN(solid_volumes))
+			return 0
+
+		removing_volumes = solid_volumes
+		removing_volumes_total = total_volume - total_liquid_volume
+	else
+		return 0
 
 	var/removing = clamp(CHEMS_QUANTIZE(amount), 0, total_volume) // not ideal but something is making total_volume become NaN
 	if(!removing || total_volume <= 0)
@@ -376,18 +505,18 @@ var/global/obj/temp_reagents_holder = new
 
 	// Some reagents may be too low to remove from, so do multiple passes.
 	. = 0
-	var/part = removing / total_volume
+	var/part = removing / removing_volumes_total
 	var/failed_remove = FALSE
 	while(removing >= MINIMUM_CHEMICAL_VOLUME && total_volume >= MINIMUM_CHEMICAL_VOLUME && !failed_remove)
 		failed_remove = TRUE
-		for(var/current in reagent_volumes)
-			var/removing_amt = min(CHEMS_QUANTIZE(REAGENT_VOLUME(src, current) * part), removing)
+		for(var/current in removing_volumes)
+			var/removing_amt = min(CHEMS_QUANTIZE(removing_volumes[current] * part), removing)
 			if(removing_amt <= 0)
 				continue
 			failed_remove = FALSE
 			removing -= removing_amt
 			. += removing_amt
-			remove_reagent(current, removing_amt, TRUE, TRUE)
+			remove_reagent(current, removing_amt, TRUE, TRUE, removed_phases = removed_phases)
 
 	if(!defer_update)
 		handle_update()
@@ -395,7 +524,8 @@ var/global/obj/temp_reagents_holder = new
 // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
 // Returns actual amount removed from [src] (not amount transferred to [target]).
 // Use safety = 1 for temporary targets to avoid queuing them up for processing.
-/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/safety = 0, var/defer_update = FALSE, list/skip_reagents)
+// Reagent phases are preserved.
+/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/safety = 0, var/defer_update = FALSE, var/list/skip_reagents, var/transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
 
 	if(!target || !istype(target))
 		return
@@ -418,20 +548,51 @@ var/global/obj/temp_reagents_holder = new
 	. = 0
 	for(var/rtype in reagent_volumes - skip_reagents)
 		var/amount_to_transfer = CHEMS_QUANTIZE(REAGENT_VOLUME(src, rtype) * part)
-		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE) // We don't react until everything is in place
-		. += amount_to_transfer
-		if(!copy)
-			remove_reagent(rtype, amount_to_transfer, TRUE, TRUE)
+
+		// Prioritize liquid transfers
+		if(transferred_phases & MAT_PHASE_LIQUID)
+			var/liquid_transferred = min(amount_to_transfer, CHEMS_QUANTIZE(LIQUID_VOLUME(src, rtype)))
+			target.add_reagent(rtype, liquid_transferred * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE, MAT_PHASE_LIQUID)  // We don't react until everything is in place
+			. += liquid_transferred
+			amount_to_transfer -= liquid_transferred
+
+			if(!copy)
+				remove_reagent(rtype, liquid_transferred, TRUE, TRUE, MAT_PHASE_LIQUID)
+
+		if(transferred_phases & MAT_PHASE_SOLID)
+			var/solid_transferred = (min(amount_to_transfer, CHEMS_QUANTIZE(SOLID_VOLUME(src, rtype))))
+			target.add_reagent(rtype, solid_transferred * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE, MAT_PHASE_SOLID)  // Ditto
+			. += solid_transferred
+			amount_to_transfer -= solid_transferred
+
+			if(!copy)
+				remove_reagent(rtype, solid_transferred, TRUE, TRUE, MAT_PHASE_SOLID)
+
 
 	// Due to rounding, we may have taken less than we wanted.
 	// If we're up short, add the remainder taken from the primary reagent.
 	// If we're skipping the primary reagent we just don't do this step.
 	if(. < amount && primary_reagent && !(primary_reagent in skip_reagents) && REAGENT_VOLUME(src, primary_reagent) > 0)
 		var/remainder = min(REAGENT_VOLUME(src, primary_reagent), CHEMS_QUANTIZE(amount - .))
-		target.add_reagent(primary_reagent, remainder * multiplier, REAGENT_DATA(src, primary_reagent), TRUE, TRUE)
-		. += remainder
+
+		var/liquid_remainder
+		var/solid_remainder
+
+		if(LIQUID_VOLUME(src, primary_reagent))
+			liquid_remainder = min(remainder, LIQUID_VOLUME(src, primary_reagent))
+			target.add_reagent(primary_reagent, remainder * multiplier, REAGENT_DATA(src, primary_reagent), TRUE, TRUE, MAT_PHASE_LIQUID)
+			. += liquid_remainder
+			remainder -= liquid_remainder
+		if(remainder >= 0 && SOLID_VOLUME(src, primary_reagent))
+			solid_remainder = min(remainder, SOLID_VOLUME(src, primary_reagent))
+			target.add_reagent(primary_reagent, solid_remainder * multiplier, REAGENT_DATA(src, primary_reagent), TRUE, TRUE, MAT_PHASE_SOLID)
+			. += solid_remainder
+			remainder -= solid_remainder
 		if(!copy)
-			remove_reagent(primary_reagent, remainder, TRUE, TRUE)
+			if(liquid_remainder >= 0)
+				remove_reagent(primary_reagent, liquid_remainder, TRUE, TRUE, MAT_PHASE_LIQUID)
+			if(solid_remainder >= 0)
+				remove_reagent(primary_reagent, solid_remainder, TRUE, TRUE, MAT_PHASE_SOLID)
 
 	if(!defer_update)
 		target.handle_update(safety)
@@ -445,22 +606,22 @@ var/global/obj/temp_reagents_holder = new
 //not directly injected into the contents. It first calls touch, then the appropriate trans_to_*() or splash_mob().
 //If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person),
 //call the appropriate trans_to_*() proc.
-/datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE)
+/datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE, var/transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
 	if(ismob(target))
 		touch_mob(target)
 		if(QDELETED(target))
 			return 0
 		return splash_mob(target, amount, copy, defer_update = defer_update)
 	if(isturf(target))
-		return trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update)
+		return trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 	if(isobj(target))
 		touch_obj(target)
 		if(!QDELETED(target) && target.can_be_poured_into(my_atom))
-			return trans_to_obj(target, amount, multiplier, copy, defer_update = defer_update)
+			return trans_to_obj(target, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 		return 0
 	return 0
 
-//Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
+//Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well. All phases are transferred by default
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60, var/defer_update = FALSE)
 
 	if(!istype(target))
@@ -540,8 +701,8 @@ var/global/obj/temp_reagents_holder = new
 	if (total_volume <= 0)
 		qdel(src)
 
-/datum/reagents/proc/trans_type_to(var/atom/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
-	if (!target || !target.reagents || !target.simulated)
+/datum/reagents/proc/trans_type_to(var/atom/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE, var/transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
+	if (!target || !target.reagents || !target.simulated || !transferred_phases)
 		return
 
 	amount = max(0, min(amount, REAGENT_VOLUME(src, type), REAGENTS_FREE_SPACE(target.reagents) / multiplier))
@@ -549,13 +710,40 @@ var/global/obj/temp_reagents_holder = new
 	if(!amount)
 		return
 
+	// Small check for optimization.
+	if (!(transferred_phases & MAT_PHASE_LIQUID))
+		if(!SOLID_VOLUME(src, type))
+			return
+
+	if (!(transferred_phases & MAT_PHASE_SOLID))
+		if(!LIQUID_VOLUME(src, type))
+			return
+
 	var/datum/reagents/F = new(amount, global.temp_reagents_holder)
-	F.add_reagent(type, amount, REAGENT_DATA(src, type))
-	remove_reagent(type, amount, defer_update = defer_update)
-	. = F.trans_to(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
+
+	var/amount_remaining = amount
+
+	// Prioritize liquid transfers.
+	if(transferred_phases & MAT_PHASE_LIQUID)
+		var/liquid_transferred = NONUNIT_FLOOR(min(amount_remaining, LIQUID_VOLUME(src, type)), MINIMUM_CHEMICAL_VOLUME)
+		F.add_reagent(type, liquid_transferred, REAGENT_DATA(src, type), defer_update = TRUE, phase = MAT_PHASE_LIQUID)
+		remove_reagent(type, liquid_transferred, defer_update = TRUE, removed_phases = MAT_PHASE_LIQUID)
+		amount_remaining -= liquid_transferred
+
+	if(transferred_phases & MAT_PHASE_SOLID)
+		var/solid_transferred = NONUNIT_FLOOR(min(amount_remaining, SOLID_VOLUME(src, type)), MINIMUM_CHEMICAL_VOLUME)
+		F.add_reagent(type, solid_transferred, REAGENT_DATA(src, type), defer_update = TRUE, phase = MAT_PHASE_SOLID)
+		remove_reagent(type, solid_transferred, defer_update = TRUE, removed_phases = MAT_PHASE_LIQUID)
+		amount_remaining -= solid_transferred
+
+	// Now that both liquid and solid components are removed, we can update if necessary.
+	if(!defer_update)
+		handle_update()
+
+	. = F.trans_to(target, amount, multiplier, defer_update = defer_update, transferred_phases = transferred_phases) // Let this proc check the atom's type
 	qdel(F)
 
-/datum/reagents/proc/trans_type_to_holder(var/datum/reagents/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
+/datum/reagents/proc/trans_type_to_holder(var/datum/reagents/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE, var/transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
 	if (!target)
 		return
 
@@ -564,11 +752,17 @@ var/global/obj/temp_reagents_holder = new
 	if(!amount)
 		return
 
-	var/datum/reagents/F = new(amount, global.temp_reagents_holder)
-	F.add_reagent(type, amount, REAGENT_DATA(src, type))
-	remove_reagent(type, amount, defer_update = defer_update)
-	. = F.trans_to_holder(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
-	qdel(F)
+	// Small check for optimization.
+	if (!(transferred_phases & MAT_PHASE_LIQUID))
+		if(!SOLID_VOLUME(src, type))
+			return
+
+	if (!(transferred_phases & MAT_PHASE_SOLID))
+		if(!LIQUID_VOLUME(src, type))
+			return
+
+	var/filtered_types = reagent_volumes - type
+	return trans_to_holder(target, amount, multiplier, skip_reagents = filtered_types, defer_update = defer_update, transferred_phases = transferred_phases) // Let this proc check the atom's type
 
 // When applying reagents to an atom externally, touch procs are called to trigger any on-touch effects of the reagent.
 // Options are touch_turf(), touch_mob() and touch_obj(). This does not handle transferring reagents to things.
@@ -626,7 +820,7 @@ var/global/obj/temp_reagents_holder = new
 		perm = L.reagent_permeability()
 	return trans_to_mob(target, amount * perm, CHEM_TOUCH, 1, copy, defer_update = defer_update)
 
-/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_INJECT, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Transfer after checking into which holder...
+/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_INJECT, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE, var/transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID)) // Transfer after checking into which holder...
 	if(!target || !istype(target) || !target.simulated)
 		return
 	if(isliving(target))
@@ -634,7 +828,7 @@ var/global/obj/temp_reagents_holder = new
 		if(type == CHEM_INJECT)
 			var/datum/reagents/R = L.get_injected_reagents()
 			if(R)
-				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update)
+				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 		if(type == CHEM_INGEST)
 			var/datum/reagents/R = L.get_ingested_reagents()
 			if(R)
@@ -642,39 +836,51 @@ var/global/obj/temp_reagents_holder = new
 		if(type == CHEM_TOUCH)
 			var/datum/reagents/R = L.get_contact_reagents()
 			if(R)
-				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update)
+				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 		if(type == CHEM_INHALE)
 			var/datum/reagents/R = L.get_inhaled_reagents()
 			if(R)
-				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update)
+				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 	var/datum/reagents/R = new /datum/reagents(amount, global.temp_reagents_holder)
-	. = trans_to_holder(R, amount, multiplier, copy, TRUE, defer_update = defer_update)
+	. = trans_to_holder(R, amount, multiplier, copy, TRUE, defer_update = defer_update, transferred_phases = transferred_phases)
 	R.touch_mob(target)
 	qdel(R)
 
-/datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE)
+/datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE, var/transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
 	if(!target?.simulated)
 		return
+
+	// If we're only dumping solids, and there's not enough liquid present on the turf to make a slurry, we dump the solids directly.
+	// This avoids creating an unnecessary reagent holder that won't be immediately deleted.
+	if((!(transferred_phases & MAT_PHASE_LIQUID) || !total_liquid_volume) && (target.reagents?.total_liquid_volume < FLUID_SLURRY))
+		var/datum/reagents/R = new /datum/reagents(amount, global.temp_reagents_holder)
+		trans_to_holder(R, amount, multiplier, copy, TRUE, defer_update = defer_update, transferred_phases = MAT_PHASE_SOLID)
+		R.touch_turf(target)
+		target.dump_solid_reagents(R)
+		qdel(R)
+		return
+
 	if(!target.reagents)
 		target.create_reagents(FLUID_MAX_DEPTH)
-	trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update)
+	trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 	// Deferred updates are presumably being done by SSfluids.
 	// Do an immediate fluid_act call rather than waiting for SSfluids to proc.
 	if(!defer_update)
 		target.fluid_act(target.reagents)
 
-/datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
+ // Objects may or may not have reagents; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
+/datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE, var/transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
 	if(!target || !target.simulated)
 		return
 
 	if(!target.reagents)
 		var/datum/reagents/R = new /datum/reagents(amount * multiplier, global.temp_reagents_holder)
-		. = trans_to_holder(R, amount, multiplier, copy, TRUE, defer_update = defer_update)
+		. = trans_to_holder(R, amount, multiplier, copy, TRUE, defer_update = defer_update, transferred_phases = transferred_phases)
 		R.touch_obj(target)
 		qdel(R)
 		return
 
-	return trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update)
+	return trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 
 /* Atom reagent creation - use it all the time */
 

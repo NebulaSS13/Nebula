@@ -46,7 +46,7 @@
 		return
 
 	if(reagents?.total_volume)
-		to_chat(user, SPAN_NOTICE("It contains [reagents.total_volume] units of liquid."))
+		to_chat(user, SPAN_NOTICE("It contains [reagents.total_volume] units of reagents."))
 	else
 		to_chat(user, SPAN_NOTICE("It is empty."))
 	if(!ATOM_IS_OPEN_CONTAINER(src))

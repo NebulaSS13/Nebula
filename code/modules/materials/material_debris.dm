@@ -10,15 +10,22 @@
 	name = "scraps"
 	desc = "A small pile of tailings and scraps."
 
+	var/total_matter = 0
+
 /obj/item/debris/scraps/proc/update_primary_material()
 
 	var/list/mat_names = list()
 	var/highest_mat
+
+	total_matter = 0
+
 	for(var/mat in matter)
-		if(!highest_mat || matter[highest_mat] < matter[mat])
+		var/mat_amt = matter[mat]
+		if(!highest_mat || matter[highest_mat] < mat_amt)
 			highest_mat = mat
 		var/decl/material/material_decl = GET_DECL(mat)
 		mat_names += material_decl.solid_name
+		total_matter += mat_amt
 
 	if(!highest_mat)
 		qdel(src)
@@ -64,6 +71,64 @@
 // Override as squashing items produces this item type.
 /obj/item/debris/scraps/squash_item(skip_qdel = FALSE)
 	return
+
+// Physical object for holding solid reagents which are out of solution or slurry.
+/obj/item/debris/scraps/chemical
+	desc = "A pile of dust and small filings"
+
+/obj/item/debris/scraps/chemical/fluid_act(datum/reagents/fluids)
+	SHOULD_CALL_PARENT(FALSE)
+
+	if(!istype(loc, /turf))
+		return
+	if(!QDELETED(src) && fluids?.total_liquid_volume >= FLUID_SLURRY)
+		var/free_space = REAGENTS_FREE_SPACE(fluids)
+		for(var/matter_type in matter)
+			if(free_space <= MINIMUM_CHEMICAL_VOLUME)
+				break
+			var/reagents_added = min(free_space, MATERIAL_UNITS_TO_REAGENTS_UNITS(matter[matter_type]))
+			fluids.add_reagent(matter_type, reagents_added, defer_update = TRUE, phase = MAT_PHASE_SOLID)
+			matter[matter_type] -= reagents_added/REAGENT_UNITS_PER_MATERIAL_UNIT
+			if(matter[matter_type] <= 0)
+				matter -= matter_type
+
+			free_space -= reagents_added
+
+		fluids.handle_update()
+		update_primary_material()
+
+/obj/item/debris/scraps/chemical/afterattack(atom/target, mob/user, proximity)
+	if(!ATOM_IS_OPEN_CONTAINER(target) || !proximity || !target.reagents)
+		return ..()
+
+	var/free_space = target.get_reagent_space()
+	if(free_space <= 0)
+		to_chat(user, SPAN_WARNING("\The [target] is full!"))
+		return FALSE
+
+	for(var/matter_type in matter)
+		if(free_space <= MINIMUM_CHEMICAL_VOLUME)
+			break
+
+		var/adj_mat_amt = min(1, (free_space/REAGENT_UNITS_PER_MATERIAL_UNIT)/total_matter)*matter[matter_type]
+		var/reagents_added = max(min(free_space, MATERIAL_UNITS_TO_REAGENTS_UNITS(adj_mat_amt)), MINIMUM_CHEMICAL_VOLUME)
+		target.reagents.add_reagent(matter_type, reagents_added, defer_update = TRUE, phase = MAT_PHASE_SOLID)
+		matter[matter_type] -= reagents_added/REAGENT_UNITS_PER_MATERIAL_UNIT
+		if(matter[matter_type] <= 0)
+			matter -= matter_type
+
+		free_space -= reagents_added
+
+	if(!length(matter))
+		to_chat(user, SPAN_NOTICE("You carefully dump \the [src] into \the [target]."))
+		user?.drop_from_inventory(src)
+		qdel(src)
+	else
+		to_chat(user, SPAN_NOTICE("You carefully dump some of \the [src] into \the [target]."))
+		update_primary_material()
+
+	playsound(src, 'sound/effects/refill.ogg', 25, 1)
+	return TRUE
 
 // This object is sort of a placeholder for a more nuanced melting and item damage system.
 // The idea is if your gun is half-melted it should not function as a gun anymore.
