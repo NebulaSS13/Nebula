@@ -20,9 +20,6 @@
 /obj/structure/cable/blue{
 	icon_state = "1-2"
 	},
-/obj/effect/shuttle_landmark/mule/start{
-	dir = 1
-	},
 /turf/floor/tiled/techfloor/grid,
 /area/liberia/dockinghall)
 "ad" = (
@@ -2599,9 +2596,11 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/mule/start,
 /obj/abstract/local_dock/automatic{
 	shuttle_tag = "Mule";
-	port_tag = "docking port"
+	port_tag = "docking port";
+	dock_target = "mule_port_shuttle_dock"
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/liberia/mule)

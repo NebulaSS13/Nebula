@@ -755,9 +755,6 @@
 /obj/machinery/door/airlock/external/glass/bolted{
 	id_tag = "dock_star_out"
 	},
-/obj/effect/shuttle_landmark/docking_arm_starboard/rescue{
-	dir = 4
-	},
 /turf/floor/tiled/steel_ridged,
 /area/ship/trade/dock)
 "bx" = (
@@ -908,11 +905,15 @@
 /obj/structure/cable/orange{
 	icon_state = "4-8"
 	},
+/obj/effect/shuttle_landmark/docking_arm_port/shuttle{
+	dir = 4
+	},
 /obj/abstract/local_dock/automatic{
 	dir = 4;
 	shuttle_tag = "Bee Shuttle";
 	port_tag = "starboard";
-	name = "starboard docking port"
+	name = "starboard docking port";
+	dock_target = "bee_star"
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/shuttle/outgoing/general)
@@ -930,9 +931,6 @@
 /obj/machinery/shield_diffuser,
 /obj/structure/cable{
 	icon_state = "4-8"
-	},
-/obj/effect/shuttle_landmark/docking_arm_port/shuttle{
-	dir = 8
 	},
 /turf/floor/tiled/steel_ridged,
 /area/ship/trade/dock)
@@ -1046,7 +1044,8 @@
 	pixel_y = 32;
 	tag_airpump = "tradeship_rescue_shuttle_pump";
 	tag_chamber_sensor = "tradeship_rescue_shuttle_sensor";
-	tag_exterior_door = "tradeship_rescue_shuttle_out"
+	tag_exterior_door = "tradeship_rescue_shuttle_out";
+	directional_offset = null
 	},
 /obj/effect/floor_decal/corner/white{
 	dir = 9
@@ -1055,13 +1054,15 @@
 	id_tag = "tradeship_rescue_shuttle_sensor";
 	pixel_x = -22;
 	pixel_y = 20;
-	dir = 4
+	dir = 4;
+	directional_offset = null
 	},
 /obj/abstract/local_dock/automatic{
 	dir = 1;
 	shuttle_tag = "Rescue Shuttle";
 	port_tag = "center";
-	name = "center"
+	name = "center";
+	reorient = 0
 	},
 /turf/floor/tiled,
 /area/ship/trade/shuttle/rescue)
@@ -6013,7 +6014,8 @@
 /obj/abstract/local_dock/automatic{
 	dir = 1;
 	shuttle_tag = "Bee Shuttle";
-	name = "center"
+	name = "center";
+	reorient = 0
 	},
 /turf/floor/tiled,
 /area/ship/trade/shuttle/outgoing/general)
@@ -6142,10 +6144,14 @@
 	dir = 8
 	},
 /obj/effect/decal/warning_stripes,
+/obj/effect/shuttle_landmark/docking_arm_starboard/rescue{
+	dir = 8
+	},
 /obj/abstract/local_dock/automatic{
 	dir = 8;
 	shuttle_tag = "Rescue Shuttle";
-	port_tag = "port"
+	port_tag = "port";
+	dock_target = "tradeship_rescue_shuttle"
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/shuttle/rescue)

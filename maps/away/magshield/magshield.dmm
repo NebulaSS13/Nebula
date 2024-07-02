@@ -674,8 +674,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "EngineBlast";
-	name = "Engine Monitoring Room Blast Doors";
-	
+	name = "Engine Monitoring Room Blast Doors"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/floor/plating,
@@ -734,8 +733,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "EngineBlast";
-	name = "Engine Monitoring Room Blast Doors";
-	
+	name = "Engine Monitoring Room Blast Doors"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/yellow{
@@ -1555,7 +1553,8 @@
 /area/magshield/north)
 "ew" = (
 /obj/structure/sign/warning/docking_area{
-	pixel_y = -30
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/floor/airless,
 /area/magshield/north)
@@ -1751,8 +1750,10 @@
 /obj/machinery/door/airlock/external/bolted_open,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/button/access{
-	pixel_x = -25;
-	pixel_y = 25
+	pixel_x = -20;
+	pixel_y = 32;
+	id_tag = "magshield_dock";
+	dir = 4
 	},
 /turf/floor/airless,
 /area/magshield/north)
@@ -1806,16 +1807,18 @@
 "fd" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "centcom_shuttle_dock_pump"
+	id_tag = "magshield_dock_pump"
 	},
 /obj/effect/floor_decal/industrial/hatch/blue,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	pixel_x = 25;
-	dir = 8
+	dir = 8;
+	id_tag = "magshield_dock"
 	},
 /obj/machinery/airlock_sensor{
 	pixel_x = -25;
-	dir = 4
+	dir = 4;
+	id_tag = "magshield_dock_sensor"
 	},
 /turf/floor/airless,
 /area/magshield/north)
@@ -1865,6 +1868,11 @@
 /area/magshield/north)
 "fn" = (
 /obj/machinery/door/airlock/external/bolted_open,
+/obj/machinery/button/access{
+	pixel_x = -25;
+	pixel_y = -16;
+	id_tag = "magshield_dock"
+	},
 /turf/floor/airless,
 /area/magshield/north)
 "fo" = (
@@ -1914,12 +1922,11 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "fw" = (
-/obj/machinery/button/access{
-	pixel_x = -25;
-	pixel_y = 25
+/obj/effect/shuttle_landmark/nav_magshield/dock1{
+	dir = 1
 	},
-/turf/floor/airless,
-/area/magshield/north)
+/turf/space,
+/area/space)
 "fx" = (
 /obj/machinery/atmospherics/unary/tank,
 /obj/machinery/atmospherics/portables_connector{
@@ -1961,10 +1968,6 @@
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/floor/tiled,
 /area/magshield/west)
-"fH" = (
-/obj/effect/overmap/visitable/sector/magshield,
-/turf/floor/airless,
-/area/magshield/north)
 "fI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -3889,6 +3892,10 @@
 /area/space)
 "lA" = (
 /obj/effect/shuttle_landmark/nav_magshield/nav3,
+/turf/space,
+/area/space)
+"nQ" = (
+/obj/effect/overmap/visitable/sector/magshield,
 /turf/space,
 /area/space)
 "qp" = (
@@ -21013,7 +21020,7 @@ dg
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -21215,7 +21222,7 @@ dj
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -21417,7 +21424,7 @@ dj
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -21619,7 +21626,7 @@ eP
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -21821,7 +21828,7 @@ eP
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -22023,7 +22030,7 @@ eQ
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -22225,7 +22232,7 @@ eR
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -22427,7 +22434,7 @@ eS
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -22629,7 +22636,7 @@ eO
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -22831,7 +22838,7 @@ eP
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -23033,7 +23040,7 @@ dj
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -23235,7 +23242,7 @@ dj
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -23436,8 +23443,8 @@ ev
 de
 de
 de
-dg
-dj
+aa
+aa
 aa
 aa
 aa
@@ -23639,7 +23646,6 @@ eT
 fd
 fn
 fw
-fH
 aa
 aa
 aa
@@ -23649,6 +23655,7 @@ aa
 aa
 aa
 aa
+nQ
 aa
 aa
 aa
@@ -23840,8 +23847,8 @@ ew
 de
 de
 de
-dg
-dj
+aa
+aa
 aa
 aa
 aa
@@ -24043,7 +24050,7 @@ eU
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -24245,7 +24252,7 @@ ee
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -24447,7 +24454,7 @@ ee
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -24649,7 +24656,7 @@ ee
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -24851,7 +24858,7 @@ ee
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -25053,7 +25060,7 @@ ee
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -25255,7 +25262,7 @@ eU
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -25457,7 +25464,7 @@ eV
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -25659,7 +25666,7 @@ eW
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -25861,7 +25868,7 @@ eX
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -26063,7 +26070,7 @@ dA
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa
@@ -26265,7 +26272,7 @@ dt
 de
 de
 aa
-ac
+aa
 aa
 aa
 aa

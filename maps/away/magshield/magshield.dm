@@ -39,6 +39,11 @@
 	name = "Orbital Station Navpoint #5"
 	landmark_tag = "nav_magshield_antag"
 
+/obj/effect/shuttle_landmark/nav_magshield/dock1
+	name = "Orbital Station Docking Port #1"
+	landmark_tag = "nav_magshield_dock_1"
+	flags = SLANDMARK_FLAG_REORIENT | SLANDMARK_FLAG_AUTOSET
+
 /obj/structure/magshield/maggen
 	name = "magnetic field generator"
 	desc = "A large three-handed generator with rotating top. It is used to create high-power magnetic fields in hard vacuum."
