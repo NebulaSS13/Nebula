@@ -315,6 +315,8 @@
 	is_spawnable_type = FALSE
 	var/reorient = TRUE
 	var/port_tag
+	/// The id_tag of the docking controller associated with this docking port. If null, disables docking when using this port.
+	var/dock_target
 
 /obj/abstract/local_dock/Initialize(ml, new_port_tag)
 	if(new_port_tag)
