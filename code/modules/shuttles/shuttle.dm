@@ -409,7 +409,7 @@
 	var/list/ports = get_ports()
 	for(var/obj/abstract/local_dock/port in ports)
 		res[port.name] = port
-	res["None"] = null
+	res["none"] = null
 	return res
 
 /datum/shuttle/proc/get_current_port()
@@ -440,7 +440,7 @@
 
 /datum/shuttle/proc/get_port_name()
 	var/obj/abstract/local_dock/current_port = get_port_by_tag(current_port_tag)
-	return current_port?.name || "None"
+	return current_port?.name || "none"
 
 /datum/shuttle/proc/get_angle_offset(obj/rotation_center, obj/effect/shuttle_landmark/destination)
 	if(istype(rotation_center, /obj/effect/shuttle_landmark))
