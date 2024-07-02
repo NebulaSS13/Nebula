@@ -340,9 +340,9 @@
 		if(force || (istype(TAD, get_base_turf_by_area(TAD)) || TAD.is_open()))
 			TAD.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
 
-		// TODO: Ideally the second check here would remain is_open() rather than a direct type check, but unfortunately we can't do that with only the path.
+		// TODO: Ideally the latter checks here would remain is_open() rather than direct type checks, but unfortunately we can't do that with only the path.
 		// In nearly all current situations, they are effectively the same thing.
-		else if(!TAD.prev_type || istype(TAD.prev_type, get_base_turf_by_area(TAD)) || ispath(TAD.prev_type, /turf/open))
+		else if(!TAD.prev_type || istype(TAD.prev_type, get_base_turf_by_area(TAD)) || ispath(TAD.prev_type, /turf/open) || ispath(TAD.prev_type, /turf/space))
 			// In case there's a pending shuttle move above, prepare it to create a ceiling post-translation.
 			TAD.prev_type = ceiling_type
 
