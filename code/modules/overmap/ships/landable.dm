@@ -323,9 +323,18 @@
 		port_tag = new_port_tag
 	. = ..()
 
+/obj/abstract/local_dock/automatic/modify_mapped_vars(map_hash)
+	. = ..()
+	ADJUST_TAG_VAR(port_tag, map_hash)
+	ADJUST_TAG_VAR(dock_target, map_hash)
+
 /// This subtype automatically adds itself to its shuttle based on the shuttle_tag var.
 /obj/abstract/local_dock/automatic
 	var/shuttle_tag
+
+/obj/abstract/local_dock/automatic/modify_mapped_vars(map_hash)
+	. = ..()
+	ADJUST_TAG_VAR(shuttle_tag, map_hash)
 
 /obj/abstract/local_dock/automatic/Initialize(ml, new_port_tag, new_shuttle_tag)
 	if(new_shuttle_tag)
