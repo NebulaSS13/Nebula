@@ -139,17 +139,18 @@
 /obj/structure/door/can_install_lock()
 	return TRUE
 
-/obj/structure/door/attackby(obj/item/I, mob/user)
-	add_fingerprint(user, 0, I)
+/obj/structure/door/attackby(obj/item/used_item, mob/user)
+	add_fingerprint(user, 0, used_item)
 
-	if((user.a_intent == I_HURT && I.force) || istype(I, /obj/item/stack/material))
+	if((user.a_intent == I_HURT && used_item.force) || istype(used_item, /obj/item/stack/material))
 		return ..()
 
-	if(try_key_unlock(I, user))
-		return TRUE
+	if(used_item.user_can_wield(user, silent = TRUE))
+		if(try_key_unlock(used_item, user))
+			return TRUE
 
-	if(try_install_lock(I, user))
-		return TRUE
+		if(try_install_lock(used_item, user))
+			return TRUE
 
 	if(density)
 		open(user)

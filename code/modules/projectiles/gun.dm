@@ -649,6 +649,8 @@
 		. = 1
 
 /obj/item/gun/attack_self(mob/user)
+	if(!user.check_dexterity(DEXTERITY_WEAPONS))
+		return TRUE // prevent further interactions
 	var/datum/firemode/new_mode = switch_firemodes()
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		new_mode = switch_firemodes()
@@ -656,6 +658,8 @@
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
 /obj/item/gun/proc/toggle_safety(var/mob/user)
+	if(user && !user.check_dexterity(DEXTERITY_WEAPONS))
+		return TRUE
 	if(!has_safety)
 		to_chat(user,SPAN_NOTICE("You can't find a safety on \the [src]!"))
 		return
@@ -740,6 +744,11 @@
 /decl/interaction_handler/toggle_safety
 	name = "Toggle Gun Safety"
 	expected_target_type = /obj/item/gun
+
+/decl/interaction_handler/toggle_safety/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(!user.check_dexterity(DEXTERITY_WEAPONS))
+		return FALSE
 
 /decl/interaction_handler/toggle_safety/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/gun = target

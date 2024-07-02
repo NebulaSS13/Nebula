@@ -19,7 +19,10 @@
 	max_health = 100
 
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
-	var/construction_state = 2
+	var/const/CONSTRUCTION_STATE_NO_FRAME = 0
+	var/const/CONSTRUCTION_STATE_IN_FRAME = 1
+	var/const/CONSTRUCTION_STATE_FASTENED = 2
+	var/construction_state = CONSTRUCTION_STATE_FASTENED
 	var/id
 	var/polarized = 0
 	var/basestate = "window"
@@ -173,60 +176,90 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 	return TRUE
 
-/obj/structure/window/attackby(obj/item/W, mob/user)
-	if(!istype(W)) return//I really wish I did not need this
-
-	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
-
-	if(IS_SCREWDRIVER(W))
-		if(reinf_material && construction_state >= 1)
-			construction_state = 3 - construction_state
+/obj/structure/window/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
+	var/tool_sound = screwdriver.get_tool_sound(TOOL_SCREWDRIVER) || 'sound/items/Screwdriver.ogg'
+	if(reinf_material) // reinforced windows have construction states
+		if(construction_state >= CONSTRUCTION_STATE_IN_FRAME) // if the window is in the frame
+			playsound(loc, tool_sound, 75, 1)
+			switch(construction_state)
+				if(CONSTRUCTION_STATE_IN_FRAME)
+					construction_state = CONSTRUCTION_STATE_FASTENED
+					to_chat(user, SPAN_NOTICE("You have fastened the window to the frame."))
+				if(CONSTRUCTION_STATE_FASTENED)
+					construction_state = CONSTRUCTION_STATE_IN_FRAME
+					to_chat(user, SPAN_NOTICE("You have unfastened the window from the frame."))
 			update_nearby_icons()
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (construction_state == 1 ? SPAN_NOTICE("You have unfastened the window from the frame.") : SPAN_NOTICE("You have fastened the window to the frame.")))
-		else if(reinf_material && construction_state == 0)
-			set_anchored(!anchored)
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
+			return TRUE
+		else // if unanchored
+			set_anchored(!anchored) // sets construction_state for us
+			playsound(loc, tool_sound, 75, 1)
 			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the frame to the floor.") : SPAN_NOTICE("You have unfastened the frame from the floor.")))
-		else if(!reinf_material)
-			set_anchored(!anchored)
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
-	else if(IS_CROWBAR(W) && reinf_material && construction_state <= 1)
-		construction_state = 1 - construction_state
-		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
-		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
-	else if(IS_WRENCH(W) && !anchored && (!construction_state || !reinf_material))
-		if(!material)
-			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
-		else
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
-			dismantle_structure(user)
-	else if(IS_COIL(W) && is_fulltile())
-		if (polarized)
-			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
-			return
-		var/obj/item/stack/cable_coil/C = W
-		if (C.use(1))
-			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
-			polarized = TRUE
-			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
-	else if (IS_WIRECUTTER(W))
+			return TRUE
+	else // basic windows can only be anchored or unanchored
+		set_anchored(!anchored)
+		playsound(loc, tool_sound, 75, 1)
+		to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
+		return TRUE
+
+/obj/structure/window/handle_default_crowbar_attackby(mob/user, obj/item/crowbar)
+	if(!reinf_material || !anchored || construction_state > CONSTRUCTION_STATE_IN_FRAME)
+		return FALSE // ineligible, allow other interactions to proceed
+	switch(construction_state)
+		if(CONSTRUCTION_STATE_NO_FRAME) // pry the window into the frame
+			construction_state = CONSTRUCTION_STATE_IN_FRAME
+			to_chat(user, SPAN_NOTICE("You have pried the window into the frame."))
+		if(CONSTRUCTION_STATE_IN_FRAME)
+			construction_state = CONSTRUCTION_STATE_NO_FRAME
+			to_chat(user, SPAN_NOTICE("You have pried the window out of the frame."))
+	playsound(loc, crowbar.get_tool_sound(TOOL_CROWBAR) || 'sound/items/Crowbar.ogg', 75, 1)
+	return TRUE
+
+/obj/structure/window/handle_default_wrench_attackby(mob/user, obj/item/wrench)
+	if(anchored || (reinf_material && construction_state > CONSTRUCTION_STATE_NO_FRAME))
+		return FALSE // ineligible, allow other interactions to proceed
+	if(!material) // is this even necessary now? indestructible admin level window types maybe?
+		to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
+		return TRUE // prevent other interactions
+	playsound(loc, wrench.get_tool_sound(TOOL_WRENCH) || 'sound/items/Ratchet.ogg', 75, 1)
+	visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
+	dismantle_structure(user)
+	return TRUE
+
+/obj/structure/window/handle_default_cable_attackby(mob/user, obj/item/stack/cable_coil/coil)
+	if(!is_fulltile())
+		return FALSE // ineligible, allow other interactions to proceed
+	if(polarized)
+		to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
+		return TRUE // prevent further interactions
+	if(coil.use(1))
+		playsound(loc, 'sound/effects/sparks1.ogg', 75, 1)
+		polarized = TRUE
+		to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
+	else
+		to_chat(user, SPAN_WARNING("You need at least one length of [coil.plural_name] to polarize \the [src]!"))
+	return TRUE
+
+/obj/structure/window/handle_default_wirecutter_attackby(mob/user, obj/item/wirecutters/wirecutters)
+	if (!polarized)
+		to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
+		return TRUE // prevent other interactions
+	var/obj/item/stack/cable_coil/product = new /obj/item/stack/cable_coil(get_turf(user), 1)
+	if(product.add_to_stacks(user, TRUE))
+		user.put_in_hands(product)
+	if (opacity)
+		toggle() // must toggle off BEFORE unsetting the polarization var
+	polarized = FALSE
+	id = null
+	playsound(loc, wirecutters.get_tool_sound(TOOL_WIRECUTTERS) || 'sound/items/Wirecutter.ogg', 75, 1)
+	to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
+	return TRUE
+
+/obj/structure/window/attackby(obj/item/W, mob/user)
+	// bespoke interactions not handled by the prior procs
+	if(IS_MULTITOOL(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
-			return
-		new /obj/item/stack/cable_coil(get_turf(user), 1)
-		if (opacity)
-			toggle()
-		polarized = FALSE
-		id = null
-		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
-		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
-	else if(IS_MULTITOOL(W))
-		if (!polarized)
-			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
-			return
+			return TRUE
 		if (anchored)
 			playsound(loc, 'sound/effects/pop.ogg', 75, 1)
 			to_chat(user, SPAN_NOTICE("You toggle \the [src]'s tinting."))
@@ -234,33 +267,42 @@
 		else
 			var/response = input(user, "New Window ID:", name, id) as null | text
 			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_held_item() != W)
-				return
+				return TRUE
 			id = sanitize_safe(response, MAX_NAME_LEN)
 			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
-		return
+		return TRUE
 	else if(istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
 		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
-			return
+			return TRUE // failed to finish or otherwise failed, prevent further interactions
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
 		visible_message(SPAN_NOTICE("[user] has started slicing through the window's frame!"))
-		if(do_after(user,20,src))
+		if(do_after(user, 2 SECONDS, src))
 			visible_message(SPAN_WARNING("[user] has sliced through the window's frame!"))
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
-			construction_state = 0
-			set_anchored(0)
-	else if (!istype(W, /obj/item/paint_sprayer))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
-			user.do_attack_animation(src)
-			hit(W.force)
-			if(current_health <= 7)
-				set_anchored(FALSE)
-				step(src, get_dir(user, src))
-		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		..()
-	return
+			set_anchored(FALSE)
+	if (istype(W, /obj/item/paint_sprayer))
+		return FALSE // allow afterattack to run
+	return ..() // handle generic interactions, bashing, etc
+
+/obj/structure/window/bash(obj/item/weapon, mob/user)
+	if(isliving(user) && user.a_intent == I_HELP)
+		return FALSE
+	if(!weapon.user_can_wield(user))
+		return FALSE
+	if(weapon.item_flags & ITEM_FLAG_NO_BLUDGEON)
+		return FALSE
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	// physical damage types that can impart force; swinging a bat or energy sword
+	if(weapon.atom_damage_type == BRUTE || weapon.atom_damage_type == BURN)
+		user.do_attack_animation(src)
+		hit(weapon.force)
+		if(current_health <= 7)
+			set_anchored(FALSE)
+			step(src, get_dir(user, src))
+	else
+		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+	return TRUE // bash successful
 
 // TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
@@ -302,6 +344,7 @@
 	return TRUE
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
+	// TODO: use reinf_material properties, paper reinforcement should be worse than plasteel reinforcement
 	if(reinf_material) damage *= 0.5
 	take_damage(damage)
 
@@ -352,11 +395,11 @@
 		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.solid_name] lattice."))
 	if (reinf_material)
 		switch (construction_state)
-			if (0)
+			if (CONSTRUCTION_STATE_NO_FRAME)
 				to_chat(user, SPAN_WARNING("The window is not in the frame."))
-			if (1)
+			if (CONSTRUCTION_STATE_IN_FRAME)
 				to_chat(user, SPAN_WARNING("The window is pried into the frame but not yet fastened."))
-			if (2)
+			if (CONSTRUCTION_STATE_FASTENED)
 				to_chat(user, SPAN_NOTICE("The window is fastened to the frame."))
 	if (anchored)
 		to_chat(user, SPAN_NOTICE("It is fastened to \the [get_turf(src)]."))
@@ -441,7 +484,7 @@
 	icon_state = "window_full"
 
 /obj/structure/window/basic/full/polarized
-	polarized = 1
+	polarized = TRUE
 
 /obj/structure/window/borosilicate
 	name = "borosilicate window"
@@ -494,7 +537,7 @@
 	name = "electrochromic window"
 	desc = "Adjusts its tint with voltage. Might take a few good hits to shatter it."
 	basestate = "rwindow"
-	polarized = 1
+	polarized = TRUE
 
 /obj/structure/window/reinforced/polarized/full
 	dir = NORTHEAST
@@ -600,8 +643,7 @@
 		if (ST.use(required_amount))
 			var/obj/structure/window/WD = new(loc, ST.material.type, ST.reinf_material?.type, dir_to_set, FALSE)
 			to_chat(user, SPAN_NOTICE("You place [WD]."))
-			WD.construction_state = 0
-			WD.set_anchored(FALSE)
+			WD.set_anchored(FALSE) // handles setting construction state for us
 		else
 			to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
 			return

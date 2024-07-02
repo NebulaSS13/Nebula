@@ -30,6 +30,8 @@
 	return null
 
 /obj/item/gun/projectile/shotgun/pump/attack_self(mob/user)
+	if(!user_can_wield(user))
+		return TRUE
 	if(world.time >= recentpump + 10)
 		pump(user)
 		recentpump = world.time

@@ -92,6 +92,8 @@
 	Process keypresses coming from the nanoUI.
  */
 /datum/extension/lockable/proc/pressed_key(key_char, mob/user)
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
+		return
 	// Always clear error when pressing a button.
 	clear_error()
 
@@ -318,22 +320,25 @@
 /**
 	Item attack handler for interactions with the host.
  */
-/datum/extension/lockable/proc/attackby(obj/item/W, mob/user)
+/datum/extension/lockable/proc/attackby(obj/item/used_item, mob/user)
 	if(!locked)
-		return
+		return FALSE
+
+	if(!used_item.user_can_wield(user))
+		return TRUE
 
 	//TODO: This probably should be handled in a better way.
-	if(!is_digital_lock && istype(W, /obj/item/energy_blade))
-		var/obj/item/energy_blade/blade = W
+	if(!is_digital_lock && istype(used_item, /obj/item/energy_blade))
+		var/obj/item/energy_blade/blade = used_item
 		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "You slice through the lock of \the [holder]."))
 			var/obj/item/A = holder
 			spark_at(A.loc, amount=5)
 			playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			return TRUE
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		if(!opening_panel)
-			var/obj/item/screwdriver/S = W
+			var/obj/item/screwdriver/S = used_item
 			opening_panel = TRUE //Make sure we only have one user/attempt to opens the panel at a time.
 			if(
 				S.do_tool_interaction(
@@ -350,8 +355,8 @@
 				toggle_panel(user)
 		return TRUE
 
-	if(IS_MULTITOOL(W))
-		try_hack(W, user)
+	if(IS_MULTITOOL(used_item))
+		try_hack(used_item, user)
 		return TRUE
 
 /**

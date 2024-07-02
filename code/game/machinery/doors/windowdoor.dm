@@ -197,15 +197,15 @@
 	else if (density)
 		flick("[base_state]deny", src)
 
-/obj/machinery/door/window/bash(obj/item/I, mob/user)
+/obj/machinery/door/window/bash(obj/item/weapon, mob/user)
 	//Emags and energy swords? You may pass.
-	if (istype(I, /obj/item/energy_blade))
-		var/obj/item/energy_blade/blade = I
+	if (weapon.user_can_wield(user) && istype(weapon, /obj/item/energy_blade))
+		var/obj/item/energy_blade/blade = weapon
 		if(blade.is_special_cutting_tool() && emag_act(10, user))
 			spark_at(loc, amount=5)
 			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 			visible_message(SPAN_WARNING("The glass door was sliced open by [user]!"))
-		return 1
+		return TRUE
 	return ..()
 
 /obj/machinery/door/window/brigdoor

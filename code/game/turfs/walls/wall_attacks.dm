@@ -308,7 +308,7 @@
 
 /turf/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 
-	if(istype(W, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(istype(W, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) || !W.user_can_wield(user))
 		return ..()
 
 	if(handle_wall_tool_interactions(W, user))

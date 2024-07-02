@@ -779,14 +779,16 @@
 		apply_danger_level(danger_level)
 	update_icon()
 
-/obj/machinery/alarm/attackby(obj/item/W, mob/user)
+/obj/machinery/alarm/attackby(obj/item/used_item, mob/user)
 	if(!(stat & (BROKEN|NOPOWER)))
-		if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
+		if (istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer))// trying to unlock the interface with an ID card
+			if(!used_item.user_can_wield(user))
+				return TRUE
 			if(allowed(user) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 				locked = !locked
-				to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>")
+				to_chat(user, SPAN_NOTICE("You [ locked ? "lock" : "unlock"] the Air Alarm interface."))
 			else
-				to_chat(user, "<span class='warning'>Access denied.</span>")
+				to_chat(user, SPAN_WARNING("Access denied."))
 			return TRUE
 	return ..()
 

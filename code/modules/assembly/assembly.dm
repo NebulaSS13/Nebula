@@ -114,17 +114,19 @@
 	return 0
 
 
-/obj/item/assembly/attackby(obj/item/W, mob/user)
-	if(isassembly(W))
-		var/obj/item/assembly/A = W
-		if((!A.secured) && (!secured))
-			attach_assembly(A,user)
+/obj/item/assembly/attackby(obj/item/component, mob/user)
+	if(!user_can_wield(user) || !component.user_can_wield(user))
+		return TRUE
+	if(isassembly(component))
+		var/obj/item/assembly/assembly = component
+		if(!assembly.secured && !secured)
+			attach_assembly(assembly, user)
 			return
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(component))
 		if(toggle_secure())
-			to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] is ready!"))
 		else
-			to_chat(user, "<span class='notice'>\The [src] can now be attached!</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] can now be attached!"))
 		return
 	..()
 	return
@@ -144,10 +146,13 @@
 
 
 /obj/item/assembly/attack_self(mob/user)
-	if(!user)	return 0
+	if(!user) // is this check even necessary outside of admin proccalls?
+		return FALSE
+	if(!user_can_wield(user))
+		return TRUE
 	user.set_machine(src)
 	interact(user)
-	return 1
+	return TRUE
 
 /obj/item/assembly/interact(mob/user)
 	return //HTML MENU FOR WIRES GOES HERE
