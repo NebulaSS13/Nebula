@@ -137,14 +137,14 @@
 /atom/proc/shuttle_rotate(angle)
 	if(angle)
 		set_dir(SAFE_TURN(dir, angle))
-		queue_icon_update()
+		addtimer(CALLBACK(src, PROC_REF(queue_icon_update)), 1)
 		return TRUE
 
 /obj/structure/shuttle_rotate(angle)
 	. = ..()
 	if(.)
 		addtimer(CALLBACK(src, PROC_REF(update_connections), TRUE), 1)
-		queue_icon_update()
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, queue_icon_update)), 1)
 
 /obj/machinery/network/requests_console/shuttle_rotate(angle)
 	. = ..(-angle) // for some reason directions are switched for these
@@ -156,7 +156,7 @@
 	. = ..()
 	if(.)
 		addtimer(CALLBACK(src, PROC_REF(update_connections), TRUE), 1)
-		queue_icon_update()
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, queue_icon_update)), 1)
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
 //If ignore_background is set to true, turfs with TURF_FLAG_BACKGROUND set will only translate anchored contents.
