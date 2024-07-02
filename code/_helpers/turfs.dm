@@ -140,6 +140,18 @@
 		addtimer(CALLBACK(src, PROC_REF(queue_icon_update)), 1)
 		return TRUE
 
+// Adjust pixel_x, pixel_y, etc. for things without directional_offset.
+// This may cause issues with things that shouldn't rotate. Those should be using pixel_w and pixel_z, preferably!
+/obj/shuttle_rotate(angle)
+	. = ..()
+	if(. && isnull(directional_offset) && (pixel_x || pixel_y))
+		var/adj = cos(angle)
+		var/opp = sin(angle)
+		var/old_pixel_x = pixel_x
+		var/old_pixel_y = pixel_y
+		pixel_x = adj * old_pixel_x + opp * old_pixel_y
+		pixel_y = adj * old_pixel_y + opp * old_pixel_x
+
 /obj/structure/shuttle_rotate(angle)
 	. = ..()
 	if(.)
