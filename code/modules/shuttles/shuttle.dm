@@ -422,6 +422,9 @@
 	return get_current_port() || current_location
 
 /datum/shuttle/proc/set_port(port)
+	if(isnull(port)) // short-circuit special case for null port
+		current_port_tag = null
+		return TRUE
 	var/obj/abstract/local_dock/dock
 	if(istype(port, /obj/abstract/local_dock)) // We need to check availability.
 		dock = port
