@@ -313,6 +313,7 @@
 	invisibility = INVISIBILITY_ABSTRACT
 	movable_flags = MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE
 	is_spawnable_type = FALSE
+	var/reorient = TRUE
 	var/port_tag
 
 /obj/abstract/local_dock/Initialize(ml, new_port_tag)

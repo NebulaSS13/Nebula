@@ -446,5 +446,8 @@
 	if(istype(rotation_center, /obj/effect/shuttle_landmark))
 		var/obj/effect/shuttle_landmark/center_landmark = rotation_center
 		return center_landmark.get_angle_offset(destination)
-	// Fallback case for a docking port; these always reorient.
-	return dir2angle(rotation_center.dir) - dir2angle(destination.dir)
+	// Fallback case for a docking port.
+	var/obj/abstract/local_dock/center_dock = rotation_center
+	if(istype(center_dock) && center_dock.reorient)
+		return dir2angle(destination.dir) - dir2angle(rotation_center.dir)
+	return 0 // do not rotate
