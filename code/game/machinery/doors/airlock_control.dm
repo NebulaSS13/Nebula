@@ -56,17 +56,17 @@
 /decl/public_access/public_method/airlock_lock
 	name = "engage bolts"
 	desc = "Bolts the airlock, if possible."
-	call_proc = /obj/machinery/door/airlock/proc/lock
+	call_proc = TYPE_PROC_REF(/obj/machinery/door/airlock, lock)
 
 /decl/public_access/public_method/airlock_unlock
 	name = "disengage bolts"
 	desc = "Unbolts the airlock, if possible."
-	call_proc = /obj/machinery/door/airlock/proc/unlock
+	call_proc = TYPE_PROC_REF(/obj/machinery/door/airlock, unlock)
 
 /decl/public_access/public_method/airlock_toggle_bolts
 	name = "toggle bolts"
 	desc = "Toggles whether the airlock is bolted or not, if possible."
-	call_proc = /obj/machinery/door/airlock/proc/toggle_lock
+	call_proc = TYPE_PROC_REF(/obj/machinery/door/airlock, toggle_lock)
 
 /decl/public_access/public_variable/airlock_door_state
 	expected_type = /obj/machinery/door/airlock
