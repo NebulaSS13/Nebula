@@ -255,8 +255,11 @@
 	// remove the old ceiling, if it existed
 	for(var/turf/TO in turf_translation)
 		var/turf/TA = GetAbove(TO)
-		if(istype(TA, ceiling_type))
-			TA.ChangeTurf(get_base_turf_by_area(TA), TRUE, TRUE, TRUE)
+		if(istype(TA))
+			if(istype(TA, ceiling_type))
+				TA.ChangeTurf(get_base_turf_by_area(TA), TRUE, TRUE, TRUE)
+			else if(TA.prev_type == ceiling_type)
+				TA.prev_type = null
 
 	handle_pipes_and_power_on_move(new_turfs)
 
@@ -328,11 +331,20 @@
 		var/turf/TAS = GetAbove(TS)
 		if(!istype(TAD))
 			continue
+
+		// Check for multi-z shuttles. Don't create a ceiling where the shuttle is about to be.
+		if((istype(TAS) && (get_area(TAS) in shuttle_area)))
+			continue
+
+
 		if(force || (istype(TAD, get_base_turf_by_area(TAD)) || TAD.is_open()))
-			// Check for multi-z shuttles. Don't create a ceiling where the shuttle is about to be.
-			if((istype(TAS) && (get_area(TAS) in shuttle_area)))
-				continue
 			TAD.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
+
+		// TODO: Ideally the latter checks here would remain is_open() rather than direct type checks, but unfortunately we can't do that with only the path.
+		// In nearly all current situations, they are effectively the same thing.
+		else if(!TAD.prev_type || istype(TAD.prev_type, get_base_turf_by_area(TAD)) || ispath(TAD.prev_type, /turf/open) || ispath(TAD.prev_type, /turf/space))
+			// In case there's a pending shuttle move above, prepare it to create a ceiling post-translation.
+			TAD.prev_type = ceiling_type
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()

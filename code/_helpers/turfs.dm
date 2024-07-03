@@ -114,7 +114,8 @@
 		if(ignore_background && (source.turf_flags & TURF_FLAG_BACKGROUND))
 			continue
 		var/old_turf = source.prev_type || base_turf || get_base_turf_by_area(source)
-		source.ChangeTurf(old_turf, keep_air = !translate_air)
+		var/turf/changed = source.ChangeTurf(old_turf, keep_air = !translate_air)
+		changed.prev_type = null
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
 //If ignore_background is set to true, turfs with TURF_FLAG_BACKGROUND set will only translate anchored contents.
