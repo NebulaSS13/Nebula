@@ -56,11 +56,11 @@
 					destroy_surroundings()
 				handle_attacking_target()
 
-			if(STANCE_INSIDE) //we aren't inside something so just switch
+			if(STANCE_CONTAINED) //we aren't inside something so just switch
 				set_stance(STANCE_IDLE)
 
-	else if(get_stance() != STANCE_INSIDE)
-		set_stance(STANCE_INSIDE)
+	else if(get_stance() != STANCE_CONTAINED)
+		set_stance(STANCE_CONTAINED)
 		body.stop_automove()
 		set_target(null)
 

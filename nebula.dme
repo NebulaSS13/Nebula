@@ -352,6 +352,7 @@
 #include "code\datums\type_cloning.dm"
 #include "code\datums\weakref.dm"
 #include "code\datums\ai\_ai.dm"
+#include "code\datums\ai\_ai_stance.dm"
 #include "code\datums\ai\aggressive.dm"
 #include "code\datums\ai\beast.dm"
 #include "code\datums\ai\commanded.dm"
