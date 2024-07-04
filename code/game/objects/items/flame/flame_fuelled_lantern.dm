@@ -10,7 +10,8 @@
 	slot_flags          = SLOT_LOWER_BODY
 	lit_light_power     = 0.7
 	lit_light_range     = 6
-	max_fuel            = 120
+	max_fuel            = 60
+	_fuel_spend_amt     = (1 / 60) // a full lantern should last an hour
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material            = /decl/material/solid/metal/copper
 	can_manually_light  = FALSE
