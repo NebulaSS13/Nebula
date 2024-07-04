@@ -99,7 +99,7 @@
 			if("toggle_suspension")
 				if(detailed_account_view)
 					detailed_account_view.suspended = !detailed_account_view.suspended
-					callHook("change_account_status", list(detailed_account_view))
+					RAISE_EVENT(/decl/observ/change_account_status, detailed_account_view)
 
 			if("finalise_create_account")
 				var/account_name = href_list["holder_name"]
@@ -149,7 +149,7 @@
 				var/funds = detailed_account_view.money
 				detailed_account_view.transfer(station_account, funds, "Revocation of payroll")
 
-				callHook("revoke_payroll", list(detailed_account_view))
+				RAISE_EVENT(/decl/observ/revoke_payroll, detailed_account_view)
 
 			if("print")
 
