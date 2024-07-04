@@ -18,9 +18,9 @@
 	var/partialTag = "" //set by a partial tagger the first time round, then put in destinationTag if it goes through again.
 
 	// initialize a holder from the contents of a disposal unit
-/obj/structure/disposalholder/proc/init(var/obj/machinery/disposal/D, var/datum/gas_mixture/flush_gas)
+/obj/structure/disposalholder/proc/init(var/obj/machinery/disposal/disposal_unit, var/datum/gas_mixture/flush_gas)
 	gas = flush_gas// transfer gas resv. into holder object -- let's be explicit about the data this proc consumes, please.
-	var/stuff = D.get_contained_external_atoms()
+	var/stuff = disposal_unit.get_contained_external_atoms()
 	//Check for any living mobs trigger hasmob.
 	//hasmob effects whether the package goes to cargo or its tagged destination.
 	hasmob = length(check_mob(stuff))
@@ -36,20 +36,20 @@
 /obj/structure/disposalholder/proc/check_mob(list/stuff, max_depth = 1)
 	. = list()
 	if(max_depth > 0)
-		for(var/mob/living/M in stuff)
-			if (!isdrone(M))
-				. += M
-		for(var/obj/O in stuff)
-			. += check_mob(O.contents, max_depth - 1)
+		for(var/mob/living/victim in stuff)
+			if (!isdrone(victim))
+				. += victim
+		for(var/obj/container in stuff)
+			. += check_mob(container.contents, max_depth - 1)
 
 	// start the movement process
 	// argument is the disposal unit the holder started in
-/obj/structure/disposalholder/proc/start(var/obj/machinery/disposal/D)
-	if(!D.trunk)
-		D.expel(src)	// no trunk connected, so expel immediately
+/obj/structure/disposalholder/proc/start(var/obj/machinery/disposal/disposal_unit)
+	if(!disposal_unit.trunk)
+		disposal_unit.expel(src)	// no trunk connected, so expel immediately
 		return
 
-	forceMove(D.trunk)
+	forceMove(disposal_unit.trunk)
 	active = 1
 	set_dir(DOWN)
 	START_PROCESSING(SSdisposals, src)
@@ -65,8 +65,8 @@
 		var/obj/structure/disposalpipe/last
 
 		if(hasmob && prob(3))
-			for(var/mob/living/H in check_mob(src))
-				H.apply_damage(30, BRUTE, null, DAM_DISPERSED, "Blunt Trauma", ARMOR_MELEE_MAJOR)//horribly maim any living creature jumping down disposals.  c'est la vie
+			for(var/mob/living/victim in check_mob(src))
+				victim.apply_damage(30, BRUTE, null, DAM_DISPERSED, "Blunt Trauma", ARMOR_MELEE_MAJOR)//horribly maim any living creature jumping down disposals.  c'est la vie
 
 		var/obj/structure/disposalpipe/curr = loc
 		if(!istype(curr))
@@ -87,26 +87,26 @@
 	return get_step(loc,dir)
 
 // find a matching pipe on a turf
-/obj/structure/disposalholder/proc/findpipe(var/turf/T)
-	if(!T)
+/obj/structure/disposalholder/proc/findpipe(var/turf/containing_turf)
+	if(!containing_turf)
 		return null
 
 	var/fdir = turn(dir, 180)	// flip the movement direction
-	for(var/obj/structure/disposalpipe/P in T)
-		if(fdir & P.dpdir)		// find pipe direction mask that matches flipped dir
-			return P
+	for(var/obj/structure/disposalpipe/pipe in containing_turf)
+		if(fdir & pipe.dpdir)		// find pipe direction mask that matches flipped dir
+			return pipe
 	// if no matching pipe, return null
 	return null
 
 // merge two holder objects
 // used when a a holder meets a stuck holder
 /obj/structure/disposalholder/proc/merge(var/obj/structure/disposalholder/other)
-	for(var/atom/movable/AM in other)
-		AM.forceMove(src)		// move everything in other holder to this one
-		if(ismob(AM))
-			var/mob/M = AM
-			if(M.client)	// if a client mob, update eye to follow this holder
-				M.client.eye = src
+	for(var/atom/movable/other_movable in other)
+		other_movable.forceMove(src)		// move everything in other holder to this one
+		if(ismob(other_movable))
+			var/mob/other_mob = other_movable
+			if(other_mob.client)	// if a client mob, update eye to follow this holder
+				other_mob.client.eye = src
 	qdel(other)
 
 /obj/structure/disposalholder/proc/settag(var/new_tag)
@@ -124,12 +124,12 @@
 	if(!isliving(user))
 		return
 
-	var/mob/living/U = user
+	var/mob/living/living_user = user
 
-	if (U.stat || U.is_on_special_ability_cooldown())
+	if (living_user.stat || living_user.is_on_special_ability_cooldown())
 		return
 
-	U.set_special_ability_cooldown(10 SECONDS)
+	living_user.set_special_ability_cooldown(10 SECONDS)
 
 	var/turf/our_turf = get_turf(src)
 	if (our_turf)
