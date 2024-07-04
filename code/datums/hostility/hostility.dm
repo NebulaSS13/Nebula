@@ -12,13 +12,13 @@
 		return FALSE
 
 	if(isliving(target))
-		var/mob/living/L = target
-		if(L.stat)
+		var/mob/living/target_mob = target
+		if(target_mob.stat)
 			return FALSE
 
 		if(isliving(holder))
-			var/mob/living/H = holder
-			if(L.faction == H.faction)
+			var/mob/holder_mob = holder
+			if(target_mob.faction == holder_mob.faction)
 				return FALSE
 
 	return can_special_target(holder, target)

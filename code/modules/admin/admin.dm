@@ -961,24 +961,24 @@ var/global/BSACooldown = 0
 /proc/is_special_character(var/character) // returns 1 for special characters and 2 for heroes of gamemode
 	if(!SSticker.mode)
 		return 0
-	var/datum/mind/M
+	var/datum/mind/mind
 	if (ismob(character))
-		var/mob/C = character
-		M = C.mind
+		var/mob/character_mob = character
+		mind = character_mob.mind
 	else if(istype(character, /datum/mind))
-		M = character
+		mind = character
 
-	if(M)
+	if(mind)
 		if(SSticker.mode.antag_templates && SSticker.mode.antag_templates.len)
 			for(var/decl/special_role/antag in SSticker.mode.antag_templates)
-				if(antag.is_antagonist(M))
+				if(antag.is_antagonist(mind))
 					return 2
-		if(M.assigned_special_role)
+		if(mind.assigned_special_role)
 			return 1
 
 	if(isrobot(character))
-		var/mob/living/silicon/robot/R = character
-		if(R.emagged)
+		var/mob/living/silicon/robot/robot = character
+		if(robot.emagged)
 			return 1
 
 	return 0

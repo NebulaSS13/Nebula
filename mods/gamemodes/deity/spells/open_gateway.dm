@@ -13,14 +13,14 @@
 	cast_sound = 'sound/effects/meteorimpact.ogg'
 
 /spell/open_gateway/choose_targets()
-	var/mob/living/H = holder
-	var/turf/T = get_turf(H)
-	holder.visible_message(SPAN_NOTICE("A gateway opens up underneath \the [H]!"))
-	var/g
+	var/mob/living/spellcaster = holder
+	var/turf/source_turf = get_turf(spellcaster)
+	holder.visible_message(SPAN_NOTICE("A gateway opens up underneath \the [spellcaster]!"))
+	var/deity
 	var/decl/special_role/godcultist/godcult = GET_DECL(/decl/special_role/godcultist)
-	if(H.mind && (H.mind in godcult.current_antagonists))
-		g = godcult.get_deity(H.mind)
-	return list(new /obj/structure/deity/gateway(T,g))
+	if(spellcaster.mind && (spellcaster.mind in godcult.current_antagonists))
+		deity = godcult.get_deity(spellcaster.mind)
+	return list(new /obj/structure/deity/gateway(source_turf, deity))
 
 /spell/open_gateway/cast(var/list/targets, var/mob/holder, var/channel_count)
 	if(prob((channel_count / 5) * 100))

@@ -51,10 +51,10 @@
 	if(owner)
 		var/datum/extension/access_provider/owner_access = get_extension(owner, /datum/extension/access_provider)
 		owner_access?.unregister_id(src)
-	var/mob/living/H = owner
+	var/mob/living/old_owner = owner
 	. = ..()
-	if(H && !(locate(type) in H.get_internal_organs()))
-		H.remove_language(/decl/language/mantid/worldnet)
+	if(old_owner && !(locate(type) in old_owner.get_internal_organs()))
+		old_owner.remove_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/Initialize()
 	if(ispath(id_card))
