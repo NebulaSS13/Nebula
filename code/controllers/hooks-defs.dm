@@ -40,10 +40,3 @@
  * Parameters: var/mob/living/human, var/gibbed
  */
 /hook/death
-
-/**
- * Cloning hook.
- * Called in cloning.dm when someone is brought back by the wonders of modern science.
- * Parameters: var/mob/living/human
- */
-/hook/clone
