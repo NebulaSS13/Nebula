@@ -33,10 +33,3 @@
  * Called in world.dm prior to the parent call in world/Reboot.
  */
 /hook/reboot
-
-/**
- * Death hook.
- * Called in death.dm when someone dies.
- * Parameters: var/mob/living/human, var/gibbed
- */
-/hook/death
