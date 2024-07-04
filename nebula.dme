@@ -543,6 +543,7 @@
 #include "code\datums\observation\crate_sold.dm"
 #include "code\datums\observation\cyborg_created.dm"
 #include "code\datums\observation\death.dm"
+#include "code\datums\observation\debrain.dm"
 #include "code\datums\observation\density_set.dm"
 #include "code\datums\observation\destroyed.dm"
 #include "code\datums\observation\dir_set.dm"
