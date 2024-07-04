@@ -96,10 +96,3 @@
  * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
  */
 /hook/sell_crate
-
-/**
- * Player latejoin hook.
- * Called in new_player.dm when a player joins the round after it has started.
- * Parameters: var/datum/job/job, var/mob/living/character
- */
-/hook/player_latejoin
