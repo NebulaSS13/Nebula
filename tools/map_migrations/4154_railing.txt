@@ -1,0 +1,1 @@
+/obj/structure/railing/mapped/ebony : /obj/structure/railing/mapped/wooden/ebony{@OLD}
