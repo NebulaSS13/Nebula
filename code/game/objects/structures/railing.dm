@@ -27,11 +27,28 @@
 /obj/structure/railing/mapped/no_density
 	density = FALSE
 
-/obj/structure/railing/mapped/ebony
-	material = /decl/material/solid/organic/wood/ebony
+/obj/structure/railing/mapped/wooden
+	material = /decl/material/solid/organic/wood
 	parts_type = /obj/item/stack/material/plank
-	color = WOOD_COLOR_BLACK
+	color = WOOD_COLOR_GENERIC
 	paint_color = null
+
+// Subtypes.
+#define WOOD_RAILING_SUBTYPE(material_name) \
+/obj/structure/railing/mapped/wooden/##material_name { \
+	material = /decl/material/solid/organic/wood/##material_name; \
+	color = /decl/material/solid/organic/wood/##material_name::color; \
+}
+
+WOOD_RAILING_SUBTYPE(fungal)
+WOOD_RAILING_SUBTYPE(ebony)
+WOOD_RAILING_SUBTYPE(walnut)
+WOOD_RAILING_SUBTYPE(maple)
+WOOD_RAILING_SUBTYPE(mahogany)
+WOOD_RAILING_SUBTYPE(bamboo)
+WOOD_RAILING_SUBTYPE(yew)
+
+#undef WOOD_RAILING_SUBTYPE
 
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
