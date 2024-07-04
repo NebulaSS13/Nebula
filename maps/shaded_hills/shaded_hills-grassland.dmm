@@ -15,7 +15,7 @@
 /turf/floor/natural/grass,
 /area/shaded_hills/outside)
 "dB" = (
-/turf/wall/log/ebony,
+/turf/wall/log/walnut,
 /area/shaded_hills/caves/unexplored)
 "ee" = (
 /turf/floor/natural/path/running_bond/basalt,
@@ -55,7 +55,7 @@
 /area/shaded_hills/outside/river)
 "iP" = (
 /obj/structure/fire_source/firepit/basalt,
-/obj/item/stack/material/log/mapped/ebony/ten,
+/obj/item/stack/material/log/mapped/walnut/ten,
 /turf/floor/natural/barren,
 /area/shaded_hills/outside)
 "jj" = (
@@ -111,9 +111,9 @@
 /turf/floor/natural/barren,
 /area/shaded_hills/caves/entrance)
 "nl" = (
-/obj/structure/door/wood/ebony,
+/obj/structure/door/walnut,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside)
 "oo" = (
 /obj/item/stack/material/ore/handful/sand,
@@ -147,7 +147,7 @@
 /area/shaded_hills/caves/unexplored)
 "ul" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside)
 "vX" = (
 /turf/floor/natural/path/running_bond/basalt,
@@ -162,7 +162,7 @@
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside)
 "xC" = (
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside)
 "yA" = (
 /obj/abstract/landmark/latejoin/observer,
@@ -191,7 +191,7 @@
 /turf/floor/woven,
 /area/shaded_hills/outside)
 "EE" = (
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/river)
 "EL" = (
 /obj/abstract/exterior_marker/inside,
@@ -209,13 +209,13 @@
 /area/shaded_hills/outside)
 "ES" = (
 /obj/abstract/exterior_marker/inside,
-/turf/wall/log/ebony,
+/turf/wall/log/walnut,
 /area/shaded_hills/outside)
 "EV" = (
 /turf/floor/natural/mud/water/deep,
 /area/shaded_hills/caves/river)
 "Fg" = (
-/obj/structure/door/wood/ebony,
+/obj/structure/door/walnut,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/outside)
@@ -262,7 +262,7 @@
 /turf/floor/natural/rock/basalt,
 /area/shaded_hills/outside)
 "JN" = (
-/turf/wall/log/ebony,
+/turf/wall/log/walnut,
 /area/shaded_hills/outside/river)
 "Kd" = (
 /turf/floor/natural/mud,
@@ -369,7 +369,7 @@
 /turf/floor/natural/rock/basalt,
 /area/shaded_hills/caves/unexplored/south)
 "ZV" = (
-/turf/wall/log/ebony,
+/turf/wall/log/walnut,
 /area/shaded_hills/outside)
 
 (1,1,1) = {"

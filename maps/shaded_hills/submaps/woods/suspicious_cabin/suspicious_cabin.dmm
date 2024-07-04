@@ -6,18 +6,18 @@
 /obj/structure/bed/chair/wood/ebony{
 	dir = 1
 	},
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "e" = (
 /obj/structure/bed/simple/ebony/cloth,
 /obj/item/bedsheet/furs,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "f" = (
 /turf/floor/natural/dirt,
 /area/template_noop)
 "g" = (
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "i" = (
 /obj/structure/reagent_dispensers/barrel/ebony/wine,
@@ -25,18 +25,18 @@
 /area/template_noop)
 "k" = (
 /obj/structure/coatrack,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "q" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/glass/pottery/cup,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "r" = (
 /obj/structure/bed/chair/bench/ebony{
 	dir = 4
 	},
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "s" = (
 /turf/floor/natural/path/basalt,
@@ -47,17 +47,15 @@
 /turf/floor/natural/path/basalt,
 /area/template_noop)
 "v" = (
-/obj/structure/window/basic/full,
-/obj/structure/wall_frame/log/ebony,
-/turf/floor/natural/path/basalt,
+/turf/wall/log/walnut/shutter,
 /area/template_noop)
 "w" = (
 /obj/structure/bed/chair/wood/ebony,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "x" = (
-/obj/structure/door/ebony,
-/turf/floor/wood/ebony,
+/obj/structure/door/walnut,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "y" = (
 /obj/structure/reagent_dispensers/barrel/ebony,
@@ -65,15 +63,15 @@
 /area/template_noop)
 "A" = (
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "E" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/glass/pottery/teapot,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "G" = (
-/obj/item/stack/material/log/mapped/ebony/twenty,
+/obj/item/stack/material/log/mapped/walnut/twenty,
 /turf/floor/natural/path/basalt,
 /area/template_noop)
 "J" = (
@@ -82,8 +80,11 @@
 /obj/item/chems/cooking_vessel/pot,
 /turf/floor/natural/path/basalt,
 /area/template_noop)
+"K" = (
+/turf/wall/brick/basalt/shutter,
+/area/template_noop)
 "M" = (
-/obj/structure/door/ebony,
+/obj/structure/door/walnut,
 /turf/floor/natural/path,
 /area/template_noop)
 "N" = (
@@ -97,7 +98,7 @@
 /area/template_noop)
 "P" = (
 /obj/structure/bed/chair/bench/ebony,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "Q" = (
 /obj/structure/reagent_dispensers/barrel/ebony/beer,
@@ -105,7 +106,7 @@
 /area/template_noop)
 "R" = (
 /obj/structure/table/woodentable/ebony,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/template_noop)
 "S" = (
 /obj/structure/table/woodentable/ebony,
@@ -122,7 +123,7 @@
 /turf/wall/brick/basalt,
 /area/template_noop)
 "Y" = (
-/turf/wall/log/ebony,
+/turf/wall/log/walnut,
 /area/template_noop)
 
 (1,1,1) = {"
@@ -149,7 +150,7 @@ f
 X
 X
 X
-X
+K
 X
 X
 X
