@@ -38,7 +38,7 @@
 	break_apart(user)
 	return TRUE
 
-/obj/item/sealant/attackby(obj/item/W, mob/user)
+/obj/item/sealant/attackby(obj/item/used_item, mob/user)
 	break_apart(user)
 	return TRUE
 
@@ -54,9 +54,9 @@
 		user.setClickCooldown(1 SECOND)
 	qdel(src)
 
-/obj/item/sealant/Bump(atom/A, forced)
+/obj/item/sealant/Bump(atom/bumped, forced)
 	. = ..()
-	splat(A)
+	splat(bumped)
 
 /obj/item/sealant/throw_impact(atom/hit_atom)
 	. = ..()
@@ -66,18 +66,18 @@
 	if(splatted)
 		return
 	splatted = TRUE
-	var/turf/T = get_turf(target) || get_turf(src)
-	if(T)
-		new /obj/effect/sealant(T)
+	var/turf/target_turf = get_turf(target) || get_turf(src)
+	if(target_turf)
+		new /obj/effect/sealant(target_turf)
 		if(isliving(target))
-			var/mob/living/H = target
+			var/mob/living/living_target = target
 			for(var/slot in shuffle(splat_try_equip_slots))
-				if(!H.get_equipped_item(slot))
-					H.equip_to_slot_if_possible(src, slot)
-					if(H.get_equipped_item(slot) == src)
+				if(!living_target.get_equipped_item(slot))
+					living_target.equip_to_slot_if_possible(src, slot)
+					if(living_target.get_equipped_item(slot) == src)
 						return
-		if(!T.density && !(locate(foam_type) in T))
-			new foam_type(T)
+		if(!target_turf.density && !(locate(foam_type) in target_turf))
+			new foam_type(target_turf)
 
 	if(!QDELETED(src))
 		qdel(src)
