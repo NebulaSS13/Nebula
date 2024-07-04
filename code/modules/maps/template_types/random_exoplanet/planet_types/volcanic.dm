@@ -51,11 +51,11 @@
 /datum/fauna_generator/volcanic
 	fauna_types = list(
 		/mob/living/simple_animal/thinbug,
-		/mob/living/simple_animal/hostile/retaliate/beast/shantak/lava,
-		/mob/living/simple_animal/hostile/retaliate/beast/charbaby
+		/mob/living/simple_animal/hostile/beast/shantak/lava,
+		/mob/living/simple_animal/hostile/beast/charbaby
 	)
 	megafauna_types = list(
-		/mob/living/simple_animal/hostile/drake
+		/mob/living/simple_animal/hostile/space_dragon
 	)
 
 /datum/fauna_generator/volcanic/generate_template(spawn_type, atmos_temp, list/min_gas, list/max_gas)

@@ -143,7 +143,9 @@ meteor_act
 		visible_message("<span class='warning'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name][weapon_mention] by [user]!</span>")
 		return // If it has no force then no need to do anything else.
 
-	return standard_weapon_hit_effects(I, user, effective_force, hit_zone)
+	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
+	if(istype(ai))
+		ai.retaliate(user)
 
 /mob/living/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)

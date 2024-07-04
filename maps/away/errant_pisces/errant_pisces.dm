@@ -21,12 +21,15 @@
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
 	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
-	turns_per_wander = 5
 	butchery_data = /decl/butchery_data/animal/fish/space_carp/shark
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
-	break_stuff_probability = 35
 	faction = "shark"
+	ai = /datum/mob_controller/aggressive/carp/shark
+
+/datum/mob_controller/aggressive/carp/shark
+	break_stuff_probability = 35
+	turns_per_wander = 10
 
 /mob/living/simple_animal/hostile/carp/shark/carp_randomify()
 	return
@@ -41,10 +44,9 @@
 			environment.merge(sharkmaw_chlorine)
 			visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))
 
-/mob/living/simple_animal/hostile/carp/shark/attack_target(mob/target)
-	set waitfor = 0//to deal with sleep() possibly stalling other procs
+/mob/living/simple_animal/hostile/carp/shark/apply_attack_effects(mob/living/target)
 	. =..()
-	var/mob/living/L = .
+	var/mob/living/L = target
 	if(istype(L))
 		if(prob(25))//if one is unlucky enough, they get tackled few tiles away
 			L.visible_message("<span class='danger'>\The [src] tackles [L]!</span>")

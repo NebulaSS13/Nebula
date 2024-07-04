@@ -2,9 +2,7 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
-	emote_speech = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
-	emote_hear = list("wails","screeches")
 	base_animal_type = /mob/living/simple_animal/construct
 	base_movement_delay = -1
 
@@ -14,7 +12,6 @@
 	response_harm =    "punches"
 	icon = 'icons/mob/simple_animal/shade.dmi'
 	a_intent = I_HURT
-	stop_wandering = TRUE
 	status_flags = CANPUSH
 	universal_speak = FALSE
 	universal_understand = TRUE
@@ -32,11 +29,15 @@
 	gene_damage = -1
 	butchery_data = /decl/butchery_data/occult
 	hud_used = /datum/hud/construct
-
 	z_flags = ZMM_MANGLE_PLANES
 	glowing_eyes = TRUE
-
+	ai = /datum/mob_controller/construct
 	var/list/construct_spells = list()
+
+/datum/mob_controller/construct
+	emote_speech = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
+	emote_hear = list("wails","screeches")
+	do_wander = FALSE
 
 /mob/living/simple_animal/construct/check_has_mouth()
 	return FALSE
@@ -108,9 +109,12 @@
 	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	can_escape = TRUE
 	hud_used = /datum/hud/construct/juggernaut
 	base_movement_delay = 3
+	ai = /datum/mob_controller/hostile/construct_armoured
+
+/datum/mob_controller/hostile/construct_armoured
+	can_escape_buckles = TRUE
 
 /obj/item/natural_weapon/juggernaut
 	name = "armored gauntlet"
@@ -227,9 +231,9 @@
 	environment_smash = 2
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	can_escape = TRUE
 	hud_used = /datum/hud/construct/juggernaut
 	base_movement_delay = 5
+	ai = /datum/mob_controller/hostile/construct_armoured
 
 /obj/item/natural_weapon/juggernaut/behemoth
 	force = 50

@@ -57,7 +57,7 @@
 
 /datum/fauna_generator/meat
 	fauna_types = list(
-		/mob/living/simple_animal/hostile/retaliate/jelly/alt,
+		/mob/living/simple_animal/hostile/jelly/alt,
 		/mob/living/simple_animal/hostile/leech
 	)
 

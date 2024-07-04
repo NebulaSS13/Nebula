@@ -891,7 +891,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cj" = (
-/mob/living/simple_animal/hostile/retaliate/parrot/pirate,
+/mob/living/simple_animal/hostile/parrot/pirate,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1011,7 +1011,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "SkipjackShuttersNorth";
 	name = "Blast Doors";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1378,7 +1378,7 @@
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1405,7 +1405,7 @@
 	dir = 8;
 	id_tag = "SkipjackShuttersEast";
 	name = "Skipjack Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1477,7 +1477,7 @@
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/floor/plating,

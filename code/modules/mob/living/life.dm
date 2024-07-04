@@ -116,8 +116,6 @@
 	//Body temperature adjusts itself (self-regulation)
 	stabilize_body_temperature()
 	// Only handle AI stuff if we're not being played.
-	if(!key)
-		handle_legacy_ai()
 	return TRUE
 
 /mob/living/proc/experiences_hunger_and_thirst()
@@ -134,10 +132,6 @@
 	if(my_species)
 		return my_species.thirst_factor
 	return 0
-
-// Used to handle non-datum AI.
-/mob/living/proc/handle_legacy_ai()
-	return
 
 /mob/living/proc/handle_nutrition_and_hydration()
 	SHOULD_CALL_PARENT(TRUE)

@@ -27,7 +27,10 @@
 	max_health = 200
 	natural_weapon = /obj/item/natural_weapon/pincers/strong
 	resistance = 9
-	can_escape = TRUE //snip snip
+	ai = /datum/mob_controller/familiar_crab
+
+/datum/mob_controller/familiar_crab
+	can_escape_buckles = TRUE
 
 /obj/item/natural_weapon/pincers/strong
 	force = 15
@@ -45,9 +48,12 @@
 	speak_emote = list("gnashes")
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite
-	can_escape = TRUE
 	min_gas = null
 	wizardy_spells = list(/spell/aoe_turf/conjure/forcewall)
+	ai = /datum/mob_controller/familiar_pike
+
+/datum/mob_controller/familiar_pike
+	can_escape_buckles = TRUE
 
 /mob/living/simple_animal/familiar/pike/Process_Spacemove()
 	return 1	//No drifting in space for space carp!	//original comments do not steal
@@ -103,9 +109,11 @@
 	response_harm = "stamps on"
 	max_health = 15
 	natural_weapon = /obj/item/natural_weapon/bite/mouse
-	can_escape = TRUE
-
 	wizardy_spells = list(/spell/aoe_turf/smoke)
+	ai = /datum/mob_controller/familiar_mouse
+
+/datum/mob_controller/familiar_mouse
+	can_escape_buckles = TRUE
 
 /mob/living/simple_animal/familiar/pet/mouse/Initialize()
 	. = ..()

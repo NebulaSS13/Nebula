@@ -47,13 +47,13 @@
 /datum/fauna_generator/chlorine
 	fauna_types = list(
 		/mob/living/simple_animal/thinbug,
-		/mob/living/simple_animal/hostile/retaliate/beast/samak/alt,
+		/mob/living/simple_animal/hostile/beast/samak/alt,
 		/mob/living/simple_animal/yithian,
 		/mob/living/simple_animal/tindalos,
-		/mob/living/simple_animal/hostile/retaliate/jelly,
+		/mob/living/simple_animal/hostile/jelly,
 	)
 	megafauna_types = list(
-		/mob/living/simple_animal/hostile/retaliate/jelly/mega,
+		/mob/living/simple_animal/hostile/jelly/mega,
 	)
 
 ////////////////////////////////////////////////////////////////////////////

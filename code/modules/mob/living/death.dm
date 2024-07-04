@@ -9,3 +9,5 @@
 		if(rig)
 			rig.notify_ai(SPAN_DANGER("Warning: user death event. Mobility control passed to integrated intelligence system."))
 		stop_aiming(no_message=1)
+		if(istype(ai))
+			ai.handle_death(gibbed)

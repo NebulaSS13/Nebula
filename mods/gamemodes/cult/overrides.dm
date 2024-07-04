@@ -51,13 +51,13 @@
 	if(ispath(MP, /mob/living/simple_animal/shade))
 		return 1
 
-/mob/living/simple_animal/hostile/faithless
+/mob/living/simple_animal/hostile/revenant
 	butchery_data = /decl/butchery_data/occult
 
-/mob/living/simple_animal/hostile/faithless/cult
+/mob/living/simple_animal/hostile/revenant/cult
 	faction = "cult"
 
-/mob/living/simple_animal/hostile/faithless/cult/on_defilement()
+/mob/living/simple_animal/hostile/revenant/cult/on_defilement()
 	return
 
 /obj/item/mop/Initialize()

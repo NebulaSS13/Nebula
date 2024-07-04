@@ -7,14 +7,14 @@ var/global/list/href_to_mob_type = list(
 		"Robot" =    /mob/living/silicon/robot
 	),
 	"Animals" = list(
-		"Cat" =      /mob/living/simple_animal/cat,
-		"Runtime" =  /mob/living/simple_animal/cat/fluff/runtime,
+		"Cat" =      /mob/living/simple_animal/passive/cat,
+		"Runtime" =  /mob/living/simple_animal/passive/cat/fluff/runtime,
 		"Corgi" =    /mob/living/simple_animal/corgi,
 		"Ian" =      /mob/living/simple_animal/corgi/Ian,
 		"Crab" =     /mob/living/simple_animal/crab,
 		"Coffee" =   /mob/living/simple_animal/crab/Coffee,
-		"Parrot" =   /mob/living/simple_animal/hostile/retaliate/parrot,
-		"Poly" =     /mob/living/simple_animal/hostile/retaliate/parrot/Poly,
+		"Parrot" =   /mob/living/simple_animal/hostile/parrot,
+		"Poly" =     /mob/living/simple_animal/hostile/parrot/Poly,
 	)
 )
 

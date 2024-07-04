@@ -7,13 +7,18 @@
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	pass_flags = PASS_FLAG_TABLE
 	faction = "leeches"
-	can_pry = FALSE
-	break_stuff_probability = 5
 	flash_protection = FLASH_PROTECTION_MAJOR
 	bleed_colour = COLOR_VIOLET
+	ai = /datum/mob_controller/aggressive/leech
 
 	var/suck_potency = 8
 	var/belly = 100
+
+/datum/mob_controller/aggressive/leech
+	break_stuff_probability = 5
+
+/mob/living/simple_animal/hostile/can_pry_door()
+	return FALSE
 
 /mob/living/simple_animal/hostile/leech/exoplanet/Initialize()
 	adapt_to_current_level()
@@ -22,15 +27,15 @@
 /mob/living/simple_animal/hostile/leech/handle_regular_status_updates()
 	. = ..()
 	if(.)
-		if(target_mob)
+		if(istype(ai) && ai.get_target())
 			belly -= 3
 		else
 			belly -= 1
 
-/mob/living/simple_animal/hostile/leech/attack_target(mob/target)
+/mob/living/simple_animal/hostile/leech/apply_attack_effects(mob/living/target)
 	. = ..()
-	if(ishuman(.) && belly <= 75)
-		var/mob/living/human/H = .
+	if(ishuman(target) && belly <= 75)
+		var/mob/living/human/H = target
 		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 		if(istype(S) && !length(S.breaches))
 			return

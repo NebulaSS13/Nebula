@@ -87,9 +87,9 @@
 		if(!do_after(src, attack_delay, A) || !Adjacent(A))
 			visible_message(SPAN_NOTICE("\The [src] misses [G.his] attack on \the [A]!"))
 			animate(src, pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2) // reset wherever the attack animation got us to.
-			MoveToTarget(TRUE) // Restart hostile mob tracking.
+			ai?.move_to_target(TRUE) // Restart hostile mob tracking.
 			return TRUE
-		MoveToTarget(TRUE) // Restart hostile mob tracking.
+		ai?.move_to_target(TRUE) // Restart hostile mob tracking.
 
 	if(ismob(A)) // Clientless mobs are too dum to move away, so they can be missed.
 		var/mob/mob = A
@@ -97,7 +97,9 @@
 			visible_message(SPAN_NOTICE("\The [src] misses [G.his] attack on \the [A]!"))
 			return TRUE
 
-	return A.attackby(attacking_with, src)
+	. = A.attackby(attacking_with, src)
+	if(isliving(A))
+		apply_attack_effects(A)
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)

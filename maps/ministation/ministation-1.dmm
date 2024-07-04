@@ -4972,10 +4972,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
 	},
-/mob/living/simple_animal/crow{
-	desc = "She's not a real doctor but she is a real bird.";
-	name = "Dr. Bird";
-	},
+/mob/living/simple_animal/crow/doctor,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "vK" = (

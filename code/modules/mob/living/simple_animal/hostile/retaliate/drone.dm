@@ -1,17 +1,11 @@
 
 //malfunctioning combat drones
-/mob/living/simple_animal/hostile/retaliate/malf_drone
+/mob/living/simple_animal/hostile/malf_drone
 	name = "combat drone"
 	desc = "An automated combat drone armed with state of the art weaponry and shielding."
 	icon = 'icons/mob/simple_animal/drone_combat.dmi'
-	ranged = 1
-	rapid = 0
-	speak_chance = 2.5
-	turns_per_wander = 3
-	emote_speech = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
-	emote_see    = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
+	burst_projectile = 0
 	a_intent = I_HURT
-	stop_wandering_when_pulled = FALSE
 	max_health = 300
 	move_intents = list(
 		/decl/move_intent/walk/animal_slow,
@@ -19,32 +13,23 @@
 	)
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
-	destroy_surroundings = 0
 	gene_damage = -1
 	butchery_data = /decl/butchery_data/synthetic
 	bleed_colour = SYNTH_BLOOD_COLOR
 	base_movement_delay = 8
-
-	var/datum/effect/effect/system/trail/ion_trail
-
-	//the drone randomly switches between these states if it's malfunctioning
-	var/malfunctioning = 1
-	var/hostile_drone = 0
-	//0 - retaliate, only attack enemies that attack it
-	//1 - hostile, attack everything that comes near
-	var/hostile_range = 10
-
-	var/explode_chance = 1
-	var/disabled = 0
-	var/exploding = 0
+	ai = /datum/mob_controller/aggressive/malf_drone
 
 	//Drones aren't affected by atmos.
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
+	faction = "malf_drone"
 
 	var/has_loot = 1
-	faction = "malf_drone"
+	var/datum/effect/effect/system/trail/ion_trail
+	var/explode_chance = 1
+	var/disabled = 0
+	var/exploding = 0
 
 	var/static/list/debris = list(
 		/decl/material/solid/glass =          /obj/item/shard,
@@ -52,13 +37,37 @@
 		/decl/material/solid/metal/plasteel = null
 	)
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/check_has_mouth()
+/datum/mob_controller/aggressive/malf_drone
+	speak_chance = 1.25
+	turns_per_wander = 6
+	emote_speech = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
+	emote_see    = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
+	stop_wander_when_pulled = FALSE
+	only_attack_enemies = TRUE
+	try_destroy_surroundings = FALSE
+	//the drone randomly switches between these states if it's malfunctioning
+	var/malfunctioning = 1
+	var/hostile_drone = 0
+	//0 - retaliate, only attack enemies that attack it
+	//1 - hostile, attack everything that comes near
+	var/hostile_range = 10
+
+/mob/living/simple_animal/hostile/malf_drone/has_ranged_attack()
+	return TRUE
+
+/datum/mob_controller/aggressive/malf_drone/list_targets(var/dist = 7)
+	. = ..(hostile_drone ? hostile_range : dist)
+	for(var/mob/M in .)
+		if(istype(M, body.type))
+			. -= M
+
+/mob/living/simple_animal/hostile/malf_drone/check_has_mouth()
 	return FALSE
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/can_act()
+/mob/living/simple_animal/hostile/malf_drone/can_act()
 	return disabled <= 0 && ..()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Initialize()
+/mob/living/simple_animal/hostile/malf_drone/Initialize()
 	. = ..()
 	if(prob(5))
 		projectiletype = /obj/item/projectile/beam/pulse/drone
@@ -67,26 +76,21 @@
 	ion_trail.set_up(src)
 	ion_trail.start()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Process_Spacemove()
+/mob/living/simple_animal/hostile/malf_drone/Process_Spacemove()
 	return 1
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/proc/Haywire()
-	if(prob(disabled ? 0 : 1) && malfunctioning)
-		if(hostile_drone)
+/mob/living/simple_animal/hostile/malf_drone/proc/Haywire()
+	var/datum/mob_controller/aggressive/malf_drone/drone_ai = ai
+	if(prob(disabled ? 0 : 1) && istype(drone_ai) && drone_ai.malfunctioning)
+		if(drone_ai.hostile_drone)
 			src.visible_message("<span class='notice'>[html_icon(src)] [src] retracts several targetting vanes, and dulls it's running lights.</span>")
-			hostile_drone = 0
+			drone_ai.hostile_drone = 0
 		else
 			src.visible_message("<span class='warning'>[html_icon(src)] [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
-			hostile_drone = 1
-
-/mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets(var/dist = 7)
-	. = ..(hostile_drone ? hostile_range : dist)
-	for(var/mob/M in .)
-		if(istype(M, type))
-			. -= M
+			drone_ai.hostile_drone = 1
 
 //self repair systems have a chance to bring the drone back to life
-/mob/living/simple_animal/hostile/retaliate/malf_drone/handle_living_non_stasis_processes()
+/mob/living/simple_animal/hostile/malf_drone/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -95,12 +99,14 @@
 	if(disabled > 0)
 		set_stat(UNCONSCIOUS)
 		disabled--
-		wander = FALSE
-		speak_chance = 0
+		if(istype(ai))
+			ai.stop_wandering()
+			ai.speak_chance = 0
 		if(disabled <= 0)
 			set_stat(CONSCIOUS)
-			wander = TRUE
-			speak_chance = 2.5
+			if(istype(ai))
+				ai.resume_wandering()
+				ai.speak_chance = 1.25
 
 	//repair a bit of damage
 	if(prob(1))
@@ -146,7 +152,7 @@
 	if(!exploding && !disabled && prob(explode_chance))
 		exploding = 1
 		set_stat(UNCONSCIOUS)
-		wander = TRUE
+		ai?.resume_wandering()
 		stop_automove()
 		spawn(rand(50,150))
 			if(!disabled && exploding)
@@ -155,7 +161,7 @@
 
 	update_icon()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/on_update_icon()
+/mob/living/simple_animal/hostile/malf_drone/on_update_icon()
 	. = ..()
 	if(stat != DEAD)
 		var/current_max_health = get_max_health()
@@ -167,28 +173,30 @@
 			icon_state = "[icon_state]-shield2"
 
 //ion rifle!
-/mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
+/mob/living/simple_animal/hostile/malf_drone/emp_act(severity)
 	take_damage(rand(3,15) * (severity + 1), BURN)
 	disabled = rand(150, 600)
-	hostile_drone = 0
+	var/datum/mob_controller/aggressive/malf_drone/drone_brain = ai
+	if(istype(drone_brain))
+		drone_brain.hostile_drone = 0
 	stop_automove()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/get_death_message(gibbed)
+/mob/living/simple_animal/hostile/malf_drone/get_death_message(gibbed)
 	return "suddenly breaks apart."
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/get_self_death_message(gibbed)
+/mob/living/simple_animal/hostile/malf_drone/get_self_death_message(gibbed)
 	return "You have been destroyed."
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/death(gibbed)
+/mob/living/simple_animal/hostile/malf_drone/death(gibbed)
 	. = ..()
 	if(. && !gibbed)
 		physically_destroyed()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
+/mob/living/simple_animal/hostile/malf_drone/Destroy()
 	QDEL_NULL(ion_trail)
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/physically_destroyed(skip_qdel)
+/mob/living/simple_animal/hostile/malf_drone/physically_destroyed(skip_qdel)
 	//some random debris left behind
 	if(has_loot)
 		spark_at(src, cardinal_only = TRUE)

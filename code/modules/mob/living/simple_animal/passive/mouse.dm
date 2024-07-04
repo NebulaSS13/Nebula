@@ -4,12 +4,7 @@
 	desc = "It's a small rodent."
 	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 	speak_emote  = list("squeeks","squeeks","squiks")
-	emote_speech = list("Squeek!","SQUEEK!","Squeek?")
-	emote_hear   = list("squeeks","squeaks","squiks")
-	emote_see    = list("runs in a circle", "shakes", "scritches at something")
 	pass_flags = PASS_FLAG_TABLE
-	speak_chance = 0.5
-	turns_per_wander = 5
 	see_in_dark = 6
 	max_health = 5
 	response_harm = "stamps on"
@@ -20,7 +15,6 @@
 	universal_understand = TRUE
 	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_MINISCULE
-	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
 	base_animal_type = /mob/living/simple_animal/passive/mouse
@@ -31,22 +25,27 @@
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
 
+/datum/mob_controller/passive/mouse
+	expected_type = /mob/living/simple_animal/passive/mouse
+	emote_speech = list("Squeek!","SQUEEK!","Squeek?")
+	emote_hear   = list("squeeks","squeaks","squiks")
+	emote_see    = list("runs in a circle", "shakes", "scritches at something")
+	speak_chance = 0.25
+	turns_per_wander = 10
+	can_escape_buckles = TRUE
+
 /mob/living/simple_animal/passive/mouse/get_remains_type()
 	return /obj/item/remains/mouse
 
 /mob/living/simple_animal/passive/mouse/get_dexterity(var/silent)
 	return DEXTERITY_NONE // Mice are troll bait, give them no power.
 
-/datum/mob_controller/passive/mouse
-	expected_type = /mob/living/simple_animal/passive/mouse
-
 /datum/mob_controller/passive/mouse/do_process()
 	..()
-	var/mob/living/simple_animal/passive/mouse/mouse = body
-	if(prob(mouse.speak_chance))
-		playsound(mouse.loc, 'sound/effects/mousesqueek.ogg', 50)
-	if(mouse.stat == UNCONSCIOUS && prob(5))
-		INVOKE_ASYNC(mouse, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
+	if(prob(speak_chance))
+		playsound(body.loc, 'sound/effects/mousesqueek.ogg', 50)
+	if(body.stat == UNCONSCIOUS && prob(5))
+		INVOKE_ASYNC(body, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
 
 /mob/living/simple_animal/passive/mouse/Initialize()
 	verbs += /mob/living/proc/ventcrawl

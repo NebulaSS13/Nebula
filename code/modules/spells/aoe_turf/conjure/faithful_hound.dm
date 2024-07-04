@@ -13,7 +13,16 @@
 	summon_type = list(/mob/living/simple_animal/faithful_hound)
 	hud_state = "wiz_hound"
 
+	var/temp_password
+
+/spell/aoe_turf/conjure/faithful_hound/apply_vars(atom/summoned_object, mob/caster)
+	. = ..()
+	var/mob/living/simple_animal/faithful_hound/hound = summoned_object
+	if(istype(hound) && istype(hound.ai))
+		hound.ai.add_friend(caster)
+		hound.ai.memorise(caster, temp_password)
+		temp_password = null
+
 /spell/aoe_turf/conjure/faithful_hound/before_cast()
 	..()
-	var/password = sanitize(input("What password will this beast listen to?") as text, MAX_NAME_LEN)
-	newVars = list("password" = password, "allowed_mobs" = list(usr))
+	temp_password = sanitize(input("What password will this beast listen to?") as text, MAX_NAME_LEN)

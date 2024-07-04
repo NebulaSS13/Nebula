@@ -9,6 +9,6 @@
 	must_use_hook = FALSE
 	gut_type = /obj/item/chems/food/butchery/offal/small
 
-/decl/butchery_data/animal/reptile/drake/harvest_bones(mob/living/donor)
+/decl/butchery_data/animal/reptile/space_dragon/harvest_bones(mob/living/donor)
 	. = ..()
 	LAZYADD(., new /obj/item/whip/tail(get_turf(donor)))

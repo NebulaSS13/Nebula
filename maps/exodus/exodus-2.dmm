@@ -45667,7 +45667,7 @@
 /turf/floor/tiled/white,
 /area/exodus/crew_quarters/heads/cmo)
 "bRd" = (
-/mob/living/simple_animal/cat/fluff/runtime,
+/mob/living/simple_animal/passive/cat/fluff/runtime,
 /turf/floor/tiled/white,
 /area/exodus/crew_quarters/heads/cmo)
 "bRe" = (
@@ -63855,7 +63855,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/mob/living/simple_animal/hostile/retaliate/parrot/Poly,
+/mob/living/simple_animal/hostile/parrot/Poly,
 /turf/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/chief)
 "kxa" = (

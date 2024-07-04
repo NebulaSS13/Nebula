@@ -61,7 +61,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return TRUE
 	if(try_butcher_in_place(user, used_item))
 		return TRUE
-	return used_item.use_on_mob(src, user)
+	var/oldhealth = current_health
+	. = used_item.use_on_mob(src, user)
+	if(used_item.force && istype(ai) && current_health < oldhealth)
+		ai.retaliate(user)
 
 /mob/living/human/attackby(obj/item/I, mob/user)
 

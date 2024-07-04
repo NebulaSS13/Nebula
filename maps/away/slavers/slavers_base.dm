@@ -133,19 +133,25 @@
 	name = "abolition extremist"
 	desc = "Vigiliant fighter against slavery."
 	icon = 'maps/away/slavers/icons/abolitionist.dmi'
-	speak_chance = 0
-	turns_per_wander = 5
-	stop_wandering_when_pulled = FALSE
+
 	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/punch
-	can_escape = TRUE
 	unsuitable_atmos_damage = 15
 	projectilesound = 'sound/weapons/laser.ogg'
-	ranged = 1
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"
+	ai = /datum/mob_controller/abolitionist
 	var/corpse = /obj/abstract/landmark/corpse/abolitionist
 	var/weapon = /obj/item/gun/energy/laser
+
+/mob/living/simple_animal/hostile/abolition_extremist/has_ranged_attack()
+	return TRUE
+
+/datum/mob_controller/abolitionist
+	speak_chance = 0
+	turns_per_wander = 10
+	stop_wander_when_pulled = 0
+	can_escape_buckles = TRUE
 
 /mob/living/simple_animal/hostile/abolition_extremist/death(gibbed)
 	. = ..()

@@ -13,7 +13,7 @@
 	spawnable=list(
 		/mob/living/simple_animal/hostile/scarybat,
 		/mob/living/simple_animal/hostile/creature,
-		/mob/living/simple_animal/hostile/faithless
+		/mob/living/simple_animal/hostile/revenant
 	)
 
 /obj/effect/gateway/active/Initialize()

@@ -5,11 +5,6 @@
 	desc = "It's a corgi."
 	icon = 'icons/mob/simple_animal/corgi.dmi'
 	speak_emote  = list("barks", "woofs")
-	emote_speech = list("YAP", "Woof!", "Bark!", "AUUUUUU")
-	emote_hear   = list("barks", "woofs", "yaps","pants")
-	emote_see    = list("shakes its head", "shivers")
-	speak_chance = 0.5
-	turns_per_wander = 10
 	response_disarm = "bops"
 	see_in_dark = 5
 	mob_size = MOB_SIZE_SMALL
@@ -19,6 +14,26 @@
 	base_animal_type = /mob/living/simple_animal/corgi
 	can_buckle = TRUE
 	butchery_data = /decl/butchery_data/animal/corgi
+	ai = /datum/mob_controller/corgi
+
+/datum/mob_controller/corgi
+	emote_speech = list("YAP", "Woof!", "Bark!", "AUUUUUU")
+	emote_hear   = list("barks", "woofs", "yaps","pants")
+	emote_see    = list("shakes its head", "shivers")
+	speak_chance = 0.25
+	turns_per_wander = 20
+
+/datum/mob_controller/corgi/proc/dance()
+	set waitfor = FALSE
+	if(QDELETED(body) || body.client)
+		return
+	var/decl/pronouns/pronouns = body.get_pronouns()
+	body.custom_emote(VISIBLE_MESSAGE, pick("dances around.","chases [pronouns.his] tail."))
+	for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
+		body.set_dir(i)
+		sleep(1)
+		if(QDELETED(body) || body.client)
+			return
 
 /mob/living/simple_animal/corgi/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/corgi)
@@ -40,58 +55,73 @@
 	real_name = "Ian"	//Intended to hold the name without altering it.
 	gender = MALE
 	desc = "It's a corgi."
+	ai = /datum/mob_controller/corgi/ian
+
+/datum/mob_controller/corgi/ian
 	var/turns_since_scan = 0
 	var/obj/movement_target
 
-/mob/living/simple_animal/corgi/Ian/do_delayed_life_action()
-	..()
+/datum/mob_controller/corgi/ian/proc/go_get_lunch()
+	set waitfor = FALSE
+
+	if(!movement_target || !body || body.stat)
+		return
+
+	stop_wandering()
+	step_to(body, movement_target,1)
+	sleep(3)
+	if(!movement_target || !body || body.stat)
+		return
+
+	step_to(body, movement_target,1)
+	sleep(3)
+	if(!movement_target || !body || body.stat)
+		return
+
+	step_to(body, movement_target,1)
+	if(!movement_target || !body || body.stat)
+		return
+
+	if (movement_target.loc.x < body.x)
+		body.set_dir(WEST)
+	else if (movement_target.loc.x > body.x)
+		body.set_dir(EAST)
+	else if (movement_target.loc.y < body.y)
+		body.set_dir(SOUTH)
+	else if (movement_target.loc.y > body.y)
+		body.set_dir(NORTH)
+	else
+		body.set_dir(SOUTH)
+	if(isturf(movement_target.loc) && body.Adjacent(movement_target))
+		body.UnarmedAttack(movement_target)
+	else if(ishuman(movement_target.loc) && prob(20))
+		body.custom_emote(VISIBLE_MESSAGE, "stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
+
+/datum/mob_controller/corgi/ian/do_process(time_elapsed)
+	. = ..()
+	if(body.stat || body.current_posture?.prone || body.buckled)
+		return
+
 	//Feeding, chasing food, FOOOOODDDD
-	if(!current_posture.prone && !buckled)
-		turns_since_scan++
-		if(turns_since_scan > 5)
-			turns_since_scan = 0
-			if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
-				movement_target = null
-				stop_wandering = FALSE
-			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
-				movement_target = null
-				stop_wandering = FALSE
-				for(var/obj/item/chems/food/S in oview(src,3))
-					if(isturf(S.loc) || ishuman(S.loc))
-						movement_target = S
-						break
-			if(movement_target)
-				stop_wandering = TRUE
-				step_to(src,movement_target,1)
-				sleep(3)
-				step_to(src,movement_target,1)
-				sleep(3)
-				step_to(src,movement_target,1)
+	turns_since_scan++
+	if(turns_since_scan > 10)
+		turns_since_scan = 0
+		if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
+			movement_target = null
+			resume_wandering()
+		if( !movement_target || !(movement_target.loc in oview(body, 3)) )
+			movement_target = null
+			resume_wandering()
+			for(var/obj/item/chems/food/S in oview(body, 3))
+				if(isturf(S.loc) || ishuman(S.loc))
+					movement_target = S
+					break
+		if(movement_target)
+			go_get_lunch()
+			return
 
-				if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
-					if (movement_target.loc.x < src.x)
-						set_dir(WEST)
-					else if (movement_target.loc.x > src.x)
-						set_dir(EAST)
-					else if (movement_target.loc.y < src.y)
-						set_dir(SOUTH)
-					else if (movement_target.loc.y > src.y)
-						set_dir(NORTH)
-					else
-						set_dir(SOUTH)
-
-					if(isturf(movement_target.loc) && Adjacent(movement_target))
-						UnarmedAttack(movement_target)
-					else if(ishuman(movement_target.loc) && prob(20))
-						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
-
-		if(prob(1))
-			visible_emote(pick("dances around.","chases their tail."))
-			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-				set_dir(i)
-				sleep(1)
-				if(QDELETED(src) || client)
-					return
+	if(prob(1))
+		dance()
 
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
 	if(istype(O, /obj/item/newspaper))
@@ -144,8 +174,40 @@
 	gender = FEMALE
 	desc = "It's a corgi with a cute pink bow."
 	icon = 'icons/mob/simple_animal/corgi_lisa.dmi'
-	var/turns_since_scan = 0
+	ai = /datum/mob_controller/corgi/lisa
+
+/datum/mob_controller/corgi/lisa
 	var/puppies = 0
+	var/turns_since_scan = 0
+
+/datum/mob_controller/corgi/lisa/do_process(time_elapsed)
+	. = ..()
+	if(body.stat || body.current_posture?.prone || body.buckled)
+		return
+
+	turns_since_scan++
+	if(turns_since_scan > 30)
+		turns_since_scan = 0
+		var/alone = 1
+		var/mob/living/ian
+		for(var/mob/M in oviewers(7, body))
+			if(istype(M, /mob/living/simple_animal/corgi/Ian))
+				if(M.client)
+					alone = 0
+					break
+				else
+					ian = M
+			else
+				alone = 0
+				break
+		if(alone && ian && puppies < 4)
+			if(body.near_camera() || ian.near_camera())
+				return
+			new /mob/living/simple_animal/corgi/puppy(body.loc)
+			puppies++
+
+	if(prob(1))
+		dance()
 
 //Lisa already has a cute bow!
 /mob/living/simple_animal/corgi/Lisa/OnTopic(mob/user, href_list)
@@ -153,34 +215,3 @@
 		to_chat(user, "<span class='warning'>[src] already has a cute bow!</span>")
 		return TOPIC_HANDLED
 	return ..()
-
-/mob/living/simple_animal/corgi/Lisa/do_delayed_life_action()
-	..()
-	if(!current_posture.prone && !buckled)
-		turns_since_scan++
-		if(turns_since_scan > 15)
-			turns_since_scan = 0
-			var/alone = 1
-			var/ian = 0
-			for(var/mob/M in oviewers(7, src))
-				if(istype(M, /mob/living/simple_animal/corgi/Ian))
-					if(M.client)
-						alone = 0
-						break
-					else
-						ian = M
-				else
-					alone = 0
-					break
-			if(alone && ian && puppies < 4)
-				if(near_camera(src) || near_camera(ian))
-					return
-				new /mob/living/simple_animal/corgi/puppy(loc)
-
-		if(prob(1))
-			visible_emote(pick("dances around","chases her tail"))
-			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-				set_dir(i)
-				sleep(1)
-				if(QDELETED(src) || client)
-					return

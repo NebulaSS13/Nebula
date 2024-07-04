@@ -115,7 +115,7 @@
 			familiar_type = /mob/living/simple_animal/passive/mouse
 		if("Cat")
 			H.add_genetic_condition(GENE_COND_RUNNING)
-			familiar_type = /mob/living/simple_animal/cat
+			familiar_type = /mob/living/simple_animal/passive/cat
 		if("Bear")
 			familiar_type = /mob/living/simple_animal/hostile/bear
 	var/spell/targeted/shapeshift/familiar/F = new()

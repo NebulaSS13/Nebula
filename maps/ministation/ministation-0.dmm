@@ -11926,7 +11926,7 @@
 /turf/floor/tiled,
 /area/ministation/engine)
 "RY" = (
-/mob/living/simple_animal/hostile/retaliate/parrot/Poly,
+/mob/living/simple_animal/hostile/parrot/Poly,
 /obj/structure/table/reinforced,
 /obj/item/chems/drinks/glass2/coffeecup/one,
 /turf/floor/wood/yew,

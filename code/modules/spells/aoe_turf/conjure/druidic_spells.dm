@@ -67,9 +67,13 @@
 
 	hud_state = "wiz_bear"
 
-/spell/aoe_turf/conjure/summon/bear/before_cast()
-	..()
-	newVars["master"] = holder //why not do this in the beginning? MIND SWITCHING.
+/spell/aoe_turf/conjure/summon/bear/apply_vars(atom/summoned_object, mob/caster)
+	. = ..()
+	if(isliving(summoned_object))
+		var/mob/living/summoned_mob = summoned_object
+		if(istype(summoned_mob.ai, /datum/mob_controller/aggressive/commanded))
+			var/datum/mob_controller/aggressive/commanded/command_ai = summoned_mob.ai
+			command_ai.master = caster
 
 /spell/aoe_turf/conjure/summon/bear/empower_spell()
 	if(!..())

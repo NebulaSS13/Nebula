@@ -41,12 +41,12 @@
 
 /datum/fauna_generator/snow
 	fauna_types = list(
-		/mob/living/simple_animal/hostile/retaliate/beast/samak,
-		/mob/living/simple_animal/hostile/retaliate/beast/diyaab,
-		/mob/living/simple_animal/hostile/retaliate/beast/shantak
+		/mob/living/simple_animal/hostile/beast/samak,
+		/mob/living/simple_animal/hostile/beast/diyaab,
+		/mob/living/simple_animal/hostile/beast/shantak
 	)
 	megafauna_types = list(
-		/mob/living/simple_animal/hostile/retaliate/giant_crab
+		/mob/living/simple_animal/hostile/giant_crab
 	)
 
 ////////////////////////////////////////////////////////////////////////////

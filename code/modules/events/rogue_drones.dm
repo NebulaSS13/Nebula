@@ -19,7 +19,7 @@
 	else
 		num = rand(2,6)
 	for(var/i=0, i<num, i++)
-		var/mob/living/simple_animal/hostile/retaliate/malf_drone/D = new(get_turf(pick(possible_spawns)))
+		var/mob/living/simple_animal/hostile/malf_drone/D = new(get_turf(pick(possible_spawns)))
 		drones_list.Add(D)
 		if(prob(25))
 			D.disabled = rand(15, 60)
@@ -36,7 +36,7 @@
 
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0
-	for(var/mob/living/simple_animal/hostile/retaliate/malf_drone/D in drones_list)
+	for(var/mob/living/simple_animal/hostile/malf_drone/D in drones_list)
 		spark_at(D.loc)
 		D.z = SSmapping.admin_levels[1]
 		D.has_loot = 0

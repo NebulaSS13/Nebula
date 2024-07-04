@@ -29,18 +29,21 @@
 	environment_smash = 1
 	faction = "lar_maria"
 	status_flags = CANPUSH
-	speak_chance = 25
-	emote_speech = list("Die!", "Fresh meat!", "Hurr!", "You said help will come!", "I did nothing!", "Eat my fist!", "One for the road!")
-	emote_hear   = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
-	emote_see    = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
-	turns_per_wander = 5
 	base_movement_delay = 8
-	can_escape = TRUE
-	stop_wandering_when_pulled = FALSE
 	natural_weapon = /obj/item/natural_weapon/punch
+	ai = /datum/mob_controller/aggressive/lar_maria
 
 	var/obj/abstract/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
+
+/datum/mob_controller/aggressive/lar_maria
+	emote_speech = list("Die!", "Fresh meat!", "Hurr!", "You said help will come!", "I did nothing!", "Eat my fist!", "One for the road!")
+	speak_chance = 12.5
+	emote_hear   = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
+	emote_see    = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
+	turns_per_wander = 10
+	stop_wander_when_pulled = 0
+	can_escape_buckles = TRUE
 
 /mob/living/simple_animal/hostile/lar_maria/death(gibbed)
 	. = ..()
@@ -111,8 +114,10 @@
 
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged
 	weapon = /obj/item/gun/projectile/shotgun/pump
-	ranged = 1
 	projectiletype = /obj/item/projectile/bullet/shotgun/beanbag
+
+/mob/living/simple_animal/hostile/lar_maria/guard/ranged/has_ranged_attack()
+	return TRUE
 
 /obj/item/clothing/head/soft/zhp_cap
 	name = "Zeng-Hu Pharmaceuticals cap"

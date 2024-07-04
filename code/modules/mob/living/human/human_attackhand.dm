@@ -217,6 +217,8 @@
 	attack.apply_effects(H, src, rand_damage, hit_zone)
 	// Finally, apply damage to target
 	apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
+	if(istype(ai))
+		ai.retaliate(user)
 	return TRUE
 
 /mob/living/human/attack_hand(mob/user)

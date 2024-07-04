@@ -72,3 +72,7 @@
 
 /obj/machinery/camera/network/hallway
 	preset_channels = list("Hallway")
+
+/mob/living/simple_animal/crow/doctor
+	desc = "She's not a real doctor, but she is a real bird."
+	name = "Dr. Bird"

@@ -857,7 +857,7 @@ default behaviour is:
 /mob/living/proc/set_nutrition(var/amt)
 	nutrition = clamp(amt, 0, get_max_nutrition())
 
-/mob/living/proc/get_nutrition(var/amt)
+/mob/living/proc/get_nutrition()
 	return nutrition
 
 /mob/living/proc/adjust_nutrition(var/amt)
@@ -1421,7 +1421,7 @@ default behaviour is:
 	return TRUE
 
 /mob/living/proc/can_direct_mount(var/mob/user)
-	if(can_buckle && istype(user) && !user.incapacitated() && user == buckled_mob)
+	if((user.faction == faction || !faction) && can_buckle && istype(user) && !user.incapacitated() && user == buckled_mob)
 		if(client && a_intent != I_HELP)
 			return FALSE // do not Ratatouille your colleagues
 		// TODO: Piloting skillcheck for hands-free moving? Stupid but amusing
@@ -1456,6 +1456,13 @@ default behaviour is:
 		for(var/obj/item/grab/G in buckled_mob.get_held_items())
 			if(G.get_affecting_mob() == src && !istype(G.current_grab, /decl/grab/simple/control))
 				qdel(G)
+	if(istype(ai))
+		ai.retaliate(M)
+
+/mob/living/try_make_grab(mob/living/user, defer_hand = FALSE)
+	. = ..()
+	if(istype(ai))
+		ai.retaliate(user)
 
 /mob/living/can_buckle_mob(var/mob/living/dropping)
 	. = ..() && stat == CONSCIOUS && !buckled && dropping.mob_size <= mob_size
@@ -1651,3 +1658,36 @@ default behaviour is:
 		if(istype(I))
 			return I.get_darksight_range()
 	return get_bodytype()?.eye_darksight_range
+
+/mob/living/proc/can_act()
+	return !QDELETED(src) && !incapacitated()
+
+// Currently only used by AI behaviors
+/mob/living/proc/has_ranged_attack()
+	return FALSE
+
+/mob/living/proc/get_ranged_attack_distance()
+	return 0
+
+/mob/living/proc/handle_ranged_attack(atom/target)
+	if(istype(target))
+		for(var/obj/item/gun/gun in get_held_items())
+			gun.afterattack(target, src, target.Adjacent(src))
+		return TRUE
+	return FALSE
+
+/mob/living/proc/can_pry_door()
+	return FALSE
+
+/mob/living/proc/get_door_pry_time()
+	return 7 SECONDS
+
+/mob/living/proc/pry_door(atom/target, pry_time)
+	return
+
+/mob/living/proc/turf_is_safe(turf/target)
+	if(!istype(target))
+		return FALSE
+	if(target.is_open() && target.has_gravity() && !can_overcome_gravity())
+		return FALSE
+	return TRUE

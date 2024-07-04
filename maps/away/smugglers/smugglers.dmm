@@ -711,7 +711,7 @@
 /turf/floor,
 /area/smugglers/base)
 "bP" = (
-/mob/living/simple_animal/hostile/retaliate/malf_drone,
+/mob/living/simple_animal/hostile/malf_drone,
 /turf/floor/tiled,
 /area/smugglers/office)
 "bQ" = (
@@ -923,7 +923,7 @@
 "cz" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/dirt,
-/mob/living/simple_animal/hostile/retaliate/malf_drone,
+/mob/living/simple_animal/hostile/malf_drone,
 /turf/floor/tiled,
 /area/smugglers/dorms)
 "cA" = (

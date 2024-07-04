@@ -405,7 +405,7 @@
 		faction = MOB_FACTION_NEUTRAL
 		natural_weapon.force = 0
 		environment_smash = 0
-		destroy_surroundings = 0
+		ai?.try_destroy_surroundings = FALSE
 	else
 		faction = "carp"
 		natural_weapon.force = initial(natural_weapon.force)

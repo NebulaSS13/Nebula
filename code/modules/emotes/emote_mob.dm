@@ -152,7 +152,7 @@
 	return capitalize(pretext) + nametext + subtext
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
-
+	set waitfor = FALSE
 	if(!can_emote(m_type, src))
 		return
 

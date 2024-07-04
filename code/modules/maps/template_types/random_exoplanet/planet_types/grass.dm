@@ -73,11 +73,11 @@
 	fauna_types = list(
 		/mob/living/simple_animal/yithian,
 		/mob/living/simple_animal/tindalos,
-		/mob/living/simple_animal/hostile/retaliate/jelly
+		/mob/living/simple_animal/hostile/jelly
 	)
 	megafauna_types = list(
-		/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna,
-		/mob/living/simple_animal/hostile/retaliate/goose/dire
+		/mob/living/simple_animal/hostile/parrot/space/megafauna,
+		/mob/living/simple_animal/hostile/goose/dire
 	)
 
 ////////////////////////////////////////////////////////////////////////////

@@ -31,7 +31,7 @@
 		/obj/structure/iv_drip,
 		/obj/machinery/disposal,
 		/mob/living/simple_animal/cow,
-		/mob/living/simple_animal/hostile/retaliate/goat,
+		/mob/living/simple_animal/hostile/goat,
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,

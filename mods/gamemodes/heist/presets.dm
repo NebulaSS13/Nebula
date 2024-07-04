@@ -1,5 +1,8 @@
-/mob/living/simple_animal/hostile/retaliate/parrot/pirate
+/mob/living/simple_animal/hostile/parrot/pirate
 	name = "\proper Meatbag"
+	ai = /datum/mob_controller/aggressive/parrot/pirate
+
+/datum/mob_controller/aggressive/parrot/pirate
 	emote_speech = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")
 
 /obj/machinery/network/telecomms_hub/raider
