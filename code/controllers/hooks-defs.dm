@@ -89,10 +89,3 @@
  * Parameters: var/obj/item/card/id
  */
 /hook/terminate_employee
-
-/**
- * Crate sold hook.
- * Called in supplyshuttle.dm when a crate is sold on the shuttle.
- * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
- */
-/hook/sell_crate
