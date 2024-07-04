@@ -55,9 +55,3 @@
  */
 /hook/debrain
 
-/**
- * Borged hook.
- * Called in robot_parts.dm when someone gets turned into a cyborg.
- * Parameters: var/mob/living/silicon/robot
- */
-/hook/borgify
