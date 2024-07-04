@@ -65,7 +65,7 @@
 		)
 		switch(w_class)
 			if(0 to ITEM_SIZE_SMALL)
-				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_NONE
+				pass()
 			if(ITEM_SIZE_SMALL to ITEM_SIZE_NORMAL) // Since ITEM_SIZE_SMALL was already covered, this is just ITEM_SIZE_NORMAL.
 				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_WORST
 			if(ITEM_SIZE_NORMAL to ITEM_SIZE_LARGE)
