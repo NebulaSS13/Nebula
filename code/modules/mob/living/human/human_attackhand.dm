@@ -51,7 +51,7 @@
 		var/list/status = list()
 
 		var/feels = 1 + round(org.pain/100, 0.1)
-		var/feels_brute = (org.brute_dam * feels)
+		var/feels_brute = org.can_feel_pain() ? (org.brute_dam * feels) : 0
 		if(feels_brute > 0)
 			switch(feels_brute / org.max_damage)
 				if(0 to 0.35)
@@ -61,7 +61,7 @@
 				if(0.65 to INFINITY)
 					status += "throbbing with agony"
 
-		var/feels_burn = (org.burn_dam * feels)
+		var/feels_burn = org.can_feel_pain() ? (org.burn_dam * feels) : 0
 		if(feels_burn > 0)
 			switch(feels_burn / org.max_damage)
 				if(0 to 0.35)
@@ -77,7 +77,7 @@
 			status += "<b>bleeding</b>"
 		if(org.is_dislocated())
 			status += "dislocated"
-		if(org.status & ORGAN_BROKEN)
+		if(org.status & ORGAN_BROKEN & org.can_feel_pain())
 			status += "hurts when touched"
 
 		if(org.status & ORGAN_DEAD)
