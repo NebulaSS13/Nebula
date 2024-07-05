@@ -1,9 +1,9 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aM" = (
-/turf/wall/log/ebony/shutter,
+/turf/wall/log/walnut/shutter,
 /area/shaded_hills/witch_hut)
 "bg" = (
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "cE" = (
 /turf/floor/natural/mud/water,
@@ -12,7 +12,7 @@
 /obj/structure/bed/chair/wood/ebony{
 	dir = 8
 	},
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "hT" = (
 /turf/floor/natural/mud/water/deep,
@@ -40,7 +40,7 @@
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/rock/hematite,
 /obj/item/rock/flint,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "oF" = (
 /turf/unsimulated/dark_filler,
@@ -50,7 +50,7 @@
 /area/shaded_hills/caves/swamp)
 "pl" = (
 /obj/structure/drying_rack,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "rP" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
@@ -70,7 +70,7 @@
 /obj/structure/wall_sconce/lantern{
 	dir = 8
 	},
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "vZ" = (
 /turf/floor/natural/mud/water,
@@ -91,7 +91,7 @@
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/river/swamp)
 "BF" = (
-/obj/structure/door/ebony,
+/obj/structure/door/walnut,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/witch_hut)
 "BY" = (
@@ -102,7 +102,7 @@
 /turf/unsimulated/dark_filler,
 /area/shaded_hills/caves/unexplored/swamp)
 "Ev" = (
-/turf/wall/log/ebony,
+/turf/wall/log/walnut,
 /area/shaded_hills/witch_hut)
 "EI" = (
 /turf/unsimulated/mask,
@@ -113,7 +113,7 @@
 /obj/item/chems/glass/pottery/cup,
 /obj/item/chems/glass/pottery/cup,
 /obj/item/chems/glass/bucket/wood,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "Ic" = (
 /turf/floor/natural/clay,
@@ -132,11 +132,11 @@
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "KA" = (
 /obj/abstract/landmark/start/shaded_hills/herbalist,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "LF" = (
 /turf/wall/natural/basalt/shaded_hills,
@@ -149,8 +149,8 @@
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/swamp)
 "SE" = (
-/obj/structure/door/ebony,
-/turf/floor/wood/ebony,
+/obj/structure/door/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "Ty" = (
 /obj/abstract/landmark/start/shaded_hills/traveller,
@@ -164,7 +164,7 @@
 /area/shaded_hills/outside/swamp)
 "TR" = (
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "Vl" = (
 /obj/structure/table/woodentable/ebony,
@@ -173,7 +173,7 @@
 	},
 /obj/item/chems/glass/mortar,
 /obj/item/rock/basalt,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 "VA" = (
 /turf/wall/brick/basalt,
@@ -191,7 +191,7 @@
 /obj/structure/bed/simple/ebony,
 /obj/item/bedsheet/furs,
 /obj/abstract/landmark/start/shaded_hills/herbalist,
-/turf/floor/wood/ebony,
+/turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
 
 (1,1,1) = {"

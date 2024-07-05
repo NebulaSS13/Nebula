@@ -201,34 +201,31 @@
 
 /obj/structure/door/wood
 	material = /decl/material/solid/organic/wood
+	color = /decl/material/solid/organic/wood::color
 
 /obj/structure/door/mahogany
 	material = /decl/material/solid/organic/wood/mahogany
+	color = /decl/material/solid/organic/wood/mahogany::color
 
 /obj/structure/door/maple
 	material = /decl/material/solid/organic/wood/maple
+	color = /decl/material/solid/organic/wood/maple::color
 
 /obj/structure/door/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
 
 /obj/structure/door/walnut
 	material = /decl/material/solid/organic/wood/walnut
+	color = /decl/material/solid/organic/wood/walnut::color
 
 /obj/structure/door/wood/saloon
 	material = /decl/material/solid/organic/wood
 	opacity = FALSE
 
-/obj/structure/door/wood/ebony
-	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
-
 /obj/structure/door/wood/saloon/ebony
 	material = /decl/material/solid/organic/wood/ebony
 	color = /decl/material/solid/organic/wood/ebony::color
-
-/obj/structure/door/wood/walnut
-	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
 
 /obj/structure/door/wood/saloon/walnut
 	material = /decl/material/solid/organic/wood/walnut

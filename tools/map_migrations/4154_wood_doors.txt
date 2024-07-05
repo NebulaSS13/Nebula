@@ -1,0 +1,2 @@
+/obj/structure/door/wood/ebony : /obj/structure/door/ebony{@OLD}
+/obj/structure/door/wood/walnut : /obj/structure/door/walnut{@OLD}

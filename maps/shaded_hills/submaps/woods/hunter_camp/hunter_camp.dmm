@@ -34,7 +34,7 @@
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "A" = (
 /obj/abstract/exterior_marker/inside,
-/turf/wall/log/ebony,
+/turf/wall/log/walnut,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "B" = (
 /obj/structure/flora/stump/tree/ebony,
@@ -77,7 +77,7 @@
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "S" = (
 /obj/structure/fire_source/firepit/basalt,
-/obj/item/stack/material/log/mapped/ebony/fifteen,
+/obj/item/stack/material/log/mapped/walnut/fifteen,
 /turf/floor/natural/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "U" = (

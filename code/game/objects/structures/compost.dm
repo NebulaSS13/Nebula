@@ -199,3 +199,11 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 /obj/structure/reagent_dispensers/compost_bin/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYREMOVE(., /decl/interaction_handler/toggle_open/reagent_dispenser)
+
+/obj/structure/reagent_dispensers/compost_bin/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
+
+/obj/structure/reagent_dispensers/compost_bin/walnut
+	material = /decl/material/solid/organic/wood/walnut
+	color = /decl/material/solid/organic/wood/walnut::color
