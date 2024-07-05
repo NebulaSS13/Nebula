@@ -38,10 +38,11 @@
 		return
 
 	if(islist(comments))
-		if(length(comments) == 1)
-			comments = comments[1]
+		var/list/comment_list = comments
+		if(length(comment_list) == 1)
+			comments = comment_list[1]
 		else
-			comments = input(usr, "Multiple matches. Which character do you wish to show?", "View Character Comments") as null|anything in comments
+			comments = input(usr, "Multiple matches. Which character do you wish to show?", "View Character Comments") as null|anything in comment_list
 	if(istype(comments))
 		comments.display_to(usr)
 	else

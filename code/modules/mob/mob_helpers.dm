@@ -534,9 +534,9 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return !client && !teleop && (last_ckey || !ai)
 
 /mob/proc/try_teleport(var/area/thearea)
-	if(!istype(thearea))
-		if(istype(thearea, /list))
-			thearea = thearea[1]
+	if(istype(thearea, /list))
+		var/list/area_list = thearea
+		thearea = area_list[1]
 	var/list/L = list()
 	for(var/turf/T in get_area_turfs(thearea))
 		if(!T.density)
