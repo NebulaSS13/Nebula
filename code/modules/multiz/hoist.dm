@@ -48,15 +48,14 @@
 
 /obj/effect/hoist_hook/receive_mouse_drop(atom/dropping, mob/user, params)
 	// skip the parent buckle logic, handle climbing directly
-	var/mob/living/H = user
-	if(istype(H) && !H.anchored && can_climb(H) && dropping == user)
+	if(isliving(user) && !user.anchored && can_climb(user) && dropping == user)
 		do_climb(dropping)
 		return TRUE
 	// end copypasta'd code
 	if(istype(dropping, /atom/movable))
-		var/atom/movable/AM = dropping
-		if(!AM.simulated || AM.anchored)
-			to_chat(user, SPAN_WARNING("You can't do that with \the [AM]."))
+		var/atom/movable/dropped_movable = dropping
+		if(!dropped_movable.simulated || dropped_movable.anchored)
+			to_chat(user, SPAN_WARNING("You can't do that with \the [dropped_movable]."))
 			return TRUE
 		if(source_hoist.hoistee)
 			to_chat(user, SPAN_NOTICE("\The [source_hoist.hoistee] is already attached to \the [src]!"))
@@ -66,24 +65,24 @@
 			return
 		if (!user.check_dexterity(DEXTERITY_HOLD_ITEM))
 			return
-		source_hoist.attach_hoistee(AM)
+		source_hoist.attach_hoistee(dropped_movable)
 		user.visible_message(
-			SPAN_NOTICE("[user] attaches \the [AM] to \the [src]."),
-			SPAN_NOTICE("You attach \the [AM] to \the [src]."),
+			SPAN_NOTICE("[user] attaches \the [dropped_movable] to \the [src]."),
+			SPAN_NOTICE("You attach \the [dropped_movable] to \the [src]."),
 			"You hear something clamp into place.")
 		return TRUE
 
-/obj/structure/hoist/proc/attach_hoistee(atom/movable/AM)
-	hoistee = AM
-	if(ismob(AM))
-		source_hook.buckle_mob(AM)
+/obj/structure/hoist/proc/attach_hoistee(atom/movable/victim)
+	hoistee = victim
+	if(ismob(victim))
+		source_hook.buckle_mob(victim)
 	else
-		AM.anchored = TRUE // can't buckle non-mobs at the moment
-	source_hook.layer = AM.layer + 0.1
-	if (get_turf(AM) != get_turf(source_hook))
-		AM.forceMove(get_turf(source_hook))
+		victim.anchored = TRUE // can't buckle non-mobs at the moment
+	source_hook.layer = victim.layer + 0.1
+	if (get_turf(victim) != get_turf(source_hook))
+		victim.forceMove(get_turf(source_hook))
 
-	events_repository.register(/decl/observ/destroyed, AM, src, PROC_REF(release_hoistee))
+	events_repository.register(/decl/observ/destroyed, victim, src, PROC_REF(release_hoistee))
 
 /obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user, params)
 	if(source_hoist.hoistee && isturf(over) && over.Adjacent(source_hoist.hoistee))
@@ -105,9 +104,9 @@
 /obj/effect/hoist_hook/unbuckle_mob()
 	. = ..()
 	if (. && !QDELETED(source_hoist))
-		var/mob/M = .
+		var/mob/victim = .
 		source_hoist.hoistee = null
-		M.fall(get_turf(src))	// fuck you, you fall now!
+		victim.fall(get_turf(src))	// fuck you, you fall now!
 
 /obj/structure/hoist
 	name = "hoist"
@@ -210,19 +209,11 @@
 
 	check_consistency()
 
-	var/size
-	if (ismob(hoistee))
-		var/mob/M = hoistee
-		size = M.mob_size
-	else if (isobj(hoistee))
-		var/obj/O = hoistee
-		size = O.w_class
-
 	user.visible_message(
 		SPAN_NOTICE("[user] begins to [movtext] \the [hoistee]!"),
 		SPAN_NOTICE("You begin to [movtext] \the [hoistee]!"),
 		SPAN_NOTICE("You hear the sound of a crank."))
-	if (do_after(user, (1 SECONDS) * size / 4, src))
+	if (do_after(user, (1 SECONDS) * get_object_size(hoistee) / 4, src))
 		move_dir(movedir, 1)
 	return TRUE
 
@@ -265,8 +256,8 @@
 			if (source_hook in get_step(src, dir)) // you don't get to move above the hoist
 				return FALSE
 		if (DOWN)
-			var/turf/T = get_turf(source_hook)
-			if(!istype(T) || !T.is_open()) // can't move down through a solid tile
+			var/turf/current_turf = get_turf(source_hook)
+			if(!current_turf || !current_turf.is_open()) // can't move down through a solid tile or if not on a turf
 				return FALSE
 	return TRUE // i thought i could trust myself to write something as simple as this, guess i was wrong
 

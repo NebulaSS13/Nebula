@@ -39,8 +39,7 @@
 // Receive a mouse drop.
 // Returns false if the atom is valid for dropping further up the chain, true if the drop has been handled.
 /atom/proc/receive_mouse_drop(atom/dropping, mob/user, params)
-	var/mob/living/H = user
-	if(istype(H) && !H.anchored && can_climb(H) && dropping == user)
+	if(isliving(user) && !user.anchored && can_climb(user) && dropping == user)
 		do_climb(dropping)
 		return TRUE
 	return FALSE

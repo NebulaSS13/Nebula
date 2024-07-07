@@ -62,7 +62,7 @@
 		return 0
 
 	if(!holder.cell.check_charge(use_power_cost * CELLRATE))
-		to_chat(holder.wearer,"<span class='warning'>Not enough stored power.</span>")
+		to_chat(holder.wearer,SPAN_WARNING("Not enough stored power."))
 		return 0
 
 	if(!target)
@@ -123,7 +123,7 @@
 		return 0
 
 	if(accepted_item.charges >= 5)
-		to_chat(user, "<span class='danger'>Another grenade of that type will not fit into the module.</span>")
+		to_chat(user, SPAN_DANGER("Another grenade of that type will not fit into the module."))
 		return 0
 
 	to_chat(user, SPAN_BLUE("<b>You slot \the [input_device] into the suit module.</b>"))
@@ -139,10 +139,10 @@
 	if(!target)
 		return 0
 
-	var/mob/living/human/H = holder.wearer
+	var/mob/living/human/wearer = holder.wearer
 
 	if(!charge_selected)
-		to_chat(H, "<span class='danger'>You have not selected a grenade type.</span>")
+		to_chat(wearer, SPAN_DANGER("You have not selected a grenade type."))
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
@@ -151,14 +151,14 @@
 		return 0
 
 	if(charge.charges <= 0)
-		to_chat(H, "<span class='danger'>Insufficient grenades!</span>")
+		to_chat(wearer, SPAN_DANGER("Insufficient grenades!"))
 		return 0
 
 	charge.charges--
-	var/obj/item/grenade/new_grenade = new charge.product_type(get_turf(H))
-	H.visible_message("<span class='danger'>[H] launches \a [new_grenade]!</span>")
+	var/obj/item/grenade/new_grenade = new charge.product_type(get_turf(wearer))
+	wearer.visible_message(SPAN_DANGER("[wearer] launches \a [new_grenade]!"), SPAN_DANGER("You launch \a [new_grenade]!"))
 	log_and_message_admins("fired a grenade ([new_grenade.name]) from a rigsuit grenade launcher.")
-	new_grenade.activate(H)
+	new_grenade.activate(wearer)
 	new_grenade.throw_at(target,fire_force,fire_distance)
 
 /obj/item/rig_module/grenade_launcher/cleaner
@@ -402,21 +402,21 @@
 	if(!..())
 		return FALSE
 
-	var/mob/living/H = holder.wearer
+	var/mob/living/wearer = holder.wearer
 
 	if(target)
 		var/obj/item/firing = new fabrication_type()
 		firing.dropInto(loc)
-		H.visible_message(SPAN_DANGER("\The [H] launches \a [firing]!"))
+		wearer.visible_message(SPAN_DANGER("\The [wearer] launches \a [firing]!"), SPAN_DANGER("You launch \a [firing]!"))
 		firing.throw_at(target,fire_force,fire_distance)
 	else
-		if(!H.get_empty_hand_slot())
-			to_chat(H, SPAN_WARNING("Your hands are full."))
+		if(!wearer.get_empty_hand_slot())
+			to_chat(wearer, SPAN_WARNING("Your hands are full."))
 		else
 			var/obj/item/new_weapon = new fabrication_type()
-			new_weapon.forceMove(H)
-			to_chat(H, SPAN_BLUE("<b>You quickly fabricate \a [new_weapon].</b>"))
-			H.put_in_hands(new_weapon)
+			new_weapon.forceMove(wearer)
+			to_chat(wearer, SPAN_BLUE("<b>You quickly fabricate \a [new_weapon].</b>"))
+			wearer.put_in_hands(new_weapon)
 
 	return TRUE
 

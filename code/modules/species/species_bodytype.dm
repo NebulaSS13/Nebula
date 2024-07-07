@@ -614,11 +614,11 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/proc/get_limb_from_zone(limb)
 	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb
 
-/decl/bodytype/proc/check_vital_organ_missing(mob/living/H)
+/decl/bodytype/proc/check_vital_organ_missing(mob/living/patient)
 	if(length(vital_organs))
 		for(var/organ_tag in vital_organs)
-			var/obj/item/organ/O = H.get_organ(organ_tag, /obj/item/organ)
-			if(!O || (O.status & ORGAN_DEAD))
+			var/obj/item/organ/vital_organ = patient.get_organ(organ_tag, /obj/item/organ)
+			if(!vital_organ || (vital_organ.status & ORGAN_DEAD))
 				return TRUE
 	return FALSE
 
