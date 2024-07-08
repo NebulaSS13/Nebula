@@ -58,7 +58,7 @@
 			to_chat(user, SPAN_WARNING("\The [target] isn't wearing a spacesuit for you to reseal."))
 		return TRUE
 
-	if(!target?.should_have_organ(BP_HEAD))
+	if(!target?.should_have_limb(BP_HEAD))
 		return ..()
 
 	if(user.get_target_zone() == BP_EYES)
