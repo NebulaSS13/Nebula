@@ -585,6 +585,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 // Level Data Implementations
 ////////////////////////////////////////////
 /datum/level_data/space
+	daycycle_id = "space_solars"
+	daycycle_type = /datum/daycycle/solars
 
 /datum/level_data/debug
 	name = "Debug Level"
