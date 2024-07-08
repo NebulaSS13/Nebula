@@ -32,18 +32,19 @@
 	// Get our location temperature if possible.
 	// Nullspace is room temperature, clearly.
 	var/adjust_temp = T20C
+	var/thermal_mass_coefficient = get_thermal_mass_coefficient()
 	if(isturf(loc))
 		var/turf/T = loc
 		var/datum/gas_mixture/environment = T.return_air()
-		if(environment)
-			adjust_temp = environment.temperature
+		adjust_temp = environment.temperature
+		//scale the thermal mass coefficient so that 1atm = 1x, 0atm = 0x, 10atm = 10x
+		thermal_mass_coefficient *= (environment.return_pressure() / ONE_ATMOSPHERE)
 	else if(loc)
 		adjust_temp = loc.temperature
 
 	// Determine if our temperature needs to change.
 	var/old_temp = temperature
 	var/diff_temp = adjust_temp - temperature
-	var/thermal_mass_coefficient = get_thermal_mass_coefficient()
 	if(abs(diff_temp) >= (thermal_mass_coefficient * ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD))
 		var/altered_temp = max(temperature + (thermal_mass_coefficient * diff_temp), 0)
 		ADJUST_ATOM_TEMPERATURE(src, (diff_temp > 0) ? min(adjust_temp, altered_temp) : max(adjust_temp, altered_temp))
