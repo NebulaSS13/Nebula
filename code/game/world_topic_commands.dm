@@ -1,24 +1,10 @@
-var/global/list/decl/topic_command/topic_commands = list()
-
 /decl/topic_command
+	abstract_type = /decl/topic_command
 	var/name
 	var/has_params = FALSE
-	var/base_type = /decl/topic_command
-
-/// Initialises the assoc list of topic commands by key.
-/hook/startup/proc/setup_api()
-	var/list/commands = decls_repository.get_decls_of_subtype(/decl/topic_command)
-	for (var/command in commands)
-		var/decl/topic_command/TC = commands[command]
-		if(TC.base_type == command)
-			continue
-		global.topic_commands[TC.name] = TC
-	return TRUE
 
 /// Returns TRUE if we can use this command, and FALSE otherwise
 /decl/topic_command/proc/can_use(var/T, var/addr, var/master, var/key)
-	if(base_type == type) // this is an abstract type
-		return FALSE
 	if (has_params)
 		if (copytext(T, 1, length(name) + 1) != name)
 			return FALSE
@@ -38,7 +24,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 	return use(params)
 
 /decl/topic_command/secure
-	base_type = /decl/topic_command/secure
+	abstract_type = /decl/topic_command/secure
 
 /decl/topic_command/secure/try_use(var/T, var/addr, var/master, var/key)
 	if (!can_use(T, addr, master, key))
@@ -60,6 +46,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/ping
 	name = "ping"
+	uid = "topic_command_ping"
 
 /decl/topic_command/ping/use()
 	var/x = 1
@@ -69,12 +56,14 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/players
 	name = "players"
+	uid = "topic_command_players"
 
 /decl/topic_command/players/use()
 	return global.clients.len
 
 /decl/topic_command/status
 	name = "status"
+	uid = "topic_command_status"
 	has_params = TRUE
 
 /decl/topic_command/status/use(var/list/params)
@@ -119,6 +108,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/manifest
 	name = "manifest"
+	uid = "topic_command_manifest"
 
 /decl/topic_command/manifest/use()
 	var/list/positions = list()
@@ -138,6 +128,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/revision
 	name = "revision"
+	uid = "topic_command_revision"
 
 /decl/topic_command/revision/use()
 	var/list/L = list()
@@ -162,6 +153,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 * * * * * * * */
 /decl/topic_command/ban
 	name = "placepermaban"
+	uid = "topic_command_placepermaban"
 	has_params = TRUE
 
 /decl/topic_command/ban/try_use(var/T, var/addr, var/master, var/key)
@@ -205,6 +197,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/secure/laws
 	name = "laws"
+	uid = "topic_command_laws"
 	has_params = TRUE
 
 /decl/topic_command/secure/laws/use(var/list/params)
@@ -251,6 +244,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/secure/info
 	name = "info"
+	uid = "topic_command_info"
 	has_params = TRUE
 
 /decl/topic_command/secure/info/use(var/list/params)
@@ -300,6 +294,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/secure/adminmsg
 	name = "adminmsg"
+	uid = "topic_command_adminmsg"
 	has_params = TRUE
 
 /decl/topic_command/secure/adminmsg/use(var/list/params)
@@ -335,6 +330,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/secure/notes
 	name = "notes"
+	uid = "topic_command_notes"
 	has_params = TRUE
 
 /decl/topic_command/secure/notes/use(var/list/params)
@@ -342,6 +338,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/secure/age
 	name = "age"
+	uid = "topic_command_age"
 	has_params = TRUE
 
 /decl/topic_command/secure/age/use(var/list/params)
@@ -356,6 +353,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command/secure/prometheus_metrics
 	name = "prometheus_metrics"
+	uid = "topic_command_prometheus_metrics"
 
 /decl/topic_command/secure/prometheus_metrics/use()
 	if(!global.prometheus_metrics)
