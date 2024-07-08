@@ -97,7 +97,7 @@
 
 /obj/item/flashlight/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(on && user.get_target_zone() == BP_EYES && target.should_have_organ(BP_HEAD))
+	if(on && user.get_target_zone() == BP_EYES && target.should_have_limb(BP_HEAD))
 
 		add_fingerprint(user)
 		if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))	//too dumb to use flashlight properly
