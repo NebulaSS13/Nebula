@@ -29,7 +29,6 @@
 	BITSET(hud_updateflag, LIFE_HUD)
 
 	//Handle species-specific deaths.
-	callHook("death", list(src, gibbed))
 	handle_hud_list()
 	if(!gibbed)
 		animate_tail_stop()

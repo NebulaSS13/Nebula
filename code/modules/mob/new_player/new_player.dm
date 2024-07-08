@@ -241,7 +241,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		else if(spawnpoint.spawn_announcement)
 			AnnounceCyborg(character, job, spawnpoint.spawn_announcement)
 
-	callHook("player_latejoin", list(job, character))
+	RAISE_EVENT(/decl/observ/player_latejoin, character, job)
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 	qdel(src)

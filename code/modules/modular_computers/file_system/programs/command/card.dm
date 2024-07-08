@@ -198,7 +198,7 @@
 			if(computer)
 				id_card.assignment = "Terminated"
 				remove_nt_access(id_card)
-				callHook("terminate_employee", list(id_card))
+				RAISE_EVENT(/decl/observ/employee_id_terminated, id_card)
 		if("edit")
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
@@ -296,7 +296,7 @@
 					id_card.assignment = t1
 					id_card.position = t1
 
-				callHook("reassign_employee", list(id_card))
+				RAISE_EVENT(/decl/observ/employee_id_reassigned, id_card)
 		if("access")
 			if(href_list["allowed"] && id_card)
 				var/access_type = href_list["access_target"]

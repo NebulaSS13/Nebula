@@ -128,7 +128,7 @@
 			cell_component.installed = 1
 
 		SSstatistics.add_field("cyborg_birth",1)
-		callHook("borgify", list(O))
+		RAISE_EVENT(/decl/observ/cyborg_created, O)
 		O.Namepick()
 		qdel(src)
 

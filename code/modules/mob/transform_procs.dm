@@ -135,7 +135,7 @@
 
 	O.dropInto(loc)
 	O.job = ASSIGNMENT_ROBOT
-	callHook("borgify", list(O))
+	RAISE_EVENT(/decl/observ/cyborg_created, O)
 	O.Namepick()
 
 	qdel(src) // Queues us for a hard delete

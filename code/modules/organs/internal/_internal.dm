@@ -279,7 +279,7 @@
 			brainmob.languages = M.languages?.Copy()
 			brainmob.default_language = M.default_language
 			to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
-			callHook("debrain", list(brainmob))
+			RAISE_EVENT(/decl/observ/debrain, brainmob, src, M)
 		return TRUE
 	return FALSE
 

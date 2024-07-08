@@ -84,9 +84,9 @@ SUBSYSTEM_DEF(supply)
 		for(var/atom/movable/AM in subarea)
 			if(AM.anchored)
 				continue
-			if(istype(AM, /obj/structure/closet/crate/))
+			if(istype(AM, /obj/structure/closet/crate))
 				var/obj/structure/closet/crate/CR = AM
-				callHook("sell_crate", list(CR, subarea))
+				RAISE_EVENT(/decl/observ/crate_sold, subarea, CR)
 				add_points_from_source(CR.get_single_monetary_worth() * crate_return_rebate * 0.1, "crate")
 				var/find_slip = 1
 

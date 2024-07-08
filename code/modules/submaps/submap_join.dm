@@ -111,7 +111,7 @@
 		SSticker.mode.handle_offsite_latejoin(character)
 		global.universe.OnPlayerLatejoin(character)
 		log_and_message_admins("has joined the round as offsite role [character.mind.assigned_role].", character)
-		callHook("submap_join", list(job, character))
+		RAISE_EVENT(/decl/observ/submap_join, src, character, job)
 		if(character.cannot_stand()) equip_wheelchair(character)
 		job.post_equip_job_title(character, job.title)
 		qdel(joining)

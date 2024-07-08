@@ -4,10 +4,14 @@ var/global/datum/matchmaker/matchmaker = new()
 	matchmaker.do_matchmaking()
 	return TRUE
 
-/hook/player_latejoin/proc/matchmaking(var/datum/job/job, var/mob/living/character)
+/datum/matchmaker/matchmaker/New()
+	. = ..()
+	events_repository.register_global(/decl/observ/player_latejoin, src, PROC_REF(matchmake_latejoiner))
+
+/datum/matchmaker/proc/matchmake_latejoiner(mob/living/character, datum/job/job)
 	if(character.mind && character.client?.prefs.relations.len)
 		for(var/T in character.client.prefs.relations)
-			var/TT = matchmaker.relation_types[T]
+			var/TT = relation_types[T]
 			var/datum/relation/R = new TT
 			R.holder = character.mind
 			R.info = character.client.prefs.relations_info[T]
@@ -16,7 +20,7 @@ var/global/datum/matchmaker/matchmaker = new()
 		return TRUE
 	if(!job.create_record)
 		return TRUE
-	matchmaker.do_matchmaking()
+	do_matchmaking()
 	return TRUE
 
 /datum/mind

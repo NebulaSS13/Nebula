@@ -9,13 +9,21 @@ var/global/auxtools_debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
 /proc/enable_debugging(mode, port)
 	CRASH("auxtools not loaded")
 
-/hook/startup/proc/auxtools_init()
+/world/New()
+	auxtools_init()
+	return ..()
+
+/world/proc/auxtools_init()
 	if (global.auxtools_debug_server)
 		call_ext(global.auxtools_debug_server, "auxtools_init")()
 		enable_debugging()
 	return TRUE
 
-/hook/shutdown/proc/auxtools_shutdown()
+/world/Del()
+	auxtools_shutdown()
+	return ..()
+
+/world/proc/auxtools_shutdown()
 	if (global.auxtools_debug_server)
 		call_ext(global.auxtools_debug_server, "auxtools_shutdown")()
 	return TRUE
