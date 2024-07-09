@@ -100,7 +100,7 @@
 			broken(1)
 
 	on = expected_to_be_on()
-	update_icon(0)
+	queue_icon_update(0)
 
 /obj/machinery/light/Destroy()
 	QDEL_NULL(lightbulb)

@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(icon_update)
 		return
 
 	while (queue_refs.len)
-	
+
 		if(Master.map_loading)
 			return
 
@@ -61,10 +61,11 @@ SUBSYSTEM_DEF(icon_update)
 		var/length = length(SSicon_update.queue_refs)
 		SSicon_update.queue_args.len = length
 		SSicon_update.queue_args[length] = args.len ? args : null
-	
+
 		// SSicon_update sleeps when it runs out of things in its
 		// queue, so wake it up.
-		SSicon_update.wake()
+		if(!Master.map_loading) // Don't wake early if we're loading a map, it'll get woken up when the map loads.
+			SSicon_update.wake()
 
 /datum/controller/subsystem/icon_update/StartLoadingMap()
 	suspend()
