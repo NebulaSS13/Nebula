@@ -60,7 +60,9 @@ while [[ ! -e stopserver ]]; do
 	if [[ "$GITDIR" != "." ]]; then
 		cp "$GITDIR/$DME.dmb" .
 		cp "$GITDIR/$DME.rsc" .
-		cp -r "$GITDIR/nano" .
+		cp -r "$GITDIR/nano" . # Necessary for NanoUI
+		cp -r "$GITDIR/maps" . # Necessary for runtime submap loading
+		cp -r "$GITDIR/mods" . # Also necessary for runtime submap loading. TODO: a better solution
 		[[ ! -e btime.so && -e "$GITDIR/btime.so" ]] && cp "$GITDIR/btime.so" .
 		[[ ! -e .git/logs ]] && mkdir -p .git/logs
 		cp "$GITDIR/.git/HEAD" ./.git/HEAD
