@@ -39,7 +39,7 @@
 	ailment_table += "<tr><td><b>[name_column]</b></td><td><b>[treatment_column]</b></td></tr>"
 	for(var/atype in subtypesof(/datum/ailment))
 		var/datum/ailment/ailment = get_ailment_reference(atype)
-		if(!ailment.name || show_robotics_recipes != ailment.affects_robotics || ailment.hidden_from_codex)
+		if(!ailment.name || show_robotics_recipes != ailment.applies_to_prosthetics || ailment.hidden_from_codex)
 			continue
 		ailment_table += "<tr><td>[ailment.name]</td><td>"
 		var/list/ailment_cures = list()
