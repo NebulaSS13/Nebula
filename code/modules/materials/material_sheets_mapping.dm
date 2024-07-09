@@ -96,6 +96,7 @@ STACK_SUBTYPES(blackbronze,    "black bronze",                  solid/metal/blac
 STACK_SUBTYPES(redgold,        "red gold",                      solid/metal/redgold,         ingot,            null)
 STACK_SUBTYPES(stainlesssteel, "stainless steel",               solid/metal/stainlesssteel,  ingot,            null)
 STACK_SUBTYPES(ice,            "ice",                           liquid/water,                cubes,            null)
+STACK_SUBTYPES(nutriment,      "nutriment",                     liquid/nutriment,            segment,          null)
 
 STACK_SUBTYPES(cloth,          "cloth",                         solid/organic/cloth,         bolt,             null)
 STACK_SUBTYPES(yellow,         "yellow cloth",                  solid/organic/cloth,         bolt/yellow,      null)
