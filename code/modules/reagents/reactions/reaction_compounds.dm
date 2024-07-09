@@ -1,6 +1,5 @@
 /decl/chemical_reaction/compound
 	abstract_type = /decl/chemical_reaction/compound
-	reaction_category = REACTION_TYPE_COMPOUND
 
 /decl/chemical_reaction/compound/surfactant
 	name = "Azosurfactant"

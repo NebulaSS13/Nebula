@@ -444,7 +444,7 @@ default behaviour is:
 	if(!isturf(loc))
 		for(var/G in get_active_grabs())
 			qdel(G)
-			return
+		return
 
 	if(isturf(old_loc))
 		for(var/atom/movable/AM as anything in ret_grab())
