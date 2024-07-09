@@ -12,6 +12,7 @@
 cd $SERVERDIR
 
 cleanup() { # $1: server pid
+	cd $SERVERDIR
 	rm server_running
 	[[ $1 != "" ]] && kill -s SIGTERM $1
 }
