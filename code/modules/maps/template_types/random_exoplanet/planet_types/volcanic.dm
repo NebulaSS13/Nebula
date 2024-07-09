@@ -99,8 +99,7 @@
 		/datum/level_data/planetoid/exoplanet/underground
 	)
 	possible_themes = list(
-		/datum/exoplanet_theme/mountains = 100,
-		/datum/exoplanet_theme = 90,
+		/datum/exoplanet_theme/mountains = 190,
 		/datum/exoplanet_theme/robotic_guardians = 10
 	)
 
