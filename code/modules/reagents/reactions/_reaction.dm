@@ -14,7 +14,7 @@
 	var/reaction_sound = 'sound/effects/bubbles.ogg'
 	var/lore_text
 	var/mechanics_text
-	var/reaction_category
+	var/reaction_category = REACTION_TYPE_COMPOUND
 	/// Flags used when reaction processing.
 	var/chemical_reaction_flags = 0
 

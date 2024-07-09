@@ -1,5 +1,5 @@
 // Admin object possession
-/datum/movement_handler/mob/admin_possess/DoMove(var/direction)
+/datum/movement_handler/mob/admin_possess/DoMove(direction, mob/mover, is_external)
 	if(QDELETED(mob.control_object))
 		return MOVEMENT_REMOVE
 
@@ -13,7 +13,7 @@
 		control_object.set_dir(direction)
 
 // Death handling
-/datum/movement_handler/mob/death/DoMove(var/direction, var/mob/mover)
+/datum/movement_handler/mob/death/DoMove(direction, mob/mover, is_external)
 	if(mob != mover || mob.stat != DEAD)
 		return
 
@@ -25,7 +25,7 @@
 	mob.ghostize()
 
 // Incorporeal/Ghost movement
-/datum/movement_handler/mob/incorporeal/DoMove(var/direction, var/mob/mover)
+/datum/movement_handler/mob/incorporeal/DoMove(direction, mob/mover, is_external)
 	. = MOVEMENT_HANDLED
 	direction = mob.AdjustMovementDirection(direction, mover)
 	mob.set_glide_size(0)
@@ -44,7 +44,7 @@
 	return
 
 // Eye movement
-/datum/movement_handler/mob/eye/DoMove(var/direction, var/mob/mover)
+/datum/movement_handler/mob/eye/DoMove(direction, mob/mover, is_external)
 	if(IS_NOT_SELF(mover)) // We only care about direct movement
 		return
 	if(!mob.eyeobj)
@@ -52,7 +52,7 @@
 	mob.eyeobj.EyeMove(direction)
 	return MOVEMENT_HANDLED
 
-/datum/movement_handler/mob/eye/MayMove(var/mob/mover, var/is_external)
+/datum/movement_handler/mob/eye/MayMove(mob/mover, is_external)
 	if(IS_NOT_SELF(mover))
 		return MOVEMENT_PROCEED
 	if(is_external)
@@ -65,29 +65,26 @@
 	var/allow_move
 
 // Space movement
-/datum/movement_handler/mob/space/DoMove(var/direction, var/mob/mover)
-	if(!mob.has_gravity())
-		if(!allow_move)
-			return MOVEMENT_HANDLED
-		if(!mob.space_do_move(allow_move, direction))
-			return MOVEMENT_HANDLED
+/datum/movement_handler/mob/space/DoMove(direction, mob/mover, is_external)
+	if(mob.has_gravity() || (IS_NOT_SELF(mover) && is_external))
+		return
+	if(!allow_move || !mob.space_do_move(allow_move, direction))
+		return MOVEMENT_HANDLED
 
-/datum/movement_handler/mob/space/MayMove(var/mob/mover, var/is_external)
+/datum/movement_handler/mob/space/MayMove(mob/mover, is_external)
 	if(IS_NOT_SELF(mover) && is_external)
 		return MOVEMENT_PROCEED
-
 	if(!mob.has_gravity())
 		allow_move = mob.Process_Spacemove(1)
 		if(!allow_move)
 			return MOVEMENT_STOP
-
 	return MOVEMENT_PROCEED
 
 // Buckle movement
-/datum/movement_handler/mob/buckle_relay/DoMove(var/direction, var/mover)
+/datum/movement_handler/mob/buckle_relay/DoMove(direction, mob/mover, is_external)
 	return mob?.buckled?.handle_buckled_relaymove(src, mob, direction, mover)
 
-/datum/movement_handler/mob/buckle_relay/MayMove(var/mover)
+/datum/movement_handler/mob/buckle_relay/MayMove(mob/mover, is_external)
 	if(mob.buckled)
 		return mob.buckled.MayMove(mover, FALSE) ? (MOVEMENT_PROCEED|MOVEMENT_HANDLED) : MOVEMENT_STOP
 	return MOVEMENT_PROCEED
@@ -104,7 +101,7 @@
 		next_move = world.time + delay
 		mob.set_glide_size(delay)
 
-/datum/movement_handler/mob/delay/MayMove(var/mover, var/is_external)
+/datum/movement_handler/mob/delay/MayMove(mob/mover, is_external)
 	if(IS_NOT_SELF(mover) && is_external)
 		return MOVEMENT_PROCEED
 	return ((mover && mover != mob) ||  world.time >= next_move) ? MOVEMENT_PROCEED : MOVEMENT_STOP
@@ -116,31 +113,35 @@
 	next_move += max(0, delay)
 
 // Stop effect
-/datum/movement_handler/mob/stop_effect/DoMove()
-	if(MayMove() == MOVEMENT_STOP)
+/datum/movement_handler/mob/DoMove(direction, mob/mover, is_external)
+	if(MayMove(mover, is_external) == MOVEMENT_STOP)
 		return MOVEMENT_HANDLED
 
-/datum/movement_handler/mob/stop_effect/MayMove()
+/datum/movement_handler/mob/stop_effect/MayMove(mob/mover, is_external)
 	for(var/obj/effect/stop/S in mob.loc)
 		if(S.victim == mob)
 			return MOVEMENT_STOP
 	return MOVEMENT_PROCEED
 
 // Transformation
-/datum/movement_handler/mob/transformation/MayMove()
+/datum/movement_handler/mob/transformation/MayMove(mob/mover, is_external)
 	return MOVEMENT_STOP
 
 // Consciousness - Is the entity trying to conduct the move conscious?
-/datum/movement_handler/mob/conscious/MayMove(var/mob/mover)
+/datum/movement_handler/mob/conscious/MayMove(mob/mover, is_external)
 	return (mover ? mover.stat == CONSCIOUS : mob.stat == CONSCIOUS) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 // Along with more physical checks
-/datum/movement_handler/mob/physically_capable/MayMove(var/mob/mover)
+/datum/movement_handler/mob/physically_capable/MayMove(mob/mover, is_external)
 	// We only check physical capability if the host mob tried to do the moving
-	return ((mover && mover != mob) || !mob.incapacitated(INCAPACITATION_DISABLED & ~INCAPACITATION_FORCELYING)) ? MOVEMENT_PROCEED : MOVEMENT_STOP
+	if(mover && mover != mob)
+		return MOVEMENT_PROCEED
+	if(mob.incapacitated(INCAPACITATION_DISABLED & ~INCAPACITATION_FORCELYING))
+		return MOVEMENT_STOP
+	return MOVEMENT_PROCEED
 
 // Is anything physically preventing movement?
-/datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
+/datum/movement_handler/mob/physically_restrained/MayMove(mob/mover, is_external)
 	if(istype(mob.buckled) && !mob.buckled.buckle_movable)
 		if(mover == mob)
 			to_chat(mob, SPAN_WARNING("You're buckled to \the [mob.buckled]!"))
@@ -166,7 +167,7 @@
 	return MOVEMENT_PROCEED
 
 // Finally... the last of the mob movement junk
-/datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
+/datum/movement_handler/mob/movement/DoMove(direction, mob/mover, is_external)
 	. = MOVEMENT_HANDLED
 
 	if(!mob || mob.moving)
@@ -203,7 +204,7 @@
 	mob.handle_embedded_and_stomach_objects()
 	mob.moving = FALSE
 
-/datum/movement_handler/mob/movement/MayMove(var/mob/mover)
+/datum/movement_handler/mob/movement/MayMove(mob/mover, is_external)
 	return IS_SELF(mover) &&  mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
 
 /mob/proc/get_stamina_used_per_step()
