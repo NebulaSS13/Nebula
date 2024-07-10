@@ -248,6 +248,7 @@
 
 ///Stop running any processing needed by the planet, and unregister from processors.
 /datum/planetoid_data/proc/end_processing()
+	set waitfor = FALSE
 	if(daycycle_id)
 		SSdaycycle.remove_level(get_linked_level_zs(), daycycle_id)
 
