@@ -98,7 +98,7 @@ var/global/list/_fluid_edge_mask_cache = list()
 	if(updating_edge_mask)
 		return
 	updating_edge_mask = TRUE
-	sleep(-1)
+	sleep(0)
 	updating_edge_mask = FALSE
 
 	if(loc?.reagents?.total_volume <= FLUID_PUDDLE)
