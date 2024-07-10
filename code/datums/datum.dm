@@ -26,13 +26,14 @@
 	if(istype(SSnano))
 		SSnano.close_uis(src)
 
-	var/list/timers = active_timers
-	active_timers = null
-	for(var/thing in timers)
-		var/datum/timedevent/timer = thing
-		if (timer.spent && !(timer.flags & TIMER_LOOP))
-			continue
-		qdel(timer)
+	if(active_timers)
+		var/list/timers = active_timers
+		active_timers = null
+		for(var/thing in timers)
+			var/datum/timedevent/timer = thing
+			if (timer.spent && !(timer.flags & TIMER_LOOP))
+				continue
+			qdel(timer)
 
 	if(extensions)
 		for(var/expansion_key in extensions)
@@ -45,7 +46,7 @@
 
 	var/decl/observ/destroyed/destroyed_event = GET_DECL(/decl/observ/destroyed)
 	// Typecheck is needed (rather than nullchecking) due to oddness with new() ordering during world creation.
-	if(istype(events_repository) && destroyed_event.global_listeners.len || destroyed_event.event_sources[src])
+	if(istype(events_repository) && destroyed_event.event_sources[src])
 		RAISE_EVENT(/decl/observ/destroyed, src)
 
 	if (!isturf(src))	// Not great, but the 'correct' way to do it would add overhead for little benefit.

@@ -8,3 +8,4 @@
 
 /decl/observ/destroyed
 	name = "Destroyed"
+	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS
