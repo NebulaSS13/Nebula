@@ -13,7 +13,7 @@
 
 	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST,UP,DOWN)
 
-/turf/unsimulated/wall/cascade/Initialize(mapload, ...)
+/turf/unsimulated/wall/cascade/New()
 	. = ..()
 	START_PROCESSING(SSturf, src)
 

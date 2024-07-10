@@ -18,6 +18,6 @@
 	icon_state = "water"
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_WET | TURF_IS_HOLOMAP_PATH
 
-/turf/unsimulated/beach/water/Initialize(var/ml)
-	. = ..()
+/turf/unsimulated/beach/water/New()
+	..()
 	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water2","layer"=MOB_LAYER+0.1)

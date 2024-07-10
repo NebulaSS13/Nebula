@@ -9,6 +9,7 @@
 		if(!istype(storage))
 			storage = null
 
+	// This preloader code is also duplicated in /turf/unsimulated/New(). If you change this, be sure to change it there, too.
 	//atom creation method that preloads variables at creation
 	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		global._preloader.load(src)
@@ -65,7 +66,7 @@
 	if(light_power && light_range)
 		update_light()
 
-	if(opacity)
+	if(simulated && opacity)
 		updateVisibility(src)
 		var/turf/T = loc
 		if(istype(T))
@@ -87,7 +88,7 @@
 	LAZYCLEARLIST(priority_overlays)
 	LAZYCLEARLIST(climbers)
 	QDEL_NULL(light)
-	if(opacity)
+	if(simulated && opacity)
 		updateVisibility(src)
 	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
 		QDEL_NULL(atom_codex_ref)
