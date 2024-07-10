@@ -9,6 +9,7 @@
 		if(!istype(storage))
 			storage = null
 
+	// This preloader code is duplicated in /obj/effect/floor_decal/Initialize(). If you change this, be sure to change it there, too.
 	//atom creation method that preloads variables at creation
 	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		global._preloader.load(src)
