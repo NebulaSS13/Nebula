@@ -24,7 +24,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	SSambience.queued += src
+	AMBIENCE_QUEUE_TURF(src)
 
 	//We might be an edge
 	if(y == world.maxy || forced_dirs & NORTH)

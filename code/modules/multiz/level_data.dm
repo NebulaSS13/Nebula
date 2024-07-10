@@ -730,5 +730,5 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 /datum/level_data/proc/update_turf_ambience()
 	if(SSatoms.atom_init_stage >= INITIALIZATION_INNEW_REGULAR)
 		for(var/turf/level_turf as anything in block(locate(level_inner_min_x, level_inner_min_y, level_z), locate(level_inner_max_x, level_inner_max_y, level_z)))
-			level_turf.update_ambient_light_from_z_or_area() // SSambience.queued |= level_turf - seems to be less consistent
+			level_turf.update_ambient_light_from_z_or_area() // AMBIENCE_QUEUE_TURF(level_turf) - seems to be less consistent
 			CHECK_TICK

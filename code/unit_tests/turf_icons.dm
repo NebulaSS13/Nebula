@@ -55,8 +55,8 @@
 		SSair.tiles_to_update    -= floor
 		SSairflow.processing     -= floor
 		SSoverlays.processing    -= floor
-		SSambience.queued        -= floor
 		SSicon_update.queue_refs -= floor
+		AMBIENCE_UNQUEUE_TURF(floor)
 		if(floor.reagents)
 			floor.reagents.clear_reagents()
 			SSmaterials.active_holders -= floor.reagents

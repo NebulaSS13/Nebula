@@ -99,7 +99,7 @@
 	else
 		luminosity = 1
 
-	SSambience.queued += src
+	AMBIENCE_QUEUE_TURF(src)
 
 	if (opacity)
 		has_opaque_atom = TRUE
@@ -150,7 +150,7 @@
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
-	SSambience.queued -= src
+	AMBIENCE_UNQUEUE_TURF(src)
 
 	changing_turf = FALSE
 
@@ -574,7 +574,7 @@
 
 	is_outside = new_outside
 	update_external_atmos_participation()
-	SSambience.queued |= src
+	AMBIENCE_QUEUE_TURF(src)
 
 	if(!skip_weather_update)
 		update_weather()

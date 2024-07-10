@@ -42,7 +42,7 @@
 	. = ..()
 	if(!ml && protects_against_weather)
 		for(var/turf/T in RANGE_TURFS(src, 1))
-			T.update_ambient_light_from_z_or_area()
+			AMBIENCE_QUEUE_TURF(T)
 
 // I hate doing things that aren't cleanup in Destroy(), but this should still update even when admin-deleted.
 /obj/structure/flora/tree/Destroy()
@@ -50,7 +50,7 @@
 	. = ..()
 	if(protects_against_weather)
 		for(var/turf/T in turfs_to_update)
-			T.update_ambient_light_from_z_or_area()
+			AMBIENCE_QUEUE_TURF(T)
 
 /obj/structure/flora/tree/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()

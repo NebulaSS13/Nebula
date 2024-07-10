@@ -159,9 +159,9 @@ var/global/list/areas = list()
 
 	if(T.is_outside() != old_outside)
 		T.update_weather()
-		SSambience.queued |= T
+		AMBIENCE_QUEUE_TURF(T)
 	else if(A.interior_ambient_light_modifier != old_area_ambience)
-		SSambience.queued |= T
+		AMBIENCE_QUEUE_TURF(T)
 
 /turf/proc/update_registrations_on_adjacent_area_change()
 	for(var/obj/machinery/door/firedoor/door in src)
