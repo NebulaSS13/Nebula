@@ -29,10 +29,7 @@ var/global/list/wall_fullblend_objects = list(
 	explosion_resistance = 10
 	color = COLOR_STEEL
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
-	initial_gas = list(
-		/decl/material/gas/oxygen = MOLES_O2STANDARD,
-		/decl/material/gas/nitrogen = MOLES_N2STANDARD
-	)
+	initial_gas = GAS_STANDARD_AIRMIX
 	zone_membership_candidate = TRUE
 
 	/// If set, will prevent merges between walls with different IDs.

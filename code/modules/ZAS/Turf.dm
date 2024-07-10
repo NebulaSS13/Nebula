@@ -223,6 +223,11 @@
 		return TRUE
 	return FALSE
 
+var/global/list/STANDARD_AIRMIX = list(
+	/decl/material/gas/oxygen = MOLES_O2STANDARD,
+	/decl/material/gas/nitrogen = MOLES_N2STANDARD
+)
+
 /turf/return_air()
 	RETURN_TYPE(/datum/gas_mixture)
 
@@ -259,7 +264,10 @@
 	air = new/datum/gas_mixture
 	air.temperature = temperature
 	if(initial_gas)
-		air.gas = initial_gas.Copy()
+		if(initial_gas == GAS_STANDARD_AIRMIX)
+			air.gas = global.STANDARD_AIRMIX.Copy()
+		else
+			air.gas = initial_gas.Copy()
 	air.update_values()
 	return air
 

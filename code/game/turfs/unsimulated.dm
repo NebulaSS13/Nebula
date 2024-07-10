@@ -1,9 +1,6 @@
 /turf/unsimulated
 	name = "command"
-	initial_gas = list(
-		/decl/material/gas/oxygen = MOLES_O2STANDARD,
-		/decl/material/gas/nitrogen = MOLES_N2STANDARD
-	)
+	initial_gas = GAS_STANDARD_AIRMIX
 	abstract_type = /turf/unsimulated
 	simulated = FALSE
 
