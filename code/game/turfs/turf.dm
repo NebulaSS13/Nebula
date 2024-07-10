@@ -110,7 +110,8 @@
 	else if (permit_ao)
 		queue_ao()
 
-	updateVisibility(src, FALSE)
+	if(simulated)
+		updateVisibility(src, FALSE)
 
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
