@@ -27,6 +27,10 @@
 	// We care about our own moved event in case of structural failure.
 	events_repository.register(/decl/observ/moved, src, src, PROC_REF(check_stack_failure))
 
+/obj/item/pizzabox/Destroy()
+	events_repository.unregister(/decl/observ/moved, src, src)
+	return ..()
+
 /obj/item/pizzabox/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && length(stacked_boxes))
 		var/i = 1
