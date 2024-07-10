@@ -66,6 +66,7 @@
 	var/old_open_turf_type =   open_turf_type
 	var/old_affecting_heat_sources = affecting_heat_sources
 	var/old_height =           get_physical_height()
+	var/old_alpha_mask_state = get_movable_alpha_mask_state(null)
 
 	var/old_ambience =         ambient_light
 	var/old_ambience_mult =    ambient_light_multiplier
@@ -174,8 +175,9 @@
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)
 
-	for(var/atom/movable/AM in W.contents)
-		AM.update_turf_alpha_mask()
+	if(old_alpha_mask_state != get_movable_alpha_mask_state(null))
+		for(var/atom/movable/AM as anything in W)
+			AM.update_turf_alpha_mask()
 
 /turf/proc/transport_properties_from(turf/other, transport_air)
 	if(transport_air && can_inherit_air && (other.zone || other.air))
