@@ -13,7 +13,7 @@
 		return
 
 	// Acquire the list of not-yet utilized overmap turfs on this Z-level
-	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z),locate(overmap.map_size_x - OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE, overmap.assigned_z))
+	var/list/candidate_turfs = block(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z, overmap.map_size_x - OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE, overmap.assigned_z)
 	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap)
 
 	for(var/i = 1 to overmap.event_areas)

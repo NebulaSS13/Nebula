@@ -83,7 +83,7 @@
 	// Attempt to find a safe and random overmap turf to start on
 	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
 	var/list/candidates = list()
-	for(var/turf/T in block(locate(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z), locate(overmap.map_size_x - 1, overmap.map_size_y - 1, overmap.assigned_z)))
+	for(var/turf/T as anything in block(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z, overmap.map_size_x - 1, overmap.map_size_y - 1, overmap.assigned_z))
 		if(locate(/obj/effect/overmap) in T)
 			continue
 		candidates += T

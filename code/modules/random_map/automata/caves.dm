@@ -66,8 +66,7 @@
 	var/tmp_cell
 	var/new_path
 	var/num_applied = 0
-	for (var/thing in block(locate(origin_x, origin_y, origin_z), locate(limit_x, limit_y, origin_z)))
-		var/turf/T = thing
+	for (var/turf/T as anything in block(origin_x, origin_y, origin_z, limit_x, limit_y, origin_z))
 		if (!T || (target_turf_type && !istype(T, target_turf_type)))
 			continue
 		tmp_cell = TRANSLATE_COORD(T.x, T.y)

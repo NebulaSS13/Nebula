@@ -16,7 +16,7 @@
 	var/num_craters = round(min(0.5, rand()) * 0.02 * LD.level_inner_width * LD.level_inner_height)
 
 	//Grab all turfs that are within the level's borders
-	var/list/available_turfs = block(locate(LD.level_inner_min_x, LD.level_inner_min_y, LD.level_z), locate(LD.level_inner_max_x, LD.level_inner_max_y, LD.level_z))
+	var/list/available_turfs = block(LD.level_inner_min_x, LD.level_inner_min_y, LD.level_z, LD.level_inner_max_x, LD.level_inner_max_y, LD.level_z)
 	var/list/picked_turfs = list()
 
 	//Manually filter out turfs

@@ -63,7 +63,8 @@
 /obj/abstract/weather_system/Destroy()
 	// Clean ourselves out of the vis_contents of our affected turfs.
 	for(var/tz in affecting_zs)
-		for(var/turf/T as anything in block(locate(1, 1, tz), locate(world.maxx, world.maxy, tz)))
+		var/datum/level_data/level = SSmapping.levels_by_z[tz]
+		for(var/turf/T as anything in block(level.level_inner_min_x, level.level_inner_min_y, tz, level.level_inner_max_x, level.level_inner_max_y, tz))
 			if(T.weather == src)
 				T.weather = null
 				T.update_vis_contents()

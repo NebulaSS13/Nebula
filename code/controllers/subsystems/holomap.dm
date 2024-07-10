@@ -74,7 +74,7 @@ SUBSYSTEM_DEF(minimap)
 	if(world.maxy + offset_y > canvas.Height())
 		CRASH("Minimap for z=[zlevel] : world.maxy ([world.maxy]) + holomap_offset_y ([offset_y]) must be <= [canvas.Height()]")
 
-	for(var/turf/tile as anything in BLOCK_TURFS(1,1,world.maxx,world.maxy,zlevel))
+	for(var/turf/tile as anything in Z_ALL_TURFS(zlevel))
 		var/area/A = get_area(tile)
 		if ((A && (A.area_flags & AREA_FLAG_HIDE_FROM_HOLOMAP)) || (tile.turf_flags & TURF_IS_HOLOMAP_ROCK))
 			continue

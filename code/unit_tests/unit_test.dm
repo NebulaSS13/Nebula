@@ -121,7 +121,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 		z_levels |= space.z
 
 		for(var/z_level in z_levels)
-			for(var/T in block(locate(1, 1, z_level), locate(world.maxx, world.maxy, z_level)))
+			for(var/T in Z_ALL_TURFS(z_level))
 				for(var/atom in T)
 					if(is_type_in_list(atom, ignored_types))
 						continue
