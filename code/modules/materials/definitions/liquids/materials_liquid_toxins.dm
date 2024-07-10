@@ -257,6 +257,15 @@
 		else if (prob(10))
 			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
 
+/decl/material/liquid/acrylamide
+	name = "acrylamide"
+	uid = "liquid_acrylamide"
+	lore_text = "A colourless substance formed when food is burned. Rumoured to cause cancer, but mostly just nasty to eat."
+	taste_description = "bitter char"
+	color = "#a39894"
+	toxicity = 2
+	taste_mult = 2
+
 /decl/material/liquid/bromide
 	name = "bromide"
 	codex_name = "elemental bromide"

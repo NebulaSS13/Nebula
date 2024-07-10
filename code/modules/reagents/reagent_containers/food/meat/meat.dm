@@ -191,7 +191,7 @@
 
 /obj/item/chems/food/organ
 	name = "organ"
-	desc = "It's good for you."
+	desc = "It's good for you, probably."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "appendix"
 	filling_color = "#e00d34"
@@ -201,7 +201,7 @@
 /obj/item/chems/food/organ/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/protein, rand(3,5))
-	add_to_reagents(/decl/material/liquid/bromide,           rand(1,3)) //lolwat?
+	add_to_reagents(/decl/material/gas/ammonia,              rand(1,3)) // you probably should not be eating raw organ meat
 
 /obj/item/chems/food/meatkabob
 	name = "meat-kabob"

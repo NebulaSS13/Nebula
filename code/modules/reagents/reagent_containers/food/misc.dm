@@ -8,8 +8,8 @@
 
 /obj/item/chems/food/badrecipe/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/protein, 1)
-	add_to_reagents(/decl/material/solid/carbon,             3)
+	add_to_reagents(/decl/material/liquid/acrylamide, 1)
+	add_to_reagents(/decl/material/solid/carbon,      3)
 
 /obj/item/chems/food/stuffing
 	name = "stuffing"
