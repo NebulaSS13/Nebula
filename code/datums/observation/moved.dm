@@ -20,6 +20,13 @@
 	if(. && istype(mover.loc, expected_type))
 		register(mover.loc, mover, TYPE_PROC_REF(/atom/movable, recursive_move))
 
+/decl/observ/moved/unregister(var/atom/movable/mover, var/datum/listener, var/proc_call)
+	. = ..()
+
+	// Unregister from the parent if possible.
+	if(. && istype(mover.loc, expected_type))
+		unregister(mover.loc, mover, TYPE_PROC_REF(/atom/movable, recursive_move))
+
 /********************
 * Movement Handling *
 ********************/
