@@ -16,6 +16,11 @@
 		global._preloader.load(src)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
+/turf/unsimulated/ChangeTurf(turf/N, tell_universe, force_lighting_update, keep_air, update_open_turfs_above, keep_height)
+	if(!SSmapping.initialized)
+		atom_flags = 0 // We want ChangeTurf to treat us as if we aren't initialized if SSmapping isn't done.
+	return ..()
+
 /turf/unsimulated/Initialize(mapload)
 	SHOULD_CALL_PARENT(FALSE)
 	SHOULD_NOT_OVERRIDE(TRUE)
