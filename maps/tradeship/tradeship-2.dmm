@@ -7005,7 +7005,7 @@
 	announcementConsole = 1;
 	department = "Captain";
 	pixel_y = -32;
-	dir = 1
+	dir = 2;
 	},
 /obj/item/radio/intercom{
 	dir = 4;
