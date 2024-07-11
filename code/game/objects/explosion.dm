@@ -64,7 +64,7 @@
 	var/x0 = epicenter.x
 	var/y0 = epicenter.y
 	var/z0 = epicenter.z
-	for(var/turf/T in RANGE_TURFS(epicenter, max_range))
+	for(var/turf/T as anything in RANGE_TURFS(epicenter, max_range))
 		var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 		if(dist < devastation_range)
 			dist = 1
@@ -206,7 +206,7 @@
 		if (T.type == /turf/space)	// Equality is faster than istype.
 			reception = EXPLFX_NONE
 
-			for (var/turf/THING in RANGE_TURFS(M, 1))
+			for (var/turf/THING as anything in RANGE_TURFS(M, 1))
 				reception |= EXPLFX_SHAKE
 				break
 

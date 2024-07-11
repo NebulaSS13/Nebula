@@ -61,7 +61,7 @@
 	// Unlit turfs will have corners if they have a lit neighbor -- don't generate corners for them, but do update them if they're there.
 	// if (!corners)
 	// 	var/force_build_corners = FALSE
-	// 	for (var/turf/T in RANGE_TURFS(src, 1))
+	// 	for (var/turf/T as anything in RANGE_TURFS(src, 1))
 	// 		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 	// 			force_build_corners = TRUE
 	// 			break

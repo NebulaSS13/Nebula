@@ -203,7 +203,7 @@
 						W.germ_level += 1
 
 /mob/living/human/proc/Check_Proppable_Object()
-	for(var/turf/T in RANGE_TURFS(src, 1)) //we only care for non-space turfs
+	for(var/turf/T as anything in RANGE_TURFS(src, 1)) //we only care for non-space turfs
 		if(T.density && T.simulated)	//walls work
 			return 1
 

@@ -147,7 +147,7 @@
 	var/turf/origin = get_turf(O)
 	if(!origin)
 		return
-	for(var/turf/T in RANGE_TURFS(origin, effective_range))
+	for(var/turf/T as anything in RANGE_TURFS(origin, effective_range))
 		for(var/obj/effect/overmap/other in get_turf(T))
 			. |= other
 
@@ -195,7 +195,7 @@
 	var/turf/T = loc
 	if(!istype(T))
 		return FALSE
-	for(var/turf/neighbor in RANGE_TURFS(T, 1))
+	for(var/turf/neighbor as anything in RANGE_TURFS(T, 1))
 		if(istype(neighbor, /turf/space) || neighbor.is_outside())
 			return TRUE
 	return FALSE

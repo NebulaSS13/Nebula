@@ -53,7 +53,7 @@ SUBSYSTEM_DEF(ambience)
 	var/lit = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	// If we're not, we want ambient light if one of our neighbors needs to show spillover from corners.
 	if(!lit)
-		for(var/turf/T in RANGE_TURFS(src, 1))
+		for(var/turf/T as anything in RANGE_TURFS(src, 1))
 			// Fuck if I know how these turfs are located in an area that is not an area.
 			if(isloc(T.loc) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 				lit = TRUE

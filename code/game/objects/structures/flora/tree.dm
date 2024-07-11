@@ -41,7 +41,7 @@
 /obj/structure/flora/tree/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	if(!ml && protects_against_weather)
-		for(var/turf/T in RANGE_TURFS(src, 1))
+		for(var/turf/T as anything in RANGE_TURFS(src, 1))
 			AMBIENCE_QUEUE_TURF(T)
 
 // I hate doing things that aren't cleanup in Destroy(), but this should still update even when admin-deleted.

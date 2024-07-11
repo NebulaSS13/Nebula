@@ -1684,7 +1684,7 @@ default behaviour is:
 		. += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
 
 /mob/living/proc/find_mob_supporting_object()
-	for(var/turf/T in RANGE_TURFS(src, 1))
+	for(var/turf/T as anything in RANGE_TURFS(src, 1))
 		if(T.density && T.simulated)
 			return TRUE
 	for(var/obj/O in orange(1, src))
