@@ -22,7 +22,7 @@ var/global/list/all_warrants
 /datum/nano_module/program/proc/get_warrants(list/accesses, mob/user)
 	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
-		return network.get_all_files_of_type(/datum/computer_file/report/warrant, accesses, user)
+		return network.get_all_files_of_type(/datum/computer_file/report/warrant, accesses = accesses)
 
 /datum/nano_module/program/proc/remove_warrant(datum/computer_file/report/warrant/W, list/accesses, mob/user)
 	var/datum/computer_network/network = program?.computer?.get_network()
@@ -84,9 +84,9 @@ var/global/list/all_warrants
 		. = 1
 		var/datum/computer_file/report/warrant/W
 		if(href_list["addwarrant"] == "arrest")
-			W = new /datum/computer_file/report/warrant/arrest()
+			W = new /datum/computer_file/report/warrant/arrest
 		else
-			W = new /datum/computer_file/report/warrant/search()
+			W = new /datum/computer_file/report/warrant/search
 		active = W
 
 	if(href_list["savewarrant"])
@@ -94,7 +94,7 @@ var/global/list/all_warrants
 		if(!active)
 			return
 		broadcast_security_hud_message("[active.get_broadcast_summary()] has been [(active in global.all_warrants) ? "edited" : "uploaded"].", nano_host())
-		
+
 		var/success = save_warrant(active, accesses, usr)
 		if(success != OS_FILE_SUCCESS)
 			to_chat(usr, SPAN_WARNING("Could not save warrant. You may lack access to the file servers."))
