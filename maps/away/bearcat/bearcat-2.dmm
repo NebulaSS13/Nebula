@@ -147,7 +147,8 @@
 	announcementConsole = 1;
 	department = "Captain";
 	pixel_x = 32;
-	initial_network_id = "freightnet_0451"
+	initial_network_id = "freightnet_0451";
+	dir = 4;
 	},
 /obj/structure/bed/chair{
 	dir = 1

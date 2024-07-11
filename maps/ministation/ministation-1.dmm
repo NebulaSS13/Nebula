@@ -214,7 +214,7 @@
 	},
 /obj/machinery/network/requests_console{
 	department = "Detective's office";
-	pixel_x = 30;
+	pixel_x = 32;
 	initial_network_id = "molluscnet";
 	dir = 4
 	},

@@ -1977,7 +1977,8 @@
 /obj/machinery/network/requests_console{
 	department = "Security";
 	name = "Security RC";
-	pixel_x = 30
+	pixel_x = 32;
+	dir = 4;
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 4
@@ -3258,7 +3259,8 @@
 	announcementConsole = 1;
 	department = "Head of Security's Desk";
 	name = "Head of Security RC";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/crew_quarters/heads/hos)
@@ -6750,7 +6752,8 @@
 /obj/machinery/network/requests_console{
 	department = "Security";
 	name = "Security RC";
-	pixel_x = 30
+	pixel_x = 32;
+	dir = 4;
 	},
 /turf/simulated/floor/lino,
 /area/exodus/security/detectives_office)
@@ -7161,7 +7164,8 @@
 /obj/machinery/network/requests_console{
 	department = "Internal Affairs";
 	name = "Internal Affairs RC";
-	pixel_x = 30
+	pixel_x = 32;
+	dir = 4;
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
@@ -9440,7 +9444,8 @@
 	},
 /obj/machinery/network/requests_console{
 	department = "Crew Quarters";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/exodus/crew_quarters/sleep/cryo)
@@ -13235,7 +13240,8 @@
 "aBZ" = (
 /obj/machinery/network/requests_console{
 	department = "EVA";
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8;
 	},
 /obj/machinery/light{
 	dir = 8
@@ -13996,7 +14002,8 @@
 /obj/structure/table,
 /obj/machinery/network/requests_console{
 	department = "Tool Storage";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/random/tech_supply,
 /obj/random/tech_supply,
@@ -14983,7 +14990,8 @@
 "aFH" = (
 /obj/machinery/network/requests_console{
 	department = "Security";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/light_switch{
 	pixel_x = 27;
@@ -15901,7 +15909,8 @@
 	},
 /obj/machinery/network/requests_console{
 	department = "Chapel";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/lino,
@@ -17553,7 +17562,8 @@
 /obj/machinery/network/requests_console{
 	department = "Bar";
 	name = "Bar RC";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/vending/boozeomat,
 /turf/simulated/floor/lino,
@@ -23719,7 +23729,8 @@
 /obj/structure/closet/wardrobe/grey,
 /obj/machinery/network/requests_console{
 	department = "Locker Room";
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8;
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exodus/crew_quarters/locker)
@@ -23909,7 +23920,8 @@
 	announcementConsole = 1;
 	department = "Bridge";
 	name = "Bridge RC";
-	pixel_y = -30
+	pixel_y = -32;
+	dir = 2;
 	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -26818,7 +26830,8 @@
 /obj/machinery/network/requests_console{
 	department = "Kitchen";
 	name = "Kitchen RC";
-	pixel_y = -30
+	pixel_y = -32;
+	dir = 2;
 	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -27275,7 +27288,8 @@
 /obj/item/stack/package_wrap/fifty,
 /obj/machinery/network/requests_console{
 	department = "Cargo Bay";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/effect/floor_decal/corner/white{
 	dir = 4
@@ -28641,8 +28655,8 @@
 	},
 /obj/machinery/network/requests_console{
 	department = "AI";
-	pixel_x = -32;
-	pixel_y = 32
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/structure/cable/cyan{
 	icon_state = "0-2"
@@ -29863,7 +29877,8 @@
 	announcementConsole = 1;
 	department = "Bridge";
 	name = "Bridge RC";
-	pixel_y = -30
+	pixel_y = -32;
+	dir = 2;
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -30564,7 +30579,8 @@
 	announcementConsole = 1;
 	department = "Captain's Desk";
 	name = "Captain RC";
-	pixel_x = -30
+	pixel_x = -32;
+	dir = 8;
 	},
 /obj/structure/filing_cabinet,
 /turf/simulated/floor/wood/walnut,
@@ -30736,7 +30752,8 @@
 /obj/machinery/network/requests_console{
 	department = "Robotics";
 	name = "Robotics RC";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/light{
 	dir = 1
@@ -31666,7 +31683,8 @@
 	},
 /obj/machinery/network/requests_console{
 	department = "Cargo Bay";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/steel_grid,
@@ -35903,7 +35921,8 @@
 /obj/machinery/network/requests_console{
 	department = "Science";
 	name = "Science Requests Console";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/structure/table{
 	name = "plastic table frame"
@@ -36697,7 +36716,8 @@
 "bzv" = (
 /obj/machinery/network/requests_console{
 	department = "Cargo Bay";
-	pixel_x = -30
+	pixel_x = -32;
+	dir = 8;
 	},
 /obj/machinery/camera/network/civilian_west{
 	c_tag = "Cargo Office";
@@ -39296,7 +39316,8 @@
 	announcementConsole = 1;
 	department = "Head of Personnel's Desk";
 	name = "Head of Personnel RC";
-	pixel_y = -30
+	pixel_y = -32;
+	dir = 2;
 	},
 /obj/machinery/camera/network/command{
 	c_tag = "Bridge - HoP's Office";
@@ -40400,7 +40421,8 @@
 /obj/machinery/network/requests_console{
 	department = "Medbay";
 	name = "Medbay RC";
-	pixel_y = 30
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -40918,8 +40940,8 @@
 "bHE" = (
 /obj/machinery/network/requests_console{
 	department = "Cargo Bay";
-	pixel_x = -30;
-	pixel_y = 32
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/steel_grid,
@@ -41652,7 +41674,8 @@
 /obj/item/pen,
 /obj/machinery/network/requests_console{
 	department = "Cargo Bay";
-	pixel_x = -30
+	pixel_x = -32;
+	dir = 8;
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
@@ -44966,8 +44989,8 @@
 	announcementConsole = 1;
 	department = "Chief Medical Officer's Desk";
 	name = "Chief Medical Officer RC";
-	pixel_x = -34;
-	pixel_y = 2
+	pixel_x = -32;
+	dir = 8;
 	},
 /obj/machinery/camera/network/medbay{
 	c_tag = "Medbay - CMO's Office";
@@ -45184,7 +45207,8 @@
 /obj/machinery/network/requests_console{
 	department = "Science";
 	name = "Science Requests Console";
-	pixel_x = 30
+	pixel_x = 32;
+	dir = 4;
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
@@ -45489,7 +45513,8 @@
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/machinery/network/requests_console{
 	department = "Janitorial";
-	pixel_y = -29
+	pixel_y = -32;
+	dir = 2;
 	},
 /obj/item/chems/spray/cleaner,
 /obj/structure/table/steel,
@@ -46487,7 +46512,8 @@
 	},
 /obj/machinery/network/requests_console{
 	department = "Tech storage";
-	pixel_x = 28
+	pixel_x = 32;
+	dir = 4;
 	},
 /turf/simulated/floor/plating,
 /area/exodus/storage/tech)
@@ -48572,7 +48598,8 @@
 	announcementConsole = 1;
 	department = "Chief Engineer's Desk";
 	name = "Chief Engineer RC";
-	pixel_y = 34
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/newscaster{
 	pixel_x = -28;
@@ -50671,7 +50698,8 @@
 /obj/machinery/network/requests_console{
 	department = "Science";
 	name = "Science Requests Console";
-	pixel_y = 28
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/machinery/camera/network/research{
 	c_tag = "Xenobiology North"
@@ -55209,7 +55237,8 @@
 /obj/machinery/network/requests_console{
 	department = "Science";
 	name = "Science Requests Console";
-	pixel_x = 30
+	pixel_x = 32;
+	dir = 4;
 	},
 /obj/effect/floor_decal/corner/purple{
 	dir = 8
@@ -56098,7 +56127,8 @@
 /obj/machinery/network/requests_console{
 	department = "Engineering";
 	name = "Engineering RC";
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 2;
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/foyer)
@@ -59967,7 +59997,8 @@
 	announcementConsole = 1;
 	department = "Research Director's Desk";
 	name = "Research Director RC";
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4;
 	},
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -60260,7 +60291,8 @@
 /obj/machinery/network/requests_console{
 	department = "Virology";
 	name = "Virology Requests Console";
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8;
 	},
 /obj/structure/table/glass,
 /obj/effect/floor_decal/corner/lime{
@@ -60349,7 +60381,8 @@
 /obj/machinery/network/requests_console{
 	department = "Engineering";
 	name = "Engineering RC";
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 2;
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
@@ -64151,7 +64184,8 @@
 "oWh" = (
 /obj/machinery/network/requests_console{
 	department = "Arrival shuttle";
-	pixel_y = -30
+	pixel_y = -32;
+	dir = 2;
 	},
 /obj/effect/floor_decal/corner/white{
 	dir = 10
