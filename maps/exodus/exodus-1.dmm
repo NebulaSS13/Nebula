@@ -3495,7 +3495,8 @@
 /obj/machinery/network/requests_console{
 	department = "Atmospherics";
 	name = "Atmos RC";
-	pixel_y = 28
+	pixel_y = 32;
+	dir = 1;
 	},
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled/steel_grid,

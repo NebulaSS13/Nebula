@@ -1735,7 +1735,8 @@
 /obj/machinery/network/requests_console{
 	icon_state = "req_comp_rewired";
 	pixel_y = -32;
-	stat = 1
+	stat = 1;
+	dir = 2;
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
