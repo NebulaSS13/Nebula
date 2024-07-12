@@ -470,6 +470,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/can_buckle_mob(var/mob/living/dropping)
 	. = ..() && can_have_rider && (dropping.mob_size <= max_rider_size)
 
+// Simplemobs have to hang out in the rain so make them immune to weather effects (like hail).
+/mob/living/simple_animal/handle_weather_effects()
+	SHOULD_CALL_PARENT(FALSE)
+
 /mob/living/simple_animal/get_available_postures()
 	var/static/list/available_postures = list(
 		/decl/posture/standing,
