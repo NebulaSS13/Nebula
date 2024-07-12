@@ -35,6 +35,9 @@
 /turf/floor/natural/get_plant_growth_rate()
 	return 0.1
 
+/turf/floor/natural/is_plating()
+	return FALSE
+
 /turf/floor/natural/Initialize(mapload, no_update_icon = FALSE)
 
 	if(base_color)

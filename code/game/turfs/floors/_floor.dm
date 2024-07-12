@@ -41,6 +41,8 @@
 	return TRUE
 
 /turf/floor/is_plating()
+	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
+		return !initial_flooring
 	return !flooring
 
 /turf/floor/get_base_movement_delay(var/travel_dir, var/mob/mover)
