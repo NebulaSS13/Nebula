@@ -29,7 +29,7 @@
 		name = get_product_name()
 	if(required_technology == TRUE)
 		if(ispath(path, /obj/item))
-			required_technology = cached_json_decode(atom_info_repository.get_origin_tech_for(path, amount = 1))
+			required_technology = atom_info_repository.get_origin_tech_for(path, amount = 1)
 		if(!islist(required_technology))
 			required_technology = list()
 	if(!resources)

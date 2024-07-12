@@ -151,7 +151,7 @@
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
-	AMBIENCE_UNQUEUE_TURF(src)
+	AMBIENCE_DEQUEUE_TURF(src)
 
 	changing_turf = FALSE
 

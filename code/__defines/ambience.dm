@@ -4,7 +4,7 @@
 		SSambience.queued += T; \
 	}
 
-#define AMBIENCE_UNQUEUE_TURF(T) \
+#define AMBIENCE_DEQUEUE_TURF(T) \
 	if(T.ambience_queued) { \
 		T.ambience_queued = FALSE; \
 		SSambience.queued -= T; \

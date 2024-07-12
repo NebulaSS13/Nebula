@@ -42,7 +42,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 		matter_mult_cache[key] = obj_instance.get_matter_amount_modifier()
 	if(!origin_tech_cache[key] && ispath(path, /obj/item))
 		var/obj/item/item_instance = instance || get_instance_of(path, material, amount)
-		origin_tech_cache[key] = item_instance.get_origin_tech()
+		origin_tech_cache[key] = cached_json_decode(item_instance.get_origin_tech())
 	if(!QDELETED(instance))
 		qdel(instance)
 
