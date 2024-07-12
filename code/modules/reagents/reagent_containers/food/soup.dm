@@ -128,7 +128,7 @@
 		),
 		list(
 			/decl/material/solid/carbon =              10,
-			/decl/material/liquid/bromide =            10
+			/decl/material/liquid/acrylamide =         10
 		),
 		list(
 			/decl/material/liquid/nutriment =           5,

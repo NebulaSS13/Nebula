@@ -8,8 +8,10 @@
 	var/obj/item/organ/organ      // Organ associated with the ailment (ailment is in organ.ailments list).
 
 	// Requirements before applying to a target.
-	var/list/applies_to_organ         // What organ tags (BP_HEAD, etc) is the ailment valid for?
-	var/affects_robotics = FALSE      // Does the ailment affect prosthetics specifically or flesh?
+	var/list/applies_to_organ          // What organ tags (BP_HEAD, etc) is the ailment valid for?
+	var/applies_to_prosthetics = FALSE // Does the ailment affect prosthetic or non-prosthetic limbs?
+	var/applies_to_robotics    = FALSE // Does the ailment affect robotic limbs?
+	var/applies_to_crystalline = FALSE // Does the ailment affect crystalline limbs?
 	var/specific_organ_subtype = /obj/item/organ/external // What organ subtype, if any, does the ailment apply to?
 
 	// Treatment types
@@ -41,7 +43,11 @@
 /datum/ailment/proc/can_apply_to(var/obj/item/organ/_organ)
 	if(specific_organ_subtype && !istype(_organ, specific_organ_subtype))
 		return FALSE
-	if(affects_robotics != !!(BP_IS_PROSTHETIC(_organ)))
+	if(!isnull(applies_to_prosthetics) && (applies_to_prosthetics != !!BP_IS_PROSTHETIC(_organ)))
+		return FALSE
+	if(!isnull(applies_to_robotics) && (applies_to_robotics != !!BP_IS_ROBOTIC(_organ)))
+		return FALSE
+	if(!isnull(applies_to_crystalline) && (applies_to_crystalline != !!BP_IS_CRYSTAL(_organ)))
 		return FALSE
 	if(length(applies_to_organ) && !(_organ?.organ_tag in applies_to_organ))
 		return FALSE

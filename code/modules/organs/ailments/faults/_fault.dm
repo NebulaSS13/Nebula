@@ -1,5 +1,6 @@
 /datum/ailment/fault
-	affects_robotics = TRUE
+	applies_to_robotics    = TRUE
+	applies_to_prosthetics = TRUE
 	category = /datum/ailment/fault
 	treated_by_item_type = list(
 		/obj/item/stack/nanopaste,
