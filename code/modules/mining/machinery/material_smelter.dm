@@ -24,30 +24,11 @@
 	create_reagents(INFINITY)
 	queue_temperature_atoms(src)
 
-// Outgas anything that is in gas form. Check what you put into the smeltery, nerds.
+// Update displayed materials
 /obj/machinery/material_processing/smeltery/on_reagent_change()
 
 	if(!(. = ..()) || !reagents)
 		return
-
-	var/datum/gas_mixture/environment = loc?.return_air()
-	if(!environment)
-		return
-
-	var/adjusted_air = FALSE
-	for(var/mtype in reagents?.reagent_volumes)
-		var/decl/material/mat = GET_DECL(mtype)
-		if(!isnull(mat.boiling_point) && temperature >= mat.boiling_point)
-			adjusted_air = TRUE
-			var/removing = REAGENT_VOLUME(reagents, mtype)
-			remove_from_reagents(mtype, removing, defer_update = TRUE)
-			if(environment)
-				environment.adjust_gas_temp(mtype, (removing * 0.2), temperature, FALSE) // Arbitrary conversion constant, TODO consistent one
-
-	if(adjusted_air)
-		if(environment)
-			environment.update_values()
-		reagents.update_total()
 
 	for(var/mtype in reagents.reagent_volumes)
 		show_materials |= mtype
