@@ -13,7 +13,7 @@
 	var/papers         = 50
 	var/tmp/max_papers = 50
 	var/paper_type     = /obj/item/paper/sticky
-	var/obj/item/paper/top                        //The instanciated paper on the top of the pad, if there's one
+	var/obj/item/paper/top                        //The instantiated paper on the top of the pad, if there's one
 
 /obj/item/sticky_pad/Initialize(ml, material_key)
 	. = ..()
