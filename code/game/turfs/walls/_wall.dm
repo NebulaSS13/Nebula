@@ -168,20 +168,23 @@ var/global/list/wall_fullblend_objects = list(
 /turf/wall/examine(mob/user)
 	. = ..()
 
+	if(!isnull(shutter_state))
+		to_chat(user, SPAN_NOTICE("The shutter is [shutter_state ? "open" : "closed"]."))
+
 	if(!damage)
-		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
+		to_chat(user, SPAN_NOTICE("It looks fully intact."))
 	else
 		var/dam = damage / material.integrity
 		if(dam <= 0.3)
-			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
+			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
 		else if(dam <= 0.6)
-			to_chat(user, "<span class='warning'>It looks moderately damaged.</span>")
+			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
 		else
-			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
+			to_chat(user, SPAN_DANGER("It looks heavily damaged."))
 	if(paint_color)
 		to_chat(user, get_paint_examine_message())
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
+		to_chat(user, SPAN_WARNING("There is fungus growing on [src]."))
 
 /turf/wall/proc/get_paint_examine_message()
 	return SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
