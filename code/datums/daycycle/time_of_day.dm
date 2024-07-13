@@ -1,5 +1,5 @@
-/datum/time_of_day
-	abstract_type = /datum/time_of_day
+/datum/daycycle_period
+	abstract_type = /datum/daycycle_period
 	/// In-character descriptor (ie. 'sunrise')
 	var/name
 	/// Message shown to outdoors players when the daycycle moves to this period.
@@ -13,28 +13,28 @@
 	/// Ambient temperature modifier during this time of day.
 	var/temperature
 
-/datum/time_of_day/sunrise
+/datum/daycycle_period/sunrise
 	name = "sunrise"
 	announcement = "The sun peeks over the horizon, bathing the world in rosy light."
 	period = 0.1
 	color = COLOR_RED_LIGHT
 	power = 0.5
 
-/datum/time_of_day/daytime
+/datum/daycycle_period/daytime
 	name = "daytime"
 	announcement = "The sun rises over the horizon, beginning another day."
 	period = 0.4
 	power = 1
 	color = COLOR_DAYLIGHT
 
-/datum/time_of_day/sunset
+/datum/daycycle_period/sunset
 	name = "sunset"
 	announcement = "The sun begins to dip below the horizon, and the daylight fades."
 	period = 0.6
 	color = COLOR_ORANGE
 	power = 0.5
 
-/datum/time_of_day/night
+/datum/daycycle_period/night
 	name = "night"
 	announcement = "Night falls, blanketing the world in darkness."
 	period = 1
@@ -42,7 +42,7 @@
 	power = 0.3
 
 // Dummy period used by solars.
-/datum/time_of_day/permanent_daytime
+/datum/daycycle_period/permanent_daytime
 	name = null
 	announcement = null
 	color = null

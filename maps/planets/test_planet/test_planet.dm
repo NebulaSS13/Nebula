@@ -75,7 +75,7 @@
 	fauna               = /datum/fauna_generator/neutralia
 
 /datum/daycycle/exoplanet/neutralia
-	day_duration        = 12 MINUTES
+	cycle_duration        = 12 MINUTES
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Neutralia Template

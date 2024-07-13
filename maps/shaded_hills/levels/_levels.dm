@@ -21,6 +21,9 @@
 	var/submap_area
 	var/list/mobs_to_spawn = list()
 
+/datum/daycycle/shaded_hills
+	cycle_duration = 2 HOURS // 1 hour of daylight, 1 hour of night
+
 // Randomized time of day to start at.
 /datum/daycycle/shaded_hills/New()
 	time_of_day = rand(day_duration)
