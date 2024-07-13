@@ -162,6 +162,8 @@ SUBSYSTEM_DEF(mapping)
 	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
 		turbolift.build_turbolift()
 
+	global.using_map.finalize_map_generation()
+
 	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()

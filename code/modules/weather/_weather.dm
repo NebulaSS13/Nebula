@@ -31,6 +31,9 @@
 	appearance_flags  = (RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM)
 	is_spawnable_type = FALSE
 
+	// List of /decl/state types that are forbidden.
+	var/list/banned_weather_conditions
+
 	var/water_material = /decl/material/liquid/water     // Material to use for the properties of rain.
 	var/ice_material =   /decl/material/solid/ice        // Material to use for the properties of snow and hail.
 
@@ -82,13 +85,15 @@
 	// Exoplanet stuff for the future:
 	// - TODO: track and check exoplanet temperature.
 	// - TODO: compare to a list of 'acceptable' states
-	if(istype(next_state))
-		if(next_state.is_liquid)
-			return !!water_material
-		if(next_state.is_ice)
-			return !!ice_material
-		return TRUE
-	return FALSE
+	if(!istype(next_state))
+		return FALSE
+	if(next_state.is_liquid && isnull(water_material))
+		return FALSE
+	if(next_state.is_ice && isnull(ice_material))
+		return FALSE
+	if(length(banned_weather_conditions) && (next_state.type in banned_weather_conditions))
+		return FALSE
+	return TRUE
 
 // Dummy object for lightning flash animation.
 /obj/abstract/lightning_overlay

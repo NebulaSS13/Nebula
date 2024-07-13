@@ -86,10 +86,6 @@
 		)
 	)
 
-/datum/level_data/player_level/shaded_hills/grassland/after_generate_level()
-	. = ..()
-	// Neither of these procs handle laterally linked levels yet.
-	SSweather.setup_weather_system(src)
 
 /datum/level_data/player_level/shaded_hills/swamp
 	name = "Shaded Hills - Swamp"
@@ -180,11 +176,6 @@
 	submap_budget = 5
 	submap_category = MAP_TEMPLATE_CATEGORY_SH_DOWNLANDS
 	submap_area = /area/shaded_hills/outside/downlands/poi
-
-/datum/level_data/player_level/shaded_hills/downlands/after_generate_level()
-	. = ..()
-	// Neither of these procs handle laterally linked levels yet.
-	SSweather.setup_weather_system(src)
 
 /datum/level_data/player_level/shaded_hills/caverns
 	name = "Shaded Hills - Caverns"

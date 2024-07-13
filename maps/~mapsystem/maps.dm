@@ -490,3 +490,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/populate_overmap_events()
 	for(var/overmap_id in global.overmaps_by_name)
 		SSmapping.overmap_event_handler.create_events(global.overmaps_by_name[overmap_id])
+
+/datum/map/proc/finalize_map_generation()
+	return
