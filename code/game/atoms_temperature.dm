@@ -21,9 +21,12 @@
 	if(user && heated_by)
 		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
 	// Update our own heat.
-	var/altered_temp = max(temperature + (get_thermal_mass_coefficient() * diff_temp), 0)
+	var/altered_temp = max(temperature + (get_thermal_mass_coefficient() * diff_temp * (heated_by ? heated_by.get_manual_heat_source_coefficient() : 1)), 0)
 	ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))
 	return TRUE
+
+/atom/proc/get_manual_heat_source_coefficient()
+	return 1
 
 // TODO: move mob bodytemperature onto this proc.
 /atom/proc/ProcessAtomTemperature()

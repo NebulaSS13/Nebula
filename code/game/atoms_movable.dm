@@ -490,6 +490,9 @@
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
 
+/atom/movable/get_manual_heat_source_coefficient()
+	return ..() * (get_object_size() / ITEM_SIZE_NORMAL)
+
 // TODO: account for reagents and matter.
 /atom/movable/get_thermal_mass()
 	if(!simulated)
