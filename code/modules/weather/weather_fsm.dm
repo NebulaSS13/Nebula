@@ -6,5 +6,5 @@
 	for(var/decl/state_transition/weather/state_transition in valid_transitions)
 		transitions[state_transition] = state_transition.likelihood_weighting
 	if(length(transitions))
-		return pick(transitions) //pickweight(transitions)
+		return pickweight(transitions)
 	return ..()
