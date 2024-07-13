@@ -412,6 +412,15 @@
 /obj/structure/fire_source/spark_act(obj/effect/sparks/sparks)
 	try_light(1000)
 
+/obj/structure/fire_source/CanPass(atom/movable/mover, turf/target, height, air_group)
+	. = ..()
+	if(lit && ismob(mover))
+		var/mob/M = mover
+		if(!MOVING_QUICKLY(M))
+			to_chat(M, SPAN_WARNING("You refrain from stepping into \the [src]."))
+			return FALSE
+	return ..()
+
 // Subtypes.
 /obj/structure/fire_source/firepit
 	obj_flags = OBJ_FLAG_HOLLOW
@@ -444,34 +453,26 @@
 /obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
 	return FALSE
 
-/* Uncomment when 515 is the minimum version.
 #define MATERIAL_FIREPLACE(material_name) \
 /obj/structure/fire_source/fireplace/##material_name { \
 	color = /decl/material/solid/stone/##material_name::color; \
 	material = /decl/material/solid/stone/##material_name; \
 }
-*/
+MATERIAL_FIREPLACE(basalt)
+MATERIAL_FIREPLACE(marble)
+MATERIAL_FIREPLACE(granite)
+MATERIAL_FIREPLACE(pottery)
+#undef MATERIAL_FIREPLACE
 
-/obj/structure/fire_source/fireplace/basalt
-	material = /decl/material/solid/stone/basalt
-
-/obj/structure/fire_source/fireplace/marble
-	material = /decl/material/solid/stone/marble
-
-/obj/structure/fire_source/fireplace/granite
-	material = /decl/material/solid/stone/granite
-
-/obj/structure/fire_source/fireplace/pottery
-	material = /decl/material/solid/stone/pottery
-
-/obj/structure/fire_source/firepit/basalt
-	material = /decl/material/solid/stone/basalt
-
-/obj/structure/fire_source/firepit/marble
-	material = /decl/material/solid/stone/marble
-
-/obj/structure/fire_source/firepit/granite
-	material = /decl/material/solid/stone/granite
+#define MATERIAL_FIREPIT(material_name) \
+/obj/structure/fire_source/firepit/##material_name { \
+	color = /decl/material/solid/stone/##material_name::color; \
+	material = /decl/material/solid/stone/##material_name; \
+}
+MATERIAL_FIREPIT(basalt)
+MATERIAL_FIREPIT(marble)
+MATERIAL_FIREPIT(granite)
+#undef MATERIAL_FIREPIT
 
 #undef FUEL_CONSUMPTION_CONSTANT
 #undef FIRE_LIT
