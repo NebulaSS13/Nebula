@@ -1,0 +1,4 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Cigarettes and welding torches will now heat atom reagents slower.}
+delete-after: true
