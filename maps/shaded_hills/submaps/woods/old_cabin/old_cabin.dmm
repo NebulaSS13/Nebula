@@ -38,7 +38,8 @@
 /obj/effect/spider/spiderling/mundane,
 /obj/structure/table/woodentable/ebony,
 /obj/structure/wall_sconce/torch{
-	dir = 1
+	dir = 1;
+	pixel_y = 24
 	},
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/walnut,
@@ -54,6 +55,10 @@
 /obj/item/chems/food/grown/carrot,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/old_cabin)
+"G" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/log/walnut/shutter,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "H" = (
 /obj/structure/table/woodentable/ebony,
@@ -82,9 +87,10 @@
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
-"S" = (
+"W" = (
 /obj/structure/wall_sconce/torch{
-	dir = 1
+	dir = 1;
+	pixel_y = 24
 	},
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
@@ -115,7 +121,7 @@ i
 M
 M
 M
-M
+G
 M
 M
 M
@@ -143,8 +149,8 @@ I
 M
 N
 L
-M
-S
+G
+i
 "}
 (5,1,1) = {"
 i
@@ -156,7 +162,7 @@ M
 M
 M
 M
-i
+W
 "}
 (6,1,1) = {"
 h
@@ -179,7 +185,7 @@ B
 a
 B
 I
-M
+G
 i
 "}
 (8,1,1) = {"
@@ -199,7 +205,7 @@ i
 M
 M
 M
-M
+G
 M
 M
 M
