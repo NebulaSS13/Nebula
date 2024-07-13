@@ -106,6 +106,8 @@
 			_storage.close(other_user)
 
 /datum/storage_ui/default/show_to(mob/user)
+	if(!istype(user))
+		return
 	var/list/contents = _storage?.get_contents()
 	if(user.active_storage != _storage)
 		for(var/obj/item/I in contents)
@@ -113,21 +115,22 @@
 				return
 	if(user.active_storage)
 		user.active_storage.hide_from(user)
-	user.client.screen -= boxes
-	user.client.screen -= storage_start
-	user.client.screen -= storage_continue
-	user.client.screen -= storage_end
-	user.client.screen -= closer
-	user.client.screen -= contents
-	user.client.screen += closer
-	if(length(contents))
-		user.client.screen += contents
-	if(_storage.storage_slots)
-		user.client.screen += boxes
-	else
-		user.client.screen += storage_start
-		user.client.screen += storage_continue
-		user.client.screen += storage_end
+	if(user.client)
+		user.client.screen -= boxes
+		user.client.screen -= storage_start
+		user.client.screen -= storage_continue
+		user.client.screen -= storage_end
+		user.client.screen -= closer
+		user.client.screen -= contents
+		user.client.screen += closer
+		if(length(contents))
+			user.client.screen += contents
+		if(_storage.storage_slots)
+			user.client.screen += boxes
+		else
+			user.client.screen += storage_start
+			user.client.screen += storage_continue
+			user.client.screen += storage_end
 	LAZYDISTINCTADD(is_seeing, user)
 	user.active_storage = _storage
 
