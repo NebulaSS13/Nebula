@@ -26,7 +26,7 @@
 
 // Randomized time of day to start at.
 /datum/daycycle/shaded_hills/New()
-	time_of_day = rand(day_duration)
+	time_in_cycle = rand(cycle_duration)
 	..()
 
 /datum/level_data/player_level/shaded_hills/get_subtemplate_areas(template_category, blacklist, whitelist)
