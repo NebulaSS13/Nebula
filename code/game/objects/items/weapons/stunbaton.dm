@@ -37,7 +37,7 @@
 	return ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/high)
 
 /obj/item/baton/infinite/Initialize(var/ml, var/material_key, var/loaded_cell_type)
-	. = ..(ml, material_key, loaded_cell_type = /obj/item/cell/infinite)
+	. = ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/infinite)
 	set_status(1, null)
 
 /obj/item/baton/proc/update_status()
