@@ -1374,3 +1374,11 @@
 
 /mob/proc/do_attack_windup_checking(atom/target)
 	return TRUE
+
+/mob/living/human/debug_attack_windup
+	ai = /datum/mob_controller/aggressive
+	faction = "arsehole"
+
+/mob/living/human/debug_attack_windup/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
+	. = ..()
+	put_in_active_hand(new /obj/item/stamp/denied(src))
