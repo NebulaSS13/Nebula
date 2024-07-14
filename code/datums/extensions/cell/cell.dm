@@ -27,7 +27,7 @@
 
 /datum/extension/loaded_cell/proc/create_cell(_create_cell_type, _override_cell_capacity)
 	if(!ispath(_create_cell_type, expected_cell_type))
-		PRINT_STACK_TRACE("Non-expected type supplied to [type] as premade cell type.")
+		PRINT_STACK_TRACE("Non-expected type '[_create_cell_type]' supplied to [type] as premade cell type (expected '[expected_cell_type]').")
 	loaded_cell_ref = weakref(new _create_cell_type(holder, _override_cell_capacity))
 
 /datum/extension/loaded_cell/proc/get_cell()
