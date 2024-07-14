@@ -1213,3 +1213,6 @@
 		if(istype(limb.material, /decl/material/solid/organic/meat))
 			return TRUE
 	return FALSE
+
+/mob/living/human/get_attack_telegraph_delay()
+	return client ? 0 : DEFAULT_ATTACK_COOLDOWN

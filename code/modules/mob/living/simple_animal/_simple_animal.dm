@@ -461,8 +461,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	bodytype_flag = 0
 	bodytype_category = "quadrupedal animal body"
 
-/mob/living/simple_animal/proc/get_melee_accuracy()
-	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
+/mob/living/simple_animal/get_base_telegraphed_melee_accuracy()
+	return sa_accuracy
 
 /mob/living/simple_animal/check_has_mouth()
 	return TRUE
@@ -544,3 +544,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/can_eat_food_currently(obj/eating, mob/user, consumption_method)
 	return TRUE
+
+/mob/living/simple_animal/get_attack_telegraph_delay()
+	return attack_delay
