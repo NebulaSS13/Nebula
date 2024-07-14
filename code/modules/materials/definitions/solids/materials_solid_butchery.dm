@@ -22,6 +22,7 @@
 	fishing_bait_value = 1
 	nutriment_animal = TRUE
 	soup_overlay = "soup_chunks"
+	nutriment_factor = 10
 
 /decl/material/solid/organic/meat/egg
 	name = "egg yolk"
