@@ -12,9 +12,20 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ash"
 
+/obj/effect/decal/cleanable/ash/attackby(obj/item/I, mob/user)
+	if(ATOM_IS_OPEN_CONTAINER(I))
+		if(REAGENTS_FREE_SPACE(I.reagents) <= 0)
+			to_chat(user, SPAN_WARNING("\The [I] is full."))
+		else
+			I.add_to_reagents(/decl/material/solid/carbon/ashes, 20)
+			user.visible_message(SPAN_NOTICE("\The [user] carefully scoops \the [src] into \the [I]."))
+			qdel(src)
+		return TRUE
+	return ..()
+
 /obj/effect/decal/cleanable/ash/attack_hand(var/mob/user)
 	SHOULD_CALL_PARENT(FALSE)
-	to_chat(user, "<span class='notice'>[src] sifts through your fingers.</span>")
+	to_chat(user, SPAN_NOTICE("\The [src] sifts through your fingers."))
 	var/turf/F = get_turf(src)
 	if (istype(F))
 		F.add_dirt(4)

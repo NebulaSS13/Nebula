@@ -557,6 +557,11 @@ var/global/list/ailment_reference_cache = list()
 // The organ may be inside an external organ that's not inside a mob, or inside a mob
 //detached : If true, the organ will be installed in a detached state, otherwise it will be added in an attached state
 /obj/item/organ/proc/do_install(var/mob/living/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
+
+	// While on an owner, do not take damage.
+	max_health = ITEM_HEALTH_NO_DAMAGE
+	current_health = ITEM_HEALTH_NO_DAMAGE
+
 	//Make sure to force the flag accordingly
 	set_detached(detached)
 	if(QDELETED(src))
@@ -584,6 +589,13 @@ var/global/list/ailment_reference_cache = list()
 //detach: If detach is true, we're going to set the organ to detached, and add it to the detached organs list, and remove it from processing lists.
 //        If its false, we just remove the organ from all lists
 /obj/item/organ/proc/do_uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
+
+	max_health = max_damage
+	if(current_health == ITEM_HEALTH_NO_DAMAGE)
+		current_health = max_health
+	else
+		current_health = min(current_health, max_health)
+
 	action_button_name = null
 	screen_loc = null
 	rejecting = null
@@ -650,3 +662,11 @@ var/global/list/ailment_reference_cache = list()
 /// Returns a list with two entries, first being the stat panel title, the second being the value. See has_stat_value bool above.
 /obj/item/organ/proc/get_stat_info()
 	return null
+
+/obj/item/organ/handle_destroyed_by_heat()
+	if(owner)
+		return
+	if(isturf(loc))
+		new /obj/effect/decal/cleanable/ash(loc)
+	if(!QDELETED(src))
+		qdel(src)
