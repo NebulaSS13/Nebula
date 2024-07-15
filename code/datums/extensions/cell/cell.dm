@@ -17,15 +17,18 @@
 			PRINT_STACK_TRACE("Non-cell type supplied to [type] as expected cell type.")
 		expected_cell_type = _expected_cell_type
 	if(ispath(_create_cell_type))
-		if(!ispath(_expected_cell_type, expected_cell_type))
-			PRINT_STACK_TRACE("Non-expected type supplied to [type] as premade cell type.")
-		loaded_cell_ref = weakref(new _create_cell_type(holder, _override_cell_capacity))
+		create_cell(_create_cell_type, _override_cell_capacity)
 
 /datum/extension/loaded_cell/Destroy()
 	var/obj/item/cell/existing_cell = loaded_cell_ref?.resolve()
 	if(istype(existing_cell) && !QDELETED(existing_cell) && existing_cell.loc == holder)
 		qdel(existing_cell)
 	return ..()
+
+/datum/extension/loaded_cell/proc/create_cell(_create_cell_type, _override_cell_capacity)
+	if(!ispath(_create_cell_type, expected_cell_type))
+		PRINT_STACK_TRACE("Non-expected type '[_create_cell_type]' supplied to [type] as premade cell type (expected '[expected_cell_type]').")
+	loaded_cell_ref = weakref(new _create_cell_type(holder, _override_cell_capacity))
 
 /datum/extension/loaded_cell/proc/get_cell()
 	var/obj/item/cell/cell = loaded_cell_ref?.resolve()
