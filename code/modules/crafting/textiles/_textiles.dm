@@ -7,6 +7,7 @@
 	material            = /decl/material/solid/organic/wood
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	obj_flags           = OBJ_FLAG_ANCHORABLE
+	throwpass           = TRUE // You can reach over these to things behind them.
 
 	var/tmp/working     = FALSE
 	var/work_skill      = SKILL_CONSTRUCTION

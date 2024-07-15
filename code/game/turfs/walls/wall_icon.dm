@@ -160,8 +160,12 @@
 
 	if(!isnull(shutter_state) && shutter_icon)
 		var/decl/material/shutter_mat = shutter_material || material
+		var/new_light_dir // get the opposite direction associated with the strongest light
+		var/light_str // the strength associated with new_light_dir
+		var/new_light_color // get the color associated with the strongest light
 		var/list/shutters
 		var/list/connected = corner_states_to_dirs(wall_connections) | corner_states_to_dirs(other_connections) // merge the lists
+		set_light(0) // disable our own light before we calculate light strength
 		for(var/stepdir in global.cardinal)
 			if(stepdir in connected)
 				continue
@@ -174,10 +178,21 @@
 				if(istype(other_neighbor))
 					var/light_amt   = 255 * other_neighbor.get_lumcount()
 					if(light_amt > 0)
+						if(!new_light_dir || light_str < light_amt / 255)
+							new_light_dir = stepdir
+							light_str = light_amt / 255
+							new_light_color = other_neighbor.get_avg_color()
 						var/image/light_overlay = emissive_overlay(shutter_icon, "glow", dir = stepdir, color = other_neighbor.get_avg_color())
 						light_overlay.alpha = light_amt
 						light_overlay.appearance_flags |= RESET_COLOR|RESET_ALPHA
 						LAZYADD(shutters, light_overlay)
+		// create a light cone in the direction of new_light_dir with color new_light_color
+		if(new_light_dir)
+			light_dir = new_light_dir
+			set_light(7, light_str, new_light_color, LIGHT_WIDE)
+		else
+			light_dir = null
+			set_light(0)
 
 		if(length(shutters))
 			var/image/shutter_image = new /image

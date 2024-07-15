@@ -298,6 +298,8 @@
 		var/ndir
 		if (ismob(top_atom) && top_atom:facing_dir)
 			ndir = top_atom:facing_dir
+		else if(top_atom.light_dir)
+			ndir = top_atom.light_dir
 		else
 			ndir = top_atom.dir
 
