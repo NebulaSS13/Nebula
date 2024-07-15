@@ -16,4 +16,8 @@
 
 /decl/hierarchy/outfit/job/shaded_hills/traveller/cleric
 	name    = "Shaded Hills - Travelling Cleric"
-
+	backpack_contents = list(
+		/obj/item/stack/medical/bruise_pack/bandage/ten = 1,
+		/obj/item/stack/medical/ointment/poultice/ten   = 1,
+		/obj/item/stack/medical/splint/simple/five      = 1
+	)
