@@ -1,7 +1,7 @@
 /obj/abstract/weather_system
-	var/tmp/wind_direction =    0                        // Bitflag; current wind direction.
-	var/tmp/wind_strength =     1                        // How string is the wind currently?
-	var/const/base_wind_delay = 1                        // What is the base movement delay or increase applied by wind strength?
+	var/tmp/wind_direction =    0   // Bitflag; current wind direction.
+	var/tmp/wind_strength =     1   // How strong is the wind currently?
+	var/const/base_wind_delay = 0.5 // What is the base movement delay or increase applied by wind strength?
 
 // Randomizes wind speed and direction sometimes.
 /obj/abstract/weather_system/proc/handle_wind()
