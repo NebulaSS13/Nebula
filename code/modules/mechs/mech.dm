@@ -245,3 +245,7 @@
 // ideal fix; regulators or something would be a better solution.
 /mob/living/exosuit/merge_exhaled_volume(datum/gas_mixture/exhaled)
 	return loc?.merge_exhaled_volume(exhaled)
+
+// Override this to avoid triggering the ancient vore code.
+/mob/living/exosuit/relaymove(mob/living/user, direction)
+	return
