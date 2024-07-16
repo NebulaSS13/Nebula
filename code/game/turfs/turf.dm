@@ -271,10 +271,8 @@
 
 	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W
-		if (G.affecting == G.assailant)
-			return TRUE
-
-		step(G.affecting, get_dir(G.affecting.loc, src))
+		if (G.affecting != G.assailant)
+			G.affecting.DoMove(get_dir(G.affecting.loc, src), user, TRUE)
 		return TRUE
 
 	if(IS_COIL(W) && try_build_cable(W, user))

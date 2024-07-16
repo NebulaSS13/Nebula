@@ -449,8 +449,11 @@ default behaviour is:
 	if(isturf(old_loc))
 		for(var/atom/movable/AM as anything in ret_grab())
 			if(AM != src && AM.loc != loc && !AM.anchored && old_loc.Adjacent(AM))
-				AM.glide_size = glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
-				AM.DoMove(get_dir(get_turf(AM), old_loc), src, TRUE)
+				if(get_z(AM) <= get_z(src))
+					AM.glide_size = glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
+					AM.DoMove(get_dir(get_turf(AM), old_loc), src, TRUE)
+				else // Hackfix for eternal bump due to grabber moving down through an openturf.
+					AM.dropInto(get_turf(src))
 
 	var/list/mygrabs = get_active_grabs()
 	for(var/obj/item/grab/G as anything in mygrabs)

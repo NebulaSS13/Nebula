@@ -4,16 +4,6 @@
 	container_categories = list(RECIPE_CATEGORY_POT)
 	var/precursor_type
 
-/decl/recipe/soup/stock
-	abstract_type = /decl/recipe/soup/stock
-	result_quantity = 10
-	result = /decl/material/liquid/nutriment/soup/stock
-	reagents = list(
-		/decl/material/solid/sodiumchloride = 1,
-		/decl/material/liquid/water = 10
-	)
-	minimum_temperature = 100 CELSIUS
-
 /decl/recipe/soup/get_result_data(atom/container, list/used_ingredients)
 
 	. = list()
@@ -65,6 +55,16 @@
 		.["soup_ingredients"] = ingredients
 	if(soup_flags)
 		.["soup_flags"] = soup_flags
+
+/decl/recipe/soup/stock
+	abstract_type = /decl/recipe/soup/stock
+	result_quantity = 10
+	result = /decl/material/liquid/nutriment/soup/stock
+	reagents = list(
+		/decl/material/solid/sodiumchloride = 1,
+		/decl/material/liquid/water = 10
+	)
+	minimum_temperature = 100 CELSIUS
 
 /decl/recipe/soup/stock/meat
 	display_name = "meat stock"

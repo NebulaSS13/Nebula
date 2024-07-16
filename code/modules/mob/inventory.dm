@@ -304,22 +304,23 @@
 	return TRUE
 
 //Attemps to remove an object on a mob.
-/mob/proc/remove_from_mob(var/obj/O, var/atom/target, var/play_dropsound = TRUE)
-	if(!O) // Nothing to remove, so we succeed.
-		return 1
-	src.unequip(O)
-	if (src.client)
-		src.client.screen -= O
-	O.reset_plane_and_layer()
-	O.screen_loc = null
-	if(istype(O, /obj/item))
-		var/obj/item/I = O
+/mob/proc/remove_from_mob(var/obj/object, var/atom/target, var/play_dropsound = TRUE)
+	if(!istype(object)) // Nothing to remove, so we succeed.
+		return TRUE
+	unequip(object)
+	if(client)
+		client.screen -= object
+	object.reset_plane_and_layer()
+	object.screen_loc = null
+	if(!QDELETED(object))
 		if(target)
-			I.forceMove(target)
+			object.forceMove(target)
 		else
-			I.dropInto(loc)
-		I.dropped(src, play_dropsound)
-	return 1
+			object.dropInto(loc)
+		if(isitem(object))
+			var/obj/item/item = object
+			item.dropped(src, play_dropsound)
+	return TRUE
 
 /mob/proc/drop_held_items()
 	for(var/thing in get_held_items())
