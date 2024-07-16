@@ -116,13 +116,18 @@
 	var/sdepth = A.storage_depth(src)
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
 		if(holding)
+
+			// AI driven mobs have a melee telegraph that needs to be handled here.
+			if(a_intent == I_HURT && istype(A) && (!do_attack_windup_checking(A) || holding != get_active_held_item()))
+				return TRUE
+
 			var/resolved = holding.resolve_attackby(A, src, params)
 			if(!resolved && A && holding)
 				holding.afterattack(A, src, 1, params) // 1 indicates adjacency
-			setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+			setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		else
 			if(ismob(A)) // No instant mob attacking
-				setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, TRUE)
 
 		trigger_aiming(TARGET_CAN_CLICK)
@@ -137,14 +142,19 @@
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
 			if(holding)
+
+				// AI driven mobs have a melee telegraph that needs to be handled here.
+				if(a_intent == I_HURT && istype(A) && (!do_attack_windup_checking(A) || holding != get_active_held_item()))
+					return TRUE
+
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = holding.resolve_attackby(A,src, params)
 				if(!resolved && A && holding)
 					holding.afterattack(A, src, 1, params) // 1: clicking something Adjacent
-				setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			else
 				if(ismob(A)) // No instant mob attacking
-					setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, TRUE)
 
 			trigger_aiming(TARGET_CAN_CLICK)
@@ -210,6 +220,10 @@
 	// Pick up items.
 	if(check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 		return A.attack_hand(src)
+
+	// AI driven mobs have a melee telegraph that needs to be handled here.
+	if(a_intent == I_HURT && istype(A) && !do_attack_windup_checking(A))
+		return TRUE
 
 	return FALSE
 

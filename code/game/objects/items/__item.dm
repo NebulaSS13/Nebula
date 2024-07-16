@@ -1073,7 +1073,15 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		try_burn_wearer(user, slot, 1)
 
 /obj/item/can_embed()
-	return !anchored && !is_robot_module(src)
+	. = !anchored && !is_robot_module(src)
+	if(. && isliving(loc))
+		var/mob/living/holder = loc
+		// Terrible check for if the mob is being driven by an AI or not.
+		// AI can't retrieve the weapon currently so this is unfair.
+		if(holder.get_attack_telegraph_delay() > 0)
+			return FALSE
+		// Skill check to avoid getting it stuck.
+		return holder.skill_fail_prob(SKILL_COMBAT, 100, no_more_fail = SKILL_EXPERT)
 
 /obj/item/clear_matter()
 	..()
