@@ -1,3 +1,20 @@
+/decl/hierarchy/skill/Initialize()
+	. = ..()
+	// Rename the default skill levels.
+	var/static/list/replacement_levels = list(
+		"Unskilled",
+		"Beginner",
+		"Apprentice",
+		"Journeyman",
+		"Master"
+	)
+	var/i = 0
+	for(var/level in levels)
+		i++
+		var/old_string = levels[level]
+		levels -= level
+		levels[replacement_levels[i]] = old_string
+
 /decl/hierarchy/skill/crafting
 	name = "Crafting"
 	difficulty = SKILL_EASY
