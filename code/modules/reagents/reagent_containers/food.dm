@@ -22,6 +22,7 @@
 	center_of_mass = @'{"x":16,"y":16}'
 	w_class = ITEM_SIZE_SMALL
 	abstract_type = /obj/item/chems/food
+	needs_attack_dexterity = DEXTERITY_NONE
 
 	/// Indicates the food should give a stress effect on eating.
 	// This is set to 1 if the food is created by a recipe, -1 if the food is raw.

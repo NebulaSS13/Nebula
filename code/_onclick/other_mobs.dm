@@ -74,11 +74,11 @@
 	if(.)
 		return
 
-	a_intent = I_HURT
 	var/attacking_with = get_natural_weapon()
 	if(a_intent == I_HELP || !attacking_with)
 		return A.attack_animal(src)
 
+	a_intent = I_HURT
 	. = A.attackby(attacking_with, src)
 	if(!.)
 		reset_offsets(anim_time = 2)
