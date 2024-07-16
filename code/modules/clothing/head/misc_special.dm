@@ -167,6 +167,7 @@
 			)
 		for(var/i = 1 to slice_amount)
 			new /obj/item/chems/food/processed_grown/chopped(loc, material?.type, plant)
+		qdel(src)
 		return TRUE
 	return ..()
 

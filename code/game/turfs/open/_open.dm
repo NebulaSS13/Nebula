@@ -41,6 +41,7 @@
 	return TRUE
 
 /turf/open/attackby(obj/item/C, mob/user)
+
 	if(istype(C, /obj/item/stack/material/rods))
 		var/ladder = (locate(/obj/structure/ladder) in src)
 		if(ladder)
@@ -68,6 +69,12 @@
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attackby(C, user)
+
+	if(istype(C, /obj/item/grab))
+		var/obj/item/grab/G = C
+		if (G.affecting != G.assailant)
+			G.affecting.DoMove(get_dir(G.affecting.loc, src), user, TRUE)
+		return TRUE
 
 	return FALSE
 

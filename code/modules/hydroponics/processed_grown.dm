@@ -50,15 +50,16 @@
 
 /obj/item/chems/food/processed_grown/on_update_icon()
 	. = ..()
-	if(!istype(seed) || !draw_rind)
+	if(!istype(seed))
 		return
 	icon_state = get_world_inventory_state()
 	var/rind_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 	color = seed.get_trait(TRAIT_FLESH_COLOUR) || rind_colour
-	var/image/rind = image(icon, "[icon_state]-rind")
-	rind.color = rind_colour || color
-	rind.appearance_flags |= RESET_COLOR
-	add_overlay(rind)
+	if(draw_rind)
+		var/image/rind = image(icon, "[icon_state]-rind")
+		rind.color = rind_colour || color
+		rind.appearance_flags |= RESET_COLOR
+		add_overlay(rind)
 
 // Fruit slices. TODO: seed color so orange slices don't get black seeds.
 /obj/item/chems/food/processed_grown/slice
