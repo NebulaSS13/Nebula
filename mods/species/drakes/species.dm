@@ -12,6 +12,7 @@
 	base_external_prosthetics_model = null // no robolimbs for dogs
 	preview_outfit = null                  // no pants for dogs
 	snow_slowdown_mod = -0.5
+	gluttonous = GLUT_TINY
 	available_pronouns = list(
 		/decl/pronouns,
 		/decl/pronouns/neuter,

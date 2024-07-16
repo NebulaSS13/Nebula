@@ -21,9 +21,12 @@
 	var/submap_area
 	var/list/mobs_to_spawn = list()
 
+/datum/daycycle/shaded_hills
+	cycle_duration = 2 HOURS // 1 hour of daylight, 1 hour of night
+
 // Randomized time of day to start at.
 /datum/daycycle/shaded_hills/New()
-	time_of_day = rand(day_duration)
+	time_in_cycle = rand(cycle_duration)
 	..()
 
 /datum/level_data/player_level/shaded_hills/get_subtemplate_areas(template_category, blacklist, whitelist)
@@ -83,10 +86,6 @@
 		)
 	)
 
-/datum/level_data/player_level/shaded_hills/grassland/after_generate_level()
-	. = ..()
-	// Neither of these procs handle laterally linked levels yet.
-	SSweather.setup_weather_system(src)
 
 /datum/level_data/player_level/shaded_hills/swamp
 	name = "Shaded Hills - Swamp"
@@ -177,11 +176,6 @@
 	submap_budget = 5
 	submap_category = MAP_TEMPLATE_CATEGORY_SH_DOWNLANDS
 	submap_area = /area/shaded_hills/outside/downlands/poi
-
-/datum/level_data/player_level/shaded_hills/downlands/after_generate_level()
-	. = ..()
-	// Neither of these procs handle laterally linked levels yet.
-	SSweather.setup_weather_system(src)
 
 /datum/level_data/player_level/shaded_hills/caverns
 	name = "Shaded Hills - Caverns"

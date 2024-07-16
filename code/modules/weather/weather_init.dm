@@ -1,10 +1,12 @@
 INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
-/obj/abstract/weather_system/Initialize(var/ml, var/target_z, var/initial_weather)
+/obj/abstract/weather_system/Initialize(var/ml, var/target_z, var/initial_weather, var/list/banned)
 	SSweather.register_weather_system(src)
 
 	. = ..()
 
 	set_invisibility(INVISIBILITY_NONE)
+
+	banned_weather_conditions = banned
 
 	// Bookkeeping/rightclick guards.
 	verbs.Cut()

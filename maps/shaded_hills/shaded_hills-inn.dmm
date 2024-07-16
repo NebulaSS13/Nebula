@@ -23,6 +23,12 @@
 "bW" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/cooking_vessel/skillet,
+/obj/item/chems/glass/pottery/bowl,
+/obj/item/chems/glass/pottery/bowl,
+/obj/item/chems/glass/pottery/bowl,
+/obj/item/chems/glass/pottery/cup,
+/obj/item/chems/glass/pottery/cup,
+/obj/item/chems/glass/pottery/cup,
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "cl" = (
@@ -1080,6 +1086,8 @@
 /obj/item/chems/food/grown/carrot,
 /obj/item/chems/food/grown/carrot,
 /obj/item/chems/food/grown/cabbage,
+/obj/item/chems/condiment/flour,
+/obj/item/chems/condiment/large/salt,
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "TR" = (
