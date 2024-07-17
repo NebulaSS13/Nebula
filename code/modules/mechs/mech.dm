@@ -234,6 +234,16 @@
 	else
 		to_chat(user, SPAN_WARNING("Error: No power cell was detected."))
 
+// Dump exhaled air into the environment to avoid the tank filling
+// up with CO2 and the cockpit filling up with N2. This isn't an
+// ideal fix; regulators or something would be a better solution.
+/mob/living/exosuit/merge_exhaled_volume(datum/gas_mixture/exhaled)
+	return loc?.merge_exhaled_volume(exhaled)
+
+// Override this to avoid triggering the ancient vore code.
+/mob/living/exosuit/relaymove(mob/living/user, direction)
+	return
+
 /mob/living/exosuit/get_available_postures()
 	var/static/list/available_postures = list(
 		/decl/posture/standing

@@ -168,6 +168,7 @@
 	message = trim(html_encode(message))
 	message = filter_modify_message(message)
 	message = format_emote(src, message)
+	message = trim(html_decode(message))
 
 	if (message)
 		log_emote("[name]/[key] : [message]")

@@ -1333,6 +1333,17 @@
 /mob/proc/nervous_system_failure()
 	return FALSE
 
+/mob/proc/resolve_to_radio_listeners()
+	if(status_flags & PASSEMOTES)
+		var/list/listeners = list(src)
+		for(var/obj/item/holder/holder in src.contents)
+			for(var/mob/living/listener in holder)
+				listeners |= listener
+		for(var/mob/living/listener in contents)
+			listeners |= listener
+		return listeners
+	return src
+
 /mob/proc/mob_throw_item(atom/target)
 	return
 
