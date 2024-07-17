@@ -90,6 +90,9 @@
 /obj/item/stack/medical/bruise_pack/bandage/five
 	amount = 5
 
+/obj/item/stack/medical/bruise_pack/bandage/ten
+	amount = 10
+
 /obj/item/stack/medical/bruise_pack/bandage/proc/get_poultice_requirement_string()
 	. = list()
 	for(var/reagent in poultice_reagent_requirements)
@@ -211,6 +214,9 @@
 
 /obj/item/stack/medical/ointment/poultice/five
 	amount = 5
+
+/obj/item/stack/medical/ointment/poultice/ten
+	amount = 10
 
 /obj/item/stack/medical/ointment/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
@@ -352,18 +358,36 @@
 /obj/item/stack/medical/splint
 	name = "medical splints"
 	singular_name = "medical splint"
+	plural_name = "medical splints"
 	desc = "Modular splints capable of supporting and immobilizing bones in both limbs and appendages."
 	icon_state = "splint"
 	amount = 5
 	max_amount = 5
 	animal_heal = 0
-	var/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)	//List of organs you can splint, natch.
+
+/obj/item/stack/medical/splint/proc/get_splitable_organs()
+	var/static/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)	//List of organs you can splint, natch.
+	return splintable_organs
 
 /obj/item/stack/medical/splint/check_limb_state(var/mob/user, var/obj/item/organ/external/limb)
 	if(BP_IS_PROSTHETIC(limb))
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a prosthetic limb."))
 		return FALSE
 	return TRUE
+
+/obj/item/stack/medical/splint/simple
+	name = "splints"
+	singular_name = "splint"
+	plural_name = "splints"
+	icon_state = "simple-splint"
+	amount = 1
+	material = /decl/material/solid/organic/wood
+	matter = list(
+		/decl/material/solid/organic/cloth = MATTER_AMOUNT_REINFORCEMENT
+	)
+
+/obj/item/stack/medical/splint/simple/five
+	amount = 5
 
 /obj/item/stack/medical/splint/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
@@ -374,7 +398,7 @@
 	var/mob/living/human/H = target
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
 
-	if(!(affecting.organ_tag in splintable_organs))
+	if(!(affecting.organ_tag in get_splitable_organs()))
 		to_chat(user, SPAN_WARNING("You can't use \the [src] to apply a splint there!"))
 		return TRUE
 
@@ -440,7 +464,10 @@
 	desc = "For holding your limbs in place with duct tape and scrap metal."
 	icon_state = "tape-splint"
 	amount = 1
-	splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG)
+
+/obj/item/stack/medical/splint/ghetto/get_splitable_organs()
+	var/static/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG)
+	return splintable_organs
 
 /obj/item/stack/medical/resin
 	name = "resin patches"

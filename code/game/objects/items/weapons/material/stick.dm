@@ -26,22 +26,38 @@
 
 	if(!sharp && (istype(W, /obj/item/stack/material/bolt) || istype(W, /obj/item/stack/material/bundle)))
 
-		// Ugly way to check for dried grass vs regular grass.
-		var/obj/item/stack/material/fuel = W
-		if(!fuel.special_crafting_check())
-			return ..()
-
-		if(fuel.get_amount() < 5)
-			to_chat(user, SPAN_WARNING("You need at least five units of flammable material to create a torch."))
+		var/choice = input(user, "Do you want to make a torch, or a splint?", "Stick Crafting") as null|anything in list("Torch", "Splint")
+		if(!choice || QDELETED(user) || user.get_active_held_item() != W || QDELETED(W) || !QDELETED(src) || (loc != user && !Adjacent(user)) || sharp)
 			return TRUE
 
-		var/was_held = loc == user
+		var/obj/item/stack/material/cloth = W
+
+		var/atom/product_type
+		var/cloth_cost
+		if(choice == "Splint")
+			product_type = /obj/item/stack/medical/splint/simple
+			cloth_cost = 5
+		else if(choice == "Torch")
+			product_type = /obj/item/flame/torch
+			cloth_cost = 3
+		else
+			return TRUE
+
+		if(cloth.get_amount() < cloth_cost)
+			to_chat(user, SPAN_WARNING("You need at least [cloth_cost] unit\s of material to create \a [initial(product_type.name)]."))
+			return TRUE
+
+		// Ugly way to check for dried grass vs regular grass.
+		if(!cloth.special_crafting_check())
+			return ..()
+
+		var/was_held = (loc == user)
+		cloth.use(cloth_cost)
 		if(!was_held || user.try_unequip(src))
-			var/obj/item/flame/torch/torch = new(get_turf(src), material?.type, W.material?.type)
-			fuel.use(5)
+			var/obj/item/thing = new product_type(get_turf(src), material?.type, W.material?.type)
 			if(was_held)
-				user.put_in_hands(torch)
-			to_chat(user, SPAN_NOTICE("You fashion \the [src] into \a [torch]."))
+				user.put_in_hands(thing)
+			to_chat(user, SPAN_NOTICE("You fashion \the [src] into \a [thing]."))
 			qdel(src)
 		return TRUE
 
