@@ -151,4 +151,5 @@
 		if(internals_air && (internals_air.return_pressure() < loc_air.return_pressure())) // based on the assumption it has a one-way valve for gas release
 			internals_air.merge(breath)
 			return
-	loc_air.merge(breath)
+	if(loc)
+		loc.merge_exhaled_volume(breath)

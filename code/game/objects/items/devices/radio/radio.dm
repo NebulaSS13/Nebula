@@ -64,6 +64,10 @@
 	var/analog_secured = list() // list of accesses used for encrypted analog, mainly for mercs/raiders
 	var/datum/radio_frequency/analog_radio_connection
 
+/obj/item/radio/proc/get_radio_listeners()
+	for(var/mob/listener in hearers(canhear_range, get_turf(src)))
+		LAZYDISTINCTADD(., listener.resolve_to_radio_listeners())
+
 /obj/item/radio/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 	return ..(/obj/item/cell/device, /obj/item/cell/device, /datum/extension/loaded_cell, charge_value)
 
