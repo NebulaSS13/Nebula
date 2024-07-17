@@ -48,6 +48,17 @@
 			if(R != type)
 				ingested.remove_reagent(R, removed * effect)
 
+/decl/material/solid/carbon/ashes
+	name = "ashes"
+	uid = "solid_ashes"
+	lore_text = "The powdery remains of burned organic material."
+	color = "#5c5c5c"
+	dissolves_in = MAT_SOLVENT_MODERATE
+	// Todo: calcium
+	dissolves_into = list(
+		/decl/material/solid/carbon = 1
+	)
+
 /decl/material/solid/phosphorus
 	name = "phosphorus"
 	uid = "solid_phosphorus"

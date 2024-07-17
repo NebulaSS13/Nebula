@@ -474,6 +474,9 @@
 /atom/proc/handle_melting(list/meltable_materials)
 	SHOULD_CALL_PARENT(TRUE)
 
+/atom/proc/handle_destroyed_by_heat()
+	return handle_melting()
+
 /**
 	Handle this atom being exposed to lava. Calls qdel() by default
 
