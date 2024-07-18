@@ -59,13 +59,15 @@
 // Returns true if overriden and needs deletion. If the argument is false, we will merge into any existing blood.
 /obj/effect/decal/cleanable/blood/proc/merge_with_blood()
 	if(!isturf(loc) || blood_size == BLOOD_SIZE_NO_MERGE)
-		return
+		return FALSE
 	for(var/obj/effect/decal/cleanable/blood/B in loc)
 		if(B != src && B.blood_size != BLOOD_SIZE_NO_MERGE)
 			if(B.blood_DNA)
 				blood_size = BLOOD_SIZE_NO_MERGE
 				B.blood_DNA |= blood_DNA.Copy()
+			B.alpha = initial(B.alpha) // reset rain-based fading due to more drips
 			return TRUE
+	return FALSE
 
 /obj/effect/decal/cleanable/blood/proc/start_drying()
 	drytime = world.time + DRYING_TIME * (amount+1)

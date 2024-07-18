@@ -570,3 +570,13 @@
 	var/datum/movement_handler/delay/delay = locate() in movement_handlers
 	if(istype(delay))
 		delay.next_move = world.time
+
+/atom/movable/get_affecting_weather()
+	var/turf/my_turf = get_turf(src)
+	if(!istype(my_turf))
+		return
+	var/turf/actual_loc = loc
+	// If we're standing in the rain, use the turf weather.
+	. = istype(actual_loc) && actual_loc.weather
+	if(!.) // If we're under or inside shelter, use the z-level rain (for ambience)
+		. = SSweather.weather_by_z[my_turf.z]

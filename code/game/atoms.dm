@@ -958,3 +958,10 @@
 
 /atom/proc/spark_act(obj/effect/sparks/sparks)
 	return
+
+/atom/proc/get_affecting_weather()
+	return
+
+/atom/proc/is_outside()
+	var/turf/turf = get_turf(src)
+	return istype(turf) ? turf.is_outside() : OUTSIDE_UNCERTAIN
