@@ -2,14 +2,14 @@
 	name                    = "Inn Workers"
 	colour                  = "#404e68"
 	display_color           = "#8c96c4"
-	lock_keys = list(
-		"inn interior" = /decl/material/solid/metal/copper,
-		"inn exterior" = /decl/material/solid/metal/iron
-	)
 
 /datum/job/shaded_hills/inn
 	abstract_type           = /datum/job/shaded_hills/inn
 	department_types        = list(/decl/department/shaded_hills/inn)
+	lock_keys = list(
+		"inn interior" = /decl/material/solid/metal/copper,
+		"inn exterior" = /decl/material/solid/metal/iron
+	)
 
 /datum/job/shaded_hills/inn/innkeeper
 	title                   = "Innkeeper"
