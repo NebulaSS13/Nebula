@@ -28,7 +28,7 @@
 	spawn_positions         = 2
 	total_positions         = 2
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/traveller/scholar
-	skill_points            = 24
+	skill_points            = 26
 	min_skill               = list(
 		SKILL_LITERACY      = SKILL_ADEPT
 	)
