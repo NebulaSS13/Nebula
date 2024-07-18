@@ -44,7 +44,8 @@ SUBSYSTEM_DEF(persistence)
 	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
 		return
 
-	if(!isStationLevel(T.z))
+	var/datum/level_data/level = SSmapping.levels_by_z[T.z]
+	if(!istype(level) || !level.permit_persistence)
 		return
 
 	if(!tracking_values[track_type])
