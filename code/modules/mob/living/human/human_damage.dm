@@ -334,7 +334,7 @@ This function restores all organs.
 	verbs -= /mob/living/human/proc/undislocate
 
 
-/mob/living/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
+/mob/living/human/apply_damage(damage = 0, damagetype = BRUTE, def_zone, damage_flags = 0, obj/used_weapon, armor_pen, silent = FALSE, obj/item/organ/external/given_organ)
 	if(status_flags & GODMODE)
 		return	//godmode
 

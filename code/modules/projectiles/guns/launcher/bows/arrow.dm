@@ -4,7 +4,7 @@
 	base_state = ICON_STATE_WORLD
 	plural_icon_state = ICON_STATE_WORLD + "-mult"
 	max_icon_state = ICON_STATE_WORLD + "-max"
-	throwforce = 8
+	throwforce = 10
 	w_class = ITEM_SIZE_NORMAL
 	sharp = 1
 	edge = 0
@@ -65,6 +65,7 @@
 	name = "bolt"
 	singular_name = "bolt"
 	plural_name = "bolts"
+	throwforce = 12
 	icon = 'icons/obj/items/weapon/arrow_bolt.dmi'
 	desc = "It's got a tip for you - get the point?"
 
@@ -72,6 +73,7 @@
 	name = "alloy spike"
 	singular_name = "alloy spike"
 	plural_name = "alloy spikes"
+	throwforce = 12
 	desc = "It's about a foot of weird silver metal with a wicked point."
 	material = /decl/material/solid/metal/alienalloy
 
@@ -79,6 +81,7 @@
 	name = "rod"
 	singular_name = "rod"
 	plural_name = "rods"
+	throwforce = 12
 	desc = "Don't cry for me, Orithena."
 	icon = 'icons/obj/items/weapon/arrow_rod.dmi'
 	material = /decl/material/solid/metal/steel

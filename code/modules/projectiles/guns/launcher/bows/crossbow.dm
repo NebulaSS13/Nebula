@@ -9,6 +9,7 @@
 	keep_tension_when_dropped = TRUE
 	bow_ammo_type = /obj/item/stack/material/bow_ammo/bolt
 	draw_time = 2 SECONDS
+	release_speed = 18
 
 /obj/item/gun/launcher/bow/crossbow/show_load_message(mob/user)
 	if(user)

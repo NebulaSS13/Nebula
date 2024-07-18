@@ -207,14 +207,14 @@
 	if(!istype(O))
 		return FALSE
 
+	if(!affecting)
+		affecting = get_organ(def_zone)
+
 	if(!supplied_wound)
-		supplied_wound = apply_damage(embed_damage, dtype, def_zone, O.damage_flags(), O, O.armor_penetration)
+		supplied_wound = apply_damage(embed_damage, dtype, damage_flags = O.damage_flags(), used_weapon = O, armor_pen = O.armor_penetration, given_organ = (affecting || def_zone))
 
 	if(!O.can_embed())
 		return FALSE
-
-	if(!affecting)
-		affecting = get_organ(def_zone)
 
 	if(affecting && istype(supplied_wound) && supplied_wound.is_open() && dtype == BRUTE) // Can't embed in a small bruise.
 		var/obj/item/I = O

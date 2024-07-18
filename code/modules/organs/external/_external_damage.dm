@@ -46,6 +46,7 @@
 			spillover = brute_dam + burn_dam + brute + burn - max_damage
 			if(spillover > 0)
 				burn = max(burn - spillover, 0)
+
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
 		owner.update_health() //droplimb will call update_health() again if it does end up being called
@@ -86,11 +87,11 @@
 
 	if(burn)
 		if(laser)
-			createwound(LASER, burn)
+			created_wound = createwound(LASER, burn)
 			if(prob(40))
 				owner.IgniteMob()
 		else
-			createwound(BURN, burn)
+			created_wound = createwound(BURN, burn)
 
 	//Initial pain spike
 	add_pain(0.6*burn + 0.4*brute)

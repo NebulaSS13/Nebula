@@ -109,7 +109,7 @@
 		else
 			return body
 
-/mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
+/mob/living/exosuit/apply_damage(damage = 0, damagetype = BRUTE, def_zone, damage_flags = 0, obj/used_weapon, armor_pen, silent = FALSE, obj/item/organ/external/given_organ)
 	if(!damage)
 		return 0
 
