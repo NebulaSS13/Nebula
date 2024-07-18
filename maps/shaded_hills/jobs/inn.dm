@@ -2,6 +2,10 @@
 	name                    = "Inn Workers"
 	colour                  = "#404e68"
 	display_color           = "#8c96c4"
+	lock_keys = list(
+		"inn interior" = /decl/material/solid/metal/copper,
+		"inn exterior" = /decl/material/solid/metal/iron
+	)
 
 /datum/job/shaded_hills/inn
 	abstract_type           = /datum/job/shaded_hills/inn
@@ -19,10 +23,6 @@
 	guestbanned             = TRUE
 	must_fill               = TRUE
 	not_random_selectable   = TRUE
-	lock_keys = list(
-		"inn interior" = /decl/material/solid/metal/copper,
-		"inn exterior" = /decl/material/solid/metal/iron
-	)
 	min_skill               = list(
 		// notably: no athletics requirement, and no literacy requirement but i'm less certain on that
 		SKILL_FINANCE       = SKILL_BASIC, // at least competent enough to keep the inn running
