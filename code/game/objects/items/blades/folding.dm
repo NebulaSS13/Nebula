@@ -17,6 +17,9 @@
 	var/open_attack_verbs     = list("slashed", "stabbed")
 	var/closed_attack_verbs   = list("prodded", "tapped")
 
+/obj/item/bladed/folding/iron
+	material = /decl/material/solid/metal/iron
+
 /obj/item/bladed/folding/Initialize()
 	. = ..()
 	update_force()
