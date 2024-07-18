@@ -46,9 +46,13 @@
 	color = COLOR_GRAY40
 	is_outside = OUTSIDE_NO
 	description = "The deep dark brings distant, whispering echoes to your ears."
-	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
+	ambience = list(
+		'sound/ambience/ambimine.ogg',
+		'sound/ambience/song_game.ogg'
+	)
 	area_blurb_category = /area/shaded_hills/caves
-
+	sound_env = CAVE
+	area_flags = AREA_FLAG_IS_BACKGROUND
 
 /area/shaded_hills/caves/deep
 	name = "\improper Deep Caverns"

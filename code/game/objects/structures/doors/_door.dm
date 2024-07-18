@@ -192,7 +192,7 @@
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
 
 /decl/interaction_handler/knock_on_door/invoked(var/atom/target, var/mob/user)
-	if(!density)
+	if(!istype(target) || !target.density)
 		return FALSE
 	user.do_attack_animation(src)
 	playsound(target.loc, 'sound/effects/glassknock.ogg', 80, 1)
