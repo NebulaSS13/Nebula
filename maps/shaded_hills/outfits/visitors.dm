@@ -16,6 +16,7 @@
 	name = "Shaded Hills - Beggar Knight, Longsword"
 	suit = /obj/item/clothing/suit/armor/forged/banded
 	belt = /obj/item/bladed/longsword
+	hands = list()
 	backpack_contents = list(
 		/obj/item/stack/medical/bruise_pack/bandage/five = 1,
 		/obj/item/stack/medical/ointment/poultice/five   = 1,
