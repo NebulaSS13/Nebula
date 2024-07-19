@@ -2,9 +2,20 @@
 	name    = "Shaded Hills - Traveller"
 
 /decl/hierarchy/outfit/job/shaded_hills/beggar_knight
-	name = "Shaded Hills - Beggar Knight"
+	name = "Shaded Hills - Beggar Knight, Shortsword and Shield"
 	suit = /obj/item/clothing/suit/armor/forged/banded
 	belt = /obj/item/bladed/shortsword
+	hands = list(/obj/item/shield/buckler)
+	backpack_contents = list(
+		/obj/item/stack/medical/bruise_pack/bandage/five = 1,
+		/obj/item/stack/medical/ointment/poultice/five   = 1,
+		/obj/item/chems/waterskin/crafted/wine           = 1
+	)
+
+/decl/hierarchy/outfit/job/shaded_hills/beggar_knight/longsword
+	name = "Shaded Hills - Beggar Knight, Longsword"
+	suit = /obj/item/clothing/suit/armor/forged/banded
+	belt = /obj/item/bladed/longsword
 	backpack_contents = list(
 		/obj/item/stack/medical/bruise_pack/bandage/five = 1,
 		/obj/item/stack/medical/ointment/poultice/five   = 1,
