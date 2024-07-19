@@ -12,10 +12,14 @@
 	material = /decl/material/solid/organic/plastic
 	var/can_use = 1
 	var/obj/effect/dummy/chameleon/active_dummy = null
-	var/saved_item = /obj/item/trash/cigbutt
-	var/saved_icon = 'icons/clothing/mask/smokables/cigarette.dmi'
-	var/saved_icon_state = "butt"
-	var/saved_overlays
+	var/saved_appearance
+
+/obj/item/chameleon/Destroy()
+	saved_appearance = null
+	if(istype(active_dummy) && !QDELETED(active_dummy))
+		qdel(active_dummy)
+	active_dummy = null
+	return ..()
 
 /obj/item/chameleon/dropped()
 	disrupt()
@@ -29,57 +33,69 @@
 	toggle()
 
 /obj/item/chameleon/afterattack(atom/target, mob/user , proximity)
-	if(!proximity) return
-	if(!active_dummy)
-		if(istype(target,/obj/item) && !istype(target, /obj/item/disk/nuclear))
-			playsound(get_turf(src), 'sound/weapons/flash.ogg', 100, 1, -6)
-			to_chat(user, "<span class='notice'>Scanned [target].</span>")
-			saved_item = target.type
-			saved_icon = target.icon
-			saved_icon_state = target.icon_state
-			saved_overlays = target.overlays
+
+	if(!proximity)
+		return ..()
+
+	if(active_dummy)
+		to_chat(user, SPAN_WARNING("\The [src] is already projecting. Turn it off first."))
+		return TRUE
+
+	if(!istype(target, /obj/item))
+		to_chat(user, SPAN_WARNING("\The [src] can only mimic items."))
+		return TRUE
+
+	if(istype(target, /obj/item/disk/nuclear))
+		to_chat(user, SPAN_WARNING("Inter-system tax fraud regulations prevent scanning \the [target]."))
+		return TRUE
+
+	if(!target.simulated || !target.icon || !target.icon_state || !check_state_in_icon(target.icon_state, target.icon))
+		to_chat(user, SPAN_WARNING("\The [target] is not suitable for scanning."))
+		return TRUE
+
+	playsound(get_turf(src), 'sound/weapons/flash.ogg', 100, 1, -6)
+	to_chat(user, SPAN_NOTICE("Scanned [target]."))
+	saved_appearance = target.appearance
 
 /obj/item/chameleon/proc/toggle()
-	if(!can_use || !saved_item) return
+
+	if(!can_use)
+		to_chat(usr, SPAN_WARNING("\The [src] needs time to recharge!"))
+		return
+
+	if(!saved_appearance)
+		to_chat(usr, SPAN_WARNING("\The [src] needs to scan something to mimic first!"))
+		return
+
+	playsound(get_turf(src), 'sound/effects/pop.ogg', 100, 1, -6)
+	var/obj/effect/overlay/T = new(get_turf(src))
+	T.icon = 'icons/effects/effects.dmi'
+	flick("emppulse",T)
+	QDEL_IN(T, 8)
+
 	if(active_dummy)
-		eject_all()
-		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, 1, -6)
-		qdel(active_dummy)
-		active_dummy = null
-		to_chat(usr, "<span class='notice'>You deactivate the [src].</span>")
-		var/obj/effect/overlay/T = new /obj/effect/overlay(get_turf(src))
-		T.icon = 'icons/effects/effects.dmi'
-		flick("emppulse",T)
-		QDEL_IN(T, 8)
+		active_dummy.dump_contents()
+		QDEL_NULL(active_dummy)
+		to_chat(usr, SPAN_NOTICE("You deactivate \the [src]."))
 	else
-		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, 1, -6)
-		var/obj/O = new saved_item(src)
-		if(!O) return
-		var/obj/effect/dummy/chameleon/C = new /obj/effect/dummy/chameleon(usr.loc)
-		C.activate(O, usr, saved_icon, saved_icon_state, saved_overlays, src)
-		qdel(O)
-		to_chat(usr, "<span class='notice'>You activate the [src].</span>")
-		var/obj/effect/overlay/T = new/obj/effect/overlay(get_turf(src))
-		T.icon = 'icons/effects/effects.dmi'
-		flick("emppulse",T)
-		QDEL_IN(T, 8)
+		active_dummy = new(get_turf(usr), src)
+		active_dummy.appearance = saved_appearance
+		to_chat(usr, SPAN_NOTICE("You activate \the [src]."))
+		usr.forceMove(active_dummy)
 
 /obj/item/chameleon/proc/disrupt(var/delete_dummy = 1)
-	if(active_dummy)
-		spark_at(src, amount = 5, cardinal_only = TRUE, holder = src)
-		eject_all()
-		if(delete_dummy)
-			qdel(active_dummy)
-		active_dummy = null
-		can_use = 0
-		spawn(50) can_use = 1
+	if(!active_dummy)
+		return
+	spark_at(loc, amount = 5, cardinal_only = TRUE, holder = src)
+	active_dummy.dump_contents()
+	if(delete_dummy)
+		qdel(active_dummy)
+	active_dummy = null
+	can_use = FALSE
+	addtimer(CALLBACK(src, PROC_REF(reset_can_use)), 5 SECONDS, (TIMER_UNIQUE | TIMER_OVERRIDE))
 
-/obj/item/chameleon/proc/eject_all()
-	for(var/atom/movable/A in active_dummy)
-		A.forceMove(active_dummy.loc)
-		if(ismob(A))
-			var/mob/M = A
-			M.reset_view(null)
+/obj/item/chameleon/proc/reset_can_use()
+	can_use = TRUE
 
 /obj/effect/dummy/chameleon
 	name = ""
@@ -87,65 +103,75 @@
 	density = FALSE
 	anchored = TRUE
 	is_spawnable_type = FALSE
-	var/can_move = 1
+	movement_handlers = list(/datum/movement_handler/delay/chameleon_projector)
+	var/can_move = TRUE
 	var/obj/item/chameleon/master = null
 
-/obj/effect/dummy/chameleon/proc/activate(var/obj/O, var/mob/M, new_icon, new_iconstate, new_overlays, var/obj/item/chameleon/C)
-	name = O.name
-	desc = O.desc
-	icon = new_icon
-	icon_state = new_iconstate
-	overlays = new_overlays
-	set_dir(O.dir)
-	M.forceMove(src)
-	master = C
+/obj/effect/dummy/chameleon/Initialize(mapload, var/obj/item/chameleon/projector)
+	. = ..()
+	verbs.Cut()
+	master = projector
+	if(!istype(master) || !master.saved_appearance)
+		master = null
+		return INITIALIZE_HINT_QDEL
+	appearance = master.saved_appearance
 	master.active_dummy = src
 
-/obj/effect/dummy/chameleon/attackby()
-	for(var/mob/M in src)
-		to_chat(M, "<span class='warning'>Your chameleon-projector deactivates.</span>")
+/obj/effect/dummy/chameleon/Destroy()
+	if(master)
+		master.disrupt(FALSE)
+		master = null
+	. = ..()
+
+/obj/effect/dummy/chameleon/proc/disrupted()
+	for(var/mob/held in src)
+		to_chat(held, SPAN_DANGER("Your [master.name] deactivates!"))
 	master.disrupt()
+
+/obj/effect/dummy/chameleon/attackby()
+	disrupted()
+	return TRUE
 
 /obj/effect/dummy/chameleon/attack_hand()
 	SHOULD_CALL_PARENT(FALSE)
-	for(var/mob/M in src)
-		to_chat(M, SPAN_DANGER("Your chameleon-projector deactivates."))
-	master.disrupt()
+	disrupted()
 	return TRUE
 
 /obj/effect/dummy/chameleon/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)
-	for(var/mob/M in src)
-		to_chat(M, SPAN_DANGER("Your chameleon-projector deactivates."))
-	master.disrupt()
+	disrupted()
 
 /obj/effect/dummy/chameleon/bullet_act()
-	for(var/mob/M in src)
-		to_chat(M, "<span class='warning'>Your chameleon-projector deactivates.</span>")
-	..()
-	master.disrupt()
+	disrupted()
 
-/obj/effect/dummy/chameleon/relaymove(var/mob/user, direction)
-	if(!has_gravity())
-		return //No magical space movement!
-
-	if(can_move)
-		can_move = 0
-		switch(user.bodytemperature)
-			if(300 to INFINITY)
-				spawn(10) can_move = 1
-			if(295 to 300)
-				spawn(13) can_move = 1
-			if(280 to 295)
-				spawn(16) can_move = 1
-			if(260 to 280)
-				spawn(20) can_move = 1
-			else
-				spawn(25) can_move = 1
-		if(isturf(loc))
-			step(src, direction)
-	return
-
-/obj/effect/dummy/chameleon/Destroy()
-	master.disrupt(0)
+// This is not ideal, but the alternative is making the effect simulated.
+// As it is, the effect can freely levitate over any open space.
+/obj/effect/dummy/chameleon/Move()
 	. = ..()
+	if(. && isturf(loc) && loc.has_gravity() && !(locate(/obj/structure/catwalk) in loc) && !(locate(/obj/structure/lattice) in loc))
+		disrupted()
+
+/datum/movement_handler/delay/chameleon_projector
+	delay = 2.5 SECONDS
+
+/datum/movement_handler/delay/chameleon_projector/MayMove(mob/mover, is_external)
+	return host.loc?.has_gravity() ? ..() : MOVEMENT_STOP
+
+/datum/movement_handler/delay/chameleon_projector/DoMove(direction, mob/mover, is_external)
+	if(istype(mover))
+		switch(mover.bodytemperature)
+			if(300 to INFINITY)
+				delay = 1 SECOND
+			if(295 to 300)
+				delay = 1.3 SECONDS
+			if(280 to 295)
+				delay = 1.6 SECONDS
+			if(260 to 280)
+				delay = 2 SECONDS
+			else
+				delay = 2.5 SECONDS
+	else
+		delay = 2.5 SECONDS
+	..()
+	step(host, direction)
+	return MOVEMENT_HANDLED
