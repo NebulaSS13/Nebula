@@ -4,6 +4,7 @@
 	layer = STRUCTURE_LAYER
 	abstract_type = /obj/structure
 	max_health = 50
+	temperature_sensitive = TRUE
 
 	var/structure_flags
 	var/last_damage_message

@@ -4,6 +4,7 @@
 	abstract_type = /turf
 	is_spawnable_type = TRUE
 	layer = TURF_LAYER
+	temperature_sensitive = TRUE
 
 	/// Will participate in ZAS, join zones, etc.
 	var/zone_membership_candidate = FALSE

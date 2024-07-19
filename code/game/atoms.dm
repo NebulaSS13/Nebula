@@ -56,6 +56,9 @@
 	var/current_health
 	var/max_health
 
+	/// Does this atom respond to changes in local temperature via the `temperature` var?
+	var/temperature_sensitive = FALSE
+
 /atom/proc/get_max_health()
 	return max_health
 
