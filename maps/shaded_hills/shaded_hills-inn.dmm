@@ -22,7 +22,7 @@
 /area/shaded_hills/general_store)
 "bW" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/chems/cooking_vessel/skillet,
+/obj/item/chems/cooking_vessel/skillet/iron,
 /obj/item/chems/glass/pottery/bowl,
 /obj/item/chems/glass/pottery/bowl,
 /obj/item/chems/glass/pottery/bowl,
@@ -954,7 +954,7 @@
 /area/shaded_hills/slaughterhouse)
 "Ot" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/chems/cooking_vessel/pot,
+/obj/item/chems/cooking_vessel/pot/iron,
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "ON" = (
@@ -1210,8 +1210,8 @@
 /area/shaded_hills/farmhouse)
 "WV" = (
 /obj/structure/table/marble,
-/obj/item/chems/cooking_vessel/pot,
-/obj/item/chems/cooking_vessel/skillet,
+/obj/item/chems/cooking_vessel/pot/iron,
+/obj/item/chems/cooking_vessel/skillet/iron,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "WY" = (

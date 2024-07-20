@@ -7,6 +7,9 @@
 	presentation_flags = PRESENTATION_FLAG_NAME
 	obj_flags          = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
 
+/obj/item/chems/cooking_vessel/pot/iron
+	material = /decl/material/solid/metal/iron
+
 /obj/item/chems/cooking_vessel/pot/on_update_icon()
 	. = ..()
 	if(reagents?.total_volume)
