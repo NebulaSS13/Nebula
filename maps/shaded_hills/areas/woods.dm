@@ -29,5 +29,5 @@
 
 /area/shaded_hills/forester_hut
 	name = "\improper Foresters' Hut"
-	fishing_failure_prob = "100"
+	fishing_failure_prob = 100
 	fishing_results = list()

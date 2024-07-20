@@ -179,7 +179,7 @@
 	dir = 1
 	},
 /turf/floor/wood/walnut,
-/area/shaded_hills/farmhouse)
+/area/shaded_hills/farmhouse/porch)
 "hE" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 4
@@ -327,7 +327,7 @@
 	},
 /obj/abstract/landmark/start/shaded_hills/farmer,
 /turf/floor/wood/walnut,
-/area/shaded_hills/farmhouse)
+/area/shaded_hills/farmhouse/porch)
 "me" = (
 /obj/structure/reagent_dispensers/barrel/ebony,
 /obj/item/seeds/extracted/potato,
@@ -346,7 +346,7 @@
 	dir = 4
 	},
 /turf/floor/wood/walnut,
-/area/shaded_hills/farmhouse)
+/area/shaded_hills/farmhouse/porch)
 "nn" = (
 /turf/wall/log/walnut,
 /area/shaded_hills/stable)
@@ -612,6 +612,9 @@
 	},
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/shrine)
+"zQ" = (
+/turf/floor/wood/walnut,
+/area/shaded_hills/general_store/porch)
 "Ak" = (
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/stable)
@@ -684,9 +687,16 @@
 /obj/item/bedsheet/yellowed,
 /turf/floor/wood/walnut,
 /area/shaded_hills/general_store)
+"BX" = (
+/obj/structure/wall_sconce/lantern,
+/turf/floor/wood/walnut,
+/area/shaded_hills/farmhouse/porch)
 "CR" = (
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
+"Dl" = (
+/turf/floor/wood/walnut,
+/area/shaded_hills/farmhouse/porch)
 "Dn" = (
 /obj/structure/reagent_dispensers/barrel/ebony/oil,
 /turf/floor/wood/walnut,
@@ -766,7 +776,7 @@
 	dir = 8
 	},
 /turf/floor/wood/walnut,
-/area/shaded_hills/general_store)
+/area/shaded_hills/general_store/porch)
 "Gu" = (
 /obj/structure/fire_source/stove,
 /obj/item/stack/material/log/mapped/walnut/twenty,
@@ -1000,7 +1010,7 @@
 	dir = 4
 	},
 /turf/floor/wood/walnut,
-/area/shaded_hills/general_store)
+/area/shaded_hills/general_store/porch)
 "Rl" = (
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/downlands)
@@ -1132,7 +1142,7 @@
 	dir = 8
 	},
 /turf/floor/wood/walnut,
-/area/shaded_hills/farmhouse)
+/area/shaded_hills/farmhouse/porch)
 "VW" = (
 /obj/structure/table/marble,
 /obj/item/chems/glass/beaker/bowl,
@@ -8933,7 +8943,7 @@ TR
 EV
 TR
 TR
-uJ
+zQ
 eG
 uJ
 uJ
@@ -13492,8 +13502,8 @@ TR
 HI
 TR
 Ic
-qP
-gB
+Dl
+BX
 LN
 qP
 qP
@@ -13644,8 +13654,8 @@ TR
 HI
 EV
 EV
-qP
-qP
+Dl
+Dl
 WO
 qP
 qP
@@ -13796,7 +13806,7 @@ TR
 HI
 TR
 Ic
-qP
+Dl
 lL
 LN
 hJ
@@ -13948,7 +13958,7 @@ TR
 TR
 EV
 Ic
-qP
+Dl
 hc
 IQ
 HF
