@@ -26,6 +26,10 @@
 /obj/item/soap/crafted
 	desc = "A lump of home-made soap."
 	icon_state = "soap-lump"
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
+
+/obj/item/soap/crafted/generate_icon()
+	return
 
 /obj/item/soap/initialize_reagents(populate = TRUE)
 	create_reagents(SOAP_MAX_VOLUME)
