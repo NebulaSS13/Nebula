@@ -1094,6 +1094,8 @@
 #include "code\game\objects\items\blades\folding.dm"
 #include "code\game\objects\items\blades\knife.dm"
 #include "code\game\objects\items\blades\polearm.dm"
+#include "code\game\objects\items\blades\spear.dm"
+#include "code\game\objects\items\blades\spear_improvised.dm"
 #include "code\game\objects\items\blades\swords_one_handed.dm"
 #include "code\game\objects\items\blades\swords_two_handed.dm"
 #include "code\game\objects\items\books\_book.dm"
