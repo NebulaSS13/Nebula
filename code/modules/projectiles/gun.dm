@@ -184,17 +184,6 @@
 /obj/item/gun/proc/get_safety_indicator()
 	return mutable_appearance(icon, "[get_world_inventory_state()][safety_icon][safety()]")
 
-/obj/item/gun/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && user_mob?.can_twohand_item(src) && is_held_twohanded(user_mob))
-		var/wielded_state = "[overlay.icon_state]-wielded"
-		if(check_state_in_icon(wielded_state, overlay.icon))
-			overlay.icon_state = wielded_state
-	apply_gun_mob_overlays(user_mob, bodytype, overlay, slot, bodypart)
-	. = ..()
-
-/obj/item/gun/proc/apply_gun_mob_overlays(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	return
-
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
