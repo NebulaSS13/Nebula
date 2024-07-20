@@ -307,8 +307,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/nutriment_factor     = 0 // Per removed amount each tick
 	var/hydration_factor     = 0 // Per removed amount each tick
 	var/injectable_nutrition = FALSE
-	var/soup_overlay
-	var/soup_base = "soup_base"
+	var/reagent_overlay
+	var/reagent_overlay_base = "reagent_base"
 
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)

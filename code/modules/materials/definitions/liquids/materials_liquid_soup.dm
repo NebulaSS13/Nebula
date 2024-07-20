@@ -82,7 +82,7 @@
 	solid_name        = "powdered soup"
 	uid               = "liquid_soup_simple"
 	mask_name_suffix  = "soup"
-	soup_overlay      = "soup_meatballs"
+	reagent_overlay   = "soup_meatballs"
 	nutriment_factor  = 10
 
 /decl/material/liquid/nutriment/soup/stew
@@ -91,6 +91,6 @@
 	solid_name       = "powdered stew"
 	uid              = "liquid_soup_stew"
 	mask_name_suffix = "stew"
-	soup_overlay     = "soup_chunks"
+	reagent_overlay  = "soup_chunks"
 	nutriment_factor = 10
 	glass_name       = "stew"

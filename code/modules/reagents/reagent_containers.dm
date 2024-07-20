@@ -151,25 +151,34 @@
 		return TRUE
 	return FALSE
 
-/obj/item/chems/proc/get_soup_overlay()
+// TODO: merge beakers etc down into this proc.
+/obj/item/chems/proc/get_reagents_overlay()
+
 	if(reagents?.total_volume <= 0)
 		return
-	var/image/soup_overlay
+
 	var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 	if(!primary_reagent)
 		return
-	if(primary_reagent.soup_base)
-		soup_overlay = overlay_image(icon, primary_reagent.soup_base, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
+
+	var/reagents_state
+	if(primary_reagent.reagent_overlay_base)
+		reagents_state = primary_reagent.reagent_overlay_base
 	else
-		soup_overlay = overlay_image(icon, "soup_base", reagents.get_color(), RESET_COLOR | RESET_ALPHA)
-	if(primary_reagent.soup_overlay)
-		soup_overlay.overlays += overlay_image(icon, primary_reagent.soup_overlay, primary_reagent.color, RESET_COLOR | RESET_ALPHA)
+		reagents_state = "reagent_base"
+
+	if(!reagents_state || !check_state_in_icon(reagents_state, icon))
+		return
+
+	var/image/reagent_overlay = overlay_image(icon, reagents_state, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
+	if(primary_reagent.reagent_overlay)
+		reagent_overlay.overlays += overlay_image(icon, primary_reagent.reagent_overlay, primary_reagent.color, RESET_COLOR | RESET_ALPHA)
 	else
 		for(var/reagent_type in reagents.reagent_volumes)
 			var/decl/material/reagent = GET_DECL(reagent_type)
-			if(reagent != primary_reagent && reagent.soup_overlay)
-				soup_overlay.overlays += overlay_image(icon, reagent.soup_overlay, reagent.color, RESET_COLOR | RESET_ALPHA)
-	return soup_overlay
+			if(reagent != primary_reagent && reagent.reagent_overlay && check_state_in_icon(reagent.reagent_overlay, icon))
+				reagent_overlay.overlays += overlay_image(icon, reagent.reagent_overlay, reagent.color, RESET_COLOR | RESET_ALPHA)
+	return reagent_overlay
 
 //
 // Interactions

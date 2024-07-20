@@ -276,8 +276,8 @@
 	nutriment_factor = 1
 	color = "#ffffff"
 	uid = "chem_nutriment_rice"
-	soup_base = "rice_base"
-	soup_overlay = "soup_meatballs"
+	reagent_overlay_base = "rice_base"
+	reagent_overlay = "soup_meatballs"
 
 /decl/material/liquid/nutriment/cherryjelly
 	name = "cherry jelly"

@@ -5,6 +5,16 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	presentation_flags = PRESENTATION_FLAG_NAME
 
+/obj/item/chems/glass/pottery/on_reagent_change()
+	if((. = ..()))
+		update_icon()
+
+/obj/item/chems/glass/pottery/on_update_icon()
+	. = ..()
+	var/image/contents_overlay = get_reagents_overlay()
+	if(contents_overlay)
+		add_overlay(contents_overlay)
+
 /obj/item/chems/glass/pottery/teapot
 	name = "teapot"
 	desc = "A handmade, slightly lumpy teapot."
@@ -64,15 +74,6 @@
 	amount_per_transfer_from_this = 10
 	volume = 60
 
-/obj/item/chems/glass/pottery/bowl/on_reagent_change()
-	if((. = ..()))
-		update_icon()
-
-/obj/item/chems/glass/pottery/bowl/on_update_icon()
-	. = ..()
-	var/image/soup_overlay = get_soup_overlay()
-	if(soup_overlay)
-		add_overlay(soup_overlay)
 
 /obj/item/chems/glass/pottery/bottle/beer/populate_reagents()
 	. = ..()
