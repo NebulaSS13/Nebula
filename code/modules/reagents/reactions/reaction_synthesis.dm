@@ -129,7 +129,7 @@
 	name = "Handmade Soap"
 	required_reagents = list(
 		/decl/material/solid/carbon/ashes         = 5,
-		/decl/material/solid/water                = 5,
+		/decl/material/liquid/water               = 5,
 		/decl/material/liquid/nutriment/plant_oil = 10
 	)
 	result_amount = 1
