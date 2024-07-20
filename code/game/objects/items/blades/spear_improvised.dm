@@ -23,21 +23,21 @@
 		if(istype(hilt_material))
 			SSmaterials.create_object(hilt_material, get_turf(src), 1, /obj/item/stack/material/rods)
 		if(istype(guard_material))
-			new /obj/item/stack/cable_coil(get_turf(src), 3, cable_color)
+			new /obj/item/stack/cable_coil(get_turf(src), 3, force_binding_color)
 	..()
 
 // Subtypes for mapping/spawning
 /obj/item/bladed/polearm/spear/improvised/diamond
-	material = /decl/material/solid/gemstone/diamond
-	hilt_material = /decl/material/solid/metal/gold
+	material            = /decl/material/solid/gemstone/diamond
+	hilt_material       = /decl/material/solid/metal/gold
 	force_binding_color = COLOR_PURPLE
 
 /obj/item/bladed/polearm/spear/improvised/steel
-	material = /decl/material/solid/metal/steel
-	hilt_material = /decl/material/solid/organic/wood
+	material            = /decl/material/solid/metal/steel
+	hilt_material       = /decl/material/solid/organic/wood
 	force_binding_color = COLOR_GREEN
 
 /obj/item/bladed/polearm/spear/improvised/supermatter
-	material = /decl/material/solid/exotic_matter
-	hilt_material = /decl/material/solid/organic/wood/ebony
+	material            = /decl/material/solid/exotic_matter
+	hilt_material       = /decl/material/solid/organic/wood/ebony
 	force_binding_color = COLOR_INDIGO

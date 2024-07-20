@@ -1,28 +1,21 @@
 /obj/item/bladed/axe
-	abstract_type  = /obj/item/bladed/axe
-	can_be_twohanded = TRUE
-	pickup_sound   = 'sound/foley/scrape1.ogg'
-	drop_sound     = 'sound/foley/tooldrop1.ogg'
-	w_class        = ITEM_SIZE_HUGE
-	slot_flags     = SLOT_BACK
+	abstract_type       = /obj/item/bladed/axe
+	can_be_twohanded    = TRUE
+	pickup_sound        = 'sound/foley/scrape1.ogg'
+	drop_sound          = 'sound/foley/tooldrop1.ogg'
+	w_class             = ITEM_SIZE_HUGE
+	slot_flags          = SLOT_BACK
+	hilt_material       = /decl/material/solid/organic/wood
+	guard_material      = /decl/material/solid/organic/leather/gut
+	pommel_material     = null
+	attack_verb         = list("attacked", "chopped", "cleaved", "torn", "cut")
+	_base_attack_force  = 30
 
-/obj/item/bladed/axe/fire
-	name = "fire axe"
-	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
-	icon = 'icons/obj/items/tool/fireaxe.dmi'
-	sharp = 1
-	edge = 1
-	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	material = /decl/material/solid/metal/steel
-	material_alteration = MAT_FLAG_ALTERATION_NAME
+// Discard pommel material.
+/obj/item/bladed/axe/Initialize(ml, material_key, _hilt_mat, _guard_mat, _pommel_mat)
+	return ..(ml, material_key, _hilt_mat, _guard_mat)
 
-	_base_attack_force = 30
-
-/obj/item/bladed/axe/fire/Initialize()
-	. = ..()
-	set_extension(src, /datum/extension/tool, list(TOOL_HATCHET = TOOL_QUALITY_DEFAULT))
-
-/obj/item/bladed/axe/fire/afterattack(atom/A, mob/user, proximity)
+/obj/item/bladed/axe/afterattack(atom/A, mob/user, proximity)
 	. = ..()
 	if(proximity && A && is_held_twohanded())
 		if(istype(A,/obj/structure/window))
