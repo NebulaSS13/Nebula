@@ -3,6 +3,7 @@
 	trait_cost = 1
 	category = "Prosthetic Limbs"
 	available_at_chargen = TRUE
+	available_at_map_tech = MAP_TECH_LEVEL_SPACE
 	abstract_type = /decl/trait/prosthetic_limb
 	reapply_on_rejuvenation = TRUE
 	var/fullbody_synthetic_only = FALSE
@@ -29,6 +30,7 @@
 			var/decl/bodytype/prosthetic/model_manufacturer = GET_DECL(model)
 			name = "[capitalize(model_manufacturer.name)] [bodypart_name]"
 			description = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
+			available_at_map_tech = model_manufacturer.required_map_tech
 		else
 			name = "Prosthetic [bodypart_name]"
 			description = "You have been fitted with a basic [lowertext(bodypart_name)] prosthesis."

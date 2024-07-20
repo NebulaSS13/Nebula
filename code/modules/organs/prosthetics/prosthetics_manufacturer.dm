@@ -49,6 +49,8 @@
 	)
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
+	/// Prosthetics of this type are not available in chargen unless the map has the required tech level.
+	var/required_map_tech = MAP_TECH_LEVEL_SPACE
 
 /decl/bodytype/prosthetic/get_user_species_for_validation()
 	if(bodytype_category)

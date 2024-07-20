@@ -108,6 +108,8 @@
 	var/list/incompatible_with
 	/// Whether or not trait is shown in chargen prefs
 	var/available_at_chargen = FALSE
+	/// Whether this trait should be available on a map with a given tech leve.
+	var/available_at_map_tech = MAP_TECH_LEVEL_ANY
 	/// Whether or not a rejuvenation should apply this aspect.
 	var/reapply_on_rejuvenation = FALSE
 	/// What species can select this trait in chargen?
@@ -137,6 +139,9 @@
 		else if(trait.parent != src)
 			. += "child [trait || "NULL"] does not have correct parent - expected [src], got [trait.parent || "NULL"]"
 
+/decl/trait/proc/is_available_at_chargen()
+	return available_at_chargen && global.using_map.map_tech_level >= available_at_map_tech
+
 /decl/trait/proc/validate_level(level)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
@@ -160,7 +165,7 @@
 			trait_category = new(category)
 			global.trait_categories[category] = trait_category
 		trait_category.items += src
-		if(trait_category.hide_from_chargen && available_at_chargen)
+		if(trait_category.hide_from_chargen && is_available_at_chargen())
 			trait_category.hide_from_chargen = FALSE
 		if(istype(parent))
 			LAZYDISTINCTADD(parent.children, src)
