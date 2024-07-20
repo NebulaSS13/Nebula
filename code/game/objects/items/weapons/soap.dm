@@ -23,6 +23,10 @@
 	var/decal_name
 	var/list/decals = list("diamond", "heart", "circle", "triangle", "")
 
+/obj/item/soap/crafted
+	desc = "A lump of home-made soap."
+	icon_state = "soap-lump"
+
 /obj/item/soap/initialize_reagents(populate = TRUE)
 	create_reagents(SOAP_MAX_VOLUME)
 	. = ..()
@@ -33,6 +37,9 @@
 /obj/item/soap/Initialize()
 	. = ..()
 	initialize_reagents()
+	generate_icon()
+
+/obj/item/soap/proc/generate_icon()
 	var/shape = pick(valid_shapes)
 	var/scent = pick(valid_scents)
 	var/smelly = pick(scent_intensity)
