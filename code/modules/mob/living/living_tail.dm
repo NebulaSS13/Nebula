@@ -1,4 +1,4 @@
-/mob/living/proc/update_tail_showing(var/update_icons=1)
+/mob/living/proc/update_tail_showing(update_icons = TRUE)
 
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!istype(tail_organ))
@@ -6,7 +6,7 @@
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 		return
 
-	var/tail_state = tail_organ.get_tail(tail_organ)
+	var/tail_state = tail_organ.get_tail()
 	if(!tail_state)
 		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
@@ -18,8 +18,11 @@
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 
 	var/icon/tail_s = get_tail_icon_for_organ(tail_organ)
-	var/tail_image = image(tail_s, icon_state = tail_state)
-	animate_tail_reset(0)
+	if(!check_state_in_icon(tail_state, tail_s))
+		set_tail_state("_static")
+		return
+
+	var/tail_image = image(tail_s, tail_state)
 	if(dir == NORTH)
 		set_current_mob_underlay(HU_TAIL_LAYER, null, FALSE)
 		set_current_mob_overlay(HO_TAIL_LAYER, tail_image, update_icons)
@@ -47,6 +50,9 @@
 	var/tail_icon  = tail_organ.get_tail_icon()
 	if(!tail_state || !tail_icon)
 		return // No tail data!
+
+	if(tail_organ.tail_animation_state)
+		tail_state = "[tail_state][tail_organ.tail_animation_state]"
 
 	// These values may be null and are generally optional.
 	var/hair_colour     = GET_HAIR_COLOUR(src)
@@ -86,10 +92,10 @@
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return null
-	var/image/tail_overlay = get_current_tail_image()
-	if(tail_overlay && check_state_in_icon(tail_overlay.icon, t_state))
-		tail_overlay.icon_state = t_state
-	return tail_overlay
+	if(tail_organ.tail_animation_state != t_state)
+		tail_organ.tail_animation_state = t_state
+		update_tail_showing(TRUE)
+	return get_current_tail_image()
 
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
@@ -100,20 +106,10 @@
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
-	var/t_state = "[tail_organ.get_tail()]_once"
-
-	var/image/tail_overlay = get_current_tail_image()
-	if(tail_overlay && tail_overlay.icon_state == t_state)
-		return //let the existing animation finish
-
-	tail_overlay = set_tail_state(t_state)
+	var/image/tail_overlay = set_tail_state("_once")
 	if(tail_overlay)
-		spawn(20)
-			//check that the animation hasn't changed in the meantime
-			var/current_tail = get_current_tail_image()
-			if(current_tail == tail_overlay && tail_overlay.icon_state == t_state)
-				animate_tail_stop()
-
+		spawn(2 SECONDS)
+			animate_tail_stop()
 	if(update_icons)
 		queue_icon_update()
 
@@ -123,7 +119,7 @@
 		return
 	var/tail_states = tail_organ.get_tail_states()
 	if(tail_states)
-		set_tail_state("[tail_organ.get_tail()]_slow[rand(1, tail_states)]")
+		set_tail_state("_slow[rand(1, tail_states)]")
 		if(update_icons)
 			queue_icon_update()
 
@@ -133,7 +129,7 @@
 		return
 	var/tail_states = tail_organ.get_tail_states()
 	if(tail_states)
-		set_tail_state("[tail_organ.get_tail()]_loop[rand(1, tail_states)]")
+		set_tail_state("_loop[rand(1, tail_states)]")
 		if(update_icons)
 			queue_icon_update()
 
@@ -143,9 +139,9 @@
 		return
 	var/tail_states = tail_organ.get_tail_states(src)
 	if(stat != DEAD && tail_states)
-		set_tail_state("[tail_organ.get_tail()]_idle[rand(1, tail_states)]")
+		set_tail_state("_idle[rand(1, tail_states)]")
 	else
-		set_tail_state("[tail_organ.get_tail()]_static")
+		set_tail_state("_static")
 
 	if(update_icons)
 		queue_icon_update()
@@ -154,4 +150,4 @@
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
-	set_tail_state("[tail_organ.get_tail()]_static")
+	set_tail_state("_static")

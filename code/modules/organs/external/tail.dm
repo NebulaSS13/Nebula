@@ -27,9 +27,12 @@
 	var/tail_hair_blend = ICON_ADD
 	/// How many random tail states are available for animations.
 	var/tail_states = 1
+	/// If we have an animation playing, it will be this state.
+	var/tail_animation_state
 
 /obj/item/organ/external/tail/skeletonize()
 	. = ..()
+	tail_animation_state = null
 	owner?.update_tail_showing()
 
 /obj/item/organ/external/tail/do_uninstall(in_place, detach, ignore_children, update_icon)
@@ -47,6 +50,8 @@
 /obj/item/organ/external/tail/proc/get_tail()
 	var/modifier = owner?.get_overlay_state_modifier()
 	. = modifier ? "[tail][modifier]" : tail
+	if(tail_animation_state)
+		. = "[.][tail_animation_state]"
 
 /obj/item/organ/external/tail/proc/get_tail_icon()
 	return tail_icon
