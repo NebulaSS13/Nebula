@@ -169,13 +169,13 @@
 		/obj/item/clothing/suit/judgerobe           = TRADER_THIS_TYPE,
 		/obj/item/clothing/suit/wizrobe/magusred    = TRADER_THIS_TYPE,
 		/obj/item/clothing/suit/wizrobe/magusblue   = TRADER_THIS_TYPE,
-		/obj/item/clothing/costume/gladiator          = TRADER_THIS_TYPE,
-		/obj/item/clothing/costume/kilt               = TRADER_THIS_TYPE,
-		/obj/item/clothing/costume/redcoat            = TRADER_THIS_TYPE,
-		/obj/item/clothing/costume/soviet             = TRADER_THIS_TYPE,
+		/obj/item/clothing/costume/gladiator        = TRADER_THIS_TYPE,
+		/obj/item/clothing/costume/kilt             = TRADER_THIS_TYPE,
+		/obj/item/clothing/costume/redcoat          = TRADER_THIS_TYPE,
+		/obj/item/clothing/costume/soviet           = TRADER_THIS_TYPE,
 		/obj/item/harpoon                           = TRADER_THIS_TYPE,
 		/obj/item/sword                             = TRADER_ALL,
 		/obj/item/scythe                            = TRADER_THIS_TYPE,
 		/obj/item/star                              = TRADER_THIS_TYPE,
-		/obj/item/baseball_bat             = TRADER_THIS_TYPE
+		/obj/item/baseball_bat                      = TRADER_THIS_TYPE
 	)

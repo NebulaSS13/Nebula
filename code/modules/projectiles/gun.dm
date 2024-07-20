@@ -42,9 +42,9 @@
 	origin_tech = @'{"combat":1}'
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
-
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/pickup2.ogg'
+	can_be_twohanded = TRUE // also checks one_hand_penalty
 
 	var/fire_verb = "fire"
 	var/waterproof = FALSE
@@ -106,6 +106,9 @@
 	autofiring_at = null
 	autofiring_by = null
 	. = ..()
+
+/obj/item/gun/is_held_twohanded(mob/living/wielder)
+	return one_hand_penalty > 0 && ..()
 
 /obj/item/gun/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
 	return TRUE
