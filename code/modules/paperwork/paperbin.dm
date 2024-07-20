@@ -8,7 +8,6 @@
 	item_state          = "sheet-metal"
 	randpixel           = 0
 	layer               = BELOW_OBJ_LAYER
-	throwforce          = 1
 	w_class             = ITEM_SIZE_NORMAL
 	throw_speed         = 3
 	throw_range         = 7

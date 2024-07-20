@@ -5,12 +5,11 @@
 	icon_state = "lock_construct"
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
+	_base_attack_force = 0
 	var/lock_data
 
 /obj/item/lock_construct/Initialize()
 	. = ..()
-	force = 0
-	throwforce = 0
 	lock_data = generateRandomString(round(material.integrity/50))
 
 /obj/item/lock_construct/examine(mob/user, distance)

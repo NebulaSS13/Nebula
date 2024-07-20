@@ -6,7 +6,6 @@
 	randpixel = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
-	throwforce = 1
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/brass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
@@ -136,7 +135,6 @@
 	slot_flags = SLOT_LOWER_BODY
 	item_state = "syringe_kit"
 	material = /decl/material/solid/metal/steel
-	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 10

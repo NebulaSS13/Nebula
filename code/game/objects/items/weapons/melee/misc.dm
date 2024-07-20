@@ -6,13 +6,12 @@
 	item_state = "chain"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
-	force = 10
 	item_flags = ITEM_FLAG_IS_WEAPON
-	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"combat":4}'
 	attack_verb = list("flicked", "whipped", "lashed")
 	material = /decl/material/solid/organic/leather
+	_base_attack_force = 10
 
 /obj/item/whip/abyssal
 	name = "abyssal whip"
@@ -21,11 +20,10 @@
 	item_state = "whip"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
-	force = 16 //max hit with 60 strength and no equipment. Duel Arena no No forfeit - Snapshot
-	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"combat":4}'
 	attack_verb = list("flicked", "whipped", "lashed")
+	_base_attack_force = 16 //max hit with 60 strength and no equipment. Duel Arena no No forfeit - Snapshot
 
 /obj/item/whip/tail
 	name = "drake's tail"
@@ -33,7 +31,7 @@
 	icon_state = "tailwhip"
 	item_state = "whip"
 	obj_flags = null
-	force = 19
+	_base_attack_force = 19
 	edge = TRUE
 	origin_tech = @'{"combat":6,"materials":5}'
 	material = /decl/material/solid/organic/leather/lizard

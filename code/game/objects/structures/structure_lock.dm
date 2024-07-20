@@ -4,7 +4,7 @@
 /obj/structure/proc/try_key_unlock(obj/item/used_item, mob/user)
 	if(!lock)
 		return FALSE
-	if(!used_item.user_can_wield(user))
+	if(!used_item.user_can_attack_with(user))
 		return FALSE
 	if(istype(used_item, /obj/item/key))
 		if(lock.toggle(used_item))

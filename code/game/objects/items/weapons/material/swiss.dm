@@ -14,7 +14,6 @@
 	desc = "A small, colourable, multi-purpose folding knife."
 	icon = 'icons/obj/items/weapon/knives/folding/swiss.dmi'
 	valid_handle_colors = null
-	max_force = 5
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
@@ -78,7 +77,7 @@
 			user.visible_message("<span class='notice'>\The [user] opens the [lowertext(choice)].</span>")
 
 	active_tool = choice
-	update_force()
+	update_attack_force()
 	update_icon()
 	add_fingerprint(user)
 
@@ -86,7 +85,7 @@
 	. = ..()
 	to_chat(user, active_tool == SWISSKNF_CLOSED ? "It is closed." : "Its [lowertext(active_tool)] is folded out.")
 
-/obj/item/knife/folding/swiss/update_force()
+/obj/item/knife/folding/swiss/update_attack_force()
 	if(active_tool == SWISSKNF_CLOSED)
 		w_class = initial(w_class)
 	else
@@ -114,9 +113,10 @@
 
 /obj/item/knife/folding/swiss/resolve_attackby(obj/target, mob/user)
 	if((istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)) && active_tool == SWISSKNF_GBLADE)
-		force = force * 8
+		var/force = get_base_attack_force()
+		set_base_attack_force(force * 8)
 		. = ..()
-		update_force()
+		set_base_attack_force(force)
 		return
 	if(istype(target, /obj/item))
 		if(target.w_class <= ITEM_SIZE_NORMAL)

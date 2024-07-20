@@ -3,15 +3,13 @@
 	desc                = "A long, heavy length of material, purportedly used by wizards."
 	icon                = 'icons/obj/items/staff.dmi'
 	icon_state          = ICON_STATE_WORLD
-	force               = 10
-	throwforce          = 7
-	throw_speed         = 1
-	throw_range         = 5
+
 	w_class             = ITEM_SIZE_HUGE
 	attack_verb         = list("bludgeoned", "whacked", "disciplined", "thrashed")
 	material            = /decl/material/solid/organic/wood
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	base_parry_chance   = 30
+	_base_attack_force = 3
 
 /obj/item/staff/get_stance_support_value()
 	return LIMB_UNUSABLE

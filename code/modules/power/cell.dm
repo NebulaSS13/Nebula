@@ -6,8 +6,6 @@
 	icon_state = "cell"
 	item_state = "cell"
 	origin_tech = @'{"powerstorage":1}'
-	force = 5.0
-	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
@@ -125,7 +123,7 @@
 	desc = "A small power cell designed to power handheld devices."
 	icon_state = "device"
 	w_class = ITEM_SIZE_SMALL
-	force = 0
+	_base_attack_force = 0
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100

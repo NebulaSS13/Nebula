@@ -240,9 +240,8 @@
 	w_class = ITEM_SIZE_GARGANTUAN
 	slot_flags = 0
 	base_parry_chance = 0 //Irrelevant for exosuits, revise if this changes
-	max_force = 25
-	material_force_multiplier = 0.75 // Equals 20 AP with 25 force
 	max_health = ITEM_HEALTH_NO_DAMAGE //Else we need a whole system for replacement blades
+	_base_attack_force = 25
 
 /obj/item/tool/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
@@ -427,15 +426,12 @@
 		shield.on_block_attack()
 		return AURA_FALSE|AURA_CANCEL
 
-/obj/aura/mech_ballistic/hitby(atom/movable/M, datum/thrownthing/TT)
+/obj/aura/mech_ballistic/hitby(atom/movable/AM, datum/thrownthing/TT)
 	. = ..()
 	if (. && shield)
-		var/throw_damage = 0
-		if (istype(M,/obj/))
-			var/obj/O = M
-			throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
-		if (prob(shield.block_chance(throw_damage, 0, source = M, attacker = TT.thrower)))
-			user.visible_message(SPAN_WARNING("\The [M] bounces off \the [user]'s [shield]."))
+		var/throw_damage = AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		if (prob(shield.block_chance(throw_damage, 0, source = AM, attacker = TT.thrower)))
+			user.visible_message(SPAN_WARNING("\The [AM] bounces off \the [user]'s [shield]."))
 			playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 			shield.on_block_attack()
 			return AURA_FALSE|AURA_CANCEL

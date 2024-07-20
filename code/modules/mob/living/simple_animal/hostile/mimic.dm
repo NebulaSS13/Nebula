@@ -90,12 +90,12 @@ var/global/list/protected_objects = list(
 			ai?.try_destroy_surroundings = TRUE
 			if(O.density && O.anchored)
 				knockdown_people = 1
-				attacking_with.force = 2 * initial(attacking_with.force)
+				attacking_with.set_base_attack_force(2 * attacking_with.get_initial_base_attack_force())
 		else if(istype(O, /obj/item))
 			ai?.try_destroy_surroundings = FALSE
 			var/obj/item/I = O
 			current_health = 15 * I.w_class
-			attacking_with.force = 2 + initial(I.force)
+			attacking_with.set_base_attack_force(2 + I.get_initial_base_attack_force())
 
 			if(I.w_class <= ITEM_SIZE_SMALL)
 				move_intents = list(

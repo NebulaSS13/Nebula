@@ -11,7 +11,6 @@
 	color = COLOR_GRAY20
 	icon = 'icons/clothing/hands/gloves_thick.dmi'
 	icon_state = ICON_STATE_WORLD
-	force = 5
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,

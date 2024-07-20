@@ -460,7 +460,6 @@
 	randpixel = 10
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	throwforce = 1
 	var/use_color = TRUE
 
 /obj/item/trash/cigbutt/Initialize()

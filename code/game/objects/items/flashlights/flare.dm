@@ -64,10 +64,10 @@
 
 /obj/item/flashlight/flare/proc/update_damage()
 	if(on)
-		force = on_damage
+		set_base_attack_force(on_damage)
 		atom_damage_type = BURN
 	else
-		force = initial(force)
+		set_base_attack_force(get_initial_base_attack_force())
 		atom_damage_type = initial(atom_damage_type)
 
 /obj/item/flashlight/flare/on_update_icon()

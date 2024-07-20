@@ -173,7 +173,7 @@
 		qdel(src)
 		return
 
-	if(prob(I.force * 20 - metal * 25))
+	if(prob(I.get_attack_force(user) * 20 - metal * 25))
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the foamed metal with \the [I].</span>")
 		qdel(src)
 	else

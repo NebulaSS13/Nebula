@@ -139,7 +139,7 @@
 
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
 
-	if((W.atom_damage_type == BRUTE || W.atom_damage_type == BURN) && (W.can_puncture() || W.force > 10))
+	if((W.atom_damage_type == BRUTE || W.atom_damage_type == BURN) && (W.can_puncture() || W.get_attack_force(user) > 10))
 		visible_message(SPAN_DANGER("\The [user] pierces \the [src] with \the [W]!"))
 		deflate(TRUE)
 		return TRUE

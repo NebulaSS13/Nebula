@@ -17,7 +17,7 @@
 	name = "maglight"
 	desc = "A very, very heavy duty flashlight."
 	icon = 'icons/obj/lighting/maglight.dmi'
-	force = 10
+	_base_attack_force = 10
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
@@ -28,7 +28,7 @@
 	name = "lantern"
 	desc = "A mining lantern."
 	icon = 'icons/obj/lighting/lantern.dmi'
-	force = 10
+	_base_attack_force = 10
 	attack_verb = list ("bludgeoned", "bashed", "whack")
 	w_class = ITEM_SIZE_NORMAL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

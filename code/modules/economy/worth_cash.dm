@@ -6,8 +6,6 @@
 	opacity = FALSE
 	density = FALSE
 	anchored = FALSE
-	force = 1
-	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_TINY

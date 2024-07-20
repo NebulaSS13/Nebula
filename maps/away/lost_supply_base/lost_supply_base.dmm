@@ -1724,7 +1724,7 @@
 /turf/floor/airless,
 /area/lost_supply_base)
 "fJ" = (
-/obj/item/twohanded/fireaxe,
+/obj/item/bladed/axe/fire,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/airless,

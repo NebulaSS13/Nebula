@@ -4,7 +4,7 @@
 	icon = 'mods/species/ascent/icons/particle_rifle/rifle.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
-	force = 25 // Heavy as Hell.
+	_base_attack_force = 25 // Heavy as Hell.
 	projectile_type = /obj/item/projectile/beam/particle
 	max_shots = 18
 	self_recharge = 1
@@ -26,7 +26,7 @@
 	name = "particle projector"
 	desc = "A smaller variant on the Ascent particle lance, usually carried by drones and alates."
 	icon = 'mods/species/ascent/icons/particle_rifle/rifle_small.dmi'
-	force = 12
+	_base_attack_force = 12
 	max_shots = 9
 	burst = 1
 	one_hand_penalty = 0

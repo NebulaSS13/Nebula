@@ -162,7 +162,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/hardness = MAT_VALUE_HARD            // Used for edge damage in weapons.
 	var/reflectiveness = MAT_VALUE_DULL
 	var/ferrous = FALSE                       // Can be used as a striker for firemaking.
-	var/weight = MAT_VALUE_NORMAL             // Determines blunt damage/throwforce for weapons.
+	var/weight = MAT_VALUE_NORMAL             // Determines blunt damage/throw force for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
 	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'

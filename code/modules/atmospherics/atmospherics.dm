@@ -247,7 +247,7 @@ Pipelines + Other Objects -> Pipe network
 		var/unwrench_time = 4 SECONDS
 		if(!deconstruction_pressure_check())
 			unwrench_time *= 2
-			var/obj/item/twohanded/pipewrench/wrench = user.get_active_held_item()
+			var/obj/item/wrench/pipe/wrench = user.get_active_held_item()
 			if(!istype(wrench))
 				return SPAN_WARNING("You cannot unwrench \the [src], the internal pressure is too extreme compared to the environment.")
 

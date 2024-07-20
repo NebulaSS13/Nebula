@@ -182,11 +182,11 @@
 	var/damage = 0
 	switch(W.atom_damage_type)
 		if(BURN)
-			damage = (W.force / fire_resist)
+			damage = (W.get_attack_force(user) / fire_resist)
 			if(IS_WELDER(W))
 				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 		if(BRUTE)
-			damage = (W.force / brute_resist)
+			damage = (W.get_attack_force(user) / brute_resist)
 
 	take_damage(damage, W.atom_damage_type)
 	return
@@ -359,13 +359,13 @@ regen() will cover update_icon() for this proc
 		switch(tendril_type)
 			if("solid")
 				desc = "An incredibly dense, yet flexible, tendril, removed from an asteroclast."
-				force = 10
+				set_base_attack_force(10)
 				color = COLOR_BRONZE
 				origin_tech = @'{"materials":2}'
 			if("fire")
 				desc = "A tendril removed from an asteroclast. It's hot to the touch."
 				atom_damage_type = BURN
-				force = 15
+				set_base_attack_force(15)
 				color = COLOR_AMBER
 				origin_tech = @'{"powerstorage":2}'
 
@@ -373,8 +373,8 @@ regen() will cover update_icon() for this proc
 	if(!proximity)
 		return
 	if(is_tendril && prob(50))
-		force--
-		if(force <= 0)
+		set_base_attack_force(get_base_attack_force()-1)
+		if(get_base_attack_force() <= 0)
 			visible_message(SPAN_NOTICE("\The [src] crumbles apart!"))
 			user.drop_from_inventory(src)
 			new /obj/effect/decal/cleanable/ash(src.loc)

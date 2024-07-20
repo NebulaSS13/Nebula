@@ -3,14 +3,13 @@
 	icon_state          = ICON_STATE_WORLD
 	obj_flags           = OBJ_FLAG_CONDUCTIBLE
 	slot_flags          = SLOT_LOWER_BODY
-	force               = 10
-	throwforce          = 4
 	w_class             = ITEM_SIZE_HUGE
 	origin_tech         = @'{"materials":1,"engineering":1}'
 	attack_verb         = list("hit", "pierced", "sliced", "attacked")
 	sharp               = 0
 	abstract_type       = /obj/item/tool
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	_base_attack_force  = 10
 
 	/// Material is used for the head, handle is handle(d) below.
 	material = /decl/material/solid/metal/steel

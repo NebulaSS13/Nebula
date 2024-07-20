@@ -5,14 +5,13 @@
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_LOWER_BODY
-	force = 10
 	item_flags = ITEM_FLAG_IS_WEAPON
 	throw_speed = 1
 	throw_range = 4
-	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/glass
 	max_health = ITEM_HEALTH_NO_DAMAGE
+	_base_attack_force = 10
 
 /obj/item/nullrod/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
@@ -55,9 +54,8 @@
 	desc = "It's a net made of green energy."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
-	throwforce = 0
-	force = 0
 	max_health = 100
+	_base_attack_force = 0
 	var/net_type = /obj/effect/energy_net
 
 /obj/item/energy_net/safari
@@ -210,7 +208,7 @@
 	return TRUE
 
 /obj/effect/energy_net/attackby(obj/item/W, mob/user)
-	current_health -= W.force
+	current_health -= W.get_attack_force(user)
 	healthcheck()
 	..()
 

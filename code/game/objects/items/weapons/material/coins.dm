@@ -5,13 +5,10 @@
 	icon_state = "coin1"
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	randpixel = 8
-	force = 1
-	throwforce = 1
-	material_force_multiplier = 0.1
-	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	material = /decl/material/solid/metal/steel
+	_base_attack_force = 1
 	var/can_flip = TRUE
 	var/datum/denomination/denomination
 

@@ -156,6 +156,10 @@ var/global/list/icon_state_cache = list()
 			adjusted_overlay.plane =            I.plane
 			adjusted_overlay.layer =            I.layer
 			overlay.overlays += adjusted_overlay
+
+	if(overlay && is_held_twohanded())
+		overlay.icon_state = "[overlay.icon_state]-wielded"
+
 	return overlay
 
 //Special proc belts use to compose their icon

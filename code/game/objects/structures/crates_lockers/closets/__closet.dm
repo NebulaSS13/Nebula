@@ -246,13 +246,13 @@ var/global/list/closets = list()
 
 /obj/structure/closet/attackby(obj/item/used_item, mob/user)
 
-	if(user.a_intent == I_HURT && used_item.force)
+	if(user.a_intent == I_HURT && used_item.get_attack_force(user))
 		return ..()
 
 	if(!opened && (istype(used_item, /obj/item/stack/material) || IS_WRENCH(used_item)) )
 		return ..()
 
-	var/can_wield = used_item.user_can_wield(user, silent = TRUE)
+	var/can_wield = used_item.user_can_attack_with(user, silent = TRUE)
 
 	if(opened)
 		if(can_wield)

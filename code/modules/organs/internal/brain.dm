@@ -4,9 +4,7 @@
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	icon_state = "brain2"
-	force = 1.0
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = @'{"biotech":3}'
@@ -15,6 +13,7 @@
 	damage_reduction = 0
 	scale_max_damage_to_species_health = FALSE
 	transfer_brainmob_with_organ = TRUE
+	_base_attack_force = 1
 	var/can_use_brain_interface = TRUE
 	var/should_announce_brain_damage = TRUE
 	var/oxygen_reserve = 6

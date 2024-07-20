@@ -52,7 +52,7 @@
 		to_chat(user, SPAN_NOTICE("You cleanse \the [src] of taint, purging its shackles to its creator."))
 		is_evil = 0
 		return
-	if(I.force >= 5)
+	if(I.get_attack_force(user) >= 5)
 		if(full != SOULSTONE_CRACKED)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]"),

@@ -34,7 +34,6 @@
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
 	storage = /datum/storage/cigpapers
-	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/plastic
 
@@ -65,7 +64,6 @@
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
 	storage = /datum/storage/chewables
-	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/tin
 

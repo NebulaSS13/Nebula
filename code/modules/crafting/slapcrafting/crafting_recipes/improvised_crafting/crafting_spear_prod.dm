@@ -20,13 +20,13 @@
 /decl/crafting_stage/spear_blade_shard
 	completion_trigger_type = /obj/item/shard
 	progress_message = "You fasten the shard to the top of the rod with the cable."
-	product = /obj/item/twohanded/spear
+	product = /obj/item/bladed/polearm/spear
 
 /decl/crafting_stage/spear_blade_shard/get_product(var/obj/item/work)
 	var/obj/item/shard/blade = locate() in work
 	. = new product(get_turf(work), blade && blade.material && blade.material.type)
-	if(ispath(product,  /obj/item/twohanded/spear))
-		var/obj/item/twohanded/spear/S = .
+	if(ispath(product,  /obj/item/bladed/polearm/spear))
+		var/obj/item/bladed/polearm/spear/S = .
 		var/obj/item/handcuffs/cable/C = locate() in work
 		if(C)
 			S.cable_color = C.color
@@ -37,7 +37,7 @@
 /decl/crafting_stage/spear_blade_blade
 	completion_trigger_type = /obj/item/butterflyblade
 	progress_message = "You fasten the blade to the top of the rod with the cable."
-	product = /obj/item/twohanded/spear
+	product = /obj/item/bladed/polearm/spear
 
 /decl/crafting_stage/spear_blade_blade/get_product(var/obj/item/work)
 	var/obj/item/butterflyblade/blade = locate() in work

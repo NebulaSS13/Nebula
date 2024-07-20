@@ -25,7 +25,7 @@
 	icon_state = ICON_STATE_WORLD
 	max_shots = 5
 	w_class = ITEM_SIZE_SMALL
-	force = 2 //it's the size of a car key, what did you expect?
+	_base_attack_force = 2 //it's the size of a car key, what did you expect?
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, indicator_color=COLOR_CYAN),

@@ -6,7 +6,6 @@
 	icon_state = ICON_STATE_WORLD
 	gender = PLURAL
 	w_class = ITEM_SIZE_TINY
-	throwforce = 2
 	slot_flags = SLOT_EARS
 	fallback_slot = slot_l_ear_str
 

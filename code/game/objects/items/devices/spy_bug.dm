@@ -5,15 +5,11 @@
 	icon_state = "eshield0"
 	item_state = "nothing"
 	layer = BELOW_TABLE_LAYER
-
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 5.0
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	throwforce = 5
 	throw_range = 15
 	throw_speed = 3
-
 	origin_tech = @'{"programming":1,"engineering":1,"esoteric":3}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
@@ -21,7 +17,6 @@
 		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
 	)
-
 	var/obj/item/radio/spy/radio
 
 /obj/item/spy_bug/Initialize()

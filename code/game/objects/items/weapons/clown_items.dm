@@ -21,7 +21,6 @@
 	desc = "A horn off of a bicycle."
 	icon = 'icons/obj/items/horn.dmi'
 	icon_state = ICON_STATE_WORLD
-	throwforce = 3
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
 	throw_range = 15

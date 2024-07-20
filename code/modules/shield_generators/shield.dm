@@ -212,13 +212,14 @@
 	user.do_attack_animation(src)
 
 	if(gen.check_flag(MODEFLAG_HYPERKINETIC))
+		var/force = I.get_attack_force(user)
 		user.visible_message("<span class='danger'>\The [user] [pick(I.attack_verb)] \the [src] with \the [I]!</span>")
 		if(I.atom_damage_type == BURN)
-			take_damage(I.force, SHIELD_DAMTYPE_HEAT)
+			take_damage(force, SHIELD_DAMTYPE_HEAT)
 		else if (I.atom_damage_type == BRUTE)
-			take_damage(I.force, SHIELD_DAMTYPE_PHYSICAL)
+			take_damage(force, SHIELD_DAMTYPE_PHYSICAL)
 		else
-			take_damage(I.force, SHIELD_DAMTYPE_EM)
+			take_damage(force, SHIELD_DAMTYPE_EM)
 		if(gen.check_flag(MODEFLAG_OVERCHARGE) && (I.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			overcharge_shock(user)
 	else

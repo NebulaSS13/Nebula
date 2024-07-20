@@ -5,10 +5,8 @@
 	icon = 'icons/obj/items/weapon/stunbaton.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
-	force = 15
 	sharp = 0
 	edge = 0
-	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"combat":2}'
 	attack_verb = list("beaten")
@@ -20,6 +18,7 @@
 		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
 	)
 	item_flags = ITEM_FLAG_IS_WEAPON
+	_base_attack_force = 15
 	var/stunforce = 0
 	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not
@@ -207,11 +206,13 @@
 	icon = 'icons/obj/items/weapon/stunprod.dmi'
 	icon_state = "stunprod_nocell"
 	item_state = "prod"
-	force = 3
-	throwforce = 5
 	stunforce = 0
 	agonyforce = 60	//same force as a stunbaton, but uses way more charge.
 	hitcost = 25
 	attack_verb = list("poked")
 	slot_flags = null
-	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE)
+	matter = list(
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE
+	)
+	_base_attack_force = 3

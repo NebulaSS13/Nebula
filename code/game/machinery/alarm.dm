@@ -782,7 +782,7 @@
 /obj/machinery/alarm/attackby(obj/item/used_item, mob/user)
 	if(!(stat & (BROKEN|NOPOWER)))
 		if (istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer))// trying to unlock the interface with an ID card
-			if(!used_item.user_can_wield(user))
+			if(!used_item.user_can_attack_with(user))
 				return TRUE
 			if(allowed(user) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 				locked = !locked

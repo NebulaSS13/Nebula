@@ -112,7 +112,7 @@
 
 /obj/item/natural_weapon/bite/megalion
 	name = "mandibles"
-	force = 25
+	_base_attack_force = 25
 
 /mob/living/simple_animal/hostile/antlion/mega/Initialize()
 	. = ..()

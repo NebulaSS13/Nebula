@@ -103,13 +103,12 @@
 	icon_state = "golden_cup"
 	item_state = "" //nope :(
 	w_class = ITEM_SIZE_HUGE
-	force = 14
-	throwforce = 10
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = null
 	volume = 150
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	_base_attack_force = 14
 
 ///////////////////////////////////////////////Drinks
 //Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be ingested directly

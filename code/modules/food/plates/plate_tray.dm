@@ -6,13 +6,12 @@
 	material             = /decl/material/solid/organic/plastic
 	w_class              = ITEM_SIZE_NORMAL
 	storage              = /datum/storage/tray
-	force                = 4
-	throwforce           = 10
 	throw_speed          = 1
 	throw_range          = 5
 	melee_accuracy_bonus = -10
 	attack_verb          = list("served","slammed","hit")
 	material_alteration  = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	_base_attack_force   = 4
 	var/cooldown         = 0 // Cooldown for banging the tray with a rolling pin. based on world.time. very silly
 	var/no_drop          = FALSE
 

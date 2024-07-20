@@ -134,13 +134,7 @@
 	. = ..()
 	if(.)
 		visible_message(SPAN_DANGER("[src] was hit by [AM]."))
-		var/tforce = 0
-		if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-			var/mob/I = AM
-			tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		else if(isobj(AM))
-			var/obj/item/I = AM
-			tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		var/tforce = AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		if(reinf_material)
 			tforce *= 0.25
 		if(current_health - tforce <= 7 && !reinf_material)
@@ -288,7 +282,7 @@
 /obj/structure/window/bash(obj/item/weapon, mob/user)
 	if(isliving(user) && user.a_intent == I_HELP)
 		return FALSE
-	if(!weapon.user_can_wield(user))
+	if(!weapon.user_can_attack_with(user))
 		return FALSE
 	if(weapon.item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return FALSE
@@ -296,7 +290,7 @@
 	// physical damage types that can impart force; swinging a bat or energy sword
 	if(weapon.atom_damage_type == BRUTE || weapon.atom_damage_type == BURN)
 		user.do_attack_animation(src)
-		hit(weapon.force)
+		hit(weapon.get_attack_force(user))
 		if(current_health <= 7)
 			set_anchored(FALSE)
 			step(src, get_dir(user, src))

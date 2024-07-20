@@ -183,7 +183,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 		var/delay_holder
 
-		if(W.force < 5)
+		if(W.get_attack_force(user) < 5)
 			visible_message(SPAN_WARNING("[user] starts sawing away roughly at \the [src] with \the [W]."))
 			delay_holder = 8 SECONDS
 		else
@@ -502,7 +502,6 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_MAROON
 	desc = "A coil of wiring, suitable for both delicate electronics and heavy duty power supply."
 	singular_name = "length"
-	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
 	throw_range = 5

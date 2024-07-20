@@ -17,7 +17,7 @@
 	name = "Burning Hand"
 	icon = 'icons/mob/screen/grabs.dmi'
 	icon_state = "grabbed+1"
-	force = 10
+	_base_attack_force = 10
 	atom_damage_type =  BURN
 	simulated = 0
 	max_health = ITEM_HEALTH_NO_DAMAGE
@@ -41,7 +41,7 @@
 		return
 	burn_timer = world.time + 5 SECONDS
 	burn_power++
-	force += 2
+	set_base_attack_force(get_base_attack_force()+2)
 	if(!ishuman(src.loc))
 		qdel(src)
 		return

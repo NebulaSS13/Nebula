@@ -13,7 +13,6 @@
 	slot_flags             = SLOT_HEAD
 	body_parts_covered     = SLOT_HEAD
 	randpixel              = 8
-	throwforce             = 0
 	throw_range            = 1
 	throw_speed            = 1
 	w_class                = ITEM_SIZE_TINY

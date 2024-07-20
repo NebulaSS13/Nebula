@@ -4,7 +4,6 @@
 	base_state = ICON_STATE_WORLD
 	plural_icon_state = ICON_STATE_WORLD + "-mult"
 	max_icon_state = ICON_STATE_WORLD + "-max"
-	throwforce = 10
 	w_class = ITEM_SIZE_NORMAL
 	sharp = 1
 	edge = 0
@@ -13,6 +12,8 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	matter_multiplier = 0.2
 	is_spawnable_type = TRUE
+	_base_attack_force = 2
+	_thrown_force_multiplier = 3
 	var/superheated = FALSE
 
 /obj/item/stack/material/bow_ammo/on_update_icon()
@@ -20,10 +21,15 @@
 	if(superheated)
 		add_overlay(overlay_image(icon, "[icon_state]-superheated", COLOR_WHITE, RESET_COLOR))
 
+/obj/item/stack/material/bow_ammo/update_attack_force()
+	. = ..()
+	if(superheated)
+		_cached_attack_force *= 2
+
 /obj/item/stack/material/bow_ammo/proc/make_superheated()
 	if(!superheated)
-		throwforce *= 2
 		superheated = TRUE
+		update_attack_force()
 		update_icon()
 
 /// Helper for metal rods falling apart.

@@ -1,20 +1,19 @@
 /obj/item/energy_blade/projected
 
-	anchored =          TRUE    // Never spawned outside of inventory, should be fine.
-	armor_penetration = 100
-	throw_speed =       1
-	throw_range =       1
-	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
+	anchored           = TRUE    // Never spawned outside of inventory, should be fine.
+	armor_penetration  = 100
+	throw_speed        = 1
+	throw_range        = 1
+	w_class            = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	hitsound = 'sound/weapons/blade1.ogg'
-	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
+	hitsound           = 'sound/weapons/blade1.ogg'
+	is_spawnable_type  = FALSE // Do not manually spawn this, it will runtime/break.
 
-	active =              TRUE
-	active_force =        40 //Normal attacks deal very high damage - about the same as wielded fire axe
-	active_sharp =        1
-	active_edge =         1
-	active_throwforce =   1  //Throwing or dropping the item deletes it.
-	active_parry_chance = 50
+	active                    = TRUE
+	active_sharp              = 1
+	active_edge               = 1
+	active_parry_chance       = 50
+	_active_base_attack_force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
 	obj_flags = OBJ_FLAG_NO_STORAGE
 
 	var/mob/living/creator

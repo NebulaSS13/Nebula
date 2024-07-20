@@ -94,7 +94,6 @@
 /obj/item/knife/ritual/shadow
 	name = "black death"
 	desc = "An obsidian dagger. The singed remains of a green cloth are wrapped around the 'handle.'"
-	material_force_multiplier = 0.3
 	var/charge = 5
 
 /obj/item/knife/ritual/shadow/apply_hit_effect(var/mob/living/target, var/mob/living/user, var/hit_zone)

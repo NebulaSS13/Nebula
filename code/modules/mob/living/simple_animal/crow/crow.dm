@@ -39,7 +39,7 @@
 	gender = PLURAL
 	attack_verb = list("clawed")
 	sharp = TRUE
-	force = 7
+	_base_attack_force = 7
 
 /mob/living/simple_animal/crow/Initialize()
 	. = ..()

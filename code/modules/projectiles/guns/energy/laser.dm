@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
-	force = 10
+	_base_attack_force = 10
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
 	origin_tech = @'{"combat":3,"magnets":2}'
@@ -59,7 +59,6 @@
 	icon = 'icons/obj/guns/caplaser.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
-	force = 5
 	slot_flags = SLOT_LOWER_BODY //too unusually shaped to fit in a holster
 	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam

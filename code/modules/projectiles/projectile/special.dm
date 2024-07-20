@@ -177,8 +177,6 @@
 /obj/item/missile
 	icon = 'icons/obj/items/grenades/missile.dmi'
 	icon_state = ICON_STATE_WORLD
-	var/primed = null
-	throwforce = 15
 	material = /decl/material/solid/fiberglass
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
@@ -187,6 +185,7 @@
 		/decl/material/liquid/anfo           = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/liquid/fuel           = MATTER_AMOUNT_REINFORCEMENT,
 	)
+	var/primed = null
 
 /obj/item/missile/throw_impact(atom/hit_atom)
 	..()

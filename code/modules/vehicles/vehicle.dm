@@ -100,9 +100,9 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.atom_damage_type)
 			if(BURN)
-				current_health -= W.force * fire_dam_coeff
+				current_health -= W.get_attack_force(user) * fire_dam_coeff
 			if(BRUTE)
-				current_health -= W.force * brute_dam_coeff
+				current_health -= W.get_attack_force(user) * brute_dam_coeff
 		..()
 		healthcheck()
 

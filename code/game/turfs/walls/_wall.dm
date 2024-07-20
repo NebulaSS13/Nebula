@@ -139,11 +139,10 @@ var/global/list/wall_fullblend_objects = list(
 
 	take_damage(damage)
 
-/turf/wall/hitby(AM, var/datum/thrownthing/TT)
+/turf/wall/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
 	if(. && density && !ismob(AM))
-		var/obj/O = AM
-		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		var/tforce = AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src, hitsound, tforce >= 15 ? 60 : 25, TRUE)
 		if(tforce > 0)
 			take_damage(tforce)

@@ -8,14 +8,13 @@
 	icon_state                    = ICON_STATE_WORLD
 	throw_range                   = 5
 	throw_speed                   = 4
-	throwforce                    = 3
-	force                         = 3
 	w_class                       = ITEM_SIZE_NORMAL
 	material                      = /decl/material/solid/organic/plastic
 	volume                        = 60
 	amount_per_transfer_from_this = 30
 	possible_transfer_amounts     = @"[30,60]"
 	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER
+	_base_attack_force            = 3
 
 /obj/item/chems/toner_cartridge/populate_reagents()
 	//Normally this would be toner powder, but probably not worth making a material for that.

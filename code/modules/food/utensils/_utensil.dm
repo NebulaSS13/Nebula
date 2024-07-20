@@ -19,9 +19,7 @@
 	attack_verb                      = list("attacked", "stabbed", "poked")
 	sharp                            = FALSE
 	edge                             = FALSE
-	thrown_material_force_multiplier = 0.1
 	material                         = /decl/material/solid/metal/aluminium
-	material_force_multiplier        = 0.1
 	material_alteration              = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 	var/obj/item/food/loaded_food

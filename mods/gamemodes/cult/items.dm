@@ -26,6 +26,7 @@
 		to_chat(user, "<span class='danger'>An unexplicable force rips through you, tearing the sword from your grasp!</span>")
 
 	//random amount of damage between half of the blade's force and the full force of the blade.
+	var/force = get_attack_force(user)
 	user.apply_damage(rand(force/2, force), BRUTE, zone, (DAM_SHARP|DAM_EDGE), armor_pen = 100)
 	SET_STATUS_MAX(user, STAT_WEAK, 5)
 

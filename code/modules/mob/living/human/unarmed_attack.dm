@@ -271,7 +271,7 @@
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	if(!istype(shoes))
 		return damage
-	return damage + (shoes ? shoes.force : 0)
+	return damage + (shoes ? shoes.get_attack_force(user) : 0)
 
 /decl/natural_attack/kick/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
@@ -307,7 +307,7 @@
 
 /decl/natural_attack/stomp/get_unarmed_damage(mob/living/user, mob/living/victim)
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
-	return damage + (shoes ? shoes.force : 0)
+	return damage + (shoes ? shoes.get_attack_force(user) : 0)
 
 /decl/natural_attack/stomp/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 

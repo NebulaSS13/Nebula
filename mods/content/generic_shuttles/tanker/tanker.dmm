@@ -399,7 +399,7 @@
 /obj/structure/rack,
 /obj/item/belt/utility/atmostech,
 /obj/item/wrench,
-/obj/item/twohanded/pipewrench,
+/obj/item/wrench/pipe,
 /obj/item/radio/off,
 /obj/item/radio/off,
 /turf/floor/tiled/steel_grid,

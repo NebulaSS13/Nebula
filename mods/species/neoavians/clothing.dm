@@ -91,6 +91,6 @@
 	name = "cloth footwraps"
 	desc = "A roll of treated canvas used for wrapping feet."
 	icon = 'mods/species/neoavians/icons/clothing/feet/footwraps.dmi'
-	force = 0
+	_base_attack_force = 0
 	item_flags = ITEM_FLAG_SILENT
 	w_class = ITEM_SIZE_SMALL

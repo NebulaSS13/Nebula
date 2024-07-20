@@ -177,5 +177,5 @@
 		/obj/item/sword                             = TRADER_ALL,
 		/obj/item/scythe                            = TRADER_THIS_TYPE,
 		/obj/item/star                              = TRADER_THIS_TYPE,
-		/obj/item/twohanded/baseballbat             = TRADER_THIS_TYPE
+		/obj/item/baseball_bat             = TRADER_THIS_TYPE
 	)

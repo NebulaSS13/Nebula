@@ -7,8 +7,6 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
-	throwforce = 3
-	force = 3
 	w_class = ITEM_SIZE_TINY
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
 	var/obj/item/chems/syringe/syringe
@@ -73,7 +71,7 @@
 	icon = 'icons/obj/guns/launcher/syringe.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
-	force = 7
+	_base_attack_force = 7
 	material = /decl/material/solid/metal/steel
 	slot_flags = SLOT_LOWER_BODY
 
@@ -153,7 +151,7 @@
 	icon = 'icons/clothing/mask/smokables/cigarette_electronic_deluxe.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	force = 3
+	_base_attack_force = 3
 	throw_distance = 7
 	release_force = 10
 

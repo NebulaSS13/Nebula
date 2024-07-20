@@ -6,7 +6,6 @@
 	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
-	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 5

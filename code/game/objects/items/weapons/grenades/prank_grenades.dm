@@ -6,7 +6,7 @@
 	playsound(src.loc, get_sfx("explosion"), 50, 1, 30)
 
 /obj/item/natural_weapon/bite/fake
-	force = 0
+	_base_attack_force = 0
 
 /mob/living/simple_animal/hostile/carp/holodeck/fake
 	faction = null

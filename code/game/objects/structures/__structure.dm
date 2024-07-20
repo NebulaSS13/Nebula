@@ -241,7 +241,7 @@
 		for(var/obj/item/shard/S in L)
 			if(S.sharp && prob(50))
 				affecting_mob.visible_message(SPAN_DANGER("\The [S] slices into [affecting_mob]'s face!"), SPAN_DANGER("\The [S] slices into your face!"))
-				affecting_mob.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
+				affecting_mob.standard_weapon_hit_effects(S, G.assailant, S.get_attack_force()*2, BP_HEAD)
 		qdel(G)
 	else if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()

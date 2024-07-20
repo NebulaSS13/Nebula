@@ -4,7 +4,6 @@
 	icon = 'icons/obj/items/storage/candles.dmi'
 	icon_state = ICON_STATE_WORLD
 	storage = /datum/storage/box/candles
-	throwforce = 2
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/cardboard

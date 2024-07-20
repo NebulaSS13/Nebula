@@ -11,7 +11,6 @@
 	icon = 'icons/obj/fishing_rod.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
-	force = 5 // bonk
 
 	// Fishing minigame tracking vars.
 	var/turf/fishing_target

@@ -50,7 +50,7 @@
 		SPAN_DANGER("You hit \the [src] with \the [W]!"),
 		SPAN_DANGER("You hear something breaking!")
 		)
-	take_damage(W.force, W.atom_damage_type)
+	take_damage(W.get_attack_force(user), W.atom_damage_type)
 
 /obj/structure/deity/physically_destroyed(mob/user)
 	SHOULD_CALL_PARENT(FALSE)

@@ -5,12 +5,11 @@
 	density = FALSE
 	anchored = FALSE
 	w_class = ITEM_SIZE_HUGE
-	force = 0
-	throwforce = 0
 	throw_speed = 1
 	throw_range = 20
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	material = /decl/material/solid/organic/plastic
+	_base_attack_force = 0
 
 /obj/item/ball/afterattack(atom/target, mob/user)
 	if(user.try_unequip(src))

@@ -3,7 +3,6 @@
 	icon_state                        = "preview"
 	abstract_type                     = /obj/item/bladed
 	material                          = /decl/material/solid/metal/steel
-	material_force_multiplier         = 0.3
 	material_alteration               = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	origin_tech                       = @'{"materials":1,"combat":1}'
 	attack_verb                       = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -14,7 +13,6 @@
 	pickup_sound                      = 'sound/foley/knife1.ogg'
 	drop_sound                        = 'sound/foley/knifedrop3.ogg'
 	hitsound                          = 'sound/weapons/bladeslice.ogg'
-	thrown_material_force_multiplier  = 0.16
 	slot_flags                        = SLOT_LOWER_BODY
 	var/decl/material/hilt_material   = /decl/material/solid/organic/wood
 	var/decl/material/guard_material  = /decl/material/solid/organic/wood

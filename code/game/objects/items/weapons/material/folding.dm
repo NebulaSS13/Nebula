@@ -4,7 +4,6 @@
 	name = "pocketknife"
 	desc = "A small folding knife."
 	icon = 'icons/obj/items/weapon/knives/folding/basic.dmi'
-	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("prodded", "tapped")
 	edge = FALSE
@@ -18,7 +17,7 @@
 
 /obj/item/knife/folding/attack_self(mob/user)
 	open = !open
-	update_force()
+	update_attack_force()
 	update_icon()
 	if(open)
 		user.visible_message("<span class='warning'>\The [user] opens \the [src].</span>")
@@ -27,7 +26,7 @@
 		user.visible_message("<span class='notice'>\The [user] closes \the [src].</span>")
 	add_fingerprint(user)
 
-/obj/item/knife/folding/update_force()
+/obj/item/knife/folding/update_attack_force()
 	if(open)
 		edge = 1
 		sharp = 1
@@ -73,8 +72,6 @@
 /obj/item/knife/folding/combat //master obj
 	name = "switchblade"
 	desc = "This is a master item - berate the admin or mapper who spawned this"
-	material_force_multiplier = 0.25
-	thrown_material_force_multiplier = 0.25
 	valid_handle_colors = null
 
 /obj/item/knife/folding/combat/balisong

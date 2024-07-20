@@ -5,9 +5,8 @@
 	welding_resource = "stored charge"
 	tank = null
 	waterproof = TRUE
-	force = 7
-	throwforce = 7
 	lit_colour = COLOR_CYAN_BLUE
+	_base_attack_force = 7
 	var/fuel_cost_multiplier = 10
 
 /obj/item/weldingtool/electric/Initialize()

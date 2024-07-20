@@ -4,7 +4,6 @@
 	icon                      = 'icons/obj/items/tool/cutter.dmi'
 	icon_state                = ICON_STATE_WORLD
 	slot_flags                = SLOT_LOWER_BODY
-	material_force_multiplier = 0.2
 	w_class                   = ITEM_SIZE_SMALL
 	origin_tech               = @'{"materials":3,"engineering":3}'
 	material                  = /decl/material/solid/metal/steel
@@ -38,7 +37,6 @@
 	icon                      = 'icons/obj/items/tool/powerdrill.dmi'
 	icon_state                = ICON_STATE_WORLD
 	slot_flags                = SLOT_LOWER_BODY
-	material_force_multiplier = 0.2
 	w_class                   = ITEM_SIZE_SMALL
 	origin_tech               = @'{"materials":3,"engineering":3}'
 	material                  = /decl/material/solid/metal/steel

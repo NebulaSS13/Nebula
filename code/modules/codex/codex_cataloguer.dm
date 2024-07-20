@@ -6,7 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"materials":2, "programming":3,"magnets":3}'
-	force = 0
+	_base_attack_force = 0
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/plastic

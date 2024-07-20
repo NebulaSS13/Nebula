@@ -47,7 +47,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /atom/movable/proc/bash(obj/item/weapon, mob/user)
 	if(isliving(user) && user.a_intent == I_HELP)
 		return FALSE
-	if(!weapon.user_can_wield(user))
+	if(!weapon.user_can_attack_with(user))
 		return FALSE
 	if(weapon.item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return FALSE
@@ -64,7 +64,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			return TRUE
 	var/oldhealth = current_health
 	. = used_item.use_on_mob(src, user)
-	if(used_item.force && istype(ai) && current_health < oldhealth)
+	if(used_item.get_attack_force(user) && istype(ai) && current_health < oldhealth)
 		ai.retaliate(user)
 
 /mob/living/human/attackby(obj/item/I, mob/user)
@@ -104,7 +104,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	// TODO: revisit if this should be a silent failure/parent call instead, for mob-level storage interactions?
 	// like a horse with a saddlebag or something
-	if(!user_can_wield(user))
+	if(!user_can_attack_with(user))
 		return TRUE // skip other interactions
 
 	if(squash_item())
@@ -161,7 +161,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		else
 			use_hitsound = "swing_hit"
 	playsound(loc, use_hitsound, 50, 1, -1)
-	return target.hit_with_weapon(src, user, force, hit_zone)
+	return target.hit_with_weapon(src, user, get_attack_force(user), hit_zone)
 
 /obj/item/proc/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
 	return istype(user) && istype(aiming_at)

@@ -214,7 +214,7 @@
 		current_health -= (rand(3,5)*5)
 	else
 		..()
-		var/damage = W.force
+		var/damage = W.get_attack_force(user)
 		if(W.edge)
 			damage *= 2
 		adjust_health(-damage)
@@ -282,7 +282,7 @@
 		return
 	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [vine]."))
 	playsound(get_turf(vine), holding.hitsound, 100, 1)
-	var/chop_time = (vine.current_health/holding.force) * 0.5 SECONDS
+	var/chop_time = (vine.current_health/holding.get_attack_force(user)) * 0.5 SECONDS
 	if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 		chop_time *= 0.5
 	if(do_after(user, chop_time, vine, TRUE))

@@ -131,10 +131,12 @@
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return TRUE
-		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
-			to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>")
-			physically_destroyed()
-			return TRUE
+		else
+			var/force = W.get_attack_force(user)
+			if((!is_sharp(W) && force >= 10) || force >= 20)
+				to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>")
+				physically_destroyed()
+				return TRUE
 	var/turf/T = user.loc	//get user's location for delay checks
 	if(damage && istype(W, /obj/item/weldingtool))
 
@@ -340,7 +342,7 @@
 
 /turf/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 
-	if(istype(W, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) || !W.user_can_wield(user))
+	if(istype(W, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) || !W.user_can_attack_with(user))
 		return ..()
 
 	if(handle_wall_tool_interactions(W, user))
@@ -353,7 +355,8 @@
 		return TRUE
 
 	// Attack the wall with items
-	if(istype(W,/obj/item/rcd) || istype(W, /obj/item/chems) || !W.force || user.a_intent == I_HELP)
+	var/force = W.get_attack_force(user)
+	if(istype(W,/obj/item/rcd) || istype(W, /obj/item/chems) || !force || user.a_intent == I_HELP)
 		return ..()
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -361,7 +364,7 @@
 	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
 	if(W.atom_damage_type == BURN)
 		material_divisor = max(material.burn_armor, reinf_material?.burn_armor)
-	var/effective_force = round(W.force / material_divisor)
+	var/effective_force = round(force / material_divisor)
 	if(effective_force < 2)
 		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it had no effect!"))
 		playsound(src, hitsound, 25, 1)

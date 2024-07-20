@@ -59,8 +59,9 @@
 	return simulated
 
 /obj/item/proc/get_volume_by_throwforce_and_or_w_class()
-	if(throwforce && w_class)
-		return clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
+	var/thrown_force = get_thrown_attack_force()
+	if(thrown_force && w_class)
+		return clamp((thrown_force + w_class) * 5, 30, 100)// Add the item's thrown force to its weight class and multiply by 5, then clamp the value between 30 and 100
 	else if(w_class)
 		return clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
 	else
@@ -70,7 +71,7 @@
 	. = ..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
 		var/volume = get_volume_by_throwforce_and_or_w_class()
-		if (throwforce > 0)
+		if (get_thrown_attack_force() > 0)
 			if(hitsound)
 				playsound(hit_atom, hitsound, volume, TRUE, -1)
 			else

@@ -4,7 +4,6 @@
 	abstract_type               = /obj/item/flame
 	icon_state                  = ICON_STATE_WORLD
 	w_class                     = ITEM_SIZE_TINY
-	throwforce                  = 4
 	origin_tech                 = @'{"materials":1}'
 	material                    = /decl/material/solid/organic/wood
 
@@ -77,7 +76,7 @@
 		return FALSE
 	lit = TRUE
 	atom_damage_type =  BURN
-	update_force()
+	update_attack_force()
 
 	update_icon()
 	if(istype(loc, /obj/structure/wall_sconce))
@@ -117,7 +116,7 @@
 		return FALSE
 	lit = FALSE
 	atom_damage_type =  BRUTE
-	update_force()
+	update_attack_force()
 
 	update_icon()
 	if(istype(loc, /obj/structure/wall_sconce))

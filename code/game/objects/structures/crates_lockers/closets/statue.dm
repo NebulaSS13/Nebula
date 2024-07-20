@@ -99,7 +99,7 @@
 		check_health()
 
 /obj/structure/closet/statue/attackby(obj/item/I, mob/user)
-	current_health -= I.force
+	current_health -= I.get_attack_force(user)
 	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
 	check_health()

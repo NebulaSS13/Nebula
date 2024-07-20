@@ -3,7 +3,6 @@
 	desc = "A device that produces a bright flash of light, designed to stun and disorient an attacker."
 	icon = 'icons/obj/items/device/flash.dmi'
 	icon_state = ICON_STATE_WORLD
-	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 10

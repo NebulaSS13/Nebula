@@ -35,7 +35,7 @@
 	name = "foul touch"
 	attack_verb = list("drained")
 	atom_damage_type =  BURN
-	force = 10
+	_base_attack_force = 10
 
 /mob/living/simple_animal/shade/on_defilement()
 	return

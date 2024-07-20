@@ -127,7 +127,7 @@
 	desc       = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
 	icon       = 'icons/obj/items/posters.dmi'
 	icon_state = "rolled_poster"
-	force = 0
+	_base_attack_force = 0
 	material = /decl/material/solid/organic/paper
 	///The name of the medium, excluding any reference to the design
 	var/base_name = "rolled-up poster"

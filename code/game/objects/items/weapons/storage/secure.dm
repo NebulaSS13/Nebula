@@ -106,7 +106,7 @@
 	icon = 'icons/obj/items/storage/briefcase_secure.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A large briefcase with a digital locking system."
-	force = 8.0
+	_base_attack_force = 8.0
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
@@ -137,7 +137,7 @@
 	icon = 'icons/obj/items/storage/safe.dmi'
 	icon_state = ICON_STATE_WORLD
 	overlay_panel_open = null //TODO: Add service panel open overlay
-	force = 8
+	_base_attack_force = 8
 	w_class = ITEM_SIZE_STRUCTURE
 	anchored = TRUE
 	density = FALSE

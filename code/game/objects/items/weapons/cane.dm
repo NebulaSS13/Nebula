@@ -3,10 +3,6 @@
 	desc                = "A slender cane, used to keep yourself upright or to thrash rapscallions."
 	icon                = 'icons/obj/items/cane.dmi'
 	icon_state          = ICON_STATE_WORLD
-	force               = 5
-	throwforce          = 3
-	throw_speed         = 1
-	throw_range         = 5
 	base_parry_chance   = 10
 	w_class             = ITEM_SIZE_SMALL
 	material            = /decl/material/solid/organic/wood/ebony

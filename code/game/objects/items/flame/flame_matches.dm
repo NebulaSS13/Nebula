@@ -1,14 +1,14 @@
 /obj/item/flame/match
-	name        = "match"
-	desc        = "A simple match stick, used for lighting fine smokables."
-	icon        = 'icons/obj/items/flame/match.dmi'
-	obj_flags   = OBJ_FLAG_HOLLOW // so that it's not super overpriced compared to lighters
-	slot_flags  = SLOT_EARS
-	attack_verb = list("burnt", "singed")
-	randpixel   = 10
-	max_force   = 1
-	_fuel       = 5
-	var/burnt   = FALSE
+	name               = "match"
+	desc               = "A simple match stick, used for lighting fine smokables."
+	icon               = 'icons/obj/items/flame/match.dmi'
+	obj_flags          = OBJ_FLAG_HOLLOW // so that it's not super overpriced compared to lighters
+	slot_flags         = SLOT_EARS
+	attack_verb        = list("burnt", "singed")
+	randpixel          = 10
+	_fuel              = 5
+	_base_attack_force = 1
+	var/burnt          = FALSE
 
 /obj/item/flame/match/Initialize()
 	. = ..()

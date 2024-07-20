@@ -447,7 +447,7 @@ var/global/list/all_apcs = list()
 	if (!(user.a_intent == I_HURT) || (used_item.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		return
 
-	if(!used_item.user_can_wield(user))
+	if(!used_item.user_can_attack_with(user))
 		return FALSE
 
 	. = ..()

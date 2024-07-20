@@ -157,7 +157,6 @@
 	amount = 20
 	max_amount = 20
 	singular_name = "length"
-	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
 	throw_range = 5

@@ -5,7 +5,7 @@
 	origin_tech = @'{"biotech":5,"materials":2}'
 	icon = 'icons/obj/items/device/animal_tagger.dmi'
 	icon_state = ICON_STATE_WORLD
-	force = 1
+	_base_attack_force = 1
 	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT)
 	var/loaded = 1

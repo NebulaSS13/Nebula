@@ -119,7 +119,7 @@ meteor_act
 		visible_message("<span class='danger'>\The [user] misses [src] with \the [I]!</span>")
 		return null
 
-	if(check_shields(I.force, I, user, target_zone, I))
+	if(check_shields(I.get_attack_force(user), I, user, target_zone, I))
 		return null
 
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
@@ -152,7 +152,7 @@ meteor_act
 	if(!affecting)
 		return 0
 
-	var/blocked = get_blocked_ratio(hit_zone, I.atom_damage_type, I.damage_flags(), I.armor_penetration, I.force)
+	var/blocked = get_blocked_ratio(hit_zone, I.atom_damage_type, I.damage_flags(), I.armor_penetration, I.get_attack_force(user))
 	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
 		effective_force *= 0.66 //reduced effective force...

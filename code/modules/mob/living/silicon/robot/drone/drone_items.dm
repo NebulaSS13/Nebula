@@ -189,8 +189,8 @@
 		wrapped.forceMove(user)
 
 		//The force of the wrapped obj gets set to zero during the use_on_mob() and afterattack().
-		var/force_holder = wrapped.force
-		wrapped.force = 0.0
+		var/force_holder = wrapped.get_base_attack_force()
+		wrapped.set_base_attack_force(0)
 
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		var/resolved = wrapped.resolve_attackby(target,user,params)
@@ -256,7 +256,7 @@
 		wrapped.afterattack(target, user, 1, params)
 
 	if(wrapped)
-		wrapped.force = force_holder
+		wrapped.set_base_attack_force(force_holder)
 
 	//If wrapped was neither deleted nor put into target, put it back into the gripper.
 	if(wrapped && user && !QDELETED(wrapped) && wrapped.loc == user)

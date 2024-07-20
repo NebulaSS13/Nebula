@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/feet/magboots.dmi'
 	bodytype_equip_flags = null
-	force = 3
+	_base_attack_force = 3
 	can_fit_under_magboots = FALSE
 	action_button_name = "Toggle Magboots"
 	center_of_mass = null
@@ -32,13 +32,13 @@
 		item_flags &= ~ITEM_FLAG_NOSLIP
 		magpulse = 0
 		set_slowdown()
-		force = 3
+		set_base_attack_force(3)
 		to_chat(user, "You disable the mag-pulse traction system.")
 	else
 		item_flags |= ITEM_FLAG_NOSLIP
 		magpulse = 1
 		set_slowdown()
-		force = 5
+		set_base_attack_force(5)
 		playsound(get_turf(src), 'sound/effects/magnetclamp.ogg', 20)
 		to_chat(user, "You enable the mag-pulse traction system.")
 	update_icon()

@@ -320,11 +320,13 @@
 	if(istype(I, /obj/item/nullrod))
 		user.visible_message(SPAN_NOTICE("\The [user] touches \the [src] with \the [I], and it disappears."), SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."))
 		qdel(src)
-	else if(I.force)
-		user.visible_message(SPAN_NOTICE("\The [user] hits \the [src] with \the [I]."), SPAN_NOTICE("You hit \the [src] with \the [I]."))
-		take_damage(I.force, I.atom_damage_type)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
+	else
+		var/force = I.get_attack_force(user)
+		if(force)
+			user.visible_message(SPAN_NOTICE("\The [user] hits \the [src] with \the [I]."), SPAN_NOTICE("You hit \the [src] with \the [I]."))
+			take_damage(force, I.atom_damage_type)
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			user.do_attack_animation(src)
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.atom_damage_type == BRUTE || Proj.atom_damage_type == BURN))

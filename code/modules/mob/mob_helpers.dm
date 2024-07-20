@@ -8,11 +8,6 @@
 /proc/mob_size_difference(var/mob_size_A, var/mob_size_B)
 	return round(log(2, mob_size_A/mob_size_B), 1)
 
-/mob/proc/can_wield_item(obj/item/W)
-	if(W.w_class >= ITEM_SIZE_LARGE && issmall(src))
-		return FALSE //M is too small to wield this
-	return TRUE
-
 /mob/proc/isSynthetic()
 	return 0
 

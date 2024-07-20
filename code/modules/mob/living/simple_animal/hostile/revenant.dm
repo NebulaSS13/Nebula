@@ -32,7 +32,7 @@
 	attack_verb = list("gripped")
 	hitsound = 'sound/hallucinations/growl1.ogg'
 	atom_damage_type =  BURN
-	force = 15
+	_base_attack_force = 15
 
 /mob/living/simple_animal/hostile/revenant/Process_Spacemove()
 	return 1

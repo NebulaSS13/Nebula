@@ -454,11 +454,11 @@
 
 /**Whether a stack has the capability to be split. */
 /obj/item/stack/proc/can_split()
-	return !(uses_charge && !force) //#TODO: The !force was a hacky way to tell if its a borg or rigsuit module. Probably would be good to find a better way...
+	return !(uses_charge && !is_robot_module(src))
 
 /**Whether a stack type has the capability to be merged. */
 /obj/item/stack/proc/can_merge_stacks(var/obj/item/stack/other)
-	return !(uses_charge && !force) && (!istype(other) || other.paint_color == paint_color)
+	return !(uses_charge && !is_robot_module(src)) && (!istype(other) || other.paint_color == paint_color)
 
 /// Returns the string describing an amount of the stack, i.e. "an ingot" vs "a flag"
 /obj/item/stack/proc/get_string_for_amount(amount)
@@ -474,3 +474,9 @@
 	for(var/mat in matter)
 		matter_per_piece[mat] = round(matter[mat] / amount)
 	update_icon()
+
+// TODO.
+/obj/item/stack/update_attack_force()
+	. = ..()
+	//_throwforce = round(0.25*material.get_edge_damage())
+	//_force = round(0.5*material.get_blunt_damage())

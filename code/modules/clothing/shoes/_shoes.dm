@@ -10,7 +10,7 @@
 	heat_protection = SLOT_FEET
 	slot_flags = SLOT_FEET
 	permeability_coefficient = 0.50
-	force = 2
+	_base_attack_force = 2
 	blood_overlay_type = "shoeblood"
 	material = /decl/material/solid/organic/leather
 	origin_tech = @'{"materials":1,"engineering":1}'

@@ -6,8 +6,7 @@ Buildable meters
 /obj/item/pipe
 	name = "pipe"
 	desc = "A pipe."
-	var/connect_types = CONNECT_TYPE_REGULAR
-	force = 7
+	_base_attack_force = 7
 	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "simple"
 	randpixel = 5
@@ -17,6 +16,7 @@ Buildable meters
 	obj_flags = OBJ_FLAG_ROTATABLE
 	dir = SOUTH
 	material = /decl/material/solid/metal/steel
+	var/connect_types = CONNECT_TYPE_REGULAR
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
 	var/rotate_class = PIPE_ROTATE_STANDARD

@@ -114,7 +114,7 @@
 
 /obj/machinery/papershredder/attackby(var/obj/item/used_item, var/mob/user)
 	//Silently skip tools, and things we don't have the dexterity to use
-	if(!has_extension(used_item, /datum/extension/tool) && used_item.user_can_wield(user, silent = TRUE))
+	if(!has_extension(used_item, /datum/extension/tool) && used_item.user_can_attack_with(user, silent = TRUE))
 		var/trying_to_smack = !(used_item.item_flags & ITEM_FLAG_NO_BLUDGEON) && user && user.a_intent == I_HURT
 		if(used_item.storage)
 			empty_bin(user, used_item)
@@ -210,7 +210,6 @@
 	randpixel    = 5
 	throw_range  = 3
 	throw_speed  = 2
-	throwforce   = 0
 	w_class      = ITEM_SIZE_TINY
 	material     = /decl/material/solid/organic/paper
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME

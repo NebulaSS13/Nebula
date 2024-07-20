@@ -20,7 +20,7 @@
 	name = "energy crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = ITEM_SIZE_LARGE
-	force = 10
+	_base_attack_force = 10
 	one_hand_penalty = 1
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/energy/bolt/large

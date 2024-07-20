@@ -287,9 +287,10 @@ var/global/list/possible_say_verbs = list(
 		return
 	if(try_stock_parts_removal(W, user))
 		return
-	if(W.force)
+	var/force = W.get_attack_force(user)
+	if(force)
 		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
-		take_damage(W.force)
+		take_damage(force)
 	else
 		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 

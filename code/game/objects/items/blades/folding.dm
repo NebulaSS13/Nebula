@@ -1,15 +1,14 @@
 /obj/item/bladed/folding
-	name                      = "folding knife"
-	desc                      = "A small folding knife."
-	icon                      = 'icons/obj/items/bladed/folding.dmi'
-	material_force_multiplier = 0.2
-	w_class                   = ITEM_SIZE_SMALL
-	sharp                     = FALSE
-	pommel_material           = null
-	guard_material            = null
-	slot_flags                = null
-	material                  = /decl/material/solid/metal/bronze
-	hilt_material             = /decl/material/solid/organic/wood
+	name                       = "folding knife"
+	desc                       = "A small folding knife."
+	icon                       = 'icons/obj/items/bladed/folding.dmi'
+	w_class                    = ITEM_SIZE_SMALL
+	sharp                      = FALSE
+	pommel_material            = null
+	guard_material             = null
+	slot_flags                 = null
+	material                   = /decl/material/solid/metal/bronze
+	hilt_material              = /decl/material/solid/organic/wood
 
 	var/open                  = FALSE
 	var/closed_item_size      = ITEM_SIZE_SMALL
@@ -22,7 +21,7 @@
 
 /obj/item/bladed/folding/Initialize()
 	. = ..()
-	update_force()
+	update_attack_force()
 
 /obj/item/bladed/folding/attack_self(mob/user)
 	if(user.a_intent != I_HELP)
@@ -36,7 +35,7 @@
 
 /obj/item/bladed/folding/proc/set_open(new_state, mob/user)
 	open = new_state
-	update_force()
+	update_attack_force()
 	update_icon()
 	if(user)
 		if(open)
@@ -51,7 +50,7 @@
 	if(!open)
 		icon_state = "[icon_state]-closed"
 
-/obj/item/bladed/folding/update_force()
+/obj/item/bladed/folding/update_attack_force()
 	edge  = open
 	sharp = open
 	if(open)

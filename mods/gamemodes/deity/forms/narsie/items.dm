@@ -35,18 +35,18 @@
 
 //EXEC AXE
 //If a person hit by this axe within three seconds dies, sucks in their soul to be harvested at altars.
-/obj/item/twohanded/fireaxe/cult
+/obj/item/bladed/axe/fire/cult
 	name = "terrible axe"
 	desc = "Its head is sharp and stained red with heavy use."
 	icon = 'icons/obj/items/weapon/bone_axe.dmi'
 	var/stored_power = 0
 
-/obj/item/twohanded/fireaxe/cult/examine(mob/user)
+/obj/item/bladed/axe/fire/cult/examine(mob/user)
 	. = ..()
 	if(stored_power)
 		to_chat(user, SPAN_NOTICE("It exudes a death-like smell."))
 
-/obj/item/twohanded/fireaxe/cult/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
+/obj/item/bladed/axe/fire/cult/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
 	if(istype(a, /obj/structure/deity/altar))
 		var/obj/structure/deity/altar/altar = a
 		if(stored_power && altar.linked_god)
@@ -56,12 +56,12 @@
 	if(ismob(a))
 		var/mob/M = a
 		if(M.stat != DEAD)
-			events_repository.register(/decl/observ/death, M,src, TYPE_PROC_REF(/obj/item/twohanded/fireaxe/cult, gain_power))
+			events_repository.register(/decl/observ/death, M,src, TYPE_PROC_REF(/obj/item/bladed/axe/fire/cult, gain_power))
 		spawn(30)
 			events_repository.unregister(/decl/observ/death, M,src)
 	return ..()
 
-/obj/item/twohanded/fireaxe/cult/proc/gain_power()
+/obj/item/bladed/axe/fire/cult/proc/gain_power()
 	stored_power += 50
 	src.visible_message(SPAN_OCCULT("\The [src] screeches as the smell of death fills the air!"))
 

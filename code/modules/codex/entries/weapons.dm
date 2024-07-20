@@ -13,7 +13,7 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/spear
-	associated_paths = list(/obj/item/twohanded/spear)
+	associated_paths = list(/obj/item/bladed/polearm/spear)
 	associated_strings = list("spear")
 	mechanics_text = "Spears are automatically held with two hands if the other hand is free to do so. Holding with both hands increases damage dealt. \
 	<BR><BR>You can start crafting a spear by making cable cuffs and applying them to a rod. After, examining the spear assembly will give details on how to proceed."

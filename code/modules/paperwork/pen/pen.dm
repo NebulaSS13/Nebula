@@ -5,7 +5,6 @@
 	icon_state             = ICON_STATE_WORLD
 	slot_flags             = SLOT_LOWER_BODY | SLOT_EARS
 	w_class                = ITEM_SIZE_TINY
-	throwforce             = 0
 	throw_speed            = 7
 	throw_range            = 15
 	material               = /decl/material/solid/organic/plastic

@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 1
 	throw_range = 3
-	force = 15
+	_base_attack_force = 15
 	material = /decl/material/solid/stone/basalt
 	var/list/potentials = list(
 		SPECIES_HUMAN = /obj/item/bag/cash/infinite

@@ -147,7 +147,8 @@
 	if(mstick_slot && mstick_slot.can_broadcast && istype(mstick_slot.stored_stick) && mstick_slot.check_functionality())
 		return mstick_slot.stored_stick
 
-/obj/item/modular_computer/proc/update_name()
+/obj/item/modular_computer/update_name()
+	return
 
 /obj/item/modular_computer/get_cell()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)

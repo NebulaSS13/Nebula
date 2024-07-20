@@ -6,9 +6,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
 	item_flags = ITEM_FLAG_IS_WEAPON
-	material_force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
 	armor_penetration = 10
-	thrown_material_force_multiplier = 0.16 // 10 when thrown with weight 60 (steel)
 	sharp = 1
 	edge = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -22,7 +20,7 @@
 
 	var/draw_handle = TRUE
 
-/obj/item/sword/update_force()
+/obj/item/sword/update_attack_force()
 	sharp = initial(sharp)
 	edge = initial(edge)
 	hitsound = initial(hitsound)
