@@ -440,4 +440,3 @@
 /decl/interaction_handler/clothing_set_sensors/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/clothing/U = target
 	U.set_sensors(user)
-

@@ -224,6 +224,7 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/organic/plastic
+	_base_attack_force = 0
 
 /obj/item/bonegel/Initialize()
 	. = ..()

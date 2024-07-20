@@ -127,4 +127,3 @@
 	airlock.update_icon()
 	airlock = null
 	update_icon()
-
