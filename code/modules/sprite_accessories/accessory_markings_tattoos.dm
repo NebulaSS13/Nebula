@@ -124,7 +124,7 @@
 /decl/sprite_accessory/marking/tat/rose
 	name = "Tattoo (Rose, Left Leg)"
 	uid = "acc_marking_rose_l_leg"
-	icon_state = "tat_rose_ileg"
+	icon_state = "tat_rose"
 	body_parts = list(BP_L_LEG, BP_L_FOOT)
 
 /decl/sprite_accessory/marking/tat/rose/r_leg

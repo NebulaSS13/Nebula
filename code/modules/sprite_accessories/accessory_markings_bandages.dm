@@ -79,11 +79,6 @@
 	uid = "accessory_marking_bandage2_head"
 	icon_state = "bandage2-head"
 
-/decl/sprite_accessory/marking/bandage/groin/two
-	name = "Bandage, Lower Body, 2"
-	uid = "accessory_marking_bandage2_groin"
-	icon_state = "bandage2-groin"
-
 /decl/sprite_accessory/marking/bandage/torso/two
 	name = "Bandage, Chest, 2"
 	uid = "accessory_marking_bandage2_torso"
@@ -133,16 +128,6 @@
 	name = "Bandage, Head, 1"
 	uid = "accessory_marking_bandage3_head"
 	icon_state = "bandage3-head"
-
-/decl/sprite_accessory/marking/bandage/groin/three
-	name = "Bandage, Lower Body, 2"
-	uid = "accessory_marking_bandage3_groin"
-	icon_state = "bandage3-groin"
-
-/decl/sprite_accessory/marking/bandage/torso/three
-	name = "Bandage, Chest, 3"
-	uid = "accessory_marking_bandage3_torso"
-	icon_state = "bandage3-torso"
 
 /decl/sprite_accessory/marking/bandage/left_arm/three
 	name = "Bandage, Left Arm, 3"
