@@ -9,7 +9,6 @@
 	throw_range = 20
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	material = /decl/material/solid/organic/plastic
-	_base_attack_force = 0
 
 /obj/item/ball/afterattack(atom/target, mob/user)
 	if(user.try_unequip(src))
