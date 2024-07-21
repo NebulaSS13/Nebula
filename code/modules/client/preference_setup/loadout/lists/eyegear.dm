@@ -10,6 +10,10 @@
 	name = "eyepatch"
 	path = /obj/item/clothing/glasses/eyepatch
 
+/decl/loadout_option/eyes/eyepatch_colourable
+	name = "eyepatch, colourable"
+	path = /obj/item/clothing/glasses/eyepatch/colourable
+
 /decl/loadout_option/eyes/glasses
 	name = "glasses selection"
 	path = /obj/item/clothing/glasses
