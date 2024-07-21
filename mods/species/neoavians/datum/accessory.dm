@@ -8,7 +8,7 @@
 	uid = "acc_hair_avian_plumage"
 
 /decl/sprite_accessory/hair/avian/get_hidden_substitute()
-	if(accessory_flags & VERY_SHORT)
+	if(accessory_flags & HAIR_VERY_SHORT)
 		return src
 	return GET_DECL(/decl/sprite_accessory/hair/bald)
 

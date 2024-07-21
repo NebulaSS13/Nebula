@@ -22,7 +22,7 @@
 
 /decl/sprite_accessory/facial_hair/can_be_groomed_with(obj/item/organ/external/organ, obj/item/grooming/tool)
 	. = ..()
-	if(. == GROOMING_RESULT_SUCCESS && (accessory_flags & VERY_SHORT))
+	if(. == GROOMING_RESULT_SUCCESS && (accessory_flags & HAIR_VERY_SHORT))
 		return GROOMING_RESULT_PARTIAL
 
 /decl/sprite_accessory/facial_hair/get_hidden_substitute()
