@@ -16,7 +16,7 @@
 	force_limb_dir = WEST
 
 	/// Name of tail state in species effects icon file. Used as a prefix for animated states.
-	var/tail
+	var/tail = BP_TAIL
 	/// Icon file to use for tail states (including animations)
 	var/tail_icon
 	/// Blend mode for overlaying colour on the tail.
@@ -56,7 +56,7 @@
 /obj/item/organ/external/tail/proc/get_tail_icon()
 	return tail_icon
 
-/obj/item/organ/external/tail/proc/get_tail_states()
+/obj/item/organ/external/tail/proc/get_tail_animation_states()
 	return tail_animation_states
 
 /obj/item/organ/external/tail/proc/get_tail_blend()

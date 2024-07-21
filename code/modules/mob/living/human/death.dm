@@ -31,7 +31,7 @@
 	//Handle species-specific deaths.
 	handle_hud_list()
 	if(!gibbed)
-		animate_tail_stop()
+		set_tail_animation_state(null, TRUE)
 		handle_organs()
 		if(species.death_sound)
 			playsound(loc, species.death_sound, 80, 1, 1)

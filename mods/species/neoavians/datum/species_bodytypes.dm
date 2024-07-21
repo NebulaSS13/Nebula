@@ -89,7 +89,7 @@
 		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_icon
 
-/obj/item/organ/external/tail/avian/get_tail_states()
+/obj/item/organ/external/tail/avian/get_tail_animation_states()
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_animation_states

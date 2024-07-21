@@ -268,9 +268,8 @@
 	)
 
 /obj/item/organ/external/tail/grafadreka
-	tail       = "tail"
-	tail_icon  = 'mods/species/drakes/icons/tail.dmi'
+	tail_icon  = 'mods/species/drakes/icons/body.dmi'
 	tail_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/tail/grafadreka/hatchling
-	tail_icon  = 'mods/species/drakes/icons/hatchling_tail.dmi'
+	tail_icon  = 'mods/species/drakes/icons/hatchling_body.dmi'

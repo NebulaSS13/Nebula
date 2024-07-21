@@ -77,5 +77,4 @@
 
 /obj/item/organ/external/tail/lizard
 	tail_icon             = 'mods/species/bayliens/unathi/icons/tail.dmi'
-	tail                  = "sogtail"
 	tail_animation_states = 9

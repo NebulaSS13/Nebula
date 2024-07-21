@@ -1,6 +1,5 @@
 /obj/item/organ/external/tail/kobaloi
 	tail_icon        = 'mods/content/fantasy/icons/kobaloi/body.dmi'
-	tail             = "tail"
 	tail_blend       = ICON_MULTIPLY
 
 /decl/sprite_accessory/marking/kobaloi
