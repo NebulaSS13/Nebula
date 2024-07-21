@@ -26,7 +26,7 @@
 	/// Blend mode for hair overlays.
 	var/tail_hair_blend = ICON_ADD
 	/// How many random tail states are available for animations.
-	var/tail_states = 1
+	var/tail_animation_states = 0
 	/// If we have an animation playing, it will be this state.
 	var/tail_animation_state
 
@@ -50,14 +50,14 @@
 /obj/item/organ/external/tail/proc/get_tail()
 	var/modifier = owner?.get_overlay_state_modifier()
 	. = modifier ? "[tail][modifier]" : tail
-	if(tail_animation_state)
+	if(tail_animation_state && tail_animation_states)
 		. = "[.][tail_animation_state]"
 
 /obj/item/organ/external/tail/proc/get_tail_icon()
 	return tail_icon
 
 /obj/item/organ/external/tail/proc/get_tail_states()
-	return tail_states
+	return tail_animation_states
 
 /obj/item/organ/external/tail/proc/get_tail_blend()
 	return tail_blend

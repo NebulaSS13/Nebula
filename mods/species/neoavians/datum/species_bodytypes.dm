@@ -37,7 +37,7 @@
 	var/tail_blend =        ICON_MULTIPLY
 	var/tail_hair
 	var/tail_hair_blend
-	var/tail_states
+	var/tail_animation_states
 
 /decl/bodytype/avian/raptor
 	name                 = "raptor"
@@ -92,7 +92,7 @@
 /obj/item/organ/external/tail/avian/get_tail_states()
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
-		return bird_bod.tail_states
+		return bird_bod.tail_animation_states
 
 /obj/item/organ/external/tail/avian/get_tail_blend()
 	if(istype(bodytype, /decl/bodytype/avian))

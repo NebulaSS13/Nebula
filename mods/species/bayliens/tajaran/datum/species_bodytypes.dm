@@ -70,3 +70,4 @@
 	tail_icon  = 'mods/species/bayliens/tajaran/icons/tail.dmi'
 	tail       = "tajtail"
 	tail_blend = ICON_MULTIPLY
+	tail_animation_states = 1
