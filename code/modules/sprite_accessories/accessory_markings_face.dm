@@ -3,8 +3,12 @@
 	abstract_type = /decl/sprite_accessory/marking/face
 	body_parts = list(BP_HEAD)
 
-/decl/sprite_accessory/marking/face/blush
+/decl/sprite_accessory/marking/face/lips
+	name = "Lips"
+	icon_state = "lips"
+	uid = "accessory_marking_lips"
 
+/decl/sprite_accessory/marking/face/blush
 	name = "Blush, Face"
 	icon_state = "blush"
 	uid = "accessory_marking_blush"
