@@ -9,7 +9,7 @@
 	guard_material      = /decl/material/solid/organic/leather/gut
 	pommel_material     = null
 	attack_verb         = list("attacked", "chopped", "cleaved", "torn", "cut")
-	_base_attack_force  = 30
+	_base_attack_force  = 22
 
 // Discard pommel material.
 /obj/item/bladed/axe/Initialize(ml, material_key, _hilt_mat, _guard_mat, _pommel_mat)

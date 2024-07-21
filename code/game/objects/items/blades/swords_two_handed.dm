@@ -13,6 +13,7 @@
 	can_be_twohanded     = TRUE
 	pickup_sound         = 'sound/foley/scrape1.ogg'
 	drop_sound           = 'sound/foley/tooldrop1.ogg'
+	_base_attack_force   = 20
 
 /obj/item/bladed/broadsword
 	name                 = "broadsword"
@@ -27,3 +28,4 @@
 	can_be_twohanded     = TRUE
 	pickup_sound         = 'sound/foley/scrape1.ogg'
 	drop_sound           = 'sound/foley/tooldrop1.ogg'
+	_base_attack_force   = 22

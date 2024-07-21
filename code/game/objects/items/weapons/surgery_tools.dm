@@ -81,7 +81,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	_base_attack_force = 15.0
+	_base_attack_force = 15
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"materials":1,"biotech":1}'
 	attack_verb = list("drilled")
@@ -224,7 +224,6 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/organic/plastic
-	_base_attack_force = 0
 
 /obj/item/bonegel/Initialize()
 	. = ..()
@@ -238,7 +237,7 @@
 	origin_tech = @'{"materials":1,"biotech":3}'
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/plastic
-	_base_attack_force = 0
+	_base_attack_force = 1
 
 /obj/item/sutures/Initialize()
 	. = ..()

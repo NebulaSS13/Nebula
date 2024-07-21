@@ -8,6 +8,7 @@
 	w_class                    = ITEM_SIZE_NORMAL
 	base_parry_chance          = 30
 	melee_accuracy_bonus       = 20
+	_base_attack_force         = 15
 
 /obj/item/bladed/shortsword
 	name                       = "shortsword"
@@ -19,6 +20,7 @@
 	w_class                    = ITEM_SIZE_NORMAL
 	base_parry_chance          = 50
 	armor_penetration          = 10
+	_base_attack_force         = 15
 
 /obj/item/bladed/rapier
 	name                       = "rapier"
@@ -30,3 +32,4 @@
 	base_parry_chance          = 60
 	armor_penetration          = 25
 	melee_accuracy_bonus       = 25
+	_base_attack_force         = 15

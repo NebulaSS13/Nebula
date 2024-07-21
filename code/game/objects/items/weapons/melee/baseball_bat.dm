@@ -12,7 +12,7 @@
 	material                   = /decl/material/solid/organic/wood/maple
 	material_alteration        = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	melee_accuracy_bonus       = -10
-	_base_attack_force         = 40
+	_base_attack_force         = 20
 
 //Predefined materials go here.
 /obj/item/baseball_bat/aluminium

@@ -27,9 +27,11 @@
 	add_fingerprint(user)
 
 /obj/item/knife/folding/update_attack_force()
+	..()
 	if(open)
-		edge = 1
-		sharp = 1
+		// TODO: check sharp/edge.
+		edge = TRUE
+		sharp = TRUE
 		w_class = ITEM_SIZE_NORMAL
 		attack_verb = list("slashed", "stabbed")
 		..()
@@ -38,7 +40,6 @@
 		sharp = initial(sharp)
 		w_class = initial(w_class)
 		attack_verb = closed_attack_verbs
-		..()
 
 /obj/item/knife/folding/on_update_icon()
 	. = ..()

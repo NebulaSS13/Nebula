@@ -5,7 +5,6 @@
 	icon_state = "lock_construct"
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
-	_base_attack_force = 0
 	var/lock_data
 
 /obj/item/lock_construct/Initialize()

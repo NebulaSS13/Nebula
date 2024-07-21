@@ -1,5 +1,5 @@
 //knives for stabbing and slashing and so on and so forth
-/obj/item/knife //master obj
+/obj/item/knife
 	name = "knife"
 	desc = "You call that a knife? This is a master item - berate the admin or mapper who spawned this"
 	icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
@@ -14,7 +14,8 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
-
+	abstract_type = /obj/item/knife
+	_base_attack_force = 8
 	var/draw_handle
 	var/handle_color
 	var/valid_handle_colors
@@ -122,6 +123,7 @@
 	icon = 'icons/obj/items/weapon/knives/utility.dmi'
 	w_class = ITEM_SIZE_SMALL
 	draw_handle = TRUE
+	_base_attack_force = 5
 
 /obj/item/knife/utility/lightweight
 	name = "lightweight utility knife"

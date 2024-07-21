@@ -17,22 +17,20 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
-
+	_base_attack_force = 15
 	var/draw_handle = TRUE
 
-/obj/item/sword/update_attack_force()
-	sharp = initial(sharp)
-	edge = initial(edge)
-	hitsound = initial(hitsound)
-	if(material?.hardness < MAT_VALUE_HARD)
-		edge = 0
+/obj/item/edge/set_edge(new_edge)
+	. = ..()
+	if(. && !edge)
 		attack_verb = list("attacked", "stabbed", "jabbed", "smacked", "prodded")
 		hitsound = 'sound/weapons/pierce.ogg'
-	if(material?.hardness < MAT_VALUE_RIGID)
-		sharp = 0
+
+/obj/item/sword/set_sharp(new_sharp)
+	. = ..()
+	if(. && !sharp)
 		attack_verb = list("attacked", "smashed", "jabbed", "smacked", "prodded", "bonked")
 		hitsound = "chop"
-	. = ..()
 
 /obj/item/sword/on_update_icon()
 	. = ..()
@@ -54,12 +52,14 @@
 
 /obj/item/sword/replica
 	material = /decl/material/solid/organic/plastic
+	_base_attack_force = 5
 
 /obj/item/sword/katana
 	name = "katana"
 	desc = "Woefully underpowered in D20. This one looks pretty sharp."
 	icon = 'icons/obj/items/weapon/swords/katana.dmi'
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
+	_base_attack_force = 15
 
 /obj/item/sword/katana/set_material(new_material)
 	. = ..()
@@ -81,6 +81,7 @@
 	material = /decl/material/solid/metal/titanium
 	hitsound = 'sound/weapons/anime_sword.wav'
 	pickup_sound = 'sound/weapons/katana_out.wav'
+	_base_attack_force = 30
 
 /obj/item/sword/katana/vibro/pickup_sound_callback()
 	if(ismob(loc) && pickup_sound)

@@ -2,17 +2,15 @@
 	/// Tracking var for base attack value with material modifiers, to save recalculating 200 times.
 	VAR_PRIVATE/_cached_attack_force
 	/// Base force value; generally, the damage output if used one-handed by a medium mob (human) and made of steel.
-	VAR_PROTECTED/_base_attack_force         = 5
-	/// Multiplier to base force based on the material of the weapon, with additional tweaking from sharpness.
-	VAR_PROTECTED/_material_force_multiplier = 1.25
+	VAR_PROTECTED/_base_attack_force        = 5
 	/// Multiplier to the base thrown force based on the material per above.
-	VAR_PROTECTED/_thrown_force_multiplier   = 0.1
+	VAR_PROTECTED/_thrown_force_multiplier  = 0.3
 	/// Multiplier to total base damage from weapon and material if the weapon is wieldable and held in two hands.
-	VAR_PROTECTED/_wielded_force_multiplier  = 1.25
+	VAR_PROTECTED/_wielded_force_multiplier = 1.25
 	/// How much of our overall damage is influenced by material weight?
-	VAR_PROTECTED/_weight_force_factor       = 0.25
+	VAR_PROTECTED/_weight_force_factor      = 0.25
 	/// How much of our overall damage is influenced by material hardness?
-	VAR_PROTECTED/_hardness_force_factor     = 0.25
+	VAR_PROTECTED/_hardness_force_factor    = 0.25
 
 /obj/item/proc/get_max_weapon_force()
 	. = get_attack_force()
@@ -45,6 +43,18 @@
 	_cached_attack_force = null
 	_base_attack_force = new_force
 
+/obj/item/proc/set_edge(new_edge)
+	if(edge != new_edge)
+		edge = new_edge
+		return TRUE
+	return FALSE
+
+/obj/item/proc/set_sharp(new_sharp)
+	if(sharp != new_sharp)
+		sharp = new_sharp
+		return TRUE
+	return FALSE
+
 /obj/item/proc/update_attack_force()
 
 	// Get our base force.
@@ -55,40 +65,38 @@
 
 	// Check if this material is hard enough to hold an edge.
 	if(!material.can_hold_edge())
-		edge = FALSE
+		set_edge(FALSE)
 	else if(!edge)
-		edge = initial(edge)
+		set_edge(initial(edge))
 
 	// Check if this material can hold a point.
 	if(!material.can_hold_sharpness())
-		sharp = FALSE
+		set_sharp(FALSE)
 	else if(!sharp)
-		sharp = initial(sharp)
-
-	// Assumptions for the purposes of this calc:
-	// - sharp objects are used for thrusting so rely on hardness
-	// - blunt objects are used for striking so use weight.
+		set_sharp(initial(sharp))
 
 	// Work out where we're going to cap our calculated force.
 	// Any additional force resulting from hardness or weight turn into armour penetration.
-	var/accumulated_force  = _cached_attack_force
-	var/expected_max_force = _material_force_multiplier * _cached_attack_force
+	var/accumulated_force        = _cached_attack_force
+	var/weight_force_component   = (_cached_attack_force * _weight_force_factor)
+	var/hardness_force_component = (_cached_attack_force * _hardness_force_factor)
+	var/expected_material_mod    = (weight_force_component+hardness_force_component)/2
+	var/expected_min_force       = _cached_attack_force - expected_material_mod
+	var/expected_max_force       = _cached_attack_force + expected_material_mod
 
 	// Heavier weapons are generally going to be more effective, regardless of edge or sharpness.
 	// We don't factor in w_class or matter at this point, because we are assuming the base attack
 	// force was set already taking into account how effective this weapon should be.
-	var/weight_force_component = (_cached_attack_force * _weight_force_factor)
 	var/relative_weight = (material.weight / MAT_VALUE_VERY_HEAVY)
 	if(obj_flags & OBJ_FLAG_HOLLOW)
 		relative_weight *= HOLLOW_OBJECT_MATTER_MULTIPLIER
 	accumulated_force += (weight_force_component * relative_weight) - (weight_force_component/2)
 
 	// Apply hardness in the same way.
-	var/hardness_force_component = (_cached_attack_force * _hardness_force_factor)/2
 	accumulated_force += (hardness_force_component * (material.hardness / MAT_VALUE_VERY_HARD)) - (hardness_force_component/2)
 
 	// Round off our calculated attack force and turn any overflow into armour penetration.
-	_cached_attack_force = round(min(accumulated_force, expected_max_force))
+	_cached_attack_force = round(clamp(accumulated_force, expected_min_force, expected_max_force))
 
 	// Update our armor penetration.
 	armor_penetration = initial(armor_penetration)
@@ -104,3 +112,54 @@
 	if(!istype(weapon) || !weapon.is_held_twohanded())
 		return supplied_force
 	return round(supplied_force * wield_mult)
+
+// Debug proc - leaving in for future work. Linter hates protected var access so leave commented.
+/*
+/client/verb/debug_dump_weapon_values()
+	set name = "Dump Weapon Values"
+	set category = "Debug"
+	set src = usr
+
+	var/list/rows = list()
+	rows += jointext(list(
+		"Name",
+		"Type",
+		"Base Force",
+		"Calculated Force",
+		"Thrown Force",
+		"Min Force",
+		"Max Force",
+		"Wield force",
+		"Armour Pen",
+		"Sharp/Edge"
+	), "|")
+
+	for(var/thing in subtypesof(/obj/item))
+
+		var/obj/item/item = thing
+		if(!TYPE_IS_SPAWNABLE(item))
+			continue
+
+		item = new item
+
+		var/attk_force = item.get_attack_force()
+		var/expected_material_mod = ((attk_force * item._weight_force_factor) + (attk_force * item._hardness_force_factor))/2
+
+		rows += jointext(list(
+			item.name,
+			item.type,
+			item.get_base_attack_force(),
+			attk_force,
+			item.get_thrown_attack_force(),
+			(attk_force - expected_material_mod),
+			(attk_force + expected_material_mod),
+			(attk_force * item._wielded_force_multiplier),
+			item.armor_penetration,
+			(item.sharp||item.edge)
+		), "|")
+
+	text2file(jointext(rows, "\n"), "weapon_stats_dump.csv")
+	if(fexists("weapon_stats_dump.csv"))
+		direct_output(usr, ftp("weapon_stats_dump.csv", "weapon_stats_dump.csv"))
+	to_chat(usr, "Done.")
+*/

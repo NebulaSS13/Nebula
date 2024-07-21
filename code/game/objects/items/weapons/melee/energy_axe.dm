@@ -17,5 +17,5 @@
 	base_parry_chance =    30
 	active_parry_chance =  30
 	melee_accuracy_bonus = 15
-	_active_base_attack_force = 60
+	_active_base_attack_force = 40
 	_base_attack_force = 20

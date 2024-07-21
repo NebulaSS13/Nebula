@@ -28,7 +28,7 @@
 	throw_speed = 4
 	throw_range = 20
 	material = /decl/material/solid/organic/plastic
-	_base_attack_force = 0
+	_base_attack_force = 1
 
 /*
  * Balloons

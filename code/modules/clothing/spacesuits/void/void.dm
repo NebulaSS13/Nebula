@@ -45,6 +45,8 @@
 	breach_threshold = 15
 	can_breach = 1
 
+	_base_attack_force = 5
+
 	//Inbuilt devices.
 	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.

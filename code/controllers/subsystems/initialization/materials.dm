@@ -22,9 +22,6 @@ SUBSYSTEM_DEF(materials)
 	// Overlay caches
 	var/list/wall_damage_overlays
 
-	// Weapon value calculation values.
-	var/material_weapon_modifier_
-
 /datum/controller/subsystem/materials/Initialize()
 
 	// Init reaction list.

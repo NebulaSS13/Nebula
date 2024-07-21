@@ -13,7 +13,7 @@
 	matter_multiplier = 0.2
 	is_spawnable_type = TRUE
 	_base_attack_force = 2
-	_thrown_force_multiplier = 3
+	_thrown_force_multiplier = 7
 	var/superheated = FALSE
 
 /obj/item/stack/material/bow_ammo/on_update_icon()

@@ -41,7 +41,7 @@
 	pickup_sound               = 'sound/foley/scrape1.ogg'
 	drop_sound                 = 'sound/foley/tooldrop1.ogg'
 	slot_flags                 = SLOT_BACK
-	_base_attack_force         = 60
+	_base_attack_force         = 20
 
 /obj/item/wrench/pipe/get_handle_color()
 	return null

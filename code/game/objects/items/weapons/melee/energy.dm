@@ -117,6 +117,8 @@
 		if(inactive_sound)
 			playsound(loc, inactive_sound, 50, 1)
 
+	update_attack_force()
+
 	if(lighting_color)
 		if(active)
 			set_light(2, 0.8, lighting_color)

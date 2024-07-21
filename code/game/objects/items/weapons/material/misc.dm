@@ -57,6 +57,7 @@
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	_base_attack_force = 10
 
 /obj/item/cross
 	name = "cross"

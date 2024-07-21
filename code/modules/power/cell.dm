@@ -123,7 +123,6 @@
 	desc = "A small power cell designed to power handheld devices."
 	icon_state = "device"
 	w_class = ITEM_SIZE_SMALL
-	_base_attack_force = 0
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100

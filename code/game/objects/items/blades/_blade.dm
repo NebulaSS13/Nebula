@@ -14,6 +14,7 @@
 	hitsound                          = 'sound/weapons/bladeslice.ogg'
 	slot_flags                        = SLOT_LOWER_BODY
 	material                          = /decl/material/solid/metal/steel
+	_base_attack_force                = 10
 	var/decl/material/hilt_material   = /decl/material/solid/organic/wood
 	var/decl/material/guard_material  = /decl/material/solid/organic/wood
 	var/decl/material/pommel_material = /decl/material/solid/organic/wood
