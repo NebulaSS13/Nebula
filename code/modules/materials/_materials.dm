@@ -159,10 +159,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/turf_touch_threshold = FLUID_QDEL_POINT
 
 	// Damage values.
-	var/hardness = MAT_VALUE_HARD            // Used for edge damage in weapons.
-	var/reflectiveness = MAT_VALUE_DULL
-	var/ferrous = FALSE                       // Can be used as a striker for firemaking.
-	var/weight = MAT_VALUE_NORMAL             // Determines blunt damage/throw force for weapons.
+	var/hardness = MAT_VALUE_HARD       // Used for edge damage in weapons.
+	var/weight = MAT_VALUE_NORMAL       // Determines blunt damage/throw force for weapons.
+	var/reflectiveness = MAT_VALUE_DULL // How effective is this at reflecting light?
+	var/ferrous = FALSE                 // Can be used as a striker for firemaking.
 
 	// Noise when someone is faceplanted onto a table made of this material.
 	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
@@ -521,14 +521,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/list/temp_matter = list()
 	temp_matter[type] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
-
-// Weapons handle applying a divisor for this value locally.
-/decl/material/proc/get_blunt_damage()
-	return weight //todo
-
-// As above.
-/decl/material/proc/get_edge_damage()
-	return hardness //todo
 
 /decl/material/proc/get_attack_cooldown()
 	if(weight <= MAT_VALUE_LIGHT)
@@ -1058,3 +1050,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			if(data_color)
 				return data_color
 	return color
+
+/decl/material/proc/can_hold_sharpness()
+	return hardness > MAT_VALUE_FLEXIBLE
+
+/decl/material/proc/can_hold_edge()
+	return hardness > MAT_VALUE_FLEXIBLE

@@ -474,9 +474,3 @@
 	for(var/mat in matter)
 		matter_per_piece[mat] = round(matter[mat] / amount)
 	update_icon()
-
-// TODO.
-/obj/item/stack/update_attack_force()
-	. = ..()
-	//_throwforce = round(0.25*material.get_edge_damage())
-	//_force = round(0.5*material.get_blunt_damage())
