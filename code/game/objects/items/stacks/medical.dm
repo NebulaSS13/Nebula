@@ -25,8 +25,7 @@
 /obj/item/stack/medical/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	// TODO: dex check
-	if(!ishuman(user) && !issilicon(user))
-		to_chat(user, SPAN_WARNING("You don't have the dexterity to do this!"))
+	if(!user.can_wield_item(src))
 		return TRUE
 
 	if(!ishuman(target))
