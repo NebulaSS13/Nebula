@@ -243,7 +243,7 @@
 	if(!container.reagents?.total_volume)
 		return FALSE
 
-	// Must be impure.
+	// This check means it's impure.
 	if(length(container.reagents.reagent_volumes) > length(sterilizing_reagents))
 		return FALSE
 
