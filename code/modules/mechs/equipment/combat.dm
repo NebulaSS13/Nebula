@@ -438,7 +438,7 @@
 
 /obj/aura/mech_ballistic/attackby(obj/item/I, mob/user)
 	. = ..()
-	if (shield && prob(shield.block_chance(I.force, I.armor_penetration, source = I, attacker = user)))
+	if (shield && prob(shield.block_chance(I.get_attack_force(), I.armor_penetration, source = I, attacker = user)))
 		user.visible_message(SPAN_WARNING("\The [I] is blocked by \the [user]'s [shield.name]."))
 		playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 		return AURA_FALSE|AURA_CANCEL

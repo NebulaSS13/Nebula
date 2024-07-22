@@ -12,8 +12,8 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	matter_multiplier = 0.2
 	is_spawnable_type = TRUE
-	_base_attack_force = 2
-	_thrown_force_multiplier = 7
+	_base_attack_force = 7 // Legolas mode...
+	_thrown_force_multiplier = 1.15
 	var/superheated = FALSE
 
 /obj/item/stack/material/bow_ammo/on_update_icon()
@@ -50,6 +50,12 @@
 	desc = "A long, sharp stick, fletched at one end."
 	var/decl/material/fletching_material
 
+/obj/item/stack/material/bow_ammo/arrow/iron
+	material = /decl/material/solid/metal/iron
+
+/obj/item/stack/material/bow_ammo/arrow/iron/fifteen
+	amount = 15
+
 /obj/item/stack/material/bow_ammo/arrow/fifteen
 	amount = 15
 
@@ -71,23 +77,23 @@
 	name = "bolt"
 	singular_name = "bolt"
 	plural_name = "bolts"
-	throwforce = 12
 	icon = 'icons/obj/items/weapon/arrow_bolt.dmi'
 	desc = "It's got a tip for you - get the point?"
+	_thrown_force_multiplier = 1.2
 
 /obj/item/stack/material/bow_ammo/spike
 	name = "alloy spike"
 	singular_name = "alloy spike"
 	plural_name = "alloy spikes"
-	throwforce = 12
 	desc = "It's about a foot of weird silver metal with a wicked point."
 	material = /decl/material/solid/metal/alienalloy
+	_thrown_force_multiplier = 1.25
 
 /obj/item/stack/material/bow_ammo/rod
 	name = "rod"
 	singular_name = "rod"
 	plural_name = "rods"
-	throwforce = 12
 	desc = "Don't cry for me, Orithena."
 	icon = 'icons/obj/items/weapon/arrow_rod.dmi'
 	material = /decl/material/solid/metal/steel
+	_thrown_force_multiplier = 1.2
