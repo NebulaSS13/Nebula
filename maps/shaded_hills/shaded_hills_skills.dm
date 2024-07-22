@@ -1,3 +1,20 @@
+/decl/hierarchy/skill/Initialize()
+	. = ..()
+	// Rename the default skill levels.
+	var/static/list/replacement_levels = list(
+		"Unskilled",
+		"Beginner",
+		"Apprentice",
+		"Journeyman",
+		"Master"
+	)
+	var/i = 0
+	for(var/level in levels)
+		i++
+		var/old_string = levels[level]
+		levels -= level
+		levels[replacement_levels[i]] = old_string
+
 /decl/hierarchy/skill/crafting
 	name = "Crafting"
 	difficulty = SKILL_EASY
@@ -144,4 +161,122 @@
 		SKILL_ENGINES,
 		SKILL_DEVICES,
 		SKILL_CONSTRUCTION, // Anything using this should be replaced with another skill.
+	)
+
+//overrides for base skills with more fitting names/level texts
+/decl/hierarchy/skill/security
+	name = "Combat"
+
+/decl/hierarchy/skill/service
+	name = "Domestic"
+
+/decl/hierarchy/skill/organizational/finance
+	name = "Finance"
+	uid =  "skill_finance"
+	desc = "Your ability to manage money and investments."
+	levels = list(
+		"Unskilled"   = "Your understanding of money starts and ends with personal finance. While you are able to perform basic transactions, you get lost in the details, and can find yourself ripped off on occasion.<br>- You get some starting money, increasing with level.",
+		"Basic"       = "You have some limited understanding of financial transactions, and will generally be able to keep accurate records. You have little experience with investment, and managing large sums of money will likely go poorly for you.<br>- You can use the verb \"Appraise\" to see the value of different objects.",
+		"Trained"     = "You are good at managing accounts, keeping records, and arranging transactions. You have some familiarity with loans, exchange rates and taxes, but may be stumped when facing more complicated financial situations.",
+		"Experienced" = "With your experience, you are familiar with any financial entities you may run across, and are a shrewd judge of value. More often than not, investments you make will pan out well.",
+		"Master"      = "You have an excellent knowledge of finance, will often make brilliant investments, and have an instinctive feel for kingdom-wide economics. Financial instruments are weapons in your hands. You likely have professional experience in the finance industry."
+	)
+
+/decl/hierarchy/skill/organizational/finance/update_special_effects(mob/mob, level)
+	return //we don't want legalese here
+
+/decl/hierarchy/skill/general/hauling
+	name = "Athletics"
+	uid =  "skill_hauling"
+	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
+	levels = list(
+		"Unskilled"   = "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.<br>- You can pull objects but your stamina depends on your skill rank. Your strength increases with level.<br>- You can throw objects. Their speed, thrown distance, and force increases with level.<br>- You can sprint, the stamina consumption rate is lowered with each level.<br>- You can leap by holding Ctrl and clicking on a distant target with grab intent, leap range is increased and chances of falling over are decreased with each level.",
+		"Basic"       = "You have some familiarity with manual labor, and are in reasonable physical shape. Tasks requiring great dexterity or strength may still elude you.<br>- You can throw \"huge\" items or normal-sized mobs without getting weakened.",
+		"Trained"     = "You have sufficient strength and dexterity for even very strenuous tasks, and can work for a long time without tiring.",
+		"Experienced" = "You have experience with heavy work in trying physical conditions, and are in excellent shape. You often work out.",
+		"Master"      = "In addition to your excellent strength and endurance, you have a lot of experience with the specific physical demands of your job."
+	)
+
+/decl/hierarchy/skill/service/botany
+	name = "Horticulture"
+	uid =  "skill_botany"
+	desc = "Describes how good you are at growing and maintaining plants."
+	levels = list(
+		"Unskilled"   = "You know next to nothing about plants. While you can attempt to plant, weed, or harvest, you are just as likely to kill the plant instead.",
+		"Basic"       = "You've done some gardening. You can water, weed, fertilize, plant, and harvest, and you can recognize and deal with pests.<br>- You can safely plant and weed normal plants.<br>- You can tell weeds and pests apart from each other.",
+		"Trained"     = "You are proficient at botany, and can grow plants for food, medicine or textile use. Your plants will generally survive and prosper. <br>- You can safely plant and weed exotic plants.",
+		"Experienced" = "You are an experienced horticulturalist with an encyclopedic knowledge of plants and their properties.",
+		"Master"      = "You're a specialized gardener. You can care for even the most exotic, fragile, or dangerous plants."
+	)
+
+/decl/hierarchy/skill/service/cooking
+	name = "Cooking"
+	uid =  "skill_cooking"
+	desc = "Describes your skill at preparing meals and other consumable goods. This includes mixing alcoholic beverages."
+	levels = list(
+		"Unskilled"   = "You barely know anything about cooking, and rely on others when you can. The stove is a device of black magic to you, and you avoid it when possible.",
+		"Basic"       = "You can make simple meals and do the cooking for your family. Things like roasted meat, boiled vegetables, or simple mixed drinks are your usual fare.",
+		"Trained"     = "You can make most meals while following instructions, and they generally turn out well. You have some experience with hosting, catering, and/or bartending.",
+		"Experienced" = "You can cook professionally, keeping an entire inn fed easily. Your food is tasty and you don't have a problem with tricky or complicated dishes. You can be depended on to make just about any commonly-served drink.",
+		"Master"      = "You are an expect chef capable of preparing a meal fit for a king! Not only are you good at cooking and mixing drinks, but you can manage a kitchen staff and cater for special events. You can safely prepare exotic foods and drinks that would be poisonous if prepared incorrectly."
+	)
+
+/decl/hierarchy/skill/security/combat
+	name = "Melee Combat"
+	uid =  "skill_combat"
+	desc = "This skill describes your training with melee weapons such as swords and spears. It also dictates how good you are at hand-to-hand combat."
+	levels = list(
+		"Unskilled"   = "You have little to no experience with melee combat, you can swing or stab with a weapon, but you don't know how to do so effectively.<br>- You can disarm, grab, and hit. Their success chance depends on the fighters' skill difference.<br>- The chance of falling over when tackled is reduced with level.",
+		"Basic"       = "You have some basic training on how to use a weapon in combat, but are still a beginner. You can handle yourself if you really have to, and know the basics of how to swing a sword.",
+		"Trained"     = "You have had more melee training, and can easily defeat unskilled opponents. Melee combat may not be your specialty, and you don't engage in it more than needed, but you know how to handle yourself in a fight.<br>- You can parry with weapons. This increases with level.<br>- You can do grab maneuvers (pinning, dislocating).<br>- You can grab targets when leaping at them and not fall over, if your species is able to do so.",
+		"Experienced" = "You're good at melee combat. You've trained explicitly with one or more types of weapon, you can use them competently and you can think strategically and quickly in a melee. You're in good shape and you spend time training.",
+		"Master"      = "You specialize in melee combat. You are in good shape  and skilled with multiple types of weapon. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or knight."
+	)
+
+/decl/hierarchy/skill/security/weapons
+	name = "Marksmanship"
+	uid =  "skill_weapons"
+	desc = "This skill describes your expertise with ranged weapons such as bows and slings."
+	levels = list(
+		"Unskilled"   = "You have little to no experience with a ranged weapon, and are likely to miss your target, injure yourself or missfire. <br>- You might fire your weapon randomly.",
+		"Basic"       = "You know how to handle weapons safely, and you're comfortable using simple weapons. Your aim is decent and you can usually be trusted not to do anything stupid with a weapon you are familiar with, but your training isn't automatic yet and your performance will degrade in high-stress situations.<br>- You can use ranged weapons. Their accuracy depends on your skill level.",
+		"Trained"     = "You have had extensive weapons training, or have used weapons in combat. Your aim is better now. You are familiar with most types of weapons and can use them in a pinch. You have an understanding of tactics, and can be trusted to stay calm under fire. You may have military or guardsman experience and you probably carry a weapon on the job.",
+		"Experienced" = "You've used ranged weapons in high-stress situations, and your skills have become automatic. Your aim is good.",
+		"Master"      = "You are a master marksman with great aim, you can hit a moving target, even from afar."
+	)
+
+/decl/hierarchy/skill/medical/medical
+	name = "Medicine"
+	uid =  "skill_medical"
+	desc = "Covers an understanding of the body and medicine. At a low level, this skill gives a basic understanding of applying common types of medicine. At a high level, this skill grants exact knowledge of all the medicine available in these lands."
+	levels = list(
+		"Unskilled"   = "You know first aid, such as how to apply a bandage or salve to an injury. You can tell when someone is badly hurt and needs a doctor; you can see whether someone has a badly broken bone, is having trouble breathing, or is unconscious. You may have trouble telling the difference between unconscious and dead at distance.<br>- You can use basic first aid supplies, such as bandages and salves.",
+		"Basic"       = "You are an apprentice healer. You can stop bleeding, perform resuscitation, apply a splint, take someone's pulse, apply trauma and burn treatments. You probably know that antitoxins help poisoning. You've been briefed on the symptoms of common emergencies like a punctured lung, appendicitis, alcohol poisoning, or broken bones, and though you can't treat them, you know that they need a doctor's attention. You can recognize most emergencies as emergencies and safely stabilize and transport a patient.",
+		"Trained"     = "You are a healer, having recently finished your apprenticeship. You know how to treat most illnesses and injuries, though exotic illnesses and unusual injuries may still stump you. You have probably begun to specialize in some sub-field of medicine. In emergencies, you can think fast enough to keep your patients alive, and even when you can't treat a patient, you know how to find someone who can. <br>- You can apply splints without failing. You can perform simple surgery steps if you have Journeyman level Anatomy skill",
+		"Experienced" = "You are a skilled doctor. You know how to use all of the medical supplies available to treat a patient. Your deep knowledge of the body and medications will let you diagnose and come up with a course of treatment for most ailments. You can perform all surgery steps if you have Journeyman level Anatomy skill",
+		"Master"      = "You are an experienced doctor. You've seen almost everything there is to see when it comes to injuries and illness and even when it comes to something you haven't seen, you can apply your wide knowledge base to put together a treatment. In a pinch, you can do just about any medicine-related task, but your specialty, whatever it may be, is where you really shine."
+	)
+
+/decl/hierarchy/skill/medical/anatomy
+	name = "Anatomy"
+	uid =  "skill_anatomy"
+	desc = "Gives you a detailed insight of the human body. A high skill in this is required to perform surgery."
+	levels = list(
+		"Unskilled"   = "You know what organs, bones, and such are, and you know roughly where they are. You know that someone who's badly hurt or sick may need surgery.",
+		"Basic"       = "You've received tutoring on anatomy and you've spent at least some time poking around inside actual people. You know where everything is, more or less. You could assist in surgery, if you have the required medical skills. If you really had to, you could probably perform basic surgery such as an appendectomy, but you're not yet a qualified surgeon and you really shouldn't--not unless it's an emergency.",
+		"Trained"     = "You have some training in anatomy. Diagnosing broken bones, damaged ligaments, arrow wounds, and other trauma is straightforward for you. You can splint limbs with a good chance of success and you know how to perform resuscitation. Surgery is still outside your training.<br>- You can do surgery (requires Apprentice level Medicine skill too) but you are very likely to fail at every step. Its speed increases with level.",
+		"Experienced" = "You're a skilled doctor. You can put together broken bones, fix a damaged lung, patch up a liver, or remove an appendix without problems. But tricky surgeries, with an unstable patient or delicate manipulation of vital organs like the heart and brain, are at the edge of your ability, and you prefer to leave them to specialized surgeons. You can recognize when someone's anatomy is noticeably unusual.<br>- You can do all surgery steps safely, if you have Journeyman level Medicine skill too.",
+		"Master"      = "You are an experienced surgeon. You can handle anything that gets rolled, pushed, or dragged to you, and you can keep a patient alive and stable even if there's no one to assist you. You can handle severe trauma cases or multiple organ failure, repair brain damage, and perform heart surgery. By now, you've probably specialized in one field, where you may have made new contributions to surgical technique. You can detect even small variations in the anatomy of a patient--very little will slip by your notice.<br>- The penalty from operating on improper operating surfaces is reduced."
+	)
+
+/decl/hierarchy/skill/medical/chemistry
+	name = "Chemistry"
+	uid =  "skill_chemistry"
+	desc = "Experience with chemical ingredients, and an understanding of what the effect will be. This doesn't cover an understanding of the effect of reagents on the human body, as such the medical skill is also required for medical chemists."
+	levels = list(
+		"Unskilled"   = "You know that chemists work with various ingredients; you know that they can make medicine, poison or other useful concoctions.",
+		"Basic"       = "You can make basic medication--things like anti-toxin or burn salves. You have some training in safety and you won't blow up the lab... probably.",
+		"Trained"     = "You can accurately measure out ingredients, grind powders, and mix reagents. You may still lose some product on occasion, but are unlikely to endanger yourself or those around you.",
+		"Experienced" = "You work as an pharmacist, or else you are a doctor with training in chemistry. If you are a pharmacist, you can make most medications. At this stage, you're working mostly by-the-book. <br>- You can examine held containers for some reagents.",
+		"Master"      = "You specialized in chemistry or pharmaceuticals; you are either a medical researcher or professional chemist. You can create custom mixes and make even the trickiest of medications easily. You understand how your pharmaceuticals interact with the bodies of your patients. You are probably the originator of at least one new chemical innovation.<br>- You can examine held containers for all reagents."
 	)
