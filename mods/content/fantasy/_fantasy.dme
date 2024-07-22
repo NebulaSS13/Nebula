@@ -25,6 +25,7 @@
 #include "items\clothing\_loadout.dm"
 #include "items\clothing\_recipes.dm"
 #include "items\clothing\armor.dm"
+#include "items\clothing\glasses.dm"
 #include "items\clothing\jerkin.dm"
 #include "items\clothing\loincloth.dm"
 #include "items\clothing\overrides.dm"

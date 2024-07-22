@@ -21,6 +21,7 @@
 		"prescription glasses" = /obj/item/clothing/glasses/prescription,
 		"green glasses" =        /obj/item/clothing/glasses/prescription/gglasses,
 		"hipster glasses" =      /obj/item/clothing/glasses/prescription/hipster,
+		"pince-nez glasses" =    /obj/item/clothing/glasses/prescription/pincenez,
 		"monocle" =              /obj/item/clothing/glasses/eyepatch/monocle
 	)
 
