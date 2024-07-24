@@ -114,7 +114,7 @@
 		current_health = clamp(current_health + used*DOOR_REPAIR_AMOUNT, current_health, current_max_health)
 
 /obj/structure/attackby(obj/item/used_item, mob/user)
-	if(used_item.user_can_wield(user))
+	if(used_item.user_can_wield(user, silent = TRUE))
 		if(used_item.force && user.a_intent == I_HURT)
 			attack_animation(user)
 			visible_message(SPAN_DANGER("\The [src] has been [pick(used_item.attack_verb)] with \the [used_item] by \the [user]!"))

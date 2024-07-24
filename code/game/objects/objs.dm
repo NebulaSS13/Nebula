@@ -130,8 +130,8 @@
 
 /obj/attackby(obj/item/used_item, mob/user)
 	// We need to call parent even if we lack dexterity, so that storage can work.
-	if(used_item.user_can_wield(user))
-		if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(used_item) || IS_HAMMER(used_item)))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(used_item) || IS_HAMMER(used_item)))
+		if(used_item.user_can_wield(user))
 			wrench_floor_bolts(user, null, used_item)
 			update_icon()
 			return TRUE
