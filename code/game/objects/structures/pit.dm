@@ -137,9 +137,8 @@
 	icon_state = "pit0"
 
 /obj/structure/pit/closed/grave/Initialize()
+	setup_contents() // must run before parent call or close() will delete us
 	. = ..()
-	if(. != INITIALIZE_HINT_QDEL)
-		setup_contents()
 
 /obj/structure/pit/closed/grave/proc/setup_contents()
 	var/obj/structure/closet/coffin/C = new(src.loc)
