@@ -22,17 +22,8 @@
 		return TRUE
 
 	if (!open && istype(used_item, /obj/item/gravemarker))
-		var/competitor = locate(/obj/structure/gravemarker) in src.loc
-		if(competitor)
-			to_chat(user, SPAN_WARNING("There's already \a [competitor] here."))
-			return TRUE
-		user.visible_message(SPAN_NOTICE("\The [user] starts planting \a [used_item] on \the [src]."), SPAN_NOTICE("You start planting \a [used_item] on \the [src]."), SPAN_NOTICE("You hear soil shifting."))
-		if(!do_after(user, 5 SECONDS, src))
-			user.visible_message(SPAN_NOTICE("\The [user] stops planting \a [used_item] on \the [src]."), SPAN_NOTICE("You stop planting \a [used_item] on \the [src]."), SPAN_NOTICE("You hear the soil become still once more."))
-			return TRUE
 		var/obj/item/gravemarker/gravemarker = used_item
-		if(gravemarker.bury(src, user))
-			user.visible_message(SPAN_NOTICE("\The [user] plants a grave marker on \the [src]."), SPAN_NOTICE("You plant a grave marker on \the [src]."))
+		gravemarker.try_bury(get_turf(src), user)
 		return TRUE
 	return ..()
 
@@ -251,15 +242,56 @@
 	else if(message)
 		to_chat(user, "You can't read the inscription from here.")
 
-// use on a pit to bury it in the ground
-/obj/item/gravemarker/proc/bury(obj/structure/pit/grave, mob/user)
-	if(!istype(grave))
-		to_chat(user, SPAN_WARNING("You can't plant \the [src] here."))
+/obj/item/gravemarker/attack_self(mob/user)
+	if(user.a_intent != I_HURT)
+		try_bury(get_turf(user), user)
+		return TRUE
+	return ..()
+
+/obj/item/gravemarker/afterattack(turf/target, mob/user, proximity)
+	if((. = ..()) || (user.a_intent == I_HURT && !(item_flags & ITEM_FLAG_NO_BLUDGEON)) || !proximity)
+		return
+	if(!istype(target))
+		target = get_turf(target)
+	try_bury(target, user)
+	return TRUE
+
+/obj/item/gravemarker/proc/try_bury(turf/target_turf, mob/user)
+	if(!can_bury(target_turf, user))
 		return FALSE
-	if(grave.open)
-		to_chat(user, SPAN_WARNING("You can't plant \the [src] here, it's an open pit!"))
+	var/obj/structure/pit/grave = locate() in target_turf
+	var/where = grave ? "on \the [grave]" : "in \the [target_turf]"
+	user.visible_message(SPAN_NOTICE("\The [user] starts planting \a [src] [where]."), SPAN_NOTICE("You start planting \a [src] [where]."), SPAN_NOTICE("You hear soil shifting."))
+	if(!do_after(user, 5 SECONDS, grave || target_turf))
+		user.visible_message(SPAN_NOTICE("\The [user] stops planting \a [src] [where]."), SPAN_NOTICE("You stop planting \a [src] [where]."), SPAN_NOTICE("You hear the soil become still once more."))
+		return TRUE
+	// check again after the delay, just in case
+	if(!can_bury(target_turf, user))
 		return FALSE
-	var/obj/structure/gravemarker/gravemarker = new gravemarker_type(grave.loc, material.type)
+	if(bury(target_turf, user))
+		grave = locate() in target_turf // could have been removed or created during the delay
+		where = grave ? "on \the [grave]" : "in \the [target_turf]"
+		user.visible_message(SPAN_NOTICE("\The [user] plants \a [src] [where]."), SPAN_NOTICE("You plant \a [src] [where]."), SPAN_NOTICE("You hear soil shifting."))
+
+/obj/item/gravemarker/proc/can_bury(turf/target_turf, mob/user, silent = FALSE)
+	var/obj/structure/pit/grave = locate() in target_turf
+	if(target_turf.is_open() || grave?.open)
+		if(user && !silent)
+			to_chat(user, SPAN_WARNING("You can't plant \the [src] here, it's an open pit!"))
+		return FALSE
+	if(!grave && !target_turf.can_be_dug(MAT_VALUE_RIGID)) // a grave means it's able to be planted
+		if(user && !silent)
+			to_chat(user, SPAN_WARNING("The ground here is too hard to plant \the [src] in."))
+		return FALSE
+	var/obj/structure/gravemarker/competitor = locate() in target_turf
+	if(competitor)
+		to_chat(user, SPAN_WARNING("There's already \a [competitor] here."))
+		return FALSE
+	return TRUE
+
+// use in hand or on a pit to bury it in the ground
+/obj/item/gravemarker/proc/bury(turf/target_turf)
+	var/obj/structure/gravemarker/gravemarker = new gravemarker_type(target_turf, material.type)
 	gravemarker.message = message
 	gravemarker.icon_state = icon_state
 	qdel(src)
