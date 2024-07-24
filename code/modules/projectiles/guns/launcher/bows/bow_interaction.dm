@@ -1,10 +1,20 @@
 /obj/item/gun/launcher/bow/attack_self(mob/user)
+
 	if(tension)
 		relax_tension(user)
 		return TRUE
+
+	if(!get_loaded_arrow(user) && user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		for(var/obj/item/stack/material/bow_ammo/ammo in user.get_inactive_held_items())
+			attackby(ammo, user)
+			if(get_loaded_arrow(user))
+				start_drawing(user)
+				return TRUE
+
 	if(get_loaded_arrow(user))
 		start_drawing(user)
 		return TRUE
+
 	return ..()
 
 /obj/item/gun/launcher/bow/attack_hand(mob/user)

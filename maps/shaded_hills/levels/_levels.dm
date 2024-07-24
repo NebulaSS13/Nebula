@@ -4,6 +4,7 @@
 /datum/level_data/player_level/shaded_hills
 	use_global_exterior_ambience = FALSE
 	base_area = null
+	base_turf = /turf/floor/natural/dirt
 	abstract_type = /datum/level_data/player_level/shaded_hills
 	ambient_light_level = 1
 	ambient_light_color = "#f3e6ca"
@@ -15,7 +16,6 @@
 	daycycle_type = /datum/daycycle/shaded_hills
 	daycycle_id = "daycycle_shaded_hills"
 	template_edge_padding = 0 // we use a strictly delineated subarea, no need for this guard
-
 	var/submap_budget   = 0
 	var/submap_category = null
 	var/submap_area
@@ -190,6 +190,7 @@
 		/datum/random_map/automata/cave_system/shaded_hills,
 		/datum/random_map/noise/ore/rich
 	)
+	base_turf = /turf/floor/natural/rock/basalt
 
 /datum/level_data/player_level/shaded_hills/dungeon
 	name = "Shaded Hills - Dungeon"
@@ -200,6 +201,7 @@
 	submap_budget = 5
 	submap_category = MAP_TEMPLATE_CATEGORY_SH_DUNGEON
 	submap_area = /area/shaded_hills/caves/dungeon/poi
+	base_turf = /turf/floor/natural/rock/basalt
 
 /obj/abstract/level_data_spawner/shaded_hills_grassland
 	level_data_type = /datum/level_data/player_level/shaded_hills/grassland

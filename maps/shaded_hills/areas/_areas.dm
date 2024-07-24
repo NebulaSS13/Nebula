@@ -18,6 +18,8 @@
 		/obj/item/stick                                      = 1,
 		/obj/item/trash/mollusc_shell                        = 1,
 	)
+	sound_env = GENERIC
+	ambience = list()
 	var/list/additional_fishing_results
 
 /area/shaded_hills/Initialize()
@@ -30,6 +32,7 @@
 	name = "\improper Grasslands"
 	color = COLOR_GREEN
 	is_outside = OUTSIDE_YES
+	sound_env = FOREST
 	ambience = list(
 		'sound/effects/wind/wind_2_1.ogg',
 		'sound/effects/wind/wind_2_2.ogg',
@@ -41,4 +44,4 @@
 	description = "Birds and insects call from the grasses, and a cool wind gusts from across the river."
 	area_blurb_category = /area/shaded_hills/outside
 	interior_ambient_light_modifier = -0.3
-
+	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_BACKGROUND

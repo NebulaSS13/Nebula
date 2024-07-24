@@ -713,7 +713,7 @@ This function completely restores a damaged organ to perfect condition.
 			for(var/datum/wound/other in wounds)
 				if(other.can_merge_wounds(wound))
 					other.merge_wound(wound)
-					return
+					return other
 		LAZYADD(wounds, wound)
 		return wound
 

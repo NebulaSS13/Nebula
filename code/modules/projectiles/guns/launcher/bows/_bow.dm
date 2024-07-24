@@ -21,7 +21,7 @@
 	/// Highest possible tension.
 	var/max_tension = 3
 	/// Speed per unit of tension.
-	var/release_speed = 10
+	var/release_speed = 14
 	/// Time needed to draw the bow back by one "tension"
 	var/draw_time = 1 SECOND
 	/// Does this bow need an arrow nocked to draw?

@@ -161,6 +161,9 @@
 	/// Note that this is more or less unnecessary if you are using a mapped area that doesn't stretch to the edge of the level.
 	var/template_edge_padding = 15
 
+	// Whether or not this level permits things like graffiti and filth to persist across rounds.
+	var/permit_persistence = FALSE
+
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
@@ -593,12 +596,14 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 
 /datum/level_data/main_level
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
+	permit_persistence = TRUE
 
 /datum/level_data/admin_level
 	level_flags = (ZLEVEL_ADMIN|ZLEVEL_SEALED)
 
 /datum/level_data/player_level
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
+	permit_persistence = TRUE
 
 /datum/level_data/unit_test
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)

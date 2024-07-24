@@ -10,67 +10,65 @@
 				if(70 to INFINITY)
 					return /datum/wound/cut/massive
 				if(60 to 70)
-					return /datum/wound/cut/gaping_big
+					. = /datum/wound/cut/gaping_big
 				if(50 to 60)
-					return /datum/wound/cut/gaping
+					. = /datum/wound/cut/gaping
 				if(25 to 50)
-					return /datum/wound/cut/flesh
+					. = /datum/wound/cut/flesh
 				if(15 to 25)
-					return /datum/wound/cut/deep
+					. = /datum/wound/cut/deep
 				if(0 to 15)
-					return /datum/wound/cut/small
+					. = /datum/wound/cut/small
 		if(PIERCE)
 			switch(damage)
 				if(60 to INFINITY)
-					return /datum/wound/puncture/massive
+					. = /datum/wound/puncture/massive
 				if(50 to 60)
-					return /datum/wound/puncture/gaping_big
+					. = /datum/wound/puncture/gaping_big
 				if(30 to 50)
-					return /datum/wound/puncture/gaping
+					. = /datum/wound/puncture/gaping
 				if(15 to 30)
-					return /datum/wound/puncture/flesh
+					. = /datum/wound/puncture/flesh
 				if(0 to 15)
-					return /datum/wound/puncture/small
+					. = /datum/wound/puncture/small
 		if(BRUISE)
-			return /datum/wound/bruise
+			. = /datum/wound/bruise
 		if(BURN, LASER)
 			switch(damage)
 				if(50 to INFINITY)
-					return /datum/wound/burn/carbonised
+					. = /datum/wound/burn/carbonised
 				if(40 to 50)
-					return /datum/wound/burn/deep
+					. = /datum/wound/burn/deep
 				if(30 to 40)
-					return /datum/wound/burn/severe
+					. = /datum/wound/burn/severe
 				if(15 to 30)
-					return /datum/wound/burn/large
+					. = /datum/wound/burn/large
 				if(0 to 15)
-					return /datum/wound/burn/moderate
+					. = /datum/wound/burn/moderate
 		if(SHATTER)
 			switch(damage)
 				if(50 to INFINITY)
-					return /datum/wound/shatter/smashed
+					. = /datum/wound/shatter/smashed
 				if(40 to 50)
-					return /datum/wound/shatter/wide
+					. = /datum/wound/shatter/wide
 				if(30 to 40)
-					return /datum/wound/shatter/narrow
+					. = /datum/wound/shatter/narrow
 				if(15 to 30)
-					return /datum/wound/shatter/cracked
+					. = /datum/wound/shatter/cracked
 				if(0 to 15)
-					return /datum/wound/shatter/chipped
+					. = /datum/wound/shatter/chipped
 		if(CHARRED)
 			switch(damage)
 				if(50 to INFINITY)
-					return /datum/wound/charred/charcoal
+					. = /datum/wound/charred/charcoal
 				if(40 to 50)
-					return /datum/wound/charred/charred
+					. = /datum/wound/charred/charred
 				if(30 to 40)
-					return /datum/wound/charred/burned
+					. = /datum/wound/charred/burned
 				if(15 to 30)
-					return /datum/wound/charred/seared
+					. = /datum/wound/charred/seared
 				if(0 to 15)
-					return /datum/wound/charred/singed
-
-	return null //no wound
+					. = /datum/wound/charred/singed
 
 /datum/wound/proc/close()
 	return
