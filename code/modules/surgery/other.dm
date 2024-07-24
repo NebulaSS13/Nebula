@@ -154,7 +154,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/sterilize
 	name = "Sterilize wound"
-	description = "This procedure sterilizes a wound with alcohol."
+	description = "This procedure sterilizes a wound with antiseptic substances such as alcohol or raw honey."
 	allowed_tools = list(
 		/obj/item/chems/spray = 100,
 		/obj/item/chems/dropper = 100,
@@ -165,14 +165,25 @@
 		/obj/item/chems/drinks/glass2 = 75,
 		/obj/item/chems/glass/bucket = 50
 	)
-	var/static/list/skip_open_container_checks = list(
+	var/list/skip_open_container_checks = list(
 		/obj/item/chems/spray,
 		/obj/item/chems/dropper
 	)
+	var/list/sterilizing_reagents = list(
+		/decl/material/liquid/nutriment/honey,
+		/decl/material/liquid/antiseptic
+	)
+
 	can_infect = 0
 	blood_level = 0
 	min_duration = 50
 	max_duration = 60
+
+/decl/surgery_step/sterilize/Initialize()
+	. = ..()
+	for(var/decl/material/liquid/ethanol/booze in decls_repository.get_decls_of_type_unassociated(/decl/material/liquid/ethanol))
+		if(booze.strength <= 40)
+			sterilizing_reagents |= booze.type
 
 /decl/surgery_step/sterilize/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -229,12 +240,15 @@
 	if(!valid_container)
 		return FALSE
 
-	if(container.reagents.has_reagent(/decl/material/liquid/antiseptic))
-		return TRUE
+	if(!container.reagents?.total_volume)
+		return FALSE
 
-	for(var/rtype in container?.reagents?.reagent_volumes)
-		var/decl/material/liquid/ethanol/booze = GET_DECL(rtype)
-		if(istype(booze) && booze.strength <= 40)
-			return TRUE
+	// This check means it's impure.
+	if(length(container.reagents.reagent_volumes) > length(sterilizing_reagents))
+		return FALSE
 
-	return FALSE
+	// Check if we have sterilizing reagents and -only- sterilizing reagents.
+	for(var/reagent in container.reagents.reagent_volumes)
+		if(!(reagent in sterilizing_reagents))
+			return FALSE
+		. = TRUE

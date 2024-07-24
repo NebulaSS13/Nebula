@@ -107,8 +107,8 @@
 		SPAN_NOTICE("You climb on \the [src]."))
 	else
 		visible_message(SPAN_NOTICE("\The [target] has been laid on \the [src] by \the [user]."))
-	target.set_posture(/decl/posture/lying/deliberate)
 	target.dropInto(loc)
+	target.set_posture(/decl/posture/lying/deliberate)
 	add_fingerprint(user)
 	update_icon()
 
