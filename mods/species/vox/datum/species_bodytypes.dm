@@ -133,12 +133,11 @@
 	eye_icon   = 'mods/species/vox/icons/body/servitor/eyes_alchemist.dmi'
 
 /obj/item/organ/external/tail/vox
-	tail       = "voxtail"
-	tail_icon  = 'mods/species/vox/icons/body/soldier/tail.dmi'
+	tail_icon  = 'mods/species/vox/icons/body/soldier/body.dmi'
 	tail_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/tail/vox/servitor
-	tail_icon  = 'mods/species/vox/icons/body/servitor/tail.dmi'
+	tail_icon  = 'mods/species/vox/icons/body/servitor/body.dmi'
 
 /obj/item/organ/external/tail/vox/stanchion
-	tail_icon  = 'mods/species/vox/icons/body/stanchion/tail.dmi'
+	tail_icon  = 'mods/species/vox/icons/body/stanchion/body.dmi'

@@ -76,5 +76,5 @@
 	onmob_state_modifiers = null
 
 /obj/item/organ/external/tail/lizard
-	tail_icon = 'mods/species/bayliens/unathi/icons/tail.dmi'
-	tail      = "sogtail"
+	tail_icon             = 'mods/species/bayliens/unathi/icons/tail.dmi'
+	tail_animation_states = 9

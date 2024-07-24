@@ -1,4 +1,4 @@
-/mob/living/proc/update_tail_showing(var/update_icons=1)
+/mob/living/proc/update_tail_showing(update_icons = TRUE)
 
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!istype(tail_organ))
@@ -6,7 +6,7 @@
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 		return
 
-	var/tail_state = tail_organ.get_tail(tail_organ)
+	var/tail_state = tail_organ.get_tail()
 	if(!tail_state)
 		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
@@ -17,9 +17,12 @@
 		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 
-	var/icon/tail_s = get_tail_icon_for_organ(tail_organ)
-	var/tail_image = image(tail_s, icon_state = tail_state)
-	animate_tail_reset(0)
+	var/icon/tail_s = get_tail_icon_for_organ(tail_organ, tail_state)
+	if(!tail_s)
+		set_tail_animation_state(null)
+		return
+
+	var/tail_image = image(tail_s, tail_state)
 	if(dir == NORTH)
 		set_current_mob_underlay(HU_TAIL_LAYER, null, FALSE)
 		set_current_mob_overlay(HO_TAIL_LAYER, tail_image, update_icons)
@@ -31,13 +34,13 @@
 		update_icon()
 		compile_overlays()
 
-/mob/living/proc/get_tail_icon_for_organ(var/obj/item/organ/external/tail/tail_organ)
-	if(!istype(tail_organ))
+/mob/living/proc/get_tail_icon_for_organ(obj/item/organ/external/tail/tail_organ, tail_state)
+
+	if(!istype(tail_organ) || !tail_state)
 		return
 
-	var/tail_state = tail_organ.get_tail()
 	if(tail_organ.limb_flags & ORGAN_FLAG_SKELETAL)
-		if(!tail_organ.bodytype?.skeletal_icon)
+		if(!tail_organ.bodytype?.skeletal_icon || !(check_state_in_icon(tail_state, tail_organ.bodytype.skeletal_icon)))
 			return
 		var/tail_cache_key = "[tail_state][tail_organ.bodytype.skeletal_icon]_skeletal"
 		if(!global.tail_icon_cache[tail_cache_key])
@@ -45,8 +48,11 @@
 		return global.tail_icon_cache[tail_cache_key]
 
 	var/tail_icon  = tail_organ.get_tail_icon()
-	if(!tail_state || !tail_icon)
+	if(!tail_icon)
 		return // No tail data!
+
+	if(!check_state_in_icon(tail_state, tail_icon))
+		return
 
 	// These values may be null and are generally optional.
 	var/hair_colour     = GET_HAIR_COLOUR(src)
@@ -82,14 +88,17 @@
 		if(tail_organ?.get_tail())
 			update_tail_showing()
 
-/mob/living/proc/set_tail_state(var/t_state)
+/mob/living/proc/set_tail_animation_state(var/t_state, update_icons = TRUE)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return null
-	var/image/tail_overlay = get_current_tail_image()
-	if(tail_overlay && check_state_in_icon(tail_overlay.icon, t_state))
-		tail_overlay.icon_state = t_state
-	return tail_overlay
+	// If we don't have animation states, don't try to force us to use one.
+	if(t_state != null && !tail_organ.get_tail_animation_states())
+		t_state = null
+	if(tail_organ.tail_animation_state != t_state)
+		tail_organ.tail_animation_state = t_state
+		update_tail_showing(update_icons)
+	. = get_current_tail_image()
 
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
@@ -100,58 +109,35 @@
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
-	var/t_state = "[tail_organ.get_tail()]_once"
-
-	var/image/tail_overlay = get_current_tail_image()
-	if(tail_overlay && tail_overlay.icon_state == t_state)
-		return //let the existing animation finish
-
-	tail_overlay = set_tail_state(t_state)
-	if(tail_overlay)
-		spawn(20)
-			//check that the animation hasn't changed in the meantime
-			var/current_tail = get_current_tail_image()
-			if(current_tail == tail_overlay && tail_overlay.icon_state == t_state)
-				animate_tail_stop()
-
-	if(update_icons)
-		queue_icon_update()
+	var/tail_states = tail_organ.get_tail_animation_states()
+	if(tail_states)
+		. = set_tail_animation_state("_once[rand(1, tail_states)]", update_icons)
+		if(.)
+			spawn(2 SECONDS)
+				set_tail_animation_state(null, TRUE)
 
 /mob/living/proc/animate_tail_start(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
-	var/tail_states = tail_organ.get_tail_states()
+	var/tail_states = tail_organ.get_tail_animation_states()
 	if(tail_states)
-		set_tail_state("[tail_organ.get_tail()]_slow[rand(1, tail_states)]")
-		if(update_icons)
-			queue_icon_update()
+		return set_tail_animation_state("_slow[rand(1, tail_states)]", update_icons)
 
 /mob/living/proc/animate_tail_fast(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
-	var/tail_states = tail_organ.get_tail_states()
+	var/tail_states = tail_organ.get_tail_animation_states()
 	if(tail_states)
-		set_tail_state("[tail_organ.get_tail()]_loop[rand(1, tail_states)]")
-		if(update_icons)
-			queue_icon_update()
+		return set_tail_animation_state("_loop[rand(1, tail_states)]", update_icons)
 
 /mob/living/proc/animate_tail_reset(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
 		return
-	var/tail_states = tail_organ.get_tail_states(src)
-	if(stat != DEAD && tail_states)
-		set_tail_state("[tail_organ.get_tail()]_idle[rand(1, tail_states)]")
-	else
-		set_tail_state("[tail_organ.get_tail()]_static")
-
-	if(update_icons)
-		queue_icon_update()
-
-/mob/living/proc/animate_tail_stop(var/update_icons=1)
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
-	if(!tail_organ || (tail_organ.limb_flags & ORGAN_FLAG_SKELETAL))
-		return
-	set_tail_state("[tail_organ.get_tail()]_static")
+	if(stat != DEAD)
+		var/tail_states = tail_organ.get_tail_animation_states()
+		if(tail_states)
+			return set_tail_animation_state("_idle[rand(1, tail_states)]", update_icons)
+	return set_tail_animation_state(null, update_icons)

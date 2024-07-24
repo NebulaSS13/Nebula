@@ -500,7 +500,20 @@ var/global/list/bodytypes_by_category = list()
 				var/tail_state = tail_organ.get_tail()
 				if(tail_icon && tail_state)
 					if(!check_state_in_icon(tail_state, tail_icon))
-						. += "tail state [tail_state] not present in icon [tail_icon], available states are: [json_encode(icon_states(tail_icon))]"
+						. += "base tail state '[tail_state]' not present in icon '[tail_icon]'"
+					var/tail_states = tail_organ.get_tail_animation_states()
+					if(tail_states)
+						var/static/list/animation_modifiers = list(
+							"_idle",
+							"_slow",
+							"_loop",
+							"_once"
+						)
+						for(var/modifier in animation_modifiers)
+							var/modified_state = "[tail_state][modifier]"
+							for(var/i = 1 to tail_states)
+								if(!check_state_in_icon("[modified_state][i]", tail_icon))
+									. += "animated tail state '[modified_state][i]' not present in icon '[tail_icon]'"
 				else
 					if(!tail_icon)
 						. += "missing tail icon"
