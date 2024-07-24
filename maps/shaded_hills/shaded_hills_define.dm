@@ -28,6 +28,7 @@
 	credit_sound = list(
 		'sound/music/Miris-Magic-Dance.ogg'
 	)
+	game_year = -914 // in 2024, the year should be 1110, roughly a century after the fall of the Imperial Aegis
 
 /decl/backpack_outfit/sack
 	is_default = TRUE
