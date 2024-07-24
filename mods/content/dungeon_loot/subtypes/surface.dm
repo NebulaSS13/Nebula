@@ -26,7 +26,7 @@
 		/obj/item/storage/med_pouch/toxin,
 		/obj/item/storage/med_pouch/radiation,
 		/obj/item/storage/med_pouch/oxyloss,
-		/obj/item/chems/hypospray/autoinjector
+		/obj/item/chems/hypospray/autoinjector/stabilizer
 	)
 	return common_loot
 
