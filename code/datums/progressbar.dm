@@ -21,6 +21,7 @@
 		goal = goal_number
 	bar = image('icons/effects/progressbar.dmi', target, "prog_bar_0")
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+	bar.blend_mode = BLEND_OVERLAY
 	bar.plane = HUD_PLANE
 	bar.layer = HUD_ABOVE_ITEM_LAYER
 
