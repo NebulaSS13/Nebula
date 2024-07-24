@@ -181,3 +181,7 @@
 	result_type            = /obj/structure/table/frame
 	category               = "furniture"
 	difficulty             = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/planks/furniture/gravemarker
+	result_type            = /obj/item/gravemarker
+	difficulty             = MAT_VALUE_NORMAL_DIY
