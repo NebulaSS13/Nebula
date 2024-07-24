@@ -39,11 +39,6 @@
 /obj/structure/pit/on_update_icon()
 	..()
 	icon_state = "pit[open]"
-	if(isturf(loc))
-		var/turf/T = loc
-		var/soil_color = T.get_soil_color()
-		if(soil_color)
-			color = soil_color
 
 /obj/structure/pit/proc/open(mob/user)
 	name = initial(name)
