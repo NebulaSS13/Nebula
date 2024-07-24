@@ -25,6 +25,9 @@
 		/decl/music_track/teller,
 		/decl/music_track/suonatore
 	)
+	credit_sound = list(
+		'sound/music/Miris-Magic-Dance.ogg'
+	)
 
 /decl/backpack_outfit/sack
 	is_default = TRUE

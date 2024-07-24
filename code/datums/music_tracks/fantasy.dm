@@ -19,3 +19,9 @@
 	license = /decl/license/cc_by_3_0
 	url = "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400023"
 
+/decl/music_track/magic_dance
+	artist = "Kevin Macleod"
+	title = "Miri's Magic Dance"
+	song = 'sound/music/Miris-Magic-Dance.ogg'
+	license = /decl/license/cc_by_3_0
+	url = "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100157"
