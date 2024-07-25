@@ -28,7 +28,7 @@
 	return can_be_dug(tool_hardness, using_tool) && !(locate(/obj/structure/pit) in src)
 
 /turf/proc/try_dig_pit(var/mob/user, var/obj/item/tool, using_tool = TOOL_SHOVEL)
-	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 5 SECONDS, set_cooldown = TRUE))
+	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 5 SECONDS, check_skill = SKILL_HAULING, set_cooldown = TRUE))
 		return dig_pit(tool?.material?.hardness, using_tool)
 	return null
 
@@ -55,7 +55,7 @@
 	return can_be_dug(tool_hardness, using_tool) && get_physical_height() > -(FLUID_DEEP)
 
 /turf/proc/try_dig_trench(mob/user, obj/item/tool, using_tool = TOOL_SHOVEL)
-	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 2.5 SECONDS, set_cooldown = TRUE))
+	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 2.5 SECONDS, check_skill = SKILL_HAULING, set_cooldown = TRUE))
 		return dig_trench(tool?.material?.hardness, using_tool)
 	return null
 
