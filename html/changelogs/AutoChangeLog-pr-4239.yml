@@ -1,0 +1,4 @@
+author: Penelope Haze
+changes:
+  - {tweak: Digging pits and trenches now checks athletics instead of construction.}
+delete-after: true
