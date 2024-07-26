@@ -8,31 +8,31 @@
 	crafting_extra_cost_factor  = 1 // No wastage for just resculpting materials.
 
 /decl/stack_recipe/soft/teapot
-	result_type                 = /obj/item/chems/glass/pottery/teapot
+	result_type                 = /obj/item/chems/glass/handmade/teapot
 
 /decl/stack_recipe/soft/cup
-	result_type                 = /obj/item/chems/glass/pottery/cup
+	result_type                 = /obj/item/chems/glass/handmade/cup
 
 /decl/stack_recipe/soft/mug
-	result_type                 = /obj/item/chems/glass/pottery/mug
+	result_type                 = /obj/item/chems/glass/handmade/mug
 
 /decl/stack_recipe/soft/vase
-	result_type                 = /obj/item/chems/glass/pottery/vase
+	result_type                 = /obj/item/chems/glass/handmade/vase
 
 /decl/stack_recipe/soft/bowl
-	result_type                 = /obj/item/chems/glass/pottery/bowl
+	result_type                 = /obj/item/chems/glass/handmade/bowl
 
 /decl/stack_recipe/soft/jar
-	result_type                 = /obj/item/chems/glass/pottery/jar
+	result_type                 = /obj/item/chems/glass/handmade/jar
 
 /decl/stack_recipe/soft/bottle
-	result_type                 = /obj/item/chems/glass/pottery/bottle
+	result_type                 = /obj/item/chems/glass/handmade/bottle
 
 /decl/stack_recipe/soft/bottle_wide
-	result_type                 = /obj/item/chems/glass/pottery/bottle/wide
+	result_type                 = /obj/item/chems/glass/handmade/bottle/wide
 
 /decl/stack_recipe/soft/bottle_tall
-	result_type                 = /obj/item/chems/glass/pottery/bottle/tall
+	result_type                 = /obj/item/chems/glass/handmade/bottle/tall
 
 /decl/stack_recipe/soft/stack
 	name                        = "brick"

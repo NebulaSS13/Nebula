@@ -29,7 +29,7 @@
 /area/template_noop)
 "q" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/chems/glass/pottery/cup,
+/obj/item/chems/glass/handmade/cup,
 /turf/floor/wood/walnut,
 /area/template_noop)
 "r" = (
@@ -67,7 +67,7 @@
 /area/template_noop)
 "E" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/chems/glass/pottery/teapot,
+/obj/item/chems/glass/handmade/teapot,
 /turf/floor/wood/walnut,
 /area/template_noop)
 "G" = (
@@ -110,9 +110,9 @@
 /area/template_noop)
 "S" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/chems/glass/pottery/bowl,
-/obj/item/chems/glass/pottery/bowl,
-/obj/item/chems/glass/pottery/cup,
+/obj/item/chems/glass/handmade/bowl,
+/obj/item/chems/glass/handmade/bowl,
+/obj/item/chems/glass/handmade/cup,
 /turf/floor/natural/path/basalt,
 /area/template_noop)
 "U" = (
