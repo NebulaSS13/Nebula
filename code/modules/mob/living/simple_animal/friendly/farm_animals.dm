@@ -193,6 +193,7 @@
 	mob_size = MOB_SIZE_MINISCULE
 	butchery_data = /decl/butchery_data/animal/small/fowl/chicken/chick
 	ai = /datum/mob_controller/chick
+	holder_type = /obj/item/holder
 	var/amount_grown = 0
 
 /datum/mob_controller/chick
@@ -243,6 +244,7 @@ var/global/chicken_count = 0
 	speak_emote  = list("clucks","croons")
 	butchery_data = /decl/butchery_data/animal/small/fowl/chicken
 	ai = /datum/mob_controller/fowl/chicken
+	holder_type = /obj/item/holder
 	var/eggsleft = 0
 
 /datum/mob_controller/fowl/chicken
