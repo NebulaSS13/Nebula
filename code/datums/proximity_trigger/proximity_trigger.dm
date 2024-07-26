@@ -139,6 +139,8 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/proc/on_turf_entered(var/turf/T, var/atom/enterer)
 	if(enterer == holder) // We have an explicit call for holder, in case it moved somewhere we're not listening to.
 		return
+	if(!enterer.simulated)
+		return
 	// For opaque movables, we need to recheck visibility on destruction, when their opacity is changed, or when they move out of range.
 	if(enterer.opacity)
 		events_repository.register(/decl/observ/opacity_set, enterer, src, TYPE_PROC_REF(/datum/proximity_trigger, update_opaque_atom))

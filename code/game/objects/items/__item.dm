@@ -4,6 +4,7 @@
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	pass_flags = PASS_FLAG_TABLE
 	abstract_type = /obj/item
+	temperature_sensitive = TRUE
 
 	/// Set to false to skip state checking and never draw an icon on the mob (except when held)
 	var/draw_on_mob_when_equipped = TRUE

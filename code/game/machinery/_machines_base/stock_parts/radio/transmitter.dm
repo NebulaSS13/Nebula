@@ -14,9 +14,9 @@
 		return
 	if(!buffer)
 		buffer = data
-		addtimer(CALLBACK(src, PROC_REF(transmit)), latency)
+		addtimer(CALLBACK(src, PROC_REF(transmit)), latency, TIMER_UNIQUE)
 	else
-		buffer |= data
+		buffer = (data |= buffer) // this avoids list copies. basically, give entries already in data priority and add buffered data after
 
 /obj/item/stock_parts/radio/transmitter/proc/transmit()
 	if(!LAZYLEN(buffer))

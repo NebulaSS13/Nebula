@@ -654,7 +654,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 /decl/public_access/public_method/fax_receive_document
 	name = "Send Fax Message"
 	desc = "Sends the specified document over to the specified network tag."
-	call_proc = /obj/machinery/faxmachine/proc/receive_fax
+	call_proc = TYPE_PROC_REF(/obj/machinery/faxmachine, receive_fax)
 	forward_args = TRUE
 
 ////////////////////////////////////////////////////////////////////////////////////////

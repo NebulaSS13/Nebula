@@ -85,6 +85,7 @@ Class Procs:
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY
 	)
+	temperature_sensitive = TRUE
 	abstract_type = /obj/machinery
 
 	var/stat = 0

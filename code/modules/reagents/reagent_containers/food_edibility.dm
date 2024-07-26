@@ -24,22 +24,23 @@
 		else if(cooked_food == FOOD_RAW)
 			living_eater.add_stressor(/datum/stressor/ate_raw_food, 15 MINUTES)
 
+	var/atom/loc_ref = loc
 	var/obj/item/plate_ref = plate
 	var/trash_ref = trash
 	. = ..()
 	if(.)
 		if(trash_ref)
 			if(ispath(trash_ref, /obj/item))
-				var/obj/item/trash_item = new trash_ref(get_turf(src))
+				var/obj/item/trash_item = new trash_ref(loc_ref)
 				if(feeder)
 					feeder.put_in_hands(trash_item)
 			else if(istype(trash_ref, /obj/item))
 				var/obj/item/trash_item = trash_ref
 				if(!QDELETED(trash_item))
-					trash_item.dropInto(get_turf(src))
+					trash_item.dropInto(loc_ref)
 					if(feeder)
 						feeder.put_in_hands(trash_item)
 		if(plate_ref && !QDELETED(plate_ref))
-			plate_ref.dropInto(get_turf(src))
+			plate_ref.dropInto(loc_ref)
 			if(feeder)
 				feeder.put_in_hands(plate_ref)

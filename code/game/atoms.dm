@@ -57,6 +57,8 @@
 	/// (FLOAT) Theoretical maximum health value.
 	var/max_health
 
+	/// (BOOL) Does this atom respond to changes in local temperature via the `temperature` var?
+	var/temperature_sensitive = FALSE
 	/// (DATUM) /datum/storage instance to use for this obj. Set to a type for instantiation on init.
 	var/datum/storage/storage
 	/// (FLOAT) world.time of last on_reagent_update call, used to prevent recursion due to reagents updating reagents
