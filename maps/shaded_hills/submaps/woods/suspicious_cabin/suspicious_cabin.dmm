@@ -77,7 +77,7 @@
 "J" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/food/grown/potato,
-/obj/item/chems/cooking_vessel/pot,
+/obj/item/chems/cooking_vessel/pot/iron,
 /turf/floor/natural/path/basalt,
 /area/template_noop)
 "K" = (

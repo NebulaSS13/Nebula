@@ -1,7 +1,7 @@
 // Swamp areas.
 /area/shaded_hills/witch_hut
 	name = "Witches' Hut"
-	fishing_failure_prob = "100"
+	fishing_failure_prob = 100
 	fishing_results = list()
 
 /area/shaded_hills/caves/river/swamp

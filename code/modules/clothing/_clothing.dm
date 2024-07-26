@@ -93,7 +93,7 @@
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)
-	if(rags && (I.edge || I.sharp) && user.a_intent == I_HURT)
+	if(istype(material) && material.default_solid_form && rags && (I.edge || I.sharp) && user.a_intent == I_HURT)
 		if(length(accessories))
 			to_chat(user, SPAN_WARNING("You should remove the accessories attached to \the [src] first."))
 			return TRUE
@@ -104,12 +104,12 @@
 		playsound(loc, 'sound/weapons/cablecuff.ogg', 30, 1)
 		user.visible_message(SPAN_DANGER("\The [user] begins ripping apart \the [src] with \the [I]."))
 		if(do_after(user, 5 SECONDS, src))
-			user.visible_message(SPAN_DANGER("\The [user] tears \the [src] into rags with \the [I]."))
-			for(var/i = 1 to rags)
-				new /obj/item/chems/glass/rag(get_turf(src))
+			user.visible_message(SPAN_DANGER("\The [user] tears \the [src] apart with \the [I]."))
+			material.create_object(get_turf(src), rags)
 			if(loc == user)
 				user.drop_from_inventory(src)
-			LAZYREMOVE(matter, /decl/material/solid/organic/cloth)
+			LAZYREMOVE(matter, material.type)
+			material = null
 			physically_destroyed()
 		return TRUE
 	. = ..()
@@ -314,7 +314,7 @@
 
 	var/rags = RAG_COUNT(src)
 	if(rags)
-		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
+		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] section\s."))
 
 	var/obj/item/clothing/sensor/vitals/sensor = locate() in accessories
 	if(sensor)

@@ -127,7 +127,7 @@
 			if(trait.type in pref.traits)
 				trait_spent += trait.trait_cost
 
-			if(trait_category_id == selected_category && !trait.parent && trait.available_at_chargen)
+			if(trait_category_id == selected_category && !trait.parent && trait.is_available_at_chargen())
 				body += trait.get_trait_selection_data(src, pref.traits)
 
 		var/category_label = trait_category.name

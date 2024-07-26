@@ -5,3 +5,6 @@
 	volume             = 30
 	cooking_category   = RECIPE_CATEGORY_SKILLET
 	obj_flags          = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
+
+/obj/item/chems/cooking_vessel/skillet/iron
+	material = /decl/material/solid/metal/iron

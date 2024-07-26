@@ -3,6 +3,7 @@
 	description = "You have a synthetic heart."
 	trait_cost = 1
 	available_at_chargen = TRUE
+	available_at_map_tech = MAP_TECH_LEVEL_SPACE
 	category = "Prosthetic Organs"
 	reapply_on_rejuvenation = TRUE
 	var/synthetic_bodytype_restricted = FALSE
