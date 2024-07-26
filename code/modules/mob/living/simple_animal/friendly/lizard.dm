@@ -11,6 +11,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	butchery_data = /decl/butchery_data/animal/reptile/small
 	ai = /datum/mob_controller/lizard
+	holder_type = /obj/item/holder
 
 /datum/mob_controller/lizard
 	can_escape_buckles = TRUE
