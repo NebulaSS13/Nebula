@@ -110,8 +110,8 @@
 "Hi" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/glass/handmade/teapot,
-/obj/item/chems/glass/handmade/cup,
-/obj/item/chems/glass/handmade/cup,
+/obj/item/chems/glass/handmade/cup/wood,
+/obj/item/chems/glass/handmade/cup/wood,
 /obj/item/chems/glass/bucket/wood,
 /turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
