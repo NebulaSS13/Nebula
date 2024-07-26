@@ -199,7 +199,7 @@
 	ignition_point = T0C+100
 	tans_to = /decl/material/solid/organic/plantmatter/grass/dry
 	tensile_strength = 0.2
-	dug_drop_type = /obj/item/stack/material/bundle
+	dug_drop_type = /obj/item/stack/material/bundle/grass // Sets drying_wetness etc
 
 /decl/material/solid/organic/plantmatter/grass/dry
 	name = "dried grass"
@@ -208,6 +208,7 @@
 	ignition_point = T0C+50
 	tensile_strength = 0.5
 	compost_value = 0.5
+	dug_drop_type = /obj/item/stack/material/bundle // Unsets drying_wetness etc
 
 /decl/material/solid/organic/leather
 	name = "leather"
