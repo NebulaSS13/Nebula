@@ -1385,3 +1385,7 @@
 
 /mob/proc/do_attack_windup_checking(atom/target)
 	return TRUE
+
+// Stub proc; implemented on /mob/living
+/mob/proc/handle_footsteps()
+	return

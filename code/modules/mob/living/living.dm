@@ -1562,8 +1562,59 @@ default behaviour is:
 
 	return TRUE
 
-/mob/living/proc/handle_footsteps()
-	return
+/mob/living/proc/get_footstep_sound(turf/step_turf)
+	return step_turf?.get_footstep_sound(src)
+
+/mob/living/proc/has_footsteps()
+	return FALSE
+
+/mob/living/handle_footsteps()
+
+	if(stat || buckled || current_posture?.prone || throwing || !has_footsteps())
+		return
+
+	step_count++
+	 //every other turf makes a sound
+	if((step_count % 2) && !MOVING_DELIBERATELY(src))
+		return
+
+	// don't need to step as often when you hop around
+	if((step_count % 3) && !has_gravity())
+		return
+
+	var/turf/T = get_turf(src)
+	if(!T)
+		return
+
+	var/footsound = get_footstep_sound(T)
+	if(!footsound)
+		return
+
+	var/range = world.view - 2
+	var/volume = 70
+	if(MOVING_DELIBERATELY(src))
+		volume -= 45
+		range -= 0.333
+
+	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
+	volume = round(modify_footstep_volume(volume, shoes))
+	range  = round(modify_footstep_range(range, shoes))
+	if(volume > 0 && range > 0)
+		playsound(T, footsound, volume, 1, range)
+
+/mob/living/proc/modify_footstep_volume(volume, obj/item/clothing/shoes/shoes)
+	if(istype(shoes))
+		return volume * shoes.footstep_volume_mod
+	if(!shoes)
+		return volume - 60
+	return volume
+
+/mob/living/proc/modify_footstep_range(range, obj/item/clothing/shoes/shoes)
+	if(istype(shoes))
+		return range * shoes.footstep_range_mod
+	if(!shoes)
+		return range * range - 0.333
+	return range
 
 /mob/living/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
 

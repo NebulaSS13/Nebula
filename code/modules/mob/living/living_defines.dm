@@ -86,3 +86,6 @@
 
 	/// Organ instances that should report info to Stat().
 	var/list/stat_organs
+
+	/// Var used to track current step for footsteps sounds.
+	var/tmp/step_count

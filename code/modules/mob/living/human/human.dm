@@ -8,7 +8,6 @@
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
-	var/step_count
 
 /mob/living/human/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
 
@@ -1112,57 +1111,15 @@
 	if((. = ..()) && !surgical_removal)
 		shock_stage += 20
 
-/mob/living/human/proc/has_footsteps()
-	if(species.silent_steps || buckled || current_posture.prone || throwing)
+/mob/living/human/has_footsteps()
+	if(species.silent_steps)
 		return //people flying, lying down or sitting do not step
-
 	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	if(shoes && (shoes.item_flags & ITEM_FLAG_SILENT))
 		return // quiet shoes
-
 	if(!has_organ(BP_L_FOOT) && !has_organ(BP_R_FOOT))
 		return //no feet no footsteps
-
 	return TRUE
-
-/mob/living/human/handle_footsteps()
-	step_count++
-	if(!has_footsteps())
-		return
-
-	 //every other turf makes a sound
-	if((step_count % 2) && !MOVING_DELIBERATELY(src))
-		return
-
-	// don't need to step as often when you hop around
-	if((step_count % 3) && !has_gravity())
-		return
-
-	var/turf/T = get_turf(src)
-	if(!T)
-		return
-
-	var/footsound = T.get_footstep_sound(src)
-	if(!footsound)
-		return
-
-	var/range = world.view - 2
-	var/volume = 70
-	if(MOVING_DELIBERATELY(src))
-		volume -= 45
-		range -= 0.333
-	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
-	if(istype(shoes))
-		volume *= shoes.footstep_volume_mod
-		range  *= shoes.footstep_range_mod
-	else if(!shoes)
-		volume -= 60
-		range -= 0.333
-
-	range  = round(range)
-	volume = round(volume)
-	if(volume > 0 && range > 0)
-		playsound(T, footsound, volume, 1, range)
 
 /mob/living/human/get_skin_tone(value)
 	return skin_tone
