@@ -40,6 +40,7 @@
 	default_solid_form = /obj/item/stack/material/plank
 	sound_manipulate = 'sound/foley/woodpickup1.ogg'
 	sound_dropped = 'sound/foley/wooddrop1.ogg'
+	compost_value = 0.2
 
 /decl/material/solid/organic/wood/fungal
 	name = "towercap"
