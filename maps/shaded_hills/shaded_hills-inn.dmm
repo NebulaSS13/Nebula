@@ -883,7 +883,7 @@
 /area/shaded_hills/inn)
 "JK" = (
 /obj/structure/table/woodentable_reinforced/mahogany,
-/obj/item/flame/candle,
+/obj/item/flame/candle/handmade,
 /turf/floor/carpet/red,
 /area/shaded_hills/shrine)
 "JM" = (
@@ -1109,7 +1109,7 @@
 /area/shaded_hills/shrine)
 "UD" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/flame/candle,
+/obj/item/flame/candle/handmade,
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "US" = (
