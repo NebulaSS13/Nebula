@@ -46,7 +46,7 @@
 	name = "towercap"
 	uid = "solid_wood_fungal"
 	color = "#e6d8dd"
-	hardness = MAT_VALUE_FLEXIBLE + 1
+	hardness = MAT_VALUE_FLEXIBLE + 10
 
 /decl/material/solid/organic/wood/holographic
 	name = "holographic wood"
