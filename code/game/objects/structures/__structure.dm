@@ -4,6 +4,7 @@
 	layer = STRUCTURE_LAYER
 	abstract_type = /obj/structure
 	max_health = 50
+	temperature_sensitive = TRUE
 
 	/// Multiplier for degree of comfort offered to mobs buckled to this furniture.
 	var/user_comfort = 0 // TODO: extremely uncomfortable chairs

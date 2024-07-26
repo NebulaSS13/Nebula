@@ -24,7 +24,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 /decl/public_access/public_method/toggle_input_toggle
 	name = "toggle input"
 	desc = "Toggles the input toggle variable."
-	call_proc = /obj/machinery/proc/toggle_input_toggle
+	call_proc = TYPE_PROC_REF(/obj/machinery, toggle_input_toggle)
 
 /obj/machinery/proc/toggle_input_toggle()
 	var/decl/public_access/public_variable/variable = GET_DECL(/decl/public_access/public_variable/input_toggle)
@@ -141,7 +141,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 /decl/public_access/public_method/toggle_power
 	name = "toggle power"
 	desc = "Turns the machine on or off."
-	call_proc = /obj/machinery/proc/toggle_power
+	call_proc = TYPE_PROC_REF(/obj/machinery, toggle_power)
 
 /obj/machinery/proc/toggle_power()
 	update_use_power(!use_power)
@@ -149,7 +149,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 /decl/public_access/public_method/refresh
 	name = "refresh machine"
 	desc = "Attempts to refresh the machine's status. Implementation may vary."
-	call_proc = /obj/machinery/proc/refresh
+	call_proc = TYPE_PROC_REF(/obj/machinery, refresh)
 
 /obj/machinery/proc/refresh()
 	queue_icon_update()

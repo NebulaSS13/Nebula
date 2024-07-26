@@ -213,8 +213,6 @@ var/global/list/outfits_decls_by_type_
 			W.update_icon()
 	H.update_icon()
 	H.set_id_info(W)
-	if(H.mind?.initial_account)
-		W.associated_account_number = H.mind.initial_account.account_number
 	equip_pda(H, assignment, equip_adjustments)
 	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W

@@ -55,12 +55,12 @@
 /decl/public_access/public_method/driver_drive
 	name = "launch"
 	desc = "Makes the mass driver launch immediately"
-	call_proc = /obj/machinery/mass_driver/proc/drive
+	call_proc = TYPE_PROC_REF(/obj/machinery/mass_driver, drive)
 
 /decl/public_access/public_method/driver_drive_delayed
 	name = "delayed launch"
 	desc = "Makes the mass driver launch after a short delay"
-	call_proc = /obj/machinery/mass_driver/proc/delayed_drive
+	call_proc = TYPE_PROC_REF(/obj/machinery/mass_driver, delayed_drive)
 
 /decl/stock_part_preset/radio/receiver/driver
 	frequency = BLAST_DOORS_FREQ
