@@ -21,3 +21,10 @@
 	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."
 	icon = 'icons/clothing/eyes/glasses_green.dmi'
 	body_parts_covered = 0
+
+/obj/item/clothing/glasses/prescription/pincenez
+	name = "pince-nez glasses"
+	desc = "Popularized in the 19th century by French people, evil scientists, and dead people in bathtubs."
+	icon = 'icons/clothing/eyes/glasses_pincenez.dmi'
+	body_parts_covered = 0
+	material = /decl/material/solid/metal/bronze
