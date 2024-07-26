@@ -191,6 +191,8 @@
 		mob.moving = FALSE
 		return
 
+	mob.handle_footsteps()
+
 	// Sprinting uses up stamina and causes exertion effects.
 	if(MOVING_QUICKLY(mob))
 		mob.last_quick_move_time = world.time
