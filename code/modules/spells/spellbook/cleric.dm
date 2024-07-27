@@ -43,8 +43,8 @@
 		/obj/item/stack/nanopaste,
 		/obj/item/scanner/health,
 		/obj/item/scanner/breath,
-		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/stack/medical/advanced/ointment,
+		/obj/item/stack/medical/bandage/advanced,
+		/obj/item/stack/medical/ointment/advanced,
 		/obj/item/bodybag/rescue,
 		/obj/item/defibrillator
 	)

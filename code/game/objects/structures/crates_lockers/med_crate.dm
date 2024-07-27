@@ -6,7 +6,7 @@
 /obj/structure/closet/crate/med_crate/trauma/WillContain()
 	return list(
 		/obj/item/stack/medical/splint = 2,
-		/obj/item/stack/medical/advanced/bruise_pack = 10,
+		/obj/item/stack/medical/bandage/advanced = 10,
 		/obj/item/chems/pill/sugariron = 6,
 		/obj/item/pill_bottle/painkillers,
 		/obj/item/pill_bottle/strong_painkillers,
@@ -21,7 +21,7 @@
 /obj/structure/closet/crate/med_crate/burn/WillContain()
 	return list(
 		/obj/item/defibrillator/loaded,
-		/obj/item/stack/medical/advanced/ointment = 10,
+		/obj/item/stack/medical/ointment/advanced = 10,
 		/obj/item/pill_bottle/burn_meds,
 		/obj/item/pill_bottle/painkillers,
 		/obj/item/pill_bottle/strong_painkillers,

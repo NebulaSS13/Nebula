@@ -153,7 +153,7 @@
 /obj/structure/table/glass,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/chems/syringe/antibiotic,
-/obj/item/stack/medical/advanced/bruise_pack,
+/obj/item/stack/medical/bandage/advanced,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -1211,7 +1211,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "ninjadoor";
 	name = "Blast Door";
-	
+
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"

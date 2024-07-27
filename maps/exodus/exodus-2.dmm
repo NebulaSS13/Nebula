@@ -56288,7 +56288,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/item/stack/medical/advanced/bruise_pack,
+/obj/item/stack/medical/bandage/advanced,
 /obj/item/retractor,
 /turf/floor/tiled/white/monotile,
 /area/exodus/medical/surgery)
@@ -56377,7 +56377,7 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/item/stack/medical/advanced/bruise_pack,
+/obj/item/stack/medical/bandage/advanced,
 /obj/item/retractor,
 /turf/floor/tiled/white/monotile,
 /area/exodus/medical/surgery2)

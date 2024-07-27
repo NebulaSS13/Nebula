@@ -20,12 +20,12 @@
 
 /decl/hierarchy/supply_pack/medical/atk
 	name = "Triage - Advanced trauma supplies"
-	contains = list(/obj/item/stack/medical/advanced/bruise_pack = 6)
+	contains = list(/obj/item/stack/medical/bandage/advanced = 6)
 	containername = "advanced trauma crate"
 
 /decl/hierarchy/supply_pack/medical/abk
 	name = "Triage - Advanced burn supplies"
-	contains = list(/obj/item/stack/medical/advanced/ointment = 6)
+	contains = list(/obj/item/stack/medical/ointment/advanced = 6)
 	containername = "advanced burn crate"
 
 /decl/hierarchy/supply_pack/medical/trauma

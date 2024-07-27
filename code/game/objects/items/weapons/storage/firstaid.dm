@@ -27,7 +27,7 @@
 
 /obj/item/firstaid/regular/WillContain()
 	return list(
-		/obj/item/stack/medical/bruise_pack = 2,
+		/obj/item/stack/medical/bandage = 2,
 		/obj/item/stack/medical/ointment = 2,
 		/obj/item/pill_bottle/antibiotics,
 		/obj/item/pill_bottle/painkillers,
@@ -91,8 +91,8 @@
 /obj/item/firstaid/adv/WillContain()
 	return list(
 		/obj/item/pill_bottle/assorted,
-		/obj/item/stack/medical/advanced/bruise_pack = 3,
-		/obj/item/stack/medical/advanced/ointment = 2,
+		/obj/item/stack/medical/bandage/advanced = 3,
+		/obj/item/stack/medical/ointment/advanced = 2,
 		/obj/item/stack/medical/splint
 		)
 
@@ -147,7 +147,7 @@
 		/obj/item/surgicaldrill,
 		/obj/item/bonegel,
 		/obj/item/sutures,
-		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/stack/medical/bandage/advanced,
 	)
 
 /obj/item/firstaid/surgery/ghetto // Mostly just for debugging.

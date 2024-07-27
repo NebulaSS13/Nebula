@@ -436,6 +436,17 @@ default behaviour is:
 		if(DI)
 			standing_image.overlays += DI
 	set_current_mob_overlay(HO_DAMAGE_LAYER, standing_image, update_icons)
+	update_bandages(update_icons)
+
+/mob/living/proc/update_bandages(var/update_icons=1)
+	var/list/bandage_overlays
+	var/bandage_icon = get_bodytype()?.get_bandages_icon(src)
+	if(bandage_icon)
+		for(var/obj/item/organ/external/O in get_external_organs())
+			var/bandage_level = O.bandage_level()
+			if(bandage_level)
+				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
+	set_current_mob_overlay(HO_BANDAGE_LAYER, bandage_overlays, update_icons)
 
 /mob/living/handle_grabs_after_move(var/turf/old_loc, var/direction)
 

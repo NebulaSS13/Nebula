@@ -249,20 +249,6 @@ Please contact me on #coderbus IRC. ~Carn x
 
 	return transform
 
-/mob/living/human/update_damage_overlays(update_icons = TRUE)
-	. = ..()
-	update_bandages(update_icons)
-
-/mob/living/human/proc/update_bandages(var/update_icons=1)
-	var/list/bandage_overlays
-	var/bandage_icon = get_bodytype().get_bandages_icon(src)
-	if(bandage_icon)
-		for(var/obj/item/organ/external/O in get_external_organs())
-			var/bandage_level = O.bandage_level()
-			if(bandage_level)
-				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
-	set_current_mob_overlay(HO_DAMAGE_LAYER, bandage_overlays, update_icons)
-
 /mob/living/human/proc/get_human_icon_cache_key()
 	. = list()
 	for(var/limb_tag in global.all_limb_tags)

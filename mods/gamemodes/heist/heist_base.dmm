@@ -1689,7 +1689,7 @@
 	},
 /obj/item/hemostat,
 /obj/item/scalpel,
-/obj/item/stack/medical/advanced/bruise_pack,
+/obj/item/stack/medical/bandage/advanced,
 /turf/floor/shuttle/white,
 /area/map_template/skipjack_station/start)
 "er" = (

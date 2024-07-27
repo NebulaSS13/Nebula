@@ -21,8 +21,8 @@
 		/obj/item/scanner/breath = 5,
 		/obj/item/chems/glass/beaker = 4,
 		/obj/item/chems/dropper = 2,
-		/obj/item/stack/medical/advanced/bruise_pack = 3,
-		/obj/item/stack/medical/advanced/ointment = 3,
+		/obj/item/stack/medical/bandage/advanced = 3,
+		/obj/item/stack/medical/ointment/advanced = 3,
 		/obj/item/stack/medical/splint = 2,
 		/obj/item/chems/hypospray/autoinjector/pain = 4
 	)
@@ -44,7 +44,7 @@
 	base_type = /obj/machinery/vending/wallmed1
 	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	products = list(
-		/obj/item/stack/medical/bruise_pack = 3,
+		/obj/item/stack/medical/bandage = 3,
 		/obj/item/stack/medical/ointment = 3,
 		/obj/item/chems/pill/painkillers = 2,
 		/obj/item/chems/pill/strong_painkillers = 2,
@@ -68,7 +68,7 @@
 	base_type = /obj/machinery/vending/wallmed2
 	products = list(
 		/obj/item/chems/hypospray/autoinjector/stabilizer = 5,
-		/obj/item/stack/medical/bruise_pack = 4,
+		/obj/item/stack/medical/bandage = 4,
 		/obj/item/stack/medical/ointment = 4,
 		/obj/item/med_pouch/trauma,
 		/obj/item/med_pouch/burn,
@@ -77,7 +77,7 @@
 		/obj/item/med_pouch/radiation
 	)
 	contraband = list(
-		/obj/item/chems/pill/bromide = 3, 
+		/obj/item/chems/pill/bromide = 3,
 		/obj/item/chems/hypospray/autoinjector/pain = 2
 	)
 	directional_offset = @'{"NORTH":{"y":-24}, "SOUTH":{"y":24}, "EAST":{"x":-24}, "WEST":{"x":24}}'

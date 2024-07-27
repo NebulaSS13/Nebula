@@ -2846,9 +2846,9 @@
 /area/tdome/tdomeadmin)
 "lPd" = (
 /obj/structure/table,
-/obj/item/stack/medical/bruise_pack,
-/obj/item/stack/medical/bruise_pack,
-/obj/item/stack/medical/bruise_pack,
+/obj/item/stack/medical/bandage,
+/obj/item/stack/medical/bandage,
+/obj/item/stack/medical/bandage,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},

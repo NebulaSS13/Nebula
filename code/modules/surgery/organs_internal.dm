@@ -18,8 +18,8 @@
 	name = "Repair internal organ"
 	description = "This procedure is used to repair damage to the internal organs of a patient."
 	allowed_tools = list(
-		/obj/item/stack/medical/advanced/bruise_pack = 100,
-		/obj/item/stack/medical/bruise_pack = 40,
+		/obj/item/stack/medical/bandage/advanced = 100,
+		/obj/item/stack/medical/bandage = 40,
 		/obj/item/stack/tape_roll/duct_tape = 20
 	)
 	min_duration = 70
@@ -39,9 +39,9 @@
 
 /decl/surgery_step/internal/fix_organ/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/tool_name = "\the [tool]"
-	if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
+	if (istype(tool, /obj/item/stack/medical/bandage/advanced))
 		tool_name = "regenerative membrane"
-	else if (istype(tool, /obj/item/stack/medical/bruise_pack))
+	else if (istype(tool, /obj/item/stack/medical/bandage))
 		tool_name = "the bandaid"
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("[user] starts treating damage within \the [target]'s [affected.name] with [tool_name].", \
@@ -55,9 +55,9 @@
 
 /decl/surgery_step/internal/fix_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/tool_name = "\the [tool]"
-	if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
+	if (istype(tool, /obj/item/stack/medical/bandage/advanced))
 		tool_name = "regenerative membrane"
-	if (istype(tool, /obj/item/stack/medical/bruise_pack))
+	if (istype(tool, /obj/item/stack/medical/bandage))
 		tool_name = "the bandaid"
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
@@ -77,7 +77,7 @@
 	user.visible_message("<span class='warning'>[user]'s hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!</span>")
 	var/dam_amt = 2
-	if(istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
+	if(istype(tool, /obj/item/stack/medical/bandage/advanced))
 		target.take_damage(5, TOX)
 	else
 		dam_amt = 5

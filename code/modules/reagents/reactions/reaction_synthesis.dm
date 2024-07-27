@@ -123,7 +123,7 @@
 	var/create_stacks = FLOOR(created_volume)
 	if(create_stacks <= 0)
 		return
-	new /obj/item/stack/medical/resin/handmade(T, create_stacks)
+	new /obj/item/stack/medical/resin/crafted(T, create_stacks)
 
 /decl/chemical_reaction/synthesis/soap
 	name = "Handmade Soap"
