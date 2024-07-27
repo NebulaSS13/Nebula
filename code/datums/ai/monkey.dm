@@ -7,7 +7,9 @@
 
 /datum/mob_controller/monkey/do_process(var/time_elapsed)
 
-	. = ..()
+	if(!(. = ..()))
+		return
+
 	if(body.incapacitated())
 		return
 

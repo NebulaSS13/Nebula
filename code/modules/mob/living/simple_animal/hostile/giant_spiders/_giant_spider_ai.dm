@@ -16,8 +16,7 @@
 			body.custom_emote(VISIBLE_MESSAGE, "locks its eyes on [.]")
 
 /datum/mob_controller/aggressive/giant_spider/do_process()
-	. = ..()
-	if(!body || body.stat || !istype(body, /mob/living/simple_animal/hostile/giant_spider))
+	if(!(. = ..()) || body.stat || !istype(body, /mob/living/simple_animal/hostile/giant_spider))
 		return
 	if(get_stance() == STANCE_IDLE)
 		//chance to skitter madly away

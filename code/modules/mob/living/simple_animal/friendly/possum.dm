@@ -31,9 +31,10 @@
 	can_escape_buckles = TRUE
 
 /datum/mob_controller/opossum/do_process(time_elapsed)
-	. = ..()
-	if(!prob(0.5))
+
+	if(!(. = ..()) || !prob(0.5))
 		return
+
 	var/mob/living/simple_animal/opossum/poss = body
 	if(poss.stat == UNCONSCIOUS)
 		do_wander = FALSE

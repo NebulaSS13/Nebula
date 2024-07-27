@@ -50,9 +50,10 @@
 
 /datum/mob_controller/passive/hunter/do_process(time_elapsed)
 
-	..()
+	if(!(. = ..()))
+		return
 
-	if(!body || body.incapacitated() || body.current_posture?.prone || body.buckled || flee_target || !get_target())
+	if(body.incapacitated() || body.current_posture?.prone || body.buckled || flee_target || !get_target())
 		return
 
 	var/mob/living/target = get_target()

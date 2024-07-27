@@ -41,7 +41,8 @@
 	return DEXTERITY_NONE // Mice are troll bait, give them no power.
 
 /datum/mob_controller/passive/mouse/do_process()
-	..()
+	if(!(. = ..()))
+		return
 	if(prob(speak_chance))
 		playsound(body.loc, 'sound/effects/mousesqueek.ogg', 50)
 	if(body.stat == UNCONSCIOUS && prob(5))

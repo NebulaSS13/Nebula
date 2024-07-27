@@ -17,7 +17,9 @@
 	return !isnull(flee_target)
 
 /datum/mob_controller/passive/do_process(time_elapsed)
-	..()
+
+	if(!(. = ..()))
+		return
 
 	// Handle fleeing from aggressors.
 	turns_since_scan++

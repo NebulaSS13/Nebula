@@ -10,7 +10,10 @@
 	var/retribution = TRUE
 
 /datum/mob_controller/aggressive/commanded/do_process(time_elapsed)
-	..()
+
+	if(!(. = ..()) || body.stat)
+		return
+
 	while(command_buffer.len > 1)
 		var/mob/speaker = command_buffer[1]
 		var/message = command_buffer[2]
@@ -19,6 +22,7 @@
 			var/substring = copytext(message,length(filtered_name)+1) //get rid of the name.
 			listen(speaker,substring)
 		command_buffer.Remove(command_buffer[1],command_buffer[2])
+
 	switch(stance)
 		if(STANCE_COMMANDED_FOLLOW)
 			follow_target()

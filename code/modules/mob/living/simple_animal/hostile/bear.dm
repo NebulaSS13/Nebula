@@ -49,9 +49,8 @@
 		set_stance(STANCE_ALERT)
 
 /datum/mob_controller/aggressive/bear/do_process()
-	. = ..()
 
-	if(!body || body.stat)
+	if(!(. = ..()) || body.stat)
 		return
 
 	var/atom/target = get_target()
