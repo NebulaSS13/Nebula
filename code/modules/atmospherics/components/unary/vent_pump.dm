@@ -439,12 +439,12 @@
 /decl/public_access/public_method/purge_pump
 	name = "activate purge mode"
 	desc = "Activates purge mode, overriding pressure checks and removing air."
-	call_proc = /obj/machinery/atmospherics/unary/vent_pump/proc/purge
+	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/vent_pump, purge)
 
 /decl/public_access/public_method/toggle_pump_dir
 	name = "toggle pump direction"
 	desc = "Toggles the pump's direction, from release to siphon or vice versa."
-	call_proc = /obj/machinery/atmospherics/unary/vent_pump/proc/toggle_pump_dir
+	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/vent_pump, toggle_pump_dir)
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump
 	frequency = PUMP_FREQ

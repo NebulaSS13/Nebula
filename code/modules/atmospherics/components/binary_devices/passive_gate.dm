@@ -253,7 +253,7 @@
 /decl/public_access/public_method/toggle_unlocked
 	name = "toggle valve"
 	desc = "Open or close the valve."
-	call_proc = /obj/machinery/atmospherics/binary/passive_gate/proc/toggle_unlocked
+	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/binary/passive_gate, toggle_unlocked)
 
 /decl/stock_part_preset/radio/event_transmitter/passive_gate
 	frequency = PUMP_FREQ

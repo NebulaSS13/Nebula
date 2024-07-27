@@ -33,6 +33,10 @@
 	var/shockedby = list()              //Some sort of admin logging var
 	var/welded = null
 	var/locked = FALSE
+	/// If TRUE, when operating goes from TRUE to FALSE (i.e. door finishes closing/opening), the door will lock itself.
+	var/locking = FALSE
+	/// If TRUE, when operating goes from TRUE to FALSE (i.e. door finishes closing/opening), the door will unlock itself.
+	var/unlocking = FALSE
 	var/lock_cut_state = BOLTS_FINE
 	var/lights = 1 // Lights show by default
 	var/aiDisabledIdScanner = 0
@@ -291,9 +295,9 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/on_update_icon(state=0, override=0)
 
 	if(set_dir_on_update)
-		if(connections & (NORTH|SOUTH) == (NORTH|SOUTH))
+		if((connections & (NORTH|SOUTH)) == (NORTH|SOUTH))
 			set_dir(EAST)
-		else if (connections & (EAST|WEST) == (EAST|WEST))
+		else if ((connections & (EAST|WEST)) == (EAST|WEST))
 			set_dir(SOUTH)
 
 	switch(state)
@@ -885,7 +889,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/open(var/forced=0)
 	if(!can_open(forced))
-		return 0
+		return FALSE
 	use_power_oneoff(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 
 	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator
@@ -894,7 +898,15 @@ About the new airlock wires panel:
 	else
 		playsound(src.loc, pick(open_sound_unpowered), 100, 1)
 
-	return ..()
+	. = ..()
+	if(.)
+		// lock and unlock handle updating for us, we don't want duplicate updates
+		if(locking)
+			lock()
+		else if(unlocking)
+			unlock()
+		else
+			toggle_input_toggle() // this sends an update to anything listening for our status, like docking/airlock controllers
 
 /obj/machinery/door/airlock/can_open(var/forced=0)
 	if(QDELETED(src) || brace)
@@ -921,7 +933,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
-		return 0
+		return FALSE
 
 	if(safe)
 		for(var/turf/turf in locs)
@@ -931,7 +943,7 @@ About the new airlock wires panel:
 						playsound(src.loc, close_failure_blocked, 30, 0, -3)
 						next_beep_at = world.time + SecondsToTicks(10)
 					close_door_at = world.time + 6
-					return
+					return FALSE
 
 	for(var/turf/turf in locs)
 		for(var/atom/movable/AM in turf)
@@ -945,35 +957,54 @@ About the new airlock wires panel:
 	else
 		playsound(src.loc, pick(close_sound_unpowered), 100, 1)
 
-	..()
+	. = ..()
+	if(.)
+		// lock and unlock handle updating for us, we don't want duplicate updates
+		if(locking)
+			lock()
+		else if(unlocking)
+			unlock()
+		else
+			toggle_input_toggle() // this sends an update to anything listening for our status, like docking/airlock controllers
 
 /obj/machinery/door/airlock/proc/lock(var/forced=0)
 	if(locked)
-		return 0
+		return FALSE
 
-	if (operating && !forced) return 0
+	if (operating && !forced)
+		unlocking = FALSE
+		locking = TRUE
+		return FALSE
 
-	if (lock_cut_state == BOLTS_CUT) return 0 //what bolts?
+	if (lock_cut_state == BOLTS_CUT) return FALSE //what bolts?
 
 	src.locked = TRUE
 	playsound(src, bolts_dropping, 30, 0, -6)
 	audible_message("You hear a click from the bottom of the door.", hearing_distance = 1)
 	update_icon()
-	return 1
+	toggle_input_toggle() // this sends an update to anything listening for our status, like docking/airlock controllers
+	return TRUE
 
 /obj/machinery/door/airlock/proc/unlock(var/forced=0)
 	if(!src.locked)
-		return
+		return FALSE
 
 	if (!forced)
+		if(!src.arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
+			return FALSE
+		if(operating)
+			locking = FALSE
+			unlocking = TRUE
+			return FALSE
 		if(operating || !src.arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-			return
+			return FALSE
 
 	src.locked = FALSE
 	playsound(src, bolts_rising, 30, 0, -6)
 	audible_message("You hear a click from the bottom of the door.", hearing_distance = 1)
 	update_icon()
-	return 1
+	toggle_input_toggle() // this sends an update to anything listening for our status, like docking/airlock controllers
+	return TRUE
 
 /obj/machinery/door/airlock/proc/toggle_lock(var/forced = 0)
 	return locked ? unlock() : lock()

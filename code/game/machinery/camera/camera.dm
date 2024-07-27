@@ -340,7 +340,7 @@
 /decl/public_access/public_method/toggle_camera
 	name = "toggle camera"
 	desc = "Toggles camera on or off."
-	call_proc = /obj/machinery/camera/proc/toggle_status
+	call_proc = TYPE_PROC_REF(/obj/machinery/camera, toggle_status)
 
 /decl/public_access/public_variable/camera_state
 	expected_type = /obj/machinery/camera

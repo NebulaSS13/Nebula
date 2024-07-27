@@ -235,6 +235,7 @@ Single Use Emergency Pouches
 /obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
 	desc = "An emergency autoinjector from an emergency medical pouch."
+	abstract_type = /obj/item/chems/hypospray/autoinjector/pouch_auto
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer/populate_reagents()
 	add_to_reagents(/decl/material/liquid/stabilizer, 5)

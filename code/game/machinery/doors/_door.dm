@@ -136,7 +136,7 @@
 	if(close_door_at && world.time >= close_door_at)
 		if(autoclose)
 			close_door_at = next_close_time()
-			INVOKE_ASYNC(src, TYPE_PROC_REF(/obj/machinery/door, close))
+			INVOKE_ASYNC(src, PROC_REF(close))
 		else
 			close_door_at = 0
 
@@ -436,7 +436,7 @@
 
 /obj/machinery/door/proc/open(forced = FALSE)
 	if(!can_open(forced))
-		return
+		return FALSE
 
 	operating = 1
 
@@ -464,7 +464,7 @@
 
 /obj/machinery/door/proc/close(forced = FALSE)
 	if(!can_close(forced))
-		return
+		return FALSE
 
 	operating = 1
 
@@ -485,6 +485,7 @@
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
 	qdel(fire)
+	return TRUE
 
 /obj/machinery/door/proc/toggle(to_open = density)
 	if(to_open)
@@ -608,20 +609,20 @@
 /decl/public_access/public_method/open_door
 	name = "open door"
 	desc = "Opens the door if possible."
-	call_proc = /obj/machinery/door/proc/open
+	call_proc = TYPE_PROC_REF(/obj/machinery/door, open)
 
 /decl/public_access/public_method/toggle_door
 	name = "toggle door"
 	desc = "Toggles whether the door is open or not, if possible."
-	call_proc = /obj/machinery/door/proc/toggle
+	call_proc = TYPE_PROC_REF(/obj/machinery/door, toggle)
 
 /decl/public_access/public_method/toggle_door_to
 	name = "toggle door to"
 	desc = "Toggles the door, depending on the supplied argument, to open (if 1) or closed (if 0)."
-	call_proc = /obj/machinery/door/proc/toggle
+	call_proc = TYPE_PROC_REF(/obj/machinery/door, toggle)
 	forward_args = TRUE
 
 /decl/public_access/public_method/close_door
 	name = "close door"
 	desc = "Closes the door if possible."
-	call_proc = /obj/machinery/door/proc/close
+	call_proc = TYPE_PROC_REF(/obj/machinery/door, close)

@@ -155,7 +155,7 @@
 /decl/public_access/public_method/inject
 	name = "inject"
 	desc = "Injects gas into its environment."
-	call_proc = /obj/machinery/atmospherics/unary/outlet_injector/proc/inject
+	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/outlet_injector, inject)
 
 /decl/stock_part_preset/radio/event_transmitter/outlet_injector
 	frequency = ATMOS_TANK_FREQ

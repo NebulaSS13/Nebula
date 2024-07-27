@@ -1,6 +1,6 @@
 /datum/extension/network_device/acl
 	var/list/group_dict = list()	// Groups on the network, stored as strings.
-									// Parents groups with children have a list of child groups associated with the string key 
+									// Parents groups with children have a list of child groups associated with the string key
 
 	var/list/all_groups = list()	// All group strings, not sorted by parent or child group. Used for uniqueness checking.
 
@@ -39,7 +39,7 @@
 		return "Maximum group name length is 15 characters."
 	if(group_name in all_groups)
 		return "Group name must be unique"
-	
+
 	// Adding a child group.
 	if(parent_group)
 		if(!(parent_group in group_dict))
@@ -49,7 +49,7 @@
 		group_dict[parent_group] += group_name
 	else
 		group_dict += group_name
-	
+
 	all_groups += group_name
 	return "Added [parent_group ? "child group" : "parent group"] \"[group_name]\"" + "[parent_group ? " to \"[parent_group]\"." : "."]"
 
@@ -63,7 +63,7 @@
 			return "No child group with name \"[group_name]\" found in \"[parent_group]\""
 		group_dict[parent_group] -= group_name
 		if(!length(group_dict[parent_group])) // Cull the list until we add a new child group.
-			group_dict[parent_group] = null	
+			group_dict[parent_group] = null
 		all_groups -= group_name
 		return "Removed child group \"[group_name]\" from parent group \"[parent_group]\"."
 	if(group_name in group_dict)
@@ -110,17 +110,17 @@
 /decl/public_access/public_method/add_group
 	name = "Add group"
 	desc = "Adds a new group with the passed name. A parent group can be passed to add a child group."
-	call_proc = /datum/extension/network_device/acl/proc/add_group
+	call_proc = TYPE_PROC_REF(/datum/extension/network_device/acl, add_group)
 	forward_args = TRUE
 
 /decl/public_access/public_method/remove_group
 	name = "Remove group"
 	desc = "Removes a group with the passed name. A parent group can be passed to remove a child group of that parent."
-	call_proc = /datum/extension/network_device/acl/proc/remove_group
+	call_proc = TYPE_PROC_REF(/datum/extension/network_device/acl, remove_group)
 	forward_args = TRUE
 
 /decl/public_access/public_method/list_groups
 	name = "List groups"
 	desc = "Lists groups on the group access controller. A parent group can be passed list children of that parent group."
-	call_proc = /datum/extension/network_device/acl/proc/get_group_listing
+	call_proc = TYPE_PROC_REF(/datum/extension/network_device/acl, get_group_listing)
 	forward_args = TRUE

@@ -72,9 +72,9 @@
 /obj/structure/leech_spawner/proc/burst(var/mob/living/victim)
 	if(!proxy_listener || !istype(victim) || !(victim in view(5, src)))
 		return
+	QDEL_NULL(proxy_listener) // delete prior to spawning the leeches to avoid infinite recursion
 	for(var/i in 1 to 12)
 		new leech_type(get_turf(src))
 	visible_message(SPAN_MFAUNA("A swarm of leeches burst out from \the [src]!"))
 	icon_state = "reeds_empty"
 	desc = "Some alien reeds."
-	QDEL_NULL(proxy_listener)

@@ -136,17 +136,17 @@
 /decl/public_access/public_method/tvalve_go_straight
 	name = "valve go straight"
 	desc = "Sets the valve to send output straight."
-	call_proc = /obj/machinery/atmospherics/tvalve/proc/go_straight
+	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/tvalve, go_straight)
 
 /decl/public_access/public_method/tvalve_go_side
 	name = "valve go side"
 	desc = "Redirects output to the side."
-	call_proc = /obj/machinery/atmospherics/tvalve/proc/go_to_side
+	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/tvalve, go_to_side)
 
 /decl/public_access/public_method/tvalve_toggle
 	name = "valve toggle"
 	desc = "Toggles the output direction."
-	call_proc = /obj/machinery/atmospherics/tvalve/proc/toggle
+	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/tvalve, toggle)
 
 /decl/stock_part_preset/radio/receiver/tvalve
 	frequency = FUEL_FREQ
