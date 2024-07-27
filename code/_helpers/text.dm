@@ -58,6 +58,14 @@
 		//            https://en.wikipedia.org/wiki/Whitespace_character#Unicode
 		var/static/regex/unicode_control_chars = regex(@"[\u0001-\u0009\u000B\u000C\u000E-\u001F\u007F\u0080-\u009F\u00A0\u1680\u180E\u2000-\u200D\u2028\u2029\u202F\u205F\u2060\u3000\uFEFF]", "g")
 		input = unicode_control_chars.Replace(input, "")
+		// Allows at most one Unicode combining diacritical mark in a row
+		// Codes acquired from https://en.wikipedia.org/wiki/Combining_Diacritical_Marks
+		//                     https://en.wikipedia.org/wiki/Combining_Diacritical_Marks_Extended
+		//                     https://en.wikipedia.org/wiki/Combining_Diacritical_Marks_Supplement
+		//                     https://en.wikipedia.org/wiki/Combining_Diacritical_Marks_for_Symbols
+		//                     https://en.wikipedia.org/wiki/Combining_Half_Marks
+		var/static/regex/unicode_diacritical_marks = regex(@"([\u0300-\u036F\u1AB0-\u1ACE\u1DC0-\u1DFF\u20D0-\u20F0\uFE20-\uFE2F]){2,}", "g")
+		input = unicode_diacritical_marks.Replace(input, "$1")
 
 	if(encode)
 		// In addition to processing html, html_encode removes byond formatting codes like "\red", "\i" and other.
