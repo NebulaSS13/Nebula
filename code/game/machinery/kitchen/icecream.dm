@@ -198,12 +198,14 @@
 	layer = ABOVE_OBJ_LAYER
 	bitesize = 3
 	volume = 20
+	nutriment_amt = 5
+	nutriment_type = /decl/material/liquid/nutriment
+	nutriment_desc = "crunchy waffle cone"
 	var/ice_creamed
 	var/cone_type
 
 /obj/item/chems/food/icecream/Initialize()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment, 5)
 	update_icon()
 
 /obj/item/chems/food/icecream/on_update_icon()

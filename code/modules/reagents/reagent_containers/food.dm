@@ -34,7 +34,9 @@
 	var/dry = FALSE
 	var/nutriment_amt = 0
 	var/nutriment_type = /decl/material/liquid/nutriment // Used to determine which base nutriment type is spawned for this item.
-	var/list/nutriment_desc = list("food" = 1)    // List of flavours and flavour strengths. The flavour strength text is determined by the ratio of flavour strengths in the snack.
+	// List of flavours and flavour strengths.
+	// The flavour strength text is determined by the ratio of flavour strengths in the snack.
+	var/list/nutriment_desc
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	var/filling_color = "#ffffff" //Used by sandwiches.
 	var/trash

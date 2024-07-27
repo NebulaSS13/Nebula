@@ -14,11 +14,17 @@
 
 	if(length(used_items))
 
-		for(var/obj/item/chems/food/food in used_items)
-			if(food.nutriment_type && food.nutriment_desc)
+		for(var/obj/item/chems/ingredient in used_items)
+			var/obj/item/chems/food/food = ingredient
+			if(istype(food))
 				for(var/taste in food.nutriment_desc)
-					taste_strings[taste] += food.nutriment_desc[taste]
-			soup_flags |= food.ingredient_flags
+					taste_strings[taste] = max(taste_strings[taste], food.nutriment_desc[taste])
+				soup_flags |= food.ingredient_flags
+
+			for(var/reagent_type in ingredient.reagents?.reagent_volumes)
+				var/decl/material/reagent = GET_DECL(reagent_type)
+				if(reagent.taste_description)
+					taste_strings[reagent.taste_description] = max(taste_strings[reagent.taste_description], reagent.taste_mult)
 
 		if(locate(/obj/item/chems/food/grown) in used_items)
 			for(var/obj/item/chems/food/grown/veg in used_items)
@@ -85,6 +91,7 @@
 	. = list()
 	.["soup_ingredients"] = list("marrow" = 1)
 	.["soup_flags"] = INGREDIENT_FLAG_MEAT
+	.["taste"] = list("rich marrow" = 5)
 
 /decl/recipe/soup/simple
 	abstract_type = /decl/recipe/soup/simple

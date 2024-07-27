@@ -154,14 +154,14 @@
 
 /decl/material/liquid/drink/juice/potato
 	name = "potato juice"
-	lore_text = "Juice of the potato. Bleh."
-	taste_description = "sadness and potatoes"
+	lore_text = "Juice of the potato."
+	taste_description = "starch"
 	nutrition = 2
 	color = "#302000"
 	uid = "chem_drink_potato"
 
 	glass_name = "potato juice"
-	glass_desc = "Juice from a potato. Bleh."
+	glass_desc = "Juice from a potato. Possibly the most boring drink in existence, other than water."
 
 /decl/material/liquid/drink/juice/garlic
 	name = "garlic juice"
