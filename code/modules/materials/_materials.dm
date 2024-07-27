@@ -73,6 +73,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/antag_text
 	var/default_solid_form = /obj/item/stack/material/sheet
 
+	var/soup_name
+	var/soup_hot_desc = "simmering"
+
 	var/affect_blood_on_ingest = TRUE
 	var/affect_blood_on_inhale = TRUE
 
@@ -351,6 +354,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	solid_name     ||= use_name
 	gas_name       ||= use_name
 	adjective_name ||= use_name
+	soup_name      ||= liquid_name
 
 	// Null/clear a bunch of physical vars as this material is fake.
 	if(holographic)
@@ -1004,7 +1008,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			var/data_name = rdata["mask_name"]
 			if(data_name)
 				return data_name
-	return liquid_name
+	return soup_name
 
 /decl/material/proc/get_reagent_color(datum/reagents/holder)
 	if(istype(holder) && holder.reagent_data)

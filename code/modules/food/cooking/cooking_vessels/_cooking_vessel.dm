@@ -43,8 +43,8 @@
 		for(var/reagent_type in reagents.reagent_volumes)
 			var/decl/material/reagent = GET_DECL(reagent_type)
 			var/reagent_name = reagent.get_reagent_name(reagents)
-			if(!isnull(reagent.boiling_point) && temperature >= reagent.boiling_point)
-				. += "[reagents.reagent_volumes[reagent_type]]u of simmering [reagent_name]"
+			if(!isnull(reagent.boiling_point) && temperature >= reagent.boiling_point && reagent.soup_hot_desc)
+				. += "[reagents.reagent_volumes[reagent_type]]u of [reagent.soup_hot_desc] [reagent_name]"
 			else
 				. += "[reagents.reagent_volumes[reagent_type]]u of [reagent_name]"
 
