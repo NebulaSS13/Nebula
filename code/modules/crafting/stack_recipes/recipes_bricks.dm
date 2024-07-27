@@ -11,6 +11,15 @@
 	)
 	category                    = "structures"
 
+/decl/stack_recipe/bricks/cup
+	result_type                = /obj/item/chems/glass/handmade/cup
+
+/decl/stack_recipe/bricks/mug
+	result_type                = /obj/item/chems/glass/handmade/mug
+
+/decl/stack_recipe/bricks/bowl
+	result_type                = /obj/item/chems/glass/handmade/bowl
+
 /decl/stack_recipe/bricks/fire_source
 	abstract_type               = /decl/stack_recipe/bricks/fire_source
 	on_floor                    = TRUE

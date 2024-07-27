@@ -1,0 +1,1 @@
+/obj/item/chems/glass/pottery/@SUBTYPES : /obj/item/chems/glass/handmade/@SUBTYPES{@OLD}
