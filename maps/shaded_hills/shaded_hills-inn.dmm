@@ -855,7 +855,6 @@
 /area/shaded_hills/outside/downlands)
 "Je" = (
 /obj/structure/pit/closed/grave,
-/obj/structure/gravemarker/random,
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/shrine)
 "Jo" = (

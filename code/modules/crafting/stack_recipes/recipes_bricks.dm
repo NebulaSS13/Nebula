@@ -40,6 +40,10 @@
 	difficulty                 = MAT_VALUE_HARD_DIY
 	category                   = "furniture"
 
+/decl/stack_recipe/bricks/gravestone
+	result_type            = /obj/item/gravemarker/gravestone
+	difficulty             = MAT_VALUE_NORMAL_DIY
+
 /decl/stack_recipe/bricks/fountain
 	result_type                = /obj/structure/fountain/mundane
 	one_per_turf               = TRUE
