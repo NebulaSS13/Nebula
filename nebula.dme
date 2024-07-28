@@ -2529,7 +2529,6 @@
 #include "code\modules\hydroponics\seed_mobs.dm"
 #include "code\modules\hydroponics\seed_packets.dm"
 #include "code\modules\hydroponics\seed_storage.dm"
-#include "code\modules\hydroponics\beekeeping\beehive.dm"
 #include "code\modules\hydroponics\plant_types\seeds_herbs.dm"
 #include "code\modules\hydroponics\plant_types\seeds_misc.dm"
 #include "code\modules\hydroponics\spreading\spreading.dm"

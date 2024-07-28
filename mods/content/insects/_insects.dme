@@ -1,0 +1,12 @@
+#ifndef MODPACK_INSECTS
+#define MODPACK_INSECTS
+// BEGIN_INCLUDE
+#include "_insects.dm"
+#include "centrifuge.dm"
+#include "closets.dm"
+#include "items.dm"
+#include "recipes.dm"
+#include "trading.dm"
+#include "hives/_hive.dm"
+// END_INCLUDE
+#endif

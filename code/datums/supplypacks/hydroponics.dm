@@ -58,15 +58,6 @@
 	containername = "exotic Seeds crate"
 	access = access_xenobiology
 
-/decl/hierarchy/supply_pack/hydroponics/bee_keeper
-	name = "Equipment - Beekeeping"
-	contains = list(/obj/item/beehive_assembly,
-					/obj/item/bee_smoker,
-					/obj/item/honey_frame = 5,
-					/obj/item/bee_pack)
-	containername = "beekeeping crate"
-	access = access_hydroponics
-
 /decl/hierarchy/supply_pack/hydroponics/hydrotray
 	name = "Equipment - Hydroponics tray"
 	contains = list(/obj/machinery/portable_atmospherics/hydroponics)

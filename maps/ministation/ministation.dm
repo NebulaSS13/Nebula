@@ -25,6 +25,7 @@ Twice...
 
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
+	#include "../../mods/content/insects/_insects.dme"
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"

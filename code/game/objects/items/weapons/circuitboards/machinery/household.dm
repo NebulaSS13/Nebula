@@ -46,20 +46,6 @@
 /obj/item/stock_parts/circuitboard/cooker/get_buildable_types()
 	return subtypesof(/obj/machinery/cooker)
 
-/obj/item/stock_parts/circuitboard/honey
-	name = "circuitboard (honey extractor)"
-	build_path = /obj/machinery/honey_extractor
-	board_type = "machine"
-	origin_tech = @'{"biotech":2,"engineering":1}'
-	req_components = list(
-		/obj/item/stock_parts/manipulator = 2,
-		/obj/item/stock_parts/matter_bin = 2)
-
-/obj/item/stock_parts/circuitboard/honey/seed
-	name = "circuitboard (seed extractor)"
-	build_path = /obj/machinery/seed_extractor
-	board_type = "machine"
-
 /obj/item/stock_parts/circuitboard/seed_storage
 	name = "circuitboard (seed storage)"
 	build_path = /obj/machinery/seed_storage
