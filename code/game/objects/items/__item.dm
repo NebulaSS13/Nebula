@@ -1189,3 +1189,34 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/is_watertight()
 	return watertight || ..()
 
+// Bespoke proc for handling when a centrifuge smooshes us, only currently used by growns and hive frames.
+/obj/item/proc/handle_centrifuge_process(obj/machinery/centrifuge/centrifuge)
+	SHOULD_CALL_PARENT(TRUE)
+	return istype(centrifuge) && !QDELETED(centrifuge.loaded_beaker) && istype(centrifuge.loaded_beaker)
+
+/obj/item/proc/convert_matter_to_lumps(skip_qdel = FALSE)
+
+	var/list/scrap_matter = list()
+	for(var/mat in matter)
+		var/mat_amount = matter[mat]
+		var/obj/item/stack/material/mat_stack = /obj/item/stack/material/lump
+		var/mat_per_stack = SHEET_MATERIAL_AMOUNT * initial(mat_stack.matter_multiplier)
+		var/sheet_amount  = round(mat_amount / mat_per_stack)
+		if(sheet_amount)
+			var/obj/item/stack/material/lump/lump = new(loc, sheet_amount, mat)
+			LAZYADD(., lump)
+			mat_amount -= sheet_amount * mat_per_stack
+		if(mat_amount)
+			scrap_matter[mat] += mat_amount
+
+	if(length(scrap_matter))
+		var/obj/item/debris/scraps/scraps = new(loc)
+		scraps.matter = scrap_matter.Copy()
+		scraps.update_primary_material()
+		LAZYADD(., scraps)
+
+	matter = null
+	material = null
+	if(!skip_qdel)
+		qdel(src)
+

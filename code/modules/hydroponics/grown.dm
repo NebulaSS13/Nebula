@@ -15,6 +15,18 @@
 	var/seeds_extracted = FALSE
 	var/datum/seed/seed
 
+// This is sort of pointless while food is a valid input on the ChemMaster but maybe
+// in the future there will be some more interesting ways to process growns/food.
+/obj/item/food/grown/handle_centrifuge_process(obj/machinery/centrifuge/centrifuge)
+	if(!(. = ..()))
+		return
+	if(reagents.total_volume)
+		reagents.trans_to_holder(centrifuge.loaded_beaker.reagents, reagents.total_volume)
+	for(var/obj/item/thing in contents)
+		thing.dropInto(centrifuge.loc)
+	for(var/atom/movable/thing in convert_matter_to_lumps())
+		thing.dropInto(centrifuge.loc)
+
 /obj/item/food/grown/examine(mob/user, distance)
 	. = ..()
 	if(user && distance <= 1 && seed && user.skill_check(work_skill, SKILL_BASIC))

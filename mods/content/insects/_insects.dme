@@ -5,8 +5,14 @@
 #include "centrifuge.dm"
 #include "closets.dm"
 #include "items.dm"
+#include "materials.dm"
 #include "recipes.dm"
 #include "trading.dm"
-#include "hives/_hive.dm"
+#include "hives\_hive.dm"
+#include "hives\hive_frame.dm"
+#include "hives\hive_insects.dm"
+#include "hives\hive_queen.dm"
+#include "hives\hive_structure.dm"
+#include "hives\hive_swarm.dm"
 // END_INCLUDE
 #endif
