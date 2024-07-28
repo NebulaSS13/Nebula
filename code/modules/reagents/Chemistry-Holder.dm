@@ -65,7 +65,7 @@ var/global/obj/temp_reagents_holder = new
 	var/total_volume = 0
 	var/maximum_volume = 120
 
-	var/total_liquid_volume // Used to determine when to create fluids in world and the like.
+	var/total_liquid_volume // Used to determine when to create fluids in the world and the like.
 
 	var/atom/my_atom
 	var/cached_color
