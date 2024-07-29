@@ -16,7 +16,7 @@
 				// Handle environmental effects like weather and flooding.
 				if(T.reagents?.total_volume && reagents.total_volume < reagents.maximum_volume)
 					T.reagents.trans_to_obj(src, min(space_left, min(T.reagents.total_volume, rand(5,10))))
-				if(istype(T.weather?.weather_system?.current_state, /decl/state/weather/rain))
+				if(istype(T.weather?.weather_system?.current_state, /decl/state/weather/rain) && get_weather_exposure() && (waterlevel < 100)) // don't totally flood the tray, we need to leave space for food etc
 					var/decl/state/weather/rain/rain = T.weather.weather_system.current_state
 					if(rain.is_liquid)
 						reagents.add_reagent(T.weather.water_material, min(space_left, rand(3,5)))
