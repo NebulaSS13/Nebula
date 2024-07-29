@@ -115,6 +115,7 @@
 		if(target_loc && exosuit.legs && exosuit.legs.can_move_on(exosuit.loc, target_loc) && exosuit.MayEnterTurf(target_loc))
 			exosuit.Move(target_loc)
 	return MOVEMENT_HANDLED
+
 /datum/movement_handler/mob/space/exosuit
 	expected_host_type = /mob/living/exosuit
 
