@@ -38,7 +38,7 @@
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/point_of_interest/fox_den)
 "P" = (
-/obj/item/chems/food/butchery/offal/small,
+/obj/item/food/butchery/offal/small,
 /obj/item/stack/material/bone/mapped/bone,
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,

@@ -3170,7 +3170,7 @@
 	name = "plastic table frame"
 	},
 /obj/item/plate,
-/obj/item/chems/food/flatbread,
+/obj/item/food/flatbread,
 /turf/floor/tiled,
 /area/magshield/south)
 "jw" = (
@@ -3456,7 +3456,7 @@
 /area/magshield/south)
 "kp" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/chems/food/hotdog,
+/obj/item/food/hotdog,
 /turf/floor/tiled/freezer,
 /area/magshield/south)
 "kq" = (
@@ -3612,7 +3612,7 @@
 /area/magshield/south)
 "kI" = (
 /obj/structure/table/marble,
-/obj/item/chems/food/chips,
+/obj/item/food/chips,
 /turf/floor/tiled/white,
 /area/magshield/south)
 "kJ" = (
@@ -3626,11 +3626,11 @@
 /area/magshield/south)
 "kL" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
 /turf/floor/tiled/freezer,
 /area/magshield/south)
 "kM" = (

@@ -294,7 +294,7 @@
 /obj/item/bedsheet/orange,
 /obj/item/stock_parts/matter_bin/adv,
 /obj/item/stock_parts/micro_laser/ultra,
-/obj/item/chems/food/liquidfood,
+/obj/item/food/liquidfood,
 /obj/item/stack/material/brick/mapped/sandstone/fifty,
 /turf/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
