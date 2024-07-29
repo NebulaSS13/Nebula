@@ -17,6 +17,10 @@
 			/decl/cultural_info/culture/other
 		),
 		TAG_RELIGION =  list(
+			/decl/cultural_info/religion/ancestors,
+			/decl/cultural_info/religion/folk_deity,
+			/decl/cultural_info/religion/anima_materialism,
+			/decl/cultural_info/religion/virtuist,
 			/decl/cultural_info/religion/other
 		)
 	)

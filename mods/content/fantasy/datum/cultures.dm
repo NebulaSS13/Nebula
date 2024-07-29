@@ -28,6 +28,22 @@
 	name = "Other Faction"
 	description = "You don't align with any of the more well-known factions or powers."
 
+/decl/cultural_info/religion/ancestors
+	name = "Ancestor Worship"
+	description = "You revere your ancestors through your deeds and offerings, and work to follow the example laid down by them. You may blame fortune and misfortune alike on the influence of your ancestors, and might seek to appease them in times of trouble."
+
+/decl/cultural_info/religion/folk_deity
+	name = "Folk Deity"
+	description = "You worship the folk deity or deities of either the local area or of your hometown or another significant place in your past. Followers of these religions may have a variety of beliefs about their folk deity and how they manifest in and affect the world, but typically they are not believed to stray far from shrines dedicated to them. Additionally, followers believe their influence tends to be subtle rather than dramatic."
+
+/decl/cultural_info/religion/anima_materialism
+	name = "Anima Materialism"
+	description = "You believe in the natural laws governing material and anima over all else, spurning the supposed influence of the divine. Whether attempting to delve deep into those laws yourself or merely content with the understanding that everything is linked via mechanistic rules, you do not hold to a belief in any immaterial higher power."
+
+/decl/cultural_info/religion/virtuist
+	name = "Virtuist"
+	description = "You seek to display virtue and temperance in all that you do. You may look up to others as examples of such virtues, particularly strong historical figures in the Aegis and Splinter Kingdoms, like the Seven Sisters."
+
 /decl/cultural_info/religion/other
 	name = "Other Religion"
 	description = "You practice no religion, or a small or relatively unknown religion distinct from the major faiths."
