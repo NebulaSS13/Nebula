@@ -57,14 +57,23 @@
 	check_plant_health()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/Process()
-	var/turf/T = get_turf(src)
-	if(istype(T) && !closed_system)
-		var/space_left = reagents ? (reagents.maximum_volume - reagents.total_volume) : 0
-		if(waterlevel < 100 && space_left > 0 && reagents.total_volume < 10)
-			for(var/step_dir in global.alldirs)
-				var/turf/neighbor = get_step_resolving_mimic(src, step_dir)
-				if(neighbor != loc && neighbor?.reagents?.total_volume && Adjacent(neighbor))
-					neighbor.reagents.trans_to_obj(src, rand(2,3))
+	. = ..()
+	if(. == PROCESS_KILL || QDELETED(src))
+		return
+	var/turf/my_turf = get_turf(src)
+	if(!istype(my_turf))
+		return
+	if(closed_system || !reagents || waterlevel >= 100)
+		return
+	if((reagents.maximum_volume - reagents.total_volume) <= 0 || reagents.total_volume >= 10)
+		return
+	for(var/step_dir in global.alldirs)
+		var/turf/neighbor = get_step_resolving_mimic(src, step_dir)
+		if(neighbor == my_turf || !neighbor?.reagents?.total_volume || !Adjacent(neighbor))
+			continue
+		neighbor.reagents.trans_to_obj(src, rand(2,3))
+		if((reagents.maximum_volume - reagents.total_volume) <= 0 || reagents.total_volume >= 10)
+			break
 	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O, var/mob/user)
