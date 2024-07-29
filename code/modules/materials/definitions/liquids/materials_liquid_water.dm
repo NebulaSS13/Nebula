@@ -77,8 +77,8 @@
 
 /decl/material/liquid/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	..()
-	if(istype(O, /obj/item/chems/food/monkeycube))
-		var/obj/item/chems/food/monkeycube/cube = O
+	if(istype(O, /obj/item/food/monkeycube))
+		var/obj/item/food/monkeycube/cube = O
 		if(!cube.wrapper_type)
 			cube.Expand()
 

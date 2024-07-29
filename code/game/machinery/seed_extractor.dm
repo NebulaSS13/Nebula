@@ -18,10 +18,10 @@
 		return
 
 	// Fruits and vegetables.
-	if(istype(O, /obj/item/chems/food/grown))
+	if(istype(O, /obj/item/food/grown))
 		if(!user.try_unequip(O))
 			return TRUE
-		var/obj/item/chems/food/grown/F = O
+		var/obj/item/food/grown/F = O
 		if(!F.seed)
 			to_chat(user, SPAN_WARNING("\The [O] doesn't seem to have any usable seeds inside it."))
 			return TRUE

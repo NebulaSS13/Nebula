@@ -3,7 +3,7 @@
 	meat_name     = "mushroom"
 
 	meat_material = /decl/material/solid/organic/plantmatter
-	meat_type     = /obj/item/chems/food/hugemushroomslice
+	meat_type     = /obj/item/food/hugemushroomslice
 
 	bone_material = null
 	bone_amount   = 0
@@ -22,7 +22,7 @@
 	meat_name     = "vegetable"
 
 	meat_material = /decl/material/solid/organic/plantmatter
-	meat_type     = /obj/item/chems/food/tomatomeat
+	meat_type     = /obj/item/food/tomatomeat
 
 	bone_material = null
 	bone_amount   = 0

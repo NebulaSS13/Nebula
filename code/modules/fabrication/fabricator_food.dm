@@ -25,7 +25,7 @@
 	..()
 
 /obj/machinery/fabricator/bioprinter/can_ingest(var/obj/item/thing)
-	return istype(thing, /obj/item/chems/food) || ..()
+	return istype(thing, /obj/item/food) || ..()
 
 /obj/machinery/fabricator/replicator/proc/state_status()
 	for(var/thing in storage_capacity)

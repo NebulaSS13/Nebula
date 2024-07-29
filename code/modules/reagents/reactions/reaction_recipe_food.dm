@@ -24,7 +24,7 @@
 	mix_message = "The solution thickens and curdles into a rich yellow solid."
 	minimum_temperature = 40 CELSIUS
 	maximum_temperature = (40 CELSIUS) + 100
-	obj_result = /obj/item/chems/food/sliceable/cheesewheel
+	obj_result = /obj/item/food/sliceable/cheesewheel
 
 /decl/chemical_reaction/recipe/food/cheesewheel/rennet
 	name = "Rennet Cheesewheel"
@@ -42,7 +42,7 @@
 	)
 	result_amount = 3
 	mix_message = "The flour thickens the processed meat until it clumps."
-	obj_result = /obj/item/chems/food/meatball/raw
+	obj_result = /obj/item/food/meatball/raw
 
 /decl/chemical_reaction/recipe/food/dough
 	name = "Plain dough"
@@ -52,38 +52,38 @@
 		/decl/material/liquid/water           = 10
 	)
 	mix_message = "The solution folds and thickens into a large ball of dough."
-	obj_result = /obj/item/chems/food/dough
+	obj_result = /obj/item/food/dough
 
 /decl/chemical_reaction/recipe/food/soydough
 	name = "Soy dough"
 	required_reagents = list(/decl/material/liquid/nutriment/plant_protein = 3, /decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
 	mix_message = "The solution folds and thickens into a large ball of dough."
-	obj_result = /obj/item/chems/food/dough
+	obj_result = /obj/item/food/dough
 
 /decl/chemical_reaction/recipe/food/syntiflesh
 	name = "Synthetic Meat"
 	required_reagents = list(/decl/material/liquid/blood = 5, /decl/material/liquid/plasticide = 1)
 	mix_message = "The solution thickens disturbingly, taking on a meaty appearance."
-	obj_result = /obj/item/chems/food/butchery/meat/syntiflesh
+	obj_result = /obj/item/food/butchery/meat/syntiflesh
 
 /decl/chemical_reaction/recipe/food/tofu
 	name = "Tofu"
 	required_reagents = list(/decl/material/liquid/drink/milk/soymilk = 10)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
 	mix_message = "The solution thickens and clumps into a yellow-white substance."
-	obj_result = /obj/item/chems/food/tofu
+	obj_result = /obj/item/food/tofu
 
 /decl/chemical_reaction/recipe/food/chocolate_bar
 	name = "Soy Chocolate"
 	required_reagents = list(/decl/material/liquid/drink/milk/soymilk = 2, /decl/material/liquid/nutriment/coco = 2, /decl/material/liquid/nutriment/sugar = 2)
 	mix_message = "The solution thickens and hardens into a glossy brown substance."
-	obj_result = /obj/item/chems/food/chocolatebar
+	obj_result = /obj/item/food/chocolatebar
 
 /decl/chemical_reaction/recipe/food/chocolate_bar2
 	name = "Milk Chocolate"
 	required_reagents = list(/decl/material/liquid/drink/milk = 2, /decl/material/liquid/nutriment/coco = 2, /decl/material/liquid/nutriment/sugar = 2)
 	mix_message = "The solution thickens and hardens into a glossy brown substance."
-	obj_result = /obj/item/chems/food/chocolatebar
+	obj_result = /obj/item/food/chocolatebar
 	minimum_temperature = 70 CELSIUS
 
 /decl/chemical_reaction/recipe/food/stuffing
@@ -95,7 +95,7 @@
 		/decl/material/liquid/nutriment/bread = 5
 	)
 	mix_message = "The breadcrumbs and water clump together to form a thick stuffing."
-	obj_result = /obj/item/chems/food/stuffing
+	obj_result = /obj/item/food/stuffing
 
 /decl/chemical_reaction/recipe/food/mint
 	name = "Mint"
@@ -104,7 +104,7 @@
 		/decl/material/liquid/frostoil = 5
 	)
 	mix_message = "The solution thickens and hardens into a glossy brown substance."
-	obj_result = /obj/item/chems/food/mint
+	obj_result = /obj/item/food/mint
 
 /decl/chemical_reaction/recipe/food/pudding
 	abstract_type = /decl/chemical_reaction/recipe/food/pudding
@@ -117,7 +117,7 @@
 		/decl/material/liquid/drink/tea/green = 1
 	)
 	mix_message = "The tea mingles with and cooks the rice."
-	obj_result = /obj/item/chems/food/chazuke
+	obj_result = /obj/item/food/chazuke
 
 /decl/chemical_reaction/recipe/food/pudding/ricepudding
 	name = "Rice Pudding"
@@ -125,7 +125,7 @@
 		/decl/material/liquid/drink/milk = 5,
 		/decl/material/liquid/nutriment/rice = 10
 	)
-	obj_result = /obj/item/chems/food/ricepudding
+	obj_result = /obj/item/food/ricepudding
 
 /decl/chemical_reaction/recipe/food/pudding/spacylibertyduff
 	name = "Space Liberty Duff"
@@ -134,7 +134,7 @@
 		/decl/material/liquid/ethanol/vodka = 5,
 		/decl/material/liquid/psychotropics = 5
 	)
-	obj_result = /obj/item/chems/food/spacylibertyduff
+	obj_result = /obj/item/food/spacylibertyduff
 
 /decl/chemical_reaction/recipe/food/pudding/amanitajelly
 	name = "Amanita Jelly"
@@ -143,10 +143,10 @@
 		/decl/material/liquid/ethanol/vodka = 5,
 		/decl/material/liquid/amatoxin = 5
 	)
-	obj_result = /obj/item/chems/food/amanitajelly
+	obj_result = /obj/item/food/amanitajelly
 
 /decl/chemical_reaction/recipe/food/pudding/amanitajelly/create_food(location)
-	var/obj/item/chems/food/amanitajelly/being_cooked = ..()
+	var/obj/item/food/amanitajelly/being_cooked = ..()
 	if(being_cooked?.reagents)
 		being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)
 	return being_cooked

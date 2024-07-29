@@ -2,7 +2,7 @@
 // Pasta //
 ///////////
 
-/obj/item/chems/food/spagetti
+/obj/item/food/spagetti
 	name = "spaghetti"
 	desc = "A bundle of raw spaghetti."
 	icon_state = "spagetti"
@@ -12,7 +12,7 @@
 	nutriment_amt = 1
 	bitesize = 1
 
-/obj/item/chems/food/boiledspagetti
+/obj/item/food/boiledspagetti
 	name = "boiled spaghetti"
 	desc = "A plain dish of pasta, just screaming for sauce."
 	icon_state = "spagettiboiled"
@@ -23,7 +23,7 @@
 	nutriment_amt = 2
 	bitesize = 2
 
-/obj/item/chems/food/pastatomato
+/obj/item/food/pastatomato
 	name = "spaghetti & tomato"
 	desc = "Spaghetti and crushed tomatoes."
 	icon_state = "pastatomato"
@@ -34,11 +34,11 @@
 	nutriment_amt = 6
 	bitesize = 4
 
-/obj/item/chems/food/pastatomato/populate_reagents()
+/obj/item/food/pastatomato/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 10)
 
-/obj/item/chems/food/nanopasta
+/obj/item/food/nanopasta
 	name = "nanopasta"
 	desc = "Nanomachines, son!"
 	icon_state = "nanopasta"
@@ -48,11 +48,11 @@
 	nutriment_amt = 6
 	bitesize = 4
 
-/obj/item/chems/food/nanopasta/populate_reagents()
+/obj/item/food/nanopasta/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nanitefluid, 10)
 
-/obj/item/chems/food/meatballspagetti
+/obj/item/food/meatballspagetti
 	name = "spaghetti & meatballs"
 	desc = "Now thats a nice meatball!"
 	icon_state = "meatballspagetti"
@@ -62,11 +62,11 @@
 	nutriment_desc = list("noodles" = 4)
 	nutriment_amt = 4
 	bitesize = 2
-/obj/item/chems/food/meatballspagetti/populate_reagents()
+/obj/item/food/meatballspagetti/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
-/obj/item/chems/food/spesslaw
+/obj/item/food/spesslaw
 	name = "spaghetti & too many meatballs"
 	desc = "Do you want some pasta with those meatballs?"
 	icon_state = "spesslaw"
@@ -76,6 +76,6 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/chems/food/spesslaw/populate_reagents()
+/obj/item/food/spesslaw/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 4)

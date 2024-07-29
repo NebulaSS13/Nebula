@@ -13,7 +13,7 @@
 
 /decl/butchery_data/humanoid/avian
 	meat_name = "chicken"
-	meat_type = /obj/item/chems/food/butchery/meat/chicken
+	meat_type = /obj/item/food/butchery/meat/chicken
 
 /decl/species/neoavian
 	name = SPECIES_AVIAN

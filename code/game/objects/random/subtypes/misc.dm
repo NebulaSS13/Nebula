@@ -31,7 +31,7 @@
 		/obj/item/chems/syringe                        = 3,
 		/obj/item/chems/syringe/steroid                = 2,
 		/obj/item/chems/syringe/drugs                  = 1,
-		/obj/item/chems/food/egg/lizard                = 3
+		/obj/item/food/egg/lizard                = 3
 	)
 	return spawnable_choices
 

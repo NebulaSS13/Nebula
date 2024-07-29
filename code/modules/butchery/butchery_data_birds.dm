@@ -2,8 +2,8 @@
 	meat_name     = "fowl"
 	abstract_type = /decl/butchery_data/animal/bird
 	skin_material = /decl/material/solid/organic/skin/feathers
-	meat_type     = /obj/item/chems/food/butchery/meat/chicken/game
-	gut_type      = /obj/item/chems/food/butchery/offal/small
+	meat_type     = /obj/item/food/butchery/meat/chicken/game
+	gut_type      = /obj/item/food/butchery/offal/small
 
 /decl/butchery_data/animal/bird/parrot
 	meat_amount   = 3
@@ -12,8 +12,8 @@
 	meat_amount   = 10
 	bone_amount   = 20
 	skin_amount   = 20
-	stomach_type  = /obj/item/chems/food/butchery/stomach
-	gut_type      = /obj/item/chems/food/butchery/offal
+	stomach_type  = /obj/item/food/butchery/stomach
+	gut_type      = /obj/item/food/butchery/offal
 
 /decl/butchery_data/animal/bird/parrot/space/purple
 	skin_material = /decl/material/solid/organic/skin/feathers/purple

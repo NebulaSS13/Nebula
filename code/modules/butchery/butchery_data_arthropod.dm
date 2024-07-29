@@ -11,7 +11,7 @@
 	meat_amount   = 3
 	skin_amount   = 10
 	must_use_hook = FALSE
-	gut_type      = /obj/item/chems/food/butchery/offal/small
+	gut_type      = /obj/item/food/butchery/offal/small
 
 /decl/butchery_data/animal/arthropod/crab/giant
 	meat_amount   = 12
@@ -19,7 +19,7 @@
 
 /decl/butchery_data/animal/arthropod/giant_spider
 	meat_name     = "spider"
-	meat_type     = /obj/item/chems/food/spider
+	meat_type     = /obj/item/food/spider
 	meat_amount   = 3
 	skin_amount   = 5
 

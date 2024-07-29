@@ -15,7 +15,7 @@
 	var/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		for(var/i = 1, i <= 3, i++)
-			new /obj/item/chems/food/monkeycube(location)
+			new /obj/item/food/monkeycube(location)
 	return TRUE
 
 /decl/slime_colour/grey/handle_uranium_reaction(var/datum/reagents/holder)

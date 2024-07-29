@@ -28,7 +28,7 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 		var/worms = round(5 * turf.get_plant_growth_rate())
 		if(worms)
 			for(var/i = 1 to worms)
-				var/obj/item/chems/food/worm/worm = new(src)
+				var/obj/item/food/worm/worm = new(src)
 				if(!storage.handle_item_insertion(null, worm))
 					qdel(worm)
 					break
@@ -44,7 +44,7 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 	if(distance <= 1)
 
 		var/worms = 0
-		for(var/obj/item/chems/food/worm/worm in get_stored_inventory())
+		for(var/obj/item/food/worm/worm in get_stored_inventory())
 			worms++
 
 		switch(worms)
@@ -61,7 +61,7 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 
 		var/list/composting = list()
 		for(var/thing in get_stored_inventory())
-			if(!istype(thing, /obj/item/chems/food/worm))
+			if(!istype(thing, /obj/item/food/worm))
 				composting += thing
 
 		if(length(composting))
@@ -113,7 +113,7 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 	if(islist(current_contents))
 		current_contents = current_contents.Copy()
 
-	for(var/obj/item/chems/food/worm/worm in current_contents)
+	for(var/obj/item/food/worm/worm in current_contents)
 		current_contents -= worm
 		worms++
 
@@ -179,7 +179,7 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 
 	// Grow more worms.
 	if(REAGENT_VOLUME(reagents, /decl/material/liquid/fertilizer/compost) > 0 && prob(0.1) && worms < COMPOST_MAX_WORMS)
-		var/obj/item/chems/food/worm/worm = new(src)
+		var/obj/item/food/worm/worm = new(src)
 		if(!storage.handle_item_insertion(null, worm))
 			qdel(worm)
 

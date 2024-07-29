@@ -1,14 +1,14 @@
 /decl/recipe/roast_sifpod
 	fruit = list("sifpod" = 1)
 	reagent_mix = REAGENT_REPLACE // Clear the sifsap.
-	result = /obj/item/chems/food/roast_sifpod
+	result = /obj/item/food/roast_sifpod
 
 /datum/seed/sifpod
 	name = "sifpod"
 	product_name = "sivian pod"
 	display_name = "sivian pod"
 	grown_tag = "sifpod"
-	backyard_grilling_product = /obj/item/chems/food/roast_sifpod
+	backyard_grilling_product = /obj/item/food/roast_sifpod
 	backyard_grilling_announcement = "crackles and pops as the roast hull splits open."
 	chems = list(
 		/decl/material/liquid/nutriment = list(1,5),
@@ -28,7 +28,7 @@
 	set_trait(TRAIT_FLESH_COLOUR,"#05157d")
 	set_trait(TRAIT_IDEAL_LIGHT, 1)
 
-/obj/item/chems/food/roast_sifpod
+/obj/item/food/roast_sifpod
 	name = "roast sifpod"
 	desc = "A charred and blackened sifpod, roasted to kill the toxins and split open to reveal steaming blue-green fruit jelly within. A popular campfire snack."
 	icon = 'mods/species/drakes/icons/sifpod.dmi'

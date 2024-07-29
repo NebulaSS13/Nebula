@@ -11,14 +11,14 @@
 	can_burn_food = 1
 
 	output_options = list(
-		"Personal Pizza" = /obj/item/chems/food/variable/pizza,
-		"Bread" = /obj/item/chems/food/variable/bread,
-		"Pie" = /obj/item/chems/food/variable/pie,
-		"Small Cake" = /obj/item/chems/food/variable/cake,
-		"Hot Pocket" = /obj/item/chems/food/variable/pocket,
-		"Kebab" = /obj/item/chems/food/variable/kebab,
-		"Waffles" = /obj/item/chems/food/variable/waffles,
-		"Pancakes" = /obj/item/chems/food/variable/pancakes,
-		"Cookie" = /obj/item/chems/food/variable/cookie,
-		"Donut" = /obj/item/chems/food/variable/donut,
+		"Personal Pizza" = /obj/item/food/variable/pizza,
+		"Bread" = /obj/item/food/variable/bread,
+		"Pie" = /obj/item/food/variable/pie,
+		"Small Cake" = /obj/item/food/variable/cake,
+		"Hot Pocket" = /obj/item/food/variable/pocket,
+		"Kebab" = /obj/item/food/variable/kebab,
+		"Waffles" = /obj/item/food/variable/waffles,
+		"Pancakes" = /obj/item/food/variable/pancakes,
+		"Cookie" = /obj/item/food/variable/cookie,
+		"Donut" = /obj/item/food/variable/donut,
 		)

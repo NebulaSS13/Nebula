@@ -1,13 +1,13 @@
-/obj/item/chems/food/slice/bread/attackby(obj/item/W, mob/user)
+/obj/item/food/slice/bread/attackby(obj/item/W, mob/user)
 
-	if(istype(W,/obj/item/shard) || istype(W,/obj/item/chems/food))
-		var/obj/item/chems/food/csandwich/S = new()
+	if(istype(W,/obj/item/shard) || istype(W,/obj/item/food))
+		var/obj/item/food/csandwich/S = new()
 		S.dropInto(loc)
 		S.attackby(W,user)
 		qdel(src)
 	..()
 
-/obj/item/chems/food/csandwich
+/obj/item/food/csandwich
 	name = "sandwich"
 	desc = "The best thing since sliced bread."
 	icon_state = "breadslice"
@@ -16,11 +16,11 @@
 
 	var/list/ingredients = list()
 
-/obj/item/chems/food/csandwich/attackby(obj/item/W, mob/user)
+/obj/item/food/csandwich/attackby(obj/item/W, mob/user)
 
 	var/sandwich_limit = 4
 	for(var/obj/item/O in ingredients)
-		if(istype(O,/obj/item/chems/food/slice/bread))
+		if(istype(O,/obj/item/food/slice/bread))
 			sandwich_limit += 4
 
 	if(src.contents.len > sandwich_limit)
@@ -32,7 +32,7 @@
 		to_chat(user, "<span class='warning'>You hide [W] in \the [src].</span>")
 		update()
 		return
-	else if(istype(W,/obj/item/chems/food))
+	else if(istype(W,/obj/item/food))
 		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, "<span class='warning'>You layer [W] over \the [src].</span>")
@@ -43,13 +43,13 @@
 		return
 	..()
 
-/obj/item/chems/food/csandwich/proc/update()
+/obj/item/food/csandwich/proc/update()
 	var/fullname = "" //We need to build this from the contents of the var.
 	var/i = 0
 
 	overlays.Cut()
 
-	for(var/obj/item/chems/food/O in ingredients)
+	for(var/obj/item/food/O in ingredients)
 
 		i++
 		if(i == 1)
@@ -74,17 +74,17 @@
 	if(length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
 	w_class = CEILING(clamp((ingredients.len/2),2,4))
 
-/obj/item/chems/food/csandwich/Destroy()
+/obj/item/food/csandwich/Destroy()
 	for(var/obj/item/O in ingredients)
 		qdel(O)
 	return ..()
 
-/obj/item/chems/food/csandwich/examine(mob/user)
+/obj/item/food/csandwich/examine(mob/user)
 	. = ..(user)
 	var/obj/item/O = pick(contents)
 	to_chat(user, "<span class='warning'>You think you can see [O.name] in there.</span>")
 
-/obj/item/chems/food/csandwich/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+/obj/item/food/csandwich/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/obj/item/shard = locate() in get_contained_external_atoms() // grab early in case of qdele
 	. = ..()
 	if(. && target == user)

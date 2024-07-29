@@ -112,7 +112,7 @@
 		if( !movement_target || !(movement_target.loc in oview(body, 3)) )
 			movement_target = null
 			resume_wandering()
-			for(var/obj/item/chems/food/S in oview(body, 3))
+			for(var/obj/item/food/S in oview(body, 3))
 				if(isturf(S.loc) || ishuman(S.loc))
 					movement_target = S
 					break

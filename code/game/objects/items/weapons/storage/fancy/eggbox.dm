@@ -8,7 +8,7 @@
 	icon_state = ICON_STATE_WORLD
 	item_state = null
 	w_class = ITEM_SIZE_NORMAL
-	key_type = /obj/item/chems/food/egg
+	key_type = /obj/item/food/egg
 	use_single_icon_overlay_state = "eggbox"
 	storage = /datum/storage/box/egg
 
@@ -28,22 +28,22 @@
 	return overlay
 
 /obj/item/box/fancy/egg_box/WillContain()
-	return list(/obj/item/chems/food/egg = 12)
+	return list(/obj/item/food/egg = 12)
 
 // Subtypes below.
 /obj/item/box/fancy/egg_box/assorted/WillContain()
 	return list(
-		/obj/item/chems/food/egg         = 1,
-		/obj/item/chems/food/egg/blue    = 1,
-		/obj/item/chems/food/egg/green   = 1,
-		/obj/item/chems/food/egg/mime    = 1,
-		/obj/item/chems/food/egg/orange  = 1,
-		/obj/item/chems/food/egg/purple  = 1,
-		/obj/item/chems/food/egg/rainbow = 1,
-		/obj/item/chems/food/egg/red     = 1,
-		/obj/item/chems/food/egg/yellow  = 1,
-		/obj/item/chems/food/boiledegg   = 1,
-		/obj/item/chems/food/egg/lizard  = 1
+		/obj/item/food/egg         = 1,
+		/obj/item/food/egg/blue    = 1,
+		/obj/item/food/egg/green   = 1,
+		/obj/item/food/egg/mime    = 1,
+		/obj/item/food/egg/orange  = 1,
+		/obj/item/food/egg/purple  = 1,
+		/obj/item/food/egg/rainbow = 1,
+		/obj/item/food/egg/red     = 1,
+		/obj/item/food/egg/yellow  = 1,
+		/obj/item/food/boiledegg   = 1,
+		/obj/item/food/egg/lizard  = 1
 	)
 
 /obj/item/box/fancy/egg_box/empty/WillContain()

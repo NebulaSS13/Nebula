@@ -7,7 +7,7 @@
 	bone_amount   = 1
 	skin_amount   = 1
 	must_use_hook = FALSE
-	gut_type = /obj/item/chems/food/butchery/offal/small
+	gut_type = /obj/item/food/butchery/offal/small
 
 /decl/butchery_data/animal/reptile/space_dragon/harvest_bones(mob/living/donor)
 	. = ..()

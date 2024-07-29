@@ -10,7 +10,7 @@
 		"the master blueprints"              = /obj/item/blueprints,
 		"a nasa voidsuit"                    = /obj/item/clothing/suit/space/void,
 		"full tank of hydrogen"              = /obj/item/tank/hydrogen,
-		"a piece of corgi meat"              = /obj/item/chems/food/butchery/meat/corgi,
+		"a piece of corgi meat"              = /obj/item/food/butchery/meat/corgi,
 		"a chief science officer's jumpsuit" = /obj/item/clothing/jumpsuit/research_director,
 		"a chief engineer's jumpsuit"        = /obj/item/clothing/jumpsuit/chief_engineer,
 		"a chief medical officer's jumpsuit" = /obj/item/clothing/jumpsuit/chief_medical_officer,

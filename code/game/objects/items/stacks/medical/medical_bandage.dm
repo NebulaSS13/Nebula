@@ -39,7 +39,7 @@
 /obj/item/stack/medical/bandage/attackby(obj/item/used_item, mob/living/user)
 
 	// Making a poultice.
-	if(istype(used_item, /obj/item/chems) && used_item.reagents && !istype(used_item, /obj/item/chems/food) && ATOM_IS_OPEN_CONTAINER(used_item))
+	if(istype(used_item, /obj/item/chems) && used_item.reagents && ATOM_IS_OPEN_CONTAINER(used_item))
 
 		var/create_poultices = get_amount()
 		var/missing_reagent = FALSE

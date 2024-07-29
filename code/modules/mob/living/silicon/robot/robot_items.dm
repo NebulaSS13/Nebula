@@ -374,8 +374,8 @@
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5
 	var/list/fuel_types = list(
-		/obj/item/chems/food/butchery/meat = 2,
-		/obj/item/chems/food/butchery/meat/fish = 1.5
+		/obj/item/food/butchery/meat = 2,
+		/obj/item/food/butchery/meat/fish = 1.5
 	)
 
 /obj/item/bioreactor/attack_self(var/mob/user)
@@ -390,7 +390,7 @@
 	if(!proximity_flag || !istype(target))
 		return
 
-	var/is_fuel = istype(target, /obj/item/chems/food/grown)
+	var/is_fuel = istype(target, /obj/item/food/grown)
 	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
 
 	if(!is_fuel)
@@ -421,7 +421,7 @@
 
 	for(var/thing in contents)
 		var/atom/A = thing
-		if(istype(A, /obj/item/chems/food/grown))
+		if(istype(A, /obj/item/food/grown))
 			generating_power = base_power_generation
 			using_item = A
 		else

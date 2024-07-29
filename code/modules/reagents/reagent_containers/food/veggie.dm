@@ -2,7 +2,7 @@
 // Veggie Foods //
 //////////////////
 
-/obj/item/chems/food/aesirsalad
+/obj/item/food/aesirsalad
 	name = "\improper Aether salad"
 	desc = "Probably too incredible for mortal men to fully enjoy."
 	icon_state = "aesirsalad"
@@ -13,11 +13,11 @@
 	nutriment_desc = list("apples" = 3,"salad" = 4, "quintessence" = 2)
 	bitesize = 3
 
-/obj/item/chems/food/aesirsalad/populate_reagents()
+/obj/item/food/aesirsalad/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/regenerator, 8)
 
-/obj/item/chems/food/tossedsalad
+/obj/item/food/tossedsalad
 	name = "tossed salad"
 	desc = "A proper salad, basic and simple, with little bits of carrot, tomato and apple intermingled. Vegan!"
 	icon_state = "herbsalad"
@@ -28,7 +28,7 @@
 	nutriment_amt = 8
 	bitesize = 3
 
-/obj/item/chems/food/validsalad
+/obj/item/food/validsalad
 	name = "valid salad"
 	desc = "It's just a salad of questionable 'herbs' with meatballs and fried potato slices. Nothing suspicious about it."
 	icon_state = "validsalad"
@@ -39,11 +39,11 @@
 	nutriment_amt = 6
 	bitesize = 3
 
-/obj/item/chems/food/validsalad/populate_reagents()
+/obj/item/food/validsalad/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
-/obj/item/chems/food/hugemushroomslice
+/obj/item/food/hugemushroomslice
 	name = "huge mushroom slice"
 	desc = "A slice from a huge mushroom."
 	icon_state = "hugemushroomslice"
@@ -53,6 +53,6 @@
 	nutriment_desc = list("raw" = 2, "mushroom" = 2)
 	bitesize = 6
 
-/obj/item/chems/food/hugemushroomslice/populate_reagents()
+/obj/item/food/hugemushroomslice/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/psychotropics, 3)

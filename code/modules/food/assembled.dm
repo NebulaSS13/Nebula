@@ -3,10 +3,10 @@
 /// The ingredient can be a typepath or a grown_tag string (used for mobs or plants)
 /// The product can be a typepath or a list of typepaths, which will prompt the user.
 /// TODO: validate that these products are properly ordered
-/obj/item/chems/food/proc/get_combined_food_products()
+/obj/item/food/proc/get_combined_food_products()
 	return
 
-/obj/item/chems/food/attackby(obj/item/W, mob/living/user)
+/obj/item/food/attackby(obj/item/W, mob/living/user)
 
 	if(W?.storage)
 		return ..()
@@ -35,10 +35,10 @@
 
 	return ..()
 
-/obj/item/chems/food/proc/get_grown_tag()
+/obj/item/food/proc/get_grown_tag()
 	return
 
-/obj/item/chems/food/proc/try_create_combination(obj/item/W, mob/user)
+/obj/item/food/proc/try_create_combination(obj/item/W, mob/user)
 	if(!length(get_combined_food_products()) || !istype(W) || QDELETED(src) || QDELETED(W))
 		return FALSE
 
@@ -48,8 +48,8 @@
 		return FALSE
 
 	var/create_type = combined_food_products[W.type]
-	if(!create_type && istype(W, /obj/item/chems/food))
-		var/obj/item/chems/food/food = W
+	if(!create_type && istype(W, /obj/item/food))
+		var/obj/item/food/food = W
 		var/check_grown_tag = food.get_grown_tag()
 		if(check_grown_tag)
 			create_type = combined_food_products[check_grown_tag]
@@ -65,7 +65,7 @@
 
 	// TODO: move reagents/matter into produced food object.
 	if(ispath(create_type) && user.canUnEquip(src))
-		var/obj/item/chems/food/result = new create_type()
+		var/obj/item/food/result = new create_type()
 		//If the snack was in your hands, the result will be too
 		if (src in user.get_held_item_slots())
 			user.drop_from_inventory(src)
@@ -78,12 +78,12 @@
 		return TRUE
 
 	// Reverse the interaction to avoid the dumb thing where combinations aren't commutative.
-	var/obj/item/chems/food/food = W
+	var/obj/item/food/food = W
 	if(istype(food))
 		return food.try_create_combination(src, user)
 	return FALSE
 
-/obj/item/chems/food/examine(mob/user, distance)
+/obj/item/food/examine(mob/user, distance)
 	. = ..()
 	if(distance > 1)
 		return
@@ -102,124 +102,124 @@
 			product_string = "\a [atom_info_repository.get_name_for(product)]"
 		to_chat(user, SPAN_NOTICE("With this and \a [atom_info_repository.get_name_for(thing_type)], you could make [product_string]."))
 
-/obj/item/chems/food/bun/get_combined_food_products()
+/obj/item/food/bun/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/meatball         = /obj/item/chems/food/burger,
-		/obj/item/chems/food/butchery/cutlet           = /obj/item/chems/food/hamburger,
-		/obj/item/chems/food/sausage          = /obj/item/chems/food/hotdog,
-		/obj/item/robot_parts/head            = /obj/item/chems/food/roburger,
-		/obj/item/holder/corgi                = /obj/item/chems/food/classichotdog,
-		/obj/item/chems/food/butchery/cutlet           = /obj/item/chems/food/burger,
-		/obj/item/organ/internal/brain        = /obj/item/chems/food/brainburger,
-		/obj/item/chems/food/xenomeat         = /obj/item/chems/food/xenoburger,
-		/obj/item/chems/food/butchery/meat/fish             = /obj/item/chems/food/fishburger,
-		/obj/item/chems/food/tofu             = /obj/item/chems/food/tofuburger,
-		/obj/item/ectoplasm                   = /obj/item/chems/food/ghostburger,
-		/obj/item/clothing/mask/gas/clown_hat = /obj/item/chems/food/clownburger,
-		/obj/item/clothing/head/beret         = /obj/item/chems/food/mimeburger,
-		/obj/item/chems/food/bun              = /obj/item/chems/food/bunbun,
-		/obj/item/chems/food/sausage          = /obj/item/chems/food/hotdog
+		/obj/item/food/meatball         = /obj/item/food/burger,
+		/obj/item/food/butchery/cutlet           = /obj/item/food/hamburger,
+		/obj/item/food/sausage          = /obj/item/food/hotdog,
+		/obj/item/robot_parts/head            = /obj/item/food/roburger,
+		/obj/item/holder/corgi                = /obj/item/food/classichotdog,
+		/obj/item/food/butchery/cutlet           = /obj/item/food/burger,
+		/obj/item/organ/internal/brain        = /obj/item/food/brainburger,
+		/obj/item/food/xenomeat         = /obj/item/food/xenoburger,
+		/obj/item/food/butchery/meat/fish             = /obj/item/food/fishburger,
+		/obj/item/food/tofu             = /obj/item/food/tofuburger,
+		/obj/item/ectoplasm                   = /obj/item/food/ghostburger,
+		/obj/item/clothing/mask/gas/clown_hat = /obj/item/food/clownburger,
+		/obj/item/clothing/head/beret         = /obj/item/food/mimeburger,
+		/obj/item/food/bun              = /obj/item/food/bunbun,
+		/obj/item/food/sausage          = /obj/item/food/hotdog
 	)
 	return combined_food_products
 
-/obj/item/chems/food/twobread/get_combined_food_products()
+/obj/item/food/twobread/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/slice/bread = /obj/item/chems/food/threebread
+		/obj/item/food/slice/bread = /obj/item/food/threebread
 	)
 	return combined_food_products
 
-/obj/item/chems/food/doughslice/get_combined_food_products()
+/obj/item/food/doughslice/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/meatball    = /obj/item/chems/food/donkpocket,
-		/obj/item/chems/food/meatball/raw = list(
-			/obj/item/chems/food/pelmen,
-			/obj/item/chems/food/donkpocket
+		/obj/item/food/meatball    = /obj/item/food/donkpocket,
+		/obj/item/food/meatball/raw = list(
+			/obj/item/food/pelmen,
+			/obj/item/food/donkpocket
 		)
 	)
 	return combined_food_products
 
-/obj/item/chems/food/burger/get_combined_food_products()
+/obj/item/food/burger/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger,
-		/obj/item/clothing/head/wizard   = /obj/item/chems/food/spellburger
+		/obj/item/food/cheesewedge = /obj/item/food/cheeseburger,
+		/obj/item/clothing/head/wizard   = /obj/item/food/spellburger
 	)
 	return combined_food_products
 
-/obj/item/chems/food/hamburger/get_combined_food_products()
+/obj/item/food/hamburger/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger
+		/obj/item/food/cheesewedge = /obj/item/food/cheeseburger
 	)
 	return combined_food_products
 
-/obj/item/chems/food/human/burger/get_combined_food_products()
+/obj/item/food/human/burger/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger
+		/obj/item/food/cheesewedge = /obj/item/food/cheeseburger
 	)
 	return combined_food_products
 
 // Spaghetti + meatball = spaghetti with meatball(s)
-/obj/item/chems/food/boiledspagetti/get_combined_food_products()
+/obj/item/food/boiledspagetti/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/meatball = /obj/item/chems/food/meatballspagetti,
-		/obj/item/stack/nanopaste     = /obj/item/chems/food/nanopasta
+		/obj/item/food/meatball = /obj/item/food/meatballspagetti,
+		/obj/item/stack/nanopaste     = /obj/item/food/nanopasta
 	)
 	return combined_food_products
 
 // Spaghetti with meatballs + meatball = spaghetti with more meatball(s)
-/obj/item/chems/food/meatballspagetti/get_combined_food_products()
+/obj/item/food/meatballspagetti/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/meatball = /obj/item/chems/food/spesslaw
+		/obj/item/food/meatball = /obj/item/food/spesslaw
 	)
 	return combined_food_products
 
-/obj/item/chems/food/butchery/cutlet/raw/get_combined_food_products()
+/obj/item/food/butchery/cutlet/raw/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/meatball/raw = /obj/item/chems/food/sausage
+		/obj/item/food/meatball/raw = /obj/item/food/sausage
 	)
 	return combined_food_products
 
-/obj/item/chems/food/meatball/raw/get_combined_food_products()
+/obj/item/food/meatball/raw/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/butchery/cutlet/raw = /obj/item/chems/food/sausage
+		/obj/item/food/butchery/cutlet/raw = /obj/item/food/sausage
 	)
 	return combined_food_products
 
-/obj/item/chems/food/sausage/get_combined_food_products()
+/obj/item/food/sausage/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/meatball/raw = /obj/item/chems/food/fatsausage,
-		/obj/item/chems/food/butchery/cutlet/raw   = /obj/item/chems/food/fatsausage
+		/obj/item/food/meatball/raw = /obj/item/food/fatsausage,
+		/obj/item/food/butchery/cutlet/raw   = /obj/item/food/fatsausage
 	)
 	return combined_food_products
 
-/obj/item/chems/food/sliceable/flatdough/get_combined_food_products()
+/obj/item/food/sliceable/flatdough/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/butchery/cutlet   = /obj/item/chems/food/meatpie/raw,
-		/obj/item/chems/food/tofu     = /obj/item/chems/food/tofupie/raw,
-		/obj/item/chems/food/xenomeat = /obj/item/chems/food/xemeatpie/raw,
-		"apple"                       = /obj/item/chems/food/applepie/raw,
-		"berries"                     = /obj/item/chems/food/berryclafoutis/raw,
-		"plumphelmet"                 = /obj/item/chems/food/plump_pie/raw
+		/obj/item/food/butchery/cutlet   = /obj/item/food/meatpie/raw,
+		/obj/item/food/tofu     = /obj/item/food/tofupie/raw,
+		/obj/item/food/xenomeat = /obj/item/food/xemeatpie/raw,
+		"apple"                       = /obj/item/food/applepie/raw,
+		"berries"                     = /obj/item/food/berryclafoutis/raw,
+		"plumphelmet"                 = /obj/item/food/plump_pie/raw
 	)
 	return combined_food_products
 
 // This one looks slightly weird but the attackby() proc should mirror it to the potato.
-/obj/item/chems/food/cheesewedge/get_combined_food_products()
+/obj/item/food/cheesewedge/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		"potato" = /obj/item/chems/food/loadedbakedpotato/raw
+		"potato" = /obj/item/food/loadedbakedpotato/raw
 	)
 	return combined_food_products
 
-/obj/item/chems/food/fries/get_combined_food_products()
+/obj/item/food/fries/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheesyfries/uncooked
+		/obj/item/food/cheesewedge = /obj/item/food/cheesyfries/uncooked
 	)
 	return combined_food_products
 
-/obj/item/chems/food/meatpie/raw/cooked_food           = FOOD_RAW
-/obj/item/chems/food/tofupie/raw/cooked_food           = FOOD_RAW
-/obj/item/chems/food/xemeatpie/raw/cooked_food         = FOOD_RAW
-/obj/item/chems/food/applepie/raw/cooked_food          = FOOD_RAW
-/obj/item/chems/food/berryclafoutis/raw/cooked_food    = FOOD_RAW
-/obj/item/chems/food/plump_pie/raw/cooked_food         = FOOD_RAW
-/obj/item/chems/food/loadedbakedpotato/raw/cooked_food = FOOD_RAW
-/obj/item/chems/food/cheesyfries/uncooked/cooked_food  = FOOD_PREPARED // No penalty for eating it, but nicer cooked.
+/obj/item/food/meatpie/raw/cooked_food           = FOOD_RAW
+/obj/item/food/tofupie/raw/cooked_food           = FOOD_RAW
+/obj/item/food/xemeatpie/raw/cooked_food         = FOOD_RAW
+/obj/item/food/applepie/raw/cooked_food          = FOOD_RAW
+/obj/item/food/berryclafoutis/raw/cooked_food    = FOOD_RAW
+/obj/item/food/plump_pie/raw/cooked_food         = FOOD_RAW
+/obj/item/food/loadedbakedpotato/raw/cooked_food = FOOD_RAW
+/obj/item/food/cheesyfries/uncooked/cooked_food  = FOOD_PREPARED // No penalty for eating it, but nicer cooked.

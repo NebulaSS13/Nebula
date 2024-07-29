@@ -19,8 +19,8 @@
 
 /obj/structure/closet/secure_closet/freezer/meat/WillContain()
 	return list(
-		/obj/item/chems/food/butchery/meat/beef = 8,
-		/obj/item/chems/food/butchery/meat/fish = 4
+		/obj/item/food/butchery/meat/beef = 8,
+		/obj/item/food/butchery/meat/fish = 4
 	)
 
 /obj/structure/closet/secure_closet/freezer/fridge

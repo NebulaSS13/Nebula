@@ -32,7 +32,7 @@
 
 /turf/floor/natural/mud/drop_diggable_resources()
 	if(get_physical_height() > -(FLUID_DEEP) && prob(15))
-		new /obj/item/chems/food/worm(src)
+		new /obj/item/food/worm(src)
 	return ..()
 
 /turf/floor/natural/mud/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

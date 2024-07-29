@@ -25,7 +25,7 @@
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_SMALL
 	can_hold = list(
-		/obj/item/chems/food/grown,
+		/obj/item/food/grown,
 		/obj/item/seeds
 	)
 	allow_quick_gather = TRUE

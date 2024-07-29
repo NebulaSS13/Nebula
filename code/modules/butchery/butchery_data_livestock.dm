@@ -1,15 +1,15 @@
 /decl/butchery_data/animal/ruminant
 	abstract_type = /decl/butchery_data/animal/ruminant
-	stomach_type  = /obj/item/chems/food/butchery/stomach/ruminant
+	stomach_type  = /obj/item/food/butchery/stomach/ruminant
 
 /decl/butchery_data/animal/ruminant/harvest_meat(mob/donor)
 	var/static/list/extra_product = list(
-		/obj/item/chems/food/butchery/haunch/shoulder,
-		/obj/item/chems/food/butchery/haunch/shoulder,
-		/obj/item/chems/food/butchery/haunch/side,
-		/obj/item/chems/food/butchery/haunch/side,
-		/obj/item/chems/food/butchery/haunch,
-		/obj/item/chems/food/butchery/haunch
+		/obj/item/food/butchery/haunch/shoulder,
+		/obj/item/food/butchery/haunch/shoulder,
+		/obj/item/food/butchery/haunch/side,
+		/obj/item/food/butchery/haunch/side,
+		/obj/item/food/butchery/haunch,
+		/obj/item/food/butchery/haunch
 	)
 	var/create_turf = get_turf(donor)
 	for(var/product in extra_product)
@@ -18,7 +18,7 @@
 
 /decl/butchery_data/animal/ruminant/goat
 	meat_name       = "chevon"
-	meat_type       = /obj/item/chems/food/butchery/meat/goat
+	meat_type       = /obj/item/food/butchery/meat/goat
 	meat_amount     = 4
 	bone_amount     = 8
 	skin_material   = /decl/material/solid/organic/skin/goat
@@ -27,7 +27,7 @@
 
 /decl/butchery_data/animal/ruminant/deer
 	meat_name       = "venison"
-	meat_type       = /obj/item/chems/food/butchery/meat
+	meat_type       = /obj/item/food/butchery/meat
 	meat_amount     = 5
 	bone_amount     = 9
 	skin_material   = /decl/material/solid/organic/skin/deer
@@ -39,7 +39,7 @@
 
 /decl/butchery_data/animal/ruminant/cow
 	meat_name     = "beef"
-	meat_type     = /obj/item/chems/food/butchery/meat/beef
+	meat_type     = /obj/item/food/butchery/meat/beef
 	meat_amount   = 6
 	bone_amount   = 10
 	skin_material = /decl/material/solid/organic/skin/cow
@@ -47,7 +47,7 @@
 
 /decl/butchery_data/animal/small/fowl
 	meat_name       = "fowl"
-	meat_type       = /obj/item/chems/food/butchery/meat/chicken
+	meat_type       = /obj/item/food/butchery/meat/chicken
 	meat_material   = /decl/material/solid/organic/meat/chicken
 	meat_amount     = 2
 	bone_amount     = 2

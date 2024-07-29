@@ -166,7 +166,7 @@
 				SPAN_NOTICE("You slice \the [src]!")
 			)
 		for(var/i = 1 to slice_amount)
-			new /obj/item/chems/food/processed_grown/chopped(loc, material?.type, plant)
+			new /obj/item/food/processed_grown/chopped(loc, material?.type, plant)
 		qdel(src)
 		return TRUE
 	return ..()

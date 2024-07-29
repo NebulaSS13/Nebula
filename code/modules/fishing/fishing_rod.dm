@@ -237,7 +237,7 @@
 	if(load_line(user, W))
 		return TRUE
 
-	if(istype(W, /obj/item/chems/food))
+	if(istype(W, /obj/item/food))
 
 		if(bait)
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [bait] on the hook."))

@@ -30,7 +30,7 @@
 			return TRUE
 
 	// Skim off any slag.
-	if(istype(W, /obj/item/chems) && ATOM_IS_OPEN_CONTAINER(W) && W.reagents && !istype(W, /obj/item/chems/food)) // TODO: food not being a container
+	if(istype(W, /obj/item/chems) && ATOM_IS_OPEN_CONTAINER(W) && W.reagents)
 
 		// Pour contents into the crucible.
 		if(W.reagents.total_volume)

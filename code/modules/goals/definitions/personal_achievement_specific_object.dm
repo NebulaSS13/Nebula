@@ -28,12 +28,12 @@
 	completion_message = "Ahh, that was just what you needed."
 
 /datum/goal/achievement/specific_object/food/New()
-	possible_objects = subtypesof(/obj/item/chems/food)
+	possible_objects = subtypesof(/obj/item/food)
 	blacklisted_objects = blacklisted_objects || list()
-	blacklisted_objects |= typesof(/obj/item/chems/food/amanita_pie)
-	blacklisted_objects |= typesof(/obj/item/chems/food/amanitajelly)
-	blacklisted_objects |= typesof(/obj/item/chems/food/can/caviar/true)
-	blacklisted_objects |= typesof(/obj/item/chems/food/old)
+	blacklisted_objects |= typesof(/obj/item/food/amanita_pie)
+	blacklisted_objects |= typesof(/obj/item/food/amanitajelly)
+	blacklisted_objects |= typesof(/obj/item/food/can/caviar/true)
+	blacklisted_objects |= typesof(/obj/item/food/old)
 	..()
 
 /datum/goal/achievement/specific_object/food/update_strings()

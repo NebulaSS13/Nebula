@@ -29,8 +29,8 @@
 
 		// It also means they can do the old school cartoon schtick of eating
 		// an entire sandwich and spitting up an empty plate. Ptooie.
-		if(istype(prop, /obj/item/chems/food))
-			var/obj/item/chems/food/food = prop
+		if(istype(prop, /obj/item/food))
+			var/obj/item/food/food = prop
 			var/trash = food.trash
 			_holding = null
 			qdel(prop)

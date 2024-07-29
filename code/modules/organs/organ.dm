@@ -402,7 +402,7 @@
 	target.attackby(convert_to_food(user), user)
 
 /obj/item/organ/proc/convert_to_food(mob/user)
-	var/obj/item/chems/food/organ/yum = new(get_turf(src))
+	var/obj/item/food/organ/yum = new(get_turf(src))
 	yum.SetName(name)
 	yum.appearance = src
 	if(reagents && reagents.total_volume)
@@ -651,7 +651,7 @@ var/global/list/ailment_reference_cache = list()
 	if(butchery_decl.meat_type)
 		var/list/products = butchery_decl.place_products(owner, material?.type, clamp(w_class, 1, 3), butchery_decl.meat_type)
 		if(meat_name)
-			for(var/obj/item/chems/food/butchery/product in products)
+			for(var/obj/item/food/butchery/product in products)
 				product.set_meat_name(meat_name)
 
 /obj/item/organ/physically_destroyed(skip_qdel)

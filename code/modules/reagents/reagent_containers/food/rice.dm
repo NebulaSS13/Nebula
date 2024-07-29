@@ -2,7 +2,7 @@
 // Rice //
 //////////
 
-/obj/item/chems/food/boiledrice
+/obj/item/food/boiledrice
 	name = "boiled rice"
 	desc = "White rice, a very important staple food. Goes excellent with many many things."
 	icon_state = "boiledrice"
@@ -13,7 +13,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/chazuke
+/obj/item/food/chazuke
 	name = "chazuke"
 	desc = "An ancient way of using up day-old rice, this dish is composed of plain green tea poured over plain white rice. Hopefully you have something else to put in."
 	icon_state = "chazuke"
@@ -22,13 +22,13 @@
 	nutriment_desc = list("green tea" = 2, "mild rice" = 2)
 	bitesize = 3
 	nutriment_amt = 5
-	nutriment_type = /decl/material/liquid/nutriment/rice 
+	nutriment_type = /decl/material/liquid/nutriment/rice
 
-/obj/item/chems/food/chazuke/populate_reagents()
+/obj/item/food/chazuke/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/tea/green, 1)
 
-/obj/item/chems/food/katsucurry
+/obj/item/food/katsucurry
 	name = "katsu curry"
 	desc = "An oriental curry dish made from apples, potatoes, and carrots. Served with rice and breaded chicken."
 	icon_state = "katsu"
@@ -39,7 +39,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/ricepudding
+/obj/item/food/ricepudding
 	name = "rice pudding"
 	desc = "Where's the jam?"
 	icon_state = "rpudding"

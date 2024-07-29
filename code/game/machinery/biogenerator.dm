@@ -28,7 +28,7 @@
 		"Food" = list(
 			/obj/item/chems/drinks/milk/smallcarton = 30,
 			/obj/item/chems/drinks/milk = 50,
-			/obj/item/chems/food/butchery/meat/syntiflesh = 50,
+			/obj/item/food/butchery/meat/syntiflesh = 50,
 			/obj/item/box/fancy/egg_box = 300),
 		"Nutrients" = list(
 			/obj/item/chems/glass/bottle/eznutrient = 60,
@@ -99,7 +99,7 @@
 	else if(isobj(O))
 		if(O.storage)
 			var/hadPlants = 0
-			for(var/obj/item/chems/food/grown/G in O.storage.get_contents())
+			for(var/obj/item/food/grown/G in O.storage.get_contents())
 				hadPlants = 1
 				O.storage.remove_from_storage(user, G, src, TRUE)
 				ingredients++
@@ -112,7 +112,7 @@
 			else if(ingredients < capacity)
 				to_chat(user, "<span class='notice'>You empty \the [O] into \the [src].</span>")
 
-	else if(!istype(O, /obj/item/chems/food/grown))
+	else if(!istype(O, /obj/item/food/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
 	else if(user.try_unequip(O, src))
 		ingredients++
@@ -193,7 +193,7 @@
 		return
 
 	var/S = 0
-	for(var/obj/item/chems/food/grown/I in contents)
+	for(var/obj/item/food/grown/I in contents)
 		S += 5
 		ingredients--
 		var/amt = REAGENT_VOLUME(I.reagents, /decl/material/liquid/nutriment)

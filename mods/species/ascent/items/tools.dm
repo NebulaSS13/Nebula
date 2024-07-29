@@ -42,14 +42,14 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	desc = "An alien portable long term storage device for potable water."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 
-/obj/item/chems/food/hydration
+/obj/item/food/hydration
 	name = "hydration ration"
 	desc = "Approximately ten units of liquid hydration in a edible membrane. Unflavored."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 	icon_state = "h2o_ration"
 	bitesize = 10
 
-/obj/item/chems/food/hydration/populate_reagents()
+/obj/item/food/hydration/populate_reagents()
 	add_to_reagents(/decl/material/liquid/water, 10)
 	. = ..()
 

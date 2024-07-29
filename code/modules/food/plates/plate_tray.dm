@@ -17,7 +17,7 @@
 	var/no_drop          = FALSE
 
 // Override this so we can use our storage.
-/obj/item/plate/tray/try_plate_food(obj/item/chems/food/food, mob/user)
+/obj/item/plate/tray/try_plate_food(obj/item/food/food, mob/user)
 	return FALSE
 
 /obj/item/plate/tray/resolve_attackby(var/atom/A, mob/user)

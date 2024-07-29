@@ -274,8 +274,8 @@ var/global/chicken_count = 0
 		global.chicken_count -= 1
 
 /mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/chems/food)) //feedin' dem chickens
-		var/obj/item/chems/food/G = O
+	if(istype(O, /obj/item/food)) //feedin' dem chickens
+		var/obj/item/food/G = O
 		if(findtext(G.get_grown_tag(), "wheat")) // includes chopped, crushed, dried etc.
 			if(!stat && eggsleft < 8)
 				user.visible_message("<span class='notice'>[user] feeds [O] to [name]! It clucks happily.</span>","<span class='notice'>You feed [O] to [name]! It clucks happily.</span>")
@@ -292,7 +292,7 @@ var/global/chicken_count = 0
 	if((. = ..()) && prob(3) && eggsleft > 0)
 		visible_message("[src] [pick("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")]")
 		eggsleft--
-		var/obj/item/chems/food/egg/E = new(get_turf(src))
+		var/obj/item/food/egg/E = new(get_turf(src))
 		E.pixel_x = rand(-6,6)
 		E.pixel_y = rand(-6,6)
 		if(chicken_count < MAX_CHICKENS && prob(10))
@@ -328,15 +328,15 @@ var/global/chicken_count = 0
 		else
 			icon = 'icons/mob/simple_animal/duck_white.dmi'
 
-/obj/item/chems/food/egg
+/obj/item/food/egg
 	var/amount_grown = 0
 
-/obj/item/chems/food/egg/Destroy()
+/obj/item/food/egg/Destroy()
 	if(amount_grown)
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/chems/food/egg/Process()
+/obj/item/food/egg/Process()
 	if(isturf(loc))
 		amount_grown += rand(1,2)
 		if(amount_grown >= 100)
