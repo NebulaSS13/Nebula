@@ -57,7 +57,7 @@
 
 	var/reaction_volume = holder.maximum_volume
 	for(var/reactant in required_reagents)
-		var/A = NONUNIT_FLOOR(REAGENT_VOLUME(holder, reactant) / required_reagents[reactant] / limit, MINIMUM_CHEMICAL_VOLUME)  // How much of this reagent we are allowed to use
+		var/A = CHEMS_QUANTIZE(REAGENT_VOLUME(holder, reactant) / required_reagents[reactant] / limit)  // How much of this reagent we are allowed to use
 		if(reaction_volume > A)
 			reaction_volume = A
 
