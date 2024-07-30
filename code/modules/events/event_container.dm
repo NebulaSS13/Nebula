@@ -15,7 +15,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	if(!next_event_time)
 		set_event_delay()
 
-	if(delayed || !get_config_value(/decl/config/toggle/allow_random_events))
+	if(delayed || !get_config_value(/decl/config/toggle/on/allow_random_events))
 		next_event_time += (world.time - last_world_time)
 	else if(world.time > next_event_time)
 		start_event()
