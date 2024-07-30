@@ -88,11 +88,11 @@
  * AI - Not really intelligent, but I'm calling it AI anyway.
  */
 /datum/mob_controller/aggressive/parrot/do_process()
-	. = ..()
-	if(!body || body.stat || !istype(body, /mob/living/simple_animal/hostile/parrot))
-		return
-	var/mob/living/simple_animal/hostile/parrot/parrot = body
 
+	if(!(. = ..()) || body.stat || !istype(body, /mob/living/simple_animal/hostile/parrot))
+		return
+
+	var/mob/living/simple_animal/hostile/parrot/parrot = body
 	if(!isturf(parrot.loc))
 		return // Let's not bother in nullspace
 

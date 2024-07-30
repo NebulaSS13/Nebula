@@ -28,8 +28,8 @@
 	return ..()
 
 /datum/mob_controller/aggressive/do_process()
-	. = ..()
-	if(QDELETED(body) || body.stat)
+
+	if(!(. = ..()))
 		return
 
 	if(!body.can_act())

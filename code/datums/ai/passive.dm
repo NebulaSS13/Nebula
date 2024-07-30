@@ -8,37 +8,49 @@
 	//see if we should stop fleeing
 	var/atom/flee_target_atom = flee_target?.resolve()
 	if(istype(flee_target_atom) && (flee_target_atom.loc in view(body)))
-		if(body.MayMove())
-			walk_away(body, flee_target_atom, 7, 2)
+		startle()
 		stop_wandering()
-	else
-		flee_target = null
-		resume_wandering()
-	return !isnull(flee_target)
+		if(body.MayMove())
+			var/static/datum/automove_metadata/_passive_flee_metadata = new(
+				_avoid_target = TRUE,
+				_acceptable_distance = 6
+			)
+			body.set_moving_quickly()
+			body.start_automove(flee_target_atom, metadata = _passive_flee_metadata)
+			return TRUE
+
+	flee_target = null
+	body.set_moving_slowly()
+	body.stop_automove()
+	resume_wandering()
+	return FALSE
 
 /datum/mob_controller/passive/do_process(time_elapsed)
-	..()
+
+	if(!(. = ..()))
+		return
 
 	// Handle fleeing from aggressors.
-	turns_since_scan++
-	if (turns_since_scan > 10)
-		body.stop_automove()
-		turns_since_scan = 0
-		if(update_targets())
-			return
+	if(body.stat == CONSCIOUS)
+		turns_since_scan++
+		if (turns_since_scan > 10)
+			turns_since_scan = 0
+			if(update_targets())
+				return
 
 	// Handle sleeping or wandering.
-	if(body.stat == CONSCIOUS && prob(0.25))
-		body.set_stat(UNCONSCIOUS)
-		do_wander = FALSE
-		speak_chance = 0
-	else if(body.stat == UNCONSCIOUS && prob(0.5))
-		body.set_stat(CONSCIOUS)
-		do_wander = TRUE
+	if(isnull(flee_target))
+		if(body.stat == CONSCIOUS && prob(0.25))
+			body.set_stat(UNCONSCIOUS)
+			do_wander = FALSE
+			speak_chance = 0
+		else if(body.stat == UNCONSCIOUS && prob(0.5))
+			body.set_stat(CONSCIOUS)
+			do_wander = TRUE
 
 /datum/mob_controller/passive/retaliate(atom/source)
 	if((. = ..()))
 		source = source || get_turf(body)
 		if(istype(source))
 			flee_target = weakref(source)
-			turns_since_scan = 10
+			update_targets()

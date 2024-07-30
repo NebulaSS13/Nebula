@@ -58,11 +58,14 @@
 		body.update_icon()
 
 /datum/mob_controller/slime/do_process(time_elapsed)
-	. = ..()
+
+	if(!(. = ..()))
+		return
+
 	if(attacked > 0)
 		attacked = clamp(attacked--, 0, 50)
 
-	if(!slime || !body || HAS_STATUS(slime, STAT_CONFUSE))
+	if(!slime || body.stat || HAS_STATUS(slime, STAT_CONFUSE))
 		return
 
 	// A hungry slime begins losing its friends.

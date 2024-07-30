@@ -42,8 +42,7 @@
 
 /datum/mob_controller/aggressive/goat/do_process(time_elapsed)
 
-	. = ..()
-	if(QDELETED(body) || body.stat)
+	if(!(. = ..()) || body.stat)
 		return
 
 	//chance to go crazy and start wacking stuff

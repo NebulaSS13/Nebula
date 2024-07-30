@@ -543,3 +543,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/get_attack_telegraph_delay()
 	return attack_delay
+
+/mob/living/simple_animal/set_stat(var/new_stat)
+	if((. = ..()))
+		queue_icon_update()

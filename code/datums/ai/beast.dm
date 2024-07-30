@@ -6,7 +6,8 @@
 
 /datum/mob_controller/aggressive/beast/do_process(time_elapsed)
 
-	. = ..()
+	if(!(. = ..()))
+		return
 
 	var/mob/living/simple_animal/hostile/beast/beast = body
 	if(!istype(beast))

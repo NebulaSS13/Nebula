@@ -110,11 +110,12 @@
 /datum/mob_controller/proc/do_process()
 	SHOULD_CALL_PARENT(TRUE)
 	if(!body || QDELETED(body))
-		return
+		return FALSE
 	if(!body.stat)
 		try_unbuckle()
 		try_wander()
 		try_bark()
+	return TRUE
 
 // The mob will try to unbuckle itself from nets, beds, chairs, etc.
 /datum/mob_controller/proc/try_unbuckle()
@@ -215,10 +216,18 @@
 /datum/mob_controller/proc/open_fire()
 	return
 
+/datum/mob_controller/proc/startle()
+	if(QDELETED(body) || body.stat != UNCONSCIOUS)
+		return
+	body.set_stat(CONSCIOUS)
+	if(body.current_posture?.prone)
+		body.set_posture(/decl/posture/standing)
+
 /datum/mob_controller/proc/retaliate(atom/source)
 	SHOULD_CALL_PARENT(TRUE)
-	if(!istype(body) || body.stat)
+	if(!istype(body) || body.stat == DEAD)
 		return FALSE
+	startle()
 	if(isliving(source))
 		remove_friend(source)
 	return TRUE

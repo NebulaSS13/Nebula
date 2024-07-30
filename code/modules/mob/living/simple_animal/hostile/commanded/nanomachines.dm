@@ -25,7 +25,10 @@
 	sharp = TRUE
 
 /datum/mob_controller/aggressive/commanded/nanomachines/do_process(time_elapsed)
-	. = ..()
+
+	if(!(. = ..()) || body.stat)
+		return
+
 	switch(stance)
 		if(STANCE_COMMANDED_HEAL)
 			if(!get_target())

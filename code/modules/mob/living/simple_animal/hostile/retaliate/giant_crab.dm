@@ -35,7 +35,8 @@
 	can_escape_buckles = TRUE
 
 /datum/mob_controller/aggressive/giant_crab/do_process(time_elapsed)
-	. = ..()
+	if(!(. = ..()))
+		return
 	var/mob/living/simple_animal/hostile/giant_crab/crab = body
 	if(!istype(crab) || body.stat)
 		return

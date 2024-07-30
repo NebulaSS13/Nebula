@@ -23,8 +23,7 @@
 	password = message
 
 /datum/mob_controller/faithful_hound/do_process()
-	. = ..()
-	if(body.stat || body.client || world.time <= last_check)
+	if(!(. = ..()) || body.client || world.time <= last_check)
 		return
 	last_check = world.time + 5 SECONDS
 	var/aggressiveness = 0 //The closer somebody is to us, the more aggressive we are

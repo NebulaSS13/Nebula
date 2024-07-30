@@ -16,8 +16,7 @@
 		protect(paired_nurse)
 
 /datum/mob_controller/aggressive/giant_spider/guard/handle_death(gibbed)
-	. = ..()
-	if(paired_nurse)
+	if((. = ..()) && paired_nurse)
 		var/datum/mob_controller/aggressive/giant_spider/nurse/paired_nurse_instance = paired_nurse.resolve()
 		if(istype(paired_nurse_instance) && paired_nurse_instance.paired_guard == weakref(src))
 			paired_nurse_instance.paired_guard = null

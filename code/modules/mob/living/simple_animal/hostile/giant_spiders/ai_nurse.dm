@@ -11,9 +11,8 @@
 	)
 
 /datum/mob_controller/aggressive/giant_spider/nurse/do_process(time_elapsed)
-	. = ..()
 
-	if(get_activity() != AI_ACTIVITY_IDLE || get_stance() != STANCE_IDLE)
+	if(!(. = ..()) || get_activity() != AI_ACTIVITY_IDLE || get_stance() != STANCE_IDLE)
 		return // We are doing something else, let it play out.
 
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/spooder = body

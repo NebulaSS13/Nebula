@@ -98,8 +98,8 @@
 		body.custom_emote(VISIBLE_MESSAGE, "stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
 /datum/mob_controller/corgi/ian/do_process(time_elapsed)
-	. = ..()
-	if(body.stat || body.current_posture?.prone || body.buckled)
+
+	if(!(. = ..()) || body.stat || body.current_posture?.prone || body.buckled)
 		return
 
 	//Feeding, chasing food, FOOOOODDDD
@@ -181,8 +181,8 @@
 	var/turns_since_scan = 0
 
 /datum/mob_controller/corgi/lisa/do_process(time_elapsed)
-	. = ..()
-	if(body.stat || body.current_posture?.prone || body.buckled)
+
+	if(!(. = ..()) || body.stat || body.current_posture?.prone || body.buckled)
 		return
 
 	turns_since_scan++

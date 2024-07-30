@@ -27,7 +27,10 @@
 			break
 
 /datum/mob_controller/passive/hunter/cat/do_process()
-	. = ..()
+
+	if(!(. = ..()))
+		return
+
 	if(!hunt_target && !flee_target && prob(1)) //spooky
 		var/mob/observer/ghost/spook = locate() in range(body, 5)
 		if(spook)
@@ -92,7 +95,8 @@
 
 /datum/mob_controller/passive/hunter/cat/friendly/do_process()
 
-	. = ..()
+	if(!(. = ..()))
+		return
 
 	// Get our friend.
 	var/list/friends = get_friends()

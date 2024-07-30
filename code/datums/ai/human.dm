@@ -8,7 +8,8 @@
 	if(H.stat != CONSCIOUS)
 		return
 
-	. = ..()
+	if(!(. = ..()))
+		return
 
 	if(H.get_shock() && H.shock_stage < 40 && prob(1.5))
 		H.emote(pick(/decl/emote/audible/moan, /decl/emote/audible/groan))
