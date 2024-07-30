@@ -108,3 +108,7 @@
 	if(user.a_intent == I_HURT)
 		return ..()
 	return TRUE
+
+/obj/structure/fountain/mundane/sandstone
+	material = /decl/material/solid/stone/sandstone
+	color = /decl/material/solid/stone/sandstone::color
