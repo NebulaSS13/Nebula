@@ -264,20 +264,6 @@
 /mob/living/proc/handle_random_events()
 	return
 
-/mob/living/proc/is_outside()
-	var/turf/T = loc
-	return istype(T) && T.is_outside()
-
-/mob/living/proc/get_affecting_weather()
-	var/turf/my_turf = get_turf(src)
-	if(!istype(my_turf))
-		return
-	var/turf/actual_loc = loc
-	// If we're standing in the rain, use the turf weather.
-	. = istype(actual_loc) && actual_loc.weather
-	if(!.) // If we're under or inside shelter, use the z-level rain (for ambience)
-		. = SSweather.weather_by_z[my_turf.z]
-
 /mob/living/proc/handle_contact_reagent_dripping()
 	// TODO: process dripping outside of Life() so corpses don't become sponges.
 	// TODO: factor temperature and vapor into this so warmer locations dry you off.
@@ -291,18 +277,22 @@
 	if(drip_amount)
 		touching_reagents.trans_to(loc, drip_amount)
 
-/mob/living/proc/handle_weather_effects(obj/abstract/weather_system/weather)
-	// Handle physical effects of weather.
-	if(!istype(weather))
-		return
-	var/decl/state/weather/weather_state = weather.weather_system.current_state
-	if(istype(weather_state))
-		weather_state.handle_exposure(src, get_weather_exposure(weather), weather)
+/mob/living/process_weather(obj/abstract/weather_system/weather, decl/state/weather/weather_state)
+	// Handle physical effects of weather. Ambience is handled in handle_environment with a
+	// client check as mobs with no clients don't need to handle ambient messages and sounds.
+	weather_state?.handle_exposure(src, get_weather_exposure(weather), weather)
 
 /mob/living/proc/handle_weather_ambience(obj/abstract/weather_system/weather)
 	// Refresh weather ambience.
 	// Show messages and play ambience.
-	if(!istype(weather) || !client || get_preference_value(/datum/client_preference/play_ambiance) != PREF_YES)
+	if(!istype(weather) || !client)
+		return
+
+	// Send strings if we're outside.
+	if(is_outside() && !weather.show_weather(src))
+		weather.show_wind(src)
+
+	if(get_preference_value(/datum/client_preference/play_ambiance) == PREF_NO)
 		return
 
 	// Work out if we need to change or cancel the current ambience sound.
@@ -329,9 +319,7 @@
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 	SHOULD_CALL_PARENT(TRUE)
 	handle_contact_reagent_dripping() // See comment on proc definition
-	var/weather = get_affecting_weather()
-	handle_weather_effects(weather)
-	handle_weather_ambience(weather)
+	handle_weather_ambience(get_affecting_weather())
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
 /mob/living/proc/handle_regular_status_updates()

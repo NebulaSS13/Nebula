@@ -61,21 +61,16 @@
 	handle_protected_effects(M, weather)
 
 /decl/state/weather/proc/handle_exposure(var/mob/living/M, var/exposure, var/obj/abstract/weather_system/weather)
-
-	// Send strings if we're outside.
-	if(M.is_outside() && M.client)
-		if(!weather.show_weather(M))
-			weather.show_wind(M)
-
-	if(exposure != WEATHER_IGNORE && weather.set_cooldown(M))
-		if(exposure == WEATHER_EXPOSED)
-			handle_exposure_effects(M, weather)
-		else if(exposure == WEATHER_ROOFED)
-			handle_roofed_effects(M, weather)
-		else if(exposure == WEATHER_PROTECTED)
-			var/list/protected_by = M.get_weather_protection()
-			if(LAZYLEN(protected_by))
-				handle_protected_effects(M, weather, pick(protected_by))
+	if(exposure == WEATHER_IGNORE || !weather.set_cooldown(M))
+		return
+	if(exposure == WEATHER_EXPOSED)
+		handle_exposure_effects(M, weather)
+	else if(exposure == WEATHER_ROOFED)
+		handle_roofed_effects(M, weather)
+	else if(exposure == WEATHER_PROTECTED)
+		var/list/protected_by = M.get_weather_protection()
+		if(LAZYLEN(protected_by))
+			handle_protected_effects(M, weather, pick(protected_by))
 
 /decl/state/weather/proc/adjust_temperature(initial_temperature)
 	return initial_temperature

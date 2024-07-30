@@ -2,6 +2,7 @@
 	name = "rune"
 	desc = "A rune drawn in crayon."
 	icon = 'icons/obj/rune.dmi'
+	weather_sensitive = FALSE
 
 /obj/effect/decal/cleanable/crayon/Initialize(mapload, main = "#ffffff", shade = "#000000", var/type = "rune")
 	name = type

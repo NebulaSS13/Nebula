@@ -4,6 +4,7 @@
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
+	weather_sensitive = TRUE
 
 	/// If true, the next icon update will also regenerate the body.
 	var/regenerate_body_icon = FALSE

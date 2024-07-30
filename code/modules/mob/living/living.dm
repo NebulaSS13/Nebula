@@ -12,6 +12,9 @@
 	else
 		add_to_living_mob_list()
 
+	if(weather_sensitive)
+		SSweather_atoms.weather_atoms += src
+
 /mob/living/get_ai_type()
 	var/decl/species/my_species = get_species()
 	if(ispath(my_species?.ai))
@@ -729,6 +732,8 @@ default behaviour is:
 	// done in this order so that icon updates aren't triggered once all our organs are obliterated
 	delete_inventory(TRUE)
 	delete_organs()
+	if(weather_sensitive)
+		SSweather_atoms.weather_atoms -= src
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()

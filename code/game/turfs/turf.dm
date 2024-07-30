@@ -537,7 +537,7 @@
 
 	SSair.mark_for_update(src)
 
-/turf/proc/is_outside()
+/turf/is_outside()
 
 	// Can't rain inside or through solid walls.
 	// TODO: dense structures like full windows should probably also block weather.
@@ -762,6 +762,9 @@
 /turf/proc/get_fishing_result(obj/item/chems/food/bait)
 	var/area/A = get_area(src)
 	return A.get_fishing_result(src, bait)
+
+/turf/get_affecting_weather()
+	return weather
 
 /turf/get_alt_interactions(mob/user)
 	. = ..()

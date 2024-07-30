@@ -294,6 +294,7 @@
 #include "code\controllers\subsystems\vis_contents.dm"
 #include "code\controllers\subsystems\vote.dm"
 #include "code\controllers\subsystems\weather.dm"
+#include "code\controllers\subsystems\weather_atoms.dm"
 #include "code\controllers\subsystems\xenoarch.dm"
 #include "code\controllers\subsystems\zcopy.dm"
 #include "code\controllers\subsystems\initialization\character_info.dm"
