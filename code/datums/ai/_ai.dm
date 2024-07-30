@@ -234,10 +234,10 @@
 	return stance
 
 /datum/mob_controller/proc/list_targets(var/dist = 7)
-	return
+	return null
 
-/datum/mob_controller/proc/open_fire()
-	return
+/datum/mob_controller/proc/handle_ranged_target(atom/ranged_target)
+	return FALSE
 
 /datum/mob_controller/proc/startle()
 	if(QDELETED(body) || body.stat != UNCONSCIOUS)
@@ -336,3 +336,9 @@
 	if(body)
 		return body.set_target_zone(ran_zone())
 	return FALSE
+
+/datum/mob_controller/proc/clear_friends()
+	LAZYCLEARLIST(_friends)
+
+/datum/mob_controller/proc/clear_paths()
+	return

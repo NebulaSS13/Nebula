@@ -4,54 +4,20 @@
 	icon = 'icons/mob/bot/cleanbot.dmi'
 	icon_state = "cleanbot0"
 	req_access = list(list(access_janitor, access_robotics))
-	botcard_access = list(access_janitor, access_maint_tunnels)
-
+	ai = /datum/mob_controller/bot/clean
 	wait_if_pulled = 1
 	min_target_dist = 0
 
 	var/screwloose = 0
 	var/oddbutton = 0
 	var/blood = 1
-	var/list/target_types = list()
 
-/mob/living/bot/cleanbot/Initialize()
-	. = ..()
-	get_targets()
-
-/mob/living/bot/cleanbot/handleIdle()
-	if(!screwloose && !oddbutton && prob(5))
-		visible_message("\The [src] makes an excited beeping booping sound!")
-	if(screwloose && prob(5)) // Make a mess
-		if(isturf(loc))
-			var/turf/T = loc
-			if(T.simulated)
-				T.wet_floor()
-	if(oddbutton && prob(5)) // Make a big mess
-		visible_message("Something flies out of [src]. He seems to be acting oddly.")
-		var/obj/effect/decal/cleanable/blood/gibs/gib = new(loc)
-		var/weakref/g = weakref(gib)
-		ignore_list += g
-		spawn(600)
-			ignore_list -= g
-
-/mob/living/bot/cleanbot/lookForTargets()
-	for(var/obj/effect/decal/cleanable/D in view(world.view + 1, src))
-		if(confirmTarget(D))
-			target = D
-			playsound(src, 'sound/machines/boop1.ogg', 30)
-			return
-
-/mob/living/bot/cleanbot/confirmTarget(var/obj/effect/decal/cleanable/D)
-	if(!..())
-		return 0
-	for(var/T in target_types)
-		if(istype(D, T))
-			return 1
-	return 0
-
-/mob/living/bot/cleanbot/handleAdjacentTarget()
-	if(get_turf(target) == src.loc)
-		UnarmedAttack(target)
+/mob/living/bot/cleanbot/get_initial_bot_access()
+	var/static/list/bot_access = list(
+		access_janitor,
+		access_maint_tunnels
+	)
+	return bot_access.Copy()
 
 /mob/living/bot/cleanbot/UnarmedAttack(var/obj/effect/decal/cleanable/D, var/proximity)
 
@@ -70,8 +36,8 @@
 	update_icon()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
 	if(do_after(src, cleantime, progress = 0) && !QDELETED(D))
-		if(D == target)
-			target = null
+		if(D == ai?.get_target())
+			ai.set_target(null)
 		qdel(D)
 	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
@@ -112,10 +78,10 @@
 		switch(command)
 			if("blood")
 				blood = !blood
-				get_targets()
+				ai?.find_target()
 			if("patrol")
 				will_patrol = !will_patrol
-				patrol_path = null
+				ai?.clear_paths()
 
 	if(CanAccessMaintenance(user))
 		switch(command)
@@ -132,17 +98,3 @@
 		oddbutton = 1
 		screwloose = 1
 		return 1
-
-/mob/living/bot/cleanbot/proc/get_targets()
-	target_types = list()
-
-	target_types += /obj/effect/decal/cleanable/blood/oil
-	target_types += /obj/effect/decal/cleanable/vomit
-	target_types += /obj/effect/decal/cleanable/crayon
-	target_types += /obj/effect/decal/cleanable/mucus
-	target_types += /obj/effect/decal/cleanable/dirt
-	target_types += /obj/effect/decal/cleanable/filth
-	target_types += /obj/effect/decal/cleanable/spiderling_remains
-
-	if(blood)
-		target_types += /obj/effect/decal/cleanable/blood

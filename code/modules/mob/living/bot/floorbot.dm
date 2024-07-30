@@ -6,6 +6,7 @@
 	req_access = list(list(access_construction, access_robotics))
 	wait_if_pulled = 1
 	min_target_dist = 0
+	ai = /datum/mob_controller/bot/floor
 
 	var/amount = 10 // 1 for tile, 2 for lattice
 	var/maxAmount = 60
@@ -84,54 +85,6 @@
 			to_chat(user, "<span class='notice'>\The [src] buzzes and beeps.</span>")
 		return 1
 
-/mob/living/bot/floorbot/handleRegular()
-	++tilemake
-	if(tilemake >= 100)
-		tilemake = 0
-		addTiles(1)
-
-	if(prob(1))
-		custom_emote(2, "makes an excited booping beeping sound!")
-
-/mob/living/bot/floorbot/handleAdjacentTarget()
-	if(get_turf(target) == src.loc)
-		UnarmedAttack(target)
-
-/mob/living/bot/floorbot/lookForTargets()
-	for(var/turf/floor/T in view(src))
-		if(confirmTarget(T))
-			target = T
-			return
-
-	if(amount < maxAmount && (eattiles || maketiles))
-		for(var/obj/item/stack/S in view(src))
-			if(confirmTarget(S))
-				target = S
-				return
-
-/mob/living/bot/floorbot/confirmTarget(var/atom/A) // The fact that we do some checks twice may seem confusing but remember that the bot's settings may be toggled while it's moving and we want them to stop in that case
-	anchored = FALSE
-	if(!..())
-		return 0
-
-	if(istype(A, /obj/item/stack/tile/floor))
-		return (amount < maxAmount && eattiles)
-
-	if(istype(A, /obj/item/stack/material))
-		var/obj/item/stack/material/S = A
-		if(S.material?.type == /decl/material/solid/metal/steel)
-			return (amount < maxAmount && maketiles)
-
-	if(A.loc.name == "Space")
-		return 0
-
-	var/turf/floor/T = A
-	if(istype(T))
-		if(emagged)
-			return 1
-		else
-			return (amount && (T.is_floor_damaged() || (improvefloors && !T.has_flooring())))
-
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
 
 	. = ..()
@@ -158,7 +111,7 @@
 			if(do_after(src, 150, F)) // Extra time because this can and will kill.
 				F.physically_destroyed()
 				addTiles(1)
-		target = null
+		ai?.set_target(null)
 		update_icon()
 	else if(istype(A, /turf/floor))
 		var/turf/floor/F = A
@@ -171,7 +124,7 @@
 				if(F.is_floor_damaged())
 					F.set_flooring(null)
 			anchored = FALSE
-			target = null
+			ai?.set_target(null)
 			busy = 0
 			update_icon()
 		else if(!F.has_flooring() && amount)
@@ -184,7 +137,7 @@
 					F.set_flooring(GET_DECL(floor_build_type))
 					addTiles(-1)
 			anchored = FALSE
-			target = null
+			ai?.set_target(null)
 			update_icon()
 	else if(istype(A, /obj/item/stack/tile/floor) && amount < maxAmount)
 		var/obj/item/stack/tile/floor/T = A
@@ -198,7 +151,7 @@
 				T.use(eaten)
 				addTiles(eaten)
 		anchored = FALSE
-		target = null
+		ai?.set_target(null)
 		update_icon()
 	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
 		var/obj/item/stack/material/M = A

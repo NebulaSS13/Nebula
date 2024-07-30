@@ -17,12 +17,10 @@
 	density = TRUE
 	max_health = 150
 	mob_bump_flag = HEAVY
-
 	min_target_dist = 0
 	max_target_dist = 250
 	target_speed = 3
-	max_frustration = 5
-	botcard_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	ai = /datum/mob_controller/bot/mule
 
 	var/atom/movable/load
 
@@ -50,6 +48,18 @@
 
 	suffix = num2text(++amount)
 	name = "Mulebot #[suffix]"
+
+/mob/living/bot/mulebot/get_initial_bot_access()
+	var/static/list/bot_access = list(
+		access_maint_tunnels,
+		access_mailsorting,
+		access_cargo,
+		access_cargo_bot,
+		access_qm,
+		access_mining,
+		access_mining_station
+	)
+	return bot_access.Copy()
 
 /mob/living/bot/mulebot/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
@@ -122,8 +132,9 @@
 /mob/living/bot/mulebot/proc/obeyCommand(var/command)
 	switch(command)
 		if("Home")
-			resetTarget()
-			target = home
+			if(ai)
+				ai.lose_target()
+				ai.set_target(home)
 			targetName = "Home"
 		if("SetD")
 			var/new_dest
@@ -133,8 +144,9 @@
 			else
 				alert("No destination beacons available.")
 			if(new_dest)
-				resetTarget()
-				target = get_turf(beaconlist[new_dest])
+				if(ai)
+					ai.lose_target()
+					ai.set_target(get_turf(beaconlist[new_dest]))
 				targetName = new_dest
 		if("GoTD")
 			paused = 0
@@ -153,39 +165,22 @@
 	if(open)
 		icon_state = "mulebot-hatch"
 		return
-	if(target_path.len && !paused)
+	var/datum/mob_controller/bot/botai = ai
+	if(istype(botai) && LAZYLEN(botai.target_path) && !paused)
 		icon_state = "mulebot1"
 		return
 	icon_state = "mulebot0"
 
-/mob/living/bot/mulebot/handleRegular()
-	if(!safety && prob(1))
-		flick("mulebot-emagged", src)
-	update_icon()
-
-/mob/living/bot/mulebot/handleFrustrated()
-	custom_emote(2, "makes a sighing buzz.")
-	playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
-	..()
-
-/mob/living/bot/mulebot/handleAdjacentTarget()
-	if(target == src.loc)
-		custom_emote(2, "makes a chiming sound.")
-		playsound(loc, 'sound/machines/chime.ogg', 50, 0)
-		UnarmedAttack(target)
-		resetTarget()
-		if(auto_return && home && (loc != home))
-			target = home
-			targetName = "Home"
-
-/mob/living/bot/mulebot/confirmTarget()
-	return 1
-
 /mob/living/bot/mulebot/calcTargetPath()
 	..()
-	if(!target_path.len && target != home) // I presume that target is not null
-		resetTarget()
-		target = home
+
+	var/datum/mob_controller/bot/botai = ai
+	if(!istype(botai))
+		return
+
+	if(!LAZYLEN(botai.target_path) && ai && ai.get_target() != home) // I presume that target is not null
+		ai.lose_target()
+		ai.set_target(home)
 		targetName = "Home"
 
 /mob/living/bot/mulebot/stepToTarget()

@@ -209,7 +209,7 @@
 		return
 	if(body.has_ranged_attack() && get_dist(body, target) <= body.get_ranged_attack_distance() && !move_only)
 		body.stop_automove()
-		open_fire()
+		handle_ranged_target(target)
 		return
 	set_stance(STANCE_ATTACKING)
 	body.start_automove(target)
@@ -257,10 +257,10 @@
 				return FALSE
 	return TRUE
 
-/datum/mob_controller/aggressive/open_fire()
-	if(!body.can_act())
+/datum/mob_controller/aggressive/handle_ranged_target(atom/ranged_target)
+	if(!body.can_act() || !ranged_target)
 		return FALSE
-	body.handle_ranged_attack(get_target())
+	body.handle_ranged_attack(ranged_target)
 	return TRUE
 
 /datum/mob_controller/aggressive/lose_target()
