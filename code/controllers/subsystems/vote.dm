@@ -64,6 +64,7 @@ SUBSYSTEM_DEF(vote)
 /datum/controller/subsystem/vote/proc/initiate_vote(vote_type, mob/creator, automatic = 0)
 	set waitfor = FALSE
 	if(active_vote)
+		to_chat(creator, SPAN_WARNING("There is already a vote in progress."))
 		return FALSE
 	if(!automatic && (!istype(creator) || !creator.client))
 		return FALSE
@@ -71,10 +72,12 @@ SUBSYSTEM_DEF(vote)
 	if(last_started_time != null && !(is_admin(creator) || automatic))
 		var/next_allowed_time = (last_started_time + get_config_value(/decl/config/num/vote_delay))
 		if(next_allowed_time > world.time)
+			to_chat(creator, SPAN_WARNING("Another vote cannot be run so soon."))
 			return FALSE
 
 	var/datum/vote/new_vote = new vote_type
 	if(!new_vote.setup(creator, automatic))
+		to_chat(creator, SPAN_WARNING("The selected vote could not be set up or run."))
 		return FALSE
 
 	active_vote = new_vote
