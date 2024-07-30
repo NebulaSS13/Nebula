@@ -16,6 +16,12 @@
 	total_positions         = 1
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/shrine/keeper
 	min_skill               = list(
+		SKILL_STONEMASONRY  = SKILL_BASIC,
+		SKILL_CARPENTRY     = SKILL_BASIC,
+		SKILL_TEXTILES      = SKILL_BASIC,
+		SKILL_COOKING       = SKILL_BASIC,
+		SKILL_BOTANY        = SKILL_BASIC,
+		SKILL_ATHLETICS     = SKILL_BASIC,
 		SKILL_LITERACY      = SKILL_ADEPT,
 		SKILL_MEDICAL       = SKILL_ADEPT,
 		SKILL_ANATOMY       = SKILL_ADEPT,
