@@ -962,4 +962,4 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		try_burn_wearer(user, slot, 1)
 
 /obj/item/can_embed()
-	return !anchored && !is_robot_module(src)
+	return !anchored && (!ismob(loc) || canremove) && (!loc || isturf(loc) || ismob(loc)) && !is_robot_module(src)
