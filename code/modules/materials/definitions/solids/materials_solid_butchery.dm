@@ -63,7 +63,7 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	integrity = 50
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_SOFT+5
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	explosion_resistance = 1
 	reflectiveness = MAT_VALUE_DULL

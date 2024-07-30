@@ -76,7 +76,7 @@
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
 	color = "#aaaaaa"
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_SOFT+5
 	brute_armor = 1
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
@@ -108,7 +108,7 @@
 	use_reinf_state         = null
 	flags                   = MAT_FLAG_BRITTLE
 	reflectiveness          = MAT_VALUE_DULL
-	hardness                = MAT_VALUE_SOFT - 5
+	hardness                = MAT_VALUE_FLEXIBLE-5
 	wall_support_value      = MAT_VALUE_EXTREMELY_LIGHT - 9
 	weight                  = MAT_VALUE_EXTREMELY_LIGHT - 9
 	construction_difficulty = MAT_VALUE_EASY_DIY
@@ -139,7 +139,7 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_SOFT+5
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/bolt

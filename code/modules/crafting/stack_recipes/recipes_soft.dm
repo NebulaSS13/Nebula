@@ -4,7 +4,7 @@
 	craft_stack_types           = null
 	forbidden_craft_stack_types = null
 	required_min_hardness       = 0
-	required_max_hardness       = MAT_VALUE_MALLEABLE
+	required_max_hardness       = MAT_VALUE_SOFT
 	crafting_extra_cost_factor  = 1 // No wastage for just resculpting materials.
 
 /decl/stack_recipe/soft/teapot
@@ -47,6 +47,12 @@
 		if(user)
 			S.add_to_stacks(user, 1)
 	return S
+
+/decl/stack_recipe/soft/stack/bar
+	name                        = "bar"
+	name_plural                 = "bars"
+	result_type                 = /obj/item/stack/material/bar
+	result_type                 = /obj/item/stack/material/bar/wax
 
 /decl/stack_recipe/soft/stack/large_lump
 	name                        = "large lump"
