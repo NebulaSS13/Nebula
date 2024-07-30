@@ -5,6 +5,7 @@
 	footstep_type = /decl/footsteps/sand
 	icon = 'icons/turf/flooring/sand.dmi'
 	icon_edge_layer = EXT_EDGE_SAND
+	icon_has_corners = TRUE
 	possible_states = 4
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	material = /decl/material/solid/sand
