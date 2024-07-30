@@ -99,7 +99,7 @@
 			if(LAZYACCESS(reagent_amounts,2) && potency > 0)
 				rtotal += round(potency/reagent_amounts[2])
 			if(rid == /decl/material/liquid/nutriment)
-				LAZYSET(data, seed.product_name, max(1,rtotal))
+				LAZYSET(data, "taste", list(seed.product_name = max(1,rtotal)))
 			add_to_reagents(rid,max(1,rtotal),data)
 
 /obj/item/chems/food/grown/proc/update_desc()
