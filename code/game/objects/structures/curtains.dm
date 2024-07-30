@@ -174,35 +174,55 @@
 // - Closed subtypes
 /obj/structure/curtain/bed
 	curtain_kind_path = /decl/curtain_kind/cloth/bed
+	color = /decl/curtain_kind/cloth/bed::color
 /obj/structure/curtain/black
 	curtain_kind_path = /decl/curtain_kind/cloth/black
+	color = /decl/curtain_kind/cloth/black::color
 /obj/structure/curtain/bar
 	curtain_kind_path = /decl/curtain_kind/cloth/bar
+	color = /decl/curtain_kind/cloth/bar::color
 /obj/structure/curtain/medical
 	curtain_kind_path = /decl/curtain_kind/plastic/medical
+	color = /decl/curtain_kind/plastic/medical::color
+	alpha = /decl/curtain_kind/plastic/medical::alpha
 /obj/structure/curtain/privacy
 	curtain_kind_path = /decl/curtain_kind/plastic/privacy
+	color = /decl/curtain_kind/plastic/privacy::color
 /obj/structure/curtain/shower
 	curtain_kind_path = /decl/curtain_kind/plastic/shower
+	color = /decl/curtain_kind/plastic/shower::color
+	alpha = /decl/curtain_kind/plastic/shower::alpha
 /obj/structure/curtain/canteen
 	curtain_kind_path = /decl/curtain_kind/plastic/canteen
+	color = /decl/curtain_kind/plastic/canteen::color
 
 // - Open subtypes
 /obj/structure/curtain/open/bed
 	curtain_kind_path = /decl/curtain_kind/cloth/bed
+	color = /decl/curtain_kind/cloth/bed::color
 /obj/structure/curtain/open/black
 	curtain_kind_path = /decl/curtain_kind/cloth/black
+	color = /decl/curtain_kind/cloth/black::color
 /obj/structure/curtain/open/medical
 	curtain_kind_path = /decl/curtain_kind/plastic/medical
+	color = /decl/curtain_kind/plastic/medical::color
+	alpha = /decl/curtain_kind/plastic/medical::alpha
 /obj/structure/curtain/open/bar
 	curtain_kind_path = /decl/curtain_kind/cloth/bar
+	color = /decl/curtain_kind/cloth/bar::color
 /obj/structure/curtain/open/privacy
 	curtain_kind_path = /decl/curtain_kind/plastic/privacy
+	color = /decl/curtain_kind/plastic/privacy::color
 /obj/structure/curtain/open/shower
 	curtain_kind_path = /decl/curtain_kind/plastic/shower
+	color = /decl/curtain_kind/plastic/shower::color
+	alpha = /decl/curtain_kind/plastic/shower::alpha
 /obj/structure/curtain/open/canteen
 	curtain_kind_path = /decl/curtain_kind/plastic/canteen
+	color = /decl/curtain_kind/plastic/canteen::color
 /obj/structure/curtain/open/shower/engineering
 	curtain_kind_path = /decl/curtain_kind/plastic/shower/engineering
+	color = /decl/curtain_kind/plastic/shower/engineering::color
 /obj/structure/curtain/open/shower/security
 	curtain_kind_path = /decl/curtain_kind/plastic/shower/security
+	color = /decl/curtain_kind/plastic/shower/security::color

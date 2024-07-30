@@ -223,6 +223,7 @@
 
 /obj/structure/door/sandstone
 	material = /decl/material/solid/stone/sandstone
+	color = /decl/material/solid/stone/sandstone::color
 
 /obj/structure/door/diamond
 	material = /decl/material/solid/gemstone/diamond
