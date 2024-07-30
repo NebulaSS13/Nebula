@@ -8,7 +8,6 @@
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	obj_flags = OBJ_FLAG_ROTATABLE
 	base_icon = "chair"
-
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 	var/has_special_overlay = FALSE
 

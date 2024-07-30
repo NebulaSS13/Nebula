@@ -1,14 +1,14 @@
 /obj/structure/bed/sofa
 	name = "sofa"
-	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
+	desc = "A wide and comfy sofa. No assistants were eaten by it during production!"
 	icon_state = "sofa_preview"
 	base_icon = "sofa"
 	color = "#666666"
 	buckle_dir = FALSE
 	buckle_lying = FALSE //force people to sit up in chairs when buckled
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_ANCHORABLE
 	material = /decl/material/solid/organic/wood
-
+	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	var/has_special_overlay = FALSE
 
 /obj/structure/bed/sofa/do_simple_ranged_interaction(var/mob/user)
@@ -19,19 +19,6 @@
 /obj/structure/bed/sofa/post_buckle_mob()
 	update_icon()
 	return ..()
-
-/obj/structure/bed/attackby(obj/item/W, mob/user) //made to be able to rotate the sofa
-	. = ..()
-	if(.)
-		return
-	if(!IS_WRENCH(W))
-		return
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	anchored = !anchored
-	if(anchored)
-		to_chat(user, "You disanchored \the [src].")
-	else
-		to_chat(user, "You anchored \the [src].")
 
 /obj/structure/bed/sofa/on_update_icon()
 
