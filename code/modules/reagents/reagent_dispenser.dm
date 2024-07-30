@@ -86,10 +86,7 @@
 
 	// We do this here to avoid putting the vessel straight into storage.
 	// This is usually handled by afterattack on /chems.
-	// The item must be an open container, but food items should not be filled from sources like this.
-	// They're open in order to add condiments, not to be poured into/out of.
-	// TODO: Rewrite open-container-ness or food to make this unnecessary!
-	if(storage && ATOM_IS_OPEN_CONTAINER(W) && !istype(W, /obj/item/food) && user.a_intent == I_HELP)
+	if(storage && ATOM_IS_OPEN_CONTAINER(W) && user.a_intent == I_HELP)
 		if(W.standard_dispenser_refill(user, src))
 			return TRUE
 		if(W.standard_pour_into(user, src))

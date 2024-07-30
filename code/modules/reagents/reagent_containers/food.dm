@@ -14,7 +14,6 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = null
 	randpixel = 6
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_HOLLOW
 	item_flags = null
 	material = /decl/material/liquid/nutriment
@@ -68,8 +67,9 @@
 /obj/item/food/can_be_injected_by(var/atom/injector)
 	return TRUE
 
-/obj/item/food/standard_pour_into(mob/user, atom/target)
-	return FALSE
+// Does not rely on ATOM_IS_OPEN_CONTAINER because we want to be able to pour in but not out.
+/obj/item/food/can_be_poured_into(atom/source)
+	return (reagents?.maximum_volume > 0)
 
 /obj/item/food/attack_self(mob/user)
 	if(is_edible(user) && handle_eaten_by_mob(user, user) != EATEN_INVALID)

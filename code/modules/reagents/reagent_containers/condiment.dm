@@ -58,20 +58,7 @@
 		return
 	if(standard_pour_into(user, target))
 		return
-
-	if(istype(target, /obj/item/food)) // These are not opencontainers but we can transfer to them
-		if(!reagents || !reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("There is no condiment left in \the [src]."))
-			return
-
-		if(!REAGENTS_FREE_SPACE(target.reagents))
-			to_chat(user, SPAN_NOTICE("You can't add more condiment to \the [target]."))
-			return
-
-		var/trans = reagents.trans_to_obj(target, amount_per_transfer_from_this)
-		to_chat(user, SPAN_NOTICE("You add [trans] units of the condiment to \the [target]."))
-	else
-		..()
+	..()
 
 /obj/item/chems/condiment/proc/update_center_of_mass()
 	center_of_mass = is_special_bottle ? initial(is_special_bottle.center_of_mass) : initial(center_of_mass)
