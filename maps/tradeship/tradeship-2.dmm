@@ -2263,7 +2263,7 @@
 	},
 /obj/item/firstaid/adv,
 /obj/random/medical,
-/obj/item/stack/medical/advanced/bruise_pack,
+/obj/item/stack/medical/bandage/advanced,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/scanner/health,
 /obj/item/defibrillator/compact/loaded,
@@ -4474,7 +4474,7 @@
 	id_tag = "bee_shutters";
 	directional_offset = null
 	},
-/obj/item/stack/medical/bruise_pack,
+/obj/item/stack/medical/bandage,
 /turf/floor/tiled,
 /area/ship/trade/shuttle/outgoing/general)
 "lU" = (

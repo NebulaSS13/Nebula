@@ -35,7 +35,7 @@
 		var/atom/product_type
 		var/cloth_cost
 		if(choice == "Splint")
-			product_type = /obj/item/stack/medical/splint/simple
+			product_type = /obj/item/stack/medical/splint/crafted
 			cloth_cost = 5
 		else if(choice == "Torch")
 			product_type = /obj/item/flame/torch

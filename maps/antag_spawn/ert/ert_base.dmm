@@ -2452,7 +2452,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2462,7 +2462,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "rescuedock";
 	name = "Blast Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2696,7 +2696,7 @@
 	dir = 4;
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2756,7 +2756,7 @@
 	dir = 4;
 	id_tag = "rescueeva";
 	name = "Blast Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -3162,7 +3162,7 @@
 	dir = 4;
 	id_tag = "rescuebridge";
 	name = "Blast Shutters";
-	
+
 	},
 /obj/effect/paint/blue,
 /turf/floor/plating,
@@ -3213,7 +3213,7 @@
 	dir = 4;
 	id_tag = "rescueinfirm";
 	name = "Blast Shutters";
-	
+
 	},
 /obj/effect/paint/blue,
 /turf/floor/plating,
@@ -3250,7 +3250,7 @@
 /obj/structure/table/glass,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/chems/syringe/antibiotic,
-/obj/item/stack/medical/advanced/bruise_pack,
+/obj/item/stack/medical/bandage/advanced,
 /turf/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "hh" = (

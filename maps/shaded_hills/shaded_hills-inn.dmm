@@ -382,8 +382,8 @@
 /area/shaded_hills/shrine)
 "pi" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/stack/medical/ointment/poultice/five,
-/obj/item/stack/medical/bruise_pack/bandage/five,
+/obj/item/stack/medical/ointment/crafted/five,
+/obj/item/stack/medical/bandage/crafted/five,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "qe" = (
@@ -761,8 +761,8 @@
 /area/shaded_hills/outside/downlands)
 "Gb" = (
 /obj/structure/table/marble,
-/obj/item/stack/medical/bruise_pack/bandage/five,
-/obj/item/stack/medical/ointment/poultice/five,
+/obj/item/stack/medical/bandage/crafted/five,
+/obj/item/stack/medical/ointment/crafted/five,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/shrine)
 "Gj" = (

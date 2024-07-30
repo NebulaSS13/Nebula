@@ -19,7 +19,7 @@
 /obj/structure/loot_pile/surface/medicine_cabinet/get_common_loot()
 	var/static/list/common_loot = list(
 		/obj/item/pill_bottle/sugariron,
-		/obj/item/stack/medical/bruise_pack,
+		/obj/item/stack/medical/bandage,
 		/obj/item/stack/medical/ointment,
 		/obj/item/med_pouch/trauma,
 		/obj/item/med_pouch/burn,
@@ -44,8 +44,8 @@
 
 /obj/structure/loot_pile/surface/medicine_cabinet/get_rare_loot()
 	var/static/list/rare_loot = list(
-		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/stack/medical/advanced/ointment,
+		/obj/item/stack/medical/bandage/advanced,
+		/obj/item/stack/medical/ointment/advanced,
 		/obj/item/pill_bottle/strong_painkillers
 	)
 	return rare_loot

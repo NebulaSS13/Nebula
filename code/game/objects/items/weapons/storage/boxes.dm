@@ -76,7 +76,7 @@
 				/obj/item/clothing/mask/breath,
 				/obj/item/tank/emergency/oxygen,
 				/obj/item/chems/hypospray/autoinjector/stabilizer,
-				/obj/item/stack/medical/bruise_pack,
+				/obj/item/stack/medical/bandage,
 				/obj/item/flashlight/flare/glowstick,
 				/obj/item/chems/food/candy/proteinbar,
 				/obj/item/oxycandle,
@@ -94,7 +94,7 @@
 				/obj/item/tank/emergency/oxygen/engi,
 				/obj/item/chems/hypospray/autoinjector/stabilizer,
 				/obj/item/chems/hypospray/autoinjector/antirad,
-				/obj/item/stack/medical/bruise_pack,
+				/obj/item/stack/medical/bandage,
 				/obj/item/flashlight/flare/glowstick,
 				/obj/item/chems/food/candy/proteinbar,
 				/obj/item/oxycandle

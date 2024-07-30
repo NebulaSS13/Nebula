@@ -2481,7 +2481,7 @@
 	},
 /obj/item/firstaid/adv,
 /obj/random/medical,
-/obj/item/stack/medical/advanced/bruise_pack,
+/obj/item/stack/medical/bandage/advanced,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/scanner/health,
 /obj/machinery/light/small{

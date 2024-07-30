@@ -77,7 +77,7 @@
 	category              = "bedding"
 
 /decl/stack_recipe/textiles/cloth/bandages
-	result_type           = /obj/item/stack/medical/bruise_pack/bandage
+	result_type           = /obj/item/stack/medical/bandage/crafted
 	category              = "medical"
 
 /decl/stack_recipe/textiles/fur

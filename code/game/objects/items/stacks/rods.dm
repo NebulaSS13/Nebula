@@ -80,7 +80,7 @@
 			return
 		T.use(4)
 
-		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
+		var/obj/item/stack/medical/splint/improvised/new_splint = new(user.loc)
 		new_splint.dropInto(loc)
 		new_splint.add_fingerprint(user)
 		playsound(user, 'sound/effects/tape.ogg', 50, TRUE)

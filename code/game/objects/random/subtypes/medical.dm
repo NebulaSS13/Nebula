@@ -34,13 +34,13 @@
 
 /obj/random/medical/lite/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/stack/medical/bruise_pack               = 4,
+		/obj/item/stack/medical/bandage               = 4,
 		/obj/item/stack/medical/ointment                  = 4,
 		/obj/item/pill_bottle/antibiotics                 = 2,
 		/obj/item/pill_bottle/painkillers                 = 2,
 		/obj/item/pill_bottle/strong_painkillers          = 1,
-		/obj/item/stack/medical/advanced/bruise_pack      = 2,
-		/obj/item/stack/medical/advanced/ointment         = 2,
+		/obj/item/stack/medical/bandage/advanced      = 2,
+		/obj/item/stack/medical/ointment/advanced         = 2,
 		/obj/item/stack/medical/splint                    = 1,
 		/obj/item/chems/hypospray/autoinjector/stabilizer = 3,
 		/obj/item/pill_bottle/burn_meds                   = 2,

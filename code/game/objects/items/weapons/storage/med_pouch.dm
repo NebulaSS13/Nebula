@@ -76,7 +76,7 @@ Single Use Emergency Pouches
 			/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
 			/obj/item/chems/pill/pouch_pill/stabilizer,
 			/obj/item/chems/pill/pouch_pill/brute_meds,
-			/obj/item/stack/medical/bruise_pack = 2,
+			/obj/item/stack/medical/bandage = 2,
 		)
 
 /obj/item/med_pouch/burn

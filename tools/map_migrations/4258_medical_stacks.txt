@@ -1,0 +1,9 @@
+/obj/item/stack/medical/bruise_pack/bandage/@SUBTYPES : /obj/item/stack/medical/bandage/crafted@SUBTYPES{@OLD}
+/obj/item/stack/medical/bruise_pack/@SUBTYPES : /obj/item/stack/medical/bandage/@SUBTYPES{@OLD}
+/obj/item/stack/medical/ointment/poultice/@SUBTYPES : /obj/item/stack/medical/ointment/crafted/@SUBTYPES{@OLD}
+/obj/item/stack/medical/advanced/bruise_pack/@SUBTYPES : /obj/item/stack/medical/bandage/advanced/@SUBTYPES{@OLD}
+/obj/item/stack/medical/advanced/ointment/@SUBTYPES : /obj/item/stack/medical/bandage/ointment/@SUBTYPES{@OLD}
+/obj/item/stack/medical/splint/simple/@SUBTYPES : /obj/item/stack/medical/splint/crafted/@SUBTYPES{@OLD}
+/obj/item/stack/medical/splint/ghetto/@SUBTYPES : /obj/item/stack/medical/splint/improvised/@SUBTYPES{@OLD}
+/obj/item/stack/medical/resin/handmade/@SUBTYPES : /obj/item/stack/medical/resin/crafted/@SUBTYPES{@OLD}
+

@@ -27,7 +27,7 @@
 		/obj/item/wirecutters,
 		/obj/item/multitool,
 		/obj/item/stack/medical/ointment,
-		/obj/item/stack/medical/bruise_pack,
+		/obj/item/stack/medical/bandage,
 		/obj/item/stack/medical/splint
 	)
 	synths = list(/datum/matter_synth/medicine = 15000)
@@ -50,7 +50,7 @@
 	. = ..()
 	for(var/thing in list(
 		 /obj/item/stack/medical/ointment,
-		 /obj/item/stack/medical/bruise_pack,
+		 /obj/item/stack/medical/bandage,
 		 /obj/item/stack/medical/splint
 		))
 		var/obj/item/stack/medical/stack = locate(thing) in equipment
@@ -62,7 +62,7 @@
 	var/datum/matter_synth/medicine/medicine = locate() in synths
 	for(var/thing in list(
 		 /obj/item/stack/medical/ointment,
-		 /obj/item/stack/medical/bruise_pack,
+		 /obj/item/stack/medical/bandage,
 		 /obj/item/stack/medical/splint
 		))
 		var/obj/item/stack/medical/stack = locate(thing) in equipment

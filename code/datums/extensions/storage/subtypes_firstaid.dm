@@ -18,7 +18,7 @@
 		/obj/item/surgicaldrill,
 		/obj/item/bonegel,
 		/obj/item/sutures,
-		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/stack/medical/bandage/advanced,
 		/obj/item/stack/nanopaste
 	)
 

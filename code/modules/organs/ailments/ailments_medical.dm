@@ -54,7 +54,7 @@
 /datum/ailment/sprain
 	name = "sprained limb"
 	applies_to_organ = list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
-	treated_by_item_type = /obj/item/stack/medical/bruise_pack
+	treated_by_item_type = /obj/item/stack/medical/bandage
 	third_person_treatment_message = "$USER$ wraps $TARGET$'s sprained $ORGAN$ in $ITEM$."
 	self_treatment_message = "$USER$ wraps $USER_THEIR$ sprained $ORGAN$ in $ITEM$."
 	manual_diagnosis_string = "$USER_THEIR$ $ORGAN$ is visibly swollen."
