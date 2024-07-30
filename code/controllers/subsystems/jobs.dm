@@ -418,7 +418,7 @@ SUBSYSTEM_DEF(jobs)
 	var/list/loadout_taken_slots = list()
 	if(H.client.prefs.Gear() && job.loadout_allowed)
 		for(var/thing in H.client.prefs.Gear())
-			var/decl/loadout_option/G = global.gear_datums[thing]
+			var/decl/loadout_option/G = decls_repository.get_decl_by_id_or_var(thing, /decl/loadout_option)
 			if(G)
 				var/permitted = FALSE
 				if(G.allowed_branches)
@@ -448,7 +448,7 @@ SUBSYSTEM_DEF(jobs)
 					to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
 					continue
 
-				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
+				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.uid]))
 					spawn_in_storage.Add(G)
 				else
 					loadout_taken_slots.Add(G.slot)
@@ -542,7 +542,7 @@ SUBSYSTEM_DEF(jobs)
 
 	if(spawn_in_storage)
 		for(var/decl/loadout_option/G in spawn_in_storage)
-			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.name])
+			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.uid])
 
 	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title || job_title].</B></font>")
 

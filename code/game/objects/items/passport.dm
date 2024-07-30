@@ -23,8 +23,8 @@
 	var/pob = culture ? culture.name : "Unset"
 
 	var/fingerprint = H.get_full_print(ignore_blockers = TRUE) || "N/A"
-	var/decl/pronouns/G = H.get_pronouns(ignore_coverings = TRUE)
-	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [capitalize(G.name)]\nAge: [H.get_age()]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
+	var/decl/pronouns/pronouns = H.get_pronouns(ignore_coverings = TRUE)
+	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [capitalize(pronouns.name)]\nAge: [H.get_age()]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 
 /obj/item/passport/attack_self(mob/user)
 	user.visible_message(

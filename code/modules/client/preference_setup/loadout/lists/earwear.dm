@@ -10,6 +10,7 @@
 /decl/loadout_option/ears/earrings
 	name = "earrings"
 	path = /obj/item/clothing/ears
+	uid = "gear_ears_earrings"
 
 /decl/loadout_option/ears/earrings/get_gear_tweak_options()
 	. = ..()

@@ -2,6 +2,7 @@
 	name = "guns"
 	cost = 4
 	path = /obj/item/gun/projectile
+	uid = "gear_utility_guns"
 
 /decl/loadout_option/utility/guns/Initialize()
 	. = ..()

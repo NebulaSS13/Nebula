@@ -4,8 +4,7 @@
 /datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
 
 	var/list/failed = list()
-	for(var/gear_name in global.gear_datums)
-		var/decl/loadout_option/G = global.gear_datums[gear_name]
+	for(var/decl/loadout_option/G in decls_repository.get_decls_unassociated(/decl/loadout_option))
 		var/list/path_tweaks = list()
 		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
 			path_tweaks += p
@@ -39,8 +38,7 @@
 
 /datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path/start_test()
 	var/list/failed = list()
-	for(var/gear_name in global.gear_datums)
-		var/decl/loadout_option/G = global.gear_datums[gear_name]
+	for(var/decl/loadout_option/G in decls_repository.get_decls_unassociated(/decl/loadout_option))
 		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
 			for(var/path_name in p.valid_paths)
 				var/path_type = p.valid_paths[path_name]
@@ -58,8 +56,7 @@
 
 /datum/unit_test/loadout_test_gear_path_tweaks_shall_have_unique_keys/start_test()
 	var/path_entries_by_gear_path_and_name = list()
-	for(var/gear_name in global.gear_datums)
-		var/decl/loadout_option/G = global.gear_datums[gear_name]
+	for(var/decl/loadout_option/G in decls_repository.get_decls_unassociated(/decl/loadout_option))
 		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
 			for(var/path_name in p.valid_paths)
 				group_by(path_entries_by_gear_path_and_name, "[G] - [p] - [path_name]", path_name)
@@ -82,8 +79,7 @@
 /datum/unit_test/loadout_custom_setup_tweaks_shall_have_valid_procs/start_test()
 
 	var/list/failures = list()
-	for(var/gear_name in global.gear_datums)
-		var/decl/loadout_option/G = global.gear_datums[gear_name]
+	for(var/decl/loadout_option/G in decls_repository.get_decls_unassociated(/decl/loadout_option))
 		var/datum/instance
 		var/mob/user
 		for(var/datum/gear_tweak/custom_setup/cs in G.gear_tweaks)
@@ -125,6 +121,7 @@
 	path = /obj/unit_test/loadout
 	custom_setup_proc = /obj/unit_test/loadout/proc/loadout_proc
 	custom_setup_proc_arguments = list(5)
+	uid = "gear_debug"
 
 /obj/unit_test/loadout
 	var/loadout_mob

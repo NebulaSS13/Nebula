@@ -567,18 +567,18 @@
 	..()
 
 	if (istype(W, /obj/item/chems/food))
-		var/obj/item/chems/food/grown/G = W
-		if (!G.dry)
-			to_chat(user, SPAN_NOTICE("[G] must be dried before you stuff it into [src]."))
+		var/obj/item/chems/food/grown/grown = W
+		if (!grown.dry)
+			to_chat(user, SPAN_NOTICE("\The [grown] must be dried before you stuff it into \the [src]."))
 			return
 		if (smoketime)
-			to_chat(user, SPAN_NOTICE("[src] is already packed."))
+			to_chat(user, SPAN_NOTICE("\The [src] is already packed."))
 			return
 		smoketime = 1000
-		if(G.reagents)
-			G.reagents.trans_to_obj(src, G.reagents.total_volume)
-		SetName("[G.name]-packed [initial(name)]")
-		qdel(G)
+		if(grown.reagents)
+			grown.reagents.trans_to_obj(src, grown.reagents.total_volume)
+		SetName("[grown.name]-packed [initial(name)]")
+		qdel(grown)
 
 	else if(istype(W, /obj/item/flame/lighter))
 		var/obj/item/flame/lighter/L = W

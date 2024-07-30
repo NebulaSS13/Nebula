@@ -6,8 +6,8 @@
 /datum/artifact_trigger/gas/New()
 	if(!gas_needed)
 		gas_needed = list(pick(decls_repository.get_decl_paths_of_subtype(/decl/material/gas)) = rand(1,10))
-	var/decl/material/gas/G = GET_DECL(gas_needed[1])
-	name = "concentration of [G.name]"
+	var/decl/material/gas/gas = GET_DECL(gas_needed[1])
+	name = "concentration of [gas.name]"
 
 /datum/artifact_trigger/gas/copy()
 	var/datum/artifact_trigger/gas/C = ..()
