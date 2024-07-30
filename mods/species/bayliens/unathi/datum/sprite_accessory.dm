@@ -4,7 +4,7 @@
 	icon_state = "horns"
 	species_allowed = list(SPECIES_LIZARD)
 	color_blend = ICON_MULTIPLY
-	accessory_flags = VERY_SHORT
+	accessory_flags = HAIR_VERY_SHORT
 	uid = "acc_hair_una_horns"
 
 /decl/sprite_accessory/horns/lizard/spines_long
@@ -73,7 +73,7 @@
 	icon_state = "frills_aqua"
 	species_allowed = list(SPECIES_LIZARD)
 	color_blend = ICON_MULTIPLY
-	accessory_flags = VERY_SHORT
+	accessory_flags = HAIR_VERY_SHORT
 	uid = "acc_hair_una_aqua"
 
 /decl/sprite_accessory/frills/lizard/hood

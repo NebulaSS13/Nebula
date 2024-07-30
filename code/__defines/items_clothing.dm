@@ -184,7 +184,7 @@
 #define VITALS_SENSOR_TRACKING 3
 
 // Hair Flags
-#define VERY_SHORT           BITFLAG(0)
+#define HAIR_VERY_SHORT      BITFLAG(0)
 #define HAIR_TIEABLE         BITFLAG(1)
 #define HAIR_BALD            BITFLAG(2)
 #define HAIR_LOSS_VULNERABLE BITFLAG(3)

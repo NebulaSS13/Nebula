@@ -388,6 +388,7 @@ var/global/list/dexterity_levels = list(
 #define SAC_FACIAL_HAIR /decl/sprite_accessory_category/facial_hair
 #define SAC_COSMETICS   /decl/sprite_accessory_category/cosmetics
 #define SAC_MARKINGS    /decl/sprite_accessory_category/markings
+#define SAC_EARS        /decl/sprite_accessory_category/ears
 #define SAC_HORNS       /decl/sprite_accessory_category/horns
 #define SAC_FRILLS      /decl/sprite_accessory_category/frills
 

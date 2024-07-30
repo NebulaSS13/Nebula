@@ -20,9 +20,14 @@
 	else
 		icon = flipped_icon
 		flipped = "right"
-	to_chat(usr, "You change \the [src] to cover the [flipped] eye.")
+	to_chat(usr, SPAN_NOTICE("You change \the [src] to cover the [flipped] eye."))
 	update_icon()
 	update_clothing_icon()
+
+/obj/item/clothing/glasses/eyepatch/colourable
+	desc = "A simple cloth patch that covers an eye."
+	icon = 'icons/clothing/eyes/eyepatch_colourable.dmi'
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/glasses/eyepatch/hud
 	name = "iPatch"
