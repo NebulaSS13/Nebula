@@ -8,13 +8,13 @@
 
 		if(!closed_system)
 			var/space_left = reagents ? (reagents.maximum_volume - reagents.total_volume) : 0
-			if(space_left > 0)
+			if(space_left > 0 && reagents.total_volume < 10)
 				// Handle nearby smoke if any.
 				for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 					if(smoke.reagents.total_volume)
 						smoke.reagents.trans_to_obj(src, 5, copy = 1)
 				// Handle environmental effects like weather and flooding.
-				if(T.reagents?.total_volume && reagents.total_volume < reagents.maximum_volume)
+				if(T.reagents?.total_volume)
 					T.reagents.trans_to_obj(src, min(space_left, min(T.reagents.total_volume, rand(5,10))))
 				if(istype(T.weather?.weather_system?.current_state, /decl/state/weather/rain))
 					var/decl/state/weather/rain/rain = T.weather.weather_system.current_state
