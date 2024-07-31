@@ -398,7 +398,7 @@
 	melting_point = 505
 	boiling_point = 2875
 	color = "#c5c5a8"
-	hardness = MAT_VALUE_SOFT + 10
+	hardness = MAT_VALUE_FLEXIBLE
 	construction_difficulty = MAT_VALUE_EASY_DIY
 	reflectiveness = MAT_VALUE_MATTE
 
@@ -409,7 +409,7 @@
 	melting_point = 600
 	boiling_point = 2022
 	color = "#3f3f4d"
-	hardness = MAT_VALUE_SOFT
+	hardness = MAT_VALUE_FLEXIBLE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metallic sugar"
