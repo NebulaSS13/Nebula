@@ -56,6 +56,9 @@
 	var/update_icon = FALSE
 	copy_to(mannequin, TRUE)
 
+	// Apply any species-specific preview modification.
+	mannequin = mannequin.species?.modify_preview_appearance(mannequin)
+
 	var/datum/job/previewJob
 	if(equip_preview_mob)
 		// Determine what job is marked as 'High' priority, and dress them up as such.

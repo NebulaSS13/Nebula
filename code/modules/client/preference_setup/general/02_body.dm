@@ -9,8 +9,7 @@
 	var/list/appearance_descriptors = list()
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
 
-	var/icon/bgstate = "000"
-	var/list/bgstate_options = list("000", "midgrey", "FFF", "white", "steel", "techmaint", "dark", "plating", "reinforced")
+	var/icon/bgstate
 
 /datum/category_item/player_setup_item/physical/body
 	name = "Body"
@@ -65,6 +64,9 @@
 			if(style_decl)
 				LAZYINITLIST(pref.sprite_accessories[accessory_cat.type])
 				pref.sprite_accessories[accessory_cat.type][style_decl.type] = load_markings[accessory] || COLOR_BLACK
+
+	if(!pref.bgstate || !(pref.bgstate in global.using_map.char_preview_bgstate_options))
+		pref.bgstate = global.using_map.char_preview_bgstate_options[1]
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
 
@@ -142,8 +144,8 @@
 			else
 				pref.appearance_descriptors[descriptor.name] = descriptor.sanitize_value(last_descriptors[descriptor.name])
 
-	if(!pref.bgstate || !(pref.bgstate in pref.bgstate_options))
-		pref.bgstate = "000"
+	if(!pref.bgstate || !(pref.bgstate in global.using_map.char_preview_bgstate_options))
+		pref.bgstate = global.using_map.char_preview_bgstate_options[1]
 
 /datum/category_item/player_setup_item/physical/body/content(var/mob/user)
 	. = list()

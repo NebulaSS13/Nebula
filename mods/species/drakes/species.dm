@@ -46,6 +46,12 @@
 	// Drakes must be whitelisted for jobs to be able to join as them, see maps.dm.
 	job_blacklist_by_default = TRUE
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	preview_screen_locs = list(
+		"1" = "character_preview_map:1,4:36",
+		"2" = "character_preview_map:1,3:31",
+		"4" = "character_preview_map:1,2:26",
+		"8" = "character_preview_map:1,1:21"
+	)
 
 	var/list/adult_pain_emotes_with_pain_level = list(
 		list(/decl/emote/audible/drake_huff, /decl/emote/audible/drake_rattle) = 20

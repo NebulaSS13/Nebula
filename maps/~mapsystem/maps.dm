@@ -168,6 +168,18 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/_available_backpacks
 	var/backpacks_setup = FALSE
 
+	var/list/char_preview_bgstate_options = list(
+		"000",
+		"midgrey",
+		"FFF",
+		"white",
+		"steel",
+		"techmaint",
+		"dark",
+		"plating",
+		"reinforced"
+	)
+
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(LAZYLEN(lobby_tracks) == 1)
