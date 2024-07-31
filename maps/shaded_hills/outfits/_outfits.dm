@@ -11,4 +11,6 @@
 		/obj/item/bladed/folding/iron,
 		/obj/item/flame/torch
 	)
+	l_pocket      = /obj/item/rock/flint/striker
+	r_pocket      = /obj/item/bladed/folding/iron
 	outfit_flags  = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL
