@@ -20,14 +20,6 @@
 		/decl/bodytype/prosthetic/basic_human
 	)
 
-	available_accessory_categories = list(
-		SAC_HAIR,
-		SAC_FACIAL_HAIR,
-		SAC_EARS,
-		SAC_COSMETICS,
-		SAC_MARKINGS
-	)
-
 	exertion_effect_chance = 10
 	exertion_hydration_scale = 1
 	exertion_charge_scale = 1

@@ -392,9 +392,11 @@ var/global/list/dexterity_levels = list(
 #define SAC_EARS        /decl/sprite_accessory_category/ears
 #define SAC_HORNS       /decl/sprite_accessory_category/horns
 #define SAC_FRILLS      /decl/sprite_accessory_category/frills
+#define SAC_TAIL        /decl/sprite_accessory_category/tail
 
 // Sprite accessory metadata types for shorter reference.
 #define SAM_COLOR       /decl/sprite_accessory_metadata/color
+#define SAM_COLOR_INNER /decl/sprite_accessory_metadata/color/alt
 
 // Helpers for setting mob appearance. They are extremely ugly, hence the helpers.
 #define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))

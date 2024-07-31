@@ -13,3 +13,7 @@
 
 /decl/sprite_accessory_metadata/color/get_new_value_for(mob/user, decl/sprite_accessory/accessory_decl, current_value)
 	return input(user, "Choose a [lowertext(name)] for your [accessory_decl.name]: ", CHARACTER_PREFERENCE_INPUT_TITLE, current_value) as color|null
+
+/decl/sprite_accessory_metadata/color/alt
+	name = "Secondary Color"
+	uid = "sa_metadata_color_alt"

@@ -36,7 +36,8 @@
 		SAC_HORNS,
 		SAC_FRILLS,
 		SAC_COSMETICS,
-		SAC_MARKINGS
+		SAC_MARKINGS,
+		SAC_TAIL
 	)
 
 	primitive_form = "Stok"
