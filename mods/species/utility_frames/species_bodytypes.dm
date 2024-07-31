@@ -23,9 +23,9 @@
 	)
 	default_sprite_accessories = list(
 		SAC_MARKINGS = list(
-			/decl/sprite_accessory/marking/frame/plating = "#8888cc",
-			/decl/sprite_accessory/marking/frame/plating/legs = "#8888cc",
-			/decl/sprite_accessory/marking/frame/plating/head = "#8888cc"
+			/decl/sprite_accessory/marking/frame/plating      = list(SAM_COLOR = "#8888cc"),
+			/decl/sprite_accessory/marking/frame/plating/legs = list(SAM_COLOR = "#8888cc"),
+			/decl/sprite_accessory/marking/frame/plating/head = list(SAM_COLOR = "#8888cc")
 		)
 	)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame

@@ -107,9 +107,9 @@
 	age_descriptor = /datum/appearance_descriptor/age/grafadreka
 	default_sprite_accessories = list(
 		SAC_MARKINGS = list(
-			/decl/sprite_accessory/marking/grafadreka                 = COLOR_BLUE_GRAY,
-			/decl/sprite_accessory/marking/grafadreka/bioluminescence = COLOR_CYAN,
-			/decl/sprite_accessory/marking/grafadreka/claws           = COLOR_SILVER
+			/decl/sprite_accessory/marking/grafadreka                 = list(SAM_COLOR = COLOR_BLUE_GRAY),
+			/decl/sprite_accessory/marking/grafadreka/bioluminescence = list(SAM_COLOR = COLOR_CYAN),
+			/decl/sprite_accessory/marking/grafadreka/claws           = list(SAM_COLOR = COLOR_SILVER)
 		)
 	)
 	z_flags = ZMM_WIDE_LOAD

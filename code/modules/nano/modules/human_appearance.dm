@@ -48,21 +48,23 @@
 	if(href_list["hair"])
 		var/decl/sprite_accessory/hair = locate(href_list["hair"])
 		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR)) && SET_HAIR_STYLE(owner, hair.type, FALSE))
+			owner.update_hair() // No idea why this is necessary, setting the accessory above should be fine.
 			return TRUE
 
 	if(href_list["hair_color"] && can_change(APPEARANCE_HAIR_COLOR))
-		var/new_hair = input("Please select hair color.", "Hair Color", GET_HAIR_COLOUR(owner)) as color|null
-		if(new_hair && can_still_topic(state) && SET_HAIR_COLOUR(owner, new_hair, FALSE))
+		var/new_hair_color = input("Please select hair color.", "Hair Color", GET_HAIR_COLOR(owner)) as color|null
+		if(new_hair_color && can_still_topic(state) && SET_HAIR_COLOR(owner, new_hair_color, FALSE))
 			return TRUE
 
 	if(href_list["facial_hair"])
 		var/decl/sprite_accessory/facial_hair = locate(href_list["facial_hair"])
 		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR)) && SET_FACIAL_HAIR_STYLE(owner, facial_hair.type, FALSE))
+			owner.update_hair() // No idea why this is necessary, setting the accessory above should be fine.
 			return TRUE
 
 	if(href_list["facial_hair_color"] && can_change(APPEARANCE_FACIAL_HAIR_COLOR))
-		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", GET_FACIAL_HAIR_COLOUR(owner)) as color|null
-		if(new_facial && can_still_topic(state) && SET_FACIAL_HAIR_COLOUR(owner, new_facial, FALSE))
+		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", GET_FACIAL_HAIR_COLOR(owner)) as color|null
+		if(new_facial && can_still_topic(state) && SET_FACIAL_HAIR_COLOR(owner, new_facial, FALSE))
 			return TRUE
 
 	if(href_list["eye_color"])

@@ -384,6 +384,7 @@ var/global/list/dexterity_levels = list(
 #define EATING_METHOD_EAT   0
 #define EATING_METHOD_DRINK 1
 
+// Sprite accessory categories for shorter reference.
 #define SAC_HAIR        /decl/sprite_accessory_category/hair
 #define SAC_FACIAL_HAIR /decl/sprite_accessory_category/facial_hair
 #define SAC_COSMETICS   /decl/sprite_accessory_category/cosmetics
@@ -392,17 +393,19 @@ var/global/list/dexterity_levels = list(
 #define SAC_HORNS       /decl/sprite_accessory_category/horns
 #define SAC_FRILLS      /decl/sprite_accessory_category/frills
 
-// Helpers for setting mob appearance. They are extremely ugly, hence the helpers.
-#define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)          (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
-#define GET_HAIR_STYLE(TARGET)                              (TARGET.get_organ_sprite_accessory_by_category(SAC_HAIR, BP_HEAD))
-#define SET_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category(null, SAC_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
-#define GET_HAIR_COLOUR(TARGET)                             (TARGET.get_organ_sprite_accessory(GET_HAIR_STYLE(TARGET), BP_HEAD))
+// Sprite accessory metadata types for shorter reference.
+#define SAM_COLOR       /decl/sprite_accessory_metadata/color
 
-#define SET_FACIAL_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)   (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_FACIAL_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
-#define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(SAC_FACIAL_HAIR, BP_HEAD))
-#define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, SAC_FACIAL_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
-#define GET_FACIAL_HAIR_COLOUR(TARGET)                      (TARGET.get_organ_sprite_accessory(GET_FACIAL_HAIR_STYLE(TARGET), BP_HEAD))
+// Helpers for setting mob appearance. They are extremely ugly, hence the helpers.
+#define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_HAIR_STYLE(TARGET)                            (TARGET.get_organ_sprite_accessory_by_category(SAC_HAIR, BP_HEAD))
+#define SET_HAIR_COLOR(TARGET, COLOR, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category(null, SAC_HAIR, list(SAM_COLOR = (COLOR)), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define GET_HAIR_COLOR(TARGET)                            (TARGET.get_organ_sprite_accessory_metadata(GET_HAIR_STYLE(TARGET), BP_HEAD, SAM_COLOR))
+
+#define SET_FACIAL_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_FACIAL_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_FACIAL_HAIR_STYLE(TARGET)                     (TARGET.get_organ_sprite_accessory_by_category(SAC_FACIAL_HAIR, BP_HEAD))
+#define SET_FACIAL_HAIR_COLOR(TARGET, COLOR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, SAC_FACIAL_HAIR, list(SAM_COLOR = (COLOR)), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define GET_FACIAL_HAIR_COLOR(TARGET)                     (TARGET.get_organ_sprite_accessory_metadata(GET_FACIAL_HAIR_STYLE(TARGET), BP_HEAD, SAM_COLOR))
 
 // Used in death() to skip message broadcast.
 #define SKIP_DEATH_MESSAGE "no message"
-

@@ -408,13 +408,14 @@ var/global/list/time_prefs_fixed = list()
 			O.clear_sprite_accessories_by_category(sprite_category.type, skip_update = TRUE)
 
 	for(var/accessory_category in sprite_accessories)
-		for(var/accessory in sprite_accessories[accessory_category])
+		var/list/accessories = sprite_accessories[accessory_category]
+		for(var/accessory in accessories)
 			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			var/accessory_colour = sprite_accessories[accessory_category][accessory]
+			var/accessory_metadata = accessories[accessory]
 			for(var/bodypart in accessory_decl.body_parts)
 				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
 				if(O)
-					O.set_sprite_accessory(accessory, accessory_category, accessory_colour, skip_update = TRUE)
+					O.set_sprite_accessory(accessory, accessory_category, accessory_metadata, skip_update = TRUE)
 
 	if(length(traits))
 		for(var/trait_type in traits)

@@ -53,7 +53,8 @@
 	for(var/accessory_category in default_sprite_accessories)
 		pref.sprite_accessories[accessory_category] = list()
 		for(var/accessory in default_sprite_accessories[accessory_category])
-			pref.sprite_accessories[accessory_category][accessory] = default_sprite_accessories[accessory_category][accessory]
+			var/list/default_data = default_sprite_accessories[accessory_category][accessory]
+			pref.sprite_accessories[accessory_category][accessory] = islist(default_data) ? default_data.Copy() : list()
 
 /decl/bodytype/proc/apply_appearance(var/mob/living/human/H)
 	if(base_color)

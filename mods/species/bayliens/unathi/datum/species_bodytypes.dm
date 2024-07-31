@@ -22,7 +22,7 @@
 
 	default_sprite_accessories = list(
 		SAC_FRILLS = list(
-			/decl/sprite_accessory/frills/lizard/frills_long = "#192e19"
+			/decl/sprite_accessory/frills/lizard/frills_long = list(SAM_COLOR = "#192e19")
 		)
 	)
 

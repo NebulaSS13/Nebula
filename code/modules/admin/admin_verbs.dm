@@ -748,12 +748,12 @@ var/global/list/admin_verbs_mod = list(
 	var/update_hair = FALSE
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
 	if(new_facial)
-		SET_FACIAL_HAIR_COLOUR(M, new_facial, TRUE)
+		SET_FACIAL_HAIR_COLOR(M, new_facial, TRUE)
 		update_hair = TRUE
 
 	var/new_hair = input("Please select hair color.", "Character Generation") as color
 	if(new_hair)
-		SET_HAIR_COLOUR(M, new_hair, TRUE)
+		SET_HAIR_COLOR(M, new_hair, TRUE)
 		update_hair = TRUE
 
 	var/new_eyes = input("Please select eye color.", "Character Generation") as color
@@ -792,7 +792,7 @@ var/global/list/admin_verbs_mod = list(
 			M.set_gender(NEUTER)
 
 	if(update_hair)
-		M.update_hair()
+		M.update_hair(TRUE)
 	M.update_body()
 
 /client/proc/free_slot_submap()

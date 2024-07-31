@@ -23,8 +23,8 @@
 	)
 	override_limb_types  = list(BP_TAIL = /obj/item/organ/external/tail/avian)
 	default_sprite_accessories = list(
-		SAC_HAIR     = list(/decl/sprite_accessory/hair/avian    = "#252525"),
-		SAC_MARKINGS = list(/decl/sprite_accessory/marking/avian = "#454545")
+		SAC_HAIR     = list(/decl/sprite_accessory/hair/avian    = list(SAM_COLOR = "#252525")),
+		SAC_MARKINGS = list(/decl/sprite_accessory/marking/avian = list(SAM_COLOR = "#454545"))
 	)
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
 	heat_discomfort_strings = list(

@@ -14,7 +14,7 @@
 
 	default_sprite_accessories = list(
 		SAC_HAIR = list(
-			/decl/sprite_accessory/hair/skrell/short = "#006666"
+			/decl/sprite_accessory/hair/skrell/short = list(SAM_COLOR = "#006666")
 		)
 	)
 	appearance_descriptors = list(

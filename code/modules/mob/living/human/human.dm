@@ -625,11 +625,11 @@
 			continue
 		for(var/accessory in root_bodytype.default_sprite_accessories[acc_cat])
 			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			var/accessory_colour = root_bodytype.default_sprite_accessories[acc_cat][accessory]
+			var/accessory_metadata = root_bodytype.default_sprite_accessories[acc_cat][accessory]
 			for(var/bodypart in accessory_decl.body_parts)
 				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, bodypart)
 				if(O && O.bodytype == root_bodytype)
-					O.set_sprite_accessory(accessory, accessory_decl.accessory_category, accessory_colour, skip_update = TRUE)
+					O.set_sprite_accessory(accessory, accessory_decl.accessory_category, accessory_metadata, skip_update = TRUE)
 
 	reset_offsets()
 
