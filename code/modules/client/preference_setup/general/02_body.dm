@@ -412,3 +412,4 @@
 		var/decl/sprite_accessory/accessory_decl = all_accessories[accessory]
 		if(istype(accessory_decl) && !is_type_in_list(accessory_decl, disallowed_accessories) && accessory_decl.accessory_is_available(acc_mob, mob_species, mob_bodytype))
 			LAZYADD(., accessory_decl)
+	return sortTim(., /proc/cmp_name_asc)
