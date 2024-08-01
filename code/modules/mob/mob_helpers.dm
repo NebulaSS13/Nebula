@@ -416,24 +416,23 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 #define SAFE_PERP -50
 /mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
+
 	if(stat == DEAD)
 		return SAFE_PERP
 	if(get_equipped_item(slot_handcuffed_str))
 		return SAFE_PERP
-	return 0
-
-/mob/living/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
-	var/threatcount = ..()
-	if(. == SAFE_PERP)
-		return SAFE_PERP
 
 	//Agent cards lower threatlevel.
+	var/threatcount = 0
 	var/obj/item/card/id/id = GetIdCard()
-	if(id && istype(id, /obj/item/card/id/syndicate))
-		threatcount -= 2
+
 	// A proper	CentCom id is hard currency.
-	else if(id && istype(id, /obj/item/card/id/centcom))
+	if(istype(id, /obj/item/card/id/centcom))
 		return SAFE_PERP
+
+	// Syndicate IDs have masking I guess.
+	if(istype(id, /obj/item/card/id/syndicate))
+		threatcount -= 2
 
 	if(check_access && !access_obj.allowed(src))
 		threatcount += 4
@@ -447,7 +446,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/energy_blade) || istype(belt, /obj/item/baton))
 			threatcount += 2
 
-		if(species.name != global.using_map.default_species)
+		if(get_species_name() != global.using_map.default_species)
 			threatcount += 2
 
 	if(check_records || check_arrest)

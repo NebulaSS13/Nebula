@@ -527,9 +527,9 @@
 	if(try_slapcrafting(W, user))
 		return TRUE
 
-	if(W.storage?.use_to_pickup)
+	if(W.storage?.use_to_pickup && isturf(loc))
 		//Mode is set to collect all items
-		if(W.storage.collection_mode && isturf(src.loc))
+		if(W.storage.collection_mode)
 			W.storage.gather_all(src.loc, user)
 			return TRUE
 		if(W.storage.can_be_inserted(src, user))
@@ -1069,7 +1069,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		try_burn_wearer(user, slot, 1)
 
 /obj/item/can_embed()
-	return !anchored && !is_robot_module(src)
+	return !anchored && (!ismob(loc) || canremove) && (!loc || isturf(loc) || ismob(loc)) && !is_robot_module(src)
 
 /obj/item/clear_matter()
 	..()

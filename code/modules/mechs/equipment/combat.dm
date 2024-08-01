@@ -421,12 +421,11 @@
 
 /obj/aura/mech_ballistic/bullet_act(obj/item/projectile/P, def_zone)
 	. = ..()
-	if (shield)
-		if (prob(shield.block_chance(P.damage, P.armor_penetration, source = P)))
-			user.visible_message(SPAN_WARNING("\The [P] is blocked by \the [user]'s [shield]."))
-			user.bullet_impact_visuals(P, def_zone, 0)
-			shield.on_block_attack()
-			return AURA_FALSE|AURA_CANCEL
+	if (shield && prob(shield.block_chance(P.damage, P.armor_penetration, source = P)))
+		user.visible_message(SPAN_WARNING("\The [P] is blocked by \the [user]'s [shield.name]."))
+		user.bullet_impact_visuals(P, def_zone, 0)
+		shield.on_block_attack()
+		return AURA_FALSE|AURA_CANCEL
 
 /obj/aura/mech_ballistic/hitby(atom/movable/M, datum/thrownthing/TT)
 	. = ..()
@@ -443,11 +442,10 @@
 
 /obj/aura/mech_ballistic/attackby(obj/item/I, mob/user)
 	. = ..()
-	if (shield)
-		if (prob(shield.block_chance(I.force, I.armor_penetration, source = I, attacker = user)))
-			user.visible_message(SPAN_WARNING("\The [I] is blocked by \the [user]'s [shield]."))
-			playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-			return AURA_FALSE|AURA_CANCEL
+	if (shield && prob(shield.block_chance(I.force, I.armor_penetration, source = I, attacker = user)))
+		user.visible_message(SPAN_WARNING("\The [I] is blocked by \the [user]'s [shield.name]."))
+		playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+		return AURA_FALSE|AURA_CANCEL
 
 /obj/item/mech_equipment/flash
 	name = "exosuit flash"

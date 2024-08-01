@@ -6,7 +6,7 @@
 	color = "#666666"
 	buckle_dir = FALSE
 	buckle_lying = FALSE //force people to sit up in chairs when buckled
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_ANCHORABLE
 	material = /decl/material/solid/organic/wood
 	reinf_material = /decl/material/solid/organic/cloth
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
@@ -21,19 +21,6 @@
 /obj/structure/bed/sofa/post_buckle_mob()
 	update_icon()
 	return ..()
-
-/obj/structure/bed/attackby(obj/item/W, mob/user) //made to be able to rotate the sofa
-	. = ..()
-	if(.)
-		return
-	if(!IS_WRENCH(W))
-		return
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	anchored = !anchored
-	if(anchored)
-		to_chat(user, "You disanchored \the [src].")
-	else
-		to_chat(user, "You anchored \the [src].")
 
 /obj/structure/bed/sofa/on_update_icon()
 

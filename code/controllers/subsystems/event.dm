@@ -126,7 +126,7 @@ SUBSYSTEM_DEF(event)
 
 //Event manager UI
 /datum/controller/subsystem/event/proc/GetInteractWindow()
-	var/allow_random_events = get_config_value(/decl/config/toggle/allow_random_events)
+	var/allow_random_events = get_config_value(/decl/config/toggle/on/allow_random_events)
 	var/html = "<A align='right' href='byond://?src=\ref[src];refresh=1'>Refresh</A>"
 	html += "<A align='right' href='byond://?src=\ref[src];pause_all=[!allow_random_events]'>Pause All - [allow_random_events ? "Pause" : "Resume"]</A>"
 
@@ -262,8 +262,8 @@ SUBSYSTEM_DEF(event)
 		EC.delayed = !EC.delayed
 		log_and_message_admins("has [EC.delayed ? "paused" : "resumed"] countdown for [severity_to_string[EC.severity]] events.")
 	else if(href_list["pause_all"])
-		set_config_value(/decl/config/toggle/allow_random_events, text2num(href_list["pause_all"]))
-		log_and_message_admins("has [get_config_value(/decl/config/toggle/allow_random_events) ? "resumed" : "paused"] countdown for all events.")
+		set_config_value(/decl/config/toggle/on/allow_random_events, text2num(href_list["pause_all"]))
+		log_and_message_admins("has [get_config_value(/decl/config/toggle/on/allow_random_events) ? "resumed" : "paused"] countdown for all events.")
 	else if(href_list["interval"])
 		var/delay = input("Enter delay modifier. A value less than one means events fire more often, higher than one less often.", "Set Interval Modifier") as num|null
 		if(delay && delay > 0)
