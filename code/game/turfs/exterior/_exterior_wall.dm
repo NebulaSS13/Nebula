@@ -80,6 +80,10 @@ var/global/list/natural_walls = list()
 			to_chat(user, SPAN_WARNING("You cannot cut a ramp into a wall with no additional walls behind it."))
 			return TRUE
 
+		if(P.material?.hardness < material.hardness)
+			to_chat(user, SPAN_WARNING("\The [P] is not hard enough to cut through [material.solid_name]."))
+			return TRUE
+
 		if(P.do_tool_interaction(TOOL_PICK, user, src, 3 SECONDS, suffix_message = ", forming it into a ramp") && !ramp_slope_direction)
 			make_ramp(user, user_dir)
 		return TRUE
@@ -225,7 +229,7 @@ var/global/list/natural_walls = list()
 			return handle_xenoarch_tool_interaction(W, user)
 
 	// Drill out natural walls.
-	if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
+	if(W.material?.hardness >= material.hardness && W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
 		dismantle_wall()
 		return TRUE
 

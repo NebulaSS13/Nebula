@@ -1,4 +1,3 @@
-
 /decl/config/toggle/on
 	abstract_type = /decl/config/toggle/on
 	default_value = TRUE

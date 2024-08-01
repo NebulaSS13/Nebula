@@ -276,6 +276,10 @@
 		show_to(user)
 
 /obj/item/storage/proc/gather_all(var/turf/T, var/mob/user)
+
+	if(!istype(T))
+		return
+
 	var/success = 0
 	var/failure = 0
 
