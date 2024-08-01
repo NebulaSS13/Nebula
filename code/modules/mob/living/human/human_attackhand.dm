@@ -414,3 +414,12 @@
 		if(summary)
 			to_chat(src, SPAN_NOTICE(summary))
 	attack_selector?.update_icon()
+
+/mob/living/human/UnarmedAttack(atom/A, proximity_flag)
+	// Hackfix for humans trying to attack someone without hands.
+	// Dexterity ect. should be checked in these procs regardless,
+	// but unarmed attacks that don't require hands should still
+	// have the ability to be used.
+	if(!(. = ..()) && !get_active_held_item_slot() && a_intent == I_HURT && isliving(A))
+		var/mob/living/victim = A
+		return victim.default_hurt_interaction(src)

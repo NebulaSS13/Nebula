@@ -1,4 +1,3 @@
-#define SPECIES_TAJARA  "Tajara"
 #define LANGUAGE_TAJARA "Siik'maas"
 #define BODYTYPE_FELINE "feline body"
 #define BODY_FLAG_FELINE BITFLAG(7)

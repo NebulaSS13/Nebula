@@ -85,7 +85,7 @@
 				var/atom/movable/AM = atom_movable
 				if(AM && AM.simulated && !T.protects_atom(AM))
 					AM.explosion_act(dist)
-					if(!QDELETED(AM) && !AM.anchored)
+					if(!QDELETED(AM) && !AM.anchored && isturf(AM.loc))
 						addtimer(CALLBACK(AM, TYPE_PROC_REF(/atom/movable, throw_at), throw_target, throw_dist, throw_dist), 0)
 
 	var/took = (REALTIMEOFDAY-start_time)/10

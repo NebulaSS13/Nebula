@@ -256,7 +256,7 @@
 		// Pour fuel or water into a fire.
 		if(istype(thing, /obj/item/chems))
 			var/obj/item/chems/chems = thing
-			if(chems.standard_pour_into(src, user))
+			if(chems.standard_pour_into(user, src))
 				return TRUE
 
 	if(lit == FIRE_LIT && istype(thing, /obj/item/flame))

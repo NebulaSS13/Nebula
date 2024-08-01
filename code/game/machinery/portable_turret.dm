@@ -383,6 +383,7 @@ var/global/list/turret_icons
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
 
 /obj/machinery/porta_turret/Process()
+
 	if(stat & (NOPOWER|BROKEN))
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already
 		popDown()
@@ -399,9 +400,8 @@ var/global/list/turret_icons
 	for(var/mob/M in mobs_in_view(world.view, src))
 		assess_and_assign(M, targets, secondarytargets)
 
-	if(!tryToShootAt(targets))
-		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
-			popDown() // no valid targets, close the cover
+	if(!tryToShootAt(targets) && !tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
+		popDown() // no valid targets, close the cover
 
 	var/current_max_health = get_max_health()
 	if(auto_repair && (current_health < current_max_health))
@@ -416,13 +416,10 @@ var/global/list/turret_icons
 			secondarytargets += L
 
 /obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
-	if(!istype(L))
+	if(!istype(L) || !L.simulated)
 		return TURRET_NOT_TARGET
 
 	if(L.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
-		return TURRET_NOT_TARGET
-
-	if(!L)
 		return TURRET_NOT_TARGET
 
 	if(!emagged && issilicon(L))	// Don't target silica
@@ -454,34 +451,29 @@ var/global/list/turret_icons
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
-	if(ishuman(L))	//if the target is a human, analyze threat level
-		if(assess_perp(L) < 4)
-			return TURRET_NOT_TARGET	//if threat level < 4, keep going
+	if(assess_perp(L) < 4) //if the target is a human, analyze threat level
+		return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.current_posture.prone)		//if the perp is lying down, it's still a target but a less-important target
 		return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
-/obj/machinery/porta_turret/proc/assess_perp(var/mob/living/human/H)
-	if(!H || !istype(H))
+/obj/machinery/porta_turret/proc/assess_perp(var/mob/living/perp)
+	if(!istype(perp))
 		return 0
-
 	if(emagged)
 		return 10
-
-	return H.assess_perp(src, check_access, check_weapons, check_records, check_arrest)
+	return perp.assess_perp(src, check_access, check_weapons, check_records, check_arrest)
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
-	if(targets.len && last_target && (last_target in targets) && target(last_target))
+	if(length(targets) && last_target && (last_target in targets) && target(last_target))
 		return 1
 
-	while(targets.len > 0)
-		var/mob/living/M = pick(targets)
-		targets -= M
+	while(length(targets))
+		var/mob/living/M = pick_n_take(targets)
 		if(target(M))
-			return 1
-
+			return TRUE
 
 /obj/machinery/porta_turret/proc/popUp()	//pops the turret up
 	if(disabled)

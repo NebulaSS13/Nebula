@@ -207,7 +207,7 @@
 	mob.moving = FALSE
 
 /datum/movement_handler/mob/movement/MayMove(mob/mover, is_external)
-	return IS_SELF(mover) &&  mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
+	return IS_SELF(mover) && mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
 
 /mob/proc/get_stamina_used_per_step()
 	return 1

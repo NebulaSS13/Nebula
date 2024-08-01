@@ -766,8 +766,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set desc = "Toggles random events such as meteors, black holes, blob (but not space dust) on/off"
 	if(!check_rights(R_SERVER))	return
 
-	toggle_config_value(/decl/config/toggle/allow_random_events)
-	if(get_config_value(/decl/config/toggle/allow_random_events))
+	toggle_config_value(/decl/config/toggle/on/allow_random_events)
+	if(get_config_value(/decl/config/toggle/on/allow_random_events))
 		to_chat(usr, "Random events enabled")
 		message_admins("Admin [key_name_admin(usr)] has enabled random events.", 1)
 	else
