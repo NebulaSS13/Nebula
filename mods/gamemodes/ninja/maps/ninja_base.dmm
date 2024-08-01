@@ -742,7 +742,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bS" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/soylentgreen,
+/obj/item/food/soylentgreen,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

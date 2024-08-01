@@ -6492,7 +6492,7 @@
 /area/ship/trade/command/bridge)
 "Im" = (
 /obj/structure/table,
-/obj/item/chems/food/monkeycube/wrapped,
+/obj/item/food/monkeycube/wrapped,
 /obj/structure/closet/secure_closet/medical_wall/pills{
 	pixel_y = -32;
 	req_access = null;
@@ -7006,6 +7006,7 @@
 	department = "Captain";
 	pixel_y = -32;
 	dir = 2;
+	
 	},
 /obj/item/radio/intercom{
 	dir = 4;

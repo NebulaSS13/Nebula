@@ -6,7 +6,7 @@
 	icon = 'icons/obj/food/containers/crackerbag.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	key_type = /obj/item/chems/food/cracker
+	key_type = /obj/item/food/cracker
 	use_single_icon_overlay_state = "crackerbag"
 	storage = /datum/storage/box/crackers
 
@@ -15,7 +15,7 @@
 	return overlay
 
 /obj/item/box/fancy/crackers/WillContain()
-	return list(/obj/item/chems/food/cracker = 6)
+	return list(/obj/item/food/cracker = 6)
 
 /obj/item/box/fancy/crackers/update_icon_state()
 	icon_state = get_world_inventory_state()

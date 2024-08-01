@@ -262,15 +262,15 @@
 /area/shaded_hills/stable)
 "jx" = (
 /obj/structure/reagent_dispensers/barrel/ebony,
-/obj/item/chems/food/grown/potato,
-/obj/item/chems/food/grown/potato,
-/obj/item/chems/food/grown/potato,
-/obj/item/chems/food/grown/carrot,
-/obj/item/chems/food/grown/carrot,
-/obj/item/chems/food/grown/carrot,
-/obj/item/chems/food/grown/cabbage,
-/obj/item/chems/food/grown/cabbage,
-/obj/item/chems/food/grown/cabbage,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/carrot,
+/obj/item/food/grown/carrot,
+/obj/item/food/grown/carrot,
+/obj/item/food/grown/cabbage,
+/obj/item/food/grown/cabbage,
+/obj/item/food/grown/cabbage,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "jA" = (
@@ -601,7 +601,7 @@
 /area/shaded_hills/inn)
 "zl" = (
 /obj/structure/table/marble,
-/obj/item/chems/food/meatpie,
+/obj/item/food/meatpie,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "zm" = (
@@ -801,12 +801,12 @@
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/downlands)
 "GZ" = (
-/obj/item/chems/food/butchery/meat/chicken,
-/obj/item/chems/food/butchery/meat/chicken,
-/obj/item/chems/food/butchery/haunch/side,
-/obj/item/chems/food/butchery/haunch/shoulder,
-/obj/item/chems/food/butchery/cutlet/raw,
-/obj/item/chems/food/butchery/cutlet/raw,
+/obj/item/food/butchery/meat/chicken,
+/obj/item/food/butchery/meat/chicken,
+/obj/item/food/butchery/haunch/side,
+/obj/item/food/butchery/haunch/shoulder,
+/obj/item/food/butchery/cutlet/raw,
+/obj/item/food/butchery/cutlet/raw,
 /obj/structure/reagent_dispensers/barrel/ebony,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
@@ -983,10 +983,10 @@
 /area/shaded_hills/shrine)
 "PQ" = (
 /obj/structure/closet/crate/chest,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat/chicken,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat/chicken,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "Qs" = (
@@ -1092,11 +1092,11 @@
 /area/shaded_hills/outside/downlands)
 "TM" = (
 /obj/structure/table/woodentable/ebony,
-/obj/item/chems/food/grown/potato,
-/obj/item/chems/food/grown/potato,
-/obj/item/chems/food/grown/carrot,
-/obj/item/chems/food/grown/carrot,
-/obj/item/chems/food/grown/cabbage,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/carrot,
+/obj/item/food/grown/carrot,
+/obj/item/food/grown/cabbage,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/large/salt,
 /turf/floor/wood/walnut,
@@ -1262,7 +1262,7 @@
 /area/shaded_hills/outside/shrine)
 "ZE" = (
 /obj/structure/table/marble,
-/obj/item/chems/food/cherrypie,
+/obj/item/food/cherrypie,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "ZY" = (

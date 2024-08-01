@@ -3,7 +3,7 @@
 #define OPEN_HARD 1
 #define OPEN_EASY 0
 
-/obj/item/chems/food/can
+/obj/item/food/can
 	name = "empty can"
 	icon = 'icons/obj/food_canned.dmi'
 	center_of_mass = @'{"x":15,"y":9}'
@@ -13,27 +13,27 @@
 	var/sealed = TRUE
 	var/open_complexity = OPEN_HARD
 
-/obj/item/chems/food/can/Initialize()
+/obj/item/food/can/Initialize()
 	. = ..()
 	if(!sealed)
 		unseal()
 
-/obj/item/chems/food/can/examine(mob/user)
+/obj/item/food/can/examine(mob/user)
 	. = ..()
 	to_chat(user, "It is [!ATOM_IS_OPEN_CONTAINER(src) ? "" : "un"]sealed.")
 	to_chat(user, "It looks [open_complexity ? "hard" : "easy "] to open.")
 
-/obj/item/chems/food/can/proc/unseal(mob/user)
+/obj/item/food/can/proc/unseal(mob/user)
 	playsound(src, 'sound/effects/canopen.ogg', rand(10, 50), 1)
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	sealed = FALSE
 
-/obj/item/chems/food/can/attack_self(mob/user)
+/obj/item/food/can/attack_self(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src) && !open_complexity)
 		to_chat(user, SPAN_NOTICE("You unseal \the [src] with a crack of metal."))
 		unseal()
 
-/obj/item/chems/food/can/attackby(obj/item/W, mob/user)
+/obj/item/food/can/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/knife) && !ATOM_IS_OPEN_CONTAINER(src))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] is trying to open \the [src] with \the [W]."),
@@ -51,18 +51,18 @@
 		else
 			to_chat(user, SPAN_WARNING("You need a can-opener to open this!"))
 
-/obj/item/chems/food/can/on_update_icon()
+/obj/item/food/can/on_update_icon()
 	. = ..()
 	icon_state = initial(icon_state)
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		icon_state = "[initial(icon_state)]-open"
 
-/obj/item/chems/food/can/apply_filling_overlay()
+/obj/item/food/can/apply_filling_overlay()
 	return //Bypass searching through the whole icon file for a filling icon
 
 //Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts
 
-/obj/item/chems/food/can/beef
+/obj/item/food/can/beef
 	name = "quadrangled beefium"
 	icon_state = "beef"
 	desc = "Proteins carefully cloned from an extinct species of cattle in a secret facility on the outer rim."
@@ -70,11 +70,11 @@
 	filling_color = "#663300"
 	nutriment_desc = list("beef" = 1)
 
-/obj/item/chems/food/can/beef/populate_reagents()
+/obj/item/food/can/beef/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 12)
 
-/obj/item/chems/food/can/beans
+/obj/item/food/can/beans
 	name = "baked beans"
 	icon_state = "beans"
 	desc = "Carefully synthethized from soy."
@@ -83,7 +83,7 @@
 	nutriment_desc = list("beans" = 1)
 	nutriment_amt = 12
 
-/obj/item/chems/food/can/tomato
+/obj/item/food/can/tomato
 	name = "tomato soup"
 	icon_state = "tomato"
 	desc = "Plain old unseasoned tomato soup. This can is older than you are!"
@@ -93,11 +93,11 @@
 	eat_sound = 'sound/items/drink.ogg'
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/can/tomato/populate_reagents()
+/obj/item/food/can/tomato/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 12)
 
-/obj/item/chems/food/can/spinach
+/obj/item/food/can/spinach
 	name = "spinach"
 	icon_state = "spinach"
 	desc = "Notably has less iron in it than a watermelon."
@@ -106,7 +106,7 @@
 	nutriment_desc = list("sogginess" = 1, "vegetable" = 1)
 	bitesize = 20
 
-/obj/item/chems/food/can/spinach/populate_reagents()
+/obj/item/food/can/spinach/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment,    5)
 	add_to_reagents(/decl/material/liquid/adrenaline,   5)
@@ -115,7 +115,7 @@
 
 //Vending Machine Foods should go here.
 
-/obj/item/chems/food/can/caviar
+/obj/item/food/can/caviar
 	name = "canned caviar"
 	icon_state = "fisheggs"
 	desc = "Caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt."
@@ -124,7 +124,7 @@
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 6
 
-/obj/item/chems/food/can/caviar/true
+/obj/item/food/can/caviar/true
 	name = "canned caviar"
 	icon_state = "carpeggs"
 	desc = "Caviar, or space carp eggs. Exceeds the recomended amount of heavy metals in your diet! But very posh."
@@ -133,7 +133,7 @@
 	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
 	nutriment_amt = 6
 
-/obj/item/chems/food/can/caviar/true/populate_reagents()
+/obj/item/food/can/caviar/true/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 4)
 	add_to_reagents(/decl/material/liquid/carpotoxin,        1)

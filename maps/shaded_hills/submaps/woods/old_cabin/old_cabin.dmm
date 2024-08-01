@@ -52,7 +52,7 @@
 "D" = (
 /obj/effect/spider/spiderling/mundane,
 /obj/structure/table/woodentable/ebony,
-/obj/item/chems/food/grown/carrot,
+/obj/item/food/grown/carrot,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
@@ -63,9 +63,9 @@
 "H" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/bladed/knife,
-/obj/item/chems/food/grown/potato,
-/obj/item/chems/food/grown/potato,
-/obj/item/chems/food/grown/carrot,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/carrot,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)

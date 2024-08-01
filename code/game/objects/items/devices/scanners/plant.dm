@@ -6,7 +6,7 @@
 	scan_sound = 'sound/effects/fastbeep.ogg'
 	printout_color = "#eeffe8"
 	var/static/list/valid_targets = list(
-		/obj/item/chems/food/grown,
+		/obj/item/food/grown,
 		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/item/seeds,
 		/obj/structure/flora/plant
@@ -26,8 +26,8 @@
 
 	var/datum/seed/grown_seed
 	var/datum/reagents/grown_reagents
-	if(istype(target,/obj/item/chems/food/grown))
-		var/obj/item/chems/food/grown/G = target
+	if(istype(target,/obj/item/food/grown))
+		var/obj/item/food/grown/G = target
 		grown_seed = G.seed
 		grown_reagents = G.reagents
 	else if(istype(target,/obj/item/seeds))

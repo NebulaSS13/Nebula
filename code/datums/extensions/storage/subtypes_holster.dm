@@ -20,7 +20,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/chems/food/donut/,
+		/obj/item/food/donut,
 		/obj/item/baton,
 		/obj/item/telebaton,
 		/obj/item/flame/fuelled/lighter,

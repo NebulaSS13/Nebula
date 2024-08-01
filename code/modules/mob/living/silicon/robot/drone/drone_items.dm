@@ -84,7 +84,7 @@
 		/obj/item/stack/cable_coil,
 		/obj/item/stock_parts/circuitboard,
 		/obj/item/chems/glass,
-		/obj/item/chems/food/monkeycube,
+		/obj/item/food/monkeycube,
 		/obj/item/stock_parts/computer,
 		/obj/item/transfer_valve,
 		/obj/item/assembly/signaler,
@@ -110,7 +110,7 @@
 	desc = "A simple grasping tool used to perform tasks in the service sector, such as handling food, drinks, and seeds."
 	can_hold = list(
 		/obj/item/chems/glass,
-		/obj/item/chems/food,
+		/obj/item/food,
 		/obj/item/chems/drinks,
 		/obj/item/chems/condiment,
 		/obj/item/seeds,
@@ -387,7 +387,7 @@
 		else if(istype(W,/obj/item/shard))
 			if(glass)
 				glass.add_charge(1000)
-		else if(istype(W,/obj/item/chems/food/grown))
+		else if(istype(W,/obj/item/food/grown))
 			if(wood)
 				wood.add_charge(4000)
 		else if(istype(W,/obj/item/pipe))

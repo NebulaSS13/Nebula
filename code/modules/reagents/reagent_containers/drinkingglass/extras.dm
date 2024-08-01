@@ -11,11 +11,11 @@
 			update_icon()
 		else
 			to_chat(user, "<span class=warning>There's no space to put \the [GE] on \the [src]!</span>")
-	else if(istype(I, /obj/item/chems/food/processed_grown/slice))
+	else if(istype(I, /obj/item/food/processed_grown/slice))
 		if(!rim_pos)
 			to_chat(user, "<span class=warning>There's no space to put \the [I] on \the [src]!</span>")
 			return
-		var/obj/item/chems/food/processed_grown/slice/FS = I
+		var/obj/item/food/processed_grown/slice/FS = I
 		extras += FS
 		if(!user.try_unequip(FS, src))
 			return

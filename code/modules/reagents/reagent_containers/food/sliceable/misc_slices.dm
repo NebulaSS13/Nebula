@@ -1,4 +1,4 @@
-/obj/item/chems/food/watermelonslice
+/obj/item/food/watermelonslice
 	name = "watermelon slice"
 	desc = "A slice of watery goodness."
 	icon_state = "watermelonslice"

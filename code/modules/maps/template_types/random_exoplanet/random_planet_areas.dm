@@ -14,7 +14,7 @@
 	is_outside = OUTSIDE_YES
 
 // Let's make a token effort at making the fish somewhat alien I guess.
-/area/exoplanet/get_fishing_result(turf/origin, obj/item/chems/food/bait)
+/area/exoplanet/get_fishing_result(turf/origin, obj/item/food/bait)
 	. = ..()
 	if(ismob(.))
 		var/mob/M = .

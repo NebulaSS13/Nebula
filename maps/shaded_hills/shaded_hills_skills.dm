@@ -110,7 +110,7 @@
 /obj/item/stack/material/skin
 	work_skill = SKILL_TEXTILES
 
-/obj/item/chems/food/butchery/offal
+/obj/item/food/butchery/offal
 	work_skill = SKILL_TEXTILES
 
 /decl/material/solid/organic/cloth

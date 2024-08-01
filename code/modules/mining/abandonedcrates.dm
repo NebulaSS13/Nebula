@@ -24,7 +24,7 @@
 		if(1 to 5) // Common things go, 5%
 			new /obj/item/chems/drinks/bottle/rum(src)
 			new /obj/item/chems/drinks/bottle/whiskey(src)
-			new /obj/item/chems/food/grown/ambrosiadeus(src)
+			new /obj/item/food/grown/ambrosiadeus(src)
 			new /obj/item/flame/fuelled/lighter/zippo(src)
 		if(6 to 10)
 			new /obj/item/tool/drill(src)

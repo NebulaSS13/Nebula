@@ -1,21 +1,24 @@
-/obj/item/chems/food/get_food_consumption_method(mob/eater)
+/obj/item/food/get_edible_material_amount(mob/eater)
+	return reagents?.total_volume
+
+/obj/item/food/get_food_consumption_method(mob/eater)
 	return EATING_METHOD_EAT
 
-/obj/item/chems/food/play_feed_sound(mob/user, consumption_method = EATING_METHOD_EAT)
+/obj/item/food/play_feed_sound(mob/user, consumption_method = EATING_METHOD_EAT)
 	if(eat_sound)
 		playsound(user, pick(eat_sound), rand(10, 50), 1)
 		return
 	return ..()
 
-/obj/item/chems/food/handle_eaten_by_mob(mob/user, mob/target)
+/obj/item/food/handle_eaten_by_mob(mob/user, mob/target)
 	. = ..()
 	if(. == EATEN_SUCCESS)
 		bitecount++
 
-/obj/item/chems/food/get_food_default_transfer_amount(mob/eater)
+/obj/item/food/get_food_default_transfer_amount(mob/eater)
 	return eater?.get_eaten_transfer_amount(bitesize)
 
-/obj/item/chems/food/handle_consumed(mob/feeder, mob/eater, consumption_method = EATING_METHOD_EAT)
+/obj/item/food/handle_consumed(mob/feeder, mob/eater, consumption_method = EATING_METHOD_EAT)
 
 	if(isliving(eater))
 		var/mob/living/living_eater = eater

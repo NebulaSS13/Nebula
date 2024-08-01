@@ -4,7 +4,7 @@
 
 // Also contains unfried fried foods.
 
-/obj/item/chems/food/onionrings
+/obj/item/food/onionrings
 	name = "onion rings"
 	desc = "Like circular fries but better."
 	icon_state = "onionrings"
@@ -15,7 +15,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/fries
+/obj/item/food/fries
 	name = "chips"
 	desc = "Frenched potato, fried."
 	icon_state = "fries"
@@ -26,7 +26,7 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/chems/food/cheesyfries
+/obj/item/food/cheesyfries
 	name = "cheesy fries"
 	desc = "Fries. Covered in cheese. Duh."
 	icon_state = "cheesyfries"
@@ -37,6 +37,6 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/chems/food/cheesyfries/populate_reagents()
+/obj/item/food/cheesyfries/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 2)

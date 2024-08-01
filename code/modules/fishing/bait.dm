@@ -1,4 +1,4 @@
-/obj/item/chems/food/worm
+/obj/item/food/worm
 	name = "worm"
 	desc = "A wriggling worm."
 	icon = 'icons/obj/worm.dmi'

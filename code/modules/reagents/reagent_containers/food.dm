@@ -1,29 +1,30 @@
 ///////////
 // Foods //
 ///////////
-//Subtypes of /obj/item/chems/food are food items that people consume whole. The key points are that they are created
+//Subtypes of /obj/item/food are food items that people consume whole. The key points are that they are created
 //	already filled with reagents and are destroyed when empty. Additionally, they make a "munching" noise when eaten.
 
 //Food can hold a maximum of 50 units Generally speaking, you don't want to go over 40
 //	total for the item because you want to leave space for extra condiments. If you want an effect, add a reagent for
 //	it. Try to stick to existing reagents when possible (so if you want a stronger healing effect, just use regenerative serum).
 
-/obj/item/chems/food
+/obj/item/food
 	name = "snack"
 	desc = "Yummy!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = null
 	randpixel = 6
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_HOLLOW
 	item_flags = null
 	material = /decl/material/liquid/nutriment
-	possible_transfer_amounts = null
-	volume = 50
 	center_of_mass = @'{"x":16,"y":16}'
 	w_class = ITEM_SIZE_SMALL
-	abstract_type = /obj/item/chems/food
+	abstract_type = /obj/item/food
 	needs_attack_dexterity = DEXTERITY_NONE
 
+	/// The maximum reagent volume of this food. Used in initialize_reagents.
+	var/volume = 50
 	/// Indicates the food should give a stress effect on eating.
 	// This is set to 1 if the food is created by a recipe, -1 if the food is raw.
 	var/cooked_food = FOOD_PREPARED
@@ -42,35 +43,43 @@
 	var/trash
 	var/obj/item/plate/plate
 
-/obj/item/chems/food/Initialize()
+/obj/item/food/Initialize()
 	. = ..()
 	if(cooked_food == FOOD_RAW)
 		name = "raw [name]"
-	amount_per_transfer_from_this = bitesize
 	if(ispath(plate))
 		plate = new plate(src)
 
-/obj/item/chems/food/can_be_injected_by(var/atom/injector)
+/obj/item/food/Initialize(ml, material_key)
+	. = ..()
+	initialize_reagents()
+
+/obj/item/food/initialize_reagents(populate = TRUE)
+	if(!reagents)
+		create_reagents(volume)
+	else
+		reagents.maximum_volume = max(reagents.maximum_volume, volume)
+	return ..()
+
+/obj/item/chems/on_reagent_change()
+	if((. = ..()))
+		update_icon()
+
+/obj/item/food/can_be_injected_by(var/atom/injector)
 	return TRUE
 
-/obj/item/chems/food/standard_pour_into(mob/user, atom/target)
+/obj/item/food/standard_pour_into(mob/user, atom/target)
 	return FALSE
 
-/obj/item/chems/food/update_container_name()
-	return FALSE
-
-/obj/item/chems/food/update_container_desc()
-	return FALSE
-
-/obj/item/chems/food/attack_self(mob/user)
+/obj/item/food/attack_self(mob/user)
 	if(is_edible(user) && handle_eaten_by_mob(user, user) != EATEN_INVALID)
 		return TRUE
 	return ..()
 
-/obj/item/chems/food/dragged_onto(var/mob/user)
+/obj/item/food/dragged_onto(var/mob/user)
 	return attack_self(user)
 
-/obj/item/chems/food/examine(mob/user, distance)
+/obj/item/food/examine(mob/user, distance)
 	. = ..()
 
 	if(distance > 1)
@@ -91,20 +100,20 @@
 	else
 		to_chat(user, SPAN_NOTICE("\The [src] was bitten multiple times!"))
 
-/obj/item/chems/food/proc/is_sliceable()
+/obj/item/food/proc/is_sliceable()
 	return (slice_num && slice_path && slice_num > 0)
 
-/obj/item/chems/food/proc/drop_plate(var/drop_loc)
+/obj/item/food/proc/drop_plate(var/drop_loc)
 	if(istype(plate))
 		plate.dropInto(drop_loc || loc)
 		plate.make_dirty(src)
 	plate = null
 
-/obj/item/chems/food/physically_destroyed()
+/obj/item/food/physically_destroyed()
 	drop_plate()
 	return ..()
 
-/obj/item/chems/food/Destroy()
+/obj/item/food/Destroy()
 	QDEL_NULL(plate)
 	trash = null
 	if(contents)
@@ -112,7 +121,7 @@
 			something.dropInto(loc)
 	. = ..()
 
-/obj/item/chems/food/proc/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
+/obj/item/food/proc/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
 	filling_color = food_color
 	if(copy_donor_appearance)
 		appearance = donor
@@ -124,7 +133,7 @@
 			transform = M
 	update_icon()
 
-/obj/item/chems/food/on_update_icon()
+/obj/item/food/on_update_icon()
 	underlays.Cut()
 	. = ..()
 	//Since other things that don't have filling override this, slap it into its own proc to avoid the overhead of scanning through the icon file
@@ -142,12 +151,12 @@
 		I.appearance_flags |= RESET_TRANSFORM|RESET_COLOR
 		underlays += list(I)
 
-/obj/item/chems/food/proc/apply_filling_overlay()
+/obj/item/food/proc/apply_filling_overlay()
 	if(check_state_in_icon("[icon_state]_filling", icon))
 		add_overlay(overlay_image(icon, "[icon_state]_filling", filling_color))
 
 //Since we automatically create some reagents types for the nutriments, make sure we call this proc when overriding it
-/obj/item/chems/food/populate_reagents()
+/obj/item/food/populate_reagents()
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	if(nutriment_amt && nutriment_type)

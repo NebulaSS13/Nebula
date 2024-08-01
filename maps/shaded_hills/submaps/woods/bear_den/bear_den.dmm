@@ -45,8 +45,8 @@
 /area/shaded_hills/outside/point_of_interest/bear_den)
 "G" = (
 /obj/item/bone/skull/deer,
-/obj/item/chems/food/butchery/stomach,
-/obj/item/chems/food/butchery/offal,
+/obj/item/food/butchery/stomach,
+/obj/item/food/butchery/offal,
 /obj/abstract/exterior_marker/inside,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/natural/dirt,

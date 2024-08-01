@@ -742,7 +742,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/item/chems/food/liquidfood,
+/obj/item/food/liquidfood,
 /turf/floor/airless,
 /area/slavers_base/cells)
 "ce" = (
@@ -1307,7 +1307,7 @@
 /area/slavers_base/med)
 "dE" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/item/chems/food/liquidfood,
+/obj/item/food/liquidfood,
 /turf/floor/airless,
 /area/slavers_base/med)
 "dF" = (
@@ -1445,7 +1445,7 @@
 /turf/floor/tiled/airless,
 /area/slavers_base/med)
 "dZ" = (
-/obj/item/chems/food/liquidfood,
+/obj/item/food/liquidfood,
 /turf/floor/airless,
 /area/slavers_base/med)
 "ea" = (

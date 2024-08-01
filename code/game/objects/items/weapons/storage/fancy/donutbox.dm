@@ -19,7 +19,7 @@
 	return overlay
 
 /obj/item/box/fancy/donut/WillContain()
-	return list(/obj/item/chems/food/donut = 6)
+	return list(/obj/item/food/donut = 6)
 
 // Subtypes below.
 /obj/item/box/fancy/donut/empty/WillContain()

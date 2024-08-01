@@ -7,8 +7,8 @@
 					/obj/item/chems/drinks/milk = 4,
 					/obj/item/chems/drinks/soymilk = 2,
 					/obj/item/box/fancy/egg_box = 2,
-					/obj/item/chems/food/tofu = 4,
-					/obj/item/chems/food/butchery/meat = 4,
+					/obj/item/food/tofu = 4,
+					/obj/item/food/butchery/meat = 4,
 					/obj/item/chems/condiment/enzyme = 1
 					)
 	containertype = /obj/structure/closet/crate/freezer
@@ -16,28 +16,28 @@
 
 /decl/hierarchy/supply_pack/galley/beef
 	name = "Perishables - Beef"
-	contains = list(/obj/item/chems/food/butchery/meat/beef = 6)
+	contains = list(/obj/item/food/butchery/meat/beef = 6)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "cow meat crate"
 
 /decl/hierarchy/supply_pack/galley/goat
 	name = "Perishables - Goat meat"
-	contains = list(/obj/item/chems/food/butchery/meat/goat = 6)
+	contains = list(/obj/item/food/butchery/meat/goat = 6)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "goat meat crate"
 
 /decl/hierarchy/supply_pack/galley/chicken
 	name = "Perishables - Poultry"
-	contains = list(/obj/item/chems/food/butchery/meat/chicken = 6)
+	contains = list(/obj/item/food/butchery/meat/chicken = 6)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "chicken meat crate"
 
 /decl/hierarchy/supply_pack/galley/seafood
 	name = "Perishables - Seafood"
 	contains = list(
-		/obj/item/chems/food/butchery/meat/fish = 3,
-		/obj/item/chems/food/butchery/meat/fish/shark = 3,
-		/obj/item/chems/food/butchery/meat/fish/octopus = 3,
+		/obj/item/food/butchery/meat/fish = 3,
+		/obj/item/food/butchery/meat/fish/shark = 3,
+		/obj/item/food/butchery/meat/fish/octopus = 3,
 		/obj/item/mollusc/clam = 3
 		)
 	containertype = /obj/structure/closet/crate/freezer

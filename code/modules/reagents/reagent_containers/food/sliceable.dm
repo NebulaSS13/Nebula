@@ -5,7 +5,7 @@
 
 // sliceable is just an organization type path, it doesn't have any additional code or variables tied to it.
 
-/obj/item/chems/food/sliceable
+/obj/item/food/sliceable
 	w_class = ITEM_SIZE_NORMAL //whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
 	utensil_flags = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
 
@@ -15,7 +15,7 @@
  *  This path contains some extra code for spawning slices pre-filled with
  *  reagents.
  */
-/obj/item/chems/food/slice
+/obj/item/food/slice
 	name = "slice of... something"
 	var/whole_path // path for the item from which this slice comes
 	var/filled = FALSE // should the slice spawn with any reagents
@@ -28,10 +28,10 @@
  *  whole item, transferring the reagents and deleting the whole item, which may
  *  have performance implications.
  */
-/obj/item/chems/food/slice/Initialize()
+/obj/item/food/slice/Initialize()
 	. = ..()
 	if(filled)
-		var/obj/item/chems/food/whole = new whole_path()
+		var/obj/item/food/whole = new whole_path()
 		if(whole && whole.slice_num)
 			var/reagent_amount = whole.reagents.total_volume/whole.slice_num
 			whole.reagents.trans_to_obj(src, reagent_amount)

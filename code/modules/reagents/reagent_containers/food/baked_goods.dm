@@ -2,7 +2,7 @@
 // Baked Goods //
 /////////////////
 
-/obj/item/chems/food/muffin
+/obj/item/food/muffin
 	name = "muffin"
 	desc = "A delicious and spongy little cake."
 	icon_state = "muffin"
@@ -12,7 +12,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/bananapie
+/obj/item/food/bananapie
 	name = "banana cream pie"
 	desc = "Just like back home, on clown planet! HONK!"
 	icon_state = "pie"
@@ -23,17 +23,17 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/bananapie/populate_reagents()
+/obj/item/food/bananapie/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/banana_cream, 5)
 
-/obj/item/chems/food/pie/throw_impact(atom/hit_atom)
+/obj/item/food/pie/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/pie_smudge(src.loc)
 	src.visible_message("<span class='danger'>\The [src.name] splats.</span>","<span class='danger'>You hear a splat.</span>")
 	qdel(src)
 
-/obj/item/chems/food/berryclafoutis
+/obj/item/food/berryclafoutis
 	name = "berry clafoutis"
 	desc = "No black birds, this is a good sign."
 	icon_state = "berryclafoutis"
@@ -43,11 +43,11 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/berryclafoutis/populate_reagents()
+/obj/item/food/berryclafoutis/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/drink/juice/berry, 5)
 
-/obj/item/chems/food/waffles
+/obj/item/food/waffles
 	name = "waffles"
 	desc = "Mmm, waffles."
 	icon_state = "waffles"
@@ -58,7 +58,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/rofflewaffles
+/obj/item/food/rofflewaffles
 	name = "waffles(?)"
 	desc = "There's something funny about these waffles."
 	icon_state = "rofflewaffles"
@@ -69,11 +69,11 @@
 	nutriment_amt = 8
 	bitesize = 4
 
-/obj/item/chems/food/rofflewaffles/populate_reagents()
+/obj/item/food/rofflewaffles/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/psychotropics, 8)
 
-/obj/item/chems/food/pancakes
+/obj/item/food/pancakes
 	name = "pancakes"
 	desc = "Pancakes without blueberries, still delicious."
 	icon_state = "pancakes"
@@ -83,7 +83,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/pancakesblu
+/obj/item/food/pancakesblu
 	name = "blueberry pancakes"
 	desc = "Pancakes with blueberries, delicious."
 	icon_state = "pancakes"
@@ -93,7 +93,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/eggplantparm
+/obj/item/food/eggplantparm
 	name = "eggplant parmigiana"
 	desc = "The only good recipe for eggplant."
 	icon_state = "eggplantparm"
@@ -104,7 +104,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/soylentgreen
+/obj/item/food/soylentgreen
 	name = "\improper Soylent Green"
 	desc = "Not made of people. Honest."//Totally people.
 	icon_state = "soylent_green"
@@ -113,11 +113,11 @@
 	center_of_mass = @'{"x":15,"y":11}'
 	bitesize = 2
 
-/obj/item/chems/food/soylentgreen/populate_reagents()
+/obj/item/food/soylentgreen/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
-/obj/item/chems/food/soylenviridians
+/obj/item/food/soylenviridians
 	name = "\improper Soylen Virdians"
 	desc = "Not made of people. Honest."//Actually honest for once.
 	icon_state = "soylent_yellow"
@@ -128,7 +128,7 @@
 	nutriment_amt = 10
 	bitesize = 2
 
-/obj/item/chems/food/meatpie
+/obj/item/food/meatpie
 	name = "meat-pie"
 	icon_state = "meatpie"
 	desc = "An old barber recipe, very delicious!"
@@ -137,11 +137,11 @@
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 2
 
-/obj/item/chems/food/meatpie/populate_reagents()
+/obj/item/food/meatpie/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
-/obj/item/chems/food/tofupie
+/obj/item/food/tofupie
 	name = "tofu-pie"
 	icon_state = "meatpie"
 	desc = "A delicious tofu pie."
@@ -152,7 +152,7 @@
 	nutriment_amt = 10
 	bitesize = 2
 
-/obj/item/chems/food/amanita_pie
+/obj/item/food/amanita_pie
 	name = "amanita pie"
 	desc = "Sweet and tasty poison pie."
 	icon_state = "amanita_pie"
@@ -162,12 +162,12 @@
 	nutriment_amt = 5
 	bitesize = 3
 
-/obj/item/chems/food/amanita_pie/populate_reagents()
+/obj/item/food/amanita_pie/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/amatoxin,      3)
 	add_to_reagents(/decl/material/liquid/psychotropics, 1)
 
-/obj/item/chems/food/plump_pie
+/obj/item/food/plump_pie
 	name = "plump pie"
 	desc = "I bet you love stuff made out of plump helmets!"
 	icon_state = "plump_pie"
@@ -177,14 +177,14 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/plump_pie/populate_reagents()
+/obj/item/food/plump_pie/populate_reagents()
 	. = ..()
 	if(prob(10)) //#TODO: have this depend on cook's skill within the recipe handling instead maybe?
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
 		add_to_reagents(/decl/material/liquid/regenerator, 5)
 
-/obj/item/chems/food/xemeatpie
+/obj/item/food/xemeatpie
 	name = "xeno-pie"
 	icon_state = "xenomeatpie"
 	desc = "A delicious meatpie. Probably heretical."
@@ -193,11 +193,11 @@
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 2
 
-/obj/item/chems/food/xemeatpie/populate_reagents()
+/obj/item/food/xemeatpie/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
-/obj/item/chems/food/poppypretzel
+/obj/item/food/poppypretzel
 	name = "poppy pretzel"
 	desc = "It's all twisted up!"
 	icon_state = "poppypretzel"
@@ -207,7 +207,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/applepie
+/obj/item/food/applepie
 	name = "apple pie"
 	desc = "A pie containing sweet sweet love... or apple."
 	icon_state = "applepie"
@@ -217,7 +217,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/cherrypie
+/obj/item/food/cherrypie
 	name = "cherry pie"
 	desc = "Taste so good, make a grown man cry."
 	icon_state = "cherrypie"
@@ -227,7 +227,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/fortunecookie
+/obj/item/food/fortunecookie
 	name = "fortune cookie"
 	desc = "A true prophecy in each cookie!"
 	icon_state = "fortune_cookie"

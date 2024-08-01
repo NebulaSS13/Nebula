@@ -16,7 +16,7 @@
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 
 /datum/storage/box/monkey
-	can_hold = list(/obj/item/chems/food/monkeycube)
+	can_hold = list(/obj/item/food/monkeycube)
 
 /datum/storage/box/snappop
 	can_hold = list(/obj/item/toy/snappop)
@@ -35,7 +35,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(
 		/obj/item/organ,
-		/obj/item/chems/food,
+		/obj/item/food,
 		/obj/item/chems/drinks,
 		/obj/item/chems/condiment,
 		/obj/item/chems/glass
@@ -74,7 +74,7 @@
 
 /datum/storage/box/donut
 	max_storage_space = ITEM_SIZE_SMALL * 6
-	can_hold = list(/obj/item/chems/food/donut)
+	can_hold = list(/obj/item/food/donut)
 
 /datum/storage/box/glasses
 	can_hold = list(/obj/item/chems/drinks/glass2)
@@ -94,15 +94,15 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = ITEM_SIZE_SMALL * 12
 	can_hold = list(
-		/obj/item/chems/food/egg,
-		/obj/item/chems/food/boiledegg
+		/obj/item/food/egg,
+		/obj/item/food/boiledegg
 	)
 
 /datum/storage/box/crackers
 	storage_slots = 6
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = ITEM_SIZE_TINY * 6
-	can_hold = list(/obj/item/chems/food/cracker)
+	can_hold = list(/obj/item/food/cracker)
 
 /datum/storage/box/crayons
 	max_w_class = ITEM_SIZE_TINY

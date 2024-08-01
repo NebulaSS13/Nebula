@@ -1,4 +1,4 @@
-/obj/item/chems/food/tofu
+/obj/item/food/tofu
 	name = "tofu"
 	icon_state = "tofu"
 	desc = "We all love tofu."
@@ -8,11 +8,11 @@
 	nutriment_desc = list("tofu" = 3, "softness" = 3)
 	bitesize = 3
 
-/obj/item/chems/food/tofu/populate_reagents()
+/obj/item/food/tofu/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/plant_protein, 6)
 
-/obj/item/chems/food/tofukabob
+/obj/item/food/tofukabob
 	name = "tofu-kabob"
 	icon_state = "kabob"
 	desc = "Vegan meat, on a stick."
@@ -23,7 +23,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/tofurkey
+/obj/item/food/tofurkey
 	name = "\improper Tofurkey"
 	desc = "A fake turkey made from tofu."
 	icon_state = "tofurkey"
@@ -33,7 +33,7 @@
 	nutriment_desc = list("turkey" = 3, "tofu" = 5, "softness" = 4)
 	bitesize = 3
 
-/obj/item/chems/food/stewedsoymeat
+/obj/item/food/stewedsoymeat
 	name = "stewed soy meat"
 	desc = "Even non-vegetarians will LOVE this!"
 	icon_state = "stewedsoymeat"

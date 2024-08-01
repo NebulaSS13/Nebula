@@ -1700,7 +1700,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/amanita_pie,
+/obj/item/food/amanita_pie,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1709,7 +1709,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/bigbiteburger,
+/obj/item/food/bigbiteburger,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Crescent Bar Center"
 	},
@@ -1742,7 +1742,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/stew,
+/obj/item/food/stew,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1822,7 +1822,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/boiledrice,
+/obj/item/food/boiledrice,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1831,7 +1831,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/beetsoup,
+/obj/item/food/beetsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1840,7 +1840,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/stuffing,
+/obj/item/food/stuffing,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1849,7 +1849,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/soylenviridians,
+/obj/item/food/soylenviridians,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2025,7 +2025,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/bloodsoup,
+/obj/item/food/bloodsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2034,7 +2034,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/tofukabob,
+/obj/item/food/tofukabob,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2046,7 +2046,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/poppypretzel,
+/obj/item/food/poppypretzel,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2159,7 +2159,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/spesslaw,
+/obj/item/food/spesslaw,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2175,7 +2175,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/candiedapple,
+/obj/item/food/candiedapple,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2184,7 +2184,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/mushroomsoup,
+/obj/item/food/mushroomsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2200,7 +2200,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/meatsteak,
+/obj/item/food/meatsteak,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},

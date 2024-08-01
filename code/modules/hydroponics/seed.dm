@@ -23,7 +23,7 @@
 	var/grown_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
-	var/product_type = /obj/item/chems/food/grown
+	var/product_type = /obj/item/food/grown
 	var/product_material
 	var/force_layer
 	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
@@ -35,7 +35,7 @@
 	// Dissection values.
 	var/min_seed_extracted = 1
 	var/max_seed_extracted = 2
-	var/slice_product = /obj/item/chems/food/processed_grown/slice
+	var/slice_product = /obj/item/food/processed_grown/slice
 	var/slice_amount = 5
 
 	// Cached images for overlays
@@ -45,7 +45,7 @@
 
 	// Backyard grilling vars. Not passed through genetics.
 	var/backyard_grilling_rawness      = 20
-	var/backyard_grilling_product      = /obj/item/chems/food/badrecipe
+	var/backyard_grilling_product      = /obj/item/food/badrecipe
 	var/backyard_grilling_announcement = "smokes and chars!"
 
 	// Used to show an icon when drying in a rack.
@@ -627,8 +627,8 @@
 				var/obj/item/product = new product_type(get_turf(user), null, src)
 				. += product
 
-				if(get_trait(TRAIT_PRODUCT_COLOUR) && istype(product, /obj/item/chems/food))
-					var/obj/item/chems/food/snack = product
+				if(get_trait(TRAIT_PRODUCT_COLOUR) && istype(product, /obj/item/food))
+					var/obj/item/food/snack = product
 					snack.color = get_trait(TRAIT_PRODUCT_COLOUR)
 					snack.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
@@ -764,23 +764,23 @@
 	clone.update_growth_stages()
 	return clone
 
-/datum/seed/proc/show_slice_message(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
-	if(slice_product == /obj/item/chems/food/processed_grown/chopped)
+/datum/seed/proc/show_slice_message(mob/user, obj/item/tool, obj/item/food/grown/sliced)
+	if(slice_product == /obj/item/food/processed_grown/chopped)
 		sliced.visible_message(SPAN_NOTICE("\The [user] quickly chops up \the [sliced] with \the [tool]."))
-	else if(slice_product == /obj/item/chems/food/processed_grown/crushed)
+	else if(slice_product == /obj/item/food/processed_grown/crushed)
 		sliced.visible_message(SPAN_NOTICE("\The [user] methodically crushes \the [sliced] with the handle of \the [tool]."))
-	else if(slice_product == /obj/item/chems/food/processed_grown/sticks)
+	else if(slice_product == /obj/item/food/processed_grown/sticks)
 		sliced.visible_message(SPAN_NOTICE("\The [user] neatly slices \the [sliced] into sticks with \the [tool]."))
 	else
 		return null
 	return TRUE
 
-/datum/seed/proc/show_slice_message_poor(mob/user, obj/item/tool, obj/item/chems/food/grown/sliced)
-	if(slice_product == /obj/item/chems/food/processed_grown/chopped)
+/datum/seed/proc/show_slice_message_poor(mob/user, obj/item/tool, obj/item/food/grown/sliced)
+	if(slice_product == /obj/item/food/processed_grown/chopped)
 		sliced.visible_message(SPAN_NOTICE("\The [user] crudely chops \the [sliced] with \the [tool]."))
-	else if(slice_product == /obj/item/chems/food/processed_grown/crushed)
+	else if(slice_product == /obj/item/food/processed_grown/crushed)
 		sliced.visible_message(SPAN_NOTICE("\The [user] messily crushes \the [sliced] with the handle of \the [tool]."))
-	else if(slice_product == /obj/item/chems/food/processed_grown/sticks)
+	else if(slice_product == /obj/item/food/processed_grown/sticks)
 		sliced.visible_message(SPAN_NOTICE("\The [user] roughly slices \the [sliced] into sticks with \the [tool]."))
 	else
 		return null

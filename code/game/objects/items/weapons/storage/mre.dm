@@ -98,7 +98,7 @@ MRE Stuff
 /obj/item/mre/menu10/WillContain()
 	. = list(
 		main_meal,
-		/obj/item/chems/food/candy/proteinbar,
+		/obj/item/food/candy/proteinbar,
 		/obj/item/chems/condiment/small/packet/protein,
 		/obj/random/mre/sauce/sugarfree,
 		/obj/item/utensil/spoon/plastic
@@ -137,7 +137,7 @@ MRE Stuff
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE)
 
 /obj/item/mrebag/WillContain()
-	return list(/obj/item/chems/food/slice/pizza/meat/filled)
+	return list(/obj/item/food/slice/pizza/meat/filled)
 
 /obj/item/mrebag/on_update_icon()
 	. = ..()
@@ -151,31 +151,31 @@ MRE Stuff
 	return ..()
 
 /obj/item/mrebag/menu2/WillContain()
-	return list(/obj/item/chems/food/slice/pizza/margherita/filled)
+	return list(/obj/item/food/slice/pizza/margherita/filled)
 
 /obj/item/mrebag/menu3/WillContain()
-	return list(/obj/item/chems/food/slice/pizza/vegetable/filled)
+	return list(/obj/item/food/slice/pizza/vegetable/filled)
 
 /obj/item/mrebag/menu4/WillContain()
-	return list(/obj/item/chems/food/hamburger)
+	return list(/obj/item/food/hamburger)
 
 /obj/item/mrebag/menu5/WillContain()
-	return list(/obj/item/chems/food/taco)
+	return list(/obj/item/food/taco)
 
 /obj/item/mrebag/menu6/WillContain()
-	return list(/obj/item/chems/food/slice/meatbread/filled)
+	return list(/obj/item/food/slice/meatbread/filled)
 
 /obj/item/mrebag/menu7/WillContain()
-	return list(/obj/item/chems/food/tossedsalad)
+	return list(/obj/item/food/tossedsalad)
 
 /obj/item/mrebag/menu8/WillContain()
-	return list(/obj/item/chems/food/hotchili)
+	return list(/obj/item/food/hotchili)
 
 /obj/item/mrebag/menu9/WillContain()
-	return list(/obj/item/chems/food/boiledrice)
+	return list(/obj/item/food/boiledrice)
 
 /obj/item/mrebag/menu10/WillContain()
-	return list(/obj/item/chems/food/meatcube)
+	return list(/obj/item/food/meatcube)
 
 /obj/item/mrebag/dessert
 	name = "dessert"
@@ -187,7 +187,7 @@ MRE Stuff
 	return list(/obj/random/mre/dessert)
 
 /obj/item/mrebag/dessert/menu9/WillContain()
-	return list(/obj/item/chems/food/plumphelmetbiscuit)
+	return list(/obj/item/food/plumphelmetbiscuit)
 
 /obj/item/mrebag/dessert/menu11/WillContain()
 	return list(/obj/item/pen/crayon/rainbow)

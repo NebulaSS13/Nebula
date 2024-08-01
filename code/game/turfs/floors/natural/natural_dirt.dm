@@ -21,5 +21,5 @@
 
 /turf/floor/natural/dirt/drop_diggable_resources()
 	if(get_physical_height() > -(FLUID_DEEP) && prob(10))
-		new /obj/item/chems/food/worm(src)
+		new /obj/item/food/worm(src)
 	return ..()

@@ -407,8 +407,8 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O, var/mob/user)
 
-	if(istype(O, /obj/item/chems/food/grown))
-		var/obj/item/chems/food/grown/bulb = O
+	if(istype(O, /obj/item/food/grown))
+		var/obj/item/food/grown/bulb = O
 		if(bulb.seed?.grown_is_seed)
 			plant_seed(user, bulb)
 			return TRUE
@@ -485,7 +485,7 @@
 	if (istype(O, /obj/item/plants))
 		physical_attack_hand(user) // Harvests and clears out dead plants.
 		if(O.storage)
-			for (var/obj/item/chems/food/grown/G in get_turf(user))
+			for (var/obj/item/food/grown/G in get_turf(user))
 				if(O.storage.can_be_inserted(G, user))
 					O.storage.handle_item_insertion(user, G, TRUE)
 		return TRUE
@@ -528,7 +528,7 @@
 
 	return ..()
 
-// S can also be an instance of /obj/item/chems/food/grown
+// S can also be an instance of /obj/item/food/grown
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(var/mob/user, var/obj/item/seeds/S)
 
 	if(seed)
@@ -540,12 +540,12 @@
 	if(istype(S))
 		planting_seed = S.seed
 		plant_noun = "[planting_seed?.product_name] [planting_seed.seed_noun]"
-	else if(istype(S, /obj/item/chems/food/grown))
-		var/obj/item/chems/food/grown/fruit = S
+	else if(istype(S, /obj/item/food/grown))
+		var/obj/item/food/grown/fruit = S
 		planting_seed = fruit.seed
 		plant_noun = "[planting_seed?.product_name]"
-	else if(istype(S, /obj/item/chems/food/processed_grown))
-		var/obj/item/chems/food/processed_grown/fruit = S
+	else if(istype(S, /obj/item/food/processed_grown))
+		var/obj/item/food/processed_grown/fruit = S
 		planting_seed = fruit.seed
 		plant_noun = "[planting_seed?.product_name]"
 	else

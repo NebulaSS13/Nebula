@@ -50,13 +50,13 @@
 
 /obj/random/mre/dessert/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/chems/food/candy,
-		/obj/item/chems/food/candy/proteinbar,
-		/obj/item/chems/food/donut,
-		/obj/item/chems/food/donut/jelly,
-		/obj/item/chems/food/chocolatebar,
-		/obj/item/chems/food/cookie,
-		/obj/item/chems/food/poppypretzel,
+		/obj/item/food/candy,
+		/obj/item/food/candy/proteinbar,
+		/obj/item/food/donut,
+		/obj/item/food/donut/jelly,
+		/obj/item/food/chocolatebar,
+		/obj/item/food/cookie,
+		/obj/item/food/poppypretzel,
 		/obj/item/clothing/mask/chewable/candy/gum
 	)
 	return spawnable_choices
@@ -67,10 +67,10 @@
 
 /obj/random/mre/dessert/vegan/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/chems/food/candy,
-		/obj/item/chems/food/chocolatebar,
-		/obj/item/chems/food/donut/jelly,
-		/obj/item/chems/food/plumphelmetbiscuit
+		/obj/item/food/candy,
+		/obj/item/food/chocolatebar,
+		/obj/item/food/donut/jelly,
+		/obj/item/food/plumphelmetbiscuit
 	)
 	return spawnable_choices
 
@@ -170,23 +170,23 @@
 
 /obj/random/snack/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/chems/food/liquidfood,
-		/obj/item/chems/food/candy,
+		/obj/item/food/liquidfood,
+		/obj/item/food/candy,
 		/obj/item/chems/drinks/dry_ramen,
-		/obj/item/chems/food/chips,
-		/obj/item/chems/food/sosjerky,
-		/obj/item/chems/food/no_raisin,
-		/obj/item/chems/food/spacetwinkie,
-		/obj/item/chems/food/cheesiehonkers,
-		/obj/item/chems/food/tastybread,
-		/obj/item/chems/food/candy/proteinbar,
-		/obj/item/chems/food/syndicake,
-		/obj/item/chems/food/donut,
-		/obj/item/chems/food/donut/jelly,
+		/obj/item/food/chips,
+		/obj/item/food/sosjerky,
+		/obj/item/food/no_raisin,
+		/obj/item/food/spacetwinkie,
+		/obj/item/food/cheesiehonkers,
+		/obj/item/food/tastybread,
+		/obj/item/food/candy/proteinbar,
+		/obj/item/food/syndicake,
+		/obj/item/food/donut,
+		/obj/item/food/donut/jelly,
 		/obj/item/pizzabox/meat,
 		/obj/item/pizzabox/vegetable,
 		/obj/item/pizzabox/margherita,
 		/obj/item/pizzabox/mushroom,
-		/obj/item/chems/food/plumphelmetbiscuit
+		/obj/item/food/plumphelmetbiscuit
 	)
 	return spawnable_choices

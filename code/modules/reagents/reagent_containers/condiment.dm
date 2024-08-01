@@ -59,7 +59,7 @@
 	if(standard_pour_into(user, target))
 		return
 
-	if(istype(target, /obj/item/chems/food)) // These are not opencontainers but we can transfer to them
+	if(istype(target, /obj/item/food)) // These are not opencontainers but we can transfer to them
 		if(!reagents || !reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("There is no condiment left in \the [src]."))
 			return

@@ -18,8 +18,8 @@
 /turf/floor/natural/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "k" = (
-/obj/item/chems/food/butchery/offal,
-/obj/item/chems/food/butchery/offal/small,
+/obj/item/food/butchery/offal,
+/obj/item/food/butchery/offal/small,
 /obj/structure/pit,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
@@ -28,8 +28,8 @@
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "q" = (
 /obj/structure/closet/crate/chest/ebony,
-/obj/item/chems/food/butchery/haunch/shoulder,
-/obj/item/chems/food/butchery/haunch/side,
+/obj/item/food/butchery/haunch/shoulder,
+/obj/item/food/butchery/haunch/side,
 /turf/floor/natural/barren,
 /area/shaded_hills/outside/point_of_interest/hunter_camp)
 "A" = (

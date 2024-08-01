@@ -2835,7 +2835,7 @@
 	dir = 8
 	},
 /obj/item/chems/condiment/sugar,
-/obj/item/chems/food/sliceable/bread,
+/obj/item/food/sliceable/bread,
 /turf/floor/tiled,
 /area/casino/casino_kitchen)
 "in" = (
@@ -2862,13 +2862,13 @@
 "iq" = (
 /obj/structure/table/woodentable,
 /obj/item/plate,
-/obj/item/chems/food/applepie,
+/obj/item/food/applepie,
 /turf/floor/carpet,
 /area/casino/casino_mainfloor)
 "ir" = (
 /obj/structure/table/woodentable,
 /obj/item/plate,
-/obj/item/chems/food/bigbiteburger,
+/obj/item/food/bigbiteburger,
 /turf/floor/carpet,
 /area/casino/casino_mainfloor)
 "is" = (
@@ -2951,10 +2951,10 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
-/obj/item/chems/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat,
 /turf/floor/tiled/freezer,
 /area/casino/casino_kitchen)
 "iD" = (
@@ -3049,7 +3049,7 @@
 /obj/machinery/door/firedoor,
 /obj/structure/table/marble,
 /obj/item/plate/tray,
-/obj/item/chems/food/stew,
+/obj/item/food/stew,
 /turf/floor/tiled,
 /area/casino/casino_kitchen)
 "iR" = (
@@ -3392,7 +3392,7 @@
 "jJ" = (
 /obj/structure/table/woodentable,
 /obj/item/ashtray,
-/obj/item/chems/food/cubancarp,
+/obj/item/food/cubancarp,
 /turf/floor/carpet,
 /area/casino/casino_mainfloor)
 "jK" = (
@@ -3470,7 +3470,7 @@
 "jU" = (
 /obj/structure/table/woodentable,
 /obj/item/plate,
-/obj/item/chems/food/waffles,
+/obj/item/food/waffles,
 /obj/item/chems/drinks/cans/iced_tea,
 /turf/floor/carpet,
 /area/casino/casino_mainfloor)

@@ -9,13 +9,13 @@
 	var/is_dirty
 
 /obj/item/plate/Destroy()
-	if(istype(loc, /obj/item/chems/food))
-		var/obj/item/chems/food/food = loc
+	if(istype(loc, /obj/item/food))
+		var/obj/item/food/food = loc
 		if(food.plate == src)
 			food.plate = null
 	return ..()
 
-/obj/item/plate/proc/make_dirty(obj/item/chems/food/food)
+/obj/item/plate/proc/make_dirty(obj/item/food/food)
 	if(!is_dirty)
 		is_dirty = food?.filling_color || COLOR_WHITE
 		update_icon()
@@ -35,7 +35,7 @@
 		add_overlay(I)
 
 // Return TRUE to terminate attacky past this proc.
-/obj/item/plate/proc/try_plate_food(obj/item/chems/food/food, mob/user)
+/obj/item/plate/proc/try_plate_food(obj/item/food/food, mob/user)
 	if(!istype(food))
 		return FALSE
 	if(food.plate)

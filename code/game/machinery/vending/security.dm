@@ -15,7 +15,7 @@
 		/obj/item/grenade/flashbang = 4,
 		/obj/item/grenade/chem_grenade/teargas = 4,
 		/obj/item/flash = 5,
-		/obj/item/chems/food/donut = 12,
+		/obj/item/food/donut = 12,
 		/obj/item/box/evidence = 6
 	)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/box/fancy/donut = 2)

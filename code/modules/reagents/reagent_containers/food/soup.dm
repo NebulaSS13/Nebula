@@ -2,7 +2,7 @@
 // Soups //
 ///////////
 
-/obj/item/chems/food/meatballsoup
+/obj/item/food/meatballsoup
 	name = "meatball soup"
 	desc = "You've got balls kid, BALLS!"
 	icon_state = "meatballsoup"
@@ -12,12 +12,12 @@
 	bitesize = 5
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 
-/obj/item/chems/food/meatballsoup/populate_reagents()
+/obj/item/food/meatballsoup/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat,  8)
 	add_to_reagents(/decl/material/liquid/water,              5)
 
-/obj/item/chems/food/bloodsoup
+/obj/item/food/bloodsoup
 	name = "tomato soup"
 	desc = "Smells like copper."
 	icon_state = "tomatosoup"
@@ -27,13 +27,13 @@
 	eat_sound = 'sound/items/drink.ogg'
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/bloodsoup/populate_reagents()
+/obj/item/food/bloodsoup/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat,  2)
 	add_to_reagents(/decl/material/liquid/blood,              10)
 	add_to_reagents(/decl/material/liquid/water,              5)
 
-/obj/item/chems/food/clownstears
+/obj/item/food/clownstears
 	name = "clown's tears"
 	desc = "Not very funny."
 	icon_state = "clownstears"
@@ -44,12 +44,12 @@
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
 
-/obj/item/chems/food/clownstears/populate_reagents()
+/obj/item/food/clownstears/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/drink/juice/banana, 5)
 	add_to_reagents(/decl/material/liquid/water,              10)
 
-/obj/item/chems/food/vegetablesoup
+/obj/item/food/vegetablesoup
 	name = "veggie soup"
 	desc = "A highly nutritious blend of vegetative goodness. Guaranteed to leave you with a, er, \"souped-up\" sense of wellbeing."
 	icon_state = "vegetablesoup"
@@ -62,11 +62,11 @@
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/vegetablesoup/populate_reagents()
+/obj/item/food/vegetablesoup/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/water, 5)
 
-/obj/item/chems/food/nettlesoup
+/obj/item/food/nettlesoup
 	name = "nettle soup"
 	desc = "A mean, green, calorically lean dish derived from a poisonous plant. It has a rather acidic bite to its taste."
 	icon_state = "nettlesoup"
@@ -79,12 +79,12 @@
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/nettlesoup/populate_reagents()
+/obj/item/food/nettlesoup/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/water,       5)
 	add_to_reagents(/decl/material/liquid/regenerator, 5)
 
-/obj/item/chems/food/mysterysoup
+/obj/item/food/mysterysoup
 	name = "mystery soup"
 	desc = "The mystery is, why aren't you eating it?"
 	icon_state = "mysterysoup"
@@ -97,7 +97,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/mysterysoup/proc/get_random_fillings()
+/obj/item/food/mysterysoup/proc/get_random_fillings()
 	return list(
 		list(
 			/decl/material/liquid/nutriment =           6,
@@ -141,13 +141,13 @@
 		)
 	)
 
-/obj/item/chems/food/mysterysoup/populate_reagents()
+/obj/item/food/mysterysoup/populate_reagents()
 	. = ..()
 	var/list/fillings = pick(get_random_fillings())
 	for(var/filling in fillings)
 		add_to_reagents(filling, fillings[filling])
 
-/obj/item/chems/food/wishsoup
+/obj/item/food/wishsoup
 	name = "wish soup"
 	desc = "I wish this was soup."
 	icon_state = "wishsoup"
@@ -158,14 +158,14 @@
 	eat_sound = 'sound/items/drink.ogg'
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/wishsoup/populate_reagents()
+/obj/item/food/wishsoup/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/water, 10)
 	if(prob(25))
 		src.desc = "A wish come true!"
 		add_to_reagents(/decl/material/liquid/nutriment, 8, list("taste" = list("something good" = 8)))
 
-/obj/item/chems/food/hotchili
+/obj/item/food/hotchili
 	name = "hot chili"
 	desc = "Sound the fire alarm!"
 	icon_state = "hotchili"
@@ -176,13 +176,13 @@
 	nutriment_amt = 3
 	bitesize = 5
 
-/obj/item/chems/food/hotchili/populate_reagents()
+/obj/item/food/hotchili/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat,  3)
 	add_to_reagents(/decl/material/liquid/capsaicin,          3)
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 2)
 
-/obj/item/chems/food/coldchili
+/obj/item/food/coldchili
 	name = "cold chili"
 	desc = "This slush is barely a liquid!"
 	icon_state = "coldchili"
@@ -193,13 +193,13 @@
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 5
 
-/obj/item/chems/food/coldchili/populate_reagents()
+/obj/item/food/coldchili/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat,   3)
 	add_to_reagents(/decl/material/liquid/frostoil,            3)
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato,  2)
 
-/obj/item/chems/food/tomatosoup
+/obj/item/food/tomatosoup
 	name = "tomato soup"
 	desc = "Drinking this feels like being a vampire! A tomato vampire..."
 	icon_state = "tomatosoup"
@@ -212,11 +212,11 @@
 	eat_sound = 'sound/items/drink.ogg'
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/tomatosoup/populate_reagents()
+/obj/item/food/tomatosoup/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 10)
 
-/obj/item/chems/food/stew
+/obj/item/food/stew
 	name = "stewpot"
 	desc = "A nice and warm stew. Healthy and strong."
 	icon_state = "stew"
@@ -226,14 +226,14 @@
 	nutriment_amt = 6
 	bitesize = 10
 
-/obj/item/chems/food/stew/populate_reagents()
+/obj/item/food/stew/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat,  4)
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 5)
 	add_to_reagents(/decl/material/liquid/eyedrops,           5)
 	add_to_reagents(/decl/material/liquid/water,              5)
 
-/obj/item/chems/food/milosoup
+/obj/item/food/milosoup
 	name = "milosoup"
 	desc = "The universes best soup! Yum!!!"
 	icon_state = "milosoup"
@@ -245,11 +245,11 @@
 	eat_sound = 'sound/items/drink.ogg'
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/milosoup/populate_reagents()
+/obj/item/food/milosoup/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/water, 5)
 
-/obj/item/chems/food/mushroomsoup
+/obj/item/food/mushroomsoup
 	name = "chantrelle soup"
 	desc = "A delicious and hearty mushroom soup."
 	icon_state = "mushroomsoup"
@@ -262,7 +262,7 @@
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/beetsoup
+/obj/item/food/beetsoup
 	name = "beet soup"
 	desc = "Wait, how do you spell it again...?"
 	icon_state = "beetsoup"
@@ -275,6 +275,6 @@
 	eat_sound = 'sound/items/drink.ogg'
 	utensil_flags = UTENSIL_FLAG_SCOOP
 
-/obj/item/chems/food/beetsoup/populate_reagents()
+/obj/item/food/beetsoup/populate_reagents()
 	. = ..()
 	SetName(pick(list("borsch","bortsch","borstch","borsh","borshch","borscht")))

@@ -12,7 +12,7 @@
 	var/datum/mob_snapshot/loaded_dna //DNA for biological organs
 
 /obj/machinery/fabricator/bioprinter/can_ingest(var/obj/item/thing)
-	. = istype(thing, /obj/item/organ) || istype(thing, /obj/item/chems/food/butchery) || ..()
+	. = istype(thing, /obj/item/organ) || istype(thing, /obj/item/food/butchery) || ..()
 
 /obj/machinery/fabricator/bioprinter/get_nano_template()
 	return "fabricator_bioprinter.tmpl"

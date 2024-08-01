@@ -565,8 +565,8 @@
 
 	..()
 
-	if (istype(W, /obj/item/chems/food))
-		var/obj/item/chems/food/grown/grown = W
+	if (istype(W, /obj/item/food))
+		var/obj/item/food/grown/grown = W
 		if (!grown.dry)
 			to_chat(user, SPAN_NOTICE("\The [grown] must be dried before you stuff it into \the [src]."))
 			return

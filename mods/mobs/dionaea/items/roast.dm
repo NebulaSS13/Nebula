@@ -1,4 +1,4 @@
-/obj/item/chems/food/dionaroast
+/obj/item/food/dionaroast
 	name = "roast diona"
 	desc = "It's like an enormous, leathery carrot. With an eye."
 	icon_state = "dionaroast"
@@ -9,6 +9,6 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/dionaroast/populate_reagents()
+/obj/item/food/dionaroast/populate_reagents()
 	add_to_reagents(/decl/material/solid/metal/radium, 2)
 	. = ..()

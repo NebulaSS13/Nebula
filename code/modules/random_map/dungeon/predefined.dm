@@ -8,6 +8,6 @@
 	monsters_uncommon = list(/mob/living/simple_animal/hostile/hivebot = 10, /mob/living/simple_animal/hostile/hivebot/strong = 1)
 
 /datum/random_map/winding_dungeon/premade/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
-	loot_common = subtypesof(/obj/item/energy_blade/sword) + subtypesof(/obj/item/baton) + subtypesof(/obj/item/chems/food) + subtypesof(/obj/item/chems/condiment) + subtypesof(/obj/item/chems/drinks)
+	loot_common = subtypesof(/obj/item/energy_blade/sword) + subtypesof(/obj/item/baton) + subtypesof(/obj/item/food) + subtypesof(/obj/item/chems/condiment) + subtypesof(/obj/item/chems/drinks)
 	loot_uncommon += subtypesof(/obj/item/gun/projectile) + subtypesof(/obj/item/ammo_magazine)
 	..()

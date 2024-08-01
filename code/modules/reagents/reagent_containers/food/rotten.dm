@@ -1,6 +1,6 @@
 //inedible old vendor food
 
-/obj/item/chems/food/old
+/obj/item/food/old
 	name = "master old-food"
 	desc = "they're all inedible and potentially dangerous items"
 	center_of_mass = @'{"x":15,"y":12}'
@@ -8,9 +8,9 @@
 	nutriment_amt = 10
 	bitesize = 3
 	filling_color = "#336b42"
-	abstract_type = /obj/item/chems/food/old
+	abstract_type = /obj/item/food/old
 
-/obj/item/chems/food/old/populate_reagents()
+/obj/item/food/old/populate_reagents()
 	. = ..()
 	add_to_reagents(pick(
 				/decl/material/liquid/fuel,
@@ -20,32 +20,32 @@
 				/decl/material/liquid/presyncopics,
 				/decl/material/liquid/psychotropics), 5)
 
-/obj/item/chems/food/old/pizza
+/obj/item/food/old/pizza
 	name = "pizza"
 	desc = "It's so stale you could probably cut something with the cheese."
 	icon_state = "ancient_pizza"
 
-/obj/item/chems/food/old/burger
+/obj/item/food/old/burger
 	name = "\improper Giga Burger!"
 	desc = "At some point in time this probably looked delicious."
 	icon_state = "ancient_burger"
 
-/obj/item/chems/food/old/hamburger
+/obj/item/food/old/hamburger
 	name = "\improper Horse Burger!"
 	desc = "Even if you were hungry enough to eat a horse, it'd be a bad idea to eat this."
 	icon_state = "ancient_hburger"
 
-/obj/item/chems/food/old/fries
+/obj/item/food/old/fries
 	name = "chips"
 	desc = "The salt appears to have preserved these, still stale and gross."
 	icon_state = "ancient_fries"
 
-/obj/item/chems/food/old/hotdog
+/obj/item/food/old/hotdog
 	name = "hotdog"
 	desc = "This is probably only marginally less safe to eat than when it was first created."
 	icon_state = "ancient_hotdog"
 
-/obj/item/chems/food/old/taco
+/obj/item/food/old/taco
 	name = "taco"
 	desc = "Interestingly, the shell has gone soft and the contents have gone stale."
 	icon_state = "ancient_taco"

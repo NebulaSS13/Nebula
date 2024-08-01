@@ -1,8 +1,8 @@
-/obj/item/chems/food/sliceable/cheesewheel
+/obj/item/food/sliceable/cheesewheel
 	name = "cheese wheel"
 	desc = "A big wheel of delcious cheddar."
 	icon_state = "cheesewheel"
-	slice_path = /obj/item/chems/food/cheesewedge
+	slice_path = /obj/item/food/cheesewedge
 	slice_num = 5
 	filling_color = "#fff700"
 	center_of_mass = @'{"x":16,"y":10}'
@@ -10,11 +10,11 @@
 	nutriment_amt = 10
 	bitesize = 2
 
-/obj/item/chems/food/sliceable/cheesewheel/populate_reagents()
+/obj/item/food/sliceable/cheesewheel/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
-/obj/item/chems/food/cheesewedge
+/obj/item/food/cheesewedge
 	name = "cheese wedge"
 	desc = "A wedge of delicious cheddar. The cheese wheel it was cut from can't have gone far."
 	icon_state = "cheesewedge"

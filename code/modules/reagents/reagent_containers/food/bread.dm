@@ -2,7 +2,7 @@
 // Bread-Based Foods //
 ///////////////////////
 
-/obj/item/chems/food/sandwich
+/obj/item/food/sandwich
 	name = "sandwich"
 	desc = "A grand creation of meat, cheese, bread, and several leaves of lettuce!"
 	icon_state = "sandwich"
@@ -13,14 +13,14 @@
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
-	backyard_grilling_product = /obj/item/chems/food/toastedsandwich
+	backyard_grilling_product = /obj/item/food/toastedsandwich
 	backyard_grilling_announcement = "is toasted golden brown."
 
-/obj/item/chems/food/sandwich/populate_reagents()
+/obj/item/food/sandwich/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 3)
 
-/obj/item/chems/food/toastedsandwich
+/obj/item/food/toastedsandwich
 	name = "toasted sandwich"
 	desc = "Now if you only had a pepper bar."
 	icon_state = "toastedsandwich"
@@ -32,12 +32,12 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
 
-/obj/item/chems/food/toastedsandwich/populate_reagents()
+/obj/item/food/toastedsandwich/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 3)
 	add_to_reagents(/decl/material/solid/carbon,             2)
 
-/obj/item/chems/food/grilledcheese
+/obj/item/food/grilledcheese
 	name = "grilled cheese sandwich"
 	desc = "Goes great with Tomato soup!"
 	icon_state = "toastedsandwich"
@@ -48,11 +48,11 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/grilledcheese/populate_reagents()
+/obj/item/food/grilledcheese/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
-/obj/item/chems/food/baguette
+/obj/item/food/baguette
 	name = "baguette"
 	desc = "Good for pretend sword fights."
 	icon_state = "baguette"
@@ -63,12 +63,12 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/baguette/populate_reagents()
+/obj/item/food/baguette/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/blackpepper,    1)
 	add_to_reagents(/decl/material/solid/sodiumchloride, 1)
 
-/obj/item/chems/food/jelliedtoast
+/obj/item/food/jelliedtoast
 	name = "jellied toast"
 	desc = "A slice of bread covered with delicious jam."
 	icon_state = "jellytoast"
@@ -80,11 +80,11 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/jelliedtoast/cherry/populate_reagents()
+/obj/item/food/jelliedtoast/cherry/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/cherryjelly, 5)
 
-/obj/item/chems/food/jellysandwich
+/obj/item/food/jellysandwich
 	name = "jelly sandwich"
 	desc = "You wish you had some peanut butter to go with this..."
 	icon_state = "jellysandwich"
@@ -96,11 +96,11 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/jellysandwich/cherry/populate_reagents()
+/obj/item/food/jellysandwich/cherry/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/cherryjelly, 5)
 
-/obj/item/chems/food/twobread
+/obj/item/food/twobread
 	name = "\improper Two Bread"
 	desc = "It is very bitter and winy."
 	icon_state = "twobread"
@@ -111,7 +111,7 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/threebread
+/obj/item/food/threebread
 	name = "\improper Three Bread"
 	desc = "Is such a thing even possible?"
 	icon_state = "threebread"
@@ -122,7 +122,7 @@
 	bitesize = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/flatbread
+/obj/item/food/flatbread
 	name = "flatbread"
 	desc = "Bland but filling."
 	icon = 'icons/obj/food_ingredients.dmi'

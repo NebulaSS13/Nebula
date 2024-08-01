@@ -106,9 +106,9 @@
 	. = ..()
 	if(!.)
 		return
-	if(istype(W, /obj/item/chems/food/worm) && istype(holder, /obj/structure/reagent_dispensers/compost_bin))
+	if(istype(W, /obj/item/food/worm) && istype(holder, /obj/structure/reagent_dispensers/compost_bin))
 		var/worms = 0
-		for(var/obj/item/chems/food/worm/worm in get_contents())
+		for(var/obj/item/food/worm/worm in get_contents())
 			worms++
 		return worms < COMPOST_MAX_WORMS
 	return W.is_compostable()

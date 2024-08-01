@@ -41,19 +41,19 @@
 	w_class = ITEM_SIZE_TINY
 
 //tobacco sold seperately if you're too snobby to grow it yourself.
-/obj/item/chems/food/grown/dried_tobacco
+/obj/item/food/grown/dried_tobacco
 	seed = "tobacco"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/chems/food/grown/dried_tobacco/Initialize()
+/obj/item/food/grown/dried_tobacco/Initialize()
 	. = ..()
 	dry = TRUE
 	SetName("dried [name]")
 	color = "#a38463"
-/obj/item/chems/food/grown/dried_tobacco/bad
+/obj/item/food/grown/dried_tobacco/bad
 	seed = "badtobacco"
 
-/obj/item/chems/food/grown/dried_tobacco/fine
+/obj/item/food/grown/dried_tobacco/fine
 	seed = "finetobacco"
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)

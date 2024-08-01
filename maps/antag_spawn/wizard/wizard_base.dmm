@@ -90,7 +90,7 @@
 /area/map_template/wizard_station)
 "aq" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/chawanmushi,
+/obj/item/food/chawanmushi,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -425,7 +425,7 @@
 /area/map_template/wizard_station)
 "bg" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/milosoup,
+/obj/item/food/milosoup,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

@@ -6,7 +6,7 @@
 	var/meat_name         = "meat"
 	var/meat_flags        = INGREDIENT_FLAG_MEAT
 
-	var/meat_type         = /obj/item/chems/food/butchery/meat
+	var/meat_type         = /obj/item/food/butchery/meat
 	var/meat_material     = /decl/material/solid/organic/meat
 	var/meat_amount       = 3
 
@@ -18,7 +18,7 @@
 	var/skin_material     = /decl/material/solid/organic/skin
 	var/skin_amount       = 3
 
-	var/gut_type          = /obj/item/chems/food/butchery/offal
+	var/gut_type          = /obj/item/food/butchery/offal
 	var/gut_material      = /decl/material/solid/organic/meat/gut
 	var/gut_amount        = 1
 
@@ -79,11 +79,11 @@
 
 	if(donor.reagents && length(.))
 		var/list/meat
-		for(var/obj/item/chems/food/slab in .)
+		for(var/obj/item/food/slab in .)
 			LAZYADD(meat, slab)
 		if(length(meat))
 			var/reagent_split = round(donor.reagents.total_volume/length(meat), 1)
-			for(var/obj/item/chems/food/slab as anything in meat)
+			for(var/obj/item/food/slab as anything in meat)
 				donor.reagents.trans_to_obj(slab, reagent_split)
 
 	// This process will delete the mob, so do it last.

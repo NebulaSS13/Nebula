@@ -7284,7 +7284,7 @@
 /turf/floor/wood,
 /area/ministation/engine)
 "EO" = (
-/obj/item/chems/food/old/pizza,
+/obj/item/food/old/pizza,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4

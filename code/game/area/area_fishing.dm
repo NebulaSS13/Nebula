@@ -10,7 +10,7 @@
 		/obj/item/hand/missing_card = 1
 	)
 
-/area/proc/get_fishing_result(turf/origin, obj/item/chems/food/bait)
+/area/proc/get_fishing_result(turf/origin, obj/item/food/bait)
 	if(!length(fishing_results) || prob(fishing_failure_prob))
 		return null
 	return pickweight(fishing_results)

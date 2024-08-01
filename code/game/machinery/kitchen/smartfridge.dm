@@ -51,7 +51,7 @@
 	return ..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/chems/food/grown/) || istype(O,/obj/item/seeds/))
+	if(istype(O,/obj/item/food/grown/) || istype(O,/obj/item/seeds/))
 		return 1
 	return 0
 
@@ -84,7 +84,7 @@
 	desc = "A refrigerated storage unit for fruits and vegetables."
 
 /obj/machinery/smartfridge/produce/accept_check(var/obj/item/O)
-	return istype(O, /obj/item/chems/food/grown)
+	return istype(O, /obj/item/food/grown)
 
 /obj/machinery/smartfridge/sheets
 	name = "raw material storage"
@@ -121,7 +121,7 @@
 	icon_contents = "food"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/chems/food) || istype(O,/obj/item/utensil))
+	if(istype(O,/obj/item/food) || istype(O,/obj/item/utensil))
 		return 1
 
 /obj/machinery/smartfridge/Process()

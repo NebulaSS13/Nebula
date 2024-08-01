@@ -164,9 +164,9 @@
 
 /obj/structure/closet/crate/freezer/meat/WillContain()
 	return list(
-		/obj/item/chems/food/butchery/meat/beef = 4,
-		/obj/item/chems/food/butchery/meat/syntiflesh = 4,
-		/obj/item/chems/food/butchery/meat/fish = 4
+		/obj/item/food/butchery/meat/beef = 4,
+		/obj/item/food/butchery/meat/syntiflesh = 4,
+		/obj/item/food/butchery/meat/fish = 4
 	)
 
 /obj/structure/closet/crate/bin

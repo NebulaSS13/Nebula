@@ -1,29 +1,29 @@
-/obj/item/chems/food/grown/ambrosiavulgaris
+/obj/item/food/grown/ambrosiavulgaris
 	seed = "ambrosiavulgaris"
 
-/obj/item/chems/food/grown/ambrosiadeus
+/obj/item/food/grown/ambrosiadeus
 	seed = "ambrosiadeus"
 
-/obj/item/chems/food/grown/potato
+/obj/item/food/grown/potato
 	seed = "potato"
 
-/obj/item/chems/food/grown/carrot
+/obj/item/food/grown/carrot
 	seed = "carrot"
 
-/obj/item/chems/food/grown/cabbage
+/obj/item/food/grown/cabbage
 	seed = "cabbage"
 
-/obj/item/chems/food/grown/yarrow
+/obj/item/food/grown/yarrow
 	seed = "yarrow"
 
-/obj/item/chems/food/grown/aloe
+/obj/item/food/grown/aloe
 	seed = "aloe"
 
-/obj/item/chems/food/grown/foxglove
+/obj/item/food/grown/foxglove
 	seed = "foxglove"
 
-/obj/item/chems/food/grown/valerian
+/obj/item/food/grown/valerian
 	seed = "valerian"
 
-/obj/item/chems/food/grown/ginseng
+/obj/item/food/grown/ginseng
 	seed = "ginseng"
