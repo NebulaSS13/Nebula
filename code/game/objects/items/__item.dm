@@ -532,9 +532,9 @@
 	if(can_wield && try_slapcrafting(used_item, user))
 		return TRUE
 
-	if(used_item.storage?.use_to_pickup)
+	if(used_item.storage?.use_to_pickup && isturf(src.loc))
 		//Mode is set to collect all items
-		if(used_item.storage.collection_mode && isturf(src.loc))
+		if(used_item.storage.collection_mode)
 			used_item.storage.gather_all(src.loc, user)
 			return TRUE
 		if(used_item.storage.can_be_inserted(src, user))
@@ -1074,7 +1074,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		try_burn_wearer(user, slot, 1)
 
 /obj/item/can_embed()
-	. = !anchored && !is_robot_module(src)
+	. = !anchored && (!ismob(loc) || canremove) && (!loc || isturf(loc) || ismob(loc)) && !is_robot_module(src)
 	if(. && isliving(loc))
 		var/mob/living/holder = loc
 		// Terrible check for if the mob is being driven by an AI or not.

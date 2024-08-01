@@ -9,14 +9,17 @@
 /decl/loadout_option/eyes/eyepatch
 	name = "eyepatch"
 	path = /obj/item/clothing/glasses/eyepatch
+	uid = "gear_eyes_eyepatch"
 
 /decl/loadout_option/eyes/eyepatch_colourable
 	name = "eyepatch, colourable"
 	path = /obj/item/clothing/glasses/eyepatch/colourable
+	uid = "gear_eyes_eyepatch_colourable"
 
 /decl/loadout_option/eyes/glasses
 	name = "glasses selection"
 	path = /obj/item/clothing/glasses
+	uid = "gear_eyes_glasses"
 
 /decl/loadout_option/eyes/glasses/get_gear_tweak_options()
 	. = ..()
@@ -33,6 +36,7 @@
 	name = "sunglasses selection"
 	path = /obj/item/clothing/glasses/sunglasses
 	cost = 3
+	uid = "gear_eyes_shades"
 
 /decl/loadout_option/eyes/shades/get_gear_tweak_options()
 	. = ..()
@@ -46,3 +50,4 @@
 	name = "blindfold"
 	path = /obj/item/clothing/glasses/blindfold
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	uid = "gear_eyes_blindfold"

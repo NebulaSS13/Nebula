@@ -83,11 +83,11 @@
 			. += "<a href='byond://?src=\ref[src];bodytype=\ref[B]'>[capitalize(B.pref_name)]</a>"
 
 	. += "<br><b>Pronouns:</b> "
-	for(var/decl/pronouns/G in S.available_pronouns)
-		if(G.name == pref.gender)
-			. += "<span class='linkOn'>[G.pronoun_string]</span>"
+	for(var/decl/pronouns/pronouns in S.available_pronouns)
+		if(pronouns.name == pref.gender)
+			. += "<span class='linkOn'>[pronouns.pronoun_string]</span>"
 		else
-			. += "<a href='byond://?src=\ref[src];gender=\ref[G]'>[G.pronoun_string]</a>"
+			. += "<a href='byond://?src=\ref[src];gender=\ref[pronouns]'>[pronouns.pronoun_string]</a>"
 
 	. += "<br><b>Spawnpoint</b>:"
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)

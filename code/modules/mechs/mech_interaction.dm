@@ -161,6 +161,7 @@
 			var/system_moved = FALSE
 			var/obj/item/temp_system
 			var/obj/item/mech_equipment/ME
+			var/temp_old_anchored
 			if(istype(selected_system, /obj/item/mech_equipment))
 				ME = selected_system
 				temp_system = ME.get_effective_obj()
@@ -169,6 +170,10 @@
 					temp_system.forceMove(src)
 			else
 				temp_system = selected_system
+			// Hackery for preventing embedding of melee weapons.
+			if(temp_system)
+				temp_old_anchored = temp_system.anchored
+				temp_system.anchored = TRUE
 
 			// Slip up and attack yourself maybe.
 			failed = FALSE
@@ -208,8 +213,12 @@
 				ME = selected_system
 				extra_delay = ME.equipment_delay
 			setClickCooldown(arms ? arms.action_delay + extra_delay : 15 + extra_delay)
-			if(system_moved)
-				temp_system.forceMove(selected_system)
+
+			if(!QDELETED(temp_system))
+				if(system_moved)
+					temp_system.forceMove(selected_system)
+				temp_system.anchored = temp_old_anchored
+
 			current_user = null
 			return
 

@@ -11,16 +11,19 @@
 	name = "gloves, colored"
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	path = /obj/item/clothing/gloves
+	uid = "gear_gloves_color"
 
 /decl/loadout_option/gloves/evening
-	name = "gloves, evening, colour select"
+	name = "gloves, evening, color select"
 	path = /obj/item/clothing/gloves/evening
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	uid = "gear_gloves_evening"
 
 /decl/loadout_option/ring
 	name = "ring"
 	path = /obj/item/clothing/gloves/ring
 	cost = 2
+	uid = "gear_gloves_ring"
 
 /decl/loadout_option/ring/get_gear_tweak_options()
 	. = ..()

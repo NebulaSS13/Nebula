@@ -6,7 +6,7 @@
 		/decl/config/lists/event_first_run,
 		/decl/config/lists/event_delay_lower,
 		/decl/config/lists/event_delay_upper,
-		/decl/config/toggle/allow_random_events
+		/decl/config/toggle/on/allow_random_events
 	)
 
 //if objectives are disabled or not
@@ -42,6 +42,6 @@
 		"Affect mundane, moderate, and major events respectively."
 	)
 
-/decl/config/toggle/allow_random_events
+/decl/config/toggle/on/allow_random_events
 	uid = "allow_random_events"
 	desc = "Hash out to disable random events during the round."

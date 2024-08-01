@@ -11,13 +11,6 @@
 	/// Whether the job preferences for this submap archetype are collapsed by default.
 	var/default_to_hidden = TRUE
 
-/decl/submap_archetype/Initialize()
-	if(islist(whitelisted_species) && !length(whitelisted_species))
-		whitelisted_species |= SSmodpacks.default_submap_whitelisted_species
-	if(islist(blacklisted_species) && !length(blacklisted_species))
-		blacklisted_species |= SSmodpacks.default_submap_blacklisted_species
-	. = ..()
-
 /decl/submap_archetype/validate()
 	. = ..()
 	if(!descriptor)

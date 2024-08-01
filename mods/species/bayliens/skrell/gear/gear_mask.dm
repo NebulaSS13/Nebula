@@ -2,6 +2,7 @@
 	name = "skrellian gill cover"
 	path = /obj/item/clothing/mask/gas/skrell
 	whitelisted = list(SPECIES_SKRELL)
+	uid = "gear_mask_skrell"
 
 /obj/item/clothing/mask/gas/skrell
 	name = "skrellian gill cover"

@@ -161,6 +161,11 @@
 			cut_delay *= 0.5
 
 		else if(IS_PICK(W))
+
+			if(W.material?.hardness < material.hardness)
+				to_chat(user, SPAN_WARNING("\The [W] is not hard enough to cut through [material.solid_name]."))
+				return TRUE
+
 			dismantle_verb  = W.get_tool_message(TOOL_PICK)
 			dismantle_sound = W.get_tool_sound(TOOL_PICK)
 			cut_delay       = W.get_expected_tool_use_delay(TOOL_PICK, cut_delay)

@@ -97,14 +97,14 @@
 	var/list/forms = subtypesof(/datum/god_form)
 
 	for(var/form in forms)
-		var/datum/god_form/G = form
-		var/god_name = initial(G.name)
-		var/icon/god_icon = icon('icons/mob/mob.dmi', initial(G.pylon_icon_state))
+		var/datum/god_form/god = form
+		var/god_name = initial(god.name)
+		var/icon/god_icon = icon('icons/mob/mob.dmi', initial(god.pylon_icon_state))
 		send_rsc(src,god_icon, "[god_name].png")
 		dat += {"<tr>
-					<td><a href="byond://?src=\ref[src];form=\ref[G]">[god_name]</a></td>
+					<td><a href="byond://?src=\ref[src];form=\ref[god]">[god_name]</a></td>
 					<td><img src="[god_name].png"></td>
-					<td>[initial(G.info)]</td>
+					<td>[initial(god.info)]</td>
 				</tr>"}
 	dat += "</table>"
 	show_browser(src, JOINTEXT(dat), "window=godform;can_close=0")
