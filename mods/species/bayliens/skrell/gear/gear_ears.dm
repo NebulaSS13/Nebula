@@ -46,3 +46,4 @@
 	whitelisted = list(SPECIES_SKRELL)
 	path = /obj/item/clothing/ears/skrell
 	loadout_flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_SUBTYPE_SELECTION
+	uid = "gear_accessory_skrell"

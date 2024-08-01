@@ -485,13 +485,13 @@
 		return
 
 	for(var/rtype in source.reagents.reagent_volumes)
-		var/decl/material/G = GET_DECL(rtype)
+		var/decl/material/mat = GET_DECL(rtype)
 		if(!direction_mode)
-			if(G.name in demand)
-				source.reagents.trans_type_to(target, G.type, transfer_amount)
+			if(mat.name in demand)
+				source.reagents.trans_type_to(target, rtype, transfer_amount)
 		else
-			if(!(G.name in demand))
-				source.reagents.trans_type_to(target, G.type, transfer_amount)
+			if(!(mat.name in demand))
+				source.reagents.trans_type_to(target, rtype, transfer_amount)
 	activate_pin(2)
 	push_data()
 

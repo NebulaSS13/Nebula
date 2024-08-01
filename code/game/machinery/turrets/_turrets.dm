@@ -12,14 +12,14 @@
 	idle_power_usage = 500
 	active_power_usage = 10 KILOWATTS
 	interact_offline = TRUE
-
 	transform_animate_time = 0.2 SECONDS
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
+	abstract_type = /obj/machinery/turret
+
 	// Visuals.
 	var/image/turret_stand = null
 	var/image/turret_ray = null
 	var/ray_color = "#ffffffff" // Color of the ray, changed by the FSM when switching states.
-
 	var/image/transverse_left // Images for displaying the range of the turret's transverse
 	var/image/transverse_right
 

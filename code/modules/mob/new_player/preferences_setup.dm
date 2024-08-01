@@ -79,7 +79,7 @@
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob.skip_loadout_preview))
 		// Equip custom gear loadout, replacing any job items
 		for(var/thing in Gear())
-			var/decl/loadout_option/G = global.gear_datums[thing]
+			var/decl/loadout_option/G = decls_repository.get_decl_by_id_or_var(thing, /decl/loadout_option)
 			if(G)
 				var/permitted = FALSE
 				if(G.allowed_roles && G.allowed_roles.len)
@@ -96,7 +96,7 @@
 				if(!permitted)
 					continue
 
-				if(G.slot && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.name]))
+				if(G.slot && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.uid]))
 					update_icon = TRUE
 
 	if(update_icon)

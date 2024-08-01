@@ -217,7 +217,8 @@
 			inv_box = sublist[2]
 			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
 		hand_y_offset += world.icon_size
-	if(mymob.client && length(hand_hud_objects))
+
+	if(mymob.client && islist(hand_hud_objects) && length(hand_hud_objects))
 		mymob.client.screen |= hand_hud_objects
 
 	// Make sure all held items are on the screen and set to the correct screen loc.

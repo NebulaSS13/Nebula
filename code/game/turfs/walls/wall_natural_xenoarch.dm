@@ -43,6 +43,9 @@
 
 /turf/wall/natural/proc/handle_xenoarch_tool_interaction(var/obj/item/tool/xeno/P, var/mob/user)
 	. = TRUE
+	if(P.material?.hardness < material.hardness)
+		to_chat(user, SPAN_WARNING("\The [P] is not hard enough to excavate [material.solid_name]."))
+		return
 	if(last_excavation + 2 SECONDS > world.time)//prevents message spam
 		return
 	last_excavation = world.time

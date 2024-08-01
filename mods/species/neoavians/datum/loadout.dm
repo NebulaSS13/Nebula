@@ -10,6 +10,7 @@
 	name = "Neo-Avian uniform selection"
 	path = /obj/item/clothing/dress/avian_smock
 	slot = slot_w_uniform_str
+	uid = "gear_under_avian"
 
 /decl/loadout_option/avian/uniform_selection/get_gear_tweak_options()
 	. = ..()
@@ -30,3 +31,4 @@
 	path  = /obj/item/clothing/shoes/avian/footwraps
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	slot  = slot_shoes_str
+	uid = "gear_shoes_avian"

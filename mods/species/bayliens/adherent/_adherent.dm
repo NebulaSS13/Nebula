@@ -1,4 +1,3 @@
-#define SPECIES_ADHERENT  "Adherent"
 #define BODYTYPE_ADHERENT "adherent body"
 #define LANGUAGE_ADHERENT "Protocol"
 

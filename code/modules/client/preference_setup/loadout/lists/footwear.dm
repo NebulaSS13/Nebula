@@ -7,14 +7,16 @@
 	abstract_type = /decl/loadout_option/shoes
 
 /decl/loadout_option/shoes/athletic
-	name = "athletic shoes, colour select"
+	name = "athletic shoes, color select"
 	path = /obj/item/clothing/shoes/athletic
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	uid = "gear_shoes_athletic"
 
 /decl/loadout_option/shoes/boots
 	name = "boot selection"
 	path = /obj/item/clothing/shoes
 	cost = 2
+	uid = "gear_shoes_boots"
 
 /decl/loadout_option/shoes/boots/get_gear_tweak_options()
 	. = ..()
@@ -30,6 +32,7 @@
 /decl/loadout_option/shoes/color
 	name = "shoe selection"
 	path = /obj/item/clothing/shoes
+	uid = "gear_shoes_color"
 
 /decl/loadout_option/shoes/color/get_gear_tweak_options()
 	. = ..()
@@ -51,20 +54,24 @@
 	)
 
 /decl/loadout_option/shoes/flats
-	name = "flats, colour select"
+	name = "flats, color select"
 	path = /obj/item/clothing/shoes/flats
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	uid = "gear_shoes_flats"
 
 /decl/loadout_option/shoes/high
 	name = "high tops selection"
 	path = /obj/item/clothing/shoes/color/hightops
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
+	uid = "gear_shoes_high_tops"
 
 /decl/loadout_option/shoes/sandal
 	name = "wooden sandals"
 	path = /obj/item/clothing/shoes/sandal
+	uid = "gear_shoes_sandals"
 
 /decl/loadout_option/shoes/heels
-	name = "high heels, colour select"
+	name = "high heels, color select"
 	path = /obj/item/clothing/shoes/heels
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	uid = "gear_shoes_heels"
