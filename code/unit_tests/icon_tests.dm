@@ -153,3 +153,28 @@
 	else
 		pass("All decals have valid icon states.")
 	return 1
+
+/datum/unit_test/icon_test/bgstate
+	name = "ICON_STATE - Character Previews Will Have Background States"
+
+/datum/unit_test/icon_test/bgstate/start_test()
+	var/obj/screen/setup_preview/preview = /obj/screen/setup_preview
+	var/test_icon = initial(preview.icon)
+	if(!test_icon)
+		fail("Missing test icon.")
+		return 1
+
+	var/list/check_icons = list('icons/effects/128x48.dmi') // pAI preview
+	check_icons |= test_icon
+
+	var/list/failures = list()
+	for(var/bgicon in check_icons)
+		for(var/bgstate in global.using_map.char_preview_bgstate_options)
+			if(!check_state_in_icon(bgstate, bgicon))
+				failures += "[bgicon] - [bgstate]"
+
+	if(failures.len)
+		fail("Missing preview background icon states:\n\t-[jointext(failures, "\n\t-")]")
+	else
+		pass("All preview icons have all background icon states.")
+	return 1

@@ -5,7 +5,6 @@
 	var/icon/pai_preview
 	var/datum/paiCandidate/candidate
 	var/icon/bgstate = "steel"
-	var/list/bgstate_options = list("FFF", "steel", "white")
 
 /datum/category_item/player_setup_item/player_global/pai/load_preferences(datum/pref_record_reader/R)
 	if(!candidate)
@@ -78,7 +77,7 @@
 				if(!isnull(t) && CanUseTopic(user))
 					candidate.say_verb = t
 			if("cyclebg")
-				bgstate = next_in_list(bgstate, bgstate_options)
+				bgstate = next_in_list(bgstate, global.using_map.char_preview_bgstate_options)
 				update_pai_preview(user)
 				. = TOPIC_HARD_REFRESH
 		return

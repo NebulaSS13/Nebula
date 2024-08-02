@@ -30,6 +30,17 @@
 	)
 	game_year = -914 // in 2024, the year should be 1110, roughly a century after the fall of the Imperial Aegis
 
+	char_preview_bgstate_options = list(
+		"000",
+		"midgrey",
+		"FFF",
+		"wood"  = /turf/floor/wood::color,
+		"mud",
+		"grass" = /turf/floor/natural/grass::color,
+		"rock"  = /turf/floor/natural/rock/basalt::color,
+		"brick" = /turf/wall/brick/sandstone::color
+	)
+
 /decl/backpack_outfit/sack
 	is_default = TRUE
 
