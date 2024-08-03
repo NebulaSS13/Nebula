@@ -349,11 +349,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		CRASH("Unnamed material /decl tried to initialize.")
 	// Default use_name to name if unset.
 	use_name       ||= name
-	// Default everything else to use_name, so that if it's overridden, we use that instead of base name.
+	// Default the other state names to use_name, so that if it's overridden, we use that instead of base name.
 	liquid_name    ||= use_name
 	solid_name     ||= use_name
 	gas_name       ||= use_name
-	adjective_name ||= use_name
+	// Use solid_name for adjective_name so that we get "ice bracelet" instead of "water bracelet" for things made of water below 0C.
+	adjective_name ||= solid_name
+	// Default soup_name to liquid_name if unset.
 	soup_name      ||= liquid_name
 
 	// Null/clear a bunch of physical vars as this material is fake.
