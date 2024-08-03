@@ -397,6 +397,7 @@ var/global/list/dexterity_levels = list(
 // Sprite accessory metadata types for shorter reference.
 #define SAM_COLOR       /decl/sprite_accessory_metadata/color
 #define SAM_COLOR_INNER /decl/sprite_accessory_metadata/color/alt
+#define SAM_GRADIENT    /decl/sprite_accessory_metadata/gradient
 
 // Helpers for setting mob appearance. They are extremely ugly, hence the helpers.
 #define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))

@@ -169,7 +169,7 @@
 /decl/sprite_accessory/proc/get_cached_accessory_icon_key(var/obj/item/organ/external/organ, var/list/metadata)
 	. = list(organ.bodytype, organ.icon_state)
 	for(var/metadata_type in accessory_metadata_types)
-		. += LAZYACCESS(metadata, metadata_type)
+		. += LAZYACCESS(metadata, metadata_type) || "null"
 	return JOINTEXT(.)
 
 /decl/sprite_accessory/proc/get_cached_accessory_icon(var/obj/item/organ/external/organ, var/list/metadata)
@@ -200,14 +200,27 @@
 
 		accessory_icon = icon(use_icon, use_state)
 
+		// Inner overlay and color.
+		var/inner_color = LAZYACCESS(metadata, SAM_COLOR_INNER)
+
 		// Base icon and color.
 		if(!isnull(color_blend))
+			var/decl/sprite_accessory_metadata/gradient/gradient_metadata = GET_DECL(SAM_GRADIENT)
+			var/icon/gradient_icon = LAZYACCESS(metadata, SAM_GRADIENT)
+			if(istext(gradient_icon) && (gradient_metadata.validate_data(gradient_icon)))
+				gradient_icon = icon(gradient_metadata.icon, gradient_icon)
+			else
+				gradient_icon = null
+			if(gradient_icon)
+				gradient_icon.Blend(accessory_icon, ICON_AND)
+				if(!isnull(inner_color))
+					gradient_icon.Blend(inner_color, color_blend)
 			var/color = LAZYACCESS(metadata, SAM_COLOR)
 			if(!isnull(color))
 				accessory_icon.Blend(color, color_blend)
+			if(gradient_icon)
+				accessory_icon.Blend(gradient_icon, ICON_OVERLAY)
 
-		// Inner overlay and color.
-		var/inner_color = LAZYACCESS(metadata, SAM_COLOR_INNER)
 		if(!isnull(inner_color))
 			var/inner_state = "[use_state]_inner"
 			if(check_state_in_icon(inner_state, use_icon))

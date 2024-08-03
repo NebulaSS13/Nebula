@@ -1,21 +1,22 @@
 /decl/sprite_accessory_category/hair
-	name                  = "Hair"
-	base_accessory_type   = /decl/sprite_accessory/hair
-	default_accessory     = /decl/sprite_accessory/hair/bald
-	always_apply_defaults = TRUE
-	uid                   = "acc_cat_hair"
+	name                     = "Hair"
+	base_accessory_type      = /decl/sprite_accessory/hair
+	default_accessory        = /decl/sprite_accessory/hair/bald
+	always_apply_defaults    = TRUE
+	uid                      = "acc_cat_hair"
 
 /decl/sprite_accessory/hair
-	abstract_type         = /decl/sprite_accessory/hair
-	icon                  = 'icons/mob/human_races/species/human/hair.dmi'
-	hidden_by_gear_slot   = slot_head_str
-	hidden_by_gear_flag   = BLOCK_HEAD_HAIR
-	body_parts            = list(BP_HEAD)
-	sprite_overlay_layer  = FLOAT_LAYER
-	is_heritable          = TRUE
-	accessory_category    = SAC_HAIR
-	accessory_flags       = HAIR_LOSS_VULNERABLE
-	grooming_flags        = GROOMABLE_BRUSH | GROOMABLE_COMB
+	abstract_type            = /decl/sprite_accessory/hair
+	icon                     = 'icons/mob/human_races/species/human/hair.dmi'
+	hidden_by_gear_slot      = slot_head_str
+	hidden_by_gear_flag      = BLOCK_HEAD_HAIR
+	body_parts               = list(BP_HEAD)
+	sprite_overlay_layer     = FLOAT_LAYER
+	is_heritable             = TRUE
+	accessory_category       = SAC_HAIR
+	accessory_flags          = HAIR_LOSS_VULNERABLE
+	grooming_flags           = GROOMABLE_BRUSH | GROOMABLE_COMB
+	accessory_metadata_types = list(SAM_COLOR, SAM_COLOR_INNER, SAM_GRADIENT)
 
 /decl/sprite_accessory/hair/get_grooming_descriptor(grooming_result, obj/item/organ/external/organ, obj/item/grooming/tool)
 	return grooming_result == GROOMING_RESULT_PARTIAL ? "scalp" : "hair"
