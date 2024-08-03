@@ -148,7 +148,7 @@
 	return list(SAM_COLOR = COLOR_BLACK)
 
 /decl/sprite_accessory/proc/get_cached_accessory_icon(var/obj/item/organ/external/organ, var/list/metadata)
-	if(!length(metadata) || !istext(metadata[SAM_COLOR])) // For some reason this is getting passed empty lists. :(
+	if(!length(metadata))
 		metadata = get_default_accessory_metadata()
 	var/color = LAZYACCESS(metadata, SAM_COLOR)
 	ASSERT(istext(color) && (length(color) == 7 || length(color) == 9))

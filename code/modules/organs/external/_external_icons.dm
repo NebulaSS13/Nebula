@@ -167,7 +167,7 @@ var/global/list/organ_icon_cache = list()
 		var/list/metadata = accessories[accessory_type] || accessory.get_default_accessory_metadata()
 		if(islist(metadata) && metadata_tag)
 			metadata = metadata[metadata_tag]
-		return islist(metadata) ? metadata.Copy() : list()
+		return islist(metadata) ? metadata.Copy() : metadata
 
 /obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_metadata, var/skip_update = FALSE)
 
