@@ -45,13 +45,13 @@
 	)
 	default_sprite_accessories = list(
 		SAC_HAIR = list(
-			/decl/sprite_accessory/hair/vox/short = "#160900"
+			/decl/sprite_accessory/hair/vox/short     = list(SAM_COLOR = "#160900")
 		),
 		SAC_MARKINGS = list(
-			/decl/sprite_accessory/marking/vox/beak   = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/crest  = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/claws  = "#a0a654"
+			/decl/sprite_accessory/marking/vox/beak   = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/scutes = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/crest  = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/claws  = list(SAM_COLOR = "#a0a654")
 		)
 	)
 
@@ -86,13 +86,13 @@
 
 	default_sprite_accessories = list(
 		SAC_HAIR = list(
-			/decl/sprite_accessory/hair/vox/short/servitor = "#160900"
+			/decl/sprite_accessory/hair/vox/short/servitor     = list(SAM_COLOR = "#160900")
 		),
 		SAC_MARKINGS = list(
-			/decl/sprite_accessory/marking/vox/beak/servitor   = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/scutes/servitor = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/crest/servitor  = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/claws/servitor  = "#a0a654"
+			/decl/sprite_accessory/marking/vox/beak/servitor   = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/scutes/servitor = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/crest/servitor  = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/claws/servitor  = list(SAM_COLOR = "#a0a654")
 		)
 	)
 
@@ -111,13 +111,13 @@
 	icon_template       = 'mods/species/vox/icons/body/stanchion/template.dmi'
 	default_sprite_accessories = list(
 		SAC_HAIR = list(
-			/decl/sprite_accessory/hair/vox/short/stanchion = "#160900"
+			/decl/sprite_accessory/hair/vox/short/stanchion     = list(SAM_COLOR = "#160900")
 		),
 		SAC_MARKINGS = list(
-			/decl/sprite_accessory/marking/vox/beak/stanchion   = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/scutes/stanchion = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/crest/stanchion  = "#bc7d3e",
-			/decl/sprite_accessory/marking/vox/claws/stanchion  = "#a0a654"
+			/decl/sprite_accessory/marking/vox/beak/stanchion   = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/scutes/stanchion = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/crest/stanchion  = list(SAM_COLOR = "#bc7d3e"),
+			/decl/sprite_accessory/marking/vox/claws/stanchion  = list(SAM_COLOR = "#a0a654")
 		)
 	)
 

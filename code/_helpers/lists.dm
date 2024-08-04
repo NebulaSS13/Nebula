@@ -856,3 +856,21 @@ var/global/list/json_cache = list()
 /// Is this a dense (all keys have non-null values) associative list with at least one entry?
 /proc/is_dense_assoc(var/list/L)
 	return length(L) > 0 && !isnull(L[L[1]])
+
+// I have a feeling this is a redundant proc but I couldn't find another implementation.
+/proc/lists_are_equivalent(list/A, list/B, associative)
+	if(A == B) // Literal equivalence (or two nulls)
+		return TRUE
+	if(length(A) != length(B)) // Also takes care of nulls.
+		return FALSE
+	for(var/index in A)
+		if(!(index in B))
+			return FALSE
+		if(associative && A[index] != B[index])
+			return FALSE
+	for(var/index in B)
+		if(!(index in A))
+			return FALSE
+		if(associative && A[index] != B[index])
+			return FALSE
+	return TRUE

@@ -9,15 +9,18 @@
 	gender = pronouns.name
 
 	for(var/acc_cat in sprite_accessories)
+
 		var/decl/sprite_accessory_category/accessory_category_decl = GET_DECL(acc_cat)
 		if(accessory_category_decl.single_selection)
 			var/list/available_styles = get_usable_sprite_accessories(H, current_species, current_bodytype, acc_cat, null)
 			if(length(available_styles))
-				sprite_accessories[acc_cat][1] = pick(available_styles)
-			sprite_accessories[acc_cat][sprite_accessories[acc_cat][1]] = get_random_colour()
+				var/decl/sprite_accessory/accessory = pick(available_styles)
+				sprite_accessories[acc_cat] = list(accessory.type = accessory.get_random_metadata())
 			continue
-		for(var/accessory in sprite_accessories[acc_cat])
-			sprite_accessories[acc_cat][accessory] = get_random_colour()
+
+		for(var/accessory_type in sprite_accessories[acc_cat])
+			var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+			sprite_accessories[acc_cat][accessory_type] = accessory.get_random_metadata()
 
 	if(bodytype)
 		if(current_bodytype.appearance_flags & HAS_A_SKIN_TONE)

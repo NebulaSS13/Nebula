@@ -9,8 +9,6 @@
 	var/max_selections
 	/// A default always-available type used as a fallback.
 	var/default_accessory
-	/// A default colour for the above.
-	var/default_accessory_color = COLOR_BLACK
 	/// Set to FALSE for categories where multiple selection is allowed (markings)
 	var/single_selection        = TRUE
 	/// Set to TRUE to apply these markings as defaults when bodytype is set.

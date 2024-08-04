@@ -476,7 +476,8 @@ var/global/list/bodytypes_by_category = list()
 		if(!istype(acc_cat))
 			. += "invalid sprite accessory category entry: [accessory_category || "null"]"
 			continue
-		for(var/accessory in default_sprite_accessories[accessory_category])
+		var/accessories = default_sprite_accessories[accessory_category]
+		for(var/accessory in accessories)
 			var/decl/sprite_accessory/acc_decl = GET_DECL(accessory)
 			if(!istype(acc_decl))
 				. += "invalid sprite accessory in category [accessory_category]: [accessory || "null"]"
@@ -485,6 +486,8 @@ var/global/list/bodytypes_by_category = list()
 				. += "accessory category [acc_decl.accessory_category || "null"] does not match [acc_cat.type]"
 			if(!istype(acc_decl, acc_cat.base_accessory_type))
 				. += "accessory type [acc_decl.type] does not align with category base accessory: [acc_cat.base_accessory_type || "null"]"
+			if(!islist(accessories[accessory]))
+				. += "non-list default metadata for [acc_decl.type]: [accessories[accessory] || "NULL"]"
 
 	var/list/tail_data = has_limbs[BP_TAIL]
 	if(tail_data)
@@ -661,11 +664,11 @@ var/global/list/bodytypes_by_category = list()
 	for(var/accessory_category in default_sprite_accessories)
 		for(var/accessory in default_sprite_accessories[accessory_category])
 			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			var/accessory_colour = default_sprite_accessories[accessory_category][accessory]
+			var/accessory_metadata = default_sprite_accessories[accessory_category][accessory]
 			for(var/bodypart in accessory_decl.body_parts)
 				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(setting, bodypart)
 				if(O)
-					O.set_sprite_accessory(accessory, null, accessory_colour, skip_update = TRUE)
+					O.set_sprite_accessory(accessory, null, accessory_metadata, skip_update = TRUE)
 
 /decl/bodytype/proc/customize_preview_mannequin(mob/living/human/dummy/mannequin/mannequin)
 	set_default_sprite_accessories(mannequin)

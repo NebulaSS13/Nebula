@@ -11,13 +11,13 @@
 		src.verbs -= /mob/living/human/proc/morph
 		return
 
-	var/new_facial = input("Please select facial hair color.", "Character Generation", GET_FACIAL_HAIR_COLOUR(src)) as color
+	var/new_facial = input("Please select facial hair color.", "Character Generation", GET_FACIAL_HAIR_COLOR(src)) as color
 	if(new_facial)
-		SET_FACIAL_HAIR_COLOUR(src, new_facial, TRUE)
+		SET_FACIAL_HAIR_COLOR(src, new_facial, TRUE)
 
-	var/new_hair = input("Please select hair color.", "Character Generation", GET_HAIR_COLOUR(src)) as color
+	var/new_hair = input("Please select hair color.", "Character Generation", GET_HAIR_COLOR(src)) as color
 	if(new_hair)
-		SET_HAIR_COLOUR(src, new_hair, TRUE)
+		SET_HAIR_COLOR(src, new_hair, TRUE)
 
 	var/new_eyes = input("Please select eye color.", "Character Generation", get_eye_colour()) as color
 	if(new_eyes)

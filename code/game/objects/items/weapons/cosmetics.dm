@@ -73,17 +73,17 @@
 		return TRUE
 
 	if(user == target)
-		if(target.get_organ_sprite_accessory(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
+		if(target.get_organ_sprite_accessory_metadata(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
 			to_chat(user, SPAN_WARNING("You need to wipe off your old makeup first!"))
 			return TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] does their makeup with \the [src]."),
 			SPAN_NOTICE("You take a moment to apply \the [src]. Perfect!")
 		)
-		user.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
+		user.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, list(SAM_COLOR = makeup_color), apply_marking_to_limb)
 		return TRUE
 
-	if(target.get_organ_sprite_accessory(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
+	if(target.get_organ_sprite_accessory_metadata(cosmetic_type, apply_marking_to_limb))	//if they already have lipstick on
 		to_chat(user, SPAN_WARNING("You need to wipe off the old makeup first!"))
 		return TRUE
 
@@ -96,9 +96,9 @@
 			SPAN_NOTICE("\The [user] does \the [target]'s makeup with \the [src]."),
 			SPAN_NOTICE("You apply \the [src] to \the [target].")
 		)
-		if(target.get_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, apply_marking_to_limb))
+		if(target.get_organ_sprite_accessory_metadata(cosmetic_type, apply_marking_to_limb))
 			return TRUE
-		target.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
+		target.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, list(SAM_COLOR = makeup_color), apply_marking_to_limb)
 	return TRUE
 
 //types

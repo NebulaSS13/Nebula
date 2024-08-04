@@ -71,6 +71,13 @@
 	var/draw_accessory = TRUE
 	/// Bitflags indicating what grooming tools work on this accessory.
 	var/grooming_flags = GROOMABLE_NONE
+	/// A list of metadata types for customisation of this accessory.
+	var/list/accessory_metadata_types
+
+/decl/sprite_accessory/Initialize()
+	. = ..()
+	if(!isnull(color_blend))
+		LAZYDISTINCTADD(accessory_metadata_types, /decl/sprite_accessory_metadata/color)
 
 /decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
 	return
@@ -137,7 +144,13 @@
 /decl/sprite_accessory/proc/get_grooming_descriptor(grooming_result, obj/item/organ/external/organ, obj/item/grooming/tool)
 	return "mystery grooming target"
 
-/decl/sprite_accessory/proc/get_cached_accessory_icon(var/obj/item/organ/external/organ, var/color = COLOR_WHITE)
+/decl/sprite_accessory/proc/get_default_accessory_metadata()
+	return list(SAM_COLOR = COLOR_BLACK)
+
+/decl/sprite_accessory/proc/get_cached_accessory_icon(var/obj/item/organ/external/organ, var/list/metadata)
+	if(!length(metadata))
+		metadata = get_default_accessory_metadata()
+	var/color = LAZYACCESS(metadata, SAM_COLOR)
 	ASSERT(istext(color) && (length(color) == 7 || length(color) == 9))
 	if(!icon_state)
 		return null
@@ -160,3 +173,21 @@
 			accessory_icon.Blend(color, color_blend)
 		cached_icons[organ.bodytype][organ.icon_state][color] = accessory_icon
 	return accessory_icon
+
+/decl/sprite_accessory/proc/update_metadata(list/new_metadata, list/old_metadata)
+	if(!islist(new_metadata) && !islist(old_metadata))
+		return get_default_accessory_metadata()
+	if(!islist(new_metadata))
+		new_metadata = get_default_accessory_metadata()
+	if(!islist(old_metadata))
+		old_metadata = get_default_accessory_metadata()
+	for(var/metadata_type in old_metadata)
+		if(!(metadata_type in new_metadata))
+			new_metadata[metadata_type] = old_metadata[metadata_type]
+	for(var/metadata_type in new_metadata)
+		if(!(metadata_type in old_metadata))
+			new_metadata -= metadata_type
+	return new_metadata
+
+/decl/sprite_accessory/proc/get_random_metadata()
+	return list(SAM_COLOR = get_random_colour())

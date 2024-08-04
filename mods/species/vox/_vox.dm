@@ -12,7 +12,7 @@
 
 /mob/living/human/vox/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
 	SET_HAIR_STYLE(src, /decl/sprite_accessory/hair/vox/short, TRUE)
-	SET_HAIR_COLOUR(src, COLOR_BEASTY_BROWN, TRUE)
+	SET_HAIR_COLOR(src, COLOR_BEASTY_BROWN, TRUE)
 	species_name = SPECIES_VOX
 	. = ..()
 

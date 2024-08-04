@@ -55,7 +55,7 @@
 		return
 
 	// These values may be null and are generally optional.
-	var/hair_colour     = GET_HAIR_COLOUR(src)
+	var/hair_colour     = GET_HAIR_COLOR(src)
 	var/skin_colour     = get_skin_colour()
 	var/tail_hair       = tail_organ.get_tail_hair()
 	var/tail_blend      = tail_organ.get_tail_blend()
