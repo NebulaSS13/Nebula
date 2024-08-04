@@ -2355,6 +2355,7 @@
 #include "code\modules\food\assembled.dm"
 #include "code\modules\food\cooking\_recipe.dm"
 #include "code\modules\food\cooking\cooking_vessels\_cooking_vessel.dm"
+#include "code\modules\food\cooking\cooking_vessels\baking_dish.dm"
 #include "code\modules\food\cooking\cooking_vessels\pot.dm"
 #include "code\modules\food\cooking\cooking_vessels\skillet.dm"
 #include "code\modules\food\cooking\recipes\recipe_assembled.dm"

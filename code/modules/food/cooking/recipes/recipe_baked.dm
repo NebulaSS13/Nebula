@@ -1,5 +1,9 @@
 /decl/recipe/baked
 	abstract_type = /decl/recipe/baked
+	container_categories = list(
+		RECIPE_CATEGORY_MICROWAVE,
+		RECIPE_CATEGORY_BAKING_DISH
+	)
 	//cooking_heat_type = COOKING_HEAT_INDIRECT
 
 /decl/recipe/baked/pizzamargherita
