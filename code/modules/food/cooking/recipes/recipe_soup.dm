@@ -42,7 +42,7 @@
 		var/list/precursor_taste = LAZYACCESS(precursor_data, "taste")
 		if(length(precursor_taste))
 			for(var/taste in precursor_taste)
-				taste_strings[taste] += precursor_taste["taste"]
+				taste_strings[taste] += precursor_taste[taste]
 		var/list/precursor_ingredients = LAZYACCESS(precursor_data, "soup_ingredients")
 		if(length(precursor_ingredients))
 			for(var/ingredient in precursor_ingredients)
