@@ -98,8 +98,9 @@
 			var/potency = seed.get_trait(TRAIT_POTENCY)
 			if(LAZYACCESS(reagent_amounts,2) && potency > 0)
 				rtotal += round(potency/reagent_amounts[2])
-			if(rid == /decl/material/liquid/nutriment)
-				LAZYSET(data, "taste", list(seed.product_name = max(1,rtotal)))
+			var/decl/material/reagent = GET_DECL(rid)
+			if(!reagent.taste_description)
+				LAZYSET(data, "taste", list(seed.product_name = max(1,rtotal) * reagent.taste_mult))
 			add_to_reagents(rid,max(1,rtotal),data)
 
 /obj/item/food/grown/proc/update_desc()
