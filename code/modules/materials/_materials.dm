@@ -889,10 +889,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Sum our existing taste data with the incoming taste data.
 	var/total_taste = 0
+	var/new_fraction = amount / REAGENT_VOLUME(reagents, type) // the fraction of the total reagent volume that the new data is associated with
 	var/list/tastes = list()
 	var/list/newtastes = LAZYACCESS(newdata, "taste")
 	for(var/taste in newtastes)
-		var/newtaste   = newtastes[taste]
+		var/newtaste   = newtastes[taste] * new_fraction
 		tastes[taste] += newtaste
 		total_taste   += newtaste
 
@@ -901,14 +902,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// with a taste list into honey for example won't completely mask the
 	// taste of honey.
 	var/list/oldtastes = LAZYACCESS(., "taste")
+	var/old_fraction = 1 - new_fraction
 	if(length(oldtastes))
 		for(var/taste in oldtastes)
-			var/oldtaste   = oldtastes[taste]
+			var/oldtaste   = oldtastes[taste] * old_fraction
 			tastes[taste] += oldtaste
 			total_taste   += oldtaste
-	else if(taste_description)
-		tastes[taste_description] += taste_mult
-		total_taste               += taste_mult
+	else if(length(tastes) && taste_description) // only add it to the list if we already have other tastes
+		tastes[taste_description] += taste_mult * old_fraction
+		total_taste               += taste_mult * old_fraction
 
 	// Cull all tastes below 10% of total
 	if(length(tastes))
