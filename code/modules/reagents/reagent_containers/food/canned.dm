@@ -60,6 +60,9 @@
 /obj/item/food/can/apply_filling_overlay()
 	return //Bypass searching through the whole icon file for a filling icon
 
+/obj/item/food/can/can_be_poured_into(atom/source)
+	return (reagents?.maximum_volume > 0) && ATOM_IS_OPEN_CONTAINER(src)
+
 //Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts
 
 /obj/item/food/can/beef
@@ -127,10 +130,10 @@
 /obj/item/food/can/caviar/true
 	name = "canned caviar"
 	icon_state = "carpeggs"
-	desc = "Caviar, or space carp eggs. Exceeds the recomended amount of heavy metals in your diet! But very posh."
+	desc = "Caviar, or space carp eggs. Exceeds the recommended amount of heavy metals in your diet! But very posh."
 	trash = /obj/item/trash/carpegg
 	filling_color = "#330066"
-	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
+	nutriment_desc = list("fish" = 1, "salt" = 1, "a numbing sensation" = 1)
 	nutriment_amt = 6
 
 /obj/item/food/can/caviar/true/populate_reagents()

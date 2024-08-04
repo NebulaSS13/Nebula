@@ -449,16 +449,16 @@ var/global/obj/temp_reagents_holder = new
 	if(ismob(target))
 		touch_mob(target)
 		if(QDELETED(target))
-			return TRUE
+			return 0
 		return splash_mob(target, amount, copy, defer_update = defer_update)
 	if(isturf(target))
 		return trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update)
 	if(isobj(target))
 		touch_obj(target)
-		if(!QDELETED(target) && ATOM_IS_OPEN_CONTAINER(target))
+		if(!QDELETED(target) && target.can_be_poured_into(my_atom))
 			return trans_to_obj(target, amount, multiplier, copy, defer_update = defer_update)
-		return TRUE
-	return FALSE
+		return 0
+	return 0
 
 //Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60, var/defer_update = FALSE)

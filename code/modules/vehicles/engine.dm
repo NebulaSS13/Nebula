@@ -90,13 +90,9 @@
 	temp_reagents_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/engine/thermal/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I,/obj/item/chems) && ATOM_IS_OPEN_CONTAINER(I))
-		if(istype(I,/obj/item/food) || istype(I,/obj/item/chems/pill))
-			return 0
-		var/obj/item/chems/C = I
-		C.standard_pour_into(user,src)
-		return 1
-	..()
+	if(I.standard_pour_into(user, src))
+		return TRUE
+	return ..()
 
 /obj/item/engine/thermal/use_power()
 	if(fuel_points >= cost_per_move)

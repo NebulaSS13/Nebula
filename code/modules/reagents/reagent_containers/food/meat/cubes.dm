@@ -3,7 +3,6 @@
 /obj/item/food/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	icon_state = "monkeycube"
 	bitesize = 12
 	filling_color = "#adac7f"
@@ -38,9 +37,11 @@
 	icon_state = "monkeycube"
 	desc = "Just add water!"
 	to_chat(user, SPAN_NOTICE("You unwrap \the [src]."))
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	user.put_in_hands(new wrapper_type(get_turf(user)))
 	wrapper_type = null
+
+/obj/item/food/monkeycube/can_be_poured_into(atom/source)
+	return ..() && !wrapper_type
 
 /obj/item/food/monkeycube/handle_eaten_by_mob(mob/user, mob/target)
 	. = ..()
