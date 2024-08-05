@@ -12,6 +12,8 @@
 	wall_blend_icons = list(
 		'icons/turf/walls/solid.dmi' = TRUE,
 		'icons/turf/walls/wood.dmi' = TRUE,
+		'icons/turf/walls/brick.dmi' = TRUE,
+		'icons/turf/walls/log.dmi' = TRUE,
 		'icons/turf/walls/metal.dmi' = TRUE
 	)
 	dissolves_into = list(
