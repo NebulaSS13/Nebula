@@ -40,6 +40,42 @@
 		else
 			source.thermal_conductivity = initial(source.thermal_conductivity)
 
+/turf/wall/proc/toggle_shutters(mob/user)
+	if(!isnull(shutter_state))
+		shutter_state = !shutter_state
+		refresh_opacity()
+		blocks_air = shutter_state ? ZONE_BLOCKED : AIR_BLOCKED
+		if(simulated)
+			SSair.mark_for_update(src)
+		visible_message(SPAN_NOTICE("\The [user] [shutter_state ? "opens" : "closes"] the shutter."))
+		update_icon()
+		if(shutter_sound)
+			playsound(src, shutter_sound, 25, 1)
+		return TRUE
+	return FALSE
+
+// You can open shutters from two tiles away, as long as nothing is in the way.
+/turf/wall/attack_hand_ranged(mob/user)
+	if((. = ..()))
+		return
+	// have to be 2.5 or fewer tiles away
+	if(get_dist_euclidian(user, src) > 2.5)
+		return FALSE
+	// We need to find the closest dir with a shutter. That means a cardinal dir without a connection.
+	var/list/connected = corner_states_to_dirs(wall_connections) | corner_states_to_dirs(other_connections) // merge the lists
+	for(var/stepdir in global.cardinal)
+		if(stepdir in connected)
+			continue
+		var/turf/between = get_step(src, stepdir)
+		// we have a shutter, but can we interact with it?
+		if(between.density) // the intermediate tile is solid
+			continue
+		// Something is blocking either the user or us.
+		if(!user.Adjacent(between) || !between.Adjacent(src))
+			continue
+		return toggle_shutters(user)
+	return FALSE
+
 /turf/wall/proc/try_touch(var/mob/user, var/rotting)
 	. = TRUE
 	if(rotting)
@@ -54,16 +90,7 @@
 		toggle_open(user)
 		return TRUE
 
-	if(!isnull(shutter_state))
-		shutter_state = !shutter_state
-		refresh_opacity()
-		blocks_air = shutter_state ? ZONE_BLOCKED : AIR_BLOCKED
-		if(simulated)
-			SSair.mark_for_update(src)
-		visible_message(SPAN_NOTICE("\The [user] [shutter_state ? "opens" : "closes"] the shutter."))
-		update_icon()
-		if(shutter_sound)
-			playsound(src, shutter_sound, 25, 1)
+	if(toggle_shutters(user))
 		return TRUE
 
 	if (isnull(construction_stage) || !reinf_material)
