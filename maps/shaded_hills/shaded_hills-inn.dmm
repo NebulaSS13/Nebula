@@ -601,7 +601,10 @@
 /area/shaded_hills/inn)
 "zl" = (
 /obj/structure/table/marble,
-/obj/item/food/meatpie,
+/obj/item/chems/cooking_vessel/pot/iron,
+/obj/item/chems/cooking_vessel/skillet/iron,
+/obj/item/chems/cooking_vessel/baking_dish/earthenware,
+/obj/item/chems/cooking_vessel/baking_dish/earthenware,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "zm" = (
@@ -1210,9 +1213,7 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/farmhouse)
 "WV" = (
-/obj/structure/table/marble,
-/obj/item/chems/cooking_vessel/pot/iron,
-/obj/item/chems/cooking_vessel/skillet/iron,
+/obj/structure/fire_source/kiln/oven,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "WY" = (
@@ -1263,6 +1264,7 @@
 "ZE" = (
 /obj/structure/table/marble,
 /obj/item/food/cherrypie,
+/obj/item/food/meatpie,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "ZY" = (

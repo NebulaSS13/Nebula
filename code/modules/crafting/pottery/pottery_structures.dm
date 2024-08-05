@@ -10,6 +10,10 @@
 	var/maximum_items = 3
 	var/firebox_open = TRUE
 
+/obj/structure/fire_source/kiln/oven
+	name = "oven"
+	desc = "A hulking oven intended for baking and cooking."
+
 /obj/structure/fire_source/kiln/high_temperature
 	material = /decl/material/solid/stone/pottery
 
