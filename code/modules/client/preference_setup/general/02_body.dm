@@ -82,8 +82,11 @@
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
 
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/list/save_accessories = list()
-	for(var/acc_cat in pref.sprite_accessories)
+	for(var/acc_cat in mob_species.available_accessory_categories)
+		if(!(acc_cat in pref.sprite_accessories))
+			continue
 		var/decl/sprite_accessory_category/accessory_category = GET_DECL(acc_cat)
 		save_accessories[accessory_category.uid] = list()
 		for(var/acc in pref.sprite_accessories[acc_cat])
@@ -103,6 +106,7 @@
 	W.write("bgstate",                pref.bgstate)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
+
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	if(mob_bodytype.appearance_flags & HAS_SKIN_COLOR)
@@ -128,9 +132,11 @@
 	var/acc_mob = get_mannequin(pref.client?.ckey)
 	LAZYINITLIST(pref.sprite_accessories)
 	for(var/acc_cat in pref.sprite_accessories)
+
 		if(!(acc_cat in mob_species.available_accessory_categories))
 			pref.sprite_accessories -= acc_cat
 			continue
+
 		var/decl/sprite_accessory_category/accessory_category = GET_DECL(acc_cat)
 		for(var/acc in pref.sprite_accessories[acc_cat])
 			var/decl/sprite_accessory/accessory = GET_DECL(acc)
@@ -145,6 +151,7 @@
 						acc_data[metadata_type] = metadata.default_value
 
 	for(var/accessory_category in mob_species.available_accessory_categories)
+
 		LAZYINITLIST(pref.sprite_accessories[accessory_category])
 		var/decl/sprite_accessory_category/accessory_cat_decl = GET_DECL(accessory_category)
 		if(accessory_cat_decl.single_selection)
@@ -231,8 +238,17 @@
 		var/const/right_arrow = "&#8680;"
 
 		for(var/accessory_category in mob_species.available_accessory_categories)
+
 			var/decl/sprite_accessory_category/accessory_cat_decl = GET_DECL(accessory_category)
+
+			// Check how many styles are available, and skip if only the default is available to avoid cluttering the page.
 			var/list/current_accessories = LAZYACCESS(pref.sprite_accessories, accessory_category)
+			var/list/available_styles = pref.get_usable_sprite_accessories(get_mannequin(pref.client?.ckey), mob_species, mob_bodytype, accessory_cat_decl.type, current_accessories)
+			for(var/accessory in current_accessories)
+				LAZYDISTINCTADD(available_styles, GET_DECL(accessory))
+			if(!length(available_styles) || (length(available_styles) == 1 && available_styles[1] == GET_DECL(accessory_cat_decl.default_accessory)))
+				continue
+
 			var/cat_decl_ref = "\ref[accessory_cat_decl]"
 			if(accessory_cat_decl.single_selection)
 				var/current_accessory = length(current_accessories) ? current_accessories[1] : accessory_cat_decl.default_accessory

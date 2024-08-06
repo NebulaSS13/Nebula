@@ -16,7 +16,7 @@
 	color_blend          = ICON_MULTIPLY
 
 /decl/sprite_accessory/ears/none
-	name                        = "Standard Ears"
+	name                        = "Default Ears"
 	icon_state                  = "none"
 	uid                         = "acc_ears_none"
 	bodytypes_allowed           = null

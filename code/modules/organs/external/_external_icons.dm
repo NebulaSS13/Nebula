@@ -196,7 +196,7 @@ var/global/list/organ_icon_cache = list()
 		if(!accessory_decl.accessory_is_available(owner, species, bodytype))
 			return FALSE
 		var/list/existing_metadata = LAZYACCESS(accessories, accessory_type)
-		if(lists_are_equivalent(existing_metadata, accessory_metadata, associative = TRUE))
+		if(same_entries(existing_metadata, accessory_metadata))
 			return FALSE
 		if(accessory_cat_decl.single_selection)
 			LAZYDISTINCTADD(refresh_accessories, accessories)

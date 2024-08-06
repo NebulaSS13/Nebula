@@ -73,6 +73,8 @@
 	var/grooming_flags = GROOMABLE_NONE
 	/// A list of metadata types for customisation of this accessory.
 	var/list/accessory_metadata_types
+	/// A value to check whitelists for.
+	var/is_whitelisted
 
 /decl/sprite_accessory/Initialize()
 	. = ..()
@@ -106,6 +108,8 @@
 			return FALSE
 	if(requires_appearance_flags && !(bodytype.appearance_flags & requires_appearance_flags))
 		return FALSE
+	if(is_whitelisted && usr?.ckey && !is_admin(usr))
+		return is_alien_whitelisted(usr, is_whitelisted)
 	return TRUE
 
 /decl/sprite_accessory/validate()
@@ -127,10 +131,14 @@
 	if(!organ?.owner)
 		return FALSE
 	if(hidden_by_gear_slot)
-		var/obj/item/hiding = organ.owner.get_equipped_item(hidden_by_gear_slot)
-		if(!hiding)
-			return FALSE
-		return (hiding.flags_inv & hidden_by_gear_flag)
+		if(islist(hidden_by_gear_slot))
+			for(var/hiding_slot in hidden_by_gear_slot)
+				var/obj/item/hiding = organ.owner.get_equipped_item(hiding_slot)
+				if(hiding && (hiding.flags_inv & hidden_by_gear_flag))
+					return TRUE
+		else
+			var/obj/item/hiding = organ.owner.get_equipped_item(hidden_by_gear_slot)
+			return hiding && (hiding.flags_inv & hidden_by_gear_flag)
 	return FALSE
 
 /decl/sprite_accessory/proc/get_accessory_icon(var/obj/item/organ/external/organ)
@@ -191,3 +199,7 @@
 
 /decl/sprite_accessory/proc/get_random_metadata()
 	return list(SAM_COLOR = get_random_colour())
+
+/decl/sprite_accessory_category/proc/prepare_character(mob/living/character, list/accessories)
+	return
+

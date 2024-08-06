@@ -30,6 +30,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/list/available_accessory_categories = list(
 		SAC_HAIR,
 		SAC_FACIAL_HAIR,
+		SAC_EARS,
+		SAC_TAIL,
 		SAC_COSMETICS,
 		SAC_MARKINGS
 	)

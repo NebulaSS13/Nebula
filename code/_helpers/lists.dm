@@ -205,6 +205,8 @@
 /*
 Two lists may be different (A!=B) even if they have the same elements.
 This actually tests if they have the same entries and values.
+This will handle list values in associative lists, but cannot handle
+non-associative list equivalence across different refs.
 */
 /proc/same_entries(var/list/first, var/list/second)
 	if(!islist(first) || !islist(second))
@@ -212,7 +214,16 @@ This actually tests if they have the same entries and values.
 	if(length(first) != length(second))
 		return 0
 	for(var/entry in first)
-		if(!(entry in second) || (first[entry] != second[entry]))
+		if(!(entry in second))
+			return 0
+		var/first_entry = first[entry]
+		if(islist(first_entry))
+			var/second_entry = second[entry]
+			if(!islist(second_entry))
+				return 0
+			if(!same_entries(first_entry, second_entry))
+				return 0
+		else if(first_entry != second[entry])
 			return 0
 	return 1
 /*
@@ -856,21 +867,3 @@ var/global/list/json_cache = list()
 /// Is this a dense (all keys have non-null values) associative list with at least one entry?
 /proc/is_dense_assoc(var/list/L)
 	return length(L) > 0 && !isnull(L[L[1]])
-
-// I have a feeling this is a redundant proc but I couldn't find another implementation.
-/proc/lists_are_equivalent(list/A, list/B, associative)
-	if(A == B) // Literal equivalence (or two nulls)
-		return TRUE
-	if(length(A) != length(B)) // Also takes care of nulls.
-		return FALSE
-	for(var/index in A)
-		if(!(index in B))
-			return FALSE
-		if(associative && A[index] != B[index])
-			return FALSE
-	for(var/index in B)
-		if(!(index in A))
-			return FALSE
-		if(associative && A[index] != B[index])
-			return FALSE
-	return TRUE

@@ -410,7 +410,9 @@ var/global/list/time_prefs_fixed = list()
 			O.clear_sprite_accessories_by_category(sprite_category.type, skip_update = TRUE)
 
 	for(var/accessory_category in sprite_accessories)
+		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
 		var/list/accessories = sprite_accessories[accessory_category]
+		acc_cat.prepare_character(character, accessories)
 		for(var/accessory in accessories)
 			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
 			var/accessory_metadata = accessories[accessory]

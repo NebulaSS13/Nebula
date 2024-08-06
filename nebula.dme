@@ -3770,6 +3770,7 @@
 #include "code\modules\sprite_accessories\markings\accessory_markings_tattoos.dm"
 #include "code\modules\sprite_accessories\metadata\_accessory_metadata.dm"
 #include "code\modules\sprite_accessories\metadata\accessory_metadata_color.dm"
+#include "code\modules\sprite_accessories\tails\_accessory_tail.dm"
 #include "code\modules\status_conditions\_status.dm"
 #include "code\modules\status_conditions\_status_markers.dm"
 #include "code\modules\status_conditions\status_counters_simple.dm"
