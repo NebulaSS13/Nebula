@@ -127,6 +127,9 @@
 /decl/stack_recipe/planks/furniture/compost_bin
 	result_type            = /obj/structure/reagent_dispensers/compost_bin
 
+/decl/stack_recipe/planks/furniture/produce_bin
+	result_type            = /obj/structure/produce_bin
+
 /decl/stack_recipe/planks/furniture/coffin
 	result_type            = /obj/structure/closet/coffin/wooden
 

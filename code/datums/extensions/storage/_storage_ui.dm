@@ -271,6 +271,62 @@
 	arrange_item_slots(row_num, col_count)
 	refresh_viewers()
 
+// produce bin
+// numbered maptext display + deduplication by seed name
+/datum/storage_ui/default/produce_bin/prepare_ui(mob/user)
+	slot_orient_objs()
+	refresh_viewers()
+
+/datum/storage_ui/default/produce_bin/show_to(mob/user)
+	. = ..()
+	if(user.client)
+		user.client.screen -= storage_start
+		user.client.screen -= storage_continue
+		user.client.screen -= storage_end
+		user.client.screen += boxes
+
+/datum/storage_ui/default/produce_bin/proc/get_seed_counts()
+	var/list/counts = list()
+	for(var/obj/item/food/grown/produce in _storage.get_contents())
+		counts[produce.seed.name]++
+	return counts
+
+//This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
+/datum/storage_ui/default/produce_bin/slot_orient_objs()
+	var/adjusted_contents = length(get_seed_counts())
+	var/row_num = 0
+	if (adjusted_contents > 7)
+		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
+	arrange_item_slots(row_num, clamp(adjusted_contents - 1, 0, 6))
+
+//This proc draws out the inventory and places the items on it. It uses the standard position.
+/datum/storage_ui/default/produce_bin/arrange_item_slots(rows, cols)
+	var/cx = SCREEN_LOC_MOD_FIRST
+	var/cy = SCREEN_LOC_MOD_SECOND + rows
+	boxes.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED] to LEFT+[SCREEN_LOC_MOD_FIRST + cols]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND + rows]:[SCREEN_LOC_MOD_DIVIDED]"
+
+	var/list/counts = get_seed_counts()
+	var/list/displayed = list()
+	for(var/obj/item/food/grown/produce in _storage.get_contents())
+		if(displayed[produce.seed.name])
+			continue
+		displayed[produce.seed.name] = TRUE
+		produce.screen_loc = "LEFT+[cx]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[cy]:[SCREEN_LOC_MOD_DIVIDED]"
+		produce.maptext_x = 2
+		produce.maptext_y = 2
+		produce.maptext = STYLE_SMALLFONTS_OUTLINE(counts[produce.seed.name], 6, COLOR_WHITE, COLOR_BLACK)
+		produce.hud_layerise()
+		cx++
+		if (cx > (SCREEN_LOC_MOD_FIRST + cols))
+			cx = SCREEN_LOC_MOD_FIRST
+			cy--
+
+	closer.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST + cols + 1]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
+
+/datum/storage_ui/default/produce_bin/on_pre_remove(obj/item/food/grown/produce)
+	produce.maptext = ""
+	..()
+
 #undef SCREEN_LOC_MOD_FIRST
 #undef SCREEN_LOC_MOD_SECOND
 #undef SCREEN_LOC_MOD_DIVIDED
