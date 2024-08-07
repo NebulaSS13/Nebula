@@ -186,7 +186,7 @@
 
 		if(available_units > max_accepted_units)
 			//Take only what's needed
-			var/needed_sheets  = CEILING(max_accepted_units / SHEET_MATERIAL_AMOUNT)
+			var/needed_sheets  = ceil(max_accepted_units / SHEET_MATERIAL_AMOUNT)
 			var/leftover_units = max_accepted_units % SHEET_MATERIAL_AMOUNT
 			ST.use(needed_sheets)
 			//Drop the extra as shards
@@ -199,10 +199,10 @@
 
 		else if(available_units > LABEL_MATERIAL_COST)
 			//Take all that's available
-			ST.use(CEILING(available_units/SHEET_MATERIAL_AMOUNT))
+			ST.use(ceil(available_units/SHEET_MATERIAL_AMOUNT))
 			added_labels = round(available_units / LABEL_MATERIAL_COST)
 			add_paper_labels(added_labels)
-			to_chat(user, SPAN_NOTICE("You use [CEILING(available_units/SHEET_MATERIAL_AMOUNT)] [ST.plural_name] to refill \the [src] with [added_labels] label(s)."))
+			to_chat(user, SPAN_NOTICE("You use [ceil(available_units/SHEET_MATERIAL_AMOUNT)] [ST.plural_name] to refill \the [src] with [added_labels] label(s)."))
 		else
 			//Abort because not enough materials for even a single label
 			to_chat(user, SPAN_WARNING("There's not enough [ST.plural_name] in \the [ST] to refil \the [src]!"))

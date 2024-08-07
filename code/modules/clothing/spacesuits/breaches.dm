@@ -244,7 +244,7 @@
 				return
 
 			var/obj/item/stack/tape_roll/duct_tape/D = W
-			var/amount_needed = CEILING(target_breach.class * 2)
+			var/amount_needed = ceil(target_breach.class * 2)
 			if(!D.can_use(amount_needed))
 				to_chat(user, SPAN_WARNING("There's not enough [D.plural_name] in your [src] to seal \the [target_breach.descriptor] on \the [src]! You need at least [amount_needed] [D.plural_name]."))
 				return

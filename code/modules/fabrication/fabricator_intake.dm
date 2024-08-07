@@ -34,7 +34,7 @@
 	. = SUBSTANCE_TAKEN_NONE
 
 	var/obj/item/stack/stack_ref = istype(thing, /obj/item/stack) && thing
-	var/stack_matter_div = stack_ref ? max(1, CEILING(SHEET_MATERIAL_AMOUNT * stack_ref.matter_multiplier)) : 1
+	var/stack_matter_div = stack_ref ? max(1, ceil(SHEET_MATERIAL_AMOUNT * stack_ref.matter_multiplier)) : 1
 	var/stacks_used = 0
 
 	var/mat_colour = thing.color
@@ -53,7 +53,7 @@
 
 		stored_material[material_def.type] += taking_material
 		if(stack_ref)
-			stacks_used = max(stacks_used, CEILING(taking_material/stack_matter_div))
+			stacks_used = max(stacks_used, ceil(taking_material/stack_matter_div))
 
 		if(storage_capacity[material_def.type] == stored_material[material_def.type])
 			. = SUBSTANCE_TAKEN_FULL

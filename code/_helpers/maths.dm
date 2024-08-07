@@ -91,7 +91,7 @@
 /proc/polar2turf(x, y, z, angle, distance)
 	var/x_offset = POLAR_TO_BYOND_X(distance, angle)
 	var/y_offset = POLAR_TO_BYOND_Y(distance, angle)
-	return locate(CEILING(x + x_offset), CEILING(y + y_offset), z)
+	return locate(ceil(x + x_offset), ceil(y + y_offset), z)
 
 /proc/get_turf_from_angle(x, y, z, angle, ideal_distance)
 	do

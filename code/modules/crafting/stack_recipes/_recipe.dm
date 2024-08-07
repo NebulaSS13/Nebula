@@ -154,13 +154,13 @@
 				. += "[stack_type] is in both forbidden and craftable stack types"
 
 /decl/stack_recipe/proc/get_required_stack_amount(obj/item/stack/stack)
-	return max(1, CEILING(req_amount / max(1, (SHEET_MATERIAL_AMOUNT * stack?.matter_multiplier))))
+	return max(1, ceil(req_amount / max(1, (SHEET_MATERIAL_AMOUNT * stack?.matter_multiplier))))
 
 /decl/stack_recipe/proc/get_list_display(mob/user, obj/item/stack/stack, datum/stack_recipe_list/sublist)
 
-	var/sheets_per_product = req_amount / CEILING(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier))
-	var/products_per_sheet = CEILING(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier)) / req_amount
-	var/clamp_sheets = max(1, CEILING(sheets_per_product))
+	var/sheets_per_product = req_amount / ceil(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier))
+	var/products_per_sheet = ceil(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier)) / req_amount
+	var/clamp_sheets = max(1, ceil(sheets_per_product))
 	var/max_multiplier = FLOOR(stack.get_amount() / clamp_sheets)
 
 	// Stacks can have a max bound that will cause us to waste material on crafting an impossible amount.
@@ -314,7 +314,7 @@
 		materials = atom_info_repository.get_matter_for((test_result_type || result_type), (ispath(required_material) ? required_material : null))
 		for(var/mat in materials)
 			req_amount += round(materials[mat])
-		req_amount = CEILING(req_amount*crafting_extra_cost_factor)
+		req_amount = ceil(req_amount*crafting_extra_cost_factor)
 		if(!ispath(result_type, /obj/item/stack))
 			// Due to matter calc, without this clamping, one sheet can make 32x grenade casings. Not ideal.
 			req_amount = max(req_amount, SHEET_MATERIAL_AMOUNT)

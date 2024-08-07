@@ -73,7 +73,7 @@
 				M.reset_layer()
 			else
 				// arbitrary timing value that feels good in practice. it sucks and is inconsistent:(
-				addtimer(CALLBACK(M, TYPE_PROC_REF(/atom, reset_layer)), max(0, CEILING(M.next_move - world.time)) + 1 SECOND)
+				addtimer(CALLBACK(M, TYPE_PROC_REF(/atom, reset_layer)), max(0, ceil(M.next_move - world.time)) + 1 SECOND)
 
 	if(simulated)
 		A.OnSimulatedTurfEntered(src, old_loc)

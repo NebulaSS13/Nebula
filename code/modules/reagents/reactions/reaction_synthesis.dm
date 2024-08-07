@@ -14,8 +14,8 @@
 
 /decl/chemical_reaction/synthesis/fiberglass/Initialize()
 	required_reagents = list(
-		/decl/material/solid/glass =   CEILING(REAGENT_UNITS_PER_MATERIAL_SHEET/2),
-		/decl/material/solid/organic/plastic = CEILING(REAGENT_UNITS_PER_MATERIAL_SHEET/2)
+		/decl/material/solid/glass =   ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2),
+		/decl/material/solid/organic/plastic = ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2)
 	)
 	. = ..()
 
@@ -23,7 +23,7 @@
 	..()
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
-		created_volume = CEILING(created_volume)
+		created_volume = ceil(created_volume)
 		if(created_volume > 0)
 			var/decl/material/mat = GET_DECL(/decl/material/solid/fiberglass)
 			mat.create_object(location, created_volume)

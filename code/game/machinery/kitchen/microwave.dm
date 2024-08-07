@@ -214,7 +214,7 @@
 		return
 
 	if (reagents.total_volume && prob(50)) // 50% chance a liquid recipe gets messy
-		dirty += CEILING(reagents.total_volume / 10)
+		dirty += ceil(reagents.total_volume / 10)
 
 	var/decl/recipe/recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
 	if (!recipe)

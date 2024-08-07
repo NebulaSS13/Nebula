@@ -49,7 +49,7 @@
 			else
 				add_overlay("[icon_state]-powered")
 	if(bcell)
-		var/ratio = CEILING(bcell.percent()/25) * 25
+		var/ratio = ceil(bcell.percent()/25) * 25
 		add_overlay("[icon_state]-charge[ratio]")
 	else
 		add_overlay("[icon_state]-nocell")

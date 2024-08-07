@@ -1,6 +1,5 @@
 // Macro functions.
 #define RAND_F(LOW, HIGH) (rand() * (HIGH - LOW) + LOW)
-#define CEILING(x) (-round(-(x)))
 
 // Float-aware floor and ceiling since round() will round upwards when given a second arg.
 #define NONUNIT_FLOOR(x, y)    (round( (x) / (y)) * (y))
@@ -22,4 +21,4 @@
 #define SIMPLIFY_DEGREES(degrees) (MODULUS_FLOAT((degrees), 360))
 
 #define IS_POWER_OF_TWO(VAL) ((VAL & (VAL-1)) == 0)
-#define ROUND_UP_TO_POWER_OF_TWO(VAL) (2 ** CEILING(log(2,VAL)))
+#define ROUND_UP_TO_POWER_OF_TWO(VAL) (2 ** ceil(log(2,VAL)))

@@ -59,7 +59,7 @@
 	..(null)
 
 /datum/appearance_descriptor/proc/set_default_value()
-	default_value = CEILING(LAZYLEN(standalone_value_descriptors) * 0.5)
+	default_value = ceil(LAZYLEN(standalone_value_descriptors) * 0.5)
 
 /datum/appearance_descriptor/proc/get_mob_scale_adjustments(decl/bodytype/bodytype, offset_value)
 	return
@@ -134,12 +134,12 @@
 
 /datum/appearance_descriptor/proc/get_comparative_value_string_smaller(value, decl/pronouns/my_gender, decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_smaller)
-	value = clamp(CEILING(value * maxval), 1, maxval)
+	value = clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_smaller[value]
 
 /datum/appearance_descriptor/proc/get_comparative_value_string_larger(value, decl/pronouns/my_gender, decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_larger)
-	value = clamp(CEILING(value * maxval), 1, maxval)
+	value = clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_larger[value]
 
 /datum/appearance_descriptor/proc/has_custom_value()

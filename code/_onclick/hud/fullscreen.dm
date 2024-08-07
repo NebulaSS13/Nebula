@@ -66,7 +66,7 @@
 			screen.transform = null
 			if(screen.screen_loc != ui_entire_screen && largest_bound > 7)
 				var/matrix/M = matrix()
-				M.Scale(CEILING(client.last_view_x_dim/7), CEILING(client.last_view_y_dim/7))
+				M.Scale(ceil(client.last_view_x_dim/7), ceil(client.last_view_y_dim/7))
 				screen.transform = M
 			client.screen |= screen
 

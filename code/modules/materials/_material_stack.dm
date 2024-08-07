@@ -175,12 +175,12 @@
 		if(convert_type)
 
 			var/product_per_sheet         = matter_multiplier / initial(convert_type.matter_multiplier)
-			var/minimum_per_one_product   = CEILING(1 / product_per_sheet)
+			var/minimum_per_one_product   = ceil(1 / product_per_sheet)
 
 			if(get_amount() < minimum_per_one_product)
 				to_chat(user, SPAN_WARNING("You will need [minimum_per_one_product] [minimum_per_one_product == 1 ? singular_name : plural_name] to produce [product_per_sheet] [product_per_sheet == 1 ? initial(convert_type.singular_name) : initial(convert_type.plural_name)]."))
 			else if(W.do_tool_interaction(convert_tool, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= minimum_per_one_product)
-				var/obj/item/stack/product = new convert_type(get_turf(src), CEILING(product_per_sheet), material?.type, reinf_material?.type)
+				var/obj/item/stack/product = new convert_type(get_turf(src), ceil(product_per_sheet), material?.type, reinf_material?.type)
 				use(minimum_per_one_product)
 				if(product.add_to_stacks(user, TRUE))
 					user.put_in_hands(product)

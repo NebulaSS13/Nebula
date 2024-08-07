@@ -20,9 +20,9 @@
 
 //Here are a few macros to help with people always forgetting to round the coordinates somewhere, and forgetting that not everything automatically rounds decimals.
 ///Helper macro for the x coordinate of the turf at the center of the world. Handles rounding.
-#define WORLD_CENTER_X CEILING((1 + world.maxx) / 2)
+#define WORLD_CENTER_X ceil((1 + world.maxx) / 2)
 ///Helper macro for the y coordinate of the turf at the center of the world. Handles rounding.
-#define WORLD_CENTER_Y CEILING((1 + world.maxy) / 2)
+#define WORLD_CENTER_Y ceil((1 + world.maxy) / 2)
 ///Helper macro for getting the center turf on a given z-level. Handles rounding.
 #define WORLD_CENTER_TURF(Z) locate(WORLD_CENTER_X, WORLD_CENTER_Y, Z)
 ///Helper macro to check if a position is within the world's bounds.
