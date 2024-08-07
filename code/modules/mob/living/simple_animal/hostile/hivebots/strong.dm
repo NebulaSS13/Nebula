@@ -4,9 +4,9 @@
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT
 	)
-	ai = /datum/mob_controller/hostile/hivebot_strong
+	ai = /datum/mob_controller/aggressive/hivebot_strong
 
-/datum/mob_controller/hostile/hivebot_strong
+/datum/mob_controller/aggressive/hivebot_strong
 	can_escape_buckles = TRUE
 
 /mob/living/simple_animal/hostile/hivebot/strong/has_ranged_attack()
