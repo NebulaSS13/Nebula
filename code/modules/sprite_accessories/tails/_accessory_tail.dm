@@ -25,20 +25,9 @@
 	abstract_type        = /decl/sprite_accessory/tail
 	color_blend          = ICON_MULTIPLY
 
-	var/has_second_color = FALSE
 	var/icon_animation_states
 	var/hair_state
 	var/hair_blend = ICON_ADD
-
-/decl/sprite_accessory/tail/Initialize()
-	. = ..()
-	if(has_second_color)
-		LAZYDISTINCTADD(accessory_metadata_types, /decl/sprite_accessory_metadata/color/alt)
-
-/decl/sprite_accessory/tail/get_default_accessory_metadata()
-	. = ..()
-	if(has_second_color)
-		LAZYSET(., /decl/sprite_accessory_metadata/color/alt, COLOR_BLACK)
 
 /decl/sprite_accessory/tail/none
 	name                        = "Default Tail"
@@ -66,13 +55,13 @@
 /*
 // Leaving these in for future reference.
 /decl/sprite_accessory/tail/debug
-	name             = "Debug Tail"
-	uid              = "acc_tail_debug"
-	is_whitelisted   = "DEBUG"
+	name                     = "Debug Tail"
+	uid                      = "acc_tail_debug"
+	is_whitelisted           = "DEBUG"
 
 /decl/sprite_accessory/tail/debug_inner
-	name             = "Debug Two-Tone Tail"
-	has_second_color = TRUE
-	uid              = "acc_tail_debug2"
-	is_whitelisted   = "DEBUG"
+	name                     = "Debug Two-Tone Tail"
+	uid                      = "acc_tail_debug2"
+	is_whitelisted           = "DEBUG"
+	accessory_metadata_types = list(SAM_COLOR, SAM_COLOR_INNER)
 */

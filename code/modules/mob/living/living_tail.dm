@@ -54,6 +54,8 @@
 	if(!check_state_in_icon(tail_state, tail_icon))
 		return
 
+	// TODO: merge all of this into get_cached_accessory_icon()
+
 	// These values may be null and are generally optional.
 	var/hair_colour      = GET_HAIR_COLOR(src)
 	var/tail_hair        = tail_organ.get_tail_hair()

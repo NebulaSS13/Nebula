@@ -27,5 +27,14 @@
 	bodytype_categories_denied  = null
 	body_flags_allowed          = null
 	body_flags_denied           = null
-	draw_accessory              = FALSE
 	grooming_flags              = null
+	draw_accessory              = FALSE
+
+/*
+// Leaving this in for reference.
+/decl/sprite_accessory/ears/debug
+	name = "Debug Two-Tone Ears"
+	uid = "acc_ears_debug"
+	icon_state = "debug"
+	accessory_metadata_types = list(SAM_COLOR, SAM_COLOR_INNER)
+*/
