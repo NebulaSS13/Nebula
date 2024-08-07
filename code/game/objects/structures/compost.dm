@@ -17,7 +17,6 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 	wrenchable                = FALSE
 	possible_transfer_amounts = @"[10,25,50,100]"
 	volume                    = 2000
-	can_toggle_open           = FALSE
 	storage                   = /datum/storage/hopper/industrial/compost
 
 /obj/structure/reagent_dispensers/compost_bin/Initialize()
@@ -38,6 +37,15 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 	if(is_processing)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
+
+/obj/structure/reagent_dispensers/compost_bin/on_update_icon()
+	. = ..()
+	icon_state = ICON_STATE_WORLD
+	if(ATOM_IS_OPEN_CONTAINER(src))
+		add_overlay(overlay_image(icon, "[icon_state]-hinges-open", null, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-open", get_color(), RESET_COLOR)) // leaving the door open for separate lid materials in the future
+	else
+		add_overlay(overlay_image(icon, "[icon_state]-hinges", null, RESET_COLOR))
 
 /obj/structure/reagent_dispensers/compost_bin/examine(mob/user, distance)
 	. = ..()
@@ -182,10 +190,6 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 		var/obj/item/food/worm/worm = new(src)
 		if(!storage.handle_item_insertion(null, worm))
 			qdel(worm)
-
-/obj/structure/reagent_dispensers/compost_bin/get_alt_interactions(var/mob/user)
-	. = ..()
-	LAZYREMOVE(., /decl/interaction_handler/toggle_open/reagent_dispenser)
 
 /obj/structure/reagent_dispensers/compost_bin/ebony
 	material = /decl/material/solid/organic/wood/ebony
