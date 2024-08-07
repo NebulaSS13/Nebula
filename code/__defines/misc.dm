@@ -344,9 +344,10 @@
 #define GROOMING_RESULT_SUCCESS 2
 
 // Used by recipe selection.
-#define RECIPE_CATEGORY_MICROWAVE "microwave"
-#define RECIPE_CATEGORY_POT       "pot"
-#define RECIPE_CATEGORY_SKILLET   "skillet"
+#define RECIPE_CATEGORY_MICROWAVE   "microwave"
+#define RECIPE_CATEGORY_POT         "pot"
+#define RECIPE_CATEGORY_SKILLET     "skillet"
+#define RECIPE_CATEGORY_BAKING_DISH "baking dish"
 
 // So we want to have compile time guarantees these methods exist on local type, unfortunately 515 killed the .proc/procname and .verb/verbname syntax so we have to use nameof()
 // For the record: GLOBAL_VERB_REF would be useless as verbs can't be global.

@@ -247,6 +247,9 @@
 	if(abilities?.do_ranged_invocation(A))
 		return TRUE
 
+	if(A.attack_hand_ranged(src))
+		return TRUE
+
 	return FALSE
 
 /*

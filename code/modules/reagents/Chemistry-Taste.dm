@@ -23,35 +23,10 @@ calculate text size per text.
 	if(minimum_percent > 100)
 		return
 
+	var/list/tastes = get_taste_list(source_holder) //descriptor = strength
 	var/total_taste = 0
-	var/list/tastes = list() //descriptor = strength
-	for(var/reagent_type in reagent_volumes)
-		var/decl/material/reagent = GET_DECL(reagent_type)
-		var/list/nutriment_data = LAZYACCESS(reagent_data, reagent_type)
-		var/list/taste_data = LAZYACCESS(nutriment_data, "taste")
-		if(length(taste_data))
-			for(var/taste in taste_data)
-				var/taste_power = taste_data[taste]
-				tastes[taste]  += taste_power
-				total_taste    += taste_power
-		else if(reagent.taste_description)
-			tastes[reagent.taste_description] += reagent.taste_mult
-			total_taste                       += reagent.taste_mult
-
-	var/decl/material/primary_ingredient = get_primary_reagent_decl()
-	if(primary_ingredient?.cocktail_ingredient && source_holder?.my_atom)
-		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(primary_ingredient.type))
-			if(!LAZYLEN(cocktail.tastes))
-				continue
-			if(!cocktail.matches(source_holder.my_atom))
-				continue
-			var/cocktail_volume = 0
-			for(var/chem in cocktail.ratios)
-				cocktail_volume += REAGENT_VOLUME(src, chem)
-			for(var/taste_desc in cocktail.tastes)
-				var/taste_power     = cocktail.tastes[taste_desc] * cocktail_volume
-				tastes[taste_desc] += taste_power
-				total_taste        += taste_power
+	for(var/taste in tastes)
+		total_taste += tastes[taste]
 
 	//deal with percentages
 	for(var/taste in tastes)
@@ -70,3 +45,31 @@ calculate text size per text.
 
 	if(length(.))
 		. = english_list(., "something indescribable")
+
+/datum/reagents/proc/get_taste_list(datum/reagents/source_holder)
+	var/list/tastes = list() //descriptor = strength
+	for(var/reagent_type in reagent_volumes)
+		var/decl/material/reagent = GET_DECL(reagent_type)
+		var/list/nutriment_data = LAZYACCESS(reagent_data, reagent_type)
+		var/list/taste_data = LAZYACCESS(nutriment_data, "taste")
+		if(length(taste_data))
+			for(var/taste in taste_data)
+				var/taste_power = taste_data[taste]
+				tastes[taste]  += taste_power
+		else if(reagent.taste_description)
+			tastes[reagent.taste_description] += reagent.taste_mult
+
+	var/decl/material/primary_ingredient = get_primary_reagent_decl()
+	if(primary_ingredient?.cocktail_ingredient && source_holder?.my_atom)
+		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(primary_ingredient.type))
+			if(!LAZYLEN(cocktail.tastes))
+				continue
+			if(!cocktail.matches(source_holder.my_atom))
+				continue
+			var/cocktail_volume = 0
+			for(var/chem in cocktail.ratios)
+				cocktail_volume += REAGENT_VOLUME(src, chem)
+			for(var/taste_desc in cocktail.tastes)
+				var/taste_power     = cocktail.tastes[taste_desc] * cocktail_volume
+				tastes[taste_desc] += taste_power
+	return tastes

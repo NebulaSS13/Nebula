@@ -56,6 +56,10 @@
 	},
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/shrine)
+"dx" = (
+/obj/structure/fire_source/kiln/oven,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/shrine)
 "dC" = (
 /obj/structure/door/walnut{
 	dir = 4
@@ -508,6 +512,12 @@
 	},
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
+"vz" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/cooking_vessel/baking_dish/earthenware,
+/obj/item/chems/cooking_vessel/baking_dish/earthenware,
+/turf/floor/wood/walnut,
+/area/shaded_hills/shrine)
 "vA" = (
 /obj/structure/table/marble,
 /obj/item/chems/condiment/sugar,
@@ -542,6 +552,13 @@
 /obj/abstract/exterior_marker/inside,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
+"xh" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/condiment/large/salt,
+/obj/item/chems/condiment/flour,
+/obj/item/chems/condiment/sugar,
+/turf/floor/wood/walnut,
+/area/shaded_hills/shrine)
 "xk" = (
 /obj/structure/flora/tree/dead/mahogany,
 /turf/floor/natural/dirt,
@@ -601,7 +618,10 @@
 /area/shaded_hills/inn)
 "zl" = (
 /obj/structure/table/marble,
-/obj/item/food/meatpie,
+/obj/item/chems/cooking_vessel/pot/iron,
+/obj/item/chems/cooking_vessel/skillet/iron,
+/obj/item/chems/cooking_vessel/baking_dish/earthenware,
+/obj/item/chems/cooking_vessel/baking_dish/earthenware,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "zm" = (
@@ -1097,8 +1117,6 @@
 /obj/item/food/grown/carrot,
 /obj/item/food/grown/carrot,
 /obj/item/food/grown/cabbage,
-/obj/item/chems/condiment/flour,
-/obj/item/chems/condiment/large/salt,
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "TR" = (
@@ -1210,9 +1228,7 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/farmhouse)
 "WV" = (
-/obj/structure/table/marble,
-/obj/item/chems/cooking_vessel/pot/iron,
-/obj/item/chems/cooking_vessel/skillet/iron,
+/obj/structure/fire_source/kiln/oven,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "WY" = (
@@ -1263,6 +1279,7 @@
 "ZE" = (
 /obj/structure/table/marble,
 /obj/item/food/cherrypie,
+/obj/item/food/meatpie,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "ZY" = (
@@ -18320,10 +18337,10 @@ CR
 PG
 CR
 CR
+AX
 CR
 CR
-CR
-QB
+PG
 CR
 CR
 gt
@@ -18470,12 +18487,12 @@ QB
 QB
 Il
 QB
-CR
-CR
-AX
-CR
-CR
-PG
+Il
+QB
+QB
+Il
+QB
+QB
 CR
 XM
 XM
@@ -18621,12 +18638,12 @@ iK
 iK
 kv
 kv
+Kh
+CR
+CR
 QB
-Il
-QB
-QB
-Il
-QB
+CR
+CR
 QB
 CR
 XM
@@ -18773,12 +18790,12 @@ iK
 kv
 kv
 kv
-Kh
-CR
-CR
 QB
-CR
-CR
+Jt
+qe
+QB
+Jt
+qe
 QB
 uP
 XM
@@ -18925,12 +18942,12 @@ iK
 kv
 kv
 kv
+Yc
+Yc
 QB
-Jt
-qe
 QB
-Jt
-qe
+QB
+QB
 QB
 CR
 XM
@@ -19077,12 +19094,12 @@ kv
 kv
 kv
 kv
-Yc
-Yc
-QB
-QB
-QB
-QB
+RG
+dx
+Vj
+CR
+CR
+CR
 QB
 CR
 XM
@@ -19229,11 +19246,11 @@ kv
 kv
 kv
 kv
-RG
+Yc
 XH
 Vj
-CR
-CR
+xh
+vz
 CR
 PG
 CR

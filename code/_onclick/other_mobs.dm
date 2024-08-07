@@ -54,6 +54,10 @@
 
 	. = ..()
 
+/atom/proc/attack_hand_ranged(mob/user)
+	SHOULD_CALL_PARENT(TRUE)
+	return FALSE
+
 /mob/living/RestrainedClickOn(var/atom/A)
 	return
 

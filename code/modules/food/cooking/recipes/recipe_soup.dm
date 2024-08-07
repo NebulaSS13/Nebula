@@ -16,15 +16,11 @@
 
 		for(var/obj/item/ingredient in used_items)
 			var/obj/item/food/food = ingredient
+			var/list/food_tastes = food.reagents.get_taste_list()
 			if(istype(food))
-				for(var/taste in food.nutriment_desc)
-					taste_strings[taste] = max(taste_strings[taste], food.nutriment_desc[taste])
+				for(var/taste in food_tastes)
+					taste_strings[taste] = max(taste_strings[taste], food_tastes[taste])
 				soup_flags |= food.ingredient_flags
-
-			for(var/reagent_type in ingredient.reagents?.reagent_volumes)
-				var/decl/material/reagent = GET_DECL(reagent_type)
-				if(reagent.taste_description)
-					taste_strings[reagent.taste_description] = max(taste_strings[reagent.taste_description], reagent.taste_mult)
 
 		if(locate(/obj/item/food/grown) in used_items)
 			for(var/obj/item/food/grown/veg in used_items)
@@ -46,7 +42,7 @@
 		var/list/precursor_taste = LAZYACCESS(precursor_data, "taste")
 		if(length(precursor_taste))
 			for(var/taste in precursor_taste)
-				taste_strings[taste] += precursor_taste["taste"]
+				taste_strings[taste] += precursor_taste[taste]
 		var/list/precursor_ingredients = LAZYACCESS(precursor_data, "soup_ingredients")
 		if(length(precursor_ingredients))
 			for(var/ingredient in precursor_ingredients)
