@@ -69,7 +69,7 @@
 		var/obj/item/stack/material/M = O
 		var/amt = M.amount
 		if(amt * SHEET_MATERIAL_AMOUNT + materials[M.material.type] > metal_max)
-			amt = -round(-(metal_max - materials[M.material.type]) / SHEET_MATERIAL_AMOUNT) //round up
+			amt = ceil((metal_max - materials[M.material.type]) / SHEET_MATERIAL_AMOUNT)
 		if(M.use(amt))
 			materials[M.material.type] = min(metal_max, materials[M.material.type] + amt * SHEET_MATERIAL_AMOUNT)
 			to_chat(user, "<span class='warning'>You insert [M.material.solid_name] into \the [src].</span>")
