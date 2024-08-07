@@ -633,6 +633,10 @@
 	},
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/shrine)
+"zH" = (
+/obj/structure/produce_bin/walnut,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/downlands)
 "zQ" = (
 /turf/floor/wood/walnut,
 /area/shaded_hills/general_store/porch)
@@ -955,6 +959,13 @@
 /obj/abstract/landmark/start/shaded_hills/traveller/learned,
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/downlands)
+"Mj" = (
+/obj/structure/railing/mapped/wooden/walnut{
+	dir = 4
+	},
+/obj/structure/produce_bin/walnut,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/shrine)
 "Mo" = (
 /turf/open,
 /area/shaded_hills/outside/shrine)
@@ -13224,7 +13235,7 @@ qP
 qP
 ya
 LN
-TR
+zH
 Rl
 GW
 Ay
@@ -20471,7 +20482,7 @@ qL
 Kh
 Aw
 WE
-VM
+Mj
 Sj
 fg
 By
