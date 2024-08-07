@@ -55,7 +55,7 @@
 	. = ..()
 	if(. || length(contents) || !ispath(foldable) || !istype(material))
 		return TRUE
-	var/sheet_amount = FLOOR(LAZYACCESS(matter, material.type) / SHEET_MATERIAL_AMOUNT)
+	var/sheet_amount = floor(LAZYACCESS(matter, material.type) / SHEET_MATERIAL_AMOUNT)
 	if(sheet_amount <= 0 || !user.try_unequip(src))
 		return TRUE
 	to_chat(user, SPAN_NOTICE("You fold \the [src] flat."))

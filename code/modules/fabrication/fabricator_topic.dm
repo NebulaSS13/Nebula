@@ -70,7 +70,7 @@
 	if(mat?.phase_at_temperature() != MAT_PHASE_SOLID)
 		stored_material[mat_path] = 0
 	else
-		var/sheet_count = FLOOR(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
+		var/sheet_count = floor(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
 		if(sheet_count >= 1)
 			stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT
 			SSmaterials.create_object(mat_path, get_turf(src), sheet_count)

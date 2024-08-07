@@ -308,7 +308,7 @@
 /obj/effect/fusion_em_field/proc/Radiate()
 	if(isturf(loc))
 		var/empsev = max(1, min(3, ceil(size/2)))
-		for(var/atom/movable/AM in range(max(1,FLOOR(size/2)), loc))
+		for(var/atom/movable/AM in range(max(1,floor(size/2)), loc))
 
 			if(AM == src || AM == owned_core || !AM.simulated)
 				continue
@@ -366,7 +366,7 @@
 		//determine a random amount to actually react this cycle, and remove it from the standard pool
 		//this is a hack, and quite nonrealistic :(
 		for(var/reactant in react_pool)
-			react_pool[reactant] = rand(FLOOR(react_pool[reactant]/2),react_pool[reactant])
+			react_pool[reactant] = rand(floor(react_pool[reactant]/2),react_pool[reactant])
 			reactants[reactant] -= react_pool[reactant]
 			if(!react_pool[reactant])
 				react_pool -= reactant

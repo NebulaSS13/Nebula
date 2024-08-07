@@ -583,7 +583,7 @@
 	time_offset = 0
 	var/required_moves = 0
 	if(speed > 0)
-		required_moves = FLOOR(elapsed_time_deciseconds / speed)
+		required_moves = floor(elapsed_time_deciseconds / speed)
 		if(required_moves > SSprojectiles.global_max_tick_moves)
 			var/overrun = required_moves - SSprojectiles.global_max_tick_moves
 			required_moves = SSprojectiles.global_max_tick_moves

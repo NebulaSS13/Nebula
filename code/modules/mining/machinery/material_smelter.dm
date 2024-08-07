@@ -70,9 +70,9 @@
 				continue
 			eaten++
 			if(eating.reagents?.total_volume)
-				eating.reagents.trans_to_obj(src, FLOOR(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
+				eating.reagents.trans_to_obj(src, floor(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
 			for(var/mtype in eating.matter)
-				add_to_reagents(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+				add_to_reagents(mtype, floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
 			if(eaten >= MAX_INTAKE_ORE_PER_TICK)
 				break
@@ -83,7 +83,7 @@
 						continue
 					visible_message(SPAN_DANGER("\The [src] rips \the [H]'s [eating.name] clean off!"))
 					for(var/mtype in eating.matter)
-						add_to_reagents(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+						add_to_reagents(mtype, floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 					eating.dismember(silent = TRUE)
 					qdel(eating)
 					break
@@ -91,7 +91,7 @@
 	if(output_turf)
 		for(var/mtype in casting)
 			var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
-			var/samt = FLOOR((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
+			var/samt = floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 			if(samt > 0)
 				SSmaterials.create_object(mtype, output_turf, samt)
 				remove_from_reagents(mtype, ramt)
@@ -130,7 +130,7 @@
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 		if(ramt <= 0 && !show_all_materials && !(mtype in always_show_materials))
 			continue
-		var/samt = FLOOR((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
+		var/samt = floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		var/obj/item/stack/material/sheet = mat.default_solid_form
 		materials += list(list("label" = "[mat.liquid_name]<br>[ramt]u ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
 		data["materials"] = materials

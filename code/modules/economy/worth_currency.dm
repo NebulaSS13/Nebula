@@ -100,7 +100,7 @@
 		. += "missing coin crafting recipes: [english_list(validating_denominations)]"
 
 /decl/currency/proc/format_value(var/amt)
-	. = "[name_prefix][FLOOR(amt / absolute_value)][name_suffix]"
+	. = "[name_prefix][floor(amt / absolute_value)][name_suffix]"
 
 /decl/currency/proc/build_denominations()
 	denominations = sortTim(denominations, /proc/cmp_currency_denomination_des)

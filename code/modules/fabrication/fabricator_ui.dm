@@ -123,7 +123,7 @@
 	var/list/multiplier
 	if(R.max_amount >= PRINT_MULTIPLIER_DIVISOR && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
 		multiplier = list()
-		for(var/i = 1 to FLOOR(min(R.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
+		for(var/i = 1 to floor(min(R.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
 			var/mult = i * PRINT_MULTIPLIER_DIVISOR
 			multiplier += list(list("label" = "x[mult]", "multiplier" = mult))
 	return multiplier

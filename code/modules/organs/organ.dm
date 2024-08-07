@@ -160,7 +160,7 @@
 
 // resets scarring, but ah well
 /obj/item/organ/proc/set_max_damage(var/ndamage)
-	absolute_max_damage = FLOOR(ndamage)
+	absolute_max_damage = floor(ndamage)
 	max_damage = absolute_max_damage
 
 /obj/item/organ/proc/set_species(specie_name)
@@ -183,11 +183,11 @@
 	min_broken_damage = initial(min_broken_damage)
 
 	if(absolute_max_damage)
-		set_max_damage(max(1, FLOOR(absolute_max_damage * total_health_coefficient)))
-		min_broken_damage = max(1, FLOOR(absolute_max_damage * 0.5))
+		set_max_damage(max(1, floor(absolute_max_damage * total_health_coefficient)))
+		min_broken_damage = max(1, floor(absolute_max_damage * 0.5))
 	else
-		min_broken_damage = max(1, FLOOR(min_broken_damage * total_health_coefficient))
-		set_max_damage(max(1, FLOOR(min_broken_damage * 2)))
+		min_broken_damage = max(1, floor(min_broken_damage * total_health_coefficient))
+		set_max_damage(max(1, floor(min_broken_damage * 2)))
 
 	reset_status()
 

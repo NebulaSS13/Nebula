@@ -184,7 +184,7 @@
 		if(position[i] < 0)
 			deltas[i] = ceil(position[i])
 		else if(position[i] > 0)
-			deltas[i] = FLOOR(position[i])
+			deltas[i] = floor(position[i])
 		moved = TRUE
 		// Delta over 0 means we've moved a turf, so we adjust our position accordingly.
 		if(deltas[i] != 0)

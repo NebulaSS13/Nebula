@@ -158,10 +158,10 @@
 
 /decl/stack_recipe/proc/get_list_display(mob/user, obj/item/stack/stack, datum/stack_recipe_list/sublist)
 
-	var/sheets_per_product = req_amount / ceil(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier))
-	var/products_per_sheet = ceil(FLOOR(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier)) / req_amount
+	var/sheets_per_product = req_amount / ceil(floor(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier))
+	var/products_per_sheet = ceil(floor(SHEET_MATERIAL_AMOUNT * stack.matter_multiplier)) / req_amount
 	var/clamp_sheets = max(1, ceil(sheets_per_product))
-	var/max_multiplier = FLOOR(stack.get_amount() / clamp_sheets)
+	var/max_multiplier = floor(stack.get_amount() / clamp_sheets)
 
 	// Stacks can have a max bound that will cause us to waste material on crafting an impossible amount.
 	if(ispath(result_type, /obj/item/stack))
@@ -177,7 +177,7 @@
 	. = list("<tr>")
 
 	. += "<td width = '150px'>"
-	. += get_display_name(max(1, FLOOR(products_per_sheet)), apply_article = FALSE)
+	. += get_display_name(max(1, floor(products_per_sheet)), apply_article = FALSE)
 	. += "</td>"
 
 	. += "<td width = '75px'>"
@@ -206,7 +206,7 @@
 	else if(allow_multiple_craft && !one_per_turf && clamp_sheets <= max_multiplier)
 		var/new_row = 5
 		for(var/i = clamp_sheets to max_multiplier step clamp_sheets)
-			var/producing = FLOOR(i * products_per_sheet)
+			var/producing = floor(i * products_per_sheet)
 			. += "<a href='byond://?src=\ref[stack];make=\ref[src];producing=[producing];expending=[i];returning=\ref[sublist]'>[producing]x</a>"
 			if(new_row == 0)
 				new_row = 5
@@ -214,7 +214,7 @@
 			else
 				new_row--
 	else
-		. += "<a href='byond://?src=\ref[stack];make=\ref[src];producing=[FLOOR(clamp_sheets * products_per_sheet)];expending=[clamp_sheets];returning=\ref[sublist]'>1x</a>"
+		. += "<a href='byond://?src=\ref[stack];make=\ref[src];producing=[floor(clamp_sheets * products_per_sheet)];expending=[clamp_sheets];returning=\ref[sublist]'>1x</a>"
 
 	. += "</td>"
 	. += "</tr>"

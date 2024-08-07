@@ -367,7 +367,7 @@ var/global/list/card_decks = list()
 		overlays += I
 		return
 
-	var/offset = FLOOR(20/cards.len)
+	var/offset = floor(20/cards.len)
 
 	var/matrix/M = matrix()
 	if(direction)

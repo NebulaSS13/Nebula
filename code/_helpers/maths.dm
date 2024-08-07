@@ -1,7 +1,7 @@
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
 	var/d = max - min
-	var/t = FLOOR((val - min) / d)
+	var/t = floor((val - min) / d)
 	return val - (t * d)
 
 // Trigonometric functions.
@@ -37,7 +37,7 @@
 	return (val >= min) && (val <= max)
 
 /proc/IsInteger(x)
-	return FLOOR(x) == x
+	return floor(x) == x
 
 /proc/IsMultiple(x, y)
 	return x % y == 0

@@ -1487,8 +1487,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 				. = SURGERY_ENCASED
 		else
 			var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
-			var/smol_threshold = max(1, FLOOR(min_broken_damage * 0.4 * total_health_coefficient))
-			var/beeg_threshold = max(1, FLOOR(min_broken_damage * 0.6 * total_health_coefficient))
+			var/smol_threshold = max(1, floor(min_broken_damage * 0.4 * total_health_coefficient))
+			var/beeg_threshold = max(1, floor(min_broken_damage * 0.6 * total_health_coefficient))
 			if(!incision.autoheal_cutoff == 0) //not clean incision
 				smol_threshold *= 1.5
 				beeg_threshold = max(beeg_threshold, min(beeg_threshold * 1.5, incision.damage_list[1])) //wounds can't achieve bigger

@@ -11,7 +11,6 @@
 #define MULT_BY_RANDOM_COEF(VAR,LO,HI) VAR =  round((VAR * rand(LO * 100, HI * 100))/100, 0.1)
 
 #define ROUND(x) (((x) >= 0) ? round((x)) : -round(-(x)))
-#define FLOOR(x) (round(x))
 #define EULER 2.7182818285
 
 #define MODULUS_FLOAT(X, Y) ( (X) - (Y) * round((X) / (Y)) )

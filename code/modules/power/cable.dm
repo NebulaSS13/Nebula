@@ -875,8 +875,8 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/item/stack/cable_coil/fabricator/get_amount()
 	var/obj/item/cell/cell = get_cell()
-	. = (cell ? FLOOR(cell.charge / cost_per_cable) : 0)
+	. = (cell ? floor(cell.charge / cost_per_cable) : 0)
 
 /obj/item/stack/cable_coil/fabricator/get_max_amount()
 	var/obj/item/cell/cell = get_cell()
-	. = (cell ? FLOOR(cell.maxcharge / cost_per_cable) : 0)
+	. = (cell ? floor(cell.maxcharge / cost_per_cable) : 0)

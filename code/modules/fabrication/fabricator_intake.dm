@@ -9,7 +9,7 @@
 	for(var/R in thing.reagents.reagent_volumes)
 		if(!base_storage_capacity[R])
 			continue
-		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), FLOOR((storage_capacity[R] - stored_material[R]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
+		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), floor((storage_capacity[R] - stored_material[R]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
 		if(taking_reagent <= 0)
 			continue
 		var/reagent_matter = round(taking_reagent / REAGENT_UNITS_PER_MATERIAL_UNIT)

@@ -263,7 +263,7 @@
 		if (!BP_IS_PROSTHETIC(organ))
 			organ.rejuvenate(1)
 			organ.max_damage *= 3
-			organ.min_broken_damage = FLOOR(organ.max_damage * 0.75)
+			organ.min_broken_damage = floor(organ.max_damage * 0.75)
 	verbs += /mob/living/proc/breath_death
 	verbs += /mob/living/proc/consume
 	playsound(get_turf(src), 'sound/hallucinations/wail.ogg', 20, 1)

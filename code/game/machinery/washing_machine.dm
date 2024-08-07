@@ -69,7 +69,7 @@
 /obj/machinery/washing_machine/proc/wash()
 	if(operable())
 		var/list/washing_atoms = get_contained_external_atoms()
-		var/amount_per_atom = FLOOR(reagents.total_volume / length(washing_atoms))
+		var/amount_per_atom = floor(reagents.total_volume / length(washing_atoms))
 
 		if(amount_per_atom > 0)
 			var/decl/material/smelliest = get_smelliest_reagent(reagents)

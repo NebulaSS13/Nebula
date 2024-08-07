@@ -5,7 +5,7 @@ var/global/_comment_mood_legend
 	if(!global._comment_mood_legend)
 		var/legend_width = 500
 		var/legend_per_row = 5
-		var/legend_cell_width = FLOOR(legend_width/legend_per_row)
+		var/legend_cell_width = floor(legend_width/legend_per_row)
 		global._comment_mood_legend = list("<table align = 'center' width = '[legend_width]px' style='padding: 3px'><tr><td colspan = [legend_per_row]><center><b>Legend</b></center></td></tr>")
 		var/list/all_moods = decls_repository.get_decls_of_type(/decl/comment_mood)
 		var/counter = 0

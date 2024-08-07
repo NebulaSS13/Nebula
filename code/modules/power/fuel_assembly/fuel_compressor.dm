@@ -57,7 +57,7 @@
 
 	var/decl/material/mat = GET_DECL(mat_type)
 	if(mat && stored_material[mat_type] >= SHEET_MATERIAL_AMOUNT)
-		var/sheet_count = FLOOR(stored_material[mat_type]/SHEET_MATERIAL_AMOUNT)
+		var/sheet_count = floor(stored_material[mat_type]/SHEET_MATERIAL_AMOUNT)
 		stored_material[mat_type] -= sheet_count * SHEET_MATERIAL_AMOUNT
 		SSmaterials.create_object(mat_type, get_turf(src), sheet_count)
 		if(isnull(stored_material[mat_type]))

@@ -241,7 +241,7 @@
 		return val
 	if(istext(val))
 		var/list/vals = splittext(val, "x")
-		return FLOOR(max(text2num(vals[1]), text2num(vals[2]))/2)
+		return floor(max(text2num(vals[1]), text2num(vals[2]))/2)
 	return 0
 
 // If all of these flags are present, it should come out at exactly 1. Yes, this

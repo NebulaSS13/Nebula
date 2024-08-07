@@ -20,7 +20,7 @@
 	if(name)
 		filename = "data/persistent/[ckey(global.using_map.name)]-[ckey(name)].json"
 	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
-		entries_decay_at = FLOOR(entries_expire_at * entries_decay_at)
+		entries_decay_at = floor(entries_expire_at * entries_decay_at)
 
 /decl/persistence_handler/proc/GetValidTurf(var/turf/T, var/list/tokens)
 	if(T && isStationLevel(T.z) && CheckTurfContents(T, tokens))

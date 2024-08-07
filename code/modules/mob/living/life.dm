@@ -194,7 +194,7 @@
 		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
 	var/decl/species/my_species = get_species()
-	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
+	damage = floor(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 		take_damage(damage * RADIATION_SPEED_COEFFICIENT, TOX)

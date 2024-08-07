@@ -380,7 +380,7 @@
 	if(length(reagents?.reagent_volumes))
 		LAZYINITLIST(.)
 		for(var/R in reagents.reagent_volumes)
-			.[R] += FLOOR(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)
+			.[R] += floor(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)
 	for(var/atom/contained_obj as anything in get_contained_external_atoms()) // machines handle component parts separately
 		. = MERGE_ASSOCS_WITH_NUM_VALUES(., contained_obj.get_contained_matter())
 
