@@ -36,6 +36,8 @@
 	var/frustration = 0
 	var/max_frustration = 0
 
+	var/seeking_patrol_path = FALSE
+
 	layer = HIDING_MOB_LAYER
 
 /mob/living/bot/Initialize()
@@ -291,13 +293,41 @@
 	return
 
 /mob/living/bot/proc/startPatrol()
+	if(waiting_for_path)
+		return
+	seeking_patrol_path = TRUE
 	var/turf/T = getPatrolTurf()
 	if(T)
-		patrol_path = AStar(get_turf(loc), T, TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_patrol_dist, id = botcard, exclude = obstacle)
-		if(!patrol_path)
-			patrol_path = list()
-		obstacle = null
-	return
+		SSpathfinding.enqueue_mover(
+			src,
+			T,
+			new /datum/pathfinding_metadata(
+				_max_node_depth = 200,
+				_id = botcard,
+				_obstacle = obstacle
+			)
+		)
+
+/mob/living/bot/path_found(list/path)
+	..()
+	if(seeking_patrol_path)
+		seeking_patrol_path = FALSE
+		patrol_path = path || list()
+	else
+		target_path = path
+	obstacle = null
+
+/mob/living/bot/path_not_found()
+	..()
+	if(seeking_patrol_path)
+		seeking_patrol_path = FALSE
+		patrol_path = list()
+	else
+		target_path = list()
+		if(target && target.loc)
+			ignore_list |= target
+		resetTarget()
+	obstacle = null
 
 /mob/living/bot/proc/getPatrolTurf()
 	var/minDist = INFINITY
@@ -325,13 +355,18 @@
 	return
 
 /mob/living/bot/proc/calcTargetPath()
-	target_path = AStar(get_turf(loc), get_turf(target), TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_target_dist, id = botcard, exclude = obstacle)
-	if(!target_path)
-		if(target && target.loc)
-			ignore_list |= target
-		resetTarget()
-		obstacle = null
-	return
+	if(waiting_for_path)
+		return
+	seeking_patrol_path = FALSE
+	SSpathfinding.enqueue_mover(
+		src,
+		get_turf(target),
+		new /datum/pathfinding_metadata(
+			_max_node_depth = 200,
+			_id = botcard,
+			_obstacle = obstacle
+		)
+	)
 
 /mob/living/bot/proc/makeStep(var/list/path)
 	if(!path.len)

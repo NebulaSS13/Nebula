@@ -60,6 +60,9 @@
 	/// Aggressive AI var; defined here for reference without casting.
 	var/try_destroy_surroundings = FALSE
 
+	/// Current path for A* pathfinding.
+	var/list/executing_path
+
 /datum/mob_controller/New(var/mob/living/target_body)
 	body = target_body
 	if(expected_type && !istype(body, expected_type))
@@ -78,7 +81,26 @@
 	. = ..()
 
 /datum/mob_controller/proc/get_automove_target(datum/automove_metadata/metadata)
-	return null
+	var/turf/move_target = (islist(executing_path) && length(executing_path)) ? executing_path : null
+	if(istype(move_target) && QDELETED(move_target))
+		clear_path()
+
+/datum/mob_controller/proc/handle_post_automoved(atom/old_loc)
+	if(!islist(executing_path) || length(executing_path) <= 0)
+		return
+	var/turf/body_turf = get_turf(body)
+	if(!istype(body_turf))
+		return
+	if(executing_path[1] != body_turf)
+		return
+	if(length(executing_path) > 1)
+		executing_path.Cut(1, 2)
+	else
+		clear_path()
+
+/datum/mob_controller/proc/clear_path()
+	executing_path = null
+	body?.stop_automove()
 
 /datum/mob_controller/proc/can_do_automated_move(variant_move_delay)
 	return body && !body.client
