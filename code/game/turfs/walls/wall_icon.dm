@@ -214,8 +214,8 @@
 		return 1
 	else if(material && istype(W.material))
 		var/other_wall_icon = W.get_wall_icon()
-		if(material.wall_blend_icons[other_wall_icon])
-			return 2
 		if(get_wall_icon() == other_wall_icon)
 			return 1
+		if(material.wall_blend_icons[other_wall_icon])
+			return 2
 	return 0
