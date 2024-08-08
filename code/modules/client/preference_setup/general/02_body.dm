@@ -354,7 +354,7 @@
 			var/list/accessory_metadata = current_accessories[accessory_decl.type] || accessory_decl.get_default_accessory_metadata()
 			var/current_value = accessory_metadata[metadata_decl.type]
 			var/new_value = metadata_decl.get_new_value_for(user, accessory_decl, current_value)
-			if(!new_value || current_value == new_value || !(accessory_decl.type in current_accessories))
+			if(isnull(new_value) || current_value == new_value || !(accessory_decl.type in current_accessories))
 				return TOPIC_NOACTION
 			if(accessory_category.single_selection)
 				current_accessories.Cut()
