@@ -14,7 +14,6 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = null
 	randpixel = 6
-	obj_flags = OBJ_FLAG_HOLLOW
 	item_flags = null
 	material = /decl/material/liquid/nutriment
 	center_of_mass = @'{"x":16,"y":16}'
