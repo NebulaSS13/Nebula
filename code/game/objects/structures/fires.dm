@@ -296,7 +296,7 @@
 	last_fuel_burn_temperature = max(ignition_temperature, last_fuel_burn_temperature)
 	if(fuel < LOW_FUEL) // fire's dying
 		if(last_fuel_burn_temperature > T20C)
-			last_fuel_burn_temperature = max(T20C, round(last_fuel_burn_temperature * 0.9))
+			last_fuel_burn_temperature = max(T20C, round(last_fuel_burn_temperature * 0.95))
 		if(last_fuel_burn_temperature < last_fuel_ignite_temperature)
 			return FALSE // kill the fire, too cold to burn additional fuel
 
