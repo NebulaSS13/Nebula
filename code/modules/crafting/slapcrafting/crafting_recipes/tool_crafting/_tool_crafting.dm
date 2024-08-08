@@ -52,6 +52,9 @@ var/global/list/_tool_crafting_components = list(
 
 /decl/crafting_stage/tool/tool_start/is_appropriate_tool(obj/item/thing, obj/item/target)
 
+	if(!..())
+		return FALSE
+
 	if(thing.material?.hardness < MAT_VALUE_SOFT)
 		to_chat(usr, SPAN_WARNING("\The [thing] is too soft to be used as part of an effective tool."))
 		return FALSE
@@ -74,7 +77,7 @@ var/global/list/_tool_crafting_components = list(
 		to_chat(usr, SPAN_WARNING("\The [target] and \the [thing] cannot be combined into a functional tool."))
 		return FALSE
 
-	return ..()
+	return TRUE
 
 /decl/crafting_stage/tool_binding
 	descriptor = "tool binding"
