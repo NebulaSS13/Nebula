@@ -130,3 +130,8 @@
 	max_w_class = ITEM_SIZE_LARGE
 	storage_slots = 4
 	use_sound = 'sound/effects/storage/toolbox.ogg'
+
+/datum/storage/produce_bin
+	can_hold = list(/obj/item/food/grown)
+	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_STRUCTURE)
+	storage_ui = /datum/storage_ui/default/produce_bin
