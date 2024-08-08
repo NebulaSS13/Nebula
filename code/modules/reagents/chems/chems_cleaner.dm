@@ -33,6 +33,7 @@
 	taste_description = "waxy blandness"
 	color = COLOR_BEIGE
 	uid = "chem_soap"
+	hardness         = MAT_VALUE_FLEXIBLE + 10
 	melting_point    = 323
 	ignition_point   = 353
 	boiling_point    = 373
