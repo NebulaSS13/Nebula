@@ -54,13 +54,13 @@
 	update_icon()
 
 /obj/item/soap/proc/wet()
-	add_to_reagents(/decl/material/liquid/cleaner, SOAP_CLEANER_ON_WET)
+	add_to_reagents(/decl/material/liquid/cleaner/soap, SOAP_CLEANER_ON_WET)
 
 /obj/item/soap/Crossed(atom/movable/AM)
 	if(!isliving(AM))
 		return
 	var/mob/living/M = AM
-	M.slip("the [src.name]", 3)
+	M.slip("\the [src]", 3)
 
 /obj/item/soap/afterattack(atom/target, mob/user, proximity)
 	if(!proximity) return
