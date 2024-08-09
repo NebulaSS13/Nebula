@@ -91,6 +91,7 @@
 	w_class                = ITEM_SIZE_STRUCTURE
 	material               = /decl/material/solid/stone/marble
 	used                   = TRUE
+	material_alteration    = MAT_FLAG_ALTERATION_ALL
 
 /obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
