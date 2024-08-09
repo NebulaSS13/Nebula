@@ -57,7 +57,7 @@
 	var/fire_anim = null
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
 	var/space_recoil = 0 //knocks back in space
-	var/silenced = 0
+	var/silencer
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
 	var/bulk = 0			//how unwieldy this weapon for its size, affects accuracy when fired without aiming
@@ -356,9 +356,9 @@
 	if(fire_anim)
 		flick(fire_anim, src)
 
-	if(!silenced && check_fire_message_spam("fire"))
+	if(check_fire_message_spam("fire"))
 		var/user_message = SPAN_WARNING("You fire \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!")
-		if (silenced)
+		if (silencer)
 			to_chat(firer, user_message)
 		else
 			firer.visible_message(
@@ -520,7 +520,7 @@
 	if((istype(P) && P.fire_sound))
 		shot_sound = P.fire_sound
 		shot_sound_vol = P.fire_sound_vol
-	if(silenced)
+	if(silencer)
 		shot_sound_vol = 10
 
 	playsound(firer, shot_sound, shot_sound_vol, 1)
@@ -550,7 +550,7 @@
 	if (istype(in_chamber))
 		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 		var/shot_sound = in_chamber.fire_sound? in_chamber.fire_sound : fire_sound
-		if(silenced)
+		if(silencer)
 			playsound(user, shot_sound, 10, 1)
 		else
 			playsound(user, shot_sound, 50, 1)

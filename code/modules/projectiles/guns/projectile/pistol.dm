@@ -30,48 +30,65 @@
 	ammo_indicator = FALSE
 	w_class = ITEM_SIZE_SMALL
 	caliber = CALIBER_PISTOL_SMALL
-	silenced = 0
 	fire_delay = 4
 	origin_tech = @'{"combat":2,"materials":2,"esoteric":8}'
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 
 /obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
-	if(!silenced || !user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
-		return ..()
-	to_chat(user, SPAN_NOTICE("You unscrew \the [silenced] from \the [src]."))
-	user.put_in_hands(silenced)
-	silenced = initial(silenced)
-	w_class = initial(w_class)
-	update_icon()
-	return TRUE
+
+	if((. = ..()))
+		return
+
+	if(istype(silencer, /obj/item) && user.is_holding_offhand(src) &&  user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		to_chat(user, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
+		user.put_in_hands(silencer)
+		silencer = initial(silencer)
+		w_class = initial(w_class)
+		update_icon()
+		return TRUE
+
+	return FALSE
 
 /obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/silencer))
-		if(src in user.get_held_items())	//if we're not in his hands
-			to_chat(user, SPAN_WARNING("You'll need [src] in your hands to do that."))
+
+		if(!(src in user.get_held_items()))	//if we're not in his hands
+			to_chat(user, SPAN_WARNING("You'll need \the [src] in your hands to do that."))
 			return TRUE
+
+		if(istype(silencer, /obj/item))
+			to_chat(user, SPAN_WARNING("\The [src] already has \the [silencer] attached."))
+			return TRUE
+
+		if(silencer)
+			to_chat(user, SPAN_WARNING("\The [src] does not need a silencer; it is already silent."))
+			return TRUE
+
 		if(user.try_unequip(I, src))
-			to_chat(user, SPAN_NOTICE("You screw [I] onto [src]."))
-			silenced = I	//dodgy?
+			to_chat(user, SPAN_NOTICE("You screw \the [I] onto \the [src]."))
+			silencer = I
 			w_class = ITEM_SIZE_NORMAL
 			update_icon()
 		return TRUE
+
 	. = ..()
 
 /obj/item/gun/projectile/pistol/holdout/update_base_icon()
 	..()
-	if(silenced)
-		overlays += mutable_appearance(icon, "[get_world_inventory_state()]-silencer")
+	if(silencer)
+		var/silenced_state = "[get_world_inventory_state()]-silencer"
+		if(check_state_in_icon(silenced_state, icon))
+			overlays += mutable_appearance(icon, silenced_state)
 
 /obj/item/gun/projectile/pistol/holdout/get_on_belt_overlay()
-	if(silenced && check_state_in_icon("on_belt_silenced", icon))
+	if(silencer && check_state_in_icon("on_belt_silenced", icon))
 		return overlay_image(icon, "on_belt_silenced", color)
 	return ..()
 
 /obj/item/silencer
 	name = "silencer"
-	desc = "A silencer."
+	desc = "A suppressor that screws into the barrel of compatible devices and reduces the volume of gunshots."
 	icon = 'icons/obj/guns/holdout_pistol_silencer.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
