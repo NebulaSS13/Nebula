@@ -10,12 +10,11 @@
 	layer = MOB_LAYER
 	max_health = 50
 	req_access = list(list(access_security, access_forensics_lockers))
-	patrol_speed = 2
-	target_speed = 3
 	light_strength = 0 //stunbaton makes it's own light
 	RequiresAccessToToggle = 1 // Haha no
 	ai = /datum/mob_controller/bot/security
 
+	var/will_patrol
 	var/attack_state = "secbot-c"
 	var/idcheck = 0 // If true, arrests for having weapons without authorization.
 	var/check_records = 0 // If true, arrests people without a record.
@@ -131,20 +130,10 @@
 			bot_ai.awaiting_surrender = INFINITY
 		events_repository.unregister(/decl/observ/moved, moving_instance, src)
 
-/mob/living/bot/secbot/startPatrol()
-	if(!locked) // Stop running away when we set you up
-		return
-	..()
-
 /mob/living/bot/secbot/proc/cuff_target(var/mob/living/target)
 	if(istype(target) && !target.get_equipped_item(slot_handcuffed_str))
 		handcuffs.place_handcuffs(target, src)
 	ai?.lose_target() //we're done, failed or not. Don't want to get stuck if target is not
-
-/mob/living/bot/get_target_zone()
-	if(!client)
-		return BP_CHEST
-	return ..()
 
 /mob/living/bot/secbot/UnarmedAttack(var/mob/M, var/proximity)
 
@@ -168,6 +157,7 @@
 	stun_baton.use_on_mob(M, src) //robots and turrets aim for center of mass
 	flick(attack_state, src)
 	return TRUE
+
 
 /mob/living/bot/secbot/gib(do_gibs = TRUE)
 	var/turf/my_turf = get_turf(src)

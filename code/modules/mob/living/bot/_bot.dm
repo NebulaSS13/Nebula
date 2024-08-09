@@ -110,6 +110,11 @@
 /mob/living/bot/attack_ai(var/mob/living/user)
 	Interact(user)
 
+/mob/living/bot/default_help_interaction(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
+	Interact(user)
+	return TRUE
+
 /mob/living/bot/default_interaction(mob/user)
 	. = ..()
 	if(!.)

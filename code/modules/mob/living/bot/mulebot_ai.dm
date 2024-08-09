@@ -1,3 +1,4 @@
+/*
 /datum/mob_controller/bot/mule
 	max_frustration = 5
 
@@ -20,12 +21,11 @@
 	if(mulebot.auto_return && mulebot.home && (mulebot.loc != mulebot.home))
 		set_target(mulebot.home)
 		mulebot.targetName = "Home"
+*/
 
-/datum/mob_controller/bot/mule/handle_general_bot_ai(mob/living/bot/bot)
-	var/mob/living/bot/mulebot/mulebot = bot
+/datum/mob_controller/bot/mule/do_process()
+	. = ..()
+	var/mob/living/bot/mulebot/mulebot = body
 	if(istype(mulebot) && !mulebot.safety && prob(1))
-		flick("mulebot-emagged", bot)
-	bot.update_icon()
-
-/datum/mob_controller/bot/mule/valid_target(atom/A)
-	return TRUE
+		flick("mulebot-emagged", body)
+	body.update_icon()

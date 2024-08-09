@@ -10,7 +10,6 @@
 	..()
 	events_repository.unregister(/decl/observ/moved, get_target(), body)
 	awaiting_surrender = -1
-	body.stop_automove()
 
 /datum/mob_controller/bot/security/proc/check_threat(var/mob/living/perp)
 	if(!istype(perp) || perp.stat == DEAD || body == perp)
@@ -36,28 +35,13 @@
 	awaiting_surrender = INFINITY
 
 /datum/mob_controller/bot/security/find_target()
+	..()
 	var/mob/living/bot/secbot/bot = body
 	if(!istype(bot))
 		return
-	for(var/mob/living/M as anything in list_targets())
+	for(var/mob/living/M as anything in get_valid_targets())
 		set_target(M)
 		awaiting_surrender = -1
 		body.say("Level [check_threat(M)] infraction alert!")
 		body.custom_emote(VISIBLE_MESSAGE, "points at \the [M]!")
 		return
-
-/datum/mob_controller/bot/security/handle_bot_adjacent_target()
-	var/mob/living/bot/secbot/bot = body
-	if(!istype(bot))
-		return
-	var/atom/target = get_target()
-	if(!istype(target))
-		return
-	var/mob/living/victim = target
-	var/threat = check_threat(target)
-	if(awaiting_surrender < SECBOT_WAIT_TIME && istype(victim) && !victim.current_posture?.prone && threat < SECBOT_THREAT_ATTACK)
-		if(awaiting_surrender == -1)
-			bot.begin_arrest(target, threat)
-		awaiting_surrender++
-	else
-		body.UnarmedAttack(target)

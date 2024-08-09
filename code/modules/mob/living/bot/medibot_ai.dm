@@ -14,10 +14,11 @@
 	)
 
 /datum/mob_controller/bot/medical/find_target()
+	..()
 	var/mob/living/bot/medbot/bot = body
 	if(!istype(bot) || body.current_posture?.prone) // Don't look for targets if we're incapacitated!
 		return
-	for(var/mob/living/human/patient as anything in list_targets()) // Time to find a patient!
+	for(var/mob/living/human/patient as anything in get_valid_targets()) // Time to find a patient!
 		set_target(patient)
 		if(bot.vocal && world.time >= (last_newpatient_speak + 30 SECONDS))
 			var/message_text = pick(message_options)
@@ -27,14 +28,6 @@
 			last_newpatient_speak = world.time
 		return
 
-/datum/mob_controller/bot/medical/handle_bot_adjacent_target()
-	var/mob/living/bot/medbot/bot = body
-	if(!istype(bot) || body.current_posture?.prone) // Don't handle targets if we're incapacitated!
-		return
-	var/atom/target = get_target()
-	if(target)
-		body.UnarmedAttack(target)
-
 /datum/mob_controller/bot/medical/handle_bot_idle()
 	var/mob/living/bot/medbot/bot = body
 	if(!istype(bot) || !bot.vocal || !prob(1))
@@ -43,11 +36,11 @@
 	bot.say(message)
 	playsound(bot, message_options[message], 50, 0)
 
-/datum/mob_controller/bot/medical/handle_general_bot_ai(mob/living/bot/bot)
-	var/mob/living/bot/medbot/medbot = bot
-	if(istype(medbot) && body.current_posture?.prone)
+/datum/mob_controller/bot/medical/do_process()
+	..()
+	if(istype(body, /mob/living/bot/medbot) && !body.stat && body.current_posture?.prone)
+		var/mob/living/bot/medbot/medbot = body
 		medbot.handle_panic()
-	return ..()
 
 /datum/mob_controller/bot/medical/valid_target(atom/A)
 	var/mob/living/bot/medbot/bot = body

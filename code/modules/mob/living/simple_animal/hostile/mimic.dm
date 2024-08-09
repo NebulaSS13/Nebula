@@ -45,7 +45,7 @@ var/global/list/protected_objects = list(
 	var/awake = TRUE
 
 // Return a list of targets that isn't the creator
-/datum/mob_controller/aggressive/mimic/list_targets(var/dist = 7)
+/datum/mob_controller/aggressive/mimic/get_valid_targets()
 	var/mob/living/simple_animal/hostile/mimic/mimic = body
 	. = istype(mimic) && mimic.awake && ..()
 	if(length(.) && mimic.creator)

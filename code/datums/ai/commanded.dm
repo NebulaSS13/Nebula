@@ -85,8 +85,8 @@
 	var/list/targets = get_targets_by_name(message)
 	if(LAZYLEN(targets) != 1) //CONFUSED. WHO DO I FOLLOW?
 		return 0
-	var/weakref/target_ref = targets[1]
-	set_target(target_ref.resolve()) //YEAH GOOD IDEA
+	var/weakref/single_target_ref = targets[1]
+	set_target(single_target_ref.resolve()) //YEAH GOOD IDEA
 	set_stance(STANCE_COMMANDED_FOLLOW) //GOT SOMEBODY. BETTER FOLLOW EM.
 	return 1
 
@@ -98,7 +98,7 @@
 		return
 	stop_wandering()
 	var/atom/target = get_target()
-	if(istype(target) && (target in list_targets(10)))
+	if(istype(target) && (target in get_raw_target_list()))
 		body.start_automove(target)
 
 /datum/mob_controller/aggressive/commanded/proc/commanded_stop() //basically a proc that runs whenever we are asked to stay put. Probably going to remain unused.
@@ -125,12 +125,14 @@
 			LAZYADD(., weakref(M))
 
 /datum/mob_controller/aggressive/commanded/find_target()
+	SHOULD_CALL_PARENT(FALSE)
+	next_target_scan_time = world.time + target_scan_delay
 	if(!LAZYLEN(_allowed_targets))
 		return null
 	var/mode = "specific"
 	if(LAZYACCESS(_allowed_targets, 1) == "everyone") //we have been given the golden gift of murdering everything. Except our master, of course. And our friends. So just mostly everyone.
 		mode = "everyone"
-	for(var/atom/A in list_targets(10))
+	for(var/atom/A in get_raw_target_list())
 		if(A == src)
 			continue
 		if(isliving(A))

@@ -104,7 +104,7 @@
 	if(.)
 		return
 
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		return TRUE
 
 	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
@@ -117,7 +117,7 @@
 				action = "water" // Needs a better one
 				update_icon()
 				visible_message("<span class='notice'>[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
 					T.physical_attack_hand(src)
@@ -125,7 +125,7 @@
 				action = "water"
 				update_icon()
 				visible_message("<span class='notice'>[src] starts watering \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 					visible_message("<span class='notice'>[src] waters \the [A].</span>")
@@ -134,7 +134,7 @@
 				action = "hoe"
 				update_icon()
 				visible_message("<span class='notice'>[src] starts uprooting the weeds in \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] uproots the weeds in \the [A].</span>")
 					T.weedlevel = 0
@@ -142,11 +142,11 @@
 				action = "fertile"
 				update_icon()
 				visible_message("<span class='notice'>[src] starts fertilizing \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] fertilizes \the [A].</span>")
 					T.add_to_reagents(/decl/material/gas/ammonia, 10)
-		busy = 0
+		ai?.set_stance(STANCE_IDLE)
 		action = ""
 		update_icon()
 		T.update_icon()
@@ -156,20 +156,20 @@
 		action = "water"
 		update_icon()
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
-		busy = 1
+		ai?.set_stance(STANCE_BUSY)
 		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
 			tank.add_to_reagents(/decl/material/liquid/water, 100)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-		busy = 0
+		ai?.set_stance(STANCE_IDLE)
 		action = ""
 		update_icon()
 		visible_message("<span class='notice'>[src] finishes refilling its tank.</span>")
 	else if(emagged && ishuman(A))
 		var/action = pick("weed", "water")
-		busy = 1
+		ai?.set_stance(STANCE_BUSY)
 		spawn(50) // Some delay
-			busy = 0
+			ai?.set_stance(STANCE_IDLE)
 		switch(action)
 			if("weed")
 				flick("farmbot_hoe", src)

@@ -17,9 +17,6 @@
 	density = TRUE
 	max_health = 150
 	mob_bump_flag = HEAVY
-	min_target_dist = 0
-	max_target_dist = 250
-	target_speed = 3
 	ai = /datum/mob_controller/bot/mule
 
 	var/atom/movable/load
@@ -165,28 +162,10 @@
 	if(open)
 		icon_state = "mulebot-hatch"
 		return
-	var/datum/mob_controller/bot/botai = ai
-	if(istype(botai) && LAZYLEN(botai.target_path) && !paused)
+	if(LAZYLEN(ai?.executing_path) && !paused)
 		icon_state = "mulebot1"
 		return
 	icon_state = "mulebot0"
-
-/mob/living/bot/mulebot/calcTargetPath()
-	..()
-
-	var/datum/mob_controller/bot/botai = ai
-	if(!istype(botai))
-		return
-
-	if(!LAZYLEN(botai.target_path) && ai && ai.get_target() != home) // I presume that target is not null
-		ai.lose_target()
-		ai.set_target(home)
-		targetName = "Home"
-
-/mob/living/bot/mulebot/stepToTarget()
-	if(paused)
-		return
-	..()
 
 /mob/living/bot/mulebot/UnarmedAttack(var/turf/T)
 	if(T == src.loc)
@@ -235,7 +214,7 @@
 	return beaconlist
 
 /mob/living/bot/mulebot/proc/load(var/atom/movable/C)
-	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc) || C.anchored)
+	if(ai?.get_stance() == STANCE_BUSY || load || get_dist(C, src) > 1 || !isturf(C.loc) || C.anchored)
 		return
 
 	for(var/obj/structure/flaps/P in src.loc)//Takes flaps into account
@@ -251,7 +230,7 @@
 	if(istype(crate))
 		crate.close()
 
-	busy = 1
+	ai?.set_stance(STANCE_BUSY)
 
 	C.forceMove(loc)
 	sleep(2)
@@ -272,13 +251,13 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 
-	busy = 0
+	ai?.set_stance(STANCE_IDLE)
 
 /mob/living/bot/mulebot/proc/unload(var/dirn = 0)
-	if(!load || busy)
+	if(!load || ai?.get_stance() == STANCE_BUSY)
 		return
 
-	busy = 1
+	ai?.set_stance(STANCE_BUSY)
 	overlays.Cut()
 
 	load.forceMove(loc)
@@ -306,7 +285,8 @@
 			if(M.client)
 				M.client.perspective = MOB_PERSPECTIVE
 				M.client.eye = src
-	busy = 0
+	ai?.set_stance(STANCE_IDLE)
+
 
 /mob/living/bot/mulebot/get_mob()
 	if(load && isliving(load))

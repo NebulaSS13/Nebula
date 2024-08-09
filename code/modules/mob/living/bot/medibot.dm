@@ -74,7 +74,7 @@
 	if(!on || !istype(H))
 		return FALSE
 
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		return TRUE
 
 	if(H.stat == DEAD)
@@ -105,7 +105,7 @@
 	if(declare_treatment)
 		var/area/location = get_area(src)
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location.proper_name]</b>", src)
-	busy = 1
+	ai?.set_stance(STANCE_BUSY)
 	update_icon()
 	if(do_mob(src, H, 30))
 		if(t == 1)
@@ -113,7 +113,7 @@
 		else
 			H.add_to_reagents(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
-	busy = 0
+	ai?.set_stance(STANCE_IDLE)
 	update_icon()
 	return TRUE
 
@@ -121,7 +121,7 @@
 	..()
 	if(skin)
 		add_overlay(image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]"))
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		icon_state = "medibots"
 	else
 		icon_state = "medibot[on]"
@@ -248,8 +248,9 @@
 			ai?.add_friend(user)
 		visible_message("<span class='warning'>[src] buzzes oddly!</span>")
 		flick("medibot_spark", src)
-		ai?.set_target(null)
-		busy = 0
+		if(ai)
+			ai.set_target(null)
+			ai.set_stance(STANCE_IDLE)
 		emagged = 1
 		on = 1
 		update_icon()

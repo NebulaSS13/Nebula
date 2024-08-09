@@ -6,8 +6,8 @@
 	req_access = list(list(access_janitor, access_robotics))
 	ai = /datum/mob_controller/bot/clean
 	wait_if_pulled = 1
-	min_target_dist = 0
 
+	var/will_patrol
 	var/screwloose = 0
 	var/oddbutton = 0
 	var/blood = 1
@@ -31,7 +31,7 @@
 	if(D.loc != loc)
 		return FALSE
 
-	busy = 1
+	ai?.set_stance(STANCE_BUSY)
 	visible_message("\The [src] begins to clean up \the [D].")
 	update_icon()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
@@ -40,7 +40,7 @@
 			ai.set_target(null)
 		qdel(D)
 	playsound(src, 'sound/machines/boop2.ogg', 30)
-	busy = 0
+	ai?.set_stance(STANCE_IDLE)
 	update_icon()
 	return TRUE
 
@@ -55,7 +55,7 @@
 
 /mob/living/bot/cleanbot/on_update_icon()
 	..()
-	if(busy)
+	if(istype(ai) && ai.get_stance() == STANCE_BUSY)
 		icon_state = "cleanbot-c"
 	else
 		icon_state = "cleanbot[on]"

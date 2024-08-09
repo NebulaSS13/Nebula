@@ -52,8 +52,8 @@
 		if(LAZYLEN(targets) != 1)
 			body.say("ERROR. TARGET COULD NOT BE PARSED.")
 			return 0
-		var/weakref/target_ref = targets[1]
-		set_target(target_ref.resolve())
+		var/weakref/single_target_ref = targets[1]
+		set_target(single_target_ref.resolve())
 		set_stance(STANCE_COMMANDED_HEAL)
 		return 1
 	if(findtext(text,"emergency protocol"))
