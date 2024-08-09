@@ -680,7 +680,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 	set name = "Rest"
 	set category = "IC"
 
-	resting = 0
+	resting = FALSE
 	var/obj/item/rig/rig = src.get_rig()
 	if(rig)
 		rig.force_rest(src)
