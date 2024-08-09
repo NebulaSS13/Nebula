@@ -347,4 +347,5 @@
 		target.atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 	else
 		target.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	target.update_icon()
 	return TRUE
