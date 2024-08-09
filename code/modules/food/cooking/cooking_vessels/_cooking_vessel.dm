@@ -91,7 +91,6 @@
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 
 /obj/item/chems/cooking_vessel/Process()
-	. = ..()
 	var/decl/recipe/recipe = select_recipe(cooking_category, src, temperature)
 	if(!recipe) // Too hot, too cold, ingredients changed.
 		//TODO fail last recipe
