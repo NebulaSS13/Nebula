@@ -6,8 +6,8 @@
 	bitesize = 1
 	var/fish_type = "fish"
 
-/obj/item/food/sushi/Initialize(mapload, var/obj/item/food/rice, var/obj/item/food/topping)
-	. = ..(mapload)
+/obj/item/food/sushi/Initialize(mapload, material_key, skip_plate = FALSE, obj/item/food/rice, obj/item/food/topping)
+	. = ..(mapload, material_key, skip_plate)
 
 	if(istype(topping))
 		for(var/taste_thing in topping.nutriment_desc)
@@ -61,9 +61,10 @@
 	var/fish_type = "fish"
 	var/slices = 1
 
-/obj/item/food/sashimi/Initialize(mapload, material_key, var/_fish_type)
-	. = ..(mapload)
-	if(_fish_type) fish_type = _fish_type
+/obj/item/food/sashimi/Initialize(mapload, material_key, skip_plate = FALSE, _fish_type)
+	. = ..(mapload, material_key, skip_plate)
+	if(_fish_type)
+		fish_type = _fish_type
 	name = "[fish_type] sashimi"
 	update_icon()
 
@@ -104,7 +105,7 @@
 		else
 			if(!user.try_unequip(I))
 				return
-			new /obj/item/food/sushi(get_turf(src), I, src)
+			new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
 		return
 	. = ..()
 
@@ -116,36 +117,39 @@
 			if(sashimi.slices > 1)
 				to_chat(user, "<span class='warning'>Putting more than one slice of fish on your sushi is just greedy.</span>")
 			else
-				new /obj/item/food/sushi(get_turf(src), src, I)
+				new /obj/item/food/sushi(get_turf(src), null, TRUE, src, I)
 			return
-		if(istype(I, /obj/item/food/friedegg) || \
-		 istype(I, /obj/item/food/tofu) || \
-		 istype(I, /obj/item/food/butchery/cutlet) || \
-		 istype(I, /obj/item/food/butchery/cutlet/raw) || \
-		 istype(I, /obj/item/food/spider) || \
-		 istype(I, /obj/item/food/butchery/meat/chicken))
-			new /obj/item/food/sushi(get_turf(src), src, I)
+		var/static/list/sushi_types = list(
+			/obj/item/food/friedegg,
+			/obj/item/food/tofu,
+			/obj/item/food/butchery/cutlet,
+			/obj/item/food/butchery/cutlet/raw,
+			/obj/item/food/spider,
+			/obj/item/food/butchery/meat/chicken
+		)
+		if(is_type_in_list(I, sushi_types))
+			new /obj/item/food/sushi(get_turf(src), null, TRUE, src, I)
 			return
 	. = ..()
 // Used for turning other food into sushi.
 /obj/item/food/friedegg/attackby(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), I, src)
+		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
 		return
 	. = ..()
 /obj/item/food/tofu/attackby(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), I, src)
+		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
 		return
 	. = ..()
 /obj/item/food/butchery/cutlet/raw/attackby(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), I, src)
+		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
 		return
 	. = ..()
 /obj/item/food/butchery/cutlet/attackby(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), I, src)
+		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
 		return
 	. = ..()
 // End non-fish sushi.

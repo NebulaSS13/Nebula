@@ -18,7 +18,7 @@
 	/// Used in recipes to distinguish between general types.
 	var/processed_grown_tag
 
-/obj/item/food/processed_grown/Initialize(mapload, material_key, _seed)
+/obj/item/food/processed_grown/Initialize(mapload, material_key, skip_plate = FALSE, _seed)
 
 	if(isnull(seed) && _seed)
 		seed = _seed
@@ -43,7 +43,7 @@
 	. = dry ? "dried [seed.grown_tag] [processed_grown_tag]" : "[seed.grown_tag] [processed_grown_tag]"
 
 /obj/item/food/processed_grown/create_slice()
-	return new slice_path(loc, material?.type, seed)
+	return new slice_path(loc, material?.type, TRUE, seed)
 
 /obj/item/food/processed_grown/proc/update_strings()
 	return

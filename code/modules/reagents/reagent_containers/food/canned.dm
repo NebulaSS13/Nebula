@@ -13,7 +13,7 @@
 	var/sealed = TRUE
 	var/open_complexity = OPEN_HARD
 
-/obj/item/food/can/Initialize()
+/obj/item/food/can/Initialize(mapload, material_key, skip_plate = FALSE)
 	. = ..()
 	if(!sealed)
 		unseal()

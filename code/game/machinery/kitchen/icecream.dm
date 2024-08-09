@@ -204,7 +204,7 @@
 	var/ice_creamed
 	var/cone_type
 
-/obj/item/food/icecream/Initialize()
+/obj/item/food/icecream/Initialize(mapload, material_key, skip_plate = FALSE)
 	. = ..()
 	update_icon()
 

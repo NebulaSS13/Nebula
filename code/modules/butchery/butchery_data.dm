@@ -36,6 +36,9 @@
 		blood_splatter(product_loc, donor, large = TRUE)
 	if(ispath(product_type, /obj/item/stack))
 		LAZYADD(., new product_type(product_loc, product_amount, product_material, donor))
+	else if(ispath(product_type, /obj/item/food))
+		for(var/i = 1 to product_amount)
+			LAZYADD(., new product_type(product_loc, product_material, TRUE, donor))
 	else
 		for(var/i = 1 to product_amount)
 			LAZYADD(., new product_type(product_loc, product_material, donor))

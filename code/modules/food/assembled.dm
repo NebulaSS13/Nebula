@@ -65,7 +65,27 @@
 
 	// TODO: move reagents/matter into produced food object.
 	if(ispath(create_type) && user.canUnEquip(src))
-		var/obj/item/food/result = new create_type()
+		var/obj/item/food/result
+		if(ispath(create_type, /obj/item/food))
+
+			// Create the food with no plate, and move over any existing plate.
+			result = new create_type(null, null, TRUE) // Skip plate creation.
+
+			if(istype(W, /obj/item/food))
+				var/obj/item/food/other_food = W
+				result.plate = other_food.plate
+				other_food.plate = null
+
+			if(!result.plate && plate)
+				result.plate = plate
+				plate = null
+
+			if(istype(result.plate) && result.plate.loc != result)
+				result.plate.forceMove(result)
+
+		else
+			result = new create_type
+
 		//If the snack was in your hands, the result will be too
 		if (src in user.get_held_item_slots())
 			user.drop_from_inventory(src)

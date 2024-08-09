@@ -25,7 +25,7 @@
 	)
 	return meat_icons
 
-/obj/item/food/butchery/meat/Initialize(ml, material_key, mob/living/donor)
+/obj/item/food/butchery/meat/Initialize(mapload, material_key, skip_plate = FALSE, mob/living/donor)
 	icon = pick(get_meat_icons())
 	return ..()
 

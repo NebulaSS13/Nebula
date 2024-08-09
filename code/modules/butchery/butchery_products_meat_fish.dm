@@ -30,7 +30,7 @@
 			food.remove_from_reagents(/decl/material/liquid/carpotoxin, REAGENT_VOLUME(reagents, /decl/material/liquid/carpotoxin))
 
 /obj/item/food/butchery/meat/fish/create_slice()
-	return new slice_path(loc, material?.type, meat_name) // pass fish name to sashimi
+	return new slice_path(loc, material?.type, TRUE, meat_name) // pass fish name to sashimi
 
 /obj/item/food/butchery/meat/fish/grilled
 	desc                           = "A lightly grilled fish fillet."
