@@ -153,19 +153,31 @@
 		update_icon() // In case item_state is set somewhere else.
 	..()
 
+/obj/item/gun/proc/update_base_icon_state()
+	icon_state = get_world_inventory_state()
+
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
 	. = ..()
-	update_base_icon()
+	update_base_icon_state()
 	if(istype(M))
 		if(has_safety && M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
 			add_overlay(image('icons/obj/guns/gui.dmi',"safety[safety()]"))
 		if(src in M.get_held_items())
 			M.update_inhand_overlays()
+
+	if(silencer)
+		var/silenced_state = "[icon_state]-silencer"
+		if(check_state_in_icon(silenced_state, icon))
+			add_overlay(mutable_appearance(icon, silenced_state))
+
 	if(safety_icon)
 		add_overlay(get_safety_indicator())
 
-/obj/item/gun/proc/update_base_icon()
+/obj/item/gun/get_on_belt_overlay()
+	if(silencer && check_state_in_icon("on_belt_silenced", icon))
+		return overlay_image(icon, "on_belt_silenced", color)
+	return ..()
 
 /obj/item/gun/proc/get_safety_indicator()
 	return mutable_appearance(icon, "[get_world_inventory_state()][safety_icon][safety()]")
@@ -617,6 +629,16 @@
 		to_chat(user, "The safety is [safety() ? "on" : "off"].")
 	last_safety_check = world.time
 
+/obj/item/gun/proc/try_switch_firemodes(mob/user)
+	if(!istype(user) || length(firemodes) <= 1)
+		return FALSE
+	var/datum/firemode/new_mode = switch_firemodes()
+	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+		new_mode = switch_firemodes()
+	if(new_mode)
+		to_chat(user, SPAN_NOTICE("\The [src] is now set to [new_mode.name]."))
+	return !!new_mode
+
 /obj/item/gun/proc/switch_firemodes(next_mode)
 	if(!next_mode)
 		next_mode = get_next_firemode()
@@ -637,11 +659,9 @@
 		. = 1
 
 /obj/item/gun/attack_self(mob/user)
-	var/datum/firemode/new_mode = switch_firemodes()
-	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		new_mode = switch_firemodes()
-	if(new_mode)
-		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
+	if(try_switch_firemodes(user))
+		return TRUE
+	return ..()
 
 /obj/item/gun/proc/toggle_safety(var/mob/user)
 	if(!has_safety)
@@ -723,12 +743,24 @@
 
 /obj/item/gun/get_alt_interactions(mob/user)
 	. = ..()
-	LAZYADD(., /decl/interaction_handler/toggle_safety)
+	LAZYADD(., /decl/interaction_handler/gun/toggle_safety)
+	if(length(firemodes) > 1)
+		LAZYADD(., /decl/interaction_handler/gun/toggle_firemode)
 
-/decl/interaction_handler/toggle_safety
-	name = "Toggle Gun Safety"
+/decl/interaction_handler/gun
+	abstract_type = /decl/interaction_handler/gun
 	expected_target_type = /obj/item/gun
+
+/decl/interaction_handler/gun/toggle_safety
+	name = "Toggle Safety"
 
 /decl/interaction_handler/toggle_safety/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/gun = target
 	gun.toggle_safety(user)
+
+/decl/interaction_handler/gun/toggle_firemode
+	name = "Change Firemode"
+
+/decl/interaction_handler/gun/toggle_firemode/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/gun/gun = target
+	gun.try_switch_firemodes(user)
