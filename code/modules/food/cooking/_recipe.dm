@@ -157,7 +157,11 @@ var/global/list/_cooking_recipe_cache = list()
 				continue
 			container_contents -= thing
 			if(isnum(needed_items[itype]))
-				--needed_items[itype]
+				if(istype(thing, /obj/item/stack))
+					var/obj/item/stack/stack = thing
+					needed_items[itype] -= stack.amount
+				else
+					--needed_items[itype]
 				if(needed_items[itype] <= 0)
 					needed_items -= itype
 					break
@@ -230,6 +234,23 @@ var/global/list/_cooking_recipe_cache = list()
 	var/list/container_contents = container.get_contained_external_atoms()
 	if(LAZYLEN(items))
 		for(var/item_type in items)
+			if(ispath(item_type, /obj/item/stack))
+				var/needed_amount = max(1, items[item_type])
+				var/obj/item/stack/stack
+				while(needed_amount > 0 && (stack = locate(item_type) in container_contents))
+					if(QDELETED(stack))
+						container_contents -= stack
+						continue
+					var/amount_to_take = min(stack.amount, needed_amount)
+					var/obj/item/stack/used
+					if(stack.amount <= amount_to_take) // We're using the whole stack.
+						used = stack
+						container_contents -= stack
+					else
+						used = stack.split(amount_to_take)
+					used_ingredients["items"] += used
+					needed_amount -= used.amount
+				continue
 			for(var/item_count in 1 to max(1, items[item_type]))
 				var/obj/item/item = locate(item_type) in container_contents
 				container_contents -= item
