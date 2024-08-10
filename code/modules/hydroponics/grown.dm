@@ -23,7 +23,7 @@
 		else if(!seeds_extracted && seed.min_seed_extracted)
 			to_chat(user, SPAN_NOTICE("With a knife, you could extract at least [seed.min_seed_extracted] seed\s."))
 
-/obj/item/food/grown/Initialize(mapload, material_key, _seed)
+/obj/item/food/grown/Initialize(mapload, material_key, skip_plate = FALSE, _seed)
 
 	if(isnull(seed) && _seed)
 		seed = _seed
@@ -65,7 +65,7 @@
 	if(!dried_type)
 		dried_type = type
 
-	. = ..(mapload) //Init reagents
+	. = ..(mapload, material_key, skip_plate) //Init reagents
 
 /obj/item/food/grown/initialize_reagents(populate)
 	if(reagents)
@@ -287,7 +287,7 @@ var/global/list/_wood_materials = list(
 	. = dry ? "dried [seed.grown_tag]" : seed.grown_tag
 
 /obj/item/food/grown/create_slice()
-	return new slice_path(loc, material?.type, seed)
+	return new slice_path(loc, material?.type, TRUE, seed)
 
 /obj/item/food/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()

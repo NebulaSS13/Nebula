@@ -198,6 +198,8 @@ var/global/list/_cooking_recipe_cache = list()
 
 // Create the actual result atom. Handled by a proc to allow for recipes to override it.
 /decl/recipe/proc/create_result_atom(atom/container, list/used_ingredients)
+	if(ispath(result, /obj/item/food))
+		return new result(container, null, TRUE) // Supply argument to skip plate creation.
 	return new result(container)
 
 /// Return a data list to pass to a reagent creation proc. Allows for overriding/mutation based on ingredients.

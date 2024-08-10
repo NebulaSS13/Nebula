@@ -8,7 +8,7 @@
 	nutriment_amt = 5
 	var/meat_name = "meat"
 
-/obj/item/food/jerky/Initialize()
+/obj/item/food/jerky/Initialize(mapload, material_key, skip_plate = FALSE)
 	. = ..()
 	if(meat_name)
 		set_meat_name(meat_name)

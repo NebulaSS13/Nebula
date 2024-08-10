@@ -45,7 +45,7 @@
 	seed = "tobacco"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/food/grown/dried_tobacco/Initialize()
+/obj/item/food/grown/dried_tobacco/Initialize(mapload, material_key, skip_plate = FALSE)
 	. = ..()
 	dry = TRUE
 	SetName("dried [name]")

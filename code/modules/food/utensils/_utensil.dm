@@ -62,19 +62,6 @@
 		if(check_state_in_icon(loaded_state, icon))
 			add_overlay(overlay_image(icon, loaded_state, loaded_food.reagents?.get_color() || loaded_food.filling_color || get_color(), RESET_COLOR))
 
-/obj/item/food
-	/// A type used when cloning this food item for utensils.
-	var/utensil_type
-	/// A set of utensil flags determining which utensil interactions are valid with this food.
-	var/utensil_flags = UTENSIL_FLAG_SCOOP | UTENSIL_FLAG_COLLECT
-
-/obj/item/food/Initialize()
-	. = ..()
-	if(isnull(utensil_type))
-		utensil_type = type
-	if(slice_path && slice_num)
-		utensil_flags |= UTENSIL_FLAG_SLICE
-
 // TODO: generalize this for edible non-food items somehow?
 /obj/item/food/proc/seperate_chunk(obj/item/utensil/utensil, mob/user)
 	if(!istype(utensil))
@@ -84,7 +71,7 @@
 
 		// Create a dummy copy of the target food item.
 		// This ensures we keep all food behavior, strings, sounds, etc.
-		utensil.loaded_food = new utensil_type(utensil)
+		utensil.loaded_food = new utensil_food_type(utensil, material?.type, TRUE)
 		QDEL_NULL(utensil.loaded_food.trash)
 		QDEL_NULL(utensil.loaded_food.plate)
 		utensil.loaded_food.color = color
@@ -160,7 +147,7 @@
 	return . || TRUE
 
 /obj/item/food/proc/create_slice()
-	return new slice_path(loc, material?.type)
+	return new slice_path(loc, material?.type, TRUE)
 
 /obj/item/food/proc/do_utensil_interaction(obj/item/tool, mob/user)
 

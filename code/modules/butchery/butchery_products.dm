@@ -16,7 +16,7 @@
 	var/fat_material    = /decl/material/solid/organic/meat/gut
 	var/meat_name       = "meat"
 
-/obj/item/food/butchery/Initialize(ml, material_key, mob/living/donor)
+/obj/item/food/butchery/Initialize(mapload, material_key, skip_plate = FALSE, mob/living/donor)
 	var/decl/butchery_data/butchery_decl = GET_DECL(donor?.butchery_data)
 	if(butchery_decl)
 		if(butchery_decl.meat_material)
@@ -159,7 +159,7 @@
 	w_class             = ITEM_SIZE_HUGE
 	var/bone_material   = /decl/material/solid/organic/bone
 
-/obj/item/food/butchery/haunch/Initialize(ml, material_key, mob/living/donor)
+/obj/item/food/butchery/haunch/Initialize(mapload, material_key, skip_plate = FALSE, mob/living/donor)
 	var/decl/butchery_data/butchery_decl = GET_DECL(donor?.butchery_data)
 	if(butchery_decl)
 		bone_material = butchery_decl.bone_material
@@ -187,7 +187,7 @@
 	icon                = 'icons/obj/items/butchery/side.dmi'
 	w_class             = ITEM_SIZE_GARGANTUAN
 
-/obj/item/food/butchery/haunch/side/Initialize(ml, material_key, mob/living/donor)
+/obj/item/food/butchery/haunch/side/Initialize(mapload, material_key, skip_plate = FALSE, mob/living/donor)
 	. = ..()
 	if(donor && !isnull(slice_num))
 		slice_num = max(1, round(slice_num/2))

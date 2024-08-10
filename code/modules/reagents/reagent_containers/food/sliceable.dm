@@ -28,7 +28,7 @@
  *  whole item, transferring the reagents and deleting the whole item, which may
  *  have performance implications.
  */
-/obj/item/food/slice/Initialize()
+/obj/item/food/slice/Initialize(mapload, material_key, skip_plate = FALSE)
 	. = ..()
 	if(filled)
 		var/obj/item/food/whole = new whole_path()

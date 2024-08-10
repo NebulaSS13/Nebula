@@ -40,17 +40,28 @@
 	var/filling_color = "#ffffff" //Used by sandwiches.
 	var/trash
 	var/obj/item/plate/plate
+	/// A type used when cloning this food item for utensils.
+	var/utensil_food_type
+	/// A set of utensil flags determining which utensil interactions are valid with this food.
+	var/utensil_flags = UTENSIL_FLAG_SCOOP | UTENSIL_FLAG_COLLECT
 
-/obj/item/food/Initialize()
+/obj/item/food/Initialize(ml, material_key, skip_plate = FALSE)
 	. = ..()
 	if(cooked_food == FOOD_RAW)
 		name = "raw [name]"
-	if(ispath(plate))
-		plate = new plate(src)
 
-/obj/item/food/Initialize(ml, material_key)
-	. = ..()
+	if(skip_plate)
+		plate = null
+	else if(ispath(plate))
+		plate = new plate(src)
+	else if(!istype(plate))
+		plate = null
+
 	initialize_reagents()
+	if(isnull(utensil_food_type))
+		utensil_food_type = type
+	if(slice_path && slice_num)
+		utensil_flags |= UTENSIL_FLAG_SLICE
 
 /obj/item/food/initialize_reagents(populate = TRUE)
 	if(!reagents)

@@ -8,7 +8,7 @@
 	filling_color = COLOR_BROWN
 	abstract_type = /obj/item/food/variable
 
-/obj/item/food/variable/Initialize()
+/obj/item/food/variable/Initialize(mapload, material_key, skip_plate = FALSE)
 	. = ..()
 	update_icon()
 

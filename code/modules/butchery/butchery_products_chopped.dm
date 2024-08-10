@@ -6,7 +6,7 @@
 	nutriment_amt = 1
 	w_class       = ITEM_SIZE_TINY
 
-/obj/item/food/butchery/chopped/Initialize()
+/obj/item/food/butchery/chopped/Initialize(mapload, material_key, skip_plate = FALSE)
 	. = ..()
 	slice_path = null
 	slice_num = null
