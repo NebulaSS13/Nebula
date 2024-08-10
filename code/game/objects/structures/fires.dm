@@ -44,6 +44,10 @@
 	var/list/affected_exterior_turfs
 	var/next_fuel_consumption = 0
 	var/last_fuel_burn_temperature = T20C
+	// TODO: Replace this and the fuel var with just tracking currently-burning matter?
+	// Or use atom fires when those are implemented?
+	/// The minimum temperature required to ignite any fuel added.
+	var/last_fuel_ignite_temperature = 0
 	var/cap_last_fuel_burn = 850 CELSIUS // Prevent using campfires and stoves as kilns.
 	var/exterior_temperature = 30
 
@@ -124,6 +128,7 @@
 /obj/structure/fire_source/proc/die()
 	if(lit == FIRE_LIT)
 		lit = FIRE_DEAD
+		last_fuel_ignite_temperature = 0
 		last_fuel_burn_temperature = T20C
 		refresh_affected_exterior_turfs()
 		visible_message(SPAN_DANGER("\The [src] goes out!"))
@@ -230,6 +235,7 @@
 			if(mat.accelerant_value > FUEL_VALUE_NONE)
 				fuel += amount * (1 + material.accelerant_value)
 			last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
+			last_fuel_ignite_temperature = min(last_fuel_ignite_temperature, mat.ignition_point)
 		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
 			fuel -= amount * mat.accelerant_value
 		fuel = max(fuel, 0)
@@ -288,8 +294,11 @@
 	// Slowly lose burn temperature.
 	// TODO: use temperature var and equalizing system?
 	last_fuel_burn_temperature = max(ignition_temperature, last_fuel_burn_temperature)
-	if(last_fuel_burn_temperature > T20C && fuel < LOW_FUEL)
-		last_fuel_burn_temperature = max(T20C, round(last_fuel_burn_temperature * 0.9))
+	if(fuel < LOW_FUEL) // fire's dying
+		if(last_fuel_burn_temperature > T20C)
+			last_fuel_burn_temperature = max(T20C, round(last_fuel_burn_temperature * 0.95))
+		if(last_fuel_burn_temperature < last_fuel_ignite_temperature)
+			return FALSE // kill the fire, too cold to burn additional fuel
 
 	var/list/waste = list()
 	for(var/obj/item/thing in contents)
@@ -391,14 +400,14 @@
 				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 				add_overlay(I)
 				set_light(light_range_high, light_power_high, light_color_high)
-			else if(fuel <= LOW_FUEL)
-				var/image/I = image(icon, "[icon_state]_lit_dying")
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
+			else if(fuel > LOW_FUEL)
+				var/image/I = image(icon, "[icon_state]_lit_low")
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
 				add_overlay(I)
 				set_light(light_range_mid, light_power_mid, light_color_mid)
 			else
-				var/image/I = image(icon, "[icon_state]_lit_low")
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				var/image/I = image(icon, "[icon_state]_lit_dying")
+				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 				add_overlay(I)
 				set_light(light_range_low, light_power_low, light_color_low)
 		if(FIRE_DEAD)
