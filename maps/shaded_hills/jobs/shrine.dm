@@ -1,12 +1,15 @@
 /decl/department/shaded_hills/shrine
-	name                    = "Shrine Attendants"
-	colour                  = "#404e68"
-	display_color           = "#8c96c4"
+	name          = "Shrine Attendants"
+	colour        = "#404e68"
+	display_color = "#8c96c4"
+	lock_keys     = list(
+		"shrine"  = /decl/material/solid/metal/copper
+	)
 
 /datum/job/shaded_hills/shrine
-	abstract_type = /datum/job/shaded_hills/shrine
-	department_types        = list(/decl/department/shaded_hills/shrine)
-	skill_points            = 20
+	abstract_type    = /datum/job/shaded_hills/shrine
+	department_types = list(/decl/department/shaded_hills/shrine)
+	skill_points     = 20
 
 /datum/job/shaded_hills/shrine/keeper
 	title                   = "Shrine Keeper"

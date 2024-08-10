@@ -6,10 +6,6 @@
 /datum/job/shaded_hills/inn
 	abstract_type           = /datum/job/shaded_hills/inn
 	department_types        = list(/decl/department/shaded_hills/inn)
-	lock_keys = list(
-		"inn interior" = /decl/material/solid/metal/copper,
-		"inn exterior" = /decl/material/solid/metal/iron
-	)
 
 /datum/job/shaded_hills/inn/innkeeper
 	title                   = "Innkeeper"
@@ -32,6 +28,11 @@
 		SKILL_CHEMISTRY     = SKILL_ADEPT, // a bit more leeway than most jobs, but still not as good as the herbalist
 	)
 	skill_points            = 22
+	lock_keys = list(
+		"inn backroom" = /decl/material/solid/metla/silver,
+		"inn interior" = /decl/material/solid/metal/copper,
+		"inn exterior" = /decl/material/solid/metal/iron
+	)
 
 /obj/abstract/landmark/start/shaded_hills/innkeeper
 	name                    = "Innkeeper"
@@ -49,6 +50,10 @@
 		SKILL_BOTANY        = SKILL_BASIC,
 	)
 	skill_points            = 18
+	lock_keys = list(
+		"inn interior" = /decl/material/solid/metal/copper,
+		"inn exterior" = /decl/material/solid/metal/iron
+	)
 
 /obj/abstract/landmark/start/shaded_hills/inn_worker
 	name                    = "Inn Worker"
@@ -64,6 +69,10 @@
 		SKILL_COOKING       = SKILL_EXPERT // skilled with food and drink
 	)
 	skill_points            = 18
+	lock_keys = list(
+		"inn interior" = /decl/material/solid/metal/copper,
+		"inn exterior" = /decl/material/solid/metal/iron
+	)
 
 /obj/abstract/landmark/start/shaded_hills/bartender
 	name                    = "Bartender"
@@ -80,6 +89,9 @@
 		SKILL_BOTANY        = SKILL_ADEPT, // must be skilled enough to have plants reliably survive when planted
 	)
 	skill_points            = 18
+	lock_keys = list(
+		"farmhouse" = /decl/material/solid/metal/copper
+	)
 
 /obj/abstract/landmark/start/shaded_hills/farmer
 	name                    = "Farmer"
