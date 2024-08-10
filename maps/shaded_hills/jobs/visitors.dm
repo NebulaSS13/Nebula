@@ -49,17 +49,20 @@
 	total_positions         = 2
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/beggar_knight
 	min_skill               = list(
+		SKILL_COMBAT        = SKILL_ADEPT,
 		SKILL_WEAPONS       = SKILL_ADEPT,
-		SKILL_ATHLETICS     = SKILL_ADEPT,
+		SKILL_ATHLETICS     = SKILL_ADEPT
 	)
 	max_skill               = list(
-		SKILL_FINANCE       = SKILL_NONE,
+		SKILL_COMBAT        = SKILL_MAX,
+		SKILL_WEAPONS       = SKILL_MAX,
 		SKILL_CARPENTRY     = SKILL_BASIC,
 		SKILL_METALWORK     = SKILL_BASIC,
 		SKILL_TEXTILES      = SKILL_BASIC,
 		SKILL_STONEMASONRY  = SKILL_BASIC,
 		SKILL_SCULPTING     = SKILL_BASIC,
 		SKILL_ARTIFICE      = SKILL_BASIC,
+		SKILL_FINANCE       = SKILL_NONE
 	)
 
 /obj/abstract/landmark/start/shaded_hills/beggar_knight
@@ -74,15 +77,17 @@
 	total_positions         = 2
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/traveller/cleric
 	min_skill               = list(
+		SKILL_COMBAT        = SKILL_ADEPT,
 		SKILL_WEAPONS       = SKILL_ADEPT,
 		SKILL_ATHLETICS     = SKILL_ADEPT,
 		SKILL_MEDICAL       = SKILL_ADEPT,
-		SKILL_ANATOMY       = SKILL_ADEPT,
+		SKILL_ANATOMY       = SKILL_ADEPT
 	)
 	max_skill               = list(
+		SKILL_COMBAT        = SKILL_MAX,
 		SKILL_WEAPONS       = SKILL_MAX,
 		SKILL_MEDICAL       = SKILL_MAX,
-		SKILL_ANATOMY       = SKILL_MAX,
+		SKILL_ANATOMY       = SKILL_MAX
 	)
 	skill_points            = 22
 
