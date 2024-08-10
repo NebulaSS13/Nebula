@@ -228,5 +228,6 @@
 
 	for(var/obj/item/chems/food/food in results)
 		food.cooked_food = TRUE
+		QDEL_NULL(food.plate)
 
 	return results
