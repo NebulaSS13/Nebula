@@ -13,7 +13,7 @@
 	pickup_sound = 'sound/effects/holster/holsterout.ogg'
 	tank         = null
 	randpixel    = 0 //Prevent randpixel from screwing with backpack overlays
-
+	obj_flags    = OBJ_FLAG_NO_STORAGE
 	var/obj/item/chems/weldpack/linked_pack
 
 /obj/item/weldingtool/weldpack/Initialize(ml, material_key, var/obj/item/chems/weldpack/pack)
@@ -57,11 +57,6 @@
 /obj/item/weldingtool/weldpack/proc/on_pack_deleted()
 	if(!linked_pack.is_welder_attached())
 		linked_pack.reattach_gun()
-
-/obj/item/weldingtool/weldpack/get_storage_cost()
-	if(loc != linked_pack)
-		return ITEM_SIZE_NO_CONTAINER
-	return ..()
 
 ////////////////////////////////////////////////////////////
 //Welder Pack

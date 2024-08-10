@@ -15,6 +15,7 @@
 	active_edge =         1
 	active_throwforce =   1  //Throwing or dropping the item deletes it.
 	active_parry_chance = 50
+	obj_flags = OBJ_FLAG_NO_STORAGE
 
 	var/mob/living/creator
 
@@ -25,9 +26,6 @@
 
 /obj/item/energy_blade/projected/is_special_cutting_tool(var/high_power)
 	return active
-
-/obj/item/energy_blade/projected/get_storage_cost()
-	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/energy_blade/projected/attack_self(mob/user)
 	user.drop_from_inventory(src)

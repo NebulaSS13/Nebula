@@ -1,8 +1,8 @@
 /obj/item/mech_storage
-	w_class = ITEM_SIZE_NO_CONTAINER
-	storage = /datum/storage/mech
-	anchored = TRUE
+	storage    = /datum/storage/mech
+	anchored   = TRUE
 	max_health = ITEM_HEALTH_NO_DAMAGE
+	obj_flags  = OBJ_FLAG_NO_STORAGE
 
 /obj/item/mech_component/chassis/Adjacent(var/atom/neighbor, var/recurse = 1) //For interaction purposes we consider body to be adjacent to whatever holder mob is adjacent
 	var/mob/living/exosuit/E = loc

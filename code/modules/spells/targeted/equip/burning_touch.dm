@@ -21,6 +21,7 @@
 	atom_damage_type =  BURN
 	simulated = 0
 	max_health = ITEM_HEALTH_NO_DAMAGE
+	obj_flags = OBJ_FLAG_NO_STORAGE
 	var/burn_power = 0
 	var/burn_timer
 
@@ -62,9 +63,6 @@
 			to_chat(user, "<span class='danger'>You begin to lose control of \the [src]'s flames as they rapidly move up your arm...</span>")
 		else
 			to_chat(user, "<span class='warning'>You feel \the [src] grow hotter and hotter!</span>")
-
-/obj/item/burning_hands/get_storage_cost()
-	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/burning_hands/dropped()
 	..()

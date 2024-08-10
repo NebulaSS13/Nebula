@@ -2,8 +2,7 @@
 	name = "robot module"
 	icon = 'icons/obj/modules/module_standard.dmi'
 	icon_state = ICON_STATE_WORLD
-	w_class = ITEM_SIZE_NO_CONTAINER
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_NO_STORAGE
 	is_spawnable_type = FALSE
 
 	var/associated_department

@@ -177,13 +177,12 @@ var/global/list/_test_storage_items = list()
 			to_chat(user, SPAN_WARNING("\The [W] is too big for \the [holder]."))
 		return 0
 
-	var/total_storage_space = W.get_storage_cost()
-	if(total_storage_space >= ITEM_SIZE_NO_CONTAINER)
+	if(W.obj_flags & OBJ_FLAG_NO_STORAGE)
 		if(!stop_messages)
 			to_chat(user, SPAN_WARNING("\The [W] cannot be placed in \the [holder]."))
 		return 0
 
-	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
+	var/total_storage_space = W.get_storage_cost() + storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
 			to_chat(user, SPAN_WARNING("\The [holder] is too full, make some space."))

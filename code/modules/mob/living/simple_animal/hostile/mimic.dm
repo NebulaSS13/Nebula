@@ -102,7 +102,7 @@ var/global/list/protected_objects = list(
 					/decl/move_intent/walk/animal_fast,
 					/decl/move_intent/run/animal_fast
 				)
-			else if(I.w_class <= ITEM_SIZE_NO_CONTAINER)
+			else if(I.w_class <= ITEM_SIZE_GARGANTUAN)
 				move_intents = list(
 					/decl/move_intent/walk/animal,
 					/decl/move_intent/run/animal

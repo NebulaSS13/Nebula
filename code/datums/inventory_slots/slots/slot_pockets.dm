@@ -24,7 +24,7 @@
 			if(!disable_warning)
 				to_chat(user, SPAN_WARNING("You need to be wearing something before you can put \the [prop] in your pocket."))
 			return FALSE
-		return prop.get_storage_cost() < ITEM_SIZE_NO_CONTAINER
+		return !(prop.obj_flags & OBJ_FLAG_NO_STORAGE)
 
 /datum/inventory_slot/pocket/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	return

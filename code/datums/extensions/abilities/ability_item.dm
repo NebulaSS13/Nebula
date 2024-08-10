@@ -1,6 +1,6 @@
 /obj/item/ability
-	atom_flags = 0
 	simulated = 1
+	obj_flags = OBJ_FLAG_NO_STORAGE
 	anchored = TRUE
 	pickup_sound = null
 	drop_sound =   null
@@ -25,9 +25,6 @@
 /obj/item/ability/dropped()
 	..()
 	qdel(src)
-
-/obj/item/ability/get_storage_cost()
-	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/ability/attack_self(var/mob/user)
 	user?.drop_from_inventory(src)

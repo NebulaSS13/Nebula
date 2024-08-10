@@ -69,14 +69,13 @@
 	else if(istype(food, /obj/item) && !istype(food, /obj/item/holder)) //Don't eat holders. They are special.
 		var/obj/item/I = food
 		var/cost = I.get_storage_cost()
-		if(cost < ITEM_SIZE_NO_CONTAINER)
-			if((species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
+		if(!(I.obj_flags & OBJ_FLAG_NO_STORAGE))
+			if((species.gluttonous & GLUT_ITEM_TINY) && cost < ITEM_SIZE_LARGE)
 				return DEVOUR_SLOW
-			else if((species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)
+			else if((species.gluttonous & GLUT_ITEM_NORMAL) && cost <= ITEM_SIZE_LARGE)
 				return DEVOUR_SLOW
 			else if(species.gluttonous & GLUT_ITEM_ANYTHING)
 				return DEVOUR_FAST
-
 
 /obj/item/organ/internal/stomach/proc/throw_up()
 	set name = "Empty Stomach"
