@@ -35,6 +35,10 @@
 /obj/abstract/ramp_sculptor/east,
 /turf/wall/natural/dirt,
 /area/shaded_hills/caves/dungeon)
+"GE" = (
+/obj/structure/stairs/long/north,
+/turf/floor/natural/path/running_bond/basalt,
+/area/shaded_hills/caves/dungeon/poi)
 "HI" = (
 /turf/floor/natural/rock/basalt,
 /area/shaded_hills/caves/dungeon)
@@ -8632,8 +8636,8 @@ bD
 bD
 bD
 bD
-bD
-bD
+it
+GE
 bD
 bD
 bD
@@ -8784,9 +8788,9 @@ bD
 bD
 bD
 bD
-bD
 it
-bD
+it
+it
 bD
 it
 bD

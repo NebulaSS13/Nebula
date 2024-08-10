@@ -29,9 +29,9 @@
 	)
 	skill_points            = 22
 	lock_keys = list(
-		"inn backroom" = /decl/material/solid/metla/silver,
-		"inn interior" = /decl/material/solid/metal/copper,
-		"inn exterior" = /decl/material/solid/metal/iron
+		"inn back room" = /decl/material/solid/metal/silver,
+		"inn interior"  = /decl/material/solid/metal/copper,
+		"inn exterior"  = /decl/material/solid/metal/iron
 	)
 
 /obj/abstract/landmark/start/shaded_hills/innkeeper

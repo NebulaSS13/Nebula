@@ -38,8 +38,8 @@
 	fishing_results = list()
 	sound_env = ROOM
 
-/area/shaded_hills/tannery
-	name = "\improper Tannery"
+/area/shaded_hills/storehouse
+	name = "\improper Storehouse"
 	fishing_failure_prob = 100
 	fishing_results = list()
 	sound_env = ROOM
