@@ -254,13 +254,13 @@ var/global/chicken_count = 0
 		var/obj/item/chems/food/grown/G = O
 		if(G.seed && G.seed.kitchen_tag == "wheat")
 			if(!stat && eggsleft < 8)
-				user.visible_message("<span class='notice'>[user] feeds [O] to [name]! It clucks happily.</span>","<span class='notice'>You feed [O] to [name]! It clucks happily.</span>")
+				user.visible_message(SPAN_NOTICE("[user] feeds \the [O] to \the [src]! It clucks happily."), SPAN_NOTICE("You feed \the [O] to \the [src]! It clucks happily."), SPAN_NOTICE("You hear clucking."))
 				qdel(O)
 				eggsleft += rand(1, 4)
 			else
-				to_chat(user, "<span class='notice'>[name] doesn't seem hungry!</span>")
+				to_chat(user, SPAN_NOTICE("\The [src] doesn't seem hungry!"))
 		else
-			to_chat(user, "[name] doesn't seem interested in that.")
+			to_chat(user, "\The [src] doesn't seem interested in that.")
 	else
 		..()
 
