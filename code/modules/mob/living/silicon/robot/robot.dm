@@ -1125,3 +1125,13 @@
 		to_chat(src, SPAN_WARNING("You have already grabbed something!"))
 		return FALSE
 	return TRUE
+
+/mob/living/silicon/robot/prepare_for_despawn()
+	clear_brain()
+	if(module)
+		for(var/obj/item/I in module) // the tools the borg has; metal, glass, guns etc
+			for(var/obj/item/O in I.get_contained_external_atoms()) // the things inside the tools, if anything; mainly for janiborg trash bags
+				O.forceMove(src)
+			qdel(I)
+		QDEL_NULL(module)
+	return ..()

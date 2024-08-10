@@ -181,6 +181,10 @@
 /obj/structure/table/woodentable/ebony,
 /turf/floor/wood/walnut,
 /area/shaded_hills/forester_hut)
+"Uz" = (
+/obj/effect/departure_signpost/north,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/woods)
 "VA" = (
 /obj/abstract/landmark/start/shaded_hills/traveller,
 /turf/floor/natural/path/basalt,
@@ -1740,7 +1744,7 @@ lC
 lC
 lC
 YB
-lU
+Uz
 HA
 HA
 HA

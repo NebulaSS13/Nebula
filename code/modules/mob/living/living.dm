@@ -1800,3 +1800,25 @@ default behaviour is:
 			return FALSE
 
 	return TRUE
+
+/mob/living/proc/prepare_for_despawn()
+	//Update any existing objectives involving this mob.
+	for(var/datum/objective/objective in global.all_objectives)
+		// We don't want revs to get objectives that aren't for heads of staff. Letting
+		// them win or lose based on cryo is silly so we remove the objective.
+		if(objective.target == mind)
+			if(objective.owner?.current)
+				to_chat(objective.owner.current, SPAN_DANGER("You get the feeling your target, [real_name], is no longer within your reach..."))
+			qdel(objective)
+	//Handle job slot/tater cleanup.
+	if(mind)
+		if(mind.assigned_job)
+			mind.assigned_job.clear_slot()
+		if(mind.objectives.len)
+			mind.objectives = null
+			mind.assigned_special_role = null
+	// Delete them from datacore.
+	var/datum/computer_file/report/crew_record/record = get_crewmember_record(sanitize(real_name))
+	if(record)
+		qdel(record)
+	return TRUE

@@ -1046,6 +1046,10 @@
 "Rl" = (
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/downlands)
+"Rz" = (
+/obj/effect/departure_signpost/east,
+/turf/floor/natural/dirt,
+/area/shaded_hills/outside/downlands)
 "RC" = (
 /obj/structure/railing/mapped/wooden/walnut,
 /turf/floor/natural/grass,
@@ -22849,7 +22853,7 @@ HI
 HI
 HI
 TR
-TR
+Rz
 EV
 Gq
 Ic
