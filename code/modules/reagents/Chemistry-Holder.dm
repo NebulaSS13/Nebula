@@ -394,27 +394,28 @@ var/global/obj/temp_reagents_holder = new
 		else
 			handle_update()
 
-/datum/reagents/proc/has_reagent(var/reagent_type, var/amount, var/phase)
-	if(phase)
-		if(phase == MAT_PHASE_SOLID)
-			. = SOLID_VOLUME(src, reagent_type)
-		else if(phase == MAT_PHASE_LIQUID)
-			. = LIQUID_VOLUME(src, reagent_type)
+/datum/reagents/proc/has_reagent(var/reagent_type, var/amount, var/phases)
+	. = 0
+	if(phases)
+		if(phases & MAT_PHASE_SOLID)
+			. += SOLID_VOLUME(src, reagent_type)
+		if(phases & MAT_PHASE_LIQUID)
+			. += LIQUID_VOLUME(src, reagent_type)
 	else
 		. = REAGENT_VOLUME(src, reagent_type)
 	if(. && amount)
 		. = (. >= amount)
 
-/datum/reagents/proc/has_any_reagent(var/list/check_reagents, var/phase)
+/datum/reagents/proc/has_any_reagent(var/list/check_reagents, var/phases)
 	for(var/check in check_reagents)
-		if(has_reagent(check, check_reagents[check], phase))
+		if(has_reagent(check, check_reagents[check], phases))
 			return TRUE
 	return FALSE
 
-/datum/reagents/proc/has_all_reagents(var/list/check_reagents, var/phase)
+/datum/reagents/proc/has_all_reagents(var/list/check_reagents, var/phases)
 	. = TRUE
 	for(var/check in check_reagents)
-		. = min(., has_reagent(check, check_reagents[check], phase))
+		. = min(., has_reagent(check, check_reagents[check], phases))
 		if(!.)
 			return
 

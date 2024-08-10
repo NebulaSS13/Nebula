@@ -78,3 +78,5 @@
 #define DEFAULT_GAS_OXIDIZER   /decl/material/gas/oxygen
 
 #define CHEM_REACTION_FLAG_OVERFLOW_CONTAINER BITFLAG(0)
+
+#define MAX_SCRAP_MATTER (SHEET_MATERIAL_AMOUNT * 5) // Maximum amount of matter in chemical scraps

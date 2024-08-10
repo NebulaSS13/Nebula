@@ -76,8 +76,8 @@
 		return FLUID_MAX_DEPTH
 	var/obj/structure/glass_tank/aquarium = locate() in contents
 	if(aquarium)
-		return aquarium.reagents?.total_liquid_volume * TANK_WATER_MULTIPLIER
-	return reagents?.total_liquid_volume || 0
+		return aquarium.reagents?.total_volume * TANK_WATER_MULTIPLIER
+	return reagents?.total_volume || 0
 
 /turf/proc/show_bubbles()
 	set waitfor = FALSE
@@ -95,7 +95,7 @@
 				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-	else if(reagents?.total_liquid_volume > FLUID_QDEL_POINT)
+	else if(reagents?.total_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 
 /turf/get_reagents()
@@ -134,8 +134,7 @@
 	if(!target.reagents)
 		target.create_reagents(FLUID_MAX_DEPTH)
 
-	// We reference total_volume instead of total_liquid_volume here because the maximum volume limits of the turfs still respect solid volumes, even if the fluid
-	// system mostly cares about the liquid volume.
+	// We reference total_volume instead of total_liquid_volume here because the maximum volume limits of the turfs still respect solid volumes, and depth is still determined by total volume.
 	reagents.trans_to_turf(target, min(reagents.total_volume, min(target.reagents.maximum_volume - target.reagents.total_volume, amount)), defer_update = defer_update)
 	if(defer_update)
 		if(!QDELETED(reagents))
@@ -173,7 +172,7 @@
 	if(reagents?.total_liquid_volume < FLUID_SLURRY)
 		dump_solid_reagents()
 
-	if(reagents?.total_liquid_volume > FLUID_QDEL_POINT)
+	if(reagents?.total_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 		if(primary_reagent && (REAGENT_VOLUME(reagents, primary_reagent.type) >= primary_reagent.slippery_amount))
@@ -192,7 +191,7 @@
 
 	for(var/checkdir in global.cardinal)
 		var/turf/neighbor = get_step_resolving_mimic(src, checkdir)
-		if(neighbor?.reagents?.total_liquid_volume > FLUID_QDEL_POINT)
+		if(neighbor?.reagents?.total_volume > FLUID_QDEL_POINT)
 			ADD_ACTIVE_FLUID(neighbor)
 
 /turf/proc/dump_solid_reagents(datum/reagents/solids)
@@ -202,11 +201,11 @@
 		var/list/matter_list = list()
 		for(var/reagent_type in solids.solid_volumes)
 			var/reagent_amount = solids.solid_volumes[reagent_type]
-			matter_list[reagent_type] = reagent_amount/REAGENT_UNITS_PER_MATERIAL_UNIT
+			matter_list[reagent_type] = round(reagent_amount/REAGENT_UNITS_PER_MATERIAL_UNIT)
 			solids.remove_reagent(reagent_type, reagent_amount, defer_update = TRUE, removed_phases = MAT_PHASE_SOLID)
 
 		var/obj/item/debris/scraps/chemical/scraps = locate() in contents
-		if(!scraps)
+		if(!istype(scraps) || scraps.get_total_matter() >= MAX_SCRAP_MATTER)
 			scraps = new(src)
 		if(!LAZYLEN(scraps.matter))
 			scraps.matter = matter_list
