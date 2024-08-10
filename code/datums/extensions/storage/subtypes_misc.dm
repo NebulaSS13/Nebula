@@ -113,6 +113,15 @@
 		return worms < COMPOST_MAX_WORMS
 	return W.is_compostable()
 
+/datum/storage/hopper/mortar
+	max_w_class = ITEM_SIZE_NORMAL * 2
+
+/datum/storage/hopper/mortar/can_be_inserted(obj/item/inserting_item, mob/user, stop_messages)
+	. = ..()
+	if(!.)
+		return
+	return inserting_item.reagents?.total_volume > 0
+
 /datum/storage/photo_album
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
 	can_hold = list(/obj/item/photo)
