@@ -1,0 +1,5 @@
+author: Penelope Haze
+changes:
+  - {tweak: Mortars (for grinding) are now capable of holding more than one item at
+      a time.}
+delete-after: true
