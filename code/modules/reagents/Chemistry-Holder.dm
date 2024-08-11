@@ -471,7 +471,7 @@ var/global/obj/temp_reagents_holder = new
 		return
 
 	if(isturf(target.loc) && min_spill && max_spill)
-		var/spill = FLOOR(amount*(rand(min_spill, max_spill)/100))
+		var/spill = floor(amount*(rand(min_spill, max_spill)/100))
 		if(spill)
 			amount -= spill
 			trans_to_turf(target.loc, spill, multiplier, copy, defer_update)

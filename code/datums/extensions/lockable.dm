@@ -132,8 +132,8 @@
 	Returns null if there are no problems. Or a text string describing the problem otherwise.
  */
 /datum/extension/lockable/proc/keycode_issues_text(code)
-	if(length(code) < FLOOR(max_code_length * 0.5) || length(code) > max_code_length)
-		return "Keycode must be between [FLOOR(max_code_length * 0.5)] and [max_code_length] numbers long."
+	if(length(code) < floor(max_code_length * 0.5) || length(code) > max_code_length)
+		return "Keycode must be between [floor(max_code_length * 0.5)] and [max_code_length] numbers long."
 	return null //Return null, since we have no issues
 
 /**

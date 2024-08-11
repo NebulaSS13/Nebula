@@ -88,7 +88,7 @@
 				// Dump the material out as a stack.
 				var/obj/item/stack/material/cubestack = created_stack_type
 				var/max_stack = initial(cubestack.max_amount)
-				var/stack_amount = FLOOR(munched_matter[mat] / SHEET_MATERIAL_AMOUNT)
+				var/stack_amount = floor(munched_matter[mat] / SHEET_MATERIAL_AMOUNT)
 
 				// Keep track of any trace matter for the next run.
 				munched_matter[mat] -= stack_amount * SHEET_MATERIAL_AMOUNT

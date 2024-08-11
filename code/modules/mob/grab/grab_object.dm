@@ -297,7 +297,7 @@
 	return current_grab.force_danger
 
 /obj/item/grab/proc/grab_slowdown()
-	. = CEILING(affecting?.get_object_size() * current_grab.grab_slowdown)
+	. = ceil(affecting?.get_object_size() * current_grab.grab_slowdown)
 	. /= (affecting?.movable_flags & MOVABLE_FLAG_WHEELED) ? 2 : 1
 	. = max(.,1)
 

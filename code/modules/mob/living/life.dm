@@ -194,7 +194,7 @@
 		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
 	var/decl/species/my_species = get_species()
-	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
+	damage = floor(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 		take_damage(damage * RADIATION_SPEED_COEFFICIENT, TOX)
@@ -633,7 +633,7 @@
 	// Calculate the expected and actual number of functioning legs we have.
 	var/has_sufficient_working_legs = TRUE
 	var/list/root_limb_tags  = root_bodytype.organ_tags_by_category[ORGAN_CATEGORY_STANCE_ROOT]
-	var/minimum_working_legs = CEILING(length(root_limb_tags) * 0.5)
+	var/minimum_working_legs = ceil(length(root_limb_tags) * 0.5)
 	if(minimum_working_legs > 0)
 		var/leg_count = 0
 		has_sufficient_working_legs = FALSE

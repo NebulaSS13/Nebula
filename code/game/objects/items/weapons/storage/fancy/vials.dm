@@ -16,7 +16,7 @@
 /obj/item/box/fancy/vials/on_update_icon()
 	. = ..()
 	var/key_count = count_by_type(contents, key_type)
-	icon_state = "[initial(icon_state)][FLOOR(key_count/2)]"
+	icon_state = "[initial(icon_state)][floor(key_count/2)]"
 
 /*
  * Not actually a "fancy" storage...
@@ -38,7 +38,7 @@
 /obj/item/lockbox/vials/on_update_icon()
 	. = ..()
 	var/total_contents = count_by_type(contents, /obj/item/chems/glass/beaker/vial)
-	icon_state = "vialbox[FLOOR(total_contents/2)]"
+	icon_state = "vialbox[floor(total_contents/2)]"
 	if (!broken)
 		add_overlay("led[locked]")
 		if(locked)

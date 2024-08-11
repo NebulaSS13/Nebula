@@ -182,9 +182,9 @@
 		// Add speed to this dimension of our position.
 		position[i] += clamp((speed[i] * OVERMAP_SPEED_CONSTANT) * (wait / (1 SECOND)), -1, 1)
 		if(position[i] < 0)
-			deltas[i] = CEILING(position[i])
+			deltas[i] = ceil(position[i])
 		else if(position[i] > 0)
-			deltas[i] = FLOOR(position[i])
+			deltas[i] = floor(position[i])
 		moved = TRUE
 		// Delta over 0 means we've moved a turf, so we adjust our position accordingly.
 		if(deltas[i] != 0)

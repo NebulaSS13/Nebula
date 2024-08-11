@@ -45,7 +45,7 @@
 	var/list/matter_for_product = atom_info_repository.get_matter_for(product_type, /decl/material/placeholder, 1)
 	for(var/mat in matter_for_product)
 		required_volume += matter_for_product[mat]
-	required_volume = CEILING(required_volume * REAGENT_UNITS_PER_MATERIAL_UNIT)
+	required_volume = ceil(required_volume * REAGENT_UNITS_PER_MATERIAL_UNIT)
 	if(required_volume > 0)
 		if(reagents)
 			reagents.maximum_volume = required_volume

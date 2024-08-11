@@ -72,7 +72,7 @@
 
 	SetName(lowertext("[fullname] sandwich"))
 	if(length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
-	w_class = CEILING(clamp((ingredients.len/2),2,4))
+	w_class = ceil(clamp((ingredients.len/2),2,4))
 
 /obj/item/food/csandwich/Destroy()
 	for(var/obj/item/O in ingredients)

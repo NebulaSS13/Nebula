@@ -243,8 +243,8 @@
 
 	//Get the origin of the lower left corner where the level's edge begins at on the world.
 	//#FIXME: This is problematic when dealing with an even width/height
-	var/x_origin = origin_is_world_center? max(FLOOR((world.maxx - level_max_width)  / 2), 1) : 1
-	var/y_origin = origin_is_world_center? max(FLOOR((world.maxy - level_max_height) / 2), 1) : 1
+	var/x_origin = origin_is_world_center? max(floor((world.maxx - level_max_width)  / 2), 1) : 1
+	var/y_origin = origin_is_world_center? max(floor((world.maxy - level_max_height) / 2), 1) : 1
 
 	//The first x/y that's past the edge and within the accessible level
 	level_inner_min_x = x_origin + TRANSITIONEDGE

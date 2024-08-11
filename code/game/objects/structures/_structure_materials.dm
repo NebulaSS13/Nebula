@@ -70,7 +70,7 @@
 				placing = (matter[mat] / SHEET_MATERIAL_AMOUNT) * 0.75
 				if(parts_type)
 					placing *= atom_info_repository.get_matter_multiplier_for(parts_type, mat, placing)
-				placing = FLOOR(placing)
+				placing = floor(placing)
 			else
 				placing = parts_amount
 			if(placing > 0)

@@ -120,11 +120,11 @@ var/global/list/beam_icon_cache = list() // shut up chinsky I do not have a cach
 		//Position the effect so the beam is one continous line
 		var/a
 		if(abs(Pixel_x)>32)
-			a = Pixel_x > 0 ? round(Pixel_x/32) : CEILING(Pixel_x/32)
+			a = Pixel_x > 0 ? round(Pixel_x/32) : ceil(Pixel_x/32)
 			X.x += a
 			Pixel_x %= 32
 		if(abs(Pixel_y)>32)
-			a = Pixel_y > 0 ? round(Pixel_y/32) : CEILING(Pixel_y/32)
+			a = Pixel_y > 0 ? round(Pixel_y/32) : ceil(Pixel_y/32)
 			X.y += a
 			Pixel_y %= 32
 

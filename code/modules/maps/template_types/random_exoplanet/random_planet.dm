@@ -246,7 +246,7 @@
 	var/list/places
 	var/attempts       = 10 * amount_shuttle_landing_points
 	var/points_left    = amount_shuttle_landing_points
-	var/landing_radius = CEILING(max_shuttle_radius / 2)
+	var/landing_radius = ceil(max_shuttle_radius / 2)
 	var/border_padding = landing_radius + 3
 
 	while(points_left)

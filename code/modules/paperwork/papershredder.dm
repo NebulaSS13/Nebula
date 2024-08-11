@@ -177,7 +177,7 @@
 /obj/machinery/papershredder/on_update_icon()
 	cut_overlays()
 	var/ratio = ((cached_total_matter * 5) / max_total_matter)
-	icon_state = "papershredder[clamp(CEILING(ratio), 0, 5)]"
+	icon_state = "papershredder[clamp(ceil(ratio), 0, 5)]"
 	if(!is_unpowered())
 		add_overlay("papershredder_power")
 		if(is_broken() || is_bin_full())

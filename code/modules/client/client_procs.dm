@@ -501,8 +501,8 @@ var/global/const/MAX_VIEW = 41
 		return // Some kind of malformed winget(), do not proceed.
 
 	// Rescale as needed.
-	var/res_x =    get_config_value(/decl/config/num/clients/lock_client_view_x) || CEILING(text2num(view_components[1]) / divisor)
-	var/res_y =    get_config_value(/decl/config/num/clients/lock_client_view_y) || CEILING(text2num(view_components[2]) / divisor)
+	var/res_x =    get_config_value(/decl/config/num/clients/lock_client_view_x) || ceil(text2num(view_components[1]) / divisor)
+	var/res_y =    get_config_value(/decl/config/num/clients/lock_client_view_y) || ceil(text2num(view_components[2]) / divisor)
 	var/max_view = get_config_value(/decl/config/num/clients/max_client_view_x)  || MAX_VIEW
 
 	last_view_x_dim = clamp(res_x, MIN_VIEW, max_view)

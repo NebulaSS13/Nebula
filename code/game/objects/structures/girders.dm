@@ -66,7 +66,7 @@
 		effective_cover *= 2
 	if(!anchored)
 		effective_cover *= 0.5
-	effective_cover = clamp(FLOOR(effective_cover), 0, 100)
+	effective_cover = clamp(floor(effective_cover), 0, 100)
 	if(Proj.original != src && !prob(effective_cover))
 		return PROJECTILE_CONTINUE
 	var/damage = Proj.get_structure_damage()
@@ -75,7 +75,7 @@
 	if(!istype(Proj, /obj/item/projectile/beam))
 		damage *= 0.4
 	if(reinf_material)
-		damage = FLOOR(damage * 0.75)
+		damage = floor(damage * 0.75)
 	..()
 	if(damage)
 		take_damage(damage, Proj.atom_damage_type)

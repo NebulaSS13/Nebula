@@ -1,7 +1,7 @@
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
 	var/d = max - min
-	var/t = FLOOR((val - min) / d)
+	var/t = floor((val - min) / d)
 	return val - (t * d)
 
 // Trigonometric functions.
@@ -37,7 +37,7 @@
 	return (val >= min) && (val <= max)
 
 /proc/IsInteger(x)
-	return FLOOR(x) == x
+	return floor(x) == x
 
 /proc/IsMultiple(x, y)
 	return x % y == 0
@@ -91,7 +91,7 @@
 /proc/polar2turf(x, y, z, angle, distance)
 	var/x_offset = POLAR_TO_BYOND_X(distance, angle)
 	var/y_offset = POLAR_TO_BYOND_Y(distance, angle)
-	return locate(CEILING(x + x_offset), CEILING(y + y_offset), z)
+	return locate(ceil(x + x_offset), ceil(y + y_offset), z)
 
 /proc/get_turf_from_angle(x, y, z, angle, ideal_distance)
 	do

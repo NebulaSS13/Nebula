@@ -53,7 +53,7 @@
 	return (mult * (4 - severity)) + (severity != 1? rand(-(mult / severity), (mult / severity)) : 0 )
 
 /obj/item/proc/explosion_severity_damage_multiplier()
-	return CEILING(get_max_health() / 3)
+	return ceil(get_max_health() / 3)
 
 /obj/item/is_burnable()
 	return simulated

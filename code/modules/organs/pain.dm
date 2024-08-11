@@ -3,7 +3,7 @@
 		var/matrix/M
 		if(client && max(client.last_view_x_dim, client.last_view_y_dim) > 7)
 			M = matrix()
-			M.Scale(CEILING(client.last_view_x_dim/7), CEILING(client.last_view_y_dim/7))
+			M.Scale(ceil(client.last_view_x_dim/7), ceil(client.last_view_y_dim/7))
 		pain.transform = M
 		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
 		animate(pain, alpha = 0, time = 20)
@@ -24,9 +24,9 @@
 	// Excessive halloss is horrible, just give them enough to make it visible.
 	if(!nohalloss && power)
 		if(affecting)
-			affecting.add_pain(CEILING(power/2))
+			affecting.add_pain(ceil(power/2))
 		else
-			take_damage(CEILING(power/2), PAIN)
+			take_damage(ceil(power/2), PAIN)
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks

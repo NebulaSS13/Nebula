@@ -269,7 +269,7 @@
 		data["mode"] = 1
 		data["product"] = currently_vending.item_name
 		data["price"] = cur.format_value(currently_vending.price)
-		data["price_num"] = FLOOR(currently_vending.price / cur.absolute_value)
+		data["price_num"] = floor(currently_vending.price / cur.absolute_value)
 		data["message"] = status_message
 		data["message_err"] = status_error
 	else
@@ -286,7 +286,7 @@
 				"key" =    key,
 				"name" =   I.item_name,
 				"price" =  cur.format_value(I.price),
-				"price_num" = FLOOR(I.price / cur.absolute_value),
+				"price_num" = floor(I.price / cur.absolute_value),
 				"color" =  I.display_color,
 				"amount" = I.get_amount())))
 

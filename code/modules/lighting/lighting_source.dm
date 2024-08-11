@@ -148,7 +148,6 @@
 #define POLAR_TO_CART_X(R,T) ((R) * cos(T))
 #define POLAR_TO_CART_Y(R,T) ((R) * sin(T))
 #define DETERMINANT(A_X,A_Y,B_X,B_Y) ((A_X)*(B_Y) - (A_Y)*(B_X))
-#define MINMAX(NUM) ((NUM) < 0 ? -round(-(NUM)) : round(NUM))
 #define ARBITRARY_NUMBER 10
 
 /datum/light_source/proc/regenerate_angle(ndir)
@@ -190,16 +189,15 @@
 
 	// Convert our angle + range into a vector.
 	limit_a_x = POLAR_TO_CART_X(light_range + ARBITRARY_NUMBER, limit_a_t)
-	limit_a_x = MINMAX(limit_a_x)
+	limit_a_x = trunc(limit_a_x)
 	limit_a_y = POLAR_TO_CART_Y(light_range + ARBITRARY_NUMBER, limit_a_t)
-	limit_a_y = MINMAX(limit_a_y)
+	limit_a_y = trunc(limit_a_y)
 	limit_b_x = POLAR_TO_CART_X(light_range + ARBITRARY_NUMBER, limit_b_t)
-	limit_b_x = MINMAX(limit_b_x)
+	limit_b_x = trunc(limit_b_x)
 	limit_b_y = POLAR_TO_CART_Y(light_range + ARBITRARY_NUMBER, limit_b_t)
-	limit_b_y = MINMAX(limit_b_y)
+	limit_b_y = trunc(limit_b_y)
 
 #undef ARBITRARY_NUMBER
-#undef MINMAX
 #undef POLAR_TO_CART_Y
 #undef POLAR_TO_CART_X
 

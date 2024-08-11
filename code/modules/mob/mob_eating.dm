@@ -6,7 +6,7 @@
 /mob/proc/get_eaten_transfer_amount(var/default)
 	. = default
 	if(issmall(src))
-		. = CEILING(.*0.5)
+		. = ceil(.*0.5)
 
 /mob/proc/can_eat_food_currently(obj/eating, mob/user)
 	return TRUE

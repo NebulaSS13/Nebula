@@ -13,7 +13,7 @@ var/global/const/SKYBOX_DIMENSION = 736 // Largest measurement for icon sides, u
 
 /obj/skybox/Initialize()
 	if(!max_view_dim)
-		max_view_dim = CEILING(SKYBOX_DIMENSION / world.icon_size)
+		max_view_dim = ceil(SKYBOX_DIMENSION / world.icon_size)
 	. = ..()
 
 /client

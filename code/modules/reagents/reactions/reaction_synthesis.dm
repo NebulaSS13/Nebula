@@ -14,8 +14,8 @@
 
 /decl/chemical_reaction/synthesis/fiberglass/Initialize()
 	required_reagents = list(
-		/decl/material/solid/glass =   CEILING(REAGENT_UNITS_PER_MATERIAL_SHEET/2),
-		/decl/material/solid/organic/plastic = CEILING(REAGENT_UNITS_PER_MATERIAL_SHEET/2)
+		/decl/material/solid/glass =   ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2),
+		/decl/material/solid/organic/plastic = ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2)
 	)
 	. = ..()
 
@@ -23,7 +23,7 @@
 	..()
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
-		created_volume = CEILING(created_volume)
+		created_volume = ceil(created_volume)
 		if(created_volume > 0)
 			var/decl/material/mat = GET_DECL(/decl/material/solid/fiberglass)
 			mat.create_object(location, created_volume)
@@ -53,7 +53,7 @@
 		var/list/removing_reagents = list()
 		for(var/rtype in holder.reagent_volumes)
 			if(rtype != /decl/material/liquid/crystal_agent)
-				var/solidifying = FLOOR(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
+				var/solidifying = floor(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 				if(solidifying)
 					SSmaterials.create_object(rtype, location, solidifying, /obj/item/stack/material/cubes)
 					removing_reagents[rtype] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
@@ -88,7 +88,7 @@
 		for(var/rtype in holder.reagent_volumes)
 			var/decl/material/mat = GET_DECL(rtype)
 			if(mat.default_solid_form == /obj/item/stack/material/aerogel)
-				var/solidifying = FLOOR(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
+				var/solidifying = floor(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 				if(solidifying)
 					SSmaterials.create_object(rtype, location, solidifying)
 					removing_reagents[rtype] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
@@ -120,7 +120,7 @@
 	var/turf/T = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(!istype(T))
 		return
-	var/create_stacks = FLOOR(created_volume)
+	var/create_stacks = floor(created_volume)
 	if(create_stacks <= 0)
 		return
 	new /obj/item/stack/medical/resin/crafted(T, create_stacks)
@@ -141,7 +141,7 @@
 	var/turf/T = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(!istype(T))
 		return
-	var/create_soap = FLOOR(created_volume)
+	var/create_soap = floor(created_volume)
 	if(create_soap <= 0)
 		return
 	for(var/i = 1 to create_soap)

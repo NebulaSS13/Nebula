@@ -272,7 +272,7 @@
 
 		//figure out how much metal we need
 		var/amount_needed = (current_max_health - current_health) / DOOR_REPAIR_AMOUNT
-		amount_needed = CEILING(amount_needed)
+		amount_needed = ceil(amount_needed)
 
 		var/obj/item/stack/stack = I
 		var/transfer

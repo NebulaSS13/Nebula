@@ -228,7 +228,7 @@
 
 	var/can_carry = can_pull_size
 	if(loc?.has_gravity())
-		can_carry = FLOOR(can_carry * 0.75)
+		can_carry = floor(can_carry * 0.75)
 	for(var/obj/item/grab/G in get_active_grabs())
 		can_carry -= G.affecting.get_object_size()
 		if(can_carry < 0)

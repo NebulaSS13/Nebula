@@ -544,7 +544,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		if(BP_IS_BRITTLE(S))
 			to_chat(user, SPAN_WARNING("\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
 			return TRUE
-		var/use_amt = min(src.amount, CEILING(S.burn_dam/3), 5)
+		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)
 		if(can_use(use_amt))
 			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
 				use(use_amt)
@@ -875,8 +875,8 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/item/stack/cable_coil/fabricator/get_amount()
 	var/obj/item/cell/cell = get_cell()
-	. = (cell ? FLOOR(cell.charge / cost_per_cable) : 0)
+	. = (cell ? floor(cell.charge / cost_per_cable) : 0)
 
 /obj/item/stack/cable_coil/fabricator/get_max_amount()
 	var/obj/item/cell/cell = get_cell()
-	. = (cell ? FLOOR(cell.maxcharge / cost_per_cable) : 0)
+	. = (cell ? floor(cell.maxcharge / cost_per_cable) : 0)

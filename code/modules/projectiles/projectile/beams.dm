@@ -61,8 +61,8 @@
 				P.light_color = color
 				P.firer = firer
 				P.shot_from = shot_from
-				P.damage = FLOOR(damage/split_count)
-				P.armor_penetration = FLOOR(armor_penetration/split_count)
+				P.damage = floor(damage/split_count)
+				P.armor_penetration = floor(armor_penetration/split_count)
 				P.launch(pick_n_take(targets), def_zone)
 	. = ..()
 

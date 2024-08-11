@@ -99,7 +99,7 @@
 		// At best, you get about 5 pieces of clay or dirt from digging the
 		// associated turfs. So we'll make it cost 5 to put some back.
 		// TODO: maybe make this use the diggable loot list.
-		var/stack_depth = CEILING((abs(get_physical_height()) / TRENCH_DEPTH_PER_ACTION) * 5)
+		var/stack_depth = ceil((abs(get_physical_height()) / TRENCH_DEPTH_PER_ACTION) * 5)
 		var/using_lumps = max(1, min(stack.amount, min(stack_depth, 5)))
 		if(stack.use(using_lumps))
 			set_physical_height(min(0, get_physical_height() + ((using_lumps / 5) * TRENCH_DEPTH_PER_ACTION)))

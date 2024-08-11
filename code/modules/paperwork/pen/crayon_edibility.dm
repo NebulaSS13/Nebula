@@ -8,7 +8,7 @@
 	if(!eater_ingested)
 		return
 	if(pigment_type)
-		var/partial_amount = CEILING(amount * 0.4)
+		var/partial_amount = ceil(amount * 0.4)
 		eater_ingested.add_reagent(pigment_type, partial_amount)
 		eater_ingested.add_reagent(/decl/material/solid/organic/wax, amount - partial_amount)
 	else

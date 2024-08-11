@@ -9,7 +9,7 @@
 	for(var/R in thing.reagents.reagent_volumes)
 		if(!base_storage_capacity[R])
 			continue
-		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), FLOOR((storage_capacity[R] - stored_material[R]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
+		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), floor((storage_capacity[R] - stored_material[R]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
 		if(taking_reagent <= 0)
 			continue
 		var/reagent_matter = round(taking_reagent / REAGENT_UNITS_PER_MATERIAL_UNIT)
@@ -34,7 +34,7 @@
 	. = SUBSTANCE_TAKEN_NONE
 
 	var/obj/item/stack/stack_ref = istype(thing, /obj/item/stack) && thing
-	var/stack_matter_div = stack_ref ? max(1, CEILING(SHEET_MATERIAL_AMOUNT * stack_ref.matter_multiplier)) : 1
+	var/stack_matter_div = stack_ref ? max(1, ceil(SHEET_MATERIAL_AMOUNT * stack_ref.matter_multiplier)) : 1
 	var/stacks_used = 0
 
 	var/mat_colour = thing.color
@@ -53,7 +53,7 @@
 
 		stored_material[material_def.type] += taking_material
 		if(stack_ref)
-			stacks_used = max(stacks_used, CEILING(taking_material/stack_matter_div))
+			stacks_used = max(stacks_used, ceil(taking_material/stack_matter_div))
 
 		if(storage_capacity[material_def.type] == stored_material[material_def.type])
 			. = SUBSTANCE_TAKEN_FULL

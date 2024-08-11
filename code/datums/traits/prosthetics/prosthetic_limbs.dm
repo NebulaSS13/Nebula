@@ -24,7 +24,7 @@
 	. = ..()
 	// Macro can generate float costs, round to closest point value.
 	if(trait_cost)
-		trait_cost = CEILING(trait_cost)
+		trait_cost = ceil(trait_cost)
 	if(bodypart_name)
 		if(model)
 			var/decl/bodytype/prosthetic/model_manufacturer = GET_DECL(model)

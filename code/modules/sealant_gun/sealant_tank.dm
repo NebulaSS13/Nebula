@@ -9,7 +9,7 @@
 
 /obj/item/sealant_tank/on_update_icon()
 	. = ..()
-	add_overlay("fill_[FLOOR((foam_charges/max_foam_charges) * 5)]")
+	add_overlay("fill_[floor((foam_charges/max_foam_charges) * 5)]")
 
 /obj/item/sealant_tank/examine(mob/user, distance)
 	. = ..()

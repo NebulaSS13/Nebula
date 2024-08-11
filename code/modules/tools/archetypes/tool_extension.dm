@@ -64,7 +64,7 @@
 	return LAZYACCESS(tool_use_sounds, archetype) || get_tool_property(archetype, TOOL_PROP_SOUND) || tool_archetype.tool_sound
 
 /datum/extension/tool/proc/get_expected_tool_use_delay(archetype, delay, mob/user, check_skill = SKILL_CONSTRUCTION)
-	. = CEILING(delay * get_tool_speed(archetype))
+	. = ceil(delay * get_tool_speed(archetype))
 	if(user && check_skill)
 		. *= user.skill_delay_mult(check_skill, 0.3)
 	. = max(round(.), 5)

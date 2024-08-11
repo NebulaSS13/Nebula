@@ -106,7 +106,7 @@
 
 		weaving_progress += loaded_thread.matter_per_piece[weaving_type]
 		var/obj/item/stack/material/product_ref = product_type
-		var/matter_per_product = CEILING(initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)
+		var/matter_per_product = ceil(initial(product_ref.matter_multiplier) * SHEET_MATERIAL_AMOUNT)
 		if(weaving_progress > matter_per_product)
 			var/produced = round(weaving_progress / matter_per_product)
 			processed += produced
