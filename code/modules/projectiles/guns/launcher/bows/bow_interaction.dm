@@ -4,18 +4,23 @@
 		relax_tension(user)
 		return TRUE
 
-	if(!get_loaded_arrow(user) && user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
-		for(var/obj/item/stack/material/bow_ammo/ammo in user.get_inactive_held_items())
-			attackby(ammo, user)
-			if(get_loaded_arrow(user))
-				start_drawing(user)
-				return TRUE
+	if(!get_loaded_arrow(user) && !autofire_enabled && user.skill_check(SKILL_WEAPONS, SKILL_ADEPT) && load_available_ammo(user))
+		return TRUE
 
-	if(get_loaded_arrow(user))
+	if(!autofire_enabled && get_loaded_arrow(user))
 		start_drawing(user)
 		return TRUE
 
 	return ..()
+
+/obj/item/gun/launcher/bow/proc/load_available_ammo(mob/living/user)
+	for(var/obj/item/stack/material/bow_ammo/ammo in user.get_inactive_held_items())
+		attackby(ammo, user)
+		if(get_loaded_arrow(user))
+			if(!autofire_enabled)
+				start_drawing(user)
+			return TRUE
+	return FALSE
 
 /obj/item/gun/launcher/bow/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))
@@ -59,10 +64,12 @@
 	update_icon()
 
 /obj/item/gun/launcher/bow/proc/relax_tension(mob/user)
-	if(user)
-		show_string_relax_message(user)
 	tension = 0
 	update_icon()
+	if(autofire_enabled)
+		clear_autofire()
+	else if(user)
+		show_string_relax_message(user)
 
 /obj/item/gun/launcher/bow/proc/try_string(mob/user, obj/item/bowstring/new_string)
 	if(string)

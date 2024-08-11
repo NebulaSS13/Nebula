@@ -135,7 +135,7 @@
 		deltimer(autofiring_timer)
 		autofiring_timer = null
 
-/obj/item/gun/proc/handle_autofire(var/autoturn)
+/obj/item/gun/proc/handle_autofire(autoturn)
 	set waitfor = FALSE
 	. = TRUE
 	if(QDELETED(autofiring_at) || QDELETED(autofiring_by))
@@ -145,9 +145,12 @@
 	if(!.)
 		clear_autofire()
 	else if(can_autofire())
-		if(autoturn)
-			autofiring_by.set_dir(get_dir(src, autofiring_at))
-		Fire(autofiring_at, autofiring_by, null, (get_dist(autofiring_at, autofiring_by) <= 1), FALSE, FALSE)
+		try_autofire(autoturn)
+
+/obj/item/gun/proc/try_autofire(autoturn)
+	if(autoturn)
+		autofiring_by.set_dir(get_dir(src, autofiring_at))
+	Fire(autofiring_at, autofiring_by, null, (get_dist(autofiring_at, autofiring_by) <= 1), FALSE, FALSE)
 
 /obj/item/gun/update_twohanding()
 	if(one_hand_penalty)
