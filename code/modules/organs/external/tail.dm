@@ -42,11 +42,11 @@
 
 	// Set our onmob appearance.
 	var/decl/sprite_accessory/tail/tail_data = get_sprite_accessory_by_category(SAC_TAIL)
-	if(tail_data.draw_accessory)
+	if(tail_data?.draw_accessory)
 		icon = tail_data.icon
 		icon_state = tail_data.icon_state
 
-	if(update_icon && !istype(H) && !QDELETED(H) && H != owner)
+	if(update_icon && istype(H) && !QDELETED(H) && H != owner)
 		H.update_tail_showing(FALSE)
 
 /obj/item/organ/external/tail/do_install(mob/living/human/target, affected, in_place, update_icon, detached)
