@@ -1632,7 +1632,7 @@ default behaviour is:
 		return range * range - 0.333
 	return range
 
-/mob/living/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+/mob/living/handle_flashed(var/flash_strength)
 
 	var/safety = eyecheck()
 	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
