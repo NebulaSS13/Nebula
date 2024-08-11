@@ -84,10 +84,9 @@
 
 	a_intent = I_HURT
 	. = A.attackby(attacking_with, src)
+	// attack effects are handled in natural_weapon's apply_hit_effect() instead of here
 	if(!.)
 		reset_offsets(anim_time = 2)
-	else if(isliving(A))
-		apply_attack_effects(A)
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)
