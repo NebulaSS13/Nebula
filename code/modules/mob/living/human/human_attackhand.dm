@@ -231,7 +231,7 @@
 	// Should this all be in Touch()?
 		var/mob/living/human/H = user
 		if(istype(H))
-			if(H != src && check_shields(0, null, H, H.get_target_zone(), H.name))
+			if(H != src && check_shields(0, null, H, H.get_target_zone(), H))
 				H.do_attack_animation(src)
 				return TRUE
 
