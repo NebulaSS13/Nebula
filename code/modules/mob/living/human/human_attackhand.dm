@@ -113,6 +113,10 @@
 		to_chat(user, SPAN_WARNING("You can't attack while incapacitated."))
 		return TRUE
 
+	// AI driven mobs have a melee telegraph that needs to be handled here.
+	if(user.a_intent == I_HURT && !user.do_attack_windup_checking(src))
+		return TRUE
+
 	if(!ishuman(user))
 		attack_generic(user, rand(1,3), "punched")
 		return TRUE
