@@ -107,6 +107,8 @@
 	var/wieldsound = 'sound/foley/scrape1.ogg'
 	var/unwieldsound = 'sound/foley/tooldrop1.ogg'
 
+	var/base_name
+
 /obj/item/get_color()
 	if(paint_color)
 		return paint_color
@@ -147,6 +149,8 @@
 	return origin_tech
 
 /obj/item/Initialize(var/ml, var/material_key)
+
+	base_name ||= name
 
 	if(isnull(current_health))
 		current_health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
@@ -712,7 +716,6 @@
 		return
 	usr.UnarmedAttack(src, usr.Adjacent(src))
 
-
 //This proc is executed when someone clicks the on-screen UI button. To make the UI button show, set the 'icon_action_button' to the icon_state of the image of the button in screen1_action.dmi
 //The default action is attack_self().
 //Checks before we get to here are: mob is alive, mob is not restrained, paralyzed, asleep, resting, laying, item is on the mob.
@@ -1067,7 +1070,9 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 // Supplied during loadout gear tweaking.
 /obj/item/proc/set_custom_name(var/new_name)
-	SetName(new_name)
+	base_name = new_name
+	material_alteration &= ~MAT_FLAG_ALTERATION_NAME
+	update_name()
 
 // Supplied during loadout gear tweaking.
 /obj/item/proc/set_custom_desc(var/new_desc)

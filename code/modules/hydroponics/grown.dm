@@ -23,6 +23,19 @@
 		else if(!seeds_extracted && seed.min_seed_extracted)
 			to_chat(user, SPAN_NOTICE("With a knife, you could extract at least [seed.min_seed_extracted] seed\s."))
 
+/obj/item/food/grown/update_name()
+	if(!seed)
+		return ..()
+	var/descriptor = list()
+	if(dry)
+		descriptor += "dried"
+	if(backyard_grilling_count > 0)
+		descriptor += "roasted"
+	if(length(descriptor))
+		SetName("[english_list(descriptor)] [seed.product_name]")
+	else
+		SetName("[seed.product_name]")
+
 /obj/item/food/grown/Initialize(mapload, material_key, skip_plate = FALSE, _seed)
 
 	if(isnull(seed) && _seed)
@@ -46,15 +59,7 @@
 	if(seed.scannable_result)
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 
-	var/descriptor = list()
-	if(dry)
-		descriptor += "dried"
-	if(backyard_grilling_count > 0)
-		descriptor += "roasted"
-	if(length(descriptor))
-		SetName("[english_list(descriptor)] [seed.product_name]")
-	else
-		SetName("[seed.product_name]")
+	update_name()
 	if(seed.product_material)
 		material = seed.product_material
 

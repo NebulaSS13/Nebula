@@ -18,8 +18,7 @@
 	var/base_icon = null // Base icon name for fill states
 
 /obj/item/chems/drinks/Initialize()
-	if(!base_name)
-		base_name = name
+	base_name ||= name
 	. = ..()
 
 /obj/item/chems/drinks/dragged_onto(var/mob/user)

@@ -8,7 +8,6 @@
 	obj_flags = OBJ_FLAG_HOLLOW
 	abstract_type = /obj/item/chems
 
-	var/base_name
 	var/base_desc
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = @"[5,10,15,25,30]"

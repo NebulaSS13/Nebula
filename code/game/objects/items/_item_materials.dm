@@ -102,9 +102,9 @@
 
 /obj/item/proc/update_name()
 	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
-		SetName("[material.adjective_name] [initial(name)]")
+		SetName("[material.adjective_name] [base_name || initial(name)]")
 	else
-		SetName(initial(name))
+		SetName(base_name || initial(name))
 
 /obj/item/get_matter_amount_modifier()
 	. = ..()
