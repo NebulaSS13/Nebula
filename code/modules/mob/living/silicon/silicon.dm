@@ -424,7 +424,7 @@
 	if(os)
 		os.Process()
 
-/mob/living/silicon/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+/mob/living/silicon/handle_flashed(var/flash_strength)
 	SET_STATUS_MAX(src, STAT_PARA, flash_strength)
 	SET_STATUS_MAX(src, STAT_WEAK, flash_strength)
 	return TRUE

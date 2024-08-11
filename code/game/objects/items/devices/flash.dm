@@ -88,7 +88,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	do_flash_animation(user, target)
 
-	if(target.stat != DEAD && target.handle_flashed(src, rand(str_min,str_max)))
+	if(target.stat != DEAD && target.handle_flashed(rand(str_min,str_max)))
 		admin_attack_log(user, target, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
 		if(!target.isSynthetic())
 			user.visible_message(SPAN_DANGER("\The [user] blinds \the [target] with \the [src]!"))
@@ -105,7 +105,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	do_flash_animation(user)
 	for(var/mob/living/M in oviewers(3, null))
-		M.handle_flashed(src, rand(str_min,str_max))
+		M.handle_flashed(rand(str_min,str_max))
 	return TRUE
 
 /obj/item/flash/emp_act(severity)
@@ -113,7 +113,7 @@
 		return FALSE
 	do_flash_animation()
 	for(var/mob/living/M in oviewers(3, null))
-		M.handle_flashed(src, rand(str_min,str_max))
+		M.handle_flashed(rand(str_min,str_max))
 
 /obj/item/flash/synthetic //not for regular use, weaker effects
 	name = "modified flash"
