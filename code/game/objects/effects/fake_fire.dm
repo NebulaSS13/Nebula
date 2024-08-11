@@ -33,17 +33,25 @@
 	if(lifetime)
 		QDEL_IN(src,lifetime)
 
+/obj/effect/fake_fire/proc/can_affect_atom(atom/target)
+	if(target == src)
+		return FALSE
+	return target.simulated
+
+/obj/effect/fake_fire/proc/can_affect_mob(mob/living/victim)
+	return can_affect_atom(victim)
+
 /obj/effect/fake_fire/Process()
 	if(!loc)
 		qdel(src)
 		return PROCESS_KILL
 	for(var/mob/living/victim in loc)
-		if(!victim.simulated)
+		if(!can_affect_mob(victim))
 			continue
 		victim.FireBurn(firelevel, last_temperature, pressure)
 	loc.fire_act(firelevel, last_temperature, pressure)
 	for(var/atom/burned in loc)
-		if(!burned.simulated || burned == src)
+		if(!can_affect_atom(burned))
 			continue
 		burned.fire_act(firelevel, last_temperature, pressure)
 
@@ -53,4 +61,17 @@
 
 /obj/effect/fake_fire/Destroy()
 	STOP_PROCESSING(SSobj,src)
-	. = ..()
+	return ..()
+
+// A subtype of fake_fire used for spells that shouldn't affect the caster.
+/obj/effect/fake_fire/variable/owned
+	var/mob/living/owner
+
+/obj/effect/fake_fire/variable/owned/can_affect_atom(atom/target)
+	if(target == owner)
+		return FALSE
+	return ..()
+
+/obj/effect/fake_fire/variable/owned/Destroy()
+	owner = null
+	return ..()
