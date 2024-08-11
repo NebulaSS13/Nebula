@@ -2,7 +2,7 @@
 // firemodes, projectile types, etc) so this'll have to  do for now.
 /obj/item/gun/get_base_value()
 	. = 100
-	if(silenced)
+	if(silencer)
 		. += 20
 
 	var/static/list/vars_to_value = list(

@@ -2948,7 +2948,7 @@
 /area/ministation/medical)
 "rU" = (
 /obj/structure/table,
-/obj/machinery/faxmachine,
+/obj/machinery/faxmachine/mapped,
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
 "rW" = (

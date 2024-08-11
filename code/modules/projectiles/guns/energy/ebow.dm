@@ -8,7 +8,7 @@
 	origin_tech = @'{"combat":2,"magnets":2,"esoteric":5}'
 	material = /decl/material/solid/metal/steel
 	slot_flags = SLOT_LOWER_BODY
-	silenced = 1
+	silencer = TRUE
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = /obj/item/projectile/energy/bolt
 	max_shots = 8

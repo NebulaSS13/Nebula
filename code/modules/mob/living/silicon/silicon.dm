@@ -50,9 +50,9 @@
 	global.silicon_mob_list += src
 	. = ..()
 
-	if(silicon_radio)
+	if(ispath(silicon_radio))
 		silicon_radio = new silicon_radio(src)
-	if(silicon_camera)
+	if(ispath(silicon_camera))
 		silicon_camera = new silicon_camera(src)
 	for(var/T in starting_stock_parts)
 		stock_parts += new T(src)
