@@ -37,12 +37,16 @@
 /obj/item/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(user.incapacitated())
 		return 0
-
 	//block as long as they are not directly behind us
 	var/bad_arc = user.dir && global.reverse_dir[user.dir] //arc of directions from which we cannot block
 	if(check_shield_arc(user, bad_arc, damage_source, attacker))
-		if(prob(get_block_chance(user, damage, damage_source, attacker)))
+		var/block_chance = get_block_chance(user, damage, damage_source, attacker)
+		if(attacker)
+			block_chance = max(0, block_chance - 10 * attacker.get_skill_difference(SKILL_COMBAT, user))
+		if(prob(block_chance))
 			user.visible_message("<span class='danger'>\The [user] blocks [attack_text] with \the [src]!</span>")
+			if(max_health != ITEM_HEALTH_NO_DAMAGE)
+				take_damage(damage)
 			return 1
 	return 0
 
@@ -126,6 +130,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/organic/wood = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("shoved", "bashed")
+	max_health = 250
 
 /obj/item/shield/buckler/handle_shield(mob/user)
 	. = ..()

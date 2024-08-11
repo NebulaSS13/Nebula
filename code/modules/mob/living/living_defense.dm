@@ -175,7 +175,7 @@
 	zone = get_zone_with_miss_chance(zone, src, miss_chance, ranged_attack=1)
 
 	if(zone && TT?.thrower && TT.thrower != src)
-		var/shield_check = check_shields(throw_damage, O, TT.thrower, zone, "[O]")
+		var/shield_check = check_shields(throw_damage, O, TT.thrower, zone, O)
 		if(shield_check == PROJECTILE_FORCE_MISS)
 			zone = null
 		else if(shield_check)
@@ -436,6 +436,8 @@
 	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
 	if(suit)
 		LAZYDISTINCTADD(checking_slots, suit)
+	if(isatom(attack_text))
+		attack_text = "\the [attack_text]"
 	for(var/obj/item/shield in checking_slots)
 		if(shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text))
 			return TRUE
