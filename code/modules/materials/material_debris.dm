@@ -27,7 +27,7 @@
 
 	// Safety check, although this should be prevented for player side interactions
 	if(total_matter > MAX_SCRAP_MATTER)
-		var/divisor = CEILING(total_matter / MAX_SCRAP_MATTER)
+		var/divisor = ceil(total_matter / MAX_SCRAP_MATTER)
 		var/list/matter_per_pile = list()
 
 		for(var/mat in matter)
