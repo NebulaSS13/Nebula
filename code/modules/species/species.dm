@@ -678,7 +678,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/list/all_accessories = decls_repository.get_decls_of_subtype(accessory_category_decl.base_accessory_type)
 		for(var/accessory_style in all_accessories)
 			var/decl/sprite_accessory/check_accessory = all_accessories[accessory_style]
-			if(!check_accessory || !check_accessory.accessory_is_available(null, src, bodytype))
+			if(!check_accessory || !check_accessory.accessory_is_available(null, src, bodytype, FALSE))
 				continue
 			ADD_SORTED(available_accessories, accessory_style, /proc/cmp_text_asc)
 			available_accessories[accessory_style] = check_accessory

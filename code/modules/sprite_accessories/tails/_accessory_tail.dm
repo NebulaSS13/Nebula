@@ -49,7 +49,7 @@
 	uid            = "acc_tail_hidden"
 	draw_accessory = TRUE
 
-/decl/sprite_accessory/tail/none/hide_tail/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype)
+/decl/sprite_accessory/tail/none/hide_tail/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype, list/traits)
 	. = ..() && (BP_TAIL in bodytype.has_limbs)
 
 /*

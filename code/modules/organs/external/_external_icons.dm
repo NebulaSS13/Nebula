@@ -193,7 +193,7 @@ var/global/list/organ_icon_cache = list()
 
 	var/list/refresh_accessories
 	if(accessory_metadata)
-		if(!accessory_decl.accessory_is_available(owner, species, bodytype))
+		if(!accessory_decl.accessory_is_available(owner, species, bodytype, FALSE))
 			return FALSE
 		var/list/existing_metadata = LAZYACCESS(accessories, accessory_type)
 		if(same_entries(existing_metadata, accessory_metadata))
@@ -363,7 +363,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	if(ispath(accessory_style))
 		accessory_style = GET_DECL(accessory_style)
 	// Check if this style is permitted for this species, period.
-	if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype))
+	if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype, FALSE))
 		return null
 	// Check if we are concealed (long hair under a hat for example).
 	if(accessory_style.is_hidden(src))
@@ -374,7 +374,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	for(var/acc_cat in _sprite_accessories)
 		for(var/accessory in _sprite_accessories[acc_cat])
 			var/decl/sprite_accessory/accessory_style = GET_DECL(accessory)
-			if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype))
+			if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype, FALSE))
 				_sprite_accessories[acc_cat] -= accessory
 				. = TRUE
 	if(.)

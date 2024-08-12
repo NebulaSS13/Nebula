@@ -28,7 +28,7 @@
 	if(istype(subject))
 		subject.update_body()
 
-/decl/sprite_accessory/cosmetics/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype)
+/decl/sprite_accessory/cosmetics/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype, list/traits)
 	. = ..()
 	if(.)
 		if(!bodytype)
