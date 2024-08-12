@@ -26,6 +26,7 @@
 	eye_innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 	eye_contaminant_guard = 1
 	eye_icon = 'mods/species/serpentid/icons/eyes.dmi'
+	uid = "bodytype_serpentid"
 
 	has_limbs = list(
 		BP_CHEST        = list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
@@ -71,3 +72,4 @@
 /decl/bodytype/serpentid/green
 	name = "green"
 	icon_base = 'mods/species/serpentid/icons/body_green.dmi'
+	uid = "bodytype_serpentid_green"

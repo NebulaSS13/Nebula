@@ -1,6 +1,8 @@
 var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype
+	decl_flags = DECL_FLAG_MANDATORY_UID
+	abstract_type = /decl/bodytype
 	/// Name used in general.
 	var/name = "default"
 	/// Name used in preference bodytype selection. Defaults to name.

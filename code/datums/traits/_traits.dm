@@ -115,6 +115,11 @@
 	/// What species cannot select this trait in chargen?
 	var/list/blocked_species
 
+/decl/trait/Initialize()
+	if(available_at_chargen)
+		decl_flags |= DECL_FLAG_MANDATORY_UID
+	return ..()
+
 /decl/trait/validate()
 	. = ..()
 	if(!name || !istext(name)) // Empty strings are valid texts

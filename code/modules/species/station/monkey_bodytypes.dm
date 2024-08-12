@@ -16,6 +16,7 @@
 		/datum/appearance_descriptor/height = 0.6,
 		/datum/appearance_descriptor/build =  0.6
 	)
+	uid = "bodytype_monkey"
 
 /decl/bodytype/monkey/Initialize()
 	equip_adjust = list(

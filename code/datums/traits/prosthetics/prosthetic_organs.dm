@@ -1,12 +1,11 @@
 /decl/trait/prosthetic_organ
-	name = "Prosthetic Heart"
-	description = "You have a synthetic heart."
+	abstract_type = /decl/trait/prosthetic_organ
 	trait_cost = 1
 	available_at_chargen = TRUE
 	category = "Prosthetic Organs"
 	reapply_on_rejuvenation = TRUE
 	var/synthetic_bodytype_restricted = FALSE
-	var/apply_to_organ = BP_HEART
+	var/apply_to_organ
 
 /decl/trait/prosthetic_organ/is_available_to(datum/preferences/pref)
 	. = ..()
@@ -44,6 +43,12 @@
 		if(I)
 			I.set_bodytype(I.species.base_internal_prosthetics_model)
 
+/decl/trait/prosthetic_organ/heart
+	name = "Prosthetic Heart"
+	description = "You have a synthetic heart."
+	uid = "trait_prosthetic_heart"
+	apply_to_organ = BP_HEART
+
 /decl/trait/prosthetic_organ/eyes
 	name = "Prosthetic Eyes"
 	description = "Your vision is augmented."
@@ -55,32 +60,38 @@
 		/decl/trait/malus/colourblind/tritanopia,
 		/decl/trait/malus/colourblind/achromatopsia
 	)
+	uid = "trait_prosthetic_eyes"
 
 /decl/trait/prosthetic_organ/kidneys
 	name = "Prosthetic Kidneys"
 	description = "You have synthetic kidneys."
 	apply_to_organ = BP_KIDNEYS
+	uid = "trait_prosthetic_kidneys"
 
 /decl/trait/prosthetic_organ/liver
 	name = "Prosthetic Liver"
 	description = "You have a literal iron liver."
 	apply_to_organ = BP_LIVER
+	uid = "trait_prosthetic_liver"
 
 /decl/trait/prosthetic_organ/lungs
 	name = "Prosthetic Lungs"
 	description = "You have synthetic lungs."
 	apply_to_organ = BP_LUNGS
+	uid = "trait_prosthetic_lungs"
 
 /decl/trait/prosthetic_organ/stomach
 	name = "Prosthetic Stomach"
 	description = "You have a literal iron stomach."
 	apply_to_organ = BP_STOMACH
+	uid = "trait_prosthetic_stomach"
 
 /decl/trait/prosthetic_organ/brain
 	name = "Synthetic Brain"
 	description = "You are an artificial lifeform, with a mind made of steel and light."
 	apply_to_organ = BP_BRAIN
 	synthetic_bodytype_restricted = TRUE
+	uid = "trait_prosthetic_brain"
 	var/new_brain_type = /obj/item/organ/internal/brain/robotic
 
 /decl/trait/prosthetic_organ/brain/apply_trait(mob/living/holder)

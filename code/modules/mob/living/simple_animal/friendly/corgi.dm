@@ -23,6 +23,9 @@
 /mob/living/simple_animal/corgi/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/corgi)
 
+/decl/bodytype/quadruped/animal/corgi
+	uid = "bodytype_animal_corgi"
+
 /decl/bodytype/quadruped/animal/corgi/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
@@ -114,6 +117,9 @@
 
 /mob/living/simple_animal/corgi/puppy/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/puppy)
+
+/decl/bodytype/quadruped/animal/puppy
+	uid = "bodytype_animal_puppy"
 
 /decl/bodytype/quadruped/animal/puppy/Initialize()
 	equip_adjust = list(

@@ -113,6 +113,9 @@
 /mob/living/silicon/robot/drone/costruction/get_bodytype()
 	return GET_DECL(/decl/bodytype/drone/construction)
 
+/decl/bodytype/drone/construction
+	uid = "bodytype_drone_construction"
+
 /decl/bodytype/drone/construction/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
@@ -357,6 +360,7 @@
 	name = "drone"
 	bodytype_flag = 0
 	bodytype_category = "drone body"
+	uid = "bodytype_drone"
 
 /decl/bodytype/drone/Initialize()
 	if(!length(equip_adjust))
