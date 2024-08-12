@@ -1,17 +1,18 @@
 /obj/item/gun/launcher/sealant
-	name = "sealant gun"
-	desc = "A heavy, unwieldly device used to spray metal foam sealant onto hull breaches or damaged flooring."
-	icon =             'icons/obj/guns/sealant_gun.dmi'
-	icon_state =       ICON_STATE_WORLD
+	name             = "sealant gun"
+	desc             = "A heavy, unwieldly device used to spray metal foam sealant onto hull breaches or damaged flooring."
+	icon             = 'icons/obj/guns/sealant_gun.dmi'
+	icon_state       = ICON_STATE_WORLD
 	autofire_enabled = TRUE
-	has_safety =       FALSE
-	waterproof =       TRUE
-	w_class =          ITEM_SIZE_NO_CONTAINER
-	slot_flags =       SLOT_BACK
-	fire_sound =       'sound/effects/refill.ogg'
-	screen_shake =     FALSE
-	release_force =    5
-	fire_delay =       1
+	has_safety       = FALSE
+	waterproof       = TRUE
+	w_class          = ITEM_SIZE_GARGANTUAN
+	obj_flags        = OBJ_FLAG_NO_STORAGE
+	slot_flags       = SLOT_BACK
+	fire_sound       = 'sound/effects/refill.ogg'
+	screen_shake     = FALSE
+	release_force    = 5
+	fire_delay       = 1
 
 	var/foam_charges_per_shot = 1
 	var/obj/item/sealant_tank/loaded_tank

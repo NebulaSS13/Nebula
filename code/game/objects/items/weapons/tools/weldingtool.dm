@@ -268,11 +268,6 @@
 /obj/item/weldingtool/proc/isOn()
 	return src.welding
 
-/obj/item/weldingtool/get_storage_cost()
-	if(isOn())
-		return ITEM_SIZE_NO_CONTAINER
-	return ..()
-
 /obj/item/weldingtool/on_update_icon()
 	. = ..()
 	z_flags &= ~ZMM_MANGLE_PLANES
@@ -318,6 +313,7 @@
 	update_physical_damage()
 	playsound(src, activate_sound, 50, TRUE)
 	welding = TRUE
+	obj_flags |= OBJ_FLAG_NO_STORAGE
 	update_icon()
 	START_PROCESSING(SSobj, src)
 	return TRUE
@@ -333,6 +329,7 @@
 	update_physical_damage()
 	playsound(src, deactivate_sound, 50, TRUE)
 	welding = FALSE
+	obj_flags &= ~OBJ_FLAG_NO_STORAGE
 	update_icon()
 	return TRUE
 

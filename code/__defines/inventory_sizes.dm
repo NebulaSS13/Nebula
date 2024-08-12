@@ -22,7 +22,6 @@
 #define ITEM_SIZE_LARGE          4
 #define ITEM_SIZE_HUGE           5
 #define ITEM_SIZE_GARGANTUAN     6
-#define ITEM_SIZE_NO_CONTAINER   10 // Use this to forbid item from being placed in a container.
 #define ITEM_SIZE_STRUCTURE      20
 
 #define ITEM_SIZE_MIN            ITEM_SIZE_TINY

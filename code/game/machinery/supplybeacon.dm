@@ -5,7 +5,8 @@
 	desc = "An inactive, hacked supply beacon stamped with the Nyx Rapid Fabrication logo. Good for one (1) ballistic supply pod shipment."
 	icon_state = "beacon"
 	material = /decl/material/solid/metal/steel
-	w_class = ITEM_SIZE_NO_CONTAINER
+	w_class = ITEM_SIZE_STRUCTURE
+	obj_flags = OBJ_FLAG_NO_STORAGE
 
 	var/deploy_path = /obj/structure/supply_beacon
 	var/deploy_time = 30

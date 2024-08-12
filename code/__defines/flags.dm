@@ -67,6 +67,7 @@ The latter will result in a linter warning and will not work correctly.
 #define OBJ_FLAG_HOLLOW                     BITFLAG(5)  // Modifies initial matter values to be lower than w_class normally sets.
 #define OBJ_FLAG_SUPPORT_MOB                BITFLAG(6)  // Object can be used to prop up a mob with stance damage (broken legs)
 #define OBJ_FLAG_INSULATED_HANDLE           BITFLAG(7)  // Object skips burn checks when held by unprotected hands.
+#define OBJ_FLAG_NO_STORAGE                 BITFLAG(8)  // Object cannot be placed into storage.
 
 // Item-level flags (/obj/item/item_flags)
 #define ITEM_FLAG_NO_BLUDGEON               BITFLAG(0)  // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.

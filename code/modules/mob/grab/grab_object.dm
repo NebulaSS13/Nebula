@@ -1,12 +1,12 @@
 /obj/item/grab
-	name              = "grab"
-	canremove         = FALSE
-	item_flags        = ITEM_FLAG_NO_BLUDGEON
-	w_class           = ITEM_SIZE_NO_CONTAINER
-	pickup_sound      = null
-	drop_sound        = null
-	equip_sound       = null
-	is_spawnable_type = FALSE
+	name                   = "grab"
+	canremove              = FALSE
+	item_flags             = ITEM_FLAG_NO_BLUDGEON
+	pickup_sound           = null
+	drop_sound             = null
+	equip_sound            = null
+	is_spawnable_type      = FALSE
+	obj_flags              = OBJ_FLAG_NO_STORAGE
 	needs_attack_dexterity = DEXTERITY_GRAPPLE
 
 	var/atom/movable/affecting             // Atom being targeted by this grab.

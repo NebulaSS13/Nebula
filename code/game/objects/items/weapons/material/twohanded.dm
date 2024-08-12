@@ -208,7 +208,7 @@
 	attack_verb = list("bludgeoned", "slammed", "smashed", "wrenched")
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NAME
-	w_class = ITEM_SIZE_NO_CONTAINER
+	obj_flags = OBJ_FLAG_NO_STORAGE
 
 /obj/item/twohanded/pipewrench/Initialize()
 	. = ..()

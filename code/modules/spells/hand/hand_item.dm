@@ -12,6 +12,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	icon_state = "spell"
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE
+	obj_flags = OBJ_FLAG_NO_STORAGE
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
 
@@ -20,9 +21,6 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	hand_spell = loc
 	name = "[name] ([hand_spell.name])"
 	icon_state = hand_spell.hand_state
-
-/obj/item/magic_hand/get_storage_cost()
-	return ITEM_SIZE_NO_CONTAINER
 
 // These return values do not look correct...
 /obj/item/magic_hand/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)

@@ -69,6 +69,7 @@
 	. = ..()
 	if(active)
 		active = FALSE
+		obj_flags &= ~OBJ_FLAG_NO_STORAGE
 		toggle_active(ismob(loc) && loc)
 	if(active_sharp || active_edge)
 		set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_WORST))
@@ -81,9 +82,9 @@
 /obj/item/energy_blade/proc/toggle_active(var/mob/user)
 
 	active = !active
-
 	if(active)
 
+		obj_flags |= OBJ_FLAG_NO_STORAGE
 		force =             active_force
 		throwforce =        active_throwforce
 		sharp =             active_sharp
@@ -100,6 +101,7 @@
 
 	else
 
+		obj_flags &= ~OBJ_FLAG_NO_STORAGE
 		force =             initial(force)
 		throwforce =        initial(throwforce)
 		sharp =             initial(sharp)
@@ -149,9 +151,6 @@
 	toggle_active(user)
 	add_fingerprint(user)
 	return TRUE
-
-/obj/item/energy_blade/get_storage_cost()
-	. = active ? ITEM_SIZE_NO_CONTAINER : ..()
 
 /obj/item/energy_blade/on_update_icon()
 	. = ..()

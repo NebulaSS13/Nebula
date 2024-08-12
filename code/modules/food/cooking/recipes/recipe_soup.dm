@@ -67,6 +67,7 @@
 		/decl/material/liquid/water = 10
 	)
 	minimum_temperature = 100 CELSIUS
+	complexity = 10 // Setting high by default so it takes priority over simple soup.
 
 /decl/recipe/soup/stock/meat
 	display_name = "meat stock"
@@ -98,6 +99,7 @@
 	result_quantity = 10
 	completion_message = "A savoury smell rises from the soup as the ingredients release their flavour into the broth."
 	precursor_type = /decl/material/liquid/nutriment/soup/stock
+	complexity = 5 // Setting high by default so it takes priority over stew.
 
 /decl/recipe/soup/simple/meat
 	display_name = "simple meat soup"
