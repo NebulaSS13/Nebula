@@ -42,12 +42,16 @@
 	name                    = "Itinerant Scholar"
 
 /datum/job/shaded_hills/visitor/beggar_knight
-	title                   = "Beggar Knight"
+	title                   = "Beggar Knight, Shortsword and Shield"
 	supervisors             = "your vows"
 	description             = "You are a wandering swordmaster sworn to a vow of poverty, with nothing to your name but the armour on your back and the blade at your hip. Beggar knights are tolerated due to their martial prowess, and are usually paid with food or new equipment as they are avowed against carrying coin."
 	spawn_positions         = 2
 	total_positions         = 2
+	economic_power = 0 //vowed against carrying money
 	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/beggar_knight
+	alt_titles              = list(
+		"Beggar Knight, Longsword" = /decl/hierarchy/outfit/job/shaded_hills/beggar_knight/longsword,
+	)
 	min_skill               = list(
 		SKILL_COMBAT        = SKILL_ADEPT,
 		SKILL_WEAPONS       = SKILL_ADEPT,
