@@ -18,7 +18,7 @@
 	l_ear = /obj/item/radio/headset/heads/cmo
 	uniform = /obj/item/clothing/under/det/black
 	shoes = /obj/item/clothing/shoes/dress
-	r_pocket = /obj/item/chems/hypospray
+	r_pocket = /obj/item/chems/hypospray/vial
 
 /obj/item/card/id/ministation/doctor
 	name = "identification card"
