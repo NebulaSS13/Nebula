@@ -71,16 +71,27 @@
 /obj/item/proc/get_drying_state(var/obj/rack)
 	return "generic"
 
+/obj/item/proc/should_take_heat_damage(datum/gas_mixture/air, exposed_temperature)
+	if(!can_take_damage())
+		return FALSE
+	if(!length(matter))
+		return FALSE
+	for(var/mat in matter)
+		var/decl/material/material = GET_DECL(mat)
+		// We should burn if we're above the temperature damage threshold.
+		if(!isnull(material.temperature_damage_threshold) && exposed_temperature >= material.temperature_damage_threshold)
+			return TRUE
+	return FALSE
+
 /obj/item/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
 
-	// Take fire damage if appropriate.
-	if(get_max_health() != ITEM_HEALTH_NO_DAMAGE && length(matter))
-		for(var/mat in matter)
-			var/decl/material/material = GET_DECL(mat)
-			if(!isnull(material.temperature_damage_threshold) && exposed_temperature >= material.temperature_damage_threshold)
-				take_damage(rand(3,5), BURN)
-				break
+	var/should_burn = should_take_heat_damage(air, exposed_temperature)
 
 	if(exposed_temperature >= drying_threshold_temperature)
 		dry_out(drying_power = rand(2, 4), fire_exposed = TRUE, silent = TRUE)
+		should_burn &&= !is_dryable() // no fire damage if we're drying
+
+	// Take fire damage if appropriate.
+	if(should_burn)
+		take_damage(rand(3,5), BURN)
