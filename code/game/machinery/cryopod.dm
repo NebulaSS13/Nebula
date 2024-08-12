@@ -1,10 +1,17 @@
+/proc/despawn_character(mob/living/character)
+	if(character.client)
+		character.ghostize()
+	character.prepare_for_despawn()
+	character.key = null
+	character.ckey = null
+	qdel(character)
+
 /*
  * Cryogenic refrigeration unit. Basically a despawner.
  * Stealing a lot of concepts/code from sleepers due to massive laziness.
  * The despawn tick will only fire if it's been more than time_till_despawned ticks
  * since time_entered, which is world.time when the occupant moves in.
  */
-
 
 //Main cryopod console.
 
@@ -312,21 +319,6 @@
 
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer
-/obj/machinery/cryopod/robot/despawn_occupant()
-	var/mob/living/silicon/robot/R = occupant
-	if(istype(R))
-		R.clear_brain()
-		if(R.module)
-			for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
-				for(var/obj/item/O in I.get_contained_external_atoms()) // the things inside the tools, if anything; mainly for janiborg trash bags
-					O.forceMove(R)
-				qdel(I)
-			qdel(R.module)
-
-	. = ..()
-
-// This function can not be undone; do not call this unless you are sure
-// Also make sure there is a valid control computer
 /obj/machinery/cryopod/proc/despawn_occupant()
 	//Drop all items into the pod.
 	for(var/obj/item/equipped_item in occupant.get_equipped_items(include_carried = TRUE))
@@ -352,38 +344,9 @@
 		else
 			frozen_item.forceMove(get_turf(src))
 
-	//Update any existing objectives involving this mob.
-	for(var/datum/objective/objective in global.all_objectives)
-		// We don't want revs to get objectives that aren't for heads of staff. Letting
-		// them win or lose based on cryo is silly so we remove the objective.
-		if(objective.target == occupant.mind)
-			if(objective.owner?.current)
-				to_chat(objective.owner.current, SPAN_DANGER("You get the feeling your target, [occupant.real_name], is no longer within your reach..."))
-			qdel(objective)
-
-	//Handle job slot/tater cleanup.
-	if(occupant.mind)
-		if(occupant.mind.assigned_job)
-			occupant.mind.assigned_job.clear_slot()
-
-		if(occupant.mind.objectives.len)
-			occupant.mind.objectives = null
-			occupant.mind.assigned_special_role = null
-
-	// Delete them from datacore.
-	var/sanitized_name = occupant.real_name
-	sanitized_name = sanitize(sanitized_name)
-	var/datum/computer_file/report/crew_record/record = get_crewmember_record(sanitized_name)
-	if(record)
-		qdel(record)
-
 	icon_state = base_icon_state
 
-	//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
-
-
 	//Make an announcement and log the person entering storage.
-
 	// Titles should really be fetched from data records
 	//  and records should not be fetched by name as there is no guarantee names are unique
 	var/role_alt_title = occupant.mind ? occupant.mind.role_alt_title : "Unknown"
@@ -394,12 +357,7 @@
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
 	do_telecomms_announcement(src, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
-
-	//This should guarantee that ghosts don't spawn.
-	occupant.ckey = null
-
-	// Delete the mob.
-	qdel(occupant)
+	despawn_character(occupant)
 	set_occupant(null)
 
 /obj/machinery/cryopod/proc/attempt_enter(var/mob/target, var/mob/user)

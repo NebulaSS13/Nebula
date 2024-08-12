@@ -30,5 +30,6 @@
 #include "items\clothing\loincloth.dm"
 #include "items\clothing\overrides.dm"
 #include "items\clothing\trousers.dm"
+#include "props\signpost.dm"
 // END_INCLUDE
 #endif
