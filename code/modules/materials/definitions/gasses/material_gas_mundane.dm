@@ -21,6 +21,7 @@
 	gas_specific_heat = 80
 	molar_mass = 0.004
 	latent_heat = 21
+	melting_point = 0 // Helium does not ever freeze at standard pressure, but this temperature rises at higher pressures.
 	boiling_point = -269 CELSIUS
 	gas_symbol_html = "He"
 	gas_symbol = "He"
@@ -40,6 +41,7 @@
 	molar_mass = 0.044
 	latent_heat = 380
 	boiling_point = -78 CELSIUS
+	melting_point = null // at standard pressure it never becomes a liquid, it can only be a gas or solid
 	gas_symbol_html = "CO<sub>2</sub>"
 	gas_symbol = "CO2"
 	gas_metabolically_inert = TRUE
@@ -222,6 +224,7 @@
 	gas_specific_heat = 20
 	molar_mass = 0.02
 	latent_heat = 86
+	melting_point = -249 CELSIUS
 	boiling_point = -246 CELSIUS
 	gas_symbol_html = "Ne"
 	gas_symbol = "Ne"
@@ -307,6 +310,7 @@
 	gas_specific_heat = 100
 	molar_mass = 0.002
 	latent_heat = 454
+	melting_point = -259 CELSIUS
 	boiling_point = -252 CELSIUS
 	gas_flags = XGM_GAS_FUEL
 	burn_product = /decl/material/liquid/water
@@ -326,6 +330,8 @@
 	color = "#777777"
 	stack_origin_tech = @'{"materials":5}'
 	value = 0.45
+	melting_point = -252 CELSIUS
+	boiling_point = -248 CELSIUS
 	gas_symbol_html = "T"
 	gas_symbol = "T"
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
@@ -343,6 +349,8 @@
 	gas_symbol_html = "D"
 	gas_symbol = "D"
 	value = 0.5
+	melting_point = -254 CELSIUS
+	boiling_point = -250 CELSIUS
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON
 
