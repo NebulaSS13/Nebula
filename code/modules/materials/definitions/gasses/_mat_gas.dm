@@ -21,4 +21,6 @@
 		liquid_name = "liquid [name]"
 	if(!solid_name)
 		solid_name = "frozen [name]"
+	if(!solution_name)
+		solution_name = "[name] solution"
 	. = ..()

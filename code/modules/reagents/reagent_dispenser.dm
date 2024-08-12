@@ -73,9 +73,12 @@
 
 		to_chat(user, SPAN_NOTICE("It contains:"))
 		if(LAZYLEN(reagents?.reagent_volumes))
-			for(var/rtype in reagents.reagent_volumes)
+			for(var/rtype in reagents.liquid_volumes)
 				var/decl/material/R = GET_DECL(rtype)
-				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] unit\s of [R.liquid_name]."))
+				to_chat(user, SPAN_NOTICE("[LIQUID_VOLUME(reagents, rtype)] unit\s of [R.get_reagent_name(reagents, MAT_PHASE_LIQUID)]."))
+			for(var/rtype in reagents.solid_volumes)
+				var/decl/material/R = GET_DECL(rtype)
+				to_chat(user, SPAN_NOTICE("[SOLID_VOLUME(reagents, rtype)] unit\s of [R.get_reagent_name(reagents, MAT_PHASE_SOLID)]."))
 		else
 			to_chat(user, SPAN_NOTICE("Nothing."))
 

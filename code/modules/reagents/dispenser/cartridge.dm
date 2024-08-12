@@ -21,7 +21,7 @@
 	if(reagents.total_volume <= 0)
 		to_chat(user, "It is empty.")
 	else
-		to_chat(user, "It contains [reagents.total_volume] units of liquid.")
+		to_chat(user, "It contains [reagents.total_volume] units of reagents.")
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "The cap is sealed.")
 

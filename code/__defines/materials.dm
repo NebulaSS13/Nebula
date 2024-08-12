@@ -64,10 +64,10 @@
 #define ORE_EXOTIC   "exotic matter"
 
 //Phase of matter placeholders
-#define MAT_PHASE_SOLID     "solid"
-#define MAT_PHASE_LIQUID    "liquid"
-#define MAT_PHASE_GAS       "gas"
-#define MAT_PHASE_PLASMA    "plasma"
+#define MAT_PHASE_SOLID     BITFLAG(0)
+#define MAT_PHASE_LIQUID    BITFLAG(1)
+#define MAT_PHASE_GAS       BITFLAG(2)
+#define MAT_PHASE_PLASMA    BITFLAG(3)
 
 // Fission interactions.
 // For these, associated value is ideal neutron energy for reaction.

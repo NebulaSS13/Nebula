@@ -55,6 +55,10 @@
 
 #define REAGENTS_FREE_SPACE(R) (R?.maximum_volume - R?.total_volume)
 #define REAGENT_VOLUME(REAGENT_HOLDER, REAGENT_TYPE) (REAGENT_HOLDER?.reagent_volumes && REAGENT_HOLDER.reagent_volumes[REAGENT_TYPE])
+
+#define LIQUID_VOLUME(REAGENT_HOLDER, REAGENT_TYPE) (REAGENT_HOLDER?.liquid_volumes && REAGENT_HOLDER.liquid_volumes[REAGENT_TYPE])
+#define SOLID_VOLUME(REAGENT_HOLDER, REAGENT_TYPE) (REAGENT_HOLDER?.solid_volumes && REAGENT_HOLDER.solid_volumes[REAGENT_TYPE])
+
 #define REAGENT_DATA(REAGENT_HOLDER, REAGENT_TYPE)   (REAGENT_HOLDER?.reagent_data    && REAGENT_HOLDER.reagent_data[REAGENT_TYPE])
 
 #define MAT_SOLVENT_NONE        0
@@ -74,3 +78,5 @@
 #define DEFAULT_GAS_OXIDIZER   /decl/material/gas/oxygen
 
 #define CHEM_REACTION_FLAG_OVERFLOW_CONTAINER BITFLAG(0)
+
+#define MAX_SCRAP_MATTER (SHEET_MATERIAL_AMOUNT * 5) // Maximum amount of matter in chemical scraps

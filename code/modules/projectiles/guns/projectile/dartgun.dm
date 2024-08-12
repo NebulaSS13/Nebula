@@ -58,9 +58,14 @@
 		to_chat(user, "<span class='notice'>\The [src] contains:</span>")
 		for(var/obj/item/chems/glass/beaker/B in beakers)
 			if(B.reagents && LAZYLEN(B.reagents?.reagent_volumes))
-				for(var/rtype in B.reagents.reagent_volumes)
-					var/decl/material/R = GET_DECL(rtype)
-					to_chat(user, "<span class='notice'>[REAGENT_VOLUME(B.reagents, rtype)] units of [R.get_reagent_name(B.reagents)]</span>")
+				for(var/ltype in B.reagents.liquid_volumes)
+					var/decl/material/R = GET_DECL(ltype)
+					to_chat(user, "<span class='notice'>[LIQUID_VOLUME(B.reagents, ltype)] units of [R.get_reagent_name(B.reagents, MAT_PHASE_LIQUID)]</span>")
+
+				for(var/stype in B.reagents.solid_volumes)
+					var/decl/material/R = GET_DECL(stype)
+					to_chat(user, "<span class='notice'>[SOLID_VOLUME(B.reagents, stype)] units of [R.get_reagent_name(B.reagents, MAT_PHASE_SOLID)]</span>")
+
 
 /obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/chems/glass))

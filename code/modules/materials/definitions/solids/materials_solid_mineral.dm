@@ -160,7 +160,7 @@
 	dissolves_into = list(
 		/decl/material/solid/sodium = 1
 	)
-	soup_name = "salt"
+	solid_name = "salt"
 	soup_hot_desc = null
 
 /decl/material/solid/potash

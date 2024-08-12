@@ -64,6 +64,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/solid_name
 	var/gas_name
 	var/liquid_name
+	var/solution_name      // Name for the material in solution.
 	var/use_name
 	var/wall_name = "wall" // Name given to walls of this material
 	var/flags = 0          // Various status modifiers.
@@ -73,7 +74,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/antag_text
 	var/default_solid_form = /obj/item/stack/material/sheet
 
-	var/soup_name
 	var/soup_hot_desc = "simmering"
 
 	var/affect_blood_on_ingest = TRUE
@@ -355,8 +355,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	gas_name       ||= use_name
 	// Use solid_name for adjective_name so that we get "ice bracelet" instead of "water bracelet" for things made of water below 0C.
 	adjective_name ||= solid_name
-	// Default soup_name to liquid_name if unset.
-	soup_name      ||= liquid_name
+	adjective_name ||= use_name
 
 	// Null/clear a bunch of physical vars as this material is fake.
 	if(holographic)
@@ -1005,14 +1004,31 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!isnull(boiling_point) && burn_temperature >= boiling_point)
 		LAZYSET(., type, amount)
 
-/decl/material/proc/get_reagent_name(datum/reagents/holder)
+/decl/material/proc/get_reagent_name(datum/reagents/holder, phase = MAT_PHASE_LIQUID)
+
 	if(istype(holder) && holder.reagent_data)
 		var/list/rdata = holder.reagent_data[type]
 		if(rdata)
 			var/data_name = rdata["mask_name"]
 			if(data_name)
 				return data_name
-	return soup_name
+
+	if(phase == MAT_PHASE_SOLID)
+		return solid_name
+
+	// Check if the material is in solution. This is a much simpler check than normal solubility.
+	if(phase == MAT_PHASE_LIQUID)
+		if(!istype(holder))
+			return liquid_name
+		var/atom/location = holder.get_reaction_loc()
+		var/temperature = location?.temperature || T20C
+
+		if(melting_point > temperature)
+			return solution_name
+		else
+			return liquid_name
+
+	return "something"
 
 /decl/material/proc/get_reagent_color(datum/reagents/holder)
 	if(istype(holder) && holder.reagent_data)
