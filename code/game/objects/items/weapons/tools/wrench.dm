@@ -36,8 +36,9 @@
 	attack_verb                = list("bludgeoned", "slammed", "smashed", "wrenched")
 	material                   = /decl/material/solid/metal/steel
 	material_alteration        = MAT_FLAG_ALTERATION_NAME
-	w_class                    = ITEM_SIZE_NO_CONTAINER
-	can_be_twohanded             = TRUE
+	w_class                    = ITEM_SIZE_GARGANTUAN
+	can_be_twohanded           = TRUE
+	obj_flags                  = OBJ_FLAG_NO_STORAGE
 	pickup_sound               = 'sound/foley/scrape1.ogg'
 	drop_sound                 = 'sound/foley/tooldrop1.ogg'
 	slot_flags                 = SLOT_BACK
