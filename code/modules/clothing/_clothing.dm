@@ -41,6 +41,9 @@
 /obj/item/clothing/get_equipment_tint()
 	return tint
 
+/obj/item/clothing/get_matter_amount_modifier()
+	return ..() * 5 // clothes are complicated and have a high surface area. todo: a better way to do this?
+
 /obj/item/clothing/Initialize()
 
 	. = ..()
