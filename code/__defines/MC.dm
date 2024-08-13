@@ -99,7 +99,9 @@ if(Datum.is_processing) {\
 // TIMER_OVERRIDE is impossible to support because we don't track that for DPC queued calls, and adding a third list for that would be a lot of overhead for no real benefit
 // TIMER_STOPPABLE can't work because it uses timer IDs instead of hashes, and DPC queued calls don't have IDs.
 // TIMER_LOOP doesn't work because it needs to be a timer that can re-insert in the list, and a zero-wait looping timer should really be a ticker subsystem instead.
-// Update this define if any of those change.
+// Update these defines if any of those change.
+/// These are the flags forbidden when putting zero-wait timers on SSdpc instead of SStimer.
+#define DPC_FORBID_FLAGS   TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE | TIMER_LOOP
 /// These are the flags forbidden when putting zero-wait TIMER_UNIQUE timers on SSdpc instead of SStimer.
 #define UDPC_FORBID_FLAGS  TIMER_OVERRIDE | TIMER_STOPPABLE | TIMER_LOOP
 

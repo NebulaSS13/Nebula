@@ -569,7 +569,7 @@ SUBSYSTEM_DEF(timer)
 		PRINT_STACK_TRACE("addtimer called with a callback assigned to a qdeleted object. In the future such timers will not \
 			be supported and may refuse to run or run with a 0 wait")
 
-	if (wait == 0 && !flags)
+	if (wait == 0 && !(flags & DPC_FORBID_FLAGS))
 		SSdpc.queued_calls += callback
 		return
 

@@ -1,7 +1,7 @@
 /*
 This is pretty much just an optimization for wait=0 timers. They're relatively common, but generally don't actually need the more
  complex features of SStimer. SSdpc can handle these timers instead (and it's a lot simpler than SStimer is), but it can't handle
- complex timers with flags. This doesn't need to be explicitly used, eligible timers are automatically converted.
+ timers with certain flags (check MC.dm). This doesn't need to be explicitly used, eligible timers are automatically converted.
 */
 
 SUBSYSTEM_DEF(dpc)
@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(dpc)
 	var/unique_avg = 0
 
 /datum/controller/subsystem/dpc/stat_entry()
-	return ..() + " Q: [queued_calls.len], AQ: ~[round(avg)], UQ: [unique_queued_calls.len], AQ: ~[round(unique_avg)]"
+	return ..() + " Q: [queued_calls.len], AQ: ~[round(avg)], UQ: [unique_queued_calls.len], UAQ: ~[round(unique_avg)]"
 
 /datum/controller/subsystem/dpc/fire(resumed = FALSE)
 	var/list/qc = queued_calls
