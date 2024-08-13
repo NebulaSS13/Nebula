@@ -47,6 +47,9 @@
 /decl/stack_recipe/bricks/fire_source/alembic
 	result_type                = /obj/structure/fire_source/heater
 
+/decl/stack_recipe/bricks/fire_source/alembic
+	result_type                 = /obj/structure/fire_source/heater
+
 /decl/stack_recipe/bricks/furniture
 	abstract_type              = /decl/stack_recipe/bricks/furniture
 	one_per_turf               = TRUE

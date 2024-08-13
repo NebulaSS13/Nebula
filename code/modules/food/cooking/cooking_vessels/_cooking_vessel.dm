@@ -151,3 +151,4 @@
 	. = ..()
 	if(. != PROCESS_KILL && !is_processing)
 		START_PROCESSING(SSobj, src)
+	update_icon()

@@ -312,6 +312,10 @@
 	if(draught_mult <= 0)
 		return FALSE
 
+	var/draught_mult = (has_draught ? draught_values[draught_values[current_draught]] : 1)
+	if(draught_mult <= 0)
+		return FALSE
+
 	if(fuel >= IDEAL_FUEL)
 		return TRUE
 
