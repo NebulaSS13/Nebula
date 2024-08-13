@@ -100,6 +100,9 @@ steam.start() -- spawns the effect
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	pass_flags = PASS_FLAG_TABLE
 	var/spark_sound = "sparks"
+	var/lit_light_range = 1
+	var/lit_light_power = 0.5
+	var/lit_light_color = COLOR_MUZZLE_FLASH
 
 /obj/effect/sparks/struck
 	spark_sound = "light_bic"
@@ -108,6 +111,7 @@ steam.start() -- spawns the effect
 	. = ..()
 	QDEL_IN(src, 5 SECONDS)
 	playsound(loc, spark_sound, 100, 1)
+	set_light(lit_light_range, lit_light_power, lit_light_color)
 	if(isturf(loc))
 		var/turf/T = loc
 		T.spark_act()
