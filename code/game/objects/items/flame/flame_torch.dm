@@ -47,7 +47,7 @@
 
 /obj/item/flame/torch/extinguish(var/mob/user, var/no_message)
 	. = ..()
-	if(. && !burnt)
+	if(. && _fuel <= 0 && !burnt)
 		burnt = TRUE
 		name = "burnt torch"
 		desc = "A torch. This one has seen better days."
