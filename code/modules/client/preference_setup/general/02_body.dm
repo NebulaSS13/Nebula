@@ -140,7 +140,7 @@
 		var/decl/sprite_accessory_category/accessory_category = GET_DECL(acc_cat)
 		for(var/acc in pref.sprite_accessories[acc_cat])
 			var/decl/sprite_accessory/accessory = GET_DECL(acc)
-			if(!istype(accessory, accessory_category.base_accessory_type) || !accessory.accessory_is_available(acc_mob, mob_species, mob_bodytype))
+			if(!istype(accessory, accessory_category.base_accessory_type) || !accessory.accessory_is_available(acc_mob, mob_species, mob_bodytype, pref.traits))
 				pref.sprite_accessories[acc_cat] -= acc
 			else
 				var/acc_data = pref.sprite_accessories[acc_cat][acc]
@@ -471,6 +471,6 @@
 		if(accessory in existing_accessories)
 			continue
 		var/decl/sprite_accessory/accessory_decl = all_accessories[accessory]
-		if(istype(accessory_decl) && !is_type_in_list(accessory_decl, disallowed_accessories) && accessory_decl.accessory_is_available(acc_mob, mob_species, mob_bodytype))
+		if(istype(accessory_decl) && !is_type_in_list(accessory_decl, disallowed_accessories) && accessory_decl.accessory_is_available(acc_mob, mob_species, mob_bodytype, traits))
 			LAZYADD(., accessory_decl)
 	return sortTim(., /proc/cmp_name_asc)

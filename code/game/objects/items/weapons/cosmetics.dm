@@ -68,7 +68,7 @@
 		return ..()
 
 	var/decl/sprite_accessory/cosmetics/lip_decl = GET_DECL(cosmetic_type)
-	if(!lip_decl?.accessory_is_available(user, limb.species, limb.bodytype))
+	if(!lip_decl?.accessory_is_available(user, limb.species, limb.bodytype, user.get_traits()))
 		to_chat(user, SPAN_WARNING("You can't wear this makeup!"))
 		return TRUE
 

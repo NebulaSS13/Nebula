@@ -75,6 +75,8 @@
 	var/list/accessory_metadata_types
 	/// A value to check whitelists for.
 	var/is_whitelisted
+	/// A set of trait levels to check for.
+	var/list/required_traits
 
 /decl/sprite_accessory/Initialize()
 	. = ..()
@@ -84,7 +86,7 @@
 /decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
 	return
 
-/decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype)
+/decl/sprite_accessory/proc/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype, list/traits)
 	if(species)
 		var/species_is_permitted = TRUE
 		if(species_allowed)
@@ -110,6 +112,13 @@
 		return FALSE
 	if(is_whitelisted && usr?.ckey && !is_admin(usr))
 		return is_alien_whitelisted(usr, is_whitelisted)
+	if(length(required_traits) && traits != FALSE)
+		if(!islist(traits) || !length(traits))
+			return FALSE
+		for(var/trait in required_traits)
+			if(!(trait in traits))
+				return FALSE
+
 	return TRUE
 
 /decl/sprite_accessory/validate()
