@@ -11,6 +11,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material = /decl/material/solid/organic/wood/yew
 	fire_verb = "loose"
+	autofire_enabled = TRUE
 
 	/// What are we strung with?
 	var/obj/item/bowstring/string = /obj/item/bowstring
@@ -34,6 +35,48 @@
 	var/bow_ammo_type = /obj/item/stack/material/bow_ammo/arrow
 	/// Flag for tracking if a bow is currently being drawn, to avoid double draw.
 	var/drawing_bow = FALSE
+	/// Timer for tracking next increase in tension from click and hold.
+	var/next_tension_step
+
+/obj/item/gun/launcher/bow/set_autofire(var/atom/fire_at, var/mob/fire_by, var/autoturn = TRUE)
+	if(autofiring_at)
+		return ..()
+	. = ..()
+	if(ismob(fire_by))
+		if(!get_loaded_arrow(fire_by) && fire_by.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+			load_available_ammo(fire_by)
+		if(check_can_draw(fire_by))
+			tension = 0
+			next_tension_step = world.time + get_draw_time(fire_by)
+			fire_by.set_dir(get_dir(fire_by, fire_at))
+			fire_by.visible_message(SPAN_NOTICE("\The [fire_by] begins drawing back \the [src]!"))
+			update_icon()
+
+/obj/item/gun/launcher/bow/try_autofire(autoturn)
+	var/mob/wielder = loc
+	if(!ismob(wielder) || !check_can_draw(wielder))
+		clear_autofire()
+	else
+		wielder.set_dir(get_dir(wielder, autofiring_at))
+		if(world.time >= next_tension_step && tension < max_tension)
+			next_tension_step = world.time + get_draw_time(wielder)
+			tension++
+			if(tension == max_tension)
+				wielder.visible_message(SPAN_NOTICE("\The [wielder] pulls \the [src] back to its maximum draw!"))
+			else
+				wielder.visible_message(SPAN_NOTICE("\The [wielder] continues drawing back \the [src]!"))
+			update_icon()
+
+/obj/item/gun/launcher/bow/clear_autofire()
+	if(tension)
+		var/mob/living/wielder = loc
+		if(istype(wielder) && !wielder.incapacitated() && wielder.get_active_held_item() == src && get_loaded_arrow())
+			wielder.set_dir(get_dir(wielder, autofiring_at))
+			Fire(autofiring_at, autofiring_by, null, (get_dist(autofiring_at, autofiring_by) <= 1), FALSE, FALSE)
+	. = ..()
+	if(tension)
+		tension = 0
+		update_icon()
 
 /obj/item/gun/launcher/bow/handle_click_empty(atom/movable/firer)
 	if(check_fire_message_spam("click"))
