@@ -165,7 +165,7 @@
 	ignition_point = T0C+300
 	conductive = 1
 	hidden_from_codex = TRUE
-	construction_difficulty = MAT_VALUE_NORMAL_DIY
+	construction_difficulty = MAT_VALUE_EASY_DIY
 	integrity = 70
 	hardness = MAT_VALUE_SOFT
 	weight = MAT_VALUE_NORMAL
@@ -219,7 +219,7 @@
 	ignition_point = T0C+300
 	conductive = 0
 	hidden_from_codex = TRUE
-	construction_difficulty = MAT_VALUE_NORMAL_DIY
+	construction_difficulty = MAT_VALUE_HARD_DIY
 	integrity = 50
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_EXTREMELY_LIGHT
