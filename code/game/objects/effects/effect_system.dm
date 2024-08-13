@@ -109,7 +109,9 @@ steam.start() -- spawns the effect
 
 /obj/effect/sparks/Initialize()
 	. = ..()
-	QDEL_IN(src, 5 SECONDS)
+	// this is 2 seconds so that it doesn't appear to freeze after its last move, which ends up making it look like timers are broken
+	// if you change the number of or delay between moves in spread(), this may need to be changed
+	QDEL_IN(src, 2 SECONDS)
 	playsound(loc, spark_sound, 100, 1)
 	set_light(lit_light_range, lit_light_power, lit_light_color)
 	if(isturf(loc))
