@@ -3,6 +3,7 @@
 	icon_state = "sheet-cloth"
 	singular_name = "bolt"
 	plural_name = "bolts"
+	w_class = ITEM_SIZE_NORMAL
 	stack_merge_type = /obj/item/stack/material/bolt
 	crafting_stack_type = /obj/item/stack/material/bolt
 	craft_verb = "tailor"
