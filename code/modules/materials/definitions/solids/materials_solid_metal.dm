@@ -164,6 +164,7 @@
 	weight = MAT_VALUE_NORMAL
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	stack_origin_tech = @'{"materials":2}'
+	temperature_burn_milestone_material = TRUE
 
 /decl/material/solid/metal/silver
 	name = "silver"
@@ -384,6 +385,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
 	ferrous = TRUE
+	temperature_burn_milestone_material = TRUE
 
 /decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.has_trait(/decl/trait/metabolically_inert))
@@ -414,6 +416,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metallic sugar"
 	toxicity = 1
+	temperature_burn_milestone_material = TRUE
 
 /decl/material/solid/metal/zinc
 	name = "zinc"

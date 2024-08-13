@@ -27,6 +27,16 @@
 	abstract_type = /obj/structure/fire_source
 	throwpass = TRUE
 
+	var/has_draught = TRUE
+	var/static/list/draught_values = list(
+		"all the way open"      = 1,
+		"one-quarter closed"    = 0.75,
+		"half closed"           = 0.5,
+		"three-quarters closed" = 0.25,
+		"all the way closed"    = 0
+	)
+	var/current_draught = 1
+
 	var/datum/effect/effect/system/steam_spread/steam // Used when being quenched.
 	var/datum/composite_sound/fire_crackles/fire_loop
 	var/datum/composite_sound/grill/grill_loop // Used when food is cooking on the fire.
@@ -173,6 +183,11 @@
 /obj/structure/fire_source/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
+		if(has_draught)
+			to_chat(user, "\The [src]'s draught is [draught_values[current_draught]].")
+		var/list/burn_strings = get_descriptive_temperature_strings(last_fuel_burn_temperature)
+		if(length(burn_strings))
+			to_chat(user, "\The [src] is burning hot enough to [english_list(burn_strings)].")
 		var/list/removable = get_removable_atoms()
 		if(length(removable))
 			to_chat(user, "Looking within \the [src], you see:")
@@ -289,6 +304,10 @@
 
 /obj/structure/fire_source/proc/process_fuel(ignition_temperature)
 
+	var/draught_mult = (has_draught ? draught_values[draught_values[current_draught]] : 1)
+	if(draught_mult <= 0)
+		return FALSE
+
 	if(fuel >= IDEAL_FUEL)
 		return TRUE
 
@@ -318,8 +337,9 @@
 	dump_waste_products(loc, waste)
 
 	if(!isnull(cap_last_fuel_burn))
+		var/effective_cap = cap_last_fuel_burn * draught_mult
+		last_fuel_burn_temperature = min(last_fuel_burn_temperature, effective_cap)
 		// TODO: dump excess directly into the atmosphere as heat
-		last_fuel_burn_temperature = min(last_fuel_burn_temperature, cap_last_fuel_burn)
 
 	return (fuel > 0)
 
@@ -386,9 +406,20 @@
 
 	queue_icon_update()
 
+/obj/structure/fire_source/proc/has_fuel()
+	if(fuel)
+		return TRUE
+	if(!length(contents))
+		return FALSE
+	for(var/obj/item/thing in contents)
+		if(!isnull(thing.material?.ignition_point))
+			return TRUE
+	return FALSE
+
 /obj/structure/fire_source/on_update_icon()
 	..()
-	if((fuel || length(contents)) && (lit != FIRE_DEAD))
+
+	if(has_fuel() && (lit != FIRE_DEAD))
 		// todo: get colour from fuel
 		var/image/I = image(icon, "[icon_state]_full")
 		I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
@@ -431,9 +462,30 @@
 			return FALSE
 	return ..()
 
+/obj/structure/fire_source/proc/adjust_draught(mob/user)
+	var/choice = input(user, "How do you wish to adjust the draught?", "Adjust Draught", draught_values[current_draught]) as null|anything in draught_values
+	if(choice && !QDELETED(src) && !QDELETED(user) && CanPhysicallyInteract(user))
+		current_draught = clamp(draught_values.Find(choice), 1, length(draught_values))
+		user.visible_message(SPAN_NOTICE("\The [user] adjusts \the [src]'s draught until it is [draught_values[current_draught]]."))
+
+/obj/structure/fire_source/get_alt_interactions(mob/user)
+	. = ..()
+	if(has_draught)
+		LAZYADD(., /decl/interaction_handler/adjust_draught)
+
+/decl/interaction_handler/adjust_draught
+	name = "Adjust Draught"
+	expected_target_type = /obj/structure/fire_source
+
+/decl/interaction_handler/adjust_draught/invoked(atom/target, mob/user)
+	var/obj/structure/fire_source/fire = target
+	if(fire.has_draught)
+		fire.adjust_draught(user)
+
 // Subtypes.
 /obj/structure/fire_source/firepit
 	obj_flags = OBJ_FLAG_HOLLOW
+	has_draught = FALSE
 
 /obj/structure/fire_source/stove
 	name = "stove"

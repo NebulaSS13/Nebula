@@ -252,6 +252,7 @@
 	dug_drop_type = /obj/item/stack/material/lump/large
 	default_solid_form = /obj/item/stack/material/lump/large
 	bakes_into_material = /decl/material/solid/stone/pottery
+	temperature_burn_milestone_material = TRUE
 	melting_point = null // Clay is already almost a liquid...
 	// lower than the temperature expected from a kiln so that clay can be used to make bricks to make a high-temperature kiln.
 	bakes_into_at_temperature = 950 CELSIUS

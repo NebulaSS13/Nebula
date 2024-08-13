@@ -823,3 +823,6 @@
 	var/turf/T = get_turf(target)
 	if(T.can_dig_farm(prop?.material?.hardness))
 		T.try_dig_farm(user, prop)
+
+/turf/take_vaporized_reagent(reagent, amount)
+	return assume_gas(reagent, round(amount / REAGENT_UNITS_PER_GAS_MOLE))

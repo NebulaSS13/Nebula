@@ -1,3 +1,32 @@
+var/global/list/_descriptive_temperature_strings
+/proc/get_descriptive_temperature_strings(temperature)
+	if(!_descriptive_temperature_strings)
+		_descriptive_temperature_strings = list()
+
+		for(var/decl/material/material as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/material))
+
+			if(!material.temperature_burn_milestone_material)
+				continue
+
+			if(!isnull(material.bakes_into_at_temperature) && material.bakes_into_material)
+				var/decl/material/cook = GET_DECL(material.bakes_into_material)
+				global._descriptive_temperature_strings["bake [material.name] into [cook.name]"] = material.bakes_into_at_temperature
+				continue
+
+			switch(material.phase_at_temperature())
+				if(MAT_PHASE_SOLID)
+					if(!isnull(material.ignition_point))
+						global._descriptive_temperature_strings["ignite [material.name]"] = material.ignition_point
+					else if(!isnull(material.melting_point))
+						global._descriptive_temperature_strings["melt [material.name]"] = material.melting_point
+				if(MAT_PHASE_LIQUID)
+					if(!isnull(material.boiling_point))
+						global._descriptive_temperature_strings["boil [material.name]"] = material.boiling_point
+
+	for(var/burn_string in global._descriptive_temperature_strings)
+		if(temperature >= global._descriptive_temperature_strings[burn_string])
+			LAZYADD(., burn_string)
+
 var/global/list/materials_by_gas_symbol = list()
 
 /obj/effect/gas_overlay
@@ -313,6 +342,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/reagent_overlay
 	var/reagent_overlay_base = "reagent_base"
 
+	/// Boolean to indicate if this material should be used as a reference point for burn temperatures.
+	var/temperature_burn_milestone_material = FALSE
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
@@ -359,6 +391,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Null/clear a bunch of physical vars as this material is fake.
 	if(holographic)
+		temperature_burn_milestone_material = FALSE
 		shard_type                   = SHARD_NONE
 		conductive                   = 0
 		hidden_from_codex            = TRUE
@@ -540,7 +573,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // Currently used for weapons and objects made of uranium to irradiate things.
 /decl/material/proc/products_need_process()
 	return (radioactivity>0) //todo
-
 
 //Clausius–Clapeyron relation
 /decl/material/proc/get_boiling_temp(var/pressure = ONE_ATMOSPHERE)

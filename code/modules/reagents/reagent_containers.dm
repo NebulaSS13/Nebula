@@ -180,6 +180,33 @@
 				reagent_overlay.overlays += overlay_image(icon, reagent.reagent_overlay, reagent.color, RESET_COLOR | RESET_ALPHA)
 	return reagent_overlay
 
+/obj/item/chems/ProcessAtomTemperature()
+
+	. = ..()
+
+	if(QDELETED(src) || !reagents?.total_volume || !ATOM_IS_OPEN_CONTAINER(src) || !isatom(loc))
+		return
+
+	// Vaporize anything over its boiling point.
+	for(var/reagent in reagents.reagent_volumes)
+		var/decl/material/mat = GET_DECL(reagent)
+		if(!isnull(mat.boiling_point) && temperature >= mat.boiling_point)
+			// TODO: reduce atom temperature?
+			var/removing = min(5, reagents.reagent_volumes[reagent])
+			reagents.remove_reagent(reagent, removing, defer_update = TRUE, removed_phases = MAT_PHASE_LIQUID)
+			loc.take_vaporized_reagent(reagent, removing)
+
+/obj/item/chems/take_vaporized_reagent(reagent, amount)
+	// TODO: check ATOM_IS_OPEN_CONTAINER(src) when there is a closed container for alembic vessels
+	if(!reagents?.maximum_volume)
+		return ..()
+	var/take_reagent = min(amount, REAGENTS_FREE_SPACE(reagents))
+	if(take_reagent > 0)
+		reagents.add_reagent(reagent, take_reagent)
+		amount -= take_reagent
+	if(amount > 0)
+		return ..(reagent, amount)
+
 //
 // Interactions
 //
