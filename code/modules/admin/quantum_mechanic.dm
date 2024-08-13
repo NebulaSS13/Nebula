@@ -27,7 +27,7 @@
 	Q.set_dir(mob.dir)
 	Q.ckey = ckey
 
-	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/quantum)
+	var/decl/outfit/outfit = GET_DECL(/decl/outfit/quantum)
 	outfit.equip_outfit(Q)
 
 	//Sort out ID
@@ -45,7 +45,7 @@
 	Q.phase_in(get_turf(Q))
 	log_debug("Quantum Mechanic spawned at X: [Q.x], Y: [Q.y], Z: [Q.z]. User: [src]")
 
-/decl/hierarchy/outfit/quantum
+/decl/outfit/quantum
 	name = "Quantum Mechanic"
 	glasses =  /obj/item/clothing/glasses/sunglasses/quantum
 	uniform =  /obj/item/clothing/jumpsuit/quantum

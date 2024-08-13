@@ -15,7 +15,7 @@
 	ideal_character_age = 20
 	minimal_player_age = 7
 
-	outfit_type = /decl/hierarchy/outfit/job/merchant
+	outfit_type = /decl/outfit/job/merchant
 
 	skill_points = 24
 	min_skill = list(
@@ -36,7 +36,7 @@
 /obj/abstract/submap_landmark/spawnpoint/liberia
 	name = "Merchant"
 
-/decl/hierarchy/outfit/job/merchant
+/decl/outfit/job/merchant
 	name = "Job - Merchant - Liberia"
 	shoes = /obj/item/clothing/shoes/color/black
 	l_ear = /obj/item/radio/headset

@@ -3,7 +3,7 @@
 	supervisors = "the Head Engineer"
 	total_positions = 2
 	spawn_positions = 2
-	outfit_type = /decl/hierarchy/outfit/job/ministation/engineer
+	outfit_type = /decl/outfit/job/ministation/engineer
 	department_types = list(/decl/department/engineering)
 	selection_color = "#5b4d20"
 	economic_power = 5
@@ -118,7 +118,7 @@
 	)
 	minimal_player_age = 14
 	supervisors = "the Captain"
-	outfit_type = /decl/hierarchy/outfit/job/ministation/chief_engineer
+	outfit_type = /decl/outfit/job/ministation/chief_engineer
 	min_skill = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_COMPUTER     = SKILL_ADEPT,

@@ -65,7 +65,7 @@
 	wizard.current.SetName(wizard.current.real_name)
 
 /decl/special_role/wizard/equip_role(var/mob/living/human/wizard_mob)
-	default_outfit = pick(decls_repository.get_decl_paths_of_subtype(/decl/hierarchy/outfit/wizard))
+	default_outfit = pick(decls_repository.get_decl_paths_of_subtype(/decl/outfit/wizard))
 	. = ..()
 
 /decl/special_role/wizard/print_player_summary()

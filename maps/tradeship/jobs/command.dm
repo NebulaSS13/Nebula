@@ -1,7 +1,7 @@
 /datum/job/tradeship_captain
 	title = "Captain"
 	supervisors = "your profit margin, your conscience, and the Trademaster"
-	outfit_type = /decl/hierarchy/outfit/job/tradeship/captain
+	outfit_type = /decl/outfit/job/tradeship/captain
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_WEAPONS  = SKILL_ADEPT,
@@ -76,7 +76,7 @@
 /datum/job/tradeship_first_mate
 	title = "First Mate"
 	supervisors = "the Captain"
-	outfit_type = /decl/hierarchy/outfit/job/tradeship/mate
+	outfit_type = /decl/outfit/job/tradeship/mate
 	head_position = 1
 	department_types = list(
 		/decl/department/command,

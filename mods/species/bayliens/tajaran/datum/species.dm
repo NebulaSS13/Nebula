@@ -20,7 +20,7 @@
 	hidden_from_codex = FALSE
 	available_bodytypes = list(/decl/bodytype/feline)
 
-	preview_outfit = /decl/hierarchy/outfit/job/generic/engineer
+	preview_outfit = /decl/outfit/job/generic/engineer
 
 	spawn_flags = SPECIES_CAN_JOIN
 

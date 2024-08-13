@@ -57,7 +57,7 @@
 	guestbanned = 1
 	must_fill = 1
 	not_random_selectable = 1
-	outfit_type = /decl/hierarchy/outfit/job/science/rd
+	outfit_type = /decl/outfit/job/science/rd
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_COMPUTER = SKILL_BASIC,
@@ -107,7 +107,7 @@
 		"High Energy Researcher"
 	)
 	minimal_player_age = 7
-	outfit_type = /decl/hierarchy/outfit/job/science/scientist
+	outfit_type = /decl/outfit/job/science/scientist
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_COMPUTER = SKILL_BASIC,
@@ -148,7 +148,7 @@
 		"Biomechanical Engineer",
 		"Mechatronic Engineer")
 	minimal_player_age = 3
-	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
+	outfit_type = /decl/outfit/job/science/roboticist
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_COMPUTER = SKILL_ADEPT,

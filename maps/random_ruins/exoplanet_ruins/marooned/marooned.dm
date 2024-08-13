@@ -21,10 +21,10 @@
 
 /obj/abstract/landmark/corpse/marooned_officer
 	name = "Horazy Warda"
-	corpse_outfits = list(/decl/hierarchy/outfit/marooned_officer)
+	corpse_outfits = list(/decl/outfit/marooned_officer)
 	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME
 
-/decl/hierarchy/outfit/marooned_officer
+/decl/outfit/marooned_officer
 	name = "Dead Magnitka's fleet officer"
 	uniform = /obj/item/clothing/costume/magintka_uniform
 	suit = /obj/item/clothing/suit/jacket/winter

@@ -68,7 +68,7 @@
 	if(type == /datum/job && global.using_map.default_job_type == type)
 		title = "Debug Job"
 		hud_icon = "hudblank"
-		outfit_type = /decl/hierarchy/outfit/job/generic/scientist
+		outfit_type = /decl/outfit/job/generic/scientist
 		autoset_department = TRUE
 
 	if(!length(department_types) && autoset_department)
@@ -96,7 +96,7 @@
 	else
 		H.set_default_language(/decl/language/human/common)
 
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
+	var/decl/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit)
 		. = outfit.equip_outfit(H, alt_title || title, job = src, rank = grade)
 
@@ -120,8 +120,8 @@
 		. = allowed_branches[branch.type] || .
 	if(allowed_ranks && grade)
 		. = allowed_ranks[grade.type] || .
-	. = . || outfit_type
-	. = outfit_by_type(.)
+	. ||= outfit_type
+	return GET_DECL(.)
 
 /datum/job/proc/create_cash_on_hand(var/mob/living/human/H, var/datum/money_account/M)
 	if(!istype(M) || !H.client?.prefs?.starting_cash_choice)
@@ -181,7 +181,7 @@
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade, var/additional_skips)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
+	var/decl/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip_outfit(H, alt_title || title, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips), job = src, rank = grade)

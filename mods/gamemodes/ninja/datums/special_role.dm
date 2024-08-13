@@ -13,7 +13,7 @@
 	default_access = list(access_ninja)
 	faction = "ninja"
 	base_to_load = "Ninja Base"
-	default_outfit = /decl/hierarchy/outfit/ninja
+	default_outfit = /decl/outfit/ninja
 	id_title = "Infiltrator"
 	rig_type = /obj/item/rig/light/ninja
 	var/list/ninja_titles
@@ -95,7 +95,7 @@
 		H.SetName(H.real_name)
 	player.name = H.name
 
-/decl/hierarchy/outfit/ninja
+/decl/outfit/ninja
 	name =    "Special Role - Ninja"
 	l_ear =   /obj/item/radio/headset
 	uniform = /obj/item/clothing/jumpsuit/black

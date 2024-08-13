@@ -64,23 +64,23 @@
 
 /obj/abstract/landmark/corpse/lar_maria/test_subject
 	name = "dead test subject"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/test_subject)
+	corpse_outfits = list(/decl/outfit/corpse/test_subject)
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION//no name, no hairs etc.
 
-/decl/hierarchy/outfit/corpse/test_subject
+/decl/outfit/corpse/test_subject
 	name = "dead ZHP test subject"
 	uniform = /obj/item/clothing/jumpsuit/orange
 	shoes = /obj/item/clothing/shoes/color/orange
 
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard
 	name = "dead guard"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_guard)
+	corpse_outfits = list(/decl/outfit/corpse/zhp_guard)
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
 
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-115))
 
-/decl/hierarchy/outfit/corpse/zhp_guard
+/decl/outfit/corpse/zhp_guard
 	name = "Dead ZHP guard"
 	uniform = /obj/item/clothing/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/armor/pcarrier/light
@@ -133,9 +133,9 @@
 
 /obj/abstract/landmark/corpse/lar_maria/virologist
 	name = "dead virologist"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_virologist)
+	corpse_outfits = list(/decl/outfit/corpse/zhp_virologist)
 
-/decl/hierarchy/outfit/corpse/zhp_virologist
+/decl/outfit/corpse/zhp_virologist
 	name = "Dead male ZHP virologist"
 	uniform = /obj/item/clothing/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/toggle/labcoat
@@ -152,12 +152,12 @@
 
 /obj/abstract/landmark/corpse/lar_maria/virologist_female
 	name = "dead virologist"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_virologist_female)
+	corpse_outfits = list(/decl/outfit/corpse/zhp_virologist_female)
 	hair_styles_per_species = list(SPECIES_HUMAN = list(/decl/sprite_accessory/hair/flair))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#ae7b48"))
 	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
 
-/decl/hierarchy/outfit/corpse/zhp_virologist_female
+/decl/outfit/corpse/zhp_virologist_female
 	name = "Dead female ZHP virologist"
 	uniform = /obj/item/clothing/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/toggle/labcoat

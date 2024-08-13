@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/raider
+/decl/outfit/raider
 	name =  "Special Role - Raider"
 	l_ear = /obj/item/radio/headset/raider
 	id_type = /obj/item/card/id/syndicate
@@ -62,11 +62,11 @@
 		/obj/item/clothing/webbing/holster/hip
 	)
 
-/decl/hierarchy/outfit/raider/Initialize()
+/decl/outfit/raider/Initialize()
 	randomize_clothing()
 	. = ..()
 
-/decl/hierarchy/outfit/raider/equip_outfit(mob/living/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
+/decl/outfit/raider/equip_outfit(mob/living/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	randomize_clothing()
 	. = ..()
 	if(. && H)
@@ -122,7 +122,7 @@
 			else
 				H.put_in_hands(holster)
 
-/decl/hierarchy/outfit/raider/proc/randomize_clothing()
+/decl/outfit/raider/proc/randomize_clothing()
 	shoes =   pick(raider_shoes)
 	uniform = pick(raider_uniforms)
 	glasses = pick(raider_glasses)

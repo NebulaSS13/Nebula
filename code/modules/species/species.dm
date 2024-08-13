@@ -222,7 +222,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/preview_icon_width = 64
 	var/preview_icon_height = 64
 	var/preview_icon_path
-	var/preview_outfit = /decl/hierarchy/outfit/job/generic/assistant
+	var/preview_outfit = /decl/outfit/job/generic/assistant
 
 	/// List of emote types that this species can use by default.
 	var/list/default_emotes

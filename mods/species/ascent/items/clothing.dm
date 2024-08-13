@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/ascent
+/decl/outfit/job/ascent
 	name         = "Ascent - Gyne"
 	mask         = /obj/item/clothing/mask/gas/ascent
 	uniform      = /obj/item/clothing/jumpsuit/ascent
@@ -9,11 +9,11 @@
 	pda_slot     = 0
 	outfit_flags = 0
 
-/decl/hierarchy/outfit/job/ascent/attendant
+/decl/outfit/job/ascent/attendant
 	name = "Ascent - Attendant"
 	back = /obj/item/rig/mantid
 
-/decl/hierarchy/outfit/job/ascent/tech
+/decl/outfit/job/ascent/tech
 	name = "Ascent - Technician"
 	suit = /obj/item/clothing/suit/ascent
 

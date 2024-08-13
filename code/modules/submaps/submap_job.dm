@@ -6,7 +6,7 @@
 	announced = FALSE
 	create_record = FALSE
 	total_positions = 4
-	outfit_type = /decl/hierarchy/outfit/job/survivor
+	outfit_type = /decl/outfit/job/survivor
 	hud_icon = "hudblank"
 	available_by_default = FALSE
 	allowed_ranks = null
@@ -45,7 +45,7 @@
 	var/list/blacklisted_species = list()
 	var/list/whitelisted_species = list()
 
-/decl/hierarchy/outfit/job/survivor
+/decl/outfit/job/survivor
 	name = "Job - Survivor"
 
 /datum/job/submap/New(var/datum/submap/_owner, var/abstract_job = FALSE)

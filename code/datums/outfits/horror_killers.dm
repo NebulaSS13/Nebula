@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/tunnel_clown
+/decl/outfit/tunnel_clown
 	name = "Tunnel clown"
 	uniform = /obj/item/clothing/costume/clown
 	shoes = /obj/item/clothing/shoes/clown_shoes
@@ -15,7 +15,7 @@
 	id_type = /obj/item/card/id/centcom/station
 	id_pda_assignment = "Tunnel Clown!"
 
-/decl/hierarchy/outfit/masked_killer
+/decl/outfit/masked_killer
 	name = "Masked killer"
 	uniform = /obj/item/clothing/pants/mustard/overalls
 	shoes = /obj/item/clothing/shoes/color/white
@@ -29,14 +29,14 @@
 	r_pocket = /obj/item/scalpel
 	hands = list(/obj/item/twohanded/fireaxe)
 
-/decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/human/H)
+/decl/outfit/masked_killer/post_equip(var/mob/living/human/H)
 	..()
 	var/victim = get_mannequin(H.ckey)
 	if(victim)
 		for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
 			carried_item.add_blood(victim) //Oh yes, there will be blood... just not blood from the killer because that's odd
 
-/decl/hierarchy/outfit/reaper
+/decl/outfit/reaper
 	name = "Reaper"
 	uniform =  /obj/item/clothing/pants/slacks/outfit
 	shoes =    /obj/item/clothing/shoes/color/black
@@ -50,7 +50,7 @@
 	pda_slot = slot_belt_str
 	pda_type = /obj/item/modular_computer/pda/heads
 
-/decl/hierarchy/outfit/reaper/post_equip(var/mob/living/human/H)
+/decl/outfit/reaper/post_equip(var/mob/living/human/H)
 	..()
 	var/obj/item/secure_storage/briefcase/sec_briefcase = new(H)
 	for(var/obj/item/briefcase_item in sec_briefcase)

@@ -3,9 +3,9 @@
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "literally everyone, you bottom feeder"
-	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand
+	outfit_type = /decl/outfit/job/tradeship/hand
 	alt_titles = list(
-		"Cook" = /decl/hierarchy/outfit/job/tradeship/hand/cook,
+		"Cook" = /decl/outfit/job/tradeship/hand/cook,
 		"Cargo Hand",
 		"Passenger")
 	department_types = list(/decl/department/civilian)

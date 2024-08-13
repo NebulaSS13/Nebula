@@ -52,7 +52,7 @@
 	guestbanned = 1
 	must_fill = 1
 	not_random_selectable = 1
-	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
+	outfit_type = /decl/outfit/job/medical/cmo
 	min_skill = list(
 		SKILL_LITERACY  = SKILL_ADEPT,
 		SKILL_MEDICAL   = SKILL_EXPERT,
@@ -103,12 +103,12 @@
 		access_external_airlocks
 	)
 	alt_titles = list(
-		"Surgeon" =             /decl/hierarchy/outfit/job/medical/doctor/surgeon,
-		"Emergency Physician" = /decl/hierarchy/outfit/job/medical/doctor/emergency_physician,
-		"Nurse" =               /decl/hierarchy/outfit/job/medical/doctor/nurse,
-		"Virologist" =          /decl/hierarchy/outfit/job/medical/doctor/virologist
+		"Surgeon" =             /decl/outfit/job/medical/doctor/surgeon,
+		"Emergency Physician" = /decl/outfit/job/medical/doctor/emergency_physician,
+		"Nurse" =               /decl/outfit/job/medical/doctor/nurse,
+		"Virologist" =          /decl/outfit/job/medical/doctor/virologist
 	)
-	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
+	outfit_type = /decl/outfit/job/medical/doctor
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_EVA      = SKILL_BASIC,
@@ -149,7 +149,7 @@
 		access_medical_equip,
 		access_chemistry
 	)
-	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
+	outfit_type = /decl/outfit/job/medical/chemist
 	min_skill = list(
 		SKILL_LITERACY  = SKILL_ADEPT,
 		SKILL_MEDICAL   = SKILL_ADEPT,
@@ -186,7 +186,7 @@
 		access_medical_equip,
 		access_psychiatrist
 	)
-	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
+	outfit_type = /decl/outfit/job/medical/psychiatrist
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_MEDICAL  = SKILL_BASIC

@@ -18,7 +18,7 @@
 	initial_spawn_target = 6
 
 	faction = "deathsquad"
-	default_outfit = /decl/hierarchy/outfit/commando
+	default_outfit = /decl/outfit/commando
 	id_title = "Asset Protection"
 	var/deployed = 0
 
@@ -26,7 +26,7 @@
 	if(..())
 		deployed = 1
 
-/decl/hierarchy/outfit/commando
+/decl/outfit/commando
 	name =     "Special Role - Deathsquad Commando"
 	l_ear =    /obj/item/radio/headset/ert
 	uniform =  /obj/item/clothing/jumpsuit/green
@@ -40,7 +40,7 @@
 		/obj/item/energy_blade/sword
 	)
 
-/decl/hierarchy/outfit/commando/leader
+/decl/outfit/commando/leader
 	name =    "Special Role - Deathsquad Leader"
 	uniform =  /obj/item/clothing/costume/centcom_officer
 	l_pocket = /obj/item/pinpointer
@@ -48,7 +48,7 @@
 
 /decl/special_role/deathsquad/equip_role(var/mob/living/human/player)
 	if (player.mind == leader)
-		default_outfit = /decl/hierarchy/outfit/commando/leader
+		default_outfit = /decl/outfit/commando/leader
 	else
 		default_outfit = initial(default_outfit)
 	. = ..()

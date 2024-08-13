@@ -18,7 +18,7 @@
 	faction = "mercenary"
 
 	base_to_load = "Mercenary Base"
-	default_outfit = /decl/hierarchy/outfit/mercenary
+	default_outfit = /decl/outfit/mercenary
 
 /decl/special_role/mercenary/create_global_objectives()
 	if(!..())
