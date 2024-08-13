@@ -237,7 +237,8 @@
 			last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
 			last_fuel_ignite_temperature = min(last_fuel_ignite_temperature, mat.ignition_point)
 		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
-			fuel -= amount * mat.accelerant_value
+			// This means that 200u, a full wooden bucket of water, will suppress a fire with 20 fuel.
+			fuel -= amount * (mat.accelerant_value / FUEL_VALUE_SUPPRESSANT)
 		fuel = max(fuel, 0)
 		loc.take_waste_burn_products(., last_fuel_burn_temperature)
 
@@ -332,10 +333,10 @@
 		for(var/rtype in reagents?.reagent_volumes)
 
 			var/decl/material/reagent = GET_DECL(rtype)
-			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
+			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && !isnull(reagent.boiling_point) && reagent.boiling_point < get_current_burn_temperature())
 				do_steam = TRUE
 
-			var/volume = max(1, round(REAGENT_VOLUME(reagents, rtype) / 10)) // arbitrary constant to get it in line with mat burning values
+			var/volume = round(REAGENT_VOLUME(reagents, rtype) / REAGENT_UNITS_PER_GAS_MOLE)
 			var/list/waste_products = burn_material(reagent, volume)
 			if(!isnull(waste_products))
 				for(var/product in waste_products)
