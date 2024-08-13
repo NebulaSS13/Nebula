@@ -1,14 +1,14 @@
-/decl/hierarchy/skill
+/decl/skill
 
-	name = "None"                         // Name of the skill. This is what the player sees.
-	abstract_type = /decl/hierarchy/skill // Don't mess with this without changing how Initialize works.
-	expected_type = /decl/hierarchy/skill
-	var/sort_priority = 0                 // Used for sort order in lists/presentation.
+	abstract_type = /decl/skill // Don't mess with this without changing how Initialize works.
+	var/name = "None"                     // Name of the skill. This is what the player sees.
+	var/decl/skill_category/category      // Category this skill belongs to.
 	var/desc = "Placeholder skill"        // Generic description of this skill.
 	var/difficulty = SKILL_AVERAGE        //Used to compute how expensive the skill is
 	var/default_max = SKILL_ADEPT         //Makes the skill capped at this value in selection unless overriden at job level.
 	var/default_value                     // The specific default value used for this skill. If null, uses the skillset's default.
 	var/prerequisites                     // A list of skill prerequisites, if needed.
+	var/fallback_key                      // If the skill UID is not found in the savefile, this is the fallback key to use for migrating old savefiles.
 
    	// Names for different skill values, in order from 1 up.
 	var/list/levels = list(
@@ -19,7 +19,12 @@
 		"Master"      = "Professional Description"
 	)
 
-/decl/hierarchy/skill/proc/get_cost(var/level)
+/decl/skill/Initialize()
+	. = ..()
+	category = GET_DECL(category)
+	ADD_SORTED(category.children, src, /proc/cmp_skill_asc)
+
+/decl/skill/proc/get_cost(var/level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_ADEPT)
 			return difficulty
@@ -28,59 +33,55 @@
 		else
 			return 0
 
-/decl/hierarchy/skill/proc/update_special_effects(mob/mob, level)
+/decl/skill/proc/update_special_effects(mob/mob, level)
 	return
 
-/decl/hierarchy/skill/dd_SortValue()
-	return sort_priority
+/decl/skill/validate()
+	. = ..()
+	if(!category)
+		. += "Category not set"
 
-/decl/hierarchy/skill/organizational
+/decl/skill_category
+	abstract_type = /decl/skill_category
+	var/name = "Category"
+	var/sort_priority = 0 //! Used for sort order in lists/presentation.
+	var/list/decl/skill/children = list()
+
+/decl/skill_category/organizational
 	name = "Organizational"
 	sort_priority = 1
-	difficulty = SKILL_EASY
-	default_max = SKILL_MAX
-	abstract_type = /decl/hierarchy/skill/organizational
 
-/decl/hierarchy/skill/general
+/decl/skill_category/general
 	name = "General"
 	sort_priority = 2
-	difficulty = SKILL_EASY
-	default_max = SKILL_MAX
-	abstract_type = /decl/hierarchy/skill/general
 
-/decl/hierarchy/skill/security
+/decl/skill_category/security
 	name = "Security"
 	sort_priority = 3
-	abstract_type = /decl/hierarchy/skill/security
 
-/decl/hierarchy/skill/engineering
+/decl/skill_category/engineering
 	name = "Engineering"
 	sort_priority = 4
-	abstract_type = /decl/hierarchy/skill/engineering
 
-/decl/hierarchy/skill/research
+/decl/skill_category/research
 	name = "Research"
 	sort_priority = 5
-	abstract_type = /decl/hierarchy/skill/research
 
-/decl/hierarchy/skill/medical
+/decl/skill_category/medical
 	name = "Medical"
 	sort_priority = 6
-	abstract_type = /decl/hierarchy/skill/medical
-	difficulty = SKILL_HARD
 
-/decl/hierarchy/skill/service
+/decl/skill_category/service
 	name = "Service"
 	sort_priority = 7
-	difficulty = SKILL_EASY
-	default_max = SKILL_MAX
-	abstract_type = /decl/hierarchy/skill/service
 
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
-/decl/hierarchy/skill/organizational/literacy
+/decl/skill/literacy
 	name = "Literacy"
+	category = /decl/skill_category/organizational
 	uid = "skill_literacy"
+	fallback_key = "/decl/hierarchy/skill/organizational/literacy"
 	desc = "Your ability to read and write."
 	levels = list(
 		"Unskilled"   = "You are completely incapable of reading or writing.",
@@ -90,9 +91,11 @@
 		"Master"      = "Your mastery of the written word is such that you are able to produce your own textbooks for others to use. You can write a textbook about any skill you have personally trained in."
 	)
 
-/decl/hierarchy/skill/organizational/finance
+/decl/skill/finance
 	name = "Finance"
+	category = /decl/skill_category/organizational
 	uid =  "skill_finance"
+	fallback_key = "/decl/hierarchy/skill/organizational/finance"
 	desc = "Your ability to manage money and investments."
 	levels = list(
 		"Unskilled"   = "Your understanding of money starts and ends with personal finance. While you are able to perform basic transactions, you get lost in the details, and can find yourself ripped off on occasion.<br>- You get some starting money, increasing with level.",
@@ -102,15 +105,22 @@
 		"Master"      = "You have an excellent knowledge of finance, will often make brilliant investments, and have an instinctive feel for interstellar economics. Financial instruments are weapons in your hands. You likely have professional experience in the finance industry."
 	)
 
-/decl/hierarchy/skill/organizational/finance/update_special_effects(mob/mob, level)
+/decl/skill/finance/update_special_effects(mob/mob, level)
 	mob.remove_language(/decl/language/legal)
 	if(level >= SKILL_EXPERT)
 		mob.add_language(/decl/language/legal)
 
 // Category: General
-/decl/hierarchy/skill/general/eva
+/decl/skill/general
+	abstract_type = /decl/skill/general
+	difficulty = SKILL_EASY
+	default_max = SKILL_MAX
+
+/decl/skill/general/eva
 	name = "Extra-vehicular activity"
+	category = /decl/skill_category/general
 	uid =  "skill_eva"
+	fallback_key = "/decl/hierarchy/skill/general/eva"
 	desc = "This skill describes your skill and knowledge of space-suits and working in vacuum."
 	levels = list(
 		"Unskilled"   = "You have basic safety training common to people who work in space: You know how to put on and seal your internals, and you can probably struggle into a space suit if you really need to, though you'll be clumsy at it. You're still prone to mistakes that may leave you trying to breathe vacuum.<br>- You can remove hardsuits. Its speed increases with level.<br>- You will always get floored when you enter gravity area from space. This chance decreases with level.<br>- You are likely to slip. This chance decreases with level.",
@@ -120,9 +130,11 @@
 		"Master"      = "You are just as much at home in a vacuum as in atmosphere. You probably do your job almost entirely EVA.<br>- You cannot get floored anymore.<br>- You get bonus speed in zero-G."
 	)
 
-/decl/hierarchy/skill/general/eva/mech
+/decl/skill/general/mech
 	name = "Exosuit Operation"
+	category = /decl/skill_category/general
 	uid =  "skill_exosuit"
+	fallback_key = "/decl/hierarchy/skill/general/eva/mech"
 	desc = "Allows you to operate exosuits well."
 	levels = list(
 		"Untrained"   = "You are unfamiliar with exosuit controls, and if you attempt to use them you are liable to make mistakes.",
@@ -132,9 +144,11 @@
 	default_max = SKILL_BASIC
 	difficulty = SKILL_AVERAGE
 
-/decl/hierarchy/skill/general/pilot
+/decl/skill/general/pilot
 	name = "Piloting"
+	category = /decl/skill_category/general
 	uid =  "skill_pilot"
+	fallback_key = "/decl/hierarchy/skill/general/pilot"
 	desc = "Describes your experience and understanding of piloting spacecraft, from small and short-range pods to corvette sized vessels."
 	levels = list(
 		"Unskilled"   = "You know what a spacecraft is, and you might have an abstract understanding of the differences between various ships. If your department is involved in the use of spacecraft, you know roughly what their capabilities are. You might be able to fly a spacecraft in a videogame. If you were to take the Helm of a smaller vessel, you might be able to move it with proper guidance.<br>- Travel time between tranisition decreases with level.<br>- You can fly ships but their movement might be randomized.<br>- The speed of your ship hitting carps will increase with level.",
@@ -146,9 +160,11 @@
 	difficulty = SKILL_AVERAGE
 	default_max = SKILL_ADEPT
 
-/decl/hierarchy/skill/general/hauling
+/decl/skill/general/hauling
 	name = "Athletics"
+	category = /decl/skill_category/general
 	uid =  "skill_hauling"
+	fallback_key = "/decl/hierarchy/skill/general/hauling"
 	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
 	levels = list(
 		"Unskilled"   = "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.<br>- You can pull objects but start to generate Lactate after tiring out. Your strength increases with level.<br>- You can throw objects. Their speed, thrown distance, and force increases with level.<br>- You can sprint, the stamina consumption rate is lowered with each level.<br>- You can leap by holding Ctrl and clicking on a distant target with grab intent, leap range is increased and chances of falling over are decreased with each level.",
@@ -158,9 +174,11 @@
 		"Master"      = "In addition to your excellent strength and endurance, you have a lot of experience with the specific physical demands of your job. You may have competitive experience with some form of athletics."
 	)
 
-/decl/hierarchy/skill/general/computer
+/decl/skill/general/computer
 	name = "Information Technology"
+	category = /decl/skill_category/general
 	uid =  "skill_computer"
+	fallback_key = "/decl/hierarchy/skill/general/computer"
 	desc = "Describes your understanding of computers, software and communication. Not a requirement for using computers, but definitely helps. Used in telecommunications and programming of computers and AIs."
 	levels = list(
 		"Unskilled"   = "You know how to use the computers and communication devices that you grew up with. You can use a computer console, a handheld or wall-mounted radio, and your headset, as well as your PDA. You know what an AI is, but you may see them as either \"people made of silicon\" or \"only machines\"; you know they have to obey their laws, but you don't know much about how or why they work.",
@@ -171,11 +189,18 @@
 	)
 
 // Category: Service
+/decl/skill/service
+	abstract_type = /decl/skill/service
+	category = /decl/skill_category/service
+	difficulty = SKILL_EASY
+	default_max = SKILL_MAX
 
-/decl/hierarchy/skill/service/botany
+/decl/skill/service/botany
 	name = "Botany"
+	category = /decl/skill_category/service
 	uid =  "skill_botany"
-	desc = "Describes how good a character is at growing and maintaining plants."
+	fallback_key = "/decl/hierarchy/skill/service/botany"
+	desc = "Describes how good you are at growing and maintaining plants."
 	levels = list(
 		"Unskilled"   = "You know next to nothing about plants. While you can attempt to plant, weed, or harvest, you are just as likely to kill the plant instead.",
 		"Basic"       = "You've done some gardening. You can water, weed, fertilize, plant, and harvest, and you can recognize and deal with pests. You may be a hobby gardener.<br>- You can safely plant and weed normal plants.<br>- You can tell weeds and pests apart from each other.",
@@ -184,10 +209,12 @@
 		"Master"      = "You're a specialized botanist. You can care for even the most exotic, fragile, or dangerous plants. You can use gene manipulation machinery with precision, and are often able to avoid the degradation of samples."
 	)
 
-/decl/hierarchy/skill/service/cooking
+/decl/skill/service/cooking
 	name = "Cooking"
+	category = /decl/skill_category/service
 	uid =  "skill_cooking"
-	desc = "Describes a character's skill at preparing meals and other consumable goods. This includes mixing alcoholic beverages."
+	fallback_key = "/decl/hierarchy/skill/service/cooking"
+	desc = "Describes your skill at preparing meals and other consumable goods. This includes mixing alcoholic beverages."
 	levels = list(
 		"Unskilled"   = "You barely know anything about cooking, and stick to vending machines when you can. The microwave is a device of black magic to you, and you avoid it when possible.",
 		"Basic"       = "You can make simple meals and do the cooking for your family. Things like spaghetti, grilled cheese, or simple mixed drinks are your usual fare.<br>- You can safely use the blender.",
@@ -198,9 +225,11 @@
 
 // Category: Security
 
-/decl/hierarchy/skill/security/combat
+/decl/skill/combat
 	name = "Close Combat"
+	category = /decl/skill_category/security
 	uid =  "skill_combat"
+	fallback_key = "/decl/hierarchy/skill/security/combat"
 	desc = "This skill describes your training in hand-to-hand combat or melee weapon usage. While expertise in this area is rare in the era of firearms, experts still exist among athletes."
 	levels = list(
 		"Unskilled"   = "You can throw a punch or a kick, but it'll knock you off-balance. You're inexperienced and have probably never been in a serious hand-to-hand fight. In a fight, you might panic and run, grab whatever's nearby and blindly strike out with it, or (if the other guy is just as much of a beginner as you are) make a fool out of yourself.<br>- You can disarm, grab, and hit. Their success chance depends on the fighters' skill difference.<br>- The chance of falling over when tackled is reduced with level.",
@@ -210,7 +239,7 @@
 		"Master"      = "You specialize in hand-to-hand combat. You're well-trained in a practical martial art, and in good shape. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or special forces member."
 	)
 
-/decl/hierarchy/skill/security/combat/get_cost(var/level)
+/decl/skill/combat/get_cost(var/level)
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
@@ -221,9 +250,11 @@
 		else
 			return 0
 
-/decl/hierarchy/skill/security/weapons
+/decl/skill/weapons
 	name = "Weapons Expertise"
+	category = /decl/skill_category/security
 	uid =  "skill_weapons"
+	fallback_key = "/decl/hierarchy/skill/security/weapons"
 	desc = "This skill describes your expertise with and knowledge of weapons. A low level in this skill implies knowledge of simple weapons, for example flashes. A high level in this skill implies knowledge of complex weapons, such as unconfigured grenades, riot shields, pulse rifles or bombs. A low-medium level in this skill is typical for security officers, a high level of this skill is typical for special agents and soldiers."
 	levels = list(
 		"Unskilled"   = "You know how to recognize a weapon when you see one. You can point a gun and shoot it, though results vary wildly. You might forget the safety, you can't control burst recoil well, and you don't have trained reflexes for gun fighting.<br>- You might fire your weapon randomly.",
@@ -233,7 +264,7 @@
 		"Master"      = "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.<br>- You get extra accuracy for sniper rifles.<br>- You automatically eject shells from bolt-action firearms."
 	)
 
-/decl/hierarchy/skill/security/weapons/get_cost(var/level)
+/decl/skill/weapons/get_cost(var/level)
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
@@ -244,9 +275,11 @@
 		else
 			return 0
 
-/decl/hierarchy/skill/security/forensics
+/decl/skill/forensics
 	name = "Forensics"
+	category = /decl/skill_category/security
 	uid =  "skill_forensics"
+	fallback_key = "/decl/hierarchy/skill/security/forensics"
 	desc = "Describes your skill at performing forensic examinations and identifying vital evidence. Does not cover analytical abilities, and as such isn't the only indicator for your investigation skill. Note that in order to perform autopsy, the surgery skill is also required."
 	levels = list(
 		"Unskilled"   = "You know that detectives solve crimes. You may have some idea that it's bad to contaminate a crime scene, but you're not too clear on the details.",
@@ -257,7 +290,7 @@
 	)
 	default_value = SKILL_NONE // defaulting this to SKILL_DEFAULT leads to a bunch of annoying examine messages
 
-/decl/hierarchy/skill/security/forensics/get_cost(var/level)
+/decl/skill/forensics/get_cost(var/level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_ADEPT, SKILL_EXPERT)
 			return difficulty * 2
@@ -267,9 +300,11 @@
 			return 0
 
 // Category: Engineering
-/decl/hierarchy/skill/engineering/construction
+/decl/skill/construction
 	name = "Construction"
+	category = /decl/skill_category/engineering
 	uid =  "skill_construction"
+	fallback_key = "/decl/hierarchy/skill/engineering/construction"
 	desc = "Your ability to construct various buildings, such as walls, floors, tables and so on. Note that constructing devices such as APCs additionally requires the Electronics skill. A low level of this skill is typical for janitors, a high level of this skill is typical for engineers."
 	//TODO: generalize material lists based on mat properties.
 	levels = list(
@@ -281,9 +316,11 @@
 	)
 	difficulty = SKILL_EASY
 
-/decl/hierarchy/skill/engineering/electrical
+/decl/skill/electrical
 	name = "Electrical Engineering"
+	category = /decl/skill_category/engineering
 	uid =  "skill_electrical"
+	fallback_key = "/decl/hierarchy/skill/engineering/electrical"
 	desc = "This skill describes your knowledge of electronics and the underlying physics. A low level of this skill implies you know how to lay out wiring and configure powernets, a high level of this skill is required for working complex electronic devices such as circuits or bots."
 	levels = list(
 		"Unskilled"   = "You know that electrical wires are dangerous and getting shocked is bad; you can see and report electrical malfunctions such as broken wires or malfunctioning APCs. You can change a light bulb, and you know how to replace a battery or charge up the equipment you normally use.<br>- Every time you open the hacking panel, wires are randomized.<br>- Every time you pulse a wire, there is a chance you pulse a different one.<br>- Every time you cut a wire, there is a chance you cut/mend extra ones.<br>- You can misconnect remote signalling devices.",
@@ -293,9 +330,11 @@
 		"Master"      = "You are an electrical engineer or the equivalent. You can design, upgrade, and modify electrical equipment and you are good at maximizing the efficiency of your power network. You can hack anything on the installation you can deal with power outages and electrical problems easily and efficiently.<br>- You can examine most wires on the hacking panel."
 	)
 
-/decl/hierarchy/skill/engineering/atmos
+/decl/skill/atmos
 	name = "Atmospherics"
+	category = /decl/skill_category/engineering
 	uid =  "skill_atmos"
+	fallback_key = "/decl/hierarchy/skill/engineering/atmos"
 	desc = "Describes your knowledge of piping, air distribution and gas dynamics."
 	levels = list(
 		"Unskilled"   = "You know that the air monitors flash orange when the air is bad and red when it's deadly. You know that a flashing fire door means danger on the other side. You know that some gases are poisonous, that pressure has to be kept in a safe range, and that most creatures need oxygen to live. You can use a fire extinguisher or deploy an inflatable barrier.<br>- RPD may give out random pipes, chance decreases with levels. <br>- You cannot recompress pipes with the RPD.",
@@ -305,9 +344,11 @@
 		"Master"      = "You are an atmospherics specialist. You monitor, modify, and optimize the installation atmospherics system, and you can quickly and easily deal with emergencies. You can modify atmospherics systems to do pretty much whatever you want them to. You can easily handle a fire or breach, and are proficient at securing an area and rescuing civilians, but you're equally likely to have simply prevented it from happening in the first place."
 	)
 
-/decl/hierarchy/skill/engineering/engines
+/decl/skill/engines
 	name = "Engines"
+	category = /decl/skill_category/engineering
 	uid =  "skill_engines"
+	fallback_key = "/decl/hierarchy/skill/engineering/engines"
 	desc = "Describes your knowledge of the various engine types common on space stations, such as the PACMAN, singularity, supermatter or RUST engine."
 	levels = list(
 		"Unskilled"   = "You know that \"delamination\" is a bad thing and that you should stay away from the singularity. You know the engine provides power, but you're unclear on the specifics. If you were to try to set up the engine, you would need someone to talk you through every detail--and even then, you'd probably make deadly mistakes.<br>- You can read the SM monitor readings with 40% error. This decreases with level.",
@@ -319,10 +360,11 @@
 	difficulty = SKILL_HARD
 
 // Category: Research
-
-/decl/hierarchy/skill/research/devices
+/decl/skill/devices
 	name = "Complex Devices"
+	category = /decl/skill_category/research
 	uid =  "skill_devices"
+	fallback_key = "/decl/hierarchy/skill/research/devices"
 	desc = "Describes the ability to assemble complex devices, such as computers, circuits, printers, robots or gas tank assemblies (bombs). Note that if a device requires electronics or programming, those skills are also required in addition to this skill."
 	levels = list(
 		"Unskilled"   = "You know how to use the technology that was present in whatever society you grew up in. You know how to tell when something is malfunctioning, but you have to call tech support to get it fixed.",
@@ -332,9 +374,11 @@
 		"Master"      = "You are an inventor or researcher. You can design, build, and modify equipment that most people don't even know exists. You are at home in the lab and the workshop and you've never met a gadget you couldn't take apart, put back together, and replicate."
 	)
 
-/decl/hierarchy/skill/research/science
+/decl/skill/science
 	name = "Science"
+	category = /decl/skill_category/research
 	uid =  "skill_science"
+	fallback_key = "/decl/hierarchy/skill/research/science"
 	desc = "Your experience and knowledge with scientific methods and processes."
 	levels = list(
 		"Unskilled"   = "You know what science is and probably have a vague idea of the scientific method from your high school science classes.",
@@ -345,9 +389,15 @@
 	)
 
 // Category: Medical
-/decl/hierarchy/skill/medical/medical
+/decl/skill/medicine
+	abstract_type = /decl/skill/medicine
+	category = /decl/skill_category/medical
+	difficulty = SKILL_HARD
+
+/decl/skill/medicine/medical
 	name = "Medicine"
 	uid =  "skill_medical"
+	fallback_key = "/decl/hierarchy/skill/medical/medical"
 	desc = "Covers an understanding of the human body and medicine. At a low level, this skill gives a basic understanding of applying common types of medicine, and a rough understanding of medical devices like the health analyzer. At a high level, this skill grants exact knowledge of all the medicine available on the installation, as well as the ability to use complex medical devices like the body scanner or mass spectrometer."
 	levels = list(
 		"Unskilled"   = "You know first aid, such as how to apply a bandage or ointment to an injury. You can use an autoinjector designed for civilian use, probably by reading the directions printed on it. You can tell when someone is badly hurt and needs a doctor; you can see whether someone has a badly broken bone, is having trouble breathing, or is unconscious. You may have trouble telling the difference between unconscious and dead at distance.<br>- You can use first aid supplies found in kits and pouches, including autoinjectors.",
@@ -357,9 +407,10 @@
 		"Master"      = "You are an experienced doctor or an expert nurse or EMT. You've seen almost everything there is to see when it comes to injuries and illness and even when it comes to something you haven't seen, you can apply your wide knowledge base to put together a treatment. In a pinch, you can do just about any medicine-related task, but your specialty, whatever it may be, is where you really shine."
 	)
 
-/decl/hierarchy/skill/medical/anatomy
+/decl/skill/medicine/anatomy
 	name = "Anatomy"
 	uid =  "skill_anatomy"
+	fallback_key = "/decl/hierarchy/skill/medical/anatomy"
 	desc = "Gives you a detailed insight of the human body. A high skill in this is required to perform surgery. This skill may also help in examining alien biology."
 	levels = list(
 		"Unskilled"   = "You know what organs, bones, and such are, and you know roughly where they are. You know that someone who's badly hurt or sick may need surgery.",
@@ -369,9 +420,10 @@
 		"Master"      = "You are an experienced surgeon. You can handle anything that gets rolled, pushed, or dragged into the OR, and you can keep a patient alive and stable even if there's no one to assist you. You can handle severe trauma cases or multiple organ failure, repair brain damage, and perform heart surgery. By now, you've probably specialized in one field, where you may have made new contributions to surgical technique. You can detect even small variations in the anatomy of a patient--very little will slip by your notice, provided you could get them on the operating table.<br>- The penalty from operating on improper operating surfaces is reduced."
 	)
 
-/decl/hierarchy/skill/medical/chemistry
+/decl/skill/medicine/chemistry
 	name = "Chemistry"
 	uid =  "skill_chemistry"
+	fallback_key = "/decl/hierarchy/skill/medical/chemistry"
 	desc = "Experience with mixing chemicals, and an understanding of what the effect will be. This doesn't cover an understanding of the effect of chemicals on the human body, as such the medical skill is also required for medical chemists."
 	levels = list(
 		"Unskilled"   = "You know that chemists work with chemicals; you know that they can make medicine or poison or useful chemicals. You probably know what an element is and have a vague idea of what a chemical reaction is from some chemistry class in your high school days.",

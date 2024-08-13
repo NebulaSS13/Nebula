@@ -68,7 +68,7 @@ Robots and antags can instruct.
 /datum/skill_verb/instruct/should_see_verb()
 	if(!..())
 		return
-	for(var/decl/hierarchy/skill/S in global.using_map.get_available_skills())
+	for(var/decl/skill/S in global.using_map.get_available_skills())
 		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
 			return 1
 
@@ -94,7 +94,7 @@ Robots and antags can instruct.
 	if(!get_options)
 		. = TRUE
 	else
-		for(var/decl/hierarchy/skill/S in global.using_map.get_available_skills())
+		for(var/decl/skill/S in global.using_map.get_available_skills())
 			if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 				LAZYSET(., S.name, S)
 
@@ -113,7 +113,7 @@ Robots and antags can instruct.
 	if(!(choice in options) || !(target in view(2)))
 		return
 
-	var/decl/hierarchy/skill/skill = options[choice]
+	var/decl/skill/skill = options[choice]
 	if(!do_skilled(6 SECONDS, skill.type, target) || !can_instruct(target) || !skill_check(skill.type, SKILL_EXPERT))
 		return
 

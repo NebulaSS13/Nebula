@@ -139,3 +139,19 @@
 
 /proc/cmp_inventory_slot_desc(datum/inventory_slot/a, datum/inventory_slot/b)
 	return b.quick_equip_priority - a.quick_equip_priority
+
+/proc/cmp_skill_category_asc(decl/skill_category/a, decl/skill_category/b)
+	return a.sort_priority - b.sort_priority
+
+/proc/cmp_skill_asc(decl/skill/a, decl/skill/b)
+	if(length(a.prerequisites))
+		var/decl/skill/prerequisite = GET_DECL(a.prerequisites[1])
+		if(b == prerequisite)
+			return 1 // goes before
+		return cmp_skill_asc(GET_DECL(a.prerequisites[1]), b)
+	if(length(b.prerequisites))
+		var/decl/skill/prerequisite = GET_DECL(b.prerequisites[1])
+		if(a == prerequisite)
+			return -1 // goes after
+		return cmp_skill_asc(a, GET_DECL(b.prerequisites[1]))
+	return cmp_name_or_type_asc(a, b)
