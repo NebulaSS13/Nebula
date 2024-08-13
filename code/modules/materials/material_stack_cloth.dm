@@ -37,7 +37,8 @@
 	crafting_stack_type = /obj/item/stack/material/thread
 	craft_verb = "weave"
 	craft_verbing = "weaving"
-	matter_multiplier = 0.1
+	w_class = ITEM_SIZE_TINY
+	matter_multiplier = 0.4
 	icon_state = "thread"
 	plural_icon_state = "thread-mult"
 	max_icon_state = "thread-max"
