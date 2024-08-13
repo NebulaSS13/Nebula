@@ -386,9 +386,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		vapor_products               = null
 		compost_value                = 0
 	else if(isnull(temperature_damage_threshold))
-		for(var/value in list(melting_point, boiling_point, heating_point))
-			if(!isnull(value) && (isnull(temperature_damage_threshold) || temperature_damage_threshold > value))
-				temperature_damage_threshold = value
+		var/new_temperature_damage_threshold = max(melting_point, boiling_point, heating_point)
+		// Don't let the threshold be lower than the ignition point.
+		if(!isnull(new_temperature_damage_threshold) && (isnull(ignition_point) || (new_temperature_damage_threshold > ignition_point)))
+			temperature_damage_threshold = new_temperature_damage_threshold
 
 	if(!shard_icon)
 		shard_icon = shard_type
