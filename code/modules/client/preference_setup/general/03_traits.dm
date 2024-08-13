@@ -7,7 +7,7 @@
 		removed_something = FALSE
 		for(var/trait_type in traits)
 			var/decl/trait/trait = GET_DECL(trait_type)
-			if(!istype(trait) || !trait.is_available_to(src) || (trait.parent && !(trait.parent.type in traits)))
+			if(!istype(trait) || !trait.is_available_to_select(src) || (trait.parent && !(trait.parent.type in traits)))
 				traits -= trait_type
 				removed_something = TRUE
 			else if(length(trait.incompatible_with))
@@ -95,7 +95,7 @@
 		if(trait_category.hide_from_chargen)
 			continue
 		for(var/decl/trait/trait as anything in trait_category.items)
-			if(trait.is_available_to(pref))
+			if(trait.is_available_to_select(pref))
 				available_categories[trait_category.name] = trait_category
 				break
 	if(!length(available_categories))
@@ -127,7 +127,7 @@
 			if(trait.type in pref.traits)
 				trait_spent += trait.trait_cost
 
-			if(trait_category_id == selected_category && !trait.parent && trait.is_available_at_chargen())
+			if(trait_category_id == selected_category && !trait.parent && trait.is_available_to_select(pref))
 				body += trait.get_trait_selection_data(src, pref.traits)
 
 		var/category_label = trait_category.name

@@ -3,7 +3,7 @@
 	trait_cost = 1
 	category = "Prosthetic Limbs"
 	available_at_chargen = TRUE
-	available_at_map_tech = MAP_TECH_LEVEL_SPACE
+	available_at_map_tech = MAP_TECH_LEVEL_ANY // the base trait must be available so that wooden prostheses are available
 	abstract_type = /decl/trait/prosthetic_limb
 	reapply_on_rejuvenation = TRUE
 	var/fullbody_synthetic_only = FALSE
@@ -20,6 +20,18 @@
 	var/decl/species/species = species_name ? get_species_by_key(species_name) : global.using_map.default_species
 	return species?.base_external_prosthetics_model
 
+/decl/trait/prosthetic_limb/get_chargen_name(datum/preferences/pref)
+	var/decl/bodytype/prosthetic/our_model = get_base_model(pref.species)
+	if(!model && our_model.name)
+		return "[capitalize_words(our_model.name)] [bodypart_name]"
+	return ..()
+
+/decl/trait/prosthetic_limb/get_chargen_desc(datum/preferences/pref)
+	var/decl/bodytype/prosthetic/our_model = get_base_model(pref.species)
+	if(!model && our_model.name)
+		return "You have been fitted with [ADD_ARTICLE(our_model.name)] [lowertext(bodypart_name)] prosthesis."
+	return ..()
+
 /decl/trait/prosthetic_limb/Initialize()
 	. = ..()
 	// Macro can generate float costs, round to closest point value.
@@ -28,7 +40,7 @@
 	if(bodypart_name)
 		if(model)
 			var/decl/bodytype/prosthetic/model_manufacturer = GET_DECL(model)
-			name = "[capitalize(model_manufacturer.name)] [bodypart_name]"
+			name = "[capitalize_words(model_manufacturer.name)] [bodypart_name]"
 			description = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
 			available_at_map_tech = model_manufacturer.required_map_tech
 		else
@@ -58,13 +70,13 @@
 	// We will also exclude from relevant amputations, but they will be handled by amputation trait build_references()
 
 	// If our model has any additional trait handling, do it here.
-	// Without a model, we will rely on is_available_to() to check get_base_model() for the user species.
+	// Without a model, we will rely on is_available_to_select() to check get_base_model() for the user species.
 	blocked_species = null
 
 /decl/trait/prosthetic_limb/applies_to_organ(var/organ)
 	return apply_to_limb && organ == apply_to_limb
 
-/decl/trait/prosthetic_limb/is_available_to(datum/preferences/pref)
+/decl/trait/prosthetic_limb/is_available_to_select(datum/preferences/pref)
 	. = ..()
 	if(.)
 		if(fullbody_synthetic_only)
@@ -79,6 +91,10 @@
 			var/decl/bodytype/B = S.get_bodytype_by_name(pref.bodytype)
 			if(!R.check_can_install(apply_to_limb, target_bodytype = (check_bodytype || B.bodytype_category)))
 				return FALSE
+			// If we're a duplicate of our parent due to get_base_model(), hide this one.
+			var/decl/trait/prosthetic_limb/parent_limb = parent
+			if(parent && !parent_limb.model && parent_limb.get_base_model(pref.species) == model && parent_limb.bodypart_name == bodypart_name)
+				return FALSE // duplicate
 		else if(!get_base_model(pref.species))
 			return FALSE
 
@@ -106,7 +122,7 @@
 			if("path" in organ_data)
 				E = new limb_path(holder, null, use_model)
 		if(istype(E) && E.bodytype != model) // sometimes in the last line we save ourselves some work here
-			// this should be pre-validated by is_available_to()
+			// this should be pre-validated by is_available_to_select()
 			if(replace_children)
 				E.set_bodytype_with_children(use_model)
 			else
