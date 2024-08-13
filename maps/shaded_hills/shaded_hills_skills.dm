@@ -1,4 +1,4 @@
-/decl/hierarchy/skill/Initialize()
+/decl/skill/Initialize()
 	. = ..()
 	// Rename the default skill levels.
 	var/static/list/replacement_levels = list(
@@ -15,13 +15,17 @@
 		levels -= level
 		levels[replacement_levels[i]] = old_string
 
-/decl/hierarchy/skill/crafting
+/decl/skill_category/crafting
 	name = "Crafting"
+	sort_priority = 3
+
+/decl/skill/crafting
+	abstract_type = /decl/skill/crafting
+	category = /decl/skill_category/crafting
 	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
-	abstract_type = /decl/hierarchy/skill/crafting
 
-/decl/hierarchy/skill/crafting/carpentry
+/decl/skill/crafting/carpentry
 	name = "Carpentry"
 	uid =  "skill_crafting_carpentry"
 	desc = "Your ability to construct and repair objects and structures made out of wood, and use woodworking tools."
@@ -33,7 +37,7 @@
 		"Master"      = "Few can match your experience with woodcraft. You fit tight joinery, carve intricate items, and prepare raw material with precision and speed. Trees dream of being worked by your hands."
 	)
 
-/decl/hierarchy/skill/crafting/stonemasonry
+/decl/skill/crafting/stonemasonry
 	name = "Stonemasonry"
 	uid =  "skill_crafting_mason"
 	desc = "Your ability to chisel, cut, carve, construct with, and knap stone and stone-like materials."
@@ -45,7 +49,7 @@
 		"Master"      = "Your work is delicate yet firm, always applying the exact amount of force for the desired effect, no more and no less. Mistakes in your work are unheard of, at least while you work without interference. You could be the head of a masons' guild, or at least train someone to work as a mason or stonecarver."
 	)
 
-/decl/hierarchy/skill/crafting/metalwork
+/decl/skill/crafting/metalwork
 	name = "Metalwork"
 	uid =  "skill_crafting_metalwork"
 	desc = "Your ability to shape, forge, and cast metal into various decorative or useful objects."
@@ -57,7 +61,7 @@
 		"Master"      = "To you, metal may as well be putty in your hands and under your hammer. You're able to get many casts from one mould, make and fill moulds of detailed objects, and forge intricate projects all on your own. With enough time, you could train someone enough to become a professional smith of their own."
 	)
 
-/decl/hierarchy/skill/crafting/artifice
+/decl/skill/crafting/artifice
 	name = "Artifice"
 	uid =  "skill_crafting_artifice"
 	desc = "Your ability to create, install, and comprehend complex devices and mechanisms, as well as your ability to create finely-detailed objects."
@@ -69,7 +73,7 @@
 		"Master"      = "You are a machine maestro, conducting a symphony of steadily-whirring mechanical parts. Every one of your creations has the utmost care put into its design and manufacture. Your hand never slips nor wavers when you work."
 	)
 
-/decl/hierarchy/skill/crafting/textiles
+/decl/skill/crafting/textiles
 	name = "Textiles"
 	uid =  "skill_crafting_textiles"
 	desc = "Your ability to create and mend objects made of cloth, thread, leather, and other fabrics."
@@ -81,7 +85,7 @@
 		"Master"      = "You've never seen a piece of clothing you couldn't mend. You've mastered not just the basics but more advanced techniques as well, making your skill with texiles nearly unmatched. Your knowledge would be suitable to train an apprentice enough to work independently."
 	)
 
-/decl/hierarchy/skill/crafting/sculpting
+/decl/skill/crafting/sculpting
 	name = "Sculpting"
 	uid =  "skill_crafting_sculpting"
 	desc = "Your ability to craft objects out of soft materials like wax or clay."
@@ -163,16 +167,30 @@
 		SKILL_CONSTRUCTION, // Anything using this should be replaced with another skill.
 	)
 
-//overrides for base skills with more fitting names/level texts
-/decl/hierarchy/skill/security
-	name = "Combat"
+//overrides for base skills and categories with more fitting names/level text
 
-/decl/hierarchy/skill/service
+/decl/skill_category/security
+	name = "Soldiering"
+	sort_priority = 2
+
+/decl/skill_category/service
 	name = "Domestic"
+	sort_priority = 1
 
-/decl/hierarchy/skill/organizational/finance
+/decl/skill_category/medical
+	name = "Medicine"
+	sort_priority = 4
+
+/decl/skill_category/research
+	name = "Natural Philosophy"
+	sort_priority = 5
+
+/decl/skill_category/organizational
+	name = "Bookkeeping"
+	sort_priority = 6
+
+/decl/skill/finance
 	name = "Finance"
-	uid =  "skill_finance"
 	desc = "Your ability to manage money and investments."
 	levels = list(
 		"Unskilled"   = "Your understanding of money starts and ends with personal finance. While you are able to perform basic transactions, you get lost in the details, and can find yourself ripped off on occasion.<br>- You get some starting money, increasing with level.",
@@ -182,13 +200,13 @@
 		"Master"      = "You have an excellent knowledge of finance, will often make brilliant investments, and have an instinctive feel for kingdom-wide economics. Financial instruments are weapons in your hands. You likely have professional experience in the finance industry."
 	)
 
-/decl/hierarchy/skill/organizational/finance/update_special_effects(mob/mob, level)
+/decl/skill/finance/update_special_effects(mob/mob, level)
 	return //we don't want legalese here
 
-/decl/hierarchy/skill/general/hauling
+/decl/skill/general/hauling
 	name = "Athletics"
-	uid =  "skill_hauling"
 	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
+	category = /decl/skill_category/security
 	levels = list(
 		"Unskilled"   = "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.<br>- You can pull objects but your stamina depends on your skill rank. Your strength increases with level.<br>- You can throw objects. Their speed, thrown distance, and force increases with level.<br>- You can sprint, the stamina consumption rate is lowered with each level.<br>- You can leap by holding Ctrl and clicking on a distant target with grab intent, leap range is increased and chances of falling over are decreased with each level.",
 		"Basic"       = "You have some familiarity with manual labor, and are in reasonable physical shape. Tasks requiring great dexterity or strength may still elude you.<br>- You can throw \"huge\" items or normal-sized mobs without getting weakened.",
@@ -197,9 +215,8 @@
 		"Master"      = "In addition to your excellent strength and endurance, you have a lot of experience with the specific physical demands of your job."
 	)
 
-/decl/hierarchy/skill/service/botany
+/decl/skill/service/botany
 	name = "Horticulture"
-	uid =  "skill_botany"
 	desc = "Describes how good you are at growing and maintaining plants."
 	levels = list(
 		"Unskilled"   = "You know next to nothing about plants. While you can attempt to plant, weed, or harvest, you are just as likely to kill the plant instead.",
@@ -209,9 +226,8 @@
 		"Master"      = "You're a specialized gardener. You can care for even the most exotic, fragile, or dangerous plants."
 	)
 
-/decl/hierarchy/skill/service/cooking
+/decl/skill/service/cooking
 	name = "Cooking"
-	uid =  "skill_cooking"
 	desc = "Describes your skill at preparing meals and other consumable goods. This includes mixing alcoholic beverages."
 	levels = list(
 		"Unskilled"   = "You barely know anything about cooking, and rely on others when you can. The stove is a device of black magic to you, and you avoid it when possible.",
@@ -221,9 +237,8 @@
 		"Master"      = "You are an expect chef capable of preparing a meal fit for a king! Not only are you good at cooking and mixing drinks, but you can manage a kitchen staff and cater for special events. You can safely prepare exotic foods and drinks that would be poisonous if prepared incorrectly."
 	)
 
-/decl/hierarchy/skill/security/combat
+/decl/skill/combat
 	name = "Melee Combat"
-	uid =  "skill_combat"
 	desc = "This skill describes your training with melee weapons such as swords and spears. It also dictates how good you are at hand-to-hand combat."
 	levels = list(
 		"Unskilled"   = "You have little to no experience with melee combat, you can swing or stab with a weapon, but you don't know how to do so effectively.<br>- You can disarm, grab, and hit. Their success chance depends on the fighters' skill difference.<br>- The chance of falling over when tackled is reduced with level.",
@@ -233,9 +248,8 @@
 		"Master"      = "You specialize in melee combat. You are in good shape  and skilled with multiple types of weapon. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or knight."
 	)
 
-/decl/hierarchy/skill/security/weapons
+/decl/skill/weapons
 	name = "Marksmanship"
-	uid =  "skill_weapons"
 	desc = "This skill describes your expertise with ranged weapons such as bows and slings."
 	levels = list(
 		"Unskilled"   = "You have little to no experience with a ranged weapon, and are likely to miss your target, injure yourself or missfire. <br>- You might fire your weapon randomly.",
@@ -245,9 +259,8 @@
 		"Master"      = "You are a master marksman with great aim, you can hit a moving target, even from afar."
 	)
 
-/decl/hierarchy/skill/medical/medical
+/decl/skill/medicine/medical
 	name = "Medicine"
-	uid =  "skill_medical"
 	desc = "Covers an understanding of the body and medicine. At a low level, this skill gives a basic understanding of applying common types of medicine. At a high level, this skill grants exact knowledge of all the medicine available in these lands."
 	levels = list(
 		"Unskilled"   = "You know first aid, such as how to apply a bandage or salve to an injury. You can tell when someone is badly hurt and needs a doctor; you can see whether someone has a badly broken bone, is having trouble breathing, or is unconscious. You may have trouble telling the difference between unconscious and dead at distance.<br>- You can use basic first aid supplies, such as bandages and salves.",
@@ -257,9 +270,8 @@
 		"Master"      = "You are an experienced doctor. You've seen almost everything there is to see when it comes to injuries and illness and even when it comes to something you haven't seen, you can apply your wide knowledge base to put together a treatment. In a pinch, you can do just about any medicine-related task, but your specialty, whatever it may be, is where you really shine."
 	)
 
-/decl/hierarchy/skill/medical/anatomy
+/decl/skill/medicine/anatomy
 	name = "Anatomy"
-	uid =  "skill_anatomy"
 	desc = "Gives you a detailed insight of the human body. A high skill in this is required to perform surgery."
 	levels = list(
 		"Unskilled"   = "You know what organs, bones, and such are, and you know roughly where they are. You know that someone who's badly hurt or sick may need surgery.",
@@ -269,10 +281,10 @@
 		"Master"      = "You are an experienced surgeon. You can handle anything that gets rolled, pushed, or dragged to you, and you can keep a patient alive and stable even if there's no one to assist you. You can handle severe trauma cases or multiple organ failure, repair brain damage, and perform heart surgery. By now, you've probably specialized in one field, where you may have made new contributions to surgical technique. You can detect even small variations in the anatomy of a patient--very little will slip by your notice.<br>- The penalty from operating on improper operating surfaces is reduced."
 	)
 
-/decl/hierarchy/skill/medical/chemistry
+/decl/skill/medicine/chemistry
 	name = "Chemistry"
-	uid =  "skill_chemistry"
 	desc = "Experience with chemical ingredients, and an understanding of what the effect will be. This doesn't cover an understanding of the effect of reagents on the human body, as such the medical skill is also required for medical chemists."
+	category = /decl/skill_category/research
 	levels = list(
 		"Unskilled"   = "You know that chemists work with various ingredients; you know that they can make medicine, poison or other useful concoctions.",
 		"Basic"       = "You can make basic medication--things like anti-toxin or burn salves. You have some training in safety and you won't blow up the lab... probably.",
