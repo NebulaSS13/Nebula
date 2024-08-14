@@ -32,12 +32,12 @@
 			pref.traits |= trait.type
 
 /datum/category_item/player_setup_item/traits/save_character(datum/pref_record_writer/W)
-	var/list/trait_names = list()
-	for(var/trait_id in pref.traits)
-		var/decl/trait/trait_decl = GET_DECL(trait_id)
+	var/list/trait_ids = list()
+	for(var/trait_type in pref.traits)
+		var/decl/trait/trait_decl = GET_DECL(trait_type)
 		if(istype(trait_decl))
-			trait_names |= trait_decl.uid
-	W.write("traits", trait_names)
+			trait_ids |= trait_decl.uid
+	W.write("traits", trait_ids)
 
 /datum/category_item/player_setup_item/traits/proc/get_trait_total()
 	var/trait_cost = 0

@@ -1,6 +1,7 @@
 /decl/bodytype/shapeshifter
 	name = "protean form"
 	bodytype_category = BODYTYPE_HUMANOID
+	uid = "bodytype_shapeshifter"
 
 /decl/bodytype/shapeshifter/apply_limb_colouration(var/obj/item/organ/external/E, var/icon/applying)
 	applying.MapColors("#4d4d4d","#969696","#1c1c1c", "#000000")

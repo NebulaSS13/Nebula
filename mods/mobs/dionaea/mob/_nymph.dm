@@ -80,6 +80,7 @@
 	name = "nymph"
 	bodytype_flag = 0
 	bodytype_category = "diona nymph body"
+	uid = "bodytype_diona"
 
 /decl/bodytype/diona/Initialize()
 	equip_adjust = list(

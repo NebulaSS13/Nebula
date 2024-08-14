@@ -63,6 +63,7 @@
 	description = "You are missing your left hand."
 	apply_to_limbs = list(BP_L_HAND)
 	ban_traits_relating_to_limbs = list(BP_L_HAND, BP_L_ARM)
+	uid = "trait_amputated_left_hand"
 
 /decl/trait/malus/amputation/left_arm
 	name = "Amputated Left Arm"
@@ -70,12 +71,14 @@
 	apply_to_limbs = list(BP_L_ARM, BP_L_HAND)
 	ban_traits_relating_to_limbs = list(BP_L_ARM, BP_L_HAND)
 	trait_cost = -2
+	uid = "trait_amputated_left_arm"
 
 /decl/trait/malus/amputation/right_hand
 	name = "Amputated Right Hand"
 	description = "You are missing your right hand."
 	apply_to_limbs = list(BP_R_HAND)
 	ban_traits_relating_to_limbs = list(BP_R_HAND, BP_R_ARM)
+	uid = "trait_amputated_right_hand"
 
 /decl/trait/malus/amputation/right_arm
 	name = "Amputated Right Arm"
@@ -83,12 +86,14 @@
 	apply_to_limbs = list(BP_R_ARM, BP_R_HAND)
 	ban_traits_relating_to_limbs = list(BP_R_ARM, BP_R_HAND)
 	trait_cost = -2
+	uid = "trait_amputated_right_arm"
 
 /decl/trait/malus/amputation/left_foot
 	name = "Amputated Left Foot"
 	description = "You are missing your left foot."
 	apply_to_limbs = list(BP_L_FOOT)
 	ban_traits_relating_to_limbs = list(BP_L_LEG, BP_L_FOOT)
+	uid = "trait_amputated_left_foot"
 
 /decl/trait/malus/amputation/left_leg
 	name = "Amputated Left Leg"
@@ -96,12 +101,14 @@
 	apply_to_limbs = list(BP_L_LEG, BP_L_FOOT)
 	ban_traits_relating_to_limbs = list(BP_L_LEG, BP_L_FOOT)
 	trait_cost = -2
+	uid = "trait_amputated_left_leg"
 
 /decl/trait/malus/amputation/right_foot
 	name = "Amputated Right Foot"
 	description = "You are missing your right foot."
 	apply_to_limbs = list(BP_R_FOOT)
 	ban_traits_relating_to_limbs = list(BP_R_LEG, BP_R_FOOT)
+	uid = "trait_amputated_right_foot"
 
 /decl/trait/malus/amputation/right_leg
 	name = "Amputated Right Leg"
@@ -109,3 +116,4 @@
 	apply_to_limbs = list(BP_R_LEG, BP_R_FOOT)
 	ban_traits_relating_to_limbs = list(BP_R_LEG, BP_R_FOOT)
 	trait_cost = -2
+	uid = "trait_amputated_right_leg"

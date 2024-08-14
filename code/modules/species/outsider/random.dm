@@ -1,11 +1,12 @@
 /decl/bodytype/alium
-	name =              "humanoid"
+	name              = "humanoid"
 	bodytype_category = BODYTYPE_HUMANOID
-	icon_base =         'icons/mob/human_races/species/humanoid/body.dmi'
-	bandages_icon =     'icons/mob/bandage.dmi'
-	limb_blend =        ICON_MULTIPLY
-	appearance_flags =  HAS_SKIN_COLOR
-	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	icon_base         = 'icons/mob/human_races/species/humanoid/body.dmi'
+	bandages_icon     = 'icons/mob/bandage.dmi'
+	limb_blend        = ICON_MULTIPLY
+	appearance_flags  = HAS_SKIN_COLOR
+	body_flags        = BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	uid               = "bodytype_alium"
 
 /decl/bodytype/alium/Initialize()
 	if(prob(10))

@@ -31,6 +31,7 @@
 /decl/bodytype/animal/crow
 	name = "crow"
 	bodytype_category = "crow body"
+	uid = "bodytype_animal_crow"
 
 /mob/living/simple_animal/crow/get_bodytype()
 	return GET_DECL(/decl/bodytype/animal/crow)

@@ -39,6 +39,7 @@
 	icon_deformed           = 'icons/mob/human_races/species/starborn/body.dmi'
 	husk_icon               = 'icons/mob/human_races/species/starborn/husk.dmi'
 	body_flags              = BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	uid                     = "bodytype_starlight_starborn"
 	cold_level_1            = 260
 	cold_level_2            = 250
 	cold_level_3            = 235
@@ -104,13 +105,14 @@
 	T.hotspot_expose(FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
 /decl/bodytype/starlight/blueforged
-	name =             "blueforged"
-	desc =             "A mass of carved and shaped spacetime."
-	icon_base =        'icons/mob/human_races/species/blueforged/body.dmi'
-	icon_deformed =    'icons/mob/human_races/species/blueforged/body.dmi'
-	eye_icon =         'icons/mob/human_races/species/blueforged/eyes.dmi'
-	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	name                 = "blueforged"
+	desc                 = "A mass of carved and shaped spacetime."
+	icon_base            = 'icons/mob/human_races/species/blueforged/body.dmi'
+	icon_deformed        = 'icons/mob/human_races/species/blueforged/body.dmi'
+	eye_icon             = 'icons/mob/human_races/species/blueforged/eyes.dmi'
+	body_flags           = BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
+	uid                  = "bodytype_starlight_blueforged"
 
 /decl/blood_type/spacestuff
 	name = "spacestuff"

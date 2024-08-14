@@ -15,6 +15,7 @@
 	base_color           = "#ae7d32"
 	base_eye_color       = "#00aa00"
 	nail_noun            = "claws"
+	uid                  = "bodytype_feline"
 
 	age_descriptor = /datum/appearance_descriptor/age/tajaran
 
