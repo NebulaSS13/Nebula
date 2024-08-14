@@ -14,6 +14,7 @@
 
 /area/shaded_hills/outside/woods
 	name = "Woodlands"
+	sound_env = FOREST
 
 /area/shaded_hills/outside/woods/poi
 	name = "Deep Woodlands"

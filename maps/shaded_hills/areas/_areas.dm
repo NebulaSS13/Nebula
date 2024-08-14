@@ -32,7 +32,7 @@
 	name = "\improper Grasslands"
 	color = COLOR_GREEN
 	is_outside = OUTSIDE_YES
-	sound_env = FOREST
+	sound_env = PLAIN
 	ambience = list(
 		'sound/effects/wind/wind_2_1.ogg',
 		'sound/effects/wind/wind_2_2.ogg',
