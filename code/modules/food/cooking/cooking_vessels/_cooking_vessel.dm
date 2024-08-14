@@ -106,8 +106,14 @@
 		started_cooking = world.time
 	else if((world.time - started_cooking) >= recipe.cooking_time)
 		recipe.produce_result(src)
-		started_cooking = null
-		last_recipe = null
+		recipe = select_recipe(cooking_category, src, temperature)
+		if(recipe && recipe == last_recipe && recipe.can_bulk_cook)
+			// Bulk cooking has benefits like reduced cook time
+			// we don't just do it instantly because there's messages each time
+			started_cooking = world.time + (recipe.cooking_time / 2)
+		else
+			started_cooking = null
+			last_recipe = null
 		return
 	last_recipe = recipe
 	update_icon()
