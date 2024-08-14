@@ -38,13 +38,11 @@
 	var/decl/trait/trait = GET_DECL(trait_type)
 	if(!trait.validate_level(trait_level))
 		return FALSE
-
 	if(our_species && !traits) // If species traits haven't been setup before, check if we need to do so now
 		var/species_level = our_species.traits[trait_type]
 		if(species_level == trait_level) // Matched the default species trait level, ignore
 			return TRUE
 		traits = our_species.traits.Copy() // The setup is to simply copy the species list of traits
-
 	if(!(trait_type in traits))
 		LAZYSET(traits, trait_type, trait_level)
 		trait.apply_trait(src)

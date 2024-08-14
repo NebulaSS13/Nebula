@@ -6,7 +6,7 @@
 /datum/category_item/player_setup_item/background/species/save_character(datum/pref_record_writer/W)
 	W.write("species", pref.species)
 
-/datum/category_item/player_setup_item/background/species/load_character(datum/pref_record_reader/R)
+/datum/category_item/player_setup_item/background/species/preload_character(datum/pref_record_reader/R)
 	pref.species = R.read("species")
 
 /datum/category_item/player_setup_item/background/species/sanitize_character()

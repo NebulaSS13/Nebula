@@ -75,6 +75,8 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_collection/player_setup_collection/proc/load_character(datum/pref_record_reader/R)
 	for(var/datum/category_group/player_setup_category/PS in categories)
+		PS.preload_character(R)
+	for(var/datum/category_group/player_setup_category/PS in categories)
 		PS.load_character(R)
 
 /datum/category_collection/player_setup_collection/proc/save_character(datum/pref_record_writer/W)
@@ -128,6 +130,10 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		PI.sanitize_character()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.finalize_character()
+
+/datum/category_group/player_setup_category/proc/preload_character(datum/pref_record_reader/R)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.preload_character(R)
 
 /datum/category_group/player_setup_category/proc/load_character(datum/pref_record_reader/R)
 	for(var/datum/category_item/player_setup_item/PI in items)
@@ -189,6 +195,12 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_item/player_setup_item/dd_SortValue()
 	return sort_order
+
+/*
+* Called when the item is asked to load per character settings, prior to load_character()
+*/
+/datum/category_item/player_setup_item/proc/preload_character(datum/pref_record_reader/R)
+	return
 
 /*
 * Called when the item is asked to load per character settings
