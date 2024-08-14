@@ -55,7 +55,7 @@
 	desc = "A wild [name]."
 	growth_stage = rand(round(plant.growth_stages * 0.65), plant.growth_stages)
 	if(!dead)
-		if(prob(50) && growth_stage >= plant.growth_stages)
+		if(prob(25) && growth_stage >= plant.growth_stages)
 			harvestable = rand(1, 3)
 		if(plant.get_trait(TRAIT_BIOLUM))
 			var/potency = plant.get_trait(TRAIT_POTENCY)
