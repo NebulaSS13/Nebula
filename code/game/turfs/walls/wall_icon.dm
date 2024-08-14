@@ -177,7 +177,7 @@
 				var/turf/other_neighbor = get_step_resolving_mimic(src, global.reverse_dir[stepdir])
 				if(istype(other_neighbor))
 					var/light_amt   = 255 * other_neighbor.get_lumcount()
-					if(light_amt > 0)
+					if(other_neighbor.lighting_overlay && light_amt > 0) // get_lumcount defaults to 0.5 if lighting_overlay is null
 						if(!new_light_dir || light_str < light_amt / 255)
 							new_light_dir = stepdir
 							light_str = light_amt / 255
