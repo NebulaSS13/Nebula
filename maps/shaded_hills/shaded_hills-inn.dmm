@@ -1133,6 +1133,12 @@
 	},
 /turf/floor/wood/walnut,
 /area/shaded_hills/general_store/porch)
+"Rh" = (
+/obj/structure/bed/simple/ebony/cloth,
+/obj/item/bedsheet/yellowed,
+/obj/abstract/landmark/start/shaded_hills/innkeeper,
+/turf/floor/wood/walnut,
+/area/shaded_hills/inn)
 "Rl" = (
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/downlands)
@@ -9048,7 +9054,7 @@ HI
 TR
 cx
 Ee
-th
+Rh
 Jo
 BB
 Ee
