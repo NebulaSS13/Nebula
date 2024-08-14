@@ -257,7 +257,7 @@
 				var/list/metadata_strings = list()
 				for(var/metadata_type in accessory_decl.accessory_metadata_types)
 					var/decl/sprite_accessory_metadata/sam = GET_DECL(metadata_type)
-					metadata_strings += sam.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, accessory_metadata[metadata_type])
+					metadata_strings += sam.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
 				var/acc_decl_ref = "\ref[accessory_decl]"
 				. += "<tr>"
 				. += "<td width = '100px'><b>[accessory_cat_decl.name]</b></td>"

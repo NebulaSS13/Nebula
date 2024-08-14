@@ -463,6 +463,12 @@ var/global/obj/temp_reagents_holder = new
 		. += current.dirtiness
 	return . / length(reagent_volumes)
 
+/datum/reagents/proc/get_accelerant_value()
+	for(var/rtype in reagent_volumes)
+		var/decl/material/current = GET_DECL(rtype)
+		. += current.accelerant_value
+	return . / length(reagent_volumes)
+
 /* Holder-to-holder and similar procs */
 /datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE, var/removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID)) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
 

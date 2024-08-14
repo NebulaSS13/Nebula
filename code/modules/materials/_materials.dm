@@ -385,9 +385,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		vapor_products               = null
 		compost_value                = 0
 	else if(isnull(temperature_damage_threshold))
-		for(var/value in list(ignition_point, melting_point, boiling_point, heating_point, bakes_into_at_temperature))
-			if(!isnull(value) && (isnull(temperature_damage_threshold) || temperature_damage_threshold > value))
-				temperature_damage_threshold = value
+		var/new_temperature_damage_threshold = max(melting_point, boiling_point, heating_point)
+		// Don't let the threshold be lower than the ignition point.
+		if(!isnull(new_temperature_damage_threshold) && (isnull(ignition_point) || (new_temperature_damage_threshold > ignition_point)))
+			temperature_damage_threshold = new_temperature_damage_threshold
 
 	if(!shard_icon)
 		shard_icon = shard_type
@@ -425,10 +426,29 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		. += "no construction difficulty set"
 
 	if(!isnull(bakes_into_at_temperature))
-		if(!isnull(melting_point) && melting_point <= bakes_into_at_temperature)
-			. += "baking point is set but melting point is lower or equal to it"
-		if(!isnull(boiling_point) && boiling_point <= bakes_into_at_temperature)
-			. += "baking point is set but boiling point is lower or equal to it"
+		// all of these variables should be above our baking temperature, because we assume only solids not currently on fire can bake
+		// modify this if a material ever needs to bake while liquid or gaseous
+		var/list/temperatures = list("melting point" = melting_point, "boiling point" = boiling_point, "heating point" = heating_point, "ignition point" = ignition_point)
+		for(var/temperature in temperatures)
+			if(isnull(temperatures[temperature]))
+				continue
+			if(temperatures[temperature] <= bakes_into_at_temperature)
+				. += "baking point is set but [temperature] is lower or equal to it"
+
+	// this is a little overengineered for only two values...
+	// but requiring heating_point > boiling_point caused a bunch of issues
+	// at least it's easy to add more if we want to enforce order more
+	var/list/transition_temperatures_ascending = list("melting point" = melting_point, "boiling point" = boiling_point)
+	var/max_key // if not null, this is a key from the above list
+	for(var/temperature_key in transition_temperatures_ascending)
+		var/temperature = transition_temperatures_ascending[temperature_key]
+		if(isnull(temperature))
+			continue
+		if(!isnull(max_key) && temperature <= transition_temperatures_ascending[max_key])
+			var/expected_temp = transition_temperatures_ascending[max_key]
+			. += "transition temperature [temperature_key] ([temperature]K, [temperature - T0C]C) is colder than [max_key], expected >[expected_temp]K ([expected_temp - T0C]C)!"
+		else
+			max_key = temperature_key
 
 	if(accelerant_value > FUEL_VALUE_NONE && isnull(ignition_point))
 		. += "accelerant value larger than zero but null ignition point"

@@ -40,6 +40,7 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+	compost_value = 0.1 // a pittance, but it's so that compost bins don't end up filled with uncompostable amatoxin
 
 /decl/material/liquid/carpotoxin
 	name = "carpotoxin"
@@ -58,6 +59,7 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+	compost_value = 0.3 // a bit more than amatoxin or wax, but still not much
 
 /decl/material/liquid/venom
 	name = "spider venom"
@@ -76,6 +78,7 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+	compost_value = 0.3 // a bit more than amatoxin or wax, but still not much
 
 /decl/material/liquid/venom/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))

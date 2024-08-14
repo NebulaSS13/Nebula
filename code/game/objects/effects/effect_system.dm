@@ -100,14 +100,20 @@ steam.start() -- spawns the effect
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	pass_flags = PASS_FLAG_TABLE
 	var/spark_sound = "sparks"
+	var/lit_light_range = 1
+	var/lit_light_power = 0.5
+	var/lit_light_color = COLOR_MUZZLE_FLASH
 
 /obj/effect/sparks/struck
 	spark_sound = "light_bic"
 
 /obj/effect/sparks/Initialize()
 	. = ..()
-	QDEL_IN(src, 5 SECONDS)
+	// this is 2 seconds so that it doesn't appear to freeze after its last move, which ends up making it look like timers are broken
+	// if you change the number of or delay between moves in spread(), this may need to be changed
+	QDEL_IN(src, 2 SECONDS)
 	playsound(loc, spark_sound, 100, 1)
+	set_light(lit_light_range, lit_light_power, lit_light_color)
 	if(isturf(loc))
 		var/turf/T = loc
 		T.spark_act()

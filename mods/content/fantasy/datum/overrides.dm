@@ -52,3 +52,7 @@
 /obj/aura/sifsap_salve
 	name = "Drakespittle Salve"
 	descriptor = "glowing spittle"
+
+// Rename wooden prostheses
+/decl/bodytype/prosthetic/wooden
+	name = "carved wooden" // weird to call it 'crude' when it's cutting-edge for the setting

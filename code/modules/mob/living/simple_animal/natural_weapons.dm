@@ -16,6 +16,13 @@
 /obj/item/natural_weapon/can_embed()
 	return FALSE
 
+/obj/item/natural_weapon/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+	if(!(. = ..()))
+		return
+	if(istype(user, /mob/living/simple_animal))
+		var/mob/living/simple_animal/animal = user
+		animal.apply_attack_effects(target)
+
 /obj/item/natural_weapon/bite
 	name = "teeth"
 	attack_verb = list("bitten")

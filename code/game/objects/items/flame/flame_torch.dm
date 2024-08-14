@@ -25,7 +25,13 @@
 	return available_scents
 
 /obj/item/flame/torch/light(mob/user, no_message)
-	. = !burnt && ..()
+	if(coating?.total_volume && coating.get_accelerant_value() < FUEL_VALUE_NONE)
+		to_chat(user, SPAN_WARNING("You cannot light \the [src] while it is wet!"))
+		return FALSE
+	if(burnt)
+		to_chat(user, SPAN_WARNING("\The [src] is burnt up."))
+		return FALSE
+	return ..()
 
 /obj/item/flame/torch/Initialize(var/ml, var/material_key, var/_head_material)
 	. = ..()
@@ -47,7 +53,7 @@
 
 /obj/item/flame/torch/extinguish(var/mob/user, var/no_message)
 	. = ..()
-	if(. && !burnt)
+	if(. && _fuel <= 0 && !burnt)
 		burnt = TRUE
 		name = "burnt torch"
 		desc = "A torch. This one has seen better days."

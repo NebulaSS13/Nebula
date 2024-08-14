@@ -9,7 +9,7 @@
 	var/synthetic_bodytype_restricted = FALSE
 	var/apply_to_organ = BP_HEART
 
-/decl/trait/prosthetic_organ/is_available_to(datum/preferences/pref)
+/decl/trait/prosthetic_organ/is_available_to_select(datum/preferences/pref)
 	. = ..()
 	if(. && pref.species && pref.bodytype)
 

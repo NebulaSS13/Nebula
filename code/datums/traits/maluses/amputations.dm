@@ -38,7 +38,7 @@
 /decl/trait/malus/amputation/applies_to_organ(var/organ)
 	return (organ in apply_to_limbs)
 
-/decl/trait/malus/amputation/is_available_to(datum/preferences/pref)
+/decl/trait/malus/amputation/is_available_to_select(datum/preferences/pref)
 	. = ..()
 	if(. && pref.bodytype)
 		var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
