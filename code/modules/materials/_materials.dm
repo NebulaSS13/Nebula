@@ -1013,7 +1013,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/total_taste = 0
 	var/new_fraction = amount / REAGENT_VOLUME(reagents, type) // the fraction of the total reagent volume that the new data is associated with
 	var/list/tastes = list()
-	var/list/newtastes = LAZYACCESS(newdata, "taste")
+	var/list/newtastes = LAZYACCESS(newdata, DATA_TASTE)
 	for(var/taste in newtastes)
 		var/newtaste   = newtastes[taste] * new_fraction
 		tastes[taste] += newtaste
@@ -1023,7 +1023,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// one to hold our base taste information. This is so pouring nutriment
 	// with a taste list into honey for example won't completely mask the
 	// taste of honey.
-	var/list/oldtastes = LAZYACCESS(., "taste")
+	var/list/oldtastes = LAZYACCESS(., DATA_TASTE)
 	var/old_fraction = 1 - new_fraction
 	if(length(oldtastes))
 		for(var/taste in oldtastes)
@@ -1041,7 +1041,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				if((tastes[taste] / total_taste) < 0.1)
 					tastes -= taste
 		if(length(tastes))
-			LAZYSET(., "taste", tastes)
+			LAZYSET(., DATA_TASTE, tastes)
 
 /decl/material/proc/explosion_act(obj/item/chems/holder, severity)
 	SHOULD_CALL_PARENT(TRUE)
@@ -1051,18 +1051,18 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	. = value
 
 /decl/material/proc/get_presentation_name(var/obj/item/prop)
-	. = glass_name || liquid_name
+	if(islist(prop?.reagents?.reagent_data))
+		. = LAZYACCESS(prop.reagents.reagent_data[type], DATA_MASK_NAME)
+	. ||= glass_name || liquid_name
 	if(prop?.reagents?.total_volume)
 		. = build_presentation_name_from_reagents(prop, .)
 
 /decl/material/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied
-
 	if(cocktail_ingredient)
 		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(type))
 			if(cocktail.matches(prop))
 				return cocktail.get_presentation_name(prop)
-
 	if(prop.reagents.has_reagent(/decl/material/solid/ice))
 		. = "iced [.]"
 
@@ -1132,7 +1132,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(istype(holder) && holder.reagent_data)
 		var/list/rdata = holder.reagent_data[type]
 		if(rdata)
-			var/data_name = rdata["mask_name"]
+			var/data_name = rdata[DATA_MASK_NAME]
 			if(data_name)
 				return data_name
 
@@ -1157,7 +1157,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(istype(holder) && holder.reagent_data)
 		var/list/rdata = holder.reagent_data[type]
 		if(rdata)
-			var/data_color = rdata["mask_color"]
+			var/data_color = rdata[DATA_MASK_COLOR]
 			if(data_color)
 				return data_color
 	return color

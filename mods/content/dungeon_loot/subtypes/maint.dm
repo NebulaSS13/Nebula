@@ -142,7 +142,7 @@
 		/obj/item/trash/tomato,
 		/obj/item/trash/spinach,
 		/obj/item/food/spider,
-		/obj/item/food/mysterysoup,
+		/obj/item/chems/glass/bowl/mystery,
 		/obj/item/food/old/hotdog,
 		/obj/item/food/old/pizza,
 		/obj/item/ammo_casing,

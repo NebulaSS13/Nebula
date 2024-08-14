@@ -106,7 +106,7 @@
 				rtotal += round(potency/reagent_amounts[2])
 			var/decl/material/reagent = GET_DECL(rid)
 			if(!reagent.taste_description)
-				LAZYSET(data, "taste", list(seed.product_name = max(1,rtotal) * reagent.taste_mult))
+				LAZYSET(data, DATA_TASTE, list(seed.product_name = max(1,rtotal) * reagent.taste_mult))
 			add_to_reagents(rid,max(1,rtotal),data)
 
 /obj/item/food/grown/proc/update_desc()

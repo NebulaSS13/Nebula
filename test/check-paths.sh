@@ -51,7 +51,7 @@ exactly 20 "direct loc set" '(\t|;|\.)loc\s*=(?!=)' -P
 exactly 0 "magic number mouse opacity set" 'mouse_opacity\s*=\s*[0-2]' -P
 exactly 1 "magic number density set" '\bdensity\s*=\s*[01]' -P
 exactly 0 "magic number anchored set" '\banchored\s*=\s*[01]' -P
-exactly 7 "magic number opacity set" '\bopacity\s*=\s*[01]' -P
+exactly 11 "magic number opacity set" '\bopacity\s*=\s*[01]' -P
 
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 

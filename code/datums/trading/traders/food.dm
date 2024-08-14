@@ -59,7 +59,7 @@
 		/obj/item/chems/condiment/small/soysauce = TRADER_THIS_TYPE,
 		/obj/item/chems/condiment/capsaicin      = TRADER_THIS_TYPE,
 		/obj/item/food/chazuke                   = TRADER_THIS_TYPE,
-		/obj/item/food/katsucurry                = TRADER_THIS_TYPE,
+		/obj/item/chems/glass/bowl/mapped/curry/katsu  = TRADER_THIS_TYPE,
 		/obj/item/food/skewer/meat                = TRADER_THIS_TYPE,
 		/obj/item/food/boiledegg                 = TRADER_THIS_TYPE,
 		/obj/item/food/boiledrice                = TRADER_THIS_TYPE,
