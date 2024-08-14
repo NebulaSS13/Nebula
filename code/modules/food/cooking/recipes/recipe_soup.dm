@@ -2,6 +2,7 @@
 	abstract_type = /decl/recipe/soup
 	reagent_mix = REAGENT_REPLACE
 	container_categories = list(RECIPE_CATEGORY_POT)
+	can_bulk_cook = TRUE
 	var/precursor_type
 
 /decl/recipe/soup/get_result_data(atom/container, list/used_ingredients)

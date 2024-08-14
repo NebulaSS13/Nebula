@@ -63,6 +63,9 @@ var/global/list/_cooking_recipe_cache = list()
 	/// A minimum about of the above reagent required.
 	var/cooking_medium_amount
 
+	/// Whether this recipe is eligible for bulk cooking in a cooking vessel. Not currently checked by microwaves.
+	var/can_bulk_cook = FALSE
+
 	var/const/REAGENT_REPLACE = 0 //Reagents in the ingredients are discarded (only the reagents present in the result at compiletime are used)
 	var/const/REAGENT_MAX     = 1 //The result will contain the maximum of each reagent present between the two pools. Compiletime result, and sum of ingredients
 	var/const/REAGENT_MIN     = 2 //As above, but the minimum, ignoring zero values.
