@@ -121,6 +121,7 @@
 	)
 	result_quantity = 10
 	result = /decl/material/liquid/nutriment/soup/stew
+	complexity = 0 // Have to reset it because it inherits from soup.
 
 /decl/recipe/soup/simple/stew/mixed
 	display_name = "mixed stew"
