@@ -6,6 +6,7 @@
 	density             = TRUE
 	material            = /decl/material/solid/organic/wood
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	atom_flags          = ATOM_FLAG_CLIMBABLE
 	obj_flags           = OBJ_FLAG_ANCHORABLE
 	throwpass           = TRUE // You can reach over these to things behind them.
 
