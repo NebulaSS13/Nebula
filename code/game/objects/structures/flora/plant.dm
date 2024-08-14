@@ -30,8 +30,8 @@
 	. = ..()
 	if(dead)
 		to_chat(user, SPAN_OCCULT("It is dead."))
-	else if(length(harvestable))
-		to_chat(user, SPAN_NOTICE("You can see [length(harvestable)] harvestable fruit\s."))
+	else if(harvestable)
+		to_chat(user, SPAN_NOTICE("You can see [harvestable] harvestable fruit\s."))
 
 /obj/structure/flora/plant/dismantle_structure(mob/user)
 	if(plant)
