@@ -5,7 +5,7 @@
 	max_health = 20
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	speak_emote = list("chitters")
-	mob_size = MOB_SIZE_TINY
+	mob_size = MOB_SIZE_SMALL
 	butchery_data = /decl/butchery_data/animal/rabbit
 	holder_type = /obj/item/holder
 	ai = /datum/mob_controller/passive/rabbit
