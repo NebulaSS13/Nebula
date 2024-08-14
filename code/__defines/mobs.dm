@@ -227,6 +227,12 @@
 // One 'unit' of taste sensitivity probability, used in mob/living/proc/ingest
 #define TASTE_DEGREE_PROB 15
 
+#define DATA_TASTE            /decl/reagent_data_field/taste
+#define DATA_INGREDIENT_LIST  /decl/reagent_data_field/ingredient_list
+#define DATA_INGREDIENT_FLAGS /decl/reagent_data_field/ingredient_flags
+#define DATA_MASK_COLOR       /decl/reagent_data_field/mask_color
+#define DATA_MASK_NAME        /decl/reagent_data_field/mask_name
+
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2

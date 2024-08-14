@@ -1,7 +1,21 @@
+/*
+  Soups to readd when we have ingredients:
+	- Dashi stock (dried seaweed, fish flakes).
+	- Miso soup (miso paste, tofu and veg in dashi stock).
+	- Proper chicken katsu (crumbed chicken object added to curry).
+	- Curry on rice.
+  Soups to add when someone can be bothered:
+	- Egg drop soup: regular soup + 3u egg, uses egg overlay.
+	- Proper curry spices, coconut milk, for curry making.
+	- Cheese soups - will need INGREDIENT_FLAG_CHEESE to be checked alongside INGREDIENT_FLAG_DAIRY.
+*/
+
 /decl/recipe/soup
 	abstract_type = /decl/recipe/soup
 	reagent_mix = REAGENT_REPLACE
 	container_categories = list(RECIPE_CATEGORY_POT)
+	minimum_temperature = 100 CELSIUS
+	result_quantity = 10
 	can_bulk_cook = TRUE
 	var/precursor_type
 
@@ -40,24 +54,24 @@
 
 	if(precursor_type)
 		var/list/precursor_data = LAZYACCESS(container.reagents?.reagent_data, precursor_type)
-		var/list/precursor_taste = LAZYACCESS(precursor_data, "taste")
+		var/list/precursor_taste = LAZYACCESS(precursor_data, DATA_TASTE)
 		if(length(precursor_taste))
 			for(var/taste in precursor_taste)
 				taste_strings[taste] += precursor_taste[taste]
-		var/list/precursor_ingredients = LAZYACCESS(precursor_data, "soup_ingredients")
+		var/list/precursor_ingredients = LAZYACCESS(precursor_data, DATA_INGREDIENT_LIST)
 		if(length(precursor_ingredients))
 			for(var/ingredient in precursor_ingredients)
 				ingredients[ingredient] += precursor_ingredients[ingredient]
-		var/precursor_allergen_flags = LAZYACCESS(precursor_data, "allergen_flags")
+		var/precursor_allergen_flags = LAZYACCESS(precursor_data, DATA_INGREDIENT_FLAGS)
 		if(precursor_allergen_flags)
 			allergen_flags |= precursor_allergen_flags
 
 	if(length(taste_strings))
-		.["taste"] = taste_strings
+		.[DATA_TASTE] = taste_strings
 	if(length(ingredients))
-		.["soup_ingredients"] = ingredients
+		.[DATA_INGREDIENT_LIST] = ingredients
 	if(allergen_flags)
-		.["allergen_flags"] = allergen_flags
+		.DATA_INGREDIENT_FLAGS] = allergen_flags
 
 /decl/recipe/soup/stock
 	abstract_type = /decl/recipe/soup/stock
@@ -87,9 +101,9 @@
 
 /decl/recipe/soup/stock/bone/get_result_data(atom/container, list/used_ingredients)
 	. = list()
-	.["soup_ingredients"] = list("marrow" = 1)
-	.["allergen_flags"] = ALLERGEN_MEAT
-	.["taste"] = list("rich marrow" = 5)
+	.[DATA_INGREDIENT_LIST] = list("marrow" = 1)
+	.[DATA_INGREDIENT_FLAGS] = ALLERGEN_MEAT
+	.[DATA_TASTE] = list("rich marrow" = 5)
 
 /decl/recipe/soup/simple
 	abstract_type = /decl/recipe/soup/simple

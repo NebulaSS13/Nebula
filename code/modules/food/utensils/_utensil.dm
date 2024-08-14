@@ -60,44 +60,15 @@
 		if(check_state_in_icon(loaded_state, icon))
 			add_overlay(overlay_image(icon, loaded_state, loaded_food.reagents?.get_color() || loaded_food.filling_color || get_color(), RESET_COLOR))
 
-// TODO: generalize this for edible non-food items somehow?
-/obj/item/food/proc/seperate_chunk(obj/item/utensil/utensil, mob/user)
-	if(!istype(utensil))
-		return
-	var/remove_amt = min(reagents?.total_volume, get_food_default_transfer_amount(user))
-	if(remove_amt)
-
-		// Create a dummy copy of the target food item.
-		// This ensures we keep all food behavior, strings, sounds, etc.
-		utensil.loaded_food = new utensil_food_type(utensil, material?.type, TRUE)
-		QDEL_NULL(utensil.loaded_food.trash)
-		QDEL_NULL(utensil.loaded_food.plate)
-		utensil.loaded_food.color = color
-		utensil.loaded_food.filling_color = filling_color
-		utensil.loaded_food.SetName("\proper some [utensil.loaded_food.name]")
-
-		// Pass over a portion of our reagents.
-		utensil.loaded_food.reagents.clear_reagents()
-		reagents.trans_to(utensil.loaded_food, remove_amt)
-		bitecount++
-		if(!reagents.total_volume)
-			handle_consumed()
-		utensil.update_icon()
-
-	else // This shouldn't happen, but who knows.
-		to_chat(user, SPAN_WARNING("None of \the [src] is left!"))
-		handle_consumed()
-	return TRUE
-
 /obj/item/food/proc/handle_utensil_collection(obj/item/utensil/utensil, mob/user)
-	seperate_chunk(utensil, user)
+	seperate_food_chunk(utensil, user)
 	if(utensil.loaded_food)
 		to_chat(user, SPAN_NOTICE("You collect [utensil.loaded_food] with \the [utensil]."))
 		return TRUE
 	return FALSE
 
 /obj/item/food/proc/handle_utensil_scooping(obj/item/utensil/utensil, mob/user)
-	seperate_chunk(utensil, user)
+	seperate_food_chunk(utensil, user)
 	if(utensil.loaded_food)
 		to_chat(user, SPAN_NOTICE("You scoop up [utensil.loaded_food] with \the [utensil]."))
 		return TRUE

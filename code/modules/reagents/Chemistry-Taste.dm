@@ -51,7 +51,7 @@ calculate text size per text.
 	for(var/reagent_type in reagent_volumes)
 		var/decl/material/reagent = GET_DECL(reagent_type)
 		var/list/nutriment_data = LAZYACCESS(reagent_data, reagent_type)
-		var/list/taste_data = LAZYACCESS(nutriment_data, "taste")
+		var/list/taste_data = LAZYACCESS(nutriment_data, DATA_TASTE)
 		if(length(taste_data))
 			for(var/taste in taste_data)
 				var/taste_power = taste_data[taste]

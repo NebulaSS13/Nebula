@@ -171,7 +171,7 @@ MRE Stuff
 	return list(/obj/item/food/tossedsalad)
 
 /obj/item/mrebag/menu8/WillContain()
-	return list(/obj/item/food/hotchili)
+	return list(/obj/item/chems/glass/bowl/mapped/chili/hot)
 
 /obj/item/mrebag/menu9/WillContain()
 	return list(/obj/item/food/boiledrice)

@@ -3046,7 +3046,7 @@
 /obj/machinery/door/firedoor,
 /obj/structure/table/marble,
 /obj/item/plate/tray,
-/obj/item/food/stew,
+/obj/item/chems/glass/bowl/mapped/stew,
 /turf/floor/tiled,
 /area/casino/casino_kitchen)
 "iR" = (
