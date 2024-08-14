@@ -1086,6 +1086,7 @@
 	name = "watermelon"
 	product_name = "watermelon"
 	display_name = "watermelon vine"
+	product_w_class = ITEM_SIZE_LARGE
 	chems = list(/decl/material/liquid/nutriment = list(1,6), /decl/material/liquid/drink/juice/watermelon = list(10,6))
 	slice_product = /obj/item/food/processed_grown/slice/large
 
@@ -1110,6 +1111,7 @@
 	name = "pumpkin"
 	product_name = "pumpkin"
 	display_name = "pumpkin vine"
+	product_w_class = ITEM_SIZE_LARGE
 	chems = list(/decl/material/liquid/nutriment = list(1,6))
 	grown_tag = "pumpkin"
 	slice_product = /obj/item/clothing/head/pumpkinhead
@@ -1328,6 +1330,7 @@
 	chems = list(/decl/material/solid/tobacco = list(1,10))
 	slice_product = /obj/item/food/processed_grown/chopped
 	slice_amount = 3
+	product_w_class = ITEM_SIZE_TINY // so that it can fit in bags of tobacco
 
 /datum/seed/tobacco/New()
 	..()

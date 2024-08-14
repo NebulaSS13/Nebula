@@ -31,6 +31,7 @@
 	var/base_seed_value = 5 // Used when generating price.
 	var/scannable_result
 	var/grown_is_seed = FALSE
+	var/product_w_class = ITEM_SIZE_SMALL
 
 	// Dissection values.
 	var/min_seed_extracted = 1

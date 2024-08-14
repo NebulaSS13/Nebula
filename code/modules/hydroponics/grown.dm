@@ -38,6 +38,7 @@
 	filling_color = seed.get_trait(TRAIT_PRODUCT_COLOUR) || seed.get_trait(TRAIT_FLESH_COLOUR)
 	slice_path    = seed.slice_product
 	slice_num     = seed.slice_amount
+	w_class       = seed.product_w_class
 
 	if(!seed.chems && !(dry && seed.dried_chems) && !(backyard_grilling_count > 0 && seed.roasted_chems))
 		return INITIALIZE_HINT_QDEL // No reagent contents, no froot
