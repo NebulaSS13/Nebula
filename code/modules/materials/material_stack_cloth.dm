@@ -3,6 +3,7 @@
 	icon_state = "sheet-cloth"
 	singular_name = "bolt"
 	plural_name = "bolts"
+	w_class = ITEM_SIZE_NORMAL
 	stack_merge_type = /obj/item/stack/material/bolt
 	crafting_stack_type = /obj/item/stack/material/bolt
 	craft_verb = "tailor"
@@ -36,7 +37,8 @@
 	crafting_stack_type = /obj/item/stack/material/thread
 	craft_verb = "weave"
 	craft_verbing = "weaving"
-	matter_multiplier = 0.1
+	w_class = ITEM_SIZE_TINY
+	matter_multiplier = 0.4
 	icon_state = "thread"
 	plural_icon_state = "thread-mult"
 	max_icon_state = "thread-max"
