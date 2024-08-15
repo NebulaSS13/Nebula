@@ -161,11 +161,15 @@
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/river/lake)
 "MR" = (
-/obj/structure/wall_sconce/lantern,
+/obj/structure/wall_sconce/lantern{
+	start_lit = 1
+	},
 /turf/floor/wood/walnut,
 /area/shaded_hills/forester_hut)
 "MU" = (
-/turf/wall/log/walnut/shutter,
+/turf/wall/log/walnut/shutter{
+	shutter_state = 1
+	},
 /area/shaded_hills/forester_hut)
 "Oi" = (
 /obj/structure/closet/crate/chest/ebony,

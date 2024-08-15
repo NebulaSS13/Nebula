@@ -1,6 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aM" = (
-/turf/wall/log/walnut/shutter,
+/turf/wall/log/walnut/shutter{
+	shutter_state = 1
+	},
 /area/shaded_hills/witch_hut)
 "bg" = (
 /turf/floor/wood/walnut,
@@ -68,7 +70,8 @@
 "vz" = (
 /obj/structure/table/woodentable/ebony,
 /obj/structure/wall_sconce/lantern{
-	dir = 8
+	dir = 8;
+	start_lit = 1
 	},
 /turf/floor/wood/walnut,
 /area/shaded_hills/witch_hut)
@@ -169,7 +172,8 @@
 "Vl" = (
 /obj/structure/table/woodentable/ebony,
 /obj/structure/wall_sconce/lantern{
-	dir = 4
+	dir = 4;
+	start_lit = 1
 	},
 /obj/item/chems/glass/mortar,
 /obj/item/rock/basalt,
