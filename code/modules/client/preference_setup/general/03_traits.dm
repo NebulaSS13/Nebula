@@ -21,8 +21,11 @@
 	sort_order = 1
 	var/selected_category
 
-/datum/category_item/player_setup_item/traits/load_character(datum/pref_record_reader/R)
+// We have to preload traits early, as they are used to sanitize several other areas of character generation.
+/datum/category_item/player_setup_item/traits/preload_character(datum/pref_record_reader/R)
+
 	pref.traits = R.read("aspects") | R.read("traits") // Grandfather in old aspect settings.
+
 	for(var/trait_id in pref.traits)
 		if(ispath(trait_id, /decl/trait))
 			continue
@@ -30,6 +33,11 @@
 		var/decl/trait/trait = decls_repository.get_decl_by_id_or_var(trait_id, /decl/trait)
 		if(istype(trait))
 			pref.traits |= trait.type
+
+	if(!pref.traits)
+		pref.traits = list()
+	else
+		pref.prune_invalid_traits()
 
 /datum/category_item/player_setup_item/traits/save_character(datum/pref_record_writer/W)
 	var/list/trait_ids = list()

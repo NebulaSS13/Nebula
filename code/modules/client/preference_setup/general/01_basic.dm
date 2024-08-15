@@ -19,9 +19,11 @@
 	name = "Basic"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/physical/basic/load_character(datum/pref_record_reader/R)
+/datum/category_item/player_setup_item/physical/basic/preload_character(datum/pref_record_reader/R)
 	pref.gender =         R.read("gender")
 	pref.bodytype =       R.read("bodytype")
+
+/datum/category_item/player_setup_item/physical/basic/load_character(datum/pref_record_reader/R)
 	pref.real_name =      R.read("real_name")
 	pref.be_random_name = R.read("name_is_always_random")
 	var/decl/spawnpoint/loaded_spawnpoint = decls_repository.get_decl_by_id_or_var(R.read("spawnpoint"), /decl/spawnpoint)

@@ -59,6 +59,11 @@
 		if(!found_species)
 			return FALSE
 
+	if(required_traits)
+		for(var/trait in required_traits)
+			if(!(trait in pref.traits))
+				return FALSE
+
 	if(faction_restricted)
 		var/has_correct_faction = FALSE
 		for(var/token in ALL_CULTURAL_TAGS)
@@ -386,22 +391,42 @@
 	abstract_type = /decl/loadout_option
 	decl_flags = DECL_FLAG_MANDATORY_UID
 
-	var/name                              // Name/index. Must be unique.
-	var/description                       // Description of this gear. If left blank will default to the description of the pathed item.
-	var/path                              // Path of item.
-	var/cost = 1                          // Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
-	var/slot                              // Slot to equip to.
-	var/list/allowed_roles                // Roles that can spawn with this item.
-	var/list/allowed_branches             // Service branches that can spawn with it.
-	var/list/allowed_skills               // Skills required to spawn with this item.
-	var/loadout_flags                     // Special tweaks in new
-	var/custom_setup_proc                 // Special tweak in New
-	var/list/custom_setup_proc_arguments  // Special tweak in New
-	var/category = /decl/loadout_category // Type to use for categorization and organization.
-	var/list/gear_tweaks = list()         // List of datums which will alter the item after it has been spawned.
-	var/replace_equipped = TRUE           // Whether or not this equipment should replace pre-existing equipment.
-	var/list/faction_restricted           // List of types of cultural datums that will allow this loadout option.
-	var/whitelisted                       // Species name to check the whitelist for.
+	/// Name/index.
+	var/name
+	/// Description of this gear. If left blank will default to the description of the pathed item.
+	var/description
+	/// Path of item.
+	var/path
+	/// Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
+	var/cost = 1
+	/// Slot to equip to.
+	var/slot
+	/// Roles that can spawn with this item.
+	var/list/allowed_roles
+	/// Service branches that can spawn with it.
+	var/list/allowed_branches
+	/// Skills required to spawn with this item.
+	var/list/allowed_skills
+	/// Special tweaks in new
+	var/loadout_flags
+	/// Special tweak in New
+	var/custom_setup_proc
+	/// Special tweak in New
+	var/list/custom_setup_proc_arguments
+	/// Type to use for categorization and organization.
+	var/category = /decl/loadout_category
+	/// List of datums which will alter the item after it has been spawned.
+	var/list/gear_tweaks = list()
+	/// Whether or not this equipment should replace pre-existing equipment.
+	var/replace_equipped = TRUE
+	/// List of types of cultural datums that will allow this loadout option.
+	var/list/faction_restricted
+	/// Species name to check the whitelist for.
+	var/whitelisted
+	/// If true, will try to apply tweaks and customisation to an already-existing instance of the spawn path.
+	var/apply_to_existing_if_possible = FALSE
+	/// A list of trait types that the character must have for this loadout option to be available.
+	var/list/required_traits
 
 /decl/loadout_option/Initialize()
 
@@ -468,11 +493,17 @@
 	src.location = location
 	src.material = material
 
-/decl/loadout_option/proc/spawn_item(user, location, metadata)
+/decl/loadout_option/proc/spawn_item(user, location, metadata, obj/item/existing_item)
 	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_gear_data(islist(metadata) && metadata["[gt]"], gd)
-	var/item = new gd.path(gd.location, gd.material)
+	var/obj/item/item
+	if(isitem(existing_item))
+		item = existing_item
+		if(gd.material)
+			item.set_material(gd.material)
+	else
+		item = new gd.path(gd.location, gd.material)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_item(user, item, (islist(metadata) && metadata["[gt]"]))
 	. = item
@@ -480,6 +511,7 @@
 		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
 /decl/loadout_option/proc/spawn_on_mob(mob/living/human/wearer, metadata)
+
 	var/obj/item/item = spawn_and_validate_item(wearer, metadata)
 	if(!item)
 		return
@@ -522,10 +554,21 @@
 	else
 		to_chat(wearer, SPAN_DANGER("Dropping \the [item] on the ground!"))
 
+/decl/loadout_option/proc/can_replace_existing(obj/item/candidate)
+	return istype(candidate, path)
+
 /decl/loadout_option/proc/spawn_and_validate_item(mob/living/human/H, metadata)
 	PRIVATE_PROC(TRUE)
 
-	var/obj/item/item = spawn_item(H, H, metadata)
+	var/obj/item/item
+	if(apply_to_existing_if_possible)
+		for(var/obj/item/candidate in H.get_equipped_items(include_carried = TRUE))
+			if(can_replace_existing(candidate))
+				item = candidate
+				break
+
+	item = spawn_item(H, H, metadata, item)
+
 	if(QDELETED(item))
 		return
 

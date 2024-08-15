@@ -1822,3 +1822,11 @@ default behaviour is:
 	if(record)
 		qdel(record)
 	return TRUE
+
+/mob/living/proc/get_preview_screen_locs()
+	for(var/obj/item/gear in get_equipped_items())
+		var/screen_locs = gear.get_preview_screen_locs()
+		if(screen_locs)
+			return screen_locs
+	var/decl/species/my_species = get_species()
+	return my_species?.character_preview_screen_locs

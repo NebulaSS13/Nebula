@@ -1150,3 +1150,6 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_equipment_tint()
 	return TINT_NONE
+
+/obj/item/proc/get_preview_screen_locs()
+	return

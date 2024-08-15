@@ -87,6 +87,7 @@ var/global/list/time_prefs_fixed = list()
 			load_data()
 			is_byond_member = client.IsByondMember()
 
+	load_preferences()
 	sanitize_preferences()
 	update_preview_icon()
 
@@ -259,8 +260,7 @@ var/global/list/time_prefs_fixed = list()
 		"8" = "character_preview_map:1:16,1:21"
 	)
 
-	var/decl/species/mannequin_species = mannequin.get_species()
-	var/list/preview_screen_locs = mannequin_species?.preview_screen_locs || default_preview_screen_locs
+	var/list/preview_screen_locs = mannequin?.get_preview_screen_locs() || default_preview_screen_locs
 	for(var/D in global.cardinal)
 		var/obj/screen/setup_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(!O)
@@ -403,6 +403,10 @@ var/global/list/time_prefs_fixed = list()
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
+	if(length(traits))
+		for(var/trait_type in traits)
+			character.set_trait(trait_type, (traits[trait_type] || TRAIT_LEVEL_EXISTS))
+
 	for(var/obj/item/organ/external/O in character.get_external_organs())
 		for(var/decl/sprite_accessory_category/sprite_category in O.get_sprite_accessory_categories())
 			if(!sprite_category.clear_in_pref_apply)
@@ -420,10 +424,6 @@ var/global/list/time_prefs_fixed = list()
 				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
 				if(O)
 					O.set_sprite_accessory(accessory, accessory_category, accessory_metadata, skip_update = TRUE)
-
-	if(length(traits))
-		for(var/trait_type in traits)
-			character.set_trait(trait_type, traits[trait_type] || TRAIT_LEVEL_EXISTS)
 
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()

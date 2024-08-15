@@ -110,15 +110,14 @@
 			return FALSE
 	if(requires_appearance_flags && !(bodytype.appearance_flags & requires_appearance_flags))
 		return FALSE
-	if(is_whitelisted && usr?.ckey && !is_admin(usr))
-		return is_alien_whitelisted(usr, is_whitelisted)
+	if(is_whitelisted && usr?.ckey && !is_admin(usr) && !is_alien_whitelisted(usr, is_whitelisted))
+		return FALSE
 	if(length(required_traits) && traits != FALSE)
 		if(!islist(traits) || !length(traits))
 			return FALSE
 		for(var/trait in required_traits)
 			if(!(trait in traits))
 				return FALSE
-
 	return TRUE
 
 /decl/sprite_accessory/validate()
