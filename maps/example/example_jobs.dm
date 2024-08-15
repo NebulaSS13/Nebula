@@ -12,10 +12,10 @@
 	economic_power = 1
 	access = list()
 	minimal_access = list()
-	outfit_type = /decl/hierarchy/outfit/job/tourist
+	outfit_type = /decl/outfit/job/tourist
 	department_types = list(
 		/decl/department/example
 		)
 
-/decl/hierarchy/outfit/job/tourist
+/decl/outfit/job/tourist
 	name = "Job - Testing Site Tourist"

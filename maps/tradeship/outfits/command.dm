@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/tradeship/captain
+/decl/outfit/job/tradeship/captain
 	name = "Tradeship - Job - Tradehouse Captain"
 	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
 	shoes = /obj/item/clothing/shoes/color/black
@@ -7,7 +7,7 @@
 	id_type = /obj/item/card/id/gold
 	l_ear = /obj/item/radio/headset/heads/captain
 
-/decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/human/H)
+/decl/outfit/job/tradeship/captain/post_equip(var/mob/living/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
 	if(uniform)
@@ -17,7 +17,7 @@
 		else
 			qdel(eyegore)
 
-/decl/hierarchy/outfit/job/tradeship/mate
+/decl/outfit/job/tradeship/mate
 	name = "Tradeship - Job - Tradehouse First Mate"
 	uniform = /obj/item/clothing/pants/slacks/black/outfit/checkered
 	shoes = /obj/item/clothing/shoes/dress

@@ -8,7 +8,7 @@
 	minimal_access = list()
 	hud_icon = "hudassistant"
 	alt_titles = list("Technical Recruit","Medical Recruit","Research Recruit","Visitor")
-	outfit_type = /decl/hierarchy/outfit/job/ministation_assistant
+	outfit_type = /decl/outfit/job/ministation_assistant
 	department_types = list(/decl/department/civilian)
 	event_categories = list(ASSIGNMENT_GARDENER)
 
@@ -17,7 +17,7 @@
 		return list(access_maint_tunnels)
 	return list()
 
-/decl/hierarchy/outfit/job/ministation_assistant
+/decl/outfit/job/ministation_assistant
 	name = "Job - Ministation Assistant"
 
 /datum/job/ministation/bartender
@@ -26,7 +26,7 @@
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 2
 	spawn_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/ministation/bartender
+	outfit_type = /decl/outfit/job/ministation/bartender
 	department_types = list(/decl/department/service)
 	selection_color = "#3fbe4a"
 	economic_power = 5
@@ -57,7 +57,7 @@
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 3
 	spawn_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/ministation/cargo
+	outfit_type = /decl/outfit/job/ministation/cargo
 	department_types = list(/decl/department/service)
 	selection_color = "#8a7c00"
 	economic_power = 5
@@ -129,7 +129,7 @@
 		"Custodian",
 		"Sanitation Technician"
 	)
-	outfit_type = /decl/hierarchy/outfit/job/ministation/janitor
+	outfit_type = /decl/outfit/job/ministation/janitor
 	min_skill = list(
 		SKILL_HAULING  = SKILL_BASIC
 	)
@@ -149,7 +149,7 @@
 		"Curator",
 		"Archivist"
 	)
-	outfit_type = /decl/hierarchy/outfit/job/ministation/librarian
+	outfit_type = /decl/outfit/job/ministation/librarian
 	min_skill = list(
 		SKILL_LITERACY = SKILL_AVERAGE
 	)

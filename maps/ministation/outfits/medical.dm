@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/ministation/doctor/head
+/decl/outfit/job/ministation/doctor/head
 	name = "Ministation - Job - Head Doctor"
 	l_ear = /obj/item/radio/headset/heads/cmo
 	uniform = /obj/item/clothing/pants/slacks/black/outfit/detective
@@ -9,7 +9,7 @@
 	hands = list(/obj/item/firstaid/adv)
 	id_type = /obj/item/card/id/ministation/doctor
 
-/decl/hierarchy/outfit/job/ministation/doctor
+/decl/outfit/job/ministation/doctor
 	l_ear = /obj/item/radio/headset/headset_med
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/medical
@@ -20,11 +20,11 @@
 	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/ministation/doctor
 
-/decl/hierarchy/outfit/job/ministation/doctor/Initialize()
+/decl/outfit/job/ministation/doctor/Initialize()
 	. = ..()
 	BACKPACK_OVERRIDE_MEDICAL
 
-/decl/hierarchy/outfit/job/ministation/doctor/head/Initialize()
+/decl/outfit/job/ministation/doctor/head/Initialize()
 	. = ..()
 	BACKPACK_OVERRIDE_MEDICAL
 

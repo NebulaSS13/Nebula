@@ -1,7 +1,7 @@
 /datum/job/tradeship_engineer
 	title = "Junior Engineer"
 	supervisors = "the Head Engineer"
-	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
+	outfit_type = /decl/outfit/job/tradeship/hand/engine
 	department_types = list(/decl/department/engineering)
 	total_positions = 8
 	spawn_positions = 7
@@ -105,7 +105,7 @@
 	)
 	minimal_player_age = 14
 	supervisors = "the Captain"
-	outfit_type = /decl/hierarchy/outfit/job/tradeship/chief_engineer
+	outfit_type = /decl/outfit/job/tradeship/chief_engineer
 	min_skill = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_COMPUTER     = SKILL_ADEPT,

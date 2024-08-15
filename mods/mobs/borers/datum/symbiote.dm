@@ -21,12 +21,12 @@ var/global/list/symbiote_starting_points = list()
 	economic_power = 0
 	defer_roundstart_spawn = TRUE
 	hud_icon = "hudblank"
-	outfit_type = /decl/hierarchy/outfit/job/symbiote_host
+	outfit_type = /decl/outfit/job/symbiote_host
 	create_record = FALSE
 	var/check_whitelist // = "Symbiote"
 	var/static/mob/living/simple_animal/borer/preview_slug
 
-/decl/hierarchy/outfit/job/symbiote_host
+/decl/outfit/job/symbiote_host
 	name = "Job - Symbiote Host"
 
 /datum/job/symbiote/post_equip_job_title(var/mob/person, var/alt_title)

@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/ministation/tradehouse
+/decl/outfit/job/ministation/tradehouse
 	name = "Ministation - Tradehouse Representative"
 	id_type = /obj/item/card/id/ministation/tradehouse_rep
 

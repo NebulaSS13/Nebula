@@ -682,7 +682,7 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/species/proc/customize_preview_mannequin(mob/living/human/dummy/mannequin/mannequin)
 	if(preview_outfit)
-		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
+		var/decl/outfit/outfit = GET_DECL(preview_outfit)
 		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
 		mannequin.update_icon()
 	mannequin.update_transform()

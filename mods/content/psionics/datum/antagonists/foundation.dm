@@ -22,7 +22,7 @@
 	initial_spawn_target = 2
 	min_player_age = 14
 	faction = "foundation"
-	default_outfit = /decl/hierarchy/outfit/foundation
+	default_outfit = /decl/outfit/foundation
 	id_title = "Foundation Agent"
 
 /decl/special_role/foundation/equip_role(var/mob/living/human/player)
@@ -35,7 +35,7 @@
 		var/datum/ability_handler/psionics/psi = player.get_ability_handler(/datum/ability_handler/psionics)
 		psi?.update(TRUE)
 
-/decl/hierarchy/outfit/foundation
+/decl/outfit/foundation
 	name = "Cuchulain Foundation Agent"
 	glasses =  /obj/item/clothing/glasses/sunglasses
 	uniform =  /obj/item/clothing/pants/slacks/black/outfit

@@ -1,14 +1,14 @@
-/decl/hierarchy/outfit/job/service
+/decl/outfit/job/service
 	l_ear = /obj/item/radio/headset/headset_service
-	abstract_type = /decl/hierarchy/outfit/job/service
+	abstract_type = /decl/outfit/job/service
 
-/decl/hierarchy/outfit/job/service/bartender
+/decl/outfit/job/service/bartender
 	name = "Job - Bartender"
 	uniform = /obj/item/clothing/pants/formal/black/outfit
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
-/decl/hierarchy/outfit/job/service/chef
+/decl/outfit/job/service/chef
 	name = "Job - Chef"
 	uniform = /obj/item/clothing/pants/slacks/outfit_chef
 	suit = /obj/item/clothing/suit/chef
@@ -16,7 +16,7 @@
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
-/decl/hierarchy/outfit/job/service/gardener
+/decl/outfit/job/service/gardener
 	name = "Job - Gardener"
 	uniform = /obj/item/clothing/jumpsuit/hydroponics
 	suit = /obj/item/clothing/suit/apron
@@ -25,19 +25,19 @@
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
-/decl/hierarchy/outfit/job/service/gardener/Initialize()
+/decl/outfit/job/service/gardener/Initialize()
 	. = ..()
 	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/backpack/hydroponics
 	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/backpack/satchel/hyd
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/backpack/messenger/hyd
 
-/decl/hierarchy/outfit/job/service/janitor
+/decl/outfit/job/service/janitor
 	name = "Job - Janitor"
 	uniform = /obj/item/clothing/jumpsuit/janitor
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
-/decl/hierarchy/outfit/job/librarian
+/decl/outfit/job/librarian
 	name = "Job - Librarian"
 	uniform = /obj/item/clothing/pants/slacks/red/outfit
 	id_type = /obj/item/card/id/civilian
@@ -47,7 +47,7 @@
 	name = "internal affair's headset"
 	desc = "The headset of your worst enemy."
 
-/decl/hierarchy/outfit/job/internal_affairs_agent
+/decl/outfit/job/internal_affairs_agent
 	name = "Job - Internal affairs agent"
 	l_ear = /obj/item/radio/headset/heads/ia
 	uniform = /obj/item/clothing/pants/slacks/black/outfit/internal_affairs
@@ -58,7 +58,7 @@
 	id_type = /obj/item/card/id/civilian/internal_affairs_agent
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
-/decl/hierarchy/outfit/job/chaplain
+/decl/outfit/job/chaplain
 	name = "Job - Chaplain"
 	uniform = /obj/item/clothing/jumpsuit/chaplain
 	hands = list(/obj/item/bible)

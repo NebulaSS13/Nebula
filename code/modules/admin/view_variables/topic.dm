@@ -29,7 +29,7 @@
 		if(!istype(victim))
 			to_chat(usr, "This can only be used on instances of type /mob/living/human")
 			return
-		var/decl/hierarchy/outfit/outfit = input("Select outfit.", "Select equipment.") as null|anything in outfits()
+		var/decl/outfit/outfit = input("Select outfit.", "Select equipment.") as null|anything in decls_repository.get_decls_of_subtype_unassociated(/decl/outfit)
 		if(!outfit)
 			return
 

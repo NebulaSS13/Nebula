@@ -17,7 +17,7 @@
 	description             = "You are the leader of the local religious order, living and working within the shrine. You are expected to see to both the spiritual and physical health of the populace, as well as travellers, if they can offer appropriate tithe."
 	spawn_positions         = 1
 	total_positions         = 1
-	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/shrine/keeper
+	outfit_type             = /decl/outfit/job/shaded_hills/shrine/keeper
 	min_skill               = list(
 		SKILL_STONEMASONRY  = SKILL_BASIC,
 		SKILL_CARPENTRY     = SKILL_BASIC,
@@ -44,7 +44,7 @@
 	description             = "You are an acolyte of the local religious order, living and working within the shrine. Under the direction of the shrine keeper, you are expected to tend to the shrine and the grounds, and to produce food or other goods for use or trade to support the clergy."
 	spawn_positions         = 2
 	total_positions         = 2
-	outfit_type             = /decl/hierarchy/outfit/job/shaded_hills/shrine
+	outfit_type             = /decl/outfit/job/shaded_hills/shrine
 	min_skill               = list(
 		SKILL_STONEMASONRY  = SKILL_BASIC,
 		SKILL_CARPENTRY     = SKILL_BASIC,

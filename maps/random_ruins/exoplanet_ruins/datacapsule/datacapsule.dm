@@ -16,9 +16,9 @@
 
 /obj/abstract/landmark/corpse/zombiescience
 	name = "Dead Scientist"
-	corpse_outfits = list(/decl/hierarchy/outfit/zombie_science)
+	corpse_outfits = list(/decl/outfit/zombie_science)
 
-/decl/hierarchy/outfit/zombie_science
+/decl/outfit/zombie_science
 	name = "Job - Dead Scientist"
 	uniform = /obj/item/clothing/jumpsuit/white
 	suit = /obj/item/clothing/suit/bio_suit/anomaly

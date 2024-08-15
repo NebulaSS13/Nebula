@@ -20,9 +20,9 @@
 /datum/job/submap/pod
 	title = "Stranded Survivor"
 	info = "Your ship has been destroyed by a terrible disaster."
-	outfit_type = /decl/hierarchy/outfit/job/survivor
+	outfit_type = /decl/outfit/job/survivor
 
-/decl/hierarchy/outfit/job/survivor
+/decl/outfit/job/survivor
 	name = "Job - Survivor"
 	id_type = null
 	pda_type = null

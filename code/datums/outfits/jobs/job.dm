@@ -1,6 +1,6 @@
-/decl/hierarchy/outfit/job
+/decl/outfit/job
 	name = "Standard Gear"
-	abstract_type = /decl/hierarchy/outfit/job
+	abstract_type = /decl/outfit/job
 
 	uniform = /obj/item/clothing/jumpsuit/grey
 	l_ear = /obj/item/radio/headset

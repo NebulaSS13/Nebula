@@ -19,7 +19,7 @@
 	title = "Colonist"
 	info = "You are a Colonist, living on the rim of explored, let alone inhabited, space in a reconstructed shelter made from the very ship that took you here."
 	total_positions = 6
-	outfit_type = /decl/hierarchy/outfit/job/colonist
+	outfit_type = /decl/outfit/job/colonist
 	min_skill = list(
 		SKILL_LITERACY = SKILL_BASIC,
 		SKILL_CONSTRUCTION = SKILL_BASIC,
@@ -37,7 +37,7 @@
 		"Colony Miner"
 	)
 
-/decl/hierarchy/outfit/job/colonist
+/decl/outfit/job/colonist
 	name = "Job - Colonist"
 	id_type = null
 	pda_type = null

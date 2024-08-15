@@ -56,7 +56,7 @@
 		access_ai_upload
 	)
 	minimal_player_age = 14
-	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
+	outfit_type = /decl/outfit/job/engineering/chief_engineer
 	min_skill = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_COMPUTER     = SKILL_ADEPT,
@@ -124,9 +124,9 @@
 		"Maintenance Technician",
 		"Engine Technician",
 		"Electrician",
-		"Atmospheric Technician" = /decl/hierarchy/outfit/job/engineering/atmos
+		"Atmospheric Technician" = /decl/outfit/job/engineering/atmos
 	)
-	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
+	outfit_type = /decl/outfit/job/engineering/engineer
 	min_skill = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_COMPUTER     = SKILL_BASIC,

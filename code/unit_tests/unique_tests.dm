@@ -65,8 +65,7 @@
 /datum/unit_test/outfit_datums_shall_have_unique_names/start_test()
 	var/list/outfits_by_name = list()
 
-	for(var/a in outfits())
-		var/decl/hierarchy/outfit/outfit = a
+	for(var/decl/outfit/outfit in decls_repository.get_decls_of_subtype_unassociated(/decl/outfit))
 		group_by(outfits_by_name, outfit.name, outfit.type)
 
 	var/number_of_issues = number_of_issues(outfits_by_name, "Names")

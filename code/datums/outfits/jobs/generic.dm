@@ -1,11 +1,11 @@
-/decl/hierarchy/outfit/job/generic
-	abstract_type = /decl/hierarchy/outfit/job/generic
+/decl/outfit/job/generic
+	abstract_type = /decl/outfit/job/generic
 	id_type = /obj/item/card/id/civilian
 
-/decl/hierarchy/outfit/job/generic/assistant
+/decl/outfit/job/generic/assistant
 	name = "Job - Assistant"
 
-/decl/hierarchy/outfit/job/generic/scientist
+/decl/outfit/job/generic/scientist
 	name = "Job - Default Scientist"
 	l_ear = /obj/item/radio/headset/headset_sci
 	suit = /obj/item/clothing/suit/toggle/labcoat/science
@@ -13,7 +13,7 @@
 	pda_type = /obj/item/modular_computer/pda/science
 	uniform = /obj/item/clothing/jumpsuit/white
 
-/decl/hierarchy/outfit/job/generic/engineer
+/decl/outfit/job/generic/engineer
 	name = "Job - Default Engineer"
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/jumpsuit/engineer
@@ -25,11 +25,11 @@
 	pda_slot = slot_l_store_str
 	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 
-/decl/hierarchy/outfit/job/generic/engineer/Initialize()
+/decl/outfit/job/generic/engineer/Initialize()
 	. = ..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
-/decl/hierarchy/outfit/job/generic/doctor
+/decl/outfit/job/generic/doctor
 	name = "Job - Default Doctor"
 	uniform = /obj/item/clothing/jumpsuit/medical
 	suit = /obj/item/clothing/suit/toggle/labcoat
@@ -40,11 +40,11 @@
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str
 
-/decl/hierarchy/outfit/job/generic/doctor/Initialize()
+/decl/outfit/job/generic/doctor/Initialize()
 	. = ..()
 	BACKPACK_OVERRIDE_MEDICAL
 
-/decl/hierarchy/outfit/job/generic/chef
+/decl/outfit/job/generic/chef
 	name = "Job - Default Chef"
 	l_ear = /obj/item/radio/headset/headset_service
 	uniform = /obj/item/clothing/pants/slacks/outfit_chef

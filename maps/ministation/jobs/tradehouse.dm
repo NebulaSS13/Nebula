@@ -7,7 +7,7 @@
 	req_admin_notify = 1
 	guestbanned = 1
 	supervisors = "the Trademaster"
-	outfit_type = /decl/hierarchy/outfit/job/ministation/tradehouse
+	outfit_type = /decl/outfit/job/ministation/tradehouse
 	min_skill = list(
 		SKILL_WEAPONS  = SKILL_BASIC,
 		SKILL_FINANCE  = SKILL_EXPERT,

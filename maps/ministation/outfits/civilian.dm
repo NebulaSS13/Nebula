@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/ministation/cargo
+/decl/outfit/job/ministation/cargo
 	l_ear = /obj/item/radio/headset/headset_cargo
 	name = "Ministation - Job - Cargo technician"
 	uniform = /obj/item/clothing/jumpsuit/cargotech
@@ -7,11 +7,11 @@
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/ore = 1)
 	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 
-/decl/hierarchy/outfit/job/ministation/cargo/Initialize()
+/decl/outfit/job/ministation/cargo/Initialize()
 	. = ..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
-/decl/hierarchy/outfit/job/ministation/bartender
+/decl/outfit/job/ministation/bartender
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Bartender"
 	uniform = /obj/item/clothing/pants/formal/black/outfit
@@ -19,14 +19,14 @@
 	pda_type = /obj/item/modular_computer/pda
 	head = /obj/item/clothing/head/chefhat
 
-/decl/hierarchy/outfit/job/ministation/janitor
+/decl/outfit/job/ministation/janitor
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Janitor"
 	uniform = /obj/item/clothing/jumpsuit/janitor
 	id_type = /obj/item/card/id/ministation/janitor
 	pda_type = /obj/item/modular_computer/pda
 
-/decl/hierarchy/outfit/job/ministation/librarian
+/decl/outfit/job/ministation/librarian
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Librarian"
 	uniform = /obj/item/clothing/pants/slacks/red/outfit

@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/tradeship/hand/engine
+/decl/outfit/job/tradeship/hand/engine
 	name = "Tradeship - Job - Junior Engineer"
 	head = /obj/item/clothing/head/hardhat
 	id_type = /obj/item/card/id/tradeship/engineering
@@ -14,7 +14,7 @@
 	desc = "A card issued to engineering staff."
 	detail_color = COLOR_SUN
 
-/decl/hierarchy/outfit/job/tradeship/chief_engineer
+/decl/outfit/job/tradeship/chief_engineer
 	name = "Tradeship - Job - Head Engineer"
 	uniform = /obj/item/clothing/jumpsuit/chief_engineer
 	glasses = /obj/item/clothing/glasses/welding/superior

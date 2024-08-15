@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/ministation/engineer
+/decl/outfit/job/ministation/engineer
 	name = "Job - Station Engineer"
 	belt = /obj/item/belt/utility/full
 	l_ear = /obj/item/radio/headset/headset_eng
@@ -11,7 +11,7 @@
 	id_type = /obj/item/card/id/ministation/engineering
 	pda_type = /obj/item/modular_computer/pda/engineering
 
-/decl/hierarchy/outfit/job/ministation/engineer/Initialize()
+/decl/outfit/job/ministation/engineer/Initialize()
 	. = ..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
@@ -20,7 +20,7 @@
 	desc = "A card issued to engineering staff."
 	detail_color = COLOR_SUN
 
-/decl/hierarchy/outfit/job/ministation/chief_engineer
+/decl/outfit/job/ministation/chief_engineer
 	name = "Job - Head Engineer"
 	uniform = /obj/item/clothing/jumpsuit/hazard
 	glasses = /obj/item/clothing/glasses/welding/superior

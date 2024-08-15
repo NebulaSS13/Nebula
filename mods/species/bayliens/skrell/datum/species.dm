@@ -32,7 +32,7 @@
 	)
 	hidden_from_codex = FALSE
 
-	preview_outfit = /decl/hierarchy/outfit/job/generic/scientist
+	preview_outfit = /decl/outfit/job/generic/scientist
 
 	burn_mod = 0.9
 	oxy_mod = 1.3

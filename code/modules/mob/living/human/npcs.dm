@@ -20,7 +20,7 @@
 		if(prob(10))
 			equip_to_appropriate_slot(new /obj/item/clothing/head/collectable/petehat(src))
 
-/decl/hierarchy/outfit/blank_subject
+/decl/outfit/blank_subject
 	name = "Test Subject"
 	uniform = /obj/item/clothing/jumpsuit/white/blank
 	shoes = /obj/item/clothing/shoes/color/white
@@ -43,7 +43,7 @@
 /mob/living/human/blank/LateInitialize()
 	var/number = "[pick(global.greek_letters)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
-	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/blank_subject)
+	var/decl/outfit/outfit = GET_DECL(/decl/outfit/blank_subject)
 	outfit.equip_outfit(src)
 	var/obj/item/clothing/head/helmet/facecover/F = locate() in src
 	if(F)

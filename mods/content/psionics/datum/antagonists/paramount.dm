@@ -11,9 +11,9 @@
 	hard_cap_round = 3
 	min_player_age = 18
 	faction = "paramount"
-	default_outfit = /decl/hierarchy/outfit/paramount
+	default_outfit = /decl/outfit/paramount
 
-/decl/hierarchy/outfit/paramount
+/decl/outfit/paramount
 	name =    "Special Role - Paramount Grandmaster"
 	head =    /obj/item/clothing/head/helmet/space/psi_amp
 	uniform = /obj/item/clothing/jumpsuit/psysuit

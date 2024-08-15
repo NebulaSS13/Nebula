@@ -14,7 +14,7 @@
 	default_access = list(access_raider)
 	faction = "pirate"
 	base_to_load = "Heist Base"
-	default_outfit = /decl/hierarchy/outfit/raider
+	default_outfit = /decl/outfit/raider
 	id_title = "Visitor"
 
 	var/list/outfits_per_species

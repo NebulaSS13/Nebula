@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/generic/fantasy
+/decl/outfit/job/generic/fantasy
 	name          = "Fantasy Outfit"
 	id_type       = null
 	pda_type      = null

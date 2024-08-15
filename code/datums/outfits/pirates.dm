@@ -1,16 +1,16 @@
-/decl/hierarchy/outfit/pirate
-	abstract_type = /decl/hierarchy/outfit/pirate
+/decl/outfit/pirate
+	abstract_type = /decl/outfit/pirate
 	name = "Pirate"
 	uniform = /obj/item/clothing/costume/pirate
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/eyepatch
 	hands = list(/obj/item/energy_blade/cutlass)
 
-/decl/hierarchy/outfit/pirate/norm
+/decl/outfit/pirate/norm
 	name = "Pirate - Normal"
 	head = /obj/item/clothing/mask/bandana/red
 
-/decl/hierarchy/outfit/pirate/space
+/decl/outfit/pirate/space
 	name = "Pirate - Space"
 	head = /obj/item/clothing/suit/armor/pirate
 	suit = /obj/item/clothing/suit/pirate

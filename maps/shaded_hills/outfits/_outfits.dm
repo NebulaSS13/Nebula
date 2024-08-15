@@ -1,6 +1,6 @@
-/decl/hierarchy/outfit/job/shaded_hills
+/decl/outfit/job/shaded_hills
 	name              = "Shaded Hills Outfit"
-	abstract_type     = /decl/hierarchy/outfit/job/shaded_hills
+	abstract_type     = /decl/outfit/job/shaded_hills
 	id_type           = null
 	pda_type          = null
 	l_ear             = null
