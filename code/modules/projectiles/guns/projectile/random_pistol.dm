@@ -20,10 +20,10 @@
 	handle_icon = pick(gun_look.handle_icons)
 	. = ..()
 
-/obj/item/gun/projectile/pistol/random/update_base_icon()
-	..()
-	overlays += image(gun_look.icon, icon_state)
-	overlays += image(handle_icon, icon_state)
+/obj/item/gun/projectile/pistol/random/on_update_icon()
+	. = ..()
+	add_overlay(image(gun_look.icon, icon_state))
+	add_overlay(image(handle_icon, icon_state))
 
 /obj/item/gun/projectile/pistol/random/get_ammo_indicator()
 	return gun_look.adjust_ammo_indicator(..(), get_world_inventory_state())

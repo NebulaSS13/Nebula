@@ -70,14 +70,12 @@
 		list(mode_name="full auto",      burst=1,    fire_delay=0,    burst_delay=1,       one_hand_penalty=7,             burst_accuracy = list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0), autofire_enabled=1)
 	)
 
-/obj/item/gun/projectile/automatic/assault_rifle/update_base_icon()
-	if(ammo_magazine)
-		if(ammo_magazine.get_stored_ammo_count())
-			icon_state = "[get_world_inventory_state()]-loaded"
-		else
-			icon_state = "[get_world_inventory_state()]-empty"
+/obj/item/gun/projectile/automatic/assault_rifle/update_base_icon_state()
+	. = ..()
+	if(ammo_magazine?.get_stored_ammo_count())
+		icon_state = "[icon_state]-loaded"
 	else
-		icon_state = get_world_inventory_state()
+		icon_state = "[icon_state]-empty"
 
 /obj/item/gun/projectile/automatic/assault_rifle/grenade
 	name = "assault rifle"

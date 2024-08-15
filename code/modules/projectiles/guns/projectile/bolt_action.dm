@@ -70,8 +70,8 @@
 
 /obj/item/gun/projectile/bolt_action/unload_ammo(mob/user, var/allow_dump=1)
 	if(!bolt_open)
-		return
-	..()
+		return FALSE
+	return ..()
 
 /obj/item/gun/projectile/bolt_action/sniper
 	name = "anti-materiel rifle"

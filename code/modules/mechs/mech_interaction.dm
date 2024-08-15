@@ -261,7 +261,7 @@
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You cannot pilot an exosuit of this size."))
 		return FALSE
-	if(!user.Adjacent(src))
+	if(!user.Adjacent(src) || user.buckled)
 		return FALSE
 	if(hatch_locked)
 		if(!silent)
