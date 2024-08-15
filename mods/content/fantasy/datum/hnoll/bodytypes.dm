@@ -15,6 +15,7 @@
 	age_descriptor       = /datum/appearance_descriptor/age/hnoll
 	base_color           = "#ae7d32"
 	base_eye_color       = "#00aa00"
+	uid                  = "bodytype_hnoll"
 
 	default_sprite_accessories = list(
 		SAC_HAIR     = list(

@@ -54,6 +54,7 @@
 	associated_gender = MALE
 	bodytype_flag =     BODY_FLAG_ALATE
 	movement_slowdown = -1
+	uid = "bodytype_crystalline_alate"
 
 /decl/bodytype/crystalline/mantid/gyne
 	name =              "gyne"
@@ -81,6 +82,7 @@
 		/datum/appearance_descriptor/body_length = 1.25
 	)
 	z_flags = ZMM_WIDE_LOAD
+	uid = "bodytype_crystalline_gyne"
 
 /decl/bodytype/crystalline/mantid/gyne/Initialize()
 	equip_adjust = list(

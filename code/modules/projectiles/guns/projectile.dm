@@ -188,19 +188,24 @@
 
 //attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
 /obj/item/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
+
+	. = FALSE
 	if(is_jammed)
 		user.visible_message("\The [user] begins to unjam [src].", "You clear the jam and unload [src].")
 		if(!do_after(user, 4, src))
 			return
 		is_jammed = 0
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
 		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src].</span>")
 		playsound(loc, mag_remove_sound, 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
-	else if(loaded.len)
+		. = TRUE
+
+	else if(length(loaded))
 		//presumably, if it can be speed-loaded, it can be speed-unloaded.
 		if(allow_dump && (load_method & SPEEDLOADER))
 			var/count = 0
@@ -214,32 +219,79 @@
 				loaded.Cut()
 			if(count)
 				user.visible_message("[user] unloads [src].", "<span class='notice'>You unload [count] round\s from [src].</span>")
+				. = TRUE
 		else if(load_method & SINGLE_CASING)
 			var/obj/item/ammo_casing/C = loaded[loaded.len]
 			loaded.len--
 			user.put_in_hands(C)
 			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-	else
-		to_chat(user, "<span class='warning'>[src] is empty.</span>")
-	update_icon()
+			. = TRUE
+	if(.)
+		update_icon()
 
-/obj/item/gun/projectile/attackby(var/obj/item/A, mob/user)
-	if(!load_ammo(A, user))
-		return ..()
+/obj/item/gun/projectile/proc/try_remove_silencer(mob/user)
+	if(!istype(user) || !istype(silencer, /obj/item))
+		return FALSE
+	if(!user.is_holding_offhand(src))
+		return FALSE
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return FALSE
+	to_chat(user, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
+	user.put_in_hands(silencer)
+	silencer = initial(silencer)
+	w_class = initial(w_class)
+	update_icon()
+	return TRUE
+
+/obj/item/gun/projectile/proc/can_have_silencer()
+	return FALSE
+
+/obj/item/gun/projectile/attackby(var/obj/item/used_item, mob/user)
+
+	if(load_ammo(used_item, user))
+		return TRUE
+
+	if(istype(used_item, /obj/item/silencer))
+
+		if(istype(silencer, /obj/item))
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [silencer] attached."))
+			return TRUE
+
+		if(silencer)
+			to_chat(user, SPAN_WARNING("\The [src] does not need a silencer; it is already silent."))
+			return TRUE
+
+		if(!can_have_silencer())
+			to_chat(user, SPAN_WARNING("\The [src] cannot be fitted with a silencer."))
+			return TRUE
+
+		if(!(src in user.get_held_items()))	//if we're not in his hands
+			to_chat(user, SPAN_WARNING("You'll need \the [src] in your hands to do that."))
+			return TRUE
+
+		if(user.try_unequip(used_item, src))
+			to_chat(user, SPAN_NOTICE("You screw \the [used_item] onto \the [src]."))
+			silencer = used_item
+			w_class = ITEM_SIZE_NORMAL
+			update_icon()
+		return TRUE
+
+	. = ..()
 
 /obj/item/gun/projectile/attack_self(mob/user)
-	if(firemodes.len > 1)
-		..()
-	else if(manual_unload)
-		unload_ammo(user)
-	else
-		to_chat(user, SPAN_WARNING("You can't unload \the [src] manually. Maybe try a crowbar?"))
+	if(length(firemodes) <= 1)
+		if(manual_unload && unload_ammo(user))
+			return TRUE
+		if(try_remove_silencer(user))
+			return TRUE
+	return ..()
 
 /obj/item/gun/projectile/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || !manual_unload || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
-		return ..()
-	unload_ammo(user, allow_dump=0)
-	return TRUE
+	if(manual_unload && unload_ammo(user, allow_dump = FALSE))
+		return TRUE
+	if(try_remove_silencer(user))
+		return TRUE
+	return ..()
 
 /obj/item/gun/projectile/afterattack(atom/A, mob/living/user)
 	..()
@@ -288,14 +340,27 @@
 	else
 		return mutable_appearance(icon, "[base_state]_ammo_ok")
 
-/* Unneeded -- so far.
-//in case the weapon has firemodes and can't unload using attack_hand()
-/obj/item/gun/projectile/verb/unload_gun()
-	set name = "Unload Ammo"
-	set category = "Object"
-	set src in usr
+/obj/item/gun/projectile/get_alt_interactions(mob/user)
+	. = ..()
+	if(isitem(silencer))
+		LAZYADD(., /decl/interaction_handler/projectile/remove_silencer)
+	if(ammo_magazine || length(loaded))
+		LAZYADD(., /decl/interaction_handler/projectile/unload_ammo)
 
-	if(usr.stat || usr.restrained()) return
+/decl/interaction_handler/projectile
+	abstract_type = /decl/interaction_handler/projectile
+	expected_target_type = /obj/item/gun/projectile
 
-	unload_ammo(usr)
-*/
+/decl/interaction_handler/projectile/remove_silencer
+	name = "Remove Silencer"
+
+/decl/interaction_handler/projectile/remove_silencer/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/gun/projectile/gun = target
+	gun.try_remove_silencer(user)
+
+/decl/interaction_handler/projectile/unload_ammo
+	name = "Remove Ammunition"
+
+/decl/interaction_handler/projectile/unload_ammo/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/gun/projectile/gun = target
+	gun.unload_ammo(user)

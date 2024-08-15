@@ -319,6 +319,7 @@ var/global/list/_cooking_recipe_cache = list()
 	/// Set the appropriate flag on the food for stressor updates.
 	for(var/obj/item/food/food in .)
 		food.cooked_food = FOOD_COOKED
+		QDEL_NULL(food.plate)
 
 	if(completion_message && ATOM_IS_OPEN_CONTAINER(container))
 		container.visible_message(SPAN_NOTICE(completion_message))

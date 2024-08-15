@@ -18,7 +18,7 @@
 	var/recentpump = 0 // to prevent spammage
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
-/obj/item/gun/projectile/shotgun/update_base_icon()
+/obj/item/gun/projectile/shotgun/update_base_icon_state()
 	if(length(loaded))
 		icon_state = get_world_inventory_state()
 	else
@@ -77,7 +77,7 @@
 		)
 
 /obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
-	..(user, allow_dump=1)
+	return ..(user, allow_dump=1)
 
 //this is largely hacky and bad :(	-Pete
 /obj/item/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A, mob/user)
