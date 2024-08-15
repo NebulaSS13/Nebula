@@ -90,6 +90,10 @@
 				var/mob/user = preference_mob()
 				var/decl/loadout_option/LO = decls_repository.get_decl_by_id_or_var(gear_id, /decl/loadout_option)
 
+				if(!istype(LO))
+					gears -= gear_id
+					continue
+
 				// Swap names for UIDs to grandfather in old saves.
 				if(LO.uid != gear_id)
 					gears[LO.uid] = gears[gear_id]
