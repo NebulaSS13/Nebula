@@ -2,6 +2,7 @@
 	icon = 'icons/mob/screen/pai.dmi'
 	abstract_type = /obj/screen/pai
 	requires_ui_style = FALSE
+	user_incapacitation_flags = INCAPACITATION_KNOCKOUT
 
 /obj/screen/pai/shell
 	name = "Toggle Chassis"

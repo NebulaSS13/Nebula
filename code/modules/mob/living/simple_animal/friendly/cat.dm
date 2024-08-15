@@ -66,6 +66,9 @@
 /mob/living/simple_animal/passive/cat/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/cat)
 
+/decl/bodytype/quadruped/animal/cat
+	uid = "bodytype_animal_cat"
+
 /decl/bodytype/quadruped/animal/cat/Initialize()
 	equip_adjust = list(
 		slot_head_str = list(
@@ -202,6 +205,9 @@
 
 /mob/living/simple_animal/passive/cat/kitten/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/kitten)
+
+/decl/bodytype/quadruped/animal/kitten
+	uid = "bodytype_animal_kitten"
 
 /decl/bodytype/quadruped/animal/kitten/Initialize()
 	equip_adjust = list(

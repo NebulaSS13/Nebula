@@ -29,6 +29,7 @@
 	)
 	eye_low_light_vision_effectiveness    = 0.15
 	eye_low_light_vision_adjustment_speed = 0.3
+	uid = "bodytype_kobaloi"
 
 /decl/bodytype/kobaloi/Initialize()
 	if(!equip_adjust)

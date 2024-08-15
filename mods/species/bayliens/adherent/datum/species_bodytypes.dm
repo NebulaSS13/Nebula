@@ -49,6 +49,7 @@
 	eye_contaminant_guard = TRUE
 	eye_innate_flash_protection = FLASH_PROTECTION_MAJOR
 	eye_icon = 'mods/species/bayliens/adherent/icons/eyes.dmi'
+	uid = "bodytype_crystalline_adherent_turquoise"
 
 /decl/bodytype/crystalline/adherent/Initialize()
 	equip_adjust = list(
@@ -110,27 +111,34 @@
 /decl/bodytype/crystalline/adherent/emerald
 	name = "emerald"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_emerald.dmi'
+	uid = "bodytype_crystalline_adherent_emerald"
 
 /decl/bodytype/crystalline/adherent/amethyst
 	name = "amethyst"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_amethyst.dmi'
+	uid = "bodytype_crystalline_adherent_amethyst"
 
 /decl/bodytype/crystalline/adherent/sapphire
 	name = "sapphire"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_sapphire.dmi'
+	uid = "bodytype_crystalline_adherent_sapphire"
 
 /decl/bodytype/crystalline/adherent/ruby
 	name = "ruby"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_ruby.dmi'
+	uid = "bodytype_crystalline_adherent_ruby"
 
 /decl/bodytype/crystalline/adherent/topaz
 	name = "topaz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_topaz.dmi'
+	uid = "bodytype_crystalline_adherent_topaz"
 
 /decl/bodytype/crystalline/adherent/quartz
 	name = "quartz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_quartz.dmi'
+	uid = "bodytype_crystalline_adherent_quartz"
 
 /decl/bodytype/crystalline/adherent/jet
 	name = "jet"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_jet.dmi'
+	uid = "bodytype_crystalline_adherent_jet"

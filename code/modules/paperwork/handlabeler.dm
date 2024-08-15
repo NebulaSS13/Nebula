@@ -248,7 +248,7 @@
 // Attach Label Overrides
 ////////////////////////////////////////////////////////////
 /atom/proc/attach_label(var/mob/user, var/atom/labeler, var/label_text)
-	to_chat(user, SPAN_WARNING("The label refuses to stick to [name]."))
+	to_chat(user, SPAN_WARNING("The label refuses to stick to \the [src]."))
 	return FALSE
 
 /mob/observer/attach_label(mob/user, atom/labeler, label_text)

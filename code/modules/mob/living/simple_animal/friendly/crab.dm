@@ -23,6 +23,9 @@
 	can_escape_buckles = TRUE //snip snip
 
 // TODO
+/decl/bodytype/hexapod
+	abstract_type = /decl/bodytype/hexapod
+
 /decl/bodytype/hexapod/animal
 	abstract_type = /decl/bodytype/hexapod/animal
 	name = "hexapod animal"
@@ -34,6 +37,9 @@
 
 /mob/living/simple_animal/crab/get_bodytype()
 	return GET_DECL(/decl/bodytype/hexapod/animal/crab)
+
+/decl/bodytype/hexapod/animal/crab
+	uid = "bodytype_animal_crab"
 
 /decl/bodytype/hexapod/animal/crab/Initialize()
 	equip_adjust = list(

@@ -17,6 +17,7 @@
 	eye_darksight_range     = 3
 	eye_flash_mod           = 1.2
 	nail_noun               = "claws"
+	uid                     = "bodytype_unathi_fem"
 
 	age_descriptor = /datum/appearance_descriptor/age/lizard
 
@@ -74,6 +75,7 @@
 	icon_deformed         = 'mods/species/bayliens/unathi/icons/deformed_body_male.dmi'
 	associated_gender     = MALE
 	onmob_state_modifiers = null
+	uid                   = "bodytype_unathi_masc"
 
 /obj/item/organ/external/tail/lizard
 	tail_icon             = 'mods/species/bayliens/unathi/icons/tail.dmi'
