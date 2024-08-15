@@ -1,0 +1,5 @@
+author: Penelope Haze
+changes:
+  - {balance: 'lowered the chance of wild plants bearing harvestable fruit by about
+      half, to incentivize farming'}
+delete-after: true
