@@ -1,0 +1,4 @@
+author: Penelope Haze
+changes:
+  - {tweak: inhabited rooms on Shaded Hills now start with open shutters and lit lanterns}
+delete-after: true
