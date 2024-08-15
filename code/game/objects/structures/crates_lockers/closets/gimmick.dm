@@ -6,6 +6,8 @@
 /obj/structure/closet/cabinet/wooden
 	desc = "A stout cabinet."
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	open_sound = 'sound/effects/doorcreaky.ogg'
+	close_sound = 'sound/effects/doorcreaky.ogg'
 	material = /decl/material/solid/organic/wood
 	closet_appearance = /decl/closet_appearance/cabinet/nocolor
 
