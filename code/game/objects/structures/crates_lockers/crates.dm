@@ -314,6 +314,8 @@
 	name = "chest"
 	desc = "A compact, hinged chest."
 	icon = 'icons/obj/closets/bases/chest.dmi'
+	open_sound = 'sound/effects/storage/briefcase.ogg'
+	close_sound = 'sound/effects/storage/briefcase.ogg'
 	closet_appearance = /decl/closet_appearance/crate/chest
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material = /decl/material/solid/organic/wood
