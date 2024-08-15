@@ -9,7 +9,7 @@
 	skin_amount   = 3
 	must_use_hook = FALSE
 	gut_type      = /obj/item/food/butchery/offal/small
-	meat_flags    = INGREDIENT_FLAG_MEAT | INGREDIENT_FLAG_FISH
+	meat_flags    = INGREDIENT_FLAG_FISH
 
 /decl/butchery_data/animal/fish/small
 	bone_amount     = 1

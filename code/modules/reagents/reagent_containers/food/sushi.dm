@@ -4,6 +4,7 @@
 	icon = 'icons/obj/sushi.dmi'
 	icon_state = "sushi_rice"
 	bitesize = 1
+	ingredient_flags = INGREDIENT_FLAG_FISH
 	var/fish_type = "fish"
 
 /obj/item/food/sushi/Initialize(mapload, material_key, skip_plate = FALSE, obj/item/food/rice, obj/item/food/topping)
@@ -58,6 +59,9 @@
 	icon_state = "sashimi"
 	gender = PLURAL
 	bitesize = 1
+	slice_num = 1
+	slice_path = /obj/item/food/butchery/chopped
+	ingredient_flags = INGREDIENT_FLAG_FISH
 	var/fish_type = "fish"
 	var/slices = 1
 
@@ -108,6 +112,17 @@
 			new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
 		return
 	. = ..()
+
+/obj/item/food/sashimi/handle_utensil_cutting(obj/item/tool, mob/user)
+	slice_num = slices // to avoid wasting it
+	. = ..()
+	if(length(.))
+		for(var/obj/item/food/food in .)
+			food.cooked_food = cooked_food
+			food.ingredient_flags = ingredient_flags
+		if(fish_type)
+			for(var/obj/item/food/butchery/meat in .)
+				meat.set_meat_name(fish_type)
 
  // Used for turning rice into sushi.
 /obj/item/food/boiledrice/attackby(var/obj/item/I, var/mob/user)
