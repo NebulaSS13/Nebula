@@ -37,6 +37,7 @@
 	var/static/list/spawnable_choices = list(
 		/mob/living/simple_animal/hostile/revenant
 	)
+	return spawnable_choices
 
 /obj/random/hostile/cave
 	name = "Random Hostile Cave Mob"
@@ -47,3 +48,4 @@
 		/mob/living/simple_animal/hostile/giant_spider/guard = 1,
 		/mob/living/simple_animal/hostile/scarybat = 4
 	)
+	return spawnable_choices

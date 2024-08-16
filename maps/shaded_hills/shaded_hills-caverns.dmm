@@ -1,4 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"az" = (
+/obj/random/hostile/cave,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/caves/deep/poi)
 "bV" = (
 /turf/floor/natural/rock/basalt,
 /area/shaded_hills/caves/deep)
@@ -24,7 +28,8 @@
 /turf/floor/natural/lava,
 /area/shaded_hills/caves/deep/poi)
 "wz" = (
-/turf/unsimulated/mask,
+/obj/random/hostile/cave,
+/turf/floor/natural/rock/basalt,
 /area/shaded_hills/caves/deep)
 "MT" = (
 /turf/floor/natural/rock/basalt,
@@ -32,6 +37,10 @@
 "Ng" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/deep)
+"SH" = (
+/obj/random/hostile/cave,
+/turf/floor/natural/rock/basalt,
+/area/shaded_hills/caves/deep/poi)
 
 (1,1,1) = {"
 mZ
@@ -4654,7 +4663,7 @@ um
 um
 um
 MT
-MT
+az
 MT
 um
 um
@@ -5243,7 +5252,7 @@ MT
 MT
 MT
 MT
-MT
+az
 MT
 MT
 MT
@@ -5748,7 +5757,7 @@ Ng
 Ng
 bV
 bV
-bV
+wz
 bV
 bV
 um
@@ -6069,7 +6078,7 @@ um
 um
 um
 MT
-MT
+az
 um
 um
 um
@@ -7750,7 +7759,7 @@ um
 MT
 MT
 MT
-MT
+SH
 MT
 MT
 MT
@@ -12133,7 +12142,7 @@ um
 um
 um
 MT
-MT
+SH
 um
 um
 um
@@ -13789,7 +13798,7 @@ MT
 MT
 MT
 MT
-MT
+az
 um
 um
 um
@@ -14656,7 +14665,7 @@ um
 um
 MT
 MT
-MT
+SH
 MT
 MT
 MT
@@ -19399,7 +19408,7 @@ bV
 bV
 bV
 bV
-bV
+wz
 bV
 bV
 um
@@ -19554,7 +19563,7 @@ bV
 bV
 bV
 bV
-wz
+um
 um
 um
 um
