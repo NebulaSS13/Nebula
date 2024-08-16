@@ -396,6 +396,11 @@
 		return ..() // just normal room temperature
 	return get_effective_burn_temperature() // heat up to our burn temperature
 
+/obj/structure/fire_source/ProcessAtomTemperature()
+	. = ..()
+	if(lit == FIRE_LIT)
+		return null // Don't return PROCESS_KILL here, we want to keep the fire going
+
 /obj/structure/fire_source/Process()
 
 	if(lit != FIRE_LIT)
