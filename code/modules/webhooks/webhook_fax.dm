@@ -5,7 +5,7 @@
 /decl/webhook/fax_sent/get_message(var/list/data)
 	. = ..()
 	.["embeds"] = list(list(
-		"title" = (data && data["title"]) || "undefined",
-		"description" = (data && data["body"]) || "undefined",
+		"title"       = LAZYACCESS(data, "title") || "undefined",
+		"description" = LAZYACCESS(data, "body") || "undefined",
 		"color" = COLOR_WEBHOOK_DEFAULT
 	))
