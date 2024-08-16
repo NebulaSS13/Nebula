@@ -138,7 +138,7 @@
 		else if(isobj(AM))
 			var/obj/item/I = AM
 			tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		if(reinf_material) 
+		if(reinf_material)
 			tforce *= 0.25
 		if(current_health - tforce <= 7 && !reinf_material)
 			set_anchored(FALSE)
@@ -265,7 +265,7 @@
 // TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
-	var/list/products = material.create_object(loc, is_fulltile() ? 4 : 2)
+	var/list/products = material.create_object(loc, 1)
 	if(reinf_material)
 		for(var/obj/item/stack/material/S in products)
 			S.reinf_material = reinf_material
