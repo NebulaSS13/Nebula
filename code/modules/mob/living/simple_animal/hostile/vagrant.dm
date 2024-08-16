@@ -19,7 +19,7 @@
 	bleed_colour = "#aad9de"
 	nutrition = 100
 	ai = /datum/mob_controller/aggressive/vagrant
-	base_movement_delay = 5
+	base_movement_delay = 2
 
 	var/cloaked = 0
 	var/mob/living/human/gripping = null

@@ -29,7 +29,7 @@
 	environment_smash = 1
 	faction = "lar_maria"
 	status_flags = CANPUSH
-	base_movement_delay = 8
+	base_movement_delay = 2
 	natural_weapon = /obj/item/natural_weapon/punch
 	ai = /datum/mob_controller/aggressive/lar_maria
 

@@ -110,7 +110,7 @@
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	hud_used = /datum/hud/construct/juggernaut
-	base_movement_delay = 3
+	base_movement_delay = 2
 	ai = /datum/mob_controller/aggressive/construct_armoured
 
 /datum/mob_controller/aggressive/construct_armoured
@@ -232,7 +232,7 @@
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	hud_used = /datum/hud/construct/juggernaut
-	base_movement_delay = 5
+	base_movement_delay = 2
 	ai = /datum/mob_controller/aggressive/construct_armoured
 
 /obj/item/natural_weapon/juggernaut/behemoth

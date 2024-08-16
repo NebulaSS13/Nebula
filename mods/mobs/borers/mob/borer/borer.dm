@@ -8,7 +8,7 @@
 	response_help_1p = "You poke $TARGET$."
 	response_disarm =  "prods"
 	response_harm =    "stamps on"
-	base_movement_delay = 5
+	base_movement_delay = 2
 
 	a_intent = I_HURT
 	status_flags = CANPUSH
