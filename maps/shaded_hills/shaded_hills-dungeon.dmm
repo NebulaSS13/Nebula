@@ -11,10 +11,6 @@
 /obj/item/stack/material/bolt/mapped/cloth/five,
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
-"bo" = (
-/obj/random/hostile/dungeon,
-/turf/floor/natural/path/running_bond/basalt,
-/area/shaded_hills/caves/dungeon/poi)
 "bD" = (
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
@@ -76,10 +72,6 @@
 /obj/structure/table/woodentable/ebony,
 /obj/item/stack/material/brick/mapped/graphite/fifteen,
 /turf/floor/natural/path/herringbone/basalt,
-/area/shaded_hills/caves/dungeon/poi)
-"hq" = (
-/obj/random/hostile/dungeon,
-/turf/floor/natural/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "hr" = (
 /obj/structure/closet/crate/chest/ebony,
@@ -511,10 +503,6 @@
 	},
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
-"IT" = (
-/obj/random/hostile/dungeon,
-/turf/floor/natural/path/herringbone/basalt,
-/area/shaded_hills/caves/dungeon/poi)
 "JA" = (
 /obj/structure/door/ebony,
 /obj/abstract/landmark/lock_preset{
@@ -568,10 +556,6 @@
 /obj/item/rock/flint/striker,
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
-"NS" = (
-/obj/random/hostile/dungeon,
-/turf/floor/natural/path/running_bond/basalt,
-/area/shaded_hills/caves/dungeon/poi)
 "Og" = (
 /turf/floor/natural/mud/water,
 /area/shaded_hills/caves/dungeon/poi)
@@ -596,7 +580,7 @@
 /turf/floor/natural/path/basalt/water,
 /area/shaded_hills/caves/dungeon/poi)
 "QT" = (
-/obj/structure/stairs/long/north,
+/obj/structure/stairs/north,
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/inn)
 "Ri" = (
@@ -11390,11 +11374,11 @@ JA
 jh
 bD
 bD
-bo
+ok
 bD
 bD
 bD
-NS
+ok
 bD
 bD
 jh
@@ -12303,7 +12287,7 @@ jh
 bD
 bD
 bD
-NS
+ok
 bD
 bD
 bD
@@ -14578,7 +14562,7 @@ oF
 it
 qh
 bD
-IT
+FT
 jh
 jh
 Kz
@@ -15947,7 +15931,7 @@ it
 ko
 jh
 lo
-hq
+ou
 jh
 hz
 it
@@ -16105,7 +16089,7 @@ wa
 it
 TA
 jh
-hq
+ou
 lo
 jh
 wa
@@ -18206,7 +18190,7 @@ bD
 Ua
 Ua
 bD
-NS
+ok
 bD
 bD
 JA

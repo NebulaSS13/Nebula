@@ -68,5 +68,8 @@
 /area/shaded_hills/caves/dungeon
 	name = "\improper Deep Dungeon"
 
+/area/shaded_hills/caves/dungeon/inn
+	name = "\improper Root Cellar"
+
 /area/shaded_hills/caves/dungeon/poi
 	name = "\improper Deepest Dungeon"

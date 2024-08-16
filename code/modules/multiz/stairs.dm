@@ -48,6 +48,17 @@
 	icon_state = "catwalk"
 
 // type paths to make mapping easier.
+/obj/structure/stairs/north
+	dir = NORTH
+
+/obj/structure/stairs/south
+	dir = SOUTH
+
+/obj/structure/stairs/east
+	dir = EAST
+
+/obj/structure/stairs/west
+	dir = WEST
 
 /obj/structure/stairs/long
 	icon = 'icons/obj/stairs_64.dmi'
