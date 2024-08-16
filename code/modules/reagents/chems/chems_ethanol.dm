@@ -9,8 +9,10 @@
 	solvent_power = MAT_SOLVENT_MODERATE
 	uid = "chem_ethanol"
 
-	heating_message = "boils away its water content, leaving pure ethanol."
-	heating_point = T100C + 10
+	boiling_point = T0C + 78.37
+
+	heating_message = "boils away its ethanol content, leaving pure water."
+	heating_point = T0C + 78.37
 	heating_products = list(
 		/decl/material/liquid/ethanol = 0.75,
 		/decl/material/liquid/water =   0.25
@@ -18,10 +20,10 @@
 	bypass_heating_products_for_root_type = /decl/material/liquid/ethanol
 
 	chilling_message = "separates as its water content freezes, leaving pure ethanol."
-	chilling_point = T0C - 10
+	chilling_point = T0C
 	chilling_products = list(
 		/decl/material/liquid/ethanol = 0.75,
-		/decl/material/liquid/water =   0.25
+		/decl/material/solid/ice =      0.25
 	)
 	bypass_chilling_products_for_root_type = /decl/material/liquid/ethanol
 	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
@@ -35,6 +37,12 @@
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 	value = 1.2
+
+/decl/material/liquid/ethanol/Initialize()
+	. = ..()
+	// Impure ethanol doesn't boil, it has to separate first.
+	if(type != bypass_heating_products_for_root_type)
+		boiling_point = null
 
 /decl/material/liquid/ethanol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
