@@ -93,6 +93,6 @@
 	. = ..()
 
 /obj/structure/fire_source/heater/take_vaporized_reagent(reagent, amount)
-	if(!vessel)
+	if(!vessel || !vessel.reagents || REAGENTS_FREE_SPACE(vessel.reagents) <= 0)
 		return ..()
 	return vessel.take_vaporized_reagent(reagent, amount)
