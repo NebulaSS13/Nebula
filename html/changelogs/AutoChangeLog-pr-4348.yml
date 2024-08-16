@@ -1,5 +1,0 @@
-author: Penelope Haze
-changes:
-  - {tweak: 'Pumpkins and watermelons are now large objects, while other produce is
-      small.'}
-delete-after: true
