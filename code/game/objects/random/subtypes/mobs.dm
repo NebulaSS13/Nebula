@@ -28,3 +28,20 @@
 		/mob/living/simple_animal/hostile/vagrant/swarm =  1
 	)
 	return spawnable_choices
+
+/obj/random/hostile/dungeon
+	name = "Random Hostile Dungeon Mob"
+
+/obj/random/hostile/dungeon/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/mob/living/simple_animal/hostile/revenant
+	)
+
+/obj/random/hostile/cave
+	name = "Random Hostile Cave Mob"
+
+/obj/random/hostile/cave/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/mob/living/simple_animal/hostile/giant_spider/guard = 1,
+		/mob/living/simple_animal/hostile/scarybat = 4
+	)
