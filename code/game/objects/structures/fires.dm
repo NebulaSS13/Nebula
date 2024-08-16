@@ -411,7 +411,7 @@
 		die()
 		return
 
-	fuel -= FUEL_CONSUMPTION_CONSTANT
+	fuel -= (FUEL_CONSUMPTION_CONSTANT * get_draught_multiplier())
 	if(!process_fuel())
 		die()
 		return
