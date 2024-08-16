@@ -693,6 +693,6 @@
 	if(href_list["datumrefresh"])
 		var/datum/datum_to_refresh = locate(href_list["datumrefresh"])
 		if(istype(datum_to_refresh, /datum) || istype(datum_to_refresh, /client))
-			debug_variables(datum_to_refresh)
+			debug_variables_inner(datum_to_refresh, filter = href_list["filter"])
 
 	return
