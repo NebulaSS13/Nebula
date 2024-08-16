@@ -19,7 +19,7 @@
 		desc += "Round duration: **[roundduration2text()]**"
 
 	.["embeds"] = list(list(
-		"title" = global.end_credits_title,
+		"title"       = global.end_credits_title,
 		"description" = desc,
-		"color" = COLOR_WEBHOOK_DEFAULT
+		"color"       = COLOR_WEBHOOK_DEFAULT
 	))
