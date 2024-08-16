@@ -31,6 +31,7 @@
 
 /obj/random/hostile/dungeon
 	name = "Random Hostile Dungeon Mob"
+	spawn_nothing_percentage = 5
 
 /obj/random/hostile/dungeon/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -39,6 +40,7 @@
 
 /obj/random/hostile/cave
 	name = "Random Hostile Cave Mob"
+	spawn_nothing_percentage = 5
 
 /obj/random/hostile/cave/spawn_choices()
 	var/static/list/spawnable_choices = list(

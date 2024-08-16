@@ -99,7 +99,6 @@
 	color = COLOR_BLUE; \
 	height = -(FLUID_DEEP); \
 }
-}
 PATH_MATERIAL_SUBTYPES(basalt)
 PATH_MATERIAL_SUBTYPES(granite)
 PATH_MATERIAL_SUBTYPES(marble)
