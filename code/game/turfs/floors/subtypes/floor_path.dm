@@ -71,6 +71,34 @@
 	color = /decl/material/solid/stone/##material_name::color; \
 	base_color = /decl/material/solid/stone/##material_name::color; \
 	material = /decl/material/solid/stone/##material_name; \
+} \
+/turf/floor/natural/path/##material_name/water { \
+	color = COLOR_SKY_BLUE; \
+	reagent_type = /decl/material/liquid/water; \
+	height = -(FLUID_SHALLOW); \
+} \
+/turf/floor/natural/path/##material_name/water/deep {\
+	color = COLOR_BLUE; \
+	height = -(FLUID_DEEP); \
+} \
+/turf/floor/natural/path/herringbone/##material_name/water { \
+	color = COLOR_SKY_BLUE; \
+	reagent_type = /decl/material/liquid/water; \
+	height = -(FLUID_SHALLOW); \
+} \
+/turf/floor/natural/path/herringbone/##material_name/water/deep { \
+	color = COLOR_BLUE; \
+	height = -(FLUID_DEEP); \
+} \
+/turf/floor/natural/path/running_bond/##material_name/water { \
+	color = COLOR_SKY_BLUE; \
+	reagent_type = /decl/material/liquid/water; \
+	height = -(FLUID_SHALLOW); \
+} \
+/turf/floor/natural/path/running_bond/##material_name/water/deep { \
+	color = COLOR_BLUE; \
+	height = -(FLUID_DEEP); \
+}
 }
 PATH_MATERIAL_SUBTYPES(basalt)
 PATH_MATERIAL_SUBTYPES(granite)
