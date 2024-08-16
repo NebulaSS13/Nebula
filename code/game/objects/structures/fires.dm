@@ -33,6 +33,7 @@
 		"one-quarter closed"    = 0.75,
 		"half closed"           = 0.5,
 		"three-quarters closed" = 0.25,
+		"open just a crack"     = 0.1,
 		"all the way closed"    = 0
 	)
 	var/current_draught = 1
