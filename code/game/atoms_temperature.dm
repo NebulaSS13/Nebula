@@ -28,22 +28,25 @@
 /atom/proc/get_manual_heat_source_coefficient()
 	return 1
 
+/// Returns the 'ambient temperature' used for temperature equalisation.
+/atom/proc/get_ambient_temperature()
+	if(isturf(loc))
+		return loc.return_air().temperature
+	else if(loc)
+		return loc.temperature
+	// Nullspace is room temperature, clearly.
+	return T20C
+
 // TODO: move mob bodytemperature onto this proc.
 /atom/proc/ProcessAtomTemperature()
 	SHOULD_NOT_SLEEP(TRUE)
 
-	// Get our location temperature if possible.
-	// Nullspace is room temperature, clearly.
-	var/adjust_temp = T20C
+	// Get our ambient temperature if possible.
+	var/adjust_temp = get_ambient_temperature()
 	var/thermal_mass_coefficient = get_thermal_mass_coefficient()
 	if(isturf(loc))
-		var/turf/T = loc
-		var/datum/gas_mixture/environment = T.return_air()
-		adjust_temp = environment.temperature
 		//scale the thermal mass coefficient so that 1atm = 1x, 0atm = 0x, 10atm = 10x
-		thermal_mass_coefficient *= (environment.return_pressure() / ONE_ATMOSPHERE)
-	else if(loc)
-		adjust_temp = loc.temperature
+		thermal_mass_coefficient *= (loc.return_air().return_pressure() / ONE_ATMOSPHERE)
 
 	// Determine if our temperature needs to change.
 	var/old_temp = temperature
