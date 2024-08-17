@@ -29,7 +29,7 @@
 				if(accessory.storage)
 					possible_arrows |= accessory.get_stored_inventory()
 
-	for(var/obj/item/stack/material/bow_ammo/ammo in possible_arrows)
+	for(var/obj/item/ammo in possible_arrows)
 		if(!can_load_arrow(ammo))
 			continue
 		attackby(ammo, user)
@@ -104,7 +104,7 @@
 /obj/item/gun/launcher/bow/attackby(obj/item/W, mob/user)
 	if(can_load_arrow(W))
 		if(_loaded)
-			to_chat(user, SPAN_WARNING("\The [src] already has \the [_loaded] nocked."))
+			to_chat(user, SPAN_WARNING("\The [src] already has \the [_loaded] ready."))
 		else
 			load_arrow(user, W)
 		return TRUE
