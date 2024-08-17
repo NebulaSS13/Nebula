@@ -146,6 +146,17 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			mob_icon_state_flags |= MOB_ICON_HAS_PARALYZED_STATE
 		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
 
+/mob/living/simple_animal/refresh_visible_overlays()
+	z_flags &= ~ZMM_MANGLE_PLANES
+	if(stat == CONSCIOUS)
+		var/image/I = get_eye_overlay()
+		if(I && glowing_eyes)
+			z_flags |= ZMM_MANGLE_PLANES
+		set_current_mob_overlay(HO_GLASSES_LAYER, I)
+	else
+		set_current_mob_overlay(HO_GLASSES_LAYER, null)
+	. = ..()
+
 /mob/living/simple_animal/on_update_icon()
 
 	..()
@@ -159,14 +170,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		icon_state += "-sleeping"
 	else if(current_posture?.deliberate && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
-
-	z_flags &= ~ZMM_MANGLE_PLANES
-	if(stat == CONSCIOUS)
-		var/image/I = get_eye_overlay()
-		if(I)
-			if(glowing_eyes)
-				z_flags |= ZMM_MANGLE_PLANES
-			add_overlay(I)
 
 /mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
