@@ -26,6 +26,17 @@
 	var/socks_color    = "#ddd5c9"
 	var/eyes_color     = "#1a1a1a"
 
+/mob/living/simple_animal/passive/deer/set_gender(new_gender, update_body)
+	. = ..()
+	if(name == initial(name))
+		switch(gender)
+			if(MALE)
+				SetName("buck")
+			if(FEMALE)
+				SetName("doe")
+			else
+				SetName("deer")
+
 /mob/living/simple_animal/passive/deer/get_eye_colour()
 	. = ..()
 	return eyes_color

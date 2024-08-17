@@ -53,7 +53,7 @@
 	return get_skin_colour() != new_color
 
 /mob/living/proc/get_eye_colour()
-	return
+	return COLOR_WHITE
 
 /mob/living/proc/set_eye_colour(var/new_color, var/skip_update = FALSE)
 	return get_eye_colour() != new_color

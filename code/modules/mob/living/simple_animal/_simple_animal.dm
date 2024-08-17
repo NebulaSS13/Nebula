@@ -173,6 +173,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(check_state_in_icon(eye_icon_state, icon))
 		var/image/I = (glowing_eyes ? emissive_overlay(icon, eye_icon_state) : image(icon, eye_icon_state))
 		I.appearance_flags = RESET_COLOR
+		I.color = get_eye_colour()
 		return I
 
 /mob/living/simple_animal/Destroy()
