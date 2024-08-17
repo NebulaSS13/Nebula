@@ -39,7 +39,7 @@
 	var/next_tension_step
 
 /obj/item/gun/launcher/bow/set_autofire(var/atom/fire_at, var/mob/fire_by, var/autoturn = TRUE)
-	if(autofiring_at)
+	if(!autofire_enabled || autofiring_at)
 		return ..()
 	. = ..()
 	if(ismob(fire_by))
@@ -53,6 +53,8 @@
 			update_icon()
 
 /obj/item/gun/launcher/bow/try_autofire(autoturn)
+	if(!autofire_enabled)
+		return ..()
 	var/mob/wielder = loc
 	if(!ismob(wielder) || !check_can_draw(wielder))
 		clear_autofire()
@@ -68,6 +70,8 @@
 			update_icon()
 
 /obj/item/gun/launcher/bow/clear_autofire()
+	if(!autofire_enabled)
+		return ..()
 	var/mob/living/wielder = loc
 	if(tension && istype(wielder) && !wielder.incapacitated() && wielder.get_active_held_item() == src && get_loaded_arrow())
 		wielder.set_dir(get_dir(wielder, autofiring_at))
