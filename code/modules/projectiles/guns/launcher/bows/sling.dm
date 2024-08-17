@@ -8,6 +8,7 @@
 	string = null
 	max_tension = 1
 	bow_ammo_type = null
+	autofire_enabled = TRUE
 
 /obj/item/gun/launcher/bow/sling/try_string(mob/user, obj/item/bowstring/new_string)
 	return FALSE
