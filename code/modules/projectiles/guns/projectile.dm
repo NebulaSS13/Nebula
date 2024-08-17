@@ -287,10 +287,11 @@
 	return ..()
 
 /obj/item/gun/projectile/attack_hand(mob/user)
-	if(manual_unload && unload_ammo(user, allow_dump = FALSE))
-		return TRUE
-	if(try_remove_silencer(user))
-		return TRUE
+	if(src in user.get_inactive_held_items())
+		if(manual_unload && unload_ammo(user, allow_dump = FALSE))
+			return TRUE
+		if(try_remove_silencer(user))
+			return TRUE
 	return ..()
 
 /obj/item/gun/projectile/afterattack(atom/A, mob/living/user)
