@@ -25,7 +25,7 @@
 
 /obj/item/gun/launcher/bow/consume_next_projectile(atom/movable/firer)
 	if(tension <= 0 && isliving(firer))
-		to_chat(firer, SPAN_WARNING("\The [src] is not drawn back!"))
+		to_chat(firer, SPAN_WARNING("\The [src] is not ready to fire!"))
 		return null
 	return get_loaded_arrow(firer)
 

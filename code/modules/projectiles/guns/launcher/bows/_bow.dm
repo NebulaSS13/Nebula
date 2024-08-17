@@ -49,7 +49,7 @@
 			tension = 0
 			next_tension_step = world.time + get_draw_time(fire_by)
 			fire_by.set_dir(get_dir(fire_by, fire_at))
-			fire_by.visible_message(SPAN_NOTICE("\The [fire_by] begins drawing back \the [src]!"))
+			show_draw_message(fire_by)
 			update_icon()
 
 /obj/item/gun/launcher/bow/try_autofire(autoturn)
@@ -62,25 +62,26 @@
 			next_tension_step = world.time + get_draw_time(wielder)
 			tension++
 			if(tension == max_tension)
-				wielder.visible_message(SPAN_NOTICE("\The [wielder] pulls \the [src] back to its maximum draw!"))
+				show_max_draw_message(wielder)
 			else
-				wielder.visible_message(SPAN_NOTICE("\The [wielder] continues drawing back \the [src]!"))
+				show_working_draw_message(wielder)
 			update_icon()
 
 /obj/item/gun/launcher/bow/clear_autofire()
-	if(tension)
-		var/mob/living/wielder = loc
-		if(istype(wielder) && !wielder.incapacitated() && wielder.get_active_held_item() == src && get_loaded_arrow())
-			wielder.set_dir(get_dir(wielder, autofiring_at))
-			Fire(autofiring_at, autofiring_by, null, (get_dist(autofiring_at, autofiring_by) <= 1), FALSE, FALSE)
+	var/mob/living/wielder = loc
+	if(tension && istype(wielder) && !wielder.incapacitated() && wielder.get_active_held_item() == src && get_loaded_arrow())
+		wielder.set_dir(get_dir(wielder, autofiring_at))
+		Fire(autofiring_at, autofiring_by, null, (get_dist(autofiring_at, autofiring_by) <= 1), FALSE, FALSE)
 	. = ..()
 	if(tension)
+		if(istype(wielder))
+			show_cancel_draw_message(wielder)
 		tension = 0
 		update_icon()
 
 /obj/item/gun/launcher/bow/handle_click_empty(atom/movable/firer)
 	if(check_fire_message_spam("click"))
-		to_chat(firer, SPAN_WARNING("\The [src] has nothing nocked."))
+		to_chat(firer, SPAN_WARNING("\The [src] has nothing loaded."))
 
 /obj/item/gun/launcher/bow/fancy
 	desc = "A projectile weapon of ancient design that turns elastic tension into long-range death. This one has decorative engraving and flourishes."
@@ -171,7 +172,7 @@
 	if(string)
 		strings += "is strung with \a [string]"
 	if(_loaded)
-		strings += "has \a [_loaded] nocked"
+		strings += "has \a [_loaded] ready"
 	if(!length(strings))
 		return
 	to_chat(user, "It [english_list(strings)].")
