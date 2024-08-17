@@ -14,12 +14,30 @@
 	return ..()
 
 /obj/item/gun/launcher/bow/proc/load_available_ammo(mob/living/user)
-	for(var/obj/item/stack/material/bow_ammo/ammo in user.get_inactive_held_items())
+
+	var/list/possible_arrows = list()
+	possible_arrows += user.get_inactive_held_items()
+	for(var/accessory_slot in list(slot_back_str, slot_w_uniform_str, slot_wear_suit_str, slot_back_str))
+		var/obj/item/gear = user.get_equipped_item(accessory_slot)
+		if(!istype(gear))
+			continue
+		if(gear.storage)
+			possible_arrows |= gear.get_stored_inventory()
+		if(istype(gear, /obj/item/clothing))
+			var/obj/item/clothing/clothes = gear
+			for(var/obj/item/clothing/accessory in clothes.accessories)
+				if(accessory.storage)
+					possible_arrows |= accessory.get_stored_inventory()
+
+	for(var/obj/item/stack/material/bow_ammo/ammo in possible_arrows)
+		if(!can_load_arrow(ammo))
+			continue
 		attackby(ammo, user)
 		if(get_loaded_arrow(user))
 			if(!autofire_enabled)
 				start_drawing(user)
 			return TRUE
+
 	return FALSE
 
 /obj/item/gun/launcher/bow/attack_hand(mob/user)
