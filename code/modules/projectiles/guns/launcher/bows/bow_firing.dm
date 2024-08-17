@@ -11,6 +11,7 @@
 		ammo = stack.split(1)
 		if(QDELETED(ammo))
 			return FALSE
+		ammo.forceMove(src)
 	else if(user && !user.try_unequip(ammo, src))
 		return FALSE
 	_loaded = ammo
