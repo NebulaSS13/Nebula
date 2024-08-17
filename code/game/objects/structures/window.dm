@@ -307,7 +307,7 @@
 // TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
-	. = material.create_object(loc, is_fulltile() ? 4 : 2)
+	. = material.create_object(loc, 1)
 	if(reinf_material)
 		for(var/obj/item/stack/material/S in .)
 			S.reinf_material = reinf_material

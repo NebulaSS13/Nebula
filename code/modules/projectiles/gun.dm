@@ -770,7 +770,7 @@
 /decl/interaction_handler/gun/toggle_safety
 	name = "Toggle Safety"
 
-/decl/interaction_handler/toggle_safety/invoked(atom/target, mob/user, obj/item/prop)
+/decl/interaction_handler/gun/toggle_safety/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/gun = target
 	gun.toggle_safety(user)
 
