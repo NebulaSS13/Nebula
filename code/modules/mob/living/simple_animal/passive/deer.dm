@@ -26,6 +26,23 @@
 	var/socks_color    = "#ddd5c9"
 	var/eyes_color     = "#1a1a1a"
 
+/mob/living/simple_animal/passive/deer/get_bodytype()
+	return GET_DECL(/decl/bodytype/quadruped/animal/deer)
+
+/decl/bodytype/quadruped/animal/deer
+	uid = "bodytype_animal_deer"
+
+/decl/bodytype/quadruped/animal/deer/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
+			"[NORTH]" = list( 1, -4),
+			"[SOUTH]" = list( 1, -4),
+			"[EAST]" =  list( 9, -4),
+			"[WEST]" =  list(-9, -4)
+		)
+	)
+	return ..()
+
 /mob/living/simple_animal/passive/deer/set_gender(new_gender, update_body)
 	. = ..()
 	if(name == initial(name))
