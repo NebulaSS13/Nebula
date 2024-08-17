@@ -94,10 +94,6 @@
 	if(. && lit == FIRE_LIT)
 		refresh_affected_exterior_turfs()
 
-/obj/structure/fire_source/proc/get_current_burn_temperature()
-	var/datum/gas_mixture/environment = return_air()
-	return max(environment?.temperature, last_fuel_burn_temperature)
-
 /obj/structure/fire_source/proc/refresh_affected_exterior_turfs()
 
 	if(lit != FIRE_LIT)
@@ -381,21 +377,23 @@
 	return loc?.get_contained_external_atoms()
 
 /obj/structure/fire_source/proc/get_effective_burn_temperature()
-	if(lit != FIRE_LIT)
-		return 0
 	var/draught_mult = get_draught_multiplier()
 	if(draught_mult <= 0)
 		return 0
 	var/ambient_temperature = get_ambient_temperature(absolute = TRUE)
 	// The effective burn temperature can't go below ambient (no cold flames) or above the actual burn temperature.
-	return clamp(last_fuel_burn_temperature * draught_mult, ambient_temperature, last_fuel_burn_temperature)
+	return clamp((last_fuel_burn_temperature - T0C) * draught_mult + T0C, ambient_temperature, last_fuel_burn_temperature)
 
 // If absolute == TRUE, return our actual ambient temperature, otherwise return our effective burn temperature when lit.
 /obj/structure/fire_source/get_ambient_temperature(absolute = FALSE)
-	. = ..()
 	if(absolute || lit != FIRE_LIT)
 		return ..() // just normal room temperature
 	return get_effective_burn_temperature() // heat up to our burn temperature
+
+/obj/structure/fire_source/get_ambient_temperature_coefficient()
+	if(lit == FIRE_LIT)
+		return 1 // Don't use the turf coefficient!
+	return ..()
 
 /obj/structure/fire_source/ProcessAtomTemperature()
 	. = ..()
