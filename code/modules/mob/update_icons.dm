@@ -14,6 +14,7 @@
 	return TRUE
 
 /mob/proc/apply_visible_overlays()
+	cut_overlays()
 	for(var/overlay in get_all_current_mob_overlays())
 		add_overlay(overlay)
 	underlays = get_all_current_mob_underlays()
