@@ -6,6 +6,11 @@
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 		return
 
+	// Update tail concealment here since it's cheap and it saves checking elsewhere.
+	if(tail_organ.tail_hidden && !tail_organ.can_be_hidden())
+		tail_organ.tail_hidden = FALSE
+		to_chat(src, SPAN_NOTICE("Your [tail_organ.name] is revealed!"))
+
 	var/tail_state = tail_organ.get_tail()
 	if(!tail_state)
 		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
