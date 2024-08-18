@@ -348,7 +348,7 @@ var/global/list/_wood_materials = list(
 
 /obj/item/food/grown/get_dried_product()
 	if(ispath(dried_type, /obj/item/food/grown))
-		return new dried_type(loc, null, seed.name)
+		return new dried_type(loc, null, TRUE, seed.name)
 	return ..()
 
 /obj/item/food/grown/get_drying_state(var/obj/rack)
@@ -360,7 +360,7 @@ var/global/list/_wood_materials = list(
 
 /obj/item/food/grown/get_grilled_product()
 	if(ispath(backyard_grilling_product, /obj/item/food/grown))
-		return new backyard_grilling_product(loc, null, seed.name)
+		return new backyard_grilling_product(loc, null, TRUE, seed.name)
 	return ..()
 
 /obj/item/food/grown/afterattack(atom/target, mob/user, flag)
