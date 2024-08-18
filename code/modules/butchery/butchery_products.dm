@@ -38,7 +38,9 @@
 
 /obj/item/food/butchery/get_drying_overlay(var/obj/rack)
 	var/image/overlay = ..()
-	if(overlay && fat_material)
+	if(fat_material)
+		if(istext(overlay))
+			overlay = image('icons/obj/drying_rack.dmi', overlay)
 		var/drying_state = "[get_drying_state(rack)]_fat"
 		if(check_state_in_icon(drying_state, 'icons/obj/drying_rack.dmi'))
 			var/decl/material/fat_material_data = GET_DECL(fat_material)

@@ -215,14 +215,19 @@
 	return FALSE
 
 /obj/structure/meat_hook/attackby(var/obj/item/thing, var/mob/user)
+
 	if(!IS_KNIFE(thing))
 		return ..()
+
 	if(!occupant)
 		to_chat(user, SPAN_WARNING("There is nothing on \the [src] to butcher."))
-		return
-	if(!busy)
-		busy = TRUE
+		return TRUE
 
+	if(busy)
+		to_chat(user, SPAN_WARNING("\The [src] is already in use!"))
+		return TRUE
+
+	busy = TRUE
 	if(occupant_state == CARCASS_FRESH)
 		if(occupant.currently_has_skin())
 			do_butchery_step(user, thing, CARCASS_SKINNED, "skinning")
@@ -243,11 +248,8 @@
 			do_butchery_step(user, thing, CARCASS_EMPTY,   "butchering")
 		else
 			set_carcass_state(CARCASS_EMPTY, apply_damage = FALSE)
-
 	busy = FALSE
 	return TRUE
-
-
 
 #undef CARCASS_EMPTY
 #undef CARCASS_FRESH
