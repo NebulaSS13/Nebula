@@ -2,7 +2,7 @@
 	name = "drying rack"
 	desc = "A rack used to hold meat or vegetables for drying, or to stretch leather out and hold it taut during the tanning process."
 	icon = 'icons/obj/drying_rack.dmi'
-	icon_state = "rack"
+	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/obj/item/drying
