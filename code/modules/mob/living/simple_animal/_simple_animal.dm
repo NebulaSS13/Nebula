@@ -158,9 +158,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..()
 
 /mob/living/simple_animal/on_update_icon()
-
-	..()
-
 	icon_state = ICON_STATE_WORLD
 	if(stat != DEAD && HAS_STATUS(src, STAT_PARA) && (mob_icon_state_flags & MOB_ICON_HAS_PARALYZED_STATE))
 		icon_state += "-paralyzed"
@@ -170,6 +167,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		icon_state += "-sleeping"
 	else if(current_posture?.deliberate && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
+	..()
 
 /mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
