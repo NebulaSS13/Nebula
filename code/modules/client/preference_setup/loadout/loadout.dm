@@ -256,7 +256,7 @@
 		if(allowed && G.allowed_skills)
 			var/list/skills_required = list()//make it into instances? instead of path
 			for(var/skill in G.allowed_skills)
-				var/decl/hierarchy/skill/instance = GET_DECL(skill)
+				var/decl/skill/instance = GET_DECL(skill)
 				skills_required[instance] = G.allowed_skills[skill]
 
 			allowed = skill_check(jobs, skills_required)//Checks if a single job has all the skills required
@@ -264,7 +264,7 @@
 			entry += "<br><i>"
 			var/list/skill_checks = list()
 			for(var/R in skills_required)
-				var/decl/hierarchy/skill/S = R
+				var/decl/skill/S = R
 				var/skill_entry
 				skill_entry += "[S.levels[skills_required[R]]]"
 				if(allowed)

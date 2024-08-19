@@ -372,7 +372,7 @@
 	//From the skills popup
 
 	else if(href_list["hit_skill_button"])
-		var/decl/hierarchy/skill/S = locate(href_list["hit_skill_button"])
+		var/decl/skill/S = locate(href_list["hit_skill_button"])
 		var/datum/job/J = locate(href_list["at_job"])
 		if(!istype(S) || !istype(J))
 			return
@@ -383,7 +383,7 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["skillinfo"])
-		var/decl/hierarchy/skill/S = locate(href_list["skillinfo"])
+		var/decl/skill/S = locate(href_list["skillinfo"])
 		if(!istype(S))
 			return
 		var/HTML = list()

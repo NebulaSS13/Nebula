@@ -116,7 +116,7 @@ var/global/arrest_security_status =  "Arrest"
 
 	if(crewmember)
 		var/skills = list()
-		for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
+		for(var/decl/skill/skill in global.using_map.get_available_skills())
 			var/level = crewmember.get_skill_value(skill.type)
 			if(level > SKILL_NONE)
 				skills += "[skill.name], [skill.levels[level]]"

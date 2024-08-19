@@ -1,9 +1,9 @@
 /datum/preferences
-	var/list/skills_saved	 	= list()	   //List of /datum/job paths, with values (lists of "/decl/hierarchy/skill" , with values saved skill points spent). Should only include entries with nonzero spending.
+	var/list/skills_saved	 	= list()	   //List of /datum/job paths, with values (lists of "/decl/skill" , with values saved skill points spent). Should only include entries with nonzero spending.
 	var/list/skills_allocated	= list()	   //Same as above, but using instances rather than path strings for both jobs and skills.
 	var/list/points_by_job		= list()	   //List of jobs, with value the number of free skill points remaining
 
-/datum/preferences/proc/get_max_skill(datum/job/job, decl/hierarchy/skill/S)
+/datum/preferences/proc/get_max_skill(datum/job/job, decl/skill/S)
 	var/min = get_min_skill(job, S)
 	if(job && job.max_skill)
 		. = job.max_skill[S.type]
@@ -13,14 +13,14 @@
 		. = SKILL_MAX
 	. = max(min, .)
 
-/datum/preferences/proc/get_total_skill_value(datum/job/job, decl/hierarchy/skill/req_skill)
+/datum/preferences/proc/get_total_skill_value(datum/job/job, decl/skill/req_skill)
 	if(!(job in skills_allocated))
 		return get_min_skill(job, req_skill)
 	var/allocated = skills_allocated[job]
 	if(req_skill in allocated)
 		return allocated[req_skill] + get_min_skill(job, req_skill)
 
-/datum/preferences/proc/get_min_skill(datum/job/job, decl/hierarchy/skill/S)
+/datum/preferences/proc/get_min_skill(datum/job/job, decl/skill/S)
 	if(job && job.min_skill)
 		. = job.min_skill[S.type]
 	if(!.)
@@ -30,7 +30,7 @@
 	if(!.)
 		. = SKILL_MIN
 
-/datum/preferences/proc/get_spent_points(datum/job/job, decl/hierarchy/skill/S)
+/datum/preferences/proc/get_spent_points(datum/job/job, decl/skill/S)
 	if(!(job in skills_allocated))
 		return 0
 	var/allocated = skills_allocated[job]
@@ -39,13 +39,13 @@
 	var/min = get_min_skill(job, S)
 	return get_level_cost(job, S, min + allocated[S])
 
-/datum/preferences/proc/get_level_cost(datum/job/job, decl/hierarchy/skill/S, level)
+/datum/preferences/proc/get_level_cost(datum/job/job, decl/skill/S, level)
 	var/min = get_min_skill(job, S)
 	. = 0
 	for(var/i=min+1, i <= level, i++)
 		. += S.get_cost(i)
 
-/datum/preferences/proc/get_max_affordable(datum/job/job, decl/hierarchy/skill/S)
+/datum/preferences/proc/get_max_affordable(datum/job/job, decl/skill/S)
 	var/current_level = get_min_skill(job, S)
 	var/allocation = skills_allocated[job]
 	if(allocation && allocation[S])
@@ -66,9 +66,11 @@
 		if("[job.type]" in pref.skills_saved)
 			var/S = pref.skills_saved["[job.type]"]
 			var/L = list()
-			for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
-				if("[skill.type]" in S)
-					L[skill] = S["[skill.type]"]
+			for(var/decl/skill/skill in global.using_map.get_available_skills())
+				if(skill.uid in S)
+					L[skill] = S[skill.uid]
+				else if(skill.fallback_key && (skill.fallback_key in S)) // LEGACY SUPPORT
+					L[skill] = S[skill.fallback_key]
 			if(length(L))
 				pref.skills_allocated[job] = L
 
@@ -77,8 +79,8 @@
 	for(var/datum/job/job in pref.skills_allocated)
 		var/S = pref.skills_allocated[job]
 		var/L = list()
-		for(var/decl/hierarchy/skill/skill in S)
-			L["[skill.type]"] = S[skill]
+		for(var/decl/skill/skill in S)
+			L[skill.uid] = S[skill]
 		if(length(L))
 			pref.skills_saved["[job.type]"] = L
 
@@ -95,7 +97,7 @@
 		var/L = list()
 		var/sum = 0
 
-		for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
+		for(var/decl/skill/skill in global.using_map.get_available_skills())
 			if(skill in input_skills)
 				var/min = get_min_skill(job, skill)
 				var/max = get_max_skill(job, skill)
@@ -118,11 +120,11 @@
 /datum/preferences/proc/get_character_age()
 	return LAZYACCESS(appearance_descriptors, "age") || 30
 
-/datum/preferences/proc/check_skill_prerequisites(datum/job/job, decl/hierarchy/skill/S)
+/datum/preferences/proc/check_skill_prerequisites(datum/job/job, decl/skill/S)
 	if(!S.prerequisites)
 		return TRUE
 	for(var/skill_type in S.prerequisites)
-		var/decl/hierarchy/skill/prereq = GET_DECL(skill_type)
+		var/decl/skill/prereq = GET_DECL(skill_type)
 		var/value = get_min_skill(job, prereq) + LAZYACCESS(skills_allocated[job], prereq)
 		if(value < S.prerequisites[skill_type])
 			return FALSE
@@ -132,13 +134,13 @@
 	var/allocation = skills_allocated[job]
 	if(!allocation)
 		return
-	for(var/decl/hierarchy/skill/S in allocation)
+	for(var/decl/skill/S in allocation)
 		if(!check_skill_prerequisites(job, S))
 			clear_skill(job, S)
 			.() // restart checking from the beginning, as after doing this we don't know whether what we've already checked is still fine.
 			return
 
-/datum/preferences/proc/clear_skill(datum/job/job, decl/hierarchy/skill/S)
+/datum/preferences/proc/clear_skill(datum/job/job, decl/skill/S)
 	if(job in skills_allocated)
 		var/min = get_min_skill(job,S)
 		var/T = skills_allocated[job]
@@ -148,7 +150,7 @@
 		if(!length(T))
 			skills_allocated -= job		  //Don't keep track of a job with no allocation
 
-/datum/category_item/player_setup_item/occupation/proc/update_skill_value(datum/job/job, decl/hierarchy/skill/S, new_level)
+/datum/category_item/player_setup_item/occupation/proc/update_skill_value(datum/job/job, decl/skill/S, new_level)
 	if(!isnum(new_level) || (round(new_level) != new_level))
 		return											//Checks to make sure we were fed an integer.
 	if(!pref.check_skill_prerequisites(job, S))
@@ -188,25 +190,21 @@
 
 	dat += "<table>"
 	var/list/available_skills = global.using_map.get_available_skills()
-	var/decl/hierarchy/skill/skill = GET_DECL(/decl/hierarchy/skill)
-	for(var/decl/hierarchy/skill/cat in skill.children)
-
+	var/list/categories = sortTim(decls_repository.get_decls_of_subtype_unassociated(/decl/skill_category), /proc/cmp_skill_category_asc)
+	for(var/decl/skill_category/cat in categories)
 		var/list/cat_rows = list()
-		for(var/decl/hierarchy/skill/S in cat.children)
+		for(var/decl/skill/S in cat.children)
 			if(S in available_skills)
 				cat_rows += get_skill_row(job, S)
-				for(var/decl/hierarchy/skill/perk in S.children)
-					if(perk in available_skills)
-						cat_rows += get_skill_row(job, perk)
 
 		if(length(cat_rows))
-			dat += "<tr><th colspan = 4><b>[cat.name]</b></th></tr>"
+			dat += "<tr><th colspan = 6><b>[cat.name]</b></th></tr>"
 			dat += cat_rows
 
 	dat += "</table>"
 	return JOINTEXT(dat)
 
-/datum/category_item/player_setup_item/occupation/proc/get_skill_row(datum/job/job, decl/hierarchy/skill/S)
+/datum/category_item/player_setup_item/occupation/proc/get_skill_row(datum/job/job, decl/skill/S)
 	var/list/dat = list()
 	var/min = pref.get_min_skill(job,S)
 	var/level = min + (pref.skills_allocated[job] ? pref.skills_allocated[job][S] : 0)				//the current skill level
@@ -223,8 +221,9 @@
 	panel.set_content(generate_skill_content(job))
 	panel.open()
 
-/datum/category_item/player_setup_item/occupation/proc/skill_to_button(decl/hierarchy/skill/skill, datum/job/job, current_level, selection_level, min, max)
-	var/offset = skill.prerequisites ? skill.prerequisites[skill.parent.type] - 1 : 0
+/datum/category_item/player_setup_item/occupation/proc/skill_to_button(decl/skill/skill, datum/job/job, current_level, selection_level, min, max)
+	var/decl/skill/prerequisite = skill.prerequisites?[1]
+	var/offset = prerequisite ? skill.prerequisites[prerequisite] - 1 : 0
 	var/effective_level = selection_level - offset
 	if(effective_level <= 0 || effective_level > length(skill.levels))
 		return "<td></td>"
@@ -242,7 +241,7 @@
 	else
 		return "<td><span class='Toohigh'>[button_label]</span></td>"
 
-/datum/category_item/player_setup_item/occupation/proc/add_link(decl/hierarchy/skill/skill, datum/job/job, text, style, value)
+/datum/category_item/player_setup_item/occupation/proc/add_link(decl/skill/skill, datum/job/job, text, style, value)
 	if(pref.check_skill_prerequisites(job, skill))
 		return "<a class=[style] href='byond://?src=\ref[src];hit_skill_button=\ref[skill];at_job=\ref[job];newvalue=[value]'>[text]</a>"
 	return text

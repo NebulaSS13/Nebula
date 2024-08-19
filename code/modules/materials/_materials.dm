@@ -416,7 +416,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!crafting_skill)
 		. += "no construction skill set"
 	else if(!isnull(construction_difficulty))
-		var/decl/hierarchy/skill/used_skill = GET_DECL(crafting_skill)
+		var/decl/skill/used_skill = GET_DECL(crafting_skill)
 		if(!istype(used_skill))
 			. += "invalid skill decl [used_skill]"
 		else if(length(used_skill.levels) < construction_difficulty)

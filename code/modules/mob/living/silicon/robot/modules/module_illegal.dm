@@ -17,7 +17,7 @@
 	var/id
 
 /obj/item/robot_module/syndicate/Initialize()
-	for(var/decl/hierarchy/skill/skill in global.using_map.get_available_skills())
+	for(var/decl/skill/skill in global.using_map.get_available_skills())
 		skills[skill.type] = SKILL_EXPERT
 	. = ..()
 

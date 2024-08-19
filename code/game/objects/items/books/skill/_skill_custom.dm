@@ -132,10 +132,10 @@
 
 	//Choosing the skill
 	var/list/skill_choices = list()
-	for(var/decl/hierarchy/skill/S in global.using_map.get_available_skills())
+	for(var/decl/skill/S in global.using_map.get_available_skills())
 		if(user.skill_check(S.type, SKILL_BASIC))
 			LAZYADD(skill_choices, S)
-	var/decl/hierarchy/skill/skill_choice = input(user, "What subject does your textbook teach?", "Textbook skill selection") as null|anything in skill_choices
+	var/decl/skill/skill_choice = input(user, "What subject does your textbook teach?", "Textbook skill selection") as null|anything in skill_choices
 	if(!can_write(pen,user) || progress > length(progress_messages))
 		return
 	if(!skill_choice)

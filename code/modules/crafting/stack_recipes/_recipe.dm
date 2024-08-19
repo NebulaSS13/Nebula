@@ -142,7 +142,7 @@
 			. += "null required material but non-null max hardness value"
 
 	if(recipe_skill && !isnull(difficulty))
-		var/decl/hierarchy/skill/used_skill = GET_DECL(recipe_skill)
+		var/decl/skill/used_skill = GET_DECL(recipe_skill)
 		if(!istype(used_skill))
 			. += "invalid skill decl [recipe_skill]"
 		else if(length(used_skill.levels) < difficulty)
@@ -192,7 +192,7 @@
 	var/used_skill = get_skill(mat, reinf_mat)
 	var/used_difficulty = get_skill_difficulty(mat, reinf_mat)
 	if(used_skill && used_difficulty)
-		var/decl/hierarchy/skill/display_skill = GET_DECL(used_skill)
+		var/decl/skill/display_skill = GET_DECL(used_skill)
 		var/skill_message = "[capitalize(LAZYACCESS(display_skill.levels, used_difficulty))] [capitalize(display_skill.name)]"
 		if(user.skill_check(used_skill, used_difficulty))
 			. += skill_message

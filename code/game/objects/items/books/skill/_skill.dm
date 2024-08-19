@@ -14,7 +14,7 @@ Skill books that increase your skills while you activate and hold them
 	matter = list(/decl/material/solid/organic/wood = MATTER_AMOUNT_REINFORCEMENT)
 	abstract_type = /obj/item/book/skill
 
-	var/decl/hierarchy/skill/skill       // e.g. SKILL_LITERACY
+	var/decl/skill/skill       // e.g. SKILL_LITERACY
 	var/skill_req = SKILL_NONE           // The level the user needs in the skill to benefit from the book, e.g. SKILL_PROF
 	var/weakref/reading                  // To check if the book is actively being used
 	var/custom = FALSE                   // To bypass init stuff, for player made textbooks and weird books. If true must have details manually set
