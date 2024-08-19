@@ -1,5 +1,5 @@
 // Names taken from https://www.behindthename.com/names/language/latin/1
-/datum/map/shaded_hills
+/datum/map
 	first_names_male = list(
 		"Aaron",        "Abacuc",        "Abdias",       "Abel",           "Abia",         "Abidan",
 		"Abimelech",    "Abisai",        "Abner",        "Abraham",        "Absalom",      "Abundius",
