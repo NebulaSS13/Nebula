@@ -49,7 +49,7 @@
 		var/turf/T = get_turf(L)
 		if(T && (T.z in affected_z_levels))
 			//this is needed because dusting resets client screen 1.5 seconds after being called (delayed due to the dusting animation)
-			var/mob/ghost = L.ghostize(0) //So we ghostize them right beforehand instead
+			var/mob/ghost = L.ghostize(CORPSE_CANNOT_REENTER) //So we ghostize them right beforehand instead
 			if(ghost && ghost.client)
 				ghost.client.screen += cinematic
 			L.dust() //then dust the body
