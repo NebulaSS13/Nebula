@@ -79,7 +79,7 @@
 
 /datum/job/shaded_hills/inn/farmer
 	title                   = "Farmer"
-	supervisors             = "your self-interest"
+	supervisors             = "your own self-interest"
 	description             = "You grow crops both for your own subsistence and to sell to others like the innkeeper or general store. You are knowledgeable of local plants grown for sustenance, but your knowledge of niche herbs may be spottier."
 	spawn_positions         = 3
 	total_positions         = 3
@@ -95,3 +95,24 @@
 
 /obj/abstract/landmark/start/shaded_hills/farmer
 	name                    = "Farmer"
+
+// Effectively a placeholder role until economic mechanics are in.
+/datum/job/shaded_hills/inn/storekeeper
+	title                   = "Storekeeper"
+	supervisors             = "growth, profit, and your own self-interest"
+	description             = "You run the local store, and are responsible for both selling goods to interested parties, and restocking from local suppliers."
+	spawn_positions         = 1
+	total_positions         = 1
+	outfit_type             = /decl/outfit/job/shaded_hills/storekeeper
+	min_skill               = list(
+		SKILL_HAULING       = SKILL_ADEPT,
+		SKILL_FINANCE       = SKILL_ADEPT,
+	)
+	skill_points            = 18
+	lock_keys = list(
+		"general store"           = /decl/material/solid/metal/copper,
+		"general store stockroom" = /decl/material/solid/metal/iron
+	)
+
+/obj/abstract/landmark/start/shaded_hills/storekeeper
+	name                    = "Storekeeper"

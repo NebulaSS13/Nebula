@@ -10,3 +10,6 @@
 
 /decl/outfit/job/shaded_hills/farmer
 	name    = "Shaded Hills - Farmer"
+
+/decl/outfit/job/shaded_hills/storekeeper
+	name    = "Shaded Hills - Storekeeper"

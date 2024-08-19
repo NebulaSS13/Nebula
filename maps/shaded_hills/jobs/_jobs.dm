@@ -7,6 +7,7 @@
 		/datum/job/shaded_hills/local/miner,
 		/datum/job/shaded_hills/local/herbalist,
 		/datum/job/shaded_hills/local/forester,
+		/datum/job/shaded_hills/inn/storekeeper,
 		/datum/job/shaded_hills/inn/innkeeper,
 		/datum/job/shaded_hills/inn/inn_worker,
 		/datum/job/shaded_hills/inn/bartender,
