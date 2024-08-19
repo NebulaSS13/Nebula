@@ -717,6 +717,7 @@
 /area/shaded_hills/outside/downlands)
 "AE" = (
 /obj/structure/door/walnut,
+/obj/abstract/landmark/lock_preset/shaded_hills/shrine,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/shrine)
 "AG" = (
