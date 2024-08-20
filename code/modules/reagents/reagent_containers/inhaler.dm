@@ -56,13 +56,8 @@
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return TRUE
 
-	// This properly handles mouth coverage/presence, but should probably be replaced later.
-	if(user == target)
-		if(!target.can_eat(src))
-			return TRUE
-	else
-		if(!target.can_force_feed(user, src))
-			return TRUE
+	if(!user.can_force_feed(target, src))
+		return TRUE
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(target)
