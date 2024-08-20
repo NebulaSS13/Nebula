@@ -717,6 +717,7 @@
 /area/shaded_hills/outside/downlands)
 "AE" = (
 /obj/structure/door/walnut,
+/obj/abstract/landmark/lock_preset/shaded_hills/shrine,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/shrine)
 "AG" = (
@@ -1258,6 +1259,10 @@
 /obj/abstract/landmark/latejoin,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
+"TA" = (
+/obj/abstract/landmark/start/shaded_hills/storekeeper,
+/turf/floor/wood/walnut,
+/area/shaded_hills/general_store)
 "TM" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/food/grown/potato,
@@ -9431,7 +9436,7 @@ Wg
 GQ
 uJ
 sM
-uJ
+TA
 Zb
 Wg
 HI
