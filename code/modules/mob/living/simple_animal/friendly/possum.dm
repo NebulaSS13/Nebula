@@ -19,6 +19,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
 	ai = /datum/mob_controller/opossum
+	butchery_data = /decl/butchery_data/animal/opossum
 	var/is_angry = FALSE
 	var/playing_dead_time
 	var/const/PLAY_DEAD_LENGTH = 20 SECONDS
