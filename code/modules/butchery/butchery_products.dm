@@ -33,6 +33,20 @@
 	if(meat_name)
 		set_meat_name(meat_name)
 
+/obj/item/food/butchery/get_drying_state(var/obj/rack)
+	return "meat"
+
+/obj/item/food/butchery/get_drying_overlay(var/obj/rack)
+	var/image/overlay = ..()
+	if(fat_material)
+		if(istext(overlay))
+			overlay = image('icons/obj/drying_rack.dmi', overlay)
+		var/drying_state = "[get_drying_state(rack)]_fat"
+		if(check_state_in_icon(drying_state, 'icons/obj/drying_rack.dmi'))
+			var/decl/material/fat_material_data = GET_DECL(fat_material)
+			overlay.overlays += overlay_image('icons/obj/drying_rack.dmi', drying_state, fat_material_data.color, RESET_COLOR)
+	return overlay
+
 /obj/item/food/butchery/on_update_icon()
 	..()
 	underlays = null
