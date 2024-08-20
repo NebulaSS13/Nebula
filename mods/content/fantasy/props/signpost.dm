@@ -53,6 +53,10 @@
 	despawn_character(user)
 	return TRUE
 
+/obj/effect/departure_signpost/get_mechanics_info()
+	. = ..()
+	. += "By clicking on the signpost, you can choose to remove your character from the round in order to free your job slot and respawn. This will delete your character's worn and held items, so make sure not to take any important items with you."
+
 // Premade types for mapping.
 /obj/effect/departure_signpost/north
 	dir = NORTH
