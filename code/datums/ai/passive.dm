@@ -39,14 +39,16 @@
 				return
 
 	// Handle sleeping or wandering.
-	if(isnull(flee_target))
-		if(body.stat == CONSCIOUS && prob(0.25))
+	if(isnull(flee_target) && prob(0.5))
+		if(prob(50) && body.stat == CONSCIOUS)
 			body.set_stat(UNCONSCIOUS)
-			do_wander = FALSE
+			stop_wander = TRUE
 			speak_chance = 0
-		else if(body.stat == UNCONSCIOUS && prob(0.5))
+		else if(body.stat == UNCONSCIOUS)
 			body.set_stat(CONSCIOUS)
-			do_wander = TRUE
+			stop_wander = FALSE
+			speak_chance = initial(speak_chance)
+		body.update_posture()
 
 /datum/mob_controller/passive/retaliate(atom/source)
 	if((. = ..()))
