@@ -4,7 +4,7 @@
 	density = FALSE
 	ai = /datum/mob_controller/aggressive/commanded
 
-/mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	ai?.memorise(speaker, message)
 	return ..()
 

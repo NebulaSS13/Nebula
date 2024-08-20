@@ -1,4 +1,4 @@
-/mob/living/deity/say(var/message, var/decl/language/speaking = null, var/verb="says", var/alt_name="")
+/mob/living/deity/say(var/message, var/decl/language/speaking = null, var/verb="says")
 	if(!..())
 		return 0
 	if(pylon)

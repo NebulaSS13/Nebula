@@ -9,7 +9,7 @@
 /mob/living/slime/say_understands(mob/speaker, decl/language/speaking)
 	. = isslime(speaker) || ..()
 
-/mob/living/slime/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/slime/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	var/datum/mob_controller/slime/slime_ai = ai
 	if(istype(slime_ai) && (weakref(speaker) in slime_ai.observed_friends))
 		LAZYSET(slime_ai.speech_buffer, speaker, lowertext(html_decode(message)))

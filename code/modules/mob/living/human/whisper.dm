@@ -24,5 +24,5 @@
 
 
 //This is used by both the whisper verb and human/say() to handle whispering
-/mob/living/human/proc/whisper_say(var/message, var/decl/language/speaking = null, var/alt_name="", var/verb="whispers")
-	say(message, speaking, verb, alt_name, whispering = TRUE)
+/mob/living/human/proc/whisper_say(var/message, var/decl/language/speaking = null, var/verb="whispers")
+	say(message, speaking, verb, whispering = TRUE)

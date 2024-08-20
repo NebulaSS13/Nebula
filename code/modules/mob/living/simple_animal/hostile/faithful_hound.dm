@@ -68,7 +68,7 @@
 /mob/living/simple_animal/faithful_hound/Destroy()
 	return ..()
 
-/mob/living/simple_animal/faithful_hound/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/faithful_hound/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	set waitfor = FALSE
 	if(!ai?.check_memory(speaker, message))
 		return
