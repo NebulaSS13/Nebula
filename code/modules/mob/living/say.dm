@@ -327,4 +327,4 @@
 	if(voice_sub)
 		return voice_sub
 
-	return real_name
+	return real_name || name
