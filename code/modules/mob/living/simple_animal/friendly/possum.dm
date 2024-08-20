@@ -37,13 +37,13 @@
 
 	var/mob/living/simple_animal/opossum/poss = body
 	if(poss.stat == UNCONSCIOUS)
-		do_wander = FALSE
+		stop_wander = TRUE
 		speak_chance = 0
 		poss.set_posture(/decl/posture/lying)
 		poss.set_stat(UNCONSCIOUS)
 		poss.is_angry = FALSE
 	else
-		do_wander = initial(do_wander)
+		stop_wander = FALSE
 		speak_chance = initial(speak_chance)
 		poss.set_posture(/decl/posture/standing)
 		poss.set_stat(CONSCIOUS)
