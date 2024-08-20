@@ -32,23 +32,23 @@
 
 /datum/mob_controller/opossum/do_process(time_elapsed)
 
-	if(!(. = ..()) || !prob(0.5))
+	if(!(. = ..()) || body.stat == DEAD || !prob(0.5))
 		return
 
 	var/mob/living/simple_animal/opossum/poss = body
-	if(poss.stat == UNCONSCIOUS)
+	if(poss.stat == CONSCIOUS)
 		stop_wander = TRUE
 		speak_chance = 0
 		poss.set_posture(/decl/posture/lying)
 		poss.set_stat(UNCONSCIOUS)
 		poss.is_angry = FALSE
-	else
+	else if(poss.stat == UNCONSCIOUS)
 		stop_wander = FALSE
 		speak_chance = initial(speak_chance)
 		poss.set_posture(/decl/posture/standing)
 		poss.set_stat(CONSCIOUS)
 		if(prob(10))
-			poss.is_angry = TRUE
+			poss.is_angry = TRUE // woke up on the wrong side of the bed
 
 /mob/living/simple_animal/opossum/adjustBruteLoss(damage, do_update_health = FALSE)
 	. = ..()
