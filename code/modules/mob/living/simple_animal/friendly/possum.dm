@@ -20,6 +20,8 @@
 	holder_type = /obj/item/holder
 	ai = /datum/mob_controller/opossum
 	var/is_angry = FALSE
+	var/playing_dead_time
+	var/const/PLAY_DEAD_LENGTH = 20 SECONDS
 
 /datum/mob_controller/opossum
 	emote_speech = list("Hiss!","Aaa!","Aaa?")
@@ -29,6 +31,15 @@
 	turns_per_wander = 6
 	expected_type = /mob/living/simple_animal/opossum
 	can_escape_buckles = TRUE
+
+/datum/mob_controller/opossum/proc/is_playing_dead()
+	var/mob/living/simple_animal/opossum/poss = body
+	return !isnull(poss.playing_dead_time) && (poss.playing_dead_time > world.time)
+
+/datum/mob_controller/opossum/try_wander()
+	if(is_playing_dead())
+		return // playing dead!
+	return ..()
 
 /datum/mob_controller/opossum/do_process(time_elapsed)
 
@@ -72,6 +83,7 @@
 		else
 			set_posture(/decl/posture/lying/deliberate)
 			custom_emote(src, "dies!")
+			playing_dead_time = world.time + PLAY_DEAD_LENGTH
 		update_icon()
 
 /mob/living/simple_animal/opossum/on_update_icon()
@@ -103,7 +115,7 @@
 	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
 
 /mob/living/simple_animal/opossum/poppy/proc/check_keywords(var/message)
-	if(!client && stat == CONSCIOUS)
+	if(!client && istype(ai) && stat == CONSCIOUS)
 		message = lowertext(message)
 		for(var/aaa in aaa_words)
 			if(findtext(message, aaa))
