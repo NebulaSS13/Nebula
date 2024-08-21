@@ -86,6 +86,7 @@
 	outfit_type             = /decl/outfit/job/shaded_hills/farmer
 	min_skill               = list(
 		SKILL_HAULING       = SKILL_ADEPT, // farming can be demanding work
+		SKILL_HUSBANDRY     = SKILL_ADEPT, // must be able to pick up and milk animals
 		SKILL_BOTANY        = SKILL_ADEPT, // must be skilled enough to have plants reliably survive when planted
 	)
 	skill_points            = 18

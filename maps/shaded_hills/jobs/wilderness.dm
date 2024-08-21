@@ -56,6 +56,7 @@
 	outfit_type             = /decl/outfit/job/shaded_hills/forester
 	min_skill               = list(
 		SKILL_HAULING       = SKILL_ADEPT, // overall physical activity
+		SKILL_HUSBANDRY     = SKILL_BASIC, // handling and caring for animals
 		SKILL_BOTANY        = SKILL_BASIC, // growing and harvesting plants, trees, etc
 		SKILL_COOKING       = SKILL_BASIC, // butchery
 		SKILL_CARPENTRY     = SKILL_ADEPT, // tree felling
