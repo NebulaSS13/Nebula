@@ -224,7 +224,7 @@
 	levels = list(
 		"Unskilled"   = "You know next to nothing about animals. You can feed and clean up after them, but you know nothing about their biology, their behavior, or raising their young.",
 		"Basic"       = "You've cared for farm animals before. You can care for the basic needs of an animal, and know how to do things like milk a cow or shear a sheep.<br>- Cows will not flee when you try to milk them.",
-		"Trained"     = "You are proficient at animal handling, and can delicately handle even skittish animals without frightening them. <br>- Passive animals will not flee when you pick them up.", // TODO: Implement this benefit
+		"Trained"     = "You are proficient at animal handling, and can delicately handle even skittish animals without frightening them. <br>- Passive animals will not flee when you pick them up.",
 		"Experienced" = "You are an experienced animal caretaker with an encyclopedic knowledge of animals.",
 		"Master"      = "You're a specialized animal caretaker. You can care for even the most exotic, fragile, or dangerous animals."
 	)
@@ -233,6 +233,7 @@
 /mob/living/simple_animal/chick/examine_skill = SKILL_HUSBANDRY
 /mob/living/simple_animal/cow/milking_skill = SKILL_HUSBANDRY
 /mob/living/simple_animal/hostile/goat/milking_skill = SKILL_HUSBANDRY
+/datum/mob_controller/passive/scooping_skill = SKILL_HUSBANDRY
 
 /decl/skill/service/cooking
 	name = "Cooking"
