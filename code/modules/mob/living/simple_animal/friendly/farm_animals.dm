@@ -296,7 +296,8 @@
 
 /mob/living/simple_animal/chick/handle_living_non_stasis_processes()
 	if((. = ..()))
-		amount_grown += rand(1,2)
+		if(prob(50)) // should take around 4 or 5 minutes to grow up, give or take
+			amount_grown += rand(1, 2)
 		if(amount_grown >= 100)
 			new /mob/living/simple_animal/fowl/chicken(src.loc)
 			qdel(src)
@@ -364,10 +365,10 @@ var/global/chicken_count = 0
 	if(istype(O, /obj/item/food)) //feedin' dem chickens
 		var/obj/item/food/G = O
 		if(findtext(G.get_grown_tag(), "wheat")) // includes chopped, crushed, dried etc.
-			if(!stat && eggsleft < 8)
+			if(!stat && eggsleft < 4)
 				user.visible_message(SPAN_NOTICE("[user] feeds \the [O] to \the [src]! It clucks happily."), SPAN_NOTICE("You feed \the [O] to \the [src]! It clucks happily."), SPAN_NOTICE("You hear clucking."))
 				qdel(O)
-				eggsleft += rand(1, 4)
+				eggsleft += rand(1, 2)
 			else
 				to_chat(user, SPAN_NOTICE("\The [src] doesn't seem hungry!"))
 		else
@@ -376,13 +377,13 @@ var/global/chicken_count = 0
 		..()
 
 /mob/living/simple_animal/fowl/chicken/handle_living_non_stasis_processes()
-	if((. = ..()) && prob(3) && eggsleft > 0)
+	if((. = ..()) && prob(1) && eggsleft > 0)
 		visible_message("[src] [pick("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")]")
 		eggsleft--
 		var/obj/item/food/egg/E = new(get_turf(src))
 		E.pixel_x = rand(-6,6)
 		E.pixel_y = rand(-6,6)
-		if(chicken_count < MAX_CHICKENS && prob(10))
+		if(chicken_count < MAX_CHICKENS && prob(30))
 			E.amount_grown = 1
 			START_PROCESSING(SSobj, E)
 
@@ -465,7 +466,8 @@ var/global/chicken_count = 0
 
 /obj/item/food/egg/Process()
 	if(isturf(loc))
-		amount_grown += rand(1,2)
+		if(prob(50))
+			amount_grown++
 		if(amount_grown >= 100)
 			visible_message("[src] hatches with a quiet cracking sound.")
 			new /mob/living/simple_animal/chick(get_turf(src))
