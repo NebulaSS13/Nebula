@@ -348,6 +348,46 @@ var/global/chicken_count = 0
 
 /obj/item/food/egg
 	var/amount_grown = 0
+	var/decl/skill/examine_skill = SKILL_BOTANY // for maps that change the default skills, or for alien eggs that need science/medical/anatomy instead
+	var/examine_difficulty = SKILL_ADEPT
+
+/obj/item/food/egg/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(isnull(examine_difficulty) || !ispath(examine_skill))
+		return
+	if(!user.skill_check(examine_skill, examine_difficulty))
+		var/decl/skill/examine_skill_decl = GET_DECL(examine_skill)
+		to_chat(user, SPAN_SUBTLE("If you knew more about [lowertext(examine_skill_decl.name)], you could learn additional information about this."))
+		return
+	if(distance > 1)
+		to_chat(user, SPAN_SUBTLE("You're too far away to learn anything about this."))
+		return
+	if(!user.get_held_slot_for_item(src))
+		to_chat(user, SPAN_NOTICE("You need to be holding \the [src] to examine it closer."))
+		return
+	// need a lit candle or lantern to check
+	var/too_hot = FALSE
+	var/obj/item/candle // not necessarily an actual candle, just a light source that won't fry the egg
+	for(var/obj/item/I in user.get_held_items())
+		if(I.light_power && I.light_range) // we have a light! todo: minimum power?
+			if(I.get_heat() >= /obj/item/flame/fuelled/lighter::lit_heat) // lighters are too hot!
+				too_hot = TRUE
+			candle = I
+			if(!too_hot)
+				break
+	if(too_hot)
+		to_chat(user, SPAN_WARNING("You can't use \the [candle] to examine \the [src], that would fry it!"))
+		return
+	else if(!candle)
+		to_chat(user, SPAN_NOTICE("You need to be holding a light source to examine this closer."))
+		return
+	switch(amount_grown)
+		if(0)
+			to_chat(user, SPAN_NOTICE("\The [src] is unfertilized."))
+		if(10 to 80)
+			to_chat(user, SPAN_NOTICE("There's something growing inside \the [src]."))
+		if(80 to 100)
+			to_chat(user, SPAN_NOTICE("\The [src] is about to hatch!"))
 
 /obj/item/food/egg/Destroy()
 	if(amount_grown)
