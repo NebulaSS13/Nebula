@@ -9,6 +9,10 @@ h1, h2, h3, h4, h5, h6	{color: #a4bad6;font-family: Georgia, Verdana, sans-serif
 
 em						{font-style: normal;font-weight: bold;}
 
+a, a:link				{color: #397ea5}
+
+a.visited, a:visited	{color: #7c00e6}
+
 .system {color:#ff0000;}
 
 .motd
@@ -93,7 +97,7 @@ h1.alert, h2.alert		{color: #a4bad6;}
 .rose					{color: #ff5050;}
 .info					{color: #6685f5;}
 .notice					{color: #6685f5;}
-.subtle					{color: #4343ca; font-size: 75%; font-style: italic;}
+.subtle					{color: #8080df; font-size: 75%; font-style: italic;}
 .alium					{color: #00ff00;}
 .cult					{color: #aa1c1c; font-weight: bold; font-style: italic;}
 .cultannounce			{color: #aa1c1c; font-style: italic; font-size: 175%;}
