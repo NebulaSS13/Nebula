@@ -194,6 +194,24 @@
 	ai = /datum/mob_controller/chick
 	holder_type = /obj/item/holder
 	var/amount_grown = 0
+	var/decl/skill/examine_skill = SKILL_BOTANY // for maps that change the default skills, or for alien eggs that need science/medical/anatomy instead
+	var/examine_difficulty = SKILL_ADEPT
+
+/mob/living/simple_animal/chick/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(!user.skill_check(examine_skill, examine_difficulty))
+		var/decl/skill/examine_skill_decl = GET_DECL(examine_skill)
+		to_chat(user, SPAN_SUBTLE("If you knew more about [lowertext(examine_skill_decl.name)], you could learn additional information about this."))
+		return
+	switch(amount_grown)
+		if(0 to 20)
+			to_chat(user, SPAN_NOTICE("It's still young."))
+		if(20 to 40)
+			to_chat(user, SPAN_NOTICE("It's starting to grow in its adult feathers."))
+		if(40 to 80)
+			to_chat(user, SPAN_NOTICE("It's grown in almost all its adult feathers."))
+		if(80 to 100)
+			to_chat(user, SPAN_NOTICE("It's almost fully grown."))
 
 /datum/mob_controller/chick
 	emote_speech = list("Cherp.","Cherp?","Chirrup.","Cheep!")
