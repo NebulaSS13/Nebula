@@ -598,7 +598,7 @@
 		to_chat(user, "\The [src] is empty.")
 		return
 
-	to_chat(user, "<span class='notice'>\An [seed.display_name] is growing here.</span>")
+	to_chat(user, SPAN_NOTICE("\A [seed.display_name] is growing here."))
 
 	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
 		if(weedlevel >= 5)
@@ -611,7 +611,10 @@
 		else if(plant_health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
 			to_chat(user, "The [seed.display_name] looks <span class='danger'>unhealthy</span>.")
 
-	if(mechanical && Adjacent(user))
+	if(!Adjacent(user))
+		return
+
+	if(mechanical)
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
 
@@ -626,7 +629,7 @@
 			return
 
 		var/light_string
-		if(closed_system && mechanical)
+		if(closed_system)
 			light_string = "that the internal lights are set to [tray_light] lumens"
 		else
 			var/light_available = T.get_lumcount() * 5
@@ -635,6 +638,11 @@
 		to_chat(user, "Water: [round(waterlevel,0.1)]/100")
 		to_chat(user, "Nutrient: [round(nutrilevel,0.1)]/10")
 		to_chat(user, "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K.")
+	else
+		if(waterlevel < 20)
+			to_chat(user, SPAN_WARNING("The [seed.display_name] is dry."))
+		if(nutrilevel < 2)
+			to_chat(user, SPAN_WARNING("The [seed.display_name]'s growth is stunted due to a lack of nutrients."))
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"
