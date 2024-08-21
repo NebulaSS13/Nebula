@@ -5,3 +5,5 @@
 	see_in_dark          = 6
 	minbodytemp          = 223
 	maxbodytemp          = 323
+	base_movement_delay  = -1
+
