@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(timer)
 	wait = 1 //SS_TICKER subsystem, so wait is in ticks
 	priority = SS_PRIORITY_TIMER
 	flags = SS_NO_INIT | SS_TICKER
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_ALL
 
 	/// Queue used for storing timers that do not fit into the current buckets
 	var/list/datum/timedevent/second_queue = list()
@@ -569,6 +569,10 @@ SUBSYSTEM_DEF(timer)
 		PRINT_STACK_TRACE("addtimer called with a callback assigned to a qdeleted object. In the future such timers will not \
 			be supported and may refuse to run or run with a 0 wait")
 
+	if (wait == 0 && !(flags & DPC_FORBID_FLAGS))
+		SSdpc.queued_calls += callback
+		return
+
 	wait = max(NONUNIT_CEILING(wait, world.tick_lag), world.tick_lag)
 
 	if(wait >= INFINITY)
@@ -597,6 +601,22 @@ SUBSYSTEM_DEF(timer)
 					if (hash_timer.flags & TIMER_STOPPABLE)
 						. = hash_timer.id
 					return
+		else
+			if(wait == 0 || flags & TIMER_NO_HASH_WAIT)
+				// Check if a unique DPC queued call exists with the same hash
+				var/datum/callback/dpc_callback = SSdpc.unique_queued_calls[hash]
+				if(dpc_callback)
+					if(flags & TIMER_OVERRIDE)
+						// if this turns out to have too much overhead, could try setting
+						// the hash's callback to null and then just having SSdpc skip nulls?
+						SSdpc.unique_queued_calls -= hash
+					else
+						return // don't create a timer
+			// No timer with this hash exists, so we can use the fast unique-DPC path
+			// Have to make sure it doesn't have illegal flags for unique DPC though
+			if(wait == 0 && !(flags & UDPC_FORBID_FLAGS))
+				SSdpc.unique_queued_calls[hash] = callback
+				return
 	else if(flags & TIMER_OVERRIDE)
 		PRINT_STACK_TRACE("TIMER_OVERRIDE used without TIMER_UNIQUE")
 

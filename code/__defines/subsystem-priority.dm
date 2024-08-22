@@ -8,6 +8,7 @@
 // SS_TICKER
 #define SS_PRIORITY_OVERLAY      100  // Applies overlays. May cause overlay pop-in if it gets behind.
 #define SS_PRIORITY_TIMER         20
+#define SS_PRIORITY_DPC           19
 
 // Normal
 #define SS_PRIORITY_TICKER       100  // Gameticker.
