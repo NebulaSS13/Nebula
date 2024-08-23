@@ -35,15 +35,15 @@
 	permit_ao        = FALSE
 	dynamic_lighting = FALSE
 
-/turf/unsimulated/debug_grid/Initialize(var/ml)
-	. = ..(ml)
+/turf/unsimulated/debug_grid/New()
+	. = ..()
 	name           = "[initial(name)]-[x],[y]"
 	maptext        = STYLE_SMALLFONTS("[x],[y]", 6, "green")
 	maptext_width  = 32
 	maptext_height = 16
 
-/turf/unsimulated/map/Initialize(var/ml)
-	. = ..(ml)
+/turf/unsimulated/map/New()
+	..()
 	name = "[x]-[y]"
 	var/list/numbers = list()
 

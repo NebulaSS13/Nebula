@@ -30,13 +30,6 @@
 	generate_overmap()
 	testing("Overmap build for [name] complete.")
 
-	if(!assigned_z)
-		PRINT_STACK_TRACE("Overmap datum generated null assigned z_level.")
-
-	if(global.overmaps_by_z["[assigned_z]"])
-		PRINT_STACK_TRACE("Duplicate overmap datum instantiated for z-level: [type], [assigned_z], [overmaps_by_name[name]]")
-	global.overmaps_by_z["[assigned_z]"] = src
-
 	for(var/event_type in subtypesof(/datum/overmap_event))
 		var/datum/overmap_event/event = event_type
 		if(initial(event.overmap_id) == name)
@@ -59,6 +52,9 @@
 	SSmapping.increment_world_z_size(/datum/level_data/overmap)
 	assigned_z = world.maxz
 	testing("Putting [name] on [assigned_z].")
+	if(global.overmaps_by_z["[assigned_z]"])
+		PRINT_STACK_TRACE("Duplicate overmap datum instantiated for z-level: [type], [assigned_z], [overmaps_by_name[name]]")
+	global.overmaps_by_z["[assigned_z]"] = src
 	populate_overmap()
 	SSmapping.sealed_levels |= assigned_z
 	. = TRUE
