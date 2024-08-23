@@ -106,7 +106,7 @@
 			set_stat(CONSCIOUS)
 			if(istype(ai))
 				ai.resume_wandering()
-				ai.speak_chance = 1.25
+				ai.speak_chance = initial(ai.speak_chance)
 
 	//repair a bit of damage
 	if(prob(1))

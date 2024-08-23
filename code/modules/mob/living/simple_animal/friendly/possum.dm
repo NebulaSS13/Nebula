@@ -19,7 +19,10 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
 	ai = /datum/mob_controller/opossum
+	butchery_data = /decl/butchery_data/animal/opossum
 	var/is_angry = FALSE
+	var/playing_dead_time
+	var/const/PLAY_DEAD_LENGTH = 20 SECONDS
 
 /datum/mob_controller/opossum
 	emote_speech = list("Hiss!","Aaa!","Aaa?")
@@ -30,25 +33,34 @@
 	expected_type = /mob/living/simple_animal/opossum
 	can_escape_buckles = TRUE
 
+/datum/mob_controller/opossum/proc/is_playing_dead()
+	var/mob/living/simple_animal/opossum/poss = body
+	return !isnull(poss.playing_dead_time) && (poss.playing_dead_time > world.time)
+
+/datum/mob_controller/opossum/try_wander()
+	if(is_playing_dead())
+		return // playing dead!
+	return ..()
+
 /datum/mob_controller/opossum/do_process(time_elapsed)
 
-	if(!(. = ..()) || !prob(0.5))
+	if(!(. = ..()) || body.stat == DEAD || !prob(0.5))
 		return
 
 	var/mob/living/simple_animal/opossum/poss = body
-	if(poss.stat == UNCONSCIOUS)
-		do_wander = FALSE
+	if(poss.stat == CONSCIOUS)
+		stop_wander = TRUE
 		speak_chance = 0
 		poss.set_posture(/decl/posture/lying)
 		poss.set_stat(UNCONSCIOUS)
 		poss.is_angry = FALSE
-	else
-		do_wander = initial(do_wander)
+	else if(poss.stat == UNCONSCIOUS)
+		stop_wander = FALSE
 		speak_chance = initial(speak_chance)
 		poss.set_posture(/decl/posture/standing)
 		poss.set_stat(CONSCIOUS)
 		if(prob(10))
-			poss.is_angry = TRUE
+			poss.is_angry = TRUE // woke up on the wrong side of the bed
 
 /mob/living/simple_animal/opossum/adjustBruteLoss(damage, do_update_health = FALSE)
 	. = ..()
@@ -72,6 +84,7 @@
 		else
 			set_posture(/decl/posture/lying/deliberate)
 			custom_emote(src, "dies!")
+			playing_dead_time = world.time + PLAY_DEAD_LENGTH
 		update_icon()
 
 /mob/living/simple_animal/opossum/on_update_icon()
@@ -98,12 +111,12 @@
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
 
-/mob/living/simple_animal/opossum/poppy/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/opossum/poppy/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
 
 /mob/living/simple_animal/opossum/poppy/proc/check_keywords(var/message)
-	if(!client && stat == CONSCIOUS)
+	if(!client && istype(ai) && stat == CONSCIOUS)
 		message = lowertext(message)
 		for(var/aaa in aaa_words)
 			if(findtext(message, aaa))

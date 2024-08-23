@@ -42,9 +42,6 @@
 	if(!istype(posture) || posture == current_posture)
 		return FALSE
 
-	if(!istype(posture))
-		return
-
 	current_posture = posture
 	if(current_posture.prone)
 		set_density(FALSE)

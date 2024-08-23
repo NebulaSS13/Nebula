@@ -38,7 +38,7 @@
 	craft_verb = "weave"
 	craft_verbing = "weaving"
 	w_class = ITEM_SIZE_TINY
-	matter_multiplier = 0.4
+	matter_multiplier = 0.125 // 250 matter units = 1 thread, each small offal is 4 thread, so a large offal is 16 thread.
 	icon_state = "thread"
 	plural_icon_state = "thread-mult"
 	max_icon_state = "thread-max"

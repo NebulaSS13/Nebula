@@ -165,7 +165,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		icon_state += "-dead"
 	else if(stat == UNCONSCIOUS && (mob_icon_state_flags & MOB_ICON_HAS_SLEEP_STATE))
 		icon_state += "-sleeping"
-	else if(current_posture?.deliberate && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
+	else if(current_posture?.prone && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 	..()
 

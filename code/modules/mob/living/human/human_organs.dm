@@ -20,6 +20,9 @@
 /mob/living/human/get_external_organs()
 	return external_organs
 
+/mob/living/human/get_injured_organs()
+	return bad_external_organs
+
 /mob/living/human/get_internal_organs()
 	return internal_organs
 

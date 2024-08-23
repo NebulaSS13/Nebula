@@ -1332,6 +1332,7 @@ default behaviour is:
 				CRASH("synthetic get_default_temperature_threshold() called with invalid threshold value.")
 	return ..()
 
+// TODO: Generalize by looping over inventory slots/bodyparts/etc. and checking coverage.
 /mob/living/clean(clean_forensics = TRUE)
 
 	SHOULD_CALL_PARENT(FALSE)
@@ -1390,12 +1391,25 @@ default behaviour is:
 		var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 		if(gloves)
 			gloves.clean()
-		else
+		else // can't clean your hands with gloves on
+			for(var/organ_tag in get_held_item_slots())
+				var/obj/item/organ/external/organ = get_organ(organ_tag)
+				if(organ)
+					organ.clean()
 			germ_level = 0
+			update_equipment_overlay(slot_gloves_str, FALSE) // clear bloody hands overlay
 
-	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
-	if(shoes && washshoes)
-		shoes.clean()
+	if(washshoes)
+		var/obj/item/shoes = get_equipped_item(slot_shoes_str)
+		if(shoes)
+			shoes.clean()
+		else // no shoes, wash feet
+			var/static/list/clean_slots = list(BP_L_FOOT, BP_R_FOOT)
+			for(var/organ_tag in clean_slots)
+				var/obj/item/organ/external/organ = get_organ(organ_tag)
+				if(organ)
+					organ.clean()
+			update_equipment_overlay(slot_shoes_str, FALSE) // clear bloody feet overlay
 
 	if(mask && washmask)
 		mask.clean()
@@ -1416,26 +1430,6 @@ default behaviour is:
 	var/obj/item/belt = get_equipped_item(slot_belt_str)
 	if(belt)
 		belt.clean()
-
-	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
-	if(gloves)
-		gloves.clean()
-		gloves.germ_level = 0
-		for(var/organ_tag in get_held_item_slots())
-			var/obj/item/organ/external/organ = get_organ(organ_tag)
-			if(organ)
-				organ.clean()
-	else
-		germ_level = 0
-	update_equipment_overlay(slot_gloves_str, FALSE)
-
-	if(!get_equipped_item(slot_shoes_str))
-		var/static/list/clean_slots = list(BP_L_FOOT, BP_R_FOOT)
-		for(var/organ_tag in clean_slots)
-			var/obj/item/organ/external/organ = get_organ(organ_tag)
-			if(organ)
-				organ.clean()
-	update_equipment_overlay(slot_shoes_str)
 
 	return TRUE
 

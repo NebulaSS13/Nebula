@@ -141,18 +141,19 @@
 // The mob will periodically sit up or step 1 tile in a random direction.
 /datum/mob_controller/proc/try_wander()
 	//Movement
+	if(stop_wander || body.buckled_mob || !do_wander || body.anchored)
+		return
 	if(body.current_posture?.prone)
 		if(!body.incapacitated())
 			body.set_posture(/decl/posture/standing)
-	else if(!stop_wander && !body.buckled_mob && do_wander && !body.anchored)
-		if(isturf(body.loc) && !body.current_posture?.prone)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
-			turns_since_wander++
-			if(turns_since_wander >= turns_per_wander && (!(stop_wander_when_pulled) || !LAZYLEN(body.grabbed_by))) //Some animals don't move when pulled
-				var/direction = pick(wander_directions || global.cardinal)
-				var/turf/move_to = get_step(body.loc, direction)
-				if(body.turf_is_safe(move_to))
-					body.SelfMove(direction)
-					turns_since_wander = 0
+	else if(isturf(body.loc))		//This is so it only moves if it's not inside a closet, gentics machine, etc.
+		turns_since_wander++
+		if(turns_since_wander >= turns_per_wander && (!(stop_wander_when_pulled) || !LAZYLEN(body.grabbed_by))) //Some animals don't move when pulled
+			var/direction = pick(wander_directions || global.cardinal)
+			var/turf/move_to = get_step(body.loc, direction)
+			if(body.turf_is_safe(move_to))
+				body.SelfMove(direction)
+				turns_since_wander = 0
 
 // The mob will periodically make a noise or perform an emote.
 /datum/mob_controller/proc/try_bark()

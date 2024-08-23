@@ -87,6 +87,12 @@
 /decl/butchery_data/animal/rabbit/black
 	skin_material     = /decl/material/solid/organic/skin/fur/black
 
+/decl/butchery_data/animal/opossum
+	meat_name         = "opossum"
+	skin_material     = /decl/material/solid/organic/skin/fur/gray
+	butchery_offset   = list(-1, 15)
+	butchery_rotation = 0
+
 /decl/butchery_data/animal/antlion
 	meat_name         = "insect"
 	meat_type         = /obj/item/food/xenomeat

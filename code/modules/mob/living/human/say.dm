@@ -1,4 +1,4 @@
-/mob/living/human/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
+/mob/living/human/say(var/message, var/decl/language/speaking, var/verb = "says", whispering)
 	if(!whispering)
 		var/obj/item/organ/internal/voicebox/voice = locate() in get_internal_organs()
 		// Check if the language they're speaking is vocal and not supplied by a machine, and if they are currently suffocating.
@@ -19,7 +19,7 @@
 	if(name != GetVoice())
 		if(get_id_name("Unknown") == GetVoice())
 			SetName(get_id_name("Unknown"))
-	. = ..(message, speaking, verb, alt_name, whispering)
+	. = ..(message, speaking, verb, whispering)
 
 /mob/living/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
@@ -86,9 +86,9 @@
 
 	return ..(message_data)
 
-/mob/living/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/human/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	if(message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
-		whisper_say(html_decode(message), speaking, alt_name)
+		whisper_say(html_decode(message), speaking)
 		return TRUE
 	return ..()
 
