@@ -52,7 +52,7 @@
 		H.verbs |= /mob/living/proc/spawn_larvae
 
 	if(H.client)
-		H.ghostize(0)
+		H.ghostize(CORPSE_CANNOT_REENTER)
 
 	if(src.mind)
 		src.mind.assigned_special_role = "Borer Husk"

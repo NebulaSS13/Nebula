@@ -38,9 +38,7 @@
 		return
 	SetName(newname || "pet slime")
 
-/mob/living/simple_animal/slime/can_force_feed(var/feeder, var/food, var/feedback)
-	if(feedback)
-		to_chat(feeder, SPAN_WARNING("Where do you intend to put \the [food]? \The [src] doesn't have a mouth!"))
+/mob/living/simple_animal/slime/check_has_mouth()
 	return FALSE
 
 /mob/living/simple_animal/slime/adult

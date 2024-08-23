@@ -354,7 +354,7 @@
 			return
 
 		if(victim.change_species(new_species))
-			to_chat(usr, SPAN_NOTICE("Set species of [victim] to [victim.species]."))
+			to_chat(usr, SPAN_NOTICE("Set species of \the [victim] to [victim.species]."))
 		else
 			to_chat(usr, SPAN_WARNING("Failed! Something went wrong."))
 

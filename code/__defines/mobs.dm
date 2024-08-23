@@ -247,8 +247,9 @@
 #define SYNTH_HEAT_LEVEL_2 1000
 #define SYNTH_HEAT_LEVEL_3 2000
 
-#define CORPSE_CAN_REENTER 1
-#define CORPSE_CAN_REENTER_AND_RESPAWN 2
+#define CORPSE_CANNOT_REENTER          0
+#define CORPSE_CAN_REENTER             BITFLAG(0)
+#define CORPSE_CAN_RESPAWN             BITFLAG(1)
 
 #define SPECIES_HUMAN            "Human"
 #define SPECIES_MONKEY           "Monkey"

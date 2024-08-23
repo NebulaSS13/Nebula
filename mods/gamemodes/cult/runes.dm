@@ -353,7 +353,7 @@
 		SPAN_OCCULT("The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry..."), \
 		SPAN_NOTICE("You hear only complete silence for a moment."))
 
-	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
+	announce_ghost_joinleave(user.ghostize(), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
 	var/mob/observer/ghost/soul
 	for(var/mob/observer/ghost/O in global.ghost_mob_list)
 		if(O.key == tmpkey)
