@@ -1269,7 +1269,7 @@
 /area/unishi/living)
 "dD" = (
 /obj/structure/table/woodentable,
-/obj/item/cane/concealed,
+/obj/item/cane/fancy/sword,
 /obj/item/clothing/suit/radiation,
 /turf/floor/tiled,
 /area/unishi/living)

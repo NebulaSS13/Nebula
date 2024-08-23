@@ -14,7 +14,7 @@
 		/obj/item/clothing/head/wizard/red = 1,
 		/obj/item/clothing/suit/wizrobe/red = 1,
 		/obj/item/clothing/shoes/sandal = 1,
-		/obj/item/staff = 2)
+		/obj/item/staff/crystal = 2)
 
 /obj/machinery/vending/dinnerware
 	name = "Dinnerware"

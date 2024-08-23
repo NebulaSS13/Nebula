@@ -3,6 +3,26 @@
 	path = /obj/item/cane
 	uid = "gear_misc_cane"
 
+/decl/loadout_option/cane/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/material])
+	var/list/available_materials = list(
+		/decl/material/solid/metal/aluminium,
+		/decl/material/solid/organic/plastic,
+		/decl/material/solid/organic/wood,
+		/decl/material/solid/organic/wood/bamboo,
+		/decl/material/solid/organic/wood/ebony,
+		/decl/material/solid/organic/wood/mahogany,
+		/decl/material/solid/organic/wood/maple,
+		/decl/material/solid/organic/wood/walnut,
+		/decl/material/solid/organic/wood/yew
+	)
+	for(var/mat in available_materials)
+		var/decl/material/mat_decl = GET_DECL(mat)
+		available_materials -= mat
+		available_materials[mat_decl.name] = mat
+	.[/datum/gear_tweak/material] = available_materials
+
 /decl/loadout_option/dice
 	name = "dice pack"
 	path = /obj/item/pill_bottle/dice

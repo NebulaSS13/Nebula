@@ -85,7 +85,7 @@ The latter will result in a linter warning and will not work correctly.
 #define ITEM_FLAG_CAN_HIDE_IN_SHOES         BITFLAG(12) // Items that can be hidden in shoes that permit it
 #define ITEM_FLAG_PADDED                    BITFLAG(13) // When set on gloves, will act like pulling punches in unarmed combat.
 #define ITEM_FLAG_CAN_TAPE                  BITFLAG(14) // Whether the item can be be taped onto something using tape
-#define ITEM_FLAG_IS_WEAPON               BITFLAG(15) // Item is considered a weapon. Currently only used for force-based worth calculation.
+#define ITEM_FLAG_IS_WEAPON                 BITFLAG(15) // Item is considered a weapon. Currently only used for force-based worth calculation.
 
 // Flags for pass_flags (/atom/var/pass_flags)
 #define PASS_FLAG_TABLE                     BITFLAG(0)

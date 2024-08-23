@@ -1173,7 +1173,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/item/cane,
+/obj/item/cane/aluminium,
 /obj/item/clothing/suit/det_trench/grey,
 /obj/item/clothing/gloves/ring/cti,
 /obj/item/clothing/costume/oldman,

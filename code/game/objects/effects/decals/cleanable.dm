@@ -1,7 +1,9 @@
 /obj/effect/decal/cleanable
 	density = FALSE
 	anchored = TRUE
+	abstract_type = /obj/effect/decal/cleanable
 
+	var/sweepable = FALSE
 	var/weather_sensitive = TRUE
 	var/persistent = FALSE
 	var/generic_filth = FALSE

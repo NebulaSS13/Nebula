@@ -1813,7 +1813,7 @@
 /area/lar_maria/office)
 "fF" = (
 /obj/structure/table/woodentable,
-/obj/item/staff/gentcane,
+/obj/item/cane/aluminium,
 /turf/floor/wood,
 /area/lar_maria/dorms)
 "fG" = (

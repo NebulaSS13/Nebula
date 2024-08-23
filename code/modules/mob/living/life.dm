@@ -559,11 +559,6 @@
 		apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
 	return ..()
 
-#define LIMB_UNUSABLE 2
-#define LIMB_DAMAGED  1
-#define LIMB_IMPAIRED 0.5
-
-
 /mob/living/proc/handle_stance()
 	set waitfor = FALSE // Can sleep in emotes.
 	// Don't need to process any of this if they aren't standing anyways
@@ -627,8 +622,10 @@
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
 	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
-	for(var/obj/item/cane/C in get_held_items())
-		stance_damage -= LIMB_UNUSABLE // Counts for a single functional limb.
+	for(var/obj/item/support in get_held_items())
+		var/support_amount = support.get_stance_support_value()
+		if(support_amount)
+			stance_damage -= support_amount // Counts for a single functional limb.
 
 	// Calculate the expected and actual number of functioning legs we have.
 	var/has_sufficient_working_legs = TRUE

@@ -1153,3 +1153,6 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_preview_screen_locs()
 	return
+
+/obj/item/proc/get_stance_support_value()
+	return 0

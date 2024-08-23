@@ -414,3 +414,8 @@ var/global/list/dexterity_levels = list(
 
 // Used in death() to skip message broadcast.
 #define SKIP_DEATH_MESSAGE "no message"
+
+// Used in organ stance calc.
+#define LIMB_UNUSABLE 2
+#define LIMB_DAMAGED  1
+#define LIMB_IMPAIRED 0.5
