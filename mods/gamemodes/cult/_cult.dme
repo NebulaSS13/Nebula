@@ -27,6 +27,10 @@
 #include "talisman.dm"
 #include "wizard.dm"
 #include "cultify\de-cultify.dm"
+#include "abilities\_handler.dm"
+#include "abilities\construct.dm"
+#include "abilities\harvest.dm"
+#include "abilities\shade.dm"
 #include "cultify\defile.dm"
 #include "cultify\mob.dm"
 #include "cultify\turf.dm"
@@ -34,7 +38,5 @@
 #include "mobs\shade.dm"
 #include "mobs\constructs\constructs.dm"
 #include "mobs\constructs\soulstone.dm"
-#include "spells\construct.dm"
-#include "spells\harvest.dm"
 // END_INCLUDE
 #endif

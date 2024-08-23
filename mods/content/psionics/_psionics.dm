@@ -30,3 +30,12 @@
 	var/datum/ability_handler/psionics/psi = !is_preview_copy && istype(character) && character.get_ability_handler(/datum/ability_handler/psionics)
 	if(psi)
 		psi.update()
+
+/decl/ability/can_use_ability(mob/user, list/metadata, silent = FALSE)
+	. = ..()
+	if(. && is_supernatural)
+		var/spell_leech = user.disrupts_psionics()
+		if(spell_leech)
+			if(!silent)
+				to_chat(user, SPAN_WARNING("You try to marshal your energy, but find it leeched away by \the [spell_leech]!"))
+			return FALSE

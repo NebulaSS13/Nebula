@@ -54,3 +54,7 @@
 		for(var/datum/ability_handler/handler in ability_handlers)
 			handler.refresh_login()
 
+/datum/extension/abilities/proc/refresh_element_positioning()
+	var/row = 0
+	for(var/datum/ability_handler/handler in ability_handlers)
+		row += handler.refresh_element_positioning(row)

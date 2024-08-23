@@ -113,6 +113,13 @@
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 
+// Magic cash bag, used for adminspawn and wizards.
+/obj/item/bag/cash/infinite
+	storage = /datum/storage/bag/cash/infinite
+
+/obj/item/bag/cash/infinite/WillContain()
+	return list(/obj/item/cash/c1000)
+
 /obj/item/bag/sack
 	name = "sack"
 	desc = "A simple sack for carrying goods."

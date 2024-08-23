@@ -1,4 +1,5 @@
 /datum/ability_handler/psionics/refresh_login()
+	. = ..()
 	update(TRUE)
 	if(!suppressed)
 		show_auras()

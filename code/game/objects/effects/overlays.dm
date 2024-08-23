@@ -54,3 +54,13 @@
 	. = ..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
+
+/// Set and cleaned up by moving projectiles for the most part.
+/obj/effect/overlay/projectile_trail
+	var/obj/item/projectile/master
+
+/obj/effect/overlay/projectile_trail/Destroy()
+	if(master)
+		LAZYREMOVE(master.proj_trails, src)
+		master = null
+	return ..()

@@ -1,20 +1,19 @@
 #define CONSTRUCT_SPELL_COST 1
 #define CONSTRUCT_SPELL_TYPE 2
 
-/spell/construction
+/decl/ability/deity/construction
 	name = "Basic Construction"
 	desc = "This ability will let you summon a structure of your choosing."
 
-	cast_delay = 10
-	charge_max = 100
-	spell_flags = Z2NOCAST
-	invocation = "none"
+	cast_delay      = 10
+	cooldown_time   = 10 SECONDS
+	invocation      = "none"
 	invocation_type = SpI_NONE
 
-	hud_state = "const_wall"
+	ability_icon_state = "const_wall"
 	cast_sound = 'sound/effects/meteorimpact.ogg'
 
-/spell/construction/choose_targets()
+/decl/ability/deity/construction/choose_targets()
 	var/list/possible_targets = list()
 	if(connected_god && connected_god.form)
 		for(var/type in connected_god.form.buildables)
@@ -33,7 +32,7 @@
 	else
 		return
 
-/spell/construction/cast_check(var/skipcharge, var/mob/user, var/list/targets)
+/decl/ability/deity/construction/cast_check(var/skipcharge, var/mob/user, var/list/targets)
 	if(!..())
 		return 0
 	var/turf/T = get_turf(user)
@@ -46,8 +45,8 @@
 				return 0
 	return 1
 
-/spell/construction/cast(var/target, mob/user)
-	charge_max = target[CONSTRUCT_SPELL_COST]
+/decl/ability/deity/construction/cast(var/target, mob/user)
+	cooldown_time = target[CONSTRUCT_SPELL_COST]
 	target = target[CONSTRUCT_SPELL_TYPE]
 	var/turf/T = get_turf(user)
 	new target(T, connected_god)

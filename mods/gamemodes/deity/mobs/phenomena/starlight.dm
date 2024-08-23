@@ -73,9 +73,9 @@
 			L.put_in_hands_or_store_or_drop(new w_type(T))
 		if(form["spells"])
 			for(var/s in form["spells"])
-				var/spell/boon = new s
-				boon.set_connected_god(linked)
-				L.add_spell(boon)
+				var/decl/ability/boon = GET_DECL(s)
+				boon.set_connected_god(L, linked)
+				L.add_ability(boon)
 		to_chat(L, "<span class='notice'>You have been chosen by your master to lead your fellow followers into the next age of rebirth.<br>You have been granted powerful armor and a powerful spell. Don't lose them, as they are your key to your divinity and leadership.<br>You also have particular sway over your deity's structures.</span>")
 		to_chat(linked, SPAN_NOTICE("\The [L] is now your herald!"))
 		linked.remove_phenomena(name)

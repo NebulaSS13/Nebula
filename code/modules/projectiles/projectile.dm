@@ -14,6 +14,18 @@
 	is_spawnable_type = FALSE
 	atom_damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
 
+	// Code for handling tails, if any.
+	/// If the projectile leaves a trail.
+	var/proj_trail = FALSE
+	/// How long the trail lasts.
+	var/proj_trail_lifespan = 0
+	/// What icon to use for the projectile trail.
+	var/proj_trail_icon = 'icons/obj/wizard.dmi'
+	/// What icon_state to use for the projectile trail.
+	var/proj_trail_icon_state = "trail"
+	/// Any extant trail effects.
+	var/list/proj_trails
+
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/atom/movable/firer = null//Who shot it
@@ -319,7 +331,15 @@
 	return 1
 
 /obj/item/projectile/proc/before_move()
-	return
+	if(!proj_trail || !isturf(loc))
+		return
+	var/obj/effect/overlay/projectile_trail/trail = new(loc)
+	trail.master     = src
+	trail.icon       = proj_trail_icon
+	trail.icon_state = proj_trail_icon_state
+	trail.set_density(FALSE)
+	LAZYADD(proj_trails, trail)
+	QDEL_IN(trail, proj_trail_lifespan)
 
 /obj/item/projectile/proc/after_move()
 	if(hitscan && tracer_type && !(locate(/obj/effect/projectile) in loc))
@@ -612,6 +632,7 @@
 		trajectory.initialize_location(target.x, target.y, target.z, 0, 0)
 
 /obj/item/projectile/Destroy()
+	QDEL_NULL_LIST(proj_trails)
 	if(hitscan)
 		if(loc && trajectory)
 			var/datum/point/pcache = trajectory.copy_to()

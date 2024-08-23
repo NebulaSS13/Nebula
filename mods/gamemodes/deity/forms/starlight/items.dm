@@ -115,8 +115,8 @@
 /obj/item/gun/energy/staff/beacon
 	name = "holy beacon"
 	desc = "Look closely into its crystal; there's a miniature sun. Or maybe that's just some fancy LEDs. Either way, it looks thoroughly mystical."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "starstaff"
+	icon = 'mods/gamemodes/deity/icons/beacon.dmi'
+	icon_state = ICON_STATE_WORLD
 	self_recharge = 0
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/flash

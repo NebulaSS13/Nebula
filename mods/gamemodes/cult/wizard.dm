@@ -1,14 +1,13 @@
-// #ifdef GAMEMODE_PACK_WIZARD
-// todo: add wizard gamemode define check once it's modularized
+#ifdef GAMEMODE_PACK_WIZARD
 /decl/modpack/cult/post_initialize()
 	. = ..()
 	global.artefact_feedback[/obj/structure/closet/wizard/souls] = "SS"
 
-/datum/spellbook/standard/New()
+/decl/spellbook/standard/New()
 	spells[/obj/structure/closet/wizard/souls] = 1
 	..()
 
-/datum/spellbook/druid/New()
+/decl/spellbook/druid/New()
 	spells[/obj/structure/closet/wizard/souls] = 1
 	..()
 
@@ -18,7 +17,7 @@
 
 /obj/structure/closet/wizard/souls/WillContain()
 	return list(
-		/obj/item/contract/boon/wizard/artificer,
+		/obj/item/paper/contract/boon/wizard/artificer,
 		/obj/item/belt/soulstone/full,
 	)
 
@@ -36,7 +35,7 @@
 /obj/item/belt/soulstone/full/WillContain()
 	return list(/obj/item/soulstone = max(1, storage?.storage_slots))
 
-/obj/item/contract/boon/wizard/artificer
+/obj/item/paper/contract/boon/wizard/artificer
 	path = /spell/aoe_turf/conjure/construct
 	desc = "This contract has a passage dedicated to an entity known as 'Nar-Sie'."
 
@@ -45,3 +44,4 @@
 
 /obj/item/summoning_stone
 	material = /decl/material/solid/stone/cult
+#endif

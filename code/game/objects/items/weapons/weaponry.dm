@@ -34,8 +34,7 @@
 	return ..()
 
 /obj/item/nullrod/proc/holy_act(mob/living/target, mob/living/user)
-	if(target.mind && LAZYLEN(target.mind.learned_spells))
-		target.silence_spells(30 SECONDS)
+	if(target.disable_abilities(30 SECONDS))
 		to_chat(target, SPAN_DANGER("You've been silenced!"))
 		return TRUE
 	return FALSE
