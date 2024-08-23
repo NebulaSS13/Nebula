@@ -136,7 +136,7 @@ Works together with spawning an observer, noted above.
 		C.images += target.hud_list[SPECIALROLE_HUD]
 	return 1
 
-/mob/proc/ghostize(var/can_reenter_corpse = CORPSE_CAN_REENTER)
+/mob/proc/ghostize(var/_can_reenter_corpse = CORPSE_CAN_REENTER)
 	// Are we the body of an aghosted admin? If so, don't make a ghost.
 	if(isghost(teleop))
 		var/mob/observer/ghost/G = teleop
@@ -145,7 +145,7 @@ Works together with spawning an observer, noted above.
 	if(key)
 		hide_fullscreens()
 		var/mob/observer/ghost/ghost = new(src)	//Transfer safety to observer spawning proc.
-		ghost.can_reenter_corpse = can_reenter_corpse
+		ghost.can_reenter_corpse = _can_reenter_corpse
 		ghost.timeofdeath = src.stat == DEAD ? src.timeofdeath : world.time
 		ghost.key = key
 		if(ghost.client && !ghost.client.holder && !get_config_value(/decl/config/toggle/antag_hud_allowed))		// For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -163,7 +163,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Relinquish your life and enter the land of the dead."
 
 	if(stat == DEAD)
-		announce_ghost_joinleave(ghostize(1))
+		announce_ghost_joinleave(ghostize())
 	else
 		var/respawn_delay = get_config_value(/decl/config/num/respawn_delay)
 		var/response
@@ -181,7 +181,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 		set_posture(/decl/posture/lying)
 		log_and_message_admins("has ghosted.")
-		var/mob/observer/ghost/ghost = ghostize(0)	//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
+		var/mob/observer/ghost/ghost = ghostize(CORPSE_CANNOT_REENTER)	//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
 
@@ -198,20 +198,29 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/verb/reenter_corpse()
 	set category = "Ghost"
 	set name = "Re-enter Corpse"
-	if(!client)	return
-	if(QDELETED(mind) || QDELETED(mind.current) || !can_reenter_corpse)
-		to_chat(src, "<span class='warning'>You have no body.</span>")
-		return
-	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
-		to_chat(src, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
-		return
+
+	if(!client)
+		return FALSE
+
+	if(QDELETED(mind?.current))
+		to_chat(src, SPAN_WARNING("You have no body"))
+		return FALSE
+
+	if(!(can_reenter_corpse & CORPSE_CAN_REENTER))
+		to_chat(src, SPAN_WARNING("You are not permitted to reenter your body."))
+		return FALSE
+
+	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any adminghosted clients
+		to_chat(src, SPAN_WARNING("Another consciousness is in your body... it is resisting you."))
+		return FALSE
+
 	stop_following()
 	mind.current.key = key
 	mind.current.teleop = null
 	mind.current.reload_fullscreen()
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
-	return 1
+	return TRUE
 
 /mob/observer/ghost/verb/toggle_medHUD()
 	set category = "Ghost"
@@ -242,8 +251,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	if(get_config_value(/decl/config/toggle/antag_hud_restricted) && !M.has_enabled_antagHUD && !client.holder)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
-		if(response == "No") return
-		M.can_reenter_corpse = 0
+		if(response == "No")
+			return
+		M.can_reenter_corpse = CORPSE_CANNOT_REENTER
 	if(!M.has_enabled_antagHUD && !client.holder)
 		M.has_enabled_antagHUD = 1
 	if(M.antagHUD)
@@ -517,24 +527,27 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	client.images -= ghost_image //remove ourself
 
 /mob/observer/ghost/MayRespawn(var/feedback = 0, var/respawn_time = 0)
+
 	if(!client)
-		return 0
-	if(mind?.current && !QDELETED(mind.current) && mind.current.stat != DEAD && (can_reenter_corpse in list(CORPSE_CAN_REENTER, CORPSE_CAN_REENTER_AND_RESPAWN)))
+		return FALSE
+
+	if(mind?.current && !QDELETED(mind.current) && mind.current.stat != DEAD && (can_reenter_corpse & CORPSE_CAN_REENTER) && !(can_reenter_corpse & CORPSE_CAN_RESPAWN))
 		if(feedback)
-			to_chat(src, "<span class='warning'>Your non-dead body prevents you from respawning.</span>")
-		return 0
+			to_chat(src, SPAN_WARNING("Your non-dead body prevents you from respawning."))
+		return FALSE
+
 	if(get_config_value(/decl/config/toggle/antag_hud_restricted) && has_enabled_antagHUD == 1)
 		if(feedback)
-			to_chat(src, "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>")
-		return 0
+			to_chat(src, SPAN_WARNING("antagHUD restrictions prevent you from respawning."))
+		return FALSE
 
 	var/timedifference = world.time - timeofdeath
 	if(!client.holder && respawn_time && timeofdeath && timedifference < respawn_time MINUTES)
 		var/timedifference_text = time2text(respawn_time MINUTES - timedifference,"mm:ss")
-		to_chat(src, "<span class='warning'>You must have been dead for [respawn_time] minute\s to respawn. You have [timedifference_text] left.</span>")
-		return 0
+		to_chat(src, SPAN_WARNING("You must have been dead for [respawn_time] minute\s to respawn. You have [timedifference_text] left."))
+		return FALSE
 
-	return 1
+	return TRUE
 
 /proc/isghostmind(var/datum/mind/player)
 	return player && !isnewplayer(player.current) && (!player.current || isghost(player.current) || (isliving(player.current) && player.current.stat == DEAD) || !player.current.client)

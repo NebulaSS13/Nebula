@@ -586,8 +586,9 @@ var/global/list/bodytypes_by_category = list()
 
 	//Clear invalid internal organs
 	if(H.has_internal_organs())
-		for(var/obj/item/organ/O in H.get_internal_organs())
+		for(var/obj/item/organ/internal/O in H.get_internal_organs())
 			if(!is_default_organ(O))
+				O.transfer_brainmob_with_organ = FALSE // To avoid ghosting us on set_species().
 				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE, skip_health_update = TRUE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(O)
 

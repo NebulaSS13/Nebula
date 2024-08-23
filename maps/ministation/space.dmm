@@ -200,7 +200,7 @@
 /area/shuttle/escape_shuttle)
 "aF" = (
 /obj/structure/table/reinforced,
-/obj/item/robot_rack/roller{
+/obj/structure/bed/roller{
 	pixel_y = 10
 	},
 /turf/floor/shuttle/blue,

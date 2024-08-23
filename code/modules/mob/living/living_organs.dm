@@ -77,6 +77,8 @@
 
 /mob/living/proc/delete_organs()
 	SHOULD_CALL_PARENT(TRUE)
-	var/list/organs = get_organs()
-	QDEL_LIST(organs)
-	return
+	for(var/datum/organ in get_organs())
+		if(istype(organ, /obj/item/organ/internal))
+			var/obj/item/organ/internal/innard = organ
+			innard.transfer_brainmob_with_organ = FALSE // Don't boot our current client.
+		qdel(organ)

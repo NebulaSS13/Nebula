@@ -95,7 +95,7 @@
 	spark_at(src)
 
 	if(key)
-		var/mob/observer/ghost/ghost = ghostize(1)
+		var/mob/observer/ghost/ghost = ghostize()
 		ghost.set_dir(dir)
 		ghost.can_reenter_corpse = TRUE
 		ghost.reload_fullscreen()
