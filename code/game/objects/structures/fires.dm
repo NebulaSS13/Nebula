@@ -237,8 +237,8 @@
 			last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
 			last_fuel_ignite_temperature = min(last_fuel_ignite_temperature, mat.ignition_point)
 		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
-			// This means that 200u, a full wooden bucket of water, will suppress a fire with 20 fuel.
-			fuel -= amount * (mat.accelerant_value / FUEL_VALUE_SUPPRESSANT)
+			// This means that 100u (under two soup bowls full of water), will suppress a fire with 20 fuel.
+			fuel -= amount * (mat.accelerant_value / FUEL_VALUE_SUPPRESSANT) * 2
 		fuel = max(fuel, 0)
 		loc.take_waste_burn_products(., last_fuel_burn_temperature)
 
