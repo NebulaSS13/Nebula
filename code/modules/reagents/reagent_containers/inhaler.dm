@@ -53,31 +53,35 @@
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return TRUE
 
-	// This properly handles mouth coverage/presence, but should probably be replaced later.
-	var/mob/living/human/H = target
-	if(user == H)
-		if(!H.can_eat(src))
-			return TRUE
-	else if(!H.can_force_feed(user, src))
+	if(!user.can_force_feed(target, src))
 		return TRUE
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	user.do_attack_animation(H)
+	user.do_attack_animation(target)
 
-	if(user == H)
-		user.visible_message(SPAN_NOTICE("\The [user] inhales from \the [src]."), SPAN_NOTICE("You stick the \the [src] in your mouth and press the injection button."))
+	if(user == target)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inhales from \the [src]."),
+			SPAN_NOTICE("You stick the \the [src] in your mouth and press the injection button.")
+		)
 	else
-		user.visible_message(SPAN_WARNING("\The [user] attempts to administer \the [src] to \the [H]..."), SPAN_NOTICE("You attempt to administer \the [src] to \the [H]..."))
-		if (!do_after(user, 1 SECONDS, H))
+		user.visible_message(
+			SPAN_WARNING("\The [user] attempts to administer \the [src] to \the [target]..."),
+			SPAN_NOTICE("You attempt to administer \the [src] to \the [target]...")
+		)
+		if (!do_after(user, 1 SECONDS, target))
 			to_chat(user, SPAN_NOTICE("You and the target need to be standing still in order to inject \the [src]."))
 			return TRUE
 
-		user.visible_message(SPAN_NOTICE("\The [user] administers \the [src] to \the [H]."), SPAN_NOTICE("You stick \the [src] in \the [H]'s mouth and press the injection button."))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] administers \the [src] to \the [target]."),
+			SPAN_NOTICE("You stick \the [src] in \the [target]'s mouth and press the injection button.")
+		)
 
 	var/contained = REAGENT_LIST(src)
-	var/trans = reagents.trans_to_mob(H, amount_per_transfer_from_this, CHEM_INHALE)
+	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INHALE)
 	if(trans)
-		admin_inject_log(user, H, src, contained, trans)
+		admin_inject_log(user, target, src, contained, trans)
 		playsound(src.loc, 'sound/effects/hypospray.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("[trans] units administered. [reagents.total_volume] units remaining in \the [src]."))
 		used = TRUE
