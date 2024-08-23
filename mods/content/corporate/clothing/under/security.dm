@@ -7,7 +7,7 @@
 /obj/item/clothing/jumpsuit/head_of_security/corp
 	icon = 'mods/content/corporate/icons/clothing/under/hos_corporate.dmi'
 
-/obj/item/clothing/jumpsuit/pcrc
+/obj/item/clothing/jumpsuit/corporate/pcrc
 	name = "\improper PCRC uniform"
 	desc = "A uniform belonging to Proxima Centauri Risk Control, a private security firm."
 	icon = 'mods/content/corporate/icons/clothing/under/pcrc.dmi'
