@@ -32,6 +32,7 @@
 	name_plural = "Humanoids"
 	description = "Some alien humanoid species, unknown to humanity. How exciting."
 	rarity_value = 5
+	hidden_from_codex = TRUE
 
 	spawn_flags = SPECIES_IS_RESTRICTED
 

@@ -6,6 +6,7 @@
 	force_cultural_info = list(
 		TAG_CULTURE = /decl/cultural_info/culture/other
 	)
+	hidden_from_codex = TRUE
 
 /decl/bodytype/starlight
 	abstract_type = /decl/bodytype/starlight

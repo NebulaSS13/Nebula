@@ -28,6 +28,7 @@
 	name =                   SPECIES_MANTID_ALATE
 	name_plural =            "Kharmaan Alates"
 	show_ssd =               "quiescent"
+	hidden_from_codex =      TRUE
 
 	base_external_prosthetics_model = null
 	available_bodytypes = list(/decl/bodytype/crystalline/mantid/alate)

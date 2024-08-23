@@ -12,6 +12,7 @@
 /decl/species/golem
 	name = SPECIES_GOLEM
 	name_plural = "Golems"
+	hidden_from_codex = TRUE
 
 	available_bodytypes = list(/decl/bodytype/crystalline/golem)
 
