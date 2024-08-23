@@ -1,0 +1,3 @@
+/obj/item/teleportation_scroll/@SUBTYPES : /obj/item/paper/scroll/teleportation/@SUBTYPES{@OLD}
+/obj/item/paper/crumpled/bloody/@SUBTYPES : /obj/item/paper/crumpled/@SUBTYPES{@OLD}
+/obj/item/paper/cig/filter/@SUBTYPES : /obj/item/cigarette_filter/@SUBTYPES{@OLD}
