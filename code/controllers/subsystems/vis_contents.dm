@@ -50,7 +50,8 @@ SUBSYSTEM_DEF(vis_contents_update)
 		return
 	vis_update_queued = TRUE
 	SSvis_contents_update.queue_refs.Add(src)
-	SSvis_contents_update.wake()
+	if(!Master.map_loading) // Don't wake early if we're loading a map, it'll get woken up when the map loads.
+		SSvis_contents_update.wake()
 
 // Horrible colon syntax below is because vis_contents
 // exists in /atom.vars, but will not compile. No idea why.

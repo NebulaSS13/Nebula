@@ -178,6 +178,7 @@
 	global._preloader.current_map_hash = null
 
 	//initialize things that are normally initialized after map load
+	Master.StartLoadingMap()
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
 	after_load()
@@ -186,6 +187,7 @@
 		level.after_template_load(src)
 		if(SSlighting.initialized)
 			SSlighting.InitializeZlev(z_index)
+	Master.StopLoadingMap()
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 	loaded++
 
@@ -219,11 +221,13 @@
 	global._preloader.current_map_hash = null
 
 	//initialize things that are normally initialized after map load
+	Master.StartLoadingMap()
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
 	after_load()
 	if (SSlighting.initialized)
 		SSlighting.InitializeTurfs(atoms_to_initialise)	// Hopefully no turfs get placed on new coords by SSatoms.
+	Master.StopLoadingMap()
 
 	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
 	loaded++

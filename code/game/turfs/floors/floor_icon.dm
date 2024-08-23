@@ -1,5 +1,11 @@
 /turf/floor
 	var/static/HEIGHT_OFFSET_RANGE = (world.icon_size - 16)
+	/// A cache for full trench shadow images, keyed by shadow_alpha.
+	VAR_PRIVATE/static/list/_height_shadow_cache = list()
+	/// A cache for north-edge trench shadow images, keyed by shadow_alpha.
+	VAR_PRIVATE/static/list/_height_north_shadow_cache = list()
+	/// A cache for trench images, keyed by icon and then by color.
+	VAR_PRIVATE/static/list/_trench_image_cache = list()
 
 /turf/floor/proc/get_trench_icon()
 	var/check_icon = (istype(flooring) && flooring.icon) || icon
@@ -20,11 +26,15 @@
 		pixel_z = default_pixel_z
 		layer = UNDER_TURF_LAYER + ((1-height_ratio) * 0.01)
 
-		var/image/I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "full")
-		var/shadow_alpha = 80 * height_ratio
-		I.color = COLOR_BLACK
-		I.alpha = shadow_alpha
-		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+		var/shadow_alpha = floor(80 * height_ratio)
+		var/shadow_alpha_key = num2text(shadow_alpha)
+		// look up a shadow for our shadow_alpha in the cache, creating one if needed
+		var/image/I = _height_shadow_cache[shadow_alpha_key]
+		if(!I)
+			_height_shadow_cache[shadow_alpha_key] = I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "full")
+			I.color = COLOR_BLACK
+			I.alpha = shadow_alpha
+			I.appearance_flags |= RESET_COLOR | RESET_ALPHA
 		add_overlay(I)
 
 		// Draw a cliff wall if we have a northern neighbor that isn't part of our trench.
@@ -36,17 +46,24 @@
 			var/trench_icon = (istype(neighbor) && neighbor.get_trench_icon()) || get_trench_icon()
 			if(trench_icon)
 
-				I = image(icon = trench_icon, icon_state = "trench")
-				I.pixel_z = world.icon_size
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-				I.color = isatom(neighbor) ? neighbor.color : color
+				// cache the trench image, keyed by icon and color
+				var/trench_color = isatom(neighbor) ? neighbor.color : color
+				var/trench_icon_key = "[ref(trench_icon)][trench_color]"
+				if(!_trench_image_cache[trench_icon_key])
+					_trench_image_cache[trench_icon_key] = I = image(icon = trench_icon, icon_state = "trench")
+					I.pixel_z = world.icon_size
+					I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+					I.color = trench_color
 				add_overlay(I)
 
-				I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "northedge")
-				I.pixel_z = world.icon_size
-				I.color = COLOR_BLACK
-				I.alpha = shadow_alpha
-				I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+				// look up a shadow for our shadow_alpha in the cache, creating one if needed
+				I = _height_north_shadow_cache[shadow_alpha_key]
+				if(!I)
+					_height_north_shadow_cache[shadow_alpha_key] = I = image(icon = 'icons/effects/height_shadow.dmi', icon_state = "northedge")
+					I.pixel_z = world.icon_size
+					I.color = COLOR_BLACK
+					I.alpha = shadow_alpha
+					I.appearance_flags |= RESET_COLOR | RESET_ALPHA
 				add_overlay(I)
 
 /turf/floor/on_update_icon(var/update_neighbors)

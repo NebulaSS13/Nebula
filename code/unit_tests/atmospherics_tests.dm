@@ -382,7 +382,7 @@
 
 	// make a place to test
 	SSmapping.increment_world_z_size(/datum/level_data/unit_test)
-	for(var/turf/T in block(locate(1, 1, world.maxz), locate(3, 3, world.maxz)))
+	for(var/turf/T as anything in block(1, 1, world.maxz, 3, 3, world.maxz))
 		T.ChangeTurf(/turf/floor)
 	var/turf/T = locate(2, 2, world.maxz)
 

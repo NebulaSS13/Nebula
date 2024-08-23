@@ -27,6 +27,8 @@ var/global/list/_alpha_masks = list()
 /atom/movable/alpha_mask/Destroy()
 	if(owner)
 		global._alpha_masks -= owner
+		events_repository.unregister(/decl/observ/moved, owner, src)
+		events_repository.unregister(/decl/observ/destroyed, owner, src)
 		owner = null
 	return ..()
 

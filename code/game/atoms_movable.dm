@@ -193,7 +193,7 @@
 		RAISE_EVENT(/decl/observ/moved, src, origin, null)
 
 	// freelook
-	if(opacity)
+	if(simulated && opacity)
 		updateVisibility(src)
 
 	// lighting
@@ -245,7 +245,7 @@
 			RAISE_EVENT(/decl/observ/moved, src, old_loc, null)
 
 		// freelook
-		if(opacity)
+		if(simulated && opacity)
 			updateVisibility(src)
 
 		// lighting

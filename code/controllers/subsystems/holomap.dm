@@ -74,7 +74,8 @@ SUBSYSTEM_DEF(minimap)
 	if(world.maxy + offset_y > canvas.Height())
 		CRASH("Minimap for z=[zlevel] : world.maxy ([world.maxy]) + holomap_offset_y ([offset_y]) must be <= [canvas.Height()]")
 
-	for(var/turf/tile as anything in BLOCK_TURFS(1,1,world.maxx,world.maxy,zlevel))
+	var/datum/level_data/level = SSmapping.levels_by_z[zlevel]
+	for(var/turf/tile as anything in block(level.level_inner_min_x, level.level_inner_min_y, zlevel, level.level_inner_max_x, level.level_inner_max_y, zlevel))
 		var/area/A = get_area(tile)
 		if ((A && (A.area_flags & AREA_FLAG_HIDE_FROM_HOLOMAP)) || (tile.turf_flags & TURF_IS_HOLOMAP_ROCK))
 			continue
@@ -92,8 +93,9 @@ SUBSYSTEM_DEF(minimap)
 	var/offset_x = HOLOMAP_PIXEL_OFFSET_X(zlevel)
 	var/offset_y = HOLOMAP_PIXEL_OFFSET_Y(zlevel)
 
-	for(var/x = 1 to world.maxx)
-		for(var/y = 1 to world.maxy)
+	var/datum/level_data/level = SSmapping.levels_by_z[zlevel]
+	for(var/x = level.level_inner_min_x to level.level_inner_max_x)
+		for(var/y = level.level_inner_min_y to level.level_inner_max_y)
 			var/turf/tile = locate(x, y, zlevel)
 			if(tile && tile.loc)
 				var/area/areaToPaint = tile.loc

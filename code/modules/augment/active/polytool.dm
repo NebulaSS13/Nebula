@@ -19,6 +19,10 @@
 		events_repository.register(/decl/observ/item_unequipped, I, src, /obj/item/organ/internal/augment/active/polytool/proc/check_holding)
 
 /obj/item/organ/internal/augment/active/polytool/Destroy()
+	for(var/obj/item/item in items)
+		events_repository.unregister(/decl/observ/moved, item, src)
+		events_repository.unregister(/decl/observ/destroyed, item, src)
+		events_repository.unregister(/decl/observ/item_unequipped, item, src)
 	QDEL_NULL_LIST(items)
 	. = ..()
 

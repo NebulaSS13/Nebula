@@ -23,8 +23,10 @@
 /proc/_ascii2text(A)
 	return ascii2text(A)
 
-/proc/_block(Start, End)
-	return block(Start, End)
+/proc/_block(StartX, StartY, StartZ, EndX, EndY, EndZ)
+	if(isturf(StartX) && isturf(StartY))
+		return block(StartX, StartY)
+	return block(StartX, StartY, StartZ, EndX, EndY, EndZ)
 
 /proc/_ckey(Key)
 	return ckey(Key)

@@ -110,3 +110,5 @@ var/global/list/gzn_check = list(NORTH, SOUTH, EAST, WEST)
 	}
 
 #endif
+
+#define GAS_STANDARD_AIRMIX "STANDARD_AIRMIX"

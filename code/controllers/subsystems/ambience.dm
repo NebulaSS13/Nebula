@@ -14,6 +14,7 @@ SUBSYSTEM_DEF(ambience)
 	var/list/curr = queued
 	while (curr.len)
 		var/turf/target = curr[curr.len]
+		target.ambience_queued = FALSE
 		curr.len--
 		if(!QDELETED(target))
 			target.update_ambient_light_from_z_or_area()
@@ -21,6 +22,16 @@ SUBSYSTEM_DEF(ambience)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
 			return
+
+/datum/controller/subsystem/ambience/StartLoadingMap()
+	suspend()
+
+/datum/controller/subsystem/ambience/StopLoadingMap()
+	wake()
+
+/turf
+	/// Whether this turf has been queued for an ambient lighting update.
+	var/ambience_queued = FALSE
 
 /turf/proc/update_ambient_light_from_z_or_area()
 
@@ -42,7 +53,7 @@ SUBSYSTEM_DEF(ambience)
 	var/lit = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	// If we're not, we want ambient light if one of our neighbors needs to show spillover from corners.
 	if(!lit)
-		for(var/turf/T in RANGE_TURFS(src, 1))
+		for(var/turf/T as anything in RANGE_TURFS(src, 1))
 			// Fuck if I know how these turfs are located in an area that is not an area.
 			if(isloc(T.loc) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 				lit = TRUE

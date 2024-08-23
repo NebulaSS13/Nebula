@@ -510,7 +510,7 @@
 	var/list/base_turfs = get_base_turfs()
 	for(var/turf/gen_turf in base_turfs)
 		var/area/TA = null // Variable for area checking. Defining it here so memory does not have to be allocated repeatedly.
-		for(var/turf/T in RANGE_TURFS(gen_turf, field_radius))
+		for(var/turf/T as anything in RANGE_TURFS(gen_turf, field_radius))
 			// Don't expand to space or on shuttle areas.
 			if(T.is_open())
 				continue

@@ -38,8 +38,8 @@
 			max_y = y_aft_transit
 
 	return block(
-		locate(min_x, min_y, LD.level_z),
-		locate(max_x, max_y, LD.level_z)
+		min_x, min_y, LD.level_z,
+		max_x, max_y, LD.level_z
 	)
 
 ///Returns all the turfs from all 4 corners of the transition border of a level.
@@ -47,20 +47,20 @@
 	var/datum/level_data/LD = SSmapping.levels_by_z[z]
 	//South-West
 	.  = block(
-			locate(LD.level_inner_min_x - TRANSITIONEDGE, LD.level_inner_min_y - TRANSITIONEDGE, LD.level_z),
-			locate(LD.level_inner_min_x - 1,              LD.level_inner_min_y - 1,              LD.level_z))
+			LD.level_inner_min_x - TRANSITIONEDGE, LD.level_inner_min_y - TRANSITIONEDGE, LD.level_z,
+			LD.level_inner_min_x - 1,              LD.level_inner_min_y - 1,              LD.level_z)
 	//South-East
 	. |= block(
-			locate(LD.level_inner_max_x + 1,              LD.level_inner_min_y - TRANSITIONEDGE, LD.level_z),
-			locate(LD.level_inner_max_x + TRANSITIONEDGE, LD.level_inner_min_y - 1,              LD.level_z))
+			LD.level_inner_max_x + 1,              LD.level_inner_min_y - TRANSITIONEDGE, LD.level_z,
+			LD.level_inner_max_x + TRANSITIONEDGE, LD.level_inner_min_y - 1,              LD.level_z)
 	//North-West
 	. |= block(
-			locate(LD.level_inner_min_x - TRANSITIONEDGE, LD.level_inner_max_y + 1,              LD.level_z),
-			locate(LD.level_inner_min_x - 1,              LD.level_inner_max_y + TRANSITIONEDGE, LD.level_z))
+			LD.level_inner_min_x - TRANSITIONEDGE, LD.level_inner_max_y + 1,              LD.level_z,
+			LD.level_inner_min_x - 1,              LD.level_inner_max_y + TRANSITIONEDGE, LD.level_z)
 	//North-East
 	. |= block(
-			locate(LD.level_inner_max_x + 1,              LD.level_inner_max_y + 1,              LD.level_z),
-			locate(LD.level_inner_max_x + TRANSITIONEDGE, LD.level_inner_max_y + TRANSITIONEDGE, LD.level_z))
+			LD.level_inner_max_x + 1,              LD.level_inner_max_y + 1,              LD.level_z,
+			LD.level_inner_max_x + TRANSITIONEDGE, LD.level_inner_max_y + TRANSITIONEDGE, LD.level_z)
 
 ///Keeps details on how to generate, maintain and access a zlevel.
 /datum/level_data
@@ -204,10 +204,8 @@
 	var/change_area = (base_area && base_area != world.area)
 	if(!change_turf && !change_area)
 		return
-	var/corner_start = locate(1, 1, level_z)
-	var/corner_end =   locate(world.maxx, world.maxy, level_z)
 	var/area/A = change_area ? get_base_area_instance() : null
-	for(var/turf/T as anything in block(corner_start, corner_end))
+	for(var/turf/T as anything in Z_ALL_TURFS(level_z))
 		if(change_turf)
 			T = T.ChangeTurf(picked_turf)
 		if(change_area)
@@ -729,6 +727,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 
 /datum/level_data/proc/update_turf_ambience()
 	if(SSatoms.atom_init_stage >= INITIALIZATION_INNEW_REGULAR)
-		for(var/turf/level_turf as anything in block(locate(level_inner_min_x, level_inner_min_y, level_z), locate(level_inner_max_x, level_inner_max_y, level_z)))
-			level_turf.update_ambient_light_from_z_or_area() // SSambience.queued |= level_turf - seems to be less consistent
+		for(var/turf/level_turf as anything in block(level_inner_min_x, level_inner_min_y, level_z, level_inner_max_x, level_inner_max_y, level_z))
+			level_turf.update_ambient_light_from_z_or_area() // AMBIENCE_QUEUE_TURF(level_turf) - seems to be less consistent
 			CHECK_TICK

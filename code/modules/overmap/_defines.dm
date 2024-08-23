@@ -83,7 +83,8 @@ var/global/list/moving_levels = list()
 	if (moving_levels["[zlevel]"] != direction)
 		moving_levels["[zlevel]"] = direction
 
-		var/list/space_turfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
+		var/datum/level_data/level = SSmapping.levels_by_z[zlevel]
+		var/list/space_turfs = block(level.level_inner_min_x, level.level_inner_min_y, zlevel, level.level_inner_max_x, level.level_inner_max_y, zlevel)
 		for(var/turf/space/T in space_turfs)
 			T.toggle_transit(direction)
 			CHECK_TICK

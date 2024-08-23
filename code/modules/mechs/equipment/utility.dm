@@ -508,7 +508,7 @@
 			return
 
 	if(istype(target, /turf))
-		for(var/turf/asteroid in RANGE_TURFS(target, 1))
+		for(var/turf/asteroid as anything in RANGE_TURFS(target, 1))
 			if (!(get_dir(owner, asteroid) & owner.dir))
 				continue
 			if(asteroid.can_be_dug(drill_head.material?.hardness) && asteroid.drop_diggable_resources())

@@ -105,8 +105,8 @@ var/global/list/known_overmap_sectors
 		location = locate(start_x, start_y, overmap.assigned_z)
 	else
 		var/list/candidate_turfs = block(
-		locate(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z),
-		locate(overmap.map_size_x - OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE, overmap.assigned_z)
+			OVERMAP_EDGE,                      OVERMAP_EDGE,                      overmap.assigned_z,
+			overmap.map_size_x - OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE, overmap.assigned_z
 		)
 
 		candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap)

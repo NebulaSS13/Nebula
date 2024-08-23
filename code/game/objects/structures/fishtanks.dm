@@ -177,7 +177,7 @@ var/global/list/global/aquarium_states_and_layers = list(
 
 	var/list/valid_turfs = list()
 
-	for(var/turf/T in RANGE_TURFS(loc, 1))
+	for(var/turf/T as anything in RANGE_TURFS(loc, 1))
 		if(Adjacent(T) && !(locate(/obj/structure/glass_tank) in T))
 			valid_turfs |= T
 

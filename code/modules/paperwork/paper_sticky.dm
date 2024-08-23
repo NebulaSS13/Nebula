@@ -19,6 +19,10 @@
 	. = ..()
 	update_top_paper()
 
+/obj/item/sticky_pad/Destroy()
+	top = null
+	return ..()
+
 /obj/item/sticky_pad/proc/update_matter()
 	matter = list(
 		/decl/material/solid/organic/paper = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)

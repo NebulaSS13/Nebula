@@ -99,7 +99,7 @@
 	else
 		luminosity = 1
 
-	SSambience.queued += src
+	AMBIENCE_QUEUE_TURF(src)
 
 	if (opacity)
 		has_opaque_atom = TRUE
@@ -110,7 +110,8 @@
 	else if (permit_ao)
 		queue_ao()
 
-	updateVisibility(src, FALSE)
+	if(simulated)
+		updateVisibility(src, FALSE)
 
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
@@ -150,7 +151,7 @@
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
-	SSambience.queued -= src
+	AMBIENCE_DEQUEUE_TURF(src)
 
 	changing_turf = FALSE
 
@@ -574,7 +575,7 @@
 
 	is_outside = new_outside
 	update_external_atmos_participation()
-	SSambience.queued |= src
+	AMBIENCE_QUEUE_TURF(src)
 
 	if(!skip_weather_update)
 		update_weather()

@@ -18,7 +18,7 @@
 	var/turf/center = get_turf(origin)
 	if(!center)
 		return
-	for(var/turf/T in RANGE_TURFS(center, range))
+	for(var/turf/T as anything in RANGE_TURFS(center, range))
 		. += T
 
 /decl/turf_selection/angle/get_turfs(var/atom/origin, var/range, var/l_angle, var/r_angle)
@@ -26,6 +26,6 @@
 	var/turf/center = get_turf(origin)
 	if(!center)
 		return
-	for(var/turf/T in RANGE_TURFS(center, range))
+	for(var/turf/T as anything in RANGE_TURFS(center, range))
 		if((l_angle == 0 && r_angle == 0) || angle_between_two_angles(l_angle, Atan2(T.x - center.x, T.y - center.y) - 90, r_angle))
 			. += T

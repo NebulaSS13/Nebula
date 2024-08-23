@@ -39,13 +39,12 @@
 
 /datum/overmap/proc/populate_overmap()
 	var/area/overmap/A = locate(overmap_area_type) || new overmap_area_type //level_data should have initialized the area
-	for(var/square in block(locate(1, 1, assigned_z), locate(map_size_x, map_size_y, assigned_z)))
-		var/turf/T = square
-		if(T.x == map_size_x || T.y == map_size_y)
-			T = T.ChangeTurf(overmap_edge_type)
+	for(var/turf/square as anything in block(1, 1, assigned_z, map_size_x, map_size_y, assigned_z))
+		if(square.x == map_size_x || square.y == map_size_y)
+			square = square.ChangeTurf(overmap_edge_type)
 		else
-			T = T.ChangeTurf(overmap_turf_type)
-		ChangeArea(T, A)
+			square = square.ChangeTurf(overmap_turf_type)
+		ChangeArea(square, A)
 
 /datum/overmap/proc/generate_overmap()
 	testing("Building overmap [name]...")
