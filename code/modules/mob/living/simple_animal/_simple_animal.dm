@@ -17,7 +17,7 @@
 		/decl/move_intent/run/animal
 	)
 
-	var/base_movement_delay = 4
+	var/base_movement_delay = 0 // Added to the delay expected from movement decls.
 	ai = /datum/mob_controller
 
 	var/can_have_rider = TRUE
