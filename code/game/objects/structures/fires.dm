@@ -336,7 +336,7 @@
 			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && !isnull(reagent.boiling_point) && reagent.boiling_point < get_current_burn_temperature())
 				do_steam = TRUE
 
-			var/volume = round(REAGENT_VOLUME(reagents, rtype) / REAGENT_UNITS_PER_GAS_MOLE)
+			var/volume = NONUNIT_CEILING(REAGENT_VOLUME(reagents, rtype) / REAGENT_UNITS_PER_GAS_MOLE, 0.1)
 			var/list/waste_products = burn_material(reagent, volume)
 			if(!isnull(waste_products))
 				for(var/product in waste_products)
