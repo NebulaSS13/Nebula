@@ -13,6 +13,15 @@
 	var/socks_color    = "#36221b"
 	var/eyes_color     = "#1d628a"
 
+/mob/living/simple_animal/passive/fox/get_available_postures()
+	var/static/list/available_postures = list(
+		/decl/posture/standing,
+		/decl/posture/lying,
+		/decl/posture/lying/deliberate,
+		/decl/posture/sitting
+	)
+	return available_postures
+
 /mob/living/simple_animal/passive/fox/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/fox)
 
