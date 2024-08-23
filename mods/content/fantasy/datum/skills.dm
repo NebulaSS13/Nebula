@@ -5,6 +5,8 @@
 #define SKILL_SCULPTING     /decl/skill/crafting/sculpting
 #define SKILL_ARTIFICE      /decl/skill/crafting/artifice
 
+#define SKILL_HUSBANDRY     /decl/skill/service/husbandry
+
 /decl/skill/Initialize()
 	. = ..()
 	// Rename the default skill levels.
@@ -215,6 +217,23 @@
 		"Experienced" = "You are an experienced horticulturalist with an encyclopedic knowledge of plants and their properties.",
 		"Master"      = "You're a specialized gardener. You can care for even the most exotic, fragile, or dangerous plants."
 	)
+
+/decl/skill/service/husbandry
+	name = "Animal Husbandry"
+	desc = "Your ability to raise and care for animals."
+	levels = list(
+		"Unskilled"   = "You know next to nothing about animals. You can feed and clean up after them, but you know nothing about their biology, their behavior, or raising their young.",
+		"Basic"       = "You've cared for farm animals before. You can care for the basic needs of an animal, and know how to do things like milk a cow or shear a sheep.<br>- Cows will not flee when you try to milk them.",
+		"Trained"     = "You are proficient at animal handling, and can delicately handle even skittish animals without frightening them. <br>- Passive animals will not flee when you pick them up.",
+		"Experienced" = "You are an experienced animal caretaker with an encyclopedic knowledge of animals.",
+		"Master"      = "You're a specialized animal caretaker. You can care for even the most exotic, fragile, or dangerous animals."
+	)
+
+/obj/item/food/egg/examine_skill = SKILL_HUSBANDRY
+/mob/living/simple_animal/chick/examine_skill = SKILL_HUSBANDRY
+/mob/living/simple_animal/cow/milking_skill = SKILL_HUSBANDRY
+/mob/living/simple_animal/hostile/goat/milking_skill = SKILL_HUSBANDRY
+/datum/mob_controller/passive/scooping_skill = SKILL_HUSBANDRY
 
 /decl/skill/service/cooking
 	name = "Cooking"

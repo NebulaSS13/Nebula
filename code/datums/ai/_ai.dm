@@ -257,6 +257,11 @@
 /datum/mob_controller/proc/check_memory(mob/speaker, message)
 	return FALSE
 
+/// General-purpose scooping reaction proc, used by /passive.
+/// Returns TRUE if the scoop should proceed, FALSE if it should be canceled.
+/datum/mob_controller/proc/scooped_by(mob/initiator)
+	return TRUE
+
 // Enemy tracking - used on /aggressive
 /datum/mob_controller/proc/get_enemies()
 	return _enemies
