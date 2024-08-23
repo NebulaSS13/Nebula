@@ -5,7 +5,7 @@
 	r_pocket = /obj/item/teleportation_scroll
 	hands = list(
 		/obj/item/staff,
-		/obj/item/spellbook
+		/obj/item/book/spell
 	)
 	back = /obj/item/backpack
 	backpack_contents = list(/obj/item/box = 1)

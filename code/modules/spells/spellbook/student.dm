@@ -1,6 +1,6 @@
 //wizard's training wheels. Basically. Same shit as in the general one.
 
-/obj/item/spellbook/student
+/obj/item/book/spell/student
 	spellbook_type = /datum/spellbook/student
 
 /datum/spellbook/student
@@ -24,5 +24,5 @@
 /datum/spellbook/student/apprentice
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE|NOREVERT|NO_LOCKING
 
-/obj/item/spellbook/apprentice
+/obj/item/book/spell/apprentice
 	spellbook_type = /datum/spellbook/student/apprentice
