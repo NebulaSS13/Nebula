@@ -171,3 +171,14 @@
 	name = "dress, nurse"
 	path = /obj/item/clothing/dress/nurse
 	uid = "gear_under_nurse"
+
+/decl/loadout_option/uniform/utility
+	name = "utility jumpsuit selection"
+	path = /obj/item/clothing/jumpsuit/utility
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
+	uid = "gear_under_util_jumpsuit"
+
+/decl/loadout_option/uniform/sleekoveralls
+	name = "overalls, sleek"
+	path = /obj/item/clothing/jumpsuit/sleekoveralls
+	uid = "gear_under_overalls"

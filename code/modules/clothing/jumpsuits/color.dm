@@ -57,4 +57,4 @@
 
 /obj/item/clothing/jumpsuit/brown
 	name = "brown jumpsuit"
-	color = "#c08720"
+	color = "#8d6722"
