@@ -13,12 +13,18 @@ var/global/list/floor_decals = list()
 	var/detail_overlay
 	var/detail_color
 
-// Have to wait for turfs to set up their flooring, so we can better guess at our layers.
-/obj/effect/floor_decal/Initialize()
-	..()
-	return INITIALIZE_HINT_LATELOAD
+/obj/effect/floor_decal/Initialize(mapload)
+	SHOULD_CALL_PARENT(FALSE)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	return INITIALIZE_HINT_NORMAL
 
-/obj/effect/floor_decal/LateInitialize(mapload, var/newdir, var/newcolour, var/newappearance)
+/obj/effect/floor_decal/New(loc, var/newdir, var/newcolour, var/newappearance)
+	// Preloader stuff copied from /atom/New() for speed.
+	//atom creation method that preloads variables at creation
+	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+		global._preloader.load(src)
+	atom_flags |= ATOM_FLAG_INITIALIZED
+
 	supplied_dir = newdir
 	if(newappearance) appearance = newappearance
 	if(newcolour) color = newcolour
@@ -43,28 +49,35 @@ var/global/list/floor_decals = list()
 		T.queue_icon_update()
 	qdel(src)
 
+/obj/effect/floor_decal/Destroy()
+// We want to make sure these GC in unit testing, but on live, we don't queue because we have so many of these.
+#ifdef UNIT_TEST
+	..()
+	return QDEL_HINT_QUEUE
+#else
+	SHOULD_CALL_PARENT(FALSE)
+	EarlyDestroy()
+	return QDEL_HINT_IWILLGC
+#endif
+
 /obj/effect/floor_decal/reset
 	name = "reset marker"
 
-/obj/effect/floor_decal/reset/Initialize()
+/obj/effect/floor_decal/reset/New()
 	..()
 	var/turf/T = get_turf(src)
 	T?.remove_decals()
-	atom_flags |= ATOM_FLAG_INITIALIZED
-	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/undo
 	name = "undo marker"
 
-/obj/effect/floor_decal/undo/Initialize()
-	SHOULD_CALL_PARENT(FALSE)
+/obj/effect/floor_decal/undo/New()
+	..()
 	var/turf/T = get_turf(src)
 	if(T && length(T.decals))
 		T.decals.len--
 		UNSETEMPTY(T.decals)
 		T.update_icon()
-	atom_flags |= ATOM_FLAG_INITIALIZED
-	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/carpet
 	name = "brown carpet"
@@ -1087,9 +1100,9 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/beach/corner
 	icon_state = "beachbordercorner"
 
-/obj/effect/floor_decal/asteroid/Initialize()
-	. = ..()
+/obj/effect/floor_decal/asteroid/New()
 	icon_state = "asteroid[rand(0,9)]"
+	..()
 
 /obj/effect/floor_decal/chapel
 	name = "chapel"
@@ -1218,9 +1231,9 @@ var/global/list/floor_decals = list()
 	icon_state = "manydot"
 	appearance_flags = 0
 
-/obj/effect/floor_decal/floordetail/Initialize()
+/obj/effect/floor_decal/floordetail/New()
 	color = null //color is here just for map preview, if left it applies both our and tile colors.
-	. = ..()
+	..()
 
 /obj/effect/floor_decal/floordetail/tiled
 	icon_state = "manydot_tiled"
