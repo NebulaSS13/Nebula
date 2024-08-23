@@ -21,7 +21,8 @@
 /obj/item/paper/cig
 	name = "rolling paper"
 	desc = "A thin piece of paper used to make smokeables."
-	icon = 'icons/obj/cigarettes.dmi'
+	icon = 'icons/obj/items/paperwork/cigarette_paper.dmi'
+
 	icon_state = "cig_paper"
 	w_class = ITEM_SIZE_TINY
 
@@ -32,12 +33,13 @@
 /obj/item/paper/cig/fancy
 	name = "\improper Trident rolling paper"
 	desc = "A thin piece of Trident-branded paper used to make fine smokeables."
-	icon_state = "cig_paperf"
+	icon = 'icons/obj/items/paperwork/cigarette_paper_fancy.dmi'
 
-/obj/item/paper/cig/filter
+/obj/item/cigarette_filter
 	name = "cigarette filter"
 	desc = "A small nub like filter for cigarettes."
-	icon_state = "cig_filter"
+	icon = 'icons/obj/items/cigarette_filter.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_TINY
 
 //tobacco sold seperately if you're too snobby to grow it yourself.
@@ -57,7 +59,7 @@
 	seed = "finetobacco"
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/paper/cig/filter))
+	if(istype(I, /obj/item/cigarette_filter))
 		if(filter)
 			to_chat(user, "<span class='warning'>[src] already has a filter!</span>")
 			return

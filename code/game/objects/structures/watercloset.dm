@@ -531,8 +531,7 @@ var/global/list/hygiene_props = list()
 /obj/item/paper/crumpled/bog
 	name       = "sheet of toilet paper"
 	desc       = "A single sheet of toilet paper. Two ply."
-	icon       = 'icons/obj/toiletpaper.dmi'
-	icon_state = "bogroll_sheet"
+	icon       = 'icons/obj/items/paperwork/toilet_paper.dmi'
 
 /obj/structure/hygiene/faucet
 	name = "faucet"

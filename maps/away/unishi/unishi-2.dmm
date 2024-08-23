@@ -2597,7 +2597,7 @@
 /turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gY" = (
-/obj/item/paper/crumpled/bloody{
+/obj/item/paper/crumpled{
 	info = "I FUCKING KNEW that piece of shit was no good. To whoever finds this, his name is Robert Moreno. He is one of the undergrads here, or at least his story went. The fucker lured us here on the pretense of a huge emergency, and the second we came in, the shutters closed behind us. We have been hearing gunshots through the ship throughout. The emitter was locked and on, and kept hitting that rock thing that one of the profs was studying, and we cant get the damn thing to stop. It chewed through everything we put in front of it and it doesnt look like it's stopping any time soon. The grad student in charge of this monstrosity is screaming and telling us that it's all over. We've been vomiting non stop, and I think our time here is running out."
 	},
 /obj/item/usedcryobag,

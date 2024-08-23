@@ -1,52 +1,41 @@
-/obj/item/teleportation_scroll
+/obj/item/paper/scroll/teleportation
 	name = "scroll of teleportation"
 	desc = "A scroll for moving around."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "scroll"
-	var/uses = 4.0
-	w_class = ITEM_SIZE_TINY
-	item_state = "paper"
-	throw_speed = 4
-	throw_range = 20
 	origin_tech = @'{"wormholes":4}'
-	material = /decl/material/solid/organic/paper
+	info = {"
+		<B>Teleportation Scroll:</B><BR>
+		<HR>
+		<B>Comes with four charges! Use them wisely.</B><BR>
+		Kind regards,<br>Wizards Federation<br><br>P.S. Don't forget to bring your gear, you'll need it to cast most spells.
+	"}
+	var/uses = 4
 
-/obj/item/teleportation_scroll/attack_self(mob/user)
+/obj/item/paper/scroll/teleportation/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
+		var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
+		if(wizards.is_antagonist(user.mind))
+			to_chat(user, SPAN_NOTICE("\The [src] has [uses] charge\s remaining."))
+
+/obj/item/paper/scroll/teleportation/attack_self(mob/user)
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
-		to_chat(usr, "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>")
+		to_chat(user, SPAN_WARNING("You stare at \the [src], but cannot make sense of the markings!"))
+		return TRUE
+	if(alert(user, "Do you wish to teleport using \the [src]? It has [uses] charge\s remaining.", "Scroll of Teleportation", "No", "Yes") == "Yes")
+		teleportscroll(user)
+	return TRUE
+
+/obj/item/paper/scroll/teleportation/proc/teleportscroll(var/mob/user)
+	if(uses <= 0)
 		return
 
-	user.set_machine(src)
-	var/dat = "<B>Teleportation Scroll:</B><BR>"
-	dat += "Number of uses: [src.uses]<BR>"
-	dat += "<HR>"
-	dat += "<B>Four uses use them wisely:</B><BR>"
-	dat += "<A href='byond://?src=\ref[src];spell_teleport=1'>Teleport</A><BR>"
-	dat += "Kind regards,<br>Wizards Federation<br><br>P.S. Don't forget to bring your gear, you'll need it to cast most spells.<HR>"
-	show_browser(user, dat, "window=scroll")
-	onclose(user, "scroll")
-	return
+	var/area/thearea = input(user, "Select an area to jump to.", "Scroll of Teleportation") as null|anything in wizteleportlocs
+	if(!thearea || QDELETED(src) || QDELETED(user) || user.get_active_held_item() != src || CanUseTopic(user) != STATUS_INTERACTIVE)
+		return
 
-/obj/item/teleportation_scroll/Topic(href, href_list)
-	if(..())
-		return 1
-	if (!ishuman(usr))
-		return 1
-	var/mob/living/human/H = usr
-	if ((usr == src.loc || (in_range(src, usr) && isturf(src.loc))))
-		usr.set_machine(src)
-		if (href_list["spell_teleport"])
-			if (src.uses >= 1)
-				teleportscroll(H)
-	attack_self(H)
-	return
-
-/obj/item/teleportation_scroll/proc/teleportscroll(var/mob/user)
-	var/area/thearea = input(user, "Area to jump to", "BOOYEA") as null|anything in wizteleportlocs
 	thearea = thearea ? wizteleportlocs[thearea] : thearea
-
-	if (!thearea || CanUseTopic(user) != STATUS_INTERACTIVE)
+	if(!thearea)
 		return
 
 	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
@@ -54,9 +43,8 @@
 	smoke.attach(user)
 	smoke.start()
 	var/turf/end = user.try_teleport(thearea)
-
 	if(!end)
-		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
+		to_chat(user, SPAN_WARNING("The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry!"))
 		return
 	smoke.start()
 	src.uses -= 1

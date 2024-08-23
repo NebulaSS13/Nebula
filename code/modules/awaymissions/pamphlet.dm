@@ -1,6 +1,6 @@
 /obj/item/paper/pamphlet
 	name = "pamphlet"
-	icon_state = "pamphlet"
+	icon = 'icons/obj/items/paperwork/pamphlet.dmi'
 	info = "<b>Welcome to the Gateway project...</b><br>\
 			Congratulations! If you're reading this, you and your superiors have decided that you're \
 			ready to commit to a life spent colonising the rolling hills of far away worlds. You \

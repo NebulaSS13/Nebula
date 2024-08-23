@@ -30,7 +30,7 @@
 		/spell/noclothes =                            1,
 		/obj/item/dice/d20/cursed =                   1,
 		/obj/structure/closet/wizard/scrying =        2,
-		/obj/item/teleportation_scroll =              1,
+		/obj/item/paper/scroll/teleportation =        1,
 		/obj/item/magic_rock =                        1,
 		/obj/item/summoning_stone =                   3,
 		/obj/item/contract/wizard/telepathy =         1,

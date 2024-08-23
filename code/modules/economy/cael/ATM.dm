@@ -376,9 +376,7 @@
 					txt += "<i>Service terminal ID:</i> [machine_id]<br>"
 
 					var/obj/item/paper/R = new(src.loc, null, txt, "Account balance: [authenticated_account.owner_name]")
-					R.apply_custom_stamp(
-						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
-						"by the [machine_id]")
+					R.apply_custom_stamp('icons/obj/items/stamps/stamp_boss.dmi', "by the [machine_id]")
 
 				if(prob(50))
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
@@ -413,9 +411,7 @@
 						txt += "</tr>"
 					txt += "</table>"
 					var/obj/item/paper/R = new(src.loc, null, txt, "Transaction logs: [authenticated_account.owner_name]")
-					R.apply_custom_stamp(
-						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
-						"by the [machine_id]")
+					R.apply_custom_stamp('icons/obj/items/stamps/stamp_boss.dmi', "by the [machine_id]")
 
 				if(prob(50))
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)

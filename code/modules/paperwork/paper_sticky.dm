@@ -92,7 +92,7 @@
 /obj/item/paper/sticky
 	name            = "sticky note"
 	desc            = "Note to self: buy more sticky notes."
-	icon            = 'icons/obj/stickynotes.dmi'
+	icon            = 'icons/obj/items/paperwork/sticky_note.dmi'
 	color           = COLOR_YELLOW
 	slot_flags      = 0
 	layer           = ABOVE_WINDOW_LAYER
@@ -112,10 +112,6 @@
 	reset_persistence_tracking()
 	events_repository.unregister(/decl/observ/moved, src, src)
 	. = ..()
-
-/obj/item/paper/sticky/update_contents_overlays()
-	if(length(info))
-		add_overlay("sticky_words")
 
 // Copied from duct tape.
 /obj/item/paper/sticky/attack_hand()

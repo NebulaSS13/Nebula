@@ -249,13 +249,7 @@ var/global/list/_wood_materials = list(
 				qdel(src)
 				return TRUE
 
-	var/static/list/rollable_types = list(
-		/obj/item/paper/cig,
-		/obj/item/paper,
-		/obj/item/teleportation_scroll
-	)
-
-	if(is_type_in_list(W, rollable_types))
+	if(istype(W, /obj/item/paper))
 
 		if(!dry)
 			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))

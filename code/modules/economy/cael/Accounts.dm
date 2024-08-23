@@ -78,9 +78,9 @@
 		txt += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
 		txt += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
 		txt += "<i>Authorised officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
-		
+
 		var/obj/item/paper/R = new /obj/item/paper(null, null, txt, "Account information: [M.account_name]")
-		R.apply_custom_stamp(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR), "by the Accounts Database")
+		R.apply_custom_stamp('icons/obj/items/stamps/stamp_boss.dmi', "by the Accounts Database")
 		new /obj/item/parcel(source_db.loc, null, R)
 
 	//add the account
