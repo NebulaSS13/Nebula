@@ -107,7 +107,7 @@
 	I.implant_in_mob(G, BP_HEAD)
 	if (user.languages.len)
 		var/decl/language/lang = user.languages[1]
-		G.add_language(lang.name)
+		G.add_language(lang.type)
 		G.set_default_language(lang)
 		I.languages[lang.name] = 1
 

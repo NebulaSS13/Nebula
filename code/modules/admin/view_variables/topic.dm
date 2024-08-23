@@ -427,7 +427,7 @@
 			to_chat(usr, "Mob doesn't exist anymore")
 			return
 
-		if(victim.remove_language(rem_language.name))
+		if(victim.remove_language(rem_language.type))
 			to_chat(usr, "Removed [rem_language] from [victim].")
 		else
 			to_chat(usr, "Mob doesn't know that language.")

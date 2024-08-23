@@ -287,10 +287,15 @@
 		return TOPIC_HANDLED
 	return ..()
 
-/proc/transfer_languages(var/mob/source, var/mob/target, var/except_flags)
-	for(var/decl/language/L in source.languages)
-		if(L.flags & except_flags)
+/mob/proc/copy_languages_to(mob/target, except_flags)
+	for(var/decl/language/new_lang in languages)
+		if(new_lang.flags & except_flags)
 			continue
-		target.add_language(L.name)
+		target.add_language(new_lang.type)
+
+/mob/living/copy_languages_to(mob/living/target, except_flags)
+	..()
+	if(isliving(target))
+		target.default_language = default_language
 
 #undef SCRAMBLE_CACHE_LEN

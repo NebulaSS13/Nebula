@@ -38,9 +38,8 @@
 			if(varName in trans.vars)
 				trans.vars[varName] = newVars[varName]
 		//Give them our languages
-		for(var/l in M.languages)
-			var/decl/language/L = l
-			trans.add_language(L.name)
+		for(var/decl/language/lang as anything in M.languages)
+			trans.add_language(lang.type)
 
 		trans.SetName("[trans.name] ([M])")
 		if(ishuman(M) && drop_items)
