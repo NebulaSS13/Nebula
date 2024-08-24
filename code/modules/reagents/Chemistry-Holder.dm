@@ -56,6 +56,8 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents
 	var/primary_reagent
+	var/primary_solid
+	var/primary_liquid
 	var/list/reagent_volumes
 
 	var/list/liquid_volumes
@@ -133,7 +135,7 @@ var/global/obj/temp_reagents_holder = new
 	primary_reagent = null
 
 	reagent_volumes = list()
-	var/primary_liquid = null
+	primary_liquid = null
 	for(var/R in liquid_volumes)
 		var/vol = CHEMS_QUANTIZE(liquid_volumes[R])
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
@@ -146,7 +148,7 @@ var/global/obj/temp_reagents_holder = new
 			if(!primary_liquid || liquid_volumes[primary_liquid] < vol)
 				primary_liquid = R
 
-	var/primary_solid = null
+	primary_solid = null
 	for(var/R in solid_volumes)
 		var/vol = CHEMS_QUANTIZE(solid_volumes[R])
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
@@ -387,6 +389,10 @@ var/global/obj/temp_reagents_holder = new
 		LAZYREMOVE(reagent_data, reagent_type)
 		if(primary_reagent == reagent_type)
 			primary_reagent = null
+		if(primary_liquid == reagent_type)
+			primary_liquid = null
+		if(primary_solid == reagent_type)
+			primary_solid = null
 		cached_color = null
 
 		if(defer_update)
