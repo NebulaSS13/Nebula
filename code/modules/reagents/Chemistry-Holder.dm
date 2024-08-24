@@ -550,7 +550,12 @@ var/global/obj/temp_reagents_holder = new
 			return
 		part /= using_volume
 	else
-		part /= total_volume
+		var/using_volume = total_volume
+		if(!(transferred_phases & MAT_PHASE_LIQUID))
+			using_volume -= total_liquid_volume
+		else if(!(transferred_phases & MAT_PHASE_SOLID))
+			using_volume = total_liquid_volume
+		part /= using_volume
 
 	. = 0
 	for(var/rtype in reagent_volumes - skip_reagents)
