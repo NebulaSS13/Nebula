@@ -1188,4 +1188,3 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/is_watertight()
 	return watertight || ..()
-

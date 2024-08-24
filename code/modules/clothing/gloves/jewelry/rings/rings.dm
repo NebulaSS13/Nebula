@@ -85,7 +85,6 @@
 	name = "Secretary-General's official seal"
 	desc = "The official seal of the Secretary-General of the Solar Confederate Government, featured prominently on a silver ring."
 	icon = 'icons/clothing/accessories/jewelry/rings/ring_seal_secgen.dmi'
-	item_flags = ITEM_FLAG_STAMP
 
 /obj/item/clothing/gloves/ring/seal/Initialize()
 	. = ..()
