@@ -26,6 +26,7 @@
 	one_per_turf                = TRUE
 	apply_material_name         = FALSE
 	category                    = "fire sources"
+	difficulty                  = MAT_VALUE_NORMAL_DIY
 
 /decl/stack_recipe/bricks/fire_source/firepit
 	result_type                 = /obj/structure/fire_source/firepit
@@ -38,6 +39,7 @@
 	forbidden_craft_stack_types = list(
 		/obj/item/stack/material/log,
 	)
+	difficulty                  = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/bricks/fire_source/kiln
 	result_type                 = /obj/structure/fire_source/kiln

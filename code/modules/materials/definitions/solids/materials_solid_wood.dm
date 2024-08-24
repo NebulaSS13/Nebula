@@ -43,14 +43,13 @@
 	sound_manipulate = 'sound/foley/woodpickup1.ogg'
 	sound_dropped = 'sound/foley/wooddrop1.ogg'
 	compost_value = 0.2
-	temperature_burn_milestone_material = TRUE
+	temperature_burn_milestone_material = /decl/material/solid/organic/wood
 
 /decl/material/solid/organic/wood/fungal
 	name = "towercap"
 	uid = "solid_wood_fungal"
 	color = "#e6d8dd"
 	hardness = MAT_VALUE_FLEXIBLE + 10
-	temperature_burn_milestone_material = FALSE
 
 /decl/material/solid/organic/wood/holographic
 	name = "holographic wood"
@@ -66,7 +65,6 @@
 	color = WOOD_COLOR_RICH
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	value = 1.6
-	temperature_burn_milestone_material = FALSE
 
 /decl/material/solid/organic/wood/maple
 	name = "maple"
@@ -75,7 +73,6 @@
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	color = WOOD_COLOR_PALE
 	value = 1.8
-	temperature_burn_milestone_material = FALSE
 
 /decl/material/solid/organic/wood/ebony
 	name = "ebony"
@@ -90,7 +87,6 @@
 	integrity = 100
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
-	temperature_burn_milestone_material = FALSE
 
 /decl/material/solid/organic/wood/walnut
 	name = "walnut"
@@ -102,7 +98,6 @@
 	color = WOOD_COLOR_CHOCOLATE
 	weight = MAT_VALUE_NORMAL
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	temperature_burn_milestone_material = FALSE
 
 /decl/material/solid/organic/wood/bamboo
 	name = "bamboo"
@@ -114,7 +109,6 @@
 	color = WOOD_COLOR_PALE2
 	weight = MAT_VALUE_VERY_LIGHT
 	hardness = MAT_VALUE_RIGID
-	temperature_burn_milestone_material = FALSE
 
 /decl/material/solid/organic/wood/yew
 	name = "yew"
@@ -129,4 +123,3 @@
 		/decl/material/liquid/heartstopper = 0.1
 	)
 	value = 1.8
-	temperature_burn_milestone_material = FALSE

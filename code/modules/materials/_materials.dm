@@ -5,7 +5,7 @@ var/global/list/_descriptive_temperature_strings
 
 		for(var/decl/material/material as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/material))
 
-			if(!material.temperature_burn_milestone_material)
+			if(material.type != material.temperature_burn_milestone_material)
 				continue
 
 			if(!isnull(material.bakes_into_at_temperature) && material.bakes_into_material)
@@ -342,8 +342,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/reagent_overlay
 	var/reagent_overlay_base = "reagent_base"
 
-	/// Boolean to indicate if this material should be used as a reference point for burn temperatures.
-	var/temperature_burn_milestone_material = FALSE
+	/// Set to a type to indicate that a type with a matching milestone type should be used as a reference point for burn temperatures.
+	var/temperature_burn_milestone_material
 
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
@@ -391,7 +391,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Null/clear a bunch of physical vars as this material is fake.
 	if(holographic)
-		temperature_burn_milestone_material = FALSE
+		temperature_burn_milestone_material = null
 		shard_type                   = SHARD_NONE
 		conductive                   = 0
 		hidden_from_codex            = TRUE
