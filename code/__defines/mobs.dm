@@ -335,10 +335,11 @@ var/global/list/dexterity_levels = list(
 #define MOB_ICON_HAS_LIVING_STATE    BITFLAG(0)
 #define MOB_ICON_HAS_DEAD_STATE      BITFLAG(1)
 #define MOB_ICON_HAS_REST_STATE      BITFLAG(2)
-#define MOB_ICON_HAS_SLEEP_STATE     BITFLAG(3)
-#define MOB_ICON_HAS_GIB_STATE       BITFLAG(4)
-#define MOB_ICON_HAS_DUST_STATE      BITFLAG(5)
-#define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(6)
+#define MOB_ICON_HAS_SITTING_STATE   BITFLAG(3)
+#define MOB_ICON_HAS_SLEEP_STATE     BITFLAG(4)
+#define MOB_ICON_HAS_GIB_STATE       BITFLAG(5)
+#define MOB_ICON_HAS_DUST_STATE      BITFLAG(6)
+#define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(7)
 #define NEUTER_ANIMATE "animate singular neutral"
 
 // Equipment Overlays Indices //

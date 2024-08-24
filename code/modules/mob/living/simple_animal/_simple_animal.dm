@@ -138,6 +138,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			mob_icon_state_flags |= MOB_ICON_HAS_SLEEP_STATE
 		if(check_state_in_icon("world-resting", icon))
 			mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
+		if(check_state_in_icon("world-sitting", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_SITTING_STATE
 		if(check_state_in_icon("world-gib", icon))
 			mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
 		if(check_state_in_icon("world-dust", icon))
@@ -165,6 +167,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		icon_state += "-dead"
 	else if(stat == UNCONSCIOUS && (mob_icon_state_flags & MOB_ICON_HAS_SLEEP_STATE))
 		icon_state += "-sleeping"
+	else if(istype(current_posture, /decl/posture/sitting) && (mob_icon_state_flags & MOB_ICON_HAS_SITTING_STATE))
+		icon_state += "-sitting"
 	else if(current_posture?.prone && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 	..()
