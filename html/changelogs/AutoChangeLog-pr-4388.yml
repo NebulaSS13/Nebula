@@ -1,5 +1,0 @@
-author: Penelope Haze
-changes:
-  - {tweak: Examining soil plots can now give warnings if a plant is low on nutrients
-      or water (<20% each).}
-delete-after: true
