@@ -34,6 +34,7 @@
 			LAZYDISTINCTADD(., slot)
 
 /mob/living/add_held_item_slot(var/datum/inventory_slot/held_slot)
+	has_had_gripper = TRUE
 	var/datum/inventory_slot/existing_slot = get_inventory_slot_datum(held_slot.slot_id)
 	if(existing_slot && existing_slot != held_slot)
 		var/held = existing_slot.get_equipped_item()

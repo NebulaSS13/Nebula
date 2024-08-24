@@ -61,6 +61,14 @@
 	return grab
 
 /mob/living/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
+
+	if(has_had_gripper)
+		if(defer_hand)
+			. = put_in_hands(grab)
+		else
+			. = put_in_active_hand(grab)
+		return
+
 	for(var/obj/item/grab/other_grab in contents)
 		if(other_grab != grab)
 			return FALSE
