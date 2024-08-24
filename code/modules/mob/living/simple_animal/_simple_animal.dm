@@ -363,10 +363,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	..(message, null, verb)
 
-/mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
-	W.forceMove(get_turf(src))
-	return 1
-
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick
 
