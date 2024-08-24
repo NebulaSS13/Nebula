@@ -1,3 +1,7 @@
+/datum/storage/book
+	max_w_class = ITEM_SIZE_SMALL
+	storage_slots = 1
+
 /datum/storage/bible
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = 4

@@ -1,6 +1,6 @@
 //all about moving around and mobility and being an annoying shit.
 
-/obj/item/spellbook/spatial
+/obj/item/book/spell/spatial
 	spellbook_type = /datum/spellbook/spatial
 
 /datum/spellbook/spatial

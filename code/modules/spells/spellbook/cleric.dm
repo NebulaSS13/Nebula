@@ -1,5 +1,5 @@
 //Cleric is all about healing. Mobility and offense comes at a higher price but not impossible.
-/obj/item/spellbook/cleric
+/obj/item/book/spell/cleric
 	spellbook_type = /datum/spellbook/cleric
 
 /datum/spellbook/cleric

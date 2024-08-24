@@ -1,6 +1,6 @@
 //all about the summons, nature, and a bit o' healin.
 
-/obj/item/spellbook/druid
+/obj/item/book/spell/druid
 	spellbook_type = /datum/spellbook/druid
 
 /datum/spellbook/druid

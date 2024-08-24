@@ -1,6 +1,6 @@
 //the spellbook we know and love. Well, the one we know, at least.
 
-/obj/item/spellbook/standard
+/obj/item/book/spell/standard
 	spellbook_type = /datum/spellbook/standard
 
 /datum/spellbook/standard

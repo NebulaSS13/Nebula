@@ -1,13 +1,15 @@
 /obj/item/book/tome
-	name = "arcane tome"
-	icon = 'icons/obj/items/tome.dmi'
-	icon_state = "tome"
-	throw_speed = 1
-	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
-	unique = 1
-	carved = 2 // Don't carve it
-	can_dissolve_text = FALSE // Or dissolve it
+	name              = "arcane tome"
+	icon              = 'icons/obj/items/tome.dmi'
+	icon_state        = "tome"
+	throw_speed       = 1
+	throw_range       = 5
+	w_class           = ITEM_SIZE_SMALL
+	unique            = TRUE
+	can_dissolve_text = FALSE
+
+/obj/item/book/tome/try_carve(mob/user, obj/item/tool)
+	return
 
 /obj/item/book/tome/attack_self(var/mob/user)
 	if(!iscultist(user))

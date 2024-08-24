@@ -80,7 +80,7 @@
 	return TRUE
 
 /obj/effect/cleanable/wizard_mark/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/spellbook))
+	if(istype(I, /obj/item/book/spell))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("\The [src] fades away!")
 		qdel(src)
