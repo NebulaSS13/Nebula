@@ -197,7 +197,6 @@
 			loc.take_vaporized_reagent(reagent, removing)
 
 /obj/item/chems/take_vaporized_reagent(reagent, amount)
-	// TODO: check ATOM_IS_OPEN_CONTAINER(src) when there is a closed container for alembic vessels
 	if(!reagents?.maximum_volume)
 		return ..()
 	var/take_reagent = min(amount, REAGENTS_FREE_SPACE(reagents))
