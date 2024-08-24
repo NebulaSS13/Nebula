@@ -5,6 +5,7 @@
 	They commonly dig shallow dens in dirt, snow or foliage, sometimes using them for concealment prior to an ambush. \
 	Biological cousins to the elusive kururak, they have heavy, low-slung bodies and powerful jaws suited to hunting land prey rather than fishing. \
 	Colonization and subsequent expansion have displaced many populations from their tundral territories into colder areas; as a result, their diet of Sivian prey animals has pivoted to a diet of giant spider meat."
+	hidden_from_codex = FALSE
 	available_bodytypes = list(
 		/decl/bodytype/quadruped/grafadreka,
 		/decl/bodytype/quadruped/grafadreka/hatchling

@@ -11,6 +11,7 @@ var/global/list/wrapped_species_by_ref = list()
 		/mob/living/human/proc/shapeshifter_select_gender,
 		/mob/living/human/proc/shapeshifter_select_colour
 	)
+	hidden_from_codex = TRUE
 	var/list/valid_transform_species = list()
 	var/monochromatic
 	var/default_form
