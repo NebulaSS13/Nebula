@@ -179,7 +179,7 @@
 	// Then add back all the original languages, and the relevant synthezising ability
 	for(var/original_language in original_languages)
 		var/decl/language/language_datum = original_language
-		R.add_language(language_datum.name, original_languages[original_language])
+		R.add_language(language_datum.type, original_languages[original_language])
 	original_languages.Cut()
 
 /obj/item/robot_module/proc/add_camera_channels(var/mob/living/silicon/robot/R)

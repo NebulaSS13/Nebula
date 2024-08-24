@@ -35,7 +35,7 @@
 		if(OOC)
 			var/active = 0
 			for(var/mob/M in global.player_list)
-				var/mob_real_name = M.real_name
+				var/mob_real_name = M.mind?.name || M.real_name
 				if(sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
 					active = 1
 					break
