@@ -395,7 +395,7 @@
 			interact(user, readonly = FALSE)
 		return TRUE
 
-	else if(P.item_flags & ITEM_FLAG_STAMP)
+	else if(P.can_stamp)
 		apply_custom_stamp(P.icon, "with \the [P]")
 		playsound(src, 'sound/effects/stamp.ogg', 50, TRUE)
 		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
@@ -478,7 +478,8 @@
 	else if(offset_y != 0)
 		stamp.pixel_y = offset_y
 
-	// TODO: alpha mask against paper.
+	stamp.blend_mode = BLEND_INSET_OVERLAY
+	appearance_flags |= KEEP_TOGETHER
 	LAZYADD(applied_stamps, stamp)
 	stamp_text += "[length(stamp_text)? "<BR>" : "<HR>"]<i>This paper has been stamped [length(stamper_name) ? stamper_name : "by the generic stamp"].</i>"
 	update_icon()
