@@ -56,6 +56,8 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents
 	var/primary_reagent
+	var/primary_solid
+	var/primary_liquid
 	var/list/reagent_volumes
 
 	var/list/liquid_volumes
@@ -133,7 +135,7 @@ var/global/obj/temp_reagents_holder = new
 	primary_reagent = null
 
 	reagent_volumes = list()
-	var/primary_liquid = null
+	primary_liquid = null
 	for(var/R in liquid_volumes)
 		var/vol = CHEMS_QUANTIZE(liquid_volumes[R])
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
@@ -146,7 +148,7 @@ var/global/obj/temp_reagents_holder = new
 			if(!primary_liquid || liquid_volumes[primary_liquid] < vol)
 				primary_liquid = R
 
-	var/primary_solid = null
+	primary_solid = null
 	for(var/R in solid_volumes)
 		var/vol = CHEMS_QUANTIZE(solid_volumes[R])
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
@@ -387,6 +389,10 @@ var/global/obj/temp_reagents_holder = new
 		LAZYREMOVE(reagent_data, reagent_type)
 		if(primary_reagent == reagent_type)
 			primary_reagent = null
+		if(primary_liquid == reagent_type)
+			primary_liquid = null
+		if(primary_solid == reagent_type)
+			primary_solid = null
 		cached_color = null
 
 		if(defer_update)
@@ -550,7 +556,12 @@ var/global/obj/temp_reagents_holder = new
 			return
 		part /= using_volume
 	else
-		part /= total_volume
+		var/using_volume = total_volume
+		if(!(transferred_phases & MAT_PHASE_LIQUID))
+			using_volume -= total_liquid_volume
+		else if(!(transferred_phases & MAT_PHASE_SOLID))
+			using_volume = total_liquid_volume
+		part /= using_volume
 
 	. = 0
 	for(var/rtype in reagent_volumes - skip_reagents)
@@ -579,26 +590,28 @@ var/global/obj/temp_reagents_holder = new
 	// Due to rounding, we may have taken less than we wanted.
 	// If we're up short, add the remainder taken from the primary reagent.
 	// If we're skipping the primary reagent we just don't do this step.
-	if(. < amount && primary_reagent && !(primary_reagent in skip_reagents) && REAGENT_VOLUME(src, primary_reagent) > 0)
-		var/remainder = min(REAGENT_VOLUME(src, primary_reagent), CHEMS_QUANTIZE(amount - .))
+	if(. < amount)
+		var/remainder = CHEMS_QUANTIZE(amount - .)
 
 		var/liquid_remainder
+		if((transferred_phases & MAT_PHASE_LIQUID) && primary_liquid && !(primary_liquid in skip_reagents) && LIQUID_VOLUME(src, primary_liquid) > 0)
+			liquid_remainder = min(remainder, LIQUID_VOLUME(src, primary_liquid))
 		var/solid_remainder
+		if((transferred_phases & MAT_PHASE_SOLID) && primary_solid && !(primary_solid in skip_reagents) && SOLID_VOLUME(src, primary_solid) > 0)
+			solid_remainder = min(remainder - liquid_remainder, SOLID_VOLUME(src, primary_solid))
 
-		if(LIQUID_VOLUME(src, primary_reagent))
-			liquid_remainder = min(remainder, LIQUID_VOLUME(src, primary_reagent))
-			target.add_reagent(primary_reagent, remainder * multiplier, REAGENT_DATA(src, primary_reagent), TRUE, TRUE, MAT_PHASE_LIQUID)
+		if(liquid_remainder > 0)
+			target.add_reagent(primary_reagent, liquid_remainder * multiplier, REAGENT_DATA(src, primary_reagent), TRUE, TRUE, MAT_PHASE_LIQUID)
 			. += liquid_remainder
 			remainder -= liquid_remainder
-		if(remainder >= 0 && SOLID_VOLUME(src, primary_reagent))
-			solid_remainder = min(remainder, SOLID_VOLUME(src, primary_reagent))
+		if(solid_remainder > 0)
 			target.add_reagent(primary_reagent, solid_remainder * multiplier, REAGENT_DATA(src, primary_reagent), TRUE, TRUE, MAT_PHASE_SOLID)
 			. += solid_remainder
 			remainder -= solid_remainder
 		if(!copy)
-			if(liquid_remainder >= 0)
+			if(liquid_remainder > 0)
 				remove_reagent(primary_reagent, liquid_remainder, TRUE, TRUE, MAT_PHASE_LIQUID)
-			if(solid_remainder >= 0)
+			if(solid_remainder > 0)
 				remove_reagent(primary_reagent, solid_remainder, TRUE, TRUE, MAT_PHASE_SOLID)
 
 	if(!defer_update)
