@@ -8,6 +8,9 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	set category = "Debug"
 	set name = "View Variables"
 
+	debug_variables_inner(D)
+
+/client/proc/debug_variables_inner(datum/D, filter = "" as null|text)
 	if(!check_rights(R_VAREDIT | R_DEBUG))
 		return
 
@@ -49,7 +52,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 					</td>
 					<td width='50%'>
 						<div align='center'>
-							<a href='byond://?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
+							<a href='javascript:void(0)' onClick='refreshPage(\"\ref[D]\")'>Refresh</a>
 							[A ? "<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[A.x];Y=[A.y];Z=[A.z]'>Jump To</a>":""]
 							<form>
 								<select name='file'
@@ -86,7 +89,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 					<input type='text'
 					       id='filter'
 					       name='filter_text'
-					       value=''
+					       value='[filter]'
 					       style='width:100%;' />
 				</td>
 			</tr></table>

@@ -17,6 +17,11 @@ function updateSearch() {
 	}
 }
 
+function refreshPage(datumref) {
+	window.location.href = 'byond://?_src_=vars;datumrefresh=' + encodeURIComponent(datumref) + ';filter=' + encodeURIComponent(document.getElementById('filter').value);
+	return true;
+}
+
 function selectTextField() {
 	var filter_text = document.getElementById('filter');
 	filter_text.focus();
