@@ -1415,6 +1415,7 @@
 #include "code\game\objects\structures\drying_rack.dm"
 #include "code\game\objects\structures\emergency_dispenser.dm"
 #include "code\game\objects\structures\extinguisher.dm"
+#include "code\game\objects\structures\fences.dm"
 #include "code\game\objects\structures\filter_stand.dm"
 #include "code\game\objects\structures\fireaxe_cabinet.dm"
 #include "code\game\objects\structures\fires.dm"
