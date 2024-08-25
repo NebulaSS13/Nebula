@@ -8,11 +8,14 @@
 	throw_speed = 7
 	throw_range = 15
 	material    = /decl/material/solid/metal/steel
-	can_stamp   = TRUE
 	matter      = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 	)
 	attack_verb = list("stamped")
+
+/obj/item/stamp/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_STAMP = TOOL_QUALITY_DEFAULT))
 
 /obj/item/stamp/denied
 	name = "\improper DENIED rubber stamp"

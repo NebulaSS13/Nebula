@@ -395,7 +395,7 @@
 			interact(user, readonly = FALSE)
 		return TRUE
 
-	else if(P.can_stamp)
+	else if(P.get_tool_quality(TOOL_STAMP))
 		apply_custom_stamp(P.icon, "with \the [P]")
 		playsound(src, 'sound/effects/stamp.ogg', 50, TRUE)
 		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
