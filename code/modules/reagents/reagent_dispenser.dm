@@ -142,6 +142,12 @@
 /obj/structure/reagent_dispensers/watertank/populate_reagents()
 	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
 
+/obj/structure/reagent_dispensers/watertank/high
+	name = "high-capacity water tank"
+	desc = "A highly-pressurized water tank made to hold vast amounts of water."
+	icon = 'icons/obj/structures/water_tank_high.dmi'
+	icon_state = ICON_STATE_WORLD
+
 /obj/structure/reagent_dispensers/watertank/firefighter
 	name   = "firefighting water reserve"
 	volume = 50000
