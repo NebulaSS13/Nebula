@@ -35,20 +35,20 @@
 
 	return src
 
-/mob/new_player/AIize()
+/mob/new_player/AIize(move = TRUE)
 	spawning = 1
 	return ..()
 
-/mob/living/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
+/mob/living/human/AIize(move = TRUE)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
 
-/mob/living/silicon/ai/AIize()
+/mob/living/silicon/ai/AIize(move = TRUE)
 	return src
 
-/mob/living/AIize()
+/mob/living/AIize(move = TRUE)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/t in get_external_organs())
@@ -60,7 +60,7 @@
 	set_invisibility(INVISIBILITY_ABSTRACT)
 	return ..()
 
-/mob/proc/AIize(move=1)
+/mob/proc/AIize(move = TRUE)
 	if(client)
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// stop the jams for AIs
 
