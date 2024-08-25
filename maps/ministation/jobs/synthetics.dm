@@ -61,7 +61,7 @@
 	return H
 
 /datum/job/computer/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin)
-	character = character.AIize(move=0) // AIize the character, but don't move them yet
+	character = character.AIize(move = FALSE)
 
 	// is_available for AI checks that there is an empty core available in this list
 	var/obj/structure/aicore/deactivated/C = empty_playable_ai_cores[1]
