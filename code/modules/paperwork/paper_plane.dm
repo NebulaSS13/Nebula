@@ -4,9 +4,8 @@
 /obj/item/paper_plane
 	name            = "paper plane"
 	desc            = "A sheet of paper folded into a plane."
-	icon            = 'icons/obj/bureaucracy.dmi'
-	icon_state      = "paper_plane"
-	item_state      = "paper"
+	icon            = 'icons/obj/items/paperwork/paper_plane.dmi'
+	icon_state      = ICON_STATE_WORLD
 	layer           = ABOVE_OBJ_LAYER
 	does_spin       = FALSE
 	throwforce      = 0
@@ -55,8 +54,7 @@
 /obj/item/paper_plane/attack_self(mob/user)
 	if(user.a_intent == I_HURT)
 		return crumple(user)
-	else
-		return unfold(user)
+	return unfold(user)
 
 /obj/item/paper_plane/proc/crumple(var/mob/user)
 	if(user)

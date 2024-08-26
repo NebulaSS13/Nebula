@@ -37,9 +37,7 @@
 	txt += "4. If everything is done correctly, the money will be transferred. To unlock the device you will have to reset the EFTPOS device.<br>"
 
 	var/obj/item/paper/R = new(src.loc, null, txt, "Steps to success: Correct EFTPOS Usage")
-	R.apply_custom_stamp(
-		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR),
-		"by \the [src]")
+	R.apply_custom_stamp('icons/obj/items/stamps/stamp_boss.dmi', "by \the [src]")
 
 	//by default, connect to the station account
 	//the user of the EFTPOS device can change the target account though, and no-one will be the wiser (except whoever's being charged)
@@ -49,11 +47,7 @@
 	var/obj/item/paper/R = new(src.loc, null,
 		"<b>[eftpos_name] reference</b><br><br>Access code: [access_code]<br><br><b>Do not lose or misplace this code.</b><br>",
 		"Reference: [eftpos_name]")
-	R.apply_custom_stamp(
-		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR),
-		"by the [src]")
-
-
+	R.apply_custom_stamp('icons/obj/items/stamps/stamp_boss.dmi', "by \the [src]")
 	var/obj/item/parcel/D = new(R.loc, null, R, "EFTPOS access code")
 	D.attach_label(null, null, "EFTPOS access code")
 

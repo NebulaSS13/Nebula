@@ -55,7 +55,7 @@
 	icon_state = "filterbin"
 
 /obj/item/cigpaper/filters/WillContain()
-	return list(/obj/item/paper/cig/filter = 10)
+	return list(/obj/item/cigarette_filter = 10)
 
 /obj/item/chewables
 	name = "box of chewing wads master"

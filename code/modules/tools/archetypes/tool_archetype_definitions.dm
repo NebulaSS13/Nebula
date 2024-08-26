@@ -54,6 +54,10 @@
 	tool_sound   = 'sound/items/shovel_dirt.ogg'
 	tool_message = "tilling"
 
+/decl/tool_archetype/stamp
+	name         = "stamp"
+	tool_message = "stamping"
+
 /decl/tool_archetype/knife
 	name         = "knife"
 	tool_sound   = 'sound/weapons/bladeslice.ogg'

@@ -435,7 +435,7 @@ var/global/bomb_set
 		"vessel self-destruct instructions")
 
 	//stamp the paper
-	R.apply_custom_stamp(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-hos", flags = RESET_COLOR), "'Top Secret'")
+	R.apply_custom_stamp('icons/obj/items/stamps/stamp_cos.dmi', "'Top Secret'")
 
 //====vessel self-destruct system====
 /obj/machinery/nuclearbomb/station

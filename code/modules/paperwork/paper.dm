@@ -7,9 +7,8 @@
  */
 /obj/item/paper
 	name                   = "sheet of paper"
-	icon                   = 'icons/obj/bureaucracy.dmi'
-	icon_state             = "paper"
-	item_state             = "paper"
+	icon                   = 'icons/obj/items/paperwork/paper.dmi'
+	icon_state             = ICON_STATE_WORLD
 	layer                  = ABOVE_OBJ_LAYER
 	slot_flags             = SLOT_HEAD
 	body_parts_covered     = SLOT_HEAD
@@ -87,10 +86,10 @@
 /obj/item/paper/on_update_icon()
 	. = ..()
 
+	icon_state = get_world_inventory_state()
 	if(is_crumpled)
-		icon_state = "scrap"
+		icon_state = "[icon_state]-scrap"
 	else
-		icon_state = initial(icon_state)
 		update_contents_overlays()
 		//The appearence is the key, the type is the value
 		for(var/image/key in applied_stamps)
@@ -104,7 +103,9 @@
 /**Applies the overlay displayed when the paper contains some text. */
 /obj/item/paper/proc/update_contents_overlays()
 	if(length(info))
-		add_overlay("paper_words")
+		var/words_state = "[icon_state]-words"
+		if(check_state_in_icon(words_state, icon))
+			add_overlay(words_state)
 
 /obj/item/paper/proc/update_space(var/new_text)
 	if(new_text)
@@ -394,10 +395,8 @@
 			interact(user, readonly = FALSE)
 		return TRUE
 
-	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/gloves/ring/seal))
-		apply_custom_stamp(
-			image('icons/obj/bureaucracy.dmi', icon_state = "paper_[P.icon_state]", pixel_x = rand(-2, 2), pixel_y = rand(-2, 2)),
-			"with \the [P]")
+	else if(P.get_tool_quality(TOOL_STAMP))
+		apply_custom_stamp(P.icon, "with \the [P]")
 		playsound(src, 'sound/effects/stamp.ogg', 50, TRUE)
 		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
 		return TRUE
@@ -462,9 +461,27 @@
 /**Stamp the paper with the  specified values.
  * stamper_name: what is stamped. Or what comes after the sentence "This paper has been stamped "
 */
-/obj/item/paper/proc/apply_custom_stamp(var/image/stamp, var/stamper_name)
+/obj/item/paper/proc/apply_custom_stamp(stamp_icon, stamper_name, offset_x, offset_y)
+
+	if(!stamp_icon || !check_state_in_icon("stamp", stamp_icon))
+		return
+
+	var/image/stamp = overlay_image(stamp_icon, "stamp", COLOR_WHITE, RESET_COLOR)
+
+	if(isnull(offset_x))
+		stamp.pixel_x = rand(-2, 2)
+	else if(offset_x != 0)
+		stamp.pixel_x = offset_x
+
+	if(isnull(offset_y))
+		stamp.pixel_y = rand(-2, 2)
+	else if(offset_y != 0)
+		stamp.pixel_y = offset_y
+
+	stamp.blend_mode = BLEND_INSET_OVERLAY
+	appearance_flags |= KEEP_TOGETHER
 	LAZYADD(applied_stamps, stamp)
-	stamp_text += "[length(stamp_text)? "<BR>" : "<HR>"]<i>This paper has been stamped [length(stamper_name)? stamper_name : "by the generic stamp"].</i>"
+	stamp_text += "[length(stamp_text)? "<BR>" : "<HR>"]<i>This paper has been stamped [length(stamper_name) ? stamper_name : "by the generic stamp"].</i>"
 	update_icon()
 
 /**Merge the paper with other papers or bundles inside "location" */
@@ -570,11 +587,48 @@ var/global/datum/topic_state/default/paper_state/paper_topic_state = new
 // Crumpled Paper
 ///////////////////////////////////////////////////
 /obj/item/paper/crumpled
-	name       = "paper scrap"
-	icon_state = "scrap"
+	name        = "paper scrap"
+	is_crumpled = TRUE
 
-/obj/item/paper/crumpled/update_contents_overlays()
-	return
+// Stub type for moving teleportation scrolls into a modpack.
+/obj/item/paper/scroll
+	name  = "scroll"
+	desc  = "A length of writing material curled into a scroll."
+	icon  = 'icons/obj/items/paperwork/scroll.dmi'
+	color = "#feeebc"
+	var/furled = FALSE
 
-/obj/item/paper/crumpled/bloody
-	icon_state = "scrap_bloodied"
+/obj/item/paper/scroll/can_bundle()
+	return FALSE
+
+/obj/item/paper/scroll/update_contents_overlays()
+	return furled ? null : ..()
+
+/obj/item/paper/scroll/on_update_icon()
+	. = ..()
+	if(furled)
+		icon_state = "[icon_state]-furled"
+
+/obj/item/paper/scroll/get_alt_interactions(mob/user)
+	. = ..()
+	if(furled)
+		LAZYADD(., /decl/interaction_handler/scroll/unfurl)
+	else
+		LAZYADD(., /decl/interaction_handler/scroll/furl)
+
+/decl/interaction_handler/scroll
+	abstract_type = /decl/interaction_handler/scroll
+	expected_target_type = /obj/item/paper/scroll
+
+/decl/interaction_handler/scroll/invoked(atom/target, mob/user)
+	var/obj/item/paper/scroll/scroll = target
+	// TODO: paper sound
+	scroll.furled = !scroll.furled
+	user.visible_message(SPAN_NOTICE("\The [user] [scroll.furled ? "furls" : "unfurls"] \the [target]."))
+	scroll.update_icon()
+
+/decl/interaction_handler/scroll/furl
+	name = "Furl Scroll"
+
+/decl/interaction_handler/scroll/unfurl
+	name = "Unfurl Scroll"
