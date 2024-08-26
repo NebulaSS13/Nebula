@@ -1,4 +1,0 @@
-author: Noelle Lavenza
-changes:
-  - {admin: Refreshing the View Variables window no longer clears its search filter.}
-delete-after: true
