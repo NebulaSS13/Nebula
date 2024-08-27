@@ -11,8 +11,9 @@
 	SSmodpacks.default_submap_whitelisted_species |= SPECIES_TAJARA
 	SSmodpacks.default_submap_whitelisted_species |= SPECIES_LIZARD
 	SSmodpacks.default_submap_whitelisted_species |= SPECIES_SKRELL
-	SSmodpacks.default_submap_whitelisted_species |= SPECIES_ADHERENT
+	// SSmodpacks.default_submap_whitelisted_species |= SPECIES_ADHERENT
 
+/* Requires Adherents
 /mob/living/human/Process_Spacemove(allow_movement)
 	. = ..()
 	if(.)
@@ -25,3 +26,4 @@
 			// because the spacedrift subsystem checks the return value of this proc
 			// and unsets inertia_dir if it returns nonzero.
 			return 1
+*/

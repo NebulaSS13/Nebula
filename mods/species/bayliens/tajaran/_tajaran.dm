@@ -1,4 +1,5 @@
-#define LANGUAGE_TAJARA "Siik'maas"
+#define LANGUAGE_TAJARA "Siik"
+#define LANGUAGE_AKHANI "Akhani"
 #define BODYTYPE_FELINE "feline body"
 #define BODY_EQUIP_FLAG_FELINE BITFLAG(7)
 

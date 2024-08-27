@@ -35,13 +35,13 @@
 	// Must come after borers for compatibility.
 	#include "../../mods/content/psionics/_psionics.dme"
 
-	#include "../../mods/species/ascent/_ascent.dme"
 	#include "../../mods/species/drakes/_drakes.dme"
-	#include "../../mods/species/serpentid/_serpentid.dme"
-	#include "../../mods/species/utility_frames/_utility_frames.dme"
+	// #include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"
 	#include "../../mods/species/bayliens/_bayliens.dme"
 	#include "../../mods/species/vox/_vox.dme"
+
+	#include "../../mods/content/polaris/_polaris.dme"
 
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"

@@ -28,3 +28,11 @@
 	hidden = TRUE
 	hidden_from_codex = TRUE
 	uid = "religion_drake"
+
+/decl/background_detail/citizenship/grafadreka
+	name = "Sif"
+	description = "You are from the tundras and forests of the frozen garden world of Sif, where you probably eked out a life hunting giant spiders or chasing siffets."
+	language = /decl/language/grafadreka
+	hidden = TRUE
+	hidden_from_codex = TRUE
+	uid = "location_drake"

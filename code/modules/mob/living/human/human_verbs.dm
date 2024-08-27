@@ -23,7 +23,7 @@
 	if(new_eyes)
 		set_eye_colour(new_eyes)
 
-	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation", "[35-skin_tone]")  as text
+	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=pale, 150=dark, 220=very dark)", "Character Generation", "[35-skin_tone]")  as text
 
 	if (!new_tone)
 		new_tone = 35

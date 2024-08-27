@@ -83,7 +83,7 @@
 //Seals and Signet Rings
 /obj/item/clothing/gloves/ring/seal
 	name = "Secretary-General's official seal"
-	desc = "The official seal of the Secretary-General of the Sol Central Government, featured prominently on a silver ring."
+	desc = "The official seal of the Secretary-General of the Solar Confederate Government, featured prominently on a silver ring."
 	icon = 'icons/clothing/accessories/jewelry/rings/ring_seal_secgen.dmi'
 
 /obj/item/clothing/gloves/ring/seal/Initialize()

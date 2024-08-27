@@ -30,7 +30,7 @@
 	. = "[pick("Pirates","Criminal elements","A [pick("mercenary","Donk Co.","Waffle Co.","\'REDACTED\'")] strike force")] have [pick("raided","blockaded","attempted to blackmail","attacked")] [location.name] today. Security has been tightened, but many valuable minerals were taken."
 
 /decl/location_event/corporate_attack/announce(var/decl/background_detail/location)
-	. = "A small [pick("pirate","Cybersun Industries","Gorlex Marauders","mercenary")] fleet has precise-jumped into proximity with [location.name], [pick("for a smash-and-grab operation","in a hit and run attack","in an overt display of hostilities")]. Much damage was done, and security has been tightened since the incident."
+	. = "A small [pick("pirate","vox","Vystholm","mercenary")] fleet has precise-jumped into proximity with [location.name], [pick("for a smash-and-grab operation","in a hit and run attack","in an overt display of hostilities")]. Much damage was done, and security has been tightened since the incident."
 
 /decl/location_event/alien_raiders/announce(var/decl/background_detail/location)
 	if(prob(20))

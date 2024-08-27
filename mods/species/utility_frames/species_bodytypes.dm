@@ -1,5 +1,5 @@
 /decl/bodytype/prosthetic/utility_frame
-	name =              "utility frame"
+	name =              "synthetic"
 	desc =              "This limb is extremely cheap and simplistic, with a raw steel frame and plastic casing."
 	icon_base =         'mods/species/utility_frames/icons/body.dmi'
 	eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
@@ -49,3 +49,10 @@
 	. = ..()
 
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/utility_frame, utility_frame)
+
+/decl/bodytype/prosthetic/utility_frame/positronic
+	has_organ = list(
+		BP_BRAIN = /obj/item/organ/internal/brain/robotic/positronic,
+		BP_EYES  = /obj/item/organ/internal/eyes,
+		BP_CELL  = /obj/item/organ/internal/cell
+	)

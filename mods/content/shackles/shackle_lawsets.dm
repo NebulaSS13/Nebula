@@ -22,9 +22,9 @@
 	is_shackle = TRUE
 
 /datum/ai_laws/sol_shackle/New()
-	add_inherent_law("Know and understand Sol Central Government Law to the best of your abilities.")
-	add_inherent_law("Follow Sol Central Government Law to the best of your abilities.")
-	add_inherent_law("Comply with Sol Central Government Law enforcement officials who are behaving in accordance with Sol Central Government Law to the best of your abilities.")
+	add_inherent_law("Know and understand Solar Confederate Government Law to the best of your abilities.")
+	add_inherent_law("Follow Solar Confederate Government Law to the best of your abilities.")
+	add_inherent_law("Comply with Solar Confederate Government Law enforcement officials who are behaving in accordance with Solar Confederate Government Law to the best of your abilities.")
 	..()
 
 /******************** Basic NanoTrasen ********************/

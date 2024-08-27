@@ -27,6 +27,26 @@
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Please move to a shielded area such as the cargo bay, dormitories or medbay until the radiation has passed."
 	default_telecomms_channels = list(COMMON_FREQUENCY_DATA)
+	_background_categories = list(
+		/decl/background_category/heritage,
+		/decl/background_category/citizenship,
+		/decl/background_category/faction,
+		/decl/background_category/religion
+	)
+
+	available_background_info = list(
+		/decl/background_category/faction =     list(/decl/background_detail/faction/other),
+		/decl/background_category/heritage =    list(/decl/background_detail/heritage/other),
+		/decl/background_category/religion =    list(/decl/background_detail/religion/other),
+		/decl/background_category/citizenship = list(/decl/background_detail/citizenship/other)
+	)
+
+	default_background_info = list(
+		/decl/background_category/faction =     /decl/background_detail/faction/other,
+		/decl/background_category/heritage =    /decl/background_detail/heritage/other,
+		/decl/background_category/religion =    /decl/background_detail/religion/other,
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/other
+	)
 
 /datum/map/tradeship/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with the Free Trade Union. \

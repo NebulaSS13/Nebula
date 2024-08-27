@@ -21,7 +21,7 @@
 
 /decl/language/grafadreka
 	name = "Drake Language"
-	shorthand = "DR"
+	shorthand = "Drk"
 	desc = "Hiss hiss, feed me siffets."
 	speech_verb = "hisses"
 	ask_verb = "chirps"

@@ -1,9 +1,9 @@
 // Robobrain.
 /obj/item/organ/internal/brain/robotic
-	name = "computer intelligence core"
-	desc = "The pinnacle of artifical intelligence technology, conveniently stored in a fist-sized cube."
-	icon = 'icons/obj/items/brain_interface_robotic.dmi'
-	origin_tech = @'{"engineering":4,"materials":4,"wormholes":2,"programming":4}'
+	name = "drone intelligence circuit"
+	desc = "The pinnacle of artifical intelligence, achieved with classical computer science."
+	icon = 'icons/obj/items/brain_interface_drone.dmi'
+	origin_tech = @'{"engineering":4,"materials":4,"programming":4}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
@@ -25,7 +25,7 @@
 	. = ..()
 	set_bodytype(/decl/bodytype/prosthetic/basic_human)
 	update_icon()
-	brain_name = "[pick(list("ADA","DOS","GNU","MAC","WIN"))]-[random_id(type,1000,9999)]"
+	brain_name = "[pick(list("UNIT","NT","WT","A","B","C"))]-[random_id(type,1000,9999)]"
 	SetName("[name] ([brain_name])")
 
 /obj/item/organ/internal/brain/robotic/initialize_brainmob()
@@ -90,3 +90,18 @@
 
 /obj/item/organ/internal/brain/robotic/get_synthetic_owner_name()
 	return "Robot"
+
+//Positronic brain
+
+/obj/item/organ/internal/brain/robotic/positronic
+	name = "positronic brain"
+	desc = "A cube of shining metal, four inches to a side and covered in shallow grooves."
+	origin_tech = @'{"engineering":4,"materials":4,"wormholes":2,"programming":4}'
+	icon = 'icons/obj/items/brain_interface_robotic.dmi'
+
+/obj/item/organ/internal/brain/robotic/positronic/Initialize()
+	. = ..()
+	set_bodytype(/decl/bodytype/prosthetic/basic_human)
+	update_icon()
+	brain_name = "[capitalize(pick(global.using_map.last_names))]"
+	SetName("[name] ([brain_name])")

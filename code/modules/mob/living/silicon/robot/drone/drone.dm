@@ -323,13 +323,13 @@
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	to_chat(src, "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>.")
-	to_chat(src, "You are assigned to a Sol Central construction project. The name is irrelevant. Your task is to complete construction and subsystem integration as soon as possible.")
+	to_chat(src, "You are assigned to a Solar Confederate construction project. The name is irrelevant. Your task is to complete construction and subsystem integration as soon as possible.")
 	to_chat(src, "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows.")
 	to_chat(src, "<b>You do not follow orders from anyone; not the AI, not humans, and not other synthetics.</b>.")
 
 /mob/living/silicon/robot/drone/construction/init()
 	..()
-	flavor_text = "It's a bulky construction drone stamped with a Sol Central glyph."
+	flavor_text = "It's a bulky construction drone stamped with a Solar Confederate glyph."
 
 /proc/too_many_active_drones()
 	var/drones = 0

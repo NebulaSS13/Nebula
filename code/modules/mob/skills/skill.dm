@@ -105,10 +105,12 @@
 		"Master"      = "You have an excellent knowledge of finance, will often make brilliant investments, and have an instinctive feel for interstellar economics. Financial instruments are weapons in your hands. You likely have professional experience in the finance industry."
 	)
 
+/*
 /decl/skill/finance/update_special_effects(mob/mob, level)
 	mob.remove_language(/decl/language/legal)
 	if(level >= SKILL_EXPERT)
 		mob.add_language(/decl/language/legal)
+*/
 
 // Category: General
 /decl/skill/general
