@@ -19,6 +19,12 @@
 /obj/item/flame/candle/red
 	paint_color = COLOR_RED
 
+/obj/item/flame/candle/white
+	paint_color = COLOR_WHITE
+
+/obj/item/flame/candle/black
+	paint_color = COLOR_GRAY15
+
 /obj/item/flame/candle/Initialize()
 
 	// Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
