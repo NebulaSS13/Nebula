@@ -121,6 +121,9 @@ def update_path(dmm_data, replacement_string, verbose=False):
                 return [None]
             elif new_path.endswith("/@SUBTYPES"):
                 out = new_path[:-len("/@SUBTYPES")] + str(match.group('subpath') or '')
+            elif "/@SUBTYPES/" in new_path:
+                split_idx = new_path.index("/@SUBTYPES/")
+                out = new_path[:split_idx] + str(match.group('subpath') or '') + new_path[split_idx + len("/@SUBTYPES"):]
             else:
                 out = new_path
             out_props = dict()
