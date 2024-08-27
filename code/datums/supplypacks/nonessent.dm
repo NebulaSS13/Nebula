@@ -73,7 +73,7 @@
 
 /decl/hierarchy/supply_pack/nonessent/wizard
 	name = "Costume - Wizard"
-	contains = list(/obj/item/staff,
+	contains = list(/obj/item/staff/crystal,
 					/obj/item/clothing/suit/wizrobe/fake,
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/fake)

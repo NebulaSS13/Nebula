@@ -4,7 +4,7 @@
 	l_ear = /obj/item/radio/headset
 	r_pocket = /obj/item/paper/scroll/teleportation
 	hands = list(
-		/obj/item/staff,
+		/obj/item/staff/crystal,
 		/obj/item/book/spell
 	)
 	back = /obj/item/backpack

@@ -1,0 +1,5 @@
+/obj/item/cane/concealed/@SUBTYPES : /obj/item/cane/fancy/sword/@SUBTYPES{@OLD}
+/obj/item/staff/gentcane/@SUBTYPES : /obj/item/cane/fancy/@SUBTYPES{@OLD}
+/obj/item/cane : /obj/item/cane/aluminium
+/obj/item/staff/fireball/@SUBTYPES : /obj/item/staff/crystal/beacon/fireball/@SUBTYPES{@OLD}
+/obj/item/staff/@SUBTYPES : /obj/item/staff/crystal/@SUBTYPES{@OLD}

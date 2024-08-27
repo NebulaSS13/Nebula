@@ -135,8 +135,9 @@
 	if(!can_feel_pain())
 		return
 	var/crutches = 0
-	for(var/obj/item/cane/C in get_held_items())
-		crutches++
+	for(var/obj/item/support in get_held_items())
+		if(support.get_stance_support_value() > 0)
+			crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
 		if(E && (E.is_dislocated() || E.is_broken()))

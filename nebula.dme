@@ -1202,6 +1202,7 @@
 #include "code\game\objects\items\weapons\AI_modules.dm"
 #include "code\game\objects\items\weapons\autopsy.dm"
 #include "code\game\objects\items\weapons\balls.dm"
+#include "code\game\objects\items\weapons\broom.dm"
 #include "code\game\objects\items\weapons\cane.dm"
 #include "code\game\objects\items\weapons\cards_ids.dm"
 #include "code\game\objects\items\weapons\cards_ids_syndicate.dm"

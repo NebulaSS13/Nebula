@@ -2,14 +2,13 @@
 	name = "stick"
 	desc = "You feel the urge to poke someone with this."
 	icon = 'icons/obj/items/stick.dmi'
-	icon_state = "stick"
-	item_state = "stickmat"
+	icon_state = ICON_STATE_WORLD
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/organic/wood
 	attack_verb = list("poked", "jabbed")
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 	lock_picking_level = 3
 
 /obj/item/stick/attack_self(mob/user)
