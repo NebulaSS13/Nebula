@@ -70,10 +70,15 @@
 	craft_stack_types     = /obj/item/stack/material/bolt
 	category              = "clothing"
 
+/decl/stack_recipe/textiles/cloth/filter
+	result_type           = /obj/item/chems/filter
+	difficulty            = MAT_VALUE_EASY_DIY // see above comment
+	category              = "utility"
+
 /decl/stack_recipe/textiles/cloth/bandana
-	result_type             = /obj/item/clothing/mask/bandana/colourable
+	result_type           = /obj/item/clothing/mask/bandana/colourable
+	difficulty            = MAT_VALUE_EASY_DIY // see above comment
 	crafting_extra_cost_factor = 1 // basically just a rag
-	difficulty              = MAT_VALUE_EASY_DIY // see above comment
 
 /decl/stack_recipe/textiles/cloth/gloves
 	result_type           = /obj/item/clothing/gloves
