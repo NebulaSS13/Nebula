@@ -21,11 +21,14 @@
 		/decl/natural_attack/bite
 	)
 
-	description = "The Skrell are a highly advanced race of amphibians hailing from the system known as Qerr'Vallis. Their society is regimented into \
-	five different castes which the Qerr'Katish, or Royal Caste, rules over. Skrell are strict herbivores who are unable to eat large quantities of \
-	animal protein without feeling sick or even suffering from food poisoning. <br/><br/> \
-	Skrell value cooperation and have very communal lifestyles, and despite their diplomatic fluency and innate curiosity are very leery of outside \
-	interference in their customs and values."
+	description = "The skrell are a highly advanced species of amphibians hailing from \
+	the system known as Qerr'Vallis, which translates to 'Star of the royals' or 'Light of the Crown'. \
+	Their society is regimented into five castes which the Qerr'Katish, or High-caste, rules over. \
+	Skrell are strict herbivores who are unable to eat large quantities of animal protein \
+	without feeling sick or even suffering from food poisoning. <br/><br/> \
+	While skrell place high value on cooperation, diplomacy and scientific pursuit, \
+	they tend to be very leery of outside interference in their customs and values, \
+	and are highly secretive regarding internal matters of state."
 
 	butchery_data = /decl/butchery_data/humanoid/skrell
 
@@ -64,36 +67,6 @@
 		/decl/blood_type/skrell/nominus
 	)
 
-	available_background_info = list(
-		/decl/background_category/heritage = list(
-			/decl/background_detail/heritage/skrell,
-			/decl/background_detail/heritage/skrell/caste_malish,
-			/decl/background_detail/heritage/skrell/caste_kanin,
-			/decl/background_detail/heritage/skrell/caste_talum,
-			/decl/background_detail/heritage/skrell/caste_raskinta,
-			/decl/background_detail/heritage/skrell/caste_ue
-		),
-		/decl/background_category/homeworld = list(
-			/decl/background_detail/location/free,
-			/decl/background_detail/location/skrellspace,
-			/decl/background_detail/location/other
-		),
-		/decl/background_category/faction = list(
-			/decl/background_detail/faction/skrell,
-			/decl/background_detail/faction/skrell/qalaoa,
-			/decl/background_detail/faction/skrell/yiitalana,
-			/decl/background_detail/faction/skrell/krrigli,
-			/decl/background_detail/faction/skrell/qonprri,
-			/decl/background_detail/faction/skrell/kalimak,
-			/decl/background_detail/faction/other
-		),
-		/decl/background_category/religion = list(
-			/decl/background_detail/religion/skrell,
-			/decl/background_detail/religion/skrell/starspiritual,
-			/decl/background_detail/religion/other
-		)
-	)
-
 	exertion_effect_chance = 10
 	exertion_hydration_scale = 1
 	exertion_charge_scale = 1
@@ -106,6 +79,23 @@
 		/decl/emote/exertion/synthetic,
 		/decl/emote/exertion/synthetic/creak
 	)
+
+/decl/species/skrell/Initialize()
+	. = ..()
+	LAZYINITLIST(available_background_info)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/citizenship], /decl/background_detail/citizenship/skrell)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/skrell/caste_malish)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/skrell/caste_kanin)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/skrell/caste_talum)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/skrell/caste_raskinta)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/skrell/caste_ue)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/faction], /decl/background_detail/faction/skrell)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/faction], /decl/background_detail/faction/skrell_pirate)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/faction], /decl/background_detail/faction/skrell_qerrgila)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/religion], /decl/background_detail/religion/skrell)
+	LAZYSET(default_background_info, /decl/background_category/citizenship, /decl/background_detail/citizenship/skrell)
+	LAZYSET(default_background_info, /decl/background_category/heritage, /decl/background_detail/heritage/skrell/caste_malish)
+	LAZYSET(default_background_info, /decl/background_category/religion, /decl/background_detail/religion/skrell)
 
 /decl/species/skrell/fluid_act(var/mob/living/human/H, var/datum/reagents/fluids)
 	. = ..()

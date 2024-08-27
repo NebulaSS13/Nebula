@@ -24,10 +24,9 @@
 		/decl/natural_attack/bite/sharp/drake,
 		/decl/natural_attack/claws/strong/drake
 	)
-
 	force_background_info = list(
 		/decl/background_category/heritage   = /decl/background_detail/heritage/grafadreka,
-		/decl/background_category/homeworld = /decl/background_detail/location/grafadreka,
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/grafadreka,
 		/decl/background_category/faction   = /decl/background_detail/faction/grafadreka,
 		/decl/background_category/religion  = /decl/background_detail/religion/grafadreka
 	)
