@@ -165,8 +165,8 @@
 	icon_state = "solgovseal"
 
 /obj/structure/sign/double/solgovflag
-	name = "Sol Central Government Flag"
-	desc = "The iconic flag of the Sol Central Government, a symbol with many different meanings."
+	name = "Solar Confederate Government Flag"
+	desc = "The iconic flag of the Solar Confederate Government, a symbol with many different meanings."
 	abstract_type = /obj/structure/sign/double/solgovflag
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 

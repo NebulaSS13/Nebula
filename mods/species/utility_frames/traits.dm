@@ -1,6 +1,7 @@
 /decl/trait/build_references()
 	. = ..()
 	LAZYDISTINCTADD(blocked_species, /decl/species/utility_frame::uid)
+	LAZYDISTINCTADD(blocked_species, /decl/species/positronic::uid)
 
 /decl/trait/utility_frame
 	abstract_type = /decl/trait/utility_frame
@@ -8,7 +9,7 @@
 /decl/trait/utility_frame/build_references()
 	. = ..()
 	blocked_species = null
-	permitted_species = list(/decl/species/utility_frame::uid)
+	permitted_species = list(/decl/species/utility_frame::uid, /decl/species/positronic::uid)
 
 // Cosmetic/armour changes, different models of limb
 /decl/trait/utility_frame/customisation

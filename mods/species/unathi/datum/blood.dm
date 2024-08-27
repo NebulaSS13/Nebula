@@ -1,6 +1,6 @@
 /decl/blood_type/reptile
 	abstract_type = /decl/blood_type/reptile
-	splatter_colour = "#f24b2e"
+	splatter_colour = "#b3cbc3"
 	antigens = list("S", "X", "Li")
 
 /decl/blood_type/reptile/splus

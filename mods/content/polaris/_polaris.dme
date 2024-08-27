@@ -1,0 +1,10 @@
+#ifndef MODPACK_POLARIS
+#define MODPACK_POLARIS
+// BEGIN_INCLUDE
+#include "datum\citizenship.dm"
+#include "datum\cultures.dm"
+#include "datum\factions.dm"
+#include "datum\languages\human.dm"
+#include "datum\locations.dm"
+#include "datum\overrides.dm"
+#endif // MODPACK_POLARIS
