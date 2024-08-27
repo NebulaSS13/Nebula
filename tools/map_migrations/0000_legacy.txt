@@ -65,6 +65,8 @@
 /obj/machinery/computer/supplycomp/control/@SUBTYPES : /obj/machinery/computer/modular/preset/dock/@SUBTYPES{@OLD}
 /obj/machinery/computer/supplycomp/@SUBTYPES : /obj/machinery/computer/modular/preset/supply_public/@SUBTYPES{@OLD}
 /obj/item/closet_painter/@SUBTYPES : /obj/item/paint_sprayer/@SUBTYPES{@OLD}
+/turf/simulated/shuttle/plating/@SUBTYPES : /turf/floor/shuttle
+/turf/simulated/shuttle/floor/@SUBTYPES : /turf/floor/shuttle/@SUBTYPES
 
 # REMOVE BAD VAREDITS
 /@SUBTYPES {layer = @SET} : @OLD {@OLD; layer = @SKIP}
@@ -384,6 +386,8 @@
 /obj/structure/closet/grave/dirthole : /obj/structure/pit{@OLD}
 /obj/structure/closet/grave/@SUBTYPES : /obj/structure/pit/closed/grave{@OLD}
 
+/obj/item/banner/nt : /obj/item/banner/nanotrasen{@OLD}
+
 ############
 # VAREDITS #
 ############
@@ -447,7 +451,7 @@
 
 # Radio varedits
 /obj/item/radio/@SUBTYPES{subspace_transmission = @SET} : @OLD {@OLD; subspace_transmission = @SKIP}
-/obj/item/radio/@SUBTYPES{syndie = @SET} : @OLD {@OLD; syndie = @SKIP}
+/obj/item/radio/@SUBTYPES{syndie = @SET} : @OLD {@OLD; decrypt_all_messages = 1; syndie = @SKIP}
 /obj/item/radio/@SUBTYPES{adhoc_fallback = @SET} : @OLD {@OLD; can_use_analog = @SKIP}
 
 # Empty first-aid kits
