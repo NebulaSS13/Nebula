@@ -38,6 +38,7 @@
 /obj/machinery/pipedispenser/@SUBTYPES : /obj/machinery/fabricator/pipe/@SUBTYPES{@OLD}
 /obj/machinery/power/emitter/@SUBTYPES : /obj/machinery/emitter/@SUBTYPES{@OLD}
 /obj/machinery/power/fusion_core/@SUBTYPES : /obj/machinery/fusion_core/@SUBTYPES{@OLD}
+/obj/item/modular_computer/console/preset/@SUBTYPES : /obj/machinery/computer/modular/preset/@SUBTYPES{@OLD}
 /obj/machinery/modular_computer/console/preset/@SUBTYPES : /obj/machinery/computer/modular/preset/@SUBTYPES{@OLD}
 /obj/machinery/computer/modular/preset/command/@SUBTYPES : /obj/machinery/computer/modular/preset/cardslot/command/@SUBTYPES{@OLD}
 /obj/machinery/computer/fusion_core_control/@SUBTYPES : /obj/machinery/computer/fusion/core_control/@SUBTYPES{@OLD}
@@ -88,6 +89,8 @@
 # BUTTONS
 /obj/machinery/access_button/airlock_exterior : /obj/machinery/button/access/exterior{@OLD}
 /obj/machinery/access_button/airlock_interior : /obj/machinery/button/access/interior{@OLD}
+/obj/machinery/airlock_sensor/airlock_exterior : /obj/machinery/button/access/exterior{@OLD}
+/obj/machinery/airlock_sensor/airlock_interior : /obj/machinery/button/access/interior{@OLD}
 /obj/machinery/access_button : /obj/machinery/button/access{@OLD}
 /obj/machinery/button/remote/airlock{specialfunctions = 4} : /obj/machinery/button/alternate/door/bolts{@OLD; specialfunctions = @SKIP; desiredstate = @SKIP}
 /obj/machinery/button/remote/airlock : /obj/machinery/button/alternate/door{@OLD}
@@ -103,13 +106,14 @@
 /obj/item/chems/syringe/inaprovaline : /obj/item/chems/syringe/stabilizer{@OLD}
 /obj/item/chems/blood/empty : /obj/item/chems/ivbag{@OLD}
 /obj/item/chems/blood/@SUBTYPES : /obj/item/chems/ivbag/blood/@SUBTYPES{@OLD}
+/obj/item/defib_kit/@SUBTYPES : /obj/item/defibrillator/@SUBTYPES{@OLD}
 
 # Drinking glasses and cups
 /obj/item/chems/drinks/cup : /obj/item/chems/drinks/glass2/coffeecup{@OLD}
 /obj/item/chems/drinks/drinkingglass : /obj/item/chems/drinks/glass2/square{@OLD}
 
 # Airtight flaps
-/obj/structure/flaps/mining : /obj/structure/flaps/airtight{@OLD}
+/obj/structure/plasticflaps/mining : /obj/structure/flaps/airtight{@OLD}
 
 # Bushes
 /obj/structure/flora/ausbushes/@SUBTYPES : /obj/structure/flora/bush/@SUBTYPES
@@ -210,6 +214,7 @@
 
 # ATMOS REPATHS
 /obj/machinery/atmospherics/pipe/tank/@SUBTYPES : /obj/machinery/atmospherics/unary/tank/@SUBTYPES
+/obj/machinery/portable_atmospherics/canister/nitrous_oxide : /obj/machinery/portable_atmospherics/canister/sleeping_agent{@OLD}
 
 # MISC. ITEMS
 /obj/item/moneybag/vault : /obj/item/bag/cash/filled{@OLD}
@@ -373,6 +378,11 @@
 
 /obj/item/extinguisher/@SUBTYPES : /obj/item/chems/spray/extinguisher/@SUBTYPES{@OLD}
 /obj/item/camera_assembly : /obj/item/frame/camera/kit
+/obj/structure/ladder/up : /obj/structure/ladder
+/obj/random/mob/mouse : /obj/random/mouse
+
+/obj/structure/closet/grave/dirthole : /obj/structure/pit{@OLD}
+/obj/structure/closet/grave/@SUBTYPES : /obj/structure/pit/closed/grave{@OLD}
 
 ############
 # VAREDITS #
