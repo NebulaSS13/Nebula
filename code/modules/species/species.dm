@@ -187,10 +187,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/standing_jump_range = 2
 	var/list/maneuvers = list(/decl/maneuver/leap)
 
-	var/list/available_cultural_info =            list()
-	var/list/force_cultural_info =                list()
-	var/list/default_cultural_info =              list()
-	var/list/additional_available_cultural_info = list()
+	var/list/available_background_info =            list()
+	var/list/force_background_info =                list()
+	var/list/default_background_info =              list()
+	var/list/additional_available_background_info = list()
 	var/max_players
 
 	// Order matters, higher pain level should be higher up
@@ -355,28 +355,28 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	else if(length(available_pronouns) && !default_pronouns)
 		default_pronouns = available_pronouns[1]
 
-	for(var/token in ALL_CULTURAL_TAGS)
+	for(var/cat_type in global.using_map.get_background_categories())
 
-		var/force_val = force_cultural_info[token]
+		var/force_val = force_background_info[cat_type]
 		if(force_val)
-			default_cultural_info[token] = force_val
-			available_cultural_info[token] = list(force_val)
+			default_background_info[cat_type] = force_val
+			available_background_info[cat_type] = list(force_val)
 
-		else if(additional_available_cultural_info[token])
-			if(!available_cultural_info[token])
-				available_cultural_info[token] = list()
-			available_cultural_info[token] |= additional_available_cultural_info[token]
+		else if(additional_available_background_info[cat_type])
+			if(!available_background_info[cat_type])
+				available_background_info[cat_type] = list()
+			available_background_info[cat_type] |= additional_available_background_info[cat_type]
 
-		else if(!LAZYLEN(available_cultural_info[token]))
-			var/list/map_systems = global.using_map.available_cultural_info[token]
-			available_cultural_info[token] = map_systems.Copy()
+		else if(!LAZYLEN(available_background_info[cat_type]))
+			var/list/map_systems = global.using_map.available_background_info[cat_type]
+			available_background_info[cat_type] = map_systems.Copy()
 
-		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
-			var/list/avail_systems = available_cultural_info[token]
-			default_cultural_info[token] = avail_systems[1]
+		if(LAZYLEN(available_background_info[cat_type]) && !default_background_info[cat_type])
+			var/list/avail_systems = available_background_info[cat_type]
+			default_background_info[cat_type] = avail_systems[1]
 
-		if(!default_cultural_info[token])
-			default_cultural_info[token] = global.using_map.default_cultural_info[token]
+		if(!default_background_info[cat_type])
+			default_background_info[cat_type] = global.using_map.default_background_info[cat_type]
 
 	if(species_hud)
 		species_hud = new species_hud
@@ -776,3 +776,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/modify_preview_appearance(mob/living/human/dummy/mannequin)
 	return mannequin
+
+/decl/species/proc/get_default_background_datum_by_flag(background_flag)
+	for(var/cat_type in default_background_info)
+		var/decl/background_category/background_cat = GET_DECL(cat_type)
+		if(background_cat.background_flags & background_flag)
+			return GET_DECL(default_background_info[cat_type])

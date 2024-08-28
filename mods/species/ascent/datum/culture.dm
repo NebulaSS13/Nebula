@@ -71,7 +71,7 @@ var/global/list/gyne_architecture = list(
 	"imperial",      "independant",   "managed",     "multilateral", "neutral",       "nonaligned",    "parastatal"
 )
 
-/decl/cultural_info/culture/ascent
+/decl/background_detail/heritage/ascent
 	name = "Ascent Milieu"
 	language = /decl/language/mantid/nonvocal
 	default_language = /decl/language/mantid
@@ -84,8 +84,9 @@ var/global/list/gyne_architecture = list(
 	this stellar power are eusocial to an extent, and their society is shaped around the teeming masses \
 	of workers, soldiers, technicians and 'lesser' citizens supporting a throng of imperious and all-powerful \
 	queens."
+	uid = "heritage_ascent"
 
-/decl/cultural_info/culture/ascent/get_random_name(var/mob/M, var/gender)
+/decl/background_detail/heritage/ascent/get_random_name(var/mob/M, var/gender)
 	var/mob/living/human/H = M
 	var/lineage = create_gyne_name()
 	if(istype(H) && H.get_gyne_lineage())
@@ -95,7 +96,7 @@ var/global/list/gyne_architecture = list(
 	else
 		return "[random_id(/decl/species/mantid, 1, 99)] [lineage]"
 
-/decl/cultural_info/location/kharmaani
+/decl/background_detail/location/kharmaani
 	name = "Ascent Core"
 	language = /decl/language/mantid/nonvocal
 	description = "The Kharmaani are not terribly imaginative when it comes to naming their worlds. Core, \
@@ -103,9 +104,10 @@ var/global/list/gyne_architecture = list(
 	populace call their motherland. While the planet's orbit is thickly populated with habitats, factories \
 	and defense platforms, each belonging to a different node in the ever-shifting political web of Ascent \
 	social culture, the surface itself is a pristine monument to the Kharmaan evolutionary past."
+	uid = "location_ascent"
 	hidden = TRUE
 
-/decl/cultural_info/faction/ascent_alate
+/decl/background_detail/faction/ascent_alate
 	name = "Ascent Alate"
 	language = /decl/language/mantid/nonvocal
 	description = "The life of an alate is a difficult and frequently short one. Those who survive \
@@ -118,8 +120,9 @@ var/global/list/gyne_architecture = list(
 	retinue of their mother-gyne, where they will receive directed specialist training and an \
 	important role under the careful supervision of the gyne's AI control minds."
 	hidden = TRUE
+	uid = "faction_ascent_alate"
 
-/decl/cultural_info/faction/ascent_gyne
+/decl/background_detail/faction/ascent_gyne
 	name = "Ascent Gyne"
 	language = /decl/language/mantid/nonvocal
 	description = "By the time a gyne has survived her 'childhood' and shed the exoskeleton of an \
@@ -130,10 +133,12 @@ var/global/list/gyne_architecture = list(
 	and any number of the other critical fields tied into managing a fortress-nest of tens of thousands of \
 	individual citizens."
 	hidden = TRUE
+	uid = "faction_ascent_gyne"
 
-/decl/cultural_info/religion/kharmaani
+/decl/background_detail/religion/kharmaani
 	name = "Nest-Lineage Veneration"
 	description = "To the Kharmaani, the gyne is the embodiment of both the soul of the land she rules, and the \
 	power and prosperity of the genetic lineage she contains. The closest thing they have to spirituality is the \
 	veneration of their mother, and the protection and preservation of their worlds."
 	hidden = TRUE
+	uid = "religion_ascent"

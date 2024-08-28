@@ -107,8 +107,11 @@
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
 		if (!isnull(raw_name) && CanUseTopic(user))
 
-			var/decl/cultural_info/check = GET_DECL(pref.cultural_info[TAG_CULTURE])
-			var/new_name = check.sanitize_cultural_name(raw_name, pref.species)
+			var/decl/background_detail/check = pref.get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
+			if(!istype(check))
+				return TOPIC_NOACTION
+
+			var/new_name = check.sanitize_background_name(raw_name, pref.species)
 			if(filter_block_message(user, new_name))
 				return TOPIC_NOACTION
 

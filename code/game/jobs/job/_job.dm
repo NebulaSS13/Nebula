@@ -132,17 +132,17 @@
 
 /datum/job/proc/get_total_starting_money(var/mob/living/human/H)
 	. = 4 * rand(75, 100) * economic_power
-	// Get an average economic power for our cultures.
-	var/culture_mod =   0
-	var/culture_count = 0
-	for(var/token in H.cultural_info)
-		var/decl/cultural_info/culture = H.get_cultural_value(token)
-		if(culture && !isnull(culture.economic_power))
-			culture_count++
-			culture_mod += culture.economic_power
-	if(culture_count)
-		culture_mod /= culture_count
-	. *= culture_mod
+	// Get an average economic power for our background.
+	var/background_mod =   0
+	var/background_count = 0
+	for(var/token in H.background_info)
+		var/decl/background_detail/background = GET_DECL(H.background_info[token])
+		if(istype(background) && !isnull(background.economic_power))
+			background_count++
+			background_mod += background.economic_power
+	if(background_count)
+		background_mod /= background_count
+	. *= background_mod
 	// Apply other mods.
 	. *= global.using_map.salary_modifier
 	. *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)

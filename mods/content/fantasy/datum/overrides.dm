@@ -1,34 +1,34 @@
 /decl/species
-	available_cultural_info = list(
-		TAG_HOMEWORLD = list(
-			/decl/cultural_info/location/fantasy,
-			/decl/cultural_info/location/fantasy/mountains,
-			/decl/cultural_info/location/fantasy/steppe,
-			/decl/cultural_info/location/fantasy/woods,
-			/decl/cultural_info/location/other
+	available_background_info = list(
+		/decl/background_category/homeworld = list(
+			/decl/background_detail/location/fantasy,
+			/decl/background_detail/location/fantasy/mountains,
+			/decl/background_detail/location/fantasy/steppe,
+			/decl/background_detail/location/fantasy/woods,
+			/decl/background_detail/location/other
 		),
-		TAG_FACTION =   list(
-			/decl/cultural_info/faction/fantasy,
-			/decl/cultural_info/faction/other
+		/decl/background_category/faction =   list(
+			/decl/background_detail/faction/fantasy,
+			/decl/background_detail/faction/other
 		),
-		TAG_CULTURE =   list(
-			/decl/cultural_info/culture/fantasy,
-			/decl/cultural_info/culture/fantasy/steppe,
-			/decl/cultural_info/culture/other
+		/decl/background_category/heritage =   list(
+			/decl/background_detail/heritage/fantasy,
+			/decl/background_detail/heritage/fantasy/steppe,
+			/decl/background_detail/heritage/other
 		),
-		TAG_RELIGION =  list(
-			/decl/cultural_info/religion/ancestors,
-			/decl/cultural_info/religion/folk_deity,
-			/decl/cultural_info/religion/anima_materialism,
-			/decl/cultural_info/religion/virtuist,
-			/decl/cultural_info/religion/other
+		/decl/background_category/religion =  list(
+			/decl/background_detail/religion/ancestors,
+			/decl/background_detail/religion/folk_deity,
+			/decl/background_detail/religion/anima_materialism,
+			/decl/background_detail/religion/virtuist,
+			/decl/background_detail/religion/other
 		)
 	)
-	default_cultural_info = list(
-		TAG_HOMEWORLD = /decl/cultural_info/location/fantasy,
-		TAG_FACTION   = /decl/cultural_info/faction/fantasy,
-		TAG_CULTURE   = /decl/cultural_info/culture/fantasy,
-		TAG_RELIGION  = /decl/cultural_info/religion/other
+	default_background_info = list(
+		/decl/background_category/homeworld = /decl/background_detail/location/fantasy,
+		/decl/background_category/faction   = /decl/background_detail/faction/fantasy,
+		/decl/background_category/heritage   = /decl/background_detail/heritage/fantasy,
+		/decl/background_category/religion  = /decl/background_detail/religion/other
 	)
 
 // Rename grafadreka

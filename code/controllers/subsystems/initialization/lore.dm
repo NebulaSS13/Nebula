@@ -29,14 +29,14 @@ SUBSYSTEM_DEF(lore)
 
 /datum/controller/subsystem/lore/Initialize()
 
-	var/list/all_cultural_decls = decls_repository.get_decls_of_subtype(/decl/cultural_info)
-	for(var/ftype in all_cultural_decls)
-		var/decl/cultural_info/culture = all_cultural_decls[ftype]
-		if(culture.name && culture.category && !culture.hidden)
-			if(!tagged_info[culture.category])
-				tagged_info[culture.category] = list()
-			var/list/tag_list = tagged_info[culture.category]
-			tag_list[culture.name] = culture
+	var/list/all_backgrounds = decls_repository.get_decls_of_subtype(/decl/background_detail)
+	for(var/ftype in all_backgrounds)
+		var/decl/background_detail/background = all_backgrounds[ftype]
+		if(background.name && background.category && !background.hidden)
+			if(!tagged_info[background.category])
+				tagged_info[background.category] = list()
+			var/list/tag_list = tagged_info[background.category]
+			tag_list[background.name] = background
 
 	for(var/jobtype in subtypesof(/datum/job))
 		var/datum/job/job = jobtype

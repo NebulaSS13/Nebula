@@ -74,8 +74,8 @@
 		var/list/dudes = list()
 		for(var/mob/living/human/man in global.player_list)
 			if(man.client)
-				var/decl/cultural_info/culture = man.get_cultural_value(TAG_FACTION)
-				if(culture && prob(culture.subversive_potential))
+				var/decl/background_detail/background = man.get_background_datum_by_flag(BACKGROUND_FLAG_IDEOLOGY)
+				if(istype(background) && prob(background.subversive_potential))
 					dudes += man
 			dudes -= player.current
 		for(var/datum/objective/obj in player.objectives)

@@ -25,8 +25,8 @@
 			if(abs(holdermob.get_age() - kidmob.get_age()) > 3)
 				creche -= kid		//No creepers please, it's okay if the pool is small.
 				continue
-			var/kidhome =    kidmob.get_cultural_value(TAG_HOMEWORLD)
-			var/holderhome = holdermob.get_cultural_value(TAG_HOMEWORLD)
+			var/kidhome =    kidmob.get_background_datum_by_flag(BACKGROUND_FLAG_HOMEWORLD)
+			var/holderhome = holdermob.get_background_datum_by_flag(BACKGROUND_FLAG_HOMEWORLD)
 			if(kidhome && holderhome && kidhome != holderhome)
 				creche -= kid		//No trans-galactic shennanigans either.
 	return creche

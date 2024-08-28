@@ -33,10 +33,10 @@
 	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)
 
-	force_cultural_info = list(
-		TAG_CULTURE =   /decl/cultural_info/culture/hidden/cultist,
-		TAG_HOMEWORLD = /decl/cultural_info/location/stateless,
-		TAG_FACTION =   /decl/cultural_info/faction/other
+	force_background_info = list(
+		/decl/background_category/heritage =   /decl/background_detail/heritage/hidden/cultist,
+		/decl/background_category/homeworld = /decl/background_detail/location/stateless,
+		/decl/background_category/faction =   /decl/background_detail/faction/other
 	)
 
 	traits = list(/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS)

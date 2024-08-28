@@ -169,7 +169,7 @@
 	visible_name = species
 	var/decl/species/S = get_species_by_key(species)
 	if(istype(S))
-		var/decl/cultural_info/C = GET_DECL(S.default_cultural_info[TAG_CULTURE])
+		var/decl/background_detail/C = GET_DECL(S.default_background_info[/decl/background_category/heritage])
 		if(istype(C))
 			visible_name = C.get_random_name(pick(MALE,FEMALE))
 

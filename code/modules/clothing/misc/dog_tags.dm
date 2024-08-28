@@ -28,11 +28,11 @@
 	if(!istype(H))
 		return
 
-	var/decl/cultural_info/culture = H.get_cultural_value(TAG_HOMEWORLD)
-	var/pob = culture ? culture.name : "Unset"
+	var/decl/background_detail/background = H.get_background_datum_by_flag(BACKGROUND_FLAG_CITIZENSHIP)
+	var/pob = background ? background.name : "Unset"
 
-	culture = H.get_cultural_value(TAG_RELIGION)
-	var/religion = culture ? culture.name : "Unset"
+	background = H.get_background_datum_by_flag(BACKGROUND_FLAG_RELIGION)
+	var/religion = background ? background.name : "Unset"
 
 	owner_rank = H.char_rank && H.char_rank.name
 	owner_name = H.real_name

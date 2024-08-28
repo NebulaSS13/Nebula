@@ -19,8 +19,8 @@
 	if(!istype(H))
 		return
 
-	var/decl/cultural_info/culture = H.get_cultural_value(TAG_HOMEWORLD)
-	var/pob = culture ? culture.name : "Unset"
+	var/decl/background_detail/background = H.get_background_datum_by_flag(BACKGROUND_FLAG_CITIZENSHIP)
+	var/pob = background ? background.name : "Unset"
 
 	var/fingerprint = H.get_full_print(ignore_blockers = TRUE) || "N/A"
 	var/decl/pronouns/pronouns = H.get_pronouns(ignore_coverings = TRUE)

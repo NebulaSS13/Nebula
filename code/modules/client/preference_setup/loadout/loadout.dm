@@ -66,8 +66,8 @@
 
 	if(faction_restricted)
 		var/has_correct_faction = FALSE
-		for(var/token in ALL_CULTURAL_TAGS)
-			if(pref.cultural_info[token] in faction_restricted)
+		for(var/cat_type in global.using_map.get_background_categories())
+			if(pref.background_info[cat_type] in faction_restricted)
 				has_correct_faction = TRUE
 				break
 		if(!has_correct_faction)
@@ -419,7 +419,7 @@
 	var/list/gear_tweaks = list()
 	/// Whether or not this equipment should replace pre-existing equipment.
 	var/replace_equipped = TRUE
-	/// List of types of cultural datums that will allow this loadout option.
+	/// List of types of background datums that will allow this loadout option.
 	var/list/faction_restricted
 	/// Species name to check the whitelist for.
 	var/whitelisted

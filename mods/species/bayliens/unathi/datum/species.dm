@@ -104,9 +104,9 @@
 
 /decl/species/unathi/Initialize()
 	. = ..()
-	LAZYINITLIST(available_cultural_info)
-	LAZYDISTINCTADD(available_cultural_info[TAG_CULTURE], /decl/cultural_info/culture/lizard)
-	LAZYSET(default_cultural_info, TAG_CULTURE, /decl/cultural_info/culture/lizard)
+	LAZYINITLIST(available_background_info)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/lizard)
+	LAZYSET(default_background_info, /decl/background_category/heritage, /decl/background_detail/heritage/lizard)
 
 /decl/species/unathi/equip_survival_gear(var/mob/living/human/H)
 	..()

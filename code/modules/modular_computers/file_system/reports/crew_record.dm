@@ -42,12 +42,12 @@ var/global/arrest_security_status =  "Arrest"
 	if(crewmember)
 		formal_name = crewmember.real_name
 		if(crewmember.client && crewmember.client.prefs)
-			for(var/culturetag in crewmember.client.prefs.cultural_info)
-				var/decl/cultural_info/culture = GET_DECL(crewmember.client.prefs.cultural_info[culturetag])
+			for(var/token in crewmember.client.prefs.background_info)
+				var/decl/background_detail/background = GET_DECL(crewmember.client.prefs.background_info[token])
 				if(crewmember.char_rank && crewmember.char_rank.name_short)
-					formal_name = "[formal_name][culture.get_formal_name_suffix()]"
+					formal_name = "[formal_name][background.get_formal_name_suffix()]"
 				else
-					formal_name = "[culture.get_formal_name_prefix()][formal_name][culture.get_formal_name_suffix()]"
+					formal_name = "[background.get_formal_name_prefix()][formal_name][background.get_formal_name_suffix()]"
 
 	// Generic record
 	set_name(crewmember ? crewmember.real_name : "Unset")
@@ -100,19 +100,19 @@ var/global/arrest_security_status =  "Arrest"
 			employment_record = html_decode(gen_record)
 		if(crewmember.client && crewmember.client.prefs)
 			var/list/qualifications
-			for(var/culturetag in crewmember.client.prefs.cultural_info)
-				var/decl/cultural_info/culture = GET_DECL(crewmember.client.prefs.cultural_info[culturetag])
-				var/extra_note = culture.get_qualifications()
+			for(var/token in crewmember.client.prefs.background_info)
+				var/decl/background_detail/background = GET_DECL(crewmember.client.prefs.background_info[token])
+				var/extra_note = background.get_qualifications()
 				if(extra_note)
 					LAZYADD(qualifications, extra_note)
 			if(LAZYLEN(qualifications))
 				employment_record = "[employment_record ? "[employment_record]\[br\]" : ""][jointext(qualifications, "\[br\]>")]"
 	set_employment_record(employment_record)
 
-	// Misc cultural info.
-	set_residence(crewmember ? html_decode(crewmember.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
-	set_faction(crewmember ?   html_decode(crewmember.get_cultural_value(TAG_FACTION)) :   "Unset")
-	set_religion(crewmember ?  html_decode(crewmember.get_cultural_value(TAG_RELIGION)) :  "Unset")
+	// Misc background info.
+	set_residence(crewmember ? html_decode(crewmember.get_background_datum_by_flag(BACKGROUND_FLAG_RESIDENCE)) : "Unset")
+	set_faction(crewmember ?   html_decode(crewmember.get_background_datum_by_flag(BACKGROUND_FLAG_IDEOLOGY))    : "Unset")
+	set_religion(crewmember ?  html_decode(crewmember.get_background_datum_by_flag(BACKGROUND_FLAG_RELIGION))    : "Unset")
 
 	if(crewmember)
 		var/skills = list()

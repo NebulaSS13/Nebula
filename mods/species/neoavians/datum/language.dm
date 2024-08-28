@@ -45,7 +45,7 @@
 /decl/language/neoavian/get_random_name(gender)
 	return ..(gender, 2, 4, 1.5)
 
-/decl/cultural_info/culture/neoavian
+/decl/background_detail/heritage/neoavian
 	name = "Neo-Avian Milieu"
 	description = "Neo-avians form a loose coalition of family and flock groupings, and are usually in an extreme minority in human settlements. \
 	They tend to cope poorly with confined, crowded spaces like human habs, and often make their homes in hab domes or other spacious facilities."
@@ -55,9 +55,11 @@
 		/decl/language/neoavian,
 		/decl/language/sign
 	)
+	uid = "heritage_bird_milieu"
 
-/decl/cultural_info/culture/neoavian/saurian
+/decl/background_detail/heritage/neoavian/saurian
 	name = "Saurian Revivalism"
 	description = "A minority of neo-avians, particularly those subject to genetic modification during the initial uplift of their species, \
 	embrace the dinosaur heritage shared by all avians in the form of scales, sharp teeth, slender tails, and other clear visible features of \
 	their long-extinct forebears. Many neo-avians consider them a fringe of self-important wannabes, but the movement is still going strong."
+	uid = "heritage_bird_saurian"

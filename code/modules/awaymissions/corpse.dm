@@ -94,9 +94,9 @@
 		else
 			M.randomize_eye_color()
 
-	var/decl/cultural_info/culture = M.get_cultural_value(TAG_CULTURE)
-	if(culture && CORPSE_SPAWNER_RANDOM_NAME & spawn_flags)
-		M.SetName(culture.get_random_name(M.gender))
+	var/decl/background_detail/background = M.get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
+	if(background && CORPSE_SPAWNER_RANDOM_NAME & spawn_flags)
+		M.SetName(background.get_random_name(M.gender))
 	else
 		M.SetName(name)
 	M.real_name = M.name
