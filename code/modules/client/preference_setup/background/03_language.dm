@@ -73,16 +73,16 @@
 	if(!user)
 		return
 
-	for(var/thing in pref.cultural_info)
-		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[thing])
-		if(istype(culture))
-			var/list/langs = culture.get_spoken_languages()
+	for(var/thing in pref.background_info)
+		var/decl/background_detail/background = GET_DECL(pref.background_info[thing])
+		if(istype(background))
+			var/list/langs = background.get_spoken_languages()
 			if(LAZYLEN(langs))
 				for(var/checklang in langs)
 					free_languages[checklang] =    TRUE
 					allowed_languages[checklang] = TRUE
-			if(LAZYLEN(culture.secondary_langs))
-				for(var/checklang in culture.secondary_langs)
+			if(LAZYLEN(background.secondary_langs))
+				for(var/checklang in background.secondary_langs)
 					allowed_languages[checklang] = TRUE
 
 	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
@@ -91,8 +91,8 @@
 		// Abstract, forbidden and restricted languages aren't supposed to be available to anyone in chargen.
 		if(lang.flags & (LANG_FLAG_FORBIDDEN|LANG_FLAG_RESTRICTED))
 			continue
-		// Admin don't need to worry about whitelisted checks or culture datums, give them everything.
-		// Non-whitelisted languages should be handled by culture datums.
+		// Admin don't need to worry about whitelisted checks or background datums, give them everything.
+		// Non-whitelisted languages should be handled by background datums.
 		if(user.has_admin_rights() || ((lang.flags & LANG_FLAG_WHITELISTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
 

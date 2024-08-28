@@ -30,8 +30,8 @@
 			if(H.species.get_root_species_name() != SPECIES_MANTID_ALATE)
 				H.set_species(SPECIES_MANTID_ALATE)
 			H.set_gender(MALE)
-		var/decl/cultural_info/culture/ascent/ascent_culture = GET_DECL(/decl/cultural_info/culture/ascent)
-		H.real_name = ascent_culture.get_random_name(H, H.gender)
+		var/decl/background_detail/heritage/ascent/background = GET_DECL(/decl/background_detail/heritage/ascent)
+		H.real_name = background.get_random_name(H, H.gender)
 		H.name = H.real_name
 
 /decl/special_role/hunter/equip_role(var/mob/living/human/player)

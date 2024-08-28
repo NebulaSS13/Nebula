@@ -56,11 +56,11 @@
 		/decl/natural_attack/stomp/weak
 	)
 
-	available_cultural_info = list(
-		TAG_CULTURE = list(
-			/decl/cultural_info/culture/neoavian,
-			/decl/cultural_info/culture/neoavian/saurian,
-			/decl/cultural_info/culture/other
+	available_background_info = list(
+		/decl/background_category/heritage = list(
+			/decl/background_detail/heritage/neoavian,
+			/decl/background_detail/heritage/neoavian/saurian,
+			/decl/background_detail/heritage/other
 		)
 	)
 

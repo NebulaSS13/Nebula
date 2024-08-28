@@ -76,11 +76,11 @@
 		/decl/natural_attack/bite/sharp
 	)
 
-	force_cultural_info = list(
-		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
-		TAG_HOMEWORLD = /decl/cultural_info/location/kharmaani,
-		TAG_FACTION =   /decl/cultural_info/faction/ascent_alate,
-		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
+	force_background_info = list(
+		/decl/background_category/heritage =   /decl/background_detail/heritage/ascent,
+		/decl/background_category/homeworld = /decl/background_detail/location/kharmaani,
+		/decl/background_category/faction =   /decl/background_detail/faction/ascent_alate,
+		/decl/background_category/religion =  /decl/background_detail/religion/kharmaani
 	)
 
 	pain_emotes_with_pain_level = list(
@@ -112,9 +112,9 @@
 	push_flags =              ALLMOBS
 	swap_flags =              ALLMOBS
 
-	force_cultural_info = list(
-		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
-		TAG_HOMEWORLD = /decl/cultural_info/location/kharmaani,
-		TAG_FACTION =   /decl/cultural_info/faction/ascent_gyne,
-		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
+	force_background_info = list(
+		/decl/background_category/heritage =   /decl/background_detail/heritage/ascent,
+		/decl/background_category/homeworld = /decl/background_detail/location/kharmaani,
+		/decl/background_category/faction =   /decl/background_detail/faction/ascent_gyne,
+		/decl/background_category/religion =  /decl/background_detail/religion/kharmaani
 	)

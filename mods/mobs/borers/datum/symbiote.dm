@@ -1,12 +1,13 @@
 var/global/list/symbiote_starting_points = list()
 
-/decl/cultural_info/culture/symbiotic
+/decl/background_detail/faction/symbiotic
 	name = "Symbiote Host"
 	description = "Your culture has always welcomed a form of brain-slug called cortical borers into their bodies, \
 	and your upbringing taught that this was a normal and beneficial state of affairs. Taking this background will \
 	allow symbiote players to join as your mind-partner. Symbiotes can secrete beneficial chemicals, translate languages \
 	and are rendered docile by sugar. Unlike feral cortical borers, they cannot take control of your body or cause brain damage."
 	economic_power = 0.8
+	uid = "heritage_symbiote"
 	var/matches_to_role = /datum/job/symbiote
 
 /datum/job/symbiote
@@ -110,8 +111,8 @@ var/global/list/symbiote_starting_points = list()
 		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 		if(BP_IS_PROSTHETIC(head) || BP_IS_CRYSTAL(head) || head.has_growths())
 			continue
-		var/decl/cultural_info/culture/symbiotic/culture = H.get_cultural_value(TAG_CULTURE)
-		if(!istype(culture) || culture.matches_to_role != type)
+		var/decl/background_detail/faction/symbiotic/background = H.get_background_datum_by_flag(BACKGROUND_FLAG_IDEOLOGY)
+		if(!istype(background) || background.matches_to_role != type)
 			continue
 		. += H
 		if(just_checking)

@@ -39,8 +39,8 @@
 		/decl/pronouns,
 		/decl/pronouns/neuter
 	)
-	available_cultural_info = list(
-		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)
+	available_background_info = list(
+		/decl/background_category/heritage = list(/decl/background_detail/heritage/synthetic)
 	)
 
 	exertion_effect_chance = 10

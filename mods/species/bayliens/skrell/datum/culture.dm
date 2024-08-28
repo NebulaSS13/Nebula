@@ -1,4 +1,4 @@
-/decl/cultural_info/culture/skrell
+/decl/background_detail/heritage/skrell
 	name = "Qerr-Katish"
 	description = "Considered as the leaders of Skrellkind, the Qerr-Katish are the face \
 		and soul of skrellian society. Managers, diplomats, lawyers, they are notably the \
@@ -19,8 +19,9 @@
 		/decl/language/human/common,
 		/decl/language/sign
 	)
+	uid = "heritage_skrell_qerr"
 
-/decl/cultural_info/culture/skrell/caste_malish
+/decl/background_detail/heritage/skrell/caste_malish
 	name = "Malish-Katish"
 	description = "If the Qerr-Katish are the face of Skrellkind, the Malish-Katish are \
 		its brain. Scientists of all sorts, they are the ones who allow skrellian society \
@@ -34,8 +35,9 @@
 		black pants with possible jewelry for decoration. Their skin is generally pale \
 		green, sky blue or pale yellow. They have shorter headtails."
 	economic_power = 1.3
+	uid = "heritage_skrell_malish"
 
-/decl/cultural_info/culture/skrell/caste_kanin
+/decl/background_detail/heritage/skrell/caste_kanin
 	name = "Kanin-Katish"
 	description = "The main workforce of the Skrell. While their population growth has \
 		decreased over the millennia of technological progress they are still one of the most \
@@ -53,8 +55,9 @@
 		of any kind. Their skin is generally red, orange, pale yellow, dark orange or black. \
 		They have very short headtails."
 	economic_power = 1.2
+	uid = "heritage_skrell_kanin"
 
-/decl/cultural_info/culture/skrell/caste_talum
+/decl/background_detail/heritage/skrell/caste_talum
 	name = "Talum-Katish"
 	description = "Considering the Skrells' emphasis on functionality and practicality, one \
 		would be mistaken to think they do not consider arts much. This very important sector \
@@ -75,8 +78,9 @@
 		headtails are a middle ground between the shorter headtails of the Malish and the extremely \
 		long headtails of the Qerr, and are an important element of Talum self-expression."
 	economic_power = 1.3
+	uid = "heritage_skrell_talum"
 
-/decl/cultural_info/culture/skrell/caste_raskinta
+/decl/background_detail/heritage/skrell/caste_raskinta
 	name = "Raskinta-Katish"
 	description = "Rarely seen outside the skrellian society, the Raskinta-Katish are however \
 		recognised and respected by their entire species, for they are the ones who ensure the \
@@ -98,8 +102,9 @@
 		of a headtail is not seen as disfiguring, especially if it was lost in battle, and while many \
 		of them choose to procure repair surgeries, some do not."
 	economic_power = 1.2
+	uid = "heritage_skrell_raskinta"
 
-/decl/cultural_info/culture/skrell/caste_ue
+/decl/background_detail/heritage/skrell/caste_ue
 	name = "Ue-Katish"
 	description = "While not technically a ‘Caste’ by itself, the Ue-Katish make up only an incredibly \
 	small but growing fraction of the total Skrellian population. Born to unions of Skrell of two \
@@ -114,3 +119,4 @@
 	genetic mutation. This can greatly limit their ability to pass as another caste in society at times, \
 	as having two headtails of different lengths is a dead-giveaway of an Ue-Katish."
 	economic_power = 0.8
+	uid = "heritage_skrell_ue"

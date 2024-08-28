@@ -1,26 +1,29 @@
-/decl/cultural_info/location/fantasy
+/decl/background_detail/location/fantasy
 	name = "the Downlands"
 	description = "The 'downlands' are a vaguely defined swathe of lush, heavily forested terrain in the middle \
 		of the continent. The region was historically the territory of the now-defunct Imperial Aegis, and is now \
 		largely under the control of the inheritor Splinter Kingdoms. Banditry, wild animal attacks, and oppressive \
 		local powers are rife. The Queens' Road, once a continent-spanning marvel, is now a rotting shadow of itself, \
 		and overgrown, decaying ruins from the time of the Aegis are scattered across the region."
+	uid = "location_fantasy_downlands"
 
-/decl/cultural_info/location/fantasy/mountains
+/decl/background_detail/location/fantasy/mountains
 	name = "Nine Mothers"
 	description = "The Nine Mothers form an enormous, frigid mountain range that runs north-southeast across the \
 		continent, bracketing the downloands to the east and unknown territories to the west. The eastern faces of \
 		the Mothers slope down into tundra that abuts the steppe territories known as the Grass Ocean. The range's \
 		name originates from some of the oldest known hnoll folklore, concerning the first matriarches."
+	uid = "location_fantasy_ninemothers"
 
-/decl/cultural_info/location/fantasy/steppe
+/decl/background_detail/location/fantasy/steppe
 	name = "the Grass Ocean"
 	description = "The Grass Ocean is a massive expanse of open steppe that has been home to hnoll cultures since time \
 		immemorial. The lack of resources and large game, scarcity of potable water, and general exposure to the elements \
 		breed hardy and self-reliant people. They are bracketed to the west by the Nine Mothers, and to the east by the \
 		downlands."
+	uid = "location_fantasy_steppe"
 
-/decl/cultural_info/location/fantasy/woods
+/decl/background_detail/location/fantasy/woods
 	name = "the Deepwood" // The Gloaming Wood is taken by Pathfinder and some Tasmanian crime show :(
 	description = "A number of regions within and around the downlands resisted the Imperial Aegis's efforts at colonization, \
 		repulsing the legions with whatever tools they could. The largest of these territories is known colloquially as the \
@@ -28,6 +31,7 @@
 		in the Deepwood are a scattered handful of hamlets around the edges, and even they do not commonly explore any deeper \
 		into the woods. Whatever art was used to protect the Deepwood makes it a highly oppressive and unfriendly place to \
 		interlopers, and wild tales of spirits, monsters, corrupt anima, and stolen babies abound."
+	uid = "location_fantasy_deepwood"
 
 // TODO
 // - Equatorial/tropical territories southeast of the downlands

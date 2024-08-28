@@ -4,7 +4,7 @@
 /datum/event/trivial_news/announce()
 	var/author = "Editor Mike Hammers"
 	var/channel = "The Gibson Gazette"
-	var/decl/cultural_info/location/affected_dest = GET_DECL(pick(global.using_map.available_cultural_info[TAG_HOMEWORLD]))
+	var/decl/background_detail/location/affected_dest = global.using_map.get_random_location()
 	if(!istype(affected_dest))
 		return
 	var/body = pick(

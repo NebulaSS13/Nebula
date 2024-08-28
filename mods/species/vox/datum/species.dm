@@ -97,24 +97,24 @@
 		/decl/bodytype/vox/servitor/alchemist,
 	)
 
-	available_cultural_info = list(
-		TAG_CULTURE =   list(
-			/decl/cultural_info/culture/vox,
-			/decl/cultural_info/culture/vox/salvager,
-			/decl/cultural_info/culture/vox/raider
+	available_background_info = list(
+		/decl/background_category/heritage =   list(
+			/decl/background_detail/heritage/vox,
+			/decl/background_detail/heritage/vox/salvager,
+			/decl/background_detail/heritage/vox/raider
 		),
-		TAG_HOMEWORLD = list(
-			/decl/cultural_info/location/vox,
-			/decl/cultural_info/location/vox/shroud,
-			/decl/cultural_info/location/vox/ship
+		/decl/background_category/homeworld = list(
+			/decl/background_detail/location/vox,
+			/decl/background_detail/location/vox/shroud,
+			/decl/background_detail/location/vox/ship
 		),
-		TAG_FACTION = list(
-			/decl/cultural_info/faction/vox,
-			/decl/cultural_info/faction/vox/raider,
-			/decl/cultural_info/faction/vox/apex
+		/decl/background_category/faction = list(
+			/decl/background_detail/faction/vox,
+			/decl/background_detail/faction/vox/raider,
+			/decl/background_detail/faction/vox/apex
 		),
-		TAG_RELIGION =  list(
-			/decl/cultural_info/religion/vox
+		/decl/background_category/religion =  list(
+			/decl/background_detail/religion/vox
 		)
 	)
 

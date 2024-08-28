@@ -1,7 +1,8 @@
-/decl/cultural_info
-	abstract_type = /decl/cultural_info
+/decl/background_detail
+	abstract_type = /decl/background_detail
+	decl_flags = DECL_FLAG_MANDATORY_UID
+
 	var/name
-	var/desc_type
 	var/description
 	var/economic_power = 1
 	var/language
@@ -15,7 +16,12 @@
 	var/hidden_from_codex
 	var/list/qualifications
 
-/decl/cultural_info/Initialize()
+/decl/background_detail/validate()
+	. = ..()
+	if(!ispath(category, /decl/background_category))
+		. += "invalid or null category: '[category || "NULL"]'"
+
+/decl/background_detail/Initialize()
 
 	. = ..()
 
@@ -40,7 +46,7 @@
 			secondary_langs -= additional_langs
 		UNSETEMPTY(secondary_langs)
 
-/decl/cultural_info/proc/get_random_name(var/mob/M, var/gender)
+/decl/background_detail/proc/get_random_name(var/mob/M, var/gender)
 	var/decl/language/_language
 	if(name_language)
 		_language = GET_DECL(name_language)
@@ -52,20 +58,20 @@
 		return _language.get_random_name(gender)
 	return capitalize(pick(gender==FEMALE ? global.using_map.first_names_female : global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
-/decl/cultural_info/proc/sanitize_cultural_name(new_name)
+/decl/background_detail/proc/sanitize_background_name(new_name)
 	return sanitize_name(new_name)
 
-/decl/cultural_info/proc/get_description(var/verbose = TRUE)
+/decl/background_detail/proc/get_description(var/verbose = TRUE)
 	LAZYSET(., "details", jointext(get_text_details(), "<br>"))
 	if(verbose || length(get_text_body()) <= 200)
 		LAZYSET(., "body", get_text_body())
 	else
 		LAZYSET(., "body", "[copytext(get_text_body(), 1, 194)] <small>\[...\]</small>")
 
-/decl/cultural_info/proc/get_text_body()
+/decl/background_detail/proc/get_text_body()
 	return description
 
-/decl/cultural_info/proc/get_text_details()
+/decl/background_detail/proc/get_text_details()
 	. = list()
 	var/list/spoken_langs = get_spoken_languages()
 	if(LAZYLEN(spoken_langs))
@@ -83,20 +89,20 @@
 	if(!isnull(economic_power))
 		. += "<b>Economic power:</b> [round(100 * economic_power)]%"
 
-/decl/cultural_info/proc/get_spoken_languages()
+/decl/background_detail/proc/get_spoken_languages()
 	. = list()
 	if(language)                  . |= language
 	if(default_language)          . |= default_language
 	if(LAZYLEN(additional_langs)) . |= additional_langs
 
-/decl/cultural_info/proc/get_formal_name_suffix()
+/decl/background_detail/proc/get_formal_name_suffix()
 	return
 
-/decl/cultural_info/proc/get_formal_name_prefix()
+/decl/background_detail/proc/get_formal_name_prefix()
 	return
 
-/decl/cultural_info/proc/get_qualifications()
+/decl/background_detail/proc/get_qualifications()
 	return qualifications
 
-/decl/cultural_info/proc/get_possible_personal_goals(var/department_types)
+/decl/background_detail/proc/get_possible_personal_goals(var/department_types)
 	return

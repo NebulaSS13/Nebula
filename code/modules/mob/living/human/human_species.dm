@@ -24,9 +24,9 @@
 
 /mob/living/human/corpse/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance, obj/abstract/landmark/corpse/corpse)
 	. = ..(mapload, species_name, supplied_appearance) // do not pass the corpse landmark
-	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
-	if(culture)
-		var/newname = culture.get_random_name(src, gender, species.name)
+	var/decl/background_detail/background = get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
+	if(background)
+		var/newname = background.get_random_name(src, gender, species.name)
 		if(newname && newname != name)
 			real_name = newname
 			SetName(newname)

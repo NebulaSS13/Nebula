@@ -24,17 +24,17 @@
 		/decl/natural_attack/bite/sharp/drake,
 		/decl/natural_attack/claws/strong/drake
 	)
-	available_cultural_info = list(
-		TAG_CULTURE   = list(/decl/cultural_info/culture/grafadreka),
-		TAG_HOMEWORLD = list(/decl/cultural_info/location/grafadreka),
-		TAG_FACTION   = list(/decl/cultural_info/faction/grafadreka),
-		TAG_RELIGION  = list(/decl/cultural_info/religion/grafadreka)
+	available_background_info = list(
+		/decl/background_category/heritage   = list(/decl/background_detail/heritage/grafadreka),
+		/decl/background_category/homeworld = list(/decl/background_detail/location/grafadreka),
+		/decl/background_category/faction   = list(/decl/background_detail/faction/grafadreka),
+		/decl/background_category/religion  = list(/decl/background_detail/religion/grafadreka)
 	)
-	force_cultural_info = list(
-		TAG_CULTURE   = /decl/cultural_info/culture/grafadreka,
-		TAG_HOMEWORLD = /decl/cultural_info/location/grafadreka,
-		TAG_FACTION   = /decl/cultural_info/faction/grafadreka,
-		TAG_RELIGION  = /decl/cultural_info/religion/grafadreka
+	force_background_info = list(
+		/decl/background_category/heritage   = /decl/background_detail/heritage/grafadreka,
+		/decl/background_category/homeworld = /decl/background_detail/location/grafadreka,
+		/decl/background_category/faction   = /decl/background_detail/faction/grafadreka,
+		/decl/background_category/religion  = /decl/background_detail/religion/grafadreka
 	)
 	species_hud = /datum/hud_data/grafadreka
 	inherent_verbs = list(

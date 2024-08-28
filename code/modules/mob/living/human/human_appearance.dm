@@ -33,7 +33,7 @@
 	species.handle_pre_spawn(src)
 	apply_species_appearance()
 	apply_bodytype_appearance()
-	apply_species_cultural_info()
+	apply_species_background_info()
 	species.handle_post_spawn(src)
 	reset_blood()
 	full_prosthetic = null

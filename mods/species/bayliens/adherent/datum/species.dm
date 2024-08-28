@@ -53,20 +53,20 @@
 	flesh_color = "#90edeb"
 	species_hud = /datum/hud_data/adherent
 
-	available_cultural_info = list(
-		TAG_CULTURE = list(
-			/decl/cultural_info/culture/adherent
+	available_background_info = list(
+		/decl/background_category/heritage = list(
+			/decl/background_detail/heritage/adherent
 		),
-		TAG_HOMEWORLD = list(
-			/decl/cultural_info/location/adherent,
-			/decl/cultural_info/location/adherent/monument
+		/decl/background_category/homeworld = list(
+			/decl/background_detail/location/adherent,
+			/decl/background_detail/location/adherent/monument
 		),
-		TAG_FACTION = list(
-			/decl/cultural_info/faction/adherent,
-			/decl/cultural_info/faction/adherent/loyalists,
-			/decl/cultural_info/faction/adherent/separatists
+		/decl/background_category/faction = list(
+			/decl/background_detail/faction/adherent,
+			/decl/background_detail/faction/adherent/loyalists,
+			/decl/background_detail/faction/adherent/separatists
 		),
-		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
+		/decl/background_category/religion =  list(/decl/background_detail/religion/other)
 	)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake

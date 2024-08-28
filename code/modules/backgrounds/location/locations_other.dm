@@ -1,10 +1,11 @@
-/decl/cultural_info/location/stateless
+/decl/background_detail/location/stateless
 	name = "Stateless"
 	description = "Sometimes people fall through the cracks... You have nobody to speak on your behalf."
 	economic_power = 0
 	ruling_body = "None"
+	uid = "location_stateless"
 
-/decl/cultural_info/location/other
+/decl/background_detail/location/other
 	name = "Other System"
 	description = "The last time someone tried to do a comprehensive encyclopaedia of the known galaxy, their \
 	positronic processor deleted itself rather than face up to the task. You are from nowhere in particular - a \
@@ -13,8 +14,9 @@
 	capital = "Various"
 	economic_power = 1
 	ruling_body = "Various"
+	uid = "location_other"
 
-/decl/cultural_info/location/deep_space
+/decl/background_detail/location/deep_space
 	name = "Deep Space"
 	description = "You came from the void between the stars."
 	language =         null
@@ -24,3 +26,4 @@
 	capital =          null
 	economic_power =   null
 	ruling_body =      null
+	uid = "location_deep_space"

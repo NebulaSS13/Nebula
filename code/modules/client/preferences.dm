@@ -364,9 +364,9 @@ var/global/list/time_prefs_fixed = list()
 		character.change_species(species, new_bodytype)
 
 	if(be_random_name)
-		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
-		if(culture)
-			real_name = culture.get_random_name(gender)
+		var/decl/background_detail/background = get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
+		if(background)
+			real_name = background.get_random_name(gender)
 
 	if(get_config_value(/decl/config/toggle/humans_need_surnames))
 		var/firstspace = findtext(real_name, " ")
@@ -439,8 +439,8 @@ var/global/list/time_prefs_fixed = list()
 	if(is_preview_copy)
 		return
 
-	for(var/token in cultural_info)
-		character.set_cultural_value(token, cultural_info[token], defer_language_update = TRUE)
+	for(var/token in background_info)
+		character.set_background_value(token, background_info[token], defer_language_update = TRUE)
 	character.update_languages()
 	for(var/lang in alternate_languages)
 		character.add_language(lang)
