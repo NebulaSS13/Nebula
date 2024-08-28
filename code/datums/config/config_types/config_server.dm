@@ -15,6 +15,7 @@
 		/decl/config/num/max_maint_drones,
 		/decl/config/num/drone_build_time,
 		/decl/config/num/max_character_traits,
+		/decl/config/num/max_alternate_languages,
 		/decl/config/text/irc_bot_host,
 		/decl/config/text/main_irc,
 		/decl/config/text/admin_irc,
@@ -163,6 +164,11 @@
 	uid = "max_character_traits"
 	default_value = 5
 	desc = "Remove the # to define a different cap for trait points in chargen."
+
+/decl/config/num/max_alternate_languages
+	uid = "max_alternate_languages"
+	default_value = 3
+	desc = "Remove the # to define a different maximum for alternate language selection in chargen."
 
 /decl/config/text/irc_bot_host
 	uid = "irc_bot_host"
