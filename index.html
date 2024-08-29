@@ -29,8 +29,8 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(256 modules,
-    111/4512 macros, 2.5%)</aside></h3>
+<aside>(257 modules,
+    111/4514 macros, 2.5%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -326,6 +326,7 @@ Thanks to forum_account for saving the day, the library can be found
     <li><a href="code/modules/overmap/_defines.html" title="code&#x2F;modules&#x2F;overmap&#x2F;_defines">_defines</a></li>
     <li><span class="no-substance">exoplanets&#x2F;</span><a href="code/modules/overmap/exoplanets/_exoplanet.html" title="code&#x2F;modules&#x2F;overmap&#x2F;exoplanets&#x2F;_exoplanet">_exoplanet</a></li>
     <li><span class="no-substance">planetoids&#x2F;</span><a href="code/modules/overmap/planetoids/_planetoids.html" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids">_planetoids</a></li>
+    <li><span class="no-substance">ships&#x2F;</span><a href="code/modules/overmap/ships/landable.html" title="code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;landable">landable</a></li>
     </ul></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;paperwork">paperwork</span><ul class="index-tree">
     <li><a href="code/modules/paperwork/faxmachine.html" title="code&#x2F;modules&#x2F;paperwork&#x2F;faxmachine">faxmachine</a></li>
@@ -415,7 +416,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(266 detailed/515 documented/20505 total, 2.5%)</aside></h3>
+<aside>(268 detailed/518 documented/20515 total, 2.5%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
@@ -811,6 +812,7 @@ Called in world.dm when the server starts.</li>
     </ul></li>
     <li class="has-children"><a href="obj.html" title="&#x2F;obj">obj</a><ul class="index-tree">
     <li class="has-children"><span title="&#x2F;obj&#x2F;abstract">abstract</span><ul class="index-tree">
+    <li><a href="obj/abstract/docking_port_spawner.html" title="&#x2F;obj&#x2F;abstract&#x2F;docking_port_spawner">docking_port_spawner</a></li>
     <li class="has-children"><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark">landmark</span><ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;allowed_leak">allowed_leak</span> - Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.</li>
     <li><span class="no-substance">corpse&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;corpse&#x2F;lar_maria">lar_maria</span> - crew and prisoners</li>
@@ -819,6 +821,9 @@ Called in world.dm when the server starts.</li>
     </ul></li>
     </ul></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;level_data_spawner">level_data_spawner</span> - Mapper helper for spawning a specific level_data datum with the map as it gets loaded</li>
+    <li class="has-children"><a href="obj/abstract/local_dock.html" title="&#x2F;obj&#x2F;abstract&#x2F;local_dock">local_dock</a> - Cannot actually be landed at. Used for alignment when landing or docking, however.<ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;local_dock&#x2F;automatic">automatic</span> - This subtype automatically adds itself to its shuttle based on the shuttle_tag var.</li>
+    </ul></li>
     <li><a href="obj/abstract/map_data.html" title="&#x2F;obj&#x2F;abstract&#x2F;map_data">map_data</a></li>
     </ul></li>
     <li><a href="obj/compass_holder.html" title="&#x2F;obj&#x2F;compass_holder">compass_holder</a></li>
@@ -1116,7 +1121,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/0ebbfe562435b9f7c2baefa6f26ea7982a5b3fc9">0ebbfe5</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/ff3090a21650833eb5b1e9321030ed2ef3b3aa1f">ff3090a</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
