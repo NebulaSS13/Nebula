@@ -4850,7 +4850,7 @@
 	},
 /obj/machinery/button/access/interior{
 	id_tag = "Harpoon_dock1_airlock";
-	pixel_y = 25
+	pixel_y = 24
 	},
 /turf/floor/plating,
 /area/errant_pisces/aft_hallway)
@@ -4896,18 +4896,18 @@
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/button/access/exterior{
+	id_tag = "Harpoon_dock1_airlock";
+	pixel_y = -22;
+	dir = 1
+	},
 /turf/floor/plating,
 /area/errant_pisces/aft_hallway)
 "ni" = (
-/obj/machinery/button/access/exterior{
-	id_tag = "Harpoon_dock1_airlock";
-	pixel_x = -25;
-	pixel_y = -25
+/obj/effect/shuttle_landmark/automatic{
+	dir = 8
 	},
-/turf/floor/plating,
-/area/space)
-"nj" = (
-/turf/floor/plating,
+/turf/space,
 /area/space)
 "nk" = (
 /turf/wall/r_wall,
@@ -5409,7 +5409,7 @@
 	},
 /obj/machinery/button/access/interior{
 	id_tag = "Harpoon_dock2_airlock";
-	pixel_y = -25;
+	pixel_y = -22;
 	dir = 1
 	},
 /turf/floor/plating,
@@ -5456,16 +5456,13 @@
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
-/turf/floor/plating,
-/area/errant_pisces/aft_hallway)
-"oo" = (
 /obj/machinery/button/access/exterior{
 	id_tag = "Harpoon_dock2_airlock";
-	pixel_x = -25;
-	pixel_y = -25
+	pixel_y = -22;
+	dir = 1
 	},
 /turf/floor/plating,
-/area/space)
+/area/errant_pisces/aft_hallway)
 "op" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable/green{
@@ -33833,12 +33830,12 @@ aa
 aa
 aa
 aa
-bc
+aa
 ni
-bc
-bc
-oo
-bc
+aa
+aa
+ni
+aa
 aa
 aa
 aa
@@ -34035,12 +34032,12 @@ aa
 aa
 aa
 aa
-bc
-nj
-bc
-bc
-nj
-bc
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -34237,12 +34234,12 @@ aa
 aa
 aa
 aa
-bc
-bc
-bc
-bc
-bc
-bc
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa

@@ -3,10 +3,11 @@ var/global/list/shuttle_landmarks = list()
 //making this separate from /obj/abstract/landmark until that mess can be dealt with
 /obj/effect/shuttle_landmark
 	name = "Nav Point"
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "energynet"
+	icon = 'icons/effects/landmarks.dmi'
+	icon_state = "shuttle_landmark"
 	anchored = TRUE
 	simulated = FALSE
+	layer = ABOVE_PROJECTILE_LAYER
 	invisibility = INVISIBILITY_ABSTRACT
 	is_spawnable_type = FALSE
 
@@ -82,8 +83,10 @@ var/global/list/shuttle_landmarks = list()
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
 		return FALSE
+	var/atom/movable/center_of_rotation = shuttle.get_center_of_rotation()
+	var/angle_offset = shuttle.get_angle_offset(center_of_rotation, src)
 	for(var/area/A in shuttle.shuttle_area)
-		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
+		var/list/translation = get_turf_translation(get_turf(center_of_rotation), get_turf(src), A.contents, angle = angle_offset)
 		if(check_collision(base_area, list_values(translation)))
 			return FALSE
 	var/conn = SSmapping.get_connected_levels(z)
@@ -115,6 +118,11 @@ var/global/list/shuttle_landmarks = list()
 			return TRUE //dense turf
 	return FALSE
 
+/obj/effect/shuttle_landmark/proc/get_angle_offset(obj/effect/shuttle_landmark/other)
+	if(other.flags & SLANDMARK_FLAG_REORIENT)
+		return dir2angle(other.dir) - dir2angle(dir)
+	return 0
+
 //Self-naming/numbering ones.
 /obj/effect/shuttle_landmark/automatic
 	name = "Navpoint"
@@ -132,6 +140,7 @@ var/global/list/shuttle_landmarks = list()
 //Subtype that calls explosion on init to clear space for shuttles
 /obj/effect/shuttle_landmark/automatic/clearing
 	name = "clearing"
+	var/offset = FALSE
 	var/radius = 10
 
 /obj/effect/shuttle_landmark/automatic/clearing/Initialize(var/ml, var/supplied_radius)
@@ -142,7 +151,19 @@ var/global/list/shuttle_landmarks = list()
 
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
 	..()
-	for(var/turf/T in range(radius, src))
+	var/center
+	if(offset)
+		switch(dir)
+			if(NORTH)
+				center = locate(src.x, src.y - radius / 2, src.z)
+			if(SOUTH)
+				center = locate(src.x, src.y + radius / 2, src.z)
+			if(EAST)
+				center = locate(src.x - radius / 2, src.y, src.z)
+			if(WEST)
+				center = locate(src.x + radius / 2, src.y, src.z)
+	center ||= src
+	for(var/turf/T in circlerangeturfs(center, radius))
 		if(T.density)
 			T.ChangeTurf(get_base_turf_by_area(T))
 		T.turf_flags |= TURF_FLAG_NO_POINTS_OF_INTEREST

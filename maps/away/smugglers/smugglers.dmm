@@ -102,9 +102,8 @@
 /area/mine/explored)
 "av" = (
 /obj/effect/decal/cleanable/blood/drip,
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
 	id_tag = "asteroid_base_dock_airlock";
-	name = "Dock Airlock Controller";
 	pixel_x = -25;
 	tag_airpump = "asteroid_base_dock_pump";
 	tag_exterior_door = "asteroid_base_dock_outer";

@@ -24,3 +24,15 @@
 	procname = TYPE_PROC_REF(/mob/observer/eye/landing, toggle_offsetting)
 	button_icon_state = "shuttle_offset"
 	target_type = EYE_TARGET
+
+/datum/action/eye/landing/rotate_cw
+	name = "Rotate clockwise"
+	procname ="turn_shuttle_cw"
+	button_icon_state = "shuttle_rotate_cw"
+	target_type = EYE_TARGET
+
+/datum/action/eye/landing/rotate_ccw
+	name = "Rotate counterclockwise"
+	procname ="turn_shuttle_ccw"
+	button_icon_state = "shuttle_rotate_ccw"
+	target_type = EYE_TARGET

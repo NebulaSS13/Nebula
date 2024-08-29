@@ -28,6 +28,10 @@
 	. = ..()
 	update_neighbors()
 
+/obj/structure/lattice/shuttle_rotate(angle) // DO NOT CHANGE DIR.
+	queue_icon_update()
+	update_neighbors() // in case we have lattices outside the shuttle area that want to connect
+
 /obj/structure/lattice/can_climb_from_below(var/mob/climber)
 	return TRUE
 

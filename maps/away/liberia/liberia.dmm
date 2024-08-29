@@ -177,8 +177,7 @@
 "ay" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id_tag = "merch_radaway";
-	
+	id_tag = "merch_radaway"
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -206,8 +205,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id_tag = "merch_radaway";
-	
+	id_tag = "merch_radaway"
 	},
 /turf/floor,
 /area/liberia/engineeringreactor)
@@ -645,8 +643,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "merchantshuttle";
-	name = "Merchant Window Shutters";
-	
+	name = "Merchant Window Shutters"
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -748,8 +745,7 @@
 /area/liberia/mule)
 "bv" = (
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/structure/closet/crate/medical,
 /obj/random/medical,
@@ -816,8 +812,7 @@
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/machinery/door/window/brigdoor/southright{
@@ -836,8 +831,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "merchantshuttle";
-	name = "Merchant Window Shutters";
-	
+	name = "Merchant Window Shutters"
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1270,8 +1264,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "merchantdesk";
-	name = "Merchant Desk Shutters";
-	
+	name = "Merchant Desk Shutters"
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1308,6 +1301,12 @@
 	dir = 9
 	},
 /obj/effect/catwalk_plated,
+/obj/abstract/local_dock/automatic{
+	shuttle_tag = "Mule";
+	port_tag = "center";
+	dir = 8;
+	name = "center"
+	},
 /turf/floor/plating,
 /area/liberia/mule)
 "cs" = (
@@ -1577,8 +1576,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "merchantdesk";
-	name = "Merchant Desk Shutters";
-	
+	name = "Merchant Desk Shutters"
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -1740,8 +1738,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -2390,8 +2387,7 @@
 /area/liberia/merchantstorage)
 "ef" = (
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/structure/closet/crate/secure{
 	name = "resources crate";
@@ -2601,6 +2597,11 @@
 	},
 /obj/machinery/shield_diffuser,
 /obj/effect/shuttle_landmark/mule/start,
+/obj/abstract/local_dock/automatic{
+	shuttle_tag = "Mule";
+	port_tag = "docking port";
+	dock_target = "mule_port_shuttle_dock"
+	},
 /turf/floor/tiled/techfloor/grid,
 /area/liberia/mule)
 "ez" = (
@@ -2851,9 +2852,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/machinery/computer/cryopod{
-	dir = 2
-	},
+/obj/machinery/computer/cryopod,
 /turf/floor/tiled/techfloor/grid,
 /area/liberia/cryo)
 "eY" = (
@@ -3353,8 +3352,7 @@
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /turf/floor/wood/ebony,
 /area/liberia/bar)
@@ -3644,8 +3642,7 @@
 "gx" = (
 /obj/structure/table/woodentable/walnut,
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4706,8 +4703,7 @@
 "iL" = (
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/dark/monotile,
@@ -4988,8 +4984,7 @@
 "jB" = (
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/corner/blue/mono,
@@ -5014,8 +5009,7 @@
 "jD" = (
 /obj/structure/table/glass,
 /obj/machinery/faxmachine/mapped{
-	req_access = list("ACCESS_MERCHANT");
-	
+	req_access = list("ACCESS_MERCHANT")
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/dark/monotile,
@@ -6276,8 +6270,7 @@
 /area/liberia/hallway)
 "oJ" = (
 /obj/abstract/level_data_spawner/player{
-	name = "Liberia";
-	
+	name = "Liberia"
 	},
 /turf/space,
 /area/space)
@@ -6442,8 +6435,7 @@
 	pixel_y = -30
 	},
 /obj/structure/window/reinforced{
-	dir = 8;
-	current_health = null
+	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/northleft{
 	req_access = newlist()
@@ -8095,8 +8087,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "merchantshuttle";
-	name = "Merchant Window Shutters";
-	
+	name = "Merchant Window Shutters"
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,

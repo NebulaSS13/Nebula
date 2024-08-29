@@ -416,6 +416,8 @@ send an additional command to open the door again.
 	if(command == "toggle")
 		command = doorStatus["state"] == "open" ? "close" : "open"
 
+	// the close command is 'close' but the closed state is 'closed'
+	// so we have to check if we aren't the open state, because the command and status strings match for it
 	var/toggle = command && ((doorStatus["state"] == "open") ^ (command == "open"))
 	var/locked = (doorStatus["lock"] == "locked")
 	if(toggle)

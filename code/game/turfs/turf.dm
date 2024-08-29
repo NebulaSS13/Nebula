@@ -569,6 +569,30 @@
 		. = top_of_stack.is_outside()
 	last_outside_check = . // Cache this for later calls.
 
+/turf/shuttle_rotate(angle)
+	. = ..()
+	if(. && LAZYLEN(decals))
+		var/list/old_decals = decals.Copy()
+		decals.Cut()
+		// Duplicated cache logic from flooring_decals.dm
+		// Remove if the cache is removed
+		for(var/image/decal in old_decals)
+			var/image/detail_overlay = LAZYACCESS(decal.overlays, 1)
+			var/cache_key = "[decal.alpha]-[decal.color]-[SAFE_TURN(decal.dir, angle)]-[decal.icon_state]-[decal.plane]-[decal.layer]-[detail_overlay?.icon_state]-[detail_overlay?.color]-[decal.pixel_x]-[decal.pixel_y]"
+			if(!global.floor_decals[cache_key])
+				var/image/I = image(icon = decal.icon, icon_state = decal.icon_state, dir = SAFE_TURN(decal.dir, angle))
+				I.layer = decal.layer
+				I.appearance_flags = decal.appearance_flags
+				I.color = decal.color
+				I.alpha = decal.alpha
+				I.pixel_x = decal.pixel_x
+				I.pixel_y = decal.pixel_y
+				if(detail_overlay)
+					I.overlays |= overlay_image(decal.icon, detail_overlay.icon_state, color = detail_overlay.color, flags=RESET_COLOR)
+				global.floor_decals[cache_key] = I
+			decals |= global.floor_decals[cache_key]
+		update_icon()
+
 /turf/proc/set_outside(var/new_outside, var/skip_weather_update = FALSE)
 	if(is_outside == new_outside)
 		return FALSE

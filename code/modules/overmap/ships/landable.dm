@@ -130,7 +130,7 @@
 /obj/effect/shuttle_landmark/ship
 	name = "Open Space"
 	landmark_tag = "ship"
-	flags = SLANDMARK_FLAG_AUTOSET | SLANDMARK_FLAG_ZERO_G
+	flags = SLANDMARK_FLAG_AUTOSET | SLANDMARK_FLAG_ZERO_G | SLANDMARK_FLAG_REORIENT
 	var/shuttle_name
 	var/list/visitors // landmark -> visiting shuttle stationed there
 
@@ -139,6 +139,10 @@
 		landmark_tag += "_[shuttle_name]"
 		src.shuttle_name = shuttle_name
 	. = ..()
+
+/obj/effect/shuttle_landmark/ship/modify_mapped_vars(map_hash)
+	. = ..()
+	ADJUST_TAG_VAR(shuttle_name, map_hash)
 
 /obj/effect/shuttle_landmark/ship/Destroy()
 	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors[num2text(z)]
@@ -239,3 +243,116 @@
 			return "Maneuvering under secondary thrust."
 		if(SHIP_STATUS_OVERMAP)
 			return "In open space."
+
+// Creates a docking port spawner
+/obj/abstract/docking_port_spawner
+	name = "docking port spawner"
+	icon = 'icons/effects/landmarks.dmi'
+	icon_state = "shuttle_landmark"
+	/// Used both to name the landing site and to set the landmark tag.
+	var/port_name = "docking port"
+	var/core_landmark_tag
+	var/docking_tag
+
+/obj/abstract/docking_port_spawner/modify_mapped_vars(map_hash)
+	. = ..()
+	ADJUST_TAG_VAR(core_landmark_tag, map_hash)
+	ADJUST_TAG_VAR(docking_tag, map_hash)
+
+/obj/abstract/docking_port_spawner/Initialize()
+	..()
+	if(!core_landmark_tag)
+		PRINT_STACK_TRACE("Unset core_landmark_tag: [log_info_line(src)]")
+		return INITIALIZE_HINT_QDEL
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/docking_port_spawner/LateInitialize()
+	var/obj/effect/shuttle_landmark/ship/core = SSshuttle.get_landmark(core_landmark_tag)
+	if(!core)
+		PRINT_STACK_TRACE("Unable to find shuttle landmark with tag [core_landmark_tag]")
+		qdel(src)
+		return
+	if(!core.shuttle_name || !SSshuttle.shuttles[core.shuttle_name])
+		events_repository.register_global(/decl/observ/shuttle_added, src, PROC_REF(try_create_dock_for))
+	else
+		create_dock(core)
+
+/obj/abstract/docking_port_spawner/proc/try_create_dock_for(shuttle)
+	var/obj/effect/shuttle_landmark/ship/new_core = SSshuttle.get_landmark(core_landmark_tag)
+	if(!new_core.shuttle_name || SSshuttle.shuttles[new_core.shuttle_name] != shuttle)
+		return // wait for the next shuttle to init
+	create_dock(new_core)
+	events_repository.unregister_global(/decl/observ/shuttle_added, src, PROC_REF(try_create_dock_for))
+
+/obj/abstract/docking_port_spawner/proc/create_dock(obj/effect/shuttle_landmark/ship/core)
+	var/obj/effect/shuttle_landmark/visiting_shuttle/docking/docking_landmark = new (loc, core, port_name)
+	docking_landmark.docking_controller = SSshuttle.docking_registry[docking_tag]
+	docking_landmark.dir = dir
+	var/obj/effect/overmap/visitable/our_ship = SSshuttle.ship_by_shuttle(core.shuttle_name)
+	var/datum/shuttle/our_shuttle = SSshuttle.shuttles[core.shuttle_name]
+	our_ship.add_landmark(docking_landmark)
+	var/turf/match_turf = get_step(docking_landmark, docking_landmark.dir)
+	if(match_turf)
+		var/obj/abstract/local_dock/our_dock = new /obj/abstract/local_dock(match_turf, port_name)
+		our_dock.name = port_name
+		our_shuttle.add_port(our_dock)
+	qdel(src)
+
+/obj/effect/shuttle_landmark/visiting_shuttle/docking
+	name = "docking port"
+	flags = SLANDMARK_FLAG_AUTOSET | SLANDMARK_FLAG_ZERO_G | SLANDMARK_FLAG_REORIENT // not disconnected, they are physically attached
+
+/// Cannot actually be landed at. Used for alignment when landing or docking, however.
+/obj/abstract/local_dock
+	name = "docking port" // Rename for subtypes/instances, this is shown to players.
+	icon = 'icons/effects/landmarks.dmi'
+	icon_state = "shuttle_landmark"
+	anchored = TRUE
+	simulated = FALSE
+	layer = ABOVE_PROJECTILE_LAYER
+	invisibility = INVISIBILITY_ABSTRACT
+	movable_flags = MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE
+	is_spawnable_type = FALSE
+	var/reorient = TRUE
+	var/port_tag
+	/// The id_tag of the docking controller associated with this docking port. If null, disables docking when using this port.
+	var/dock_target
+
+/obj/abstract/local_dock/Initialize(ml, new_port_tag)
+	if(new_port_tag)
+		port_tag = new_port_tag
+	. = ..()
+
+/obj/abstract/local_dock/automatic/modify_mapped_vars(map_hash)
+	. = ..()
+	ADJUST_TAG_VAR(port_tag, map_hash)
+	ADJUST_TAG_VAR(dock_target, map_hash)
+
+/// This subtype automatically adds itself to its shuttle based on the shuttle_tag var.
+/obj/abstract/local_dock/automatic
+	var/shuttle_tag
+
+/obj/abstract/local_dock/automatic/modify_mapped_vars(map_hash)
+	. = ..()
+	ADJUST_TAG_VAR(shuttle_tag, map_hash)
+
+/obj/abstract/local_dock/automatic/Initialize(ml, new_port_tag, new_shuttle_tag)
+	if(new_shuttle_tag)
+		shuttle_tag = new_shuttle_tag
+	. = ..()
+	if(!shuttle_tag)
+		CRASH("[type] created without a shuttle tag!")
+	var/datum/shuttle/our_shuttle = SSshuttle.shuttles[shuttle_tag]
+	if(!our_shuttle)
+		events_repository.register_global(/decl/observ/shuttle_added, src, PROC_REF(try_late_hookup))
+	else
+		hookup(our_shuttle)
+
+/obj/abstract/local_dock/automatic/proc/try_late_hookup(datum/shuttle/shuttle)
+	if(shuttle.name != shuttle_tag)
+		return
+	events_repository.unregister_global(/decl/observ/shuttle_added, src, PROC_REF(hookup))
+	hookup(shuttle)
+
+/obj/abstract/local_dock/automatic/proc/hookup(datum/shuttle/shuttle)
+	shuttle.add_port(src)

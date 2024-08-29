@@ -80,6 +80,15 @@
 </div>
 <div class="item" style="padding-top: 10px">
 	<div class="itemLabel">
+		Current Rotation Point:
+	</div>
+	<span class="average">{{:data.port_name}}</span>
+	<div class="item">
+		{{:helper.link('Choose Rotation Point', 'arrowreturn-1-s', {'dock_pick' : '1'}, data.can_pick ? null : 'disabled' , null)}}
+	</div>
+</div>
+<div class="item" style="padding-top: 10px">
+	<div class="itemLabel">
 		Current Destination:
 	</div>
 	<span class="average">{{:data.destination_name}}</span>

@@ -39,3 +39,8 @@
 /obj/effect/shuttle_landmark/nav_lost_supply_base/navantag
 	name = "Abandoned Supply Base Navpoint #4"
 	landmark_tag = "nav_lost_supply_base_antag"
+
+/obj/effect/shuttle_landmark/nav_lost_supply_base/docking
+	name = "docking port"
+	landmark_tag = "nav_lost_supply_base_docking"
+	flags = SLANDMARK_FLAG_REORIENT | SLANDMARK_FLAG_AUTOSET

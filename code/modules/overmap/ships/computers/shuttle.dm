@@ -23,6 +23,7 @@
 
 		. += list(
 			"destination_name" = shuttle.get_destination_name(),
+			"port_name" = shuttle.get_port_name(),
 			"can_pick" = shuttle.moving_status == SHUTTLE_IDLE,
 			"fuel_usage" = shuttle.fuel_consumption * 100,
 			"remaining_fuel" = round(total_gas, 0.01) * 100,
@@ -35,6 +36,15 @@
 	if((. = ..()) != null)
 		return
 
+	if(href_list["dock_pick"])
+		var/list/port_choices = shuttle.get_port_choices()
+		var/port
+		if(length(port_choices))
+			port = input("Choose shuttle docking port:", "Shuttle Docking Port") as null|anything in port_choices
+		else
+			to_chat(usr, SPAN_WARNING("No functional docking ports, defaulting to center-of-mass landing."))
+		if(CanInteract(usr, global.default_topic_state) && (port in port_choices))
+			shuttle.set_port(port_choices[port])
 	if(href_list["pick"])
 		var/list/possible_d = shuttle.get_possible_destinations()
 		var/D
@@ -105,9 +115,12 @@
 		to_chat(user, SPAN_WARNING("Invalid landing zone!"))
 		return
 	var/datum/shuttle/autodock/overmap/shuttle = SSshuttle.shuttles[shuttle_tag]
+	var/atom/movable/center_of_rotation = shuttle.get_center_of_rotation()
 
 	if(landing_eye.check_landing()) // Make sure the landmark is in a valid location.
 		var/obj/effect/shuttle_landmark/temporary/lz = new(lz_turf, landing_eye.check_secure_landing())
+		lz.flags |= SLANDMARK_FLAG_REORIENT
+		lz.dir = landing_eye?.shuttle_dir || center_of_rotation.dir
 		if(lz.is_valid(shuttle))	// Make sure the shuttle fits.
 			to_chat(user, SPAN_NOTICE("Landing zone set!"))
 			shuttle.set_destination(lz)

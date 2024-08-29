@@ -31,6 +31,11 @@
 	var/mothershuttle //tag of mothershuttle
 	var/motherdock    //tag of mothershuttle landmark, defaults to starting location
 
+	/// The landmark_tag of the landmark being used to match rotation and placement when docking.
+	var/current_port_tag
+	/// A list of all available docking ports to use for rotation/placement when landing and docking.
+	var/list/docking_ports
+
 /datum/shuttle/New(map_hash, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(!display_name)
@@ -171,12 +176,14 @@
 		return FALSE
 	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
+	var/atom/movable/center_of_rotation = get_center_of_rotation()
+	var/angle_offset = get_angle_offset(center_of_rotation, destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
+		translation += get_turf_translation(get_turf(center_of_rotation), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
-	shuttle_moved(destination, translation)
+	shuttle_moved(destination, translation, angle_offset)
 	RAISE_EVENT_REPEAT(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
@@ -193,13 +200,14 @@
 
 	testing("Force moving [src] to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
-
+	var/atom/movable/center_of_rotation = get_center_of_rotation()
+	var/angle_offset = get_angle_offset(center_of_rotation, destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
+		translation += get_turf_translation(get_turf(center_of_rotation), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
-	shuttle_moved(destination, translation)
+	shuttle_moved(destination, translation, angle_offset)
 	RAISE_EVENT_REPEAT(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
@@ -209,7 +217,7 @@
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. shuttle_moved() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump(), long_jump() or attempt_move()
-/datum/shuttle/proc/shuttle_moved(var/obj/effect/shuttle_landmark/destination, var/list/turf_translation)
+/datum/shuttle/proc/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation, angle = 0)
 
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
@@ -249,7 +257,7 @@
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
 	create_translated_ceiling(FALSE, turf_translation)
 
-	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf, TRUE, TRUE)
+	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf, TRUE, TRUE, angle = angle)
 	current_location = destination
 
 	// remove the old ceiling, if it existed
@@ -314,9 +322,9 @@
 			if(TD.turf_flags & TURF_FLAG_BACKGROUND)
 				continue
 			var/turf/TA = GetAbove(TD)
-			if(!istype(TA))
+			if(!TA)
 				continue
-			if(force || (istype(TA, get_base_turf_by_area(TA)) || TA.is_open()))
+			if(force || istype(TA, get_base_turf_by_area(TA)) || TA.is_open())
 				if(get_area(TA) in shuttle_area)
 					continue
 				TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
@@ -385,3 +393,64 @@
 		return "The motherdock (tag: [initial(motherdock)]) was not found."
 	if(!mothershuttle && initial(mothershuttle))
 		return "The mothershuttle (tag: [initial(mothershuttle)]) was not found."
+
+// Landing/docking ports
+/datum/shuttle/proc/get_ports()
+	return docking_ports
+
+/datum/shuttle/proc/add_port(obj/abstract/local_dock/port)
+	if(!istype(port))
+		return FALSE
+	LAZYADD(docking_ports, port)
+	return TRUE
+
+/datum/shuttle/proc/get_port_choices()
+	var/list/res = list()
+	var/list/ports = get_ports()
+	for(var/obj/abstract/local_dock/port in ports)
+		res[port.name] = port
+	res["none"] = null
+	return res
+
+/datum/shuttle/proc/get_current_port()
+	if(!current_port_tag)
+		return null
+	var/obj/abstract/local_dock/current_port = get_port_by_tag(current_port_tag)
+	return current_port
+
+/datum/shuttle/proc/get_center_of_rotation()
+	return get_current_port() || current_location
+
+/datum/shuttle/proc/set_port(port)
+	if(isnull(port)) // short-circuit special case for null port
+		current_port_tag = null
+		return TRUE
+	var/obj/abstract/local_dock/dock
+	if(istype(port, /obj/abstract/local_dock)) // We need to check availability.
+		dock = port
+	else
+		dock = get_port_by_tag(port)
+	if(dock && (dock.port_tag != current_port_tag))
+		current_port_tag = dock.port_tag
+		return TRUE
+	return FALSE // port did not exist or was already selected
+
+/datum/shuttle/proc/get_port_by_tag(port_tag)
+	for(var/obj/abstract/local_dock/port in get_ports())
+		if(port.port_tag == port_tag)
+			return port
+	return null
+
+/datum/shuttle/proc/get_port_name()
+	var/obj/abstract/local_dock/current_port = get_port_by_tag(current_port_tag)
+	return current_port?.name || "none"
+
+/datum/shuttle/proc/get_angle_offset(obj/rotation_center, obj/effect/shuttle_landmark/destination)
+	if(istype(rotation_center, /obj/effect/shuttle_landmark))
+		var/obj/effect/shuttle_landmark/center_landmark = rotation_center
+		return center_landmark.get_angle_offset(destination)
+	// Fallback case for a docking port.
+	var/obj/abstract/local_dock/center_dock = rotation_center
+	if(istype(center_dock) && center_dock.reorient)
+		return dir2angle(destination.dir) - dir2angle(rotation_center.dir)
+	return 0 // do not rotate

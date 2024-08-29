@@ -20,3 +20,6 @@
 
 #define IS_POWER_OF_TWO(VAL) ((VAL & (VAL-1)) == 0)
 #define ROUND_UP_TO_POWER_OF_TWO(VAL) (2 ** ceil(log(2,VAL)))
+
+// turn(0, angle) returns a random dir. This macro will instead do nothing if dir is already 0.
+#define SAFE_TURN(DIR, ANGLE) (DIR && turn(DIR, ANGLE))

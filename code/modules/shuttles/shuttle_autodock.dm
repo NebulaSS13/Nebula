@@ -58,11 +58,19 @@
 	force_undock() //bye!
 	..()
 
+/datum/shuttle/autodock/proc/get_dock_target_by_port_tag(var/port_tag)
+	var/obj/abstract/local_dock/dock = get_port_by_tag(port_tag)
+	if(!dock)
+		return dock_target // fallback, this should never happen
+	return dock.dock_target // do not fall back to default here; allow certain rotation points (center, etc) to disable docking
+
 /datum/shuttle/autodock/proc/update_docking_target(var/obj/effect/shuttle_landmark/location)
 	if(location && docking_cues && location.special_dock_targets && location.special_dock_targets[type])
 		current_dock_target = docking_cues[location.special_dock_targets[type]]
+	else if(current_port_tag)
+		current_dock_target = get_dock_target_by_port_tag(current_port_tag)
 	else
-		current_dock_target = dock_target
+		current_dock_target = dock_target // fallback
 	shuttle_docking_controller = SSshuttle.docking_registry[current_dock_target]
 /*
 	Docking stuff

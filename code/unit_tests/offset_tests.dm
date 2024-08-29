@@ -45,7 +45,8 @@
 	var/static/list/exception_types = list(
 		/obj/machinery/light,
 		/obj/machinery/camera,
-		/obj/structure/lift/button/standalone
+		/obj/structure/lift/button/standalone,
+		/obj/structure/hygiene/sink
 	)
 
 /datum/unit_test/wall_objs_shall_offset_onto_wall/start_test()

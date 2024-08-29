@@ -45,6 +45,13 @@
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level == LEVEL_BELOW_PLATING
 
+// Only simple pipes need this override because they handle diagonals weird.
+// We rotate the vertical and horizontal components separately.
+/obj/machinery/atmospherics/pipe/simple/shuttle_rotate(angle)
+	if(angle)
+		set_dir(SAFE_TURN(dir & (NORTH|SOUTH), angle) | SAFE_TURN(dir & (EAST|WEST), angle))
+		return TRUE
+
 /obj/machinery/atmospherics/pipe/proc/set_leaking(var/new_leaking)
 	if(new_leaking && !leaking)
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)

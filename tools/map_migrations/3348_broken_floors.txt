@@ -1,0 +1,7 @@
+/turf/floor/tiled/@SUBTYPES{icon_state="steel_broken0"} : /turf/floor/tiled/@SUBTYPES{icon_state=@SKIP;@OLD}, /obj/abstract/landmark/proc_caller/floor_breaker
+/turf/floor/tiled/@SUBTYPES{icon_state="steel_broken1"} : /turf/floor/tiled/@SUBTYPES{icon_state=@SKIP;@OLD}, /obj/abstract/landmark/proc_caller/floor_breaker
+/turf/floor/tiled/@SUBTYPES{icon_state="steel_broken2"} : /turf/floor/tiled/@SUBTYPES{icon_state=@SKIP;@OLD}, /obj/abstract/landmark/proc_caller/floor_breaker
+/turf/floor/tiled/@SUBTYPES{icon_state="steel_broken3"} : /turf/floor/tiled/@SUBTYPES{icon_state=@SKIP;@OLD}, /obj/abstract/landmark/proc_caller/floor_breaker
+/turf/floor/tiled/@SUBTYPES{icon_state="steel_broken4"} : /turf/floor/tiled/@SUBTYPES{icon_state=@SKIP;@OLD}, /obj/abstract/landmark/proc_caller/floor_breaker
+/turf/floor/tiled/@SUBTYPES{icon_state="steel_burned0"} : /turf/floor/tiled/@SUBTYPES{icon_state=@SKIP;@OLD}, /obj/abstract/landmark/proc_caller/floor_burner
+/turf/floor/tiled/@SUBTYPES{icon_state="steel_burned1"} : /turf/floor/tiled/@SUBTYPES{icon_state=@SKIP;@OLD}, /obj/abstract/landmark/proc_caller/floor_burner
