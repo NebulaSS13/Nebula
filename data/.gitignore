@@ -1,0 +1,10 @@
+all_templates.json
+*.log
+memo.sav
+investigate/*
+statistics.sqlite
+secrets/*
+elevator_falls_tracking.txt
+mode.txt
+job_full.ban
+
