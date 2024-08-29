@@ -1,0 +1,2 @@
+/obj/item/clothing/accessory/medal/@SUBTYPES : /obj/item/clothing/medal/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/badge/@SUBTYPES : /obj/item/clothing/badge/SUBTYPES{@OLD}

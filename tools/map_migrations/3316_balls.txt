@@ -1,0 +1,3 @@
+/obj/item/beach_ball/holoball : /obj/item/ball/basketball
+/obj/item/beach_ball : /obj/item/ball
+/obj/item/beach_ball/holovolleyball : /obj/item/ball/volleyball
