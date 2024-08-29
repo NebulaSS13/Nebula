@@ -1,10 +1,9 @@
 /datum/preferences
 	var/species
-	var/blood_type                           //blood type
-
+	var/blood_type
 	var/eye_colour = COLOR_BLACK
 	var/skin_colour = COLOR_BLACK
-	var/skin_tone = 0                    //Skin tone
+	var/skin_tone = -75
 	var/list/sprite_accessories = list()
 	var/list/appearance_descriptors = list()
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
@@ -23,6 +22,10 @@
 	pref.blood_type =             R.read("b_type")
 	pref.appearance_descriptors = R.read("appearance_descriptors")
 	pref.bgstate =                R.read("bgstate")
+
+	// Null skintone loaded from file -> initial skintone value.
+	if(isnull(pref.skin_tone))
+		pref.skin_tone = initial(pref.skin_tone)
 
 	// Load all of our saved accessories.
 	pref.sprite_accessories = list()
