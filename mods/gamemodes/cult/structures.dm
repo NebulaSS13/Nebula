@@ -27,7 +27,7 @@
 	attackpylon(user, damage)
 
 /obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
-	attackpylon(user, W.force)
+	attackpylon(user, W.get_attack_force(user))
 
 /obj/structure/cult/pylon/proc/attackpylon(mob/user, var/damage)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

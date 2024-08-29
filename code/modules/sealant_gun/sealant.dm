@@ -3,8 +3,6 @@
 	desc = "A blob of metal foam sealant."
 	icon = 'icons/effects/sealant.dmi'
 	icon_state = ICON_STATE_WORLD
-	force = 0
-	throwforce = 0
 	color = "#cccdcc"
 	slowdown_general = 3
 	canremove = FALSE

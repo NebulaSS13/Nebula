@@ -68,4 +68,4 @@
 	empowered_attack = FALSE
 
 /obj/item/natural_weapon/claws/space_dragon
-	force = 15
+	_base_attack_force = 15

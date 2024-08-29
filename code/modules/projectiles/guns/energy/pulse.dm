@@ -6,7 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	indicator_color = COLOR_LUMINOL
 	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
-	force = 6
+	_base_attack_force = 6
 	projectile_type = /obj/item/projectile/beam/pulse
 	max_shots = 21
 	w_class = ITEM_SIZE_NORMAL

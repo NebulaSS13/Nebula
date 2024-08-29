@@ -83,9 +83,12 @@
 	take_damage(P.damage, P.atom_damage_type)
 
 /obj/machinery/bash(obj/item/W, mob/user)
-	if(!istype(W) || W.force <= 5)
+	if(!istype(W))
+		return FALSE
+	var/force = W.get_attack_force(user)
+	if(force <= 5)
 		return FALSE
 	. = ..()
 	if(.)
 		user.setClickCooldown(W.attack_cooldown + W.w_class)
-		take_damage(W.force, W.atom_damage_type)
+		take_damage(force, W.atom_damage_type)

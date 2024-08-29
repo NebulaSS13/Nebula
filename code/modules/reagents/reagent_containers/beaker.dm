@@ -7,7 +7,6 @@
 	center_of_mass = @'{"x":15,"y":10}'
 	material = /decl/material/solid/glass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	material_force_multiplier = 0.25
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
 	var/lid_color = COLOR_BEASTY_BROWN
@@ -73,7 +72,6 @@
 	volume = 120
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120]"
-	material_force_multiplier = 0.5
 	w_class = ITEM_SIZE_LARGE
 
 /obj/item/chems/glass/beaker/bowl
@@ -86,7 +84,6 @@
 	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/solid/metal/steel
-	material_force_multiplier = 0.2
 
 /obj/item/chems/glass/beaker/kettle
 	name = "kettle"
@@ -98,7 +95,6 @@
 	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/solid/metal/iron
-	material_force_multiplier = 0.2
 	obj_flags = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
@@ -124,7 +120,6 @@
 	volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
-	material_force_multiplier = 2.5
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -143,7 +138,6 @@
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,30]"
-	material_force_multiplier = 0.1
 
 /obj/item/chems/glass/beaker/vial/throw_impact(atom/hit_atom)
 	. = ..()

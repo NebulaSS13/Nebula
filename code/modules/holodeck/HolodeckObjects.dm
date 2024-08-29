@@ -170,11 +170,10 @@
 		return
 
 	if(src.density && istype(I, /obj/item) && !istype(I, /obj/item/card))
-		var/aforce = I.force
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<span class='danger'>\The [src] was hit by \the [I].</span>")
 		if(I.atom_damage_type == BRUTE || I.atom_damage_type == BURN)
-			take_damage(aforce)
+			take_damage(I.get_attack_force(user))
 		return
 
 	src.add_fingerprint(user)
@@ -218,13 +217,12 @@
 	desc = "May the force be within you. Sorta."
 	icon = 'icons/obj/items/weapon/e_sword.dmi'
 	icon_state = "sword0"
-	force = 3.0
 	throw_speed = 1
 	throw_range = 5
-	throwforce = 0
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_NO_BLOOD
 	base_parry_chance = 50
+	_base_attack_force = 3
 	var/active = 0
 	var/item_color
 
@@ -250,13 +248,13 @@
 /obj/item/holo/esword/attack_self(mob/user)
 	active = !active
 	if (active)
-		force = 30
+		set_base_attack_force(30)
 		icon_state = "sword[item_color]"
 		w_class = ITEM_SIZE_HUGE
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>[src] is now active.</span>")
 	else
-		force = 3
+		set_base_attack_force(3)
 		icon_state = "sword0"
 		w_class = ITEM_SIZE_SMALL
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
@@ -403,12 +401,12 @@
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)
 		faction = MOB_FACTION_NEUTRAL
-		natural_weapon.force = 0
+		natural_weapon.set_base_attack_force(0)
 		environment_smash = 0
 		ai?.try_destroy_surroundings = FALSE
 	else
 		faction = "carp"
-		natural_weapon.force = initial(natural_weapon.force)
+		natural_weapon.set_base_attack_force(natural_weapon.get_initial_base_attack_force())
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib(do_gibs = TRUE)
 	SHOULD_CALL_PARENT(FALSE)

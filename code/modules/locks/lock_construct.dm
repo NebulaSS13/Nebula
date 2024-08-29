@@ -9,8 +9,6 @@
 
 /obj/item/lock_construct/Initialize()
 	. = ..()
-	force = 0
-	throwforce = 0
 	lock_data = generateRandomString(round(material.integrity/50))
 
 /obj/item/lock_construct/examine(mob/user, distance)

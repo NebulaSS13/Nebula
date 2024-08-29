@@ -235,14 +235,8 @@
 	. = ..()
 	if(.)
 		visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
-		var/tforce = 0
-		if(ismob(AM))
-			tforce = 3 * TT.speed
-		else if(isobj(AM))
-			var/obj/hitter_obj = AM
-			tforce = hitter_obj.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src.loc, hitsound, 100, 1)
-		take_damage(tforce)
+		take_damage(AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR))
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/physical_attack_hand(user)
@@ -333,7 +327,7 @@
 /obj/machinery/door/bash(obj/item/weapon, mob/user)
 	if(isliving(user) && user.a_intent != I_HURT)
 		return FALSE
-	if(!weapon.user_can_wield(user))
+	if(!weapon.user_can_attack_with(user))
 		return FALSE
 	if(weapon.item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return FALSE
@@ -341,12 +335,13 @@
 		return FALSE
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
-	if(weapon.force < min_force)
+	var/force = weapon.get_attack_force(user)
+	if(force < min_force)
 		user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [weapon] with no visible effect.</span>")
 	else
 		user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [weapon]!</span>")
 		playsound(src.loc, hitsound, 100, 1)
-		take_damage(weapon.force, weapon.atom_damage_type)
+		take_damage(force, weapon.atom_damage_type)
 	return TRUE
 
 /obj/machinery/door/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)

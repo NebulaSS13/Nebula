@@ -324,7 +324,7 @@
 	if(!locked)
 		return FALSE
 
-	if(!used_item.user_can_wield(user))
+	if(!used_item.user_can_attack_with(user))
 		return TRUE
 
 	//TODO: This probably should be handled in a better way.

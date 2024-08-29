@@ -11,7 +11,7 @@
 	charge_cost = 40
 	max_shots = 4
 	fire_delay = 35
-	force = 10
+	_base_attack_force = 10
 	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 9

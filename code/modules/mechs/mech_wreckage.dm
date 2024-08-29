@@ -86,7 +86,7 @@
 		else
 			to_chat(user, SPAN_WARNING("It's too solid to dismantle. Try cutting through some of the bigger bits."))
 		return 1
-	else if(istype(W) && W.force > 20)
+	else if(istype(W) && W.get_attack_force(user) > 20)
 		visible_message(SPAN_DANGER("\The [src] has been smashed with \the [W] by \the [user]!"))
 		if(prob(20))
 			physically_destroyed()

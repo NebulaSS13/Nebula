@@ -3,8 +3,6 @@
 	desc = "A thing to keep your butts in."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ashtray"
-	material_force_multiplier = 0.1
-	thrown_material_force_multiplier = 0.1
 	randpixel = 5
 	material = /decl/material/solid/metal/bronze
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME

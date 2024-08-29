@@ -147,8 +147,7 @@
 /obj/machinery/door/blast/attackby(obj/item/C, mob/user)
 	add_fingerprint(user, 0, C)
 	if(!panel_open) //Do this here so the door won't change state while prying out the circuit
-		var/obj/item/twohanded/zweihander = C
-		if(IS_CROWBAR(C) || (istype(C, /obj/item/twohanded/fireaxe) && zweihander.wielded))
+		if(IS_CROWBAR(C) || (istype(C, /obj/item/bladed/axe/fire) && C.is_held_twohanded()))
 			if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
 				to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
 				if(do_after(user, 2 SECONDS, src))

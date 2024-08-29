@@ -786,7 +786,7 @@
 /obj/item/gps/explorer,
 /obj/item/belt/holster/machete,
 /obj/item/tool/machete/deluxe,
-/obj/item/twohanded/spear/steel,
+/obj/item/bladed/polearm/spear/improvised/steel,
 /turf/floor/tiled/white,
 /area/ministation/science)
 "cJ" = (
@@ -2293,7 +2293,7 @@
 /obj/item/shield/buckler,
 /obj/item/gps/explorer,
 /obj/item/flashlight/lantern,
-/obj/item/twohanded/spear/steel,
+/obj/item/bladed/polearm/spear/improvised/steel,
 /turf/floor/tiled/white,
 /area/ministation/science)
 "jP" = (
@@ -4476,7 +4476,7 @@
 /obj/item/shield/buckler,
 /obj/item/gps/explorer,
 /obj/item/flashlight/lantern,
-/obj/item/twohanded/spear/steel,
+/obj/item/bladed/polearm/spear/improvised/steel,
 /turf/floor/tiled/white,
 /area/ministation/science)
 "zS" = (

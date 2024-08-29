@@ -174,7 +174,6 @@
 /obj/item/natural_weapon/charbaby
 	name = "scalding hide"
 	atom_damage_type =  BURN
-	force = 5
 	attack_verb = list("singed")
 
 /mob/living/simple_animal/hostile/beast/charbaby/default_hurt_interaction(mob/user)

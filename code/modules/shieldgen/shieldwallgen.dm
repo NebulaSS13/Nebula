@@ -295,7 +295,7 @@
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
-	G.storedpower -= I.force*2500
+	G.storedpower -= I.get_attack_force(user)*2500
 	user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I]!</span>")
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)

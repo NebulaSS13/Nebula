@@ -64,7 +64,7 @@
 		update_icon()
 
 /obj/item/chems/glass/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
+	if(get_attack_force(user) && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return ..()
 	return FALSE
 
@@ -108,7 +108,6 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/organic/plastic
-	material_force_multiplier = 0.2
 	slot_flags = SLOT_HEAD
 	drop_sound = 'sound/foley/donk1.ogg'
 	pickup_sound = 'sound/foley/pickup2.ogg'

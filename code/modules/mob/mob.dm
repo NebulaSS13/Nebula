@@ -1389,3 +1389,7 @@
 // Stub proc; implemented on /mob/living
 /mob/proc/handle_footsteps()
 	return
+
+/mob/proc/can_twohand_item(obj/item/item)
+	return FALSE
+

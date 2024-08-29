@@ -81,7 +81,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 15.0
+	_base_attack_force = 15
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"materials":1,"biotech":1}'
 	attack_verb = list("drilled")
@@ -99,12 +99,10 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 10
 	sharp = 1
 	edge = 1
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = @'{"materials":1,"biotech":1}'
@@ -113,6 +111,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
+	_base_attack_force = 10
 	var/tool_quality = TOOL_QUALITY_DEFAULT
 
 /obj/item/scalpel/Initialize()
@@ -127,7 +126,7 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
 	atom_damage_type =  BURN
-	force = 10
+	_base_attack_force = 10
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	tool_quality = TOOL_QUALITY_DECENT
@@ -136,7 +135,7 @@
 /obj/item/scalpel/laser/upgraded
 	name = "upgraded laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks somewhat advanced."
-	force = 12
+	_base_attack_force = 12
 	icon_state = "scalpel_laser2_on"
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
@@ -149,7 +148,7 @@
 	name = "advanced laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks to be the pinnacle of precision energy cutlery!"
 	icon_state = "scalpel_laser3_on"
-	force = 15
+	_base_attack_force = 15
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
@@ -166,7 +165,7 @@
 	atom_damage_type =  BURN
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel_manager_on"
-	force = 7
+	_base_attack_force = 7
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
@@ -196,9 +195,7 @@
 	icon_state = "saw3"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
-	throwforce = 9
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = @'{"materials":1,"biotech":1}'
@@ -209,6 +206,7 @@
 	edge = 1
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
+	_base_attack_force = 15
 
 /obj/item/circular_saw/Initialize()
 	. = ..()
@@ -222,11 +220,9 @@
 	name = "bone gel"
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone-gel"
-	force = 0
 	w_class = ITEM_SIZE_SMALL
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	obj_flags = OBJ_FLAG_HOLLOW
-	throwforce = 1
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/bonegel/Initialize()
@@ -238,11 +234,10 @@
 	desc = "Surgical needles and thread in a handy sterile package."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"
-	force = 0
-	throwforce = 1
 	origin_tech = @'{"materials":1,"biotech":3}'
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/plastic
+	_base_attack_force = 1
 
 /obj/item/sutures/Initialize()
 	. = ..()
@@ -253,8 +248,6 @@
 	desc = "A surgical tool for manipulating and setting bones."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone setter"
-	force = 8.0
-	throwforce = 9
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
@@ -263,6 +256,7 @@
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+	_base_attack_force = 8.0
 
 /obj/item/bonesetter/Initialize()
 	. = ..()

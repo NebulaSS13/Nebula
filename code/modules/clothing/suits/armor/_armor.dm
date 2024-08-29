@@ -23,3 +23,4 @@
 	blood_overlay_type = "armor"
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 	replaced_in_loadout = FALSE
+	_base_attack_force = 5

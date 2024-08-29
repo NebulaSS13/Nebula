@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	origin_tech = @'{"combat":2,"magnets":4}'
 	w_class = ITEM_SIZE_HUGE
-	force = 10
+	_base_attack_force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	one_hand_penalty = 4
@@ -119,7 +119,7 @@
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
-	force = 8
+	_base_attack_force = 8
 	origin_tech = @'{"materials":4,"exoticmatter":4,"engineering":6,"combat":3}'
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/plasmacutter

@@ -15,3 +15,4 @@
 	edge  = TRUE
 	utensil_flags = UTENSIL_FLAG_SLICE
 	material = /decl/material/solid/metal/steel
+	_base_attack_force = 6

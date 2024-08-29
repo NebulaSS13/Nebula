@@ -23,7 +23,7 @@
 	can_escape_buckles = TRUE
 
 /obj/item/natural_weapon/bite/pike
-	force = 25
+	_base_attack_force = 25
 
 /mob/living/simple_animal/hostile/carp/pike/carp_randomify()
 	return

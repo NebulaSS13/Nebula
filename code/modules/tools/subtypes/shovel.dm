@@ -4,13 +4,12 @@
 	icon               = 'icons/obj/items/tool/shovels/shovel.dmi'
 	icon_state         = ICON_STATE_WORLD
 	slot_flags         = SLOT_LOWER_BODY
-	force              = 8
-	throwforce         = 4
 	w_class            = ITEM_SIZE_HUGE
 	edge               = TRUE
 	sharp              = TRUE
 	attack_verb        = list("bashed", "bludgeoned", "thrashed", "whacked")
 	handle_material    = /decl/material/solid/organic/wood
+	_base_attack_force = 8
 
 /obj/item/tool/shovel/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
@@ -30,8 +29,6 @@
 	desc                = "A small tool for digging and moving dirt."
 	icon                = 'icons/obj/items/tool/shovels/spade.dmi'
 	icon_state          = ICON_STATE_WORLD
-	force               = 5
-	throwforce          = 7
 	w_class             = ITEM_SIZE_SMALL
 	edge                = FALSE
 	sharp               = FALSE
@@ -39,6 +36,7 @@
 	attack_verb         = list("bashed", "bludgeoned", "thrashed", "whacked")
 	material_alteration = 0
 	handle_material     = /decl/material/solid/organic/plastic
+	_base_attack_force  = 5
 
 /obj/item/tool/spade/get_handle_color()
 	return null

@@ -257,7 +257,7 @@
 			atom_damage_type = BURN
 			START_PROCESSING(SSobj, src)
 		else
-			force = null
+			set_base_attack_force(0)
 			atom_damage_type = BRUTE
 			STOP_PROCESSING(SSobj, src)
 		return TRUE

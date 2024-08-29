@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/plunger.dmi'
 	icon_state = ICON_STATE_WORLD
 	attack_verb = list("plunged")
-	force = 1
+	_base_attack_force = 1
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_HEAD | SLOT_FACE
 	body_parts_covered = SLOT_HEAD

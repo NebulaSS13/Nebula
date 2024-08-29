@@ -6,7 +6,6 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/steel
-	throwforce = 2
 	throw_speed = 3
 	throw_range = 10
 	origin_tech = @'{"magnets":1}'
@@ -115,7 +114,7 @@
 
 
 /obj/item/assembly/attackby(obj/item/component, mob/user)
-	if(!user_can_wield(user) || !component.user_can_wield(user))
+	if(!user_can_attack_with(user) || !component.user_can_attack_with(user))
 		return TRUE
 	if(isassembly(component))
 		var/obj/item/assembly/assembly = component
@@ -148,7 +147,7 @@
 /obj/item/assembly/attack_self(mob/user)
 	if(!user) // is this check even necessary outside of admin proccalls?
 		return FALSE
-	if(!user_can_wield(user))
+	if(!user_can_attack_with(user))
 		return TRUE
 	user.set_machine(src)
 	interact(user)

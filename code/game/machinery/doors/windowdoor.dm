@@ -199,7 +199,7 @@
 
 /obj/machinery/door/window/bash(obj/item/weapon, mob/user)
 	//Emags and energy swords? You may pass.
-	if (weapon.user_can_wield(user) && istype(weapon, /obj/item/energy_blade))
+	if (weapon.user_can_attack_with(user) && istype(weapon, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = weapon
 		if(blade.is_special_cutting_tool() && emag_act(10, user))
 			spark_at(loc, amount=5)

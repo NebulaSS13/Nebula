@@ -4,7 +4,7 @@
 	icon_state = ICON_STATE_WORLD
 	item_flags = ITEM_FLAG_IS_BELT
 	slot_flags = SLOT_HEAD | SLOT_LOWER_BODY | SLOT_OVER_BODY
-	force = 0.5
+	_base_attack_force = 1
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
@@ -112,7 +112,7 @@
 /obj/item/towel/fleece // loot from the king of goats. it's a golden towel
 	name = "golden fleece"
 	desc = "The legendary Golden Fleece of Jason made real."
-	force = 1
+	_base_attack_force = 1
 	attack_verb = list("smote")
 	material = /decl/material/solid/metal/gold
 

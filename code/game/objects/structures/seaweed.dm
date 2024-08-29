@@ -31,7 +31,7 @@
 	icon = 'icons/obj/structures/plants.dmi'
 
 /obj/effect/decal/cleanable/lichen/attackby(obj/item/I, mob/user)
-	if(I.sharp && I.force > 1)
+	if(I.sharp && I.get_attack_force(user) > 1)
 		qdel(src)
 		return TRUE
 	. = ..()

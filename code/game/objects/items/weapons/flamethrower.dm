@@ -4,17 +4,13 @@
 	icon = 'icons/obj/flamethrower.dmi'
 	icon_state = "flamethrower_base"
 	item_state = "flamethrower_0"
-
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 3
-
-	throwforce = 10
 	throw_speed = 1
 	throw_range = 5
-
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = @'{"combat":1}'
 	material = /decl/material/solid/metal/steel
+	_base_attack_force = 3
 
 	var/fire_sound
 	/// Whether we have an igniter secured (screwdrivered) to us or not

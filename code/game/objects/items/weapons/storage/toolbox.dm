@@ -4,10 +4,8 @@
 	icon = 'icons/obj/items/storage/toolboxes/toolbox_red.dmi'
 	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 20
 	attack_cooldown = 21
 	melee_accuracy_bonus = -15
-	throwforce = 10
 	throw_speed = 1
 	throw_range = 7
 	w_class = ITEM_SIZE_LARGE
@@ -15,6 +13,7 @@
 	origin_tech = @'{"combat":1}'
 	attack_verb = list("robusted")
 	material = /decl/material/solid/metal/aluminium
+	_base_attack_force = 20
 
 /obj/item/toolbox/emergency
 	name = "emergency toolbox"

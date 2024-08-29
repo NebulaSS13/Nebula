@@ -16,7 +16,7 @@
 	icon = 'icons/clothing/feet/boots.dmi'
 	material = /decl/material/solid/organic/leather/synth
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
-	force = 3
+	_base_attack_force = 3
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,

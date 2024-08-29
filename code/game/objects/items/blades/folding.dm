@@ -2,7 +2,6 @@
 	name                      = "folding knife"
 	desc                      = "A small folding knife."
 	icon                      = 'icons/obj/items/bladed/folding.dmi'
-	material_force_multiplier = 0.2
 	w_class                   = ITEM_SIZE_SMALL
 	sharp                     = FALSE
 	pommel_material           = null
@@ -10,6 +9,7 @@
 	slot_flags                = null
 	material                  = /decl/material/solid/metal/bronze
 	hilt_material             = /decl/material/solid/organic/wood
+	_base_attack_force        = 5
 
 	var/open                  = FALSE
 	var/closed_item_size      = ITEM_SIZE_SMALL
@@ -22,7 +22,7 @@
 
 /obj/item/bladed/folding/Initialize()
 	. = ..()
-	update_force()
+	update_attack_force()
 
 /obj/item/bladed/folding/attack_self(mob/user)
 	if(user.a_intent != I_HELP)
@@ -36,7 +36,7 @@
 
 /obj/item/bladed/folding/proc/set_open(new_state, mob/user)
 	open = new_state
-	update_force()
+	update_attack_force()
 	update_icon()
 	if(user)
 		if(open)
@@ -51,7 +51,9 @@
 	if(!open)
 		icon_state = "[icon_state]-closed"
 
-/obj/item/bladed/folding/update_force()
+/obj/item/bladed/folding/update_attack_force()
+	..()
+	// TODO: check sharp/edge.
 	edge  = open
 	sharp = open
 	if(open)
@@ -60,7 +62,6 @@
 	else
 		w_class     = closed_item_size
 		attack_verb = closed_attack_verbs
-	..()
 
 // Only show the inhand sprite when open.
 /obj/item/bladed/folding/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)

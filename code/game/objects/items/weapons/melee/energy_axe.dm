@@ -3,10 +3,6 @@
 	desc = "An energised battle axe."
 	icon = 'icons/obj/items/weapon/e_axe.dmi'
 	lighting_color = COLOR_SABER_AXE
-	active_force = 60
-	active_throwforce = 35
-	force = 20
-	throwforce = 10
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
@@ -21,3 +17,5 @@
 	base_parry_chance =    30
 	active_parry_chance =  30
 	melee_accuracy_bonus = 15
+	_active_base_attack_force = 40
+	_base_attack_force = 20

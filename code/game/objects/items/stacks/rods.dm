@@ -44,8 +44,6 @@
 /obj/item/stack/material/rods/Initialize()
 	. = ..()
 	update_icon()
-	throwforce = round(0.25*material.get_edge_damage())
-	force = round(0.5*material.get_blunt_damage())
 	set_extension(src, /datum/extension/tool, list(TOOL_SURGICAL_DRILL = TOOL_QUALITY_WORST))
 
 /obj/item/stack/material/rods/update_state_from_amount()

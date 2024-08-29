@@ -63,7 +63,7 @@
 		return
 	if(cell.charge < 500)
 		return
-	if(_loaded.throwforce >= 15)
+	if(_loaded.get_thrown_attack_force() >= 15)
 		return
 	if(!istype(_loaded, /obj/item/stack/material/bow_ammo))
 		return
@@ -87,7 +87,6 @@
 /obj/item/stack/material/bow_ammo/bolt/rcd
 	name = "flashforged bolt"
 	desc = "The ultimate ghetto deconstruction implement."
-	throwforce = 4
 	material = /decl/material/solid/slag
 
 /obj/item/gun/launcher/bow/crossbow/powered/rapidcrossbowdevice

@@ -126,7 +126,7 @@
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	if(effective_force)
-		try_embed_in_mob(I, hit_zone, effective_force, direction = get_dir(user, src))
+		try_embed_in_mob(user, I, hit_zone, effective_force, direction = get_dir(user, src))
 		return TRUE
 	return FALSE
 
@@ -159,7 +159,7 @@
 /mob/living/proc/handle_thrown_obj_damage(obj/O, datum/thrownthing/TT)
 
 	var/dtype = O.atom_damage_type
-	var/throw_damage = O.throwforce*(TT?.speed/THROWFORCE_SPEED_DIVISOR)
+	var/throw_damage = O.get_thrown_attack_force()*(TT?.speed/THROWFORCE_SPEED_DIVISOR)
 	var/zone = BP_CHEST
 
 	//check if we hit
@@ -192,7 +192,7 @@
 	visible_message(SPAN_DANGER("\The [src] is hit [affecting ? "in \the [affecting.name] " : ""]by \the [O]!"))
 	if(TT?.thrower?.client)
 		admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
-	try_embed_in_mob(O, zone, throw_damage, dtype, null, affecting, direction = TT.init_dir)
+	try_embed_in_mob(TT.thrower, O, zone, throw_damage, dtype, null, affecting, direction = TT.init_dir)
 	return TRUE
 
 /mob/living/momentum_power(var/atom/movable/AM, var/datum/thrownthing/TT)
@@ -202,7 +202,7 @@
 	if(has_gravity() || check_space_footing())
 		. *= 0.5
 
-/mob/living/proc/try_embed_in_mob(obj/O, def_zone, embed_damage = 0, dtype = BRUTE, datum/wound/supplied_wound, obj/item/organ/external/affecting, direction)
+/mob/living/proc/try_embed_in_mob(mob/living/user, obj/O, def_zone, embed_damage = 0, dtype = BRUTE, datum/wound/supplied_wound, obj/item/organ/external/affecting, direction)
 
 	if(!istype(O))
 		return FALSE
@@ -219,7 +219,7 @@
 	if(affecting && istype(supplied_wound) && supplied_wound.is_open() && dtype == BRUTE) // Can't embed in a small bruise.
 		var/obj/item/I = O
 		var/sharp = is_sharp(I)
-		embed_damage *= (1 - get_blocked_ratio(def_zone, BRUTE, O.damage_flags(), O.armor_penetration, I.force))
+		embed_damage *= (1 - get_blocked_ratio(def_zone, BRUTE, O.damage_flags(), O.armor_penetration, I.get_attack_force(user)))
 
 		//blunt objects should really not be embedding in things unless a huge amount of force is involved
 		var/embed_chance = embed_damage / (sharp ? I.w_class : (I.w_class*3))

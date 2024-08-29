@@ -80,7 +80,7 @@
 	update_icon()
 
 /obj/effect/quicksand/attackby(obj/item/W, mob/user)
-	if(!exposed && W.force)
+	if(!exposed && W.get_attack_force(user))
 		expose()
 	else
 		..()

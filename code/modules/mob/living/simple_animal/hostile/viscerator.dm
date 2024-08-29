@@ -17,7 +17,7 @@
 	name = "rotating blades"
 	attack_verb = list("sliced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	force = 15
+	_base_attack_force = 15
 	edge = 1
 	sharp = 1
 

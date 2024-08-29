@@ -33,7 +33,7 @@
 	name = "goose feet"
 	gender = PLURAL
 	attack_verb = list("smacked around")
-	force = 0
+	_base_attack_force = 0
 	atom_damage_type =  BRUTE
 	canremove = FALSE
 
@@ -53,8 +53,8 @@
 /mob/living/simple_animal/hostile/goose/proc/enrage(var/potency)
 	var/obj/item/attacking_with = get_natural_weapon()
 	if(attacking_with)
-		attacking_with.force = min((attacking_with.force + potency), max_damage)
-	if(!loose && prob(25) && (attacking_with && attacking_with.force >= loose_threshold)) //second wind
+		attacking_with.set_base_attack_force(min((attacking_with.get_initial_base_attack_force() + potency), max_damage))
+	if(!loose && prob(25) && (attacking_with && attacking_with.get_attack_force(src) >= loose_threshold)) //second wind
 		loose = TRUE
 		set_max_health(initial(max_health) * 1.5)
 		set_damage(BRUTE, 0)

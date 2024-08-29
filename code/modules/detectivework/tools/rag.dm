@@ -11,6 +11,7 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/solid/organic/cloth
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 
 	var/on_fire = 0
 	var/burn_time = 20 //if the rag burns for too long it turns to ashes
@@ -48,13 +49,14 @@
 		return TRUE
 	return ..()
 
-/obj/item/chems/glass/rag/proc/update_name()
+/obj/item/chems/glass/rag/update_name()
+	. = ..()
 	if(on_fire)
-		SetName("burning [initial(name)]")
+		SetName("burning [name]")
 	else if(reagents && reagents.total_volume)
-		SetName("damp [initial(name)]")
+		SetName("damp [name]")
 	else
-		SetName("dry [initial(name)]")
+		SetName("dry [name]")
 
 /obj/item/chems/glass/rag/on_update_icon()
 	. = ..()

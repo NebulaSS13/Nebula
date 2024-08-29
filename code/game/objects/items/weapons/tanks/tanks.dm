@@ -24,21 +24,18 @@ var/global/list/global/tank_gauge_cache = list()
 	icon = 'icons/obj/items/tanks/tank_blue.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/steel
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BACK
+	w_class = ITEM_SIZE_LARGE
+	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
+	melee_accuracy_bonus = -30
+	throw_speed = 1
+	throw_range = 4
+	_base_attack_force = 15
 
 	var/gauge_icon = "indicator_tank"
 	var/gauge_cap = 6
 	var/previous_gauge_pressure = null
-
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BACK
-	w_class = ITEM_SIZE_LARGE
-
-	force = 15
-	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
-	melee_accuracy_bonus = -30
-	throwforce = 10.0
-	throw_speed = 1
-	throw_range = 4
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
@@ -46,10 +43,10 @@ var/global/list/global/tank_gauge_cache = list()
 	var/maxintegrity = 20
 	var/valve_welded = 0
 	var/obj/item/tankassemblyproxy/proxyassembly
-
 	var/volume = 70
-	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
-						//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
+	//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
+	//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
+	var/manipulated_by = null
 	var/failure_temp = 173 //173 deg C Borate seal (yes it should be 153 F, but that's annoying)
 	var/leaking = 0
 	var/wired = 0

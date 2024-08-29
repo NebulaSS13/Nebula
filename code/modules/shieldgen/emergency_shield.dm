@@ -44,9 +44,8 @@
 	if(!istype(W)) return
 
 	//Calculate damage
-	var/aforce = W.force
 	if(W.atom_damage_type == BRUTE || W.atom_damage_type == BURN)
-		current_health -= aforce
+		current_health -= W.get_attack_force(user)
 
 	//Play a fitting sound
 	playsound(src.loc, 'sound/effects/EMPulse.ogg', 75, 1)
@@ -78,19 +77,13 @@
 			if(prob(50))
 				qdel(src)
 
-/obj/machinery/shield/hitby(AM, var/datum/thrownthing/TT)
+/obj/machinery/shield/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
 	if(.)
 		//Let everyone know we've been hit!
 		visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
 		//Super realistic, resource-intensive, real-time damage calculations.
-		var/tforce = 0
-		if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-			var/mob/I = AM
-			tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		else
-			var/obj/O = AM
-			tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		var/tforce = AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		current_health -= tforce
 		//This seemed to be the best sound for hitting a force field.
 		playsound(src.loc, 'sound/effects/EMPulse.ogg', 100, 1)

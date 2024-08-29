@@ -49,7 +49,7 @@
 		body.visible_message(SPAN_NOTICE("\The [body] lowers its pincer."))
 
 /obj/item/natural_weapon/pincers/giant
-	force = 15
+	_base_attack_force = 15
 	attack_verb = list("snipped", "pinched", "crushed")
 
 /mob/living/simple_animal/hostile/giant_crab/Initialize() //embiggen

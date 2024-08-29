@@ -277,10 +277,11 @@ WOOD_RAILING_SUBTYPE(yew)
 			update_icon()
 		return
 
-	if(W.force && (W.atom_damage_type == BURN || W.atom_damage_type == BRUTE))
+	var/force = W.get_attack_force(user)
+	if(force && (W.atom_damage_type == BURN || W.atom_damage_type == BRUTE))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
-		take_damage(W.force, W.atom_damage_type)
+		take_damage(force, W.atom_damage_type)
 		return
 	. = ..()
 

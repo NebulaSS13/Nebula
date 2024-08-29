@@ -28,7 +28,7 @@
 		. = ..()
 
 /mob/living/exosuit/resolve_item_attack(var/obj/item/I, var/mob/living/user, var/def_zone)
-	if(!I.force)
+	if(!I.get_attack_force(user))
 		user.visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly with \the [I]."))
 		return
 

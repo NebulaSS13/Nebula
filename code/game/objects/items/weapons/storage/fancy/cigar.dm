@@ -8,7 +8,6 @@
 	item_state = "cigpacket"
 	icon = 'icons/obj/items/storage/cigarcase.dmi'
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/wood/mahogany
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar

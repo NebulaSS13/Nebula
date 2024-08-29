@@ -4,7 +4,6 @@
 	icon = 'icons/obj/items/device/holowarrant.dmi'
 	icon_state = "holowarrant"
 	item_state = "holowarrant"
-	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 10

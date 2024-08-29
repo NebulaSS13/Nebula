@@ -1,0 +1,5 @@
+/obj/item/twohanded/spear/@SUBTYPES : /obj/item/bladed/polearm/spear/improvised/@SUBTYPES{@OLD}
+/obj/item/twohanded/fireaxe/@SUBTYPES : /obj/item/bladed/axe/fire/@SUBTYPES{@OLD}
+/obj/item/twohanded/baseballbat/@SUBTYPES : /obj/item/baseball_bat/@SUBTYPES{@OLD}
+/obj/item/twohanded/pipewrench/@SUBTYPES : /obj/item/wrench/pipe/@SUBTYPES{@OLD}
+

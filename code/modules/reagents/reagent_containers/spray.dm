@@ -10,7 +10,6 @@
 	w_class                           = ITEM_SIZE_SMALL
 	throw_speed                       = 2
 	throw_range                       = 10
-	throwforce                        = 3
 	attack_cooldown                   = DEFAULT_QUICK_COOLDOWN
 	material                          = /decl/material/solid/organic/plastic
 	volume                            = 250
@@ -191,7 +190,6 @@
 	icon = 'icons/obj/items/device/chemsprayer.dmi'
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
-	throwforce = 3
 	w_class = ITEM_SIZE_LARGE
 	possible_transfer_amounts = null
 	volume = 600

@@ -4,7 +4,6 @@
 	icon                  = 'icons/obj/items/flame/torch.dmi'
 	attack_verb           = list("burnt", "singed")
 	randpixel             = 10
-	max_force             = 5
 	_fuel                 = null
 	lit_light_power       = 0.7
 	lit_light_range       = 3

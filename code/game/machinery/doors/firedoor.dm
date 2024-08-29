@@ -239,13 +239,13 @@
 		"You hear someone struggle and metal straining.")
 		return TRUE
 
-	if(!blocked && (IS_CROWBAR(C) || istype(C,/obj/item/twohanded/fireaxe)))
+	if(!blocked && (IS_CROWBAR(C) || istype(C,/obj/item/bladed/axe/fire)))
 		if(operating)
 			return ..()
 
-		if(istype(C,/obj/item/twohanded/fireaxe))
-			var/obj/item/twohanded/fireaxe/F = C
-			if(!F.wielded)
+		if(istype(C,/obj/item/bladed/axe/fire))
+			var/obj/item/bladed/axe/fire/F = C
+			if(!F.is_held_twohanded())
 				return ..()
 
 		user.visible_message("<span class='danger'>\The [user] starts to force \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\

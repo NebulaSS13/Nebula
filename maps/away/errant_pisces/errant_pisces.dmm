@@ -4373,7 +4373,7 @@
 /obj/structure/table/steel,
 /obj/item/firstaid/surgery,
 /obj/item/knife/kitchen/cleaver,
-/obj/item/twohanded/fireaxe,
+/obj/item/bladed/axe/fire,
 /obj/structure/window/reinforced{
 	dir = 1
 	},

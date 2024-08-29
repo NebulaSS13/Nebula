@@ -5,10 +5,8 @@
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/organic/wood
 	slot_flags = SLOT_BACK
-	throwforce = 0
 	throw_speed = 3
 	throw_range = 6
-	force = 5 // bonk
 
 /obj/item/guitar/attack_self(mob/user)
 	. = ..()

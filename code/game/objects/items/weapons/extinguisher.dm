@@ -10,8 +10,6 @@
 	w_class                       = ITEM_SIZE_NORMAL
 	throw_speed                   = 2
 	throw_range                   = 10
-	throwforce                    = 10
-	force                         = 10
 	material                      = /decl/material/solid/metal/steel
 	matter                        = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb                   = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
@@ -23,6 +21,7 @@
 	particle_move_delay           = 5                    //Spray effect move delay
 	safety                        = TRUE
 	sound_spray                   = 'sound/effects/extinguish.ogg'
+	_base_attack_force            = 10
 	var/sprite_name               = "fire_extinguisher"
 
 /obj/item/chems/spray/extinguisher/mini
@@ -33,8 +32,6 @@
 	sprite_name                   = "miniFE"
 	w_class                       = ITEM_SIZE_SMALL
 	hitsound                      = null
-	throwforce                    = 2
-	force                         = 3
 	possible_transfer_amounts     = @"[40,80]" //units of liquid per spray - 120 -> same as splashing them with a bucket per spray
 	possible_particle_amounts     = @"[1,2]"
 	amount_per_transfer_from_this = 80
@@ -45,6 +42,7 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/fiberglass  = MATTER_AMOUNT_REINFORCEMENT
 	)
+	_base_attack_force            = 3
 
 /obj/item/chems/spray/extinguisher/populate_reagents()
 	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)

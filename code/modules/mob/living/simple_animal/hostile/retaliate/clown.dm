@@ -25,5 +25,5 @@
 
 /obj/item/natural_weapon/clown
 	name = "bike horn"
-	force = 10
+	_base_attack_force = 10
 	hitsound = 'sound/items/bikehorn.ogg'

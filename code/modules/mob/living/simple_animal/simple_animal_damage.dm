@@ -51,15 +51,15 @@
 	if(istype(ai))
 		ai.retaliate(user)
 
-	if(O.force <= resistance)
+	var/damage = O.get_attack_force(user)
+	if(damage <= resistance)
 		to_chat(user, SPAN_WARNING("This weapon is ineffective; it does no damage."))
 		return 0
 
-	var/damage = O.force
 	if (O.atom_damage_type == PAIN)
 		damage = 0
 	if (O.atom_damage_type == STUN)
-		damage = (O.force / 8)
+		damage = (damage / 8)
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
 		purge = 3

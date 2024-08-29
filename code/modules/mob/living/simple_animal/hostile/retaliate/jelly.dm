@@ -21,7 +21,7 @@
 /obj/item/natural_weapon/tentacles
 	name = "tentacles"
 	attack_verb = list("stung","slapped")
-	force = 10
+	_base_attack_force = 10
 	atom_damage_type =  BURN
 
 /mob/living/simple_animal/hostile/jelly/Initialize()
@@ -52,7 +52,7 @@
 	set_scale(jelly_scale)
 	var/obj/item/attacking_with = get_natural_weapon()
 	if(attacking_with)
-		attacking_with.force *= jelly_scale
+		attacking_with.set_base_attack_force(attacking_with.get_initial_base_attack_force() * jelly_scale)
 	if(!megajelly_color)
 		megajelly_color = color_matrix_rotate_hue(round(rand(0,360),20))
 	color = megajelly_color

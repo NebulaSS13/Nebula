@@ -27,7 +27,7 @@
 	category = DEITY_TREE_SACRIFICE
 	requirements = list(DEITY_TREE_SACRIFICE = 1)
 	base_cost = 50
-	boon_path = /obj/item/twohanded/fireaxe/cult
+	boon_path = /obj/item/bladed/axe/fire/cult
 
 /datum/deity_item/blood_stone
 	name = "Bloodied Stone"

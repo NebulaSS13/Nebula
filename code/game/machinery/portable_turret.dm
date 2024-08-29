@@ -291,9 +291,10 @@ var/global/list/turret_icons
 
 	else
 		//if the turret was attacked with the intention of harming it:
+		var/force = I.get_attack_force(user) * 0.5
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		take_damage(I.force * 0.5, I.atom_damage_type)
-		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
+		take_damage(force, I.atom_damage_type)
+		if(force > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
 				attacked = 1
 				spawn()

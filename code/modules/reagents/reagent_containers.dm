@@ -8,7 +8,6 @@
 	obj_flags = OBJ_FLAG_HOLLOW
 	abstract_type = /obj/item/chems
 
-	var/base_name
 	var/base_desc
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = @"[5,10,15,25,30]"
@@ -98,7 +97,7 @@
 	return
 
 /obj/item/chems/attackby(obj/item/used_item, mob/user)
-	if(used_item.user_can_wield(user, silent = TRUE))
+	if(used_item.user_can_attack_with(user, silent = TRUE))
 		if(IS_PEN(used_item))
 			var/tmp_label = sanitize_safe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 			if(length(tmp_label) > 10)
@@ -113,7 +112,7 @@
 /obj/item/chems/standard_pour_into(mob/user, atom/target, amount = 5)
 	amount = amount_per_transfer_from_this
 	// We'll be lenient: if you lack the dexterity for proper pouring you get a random amount.
-	if(!user_can_wield(user, silent = TRUE))
+	if(!user_can_attack_with(user, silent = TRUE))
 		amount = rand(1, floor(amount_per_transfer_from_this * 1.5))
 	return ..(user, target, amount)
 

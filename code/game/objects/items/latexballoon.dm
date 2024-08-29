@@ -4,12 +4,11 @@
 	icon = 'icons/obj/items/latexballon.dmi'
 	icon_state = "latexballon"
 	item_state = "lgloves"
-	force = 0
-	throwforce = 0
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 1
 	throw_range = 15
 	material = /decl/material/solid/organic/plastic
+	_base_attack_force = 0
 	var/datum/gas_mixture/air_contents = null
 
 /obj/item/latexballon/proc/blow(obj/item/tank/tank)

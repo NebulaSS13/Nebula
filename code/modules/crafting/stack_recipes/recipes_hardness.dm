@@ -63,7 +63,7 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/baseball_bat
-	result_type       = /obj/item/twohanded/baseballbat
+	result_type       = /obj/item/baseball_bat
 	difficulty        = MAT_VALUE_HARD_DIY
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE // similar to boxes, not thematically appropriate to low tech
 	category          = "weapons"

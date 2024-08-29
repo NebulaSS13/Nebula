@@ -40,7 +40,6 @@
 	name = "tactical gloves"
 	icon_state = ICON_STATE_WORLD
 	color = COLOR_BROWN
-	force = 5
 	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
 	armor = list(

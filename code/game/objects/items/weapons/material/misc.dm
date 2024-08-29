@@ -6,14 +6,12 @@
 	icon = 'icons/obj/items/weapon/harpoon.dmi'
 	icon_state = "harpoon"
 	item_state = "harpoon"
-	max_force = 20
 	item_flags = ITEM_FLAG_IS_WEAPON
-	material_force_multiplier = 0.3 // 18 with hardness 60 (steel)
-	thrown_material_force_multiplier = 0.6
 	attack_verb = list("jabbed","stabbed","ripped")
 	does_spin = FALSE
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	_base_attack_force = 20
 	var/spent
 
 /obj/item/harpoon/bomb
@@ -41,8 +39,6 @@
 	SetName("broken harpoon")
 	desc = "A short spear with just a barb - if it once had a spearhead, it doesn't any more."
 	icon_state = "harpoon_bomb_spent"
-	material_force_multiplier = 0.1
-	thrown_material_force_multiplier = 0.3
 	sharp = FALSE
 	edge = FALSE
 
@@ -51,8 +47,6 @@
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
 	icon = 'icons/obj/items/tool/scythe.dmi'
 	icon_state = ICON_STATE_WORLD
-	material_force_multiplier = 0.275 // 16 with hardness 60 (steel)
-	thrown_material_force_multiplier = 0.2
 	sharp = 1
 	edge = 1
 	throw_speed = 1
@@ -63,14 +57,13 @@
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	_base_attack_force = 10
 
 /obj/item/cross
 	name = "cross"
 	desc = "It's a cross, commonly used as a holy symbol by Christians."
 	icon = 'icons/obj/items/cross.dmi'
 	icon_state = "cross"
-	material_force_multiplier = 0.1
-	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "bashed")
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME

@@ -89,7 +89,7 @@
 	faction = "farmbots"
 
 /obj/item/natural_weapon/hooves/strong
-	force = 15
+	_base_attack_force = 15
 
 /mob/living/simple_animal/hostile/malf_drone/hydro
 	name = "Farmbot"

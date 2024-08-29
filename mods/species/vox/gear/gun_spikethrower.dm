@@ -57,7 +57,6 @@
 	name = "vox quill"
 	desc = "A wickedly barbed quill from some bizarre animal."
 	icon = 'mods/species/vox/icons/gear/arrow_quill.dmi'
-	throwforce = 5
 	material = /decl/material/solid/organic/leather/chitin
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 

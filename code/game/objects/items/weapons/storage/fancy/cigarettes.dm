@@ -8,7 +8,6 @@
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER

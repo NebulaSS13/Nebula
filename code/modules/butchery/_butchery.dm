@@ -9,7 +9,7 @@
 	if(!IS_KNIFE(tool) || !butchery_data || stat != DEAD)
 		return FALSE
 
-	if(!tool.user_can_wield(user))
+	if(!tool.user_can_attack_with(user))
 		return TRUE // skip other interactions
 
 	var/decl/butchery_data/butchery_decl = GET_DECL(butchery_data)

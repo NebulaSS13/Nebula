@@ -7,7 +7,7 @@
 	replaced_in_loadout = TRUE
 	w_class = ITEM_SIZE_SMALL
 	icon_state = ICON_STATE_WORLD
-	force = 0
+	_base_attack_force = 3
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.

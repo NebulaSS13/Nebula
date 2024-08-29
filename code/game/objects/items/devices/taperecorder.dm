@@ -4,9 +4,12 @@
 	icon = 'icons/obj/items/device/tape_recorder/tape_recorder.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_LOWER_BODY
+	throw_speed = 4
+	throw_range = 20
 
 	var/emagged = 0.0
 	var/recording = 0.0
@@ -16,11 +19,6 @@
 	var/canprint = 1
 	var/datum/wires/taperecorder/wires = null // Wires datum
 	var/maintenance = 0
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_LOWER_BODY
-	throwforce = 2
-	throw_speed = 4
-	throw_range = 20
 
 /obj/item/taperecorder/Initialize()
 	. = ..()
@@ -375,8 +373,7 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE
 	)
-	force = 1
-	throwforce = 0
+	_base_attack_force = 1
 	var/max_capacity = 600
 	var/used_capacity = 0
 	var/list/storedinfo = new/list()

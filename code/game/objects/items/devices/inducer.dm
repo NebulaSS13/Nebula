@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/device/inducer.dmi'
 	icon_state = "inducer-sci"
 	item_state = "inducer-sci"
-	force = 7
+	_base_attack_force = 7
 	origin_tech = @'{"powerstorage":6,"engineering":4}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

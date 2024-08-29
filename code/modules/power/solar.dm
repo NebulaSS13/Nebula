@@ -89,7 +89,7 @@ var/global/list/solars_list = list()
 		return
 	else if (W)
 		add_fingerprint(user)
-		current_health -= W.force
+		current_health -= W.get_attack_force(user)
 		healthcheck()
 	..()
 

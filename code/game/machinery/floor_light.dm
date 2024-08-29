@@ -58,7 +58,7 @@ var/global/list/floor_light_cache = list()
 		qdel(src)
 		return TRUE
 
-	if(W.force && user.a_intent == I_HURT)
+	if(W.get_attack_force(user) && user.a_intent == I_HURT)
 		return physical_attack_hand(user)
 
 	return ..()

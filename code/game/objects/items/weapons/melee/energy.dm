@@ -10,13 +10,12 @@
 	w_class = ITEM_SIZE_SMALL
 	hitsound = 'sound/weapons/genhit.ogg'
 
-	force =             3 // bonk
-	throwforce =        3
-	throw_speed =       1
-	throw_range =       5
-	sharp =             0
-	edge =              0
-	armor_penetration = 0
+	_base_attack_force = 3 // bonk
+	throw_speed        = 1
+	throw_range        = 5
+	sharp              = 0
+	edge               = 0
+	armor_penetration  = 0
 
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -31,7 +30,6 @@
 
 	var/active = FALSE
 	var/active_parry_chance = 15
-	var/active_force =        30
 	var/active_throwforce =   20
 	var/active_armour_pen =   50
 	var/active_edge =         1
@@ -39,14 +37,16 @@
 	var/active_descriptor =   "energized"
 	var/active_hitsound =     'sound/weapons/blade1.ogg'
 	var/active_sound =        'sound/weapons/saberon.ogg'
+	VAR_PROTECTED/_active_base_attack_force = 30
+
 	var/inactive_sound =      'sound/weapons/saberoff.ogg'
 
 	attack_verb =                   list("hit")
 	var/list/active_attack_verb	=   list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/list/inactive_attack_verb = list("hit")
 
-/obj/item/energy_blade/get_max_weapon_value()
-	return active_force
+/obj/item/energy_blade/get_max_weapon_force()
+	return _active_base_attack_force
 
 /obj/item/energy_blade/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	. = ..()
@@ -79,14 +79,17 @@
 		return 0
 	return ..()
 
+/obj/item/energy_blade/get_base_attack_force()
+	if(active)
+		return _active_base_attack_force
+	return _base_attack_force
+
 /obj/item/energy_blade/proc/toggle_active(var/mob/user)
 
 	active = !active
 	if(active)
 
 		obj_flags |= OBJ_FLAG_NO_STORAGE
-		force =             active_force
-		throwforce =        active_throwforce
 		sharp =             active_sharp
 		edge =              active_edge
 		base_parry_chance = active_parry_chance
@@ -102,8 +105,6 @@
 	else
 
 		obj_flags &= ~OBJ_FLAG_NO_STORAGE
-		force =             initial(force)
-		throwforce =        initial(throwforce)
 		sharp =             initial(sharp)
 		edge =              initial(edge)
 		base_parry_chance = initial(base_parry_chance)
@@ -115,6 +116,8 @@
 		slot_flags = initial(slot_flags)
 		if(inactive_sound)
 			playsound(loc, inactive_sound, 50, 1)
+
+	update_attack_force()
 
 	if(lighting_color)
 		if(active)

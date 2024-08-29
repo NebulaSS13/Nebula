@@ -9,7 +9,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
-	force = 10
+	_base_attack_force = 10
 
 	var/list/restricted_hardpoints
 	var/mob/living/exosuit/owner

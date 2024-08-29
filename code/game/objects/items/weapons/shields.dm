@@ -60,8 +60,6 @@
 	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
-	force = 5.0
-	throwforce = 5
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
@@ -102,14 +100,13 @@
 	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
-	force = 6.0
-	throwforce = 7
 	throw_range = 3
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/plasteel
 	max_block = 50
 	can_block_lasers = TRUE
 	slowdown_general = 1.5
+	_base_attack_force = 6
 
 /obj/item/shield/riot/metal/security //A cosmetic difference.
 	icon = 'icons/obj/items/shield/metal_security.dmi'
@@ -120,8 +117,6 @@
 	icon = 'icons/obj/items/shield/buckler.dmi'
 	icon_state = "buckler"
 	slot_flags = SLOT_BACK
-	force = 8
-	throwforce = 8
 	base_block_chance = 60
 	throw_speed = 10
 	throw_range = 20
@@ -130,6 +125,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/organic/wood = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("shoved", "bashed")
+	_base_attack_force = 8
 	max_health = 250
 
 /obj/item/shield/buckler/handle_shield(mob/user)
@@ -151,8 +147,6 @@
 	icon = 'icons/obj/items/shield/e_shield.dmi'
 	icon_state = "eshield0" // eshield1 for expanded
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 3.0
-	throwforce = 5
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_SMALL
@@ -165,6 +159,7 @@
 		/decl/material/solid/silicon          = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
 	)
+	_base_attack_force = 3
 	var/active = 0
 	var/shield_light_color = "#006aff"
 
@@ -197,14 +192,14 @@
 			M.take_organ_damage(5, 0)
 	active = !active
 	if (active)
-		force = 10
+		set_base_attack_force(10)
 		update_icon()
 		w_class = ITEM_SIZE_HUGE
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("\The [src] is now active."))
 
 	else
-		force = 3
+		set_base_attack_force(3)
 		update_icon()
 		w_class = ITEM_SIZE_TINY
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)

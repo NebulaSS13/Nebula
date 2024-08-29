@@ -30,7 +30,6 @@
 	desc = "When you REALLY want to turn up the heat."
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#694e30"
-	force = 5
 
 /obj/item/clothing/shoes/jackboots/jungleboots
 	name = "jungle boots"
@@ -100,7 +99,6 @@
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"
 	name = "clown shoes"
 	icon = 'icons/clothing/feet/clown.dmi'
-	force = 0
 	bodytype_equip_flags = null
 	can_add_hidden_item = FALSE
 	var/footstep = 1	//used for squeeks whilst walking
@@ -123,7 +121,7 @@
 	name = "boots"
 	desc = "A pair of boots worn by the followers of Nar-Sie."
 	icon = 'icons/clothing/feet/cult.dmi'
-	force = 2
+	_base_attack_force = 2
 	siemens_coefficient = 0.7
 
 	cold_protection = SLOT_FEET

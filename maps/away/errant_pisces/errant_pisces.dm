@@ -115,8 +115,8 @@
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
 	if(W.sharp || W.edge)
-		var/obj/item/SH = W
-		if (!(SH.sharp) || (SH.sharp && SH.force < 10))//is not sharp enough or at all
+		var/force = W.get_attack_force(user)
+		if (!(W.sharp) || (W.sharp && force < 10))//is not sharp enough or at all
 			to_chat(user,"<span class='warning'>You can't cut throught \the [src] with \the [W], it's too dull.</span>")
 			return
 		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
@@ -124,7 +124,7 @@
 			if (!do_after(user, 20, src))
 				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
 				return
-			take_damage(20 * (1 + (SH.force-10)/10), W.atom_damage_type) //the sharper the faster, every point of force above 10 adds 10 % to damage
+			take_damage(20 * (1 + (force-10)/10), W.atom_damage_type) //the sharper the faster, every point of force above 10 adds 10 % to damage
 		new /obj/item/stack/net(src.loc)
 		qdel(src)
 		return TRUE
@@ -182,8 +182,6 @@
 	icon = 'maps/away/errant_pisces/icons/net_roll.dmi'
 	icon_state = "net_roll"
 	w_class = ITEM_SIZE_LARGE
-	force = 3.0
-	throwforce = 5
 	throw_speed = 5
 	throw_range = 10
 	material = /decl/material/solid/organic/cloth
@@ -191,6 +189,7 @@
 	max_amount = 30
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
+	_base_attack_force = 3
 
 /obj/item/stack/net/Initialize()
 	. = ..()

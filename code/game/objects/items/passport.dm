@@ -2,7 +2,7 @@
 	name = "identification papers"
 	icon = 'icons/obj/items/passport.dmi'
 	icon_state = "passport"
-	force = 1
+	_base_attack_force = 1
 	gender = PLURAL
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("whipped")

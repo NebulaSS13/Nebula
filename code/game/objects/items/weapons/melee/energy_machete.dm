@@ -2,8 +2,7 @@
 	name = "energy machete"
 	desc = "A machete handle that extends out into a long, purple machete blade."
 	icon = 'icons/obj/items/weapon/e_machete.dmi'
-	active_force =         16
-	active_throwforce =    17
+	_active_base_attack_force = 16
 	active_parry_chance =  30
 	lighting_color = "#6600cc"
 	origin_tech = @'{"magnets":3}'

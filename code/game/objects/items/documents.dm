@@ -4,10 +4,10 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_generic"
 	item_state = "paper"
-	throwforce = 0
 	w_class = ITEM_SIZE_TINY
 	throw_range = 1
 	material = /decl/material/solid/organic/paper
+	_base_attack_force = 0
 	var/description_antag = "These conversations contain a massive amount of dirt on major figures: drugs, sex, money..."
 
 /obj/item/documents/examine(mob/user)

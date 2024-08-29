@@ -4,8 +4,6 @@
 	icon = 'icons/obj/items/weapon/throwing_star.dmi'
 	icon_state = "star"
 	randpixel = 12
-	material_force_multiplier = 0.1 // 6 with hardness 60 (steel)
-	thrown_material_force_multiplier = 0.25 // 15 with weight 60 (steel)
 	throw_speed = 10
 	throw_range = 15
 	sharp = 1
@@ -13,9 +11,10 @@
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	item_flags = ITEM_FLAG_IS_WEAPON
+	_base_attack_force = 15
 
-/obj/item/star/get_max_weapon_value()
-	return throwforce
+/obj/item/star/get_max_weapon_force()
+	return get_thrown_attack_force()
 
 /obj/item/star/throw_impact(atom/hit_atom)
 	..()

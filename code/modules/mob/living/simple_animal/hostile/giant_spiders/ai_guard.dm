@@ -50,7 +50,7 @@
 	if(istype(critter))
 		var/obj/item/attacking_with = critter.get_natural_weapon()
 		if(attacking_with)
-			attacking_with.force = initial(attacking_with.force) + 5
+			attacking_with.set_base_attack_force(attacking_with.get_initial_base_attack_force() + 5)
 	break_stuff_probability = 45
 	addtimer(CALLBACK(src, PROC_REF(calm_down)), 3 MINUTES)
 
@@ -61,5 +61,5 @@
 	if(istype(critter))
 		var/obj/item/attacking_with = critter.get_natural_weapon()
 		if(attacking_with)
-			attacking_with.force = initial(attacking_with.force)
+			attacking_with.set_base_attack_force(attacking_with.get_initial_base_attack_force())
 	break_stuff_probability = 10

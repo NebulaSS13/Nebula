@@ -5,12 +5,11 @@
 	icon_state = "iron"
 	item_state = "ironingiron"
 	w_class = ITEM_SIZE_NORMAL
-	throwforce = 10
 	throw_speed = 2
 	throw_range = 10
-	force = 8.0
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	material = /decl/material/solid/metal/steel
+	_base_attack_force = 8
 	var/enabled = 0
 
 /obj/item/ironingiron/attack_self(var/mob/user)

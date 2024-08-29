@@ -7,8 +7,6 @@
 	anchored = FALSE
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 5.0
-	throwforce = 5
 	throw_speed = 3
 	throw_range = 15
 	part_flags = 0

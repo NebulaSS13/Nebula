@@ -7,7 +7,6 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = @'{"materials":1,"biotech":1}'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
-	force = 5
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/ancient_surgery/proc/get_tool_properties()
@@ -57,7 +56,7 @@
 	desc = "A short, wickedly sharp blade used for making incisions and cutting through flesh."
 	icon = 'icons/obj/items/surgery/scalpel.dmi'
 	sharp = TRUE
-	force = 8
+	_base_attack_force = 8
 
 /obj/item/ancient_surgery/scalpel/get_tool_properties()
 	var/static/list/tool_properties = list(TOOL_SCALPEL = TOOL_QUALITY_MEDIOCRE)

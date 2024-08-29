@@ -1,7 +1,7 @@
 /obj/item/ability/psionic/tinker
 	name = "psychokinetic tool"
 	icon_state = "tinker"
-	force = 1
+	_base_attack_force = 1
 
 /obj/item/ability/psionic/tinker/Initialize()
 	. = ..()

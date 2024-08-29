@@ -5,7 +5,6 @@
 	icon_state = "corncob"
 	item_state = "corncob"
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
 	material = /decl/material/solid/organic/plantmatter
@@ -25,7 +24,6 @@
 	icon_state = "banana_peel"
 	item_state = "banana_peel"
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
 	material = /decl/material/solid/organic/plantmatter

@@ -37,16 +37,14 @@
 	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
 	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_NORMAL
-	throwforce = 5
 	throw_speed = 4
 	throw_range = 5
-	force = 5
 	origin_tech = @'{"combat":1}'
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
-
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/pickup2.ogg'
+	can_be_twohanded = TRUE // also checks one_hand_penalty
 
 	var/fire_verb = "fire"
 	var/waterproof = FALSE
@@ -108,6 +106,9 @@
 	autofiring_at = null
 	autofiring_by = null
 	. = ..()
+
+/obj/item/gun/is_held_twohanded(mob/living/wielder)
+	return one_hand_penalty > 0 && ..()
 
 /obj/item/gun/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
 	return TRUE
@@ -185,17 +186,6 @@
 
 /obj/item/gun/proc/get_safety_indicator()
 	return mutable_appearance(icon, "[get_world_inventory_state()][safety_icon][safety()]")
-
-/obj/item/gun/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && user_mob?.can_wield_item(src) && is_held_twohanded(user_mob))
-		var/wielded_state = "[overlay.icon_state]-wielded"
-		if(check_state_in_icon(wielded_state, overlay.icon))
-			overlay.icon_state = wielded_state
-	apply_gun_mob_overlays(user_mob, bodytype, overlay, slot, bodypart)
-	. = ..()
-
-/obj/item/gun/proc/apply_gun_mob_overlays(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	return
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
@@ -313,7 +303,7 @@
 
 	var/held_twohanded = TRUE // Assume a non-mob shooter won't suffer from accuracy penalties.
 	if(istype(user))
-		held_twohanded = user.can_wield_item(src) && is_held_twohanded(user)
+		held_twohanded = user.can_twohand_item(src) && is_held_twohanded(user)
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -440,7 +430,7 @@
 					to_chat(user, SPAN_WARNING("You have trouble keeping \the [src] on target with just one hand."))
 				if(8 to INFINITY)
 					to_chat(user, SPAN_WARNING("You struggle to keep \the [src] on target with just one hand!"))
-		else if(!user.can_wield_item(src))
+		else if(!user.can_twohand_item(src))
 			switch(one_hand_penalty)
 				if(4 to 6)
 					if(prob(50))

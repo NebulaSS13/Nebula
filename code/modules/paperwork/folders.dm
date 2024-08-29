@@ -7,7 +7,6 @@
 	icon         = 'icons/obj/items/folders.dmi'
 	icon_state   = "folder"
 	w_class      = ITEM_SIZE_SMALL
-	throwforce   = 0
 	drop_sound   = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 	material     = /decl/material/solid/organic/cardboard

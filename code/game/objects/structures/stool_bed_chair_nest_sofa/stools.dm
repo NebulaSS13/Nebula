@@ -1,17 +1,16 @@
 //Todo: add leather and cloth for arbitrary coloured stools.
 /obj/item/stool
-	name          = "stool"
-	desc          = "Apply butt."
-	icon          = 'icons/obj/furniture.dmi'
-	icon_state    = "stool_preview" //set for the map
-	item_state    = "stool"
-	randpixel     = 0
-	force         = 10
-	throwforce    = 10
-	w_class       = ITEM_SIZE_HUGE
-	material      = DEFAULT_FURNITURE_MATERIAL
-	obj_flags     = OBJ_FLAG_SUPPORT_MOB | OBJ_FLAG_ROTATABLE
-	var/base_icon = "stool"
+	name               = "stool"
+	desc               = "Apply butt."
+	icon               = 'icons/obj/furniture.dmi'
+	icon_state         = "stool_preview" //set for the map
+	item_state         = "stool"
+	randpixel          = 0
+	w_class            = ITEM_SIZE_HUGE
+	material           = DEFAULT_FURNITURE_MATERIAL
+	obj_flags          = OBJ_FLAG_SUPPORT_MOB | OBJ_FLAG_ROTATABLE
+	_base_attack_force = 10
+	var/base_icon      = "stool"
 	var/padding_color
 	var/decl/material/padding_material
 
@@ -26,7 +25,6 @@
 		return INITIALIZE_HINT_QDEL
 	if(ispath(padding_material, /decl/material))
 		padding_material = GET_DECL(padding_material)
-	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
 /obj/item/stool/bar

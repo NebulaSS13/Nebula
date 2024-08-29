@@ -28,7 +28,7 @@
 	var/decl/material/attacking_material = using_item.get_material()
 	var/decl/material/crushing_material = crushing_item?.get_material()
 	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(SKILL_CHEMISTRY) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
-	if(using_item.force <= 0 || !attacking_material || !crushing_material)
+	if(using_item.get_attack_force(user) <= 0 || !attacking_material || !crushing_material)
 		return TRUE
 	if(attacking_material.hardness <= crushing_material.hardness)
 		to_chat(user, SPAN_NOTICE("\The [using_item] is not hard enough to crush \the [crushing_item]."))

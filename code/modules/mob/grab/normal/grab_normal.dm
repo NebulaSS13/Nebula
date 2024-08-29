@@ -154,7 +154,7 @@
 	var/obj/item/clothing/hat = attacker.get_equipped_item(slot_head_str)
 	var/damage_flags = 0
 	if(istype(hat))
-		damage += hat.force * 3
+		damage += hat.get_attack_force(attacker) * 3
 		damage_flags = hat.damage_flags()
 
 	if(damage_flags & DAM_SHARP)
@@ -228,7 +228,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.atom_damage_type != BRUTE)
+	if(!W.edge || !W.get_attack_force(user) || W.atom_damage_type != BRUTE)
 		return 0 //unsuitable weapon
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
@@ -241,15 +241,16 @@
 	var/damage_mod = 1
 	var/damage_flags = W.damage_flags()
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
+	var/force = W.get_attack_force(user)
 	var/obj/item/clothing/head/helmet = affecting.get_equipped_item(slot_head_str)
 	if(istype(helmet) && (helmet.body_parts_covered & SLOT_HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
 		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
 		if(armor_datum)
-			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
+			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, force*1.5)
 
 	var/total_damage = 0
 	for(var/i in 1 to 3)
-		var/damage = min(W.force*1.5, 20)*damage_mod
+		var/damage = min(force*1.5, 20)*damage_mod
 		affecting.apply_damage(damage, W.atom_damage_type, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
 		total_damage += damage
 
@@ -272,7 +273,7 @@
 		return
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
-	if(!W.edge || !W.force || W.atom_damage_type != BRUTE)
+	if(!W.edge || !W.get_attack_force(user) || W.atom_damage_type != BRUTE)
 		return 0 //unsuitable weapon
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O || !(O.limb_flags & ORGAN_FLAG_HAS_TENDON) || (O.status & ORGAN_TENDON_CUT))

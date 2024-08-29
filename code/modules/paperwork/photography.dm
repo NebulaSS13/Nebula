@@ -16,7 +16,6 @@
 	icon_state       = "film"
 	item_state       = "electropack"
 	w_class          = ITEM_SIZE_TINY
-	throwforce       = 0
 	throw_range      = 10
 	material         = /decl/material/solid/organic/plastic
 	var/tmp/max_uses = 10

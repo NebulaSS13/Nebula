@@ -1,22 +1,22 @@
 /obj/item/pen
-	name                   = "pen"
-	desc                   = ""
-	icon                   = 'icons/obj/items/pens/pen.dmi'
-	icon_state             = ICON_STATE_WORLD
-	slot_flags             = SLOT_LOWER_BODY | SLOT_EARS
-	w_class                = ITEM_SIZE_TINY
-	throwforce             = 0
-	throw_speed            = 7
-	throw_range            = 15
-	material               = /decl/material/solid/organic/plastic
-	var/pen_flag           = PEN_FLAG_ACTIVE                     //Properties/state of the pen used.
+	name                  = "pen"
+	desc                  = ""
+	icon                  = 'icons/obj/items/pens/pen.dmi'
+	icon_state            = ICON_STATE_WORLD
+	slot_flags            = SLOT_LOWER_BODY | SLOT_EARS
+	w_class               = ITEM_SIZE_TINY
+	throw_speed           = 7
+	throw_range           = 15
+	material              = /decl/material/solid/organic/plastic
+	_base_attack_force    = 1
+	var/pen_flag          = PEN_FLAG_ACTIVE                     //Properties/state of the pen used.
 	var/stroke_color      = "black"                             //What colour the ink is! Can be hexadecimal colour or a colour name string.
 	var/stroke_color_name = "black"                             //Human readable name of the stroke colour. Used in text strings, and to identify the nearest colour to the stroke colour.
-	var/medium_name        = "ink"                               //Whatever the pen uses to leave its mark. Used in text strings.
-	var/max_uses           = -1                                  //-1 for unlimited uses.
-	var/pen_quality        = TOOL_QUALITY_DEFAULT                //What will be set as tool quality for the pen
+	var/medium_name       = "ink"                               //Whatever the pen uses to leave its mark. Used in text strings.
+	var/max_uses          = -1                                  //-1 for unlimited uses.
+	var/pen_quality       = TOOL_QUALITY_DEFAULT                //What will be set as tool quality for the pen
 	///The type of font this pen's written text will be represented with
-	var/pen_font           = PEN_FONT_DEFAULT
+	var/pen_font          = PEN_FONT_DEFAULT
 
 /obj/item/pen/Initialize(ml, material_key)
 	. = ..()

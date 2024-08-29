@@ -10,11 +10,12 @@
 	heat_protection = SLOT_FEET
 	slot_flags = SLOT_FEET
 	permeability_coefficient = 0.50
-	force = 2
+	_base_attack_force = 2
 	blood_overlay_type = "shoeblood"
 	material = /decl/material/solid/organic/leather
 	origin_tech = @'{"materials":1,"engineering":1}'
 	fallback_slot = slot_shoes_str
+	_base_attack_force = 5
 
 	var/can_fit_under_magboots = TRUE
 	var/can_add_cuffs = TRUE

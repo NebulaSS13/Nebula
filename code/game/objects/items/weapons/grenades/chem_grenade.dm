@@ -3,7 +3,7 @@
 	icon = 'icons/obj/items/grenades/grenade_chem.dmi'
 	desc = "A hand made chemical grenade."
 	w_class = ITEM_SIZE_SMALL
-	force = 2.0
+	_base_attack_force = 2.0
 	det_time = null
 	var/stage = 0
 	var/path = 0

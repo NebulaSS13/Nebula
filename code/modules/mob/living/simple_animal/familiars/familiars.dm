@@ -33,7 +33,7 @@
 	can_escape_buckles = TRUE
 
 /obj/item/natural_weapon/pincers/strong
-	force = 15
+	_base_attack_force = 15
 
 /*familiar version of the Pike w/o all the other hostile/carp stuff getting in the way (namely life)
 */
@@ -71,7 +71,7 @@
 
 /obj/item/natural_weapon/horror
 	name = "foul touch"
-	force = 10
+	_base_attack_force = 10
 	atom_damage_type =  BURN
 	attack_verb = list("touched")
 

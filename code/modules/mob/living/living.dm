@@ -1655,9 +1655,10 @@ default behaviour is:
 	user.set_special_ability_cooldown(5 SECONDS)
 	visible_message(SPAN_DANGER("You hear something rumbling inside [src]'s stomach..."))
 	var/obj/item/I = user.get_active_held_item()
-	if(!I?.force)
+	var/force = I?.get_attack_force(user)
+	if(!force)
 		return
-	var/d = rand(round(I.force / 4), I.force)
+	var/d = rand(round(force / 4), force)
 	visible_message(SPAN_DANGER("\The [user] attacks [src]'s stomach wall with \the [I]!"))
 	playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
@@ -1824,3 +1825,23 @@ default behaviour is:
 			return screen_locs
 	var/decl/species/my_species = get_species()
 	return my_species?.character_preview_screen_locs
+
+/mob/living/can_twohand_item(obj/item/item)
+	if(!istype(item) || !item.can_be_twohanded)
+		return FALSE
+	if(incapacitated())
+		return FALSE
+	if(mob_size < item.minimum_size_to_twohand || (!isnull(item.maximum_size_to_twohand) && mob_size > item.maximum_size_to_twohand))
+		return FALSE
+	for(var/empty_hand in get_empty_hand_slots())
+		var/datum/inventory_slot/gripper/slot = get_inventory_slot_datum(empty_hand)
+		if(!istype(slot))
+			continue
+		if(slot.requires_organ_tag)
+			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(src, slot.requires_organ_tag)
+			if(istype(hand) && hand.is_usable() && (!item.needs_attack_dexterity || hand.get_manual_dexterity() >= item.needs_attack_dexterity))
+				return TRUE
+		else if(!item.needs_attack_dexterity || slot.dexterity >= item.needs_attack_dexterity)
+			return TRUE
+	return FALSE
+

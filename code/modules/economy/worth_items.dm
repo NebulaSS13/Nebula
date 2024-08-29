@@ -2,9 +2,6 @@
 #define MUNDANE_ARMOUR_VALUE 20
 #define BASE_ARMOUR_WORTH    50
 
-/obj/item/proc/get_max_weapon_value()
-	return force
-
 /obj/item/get_base_value()
 
 	if(holographic)
@@ -23,8 +20,8 @@
 				largest_tech_val = next_tech_val
 		. += largest_tech_val
 
-	if((item_flags & ITEM_FLAG_IS_WEAPON) && force)
-		var/weapon_value = ((get_max_weapon_value() * 15) * (1 + max(sharp, edge)))
+	if((item_flags & ITEM_FLAG_IS_WEAPON) && get_base_attack_force())
+		var/weapon_value = ((get_max_weapon_force() * 15) * (1 + max(sharp, edge)))
 		if(attack_cooldown <= FAST_WEAPON_COOLDOWN)
 			weapon_value *= 1.5
 		else if(attack_cooldown >= SLOW_WEAPON_COOLDOWN)

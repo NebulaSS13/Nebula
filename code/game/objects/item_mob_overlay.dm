@@ -156,7 +156,18 @@ var/global/list/icon_state_cache = list()
 			adjusted_overlay.plane =            I.plane
 			adjusted_overlay.layer =            I.layer
 			overlay.overlays += adjusted_overlay
+
+	if(overlay)
+		if(is_held_twohanded())
+			var/wielded_state = "[overlay.icon_state]-wielded"
+			if(check_state_in_icon(wielded_state, overlay.icon))
+				overlay.icon_state = wielded_state
+		apply_additional_mob_overlays(user_mob, bodytype, overlay, slot, bodypart, use_fallback_if_icon_missing)
+
 	return overlay
+
+/obj/item/proc/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+	return
 
 //Special proc belts use to compose their icon
 /obj/item/proc/get_on_belt_overlay()

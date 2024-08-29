@@ -3,8 +3,6 @@
 	desc = "You feel the urge to poke someone with this."
 	icon = 'icons/obj/items/stick.dmi'
 	icon_state = ICON_STATE_WORLD
-	material_force_multiplier = 0.1
-	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/organic/wood
 	attack_verb = list("poked", "jabbed")
@@ -21,7 +19,7 @@
 		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
 		sharp = 1 //Sharpen stick
 		SetName("sharpened " + name)
-		update_force()
+		update_attack_force()
 		return TRUE
 
 	if(!sharp && (istype(W, /obj/item/stack/material/bolt) || istype(W, /obj/item/stack/material/bundle)))

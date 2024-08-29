@@ -2,8 +2,6 @@
 /obj/item/bladed
 	icon_state                        = "preview"
 	abstract_type                     = /obj/item/bladed
-	material                          = /decl/material/solid/metal/steel
-	material_force_multiplier         = 0.3
 	material_alteration               = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	origin_tech                       = @'{"materials":1,"combat":1}'
 	attack_verb                       = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -14,8 +12,9 @@
 	pickup_sound                      = 'sound/foley/knife1.ogg'
 	drop_sound                        = 'sound/foley/knifedrop3.ogg'
 	hitsound                          = 'sound/weapons/bladeslice.ogg'
-	thrown_material_force_multiplier  = 0.16
 	slot_flags                        = SLOT_LOWER_BODY
+	material                          = /decl/material/solid/metal/steel
+	_base_attack_force                = 10
 	var/decl/material/hilt_material   = /decl/material/solid/organic/wood
 	var/decl/material/guard_material  = /decl/material/solid/organic/wood
 	var/decl/material/pommel_material = /decl/material/solid/organic/wood
@@ -81,21 +80,30 @@
 /obj/item/bladed/proc/update_base_icon_state()
 	icon_state = get_world_inventory_state()
 
+/obj/item/bladed/proc/get_hilt_color()
+	return istype(hilt_material) ? hilt_material.color : COLOR_WHITE
+
+/obj/item/bladed/proc/get_guard_color()
+	return istype(guard_material) ? guard_material.color : COLOR_WHITE
+
+/obj/item/bladed/proc/get_pommel_color()
+	return istype(pommel_material) ? pommel_material.color : COLOR_WHITE
+
 /obj/item/bladed/on_update_icon()
 	. = ..()
 	update_base_icon_state()
 	if(istype(hilt_material))
 		var/check_state = "[icon_state]-hilt"
 		if(check_state_in_icon(check_state, icon))
-			add_overlay(overlay_image(icon, check_state, hilt_material.color, RESET_COLOR))
+			add_overlay(overlay_image(icon, check_state, get_hilt_color(), RESET_COLOR))
 	if(istype(guard_material))
 		var/check_state = "[icon_state]-guard"
 		if(check_state_in_icon(check_state, icon))
-			add_overlay(overlay_image(icon, check_state, guard_material.color, RESET_COLOR))
+			add_overlay(overlay_image(icon, check_state, get_guard_color(), RESET_COLOR))
 	if(istype(pommel_material))
 		var/check_state = "[icon_state]-pommel"
 		if(check_state_in_icon(check_state, icon))
-			add_overlay(overlay_image(icon, check_state, pommel_material.color, RESET_COLOR))
+			add_overlay(overlay_image(icon, check_state, get_pommel_color(), RESET_COLOR))
 	if(shine)
 		var/check_state = "[icon_state]-shine"
 		if(check_state_in_icon(check_state, icon))
@@ -104,20 +112,21 @@
 			add_overlay(I)
 	update_held_icon()
 
-/obj/item/bladed/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+// We handle this in the post-proc so wielding status is updated for polearms/broadswords/etc/
+/obj/item/bladed/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(istype(hilt_material))
 			var/check_state = "[overlay.icon_state]-hilt"
 			if(check_state_in_icon(check_state, overlay.icon))
-				overlay.overlays += overlay_image(overlay.icon, check_state, hilt_material.color, RESET_COLOR)
+				overlay.overlays += overlay_image(overlay.icon, check_state, get_hilt_color(), RESET_COLOR)
 		if(istype(guard_material))
 			var/check_state = "[overlay.icon_state]-guard"
 			if(check_state_in_icon(check_state, overlay.icon))
-				overlay.overlays += overlay_image(overlay.icon, check_state, guard_material.color, RESET_COLOR)
+				overlay.overlays += overlay_image(overlay.icon, check_state, get_guard_color(), RESET_COLOR)
 		if(istype(pommel_material))
 			var/check_state = "[overlay.icon_state]-pommel"
 			if(check_state_in_icon(check_state, overlay.icon))
-				overlay.overlays += overlay_image(overlay.icon, check_state, pommel_material.color, RESET_COLOR)
+				overlay.overlays += overlay_image(overlay.icon, check_state, get_pommel_color(), RESET_COLOR)
 		if(shine)
 			var/check_state = "[overlay.icon_state]-shine"
 			if(check_state_in_icon(check_state, overlay.icon))

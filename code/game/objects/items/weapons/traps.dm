@@ -7,7 +7,6 @@
 	icon_state = "beartrap0"
 	randpixel = 0
 	desc = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
-	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel

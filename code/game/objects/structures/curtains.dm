@@ -3,7 +3,7 @@
 	desc = "A rolled-up curtain."
 	icon = 'icons/obj/structures/curtain.dmi'
 	icon_state = "curtain_rolled"
-	force = 3 //just plastic
+	_base_attack_force = 3 //just plastic
 	w_class = ITEM_SIZE_HUGE //curtains, yeap
 	var/curtain_kind_path = /decl/curtain_kind //path to decl containing the curtain's details
 

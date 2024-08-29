@@ -4,7 +4,6 @@
 	icon = 'icons/obj/items/tool/crowbar.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
-	material_force_multiplier = 0.25
 	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -10
 	w_class = ITEM_SIZE_SMALL

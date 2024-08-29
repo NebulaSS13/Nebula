@@ -41,7 +41,7 @@
 /obj/item/natural_weapon/circular_saw
 	name = "giant circular saw"
 	attack_verb = list("sawed", "ripped")
-	force = 15
+	_base_attack_force = 15
 	sharp = TRUE
 	edge = TRUE
 

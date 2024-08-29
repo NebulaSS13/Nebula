@@ -83,7 +83,7 @@
 /obj/item/natural_weapon/goatking
 	name = "giant horns"
 	attack_verb = list("brutalized")
-	force = 40
+	_base_attack_force = 40
 	sharp = TRUE
 
 /obj/item/natural_weapon/goatking/fire
@@ -104,7 +104,7 @@
 /obj/item/natural_weapon/goathorns
 	name = "horns"
 	attack_verb = list("impaled", "stabbed")
-	force = 15
+	_base_attack_force = 15
 	sharp = TRUE
 
 /mob/living/simple_animal/hostile/goat/guard/master
@@ -135,13 +135,13 @@
 	var/special_attacks = 0
 
 /obj/item/natural_weapon/goatking/unleashed
-	force = 55
+	_base_attack_force = 55
 
 /obj/item/natural_weapon/goatking/lightning/unleashed
-	force = 55
+	_base_attack_force = 55
 
 /obj/item/natural_weapon/goatking/fire/unleashed
-	force = 55
+	_base_attack_force = 55
 
 /mob/living/simple_animal/hostile/goat/king/phase2/Initialize()
 	. = ..()
@@ -158,7 +158,7 @@
 /obj/item/natural_weapon/goathorns
 	name = "horns"
 	attack_verb = list("impaled", "stabbed")
-	force = 15
+	_base_attack_force = 15
 	sharp = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/goat/guard/master

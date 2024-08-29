@@ -67,8 +67,6 @@ var/global/list/rpd_pipe_selection_skilled = list()
 	desc = "Portable, complex and deceptively heavy, it's the cousin of the RCD, use to dispense piping on the move."
 	icon = 'icons/obj/items/device/rpd.dmi'
 	icon_state = "rpd"
-	force = 12
-	throwforce = 15
 	throw_speed = 1
 	throw_range = 3
 	w_class = ITEM_SIZE_NORMAL
@@ -78,6 +76,7 @@ var/global/list/rpd_pipe_selection_skilled = list()
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
+	_base_attack_force = 12
 
 	var/datum/fabricator_recipe/pipe/P
 	var/pipe_color = "white"

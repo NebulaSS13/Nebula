@@ -5,7 +5,6 @@
 	item_state = "assembly"
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
 	throw_range = 10

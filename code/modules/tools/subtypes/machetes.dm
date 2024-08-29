@@ -1,15 +1,14 @@
 /obj/item/tool/machete
-	name                      = "machete"
-	desc                      = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
-	icon                      = 'icons/obj/items/weapon/machetes/machete.dmi'
-	w_class                   = ITEM_SIZE_NORMAL
-	slot_flags                = SLOT_LOWER_BODY
-	material                  = /decl/material/solid/metal/titanium
-	base_parry_chance         = 50
-	max_force                 = 20
-	material_force_multiplier = 0.2 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
-	origin_tech               = @'{"materials":2,"combat":1}'
-	attack_verb               = list("chopped", "torn", "cut")
+	name                       = "machete"
+	desc                       = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
+	icon                       = 'icons/obj/items/weapon/machetes/machete.dmi'
+	w_class                    = ITEM_SIZE_NORMAL
+	slot_flags                 = SLOT_LOWER_BODY
+	material                   = /decl/material/solid/metal/titanium
+	base_parry_chance          = 50
+	origin_tech                = @'{"materials":2,"combat":1}'
+	attack_verb                = list("chopped", "torn", "cut")
+	_base_attack_force         = 20
 	var/static/list/standard_machete_icons = list(
 		'icons/obj/items/weapon/machetes/machete.dmi',
 		'icons/obj/items/weapon/machetes/machete_red.dmi',
