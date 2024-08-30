@@ -116,11 +116,11 @@
 		return 0
 
 	if(!target.reagents || !target.reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("[target] is empty."))
+		to_chat(user, SPAN_NOTICE("\The [target] is empty of reagents."))
 		return 1
 
 	if(reagents && !REAGENTS_FREE_SPACE(reagents))
-		to_chat(user, SPAN_NOTICE("[src] is full."))
+		to_chat(user, SPAN_NOTICE("\The [src] is full of reagents."))
 		return 1
 
 	var/trans = target.reagents.trans_to_obj(src, target.amount_dispensed)
@@ -136,11 +136,11 @@
 		return 1
 
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("[src] is empty."))
+		to_chat(user, SPAN_NOTICE("\The [src] is empty of reagents."))
 		return 1
 
 	if(target.reagents && !REAGENTS_FREE_SPACE(target.reagents))
-		to_chat(user, SPAN_NOTICE("[target] is full."))
+		to_chat(user, SPAN_NOTICE("\The [target] is full of reagents."))
 		return 1
 
 	var/contained = REAGENT_LIST(src)
@@ -166,11 +166,11 @@
 		return 0
 
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("[src] is empty."))
+		to_chat(user, SPAN_NOTICE("\The [src] is empty of reagents."))
 		return 1
 
 	if(!REAGENTS_FREE_SPACE(target.reagents))
-		to_chat(user, SPAN_NOTICE("[target] is full."))
+		to_chat(user, SPAN_NOTICE("\The [target] is full of reagents."))
 		return 1
 
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
