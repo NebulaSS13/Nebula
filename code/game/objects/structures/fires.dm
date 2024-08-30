@@ -27,6 +27,17 @@
 	abstract_type = /obj/structure/fire_source
 	throwpass = TRUE
 
+	var/has_draught = TRUE
+	var/static/list/draught_values = list(
+		"all the way open"      = 1,
+		"one-quarter closed"    = 0.75,
+		"half closed"           = 0.5,
+		"three-quarters closed" = 0.25,
+		"open just a crack"     = 0.1,
+		"all the way closed"    = 0
+	)
+	var/current_draught = 1
+
 	var/datum/effect/effect/system/steam_spread/steam // Used when being quenched.
 	var/datum/composite_sound/fire_crackles/fire_loop
 	var/datum/composite_sound/grill/grill_loop // Used when food is cooking on the fire.
@@ -47,7 +58,7 @@
 	// TODO: Replace this and the fuel var with just tracking currently-burning matter?
 	// Or use atom fires when those are implemented?
 	/// The minimum temperature required to ignite any fuel added.
-	var/last_fuel_ignite_temperature = 0
+	var/last_fuel_ignite_temperature
 	var/cap_last_fuel_burn = 850 CELSIUS // Prevent using campfires and stoves as kilns.
 	var/exterior_temperature = 30
 
@@ -82,10 +93,6 @@
 	. = ..()
 	if(. && lit == FIRE_LIT)
 		refresh_affected_exterior_turfs()
-
-/obj/structure/fire_source/proc/get_current_burn_temperature()
-	var/datum/gas_mixture/environment = return_air()
-	return max(environment?.temperature, last_fuel_burn_temperature)
 
 /obj/structure/fire_source/proc/refresh_affected_exterior_turfs()
 
@@ -128,7 +135,7 @@
 /obj/structure/fire_source/proc/die()
 	if(lit == FIRE_LIT)
 		lit = FIRE_DEAD
-		last_fuel_ignite_temperature = 0
+		last_fuel_ignite_temperature = null
 		last_fuel_burn_temperature = T20C
 		refresh_affected_exterior_turfs()
 		visible_message(SPAN_DANGER("\The [src] goes out!"))
@@ -173,6 +180,11 @@
 /obj/structure/fire_source/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
+		if(has_draught)
+			to_chat(user, "\The [src]'s draught is [draught_values[current_draught]].")
+		var/list/burn_strings = get_descriptive_temperature_strings(get_effective_burn_temperature())
+		if(length(burn_strings))
+			to_chat(user, "\The [src] is burning hot enough to [english_list(burn_strings)].")
 		var/list/removable = get_removable_atoms()
 		if(length(removable))
 			to_chat(user, "Looking within \the [src], you see:")
@@ -191,7 +203,7 @@
 			if(lit == FIRE_LIT)
 				visible_message(SPAN_DANGER("\The [user] fishes \the [removing] out of \the [src]!"))
 				// Uncomment this when there's a way to take stuff out of a kiln or oven without setting yourself on fire.
-				//user.fire_act(return_air(), last_fuel_burn_temperature, 500)
+				//user.fire_act(return_air(), get_effective_burn_temperature(), 500)
 			else
 				visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
 		update_icon()
@@ -219,7 +231,7 @@
 	SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 	visible_message(SPAN_DANGER("\The [G.assailant] hurls \the [affecting_mob] onto \the [src]!"))
 	if(lit == FIRE_LIT)
-		affecting_mob.fire_act(return_air(), last_fuel_burn_temperature, 500)
+		affecting_mob.fire_act(return_air(), get_effective_burn_temperature(), 500)
 	return TRUE
 
 /obj/structure/fire_source/isflamesource()
@@ -229,18 +241,22 @@
 	return ..() || (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 
 /obj/structure/fire_source/proc/burn_material(var/decl/material/mat, var/amount)
-	. = mat.get_burn_products(amount, last_fuel_burn_temperature)
+	var/effective_burn_temperature = get_effective_burn_temperature()
+	. = mat.get_burn_products(amount, effective_burn_temperature)
 	if(.)
-		if(mat.ignition_point && last_fuel_burn_temperature >= mat.ignition_point)
+		if(mat.ignition_point && effective_burn_temperature >= mat.ignition_point)
 			if(mat.accelerant_value > FUEL_VALUE_NONE)
 				fuel += amount * (1 + material.accelerant_value)
 			last_fuel_burn_temperature = max(last_fuel_burn_temperature, mat.burn_temperature)
-			last_fuel_ignite_temperature = min(last_fuel_ignite_temperature, mat.ignition_point)
+			if(isnull(last_fuel_ignite_temperature))
+				last_fuel_ignite_temperature = mat.ignition_point
+			else
+				last_fuel_ignite_temperature = max(last_fuel_ignite_temperature, mat.ignition_point)
 		else if(mat.accelerant_value <= FUEL_VALUE_SUPPRESSANT)
 			// This means that 100u (under two soup bowls full of water), will suppress a fire with 20 fuel.
 			fuel -= amount * (mat.accelerant_value / FUEL_VALUE_SUPPRESSANT) * 2
 		fuel = max(fuel, 0)
-		loc.take_waste_burn_products(., last_fuel_burn_temperature)
+		loc.take_waste_burn_products(., effective_burn_temperature)
 
 // Dump waste gas from burned fuel.
 /obj/structure/fire_source/proc/dump_waste_products(var/atom/target, var/list/waste)
@@ -267,7 +283,7 @@
 				return TRUE
 
 	if(lit == FIRE_LIT && istype(thing, /obj/item/flame))
-		thing.fire_act(return_air(), last_fuel_burn_temperature, 500)
+		thing.fire_act(return_air(), get_effective_burn_temperature(), 500)
 		return TRUE
 
 	if(thing.isflamesource())
@@ -287,7 +303,13 @@
 
 	return ..()
 
+/obj/structure/fire_source/proc/get_draught_multiplier()
+	return has_draught ? draught_values[draught_values[current_draught]] : 1
+
 /obj/structure/fire_source/proc/process_fuel(ignition_temperature)
+	var/draught_mult = get_draught_multiplier()
+	if(draught_mult <= 0)
+		return FALSE
 
 	if(fuel >= IDEAL_FUEL)
 		return TRUE
@@ -295,9 +317,12 @@
 	// Slowly lose burn temperature.
 	// TODO: use temperature var and equalizing system?
 	last_fuel_burn_temperature = max(ignition_temperature, last_fuel_burn_temperature)
+	var/effective_burn_temperature = get_effective_burn_temperature()
 	if(fuel < LOW_FUEL) // fire's dying
-		if(last_fuel_burn_temperature > T20C)
+		if(effective_burn_temperature > T20C)
 			last_fuel_burn_temperature = max(T20C, round(last_fuel_burn_temperature * 0.95))
+			effective_burn_temperature = get_effective_burn_temperature()
+		// Just to avoid accidentally snuffing it with the draught, we don't check effective temperature here
 		if(last_fuel_burn_temperature < last_fuel_ignite_temperature)
 			return FALSE // kill the fire, too cold to burn additional fuel
 
@@ -318,8 +343,8 @@
 	dump_waste_products(loc, waste)
 
 	if(!isnull(cap_last_fuel_burn))
-		// TODO: dump excess directly into the atmosphere as heat
 		last_fuel_burn_temperature = min(last_fuel_burn_temperature, cap_last_fuel_burn)
+		// TODO: dump excess directly into the atmosphere as heat
 
 	return (fuel > 0)
 
@@ -333,7 +358,7 @@
 		for(var/rtype in reagents?.reagent_volumes)
 
 			var/decl/material/reagent = GET_DECL(rtype)
-			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && !isnull(reagent.boiling_point) && reagent.boiling_point < get_current_burn_temperature())
+			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && !isnull(reagent.boiling_point) && reagent.boiling_point < get_effective_burn_temperature())
 				do_steam = TRUE
 
 			var/volume = NONUNIT_CEILING(REAGENT_VOLUME(reagents, rtype) / REAGENT_UNITS_PER_GAS_MOLE, 0.1)
@@ -351,6 +376,30 @@
 /obj/structure/fire_source/proc/get_fire_exposed_atoms()
 	return loc?.get_contained_external_atoms()
 
+/obj/structure/fire_source/proc/get_effective_burn_temperature()
+	var/draught_mult = get_draught_multiplier()
+	if(draught_mult <= 0)
+		return 0
+	var/ambient_temperature = get_ambient_temperature(absolute = TRUE)
+	// The effective burn temperature can't go below ambient (no cold flames) or above the actual burn temperature.
+	return clamp((last_fuel_burn_temperature - T0C) * draught_mult + T0C, ambient_temperature, last_fuel_burn_temperature)
+
+// If absolute == TRUE, return our actual ambient temperature, otherwise return our effective burn temperature when lit.
+/obj/structure/fire_source/get_ambient_temperature(absolute = FALSE)
+	if(absolute || lit != FIRE_LIT)
+		return ..() // just normal room temperature
+	return get_effective_burn_temperature() // heat up to our burn temperature
+
+/obj/structure/fire_source/get_ambient_temperature_coefficient()
+	if(lit == FIRE_LIT)
+		return 1 // Don't use the turf coefficient!
+	return ..()
+
+/obj/structure/fire_source/ProcessAtomTemperature()
+	. = ..()
+	if(lit == FIRE_LIT)
+		return null // Don't return PROCESS_KILL here, we want to keep the fire going
+
 /obj/structure/fire_source/Process()
 
 	if(lit != FIRE_LIT)
@@ -360,25 +409,27 @@
 		die()
 		return
 
-	fuel -= FUEL_CONSUMPTION_CONSTANT
+	fuel -= (FUEL_CONSUMPTION_CONSTANT * get_draught_multiplier())
 	if(!process_fuel())
 		die()
 		return
 
+	var/effective_burn_temperature = get_effective_burn_temperature()
+
 	if(isturf(loc))
 		var/turf/my_turf = loc
-		my_turf.hotspot_expose(last_fuel_burn_temperature, 500, 1)
+		my_turf.hotspot_expose(effective_burn_temperature, 500, 1)
 
 	var/datum/gas_mixture/environment = return_air()
 	for(var/atom/thing in get_fire_exposed_atoms())
-		thing.fire_act(environment, last_fuel_burn_temperature, 500)
+		thing.fire_act(environment, effective_burn_temperature, 500)
 
 	// Copied from space heaters. Heat up the air on our tile, heat will percolate out.
-	if(environment && abs(environment.temperature - last_fuel_burn_temperature) > 0.1)
+	if(environment && abs(environment.temperature - effective_burn_temperature) > 0.1)
 		var/transfer_moles = 0.25 * environment.total_moles
 		var/datum/gas_mixture/removed = environment.remove(transfer_moles)
 		if(removed)
-			var/heat_transfer = removed.get_thermal_energy_change(round(last_fuel_burn_temperature * 0.1))
+			var/heat_transfer = removed.get_thermal_energy_change(round(effective_burn_temperature * 0.1))
 			if(heat_transfer > 0)
 				removed.add_thermal_energy(heat_transfer)
 		environment.merge(removed)
@@ -386,9 +437,20 @@
 
 	queue_icon_update()
 
+/obj/structure/fire_source/proc/has_fuel()
+	if(fuel)
+		return TRUE
+	if(!length(contents))
+		return FALSE
+	for(var/obj/item/thing in contents)
+		if(!isnull(thing.material?.ignition_point))
+			return TRUE
+	return FALSE
+
 /obj/structure/fire_source/on_update_icon()
 	..()
-	if((fuel || length(contents)) && (lit != FIRE_DEAD))
+
+	if(has_fuel() && (lit != FIRE_DEAD))
 		// todo: get colour from fuel
 		var/image/I = image(icon, "[icon_state]_full")
 		I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
@@ -431,9 +493,30 @@
 			return FALSE
 	return ..()
 
+/obj/structure/fire_source/proc/adjust_draught(mob/user)
+	var/choice = input(user, "How do you wish to adjust the draught?", "Adjust Draught", draught_values[current_draught]) as null|anything in draught_values
+	if(choice && !QDELETED(src) && !QDELETED(user) && CanPhysicallyInteract(user))
+		current_draught = clamp(draught_values.Find(choice), 1, length(draught_values))
+		user.visible_message(SPAN_NOTICE("\The [user] adjusts \the [src]'s draught until it is [draught_values[current_draught]]."))
+
+/obj/structure/fire_source/get_alt_interactions(mob/user)
+	. = ..()
+	if(has_draught)
+		LAZYADD(., /decl/interaction_handler/adjust_draught)
+
+/decl/interaction_handler/adjust_draught
+	name = "Adjust Draught"
+	expected_target_type = /obj/structure/fire_source
+
+/decl/interaction_handler/adjust_draught/invoked(atom/target, mob/user)
+	var/obj/structure/fire_source/fire = target
+	if(fire.has_draught)
+		fire.adjust_draught(user)
+
 // Subtypes.
 /obj/structure/fire_source/firepit
 	obj_flags = OBJ_FLAG_HOLLOW
+	has_draught = FALSE
 
 /obj/structure/fire_source/stove
 	name = "stove"

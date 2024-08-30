@@ -38,17 +38,6 @@
 		if(length(other))
 			LAZYDISTINCTADD(., other)
 
-/obj/structure/fire_source/kiln/examine(mob/user, distance)
-	. = ..()
-	// TODO: pottery skill check
-	if(distance <= 1)
-		var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
-		for(var/mat in all_materials)
-			var/decl/material/material = all_materials[mat]
-			if(last_fuel_burn_temperature >= material.bakes_into_at_temperature && material.bakes_into_material)
-				var/decl/material/cook = GET_DECL(material.bakes_into_material)
-				to_chat(user, "\The [src] is burning hot enough to bake [material.name] into [cook.name].")
-
 /obj/structure/fire_source/kiln/attackby(obj/item/W, mob/user)
 	if(firebox_open)
 		return ..()

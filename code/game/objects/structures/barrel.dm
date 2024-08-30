@@ -14,6 +14,7 @@
 	possible_transfer_amounts = @"[10,25,50,100]"
 	volume                    = 7500
 	movable_flags             = MOVABLE_FLAG_WHEELED
+	throwpass                 = TRUE
 
 /obj/structure/reagent_dispensers/barrel/Initialize()
 	..()

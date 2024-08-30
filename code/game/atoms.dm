@@ -974,3 +974,6 @@
 /// It should also not check anything controlled by the target atom, because can_be_poured_into() already exists.
 /atom/proc/can_be_poured_from(mob/user, atom/target)
 	return (reagents?.maximum_volume > 0) && ATOM_IS_OPEN_CONTAINER(src)
+
+/atom/proc/take_vaporized_reagent(reagent, amount)
+	return
