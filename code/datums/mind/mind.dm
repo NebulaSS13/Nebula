@@ -147,7 +147,7 @@
 
 	var/is_admin =   FALSE
 	var/can_modify = FALSE
-	is_admin = check_rights(R_ADMIN, FALSE)
+	is_admin = check_rights(R_ADMIN|R_EVENT|R_FUN, FALSE)
 	can_modify = is_admin
 
 	if(href_list["add_goal"])

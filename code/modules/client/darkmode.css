@@ -38,6 +38,7 @@ a.visited, a:visited	{color: #7c00e6}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}
 .ooc .admin				{color: #b82e00;}
+.ooc .event_manager		{color: #660033;}
 .ooc .aooc				{color: #960018;}
 
 .staffwarn				{color: #ff0000; font-weight:bold; font-size: 150%;}

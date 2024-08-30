@@ -9,7 +9,7 @@
 	set name = "Jump to Area"
 	set desc = "Area to jump to"
 	set category = "Admin"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 	if(!get_config_value(/decl/config/toggle/on/admin_jump))
 		return alert("Admin jumping disabled")
@@ -23,7 +23,7 @@
 /client/proc/jumptoturf(var/turf/T)
 	set name = "Jump to Turf"
 	set category = "Admin"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 	if(!get_config_value(/decl/config/toggle/on/admin_jump))
 		return alert("Admin jumping disabled")
@@ -36,7 +36,7 @@
 	set category = "Admin"
 	set name = "Jump to Mob"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 
 	if(get_config_value(/decl/config/toggle/on/admin_jump))
@@ -55,7 +55,7 @@
 	set category = "Admin"
 	set name = "Jump to Coordinate"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 
 	if(!get_config_value(/decl/config/toggle/on/admin_jump))
@@ -79,7 +79,7 @@
 	set category = "Admin"
 	set name = "Jump to Key"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 
 	if(get_config_value(/decl/config/toggle/on/admin_jump))
@@ -98,7 +98,7 @@
 	set category = "Admin"
 	set name = "Get Mob"
 	set desc = "Mob to teleport"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 	if(get_config_value(/decl/config/toggle/on/admin_jump))
 		log_and_message_admins("teleported [key_name(M)] to self.")
@@ -112,7 +112,7 @@
 	set name = "Get Key"
 	set desc = "Key to teleport"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 
 	if(get_config_value(/decl/config/toggle/on/admin_jump))
@@ -136,7 +136,7 @@
 /client/proc/sendmob(var/mob/M in get_sorted_mob_list())
 	set category = "Admin"
 	set name = "Send Mob"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT))
 		return
 	if(!get_config_value(/decl/config/toggle/on/admin_jump))
 		alert("Admin jumping disabled")
@@ -149,4 +149,3 @@
 		M.jumpTo(pick(get_area_turfs(A)))
 		SSstatistics.add_field_details("admin_verb","SMOB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		log_and_message_admins("teleported [key_name(M)] to [A.proper_name].")
-

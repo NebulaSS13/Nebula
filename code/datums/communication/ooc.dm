@@ -30,10 +30,12 @@
 		ooc_style = "elevated"
 		if(holder.rights & R_MOD)
 			ooc_style = "moderator"
-		if(holder.rights & R_DEBUG)
-			ooc_style = "developer"
+		if(holder.rights & R_EVENT)
+			ooc_style = "event_manager"
 		if(holder.rights & R_ADMIN)
 			ooc_style = "admin"
+		if(holder.rights & R_DEBUG)
+			ooc_style = "developer"
 
 	var/can_badmin = !is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor))
 	var/ooc_color = C.prefs.ooccolor

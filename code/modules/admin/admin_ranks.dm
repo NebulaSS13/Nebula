@@ -37,10 +37,11 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 				if("stealth")					rights |= R_STEALTH
 				if("rejuv","rejuvenate")		rights |= R_REJUVENATE
 				if("varedit")					rights |= R_VAREDIT
-				if("everything","host","all")	rights |= (R_HOST | R_BUILDMODE | R_ADMIN | R_BAN | R_FUN | R_SERVER | R_DEBUG | R_PERMISSIONS | R_POSSESS | R_STEALTH | R_REJUVENATE | R_VAREDIT | R_SOUNDS | R_SPAWN | R_MOD)
+				if("everything","host","all")	rights |= (R_HOST | R_BUILDMODE | R_ADMIN | R_BAN | R_FUN | R_SERVER | R_DEBUG | R_PERMISSIONS | R_POSSESS | R_STEALTH | R_REJUVENATE | R_VAREDIT | R_SOUNDS | R_SPAWN | R_MOD | R_EVENT)
 				if("sound","sounds")			rights |= R_SOUNDS
 				if("spawn","create")			rights |= R_SPAWN
 				if("mod")						rights |= R_MOD
+				if("event")						rights |= R_EVENT
 
 		admin_ranks[rank] = rights
 		previous_rights = rights

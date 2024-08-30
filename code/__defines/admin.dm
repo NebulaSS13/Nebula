@@ -34,10 +34,11 @@
 #define R_SPAWN         BITFLAG(12)
 #define R_MOD           BITFLAG(13)
 #define R_HOST          BITFLAG(14)
+#define R_EVENT         BITFLAG(15)
 #define R_INVESTIGATE   (R_ADMIN|R_MOD)
 #define R_EVERYTHING    (~0)
 
-#define R_MAXPERMISSION BITFLAG(14) // This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+#define R_MAXPERMISSION BITFLAG(15) // This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 #define ADDANTAG_PLAYER 1	// Any player may call the add antagonist vote.
 #define ADDANTAG_ADMIN 2	// Any player with admin privilegies may call the add antagonist vote.

@@ -94,7 +94,7 @@
 		var/decl/species/current_species = get_species_by_key(current_species_name)
 
 		if(check_whitelist) //If we're using the whitelist, make sure to check it!
-			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))
+			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN|R_EVENT, 0, src))
 				continue
 			if(!is_alien_whitelisted(src, current_species))
 				continue
