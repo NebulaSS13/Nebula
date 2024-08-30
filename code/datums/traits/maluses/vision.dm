@@ -1,7 +1,7 @@
 /decl/trait/malus/impaired_vision
 	name = "Poor Eyesight"
 	description = "Your vision is somewhat impaired, and you need prescription glasses to see clearly."
-	incompatible_with = list(/decl/trait/prosthetic_organ/eyes)
+	//incompatible_with = list(/decl/trait/prosthetic_organ/eyes)
 	uid = "trait_vision_poor"
 	/// The typepath of the glasses to give the holder.
 	var/glasses_type = /obj/item/clothing/glasses/prescription
