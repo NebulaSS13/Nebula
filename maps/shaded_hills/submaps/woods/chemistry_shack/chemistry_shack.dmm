@@ -9,10 +9,29 @@
 "h" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/table/woodentable/ebony,
-/obj/item/flame/fuelled/lantern/filled,
-/obj/item/flame/fuelled/lantern/filled,
-/obj/item/rock/hematite,
-/obj/item/rock/flint,
+/obj/item/rock/hematite{
+	pixel_x = -8;
+	pixel_y = 16
+	},
+/obj/item/rock/flint{
+	pixel_y = 16
+	},
+/obj/item/chems/glass/handmade/jar{
+	pixel_y = 16;
+	pixel_x = 10
+	},
+/obj/item/chems/glass/handmade/jar{
+	pixel_y = 8;
+	pixel_x = 10
+	},
+/obj/item/flame/fuelled/lantern/filled{
+	pixel_y = 4;
+	pixel_x = 4
+	},
+/obj/item/flame/fuelled/lantern/filled{
+	pixel_y = 4;
+	pixel_x = -8
+	},
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "k" = (
@@ -20,6 +39,7 @@
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/cooking_vessel/pot/iron,
 /obj/item/chems/glass/handmade/teapot,
+/obj/abstract/landmark/organize/vertical,
 /turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "m" = (
@@ -47,11 +67,7 @@
 /area/template_noop)
 "r" = (
 /obj/abstract/exterior_marker/inside,
-/obj/structure/table/woodentable/ebony,
-/obj/item/chems/glass/handmade/bottle/tall/wine,
-/obj/item/chems/glass/handmade/bottle/tall/wine,
-/obj/item/chems/glass/handmade/jar,
-/obj/item/chems/glass/handmade/jar,
+/obj/structure/filter_stand/mapped,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "s" = (
@@ -118,10 +134,18 @@
 "U" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/table/woodentable/ebony,
-/obj/structure/fire_source/heater/mapped,
 /obj/structure/wall_sconce/lantern{
 	dir = 1;
 	pixel_y = 10
+	},
+/obj/item/chems/glass/handmade/bottle/tall/wine{
+	pixel_x = -10;
+	pixel_y = 18
+	},
+/obj/structure/fire_source/heater/mapped,
+/obj/item/chems/glass/handmade/bottle/tall/wine{
+	pixel_x = -10;
+	pixel_y = 9
 	},
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
