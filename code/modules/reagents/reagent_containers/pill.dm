@@ -271,7 +271,7 @@
 	name = "creamer pod"
 
 /obj/item/chems/pill/pod/cream/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk, 5)
+	add_to_reagents(/decl/material/liquid/drink/milk/cream, 5, data = list("milk_donor" = "cow"))
 	. = ..()
 
 /obj/item/chems/pill/pod/cream_soy

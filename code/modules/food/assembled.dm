@@ -160,20 +160,20 @@
 
 /obj/item/food/burger/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/food/cheesewedge = /obj/item/food/cheeseburger,
+		/obj/item/food/dairy/cheese/wedge = /obj/item/food/cheeseburger,
 		/obj/item/clothing/head/wizard   = /obj/item/food/spellburger
 	)
 	return combined_food_products
 
 /obj/item/food/hamburger/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/food/cheesewedge = /obj/item/food/cheeseburger
+		/obj/item/food/dairy/cheese/wedge = /obj/item/food/cheeseburger
 	)
 	return combined_food_products
 
 /obj/item/food/human/burger/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/food/cheesewedge = /obj/item/food/cheeseburger
+		/obj/item/food/dairy/cheese/wedge = /obj/item/food/cheeseburger
 	)
 	return combined_food_products
 
@@ -223,7 +223,7 @@
 	return combined_food_products
 
 // This one looks slightly weird but the attackby() proc should mirror it to the potato.
-/obj/item/food/cheesewedge/get_combined_food_products()
+/obj/item/food/dairy/cheese/wedge/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		"potato" = /obj/item/food/loadedbakedpotato/raw
 	)
@@ -231,7 +231,7 @@
 
 /obj/item/food/fries/get_combined_food_products()
 	var/static/list/combined_food_products = list(
-		/obj/item/food/cheesewedge = /obj/item/food/cheesyfries/uncooked
+		/obj/item/food/dairy/cheese/wedge = /obj/item/food/cheesyfries/uncooked
 	)
 	return combined_food_products
 

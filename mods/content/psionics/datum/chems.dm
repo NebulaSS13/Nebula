@@ -24,7 +24,7 @@
 	. = (istype(donor) && (!!donor.get_ability_handler(/datum/ability_handler/psionics) || (donor.mind && wizards.is_antagonist(donor.mind))))
 #endif
 
-/decl/chemical_reaction/synthesis/nullglass/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/decl/chemical_reaction/synthesis/nullglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(reaction_flags)
 		#ifdef GAMEMODE_PACK_CULT

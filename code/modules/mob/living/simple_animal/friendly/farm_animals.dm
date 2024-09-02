@@ -103,9 +103,19 @@
 	QDEL_NULL(udder)
 	. = ..()
 
+/mob/living/simple_animal/hostile/goat/proc/create_milk()
+	var/static/list/milk_data = list(
+		"milk_donor"   = "goat",
+		"milk_name"    = "goat",
+		"cheese_name"  = "feta",
+		"cheese_color" = "#f3f2be",
+		"mask_name"    = "goat's milk",
+	)
+	udder?.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10), data = milk_data.Copy())
+
 /mob/living/simple_animal/hostile/goat/handle_living_non_stasis_processes()
-	if((. = ..()) && stat == CONSCIOUS && udder && prob(5))
-		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
+	if((. = ..()) && stat == CONSCIOUS && prob(5))
+		create_milk()
 
 /mob/living/simple_animal/hostile/goat/attackby(var/obj/item/used_item, var/mob/user)
 	var/obj/item/chems/container = used_item
@@ -129,7 +139,7 @@
 			to_chat(user, SPAN_WARNING("The udder is dry. Wait a bit longer."))
 			return TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] starts milking \the [src] into \the [container]."), SPAN_NOTICE("You start milking \the [src] into \the [container]."))
-		if(!user.do_skilled(milking_skill, 4 SECONDS, milking_skill_req))
+		if(!user.do_skilled(4 SECONDS, milking_skill, src))
 			user.visible_message(SPAN_NOTICE("\The [user] stops milking \the [src]."), SPAN_NOTICE("You stop milking \the [src]."))
 			return TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] milks \the [src] into \the [container]."), SPAN_NOTICE("You milk \the [src] into \the [container]."))
@@ -203,7 +213,7 @@
 			to_chat(user, SPAN_WARNING("The udder is dry. Wait a bit longer."))
 			return TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] starts milking \the [src] into \the [container]."), SPAN_NOTICE("You start milking \the [src] into \the [container]."))
-		if(!user.do_skilled(milking_skill, 4 SECONDS, milking_skill_req))
+		if(!user.do_skilled(4 SECONDS, milking_skill, src))
 			user.visible_message(SPAN_NOTICE("\The [user] stops milking \the [src]."), SPAN_NOTICE("You stop milking \the [src]."))
 			return TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] milks \the [src] into \the [container]."), SPAN_NOTICE("You milk \the [src] into \the [container]."))
@@ -230,12 +240,19 @@
 		set_moving_slowly()
 	start_automove(target, metadata = upset ? _cow_flee_automove_metadata : _cow_annoyed_automove_metadata)
 
+/mob/living/simple_animal/cow/proc/create_milk()
+	// Cow milk is 'generic' so has no interesting strings.
+	var/static/list/milk_data = list(
+		"milk_donor" = "cow"
+	)
+	udder?.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10), data = milk_data.Copy())
+
 /mob/living/simple_animal/cow/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
 		return
-	if(udder && prob(5))
-		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
+	if(prob(5))
+		create_milk()
 	if(!get_automove_target() && impatience > 0 && prob(10)) // if not fleeing, 10% chance to regain patience
 		impatience--
 

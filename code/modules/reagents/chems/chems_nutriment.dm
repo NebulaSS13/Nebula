@@ -355,3 +355,8 @@
 	nutriment_factor = 1
 	color = "#d3af70"
 	uid = "chem_nutriment_yeast"
+
+/decl/material/liquid/nutriment/cheese
+	name = "cheese"
+	lore_text = "Aged, fermented, curdled milk."
+	uid = "chem_nutriment_cheese"

@@ -36,7 +36,7 @@
 /decl/recipe/fried/omelette
 	items = list(
 		/obj/item/food/egg = 2,
-		/obj/item/food/cheesewedge,
+		/obj/item/food/dairy/cheese/wedge,
 	)
 	reagent_mix = REAGENT_REPLACE // no raw egg
 	result = /obj/item/food/omelette

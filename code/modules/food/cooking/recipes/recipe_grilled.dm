@@ -38,7 +38,7 @@
 /decl/recipe/grilled/grilledcheese
 	items = list(
 		/obj/item/food/slice/bread = 2,
-		/obj/item/food/cheesewedge,
+		/obj/item/food/dairy/cheese/wedge,
 	)
 	result = /obj/item/food/grilledcheese
 	completion_message = "The bread toasts and the cheese melts together."
