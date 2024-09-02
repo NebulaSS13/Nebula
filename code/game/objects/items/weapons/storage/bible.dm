@@ -123,7 +123,7 @@
 			renamed = 1
 			return 1
 
-/obj/item/bible/verb/set_icon()
+/obj/item/bible/verb/set_icon_verb()
 	set name = "Change Icon"
 	set category = "Object"
 	set desc = "Click to change your book's icon."

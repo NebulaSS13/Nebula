@@ -99,7 +99,7 @@ MRE Stuff
 	. = list(
 		main_meal,
 		/obj/item/food/candy/proteinbar,
-		/obj/item/chems/condiment/small/packet/protein,
+		/obj/item/chems/packet/protein,
 		/obj/random/mre/sauce/sugarfree,
 		/obj/item/utensil/spoon/plastic
 	)

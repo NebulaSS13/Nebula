@@ -1,0 +1,1 @@
+/obj/item/chems/condiment/small/packet/@SUBTYPES : /obj/item/chems/packet/@SUBTYPES{@OLD}

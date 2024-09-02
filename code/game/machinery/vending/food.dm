@@ -196,7 +196,7 @@
 		/obj/item/chems/drinks/tea/green = 15,
 		/obj/item/chems/drinks/tea/chai = 15,
 		/obj/item/chems/drinks/h_chocolate = 10,
-		/obj/item/chems/condiment/small/packet/sugar = 25,
+		/obj/item/chems/packet/sugar = 25,
 		/obj/item/chems/pill/pod/cream = 25,
 		/obj/item/chems/pill/pod/cream_soy = 25,
 		/obj/item/chems/pill/pod/orange = 10,

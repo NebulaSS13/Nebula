@@ -347,3 +347,12 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_mayonnaise"
+
+
+/decl/material/liquid/nutriment/yeast
+	name = "Yeast"
+	lore_text = "A collection of live fungal cultures, cultivated across history for use in fermentation and baking."
+	taste_description = "mustiness"
+	nutriment_factor = 1
+	color = "#d3af70"
+	uid = "chem_nutriment_yeast"
