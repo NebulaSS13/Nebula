@@ -348,7 +348,6 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_mayonnaise"
 
-
 /decl/material/liquid/nutriment/yeast
 	name = "Yeast"
 	lore_text = "A collection of live fungal cultures, cultivated across history for use in fermentation and baking."

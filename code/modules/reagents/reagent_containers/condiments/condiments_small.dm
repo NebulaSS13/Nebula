@@ -9,8 +9,8 @@
 /obj/item/chems/condiment/small/##ID {  \
 	initial_condiment_type = TYPE;      \
 	morphic_container = FALSE;          \
-    name = TYPE::condiment_name;        \
-    desc = TYPE::condiment_desc;        \
+	name = TYPE::condiment_name;        \
+	desc = TYPE::condiment_desc;        \
 	icon = TYPE::condiment_icon;        \
 }
 

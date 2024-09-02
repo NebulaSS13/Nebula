@@ -1,26 +1,36 @@
+/decl/condiment_appearance/empty
+	condiment_name = "empty condiment bottle"
+	condiment_icon = 'icons/obj/food/condiments/empty.dmi'
+	condiment_desc = "An empty condiment bottle"
+
+/decl/condiment_appearance/mixed
+	condiment_name = "condiment bottle"
+	condiment_desc = "A condiment bottle half-filled with a mix of condiments."
+	condiment_icon = 'icons/obj/food/condiments/generic.dmi'
+
 /decl/condiment_appearance/ketchup
 	condiment_type = /decl/material/liquid/nutriment/ketchup
 	condiment_name = "ketchup"
 	condiment_desc = "Tomato, but more liquid, stronger, better."
-	condiment_icon = 'icons/obj/food/condiments/generic.dmi'
+	condiment_icon = 'icons/obj/food/condiments/ketchup.dmi'
 
 /decl/condiment_appearance/barbecue
 	condiment_type = /decl/material/liquid/nutriment/barbecue
 	condiment_name = "barbecue sauce"
 	condiment_desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
-	condiment_icon = 'icons/obj/food/condiments/generic.dmi'
+	condiment_icon = 'icons/obj/food/condiments/barbecue.dmi'
 
 /decl/condiment_appearance/capsaicin
 	condiment_type = /decl/material/liquid/capsaicin
 	condiment_name = "hotsauce"
 	condiment_desc = "You can almost TASTE the stomach ulcers now!"
-	condiment_icon = 'icons/obj/food/condiments/generic.dmi'
+	condiment_icon = 'icons/obj/food/condiments/hotsauce.dmi'
 
 /decl/condiment_appearance/enzyme
 	condiment_type = /decl/material/liquid/enzyme
 	condiment_name = "universal enzyme"
 	condiment_desc = "Used in cooking various dishes."
-	condiment_icon = 'icons/obj/food/condiments/generic.dmi'
+	condiment_icon = 'icons/obj/food/condiments/enzyme.dmi'
 
 /decl/condiment_appearance/soysauce
 	condiment_type = /decl/material/liquid/nutriment/soysauce
@@ -44,9 +54,16 @@
 	condiment_center_of_mass = @'{"x":16,"y":9}'
 
 /decl/condiment_appearance/salt/sack
-	condiment_name = "big bag of salt"
+	condiment_name = "bag of salt"
 	condiment_desc = "A nonsensically large bag of salt. Carefully refined from countless shifts."
 	condiment_icon = 'icons/obj/food/condiments/saltsack.dmi'
+	condiment_key  = "large"
+
+/decl/condiment_appearance/rice
+	condiment_type = /decl/material/liquid/nutriment/rice
+	condiment_name = "bag of rice"
+	condiment_desc = "A large bag of dry rice. Where'd you leave the rice cooker?"
+	condiment_icon = 'icons/obj/food/condiments/rice.dmi'
 	condiment_key  = "large"
 
 /decl/condiment_appearance/peppermill

@@ -7,8 +7,8 @@
 /obj/random/mre
 	name = "random MRE"
 	desc = "This is a random single MRE."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "mre"
+	icon = 'icons/obj/food/mre/mre_generic.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/mre/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -28,7 +28,9 @@
 /obj/random/mre/main
 	name = "random MRE main course"
 	desc = "This is a random main course for MREs."
-	icon_state = "pouch_medium"
+	icon = 'icons/obj/food/mre/pouch_medium.dmi'
+	icon_state = ICON_STATE_WORLD
+
 
 /obj/random/mre/main/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -46,7 +48,8 @@
 /obj/random/mre/dessert
 	name = "random MRE dessert"
 	desc = "This is a random dessert for MREs."
-	icon_state = "pouch_medium"
+	icon = 'icons/obj/food/mre/pouch_medium.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/mre/dessert/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -77,7 +80,7 @@
 /obj/random/mre/drink
 	name = "random MRE drink"
 	desc = "This is a random drink for MREs."
-	icon_state = "packet_small"
+	icon = 'icons/obj/food/condiments/packets/packet_small.dmi'
 
 /obj/random/mre/drink/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -94,7 +97,7 @@
 /obj/random/mre/spread
 	name = "random MRE spread"
 	desc = "This is a random spread packet for MREs."
-	icon_state = "packet_small"
+	icon = 'icons/obj/food/condiments/packets/packet_small.dmi'
 
 /obj/random/mre/spread/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -114,7 +117,7 @@
 /obj/random/mre/sauce
 	name = "random MRE sauce"
 	desc = "This is a random sauce packet for MREs."
-	icon_state = "packet_small"
+	icon = 'icons/obj/food/condiments/packets/packet_small.dmi'
 
 /obj/random/mre/sauce/spawn_choices()
 	var/static/list/spawnable_choices = list(

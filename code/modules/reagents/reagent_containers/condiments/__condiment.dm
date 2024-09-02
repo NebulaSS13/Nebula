@@ -53,9 +53,15 @@
 	return ..()
 
 /obj/item/chems/condiment/proc/get_current_condiment_appearance()
-	if(!morphic_container && initial_condiment_type)
+	if(!morphic_container)
 		return GET_DECL(initial_condiment_type)
-	return get_condiment_appearance(reagents?.get_primary_reagent_type(), condiment_key)
+	switch(LAZYLEN(reagents?.reagent_volumes))
+		if(0)
+			return GET_DECL(/decl/condiment_appearance/empty)
+		if(1)
+			return get_condiment_appearance(reagents?.get_primary_reagent_type(), condiment_key)
+		else
+			return GET_DECL(/decl/condiment_appearance/mixed)
 
 /obj/item/chems/condiment/on_reagent_change()
 	if((. = ..()))
@@ -77,10 +83,11 @@
 
 /obj/item/chems/condiment/on_update_icon()
 	. = ..()
-	var/new_icon = 'icons/obj/food/condiments/empty.dmi'
+	var/new_icon
 	var/decl/condiment_appearance/condiment = get_current_condiment_appearance()
 	if(condiment?.condiment_icon)
 		new_icon = condiment.condiment_icon
-	else if(LAZYLEN(reagents?.reagent_volumes))
-		new_icon = 'icons/obj/food/condiments/generic.dmi'
-	set_icon(new_icon)
+	else
+		new_icon = initial(icon)
+	if(new_icon)
+		set_icon(new_icon)
