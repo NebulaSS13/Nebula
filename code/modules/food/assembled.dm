@@ -120,7 +120,7 @@
 			product_string = english_list(names, and_text = " or ")
 		else
 			product_string = "\a [atom_info_repository.get_name_for(product)]"
-		to_chat(user, SPAN_NOTICE("With this and \a [atom_info_repository.get_name_for(thing_type)], you could make [product_string]."))
+		to_chat(user, SPAN_NOTICE("With this and \a [ispath(thing_type) ? atom_info_repository.get_name_for(thing_type): thing_type], you could make [product_string]."))
 
 /obj/item/food/bun/get_combined_food_products()
 	var/static/list/combined_food_products = list(
