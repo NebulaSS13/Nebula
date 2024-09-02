@@ -28,10 +28,9 @@
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
 
-/decl/material/liquid/blood/initialize_data(var/newdata)
+/decl/material/liquid/blood/initialize_data(list/newdata)
 	. = ..() || list()
-	if(.)
-		.["species"] = .["species"] || global.using_map.default_species
+	.["species"] = .["species"] || global.using_map.default_species
 
 /decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	. = ..()

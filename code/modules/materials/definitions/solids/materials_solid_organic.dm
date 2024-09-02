@@ -190,6 +190,7 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 	fishing_bait_value = 0.75
+	allergen_flags = INGREDIENT_FLAG_VEGETABLE
 
 /// Used for plant products that aren't quite wood, but are still tougher than normal plant matter.
 /decl/material/solid/organic/plantmatter/pith

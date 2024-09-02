@@ -169,21 +169,32 @@
 /obj/item/food/populate_reagents()
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
-	if(nutriment_amt && nutriment_type)
-		// Ensure our taste data is in the expected format.
-		if(nutriment_desc)
-			if(!islist(nutriment_desc))
-				nutriment_desc = list(nutriment_desc)
-			for(var/taste in nutriment_desc)
-				if(nutriment_desc[taste] <= 0)
-					nutriment_desc[taste] = 1
-		add_to_reagents(nutriment_type, nutriment_amt, get_nutriment_data())
+	if(!nutriment_amt || !nutriment_type)
+		return
+	// Ensure our taste data is in the expected format.
+	if(nutriment_desc)
+		if(!islist(nutriment_desc))
+			nutriment_desc = list(nutriment_desc)
+		for(var/taste in nutriment_desc)
+			if(nutriment_desc[taste] <= 0)
+				nutriment_desc[taste] = 1
+	add_to_reagents(nutriment_type, nutriment_amt, get_nutriment_data())
 
 /obj/item/food/proc/get_nutriment_data()
 	if(nutriment_desc)
-		return list("taste" = nutriment_desc)
+		LAZYSET(., "taste", nutriment_desc)
+	if(allergen_flags)
+		LAZYINITLIST(.)
+		.["allergen_flags"] |= allergen_flags
 
 /obj/item/food/proc/set_nutriment_data(list/newdata)
 	if(reagents?.total_volume && reagents.has_reagent(nutriment_type, 1))
 		LAZYINITLIST(reagents.reagent_data)
 		reagents.reagent_data[nutriment_type] = newdata
+
+/obj/item/food/proc/add_allergen_flags(new_flags)
+	for(var/reagent in reagents.reagent_volumes)
+		var/decl/material/mat = GET_DECL(reagent)
+		var/list/newdata = mat.mix_data(reagents, list("allergen_flags" = new_flags))
+		if(newdata)
+			LAZYSET(reagents.reagent_data, reagent, newdata)
