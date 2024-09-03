@@ -12,6 +12,7 @@
 	accessory_slot = ACCESSORY_SLOT_OVER
 	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 	hood = /obj/item/clothing/head/hood/cloak
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/item/clothing/suit/hooded_cloak/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(

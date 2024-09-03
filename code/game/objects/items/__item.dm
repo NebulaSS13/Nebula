@@ -117,17 +117,20 @@
 	return initial(color)
 
 /obj/item/set_color(new_color)
+
 	if(new_color == COLOR_WHITE)
 		new_color = null
+
 	if(paint_color != new_color)
 		paint_color = new_color
+		. = TRUE
+
 	if(paint_color)
 		color = paint_color
 	else if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
 		color = material.color
 	else
 		color = new_color
-	return FALSE
 
 /obj/item/proc/can_contaminate()
 	return !(obj_flags & ITEM_FLAG_NO_CONTAMINATION)

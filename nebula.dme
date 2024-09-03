@@ -2083,6 +2083,7 @@
 #include "code\modules\clothing\suits\armor\forged\_forged.dm"
 #include "code\modules\clothing\suits\armor\forged\banded.dm"
 #include "code\modules\clothing\suits\armor\forged\brigandine.dm"
+#include "code\modules\clothing\suits\armor\forged\cuirass.dm"
 #include "code\modules\clothing\suits\armor\forged\plate.dm"
 #include "code\modules\clothing\suits\jackets\_jacket.dm"
 #include "code\modules\clothing\suits\jackets\hoodies.dm"
