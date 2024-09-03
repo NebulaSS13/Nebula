@@ -3003,6 +3003,7 @@
 #include "code\modules\mob\living\simple_animal\passive\fox.dm"
 #include "code\modules\mob\living\simple_animal\passive\mouse.dm"
 #include "code\modules\mob\living\simple_animal\passive\rabbit.dm"
+#include "code\modules\mob\living\simple_animal\passive\wolf.dm"
 #include "code\modules\mob\new_player\lobby.dm"
 #include "code\modules\mob\new_player\login.dm"
 #include "code\modules\mob\new_player\logout.dm"
