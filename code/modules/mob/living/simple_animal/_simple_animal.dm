@@ -156,8 +156,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	if(length(draw_visible_overlays))
 		var/list/add_overlays = list()
-		for(var/overlay_color in draw_visible_overlays)
-			var/overlay_state = draw_visible_overlays[overlay_color]
+		for(var/overlay_state in draw_visible_overlays)
+			var/overlay_color = draw_visible_overlays[overlay_state]
 			if(overlay_state == "base")
 				add_overlays += overlay_image(icon, icon_state, overlay_color, RESET_COLOR)
 			else

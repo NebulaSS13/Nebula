@@ -14,7 +14,7 @@
 	draw_visible_overlays = list(
 		"base"     = "#e6e5da",
 		"markings" = "#c8b1a5",
-		"socks"    = "#5c5552"
+		"socks"    = "#e6e5da"
 	)
 
 /datum/mob_controller/passive/rabbit
@@ -34,7 +34,7 @@
 	draw_visible_overlays = list(
 		"base"     = "#62472b",
 		"markings" = "#958279",
-		"socks"    = "#9c8b78"
+		"socks"    = "#62472b"
 	)
 
 /mob/living/simple_animal/passive/rabbit/black
@@ -43,7 +43,7 @@
 	draw_visible_overlays = list(
 		"base"     = "#4f4f4f",
 		"markings" = "#958279",
-		"socks"    = "#838279"
+		"socks"    = "#4f4f4f"
 	)
 
 /mob/living/simple_animal/passive/rabbit/sparkle
