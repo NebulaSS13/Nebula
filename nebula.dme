@@ -3621,6 +3621,7 @@
 #include "code\modules\reagents\reagent_containers\food\sushi.dm"
 #include "code\modules\reagents\reagent_containers\food\veggie.dm"
 #include "code\modules\reagents\reagent_containers\food\dairy\_dairy.dm"
+#include "code\modules\reagents\reagent_containers\food\dairy\butter.dm"
 #include "code\modules\reagents\reagent_containers\food\dairy\cheeses.dm"
 #include "code\modules\reagents\reagent_containers\food\meat\cubes.dm"
 #include "code\modules\reagents\reagent_containers\food\meat\fish.dm"

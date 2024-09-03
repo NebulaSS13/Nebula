@@ -360,3 +360,20 @@
 	name = "cheese"
 	lore_text = "Aged, fermented, curdled milk."
 	uid = "chem_nutriment_cheese"
+	//allergen_flags = INGREDIENT_FLAG_DAIRY
+
+/decl/material/liquid/nutriment/butter
+	name = "butter"
+	lore_text = "The product of churning cream. Great for baking and on sandwiches."
+	color = "#ffe864"
+	taste_description = "butter"
+	uid = "chem_nutriment_butter"
+	//allergen_flags = INGREDIENT_FLAG_DAIRY
+
+/decl/material/liquid/nutriment/margarine
+	name = "margarine"
+	lore_text = "Emulsified plant oil solids. A popular non-dairy alternative to butter."
+	color = "#fff2ab"
+	taste_description = "bland oiliness"
+	uid = "chem_nutriment_margarine"
+	//allergen_flags = INGREDIENT_FLAG_DAIRY
