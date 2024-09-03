@@ -43,3 +43,15 @@
 
 /obj/structure/rack/dark
 	color = COLOR_GRAY40
+
+/obj/structure/rack/walnut
+	material = /decl/material/solid/organic/wood/walnut
+	color = /decl/material/solid/organic/wood/walnut::color
+
+/obj/structure/rack/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
+
+/obj/structure/rack/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
+	color = /decl/material/solid/organic/wood/mahogany::color
