@@ -10,10 +10,12 @@
 	holder_type = /obj/item/holder
 	ai = /datum/mob_controller/passive/rabbit
 	butchery_data      = /decl/butchery_data/animal/rabbit
-	var/fur_color      = "#e6e5da"
-	var/markings_color = "#c8b1a5"
-	var/socks_color    = "#5c5552"
-	var/eyes_color     = COLOR_BLACK
+	eye_color = COLOR_BLACK
+	draw_visible_overlays = list(
+		"base"     = "#e6e5da",
+		"markings" = "#c8b1a5",
+		"socks"    = "#5c5552"
+	)
 
 /datum/mob_controller/passive/rabbit
 	emote_hear = list("chitters")
@@ -26,41 +28,33 @@
 /decl/bodytype/quadruped/animal/rabbit
 	uid = "bodytype_animal_rabbit"
 
-
-/mob/living/simple_animal/passive/rabbit/get_eye_colour()
-	return eyes_color
-
-/mob/living/simple_animal/passive/rabbit/refresh_visible_overlays()
-	set_current_mob_overlay(HO_SKIN_LAYER,
-		list(
-			overlay_image(icon, icon_state,              fur_color,      RESET_COLOR),
-			overlay_image(icon, "[icon_state]-markings", markings_color, RESET_COLOR),
-			overlay_image(icon, "[icon_state]-socks",    socks_color,    RESET_COLOR)
-		)
-	)
-	. = ..()
-
 /mob/living/simple_animal/passive/rabbit/brown
 	name = "brown rabbit"
 	butchery_data = /decl/butchery_data/animal/rabbit/brown
-	fur_color      = "#62472b"
-	markings_color = "#958279"
-	socks_color    = "#9c8b78"
+	draw_visible_overlays = list(
+		"base"     = "#62472b",
+		"markings" = "#958279",
+		"socks"    = "#9c8b78"
+	)
 
 /mob/living/simple_animal/passive/rabbit/black
 	name = "black rabbit"
 	butchery_data = /decl/butchery_data/animal/rabbit/black
-	fur_color      = "#4f4f4f"
-	markings_color = "#958279"
-	socks_color    = "#838279"
+	draw_visible_overlays = list(
+		"base"     = "#4f4f4f",
+		"markings" = "#958279",
+		"socks"    = "#838279"
+	)
 
 /mob/living/simple_animal/passive/rabbit/sparkle
 	name = "sparklerabbit"
 	desc = "A hopping mammal with long ears and a love for raves."
 
 /mob/living/simple_animal/passive/rabbit/sparkle/Initialize()
-	fur_color      = get_random_colour()
-	markings_color = get_random_colour(TRUE)
-	socks_color    = get_random_colour()
-	eyes_color     = get_random_colour(TRUE)
+	eye_color     = get_random_colour(TRUE)
+	draw_visible_overlays = list(
+		"base"     = get_random_colour(),
+		"markings" = get_random_colour(TRUE),
+		"socks"    = get_random_colour()
+	)
 	. = ..()

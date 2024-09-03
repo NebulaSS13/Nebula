@@ -8,10 +8,13 @@
 	speak_emote        = list("huffs", "growls")
 	pass_flags         = PASS_FLAG_TABLE
 	butchery_data      = /decl/butchery_data/animal/wolf
-	var/fur_color      = "#6a6a6d"
-	var/markings_color = "#574938"
-	var/socks_color    = "#41414d"
-	var/eyes_color     = "#9b7214"
+	eye_color          = "#9b7214"
+
+	draw_visible_overlays = list(
+		"base"     = "#6a6a6d",
+		"markings" = "#574938",
+		"socks"    = "#41414d"
+	)
 
 /datum/mob_controller/passive/hunter/wolf
 	emote_speech   = list("Awoo!","Aroo!","Rrr!")
@@ -24,26 +27,15 @@
 /decl/bodytype/quadruped/animal/wolf
 	uid = "bodytype_animal_wolf"
 
-/mob/living/simple_animal/passive/wolf/get_eye_colour()
-	return eyes_color
-
-/mob/living/simple_animal/passive/wolf/refresh_visible_overlays()
-	set_current_mob_overlay(HO_SKIN_LAYER,
-		list(
-			overlay_image(icon, icon_state,              fur_color,      RESET_COLOR),
-			overlay_image(icon, "[icon_state]-markings", markings_color, RESET_COLOR),
-			overlay_image(icon, "[icon_state]-socks",    socks_color,    RESET_COLOR)
-		)
-	)
-	. = ..()
-
 /mob/living/simple_animal/passive/wolf/sparkle
 	name = "sparklewolf"
 	desc = "A predatory canine commonly known to watch speedruns and take party drugs."
 
 /mob/living/simple_animal/passive/wolf/sparkle/Initialize()
-	fur_color      = get_random_colour()
-	markings_color = get_random_colour(TRUE)
-	socks_color    = get_random_colour()
-	eyes_color     = get_random_colour(TRUE)
+	draw_visible_overlays = list(
+		"base"     = get_random_colour(),
+		"markings" = get_random_colour(TRUE),
+		"socks"    = get_random_colour()
+	)
+	eye_color = get_random_colour(TRUE)
 	. = ..()
