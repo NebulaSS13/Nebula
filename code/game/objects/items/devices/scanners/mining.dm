@@ -21,7 +21,7 @@
 
 /obj/item/scanner/mining/examine(mob/user)
 	. = ..()
-	to_chat(user,"A tiny indicator on the [src] shows it holds [survey_data] good explorer point\s.")
+	to_chat(user,"A tiny indicator on \the [src] shows it holds [survey_data] good explorer point\s.")
 
 /obj/item/scanner/mining/is_valid_scan_target(turf/T)
 	return istype(T)
@@ -43,7 +43,7 @@
 
 /obj/item/scanner/mining/proc/put_disk_in_hand(var/mob/M)
 	if(!survey_data)
-		to_chat(M, SPAN_WARNING("There is no survey data stored on the [src]."))
+		to_chat(M, SPAN_WARNING("There is no survey data stored on \the [src]."))
 		return FALSE
 	visible_message(SPAN_NOTICE("\The [src] spits out a disk containing [survey_data] GEP."))
 	var/obj/item/disk/survey/D = new(get_turf(src))

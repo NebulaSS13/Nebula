@@ -125,7 +125,7 @@
 				if(!user.try_unequip(W, src))
 					return
 				cell = W
-				to_chat(user, "You insert the [cell].")
+				to_chat(user, "You insert \the [cell].")
 		update_icon()
 		return
 

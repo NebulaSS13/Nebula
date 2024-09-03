@@ -146,7 +146,7 @@
 		remove_noun = "reinforcements"
 		check_reinf = FALSE
 
-	user.visible_message(SPAN_NOTICE("\The [user] begins removing the [src]'s [remove_mat.solid_name] [remove_noun]."))
+	user.visible_message(SPAN_NOTICE("\The [user] begins removing \the [src]'s [remove_mat.solid_name] [remove_noun]."))
 	playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 	if(do_after(user, 4 SECONDS, src))
 		if(check_reinf)

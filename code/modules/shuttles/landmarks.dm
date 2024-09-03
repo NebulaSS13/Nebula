@@ -202,7 +202,7 @@ var/global/list/shuttle_landmarks = list()
 
 /obj/item/spaceflare/attack_self(var/mob/user)
 	if(!active)
-		visible_message("<span class='notice'>[user] pulls the cord, activating the [src].</span>")
+		visible_message("<span class='notice'>[user] pulls the cord, activating \the [src].</span>")
 		activate()
 
 /obj/item/spaceflare/proc/activate()

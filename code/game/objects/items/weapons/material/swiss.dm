@@ -67,7 +67,7 @@
 		return
 	if(choice == SWISSKNF_CLOSED)
 		open = FALSE
-		user.visible_message("<span class='notice'>\The [user] closes the [name].</span>")
+		user.visible_message("<span class='notice'>\The [user] closes \the [src].</span>")
 	else
 		open = TRUE
 		if(choice == SWISSKNF_LBLADE || choice == SWISSKNF_SBLADE)

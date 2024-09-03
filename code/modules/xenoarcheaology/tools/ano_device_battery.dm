@@ -109,7 +109,7 @@
 			inserted_battery.battery_effect.ToggleActivate(1)
 		switch(inserted_battery.battery_effect.operation_type)
 			if(EFFECT_TOUCH)
-				visible_message("The [src] shudders.")
+				visible_message("\The [src] shudders.")
 				if(ismob(loc))
 					inserted_battery.battery_effect.DoEffectTouch(loc)
 				inserted_battery.use_power(energy_consumed_on_touch)

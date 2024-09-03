@@ -50,7 +50,7 @@
 		searching = TRUE
 		update_icon()
 		var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/machine_intelligence)
-		G.request_player(brainmob, "Someone is requesting a personality for a [name].", 1 MINUTE)
+		G.request_player(brainmob, "Someone is requesting a personality for \a [name].", 1 MINUTE)
 		addtimer(CALLBACK(src, PROC_REF(reset_search)), 1 MINUTE)
 		return TRUE
 	. = ..()

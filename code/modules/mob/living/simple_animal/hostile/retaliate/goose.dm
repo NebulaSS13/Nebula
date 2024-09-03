@@ -60,7 +60,7 @@
 		set_damage(BRUTE, 0)
 		set_damage(BURN, 0)
 		enrage_potency = enrage_potency_loose
-		desc += " The [name] is loose! Oh no!"
+		desc += " \The [src] is loose! Oh no!"
 		update_icon()
 
 /mob/living/simple_animal/hostile/goose/dire

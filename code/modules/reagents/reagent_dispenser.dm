@@ -285,7 +285,7 @@
 		return TRUE
 
 	if(!skip_text)
-		to_chat(user, "The [src]'s cup dispenser is empty.")
+		to_chat(user, "\The [src]'s cup dispenser is empty.")
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W, mob/user)
 	//Allow refilling with a box

@@ -104,8 +104,8 @@ Buildable meters
 	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 	if(user)
 		user.visible_message( \
-			"[user] fastens the [src].", \
-			"<span class='notice'>You have fastened the [src].</span>", \
+			"[user] fastens \the [src].", \
+			"<span class='notice'>You have fastened \the [src].</span>", \
 			"You hear ratchet.")
 	qdel(src)	// remove the pipe item
 
@@ -132,7 +132,7 @@ Buildable meters
 	if(machine.construct_state)
 		machine.construct_state.post_construct(machine)
 	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
+	to_chat(user, "<span class='notice'>You have fastened \the [src].</span>")
 	qdel(src)
 
 /obj/item/machine_chassis/air_sensor

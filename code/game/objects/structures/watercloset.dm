@@ -178,8 +178,8 @@ var/global/list/hygiene_props = list()
 				swirlie = null
 			else
 				user.visible_message(
-				SPAN_DANGER("\The [user] slams \the [GM] into the [src]!"),
-				SPAN_NOTICE("You slam \the [GM] into the [src]!"))
+				SPAN_DANGER("\The [user] slams \the [GM] into \the [src]!"),
+				SPAN_NOTICE("You slam \the [GM] into \the [src]!"))
 				GM.take_damage(8)
 				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 		return
@@ -217,7 +217,7 @@ var/global/list/hygiene_props = list()
 			if(!GM.loc == get_turf(src))
 				to_chat(user, SPAN_WARNING("\The [GM] needs to be on \the [src]."))
 				return
-			user.visible_message(SPAN_DANGER("\The [user] slams \the [GM] into the [src]!"))
+			user.visible_message(SPAN_DANGER("\The [user] slams \the [GM] into \the [src]!"))
 			GM.take_damage(8)
 	. = ..()
 

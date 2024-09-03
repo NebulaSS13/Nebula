@@ -152,7 +152,7 @@
 		src.active = 2
 	if(src.active >= 1)
 		if(src.power == 0)
-			src.visible_message("<span class='warning'>The [src.name] shuts down due to lack of power!</span>", \
+			src.visible_message("<span class='warning'>\The [src] shuts down due to lack of power!</span>", \
 				"You hear heavy droning fade away.")
 			src.active = 0
 			update_icon()

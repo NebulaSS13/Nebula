@@ -50,7 +50,7 @@
 
 
 	if(light_amount > 0.2)
-		to_chat(M, SPAN_WARNING("It's too bright here to use \the [src.name]!"))
+		to_chat(M, SPAN_WARNING("It's too bright here to use \the [src]!"))
 		return 0
 
 	//mobs in range check
@@ -63,7 +63,7 @@
 				users_in_range++
 
 	if(users_in_range < 2)
-		to_chat(M, SPAN_WARNING("There aren't enough people to use \the [src.name]!"))
+		to_chat(M, SPAN_WARNING("There aren't enough people to use \the [src]!"))
 		return 0
 
 	return 1

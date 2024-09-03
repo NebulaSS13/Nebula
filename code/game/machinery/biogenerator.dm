@@ -86,7 +86,7 @@
 		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
 	if(istype(O, /obj/item/chems/glass))
 		if(beaker)
-			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
+			to_chat(user, "<span class='notice'>]\The [src] is already loaded.</span>")
 			return TRUE
 		else if(user.try_unequip(O, src))
 			beaker = O

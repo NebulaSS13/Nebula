@@ -272,7 +272,7 @@
 			if (coil.use(1))
 				current_health = get_max_health()
 				malfunction = 0
-				to_chat(user, "<span class='notice'>You repair the [src]!</span>")
+				to_chat(user, "<span class='notice'>You repair \the [src]!</span>")
 				update_icon()
 
 	else if(IS_WRENCH(W))
@@ -281,15 +281,15 @@
 			return
 		if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>'You unsecure the [src] from the floor!</span>")
+			to_chat(user, "<span class='notice'>'You unsecure \the [src] from the floor!</span>")
 			if(active)
-				to_chat(user, "<span class='notice'>The [src] shuts off!</span>")
+				to_chat(user, "<span class='notice'>\The [src] shuts off!</span>")
 				src.shields_down()
 			anchored = FALSE
 		else
 			if(isspaceturf(get_turf(src))) return //No wrenching these in space!
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>You secure the [src] to the floor!</span>")
+			to_chat(user, "<span class='notice'>You secure \the [src] to the floor!</span>")
 			anchored = TRUE
 
 

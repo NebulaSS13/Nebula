@@ -30,13 +30,13 @@
 
 /obj/item/laundry_basket/attack_self(mob/user)
 	var/turf/T = get_turf(user)
-	to_chat(user, "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>")
+	to_chat(user, "<span class='notice'>You dump \the [src]'s contents onto \the [T].</span>")
 	return ..()
 
 /obj/item/laundry_basket/on_picked_up(mob/user)
 	var/obj/item/laundry_basket/offhand/O = new(user)
 	O.SetName("[name] - second hand")
-	O.desc = "Your second grip on the [name]."
+	O.desc = "Your second grip on \the [src]."
 	O.linked = src
 	user.put_in_inactive_hand(O)
 	linked = O

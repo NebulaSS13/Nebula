@@ -93,7 +93,7 @@ var/global/list/radio_beacons = list()
 		to_chat(user, SPAN_NOTICE("You pour some of \the [S] over \the [src]'s circuitry."))
 		if(prob(repair_fail_chance))
 			flick("[initial(icon_state)]", src)
-			visible_message(SPAN_WARNING("The [src]'s lights come back on briefly, then die out again."), range = 2)
+			visible_message(SPAN_WARNING("\The [src]'s lights come back on briefly, then die out again."), range = 2)
 		else
 			visible_message(SPAN_NOTICE("\The [src]'s lights come back on."), range = 2)
 			functioning = TRUE

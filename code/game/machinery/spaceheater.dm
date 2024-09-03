@@ -88,7 +88,7 @@
 /obj/machinery/space_heater/physical_attack_hand(mob/user)
 	if(!panel_open)
 		on = !on
-		user.visible_message("<span class='notice'>[user] switches [on ? "on" : "off"] the [src].</span>","<span class='notice'>You switch [on ? "on" : "off"] the [src].</span>")
+		user.visible_message("<span class='notice'>[user] switches [on ? "on" : "off"] \the [src].</span>","<span class='notice'>You switch [on ? "on" : "off"] \the [src].</span>")
 		update_icon()
 		return TRUE
 
