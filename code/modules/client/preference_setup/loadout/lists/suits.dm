@@ -105,8 +105,15 @@
 	uid = "gear_suit_letterman"
 
 /decl/loadout_option/suit/cloak
-	name = "plain cloak"
+	name = "cloak, plain"
 	path = /obj/item/clothing/suit/cloak
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	cost = 3
 	uid = "gear_suit_cloak"
+
+/decl/loadout_option/suit/cloak
+	name = "cloak, hooded"
+	path = /obj/item/clothing/suit/hooded_cloak
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	cost = 3
+	uid = "gear_suit_cloak_hooded"
