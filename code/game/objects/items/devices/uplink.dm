@@ -1,7 +1,7 @@
 // HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
 /* How to create an uplink in 3 easy steps!
 
- 1. All obj/item 's have a hidden_uplink var. By default it's null. Give the item one with "new(src)", it must be in it's contents. Feel free to add "uses".
+ 1. All obj/item 's have a hidden_uplink var. By default it's null. Give the item one with "new(src)", it must be in its contents. Feel free to add "uses".
 
  2. Code in the triggers. Use check_trigger for this, I recommend closing the item's menu with "close_browser(usr, "window=windowname") if it returns true.
  The var/value is the value that will be compared with the var/target. If they are equal it will activate the menu.

@@ -90,7 +90,6 @@
 
 /obj/structure/bed/sofa/right
 	name = "sofa"
-	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
 	icon_state = "sofa_r_preview"
 	base_icon = "sofa_r"
 /obj/structure/bed/sofa/right/unpadded
@@ -118,7 +117,6 @@
 
 /obj/structure/bed/sofa/left
 	name = "sofa"
-	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
 	icon_state = "sofa_l_preview"
 	base_icon = "sofa_l"
 /obj/structure/bed/sofa/left/unpadded

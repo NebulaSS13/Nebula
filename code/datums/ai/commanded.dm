@@ -53,7 +53,7 @@
 	set_target(null) //want me to attack something? Well I better forget my old target.
 	set_stance(STANCE_IDLE)
 	body.stop_automove()
-	if(message == "attack" || findtext(message,"everyone") || findtext(message,"anybody") || findtext(message, "somebody") || findtext(message, "someone")) //if its just 'attack' then just attack anybody, same for if they say 'everyone', somebody, anybody. Assuming non-pickiness.
+	if(message == "attack" || findtext(message,"everyone") || findtext(message,"anybody") || findtext(message, "somebody") || findtext(message, "someone")) //if it's just 'attack' then just attack anybody, same for if they say 'everyone', somebody, anybody. Assuming non-pickiness.
 		_allowed_targets = list("everyone")//everyone? EVERYONE
 		return 1
 	var/list/targets = get_targets_by_name(message)

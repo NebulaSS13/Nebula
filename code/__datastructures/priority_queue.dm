@@ -54,7 +54,7 @@
 /datum/priority_queue/proc/Length()
 	. = L.len
 
-/// Resorts the `item` to it's correct position in the queue.
+/// Resorts the `item` to its correct position in the queue.
 /// * For example: The queue is sorted based on weight and atom A changes weight after being added
 /datum/priority_queue/proc/ReSort(item)
 	var/i = Seek(item)

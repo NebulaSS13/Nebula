@@ -32,16 +32,16 @@
 		traits += general_entry.mechanics_text
 
 	if(one_hand_penalty)
-		traits += "It's best fired with two-handed grip."
+		traits += "It's best fired with a two-handed grip."
 
 	if(has_safety)
 		traits += "It has a safety switch. Control-Click it to toggle safety."
 
 	if(is_secure_gun())
-		traits += "It's fitted with secure registration chip. Swipe ID on it to register."
+		traits += "It's fitted with a secure registration chip. Swipe ID on it to register."
 
 	if(scope_zoom)
-		traits += "It has a magnifying optical scope. It can be toggled with Use Scope verb."
+		traits += "It has a magnifying optical scope. It can be toggled with the Use Scope verb."
 
 	if(LAZYLEN(firemodes) > 1)
 		traits += "It has multiple firemodes. Click it in hand to cycle them."

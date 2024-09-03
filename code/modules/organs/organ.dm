@@ -586,7 +586,7 @@ var/global/list/ailment_reference_cache = list()
 // 2. Called through removal on surgery or dismemberement
 // 3. Called when we're changing a mob's species.
 //detach: If detach is true, we're going to set the organ to detached, and add it to the detached organs list, and remove it from processing lists.
-//        If its false, we just remove the organ from all lists
+//        If it's false, we just remove the organ from all lists
 /obj/item/organ/proc/do_uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
 
 	max_health = max_damage
