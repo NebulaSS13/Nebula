@@ -31,14 +31,17 @@
 /obj/item/cash/imperial/crown
 	absolute_worth = 1
 	icon_state = "coin"
+	color = COLOR_BRONZE
 
 /obj/item/cash/imperial/quin
 	absolute_worth = 5
 	icon_state = "coin_medium"
+	color = COLOR_SILVER
 
 /obj/item/cash/imperial/regalis
 	absolute_worth = 125
 	icon_state = "coin_large"
+	color = COLOR_GOLD
 
 /decl/stack_recipe/coin/imperial
 	currency = /decl/currency/imperial

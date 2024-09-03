@@ -22,6 +22,7 @@
 	anchored = TRUE
 	density = FALSE
 	material = /decl/material/solid/stone/basalt
+	color = /decl/material/solid/stone/basalt::color
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	abstract_type = /obj/structure/fire_source
@@ -524,6 +525,7 @@
 	icon_state = "stove"
 	density = TRUE
 	material = /decl/material/solid/metal/iron
+	color = /decl/material/solid/metal/iron::color
 	obj_flags = OBJ_FLAG_HOLLOW
 
 /obj/structure/fire_source/stove/grab_attack(obj/item/grab/G)

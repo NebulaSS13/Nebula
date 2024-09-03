@@ -136,3 +136,4 @@
 
 /obj/structure/textiles/spinning_wheel/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color

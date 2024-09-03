@@ -10,6 +10,7 @@
 	has_safety = FALSE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material = /decl/material/solid/organic/wood/yew
+	color = /decl/material/solid/organic/wood/yew::color
 	fire_verb = "loose"
 	autofire_enabled = TRUE
 

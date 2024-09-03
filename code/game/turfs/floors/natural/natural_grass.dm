@@ -31,12 +31,14 @@
 	drying_wetness = 60
 	dried_type = /obj/item/stack/material/bundle/grass/dry
 	material = /decl/material/solid/organic/plantmatter/grass
+	color = /decl/material/solid/organic/plantmatter/grass::color
 	is_spawnable_type = TRUE
 
 /obj/item/stack/material/bundle/grass/dry
 	drying_wetness = null
 	dried_type = null
 	material = /decl/material/solid/organic/plantmatter/grass/dry
+	color = /decl/material/solid/organic/plantmatter/grass/dry::color
 
 /turf/floor/natural/grass/wild/attackby(obj/item/W, mob/user)
 	if(IS_KNIFE(W) && !istype(flooring))

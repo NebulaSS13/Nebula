@@ -148,3 +148,4 @@
 
 /obj/structure/textiles/loom/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color

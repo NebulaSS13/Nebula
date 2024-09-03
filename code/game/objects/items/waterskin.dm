@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items/waterskin.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/organic/leather/gut
+	color = /decl/material/solid/organic/leather/gut::color
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 120
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
@@ -22,6 +23,7 @@
 /obj/item/chems/waterskin/crafted
 	desc = "A long and rather unwieldly water-carrying vessel."
 	material = /decl/material/solid/organic/leather
+	color = /decl/material/solid/organic/leather::color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/chems/waterskin/crafted/wine
