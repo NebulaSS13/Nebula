@@ -447,6 +447,10 @@
 		description = initial(O.desc)
 	if(loadout_flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
+		if(ispath(path, /obj/item/clothing))
+			var/obj/item/clothing/clothes = path
+			if(!isnull(clothes::markings_state_modifier))
+				gear_tweaks += gear_tweak_free_markings_color_choice()
 	if(loadout_flags & GEAR_HAS_TYPE_SELECTION)
 		gear_tweaks += new /datum/gear_tweak/path/type(path)
 	if(loadout_flags & GEAR_HAS_SUBTYPE_SELECTION)
