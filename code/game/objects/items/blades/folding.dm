@@ -147,7 +147,7 @@
 
 /decl/interaction_handler/folding_knife/invoked(atom/target, mob/user)
 	var/obj/item/bladed/folding/folding_knife = target
-	var/chosen_option = show_radial_menu(user, user, get_radial_choices(folding_knife), radius = 42, use_labels = TRUE)
+	var/chosen_option = show_radial_menu(user, user, get_radial_choices(folding_knife), radius = 42, use_labels = RADIAL_LABELS_OFFSET)
 	if(!chosen_option)
 		return
 	if(chosen_option == "Toggle")

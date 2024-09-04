@@ -118,7 +118,7 @@
 		HAND_LABELER_MODE_REM_NAME    = btn_rem_one,
 		HAND_LABELER_MODE_REMALL_NAME = btn_rem_all,
 	)
-	return show_radial_menu(user, user, choices, use_labels = TRUE)
+	return show_radial_menu(user, user, choices, use_labels = RADIAL_LABELS_OFFSET)
 
 /obj/item/hand_labeler/attack_self(mob/user)
 	var/choice = show_action_radial_menu(user)

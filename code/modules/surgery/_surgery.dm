@@ -271,7 +271,7 @@ var/global/list/surgery_tool_exception_cache = list()
 		if(!user.client) // In case of future autodocs.
 			S = possible_surgeries[1]
 		else
-			S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
+			S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = RADIAL_LABELS_OFFSET, require_near = TRUE, check_locs = list(src))
 		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
 			S = pick(possible_surgeries)
 

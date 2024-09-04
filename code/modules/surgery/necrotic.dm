@@ -53,7 +53,7 @@
 	else
 		if(length(dead_organs) == 1)
 			return dead_organs[1]
-		return show_radial_menu(user, tool, dead_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+		return show_radial_menu(user, tool, dead_organs, radius = 42, require_near = TRUE, use_labels = RADIAL_LABELS_OFFSET, check_locs = list(tool))
 	return FALSE
 
 /decl/surgery_step/necrotic/tissue/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
@@ -149,7 +149,7 @@
 	else
 		if(length(dead_organs) == 1)
 			return dead_organs[1]
-		return show_radial_menu(user, tool, dead_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+		return show_radial_menu(user, tool, dead_organs, radius = 42, require_near = TRUE, use_labels = RADIAL_LABELS_OFFSET, check_locs = list(tool))
 	return FALSE
 
 /decl/surgery_step/necrotic/regeneration/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)

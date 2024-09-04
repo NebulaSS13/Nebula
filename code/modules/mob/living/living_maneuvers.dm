@@ -53,7 +53,7 @@
 		I.name = capitalize(maneuver_decl.name)
 		maneuvers[maneuver_decl.name] = I
 
-	var/next_maneuver = show_radial_menu(src, src, maneuvers, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src), use_labels = TRUE)
+	var/next_maneuver = show_radial_menu(src, src, maneuvers, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src), use_labels = RADIAL_LABELS_OFFSET)
 	if(next_maneuver)
 		var/decl/maneuver/maneuver = maneuvers_by_name[next_maneuver]
 		if(!maneuver.can_be_used_by(src, null))

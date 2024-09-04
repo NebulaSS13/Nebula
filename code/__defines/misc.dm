@@ -362,3 +362,7 @@
 
 /// Call by name proc reference, checks if the proc is an existing global proc
 #define GLOBAL_PROC_REF(X) (/proc/##X)
+
+#define RADIAL_LABELS_NONE     0
+#define RADIAL_LABELS_OFFSET   1
+#define RADIAL_LABELS_CENTERED 2
