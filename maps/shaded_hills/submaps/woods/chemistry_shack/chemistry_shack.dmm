@@ -1,0 +1,263 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/door/walnut{
+	dir = 4
+	},
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"h" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/table/woodentable/ebony,
+/obj/item/rock/hematite{
+	pixel_x = -8;
+	pixel_y = 16
+	},
+/obj/item/rock/flint{
+	pixel_y = 16
+	},
+/obj/item/chems/glass/handmade/jar{
+	pixel_y = 16;
+	pixel_x = 10
+	},
+/obj/item/chems/glass/handmade/jar{
+	pixel_y = 8;
+	pixel_x = 10
+	},
+/obj/item/flame/fuelled/lantern/filled{
+	pixel_y = 4;
+	pixel_x = 4
+	},
+/obj/item/flame/fuelled/lantern/filled{
+	pixel_y = 4;
+	pixel_x = -8
+	},
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"k" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/cooking_vessel/pot/iron,
+/obj/item/chems/glass/handmade/teapot,
+/obj/abstract/landmark/organize/vertical,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"m" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/reagent_dispensers/barrel/ebony/oil,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"n" = (
+/obj/structure/wall_sconce/lantern{
+	dir = 1;
+	pixel_y = 10
+	},
+/turf/floor/natural/dirt,
+/area/template_noop)
+"p" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/mortar,
+/obj/item/rock/basalt,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"q" = (
+/obj/structure/drying_rack/ebony,
+/turf/floor/natural/dirt,
+/area/template_noop)
+"r" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/filter_stand/mapped,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"s" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/log/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"z" = (
+/turf/template_noop,
+/area/template_noop)
+"C" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/door/walnut,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"F" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/brick/basalt,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"H" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/brick/basalt/shutter,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"I" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/reagent_dispensers/barrel/ebony/water,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"J" = (
+/obj/abstract/exterior_marker/inside,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"K" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/bed/simple/ebony/cloth,
+/obj/item/bedsheet/furs,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"L" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/table/woodentable/ebony,
+/obj/item/bladed/knife,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/carrot,
+/obj/item/food/grown/carrot,
+/obj/item/kitchen/rollingpin,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"M" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/reagent_dispensers/barrel/ebony/wine,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"N" = (
+/obj/abstract/exterior_marker/inside,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"R" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/closet/crate/chest/ebony,
+/obj/random/jewelry,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"U" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/table/woodentable/ebony,
+/obj/structure/wall_sconce/lantern{
+	dir = 1;
+	pixel_y = 10
+	},
+/obj/item/chems/glass/handmade/bottle/tall/wine{
+	pixel_x = -10;
+	pixel_y = 18
+	},
+/obj/structure/fire_source/heater/mapped,
+/obj/item/chems/glass/handmade/bottle/tall/wine{
+	pixel_x = -10;
+	pixel_y = 9
+	},
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"W" = (
+/turf/floor/natural/dirt,
+/area/template_noop)
+"X" = (
+/obj/abstract/exterior_marker/inside,
+/turf/wall/log/walnut/shutter,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+"Y" = (
+/obj/abstract/exterior_marker/inside,
+/obj/structure/fire_source/stove,
+/turf/floor/wood/walnut,
+/area/shaded_hills/outside/point_of_interest/chemistry_shack)
+
+(1,1,1) = {"
+W
+W
+z
+W
+W
+W
+z
+z
+z
+"}
+(2,1,1) = {"
+W
+F
+F
+H
+a
+s
+s
+s
+z
+"}
+(3,1,1) = {"
+W
+F
+h
+N
+J
+J
+Y
+s
+W
+"}
+(4,1,1) = {"
+z
+F
+U
+N
+p
+k
+L
+X
+W
+"}
+(5,1,1) = {"
+W
+F
+r
+N
+s
+s
+s
+s
+n
+"}
+(6,1,1) = {"
+z
+s
+M
+J
+C
+K
+s
+q
+z
+"}
+(7,1,1) = {"
+W
+s
+I
+m
+s
+R
+X
+q
+W
+"}
+(8,1,1) = {"
+W
+s
+s
+X
+s
+s
+s
+W
+W
+"}
+(9,1,1) = {"
+W
+W
+z
+W
+W
+W
+W
+z
+z
+"}
