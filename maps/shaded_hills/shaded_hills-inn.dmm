@@ -447,6 +447,10 @@
 "qP" = (
 /turf/floor/wood/walnut,
 /area/shaded_hills/farmhouse)
+"qW" = (
+/obj/structure/town_bell,
+/turf/floor/natural/path/basalt,
+/area/shaded_hills/outside/downlands)
 "qY" = (
 /turf/wall/brick/basalt,
 /area/shaded_hills/outside/downlands/poi)
@@ -10796,7 +10800,7 @@ Yg
 JU
 TR
 TR
-TR
+qW
 EV
 TR
 EV
@@ -10947,8 +10951,8 @@ Yg
 Yg
 Yg
 TR
-TR
-TR
+EV
+EV
 EV
 Ic
 EV
@@ -11098,9 +11102,9 @@ qG
 Jw
 Yg
 Yg
-TR
-TR
-TR
+Ic
+Ic
+Ic
 EV
 TR
 EV
@@ -11250,10 +11254,10 @@ qG
 dK
 Yg
 Yg
-TR
-TR
-TR
+Ic
+Ic
 EV
+Ic
 Ic
 EV
 TR
