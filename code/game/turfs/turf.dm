@@ -5,6 +5,7 @@
 	is_spawnable_type = TRUE
 	layer = TURF_LAYER
 	temperature_sensitive = TRUE
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 	/// Will participate in ZAS, join zones, etc.
 	var/zone_membership_candidate = FALSE

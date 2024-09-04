@@ -40,3 +40,76 @@
 
 /decl/interaction_handler/storage_open/invoked(atom/target, mob/user, obj/item/prop)
 	target?.storage?.open(user)
+
+/decl/interaction_handler/wash_hands
+	name = "Wash Hands"
+	expected_target_type = /atom
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION
+
+/decl/interaction_handler/wash_hands/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..() && target?.reagents?.has_reagent(/decl/material/liquid/water, 150)
+	if(.)
+		for(var/hand_slot in global.all_washable_hand_slots)
+			if(user.get_organ(hand_slot))
+				return TRUE
+
+/decl/interaction_handler/wash_hands/invoked(atom/target, mob/user, obj/item/prop)
+
+	// Probably needs debounce and do_after() but showers and wading into water don't, so whatever.
+	if(!target?.reagents?.has_reagent(/decl/material/liquid/water, 150)) // To avoid washing your hands in beakers.
+		to_chat(user, SPAN_WARNING("\The [src] doesn't have enough water in it to wash your hands."))
+		return
+
+	var/found_hand = FALSE
+	for(var/hand_slot in global.all_washable_hand_slots)
+		if(user.get_organ(hand_slot))
+			found_hand = TRUE
+			break
+	if(!found_hand)
+		return
+
+	var/decl/pronouns/pronouns = user.get_pronouns()
+	user.visible_message(
+		SPAN_NOTICE("\The [user] washes [pronouns.his] hands in \the [target]."),
+		SPAN_NOTICE("You wash your hands in \the [target].")
+	)
+	user.clean()
+	playsound(user.loc, 'sound/effects/slosh.ogg', 25, 1)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
+/decl/interaction_handler/drink
+	name = "Drink"
+	expected_target_type = /atom
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION
+
+/decl/interaction_handler/drink/is_possible(atom/target, mob/user, obj/item/prop)
+	return ..() && target?.reagents?.total_volume && user.check_has_mouth() && !istype(target, /obj/item)
+
+/decl/interaction_handler/drink/invoked(atom/target, mob/user, obj/item/prop)
+
+	// Items can be picked up and drunk from, this interaction is for turfs and structures.
+	if(istype(target, /obj/item))
+		return
+
+	if(!user.check_has_mouth())
+		return
+
+	if(!target?.reagents?.total_volume)
+		to_chat(user, SPAN_WARNING("\The [src] is empty of reagents."))
+		return
+
+	if(!user.can_eat_food_currently(null, user, EATING_METHOD_DRINK))
+		return
+
+	var/blocked = user.check_mouth_coverage()
+	if(blocked)
+		to_chat(user, SPAN_NOTICE("\The [blocked] is in the way!"))
+		return
+
+	user.visible_message(
+		SPAN_NOTICE("\The [user] drinks from \the [target]."),
+		SPAN_NOTICE("You drink from \the [target].")
+	)
+	target.reagents.trans_to_mob(user, 5, CHEM_INGEST)
+	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

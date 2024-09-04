@@ -255,6 +255,14 @@ var/global/list/default_onmob_icons = list(
 	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi'
 )
 
+var/global/list/all_washable_hand_slots = list(
+	BP_L_HAND,
+	BP_R_HAND,
+	BP_M_HAND,
+	BP_L_HAND_UPPER,
+	BP_R_HAND_UPPER
+)
+
 var/global/list/all_hand_slots = list(
 	BP_L_HAND,
 	BP_R_HAND,
