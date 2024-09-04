@@ -28,6 +28,9 @@
 	var/shift                   = 0
 	/// Whether or not this grab causes atoms to adjust their plane/layer according to grabber dir.
 	var/adjust_plane            = TRUE
+	// This grab will adjust the victim's layering.
+	var/adjust_layer            = TRUE
+
 	var/success_up              = "You get a better grip on $rep_affecting$."
 	var/success_down            = "You adjust your grip on $rep_affecting$."
 	var/fail_up                 = "You can't get a better grip on $rep_affecting$!"

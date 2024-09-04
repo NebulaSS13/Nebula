@@ -1,7 +1,8 @@
 /decl/grab/simple/control
-	name =         "controlling grab"
-	shift =        0
+	name         = "controlling grab"
+	shift        = 0
 	adjust_plane = FALSE
+	adjust_layer = FALSE
 
 /decl/grab/simple/control/on_hit_help(var/obj/item/grab/G, var/atom/A, var/proximity)
 	if(A == G.assailant)

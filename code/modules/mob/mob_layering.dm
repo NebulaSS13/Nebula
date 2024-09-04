@@ -7,22 +7,24 @@
 	var/last_layer = layer
 	var/new_layer = get_base_layer()
 	if(isturf(loc))
-
 		var/turf/T = loc
 		if(T.pixel_z < 0)
 			new_layer = T.layer + 0.25
 		else if(buckled && buckled.buckle_layer_above)
-			new_layer = buckled.layer + ((buckled.dir == SOUTH) ? -0.1 : 0.1)
+			new_layer = buckled.layer + ((buckled.dir == SOUTH) ? -0.01 : 0.01)
 		else if(length(grabbed_by))
 			var/draw_under = TRUE
 			var/adjust_layer = FALSE
 			for(var/obj/item/grab/G as anything in grabbed_by)
+				if(!G.current_grab.adjust_layer)
+					continue
 				if(get_dir(G.assailant, src) & SOUTH)
 					draw_under = FALSE
 				if(G.current_grab.adjust_plane)
 					adjust_layer = TRUE
 			if(adjust_layer)
 				new_layer += (draw_under ? -0.01 : 0.01)
+
 	if(new_layer != last_layer)
 		layer = new_layer
 		UPDATE_OO_IF_PRESENT
@@ -53,6 +55,11 @@
 	if(current_posture.prone)
 		return LYING_HUMAN_LAYER
 	. = ..()
+
+/mob/living/simple_animal/get_base_layer()
+	if(buckled_mob)
+		return UNDER_MOB_LAYER
+	return ..()
 
 // If you ever want to change how a mob offsets by default, you MUST add the offset
 // changes to this proc and call it from your new feature code. This prevents conflicting

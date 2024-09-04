@@ -124,6 +124,7 @@ What is the naming convention for planes or layers?
 	#define FULL_WINDOW_LAYER           3.05
 	#define ABOVE_WINDOW_LAYER          3.06
 	//LYING MOB AND HUMAN
+	#define UNDER_MOB_LAYER             3.065
 	#define LYING_MOB_LAYER             3.07
 	#define LYING_HUMAN_LAYER           3.08
 	#define BASE_ABOVE_OBJ_LAYER        3.09
