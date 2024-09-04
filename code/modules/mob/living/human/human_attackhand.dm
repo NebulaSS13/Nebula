@@ -408,7 +408,7 @@
 			var/image/radial_button = new
 			radial_button.name = capitalize(u_attack.name)
 			LAZYSET(choices, u_attack, radial_button)
-	var/decl/natural_attack/new_attack = show_radial_menu(src, (attack_selector || src), choices, radius = 42, use_labels = TRUE)
+	var/decl/natural_attack/new_attack = show_radial_menu(src, (attack_selector || src), choices, radius = 42, use_labels = RADIAL_LABELS_OFFSET)
 	if(QDELETED(src) || !istype(new_attack) || !(new_attack.type in get_natural_attacks()))
 		return
 	default_attack = new_attack

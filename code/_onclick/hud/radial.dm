@@ -173,7 +173,7 @@ var/global/list/radial_menus = list()
 /datum/radial_menu/proc/get_next_id()
 	return "c_[choices.len]"
 
-/datum/radial_menu/proc/set_choices(list/new_choices, use_tooltips, use_labels)
+/datum/radial_menu/proc/set_choices(list/new_choices, use_tooltips, use_labels = RADIAL_LABELS_NONE)
 	if(choices.len)
 		Reset()
 	for(var/E in new_choices)
@@ -186,8 +186,7 @@ var/global/list/radial_menus = list()
 				choices_icons[id] = I
 	setup_menu(use_tooltips)
 
-
-/datum/radial_menu/proc/extract_image(image/E, var/use_labels)
+/datum/radial_menu/proc/extract_image(image/E, var/use_labels = RADIAL_LABELS_NONE)
 	var/mutable_appearance/MA = new /mutable_appearance(E)
 	if(MA)
 		MA.layer = HUD_ABOVE_HUD_LAYER
@@ -196,9 +195,15 @@ var/global/list/radial_menus = list()
 			MA.maptext_width = 64
 			MA.maptext_height = 64
 			MA.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-			MA.maptext_x = -round(MA.maptext_width/2) + 16
-			MA.maptext_y = -round(MA.maptext_height/2) + 16
-			MA.maptext = STYLE_SMALLFONTS_OUTLINE("<center>[E.name]</center>", 7, COLOR_WHITE, COLOR_BLACK)
+			switch(use_labels)
+				if(RADIAL_LABELS_OFFSET)
+					MA.maptext_x = -16
+					MA.maptext_y = -8
+					MA.maptext = STYLE_SMALLFONTS_OUTLINE("<center>[E.name]</center>", 7, COLOR_WHITE, COLOR_BLACK)
+				if(RADIAL_LABELS_CENTERED)
+					MA.maptext_x = -16
+					MA.maptext_y = -16
+					MA.maptext = "<span style='font-family: \"Small Fonts\"; color: #fff; -dm-text-outline: 1 #000; font-size: 7px; text-align:center; vertical-align:middle'>[E.name]</span>"
 
 	return MA
 
@@ -253,7 +258,7 @@ var/global/list/radial_menus = list()
 	Choices should be a list where list keys are movables or text used for element names and return value
 	and list values are movables/icons/images used for element icons
 */
-/proc/show_radial_menu(mob/user, atom/anchor, list/choices, uniqueid, radius, datum/callback/custom_check, require_near = FALSE, tooltips = FALSE, no_repeat_close = FALSE, list/check_locs, use_labels = FALSE)
+/proc/show_radial_menu(mob/user, atom/anchor, list/choices, uniqueid, radius, datum/callback/custom_check, require_near = FALSE, tooltips = FALSE, no_repeat_close = FALSE, list/check_locs, use_labels = RADIAL_LABELS_NONE)
 	if(!user || !anchor || !length(choices))
 		return
 	if(!uniqueid)
