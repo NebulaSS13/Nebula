@@ -211,3 +211,38 @@
 		return list(new_turf, source)
 
 	return new_turf
+
+/proc/get_dir_z_text(turf/source, turf/target)
+	source = get_turf(source)
+	target = get_turf(target)
+	if(!istype(source) || !istype(target))
+		return "somewhere"
+	if(source == target)
+		return "right next to you"
+
+	if(source.z > target.z)
+		. += "upwards and to"
+	else if(source.z < target.z)
+		. += "downwards and to"
+
+	if(source.x == target.x)
+		if(source.y > target.y)
+			. += "the south"
+		else
+			. += "the north"
+	else if(source.y == target.y)
+		if(source.x > target.x)
+			. += "the west"
+		else
+			. += "the east"
+	else
+		if(source.x > target.x)
+			if(source.y > target.y)
+				. += "the southwest"
+			else
+				. += "the northwest"
+		else
+			if(source.y > target.y)
+				. += "the southeast"
+			else
+				. += "the northeast"
