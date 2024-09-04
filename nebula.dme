@@ -1501,6 +1501,8 @@
 #include "code\game\objects\structures\crates_lockers\closets\secure\scientist.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\security.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\service.dm"
+#include "code\game\objects\structures\decorations\_decoration.dm"
+#include "code\game\objects\structures\decorations\gargoyle.dm"
 #include "code\game\objects\structures\doors\_door.dm"
 #include "code\game\objects\structures\flora\_flora.dm"
 #include "code\game\objects\structures\flora\bush.dm"
