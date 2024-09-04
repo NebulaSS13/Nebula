@@ -1077,6 +1077,7 @@
 #include "code\game\objects\items\holosign_creator.dm"
 #include "code\game\objects\items\instruments.dm"
 #include "code\game\objects\items\latexballoon.dm"
+#include "code\game\objects\items\lockpicks.dm"
 #include "code\game\objects\items\paintkit.dm"
 #include "code\game\objects\items\paper_fortune_teller.dm"
 #include "code\game\objects\items\part_replacer.dm"
