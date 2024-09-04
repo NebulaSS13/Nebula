@@ -1,9 +1,10 @@
-/obj/structure/textiles
+/obj/structure/working
 
-	abstract_type       = /obj/structure/textiles
+	abstract_type       = /obj/structure/working
 	icon_state          = ICON_STATE_WORLD
 	anchored            = TRUE
 	density             = TRUE
+	color               = /decl/material/solid/organic/wood::color
 	material            = /decl/material/solid/organic/wood
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	atom_flags          = ATOM_FLAG_CLIMBABLE
@@ -15,40 +16,40 @@
 	var/product_type
 	var/datum/composite_sound/work_sound
 
-/obj/structure/textiles/Initialize()
+/obj/structure/working/Initialize()
 	. = ..()
 	if(ispath(work_sound))
 		work_sound = new work_sound(list(src), FALSE)
 	else
 		work_sound = null
 
-/obj/structure/textiles/Destroy()
+/obj/structure/working/Destroy()
 	QDEL_NULL(work_sound)
 	return ..()
 
-/obj/structure/textiles/proc/apply_textiles_overlays()
+/obj/structure/working/proc/apply_working_overlays()
 	return
 
-/obj/structure/textiles/on_update_icon()
+/obj/structure/working/on_update_icon()
 	..()
 	icon_state = initial(icon_state)
-	apply_textiles_overlays()
+	apply_working_overlays()
 	if(working)
 		icon_state = "[icon_state]-working"
 
-/obj/structure/textiles/proc/start_working()
+/obj/structure/working/proc/start_working()
 	working = TRUE
 	if(work_sound && !work_sound.started)
 		work_sound.start(src)
 	update_icon()
 
-/obj/structure/textiles/proc/stop_working()
+/obj/structure/working/proc/stop_working()
 	working = FALSE
 	if(work_sound?.started)
 		work_sound.stop(src)
 	update_icon()
 
-/obj/structure/textiles/attackby(obj/item/W, mob/user)
+/obj/structure/working/attackby(obj/item/W, mob/user)
 
 	if(user.a_intent == I_HURT)
 		return ..()
@@ -62,16 +63,16 @@
 
 	return ..()
 
-/obj/structure/textiles/proc/try_take_input(obj/item/W, mob/user, silent)
+/obj/structure/working/proc/try_take_input(obj/item/W, mob/user, silent)
 	return FALSE
 
-/obj/structure/textiles/proc/try_unload_material(mob/user)
+/obj/structure/working/proc/try_unload_material(mob/user)
 	return FALSE
 
-/obj/structure/textiles/proc/try_start_working(mob/user)
+/obj/structure/working/proc/try_start_working(mob/user)
 	return FALSE
 
-/obj/structure/textiles/attack_hand(mob/user)
+/obj/structure/working/attack_hand(mob/user)
 
 	if(user.a_intent == I_HURT)
 		return ..()

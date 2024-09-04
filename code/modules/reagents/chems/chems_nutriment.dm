@@ -360,7 +360,8 @@
 	name = "cheese"
 	lore_text = "Aged, fermented, curdled milk."
 	uid = "chem_nutriment_cheese"
-	//allergen_flags = INGREDIENT_FLAG_DAIRY
+	color = "#ffd000"
+	//allergen_flags = INGREDIENT_FLAG_DAIRY // Pending allergen PR.
 
 /decl/material/liquid/nutriment/butter
 	name = "butter"
@@ -368,7 +369,7 @@
 	color = "#ffe864"
 	taste_description = "butter"
 	uid = "chem_nutriment_butter"
-	//allergen_flags = INGREDIENT_FLAG_DAIRY
+	//allergen_flags = INGREDIENT_FLAG_DAIRY // Pending allergen PR.
 
 /decl/material/liquid/nutriment/margarine
 	name = "margarine"
@@ -376,4 +377,4 @@
 	color = "#fff2ab"
 	taste_description = "bland oiliness"
 	uid = "chem_nutriment_margarine"
-	//allergen_flags = INGREDIENT_FLAG_DAIRY
+	//allergen_flags = INGREDIENT_FLAG_VEGETABLE // Pending allergen PR.

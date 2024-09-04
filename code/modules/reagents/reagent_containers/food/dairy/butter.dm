@@ -2,6 +2,7 @@
 	abstract_type  = /obj/item/food/dairy/butter
 	nutriment_type = /decl/material/liquid/nutriment/butter
 	color = "#ffe864"
+	nutriment_desc = list("butter" = 1)
 
 /obj/item/food/dairy/butter/get_default_dairy_color()
 	return "#ffe864"
@@ -26,10 +27,11 @@
 
 // Mappable subtypes below.
 /obj/item/food/dairy/butter/stick/margarine
-	desc = "A stick of emulsified milk solids."
+	desc = "A stick of emulsified plant oil, often used as a substitute for butter."
 	nutriment_type = /decl/material/liquid/nutriment/margarine
 	slice_path = /obj/item/food/dairy/butter/pat/margarine
 	color = "#f3f2be"
+	nutriment_desc = list("oil" = 1)
 
 /obj/item/food/dairy/butter/stick/margarine/get_nutriment_data()
 	. = ..()
@@ -38,6 +40,7 @@
 
 /obj/item/food/dairy/butter/pat/margarine
 	desc = "A small pat of margarine, separated from some greater whole."
+	nutriment_desc = list("oil" = 1)
 
 /obj/item/food/dairy/butter/pat/margarine/get_nutriment_data()
 	. = ..()

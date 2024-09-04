@@ -182,3 +182,8 @@
 /obj/item/food/proc/get_nutriment_data()
 	if(nutriment_desc)
 		return list("taste" = nutriment_desc)
+
+/obj/item/food/proc/set_nutriment_data(list/newdata)
+	if(reagents?.total_volume && reagents.has_reagent(nutriment_type, 1))
+		LAZYINITLIST(reagents.reagent_data)
+		reagents.reagent_data[nutriment_type] = newdata

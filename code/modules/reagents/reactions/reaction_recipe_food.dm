@@ -15,6 +15,9 @@
 	var/atom/movable/food = new obj_result
 	if(istype(food))
 		food.dropInto(location)
+	if(length(data) && istype(food, /obj/item/food))
+		var/obj/item/food/food_item = food
+		food_item.set_nutriment_data(data)
 	return food
 
 /decl/chemical_reaction/recipe/food/dairy
@@ -38,6 +41,30 @@
 			if(isnull(milk_val))
 				continue
 			LAZYSET(., milk_key, milk_val)
+
+/decl/chemical_reaction/recipe/food/dairy/butter
+	name = "Enzyme Butter"
+	required_reagents = list(
+		/decl/material/solid/sodiumchloride = 1,
+		/decl/material/liquid/drink/milk/cream = 20
+	)
+	catalysts = list(/decl/material/liquid/enzyme = 5)
+	mix_message = "The solution thickens and curdles into a buttery yellow solid."
+	minimum_temperature = 40 CELSIUS
+	maximum_temperature = (40 CELSIUS) + 100
+	obj_result = /obj/item/food/dairy/butter/stick
+
+/decl/chemical_reaction/recipe/food/dairy/margarine
+	name = "Enzyme Margarine"
+	required_reagents = list(
+		/decl/material/solid/sodiumchloride = 1,
+		/decl/material/liquid/nutriment/plant_oil = 20
+	)
+	catalysts = list(/decl/material/liquid/enzyme = 5)
+	mix_message = "The solution thickens and curdles into a pale yellow solid."
+	minimum_temperature = 40 CELSIUS
+	maximum_temperature = (40 CELSIUS) + 100
+	obj_result = /obj/item/food/dairy/butter/stick/margarine
 
 /decl/chemical_reaction/recipe/food/dairy/cheesewheel
 	name = "Enzyme Cheesewheel"
