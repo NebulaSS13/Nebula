@@ -5,14 +5,17 @@
 
 /obj/structure/closet/cabinet/wooden
 	desc = "A stout cabinet."
+	icon = /decl/closet_appearance/cabinet/nocolor::base_icon
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	open_sound = 'sound/effects/doorcreaky.ogg'
 	close_sound = 'sound/effects/doorcreaky.ogg'
 	material = /decl/material/solid/organic/wood
+	color = /decl/material/solid/organic/wood::color
 	closet_appearance = /decl/closet_appearance/cabinet/nocolor
 
 /obj/structure/closet/cabinet/wooden/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
 
 /obj/structure/closet/acloset
 	name = "strange closet"

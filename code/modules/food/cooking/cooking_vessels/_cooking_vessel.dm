@@ -8,6 +8,7 @@
 	material_alteration           = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	storage                       = /datum/storage/hopper/industrial
 	material                      = /decl/material/solid/metal/stainlesssteel
+	color                         = /decl/material/solid/metal/stainlesssteel::color
 	amount_per_transfer_from_this = 15
 
 	var/cooking_category

@@ -10,24 +10,25 @@
 	craft_verbing = "tailoring"
 
 // Subtypes for dyed cloth.
+#define SET_COLOR(COLOR) paint_color = COLOR; color = COLOR
 /obj/item/stack/material/bolt/yellow
-	paint_color = "#ffbf00"
+	SET_COLOR("#ffbf00")
 /obj/item/stack/material/bolt/teal
-	paint_color = "#00e1ff"
+	SET_COLOR("#00e1ff")
 /obj/item/stack/material/bolt/black
-	paint_color = "#505050"
+	SET_COLOR("#505050")
 /obj/item/stack/material/bolt/green
-	paint_color = "#b7f27d"
+	SET_COLOR("#b7f27d")
 /obj/item/stack/material/bolt/purple
-	paint_color = "#9933ff"
+	SET_COLOR("#9933ff")
 /obj/item/stack/material/bolt/blue
-	paint_color = "#46698c"
+	SET_COLOR("#46698c")
 /obj/item/stack/material/bolt/beige
-	paint_color = "#ceb689"
+	SET_COLOR("#ceb689")
 /obj/item/stack/material/bolt/lime
-	paint_color = "#62e36c"
+	SET_COLOR("#62e36c")
 /obj/item/stack/material/bolt/red
-	paint_color = "#9d2300"
+	SET_COLOR("#9d2300")
 
 /obj/item/stack/material/thread
 	name = "thread spools"
@@ -48,20 +49,21 @@
 	is_spawnable_type = TRUE
 
 /obj/item/stack/material/thread/yellow
-	paint_color = "#ffbf00"
+	SET_COLOR("#ffbf00")
 /obj/item/stack/material/thread/teal
-	paint_color = "#00e1ff"
+	SET_COLOR("#00e1ff")
 /obj/item/stack/material/thread/black
-	paint_color = "#505050"
+	SET_COLOR("#505050")
 /obj/item/stack/material/thread/green
-	paint_color = "#b7f27d"
+	SET_COLOR("#b7f27d")
 /obj/item/stack/material/thread/purple
-	paint_color = "#9933ff"
+	SET_COLOR("#9933ff")
 /obj/item/stack/material/thread/blue
-	paint_color = "#46698c"
+	SET_COLOR("#46698c")
 /obj/item/stack/material/thread/beige
-	paint_color = "#ceb689"
+	SET_COLOR("#ceb689")
 /obj/item/stack/material/thread/lime
-	paint_color = "#62e36c"
+	SET_COLOR("#62e36c")
 /obj/item/stack/material/thread/red
-	paint_color = "#9d2300"
+	SET_COLOR("#9d2300")
+#undef SET_COLOR

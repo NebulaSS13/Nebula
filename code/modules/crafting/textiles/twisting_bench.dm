@@ -18,3 +18,4 @@
 
 /obj/structure/textiles/spinning_wheel/twisting_bench/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color

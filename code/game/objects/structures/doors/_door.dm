@@ -225,6 +225,11 @@
 	material = /decl/material/solid/stone/sandstone
 	color = /decl/material/solid/stone/sandstone::color
 
+/obj/structure/door/basalt
+	desc = "A door hewn of raw basalt, unthinkably heavy and smooth to the touch."
+	material = /decl/material/solid/stone/basalt
+	color = /decl/material/solid/stone/basalt::color
+
 /obj/structure/door/diamond
 	material = /decl/material/solid/gemstone/diamond
 

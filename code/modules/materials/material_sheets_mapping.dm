@@ -1,10 +1,11 @@
 #define STACK_SUBTYPES(MAT_ID, MAT_NAME, MAT_TYPE, STACK_TYPE, REINF_TYPE) \
 /obj/item/stack/material/##STACK_TYPE/mapped/##MAT_ID {                    \
-	name = "1 " + MAT_NAME;                                               \
+	name = "1 " + MAT_NAME;                                                \
 	material = /decl/material/MAT_TYPE;                                    \
 	reinf_material = REINF_TYPE;                                           \
 	amount = 1;                                                            \
 	is_spawnable_type = TRUE;                                              \
+	color = parent_type::paint_color || /decl/material/MAT_TYPE::color;    \
 }                                                                          \
 /obj/item/stack/material/##STACK_TYPE/mapped/##MAT_ID/five {               \
 	name = "5 " + MAT_NAME;                                                \

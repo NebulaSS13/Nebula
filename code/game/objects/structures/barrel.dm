@@ -7,6 +7,7 @@
 	atom_flags                = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
 	matter                    = null
 	material                  = /decl/material/solid/organic/wood
+	color                     = /decl/material/solid/organic/wood::color
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	wrenchable                = FALSE
 	storage                   = /datum/storage/barrel
@@ -47,6 +48,7 @@
 
 /obj/structure/reagent_dispensers/barrel/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
 
 /obj/structure/reagent_dispensers/barrel/ebony/water/populate_reagents()
 	. = ..()

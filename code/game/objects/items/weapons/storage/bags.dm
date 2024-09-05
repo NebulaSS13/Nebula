@@ -122,6 +122,7 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
 	storage = /datum/storage/bag/sack
 	material = /decl/material/solid/organic/leather
+	color = /decl/material/solid/organic/leather::color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 /obj/item/bag/sack/update_w_class()

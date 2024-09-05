@@ -11,6 +11,7 @@
 
 /obj/item/chems/cooking_vessel/pot/iron
 	material = /decl/material/solid/metal/iron
+	color = /decl/material/solid/metal/iron::color
 
 /obj/item/chems/cooking_vessel/pot/on_update_icon()
 	. = ..()

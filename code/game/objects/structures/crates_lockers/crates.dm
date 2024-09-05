@@ -319,6 +319,8 @@
 	closet_appearance = /decl/closet_appearance/crate/chest
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material = /decl/material/solid/organic/wood
+	color = /decl/material/solid/organic/wood::color
 
 /obj/structure/closet/crate/chest/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color

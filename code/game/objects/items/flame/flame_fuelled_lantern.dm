@@ -14,6 +14,7 @@
 	_fuel_spend_amt     = (1 / 60) // a full lantern should last an hour
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material            = /decl/material/solid/metal/copper
+	color               = /decl/material/solid/metal/copper::color
 	can_manually_light  = FALSE
 	sconce_can_hold     = TRUE
 

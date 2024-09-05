@@ -80,7 +80,7 @@
 
 /decl/loadout_option/fantasy/suit/cloak
 	name = "cloak"
-	path = /obj/item/clothing/suit/cloak
+	path = /obj/item/clothing/suit/cloak/crafted // Takes material colour.
 	uid = "gear_fantasy_cloak"
 
 /decl/loadout_option/fantasy/suit/poncho

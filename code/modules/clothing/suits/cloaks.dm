@@ -23,6 +23,12 @@
 	color = get_random_colour(TRUE)
 	. = ..()
 
+// Takes material colour. TODO: Crafting recipe for cloth, fur, leather, etc. cloaks.
+/obj/item/clothing/suit/cloak/crafted
+	material = /decl/material/solid/organic/cloth
+	color = /decl/material/solid/organic/cloth::color
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+
 // Cloaks should layer over and under everything, so set the layer directly rather
 // than relying on overlay order. This also overlays over inhands but it looks ok.
 /obj/item/clothing/suit/cloak/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
@@ -128,6 +134,7 @@
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon = 'icons/clothing/suits/cloaks/cloak_hide.dmi'
 	material = /decl/material/solid/organic/leather
+	color = /decl/material/solid/organic/leather::color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	armor_type = /datum/extension/armor/ablative
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

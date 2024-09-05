@@ -21,11 +21,16 @@
 			bow.remove_string()
 	return ..()
 
+#define MAT_COLOR(MAT) \
+	material = MAT;\
+	color = MAT::color
+
 /obj/item/bowstring/synthetic
-	material = /decl/material/solid/fiberglass
+	MAT_COLOR(/decl/material/solid/fiberglass)
 
 /obj/item/bowstring/steel
-	material = /decl/material/solid/metal/steel
+	MAT_COLOR(/decl/material/solid/metal/steel)
 
 /obj/item/bowstring/copper
-	material = /decl/material/solid/metal/copper
+	MAT_COLOR(/decl/material/solid/metal/copper)
+#undef MAT_COLOR

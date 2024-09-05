@@ -11,6 +11,10 @@
 	base_icon = 'icons/turf/flooring/concrete.dmi'
 	base_icon_state = "inset"
 
+/turf/floor/concrete/smooth
+	icon_state = "concrete"
+	base_icon_state = "concrete"
+
 /turf/floor/concrete/flooded
 	flooded = /decl/material/liquid/water
 	color = COLOR_LIQUID_WATER
