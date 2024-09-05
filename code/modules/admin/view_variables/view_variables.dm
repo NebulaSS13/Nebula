@@ -23,6 +23,8 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 		A = D
 		if(A.icon && A.icon_state)
 			sprite = icon(A.icon, A.icon_state)
+			if(A.color)
+				sprite.Blend(A.color, ICON_MULTIPLY)
 			send_rsc(usr, sprite, "view_vars_sprite.png")
 
 	send_rsc(usr,'code/js/view_variables.js', "view_variables.js")
