@@ -76,7 +76,7 @@
 	if(!(ishuman(user) || isrobot(user)))	return 0
 	if(opened)	return 0
 	if(contents.len)	return 0
-	visible_message("[user] folds up the [name]")
+	visible_message("[user] folds up \the [src]")
 	. = new item_path(get_turf(src))
 	qdel(src)
 

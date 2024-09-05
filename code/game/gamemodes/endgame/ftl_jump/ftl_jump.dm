@@ -104,7 +104,7 @@
 	if(nloc == new_loc)
 		reality++
 		if(reality > 5)
-			to_chat(daddy, SPAN_NOTICE("Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended..."))
+			to_chat(daddy, SPAN_NOTICE("Yep, it's certainly the other one. Your existence was a glitch, and it's finally being mended..."))
 			blueswitch()
 		else if(reality > 3)
 			to_chat(daddy, SPAN_DANGER("Something is definitely wrong. Why do you think YOU are the original?"))

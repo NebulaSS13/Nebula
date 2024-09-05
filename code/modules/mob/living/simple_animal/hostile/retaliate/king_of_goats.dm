@@ -215,7 +215,7 @@
 				set_damage(BRUTE, initial_brute)
 				set_damage(BURN, initial_burn)
 			else
-				visible_message(SPAN_NOTICE("The [src] loses concentration and huffs haughtily."))
+				visible_message(SPAN_NOTICE("\The [src] loses concentration and huffs haughtily."))
 			ai?.resume()
 
 		else return

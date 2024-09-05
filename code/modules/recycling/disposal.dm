@@ -100,7 +100,7 @@ var/global/list/diversion_junctions = list()
 					GM.client.perspective = EYE_PERSPECTIVE
 					GM.client.eye = src
 				GM.forceMove(src)
-				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in the [src] by \the [user]."))
+				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in \the [src] by \the [user]."))
 				qdel(G)
 				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 		return

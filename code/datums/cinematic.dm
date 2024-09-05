@@ -30,8 +30,8 @@ var/global/datum/cinematic/cinematic = new
 			M.set_status(STAT_STUN, 8000)
 
 	override.nuke_act(cinematic_screen, station_missed) //cinematic happens here, as does mob death.
-	//If its actually the end of the round, wait for it to end.
-	//Otherwise if its a verb it will continue on afterwards.
+	//If it's actually the end of the round, wait for it to end.
+	//Otherwise if it's a verb it will continue on afterwards.
 	sleep(30 SECONDS)
 
 	for(var/client/C in viewers)

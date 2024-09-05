@@ -100,7 +100,7 @@
 
 /obj/item/clothing/shoes/proc/remove_cuffs(var/mob/user)
 	if (!user.put_in_hands(attached_cuffs))
-		to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
+		to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to remove \the [attached_cuffs] from \the [src]."))
 		return
 	user.visible_message(SPAN_ITALIC("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 	attached_cuffs.add_fingerprint(user)
@@ -119,7 +119,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
 		return TRUE
 	if (I.w_class > hidden_item_max_w_class)
-		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
+		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in \the [src]."))
 		return TRUE
 	if (do_after(user, 1 SECONDS))
 		if(!user.try_unequip(I, src))
@@ -146,7 +146,7 @@
 		return FALSE
 	if (do_after(user, 2 SECONDS))
 		if (!user.put_in_hands(hidden_item))
-			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
+			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to pull \the [hidden_item] from \the [src]."))
 			return TRUE
 		user.visible_message(SPAN_ITALIC("\The [user] pulls \the [hidden_item] from \the [src]."), range = 1)
 		playsound(get_turf(src), 'sound/effects/holster/tactiholsterout.ogg', 25)

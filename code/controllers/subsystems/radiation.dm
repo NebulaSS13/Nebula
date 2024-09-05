@@ -37,7 +37,7 @@ SUBSYSTEM_DEF(radiation)
 		if(QDELETED(T))
 			resistance_cache -= T
 		else if((length(T.contents) + 1) != resistance_cache[T])
-			resistance_cache -= T // If its stale REMOVE it! It will get added if its needed.
+			resistance_cache -= T // If it's stale REMOVE it! It will get added if it's needed.
 		if (MC_TICK_CHECK)
 			return
 

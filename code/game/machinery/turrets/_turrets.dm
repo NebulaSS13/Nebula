@@ -38,7 +38,7 @@
 
 	// Angles
 	// Remember that in BYOND, NORTH equals 0 absolute degrees, and not 90.
-	var/traverse = 180 // Determines how wide the turret can turn to shoot things, in degrees. The 'front' of the turret is determined by it's dir variable.
+	var/traverse = 180 // Determines how wide the turret can turn to shoot things, in degrees. The 'front' of the turret is determined by its dir variable.
 	var/leftmost_traverse = null // How far left or right the turret can turn. Set automatically using the above variable and the inital dir value.
 	var/rightmost_traverse = null
 	var/current_bearing = 0 // Current absolute angle the turret has, used to calculate if it needs to turn to try to shoot the target.

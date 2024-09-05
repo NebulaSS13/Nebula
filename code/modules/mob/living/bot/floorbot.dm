@@ -81,7 +81,7 @@
 	if(!emagged)
 		emagged = 1
 		if(user)
-			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
+			to_chat(user, "<span class='notice'>\The [src] buzzes and beeps.</span>")
 		return 1
 
 /mob/living/bot/floorbot/handleRegular()

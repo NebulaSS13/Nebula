@@ -112,7 +112,7 @@
 			to_chat(user, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
 
-		audible_message("<span class='warning'>You hear a roar as the [src] activates.</span>", 1)
+		audible_message("<span class='warning'>You hear a roar as \the [src] activates.</span>", 1)
 
 		cremating = TRUE
 		locked = TRUE
@@ -131,7 +131,7 @@
 		locked = initial(locked)
 		playsound(src, 'sound/effects/spray.ogg', 50, 1)
 		update_icon()
-	
+
 // This proc sucks. Actually, all of crematorium code just sucks.
 // TODO: REWRITE OR REMOVE
 /obj/structure/crematorium/proc/on_cremate_mob(atom/cause, mob/living/victim)

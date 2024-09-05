@@ -128,7 +128,7 @@
 			location.hotspot_expose(700, 5)
 		extinguish(no_message = TRUE)
 
-/obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
+/obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights \the [src].")
 	if(QDELETED(src))
 		return
 	if(!lit)
@@ -215,7 +215,7 @@
 /obj/item/clothing/mask/smokable/cigarette/populate_reagents()
 	add_to_reagents(/decl/material/solid/tobacco, 1)
 
-/obj/item/clothing/mask/smokable/cigarette/light(var/flavor_text = "[usr] lights the [name].")
+/obj/item/clothing/mask/smokable/cigarette/light(var/flavor_text = "[usr] lights \the [src].")
 	..()
 	if(is_processing)
 		set_scent_by_reagents(src)
@@ -517,7 +517,7 @@
 /obj/item/clothing/mask/smokable/pipe/isflamesource(atom/A)
 	. = FALSE
 
-/obj/item/clothing/mask/smokable/pipe/light(var/flavor_text = "[usr] lights the [name].")
+/obj/item/clothing/mask/smokable/pipe/light(var/flavor_text = "[usr] lights \the [src].")
 	if(!lit && smoketime)
 		if(submerged())
 			to_chat(usr, SPAN_WARNING("You cannot light \the [src] underwater."))

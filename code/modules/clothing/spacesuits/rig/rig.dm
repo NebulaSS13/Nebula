@@ -171,7 +171,7 @@
 			continue
 		piece.canremove = 0
 		piece.SetName("[suit_type] [initial(piece.name)]")
-		piece.desc = "It seems to be part of a [src.name]."
+		piece.desc = "It seems to be part of \a [src]."
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.

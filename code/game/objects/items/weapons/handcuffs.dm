@@ -108,7 +108,7 @@
 	target.equip_to_slot(cuffs, slot_handcuffed_str)
 	return 1
 
-var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world can chew their restraints every 2.6 seconds
+var/global/last_chew = 0 //#FIXME: It's funny how only one person in the world can chew their restraints every 2.6 seconds
 /mob/living/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time) return

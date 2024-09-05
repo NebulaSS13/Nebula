@@ -155,10 +155,10 @@
 		return
 
 	if(status & ORGAN_BROKEN)
-		to_chat(user, "<span class='warning'>The [encased ? encased : "bone in the [name]"] moves slightly when you poke it!</span>")
+		to_chat(user, "<span class='warning'>The [encased ? encased : "bone in \the [src]"] moves slightly when you poke it!</span>")
 		owner.custom_pain("Your [name] hurts where it's poked.",40, affecting = src)
 	else
-		to_chat(user, "<span class='notice'>The [encased ? encased : "bones in the [name]"] seem to be fine.</span>")
+		to_chat(user, "<span class='notice'>The [encased ? encased : "bones in \the [src]"] seem to be fine.</span>")
 
 	if(status & ORGAN_TENDON_CUT)
 		to_chat(user, "<span class='warning'>The tendons in [name] are severed!</span>")

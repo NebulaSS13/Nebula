@@ -403,7 +403,7 @@ toggleDoor()
 
 Sends a radio command to a door to either open or close. If
 the command is 'toggle' the door will be sent a command that
-reverses it's current state.
+reverses its current state.
 Can also toggle whether the door bolts are locked or not,
 depending on the state of the 'secure' flag.
 Only sends a command if it is needed, i.e. if the door is

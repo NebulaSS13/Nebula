@@ -81,4 +81,4 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED) //Higher melee armor versus lower everything else.
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_TAIL
 	bodytype_equip_flags = BODY_FLAG_VOX
-	siemens_coefficient = 1 //Its literally metal
+	siemens_coefficient = 1 //It's literally metal

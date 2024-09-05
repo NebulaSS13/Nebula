@@ -11,7 +11,7 @@
 	if(!isliving(AM))
 		return
 	var/mob/living/M = AM
-	M.slip("the [src.name]", 4)
+	M.slip("\the [src]", 4)
 
 /*
  * Bike Horns

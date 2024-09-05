@@ -102,7 +102,7 @@
 		next = null
 	else if(darts.len)
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on the [src], loading the spring!</span>")
+		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on \the [src], loading the spring!</span>")
 		next = darts[1]
 	add_fingerprint(user)
 

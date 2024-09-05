@@ -99,13 +99,13 @@
 		return
 
 	if(buckled_mob)
-		to_chat(usr, SPAN_WARNING("You can't collapse \the [src.name] while it is still in use."))
+		to_chat(usr, SPAN_WARNING("You can't collapse \the [src] while it is still in use."))
 		return
 
-	usr.visible_message("<b>[usr]</b> starts to collapse \the [src.name].")
+	usr.visible_message("<b>[usr]</b> starts to collapse \the [src].")
 	if(do_after(usr, 4 SECONDS, src))
 		var/obj/item/wheelchair_kit/K = new item_form_type(get_turf(src))
-		visible_message(SPAN_NOTICE("<b>[usr]</b> collapses \the [src.name]."))
+		visible_message(SPAN_NOTICE("<b>[usr]</b> collapses \the [src]."))
 		K.add_fingerprint(usr)
 		qdel(src)
 
@@ -139,7 +139,7 @@
 	if(!structure_form_type)
 		return
 
-	user.visible_message("<b>[user]</b> starts to lay out \the [src.name].")
+	user.visible_message("<b>[user]</b> starts to lay out \the [src].")
 	if(do_after(user, 4 SECONDS, src))
 		var/obj/structure/bed/chair/wheelchair/W = new structure_form_type(get_turf(user))
 		user.visible_message(SPAN_NOTICE("<b>[user]</b> lays out \the [W.name]."))

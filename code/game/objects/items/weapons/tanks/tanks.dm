@@ -195,8 +195,8 @@ var/global/list/global/tank_gauge_cache = list()
 					valve_welded = 1
 					leaking = 0
 				else
-					global.bombers += "[key_name(user)] attempted to weld a [src]. [air_contents.temperature-T0C]"
-					log_and_message_admins("attempted to weld a [src]. [air_contents.temperature-T0C]", user)
+					global.bombers += "[key_name(user)] attempted to weld \a [src]. [air_contents.temperature-T0C]"
+					log_and_message_admins("attempted to weld \a [src]. [air_contents.temperature-T0C]", user)
 					if(WT.welding)
 						to_chat(user, "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>")
 						maxintegrity -= rand(2,6)

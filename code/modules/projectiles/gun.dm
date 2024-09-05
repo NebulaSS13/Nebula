@@ -30,7 +30,7 @@
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/gun
 	name = "gun"
-	desc = "Its a gun. It's pretty terrible, though."
+	desc = "It's a gun. It's pretty terrible, though."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/obj/guns/pistol.dmi'
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -715,7 +715,7 @@
 /obj/item/gun/proc/can_autofire()
 	return (autofire_enabled && world.time >= next_fire_time)
 
-/obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
+/obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with \the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
 	if(istype(user) && !safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
 		user.visible_message(SPAN_WARNING(message))
 		var/list/targets = list(user)

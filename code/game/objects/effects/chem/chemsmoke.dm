@@ -60,7 +60,7 @@
 			if(!istype(AM, /obj/effect/effect/smoke/chem))
 				reagents.splash(AM, splash_amount, copy = 1)
 
-// Fades out the smoke smoothly using it's alpha variable.
+// Fades out the smoke smoothly using its alpha variable.
 /obj/effect/effect/smoke/chem/end_of_life()
 	if(QDELETED(src))
 		return

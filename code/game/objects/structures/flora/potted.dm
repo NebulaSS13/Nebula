@@ -61,7 +61,7 @@
 
 /obj/structure/flora/pottedplant/unusual
 	name = "unusual potted plant"
-	desc = "This is an unusual plant. It's bulbous ends emit a soft blue light."
+	desc = "This is an unusual plant. Its bulbous ends emit a soft blue light."
 	icon_state = "plant-09"
 
 /obj/structure/flora/pottedplant/unusual/Initialize()
@@ -70,7 +70,7 @@
 
 /obj/structure/flora/pottedplant/orientaltree
 	name = "potted oriental tree"
-	desc = "This is a rather oriental style tree. It's flowers are bright pink."
+	desc = "This is a rather oriental style tree. Its flowers are bright pink."
 	icon_state = "plant-10"
 
 /obj/structure/flora/pottedplant/smallcactus
@@ -120,7 +120,7 @@
 
 /obj/structure/flora/pottedplant/subterranean
 	name = "subterranean potted plant"
-	desc = "This is a subterranean plant. It's bulbous ends glow faintly."
+	desc = "This is a subterranean plant. Its bulbous ends glow faintly."
 	icon_state = "plant-20"
 
 /obj/structure/flora/pottedplant/subterranean/Initialize()

@@ -245,10 +245,10 @@ regen() will cover update_icon() for this proc
 
 /obj/effect/blob/core/proc/report_shield_status(var/status)
 	if(status == "low")
-		visible_message(SPAN_DANGER("The [src]'s tendril shield fails, leaving the nucleus vulnerable!"), 3)
+		visible_message(SPAN_DANGER("\The [src]'s tendril shield fails, leaving the nucleus vulnerable!"), 3)
 		reported_low_damage = TRUE
 	if(status == "high")
-		visible_message(SPAN_NOTICE("The [src]'s tendril shield seems to have fully reformed."), 3)
+		visible_message(SPAN_NOTICE("\The [src]'s tendril shield seems to have fully reformed."), 3)
 		reported_low_damage = FALSE
 
 // Rough icon state changes that reflect the core's current_health

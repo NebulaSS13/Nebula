@@ -417,7 +417,7 @@
 				M.client.perspective = MOB_PERSPECTIVE
 
 /**
-	Handle the destruction of this atom, spilling it's contents by default
+	Handle the destruction of this atom, spilling its contents by default
 
 	- `skip_qdel`: If calling qdel() on this atom should be skipped.
 	- Return: Unknown, feel free to change this
@@ -742,7 +742,7 @@
 	LAZYREMOVE(climbers,user)
 	return TRUE
 
-/// Shake this atom and all it's climbers.
+/// Shake this atom and all its climbers.
 /atom/proc/object_shaken()
 	for(var/mob/living/M in climbers)
 		SET_STATUS_MAX(M, STAT_WEAK, 1)

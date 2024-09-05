@@ -16,11 +16,11 @@
 
 /obj/item/clothing/medal/silver/marooned_medal
 	name = "silver medal"
-	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\""
+	desc = "A silver medallion with a tri-coloured ribbon. It has the inscription \"For Distinguished Service\" on the lower part. On the medal's top bar is carved \"H. Warda\""
 	icon = 'maps/random_ruins/exoplanet_ruins/marooned/icons/medal_magnitka.dmi'
 
 /obj/abstract/landmark/corpse/marooned_officer
-	name = "Horazy Warda"
+	name = "Horacy Warda"
 	corpse_outfits = list(/decl/outfit/marooned_officer)
 	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME
 

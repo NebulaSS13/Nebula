@@ -117,7 +117,7 @@
 	if(W.sharp || W.edge)
 		var/force = W.get_attack_force(user)
 		if (!(W.sharp) || (W.sharp && force < 10))//is not sharp enough or at all
-			to_chat(user,"<span class='warning'>You can't cut throught \the [src] with \the [W], it's too dull.</span>")
+			to_chat(user,"<span class='warning'>You can't cut through \the [src] with \the [W], it's too dull.</span>")
 			return
 		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
 		while(current_health > 0 && !QDELETED(src) && !QDELETED(user))

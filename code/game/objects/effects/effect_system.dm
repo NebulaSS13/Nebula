@@ -442,7 +442,7 @@ steam.start() -- spawns the effect
 
 /////////////////////////////////////////////
 //////// Attach a steam trail to an object (eg. a reacting beaker) that will follow it
-// even if it's carried of thrown.
+// even if it's carried or thrown.
 /////////////////////////////////////////////
 
 /datum/effect/effect/system/trail/steam

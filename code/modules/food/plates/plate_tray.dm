@@ -96,7 +96,7 @@
 		storage.close(user)
 	if(!(locate(/obj/structure/table) in forced_loc) && contents.len)
 		if(user)
-			visible_message(SPAN_DANGER("Everything falls off the [name]! Good job, [user]."))
+			visible_message(SPAN_DANGER("Everything falls off \the [src]! Good job, [user]."))
 		scatter_contents(FALSE, forced_loc)
 	return ..()
 

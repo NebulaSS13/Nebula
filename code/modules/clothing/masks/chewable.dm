@@ -84,7 +84,7 @@
 		if(ismob(loc))
 			var/mob/living/M = loc
 			if (!no_message)
-				to_chat(M, "<span class='notice'>You spit out the [name].</span>")
+				to_chat(M, "<span class='notice'>You spit out \the [src].</span>")
 		qdel(src)
 
 /obj/item/clothing/mask/chewable/tobacco/lenni

@@ -18,7 +18,7 @@ var/global/datum/controller/failsafe/Failsafe
 	//	(Real friends look out for *eachother*)
 	var/lasttick = 0
 
-	// Track the MC iteration to make sure its still on track.
+	// Track the MC iteration to make sure it's still on track.
 	var/master_iteration = 0
 	var/running = TRUE
 

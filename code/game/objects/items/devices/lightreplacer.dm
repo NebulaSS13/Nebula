@@ -98,7 +98,7 @@
 			return
 		else if(G.use(1))
 			AddUses(16) //Autolathe converts 1 sheet into 16 lights.
-			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
+			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src]. You have [uses] light\s remaining.</span>")
 			return
 		else
 			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
@@ -110,7 +110,7 @@
 				if(!user.try_unequip(L))
 					return
 				AddUses(1)
-				to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
+				to_chat(user, "You insert \the [L.name] into \the [src]. You have [uses] light\s remaining.")
 				qdel(L)
 				return
 		else
@@ -123,7 +123,7 @@
 		var/mob/living/silicon/robot/R = user
 		if(R.emagged)
 			src.Emag()
-			to_chat(usr, "You shortcircuit the [src].")
+			to_chat(usr, "You shortcircuit \the [src].")
 			return
 	*/
 	to_chat(usr, "It has [uses] lights remaining.")
@@ -156,7 +156,7 @@
 	else if(!CanUse(U))
 		to_chat(U, "\The [src]'s refill light blinks red.")
 	else if(Use(U))
-		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
+		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with \the [src].</span>")
 
 		if(target.lightbulb)
 			target.remove_bulb()

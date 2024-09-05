@@ -170,7 +170,7 @@
 		if(!C.anchored && do_after(user, 5, src))
 			if(C.anchored)
 				return
-			to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
+			to_chat(user, SPAN_NOTICE("You install the canister in \the [src]."))
 			if(air_supply)
 				air_supply.dropInto(get_turf(src))
 				air_supply = null

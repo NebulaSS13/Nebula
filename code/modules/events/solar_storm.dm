@@ -29,7 +29,7 @@
 		radiate()
 
 /datum/event/solar_storm/proc/radiate()
-	// Note: Too complicated to be worth trying to use the radiation system for this.  Its only in space anyway, so we make an exception in this case.
+	// Note: Too complicated to be worth trying to use the radiation system for this.  It's only in space anyway, so we make an exception in this case.
 	for(var/mob/living/L in global.living_mob_list_)
 		if(L.loc?.atom_flags & ATOM_FLAG_SHIELD_CONTENTS)
 			continue

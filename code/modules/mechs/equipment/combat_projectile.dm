@@ -4,10 +4,10 @@
 		return
 	if(istype(O, /obj/item/crowbar))
 		A.unload_ammo(user)
-		to_chat(user, SPAN_NOTICE("You remove the ammo magazine from the [src]."))
+		to_chat(user, SPAN_NOTICE("You remove the ammo magazine from \the [src]."))
 	else if(istype(O, A.magazine_type))
 		A.load_ammo(O, user)
-		to_chat(user, SPAN_NOTICE("You load the ammo magazine into the [src]."))
+		to_chat(user, SPAN_NOTICE("You load the ammo magazine into \the [src]."))
 
 /obj/item/mech_equipment/mounted_system/projectile/attack_self(var/mob/user)
 	. = ..()

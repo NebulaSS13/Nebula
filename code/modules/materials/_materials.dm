@@ -353,7 +353,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/decl/material/reinf_mat = used_stack.get_material()
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
-		to_chat(user, SPAN_WARNING("The [reinf_mat.solid_name] is too structurally weak to reinforce the [name]."))
+		to_chat(user, SPAN_WARNING("The [reinf_mat.solid_name] is too structurally weak to reinforce \the [src]."))
 		return
 
 	if(!target_stack.can_use(use_sheets))

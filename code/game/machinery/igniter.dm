@@ -124,9 +124,9 @@
 		add_fingerprint(user)
 		disable = !disable
 		if(disable)
-			user.visible_message("<span class='warning'>[user] has disabled the [src]!</span>", "<span class='warning'>You disable the connection to the [src].</span>")
+			user.visible_message("<span class='warning'>[user] has disabled \the [src]!</span>", "<span class='warning'>You disable the connection to \the [src].</span>")
 		else if(!disable)
-			user.visible_message("<span class='warning'>[user] has reconnected the [src]!</span>", "<span class='warning'>You fix the connection to the [src].</span>")
+			user.visible_message("<span class='warning'>[user] has reconnected \the [src]!</span>", "<span class='warning'>You fix the connection to \the [src].</span>")
 		update_icon()
 	else
 		..()

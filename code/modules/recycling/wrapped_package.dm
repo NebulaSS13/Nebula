@@ -38,7 +38,7 @@
 	if(w_class < ITEM_SIZE_STRUCTURE)
 		icon_state = "[icon_state_prefix]_[clamp(round(w_class), ITEM_SIZE_MIN, ITEM_SIZE_HUGE)]"
 	else
-		//If its none of the smaller items, default to crate-sized package
+		//If it's none of the smaller items, default to crate-sized package
 		icon_state = "[icon_state_prefix]_crate"
 		//Try to see if we got a better icon state for whatever we contain
 		if(length(contents))

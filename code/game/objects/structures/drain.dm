@@ -30,7 +30,7 @@
 	if(IS_WRENCH(thing))
 		new /obj/item/drain(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>")
+		to_chat(user, "<span class='warning'>[user] unwrenches \the [src].</span>")
 		qdel(src)
 		return
 	return ..()
@@ -57,7 +57,7 @@
 	if(IS_WRENCH(thing))
 		new constructed_type(get_turf(src))
 		playsound(src, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("\The [user] wrenches the [src] down."))
+		to_chat(user, SPAN_NOTICE("\The [user] wrenches \the [src] down."))
 		qdel(src)
 		return
 	return ..()

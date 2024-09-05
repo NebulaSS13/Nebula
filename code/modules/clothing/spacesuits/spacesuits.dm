@@ -73,7 +73,7 @@
 /obj/item/clothing/head/helmet/space/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && camera)
-		to_chat(user, "This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active.")
+		to_chat(user, "This helmet has a built-in camera. It's [!ispath(camera) && camera.status ? "" : "in"]active.")
 
 /obj/item/clothing/head/helmet/space/proc/update_tint()
 	if(tinted)

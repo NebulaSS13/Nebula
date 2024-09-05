@@ -128,7 +128,7 @@
 	. = ..()
 	if(!screwloose || !oddbutton)
 		if(user)
-			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
+			to_chat(user, "<span class='notice'>\The [src] buzzes and beeps.</span>")
 		oddbutton = 1
 		screwloose = 1
 		return 1

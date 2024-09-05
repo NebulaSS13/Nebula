@@ -95,7 +95,7 @@
 
 /obj/item/baton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(status && user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
-		to_chat(user, SPAN_DANGER("You accidentally hit yourself with the [src]!"))
+		to_chat(user, SPAN_DANGER("You accidentally hit yourself with \the [src]!"))
 		SET_STATUS_MAX(user, STAT_WEAK, 30)
 		deductcharge(hitcost)
 		return TRUE
@@ -139,7 +139,7 @@
 	//stun effects
 	if(status)
 		target.stun_effect_act(stun, agony, hit_zone, src)
-		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
+		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with \the [src].")
 		deductcharge(hitcost)
 
 		if(ishuman(target))

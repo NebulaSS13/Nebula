@@ -24,7 +24,7 @@
 
 /obj/item/flame/fuelled/lighter/proc/light_effects(mob/living/user)
 	if(prob(95))
-		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light the [src]."))
+		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light \the [src]."))
 	else
 		to_chat(user, SPAN_DANGER("You burn yourself while lighting the lighter."))
 		var/hand_tag = user.get_held_slot_for_item(src)
@@ -41,7 +41,7 @@
 		shutoff_effects(user)
 
 /obj/item/flame/fuelled/lighter/proc/shutoff_effects(mob/user)
-	user.visible_message(SPAN_NOTICE("\The [user] quietly shuts off the [src]."))
+	user.visible_message(SPAN_NOTICE("\The [user] quietly shuts off \the [src]."))
 
 /obj/item/flame/fuelled/lighter/on_update_icon()
 	. = ..()

@@ -304,9 +304,9 @@
 		var/obj/item/stack/addstack = O
 		var/amount = min((max_sheets - sheets), addstack.amount)
 		if(amount < 1)
-			to_chat(user, "<span class='notice'>The [src.name] is full!</span>")
+			to_chat(user, "<span class='notice'>\The [src] is full!</span>")
 			return
-		to_chat(user, "<span class='notice'>You add [amount] sheet\s to the [src.name].</span>")
+		to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
 		sheets += amount
 		addstack.use(amount)
 		updateUsrDialog()

@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(icon_update)
 		if(Master.map_loading)
 			return
 
-		// Pops the atom and it's args
+		// Pops the atom and its args
 		var/atom/A = queue_refs[queue_refs.len]
 		var/myArgs = queue_args[queue_args.len]
 

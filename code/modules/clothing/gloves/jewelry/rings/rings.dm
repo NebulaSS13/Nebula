@@ -103,10 +103,10 @@
 
 /obj/item/clothing/gloves/ring/seal/signet/attack_self(mob/user)
 	if(nameset)
-		to_chat(user, SPAN_NOTICE("The [src] has already been claimed!"))
+		to_chat(user, SPAN_NOTICE("\The [src] has already been claimed!"))
 		return
 
 	nameset = 1
-	to_chat(user, SPAN_NOTICE("You claim the [src] as your own!"))
+	to_chat(user, SPAN_NOTICE("You claim \the [src] as your own!"))
 	name = "[user]'s signet ring"
 	desc = "A signet ring belonging to [user], for when you're too sophisticated to sign letters."
