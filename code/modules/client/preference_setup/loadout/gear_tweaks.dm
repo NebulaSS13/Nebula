@@ -47,6 +47,16 @@
 	gear.set_color(sanitize_hexcolor(metadata, gear.get_color()))
 	return GEAR_TWEAK_SUCCESS
 
+// This subtype sets the markings color for clothing.
+/datum/gear_tweak/color/markings/get_contents(var/metadata)
+	return "Secondary color: <font color='[metadata]'>&#9899;</font>"
+
+/datum/gear_tweak/color/markings/tweak_item(mob/user, obj/item/clothing/clothes, metadata)
+	if(valid_colors && !(metadata in valid_colors))
+		return GEAR_TWEAK_SKIPPED
+	clothes.markings_color = sanitize_hexcolor(metadata, clothes.markings_color)
+	return GEAR_TWEAK_SUCCESS
+
 /*
 * Path adjustment
 */
