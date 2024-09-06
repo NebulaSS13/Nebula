@@ -155,6 +155,13 @@
 	name      = "wool"
 	lore_text = "Fibers from the wooly fleece of a sheep or similar animal."
 	uid       = "solid_wool"
+	color     = "#fbfcdb"
+
+/decl/material/solid/organic/cloth/wool/diyaab
+	name      = "diyaab wool"
+	lore_text = "Fibers from the wooly fleece of a diyaab."
+	uid       = "solid_wool_diyaab"
+	color     = "#c9eeff"
 
 /decl/material/solid/organic/cloth/synthetic
 	name = "nylon"
