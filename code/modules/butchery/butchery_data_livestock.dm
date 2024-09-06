@@ -37,6 +37,15 @@
 /decl/butchery_data/animal/ruminant/deer/buck
 	// todo: drop antlers
 
+/decl/butchery_data/animal/ruminant/sheep
+	meat_name       = "mutton"
+	meat_type       = /obj/item/food/butchery/meat
+	meat_amount     = 4
+	bone_amount     = 8
+	skin_material   = /decl/material/solid/organic/skin/sheep
+	skin_amount     = 8
+	butchery_offset = list(-6, 0)
+
 /decl/butchery_data/animal/ruminant/cow
 	meat_name     = "beef"
 	meat_type     = /obj/item/food/butchery/meat/beef

@@ -19,7 +19,10 @@
 
 /obj/item/wirecutters/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/tool, list(TOOL_WIRECUTTERS = TOOL_QUALITY_DEFAULT))
+	set_extension(src, /datum/extension/tool, list(
+		TOOL_WIRECUTTERS = TOOL_QUALITY_DEFAULT,
+		TOOL_SHEARS      = TOOL_QUALITY_WORST
+	))
 
 /obj/item/wirecutters/on_update_icon()
 	. = ..()
