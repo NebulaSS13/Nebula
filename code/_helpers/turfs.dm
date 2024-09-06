@@ -221,9 +221,9 @@
 		return "right next to you"
 
 	if(source.z > target.z)
-		. += "upwards and to"
+		. += "above and to"
 	else if(source.z < target.z)
-		. += "downwards and to"
+		. += "below and to"
 
 	if(source.x == target.x)
 		if(source.y > target.y)

@@ -25,7 +25,8 @@
 /obj/structure/town_bell/update_material_desc(override_desc)
 	. = ..()
 	if(material && bell_material)
-		desc += " The frame is made of [material.name] and the bell has been cast from [bell_material::name]."
+		var/decl/material/bell_mat_decl = GET_DECL(bell_material)
+		desc += " The frame is made of [material.solid_name] and the bell has been cast from [bell_mat_decl.solid_name]."
 
 /obj/structure/town_bell/on_update_icon()
 	. = ..()
