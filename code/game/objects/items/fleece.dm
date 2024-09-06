@@ -21,4 +21,4 @@
 	return TRUE
 
 /obj/item/fleece/get_matter_amount_modifier()
-	return 5 // One fleece is 40 threads, which is roughly 4 cloth.
+	return 10 // One fleece is 80 threads, which is roughly 8 cloth.

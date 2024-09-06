@@ -5,7 +5,7 @@
 
 	var/has_fleece = FALSE
 	var/next_fleece = 0
-	var/fleece_time = 2 MINUTES
+	var/fleece_time = 5 MINUTES
 	var/fleece_type = /obj/item/fleece
 	var/decl/material/fleece_material = /decl/material/solid/organic/cloth/wool
 

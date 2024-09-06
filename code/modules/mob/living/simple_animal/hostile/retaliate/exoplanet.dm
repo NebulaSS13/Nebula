@@ -79,7 +79,7 @@
 
 /mob/living/simple_animal/hostile/beast/diyaab/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/shearable)
+	set_extension(src, /datum/extension/shearable, /decl/material/solid/organic/cloth/wool/diyaab)
 
 /datum/mob_controller/aggressive/beast/diyaab
 	speak_chance = 1.25
