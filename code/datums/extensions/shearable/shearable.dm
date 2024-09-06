@@ -1,5 +1,5 @@
 /datum/extension/shearable
-	base_type = /datum/extension/event_registration
+	base_type = /datum/extension/shearable
 	expected_type = /mob/living
 	flags = EXTENSION_FLAG_IMMEDIATE
 
