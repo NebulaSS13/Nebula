@@ -5,8 +5,8 @@ MRE Stuff
 /obj/item/mre
 	name = "standard MRE"
 	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "mre"
+	icon = 'icons/obj/food/mre/mre_generic.dmi'
+	icon_state = ICON_STATE_WORLD
 	storage = /datum/storage/mre
 	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
@@ -35,8 +35,9 @@ MRE Stuff
 
 /obj/item/mre/on_update_icon()
 	. = ..()
+	icon_state = get_world_inventory_state()
 	if(storage?.opened)
-		icon_state = "[initial(icon_state)][storage.opened]"
+		icon_state = "[icon_state]-open"
 
 /obj/item/mre/attack_self(mob/user)
 	if(storage && !storage.opened)
@@ -74,8 +75,8 @@ MRE Stuff
 
 /obj/item/mre/menu9
 	name = "vegan MRE"
+	icon = 'icons/obj/food/mre/mre_veg.dmi'
 	meal_desc = "This one is menu 9, boiled rice."
-	icon_state = "vegmre"
 	main_meal = /obj/item/mrebag/menu9
 
 /obj/item/mre/menu9/WillContain()
@@ -92,14 +93,14 @@ MRE Stuff
 /obj/item/mre/menu10
 	name = "protein MRE"
 	meal_desc = "This one is menu 10, protein."
-	icon_state = "meatmre"
 	main_meal = /obj/item/mrebag/menu10
+	icon = 'icons/obj/food/mre/mre_meat.dmi'
 
 /obj/item/mre/menu10/WillContain()
 	. = list(
 		main_meal,
 		/obj/item/food/candy/proteinbar,
-		/obj/item/chems/condiment/small/packet/protein,
+		/obj/item/chems/packet/protein,
 		/obj/random/mre/sauce/sugarfree,
 		/obj/item/utensil/spoon/plastic
 	)
@@ -107,8 +108,8 @@ MRE Stuff
 /obj/item/mre/menu11
 	name = "crayon MRE"
 	meal_desc = "This one doesn't have a menu listing. How very odd."
-	icon_state = "crayonmre"
 	main_meal = /obj/item/box/fancy/crayons
+	icon = 'icons/obj/food/mre/mre_crayon.dmi'
 
 /obj/item/mre/menu11/WillContain()
 	return list(
@@ -129,8 +130,8 @@ MRE Stuff
 /obj/item/mrebag
 	name = "main course"
 	desc = "A vacuum-sealed bag containing the MRE's main course. Self-heats when opened."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "pouch_medium"
+	icon = 'icons/obj/food/mre/pouch_medium.dmi'
+	icon_state = ICON_STATE_WORLD
 	storage = /datum/storage/mrebag
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/plastic
@@ -141,8 +142,9 @@ MRE Stuff
 
 /obj/item/mrebag/on_update_icon()
 	. = ..()
+	icon_state = get_world_inventory_state()
 	if(storage?.opened)
-		icon_state = "[initial(icon_state)][storage.opened]"
+		icon_state = "[icon_state]-open"
 
 /obj/item/mrebag/attack_self(mob/user)
 	if(storage && !storage.opened)
@@ -180,7 +182,7 @@ MRE Stuff
 /obj/item/mrebag/dessert
 	name = "dessert"
 	desc = "A vacuum-sealed bag containing the MRE's dessert."
-	icon_state = "pouch_small"
+	icon = 'icons/obj/food/mre/pouch_small.dmi'
 	storage = /datum/storage/mrebag/dessert
 
 /obj/item/mrebag/dessert/WillContain()

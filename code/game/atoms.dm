@@ -342,6 +342,14 @@
 
 	RAISE_EVENT(/decl/observ/dir_set, src, old_dir, new_dir)
 
+
+/// Set the icon to `new_icon`
+/atom/proc/set_icon(new_icon)
+	if(icon != new_icon)
+		icon = new_icon
+		return TRUE
+	return FALSE
+
 /// Set the icon_state to `new_icon_state`
 /atom/proc/set_icon_state(var/new_icon_state)
 	SHOULD_CALL_PARENT(TRUE)

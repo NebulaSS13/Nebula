@@ -126,8 +126,11 @@ var/global/obj/temp_reagents_holder = new
 			else
 				return reagent.get_reagent_name(src, MAT_PHASE_SOLID)
 
+/datum/reagents/proc/get_primary_reagent_type()
+	return primary_reagent
+
 /datum/reagents/proc/get_primary_reagent_decl()
-	. = GET_DECL(primary_reagent)
+	return GET_DECL(primary_reagent)
 
 /datum/reagents/proc/update_total() // Updates volume.
 	total_volume = 0
