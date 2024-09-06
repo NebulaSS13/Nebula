@@ -1870,9 +1870,9 @@ default behaviour is:
 	if(has_extension(src, /datum/extension/shearable))
 		var/datum/extension/shearable/shearable = get_extension(src, /datum/extension/shearable)
 		if(world.time >= shearable.next_fleece || shearable.has_fleece)
-			to_chat(user, SPAN_NOTICE("\The [src] can be sheared with a sharp object."))
+			to_chat(user, SPAN_NOTICE("\The [src] can be sheared with shears, or a similar tool."))
 		else
-			to_chat(user, SPAN_WARNING("\The [src] will be ready to be sheared in [ceil((world.time - shearable.next_fleece) / 10)] second\s."))
+			to_chat(user, SPAN_WARNING("\The [src] will be ready to be sheared in [ceil((shearable.next_fleece-world.time) / 10)] second\s."))
 
 	if(has_extension(src, /datum/extension/milkable))
 		var/datum/extension/milkable/milkable = get_extension(src, /datum/extension/milkable)
