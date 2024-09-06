@@ -151,6 +151,11 @@
 	compost_value = 0.8
 	has_textile_fibers = TRUE
 
+/decl/material/solid/organic/cloth/wool
+	name      = "wool"
+	lore_text = "Fibers from the wooly fleece of a sheep or similar animal."
+	uid       = "solid_wool"
+
 /decl/material/solid/organic/cloth/synthetic
 	name = "nylon"
 	uid = "solid_cloth_synthetic"

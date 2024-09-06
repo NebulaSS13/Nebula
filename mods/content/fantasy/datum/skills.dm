@@ -231,8 +231,13 @@
 
 /obj/item/food/egg/examine_skill = SKILL_HUSBANDRY
 /mob/living/simple_animal/chick/examine_skill = SKILL_HUSBANDRY
-/mob/living/simple_animal/cow/milking_skill = SKILL_HUSBANDRY
-/mob/living/simple_animal/hostile/goat/milking_skill = SKILL_HUSBANDRY
+
+/datum/extension/milkable
+	milking_skill = SKILL_HUSBANDRY
+
+/datum/extension/shearable
+	shearing_skill = SKILL_HUSBANDRY
+
 /datum/mob_controller/passive/scooping_skill = SKILL_HUSBANDRY
 
 /decl/skill/service/cooking

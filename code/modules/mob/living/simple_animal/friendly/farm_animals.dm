@@ -1,4 +1,3 @@
-//goat
 /mob/living/simple_animal/hostile/goat
 	name = "goat"
 	desc = "Not known for their pleasant disposition."
@@ -11,10 +10,6 @@
 	natural_weapon = /obj/item/natural_weapon/hooves
 	butchery_data = /decl/butchery_data/animal/ruminant/goat
 	ai = /datum/mob_controller/aggressive/goat
-	// TODO: milkable extension to combine goat/cow behavior?
-	var/datum/reagents/udder = null
-	var/decl/skill/milking_skill = SKILL_BOTANY
-	var/milking_skill_req = SKILL_BASIC
 
 /datum/mob_controller/aggressive/goat
 	expected_type = /mob/living/simple_animal/hostile/goat
@@ -77,7 +72,7 @@
 
 /mob/living/simple_animal/hostile/goat/Initialize()
 	. = ..()
-	udder = new(50, src)
+	set_extension(src, /datum/extension/milkable/goat)
 
 /mob/living/simple_animal/hostile/goat/UnarmedAttack(var/atom/A, var/proximity)
 	var/was_food = FALSE
@@ -99,57 +94,6 @@
 
 	return was_food ? TRUE :..()
 
-/mob/living/simple_animal/hostile/goat/Destroy()
-	QDEL_NULL(udder)
-	. = ..()
-
-/mob/living/simple_animal/hostile/goat/proc/create_milk()
-	var/static/list/milk_data = list(
-		"milk_donor"   = "goat",
-		"milk_name"    = "goat",
-		"cheese_name"  = "feta",
-		"cheese_color" = "#f3f2be",
-		"mask_name"    = "goat's milk",
-	)
-	udder?.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10), data = milk_data.Copy())
-
-/mob/living/simple_animal/hostile/goat/handle_living_non_stasis_processes()
-	if((. = ..()) && stat == CONSCIOUS && prob(5))
-		create_milk()
-
-/mob/living/simple_animal/hostile/goat/attackby(var/obj/item/used_item, var/mob/user)
-	var/obj/item/chems/container = used_item
-	if(stat == CONSCIOUS && istype(container) && ATOM_IS_OPEN_CONTAINER(container))
-		if(ai?.is_enemy(user))
-			if(user.skill_check(milking_skill, SKILL_PROF))
-				to_chat(user, SPAN_NOTICE("\The [src] goes still at your touch."))
-				ai.remove_enemy(user)
-				stop_automove()
-			else
-				to_chat(user, SPAN_DANGER("You can't milk \the [src] while it's trying to attack you!"))
-				return TRUE
-		if(container.reagents.total_volume >= container.volume)
-			to_chat(user, SPAN_WARNING("\The [container] is full."))
-			return TRUE
-		// Goats REALLY don't like being milked if you're unskilled.
-		if(user.skill_fail_prob(milking_skill, 40, milking_skill_req))
-			ai?.retaliate()
-			return TRUE
-		if(!udder.total_volume)
-			to_chat(user, SPAN_WARNING("The udder is dry. Wait a bit longer."))
-			return TRUE
-		user.visible_message(SPAN_NOTICE("\The [user] starts milking \the [src] into \the [container]."), SPAN_NOTICE("You start milking \the [src] into \the [container]."))
-		if(!user.do_skilled(4 SECONDS, milking_skill, src))
-			user.visible_message(SPAN_NOTICE("\The [user] stops milking \the [src]."), SPAN_NOTICE("You stop milking \the [src]."))
-			return TRUE
-		user.visible_message(SPAN_NOTICE("\The [user] milks \the [src] into \the [container]."), SPAN_NOTICE("You milk \the [src] into \the [container]."))
-		udder.trans_type_to(container, /decl/material/liquid/drink/milk, rand(5,10))
-		if(container.reagents.total_volume >= container.volume)
-			to_chat(user, SPAN_NOTICE("\The [container] is full."))
-		return TRUE
-	. = ..()
-
-//cow
 /mob/living/simple_animal/cow
 	name = "cow"
 	desc = "Known for their milk, just don't tip them over."
@@ -160,16 +104,12 @@
 	max_health = 50
 	butchery_data = /decl/butchery_data/animal/ruminant/cow
 
-	var/datum/reagents/udder = null
 	var/static/list/responses = list(
 		"looks at you imploringly",
 		"looks at you pleadingly",
 		"looks at you with a resigned expression",
 		"seems resigned to its fate"
 	)
-	var/decl/skill/milking_skill = SKILL_BOTANY
-	var/milking_skill_req = SKILL_BASIC
-	var/impatience = 0 // if you fail to milk it, this goes up. if it gets too high it'll flee
 
 /datum/mob_controller/cow
 	emote_speech = list("moo?","moo","MOOOOOO")
@@ -180,81 +120,7 @@
 
 /mob/living/simple_animal/cow/Initialize()
 	. = ..()
-	udder = new(50, src)
-
-/mob/living/simple_animal/cow/Destroy()
-	QDEL_NULL(udder)
-	. = ..()
-
-/mob/living/simple_animal/cow/attackby(var/obj/item/used_item, var/mob/user)
-	var/obj/item/chems/container = used_item
-	if(stat == CONSCIOUS && istype(container) && ATOM_IS_OPEN_CONTAINER(container))
-		if(get_automove_target())
-			if(user.skill_check(milking_skill, SKILL_PROF))
-				to_chat(user, SPAN_NOTICE("\The [src] goes still at your touch."))
-				stop_automove()
-			else
-				to_chat(user, SPAN_WARNING("Wait for \the [src] to stop moving before you try milking it."))
-				return TRUE
-		if(container.reagents.total_volume >= container.volume)
-			to_chat(user, SPAN_WARNING("\The [container] is full."))
-			return TRUE
-		// Cows don't like being milked if you're unskilled.
-		if(user.skill_fail_prob(milking_skill, 40, milking_skill_req))
-			if(impatience > 3)
-				visible_message(SPAN_WARNING("\The [src] bellows and flees from \the [user]!"))
-				flee(user, upset = TRUE)
-			else
-				visible_message(SPAN_WARNING("\The [src] huffs and moves away from \the [user]."))
-				flee(user, upset = FALSE)
-			impatience++
-			return TRUE
-		if(!udder.total_volume)
-			to_chat(user, SPAN_WARNING("The udder is dry. Wait a bit longer."))
-			return TRUE
-		user.visible_message(SPAN_NOTICE("\The [user] starts milking \the [src] into \the [container]."), SPAN_NOTICE("You start milking \the [src] into \the [container]."))
-		if(!user.do_skilled(4 SECONDS, milking_skill, src))
-			user.visible_message(SPAN_NOTICE("\The [user] stops milking \the [src]."), SPAN_NOTICE("You stop milking \the [src]."))
-			return TRUE
-		user.visible_message(SPAN_NOTICE("\The [user] milks \the [src] into \the [container]."), SPAN_NOTICE("You milk \the [src] into \the [container]."))
-		udder.trans_type_to(container, /decl/material/liquid/drink/milk, rand(5,10))
-		if(container.reagents.total_volume >= container.volume)
-			to_chat(user, SPAN_NOTICE("\The [container] is full."))
-		return TRUE
-	. = ..()
-
-/mob/living/simple_animal/cow/proc/flee(atom/target, upset = FALSE)
-	var/static/datum/automove_metadata/_cow_flee_automove_metadata = new(
-		_move_delay = null,
-		_acceptable_distance = 7,
-		_avoid_target = TRUE
-	)
-	var/static/datum/automove_metadata/_cow_annoyed_automove_metadata = new(
-		_move_delay = null,
-		_acceptable_distance = 2,
-		_avoid_target = TRUE
-	)
-	if(upset)
-		set_moving_quickly()
-	else
-		set_moving_slowly()
-	start_automove(target, metadata = upset ? _cow_flee_automove_metadata : _cow_annoyed_automove_metadata)
-
-/mob/living/simple_animal/cow/proc/create_milk()
-	// Cow milk is 'generic' so has no interesting strings.
-	var/static/list/milk_data = list(
-		"milk_donor" = "cow"
-	)
-	udder?.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10), data = milk_data.Copy())
-
-/mob/living/simple_animal/cow/handle_living_non_stasis_processes()
-	. = ..()
-	if(!.)
-		return
-	if(prob(5))
-		create_milk()
-	if(!get_automove_target() && impatience > 0 && prob(10)) // if not fleeing, 10% chance to regain patience
-		impatience--
+	set_extension(src, /datum/extension/milkable)
 
 /mob/living/simple_animal/cow/default_disarm_interaction(mob/user)
 	if(stat != DEAD && !HAS_STATUS(src, STAT_WEAK))

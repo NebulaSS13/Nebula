@@ -1845,3 +1845,39 @@ default behaviour is:
 	. = ..()
 	reset_layer()
 	update_icon()
+
+/mob/living/proc/flee(atom/target, upset = FALSE)
+	var/static/datum/automove_metadata/_flee_automove_metadata = new(
+		_move_delay = null,
+		_acceptable_distance = 7,
+		_avoid_target = TRUE
+	)
+	var/static/datum/automove_metadata/_annoyed_automove_metadata = new(
+		_move_delay = null,
+		_acceptable_distance = 2,
+		_avoid_target = TRUE
+	)
+	if(upset)
+		set_moving_quickly()
+	else
+		set_moving_slowly()
+	start_automove(target, metadata = upset ? _flee_automove_metadata : _annoyed_automove_metadata)
+
+/mob/living/examine(mob/user, distance, infix, suffix)
+
+	. = ..()
+
+	if(has_extension(src, /datum/extension/shearable))
+		var/datum/extension/shearable/shearable = get_extension(src, /datum/extension/shearable)
+		if(world.time >= shearable.next_fleece || shearable.has_fleece)
+			to_chat(user, SPAN_NOTICE("\The [src] can be sheared with a sharp object."))
+		else
+			to_chat(user, SPAN_WARNING("\The [src] will be ready to be sheared in [ceil((world.time - shearable.next_fleece) / 10)] second\s."))
+
+	if(has_extension(src, /datum/extension/milkable))
+		var/datum/extension/milkable/milkable = get_extension(src, /datum/extension/milkable)
+		if(milkable.udder.total_volume > 0)
+			to_chat(user, SPAN_NOTICE("\The [src] can be milked into a bucket or other container."))
+		else
+			to_chat(user, SPAN_WARNING("\The [src] cannot currently be milked."))
+
