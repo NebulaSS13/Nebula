@@ -212,37 +212,47 @@
 
 	return new_turf
 
-/proc/get_dir_z_text(turf/source, turf/target)
-	source = get_turf(source)
+/proc/get_dir_z_text(turf/origin, turf/target)
+
+	origin = get_turf(origin)
 	target = get_turf(target)
-	if(!istype(source) || !istype(target))
+
+	if(!istype(origin) || !istype(target) || !(origin.z in SSmapping.get_connected_levels(target.z, include_lateral = TRUE)))
 		return "somewhere"
-	if(source == target)
+	if(origin == target)
 		return "right next to you"
 
-	if(source.z > target.z)
+	var/datum/level_data/origin_level = SSmapping.levels_by_z[origin.z]
+	var/datum/level_data/target_level = SSmapping.levels_by_z[target.z]
+
+	if(origin_level.z_volume_level_z < target_level.z_volume_level_z)
 		. += "above and to"
-	else if(source.z < target.z)
+	else if(origin_level.z_volume_level_z > target_level.z_volume_level_z)
 		. += "below and to"
 
-	if(source.x == target.x)
-		if(source.y > target.y)
+	var/origin_x = origin.x + origin_level.z_volume_level_x
+	var/origin_y = origin.y + origin_level.z_volume_level_y
+	var/target_x = target.x + target_level.z_volume_level_x
+	var/target_y = target.y + target_level.z_volume_level_y
+
+	if(origin_x == target_x)
+		if(origin_y > target_y)
 			. += "the south"
 		else
 			. += "the north"
-	else if(source.y == target.y)
-		if(source.x > target.x)
+	else if(origin_y == target_y)
+		if(origin_x > target_x)
 			. += "the west"
 		else
 			. += "the east"
 	else
-		if(source.x > target.x)
-			if(source.y > target.y)
+		if(origin_x > target_x)
+			if(origin_y > target_y)
 				. += "the southwest"
 			else
 				. += "the northwest"
 		else
-			if(source.y > target.y)
+			if(origin_y > target_y)
 				. += "the southeast"
 			else
 				. += "the northeast"
