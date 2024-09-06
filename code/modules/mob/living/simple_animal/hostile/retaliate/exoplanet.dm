@@ -77,6 +77,10 @@
 	ai = /datum/mob_controller/aggressive/beast/diyaab
 	base_movement_delay = 1
 
+/mob/living/simple_animal/hostile/beast/diyaab/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/shearable)
+
 /datum/mob_controller/aggressive/beast/diyaab
 	speak_chance = 1.25
 	emote_speech = list("Awrr?","Aowrl!","Worrl")

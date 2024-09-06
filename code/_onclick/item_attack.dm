@@ -57,11 +57,23 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/attackby(obj/item/used_item, mob/user)
 	if(!ismob(user))
 		return TRUE
+
 	if(user.a_intent != I_HURT)
 		if(can_operate(src, user) != OPERATE_DENY && used_item.do_surgery(src,user)) //Surgery
 			return TRUE
 		if(try_butcher_in_place(user, used_item))
 			return TRUE
+
+	if(istype(used_item, /obj/item/chems) && ATOM_IS_OPEN_CONTAINER(used_item) && has_extension(src, /datum/extension/milkable))
+		var/datum/extension/milkable/milkable = get_extension(src, /datum/extension/milkable)
+		if(milkable.handle_milked(used_item, user))
+			return TRUE
+
+	if(used_item.edge && has_extension(src, /datum/extension/shearable))
+		var/datum/extension/shearable/shearable = get_extension(src, /datum/extension/shearable)
+		if(shearable.handle_sheared(used_item, user))
+			return TRUE
+
 	var/oldhealth = current_health
 	. = used_item.use_on_mob(src, user)
 	if(used_item.get_attack_force(user) && istype(ai) && current_health < oldhealth)
