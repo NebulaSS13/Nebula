@@ -38,6 +38,13 @@
 	containername = "goat crate"
 	access = access_hydroponics
 
+/decl/hierarchy/supply_pack/livecargo/sheep
+	name = "Live - Sheep"
+	contains = list(/mob/living/simple_animal/passive/sheep)
+	containertype = /obj/structure/largecrate/animal
+	containername = "sheep crate"
+	access = access_hydroponics
+
 /decl/hierarchy/supply_pack/livecargo/goose
 	name = "Live - Goose"
 	contains = list(/mob/living/simple_animal/hostile/goose)
