@@ -1480,15 +1480,6 @@ default behaviour is:
 /mob/living/can_buckle_mob(var/mob/living/dropping)
 	. = ..() && stat == CONSCIOUS && !buckled && dropping.mob_size <= mob_size
 
-/mob/living/refresh_buckled_mob()
-	..()
-	if(buckled_mob)
-		if(dir == SOUTH)
-			buckled_mob.layer = layer - 0.01
-		else
-			buckled_mob.layer = layer + 0.01
-		buckled_mob.plane = plane
-
 /mob/living/OnSimulatedTurfEntered(turf/T, old_loc)
 	T.add_dirt(0.5)
 
@@ -1845,3 +1836,12 @@ default behaviour is:
 			return TRUE
 	return FALSE
 
+/mob/living/buckle_mob(mob/living/M)
+	. = ..()
+	reset_layer()
+	update_icon()
+
+/mob/living/unbuckle_mob()
+	. = ..()
+	reset_layer()
+	update_icon()
