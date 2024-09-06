@@ -107,6 +107,12 @@
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 	uid = "gear_under_skirt"
 
+/decl/loadout_option/uniform/skirt/pleated
+	name = "pleated skirt selection"
+	path = /obj/item/clothing/skirt/pleated
+	loadout_flags = (GEAR_HAS_COLOR_SELECTION | GEAR_HAS_TYPE_SELECTION)
+	uid = "gear_under_skirt_pleated"
+
 /decl/loadout_option/uniform/skirt/short
 	name = "short skirt, color select"
 	path = /obj/item/clothing/skirt/short

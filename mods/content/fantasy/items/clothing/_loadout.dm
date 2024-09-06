@@ -67,6 +67,17 @@
 	path = /obj/item/clothing/shirt/toga
 	uid = "gear_fantasy_toga"
 
+/decl/loadout_option/fantasy/uniform/pleated
+	name = "pleated skirt selection"
+	path = /obj/item/clothing/skirt/pleated
+	loadout_flags = (GEAR_HAS_COLOR_SELECTION | GEAR_HAS_TYPE_SELECTION)
+	uid = "gear_fantasy_skirt_pleated"
+
+/decl/loadout_option/fantasy/uniform/gambeson
+	name = "gambeson"
+	path = /obj/item/clothing/shirt/gambeson
+	uid = "gear_fantasy_gambeson"
+
 /decl/loadout_option/fantasy/suit
 	name = "robes"
 	path = /obj/item/clothing/suit/robe
@@ -82,6 +93,11 @@
 	name = "cloak"
 	path = /obj/item/clothing/suit/cloak/crafted // Takes material colour.
 	uid = "gear_fantasy_cloak"
+
+/decl/loadout_option/fantasy/suit/hooded_cloak
+	name = "cloak, hooded"
+	path = /obj/item/clothing/suit/hooded_cloak
+	uid = "gear_fantasy_cloak_hooded"
 
 /decl/loadout_option/fantasy/suit/poncho
 	name = "poncho"

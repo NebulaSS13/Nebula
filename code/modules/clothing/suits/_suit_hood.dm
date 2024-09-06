@@ -6,6 +6,16 @@
 		return hood
 	return ..()
 
+/obj/item/clothing/suit/set_material(new_material)
+	. = ..()
+	if(. && istype(hood))
+		hood.set_material(new_material)
+
+/obj/item/clothing/suit/set_color(new_color)
+	. = ..()
+	if(. && istype(hood))
+		hood.set_color(new_color)
+
 /obj/item/clothing/suit/Initialize()
 	if(ispath(hood))
 		hood = new hood(src)
