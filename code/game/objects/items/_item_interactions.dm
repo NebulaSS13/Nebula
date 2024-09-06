@@ -49,8 +49,9 @@
 /decl/interaction_handler/wash_hands/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && target?.reagents?.has_reagent(/decl/material/liquid/water, 150)
 	if(.)
-		for(var/hand_slot in global.all_washable_hand_slots)
-			if(user.get_organ(hand_slot))
+		for(var/hand_slot in user.get_held_item_slots())
+			var/obj/item/organ/external/organ = user.get_organ(hand_slot)
+			if(istype(organ) && organ.is_washable)
 				return TRUE
 
 /decl/interaction_handler/wash_hands/invoked(atom/target, mob/user, obj/item/prop)
@@ -61,18 +62,29 @@
 		return
 
 	var/found_hand = FALSE
-	for(var/hand_slot in global.all_washable_hand_slots)
-		if(user.get_organ(hand_slot))
+	for(var/hand_slot in user.get_held_item_slots())
+		var/obj/item/organ/external/organ = user.get_organ(hand_slot)
+		if(istype(organ) && organ.is_washable)
 			found_hand = TRUE
 			break
+
 	if(!found_hand)
 		return
 
 	var/decl/pronouns/pronouns = user.get_pronouns()
-	user.visible_message(
-		SPAN_NOTICE("\The [user] washes [pronouns.his] hands in \the [target]."),
-		SPAN_NOTICE("You wash your hands in \the [target].")
-	)
+	if(isturf(target))
+		var/turf/turf = target
+		var/fluid = turf.get_fluid_name()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] washes [pronouns.his] hands in \the [fluid]."),
+			SPAN_NOTICE("You wash your hands in \the [fluid].")
+		)
+	else
+		user.visible_message(
+			SPAN_NOTICE("\The [user] washes [pronouns.his] hands in \the [target]."),
+			SPAN_NOTICE("You wash your hands in \the [target].")
+		)
+
 	user.clean()
 	playsound(user.loc, 'sound/effects/slosh.ogg', 25, 1)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -92,6 +104,7 @@
 		return
 
 	if(!user.check_has_mouth())
+		target.show_food_no_mouth_message(user, user)
 		return
 
 	if(!target?.reagents?.total_volume)

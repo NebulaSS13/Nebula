@@ -92,14 +92,6 @@
 		else
 			to_chat(user, SPAN_WARNING("There is nothing in \the [src] that \the [target] can consume."))
 
-/obj/proc/show_food_no_mouth_message(mob/user, mob/target)
-	target = target || user
-	if(user)
-		if(user == target)
-			to_chat(user, SPAN_WARNING("Where do you intend to put \the [src]? You don't have a mouth!"))
-		else
-			to_chat(user, SPAN_WARNING("Where do you intend to put \the [src]? \The [target] doesn't have a mouth!"))
-
 /obj/proc/play_feed_sound(var/mob/user, consumption_method = EATING_METHOD_EAT)
 	var/turf/play_turf = get_turf(user)
 	if(!play_turf)
