@@ -95,7 +95,7 @@
 		return
 
 	if(!target?.reagents?.total_volume)
-		to_chat(user, SPAN_WARNING("\The [src] is empty of reagents."))
+		target.show_food_empty_message(user, EATING_METHOD_DRINK)
 		return
 
 	if(!user.can_eat_food_currently(null, user, EATING_METHOD_DRINK))

@@ -110,9 +110,6 @@
 		if(EATING_METHOD_DRINK)
 			playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
-/obj/proc/show_food_empty_message(mob/user, mob/target)
-	to_chat(user, SPAN_NOTICE("\The [src] is empty."))
-
 /obj/proc/is_food_empty(mob/eater)
 	return get_edible_material_amount(eater) <= 0
 
@@ -135,8 +132,9 @@
 		show_food_inedible_message(user, target)
 		return EATEN_UNABLE
 
+	var/consumption_method = get_food_consumption_method(target)
 	if(is_food_empty(target))
-		show_food_empty_message(user, target)
+		show_food_empty_message(user, consumption_method)
 		return EATEN_UNABLE
 
 	if(!target.check_has_mouth())
@@ -154,7 +152,6 @@
 	if(user != target && !user.can_force_feed(target, src))
 		return EATEN_UNABLE
 
-	var/consumption_method = get_food_consumption_method(target)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(user != target)
 		if(!user.can_force_feed(target, src))
