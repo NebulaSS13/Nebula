@@ -1,9 +1,8 @@
 /obj/item/shears
-	name = "wirecutters"
-	desc = "A special pair of pliers with cutting edges. Various brackets and manipulators built into the handle allow it to repair severed wiring."
+	name = "shears"
+	desc = "A pair of sturdy shears mainly used to clip wool."
 	icon = 'icons/obj/items/shears.dmi'
 	icon_state = ICON_STATE_WORLD
-	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = @'{"materials":1,"engineering":1}'
 	material = /decl/material/solid/metal/steel
