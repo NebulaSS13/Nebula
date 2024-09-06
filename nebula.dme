@@ -1444,6 +1444,8 @@
 #include "code\game\objects\structures\mineral_bath.dm"
 #include "code\game\objects\structures\mop_bucket.dm"
 #include "code\game\objects\structures\morgue.dm"
+#include "code\game\objects\structures\pedestal.dm"
+#include "code\game\objects\structures\pillar.dm"
 #include "code\game\objects\structures\pit.dm"
 #include "code\game\objects\structures\produce_bin.dm"
 #include "code\game\objects\structures\quicksand.dm"
