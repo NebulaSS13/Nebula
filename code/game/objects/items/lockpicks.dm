@@ -8,6 +8,7 @@
 	color = /decl/material/solid/metal/steel::color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	w_class = ITEM_SIZE_TINY
+	max_health = 60
 	var/use_icon_state
 
 // Purely for aesthetics.
@@ -22,7 +23,7 @@
 	. = ..()
 	if(isnull(use_icon_state))
 		use_icon_state = num2text(rand(1,3))
-		update_icon()
+	update_icon()
 
 /obj/item/lockpick/on_update_icon()
 	. = ..()
@@ -42,13 +43,12 @@
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	storage             = /datum/storage/lockpick_roll
 
-/obj/item/lockpick_roll/filled/Initialize(ml, material_key)
-	new /obj/item/lockpick/rake(src)
-	new /obj/item/lockpick/rake(src)
-	new /obj/item/lockpick/hook(src)
-	new /obj/item/lockpick/hook(src)
-	new /obj/item/lockpick/lever(src)
-	. = ..()
+/obj/item/lockpick_roll/filled/WillContain()
+	return list(
+		/obj/item/lockpick/rake  = 2,
+		/obj/item/lockpick/hook  = 2,
+		/obj/item/lockpick/lever = 1
+	)
 
 /obj/item/lockpick_roll/attack_self(mob/user)
 	if(!storage?.opened)
@@ -62,19 +62,17 @@
 	if(!storage?.opened)
 		icon_state = "[icon_state]-rolled"
 	else if(length(contents))
-		var/x_offset = -10
+		var/x_offset = -9
 		for(var/i = 1 to length(contents))
 			var/obj/item/lockpick/thing = contents[i]
 			if(istype(thing))
-				var/mutable_appearance/MA = mutable_appearance(thing)
-				MA.pixel_x = x_offset
-				MA.pixel_y = 0
-				MA.pixel_z = 0
-				MA.pixel_w = 0
-				MA.plane = FLOAT_PLANE
-				MA.layer = FLOAT_LAYER
-				MA.appearance_flags |= RESET_COLOR
-				add_overlay(MA)
+				var/image/lockpick         = new /image
+				lockpick.color             = thing.color
+				lockpick.icon              = thing.icon
+				lockpick.icon_state        = thing.icon_state
+				lockpick.appearance_flags |= RESET_COLOR
+				lockpick.pixel_x           = x_offset
+				add_overlay(lockpick)
 			x_offset += 4
 		add_overlay("[icon_state]-cover")
 	compile_overlays()
