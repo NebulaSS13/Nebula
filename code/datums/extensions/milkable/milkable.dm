@@ -43,7 +43,10 @@
 /datum/extension/milkable/proc/create_milk()
 	var/create_milk = min(rand(milk_min, milk_max), REAGENTS_FREE_SPACE(udder))
 	if(create_milk > 0)
-		udder.add_reagent(milk_type, create_milk)
+		udder.add_reagent(milk_type, create_milk, get_milk_data())
+
+/datum/extension/milkable/proc/get_milk_data()
+	return
 
 // Return TRUE if attackby() should halt at this call.
 /datum/extension/milkable/proc/handle_milked(obj/item/chems/container, mob/user)
@@ -80,7 +83,7 @@
 		SPAN_NOTICE("\The [user] starts milking \the [critter] into \the [container]."),
 		SPAN_NOTICE("You start milking \the [critter] into \the [container].")
 	)
-	if(!user.do_skilled(milking_skill, 4 SECONDS, milking_skill_req))
+	if(!user.do_skilled(4 SECONDS, milking_skill))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] stops milking \the [critter]."),
 			SPAN_NOTICE("You stop milking \the [critter].")

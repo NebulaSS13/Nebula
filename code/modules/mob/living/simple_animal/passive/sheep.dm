@@ -16,6 +16,7 @@
 	speak_emote   = list("bleats")
 	faction       = "sheep"
 	butchery_data = /decl/butchery_data/animal/ruminant/sheep
+	ai            = /datum/mob_controller/passive/sheep
 
 /mob/living/simple_animal/passive/sheep/Initialize()
 	. = ..()
@@ -28,7 +29,7 @@
 /mob/living/simple_animal/passive/sheep/refresh_visible_overlays()
 	var/list/body_overlays = list(overlay_image(icon, icon_state, COLOR_WHITE, RESET_COLOR))
 	var/datum/extension/shearable/shearable = get_extension(src, /datum/extension/shearable)
-	if(world.time >= shearable?.has_fleece)
+	if(shearable && (world.time >= shearable.next_fleece || shearable.has_fleece))
 		var/fleece_state = "[icon_state]-fleece"
 		if(check_state_in_icon(fleece_state, icon))
 			body_overlays += overlay_image(icon, fleece_state, shearable.fleece_material.color, RESET_COLOR)

@@ -21,13 +21,12 @@
 	START_PROCESSING(SSprocessing, src)
 
 /datum/extension/shearable/Process()
-	. = ..()
 	if(has_fleece)
 		return PROCESS_KILL
 	if(world.time >= next_fleece)
 		has_fleece = TRUE
-		var/atom/holder_atom = holder
-		holder_atom.update_icon()
+		var/mob/living/critter = holder
+		critter.try_refresh_visible_overlays()
 		return PROCESS_KILL
 
 /datum/extension/shearable/proc/handle_sheared(obj/item/shears, mob/user)
@@ -54,7 +53,7 @@
 		SPAN_NOTICE("\The [user] starts shearing \the [critter]."),
 		SPAN_NOTICE("You start shearing \the [critter].")
 	)
-	if(!user.do_skilled(shearing_skill, 4 SECONDS, shearing_skill_req))
+	if(!user.do_skilled(4 SECONDS, shearing_skill))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] stops shearing \the [critter]."),
 			SPAN_NOTICE("You stop shearing \the [critter].")
@@ -82,7 +81,7 @@
 	next_fleece = world.time + fleece_time
 	if(!is_processing)
 		START_PROCESSING(SSprocessing, src)
-	critter.update_icon()
+	critter.try_refresh_visible_overlays()
 	return TRUE
 
 /datum/extension/shearable/proc/handle_shearing_failure(mob/user, mob/living/critter)
