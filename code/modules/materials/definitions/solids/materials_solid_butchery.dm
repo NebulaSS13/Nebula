@@ -133,6 +133,10 @@
 	color = COLOR_GUNMETAL
 	uid = "solid_fur_heavy"
 
+/decl/material/solid/organic/skin/sheep
+	color = COLOR_DARK_GRAY
+	uid = "solid_skin_sheep"
+
 /decl/material/solid/organic/skin/goat
 	color = COLOR_SILVER
 	uid = "solid_skin_goat"

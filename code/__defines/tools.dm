@@ -16,6 +16,7 @@
 // Misc tools.
 #define TOOL_PEN            /decl/tool_archetype/pen
 #define TOOL_STAMP          /decl/tool_archetype/stamp
+#define TOOL_SHEARS         /decl/tool_archetype/shears
 
 // Surgical tools.
 #define TOOL_SCALPEL        /decl/tool_archetype/scalpel

@@ -27,7 +27,8 @@
 /obj/item/tool/machete/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
 		TOOL_HATCHET = TOOL_QUALITY_MEDIOCRE,
-		TOOL_HAMMER  = TOOL_QUALITY_BAD
+		TOOL_HAMMER  = TOOL_QUALITY_BAD,
+		TOOL_SHEARS  = TOOL_QUALITY_WORST
 	)
 	return tool_qualities
 

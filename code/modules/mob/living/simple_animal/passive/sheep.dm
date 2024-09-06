@@ -9,12 +9,13 @@
 	uid = "bodytype_animal_deer"
 
 /mob/living/simple_animal/passive/sheep
-	name        = "sheep"
-	real_name   = "sheep"
-	desc        = "A kind of wooly animal that grazes in herds, often raised for their meat and fleeces."
-	icon        = 'icons/mob/simple_animal/sheep.dmi'
-	speak_emote = list("bleats")
-	faction     = "sheep"
+	name          = "sheep"
+	real_name     = "sheep"
+	desc          = "A kind of wooly animal that grazes in herds, often raised for their meat and fleeces."
+	icon          = 'icons/mob/simple_animal/sheep.dmi'
+	speak_emote   = list("bleats")
+	faction       = "sheep"
+	butchery_data = /decl/butchery_data/animal/ruminant/sheep
 
 /mob/living/simple_animal/passive/sheep/Initialize()
 	. = ..()

@@ -58,6 +58,11 @@
 	name         = "stamp"
 	tool_message = "stamping"
 
+/decl/tool_archetype/shears
+	name         = "shears"
+	tool_sound   = 'sound/weapons/bladeslice.ogg'
+	tool_message = "shearing"
+
 /decl/tool_archetype/knife
 	name         = "knife"
 	tool_sound   = 'sound/weapons/bladeslice.ogg'
