@@ -3,11 +3,11 @@
 		return 0
 
 	if(!target.reagents || !target.reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("[target] is empty."))
+		to_chat(user, SPAN_NOTICE("[target] is empty of reagents."))
 		return 1
 
 	if(reagents && !REAGENTS_FREE_SPACE(reagents))
-		to_chat(user, SPAN_NOTICE("[src] is full."))
+		to_chat(user, SPAN_NOTICE("[src] is full of reagents."))
 		return 1
 
 	var/trans = target.reagents.trans_to_obj(src, target.amount_dispensed)
@@ -23,11 +23,11 @@
 		return 1
 
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("[src] is empty."))
+		to_chat(user, SPAN_NOTICE("[src] is empty of reagents."))
 		return 1
 
 	if(target.reagents && !REAGENTS_FREE_SPACE(target.reagents))
-		to_chat(user, SPAN_NOTICE("[target] is full."))
+		to_chat(user, SPAN_NOTICE("[target] is full of reagents."))
 		return 1
 
 	var/contained = REAGENT_LIST(src)
@@ -39,7 +39,6 @@
 
 	reagents.splash(target, reagents.total_volume)
 	return 1
-
 
 /obj/item/proc/standard_pour_into(mob/user, atom/target, amount = 5) // This goes into afterattack and yes, it's atom-level
 	if(!target.reagents)
@@ -54,11 +53,11 @@
 		return 0
 
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("[src] is empty."))
+		to_chat(user, SPAN_NOTICE("[src] is empty of reagents."))
 		return 1
 
 	if(!REAGENTS_FREE_SPACE(target.reagents))
-		to_chat(user, SPAN_NOTICE("[target] is full."))
+		to_chat(user, SPAN_NOTICE("[target] is full of reagents."))
 		return 1
 
 	var/trans = reagents.trans_to(target, amount)
