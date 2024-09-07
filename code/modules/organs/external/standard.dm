@@ -142,6 +142,7 @@
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
+	is_washable = TRUE
 	var/gripper_type = /datum/inventory_slot/gripper/left_hand
 
 /obj/item/organ/external/hand/do_install(mob/living/human/target, affected, in_place, update_icon, detached)

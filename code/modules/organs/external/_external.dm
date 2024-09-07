@@ -81,6 +81,11 @@
 	var/image/hud_damage_image
 	var/fingerprint
 
+	// Extremely specific bool for washing hands to avoid drakes washing their entire head in the sink.
+	// The problem with adding shit like this is that now the question of whether or not feet/face should
+	// be washable comes up! There is no escape from the horrors of a detailed sim.
+	var/is_washable = FALSE
+
 /obj/item/organ/external/proc/set_fingerprint(value)
 	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !BP_IS_PROSTHETIC(src))
 		fingerprint = value

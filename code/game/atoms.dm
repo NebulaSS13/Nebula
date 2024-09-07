@@ -901,6 +901,9 @@
 	. = list()
 	if(storage)
 		. += /decl/interaction_handler/storage_open
+	if(reagents?.total_volume && ATOM_IS_OPEN_CONTAINER(src))
+		. += /decl/interaction_handler/wash_hands
+		. += /decl/interaction_handler/drink
 
 /atom/proc/can_climb_from_below(var/mob/climber)
 	return FALSE

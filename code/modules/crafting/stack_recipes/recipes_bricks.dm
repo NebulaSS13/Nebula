@@ -97,6 +97,12 @@
 	on_floor                   = TRUE
 	difficulty                 = MAT_VALUE_VERY_HARD_DIY
 
+/decl/stack_recipe/bricks/fountain/well
+	result_type                = /obj/structure/reagent_dispensers/well
+
+/decl/stack_recipe/bricks/fountain/wall
+	result_type                = /obj/structure/reagent_dispensers/well/wall_fountain
+
 /decl/stack_recipe/turfs/wall/brick
 	name                       = "brick wall"
 	result_type                = /turf/wall/brick
