@@ -154,17 +154,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/refresh_visible_overlays()
 
-	if(has_extension(src, /datum/extension/shearable))
-		var/draw_fleece = FALSE
-		var/fleece_state = "[icon_state]-fleece"
-		if(check_state_in_icon(fleece_state, icon))
-			var/datum/extension/shearable/shearable = get_extension(src, /datum/extension/shearable)
-			if(shearable && (world.time >= shearable.next_fleece || shearable.has_fleece))
-				LAZYSET(draw_visible_overlays, "-fleece", shearable.fleece_material.color)
-				draw_fleece = TRUE
-		if(!draw_fleece)
-			LAZYREMOVE(draw_visible_overlays, "-fleece")
-
 	if(length(draw_visible_overlays))
 		var/list/add_overlays = list()
 		for(var/overlay_state in draw_visible_overlays)

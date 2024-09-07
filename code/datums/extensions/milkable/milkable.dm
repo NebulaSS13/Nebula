@@ -46,7 +46,10 @@
 		udder.add_reagent(milk_type, create_milk, get_milk_data())
 
 /datum/extension/milkable/proc/get_milk_data()
-	return
+	var/static/list/milk_data = list(
+		"milk_donor" = "cow"
+	)
+	return milk_data.Copy()
 
 // Return TRUE if attackby() should halt at this call.
 /datum/extension/milkable/proc/handle_milked(obj/item/chems/container, mob/user)
@@ -123,3 +126,13 @@
 
 /datum/extension/milkable/goat/handle_milking_failure(mob/user, mob/living/critter)
 	critter?.ai?.retaliate()
+
+/datum/extension/milkable/goat/get_milk_data()
+	var/static/list/milk_data = list(
+		"milk_donor"   = "goat",
+		"milk_name"    = "goat",
+		"cheese_name"  = "feta",
+		"cheese_color" = "#f3f2be",
+		"mask_name"    = "goat's milk",
+	)
+	return milk_data.Copy()

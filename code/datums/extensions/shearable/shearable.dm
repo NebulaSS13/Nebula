@@ -24,8 +24,17 @@
 	if(has_fleece)
 		return PROCESS_KILL
 	if(world.time >= next_fleece)
+
 		has_fleece = TRUE
 		var/mob/living/critter = holder
+
+		// Update fleeced simple animals with overlay.
+		if(istype(holder, /mob/living/simple_animal))
+			var/fleece_state = "[critter.icon_state]-fleece"
+			if(check_state_in_icon(fleece_state, critter.icon))
+				var/mob/living/simple_animal/animal = critter
+				LAZYSET(animal.draw_visible_overlays, "fleece", fleece_material.color)
+
 		critter.try_refresh_visible_overlays()
 		return PROCESS_KILL
 
@@ -77,8 +86,15 @@
 	)
 
 	new fleece_type(get_turf(critter), fleece_material.type, critter)
+
 	has_fleece = FALSE
 	next_fleece = world.time + fleece_time
+
+	// Update fleeced simple animals with overlay.
+	if(istype(holder, /mob/living/simple_animal))
+		var/mob/living/simple_animal/animal = holder
+		LAZYREMOVE(animal.draw_visible_overlays, "fleece")
+
 	if(!is_processing)
 		START_PROCESSING(SSprocessing, src)
 	critter.try_refresh_visible_overlays()
