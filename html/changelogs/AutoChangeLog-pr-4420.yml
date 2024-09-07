@@ -1,5 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: Condiment bottles that were not produced by the Condimaster will no longer
-      change appearance when empty.}
-delete-after: true
