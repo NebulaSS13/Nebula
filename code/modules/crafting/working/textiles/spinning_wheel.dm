@@ -1,4 +1,4 @@
-/obj/structure/textiles/spinning_wheel
+/obj/structure/working/spinning_wheel
 
 	name         = "spinning wheel"
 	desc         = "A pedal-operated wheel for spinning plant fibers into thread."
@@ -9,11 +9,11 @@
 	var/const/MAX_LOADED = 10
 	var/list/loaded
 
-/obj/structure/textiles/spinning_wheel/Destroy()
+/obj/structure/working/spinning_wheel/Destroy()
 	QDEL_NULL_LIST(loaded)
 	return ..()
 
-/obj/structure/textiles/spinning_wheel/apply_textiles_overlays()
+/obj/structure/working/spinning_wheel/apply_working_overlays()
 	if(length(loaded))
 		var/obj/item/thing = loaded[1]
 		var/image/I = image(icon, "[icon_state]-loaded")
@@ -21,10 +21,10 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/structure/textiles/spinning_wheel/proc/can_process(obj/item/thing)
+/obj/structure/working/spinning_wheel/proc/can_process(obj/item/thing)
 	return istype(thing) && thing.has_textile_fibers()
 
-/obj/structure/textiles/spinning_wheel/try_take_input(obj/item/W, mob/user)
+/obj/structure/working/spinning_wheel/try_take_input(obj/item/W, mob/user)
 
 	if(istype(W.storage))
 		var/list/loading_growns = list()
@@ -64,10 +64,10 @@
 		return TRUE
 	return TRUE
 
-/obj/structure/textiles/spinning_wheel/proc/is_thread_material(decl/material/mat)
+/obj/structure/working/spinning_wheel/proc/is_thread_material(decl/material/mat)
 	return istype(mat) && mat.has_textile_fibers
 
-/obj/structure/textiles/spinning_wheel/try_start_working(mob/user)
+/obj/structure/working/spinning_wheel/try_start_working(mob/user)
 
 	if(!length(loaded))
 		to_chat(user, SPAN_WARNING("\The [src] needs to be prepared with fibers before you can spin anything."))
@@ -120,7 +120,7 @@
 	stop_working()
 	return TRUE
 
-/obj/structure/textiles/spinning_wheel/try_unload_material(mob/user)
+/obj/structure/working/spinning_wheel/try_unload_material(mob/user)
 	if(user.a_intent == I_GRAB)
 		if(!length(loaded))
 			to_chat(user, SPAN_WARNING("\The [src] has no fibers to remove."))
@@ -134,6 +134,6 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/textiles/spinning_wheel/ebony
+/obj/structure/working/spinning_wheel/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color    = /decl/material/solid/organic/wood/ebony::color

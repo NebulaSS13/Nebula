@@ -117,7 +117,7 @@
 	crafting_skill = SKILL_SCULPTING
 
 // TEXTILES OVERRIDES
-/obj/structure/textiles
+/obj/structure/working
 	work_skill = SKILL_TEXTILES
 
 /obj/item/stack/material/skin

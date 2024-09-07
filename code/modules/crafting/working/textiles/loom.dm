@@ -1,4 +1,4 @@
-/obj/structure/textiles/loom
+/obj/structure/working/loom
 
 	name         = "loom"
 	desc         = "A complex, articulated device for weaving threads into cloth."
@@ -11,12 +11,12 @@
 	var/weaving_color
 	var/obj/item/stack/loaded_thread
 
-/obj/structure/textiles/loom/Destroy()
+/obj/structure/working/loom/Destroy()
 	QDEL_NULL(loaded_thread)
 	QDEL_NULL(work_sound)
 	return ..()
 
-/obj/structure/textiles/loom/physically_destroyed()
+/obj/structure/working/loom/physically_destroyed()
 	if(loaded_thread)
 		loaded_thread.dropInto(loc)
 		loaded_thread = null
@@ -24,7 +24,7 @@
 		clear_in_progress_weaving()
 	return ..()
 
-/obj/structure/textiles/loom/proc/clear_in_progress_weaving()
+/obj/structure/working/loom/proc/clear_in_progress_weaving()
 	if(weaving_type && weaving_progress > 0)
 		var/obj/item/debris/scraps/scraps = new(loc)
 		scraps.matter = list(weaving_type = weaving_progress)
@@ -34,7 +34,7 @@
 	weaving_type = null
 	weaving_progress = 0
 
-/obj/structure/textiles/loom/try_take_input(obj/item/W, mob/user)
+/obj/structure/working/loom/try_take_input(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/stack/material/thread))
 
@@ -61,7 +61,7 @@
 			return TRUE
 	return FALSE
 
-/obj/structure/textiles/loom/apply_textiles_overlays()
+/obj/structure/working/loom/apply_working_overlays()
 	if(loaded_thread)
 		var/image/I = image(icon, "[icon_state]-thread")
 		I.color = loaded_thread.get_color()
@@ -73,7 +73,7 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/structure/textiles/loom/try_unload_material(mob/user)
+/obj/structure/working/loom/try_unload_material(mob/user)
 	if(user.a_intent == I_GRAB)
 		if(loaded_thread)
 			to_chat(user, SPAN_NOTICE("You remove \the [loaded_thread] from \the [src]."))
@@ -91,7 +91,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/textiles/loom/try_start_working(mob/user)
+/obj/structure/working/loom/try_start_working(mob/user)
 
 	if(!loaded_thread)
 		to_chat(user, SPAN_WARNING("\The [src] needs to be wound with thread before you can weave anything."))
@@ -146,6 +146,6 @@
 	stop_working()
 	return TRUE
 
-/obj/structure/textiles/loom/ebony
+/obj/structure/working/loom/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color    = /decl/material/solid/organic/wood/ebony::color

@@ -38,7 +38,7 @@
 
 	return 1
 
-/decl/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/decl/chemical_reaction/proc/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(thermal_product && location && ATOM_SHOULD_TEMPERATURE_ENQUEUE(location))
 		ADJUST_ATOM_TEMPERATURE(location, location.temperature + (location.get_thermal_mass_coefficient() * thermal_product))
@@ -71,7 +71,7 @@
 	if(result)
 		holder.add_reagent(result, amt_produced, data, safety = 1)
 
-	on_reaction(holder, amt_produced, alt_reaction_indicator)
+	on_reaction(holder, amt_produced, alt_reaction_indicator, data)
 
 //called after processing reactions, if they occurred
 /decl/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)

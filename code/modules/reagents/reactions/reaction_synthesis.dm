@@ -19,7 +19,7 @@
 	)
 	. = ..()
 
-/decl/chemical_reaction/synthesis/fiberglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+/decl/chemical_reaction/synthesis/fiberglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	..()
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
@@ -47,7 +47,7 @@
 			if(rtype != /decl/material/liquid/crystal_agent && REAGENT_VOLUME(holder, rtype) >= REAGENT_UNITS_PER_MATERIAL_SHEET)
 				return TRUE
 
-/decl/chemical_reaction/synthesis/crystalization/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+/decl/chemical_reaction/synthesis/crystalization/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		var/list/removing_reagents = list()
@@ -81,7 +81,7 @@
 				continue
 			return TRUE
 
-/decl/chemical_reaction/synthesis/aerogel/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+/decl/chemical_reaction/synthesis/aerogel/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		var/list/removing_reagents = list()
@@ -100,7 +100,7 @@
 	required_reagents = list(/decl/material/liquid/acid = 1, /decl/material/liquid/plasticide = 2)
 	mix_message = "The solution solidifies into a grey-white mass."
 
-/decl/chemical_reaction/synthesis/plastication/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/decl/chemical_reaction/synthesis/plastication/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	..()
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
@@ -115,7 +115,7 @@
 	result_amount = 3
 	mix_message = "The solution hardens and begins to crystallize."
 
-/decl/chemical_reaction/synthesis/resin_pack/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/decl/chemical_reaction/synthesis/resin_pack/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	..()
 	var/turf/T = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(!istype(T))
@@ -136,7 +136,7 @@
 	mix_message = "The solution thickens and solidifies."
 	minimum_temperature = 100 CELSIUS
 
-/decl/chemical_reaction/synthesis/soap/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/decl/chemical_reaction/synthesis/soap/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	..()
 	var/turf/T = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(!istype(T))

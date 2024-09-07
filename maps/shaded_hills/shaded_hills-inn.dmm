@@ -93,7 +93,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/shrine)
 "eD" = (
-/obj/structure/textiles/loom/ebony,
+/obj/structure/working/loom/ebony,
 /turf/floor/wood/walnut,
 /area/shaded_hills/farmhouse)
 "eG" = (
@@ -694,7 +694,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
 "Aq" = (
-/obj/structure/textiles/loom/ebony,
+/obj/structure/working/loom/ebony,
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "Aw" = (
@@ -736,7 +736,7 @@
 /area/shaded_hills/slaughterhouse)
 "Bx" = (
 /obj/structure/wall_sconce/lantern,
-/obj/structure/textiles/spinning_wheel/twisting_bench/ebony,
+/obj/structure/working/spinning_wheel/twisting_bench/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "By" = (
@@ -914,7 +914,7 @@
 /turf/wall/log/walnut/shutter,
 /area/shaded_hills/stable)
 "HF" = (
-/obj/structure/textiles/spinning_wheel/ebony,
+/obj/structure/working/spinning_wheel/ebony,
 /turf/floor/wood/walnut,
 /area/shaded_hills/farmhouse)
 "HI" = (
@@ -1013,7 +1013,7 @@
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/downlands)
 "Ke" = (
-/obj/structure/textiles/spinning_wheel/twisting_bench/ebony,
+/obj/structure/working/spinning_wheel/twisting_bench/ebony,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/shrine)
 "Kh" = (
@@ -1210,7 +1210,7 @@
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/shrine)
 "Sy" = (
-/obj/structure/textiles/spinning_wheel/ebony,
+/obj/structure/working/spinning_wheel/ebony,
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "SF" = (

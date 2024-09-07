@@ -4,29 +4,78 @@
 	abstract_type = /decl/chemical_reaction/recipe/food
 	var/obj_result
 
-/decl/chemical_reaction/recipe/food/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/decl/chemical_reaction/recipe/food/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
 	..()
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(obj_result && isturf(location))
 		for(var/i = 1, i <= created_volume, i++)
-			create_food(location)
+			create_food(location, reaction_data)
 
-/decl/chemical_reaction/recipe/food/proc/create_food(location)
+/decl/chemical_reaction/recipe/food/proc/create_food(location, list/data)
 	var/atom/movable/food = new obj_result
 	if(istype(food))
 		food.dropInto(location)
+	if(length(data) && istype(food, /obj/item/food))
+		var/obj/item/food/food_item = food
+		food_item.set_nutriment_data(data)
 	return food
 
-/decl/chemical_reaction/recipe/food/cheesewheel
+/decl/chemical_reaction/recipe/food/dairy
+	abstract_type = /decl/chemical_reaction/recipe/food/dairy
+	var/static/list/milk_data_keys = list(
+		"milk_donor",
+		"milk_color",
+		"milk_name",
+		"cheese_name",
+		"cheese_color"
+	)
+
+/decl/chemical_reaction/recipe/food/dairy/send_data(var/datum/reagents/holder, var/reaction_limit)
+	. = ..()
+	for(var/reagent in required_reagents)
+		var/list/data = LAZYACCESS(holder.reagent_data, reagent)
+		if(!islist(data))
+			continue
+		for(var/milk_key in milk_data_keys)
+			var/milk_val = data[milk_key]
+			if(isnull(milk_val))
+				continue
+			LAZYSET(., milk_key, milk_val)
+
+/decl/chemical_reaction/recipe/food/dairy/butter
+	name = "Enzyme Butter"
+	required_reagents = list(
+		/decl/material/solid/sodiumchloride = 1,
+		/decl/material/liquid/drink/milk/cream = 20
+	)
+	catalysts = list(/decl/material/liquid/enzyme = 5)
+	mix_message = "The solution thickens and curdles into a buttery yellow solid."
+	minimum_temperature = 40 CELSIUS
+	maximum_temperature = (40 CELSIUS) + 100
+	obj_result = /obj/item/food/dairy/butter/stick
+
+/decl/chemical_reaction/recipe/food/dairy/margarine
+	name = "Enzyme Margarine"
+	required_reagents = list(
+		/decl/material/solid/sodiumchloride = 1,
+		/decl/material/liquid/nutriment/plant_oil = 20
+	)
+	catalysts = list(/decl/material/liquid/enzyme = 5)
+	mix_message = "The solution thickens and curdles into a pale yellow solid."
+	minimum_temperature = 40 CELSIUS
+	maximum_temperature = (40 CELSIUS) + 100
+	obj_result = /obj/item/food/dairy/butter/stick/margarine
+
+/decl/chemical_reaction/recipe/food/dairy/cheesewheel
 	name = "Enzyme Cheesewheel"
 	required_reagents = list(/decl/material/liquid/drink/milk = 40)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
 	mix_message = "The solution thickens and curdles into a rich yellow solid."
 	minimum_temperature = 40 CELSIUS
 	maximum_temperature = (40 CELSIUS) + 100
-	obj_result = /obj/item/food/sliceable/cheesewheel
+	obj_result = /obj/item/food/dairy/cheese/wheel
 
-/decl/chemical_reaction/recipe/food/cheesewheel/rennet
+/decl/chemical_reaction/recipe/food/dairy/cheesewheel/rennet
 	name = "Rennet Cheesewheel"
 	catalysts = list()
 	required_reagents = list(
@@ -145,7 +194,7 @@
 	)
 	obj_result = /obj/item/food/amanitajelly
 
-/decl/chemical_reaction/recipe/food/pudding/amanitajelly/create_food(location)
+/decl/chemical_reaction/recipe/food/pudding/amanitajelly/create_food(location, list/data)
 	var/obj/item/food/amanitajelly/being_cooked = ..()
 	if(being_cooked?.reagents)
 		being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)

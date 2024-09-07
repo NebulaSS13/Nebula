@@ -355,3 +355,26 @@
 	nutriment_factor = 1
 	color = "#d3af70"
 	uid = "chem_nutriment_yeast"
+
+/decl/material/liquid/nutriment/cheese
+	name = "cheese"
+	lore_text = "Aged, fermented, curdled milk."
+	uid = "chem_nutriment_cheese"
+	color = "#ffd000"
+	//allergen_flags = INGREDIENT_FLAG_DAIRY // Pending allergen PR.
+
+/decl/material/liquid/nutriment/butter
+	name = "butter"
+	lore_text = "The product of churning cream. Great for baking and on sandwiches."
+	color = "#ffe864"
+	taste_description = "butter"
+	uid = "chem_nutriment_butter"
+	//allergen_flags = INGREDIENT_FLAG_DAIRY // Pending allergen PR.
+
+/decl/material/liquid/nutriment/margarine
+	name = "margarine"
+	lore_text = "Emulsified plant oil solids. A popular non-dairy alternative to butter."
+	color = "#fff2ab"
+	taste_description = "bland oiliness"
+	uid = "chem_nutriment_margarine"
+	//allergen_flags = INGREDIENT_FLAG_VEGETABLE // Pending allergen PR.

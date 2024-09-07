@@ -181,16 +181,20 @@
 	difficulty             = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/planks/furniture/spinning_wheel
-	result_type            = /obj/structure/textiles/spinning_wheel
+	result_type            = /obj/structure/working/spinning_wheel
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
 
 /decl/stack_recipe/planks/furniture/loom
-	result_type            = /obj/structure/textiles/loom
+	result_type            = /obj/structure/working/loom
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
 
 /decl/stack_recipe/planks/furniture/twisting_bench
-	result_type            = /obj/structure/textiles/spinning_wheel/twisting_bench
+	result_type            = /obj/structure/working/spinning_wheel/twisting_bench
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
+
+/decl/stack_recipe/planks/furniture/butter_churn
+	result_type            = /obj/structure/working/butter_churn
+	difficulty             = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/planks/furniture/cabinet
 	result_type            = /obj/structure/closet/cabinet/wooden

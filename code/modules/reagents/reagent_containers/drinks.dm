@@ -122,7 +122,7 @@
 	center_of_mass = @'{"x":16,"y":9}'
 
 /obj/item/chems/drinks/milk/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/milk, reagents.maximum_volume, data = list("milk_donor" = "cow"))
 
 /obj/item/chems/drinks/soymilk
 	name = "soymilk carton"

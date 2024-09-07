@@ -73,7 +73,7 @@
 		/obj/item/food/badrecipe,
 		/obj/item/food/tofu,
 		/obj/item/food/egg,
-		/obj/item/food/cheesewedge,
+		/obj/item/food/dairy/cheese/wedge,
 	)
 	reagent_mix = REAGENT_REPLACE // Has its own special products
 	result = /obj/item/food/mysterysoup

@@ -4,7 +4,7 @@
 	items = list(
 		/obj/item/food/meatsteak,
 		/obj/item/food/slice/bread = 2,
-		/obj/item/food/cheesewedge,
+		/obj/item/food/dairy/cheese/wedge,
 	)
 	result = /obj/item/food/sandwich
 
@@ -24,7 +24,7 @@
 		/obj/item/food/bigbiteburger,
 		/obj/item/food/dough,
 		/obj/item/food/butchery/meat,
-		/obj/item/food/cheesewedge,
+		/obj/item/food/dairy/cheese/wedge,
 		/obj/item/food/boiledegg,
 	)
 	result = /obj/item/food/superbiteburger
@@ -40,6 +40,6 @@
 	items = list(
 		/obj/item/food/doughslice,
 		/obj/item/food/butchery/cutlet,
-		/obj/item/food/cheesewedge
+		/obj/item/food/dairy/cheese/wedge
 	)
 	result = /obj/item/food/taco
