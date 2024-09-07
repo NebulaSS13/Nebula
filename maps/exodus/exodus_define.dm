@@ -12,8 +12,11 @@
 	company_short = "NT"
 	system_name   = "Nyx"
 
+	default_law_type = /datum/ai_laws/nanotrasen
+
 	overmap_ids = list(OVERMAP_ID_SPACE)
-	num_exoplanets = 1
+	num_exoplanets = 3
+	away_site_budget = 3
 
 	lobby_screens = list(
 		'maps/exodus/lobby/exodus.png'
