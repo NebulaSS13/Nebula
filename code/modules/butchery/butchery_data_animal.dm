@@ -75,6 +75,9 @@
 	skin_type     = null
 	skin_amount   = null
 
+/decl/butchery_data/animal/wolf
+	skin_material     = /decl/material/solid/organic/skin/fur/gray
+
 /decl/butchery_data/animal/rabbit
 	meat_name         = "rabbit"
 	skin_material     = /decl/material/solid/organic/skin/fur/white

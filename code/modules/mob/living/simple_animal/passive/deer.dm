@@ -21,10 +21,13 @@
 	natural_weapon     = /obj/item/natural_weapon/hooves
 	mob_size           = MOB_SIZE_LARGE
 	ai                 = /datum/mob_controller/passive/deer
-	var/fur_color      = "#b39161"
-	var/markings_color = "#3a3329"
-	var/socks_color    = "#ddd5c9"
-	var/eyes_color     = "#1a1a1a"
+	eye_color          = "#1a1a1a"
+
+	draw_visible_overlays = list(
+		"base"     = "#b39161",
+		"markings" = "#3a3329",
+		"socks"    = "#ddd5c9"
+	)
 
 /mob/living/simple_animal/passive/deer/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/deer)
@@ -53,20 +56,6 @@
 				SetName("doe")
 			else
 				SetName("deer")
-
-/mob/living/simple_animal/passive/deer/get_eye_colour()
-	. = ..()
-	return eyes_color
-
-/mob/living/simple_animal/passive/deer/refresh_visible_overlays()
-	set_current_mob_overlay(HO_SKIN_LAYER,
-		list(
-			overlay_image(icon, icon_state,              fur_color,      RESET_COLOR),
-			overlay_image(icon, "[icon_state]-markings", markings_color, RESET_COLOR),
-			overlay_image(icon, "[icon_state]-socks",    socks_color,    RESET_COLOR)
-		)
-	)
-	. = ..()
 
 /mob/living/simple_animal/passive/deer/doe
 	name               = "doe"
@@ -105,8 +94,10 @@
 	desc = "A fleet-footed forest animal known for a love of vtubers."
 
 /mob/living/simple_animal/passive/deer/sparkle/Initialize()
-	fur_color      = get_random_colour()
-	markings_color = get_random_colour(TRUE)
-	socks_color    = get_random_colour()
-	eyes_color     = get_random_colour(TRUE)
+	draw_visible_overlays = list(
+		"base"     = get_random_colour(),
+		"markings" = get_random_colour(TRUE),
+		"socks"    = get_random_colour()
+	)
+	eye_color      = get_random_colour(TRUE)
 	. = ..()

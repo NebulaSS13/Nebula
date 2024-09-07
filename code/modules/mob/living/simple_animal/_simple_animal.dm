@@ -95,6 +95,10 @@
 	var/fire_desc = "fires" //"X fire_desc at Y!"
 	var/ranged_range = 6 //tiles of range for ranged attackers to attack
 
+	// Associative list of colors to state modifiers to draw over the top of this creature's base icon.
+	var/list/draw_visible_overlays
+	var/eye_color
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
@@ -149,6 +153,19 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
 
 /mob/living/simple_animal/refresh_visible_overlays()
+
+	if(length(draw_visible_overlays))
+		var/list/add_overlays = list()
+		for(var/overlay_state in draw_visible_overlays)
+			var/overlay_color = draw_visible_overlays[overlay_state]
+			if(overlay_state == "base")
+				add_overlays += overlay_image(icon, icon_state, overlay_color, RESET_COLOR)
+			else
+				add_overlays += overlay_image(icon, "[icon_state]-[overlay_state]", overlay_color, RESET_COLOR)
+		set_current_mob_overlay(HO_SKIN_LAYER, add_overlays)
+	else
+		set_current_mob_overlay(HO_SKIN_LAYER, null)
+
 	z_flags &= ~ZMM_MANGLE_PLANES
 	if(stat == CONSCIOUS)
 		var/image/I = get_eye_overlay()
@@ -157,6 +174,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		set_current_mob_overlay(HO_GLASSES_LAYER, I)
 	else
 		set_current_mob_overlay(HO_GLASSES_LAYER, null)
+
 	. = ..()
 
 /mob/living/simple_animal/on_update_icon()
@@ -172,6 +190,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	else if(current_posture?.prone && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 	..()
+
+/mob/living/simple_animal/get_eye_colour()
+	return eye_color || ..()
 
 /mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
