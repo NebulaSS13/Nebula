@@ -906,7 +906,7 @@ var/global/BSACooldown = 0
 	set desc="Delay the game start/end"
 	set name="Delay"
 
-	if(!check_rights(R_SERVER|R_EVENT))	return
+	if(!check_rights(R_SERVER))	return
 	if (GAME_STATE > RUNLEVEL_LOBBY)
 		SSticker.delay_end = !SSticker.delay_end
 		log_and_message_admins("[SSticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
@@ -1336,7 +1336,7 @@ var/global/BSACooldown = 0
 		return //Extra sanity check to make sure only observers are shoved into things
 
 	//Same as assume-direct-control perm requirements.
-	if (!check_rights(R_VAREDIT,0) || !check_rights(R_ADMIN|R_DEBUG|R_EVENT,0))
+	if (!check_rights(R_VAREDIT,0) || !check_rights(R_ADMIN|R_DEBUG,0))
 		return 0
 	if (!frommob.ckey)
 		return 0
@@ -1391,7 +1391,7 @@ var/global/BSACooldown = 0
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
-	if (!istype(src,/datum/admins) || !check_rights(R_ADMIN|R_EVENT))
+	if (!istype(src,/datum/admins) || !check_rights(R_ADMIN))
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
@@ -1411,7 +1411,7 @@ var/global/BSACooldown = 0
 		to_chat(usr, SPAN_WARNING("This verb can only be used on /mob/living targets."))
 		return
 
-	if(check_rights(R_INVESTIGATE|R_EVENT))
+	if(check_rights(R_INVESTIGATE))
 		if(!M.admin_paralyzed)
 			M.visible_message(
 				SPAN_OCCULT("OOC: \The [M] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."),

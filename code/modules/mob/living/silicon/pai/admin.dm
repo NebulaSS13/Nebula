@@ -3,7 +3,7 @@
 	set name = "Make pAI"
 	set category = "Admin"
 
-	if(!check_rights(R_ADMIN|R_EVENT))
+	if(!check_rights(R_ADMIN))
 		return
 
 	if(!pai_key)

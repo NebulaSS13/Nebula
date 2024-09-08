@@ -9,13 +9,13 @@
 	msg = "<span class='notice'><b><font color=orange>[uppertext(global.using_map.boss_short)]M[iamessage ? " IA" : ""]:</font>[key_name(Sender, 1)] (<A HREF='byond://?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='byond://?_src_=vars;Vars=\ref[Sender]'>VV</A>) ([admin_jump_link(Sender)]) (<A HREF='byond://?_src_=holder;secretsadmin=show_round_status'>RS</A>) (<A HREF='byond://?_src_=holder;Artillery=\ref[Sender]'>BSA</A>) (<A HREF='byond://?_src_=holder;CentcommReply=\ref[Sender]'>RPLY</A>):</b> [msg]</span>"
 
 	for(var/client/C in global.admins)
-		if((R_ADMIN|R_EVENT) & C.holder.rights)
+		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/signal.ogg')
 
 /proc/Syndicate_announce(var/msg, var/mob/Sender)
 	msg = "<span class='notice'><b><font color=crimson>ILLEGAL:</font>[key_name(Sender, 1)] (<A HREF='byond://?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='byond://?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='byond://?_src_=holder;narrateto=\ref[Sender]'>DN</A>) ([admin_jump_link(Sender)]) (<A HREF='byond://?_src_=holder;secretsadmin=show_round_status'>RS</A>) (<A HREF='byond://?_src_=holder;Artillery=\ref[Sender]'>BSA</A>) (<A HREF='byond://?_src_=holder'>TAKE</a>) (<A HREF='byond://?_src_=holder;SyndicateReply=\ref[Sender]'>RPLY</A>):</b> [msg]</span>"
 	for(var/client/C in global.admins)
-		if((R_ADMIN|R_EVENT) & C.holder.rights)
+		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/signal.ogg')

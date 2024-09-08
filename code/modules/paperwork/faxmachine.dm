@@ -677,7 +677,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	var/font_colour       = LAZYACCESS(fax_details, "color") || "#006100"
 	var/faxname           = "[uppertext(dest_display_name)] FAX"
 	var/reply_type        = dest_display_name
-1
+
 	if(!(network_URI in global.using_map.map_admin_faxes))
 		reply_type = "UNKNOWN"
 
@@ -690,7 +690,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		SSwebhooks.send(WEBHOOK_FAX_SENT, list("title" = "Incoming fax transmission from [sender] in [faxname] for [dest_display_name].", "body" = "[paper.info]"))
 
 	for(var/client/C in global.admins)
-		if(check_rights((R_ADMIN|R_MOD|R_EVENT),0,C))
+		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')
 	return TRUE

@@ -56,7 +56,7 @@
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly.enabled)
 		ui_interact(user)
-	else if(check_rights(R_ADMIN|R_EVENT, 0, user))
+	else if(check_rights(R_ADMIN, 0, user))
 		var/response = alert(user, "This computer is turned off. Would you like to turn it on?", "Admin Override", "Yes", "No")
 		if(response == "Yes")
 			assembly.turn_on(user)

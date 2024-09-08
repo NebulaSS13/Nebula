@@ -98,7 +98,7 @@
 		href_list["datumrefresh"] = href_list["mob_player_panel"]
 
 	else if(href_list["give_spell"])
-		if(!check_rights(R_ADMIN|R_FUN|R_EVENT))	return
+		if(!check_rights(R_ADMIN|R_FUN))	return
 
 		var/mob/victim = locate(href_list["give_spell"])
 		if(!istype(victim))
@@ -130,7 +130,7 @@
 		src.cmd_admin_gib(victim)
 
 	else if(href_list["drop_everything"])
-		if(!check_rights(R_DEBUG|R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_DEBUG|R_ADMIN))	return
 
 		var/mob/victim = locate(href_list["drop_everything"])
 		if(!istype(victim))
@@ -574,7 +574,7 @@
 		victim.try_refresh_visible_overlays()
 
 	else if(href_list["adjustDamage"] && href_list["mobToDamage"])
-		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN|R_EVENT))	return
+		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
 
 		var/mob/living/victim = locate(href_list["mobToDamage"])
 		if(!istype(victim)) return

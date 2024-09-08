@@ -106,7 +106,7 @@ var/global/datum/admin_secrets/admin_secrets = new()
 /datum/admin_secret_item/admin_secret
 	category = /datum/admin_secret_category/admin_secrets
 	log = 0
-	permissions = R_ADMIN|R_EVENT
+	permissions = R_ADMIN
 
 /datum/admin_secret_item/debug
 	category = /datum/admin_secret_category/debug
@@ -120,5 +120,5 @@ var/global/datum/admin_secrets/admin_secrets = new()
 
 /datum/admin_secret_item/fun_secret
 	category = /datum/admin_secret_category/fun_secrets
-	permissions = R_FUN|R_EVENT
+	permissions = R_FUN
 	warn_before_use = 1

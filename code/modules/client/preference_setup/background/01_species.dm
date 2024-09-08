@@ -35,7 +35,7 @@
 	var/list/playables = list()
 
 	for(var/s in prefilter)
-		if(!check_rights(R_ADMIN|R_EVENT, 0) && get_config_value(/decl/config/toggle/use_alien_whitelist))
+		if(!check_rights(R_ADMIN, 0) && get_config_value(/decl/config/toggle/use_alien_whitelist))
 			var/decl/species/checking_species = get_species_by_key(s)
 			if(!(checking_species.spawn_flags & SPECIES_CAN_JOIN))
 				continue

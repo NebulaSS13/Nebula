@@ -190,7 +190,7 @@
 
 	else if(href_list["call_shuttle"])
 
-		if(!check_rights(R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_ADMIN))	return
 
 		if(!SSticker.mode || !SSevac.evacuation_controller)
 			return
@@ -210,7 +210,7 @@
 		href_list["secretsadmin"] = "show_round_status"
 
 	else if(href_list["delay_round_end"])
-		if(!check_rights(R_SERVER|R_EVENT))	return
+		if(!check_rights(R_SERVER))	return
 
 		SSticker.delay_end = !SSticker.delay_end
 		log_and_message_admins("[SSticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
@@ -683,7 +683,7 @@
 		cmd_admin_mute(M, mute_type)
 
 	else if(href_list["c_mode"])
-		if(!check_rights(R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_ADMIN))	return
 
 		if(SSticker.mode)
 			return alert(usr, "The game has already started.", null, null, null, null)
@@ -697,7 +697,7 @@
 		show_browser(usr, dat, "window=c_mode")
 
 	else if(href_list["f_secret"])
-		if(!check_rights(R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_ADMIN))	return
 
 		if(SSticker.mode)
 			return alert(usr, "The game has already started.", null, null, null, null)
@@ -712,7 +712,7 @@
 		show_browser(usr, dat, "window=f_secret")
 
 	else if(href_list["c_mode2"])
-		if(!check_rights(R_ADMIN|R_SERVER|R_EVENT))	return
+		if(!check_rights(R_ADMIN|R_SERVER))	return
 
 		if (SSticker.mode)
 			return alert(usr, "The game has already started.", null, null, null, null)
@@ -725,7 +725,7 @@
 		.(href, list("c_mode"=1))
 
 	else if(href_list["f_secret2"])
-		if(!check_rights(R_ADMIN|R_SERVER|R_EVENT))	return
+		if(!check_rights(R_ADMIN|R_SERVER))	return
 
 		if(SSticker.mode)
 			return alert(usr, "The game has already started.", null, null, null, null)
@@ -821,7 +821,7 @@
 		show_player_panel(M)
 
 	else if(href_list["adminplayerobservejump"])
-		if(!check_rights(R_MOD|R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_MOD|R_ADMIN))	return
 
 		var/mob/M = locate(href_list["adminplayerobservejump"])
 		var/client/C = usr.client
@@ -834,7 +834,7 @@
 		C.jumptomob(M)
 
 	else if(href_list["adminplayerobservefollow"])
-		if(!check_rights(R_MOD|R_ADMIN|R_EVENT))
+		if(!check_rights(R_MOD|R_ADMIN))
 			return
 
 		var/mob/M = locate(href_list["adminplayerobservefollow"])
@@ -859,7 +859,7 @@
 		if(ismob(M))
 			var/take_msg = "<span class='notice'><b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message.</span>"
 			for(var/client/X in global.admins)
-				if((R_ADMIN|R_MOD|R_EVENT) & X.holder.rights)
+				if((R_ADMIN|R_MOD) & X.holder.rights)
 					to_chat(X, take_msg)
 			to_chat(M, "<span class='notice'><b>Your message is being attended to by [usr.client]. Thanks for your patience!</b></span>")
 		else
@@ -874,7 +874,7 @@
 		ticket.take(client_repository.get_lite_client(usr.client))
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!check_rights(R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_ADMIN))	return
 
 		var/x = text2num(href_list["X"])
 		var/y = text2num(href_list["Y"])
@@ -933,7 +933,7 @@
 		to_chat(src.owner, "(<a href='byond://?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='byond://?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='byond://?_src_=vars;Vars=\ref[M]'>VV</A>) ([admin_jump_link(M, src)]) (<A HREF='byond://?src=\ref[src];secretsadmin=show_round_status'>RS</A>)")
 
 	else if(href_list["adminspawnprayreward"])
-		if(!check_rights(R_ADMIN|R_FUN|R_EVENT))	return
+		if(!check_rights(R_ADMIN|R_FUN))	return
 
 		var/mob/living/human/H = locate(href_list["adminspawnprayreward"])
 		if(!ishuman(H))
@@ -954,7 +954,7 @@
 		return
 
 	else if(href_list["Artillery"])
-		if(!check_rights(R_ADMIN|R_FUN|R_EVENT))	return
+		if(!check_rights(R_ADMIN|R_FUN))	return
 
 		var/mob/living/M = locate(href_list["Artillery"])
 		if(!isliving(M))
@@ -1085,26 +1085,26 @@
 		P.adminbrowse()
 
 	else if(href_list["jumpto"])
-		if(!check_rights(R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_ADMIN))	return
 
 		var/mob/M = locate(href_list["jumpto"])
 		usr.client.jumptomob(M)
 
 	else if(href_list["getmob"])
-		if(!check_rights(R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_ADMIN))	return
 
 		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")	return
 		var/mob/M = locate(href_list["getmob"])
 		usr.client.Getmob(M)
 
 	else if(href_list["sendmob"])
-		if(!check_rights(R_ADMIN|R_EVENT))	return
+		if(!check_rights(R_ADMIN))	return
 
 		var/mob/M = locate(href_list["sendmob"])
 		usr.client.sendmob(M)
 
 	else if(href_list["narrateto"])
-		if(!check_rights(R_INVESTIGATE|R_EVENT))	return
+		if(!check_rights(R_INVESTIGATE))	return
 
 		var/mob/M = locate(href_list["narrateto"])
 		usr.client.cmd_admin_direct_narrate(M)
@@ -1455,7 +1455,7 @@
 		src.access_news_network()
 
 	else if(href_list["vsc"])
-		if(check_rights(R_ADMIN|R_SERVER|R_EVENT))
+		if(check_rights(R_ADMIN|R_SERVER))
 			if(href_list["vsc"] == "airflow")
 				vsc.ChangeSettingsDialog(usr,vsc.settings)
 			if(href_list["vsc"] == "contam")
@@ -1464,7 +1464,7 @@
 				vsc.SetDefault(usr)
 
 	else if(href_list["toglang"])
-		if(check_rights(R_SPAWN|R_EVENT))
+		if(check_rights(R_SPAWN))
 			var/mob/M = locate(href_list["toglang"])
 			if(!istype(M))
 				to_chat(usr, "[M] is illegal type, must be /mob!")
