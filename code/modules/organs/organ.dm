@@ -522,12 +522,12 @@ var/global/list/ailment_reference_cache = list()
 	if(ispath(ailment, /datum/ailment))
 		for(var/datum/ailment/ext_ailment in ailments)
 			if(ailment == ext_ailment.type)
-				LAZYREMOVE(ailments, ext_ailment)
+				qdel(ext_ailment)
 				return TRUE
 	else if(istype(ailment))
 		for(var/datum/ailment/ext_ailment in ailments)
 			if(ailment == ext_ailment)
-				LAZYREMOVE(ailments, ext_ailment)
+				qdel(ext_ailment)
 				return TRUE
 	return FALSE
 
