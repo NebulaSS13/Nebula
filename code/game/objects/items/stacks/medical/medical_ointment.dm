@@ -27,10 +27,9 @@
 		to_chat(user, SPAN_WARNING("You must stand still to salve wounds."))
 		return 0
 	show_limb_salve_message(user, target, affecting)
-	use(1)
 	affecting.salve()
 	affecting.disinfect()
-	return 1
+	return 1 // consume 1 stack
 
 /obj/item/stack/medical/ointment/proc/show_limb_salve_message(mob/living/user, mob/living/target, obj/item/organ/external/affecting)
 	user.visible_message(
