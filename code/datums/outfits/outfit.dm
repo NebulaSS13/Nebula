@@ -209,16 +209,17 @@
 			W.update_icon()
 	H.update_icon()
 	H.set_id_info(W)
-	equip_pda(H, assignment, equip_adjustments)
+	equip_pda(H, id_pda_assignment || assignment, equip_adjustments)
 	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
 
-/decl/outfit/proc/equip_pda(var/mob/living/human/H, var/assignment, var/equip_adjustments)
+/decl/outfit/proc/equip_pda(var/mob/living/human/H, var/label_assignment, var/equip_adjustments)
 	if(!pda_slot || !pda_type)
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
 		return
 	var/obj/item/modular_computer/pda/pda = new pda_type(H)
+	pda.set_owner_rank_job(H.real_name, label_assignment)
 	if(H.equip_to_slot_or_store_or_drop(pda, pda_slot))
 		return pda
 
