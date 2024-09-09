@@ -129,7 +129,7 @@
 
 		if(emptied)
 			W.storage.finish_bulk_removal()
-			storage.update_ui_after_item_insertion(user)
+			storage.update_ui_after_item_insertion()
 			if(length(W.get_stored_inventory()))
 				to_chat(user, SPAN_NOTICE("You partially empty \the [W] into \the [src]'s hopper."))
 			else

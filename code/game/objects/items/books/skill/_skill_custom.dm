@@ -9,49 +9,49 @@
 	custom = TRUE
 	author = null
 	progress = 0
-	icon_state = "tb_white"
+	icon = 'icons/obj/items/books/book_white.dmi'
 	var/skill_option_string = "Skill" //changes to "continue writing content" when the book is in progress
 	var/true_author //Used to keep track of who is actually writing the book.
 	var/writing_time = 15 SECONDS // time it takes to write a segment of the book. This happens 6 times total
 
 //these all show up in the book fabricator
 /obj/item/book/skill/custom/circle
-	icon_state = "tb_white_circle"
+	icon = 'icons/obj/items/books/book_white_circle.dmi'
 /obj/item/book/skill/custom/star
-	icon_state = "tb_white_star"
+	icon = 'icons/obj/items/books/book_white_star.dmi'
 /obj/item/book/skill/custom/hourglass
-	icon_state = "tb_white_hourglass"
+	icon = 'icons/obj/items/books/book_white_hourglass.dmi'
 /obj/item/book/skill/custom/cracked
-	icon_state = "tb_white_cracked"
+	icon = 'icons/obj/items/books/book_white_cracked.dmi'
 /obj/item/book/skill/custom/gun
-	icon_state = "tb_white_gun"
+	icon = 'icons/obj/items/books/book_white_gun.dmi'
 /obj/item/book/skill/custom/wrench
-	icon_state = "tb_white_wrench"
+	icon = 'icons/obj/items/books/book_white_wrench.dmi'
 /obj/item/book/skill/custom/glass
-	icon_state = "tb_white_glass"
+	icon = 'icons/obj/items/books/book_white_glass.dmi'
 
 /obj/item/book/skill/custom/cross
-	icon_state = "tb_white_cross"
+	icon = 'icons/obj/items/books/book_white_cross.dmi'
 /obj/item/book/skill/custom/text
-	icon_state = "tb_white_text"
+	icon = 'icons/obj/items/books/book_white_text.dmi'
 /obj/item/book/skill/custom/download
-	icon_state = "tb_white_download"
+	icon = 'icons/obj/items/books/book_white_download.dmi'
 /obj/item/book/skill/custom/uparrow
-	icon_state = "tb_white_uparrow"
+	icon = 'icons/obj/items/books/book_white_uparrow.dmi'
 /obj/item/book/skill/custom/percent
-	icon_state = "tb_white_percent"
+	icon = 'icons/obj/items/books/book_white_percent.dmi'
 /obj/item/book/skill/custom/flask
-	icon_state = "tb_white_flask"
+	icon = 'icons/obj/items/books/book_white_flask.dmi'
 /obj/item/book/skill/custom/detective
-	icon_state = "tb_white_detective"
+	icon = 'icons/obj/items/books/book_white_detective.dmi'
 /obj/item/book/skill/custom/device
-	icon_state = "tb_white_device"
+	icon = 'icons/obj/items/books/book_white_device.dmi'
 /obj/item/book/skill/custom/smile
-	icon_state = "tb_white_smile"
+	icon = 'icons/obj/items/books/book_white_smile.dmi'
 /obj/item/book/skill/custom/exclamation
-	icon_state = "tb_white_exclamation"
+	icon = 'icons/obj/items/books/book_white_exclamation.dmi'
 /obj/item/book/skill/custom/question
-	icon_state = "tb_white_question"
+	icon = 'icons/obj/items/books/book_white_question.dmi'
 
 /obj/item/book/skill/custom/attackby(obj/item/pen, mob/user)
 	if(IS_PEN(pen))

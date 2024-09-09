@@ -1,6 +1,6 @@
 /obj/item/book/fluff/psionics
 	name = "Psychonetics"
-	icon_state = "foundation"
+	icon = 'mods/content/psionics/icons/psychonetics.dmi'
 	author = "John Titor"
 	title = "Psychonetics"
 	fluff_text = {"

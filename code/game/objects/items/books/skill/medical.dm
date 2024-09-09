@@ -3,11 +3,11 @@ MEDICAL
 */
 /obj/item/book/skill/medical
 	abstract_type = /obj/item/book/skill/medical
-	icon_state = "bookMedical"
+	icon = 'icons/obj/items/books/book_medical.dmi'
 
 //chemistry
 /obj/item/book/skill/medical/chemistry
-	icon_state = "chemistry"
+	icon = 'icons/obj/items/books/book_chemistry.dmi'
 	author = "Dr. Shinula Nyekundujicho"
 	skill = SKILL_CHEMISTRY
 

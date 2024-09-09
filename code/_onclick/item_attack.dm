@@ -29,14 +29,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		add_fingerprint(user)
 	return A.attackby(src, user, click_params)
 
-/atom/proc/attackby(obj/item/W, mob/user, var/click_params)
+/atom/proc/attackby(obj/item/used_item, mob/user, var/click_params)
 	if(storage)
-		if(isrobot(user) && (W == user.get_active_held_item()))
+		if(isrobot(user) && (used_item == user.get_active_held_item()))
 			return //Robots can't store their modules.
-		if(!storage.can_be_inserted(W, user))
+		if(!storage.can_be_inserted(used_item, user))
 			return
-		W.add_fingerprint(user)
-		return storage.handle_item_insertion(user, W)
+		used_item.add_fingerprint(user)
+		return storage.handle_item_insertion(user, used_item, click_params = click_params)
 	return FALSE
 
 /atom/movable/attackby(obj/item/W, mob/user)

@@ -1,7 +1,7 @@
 /obj/item/book
 	name = "book"
-	icon = 'icons/obj/library.dmi'
-	icon_state = "book"
+	icon = 'icons/obj/items/books/book.dmi'
+	icon_state = ICON_STATE_WORLD
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
@@ -40,6 +40,13 @@
 	. = ..()
 	if(SSpersistence.is_tracking(src, /decl/persistence_handler/book))
 		. = QDEL_HINT_LETMELIVE
+
+/obj/item/book/on_update_icon()
+	. = ..()
+	icon_state = get_world_inventory_state()
+	var/page_state = "[icon_state]-pages"
+	if(check_state_in_icon(page_state, icon))
+		add_overlay(overlay_image(icon, page_state, COLOR_WHITE, RESET_COLOR))
 
 /obj/item/book/proc/get_style_css()
 	return {"
@@ -180,18 +187,18 @@
 	. = pencode2html(.)
 
 /obj/item/book/printable_black
-	icon_state = "book1"
+	icon = 'icons/obj/items/books/book_printable_black.dmi'
 /obj/item/book/printable_red
-	icon_state = "book2"
+	icon = 'icons/obj/items/books/book_printable_red.dmi'
 /obj/item/book/printable_yellow
-	icon_state = "book3"
+	icon = 'icons/obj/items/books/book_printable_yellow.dmi'
 /obj/item/book/printable_blue
-	icon_state = "book4"
+	icon = 'icons/obj/items/books/book_printable_blue.dmi'
 /obj/item/book/printable_green
-	icon_state = "book5"
+	icon = 'icons/obj/items/books/book_printable_green.dmi'
 /obj/item/book/printable_purple
-	icon_state = "book6"
+	icon = 'icons/obj/items/books/book_printable_purple.dmi'
 /obj/item/book/printable_light_blue
-	icon_state = "book7"
+	icon = 'icons/obj/items/books/book_printable_light_blue.dmi'
 /obj/item/book/printable_magazine
-	icon_state = "bookMagazine"
+	icon = 'icons/obj/items/books/book_printable_magazine.dmi'

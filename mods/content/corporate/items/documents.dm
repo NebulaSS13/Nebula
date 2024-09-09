@@ -7,7 +7,7 @@
 /obj/item/book/fluff/nt_regs
 	name = "Corporate Regulations"
 	desc = "A set of corporate guidelines for employees of a megacorporation."
-	icon_state = "booknanoregs"
+	icon = 'mods/content/corporate/icons/corpregs.dmi'
 	author = "Employee Materials"
 	title = "Corporate Regulations"
 	fluff_text = "The book is empty..."

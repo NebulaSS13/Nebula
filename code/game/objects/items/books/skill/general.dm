@@ -6,7 +6,7 @@ GENERAL
 
 //eva
 /obj/item/book/skill/general/eva
-	icon_state = "evabook"
+	icon = 'icons/obj/items/books/book_eva.dmi'
 	skill = SKILL_EVA
 	author = "Big Dark"
 
@@ -27,7 +27,7 @@ GENERAL
 
 //mech
 /obj/item/book/skill/general/mech
-	icon_state = "tb_mech"
+	icon = 'icons/obj/items/books/book_mech.dmi'
 	skill = SKILL_MECH
 	author = "J.T. Marsh"
 
@@ -50,7 +50,7 @@ GENERAL
 /obj/item/book/skill/general/pilot
 	skill = SKILL_PILOT
 	author = "Sumi Shimamoto"
-	icon_state = "tb_pilot"
+	icon = 'icons/obj/items/books/book_pilot.dmi'
 
 /obj/item/book/skill/general/pilot/basic
 	name = "beginner piloting textbook"
@@ -71,7 +71,7 @@ GENERAL
 /obj/item/book/skill/general/hauling
 	skill = SKILL_HAULING
 	author = "Chiel Brunt"
-	icon_state = "tb_hauling"
+	icon = 'icons/obj/items/books/book_hauling.dmi'
 
 /obj/item/book/skill/general/hauling/basic
 	name = "beginner athletics textbook"
@@ -92,7 +92,7 @@ GENERAL
 /obj/item/book/skill/general/computer
 	skill = SKILL_COMPUTER
 	author = "Simona Castiglione"
-	icon_state = "bookNuclear"
+	icon = 'icons/obj/items/books/book_nuclear.dmi'
 
 /obj/item/book/skill/general/computer/basic
 	name = "beginner information technology textbook"

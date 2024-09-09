@@ -3,7 +3,7 @@ ENGINEERING
 */
 /obj/item/book/skill/engineering
 	abstract_type = /obj/item/book/skill/engineering
-	icon_state = "bookEngineering"
+	icon = 'icons/obj/items/books/book_engineering.dmi'
 
 //construction
 /obj/item/book/skill/engineering/construction/
@@ -78,7 +78,7 @@ ENGINEERING
 /obj/item/book/skill/engineering/atmos
 	skill = SKILL_ATMOS
 	author = "Maria Crash"
-	icon_state = "pipingbook"
+	icon = 'icons/obj/items/books/book_piping.dmi'
 
 /obj/item/book/skill/engineering/atmos/basic
 	name = "beginner atmospherics textbook"

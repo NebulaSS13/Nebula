@@ -10,7 +10,7 @@
 		var/list/contents = get_contents()
 		projector.set_slide(length(contents) ? contents[1] : null)
 
-/datum/storage/slide_projector/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
+/datum/storage/slide_projector/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update, click_params)
 	. = ..()
 	var/obj/item/slide_projector/projector = holder
 	if(. && istype(projector) && !projector.current_slide)
