@@ -7,7 +7,7 @@
 		return
 	key_to_ignore = ckey(sanitize(key_to_ignore))
 	if(prefs && prefs.ignored_players)
-		if(key_to_ignore in prefs.ignored_players && key_to_ignore != ckey)
+		if((key_to_ignore in prefs.ignored_players) && key_to_ignore != ckey)
 			to_chat(usr, "<span class='warning'>[key_to_ignore] is already being ignored.</span>")
 			return
 		prefs.ignored_players |= key_to_ignore
