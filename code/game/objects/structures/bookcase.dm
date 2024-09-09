@@ -120,6 +120,9 @@ var/global/list/station_bookcases = list()
 
 /obj/structure/bookcase/LateInitialize()
 	..()
+	if(storage && length(contents) > storage.storage_slots)
+		storage.storage_slots = length(contents)
+		storage.max_storage_space = storage.storage_slots * storage.max_w_class
 	update_icon()
 
 /obj/structure/bookcase/Destroy()
@@ -163,26 +166,26 @@ var/global/list/station_bookcases = list()
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
 
-/obj/structure/bookcase/manuals/medical/Initialize()
-	new /obj/item/book/manual/medical_diagnostics_manual(src)
-	new /obj/item/book/manual/medical_diagnostics_manual(src)
-	new /obj/item/book/manual/medical_diagnostics_manual(src)
-	new /obj/item/book/manual/chemistry_recipes(src)
-	. = ..()
+/obj/structure/bookcase/manuals/medical/WillContain()
+	return list(
+		/obj/item/book/manual/medical_diagnostics_manual = 3,
+		/obj/item/book/manual/chemistry_recipes          = 1
+	)
 
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
-/obj/structure/bookcase/manuals/engineering/Initialize()
-	new /obj/item/book/manual/engineering_construction(src)
-	new /obj/item/book/manual/engineering_particle_accelerator(src)
-	new /obj/item/book/manual/engineering_hacking(src)
-	new /obj/item/book/manual/engineering_guide(src)
-	new /obj/item/book/manual/atmospipes(src)
-	new /obj/item/book/manual/engineering_singularity_safety(src)
-	new /obj/item/book/manual/evaguide(src)
-	new /obj/item/book/manual/rust_engine(src)
-	. = ..()
+/obj/structure/bookcase/manuals/engineering/WillContain()
+	return list(
+		/obj/item/book/manual/engineering_construction,
+		/obj/item/book/manual/engineering_particle_accelerator,
+		/obj/item/book/manual/engineering_hacking,
+		/obj/item/book/manual/engineering_guide,
+		/obj/item/book/manual/atmospipes,
+		/obj/item/book/manual/engineering_singularity_safety,
+		/obj/item/book/manual/evaguide,
+		/obj/item/book/manual/rust_engine
+	)
 
 /obj/structure/bookcase/cart
 	name = "book cart"
