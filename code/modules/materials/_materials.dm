@@ -238,8 +238,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/list/basic_armor
 	var/armor_degradation_speed
 
+	// Allergen values, used by /mob/living and /datum/reagents
+	/// What allergens are present on this material?
+	var/allergen_flags  = ALLERGEN_NONE
+	var/allergen_factor = 2
+
 	// Copied reagent values. Todo: integrate.
-	var/allergen_flags = INGREDIENT_FLAG_PLAIN
 	var/taste_description
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
 	var/metabolism = REM // This would be 0.2 normally
@@ -848,9 +852,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
-// Major allergy - TODO: anaphylaxis, use stabilizer as epipen
+// Major allergy - handled by handle_allergens() on /mob/living by default.
 /decl/material/proc/apply_allergy_effects(mob/living/subject, removed, severity, ingestion_method)
-	subject.take_damage(removed * severity * 0.25, TOX)
+	if(allergen_factor > 0)
+		subject.add_chemical_effect(CE_ALLERGEN, removed * severity * allergen_factor)
+	else if(allergen_factor < 0)
+		subject.remove_chemical_effect(CE_ALLERGEN, removed * severity * allergen_factor)
 
 // Intolerance - TODO: more messages
 /decl/material/proc/apply_intolerance_effects(mob/living/subject, removed, severity, ingestion_method)

@@ -38,7 +38,7 @@
 /decl/material/liquid/drink/juice
 	uid = "chem_drink_juice"
 	fruit_descriptor = "sweet"
-	allergen_flags = INGREDIENT_FLAG_FRUIT
+	allergen_flags = ALLERGEN_FRUIT
 
 /decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -75,7 +75,7 @@
 
 	glass_name = "carrot juice"
 	glass_desc = "It is just like a carrot but without crunching."
-	allergen_flags = INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_VEGETABLE
 
 /decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -164,7 +164,7 @@
 
 	glass_name = "potato juice"
 	glass_desc = "Juice from a potato. Possibly the most boring drink in existence, other than water."
-	allergen_flags = INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_VEGETABLE
 
 /decl/material/liquid/drink/juice/garlic
 	name = "garlic juice"
@@ -176,7 +176,7 @@
 
 	glass_name = "garlic juice"
 	glass_desc = "Who would even drink juice from garlic?"
-	allergen_flags = INGREDIENT_FLAG_ALLIUM
+	allergen_flags = ALLERGEN_ALLIUM
 
 /decl/material/liquid/drink/juice/onion
 	name = "onion juice"
@@ -188,7 +188,7 @@
 
 	glass_name = "onion juice"
 	glass_desc = "Juice from an onion, for when you need to cry."
-	allergen_flags = INGREDIENT_FLAG_ALLIUM
+	allergen_flags = ALLERGEN_ALLIUM
 
 /decl/material/liquid/drink/juice/tomato
 	name = "tomato juice"
@@ -199,7 +199,7 @@
 
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
-	allergen_flags = INGREDIENT_FLAG_FRUIT | INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_FRUIT | ALLERGEN_VEGETABLE
 
 /decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -218,7 +218,7 @@
 
 	glass_name = "watermelon juice"
 	glass_desc = "Delicious juice made from watermelon."
-	allergen_flags = INGREDIENT_FLAG_FRUIT
+	allergen_flags = ALLERGEN_FRUIT
 
 /decl/material/liquid/drink/juice/turnip
 	name = "turnip juice"
@@ -229,7 +229,7 @@
 
 	glass_name = "turnip juice"
 	glass_desc = "Delicious (?) juice made from turnips."
-	allergen_flags = INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_VEGETABLE
 
 /decl/material/liquid/drink/juice/apple
 	name = "apple juice"
@@ -240,7 +240,7 @@
 
 	glass_name = "apple juice"
 	glass_desc = "Delicious juice made from apples."
-	allergen_flags = INGREDIENT_FLAG_FRUIT
+	allergen_flags = ALLERGEN_FRUIT
 
 /decl/material/liquid/drink/juice/pear
 	name = "pear juice"
@@ -251,7 +251,7 @@
 
 	glass_name = "pear juice"
 	glass_desc = "Delicious juice made from pears."
-	allergen_flags = INGREDIENT_FLAG_FRUIT
+	allergen_flags = ALLERGEN_FRUIT
 
 // Everything else
 
@@ -265,7 +265,7 @@
 
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
-	allergen_flags = INGREDIENT_FLAG_DAIRY
+	allergen_flags = ALLERGEN_DAIRY
 
 /decl/material/liquid/drink/milk/chocolate
 	name = "chocolate milk"
@@ -308,7 +308,7 @@
 	taste_description = "soy milk"
 	color = "#dfdfc7"
 	uid = "chem_drink_soymilk"
-	allergen_flags = INGREDIENT_FLAG_SOY
+	allergen_flags = ALLERGEN_SOY
 
 	glass_name = "soy milk"
 	glass_desc = "White and nutritious soy goodness!"
@@ -330,7 +330,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_coffee"
-	allergen_flags = INGREDIENT_FLAG_CAFFEINE
+	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 	var/list/flavour_modifiers = list()
 
 /decl/material/liquid/drink/coffee/Initialize()
@@ -506,7 +506,7 @@
 
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
-	allergen_flags = INGREDIENT_FLAG_DAIRY
+	allergen_flags = ALLERGEN_DAIRY
 
 /decl/material/liquid/drink/mutagencola
 	name = "mutagen cola"
@@ -523,7 +523,7 @@
 	glass_name = "mutagen cola"
 	glass_desc = "The unstable energy of a radioactive isotope in beverage form."
 	glass_special = list(DRINK_FIZZ)
-	allergen_flags = INGREDIENT_FLAG_CAFFEINE
+	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 
 /decl/material/liquid/drink/mutagencola/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -565,7 +565,7 @@
 	glass_name = "cola"
 	glass_desc = "A glass of refreshing cola."
 	glass_special = list(DRINK_FIZZ)
-	allergen_flags = INGREDIENT_FLAG_CAFFEINE
+	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 
 /decl/material/liquid/drink/citrussoda
 	name = "citrus soda"
@@ -634,7 +634,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_dryramen"
-	allergen_flags = INGREDIENT_FLAG_GLUTEN | INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_GLUTEN | ALLERGEN_VEGETABLE
 
 /decl/material/liquid/drink/hot_ramen
 	name = "hot ramen"
@@ -646,7 +646,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_hotramen"
-	allergen_flags = INGREDIENT_FLAG_GLUTEN | INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_GLUTEN | ALLERGEN_VEGETABLE
 
 /decl/material/liquid/drink/hell_ramen
 	name = "hell ramen"
@@ -657,7 +657,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_hellramen"
-	allergen_flags = INGREDIENT_FLAG_GLUTEN | INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_GLUTEN | ALLERGEN_VEGETABLE
 
 /decl/material/liquid/drink/hell_ramen/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -669,6 +669,7 @@
 
 /decl/material/liquid/drink/tea
 	abstract_type = /decl/material/liquid/drink/tea
+	allergen_flags = ALLERGEN_STIMULANT
 
 /decl/material/liquid/drink/tea/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied || glass_name
@@ -700,7 +701,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_blacktea"
-	allergen_flags = INGREDIENT_FLAG_CAFFEINE
+	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 
 /decl/material/liquid/drink/tea/black/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	if(prop.reagents.has_reagent(/decl/material/liquid/drink/juice/orange))
@@ -853,7 +854,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_energydrink"
-	allergen_flags = INGREDIENT_FLAG_CAFFEINE
+	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 
 /decl/material/liquid/drink/beastenergy/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -875,7 +876,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_kefir"
-	allergen_flags = INGREDIENT_FLAG_DAIRY
+	allergen_flags = ALLERGEN_DAIRY
 
 /decl/material/liquid/drink/compote
 	name = "compote"
@@ -888,4 +889,4 @@
 
 	glass_name = "Compote"
 	glass_desc = "Traditional dessert drink made from fruits or berries. Grandma would be proud."
-	allergen_flags = INGREDIENT_FLAG_FRUIT
+	allergen_flags = ALLERGEN_FRUIT

@@ -53,7 +53,7 @@
 	var/drying_state = "grown"
 
 	// Used to set allergens on growns.
-	var/allergen_flags = INGREDIENT_FLAG_VEGETABLE
+	var/allergen_flags = ALLERGEN_VEGETABLE
 
 /datum/seed/New()
 	update_growth_stages()

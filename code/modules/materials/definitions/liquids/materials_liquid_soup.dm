@@ -24,7 +24,7 @@
 
 /decl/material/liquid/nutriment/soup/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
 
-	var/allergen_flags = INGREDIENT_FLAG_PLAIN
+	var/allergen_flags = ALLERGEN_NONE
 	var/list/ingredients = list()
 
 	. = ..()

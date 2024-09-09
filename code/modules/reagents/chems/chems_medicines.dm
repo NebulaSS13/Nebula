@@ -180,6 +180,7 @@
 	value = 1.5
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_stimulants"
+	allergen_flags = ALLERGEN_STIMULANT
 
 /decl/material/liquid/stimulants/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -317,6 +318,7 @@
 /decl/material/liquid/stabilizer/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_STABLE)
+	M.remove_chemical_effect(CE_ALLERGEN)
 
 /decl/material/liquid/regenerator
 	name = "regenerative serum"

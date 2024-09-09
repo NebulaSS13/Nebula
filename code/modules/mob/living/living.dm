@@ -898,6 +898,14 @@ default behaviour is:
 	var/val = GET_CHEMICAL_EFFECT(src, chem)
 	. = (isnull(threshold_over) || val >= threshold_over) && (isnull(threshold_under) || val <= threshold_under)
 
+/mob/living/proc/remove_chemical_effect(var/effect, var/magnitude)
+	if(!isnull(magnitude))
+		magnitude = LAZYACCESS(chem_effects, effect) - magnitude
+	if(magnitude <= 0)
+		LAZYREMOVE(chem_effects, effect)
+	else
+		LAZYSET(chem_effects, effect, magnitude)
+
 /mob/living/proc/add_chemical_effect(var/effect, var/magnitude = 1)
 	magnitude += GET_CHEMICAL_EFFECT(src, effect)
 	LAZYSET(chem_effects, effect, magnitude)

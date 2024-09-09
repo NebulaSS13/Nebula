@@ -8,7 +8,7 @@
 /decl/recipe/soup/get_result_data(atom/container, list/used_ingredients)
 
 	. = list()
-	var/allergen_flags = INGREDIENT_FLAG_PLAIN
+	var/allergen_flags = ALLERGEN_NONE
 	var/list/taste_strings = list()
 	var/list/ingredients = list()
 	var/list/used_items = used_ingredients["items"]
@@ -88,7 +88,7 @@
 /decl/recipe/soup/stock/bone/get_result_data(atom/container, list/used_ingredients)
 	. = list()
 	.["soup_ingredients"] = list("marrow" = 1)
-	.["allergen_flags"] = INGREDIENT_FLAG_MEAT
+	.["allergen_flags"] = ALLERGEN_MEAT
 	.["taste"] = list("rich marrow" = 5)
 
 /decl/recipe/soup/simple

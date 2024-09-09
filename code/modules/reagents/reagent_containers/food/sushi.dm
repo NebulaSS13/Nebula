@@ -4,7 +4,7 @@
 	icon = 'icons/obj/sushi.dmi'
 	icon_state = "sushi_rice"
 	bitesize = 1
-	allergen_flags = INGREDIENT_FLAG_FISH
+	allergen_flags = ALLERGEN_FISH
 	var/fish_type = "fish"
 
 /obj/item/food/sushi/Initialize(mapload, material_key, skip_plate = FALSE, obj/item/food/rice, obj/item/food/topping)
@@ -61,7 +61,7 @@
 	bitesize = 1
 	slice_num = 1
 	slice_path = /obj/item/food/butchery/chopped
-	allergen_flags = INGREDIENT_FLAG_FISH
+	allergen_flags = ALLERGEN_FISH
 	var/fish_type = "fish"
 	var/slices = 1
 

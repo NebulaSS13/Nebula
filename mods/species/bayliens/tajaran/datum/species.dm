@@ -20,6 +20,8 @@
 	hidden_from_codex = FALSE
 	available_bodytypes = list(/decl/bodytype/feline)
 
+	traits = list(/decl/trait/malus/intolerance/caffeine = TRAIT_LEVEL_MAJOR)
+
 	preview_outfit = /decl/outfit/job/generic/engineer
 
 	spawn_flags = SPECIES_CAN_JOIN

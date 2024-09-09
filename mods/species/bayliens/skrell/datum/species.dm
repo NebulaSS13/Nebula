@@ -11,6 +11,8 @@
 		/decl/bodytype/skrell
 		)
 
+	traits = list(/decl/trait/malus/intolerance/protein = TRAIT_LEVEL_MINOR)
+
 	primitive_form = "Neaera"
 	unarmed_attacks = list(
 		/decl/natural_attack/stomp,
