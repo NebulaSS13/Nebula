@@ -343,6 +343,7 @@
 		PRINT_STACK_TRACE("rejuvenate() called on organ of type [type] with no owner.")
 	damage = 0
 	reset_status()
+	QDEL_NULL_LIST(ailments)
 	if(!ignore_organ_traits)
 		for(var/trait_type in owner.get_traits())
 			var/decl/trait/trait = GET_DECL(trait_type)
