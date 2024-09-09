@@ -247,7 +247,6 @@
 	desc = "Put in water to get space cleaner. Do not eat. Really."
 	icon_state = "pod21"
 	autolabel = FALSE
-	var/smell_clean_time = 10 MINUTES
 
 // Don't overwrite the custom name.
 /obj/item/chems/pill/detergent/update_container_name()
