@@ -58,6 +58,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(!ismob(user))
 		return TRUE
 
+	if(!QDELETED(used_item) && user.a_intent == I_HELP)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.get_target_zone())
+		if(length(E?.ailments))
+			for(var/datum/ailment/ailment in E.ailments)
+				if(ailment.treated_by_item(used_item))
+					ailment.was_treated_by_item(used_item, user, src)
+					return TRUE
+
 	if(user.a_intent != I_HURT)
 		if(can_operate(src, user) != OPERATE_DENY && used_item.do_surgery(src,user)) //Surgery
 			return TRUE
@@ -79,26 +87,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(used_item.get_attack_force(user) && istype(ai) && current_health < oldhealth)
 		ai.retaliate(user)
 
-/mob/living/human/attackby(obj/item/I, mob/user)
-
-	. = ..()
-	if(.)
-		if(user.a_intent != I_HELP)
-			return
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.get_target_zone())
-		if(!E)
-			return
-		for(var/datum/ailment/ailment in E.ailments)
-			if(ailment.treated_by_item(I))
-				ailment.was_treated_by_item(I, user, src)
-				return
-
-	else if(user == src && user.get_target_zone() == BP_MOUTH && can_devour(I, silent = TRUE))
+	if(!. && user == src && user.get_target_zone() == BP_MOUTH && can_devour(used_item, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
 			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
 		else
-			devour(I)
+			devour(used_item)
 		return TRUE
 
 

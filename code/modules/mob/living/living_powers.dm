@@ -105,7 +105,7 @@
 /**
  *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
  */
-/mob/living/proc/can_devour(atom/movable/victim)
+/mob/living/proc/can_devour(atom/movable/victim, silent = FALSE)
 	return FALSE
 
 /mob/living/verb/sniff_verb()
