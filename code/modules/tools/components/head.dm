@@ -5,7 +5,6 @@ var/global/list/_tool_properties_cache = list()
 	name = "tool head"
 	icon                     = 'icons/obj/items/tool/components/tool_head.dmi'
 	abstract_type            = /obj/item/tool_component/head
-	var/requires_handle_type = /obj/item/tool_component/handle/short
 
 	var/tool_type
 	var/list/tool_qualities
