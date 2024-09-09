@@ -6,25 +6,25 @@
 	abstract_type = /decl/material/liquid/drink
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Please, no more berry juice atmosphere planets.
 	compost_value = 1
+	nutriment_factor = 0
+	hydration_factor = 6
+	affect_blood_on_ingest = FALSE
 
-	var/nutrition = 0 // Per unit
-	var/hydration = 6 // Per unit
 	var/adj_dizzy = 0 // Per tick
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 
 /decl/material/liquid/drink/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.take_damage(removed, TOX) // Probably not a good idea; not very deadly though
 
 /decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
+
 	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
-	if(nutrition)
-		M.adjust_nutrition(nutrition * removed)
-	if(hydration)
-		M.adjust_hydration(hydration * removed)
 	ADJ_STATUS(M, STAT_DIZZY, adj_dizzy)
 	ADJ_STATUS(M, STAT_DROWSY, adj_drowsy)
 	ADJ_STATUS(M, STAT_ASLEEP, adj_sleepy)
@@ -158,7 +158,7 @@
 	name = "potato juice"
 	lore_text = "Juice of the potato."
 	taste_description = "starch"
-	nutrition = 2
+	nutriment_factor = 2
 	color = "#302000"
 	uid = "chem_drink_potato"
 
@@ -170,7 +170,7 @@
 	name = "garlic juice"
 	lore_text = "Who would even drink this?"
 	taste_description = "bad breath"
-	nutrition = 1
+	nutriment_factor = 1
 	color = "#eeddcc"
 	uid = "chem_drink_garlic"
 
@@ -182,7 +182,7 @@
 	name = "onion juice"
 	lore_text = "Juice from an onion, for when you need to cry."
 	taste_description = "stinging tears"
-	nutrition = 1
+	nutriment_factor = 1
 	color = "#ffeedd"
 	uid = "chem_drink_onion"
 
@@ -398,7 +398,7 @@
 	lore_text = "Made with love! And cocoa beans."
 	taste_description = "creamy chocolate"
 	color = "#403010"
-	nutrition = 2
+	nutriment_factor = 2
 	adj_temp = 5
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -629,7 +629,7 @@
 	name = "dry ramen"
 	lore_text = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
 	taste_description = "dry and cheap noodles"
-	nutrition = 1
+	nutriment_factor = 1
 	color = "#302000"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -641,7 +641,7 @@
 	lore_text = "The noodles are boiled, the flavors are artificial, just like being back in school."
 	taste_description = "wet and cheap noodles"
 	color = "#302000"
-	nutrition = 5
+	nutriment_factor = 5
 	adj_temp = 5
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -653,7 +653,7 @@
 	lore_text = "The noodles are boiled, the flavors are artificial, just like being back in school."
 	taste_description = "wet and cheap noodles on fire"
 	color = "#302000"
-	nutrition = 5
+	nutriment_factor = 5
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_drink_hellramen"

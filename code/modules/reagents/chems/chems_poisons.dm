@@ -12,6 +12,7 @@
 /decl/material/liquid/paralytics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/threshold = 2
 	var/dose = LAZYACCESS(M.chem_doses, type)
+	. = ..()
 	if(dose >= metabolism * threshold * 0.5)
 		SET_STATUS_MAX(M, STAT_CONFUSE, 2)
 		M.add_chemical_effect(CE_VOICELOSS, 1)
@@ -45,6 +46,7 @@
 	uid = "chem_pigment_presyncopics"
 
 /decl/material/liquid/presyncopics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/drug_strength = 4
 	ADJ_STATUS(M, STAT_DIZZY, drug_strength)
 	SET_STATUS_MAX(M, STAT_CONFUSE, drug_strength * 5)

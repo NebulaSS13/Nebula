@@ -105,8 +105,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/soup_hot_desc = "simmering"
 
-	var/affect_blood_on_ingest = TRUE
-	var/affect_blood_on_inhale = TRUE
+	var/affect_blood_on_ingest = 0.5
+	var/affect_blood_on_inhale = 0.75
 
 	var/narcosis = 0 // Not a great word for it. Constant for causing mild confusion when ingested.
 	var/toxicity = 0 // Organ damage from ingestion.
@@ -805,6 +805,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(M.status_flags & GODMODE)
 		return
 
@@ -852,6 +854,22 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
+/decl/material/proc/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+
+	SHOULD_CALL_PARENT(TRUE)
+
+	adjust_mob_nutrition(M, removed, holder, CHEM_INGEST)
+	if(affect_blood_on_ingest)
+		affect_blood(M, removed * affect_blood_on_ingest, holder)
+
+/decl/material/proc/affect_inhale(var/mob/living/M, var/removed, var/datum/reagents/holder)
+
+	SHOULD_CALL_PARENT(TRUE)
+
+	apply_intolerances(M, removed, holder, CHEM_INHALE)
+	if(affect_blood_on_inhale)
+		affect_blood(M, removed * affect_blood_on_inhale, holder)
+
 // Major allergy - handled by handle_allergens() on /mob/living by default.
 /decl/material/proc/apply_allergy_effects(mob/living/subject, removed, severity, ingestion_method)
 	if(allergen_factor > 0)
@@ -884,8 +902,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return 1
 
 	var/malus_level = 0
-	for(var/intolerance in intolerances)
-		malus_level = max(malus_level, subject.GetTraitLevel(intolerance))
+	for(var/decl/trait/intolerance as anything in intolerances)
+		malus_level = max(malus_level, subject.GetTraitLevel(intolerance.type))
 	if(!malus_level)
 		return 1
 
@@ -907,18 +925,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(effective_power)
 			subject.adjust_hydration(effective_power)
 
-/decl/material/proc/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	adjust_mob_nutrition(M, removed, holder, CHEM_INGEST)
-	if(affect_blood_on_ingest)
-		affect_blood(M, removed * 0.5, holder)
-
-/decl/material/proc/affect_inhale(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	apply_intolerances(M, removed, holder, CHEM_INHALE)
-	if(affect_blood_on_inhale)
-		affect_blood(M, removed * 0.75, holder)
-
 // Slightly different to other reagent processing - return TRUE to consume the removed amount, FALSE not to consume.
 /decl/material/proc/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+
+	SHOULD_CALL_PARENT(TRUE)
 
 	if(!istype(M))
 		return FALSE
