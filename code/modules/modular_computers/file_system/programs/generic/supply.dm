@@ -368,7 +368,7 @@
 		return "No Connection"
 
 	if(shuttle.has_arrive_time())
-		return "In transit ([shuttle.eta_seconds()] s)"
+		return "In transit ([shuttle.eta_readable()])"
 
 	if (shuttle.can_launch())
 		return "Docked"
