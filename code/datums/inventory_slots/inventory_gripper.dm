@@ -1,6 +1,5 @@
 /datum/inventory_slot/gripper
 	var/hand_sort_priority = 1
-	var/can_use_held_item = TRUE
 	var/dexterity = DEXTERITY_FULL
 	var/covering_slot_flags
 	/// If set, use this icon_state for the hand slot overlay; otherwise, use slot_id.

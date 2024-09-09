@@ -2,7 +2,6 @@
 	slot_name = "Mouth"
 	slot_id = BP_MOUTH
 	requires_organ_tag = BP_HEAD
-	can_use_held_item = FALSE
 	overlay_slot = BP_MOUTH
 	ui_label = "M"
 	hand_sort_priority = 3
