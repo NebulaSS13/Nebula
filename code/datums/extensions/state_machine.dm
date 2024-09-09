@@ -6,16 +6,15 @@ var/global/list/state_machines = list()
 		var/list/machines = global.state_machines["\ref[holder]"]
 		return islist(machines) && machines[base_type]
 
-/proc/add_state_machine(var/datum/holder, var/base_type, var/fsm_type)
-	if(istype(holder) && base_type)
+/proc/add_state_machine(var/datum/holder, var/datum/state_machine/fsm_type)
+	if(istype(holder) && fsm_type)
 		var/holder_ref = "\ref[holder]"
 		var/list/machines = global.state_machines[holder_ref]
 		if(!islist(machines))
 			machines = list()
 			global.state_machines[holder_ref] = machines
+		var/base_type = fsm_type::base_type
 		if(!machines[base_type])
-			if(!fsm_type)
-				fsm_type = base_type
 			var/datum/state_machine/machine = new fsm_type(holder)
 			machines[base_type] = machine
 			holder.has_state_machine = TRUE
