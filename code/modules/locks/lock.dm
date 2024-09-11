@@ -84,8 +84,8 @@
 		unlock(lock_data)
 		return TRUE
 	else if(prob(5 * unlock_power))
-		to_chat(user, SPAN_WARNING("You accidentally break \the [I]!"))
-		I.physically_destroyed()
+		to_chat(user, SPAN_WARNING("You accidentally damage \the [I]!"))
+		I.take_damage(rand(5,10))
 	else
 		to_chat(user, SPAN_WARNING("You fail to pick open \the [holder]."))
 	return FALSE
