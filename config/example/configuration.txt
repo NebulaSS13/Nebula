@@ -83,7 +83,7 @@
 #EVENT_FIRST_RUN [null,null,{"lower":80,"upper":100}]
 
 ## Determines if objectives are disabled. Valid values: none, verb, and all.
-OBJECTIVES_DISABLED all
+OBJECTIVES_DISABLED verb
 
 ##
 # GAME OPTIONS
@@ -97,10 +97,10 @@ OBJECTIVES_DISABLED all
 #ALIENS_ALLOWED
 
 ## Remove the # to allow people to leave public comments on each other's characters via the comments system. Uncomment to enable.
-#ALLOW_CHARACTER_COMMENTS
+ALLOW_CHARACTER_COMMENTS
 
 ## Allow multiple input keys to be pressed for diagonal movement.
-#ALLOW_DIAGONAL_MOVEMENT 1
+ALLOW_DIAGONAL_MOVEMENT
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
 #ANIMAL_DELAY 0
@@ -127,7 +127,7 @@ OBJECTIVES_DISABLED all
 #EXPANDED_ALT_INTERACTIONS
 
 ## Expected round length in hours.
-#EXPECTED_ROUND_LENGTH 3
+EXPECTED_ROUND_LENGTH 2
 
 ## Determines of ghosts are allowed to possess any animal. Uncomment to enable.
 #GHOSTS_CAN_POSSESS_ANIMALS
@@ -348,28 +348,28 @@ ROUNDSTART_LEVEL_GENERATION
 ## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
 ##  Uncomment to enable.
-#CONTINUOUS_ROUNDS
+CONTINUOUS_ROUNDS
 
 ## Spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard. Uncomment to enable.
 #FEATURE_OBJECT_SPELL_SYSTEM
 
 ## Allowed modes.
-#MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","spyvspy","traitor","wizard"]
+MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","spyvspy","traitor","wizard"]
 
 ## Mode names.
-#MODE_NAMES {"calamity":"Calamity","extended":"Extended","mercenary":"Mercenary","wizard":"Wizard","cult":"Cult","heist":"Heist","ninja":"Ninja","revolution":"Revolution","traitor":"Traitor","spyvspy":"Spy v. spy","crossfire":"Crossfire"}
+MODE_NAMES {"calamity":"Calamity","extended":"Extended","mercenary":"Mercenary","wizard":"Wizard","cult":"Cult","heist":"Heist","ninja":"Ninja","revolution":"Revolution","traitor":"Traitor","spyvspy":"Spy v. spy","crossfire":"Crossfire"}
 
 ## Relative probability of each mode.
-#PROBABILITIES {"calamity":0,"extended":1,"mercenary":1,"wizard":1,"cult":1,"heist":0,"ninja":0,"revolution":0,"traitor":0,"spyvspy":0,"crossfire":0}
+PROBABILITIES {"calamity":0,"extended":1,"mercenary":1,"wizard":1,"cult":0,"heist":0,"ninja":0,"revolution":0,"traitor":1,"spyvspy":0,"crossfire":0}
 
 ## If security is prohibited from being most antagonists. Uncomment to enable.
 #PROTECT_ROLES_FROM_ANTAGONIST
 
 ## If amount of traitors scales or not. Uncomment to enable.
-#TRAITOR_SCALING
+TRAITOR_SCALING
 
 ## A list of modes that should be votable.
-#VOTABLE_MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","secret","spyvspy","traitor","wizard"]
+VOTABLE_MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","secret","spyvspy","traitor","wizard"]
 
 ##
 # PROTECTED
@@ -437,7 +437,7 @@ ROUNDSTART_LEVEL_GENERATION
 #BAN_LEGACY_SYSTEM 1
 
 ## Sets the number of available character slots.
-#CHARACTER_SLOTS 10
+CHARACTER_SLOTS 40
 
 ## Sets the minimum number of cultists needed for ghosts to write in blood.
 #CULT_GHOSTWRITER_REQ_CULTISTS 10
@@ -504,7 +504,7 @@ ROUNDSTART_LEVEL_GENERATION
 #KICK_INACTIVE 0
 
 ## Sets the number of loadout slots per character.
-#LOADOUT_SLOTS 3
+LOADOUT_SLOTS 4
 
 ## Toggle for having jobs load up from the .txt Uncomment to enable.
 #LOAD_JOBS_FROM_TXT
@@ -551,7 +551,7 @@ ROUNDSTART_LEVEL_GENERATION
 #PLAYER_LIMIT 0
 
 ## Respawn delay in minutes before one may respawn as a crew member.
-#RESPAWN_DELAY 30
+RESPAWN_DELAY 5
 
 ## Set a server location for world reboot. Don't include the byond://, just give the address and port.
 #SERVER 
@@ -561,7 +561,7 @@ ROUNDSTART_LEVEL_GENERATION
 #SERVERURL 
 
 ## Server name: This appears at the top of the screen in-game.
-#SERVER_NAME Nebula 13
+SERVER_NAME Space Station 13: Polaris
 
 ## Determines how the server should handle whitelisting for ckeys. Whitelisted ckeys are found in 'config/whitelist.txt'. Set to 'none' for no whitelisting, 'jobs' to whitelist sensitive jobs, 'join' to whitelist joining the round (observing and OOC are still available, or 'connect' to whitelist access to the server. Valid values: none, jobs, join, and connect.
 #SERVER_WHITELIST none
@@ -616,10 +616,10 @@ USEALIENWHITELIST
 #VOTE_AUTOGAMEMODE_TIMELEFT 100
 
 ## Autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes).
-#VOTE_AUTOTRANSFER_INITIAL 108000
+VOTE_AUTOTRANSFER_INITIAL 72000
 
 ## Autovote delay (deciseconds) before sequential automatic transfer votes are called (default 30 minutes).
-#VOTE_AUTOTRANSFER_INTERVAL 18000
+#VOTE_AUTOTRANSFER_INTERVAL 36000
 
 ## Min delay (deciseconds) between voting sessions (default 10 minutes).
 #VOTE_DELAY 6000
