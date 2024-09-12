@@ -251,6 +251,7 @@
 		//TODO: leak to turf, doing pfshhhhh
 		if(prob(5))
 			burst()
+		else return 1
 
 	else return 1
 
