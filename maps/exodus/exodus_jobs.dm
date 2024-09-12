@@ -31,8 +31,6 @@
 		/datum/job/standard/computer
 	)
 
-	species_to_job_whitelist = list()
-
 #define HUMAN_ONLY_JOBS /datum/job/standard/captain, /datum/job/standard/hop, /datum/job/standard/hos
 	species_to_job_blacklist = list(
 		/decl/species/unathi = list(
