@@ -33172,12 +33172,12 @@
 /turf/floor/tiled/white,
 /area/exodus/medical/exam_room)
 "brY" = (
-/obj/item/cane/aluminium,
-/obj/item/cane/aluminium{
+/obj/item/cane,
+/obj/item/cane{
 	pixel_x = -3;
 	pixel_y = 2
 	},
-/obj/item/cane/aluminium{
+/obj/item/cane{
 	pixel_x = -6;
 	pixel_y = 4
 	},
@@ -83306,21 +83306,19 @@ aRB
 aRF
 aLF
 cLU
-bNB
-cLU
-cLU
-cLU
-cLU
-cLU
-cLU
-cLU
-cLU
-cLU
-cLU
-cLU
-cLU
 aQh
-cLU
+aQh
+aQh
+aQh
+aQh
+aQh
+aQh
+aQh
+aQh
+aQh
+aQh
+apc
+aGX
 cLU
 cLU
 cLU
