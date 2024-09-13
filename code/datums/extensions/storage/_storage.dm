@@ -42,8 +42,8 @@ var/global/list/_test_storage_items = list()
 	global._test_storage_items += src
 #endif
 
-	if(!istype(_holder))
-		PRINT_STACK_TRACE("Storage datum initialized with non-atom holder '[_holder || "NULL"].")
+	if(!istype(_holder, expected_type))
+		PRINT_STACK_TRACE("Storage datum initialized with non-[expected_type] holder '[_holder || "NULL"].")
 		qdel(src)
 		return
 

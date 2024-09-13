@@ -71,4 +71,5 @@
 
 /datum/state_machine/paper_fortune
 	current_state = /decl/state/paper_fortune/closed
-
+	expected_type = /obj/item/paper_fortune_teller
+	base_type = /datum/state_machine/paper_fortune

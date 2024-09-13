@@ -33,6 +33,7 @@
 	dat += "</div>"
 
 	dat += "<h4>Tag History:</h4>"
+	dat += "<a href='byond://?src=\ref[src];clear_previous_tags=1'>Clear History</a>"
 	dat += "<table style='width:100%; padding:4px;'><tr>"
 	var/cnt = 1
 	for(var/prevdest in last_used_tags)
@@ -69,6 +70,10 @@
 			. = TOPIC_REFRESH
 		else
 			. = TOPIC_HANDLED
+	else if(href_list["clear_previous_tags"])
+		clear_previous_tags()
+		to_chat(user, SPAN_NOTICE("You clear \the [src]'s tag history."))
+		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
 		interact(user)

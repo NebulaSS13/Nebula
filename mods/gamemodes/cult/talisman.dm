@@ -1,6 +1,5 @@
 /obj/item/paper/talisman
 	info = "<center><img src='talisman.png'></center><br/><br/>"
-	var/imbue = null
 
 /obj/item/paper/talisman/update_contents_overlays()
 	var/talisman_state = "[icon_state]-talisman"

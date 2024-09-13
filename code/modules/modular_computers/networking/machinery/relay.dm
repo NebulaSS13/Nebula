@@ -10,6 +10,11 @@
 	base_type = /obj/machinery/network/relay
 	produces_heat = FALSE // for convenience
 
+/obj/machinery/network/relay/RefreshParts()
+	. = ..()
+	var/datum/extension/network_device/broadcaster/relay/R = get_extension(src, /datum/extension/network_device)
+	R.cached_rating = null // regenerate cached value
+
 /obj/machinery/network/relay/ui_data(mob/user, ui_key)
 	var/data = ..()
 	var/datum/extension/network_device/broadcaster/relay/R = get_extension(src, /datum/extension/network_device)

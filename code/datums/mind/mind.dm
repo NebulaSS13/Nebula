@@ -283,7 +283,7 @@
 			if(!def_value)//If it's a custom objective, it will be an empty string.
 				def_value = "custom"
 
-		var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "mercenary", "capture", "custom")
+		var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "mercenary", "custom")
 		if (!new_obj_type) return
 
 		var/datum/objective/new_objective = null
@@ -341,7 +341,7 @@
 				new_objective = new /datum/objective/steal
 				new_objective.owner = src
 
-			if("download","capture")
+			if("download")
 				var/def_num
 				if(objective&&objective.type==text2path("/datum/objective/[new_obj_type]"))
 					def_num = objective.target_amount
@@ -354,9 +354,6 @@
 					if("download")
 						new_objective = new /datum/objective/download
 						new_objective.explanation_text = "Download [target_number] research levels."
-					if("capture")
-						new_objective = new /datum/objective/capture
-						new_objective.explanation_text = "Accumulate [target_number] capture points."
 				new_objective.owner = src
 				new_objective.target_amount = target_number
 
@@ -366,6 +363,8 @@
 				new_objective = new /datum/objective
 				new_objective.owner = src
 				new_objective.explanation_text = expl
+			else
+				PRINT_STACK_TRACE("ERROR: Unrecognized objective type [new_obj_type]")
 
 		if (!new_objective) return
 

@@ -128,7 +128,7 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 // Returns the smelliest reagent of a reagent holder.
 /proc/get_smelliest_reagent(var/datum/reagents/holder)
 	var/decl/material/smelliest
-	var/decl/material/scent_intensity
+	var/scent_intensity
 	if(!holder || !holder.total_volume)
 		return
 	for(var/reagent_type in holder.reagent_volumes)

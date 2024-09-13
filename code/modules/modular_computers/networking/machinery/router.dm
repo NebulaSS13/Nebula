@@ -14,6 +14,11 @@
 		initial_network_id = "network[random_id(type, 100, 999)]"
 	. = ..()
 
+/obj/machinery/network/router/RefreshParts()
+	. = ..()
+	var/datum/extension/network_device/broadcaster/router/R = get_extension(src, /datum/extension/network_device)
+	R.cached_rating = null // regenerate cached value
+
 /obj/machinery/network/router/ui_data(mob/user, ui_key)
 	var/data = ..()
 	var/datum/extension/network_device/broadcaster/router/R = get_extension(src, /datum/extension/network_device)
@@ -31,7 +36,7 @@
 		if(R)
 			R.allow_wifi = !R.allow_wifi
 			return TOPIC_REFRESH
-	
+
 	. = ..()
 
 /obj/machinery/network/router/update_network_status()

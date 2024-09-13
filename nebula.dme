@@ -781,7 +781,6 @@
 #include "code\game\gamemodes\objectives\_objective.dm"
 #include "code\game\gamemodes\objectives\objective_assassinate.dm"
 #include "code\game\gamemodes\objectives\objective_brig.dm"
-#include "code\game\gamemodes\objectives\objective_capture.dm"
 #include "code\game\gamemodes\objectives\objective_debrain.dm"
 #include "code\game\gamemodes\objectives\objective_demote.dm"
 #include "code\game\gamemodes\objectives\objective_download.dm"

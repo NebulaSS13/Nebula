@@ -1,6 +1,7 @@
 /datum/state_machine/turret
 	current_state = /decl/state/turret/idle
 	expected_type = /obj/machinery/turret
+	base_type = /datum/state_machine/turret
 
 /decl/state/turret
 	var/ray_color = "#ffffffff" // Turrets have a visual indicator of their current state.

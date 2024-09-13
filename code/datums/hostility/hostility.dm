@@ -59,5 +59,5 @@
 		var/mob/living/L = target
 		if(iscuffed(L))
 			return FALSE
-		return L.assess_perp(holder, access_security, check_weapons, check_no_record, check_wanted) < threat_level_threshold
+		return L.assess_perp(holder, access_check, check_weapons, check_no_record, check_wanted) < threat_level_threshold
 	return FALSE

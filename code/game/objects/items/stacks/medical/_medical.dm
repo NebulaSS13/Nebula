@@ -59,7 +59,7 @@
 		return TRUE
 
 	// If they have organs, we try to treat a specific organ being targeted.
-	if(length(target.get_organs()))
+	if(target.has_organs())
 
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, user.get_target_zone())
 		if(!affecting)

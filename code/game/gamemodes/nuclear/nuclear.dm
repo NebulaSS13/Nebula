@@ -22,13 +22,6 @@ var/global/list/nuke_disks = list()
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 
-//checks if L has a nuke disk on their person
-/decl/game_mode/nuclear/proc/check_mob(mob/living/L)
-	for(var/obj/item/disk/nuclear/N in nuke_disks)
-		if(N.storage_depth(L) >= 0)
-			return TRUE
-	return FALSE
-
 /decl/game_mode/nuclear/declare_completion()
 	var/decl/special_role/merc = GET_DECL(/decl/special_role/mercenary)
 	if(get_config_value(/decl/config/enum/objectives_disabled) == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
