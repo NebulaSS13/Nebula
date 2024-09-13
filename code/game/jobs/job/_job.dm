@@ -136,8 +136,8 @@
 	var/background_mod =   0
 	var/background_count = 0
 	for(var/token in H.background_info)
-		var/decl/background_detail/background = GET_DECL(H.background_info[token])
-		if(istype(background) && !isnull(background.economic_power))
+		var/decl/background_detail/background = H.get_background_datum(token)
+		if(!isnull(background?.economic_power))
 			background_count++
 			background_mod += background.economic_power
 	if(background_count)
