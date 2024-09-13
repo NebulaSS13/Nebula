@@ -123,20 +123,20 @@
 	. ||= outfit_type
 	return GET_DECL(.)
 
-/datum/job/proc/create_cash_on_hand(var/mob/living/human/H, var/datum/money_account/M)
-	if(!istype(M) || !H.client?.prefs?.starting_cash_choice)
+/datum/job/proc/create_cash_on_hand(var/mob/living/human/worker, var/datum/money_account/account)
+	if(!istype(account) || !worker.client?.prefs?.starting_cash_choice)
 		return 0
-	for(var/obj/item/thing in H.client.prefs.starting_cash_choice.get_cash_objects(H, M))
+	for(var/obj/item/thing in worker.client.prefs.starting_cash_choice.get_cash_objects(worker, account))
 		. += thing.get_base_value()
-		H.equip_to_storage_or_put_in_hands(thing)
+		worker.equip_to_storage_or_put_in_hands(thing)
 
-/datum/job/proc/get_total_starting_money(var/mob/living/human/H)
+/datum/job/proc/get_total_starting_money(var/mob/living/human/worker)
 	. = 4 * rand(75, 100) * economic_power
 	// Get an average economic power for our background.
 	var/background_mod =   0
 	var/background_count = 0
-	for(var/token in H.background_info)
-		var/decl/background_detail/background = H.get_background_datum(token)
+	for(var/token in worker.background_info)
+		var/decl/background_detail/background = worker.get_background_datum(token)
 		if(!isnull(background?.economic_power))
 			background_count++
 			background_mod += background.economic_power
@@ -146,38 +146,38 @@
 	// Apply other mods.
 	. *= global.using_map.salary_modifier
 	// Apply a 50% bonus per skill level above minimum.
-	. *= 1 + 2 * (H.get_skill_value(SKILL_FINANCE) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
+	. *= 1 + 2 * (worker.get_skill_value(SKILL_FINANCE) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
 	. = round(.)
 
-/datum/job/proc/setup_account(var/mob/living/human/H)
-	if(!account_allowed || (H.mind && H.mind.initial_account))
+/datum/job/proc/setup_account(var/mob/living/human/worker)
+	if(!account_allowed || worker.mind?.initial_account)
 		return
 
 	// Calculate our pay and apply all relevant modifiers.
-	var/money_amount = get_total_starting_money(H)
+	var/money_amount = get_total_starting_money(worker)
 	if(money_amount <= 0)
 		return // You are too poor for an account.
 
 	//give them an account in the station database
-	var/datum/money_account/M = create_account("[H.real_name]'s account", H.real_name, money_amount)
-	var/cash_on_hand = create_cash_on_hand(H, M)
+	var/datum/money_account/account = create_account("[worker.real_name]'s account", worker.real_name, money_amount)
+	var/cash_on_hand = create_cash_on_hand(worker, account)
 	// Store their financial info.
-	if(H.mind)
+	if(worker.mind)
 		var/remembered_info = ""
-		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
-		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-		remembered_info += "<b>Your account funds are:</b> [M.format_value_by_currency(M.money)]<br>"
-		if(M.transaction_log.len)
-			var/datum/transaction/T = M.transaction_log[1]
+		remembered_info += "<b>Your account number is:</b> #[account.account_number]<br>"
+		remembered_info += "<b>Your account pin is:</b> [account.remote_access_pin]<br>"
+		remembered_info += "<b>Your account funds are:</b> [account.format_value_by_currency(account.money)]<br>"
+		if(account.transaction_log.len)
+			var/datum/transaction/T = account.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
 		if(cash_on_hand > 0)
 			var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
 			remembered_info += "<b>Your cash on hand is:</b> [cur.format_value(cash_on_hand)]<br>"
-		H.StoreMemory(remembered_info, /decl/memory_options/system)
-		H.mind.initial_account = M
-		for(var/obj/item/card/id/I in H.GetIdCards())
+		worker.StoreMemory(remembered_info, /decl/memory_options/system)
+		worker.mind.initial_account = account
+		for(var/obj/item/card/id/I in worker.GetIdCards())
 			if(!I.associated_account_number)
-				I.associated_account_number = M.account_number
+				I.associated_account_number = account.account_number
 				break
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
