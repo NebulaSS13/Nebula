@@ -3,7 +3,7 @@ RESEARCH
 */
 /obj/item/book/skill/research
 	abstract_type = /obj/item/book/skill/research
-	icon_state = "analysis"
+	icon = 'icons/obj/items/books/book_analysis.dmi'
 
 //devices
 /obj/item/book/skill/research/devices

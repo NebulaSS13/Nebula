@@ -193,7 +193,7 @@ var/global/list/_test_storage_items = list()
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/datum/storage/proc/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
+/datum/storage/proc/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update, click_params)
 	if(!istype(W))
 		return 0
 	if(ismob(W.loc))
@@ -221,7 +221,7 @@ var/global/list/_test_storage_items = list()
 		// Run this regardless of update flag, as it impacts our remaining storage space.
 		consolidate_stacks()
 		if(!skip_update)
-			update_ui_after_item_insertion()
+			update_ui_after_item_insertion(W, click_params)
 	holder.storage_inserted()
 	if(!skip_update)
 		holder.update_icon()
@@ -250,11 +250,11 @@ var/global/list/_test_storage_items = list()
 		if(!stack.amount || QDELETED(stack))
 			stacks -= stack
 
-/datum/storage/proc/update_ui_after_item_insertion()
+/datum/storage/proc/update_ui_after_item_insertion(obj/item/inserted, click_params)
 	prepare_ui()
 	storage_ui?.on_insertion()
 
-/datum/storage/proc/update_ui_after_item_removal()
+/datum/storage/proc/update_ui_after_item_removal(obj/item/removed)
 	prepare_ui()
 	storage_ui?.on_post_remove()
 
@@ -272,7 +272,7 @@ var/global/list/_test_storage_items = list()
 		W.reset_plane_and_layer()
 	W.forceMove(new_location)
 	if(!skip_update)
-		update_ui_after_item_removal()
+		update_ui_after_item_removal(W)
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
@@ -286,7 +286,7 @@ var/global/list/_test_storage_items = list()
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /datum/storage/proc/on_item_post_deletion(obj/item/W)
-	update_ui_after_item_removal()
+	update_ui_after_item_removal(W)
 	holder?.queue_icon_update()
 
 //Run once after using remove_from_storage with skip_update = 1

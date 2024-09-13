@@ -24,7 +24,7 @@
 	return TRUE
 
 // Modified handle_item_insertion.  Would prefer not to, but...
-/datum/storage/sheets/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
+/datum/storage/sheets/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update, click_params)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
 		return FALSE

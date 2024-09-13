@@ -268,16 +268,16 @@ Skill books that increase your skills while you activate and hold them
 	)
 
 //give me ALL the textbooks
-/obj/structure/bookcase/skill_books/all/Initialize()
-	. = ..()
+/obj/structure/bookcase/skill_books/all/WillContain()
+	. = list()
 	for(var/category in catalogue)
 		for(var/real_book in subtypesof(category))
-			new real_book(src)
+			. |= real_book
 
 //Bookshelf with some random textbooks
-/obj/structure/bookcase/skill_books/random/Initialize()
-	. = ..()
+/obj/structure/bookcase/skill_books/random/WillContain()
+	. = list()
 	for(var/category in catalogue)
 		for(var/real_book in subtypesof(category))
 			if(prob(20))
-				new real_book(src)
+				. |= real_book

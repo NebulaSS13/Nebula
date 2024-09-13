@@ -6,7 +6,7 @@ SERVICE
 
 //botany
 /obj/item/book/skill/service/botany
-	icon_state = "bookHydroponicsPodPeople"
+	icon = 'icons/obj/items/books/book_hydroponics.dmi'
 	skill = SKILL_BOTANY
 	author = "Mai Dong Chat"
 
@@ -27,7 +27,7 @@ SERVICE
 
 //cooking
 /obj/item/book/skill/service/cooking
-	icon_state = "barbook"
+	icon = 'icons/obj/items/books/book_bartending.dmi'
 	skill = SKILL_COOKING
 	author = "Lavinia Burrows"
 

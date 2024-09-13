@@ -10,7 +10,7 @@ ORGANIZATIONAL
 
 /obj/item/book/skill/organizational/literacy/basic
 	name = "alphabet book"
-	icon_state = "tb_literacy"
+	icon = 'icons/obj/items/books/book_literacy.dmi'
 	author = "Dorothy Mulch"
 	custom = TRUE
 	w_class = ITEM_SIZE_NORMAL // A little bit smaller c:
@@ -20,7 +20,7 @@ ORGANIZATIONAL
 /obj/item/book/skill/organizational/finance
 	skill = SKILL_FINANCE
 	author = "Cadence Bennett"
-	icon_state = "tb_finance"
+	icon = 'icons/obj/items/books/book_finance.dmi'
 
 /obj/item/book/skill/organizational/finance/basic
 	name = "beginner finance textbook"

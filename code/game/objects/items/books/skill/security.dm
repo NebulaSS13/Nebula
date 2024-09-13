@@ -3,13 +3,13 @@ SECURITY
 */
 /obj/item/book/skill/security
 	abstract_type = /obj/item/book/skill/security
-	icon_state = "bookSpaceLaw"
+	icon = 'icons/obj/items/books/book_law.dmi'
 
 //combat
 /obj/item/book/skill/security/combat
 	skill = SKILL_COMBAT
 	author = "Autumn Eckhardstein"
-	icon_state = "tb_combat"
+	icon = 'icons/obj/items/books/book_combat.dmi'
 
 /obj/item/book/skill/security/combat/basic
 	name = "beginner close combat textbook"
@@ -30,7 +30,7 @@ SECURITY
 /obj/item/book/skill/security/weapons
 	skill = SKILL_WEAPONS
 	author = "Miho Tatsu"
-	icon_state = "tb_weapon"
+	icon = 'icons/obj/items/books/book_weapon.dmi'
 
 /obj/item/book/skill/security/weapons/basic
 	name = "beginner weapons expertise textbook"
@@ -49,7 +49,7 @@ SECURITY
 
 //forensics
 /obj/item/book/skill/security/forensics
-	icon_state = "bookDetective"
+	icon = 'icons/obj/items/books/book_detective.dmi'
 	skill = SKILL_FORENSICS
 	author = "Samuel Vimes"
 

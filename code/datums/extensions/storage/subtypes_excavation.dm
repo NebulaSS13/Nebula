@@ -5,7 +5,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	use_to_pickup = 1
 
-/datum/storage/excavation/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
+/datum/storage/excavation/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update, click_params)
 	. = ..()
 	var/obj/item/excavation/picks = holder
 	if(istype(picks))

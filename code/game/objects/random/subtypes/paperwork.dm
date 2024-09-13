@@ -1,7 +1,7 @@
 /obj/random/single/textbook
 	name = "random textbook"
-	icon = 'icons/obj/library.dmi'
-	icon_state = "book"
+	icon = 'icons/obj/items/books/book.dmi'
+	icon_state = ICON_STATE_WORLD
 	spawn_object = /obj/item/book/skill //Further randomization of which book is handled inside the book initialization
 	spawn_nothing_percentage = 0
 

@@ -23,8 +23,7 @@
 	for(var/i = 1, i <= order.multiplier, i++)
 		var/obj/item/book/skill/custom/new_item = new path(location)
 		if(colorable)
-			new_item.color =  order.get_data("selected_color", COLOR_WHITE)
-			new_item.overlays += overlay_image('icons/obj/library.dmi', "tb_over_pages", null, RESET_COLOR)
+			new_item.set_color(order.get_data("selected_color", COLOR_WHITE))
 		. += new_item
 
 /obj/machinery/fabricator/book/get_color_list()

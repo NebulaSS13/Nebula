@@ -1,6 +1,6 @@
 /obj/item/book/fluff/anomaly_spectroscopy
 	name = "Spectroscopy: Analysing the Anomalies of the Cosmos"
-	icon_state = "anomaly"
+	icon = 'icons/obj/items/books/book_anomaly.dmi'
 	author = "Doctor Martin Boyle, Director Research at the Lower Hydrolian Sector Listening Array"
 	title = "Spectroscopy: Analysing the Anomalies of the Cosmos"
 	fluff_text = {"
@@ -12,7 +12,7 @@
 
 /obj/item/book/fluff/materials_chemistry_analysis
 	name = "Materials Analysis and the Chemical Implications"
-	icon_state = "chemistry"
+	icon = 'icons/obj/items/books/book_chemistry_alt.dmi'
 	author = "Jasper Pascal, Senior Lecturer in Materials Analysis at the University of Jol'Nar"
 	title = "Materials Analysis and the Chemical Implications"
 	fluff_text = {"
@@ -27,7 +27,7 @@
 
 /obj/item/book/fluff/anomaly_testing
 	name = "Anomalous Materials and Energies"
-	icon_state = "triangulate"
+	icon = 'icons/obj/items/books/book_triangulate.dmi'
 	author = "Norman York, formerly of the Tyrolion Institute on Titan"
 	title = "Anomalous Materials and Energies"
 	fluff_text = {"
@@ -88,7 +88,7 @@
 
 /obj/item/book/fluff/stasis
 	name = "Cellular Suspension, the New Cryogenics?"
-	icon_state = "stasis"
+	icon = 'icons/obj/items/books/book_stasis.dmi'
 	author = "Elvin Schmidt"
 	title = "Cellular Suspension, the New Cryogenics?"
 	fluff_text = {"

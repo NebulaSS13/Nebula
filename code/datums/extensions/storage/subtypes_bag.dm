@@ -3,7 +3,7 @@
 	allow_quick_empty = 1
 	use_to_pickup = 1
 
-/datum/storage/bag/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update)
+/datum/storage/bag/handle_item_insertion(mob/user, obj/item/W, prevent_warning, skip_update, click_params)
 	. = ..()
 	if(. && istype(holder, /obj/item/bag))
 		var/obj/item/bag/bag = holder
