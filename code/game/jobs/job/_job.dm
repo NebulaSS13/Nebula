@@ -145,7 +145,8 @@
 	. *= background_mod
 	// Apply other mods.
 	. *= global.using_map.salary_modifier
-	. *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
+	// Apply a 50% bonus per skill level above minimum.
+	. *= 1 + 2 * (H.get_skill_value(SKILL_FINANCE) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
 	. = round(.)
 
 /datum/job/proc/setup_account(var/mob/living/human/H)
