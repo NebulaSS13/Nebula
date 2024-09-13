@@ -10,7 +10,7 @@
 	/// The number of times this object and its ancestors have been grilled. Used for grown foods' roasted chems.
 	var/backyard_grilling_count        = 0
 	/// Is this ingredient considered meat, fish, veg, etc
-	var/ingredient_flags = INGREDIENT_FLAG_PLAIN
+	var/allergen_flags = ALLERGEN_NONE
 
 /obj/item/food/get_dried_product()
 	drop_plate(get_turf(loc))

@@ -8,7 +8,7 @@
 /decl/recipe/soup/get_result_data(atom/container, list/used_ingredients)
 
 	. = list()
-	var/soup_flags = INGREDIENT_FLAG_PLAIN
+	var/allergen_flags = ALLERGEN_NONE
 	var/list/taste_strings = list()
 	var/list/ingredients = list()
 	var/list/used_items = used_ingredients["items"]
@@ -21,7 +21,7 @@
 			if(istype(food))
 				for(var/taste in food_tastes)
 					taste_strings[taste] = max(taste_strings[taste], food_tastes[taste])
-				soup_flags |= food.ingredient_flags
+				allergen_flags |= food.allergen_flags
 
 		if(locate(/obj/item/food/grown) in used_items)
 			for(var/obj/item/food/grown/veg in used_items)
@@ -48,16 +48,16 @@
 		if(length(precursor_ingredients))
 			for(var/ingredient in precursor_ingredients)
 				ingredients[ingredient] += precursor_ingredients[ingredient]
-		var/precursor_soup_flags = LAZYACCESS(precursor_data, "soup_flags")
-		if(precursor_soup_flags)
-			soup_flags |= precursor_soup_flags
+		var/precursor_allergen_flags = LAZYACCESS(precursor_data, "allergen_flags")
+		if(precursor_allergen_flags)
+			allergen_flags |= precursor_allergen_flags
 
 	if(length(taste_strings))
 		.["taste"] = taste_strings
 	if(length(ingredients))
 		.["soup_ingredients"] = ingredients
-	if(soup_flags)
-		.["soup_flags"] = soup_flags
+	if(allergen_flags)
+		.["allergen_flags"] = allergen_flags
 
 /decl/recipe/soup/stock
 	abstract_type = /decl/recipe/soup/stock
@@ -88,7 +88,7 @@
 /decl/recipe/soup/stock/bone/get_result_data(atom/container, list/used_ingredients)
 	. = list()
 	.["soup_ingredients"] = list("marrow" = 1)
-	.["soup_flags"] = INGREDIENT_FLAG_MEAT
+	.["allergen_flags"] = ALLERGEN_MEAT
 	.["taste"] = list("rich marrow" = 5)
 
 /decl/recipe/soup/simple

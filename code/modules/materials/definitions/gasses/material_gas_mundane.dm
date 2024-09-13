@@ -62,6 +62,7 @@
 /decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(!istype(M))
 		return
+	. = ..()
 	var/warning_message
 	var/warning_prob = 10
 	var/dosage = LAZYACCESS(M.chem_doses, type)
@@ -135,6 +136,7 @@
 	value = 0.25
 
 /decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)
@@ -258,6 +260,7 @@
 	value = 0.25
 
 /decl/material/gas/xenon/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)

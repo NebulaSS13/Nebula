@@ -4,7 +4,7 @@
 
 	/// Decorative string. 'beef', 'chicken', 'lamb', etc. Uses mob name if unset.
 	var/meat_name         = "meat"
-	var/meat_flags        = INGREDIENT_FLAG_MEAT
+	var/meat_flags        = ALLERGEN_MEAT
 
 	var/meat_type         = /obj/item/food/butchery/meat
 	var/meat_material     = /decl/material/solid/organic/meat

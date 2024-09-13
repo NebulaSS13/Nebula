@@ -11,31 +11,31 @@
 		. = prop.reagents.reagent_data["mask_name"]
 	return . || ..()
 
-/decl/material/liquid/nutriment/soup/initialize_data(var/newdata)
-	var/list/ingredients = LAZYACCESS(newdata, "soup_ingredients")
+/decl/material/liquid/nutriment/soup/initialize_data(list/newdata)
+	. = ..()
+	var/list/ingredients = LAZYACCESS(., "soup_ingredients")
 	if(length(ingredients))
 		ingredients = sortTim(ingredients, /proc/cmp_numeric_dsc, associative = TRUE)
-		LAZYSET(newdata, "soup_ingredients", ingredients)
+		LAZYSET(., "soup_ingredients", ingredients)
 		var/list/name_ingredients = ingredients.Copy()
 		if(length(name_ingredients) > 3)
 			name_ingredients.Cut(4)
-		newdata["mask_name"] = "[english_list(name_ingredients)] [mask_name_suffix]"
-	return newdata
+		.["mask_name"] = "[english_list(name_ingredients)] [mask_name_suffix]"
 
 /decl/material/liquid/nutriment/soup/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
 
-	var/soup_flags = INGREDIENT_FLAG_PLAIN
+	var/allergen_flags = ALLERGEN_NONE
 	var/list/ingredients = list()
 
 	. = ..()
 	if(islist(.) && length(.))
-		soup_flags |= .["soup_flags"]
+		allergen_flags |= .["allergen_flags"]
 		var/list/old_ingredients = .["soup_ingredients"]
 		for(var/ingredient in old_ingredients)
 			ingredients[ingredient] += old_ingredients[ingredient]
 
 	if(islist(newdata) && length(newdata))
-		soup_flags |= newdata["soup_flags"]
+		allergen_flags |= newdata["allergen_flags"]
 		var/list/new_ingredients = newdata["soup_ingredients"]
 		for(var/ingredient in new_ingredients)
 			ingredients[ingredient] += new_ingredients[ingredient]
@@ -50,10 +50,10 @@
 	else
 		LAZYREMOVE(., "mask_name")
 
-	if(soup_flags)
-		LAZYSET(., "soup_flags", soup_flags)
+	if(allergen_flags)
+		LAZYSET(., "allergen_flags", allergen_flags)
 	else
-		LAZYREMOVE(., "soup_flags")
+		LAZYREMOVE(., "allergen_flags")
 
 /decl/material/liquid/nutriment/soup/stock
 	name              = "broth"

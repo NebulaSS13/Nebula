@@ -20,11 +20,10 @@
 	color = "#9eefff"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // No sap air.
 	uid = "chem_glowsap"
-
-/decl/material/liquid/glowsap/affect_ingest(mob/living/M, removed, var/datum/reagents/holder)
-	affect_blood(M, removed, holder)
+	affect_blood_on_ingest = 1
 
 /decl/material/liquid/glowsap/affect_blood(mob/living/M, removed, var/datum/reagents/holder)
+	. = ..()
 	M.add_chemical_effect(CE_GLOWINGEYES, 1)
 	if(ishuman(M))
 		var/mob/living/human/H = M
@@ -78,6 +77,7 @@
 	uid = "chem_frostoil"
 
 /decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
 		M.emote(/decl/emote/visible/shiver)
@@ -106,9 +106,11 @@
 	var/slime_temp_adj = 10
 
 /decl/material/liquid/capsaicin/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.take_damage(0.5 * removed, TOX)
 
 /decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
 	if(M.has_trait(/decl/trait/metabolically_inert))
@@ -148,6 +150,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/eyes_covered = 0
 	var/mouth_covered = 0
 	var/partial_mouth_covered = 0
@@ -200,6 +203,7 @@
 	return TRUE
 
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
 	if(M.has_trait(/decl/trait/metabolically_inert))
@@ -227,18 +231,21 @@
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_mutagenics"
+	affect_blood_on_ingest = FALSE
 
 /decl/material/liquid/mutagenics/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(prob(33))
 		affect_blood(M, removed, holder)
 	return TRUE
 
 /decl/material/liquid/mutagenics/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(prob(67))
 		affect_blood(M, removed, holder)
 
 /decl/material/liquid/mutagenics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-
+	. = ..()
 	if(M.isSynthetic())
 		return
 	var/mob/living/human/H = M
@@ -268,6 +275,7 @@
 	uid = "chem_lactate"
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/volume = REAGENT_VOLUME(holder, type)
 	M.add_chemical_effect(CE_PULSE, 1)
 	if(volume >= 10)
@@ -290,6 +298,7 @@
 	uid = "chem_nanoblood"
 
 /decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/mob/living/human/H = M
 	if(!istype(H))
 		return
@@ -362,6 +371,7 @@
 	uid = "chem_tobacco_menthol"
 
 /decl/material/liquid/menthol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
@@ -378,6 +388,7 @@
 	uid = "chem_nanite_fluid"
 
 /decl/material/liquid/nanitefluid/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
@@ -409,6 +420,7 @@
 	. = /decl/material/solid/gemstone/crystal
 
 /decl/material/liquid/crystal_agent/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/result_mat = do_material_check(M)
 	if(ishuman(M))
 		var/mob/living/human/H = M

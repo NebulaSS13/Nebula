@@ -27,11 +27,11 @@
 	)
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
+	affect_blood_on_ingest = FALSE
 
-/decl/material/liquid/blood/initialize_data(var/newdata)
+/decl/material/liquid/blood/initialize_data(list/newdata)
 	. = ..() || list()
-	if(.)
-		.["species"] = .["species"] || global.using_map.default_species
+	.["species"] = .["species"] || global.using_map.default_species
 
 /decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	. = ..()
@@ -54,6 +54,7 @@
 	blood_splatter(T, W?.resolve() || holder.my_atom, 1)
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 	if(LAZYACCESS(M.chem_doses, type) > 5)
@@ -67,6 +68,7 @@
 		var/mob/living/human/H = M
 		H.inject_blood(volume, holder)
 		holder.remove_reagent(type, volume)
+	. = ..()
 
 /decl/material/liquid/coagulated_blood
 	name = "coagulated blood"

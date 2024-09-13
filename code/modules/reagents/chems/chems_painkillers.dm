@@ -44,8 +44,9 @@
 
 /decl/material/liquid/painkillers/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
-	var/effectiveness = 1
 	var/dose = LAZYACCESS(M.chem_doses, type)
+	. = ..()
+	var/effectiveness = 1
 	if(dose < effective_dose) //some ease-in ease-out for the effect
 		effectiveness = dose/effective_dose
 	else if(volume < effective_dose)

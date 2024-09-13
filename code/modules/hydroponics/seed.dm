@@ -20,7 +20,7 @@
 	var/list/roasted_chems         // Chemicals that a roasted/grilled plant product will have.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
-	var/grown_tag                // Used by the reagent grinder.
+	var/grown_tag                  // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/product_type = /obj/item/food/grown
@@ -51,6 +51,9 @@
 
 	// Used to show an icon when drying in a rack.
 	var/drying_state = "grown"
+
+	// Used to set allergens on growns.
+	var/allergen_flags = ALLERGEN_VEGETABLE
 
 /datum/seed/New()
 	update_growth_stages()
@@ -600,7 +603,7 @@
 			SSplants.seeds[name] = src
 
 		if(harvest_sample)
-			return new /obj/item/seeds(get_turf(user), null, src)
+			return new /obj/item/seeds/extracted(get_turf(user), null, src)
 
 		var/total_yield = 0
 		if(!isnull(force_amount))
@@ -628,6 +631,9 @@
 				var/obj/item/product
 				if(ispath(product_type, /obj/item/food))
 					product = new product_type(get_turf(user), null, TRUE, src)
+					if(allergen_flags)
+						var/obj/item/food/food = product
+						food.add_allergen_flags(allergen_flags)
 				else
 					product = new product_type(get_turf(user), null, src)
 				. += product

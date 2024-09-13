@@ -11,6 +11,7 @@
 	uid = "chem_eyedrops"
 
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(ishuman(M))
 		var/mob/living/human/H = M
 		var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, BP_EYES)
@@ -33,6 +34,7 @@
 	uid = "chem_antirads"
 
 /decl/material/liquid/antirads/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.radiation = max(M.radiation - 30 * removed, 0)
 
 /decl/material/liquid/brute_meds
@@ -101,10 +103,12 @@
 	glass_desc = "It's magic. We don't have to explain it."
 
 /decl/material/liquid/adminordrazine/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	affect_blood(M, removed, holder)
 	return TRUE
 
 /decl/material/liquid/adminordrazine/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.rejuvenate()
 
 /decl/material/liquid/antitoxins
@@ -125,6 +129,7 @@
 	)
 
 /decl/material/liquid/antitoxins/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(remove_generic)
 		ADJ_STATUS(M, STAT_DROWSY, -6 * removed * antitoxin_strength)
 		M.adjust_hallucination(-9 * removed * antitoxin_strength)
@@ -157,6 +162,7 @@
 	uid = "chem_immunobooster"
 
 /decl/material/liquid/immunobooster/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(REAGENT_VOLUME(holder, type) >= REAGENTS_OVERDOSE)
 		return
 	var/immunity_to_add = clamp((M.immunity_norm / 2) - M.get_immunity(), 0, removed)
@@ -180,9 +186,11 @@
 	value = 1.5
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_stimulants"
+	allergen_flags = ALLERGEN_STIMULANT
 
 /decl/material/liquid/stimulants/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
+	. = ..()
 	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, "<span class='warning'>You lose focus...</span>")
@@ -208,6 +216,7 @@
 
 /decl/material/liquid/antidepressants/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
+	. = ..()
 	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
@@ -232,6 +241,7 @@
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
+	. = ..()
 	M.adjust_immunity(-0.1)
 	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
 	if(volume > 10)
@@ -267,6 +277,7 @@
 				E.limb_flags |= ORGAN_FLAG_DEFORMED
 
 /decl/material/liquid/retrovirals/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.heal_damage(CLONE, 20 * removed)
 	if(LAZYACCESS(M.chem_doses, type) > 10)
 		ADJ_STATUS(M, STAT_DIZZY, 5)
@@ -287,6 +298,7 @@
 /decl/material/liquid/adrenaline/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	var/dose = LAZYACCESS(M.chem_doses, type)
+	. = ..()
 	if(dose < 0.2)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
 		M.add_chemical_effect(CE_PULSE, 1)
@@ -317,6 +329,7 @@
 /decl/material/liquid/stabilizer/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_STABLE)
+	M.remove_chemical_effect(CE_ALLERGEN)
 
 /decl/material/liquid/regenerator
 	name = "regenerative serum"
@@ -349,6 +362,7 @@
 	uid = "chem_neuroannealer"
 
 /decl/material/liquid/neuroannealer/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
 	if(ishuman(M))
@@ -366,6 +380,7 @@
 	uid = "chem_oxygel"
 
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.add_chemical_effect(CE_OXYGENATED, 1)
 	holder.remove_reagent(/decl/material/gas/carbon_monoxide, 2 * removed)
 
@@ -413,13 +428,13 @@
 	color = "#6666ff"
 	metabolism = REM
 	scannable = TRUE
-	affect_blood_on_inhale = TRUE
 	affect_blood_on_ingest = FALSE
 	value = 1.5
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_detoxifier"
 
 /decl/material/liquid/detoxifier/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/charges = removed * DETOXIFIER_EFFECTIVENESS
 	var/dosecharges = LAZYACCESS(M.chem_doses, type) * DETOXIFIER_DOSE_EFFECTIVENESS
 	for(var/datum/reagents/container as anything in M.get_metabolizing_reagent_holders())

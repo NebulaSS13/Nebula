@@ -388,9 +388,9 @@
 	temperature_burn_milestone_material = /decl/material/solid/metal/iron
 
 /decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
-
 	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /decl/material/solid/metal/tin

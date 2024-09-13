@@ -10,7 +10,7 @@
 	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
 	drying_wetness = 45
 	dried_type = /obj/item/food/grown/dry
-	ingredient_flags = INGREDIENT_FLAG_VEGETABLE
+	allergen_flags = ALLERGEN_VEGETABLE
 	var/work_skill = SKILL_BOTANY
 	var/seeds_extracted = FALSE
 	var/datum/seed/seed

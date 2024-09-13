@@ -5,6 +5,7 @@
 	product_type = /obj/item/mollusc
 	seed_noun = SEED_NOUN_EGGS
 	mutants = null
+	allergen_flags = ALLERGEN_FISH
 
 /datum/seed/mollusc/New()
 	..()

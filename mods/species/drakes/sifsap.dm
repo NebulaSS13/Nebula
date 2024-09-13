@@ -29,13 +29,14 @@
 	ingest_met = REM
 	toxicity = 2
 	color = "#c6e2ff"
+	affect_blood_on_ingest = 0.7
 
 /decl/material/liquid/sifsap/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.has_trait(/decl/trait/sivian_biochemistry))
 		if(!drake_add_sap(M, removed))
 			M.adjust_nutrition(toxicity * removed)
 		return
-	return affect_blood(M, removed * 0.7)
+	. = ..()
 
 /decl/material/liquid/sifsap/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.has_trait(/decl/trait/sivian_biochemistry))

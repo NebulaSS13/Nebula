@@ -105,8 +105,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/soup_hot_desc = "simmering"
 
-	var/affect_blood_on_ingest = TRUE
-	var/affect_blood_on_inhale = TRUE
+	var/affect_blood_on_ingest = 0.5
+	var/affect_blood_on_inhale = 0.75
 
 	var/narcosis = 0 // Not a great word for it. Constant for causing mild confusion when ingested.
 	var/toxicity = 0 // Organ damage from ingestion.
@@ -237,6 +237,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// Armor values generated from properties
 	var/list/basic_armor
 	var/armor_degradation_speed
+
+	// Allergen values, used by /mob/living and /datum/reagents
+	/// What allergens are present on this material?
+	var/allergen_flags  = ALLERGEN_NONE
+	var/allergen_factor = 2
 
 	// Copied reagent values. Todo: integrate.
 	var/taste_description
@@ -800,14 +805,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(M.status_flags & GODMODE)
 		return
 
 	if(nutriment_factor || hydration_factor)
 		if(injectable_nutrition)
-			adjust_nutrition(M, removed)
+			adjust_mob_nutrition(M, removed, holder, CHEM_INJECT)
 		else
+			apply_intolerances(M, removed, holder, CHEM_INJECT)
 			M.take_damage(0.2 * removed, TOX)
+	else if(!injectable_nutrition)
+		apply_intolerances(M, removed, holder, CHEM_INJECT)
 
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
@@ -844,31 +854,81 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
-// Defined as a proc so it can be overridden.
-/decl/material/proc/adjust_nutrition(var/mob/living/M, var/removed)
-	if(nutriment_factor)
-		var/nutriment_power = nutriment_factor * removed
-		if(nutriment_animal)
-			var/malus_level = M.GetTraitLevel(/decl/trait/malus/animal_protein)
-			var/malus_factor = malus_level ? malus_level * 0.25 : 0
-			if(malus_level)
-				nutriment_power *= (1 - malus_factor)
-				M.take_damage(removed * malus_factor, TOX)
-		M.adjust_nutrition(nutriment_power)
-	if(hydration_factor)
-		M.adjust_hydration(hydration_factor * removed)
-
 /decl/material/proc/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	adjust_nutrition(M, removed)
+
+	SHOULD_CALL_PARENT(TRUE)
+
+	adjust_mob_nutrition(M, removed, holder, CHEM_INGEST)
 	if(affect_blood_on_ingest)
-		affect_blood(M, removed * 0.5, holder)
+		affect_blood(M, removed * affect_blood_on_ingest, holder)
 
 /decl/material/proc/affect_inhale(var/mob/living/M, var/removed, var/datum/reagents/holder)
+
+	SHOULD_CALL_PARENT(TRUE)
+
+	apply_intolerances(M, removed, holder, CHEM_INHALE)
 	if(affect_blood_on_inhale)
-		affect_blood(M, removed * 0.75, holder)
+		affect_blood(M, removed * affect_blood_on_inhale, holder)
+
+// Major allergy - handled by handle_allergens() on /mob/living by default.
+/decl/material/proc/apply_allergy_effects(mob/living/subject, removed, severity, ingestion_method)
+	if(allergen_factor > 0)
+		subject.add_chemical_effect(CE_ALLERGEN, removed * severity * allergen_factor)
+	else if(allergen_factor < 0)
+		subject.remove_chemical_effect(CE_ALLERGEN, removed * severity * allergen_factor)
+
+// Intolerance - TODO: more messages
+/decl/material/proc/apply_intolerance_effects(mob/living/subject, removed, severity, ingestion_method)
+	if(ingestion_method != CHEM_INGEST)
+		return
+	if(ishuman(subject) && prob(removed))
+		var/mob/living/human/puker = subject
+		puker.vomit()
+	else if(prob(1))
+		var/static/list/intolerance_messages = list(
+			"Your innards churn and cramp unhappily."
+		)
+		subject.custom_pain(pick(intolerance_messages), 1)
+
+/decl/material/proc/apply_intolerances(mob/living/subject, removed, datum/reagents/holder, ingestion_method)
+
+	var/list/data = REAGENT_DATA(holder, type)
+	var/check_flags = LAZYACCESS(data, "allergen_flags") | allergen_flags
+	if(!check_flags)
+		return 1
+
+	var/list/intolerances = get_intolerances_by_flag(check_flags, ingestion_method)
+	if(!length(intolerances))
+		return 1
+
+	var/malus_level = 0
+	for(var/decl/trait/intolerance as anything in intolerances)
+		malus_level = max(malus_level, subject.GetTraitLevel(intolerance.type))
+	if(!malus_level)
+		return 1
+
+	if(malus_level >= TRAIT_LEVEL_MAJOR)
+		apply_allergy_effects(subject, removed, malus_level, ingestion_method)
+	else if(malus_level >= TRAIT_LEVEL_MINOR)
+		apply_intolerance_effects(subject, removed, malus_level, ingestion_method)
+	return max(0, (1 - (malus_level * 0.25)))
+
+// Defined as a proc so it can be overridden.
+/decl/material/proc/adjust_mob_nutrition(mob/living/subject, removed, datum/reagents/holder, ingestion_method)
+	var/metabolic_penalty = apply_intolerances(subject, removed, holder, ingestion_method)
+	if(nutriment_factor)
+		var/effective_power = nutriment_factor * metabolic_penalty * removed
+		if(effective_power)
+			subject.adjust_nutrition(effective_power)
+	if(hydration_factor)
+		var/effective_power = hydration_factor * metabolic_penalty * removed
+		if(effective_power)
+			subject.adjust_hydration(effective_power)
 
 // Slightly different to other reagent processing - return TRUE to consume the removed amount, FALSE not to consume.
 /decl/material/proc/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+
+	SHOULD_CALL_PARENT(TRUE)
 
 	if(!istype(M))
 		return FALSE
@@ -921,14 +981,23 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.take_damage(REM, TOX)
 
-/decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
-	return newdata
+/decl/material/proc/initialize_data(list/newdata) // Called when the reagent is first added to a reagents datum.
+	. = newdata
+	if(allergen_flags)
+		LAZYINITLIST(.)
+		.["allergen_flags"] |= allergen_flags
 
 /decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	reagents.cached_color = null // colour masking may change
 	. = REAGENT_DATA(reagents, type)
-	if(!length(newdata))
+	if(!length(newdata) || !islist(newdata))
 		return
+
+	// Blend in any allergen flags.
+	var/new_allergens = newdata["allergen_flags"]
+	if(new_allergens)
+		LAZYINITLIST(.)
+		.["allergen_flags"] |= new_allergens
 
 	// Sum our existing taste data with the incoming taste data.
 	var/total_taste = 0

@@ -11,6 +11,7 @@
 	uid = "chem_amphetamines"
 
 /decl/material/liquid/amphetamines/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	if(prob(5))
 		M.emote(pick(/decl/emote/visible/twitch, /decl/emote/visible/blink_r, /decl/emote/visible/shiver))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
@@ -27,6 +28,7 @@
 	uid = "chem_narcotics"
 
 /decl/material/liquid/narcotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	ADJ_STATUS(M, STAT_JITTER, -5)
 	if(prob(80))
 		M.take_damage(5.25 * removed, BRAIN)
@@ -49,6 +51,7 @@
 
 /decl/material/liquid/nicotine/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
+	. = ..()
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume <= 0.02 && LAZYACCESS(M.chem_doses, type) >= 0.05 && world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
@@ -75,6 +78,7 @@
 	var/sedative_strength = 1 // A multiplier on dose.
 
 /decl/material/liquid/sedatives/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	ADJ_STATUS(M, STAT_JITTER, -50)
 	var/threshold = 1
 	var/dose = LAZYACCESS(M.chem_doses, type) * sedative_strength
@@ -126,6 +130,7 @@
 	uid = "chem_hallucinogenics"
 
 /decl/material/liquid/hallucinogenics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.add_chemical_effect(CE_MIND, -2)
 	M.set_hallucination(50, 50)
 
@@ -144,6 +149,7 @@
 	uid = "chem_psychotropics"
 
 /decl/material/liquid/psychotropics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/threshold = 1
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose < 1 * threshold)

@@ -1,5 +1,6 @@
 /datum/seed/herb
 	abstract_type = /datum/seed/herb
+	allergen_flags = ALLERGEN_NONE // Do not make people allergic to the only medicine available on Shadyhills
 
 /datum/seed/herb/New()
 	..()

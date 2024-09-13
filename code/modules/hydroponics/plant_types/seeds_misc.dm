@@ -30,6 +30,7 @@
 	chems = list(/decl/material/liquid/capsaicin = list(3,5), /decl/material/liquid/nutriment = list(1,25))
 	mutants = list("icechili")
 	grown_tag = "chili"
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/chili/New()
 	..()
@@ -68,6 +69,7 @@
 	grown_tag = "berries"
 	slice_product = /obj/item/food/processed_grown/crushed
 	slice_amount = 3
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/berry/New()
 	..()
@@ -202,6 +204,7 @@
 	mutants = list("bluetomato","bloodtomato")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/tomato = list(10,10))
 	grown_tag = "tomato"
+	allergen_flags = ALLERGEN_FRUIT | ALLERGEN_VEGETABLE // Which is it??
 
 /datum/seed/tomato/New()
 	..()
@@ -225,6 +228,7 @@
 	mutants = list("killer")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/blood = list(1,5))
 	splat_type = /obj/effect/decal/cleanable/blood/splatter
+	allergen_flags = ALLERGEN_MEAT
 
 /datum/seed/tomato/blood/New()
 	..()
@@ -303,6 +307,7 @@
 	mutants = list("poisonapple","goldapple")
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/drink/juice/apple = list(10,10))
 	grown_tag = "apple"
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/apple/New()
 	..()
@@ -400,6 +405,7 @@
 	grown_tag = "mushroom"
 	slice_product = /obj/item/food/processed_grown/chopped
 	slice_amount = 3
+	allergen_flags = ALLERGEN_FUNGI
 
 /datum/seed/mushroom/make_splat(var/turf/T, var/obj/item/thrown)
 	if(!splat_type || (locate(splat_type) in T))
@@ -727,6 +733,7 @@
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/nutriment/sugar = list(1,5), /decl/material/liquid/drink/juice/grape = list(10,10))
 	slice_product = /obj/item/food/processed_grown/crushed
 	slice_amount = 3
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/grapes/New()
 	..()
@@ -764,6 +771,7 @@
 	)
 	slice_product = /obj/item/food/processed_grown/chopped
 	slice_amount = 3
+	allergen_flags = ALLERGEN_NUTS
 
 /datum/seed/peanuts/New()
 	..()
@@ -828,6 +836,7 @@
 	chems = list(/decl/material/liquid/drink/juice/banana = list(10,10), /decl/material/solid/potassium = list(2,3))
 	trash_type = /obj/item/bananapeel
 	grown_tag = "banana"
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/banana/New()
 	..()
@@ -905,6 +914,7 @@
 	grown_is_seed = TRUE
 	min_seed_extracted = 0
 	max_seed_extracted = 0
+	allergen_flags = ALLERGEN_ALLIUM
 
 /datum/seed/garlic/New()
 	..()
@@ -925,6 +935,7 @@
 	grown_tag = "onion"
 	slice_product = /obj/item/food/processed_grown/chopped
 	slice_amount = 3
+	allergen_flags = ALLERGEN_ALLIUM
 
 /datum/seed/onion/New()
 	..()
@@ -949,6 +960,7 @@
 	grown_tag = "soybeans"
 	slice_product = /obj/item/food/processed_grown/chopped
 	slice_amount = 3
+	allergen_flags = ALLERGEN_SOY
 
 /datum/seed/soybean/New()
 	..()
@@ -969,6 +981,7 @@
 	grown_tag = "wheat"
 	slice_product = /obj/item/food/processed_grown/crushed
 	slice_amount = 3
+	allergen_flags = ALLERGEN_VEGETABLE | ALLERGEN_GLUTEN
 
 /datum/seed/wheat/New()
 	..()
@@ -991,6 +1004,7 @@
 	grown_tag = "rice"
 	slice_product = /obj/item/food/processed_grown/crushed
 	slice_amount = 3
+	allergen_flags = ALLERGEN_VEGETABLE | ALLERGEN_GLUTEN
 
 /datum/seed/rice/New()
 	..()
@@ -1089,6 +1103,7 @@
 	product_w_class = ITEM_SIZE_LARGE
 	chems = list(/decl/material/liquid/nutriment = list(1,6), /decl/material/liquid/drink/juice/watermelon = list(10,6))
 	slice_product = /obj/item/food/processed_grown/slice/large
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/watermelon/New()
 	..()
@@ -1144,6 +1159,7 @@
 	display_name = "lime tree"
 	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/drink/juice/lime = list(10,20))
 	grown_tag = "lime"
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/citrus/New()
 	..()
@@ -1242,6 +1258,7 @@
 	grown_tag = "cherries"
 	slice_product = /obj/item/food/processed_grown/crushed
 	slice_amount = 3
+	allergen_flags = ALLERGEN_FRUIT
 
 /datum/seed/cherries/New()
 	..()
@@ -1439,6 +1456,7 @@
 	dried_chems = list(/decl/material/liquid/nutriment/tea = list(10,10))
 	slice_product = /obj/item/food/processed_grown/chopped
 	slice_amount = 3
+	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 
 /datum/seed/tea/New()
 	..()
@@ -1466,6 +1484,7 @@
 	product_material = /decl/material/solid/organic/plantmatter/pith
 	slice_product = /obj/item/food/processed_grown/crushed
 	slice_amount = 3
+	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 
 /datum/seed/coffee/New()
 	..()
