@@ -65,7 +65,7 @@
 		eye.color = eye_color
 		add_overlay(eye)
 
-/obj/item/clothing/glasses/eyepatch/hud/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/glasses/eyepatch/hud/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-eye", overlay.icon))
 		var/image/eye = emissive_overlay(overlay.icon, "[overlay.icon_state]-eye")
 		eye.color = eye_color

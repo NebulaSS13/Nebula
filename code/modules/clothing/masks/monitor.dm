@@ -47,7 +47,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/clothing/mask/monitor/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/mask/monitor/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(!(monitor_state_index in monitor_states))
 			monitor_state_index = initial(monitor_state_index)

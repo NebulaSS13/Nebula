@@ -49,7 +49,7 @@
 	if(detail_material)
 		add_overlay(overlay_image(icon, "[icon_state]-detail", detail_material.color, RESET_COLOR))
 
-/obj/item/clothing/suit/armor/forged/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/suit/armor/forged/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(strap_material)
 			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-straps", strap_material.color, RESET_COLOR)

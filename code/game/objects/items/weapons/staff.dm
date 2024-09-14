@@ -54,7 +54,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/staff/crystal/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing)
+/obj/item/staff/crystal/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		var/crystal_state = "[overlay.icon_state]-crystal"
 		if(check_state_in_icon(crystal_state, overlay.icon))

@@ -145,24 +145,26 @@ var/global/list/icon_state_cache = list()
 	if(!draw_on_mob_when_equipped && !(slot in global.all_hand_slots))
 		return overlay
 
-	var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
-	if(root_bodytype && root_bodytype.bodytype_category != bodytype)
-		var/list/overlays_to_offset = overlay.overlays
-		overlay = root_bodytype.get_offset_overlay_image(user_mob, overlay.icon, overlay.icon_state, color, (bodypart || slot))
-		for(var/thing in overlays_to_offset)
-			var/image/I = thing // Technically an appearance but don't think we can cast to those
-			var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(user_mob, I.icon, I.icon_state, I.color, (bodypart || slot))
-			adjusted_overlay.appearance_flags = I.appearance_flags
-			adjusted_overlay.plane =            I.plane
-			adjusted_overlay.layer =            I.layer
-			overlay.overlays += adjusted_overlay
-
 	if(overlay)
+
 		if(is_held_twohanded())
 			var/wielded_state = "[overlay.icon_state]-wielded"
 			if(check_state_in_icon(wielded_state, overlay.icon))
 				overlay.icon_state = wielded_state
 		apply_additional_mob_overlays(user_mob, bodytype, overlay, slot, bodypart, use_fallback_if_icon_missing)
+
+		var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
+		if(root_bodytype && root_bodytype.bodytype_category != bodytype)
+			var/list/overlays_to_offset = overlay.overlays
+			overlay = root_bodytype.get_offset_overlay_image(user_mob, overlay.icon, overlay.icon_state, color, (bodypart || slot))
+			if(overlay)
+				for(var/thing in overlays_to_offset)
+					var/image/I = thing // Technically an appearance but don't think we can cast to those
+					var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(user_mob, I.icon, I.icon_state, I.color, (bodypart || slot))
+					adjusted_overlay.appearance_flags = I.appearance_flags
+					adjusted_overlay.plane =            I.plane
+					adjusted_overlay.layer =            I.layer
+					overlay.overlays += adjusted_overlay
 
 	return overlay
 

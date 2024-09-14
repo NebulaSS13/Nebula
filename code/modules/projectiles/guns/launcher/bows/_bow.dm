@@ -157,7 +157,7 @@
 		if(check_state_in_icon(string_state, icon))
 			add_overlay(overlay_image(icon, string_state, string.color, RESET_COLOR))
 
-/obj/item/gun/launcher/bow/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/gun/launcher/bow/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(string)
 			var/string_state = "[overlay.icon_state]-string"

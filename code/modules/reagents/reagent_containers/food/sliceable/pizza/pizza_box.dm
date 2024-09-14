@@ -31,7 +31,7 @@
 	events_repository.unregister(/decl/observ/moved, src, src)
 	return ..()
 
-/obj/item/pizzabox/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/pizzabox/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && length(stacked_boxes))
 		var/i = 1
 		for(var/obj/item/pizzabox/box in stacked_boxes)

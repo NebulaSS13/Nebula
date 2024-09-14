@@ -86,7 +86,7 @@
 		var/mob/M = loc
 		M.update_inhand_overlays()
 
-/obj/item/paint_sprayer/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/paint_sprayer/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && check_state_in_icon("[overlay.icon_state]_color", overlay.icon))
 		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]_color", spray_color)
 	. = ..()

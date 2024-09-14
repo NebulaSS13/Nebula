@@ -175,7 +175,7 @@
 
 	//if someone wants to implement inspecting robot eyes here would be the place to do it.
 
-/obj/item/flashlight/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/flashlight/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && on)
 		var/icon_state_on = "[overlay.icon_state]-on"
 		if(check_state_in_icon(icon_state_on, overlay.icon))

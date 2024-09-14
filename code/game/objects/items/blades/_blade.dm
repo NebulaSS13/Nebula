@@ -112,7 +112,7 @@
 			add_overlay(I)
 	update_held_icon()
 
-// We handle this in the post-proc so wielding status is updated for polearms/broadswords/etc/
+// We handle this in the post-proc so wielding status is updated for polearms/broadswords/etc
 /obj/item/bladed/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(istype(hilt_material))

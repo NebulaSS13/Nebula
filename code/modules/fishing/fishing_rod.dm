@@ -152,7 +152,7 @@
 		if(bait)
 			to_chat(user, "\The [src] has been baited with \a [bait].")
 
-/obj/item/fishing_rod/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/fishing_rod/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(line)
 			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-line", line.color, RESET_COLOR | RESET_ALPHA)

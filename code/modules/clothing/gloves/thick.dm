@@ -42,7 +42,7 @@
 	. = ..()
 	add_overlay(overlay_image(icon, "[icon_state]-botany_fingertips", flags = RESET_COLOR))
 
-/obj/item/clothing/gloves/thick/botany/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/gloves/thick/botany/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && slot == slot_gloves_str)
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-botany_fingertips")
 		I.appearance_flags |= RESET_COLOR
