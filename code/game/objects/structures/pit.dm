@@ -21,9 +21,17 @@
 			to_chat(user, SPAN_NOTICE("You stop digging."))
 		return TRUE
 
-	if (!open && istype(used_item, /obj/item/gravemarker))
-		var/obj/item/gravemarker/gravemarker = used_item
-		gravemarker.try_bury(get_turf(src), user)
+	if (!open && istype(W, /obj/item/stack/material) && W.material?.type == /decl/material/solid/organic/wood)
+		if(locate(/obj/structure/gravemarker) in src.loc)
+			to_chat(user, SPAN_WARNING("There's already a grave marker here."))
+		else
+			var/obj/item/stack/material/plank = W
+			visible_message(SPAN_WARNING("\The [user] starts making a grave marker on top of \the [src]."))
+			if(do_after(user, 5 SECONDS) && plank.use(1))
+				visible_message(SPAN_NOTICE("\The [user] finishes the grave marker."))
+				new /obj/structure/gravemarker(src.loc)
+			else
+				to_chat(user, SPAN_NOTICE("You stop making a grave marker."))
 		return TRUE
 	return ..()
 
