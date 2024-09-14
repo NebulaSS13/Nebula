@@ -6,7 +6,7 @@
 	opacity                   = FALSE
 	anchored                  = TRUE
 	density                   = TRUE
-	atom_flags                = ATOM_FLAG_CLIMBABLE
+	atom_flags                = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
 	matter                    = null
 	material                  = /decl/material/solid/stone/granite
 	color                     = /decl/material/solid/stone/granite::color
