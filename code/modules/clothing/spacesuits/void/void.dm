@@ -281,6 +281,7 @@ else if(##equipment_var) {\
 	return TRUE
 
 /obj/item/clothing/suit/space/void/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+	overlay = ..() // Apply tank last so it doesn't get offset twice.
 	if(overlay && tank && slot == slot_back_str)
 		overlay.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
-	. = ..()
+	return overlay

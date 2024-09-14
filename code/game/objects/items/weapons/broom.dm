@@ -26,7 +26,7 @@
 			var/decl/material/bristle_mat = GET_DECL(bristle_material)
 			add_overlay(overlay_image(icon, bristle_state, bristle_mat.color, RESET_COLOR))
 
-/obj/item/staff/broom/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing)
+/obj/item/staff/broom/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && bristle_material)
 		var/bristle_state = "[overlay.icon_state]-bristles"
 		if(check_state_in_icon(bristle_state, overlay.icon))

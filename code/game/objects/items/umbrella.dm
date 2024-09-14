@@ -43,7 +43,7 @@
 	I.appearance_flags |= RESET_COLOR
 	add_overlay(I)
 
-/obj/item/umbrella/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/umbrella/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(is_open && check_state_in_icon("[overlay.icon_state]-open", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-open"

@@ -225,7 +225,7 @@
 	if(overlay && check_state_in_icon("[overlay.icon_state]-flame", overlay.icon))
 		return emissive_overlay(overlay.icon, "[overlay.icon_state]-flame")
 
-/obj/item/clothing/head/cakehat/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/head/cakehat/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && is_on_fire)
 		var/image/I = get_mob_flame_overlay(overlay, bodytype)
 		if(I)

@@ -58,7 +58,7 @@
 		desc = "A torch. This one has seen better days."
 		update_icon()
 
-/obj/item/flame/torch/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
+/obj/item/flame/torch/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(head_material)
 			var/decl/material/head_mat = GET_DECL(head_material)

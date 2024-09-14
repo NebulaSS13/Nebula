@@ -8,7 +8,7 @@
 	color = COLOR_GUNMETAL
 	light_color = LIGHT_COLOR_GREEN
 
-/obj/item/modular_computer/pda/wrist/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/modular_computer/pda/wrist/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 		var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
