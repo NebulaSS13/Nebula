@@ -4,6 +4,14 @@
 	icon                = 'icons/obj/items/tool/hammers/hammer.dmi'
 	sharp               = 0
 	edge                = 0
+	attack_verb         = list(
+		"bludgeons",
+		"slaps",
+		"beats",
+		"strikes",
+		"bashes",
+		"hammers"
+	)
 
 /obj/item/tool/hammer/get_initial_tool_properties()
 	var/static/list/tool_properties = list(
@@ -22,6 +30,17 @@
 	name                = "sledgehammer"
 	desc                = "A heavy two-handed construction hammer. Great for smashing your boss right in the face."
 	icon                = 'icons/obj/items/tool/hammers/sledgehammer.dmi'
+	can_be_twohanded    = TRUE
+	_base_attack_force  = 17
+	attack_verb         = list(
+		"brutalizes",
+		"bludgeons",
+		"beats",
+		"crushes",
+		"strikes",
+		"bashes",
+		"hammers"
+	)
 
 /obj/item/tool/hammer/sledge/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
@@ -37,6 +56,8 @@
 	icon                = 'icons/obj/items/tool/hammers/jackhammer.dmi'
 	origin_tech         = @'{"materials":3,"powerstorage":2,"engineering":2}'
 	material_alteration = 0
+	can_be_twohanded    = TRUE
+	_base_attack_force  = 15
 
 /obj/item/tool/hammer/jack/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(

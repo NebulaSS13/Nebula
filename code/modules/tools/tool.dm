@@ -113,7 +113,7 @@
 			if(check_state_in_icon(binding_state, icon))
 				add_overlay(overlay_image(icon, binding_state, binding_material.color, (RESET_COLOR|RESET_ALPHA)))
 
-/obj/item/tool/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/tool/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		var/handle_color = get_handle_color()
 		if(!isnull(handle_color))
