@@ -40,7 +40,7 @@
 	for(var/obj/item/organ/external/E in owner.get_external_organs())
 		if(prob(25))
 			E.status |= ORGAN_BRITTLE //Some nanites are not responding and you're out of luck
-			to_chat(owner,SPAN_DANGER("Your [E.name] feels cold and rigid"))
+			to_chat(owner, SPAN_DANGER("Your [E.name] feels cold and rigid."))
 	QDEL_NULL(aura)
 
 /obj/item/organ/internal/augment/active/nanounit/activate()
@@ -73,7 +73,7 @@
 		playsound(user,'sound/effects/basscannon.ogg',35,1)
 		unit.charges -= 1
 		if(unit.charges <= 0)
-			to_chat(user, SPAN_DANGER("Warning: Critical damage treshold passed. Shut down unit to avoid further damage"))
+			to_chat(user, SPAN_DANGER("Warning: Critical damage threshold passed. Shut down unit to avoid further damage."))
 		return AURA_FALSE|AURA_CANCEL
 	else unit.catastrophic_failure()
 

@@ -89,7 +89,7 @@
 				if(R.get_file_perms(get_access(usr), usr) & OS_READ_ACCESS)
 					active_record = R
 				else
-					to_chat(usr, SPAN_WARNING("Access Denied"))
+					to_chat(usr, SPAN_WARNING("Access denied."))
 				break
 		return 1
 	if(href_list["new_record"])
