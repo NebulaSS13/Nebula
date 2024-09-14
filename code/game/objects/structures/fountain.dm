@@ -92,10 +92,10 @@
 	material               = /decl/material/solid/stone/marble
 	used                   = TRUE
 	material_alteration    = MAT_FLAG_ALTERATION_ALL
+	atom_flags             = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 
 /obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 	initialize_reagents(ml)
 
 /obj/structure/fountain/mundane/initialize_reagents(populate = TRUE)
