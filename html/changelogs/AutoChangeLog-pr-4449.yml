@@ -1,5 +1,0 @@
-author: Atermonera
-changes:
-  - {tweak: Corrected a number of bad placement/offsets for wall-mounted items on
-      the exodus map}
-delete-after: true
