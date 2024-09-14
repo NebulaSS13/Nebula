@@ -1,4 +1,5 @@
 var/global/obj/temp_reagents_holder = new
+var/global/datum/reagents/sink/infinite_reagent_sink = new
 
 /atom/proc/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE)
 	return reagents?.add_reagent(reagent_type, amount, data, safety, defer_update)
@@ -6,8 +7,8 @@ var/global/obj/temp_reagents_holder = new
 /atom/proc/remove_from_reagents(reagent_type, amount, safety = FALSE, defer_update = FALSE)
 	return reagents?.remove_reagent(reagent_type, amount, safety, defer_update)
 
-/atom/proc/remove_any_reagents(amount = 1, defer_update = FALSE, removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
-	return reagents?.remove_any(amount, defer_update, removed_phases)
+/atom/proc/remove_any_reagents(amount = 1, defer_update = FALSE, removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID), skip_reagents = null)
+	return reagents?.remove_any(amount, defer_update, removed_phases, skip_reagents)
 
 /atom/proc/get_reagent_space()
 	if(!reagents?.maximum_volume)
@@ -479,10 +480,14 @@ var/global/obj/temp_reagents_holder = new
 	return . / length(reagent_volumes)
 
 /* Holder-to-holder and similar procs */
-/datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE, var/removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID)) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
+/// Removes up to [amount] of reagents from [src]. Returns actual amount removed.
+/datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE, var/removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID), skip_reagents = null)
 
 	if(amount <= 0)
 		return 0
+
+	if(skip_reagents) // use the infinite sink for this
+		return trans_to_holder(global.infinite_reagent_sink, amount, skip_reagents = skip_reagents, transferred_phases = removed_phases)
 
 	// The list we're iterating over to remove reagents.
 	var/list/removing_volumes
@@ -914,3 +919,16 @@ var/global/obj/temp_reagents_holder = new
 	else
 		reagents = new/datum/reagents(max_vol, src)
 	return reagents
+
+/// Infinite reagent sink: nothing is ever actually added to it, useful for complex, filtered deletion of reagents without holder churn.
+/datum/reagents/sink
+
+/datum/reagents/sink/add_reagent(reagent_type, amount, data, safety, defer_update, phase)
+	amount = CHEMS_QUANTIZE(min(amount, REAGENTS_FREE_SPACE(src)))
+	if(amount <= 0)
+		return FALSE
+
+	var/decl/material/newreagent = GET_DECL(reagent_type)
+	if(!istype(newreagent))
+		return FALSE
+	return TRUE
