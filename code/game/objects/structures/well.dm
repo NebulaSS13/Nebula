@@ -48,11 +48,18 @@
 		return TRUE
 
 /obj/structure/reagent_dispensers/well/Process()
-	if(!reagents || (reagents.total_volume >= reagents.maximum_volume) || !auto_refill)
+	if(!reagents || !auto_refill) // if we're full, we only stop at the end of the proc; we need to check for contaminants first
 		return PROCESS_KILL
-	reagents.add_reagent(auto_refill, rand(5, 10))
-	if(reagents.total_volume >= reagents.maximum_volume)
+	var/amount_to_add = rand(5, 10)
+	if(length(reagents.reagent_volumes) > 1) // we have impurities!
+		reagents.remove_any(amount_to_add, defer_update = TRUE, skip_reagents = list(auto_refill)) // defer update until the add_reagent call below
+	if(reagents.total_volume < reagents.maximum_volume)
+		reagents.add_reagent(auto_refill, amount_to_add)
+		return // don't stop processing
+	else if(length(reagents.reagent_volumes) == 1 && reagents.get_primary_reagent_type() == auto_refill)
+		// only one reagent and it's our auto_refill, our work is done here
 		return PROCESS_KILL
+	// if we get here, it means we have a full well with contaminants, so we keep processing
 
 /obj/structure/reagent_dispensers/well/mapped
 	auto_refill = /decl/material/liquid/water
