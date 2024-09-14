@@ -47,15 +47,15 @@
 		W.fluid_act(reagents)
 		return TRUE
 
-/obj/structure/reagent_dispensers/well/mapped
-	auto_refill = /decl/material/liquid/water
-
-/obj/structure/reagent_dispensers/well/mapped/Process()
+/obj/structure/reagent_dispensers/well/Process()
 	if(!reagents || (reagents.total_volume >= reagents.maximum_volume) || !auto_refill)
 		return PROCESS_KILL
 	reagents.add_reagent(auto_refill, rand(5, 10))
 	if(reagents.total_volume >= reagents.maximum_volume)
 		return PROCESS_KILL
+
+/obj/structure/reagent_dispensers/well/mapped
+	auto_refill = /decl/material/liquid/water
 
 /obj/structure/reagent_dispensers/well/wall_fountain
 	name            = "wall fountain"
