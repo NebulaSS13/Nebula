@@ -559,9 +559,9 @@
 				return
 			var/reason = sanitize(input("Please enter reason"))
 			if(!reason)
-				to_chat(M, "<span class='warning'>You have been kicked from the server</span>")
+				to_chat(M, SPAN_WARNING("You have been kicked from the server."))
 			else
-				to_chat(M, "<span class='warning'>You have been kicked from the server: [reason]</span>")
+				to_chat(M, SPAN_WARNING("You have been kicked from the server: [reason]"))
 			log_and_message_admins("booted [key_name_admin(M)].")
 			//M.client = null
 			qdel(M.client)

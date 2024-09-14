@@ -69,7 +69,7 @@
 			if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
 				if(wired)
 					if(anchored)
-						to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters"))
+						to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters."))
 					else
 						to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters, if anchored down with a wrench first."))
 				else
@@ -79,7 +79,7 @@
 						to_chat(user, SPAN_SUBTLE("Can have wiring installed with a cable coil, if anchored down with a wrench first."))
 			else
 				if(wired)
-					to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters"))
+					to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters."))
 				else
 					to_chat(user, SPAN_SUBTLE("Can have wiring installed with a cable coil."))
 

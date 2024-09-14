@@ -15,7 +15,7 @@
 	var/power_usage = 450 //value for simple ecig, enough for about 1 cartridge, in JOULES!
 	var/ecig_colors = list(null, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_PURPLE_GRAY)
 	var/idle = 0
-	var/idle_treshold = 30
+	var/idle_threshold = 30
 
 /obj/item/clothing/mask/smokable/ecig/Initialize()
 	setup_power_supply()
@@ -87,7 +87,7 @@
 		Deactivate()
 		return
 
-	if(idle >= idle_treshold) //idle too long -> automatic shut down
+	if(idle >= idle_threshold) //idle too long -> automatic shut down
 		idle = 0
 		visible_message(SPAN_NOTICE("\The [src] powers down automatically."), null, 2)
 		Deactivate()
