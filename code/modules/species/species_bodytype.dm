@@ -230,6 +230,7 @@ var/global/list/bodytypes_by_category = list()
 	var/list/removed_emotes
 	/// Add emotes to this list to add them to the defaults (ie. a humanoid species that also has a purr)
 	var/list/additional_emotes
+
 	/// Generalized emote list available to mobs with this bodytype.
 	var/list/default_emotes = list(
 		/decl/emote/visible/blink,
@@ -260,6 +261,7 @@ var/global/list/bodytypes_by_category = list()
 		/decl/emote/audible/moan,
 		/decl/emote/audible/grunt,
 		/decl/emote/audible/slap,
+		/decl/emote/audible/snap,
 		/decl/emote/audible/deathgasp,
 		/decl/emote/audible/giggle,
 		/decl/emote/audible/scream,
