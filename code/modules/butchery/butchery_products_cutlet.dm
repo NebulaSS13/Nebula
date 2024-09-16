@@ -8,7 +8,7 @@
 	slice_path          = /obj/item/food/butchery/chopped
 	slice_num           = 1
 	cooked_food         = FOOD_COOKED
-	w_class             = ITEM_SIZE_SMALL
+	w_class             = ITEM_SIZE_TINY
 	color               = "#81492e"
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 
