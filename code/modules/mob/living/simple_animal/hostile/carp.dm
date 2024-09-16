@@ -17,6 +17,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	butchery_data = /decl/butchery_data/animal/fish/space_carp
 	ai = /datum/mob_controller/aggressive/carp
+	ability_handlers = list(/datum/ability_handler/predator)
+
 	var/carp_color = COLOR_PURPLE
 
 /datum/mob_controller/aggressive/carp

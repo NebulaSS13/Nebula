@@ -102,7 +102,7 @@
 	)
 
 	ability_handlers = list(
-		/datum/ability_handler/grafadreka
+		/datum/ability_handler/predator/grafadreka
 	)
 	age_descriptor = /datum/appearance_descriptor/age/grafadreka
 	default_sprite_accessories = list(
@@ -173,7 +173,7 @@
 	pixel_offset_x      = 0
 	antaghud_offset_x   = 0
 	ability_handlers    = list(
-		/datum/ability_handler/grafadreka/hatchling
+		/datum/ability_handler/predator/grafadreka/hatchling
 	)
 	z_flags             = 0
 	override_limb_types = list(

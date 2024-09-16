@@ -9,6 +9,7 @@
 	pass_flags         = PASS_FLAG_TABLE
 	butchery_data      = /decl/butchery_data/animal/wolf
 	eye_color          = "#9b7214"
+	ability_handlers = list(/datum/ability_handler/predator)
 
 	draw_visible_overlays = list(
 		"base"     = "#6a6a6d",

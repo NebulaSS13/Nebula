@@ -33,13 +33,25 @@
 /datum/ability_handler/proc/refresh_login()
 	return
 
+/datum/ability_handler/proc/can_do_self_invocation(mob/user)
+	return FALSE
+
 /datum/ability_handler/proc/do_self_invocation(mob/user)
+	return FALSE
+
+/datum/ability_handler/proc/can_do_grabbed_invocation(mob/user, atom/target)
 	return FALSE
 
 /datum/ability_handler/proc/do_grabbed_invocation(mob/user, atom/target)
 	return FALSE
 
+/datum/ability_handler/proc/can_do_melee_invocation(mob/user, atom/target)
+	return FALSE
+
 /datum/ability_handler/proc/do_melee_invocation(mob/user, atom/target)
+	return FALSE
+
+/datum/ability_handler/proc/can_do_ranged_invocation(mob/user, atom/target)
 	return FALSE
 
 /datum/ability_handler/proc/do_ranged_invocation(mob/user, atom/target)

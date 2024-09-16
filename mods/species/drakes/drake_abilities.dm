@@ -1,13 +1,14 @@
-/datum/ability_handler/grafadreka
+/datum/ability_handler/predator/grafadreka
 	var/spit_projectile_type = /obj/item/projectile/drake_spit
 	var/next_spit = 0
 
-/datum/ability_handler/grafadreka/hatchling
+/datum/ability_handler/predator/grafadreka/hatchling
 	spit_projectile_type = /obj/item/projectile/drake_spit/weak
 
-/datum/ability_handler/grafadreka/do_ranged_invocation(mob/user, atom/target)
-	if(!istype(user) || user.a_intent != I_HURT || user.incapacitated() || !isatom(target))
-		return FALSE
+/datum/ability_handler/predator/grafadreka/can_do_ranged_invocation(mob/user, atom/target)
+	return istype(user) && user.a_intent == I_HURT && !user.incapacitated() && isatom(target)
+
+/datum/ability_handler/predator/grafadreka/do_ranged_invocation(mob/user, atom/target)
 	if(world.time < next_spit)
 		to_chat(user, SPAN_WARNING("You cannot spit again so soon!"))
 		return TRUE
@@ -22,20 +23,10 @@
 		spit.launch(target, user.get_target_zone(), user)
 	return TRUE
 
-/datum/ability_handler/grafadreka/do_melee_invocation(mob/user, atom/target)
-
-	if(!istype(user) || user.incapacitated() || !isatom(target) || !target.Adjacent(user))
-		return FALSE
-
-	// Nibbles
+/datum/ability_handler/predator/grafadreka/do_melee_invocation(mob/user, atom/target)
 	if(user.a_intent == I_HURT)
-		if(isliving(target))
-			return handle_dismemberment(user, target)
-		if(istype(target, /obj/item/organ))
-			return handle_organ_destruction(user, target)
-
+		return ..() // Handled by predator ability handler.
 	// Healing
 	if(user.a_intent == I_HELP && isliving(target))
 		return handle_wound_cleaning(user, target)
-
 	return FALSE

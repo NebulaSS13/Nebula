@@ -14,6 +14,7 @@
 		"markings" = "#efe9e6",
 		"socks"    = "#36221b"
 	)
+	ability_handlers = list(/datum/ability_handler/predator)
 
 /mob/living/simple_animal/passive/fox/get_available_postures()
 	var/static/list/available_postures = list(

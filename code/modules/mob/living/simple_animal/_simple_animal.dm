@@ -99,8 +99,14 @@
 	var/list/draw_visible_overlays
 	var/eye_color
 
+	var/list/ability_handlers
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
+
+	if(length(ability_handlers))
+		for(var/handler in ability_handlers)
+			add_ability_handler(handler)
 
 	// Aquatic creatures only care about water, not atmos.
 	add_inventory_slot(new /datum/inventory_slot/head/simple)

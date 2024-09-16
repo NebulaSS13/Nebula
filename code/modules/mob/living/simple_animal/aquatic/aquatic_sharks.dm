@@ -7,6 +7,7 @@
 	faction = "sharks"
 	butchery_data = /decl/butchery_data/animal/fish/shark
 	ai = /datum/mob_controller/aggressive/aquatic/shark
+	ability_handlers = list(/datum/ability_handler/predator)
 
 /obj/item/natural_weapon/bite/shark
 	_base_attack_force = 20
