@@ -14,6 +14,11 @@
 	ai = /datum/mob_controller/aggressive/bats
 	var/mob/living/owner
 
+/mob/living/simple_animal/hostile/scarybat/cave
+	name = "cave bats"
+	desc = "A swarm of screeching cave bats, twisted by the deep dark and hungering for blood."
+	faction = "undead"
+
 /datum/mob_controller/aggressive/bats
 	speak_chance = 0
 	turns_per_wander = 6

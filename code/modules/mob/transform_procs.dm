@@ -43,7 +43,7 @@
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	QDEL_NULL_LIST(worn_underwear)
-	return ..(move)
+	return ..()
 
 /mob/living/silicon/ai/AIize(move = TRUE)
 	return src

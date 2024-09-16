@@ -148,7 +148,7 @@
 					return TRUE
 
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = holding.resolve_attackby(A,src, params)
+				var/resolved = holding.resolve_attackby(A, src, params)
 				if(!resolved && A && holding)
 					holding.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
