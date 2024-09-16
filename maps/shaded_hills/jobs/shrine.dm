@@ -34,6 +34,10 @@
 		SKILL_ANATOMY       = SKILL_MAX,
 	)
 	skill_points            = 24
+	lock_keys     = list(
+		"shrine"      = /decl/material/solid/metal/copper,
+		"sunken keep" = /decl/material/solid/organic/bone
+	)
 
 /obj/abstract/landmark/start/shaded_hills/shrine_keeper
 	name                    = "Shrine Keeper"

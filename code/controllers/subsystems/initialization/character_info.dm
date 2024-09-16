@@ -121,10 +121,11 @@ SUBSYSTEM_DEF(character_info)
 	search_for = ckey(lowertext(trim(search_for)))
 	for(var/id in _comment_holders_by_id)
 		var/datum/character_information/comments = _comment_holders_by_id[id]
-		for(var/checkstring in list(comments.name, comments.ckey, comments.record_id))
-			if(findtext(ckey(lowertext(trim(checkstring))), search_for) > 0)
-				LAZYADD(., comments)
-				break
+		if(istype(comments))
+			for(var/checkstring in list(comments.name, comments.ckey, comments.record_id))
+				if(findtext(ckey(lowertext(trim(checkstring))), search_for) > 0)
+					LAZYADD(., comments)
+					break
 
 /datum/controller/subsystem/character_info/Topic(href, href_list)
 	. = ..()

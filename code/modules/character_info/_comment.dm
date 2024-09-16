@@ -26,6 +26,10 @@
 	return !get_config_value(/decl/config/num/hide_comments_older_than) || (REALTIMEOFDAY - last_updated) > (get_config_value(/decl/config/num/hide_comments_older_than))
 
 /datum/character_comment/proc/get_comment_html(var/datum/character_information/presenting, var/mob/usr, var/row_bkg_color)
+
+	if(!istype(main_mood))
+		main_mood = GET_DECL(/decl/comment_mood/unknown)
+
 	var/mood_title = main_mood.name
 	if(border_mood)
 		mood_title = "[mood_title] ([border_mood.name])"

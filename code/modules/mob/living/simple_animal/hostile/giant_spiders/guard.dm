@@ -9,3 +9,7 @@
 
 /mob/living/simple_animal/hostile/giant_spider/guard/get_door_pry_time()
 	return 6 SECONDS
+
+/mob/living/simple_animal/hostile/giant_spider/guard/cave
+	name = "giant cave spider"
+	faction = "undead"

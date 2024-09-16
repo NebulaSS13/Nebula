@@ -336,6 +336,10 @@
 /obj/structure/door/walnut,
 /turf/floor/wood/walnut,
 /area/shaded_hills/stable)
+"lv" = (
+/obj/structure/bed/chair/bench/ebony,
+/turf/floor/wood/walnut,
+/area/shaded_hills/farmhouse)
 "lz" = (
 /obj/structure/table/woodentable_reinforced/ebony,
 /obj/item/knife/kitchen/cleaver/bronze,
@@ -377,6 +381,11 @@
 /obj/item/seeds/extracted/cabbage,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
+"ml" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/shears,
+/turf/floor/wood/walnut,
+/area/shaded_hills/farmhouse)
 "mG" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 4
@@ -735,6 +744,10 @@
 	},
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
+"Bp" = (
+/obj/structure/working/butter_churn/walnut,
+/turf/floor/wood/walnut,
+/area/shaded_hills/farmhouse)
 "Br" = (
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
@@ -924,6 +937,18 @@
 "HI" = (
 /turf/floor/natural/grass,
 /area/shaded_hills/outside/downlands)
+"HK" = (
+/mob/living/simple_animal/passive/sheep,
+/turf/floor/natural/grass,
+/area/shaded_hills/outside/downlands)
+"HL" = (
+/obj/structure/table/marble,
+/obj/structure/fire_source/heater/mapped,
+/obj/item/chems/glass/handmade/jar,
+/obj/item/chems/glass/handmade/jar,
+/obj/item/chems/glass/handmade/jar,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/shrine)
 "Ic" = (
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/downlands)
@@ -1043,6 +1068,11 @@
 	},
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
+"LH" = (
+/obj/structure/table/woodentable/ebony,
+/obj/item/chems/glass/bucket/wood,
+/turf/floor/wood/walnut,
+/area/shaded_hills/farmhouse)
 "LK" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 4
@@ -11576,7 +11606,7 @@ gp
 HI
 HI
 HI
-HI
+HK
 HI
 HI
 RC
@@ -13085,7 +13115,7 @@ Ic
 EV
 TR
 IQ
-cl
+LH
 yJ
 qP
 yN
@@ -13237,7 +13267,7 @@ Ic
 EV
 TR
 LN
-cl
+ml
 qP
 qP
 gB
@@ -13695,8 +13725,8 @@ BX
 LN
 qP
 qP
-qP
-qP
+lv
+Bp
 IQ
 FD
 Rl
@@ -19568,8 +19598,8 @@ kv
 iK
 kv
 kv
-TZ
-Vj
+Yc
+HL
 Vj
 TM
 Wh
@@ -19720,8 +19750,8 @@ kv
 iK
 kv
 kv
-QB
-uP
+TZ
+CR
 CR
 Ot
 bW
@@ -19872,8 +19902,8 @@ iK
 iK
 kv
 kv
-Kh
-CR
+QB
+uP
 CR
 CR
 CR
@@ -20024,7 +20054,7 @@ iK
 iK
 kv
 By
-QB
+Kh
 cy
 VE
 BD
