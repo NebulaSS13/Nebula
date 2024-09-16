@@ -17,6 +17,7 @@
 	weight = MAT_VALUE_HEAVY
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
+	destruction_sound = "shatter"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	is_psionic_nullifier = TRUE
 	exoplanet_rarity_plant = MAT_RARITY_EXOTIC

@@ -20,6 +20,7 @@
 	burn_armor = 2
 	table_icon_base = "solid"
 	destruction_desc = "shatters"
+	destruction_sound = "shatter"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
 	wall_support_value = MAT_VALUE_LIGHT

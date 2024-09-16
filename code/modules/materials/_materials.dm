@@ -120,6 +120,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
 	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
+	var/destruction_sound = "fracture"     // As above, but the sound that plays.
 
 	// Icons
 	var/icon_base = 'icons/turf/walls/solid.dmi'

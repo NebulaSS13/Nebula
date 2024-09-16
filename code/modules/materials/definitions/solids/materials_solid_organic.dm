@@ -83,6 +83,7 @@
 	stack_origin_tech = @'{"materials":1}'
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
+	destruction_sound = "pageturn"
 	conductive = 0
 	value = 0.5
 	reflectiveness = MAT_VALUE_DULL
@@ -102,6 +103,7 @@
 	stack_origin_tech       = @'{"materials":1}'
 	door_icon_base          = "wood"
 	destruction_desc        = "tears"
+	destruction_sound       = "pageturn"
 	icon_base               = 'icons/turf/walls/solid.dmi'
 	icon_reinf              = 'icons/turf/walls/reinforced.dmi'
 	integrity               = 10 //Probably don't wanna go below 10, because of the health multiplier on things, that would result in a value smaller than 1.

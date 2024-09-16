@@ -47,8 +47,8 @@
 
 /obj/item/proc/shatter(var/consumed)
 	var/turf/T = get_turf(src)
-	T?.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
-	playsound(src, "shatter", 70, 1)
+	T?.visible_message(SPAN_DANGER("\The [src] [material?.destruction_desc || "shatters"]!"))
+	playsound(src, material?.destruction_sound || "shatter", 70, 1)
 	if(!consumed && material && w_class > ITEM_SIZE_SMALL && T)
 		material.place_shards(T)
 	qdel(src)
