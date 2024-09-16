@@ -13,7 +13,9 @@
 		/decl/material/solid/organic/skin/feathers,
 		/decl/material/solid/organic/skin/fur,
 		/decl/material/solid/organic/cloth,
-		/decl/material/solid/organic/cloth/wool
+		/decl/material/solid/organic/cloth/wool,
+		/decl/material/solid/organic/cloth/hemp,
+		/decl/material/solid/organic/cloth/linen
 	)
 
 /decl/loadout_option/fantasy/get_gear_tweak_options()
@@ -139,7 +141,9 @@
 	available_materials = list(
 		/decl/material/solid/organic/leather,
 		/decl/material/solid/organic/cloth,
-		/decl/material/solid/organic/cloth/wool
+		/decl/material/solid/organic/cloth/wool,
+		/decl/material/solid/organic/cloth/hemp
+
 	)
 	uid = "gear_fantasy_work_gloves"
 
@@ -252,7 +256,8 @@
 	available_materials = list(
 		/decl/material/solid/organic/leather,
 		/decl/material/solid/organic/cloth,
-		/decl/material/solid/organic/cloth/wool
+		/decl/material/solid/organic/cloth/wool,
+		/decl/material/solid/organic/cloth/hemp
 	)
 	uid = "gear_fantasy_bandoler"
 
@@ -264,7 +269,8 @@
 		/decl/material/solid/organic/cloth,
 		/decl/material/solid/organic/cloth/wool,
 		/decl/material/solid/organic/skin/fur,
-		/decl/material/solid/organic/skin/feathers
+		/decl/material/solid/organic/skin/feathers,
+		/decl/material/solid/organic/cloth/linen
 	)
 
 /decl/loadout_option/fantasy/eyes/eyepatch

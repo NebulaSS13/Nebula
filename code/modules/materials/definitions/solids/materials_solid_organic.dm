@@ -151,6 +151,18 @@
 	compost_value = 0.8
 	has_textile_fibers = TRUE
 
+/decl/material/solid/organic/cloth/hemp
+	name      = "hemp"
+	lore_text = "Sturdy fibers from the hemp plant, woven into strong cloth."
+	uid       = "solid_hemp"
+	color     = "#b4a374"
+
+/decl/material/solid/organic/cloth/linen
+	name      = "linen"
+	lore_text = "Fibers from the flax plant, woven into sturdy, absorbent cloth."
+	uid       = "solid_linen"
+	color     = "#eee4c7"
+
 /decl/material/solid/organic/cloth/wool
 	name      = "wool"
 	lore_text = "Fibers from the wooly fleece of a sheep or similar animal."

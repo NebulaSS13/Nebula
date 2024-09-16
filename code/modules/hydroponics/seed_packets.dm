@@ -338,6 +338,12 @@
 /obj/item/seeds/cotton
 	seed = "cotton"
 
+/obj/item/seeds/flax
+	seed = "flax"
+
+/obj/item/seeds/hemp
+	seed = "hemp"
+
 /obj/item/seeds/yarrow
 	seed = "yarrow"
 
