@@ -208,12 +208,13 @@
 	name = "paper scroll"
 	path = /obj/item/paper/scroll
 	available_materials = null
+	uid = "gear_fantasy_scroll"
 
 /decl/loadout_option/fantasy/utility/scroll
 	name = "quill pen"
 	path = /obj/item/pen/fancy/quill
 	available_materials = null
-
+	uid = "gear_fantasy_quill"
 
 /decl/loadout_option/fantasy/utility/striker
 	name = "flint striker"

@@ -29,7 +29,7 @@
 	// Do we want linseed oil at some point?
 	chems = list(
 		/decl/material/liquid/nutriment/plant_oil = list(5,12),
-		/decl/material/solid/organic/cloth = list(8,1)
+		/decl/material/solid/organic/cloth/linen = list(8,1)
 	)
 
 /datum/seed/cotton/flax/New()
