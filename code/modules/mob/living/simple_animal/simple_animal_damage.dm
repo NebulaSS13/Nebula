@@ -47,7 +47,12 @@
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
-	visible_message(SPAN_DANGER("\The [src] has been attacked with \the [O] by \the [user]!"))
+	var/attack_name = O?.attack_message_name()
+	if(attack_name)
+		visible_message(SPAN_DANGER("\The [src] has been [DEFAULTPICK(O.attack_verb, "attacked")] with [attack_name] by \the [user]!"))
+	else
+		visible_message(SPAN_DANGER("\The [src] has been [DEFAULTPICK(O.attack_verb, "attacked")] by \the [user]!"))
+
 	if(istype(ai))
 		ai.retaliate(user)
 

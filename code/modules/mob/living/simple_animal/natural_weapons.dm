@@ -9,6 +9,9 @@
 	needs_attack_dexterity = DEXTERITY_NONE
 	var/show_in_message   // whether should we show up in attack message, e.g. 'urist has been bit with teeth by carp' vs 'urist has been bit by carp'
 
+/obj/item/natural_weapon/get_attack_force(mob/living/user)
+	return get_base_attack_force()
+
 /obj/item/natural_weapon/attack_message_name()
 	return show_in_message ? ..() : null
 
