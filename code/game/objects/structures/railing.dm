@@ -196,35 +196,48 @@ WOOD_RAILING_SUBTYPE(yew)
 		return 0
 	return 1
 
-/obj/structure/railing/attackby(var/obj/item/W, var/mob/user)
-	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
-		var/obj/item/grab/G = W
-		if(ishuman(G.affecting))
-			var/mob/living/human/H = G.get_affecting_mob()
-			var/obj/occupied = turf_is_crowded()
-			if(occupied)
-				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
-				return
+/obj/structure/railing/grab_attack(var/obj/item/grab/G)
 
-			if(G.force_danger())
-				if(user.a_intent == I_HURT)
-					visible_message("<span class='danger'>[G.assailant] slams [H]'s face against \the [src]!</span>")
-					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-					var/blocked = H.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
-					if (prob(30 * (1 - blocked)))
-						SET_STATUS_MAX(H, STAT_WEAK, 5)
-					H.apply_damage(8, BRUTE, BP_HEAD)
-				else
-					if (get_turf(H) == get_turf(src))
-						H.forceMove(get_step(src, dir))
-					else
-						H.dropInto(loc)
-					SET_STATUS_MAX(H, STAT_WEAK, 5)
-					visible_message("<span class='danger'>[G.assailant] throws \the [H] over \the [src].</span>")
-			else
-				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
-			return
+	var/mob/user = G.assailant
+	var/mob/living/victim = G.get_affecting_mob()
+	if(!istype(victim) || !istype(user))
+		return ..()
+
+	// We want to throw the mob over the railing if we or they are already on the railing turf.
+	var/turf/target_turf = get_turf(src)
+	if(victim.loc == target_turf || user.loc == target_turf)
+		target_turf = get_step_resolving_mimic(target_turf, dir)
+
+	if(!istype(target_turf) || target_turf.density)
+		return ..()
+
+	var/obj/occupied = target_turf.turf_is_crowded()
+	if(occupied)
+		to_chat(user, SPAN_WARNING("There's \a [occupied] in the way."))
+		return TRUE
+
+	if(!G.force_danger())
+		to_chat(user, SPAN_WARNING("You need a better grip to do that!"))
+		return TRUE
+
+	if(user.a_intent == I_HURT && ishuman(victim))
+		visible_message(SPAN_DANGER("\The [user] slams \the [victim]'s face against \the [src]!"))
+		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
+		var/blocked = victim.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
+		if (prob(30 * (1 - blocked)))
+			SET_STATUS_MAX(victim, STAT_WEAK, 5)
+		victim.apply_damage(8, BRUTE, BP_HEAD)
+		return TRUE
+
+	if (get_turf(victim) == get_turf(src))
+		victim.forceMove(get_step(src, dir))
+	else
+		victim.dropInto(loc)
+	SET_STATUS_MAX(victim, STAT_WEAK, 5)
+	visible_message(SPAN_DANGER("\The [user] throws \the [victim] over \the [src]!"))
+	return TRUE
+
+/obj/structure/railing/attackby(var/obj/item/W, var/mob/user)
 
 	// Dismantle
 	if(IS_WRENCH(W))
