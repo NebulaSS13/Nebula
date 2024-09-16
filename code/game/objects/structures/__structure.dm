@@ -98,7 +98,7 @@
 		else
 			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
 
-	playsound(loc, hitsound, 75, 1)
+	playsound(loc, hitsound, 60, 1)
 	var/current_max_health = get_max_health()
 	current_health = clamp(current_health - damage, 0, current_max_health)
 	show_damage_message(current_health/current_max_health)
