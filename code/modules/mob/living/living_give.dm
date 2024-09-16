@@ -4,6 +4,7 @@
 	do_give(target)
 
 /mob/living/proc/do_give(var/mob/living/target)
+	set waitfor = FALSE
 	if(src.incapacitated())
 		return
 	if(!istype(target) || target.incapacitated() || target.client == null)
