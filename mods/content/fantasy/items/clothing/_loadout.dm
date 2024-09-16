@@ -200,6 +200,17 @@
 		/decl/material/solid/metal/bronze
 	)
 
+/decl/loadout_option/fantasy/utility/quill
+	name = "paper scroll"
+	path = /obj/item/paper/scroll
+	available_materials = null
+
+/decl/loadout_option/fantasy/utility/scroll
+	name = "quill pen"
+	path = /obj/item/pen/fancy/quill
+	available_materials = null
+
+
 /decl/loadout_option/fantasy/utility/striker
 	name = "flint striker"
 	path = /obj/item/rock/flint/striker
@@ -251,7 +262,7 @@
 	available_materials = list(
 		/decl/material/solid/organic/leather,
 		/decl/material/solid/organic/cloth,
-		/decl/material/solid/organic/cloth/wool
+		/decl/material/solid/organic/cloth/wool,
 		/decl/material/solid/organic/skin/fur,
 		/decl/material/solid/organic/skin/feathers
 	)

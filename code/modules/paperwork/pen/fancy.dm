@@ -13,11 +13,18 @@
 	desc = "A high quality [istype(material)?"[material.name] ":null]traditional [stroke_color_name] [medium_name] fountain pen with an internal reservoir and an extra fine gold-platinum nib. Guaranteed never to leak."
 
 /obj/item/pen/fancy/quill
-	name        = "dire goose quill"
+	name        = "quill pen"
 	icon        = 'icons/obj/items/pens/pen_quill.dmi'
 	sharp       = 0
 	material    = /decl/material/solid/organic/skin/feathers
-	pen_quality = TOOL_QUALITY_BEST
+	pen_quality = TOOL_QUALITY_DEFAULT
 
 /obj/item/pen/fancy/quill/make_pen_description()
+	desc = "A large feather, sharpened and cut to hold ink for scribing."
+
+/obj/item/pen/fancy/quill/goose
+	name        = "dire goose quill"
+	pen_quality = TOOL_QUALITY_BEST
+
+/obj/item/pen/fancy/quill/goose/make_pen_description()
 	desc = "A quill fashioned from a feather of the dire goose makes an excellent writing instrument, as well as a valuable trophy."
