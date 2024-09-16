@@ -244,6 +244,10 @@ var/global/list/closets = list()
 		..()
 		take_damage(proj_damage, Proj.atom_damage_type)
 
+// Override this so the logic in attackby() can run.
+/obj/structure/closet/grab_attack(obj/item/grab/G)
+	return FALSE
+
 /obj/structure/closet/attackby(obj/item/used_item, mob/user)
 
 	if(user.a_intent == I_HURT && used_item.get_attack_force(user))

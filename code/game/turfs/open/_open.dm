@@ -67,12 +67,6 @@
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attackby(C, user)
 
-	if(istype(C, /obj/item/grab))
-		var/obj/item/grab/G = C
-		if (G.affecting != G.assailant)
-			G.affecting.DoMove(get_dir(G.affecting.loc, src), user, TRUE)
-		return TRUE
-
 	return FALSE
 
 /turf/open/attack_hand(mob/user)

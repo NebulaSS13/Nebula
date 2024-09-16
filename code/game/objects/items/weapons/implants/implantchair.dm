@@ -68,17 +68,13 @@
 		src.updateUsrDialog()
 		src.add_fingerprint(usr)
 
-/obj/machinery/implantchair/attackby(var/obj/item/G, var/mob/user)
-	if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
-		var/mob/grabbed = grab.get_affecting_mob()
-		if(!istype(grabbed) || !grabbed.can_enter_cryopod(user))
-			return
-
-		var/mob/M = grab.affecting
-		if(put_mob(M))
-			qdel(G)
-	src.updateUsrDialog()
+/obj/machinery/implantchair/grab_attack(obj/item/grab/G)
+	var/mob/living/grabbed = G.get_affecting_mob()
+	if(istype(grabbed) && grabbed.can_enter_cryopod(G.assailant) && put_mob(grabbed))
+		qdel(G)
+		updateUsrDialog()
+		return TRUE
+	return ..()
 
 /obj/machinery/implantchair/proc/go_out(var/mob/M)
 	if(!( src.occupant ))

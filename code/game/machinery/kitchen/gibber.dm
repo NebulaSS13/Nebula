@@ -71,23 +71,21 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
 	return ..()
 
-/obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
-	if(!operating)
-		return
-	if(istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
-		if(!G.force_danger())
-			to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
-			return
+/obj/machinery/gibber/grab_attack(obj/item/grab/G)
+	if(G.force_danger())
+		move_into_gibber(G.assailant, G.affecting)
 		qdel(G)
-		move_into_gibber(user,G.affecting)
-	else if(istype(W, /obj/item/organ))
-		if(!user.try_unequip(W))
-			return
-		qdel(W)
-		user.visible_message("<span class='danger'>\The [user] feeds \the [W] into \the [src], obliterating it.</span>")
 	else
-		return ..()
+		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
+	return TRUE
+
+/obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
+	if(!operating && istype(W, /obj/item/organ))
+		if(user.try_unequip(W))
+			qdel(W)
+			user.visible_message(SPAN_DANGER("\The [user] feeds \the [W] into \the [src], obliterating it."))
+		return TRUE
+	return ..()
 
 /obj/machinery/gibber/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()

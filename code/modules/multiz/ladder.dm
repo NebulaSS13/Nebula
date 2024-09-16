@@ -110,6 +110,10 @@
 			addtimer(CALLBACK(M, TYPE_PROC_REF(/atom/movable, fall), T), 0)
 	return ..()
 
+// Override to allow attackby() flow to function with grabs.
+/obj/structure/ladder/grab_attack(obj/item/grab/G)
+	return FALSE
+
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
 	. = !istype(I, /obj/item/grab) && ..()
 	if(!.)

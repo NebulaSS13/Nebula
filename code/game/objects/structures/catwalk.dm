@@ -99,49 +99,56 @@
 /obj/structure/catwalk/attack_robot(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
 
+/obj/structure/catwalk/grab_attack(obj/item/grab/G)
+	G.affecting.forceMove(get_turf(src))
+	return TRUE
+
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
-	. = ..()
-	if(!.)
 
-		if(istype(C, /obj/item/grab))
-			var/obj/item/grab/G = C
-			G.affecting.forceMove(get_turf(src))
-			return TRUE
+	if((. = ..()))
+		return
 
-		if(istype(C, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = C
-			if(!cutter.slice(user))
-				return
+	if(istype(C, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/cutter = C
+		if(cutter.slice(user))
 			dismantle_structure(user)
+		return TRUE
+
+	if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
+
+		var/ladder = (locate(/obj/structure/ladder) in loc)
+		if(ladder)
+			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
 			return TRUE
 
-		if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
+		var/obj/item/stack/tile/ST = C
+		if(ST.in_use)
+			return TRUE
 
-			var/ladder = (locate(/obj/structure/ladder) in loc)
-			if(ladder)
-				to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
-				return TRUE
+		to_chat(user, SPAN_NOTICE("You begin plating \the [src] with \the [ST]."))
+		ST.in_use = 1
+		if (!do_after(user, 10))
+			ST.in_use = 0
+			return TRUE
 
-			var/obj/item/stack/tile/ST = C
-			if(!ST.in_use)
-				to_chat(user, "<span class='notice'>Placing tile...</span>")
-				ST.in_use = 1
-				if (!do_after(user, 10))
-					ST.in_use = 0
-					return TRUE
-				to_chat(user, "<span class='notice'>You plate \the [src]</span>")
-				name = "plated catwalk"
-				ST.in_use = 0
-				if(ST.use(1))
-					var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
-					for(var/flooring_type in decls)
-						var/decl/flooring/F = decls[flooring_type]
-						if(!F.build_type)
-							continue
-						if(istype(C, F.build_type) && (!F.build_material || C.material?.type == F.build_material))
-							plated_tile = F
-							break
-					update_icon()
+		to_chat(user, SPAN_NOTICE("You plate \the [src]"))
+		name = "plated catwalk"
+		ST.in_use = 0
+		if(!ST.use(1))
+			return TRUE
+
+		var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
+		for(var/flooring_type in decls)
+			var/decl/flooring/F = decls[flooring_type]
+			if(!F.build_type)
+				continue
+			if(istype(C, F.build_type) && (!F.build_material || C.material?.type == F.build_material))
+				plated_tile = F
+				break
+		update_icon()
+		return TRUE
+
+	return FALSE
 
 /obj/structure/catwalk/handle_default_crowbar_attackby(mob/user, obj/item/crowbar)
 	if(plated_tile)

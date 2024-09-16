@@ -80,6 +80,7 @@
 	return TRUE
 
 /obj/structure/bed/attackby(obj/item/used_item, mob/user)
+
 	if((. = ..()))
 		return
 
@@ -126,14 +127,15 @@
 			remove_padding()
 		return TRUE
 
-	if(istype(used_item, /obj/item/grab))
-		var/obj/item/grab/grab = used_item
-		var/mob/living/affecting = grab.get_affecting_mob()
-		if(affecting)
-			user.visible_message(SPAN_NOTICE("\The [user] attempts to put [affecting] onto \the [src]!"))
-			if(do_after(user, 2 SECONDS, src) && !QDELETED(affecting) && !QDELETED(user) && !QDELETED(grab) && user_buckle_mob(affecting, user))
-				qdel(used_item)
+/obj/structure/bed/grab_attack(obj/item/grab/G)
+	var/mob/living/user = G.assailant
+	var/mob/living/victim = G.get_affecting_mob()
+	if(istype(victim) && istype(user))
+		user.visible_message(SPAN_NOTICE("\The [user] attempts to put [victim] onto \the [src]!"))
+		if(do_after(user, 2 SECONDS, src) && !QDELETED(victim) && !QDELETED(user) && !QDELETED(G) && user_buckle_mob(victim, user))
+			qdel(G)
 		return TRUE
+	return ..()
 
 /obj/structure/bed/proc/add_padding(var/padding_type, var/new_padding_color)
 	reinf_material = GET_DECL(padding_type)
