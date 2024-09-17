@@ -63,12 +63,6 @@
 		silicon_camera.captureimage(A, usr)
 		return
 
-	/*
-		AI restrained() currently does nothing
-	if(restrained())
-		RestrainedClickOn(A)
-	else
-	*/
 	A.add_hiddenprint(src)
 	A.attack_ai(src)
 

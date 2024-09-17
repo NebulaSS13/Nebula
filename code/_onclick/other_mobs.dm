@@ -39,10 +39,6 @@
 		return TRUE
 	return FALSE
 
-
-/mob/living/human/RestrainedClickOn(var/atom/A)
-	return
-
 /mob/living/human/RangedAttack(var/atom/A, var/params)
 	//Climbing up open spaces
 	if(isturf(loc) && bound_overlay && !is_physically_disabled() && istype(A) && A.can_climb_from_below(src))
@@ -59,7 +55,26 @@
 	return FALSE
 
 /mob/living/RestrainedClickOn(var/atom/A)
-	return
+	if (A != src)
+		return ..()
+	if(world.time < next_restraint_chew || !get_equipped_item(slot_handcuffed_str) || a_intent != I_HURT || get_target_zone() != BP_MOUTH)
+		return FALSE
+	// Cannot chew with a mask or a full body restraint.
+	if (get_equipped_item(slot_wear_mask_str) || istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket))
+		return FALSE
+	// Type to hand so drakes don't chew off their own head.
+	var/obj/item/organ/external/hand/O = GET_EXTERNAL_ORGAN(src, get_active_held_item_slot())
+	if(!istype(O))
+		return FALSE
+	var/decl/pronouns/G = get_pronouns()
+	visible_message(
+		SPAN_DANGER("\The [src] chews on [G.his] [O.name]"),
+		SPAN_DANGER("You chew on your [O.name]!")
+	)
+	admin_attacker_log(src, "chewed on their [O.name]!")
+	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
+	next_restraint_chew = world.time + (2.5 SECONDS)
+	return TRUE
 
 /*
 	New Players:

@@ -73,7 +73,16 @@
 	return get_extension(source, base_type)
 
 /proc/get_extension(var/datum/source, var/base_type)
-	if(!istype(source) || !source.extensions || isnull(base_type))
+	// Invalid holder datum.
+	if(!istype(source))
+		PRINT_STACK_TRACE("Invalid source provided to get_extension(): [source || "null"]")
+		return
+	// Invalid extension type.
+	if(!ispath(base_type, /datum/extension))
+		PRINT_STACK_TRACE("Invalid base_type provided to get_extension(): [base_type || "null"]")
+		return
+	// Return early if we have no extensions whatsoever.
+	if(!source.extensions)
 		return
 	. = source.extensions[base_type]
 	if(!.)

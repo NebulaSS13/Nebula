@@ -1,5 +1,5 @@
 /mob/living/slime/RestrainedClickOn(var/atom/A)
-	return
+	return FALSE
 
 /mob/living/slime/UnarmedAttack(var/atom/A, var/proximity)
 
