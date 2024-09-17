@@ -127,13 +127,12 @@
 			remove_padding()
 		return TRUE
 
-/obj/structure/bed/grab_attack(obj/item/grab/G)
-	var/mob/living/user = G.assailant
-	var/mob/living/victim = G.get_affecting_mob()
+/obj/structure/bed/grab_attack(mob/user, obj/item/grab/grab)
+	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim) && istype(user))
-		user.visible_message(SPAN_NOTICE("\The [user] attempts to put [victim] onto \the [src]!"))
-		if(do_after(user, 2 SECONDS, src) && !QDELETED(victim) && !QDELETED(user) && !QDELETED(G) && user_buckle_mob(victim, user))
-			qdel(G)
+		user.visible_message(SPAN_NOTICE("\The [user] attempts to put \the [victim] onto \the [src]!"))
+		if(do_after(user, 2 SECONDS, src) && !QDELETED(victim) && !QDELETED(user) && !QDELETED(grab) && user_buckle_mob(victim, user))
+			qdel(grab)
 		return TRUE
 	return ..()
 

@@ -16,14 +16,13 @@
 		to_chat(src, SPAN_DANGER("You've lost an altar!"))
 	return ..()
 
-/obj/structure/deity/altar/grab_attack(obj/item/grab/G)
-	var/mob/living/user = G.assailant
-	var/mob/living/victim = G.get_affecting_mob()
-	if(G.force_danger() && istype(victim))
+/obj/structure/deity/altar/grab_attack(mob/user, obj/item/grab/grab)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(grab.force_danger() && istype(victim))
 		victim.dropInto(loc)
 		SET_STATUS_MAX(victim, STAT_WEAK, 1)
 		user.visible_message(SPAN_WARNING("\The [user] throws \the [victim] onto \the [src]!"))
-		qdel(G)
+		qdel(grab)
 		return TRUE
 	return ..()
 

@@ -661,7 +661,7 @@
 	- `G`: The grab hitting this atom
 	- Return: `TRUE` to skip attackby() and afterattack() or `FALSE`
 */
-/atom/proc/grab_attack(var/obj/item/grab/G)
+/atom/proc/grab_attack(mob/user, obj/item/grab/grab)
 	return FALSE
 
 /atom/proc/climb_on()

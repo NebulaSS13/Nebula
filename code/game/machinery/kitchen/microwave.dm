@@ -49,8 +49,8 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/microwave/grab_attack(obj/item/grab/G)
-	to_chat(G.assailant, SPAN_WARNING("This is ridiculous. You can not fit \the [G.affecting] into \the [src]."))
+/obj/machinery/microwave/grab_attack(mob/user, obj/item/grab/grab)
+	to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [grab.affecting] into \the [src]."))
 	return TRUE
 
 /obj/machinery/microwave/attackby(var/obj/item/O, var/mob/user)

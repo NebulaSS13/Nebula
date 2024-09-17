@@ -187,10 +187,10 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/suit_cycler/grab_attack(obj/item/grab/G)
-	var/mob/living/victim = G.get_affecting_mob()
-	if(istype(victim) && try_move_inside(victim, G.assailant))
-		qdel(G)
+/obj/machinery/suit_cycler/grab_attack(mob/user, obj/item/grab/grab)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(istype(victim) && try_move_inside(victim, user))
+		qdel(grab)
 		updateUsrDialog()
 		return TRUE
 	return ..()

@@ -148,9 +148,8 @@ var/global/list/hygiene_props = list()
 	..()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/grab_attack(obj/item/grab/G)
-	var/mob/living/user = G.assailant
-	var/mob/living/victim = G.get_affecting_mob()
+/obj/structure/hygiene/toilet/grab_attack(mob/user, obj/item/grab/grab)
+	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(!victim.loc == get_turf(src))
@@ -210,9 +209,8 @@ var/global/list/hygiene_props = list()
 	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
-/obj/structure/hygiene/urinal/grab_attack(obj/item/grab/G)
-	var/mob/living/user = G.assailant
-	var/mob/living/victim = G.get_affecting_mob()
+/obj/structure/hygiene/urinal/grab_attack(mob/user, obj/item/grab/grab)
+	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim))
 		if(!victim.loc == get_turf(src))
 			to_chat(user, SPAN_WARNING("\The [victim] needs to be on \the [src]."))

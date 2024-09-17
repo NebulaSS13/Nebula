@@ -117,7 +117,7 @@
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
 	if(QDELETED(src) || !current_grab || !assailant)
 		return TRUE
-	if(A.grab_attack(src) || current_grab.hit_with_grab(src, A, get_dist(user, A) <= 1))
+	if(A.grab_attack(user, src) || current_grab.hit_with_grab(src, A, get_dist(user, A) <= 1))
 		return TRUE
 	. = ..()
 

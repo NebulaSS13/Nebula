@@ -74,18 +74,18 @@ var/global/list/diversion_junctions = list()
 		return SPAN_NOTICE("Eject the items first!")
 	return ..()
 
-/obj/machinery/disposal/grab_attack(obj/item/grab/G)
-	var/mob/living/victim = G.get_affecting_mob()
+/obj/machinery/disposal/grab_attack(mob/user, obj/item/grab/grab)
+	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim))
-		usr.visible_message(SPAN_DANGER("\The [usr] starts putting \the [victim] into the disposal."))
-		if(do_after(usr, 2 SECONDS, src))
+		user.visible_message(SPAN_DANGER("\The [user] starts putting \the [victim] into the disposal."))
+		if(do_after(user, 2 SECONDS, src))
 			if (victim.client)
 				victim.client.perspective = EYE_PERSPECTIVE
 				victim.client.eye = src
 			victim.forceMove(src)
-			usr.visible_message(SPAN_DANGER("\The [victim] has been placed in \the [src] by \the [G.assailant]."))
-			qdel(G)
-			admin_attack_log(usr, victim, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
+			user.visible_message(SPAN_DANGER("\The [victim] has been placed in \the [src] by \the [user]."))
+			qdel(grab)
+			admin_attack_log(user, victim, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 		return TRUE
 	return ..()
 

@@ -28,10 +28,10 @@
 	. = ..()
 	to_chat(user, SPAN_NOTICE("The neural suppressors are switched [suppressing ? "on" : "off"]."))
 
-/obj/machinery/optable/grab_attack(obj/item/grab/G)
-	if(isliving(G.affecting) && check_table(G.affecting))
-		take_victim(G.affecting,usr)
-		qdel(G)
+/obj/machinery/optable/grab_attack(mob/user, obj/item/grab/grab)
+	if(isliving(grab.affecting) && check_table(grab.affecting))
+		take_victim(grab.affecting, user)
+		qdel(grab)
 		return TRUE
 	return ..()
 

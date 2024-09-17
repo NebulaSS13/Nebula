@@ -219,20 +219,20 @@
 
 	return ..()
 
-/obj/structure/fire_source/grab_attack(var/obj/item/grab/G)
-	var/mob/living/affecting_mob = G.get_affecting_mob()
-	if(!istype(affecting_mob))
+/obj/structure/fire_source/grab_attack(mob/user, obj/item/grab/grab)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(!istype(victim))
 		return FALSE
-	if (G.assailant.a_intent != I_HURT)
+	if (user.a_intent != I_HURT)
 		return TRUE
-	if (!G.force_danger())
-		to_chat(G.assailant, SPAN_WARNING("You need a better grip!"))
+	if (!grab.force_danger())
+		to_chat(user, SPAN_WARNING("You need a better grip!"))
 		return TRUE
-	affecting_mob.forceMove(get_turf(src))
-	SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
-	visible_message(SPAN_DANGER("\The [G.assailant] hurls \the [affecting_mob] onto \the [src]!"))
+	victim.forceMove(get_turf(src))
+	SET_STATUS_MAX(victim, STAT_WEAK, 5)
+	visible_message(SPAN_DANGER("\The [user] hurls \the [victim] onto \the [src]!"))
 	if(lit == FIRE_LIT)
-		affecting_mob.fire_act(return_air(), get_effective_burn_temperature(), 500)
+		victim.fire_act(return_air(), get_effective_burn_temperature(), 500)
 	return TRUE
 
 /obj/structure/fire_source/isflamesource()
@@ -528,7 +528,7 @@
 	color = /decl/material/solid/metal/iron::color
 	obj_flags = OBJ_FLAG_HOLLOW
 
-/obj/structure/fire_source/stove/grab_attack(obj/item/grab/G)
+/obj/structure/fire_source/stove/grab_attack(mob/user, obj/item/grab/grab)
 	return FALSE
 
 /obj/structure/fire_source/fireplace
@@ -545,7 +545,7 @@
 	light_color_mid = "#d47b27"
 	light_color_low = "#e44141"
 
-/obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/G)
+/obj/structure/fire_source/fireplace/grab_attack(mob/user, obj/item/grab/grab)
 	return FALSE
 
 #define MATERIAL_FIREPLACE(material_name) \

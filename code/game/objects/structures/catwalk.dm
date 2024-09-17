@@ -83,25 +83,22 @@
 	if(!QDELETED(src) && severity != 3)
 		physically_destroyed()
 
-/obj/structure/catwalk/grab_attack(var/obj/item/grab/G)
-	var/mob/living/affecting_mob = G.get_affecting_mob()
+/obj/structure/catwalk/grab_attack(mob/user, obj/item/grab/grab)
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()
 		if (occupied)
-			to_chat(G.assailant, SPAN_WARNING("There's \a [occupied] in the way."))
+			to_chat(user, SPAN_WARNING("There's \a [occupied] in the way."))
 			return TRUE
-		G.affecting.forceMove(src.loc)
-		if(affecting_mob)
-			SET_STATUS_MAX(affecting_mob, STAT_WEAK, rand(2,5))
-		visible_message(SPAN_DANGER("[G.assailant] puts [G.affecting] on \the [src]."))
+		grab.affecting.forceMove(src.loc)
+		var/mob/living/victim = grab.get_affecting_mob()
+		if(istype(victim))
+			SET_STATUS_MAX(victim, STAT_WEAK, rand(2,5))
+			visible_message(SPAN_DANGER("\The [user] puts \the [victim] on \the [src]."))
 		return TRUE
+	return ..()
 
 /obj/structure/catwalk/attack_robot(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
-
-/obj/structure/catwalk/grab_attack(obj/item/grab/G)
-	G.affecting.forceMove(get_turf(src))
-	return TRUE
 
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 

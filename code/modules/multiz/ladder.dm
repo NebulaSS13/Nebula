@@ -111,7 +111,7 @@
 	return ..()
 
 // Override to allow attackby() flow to function with grabs.
-/obj/structure/ladder/grab_attack(obj/item/grab/G)
+/obj/structure/ladder/grab_attack(mob/user, obj/item/grab/grab)
 	return FALSE
 
 /obj/structure/ladder/attackby(obj/item/I, mob/user)

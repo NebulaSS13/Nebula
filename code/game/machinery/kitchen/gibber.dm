@@ -71,12 +71,12 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
 	return ..()
 
-/obj/machinery/gibber/grab_attack(obj/item/grab/G)
-	if(G.force_danger())
-		move_into_gibber(G.assailant, G.affecting)
-		qdel(G)
+/obj/machinery/gibber/grab_attack(mob/user, obj/item/grab/grab)
+	if(grab.force_danger())
+		move_into_gibber(user, grab.affecting)
+		qdel(grab)
 	else
-		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
+		to_chat(user, SPAN_DANGER("You need a better grip to do that!"))
 	return TRUE
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
