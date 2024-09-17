@@ -85,10 +85,6 @@
 
 	return ..()
 
-/obj/item/clipboard/AltClick(mob/user)
-	if(stored_pen)
-		remove_pen(user)
-
 /obj/item/clipboard/attack_self(mob/user)
 	if(CanPhysicallyInteractWith(user, src))
 		interact(user)
@@ -194,6 +190,27 @@
 	else
 		close_browser(user, initial(name))
 
+/obj/item/clipboard/get_alt_interactions(mob/user)
+	. = ..()
+	if(stored_pen)
+		LAZYADD(., /decl/interaction_handler/clipboard_remove_pen)
+
+/decl/interaction_handler/clipboard_remove_pen
+	name = "Remove Pen"
+	expected_target_type = /obj/item/clipboard
+
+/decl/interaction_handler/clipboard_remove_pen/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/item/clipboard/clipboard = target
+		return !!clipboard.stored_pen
+
+/decl/interaction_handler/clipboard_remove_pen/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/clipboard/clipboard = target
+	if(clipboard.stored_pen)
+		clipboard.remove_pen(user)
+
+// Subtypes below.
 /obj/item/clipboard/ebony
 	material = /decl/material/solid/organic/wood/ebony
 
