@@ -9,6 +9,7 @@
 	can_hold = list(
 		/obj/item/cash,
 		/obj/item/card,
+		/obj/item/charge_stick,
 		/obj/item/clothing/mask/smokable,
 		/obj/item/cosmetics,
 		/obj/item/grooming,
