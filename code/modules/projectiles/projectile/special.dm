@@ -99,9 +99,9 @@
 			if(prob(15))
 				M.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
 				SET_STATUS_MAX(M, STAT_WEAK, 5)
-				var/decl/pronouns/G = M.get_pronouns()
+				var/decl/pronouns/pronouns = M.get_pronouns()
 				visible_message(
-					SPAN_DANGER("\The [M] writhes in pain as [G.his] vacuoles boil."),
+					SPAN_DANGER("\The [M] writhes in pain as [pronouns.his] vacuoles boil."),
 					blind_message = SPAN_WARNING("You hear a crunching sound.")
 				)
 			if(prob(35))

@@ -147,9 +147,9 @@
 				if(message == "Cancel")
 					return
 				else if(message == "Yes")
-					var/decl/pronouns/G = get_pronouns()
+					var/decl/pronouns/pronouns = get_pronouns()
 					owner.visible_message(SPAN_WARNING("\The [owner]'s skin shifts to a deep red colour with dark chevrons running down in an almost hypnotic \
-						pattern. Standing tall, [G.he] strikes, sharp spikes aimed at those threatening [G.him], claws whooshing through the air past them."))
+						pattern. Standing tall, [pronouns.he] strikes, sharp spikes aimed at those threatening [pronouns.him], claws whooshing through the air past them."))
 				playsound(owner.loc, 'sound/effects/angrybug.ogg', 60, 0)
 				owner.skin_state = SKIN_THREAT
 				owner.update_skin()

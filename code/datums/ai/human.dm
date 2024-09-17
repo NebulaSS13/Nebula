@@ -34,20 +34,20 @@
 			if(dam > maxdam && (maxdam == 0 || prob(50)) )
 				damaged_organ = E
 				maxdam = dam
-		var/decl/pronouns/G = H.get_pronouns()
+		var/decl/pronouns/pronouns = H.get_pronouns()
 		if(damaged_organ)
 			if(damaged_organ.status & ORGAN_BLEEDING)
-				H.custom_emote("clutches [G.his] [damaged_organ.name], trying to stop the blood.")
+				H.custom_emote("clutches [pronouns.his] [damaged_organ.name], trying to stop the blood.")
 			else if(damaged_organ.status & ORGAN_BROKEN)
-				H.custom_emote("holds [G.his] [damaged_organ.name] carefully.")
+				H.custom_emote("holds [pronouns.his] [damaged_organ.name] carefully.")
 			else if(damaged_organ.burn_dam > damaged_organ.brute_dam && damaged_organ.organ_tag != BP_HEAD)
-				H.custom_emote("blows on [G.his] [damaged_organ.name] carefully.")
+				H.custom_emote("blows on [pronouns.his] [damaged_organ.name] carefully.")
 			else
-				H.custom_emote("rubs [G.his] [damaged_organ.name] carefully.")
+				H.custom_emote("rubs [pronouns.his] [damaged_organ.name] carefully.")
 
 		for(var/obj/item/organ/I in H.get_internal_organs())
 			if((I.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(I))
 				continue
 			if(I.damage > 2 && prob(1))
 				var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
-				H.custom_emote("clutches [G.his] [parent.name]!")
+				H.custom_emote("clutches [pronouns.his] [parent.name]!")

@@ -56,9 +56,9 @@
 				to_chat(owner, "\The [I] fails to retract.")
 				return
 			items += I
-			var/decl/pronouns/G = owner.get_pronouns()
+			var/decl/pronouns/pronouns = owner.get_pronouns()
 			owner.visible_message(
-				SPAN_NOTICE("\The [owner] retracts [G.his] [I.name] into [G.his] [limb ? limb.name : "limb"]."),
+				SPAN_NOTICE("\The [owner] retracts [pronouns.his] [I.name] into [pronouns.his] [limb ? limb.name : "limb"]."),
 				SPAN_NOTICE("You retract your [I.name] into your [limb ? limb.name : "limb"].")
 			)
 		else
@@ -70,8 +70,8 @@
 		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item
 			//Keep track of it, make sure it returns
-			var/decl/pronouns/G = owner.get_pronouns()
+			var/decl/pronouns/pronouns = owner.get_pronouns()
 			owner.visible_message(
-				SPAN_NOTICE("\The [owner] extends [G.his] [item.name] from [G.his] [limb ? limb.name : "limb"]."),
+				SPAN_NOTICE("\The [owner] extends [pronouns.his] [item.name] from [pronouns.his] [limb ? limb.name : "limb"]."),
 				SPAN_NOTICE("You extend your [item.name] from your [limb ? limb.name : "limb"].")
 			)

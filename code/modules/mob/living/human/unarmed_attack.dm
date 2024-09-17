@@ -110,10 +110,10 @@
 						target.set_dir(global.reverse_dir[target.dir])
 					target.apply_effect(attack_damage * 0.4, WEAKEN, armour)
 			if(BP_GROIN)
-				var/decl/pronouns/G = target.get_pronouns()
+				var/decl/pronouns/pronouns = target.get_pronouns()
 				target.visible_message( \
-					SPAN_WARNING("\The [target] looks like [G.he] [G.is] in pain!"), \
-					SPAN_WARNING(G.get_message_for_being_kicked_in_the_dick()))
+					SPAN_WARNING("\The [target] looks like [pronouns.he] [pronouns.is] in pain!"), \
+					SPAN_WARNING(pronouns.get_message_for_being_kicked_in_the_dick()))
 				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
 				if(!target.current_posture.prone)
@@ -145,17 +145,17 @@
 
 /decl/natural_attack/proc/handle_eye_attack(var/mob/living/human/user, var/mob/living/human/target)
 	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(target, BP_EYES)
-	var/decl/pronouns/G = user.get_pronouns()
+	var/decl/pronouns/pronouns = user.get_pronouns()
 	if(eyes)
 		eyes.take_internal_damage(rand(3,4), 1)
-		user.visible_message(SPAN_DANGER("\The [user] jams [G.his] [eye_attack_text] into \the [target]'s [eyes.name]!"))
+		user.visible_message(SPAN_DANGER("\The [user] jams [pronouns.his] [eye_attack_text] into \the [target]'s [eyes.name]!"))
 		if(eyes.can_feel_pain())
 			to_chat(target, SPAN_DANGER("You experience immense pain as [eye_attack_text_victim] are jammed into your [eyes.name]!"))
 		else
 			to_chat(target, SPAN_DANGER("You experience [eye_attack_text_victim] being jammed into your [eyes.name]."))
 	else
 		var/decl/pronouns/target_gender = target.get_pronouns()
-		user.visible_message(SPAN_DANGER("\The [user] attempts to press [G.his] [eye_attack_text] into \the [target]'s eyes, but [target_gender.he] [target_gender.does]n't have any!"))
+		user.visible_message(SPAN_DANGER("\The [user] attempts to press [pronouns.his] [eye_attack_text] into \the [target]'s eyes, but [target_gender.he] [target_gender.does]n't have any!"))
 
 /decl/natural_attack/proc/damage_flags()
 	return (src.sharp? DAM_SHARP : 0)|(src.edge? DAM_EDGE : 0)
@@ -319,17 +319,17 @@
 	attack_damage = clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
-	var/decl/pronouns/G = user.get_pronouns()
+	var/decl/pronouns/pronouns = user.get_pronouns()
 	var/attack_string
 	switch(attack_damage)
 		if(1 to 4)
 			attack_string = pick(
 				"stomped on \the [target]'s [affecting.name][pick("", "with their [shoe_text]")]",
-				"stomped [G.his] [shoe_text] down on \the [target]'s [affecting.name]")
+				"stomped [pronouns.his] [shoe_text] down on \the [target]'s [affecting.name]")
 		if(5)
 			attack_string = pick(
 				"stomped down hard on \the [target]'s [affecting.name][pick("", "with their [shoe_text]")]",
-				"slammed [G.his] [shoe_text] down on \the [target]'s [affecting.name]")
+				"slammed [pronouns.his] [shoe_text] down on \the [target]'s [affecting.name]")
 	if(attack_string)
 		user.visible_message(SPAN_DANGER("\The [user] [attack_string]!"))
 

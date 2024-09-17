@@ -153,9 +153,9 @@
 	for(var/obj/item/organ/external/child in E.children)
 		child.status &= ~ORGAN_CUT_AWAY
 
-	var/decl/pronouns/G = get_pronouns()
+	var/decl/pronouns/pronouns = get_pronouns()
 	visible_message(
-		SPAN_NOTICE("\The [src] attaches \the [E] to [G.his] body!"),
+		SPAN_NOTICE("\The [src] attaches \the [E] to [pronouns.his] body!"),
 		SPAN_NOTICE("You attach \the [E] to your body!"))
 	try_refresh_visible_overlays() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
 	return TRUE
@@ -182,8 +182,8 @@
 	remove_organ(E, update_icon = TRUE)
 	E.dropInto(loc)
 	put_in_hands(E)
-	var/decl/pronouns/G = get_pronouns()
+	var/decl/pronouns/pronouns = get_pronouns()
 	visible_message(
-		SPAN_NOTICE("\The [src] detaches [G.his] [E.name]!"),
+		SPAN_NOTICE("\The [src] detaches [pronouns.his] [E.name]!"),
 		SPAN_NOTICE("You detach your [E.name]!"))
 	return TRUE

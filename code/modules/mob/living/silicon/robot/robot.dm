@@ -1005,8 +1005,8 @@
 				laws = new /datum/ai_laws/syndicate_override
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				global.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-				var/decl/pronouns/G = user.get_pronouns(ignore_coverings = TRUE)
-				set_zeroth_law("Only [user.real_name] and people [G.he] designate[G.s] as being such are operatives.")
+				var/decl/pronouns/pronouns = user.get_pronouns(ignore_coverings = TRUE)
+				set_zeroth_law("Only [user.real_name] and people [pronouns.he] designate[pronouns.s] as being such are operatives.")
 				SetLockdown(0)
 				. = 1
 				spawn()

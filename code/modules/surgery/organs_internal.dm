@@ -256,13 +256,13 @@
 		PRINT_STACK_TRACE("Target ([target]) of surgery [type] has no bodytype!")
 		return FALSE
 
-	var/decl/pronouns/G = O.get_pronouns()
+	var/decl/pronouns/pronouns = O.get_pronouns()
 	if(O.damage > (O.max_damage * 0.75))
-		to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
+		to_chat(user, SPAN_WARNING("\The [O.name] [pronouns.is] in no state to be transplanted."))
 		return FALSE
 
 	if(O.w_class > affected.cavity_max_w_class)
-		to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
+		to_chat(user, SPAN_WARNING("\The [O.name] [pronouns.is] too big for [affected.cavity_name] cavity!"))
 		return FALSE
 
 	var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, O.organ_tag)

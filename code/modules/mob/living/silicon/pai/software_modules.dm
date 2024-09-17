@@ -66,11 +66,11 @@
 
 		// Check the carrier
 		var/answer = input(M, "[P] is requesting a DNA sample from you. Will you allow it to confirm your identity?", "[P] Check DNA", "No") in list("Yes", "No")
-		var/decl/pronouns/G = M.get_pronouns()
+		var/decl/pronouns/pronouns = M.get_pronouns()
 		if(answer == "Yes")
 			if(!QDELETED(P) && (P.loc == M))
 				P.visible_message( \
-					message = SPAN_NOTICE("\The [M] presses [G.his] thumb against \the [P]."), \
+					message = SPAN_NOTICE("\The [M] presses [pronouns.his] thumb against \the [P]."), \
 					blind_message = SPAN_NOTICE("\The [P] makes a sharp clicking sound as it extracts DNA material from \the [M]."))
 				var/unique_enzymes = M.get_unique_enzymes()
 				to_chat(P, SPAN_NOTICE("<h3>[M]'s UE string : [unique_enzymes || "NULL"]</h3>"))
@@ -79,7 +79,7 @@
 				else
 					to_chat(P, "<b>DNA does not match stored Master DNA.</b>")
 		else
-			to_chat(P, SPAN_WARNING("\The [M] does not seem like [G.he] is going to provide a DNA sample willingly."))
+			to_chat(P, SPAN_WARNING("\The [M] does not seem like [pronouns.he] is going to provide a DNA sample willingly."))
 		return 1
 
 /datum/pai_software/radio_config

@@ -373,10 +373,10 @@
 		if(blocked)
 			to_chat(target, SPAN_WARNING("\The [blocked] is in the way!"))
 			return TRUE
-		var/decl/pronouns/G = user.get_pronouns()
+		var/decl/pronouns/pronouns = user.get_pronouns()
 		var/puff_str = pick("drag","puff","pull")
 		user.visible_message(\
-			SPAN_NOTICE("\The [user] takes a [puff_str] on [G.his] [name]."), \
+			SPAN_NOTICE("\The [user] takes a [puff_str] on [pronouns.his] [name]."), \
 			SPAN_NOTICE("You take a [puff_str] on your [name]."))
 		smoke(12, TRUE)
 		add_trace_DNA(target)

@@ -341,8 +341,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 				MED.use(1)
 		else
-			var/decl/pronouns/G = get_pronouns()
-			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [G.him] back to life."))
+			var/decl/pronouns/pronouns = get_pronouns()
+			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [pronouns.him] back to life."))
 		return TRUE
 
 	return ..()

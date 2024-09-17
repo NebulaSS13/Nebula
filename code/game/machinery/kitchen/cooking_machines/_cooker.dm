@@ -57,7 +57,7 @@
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(!istype(victim))
 		to_chat(user, SPAN_WARNING("You can't cook that."))
-			return TRUE
+		return TRUE
 	if(!can_cook_mobs)
 		to_chat(user, SPAN_WARNING("That's not going to fit."))
 		return TRUE

@@ -111,8 +111,8 @@
 		if(stat != DEAD)
 
 			var/stamina_cost = 0
-			for(var/obj/item/grab/G as anything in get_active_grabs())
-				stamina_cost -= G.grab_slowdown()
+			for(var/obj/item/grab/grab as anything in get_active_grabs())
+				stamina_cost -= grab.grab_slowdown()
 			stamina_cost = round(stamina_cost)
 			if(stamina_cost < 0)
 				adjust_stamina(stamina_cost)

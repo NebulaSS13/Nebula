@@ -432,9 +432,9 @@
 
 /atom/movable/proc/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		var/decl/pronouns/G = buckled.get_pronouns()
+		var/decl/pronouns/pronouns = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] buckles [G.self] to \the [src]."),
+			SPAN_NOTICE("\The [buckled] buckles [pronouns.self] to \the [src]."),
 			SPAN_NOTICE("You buckle yourself to \the [src]."),
 			SPAN_NOTICE("You hear metal clanking.")
 		)
@@ -449,16 +449,16 @@
 	var/mob/living/M = unbuckle_mob()
 	if(M)
 		show_unbuckle_message(M, user)
-		for(var/obj/item/grab/G as anything in (M.grabbed_by|grabbed_by))
-			qdel(G)
+		for(var/obj/item/grab/grab as anything in (M.grabbed_by|grabbed_by))
+			qdel(grab)
 		add_fingerprint(user)
 	return M
 
 /atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		var/decl/pronouns/G = buckled.get_pronouns()
+		var/decl/pronouns/pronouns = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] unbuckled [G.self] from \the [src]!"),
+			SPAN_NOTICE("\The [buckled] unbuckled [pronouns.self] from \the [src]!"),
 			SPAN_NOTICE("You unbuckle yourself from \the [src]."),
 			SPAN_NOTICE("You hear metal clanking.")
 		)

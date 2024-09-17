@@ -235,9 +235,9 @@
 	if(!P.isflamesource())
 		to_chat(user, SPAN_WARNING("\The [P] is not lit."))
 		return
-	var/decl/pronouns/G = user.get_pronouns()
+	var/decl/pronouns/pronouns = user.get_pronouns()
 	user.visible_message(\
-		SPAN_WARNING("\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!"), \
+		SPAN_WARNING("\The [user] holds \the [P] up to \the [src]. It looks like [pronouns.he] [pronouns.is] trying to burn it!"), \
 		SPAN_WARNING("You hold \the [P] up to \the [src], burning it slowly."))
 	if(!do_after(user,20, src))
 		to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))

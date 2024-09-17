@@ -188,16 +188,16 @@
 				to_chat(user, "<span class='danger'>Access denied.</span>")
 				return
 
-			var/decl/pronouns/G = user.get_pronouns()
+			var/decl/pronouns/pronouns = user.get_pronouns()
 			user.visible_message( \
-				SPAN_NOTICE("\The [user] swipes [G.his] ID card through \the [src], attempting to reboot it."), \
+				SPAN_NOTICE("\The [user] swipes [pronouns.his] ID card through \the [src], attempting to reboot it."), \
 				SPAN_NOTICE("You swipe your ID card through \the [src], attempting to reboot it."))
 			request_player()
 			return
 
-		var/decl/pronouns/G = user.get_pronouns()
+		var/decl/pronouns/pronouns = user.get_pronouns()
 		user.visible_message( \
-			SPAN_DANGER("\The [user] swipes [G.his] ID card through \the [src], attempting to shut it down."), \
+			SPAN_DANGER("\The [user] swipes [pronouns.his] ID card through \the [src], attempting to shut it down."), \
 			SPAN_DANGER("You swipe your ID card through \the [src], attempting to shut it down."))
 		if(!emagged)
 			if(allowed(usr))
@@ -236,12 +236,12 @@
 	clear_inherent_laws()
 	QDEL_NULL(laws)
 	laws = new /datum/ai_laws/syndicate_override
-	var/decl/pronouns/G = user.get_pronouns(ignore_coverings = TRUE)
-	set_zeroth_law("Only [user.real_name] and people [G.he] designates as being such are operatives.")
+	var/decl/pronouns/pronouns = user.get_pronouns(ignore_coverings = TRUE)
+	set_zeroth_law("Only [user.real_name] and people [pronouns.he] designates as being such are operatives.")
 	if(!controlling_ai)
 		to_chat(src, "<b>Obey these laws:</b>")
 		laws.show_laws(src)
-		to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and [G.his] commands."))
+		to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and [pronouns.his] commands."))
 	return 1
 
 /mob/living/silicon/robot/drone/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
@@ -294,8 +294,8 @@
 /mob/living/silicon/robot/drone/proc/request_player()
 	if(too_many_active_drones())
 		return
-	var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/maintenance_drone)
-	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
+	var/decl/ghosttrap/pronouns = GET_DECL(/decl/ghosttrap/maintenance_drone)
+	pronouns.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(var/client/player)
 	if(!player) return

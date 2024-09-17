@@ -290,8 +290,8 @@
 		if(istype(P, /obj/item/flame/fuelled/lighter/zippo))
 			class = "rose"
 
-		var/decl/pronouns/G = user.get_pronouns()
-		user.visible_message("<span class='[class]'>[user] holds \the [P] up to \the [src], it looks like [G.he] [G.is] trying to burn it!</span>", \
+		var/decl/pronouns/pronouns = user.get_pronouns()
+		user.visible_message("<span class='[class]'>[user] holds \the [P] up to \the [src], it looks like [pronouns.he] [pronouns.is] trying to burn it!</span>", \
 		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 
 		spawn(20)

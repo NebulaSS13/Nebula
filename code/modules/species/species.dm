@@ -658,8 +658,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	target.visible_message("<span class='danger'>[attacker] attempted to disarm \the [target]!</span>")
 
 /decl/species/proc/disfigure_msg(var/mob/living/human/H) //Used for determining the message a disfigured face has on examine. To add a unique message, just add this onto a specific species and change the "return" message.
-	var/decl/pronouns/G = H.get_pronouns()
-	return SPAN_DANGER("[G.His] face is horribly mangled!\n")
+	var/decl/pronouns/pronouns = H.get_pronouns()
+	return SPAN_DANGER("[pronouns.His] face is horribly mangled!\n")
 
 /decl/species/proc/get_available_accessories(var/decl/bodytype/bodytype, accessory_category)
 	. = list()

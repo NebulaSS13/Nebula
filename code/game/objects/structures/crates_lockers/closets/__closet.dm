@@ -261,8 +261,8 @@ var/global/list/closets = list()
 	if(opened)
 		if(can_wield)
 			if(istype(used_item, /obj/item/grab))
-				var/obj/item/grab/G = used_item
-				receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
+				var/obj/item/grab/grab = used_item
+				receive_mouse_drop(grab.affecting, user)      //act like they were dragged onto the closet
 				return TRUE
 			if(IS_WELDER(used_item))
 				var/obj/item/weldingtool/WT = used_item

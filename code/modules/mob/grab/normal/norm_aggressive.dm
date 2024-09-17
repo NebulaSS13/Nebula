@@ -15,28 +15,28 @@
 	grab_icon_state    = "reinforce1"
 	break_chance_table = list(5, 20, 40, 80, 100)
 
-/decl/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
-	var/mob/living/affecting_mob = G.get_affecting_mob()
+/decl/grab/normal/aggressive/process_effect(var/obj/item/grab/grab)
+	var/mob/living/affecting_mob = grab.get_affecting_mob()
 	if(istype(affecting_mob))
-		if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
+		if(grab.target_zone in list(BP_L_HAND, BP_R_HAND))
 			affecting_mob.drop_held_items()
 		// Keeps those who are on the ground down
 		if(affecting_mob.current_posture.prone)
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 4)
 
-/decl/grab/normal/aggressive/can_upgrade(var/obj/item/grab/G)
+/decl/grab/normal/aggressive/can_upgrade(var/obj/item/grab/grab)
 	. = ..()
 	if(.)
-		if(!ishuman(G.affecting))
-			to_chat(G.assailant, SPAN_WARNING("You can only upgrade an aggressive grab when grappling a human!"))
+		if(!ishuman(grab.affecting))
+			to_chat(grab.assailant, SPAN_WARNING("You can only upgrade an aggressive grab when grappling a human!"))
 			return FALSE
-		if(!(G.target_zone in list(BP_CHEST, BP_HEAD)))
-			to_chat(G.assailant, SPAN_WARNING("You need to be grabbing their torso or head for this!"))
+		if(!(grab.target_zone in list(BP_CHEST, BP_HEAD)))
+			to_chat(grab.assailant, SPAN_WARNING("You need to be grabbing their torso or head for this!"))
 			return FALSE
-		var/mob/living/human/affecting_mob = G.get_affecting_mob()
+		var/mob/living/human/affecting_mob = grab.get_affecting_mob()
 		if(istype(affecting_mob))
 			var/obj/item/clothing/C = affecting_mob.get_equipped_item(slot_head_str)
 			if(istype(C)) //hardsuit helmets etc
 				if((C.max_pressure_protection) && C.armor[ARMOR_MELEE] > 20)
-					to_chat(G.assailant, SPAN_WARNING("\The [C] is in the way!"))
+					to_chat(grab.assailant, SPAN_WARNING("\The [C] is in the way!"))
 					return FALSE

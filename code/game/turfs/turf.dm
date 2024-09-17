@@ -685,8 +685,8 @@
 		AM.forceMove(above_wall)
 		if(isliving(AM))
 			var/mob/living/L = AM
-			for(var/obj/item/grab/G in L.get_active_grabs())
-				G.affecting.forceMove(above_wall)
+			for(var/obj/item/grab/grab in L.get_active_grabs())
+				grab.affecting.forceMove(above_wall)
 	else
 		to_chat(AM, SPAN_WARNING("Something blocks the path."))
 	return TRUE

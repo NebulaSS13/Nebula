@@ -252,9 +252,9 @@ var/global/const/NO_EMAG_ACT = -50
 
 	id_card.registered_name = real_name
 
-	var/decl/pronouns/G = get_pronouns()
-	if(G)
-		id_card.card_gender = capitalize(G.bureaucratic_term )
+	var/decl/pronouns/pronouns = get_pronouns()
+	if(pronouns)
+		id_card.card_gender = capitalize(pronouns.bureaucratic_term )
 	else
 		id_card.card_gender = "Unset"
 	id_card.set_id_photo(src)

@@ -329,8 +329,8 @@
 		var/prot = FALSE
 		var/mob/living/human/H = user
 		if(istype(H))
-			var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
-			if(istype(G) && G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
+			var/obj/item/clothing/gloves/pronouns = H.get_equipped_item(slot_gloves_str)
+			if(istype(pronouns) && pronouns.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
 				prot = TRUE
 
 		if(prot > 0 || user.has_genetic_condition(GENE_COND_COLD_RESISTANCE))
@@ -341,9 +341,9 @@
 			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, user.get_active_held_item_slot())
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
 				user.apply_damage(3, BURN, hand.organ_tag, used_weapon = src)
-				var/decl/pronouns/G = user.get_pronouns()
+				var/decl/pronouns/pronouns = user.get_pronouns()
 				user.visible_message( \
-					SPAN_DANGER("\The [user]'s [hand.name] burns and sizzles as [G.he] touch[G.es] the hot [get_fitting_name()]."), \
+					SPAN_DANGER("\The [user]'s [hand.name] burns and sizzles as [pronouns.he] touch[pronouns.es] the hot [get_fitting_name()]."), \
 					SPAN_DANGER("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()]."))
 		else
 			to_chat(user, SPAN_WARNING("You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand."))

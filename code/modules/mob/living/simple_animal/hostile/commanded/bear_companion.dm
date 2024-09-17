@@ -36,17 +36,17 @@
 	set_stance(STANCE_COMMANDED_MISC) //nothing can stop this ride
 	spawn(0)
 		body.visible_message("\The [body] starts to dance!.")
-		var/decl/pronouns/G = body.get_pronouns()
+		var/decl/pronouns/pronouns = body.get_pronouns()
 		for(var/i in 1 to 10)
 			if(get_stance() != STANCE_COMMANDED_MISC || body.incapacitated()) //something has stopped this ride.
 				return
 			var/message = pick(\
-							"moves [G.his] head back and forth!",\
-							"bobs [G.his] booty!",\
-							"shakes [G.his] paws in the air!",\
-							"wiggles [G.his] ears!",\
-							"taps [G.his] foot!",\
-							"shrugs [G.his] shoulders!",\
+							"moves [pronouns.his] head back and forth!",\
+							"bobs [pronouns.his] booty!",\
+							"shakes [pronouns.his] paws in the air!",\
+							"wiggles [pronouns.his] ears!",\
+							"taps [pronouns.his] foot!",\
+							"shrugs [pronouns.his] shoulders!",\
 							"dances like you've never seen!")
 			if(body.dir != WEST)
 				body.set_dir(WEST)
@@ -56,4 +56,4 @@
 			sleep(30)
 		set_stance(STANCE_COMMANDED_STOP)
 		body.set_dir(SOUTH)
-		body.visible_message("\The [body] bows, finished with [G.his] dance.")
+		body.visible_message("\The [body] bows, finished with [pronouns.his] dance.")

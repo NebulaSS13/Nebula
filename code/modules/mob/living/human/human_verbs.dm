@@ -68,8 +68,8 @@
 	update_hair()
 	try_refresh_visible_overlays()
 
-	var/decl/pronouns/G = get_pronouns()
-	visible_message("<span class='notice'>\The [src] morphs and changes [G.his] appearance!</span>", "<span class='notice'>You change your appearance!</span>", "<span class='warning'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</span>")
+	var/decl/pronouns/pronouns = get_pronouns()
+	visible_message("<span class='notice'>\The [src] morphs and changes [pronouns.his] appearance!</span>", "<span class='notice'>You change your appearance!</span>", "<span class='warning'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</span>")
 
 /mob/living/human/proc/remotesay()
 	set name = "Project mind"
@@ -97,8 +97,8 @@
 		target.show_message("<span class='notice'>You hear a voice that seems to echo around the room: [say]</span>")
 	usr.show_message("<span class='notice'>You project your mind into [target.real_name]: [say]</span>")
 	log_say("[key_name(usr)] sent a telepathic message to [key_name(target)]: [say]")
-	for(var/mob/observer/ghost/G in global.player_list)
-		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
+	for(var/mob/observer/ghost/pronouns in global.player_list)
+		pronouns.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
 
 /mob/living/human/proc/remoteobserve()
 	set name = "Remote View"
@@ -173,15 +173,15 @@
 		return
 
 	var/self = (usr == src)
-	var/decl/pronouns/G = usr.get_pronouns()
+	var/decl/pronouns/pronouns = usr.get_pronouns()
 	if(!self)
 		var/decl/pronouns/target_gender = src.get_pronouns()
 		usr.visible_message( \
-			SPAN_NOTICE("\The [usr] kneels down, puts [G.his] hand on \the [src]'s wrist, and begins counting [target_gender.his] pulse."), \
+			SPAN_NOTICE("\The [usr] kneels down, puts [pronouns.his] hand on \the [src]'s wrist, and begins counting [target_gender.his] pulse."), \
 			SPAN_NOTICE("You begin counting \the [src]'s pulse."))
 	else
 		usr.visible_message(
-			SPAN_NOTICE("\The [usr] begins counting [G.his] pulse."), \
+			SPAN_NOTICE("\The [usr] begins counting [pronouns.his] pulse."), \
 			SPAN_NOTICE("You begin counting your pulse."))
 
 	if(get_pulse())
@@ -304,10 +304,10 @@
 	var/fail_prob = U.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
 	if(self)
 		fail_prob += U.skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
-	var/decl/pronouns/G = get_pronouns()
+	var/decl/pronouns/pronouns = get_pronouns()
 	if(prob(fail_prob))
 		visible_message( \
-		"<span class='danger'>[U] pops [self ? "[G.his]" : "[S]'s"] [current_limb.joint] in the WRONG place!</span>", \
+		"<span class='danger'>[U] pops [self ? "[pronouns.his]" : "[S]'s"] [current_limb.joint] in the WRONG place!</span>", \
 		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!</span>" \
 		)
 		current_limb.add_pain(30)
@@ -315,7 +315,7 @@
 		shock_stage += 20
 	else
 		visible_message( \
-		"<span class='danger'>[U] pops [self ? "[G.his]" : "[S]'s"] [current_limb.joint] back in!</span>", \
+		"<span class='danger'>[U] pops [self ? "[pronouns.his]" : "[S]'s"] [current_limb.joint] back in!</span>", \
 		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] back in!</span>" \
 		)
 		current_limb.undislocate()

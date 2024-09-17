@@ -179,9 +179,9 @@
 	if(!P.isflamesource() || user.incapacitated())
 		return
 	var/span_class = istype(P, /obj/item/flame/fuelled/lighter/zippo) ? "rose" : "warning"
-	var/decl/pronouns/G = user.get_pronouns()
+	var/decl/pronouns/pronouns = user.get_pronouns()
 	user.visible_message( \
-		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!</span>", \
+		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [pronouns.he] [pronouns.is] trying to burn it!</span>", \
 		"<span class='[span_class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 	addtimer(CALLBACK(src, PROC_REF(burn_callback), P, user, span_class), 2 SECONDS)
 

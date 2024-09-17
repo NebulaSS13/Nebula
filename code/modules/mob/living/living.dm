@@ -153,9 +153,9 @@ default behaviour is:
 							step(tmob.buckled, t)
 				if(ishuman(AM))
 					var/mob/living/human/M = AM
-					for(var/obj/item/grab/G in M.grabbed_by)
-						step(G.assailant, get_dir(G.assailant, AM))
-						G.adjust_position()
+					for(var/obj/item/grab/grab in M.grabbed_by)
+						step(grab.assailant, get_dir(grab.assailant, AM))
+						grab.adjust_position()
 				if(saved_dir)
 					AM.set_dir(saved_dir)
 				now_pushing = 0
@@ -456,8 +456,8 @@ default behaviour is:
 	..()
 
 	if(!isturf(loc))
-		for(var/G in get_active_grabs())
-			qdel(G)
+		for(var/obj/item/grab/grab as anything in get_active_grabs())
+			qdel(grab)
 		return
 
 	if(isturf(old_loc))
@@ -470,16 +470,16 @@ default behaviour is:
 					AM.dropInto(get_turf(src))
 
 	var/list/mygrabs = get_active_grabs()
-	for(var/obj/item/grab/G as anything in mygrabs)
-		if(G.assailant_reverse_facing())
+	for(var/obj/item/grab/grab as anything in mygrabs)
+		if(grab.assailant_reverse_facing())
 			set_dir(global.reverse_dir[direction])
-		G.assailant_moved()
-		if(QDELETED(G) || QDELETED(G.affecting))
-			mygrabs -= G
+		grab.assailant_moved()
+		if(QDELETED(grab) || QDELETED(grab.affecting))
+			mygrabs -= grab
 
 	if(length(grabbed_by))
-		for(var/obj/item/grab/G as anything in grabbed_by)
-			G.adjust_position()
+		for(var/obj/item/grab/grab as anything in grabbed_by)
+			grab.adjust_position()
 		reset_offsets()
 		reset_plane_and_layer()
 
@@ -490,23 +490,23 @@ default behaviour is:
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		if(old_loc)
 			old_loc.visible_message(SPAN_NOTICE("\The [src] moves [txt_dir]."))
-		for(var/obj/item/grab/G as anything in mygrabs)
-			var/turf/start = G.affecting.loc
-			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
-			if(!start.CanZPass(G.affecting, direction))
+		for(var/obj/item/grab/grab as anything in mygrabs)
+			var/turf/start = grab.affecting.loc
+			var/turf/destination = (direction == UP) ? GetAbove(grab.affecting) : GetBelow(grab.affecting)
+			if(!start.CanZPass(grab.affecting, direction))
 				to_chat(src, SPAN_WARNING("\The [start] blocked your pulled object!"))
-				mygrabs -= G
-				qdel(G)
+				mygrabs -= grab
+				qdel(grab)
 				continue
 			for(var/atom/A in destination)
-				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
-					to_chat(src, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
-					mygrabs -= G
-					qdel(G)
+				if(!A.CanMoveOnto(grab.affecting, start, 1.5, direction))
+					to_chat(src, SPAN_WARNING("\The [A] blocks the [grab.affecting] you were pulling."))
+					mygrabs -= grab
+					qdel(grab)
 					continue
-			G.affecting.forceMove(destination)
-			if(QDELETED(G) || QDELETED(G.affecting))
-				mygrabs -= G
+			grab.affecting.forceMove(destination)
+			if(QDELETED(grab) || QDELETED(grab.affecting))
+				mygrabs -= grab
 			continue
 
 	if(length(mygrabs) && !skill_check(SKILL_MEDICAL, SKILL_BASIC))
@@ -1517,9 +1517,9 @@ default behaviour is:
 	. = ..()
 	if(buckled_mob)
 		buckled_mob.reset_layer()
-		for(var/obj/item/grab/G in buckled_mob.get_held_items())
-			if(G.get_affecting_mob() == src && !istype(G.current_grab, /decl/grab/simple/control))
-				qdel(G)
+		for(var/obj/item/grab/grab in buckled_mob.get_held_items())
+			if(grab.get_affecting_mob() == src && !istype(grab.current_grab, /decl/grab/simple/control))
+				qdel(grab)
 	if(istype(ai))
 		ai.retaliate(M)
 
@@ -1815,14 +1815,14 @@ default behaviour is:
 	if(attack_delay <= 0)
 		return TRUE
 
-	var/decl/pronouns/G = get_pronouns()
+	var/decl/pronouns/pronouns = get_pronouns()
 	setClickCooldown(attack_delay)
 	face_atom(target)
 
 	stop_automove() // Cancel any baked-in movement.
 	do_windup_animation(target, attack_delay, no_reset = TRUE)
 	if(!do_after(src, attack_delay, target) || !Adjacent(target))
-		visible_message(SPAN_NOTICE("\The [src] misses [G.his] attack on \the [target]!"))
+		visible_message(SPAN_NOTICE("\The [src] misses [pronouns.his] attack on \the [target]!"))
 		reset_offsets(anim_time = 2)
 		ai?.move_to_target(TRUE) // Restart hostile mob tracking.
 		return FALSE
@@ -1832,7 +1832,7 @@ default behaviour is:
 		// Clientless mobs are too dum to move away, so they can be missed.
 		var/mob/mob = target
 		if(!mob.ckey && !prob(get_telegraphed_melee_accuracy()))
-			visible_message(SPAN_NOTICE("\The [src] misses [G.his] attack on \the [target]!"))
+			visible_message(SPAN_NOTICE("\The [src] misses [pronouns.his] attack on \the [target]!"))
 			reset_offsets(anim_time = 2)
 			return FALSE
 

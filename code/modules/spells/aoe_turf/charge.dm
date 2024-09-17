@@ -42,9 +42,9 @@
 		charged_item = mob_charge(target)
 
 	if(istype(target, /obj/item/grab))
-		var/obj/item/grab/G = target
-		if(G.affecting)
-			var/mob/M = G.get_affecting_mob()
+		var/obj/item/grab/grab = target
+		if(grab.affecting)
+			var/mob/M = grab.get_affecting_mob()
 			if(M)
 				charged_item = mob_charge(M)
 

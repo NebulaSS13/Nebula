@@ -157,8 +157,8 @@
 			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
-	for(var/obj/item/grab/G as anything in mob.grabbed_by)
-		if(G.assailant != mob && G.assailant != mover && (mob.restrained() || G.stop_move()))
+	for(var/obj/item/grab/grab as anything in mob.grabbed_by)
+		if(grab.assailant != mob && grab.assailant != mover && (mob.restrained() || grab.stop_move()))
 			if(mover == mob)
 				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
 			mob.ProcessGrabs()

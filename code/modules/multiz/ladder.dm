@@ -233,10 +233,10 @@
 	var/can_carry = can_pull_size
 	if(loc?.has_gravity())
 		can_carry = floor(can_carry * 0.75)
-	for(var/obj/item/grab/G in get_active_grabs())
-		can_carry -= G.affecting.get_object_size()
+	for(var/obj/item/grab/grab in get_active_grabs())
+		can_carry -= grab.affecting.get_object_size()
 		if(can_carry < 0)
-			to_chat(src, SPAN_WARNING("You can't carry \the [G.affecting] up \the [ladder]."))
+			to_chat(src, SPAN_WARNING("You can't carry \the [grab.affecting] up \the [ladder]."))
 			return FALSE
 
 	return TRUE
