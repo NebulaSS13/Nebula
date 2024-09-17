@@ -544,3 +544,18 @@
 		if(hardpoints[h] == I)
 			return h
 	return 0
+
+/decl/interaction_handler/mech_equipment
+	abstract_type = /decl/interaction_handler/mech_equipment
+	expected_target_type = /obj/item/mech_equipment
+	interaction_flags = 0 // Mech gear is a bit special, see is_possible() below.
+
+/decl/interaction_handler/mech_equipment/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		if(user.incapacitated())
+			return FALSE
+		var/obj/item/mech_equipment/gear = target
+		if(!gear.owner)
+			return FALSE
+		return gear.owner.hatch_closed && ((user in gear.owner.pilots) || user == gear.owner)

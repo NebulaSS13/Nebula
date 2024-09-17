@@ -56,16 +56,22 @@
 	var/current_mode = 0  //0 barrier, 1 bubble
 	var/shield_range = 2
 
-// TODO: convert to alt interaction.
-/obj/item/mech_equipment/atmos_shields/AltClick(mob/user)
-	if (owner?.hatch_closed && ((user in owner.pilots) || user == owner))
-		if (active)
-			to_chat(user, SPAN_WARNING("You cannot modify the projection mode while the shield is active."))
-		else
-			current_mode = !current_mode
-			to_chat(user, SPAN_NOTICE("You set the shields to [current_mode ? "bubble" : "barrier"] mode."))
-		return TRUE
-	return ..()
+/obj/item/mech_equipment/atmos_shields/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/mech_equipment/adjust_atmos_shields)
+
+/decl/interaction_handler/mech_equipment/adjust_atmos_shields
+	name = "Adjust Atmos Shields"
+	expected_target_type = /obj/item/mech_equipment/atmos_shields
+
+/decl/interaction_handler/mech_equipment/adjust_atmos_shields/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/mech_equipment/atmos_shields/shields = target
+	if (shields.active)
+		to_chat(user, SPAN_WARNING("You cannot modify the projection mode while the shield is active."))
+	else
+		shields.current_mode = !shields.current_mode
+		to_chat(user, SPAN_NOTICE("You set the shields to [shields.current_mode ? "bubble" : "barrier"] mode."))
+	return TRUE
 
 /obj/effect/mech_shield
 	name = "energy shield"
