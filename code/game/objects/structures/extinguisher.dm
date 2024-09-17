@@ -78,7 +78,7 @@
 	name = "Open/Close"
 	expected_target_type = /obj/structure/extinguisher_cabinet
 
-/decl/interaction_handler/extinguisher_cabinet_open/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/extinguisher_cabinet_open/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/extinguisher_cabinet/C = target
 	C.opened = !C.opened
 	C.update_icon()

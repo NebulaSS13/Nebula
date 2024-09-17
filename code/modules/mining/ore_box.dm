@@ -145,5 +145,6 @@
 /decl/interaction_handler/empty/ore_box/is_possible(obj/structure/ore_box/target, mob/user, obj/item/prop)
 	return ..() && target.total_ores > 0
 
-/decl/interaction_handler/empty/ore_box/invoked(obj/structure/ore_box/target, mob/user)
-	target.empty_box(user)
+/decl/interaction_handler/empty/ore_box/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/structure/ore_box/box = target
+	box.empty_box(user)

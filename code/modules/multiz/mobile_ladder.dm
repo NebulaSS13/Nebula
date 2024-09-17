@@ -131,6 +131,6 @@
 	name = "Fold Ladder"
 	expected_target_type = /obj/structure/ladder/mobile
 
-/decl/interaction_handler/ladder_fold/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/ladder_fold/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/ladder/mobile/L
 	L.fold(user)

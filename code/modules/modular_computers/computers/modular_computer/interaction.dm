@@ -168,8 +168,9 @@
 /decl/interaction_handler/remove_pen/modular_computer/is_possible(obj/item/modular_computer/target, mob/user, obj/item/prop)
 	return ..() && target.stores_pen && target.stored_pen
 
-/decl/interaction_handler/remove_pen/modular_computer/invoked(obj/item/modular_computer/target, mob/user, obj/item/prop)
-	target.remove_pen()
+/decl/interaction_handler/remove_pen/modular_computer/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/modular_computer/computer = target
+	computer.remove_pen()
 
 //
 // Emergency Shutdown
@@ -187,8 +188,9 @@
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(target, /datum/extension/assembly)
 	return !isnull(assembly) && assembly.enabled
 
-/decl/interaction_handler/emergency_shutdown/invoked(obj/item/modular_computer/target, mob/user, obj/item/prop)
-	target.emergency_shutdown()
+/decl/interaction_handler/emergency_shutdown/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/modular_computer/computer = target
+	computer.emergency_shutdown()
 
 //
 // Remove Charge-stick

@@ -619,7 +619,7 @@ var/global/datum/topic_state/default/paper_state/paper_topic_state = new
 	abstract_type = /decl/interaction_handler/scroll
 	expected_target_type = /obj/item/paper/scroll
 
-/decl/interaction_handler/scroll/invoked(atom/target, mob/user)
+/decl/interaction_handler/scroll/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/paper/scroll/scroll = target
 	// TODO: paper sound
 	scroll.furled = !scroll.furled

@@ -42,6 +42,6 @@
 
 	return TRUE
 
-/decl/interaction_handler/proc/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/proc/invoked(atom/target, mob/user, obj/item/prop)
 	SHOULD_CALL_PARENT(FALSE)
 	PRINT_STACK_TRACE("Alt interaction handler called with no invoked logic defined: [type]")

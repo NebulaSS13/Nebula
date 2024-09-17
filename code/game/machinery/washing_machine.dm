@@ -256,14 +256,16 @@
 	if(.)
 		return washer.operable() && !(washer.state & WASHER_STATE_RUNNING)
 
-/decl/interaction_handler/start_washer/invoked(obj/machinery/washing_machine/washer, mob/user)
+/decl/interaction_handler/start_washer/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/washing_machine/washer = target
 	return washer.start_washing(user)
 
 /decl/interaction_handler/toggle_open/washing_machine
 	name = "Toggle detergent port"
 	expected_target_type = /obj/machinery/washing_machine
 
-/decl/interaction_handler/toggle_open/washing_machine/invoked(obj/machinery/washing_machine/washer, mob/user)
+/decl/interaction_handler/toggle_open/washing_machine/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/washing_machine/washer = target
 	return washer.toggle_detergent_port(user)
 
 /obj/machinery/washing_machine/on_update_icon()

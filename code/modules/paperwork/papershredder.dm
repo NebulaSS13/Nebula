@@ -197,8 +197,9 @@
 /decl/interaction_handler/empty/paper_shredder/is_possible(obj/machinery/papershredder/target, mob/user, obj/item/prop)
 	return ..() && !target.is_bin_empty()
 
-/decl/interaction_handler/empty/paper_shredder/invoked(obj/machinery/papershredder/target, mob/user)
-	target.empty_bin(user)
+/decl/interaction_handler/empty/paper_shredder/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/papershredder/shredder = target
+	shredder.empty_bin(user)
 
 //////////////////////////////////////////////////////////////////
 // Shredded Paper

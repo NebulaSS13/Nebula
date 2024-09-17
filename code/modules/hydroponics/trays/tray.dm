@@ -696,6 +696,6 @@
 		var/obj/machinery/portable_atmospherics/hydroponics/T = target
 		return T.mechanical
 
-/decl/interaction_handler/hydroponics_close_lid/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/hydroponics_close_lid/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/machinery/portable_atmospherics/hydroponics/T = target
 	T.close_lid(user)
