@@ -185,6 +185,12 @@
 
 	. += "<td width = '200px'>"
 	var/max_multiplier = round(stack.get_amount() / req_amount)
+
+	// Hackfix for non-stack recipes trying to make multiples on stable.
+	// TODO: revisit multiplier on dev to make sure it's handled correctly.
+	if(!ispath(result_type, /obj/item/stack))
+		max_multiplier = min(max_multiplier, 1)
+
 	if(max_multiplier)
 		if(max_res_amount > 0)
 			max_multiplier = min(max_multiplier, round(max_res_amount / res_amount))
