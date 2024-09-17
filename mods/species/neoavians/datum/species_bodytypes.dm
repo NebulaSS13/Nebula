@@ -65,7 +65,7 @@
 	var/tail_blend = ICON_MULTIPLY
 	var/tail_hair
 	var/tail_hair_blend
-	var/tail_animation_states
+	var/tail_states
 
 /decl/bodytype/avian/raptor
 	name                 = "raptor"
