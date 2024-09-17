@@ -13,6 +13,9 @@
 	if(. && pref.species && pref.bodytype)
 
 		var/decl/species/mob_species = pref.get_species_decl()
+		if(!istype(mob_species) || isnull(mob_species.base_internal_prosthetics_model))
+			return FALSE
+
 		var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
 
 		if(!istype(mob_bodytype))
