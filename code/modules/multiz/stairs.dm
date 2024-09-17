@@ -30,7 +30,7 @@
 		A.forceMove(target)
 		if(isliving(A))
 			var/mob/living/L = A
-			for(var/obj/item/grab/grab in L.get_active_grabs())
+			for(var/obj/item/grab/grab as anything in L.get_active_grabs())
 				grab.affecting.forceMove(target)
 		if(ishuman(A))
 			var/mob/living/human/H = A

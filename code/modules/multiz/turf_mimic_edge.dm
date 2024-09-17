@@ -186,7 +186,7 @@
 	//Move grabbed things
 	if(isliving(AM))
 		var/mob/living/L = AM
-		for(var/obj/item/grab/grab in L.get_active_grabs())
+		for(var/obj/item/grab/grab as anything in L.get_active_grabs())
 			grab.affecting.forceMove(dest)
 
 ////////////////////////////////

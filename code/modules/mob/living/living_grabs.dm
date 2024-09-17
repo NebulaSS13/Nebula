@@ -17,7 +17,7 @@
 	if(LAZYLEN(grabbed_by))
 		to_chat(src, SPAN_WARNING("You cannot start grappling while already being grappled!"))
 		return FALSE
-	for(var/obj/item/grab/grab in target.grabbed_by)
+	for(var/obj/item/grab/grab as anything in target.grabbed_by)
 		if(grab.assailant != src)
 			continue
 		if(!target_zone || !ismob(target))

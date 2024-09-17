@@ -229,7 +229,7 @@
 
 	remove_cloaking_source(species)
 	if(user.a_intent != I_GRAB)
-		for (var/obj/item/grab/grab in user.get_active_grabs())
+		for (var/obj/item/grab/grab as anything in user.get_active_grabs())
 			if(grab.assailant == user && grab.affecting == src && grab.resolve_openhand_attack())
 				return TRUE
 	// Should this all be in Touch()?
@@ -340,7 +340,7 @@
 //Breaks all grips and pulls that the mob currently has.
 /mob/living/human/proc/break_all_grabs(mob/living/user)
 	. = FALSE
-	for(var/obj/item/grab/grab in get_active_grabs())
+	for(var/obj/item/grab/grab as anything in get_active_grabs())
 		if(grab.affecting)
 			visible_message(SPAN_DANGER("\The [user] has broken \the [src]'s grip on [grab.affecting]!"))
 			. = TRUE

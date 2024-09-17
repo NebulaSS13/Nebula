@@ -51,7 +51,7 @@
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/item/grab/grab in grabbed_by)
+	for(var/obj/item/grab/grab as anything in grabbed_by)
 		resisting++
 		grab.handle_resist()
 	if(resisting)

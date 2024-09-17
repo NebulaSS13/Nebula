@@ -108,7 +108,7 @@
 		A.forceMove(dest)
 		if(isliving(A))
 			var/mob/living/L = A
-			for(var/obj/item/grab/grab in L.get_active_grabs())
+			for(var/obj/item/grab/grab as anything in L.get_active_grabs())
 				grab.affecting.forceMove(dest)
 
 	if(istype(M, /obj/effect/overmap/visitable/sector/temporary))

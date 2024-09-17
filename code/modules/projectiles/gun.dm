@@ -453,7 +453,7 @@
 		var/mob/living/L = target
 		if(L.incapacitated())
 			max_mult = 1.2
-		for(var/obj/item/grab/grab in L.grabbed_by)
+		for(var/obj/item/grab/grab as anything in L.grabbed_by)
 			max_mult = max(max_mult, grab.point_blank_mult())
 	P.damage *= max_mult
 

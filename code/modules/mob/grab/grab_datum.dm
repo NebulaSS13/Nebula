@@ -107,7 +107,7 @@
 		var/mob/thrower = grab.loc
 		qdel(grab)
 		// check if we're grabbing with our inactive hand
-		for(var/obj/item/grab/inactive_grab in thrower.get_inactive_held_items())
+		for(var/obj/item/grab/inactive_grab as anything in thrower.get_inactive_held_items())
 			qdel(inactive_grab)
 
 /decl/grab/proc/hit_with_grab(var/obj/item/grab/grab, var/atom/A, var/P = TRUE)

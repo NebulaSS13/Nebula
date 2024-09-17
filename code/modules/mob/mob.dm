@@ -301,7 +301,7 @@
 #undef FULLY_BUCKLED
 
 /mob/proc/grab_restrained()
-	for (var/obj/item/grab/grab in grabbed_by)
+	for (var/obj/item/grab/grab as anything in grabbed_by)
 		if(grab.restrains())
 			return TRUE
 
@@ -477,7 +477,7 @@
 		return L
 	if(!L)
 		L = list(src)
-	for(var/obj/item/grab/grab in grabs)
+	for(var/obj/item/grab/grab as anything in grabs)
 		if(grab.affecting && !(grab.affecting in L))
 			L += grab.affecting
 			var/mob/living/affecting_mob = grab.get_affecting_mob()

@@ -153,7 +153,7 @@ default behaviour is:
 							step(tmob.buckled, t)
 				if(ishuman(AM))
 					var/mob/living/human/M = AM
-					for(var/obj/item/grab/grab in M.grabbed_by)
+					for(var/obj/item/grab/grab as anything in M.grabbed_by)
 						step(grab.assailant, get_dir(grab.assailant, AM))
 						grab.adjust_position()
 				if(saved_dir)

@@ -37,7 +37,7 @@
 /mob/proc/has_danger_grab(mob/user)
 	if (user == src || isrobot(user) || isbot(user))
 		return TRUE
-	for (var/obj/item/grab/grab in grabbed_by)
+	for (var/obj/item/grab/grab as anything in grabbed_by)
 		if (grab.force_danger())
 			return TRUE
 
@@ -150,7 +150,7 @@ var/global/list/global/organ_rel_size = list(
 		if(target.buckled || target.current_posture.prone)
 			return zone
 		// if your target is being grabbed aggressively by someone you cannot miss either
-		for(var/obj/item/grab/grab in target.grabbed_by)
+		for(var/obj/item/grab/grab as anything in target.grabbed_by)
 			if(grab.stop_move())
 				return zone
 

@@ -31,7 +31,7 @@
 			. = handle_living_non_stasis_processes()
 		aura_check(AURA_TYPE_LIFE)
 
-	for(var/obj/item/grab/grab in get_active_grabs())
+	for(var/obj/item/grab/grab as anything in get_active_grabs())
 		grab.Process()
 
 	//Check if we're on fire
