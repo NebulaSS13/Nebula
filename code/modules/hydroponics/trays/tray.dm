@@ -702,4 +702,3 @@
 	tray.check_plant_health()
 	tray.force_update = 1
 	tray.Process()
-
