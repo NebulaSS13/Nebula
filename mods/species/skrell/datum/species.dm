@@ -4,17 +4,20 @@
 	bone_material = /decl/material/solid/organic/bone/cartilage
 
 /decl/species/skrell
-	uid = "species_skrell"
-	name = "Skrell"
-	name_plural = "Skrell"
+	name = SPECIES_SKRELL
+	name_plural = SPECIES_SKRELL
 
 	available_bodytypes = list(
 		/decl/bodytype/skrell
 		)
 
-	traits = list(/decl/trait/malus/intolerance/protein = TRAIT_LEVEL_MINOR)
-
 	primitive_form = "Neaera"
+	unarmed_attacks = list(
+		/decl/natural_attack/stomp,
+		/decl/natural_attack/kick,
+		/decl/natural_attack/punch,
+		/decl/natural_attack/bite
+	)
 
 	description = "The skrell are a highly advanced species of amphibians hailing from \
 	the system known as Qerr'Vallis, which translates to 'Star of the royals' or 'Light of the Crown'. \
@@ -102,36 +105,27 @@
 	var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 	if(!shoes)
 		var/list/bloodDNA
-		var/list/blood_data = REAGENT_DATA(H.vessel, blood_reagent)
+		var/list/blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
 		if(blood_data)
-			bloodDNA = list(blood_data[DATA_BLOOD_DNA] = blood_data[DATA_BLOOD_TYPE])
+			bloodDNA = list(blood_data["blood_DNA"] = blood_data["blood_type"])
 		else
 			bloodDNA = list()
-		T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, H.dir, 0, H.get_skin_colour() + "25") // Coming (25 is the alpha value)
+		if(T.simulated)
+			T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, H.dir, 0, H.get_skin_colour() + "25") // Coming (8c is the alpha value)
 		if(isturf(old_loc))
 			var/turf/old_turf = old_loc
-			old_turf.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, 0, H.dir, H.get_skin_colour() + "25") // Going (25 is the alpha value)
+			if(old_turf.simulated)
+				old_turf.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, 0, H.dir, H.get_skin_colour() + "25") // Going (8c is the alpha value)
 
 /decl/species/skrell/check_background()
 	return TRUE
 
-/decl/material/liquid/mucus/skrell
-	name = "slime"
-	uid = "chem_mucus_skrell"
-	lore_text = "A gooey semi-liquid secreted by skrellian skin."
-
-// Copied from blood.
-// TODO: There's not currently a way to check this, which might be a little annoying for forensics.
-// But this is just a stopgap to stop Skrell from literally leaking blood everywhere they go.
-/decl/material/liquid/mucus/skrell/get_reagent_color(datum/reagents/holder)
-	var/list/goo_data = REAGENT_DATA(holder, src)
-	return goo_data?[DATA_BLOOD_COLOR] || ..()
-
 /obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints
 	name = "wet footprints"
 	desc = "They look like still wet tracks left by skrellian feet."
-	chemical = /decl/material/liquid/mucus/skrell
 
+/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints/dry()
+	qdel(src)
 /obj/item/organ/internal/eyes/skrell
 	name = "amphibian eyes"
 	desc = "Large black orbs, belonging to some sort of giant frog by looks of it."

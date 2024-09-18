@@ -1,5 +1,5 @@
 /decl/language/unathi
-	name = LANGUAGE_LIZARD
+	name = LANGUAGE_UNATHI
 	desc = "The common language of the Moghes Hegemony, composed of sibilant hisses and rattles."
 	speech_verb = "hisses"
 	ask_verb = "hisses"

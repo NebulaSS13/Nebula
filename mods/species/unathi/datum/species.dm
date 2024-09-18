@@ -12,18 +12,24 @@
 	)
 
 /decl/butchery_data/humanoid/unathi
-	meat_name = "lizard"
+	meat_name = "unathi"
 	skin_material = /decl/material/solid/organic/skin/lizard
 
 /decl/species/unathi
-	uid = "species_unathi"
-	name = "Unathi"
-	name_plural = "Unathi"
+	name = SPECIES_UNATHI
+	name_plural = SPECIES_UNATHI
 	butchery_data = /decl/butchery_data/humanoid/unathi
 
 	available_bodytypes = list(
 		/decl/bodytype/unathi,
 		/decl/bodytype/unathi/masculine
+	)
+	unarmed_attacks = list(
+		/decl/natural_attack/stomp,
+		/decl/natural_attack/tail,
+		/decl/natural_attack/claws,
+		/decl/natural_attack/punch,
+		/decl/natural_attack/bite/sharp
 	)
 
 	available_accessory_categories = list(
@@ -72,7 +78,7 @@
 	)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
-	breathing_sound = 'mods/species/unathi/sound/lizard_breathing.ogg'
+	breathing_sound = 'mods/species/unathi/sound/unathi_breathing.ogg'
 
 	default_emotes = list(
 		/decl/emote/visible/tail/swish,
