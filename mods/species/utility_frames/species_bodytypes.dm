@@ -56,3 +56,4 @@ DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/utility_frame, utility_frame)
 		BP_EYES  = /obj/item/organ/internal/eyes,
 		BP_CELL  = /obj/item/organ/internal/cell
 	)
+	uid = "bodytype_prosthetic_utility_frame_positronic"

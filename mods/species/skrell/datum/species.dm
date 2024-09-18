@@ -89,7 +89,7 @@
 	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/skrell/caste_ue)
 	LAZYDISTINCTADD(available_background_info[/decl/background_category/faction], /decl/background_detail/faction/skrell)
 	LAZYDISTINCTADD(available_background_info[/decl/background_category/faction], /decl/background_detail/faction/skrell_pirate)
-	LAZYDISTINCTADD(available_background_info[/decl/background_category/faction], /decl/background_detail/faction/skrell_qerrgila)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/faction], /decl/background_detail/faction/skrell_qerrglia)
 	LAZYDISTINCTADD(available_background_info[/decl/background_category/religion], /decl/background_detail/religion/skrell)
 	LAZYSET(default_background_info, /decl/background_category/citizenship, /decl/background_detail/citizenship/skrell)
 	LAZYSET(default_background_info, /decl/background_category/heritage, /decl/background_detail/heritage/skrell/caste_malish)

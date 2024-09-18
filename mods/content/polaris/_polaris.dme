@@ -5,6 +5,6 @@
 #include "datum\cultures.dm"
 #include "datum\factions.dm"
 #include "datum\locations.dm"
-#include "datum\languages\human.dm"
 #include "datum\overrides.dm"
+#include "datum\languages\human.dm"
 #endif // MODPACK_POLARIS

@@ -29,6 +29,7 @@
 
 /decl/language/human/solcom
 	name = "Solar Common"
+	uid = "language_solcom"
 	desc = "An early standardized hybrid of many languages, including  elements of English, French, Standard \
 	Chinese, Hindi, Spanish, Arabic, and Russian, while eliminating phonemes that would prove difficult for any \
 	particular existing cultural group to pronounce. It is the common language of the Sol system, but has been \
@@ -118,6 +119,7 @@
 
 /decl/language/human/sivian
 	name = "Sivian Creole"
+	uid = "language_sivian"
 	desc = "A hybrid language local to the Vir system, heavily incorporating elements from the local languages of early Scandinavian colonists into a form of Galactic Common."
 	speech_verb = "says"
 	whisper_verb = "whispers"

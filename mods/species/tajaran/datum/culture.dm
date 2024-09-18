@@ -1,5 +1,6 @@
 /decl/background_detail/citizenship/pearlshield
 	name = "Pearlshield Coalition"
+	uid = "citizenship_tajaran_pc"
 	description = "The Pearlshield Coalition is a political association of the frequently squabbling nation states of the tajara, \
 	cooperating on matters of galactic politics and migration."
 	language = /decl/language/tajaran
@@ -11,6 +12,7 @@
 
 /decl/background_detail/heritage/tajaran
 	name = "Tajaran - Hrarar"
+	uid = "heritage_tajaran_hrarar"
 	description = "Hrarar are the most numerous tajaran ethnicity on Meralar, and were the most heavily represented tajarans \
 	in the diplomatic delegations that dealt with humans through the early post-contact years. This led to a fairly entrenched \
 	image of the Hrarar as the \"average\" tajaran among humans and their other interstellar neighbours. Many Hrararan cultures \
@@ -25,6 +27,7 @@
 
 /decl/background_detail/heritage/tajaran/njarir
 	name = "Tajaran - Njarir'Akhan"
+	uid = "heritage_tajaran_njarir_akhan"
 	description = "The original Njarir'Akhan migrated thousands of years ago from Zarraya, journeying across a colder Meralar's \
 	near-frozen inner sea at the end of an ice age to settle on the Njarir Merana archipelago, where fishing was possible in the \
 	still-liquid water. Their descendants, the Njarjirii, are equatorial islanders with a heavily maritime culture, centered \
@@ -42,6 +45,7 @@
 
 /decl/background_detail/heritage/tajaran/rhemazar
 	name = "Tajaran - Rhemazari"
+	uid = "heritage_tajaran_rhemazari"
 	description = "Borne of cultural assimilation of the northern Zhan-Khazan tribes into the Hrarar's Second Selem Empire they \
 	conquered, the Rhemazar walk a fine line between the two culture groups, the nature-tested tenacity of their forebears with \
 	the more refined customs of the surrounding lands. \"Rhemazar\" has also come to refer to any Zhan-Khazan who leaves their \
@@ -52,6 +56,7 @@
 
 /decl/background_detail/heritage/tajaran/spacer
 	name = "Tajaran - Spacer"
+	uid = "heritage_tajaran_spacer"
 	description = "With the ongoing space race of the last six decades, particularly the post-First Contact boom of the last four, \
 	many thousand tajaran have been born off-world in habitats, colony ship and beyond, with no true homeworld and sometimes \
 	never so much has setting foot on terrestrial ground. Spacers can be found among many walks of life, often having a unique \

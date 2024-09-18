@@ -17,12 +17,14 @@
 	The Ue-Katish present the greatest skrellian counterculture and feature heavily in romanticized human media, although at their \
 	hearts they are in fact bandits and criminals, and the black markets are filled with goods plundered from human and \
 	skrellian trade ships."
+	uid = "faction_skrell_pirate"
 
-/decl/background_detail/faction/skrell_qerrgila
-	name = "Qerr-Gila"
+/decl/background_detail/faction/skrell_qerrglia
+	name = "Qerr-Glia"
 	description = "The Qerr-Glia have their roots in Qerr-Katish royals deposed in the last of the great wars on the Skrellian homeworld. \
 	Rather than accept disgrace as Ue-Katish, they turned to a life of crime. While the Qerr-Glia have at their disposition a very large \
 	network of relations and maintain several fragile alliances between various families, their only loyalty resides in their own family. \
 	They will temporarily hire anyone competent enough to fulfill their goals, willfully or forcefully, but only the members of the \
 	Qerr-Glia family are permanent members of a Qerr-Glia cell. Any Skrell abandoning their Qerr-Gila siblings for any reason would find \
 	themselves fiercely hunted down by their former brothers and sisters. "
+	uid = "faction_skrell_qerrglia"

@@ -26,10 +26,10 @@
 	// Must come after borers for compatibility.
 	#include "../../mods/content/psionics/_psionics.dme"
 
-	#include "../../mods/species/neoavians/_neoavians.dme"
 	#include "../../mods/species/skrell/_skrell.dme"
 	#include "../../mods/species/tajaran/_tajaran.dme"
 	#include "../../mods/species/unathi/_unathi.dme"
+	#include "../../mods/species/teshari/_teshari.dme"
 
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
@@ -77,6 +77,7 @@
 	#include "exodus_jobs.dm"
 	#include "exodus_loadout.dm"
 	#include "exodus_overmap.dm"
+	#include "exodus_overrides.dm"
 	#include "exodus_setup.dm"
 	#include "exodus_shuttles.dm"
 	#include "exodus_unit_testing.dm"

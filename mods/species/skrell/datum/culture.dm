@@ -50,6 +50,7 @@
 	Their skin is generally red, orange, pale yellow, dark orange or black. \
 	They have average-length headtails."
 	economic_power = 1.1
+	uid = "heritage_skrell_kanin"
 
 /decl/background_detail/heritage/skrell/caste_talum
 	name = "Skrell - Talum-Katish"
@@ -69,6 +70,7 @@
 	Talum-Katish headtails are a middle ground between the medium headtails of the Malish and Kanin and the extremely long headtails \
 	of the Qerr, and are an important element of Talum self-expression."
 	economic_power = 1.2
+	uid = "heritage_skrell_talum"
 
 /decl/background_detail/heritage/skrell/caste_raskinta
 	name = "Skrell - Raskinta-Katish"

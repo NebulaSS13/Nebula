@@ -1,5 +1,6 @@
 /decl/background_detail/citizenship/scg
 	name = "Solar Confederate Government"
+	uid = "citizenship_sol_confed_govt"
 	description = "The Solar Confederate Government, or SolGov, is a confederation \
 	of sovereign member states and protectorates with its capital on Luna in the Sol System. \
 	Originating as a unified government for all humanity, SolGov has come \
@@ -19,6 +20,7 @@
 
 /decl/background_detail/citizenship/fivearrows
 	name = "Five Arrows"
+	uid = "citizenship_five_arrows"
 	description = "The Five Arrows are the newest interstellar government, \
 	forming in 2570 as the result of the seccession of five systems in SolGov's wealthy Sagittarius Heights region, \
 	and soon joined by the Skrellian kingdoms of Kauq'xum. \
@@ -38,6 +40,7 @@
 
 /decl/background_detail/citizenship/almach
 	name = "Almach Protectorate"
+	uid = "citizenship_almach"
 	description = "The Almach Protectorate formed in 2564 after the invasion of the short-lived Almach Association, \
 	a mercurial seccesionist group in a brushfire war with SolGov, by an occupation fleet from the Far Kingdoms. \
 	After four years of occupation by the Far Kingdoms, the Skrellian military presence withdrew from the region, \
@@ -56,9 +59,9 @@
 	capital = "Carter Interstellar Spaceport, Relan (defacto)"
 	founded = "2564"
 
-
 /decl/background_detail/citizenship/earthnation
 	name = "Solar Secessionist"
+	uid = "citizenship_sol_secessionist"
 	description = "A half-dozen systems exist on the borders of SolGov, originally colonized by Solar nationals, \
 	which maintain independence from SolGov and from any other interstellar nation. \
 	They are as different from each other as they are from Sol, \
@@ -72,38 +75,6 @@
 	size_heading = "Earth Nations"
 	capital = "Brasília, Brazil, Sol (defacto)"
 	economic_power = 0.9
-
-/decl/background_detail/citizenship/other
-	name = "Other Culture"
-	description = "You are from one of the many small, relatively unknown cultures scattered across the galaxy."
-	language = /decl/language/human/common
-	secondary_langs = list(
-		/decl/language/human/common,
-		/decl/language/sign
-	)
-
-/decl/background_detail/citizenship/stateless
-	name = "Stateless"
-	description = "Statelessness is an extremely uncommon occurance. \
-	Any stateless human or positronic in SolGov space is automatically extended SolGov citizenship, \
-	as are stateless members of other species who cannot regain citizenship in their homeworld. \
-	Most other interstellar states have comperable policies. \
-	As such, statelessness tends to be at least semi-voluntary, \
-	standing in for allegience to a defunct or unrecognized government \
-	or representing a total rejection of all interstellar governments."
-	economic_power = 0
-	capital = "None"
-
-/decl/background_detail/citizenship/synthetic
-	name = "Stateless Drone"
-	description = "Drones are considered property in SolGov, \
-	and citizenships extended by the Almach Protectorate are not recognized. \
-	Thus, statelessness is ubiquituous for them."
-	secondary_langs = list(
-		/decl/language/machine,
-		/decl/language/human/common,
-		/decl/language/sign
-	)
 
 /decl/background_detail/citizenship/synthetic/sanitize_background_name(new_name)
 	return sanitize_name(new_name, allow_numbers = TRUE)

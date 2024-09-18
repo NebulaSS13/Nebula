@@ -1,5 +1,6 @@
 /decl/background_detail/citizenship/skrell
 	name = "Skrellian Near Kingdoms"
+	uid = "citizenship_skrell_nk"
 	description = "The Skrellian Near Kingdoms comprise a network of \
 	collectivist constitutional monarchies that strive for self-sufficiency. \
 	Though they are not isolationist, they generally tend to their own \

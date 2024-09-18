@@ -1,5 +1,6 @@
 /decl/background_detail/location/sif
 	name = "Sif, Vir"
+	uid = "location_sif"
 	description = "Sif is a cold, yet habitable garden world in the Vir system, \
 	originally colonized by a coalition of Scandinavian governments from Earth. \
 	Though fiercely independent for a few centuries, \
@@ -9,6 +10,7 @@
 
 /decl/background_detail/location/kara
 	name = "Kara, Vir"
+	uid = "location_kara"
 	description = "A series of asteroid habitats orbitting the gas giant Kara in the Vir system.\
 	Originally populated by smugglers, pirates, and their descendants, \
 	an internal police action and the discovery of phoron opened the region to exploitation \
@@ -17,6 +19,7 @@
 
 /decl/background_detail/location/earth
 	name = "Earth, Sol"
+	uid = "location_earth"
 	description = "The cradle of humanity, Earth has undergone something of a revitalization \
 	since the bulk of industry and resource extraction was relocated to the wider system and beyond. \
 	While large portions of the surface are now covered by vast metropolises, \

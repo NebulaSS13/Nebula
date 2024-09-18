@@ -17,8 +17,7 @@
 		return 0
 
 	H = locate(test["mobref"])
-	H.equip_to_slot(new glasses_type(H), slot_glasses_str)
-	return 1
+	return H?.equip_to_slot(new glasses_type(H), slot_glasses_str, TRUE, TRUE)
 
 /datum/unit_test/vision_glasses/check_result()
 
