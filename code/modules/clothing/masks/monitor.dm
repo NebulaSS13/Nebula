@@ -1,6 +1,6 @@
 //IPC-face object for FPB.
 /obj/item/clothing/mask/monitor
-	name = "display monitor"
+	name = "unbranded display monitor"
 	desc = "A rather clunky old CRT-style display screen, fit for mounting on an optical output."
 	flags_inv = HIDEEYES
 	body_parts_covered = SLOT_EYES
@@ -114,3 +114,18 @@
 		monitor_state_index = initial(monitor_state_index)
 	icon_state = "[initial(icon_state)]-[monitor_states[monitor_state_index]]"
 	update_clothing_icon()
+
+/obj/item/clothing/mask/monitor/grayson
+	name = "\improper Grayson display monitor"
+	desc = "This limb has a sturdy and heavy build to it, and uses plastics in the place of glass for the monitor."
+	icon = 'icons/clothing/mask/monitor_grayson.dmi'
+
+/obj/item/clothing/mask/monitor/hephaestus
+	name = "\improper Hephaestus display monitor"
+	desc = "Hephaestus' unique spin on a popular prosthetic head model. It looks rugged and sturdy."
+	icon = 'icons/clothing/mask/monitor_heph.dmi'
+
+/obj/item/clothing/mask/monitor/bishop
+	name = "\improper Bishop display monitor"
+	desc = "Bishop Cybernetics' unique spin on a popular prosthetic head model. The themes conflict in an intriguing way."
+	icon = 'icons/clothing/mask/monitor_heph.dmi'
