@@ -1,5 +1,6 @@
 /decl/background_detail/heritage/teshari
 	name = "Pack Teshari"
+	uid = "heritage_teshari_pack"
 	description = "Most Teshari follow the unique cultural traditions of their specific pack, \
 	which vary as widely as any other species' idea of nations. \
 	Pack Teshari tend to be highly social, curious, and open people, \
@@ -14,6 +15,7 @@
 
 /decl/background_detail/heritage/teshari/kamerr
 	name = "Teshari - Ka'merr"
+	uid = "heritage_teshari_kamerr"
 	description = "Adopting the Skrellian name for their people, \
 	Ka'merr prefer to integrate fully into Skrell society, \
 	rejecting some or all Teshari pack traditions and lifestyles, \
@@ -25,6 +27,7 @@
 
 /decl/background_detail/heritage/teshari/autonomist
 	name = "Teshari - Autonomist"
+	uid = "heritage_teshari_autonomist"
 	description = "Mostly remaining in the barren polar regions of Sirisai, \
 	Autonomist Teshari are those who have rejected contact with Skrell society \
 	on the basis that they believe teshari society cannot progress on its own terms \
@@ -37,6 +40,7 @@
 
 /decl/background_detail/heritage/teshari/sif
 	name = "Teshari - Sivian"
+	uid = "heritage_teshari_sif"
 	description = "Owing to its similarity to their native poles of Sirisai, \
 	the climate of Sif offers a comfortable environment for some teshari \
 	seeking a 'normal' life (mostly) independent from the skrell. \
@@ -47,6 +51,7 @@
 
 /decl/background_detail/heritage/teshari/spacer
 	name = "Teshari - Spacer"
+	uid = "heritage_teshari_space"
 	description = "Those few Teshari who have taken advantage \
 	of the Skrell's sponsorship of sending their neighbors to space, \
 	and used the opportunity to establish their own packs amongst the stars. \

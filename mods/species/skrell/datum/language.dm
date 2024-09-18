@@ -24,7 +24,7 @@ var/global/list/last_name_skrell =   file2list("mods/species/skrell/names/last_n
 	ask_verb = "trills"
 	exclaim_verb = "chirps"
 	colour = "selenian"
-	key = "h"
+	key = "p"
 	flags = LANG_FLAG_WHITELISTED
 	//should sound like there's holes in it
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix", "...", "!", "'", "oo", "q", "nq", "x", "xq", "ll", "...", "...", "...")

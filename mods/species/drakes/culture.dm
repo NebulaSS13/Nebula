@@ -35,4 +35,4 @@
 	language = /decl/language/grafadreka
 	hidden = TRUE
 	hidden_from_codex = TRUE
-	uid = "location_drake"
+	uid = "citizenship_drake"

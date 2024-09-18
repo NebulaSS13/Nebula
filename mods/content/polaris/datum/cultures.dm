@@ -1,5 +1,6 @@
 /decl/background_detail/heritage/sif
 	name = "Golden Crescent - Sivian Culture"
+	uid = "heritage_sivian"
 	description = "Sivians were begrudgingly absorbed into SolGov after a period of staunch independence around two centuries ago. \
 	Sif's factionalized colonies subsequently unified to wage bitter - though low-intensity - undeclared warfare against corporate \
 	interests from Kara that they viewed as encroaching upon the system through much of the 24th century, though with limited success. \
@@ -14,6 +15,7 @@
 
 /decl/background_detail/heritage/kara
 	name = "Golden Crescent - Karan Culture"
+	uid = "heritage_karan"
 	description = "Karans are the inhabitants of the formerly smuggler- and pirate- dominated ring of Kara, now run almost exclusively by \
 	corporate interests, which has given the population a distinctly cosmopolitan bent. Today Kara is composed of the descendants of \
 	several distinct migration waves, including a large positronic population, a number of different aliens, and humans from all corners \
@@ -26,6 +28,7 @@
 
 /decl/background_detail/heritage/earth
 	name = "Core Worlds - Solar Culture"
+	uid = "heritage_solar"
 	description = "Though almost all exist under the Solar Confederate Government, Earth remains divided between hundreds of 'old-world' \
 	nations, many of which have fragmented further since the formation of the SCG. As such, Earth remains as culturally \
 	diverse as it ever has been. However, due to the percieved prestige of the homeworld, the population skews towards \
@@ -40,25 +43,9 @@
 		/decl/language/sign
 	)
 
-
-/decl/background_detail/heritage/synthetic
-	name = "Artificial Intelligence"
-	description = "You are a simple artificial intelligence created by humanity to serve a menial purpose."
-	secondary_langs = list(
-		/decl/language/machine,
-		/decl/language/human/common,
-		/decl/language/sign
-	)
-
-/decl/background_detail/heritage/other
-	name = "Other System"
-	description = "The last time someone tried to do a comprehensive encyclopaedia of habitats in the known galaxy, their \
-	drone intelligence deleted itself rather than face up to the task. You are from nowhere in particular - a backwater \
-	world, or somewhere off the trade lanes."
-	economic_power = 1
-
 /decl/background_detail/heritage/deep_space
 	name = "Deep Space"
+	uid = "heritage_space"
 	description = "You came from the void between the stars."
 	language =         null
 	secondary_langs =  null

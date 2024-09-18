@@ -7,9 +7,17 @@
 	async = 1
 
 /datum/unit_test/vision_glasses/start_test()
-	subject = new(get_safe_turf(), /decl/species/human::uid) // force human so default map species doesn't mess with anything
-	subject.equip_to_slot(new glasses_type(subject), slot_glasses_str)
-	return 1
+	var/list/test = create_test_mob_with_mind(get_safe_turf(), /mob/living/human)
+	if(isnull(test))
+		fail("Check Runtimed in Mob creation")
+
+	if(test["result"] == FAILURE)
+		fail(test["msg"])
+		async = 0
+		return 0
+
+	H = locate(test["mobref"])
+	return H?.equip_to_slot(new glasses_type(H), slot_glasses_str, TRUE, TRUE)
 
 /datum/unit_test/vision_glasses/check_result()
 

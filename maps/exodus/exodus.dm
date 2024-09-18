@@ -72,6 +72,7 @@
 	#include "exodus_jobs.dm"
 	#include "exodus_loadout.dm"
 	#include "exodus_overmap.dm"
+	#include "exodus_overrides.dm"
 	#include "exodus_setup.dm"
 	#include "exodus_shuttles.dm"
 	#include "exodus_unit_testing.dm"

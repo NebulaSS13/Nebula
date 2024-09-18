@@ -1,5 +1,6 @@
 /decl/background_detail/faction/nanotrasen
 	name = "NanoTrasen"
+	uid = "faction_nanotrasen"
 	description = "NanoTrasen is one of the leading research and development companies in Solar space. \
 	Originally focused on consumer products, their early move into Phoron research and extraction \
 	made them the foremost experts on the substance and its uses. \

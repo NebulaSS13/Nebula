@@ -1,10 +1,15 @@
-/decl/bodytype/prosthetic/unbranded/muscleplast
+/decl/bodytype/prosthetic/muscleplast
 	name = "Unbranded - Muscleplast"
 	desc = "A high-end custom arm resembling metallic muscle, with polished plates overlaid on some segments and visible connecting cable at the joints."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/unbranded/muscleplast.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_unbranded_muscleplast"
-	has_limbs = list(BP_L_HAND, BP_L_ARM, BP_R_ARM, BP_R_HAND)
+	has_limbs = list(
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+	)
 
 /decl/bodytype/prosthetic/bishop
 	name = "Bishop"
@@ -39,8 +44,9 @@
 		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_SECONDARY
 	)
 	uid = "bodytype_prosthetic_bishop_glyph"
-	has_limbs = list(BP_HEAD)
-
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 /decl/bodytype/prosthetic/cybersolutions
 	name = "Cyber Solutions"
 	desc = "This limb is grey and utilitarian, with little in the way of aesthetic flourish."
@@ -72,7 +78,9 @@
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/cybersolutions/cybersolutions_array.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_cybersolutions_array"
-	has_limbs = list(BP_HEAD)
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 /decl/bodytype/prosthetic/einstein
 	name = "Einstein Engines"
@@ -98,7 +106,9 @@
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/grayson/grayson_reinforced.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_grayson_reinforced"
-	has_limbs = list(BP_HEAD)
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 /decl/bodytype/prosthetic/hephaestus
 	name = "Hephaestus Industries"
@@ -116,13 +126,15 @@
 	uid = "bodytype_prosthetic_hephaestus_titan"
 
 /decl/bodytype/prosthetic/hephaestus/frontier
-	name = "Hephaestus - Athena"
+	name = "Hephaestus - Frontier"
 	desc = "A rugged prosthetic head featuring the standard Hephaestus theme, a visor and an external display."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/hephaestus/hephaestus_frontier.dmi'
 	has_eyes = FALSE
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_hephaestus_frontier"
-	has_limbs = list(BP_HEAD)
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 
 /decl/bodytype/prosthetic/wardtakahashi
@@ -159,6 +171,9 @@
 	desc = "This limb features sleek black and white polymers. A visor wraps around an otherwise featureless head."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/wardtakahashi/wardtakahashi_shroud.dmi'
 	uid = "bodytype_prosthetic_wardtakahashi_shroud"
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 /decl/bodytype/prosthetic/morpheus
 	name = "Morpheus"
@@ -174,7 +189,9 @@
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/morpheus/morpheus_zenith.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_morpheus_zenith"
-	has_limbs = list(BP_HEAD)
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 /decl/bodytype/prosthetic/morpheus/skeletoncrew
 	name = "Morpheus - Skeleton Crew"
@@ -182,7 +199,9 @@
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/morpheus/morpheus_skeletoncrew.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_morpheus_skeletoncrew"
-	has_limbs = list(BP_HEAD)
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 /decl/bodytype/prosthetic/morpheus/mantis
 	name = "Unbranded - Mantis Prosis"
@@ -242,7 +261,9 @@
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/xion/xion_breach.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_xion_breach"
-	has_limbs = list(BP_HEAD)
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 /decl/bodytype/prosthetic/xion/whiteout
 	name = "Xion - Whiteout"
@@ -257,7 +278,9 @@
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/xion/xion_whiteout_breach.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_xion_whiteout_breach"
-	has_limbs = list(BP_HEAD)
+	has_limbs = list(
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+	)
 
 /decl/bodytype/prosthetic/nanotrasen
 	name = "NanoTrasen"
@@ -328,7 +351,7 @@ DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/wardtakahashi/economy,        
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/bishop,                        bishop)
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/bishop/rook,                   bishoprook)
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/bishop/glyph,                  bishopglyph)
-DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/unbranded/muscleplast,	     muscleplast)
+DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/muscleplast,	                 muscleplast)
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/morpheus/mantis,               mantis)
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/cybersolutions,                cybersolutions)
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/cybersolutions/wight,          cybersolutionswight)
@@ -357,39 +380,39 @@ DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/morpheus/mantis,         
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/wardtakahashi/economy,    wardtakahashiecon,      0, "wardtakahashiecon")
 
 /decl/trait/prosthetic_limb/right_arm/muscleplast
-    model = /decl/bodytype/prosthetic/unbranded/muscleplast
-    parent = /decl/trait/prosthetic_limb/right_arm
-    uid = "trait_prosthetic_right_arm_muscleplast"
+	model = /decl/bodytype/prosthetic/muscleplast
+	parent = /decl/trait/prosthetic_limb/right_arm
+	uid = "trait_prosthetic_right_arm_muscleplast"
 
 /decl/trait/prosthetic_limb/right_hand/muscleplast
-    model = /decl/bodytype/prosthetic/unbranded/muscleplast
-    parent = /decl/trait/prosthetic_limb/right_hand
-    uid = "trait_prosthetic_right_hand_muscleplast"
+	model = /decl/bodytype/prosthetic/muscleplast
+	parent = /decl/trait/prosthetic_limb/right_hand
+	uid = "trait_prosthetic_right_hand_muscleplast"
 
 /decl/trait/prosthetic_limb/left_arm/muscleplast
-    model = /decl/bodytype/prosthetic/unbranded/muscleplast
-    parent = /decl/trait/prosthetic_limb/left_arm
-    uid = "trait_prosthetic_left_arm_muscleplast"
+	model = /decl/bodytype/prosthetic/muscleplast
+	parent = /decl/trait/prosthetic_limb/left_arm
+	uid = "trait_prosthetic_left_arm_muscleplast"
 
 /decl/trait/prosthetic_limb/left_hand/muscleplast
-    model = /decl/bodytype/prosthetic/unbranded/muscleplast
-    parent = /decl/trait/prosthetic_limb/left_hand
-    uid = "trait_prosthetic_left_hand_muscleplast"
+	model = /decl/bodytype/prosthetic/muscleplast
+	parent = /decl/trait/prosthetic_limb/left_hand
+	uid = "trait_prosthetic_left_hand_muscleplast"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/bishop,                   bishop,                 0, "bishop")
 
 /decl/trait/prosthetic_limb/head/bishop_glyph
-    model = /decl/bodytype/prosthetic/bishop/glyph
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_bishop_glyph"
+	model = /decl/bodytype/prosthetic/bishop/glyph
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_bishop_glyph"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/bishop/rook,              bishoprook,             0, "bishoprook")
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/cybersolutions,           cybersolutions,         0, "cybersolutions")
 
 /decl/trait/prosthetic_limb/head/cybersolutions_array
-    model = /decl/bodytype/prosthetic/cybersolutions/array
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_cybersolutions_array"
+	model = /decl/bodytype/prosthetic/cybersolutions/array
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_cybersolutions_array"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/cybersolutions/outdated,  cybersolutionsoutdated, 0, "cybersolutionsoutdated")
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/cybersolutions/wight,     cybersolutionswight,    0, "cybersolutionswight")
@@ -397,29 +420,29 @@ DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/einstein,                
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/grayson,                  grayson,                0, "grayson")
 
 /decl/trait/prosthetic_limb/head/grayson_reinforced
-    model = /decl/bodytype/prosthetic/grayson/reinforced
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_grayson_reinforced"
+	model = /decl/bodytype/prosthetic/grayson/reinforced
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_grayson_reinforced"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/hephaestus,               hephaestus,             0, "hephaestus")
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/hephaestus/titan,         hephaestustitan,        0, "hephaestustitan")
 
 /decl/trait/prosthetic_limb/head/hephaestus_frontier
-    model = /decl/bodytype/prosthetic/hephaestus/frontier
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_hephaestus_frontier"
+	model = /decl/bodytype/prosthetic/hephaestus/frontier
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_hephaestus_frontier"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/morpheus,                 morpheus,               0, "morpheus")
 
 /decl/trait/prosthetic_limb/head/morpheus_skeletoncrew
-    model = /decl/bodytype/prosthetic/morpheus/skeletoncrew
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_morpheus_skeletoncrew"
+	model = /decl/bodytype/prosthetic/morpheus/skeletoncrew
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_morpheus_skeletoncrew"
 
 /decl/trait/prosthetic_limb/head/morpheus_zenith
-    model = /decl/bodytype/prosthetic/morpheus/zenith
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_morpheus_zenith"
+	model = /decl/bodytype/prosthetic/morpheus/zenith
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_morpheus_zenith"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/nanotrasen,               nanotrasen,             0, "nanotrasen")
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/nanotrasen/metro,         nanotrasenmetro,        0, "nanotrasenmetro")
@@ -431,25 +454,25 @@ DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/veymed/masculine,        
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/wardtakahashi,            wardtakahashi,          0, "wardtakahashi")
 
 /decl/trait/prosthetic_limb/head/wardtakahashi_shroud
-    model = /decl/bodytype/prosthetic/wardtakahashi/shroud
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_wardtakahashi_shroud"
+	model = /decl/bodytype/prosthetic/wardtakahashi/shroud
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_wardtakahashi_shroud"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/wardtakahashi/spirit,     wardtakahashispirit,    0, "wardtakahashispirit")
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/xion,                     xion,                   0, "xion")
 
 /decl/trait/prosthetic_limb/head/xion_breach
-    model = /decl/bodytype/prosthetic/xion/breach
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_xion_breach"
+	model = /decl/bodytype/prosthetic/xion/breach
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_xion_breach"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/xion/econo,               xionecon,               0, "xionecon")
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/xion/whiteout,            xionwhiteout,           0, "xionwhiteout")
 
 /decl/trait/prosthetic_limb/head/xion_whiteout_breach
-    model = /decl/bodytype/prosthetic/xion/whiteout/breach
-    parent = /decl/trait/prosthetic_limb/head
-    uid = "trait_prosthetic_head_xion_whiteout_breach"
+	model = /decl/bodytype/prosthetic/xion/whiteout/breach
+	parent = /decl/trait/prosthetic_limb/head
+	uid = "trait_prosthetic_head_xion_whiteout_breach"
 
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/zenghu,                 	 zenuhufem,              0, "zenghufem")
 DEFINE_ROBOLIMB_MODEL_TRAITS(/decl/bodytype/prosthetic/zenghu/masculine,         zenuhumasc,             0, "zenghumasc")

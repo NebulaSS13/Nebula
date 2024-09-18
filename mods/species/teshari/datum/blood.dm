@@ -1,6 +1,6 @@
 /decl/blood_type/avian
 	abstract_type = /decl/blood_type/avian
-	splatter_colour = "#D514F7"
+	splatter_colour = "#d514f7"
 	antigens = list("Ta", "Tb", "K")
 
 /decl/blood_type/avian/taplus

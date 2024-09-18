@@ -52,5 +52,26 @@
 		list("name" = "AI Private",    "key" = "p", "frequency" = 1343, "color" = COMMS_COLOR_AI,        "span_class" = "airadio",  "secured" = list(access_ai_upload))
 	)
 
+	_background_categories = list(
+		/decl/background_category/heritage,
+		/decl/background_category/citizenship,
+		/decl/background_category/faction,
+		/decl/background_category/religion
+	)
+
+	available_background_info = list(
+		/decl/background_category/faction =     list(/decl/background_detail/faction/other),
+		/decl/background_category/heritage =    list(/decl/background_detail/heritage/other),
+		/decl/background_category/religion =    list(/decl/background_detail/religion/other),
+		/decl/background_category/citizenship = list(/decl/background_detail/citizenship/other)
+	)
+
+	default_background_info = list(
+		/decl/background_category/faction =     /decl/background_detail/faction/other,
+		/decl/background_category/heritage =    /decl/background_detail/heritage/other,
+		/decl/background_category/religion =    /decl/background_detail/religion/other,
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/other
+	)
+
 /datum/map/exodus/get_map_info()
 	return "Welcome to Exodus Station, one of the largest remaining stopovers between the core worlds and the rim. Enjoy your stay!"
