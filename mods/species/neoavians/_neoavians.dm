@@ -3,7 +3,7 @@
 #define BODY_EQUIP_FLAG_AVIAN    BITFLAG(6)
 
 /decl/modpack/neoavians
-	name = "Teshari Content"
+	name = "Neo-Avian Content"
 
 /decl/modpack/neoavians/pre_initialize()
 	..()
