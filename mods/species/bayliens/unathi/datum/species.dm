@@ -1,12 +1,12 @@
 /datum/appearance_descriptor/age/lizard
 	standalone_value_descriptors = list(
-		"a hatchling" =     1,
-		"a toddler" =       5,
-		"a child" =         9,
-		"an adolescent" =  15,
-		"a young adult" =  32,
-		"an adult" =       40,
-		"mature" =         80,
+		"an infant" =       1,
+		"a toddler" =       3,
+		"a child" =         7,
+		"an adolescent" =  13,
+		"a young adult" =  18,
+		"an adult" =       25,
+		"middle-aged" =    50,
 		"aging" =         150,
 		"elderly" =       260
 	)
@@ -52,12 +52,8 @@
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
-	description = "A heavily reptillian species, Unathi hail from the Uuosa-Eso system, \
-	which roughly translates to 'burning mother'.<br/><br/> \
-	Coming from a harsh, inhospitable planet, they mostly hold ideals of \
-	honesty, virtue, proficiency and bravery above all else, frequently even their own lives. \
-	They prefer warmer temperatures than most species \
-	and their native tongue is a heavy hissing language called Sinta'Unathi."
+	description = "A heavily reptillian species. They prefer warmer temperatures than most species and \
+	their native tongue is a heavy hissing laungage."
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
 
@@ -109,14 +105,8 @@
 /decl/species/unathi/Initialize()
 	. = ..()
 	LAZYINITLIST(available_background_info)
-	LAZYDISTINCTADD(available_background_info[/decl/background_category/citizenship], /decl/background_detail/citizenship/moghes)
-	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/unathi)
-	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/unathi/heretic)
-	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/unathi/unbound)
-	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/unathi/redeemer)
-	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/unathi/yeosa)
-	LAZYSET(default_background_info, /decl/background_category/citizenship, /decl/background_detail/citizenship/moghes)
-	LAZYSET(default_background_info, /decl/background_category/heritage, /decl/background_detail/heritage/unathi)
+	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/lizard)
+	LAZYSET(default_background_info, /decl/background_category/heritage, /decl/background_detail/heritage/lizard)
 
 /decl/species/unathi/equip_survival_gear(var/mob/living/human/H)
 	..()
