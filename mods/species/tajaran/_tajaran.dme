@@ -1,0 +1,15 @@
+#ifndef MODPACK_TAJARAN
+#define MODPACK_TAJARAN
+// BEGIN_INCLUDE
+
+#include "tajaran.dm"
+#include "datum\accessory.dm"
+#include "datum\blood.dm"
+#include "datum\culture.dm"
+#include "datum\emotes.dm"
+#include "datum\language.dm"
+#include "datum\species.dm"
+#include "datum\species_bodytypes.dm"
+#include "machinery\suit_cycler.dm"
+// END_INCLUDE
+#endif // MODPACK_TAJARAN
