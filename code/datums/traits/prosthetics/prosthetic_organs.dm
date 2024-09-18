@@ -106,7 +106,7 @@
 	uid = "trait_posi_brain"
 	synthetic_bodytype_restricted = TRUE
 	incompatible_with = list(/decl/trait/prosthetic_organ/brain)
-	var/new_brain_type = /obj/item/organ/internal/brain/robotic/positronic
+	new_brain_type = /obj/item/organ/internal/brain/robotic/positronic
 
 /decl/trait/prosthetic_organ/brain/apply_trait(mob/living/holder)
 	. = ..()

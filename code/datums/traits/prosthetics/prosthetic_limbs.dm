@@ -131,53 +131,53 @@
 /decl/trait/prosthetic_limb/left_hand
 	bodypart_name = "Left Hand"
 	apply_to_limb = BP_L_HAND
-	incompatible_with_limbs = list(BP_L_HAND, BP_L_ARM)
+	incompatible_with_limbs = list(BP_L_HAND)
 	uid = "trait_prosthetic_left_hand"
 
 /decl/trait/prosthetic_limb/left_arm
 	bodypart_name = "Left Arm"
 	trait_cost = 2
 	apply_to_limb = BP_L_ARM
-	incompatible_with_limbs = list(BP_L_HAND, BP_L_ARM)
+	incompatible_with_limbs = list(BP_L_ARM)
 	uid = "trait_prosthetic_left_arm"
 
 /decl/trait/prosthetic_limb/right_hand
 	bodypart_name = "Right Hand"
 	apply_to_limb = BP_R_HAND
-	incompatible_with_limbs = list(BP_R_HAND, BP_R_ARM)
+	incompatible_with_limbs = list(BP_R_HAND)
 	uid = "trait_prosthetic_right_hand"
 
 /decl/trait/prosthetic_limb/right_arm
 	bodypart_name = "Right Arm"
 	trait_cost = 2
 	apply_to_limb = BP_R_ARM
-	incompatible_with_limbs = list(BP_R_HAND, BP_R_ARM)
+	incompatible_with_limbs = list(BP_R_ARM)
 	uid = "trait_prosthetic_right_arm"
 
 /decl/trait/prosthetic_limb/left_foot
 	bodypart_name = "Left Foot"
 	apply_to_limb = BP_L_FOOT
-	incompatible_with_limbs = list(BP_L_FOOT, BP_L_LEG)
+	incompatible_with_limbs = list(BP_L_FOOT)
 	uid = "trait_prosthetic_left_foot"
 
 /decl/trait/prosthetic_limb/left_leg
 	bodypart_name = "Left Leg"
 	trait_cost = 2
 	apply_to_limb = BP_L_LEG
-	incompatible_with_limbs = list(BP_L_FOOT, BP_L_LEG)
+	incompatible_with_limbs = list(BP_L_LEG)
 	uid = "trait_prosthetic_left_leg"
 
 /decl/trait/prosthetic_limb/right_foot
 	bodypart_name = "Right Foot"
 	apply_to_limb = BP_R_FOOT
-	incompatible_with_limbs = list(BP_R_FOOT, BP_R_LEG)
+	incompatible_with_limbs = list(BP_R_FOOT)
 	uid = "trait_prosthetic_right_foot"
 
 /decl/trait/prosthetic_limb/right_leg
 	bodypart_name = "Right Leg"
 	trait_cost = 2
 	apply_to_limb = BP_R_LEG
-	incompatible_with_limbs = list(BP_R_FOOT, BP_R_LEG)
+	incompatible_with_limbs = list(BP_R_LEG)
 	uid = "trait_prosthetic_right_leg"
 
 /decl/trait/prosthetic_limb/head
