@@ -18,16 +18,13 @@
 		return
 
 	var/my_height = get_physical_height()
-	var/neighbors = 0
 	for(var/direction in (icon_has_corners ? global.alldirs : global.cardinal))
 
 		var/turf/floor/natural/turf_to_check = get_step_resolving_mimic(src, direction)
 		if(!isturf(turf_to_check) || turf_to_check.density)
 			continue
 
-		// We consider adjacent turfs of our neighbour_type within our height range to be neighbors.
 		if(istype(turf_to_check, neighbour_type) && my_height == turf_to_check.get_physical_height())
-			neighbors |= direction
 			continue
 
 		if(!can_draw_edge_over(turf_to_check))
