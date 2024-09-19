@@ -120,4 +120,3 @@
 	ui_loc = ui_iclothing
 /datum/inventory_slot/head/adherent
 	ui_loc = ui_glasses
-
