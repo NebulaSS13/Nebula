@@ -60,7 +60,7 @@
 	var/list/wall_dirs =  list()
 	var/list/other_dirs = list()
 	for(var/stepdir in global.alldirs)
-		var/turf/T = get_step(src, stepdir)
+		var/turf/T = get_step_resolving_mimic(src, stepdir)
 		if(!T)
 			continue
 		if(istype(T, /turf/wall))
@@ -68,10 +68,10 @@
 				if(0)
 					continue
 				if(1)
-					wall_dirs += get_dir(src, T)
+					wall_dirs += stepdir
 				if(2)
-					wall_dirs += get_dir(src, T)
-					other_dirs += get_dir(src, T)
+					wall_dirs += stepdir
+					other_dirs += stepdir
 
 		if(handle_structure_blending)
 			var/success = 0
