@@ -25,19 +25,32 @@
 		drop_from_inventory(grab)
 
 	// Hand items to a nearby target, or place them on the turf.
-	if(place_item && !QDELETED(item) && !QDELETED(target))
+	// Don't unequip early, keep it in our hands so we can give it!
+	else if(place_item && !QDELETED(item) && !QDELETED(target))
 		// We've already been unequipped above.
 		if(isliving(target))
 			var/mob/living/mob = target
 			if(length(mob.get_held_item_slots()))
-				if(mob.in_throw_mode && mob.a_intent == I_HELP)
+				if(mob == src || (mob.in_throw_mode && mob.a_intent == I_HELP))
 					if(!try_unequip(item, play_dropsound = place_item))
 						return FALSE
-					mob.put_in_hands(item) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
-					visible_message(
-						SPAN_NOTICE("<b>\The [src]</b> hands \the [mob] \a [item]."),
-						SPAN_NOTICE("You give \the [mob] \a [item].")
-					)
+					if(target != src)
+						mob.put_in_hands(item) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
+						visible_message(
+							"<b>\The [src]</b> hands \the [mob] \a [item].",
+							SPAN_NOTICE("You give \the [mob] \a [item].")
+						)
+					else
+						var/same_hand = a_intent == I_HELP
+						var/decl/pronouns/user_pronouns = get_pronouns()
+						visible_message(
+							"<b>\The [src]</b> tosses \the [item] [same_hand ? "in the air and catches it." : "between [user_pronouns.his] hands"].",
+							SPAN_NOTICE("You toss \the [item] [same_hand ? "in the air and catch it" : "between your hands"].")
+						)
+						if(same_hand)
+							put_in_active_hand(item)
+						else
+							put_in_inactive_hand(item)
 				else
 					to_chat(src, SPAN_NOTICE("You offer \the [item] to \the [mob]."))
 					do_give(mob)
@@ -52,6 +65,8 @@
 				item.forceMove(get_turf(target))
 
 		return TRUE
+	else if(!try_unequip(item))
+		return FALSE
 
 	if(!istype(item) || QDELETED(item) || !try_unequip(item, get_turf(target), play_dropsound = place_item) || !isturf(item.loc))
 		return FALSE
