@@ -428,20 +428,20 @@
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, TT.speed)
-		addtimer(CALLBACK(src, TYPE_PROC_REF(/turf, bounce_off), AM, TT.init_dir), 2)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/turf, bounce_off), AM, TT), 2)
 	else if(isobj(AM))
 		var/obj/structure/ladder/L = locate() in contents
 		if(L)
 			L.hitby(AM)
 
-/turf/proc/bounce_off(var/atom/movable/AM, var/direction)
+/turf/proc/bounce_off(var/atom/movable/AM, var/datum/thrownthing/thrown)
 	if(AM.anchored)
 		return
 	if(ismob(AM))
 		var/mob/living/M = AM
 		if(LAZYLEN(M.pinned))
 			return
-	step(AM, turn(direction, 180))
+	AM.throw_at(get_step(src, turn(thrown.init_dir, 180)), 1, thrown.speed / 2)
 
 /turf/proc/can_engrave()
 	return FALSE
