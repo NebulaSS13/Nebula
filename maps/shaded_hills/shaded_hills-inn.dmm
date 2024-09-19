@@ -1108,10 +1108,10 @@
 /area/shaded_hills/outside/downlands)
 "My" = (
 /obj/structure/table/woodentable_reinforced/ebony,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
 /obj/item/cash/imperial/regalis,
 /obj/item/cash/imperial/quin,
 /obj/item/cash/imperial/quin,
