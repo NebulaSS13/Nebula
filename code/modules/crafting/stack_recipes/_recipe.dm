@@ -53,7 +53,8 @@
 		/obj/item/stack/material/ingot,
 		/obj/item/stack/material/plank,
 		/obj/item/stack/material/bar,
-		/obj/item/stack/material/puck
+		/obj/item/stack/material/puck,
+		/obj/item/stack/material/brick
 	)
 	/// What stack types cannot be used to make this recipe?
 	var/list/forbidden_craft_stack_types = list(
