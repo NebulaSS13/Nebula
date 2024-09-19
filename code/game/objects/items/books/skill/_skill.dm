@@ -6,7 +6,7 @@ Skill books that increase your skills while you activate and hold them
 	name = "textbook" // requires default names for tradershop, cant rely on Initialize for names
 	desc = "A blank textbook. (Notify admin)"
 	author = "The Oracle of Bakersroof"
-	icon_state = "book2"
+	icon_state = ICON_STATE_WORLD
 	_base_attack_force = 4
 	w_class = ITEM_SIZE_LARGE            // Skill books are THICC with knowledge. Up one level from regular books to prevent library-in-a-bag silliness.
 	unique = TRUE
