@@ -34,6 +34,7 @@
 		access_RC_announce,
 		access_keycard_auth,
 		access_gateway,
+		access_emergency_storage,
 		access_external_airlocks
 	)
 	minimal_access = list(
@@ -58,6 +59,7 @@
 		access_RC_announce,
 		access_keycard_auth,
 		access_gateway,
+		access_emergency_storage,
 		access_external_airlocks
 	)
 	minimal_player_age = 14
@@ -108,6 +110,7 @@
 		access_armory,
 		access_maint_tunnels,
 		access_morgue,
+		access_emergency_storage,
 		access_external_airlocks
 	)
 	minimal_access = list(
@@ -117,6 +120,7 @@
 		access_brig,
 		access_armory,
 		access_maint_tunnels,
+		access_emergency_storage,
 		access_external_airlocks
 	)
 	minimal_player_age = 7
@@ -157,6 +161,7 @@
 		access_sec_doors,
 		access_forensics_lockers,
 		access_morgue,
+		access_emergency_storage,
 		access_maint_tunnels
 	)
 	minimal_access = list(
@@ -164,6 +169,7 @@
 		access_sec_doors,
 		access_forensics_lockers,
 		access_morgue,
+		access_emergency_storage,
 		access_maint_tunnels
 	)
 	minimal_player_age = 7
@@ -205,6 +211,7 @@
 		access_brig,
 		access_maint_tunnels,
 		access_morgue,
+		access_emergency_storage,
 		access_external_airlocks
 	)
 	minimal_access = list(
@@ -213,6 +220,7 @@
 		access_sec_doors,
 		access_brig,
 		access_maint_tunnels,
+		access_emergency_storage,
 		access_external_airlocks
 	)
 	minimal_player_age = 7
