@@ -2024,6 +2024,8 @@
 /obj/machinery/vending/wallmed1{
 	pixel_x = -26
 	},
+/obj/item/gps,
+/obj/item/gps,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/main)
 "aev" = (
@@ -30852,6 +30854,9 @@
 	dir = 4
 	},
 /obj/structure/table,
+/obj/item/gps/science,
+/obj/item/gps/science,
+/obj/item/gps/science,
 /turf/floor/tiled/white,
 /area/exodus/research)
 "bnr" = (
@@ -30865,7 +30870,10 @@
 /turf/floor/carpet,
 /area/exodus/crew_quarters/captain)
 "bns" = (
-/obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/airlock/maintenance{
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_emergency_storage, access_research))
+	},
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -32723,6 +32731,10 @@
 /obj/machinery/alarm{
 	pixel_y = 22
 	},
+/obj/structure/table{
+	name = "plastic table frame"
+	},
+/obj/machinery/recharger,
 /turf/floor/plating,
 /area/ship/exodus_pod_research)
 "brh" = (
@@ -33206,6 +33218,8 @@
 /obj/item/roller,
 /obj/item/rig/medical/equipped,
 /obj/item/defibrillator/compact/loaded,
+/obj/item/gps/medical,
+/obj/item/gps/medical,
 /turf/floor/tiled/white,
 /area/exodus/medical/sleeper)
 "bsd" = (
@@ -34024,6 +34038,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/item/gun/energy/captain,
 /turf/floor/carpet,
 /area/exodus/crew_quarters/captain)
 "btR" = (
@@ -37684,7 +37699,9 @@
 /area/exodus/security/prison/dorm)
 "bBd" = (
 /obj/machinery/door/airlock{
-	name = "Starboard Emergency Storage"
+	name = "Starboard Emergency Storage";
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_emergency_storage, access_research))
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -38269,12 +38286,16 @@
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "bCr" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/turf/floor/plating,
+/obj/machinery/network/relay/long_range,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/turf/floor/tiled/white,
 /area/ship/exodus_pod_research)
 "bCs" = (
 /obj/structure/table,
@@ -39760,8 +39781,11 @@
 /turf/floor/tiled/white,
 /area/exodus/research)
 "bFr" = (
-/obj/machinery/door/airlock/maintenance,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/maintenance{
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_research))
+	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_shuttle)
 "bFs" = (
@@ -39825,7 +39849,10 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/port)
 "bFy" = (
-/obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/airlock/maintenance{
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_research))
+	},
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -42082,7 +42109,6 @@
 /area/exodus/research/xenobiology)
 "bJF" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -42091,6 +42117,10 @@
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/maintenance{
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_research))
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_port)
@@ -45216,9 +45246,12 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/maintenance{
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_research))
+	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_shuttle)
 "bQa" = (
@@ -45783,6 +45816,7 @@
 	pixel_y = 24
 	},
 /obj/structure/table/reinforced,
+/obj/item/gps,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/engineering_monitoring)
 "bRg" = (
@@ -46234,6 +46268,7 @@
 	dir = 10
 	},
 /obj/item/rig/industrial/equipped,
+/obj/item/gps/mining,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "bRW" = (
@@ -48776,9 +48811,12 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/maintenance{
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_research))
+	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_starboard)
 "bXr" = (
@@ -63023,12 +63061,16 @@
 /turf/floor/plating,
 /area/exodus/maintenance/portsolar)
 "cLt" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/turf/floor/plating,
+/obj/machinery/network/relay/long_range,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
 /area/ship/exodus_pod_engineering)
 "cLu" = (
 /obj/structure/bed/chair{
@@ -63564,8 +63606,14 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/floor/plating,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/network/relay/long_range,
+/turf/floor/tiled/steel_grid,
 /area/ship/exodus_pod_mining)
 "fmR" = (
 /obj/machinery/door/airlock/external/bolted{
@@ -64230,6 +64278,17 @@
 	},
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
+"nLD" = (
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/structure/table{
+	name = "plastic table frame"
+	},
+/obj/machinery/recharger,
+/turf/floor,
+/area/ship/exodus_pod_mining)
 "nOM" = (
 /obj/effect/floor_decal/corner/white{
 	dir = 6
@@ -64451,7 +64510,6 @@
 /area/exodus/hallway/primary/starboard)
 "roQ" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -64460,6 +64518,10 @@
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/maintenance{
+	autoset_access = 0;
+	req_access = list(list(access_maint_tunnels, access_research))
 	},
 /turf/floor/plating,
 /area/exodus/maintenance/research_starboard)
@@ -64678,6 +64740,13 @@
 	},
 /turf/floor/plating,
 /area/ship/exodus_pod_mining)
+"tsZ" = (
+/obj/effect/floor_decal/spline/plain,
+/obj/structure/hygiene/faucet{
+	dir = 1
+	},
+/turf/floor/pool,
+/area/exodus/crew_quarters/fitness)
 "tuN" = (
 /obj/machinery/light{
 	dir = 8
@@ -64686,6 +64755,11 @@
 /obj/effect/floor_decal/corner/white/three_quarters,
 /turf/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
+"tvx" = (
+/obj/effect/floor_decal/spline/plain,
+/obj/structure/hygiene/drain/bath,
+/turf/floor/pool,
+/area/exodus/crew_quarters/fitness)
 "tzU" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 1
@@ -64887,6 +64961,11 @@
 	},
 /turf/floor/plating,
 /area/space)
+"vPY" = (
+/obj/structure/table/reinforced,
+/obj/item/gps,
+/turf/floor/tiled/steel_grid,
+/area/exodus/engineering/engineering_monitoring)
 "vRS" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -83507,7 +83586,7 @@ bNr
 dkO
 idh
 tGf
-vRS
+nLD
 lDi
 vRS
 rVT
@@ -92520,7 +92599,7 @@ cjT
 cgo
 cmC
 cnG
-coG
+vPY
 bVY
 cnz
 coD
@@ -99906,7 +99985,7 @@ akq
 atP
 auX
 auX
-crV
+tsZ
 axA
 ayg
 ayY
@@ -100420,7 +100499,7 @@ aqB
 atP
 aBl
 auX
-crV
+tvx
 axA
 ayg
 azc

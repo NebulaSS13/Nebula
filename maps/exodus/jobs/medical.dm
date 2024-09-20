@@ -55,6 +55,7 @@
 	outfit_type = /decl/outfit/job/medical/cmo
 	min_skill = list(
 		SKILL_LITERACY  = SKILL_ADEPT,
+		SKILL_DEVICES  = SKILL_ADEPT,
 		SKILL_MEDICAL   = SKILL_EXPERT,
 		SKILL_ANATOMY   = SKILL_EXPERT,
 		SKILL_CHEMISTRY = SKILL_BASIC
@@ -111,12 +112,14 @@
 	outfit_type = /decl/outfit/job/medical/doctor
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_DEVICES  = SKILL_ADEPT,
 		SKILL_EVA      = SKILL_BASIC,
 		SKILL_MEDICAL  = SKILL_BASIC,
 		SKILL_ANATOMY  = SKILL_BASIC
 	)
 	max_skill = list(
 		SKILL_MEDICAL   = SKILL_MAX,
+		SKILL_ANATOMY   = SKILL_MAX,
 		SKILL_CHEMISTRY = SKILL_MAX
 	)
 	software_on_spawn = list(
