@@ -437,7 +437,7 @@
 	name = "Set Sensors Level"
 	expected_target_type = /obj/item/clothing
 
-/decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/clothing_set_sensors/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/clothing/U = target
 	U.set_sensors(user)
 

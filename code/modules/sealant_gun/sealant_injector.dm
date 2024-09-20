@@ -104,6 +104,6 @@
 	name = "Inject Sealant"
 	expected_target_type = /obj/structure/sealant_injector
 
-/decl/interaction_handler/sealant_try_inject/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/sealant_try_inject/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/sealant_injector/SI = target
 	SI.try_inject(user)

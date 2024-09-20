@@ -399,5 +399,6 @@
 	icon_state           = "radial_eject"
 	expected_target_type = /obj/item/camera
 
-/decl/interaction_handler/camera_eject_film/invoked(var/obj/item/camera/target, mob/user)
-	return target.eject_film(user)
+/decl/interaction_handler/camera_eject_film/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/camera/camera = target
+	camera.eject_film(user)

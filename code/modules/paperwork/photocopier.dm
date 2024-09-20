@@ -272,10 +272,11 @@
 /decl/interaction_handler/empty/photocopier_paper_bin/is_possible(obj/machinery/photocopier/target, mob/user, obj/item/prop)
 	return (target.printer?.get_amount_paper() > 0) && ..()
 
-/decl/interaction_handler/empty/photocopier_paper_bin/invoked(obj/machinery/photocopier/target, mob/user)
-	if(target.printer?.get_amount_paper() <= 0)
+/decl/interaction_handler/empty/photocopier_paper_bin/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/photocopier/copier = target
+	if(copier.printer?.get_amount_paper() <= 0)
 		return
-	var/obj/item/paper_bundle/B = target.printer?.remove_paper(user)
+	var/obj/item/paper_bundle/B = copier.printer?.remove_paper(user)
 	if(B)
 		user.put_in_hands(B)
 	target.update_icon()
@@ -291,5 +292,6 @@
 /decl/interaction_handler/remove/photocopier_scanner_item/is_possible(obj/machinery/photocopier/target, mob/user, obj/item/prop)
 	return target.scanner_item && ..()
 
-/decl/interaction_handler/remove/photocopier_scanner_item/invoked(obj/machinery/photocopier/target, mob/user)
-	target.eject_item(user)
+/decl/interaction_handler/remove/photocopier_scanner_item/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/photocopier/copier = target
+	copier.eject_item(user)

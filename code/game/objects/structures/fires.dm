@@ -509,7 +509,7 @@
 	name = "Adjust Draught"
 	expected_target_type = /obj/structure/fire_source
 
-/decl/interaction_handler/adjust_draught/invoked(atom/target, mob/user)
+/decl/interaction_handler/adjust_draught/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/fire_source/fire = target
 	if(fire.has_draught)
 		fire.adjust_draught(user)

@@ -75,6 +75,6 @@
 	name = "Spin Cylinder"
 	expected_target_type = /obj/item/gun/projectile/revolver
 
-/decl/interaction_handler/revolver_spin_cylinder/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/revolver_spin_cylinder/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/projectile/revolver/R = target
 	R.spin_cylinder()

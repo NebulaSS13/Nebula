@@ -516,8 +516,9 @@
 	name = "Rename Bundle"
 	expected_target_type = /obj/item/paper_bundle
 
-/decl/interaction_handler/rename/paper_bundle/invoked(obj/item/paper_bundle/target, mob/user)
-	target.rename()
+/decl/interaction_handler/rename/paper_bundle/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/paper_bundle/bundle = target
+	bundle.rename()
 
 ///////////////////////////////////////////////////////////////////////////
 // Interaction Break
@@ -526,9 +527,10 @@
 	name = "Unbundle"
 	expected_target_type = /obj/item/paper_bundle
 
-/decl/interaction_handler/unbundle/paper_bundle/invoked(obj/item/paper_bundle/target, mob/user)
+/decl/interaction_handler/unbundle/paper_bundle/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/paper_bundle/bundle = target
 	to_chat(user, SPAN_NOTICE("You loosen \the [target]."))
-	target.break_bundle(user)
+	bundle.break_bundle(user)
 
 #undef MAX_PHOTO_OVERLAYS
 #undef MAX_PAPER_UNDERLAYS

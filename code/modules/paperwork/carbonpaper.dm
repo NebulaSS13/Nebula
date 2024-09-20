@@ -57,5 +57,6 @@
 	name = "remove carbon-copy"
 	expected_target_type = /obj/item/paper/carbon
 
-/decl/interaction_handler/carbon_paper_remove/invoked(obj/item/paper/carbon/target, mob/user)
-	target.remove_copy(user)
+/decl/interaction_handler/carbon_paper_remove/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/paper/carbon/paper = target
+	paper.remove_copy(user)

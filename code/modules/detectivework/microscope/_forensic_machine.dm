@@ -121,6 +121,6 @@
 	name = "Remove Sample"
 	expected_target_type = /obj/machinery/forensic
 
-/decl/interaction_handler/forensics_remove_sample/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/forensics_remove_sample/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/machinery/forensic/F = target
 	F.remove_sample(usr)

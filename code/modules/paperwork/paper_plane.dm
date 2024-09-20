@@ -81,7 +81,7 @@
 /decl/interaction_handler/make_paper_plane/is_possible(obj/item/paper/target, mob/user, obj/item/prop)
 	return ..() && !target.is_crumpled
 
-/decl/interaction_handler/make_paper_plane/invoked(obj/item/paper/target, mob/user)
+/decl/interaction_handler/make_paper_plane/invoked(atom/target, mob/user, obj/item/prop)
 	user.visible_message(SPAN_NOTICE("\The [user] folds \the [target] into a plane."), SPAN_NOTICE("You fold \the [target] into a plane."))
 	var/obj/item/paper_plane/PP = new
 	user.try_unequip(target, PP)

@@ -221,7 +221,7 @@
 		var/obj/item/chems/C = target
 		return !!C.possible_transfer_amounts
 
-/decl/interaction_handler/set_transfer/chems/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/set_transfer/chems/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/chems/C = target
 	C.set_amount_per_transfer_from_this()
 
@@ -231,7 +231,7 @@
 	expected_target_type = /obj/item/chems
 	interaction_flags    = INTERACTION_NEEDS_INVENTORY | INTERACTION_NEEDS_PHYSICAL_INTERACTION
 
-/decl/interaction_handler/empty/chems/invoked(obj/item/chems/target, mob/user)
+/decl/interaction_handler/empty/chems/invoked(atom/target, mob/user, obj/item/prop)
 	var/turf/T = get_turf(user)
 	if(T)
 		to_chat(user, SPAN_NOTICE("You empty \the [target] onto the floor."))

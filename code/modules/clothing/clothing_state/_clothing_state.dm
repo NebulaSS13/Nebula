@@ -131,6 +131,6 @@
 	expected_target_type = /obj/item/clothing
 	var/state_decl_type
 
-/decl/interaction_handler/clothing_toggle/invoked(var/atom/target, var/mob/user)
+/decl/interaction_handler/clothing_toggle/invoked(atom/target, mob/user, obj/item/prop)
 	var/decl/clothing_state_modifier/modifier = GET_DECL(state_decl_type)
 	call(target, modifier.toggle_verb)()

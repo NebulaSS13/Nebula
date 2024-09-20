@@ -31,7 +31,7 @@
 	var/decl/interaction_handler/folding_knife/interaction = GET_DECL(/decl/interaction_handler/folding_knife)
 	if(!interaction.is_possible(src, user))
 		return FALSE
-	interaction.invoked(src, user)
+	interaction.invoked(src, user, user.get_active_held_item())
 	return TRUE
 
 /obj/item/bladed/folding/proc/set_open(new_state, mob/user)
@@ -145,7 +145,7 @@
 		I.name = "Use as [tool_name]"
 		.[tool_mode] = I
 
-/decl/interaction_handler/folding_knife/invoked(atom/target, mob/user)
+/decl/interaction_handler/folding_knife/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/bladed/folding/folding_knife = target
 	var/chosen_option = show_radial_menu(user, user, get_radial_choices(folding_knife), radius = 42, use_labels = RADIAL_LABELS_OFFSET)
 	if(!chosen_option)

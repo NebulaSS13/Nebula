@@ -428,10 +428,11 @@
 /decl/interaction_handler/empty/stock_parts_printer/is_possible(obj/item/stock_parts/printer/target, mob/user, obj/item/prop)
 	return (target.get_amount_paper() > 0) && ..()
 
-/decl/interaction_handler/empty/stock_parts_printer/invoked(obj/item/stock_parts/printer/target, mob/user)
-	if(target.get_amount_paper() <= 0)
+/decl/interaction_handler/empty/stock_parts_printer/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/stock_parts/printer/printer = target
+	if(printer.get_amount_paper() <= 0)
 		return
-	var/obj/item/paper_bundle/B = target.remove_paper(user)
+	var/obj/item/paper_bundle/B = printer.remove_paper(user)
 	if(B)
 		user.put_in_hands(B)
 	target.update_icon()
