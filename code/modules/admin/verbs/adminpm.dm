@@ -101,6 +101,9 @@
 		if(sender_lite.ckey != ticket.owner.ckey && !ticket.take(sender_lite))
 			return
 
+	// We are sending this quite early because of a return in the popup code.
+	SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Reply Sent ([ticket.id]) (Game ID: [game_id])", "body" = "**[sender_lite.key_name(FALSE, FALSE)]** to **[receiver_lite.key_name(FALSE, FALSE)]**: [msg]"))
+
 	var/recieve_message
 
 	if(holder && !C.holder)
@@ -139,6 +142,7 @@
 		receiver_message += ": <span class='message'>[msg]</span>"
 	receiver_message += "</span></span>"
 	to_chat(C, receiver_message)
+
 	window_flash(C)
 
 	//play the recieving admin the adminhelp sound (if they have them enabled)

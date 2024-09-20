@@ -63,12 +63,13 @@
 		to_chat(user, SPAN_NOTICE("[target] is full of reagents."))
 		return TRUE
 
+	var/had_liquids = length(reagents.liquid_volumes)
 	var/trans = reagents.trans_to(target, amount)
 
-	// Sounds more like pouring small pellets or dust.
-	if(!length(reagents.liquid_volumes))
-		playsound(src, 'sound/effects/refill.ogg', 25, 1)
-	else
+	if(had_liquids)
 		playsound(src, 'sound/effects/pour.ogg', 25, 1)
+	else
+		// Sounds more like pouring small pellets or dust.
+		playsound(src, 'sound/effects/refill.ogg', 25, 1)
 	to_chat(user, SPAN_NOTICE("You transfer [trans] unit\s of the solution to \the [target].  \The [src] now contains [src.reagents.total_volume] units."))
 	return TRUE

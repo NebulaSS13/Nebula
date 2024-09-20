@@ -8,6 +8,7 @@
 	fire_delay = 25
 	slot_flags = SLOT_BACK
 	has_safety = FALSE
+	w_class = ITEM_SIZE_LARGE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material = /decl/material/solid/organic/wood/yew
 	color = /decl/material/solid/organic/wood/yew::color
@@ -16,6 +17,8 @@
 
 	/// What are we strung with?
 	var/obj/item/bowstring/string = /obj/item/bowstring
+	/// Does this weapon require a string to fire?
+	var/requires_string = TRUE
 	/// Currently loaded ammo.
 	var/obj/item/_loaded
 	/// Current draw on the bow.
@@ -38,6 +41,10 @@
 	var/drawing_bow = FALSE
 	/// Timer for tracking next increase in tension from click and hold.
 	var/next_tension_step
+	/// How big is this bow when strung? Uses initial w_class if unset.
+	var/strung_w_class = ITEM_SIZE_HUGE
+	/// How big is this bow when unstrung? Uses initial w_class if unset.
+	var/unstrung_w_class
 
 /obj/item/gun/launcher/bow/set_autofire(var/atom/fire_at, var/mob/fire_by, var/autoturn = TRUE)
 	if(!autofire_enabled || autofiring_at)
@@ -98,11 +105,19 @@
 /obj/item/gun/launcher/bow/fancy/crafted
 	string = null
 
-
 /obj/item/gun/launcher/bow/Initialize()
 	if(ispath(string))
-		string = new string(src)
+		set_string(new string(src))
 	return ..()
+
+/obj/item/gun/launcher/bow/proc/set_string(new_string)
+	if(string == new_string)
+		return FALSE
+	string = new_string
+	if(istype(string))
+		w_class = strung_w_class || initial(w_class)
+	else
+		w_class = unstrung_w_class || initial(w_class)
 
 /obj/item/gun/launcher/bow/Destroy()
 	QDEL_NULL(_loaded)
@@ -115,7 +130,7 @@
 		_loaded = null
 	if(string)
 		string.dropInto(loc)
-		string = null
+		set_string(null)
 	return ..()
 
 /obj/item/gun/launcher/bow/dropped()

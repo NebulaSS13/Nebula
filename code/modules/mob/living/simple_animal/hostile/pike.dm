@@ -15,6 +15,7 @@
 	natural_weapon = /obj/item/natural_weapon/bite/pike
 	butchery_data = /decl/butchery_data/animal/fish/space_carp/pike
 	ai = /datum/mob_controller/aggressive/carp/pike
+	ability_handlers = list(/datum/ability_handler/predator)
 
 /datum/mob_controller/aggressive/carp/pike
 	turns_per_wander = 4

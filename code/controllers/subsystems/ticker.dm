@@ -103,6 +103,7 @@ SUBSYSTEM_DEF(ticker)
 
 	if(!length(global.admins))
 		send2adminirc("Round has started with no admins online.")
+		SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Round Started (Game ID: [game_id])", "body" = "Round has started with no admins online."))
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
 	mode.process()

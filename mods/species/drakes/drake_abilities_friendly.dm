@@ -1,6 +1,6 @@
 var/global/list/_wounds_being_tended_by_drakes = list()
 
-/datum/ability_handler/grafadreka/proc/handle_wound_cleaning(mob/user, mob/living/friend)
+/datum/ability_handler/predator/grafadreka/proc/handle_wound_cleaning(mob/user, mob/living/friend)
 	// Can't heal ghosts or rocks.
 	if(!isliving(friend))
 		return FALSE

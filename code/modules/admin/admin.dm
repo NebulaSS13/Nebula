@@ -789,7 +789,10 @@ var/global/BSACooldown = 0
 	if (new_vis && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
 
-	send2adminirc("[key_name(src)]" + long_message)
+	var/full_message = "[key_name(src)]" + long_message
+	send2adminirc(full_message)
+	SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Hub Visibility Toggled (Game ID: [game_id])", "body" = full_message))
+
 	log_and_message_admins(long_message)
 	SSstatistics.add_field_details("admin_verb","THUB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 

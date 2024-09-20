@@ -75,7 +75,7 @@
 
 /decl/butchery_data/animal/small/fowl/goose/dire/harvest_meat(mob/donor)
 	. = ..()
-	var/quill = new /obj/item/pen/fancy/quill(get_turf(donor))
+	var/quill = new /obj/item/pen/fancy/quill/goose(get_turf(donor))
 	LAZYADD(., quill)
 
 /decl/butchery_data/animal/small/fowl/duck

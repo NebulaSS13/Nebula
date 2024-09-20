@@ -3,7 +3,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	icon_state          = ICON_STATE_WORLD
 	material            = /decl/material/solid/organic/meat
-	w_class             = ITEM_SIZE_LARGE
+	w_class             = ITEM_SIZE_NORMAL
 	volume              = 20
 	nutriment_type      = /decl/material/solid/organic/meat
 	nutriment_desc      = list("umami" = 10)
@@ -170,7 +170,7 @@
 	icon                = 'icons/obj/items/butchery/haunch.dmi'
 	slice_num           = 2
 	slice_path          = /obj/item/food/butchery/meat
-	w_class             = ITEM_SIZE_HUGE
+	w_class             = ITEM_SIZE_LARGE
 	var/bone_material   = /decl/material/solid/organic/bone
 
 /obj/item/food/butchery/haunch/Initialize(mapload, material_key, skip_plate = FALSE, mob/living/donor)
@@ -199,7 +199,7 @@
 	name                = "side of meat"
 	desc                = "Approximately half the torso and body of an unfortunate animal, split lengthways, cleaned, and ready for cooking."
 	icon                = 'icons/obj/items/butchery/side.dmi'
-	w_class             = ITEM_SIZE_GARGANTUAN
+	w_class             = ITEM_SIZE_HUGE
 
 /obj/item/food/butchery/haunch/side/Initialize(mapload, material_key, skip_plate = FALSE, mob/living/donor)
 	. = ..()
@@ -210,6 +210,7 @@
 	meat_name = new_meat_name
 	SetName("side of [new_meat_name]")
 
+// TODO: unify with organ/internal/stomach?
 /obj/item/food/butchery/stomach
 	name                = "stomach"
 	desc                = "The stomach of a large animal. It would probably make a decent waterskin if properly treated."
@@ -217,6 +218,7 @@
 	material            = /decl/material/solid/organic/meat/gut
 	nutriment_amt       = 8
 	dried_type          = /obj/item/chems/waterskin
+	w_class             = ITEM_SIZE_SMALL
 	var/stomach_reagent = /decl/material/liquid/acid/stomach
 
 /obj/item/food/butchery/stomach/get_dried_product()

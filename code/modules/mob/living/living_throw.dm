@@ -23,8 +23,6 @@
 				var/end_T_descriptor = "<font color='#6b4400'>[start_T] \[[end_T.x],[end_T.y],[end_T.z]\] ([end_T.loc])</font>"
 				admin_attack_log(usr, mob, "Threw the victim from [start_T_descriptor] to [end_T_descriptor].", "Was from [start_T_descriptor] to [end_T_descriptor].", "threw, from [start_T_descriptor] to [end_T_descriptor], ")
 		drop_from_inventory(G)
-	else if(!try_unequip(item, play_dropsound = place_item && !isliving(target)))
-		return FALSE
 
 	// Hand items to a nearby target, or place them on the turf.
 	if(place_item && !QDELETED(item) && !QDELETED(target))
@@ -33,6 +31,8 @@
 			var/mob/living/mob = target
 			if(length(mob.get_held_item_slots()))
 				if(mob.in_throw_mode && mob.a_intent == I_HELP)
+					if(!try_unequip(item, play_dropsound = place_item))
+						return FALSE
 					mob.put_in_hands(item) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
 					visible_message(
 						SPAN_NOTICE("<b>\The [src]</b> hands \the [mob] \a [item]."),
@@ -44,12 +44,20 @@
 				return TRUE
 			to_chat(src, SPAN_WARNING("\The [mob] has no way to hold \the [item]!"))
 			return TRUE
-		if(!QDELETED(item))
-			item.forceMove(get_turf(target))
+
+		if(!QDELETED(item) && item.loc != target)
+			if(item.loc == src)
+				try_unequip(item, get_turf(target), play_dropsound = place_item)
+			else
+				item.forceMove(get_turf(target))
+
 		return TRUE
 
-	if(!istype(item) || QDELETED(item) || !isturf(item.loc))
+	if(!istype(item) || QDELETED(item) || !try_unequip(item, get_turf(target), play_dropsound = place_item) || !isturf(item.loc))
 		return FALSE
+
+	if(place_item)
+		return TRUE
 
 	var/itemsize = item.get_object_size()
 	var/message = "\The [src] has thrown \the [item]!"

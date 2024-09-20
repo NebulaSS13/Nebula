@@ -419,6 +419,7 @@
 #include "code\datums\extensions\state_machine.dm"
 #include "code\datums\extensions\abilities\abilities.dm"
 #include "code\datums\extensions\abilities\abilities_mob.dm"
+#include "code\datums\extensions\abilities\abilities_predator.dm"
 #include "code\datums\extensions\abilities\ability_handler.dm"
 #include "code\datums\extensions\abilities\ability_item.dm"
 #include "code\datums\extensions\appearance\appearance.dm"

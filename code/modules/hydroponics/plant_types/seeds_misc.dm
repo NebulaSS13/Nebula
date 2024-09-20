@@ -1,7 +1,7 @@
 /datum/seed/cotton
 	name = "cotton"
 	product_name = "cotton"
-	display_name = "cotton"
+	display_name = "cotton patch"
 	product_material = /decl/material/solid/organic/plantmatter/pith/husk
 	chems = list(
 		/decl/material/liquid/nutriment/plant_oil = list(3,10),
@@ -21,6 +21,20 @@
 	set_trait(TRAIT_PRODUCT_COLOUR, "#ffffff")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
+
+/datum/seed/cotton/flax
+	name = "flax"
+	product_name = "flax"
+	display_name = "flax patch"
+	// Do we want linseed oil at some point?
+	chems = list(
+		/decl/material/liquid/nutriment/plant_oil = list(5,12),
+		/decl/material/solid/organic/cloth/linen = list(8,1)
+	)
+
+/datum/seed/cotton/flax/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR, "#eee4c7")
 
 // Chili plants/variants.
 /datum/seed/chili
@@ -349,7 +363,7 @@
 	name = "ambrosiavulgaris"
 	product_name = "ambrosia vulgaris"
 	display_name = "ambrosia vulgaris patch"
-	mutants = list("ambrosiadeus")
+	mutants = list("ambrosiadeus", "hemp")
 	chems = list(
 		/decl/material/liquid/nutriment = list(1),
 		/decl/material/liquid/psychoactives = list(1,8),
@@ -372,6 +386,18 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#9fad55")
 	set_trait(TRAIT_PLANT_ICON,"ambrosia")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
+
+/datum/seed/ambrosia/hemp
+	name = "hemp"
+	product_name = "hemp"
+	display_name = "hemp patch"
+	mutants = null
+	chems = list(
+		/decl/material/liquid/nutriment/plant_oil = list(3,10),
+		/decl/material/solid/organic/cloth/hemp = list(8,1),
+		/decl/material/liquid/nutriment = list(1)
+	)
+	grown_tag = null
 
 /datum/seed/ambrosia/deus
 	name = "ambrosiadeus"

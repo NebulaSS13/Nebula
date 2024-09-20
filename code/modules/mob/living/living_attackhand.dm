@@ -20,6 +20,16 @@
 
 /mob/living/proc/default_hurt_interaction(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+	// TODO: integrate/generalize this ugly code instead of using boilerplate from
+	// simple_animal/UnarmedAttack() due to complexities with existing proc flow.
+	if(isanimal(user))
+		var/mob/living/simple_animal/predator = user
+		var/obj/item/attacking_with = predator.get_natural_weapon()
+		if(attacking_with)
+			attackby(attacking_with, predator)
+		else
+			attack_animal(predator)
+		return TRUE
 	return FALSE
 
 /mob/living/proc/default_help_interaction(var/mob/user)

@@ -80,7 +80,10 @@
 	if(delay)
 		sleep(delay)
 
-	if(!istype(target) || QDELETED(target) || !istype(user) || QDELETED(user) || !Adjacent(user) || user.incapacitated() || target.anchored || !target.Adjacent(src))
+	if(!istype(target) || QDELETED(target) || !istype(user) || QDELETED(user) || user.incapacitated() || target.anchored)
+		return
+
+	if(!Adjacent(user) || !target.Adjacent(user))
 		return
 
 	if(!anchored)

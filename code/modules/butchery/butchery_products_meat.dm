@@ -13,7 +13,7 @@
 	dried_type                     = /obj/item/food/jerky/meat
 	nutriment_type                 = /decl/material/solid/organic/meat
 	nutriment_amt                  = 9
-	w_class                        = ITEM_SIZE_NORMAL
+	w_class                        = ITEM_SIZE_SMALL
 	backyard_grilling_product      = /obj/item/food/meatsteak/grilled
 	backyard_grilling_announcement = "sizzles as it is grilled to medium-rare."
 

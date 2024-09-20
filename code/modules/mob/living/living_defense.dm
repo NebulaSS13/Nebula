@@ -114,7 +114,7 @@
 	if(I.attack_message_name())
 		weapon_mention = " with [I.attack_message_name()]"
 	if(effective_force)
-		visible_message(SPAN_DANGER("\The [src] has been [DEFAULTPICK(I.attack_verb, "attacked")][weapon_mention] by [user]!"))
+		visible_message(SPAN_DANGER("\The [src] has been [DEFAULTPICK(I.attack_verb, "attacked")][weapon_mention] by \the [user]!"))
 	else
 		visible_message(SPAN_WARNING("\The [src] has been [DEFAULTPICK(I.attack_verb, "attacked")][weapon_mention] by \the [user]!"))
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)

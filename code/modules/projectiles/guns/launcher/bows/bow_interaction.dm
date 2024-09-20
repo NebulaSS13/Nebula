@@ -46,7 +46,7 @@
 			relax_tension(user)
 		if(_loaded)
 			remove_arrow(user)
-		else if(string)
+		else if(istype(string))
 			remove_string(user)
 		else
 			return ..()
@@ -54,13 +54,13 @@
 	return ..()
 
 /obj/item/gun/launcher/bow/proc/remove_string(mob/user)
-	if(!string)
+	if(!istype(string))
 		return
 	string.dropInto(loc)
 	if(user)
 		show_string_remove_message(user)
 		user.put_in_hands(string)
-	string = null
+	set_string(null)
 	update_icon()
 
 /obj/item/gun/launcher/bow/proc/remove_arrow(mob/user)
@@ -94,7 +94,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] is already strung."))
 		return TRUE
 	if(user.try_unequip(new_string, src))
-		string = new_string
+		set_string(new_string)
 		if(user)
 			show_string_message(user)
 		update_icon()

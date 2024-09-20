@@ -7,3 +7,4 @@
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	faction = "creature"
 	supernatural = 1
+	ability_handlers = list(/datum/ability_handler/predator)

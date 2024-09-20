@@ -83,6 +83,7 @@
 	stack_origin_tech = @'{"materials":1}'
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
+	destruction_sound = "pageturn"
 	conductive = 0
 	value = 0.5
 	reflectiveness = MAT_VALUE_DULL
@@ -102,6 +103,7 @@
 	stack_origin_tech       = @'{"materials":1}'
 	door_icon_base          = "wood"
 	destruction_desc        = "tears"
+	destruction_sound       = "pageturn"
 	icon_base               = 'icons/turf/walls/solid.dmi'
 	icon_reinf              = 'icons/turf/walls/reinforced.dmi'
 	integrity               = 10 //Probably don't wanna go below 10, because of the health multiplier on things, that would result in a value smaller than 1.
@@ -150,6 +152,18 @@
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 	compost_value = 0.8
 	has_textile_fibers = TRUE
+
+/decl/material/solid/organic/cloth/hemp
+	name      = "hemp"
+	lore_text = "Sturdy fibers from the hemp plant, woven into strong cloth."
+	uid       = "solid_hemp"
+	color     = "#b4a374"
+
+/decl/material/solid/organic/cloth/linen
+	name      = "linen"
+	lore_text = "Fibers from the flax plant, woven into sturdy, absorbent cloth."
+	uid       = "solid_linen"
+	color     = "#eee4c7"
 
 /decl/material/solid/organic/cloth/wool
 	name      = "wool"

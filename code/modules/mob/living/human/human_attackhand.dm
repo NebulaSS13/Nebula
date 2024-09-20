@@ -233,11 +233,9 @@
 			if(G.assailant == user && G.affecting == src && G.resolve_openhand_attack())
 				return TRUE
 	// Should this all be in Touch()?
-		var/mob/living/human/H = user
-		if(istype(H))
-			if(H != src && check_shields(0, null, H, H.get_target_zone(), H))
-				H.do_attack_animation(src)
-				return TRUE
+		if(ishuman(user) && user != src && check_shields(0, null, user, user.get_target_zone(), user))
+			user.do_attack_animation(src)
+			return TRUE
 
 	return ..()
 
