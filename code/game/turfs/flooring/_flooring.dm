@@ -165,7 +165,7 @@ var/global/list/flooring_cache = list()
 		var/decl/material/use_material = target.get_material()
 		target.color = use_material?.color
 
-	var/edge_layer = (icon_edge_layer == FLOOR_EDGE_NONE) ? layer + icon_edge_layer : layer
+	var/edge_layer = (icon_edge_layer != FLOOR_EDGE_NONE) ? layer + icon_edge_layer : layer
 	var/list/edge_overlays = list()
 	var/has_border = 0
 	for(var/step_dir in global.cardinal)

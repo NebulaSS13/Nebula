@@ -35,28 +35,28 @@
 
 	. = ..(ml)
 
-	if(ispath(material))
-		if(ml)
-			set_turf_materials(material, skip_update = TRUE)
-			queue_icon_update()
-		else
-			set_turf_materials(material)
-	else if(!istype(material))
-		material = null
-		update_icon()
+	set_turf_materials(material, skip_update = TRUE)
 
 	if(!floortype && ispath(flooring))
 		floortype = flooring
-
 	if(floortype)
-		if(ml)
-			set_flooring(GET_DECL(floortype), skip_update = TRUE)
-			queue_icon_update()
-		else
-			set_flooring(GET_DECL(floortype))
+		set_flooring(GET_DECL(floortype), skip_update = TRUE)
 
 	if(fill_reagent_type && get_physical_height() < 0)
 		add_to_reagents(fill_reagent_type, abs(height))
+
+	if(material || flooring || base_flooring)
+		if(ml)
+			queue_icon_update()
+		else
+			for(var/direction in global.alldirs)
+				var/turf/target_turf = get_step_resolving_mimic(src, direction)
+				if(istype(target_turf))
+					if(TICK_CHECK) // not CHECK_TICK -- only queue if the server is overloaded
+						target_turf.queue_icon_update()
+					else
+						target_turf.update_icon()
+			update_icon()
 
 /turf/floor/Destroy()
 	set_flooring(null)
