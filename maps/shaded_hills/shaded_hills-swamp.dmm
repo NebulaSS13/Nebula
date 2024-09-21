@@ -5,7 +5,7 @@
 	},
 /area/shaded_hills/witch_hut)
 "bg" = (
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "cE" = (
 /turf/floor/mud/water,
@@ -14,7 +14,7 @@
 /obj/structure/bed/chair/wood/ebony{
 	dir = 8
 	},
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "hT" = (
 /turf/floor/mud/water/deep,
@@ -42,7 +42,7 @@
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/rock/hematite,
 /obj/item/rock/flint,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "oF" = (
 /turf/unsimulated/dark_filler,
@@ -52,7 +52,7 @@
 /area/shaded_hills/caves/swamp)
 "pl" = (
 /obj/structure/drying_rack,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "rP" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
@@ -73,7 +73,7 @@
 	dir = 8;
 	start_lit = 1
 	},
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "vZ" = (
 /turf/floor/mud/water,
@@ -116,7 +116,7 @@
 /obj/item/chems/glass/handmade/cup/wood,
 /obj/item/chems/glass/handmade/cup/wood,
 /obj/item/chems/glass/bucket/wood,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "Ic" = (
 /turf/floor/clay,
@@ -135,11 +135,11 @@
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "KA" = (
 /obj/abstract/landmark/start/shaded_hills/herbalist,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "LF" = (
 /turf/wall/natural/basalt/shaded_hills,
@@ -153,7 +153,7 @@
 /area/shaded_hills/outside/swamp)
 "SE" = (
 /obj/structure/door/walnut,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "Ty" = (
 /obj/abstract/landmark/start/shaded_hills/traveller,
@@ -167,7 +167,7 @@
 /area/shaded_hills/outside/swamp)
 "TR" = (
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "Vl" = (
 /obj/structure/table/woodentable/ebony,
@@ -177,7 +177,7 @@
 	},
 /obj/item/chems/glass/mortar,
 /obj/item/rock/basalt,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 "VA" = (
 /turf/wall/brick/basalt,
@@ -195,7 +195,7 @@
 /obj/structure/bed/simple/ebony,
 /obj/item/bedsheet/furs,
 /obj/abstract/landmark/start/shaded_hills/herbalist,
-/turf/floor/wood/walnut,
+/turf/floor/dirt/walnut,
 /area/shaded_hills/witch_hut)
 
 (1,1,1) = {"

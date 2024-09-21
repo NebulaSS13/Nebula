@@ -1,13 +1,14 @@
 
 /turf/floor/path
-	name            = "path"
-	gender          = NEUTER
-	desc            = "A cobbled path made of loose stones."
-	color           = COLOR_GRAY
-	icon            = 'icons/turf/flooring/path.dmi'
-	icon_state      = "cobble"
-	flooring        = /decl/flooring/path/cobblestone
-	floor_material  = /decl/material/solid/stone/sandstone
+	name           = "path"
+	gender         = NEUTER
+	desc           = "A cobbled path made of loose stones."
+	color          = COLOR_GRAY
+	icon           = 'icons/turf/flooring/path.dmi'
+	icon_state     = "cobble"
+	flooring       = /decl/flooring/path/cobblestone
+	floor_material = /decl/material/solid/stone/sandstone
+	base_flooring  = /decl/flooring/dirt
 
 /turf/floor/path/Initialize(mapload, no_update_icon)
 	. = ..()
