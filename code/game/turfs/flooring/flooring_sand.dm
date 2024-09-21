@@ -11,7 +11,7 @@
 
 /decl/flooring/sand/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((exposed_temperature > T0C + 1700 && prob(5)) || exposed_temperature > T0C + 3000)
-		if(target.flooring == src)
+		if(target.get_topmost_flooring() == src)
 			target.set_flooring(/decl/flooring/melted_sand)
 			. = TRUE
 		if(target.base_flooring == src)

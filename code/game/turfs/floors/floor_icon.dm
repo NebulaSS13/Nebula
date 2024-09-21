@@ -213,19 +213,20 @@
 	//If we get here then its a normal floor
 	else if (istype(opponent, /turf/floor))
 		var/turf/floor/floor_opponent = opponent
+		var/decl/flooring/opponent_flooring = floor_opponent.get_topmost_flooring()
 		if (floor_smooth == SMOOTH_ALL)
 			. = TRUE
 		//If the floor is the same as us,then we're linked,
-		else if (istype(floor_opponent.flooring, neighbour_type))
+		else if (istype(floor_opponent_flooring, neighbour_type))
 			. = TRUE
 		//If we get here it must be using a whitelist or blacklist
 		else if (floor_smooth == SMOOTH_WHITELIST)
-			if (flooring_whitelist[floor_opponent.flooring.type])
+			if (flooring_whitelist[opponent_flooring.type])
 				//Found a match on the typecache
 				. = TRUE
 		else if(floor_smooth == SMOOTH_BLACKLIST)
 			. = TRUE //Default to true for the blacklist, then make it false if a match comes up
-			if (flooring_blacklist[floor_opponent.flooring.type])
+			if (flooring_blacklist[opponent_flooring.type])
 				//Found a match on the typecache
 				. = FALSE
 		//Check for window frames.

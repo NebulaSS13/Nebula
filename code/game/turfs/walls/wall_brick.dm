@@ -2,7 +2,7 @@
 	icon_state = "brick"
 	material = /decl/material/solid/stone/sandstone
 	girder_material = null
-	floor_type = null
+	floor_type = /turf/floor/dirt
 	min_dismantle_amount = 3
 	max_dismantle_amount = 5
 

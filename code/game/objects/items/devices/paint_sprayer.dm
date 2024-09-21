@@ -216,11 +216,13 @@
 
 
 /obj/item/paint_sprayer/proc/paint_floor(var/turf/floor/F, var/mob/user, var/params)
-	if(!F.flooring)
+
+	var/decl/flooring/flooring = F.get_topmost_flooring()
+	if(!istype(flooring))
 		to_chat(user, SPAN_WARNING("You need flooring to paint on."))
 		return FALSE
 
-	if(!F.flooring.can_paint || F.is_floor_damaged())
+	if(!flooring.can_paint || F.is_floor_damaged())
 		to_chat(user, SPAN_WARNING("\The [src] cannot paint \the [F.name]."))
 		return FALSE
 

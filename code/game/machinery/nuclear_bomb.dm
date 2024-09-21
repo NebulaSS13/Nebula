@@ -462,7 +462,7 @@ var/global/bomb_set
 	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
 	for(var/turf/floor/T in get_area(src))
-		if(istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+		if(istype(T.get_topmost_flooring(), /decl/flooring/reinforced/circuit/red))
 			flash_tiles += T
 	update_icon()
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
@@ -547,7 +547,7 @@ var/global/bomb_set
 	if(!last_turf_state || target_icon_state != last_turf_state)
 		for(var/thing in flash_tiles)
 			var/turf/floor/T = thing
-			if(!istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+			if(!istype(T.get_topmost_flooring(), /decl/flooring/reinforced/circuit/red))
 				flash_tiles -= T
 				continue
 			T.icon_state = target_icon_state

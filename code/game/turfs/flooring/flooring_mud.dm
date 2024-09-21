@@ -11,7 +11,7 @@
 
 /decl/flooring/mud/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!target.reagents?.total_volume)
-		if(target.flooring == src)
+		if(target.get_topmost_flooring() == src)
 			target.set_flooring(/decl/flooring/dry_mud)
 		else if(target.base_flooring == src)
 			target.set_base_flooring(/decl/flooring/dry_mud)
@@ -31,7 +31,7 @@
 	force_material  = /decl/material/solid/soil
 
 /decl/flooring/dry_mud/fluid_act(turf/floor/target, datum/reagents/fluids)
-	if(target.flooring == src)
+	if(target.get_topmost_flooring() == src)
 		target.set_flooring(/decl/flooring/mud)
 		. = TRUE
 	if(target.base_flooring == src)
@@ -52,7 +52,7 @@
 	growth_value    = 1
 
 /decl/flooring/dirt/fluid_act(turf/floor/target, datum/reagents/fluids)
-	if(target.flooring == src)
+	if(target.get_topmost_flooring() == src)
 		target.set_flooring(/decl/flooring/mud)
 		. = TRUE
 	if(target.base_flooring == src)
