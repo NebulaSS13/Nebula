@@ -215,7 +215,7 @@
 		if (floor_smooth == SMOOTH_ALL)
 			. = TRUE
 		//If the floor is the same as us,then we're linked,
-		else if (floor_opponent.flooring?.type == neighbour_type)
+		else if (istype(floor_opponent.flooring, neighbour_type))
 			. = TRUE
 		//If we get here it must be using a whitelist or blacklist
 		else if (floor_smooth == SMOOTH_WHITELIST)
