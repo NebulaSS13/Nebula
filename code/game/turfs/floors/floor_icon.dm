@@ -39,12 +39,13 @@
 
 /turf/floor/proc/update_height_appearance()
 
-	if(istype(flooring))
-		layer = flooring.layer
+	var/decl/flooring/use_flooring = get_topmost_flooring()
+	if(istype(use_flooring))
+		layer = use_flooring.floor_layer
 	else
 		layer = initial(layer)
 
-	if(istype(flooring) && !flooring.render_trenches) // TODO: Update pool tiles/edges to behave properly with this new system.
+	if(istype(use_flooring) && !use_flooring.render_trenches) // TODO: Update pool tiles/edges to behave properly with this new system.
 		return FALSE
 
 	var/my_height = get_physical_height()
@@ -101,12 +102,8 @@
 	color = get_color()
 
 	cut_overlays()
+	update_height_appearance() // Also refreshes out base layer.
 	update_floor_icon(update_neighbors)
-
-	if(istype(flooring))
-		layer = flooring.layer
-	else
-		layer = initial(layer)
 
 	for(var/image/I in decals)
 		if(I.layer < layer)
@@ -118,8 +115,6 @@
 	if(is_floor_burned())
 		add_overlay(get_turf_damage_overlay(_floor_burned))
 
-	update_height_appearance()
-
 	if(update_neighbors)
 		for(var/turf/floor/F in orange(src, 1))
 			F.queue_ao()
@@ -128,10 +123,9 @@
 	compile_overlays()
 
 /turf/floor/proc/update_floor_icon(update_neighbors)
-	if(istype(flooring))
-		flooring.update_turf_icon(src)
-	else if(istype(base_flooring))
-		base_flooring.update_turf_icon(src)
+	var/decl/flooring/use_flooring = get_topmost_flooring()
+	if(istype(use_flooring))
+		use_flooring.update_turf_icon(src)
 
 /turf/floor/proc/is_floor_broken()
 	return !isnull(_floor_broken) && (!flooring || (flooring.flooring_flags & TURF_CAN_BREAK))
@@ -217,7 +211,7 @@
 		if (floor_smooth == SMOOTH_ALL)
 			. = TRUE
 		//If the floor is the same as us,then we're linked,
-		else if (istype(floor_opponent_flooring, neighbour_type))
+		else if (istype(opponent_flooring, neighbour_type))
 			. = TRUE
 		//If we get here it must be using a whitelist or blacklist
 		else if (floor_smooth == SMOOTH_WHITELIST)
