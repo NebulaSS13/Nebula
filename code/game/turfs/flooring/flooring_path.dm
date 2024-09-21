@@ -14,10 +14,11 @@
 	var/paver_noun = "stones"
 
 /decl/flooring/path/update_turf_strings(turf/floor/target)
-	ASSERT(target?.material?.adjective_name)
+	var/decl/material/material = target?.get_material()
+	ASSERT(material?.adjective_name)
 	ASSERT(paver_noun)
-	target.SetName("[target.material.adjective_name] [name]")
-	target.desc = "[jointext_no_nulls(list("A", paving_adjective, "path made of", paver_adjective, target.material.adjective_name, paver_noun), " ")]."
+	target.SetName("[material.adjective_name] [name]")
+	target.desc = "[jointext_no_nulls(list("A", paving_adjective, "path made of", paver_adjective, material.adjective_name, paver_noun), " ")]."
 
 /decl/flooring/path/cobblestone
 	name            = "cobblestone path"

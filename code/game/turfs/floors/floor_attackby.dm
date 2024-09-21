@@ -12,8 +12,9 @@
 		return FALSE
 	if(istype(C, /obj/item/stack/tile/roof) || IS_COIL(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
 		return ..()
-	if(istype(flooring))
-		return flooring.handle_item_interaction(src, user, C)
+	var/decl/flooring/top_flooring = get_topmost_flooring()
+	if(istype(top_flooring))
+		return top_flooring.handle_item_interaction(src, user, C)
 	if(try_backfill(C, user))
 		return TRUE
 	if(try_stack_build(C, user))

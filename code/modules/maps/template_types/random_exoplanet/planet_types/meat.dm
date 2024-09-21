@@ -133,7 +133,7 @@
 	icon              = 'icons/turf/flooring/flesh.dmi'
 	icon_state        = "meat"
 	base_flooring     = /decl/flooring/meat
-	material         = /decl/material/solid/organic/meat
+	floor_material    = /decl/material/solid/organic/meat
 
 /turf/floor/meat/acid
 	name              = "juices"

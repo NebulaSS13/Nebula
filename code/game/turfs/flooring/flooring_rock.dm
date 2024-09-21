@@ -8,6 +8,7 @@
 	icon_edge_layer = FLOOR_EDGE_VOLCANIC
 
 /decl/flooring/rock/update_turf_strings(turf/floor/target)
-	ASSERT(target?.material?.adjective_name)
-	target.SetName("[target?.material.adjective_name] [name]")
-	target.desc = "An expanse of bare [target.material.solid_name]."
+	var/decl/material/material = target?.get_material()
+	ASSERT(material?.adjective_name)
+	target.SetName("[material.adjective_name] [name]")
+	target.desc = "An expanse of bare [material.solid_name]."
