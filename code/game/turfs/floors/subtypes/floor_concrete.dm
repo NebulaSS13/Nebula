@@ -1,10 +1,10 @@
 /turf/floor/concrete
-	name = "concrete"
-	icon = 'icons/turf/flooring/concrete.dmi'
-	icon_state = "inset"
-	flooring = /decl/flooring/concrete
-	base_flooring = /decl/flooring/dirt
-	material = /decl/material/solid/stone/concrete
+	name           = "concrete"
+	icon           = 'icons/turf/flooring/concrete.dmi'
+	icon_state     = "inset"
+	flooring       = /decl/flooring/concrete
+	base_flooring  = /decl/flooring/dirt
+	floor_material = /decl/material/solid/stone/concrete
 
 /turf/floor/concrete/smooth
 	icon_state = "concrete"

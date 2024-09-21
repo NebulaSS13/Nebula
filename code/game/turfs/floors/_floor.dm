@@ -35,7 +35,7 @@
 
 	. = ..(ml)
 
-	set_turf_materials(material, skip_update = TRUE)
+	set_turf_materials(floor_material, skip_update = TRUE)
 
 	if(!floortype && ispath(flooring))
 		floortype = flooring
@@ -45,7 +45,7 @@
 	if(fill_reagent_type && get_physical_height() < 0)
 		add_to_reagents(fill_reagent_type, abs(height))
 
-	if(material || flooring || base_flooring)
+	if(floor_material || flooring || base_flooring)
 		if(ml)
 			queue_icon_update()
 		else
