@@ -63,7 +63,7 @@
 /spell/hand/charges/cast_hand()
 	if(..())
 		casts--
-		to_chat(holder, "<span class='notice'>The [name] spell has [casts] out of [max_casts] charges left</span>")
+		to_chat(holder, SPAN_NOTICE("The [name] spell has [casts] out of [max_casts] charges left."))
 		cancel_hand()
 		return TRUE
 	return FALSE

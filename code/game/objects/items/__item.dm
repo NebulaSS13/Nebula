@@ -101,6 +101,9 @@
 	/// What dexterity is required to attack with this item?
 	var/needs_attack_dexterity = DEXTERITY_WIELD_ITEM
 
+	/// Can this object leak into water sources?
+	var/watertight = FALSE 
+
 /obj/item/get_color()
 	if(paint_color)
 		return paint_color
@@ -1137,3 +1140,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_equipment_tint()
 	return TINT_NONE
+
+/obj/item/is_watertight()
+	return watertight || ..()
+

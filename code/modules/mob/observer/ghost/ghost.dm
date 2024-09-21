@@ -203,7 +203,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return FALSE
 
 	if(QDELETED(mind?.current))
-		to_chat(src, SPAN_WARNING("You have no body"))
+		to_chat(src, SPAN_WARNING("You have no body."))
 		return FALSE
 
 	if(!(can_reenter_corpse & CORPSE_CAN_REENTER))

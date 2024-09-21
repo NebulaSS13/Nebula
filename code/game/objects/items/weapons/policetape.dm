@@ -89,8 +89,8 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	return ..()
 
 /obj/item/stack/tape_roll/barricade_tape/attack_hand()
-	update_icon()
-	return ..()
+	if((. = ..()) && !QDELETED(src))
+		update_icon()
 
 /**Callback used when whoever holds us moved to a new turf. */
 /obj/item/stack/tape_roll/barricade_tape/proc/user_moved_unrolling(var/mob/M, var/atom/old_loc, var/atom/new_loc)
@@ -158,6 +158,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 
 	var/obj/structure/tape_barricade/barricade = tape_template.make_line_barricade(user, T, pdir)
 	if(barricade)
+		barricade.matter = matter_per_piece?.Copy()
 		barricade.update_neighbors()
 	return barricade
 
@@ -178,8 +179,16 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		if(!can_use(4))
 			to_chat(user, SPAN_WARNING("There isn't enough [plural_name] in \the [src] to barricade \the [A]. You need at least 4 [plural_name]."))
 			return
-		tape_template.make_door_barricade(user, A)
+
+		var/obj/structure/tape_barricade/door/bar = tape_template.make_door_barricade(user, A)
+		if(bar)
+			bar.matter = matter_per_piece?.Copy()
+			if(bar.matter)
+				for(var/mat in bar.matter)
+					bar.matter[mat] = round(bar.matter[mat] * 4)
+
 		to_chat(user, SPAN_NOTICE("You finish placing \the [src]."))
+		use(4)
 
 ////////////////////////////////////////////////////////////////////
 // Tape Line Barricade
@@ -194,6 +203,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	pass_flags       = PASS_FLAG_TABLE                //About the height of table
 	anchored         = TRUE
 	material         = /decl/material/solid/organic/plastic
+	current_health   = 5
 	var/neighbors    = 0                              //Contains all the direction flags of all the neighboring tape_barricades
 	var/is_lifted    = 0                              //Whether the tape is lifted and we're allowing everyone passage.
 	var/is_crumpled  = 0                              //Whether the tape was damaged
@@ -304,6 +314,12 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		add_overlay(ovr)
 
 /obj/structure/tape_barricade/attack_hand(mob/user)
+
+	if(user.a_intent == I_HURT)
+		user.visible_message(SPAN_DANGER("\The [user] tears \the [src]!"))
+		physically_destroyed()
+		return TRUE
+
 	if (user.a_intent != I_HELP || !allowed(user) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
 

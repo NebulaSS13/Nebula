@@ -165,18 +165,17 @@
 	icon_state = "sensors"
 	anchored = TRUE
 	density = TRUE
+	idle_power_usage = 5000
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = NOSCREEN | NOINPUT
+	base_type = /obj/machinery/shipsensors
+	stock_part_presets = list(/decl/stock_part_preset/terminal_connect)
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
 	var/heat_reduction = 1.5 // mitigates this much heat per tick
 	var/heat = 0
 	var/range = 1
 	var/sensor_strength //used for detecting ships via contacts
-	idle_power_usage = 5000
-	construct_state = /decl/machine_construction/default/panel_closed
-	uncreated_component_parts = null
-	stat_immune = NOSCREEN | NOINPUT
-	frame_type = /obj/machinery/constructable_frame
-	base_type = /obj/machinery/shipsensors
-	stock_part_presets = list(/decl/stock_part_preset/terminal_connect)
 
 /obj/machinery/shipsensors/proc/in_vacuum()
 	var/turf/T=get_turf(src)

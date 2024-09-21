@@ -91,7 +91,7 @@
 
 	if(difference > 0)
 		for(var/mob/pilot in owner.pilots)
-			to_chat(pilot, SPAN_DANGER("Warning: Deflector shield failure detect, shutting down"))
+			to_chat(pilot, SPAN_DANGER("Warning: Deflector shield failure detect, shutting down!"))
 		toggle()
 		playsound(owner.loc,'sound/mecha/internaldmgalarm.ogg',35,1)
 		return difference

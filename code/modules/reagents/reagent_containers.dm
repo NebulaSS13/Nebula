@@ -7,6 +7,7 @@
 	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 	abstract_type = /obj/item/chems
+	watertight = TRUE
 
 	var/base_name
 	var/base_desc

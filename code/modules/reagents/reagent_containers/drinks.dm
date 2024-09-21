@@ -13,6 +13,7 @@
 	randpixel = 6
 	volume = 50
 	abstract_type = /obj/item/chems/drinks
+	watertight = FALSE // /drinks uses the open container flag for this
 
 	var/filling_states   // List of percentages full that have icons
 	var/base_icon = null // Base icon name for fill states
