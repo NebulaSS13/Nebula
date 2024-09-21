@@ -72,7 +72,7 @@
 		if(is_seeds)
 			underlays += overlay_image(seed_mask_icon, "seed-mask", seed.get_trait(TRAIT_PLANT_COLOUR), RESET_COLOR)
 		else
-			add_overlay(overlay_image(seed_mask_icon, "spore-mask"), null, RESET_COLOR)
+			add_overlay(overlay_image(seed_mask_icon, "spore-mask", null, RESET_COLOR))
 	update_strings(is_seeds)
 
 /obj/item/seeds/proc/update_strings(is_seeds)

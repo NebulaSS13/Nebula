@@ -39,7 +39,7 @@
 
 /obj/item/integrated_electronics/detailer/on_update_icon()
 	. = ..()
-	add_overlay('icons/obj/assemblies/electronic_tools.dmi', "detailer-color", detail_color)
+	add_overlay(overlay_image('icons/obj/assemblies/electronic_tools.dmi', "detailer-color", detail_color))
 
 /obj/item/integrated_electronics/detailer/attack_self(mob/user)
 	var/color_choice = input(user, "Select color.", "Assembly Detailer") as null|anything in color_list
