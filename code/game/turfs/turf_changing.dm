@@ -202,6 +202,7 @@
 		return FALSE
 
 	set_flooring(other.flooring)
+	base_flooring = other.base_flooring
 	set_floor_broken(other._floor_broken, TRUE)
 	set_floor_burned(other._floor_burned)
 	return TRUE

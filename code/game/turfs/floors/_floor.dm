@@ -191,8 +191,9 @@
 /turf/floor/get_footstep_sound(var/mob/caller)
 	. = ..()
 	if(!.)
-		if(istype(flooring))
-			return get_footstep_for_mob(flooring.footstep_type)
+		var/decl/flooring/use_flooring = get_topmost_flooring() || base_flooring
+		if(istype(use_flooring))
+			return get_footstep_for_mob(use_flooring.footstep_type)
 		return get_footstep_for_mob(/decl/footsteps/blank)
 
 /turf/floor/get_movable_alpha_mask_state(atom/movable/mover)

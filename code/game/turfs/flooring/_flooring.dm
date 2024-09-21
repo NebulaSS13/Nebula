@@ -245,7 +245,7 @@ var/global/list/flooring_cache = list()
 		return TRUE
 
 	if(IS_SHOVEL(item) && (flooring_flags & TURF_REMOVE_SHOVEL))
-		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
+		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You remove the [get_surface_descriptor()] with \the [item]."))
 		floor.set_flooring(null, place_product = TRUE)
@@ -258,21 +258,21 @@ var/global/list/flooring_cache = list()
 			if(floor.is_floor_damaged())
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
 					return TRUE
-				if(floor.flooring != src)
+				if(floor.get_topmost_flooring() != src)
 					return
 				to_chat(user, SPAN_NOTICE("You remove the broken [get_surface_descriptor()]."))
 				floor.set_flooring(null)
 			else if(flooring_flags & TURF_IS_FRAGILE)
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
 					return TRUE
-				if(floor.flooring != src)
+				if(floor.get_topmost_flooring() != src)
 					return
 				to_chat(user, SPAN_DANGER("You forcefully pry off the [get_surface_descriptor()], destroying them in the process."))
 				floor.set_flooring(null)
 			else if(flooring_flags & TURF_REMOVE_CROWBAR)
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor))
 					return TRUE
-				if(floor.flooring != src)
+				if(floor.get_topmost_flooring() != src)
 					return
 				to_chat(user, SPAN_NOTICE("You lever off the [get_surface_descriptor()]."))
 				floor.set_flooring(null, place_product = TRUE)
@@ -284,7 +284,7 @@ var/global/list/flooring_cache = list()
 		if(IS_SCREWDRIVER(item) && (flooring_flags & TURF_REMOVE_SCREWDRIVER))
 			if(floor.is_floor_damaged())
 				return FALSE
-			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
+			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
 				return TRUE
 			to_chat(user, SPAN_NOTICE("You unscrew and remove the [get_surface_descriptor()]."))
 			floor.set_flooring(null, place_product = TRUE)
@@ -292,7 +292,7 @@ var/global/list/flooring_cache = list()
 			return TRUE
 
 		if(IS_WRENCH(item) && (flooring_flags & TURF_REMOVE_WRENCH))
-			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
+			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
 				return TRUE
 			to_chat(user, SPAN_NOTICE("You unwrench and remove the [get_surface_descriptor()]."))
 			floor.set_flooring(null, place_product = TRUE)

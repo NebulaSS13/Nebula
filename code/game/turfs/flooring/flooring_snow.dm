@@ -21,7 +21,7 @@
 
 /decl/flooring/snow/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!target.reagents?.total_volume)
-		if(target.flooring == src)
+		if(target.get_topmost_flooring() == src)
 			target.set_flooring(/decl/flooring/permafrost)
 		else if(target.base_flooring == src)
 			target.set_base_flooring(/decl/flooring/permafrost)
