@@ -135,7 +135,7 @@
 /turf/floor/proc/update_from_flooring(var/decl/flooring/copy_from, skip_update)
 
 	copy_from.update_turf_strings(src)
-	layer      = copy_from.layer
+	layer      = copy_from.floor_layer
 	turf_flags = copy_from.turf_flags
 	z_flags    = copy_from.z_flags
 
