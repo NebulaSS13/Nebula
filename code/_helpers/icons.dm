@@ -630,7 +630,7 @@ The _flatIcons list is a cache for generated icon files.
 */
 
 // Creates a single icon from a given /atom or /image.  Only the first argument is required.
-/proc/getFlatIcon(image/A, defdir=2, deficon=null, defstate="", defblend=BLEND_DEFAULT, always_use_defdir = 0)
+/proc/getFlatIcon(image/A, defdir = SOUTH, deficon = null, defstate = "", defblend = BLEND_DEFAULT, always_use_defdir = FALSE)
 	// We start with a blank canvas, otherwise some icon procs crash silently
 	var/icon/flat = icon('icons/effects/effects.dmi', "icon_state"="nothing") // Final flattened icon
 	if(!A || A.alpha <= 0)
@@ -638,7 +638,7 @@ The _flatIcons list is a cache for generated icon files.
 
 	var/curicon =  A.icon || deficon
 	var/curstate = A.icon_state || defstate
-	var/curdir =   (A.dir != SOUTH && !always_use_defdir) ? A.dir : defdir
+	var/curdir =   (A.dir != defdir && !always_use_defdir) ? A.dir : defdir
 	var/curblend = (A.blend_mode == BLEND_DEFAULT) ? defblend : A.blend_mode
 
 	if(curicon && !check_state_in_icon(curstate, curicon))
@@ -719,7 +719,7 @@ The _flatIcons list is a cache for generated icon files.
 			add = icon(I.icon, I.icon_state, I.dir)
 			// This checks for a silent failure mode of the icon routine. If the requested dir
 			// doesn't exist in this icon state it returns a 32x32 icon with 0 alpha.
-			if (I.dir != SOUTH && add.Width() == 32 && add.Height() == 32)
+			if (I.dir != defdir && add.Width() == 32 && add.Height() == 32)
 				// Check every pixel for blank (computationally expensive, but the process is limited
 				// by the amount of film on the station, only happens when we hit something that's
 				// turned, and bails at the very first pixel it sees.
@@ -735,19 +735,18 @@ The _flatIcons list is a cache for generated icon files.
 				if (blankpixel)
 					// Pull the default direction.
 					add = icon(I.icon, I.icon_state)
-		else // 'I' is an appearance object.
-			if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
-				add = getFlatIcon(new /image(I), I.dir, curicon, null, curblend, 1)
-			else
-				/*
-				The state var is null so that it uses the appearance's state, not ours or the default
-				Falling back to our state if state is null would be incorrect overlay logic (overlay with null state does not inherit it from parent to which it is attached)
+		// 'I' is an appearance object.
+		else if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
+			add = getFlatIcon(new /image(I), I.dir, curicon, null, curblend, 1)
+		else
+			/*
+			The state var is null so that it uses the appearance's state, not ours or the default
+			Falling back to our state if state is null would be incorrect overlay logic (overlay with null state does not inherit it from parent to which it is attached)
 
-				If icon is null on an overlay it will inherit the icon from the attached parent, so we _do_ pass curicon ...
-				but it does not do so if its icon_state is ""/null, so we check beforehand to exclude this
-				*/
-				var/icon_to_pass = (!I.icon_state && !I.icon) ? null : curicon
-				add = getFlatIcon(new/image(I), curdir, icon_to_pass, null, curblend, always_use_defdir)
+			If icon is null on an overlay it will inherit the icon from the attached parent, so we _do_ pass curicon ...
+			but it does not do so if its icon_state is ""/null, so we check beforehand to exclude this
+			*/
+			add = getFlatIcon(new/image(I), curdir, (!I.icon_state && !I.icon) ? null : curicon, null, curblend, always_use_defdir)
 
 		// Find the new dimensions of the flat icon to fit the added overlay
 		addX1 = min(flatX1, I.pixel_x + 1)

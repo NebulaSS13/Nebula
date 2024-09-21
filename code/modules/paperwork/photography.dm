@@ -329,7 +329,7 @@
 	film.use()
 	captureimage(target, user, flag)
 	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
-	to_chat(user, SPAN_NOTICE("[film.get_remaining()] photos left."))
+	to_chat(user, SPAN_NOTICE("[film.get_remaining()] photo\s left."))
 	return TRUE
 
 /obj/item/camera/examine(mob/user)

@@ -358,7 +358,7 @@ var/global/list/telecomms_hubs = list()
 
 								var/list/all_groups = net_acl.get_all_groups()
 								if(!length(all_groups))
-									to_chat(user, SPAN_WARNING("No groups were found on the network access controller"))
+									to_chat(user, SPAN_WARNING("No groups were found on the network access controller."))
 									return TOPIC_HANDLED
 
 								choice = input(user, "Which group do you wish to add? Adding a parent group will allow all members of its children groups to access the channel.", "Channel Configuration") as null|anything in all_groups

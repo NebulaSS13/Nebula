@@ -48,7 +48,7 @@
 /obj/item/stock_parts/item_holder/card_reader/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W) && !istype(loc, /obj/machinery)) //Only if not in the machine, to prevent hijacking tool interactions with the machine
 		should_swipe = !should_swipe
-		to_chat(user, SPAN_NOTICE("You toggle \the [src] into [should_swipe? "swipe" : "insert"] card mode"))
+		to_chat(user, SPAN_NOTICE("You toggle \the [src] into [should_swipe? "swipe" : "insert"] card mode."))
 		return TRUE
 	. = ..()
 

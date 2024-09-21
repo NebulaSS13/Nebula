@@ -109,6 +109,9 @@
 
 	var/base_name
 
+	/// Can this object leak into water sources?
+	var/watertight = FALSE 
+
 /obj/item/get_color()
 	if(paint_color)
 		return paint_color
@@ -1182,3 +1185,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_stance_support_value()
 	return 0
+
+/obj/item/is_watertight()
+	return watertight || ..()
+

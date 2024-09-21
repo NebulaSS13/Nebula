@@ -127,7 +127,7 @@ var/global/list/rad_collectors = list()
 				to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
 			else
 				src.locked = 0 //just in case it somehow gets locked
-				to_chat(user, "<span class='warning'>The controls can only be locked when \the [src] is active</span>")
+				to_chat(user, SPAN_WARNING("The controls can only be locked when \the [src] is active."))
 		else
 			to_chat(user, "<span class='warning'>Access denied!</span>")
 		return 1

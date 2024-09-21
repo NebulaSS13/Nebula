@@ -416,37 +416,6 @@
 	if (ATOM_IS_OPEN_CONTAINER(O))
 		return FALSE
 
-	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
-
-		if(!seed)
-			to_chat(user, SPAN_WARNING("There is nothing to take a sample from in \the [src]."))
-			return
-
-		if(sampled)
-			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
-			return
-
-		if(dead)
-			to_chat(user, SPAN_WARNING("The plant is dead."))
-			return
-
-		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
-		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
-			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
-		else
-			// Create a sample.
-			seed.harvest(user,yield_mod,1)
-		plant_health -= (rand(3,5)*10)
-
-		if(prob(30))
-			sampled = 1
-
-		// Bookkeeping.
-		check_plant_health()
-		force_update = 1
-		Process()
-		return TRUE
-
 	if(istype(O, /obj/item/chems/syringe))
 		var/obj/item/chems/syringe/S = O
 		if (S.mode == 1)
@@ -681,21 +650,56 @@
 		harvest()
 	return TRUE
 
-
 /obj/machinery/portable_atmospherics/hydroponics/get_alt_interactions(var/mob/user)
 	. = ..()
-	LAZYADD(., /decl/interaction_handler/hydroponics_close_lid)
+	LAZYADD(., /decl/interaction_handler/hydroponics/close_lid)
+	LAZYADD(., /decl/interaction_handler/hydroponics/sample)
 
-/decl/interaction_handler/hydroponics_close_lid
-	name = "Open/Close Lid"
+/decl/interaction_handler/hydroponics
+	abstract_type = /decl/interaction_handler/hydroponics
 	expected_target_type = /obj/machinery/portable_atmospherics/hydroponics
 
-/decl/interaction_handler/hydroponics_close_lid/is_possible(var/atom/target, var/mob/user)
-	. = ..()
-	if(.)
-		var/obj/machinery/portable_atmospherics/hydroponics/T = target
-		return T.mechanical
+/decl/interaction_handler/hydroponics/close_lid
+	name = "Open/Close Lid"
 
-/decl/interaction_handler/hydroponics_close_lid/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/machinery/portable_atmospherics/hydroponics/T = target
-	T.close_lid(user)
+/decl/interaction_handler/hydroponics/close_lid/is_possible(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/portable_atmospherics/hydroponics/tray = target
+	return ..() && tray.mechanical
+
+/decl/interaction_handler/hydroponics/close_lid/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/portable_atmospherics/hydroponics/tray = target
+	tray.close_lid(user)
+
+/decl/interaction_handler/hydroponics/sample
+	name = "Sample Plant"
+
+/decl/interaction_handler/hydroponics/sample/is_possible(atom/target, mob/user, obj/item/prop)
+	return ..() && istype(prop) && prop.edge && prop.w_class < ITEM_SIZE_NORMAL
+
+/decl/interaction_handler/hydroponics/sample/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/portable_atmospherics/hydroponics/tray = target
+	if(!tray.seed)
+		to_chat(user, SPAN_WARNING("There is nothing to take a sample from in \the [src]."))
+		return
+	if(tray.sampled)
+		to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
+		return
+	if(tray.dead)
+		to_chat(user, SPAN_WARNING("The plant is dead."))
+		return
+	var/needed_skill = tray.seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+	if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
+		to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
+	else
+		// Create a sample.
+		tray.seed.harvest(user, tray.yield_mod, 1)
+	tray.plant_health -= (rand(3,5)*10)
+
+	if(prob(30))
+		tray.sampled = 1
+
+	// Bookkeeping.
+	tray.check_plant_health()
+	tray.force_update = 1
+	tray.Process()
+

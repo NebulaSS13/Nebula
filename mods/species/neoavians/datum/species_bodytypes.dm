@@ -1,3 +1,30 @@
+/decl/bodytype/prosthetic/avian
+	name = "synthetic avian"
+	icon_base            = 'mods/species/neoavians/icons/body_synthetic.dmi'
+	blood_overlays       = /decl/bodytype/avian::blood_overlays
+	skeletal_icon        = /decl/bodytype/avian::skeletal_icon
+	bodytype_category    = /decl/bodytype/avian::bodytype_category
+	bodytype_flag        = /decl/bodytype/avian::bodytype_flag
+	mob_size             = /decl/bodytype/avian::mob_size
+	eye_icon             = /decl/bodytype/avian::eye_icon
+	nail_noun            = /decl/bodytype/avian::nail_noun
+	override_limb_types  = list(BP_TAIL = /obj/item/organ/external/tail/avian) // lists cannot use initial()
+	uid                  = "bodytype_prosthetic_avian"
+	var/tail             = "tail_avian"
+	var/tail_icon        = 'mods/species/neoavians/icons/tail_synthetic.dmi'
+	var/tail_blend       = ICON_OVERLAY
+	var/tail_hair
+	var/tail_hair_blend
+	var/tail_states
+
+/decl/bodytype/prosthetic/avian/raptor
+	name                 = "synthetic raptor"
+	icon_base            = 'mods/species/neoavians/icons/body_synthetic_raptor.dmi'
+	tail                 = "tail_raptor"
+	tail_hair            = "over"
+	tail_hair_blend      = ICON_MULTIPLY
+	uid                  = "bodytype_prosthetic_raptor"
+
 /decl/bodytype/avian
 	name                 = "avian"
 	bodytype_category    = BODYTYPE_AVIAN
@@ -87,28 +114,47 @@
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail
+	// This is gross but a broader rework would take some thinking.
+	if(istype(bodytype, /decl/bodytype/prosthetic/avian))
+		var/decl/bodytype/prosthetic/avian/bird_bod = bodytype
+		return bird_bod.tail
 
 /obj/item/organ/external/tail/avian/get_tail_icon()
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
+		return bird_bod.tail_icon
+	if(istype(bodytype, /decl/bodytype/prosthetic/avian))
+		var/decl/bodytype/prosthetic/avian/bird_bod = bodytype
 		return bird_bod.tail_icon
 
 /obj/item/organ/external/tail/avian/get_tail_animation_states()
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_animation_states
+	if(istype(bodytype, /decl/bodytype/prosthetic/avian))
+		var/decl/bodytype/prosthetic/avian/bird_bod = bodytype
+		return bird_bod.tail_states
 
 /obj/item/organ/external/tail/avian/get_tail_blend()
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
+		return bird_bod.tail_blend
+	if(istype(bodytype, /decl/bodytype/prosthetic/avian))
+		var/decl/bodytype/prosthetic/avian/bird_bod = bodytype
 		return bird_bod.tail_blend
 
 /obj/item/organ/external/tail/avian/get_tail_hair()
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_hair
+	if(istype(bodytype, /decl/bodytype/prosthetic/avian))
+		var/decl/bodytype/prosthetic/avian/bird_bod = bodytype
+		return bird_bod.tail_hair
 
 /obj/item/organ/external/tail/avian/get_tail_hair_blend()
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
+		return bird_bod.tail_hair_blend
+	if(istype(bodytype, /decl/bodytype/prosthetic/avian))
+		var/decl/bodytype/prosthetic/avian/bird_bod = bodytype
 		return bird_bod.tail_hair_blend

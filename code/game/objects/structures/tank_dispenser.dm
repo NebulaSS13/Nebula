@@ -80,6 +80,7 @@
 
 /obj/structure/tank_rack/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/tank))
+
 		var/list/adding_to_list
 		if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air))
 			LAZYINITLIST(oxygen_tanks)
@@ -87,12 +88,17 @@
 		else if(istype(I, /obj/item/tank/hydrogen))
 			LAZYINITLIST(hydrogen_tanks)
 			adding_to_list = hydrogen_tanks
+		else
+			return ..()
+
 		if(LAZYLEN(adding_to_list) >= 10)
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
 			UNSETEMPTY(adding_to_list)
 			return TRUE
+
 		if(!user.try_unequip(I, src))
 			return TRUE
+
 		LAZYADD(adding_to_list, weakref(I))
 		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
 		update_icon()

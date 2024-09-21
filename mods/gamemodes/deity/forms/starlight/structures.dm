@@ -185,7 +185,7 @@
 		if(activate_charging())
 			to_chat(L, SPAN_NOTICE("You place your hands on \the [src], feeling your master's power course through you."))
 		else
-			to_chat(L, SPAN_WARNING("\The [src] is already activated"))
+			to_chat(L, SPAN_WARNING("\The [src] has already been activated."))
 	else
 		to_chat(L, SPAN_WARNING("\The [src] does not recognize you as a herald of \the [linked_god]. You must wear a full set of herald's armor."))
 	return TRUE
