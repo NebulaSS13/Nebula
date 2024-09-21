@@ -11,6 +11,13 @@
 	color = "#41311b"
 	base_flooring = /decl/flooring/dirt
 
+/turf/floor/dirt/walnut
+	name = "wooden floor"
+	icon = 'icons/turf/flooring/wood.dmi'
+	icon_state = "wood"
+	color = /decl/material/solid/organic/wood/walnut::color
+	flooring = /decl/flooring/wood/walnut
+
 /turf/floor/chlorine_sand
 	name = "chlorinated sand"
 	icon = 'icons/turf/flooring/chlorine_sand.dmi'
