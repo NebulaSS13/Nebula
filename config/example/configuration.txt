@@ -178,7 +178,7 @@ EXPECTED_ROUND_LENGTH 2
 #STACK_CRAFTING_USES_TYPES 1
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
-#WALK_DELAY 4
+WALK_DELAY 3.5
 
 ##
 # GAME WORLD
@@ -635,3 +635,7 @@ VOTE_AUTOTRANSFER_INITIAL 72000
 
 ## Time period (deciseconds) which voting session will last (default 1 minute).
 #VOTE_PERIOD 600
+
+# Lock viewport to square 15x15
+LOCK_CLIENT_VIEW_X 15
+LOCK_CLIENT_VIEW_Y 15
