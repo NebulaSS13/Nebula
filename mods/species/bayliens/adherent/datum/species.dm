@@ -85,9 +85,6 @@
 				. = TRUE
 				break
 
-/decl/species/adherent/can_fall(var/mob/living/carbon/human/H)
-	. = !can_overcome_gravity(H)
-
 /decl/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	var/float_is_usable = FALSE
 	if(H && H.stat == CONSCIOUS)

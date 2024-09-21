@@ -1,6 +1,7 @@
 /obj/item/organ/external/groin/insectoid/mantid
 	name = "central support limb"
 	action_button_name = "Weave Razorweb"
+	default_action_type = /datum/action/item_action/organ/ascent
 	var/list/existing_webs = list()
 	var/list/max_webs = 4
 	var/web_weave_time = 20 SECONDS
@@ -57,6 +58,7 @@
 /obj/item/organ/external/head/insectoid/mantid
 	name = "crested head"
 	action_button_name = "Spit Razorweb"
+	default_action_type = /datum/action/item_action/organ/ascent
 	var/cooldown_time = 2.5 MINUTES
 	var/cooldown
 
