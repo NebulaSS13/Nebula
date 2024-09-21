@@ -30607,7 +30607,7 @@
 "bns" = (
 /obj/machinery/door/airlock/maintenance{
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_emergency_storage, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_EMERGENCY_STORAGE", "ACCESS_RESEARCH")
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -37436,7 +37436,7 @@
 /obj/machinery/door/airlock{
 	name = "Starboard Emergency Storage";
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_emergency_storage, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_EMERGENCY_STORAGE", "ACCESS_RESEARCH")
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -39518,7 +39518,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance{
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_RESEARCH")
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_shuttle)
@@ -39585,7 +39585,7 @@
 "bFy" = (
 /obj/machinery/door/airlock/maintenance{
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_RESEARCH")
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -41854,7 +41854,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_RESEARCH")
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_port)
@@ -44984,7 +44984,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/maintenance{
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_RESEARCH")
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_shuttle)
@@ -48539,7 +48539,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/maintenance{
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_RESEARCH")
 	},
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/research_starboard)
@@ -64246,7 +64246,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	autoset_access = 0;
-	req_access = list(list(access_maint_tunnels, access_research))
+	req_access = list("ACCESS_MAINT", "ACCESS_RESEARCH")
 	},
 /turf/floor/plating,
 /area/exodus/maintenance/research_starboard)
