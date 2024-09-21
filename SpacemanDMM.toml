@@ -56,6 +56,9 @@ override_precedes_definition = "error"
 hide_invisible = [
 	"/obj/effect/step_trigger",
 	"/obj/abstract",
+	"/turf/unsimulated/mask",
+	"/obj/effect/shuttle_landmark",
+	"/obj/effect/overmap",
 ]
 
 [map_renderer.render_passes]

@@ -5935,7 +5935,6 @@
 /turf/wall/r_wall/hull,
 /area/ship/trade/crew/kitchen)
 "Ce" = (
-/obj/structure/lattice,
 /obj/effect/paint/brown,
 /obj/effect/paint/brown,
 /turf/wall/r_wall/hull,
@@ -6926,11 +6925,6 @@
 	},
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
-"Mo" = (
-/obj/structure/lattice,
-/obj/effect/paint/brown,
-/turf/wall/r_wall/hull,
-/area/ship/trade/crew/medbay/chemistry)
 "Mp" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/autoname/engineering,
@@ -7048,9 +7042,7 @@
 /obj/machinery/network/requests_console{
 	announcementConsole = 1;
 	department = "Captain";
-	pixel_y = -32;
-	dir = 2;
-	
+	pixel_y = -32
 	},
 /obj/item/radio/intercom{
 	dir = 4;
@@ -8065,11 +8057,6 @@
 	},
 /turf/wall/titanium,
 /area/ship/trade/shuttle/rescue)
-"YS" = (
-/obj/structure/lattice,
-/obj/effect/paint/brown,
-/turf/wall/r_wall/hull,
-/area/ship/trade/crew/toilets)
 "Za" = (
 /obj/machinery/power/breakerbox/activated,
 /obj/structure/cable{
@@ -10479,7 +10466,7 @@ cI
 Zf
 aa
 aa
-YS
+vj
 vj
 Si
 vj
@@ -10806,7 +10793,7 @@ cy
 cy
 cy
 cy
-YS
+vj
 cU
 nd
 dw
@@ -10888,7 +10875,7 @@ aq
 aq
 aq
 aq
-YS
+vj
 cU
 cT
 dx
@@ -11872,7 +11859,7 @@ VW
 VW
 VW
 VW
-Mo
+om
 dd
 de
 dG

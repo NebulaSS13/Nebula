@@ -61,7 +61,7 @@
 	var/on_frame = is_on_frame()
 	if(destroyed)
 		if(on_frame)
-			icon_state = "broke_onframe"
+			icon_state = "broken_onframe"
 		else
 			icon_state = "broken"
 	else

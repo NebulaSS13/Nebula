@@ -92,6 +92,7 @@
 	name = "handful of seeds"
 	desc = "A handful of nondescript seeds."
 	icon = 'icons/obj/seeds/seed_raw.dmi'
+	icon_state = "seeds"
 	seed_base_name = "handful"
 	seed_mask_icon = null
 	is_spawnable_type = FALSE
