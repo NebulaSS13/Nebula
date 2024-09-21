@@ -32,7 +32,8 @@
 	return my_flooring.icon_edge_layer > their_flooring.icon_edge_layer
 
 /turf/floor/proc/get_trench_icon()
-	var/check_icon = (istype(flooring) && flooring.icon) || icon
+	var/decl/flooring/use_flooring = istype(base_flooring) ? base_flooring : get_topmost_flooring()
+	var/check_icon = (istype(use_flooring) && use_flooring.icon) || icon
 	if(check_icon && check_state_in_icon("trench", check_icon))
 		return check_icon
 
