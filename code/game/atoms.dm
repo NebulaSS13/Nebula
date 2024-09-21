@@ -955,3 +955,7 @@
 
 /atom/proc/spark_act(obj/effect/sparks/sparks)
 	return
+
+/atom/proc/is_watertight()
+	return ATOM_IS_OPEN_CONTAINER(src)
+

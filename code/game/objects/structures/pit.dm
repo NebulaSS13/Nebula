@@ -26,7 +26,7 @@
 			to_chat(user, SPAN_WARNING("There's already a grave marker here."))
 		else
 			var/obj/item/stack/material/plank = W
-			visible_message(SPAN_WARNING("\The [user] starts making a grave marker on top of \the [src]"))
+			visible_message(SPAN_WARNING("\The [user] starts making a grave marker on top of \the [src]."))
 			if(do_after(user, 5 SECONDS) && plank.use(1))
 				visible_message(SPAN_NOTICE("\The [user] finishes the grave marker."))
 				new /obj/structure/gravemarker(src.loc)

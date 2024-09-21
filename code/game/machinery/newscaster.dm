@@ -448,7 +448,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 			else
 				dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
 
-		var/processed_dat = human_or_robot_user.handle_reading_literacy(human_or_robot_user, dat)
+		var/processed_dat = human_or_robot_user.handle_reading_literacy(human_or_robot_user, dat, digital = TRUE)
 		if(processed_dat)
 			show_browser(human_or_robot_user, processed_dat, "window=newscaster_main;size=400x600")
 		onclose(human_or_robot_user, "newscaster_main")
@@ -829,7 +829,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 				dat+= "<HR><DIV STYLE='float:left;'><A href='byond://?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
 
 		dat+="<BR><HR><div align='center'>[src.curr_page+1]</div>"
-		var/processed_dat = human_user.handle_reading_literacy(human_user, dat)
+		var/processed_dat = human_user.handle_reading_literacy(human_user, dat, digital = TRUE)
 		if(processed_dat)
 			show_browser(human_user, processed_dat, "window=newspaper_main;size=300x400")
 			onclose(human_user, "newspaper_main")

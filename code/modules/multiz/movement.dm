@@ -138,7 +138,6 @@
 				return TRUE
 			return !can_float()
 
-
 	return TRUE
 
 /obj/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
@@ -162,9 +161,11 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
-/mob/living/human/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
-	if(..())
-		return species.can_fall(src)
+/mob/living/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+	if((. = ..()))
+		var/decl/species/my_species = get_species()
+		if(my_species)
+			return my_species.can_fall(src)
 
 /atom/movable/proc/protected_from_fall_damage(var/turf/landing)
 	if(!!(locate(/obj/structure/stairs) in landing))

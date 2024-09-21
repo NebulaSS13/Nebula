@@ -21,7 +21,9 @@
 	description = "Avian species, largely crows, magpies and other corvids, were among the first sophonts uplifted to aid in colonizing Mars. \
 	These days they are more commonly found pursuing their own careers and goals on the fringes of human space or around their adopted homeworld \
 	of Hyperion. Neo-avian naming conventions tend to be a chosen name followed by the species of the person, followed by the location they were hatched."
-	base_external_prosthetics_model = null
+
+	base_external_prosthetics_model = /decl/bodytype/prosthetic/avian
+	base_internal_prosthetics_model = /decl/bodytype/prosthetic/avian
 
 	snow_slowdown_mod = -1
 

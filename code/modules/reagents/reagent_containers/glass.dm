@@ -17,6 +17,7 @@
 	abstract_type = /obj/item/chems/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
+	watertight = FALSE // /glass uses the open container flag for this
 
 	var/list/can_be_placed_into = list(
 		/obj/machinery/chem_master/,
