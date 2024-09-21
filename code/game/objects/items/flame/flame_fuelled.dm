@@ -4,6 +4,7 @@
 	_fuel_spend_amt       = 0.05
 	can_manually_light    = TRUE
 	extinguish_on_dropped = FALSE
+	watertight            = TRUE
 
 	var/tmp/max_fuel      = 5
 	var/tmp/start_fuelled = FALSE

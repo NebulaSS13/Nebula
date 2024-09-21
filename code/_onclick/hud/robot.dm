@@ -96,11 +96,11 @@ var/global/obj/screen/robot_inventory
 			R.active_storage.close(R) //Closes the inventory ui.
 
 		if(!R.module)
-			to_chat(usr, "<span class='danger'>No module selected</span>")
+			to_chat(usr, SPAN_WARNING("No module selected."))
 			return
 
 		if(!R.module.equipment)
-			to_chat(usr, "<span class='danger'>Selected module has no modules to select</span>")
+			to_chat(usr, SPAN_WARNING("Selected module has no equipment available."))
 			return
 
 		if(!R.robot_modules_background)

@@ -56,7 +56,7 @@
 
 /obj/machinery/gibber/examine(mob/user)
 	. = ..()
-	to_chat(user, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
+	to_chat(user, "The safety guard is [emagged ? SPAN_DANGER("disabled") : "enabled"].")
 
 /obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged

@@ -1,7 +1,11 @@
+/datum/action/item_action/organ/ascent
+	button_icon = 'mods/species/ascent/icons/actions.dmi'
+
 /obj/item/organ/internal/egg_sac/insectoid
 	name = "gyne egg-sac"
 	action_button_name = "Produce Egg"
 	organ_tag = BP_EGG
+	default_action_type = /datum/action/item_action/organ/ascent
 	var/egg_metabolic_cost = 100
 
 /obj/item/organ/internal/egg_sac/insectoid/refresh_action_button()

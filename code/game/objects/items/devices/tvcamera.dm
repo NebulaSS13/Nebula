@@ -141,8 +141,8 @@ Using robohead because of restricting to roboticist */
 					..()
 					return
 				buildstep++
-				to_chat(user, "<span class='notice'>You wire the assembly</span>")
-				desc = "This TV camera assembly has wires sticking out"
+				to_chat(user, SPAN_NOTICE("You wire the assembly."))
+				desc = "This TV camera assembly has wires sticking out."
 				return
 		if(3)
 			if(IS_WIRECUTTER(W))

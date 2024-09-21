@@ -384,7 +384,7 @@
 	if(!IS_CROWBAR(W) || user.a_intent == I_HURT)
 		return
 	if(!length(stock_parts))
-		to_chat(user, SPAN_WARNING("No parts left to remove"))
+		to_chat(user, SPAN_WARNING("There are no parts in \the [src] left to remove."))
 		return
 
 	var/obj/item/stock_parts/remove = input(user, "Which component do you want to pry out?", "Remove Component") as null|anything in stock_parts

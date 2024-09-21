@@ -66,11 +66,11 @@ var/global/list/localhost_addresses = list(
 		return
 
 	if(href_list["irc_msg"])
-		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
-			to_chat(usr, "<span class='warning'>You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you</span>")
+		if(!holder && received_irc_pm < world.time - 6000) //Worst they can do is spam IRC for 10 minutes
+			to_chat(usr, SPAN_WARNING("You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you."))
 			return
 		if(mute_irc)
-			to_chat(usr, "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>")
+			to_chat(usr, SPAN_WARNING("You cannot use this as your client has been muted from sending messages to the admins on IRC."))
 			return
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return

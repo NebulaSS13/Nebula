@@ -385,7 +385,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 			to_chat(user, SPAN_WARNING("\The [card_reader] is currently set to swipe mode, which is unsupported by this machine. Please contact your system administrator."))
 		return
 	if(user)
-		to_chat(user, SPAN_NOTICE("Loading \the '[C]'..."))
+		to_chat(user, SPAN_NOTICE("You insert \the [C] into \the [src]."))
 	update_ui()
 
 /obj/machinery/faxmachine/proc/eject_card(var/mob/user)
@@ -715,3 +715,21 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	for(var/uri in global.using_map.map_admin_faxes)
 		var/list/contact_info = global.using_map.map_admin_faxes[uri]
 		add_quick_dial_contact(contact_info["name"], uri)
+
+/obj/machinery/faxmachine/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/fax_remove_card)
+
+/decl/interaction_handler/fax_remove_card
+	name = "Remove ID Card"
+	expected_target_type = /obj/machinery/faxmachine
+
+/decl/interaction_handler/fax_remove_card/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/machinery/faxmachine/fax = target
+		return !!(fax.card_reader?.get_inserted())
+
+/decl/interaction_handler/fax_remove_card/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/faxmachine/fax = target
+	fax.eject_card(user)
