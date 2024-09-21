@@ -30,7 +30,7 @@
 	result = /decl/material/liquid/painkillers
 	required_reagents = list(
 		/decl/material/liquid/stabilizer = 1,
-		/decl/material/gas/ammonia = 1,
+		/decl/material/gas/nitrogen = 1,
 		/decl/material/liquid/water = 1
 	)
 	result_amount = 3
