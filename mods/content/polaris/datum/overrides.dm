@@ -30,16 +30,18 @@
 
 /datum/appearance_descriptor/age/polaris_human
 	name = "age"
+	chargen_max_index = 9
 	standalone_value_descriptors = list(
 		"an infant" =      1,
 		"a toddler" =      3,
-		"a child" =       12,
-		"a teenager" =    19,
-		"a young adult" = 28,
-		"an adult" =      45,
-		"middle-aged" =   65,
-		"aging" =         90,
-		"elderly" =      110
+		"a child" =        7,
+		"a teenager" =    12,
+		"a young adult" = 17,
+		"an adult" =      28,
+		"middle-aged" =   45,
+		"aging" =         65,
+		"elderly" =       90,
+		"ancient" =      110
 	)
 
 /decl/species/human
