@@ -3,6 +3,7 @@
 	desc               = "A solid, heavy set of flooring plates."
 	icon               = 'icons/turf/flooring/tiles.dmi'
 	icon_base          = "tiled"
+	descriptor         = "tiles"
 	color              = COLOR_DARK_GUNMETAL
 	damage_temperature = T0C+1400
 	flooring_flags     = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN

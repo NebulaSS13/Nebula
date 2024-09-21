@@ -7,25 +7,25 @@
 		return TRUE
 	return ..()
 
-/turf/floor/attackby(var/obj/item/C, var/mob/user)
-	if(!C || !user)
+/turf/floor/attackby(var/obj/item/used_item, var/mob/user)
+	if(!used_item || !user)
 		return FALSE
-	if(istype(C, /obj/item/stack/tile/roof) || IS_COIL(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
+	if(istype(used_item, /obj/item/stack/tile/roof) || IS_COIL(used_item) || (flooring && istype(used_item, /obj/item/stack/material/rods)))
 		return ..()
 	var/decl/flooring/top_flooring = get_topmost_flooring()
 	if(istype(top_flooring))
-		return top_flooring.handle_item_interaction(src, user, C)
-	if(try_backfill(C, user))
+		return top_flooring.handle_item_interaction(src, user, used_item)
+	if(try_backfill(used_item, user))
 		return TRUE
-	if(try_stack_build(C, user))
+	if(try_stack_build(used_item, user))
 		return TRUE
-	if(try_turf_repair_or_deconstruct(C, user))
+	if(try_turf_repair_or_deconstruct(used_item, user))
 		return TRUE
 	return ..()
 
-/turf/floor/proc/try_build_catwalk(var/obj/item/C, var/mob/user)
-	if(!(locate(/obj/structure/catwalk) in src) && istype(C, /obj/item/stack/material/rods))
-		var/obj/item/stack/material/rods/R = C
+/turf/floor/proc/try_build_catwalk(var/obj/item/used_item, var/mob/user)
+	if(!(locate(/obj/structure/catwalk) in src) && istype(used_item, /obj/item/stack/material/rods))
+		var/obj/item/stack/material/rods/R = used_item
 		if (R.use(2))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/catwalk(src, R.material.type)
@@ -67,31 +67,31 @@
 		playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 	return TRUE
 
-/turf/floor/proc/try_backfill(obj/item/stack/material/C, mob/user)
+/turf/floor/proc/try_backfill(obj/item/stack/material/used_item, mob/user)
 
-	if((istype(flooring) && flooring.constructed) || !istype(C) || !istype(user))
+	if((istype(flooring) && flooring.constructed) || !istype(used_item) || !istype(user))
 		return FALSE
 
 	if(istype(base_flooring) && base_flooring.constructed)
 		return FALSE
 
-	if(!istype(C, /obj/item/stack/material/ore) && !istype(C, /obj/item/stack/material/lump))
+	if(!istype(used_item, /obj/item/stack/material/ore) && !istype(used_item, /obj/item/stack/material/lump))
 		return FALSE
 
 	if(get_physical_height() >= 0)
 		to_chat(user, SPAN_WARNING("\The [src] is flush with ground level and cannot be backfilled."))
 		return TRUE
 
-	if(!C.material?.can_backfill_turf_type)
-		to_chat(user, SPAN_WARNING("You cannot use \the [C] to backfill \the [src]."))
+	if(!used_item.material?.can_backfill_turf_type)
+		to_chat(user, SPAN_WARNING("You cannot use \the [used_item] to backfill \the [src]."))
 		return TRUE
 
-	var/can_backfill = islist(C.material.can_backfill_turf_type) ? is_type_in_list(src, C.material.can_backfill_turf_type) : istype(src, C.material.can_backfill_turf_type)
+	var/can_backfill = islist(used_item.material.can_backfill_turf_type) ? is_type_in_list(src, used_item.material.can_backfill_turf_type) : istype(src, used_item.material.can_backfill_turf_type)
 	if(!can_backfill)
-		to_chat(user, SPAN_WARNING("You cannot use \the [C] to backfill \the [src]."))
+		to_chat(user, SPAN_WARNING("You cannot use \the [used_item] to backfill \the [src]."))
 		return TRUE
 
-	var/obj/item/stack/stack = C
+	var/obj/item/stack/stack = used_item
 	if(!do_after(user, 1 SECOND, src) || user.get_active_held_item() != stack || get_physical_height() >= 0)
 		return TRUE
 
@@ -116,12 +116,12 @@
 		return base_flooring.constructed
 	return FALSE
 
-/turf/floor/proc/try_turf_repair_or_deconstruct(var/obj/item/C, var/mob/user)
+/turf/floor/proc/try_turf_repair_or_deconstruct(var/obj/item/used_item, var/mob/user)
 
 	if(!is_constructed_floor())
 		return FALSE
 
-	if(IS_CROWBAR(C) && is_floor_damaged())
+	if(IS_CROWBAR(used_item) && is_floor_damaged())
 		playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 		visible_message(SPAN_NOTICE("\The [user] has begun prying off the damaged plating."))
 		. = TRUE
@@ -139,8 +139,8 @@
 				T.visible_message(SPAN_DANGER("The ceiling above has been pried off!"))
 		return TRUE
 
-	if(IS_WELDER(C))
-		var/obj/item/weldingtool/welder = C
+	if(IS_WELDER(used_item))
+		var/obj/item/weldingtool/welder = used_item
 		if(welder.isOn() && is_plating() && welder.weld(0, user))
 			if(is_floor_damaged())
 				to_chat(user, SPAN_NOTICE("You fix some damage to \the [src]."))
@@ -156,8 +156,8 @@
 					playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			return TRUE
 
-	if(istype(C, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !is_floor_damaged())
-		var/obj/item/gun/energy/plasmacutter/cutter = C
+	if(istype(used_item, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !is_floor_damaged())
+		var/obj/item/gun/energy/plasmacutter/cutter = used_item
 		if(cutter.slice(user))
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			visible_message(SPAN_NOTICE("\The [user] has started slicing through \the [src]'s reinforcements!"))

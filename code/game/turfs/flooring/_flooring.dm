@@ -9,6 +9,7 @@ var/global/list/flooring_cache = list()
 
 /decl/flooring
 	abstract_type = /decl/flooring
+
 	var/name
 	var/desc
 	var/icon
@@ -24,12 +25,16 @@ var/global/list/flooring_cache = list()
 	var/icon_edge_layer = FLOOR_EDGE_NONE
 	var/has_environment_proc
 
-	var/build_type      // Unbuildable if not set. Must be /obj/item/stack.
-	var/build_material  // Unbuildable if object material var is not set to this.
-	var/build_cost = 1  // Stack units.
-	var/build_time = 0  // BYOND ticks.
+	/// Unbuildable if not set. Must be /obj/item/stack.
+	var/build_type
+	/// Unbuildable if object material var is not set to this.
+	var/build_material
+	/// Stack units.
+	var/build_cost = 1
+	/// BYOND ticks.
+	var/build_time = 0
 
-	var/descriptor = "tiles"
+	var/descriptor
 	var/flooring_flags
 	var/remove_timer = 10
 	var/can_paint
@@ -48,15 +53,16 @@ var/global/list/flooring_cache = list()
 	/// Smooth with everything except the types in this list. Turned into a typecache for performance reasons.
 	var/list/flooring_blacklist = list()
 
-	//How we smooth with other flooring
+	/// How we smooth with other flooring
 	var/floor_smooth
-	//How we smooth with walls
+	/// How we smooth with walls
 	var/wall_smooth
-	//How we smooth with space and openspace tiles
+	/// How we smooth with space and openspace tiles
 	var/space_smooth
 
-	var/z_flags //same z flags used for turfs, i.e ZMIMIC_DEFAULT etc
-	// Flags to apply to the turf.
+	/// same z flags used for turfs, i.e ZMIMIC_DEFAULT etc
+	var/z_flags
+	/// Flags to apply to the turf.
 	var/turf_flags
 
 	var/constructed = FALSE
@@ -142,6 +148,9 @@ var/global/list/flooring_cache = list()
 				. += "flagged for external edges but missing edge state from '[icon]'"
 			if(!check_state_in_icon(outer_corner_state, icon))
 				. += "flagged for external edges but missing corner state from '[icon]'"
+
+/decl/flooring/proc/get_surface_descriptor()
+	return descriptor || name || "terrain"
 
 /decl/flooring/proc/update_turf_strings(turf/floor/target)
 	target.SetName(name)
@@ -235,65 +244,64 @@ var/global/list/flooring_cache = list()
 	if(!(IS_SCREWDRIVER(item) && (flooring_flags & TURF_REMOVE_SCREWDRIVER)) && floor.try_graffiti(user, item))
 		return TRUE
 
-	if(!constructed)
-		return FALSE
-
-	if(IS_CROWBAR(item))
-		if(floor.is_floor_damaged())
-			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
-				return TRUE
-			if(floor.flooring != src)
-				return
-			to_chat(user, SPAN_NOTICE("You remove the broken [descriptor]."))
-			floor.set_flooring(null)
-		else if(flooring_flags & TURF_IS_FRAGILE)
-			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
-				return TRUE
-			if(floor.flooring != src)
-				return
-			to_chat(user, SPAN_DANGER("You forcefully pry off the [descriptor], destroying them in the process."))
-			floor.set_flooring(null)
-		else if(flooring_flags & TURF_REMOVE_CROWBAR)
-			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor))
-				return TRUE
-			if(floor.flooring != src)
-				return
-			to_chat(user, SPAN_NOTICE("You lever off the [descriptor]."))
-			floor.set_flooring(null, place_product = TRUE)
-		else
-			return
-		playsound(floor, 'sound/items/Crowbar.ogg', 80, 1)
-		return TRUE
-
-	if(IS_SCREWDRIVER(item) && (flooring_flags & TURF_REMOVE_SCREWDRIVER))
-		if(floor.is_floor_damaged())
-			return FALSE
-		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
-			return TRUE
-		to_chat(user, SPAN_NOTICE("You unscrew and remove the [descriptor]."))
-		floor.set_flooring(null, place_product = TRUE)
-		playsound(floor, 'sound/items/Screwdriver.ogg', 80, 1)
-		return TRUE
-
-	if(IS_WRENCH(item) && (flooring_flags & TURF_REMOVE_WRENCH))
-		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
-			return TRUE
-		to_chat(user, SPAN_NOTICE("You unwrench and remove the [descriptor]."))
-		floor.set_flooring(null, place_product = TRUE)
-		playsound(floor, 'sound/items/Ratchet.ogg', 80, 1)
-		return TRUE
-
 	if(IS_SHOVEL(item) && (flooring_flags & TURF_REMOVE_SHOVEL))
 		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You remove the [descriptor] with \the [item]."))
+		to_chat(user, SPAN_NOTICE("You remove the [get_surface_descriptor()] with \the [item]."))
 		floor.set_flooring(null, place_product = TRUE)
 		playsound(floor, 'sound/items/Deconstruct.ogg', 80, 1)
 		return TRUE
 
-	if(IS_COIL(item))
-		to_chat(user, SPAN_WARNING("You must remove the [descriptor] first."))
-		return TRUE
+	if(constructed)
+
+		if(IS_CROWBAR(item))
+			if(floor.is_floor_damaged())
+				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
+					return TRUE
+				if(floor.flooring != src)
+					return
+				to_chat(user, SPAN_NOTICE("You remove the broken [get_surface_descriptor()]."))
+				floor.set_flooring(null)
+			else if(flooring_flags & TURF_IS_FRAGILE)
+				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
+					return TRUE
+				if(floor.flooring != src)
+					return
+				to_chat(user, SPAN_DANGER("You forcefully pry off the [get_surface_descriptor()], destroying them in the process."))
+				floor.set_flooring(null)
+			else if(flooring_flags & TURF_REMOVE_CROWBAR)
+				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor))
+					return TRUE
+				if(floor.flooring != src)
+					return
+				to_chat(user, SPAN_NOTICE("You lever off the [get_surface_descriptor()]."))
+				floor.set_flooring(null, place_product = TRUE)
+			else
+				return
+			playsound(floor, 'sound/items/Crowbar.ogg', 80, 1)
+			return TRUE
+
+		if(IS_SCREWDRIVER(item) && (flooring_flags & TURF_REMOVE_SCREWDRIVER))
+			if(floor.is_floor_damaged())
+				return FALSE
+			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
+				return TRUE
+			to_chat(user, SPAN_NOTICE("You unscrew and remove the [get_surface_descriptor()]."))
+			floor.set_flooring(null, place_product = TRUE)
+			playsound(floor, 'sound/items/Screwdriver.ogg', 80, 1)
+			return TRUE
+
+		if(IS_WRENCH(item) && (flooring_flags & TURF_REMOVE_WRENCH))
+			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.flooring != src)
+				return TRUE
+			to_chat(user, SPAN_NOTICE("You unwrench and remove the [get_surface_descriptor()]."))
+			floor.set_flooring(null, place_product = TRUE)
+			playsound(floor, 'sound/items/Ratchet.ogg', 80, 1)
+			return TRUE
+
+		if(IS_COIL(item))
+			to_chat(user, SPAN_WARNING("You must remove the [get_surface_descriptor()] first."))
+			return TRUE
 
 	return FALSE
 
