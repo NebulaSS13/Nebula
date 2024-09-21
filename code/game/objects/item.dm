@@ -87,6 +87,8 @@
 	var/tmp/use_single_icon
 	var/center_of_mass = @'{"x":16,"y":16}' //can be null for no exact placement behaviour
 
+	var/watertight = FALSE // Can this object leak into water sources?
+
 /obj/item/proc/can_contaminate()
 	return !(obj_flags & ITEM_FLAG_NO_CONTAMINATION)
 
@@ -963,3 +965,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/can_embed()
 	return !anchored && (!ismob(loc) || canremove) && (!loc || isturf(loc) || ismob(loc)) && !is_robot_module(src)
+
+/obj/item/is_watertight()
+	return watertight || ..()

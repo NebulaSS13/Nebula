@@ -908,3 +908,6 @@
 /atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
 	set waitfor = FALSE
 	return
+
+/atom/proc/is_watertight()
+	return ATOM_IS_OPEN_CONTAINER(src)
