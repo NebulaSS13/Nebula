@@ -68,7 +68,7 @@
 		src.updateUsrDialog()
 		src.add_fingerprint(usr)
 
-/obj/machinery/implantchair/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/implantchair/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim) && victim.can_enter_cryopod(user) && put_mob(victim))
 		qdel(grab)

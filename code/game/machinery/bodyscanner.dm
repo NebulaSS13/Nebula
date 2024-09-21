@@ -68,7 +68,7 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/bodyscanner/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/bodyscanner/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim) && user_can_move_target_inside(victim, user))
 		qdel(grab)

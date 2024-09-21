@@ -148,7 +148,7 @@ var/global/list/hygiene_props = list()
 	..()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/hygiene/toilet/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -209,7 +209,7 @@ var/global/list/hygiene_props = list()
 	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
-/obj/structure/hygiene/urinal/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/hygiene/urinal/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim))
 		if(!victim.loc == get_turf(src))

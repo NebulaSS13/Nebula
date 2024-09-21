@@ -52,7 +52,7 @@
 		return SPAN_NOTICE("Wait for \the [src] to finish first!")
 	return ..()
 
-/obj/machinery/cooker/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/cooker/grab_attack(obj/item/grab/grab, mob/user)
 	// We are trying to cook a grabbed mob.
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(!istype(victim))

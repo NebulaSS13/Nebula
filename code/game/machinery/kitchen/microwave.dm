@@ -49,7 +49,7 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/microwave/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/microwave/grab_attack(obj/item/grab/grab, mob/user)
 	to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [grab.affecting] into \the [src]."))
 	return TRUE
 

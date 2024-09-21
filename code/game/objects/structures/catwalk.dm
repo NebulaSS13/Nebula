@@ -83,7 +83,7 @@
 	if(!QDELETED(src) && severity != 3)
 		physically_destroyed()
 
-/obj/structure/catwalk/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/catwalk/grab_attack(obj/item/grab/grab, mob/user)
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()
 		if (occupied)

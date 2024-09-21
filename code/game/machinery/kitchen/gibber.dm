@@ -71,7 +71,7 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
 	return ..()
 
-/obj/machinery/gibber/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/gibber/grab_attack(obj/item/grab/grab, mob/user)
 	if(grab.force_danger())
 		move_into_gibber(user, grab.affecting)
 		qdel(grab)

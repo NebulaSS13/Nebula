@@ -215,7 +215,7 @@
 				AM.reset_offsets()
 				AM.reset_plane_and_layer()
 
-/obj/structure/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/grab_attack(obj/item/grab/grab, mob/user)
 
 	if (!grab.force_danger())
 		to_chat(user, SPAN_WARNING("You need a better grip to do that!"))

@@ -127,7 +127,7 @@
 			remove_padding()
 		return TRUE
 
-/obj/structure/bed/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/bed/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim) && istype(user))
 		user.visible_message(SPAN_NOTICE("\The [user] attempts to put \the [victim] onto \the [src]!"))

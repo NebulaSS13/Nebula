@@ -35,7 +35,7 @@
 		carrying.forceMove(get_turf(src))
 		carrying = null
 
-/obj/structure/hand_cart/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/hand_cart/grab_attack(obj/item/grab/grab, mob/user)
 	if(isobj(grab.affecting))
 		to_chat(user, SPAN_NOTICE("You start loading \the [grab.affecting] onto \the [src]."))
 		if(load_item(grab.affecting, user))

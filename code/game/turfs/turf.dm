@@ -219,7 +219,7 @@
 /turf/attack_robot(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
 
-/turf/grab_attack(mob/user, obj/item/grab/grab)
+/turf/grab_attack(obj/item/grab/grab, mob/user)
 	if (grab.affecting != user)
 		grab.affecting.DoMove(get_dir(grab.affecting.loc, src), user, TRUE)
 	return TRUE

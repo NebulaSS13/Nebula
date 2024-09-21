@@ -392,7 +392,7 @@
 		attempt_enter(dropping, user)
 		return TRUE
 
-/obj/machinery/cryopod/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/cryopod/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim) && istype(user))
 		if(occupant)

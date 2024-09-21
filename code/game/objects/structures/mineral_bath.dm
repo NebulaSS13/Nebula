@@ -17,7 +17,7 @@
 	venus.adjust_multi(/decl/material/gas/chlorine, MOLES_N2STANDARD, /decl/material/gas/hydrogen, MOLES_O2STANDARD)
 	return venus
 
-/obj/structure/mineral_bath/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/mineral_bath/grab_attack(obj/item/grab/grab, mob/user)
 	if(enter_bath(grab.affecting))
 		qdel(grab)
 		return TRUE

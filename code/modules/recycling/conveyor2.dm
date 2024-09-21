@@ -81,7 +81,7 @@ var/global/list/all_conveyor_switches = list()
 			if(items_moved >= 10)
 				break
 
-/obj/machinery/conveyor/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/conveyor/grab_attack(obj/item/grab/grab, mob/user)
 	step(grab.affecting, get_dir(grab.affecting.loc, src))
 	return TRUE
 

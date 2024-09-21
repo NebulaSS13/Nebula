@@ -74,7 +74,7 @@ var/global/list/diversion_junctions = list()
 		return SPAN_NOTICE("Eject the items first!")
 	return ..()
 
-/obj/machinery/disposal/grab_attack(mob/user, obj/item/grab/grab)
+/obj/machinery/disposal/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(istype(victim))
 		user.visible_message(SPAN_DANGER("\The [user] starts putting \the [victim] into the disposal."))

@@ -219,7 +219,7 @@
 
 	return ..()
 
-/obj/structure/fire_source/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/fire_source/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(!istype(victim))
 		return FALSE
@@ -528,7 +528,7 @@
 	color = /decl/material/solid/metal/iron::color
 	obj_flags = OBJ_FLAG_HOLLOW
 
-/obj/structure/fire_source/stove/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/fire_source/stove/grab_attack(obj/item/grab/grab, mob/user)
 	return FALSE
 
 /obj/structure/fire_source/fireplace
@@ -545,7 +545,7 @@
 	light_color_mid = "#d47b27"
 	light_color_low = "#e44141"
 
-/obj/structure/fire_source/fireplace/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/fire_source/fireplace/grab_attack(obj/item/grab/grab, mob/user)
 	return FALSE
 
 #define MATERIAL_FIREPLACE(material_name) \

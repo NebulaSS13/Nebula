@@ -196,7 +196,7 @@ WOOD_RAILING_SUBTYPE(yew)
 		return 0
 	return 1
 
-/obj/structure/railing/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/railing/grab_attack(obj/item/grab/grab, mob/user)
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(!istype(victim) || !istype(user))
 		return ..()

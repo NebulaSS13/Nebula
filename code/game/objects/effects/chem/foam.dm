@@ -165,7 +165,7 @@
 	return TRUE
 
 
-/obj/structure/foamedmetal/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/foamedmetal/grab_attack(obj/item/grab/grab, mob/user)
 	grab.affecting.forceMove(loc)
 	visible_message(SPAN_DANGER("\The [user] smashes \the [grab.affecting] through the foamed metal wall!"))
 	qdel(grab)

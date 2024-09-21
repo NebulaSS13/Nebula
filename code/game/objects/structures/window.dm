@@ -311,7 +311,7 @@
 		for(var/obj/item/thing in .)
 			thing.set_color(paint_color)
 
-/obj/structure/window/grab_attack(mob/user, obj/item/grab/grab)
+/obj/structure/window/grab_attack(obj/item/grab/grab, mob/user)
 	if (user.a_intent != I_HURT)
 		return TRUE
 	if (!grab.force_danger())
