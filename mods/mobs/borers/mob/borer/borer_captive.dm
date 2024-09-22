@@ -31,17 +31,15 @@
 				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
 
 /mob/living/captive_brain/process_resist()
+	SHOULD_CALL_PARENT(FALSE)
 	//Resisting control by an alien mind.
 	if(isborer(src.loc))
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
-
 		to_chat(H, "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</span>")
 		to_chat(B.host, "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>")
-
 		spawn(rand(200,250)+B.host.get_damage(BRAIN))
 			if(!B || !B.controlling) return
-
 			B.host.take_damage(rand(0.1,0.5), BRAIN)
 			to_chat(H, "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>")
 			to_chat(B.host, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
@@ -49,7 +47,5 @@
 			verbs -= /mob/living/proc/release_control
 			verbs -= /mob/living/proc/punish_host
 			verbs -= /mob/living/proc/spawn_larvae
-
-		return
-
-	..()
+		return TRUE
+	return FALSE

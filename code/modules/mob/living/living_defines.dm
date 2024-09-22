@@ -95,3 +95,6 @@
 
 	/// Has this mob -ever- had a gripper? Used to skip hand checks in some cases.
 	var/has_had_gripper = FALSE
+
+	/// Timer for chewing off your hand when cuffed.
+	var/next_restraint_chew = 0

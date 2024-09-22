@@ -47,13 +47,6 @@
 			to_chat(src, "<span class='danger'>Your camera isn't functional.</span>")
 		return
 
-	/*
-	cyborg restrained() currently does nothing
-	if(restrained())
-		RestrainedClickOn(A)
-		return
-	*/
-
 	var/obj/item/holding = get_active_held_item()
 
 	// Cyborgs have no range-checking unless there is item use

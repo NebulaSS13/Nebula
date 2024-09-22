@@ -1,6 +1,6 @@
 /mob/living/proc/escape_buckle()
 
-	if(!buckled) 
+	if(!buckled)
 		return
 
 	var/unbuckle_time
@@ -57,12 +57,38 @@
 	if(resisting)
 		visible_message("<span class='danger'>[src] resists!</span>")
 
-/mob/living/proc/get_cuff_breakout_mod()
+/mob/living/proc/get_restraint_breakout_mod()
 	return 1
 
-/mob/living/proc/can_break_cuffs()
+/mob/living/proc/can_break_restraints()
 	var/decl/species/my_species = get_species()
 	return my_species?.can_shred(src, 1)
 
 /mob/living/proc/get_special_resist_time()
 	return 0
+
+/mob/living/proc/break_restraints(obj/item/restraint, slot)
+	visible_message(
+		SPAN_DANGER("\The [src] is trying to break \the [restraint]!"),
+		SPAN_DANGER("You attempt to break your [restraint]. (This will take around 5 seconds and you need to stand still)")
+	)
+
+	if(!do_after(src, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+		return FALSE
+
+	if(QDELETED(src) || QDELETED(restraint))
+		return FALSE
+
+	var/new_restraint = get_equipped_item(slot)
+	if((restraint != new_restraint) || buckled)
+		return FALSE
+
+	visible_message(
+		SPAN_DANGER("\The [src] manages to break \the [restraint]!"),
+		SPAN_DANGER("You successfully break your [restraint].")
+	)
+
+	try_unequip(restraint)
+	qdel(restraint)
+	if(buckled && buckled.buckle_require_restraints && !get_restraining_equipment())
+		buckled.unbuckle_mob()

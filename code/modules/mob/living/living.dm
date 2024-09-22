@@ -539,14 +539,34 @@ default behaviour is:
 
 /mob/living/proc/process_resist()
 
-	//Getting out of someone's inventory.
-	if(istype(src.loc, /obj/item/holder))
-		escape_inventory(src.loc)
-		return TRUE
+	SHOULD_CALL_PARENT(TRUE)
 
 	//unbuckling yourself
 	if(buckled)
-		spawn() escape_buckle()
+		// TODO: convert vines to structures and have them override user_unbuckle_mob()
+		if(istype(buckled, /obj/effect/vine))
+			var/obj/effect/vine/V = buckled
+			spawn() V.manual_unbuckle(src)
+		else
+			spawn() escape_buckle()
+		return TRUE
+	//drop && roll
+	else if(on_fire)
+		fire_stacks = max(0, fire_stacks-1.2)
+		SET_STATUS_MAX(src, STAT_WEAK, 3)
+		spin(32,2)
+		var/decl/pronouns/pronouns = get_pronouns()
+		visible_message(
+			SPAN_DANGER("\The [src] rolls on the floor, trying to put [pronouns.him][pronouns.self] out!"),
+			SPAN_NOTICE("You stop, drop, and roll!")
+		)
+		sleep(3 SECONDS)
+		if(fire_stacks <= 0)
+			visible_message(
+				SPAN_NOTICE("\The [src] successfully extinguishes [pronouns.him][pronouns.self]!"),
+				SPAN_NOTICE("You extinguish yourself.")
+			)
+			ExtinguishMob()
 		return TRUE
 
 	//Breaking out of a structure?
@@ -555,10 +575,33 @@ default behaviour is:
 		if(C.mob_breakout(src))
 			return TRUE
 
+	//Getting out of someone's inventory.
+	if(istype(src.loc, /obj/item/holder))
+		escape_inventory(src.loc)
+		return TRUE
+
 	// Get rid of someone riding around on you.
 	if(buckled_mob)
 		unbuckle_mob()
 		return TRUE
+
+	// removing equipment
+	var/obj/item/restraint = get_restraining_equipment()
+	if(restraint)
+		spawn()
+			if(QDELETED(restraint) || restraint.loc != src)
+				return
+			var/datum/extension/resistable/restraint_data = get_extension(restraint, /datum/extension/resistable)
+			if(istype(restraint_data))
+				restraint_data.user_try_escape(src, get_equipped_slot_for_item(restraint))
+
+/mob/living/proc/get_restraining_equipment()
+	// List order determines the priority of each slot.
+	var/static/list/restraining_slots = list(slot_wear_suit_str, slot_handcuffed_str)
+	for(var/slot in restraining_slots)
+		var/obj/item/restraint = get_equipped_item(slot)
+		if(istype(restraint) && has_extension(restraint, /datum/extension/resistable))
+			return restraint
 
 /mob/living/proc/escape_inventory(obj/item/holder/H)
 	if(H != src.loc) return
