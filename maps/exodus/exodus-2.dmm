@@ -18339,7 +18339,6 @@
 /obj/structure/cable/green{
 	icon_state = "0-2"
 	},
-/mob/living/bot/farmbot/premade,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/hydroponics)
 "aMH" = (
