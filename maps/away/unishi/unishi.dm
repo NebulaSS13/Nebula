@@ -143,10 +143,13 @@
 	update_icon()
 
 /decl/material/solid/phoron/safe/touch_mob(mob/living/M, amount, datum/reagents/holder)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /decl/material/solid/phoron/safe/affect_blood(mob/living/M, removed, datum/reagents/holder)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /decl/material/solid/phoron/safe/affect_touch(mob/living/M, removed, datum/reagents/holder)
+	SHOULD_CALL_PARENT(FALSE)
 	return

@@ -1,6 +1,6 @@
 /decl/blood_type/skrell
 	abstract_type = /decl/blood_type/skrell
-	splatter_colour = "#0081CD"
+	splatter_colour = "#1d2cbf"
 	antigens = list("Y", "Z", "Ph")
 
 /decl/blood_type/skrell/yplus

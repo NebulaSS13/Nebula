@@ -64,7 +64,7 @@
 
 /decl/chemical_reaction/drug/paroxetine
 	name = "Paroxetine"
-	result = /decl/material/liquid/antidepressants/paroxetine
+	result = /decl/material/liquid/paroxetine
 	required_reagents = list(/decl/material/liquid/hallucinogenics = 1, /decl/material/liquid/acetone = 1, /decl/material/liquid/stabilizer = 1)
 	result_amount = 3
 

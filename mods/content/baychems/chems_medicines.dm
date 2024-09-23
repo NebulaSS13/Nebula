@@ -29,6 +29,7 @@
 	uid = "chem_dexalin_plus"
 
 /decl/material/liquid/oxy_meds/dexalinp/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.add_chemical_effect(CE_OXYGENATED, 2) // change to add_chemical_effect_max later
 	holder.remove_reagent(/decl/material/gas/carbon_monoxide, 3 * removed)
 
@@ -67,12 +68,19 @@
 	lore_text = "Stabilizes the mind a little."
 
 // NEW, NOT RENAMED:
-/decl/material/liquid/antidepressants/paroxetine
+/decl/material/liquid/paroxetine
 	name = "paroxetine"
 	value = 3.5
 	uid = "chem_paroxetine"
+	taste_description = "bitterness"
+	color = "#ff80ff"
+	scannable = 1
+	metabolism = 0.01
+	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
-/decl/material/liquid/antidepressants/paroxetine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/paroxetine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
@@ -111,6 +119,7 @@
 	uid = "chem_arithrazine"
 
 /decl/material/liquid/antirads/arithrazine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.radiation = max(M.radiation - 70 * removed, 0)
+	. = ..()
+	M.radiation = max(M.radiation - 40 * removed, 0)
 	if(prob(60))
 		M.take_organ_damage(4 * removed, 0)
