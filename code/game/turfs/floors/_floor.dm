@@ -22,30 +22,32 @@
 	var/_floor_burned
 
 	// Flooring data.
-	var/flooring_override
-	var/decl/flooring/base_flooring = /decl/flooring/plating
-	var/decl/flooring/flooring
+	var/floor_icon_state_override
+
+	// TODO:
+	VAR_PROTECTED/decl/flooring/_base_flooring = /decl/flooring/plating
+	VAR_PROTECTED/decl/flooring/_flooring
 
 	var/const/TRENCH_DEPTH_PER_ACTION = 100
 
 /turf/floor/Initialize(var/ml, var/floortype)
 
-	if(base_flooring)
-		base_flooring = GET_DECL(base_flooring)
+	if(_base_flooring)
+		_base_flooring = GET_DECL(_base_flooring)
 
 	. = ..(ml)
 
 	set_turf_materials(floor_material, skip_update = TRUE)
 
-	if(!floortype && ispath(flooring))
-		floortype = flooring
+	if(!floortype && ispath(_flooring))
+		floortype = _flooring
 	if(floortype)
 		set_flooring(GET_DECL(floortype), skip_update = TRUE)
 
 	if(fill_reagent_type && get_physical_height() < 0)
 		add_to_reagents(fill_reagent_type, abs(height))
 
-	if(floor_material || flooring || base_flooring)
+	if(floor_material || _flooring || _base_flooring)
 		if(ml)
 			queue_icon_update()
 		else
@@ -65,10 +67,17 @@
 /turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
 
+/turf/floor/proc/has_flooring()
+	return istype(_flooring)
+
 /turf/floor/is_plating()
-	return !istype(flooring) && !density
+	if(density)
+		return FALSE
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return (!istype(flooring) || flooring == get_base_flooring())
 
 /turf/floor/get_base_movement_delay(var/travel_dir, var/mob/mover)
+	var/decl/flooring/flooring = get_topmost_flooring()
 	return istype(flooring) ? flooring.get_movement_delay(travel_dir, mover) : ..()
 
 /turf/floor/protects_atom(var/atom/A)
@@ -83,54 +92,56 @@
 /turf/floor/proc/set_base_flooring(var/new_base_flooring)
 	if(ispath(new_base_flooring))
 		new_base_flooring = GET_DECL(new_base_flooring)
-	if(base_flooring != new_base_flooring)
-		base_flooring = new_base_flooring
-	if(!base_flooring)
-		base_flooring = initial(base_flooring)
-	base_flooring = GET_DECL(base_flooring)
-	update_from_flooring(base_flooring)
+	if(_base_flooring != new_base_flooring)
+		_base_flooring = new_base_flooring
+	if(!_base_flooring)
+		_base_flooring = initial(_base_flooring)
+	_base_flooring = GET_DECL(_base_flooring)
+	update_from_flooring(_base_flooring)
+
+/turf/floor/proc/get_base_flooring()
+	RETURN_TYPE(/decl/flooring)
+	return _base_flooring
 
 /turf/floor/proc/get_topmost_flooring()
-	if(istype(flooring))
-		return flooring
-	if(istype(base_flooring))
-		return base_flooring
+	RETURN_TYPE(/decl/flooring)
+	return istype(_flooring) ? _flooring : get_base_flooring()
 
 /turf/floor/proc/set_flooring(var/decl/flooring/newflooring, skip_update, place_product)
 
-	if(flooring == newflooring)
+	if(_flooring == newflooring)
 		return
 
-	if(istype(flooring))
+	if(istype(_flooring))
 
 		LAZYCLEARLIST(decals)
 		for(var/obj/effect/decal/writing/W in src)
 			qdel(W)
 
-		flooring.on_remove()
-		if(flooring.build_type && place_product)
+		_flooring.on_remove()
+		if(_flooring.build_type && place_product)
 			// If build type uses material stack, check for it
 			// Because material stack uses different arguments
 			// And we need to use build material to spawn stack
-			if(ispath(flooring.build_type, /obj/item/stack/material))
-				var/decl/material/M = GET_DECL(flooring.build_material)
+			if(ispath(_flooring.build_type, /obj/item/stack/material))
+				var/decl/material/M = GET_DECL(_flooring.build_material)
 				if(!M)
-					CRASH("[src] at ([x], [y], [z]) cannot create stack because it has a bad build_material path: '[flooring.build_material]'")
-				M.create_object(src, flooring.build_cost, flooring.build_type)
+					CRASH("[src] at ([x], [y], [z]) cannot create stack because it has a bad build_material path: '[_flooring.build_material]'")
+				M.create_object(src, _flooring.build_cost, _flooring.build_type)
 			else
-				new flooring.build_type(src)
+				new _flooring.build_type(src)
 
-		if(flooring.has_environment_proc && is_processing)
+		if(_flooring.has_environment_proc && is_processing)
 			STOP_PROCESSING(SSobj, src)
 
-		flooring = null
+		_flooring = null
 		set_floor_broken(skip_update = TRUE)
 		set_floor_burned()
 
-	flooring = newflooring
-	flooring_override = null
+	_flooring = newflooring
+	floor_icon_state_override = null
 
-	update_from_flooring((istype(flooring) ? flooring : base_flooring), skip_update)
+	update_from_flooring(get_topmost_flooring(), skip_update)
 
 /turf/floor/proc/update_from_flooring(var/decl/flooring/copy_from, skip_update)
 
@@ -164,11 +175,8 @@
 				neighbor.update_icon()
 
 /turf/floor/can_engrave()
-	if(istype(flooring))
-		return flooring.can_engrave
-	if(istype(base_flooring))
-		return base_flooring.can_engrave
-	return can_engrave
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return flooring ? flooring.can_engrave : can_engrave
 
 /turf/floor/shuttle_ceiling
 	name = "hull plating"
@@ -185,7 +193,7 @@
 /turf/floor/handle_universal_decay()
 	if(!is_floor_burned())
 		burn_tile()
-	else if(istype(flooring))
+	else if(has_flooring())
 		break_tile_to_plating()
 	else
 		physically_destroyed()
@@ -193,13 +201,16 @@
 /turf/floor/get_footstep_sound(var/mob/caller)
 	. = ..()
 	if(!.)
-		var/decl/flooring/use_flooring = get_topmost_flooring() || base_flooring
+		var/decl/flooring/use_flooring = get_topmost_flooring()
 		if(istype(use_flooring))
 			return get_footstep_for_mob(use_flooring.footstep_type)
 		return get_footstep_for_mob(/decl/footsteps/blank)
 
 /turf/floor/get_movable_alpha_mask_state(atom/movable/mover)
-	. = ..() || (istype(flooring) ? flooring.get_movable_alpha_mask_state(mover) : null)
+	. = ..()
+	if(!.)
+		var/decl/flooring/flooring = get_topmost_flooring()
+		return flooring?.get_movable_alpha_mask_state(mover)
 
 /turf/floor/dismantle_turf(devastated, explode, no_product)
 	if(is_constructed_floor())
@@ -207,66 +218,56 @@
 	return !!switch_to_base_turf()
 
 /turf/floor/get_soil_color()
-	if(istype(flooring))
-		return flooring.dirt_color
-	if(istype(base_flooring))
-		return base_flooring.dirt_color
-	return "#7c5e42"
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return flooring ? flooring.dirt_color : "#7c5e42"
 
 /turf/floor/get_color()
 
 	if(paint_color)
 		return paint_color
 
+	var/decl/flooring/flooring = get_topmost_flooring()
 	if(istype(flooring))
 		if(flooring.color)
 			return flooring.color
-		var/decl/material/my_material = get_material()
-		if(istype(my_material))
-			return my_material.color
 		return COLOR_WHITE
-
-	if(istype(base_flooring))
-		if(base_flooring.color)
-			return base_flooring.color
-		var/decl/material/my_material = get_material()
-		if(istype(my_material))
-			return my_material.color
-		return COLOR_WHITE
-
+	var/decl/material/my_material = get_material()
+	if(istype(my_material))
+		return my_material.color
 	return color
 
+/turf/floor/proc/get_all_flooring()
+	. = list()
+	if(istype(_flooring))
+		. += _flooring
+	if(istype(_base_flooring))
+		. += _base_flooring
+
 /turf/floor/Process()
-	if(istype(flooring) && flooring.has_environment_proc)
-		return flooring.handle_environment_proc(src)
-	if(istype(base_flooring) && base_flooring.has_environment_proc)
-		return base_flooring.handle_environment_proc(src)
+	for(var/decl/flooring/flooring in get_all_flooring())
+		if(flooring.has_environment_proc)
+			return flooring.handle_environment_proc(src)
 	return PROCESS_KILL
 
 // In case a catwalk or other blocking item is destroyed.
 /turf/floor/Exited(atom/movable/AM)
 	. = ..()
 	if(!is_processing)
-		if(istype(flooring) && flooring.has_environment_proc)
-			START_PROCESSING(SSobj, src)
-		else if(istype(base_flooring) && base_flooring.has_environment_proc)
-			START_PROCESSING(SSobj, src)
+		for(var/decl/flooring/flooring in get_all_flooring())
+			if(flooring.has_environment_proc)
+				START_PROCESSING(SSobj, src)
+				break
 
 // In case something of interest enters our turf.
 /turf/floor/Entered(atom/movable/AM)
 	. = ..()
-	if(istype(flooring))
+	for(var/decl/flooring/flooring in get_all_flooring())
 		if(flooring.has_environment_proc)
 			if(!is_processing)
 				START_PROCESSING(SSobj, src)
-			return flooring.handle_environment_proc(src)
-	else if(istype(base_flooring) && base_flooring.has_environment_proc)
-		if(!is_processing)
-			START_PROCESSING(SSobj, src)
-		return base_flooring.handle_environment_proc(src)
+			flooring.handle_environment_proc(src)
+			break
 
 /turf/floor/get_plant_growth_rate()
-	var/decl/flooring/floor = get_topmost_flooring()
-	if(floor)
-		return floor.growth_value
-	return ..()
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return flooring ? flooring.growth_value : ..()

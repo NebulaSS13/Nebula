@@ -6,9 +6,9 @@
 	color          = COLOR_GRAY
 	icon           = 'icons/turf/flooring/path.dmi'
 	icon_state     = "cobble"
-	flooring       = /decl/flooring/path/cobblestone
+	_flooring      = /decl/flooring/path/cobblestone
 	floor_material = /decl/material/solid/stone/sandstone
-	base_flooring  = /decl/flooring/dirt
+	_base_flooring = /decl/flooring/dirt
 
 /turf/floor/path/Initialize(mapload, no_update_icon)
 	. = ..()
@@ -29,11 +29,11 @@
 
 /turf/floor/path/running_bond
 	icon_state = "runningbond"
-	flooring = /decl/flooring/path/running_bond
+	_flooring = /decl/flooring/path/running_bond
 
 /turf/floor/path/herringbone
 	icon_state = "herringbone"
-	flooring = /decl/flooring/path/herringbone
+	_flooring = /decl/flooring/path/herringbone
 
 // Material subtypes.
 #define PATH_MATERIAL_SUBTYPES(material_name) \

@@ -36,7 +36,7 @@
 	name = "mantid plating"
 	color = COLOR_GRAY20
 	initial_gas = list(/decl/material/gas/methyl_bromide = MOLES_CELLSTANDARD * 0.5, /decl/material/gas/oxygen = MOLES_CELLSTANDARD * 0.5)
-	base_flooring = /decl/flooring/plating/ascent
+	_base_flooring = /decl/flooring/plating/ascent
 	icon_state = "curvy"
 	icon = 'icons/turf/flooring/alium.dmi'
 
@@ -50,4 +50,4 @@
 	icon = 'icons/turf/flooring/alium.dmi'
 	color = COLOR_GRAY40
 	initial_gas = list(/decl/material/gas/methyl_bromide = MOLES_CELLSTANDARD * 0.5, /decl/material/gas/oxygen = MOLES_CELLSTANDARD * 0.5)
-	flooring = /decl/flooring/tiling_ascent
+	_flooring = /decl/flooring/tiling_ascent

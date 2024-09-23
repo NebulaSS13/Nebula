@@ -1,15 +1,13 @@
 /turf/floor/proc/is_fundament()
-	if(istype(flooring))
-		return FALSE
-	if(istype(base_flooring) && base_flooring.constructed)
-		return FALSE
-	return TRUE
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return flooring ? !flooring.constructed : TRUE
 
 /turf/floor/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
 	// This should be removed before digging trenches.
 	if(!is_fundament())
 		return FALSE
-	if(istype(base_flooring) && base_flooring.constructed)
+	var/decl/flooring/flooring = get_base_flooring()
+	if(istype(flooring) && flooring.constructed)
 		return FALSE
 	var/decl/material/my_material = get_material()
 	if(density || is_open() || !istype(my_material))
@@ -36,7 +34,7 @@
 	set_physical_height(new_height)
 
 /turf/floor/dig_pit(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
-	return flooring ? null : ..()
+	return has_flooring() ? null : ..()
 
 /turf/floor/get_diggable_resources()
 	var/decl/material/my_material = get_material()

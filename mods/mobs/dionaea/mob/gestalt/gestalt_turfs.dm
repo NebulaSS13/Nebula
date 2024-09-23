@@ -9,4 +9,4 @@
 	name           = "biomass"
 	icon           = 'mods/mobs/dionaea/icons/turfs.dmi'
 	icon_state     = "floor"
-	flooring       = /decl/flooring/diona
+	_flooring      = /decl/flooring/diona

@@ -28,31 +28,28 @@
 /turf/floor/fluid_act(var/datum/reagents/fluids)
 	. = ..()
 	if(!QDELETED(fluids) && fluids.total_volume)
-		if(istype(flooring) && flooring.fluid_act(src, fluids))
-			return
-		if(istype(base_flooring) && base_flooring.fluid_act(src, fluids))
-			return
+		for(var/decl/flooring/flooring in get_all_flooring())
+			if(flooring.fluid_act(src, fluids))
+				return
 
 /turf/floor/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 
-	if(istype(flooring) && flooring.fire_act(src, air, exposed_temperature, exposed_volume))
-		return
-
-	if(istype(base_flooring) && base_flooring.fire_act(src, air, exposed_temperature, exposed_volume))
-		return
+	for(var/decl/flooring/flooring in get_all_flooring())
+		if(flooring.fire_act(src, air, exposed_temperature, exposed_volume))
+			return
 
 	var/temp_destroy = get_damage_temperature()
 	if(!is_floor_burned() && prob(5))
 		burn_tile(exposed_temperature)
-	else if(temp_destroy && exposed_temperature >= (temp_destroy + 100) && prob(1) && !is_plating())
+	else if(temp_destroy && exposed_temperature >= (temp_destroy + 100) && prob(1) && has_flooring())
 		set_flooring(null) //destroy the tile, exposing plating
 		burn_tile(exposed_temperature)
 	return ..()
 
 //should be a little bit lower than the temperature required to destroy the material
 /turf/floor/proc/get_damage_temperature()
-	if(istype(flooring))
-		return flooring.damage_temperature
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return flooring?.damage_temperature
 
 /turf/floor/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	var/dir_to = get_dir(src, adj_turf)

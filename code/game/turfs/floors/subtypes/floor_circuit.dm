@@ -2,7 +2,7 @@
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "bcircuit"
-	flooring = /decl/flooring/reinforced/circuit
+	_flooring = /decl/flooring/reinforced/circuit
 	light_range = 2
 	light_power = 3
 	light_color = COLOR_BLUE
@@ -16,7 +16,7 @@
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "gcircuit"
-	flooring = /decl/flooring/reinforced/circuit/green
+	_flooring = /decl/flooring/reinforced/circuit/green
 	light_range = 2
 	light_power = 3
 	light_color = COLOR_GREEN
@@ -33,7 +33,7 @@
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "rcircuit"
-	flooring = /decl/flooring/reinforced/circuit/red
+	_flooring = /decl/flooring/reinforced/circuit/red
 	light_range = 2
 	light_power = 2
 	light_color = COLOR_RED

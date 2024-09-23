@@ -14,7 +14,7 @@
 		if(target.get_topmost_flooring() == src)
 			target.set_flooring(/decl/flooring/melted_sand)
 			. = TRUE
-		if(target.base_flooring == src)
+		if(target.get_base_flooring() == src)
 			target.set_base_flooring(/decl/flooring/melted_sand)
 			. = TRUE
 	return . || ..()

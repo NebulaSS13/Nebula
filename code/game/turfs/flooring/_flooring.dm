@@ -160,13 +160,13 @@ var/global/list/flooring_cache = list()
 
 	if(target.icon != icon)
 		target.icon = icon
-	if(!target.flooring_override)
-		target.flooring_override = icon_base
+	if(!target.floor_icon_state_override)
+		target.floor_icon_state_override = icon_base
 		if(has_base_range)
-			target.flooring_override = "[target.flooring_override][rand(0,has_base_range)]"
+			target.floor_icon_state_override = "[target.floor_icon_state_override][rand(0,has_base_range)]"
 
-	if(target.icon_state != target.flooring_override)
-		target.icon_state = target.flooring_override
+	if(target.icon_state != target.floor_icon_state_override)
+		target.icon_state = target.floor_icon_state_override
 
 	if(color)
 		target.color = color

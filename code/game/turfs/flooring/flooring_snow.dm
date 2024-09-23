@@ -23,7 +23,7 @@
 	if(!target.reagents?.total_volume)
 		if(target.get_topmost_flooring() == src)
 			target.set_flooring(/decl/flooring/permafrost)
-		else if(target.base_flooring == src)
+		else if(target.get_base_flooring() == src)
 			target.set_base_flooring(/decl/flooring/permafrost)
 		return
 	return ..()

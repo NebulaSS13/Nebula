@@ -10,7 +10,7 @@
 /turf/floor/attackby(var/obj/item/used_item, var/mob/user)
 	if(!used_item || !user)
 		return FALSE
-	if(istype(used_item, /obj/item/stack/tile/roof) || IS_COIL(used_item) || (flooring && istype(used_item, /obj/item/stack/material/rods)))
+	if(istype(used_item, /obj/item/stack/tile/roof) || IS_COIL(used_item) || (has_flooring() && istype(used_item, /obj/item/stack/material/rods)))
 		return ..()
 	var/decl/flooring/top_flooring = get_topmost_flooring()
 	if(istype(top_flooring))
@@ -60,7 +60,7 @@
 	// Stay still and focus...
 	if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src))
 		return TRUE
-	if(istype(flooring) || !S || !user || !use_flooring)
+	if(has_flooring() || !S || !user || !use_flooring)
 		return TRUE
 	if(S.use(use_flooring.build_cost))
 		set_flooring(use_flooring)
@@ -69,10 +69,12 @@
 
 /turf/floor/proc/try_backfill(obj/item/stack/material/used_item, mob/user)
 
+	var/decl/flooring/flooring = get_topmost_flooring()
 	if((istype(flooring) && flooring.constructed) || !istype(used_item) || !istype(user))
 		return FALSE
 
-	if(istype(base_flooring) && base_flooring.constructed)
+	flooring = get_base_flooring()
+	if(istype(flooring) && flooring.constructed)
 		return FALSE
 
 	if(!istype(used_item, /obj/item/stack/material/ore) && !istype(used_item, /obj/item/stack/material/lump))
@@ -110,11 +112,8 @@
 	return TRUE
 
 /turf/floor/proc/is_constructed_floor()
-	if(istype(flooring))
-		return flooring.constructed
-	if(istype(base_flooring))
-		return base_flooring.constructed
-	return FALSE
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return flooring?.constructed
 
 /turf/floor/proc/try_turf_repair_or_deconstruct(var/obj/item/used_item, var/mob/user)
 
