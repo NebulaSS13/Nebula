@@ -54,7 +54,8 @@
 	qdel(src)
 
 /obj/item/get_material()
-	. = material
+	RETURN_TYPE(/decl/material)
+	return material
 
 // TODO: Refactor more code to use this where necessary, and then make this use
 // some sort of generalized system for hitting with different parts of an item

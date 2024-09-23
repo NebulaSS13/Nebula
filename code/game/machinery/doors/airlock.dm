@@ -91,6 +91,7 @@
 	var/emag_file = 'icons/obj/doors/station/emag.dmi'
 
 /obj/machinery/door/airlock/get_material()
+	RETURN_TYPE(/decl/material)
 	return GET_DECL(mineral ? mineral : /decl/material/solid/metal/steel)
 
 /obj/machinery/door/airlock/proc/get_window_material()

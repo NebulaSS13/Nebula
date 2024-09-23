@@ -22,6 +22,7 @@
 	. = ..()
 	if(!ismob(loc))
 		return INITIALIZE_HINT_QDEL
+	set_extension(src, /datum/extension/demolisher/energy)
 
 /obj/item/energy_blade/projected/is_special_cutting_tool(var/high_power)
 	return active

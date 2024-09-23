@@ -19,6 +19,7 @@
 	return
 
 /turf/floor/natural/get_material()
+	RETURN_TYPE(/decl/material)
 	return material
 
 /turf/floor/natural/get_strata_material_type()

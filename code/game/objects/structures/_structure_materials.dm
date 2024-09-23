@@ -5,7 +5,8 @@
 	var/dismantled
 
 /obj/structure/get_material()
-	. = material
+	RETURN_TYPE(/decl/material)
+	return material
 
 /obj/structure/proc/get_material_health_modifier()
 	. = 1
