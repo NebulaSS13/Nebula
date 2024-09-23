@@ -5,7 +5,7 @@
 	name = "floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
-	flooring = null
+	_flooring = null
 	footstep_type = /decl/footsteps/plating
 	is_outside = OUTSIDE_AREA
 

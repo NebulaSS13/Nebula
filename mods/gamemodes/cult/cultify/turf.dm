@@ -6,18 +6,21 @@
 	return (locate(/obj/effect/narsie_footstep) in src)
 
 /turf/floor/on_defilement()
-	if(flooring?.type != /decl/flooring/reinforced/cult)
+	if(!has_flooring() || get_topmost_flooring()?.type != /decl/flooring/reinforced/cult)
 		..()
 		set_flooring(GET_DECL(/decl/flooring/reinforced/cult))
 
 /turf/floor/is_defiled()
-	return istype(flooring) ? (flooring.type == /decl/flooring/reinforced/cult) : ..()
+	var/decl/flooring/flooring = get_topmost_flooring()
+	if(flooring)
+		return flooring.type == /decl/flooring/reinforced/cult
+	return ..()
 
 /turf/floor/cult
 	name = "engraved floor"
 	icon = 'icons/turf/flooring/cult.dmi'
 	icon_state = "cult"
-	flooring = /decl/flooring/reinforced/cult
+	_flooring = /decl/flooring/reinforced/cult
 
 /turf/wall/on_defilement()
 	var/new_material

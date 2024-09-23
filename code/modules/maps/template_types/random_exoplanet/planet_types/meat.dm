@@ -132,7 +132,7 @@
 	name              = "fleshy ground"
 	icon              = 'icons/turf/flooring/flesh.dmi'
 	icon_state        = "meat"
-	base_flooring     = /decl/flooring/meat
+	_base_flooring    = /decl/flooring/meat
 	floor_material    = /decl/material/solid/organic/meat
 
 /turf/floor/meat/acid

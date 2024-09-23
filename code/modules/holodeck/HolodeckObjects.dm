@@ -17,77 +17,77 @@
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "brown"
-	flooring = /decl/flooring/carpet
+	_flooring = /decl/flooring/carpet
 
 /turf/floor/holofloor/concrete
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "brown"
-	flooring = /decl/flooring/carpet
+	_flooring = /decl/flooring/carpet
 
 /turf/floor/holofloor/concrete
 	name = "floor"
 	icon = 'icons/turf/flooring/misc.dmi'
 	icon_state = "concrete"
-	flooring = null
+	_flooring = null
 
 /turf/floor/holofloor/tiled
 	name = "floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
-	flooring = /decl/flooring/tiling
+	_flooring = /decl/flooring/tiling
 
 /turf/floor/holofloor/tiled/dark
 	name = "dark floor"
 	icon_state = "dark"
-	flooring = /decl/flooring/tiling/dark
+	_flooring = /decl/flooring/tiling/dark
 
 /turf/floor/holofloor/tiled/stone
 	name = "stone floor"
 	icon_state = "stone"
-	flooring = /decl/flooring/tiling/stone
+	_flooring = /decl/flooring/tiling/stone
 
 /turf/floor/holofloor/lino
 	name = "lino"
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_state = "lino"
-	flooring = /decl/flooring/linoleum
+	_flooring = /decl/flooring/linoleum
 
 /turf/floor/holofloor/wood
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"
 	color = WOOD_COLOR_CHOCOLATE
-	flooring = /decl/flooring/wood
+	_flooring = /decl/flooring/wood
 
 /turf/floor/holofloor/grass
 	name = "lush grass"
 	icon = 'icons/turf/flooring/fakegrass.dmi'
 	icon_state = "grass0"
-	flooring = /decl/flooring/grass/fake
+	_flooring = /decl/flooring/grass/fake
 
 /turf/floor/holofloor/snow
 	name = "snow"
 	icon = 'icons/turf/flooring/snow.dmi'
 	icon_state = "snow0"
-	flooring = /decl/flooring/snow/fake
+	_flooring = /decl/flooring/snow/fake
 
 /turf/floor/holofloor/space
 	name = "\proper space"
 	icon = 'icons/turf/flooring/fake_space.dmi'
 	icon_state = "space0"
-	flooring = /decl/flooring/fake_space
+	_flooring = /decl/flooring/fake_space
 
 /turf/floor/holofloor/reinforced
 	icon = 'icons/turf/flooring/tiles.dmi'
-	flooring = /decl/flooring/reinforced
+	_flooring = /decl/flooring/reinforced
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
 
 /turf/floor/holofloor/beach
 	desc = "Uncomfortably gritty for a hologram."
 	icon = 'icons/misc/beach.dmi'
-	flooring = /decl/flooring/sand/fake
+	_flooring = /decl/flooring/sand/fake
 	abstract_type = /turf/floor/holofloor/beach
 
 /turf/floor/holofloor/beach/sand
@@ -98,19 +98,19 @@
 	name = "coastline"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
-	flooring = /decl/flooring/sand/fake
+	_flooring = /decl/flooring/sand/fake
 
 /turf/floor/holofloor/beach/water
 	name = "water"
 	icon_state = "seashallow"
-	flooring = /decl/flooring/fake_water
+	_flooring = /decl/flooring/fake_water
 
 /turf/floor/holofloor/desert
 	name = "desert sand"
 	desc = "Uncomfortably gritty for a hologram."
 	icon_state = "barren"
 	icon = 'icons/turf/flooring/barren.dmi'
-	flooring = /decl/flooring/sand/fake
+	_flooring = /decl/flooring/sand/fake
 
 /turf/floor/holofloor/desert/Initialize(var/ml)
 	. = ..()

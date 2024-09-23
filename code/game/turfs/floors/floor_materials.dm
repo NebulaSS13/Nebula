@@ -18,10 +18,7 @@
 		queue_icon_update()
 
 /turf/floor/get_material()
-	if(istype(flooring))
+	for(var/decl/flooring/flooring in get_all_flooring())
 		if(flooring.force_material)
 			return flooring.force_material
-		return floor_material
-	if(istype(base_flooring) && base_flooring.force_material)
-		return base_flooring.force_material
 	return floor_material

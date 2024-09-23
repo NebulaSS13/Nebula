@@ -81,5 +81,7 @@
 		. += "null or invalid icon_state '[icon_state]'"
 	if(icon && icon_state && !check_state_in_icon(icon_state, icon))
 		. += "missing initial icon_state '[icon_state]' from '[icon]'"
-	if(!istype(base_flooring))
-		. += "null or invalid base_flooring ([base_flooring || "NULL"])"
+	if(!istype(_base_flooring))
+		. += "null or invalid _base_flooring ([_base_flooring || "NULL"])"
+	if(_flooring && !istype(_flooring))
+		. += "invalid post-init type for _flooring ([_flooring || "NULL"])"

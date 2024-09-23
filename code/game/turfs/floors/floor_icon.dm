@@ -32,19 +32,19 @@
 	return my_flooring.icon_edge_layer > their_flooring.icon_edge_layer
 
 /turf/floor/proc/get_trench_icon()
-	var/decl/flooring/use_flooring = istype(base_flooring) ? base_flooring : get_topmost_flooring()
-	if(istype(use_flooring) && use_flooring.icon && check_state_in_icon("trench", use_flooring.icon))
-		return use_flooring.icon
+	var/decl/flooring/flooring = get_base_flooring() || get_topmost_flooring()
+	if(istype(flooring) && flooring.icon && check_state_in_icon("trench", flooring.icon))
+		return flooring.icon
 
 /turf/floor/proc/update_height_appearance()
 
-	var/decl/flooring/use_flooring = get_topmost_flooring()
-	if(istype(use_flooring))
-		layer = use_flooring.floor_layer
+	var/decl/flooring/flooring = get_topmost_flooring()
+	if(istype(flooring))
+		layer = flooring.floor_layer
 	else
 		layer = initial(layer)
 
-	if(istype(use_flooring) && !use_flooring.render_trenches) // TODO: Update pool tiles/edges to behave properly with this new system.
+	if(istype(flooring) && !flooring.render_trenches) // TODO: Update pool tiles/edges to behave properly with this new system.
 		return FALSE
 
 	var/my_height = get_physical_height()
@@ -130,16 +130,19 @@
 		use_flooring.update_turf_icon(src)
 
 /turf/floor/proc/is_floor_broken()
-	return !isnull(_floor_broken) && (!flooring || (flooring.flooring_flags & TURF_CAN_BREAK))
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return !isnull(_floor_broken) && (!istype(flooring) || (flooring.flooring_flags & TURF_CAN_BREAK))
 
 /turf/floor/proc/is_floor_burned()
-	return !isnull(_floor_burned) && (!flooring || (flooring.flooring_flags & TURF_CAN_BURN))
+	var/decl/flooring/flooring = get_topmost_flooring()
+	return !isnull(_floor_burned) && (!istype(flooring) || (flooring.flooring_flags & TURF_CAN_BURN))
 
 /turf/floor/proc/is_floor_damaged()
 	return is_floor_broken() || is_floor_burned()
 
 /turf/floor/proc/set_floor_broken(new_broken, skip_update)
 
+	var/decl/flooring/flooring = get_topmost_flooring()
 	if(istype(flooring) && !(flooring.flooring_flags & TURF_CAN_BREAK))
 		return FALSE
 
@@ -162,6 +165,7 @@
 
 /turf/floor/proc/set_floor_burned(new_burned, skip_update)
 
+	var/decl/flooring/flooring = get_topmost_flooring()
 	if(istype(flooring) && !(flooring.flooring_flags & TURF_CAN_BURN))
 		return FALSE
 

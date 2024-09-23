@@ -15,7 +15,7 @@
 	var/harvestable    = FALSE
 
 /decl/flooring/grass/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(target.flooring == src && (exposed_temperature > T0C + 200 && prob(5)) || exposed_temperature > T0C + 1000)
+	if(target.get_topmost_flooring() == src && (exposed_temperature > T0C + 200 && prob(5)) || exposed_temperature > T0C + 1000)
 		target.set_flooring(null)
 		return TRUE
 	return ..()
