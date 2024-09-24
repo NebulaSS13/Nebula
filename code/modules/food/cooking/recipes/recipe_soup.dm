@@ -7,7 +7,7 @@
   Soups to add when someone can be bothered:
 	- Egg drop soup: regular soup + 3u egg, uses egg overlay.
 	- Proper curry spices, coconut milk, for curry making.
-	- Cheese soups - will need INGREDIENT_FLAG_CHEESE to be checked alongside INGREDIENT_FLAG_DAIRY.
+	- Cheese soups - will need ALLERGEN_CHEESE to be checked alongside ALLERGEN_DAIRY.
 */
 
 /decl/recipe/soup
@@ -62,7 +62,7 @@
 		if(length(precursor_ingredients))
 			for(var/ingredient in precursor_ingredients)
 				ingredients[ingredient] += precursor_ingredients[ingredient]
-		var/precursor_allergen_flags = LAZYACCESS(precursor_data, DATA_INGREDIENT_FLAGS)
+		var/precursor_allergen_flags = LAZYACCESS(precursor_data, DATA_ALLERGENS)
 		if(precursor_allergen_flags)
 			allergen_flags |= precursor_allergen_flags
 
@@ -71,7 +71,7 @@
 	if(length(ingredients))
 		.[DATA_INGREDIENT_LIST] = ingredients
 	if(allergen_flags)
-		.DATA_INGREDIENT_FLAGS] = allergen_flags
+		.[DATA_ALLERGENS] = allergen_flags
 
 /decl/recipe/soup/stock
 	abstract_type = /decl/recipe/soup/stock
@@ -102,7 +102,7 @@
 /decl/recipe/soup/stock/bone/get_result_data(atom/container, list/used_ingredients)
 	. = list()
 	.[DATA_INGREDIENT_LIST] = list("marrow" = 1)
-	.[DATA_INGREDIENT_FLAGS] = ALLERGEN_MEAT
+	.[DATA_ALLERGENS] = ALLERGEN_MEAT
 	.[DATA_TASTE] = list("rich marrow" = 5)
 
 /decl/recipe/soup/simple

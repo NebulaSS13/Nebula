@@ -25,5 +25,5 @@
 /decl/recipe/soup/stock/bone/get_result_data(atom/container, list/used_ingredients)
 	. = list()
 	.[DATA_INGREDIENT_LIST]  = list("marrow" = 1)
-	.[DATA_INGREDIENT_FLAGS] = INGREDIENT_FLAG_MEAT
+	.[DATA_ALLERGENS] = ALLERGEN_MEAT
 	.[DATA_TASTE]            = list("rich marrow" = 5)

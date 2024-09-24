@@ -23,11 +23,11 @@
 /decl/chemical_reaction/recipe/food/dairy
 	abstract_type = /decl/chemical_reaction/recipe/food/dairy
 	var/static/list/milk_data_keys = list(
-		"milk_donor",
-		"milk_color",
-		"milk_name",
-		"cheese_name",
-		"cheese_color"
+		DATA_MILK_DONOR,
+		DATA_MILK_NAME,
+		DATA_MILK_COLOR,
+		DATA_CHEESE_NAME,
+		DATA_CHEESE_COLOR
 	)
 
 /decl/chemical_reaction/recipe/food/dairy/send_data(var/datum/reagents/holder, var/reaction_limit)

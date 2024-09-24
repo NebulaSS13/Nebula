@@ -32,7 +32,7 @@
 
 /mob/proc/get_blood_data()
 	var/data = list()
-	data["donor"] = weakref(src)
+	data[DATA_BLOOD_DONOR] = weakref(src)
 	return data
 
 /// Removes amt units of blood from src, if it has blood.

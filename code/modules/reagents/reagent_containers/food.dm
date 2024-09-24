@@ -197,10 +197,10 @@
 
 /obj/item/food/proc/get_nutriment_data()
 	if(nutriment_desc)
-		LAZYSET(., "taste", nutriment_desc)
+		LAZYSET(., DATA_TASTE, nutriment_desc)
 	if(allergen_flags)
 		LAZYINITLIST(.)
-		.["allergen_flags"] |= allergen_flags
+		.[DATA_ALLERGENS] |= allergen_flags
 
 /obj/item/food/proc/set_nutriment_data(list/newdata)
 	if(reagents?.total_volume && reagents.has_reagent(nutriment_type, 1))
@@ -220,7 +220,7 @@
 /obj/item/food/proc/add_allergen_flags(new_flags)
 	for(var/reagent in reagents.reagent_volumes)
 		var/decl/material/mat = GET_DECL(reagent)
-		var/list/newdata = mat.mix_data(reagents, list(DATA_INGREDIENT_FLAGS = new_flags))
+		var/list/newdata = mat.mix_data(reagents, list(DATA_ALLERGENS = new_flags))
 		if(newdata)
 			LAZYSET(reagents.reagent_data, reagent, newdata)
 
