@@ -130,11 +130,11 @@
 	H.forceMove(T)
 	phase_in(H,get_turf(H))
 
-	for(var/obj/item/grab/G in H.get_active_grabs())
-		if(G.affecting)
-			phase_out(G.affecting,get_turf(G.affecting))
-			G.affecting.forceMove(locate(T.x+rand(-1,1),T.y+rand(-1,1),T.z))
-			phase_in(G.affecting,get_turf(G.affecting))
+	for(var/obj/item/grab/grab as anything in H.get_active_grabs())
+		if(grab.affecting)
+			phase_out(grab.affecting,get_turf(grab.affecting))
+			grab.affecting.forceMove(locate(T.x+rand(-1,1),T.y+rand(-1,1),T.z))
+			phase_in(grab.affecting,get_turf(grab.affecting))
 
 	return 1
 

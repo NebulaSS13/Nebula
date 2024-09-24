@@ -82,8 +82,8 @@ var/global/list/end_titles
 			if(prob(90))
 				chunk += "[background.get_random_name(H, H.gender)]\t \t \t \t[uppertext(used_name)][job]"
 			else
-				var/decl/pronouns/G = H.get_pronouns()
-				chunk += "[used_name]\t \t \t \t[uppertext(G.him)]SELF"
+				var/decl/pronouns/pronouns = H.get_pronouns()
+				chunk += "[used_name]\t \t \t \t[uppertext(pronouns.him)]SELF"
 		else
 			chunk += "[uppertext(background.get_random_name(H, H.gender))] a.k.a. '[uppertext(H.ckey)]'\t \t \t \t[uppertext(used_name)][job]"
 		chunksize++

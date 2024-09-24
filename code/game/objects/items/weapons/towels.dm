@@ -51,12 +51,12 @@
 	if(reagent_space <= 0)
 		to_chat(user, SPAN_WARNING("\The [src] is too saturated to dry [user == target ? "yourself" : "\the [target]"] off effectively."))
 	else
-		var/decl/pronouns/G = target.get_pronouns()
+		var/decl/pronouns/pronouns = target.get_pronouns()
 		var/datum/reagents/touching_reagents = target.get_contact_reagents()
 		if(!touching_reagents?.total_volume)
-			to_chat(user, SPAN_WARNING("[user == target ? "You are" : "\The [target] [G.is]"] already dry."))
+			to_chat(user, SPAN_WARNING("[user == target ? "You are" : "\The [target] [pronouns.is]"] already dry."))
 		else
-			user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to towel [user == target ? G.self : "\the [target]"] dry."))
+			user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to towel [user == target ? pronouns.self : "\the [target]"] dry."))
 			touching_reagents.trans_to(src, min(touching_reagents.total_volume, reagent_space))
 			playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 	return TRUE

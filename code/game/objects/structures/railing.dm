@@ -196,10 +196,8 @@ WOOD_RAILING_SUBTYPE(yew)
 		return 0
 	return 1
 
-/obj/structure/railing/grab_attack(var/obj/item/grab/G)
-
-	var/mob/user = G.assailant
-	var/mob/living/victim = G.get_affecting_mob()
+/obj/structure/railing/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/living/victim = grab.get_affecting_mob()
 	if(!istype(victim) || !istype(user))
 		return ..()
 
@@ -216,7 +214,7 @@ WOOD_RAILING_SUBTYPE(yew)
 		to_chat(user, SPAN_WARNING("There's \a [occupied] in the way."))
 		return TRUE
 
-	if(!G.force_danger())
+	if(!grab.force_danger())
 		to_chat(user, SPAN_WARNING("You need a better grip to do that!"))
 		return TRUE
 

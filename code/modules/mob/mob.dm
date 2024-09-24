@@ -229,8 +229,8 @@
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()
-	for(var/obj/item/grab/G as anything in get_active_grabs())
-		. = max(., G.grab_slowdown())
+	for(var/obj/item/grab/grab as anything in get_active_grabs())
+		. = max(., grab.grab_slowdown())
 	. *= (0.8 ** size_strength_mod())
 	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN))
 
@@ -301,8 +301,8 @@
 #undef FULLY_BUCKLED
 
 /mob/proc/grab_restrained()
-	for (var/obj/item/grab/G in grabbed_by)
-		if(G.restrains())
+	for (var/obj/item/grab/grab as anything in grabbed_by)
+		if(grab.restrains())
 			return TRUE
 
 /mob/proc/restrained()
@@ -424,8 +424,8 @@
 			if(isobj(A.loc))
 				look_target = "inside \the [A.loc]"
 			if(A == src)
-				var/decl/pronouns/G = get_pronouns()
-				look_target = "at [G.self]"
+				var/decl/pronouns/pronouns = get_pronouns()
+				look_target = "at [pronouns.self]"
 			for(var/mob/M in viewers(4, src))
 				if(M == src)
 					continue
@@ -477,10 +477,10 @@
 		return L
 	if(!L)
 		L = list(src)
-	for(var/obj/item/grab/G in grabs)
-		if(G.affecting && !(G.affecting in L))
-			L += G.affecting
-			var/mob/living/affecting_mob = G.get_affecting_mob()
+	for(var/obj/item/grab/grab as anything in grabs)
+		if(grab.affecting && !(grab.affecting in L))
+			L += grab.affecting
+			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(istype(affecting_mob))
 				affecting_mob.ret_grab(L)
 	return L

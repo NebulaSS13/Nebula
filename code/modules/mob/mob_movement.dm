@@ -190,7 +190,7 @@
 		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || T.has_gravity())))
 			return T
 
-	var/obj/item/grab/G = locate() in src
+	var/obj/item/grab/grab = locate() in src
 	for(var/A in range(1, get_turf(src)))
 		if(istype(A,/atom/movable))
 			var/atom/movable/AM = A
@@ -203,7 +203,7 @@
 			if(AM.density || !AM.CanPass(src))
 				if(AM.anchored)
 					return AM
-				if(G && AM == G.affecting)
+				if(grab && AM == grab.affecting)
 					continue
 				. = AM
 

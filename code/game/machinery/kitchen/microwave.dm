@@ -49,6 +49,10 @@
 *   Item Adding
 ********************/
 
+/obj/machinery/microwave/grab_attack(obj/item/grab/grab, mob/user)
+	to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [grab.affecting] into \the [src]."))
+	return TRUE
+
 /obj/machinery/microwave/attackby(var/obj/item/O, var/mob/user)
 	if(broken > 0)
 		if(broken == 2 && IS_SCREWDRIVER(O)) // If it's broken and they're using a screwdriver
@@ -104,10 +108,6 @@
 		if (!O.reagents)
 			return 1
 		return // transfer is handled in afterattack
-	else if(istype(O,/obj/item/grab))
-		var/obj/item/grab/G = O
-		to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [G.affecting] in this [src]."))
-		return 1
 	else if(IS_WRENCH(O))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins [anchored ? "securing" : "unsecuring"] [src]."),

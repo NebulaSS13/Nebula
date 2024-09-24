@@ -348,10 +348,10 @@
 	if(user.loc != get_turf(src))
 		return
 	speak_incantation(user, "Fwe[pick("'","`")]sh mah erl nyag r'ya!")
-	var/decl/pronouns/G = user.get_pronouns()
+	var/decl/pronouns/pronouns = user.get_pronouns()
 
 	user.visible_message( \
-		SPAN_NOTICE("\The [user]'s eyes glow blue as [G.he] freeze[G.s] in place, absolutely motionless."), \
+		SPAN_NOTICE("\The [user]'s eyes glow blue as [pronouns.he] freeze[pronouns.s] in place, absolutely motionless."), \
 		SPAN_OCCULT("The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry..."), \
 		SPAN_NOTICE("You hear only complete silence for a moment."))
 
@@ -711,9 +711,9 @@
 	source.set_full(0)
 	speak_incantation(user, "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!")
 
-	var/decl/pronouns/G = target.get_pronouns()
+	var/decl/pronouns/pronouns = target.get_pronouns()
 	target.visible_message( \
-		SPAN_OCCULT("\The [target]'s eyes glow with a faint red as [G.he] stand[G.s] up, slowly starting to breathe again."), \
+		SPAN_OCCULT("\The [target]'s eyes glow with a faint red as [pronouns.he] stand[pronouns.s] up, slowly starting to breathe again."), \
 		SPAN_OCCULT("Life... I'm alive again..."), \
 		"You hear a flowing liquid.")
 
@@ -812,8 +812,8 @@
 	to_chat(user, SPAN_WARNING("In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood."))
 	for(var/mob/M in global.living_mob_list_)
 		if(iscultist(M))
-			var/decl/pronouns/G = user.get_pronouns()
-			to_chat(M, "You see a vision of \the [user] keeling over dead, his blood glowing blue as it escapes [G.his] body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted.")
+			var/decl/pronouns/pronouns = user.get_pronouns()
+			to_chat(M, "You see a vision of \the [user] keeling over dead, his blood glowing blue as it escapes [pronouns.his] body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted.")
 		else
 			to_chat(M, "You see a vision of [name] keeling over dead, his blood glowing blue as it escapes his body and dissipates into thin air; you hear an otherwordly scream and feel very weak for a moment.")
 	log_and_message_admins("mended reality with the greatest sacrifice", user)

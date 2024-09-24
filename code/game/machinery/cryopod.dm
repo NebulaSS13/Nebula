@@ -392,21 +392,16 @@
 		attempt_enter(dropping, user)
 		return TRUE
 
-/obj/machinery/cryopod/attackby(var/obj/item/G, var/mob/user)
-
-	if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
+/obj/machinery/cryopod/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(istype(victim) && istype(user))
 		if(occupant)
 			to_chat(user, SPAN_NOTICE("\The [src] is in use."))
-			return
-
-		if(!ismob(grab.affecting))
-			return
-
-		if(!check_occupant_allowed(grab.affecting))
-			return
-
-		attempt_enter(grab.affecting, user)
+			return TRUE
+		if(!check_occupant_allowed(victim))
+			return TRUE
+		attempt_enter(victim, user)
+		return TRUE
 	return ..()
 
 /obj/machinery/cryopod/verb/eject()

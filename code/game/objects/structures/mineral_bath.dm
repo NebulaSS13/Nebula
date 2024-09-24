@@ -17,13 +17,11 @@
 	venus.adjust_multi(/decl/material/gas/chlorine, MOLES_N2STANDARD, /decl/material/gas/hydrogen, MOLES_O2STANDARD)
 	return venus
 
-/obj/structure/mineral_bath/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/grab))
-		var/obj/item/grab/G = thing
-		if(enter_bath(G.affecting))
-			qdel(G)
-		return
-	. = ..()
+/obj/structure/mineral_bath/grab_attack(obj/item/grab/grab, mob/user)
+	if(enter_bath(grab.affecting))
+		qdel(grab)
+		return TRUE
+	return ..()
 
 /obj/structure/mineral_bath/proc/enter_bath(var/mob/living/patient, var/mob/user)
 

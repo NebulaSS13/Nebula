@@ -16,18 +16,15 @@
 		to_chat(src, SPAN_DANGER("You've lost an altar!"))
 	return ..()
 
-/obj/structure/deity/altar/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		if(G.force_danger())
-			var/mob/living/affecting_mob = G.get_affecting_mob()
-			if(istype(affecting_mob))
-				affecting_mob.dropInto(loc)
-				SET_STATUS_MAX(affecting_mob, STAT_WEAK, 1)
-				user.visible_message(SPAN_WARNING("\The [user] throws \the [affecting_mob] onto \the [src]!"))
-				qdel(G)
-				return
-	..()
+/obj/structure/deity/altar/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(grab.force_danger() && istype(victim))
+		victim.dropInto(loc)
+		SET_STATUS_MAX(victim, STAT_WEAK, 1)
+		user.visible_message(SPAN_WARNING("\The [user] throws \the [victim] onto \the [src]!"))
+		qdel(grab)
+		return TRUE
+	return ..()
 
 /obj/structure/deity/altar/Process()
 	if(!target || world.time < next_cycle)

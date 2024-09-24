@@ -576,8 +576,8 @@
 	return ..()
 
 /obj/item/attack_ghost(mob/user)
-	var/mob/observer/ghost/G = user
-	if(G.client?.holder || G.antagHUD)
+	var/mob/observer/ghost/pronouns = user
+	if(pronouns.client?.holder || pronouns.antagHUD)
 		storage?.show_to(user)
 
 /obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
@@ -762,9 +762,9 @@
 		return 0
 	if(!istype(attacker))
 		return 0
-	var/decl/pronouns/G = attacker.get_pronouns()
+	var/decl/pronouns/pronouns = attacker.get_pronouns()
 	attacker.apply_damage(force, atom_damage_type, attacker.get_active_held_item_slot(), used_weapon = src)
-	attacker.visible_message(SPAN_DANGER("\The [attacker] hurts [G.his] hand on \the [src]!"))
+	attacker.visible_message(SPAN_DANGER("\The [attacker] hurts [pronouns.his] hand on \the [src]!"))
 	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	playsound(target, hitsound, 50, 1, -1)
 	return 1

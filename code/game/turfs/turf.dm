@@ -219,6 +219,11 @@
 /turf/attack_robot(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
 
+/turf/grab_attack(obj/item/grab/grab, mob/user)
+	if (grab.affecting != user)
+		grab.affecting.DoMove(get_dir(grab.affecting.loc, src), user, TRUE)
+	return TRUE
+
 /turf/attackby(obj/item/W, mob/user)
 
 	if(is_floor())
@@ -270,12 +275,6 @@
 
 	if(istype(W, /obj/item) && storage && storage.use_to_pickup && storage.collection_mode)
 		storage.gather_all(src, user)
-		return TRUE
-
-	if(istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
-		if (G.affecting != G.assailant)
-			G.affecting.DoMove(get_dir(G.affecting.loc, src), user, TRUE)
 		return TRUE
 
 	if(IS_COIL(W) && try_build_cable(W, user))
@@ -686,8 +685,8 @@
 		AM.forceMove(above_wall)
 		if(isliving(AM))
 			var/mob/living/L = AM
-			for(var/obj/item/grab/G in L.get_active_grabs())
-				G.affecting.forceMove(above_wall)
+			for(var/obj/item/grab/grab as anything in L.get_active_grabs())
+				grab.affecting.forceMove(above_wall)
 	else
 		to_chat(AM, SPAN_WARNING("Something blocks the path."))
 	return TRUE

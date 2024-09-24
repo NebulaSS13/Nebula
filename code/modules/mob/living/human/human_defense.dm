@@ -101,8 +101,8 @@ meteor_act
 
 /mob/living/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 
-	for (var/obj/item/grab/G in grabbed_by)
-		if(G.resolve_item_attack(user, I, target_zone))
+	for (var/obj/item/grab/grab as anything in grabbed_by)
+		if(grab.resolve_item_attack(user, I, target_zone))
 			return null
 
 	if(user == src) // Attacking yourself can't miss

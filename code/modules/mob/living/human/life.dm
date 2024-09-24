@@ -666,8 +666,8 @@
 
 	if(rounded_shock_stage >= 30)
 		if(rounded_shock_stage == 30)
-			var/decl/pronouns/G = get_pronouns()
-			visible_message("<b>\The [src]</b> is having trouble keeping [G.his] eyes open.")
+			var/decl/pronouns/pronouns = get_pronouns()
+			visible_message("<b>\The [src]</b> is having trouble keeping [pronouns.his] eyes open.")
 		if(prob(30))
 			SET_STATUS_MAX(src, STAT_BLURRY, 2)
 			SET_STATUS_MAX(src, STAT_STUTTER, 5)

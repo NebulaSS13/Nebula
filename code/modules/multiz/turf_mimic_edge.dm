@@ -186,8 +186,8 @@
 	//Move grabbed things
 	if(isliving(AM))
 		var/mob/living/L = AM
-		for(var/obj/item/grab/G in L.get_active_grabs())
-			G.affecting.forceMove(dest)
+		for(var/obj/item/grab/grab as anything in L.get_active_grabs())
+			grab.affecting.forceMove(dest)
 
 ////////////////////////////////
 // Transition Edges

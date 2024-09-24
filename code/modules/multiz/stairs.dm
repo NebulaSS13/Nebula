@@ -30,8 +30,8 @@
 		A.forceMove(target)
 		if(isliving(A))
 			var/mob/living/L = A
-			for(var/obj/item/grab/G in L.get_active_grabs())
-				G.affecting.forceMove(target)
+			for(var/obj/item/grab/grab as anything in L.get_active_grabs())
+				grab.affecting.forceMove(target)
 		if(ishuman(A))
 			var/mob/living/human/H = A
 			if(H.has_footsteps())

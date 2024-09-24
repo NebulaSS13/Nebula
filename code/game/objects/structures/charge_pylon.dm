@@ -45,10 +45,10 @@
 		visible_message("<span class='danger'>\The [user] has been shocked by \the [src]!</span>")
 		user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
 
-/obj/structure/charge_pylon/attackby(var/obj/item/grab/G, mob/user)
-	if(!istype(G))
+/obj/structure/charge_pylon/attackby(var/obj/item/grab/grab, mob/user)
+	if(!istype(grab))
 		return
-	var/mob/M = G.get_affecting_mob()
+	var/mob/M = grab.get_affecting_mob()
 	if(M)
 		charge_user(M)
 

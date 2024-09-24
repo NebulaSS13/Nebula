@@ -268,13 +268,13 @@
 	return
 
 /mob/living/human/getHUDsource(hudtype)
-	var/obj/item/clothing/glasses/G = get_equipped_item(slot_glasses_str)
-	if(!istype(G))
+	var/obj/item/clothing/glasses/pronouns = get_equipped_item(slot_glasses_str)
+	if(!istype(pronouns))
 		return ..()
-	if(G.glasses_hud_type & hudtype)
-		return G
-	if(G.hud && (G.hud.glasses_hud_type & hudtype))
-		return G.hud
+	if(pronouns.glasses_hud_type & hudtype)
+		return pronouns
+	if(pronouns.hud && (pronouns.hud.glasses_hud_type & hudtype))
+		return pronouns.hud
 
 /mob/living/silicon/robot/getHUDsource(hudtype)
 	for(var/obj/item/borg/sight/sight in list(module_state_1, module_state_2, module_state_3))
@@ -298,8 +298,8 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	var/decl/pronouns/G = get_pronouns()
-	pose = sanitize(input(usr, "This is [src]. [G.He]...", "Pose", null)  as text)
+	var/decl/pronouns/pronouns = get_pronouns()
+	pose = sanitize(input(usr, "This is [src]. [pronouns.He]...", "Pose", null)  as text)
 
 /mob/living/human/verb/set_flavor()
 	set name = "Set Flavour Text"

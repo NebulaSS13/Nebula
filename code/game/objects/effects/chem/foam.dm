@@ -164,17 +164,21 @@
 		to_chat(user, "<span class='notice'>You hit the metal foam but bounce off it.</span>")
 	return TRUE
 
-/obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		G.affecting.forceMove(loc)
-		visible_message("<span class='warning'>[G.assailant] smashes [G.affecting] through the foamed metal wall.</span>")
-		qdel(I)
-		qdel(src)
-		return
 
+/obj/structure/foamedmetal/grab_attack(obj/item/grab/grab, mob/user)
+	grab.affecting.forceMove(loc)
+	visible_message(SPAN_DANGER("\The [user] smashes \the [grab.affecting] through the foamed metal wall!"))
+	qdel(grab)
+	physically_destroyed()
+	return TRUE
+
+/obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
 	if(prob(I.get_attack_force(user) * 20 - metal * 25))
-		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the foamed metal with \the [I].</span>")
-		qdel(src)
+		user.visible_message(
+			SPAN_WARNING("\The [user] smashes through the foamed metal."),
+			SPAN_NOTICE("You smash through the foamed metal with \the [I].")
+		)
+		physically_destroyed()
 	else
-		to_chat(user, "<span class='notice'>You hit the metal foam to no effect.</span>")
+		to_chat(user, SPAN_WARNING("You hit \the [src] to no effect."))
+	return TRUE

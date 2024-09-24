@@ -67,9 +67,9 @@
 			SPAN_NOTICE("You hear a rustling sound.")
 		)
 	else
-		var/decl/pronouns/G = buckled.get_pronouns()
+		var/decl/pronouns/pronouns = buckled.get_pronouns()
 		visible_message(
-			SPAN_NOTICE("\The [buckled] [G.is] bundled into \the [src] by \the [buckling]."),
+			SPAN_NOTICE("\The [buckled] [pronouns.is] bundled into \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You are bundled into \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You hear a rustling sound.")
 		)

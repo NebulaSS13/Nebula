@@ -81,12 +81,12 @@ var/global/list/all_conveyor_switches = list()
 			if(items_moved >= 10)
 				break
 
+/obj/machinery/conveyor/grab_attack(obj/item/grab/grab, mob/user)
+	step(grab.affecting, get_dir(grab.affecting.loc, src))
+	return TRUE
+
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		step(G.affecting, get_dir(G.affecting.loc, src))
-		return
 	if(IS_CROWBAR(I))
 		if(!(stat & BROKEN))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
@@ -94,8 +94,9 @@ var/global/list/all_conveyor_switches = list()
 			transfer_fingerprints_to(C)
 		to_chat(user, "<span class='notice'>You remove the conveyor belt.</span>")
 		qdel(src)
-		return
-	user.try_unequip(I, get_turf(src))
+	else
+		user.try_unequip(I, get_turf(src))
+	return TRUE
 
 // make the conveyor broken
 // also propagate inoperability to any connected conveyor with the same id_tag

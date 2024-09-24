@@ -63,10 +63,10 @@
 	if(!istype(T)) 	// We're inside a container or on null turf, either way stop processing effects
 		return
 
-	for(var/obj/item/grab/G in grabbed_by)
-		if(isliving(G.assailant))
-			check_triggers(/datum/artifact_trigger/proc/on_touch, G.assailant)
-			touched(G.assailant)
+	for(var/obj/item/grab/grab as anything in grabbed_by)
+		if(isliving(grab.assailant))
+			check_triggers(/datum/artifact_trigger/proc/on_touch, grab.assailant)
+			touched(grab.assailant)
 
 	var/datum/gas_mixture/enivonment = T.return_air()
 	if(enivonment?.return_pressure() >= SOUND_MINIMUM_PRESSURE)

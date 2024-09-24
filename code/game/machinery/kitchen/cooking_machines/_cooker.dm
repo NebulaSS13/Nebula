@@ -52,6 +52,19 @@
 		return SPAN_NOTICE("Wait for \the [src] to finish first!")
 	return ..()
 
+/obj/machinery/cooker/grab_attack(obj/item/grab/grab, mob/user)
+	// We are trying to cook a grabbed mob.
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(!istype(victim))
+		to_chat(user, SPAN_WARNING("You can't cook that."))
+		return TRUE
+	if(!can_cook_mobs)
+		to_chat(user, SPAN_WARNING("That's not going to fit."))
+		return TRUE
+	cook_mob(victim, user)
+	return	TRUE
+
+
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
 	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
@@ -64,21 +77,6 @@
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
 		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
-		return
-
-	// We are trying to cook a grabbed mob.
-	var/obj/item/grab/G = I
-	if(istype(G))
-
-		if(!can_cook_mobs)
-			to_chat(user, "<span class='warning'>That's not going to fit.</span>")
-			return
-
-		if(!isliving(G.affecting))
-			to_chat(user, "<span class='warning'>You can't cook that.</span>")
-			return
-
-		cook_mob(G.affecting, user)
 		return
 
 	// We're trying to cook something else. Check if it's valid.

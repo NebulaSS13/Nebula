@@ -15,8 +15,8 @@
 	grab_icon_state     = "kill1"
 	break_chance_table  = list(5, 20, 40, 80, 100)
 
-/decl/grab/normal/kill/process_effect(var/obj/item/grab/G)
-	var/mob/living/affecting = G.get_affecting_mob()
+/decl/grab/normal/kill/process_effect(var/obj/item/grab/grab)
+	var/mob/living/affecting = grab.get_affecting_mob()
 	if(!istype(affecting))
 		return
 	affecting.drop_held_items()

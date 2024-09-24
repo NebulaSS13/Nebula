@@ -87,8 +87,8 @@ Robots and antags can instruct.
 		to_chat(src, SPAN_WARNING("\The [target] is in no state to be taught right now!"))
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		var/decl/pronouns/G = target.get_pronouns(ignore_coverings = TRUE)
-		to_chat(src, SPAN_WARNING("\The [target] [G.is] exhausted from all the training [G.he] recieved."))
+		var/decl/pronouns/pronouns = target.get_pronouns(ignore_coverings = TRUE)
+		to_chat(src, SPAN_WARNING("\The [target] [pronouns.is] exhausted from all the training [pronouns.he] recieved."))
 		return
 
 	if(!get_options)

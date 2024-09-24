@@ -40,9 +40,9 @@
 
 		return ..()
 
-	var/decl/pronouns/G = get_pronouns()
+	var/decl/pronouns/pronouns = get_pronouns()
 	visible_message(
-		SPAN_NOTICE("\The [src] examines [G.self]."),
+		SPAN_NOTICE("\The [src] examines [pronouns.self]."),
 		SPAN_NOTICE("You check yourself for injuries.")
 	)
 
@@ -191,8 +191,8 @@
 			if(!src.current_posture.prone)
 				attack_message = "\The [H] attempted to strike \the [src], but missed!"
 			else
-				var/decl/pronouns/G = get_pronouns()
-				attack_message = "\The [H] attempted to strike \the [src], but [G.he] rolled out of the way!"
+				var/decl/pronouns/pronouns = get_pronouns()
+				attack_message = "\The [H] attempted to strike \the [src], but [pronouns.he] rolled out of the way!"
 				src.set_dir(pick(global.cardinal))
 			miss_type = 1
 
@@ -229,8 +229,8 @@
 
 	remove_cloaking_source(species)
 	if(user.a_intent != I_GRAB)
-		for (var/obj/item/grab/G in user.get_active_grabs())
-			if(G.assailant == user && G.affecting == src && G.resolve_openhand_attack())
+		for (var/obj/item/grab/grab as anything in user.get_active_grabs())
+			if(grab.assailant == user && grab.affecting == src && grab.resolve_openhand_attack())
 				return TRUE
 	// Should this all be in Touch()?
 		if(ishuman(user) && user != src && check_shields(0, null, user, user.get_target_zone(), user))
@@ -340,7 +340,7 @@
 //Breaks all grips and pulls that the mob currently has.
 /mob/living/human/proc/break_all_grabs(mob/living/user)
 	. = FALSE
-	for(var/obj/item/grab/grab in get_active_grabs())
+	for(var/obj/item/grab/grab as anything in get_active_grabs())
 		if(grab.affecting)
 			visible_message(SPAN_DANGER("\The [user] has broken \the [src]'s grip on [grab.affecting]!"))
 			. = TRUE
@@ -365,9 +365,9 @@
 		return 0
 
 	if(user == src)
-		var/decl/pronouns/G = user.get_pronouns()
+		var/decl/pronouns/pronouns = user.get_pronouns()
 		user.visible_message( \
-			SPAN_NOTICE("\The [user] starts applying pressure to [G.his] [organ.name]!"), \
+			SPAN_NOTICE("\The [user] starts applying pressure to [pronouns.his] [organ.name]!"), \
 			SPAN_NOTICE("You start applying pressure to your [organ.name]!"))
 	else
 		user.visible_message( \
@@ -382,9 +382,9 @@
 		organ.applied_pressure = null
 
 		if(user == src)
-			var/decl/pronouns/G = user.get_pronouns()
+			var/decl/pronouns/pronouns = user.get_pronouns()
 			user.visible_message( \
-				SPAN_NOTICE("\The [user] stops applying pressure to [G.his] [organ.name]!"), \
+				SPAN_NOTICE("\The [user] stops applying pressure to [pronouns.his] [organ.name]!"), \
 				SPAN_NOTICE("You stop applying pressure to your [organ.name]!"))
 		else
 			user.visible_message( \

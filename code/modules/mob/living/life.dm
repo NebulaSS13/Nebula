@@ -31,8 +31,8 @@
 			. = handle_living_non_stasis_processes()
 		aura_check(AURA_TYPE_LIFE)
 
-	for(var/obj/item/grab/G in get_active_grabs())
-		G.Process()
+	for(var/obj/item/grab/grab as anything in get_active_grabs())
+		grab.Process()
 
 	//Check if we're on fire
 	handle_fire()
@@ -76,8 +76,8 @@
 		if(!E)
 			continue
 		if(E.is_robotic())
-			var/decl/pronouns/G = get_pronouns()
-			visible_message("<B>\The [src]</B> drops what [G.he] [G.is] holding, [G.his] [E.name] malfunctioning!")
+			var/decl/pronouns/pronouns = get_pronouns()
+			visible_message("<B>\The [src]</B> drops what [pronouns.he] [pronouns.is] holding, [pronouns.his] [E.name] malfunctioning!")
 			spark_at(src, 5, holder=src)
 			continue
 

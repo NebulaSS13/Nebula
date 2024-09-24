@@ -144,9 +144,9 @@
 /obj/item/energy_blade/attack_self(mob/user)
 	if(active)
 		if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
-			var/decl/pronouns/G = user.get_pronouns()
+			var/decl/pronouns/pronouns = user.get_pronouns()
 			user.visible_message( \
-				SPAN_DANGER("\The [user] accidentally cuts [G.self] with \the [src]."), \
+				SPAN_DANGER("\The [user] accidentally cuts [pronouns.self] with \the [src]."), \
 				SPAN_DANGER("You accidentally cut yourself with \the [src]."))
 			if(isliving(user))
 				var/mob/living/M = user

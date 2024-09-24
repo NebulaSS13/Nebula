@@ -51,9 +51,9 @@
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/item/grab/G in grabbed_by)
+	for(var/obj/item/grab/grab as anything in grabbed_by)
 		resisting++
-		G.handle_resist()
+		grab.handle_resist()
 	if(resisting)
 		visible_message("<span class='danger'>[src] resists!</span>")
 

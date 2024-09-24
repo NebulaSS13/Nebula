@@ -208,12 +208,12 @@
 		if(P)
 			var/pew_loc = pick(BP_L_FOOT, BP_R_FOOT)
 			if(process_projectile(P, user, user, pew_loc))
-				var/decl/pronouns/G = user.get_pronouns()
+				var/decl/pronouns/pronouns = user.get_pronouns()
 				handle_post_fire(user, user)
 				var/obj/item/affecting = GET_EXTERNAL_ORGAN(user, pew_loc)
 				pew_loc = affecting ? "\the [affecting]" : "the foot"
 				user.visible_message(
-					SPAN_DANGER("\The [user] shoots [G.self] in [pew_loc] with \the [src]!"),
+					SPAN_DANGER("\The [user] shoots [pronouns.self] in [pew_loc] with \the [src]!"),
 					SPAN_DANGER("You shoot yourself in [pew_loc] with \the [src]!"))
 				M.try_unequip(src)
 		else
@@ -453,8 +453,8 @@
 		var/mob/living/L = target
 		if(L.incapacitated())
 			max_mult = 1.2
-		for(var/obj/item/grab/G in L.grabbed_by)
-			max_mult = max(max_mult, G.point_blank_mult())
+		for(var/obj/item/grab/grab as anything in L.grabbed_by)
+			max_mult = max(max_mult, grab.point_blank_mult())
 	P.damage *= max_mult
 
 /obj/item/gun/proc/process_accuracy(obj/projectile, atom/movable/firer, atom/target, var/burst, var/held_twohanded)

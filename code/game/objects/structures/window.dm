@@ -311,30 +311,30 @@
 		for(var/obj/item/thing in .)
 			thing.set_color(paint_color)
 
-/obj/structure/window/grab_attack(var/obj/item/grab/G)
-	if (G.assailant.a_intent != I_HURT)
+/obj/structure/window/grab_attack(obj/item/grab/grab, mob/user)
+	if (user.a_intent != I_HURT)
 		return TRUE
-	if (!G.force_danger())
-		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
+	if (!grab.force_danger())
+		to_chat(user, SPAN_DANGER("You need a better grip to do that!"))
 		return TRUE
-	var/mob/living/affecting_mob = G.get_affecting_mob()
+	var/mob/living/affecting_mob = grab.get_affecting_mob()
 	if(!istype(affecting_mob))
-		attackby(G.affecting, G.assailant)
+		attackby(grab.affecting, user)
 		return TRUE
 	var/def_zone = ran_zone(BP_HEAD, 20, affecting_mob)
-	if(G.damage_stage() < 2)
-		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
+	if(grab.damage_stage() < 2)
+		grab.affecting.visible_message(SPAN_DANGER("\The [user] bashes \the [grab.affecting] against \the [src]!"))
 		if(prob(50))
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 2)
 		affecting_mob.apply_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
-		qdel(G)
+		qdel(grab)
 	else
-		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
+		grab.affecting.visible_message(SPAN_DANGER("\The [user] crushes \the [grab.affecting] against \the [src]!"))
 		SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 		affecting_mob.apply_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
-		qdel(G)
+		qdel(grab)
 	return TRUE
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)

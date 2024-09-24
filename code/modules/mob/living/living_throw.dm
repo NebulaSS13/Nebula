@@ -10,8 +10,8 @@
 	var/place_item = a_intent != I_HURT && Adjacent(target)
 
 	if(istype(item, /obj/item/grab))
-		var/obj/item/grab/G = item
-		item = G.throw_held()
+		var/obj/item/grab/grab = item
+		item = grab.throw_held()
 		/// throw the person instead of the grab
 		if(ismob(item))
 			var/mob/mob = item
@@ -22,7 +22,7 @@
 				var/start_T_descriptor = "<font color='#6b5d00'>[start_T] \[[start_T.x],[start_T.y],[start_T.z]\] ([start_T.loc])</font>"
 				var/end_T_descriptor = "<font color='#6b4400'>[start_T] \[[end_T.x],[end_T.y],[end_T.z]\] ([end_T.loc])</font>"
 				admin_attack_log(usr, mob, "Threw the victim from [start_T_descriptor] to [end_T_descriptor].", "Was from [start_T_descriptor] to [end_T_descriptor].", "threw, from [start_T_descriptor] to [end_T_descriptor], ")
-		drop_from_inventory(G)
+		drop_from_inventory(grab)
 
 	// Hand items to a nearby target, or place them on the turf.
 	if(place_item && !QDELETED(item) && !QDELETED(target))

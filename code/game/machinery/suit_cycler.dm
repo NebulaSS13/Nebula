@@ -187,30 +187,26 @@
 		return TRUE
 	return FALSE
 
+/obj/machinery/suit_cycler/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(istype(victim) && try_move_inside(victim, user))
+		qdel(grab)
+		updateUsrDialog()
+		return TRUE
+	return ..()
+
 /obj/machinery/suit_cycler/attackby(obj/item/I, mob/user)
 
-	if(electrified != 0)
-		if(shock(user, 100))
-			return
+	if(electrified != 0 && shock(user, 100))
+		return TRUE
 
 	//Hacking init.
 	if(IS_MULTITOOL(I) || IS_WIRECUTTER(I))
 		if(panel_open)
 			physical_attack_hand(user)
-		return
-	//Other interface stuff.
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
+		return TRUE
 
-		if(!(ismob(G.affecting)))
-			return
-
-		if(try_move_inside(G.affecting, user))
-			qdel(G)
-			updateUsrDialog()
-			return
-
-	else if(istype(I, /obj/item/clothing/shoes/magboots))
+	if(istype(I, /obj/item/clothing/shoes/magboots))
 		if(locked)
 			to_chat(user, SPAN_WARNING("The suit cycler is locked."))
 			return
@@ -223,41 +219,41 @@
 		set_boots(I)
 		update_icon()
 		updateUsrDialog()
+		return TRUE
 
-	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
+	if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
 		if(locked)
 			to_chat(user, SPAN_WARNING("The suit cycler is locked."))
-			return
+			return TRUE
 
 		if(helmet)
 			to_chat(user, SPAN_WARNING("The cycler already contains a helmet."))
-			return
-		if(!user.try_unequip(I, src))
-			return
-		to_chat(user, "You fit \the [I] into the suit cycler.")
-		set_helmet(I)
-		update_icon()
-		updateUsrDialog()
-		return
+			return TRUE
 
-	else if(istype(I,/obj/item/clothing/suit/space/void))
+		if(user.try_unequip(I, src))
+			to_chat(user, "You fit \the [I] into the suit cycler.")
+			set_helmet(I)
+			update_icon()
+			updateUsrDialog()
+		return TRUE
+
+	if(istype(I,/obj/item/clothing/suit/space/void))
 
 		if(locked)
 			to_chat(user, SPAN_WARNING("The suit cycler is locked."))
-			return
+			return TRUE
 
 		if(suit)
 			to_chat(user, SPAN_WARNING("The cycler already contains a voidsuit."))
-			return
+			return TRUE
 
-		if(!user.try_unequip(I, src))
-			return
-		to_chat(user, "You fit \the [I] into the suit cycler.")
-		set_suit(I)
-		update_icon()
-		updateUsrDialog()
-		return
+		if(user.try_unequip(I, src))
+			to_chat(user, "You fit \the [I] into the suit cycler.")
+			set_suit(I)
+			update_icon()
+			updateUsrDialog()
+		return TRUE
 
 	return ..()
 

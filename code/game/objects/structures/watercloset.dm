@@ -148,6 +148,29 @@ var/global/list/hygiene_props = list()
 	..()
 	icon_state = "toilet[open][cistern]"
 
+/obj/structure/hygiene/toilet/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(istype(victim))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		if(!victim.loc == get_turf(src))
+			to_chat(user, SPAN_WARNING("\The [victim] needs to be on the toilet."))
+			return TRUE
+		if(open && !swirlie)
+			user.visible_message(SPAN_DANGER("\The [user] starts jamming \the [victim]'s face into \the [src]!"))
+			swirlie = victim
+			if(do_after(user, 30, src))
+				user.visible_message(SPAN_DANGER("\The [user] gives [victim.name] a swirlie!"))
+				victim.take_damage(5, OXY)
+			swirlie = null
+		else
+			user.visible_message(
+			SPAN_DANGER("\The [user] slams \the [victim] into \the [src]!"),
+			SPAN_NOTICE("You slam \the [victim] into \the [src]!"))
+			victim.take_damage(8)
+			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
+		return TRUE
+	return ..()
+
 /obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/user)
 	if(IS_CROWBAR(I))
 		to_chat(user, SPAN_NOTICE("You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]."))
@@ -159,29 +182,6 @@ var/global/list/hygiene_props = list()
 				"You hear grinding porcelain.")
 			cistern = !cistern
 			update_icon()
-		return
-
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		var/mob/living/GM = G.get_affecting_mob()
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(GM)
-			if(!GM.loc == get_turf(src))
-				to_chat(user, SPAN_WARNING("\The [GM] needs to be on the toilet."))
-				return
-			if(open && !swirlie)
-				user.visible_message(SPAN_DANGER("\The [user] starts jamming \the [GM]'s face into \the [src]!"))
-				swirlie = GM
-				if(do_after(user, 30, src))
-					user.visible_message(SPAN_DANGER("\The [user] gives [GM.name] a swirlie!"))
-					GM.take_damage(5, OXY)
-				swirlie = null
-			else
-				user.visible_message(
-				SPAN_DANGER("\The [user] slams \the [GM] into \the [src]!"),
-				SPAN_NOTICE("You slam \the [GM] into \the [src]!"))
-				GM.take_damage(8)
-				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 		return
 
 	if(cistern && !isrobot(user)) //STOP PUTTING YOUR MODULES IN THE TOILET.
@@ -209,17 +209,16 @@ var/global/list/hygiene_props = list()
 	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
-/obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		var/mob/living/GM = G.get_affecting_mob()
-		if(GM)
-			if(!GM.loc == get_turf(src))
-				to_chat(user, SPAN_WARNING("\The [GM] needs to be on \the [src]."))
-				return
-			user.visible_message(SPAN_DANGER("\The [user] slams \the [GM] into \the [src]!"))
-			GM.take_damage(8)
-	. = ..()
+/obj/structure/hygiene/urinal/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(istype(victim))
+		if(!victim.loc == get_turf(src))
+			to_chat(user, SPAN_WARNING("\The [victim] needs to be on \the [src]."))
+		else
+			user.visible_message(SPAN_DANGER("\The [user] slams \the [victim] into \the [src]!"))
+			victim.take_damage(8)
+		return TRUE
+	return ..()
 
 /obj/structure/hygiene/shower
 	name = "shower"

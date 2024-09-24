@@ -244,6 +244,10 @@ var/global/list/closets = list()
 		..()
 		take_damage(proj_damage, Proj.atom_damage_type)
 
+// Override this so the logic in attackby() can run.
+/obj/structure/closet/grab_attack(obj/item/grab/grab, mob/user)
+	return FALSE
+
 /obj/structure/closet/attackby(obj/item/used_item, mob/user)
 
 	if(user.a_intent == I_HURT && used_item.get_attack_force(user))
@@ -257,8 +261,8 @@ var/global/list/closets = list()
 	if(opened)
 		if(can_wield)
 			if(istype(used_item, /obj/item/grab))
-				var/obj/item/grab/G = used_item
-				receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
+				var/obj/item/grab/grab = used_item
+				receive_mouse_drop(grab.affecting, user)      //act like they were dragged onto the closet
 				return TRUE
 			if(IS_WELDER(used_item))
 				var/obj/item/weldingtool/WT = used_item

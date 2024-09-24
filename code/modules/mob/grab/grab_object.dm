@@ -59,19 +59,19 @@
 		events_repository.register(/decl/observ/zone_selected, assailant.zone_sel, src, PROC_REF(on_target_change))
 
 	var/obj/item/organ/O = get_targeted_organ()
-	var/decl/pronouns/G = assailant.get_pronouns()
+	var/decl/pronouns/pronouns = assailant.get_pronouns()
 	if(affecting_mob && O) // may have grabbed a buckled mob, so may be grabbing their holder
 		SetName("[name] (\the [affecting_mob]'s [O.name])")
 		events_repository.register(/decl/observ/dismembered, affecting_mob, src, PROC_REF(on_organ_loss))
 		if(affecting_mob != assailant)
 			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting_mob]'s [O.name]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [G.his] [O.name]!"))
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [pronouns.his] [O.name]!"))
 	else
 		if(affecting != assailant)
 			visible_message(SPAN_DANGER("\The [assailant] has grabbed \the [affecting]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [G.self]!"))
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [pronouns.self]!"))
 
 	if(affecting_mob && assailant?.a_intent == I_HURT)
 		upgrade(TRUE)
@@ -117,7 +117,7 @@
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
 	if(QDELETED(src) || !current_grab || !assailant)
 		return TRUE
-	if(A.grab_attack(src) || current_grab.hit_with_grab(src, A, get_dist(user, A) <= 1))
+	if(A.grab_attack(src, user) || current_grab.hit_with_grab(src, A, get_dist(user, A) <= 1))
 		return TRUE
 	. = ..()
 

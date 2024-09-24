@@ -106,9 +106,9 @@
 			if(VITALS_SENSOR_TRACKING)
 				user_message = "Your vitals sensor will now report your vital lifesigns as well as your coordinate position."
 		if(user_message)
-			var/decl/pronouns/G = user.get_pronouns()
+			var/decl/pronouns/pronouns = user.get_pronouns()
 			user.visible_message( \
-				SPAN_NOTICE("\The [user] adjusts [G.his] vitals sensor."),
+				SPAN_NOTICE("\The [user] adjusts [pronouns.his] vitals sensor."),
 				SPAN_NOTICE(user_message)
 			)
 		return

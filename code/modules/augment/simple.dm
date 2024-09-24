@@ -44,9 +44,9 @@
 		slot = BP_R_HAND
 	if(slot && owner.equip_to_slot_if_possible(holding, slot))
 		var/obj/item/organ/external/limb = owner?.get_organ(parent_organ)
-		var/decl/pronouns/G = owner.get_pronouns()
+		var/decl/pronouns/pronouns = owner.get_pronouns()
 		owner.visible_message(
-			SPAN_NOTICE("\The [owner] extends [G.his] [holding.name] from [G.his] [limb ? limb.name : "limb"]."),
+			SPAN_NOTICE("\The [owner] extends [pronouns.his] [holding.name] from [pronouns.his] [limb ? limb.name : "limb"]."),
 			SPAN_NOTICE("You extend your [holding.name] from your [limb ? limb.name : "limb"].")
 		)
 
@@ -62,10 +62,10 @@
 			retracting = FALSE
 			return
 		var/obj/item/organ/external/limb = owner?.get_organ(parent_organ)
-		var/decl/pronouns/G = owner.get_pronouns()
+		var/decl/pronouns/pronouns = owner.get_pronouns()
 		owner.visible_message(
-			SPAN_NOTICE("\The [owner] retracts [G.his] [holding.name] into [G.his] [limb ? limb.name : "limb"]."),
-			SPAN_NOTICE("You retract your [holding.name] into [G.his] [limb ? limb.name : "limb"].")
+			SPAN_NOTICE("\The [owner] retracts [pronouns.his] [holding.name] into [pronouns.his] [limb ? limb.name : "limb"]."),
+			SPAN_NOTICE("You retract your [holding.name] into [pronouns.his] [limb ? limb.name : "limb"].")
 		)
 	else if(ismob(holding.loc))
 		var/mob/M = holding.loc

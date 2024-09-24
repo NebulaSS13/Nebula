@@ -5,9 +5,9 @@
 	var/use_He_is =  "You are"
 	var/use_He_has = "You have"
 	if(istype(machine) || viewer != src)
-		var/decl/pronouns/G = get_pronouns(ignore_coverings = TRUE)
-		use_He_is =  "[G.He] [G.is]"
-		use_He_has = "[G.He] [G.has]"
+		var/decl/pronouns/pronouns = get_pronouns(ignore_coverings = TRUE)
+		use_He_is =  "[pronouns.He] [pronouns.is]"
+		use_He_has = "[pronouns.He] [pronouns.has]"
 
 	var/list/dat = list()
 

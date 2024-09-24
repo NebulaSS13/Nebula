@@ -74,6 +74,21 @@ var/global/list/diversion_junctions = list()
 		return SPAN_NOTICE("Eject the items first!")
 	return ..()
 
+/obj/machinery/disposal/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/living/victim = grab.get_affecting_mob()
+	if(istype(victim))
+		user.visible_message(SPAN_DANGER("\The [user] starts putting \the [victim] into the disposal."))
+		if(do_after(user, 2 SECONDS, src))
+			if (victim.client)
+				victim.client.perspective = EYE_PERSPECTIVE
+				victim.client.eye = src
+			victim.forceMove(src)
+			user.visible_message(SPAN_DANGER("\The [victim] has been placed in \the [src] by \the [user]."))
+			qdel(grab)
+			admin_attack_log(user, victim, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
+		return TRUE
+	return ..()
+
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
 	if((. = ..()))
@@ -89,21 +104,6 @@ var/global/list/diversion_junctions = list()
 			I.storage.finish_bulk_removal()
 			update_icon()
 			return
-
-	var/obj/item/grab/G = I
-	if(istype(G))	// handle grabbed mob
-		var/mob/GM = G.get_affecting_mob()
-		if(GM)
-			usr.visible_message(SPAN_DANGER("\The [usr] starts putting [GM.name] into the disposal."))
-			if(do_after(usr, 20, src))
-				if (GM.client)
-					GM.client.perspective = EYE_PERSPECTIVE
-					GM.client.eye = src
-				GM.forceMove(src)
-				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in \the [src] by \the [user]."))
-				qdel(G)
-				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
-		return
 
 	if(!user.try_unequip(I, src) || QDELETED(I))
 		return

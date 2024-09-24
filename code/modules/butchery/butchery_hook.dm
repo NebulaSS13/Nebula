@@ -53,10 +53,10 @@
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [initial(name)] would be pointless."))
 	return TRUE
 
-/obj/structure/meat_hook/grab_attack(var/obj/item/grab/G)
-	var/mob/victim = G.get_affecting_mob()
+/obj/structure/meat_hook/grab_attack(obj/item/grab/grab, mob/user)
+	var/mob/victim = grab.get_affecting_mob()
 	if(istype(victim) && isturf(victim.loc))
-		try_spike(victim, G.assailant)
+		try_spike(victim, user)
 		return TRUE
 	return ..()
 

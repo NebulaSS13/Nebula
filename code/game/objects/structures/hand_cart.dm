@@ -35,11 +35,11 @@
 		carrying.forceMove(get_turf(src))
 		carrying = null
 
-/obj/structure/hand_cart/grab_attack(var/obj/item/grab/G)
-	if(G.affecting && istype(G.affecting, /obj/))
-		to_chat(G.assailant, SPAN_NOTICE("You start loading \the [G.affecting] onto \the [src]."))
-		if(load_item(G.affecting, G.assailant))
-			qdel(G)
+/obj/structure/hand_cart/grab_attack(obj/item/grab/grab, mob/user)
+	if(isobj(grab.affecting))
+		to_chat(user, SPAN_NOTICE("You start loading \the [grab.affecting] onto \the [src]."))
+		if(load_item(grab.affecting, user))
+			qdel(grab)
 		return TRUE
 	. = ..()
 

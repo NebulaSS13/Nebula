@@ -151,8 +151,8 @@
 var/global/list/vox_current_pressure_toggle = list()
 
 /decl/species/vox/disfigure_msg(var/mob/living/human/H)
-	var/decl/pronouns/G = H.get_pronouns()
-	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped beyond recognition!\n")
+	var/decl/pronouns/pronouns = H.get_pronouns()
+	return SPAN_DANGER("[pronouns.His] beak-segments are cracked and chipped beyond recognition!\n")
 
 /decl/species/vox/skills_from_age(age)
 	. = 8
@@ -191,11 +191,11 @@ var/global/list/vox_current_pressure_toggle = list()
 		to_chat(src, SPAN_WARNING("You are in no state to do that."))
 		return
 
-	var/decl/pronouns/G = get_pronouns()
-	visible_message(SPAN_NOTICE("\The [src] begins flexing and realigning [G.his] scaling..."))
+	var/decl/pronouns/pronouns = get_pronouns()
+	visible_message(SPAN_NOTICE("\The [src] begins flexing and realigning [pronouns.his] scaling..."))
 	if(!do_after(src, 2 SECONDS, src, FALSE))
 		visible_message(
-			SPAN_NOTICE("\The [src] ceases adjusting [G.his] scaling."),
+			SPAN_NOTICE("\The [src] ceases adjusting [pronouns.his] scaling."),
 			self_message = SPAN_WARNING("You must remain still to seal or unseal your scaling."))
 		return
 

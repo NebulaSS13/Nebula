@@ -57,12 +57,12 @@
 		to_chat(user, SPAN_WARNING("You have no blade with which to divide."))
 		return
 
-	var/decl/pronouns/G = user.get_pronouns()
-	user.visible_message(SPAN_DANGER("\The [user] raises [G.his] [blade.name] to shoulder level!"))
+	var/decl/pronouns/pronouns = user.get_pronouns()
+	user.visible_message(SPAN_DANGER("\The [user] raises [pronouns.his] [blade.name] to shoulder level!"))
 	playsound(user.loc, 'sound/effects/sanctionedaction_prep.ogg', 100, 1)
 
 	if(do_after(user, 1 SECOND, progress = 0, same_direction = 1))
-		user.visible_message(SPAN_DANGER("\The [user] swings [G.his] [blade.name] in a blazing arc!"))
+		user.visible_message(SPAN_DANGER("\The [user] swings [pronouns.his] [blade.name] in a blazing arc!"))
 		playsound(user.loc, 'sound/effects/sanctionedaction_cut.ogg', 100, 1)
 		var/obj/item/projectile/sanctionedaction/cut = new(user.loc)
 		cut.launch(get_edge_target_turf(get_turf(user.loc), user.dir), user.get_target_zone())

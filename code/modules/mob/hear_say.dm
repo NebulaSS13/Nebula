@@ -59,8 +59,8 @@
 			if(speaker == src)
 				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
 			else if(!is_blind())
-				var/decl/pronouns/G = speaker.get_pronouns()
-				to_chat(src, "<span class='name'>\The [speaker_name]</span> talks but you cannot hear [G.him].")
+				var/decl/pronouns/pronouns = speaker.get_pronouns()
+				to_chat(src, "<span class='name'>\The [speaker_name]</span> talks but you cannot hear [pronouns.him].")
 	else
 		if (language)
 			var/nverb = verb

@@ -119,8 +119,8 @@
 		vision = GET_INTERNAL_ORGAN(target, vision_organ_tag)
 		if(!vision)
 			vision = root_bodytype.has_organ[vision_organ_tag]
-			var/decl/pronouns/G = target.get_pronouns()
-			to_chat(user, SPAN_WARNING("\The [target] is missing [G.his] [initial(vision.name)]!"))
+			var/decl/pronouns/pronouns = target.get_pronouns()
+			to_chat(user, SPAN_WARNING("\The [target] is missing [pronouns.his] [initial(vision.name)]!"))
 			return TRUE
 
 		user.visible_message(
