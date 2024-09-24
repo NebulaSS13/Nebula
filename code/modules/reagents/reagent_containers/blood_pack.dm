@@ -80,10 +80,10 @@
 
 /obj/item/chems/ivbag/blood/proc/get_initial_blood_data()
 	return list(
-		"donor" = null,
-		"blood_DNA" = null,
-		"blood_type" = label_text,
-		"trace_chem" = null
+		DATA_BLOOD_DONOR      = null,
+		DATA_BLOOD_DNA        = null,
+		DATA_BLOOD_TYPE       = label_text,
+		DATA_BLOOD_TRACE_CHEM = null
 	)
 
 /obj/item/chems/ivbag/blood/populate_reagents()

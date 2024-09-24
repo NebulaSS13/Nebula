@@ -41,7 +41,7 @@
 		if(REAGENT_VOLUME(S.reagents, /decl/material/liquid/blood))
 			var/sample = REAGENT_DATA(S.reagents, /decl/material/liquid/blood)
 			if(islist(sample))
-				var/weakref/R = sample["donor"]
+				var/weakref/R = sample[DATA_BLOOD_DONOR]
 				var/mob/living/human/H = R.resolve()
 				if(H && istype(H) && H.species)
 					loaded_dna = H.get_mob_snapshot(check_dna = TRUE)

@@ -78,7 +78,7 @@
 	return list(
 		DATA_TASTE            = list("carrot" = 2, "corn" = 2, "eggplant" = 2, "potato" = 2),
 		DATA_INGREDIENT_LIST  = list("carrot" = 1, "corn" = 1, "eggplant" = 1, "potato" = 1),
-		DATA_INGREDIENT_FLAGS = INGREDIENT_FLAG_VEGETABLE,
+		DATA_ALLERGENS = ALLERGEN_VEGETABLE,
 		DATA_MASK_NAME        = "vegetable soup",
 		DATA_MASK_COLOR       = "#afc4b5"
 	)
@@ -87,7 +87,7 @@
 	. = list(
 		DATA_TASTE            = list("whitebeet" = 1, "cabbage" = 1),
 		DATA_INGREDIENT_LIST  = list("whitebeet" = 1, "cabbage" = 1),
-		DATA_INGREDIENT_FLAGS = INGREDIENT_FLAG_VEGETABLE,
+		DATA_ALLERGENS = ALLERGEN_VEGETABLE,
 		DATA_MASK_NAME        = pick("borsch","bortsch","borstch","borsh","borshch","borscht"),
 		DATA_MASK_COLOR       = "#fac9ff"
 	)
@@ -96,7 +96,7 @@
 	return list(
 		DATA_TASTE            = list("tomato" = 1),
 		DATA_INGREDIENT_LIST  = list("tomato" = 1),
-		DATA_INGREDIENT_FLAGS = INGREDIENT_FLAG_VEGETABLE,
+		DATA_ALLERGENS = ALLERGEN_VEGETABLE,
 		DATA_MASK_COLOR       = "#ff0000"
 	)
 
@@ -104,7 +104,7 @@
 	return list(
 		DATA_TASTE            = list("creamy mushroom" = 1),
 		DATA_INGREDIENT_LIST  = list("mushroom" = 1, "milk" = 1),
-		DATA_INGREDIENT_FLAGS = (INGREDIENT_FLAG_VEGETABLE | INGREDIENT_FLAG_DAIRY),
+		DATA_ALLERGENS = (ALLERGEN_VEGETABLE | ALLERGEN_DAIRY),
 		DATA_MASK_NAME        = "mushroom soup",
 		DATA_MASK_COLOR       = "#e386bf"
 	)
@@ -113,7 +113,7 @@
 	return list(
 		DATA_TASTE            = list("iron" = 1, "copper" = 1),
 		DATA_INGREDIENT_LIST  = list("blood" = 1),
-		DATA_INGREDIENT_FLAGS = INGREDIENT_FLAG_MEAT,
+		DATA_ALLERGENS = ALLERGEN_MEAT,
 		DATA_MASK_NAME        = "tomato soup",
 		DATA_MASK_COLOR       = "#ff0000"
 	)
@@ -122,7 +122,7 @@
 	return list(
 		DATA_TASTE            = list("sharp acid" = 1, "nettles" = 1, "potato chunks" = 1),
 		DATA_INGREDIENT_LIST  = list("nettle" = 1, "potato" = 1),
-		DATA_INGREDIENT_FLAGS = INGREDIENT_FLAG_VEGETABLE,
+		DATA_ALLERGENS = ALLERGEN_VEGETABLE,
 		DATA_MASK_COLOR       = "#afc4b5"
 	)
 
@@ -130,7 +130,7 @@
 	return list(
 		DATA_TASTE            = list("savoury meatballs" = 2, "cooked carrot" = 1, "cooked potato" = 1),
 		DATA_INGREDIENT_LIST  = list("meatball" = 1, "carrot" = 1, "potato" = 1),
-		DATA_INGREDIENT_FLAGS = (INGREDIENT_FLAG_VEGETABLE | INGREDIENT_FLAG_MEAT),
+		DATA_ALLERGENS = (ALLERGEN_VEGETABLE | ALLERGEN_MEAT),
 		DATA_MASK_COLOR       = "#785210"
 	)
 
@@ -141,7 +141,7 @@
 	return list(
 		DATA_TASTE            = list("savoury meat" = 2, "stewed carrot" = 1, "stewed potato" = 1, "stewed tomato" = 1, "stewed eggplant" = 1, "stewed mushroom" = 1),
 		DATA_INGREDIENT_LIST  = list("meat" = 1, "tomato" = 1, "carrot" = 1, "potato" = 1, "eggplant" = 1, "mushroom" = 1),
-		DATA_INGREDIENT_FLAGS = (INGREDIENT_FLAG_VEGETABLE | INGREDIENT_FLAG_MEAT),
+		DATA_ALLERGENS = (ALLERGEN_VEGETABLE | ALLERGEN_MEAT),
 		DATA_MASK_NAME        = "hearty stew",
 		DATA_MASK_COLOR       = "#9e673a"
 	)
@@ -154,7 +154,7 @@
 	return list(
 		DATA_TASTE            = list("chilli peppers" = 1, "burning" = 1, "spicy meat" = 2, "tomato" = 1),
 		DATA_INGREDIENT_LIST  = list("meat" = 1, "tomato" = 1, "chili" = 1),
-		DATA_INGREDIENT_FLAGS = (INGREDIENT_FLAG_VEGETABLE | INGREDIENT_FLAG_MEAT),
+		DATA_ALLERGENS = (ALLERGEN_VEGETABLE | ALLERGEN_MEAT),
 		DATA_MASK_NAME        = "hot chili",
 		DATA_MASK_COLOR       = "#ff3c00"
 	)
@@ -163,7 +163,7 @@
 	return list(
 		DATA_TASTE            = list("chilly peppers" = 1, "freezing" = 1, "spicy meat" = 2, "tomato" = 1),
 		DATA_INGREDIENT_LIST  = list("meat" = 1, "tomato" = 1, "chili" = 1),
-		DATA_INGREDIENT_FLAGS = (INGREDIENT_FLAG_VEGETABLE | INGREDIENT_FLAG_MEAT),
+		DATA_ALLERGENS = (ALLERGEN_VEGETABLE | ALLERGEN_MEAT),
 		DATA_MASK_NAME        = "cold chili",
 		DATA_MASK_COLOR       = "#2b00ff"
 	)
@@ -176,7 +176,7 @@
 	return list(
 		DATA_TASTE            = list("crumbed chicken" = 1, "curried apple" = 1, "curried potato" = 1, "curried carrot" = 1),
 		DATA_INGREDIENT_LIST  = list("apple" = 1, "carrot" = 1, "potato" = 1, "chicken" = 1, "rice" = 1),
-		DATA_INGREDIENT_FLAGS = (INGREDIENT_FLAG_VEGETABLE | INGREDIENT_FLAG_MEAT),
+		DATA_ALLERGENS = (ALLERGEN_VEGETABLE | ALLERGEN_MEAT),
 		DATA_MASK_NAME        = "chicken katsu curry",
 		DATA_MASK_COLOR       = "#faa005"
 	)

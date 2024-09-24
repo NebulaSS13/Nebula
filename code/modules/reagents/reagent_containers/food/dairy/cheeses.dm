@@ -1,8 +1,8 @@
 /obj/item/food/dairy/cheese
-	nutriment_type = /decl/material/liquid/nutriment/cheese
-	abstract_type  = /obj/item/food/dairy/cheese
-	data_name_field  = "cheese_name"
-	data_color_field  = "cheese_color"
+	nutriment_type   = /decl/material/liquid/nutriment/cheese
+	abstract_type    = /obj/item/food/dairy/cheese
+	data_name_field  = DATA_CHEESE_NAME
+	data_color_field = DATA_CHEESE_COLOR
 
 /obj/item/food/dairy/cheese/get_default_dairy_color()
 	return "#ffd000"

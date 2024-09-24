@@ -789,7 +789,7 @@
 	if(!blood_data && ishuman(M))
 		var/mob/living/human/H = M
 		blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
-	var/sample_dna = LAZYACCESS(blood_data, "blood_DNA")
+	var/sample_dna = LAZYACCESS(blood_data, DATA_BLOOD_DNA)
 	if(sample_dna)
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
 		forensics.add_data(/datum/forensics/blood_dna, sample_dna)

@@ -119,7 +119,7 @@
 		var/list/bloodDNA
 		var/list/blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
 		if(blood_data)
-			bloodDNA = list(blood_data["blood_DNA"] = blood_data["blood_type"])
+			bloodDNA = list(blood_data[DATA_BLOOD_DNA] = blood_data[DATA_BLOOD_TYPE])
 		else
 			bloodDNA = list()
 		if(T.simulated)

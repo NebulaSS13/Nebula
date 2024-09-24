@@ -30,13 +30,13 @@
 
 	. = ..()
 	if(islist(.) && length(.))
-		allergen_flags |= .[DATA_INGREDIENT_FLAGS]
+		allergen_flags |= .[DATA_ALLERGENS]
 		var/list/old_ingredients = .[DATA_INGREDIENT_LIST]
 		for(var/ingredient in old_ingredients)
 			ingredients[ingredient] += old_ingredients[ingredient] * old_fraction
 
 	if(islist(newdata) && length(newdata))
-		allergen_flags |= newdata[DATA_INGREDIENT_FLAGS]
+		allergen_flags |= newdata[DATA_ALLERGENS]
 		var/list/new_ingredients = newdata[DATA_INGREDIENT_LIST]
 		for(var/ingredient in new_ingredients)
 			ingredients[ingredient] += new_ingredients[ingredient] * new_fraction
@@ -47,7 +47,7 @@
 		var/list/name_ingredients = ingredients.Copy()
 		if(length(name_ingredients) > 3)
 			name_ingredients.Cut(4)
-		if(soup_flags & INGREDIENT_FLAG_DAIRY) // TODO: cheese
+		if(allergen_flags & ALLERGEN_DAIRY) // TODO: check ALLEGEN_CHEESE for cheese-based soups
 			LAZYSET(., DATA_MASK_NAME, "[english_list(name_ingredients)] cream [mask_name_suffix]")
 		else
 			LAZYSET(., DATA_MASK_NAME, "[english_list(name_ingredients)] [mask_name_suffix]")
@@ -55,9 +55,9 @@
 		LAZYREMOVE(., DATA_MASK_NAME)
 
 	if(allergen_flags)
-		LAZYSET(., DATA_INGREDIENT_FLAGS, allergen_flags)
+		LAZYSET(., DATA_ALLERGENS, allergen_flags)
 	else
-		LAZYREMOVE(., DATA_INGREDIENT_FLAGS)
+		LAZYREMOVE(., DATA_ALLERGENS)
 
 /decl/material/liquid/nutriment/soup/stock
 	name              = "broth"
