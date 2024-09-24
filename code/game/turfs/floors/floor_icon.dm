@@ -124,6 +124,15 @@
 
 	compile_overlays()
 
+/turf/floor/proc/update_floor_strings()
+	var/decl/flooring/flooring = get_topmost_flooring()
+	if(istype(flooring))
+		SetName(flooring.name)
+		desc = flooring.desc
+	else
+		SetName(initial(name))
+		desc = initial(desc)
+
 /turf/floor/proc/update_floor_icon(update_neighbors)
 	var/decl/flooring/use_flooring = get_topmost_flooring()
 	if(istype(use_flooring))

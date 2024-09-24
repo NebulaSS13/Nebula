@@ -44,7 +44,7 @@ var/global/list/flooring_cache = list()
 	var/turf_light_power
 	var/turf_light_color
 
-	var/force_material
+	var/decl/material/force_material
 
 	var/movement_delay
 
@@ -86,6 +86,8 @@ var/global/list/flooring_cache = list()
 
 	if(ispath(force_material))
 		force_material = GET_DECL(force_material)
+	if(!istype(force_material))
+		force_material = null
 
 	if(holographic)
 		turf_flags         = null
