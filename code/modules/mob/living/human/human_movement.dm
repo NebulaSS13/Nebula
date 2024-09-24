@@ -30,15 +30,11 @@
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
 			tally += E ? E.get_movement_delay(4) : 4
 	else
-		var/total_item_slowdown = -1
 		for(var/obj/item/I in get_equipped_items(include_carried = TRUE))
-			var/item_slowdown = 0
 			var/slot = get_equipped_slot_for_item(I)
-			item_slowdown += LAZYACCESS(I.slowdown_per_slot, slot)
-			item_slowdown += I.slowdown_general
-			item_slowdown += I.slowdown_accessory
-			total_item_slowdown += max(item_slowdown, 0)
-		tally += total_item_slowdown
+			tally += LAZYACCESS(I.slowdown_per_slot, slot)
+			tally += I.slowdown_general
+			tally += I.slowdown_accessory
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
