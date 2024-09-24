@@ -50,7 +50,7 @@
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
-	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a genera##l slowdown, no matter equipment slot.
+	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a general slowdown, no matter equipment slot.
 	var/slowdown_per_slot // How much clothing is slowing you down. This is an associative list: item slot - slowdown
 	var/slowdown_accessory // How much an accessory will slow you down when attached to a worn article of clothing.
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
@@ -110,7 +110,7 @@
 	var/base_name
 
 	/// Can this object leak into water sources?
-	var/watertight = FALSE 
+	var/watertight = FALSE
 
 /obj/item/get_color()
 	if(paint_color)

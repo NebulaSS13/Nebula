@@ -114,15 +114,12 @@
 	else
 		return 0
 
-/decl/species/serpentid/handle_movement_delay_special(var/mob/living/human/H)
+/decl/species/serpentid/handle_movement_delay_special(var/mob/living/human/victim)
 	var/tally = 0
-
-	H.remove_cloaking_source(src)
-
-	var/obj/item/organ/internal/B = H.get_organ(BP_BRAIN)
-	if(istype(B,/obj/item/organ/internal/brain/insectoid/serpentid))
-		var/obj/item/organ/internal/brain/insectoid/serpentid/N = B
-		tally += N.lowblood_tally * 2
+	victim.remove_cloaking_source(src)
+	var/obj/item/organ/internal/brain/insectoid/serpentid/bugbrain = victim.get_organ(BP_BRAIN, /obj/item/organ/internal/brain/insectoid/serpentid)
+	if(bugbrain)
+		tally += bugbrain.lowblood_tally * 2
 	return tally
 
 // todo: make this on bodytype
