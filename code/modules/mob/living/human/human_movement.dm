@@ -110,13 +110,6 @@
 
 		if(stat != DEAD)
 
-			var/stamina_cost = 0
-			for(var/obj/item/grab/grab as anything in get_active_grabs())
-				stamina_cost -= grab.grab_slowdown()
-			stamina_cost = round(stamina_cost)
-			if(stamina_cost < 0)
-				adjust_stamina(stamina_cost)
-
 			var/nut_removed = DEFAULT_HUNGER_FACTOR/10
 			var/hyd_removed = DEFAULT_THIRST_FACTOR/10
 			if (move_intent.flags & MOVE_INTENT_EXERTIVE)
