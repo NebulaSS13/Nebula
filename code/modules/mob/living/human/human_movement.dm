@@ -53,8 +53,8 @@
 	if(aiming && aiming.aiming_at)
 		tally += 5 // Iron sights make you slower, it's a well-known fact.
 
-	if(facing_dir)
-		tally += 3 // Locking direction will slow you down.
+	if(facing_dir && ((travel_dir & facing_dir) != facing_dir))
+		tally += 3 // If we're not facing the direction we're going, we have to slow down.
 
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if (root_bodytype && bodytemperature < root_bodytype.cold_discomfort_level)
