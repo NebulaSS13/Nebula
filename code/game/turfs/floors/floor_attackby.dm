@@ -13,8 +13,8 @@
 	if(istype(used_item, /obj/item/stack/tile/roof) || IS_COIL(used_item) || (has_flooring() && istype(used_item, /obj/item/stack/material/rods)))
 		return ..()
 	var/decl/flooring/top_flooring = get_topmost_flooring()
-	if(istype(top_flooring))
-		return top_flooring.handle_item_interaction(src, user, used_item)
+	if(istype(top_flooring) && top_flooring.handle_item_interaction(src, user, used_item))
+		return TRUE
 	if(try_backfill(used_item, user))
 		return TRUE
 	if(try_stack_build(used_item, user))

@@ -33,7 +33,7 @@
 /turf/floor/Initialize(var/ml, var/floortype)
 
 	if(_base_flooring)
-		_base_flooring = GET_DECL(_base_flooring)
+		set_base_flooring(_base_flooring, skip_update = TRUE)
 
 	. = ..(ml)
 
@@ -47,7 +47,7 @@
 	if(fill_reagent_type && get_physical_height() < 0)
 		add_to_reagents(fill_reagent_type, abs(height))
 
-	if(floor_material || _flooring || _base_flooring)
+	if(floor_material || get_topmost_flooring())
 		if(ml)
 			queue_icon_update()
 		else
@@ -89,19 +89,21 @@
 	if(!QDELETED(src) && fill_reagent_type && my_height < 0 && !QDELETED(reagents) && reagents.total_volume < abs(my_height))
 		add_to_reagents(fill_reagent_type, abs(my_height) - reagents.total_volume)
 
-/turf/floor/proc/set_base_flooring(var/new_base_flooring)
-	if(ispath(new_base_flooring))
+/turf/floor/proc/set_base_flooring(new_base_flooring, skip_update)
+	if(ispath(new_base_flooring, /decl/flooring))
 		new_base_flooring = GET_DECL(new_base_flooring)
-	if(_base_flooring != new_base_flooring)
-		_base_flooring = new_base_flooring
-	if(!_base_flooring)
-		_base_flooring = initial(_base_flooring)
-	_base_flooring = GET_DECL(_base_flooring)
-	update_from_flooring(_base_flooring)
+	else if(!istype(new_base_flooring, /decl/flooring))
+		new_base_flooring = null
+	if(_base_flooring == new_base_flooring)
+		return
+	_base_flooring = new_base_flooring
+	if(!_base_flooring) // We can never have a null base flooring.
+		_base_flooring = GET_DECL(initial(_base_flooring)) || GET_DECL(/decl/flooring/plating)
+	update_from_flooring(skip_update)
 
 /turf/floor/proc/get_base_flooring()
 	RETURN_TYPE(/decl/flooring)
-	return _base_flooring
+	return istype(_base_flooring) ? _base_flooring : null
 
 /turf/floor/proc/get_topmost_flooring()
 	RETURN_TYPE(/decl/flooring)
@@ -109,8 +111,13 @@
 
 /turf/floor/proc/set_flooring(var/decl/flooring/newflooring, skip_update, place_product)
 
+	if(ispath(newflooring, /decl/flooring))
+		newflooring = GET_DECL(newflooring)
+	else if(!istype(newflooring, /decl/flooring))
+		newflooring = null
+
 	if(_flooring == newflooring)
-		return
+		return FALSE
 
 	if(istype(_flooring))
 
@@ -140,13 +147,17 @@
 
 	_flooring = newflooring
 	floor_icon_state_override = null
+	update_from_flooring(skip_update)
+	return TRUE
 
-	update_from_flooring(get_topmost_flooring(), skip_update)
+/turf/floor/proc/update_from_flooring(skip_update)
 
-/turf/floor/proc/update_from_flooring(var/decl/flooring/copy_from, skip_update)
 
+	var/decl/flooring/copy_from = get_topmost_flooring()
 	if(!istype(copy_from))
-		return
+		return // this should never be the case
+
+	update_floor_strings()
 
 	layer      = copy_from.floor_layer
 	turf_flags = copy_from.turf_flags
@@ -222,15 +233,11 @@
 	return flooring ? flooring.dirt_color : "#7c5e42"
 
 /turf/floor/get_color()
-
 	if(paint_color)
 		return paint_color
-
 	var/decl/flooring/flooring = get_topmost_flooring()
-	if(istype(flooring))
-		if(flooring.color)
-			return flooring.color
-		return COLOR_WHITE
+	if(istype(flooring) && !isnull(flooring.color))
+		return flooring.color
 	var/decl/material/my_material = get_material()
 	if(istype(my_material))
 		return my_material.color
