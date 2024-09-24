@@ -36,30 +36,31 @@
 
 /decl/config/num/movement_human
 	uid = "human_delay"
-	desc = "These modify the run/walk speed of all mobs before the mob-specific modifiers are applied."
+	desc = "A modifier applied to the run/walk delay of human-type mobs. A higher value will result in slower movement."
+	default_value = -1
 
 /decl/config/num/movement_robot
 	uid = "robot_delay"
-	desc = "These modify the run/walk speed of all mobs before the mob-specific modifiers are applied."
+	desc = "A modifier applied to the run/walk delay of robots (cyborgs and drones). A higher value will result in slower movement."
 
 /decl/config/num/movement_animal
 	uid = "animal_delay"
-	desc = "These modify the run/walk speed of all mobs before the mob-specific modifiers are applied."
+	desc = "A modifier applied to the run/walk delay of simple_animal type mobs (including combat drones and other simple hostile mobs). A higher value will result in slower movement."
 
 /decl/config/num/movement_run
 	uid = "run_delay"
 	default_value = 2
-	desc = "These modify the run/walk speed of all mobs before the mob-specific modifiers are applied."
+	desc = "A modifier applied to the run delay of all mobs, prior to the mob-specific modifiers being applied. A higher value will result in slower movement."
 
 /decl/config/num/movement_walk
 	uid = "walk_delay"
 	default_value = 4
-	desc = "These modify the run/walk speed of all mobs before the mob-specific modifiers are applied."
+	desc = "A modifier applied to the walk delay of all mobs, prior to the mob-specific modifiers being applied. A higher value will result in slower movement."
 
 /decl/config/num/movement_creep
 	uid = "creep_delay"
 	default_value = 6
-	desc = "These modify the run/walk speed of all mobs before the mob-specific modifiers are applied."
+	desc = "A modifier applied to the creep delay of all mobs, prior to the mob-specific modifiers being applied. A higher value will result in slower movement."
 
 /decl/config/num/movement_glide_size
 	uid = "glide_size_delay"
