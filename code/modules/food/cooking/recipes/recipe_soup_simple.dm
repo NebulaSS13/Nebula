@@ -27,7 +27,7 @@
 /decl/recipe/soup/simple/blood/get_result_data(atom/container, list/used_ingredients)
 	. = list(
 		DATA_INGREDIENT_LIST  = list("blood" = 1),
-		DATA_ALLERGENS = ALLERGEN_MEAT,
+		DATA_INGREDIENT_FLAGS = ALLERGEN_MEAT,
 		DATA_TASTE            = list("iron and copper" = 5),
 //		DATA_MASK_NAME          = "tomato soup" // Maybe?
 	)
@@ -41,8 +41,9 @@
 	. = ..()
 	// Consider prefixing 'cream of' for milk soups?
 	LAZYINITLIST(.)
-	.[DATA_TASTE]            |= list("cream" = 1)
-	.[DATA_ALLERGENS] |= ALLERGEN_DAIRY
+	var/cream = LAZYACCESS(.[DATA_TASTE], "cream")
+	LAZYSET(.[DATA_TASTE], "cream", cream + 1)
+	LAZYDISTINCTADD(.[DATA_INGREDIENT_FLAGS], ALLERGEN_DAIRY)
 
 /decl/recipe/soup/simple/milk/meat
 	display_name   = "simple meat milk soup"

@@ -903,7 +903,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/apply_intolerances(mob/living/subject, removed, datum/reagents/holder, ingestion_method)
 
 	var/list/data = REAGENT_DATA(holder, type)
-	var/check_flags = LAZYACCESS(data, DATA_ALLERGENS) | allergen_flags
+	var/check_flags = LAZYACCESS(data, DATA_INGREDIENT_FLAGS) | allergen_flags
 	if(!check_flags)
 		return 1
 
@@ -995,7 +995,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	. = newdata
 	if(allergen_flags)
 		LAZYINITLIST(.)
-		.[DATA_ALLERGENS] |= allergen_flags
+		.[DATA_INGREDIENT_FLAGS] |= allergen_flags
 
 /decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	reagents.cached_color = null // colour masking may change
@@ -1004,10 +1004,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 
 	// Blend in any allergen flags.
-	var/new_allergens = newdata[DATA_ALLERGENS]
+	var/new_allergens = newdata[DATA_INGREDIENT_FLAGS]
 	if(new_allergens)
 		LAZYINITLIST(.)
-		.[DATA_ALLERGENS] |= new_allergens
+		.[DATA_INGREDIENT_FLAGS] |= new_allergens
 
 	// Sum our existing taste data with the incoming taste data.
 	var/total_taste = 0
