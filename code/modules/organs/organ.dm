@@ -341,6 +341,7 @@
 		PRINT_STACK_TRACE("rejuvenate() called on organ of type [type] with no owner.")
 	damage = 0
 	reset_status()
+	QDEL_NULL_LIST(ailments)
 	if(!ignore_organ_aspects && length(owner?.personal_aspects))
 		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
 			if(aspect.applies_to_organ(organ_tag))
@@ -518,12 +519,12 @@ var/global/list/ailment_reference_cache = list()
 	if(ispath(ailment, /datum/ailment))
 		for(var/datum/ailment/ext_ailment in ailments)
 			if(ailment == ext_ailment.type)
-				LAZYREMOVE(ailments, ext_ailment)
+				qdel(ext_ailment)
 				return TRUE
 	else if(istype(ailment))
 		for(var/datum/ailment/ext_ailment in ailments)
 			if(ailment == ext_ailment)
-				LAZYREMOVE(ailments, ext_ailment)
+				qdel(ext_ailment)
 				return TRUE
 	return FALSE
 

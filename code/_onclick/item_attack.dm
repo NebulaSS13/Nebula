@@ -44,35 +44,31 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
 	return TRUE
 
-/mob/living/attackby(obj/item/I, mob/user)
+/mob/living/attackby(obj/item/used_item, mob/user)
 	if(!ismob(user))
 		return TRUE
-	if(can_operate(src,user) != OPERATE_DENY && I.do_surgery(src,user)) //Surgery
-		return TRUE
-	return I.attack(src, user, user.get_target_zone() || ran_zone())
 
-/mob/living/carbon/human/attackby(obj/item/I, mob/user)
-
-	. = ..()
-	if(.)
-		if(user.a_intent != I_HELP)
-			return
+	if(!QDELETED(used_item) && user.a_intent == I_HELP)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.get_target_zone())
-		if(!E)
-			return
-		for(var/datum/ailment/ailment in E.ailments)
-			if(ailment.treated_by_item(I))
-				ailment.was_treated_by_item(I, user, src)
-				return
+		if(length(E?.ailments))
+			for(var/datum/ailment/ailment in E.ailments)
+				if(ailment.treated_by_item(used_item))
+					ailment.was_treated_by_item(used_item, user, src)
+					return TRUE
 
-	else if(user == src && user.get_target_zone() == BP_MOUTH && can_devour(I, silent = TRUE))
-		var/obj/item/blocked = src.check_mouth_coverage()
+	if(can_operate(src,user) != OPERATE_DENY && used_item.do_surgery(src,user)) //Surgery
+		return TRUE
+	return used_item.attack(src, user, user.get_target_zone() || ran_zone())
+
+/mob/living/carbon/human/attackby(obj/item/used_item, mob/user)
+	. = ..()
+	if(!. && user == src && user.get_target_zone() == BP_MOUTH && can_devour(used_item, silent = TRUE))
+		var/obj/item/blocked = check_mouth_coverage()
 		if(blocked)
 			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
 		else
-			devour(I)
+			devour(used_item)
 		return TRUE
-
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.
