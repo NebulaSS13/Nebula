@@ -1836,6 +1836,7 @@ default behaviour is:
 			reset_offsets(anim_time = 2)
 			return FALSE
 
+	reset_offsets(anim_time = 2)
 	return TRUE
 
 /mob/living/proc/prepare_for_despawn()
