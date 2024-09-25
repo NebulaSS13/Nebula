@@ -72,6 +72,7 @@
 	result = /decl/material/liquid/nutriment/vinegar
 	required_reagents = list(/decl/material/liquid/drink/juice/apple = 10)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
+	inhibitors = list(/decl/material/liquid/nutriment/sugar = 1)
 	result_amount = 10
 	mix_message = "The solution roils as it rapidly ferments into a sharp-smelling liquid."
 
