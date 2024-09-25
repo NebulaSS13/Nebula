@@ -221,6 +221,9 @@
 	if(check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 		return A.attack_hand(src)
 
+	// TODO: some way to check if we SHOULD be doing an attack windup here;
+	// corgis attacking a tree, for example, will do the windup animation despite
+	// having no interaction or message shown at the end of it.
 	// AI driven mobs have a melee telegraph that needs to be handled here.
 	if(a_intent == I_HURT && istype(A) && !do_attack_windup_checking(A))
 		return TRUE
