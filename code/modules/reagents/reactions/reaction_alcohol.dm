@@ -132,14 +132,14 @@
 	name = "Apple Cider"
 	result = /decl/material/liquid/ethanol/cider_apple
 	required_reagents = list(/decl/material/liquid/drink/juice/apple = 2, /decl/material/liquid/nutriment/sugar = 1)
-	catalysts = list(/decl/material/liquid/nutriment = 5)
+	catalysts = list(/decl/material/liquid/enzyme = 5)
 	result_amount = 3
 
 /decl/chemical_reaction/recipe/cider_pear
 	name = "Pear Cider"
 	result = /decl/material/liquid/ethanol/cider_pear
 	required_reagents = list(/decl/material/liquid/drink/juice/pear = 2, /decl/material/liquid/nutriment/sugar = 1)
-	catalysts = list(/decl/material/liquid/nutriment = 5)
+	catalysts = list(/decl/material/liquid/enzyme = 5)
 	result_amount = 3
 
 /decl/chemical_reaction/recipe/kvass
