@@ -15,11 +15,12 @@
 
 /decl/recipe/soup/curry/veg
 	display_name = "vegetarian curry"
-	items         = list(/obj/item/food/processed_grown/chopped = 2)
+	items        = list(/obj/item/food/processed_grown/chopped = 2)
 
 /decl/recipe/soup/curry/mixed
 	display_name = "mixed curry"
-	items         = list(
+	items        = list(
 		/obj/item/food/butchery/chopped = 1,
 		/obj/item/food/processed_grown/chopped = 1
 	)
+	complexity   = 3 // So it takes precedence over pure meat or pure veggie curry.

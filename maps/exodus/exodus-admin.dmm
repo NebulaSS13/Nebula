@@ -1831,7 +1831,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-obj/item/chems/glass/bowl/mapped/beet,
+/obj/item/chems/glass/bowl/mapped/beet,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2184,7 +2184,7 @@ obj/item/chems/glass/bowl/mapped/beet,
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-obj/item/chems/glass/bowl/mapped/mushroom,
+/obj/item/chems/glass/bowl/mapped/mushroom,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},

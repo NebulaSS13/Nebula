@@ -230,7 +230,7 @@
 // General food data flags
 #define DATA_TASTE            /decl/reagent_data_field/taste
 #define DATA_INGREDIENT_LIST  /decl/reagent_data_field/ingredient_list
-#define DATA_ALLERGENS /decl/reagent_data_field/ingredient_flags
+#define DATA_INGREDIENT_FLAGS /decl/reagent_data_field/ingredient_flags
 #define DATA_MASK_COLOR       /decl/reagent_data_field/mask_color
 #define DATA_MASK_NAME        /decl/reagent_data_field/mask_name
 

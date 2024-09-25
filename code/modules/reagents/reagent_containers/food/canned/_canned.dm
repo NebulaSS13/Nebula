@@ -102,7 +102,7 @@
 	add_to_reagents(/decl/material/liquid/nutriment/soup, 12, list(
 		DATA_TASTE            = list("tomato" = 1),
 		DATA_INGREDIENT_LIST  = list("tomato" = 1),
-		DATA_ALLERGENS = ALLERGEN_VEGETABLE
+		DATA_INGREDIENT_FLAGS = ALLERGEN_VEGETABLE
 	))
 
 /obj/item/food/can/spinach
