@@ -497,13 +497,27 @@
 	src.location = location
 	src.material = material
 
-/decl/loadout_option/proc/spawn_item(user, location, metadata, obj/item/existing_item)
+/datum/gear_data/proc/can_replace_existing(obj/item/candidate)
+	return istype(candidate, path)
+
+/decl/loadout_option/proc/spawn_item(mob/user, location, metadata)
 	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_gear_data(islist(metadata) && metadata["[gt]"], gd)
 	var/obj/item/item
-	if(isitem(existing_item))
-		item = existing_item
+	if(apply_to_existing_if_possible) // This was moved here from an argument so that geartweaks will affect the path used for checking.
+		for(var/obj/item/candidate in user.get_equipped_items(include_carried = TRUE))
+			if(gd.can_replace_existing(candidate))
+				item = candidate
+				break
+			if(candidate.storage)
+				for(var/obj/item/child_candidate in candidate.storage.get_contents())
+					if(gd.can_replace_existing(child_candidate))
+						item = child_candidate
+						break
+				if(item)
+					break
+	if(isitem(item))
 		if(gd.material)
 			item.set_material(gd.material)
 	else
@@ -564,14 +578,7 @@
 /decl/loadout_option/proc/spawn_and_validate_item(mob/living/human/H, metadata)
 	PRIVATE_PROC(TRUE)
 
-	var/obj/item/item
-	if(apply_to_existing_if_possible)
-		for(var/obj/item/candidate in H.get_equipped_items(include_carried = TRUE))
-			if(can_replace_existing(candidate))
-				item = candidate
-				break
-
-	item = spawn_item(H, H, metadata, item)
+	var/obj/item/item = spawn_item(H, H, metadata)
 
 	if(QDELETED(item))
 		return

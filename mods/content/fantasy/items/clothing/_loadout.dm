@@ -264,9 +264,10 @@
 
 /decl/loadout_option/fantasy/utility/waterskin
 	name = "waterskin selection"
-	path = /obj/item/chems/waterskin/crafted
+	path = /obj/item/chems/waterskin
 	available_materials = null
 	loadout_flags = null
+	apply_to_existing_if_possible = TRUE // overwrite beggar knight's wineskin
 	uid = "gear_fantasy_waterskin"
 
 /decl/loadout_option/fantasy/utility/waterskin/get_gear_tweak_options()
