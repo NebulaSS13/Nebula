@@ -44,10 +44,6 @@
 	plural_icon_state = "thread-mult"
 	max_icon_state = "thread-max"
 
-/obj/item/stack/material/thread/cotton
-	material = /decl/material/solid/organic/cloth
-	is_spawnable_type = TRUE
-
 /obj/item/stack/material/thread/yellow
 	SET_COLOR("#ffbf00")
 /obj/item/stack/material/thread/teal
