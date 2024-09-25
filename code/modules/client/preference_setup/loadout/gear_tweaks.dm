@@ -194,6 +194,7 @@
 	else
 		reagent = valid_reagents[metadata]
 	if(reagent && gear.reagents)
+		gear.reagents?.clear_reagents() // in case we're applying to an existing item with reagents
 		gear.add_to_reagents(reagent, REAGENTS_FREE_SPACE(gear.reagents))
 	return GEAR_TWEAK_SUCCESS
 
