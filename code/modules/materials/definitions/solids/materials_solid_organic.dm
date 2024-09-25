@@ -154,10 +154,11 @@
 	has_textile_fibers = TRUE
 
 /decl/material/solid/organic/cloth/hemp
-	name      = "hemp"
-	lore_text = "Sturdy fibers from the hemp plant, woven into strong cloth."
-	uid       = "solid_hemp"
-	color     = "#b4a374"
+	name           = "hemp"
+	adjective_name = "hempen"
+	lore_text      = "Sturdy fibers from the hemp plant, woven into strong cloth."
+	uid            = "solid_hemp"
+	color          = "#b4a374"
 
 /decl/material/solid/organic/cloth/linen
 	name      = "linen"
@@ -166,16 +167,18 @@
 	color     = "#eee4c7"
 
 /decl/material/solid/organic/cloth/wool
-	name      = "wool"
-	lore_text = "Fibers from the wooly fleece of a sheep or similar animal."
-	uid       = "solid_wool"
-	color     = "#fbfcdb"
+	name           = "wool"
+	adjective_name = "woolen"
+	lore_text      = "Fibers from the wooly fleece of a sheep or similar animal."
+	uid            = "solid_wool"
+	color          = "#fbfcdb"
 
 /decl/material/solid/organic/cloth/wool/diyaab
-	name      = "diyaab wool"
-	lore_text = "Fibers from the wooly fleece of a diyaab."
-	uid       = "solid_wool_diyaab"
-	color     = "#c9eeff"
+	name           = "diyaab wool"
+	adjective_name = null // override base wool
+	lore_text      = "Fibers from the wooly fleece of a diyaab."
+	uid            = "solid_wool_diyaab"
+	color          = "#c9eeff"
 
 /decl/material/solid/organic/cloth/synthetic
 	name = "nylon"
