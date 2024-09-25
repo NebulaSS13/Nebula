@@ -266,6 +266,7 @@
 /decl/material/solid/organic/leather/gut
 	name = "dried gut"
 	uid = "solid_dried_gut"
+	color = "#736754"
 
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"
