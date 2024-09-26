@@ -84,35 +84,29 @@
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(newloc, direct)
 	if (direct & (direct - 1))
-		if (direct & 1)
-			if (direct & 4)
+		if (direct & NORTH)
+			if (direct & EAST)
 				if (step(src, NORTH))
 					step(src, EAST)
-				else
-					if (step(src, EAST))
-						step(src, NORTH)
-			else
-				if (direct & 8)
-					if (step(src, NORTH))
-						step(src, WEST)
-					else
-						if (step(src, WEST))
-							step(src, NORTH)
+				else if (step(src, EAST))
+					step(src, NORTH)
+			else if (direct & WEST)
+				if (step(src, NORTH))
+					step(src, WEST)
+				else if (step(src, WEST))
+					step(src, NORTH)
 		else
-			if (direct & 2)
-				if (direct & 4)
+			if (direct & SOUTH)
+				if (direct & EAST)
 					if (step(src, SOUTH))
 						step(src, EAST)
-					else
-						if (step(src, EAST))
-							step(src, SOUTH)
-				else
-					if (direct & 8)
-						if (step(src, SOUTH))
-							step(src, WEST)
-						else
-							if (step(src, WEST))
-								step(src, SOUTH)
+					else if (step(src, EAST))
+						step(src, SOUTH)
+				else if (direct & WEST)
+					if (step(src, SOUTH))
+						step(src, WEST)
+					else if (step(src, WEST))
+						step(src, SOUTH)
 	else
 		var/atom/A = src.loc
 

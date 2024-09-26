@@ -19,25 +19,22 @@
 	tally += GET_CHEMICAL_EFFECT(src, CE_SLOWDOWN)
 
 	var/health_deficiency = (get_max_health() - current_health)
-	if(health_deficiency >= 40) tally += (health_deficiency / 25)
+	if(health_deficiency >= 40)
+		tally += (health_deficiency / 25)
 
-	if(can_feel_pain())
-		if(get_shock() >= 10) tally += (get_shock() / 10) //pain shouldn't slow you down if you can't even feel it
+	if(can_feel_pain() && get_shock() >= 10)
+		tally += (get_shock() / 10) //pain shouldn't slow you down if you can't even feel it
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
 			tally += E ? E.get_movement_delay(4) : 4
 	else
-		var/total_item_slowdown = -1
 		for(var/obj/item/I in get_equipped_items(include_carried = TRUE))
-			var/item_slowdown = 0
 			var/slot = get_equipped_slot_for_item(I)
-			item_slowdown += LAZYACCESS(I.slowdown_per_slot, slot)
-			item_slowdown += I.slowdown_general
-			item_slowdown += I.slowdown_accessory
-			total_item_slowdown += max(item_slowdown, 0)
-		tally += total_item_slowdown
+			tally += LAZYACCESS(I.slowdown_per_slot, slot)
+			tally += I.slowdown_general
+			tally += I.slowdown_accessory
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
@@ -52,8 +49,8 @@
 	if(aiming && aiming.aiming_at)
 		tally += 5 // Iron sights make you slower, it's a well-known fact.
 
-	if(facing_dir)
-		tally += 3 // Locking direction will slow you down.
+	if(facing_dir && ((travel_dir & facing_dir) != facing_dir))
+		tally += 3 // If we're not facing the direction we're going, we have to slow down.
 
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if (root_bodytype && bodytemperature < root_bodytype.cold_discomfort_level)
@@ -109,13 +106,6 @@
 	if(.) //We moved
 
 		if(stat != DEAD)
-
-			var/stamina_cost = 0
-			for(var/obj/item/grab/grab as anything in get_active_grabs())
-				stamina_cost -= grab.grab_slowdown()
-			stamina_cost = round(stamina_cost)
-			if(stamina_cost < 0)
-				adjust_stamina(stamina_cost)
 
 			var/nut_removed = DEFAULT_HUNGER_FACTOR/10
 			var/hyd_removed = DEFAULT_THIRST_FACTOR/10
