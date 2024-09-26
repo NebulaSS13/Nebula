@@ -372,14 +372,18 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(ishuman(following))
 		to_chat(src, medical_scan_results(following, 1, SKILL_MAX))
 
-	else to_chat(src, "<span class='notice'>Not a scannable target.</span>")
+	else to_chat(src, SPAN_WARNING("\The [following] is not a scannable target."))
 
 /mob/observer/ghost/verb/become_mouse()
 	set name = "Become mouse"
 	set category = "Ghost"
 
+	if(get_config_value(/decl/config/enum/server_whitelist) == CONFIG_SERVER_JOIN_WHITELIST && !check_server_whitelist(src))
+		to_chat(src, SPAN_WARNING("Non-whitelisted players cannot join rounds except as observers."))
+		return
+
 	if(get_config_value(/decl/config/toggle/disable_player_mice))
-		to_chat(src, "<span class='warning'>Spawning as a mouse is currently disabled.</span>")
+		to_chat(src, SPAN_WARNING("Spawning as a mouse is currently disabled."))
 		return
 
 	if(!MayRespawn(1, ANIMAL_SPAWN_DELAY))
@@ -387,12 +391,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/turf/T = get_turf(src)
 	if(!T || isAdminLevel(T.z))
-		to_chat(src, "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>")
+		to_chat(src, SPAN_WARNING("You may not spawn as a mouse on this Z-level."))
 		return
 
 	var/response = alert(src, "Are you -sure- you want to become a mouse?","Are you sure you want to squeek?","Squeek!","Nope!")
-	if(response != "Squeek!") return  //Hit the wrong key...again.
-
+	if(response != "Squeek!")
+		return
 
 	//find a viable mouse candidate
 	var/mob/living/simple_animal/passive/mouse/host
@@ -405,14 +409,16 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		vent_found = pick(found_vents)
 		host = new /mob/living/simple_animal/passive/mouse(vent_found.loc)
 	else
-		to_chat(src, "<span class='warning'>Unable to find any unwelded vents to spawn mice at.</span>")
+		to_chat(src, SPAN_WARNING("Unable to find any unwelded vents to spawn mice at."))
+
 	if(host)
 		if(get_config_value(/decl/config/toggle/uneducated_mice))
 			host.universal_understand = FALSE
 		announce_ghost_joinleave(src, 0, "They are now a mouse.")
 		host.ckey = src.ckey
 		host.status_flags |= NO_ANTAG
-		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")
+		to_chat(host, SPAN_INFO("You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent."))
+
 /mob/observer/ghost/verb/view_manfiest()
 	set name = "Show Crew Manifest"
 	set category = "Ghost"

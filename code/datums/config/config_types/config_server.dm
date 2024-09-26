@@ -43,7 +43,6 @@
 		/decl/config/toggle/on/allow_ai,
 		/decl/config/toggle/on/allow_drone_spawn,
 		/decl/config/toggle/hub_visibility,
-		/decl/config/toggle/usewhitelist,
 		/decl/config/toggle/load_jobs_from_txt,
 		/decl/config/toggle/disable_player_mice,
 		/decl/config/toggle/uneducated_mice,
@@ -61,7 +60,8 @@
 		/decl/config/toggle/guests_allowed,
 		/decl/config/toggle/on/jobs_have_minimal_access,
 		/decl/config/toggle/on/admin_legacy_system,
-		/decl/config/toggle/on/ban_legacy_system
+		/decl/config/toggle/on/ban_legacy_system,
+		/decl/config/enum/server_whitelist
 	)
 
 /decl/config/num/kick_inactive
@@ -293,13 +293,6 @@
 	. = ..()
 	world.update_hub_visibility()
 
-/decl/config/toggle/usewhitelist
-	uid = "usewhitelist"
-	desc = list(
-		"Set to jobban everyone who's key is not listed in data/whitelist.txt from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.",
-		"Uncomment to 1 to jobban, leave commented out to allow these positions for everyone (but see GUEST_JOBBAN above and regular jobbans)."
-	)
-
 /decl/config/toggle/load_jobs_from_txt
 	uid = "load_jobs_from_txt"
 	desc = "Toggle for having jobs load up from the .txt"
@@ -369,3 +362,14 @@
 /decl/config/toggle/on/jobs_have_minimal_access
 	uid = "jobs_have_minimal_access"
 	desc = "Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments."
+
+/decl/config/enum/server_whitelist
+	uid = "server_whitelist"
+	desc = "Determines how the server should handle whitelisting for ckeys. Whitelisted ckeys are found in '" + CONFIG_SERVER_WHITELIST_FILE + "'. Set to 'none' for no whitelisting, 'jobs' to whitelist sensitive jobs, 'join' to whitelist joining the round (observing and OOC are still available, or 'connect' to whitelist access to the server."
+	default_value = CONFIG_SERVER_NO_WHITELIST
+	enum_map = list(
+		"none"    = CONFIG_SERVER_NO_WHITELIST,
+		"jobs"    = CONFIG_SERVER_JOBS_WHITELIST,
+		"join"    = CONFIG_SERVER_JOIN_WHITELIST,
+		"connect" = CONFIG_SERVER_CONNECT_WHITELIST
+	)

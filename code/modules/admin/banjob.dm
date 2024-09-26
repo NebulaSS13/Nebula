@@ -21,7 +21,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 		if (SSjobs.guest_jobbans(rank))
 			if(get_config_value(/decl/config/toggle/on/guest_jobban) && IsGuestKey(M.key))
 				return "Guest Job-ban"
-			if(get_config_value(/decl/config/toggle/usewhitelist) && !check_whitelist(M))
+			if(get_config_value(/decl/config/enum/server_whitelist) == CONFIG_SERVER_JOBS_WHITELIST && !check_server_whitelist(M))
 				return "Whitelisted Job"
 		return ckey_is_jobbanned(M.ckey, rank)
 	return 0

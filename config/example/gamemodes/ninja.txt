@@ -1,0 +1,7 @@
+##
+# NINJA
+# Configuration options relating to the Ninja gamemode and antagonist.
+##
+
+## Remove the # to let ninjas spawn in random antag events. Uncomment to enable.
+#RANDOM_NINJAS_ALLOWED

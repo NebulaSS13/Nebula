@@ -330,6 +330,8 @@ SUBSYSTEM_DEF(jobs)
 	//Get the players who are ready
 	for(var/mob/new_player/player in global.player_list)
 		if(player.ready && player.mind && !player.mind.assigned_role)
+			if(get_config_value(/decl/config/enum/server_whitelist) == CONFIG_SERVER_JOIN_WHITELIST && !check_server_whitelist(player))
+				continue
 			unassigned_roundstart += player
 	if(unassigned_roundstart.len == 0)	return 0
 	//Shuffle players and jobs

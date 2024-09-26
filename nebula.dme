@@ -805,7 +805,7 @@
 #include "code\game\jobs\_access_defs.dm"
 #include "code\game\jobs\access.dm"
 #include "code\game\jobs\access_datum.dm"
-#include "code\game\jobs\whitelist.dm"
+#include "code\game\jobs\server_whitelist.dm"
 #include "code\game\jobs\job\_job.dm"
 #include "code\game\machinery\ai_slipper.dm"
 #include "code\game\machinery\air_sensor.dm"

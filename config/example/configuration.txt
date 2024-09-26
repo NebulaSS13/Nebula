@@ -68,8 +68,8 @@
 # Configuration options relating to event timers and probabilities.
 ##
 
-## Hash out to disable random events during the round. Uncomment to enable.
-#ALLOW_RANDOM_EVENTS
+## Hash out to disable random events during the round.
+#ALLOW_RANDOM_EVENTS 1
 
 ## The lower delay between events in minutes.
 ## Affect mundane, moderate, and major events respectively.
@@ -99,8 +99,8 @@ OBJECTIVES_DISABLED all
 ## Remove the # to allow people to leave public comments on each other's characters via the comments system. Uncomment to enable.
 #ALLOW_CHARACTER_COMMENTS
 
-## Allow multiple input keys to be pressed for diagonal movement. Uncomment to enable.
-#ALLOW_DIAGONAL_MOVEMENT
+## Allow multiple input keys to be pressed for diagonal movement.
+#ALLOW_DIAGONAL_MOVEMENT 1
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
 #ANIMAL_DELAY 0
@@ -162,9 +162,6 @@ OBJECTIVES_DISABLED all
 ## Minimum stamina recovered per tick when resting.
 #MINIMUM_STAMINA_RECOVERY 1
 
-## Remove the # to let ninjas spawn. Uncomment to enable.
-#NINJAS_ALLOWED
-
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
 #ROBOT_DELAY 0
 
@@ -194,6 +191,9 @@ OBJECTIVES_DISABLED all
 ## Determines if players can print copy/pasted integrated circuits.
 #ALLOW_IC_PRINTING 1
 
+## If true, when bodytype is changed in character creation, selected pronouns are also changed.
+#CISNORMATIVITY 1
+
 ## Determines if ghosts are permitted to write in blood during cult rounds.
 #CULT_GHOSTWRITER 1
 
@@ -220,6 +220,9 @@ OBJECTIVES_DISABLED all
 
 ## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
 #LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010
+
+## If true, most lightswitches start on by default. Otherwise, they start off. Uncomment to enable.
+#LIGHTS_START_ON
 
 ## After this amount alive, walking mushrooms spawned from botany will not reproduce.
 #MAXIMUM_MUSHROOMS 15
@@ -319,9 +322,6 @@ ROUNDSTART_LEVEL_GENERATION
 ## log OOC channel Uncomment to enable.
 #LOG_OOC
 
-## Log PDA messages. Uncomment to enable.
-#LOG_PDA
-
 ## Log world.log and runtime errors to a file. Uncomment to enable.
 #LOG_RUNTIME
 
@@ -354,13 +354,13 @@ ROUNDSTART_LEVEL_GENERATION
 #FEATURE_OBJECT_SPELL_SYSTEM
 
 ## Allowed modes.
-#MODES ["crossfire","cult","extended","god","heist","mercenary","ninja","revolution","siege","spyvspy","traitor","uprising","wizard"]
+#MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","spyvspy","traitor","wizard"]
 
 ## Mode names.
-#MODE_NAMES {"calamity":"Calamity","cult":"Cult","extended":"Extended","god":"Deity","heist":"Heist","meteor":"Meteor","crossfire":"Mercenary & heist","siege":"Mercenary & revolution","spyvspy":"Spy v. spy","uprising":"Cult & revolution","ninja":"Ninja","mercenary":"Mercenary","revolution":"Revolution","traitor":"Traitor","wizard":"Wizard"}
+#MODE_NAMES {"calamity":"Calamity","extended":"Extended","mercenary":"Mercenary","wizard":"Wizard","cult":"Cult","heist":"Heist","ninja":"Ninja","revolution":"Revolution","traitor":"Traitor","spyvspy":"Spy v. spy","crossfire":"Crossfire"}
 
 ## Relative probability of each mode.
-#PROBABILITIES {"calamity":0,"cult":1,"extended":1,"god":0,"heist":0,"meteor":0,"crossfire":0,"siege":0,"spyvspy":0,"uprising":0,"ninja":0,"mercenary":1,"revolution":0,"traitor":0,"wizard":1}
+#PROBABILITIES {"calamity":0,"extended":1,"mercenary":1,"wizard":1,"cult":1,"heist":0,"ninja":0,"revolution":0,"traitor":0,"spyvspy":0,"crossfire":0}
 
 ## If security is prohibited from being most antagonists. Uncomment to enable.
 #PROTECT_ROLES_FROM_ANTAGONIST
@@ -369,7 +369,7 @@ ROUNDSTART_LEVEL_GENERATION
 #TRAITOR_SCALING
 
 ## A list of modes that should be votable.
-#VOTABLE_MODES ["crossfire","cult","extended","god","heist","mercenary","meteor","ninja","revolution","secret","siege","spyvspy","traitor","uprising","wizard"]
+#VOTABLE_MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","secret","spyvspy","traitor","wizard"]
 
 ##
 # PROTECTED
@@ -377,13 +377,13 @@ ROUNDSTART_LEVEL_GENERATION
 ##
 
 ## Password used for authorizing external tools that can apply bans.
-#BAN_COMMS_PASSWORD
+#BAN_COMMS_PASSWORD 
 
 ## Password used for authorizing ircbot and other external tools.
-#COMMS_PASSWORD
+#COMMS_PASSWORD 
 
 ## Export address where external tools that monitor logins are located.
-#LOGIN_EXPORT_ADDR
+#LOGIN_EXPORT_ADDR 
 
 ##
 # RESOURCES
@@ -413,7 +413,7 @@ ROUNDSTART_LEVEL_GENERATION
 #ABANDON_ALLOWED 1
 
 ## IRC channel to send adminhelps to. Leave blank to disable adminhelps-to-irc.
-#ADMIN_IRC
+#ADMIN_IRC 
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 #ADMIN_LEGACY_SYSTEM 1
@@ -431,7 +431,7 @@ ROUNDSTART_LEVEL_GENERATION
 #AOOC_ALLOWED 1
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-#BANAPPEALS
+#BANAPPEALS 
 
 ## Add a # infront of this if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
 #BAN_LEGACY_SYSTEM 1
@@ -442,7 +442,7 @@ ROUNDSTART_LEVEL_GENERATION
 ## Sets the minimum number of cultists needed for ghosts to write in blood.
 #CULT_GHOSTWRITER_REQ_CULTISTS 10
 
-## Determines if the server should hide itself from the hub when no admins are online.. Uncomment to enable.
+## Determines if the server should hide itself from the hub when no admins are online. Uncomment to enable.
 #DELIST_WHEN_NO_ADMINS
 
 ## Uncomment to enable.
@@ -452,7 +452,7 @@ ROUNDSTART_LEVEL_GENERATION
 #DISABLE_WEBHOOK_EMBEDS
 
 ## Discord server permanent invite address.
-#DISCORDURL
+#DISCORDURL 
 
 ## Comment to disable the dead OOC channel by default.
 #DOOC_ALLOWED 1
@@ -473,20 +473,20 @@ ROUNDSTART_LEVEL_GENERATION
 #FORBID_SINGULO_POSSESSION
 
 ## Discussion forum address.
-#FORUMURL
+#FORUMURL 
 
 ## Defines world FPS. Defaults to 20.
 ## Can also accept ticklag values (0.9, 0.5, etc) which will automatically be converted to FPS.
 #FPS 20
 
 ## GitHub address.
-#GITHUBURL
+#GITHUBURL 
 
 ## Determines whether or not people without a registered ckey (i.e. guest-*) can connect to your server. Uncomment to enable.
 #GUESTS_ALLOWED
 
 ## Set a hosted by name for UNIX platforms.
-#HOSTEDBY
+#HOSTEDBY 
 
 ## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to visible. This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly. Uncomment to enable.
 #HUB_VISIBILITY
@@ -495,7 +495,7 @@ ROUNDSTART_LEVEL_GENERATION
 #IRC_BOT_HOST localhost
 
 ## GitHub new issue address.
-#ISSUEREPORTURL
+#ISSUEREPORTURL 
 
 ## Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments.
 #JOBS_HAVE_MINIMAL_ACCESS 1
@@ -515,8 +515,11 @@ ROUNDSTART_LEVEL_GENERATION
 ## IRC channel to send information to. Leave blank to disable.
 #MAIN_IRC #main
 
-## Remove the # to define a different cap for aspect points in chargen.
-#MAX_CHARACTER_ASPECTS 5
+## Remove the # to define a different maximum for alternate language selection in chargen.
+#MAX_ALTERNATE_LANGUAGES 3
+
+## Remove the # to define a different cap for trait points in chargen.
+#MAX_CHARACTER_TRAITS 5
 
 ## This many drones can be active at the same time.
 #MAX_MAINT_DRONES 5
@@ -551,14 +554,17 @@ ROUNDSTART_LEVEL_GENERATION
 #RESPAWN_DELAY 30
 
 ## Set a server location for world reboot. Don't include the byond://, just give the address and port.
-#SERVER
+#SERVER 
 
 ## Set a server URL for the IRC bot to use; like SERVER, don't include the byond://
 ## Unlike SERVER, this one shouldn't break auto-reconnect.
-#SERVERURL
+#SERVERURL 
 
 ## Server name: This appears at the top of the screen in-game.
 #SERVER_NAME Nebula 13
+
+## Determines how the server should handle whitelisting for ckeys. Whitelisted ckeys are found in 'config/whitelist.txt'. Set to 'none' for no whitelisting, 'jobs' to whitelist sensitive jobs, 'join' to whitelist joining the round (observing and OOC are still available, or 'connect' to whitelist access to the server. Valid values: none, jobs, join, and connect.
+#SERVER_WHITELIST none
 
 ## Determinese if a typing indicator shows overhead for people currently writing whispers. Uncomment to enable.
 #SHOW_TYPING_INDICATOR_FOR_WHISPERS
@@ -570,15 +576,10 @@ ROUNDSTART_LEVEL_GENERATION
 #UNEDUCATED_MICE
 
 ## Determines if non-admins are restricted from using humanoid alien races. Uncomment to enable.
-#USEALIENWHITELIST
+USEALIENWHITELIST
 
 ## Determines if the alien whitelist should use SQL instead of the legacy system. (requires the above uncommented as well). Uncomment to enable.
 #USEALIENWHITELIST_SQL
-
-## Set to jobban everyone who's key is not listed in data/whitelist.txt from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
-## Uncomment to 1 to jobban, leave commented out to allow these positions for everyone (but see GUEST_JOBBAN above and regular jobbans).
-##  Uncomment to enable.
-#USEWHITELIST
 
 ## Determines if data is sent to the IRC bot. Generally requires MAIN_IRC and associated setup. Uncomment to enable.
 #USE_IRC_BOT
@@ -590,7 +591,7 @@ ROUNDSTART_LEVEL_GENERATION
 #WAIT_FOR_SIGUSR1_REBOOT
 
 ## Wiki address.
-#WIKIURL
+#WIKIURL 
 
 ##
 # VOTING
