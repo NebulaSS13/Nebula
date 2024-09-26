@@ -85,8 +85,8 @@
 	color = "#ccc9a3"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 0.8
-	sparse_material_weight = 3
-	rich_material_weight = 1
+	sparse_material_weight = 9
+	rich_material_weight = 3
 	dissolves_into = list(
 		/decl/material/solid/sulfur = 0.75,
 		/decl/material/solid/metal/iron = 0.25
@@ -102,8 +102,8 @@
 	ore_icon_overlay = "lump"
 	color = "#e5becb"
 	value = 0.8
-	sparse_material_weight = 3
-	rich_material_weight = 1
+	sparse_material_weight = 9
+	rich_material_weight = 3
 	dissolves_into = list(
 		/decl/material/solid/lithium = 1
 	)
@@ -118,8 +118,8 @@
 	ore_icon_overlay = "lump"
 	color = "#e54e4e"
 	value = 0.8
-	sparse_material_weight = 3
-	rich_material_weight = 1
+	sparse_material_weight = 9
+	rich_material_weight = 3
 	dissolves_into = list(
 		/decl/material/liquid/mercury = 1
 	)
@@ -137,8 +137,8 @@
 	)
 	color = "#832828"
 	value = 0.8
-	sparse_material_weight = 3
-	rich_material_weight = 1
+	sparse_material_weight = 9
+	rich_material_weight = 3
 	lore_text = "A chemical element, the backbone of biological energy carriers."
 	taste_description = "vinegar"
 
@@ -153,8 +153,8 @@
 	ore_icon_overlay = "lump"
 	color = "#d1c0bc"
 	value = 0.8
-	sparse_material_weight = 3
-	rich_material_weight = 1
+	sparse_material_weight = 12
+	rich_material_weight = 4
 	taste_description = "salt"
 	overdose = REAGENTS_OVERDOSE
 	dissolves_into = list(

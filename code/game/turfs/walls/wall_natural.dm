@@ -93,8 +93,8 @@
 
 /turf/wall/natural/update_strings()
 	if(reinf_material)
-		SetName("[reinf_material.solid_name] deposit")
-		desc = "A natural cliff face composed of bare [material.solid_name] and a deposit of [reinf_material.solid_name]."
+		SetName("[reinf_material.ore_name] deposit")
+		desc = "A natural cliff face composed of bare [material.solid_name] and a deposit of [reinf_material.ore_name]."
 	else
 		SetName("natural [material.solid_name] wall")
 		desc = "A natural cliff face composed of bare [material.solid_name]."
