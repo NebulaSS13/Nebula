@@ -12,6 +12,24 @@ var/global/list/server_whitelist
 		global.server_whitelist = file2list(CONFIG_SERVER_WHITELIST_FILE) || list()
 	return (ckey in global.server_whitelist)
 
+/proc/save_server_whitelist()
+	// Ensure we have the server whitelist loaded regardless of config or prior call.
+	if(!global.server_whitelist)
+		global.server_whitelist = file2list(CONFIG_SERVER_WHITELIST_FILE) || list()
+
+	// Clear blank rows.
+	while(null in global.server_whitelist)
+		global.server_whitelist -= null
+	while("" in global.server_whitelist)
+		global.server_whitelist -= ""
+
+	// Remove old list rather than append.
+	if(fexists(CONFIG_SERVER_WHITELIST_FILE))
+		fdel(CONFIG_SERVER_WHITELIST_FILE)
+	// Write our list out.
+	var/write_file = file(CONFIG_SERVER_WHITELIST_FILE)
+	to_file(write_file, jointext(global.server_whitelist, "\n"))
+
 var/global/list/alien_whitelist = list()
 /hook/startup/proc/loadAlienWhitelist()
 	if(get_config_value(/decl/config/toggle/use_alien_whitelist))

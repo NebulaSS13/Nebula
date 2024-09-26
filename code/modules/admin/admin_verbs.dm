@@ -154,6 +154,8 @@ var/global/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_aliens,
 	/client/proc/toggle_random_events,
 	/client/proc/nanomapgen_DumpImage,
+	/datum/admins/proc/addserverwhitelist,
+	/datum/admins/proc/removeserverwhitelist,
 	/datum/admins/proc/panicbunker,
 	/datum/admins/proc/addbunkerbypass,
 	/datum/admins/proc/revokebunkerbypass
