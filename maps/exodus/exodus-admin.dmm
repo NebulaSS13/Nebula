@@ -396,7 +396,7 @@
 /area/shuttle/supply_shuttle)
 "aBz" = (
 /obj/structure/shuttle/engine/propulsion,
-/turf/space,
+/turf/floor/airless,
 /area/shuttle/supply_shuttle)
 "aBA" = (
 /obj/structure/bed/chair,
@@ -482,13 +482,13 @@
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "burst_l"
 	},
-/turf/space,
+/turf/floor/airless,
 /area/shuttle/supply_shuttle)
 "aCt" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "burst_r"
 	},
-/turf/space,
+/turf/floor/airless,
 /area/shuttle/supply_shuttle)
 "aCu" = (
 /obj/structure/table/reinforced,
@@ -975,7 +975,7 @@
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
-/area/space)
+/area/centcom/holding)
 "aKa" = (
 /obj/machinery/door/airlock/command{
 	autoset_access = 0;
@@ -1097,7 +1097,7 @@
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
-/area/space)
+/area/centcom/holding)
 "aKW" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -1160,7 +1160,7 @@
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
-/area/space)
+/area/centcom/holding)
 "aLc" = (
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
@@ -1273,7 +1273,7 @@
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
-/area/space)
+/area/centcom/holding)
 "aLv" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/red{
@@ -1313,7 +1313,7 @@
 /area/shuttle/escape_shuttle)
 "aLE" = (
 /obj/structure/shuttle/engine/propulsion,
-/turf/space,
+/turf/floor/airless,
 /area/shuttle/escape_shuttle)
 "aLF" = (
 /obj/machinery/door/blast/regular/open{
