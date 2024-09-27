@@ -1,5 +1,0 @@
-author: Penelope Haze
-changes:
-  - {imageadd: added overlays to show when a crafted or dried waterskin is closed}
-  - {imageadd: added a new sprite for waterskins made from dried ruminant stomachs}
-delete-after: true
