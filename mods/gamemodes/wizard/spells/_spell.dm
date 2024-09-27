@@ -24,6 +24,9 @@
 	var/smoke_spread
 	var/smoke_amt
 	var/feedback
+	// These vars are just defaults and can be overridden by anything that modifies the ability's metadata.
+	VAR_PROTECTED/base_max_upgrades = 4
+	VAR_PROTECTED/list/base_max_upgrade_levels = list((Sp_SPEED) = 4, (Sp_POWER) = 1)
 
 /decl/ability/wizard/check_equipment(mob/user, list/metadata, silent = FALSE)
 
@@ -78,6 +81,12 @@
 		if(smoke)
 			smoke.set_up(smoke_amt, 0, location)
 			smoke.start()
+
+/decl/ability/wizard/get_default_metadata()
+	. = ..()
+	.["current_upgrade_levels"] = list((Sp_SPEED) = 0, (Sp_POWER) = 0)
+	.["max_upgrades"] = base_max_upgrades
+	.["max_upgrade_levels"] = base_max_upgrade_levels.Copy()
 
 /decl/ability/wizard/proc/can_improve(upgrade_type, list/metadata)
 
