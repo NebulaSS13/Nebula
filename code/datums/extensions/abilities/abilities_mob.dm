@@ -58,8 +58,8 @@
 	var/decl/ability/ability = GET_DECL(ability_type)
 	if(!istype(ability) || !ability.associated_handler_type)
 		return FALSE
-	var/datum/ability_handler/handler = add_ability_handler(ability.associated_handler_type)
-	return handler.add_ability(ability, metadata)
+	var/datum/ability_handler/handler = get_ability_handler(ability.associated_handler_type, create_if_missing = TRUE)
+	return handler.add_ability(ability_type, metadata)
 
 /mob/proc/remove_ability(ability_type)
 	var/decl/ability/ability = GET_DECL(ability_type)
