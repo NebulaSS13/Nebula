@@ -52,7 +52,7 @@
 	name = "toggle ability cateogry"
 	icon_state = "category"
 
-/obj/screen/ability/button/remove_from_handler()
+/obj/screen/ability/category/remove_from_handler()
 	owning_handler?.remove_screen_element(src, "toggle")
 	return ..()
 
