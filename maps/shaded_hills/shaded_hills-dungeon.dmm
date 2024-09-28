@@ -429,7 +429,7 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ef" = (
-/obj/structure/reagent_dispensers/barrel,
+/obj/structure/reagent_dispensers/barrel/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Eq" = (
@@ -525,7 +525,7 @@
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Ky" = (
-/obj/structure/bookcase,
+/obj/structure/bookcase/ebony,
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Kz" = (

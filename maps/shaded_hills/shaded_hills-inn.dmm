@@ -17,7 +17,7 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/farmhouse)
 "bz" = (
-/obj/structure/closet/crate/chest,
+/obj/structure/closet/crate/chest/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/general_store)
 "bW" = (
@@ -106,7 +106,7 @@
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 4
 	},
-/obj/structure/reagent_dispensers/compost_bin,
+/obj/structure/reagent_dispensers/compost_bin/walnut,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/shrine)
 "fh" = (
@@ -582,7 +582,6 @@
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/shrine)
 "wh" = (
-/obj/structure/closet/crate/chest,
 /obj/item/cash/imperial/regalis,
 /obj/item/cash/imperial/regalis,
 /obj/item/cash/imperial/regalis,
@@ -598,6 +597,7 @@
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
 /obj/item/cash/imperial/crown,
+/obj/structure/closet/crate/chest/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/general_store)
 "wA" = (
@@ -1134,7 +1134,7 @@
 /turf/unsimulated/mask,
 /area/shaded_hills/outside/downlands/poi)
 "Oa" = (
-/obj/structure/closet/crate/chest,
+/obj/structure/closet/crate/chest/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "Ot" = (
@@ -1167,11 +1167,11 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "PQ" = (
-/obj/structure/closet/crate/chest,
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat/chicken,
+/obj/structure/closet/crate/chest/ebony,
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
 "PS" = (

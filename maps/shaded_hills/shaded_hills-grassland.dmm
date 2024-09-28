@@ -14,9 +14,6 @@
 /obj/abstract/landmark/start/shaded_hills/miner,
 /turf/floor/natural/grass,
 /area/shaded_hills/outside)
-"dB" = (
-/turf/wall/log/walnut,
-/area/shaded_hills/caves/unexplored)
 "ee" = (
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/poi)
@@ -69,10 +66,10 @@
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside)
 "kr" = (
-/obj/structure/closet/crate/chest,
 /obj/item/tool/pickaxe/iron,
 /obj/item/tool/axe,
 /obj/abstract/exterior_marker/inside,
+/obj/structure/closet/crate/chest/ebony,
 /turf/floor/woven,
 /area/shaded_hills/outside)
 "kz" = (
@@ -180,7 +177,6 @@
 /area/shaded_hills/caves/unexplored/south)
 "Ed" = (
 /obj/item/stack/material/brick/mapped/graphite/ten,
-/obj/structure/closet/crate/chest,
 /obj/item/stack/material/ore/coal,
 /obj/abstract/exterior_marker/inside,
 /obj/item/flame/torch,
@@ -188,6 +184,7 @@
 /obj/item/flame/torch,
 /obj/item/flame/torch,
 /obj/item/bag/sack,
+/obj/structure/closet/crate/chest/ebony,
 /turf/floor/woven,
 /area/shaded_hills/outside)
 "EE" = (
@@ -12252,7 +12249,7 @@ tp
 tp
 tp
 tp
-dB
+tp
 tp
 tp
 tp

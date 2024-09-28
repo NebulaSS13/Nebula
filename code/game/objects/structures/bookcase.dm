@@ -197,4 +197,8 @@ var/global/list/station_bookcases = list()
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	obj_flags = 0
 
+/obj/structure/bookcase/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color =    /decl/material/solid/organic/wood/ebony::color
+
 #undef GET_BOOK_POS
