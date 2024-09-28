@@ -13,6 +13,7 @@
 #include "scrolls.dm"
 #include "staves.dm"
 #include "storage.dm"
+#include "wizard_base.dm"
 #include "wizard_clothes.dm"
 #include "wizard_props.dm"
 #include "spellbook\spellbook_subtypes.dm"

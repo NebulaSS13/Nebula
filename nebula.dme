@@ -3995,7 +3995,6 @@
 #include "maps\_map_include.dm"
 #include "maps\antag_spawn\ert\ert.dm"
 #include "maps\antag_spawn\mercenary\mercenary.dm"
-#include "maps\antag_spawn\wizard\wizard.dm"
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
 #include "maps\example\example_define.dm"
 #include "maps\exodus\exodus_define.dm"

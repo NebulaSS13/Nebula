@@ -1,6 +1,9 @@
 /datum/map_template/ruin/antag_spawn/wizard
 	name = "Wizard Base"
-	suffixes = list("wizard/wizard_base.dmm")
+	prefix = null
+	mappaths = list(
+		"mods/gamemodes/wizard/wizard_base.dmm"
+	)
 	apc_test_exempt_areas = list(
 		/area/map_template/wizard_station = NO_SCRUBBER|NO_VENT|NO_APC
 	)
