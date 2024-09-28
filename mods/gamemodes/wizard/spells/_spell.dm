@@ -101,7 +101,7 @@
 
 	// Can we continue upgrading this field?
 	var/list/max_levels = metadata["max_upgrade_levels"]
-	return current_levels[upgrade_type] <= max_levels[upgrade_type]
+	return current_levels[upgrade_type] < max_levels[upgrade_type]
 
 /decl/ability/wizard/proc/empower_spell(mob/user, list/metadata)
 	if(can_improve(Sp_POWER, metadata))
